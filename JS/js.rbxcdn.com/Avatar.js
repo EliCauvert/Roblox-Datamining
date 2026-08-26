@@ -2,10 +2,10 @@
     try {
         var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "71a72ec8dbf3f95f1b6358be9eb414cdabd8a0f0"
+            id: "c882988f8855ea4caa7b1728bb5c8acce5ab3d15"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "6bdf3522-2947-4b36-9f81-dd9d8f911346", e._sentryDebugIdIdentifier = "sentry-dbid-6bdf3522-2947-4b36-9f81-dd9d8f911346")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "15ec3c02-0759-4292-af8f-8e8a235fbc9a", e._sentryDebugIdIdentifier = "sentry-dbid-15ec3c02-0759-4292-af8f-8e8a235fbc9a")
     } catch (e) {}
 }(),
 function() {
@@ -4078,27 +4078,27 @@ function() {
                         }, {
                             key: "mapGetOutfitDefinitionV4ToV3",
                             value: function(e) {
-                                var r, n, o, a, i = e.outfitModel,
-                                    l = e.outfitConfigurations;
+                                var r, n, o, a, i, l = e.outfitModel,
+                                    s = e.outfitConfigurations;
                                 return {
-                                    id: i.id,
-                                    universeId: null != (o = i.universeId) ? o : 0,
-                                    name: i.name,
-                                    outfitType: i.outfitType,
-                                    isEditable: i.isEditable,
-                                    moderationStatus: null != (a = i.moderationStatus) ? a : null,
-                                    scale: i.scale,
-                                    playerAvatarType: t.mapPlayerAvatarType(i.playerAvatarType),
+                                    id: l.id,
+                                    universeId: null != (o = l.universeId) ? o : 0,
+                                    name: l.name,
+                                    outfitType: l.outfitType,
+                                    isEditable: l.isEditable,
+                                    moderationStatus: null != (a = l.moderationStatus) ? a : null,
+                                    scale: l.scale,
+                                    playerAvatarType: t.mapPlayerAvatarType(l.playerAvatarType),
                                     bodyColor3s: {
-                                        headColor3: i.bodyColors.headColor,
-                                        torsoColor3: i.bodyColors.torsoColor,
-                                        rightArmColor3: i.bodyColors.rightArmColor,
-                                        leftArmColor3: i.bodyColors.leftArmColor,
-                                        rightLegColor3: i.bodyColors.rightLegColor,
-                                        leftLegColor3: i.bodyColors.leftLegColor
+                                        headColor3: l.bodyColors.headColor,
+                                        torsoColor3: l.bodyColors.torsoColor,
+                                        rightArmColor3: l.bodyColors.rightArmColor,
+                                        leftArmColor3: l.bodyColors.leftArmColor,
+                                        rightLegColor3: l.bodyColors.rightLegColor,
+                                        leftLegColor3: l.bodyColors.leftLegColor
                                     },
-                                    assets: i.assets,
-                                    backgroundAssetId: null == l || null == (n = l.background) || null == (r = n.backgroundAsset) ? void 0 : r.id
+                                    assets: l.assets,
+                                    backgroundAssetId: null != (i = null == s || null == (n = s.background) || null == (r = n.backgroundAsset) ? void 0 : r.id) ? i : 0
                                 }
                             }
                         }, {
@@ -30943,4 +30943,4 @@ function() {
             }
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("Avatar");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/avatar-9229c8d6cb56e7b1.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/avatar-e7902e1f08822d08.js.map

@@ -23,7 +23,7 @@ Roblox.LangDynamic["Feature.Friends"] = {
     "Action.Ignore": "Ignore",
     "Action.Accept": "Accept",
     "Action.Unfriend": "Unfriend",
-    "Action.IgnoreAll": "Ignore All",
+    "Action.IgnoreAll": "Ignore all",
     "Message.FriendsTabTooltip": "Friends are established when two Roblox users mutually agree to friendship.",
     "Message.FollowingTabTooltip": "People whose activity you have chosen to follow.",
     "Message.FollowerTabTooltip": "People who have chosen to follow your activity.",

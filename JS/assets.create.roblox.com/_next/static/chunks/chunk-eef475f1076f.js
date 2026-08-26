@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "b0f32ea0-e89c-fd0e-ca08-c0facb09a918")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "3cb111d4-6dcc-6920-553e-a3504c3b0dc3")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 522829, e => {
@@ -105,9 +105,9 @@
         h = d.b,
         m = d.r;
     h[28] = 258, m[258] = 28;
-    for (var p = l(c, 0), f = p.b, g = p.r, y = new i(32768), v = 0; v < 32768; ++v) {
+    for (var p = l(c, 0), f = p.b, y = p.r, g = new i(32768), v = 0; v < 32768; ++v) {
         var b = (43690 & v) >> 1 | (21845 & v) << 1;
-        b = (61680 & (b = (52428 & b) >> 2 | (13107 & b) << 2)) >> 4 | (3855 & b) << 4, y[v] = ((65280 & b) >> 8 | (255 & b) << 8) >> 1
+        b = (61680 & (b = (52428 & b) >> 2 | (13107 & b) << 2)) >> 4 | (3855 & b) << 4, g[v] = ((65280 & b) >> 8 | (255 & b) << 8) >> 1
     }
     for (var A = function(e, t, r) {
             for (var n, a = e.length, o = 0, s = new i(t); o < a; ++o) e[o] && ++s[e[o] - 1];
@@ -118,9 +118,9 @@
                 var u = 15 - t;
                 for (o = 0; o < a; ++o)
                     if (e[o])
-                        for (var l = o << 4 | e[o], d = t - e[o], h = c[e[o] - 1]++ << d, m = h | (1 << d) - 1; h <= m; ++h) n[y[h] >> u] = l
+                        for (var l = o << 4 | e[o], d = t - e[o], h = c[e[o] - 1]++ << d, m = h | (1 << d) - 1; h <= m; ++h) n[g[h] >> u] = l
             } else
-                for (n = new i(a), o = 0; o < a; ++o) e[o] && (n[o] = y[c[e[o] - 1]++] >> 15 - e[o]);
+                for (n = new i(a), o = 0; o < a; ++o) e[o] && (n[o] = g[c[e[o] - 1]++] >> 15 - e[o]);
             return n
         }, D = new a(288), v = 0; v < 144; ++v) D[v] = 8;
     for (var v = 144; v < 256; ++v) D[v] = 9;
@@ -170,8 +170,8 @@
                         n.set(r), r = n
                     }
                 },
-                g = t.f || 0,
-                y = t.p || 0,
+                y = t.f || 0,
+                g = t.p || 0,
                 v = t.b || 0,
                 b = t.l,
                 D = t.d,
@@ -180,26 +180,26 @@
                 T = 8 * i;
             do {
                 if (!b) {
-                    g = I(e, y, 1);
-                    var V = I(e, y + 1, 3);
-                    if (y += 3, V)
+                    y = I(e, g, 1);
+                    var V = I(e, g + 1, 3);
+                    if (g += 3, V)
                         if (1 == V) b = S, D = E, C = 9, w = 5;
                         else if (2 == V) {
-                        var U = I(e, y, 31) + 257,
-                            P = I(e, y + 10, 15) + 4,
-                            k = U + I(e, y + 5, 31) + 1;
-                        y += 14;
-                        for (var B = new a(k), x = new a(19), H = 0; H < P; ++H) x[u[H]] = I(e, y + 3 * H, 7);
-                        y += 3 * P;
+                        var U = I(e, g, 31) + 257,
+                            P = I(e, g + 10, 15) + 4,
+                            k = U + I(e, g + 5, 31) + 1;
+                        g += 14;
+                        for (var B = new a(k), x = new a(19), H = 0; H < P; ++H) x[u[H]] = I(e, g + 3 * H, 7);
+                        g += 3 * P;
                         for (var G = R(x), Q = (1 << G) - 1, L = A(x, G, 1), H = 0; H < k;) {
-                            var F = L[I(e, y, Q)];
-                            y += 15 & F;
+                            var F = L[I(e, g, Q)];
+                            g += 15 & F;
                             var K = F >> 4;
                             if (K < 16) B[H++] = K;
                             else {
                                 var j = 0,
                                     z = 0;
-                                for (16 == K ? (z = 3 + I(e, y, 3), y += 2, j = B[H - 1]) : 17 == K ? (z = 3 + I(e, y, 7), y += 3) : 18 == K && (z = 11 + I(e, y, 127), y += 7); z--;) B[H++] = j
+                                for (16 == K ? (z = 3 + I(e, g, 3), g += 2, j = B[H - 1]) : 17 == K ? (z = 3 + I(e, g, 7), g += 3) : 18 == K && (z = 11 + I(e, g, 127), g += 7); z--;) B[H++] = j
                             }
                         }
                         var Y = B.subarray(0, U),
@@ -207,49 +207,49 @@
                         C = R(Y), w = R(q), b = A(Y, C, 1), D = A(q, w, 1)
                     } else O(1);
                     else {
-                        var K = N(y) + 4,
+                        var K = N(g) + 4,
                             X = e[K - 4] | e[K - 3] << 8,
                             W = K + X;
                         if (W > i) {
                             m && O(0);
                             break
                         }
-                        d && p(v + X), r.set(e.subarray(K, W), v), t.b = v += X, t.p = y = 8 * W, t.f = g;
+                        d && p(v + X), r.set(e.subarray(K, W), v), t.b = v += X, t.p = g = 8 * W, t.f = y;
                         continue
                     }
-                    if (y > T) {
+                    if (g > T) {
                         m && O(0);
                         break
                     }
                 }
                 d && p(v + 131072);
-                for (var $ = (1 << C) - 1, J = (1 << w) - 1, Z = y;; Z = y) {
-                    var j = b[_(e, y) & $],
+                for (var $ = (1 << C) - 1, J = (1 << w) - 1, Z = g;; Z = g) {
+                    var j = b[_(e, g) & $],
                         ee = j >> 4;
-                    if ((y += 15 & j) > T) {
+                    if ((g += 15 & j) > T) {
                         m && O(0);
                         break
                     }
                     if (j || O(2), ee < 256) r[v++] = ee;
                     else if (256 == ee) {
-                        Z = y, b = null;
+                        Z = g, b = null;
                         break
                     } else {
                         var et = ee - 254;
                         if (ee > 264) {
                             var H = ee - 257,
                                 er = s[H];
-                            et = I(e, y, (1 << er) - 1) + h[H], y += er
+                            et = I(e, g, (1 << er) - 1) + h[H], g += er
                         }
-                        var en = D[_(e, y) & J],
+                        var en = D[_(e, g) & J],
                             ea = en >> 4;
-                        en || O(3), y += 15 & en;
+                        en || O(3), g += 15 & en;
                         var q = f[ea];
                         if (ea > 3) {
                             var er = c[ea];
-                            q += _(e, y) & (1 << er) - 1, y += er
+                            q += _(e, g) & (1 << er) - 1, g += er
                         }
-                        if (y > T) {
+                        if (g > T) {
                             m && O(0);
                             break
                         }
@@ -263,8 +263,8 @@
                         for (; v < ei; ++v) r[v] = r[v - q]
                     }
                 }
-                t.l = b, t.p = Z, t.b = v, t.f = g, b && (g = 1, t.m = C, t.d = D, t.n = w)
-            } while (!g) return v != r.length && l ? M(r, 0, v) : r.subarray(0, v)
+                t.l = b, t.p = Z, t.b = v, t.f = y, b && (y = 1, t.m = C, t.d = D, t.n = w)
+            } while (!y) return v != r.length && l ? M(r, 0, v) : r.subarray(0, v)
         },
         P = function(e, t, r) {
             r <<= 7 & t;
@@ -318,32 +318,32 @@
             };
             for (var p = s[0].s, n = 1; n < o; ++n) s[n].s > p && (p = s[n].s);
             var f = new i(p + 1),
-                g = x(r[h - 1], f, 0);
-            if (g > t) {
+                y = x(r[h - 1], f, 0);
+            if (y > t) {
                 var n = 0,
-                    y = 0,
-                    v = g - t,
+                    g = 0,
+                    v = y - t,
                     b = 1 << v;
                 for (s.sort(function(e, t) {
                         return f[t.s] - f[e.s] || e.f - t.f
                     }); n < o; ++n) {
                     var A = s[n].s;
-                    if (f[A] > t) y += b - (1 << g - f[A]), f[A] = t;
+                    if (f[A] > t) g += b - (1 << y - f[A]), f[A] = t;
                     else break
                 }
-                for (y >>= v; y > 0;) {
+                for (g >>= v; g > 0;) {
                     var D = s[n].s;
-                    f[D] < t ? y -= 1 << t - f[D]++ - 1 : ++n
+                    f[D] < t ? g -= 1 << t - f[D]++ - 1 : ++n
                 }
-                for (; n >= 0 && y; --n) {
+                for (; n >= 0 && g; --n) {
                     var C = s[n].s;
-                    f[C] == t && (--f[C], ++y)
+                    f[C] == t && (--f[C], ++g)
                 }
-                g = t
+                y = t
             }
             return {
                 t: new a(f),
-                l: g
+                l: y
             }
         },
         x = function(e, t, r) {
@@ -383,7 +383,7 @@
         },
         L = function(e, t, r, n, a, o, l, d, h, m, p) {
             P(t, p++, r), ++a[256];
-            for (var f, g, y, v, b = B(a, 15), S = b.t, E = b.l, R = B(o, 15), I = R.t, _ = R.l, N = H(S), M = N.c, V = N.n, O = H(I), U = O.c, x = O.n, L = new i(19), F = 0; F < M.length; ++F) ++L[31 & M[F]];
+            for (var f, y, g, v, b = B(a, 15), S = b.t, E = b.l, R = B(o, 15), I = R.t, _ = R.l, N = H(S), M = N.c, V = N.n, O = H(I), U = O.c, x = O.n, L = new i(19), F = 0; F < M.length; ++F) ++L[31 & M[F]];
             for (var F = 0; F < U.length; ++F) ++L[31 & U[F]];
             for (var K = B(L, 7), j = K.t, z = K.l, Y = 19; Y > 4 && !j[u[Y - 1]]; --Y);
             var q = m + 5 << 3,
@@ -391,7 +391,7 @@
                 W = G(a, S) + G(o, I) + l + 14 + 3 * Y + G(L, j) + 2 * L[16] + 3 * L[17] + 7 * L[18];
             if (h >= 0 && q <= X && q <= W) return Q(t, p, e.subarray(h, h + m));
             if (P(t, p, 1 + (W < X)), p += 2, W < X) {
-                f = A(S, E, 0), g = S, y = A(I, _, 0), v = I;
+                f = A(S, E, 0), y = S, g = A(I, _, 0), v = I;
                 var $ = A(j, z, 0);
                 P(t, p, V - 257), P(t, p + 5, x - 1), P(t, p + 10, Y - 4), p += 14;
                 for (var F = 0; F < Y; ++F) P(t, p + 3 * F, j[u[F]]);
@@ -401,17 +401,17 @@
                         var et = 31 & ee[F];
                         P(t, p, $[et]), p += j[et], et > 15 && (P(t, p, ee[F] >> 5 & 127), p += ee[F] >> 12)
                     }
-            } else f = w, g = D, y = T, v = C;
+            } else f = w, y = D, g = T, v = C;
             for (var F = 0; F < d; ++F) {
                 var er = n[F];
                 if (er > 255) {
                     var et = er >> 18 & 31;
-                    k(t, p, f[et + 257]), p += g[et + 257], et > 7 && (P(t, p, er >> 23 & 31), p += s[et]);
+                    k(t, p, f[et + 257]), p += y[et + 257], et > 7 && (P(t, p, er >> 23 & 31), p += s[et]);
                     var en = 31 & er;
-                    k(t, p, y[en]), p += v[en], en > 3 && (k(t, p, er >> 5 & 8191), p += c[en])
-                } else k(t, p, f[er]), p += g[er]
+                    k(t, p, g[en]), p += v[en], en > 3 && (k(t, p, er >> 5 & 8191), p += c[en])
+                } else k(t, p, f[er]), p += y[er]
             }
-            return k(t, p, f[256]), p + g[256]
+            return k(t, p, f[256]), p + y[256]
         },
         F = new o([65540, 131080, 131088, 131104, 262176, 1048704, 1048832, 2114560, 2117632]),
         K = new a(0),
@@ -420,9 +420,9 @@
                 h = new a(n + d + 5 * (1 + Math.ceil(d / 7e3)) + u),
                 p = h.subarray(n, h.length - u),
                 f = l.l,
-                y = 7 & (l.r || 0);
+                g = 7 & (l.r || 0);
             if (t) {
-                y && (p[0] = l.r >> 3);
+                g && (p[0] = l.r >> 3);
                 for (var v = F[t - 1], b = v >> 13, A = 8191 & v, D = (1 << r) - 1, C = l.p || new i(32768), w = l.h || new i(D + 1), S = Math.ceil(r / 3), T = 2 * S, E = function(t) {
                         return (e[t] ^ e[t + 1] << S ^ e[t + 2] << T) & D
                     }, R = new o(25e3), I = new i(288), _ = new i(32), V = 0, O = 0, U = l.i || 0, P = 0, k = l.w || 0, B = 0; U + 2 < d; ++U) {
@@ -432,7 +432,7 @@
                     if (C[H] = G, w[x] = H, k <= U) {
                         var K = d - U;
                         if ((V > 7e3 || P > 24576) && (K > 423 || !f)) {
-                            y = L(e, p, 0, R, I, _, O, P, B, U - B, y), P = V = O = 0, B = U;
+                            g = L(e, p, 0, R, I, _, O, P, B, U - B, g), P = V = O = 0, B = U;
                             for (var j = 0; j < 286; ++j) I[j] = 0;
                             for (var j = 0; j < 30; ++j) _[j] = 0
                         }
@@ -457,23 +457,23 @@
                                 G = C[H = G], X += H - G & 32767
                             }
                         if (Y) {
-                            R[P++] = 0x10000000 | m[z] << 18 | g[Y];
+                            R[P++] = 0x10000000 | m[z] << 18 | y[Y];
                             var ei = 31 & m[z],
-                                eo = 31 & g[Y];
+                                eo = 31 & y[Y];
                             O += s[ei] + c[eo], ++I[257 + ei], ++_[eo], k = U + z, ++V
                         } else R[P++] = e[U], ++I[e[U]]
                     }
                 }
                 for (U = Math.max(U, k); U < d; ++U) R[P++] = e[U], ++I[e[U]];
-                y = L(e, p, f, R, I, _, O, P, B, U - B, y), f || (l.r = 7 & y | p[y / 8 | 0] << 3, y -= 7, l.h = w, l.p = C, l.i = U, l.w = k)
+                g = L(e, p, f, R, I, _, O, P, B, U - B, g), f || (l.r = 7 & g | p[g / 8 | 0] << 3, g -= 7, l.h = w, l.p = C, l.i = U, l.w = k)
             } else {
                 for (var U = l.w || 0; U < d + f; U += 65535) {
                     var es = U + 65535;
-                    es >= d && (p[y / 8 | 0] = f, es = d), y = Q(p, y + 1, e.subarray(U, es))
+                    es >= d && (p[g / 8 | 0] = f, es = d), g = Q(p, g + 1, e.subarray(U, es))
                 }
                 l.i = d
             }
-            return M(h, 0, n + N(y) + u)
+            return M(h, 0, n + N(g) + u)
         },
         z = function() {
             for (var e = new Int32Array(256), t = 0; t < 256; ++t) {
@@ -562,10 +562,10 @@
             return n(J[r].c + ";onmessage=function(e){for(var k in e.data)self[k]=e.data[k];onmessage=" + t.toString() + "}", r, u, Z(u), a)
         },
         et = function() {
-            return [a, i, o, s, c, u, h, f, S, E, y, V, A, R, I, _, N, M, O, U, eT, ei, eo]
+            return [a, i, o, s, c, u, h, f, S, E, g, V, A, R, I, _, N, M, O, U, eT, ei, eo]
         },
         er = function() {
-            return [a, i, o, s, c, u, m, g, w, D, T, C, y, F, K, A, P, k, B, x, H, G, Q, L, N, M, j, X, eC, ei]
+            return [a, i, o, s, c, u, m, y, w, D, T, C, g, F, K, A, P, k, B, x, H, G, Q, L, N, M, j, X, eC, ei]
         },
         en = function() {
             return [ep, ef]
@@ -633,10 +633,10 @@
             var t = e.length;
             return (e[t - 4] | e[t - 3] << 8 | e[t - 2] << 16 | e[t - 1] << 24) >>> 0
         },
-        eg = function(e) {
+        ey = function(e) {
             return 10 + (e.filename ? e.filename.length + 1 : 0)
         },
-        ey = function(e, t) {
+        eg = function(e, t) {
             var r = t.level;
             if (e[0] = 120, e[1] = (0 == r ? 0 : r < 6 ? 1 : 9 == r ? 3 : 2) << 6 | (t.dictionary && 32), e[1] |= 31 - (e[0] << 8 | e[1]) % 31, t.dictionary) {
                 var n = q();
@@ -740,7 +740,7 @@
         e.prototype.push = function(e, t) {
             this.c.p(e), this.l += e.length, eA.prototype.push.call(this, e, t)
         }, e.prototype.p = function(e, t) {
-            var r = X(e, this.o, this.v && eg(this.o), t && 8, this.s);
+            var r = X(e, this.o, this.v && ey(this.o), t && 8, this.s);
             this.v && (em(r, this.o), this.v = 0), t && (eh(r, r.length - 8, this.c.d()), eh(r, r.length - 4, this.l)), this.ondata(r, t)
         }, e.prototype.flush = function(e) {
             eA.prototype.flush.call(this, e)
@@ -785,7 +785,7 @@
                 this.c.p(e), eA.prototype.push.call(this, e, t)
             }, e.prototype.p = function(e, t) {
                 var r = X(e, this.o, this.v && (this.o.dictionary ? 6 : 2), t && 4, this.s);
-                this.v && (ey(r, this.o), this.v = 0), t && eh(r, r.length - 4, this.c.d()), this.ondata(r, t)
+                this.v && (eg(r, this.o), this.v = 0), t && eh(r, r.length - 4, this.c.d()), this.ondata(r, t)
             }, e.prototype.flush = function(e) {
                 eA.prototype.flush.call(this, e)
             }
@@ -947,8 +947,8 @@
             if ((m < 0 || m > 119) && O(10), eh(e, t, m << 25 | h.getMonth() + 1 << 21 | h.getDate() << 16 | h.getHours() << 11 | h.getMinutes() << 5 | h.getSeconds() >> 1), t += 4, -1 != i && (eh(e, t, r.crc), eh(e, t + 4, i < 0 ? -i - 2 : i), eh(e, t + 8, r.size)), eh(e, t + 12, c), eh(e, t + 14, d), t += 16, null != o && (eh(e, t, l), eh(e, t + 6, r.attrs), eh(e, t + 10, o), t += 14), e.set(n, t), t += c, d)
                 for (var p in u) {
                     var f = u[p],
-                        g = f.length;
-                    eh(e, t, +p), eh(e, t + 2, g), e.set(f, t + 4), t += 4 + g
+                        y = f.length;
+                    eh(e, t, +p), eh(e, t + 2, y), e.set(f, t + 4), t += 4 + y
                 }
             return l && (e.set(s, t), t += l), t
         },
@@ -1125,20 +1125,20 @@
                             var h, p = [];
                             m.k.unshift(p), o = 2;
                             var f = el(u, s + 18),
-                                g = el(u, s + 22),
-                                y = eB(u.subarray(s + 30, s += 30 + a), !(2048 & t)),
-                                v = eH(u, s, i, 2, f, g, 0),
+                                y = el(u, s + 22),
+                                g = eB(u.subarray(s + 30, s += 30 + a), !(2048 & t)),
+                                v = eH(u, s, i, 2, f, y, 0),
                                 b = v[0],
                                 A = v[1],
                                 D = v[3];
                             8 & t && (b = -1 - D), s += i, m.c = b;
                             var C = {
-                                name: y,
+                                name: g,
                                 compression: n,
                                 start: function() {
                                     if (C.ondata || O(5), b) {
                                         var e = r.o[n];
-                                        e || C.ondata(O(14, "unknown compression type " + n, 1), null, !1), (h = b < 0 ? new e(y) : new e(y, b, A)).ondata = function(e, t, r) {
+                                        e || C.ondata(O(14, "unknown compression type " + n, 1), null, !1), (h = b < 0 ? new e(g) : new e(g, b, A)).ondata = function(e, t, r) {
                                             C.ondata(e, t, r)
                                         };
                                         for (var t = 0; t < p.length; t++) {
@@ -1183,13 +1183,13 @@
     e.s(["RAQIV2FilterOperation", () => e5.AnalyticsQueryGatewayAPIFilterOperation], 595028);
     var e5 = eZ,
         e8 = e.i(721281);
-    class e4 extends Error {
+    class e6 extends Error {
         constructor(e, t, r, n) {
             super(null != n ? n : "unsupported-version" === e ? "Document version ".concat(t, " is not supported; target version ").concat(r, ".") : "No migration path from version ".concat(t, " to version ").concat(r, ".")), (0, e8._)(this, "kind", void 0), (0, e8._)(this, "fromVersion", void 0), (0, e8._)(this, "targetVersion", void 0), this.name = "VersionedMigrationError", this.kind = e, this.fromVersion = t, this.targetVersion = r
         }
     }
-    let e6 = (e, t) => new e4("unsupported-version", e, t),
-        e7 = (e, t, r) => new e4("migration-gap", e, t, r),
+    let e4 = (e, t) => new e6("unsupported-version", e, t),
+        e7 = (e, t, r) => new e6("migration-gap", e, t, r),
         e9 = e => !!e && "object" == typeof e && !Array.isArray(e),
         te = e => {
             if (!e9(e)) return 2;
@@ -1338,7 +1338,7 @@
                         targetVersion: n,
                         getVersion: a,
                         setVersion: i,
-                        createUnsupportedVersionError: o = e6,
+                        createUnsupportedVersionError: o = e4,
                         createMigrationGapError: s = e7
                     } = e, c = t, u = a(t);
                     if (u > n) throw o(u, n);
@@ -1512,7 +1512,11 @@
         Total: "Total",
         Median: "Median",
         Cumulative: "Cumulative"
-    }, "DEFAULT_CHART_GRANULARITY", 0, "Day", "DashboardPageMode", 0, n, "EMPTY_DASHBOARD_CONFIG", 0, a, "MAX_CHART_TILES_PER_DASHBOARD", 0, 12, "MAX_DASHBOARDS_PER_UNIVERSE", 0, 16, "MAX_DASHBOARD_DESCRIPTION_LENGTH", 0, 280, "MAX_DASHBOARD_NAME_LENGTH", 0, 80, "MAX_PINNED_DASHBOARDS", 0, 5, "MAX_SUMMARY_CARDS_PER_DASHBOARD", 0, 6, "MAX_TILES_PER_ROW", 0, 2, "MAX_TILE_TITLE_LENGTH", 0, 80, "SummaryCardTitleSource", 0, {
+    }, "DEFAULT_CHART_GRANULARITY", 0, "Day", "DashboardPageMode", 0, n, "EMPTY_DASHBOARD_CONFIG", 0, a, "LOCAL_DASHBOARD_LIST_CAPABILITIES", 0, {
+        limits: {
+            maxDashboardsPerUniverse: 16
+        }
+    }, "MAX_CHART_TILES_PER_DASHBOARD", 0, 12, "MAX_DASHBOARDS_PER_UNIVERSE", 0, 16, "MAX_DASHBOARD_DESCRIPTION_LENGTH", 0, 280, "MAX_DASHBOARD_NAME_LENGTH", 0, 80, "MAX_PINNED_DASHBOARDS", 0, 5, "MAX_SUMMARY_CARDS_PER_DASHBOARD", 0, 6, "MAX_TILES_PER_ROW", 0, 2, "MAX_TILE_TITLE_LENGTH", 0, 80, "SummaryCardTitleSource", 0, {
         Auto: "Auto",
         Custom: "Custom"
     }], 379843), e.s(["getChartRowColumnCount", 0, o, "getChartRowTiles", 0, i, "halfWidthRow", 0, function(e) {
@@ -1641,7 +1645,7 @@
         }
     }
 
-    function g(e) {
+    function y(e) {
         return {
             type: "Grid",
             columnCount: e.columnCount,
@@ -1649,19 +1653,19 @@
         }
     }
 
-    function y(e) {
+    function g(e) {
         let t = "Component" === e.type ? e.component : null;
         return (null == t ? void 0 : t.type) === "SummaryCard" ? t.summaryCard : null
     }
 
     function v(e) {
-        return ("Flex" === e.type || "Grid" === e.type) && e.children.length > 0 && e.children.every(e => null !== y(e))
+        return ("Flex" === e.type || "Grid" === e.type) && e.children.length > 0 && e.children.every(e => null !== g(e))
     }
 
     function b(e) {
         return d(e).bodyNodes.flatMap(e => {
-            if (v(e) && ("Flex" === e.type || "Grid" === e.type)) return e.children.map(y).filter(e => null !== e);
-            let t = y(e);
+            if (v(e) && ("Flex" === e.type || "Grid" === e.type)) return e.children.map(g).filter(e => null !== e);
+            let t = g(e);
             return t ? [t] : []
         })
     }
@@ -1672,13 +1676,13 @@
             n = b(e);
         return h(e, {
             ...r,
-            bodyNodes: [...n.length > 0 ? [f(n)] : l, ...t.map(g)]
+            bodyNodes: [...n.length > 0 ? [f(n)] : l, ...t.map(y)]
         })
     }, "withDashboardSurface", 0, h, "withSummaryCards", 0, function(e, t) {
         let r = d(e);
         return h(e, {
             ...r,
-            bodyNodes: [...t.length > 0 ? [f(t)] : l, ...d(e).bodyNodes.filter(e => !v(e) && null === y(e))]
+            bodyNodes: [...t.length > 0 ? [f(t)] : l, ...d(e).bodyNodes.filter(e => !v(e) && null === g(e))]
         })
     }], 650040)
 }, 479236, 743209, 322172, e => {
@@ -1698,8 +1702,8 @@
         m = e.i(593431),
         p = e.i(10560),
         f = e.i(852209),
-        g = e.i(482922),
-        y = e.i(31611),
+        y = e.i(482922),
+        g = e.i(31611),
         v = e.i(531007),
         b = e.i(11517),
         A = e.i(302610),
@@ -1750,39 +1754,39 @@
             6: "Week"
         },
         R = {
-            [y.RAQIV2MetricGranularity.None]: 1,
-            [y.RAQIV2MetricGranularity.OneMinute]: 2,
-            [y.RAQIV2MetricGranularity.HalfHour]: 3,
-            [y.RAQIV2MetricGranularity.OneHour]: 4,
-            [y.RAQIV2MetricGranularity.OneDay]: 5,
-            [y.RAQIV2MetricGranularity.OneWeek]: 6
+            [g.RAQIV2MetricGranularity.None]: 1,
+            [g.RAQIV2MetricGranularity.OneMinute]: 2,
+            [g.RAQIV2MetricGranularity.HalfHour]: 3,
+            [g.RAQIV2MetricGranularity.OneHour]: 4,
+            [g.RAQIV2MetricGranularity.OneDay]: 5,
+            [g.RAQIV2MetricGranularity.OneWeek]: 6
         },
         I = {
-            DASHBOARD_GRANULARITY_CUMULATIVE: y.RAQIV2MetricGranularity.None,
-            DASHBOARD_GRANULARITY_MINUTE: y.RAQIV2MetricGranularity.OneMinute,
-            DASHBOARD_GRANULARITY_HALF_HOUR: y.RAQIV2MetricGranularity.HalfHour,
-            DASHBOARD_GRANULARITY_HOUR: y.RAQIV2MetricGranularity.OneHour,
-            DASHBOARD_GRANULARITY_DAY: y.RAQIV2MetricGranularity.OneDay,
-            DASHBOARD_GRANULARITY_WEEK: y.RAQIV2MetricGranularity.OneWeek,
-            1: y.RAQIV2MetricGranularity.None,
-            2: y.RAQIV2MetricGranularity.OneMinute,
-            3: y.RAQIV2MetricGranularity.HalfHour,
-            4: y.RAQIV2MetricGranularity.OneHour,
-            5: y.RAQIV2MetricGranularity.OneDay,
-            6: y.RAQIV2MetricGranularity.OneWeek
+            DASHBOARD_GRANULARITY_CUMULATIVE: g.RAQIV2MetricGranularity.None,
+            DASHBOARD_GRANULARITY_MINUTE: g.RAQIV2MetricGranularity.OneMinute,
+            DASHBOARD_GRANULARITY_HALF_HOUR: g.RAQIV2MetricGranularity.HalfHour,
+            DASHBOARD_GRANULARITY_HOUR: g.RAQIV2MetricGranularity.OneHour,
+            DASHBOARD_GRANULARITY_DAY: g.RAQIV2MetricGranularity.OneDay,
+            DASHBOARD_GRANULARITY_WEEK: g.RAQIV2MetricGranularity.OneWeek,
+            1: g.RAQIV2MetricGranularity.None,
+            2: g.RAQIV2MetricGranularity.OneMinute,
+            3: g.RAQIV2MetricGranularity.HalfHour,
+            4: g.RAQIV2MetricGranularity.OneHour,
+            5: g.RAQIV2MetricGranularity.OneDay,
+            6: g.RAQIV2MetricGranularity.OneWeek
         },
         _ = {
-            [y.RAQIV2AggregationType.Sum]: 1,
-            [y.RAQIV2AggregationType.Count]: 2,
-            [y.RAQIV2AggregationType.Average]: 3,
-            [y.RAQIV2AggregationType.Min]: 4,
-            [y.RAQIV2AggregationType.Max]: 5,
-            [y.RAQIV2AggregationType.CountUser]: 7,
-            [y.RAQIV2AggregationType.AveragePerUser]: 25,
-            [y.RAQIV2PercentileType.AVG]: 10,
-            [y.RAQIV2PercentileType.P10]: 11,
-            [y.RAQIV2PercentileType.P50]: 12,
-            [y.RAQIV2PercentileType.P90]: 13,
+            [g.RAQIV2AggregationType.Sum]: 1,
+            [g.RAQIV2AggregationType.Count]: 2,
+            [g.RAQIV2AggregationType.Average]: 3,
+            [g.RAQIV2AggregationType.Min]: 4,
+            [g.RAQIV2AggregationType.Max]: 5,
+            [g.RAQIV2AggregationType.CountUser]: 7,
+            [g.RAQIV2AggregationType.AveragePerUser]: 25,
+            [g.RAQIV2PercentileType.AVG]: 10,
+            [g.RAQIV2PercentileType.P10]: 11,
+            [g.RAQIV2PercentileType.P50]: 12,
+            [g.RAQIV2PercentileType.P90]: 13,
             [l.CustomDashboardSummaryCardAggregation.Total]: 20,
             [l.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod]: 21,
             [l.CustomDashboardSummaryCardAggregation.MostRecentDataPoint]: 22,
@@ -1791,40 +1795,40 @@
             [l.CustomDashboardSummaryCardAggregation.AveragePerUniqueUser]: 25
         },
         N = {
-            DASHBOARD_AGGREGATION_SUM: y.RAQIV2AggregationType.Sum,
-            DASHBOARD_AGGREGATION_COUNT: y.RAQIV2AggregationType.Count,
-            DASHBOARD_AGGREGATION_AVERAGE: y.RAQIV2AggregationType.Average,
-            DASHBOARD_AGGREGATION_MIN: y.RAQIV2AggregationType.Min,
-            DASHBOARD_AGGREGATION_MAX: y.RAQIV2AggregationType.Max,
-            DASHBOARD_AGGREGATION_DISTINCT_COUNT: y.RAQIV2AggregationType.CountUser,
-            DASHBOARD_AGGREGATION_UNIQUE_COUNT: y.RAQIV2AggregationType.CountUser,
-            DASHBOARD_AGGREGATION_PERCENTILE_AVG: y.RAQIV2PercentileType.AVG,
-            DASHBOARD_AGGREGATION_PERCENTILE_P10: y.RAQIV2PercentileType.P10,
-            DASHBOARD_AGGREGATION_PERCENTILE_P50: y.RAQIV2PercentileType.P50,
-            DASHBOARD_AGGREGATION_PERCENTILE_P90: y.RAQIV2PercentileType.P90,
+            DASHBOARD_AGGREGATION_SUM: g.RAQIV2AggregationType.Sum,
+            DASHBOARD_AGGREGATION_COUNT: g.RAQIV2AggregationType.Count,
+            DASHBOARD_AGGREGATION_AVERAGE: g.RAQIV2AggregationType.Average,
+            DASHBOARD_AGGREGATION_MIN: g.RAQIV2AggregationType.Min,
+            DASHBOARD_AGGREGATION_MAX: g.RAQIV2AggregationType.Max,
+            DASHBOARD_AGGREGATION_DISTINCT_COUNT: g.RAQIV2AggregationType.CountUser,
+            DASHBOARD_AGGREGATION_UNIQUE_COUNT: g.RAQIV2AggregationType.CountUser,
+            DASHBOARD_AGGREGATION_PERCENTILE_AVG: g.RAQIV2PercentileType.AVG,
+            DASHBOARD_AGGREGATION_PERCENTILE_P10: g.RAQIV2PercentileType.P10,
+            DASHBOARD_AGGREGATION_PERCENTILE_P50: g.RAQIV2PercentileType.P50,
+            DASHBOARD_AGGREGATION_PERCENTILE_P90: g.RAQIV2PercentileType.P90,
             DASHBOARD_AGGREGATION_TOTAL: l.CustomDashboardSummaryCardAggregation.Total,
             DASHBOARD_AGGREGATION_AVERAGE_OVER_TIME_PERIOD: l.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod,
             DASHBOARD_AGGREGATION_MOST_RECENT_DATA_POINT: l.CustomDashboardSummaryCardAggregation.MostRecentDataPoint,
             DASHBOARD_AGGREGATION_MEDIAN: l.CustomDashboardSummaryCardAggregation.Median,
             DASHBOARD_AGGREGATION_CUMULATIVE: l.CustomDashboardSummaryCardAggregation.Cumulative,
-            DASHBOARD_AGGREGATION_AVERAGE_PER_UNIQUE_USER: y.RAQIV2AggregationType.AveragePerUser,
-            1: y.RAQIV2AggregationType.Sum,
-            2: y.RAQIV2AggregationType.Count,
-            3: y.RAQIV2AggregationType.Average,
-            4: y.RAQIV2AggregationType.Min,
-            5: y.RAQIV2AggregationType.Max,
-            6: y.RAQIV2AggregationType.CountUser,
-            7: y.RAQIV2AggregationType.CountUser,
-            10: y.RAQIV2PercentileType.AVG,
-            11: y.RAQIV2PercentileType.P10,
-            12: y.RAQIV2PercentileType.P50,
-            13: y.RAQIV2PercentileType.P90,
+            DASHBOARD_AGGREGATION_AVERAGE_PER_UNIQUE_USER: g.RAQIV2AggregationType.AveragePerUser,
+            1: g.RAQIV2AggregationType.Sum,
+            2: g.RAQIV2AggregationType.Count,
+            3: g.RAQIV2AggregationType.Average,
+            4: g.RAQIV2AggregationType.Min,
+            5: g.RAQIV2AggregationType.Max,
+            6: g.RAQIV2AggregationType.CountUser,
+            7: g.RAQIV2AggregationType.CountUser,
+            10: g.RAQIV2PercentileType.AVG,
+            11: g.RAQIV2PercentileType.P10,
+            12: g.RAQIV2PercentileType.P50,
+            13: g.RAQIV2PercentileType.P90,
             20: l.CustomDashboardSummaryCardAggregation.Total,
             21: l.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod,
             22: l.CustomDashboardSummaryCardAggregation.MostRecentDataPoint,
             23: l.CustomDashboardSummaryCardAggregation.Median,
             24: l.CustomDashboardSummaryCardAggregation.Cumulative,
-            25: y.RAQIV2AggregationType.AveragePerUser
+            25: g.RAQIV2AggregationType.AveragePerUser
         },
         M = {
             [l.SummaryCardTitleSource.Auto]: 1,
@@ -1914,7 +1918,7 @@
     function K(e, t, r) {
         if (null != e) return Array.isArray(e) && e.every(e => "string" == typeof e) || B("".concat(t, " must be an array of strings.")), e.map((e, n) => r(e) ? e : B("".concat(t, "[").concat(n, "] is unsupported.")))
     }
-    let j = y.RAQIV2Dimension.CustomEventName;
+    let j = g.RAQIV2Dimension.CustomEventName;
 
     function z(e) {
         if (e && 0 !== e.length) return e.map(e => ({
@@ -1948,10 +1952,10 @@
                                 if (!e) return;
                                 let t = [];
                                 return e.aggregationType && t.push({
-                                    pseudoDimensionKey: y.RAQIV2UIPseudoDimension.AggregationType,
+                                    pseudoDimensionKey: g.RAQIV2UIPseudoDimension.AggregationType,
                                     variantKey: e.aggregationType
                                 }), e.percentile && t.push({
-                                    pseudoDimensionKey: y.RAQIV2UIPseudoDimension.PercentileType,
+                                    pseudoDimensionKey: g.RAQIV2UIPseudoDimension.PercentileType,
                                     variantKey: e.percentile
                                 }), t.length > 0 ? t : void 0
                             }(e.pseudoDimensionValues)),
@@ -2034,7 +2038,7 @@
                     if (P(h)) {
                         let e, n = null != (s = h.customEventName) ? s : h.custom_event_name;
                         "string" != typeof n && B("".concat(t, ".sources[").concat(r, "].metric.customEventMetric is invalid.")), u = {
-                            metric: y.RAQIV2UIMetric.CustomEventsV2,
+                            metric: g.RAQIV2UIMetric.CustomEventsV2,
                             customEventName: n,
                             ...void 0 !== h.aggregation ? {
                                 aggregationType: (e = H(h.aggregation, N, "aggregation"), (0, C.isRAQIV2AggregationType)(e) ? e : B("Unsupported custom-event aggregation ".concat(e, ".")))
@@ -2062,8 +2066,8 @@
                             if (!e || 0 === e.length) return;
                             let t = null,
                                 r = null,
-                                n = y.RAQIV2UIPseudoDimension.AggregationType,
-                                a = y.RAQIV2UIPseudoDimension.PercentileType;
+                                n = g.RAQIV2UIPseudoDimension.AggregationType,
+                                a = g.RAQIV2UIPseudoDimension.PercentileType;
                             for (let i of e) i.pseudoDimensionKey === n && ((0, C.isRAQIV2AggregationType)(i.variantKey) || B("Unsupported aggregation variant ".concat(i.variantKey, ".")), t = i.variantKey), i.pseudoDimensionKey === a && ((0, C.isRAQIV2PercentileType)(i.variantKey) || B("Unsupported percentile variant ".concat(i.variantKey, ".")), r = i.variantKey);
                             if (null !== t || null !== r) return {
                                 aggregationType: t,
@@ -2101,13 +2105,13 @@
             m = P(h) ? h.granularity : void 0,
             p = void 0 === m ? void 0 : I[k(m)],
             f = null != (n = e.annotationOptions) ? n : e.annotation_options,
-            g = P(f) ? (d = null != (u = K(null != (l = f.defaultAnnotationTypeKeys) ? l : f.default_annotation_type_keys, "".concat(t, ".annotationOptions.defaultAnnotationTypeKeys"), C.isDefaultAnnotationType)) ? u : [], {
+            y = P(f) ? (d = null != (u = K(null != (l = f.defaultAnnotationTypeKeys) ? l : f.default_annotation_type_keys, "".concat(t, ".annotationOptions.defaultAnnotationTypeKeys"), C.isDefaultAnnotationType)) ? u : [], {
                 supportedAnnotationTypes: (0, A.resolveCustomDashboardSupportedAnnotationTypes)(d),
                 defaultAnnotationTypes: d,
                 showAnnotationsControl: "boolean" == typeof f.showAnnotationsControl ? f.showAnnotationsControl : "boolean" != typeof f.show_annotations_control || f.show_annotations_control
             }) : void 0,
-            y = null != (a = e.defaultFilters) ? a : e.default_filters,
-            v = void 0 === y ? void 0 : F(y, "".concat(t, ".defaultFilters")),
+            g = null != (a = e.defaultFilters) ? a : e.default_filters,
+            v = void 0 === g ? void 0 : F(g, "".concat(t, ".defaultFilters")),
             b = K(null != (i = e.filterDimensionKeys) ? i : e.filter_dimension_keys, "".concat(t, ".filterDimensionKeys"), C.isCanonicalRAQIV2Dimension),
             D = K(null != (o = e.breakdownDimensionKeys) ? o : e.breakdown_dimension_keys, "".concat(t, ".breakdownDimensionKeys"), C.isCanonicalRAQIV2Dimension),
             w = K(null != (s = e.defaultBreakdownDimensionKeys) ? s : e.default_breakdown_dimension_keys, "".concat(t, ".defaultBreakdownDimensionKeys"), C.isDefaultBreakdownDimension);
@@ -2144,7 +2148,7 @@
             breakdownDimensions: D,
             defaultBreakdown: w,
             defaultGranularity: p,
-            annotationOptions: g
+            annotationOptions: y
         }
     }
 
@@ -2205,9 +2209,9 @@
                         let e = H(d.aggregation, N, "aggregation");
                         (0, C.isChartAggregation)(e) || B("Unsupported chart aggregation ".concat(e, ".")), s = e
                     }
-                    let g = null != (o = d.breakdownDimensionKeys) ? o : d.breakdown_dimension_keys;
-                    Array.isArray(g) && (g.every(e => "string" == typeof e) || B("".concat(t, ".dataSpec.breakdownDimensionKeys must contain strings.")), c = g);
-                    let y = void 0 !== p ? H(p, E, "granularity") : l.DEFAULT_CHART_GRANULARITY;
+                    let y = null != (o = d.breakdownDimensionKeys) ? o : d.breakdown_dimension_keys;
+                    Array.isArray(y) && (y.every(e => "string" == typeof e) || B("".concat(t, ".dataSpec.breakdownDimensionKeys must contain strings.")), c = y);
+                    let g = void 0 !== p ? H(p, E, "granularity") : l.DEFAULT_CHART_GRANULARITY;
                     return {
                         type: "Chart",
                         tileId: u,
@@ -2232,7 +2236,7 @@
                             ...void 0 !== c ? {
                                 breakdownDimensions: c
                             } : {},
-                            granularity: y,
+                            granularity: g,
                             filters: F(d.filters, "".concat(t, ".dataSpec.filters"))
                         },
                         chartSpec: {
@@ -2291,7 +2295,7 @@
                             if (!e) return;
                             let t = {};
                             return void 0 !== e.genreBenchmark && (t.genreBenchmark = e.genreBenchmark), void 0 !== e.similarExperienceBenchmark && (t.similarExperienceBenchmark = e.similarExperienceBenchmark), void 0 !== e.topExperienceBenchmark && (t.topExperienceBenchmark = e.topExperienceBenchmark), void 0 !== e.previousPeriod && ("boolean" != typeof e.previousPeriod && B("Backend v1 cannot persist configured previous-period comparison offsets."), t.previousPeriod = e.previousPeriod), void 0 !== e.quota && (t.quota = e.quota), Object.keys(t).length > 0 ? t : void 0
-                        }((a = t.chart).chartSpec.overlays), c = null == (o = a.dataSpec.metrics[0]) ? void 0 : o.metric, u = null != (i = a.dataSpec.aggregation) ? i : void 0 !== c ? (0, D.resolveDefaultChartAggregation)(c) : y.RAQIV2AggregationType.Average, {
+                        }((a = t.chart).chartSpec.overlays), c = null == (o = a.dataSpec.metrics[0]) ? void 0 : o.metric, u = null != (i = a.dataSpec.aggregation) ? i : void 0 !== c ? (0, D.resolveDefaultChartAggregation)(c) : g.RAQIV2AggregationType.Average, {
                             tileId: a.tileId,
                             ...void 0 !== a.title ? {
                                 title: a.title
@@ -2481,8 +2485,8 @@
             m = null != (t = e.universeId) ? t : 0,
             p = null != (r = et(e.createdTime)) ? r : new Date(0).toISOString(),
             f = null != (n = et(e.updatedTime)) ? n : p,
-            g = et(e.publishedTime),
-            y = !0 === e.isPinned,
+            y = et(e.publishedTime),
+            g = !0 === e.isPinned,
             v = e.createdBy,
             b = e.updatedBy,
             A = er(null == v ? void 0 : v.userId),
@@ -2494,11 +2498,11 @@
             name: (0, C.validateDashboardName)(null != (a = e.name) ? a : ""),
             description: (0, C.validateDashboardDescription)(null != (i = e.description) ? i : void 0),
             status: (c = (o = e).latestPublishedDocumentId, u = null != (s = o.latestPublishedVersion) ? s : 0, c || u > 0 ? "published" : "draft"),
-            isPinned: y,
-            pinnedAt: y ? et(e.pinnedTime) : void 0,
+            isPinned: g,
+            pinnedAt: g ? et(e.pinnedTime) : void 0,
             createdAt: p,
             updatedAt: f,
-            publishedAt: g,
+            publishedAt: y,
             createdByUserId: null != A ? A : 0,
             createdByUsername: "",
             ...void 0 !== D ? {
@@ -2560,6 +2564,7 @@
                 return {
                     items: (0, m.sortDashboardsForList)(o),
                     canEditCustomDashboards: (null == (a = i.capabilities) ? void 0 : a.canEdit) === !0,
+                    capabilities: i.capabilities,
                     migrationFailedCount: 0,
                     nextPageToken: t && null != (n = i.nextPageToken) ? n : void 0
                 }
@@ -2826,21 +2831,19 @@
             return r.has(n) ? (0, p.findUnusedNumberedName)(t, t => "".concat(e, " (copy ").concat(t, ")"), p.DUPLICATE_COPY_NUMBERED_SUFFIX_START) : n
         }
         async listAllDashboards(e, t) {
-            var r, n, a;
-            let i = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : [],
-                o = arguments.length > 3 ? arguments[3] : void 0,
-                s = await this.client.listDashboards(e, t ? {
+            var r, n;
+            let a = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : [],
+                i = arguments.length > 3 ? arguments[3] : void 0,
+                o = await this.client.listDashboards(e, t ? {
                     pageToken: t
                 } : void 0),
-                c = [...i, ...null != (r = s.dashboards) ? r : []],
-                u = null != (n = s.nextPageToken) ? n : void 0,
-                l = null != o ? o : null == (a = s.capabilities) ? void 0 : a.canEdit;
-            return u ? this.listAllDashboards(e, u, c, l) : {
-                dashboards: c,
-                ...void 0 === l ? {} : {
-                    capabilities: {
-                        canEdit: l
-                    }
+                s = [...a, ...null != (r = o.dashboards) ? r : []],
+                c = null != (n = o.nextPageToken) ? n : void 0,
+                u = null != i ? i : o.capabilities;
+            return c ? this.listAllDashboards(e, c, s, u) : {
+                dashboards: s,
+                ...void 0 === u ? {} : {
+                    capabilities: u
                 }
             }
         }
@@ -2860,7 +2863,7 @@
             try {
                 return await r()
             } catch (n) {
-                let r = (0, g.mapCustomDashboardsApiError)(n, t);
+                let r = (0, y.mapCustomDashboardsApiError)(n, t);
                 throw r instanceof c.CustomDashboardVersionConflictError && void 0 !== e && t && await this.refreshTokens(e, t), r
             }
         }
@@ -2904,12 +2907,13 @@
         }
     }
     e.s(["cloneTileWithNewId", 0, ed], 743209);
-    let eg = class {
+    let ey = class {
             async list(e, t) {
                 let [r, n] = await Promise.all([this.apiService.list(e, t), this.localService.list(e)]);
                 return {
                     items: r.items.map(ef),
                     canEditCustomDashboards: r.canEditCustomDashboards,
+                    capabilities: n.capabilities,
                     localItems: n.items.map(ep),
                     nextPageToken: r.nextPageToken,
                     migrationFailedCount: r.migrationFailedCount + n.migrationFailedCount
@@ -3017,7 +3021,7 @@
                 (0, u._)(this, "localService", void 0), (0, u._)(this, "apiService", void 0), this.localService = e.localService, this.apiService = e.apiService
             }
         },
-        ey = {
+        eg = {
             isoNow: () => new Date().toISOString()
         };
     var ev = e.i(730530),
@@ -3129,6 +3133,7 @@
                 let r = this.peekUniverseMap(e);
                 return {
                     ...eD(r ? (0, m.sortDashboardsForList)([...r.values()].map(e => e.document)) : [], t),
+                    capabilities: l.LOCAL_DASHBOARD_LIST_CAPABILITIES,
                     migrationFailedCount: 0
                 }
             }
@@ -3320,7 +3325,7 @@
             }
             constructor(e = {}) {
                 var t, r, n;
-                (0, u._)(this, "store", new Map), (0, u._)(this, "listeners", new Set), (0, u._)(this, "clock", void 0), (0, u._)(this, "idFactory", void 0), (0, u._)(this, "duplicateNameSuffixes", void 0), this.clock = null != (t = e.clock) ? t : ey, this.idFactory = null != (r = e.idFactory) ? r : h.defaultIdFactory, this.duplicateNameSuffixes = null != (n = e.duplicateNameSuffixes) ? n : eA
+                (0, u._)(this, "store", new Map), (0, u._)(this, "listeners", new Set), (0, u._)(this, "clock", void 0), (0, u._)(this, "idFactory", void 0), (0, u._)(this, "duplicateNameSuffixes", void 0), this.clock = null != (t = e.clock) ? t : eg, this.idFactory = null != (r = e.idFactory) ? r : h.defaultIdFactory, this.duplicateNameSuffixes = null != (n = e.duplicateNameSuffixes) ? n : eA
             }
         },
         ew = [{
@@ -3464,8 +3469,8 @@
                 this.storageUnreadableByUniverse.delete(e);
                 let {
                     records: f,
-                    quarantine: g,
-                    corrupted: y,
+                    quarantine: y,
+                    corrupted: g,
                     mutatedOnRead: v
                 } = (t = p.bucket, a = {}, i = {}, o = [], s = !1, Object.entries(null != (r = t.records) ? r : {}).forEach(t => {
                     var r;
@@ -3582,25 +3587,25 @@
                     corrupted: o,
                     mutatedOnRead: s
                 });
-                if (this.corruptedByUniverse.set(e, y), v) try {
-                    e_(d, e, f, g);
+                if (this.corruptedByUniverse.set(e, g), v) try {
+                    e_(d, e, f, y);
                     let t = d.getItem(eR(e));
                     this.materialisedByUniverse.set(e, {
                         rawString: t,
                         records: f,
-                        quarantine: g
+                        quarantine: y
                     })
                 } catch (e) {
                     null == (n = this.onPersistError) || n.call(this, e)
                 } else this.materialisedByUniverse.set(e, {
                     rawString: h,
                     records: f,
-                    quarantine: g
+                    quarantine: y
                 });
                 return {
                     storage: d,
                     records: f,
-                    quarantine: g
+                    quarantine: y
                 }
             }
             async list(e, t) {
@@ -3610,6 +3615,7 @@
                 } = this.readMaterialised(e), i = (0, m.sortDashboardsForList)(Object.values(a).map(e => e.document)), o = null != (r = null == (n = this.corruptedByUniverse.get(e)) ? void 0 : n.length) ? r : 0;
                 return {
                     ...eD(i, t),
+                    capabilities: l.LOCAL_DASHBOARD_LIST_CAPABILITIES,
                     migrationFailedCount: o
                 }
             }
@@ -3908,7 +3914,7 @@
                         universeId: t,
                         eventType: "external"
                     }))
-                }), this.clock = null != (t = e.clock) ? t : ey, this.onPersistError = e.onPersistError, this.idFactory = null != (r = e.idFactory) ? r : h.defaultIdFactory, this.duplicateNameSuffixes = null != (n = e.duplicateNameSuffixes) ? n : eA
+                }), this.clock = null != (t = e.clock) ? t : eg, this.onPersistError = e.onPersistError, this.idFactory = null != (r = e.idFactory) ? r : h.defaultIdFactory, this.duplicateNameSuffixes = null != (n = e.duplicateNameSuffixes) ? n : eA
             }
         },
         eV = class {
@@ -4033,7 +4039,7 @@
                 if (!e.isEnabled) return eO;
                 if (e.isApiBackendEnabled) {
                     let t = new ec((0, f.createDefaultCustomDashboardsApiClient)());
-                    return e.canSaveCustomDashboards ? t : e.isLocalStorageEnabled ? new eg({
+                    return e.canSaveCustomDashboards ? t : e.isLocalStorageEnabled ? new ey({
                         apiService: t,
                         localService: eU()
                     }) : new eV(t)
@@ -4087,8 +4093,8 @@
                 universeId: l
             }),
             {
-                ready: g,
-                value: y
+                ready: y,
+                value: g
             } = (0, a.useFlag)(i.isCustomDashboardsLocalStorageEnabled),
             {
                 ready: v,
@@ -4096,14 +4102,14 @@
             } = (0, a.useFlag)(i.isCustomDashboardsApiBackendEnabled, {
                 universeId: l
             }),
-            A = p && g && v,
+            A = p && y && v,
             D = !b || l === s.uninitializedUniverseId || !h || m,
             C = (0, r.useMemo)(() => A && D ? {
                 isEnabled: f,
-                isLocalStorageEnabled: y,
+                isLocalStorageEnabled: g,
                 isApiBackendEnabled: b,
                 canSaveCustomDashboards: !m && d
-            } : null, [d, A, b, f, y, m, D]),
+            } : null, [d, A, b, f, g, m, D]),
             w = (0, r.useMemo)(() => C ? u.getServiceForConfig(C) : u.service, [u, C]),
             S = (0, r.useMemo)(() => C ? !!C.isEnabled && (!C.isApiBackendEnabled || C.canSaveCustomDashboards || C.isLocalStorageEnabled) : u.canMutateDashboards, [u.canMutateDashboards, C]),
             T = (0, r.useMemo)(() => {
@@ -4189,14 +4195,14 @@
     }, "isCustomDashboardSavedDateRangeDurationValid", 0, p, "isSupportedCustomDashboardSavedDateRangeType", 0, m], 377396);
     let f = n.RAQIV2MetricGranularity.OneDay;
 
-    function g(e, t) {
+    function y(e, t) {
         return n.RAQIV2MetricToSupportedGranularities[e].includes(t === l.CustomDashboardSummaryCardAggregation.Cumulative ? n.RAQIV2MetricGranularity.None : f)
     }
 
-    function y(e, t) {
-        return g(e, t) ? t : g(e, l.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod) ? l.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod : g(e, l.CustomDashboardSummaryCardAggregation.Cumulative) ? l.CustomDashboardSummaryCardAggregation.Cumulative : null
+    function g(e, t) {
+        return y(e, t) ? t : y(e, l.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod) ? l.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod : y(e, l.CustomDashboardSummaryCardAggregation.Cumulative) ? l.CustomDashboardSummaryCardAggregation.Cumulative : null
     }
-    e.s(["SUMMARY_CARD_TIME_SERIES_GRANULARITY", 0, f, "isSummaryCardAggregationSupported", 0, g, "resolveSupportedSummaryCardAggregation", 0, y], 98949);
+    e.s(["SUMMARY_CARD_TIME_SERIES_GRANULARITY", 0, f, "isSummaryCardAggregationSupported", 0, y, "resolveSupportedSummaryCardAggregation", 0, g], 98949);
     var v = e.i(956154);
     let b = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/;
 
@@ -4415,7 +4421,7 @@
         return 0 === r.length ? void 0 : r
     }
 
-    function eg(e, t) {
+    function ey(e, t) {
         if (null == e) return;
         if (!Array.isArray(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
         let r = e.map((e, r) => {
@@ -4426,7 +4432,7 @@
         return r.length > 0 ? r : void 0
     }
 
-    function ey(e, t) {
+    function eg(e, t) {
         if (null == e) return;
         if (!Array.isArray(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
         let r = e.map((e, r) => {
@@ -4559,7 +4565,7 @@
                                 if (!(X(O, r) || x.test(r))) throw new u.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known summary-card aggregation.'));
                                 return r
                             }(r.aggregation, "".concat(t, ".aggregation")),
-                            o = a.metricKey ? y(a.metricKey, i) : i;
+                            o = a.metricKey ? g(a.metricKey, i) : i;
                         if (!o) throw new u.CustomDashboardValidationError("".concat(t, ".aggregation"), "".concat(t, ".aggregation is not supported by the selected metric."));
                         return {
                             type: "SummaryCard",
@@ -4663,9 +4669,9 @@
                                     }(r.defaultSelection, "".concat(t, ".defaultSelection"))
                                 }
                             }(a.timeRangeOptions, "".concat(t, ".timeRangeOptions")),
-                            filterDimensions: eg(a.filterDimensions, "".concat(t, ".filterDimensions")),
+                            filterDimensions: ey(a.filterDimensions, "".concat(t, ".filterDimensions")),
                             defaultFilters: (r = em(a.defaultFilters, "".concat(t, ".defaultFilters"))).length > 0 ? r : void 0,
-                            breakdownDimensions: eg(a.breakdownDimensions, "".concat(t, ".breakdownDimensions")),
+                            breakdownDimensions: ey(a.breakdownDimensions, "".concat(t, ".breakdownDimensions")),
                             defaultBreakdown: function(e, t) {
                                 if (null == e) return;
                                 if (!Array.isArray(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
@@ -4687,8 +4693,8 @@
                                 if (null == e) return;
                                 let a = D(e, t);
                                 return {
-                                    supportedAnnotationTypes: null != (r = ey(a.supportedAnnotationTypes, "".concat(t, ".supportedAnnotationTypes"))) ? r : [],
-                                    defaultAnnotationTypes: null != (n = ey(a.defaultAnnotationTypes, "".concat(t, ".defaultAnnotationTypes"))) ? n : [],
+                                    supportedAnnotationTypes: null != (r = eg(a.supportedAnnotationTypes, "".concat(t, ".supportedAnnotationTypes"))) ? r : [],
+                                    defaultAnnotationTypes: null != (n = eg(a.defaultAnnotationTypes, "".concat(t, ".defaultAnnotationTypes"))) ? n : [],
                                     showAnnotationsControl: void 0 === a.showAnnotationsControl || null === a.showAnnotationsControl || E(a.showAnnotationsControl, "".concat(t, ".showAnnotationsControl"))
                                 }
                             }(a.annotationOptions, "".concat(t, ".annotationOptions"))
@@ -5063,6 +5069,35 @@
                     }
                 });
                 i && h(o, i)
+            },
+            async filterDashboardText(t) {
+                let {
+                    universeId: r,
+                    text: n,
+                    format: a
+                } = t, {
+                    data: i,
+                    error: o,
+                    response: s
+                } = await e.POST("/v1/universes/{universeId}/custom-dashboard-text/filter", {
+                    params: {
+                        path: {
+                            universeId: r
+                        }
+                    },
+                    body: {
+                        universeId: r,
+                        text: n,
+                        format: "description" === a ? 2 : 1
+                    }
+                });
+                if ((o || !i) && h(s, o), "boolean" != typeof i.isFiltered) {
+                    var c;
+                    throw new u(null != (c = null == s ? void 0 : s.status) ? c : 0, "Response is missing isFiltered")
+                }
+                return {
+                    isFiltered: i.isFiltered
+                }
             }
         }
     }], 852209);
@@ -5089,5 +5124,5 @@
     }], 302610)
 }]);
 
-//# debugId=b0f32ea0-e89c-fd0e-ca08-c0facb09a918
-//# sourceMappingURL=3-2nt8066a5o2.js.map
+//# debugId=3cb111d4-6dcc-6920-553e-a3504c3b0dc3
+//# sourceMappingURL=1t9wekv1lgrl_.js.map
