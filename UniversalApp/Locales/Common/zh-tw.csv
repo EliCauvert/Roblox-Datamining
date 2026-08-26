@@ -224,13 +224,11 @@ Authentication.AccountSwitch.Action.SwitchAccount,切換帳戶
 Authentication.AccountSwitch.Description.AccountLimit.2,已達到帳號數量上限。如要新增帳號，請先移除現有帳號。
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,繼續以 {username} 的身分使用，系統會將你登出其他帳號。
 Authentication.AccountSwitch.Description.LogoutConfirmation,"在添加新帳號之前,您必須在此設備上登出其他 Roblox 帳號"
-Authentication.AccountSwitch.Description.ParentLogoutConfirmation,您必須登出此裝置上的其他 Roblox 帳號，才能新增具有家長權限的帳號
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,請稍後再試
 Authentication.AccountSwitch.Description.RemoveAllAccounts,登出後，所有帳號將從此裝置中移除。
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,除非再次登入，否則你將不會再在此裝置上看到此帳號。你即將返回登陸頁面。
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,嘗試直接登入
-Authentication.AccountSwitch.Header.CantSwitchAccounts,無法切換帳號
-Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,
+Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,無法切換帳號
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Header.RemoveCurrentAccount,要移除目前的帳號嗎？
 Authentication.AccountSwitch.Header.SignOutOtherAccounts,要登出其他帳號嗎？
@@ -2175,6 +2173,7 @@ Feature.Build.Action.CopyText,複製文字
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
 Feature.Build.Action.DontAskAgain,不要再詢問
+Feature.Build.Action.DontShowAgain,不要再顯示
 Feature.Build.Action.HideAutosaved,隱藏自動儲存
 Feature.Build.Action.ManageLimit,管理上限
 Feature.Build.Action.Next,
@@ -2200,16 +2199,19 @@ Feature.Build.Action.UpdateWithChanges,更新變更
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,查看使用量
 Feature.Build.Content.NewGame,新遊戲
+Feature.Build.Description.AdCampaignModerationReview,所有廣告活動都會由 Roblox 審核。此流程最多可能需要 24 小時。
+Feature.Build.Description.AdCampaignSheetRunDates,投放時間 {startDate} – {endDate}
+Feature.Build.Description.AdvertisingAgreement,繼續操作，即表示您同意 {advertisingTermsStart}Roblox 廣告條款{advertisingTermsEnd}和{advertisingStandardsStart}廣告標準{advertisingStandardsEnd}。
 Feature.Build.Description.ArchiveRemoval,若封存此遊戲，遊戲會從「組建」中移除。你仍可在創作者中心或 Roblox Studio 中，存取並還原遊戲。
 Feature.Build.Description.AutoBuyUsage,使用你的 Robux，在你建立時自動購買額外的組建使用量。你可以隨時設定每日消費上限。
 Feature.Build.Description.BoostAudienceForPlays,增加受眾，獲得更多遊玩次數。
-Feature.Build.Description.BoostGameAudience,增加遊戲的受眾
 Feature.Build.Description.BuildIdeaGame,將想法化為遊戲
 Feature.Build.Description.BuildReplyNotif,在組建回覆你時收到通知。
 Feature.Build.Description.BuyRobuxToCreate,購買更多 Robux 以繼續創作，或等待明天重置的免費組建使用量。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 購買更多組建使用量，或等待每日上限重置。
 Feature.Build.Description.CampaignRunDates,你的活動將在 {startDate} – {endDate}期間投放
 Feature.Build.Description.ChoosePlaytesters,選擇好友協助你試玩。
+Feature.Build.Description.EarnedRobuxAppliedFirst,若已賺取 Robux，這些 Robux 將會優先用於支付廣告活動費用。
 Feature.Build.Description.EnableBuildNotifs,在裝置設定中啟用通知，以接收來自組建的最新消息。
 Feature.Build.Description.FriendsLinkOnly,只有你的好友能存取此連結。若希望有更多人玩，請變更遊戲的受眾設定。
 Feature.Build.Description.GameCreationDone,我已建立完成並發佈你的遊戲。你可以打開遊戲試玩。
@@ -2223,6 +2225,7 @@ Feature.Build.Description.PlaytestLatest,你正在試玩最新版本。準備好
 Feature.Build.Description.PlaytestLocked,建立第一個遊戲後，即可開始進行遊戲測試。
 Feature.Build.Description.PlaytesterAccess,新增好友為遊戲測試員，或變更遊戲的受眾設定，讓更多人玩。
 Feature.Build.Description.PrivateShare,變更遊戲的受眾設定以分享。
+Feature.Build.Description.PromoteGameWithAdCampaign,透過為期 {durationDays} 天的廣告活動增加受眾，讓遊戲能被他人發現。
 Feature.Build.Description.RaiseLimitOrWait,提高每日 Robux 上限以繼續創作，或等待使用量於明天重置。
 Feature.Build.Description.RatingAgreement,發佈即表示您同意此內容分級準確無誤。
 Feature.Build.Description.RestoreLatest,此版本將成為你的最新發佈版本。
@@ -2255,7 +2258,9 @@ Feature.Build.Label.Deleted,已刪除
 Feature.Build.Label.DescribeIdea,描述想法
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,
+Feature.Build.Label.EasyPerformanceReport,簡單的成效報告
 Feature.Build.Label.Error,
+Feature.Build.Label.Free,免費
 Feature.Build.Label.FreeBuildUsage,免費組建使用量
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
@@ -2269,6 +2274,7 @@ Feature.Build.Label.InputNeeded,必須輸入內容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,受限
 Feature.Build.Label.Loading,
+Feature.Build.Label.MaximizeForGamePlays,最大化遊戲遊玩次數
 Feature.Build.Label.Models3D,3D 模型
 Feature.Build.Label.NoLimit,無上限
 Feature.Build.Label.NotStarted,尚未開始
@@ -2293,6 +2299,7 @@ Feature.Build.Label.SelectOption,選擇一個選項
 Feature.Build.Label.ShareAddedFriends,與你新增的好友分享
 Feature.Build.Label.Shared,已分享
 Feature.Build.Label.Sounds,音效
+Feature.Build.Label.TargetAllRobloxPlayers,鎖定所有 Roblox 玩家
 Feature.Build.Label.Thinking,思考中
 Feature.Build.Label.Title,標題
 Feature.Build.Label.TitleDescription,標題和說明
@@ -2418,6 +2425,7 @@ Feature.Build.Message.PlaytestersAdded,已新增 {INVITED_COUNT} 位遊戲測試
 Feature.Build.Message.PublicPublishFailed,你的遊戲已發佈，但無法設為公開，請再試一次。
 Feature.Build.Message.PublishExpandAudience,發佈以擴大受眾
 Feature.Build.Message.PublishNotReverted,無法還原發佈的內容，請再試一次。
+Feature.Build.Message.PublishPromotionUpsell,恭喜你發佈遊戲！你有 {promotionCount} 次免費促銷機會，可以在 Roblox 上吸引更多玩家。
 Feature.Build.Message.PublishReverted,已還原發佈版本。
 Feature.Build.Message.QuestionnaireNeeded,此遊戲是在組建之外編輯的。請完成內容問卷以發佈。
 Feature.Build.Message.ReadyToPlay,你的遊戲已可在 Roblox 上遊玩！
@@ -2445,6 +2453,7 @@ Feature.Build.Notification.Message.Review,若要查看結果，請恢復組建�
 Feature.Build.Notification.Title.Finished,組建完成
 Feature.Build.Notification.Title.NeedInput,組建需要你的輸入
 Feature.Build.Title.AdCampaignActive,廣告活動已生效
+Feature.Build.Title.AdCampaignDuration,為期 {durationDays} 天的廣告活動
 Feature.Build.Title.AddFriendsToPlaytest,新增好友協助你試玩
 Feature.Build.Title.ArchiveThisGame,要封存此遊戲嗎？
 Feature.Build.Title.AssetLibrary,素材庫
@@ -2467,6 +2476,7 @@ Feature.Build.Title.GetUsers,取得使用者
 Feature.Build.Title.NoRobuxForUsage,沒有剩餘的 Robux 可用於購買組建使用量
 Feature.Build.Title.Playtesters,遊戲測試員
 Feature.Build.Title.PlaytestersOnlyPlay,只有遊戲測試員可以遊玩
+Feature.Build.Title.PromoteGame,宣傳你的遊戲
 Feature.Build.Title.PromoteGameFree,免費宣傳你的遊戲
 Feature.Build.Title.PushNotifications,推播通知
 Feature.Build.Title.RevertLastChange,是否要還原上次的變更？
@@ -2475,6 +2485,7 @@ Feature.Build.Title.TurnActivity,回合活動
 Feature.Build.Title.VersionHistory,版本歷史紀錄
 Feature.Build.Title.VersionInformation,版本資訊
 Feature.Build.Title.VersionNumber,版本 {VERSION}
+Feature.Build.Title.WhatsIncluded,包含哪些內容？
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,不，謝了
@@ -2640,7 +2651,7 @@ Feature.Catalog.Label.Filter.Sorts,排序
 Feature.Catalog.Label.Filter.TotalValue,總價值
 Feature.Catalog.Label.Filter.UnavailableItems,不開放的道具
 Feature.Catalog.Label.FreeItemConfirmation,確定向 {creatorName} 免費取得 {itemName} 嗎？
-Feature.Catalog.Label.FreeUpperCase,免費
+Feature.Catalog.Label.FreeUpperCase,
 Feature.Catalog.Label.FromPrice,自 {itemPrice}
 Feature.Catalog.Label.FrontAccessories,正面飾品
 Feature.Catalog.Label.FullBodies,
@@ -4610,7 +4621,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,好消息
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,取得 Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,此處無法使用 Roblox Plus
-Feature.SafetyDashboard.Heading.AccountStatus,帳號狀態
+Feature.SafetyDashboard.Heading.AccountStatus.V2,帳號狀態、違規和上訴
 Feature.Schools.Action.AlreadyGraduated,我已經畢業了
 Feature.Schools.Action.CantFindSchool,找不到學校嗎？
 Feature.Schools.Action.Continue,
@@ -5385,7 +5396,7 @@ Verification.Identity.Heading.V2LetsChat,來聊天吧
 Verification.Identity.Heading.YourNewWayToChat,新的聊天方式！
 Verification.Identity.Label.AgeVerifyPrompt,驗證年齡，盡情享受 Roblox！
 Verification.Identity.Label.ConnectingToMobile,正在連接到您的行動裝置
-Verification.Identity.Label.DontShowAgain,不要再顯示
+Verification.Identity.Label.DontShowAgain,
 Verification.Identity.Label.EnableChatWithVoice,啟用麥克風即可在此體驗使用語音聊天。
 Verification.Identity.Label.EnableMicrophone,啟用麥克風
 Verification.Identity.Label.EnableVoiceChat,

@@ -225,12 +225,10 @@ Authentication.AccountSwitch.Action.SwitchAccount,Beralih Akun
 Authentication.AccountSwitch.Description.AccountLimit.2,"Kamu telah mencapai batas akun. Untuk menambahkan akun baru, hapus satu akun terlebih dahulu."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,"Dengan melanjutkan sebagai {username}, kamu akan log out dari akunmu yang lain."
 Authentication.AccountSwitch.Description.LogoutConfirmation,Kamu harus log out dari akun Roblox kamu yang lain di perangkat ini sebelum menambahkan akun baru
-Authentication.AccountSwitch.Description.ParentLogoutConfirmation,Kamu harus log out dari akun Roblox kamu yang lain di perangkat ini sebelum menambahkan akun baru dengan hak istimewa orang tua
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Coba lagi nanti
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Setelah kamu log out, semua akun akan dihapus dari perangkat ini."
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,"Jika kamu melakukan ini, kamu tidak akan lagi melihat akun ini di perangkat ini, kecuali kamu log in kembali. Kamu akan kembali ke halaman arahan."
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,Coba log in secara langsung
-Authentication.AccountSwitch.Header.CantSwitchAccounts,Tidak Dapat Beralih Akun
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,Tidak dapat beralih akun
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Header.RemoveCurrentAccount,Hapus akun saat ini?
@@ -2176,6 +2174,7 @@ Feature.Build.Action.CopyText,Salin teks
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
 Feature.Build.Action.DontAskAgain,Jangan tanya lagi
+Feature.Build.Action.DontShowAgain,Jangan tampilkan lagi
 Feature.Build.Action.HideAutosaved,Sembunyikan yang disimpan otomatis
 Feature.Build.Action.ManageLimit,Kelola batas
 Feature.Build.Action.Next,
@@ -2203,7 +2202,6 @@ Feature.Build.Content.NewGame,Game baru
 Feature.Build.Description.ArchiveRemoval,"Jika kamu mengarsipkan game ini, game ini akan dihapus dari Build. Kamu masih dapat mengakses dan memulihkannya dari Pusat Kreator atau Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Gunakan Robux-mu untuk membeli kuota penggunaan Build tambahan secara otomatis saat kamu berkreasi. Kamu dapat menetapkan batas pemakaian uang harian kapan saja.
 Feature.Build.Description.BoostAudienceForPlays,Jangkau lebih banyak audiens agar game-mu makin ramai.
-Feature.Build.Description.BoostGameAudience,Tambah audiens game-mu
 Feature.Build.Description.BuildIdeaGame,Ubah idemu menjadi game
 Feature.Build.Description.BuildReplyNotif,Dapatkan notifikasi saat Build memiliki balasan untukmu.
 Feature.Build.Description.BuyRobuxToCreate,"Beli lebih banyak Robux untuk terus berkreasi, atau tunggu hingga kuota penggunaan Build gratismu direset besok."
@@ -2411,6 +2409,7 @@ Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} dari {MAX_INVITES} playte
 Feature.Build.Message.PublicPublishFailed,"Game-mu telah dipublikasikan, tetapi tidak dapat dibuat publik. Coba lagi."
 Feature.Build.Message.PublishExpandAudience,Publikasikan untuk memperluas audiensmu
 Feature.Build.Message.PublishNotReverted,Publikasimu gagal dibatalkan. Coba lagi.
+Feature.Build.Message.PublishPromotionUpsell,"Selamat, akhirnya game kamu rilis! Kamu punya {promotionCount} promosi gratis yang tersedia untuk menjangkau lebih banyak pemain di Roblox."
 Feature.Build.Message.PublishReverted,Membatalkan publikasi.
 Feature.Build.Message.QuestionnaireNeeded,Game ini diedit di luar Build. Selesaikan kuesioner konten untuk memublikasikannya.
 Feature.Build.Message.ReadyToPlay,Game-mu siap dimainkan di Roblox!
@@ -4600,7 +4599,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Kabar baik
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Dapatkan Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus tidak tersedia di sini
-Feature.SafetyDashboard.Heading.AccountStatus,Status akun
+Feature.SafetyDashboard.Heading.AccountStatus.V2,Status akun dan pelanggaran
 Feature.Schools.Action.AlreadyGraduated,Saya sudah lulus
 Feature.Schools.Action.CantFindSchool,Tidak dapat menemukan sekolahmu?
 Feature.Schools.Action.Continue,

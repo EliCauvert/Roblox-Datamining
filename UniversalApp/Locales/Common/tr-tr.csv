@@ -225,12 +225,10 @@ Authentication.AccountSwitch.Action.SwitchAccount,Hesap Değiştir
 Authentication.AccountSwitch.Description.AccountLimit.2,Hesap sınırına ulaştın. Yeni bir hesap eklemek için lütfen mevcut bir hesabı kaldır.
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,{username} olarak devam etmek diğer hesaplarından çıkış yapmana sebep olur.
 Authentication.AccountSwitch.Description.LogoutConfirmation,Yeni bir hesap eklemeden önce bu cihazdaki diğer Roblox hesaplarından çıkış yapman gerekiyor
-Authentication.AccountSwitch.Description.ParentLogoutConfirmation,Ebeveyn ayrıcalıklarına sahip yeni bir hesap eklemeden önce bu cihazdaki diğer Roblox hesaplarından çıkış yapman gerekiyor
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Lütfen daha sonra tekrar dene
 Authentication.AccountSwitch.Description.RemoveAllAccounts,Çıkış yaptığında tüm hesaplar bu cihazdan kaldırılacaktır.
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,Bunu yaparsan tekrar giriş yapmadığın sürece bu hesabı artık bu cihazda görmeyeceksin. Açılış sayfasına geri döneceksin.
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,Doğrudan giriş yapmayı dene
-Authentication.AccountSwitch.Header.CantSwitchAccounts,Hesap Değiştirilemiyor
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,Hesap değiştirilemiyor
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Header.RemoveCurrentAccount,Mevcut hesap kaldırılsın mı?
@@ -2176,6 +2174,7 @@ Feature.Build.Action.CopyText,Metni kopyala
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
 Feature.Build.Action.DontAskAgain,Bir daha sorma
+Feature.Build.Action.DontShowAgain,Tekrar gösterme
 Feature.Build.Action.HideAutosaved,Otomatik kaydedilenleri gizle
 Feature.Build.Action.ManageLimit,Sınırı yönet
 Feature.Build.Action.Next,
@@ -2203,7 +2202,6 @@ Feature.Build.Content.NewGame,Yeni oyun
 Feature.Build.Description.ArchiveRemoval,Bu oyunu arşivlersen oyun İnşa Et'ten kaldırılır. Yaratıcı Merkezi'nde veya Roblox Studio'da oyuna erişmeye ve oyunu geri yüklemeye devam edebilirsin.
 Feature.Build.Description.AutoBuyUsage,Bir şeyler oluştururken otomatik olarak ek İnşa Et kullanım hakkı satın almak için Robux'unu kullan. İstediğin zaman günlük harcama limiti belirleyebilirsin.
 Feature.Build.Description.BoostAudienceForPlays,Daha fazla oyun için kitleni genişlet.
-Feature.Build.Description.BoostGameAudience,Oyununun kitlesini genişlet
 Feature.Build.Description.BuildIdeaGame,Fikirlerini oyuna dönüştür
 Feature.Build.Description.BuildReplyNotif,İnşa Et'ten sana bir yanıt geldiğinde haberdar ol.
 Feature.Build.Description.BuyRobuxToCreate,Bir şeyler oluşturmaya devam etmek için daha fazla Robux satın al veya ücretsiz İnşa Et kullanım hakkının yarın sıfırlanmasını bekle.
@@ -2411,6 +2409,7 @@ Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT}/{MAX_INVITES} oynanış t
 Feature.Build.Message.PublicPublishFailed,Oyunun yayınlandı ancak herkese açık hâle getirilemedi. Tekrar dene.
 Feature.Build.Message.PublishExpandAudience,Kitleni genişletmek için yayınla
 Feature.Build.Message.PublishNotReverted,Yayınlaman geri döndürülmedi. Tekrar dene.
+Feature.Build.Message.PublishPromotionUpsell,Oyununu yayınladığın için tebrikler! Roblox'ta daha fazla oyuncu kazanmak için {promotionCount} ücretsiz promosyonun var.
 Feature.Build.Message.PublishReverted,Yayınlama geri döndürüldü.
 Feature.Build.Message.QuestionnaireNeeded,Bu oyun İnşa Et dışında düzenlendi. Yayınlamak için içerik anketini tamamla.
 Feature.Build.Message.ReadyToPlay,Oyunun Roblox'ta oynamaya hazır!
@@ -4602,7 +4601,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,İyi haberlerimiz var
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus'a geç
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus burada kullanılamıyor
-Feature.SafetyDashboard.Heading.AccountStatus,Hesap durumu
+Feature.SafetyDashboard.Heading.AccountStatus.V2,Hesap durumu ve ihlaller
 Feature.Schools.Action.AlreadyGraduated,Zaten mezun oldum
 Feature.Schools.Action.CantFindSchool,Okulunu bulamıyor musun?
 Feature.Schools.Action.Continue,

@@ -208,13 +208,11 @@ Authentication.AccountSwitch.Action.SwitchAccount,สลับบัญชี
 Authentication.AccountSwitch.Description.AccountLimit.2,คุณมีบัญชีถึงจำนวนสูงสุดแล้ว หากต้องการเพิ่มบัญชีใหม่ โปรดลบบัญชีที่มีอยู่ออกก่อน
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,การดำเนินการต่อโดยใช้ {username} จะนำคุณออกจากระบบบัญชีอื่นของคุณ
 Authentication.AccountSwitch.Description.LogoutConfirmation,คุณจะต้องลงชื่อออกจากบัญชี Roblox บัญชีอื่นของคุณบนอุปกรณ์นี้ก่อนจึงจะเพิ่มบัญชีใหม่ได้
-Authentication.AccountSwitch.Description.ParentLogoutConfirmation,คุณจะต้องลงชื่อออกจากบัญชี Roblox บัญชีอื่นของคุณบนอุปกรณ์นี้ก่อนจึงจะเพิ่มบัญชีใหม่ที่มีสิทธิ์ของผู้ปกครองได้
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,โปรดลองอีกครั้งในภายหลัง
 Authentication.AccountSwitch.Description.RemoveAllAccounts,เมื่อคุณลงชื่อออก บัญชีทั้งหมดจะถูกลบออกจากอุปกรณ์นี้
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,หากลบออก คุณจะกลับไปที่หน้า Landing Page และจะไม่เห็นบัญชีนี้บนอุปกรณ์นี้อีกต่อไป เว้นแต่จะลงชื่อเข้าใช้อีกครั้ง
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,โปรดลงชื่อเข้าใช้โดยตรง
-Authentication.AccountSwitch.Header.CantSwitchAccounts,ไม่สามารถสลับบัญชีได้
-Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,
+Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,ไม่สามารถสลับบัญชีได้
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Header.RemoveCurrentAccount,ลบบัญชีปัจจุบันใช่ไหม?
 Authentication.AccountSwitch.Header.SignOutOtherAccounts,ลงชื่อออกจากบัญชีอื่นใช่ไหม?
@@ -2159,6 +2157,7 @@ Feature.Build.Action.CopyText,คัดลอกข้อความ
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
 Feature.Build.Action.DontAskAgain,ไม่ต้องถามอีก
+Feature.Build.Action.DontShowAgain,ไม่ต้องแสดงอีก
 Feature.Build.Action.HideAutosaved,ซ่อนรายการที่บันทึกอัตโนมัติ
 Feature.Build.Action.ManageLimit,จัดการวงเงิน
 Feature.Build.Action.Next,
@@ -2184,16 +2183,19 @@ Feature.Build.Action.UpdateWithChanges,อัปเดตตามการเ�
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,ดูการใช้งาน
 Feature.Build.Content.NewGame,เกมใหม่
+Feature.Build.Description.AdCampaignModerationReview,ทีมกลั่นกรองของ Roblox จะตรวจสอบแคมเปญโฆษณาทั้งหมด โดยกระบวนการนี้อาจใช้เวลาถึง 24 ชั่วโมง
+Feature.Build.Description.AdCampaignSheetRunDates,ใช้ {startDate} – {endDate}
+Feature.Build.Description.AdvertisingAgreement,การดำเนินการต่อถือว่าคุณยอมรับ{advertisingTermsStart}ข้อกำหนดการโฆษณา{advertisingTermsEnd}และ{advertisingStandardsStart}มาตรฐานการโฆษณาของ Roblox{advertisingStandardsEnd}
 Feature.Build.Description.ArchiveRemoval,หากเก็บเกมนี้ถาวร เกมจะถูกลบออกจาก Build แต่คุณยังสามารถเข้าถึงและกู้คืนเกมได้จากศูนย์กลางครีเอเตอร์หรือ Roblox Studio
 Feature.Build.Description.AutoBuyUsage,ใช้ Robux ของคุณเพื่อซื้อโควต้าการใช้งาน Build เพิ่มเติมโดยอัตโนมัติในขณะที่คุณสร้าง คุณสามารถกำหนดวงเงินใช้จ่ายต่อวันได้ตลอดเวลา
 Feature.Build.Description.BoostAudienceForPlays,เพิ่มกลุ่มเป้าหมายของคุณเพื่อให้มีคนเล่นมากขึ้น
-Feature.Build.Description.BoostGameAudience,เพิ่มกลุ่มเป้าหมายของเกมคุณ
 Feature.Build.Description.BuildIdeaGame,เปลี่ยนไอเดียของคุณให้เป็นเกม
 Feature.Build.Description.BuildReplyNotif,รับการแจ้งเตือนเมื่อ Build ตอบคุณ
 Feature.Build.Description.BuyRobuxToCreate,ซื้อ Robux เพิ่มเพื่อสร้างต่อ หรือรอให้โควต้าการใช้งาน Build ฟรีของคุณรีเซ็ตในวันพรุ่งนี้
 Feature.Build.Description.BuyUsageOrWait,ซื้อโควต้าการใช้งาน Build เพิ่มด้วย Robux หรือรอให้โควต้ารายวันของคุณรีเซ็ต
 Feature.Build.Description.CampaignRunDates,แคมเปญของคุณจะใช้งานได้ในช่วงวันที่ {startDate} - {endDate}
 Feature.Build.Description.ChoosePlaytesters,เลือกเพื่อนที่จะช่วยคุณทดลองเล่น
+Feature.Build.Description.EarnedRobuxAppliedFirst,หากคุณได้รับ Robux จะมีการนำ Robux เหล่านั้นไปชำระค่าแคมเปญโฆษณาก่อน
 Feature.Build.Description.EnableBuildNotifs,เปิดการแจ้งเตือนในการตั้งค่าอุปกรณ์ของคุณเพื่อรับอัปเดตจาก Build
 Feature.Build.Description.FriendsLinkOnly,มีเพียงเพื่อนของคุณเท่านั้นที่สามารถเข้าถึงลิงก์นี้ได้ หากต้องการให้มีคนเล่นมากขึ้น ให้เปลี่ยนการตั้งค่ากลุ่มเป้าหมายของเกม
 Feature.Build.Description.GameCreationDone,ฉันสร้างและเผยแพร่เกมของคุณเรียบร้อยแล้ว คุณสามารถเปิดเพื่อทดลองเล่นได้
@@ -2207,6 +2209,7 @@ Feature.Build.Description.PlaytestLatest,คุณกำลังทดลอง
 Feature.Build.Description.PlaytestLocked,คุณสามารถเริ่มทดลองเล่นได้หลังจากที่สร้างเกมแรกของคุณ
 Feature.Build.Description.PlaytesterAccess,เพิ่มเพื่อนเป็นผู้ทดลองเล่น หรือเปลี่ยนการตั้งค่ากลุ่มเป้าหมายของเกมเพื่อให้มีคนเล่นมากขึ้น
 Feature.Build.Description.PrivateShare,เปลี่ยนการตั้งค่ากลุ่มเป้าหมายของเกมเพื่อแชร์
+Feature.Build.Description.PromoteGameWithAdCampaign,เพิ่มกลุ่มเป้าหมายของคุณด้วยแคมเปญโฆษณา {durationDays} วันและทำให้เกมของคุณเป็นที่รู้จัก
 Feature.Build.Description.RaiseLimitOrWait,เพิ่มวงเงิน Robux รายวันของคุณเพื่อสร้างต่อ หรือรอให้รีเซ็ตในวันพรุ่งนี้
 Feature.Build.Description.RatingAgreement,การเผยแพร่จะถือว่าคุณยอมรับว่าการจัดระดับเนื้อหานี้ถูกต้อง
 Feature.Build.Description.RestoreLatest,เวอร์ชันนี้จะกลายเป็นเวอร์ชันที่เผยแพร่ล่าสุดของคุณ
@@ -2239,7 +2242,9 @@ Feature.Build.Label.Deleted,ลบแล้ว
 Feature.Build.Label.DescribeIdea,อธิบายไอเดีย
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,เสร็จ
+Feature.Build.Label.EasyPerformanceReport,รายงานประสิทธิภาพที่ใช้งานง่าย
 Feature.Build.Label.Error,
+Feature.Build.Label.Free,ฟรี
 Feature.Build.Label.FreeBuildUsage,โควต้าการใช้งาน Build ฟรี
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
@@ -2253,6 +2258,7 @@ Feature.Build.Label.InputNeeded,ต้องกรอกข้อมูล
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,จำกัด
 Feature.Build.Label.Loading,
+Feature.Build.Label.MaximizeForGamePlays,เพิ่มจำนวนการเล่นเกมให้สูงสุด
 Feature.Build.Label.Models3D,โมเดล 3D
 Feature.Build.Label.NoLimit,ไม่จำกัด
 Feature.Build.Label.NotStarted,ยังไม่ได้เริ่ม
@@ -2277,6 +2283,7 @@ Feature.Build.Label.SelectOption,
 Feature.Build.Label.ShareAddedFriends,แชร์กับเพื่อนที่คุณเพิ่ม
 Feature.Build.Label.Shared,แชร์แล้ว
 Feature.Build.Label.Sounds,
+Feature.Build.Label.TargetAllRobloxPlayers,กำหนดเป้าหมายเป็นผู้เล่น Roblox ทั้งหมด
 Feature.Build.Label.Thinking,กำลังคิด
 Feature.Build.Label.Title,
 Feature.Build.Label.TitleDescription,ชื่อและคำอธิบาย
@@ -2402,6 +2409,7 @@ Feature.Build.Message.PlaytestersAdded,เพิ่มผู้ทดสอบ�
 Feature.Build.Message.PublicPublishFailed,เผยแพร่เกมของคุณแล้ว แต่ไม่สามารถตั้งค่าเป็นสาธารณะได้ โปรดลองอีกครั้ง
 Feature.Build.Message.PublishExpandAudience,เผยแพร่เพื่อขยายกลุ่มเป้าหมายของคุณ
 Feature.Build.Message.PublishNotReverted,ย้อนกลับการเผยแพร่ของคุณไม่สำเร็จ โปรดลองอีกครั้ง
+Feature.Build.Message.PublishPromotionUpsell,ยินดีด้วยที่เผยแพร่เกมแล้ว! คุณมีโปรโมชันฟรี {promotionCount} ครั้งเพื่อเพิ่มผู้เล่นบน Roblox
 Feature.Build.Message.PublishReverted,แปลงการเผยแพร่กลับแล้ว
 Feature.Build.Message.QuestionnaireNeeded,เกมนี้ได้รับการแก้ไขนอก Build กรอกแบบสอบถามเกี่ยวกับเนื้อหาให้ครบถ้วนเพื่อเผยแพร่
 Feature.Build.Message.ReadyToPlay,เกมของคุณพร้อมให้เล่นบน Roblox แล้ว!
@@ -2429,6 +2437,7 @@ Feature.Build.Notification.Message.Review,กลับมาที่แชท B
 Feature.Build.Notification.Title.Finished,Build ทำเสร็จแล้ว
 Feature.Build.Notification.Title.NeedInput,Build ต้องการอินพุตจากคุณ
 Feature.Build.Title.AdCampaignActive,แคมเปญโฆษณาเปิดใช้งานอยู่
+Feature.Build.Title.AdCampaignDuration,แคมเปญโฆษณา {durationDays} วัน
 Feature.Build.Title.AddFriendsToPlaytest,เพิ่มเพื่อนที่จะช่วยคุณทดลองเล่น
 Feature.Build.Title.ArchiveThisGame,เก็บเกมนี้ถาวรใช่ไหม?
 Feature.Build.Title.AssetLibrary,คลัง
@@ -2451,6 +2460,7 @@ Feature.Build.Title.GetUsers,ดึงดูดผู้ใช้
 Feature.Build.Title.NoRobuxForUsage,ไม่มี Robux เหลือสำหรับโควต้าการใช้งาน Build
 Feature.Build.Title.Playtesters,ผู้ทดลองเล่น
 Feature.Build.Title.PlaytestersOnlyPlay,เฉพาะผู้ทดลองเล่นเท่านั้นที่เล่นได้
+Feature.Build.Title.PromoteGame,โปรโมตเกมของคุณ
 Feature.Build.Title.PromoteGameFree,โปรโมตเกมของคุณฟรี
 Feature.Build.Title.PushNotifications,การแจ้งเตือนแบบพุช
 Feature.Build.Title.RevertLastChange,แปลงกลับการเปลี่ยนแปลงล่าสุดไหม?
@@ -2459,6 +2469,7 @@ Feature.Build.Title.TurnActivity,เปลี่ยนกิจกรรม
 Feature.Build.Title.VersionHistory,ประวัติเวอร์ชัน
 Feature.Build.Title.VersionInformation,ข้อมูลเวอร์ชัน
 Feature.Build.Title.VersionNumber,เวอร์ชัน {VERSION}
+Feature.Build.Title.WhatsIncluded,มีอะไรให้บ้าง?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,ไม่ล่ะ ขอบคุณ
@@ -2624,7 +2635,7 @@ Feature.Catalog.Label.Filter.Sorts,เรียงลำดับ
 Feature.Catalog.Label.Filter.TotalValue,มูลค่าทั้งหมด
 Feature.Catalog.Label.Filter.UnavailableItems,ไอเท็มที่ไม่พร้อมใช้งาน
 Feature.Catalog.Label.FreeItemConfirmation,คุณต้องการรับ {itemName} จาก {creatorName} ฟรีหรือไม่?
-Feature.Catalog.Label.FreeUpperCase,ฟรี
+Feature.Catalog.Label.FreeUpperCase,
 Feature.Catalog.Label.FromPrice,จาก {itemPrice}
 Feature.Catalog.Label.FrontAccessories,ไอเท็มเสริมสำหรับด้านหน้า
 Feature.Catalog.Label.FullBodies,
@@ -4594,7 +4605,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,ข่าวดี
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,รับ Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus ใช้งานไม่ได้ที่นี่
-Feature.SafetyDashboard.Heading.AccountStatus,สถานะบัญชี
+Feature.SafetyDashboard.Heading.AccountStatus.V2,สถานะบัญชี การละเมิด และการอุทธรณ์
 Feature.Schools.Action.AlreadyGraduated,ฉันสำเร็จการศึกษาแล้ว
 Feature.Schools.Action.CantFindSchool,ไม่พบโรงเรียนของคุณใช่ไหม?
 Feature.Schools.Action.Continue,
@@ -5369,7 +5380,7 @@ Verification.Identity.Heading.V2LetsChat,มาแชทกันเถอะ
 Verification.Identity.Heading.YourNewWayToChat,วิธีใหม่ในการแชท!
 Verification.Identity.Label.AgeVerifyPrompt,ตรวจสอบยืนยันอายุของคุณเพื่อให้ได้รับประโยชน์สูงสุดจาก Roblox!
 Verification.Identity.Label.ConnectingToMobile,กำลังเชื่อมต่อกับโทรศัพท์มือถือของคุณ
-Verification.Identity.Label.DontShowAgain,ไม่ต้องแสดงอีก
+Verification.Identity.Label.DontShowAgain,
 Verification.Identity.Label.EnableChatWithVoice,เปิดใช้งานไมโครโฟนเพื่อแชทด้วยเสียงของคุณในประสบการณ์นี้
 Verification.Identity.Label.EnableMicrophone,เปิดใช้งานไมโครโฟน
 Verification.Identity.Label.EnableVoiceChat,

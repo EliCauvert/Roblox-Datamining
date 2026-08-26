@@ -226,13 +226,11 @@ Authentication.AccountSwitch.Action.SwitchAccount,계정 전환
 Authentication.AccountSwitch.Description.AccountLimit.2,계정 한도에 도달했습니다. 새 계정을 추가하려면 먼저 계정을 삭제하세요.
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,{username} 계정으로 계속 진행하면 다른 계정에서 로그아웃됩니다.
 Authentication.AccountSwitch.Description.LogoutConfirmation,새 계정을 추가하려면 먼저 이 기기의 다른 Roblox 계정에서 로그아웃해야 합니다
-Authentication.AccountSwitch.Description.ParentLogoutConfirmation,보호자 권한이 있는 새 계정을 추가하려면 먼저 이 기기의 다른 Roblox 계정에서 로그아웃해야 합니다
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,나중에 다시 시도하세요
 Authentication.AccountSwitch.Description.RemoveAllAccounts,로그아웃하면 이 기기에서 모든 계정이 삭제됩니다.
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,삭제 시에는 다시 로그인하지 않는 한 이 기기에 더 이상 해당 계정이 표시되지 않습니다. 랜딩 페이지로 다시 이동합니다.
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,직접 로그인해 보세요
-Authentication.AccountSwitch.Header.CantSwitchAccounts,계정을 전환할 수 없음
-Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,
+Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,계정을 전환할 수 없음
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Header.RemoveCurrentAccount,현재 계정을 삭제하시겠어요?
 Authentication.AccountSwitch.Header.SignOutOtherAccounts,다른 계정에서 로그아웃할까요?
@@ -2177,6 +2175,7 @@ Feature.Build.Action.CopyText,텍스트 복사
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
 Feature.Build.Action.DontAskAgain,다시 묻지 않음
+Feature.Build.Action.DontShowAgain,다시 표시하지 않음
 Feature.Build.Action.HideAutosaved,자동 저장된 버전 숨기기
 Feature.Build.Action.ManageLimit,한도 관리
 Feature.Build.Action.Next,
@@ -2202,16 +2201,19 @@ Feature.Build.Action.UpdateWithChanges,변경 사항으로 업데이트
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,사용량 보기
 Feature.Build.Content.NewGame,새 게임
+Feature.Build.Description.AdCampaignModerationReview,모든 광고 캠페인은 Roblox 규정 준수 팀에서 검토합니다. 이 절차에는 최대 24시간이 소요될 수 있습니다.
+Feature.Build.Description.AdCampaignSheetRunDates,{startDate}~{endDate} 실행
+Feature.Build.Description.AdvertisingAgreement,계속 진행하면 {advertisingTermsStart}Roblox 광고 약관{advertisingTermsEnd} 및 {advertisingStandardsStart}광고 규정{advertisingStandardsEnd}에 동의하는 것으로 간주됩니다.
 Feature.Build.Description.ArchiveRemoval,이 게임을 보관하면 해당 게임이 Build에서 삭제됩니다. 크리에이터 허브 또는 Roblox Studio에서 계속 액세스하고 복원할 수 있습니다.
 Feature.Build.Description.AutoBuyUsage,Robux를 사용하여 제작할 때 추가 Build 사용량을 자동으로 구매하세요. 언제든지 일일 지출 한도를 설정할 수 있습니다.
 Feature.Build.Description.BoostAudienceForPlays,오디언스를 확대하여 더 많은 플레이를 확보하세요.
-Feature.Build.Description.BoostGameAudience,게임의 오디언스 확대
 Feature.Build.Description.BuildIdeaGame,나만의 아이디어로 게임을 만들어 보세요
 Feature.Build.Description.BuildReplyNotif,Build에서 답변이 있을 때 알림을 받으세요.
 Feature.Build.Description.BuyRobuxToCreate,"계속 제작하려면 Robux를 더 구매하거나, 내일 무료 Build 사용량이 초기화될 때까지 기다리세요."
 Feature.Build.Description.BuyUsageOrWait,"Robux로 Build 사용량을 더 구매하거나, 일일 한도가 초기화될 때까지 기다리세요."
 Feature.Build.Description.CampaignRunDates,캠페인은 {startDate}~{endDate} 에 실행됩니다.
 Feature.Build.Description.ChoosePlaytesters,플레이테스트를 도와줄 친구를 선택하세요.
+Feature.Build.Description.EarnedRobuxAppliedFirst,"Robux를 획득한 경우, 해당 Robux가 광고 캠페인 비용에 우선 적용됩니다."
 Feature.Build.Description.EnableBuildNotifs,Build에서 보내는 최신 소식을 받으려면 기기 설정에서 알림을 켜세요.
 Feature.Build.Description.FriendsLinkOnly,친구만 이 링크에 액세스할 수 있습니다. 더 많은 사람이 플레이하기를 원하시면 게임의 대상 설정을 변경하세요.
 Feature.Build.Description.GameCreationDone,게임 생성 및 게시가 완료되었습니다. 게임을 열어 플레이테스트할 수 있습니다.
@@ -2225,6 +2227,7 @@ Feature.Build.Description.PlaytestLatest,최신 버전을 플레이테스트하�
 Feature.Build.Description.PlaytestLocked,첫 게임을 만든 후 플레이테스트를 시작할 수 있습니다.
 Feature.Build.Description.PlaytesterAccess,친구를 플레이테스터로 추가하거나 게임의 대상 설정을 변경하여 더 많은 사람이 플레이할 수 있도록 하세요.
 Feature.Build.Description.PrivateShare,게임을 공유하려면 게임의 대상 설정을 변경하세요.
+Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}일 광고 캠페인으로 오디언스를 확대하고 게임을 홍보하세요.
 Feature.Build.Description.RaiseLimitOrWait,"계속 제작하려면 일일 Robux 한도를 늘리거나, 내일 초기화될 때까지 기다리세요."
 Feature.Build.Description.RatingAgreement,게시하면 이 콘텐츠 등급이 정확하다는 데 동의하는 것으로 간주됩니다.
 Feature.Build.Description.RestoreLatest,이 버전이 최신 게시 버전이 됩니다.
@@ -2257,7 +2260,9 @@ Feature.Build.Label.Deleted,삭제됨
 Feature.Build.Label.DescribeIdea,아이디어 설명
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,
+Feature.Build.Label.EasyPerformanceReport,간편한 성과 보고서
 Feature.Build.Label.Error,
+Feature.Build.Label.Free,무료
 Feature.Build.Label.FreeBuildUsage,무료 Build 사용량
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
@@ -2271,6 +2276,7 @@ Feature.Build.Label.InputNeeded,입력 필요
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,제한됨
 Feature.Build.Label.Loading,
+Feature.Build.Label.MaximizeForGamePlays,게임 플레이 횟수 극대화
 Feature.Build.Label.Models3D,3D 모델
 Feature.Build.Label.NoLimit,한도 없음
 Feature.Build.Label.NotStarted,시작 전
@@ -2295,6 +2301,7 @@ Feature.Build.Label.SelectOption,옵션 선택
 Feature.Build.Label.ShareAddedFriends,추가한 친구와 공유
 Feature.Build.Label.Shared,공유 완료
 Feature.Build.Label.Sounds,사운드
+Feature.Build.Label.TargetAllRobloxPlayers,모든 Roblox 플레이어를 대상으로 하세요
 Feature.Build.Label.Thinking,생각 중
 Feature.Build.Label.Title,제목
 Feature.Build.Label.TitleDescription,제목 및 설명
@@ -2420,6 +2427,7 @@ Feature.Build.Message.PlaytestersAdded,{MAX_INVITES}명 중 {INVITED_COUNT}명�
 Feature.Build.Message.PublicPublishFailed,게임이 게시되었지만 공개되지 못했습니다. 다시 시도하세요.
 Feature.Build.Message.PublishExpandAudience,오디언스를 확대하려면 게시하세요
 Feature.Build.Message.PublishNotReverted,게시한 내용을 되돌리지 못했습니다. 다시 시도하세요.
+Feature.Build.Message.PublishPromotionUpsell,게임 게시가 완료되었습니다. 축하드립니다! Roblox에서 더 많은 플레이어를 확보할 수 있는 무료 프로모션이 {promotionCount}건 있습니다.
 Feature.Build.Message.PublishReverted,게시를 되돌렸습니다.
 Feature.Build.Message.QuestionnaireNeeded,이 게임은 Build 외부에서 편집되었습니다. 게시하려면 콘텐츠 설문지를 작성해 주세요.
 Feature.Build.Message.ReadyToPlay,게임을 Roblox에서 플레이할 준비가 되었습니다!
@@ -2447,6 +2455,7 @@ Feature.Build.Notification.Message.Review,결과를 검토하려면 빌드 채�
 Feature.Build.Notification.Title.Finished,빌드 완료
 Feature.Build.Notification.Title.NeedInput,빌드에 대한 의견 필요
 Feature.Build.Title.AdCampaignActive,광고 캠페인이 활성화되었습니다
+Feature.Build.Title.AdCampaignDuration,{durationDays}일 광고 캠페인
 Feature.Build.Title.AddFriendsToPlaytest,플레이테스트를 도와줄 친구 추가
 Feature.Build.Title.ArchiveThisGame,이 게임을 보관하시겠어요?
 Feature.Build.Title.AssetLibrary,라이브러리
@@ -2469,6 +2478,7 @@ Feature.Build.Title.GetUsers,사용자 가져오기
 Feature.Build.Title.NoRobuxForUsage,Build 사용량을 위한 Robux가 남아 있지 않음
 Feature.Build.Title.Playtesters,플레이테스터
 Feature.Build.Title.PlaytestersOnlyPlay,플레이테스터만 플레이할 수 있습니다
+Feature.Build.Title.PromoteGame,게임을 홍보하세요
 Feature.Build.Title.PromoteGameFree,게임을 무료로 홍보하세요
 Feature.Build.Title.PushNotifications,푸시 알림
 Feature.Build.Title.RevertLastChange,마지막 변경 사항을 되돌리시겠어요?
@@ -2477,6 +2487,7 @@ Feature.Build.Title.TurnActivity,턴 활동
 Feature.Build.Title.VersionHistory,버전 기록
 Feature.Build.Title.VersionInformation,버전 정보
 Feature.Build.Title.VersionNumber,{VERSION} 버전
+Feature.Build.Title.WhatsIncluded,포함 사항
 Feature.BuyRobux.Heading.Banner,Robux 구매
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,아니요 안 할래요
@@ -2643,7 +2654,7 @@ Feature.Catalog.Label.Filter.Sorts,정렬
 Feature.Catalog.Label.Filter.TotalValue,총계
 Feature.Catalog.Label.Filter.UnavailableItems,이용 불가 아이템
 Feature.Catalog.Label.FreeItemConfirmation,{creatorName}의 {itemName}(을)를 무료로 받으시겠어요?
-Feature.Catalog.Label.FreeUpperCase,무료
+Feature.Catalog.Label.FreeUpperCase,
 Feature.Catalog.Label.FromPrice,최저가: {itemPrice}
 Feature.Catalog.Label.FrontAccessories,전면 장신구
 Feature.Catalog.Label.FullBodies,
@@ -4614,7 +4625,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,좋은 소식
 Feature.RobloxSubscription.Title.GenericError,오류가 발생했습니다
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus 구독하기
 Feature.RobloxSubscription.Title.UnsupportedPlatform,여기에서는 Roblox Plus를 이용할 수 없습니다
-Feature.SafetyDashboard.Heading.AccountStatus,계정 상태
+Feature.SafetyDashboard.Heading.AccountStatus.V2,"계정 상태, 규정 위반 및 이의 신청"
 Feature.Schools.Action.AlreadyGraduated,이미 졸업했습니다
 Feature.Schools.Action.CantFindSchool,재학 중인 학교를 찾을 수 없나요?
 Feature.Schools.Action.Continue,

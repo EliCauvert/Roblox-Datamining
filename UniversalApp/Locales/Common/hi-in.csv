@@ -208,13 +208,11 @@ Authentication.AccountSwitch.Action.SwitchAccount,अकाउंट बदल�
 Authentication.AccountSwitch.Description.AccountLimit.2,"आपकी अकाउंट लिमिट पूरी हो गई है. नया अकाउंट जोड़ने के लिए, पहले किसी मौजूदा अकाउंट को हटाना होगा."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,"{username} के तौर पर जारी रखने पर, आपको आपके अन्य अकाउंट से साइन आउट कर दिया जाएगा."
 Authentication.AccountSwitch.Description.LogoutConfirmation,"नया अकाउंट जोड़ने से पहले, आपको इस डिवाइस पर अपने दूसरे Roblox अकाउंट से लॉग आउट करना होगा"
-Authentication.AccountSwitch.Description.ParentLogoutConfirmation,"पेरेंट प्रिविलेज के साथ नया अकाउंट जोड़ने से पहले, आपको इस डिवाइस पर अपने दूसरे Roblox अकाउंट से लॉग आउट करना होगा"
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,"बाद में, फिर से कोशिश करें"
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"साइन आउट करने के बाद, इस डिवाइस से सभी अकाउंट हटा दिए जाएँगे."
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,"ऐसा करने पर, आपको यह अकाउंट इस डिवाइस पर तब तक नहीं दिखेगा, जब तक कि आप फिर से साइन इन न करें. आपको लैंडिंग पेज पर वापस ले जाया जाएगा."
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,सीधे लॉग इन करके देखें
-Authentication.AccountSwitch.Header.CantSwitchAccounts,अकाउंट स्विच नहीं किया जा सकता
-Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,
+Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,अकाउंट स्विच नहीं किया जा सकता
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Header.RemoveCurrentAccount,मौजूदा अकाउंट हटाना है?
 Authentication.AccountSwitch.Header.SignOutOtherAccounts,अन्य अकाउंट से साइन आउट करना है?
@@ -2156,6 +2154,7 @@ Feature.Build.Action.CopyText,टेक्स्ट कॉपी करें
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
 Feature.Build.Action.DontAskAgain,दोबारा न पूछें
+Feature.Build.Action.DontShowAgain,फिर से न दिखाएँ
 Feature.Build.Action.HideAutosaved,ऑटो-सेव किए गए छिपाएँ
 Feature.Build.Action.ManageLimit,लिमिट मैनेज करें
 Feature.Build.Action.Next,आगे बढ़ें
@@ -2183,7 +2182,6 @@ Feature.Build.Content.NewGame,नया गेम
 Feature.Build.Description.ArchiveRemoval,"अगर इस गेम को आर्काइव किया जाता है, तो इसे 'बिल्ड' से हटा दिया जाएगा. आपके पास अभी भी Creator Hub या Roblox Studio से इसे ऐक्सेस और रीस्टोर करने की सुविधा रहेगी."
 Feature.Build.Description.AutoBuyUsage,"क्रिएट करते समय, बिल्ड का अतिरिक्त इस्तेमाल अपने-आप खरीदने के लिए अपने Robux का इस्तेमाल करें. आप जब चाहें, रोज़ाना खर्च की लिमिट सेट की जा सकती है."
 Feature.Build.Description.BoostAudienceForPlays,"ज़्यादा प्ले पाने के लिए, अपनी ऑडियंस बढ़ाएँ."
-Feature.Build.Description.BoostGameAudience,अपने गेम की ऑडियंस बढ़ाएँ
 Feature.Build.Description.BuildIdeaGame,अपने आइडिया को गेम में बदलें
 Feature.Build.Description.BuildReplyNotif,बिल्ड से आपके लिए कोई जवाब आने पर नोटिफ़िकेशन पाएँ.
 Feature.Build.Description.BuyRobuxToCreate,"क्रिएट करना जारी रखने के लिए, और Robux खरीदें या कल अपने मुफ़्त बिल्ड के इस्तेमाल के रीसेट होने का इंतज़ार करें."
@@ -2391,6 +2389,7 @@ Feature.Build.Message.PlaytestersAdded,{MAX_INVITES} में से {INVITED_C
 Feature.Build.Message.PublicPublishFailed,"आपका गेम पब्लिश किया गया, लेकिन पब्लिक नहीं किया जा सका. फिर से कोशिश करें."
 Feature.Build.Message.PublishExpandAudience,अपनी ऑडियंस बढ़ाने के लिए पब्लिश करें
 Feature.Build.Message.PublishNotReverted,आपका पब्लिश रिवर्ट नहीं हुआ. फिर से कोशिश करें.
+Feature.Build.Message.PublishPromotionUpsell,"अपना गेम पब्लिश करने पर आपको बधाई! Roblox पर ज़्यादा प्लेयर्स पाने के लिए, आपके पास {promotionCount} फ़्री प्रमोशन उपलब्ध हैं."
 Feature.Build.Message.PublishReverted,पब्लिश कॉन्टेंट रिवर्ट किया गया.
 Feature.Build.Message.QuestionnaireNeeded,"इस गेम को बिल्ड के बाहर एडिट किया गया था. पब्लिश करने के लिए, कॉन्टेंट क्वेश्चनेयर पूरा करें."
 Feature.Build.Message.ReadyToPlay,आपका गेम Roblox पर खेलने के लिए तैयार है!
@@ -4582,7 +4581,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,अच्छी खबर
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus लें
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus यहाँ उपलब्ध नहीं है
-Feature.SafetyDashboard.Heading.AccountStatus,अकाउंट का स्टेटस
+Feature.SafetyDashboard.Heading.AccountStatus.V2,अकाउंट का स्टेटस और उल्लंघन
 Feature.Schools.Action.AlreadyGraduated,मैंने पहले ही ग्रैजुएशन कर लिया है
 Feature.Schools.Action.CantFindSchool,आपको अपना स्कूल नहीं मिल रहा?
 Feature.Schools.Action.Continue,
@@ -5356,7 +5355,7 @@ Verification.Identity.Heading.V2LetsChat,चलो चैट करते है
 Verification.Identity.Heading.YourNewWayToChat,चैट करने का आपका नया तरीका!
 Verification.Identity.Label.AgeVerifyPrompt,Roblox का भरपूर फ़ायदा उठाने के लिए अपनी उम्र वेरिफ़ाई करें!
 Verification.Identity.Label.ConnectingToMobile,आपके मोबाइल से कनेक्ट किया जा रहा है
-Verification.Identity.Label.DontShowAgain,फिर से न दिखाएँ
+Verification.Identity.Label.DontShowAgain,
 Verification.Identity.Label.EnableChatWithVoice,"इस एक्सपीरिएंस में वॉइस चैट करने के लिए, अपना माइक्रोफ़ोन चालू करें."
 Verification.Identity.Label.EnableMicrophone,माइक्रोफ़ोन चालू करें
 Verification.Identity.Label.EnableVoiceChat,

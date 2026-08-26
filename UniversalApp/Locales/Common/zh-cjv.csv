@@ -217,13 +217,11 @@ Authentication.AccountSwitch.Action.SwitchAccount,切换帐户
 Authentication.AccountSwitch.Description.AccountLimit.2,你已达到帐户数量上限。要添加新帐户，请先移除一个帐户。
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,如果以“{username}”的身份继续，你将从其他帐户中注销。
 Authentication.AccountSwitch.Description.LogoutConfirmation,您必须注销此设备上的其他 Roblox 帐户才能添加新帐户
-Authentication.AccountSwitch.Description.ParentLogoutConfirmation,你必须注销此设备上的其他 Roblox 帐户才能添加拥有家长特权的新帐户	
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,请稍后重试
 Authentication.AccountSwitch.Description.RemoveAllAccounts,注销后，所有帐户都将从此设备中移除。
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,如果你执行此操作，除非再次登录，否则你将不会在此设备上再看到此帐户。你将返回着陆页。
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,尝试直接登录
-Authentication.AccountSwitch.Header.CantSwitchAccounts,无法切换帐户
-Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,
+Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,无法切换帐户
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Header.RemoveCurrentAccount,移除当前帐户？
 Authentication.AccountSwitch.Header.SignOutOtherAccounts,是否注销其他帐户？
@@ -2183,6 +2181,7 @@ Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,不再询问
+Feature.Build.Action.DontShowAgain,不再显示
 Feature.Build.Action.HideAutosaved,隐藏自动保存版本
 Feature.Build.Action.ManageLimit,管理限额
 Feature.Build.Action.Next,下一个
@@ -2218,16 +2217,19 @@ Feature.Build.Analytics.Title.PayerConversion,
 Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Content.NewGame,新游戏
+Feature.Build.Description.AdCampaignModerationReview,所有广告活动均由 Roblox 审核团队进行审核。此过程最多可能需要 24 小时。
+Feature.Build.Description.AdCampaignSheetRunDates,投放时间 {startDate} – {endDate}
+Feature.Build.Description.AdvertisingAgreement,继续操作，即表示你同意 {advertisingTermsStart}Roblox 广告条款{advertisingTermsEnd}和{advertisingStandardsStart}广告准则{advertisingStandardsEnd}。
 Feature.Build.Description.ArchiveRemoval,如果你将此游戏存档，它将从 Build 中移除。你仍可在创作者中心或 Roblox Studio 中访问和恢复此游戏。
 Feature.Build.Description.AutoBuyUsage,在创建过程中使用你的 Robux 自动购买额外的 Build 使用额度。你可以随时设置每日消费限额。
 Feature.Build.Description.BoostAudienceForPlays,扩大受众群体，吸引更多玩家。
-Feature.Build.Description.BoostGameAudience,增加游戏的受众
 Feature.Build.Description.BuildIdeaGame,将你的创意转化为游戏
 Feature.Build.Description.BuildReplyNotif,在 Build 回复你后获得通知。
 Feature.Build.Description.BuyRobuxToCreate,购买更多 Robux 以继续创建，或等待你的免费 Build 使用额度在明天重置。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 购买更多 Build 使用额度，或等待你的每日限额重置。
 Feature.Build.Description.CampaignRunDates,你的广告活动将在 {startDate} – {endDate}期间投放
 Feature.Build.Description.ChoosePlaytesters,选择好友来帮助你进行游戏测试。
+Feature.Build.Description.EarnedRobuxAppliedFirst,如果你已赚取 Robux，这些 Robux 将首先用于支付广告活动费用。
 Feature.Build.Description.EnableBuildNotifs,在设备设置中启用通知，获取来自 Build 的最新动态。
 Feature.Build.Description.FriendsLinkOnly,只有你的好友才能访问此链接。如果你希望更多人游玩，请更改游戏的受众设置。
 Feature.Build.Description.GameCreationDone,我已完成游戏的创建和发布。你可以打开它进行游戏测试。
@@ -2241,6 +2243,7 @@ Feature.Build.Description.PlaytestLatest,你正在对最新版本进行游戏测
 Feature.Build.Description.PlaytestLocked,创建你的第一款游戏后，你就可以开始游戏测试。
 Feature.Build.Description.PlaytesterAccess,将好友添加为测试玩家，或更改游戏的受众设置，允许更多人游玩。
 Feature.Build.Description.PrivateShare,更改游戏的受众设置以分享该游戏。
+Feature.Build.Description.PromoteGameWithAdCampaign,通过为期 {durationDays} 天的广告活动扩大受众群体，让你的游戏被他人发现。
 Feature.Build.Description.RaiseLimitOrWait,提高你的每日 Robux 限额以继续创建，或等待限额在明天重置。
 Feature.Build.Description.RatingAgreement,发布即表示你同意此内容评级准确无误。
 Feature.Build.Description.RestoreLatest,此版本将成为你的最新发布版本。
@@ -2274,7 +2277,9 @@ Feature.Build.Label.Deleted,已删除
 Feature.Build.Label.DescribeIdea,描述一个创意
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,
+Feature.Build.Label.EasyPerformanceReport,轻松获得效果报告
 Feature.Build.Label.Error,
+Feature.Build.Label.Free,免费
 Feature.Build.Label.FreeBuildUsage,免费 Build 使用额度
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,仅限好友
@@ -2288,6 +2293,7 @@ Feature.Build.Label.InputNeeded,需要输入内容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,受限
 Feature.Build.Label.Loading,正在加载…
+Feature.Build.Label.MaximizeForGamePlays,最大化游戏游玩次数
 Feature.Build.Label.Models3D,3D 模型
 Feature.Build.Label.NoLimit,无限额
 Feature.Build.Label.NotStarted,未开始
@@ -2312,6 +2318,7 @@ Feature.Build.Label.SelectOption,选择一个选项
 Feature.Build.Label.ShareAddedFriends,分享给已添加的好友
 Feature.Build.Label.Shared,已共享
 Feature.Build.Label.Sounds,声音
+Feature.Build.Label.TargetAllRobloxPlayers,定位所有 Roblox 玩家
 Feature.Build.Label.Thinking,正在思考
 Feature.Build.Label.Title,标题
 Feature.Build.Label.TitleDescription,标题和描述
@@ -2439,6 +2446,8 @@ Feature.Build.Message.PlaytestersAdded,已添加 {INVITED_COUNT} 位测试玩家
 Feature.Build.Message.PublicPublishFailed,你的游戏已发布，但无法公开。请重试。
 Feature.Build.Message.PublishExpandAudience,发布并扩大受众范围
 Feature.Build.Message.PublishNotReverted,你的发布未还原。请重试。
+Feature.Build.Message.PublishPromotionUpsell,恭喜你成功发布游戏！你有 {promotionCount} 次免费推广机会，可在 Roblox 上吸引更多玩家。
+Feature.Build.Message.PublishPromotionUpsellSingular,
 Feature.Build.Message.PublishReverted,已还原发布操作。
 Feature.Build.Message.QuestionnaireNeeded,此游戏是在 Build 之外编辑的。请填写内容问卷，以便发布游戏。
 Feature.Build.Message.ReadyToPlay,你的游戏已可在 Roblox 上游玩！
@@ -2466,6 +2475,7 @@ Feature.Build.Notification.Message.Review,恢复构建聊天以查看结果。
 Feature.Build.Notification.Title.Finished,构建已完成
 Feature.Build.Notification.Title.NeedInput,构建需要你的输入
 Feature.Build.Title.AdCampaignActive,广告活动已启动
+Feature.Build.Title.AdCampaignDuration,{durationDays} 天广告活动
 Feature.Build.Title.AddFriendsToPlaytest,添加好友来帮助你进行游戏测试
 Feature.Build.Title.AddImages,
 Feature.Build.Title.ArchiveThisGame,要将此游戏存档吗？
@@ -2489,6 +2499,7 @@ Feature.Build.Title.GetUsers,获取用户
 Feature.Build.Title.NoRobuxForUsage,没有剩余的 Robux 可用于购买 Build 使用额度
 Feature.Build.Title.Playtesters,测试玩家
 Feature.Build.Title.PlaytestersOnlyPlay,只有测试玩家可以游玩
+Feature.Build.Title.PromoteGame,推广你的游戏
 Feature.Build.Title.PromoteGameFree,免费推广你的游戏
 Feature.Build.Title.PushNotifications,推送通知
 Feature.Build.Title.RevertLastChange,是否还原上次更改？
@@ -2497,6 +2508,7 @@ Feature.Build.Title.TurnActivity,轮次活动
 Feature.Build.Title.VersionHistory,版本历史记录
 Feature.Build.Title.VersionInformation,版本信息
 Feature.Build.Title.VersionNumber,版本 {VERSION}
+Feature.Build.Title.WhatsIncluded,包含哪些内容？
 Feature.BuyRobux.Heading.Banner,购买罗宝
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,不了，谢谢
@@ -2662,7 +2674,7 @@ Feature.Catalog.Label.Filter.Sorts,排序方式
 Feature.Catalog.Label.Filter.TotalValue,总值
 Feature.Catalog.Label.Filter.UnavailableItems,不可用物品
 Feature.Catalog.Label.FreeItemConfirmation,确认从“{creatorName}”免费获取“{itemName}”？
-Feature.Catalog.Label.FreeUpperCase,免费
+Feature.Catalog.Label.FreeUpperCase,
 Feature.Catalog.Label.FromPrice,From {itemPrice}
 Feature.Catalog.Label.FrontAccessories,正面配饰
 Feature.Catalog.Label.FullBodies,
@@ -3963,16 +3975,19 @@ Feature.NotApproved.Description.CommunityStandards,为了让 Roblox 平台适合
 Feature.NotApproved.Description.Delete,您的账户已被封禁。
 Feature.NotApproved.Description.FollowTheRules,请确保你了解并遵守相关规则。
 Feature.NotApproved.Description.Foreshadow,如果你持续违反规则，我们可能会延长封禁时间，甚至永久封禁你的帐户。
+Feature.NotApproved.Description.Foreshadow.Kids,
 Feature.NotApproved.Description.Foreshadow.V2,
 Feature.NotApproved.Description.LinkedAccounts,处理措施基于你在所有关联帐户中的行为。
 Feature.NotApproved.Description.ManualDetectionAutomatedDecision,我们在做出这个决定时使用了自动化
 Feature.NotApproved.Description.ManualDetectionAutomatedDecision.V2,我们使用了自动化系统来做出该决定。
 Feature.NotApproved.Description.Mistake,你可以在此提交申诉或请求我们复审此决定。
+Feature.NotApproved.Description.Mistake.Kids,
 Feature.NotApproved.Description.Mistake.V2,是我们出现失误了吗？你可在此处申诉，或要求我们重新审核此决定。
 Feature.NotApproved.Description.Mistake.V3,如果你认为我们判断有误，可以对此决定提出申诉。
 Feature.NotApproved.Description.PluralViolation,{type}其中一项
 Feature.NotApproved.Description.ReactivationNotice,选择“继续”以查看我们的规则，然后立即开始游玩。
 Feature.NotApproved.Description.ReviewProcess,我们会结合技术手段与人工审核来检查你的活动。
+Feature.NotApproved.Description.RuleExplanation.Bullets.Bullying.Kids,
 Feature.NotApproved.Description.RuleExplanation.Bullets.MisuingRobloxSystems,
 Feature.NotApproved.Description.RuleExplanation.Bullets.MisusingRobloxSystems,"假装成另一个人
 因未发生的事而举报用户
@@ -3991,6 +4006,8 @@ Feature.NotApproved.Description.RuleExplanation.Bullets.SSHAndIllegalRegAct,"伤
 非法或危险的物品，如酒精和毒品
 赌博、下注或抽奖游戏
 在现实世界中制造武器的说明"
+Feature.NotApproved.Description.RuleExplanation.Bullets.SexualContent.Kids,
+Feature.NotApproved.Description.RuleExplanation.Bullets.SharingPII.Kids,
 Feature.NotApproved.Description.RuleExplanation.BullyingHarassmentDiscrimination,"严禁对他人说出刻薄的话或以恶意的方式议论他人。这包括威胁伤害对方，例如泄露其隐私信息或在现实生活中伤害他们。
 此外，严禁基于他人的身份、信仰或出身而恶意对待或排挤他人。"
 Feature.NotApproved.Description.RuleExplanation.Dating,聊天时请保持友好态度，避免暧昧行为。禁止接吻或约会等浪漫举动。同时请注意，虚拟形象的服装不宜过于暴露。
@@ -4002,9 +4019,12 @@ Feature.NotApproved.Description.RuleExplanation.PII,为了保障每个人及其�
 Feature.NotApproved.Description.RuleExplanation.RealLifeEvents,"对现实世界中发生的特定事件表现出不尊重的态度属于违规行为。这包括重现或嘲笑事件或事件中的人物，尤其是当这些事件或人物令许多人感到悲伤或恐惧时。
 这包括："
 Feature.NotApproved.Description.RuleExplanation.SSHAndIllegalRegulatedActivities,绝不允许创作或讨论危险或有害的内容，也不允许对这样的内容开玩笑。例如：
+Feature.NotApproved.Description.RuleExplanation.SharingPII.Kids,
 Feature.NotApproved.Description.RuleExplanation.Spam,不断重复发送相同的消息是不允许的。
 Feature.NotApproved.Description.RuleExplanation.Swearing,绝不允许使用脏话。这包括使用错误拼写、符号或其他方法来绕过检测系统。
 Feature.NotApproved.Description.RuleExplanation.ViolentContentAndGore,展示逼真的暴力行为，或任何看起来像人、动物或角色受到严重身体或情感伤害的内容，都是违反规则的行为。
+Feature.NotApproved.Description.RuleImportance.Bullets.SharingPII.Kids,
+Feature.NotApproved.Description.RuleImportance.Bullying.Kids,
 Feature.NotApproved.Description.RuleImportance.BullyingHarassmentDiscrimination,为了确保我们的社区对每个人来说都充满乐趣，我们杜绝任何可能让他人感到不安全或不适的言语或行为。Roblox 欢迎所有种族、民族、性别认同、能力、性取向和宗教的用户。
 Feature.NotApproved.Description.RuleImportance.Dating,让聊天内容和虚拟形象专注于友谊，有助于确保每个人都感到自在。
 Feature.NotApproved.Description.RuleImportance.DirectingUsersOffPlatform,Roblox 设有安全保护机制，致力于保障聊天和互动的安全。链接可能会将你带到看起来与 Roblox 完全相同的虚假网站，以便盗取你的帐户和道具。这些网站也可能包含不当的图片或视频。如果你在 Roblox 之外交易 Robux 或道具，对方可能欺骗你而不履行承诺。
@@ -4013,11 +4033,13 @@ Feature.NotApproved.Description.RuleImportance.MisusingRobloxSystems,
 Feature.NotApproved.Description.RuleImportance.PII,如果陌生人查出你在现实生活中的身份，他们可能会尝试在 Roblox 之外与你联系。这种行为很危险，因为在网上很难分辨对方是好人还是坏人。因此，我们也绝不分享密码。否则，可能会有人窃取你的帐户，夺走你辛苦积累的道具。
 Feature.NotApproved.Description.RuleImportance.RealLifeEvents,对于经历过这些事件的人来说，看到这些事件被重现或嘲笑可能会感到非常不安。
 Feature.NotApproved.Description.RuleImportance.SSHAndIllegalRegulatedActivities,分享有关伤害自己或他人的内容是不安全的。如果你遇到困难，请务必与你信任的成年人倾诉。分享危险的特技等内容可能诱使他人效仿并造成严重伤害。拒绝分享此类内容，就是在守护自己和所有 Roblox 玩家的安全。
+Feature.NotApproved.Description.RuleImportance.SexualContent.Kids,
 Feature.NotApproved.Description.RuleImportance.Spam,垃圾信息会让人难以跟上对话，破坏讨论的乐趣。
 Feature.NotApproved.Description.RuleImportance.Swearing,Roblox 适合所有人，包括年幼的孩子。我们使用尊重和欢迎的语言来对待整个社区。
 Feature.NotApproved.Description.RuleImportance.ViolentContentAndGore,我们的社区中有很多小朋友，目睹极端暴力可能会让他们感到害怕和不安。
 Feature.NotApproved.Description.SecondChance.Details,你现在可以回到游戏中。稍后你将无法对此决定提出申诉。
 Feature.NotApproved.Description.SecondChance.Second,鉴于你以往的表现良好，这一次你可以免于帐户封禁处罚。
+Feature.NotApproved.Description.SuspendedUntil,
 Feature.NotApproved.Description.Violation,经管理员审查，您在罗布乐思的部分行为构成了对我方{startLink}服务条款{endLink}的违反。
 Feature.NotApproved.Heading.AccountBanned,帐户被封禁
 Feature.NotApproved.Heading.AccountDeleted,账户已被删除
@@ -4033,6 +4055,8 @@ Feature.NotApproved.Heading.BannedOneMinute,封停 1 分钟
 Feature.NotApproved.Heading.BannedOneSecond,封停 1 秒
 Feature.NotApproved.Heading.Error,发生未知错误，请稍后重试。
 Feature.NotApproved.Heading.ReactivationNotice,返回游戏
+Feature.NotApproved.Heading.RecentlyChecked,
+Feature.NotApproved.Heading.RuleExplanation.Bullying.Kids,
 Feature.NotApproved.Heading.RuleExplanation.BullyingHarassmentDiscrimination,让每个人都感到受欢迎
 Feature.NotApproved.Heading.RuleExplanation.Dating,保持朋友关系
 Feature.NotApproved.Heading.RuleExplanation.DirectingUsersOffPlatform,请在 Roblox 上进行交流
@@ -4041,10 +4065,13 @@ Feature.NotApproved.Heading.RuleExplanation.MisusingRobloxSystems,公平诚信�
 Feature.NotApproved.Heading.RuleExplanation.PII,保护私人信息
 Feature.NotApproved.Heading.RuleExplanation.RealLifeEvents,对现实生活中的事件保持体谅
 Feature.NotApproved.Heading.RuleExplanation.SSHAndIllegalRegulatedActivities,保持身心健康
+Feature.NotApproved.Heading.RuleExplanation.SexualContent.Kids,
+Feature.NotApproved.Heading.RuleExplanation.SharingPII.Kids,
 Feature.NotApproved.Heading.RuleExplanation.Spam,让对话顺畅进行
 Feature.NotApproved.Heading.RuleExplanation.Swearing,使用友善和尊重的语言
 Feature.NotApproved.Heading.RuleExplanation.ViolentContentAndGore,保持冷静，继续游戏
 Feature.NotApproved.Heading.RuleImportance,为什么这很重要？
+Feature.NotApproved.Heading.RuleImportance.Kids,
 Feature.NotApproved.Heading.SecondChance,学习这条规则，立即回到游戏中
 Feature.NotApproved.Heading.SecondChance.Details,这次免于帐户封禁处罚？
 Feature.NotApproved.Heading.Suspended,
@@ -4059,6 +4086,8 @@ Feature.NotApproved.Heading.SuspendedSixtyDays,封禁 60 天
 Feature.NotApproved.Heading.SuspendedThirtyDays,封禁 30 天
 Feature.NotApproved.Heading.SuspendedThreeDays,封禁 3 天
 Feature.NotApproved.Heading.Warning,
+Feature.NotApproved.Heading.WhatNext,
+Feature.NotApproved.Heading.Why,
 Feature.NotApproved.Label.AbuseType.AccountTheft,帐户盗窃
 Feature.NotApproved.Label.AbuseType.AdultContent,成人内容
 Feature.NotApproved.Label.AbuseType.Advertisement,
@@ -4066,6 +4095,8 @@ Feature.NotApproved.Label.AbuseType.Advertising,
 Feature.NotApproved.Label.AbuseType.AssetOwnership,素材所有人
 Feature.NotApproved.Label.AbuseType.Billing,账务
 Feature.NotApproved.Label.AbuseType.BlockedContent,屏蔽内容
+Feature.NotApproved.Label.AbuseType.Bullying.Kids,
+Feature.NotApproved.Label.AbuseType.Bullying.Note.Kids,
 Feature.NotApproved.Label.AbuseType.Chargeback,拒付
 Feature.NotApproved.Label.AbuseType.CheatandExploits,作弊和外挂
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,儿童危害行为
@@ -4143,6 +4174,10 @@ Feature.NotApproved.Label.AbuseType.Scamming,
 Feature.NotApproved.Label.AbuseType.SeekingSexualContent,寻找性爱内容
 Feature.NotApproved.Label.AbuseType.SexualAdultContent,色情 / 限制级内容
 Feature.NotApproved.Label.AbuseType.SexualContent,
+Feature.NotApproved.Label.AbuseType.SexualContent.Kids,
+Feature.NotApproved.Label.AbuseType.SexualContent.Note.Kids,
+Feature.NotApproved.Label.AbuseType.SharingPII.Kids,
+Feature.NotApproved.Label.AbuseType.SharingPII.Note.Kids,
 Feature.NotApproved.Label.AbuseType.Shock,震撼
 Feature.NotApproved.Label.AbuseType.Spam,垃圾邮件
 Feature.NotApproved.Label.AbuseType.SuggestiveSexualizedImagery,性暗示/性化图像
@@ -4635,7 +4670,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,好消息
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,获取 Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus 在这里不可用
-Feature.SafetyDashboard.Heading.AccountStatus,帐户状态
+Feature.SafetyDashboard.Heading.AccountStatus.V2,帐户状态、违规和申诉
 Feature.Schools.Action.AlreadyGraduated,我已经毕业了
 Feature.Schools.Action.CantFindSchool,找不到你的学校？
 Feature.Schools.Action.Continue,
@@ -5412,7 +5447,7 @@ Verification.Identity.Heading.V2LetsChat,我们来聊天吧
 Verification.Identity.Heading.YourNewWayToChat,全新的聊天方式！
 Verification.Identity.Label.AgeVerifyPrompt,验证您的年龄以获得最大的 Roblox 乐趣！
 Verification.Identity.Label.ConnectingToMobile,正在连接你的手机
-Verification.Identity.Label.DontShowAgain,不再显示
+Verification.Identity.Label.DontShowAgain,
 Verification.Identity.Label.EnableChatWithVoice,启用麦克风，即可在此作品使用语音聊天。
 Verification.Identity.Label.EnableMicrophone,启用麦克风
 Verification.Identity.Label.EnableVoiceChat,
