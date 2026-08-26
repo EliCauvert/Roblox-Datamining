@@ -1832,6 +1832,7 @@ Feature.Build.Action.CopyText,Sao chép văn bản
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
 Feature.Build.Action.DontAskAgain,Không hỏi lại
+Feature.Build.Action.DontShowAgain,Không hiển thị lại
 Feature.Build.Action.HideAutosaved,Ẩn phiên bản lưu tự động
 Feature.Build.Action.ManageLimit,Quản lý hạn mức
 Feature.Build.Action.Next,
@@ -1857,16 +1858,19 @@ Feature.Build.Action.UpdateWithChanges,Cập nhật các thay đổi
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Xem mức sử dụng
 Feature.Build.Content.NewGame,Trò chơi mới
+Feature.Build.Description.AdCampaignModerationReview,Mọi chiến dịch quảng cáo đều được đội ngũ kiểm duyệt của Roblox xem xét. Quá trình này có thể mất đến 24 giờ.
+Feature.Build.Description.AdCampaignSheetRunDates,Chạy từ {startDate} – {endDate}
+Feature.Build.Description.AdvertisingAgreement,"Bằng việc tiếp tục, bạn đồng ý với {advertisingTermsStart}Điều khoản quảng cáo{advertisingTermsEnd} và {advertisingStandardsStart}Tiêu chuẩn quảng cáo của Roblox{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"Nếu bạn lưu trữ trò chơi này, trò chơi sẽ bị gỡ khỏi Build. Bạn vẫn có thể truy cập và khôi phục trò chơi từ Trung tâm nhà sáng tạo hoặc Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Dùng Robux của bạn để tự động mua thêm lượt sử dụng Build trong quá trình sáng tạo. Bạn có thể cài đặt hạn mức chi tiêu hằng ngày bất cứ lúc nào.
 Feature.Build.Description.BoostAudienceForPlays,Thu hút thêm đối tượng để tăng số lượt chơi.
-Feature.Build.Description.BoostGameAudience,Giúp trò chơi tiếp cận được nhiều đối tượng hơn
 Feature.Build.Description.BuildIdeaGame,Biến ý tưởng thành trò chơi
 Feature.Build.Description.BuildReplyNotif,Nhận thông báo khi Build gửi phản hồi cho bạn.
 Feature.Build.Description.BuyRobuxToCreate,Hãy mua thêm Robux để tiếp tục sáng tạo hoặc chờ đến ngày mai để lượt sử dụng Build miễn phí của bạn được làm mới.
 Feature.Build.Description.BuyUsageOrWait,"Dùng Robux để mua thêm lượt sử dụng Build, hoặc đợi hạn mức hằng ngày được làm mới."
 Feature.Build.Description.CampaignRunDates,Chiến dịch của bạn sẽ diễn ra từ {startDate} – {endDate}
 Feature.Build.Description.ChoosePlaytesters,Chọn bạn bè để giúp bạn chơi thử.
+Feature.Build.Description.EarnedRobuxAppliedFirst,"Nếu bạn kiếm được Robux, số Robux này sẽ được ưu tiên trừ vào chi phí của chiến dịch quảng cáo."
 Feature.Build.Description.EnableBuildNotifs,Bật thông báo trong phần cài đặt của thiết bị để nhận thông tin cập nhật từ Build.
 Feature.Build.Description.FriendsLinkOnly,Chỉ bạn bè của bạn mới có thể truy cập đường liên kết này. Hãy thay đổi cài đặt Đối tượng của trò chơi nếu bạn muốn có nhiều người chơi hơn.
 Feature.Build.Description.GameCreationDone,Tôi đã tạo xong và đăng trò chơi của bạn. Bạn đã có thể mở lên để chơi thử.
@@ -1880,6 +1884,7 @@ Feature.Build.Description.PlaytestLatest,Bạn đang chơi thử phiên bản m�
 Feature.Build.Description.PlaytestLocked,Bạn có thể bắt đầu chơi thử sau khi tạo trò chơi đầu tiên.
 Feature.Build.Description.PlaytesterAccess,Hãy thêm bạn bè làm người chơi thử hoặc thay đổi cài đặt Đối tượng của trò chơi để cho phép có thêm người chơi.
 Feature.Build.Description.PrivateShare,Hãy thay đổi cài đặt Đối tượng của trò chơi để chia sẻ.
+Feature.Build.Description.PromoteGameWithAdCampaign,Thu hút thêm người chơi bằng chiến dịch quảng cáo dài {durationDays} ngày và giúp trò chơi của bạn tiếp cận được nhiều người hơn.
 Feature.Build.Description.RaiseLimitOrWait,"Tăng hạn mức Robux hằng ngày của bạn để tiếp tục sáng tạo, hoặc đợi hạn mức làm mới vào ngày mai."
 Feature.Build.Description.RatingAgreement,"Bằng việc đăng, bạn đồng ý rằng mức phân loại nội dung này là chính xác."
 Feature.Build.Description.RestoreLatest,Phiên bản này sẽ trở thành phiên bản mới nhất được đăng của bạn.
@@ -1912,7 +1917,9 @@ Feature.Build.Label.Deleted,Đã xóa
 Feature.Build.Label.DescribeIdea,Mô tả ý tưởng
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,Hoàn tất
+Feature.Build.Label.EasyPerformanceReport,Báo cáo hiệu suất dễ dàng
 Feature.Build.Label.Error,
+Feature.Build.Label.Free,Miễn phí
 Feature.Build.Label.FreeBuildUsage,Lượt sử dụng Build miễn phí
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Chỉ bạn bè
@@ -1926,6 +1933,7 @@ Feature.Build.Label.InputNeeded,Cần thông tin đầu vào
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Giới hạn
 Feature.Build.Label.Loading,
+Feature.Build.Label.MaximizeForGamePlays,Tăng tối đa lượt chơi
 Feature.Build.Label.Models3D,Mô hình 3D
 Feature.Build.Label.NoLimit,Không giới hạn
 Feature.Build.Label.NotStarted,Chưa bắt đầu
@@ -1950,6 +1958,7 @@ Feature.Build.Label.SelectOption,Chọn một tùy chọn
 Feature.Build.Label.ShareAddedFriends,Chia sẻ với bạn bè mà bạn đã thêm
 Feature.Build.Label.Shared,Đã chia sẻ
 Feature.Build.Label.Sounds,
+Feature.Build.Label.TargetAllRobloxPlayers,Nhắm đến tất cả người chơi Roblox
 Feature.Build.Label.Thinking,Đang tư duy
 Feature.Build.Label.Title,Tiêu đề
 Feature.Build.Label.TitleDescription,Tiêu đề và mô tả
@@ -2075,6 +2084,7 @@ Feature.Build.Message.PlaytestersAdded,Đã thêm {INVITED_COUNT} trên {MAX_INV
 Feature.Build.Message.PublicPublishFailed,Trò chơi của bạn đã được đăng nhưng chưa đăng công khai. Vui lòng thử lại.
 Feature.Build.Message.PublishExpandAudience,Đăng để mở rộng đối tượng của bạn
 Feature.Build.Message.PublishNotReverted,Không hủy đăng được. Vui lòng thử lại.
+Feature.Build.Message.PublishPromotionUpsell,Chúc mừng bạn đã đăng trò chơi thành công! Bạn có {promotionCount} lượt quảng cáo miễn phí để thu hút thêm người chơi trên Roblox.
 Feature.Build.Message.PublishReverted,Đã hủy đăng.
 Feature.Build.Message.QuestionnaireNeeded,Trò chơi này đã được chỉnh sửa bên ngoài Build. Vui lòng trả lời khảo sát nội dung để đăng.
 Feature.Build.Message.ReadyToPlay,Trò chơi của bạn đã sẵn sàng để chơi trên Roblox!
@@ -2102,6 +2112,7 @@ Feature.Build.Notification.Message.Review,Hãy quay lại đoạn trò chuyện 
 Feature.Build.Notification.Title.Finished,Đã tạo dựng xong
 Feature.Build.Notification.Title.NeedInput,Tính năng Tạo dựng cần bạn cung cấp thông tin
 Feature.Build.Title.AdCampaignActive,Chiến dịch quảng cáo đang hoạt động
+Feature.Build.Title.AdCampaignDuration,Chiến dịch quảng cáo dài {durationDays} ngày
 Feature.Build.Title.AddFriendsToPlaytest,Thêm bạn bè để giúp bạn chơi thử
 Feature.Build.Title.ArchiveThisGame,Lưu trữ trò chơi này?
 Feature.Build.Title.AssetLibrary,Thư viện
@@ -2124,6 +2135,7 @@ Feature.Build.Title.GetUsers,Thu hút người dùng
 Feature.Build.Title.NoRobuxForUsage,Không còn Robux để sử dụng Build
 Feature.Build.Title.Playtesters,Người chơi thử
 Feature.Build.Title.PlaytestersOnlyPlay,Chỉ người chơi thử mới có thể chơi
+Feature.Build.Title.PromoteGame,Quảng bá trò chơi của bạn
 Feature.Build.Title.PromoteGameFree,Quảng bá trò chơi của bạn miễn phí
 Feature.Build.Title.PushNotifications,Thông báo đẩy
 Feature.Build.Title.RevertLastChange,Trả về bản thay đổi gần nhất?
@@ -2132,6 +2144,7 @@ Feature.Build.Title.TurnActivity,Hoạt động trong lượt
 Feature.Build.Title.VersionHistory,Lịch sử phiên bản
 Feature.Build.Title.VersionInformation,Thông tin phiên bản
 Feature.Build.Title.VersionNumber,Phiên bản {VERSION}
+Feature.Build.Title.WhatsIncluded,Bao gồm những gì?
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Cho phép
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -3752,7 +3765,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Tin vui cho bạn
 Feature.RobloxSubscription.Title.GenericError,Đã gặp lỗi
 Feature.RobloxSubscription.Title.GetBlackbird,Mua gói Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Gói Roblox Plus không hỗ trợ nền tảng này
-Feature.SafetyDashboard.Heading.AccountStatus,Trạng thái tài khoản
+Feature.SafetyDashboard.Heading.AccountStatus.V2,"Trạng thái tài khoản, vi phạm và khiếu nại"
 Feature.Schools.Label.Classmates,Bạn cùng lớp
 Feature.Screentime.Content.ScreentimeLimitDialog,Bạn đã đạt giới hạn thời gian dùng máy hàng ngày. Hãy quay lại vào ngày mai để truy cập lại vào Roblox.
 Feature.SecurityFeedback.Header.NewLogin,Cảnh báo hoạt động mới

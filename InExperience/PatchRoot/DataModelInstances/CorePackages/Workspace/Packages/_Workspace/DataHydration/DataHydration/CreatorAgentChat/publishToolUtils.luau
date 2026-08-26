@@ -168,8 +168,8 @@ local _ = function(value)
 	return if not (not ok or typeof(status) ~= "table") then if status.type == "text" and typeof(status.text) == "string" then status else nil else nil
 end
 
-local function getToolCallPublishedVersionNumber(p4)
-	-- upvalues: httpService (ref), fFlagCreatorAgentChatParseDirectPublishVersion (ref)
+local function getToolCallPublishedVersionNumber(p4, p5)
+	-- upvalues: httpService (ref)
 	local content = p4.content
 	
 	if typeof(content) ~= "table" then
@@ -181,7 +181,7 @@ local function getToolCallPublishedVersionNumber(p4)
 		if typeof(var4) == "string" then
 			local ok, status = pcall(httpService.JSONDecode, httpService, var4)
 			local var5 = if not ok or typeof(status) ~= "table" then if status.type == "text" and typeof(status.text) == "string" then status else nil else nil
-			ok = if var5 ~= nil then if fFlagCreatorAgentChatParseDirectPublishVersion then var4 else nil else var5.text
+			ok = if var5 ~= nil then if p5 then var4 else nil else var5.text
 			
 			if ok ~= nil then
 				local match = string.match(ok, "^%s*Saved as version%s+(%d+)%s*%.?%s*$")
@@ -200,16 +200,16 @@ return {
 	PUBLISH_PLACE_TOOL_IDENTIFIERS = list,
 	includesPublishPlaceTool = includesPublishPlaceTool,
 	toolCallMatchesPublishPlace = toolCallMatchesPublishPlace,
-	getLatestSuccessfulResult = function(p5)
-		-- upvalues: isSaveAndPublishToolCall (ref), getToolCallPublishedVersionNumber (ref), fFlagCreatorAgentChatParseDirectPublishVersion (ref), debugModule (ref)
-		if p5 == nil then
+	getLatestSuccessfulResult = function(p6, p7)
+		-- upvalues: isSaveAndPublishToolCall (ref), fFlagCreatorAgentChatParseDirectPublishVersion (ref), getToolCallPublishedVersionNumber (ref), debugModule (ref)
+		if p6 == nil then
 			return nil
 		end
 		local t = nil
 		
-		for i, v in p5.toolCalls do
+		for i, v in p6.toolCalls do
 			if v.status == "completed" and isSaveAndPublishToolCall(v) then
-				local var6 = getToolCallPublishedVersionNumber(v)
+				local var6 = getToolCallPublishedVersionNumber(v, fFlagCreatorAgentChatParseDirectPublishVersion or (p7 ~= nil and p7.parseDirectText == true))
 				
 				if var6 ~= nil then
 					t = {

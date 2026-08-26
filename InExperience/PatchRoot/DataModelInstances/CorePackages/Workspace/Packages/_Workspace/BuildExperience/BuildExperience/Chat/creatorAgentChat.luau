@@ -12,7 +12,6 @@ local clientLogsControllerModule = require(script.Parent.clientLogsController)
 local localToolOverlayModule = require(script.Parent.localToolOverlay)
 local proposePlanControllerModule = require(script.Parent.proposePlanController)
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
-local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
 local fFlagBuildEventsUpdate1Module = require(buildExperience.Flags.FFlagBuildEventsUpdate1)
 local studioAskUserTool = creatorAgentChatModule.StudioAskUserTool
 local studioClientDataModelTools = creatorAgentChatModule.StudioClientDataModelTools
@@ -179,7 +178,7 @@ end
 
 return {
 	createLiveAssistantTurn = function(p1, p2, p3, p4, p5, p6)
-		-- upvalues: createLocalToolControllers (ref), studioAskUserTool (ref), studioProposePlanTool (ref), studioClientLogsTool (ref), fFlagBuildExperienceClientDataModelTools (ref), studioClientDataModelTools (ref), fFlagEnableTeamTestLua (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), fFlagBuildAgentRollbackModule (ref), resolvePromptFailure (ref), debug (ref), getPromptFailureTelemetryParameters (ref), localizationStringsModule (ref), t_1 (ref)
+		-- upvalues: createLocalToolControllers (ref), studioAskUserTool (ref), studioProposePlanTool (ref), studioClientLogsTool (ref), fFlagBuildExperienceClientDataModelTools (ref), studioClientDataModelTools (ref), fFlagEnableTeamTestLua (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), resolvePromptFailure (ref), debug (ref), getPromptFailureTelemetryParameters (ref), localizationStringsModule (ref), t_1 (ref)
 		local var2 = createLocalToolControllers(p1, p4, p5)
 		local universeId = p1.universeId
 		local list = {
@@ -212,8 +211,8 @@ return {
 					messageId = p7
 				})
 			end,
-			onReceived = if fFlagBuildEventsUpdate1Module or fFlagBuildAgentRollbackModule and p6 ~= nil then function(p7)
-				-- upvalues: fFlagBuildEventsUpdate1Module (copy), sendBuildExperienceEventModule (copy), universeId (ref), p1 (ref), fFlagBuildAgentRollbackModule (copy), p6 (ref)
+			onReceived = if fFlagBuildEventsUpdate1Module or p6 ~= nil then function(p7)
+				-- upvalues: fFlagBuildEventsUpdate1Module (copy), sendBuildExperienceEventModule (copy), universeId (ref), p1 (ref), p6 (ref)
 				if fFlagBuildEventsUpdate1Module then
 					sendBuildExperienceEventModule("SEND_PROMPT_RECIEVED", {
 						universeId = universeId,
@@ -222,8 +221,8 @@ return {
 						turnId = p7
 					})
 				end
-				if fFlagBuildAgentRollbackModule and p6 ~= nil then
-					p6()
+				if p6 ~= nil then
+					p6(p7)
 				end
 			end else nil,
 			onCompleted = function(p7)

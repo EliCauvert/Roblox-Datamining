@@ -1832,6 +1832,7 @@ Feature.Build.Action.CopyText,Copiar texto
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
 Feature.Build.Action.DontAskAgain,Não perguntar novamente
+Feature.Build.Action.DontShowAgain,
 Feature.Build.Action.HideAutosaved,Ocultar versões salvas automaticamente
 Feature.Build.Action.ManageLimit,Gerenciar limite
 Feature.Build.Action.Next,Avançar
@@ -1839,6 +1840,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,Me enviar notificação
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Abrir configurações
+Feature.Build.Action.Play,Jogar
 Feature.Build.Action.Playtest,Teste de jogo
 Feature.Build.Action.Preview,Pré-visualização
 Feature.Build.Action.Publish,
@@ -1856,16 +1858,19 @@ Feature.Build.Action.UpdateWithChanges,Atualizar com alterações
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Ver uso
 Feature.Build.Content.NewGame,Novo jogo
+Feature.Build.Description.AdCampaignModerationReview,Todas as campanhas publicitárias são analisadas pela moderação da Roblox. Esse processo pode levar até 24 horas.
+Feature.Build.Description.AdCampaignSheetRunDates,É exibido de {startDate} a {endDate}
+Feature.Build.Description.AdvertisingAgreement,"Ao prosseguir, você concorda com os {advertisingTermsStart}Termos de Publicidade{advertisingTermsEnd} e os {advertisingStandardsStart}Padrões de Publicidade{advertisingStandardsEnd} da Roblox."
 Feature.Build.Description.ArchiveRemoval,"Se você arquivar este jogo, ele será removido da aba Criar. Você ainda poderá acessá-lo e restaurá-lo no Salão dos Criadores ou no Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Use seu Robux para comprar mais limite para função Criar automaticamente enquanto cria. Você pode definir um limite de gastos diários a qualquer momento.
 Feature.Build.Description.BoostAudienceForPlays,Aumente seu público para obter mais jogadas.
-Feature.Build.Description.BoostGameAudience,Aumente o público do seu jogo
 Feature.Build.Description.BuildIdeaGame,Transforme suas ideias em um jogo
 Feature.Build.Description.BuildReplyNotif,Receba uma notificação quando a função Criar tiver uma resposta para você.
 Feature.Build.Description.BuyRobuxToCreate,"Compre mais Robux para continuar criando ou aguarde até amanhã, quando o seu limite gratuito da função Criar será restabelecido."
 Feature.Build.Description.BuyUsageOrWait,Use Robux para comprar mais limite para a função Criar ou aguarde o seu limite diário ser restabelecido.
 Feature.Build.Description.CampaignRunDates,Sua campanha será executada de {startDate} a {endDate}
 Feature.Build.Description.ChoosePlaytesters,Escolha amizades para ajudar você a testar o jogo.
+Feature.Build.Description.EarnedRobuxAppliedFirst,"Se você ganhou Robux, eles serão aplicados primeiro ao custo da campanha publicitária."
 Feature.Build.Description.EnableBuildNotifs,Ative as notificações nas configurações do seu dispositivo para receber atualizações da função Criar.
 Feature.Build.Description.FriendsLinkOnly,Só suas amizades podem acessar este link. Altere a configuração de público do seu jogo se quiser que mais pessoas joguem.
 Feature.Build.Description.GameCreationDone,Finalizei a criação e a publicação do seu jogo. Você pode abri-lo para fazer testes.
@@ -1879,6 +1884,7 @@ Feature.Build.Description.PlaytestLatest,Você está testando sua versão mais r
 Feature.Build.Description.PlaytestLocked,Você pode começar o teste de jogo depois de criar seu primeiro jogo.
 Feature.Build.Description.PlaytesterAccess,Adicione amizades para testarem o jogo ou altere a configuração de público do seu jogo para permitir que mais pessoas joguem.
 Feature.Build.Description.PrivateShare,Altere a configuração de público do seu jogo para compartilhá-lo.
+Feature.Build.Description.PromoteGameWithAdCampaign,Aumente seu público com uma campanha de anúncios de {durationDays} dias e deixe seu jogo ser descoberto.
 Feature.Build.Description.RaiseLimitOrWait,Aumente seu limite diário de Robux para continuar criando ou aguarde até amanhã para que seja restabelecido.
 Feature.Build.Description.RatingAgreement,"Ao publicar, você concorda que esta classificação de conteúdo está correta."
 Feature.Build.Description.RestoreLatest,Esta versão se tornará sua versão mais recente publicada.
@@ -1889,7 +1895,10 @@ Feature.Build.Header.ContentMaturity,Maturidade do conteúdo
 Feature.Build.Header.CustomAnswer,Resposta personalizada
 Feature.Build.Header.GameDetails,Detalhes do jogo
 Feature.Build.Header.Overview,Visão geral
+Feature.Build.Header.PastCampaigns,Campanhas anteriores
 Feature.Build.Label.Access,Acesso
+Feature.Build.Label.AdClicks,Cliques no anúncio
+Feature.Build.Label.AdViews,Visualizações de anúncios
 Feature.Build.Label.AdditionalUsage,Limite de uso adicional da função Criar
 Feature.Build.Label.AdditionalUsed,{USED} de {LIMIT} usado(s)
 Feature.Build.Label.All,
@@ -1903,14 +1912,18 @@ Feature.Build.Label.ContentRating,Classificação de conteúdo
 Feature.Build.Label.Created,Criado
 Feature.Build.Label.CreatedDate,{DAY} de {MONTH} de {YEAR}
 Feature.Build.Label.CreatorHub,Salão dos Criadores
+Feature.Build.Label.DateRange,{startDate} – {endDate}
 Feature.Build.Label.Deleted,Excluído
 Feature.Build.Label.DescribeIdea,Descreva uma ideia
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,
+Feature.Build.Label.EasyPerformanceReport,Relatório de desempenho fácil
 Feature.Build.Label.Error,
+Feature.Build.Label.Free,Grátis
 Feature.Build.Label.FreeBuildUsage,Limite de uso gratuito da função Criar
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Apenas amizades
+Feature.Build.Label.GamePlays,Jogadas
 Feature.Build.Label.GetMoreBuildUsage,Obtenha mais limite de uso para a função Criar
 Feature.Build.Label.Hi,Olá
 Feature.Build.Label.IconThumbnails,Ícone e miniaturas
@@ -1920,11 +1933,13 @@ Feature.Build.Label.InputNeeded,Informações necessárias
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitado
 Feature.Build.Label.Loading,Carregando…
+Feature.Build.Label.MaximizeForGamePlays,Aumente as jogadas ao máximo
 Feature.Build.Label.Models3D,Modelos 3D
 Feature.Build.Label.NoLimit,Sem limite
 Feature.Build.Label.NotStarted,Não iniciado
 Feature.Build.Label.Pending,Pendente
 Feature.Build.Label.PercentUsed,Uso: {PERCENT}%
+Feature.Build.Label.PlayTime,Tempo de jogo
 Feature.Build.Label.PreviouslyPublished,Publicado anteriormente
 Feature.Build.Label.Private,Privada
 Feature.Build.Label.Public,Pública
@@ -1943,6 +1958,7 @@ Feature.Build.Label.SelectOption,Selecione uma opção
 Feature.Build.Label.ShareAddedFriends,Compartilhe com as amizades que você adicionou
 Feature.Build.Label.Shared,Compartilhado
 Feature.Build.Label.Sounds,Sons
+Feature.Build.Label.TargetAllRobloxPlayers,Segmente todos os jogadores da Roblox
 Feature.Build.Label.Thinking,Pensando
 Feature.Build.Label.Title,Título
 Feature.Build.Label.TitleDescription,Título e descrição
@@ -2022,6 +2038,7 @@ Feature.Build.Label.VersionTitleDesc,Título e descrição da versão
 Feature.Build.Label.Video,Vídeo
 Feature.Build.Message.AccountRequirements,Sua conta não atende aos requisitos para usar a função Criar.
 Feature.Build.Message.AccountTooNew,Sua conta é muito recente para publicar. Tente novamente quando ela tiver 2 dias.
+Feature.Build.Message.AdPerformanceLoadFailed,Não foi possível carregar o desempenho da publicidade
 Feature.Build.Message.AllFriendsAdded,Você adicionou todas as suas amizades como testadores.
 Feature.Build.Message.AnswerBuildQuestion,Responda à pergunta da função Criar abaixo.
 Feature.Build.Message.AssetDetailsUnavailable,Os detalhes do ativo não estão disponíveis.
@@ -2067,6 +2084,7 @@ Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} de {MAX_INVITES} testador
 Feature.Build.Message.PublicPublishFailed,"Seu jogo foi publicado, mas não foi possível torná-lo público. Tente novamente."
 Feature.Build.Message.PublishExpandAudience,Publique para ampliar seu público
 Feature.Build.Message.PublishNotReverted,Sua publicação não foi revertida. Tente novamente.
+Feature.Build.Message.PublishPromotionUpsell,Parabéns por publicar seu jogo! Você tem {promotionCount} promoções gratuitas disponíveis para conquistar mais jogadores na Roblox.
 Feature.Build.Message.PublishReverted,Publicação revertida.
 Feature.Build.Message.QuestionnaireNeeded,Este jogo foi editado fora da função Criar. Preencha o questionário de conteúdo para publicar.
 Feature.Build.Message.ReadyToPlay,Seu jogo está pronto para ser jogado na Roblox!
@@ -2094,6 +2112,7 @@ Feature.Build.Notification.Message.Review,Retome o chat de criação para revisa
 Feature.Build.Notification.Title.Finished,Criação concluída
 Feature.Build.Notification.Title.NeedInput,A criação precisa da sua contribuição
 Feature.Build.Title.AdCampaignActive,A campanha de anúncios está ativa
+Feature.Build.Title.AdCampaignDuration,Campanha de anúncios de {durationDays} dias
 Feature.Build.Title.AddFriendsToPlaytest,Adicione amizades para ajudar você a testar o jogo
 Feature.Build.Title.ArchiveThisGame,Arquivar este jogo?
 Feature.Build.Title.AssetLibrary,Biblioteca
@@ -2112,9 +2131,11 @@ Feature.Build.Title.FriendsOnlyPlay,Apenas amizades podem jogar
 Feature.Build.Title.GameCreationDone,Criação de jogo concluída
 Feature.Build.Title.GamePrivate,Este jogo é privado
 Feature.Build.Title.GenericError,
+Feature.Build.Title.GetUsers,Obter usuários
 Feature.Build.Title.NoRobuxForUsage,Não há mais Robux para usar a função Criar
 Feature.Build.Title.Playtesters,Testadores de jogos
 Feature.Build.Title.PlaytestersOnlyPlay,Apenas testadores podem jogar
+Feature.Build.Title.PromoteGame,Promova seu jogo
 Feature.Build.Title.PromoteGameFree,Promova seu jogo de graça
 Feature.Build.Title.PushNotifications,Notificações push
 Feature.Build.Title.RevertLastChange,Reverter a última alteração?
@@ -2123,6 +2144,7 @@ Feature.Build.Title.TurnActivity,Ações do assistente durante a resposta
 Feature.Build.Title.VersionHistory,Histórico do lançamento
 Feature.Build.Title.VersionInformation,Informações da versão
 Feature.Build.Title.VersionNumber,Versão {VERSION}
+Feature.Build.Title.WhatsIncluded,O que está incluído?
 Feature.Call.Error.Description.Generic,"Algo deu errado, tente novamente mais tarde."
 Feature.Captures.Action.Allow,Permitir
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -2481,7 +2503,7 @@ Feature.Catalog.LabelAnyPrice,Qualquer preço
 Feature.Catalog.LabelClassicHeads,
 Feature.Catalog.LabelCollectibles,Colecionáveis
 Feature.Catalog.LabelContentDeleted,Conteúdo excluído
-Feature.Catalog.LabelFree,Grátis
+Feature.Catalog.LabelFree,
 Feature.Catalog.LabelNoResellers,Nenhum revendedor
 Feature.Catalog.LabelOffSale,
 Feature.Catalog.LabelPants,
@@ -2802,7 +2824,7 @@ Feature.ExperienceDetails.Label.NotPlayable,Não jogável
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,Concordo com o aviso ao jogar esta experiência
 Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
-Feature.ExperienceDetails.PlayButtonText.Play,Jogar
+Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,Jogar demo
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,Desbloquear
@@ -3722,6 +3744,7 @@ Feature.RobloxSubscription.Body.GenericError,Não foi possível concluir esta a�
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Esta assinatura não está disponível para compra neste dispositivo.
 Feature.RobloxSubscription.Description.AgeCheckTrial,Faça a verificação de idade e ganhe 1 semana grátis do Roblox Plus como agradecimento. Não é necessário informar um método de pagamento para aproveitar esse teste grátis.
 Feature.RobloxSubscription.Description.Benefit.Customize,Personalize com molduras de perfil e temas do aplicativo
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% de desconto nos primeiros 60 dias, depois 20% de desconto em itens e avatares"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Mais diversão por menos Robux. Assine o Roblox Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Ao clicar em \u{201C}{ctaText}\u{201D}, você concorda com os <a href=""{termsUrl}"">Termos de assinatura da Roblox</a>. A cobrança será feita automaticamente todo mês até você cancelar."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Servidores privados gratuitos
@@ -3741,7 +3764,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Boas notícias
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Assine o Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,O Roblox Plus não está disponível aqui
-Feature.SafetyDashboard.Heading.AccountStatus,Status da conta
+Feature.SafetyDashboard.Heading.AccountStatus.V2,"Status da conta, violações e recursos"
 Feature.Schools.Label.Classmates,Colegas da escola
 Feature.Screentime.Content.ScreentimeLimitDialog,Você atingiu seu limite diário de tempo de tela. Volte amanhã para acessar a Roblox novamente.
 Feature.SecurityFeedback.Header.NewLogin,Alerta de nova atividade

@@ -1,4 +1,5 @@
-﻿local localizationStringsModule = require(script:FindFirstAncestor("BuildExperience").LocalizationStrings)
+﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
+local localizationStringsModule = require(buildExperience.LocalizationStrings)
 
 return {
 	CAS_RPC_TIMEOUT_SECONDS = 30,
@@ -11,5 +12,6 @@ return {
 	formatAssistantLoadingText = localizationStringsModule.formatChatThinkingDuration,
 	ASSISTANT_STATUS_SWAP_INTERVAL_SECONDS = game:DefineFastInt("BuildExperienceAssistantStatusSwapIntervalSeconds", 10),
 	ASSISTANT_THINKING_DURATION_SUFFIX_DELAY_SECONDS = game:DefineFastInt("BuildExperienceAssistantThinkingDurationSuffixDelaySeconds", 10),
+	MESSAGE_LAYOUT_ORDER_STRIDE = if require(buildExperience.Flags.FFlagBuildAdUpsell) then 10 else 1,
 	PUBLISH_PLACE_TOOL_IDENTIFIERS = { "studio_save_and_publish", "cas_save_and_publish" }
 }

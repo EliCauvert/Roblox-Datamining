@@ -1774,6 +1774,7 @@ Feature.Build.Action.CopyText,Text kopieren
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
 Feature.Build.Action.DontAskAgain,Nicht erneut fragen
+Feature.Build.Action.DontShowAgain,
 Feature.Build.Action.HideAutosaved,Automatisch gespeicherte Elemente verbergen
 Feature.Build.Action.ManageLimit,Limit verwalten
 Feature.Build.Action.Next,
@@ -1799,16 +1800,19 @@ Feature.Build.Action.UpdateWithChanges,Mit Änderungen aktualisieren
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Kontingent anzeigen
 Feature.Build.Content.NewGame,Neues Spiel
+Feature.Build.Description.AdCampaignModerationReview,Alle Werbekampagnen werden vom Roblox-Moderationsteam überprüft. Dieser Vorgang kann bis zu 24 Stunden dauern.
+Feature.Build.Description.AdCampaignSheetRunDates,Läuft vom {startDate} bis zum {endDate}
+Feature.Build.Description.AdvertisingAgreement,"Indem du fortfährst, stimmst du den {advertisingTermsStart}Werbebedingungen{advertisingTermsEnd} und {advertisingStandardsStart}Werberichtlinien{advertisingStandardsEnd} von Roblox zu."
 Feature.Build.Description.ArchiveRemoval,"Wenn du dieses Spiel archivierst, wird es aus Build entfernt. Du kannst weiterhin im Creator Hub oder in Roblox Studio darauf zugreifen und es wiederherstellen."
 Feature.Build.Description.AutoBuyUsage,"Verwende deine Robux, um beim Erstellen automatisch zusätzliches Build-Kontingent zu kaufen. Du kannst jederzeit ein tägliches Ausgabenlimit festlegen."
 Feature.Build.Description.BoostAudienceForPlays,Vergrößere deine Zielgruppe für mehr Spieler.
-Feature.Build.Description.BoostGameAudience,Vergrößere die Zielgruppe deines Spiels
 Feature.Build.Description.BuildIdeaGame,Mache aus deinen Ideen ein Spiel
 Feature.Build.Description.BuildReplyNotif,"Erhalte Benachrichtigungen, wenn Build eine Antwort für dich hat."
 Feature.Build.Description.BuyRobuxToCreate,"Kaufe mehr Robux, um weiter zu erstellen, oder warte, bis dein kostenloses Build-Kontingent morgen zurückgesetzt wird."
 Feature.Build.Description.BuyUsageOrWait,"Kaufe mehr Build-Kontingent mit Robux oder warte, bis dein Tageslimit zurückgesetzt wird."
 Feature.Build.Description.CampaignRunDates,Deine Kampagne läuft von {startDate}–{endDate}.
 Feature.Build.Description.ChoosePlaytesters,"Wähle Freunde aus, die dir beim Spieltest helfen."
+Feature.Build.Description.EarnedRobuxAppliedFirst,"Wenn du Robux verdient hast, werden diese zuerst auf die Kosten der Werbekampagne angerechnet."
 Feature.Build.Description.EnableBuildNotifs,"Aktiviere Benachrichtigungen in deinen Geräteeinstellungen, um Updates von Build zu erhalten."
 Feature.Build.Description.FriendsLinkOnly,"Nur deine Freunde können auf diesen Link zugreifen. Ändere die Zielgruppeneinstellung deines Spiels, wenn du möchtest, dass mehr Personen spielen."
 Feature.Build.Description.GameCreationDone,"Ich habe die Erstellung und Veröffentlichung deines Spiels abgeschlossen. Du kannst es öffnen, um es zu testen."
@@ -1822,6 +1826,7 @@ Feature.Build.Description.PlaytestLatest,"Du testest gerade die neueste Version.
 Feature.Build.Description.PlaytestLocked,"Du kannst mit dem Spieltest beginnen, nachdem du dein erstes Spiel erstellt hast."
 Feature.Build.Description.PlaytesterAccess,"Füge Freunde als Spieltester hinzu oder ändere die Zielgruppeneinstellung deines Spiels, damit mehr Personen spielen können."
 Feature.Build.Description.PrivateShare,"Ändere die Zielgruppeneinstellung deines Spiels, um es zu teilen."
+Feature.Build.Description.PromoteGameWithAdCampaign,"Vergrößere deine Zielgruppe mit einer {durationDays}-tägigen Werbekampagne und sorge dafür, dass dein Spiel besser entdeckt wird."
 Feature.Build.Description.RaiseLimitOrWait,"Erhöhe dein tägliches Robux-Limit, um weiter zu erstellen, oder warte, bis es morgen zurückgesetzt wird."
 Feature.Build.Description.RatingAgreement,"Durch die Veröffentlichung erklärst du dich damit einverstanden, dass diese Inhaltseinstufung korrekt ist."
 Feature.Build.Description.RestoreLatest,Diese Version wird zu Ihrer neuesten veröffentlichten Version.
@@ -1854,7 +1859,9 @@ Feature.Build.Label.Deleted,Gelöscht
 Feature.Build.Label.DescribeIdea,Beschreibe eine Idee
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,
+Feature.Build.Label.EasyPerformanceReport,Einfacher Leistungsbericht
 Feature.Build.Label.Error,
+Feature.Build.Label.Free,Gratis
 Feature.Build.Label.FreeBuildUsage,Kostenloses Build-Kontingent
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Nur Freunde
@@ -1868,6 +1875,7 @@ Feature.Build.Label.InputNeeded,Eingabe erforderlich
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitiert
 Feature.Build.Label.Loading,Wird geladen …
+Feature.Build.Label.MaximizeForGamePlays,Für maximale Spielaufrufe optimieren
 Feature.Build.Label.Models3D,3D-Modelle
 Feature.Build.Label.NoLimit,Kein Limit
 Feature.Build.Label.NotStarted,Nicht begonnen
@@ -1892,6 +1900,7 @@ Feature.Build.Label.SelectOption,Wähle eine Option
 Feature.Build.Label.ShareAddedFriends,"Mit Freunden teilen, die du hinzugefügt hast"
 Feature.Build.Label.Shared,Geteilt
 Feature.Build.Label.Sounds,Sounds
+Feature.Build.Label.TargetAllRobloxPlayers,Alle Roblox-Spieler erreichen
 Feature.Build.Label.Thinking,Denkt nach
 Feature.Build.Label.Title,Titel
 Feature.Build.Label.TitleDescription,Titel und Beschreibung
@@ -2017,6 +2026,7 @@ Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} von {MAX_INVITES} Spielet
 Feature.Build.Message.PublicPublishFailed,"Dein Spiel wurde veröffentlicht, konnte aber nicht öffentlich gemacht werden. Bitte versuche es erneut."
 Feature.Build.Message.PublishExpandAudience,"Veröffentliche, um deine Zielgruppe zu vergrößern"
 Feature.Build.Message.PublishNotReverted,Deine Veröffentlichung wurde nicht rückgängig gemacht. Bitte versuche es erneut.
+Feature.Build.Message.PublishPromotionUpsell,"Herzlichen Glückwunsch zur Veröffentlichung deines Spiels! Du hast {promotionCount} kostenlose Werbeaktionen zur Verfügung, um mehr Spieler auf Roblox zu gewinnen."
 Feature.Build.Message.PublishReverted,Veröffentlichung zurückgesetzt.
 Feature.Build.Message.QuestionnaireNeeded,"Dieses Spiel wurde außerhalb von Build bearbeitet. Fülle den Inhaltsfragebogen aus, um es zu veröffentlichen."
 Feature.Build.Message.ReadyToPlay,"Dein Spiel ist bereit, auf Roblox gespielt zu werden!"
@@ -2044,6 +2054,7 @@ Feature.Build.Notification.Message.Review,"Setze deinen Build-Chat fort, um das 
 Feature.Build.Notification.Title.Finished,Build abgeschlossen
 Feature.Build.Notification.Title.NeedInput,Build benötigt deine Eingabe
 Feature.Build.Title.AdCampaignActive,Werbekampagne ist aktiv
+Feature.Build.Title.AdCampaignDuration,{durationDays}-tägige Werbekampagne
 Feature.Build.Title.AddFriendsToPlaytest,"Füge Freunde hinzu, die dir beim Spieltest helfen"
 Feature.Build.Title.ArchiveThisGame,Dieses Spiel archivieren?
 Feature.Build.Title.AssetLibrary,Bibliothek
@@ -2066,6 +2077,7 @@ Feature.Build.Title.GetUsers,Benutzer gewinnen
 Feature.Build.Title.NoRobuxForUsage,Keine Robux mehr für das Build-Kontingent übrig
 Feature.Build.Title.Playtesters,Spieletester
 Feature.Build.Title.PlaytestersOnlyPlay,Nur Spieletester können spielen
+Feature.Build.Title.PromoteGame,Bewirb dein Spiel
 Feature.Build.Title.PromoteGameFree,Bewirb dein Spiel kostenlos
 Feature.Build.Title.PushNotifications,Push-Benachrichtigungen
 Feature.Build.Title.RevertLastChange,Letzte Änderung rückgängig machen?
@@ -2074,6 +2086,7 @@ Feature.Build.Title.TurnActivity,Aktivität drehen
 Feature.Build.Title.VersionHistory,Versionsverlauf
 Feature.Build.Title.VersionInformation,Versionsinformationen
 Feature.Build.Title.VersionNumber,Version {VERSION}
+Feature.Build.Title.WhatsIncluded,Was ist enthalten?
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Erlauben
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -2432,7 +2445,7 @@ Feature.Catalog.LabelAnyPrice,Beliebiger Preis
 Feature.Catalog.LabelClassicHeads,
 Feature.Catalog.LabelCollectibles,Sammlerobjekte
 Feature.Catalog.LabelContentDeleted,Inhalt gelöscht
-Feature.Catalog.LabelFree,Gratis
+Feature.Catalog.LabelFree,
 Feature.Catalog.LabelNoResellers,Keine Wiederverkäufer
 Feature.Catalog.LabelOffSale,Nicht käuflich
 Feature.Catalog.LabelPants,
@@ -3691,7 +3704,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Gute Neuigkeiten
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus holen
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus ist hier nicht verfügbar
-Feature.SafetyDashboard.Heading.AccountStatus,Kontostatus
+Feature.SafetyDashboard.Heading.AccountStatus.V2,"Kontostatus, Verstöße und Widersprüche"
 Feature.Schools.Label.Classmates,Mitschüler
 Feature.Screentime.Content.ScreentimeLimitDialog,"Du hast dein tägliches Bildschirmzeitlimit erreicht. Komm morgen wieder, um erneut auf Roblox zuzugreifen."
 Feature.SecurityFeedback.Header.NewLogin,Neue Aktivitätsbenachrichtigung

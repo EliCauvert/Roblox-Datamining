@@ -22,7 +22,6 @@ local fFlagSduiOrderedTemplateDataSupport = require(parent.SharedFlags).FFlagSdu
 local fFlagSduiImprovedErrorDimensions = require(parent.SharedFlags).FFlagSduiImprovedErrorDimensions
 local fFlagSduiInlineNestedComponentSchema = require(parent.SharedFlags).FFlagSduiInlineNestedComponentSchema
 local fFlagSduiClientPageScope = require(parent.SharedFlags).FFlagSduiClientPageScope
-local fFlagSduiRenderPerf = require(parent.SharedFlags).FFlagSduiRenderPerf
 local t = {}
 
 local function buildItemList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
@@ -99,7 +98,7 @@ local function buildItemList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 end
 
 local function buildOrderedTemplateDataList(p11, p12, p13, p14, p15)
-	-- upvalues: fFlagSduiRenderPerf (ref), splitDottedPathModule (ref), signalsModule (ref), sduiPropUtilsModule (ref), fFlagSduiClientPageScope (ref), fFlagSduiInlineNestedComponentSchema (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiImprovedErrorDimensions (ref), buildInputsForNestedComponentModule (ref), buildConfigForComponent (ref), sduiParseHelpersModule (ref), propResultCategory (ref)
+	-- upvalues: splitDottedPathModule (ref), signalsModule (ref), sduiPropUtilsModule (ref), fFlagSduiClientPageScope (ref), fFlagSduiInlineNestedComponentSchema (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiImprovedErrorDimensions (ref), buildInputsForNestedComponentModule (ref), buildConfigForComponent (ref), sduiParseHelpersModule (ref), propResultCategory (ref)
 	local entryMapPath = p11.entry_map_path
 	local entryOrder = p11.entry_order
 	local templateDataMap = p11.template_data_map
@@ -110,9 +109,9 @@ local function buildOrderedTemplateDataList(p11, p12, p13, p14, p15)
 	if templateDataMap == nil or typeof(templateDataMap) ~= "table" then
 		error("Missing or invalid template_data_map in ordered_template_data")
 	end
-	local var5 = if entryMapPath and entryMapPath ~= "" then if fFlagSduiRenderPerf then splitDottedPathModule(entryMapPath) else string.split(entryMapPath, ".") else nil
+	local var5 = if entryMapPath and entryMapPath ~= "" then splitDottedPathModule(entryMapPath) else nil
 	local var6 = if entryOrder then entryOrder.kind else nil
-	local var7 = if var6 and var6.type == "binding_path" then if fFlagSduiRenderPerf then splitDottedPathModule(var6.value) else string.split(var6.value, ".") else nil
+	local var7 = if var6 and var6.type == "binding_path" then splitDottedPathModule(var6.value) else nil
 	
 	return signalsModule.createComputed(function(p16)
 		-- upvalues: var7 (ref), sduiPropUtilsModule (copy), p12 (ref), p13 (ref), fFlagSduiClientPageScope (copy), p14 (ref), var6 (ref), var5 (ref), templateDataMap (ref), fFlagSduiInlineNestedComponentSchema (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), signalsModule (copy), buildInputsForNestedComponentModule (copy), buildConfigForComponent (copy), p15 (ref), sduiParseHelpersModule (copy)

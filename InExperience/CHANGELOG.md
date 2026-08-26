@@ -1,3 +1,366 @@
+## 12660 - 2026-08-26 20:13
+
+### New files
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/MomentsCreation/MomentsCreation/Flags/GetFFlagMomentsGeneratedTextDisclosureWrap.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/SocialServerDrivenUi/Actions/SduiOpenProfileFramesEditorAction.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/AdUpsellMilestone/AdUpsellMilestoneContainer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/AdUpsellMilestone/AdUpsellMilestoneView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/AdUpsellMilestone/adUpsellVisibilityUtils.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/AdUpsellMilestone/useAdUpsellMilestoneViewModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/CreateAdCampaignSheet/CreateAdCampaignSheetConfig.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/CreateAdCampaignSheet/CreateAdCampaignSheetContainer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/CreateAdCampaignSheet/CreateAdCampaignSheetView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/CreateAdCampaignSheet/useCreateAdCampaignSheetViewModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/getAdUpsellEligibility.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/BuildChatPage/adUpsellPublishUtils.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/BuildChatPage/useAdUpsellChatViewModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/GameConfigurations/PublishFooter/isMenuPublishPublic.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Flags/FFlagBuildAdUpsell.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Flags/FIntBuildAdUpsellCompletedTurnGap.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Flags/FIntBuildAdUpsellPublishInterval.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Stores/GetAdUpsellEventStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Stores/GetAdUpsellEventStore/createAdUpsellEventStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/InlineLayout.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PurchasePrompt/PurchasePrompt/Thunks/fetchInGameItemCartPricing.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PurchasePrompt/PurchasePrompt/Utils/getInGameItemProductIdentifier.luau`
+
+### Removed files
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags/FFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags/FFlagSduiInputDataMergeStrategy.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags/GetFFlagEnableAccountSwitcherFoundationDesign.luau`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UrlBuilder/UrlBuilder/UrlPatterns/StaticUrlPatterns.luau`
+- New function: `violations`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/AuthCommon/AuthCommon/Thunks/OpenAccountSelector.luau`
+- Removed variable: `authCommon`
+- Removed variable: `dependenciesModule`
+- Removed variable: `getFFlagEnableAccountSwitcherFoundationDesign`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameDetail/GameDetail/ExperienceDetailsPage/ExperienceDetailsBottomSheet.luau`
+- Removed variable: `fFlagLuaAppSduiEdpRouteAwareSessionRemoval`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameDetail/GameDetail/ExperienceDetailsPage/ExperienceDetailsFullPage.luau`
+- Removed variable: `sessionType`
+- Removed variable: `fFlagLuaAppSduiEdpRouteAwareSessionRemoval`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameDetail/GameDetail/ExperienceDetailsPage/ExperienceDetailsPersistentActionBar.luau`
+- Removed variable: `fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameDetail/GameDetail/ExperienceDetailsPage/Fallback/ExperienceDetailsFallbackActionBar.luau`
+- Removed variable: `fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameDetail/GameDetail/ExperienceDetailsPage/Fallback/ExperienceDetailsFallbackAttributionRow.luau`
+- Removed variable: `fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameTile/GameTile/GameTileDirectAction.luau`
+- Removed variable: `sharedFlagsModule`
+- Removed variable: `fFlagLuaAppAdjustOverflowMenuVisual`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameTile/GameTile/GameTileOverflowMenu.luau`
+- Removed variable: `fFlagLuaAppAdjustOverflowMenuVisual`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/MediaGallery/MediaGallery/Hooks/useFilteredMediaItems.luau`
+- Removed variable: `fFlagLuaAppMediaGalleryNilImageIdFix`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/MediaGallery/MediaGallery/getImageUri.luau`
+- Removed variable: `fFlagLuaAppMediaGalleryNilImageIdFix`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/MomentsCreation/MomentsCreation/Components/GeneratedTextFeedback/GeneratedTextFeedbackView.luau`
+- New variable: `getFFlagMomentsGeneratedTextDisclosureWrapModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/SduiCoreSystem/ClientBinding/PropBuilder/SduiClientBindingParsers.luau`
+- Upvalue no longer captured by `resolveTokenValueToNumber`: `fFlagSduiRenderPerf`
+- Removed variable: `fFlagSduiRenderPerf`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/SduiCoreSystem/ClientBinding/PropBuilder/SduiPropUtils.luau`
+- Upvalue no longer captured by `resolveBindingPathValue`: `fFlagSduiRenderPerf`
+- Upvalue no longer captured by `resolveBindingPathValue`: `sduiParseHelpersModule`
+- Upvalue no longer captured by `generateDynamicBindingPropValue`: `fFlagSduiRenderPerf`
+- Upvalue no longer captured by `generateTokenBindingPropValue`: `fFlagSduiRenderPerf`
+- Upvalue no longer captured by `evaluateCondition`: `fFlagSduiRenderPerf`
+- New function: `_`
+- Upvalue no longer captured by `resolveTablePropValue`: `fFlagSduiRenderPerf`
+- Upvalue no longer captured by `resolveSourceArray`: `fFlagSduiRenderPerf`
+- New function: `var44`
+- New function: `var45`
+- Removed function: `getFieldObject`
+- Removed function: `var38`
+- Removed function: `var39`
+- Removed variable: `fFlagSduiRenderPerf`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/SduiCoreSystem/ClientBinding/PropBuilder/buildInputsForNestedComponent.luau`
+- Removed variable: `fFlagSduiRenderPerf`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/SduiCoreSystem/ClientBinding/PropBuilder/buildLazyNestedComponentListProp.luau`
+- Upvalue no longer captured by `buildOrderedTemplateDataList`: `fFlagSduiRenderPerf`
+- Removed variable: `fFlagSduiRenderPerf`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/SduiCoreSystem/ClientBinding/buildDataBindingSourcesForTemplate.luau`
+- Removed variable: `fFlagSduiRenderPerf`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/SduiCoreSystem/ClientBinding/createSduiClientBindingWrappers.luau`
+- Removed variable: `sduiDataBindingShallowEquals`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiSharedUtilities/SduiSharedUtilities/createSduiApiStore.luau`
+- Upvalue no longer captured by `fetchFn`: `fFlagSduiInputDataMergeStrategy`
+- Upvalue no longer captured by `fetchFn`: `fFlagSduiRenderPerf`
+- Upvalue no longer captured by `processSduiResponse`: `fFlagSduiInputDataMergeStrategy`
+- Removed variable: `fFlagSduiInputDataMergeStrategy`
+- Removed variable: `fFlagSduiRenderPerf`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiSharedUtilities/SduiSharedUtilities/handleSduiApiResponse.luau`
+- Removed function: `_`
+- Removed variable: `fFlagSduiInputDataMergeStrategy`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/SocialServerDrivenUi/Actions/registerSocialActions.luau`
+- New function: `lazyHandler`
+- New variable: `fFlagEditProfileFramesEnabled`
+- New variable: `fFlagAddSDUIEditProfileFramesAction`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/BuildPage.luau`
+- New upvalue captured by `screen`: `fFlagBuildAdUpsellModule`
+- New upvalue captured by `screen`: `useNavigationFocus`
+- New variable: `fFlagBuildAdUpsellModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Chat/chatConstants.luau`
+- New variable: `buildExperience`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Chat/chatTypes.luau`
+- New function: `makeAssistantTurnAnchorKey`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Chat/creatorAgentChat.luau`
+- Upvalue no longer captured by `createLiveAssistantTurn`: `fFlagBuildAgentRollbackModule`
+- Removed variable: `fFlagBuildAgentRollbackModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Chat/parseSessionStream.luau`
+- New variable: `chatTypesModule`
+- New variable: `fFlagBuildAdUpsellModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Chat/useChatSessionCore.luau`
+- New parameter added to `_` (1 -> 3 params)
+- Upvalue no longer captured by `_`: `placeVersionHistoryModule`
+- Parameter removed from `_` (2 -> 1 params)
+- New function: `noteLiveAdUpsellTurns`
+- Parameter removed from `_` (5 -> 1 params)
+- New upvalue captured by `_`: `placeVersionHistoryModule`
+- Upvalue no longer captured by `_`: `fFlagBuildExperienceShowThinkingBeforeUniverseCreationModule`
+- New parameter added to `_` (1 -> 2 params)
+- Upvalue no longer captured by `_`: `fFlagBuildExperienceChatHistoryLoadingSkeletonModule`
+- Upvalue no longer captured by `_`: `sessionId`
+- Upvalue no longer captured by `_`: `universeId`
+- Upvalue no longer captured by `_`: `var73 (write)`
+- New upvalue captured by `tryFocus`: `var8 (write)`
+- Upvalue no longer captured by `tryFocus`: `var7 (write)`
+- New parameter added to `_` (0 -> 1 params)
+- Upvalue no longer captured by `_`: `isHydrateCancelled`
+- Upvalue no longer captured by `_`: `sessionId`
+- Upvalue no longer captured by `_`: `var73 (write)`
+- New parameter added to `_` (1 -> 5 params)
+- New upvalue captured by `_`: `fFlagBuildExperienceShowThinkingBeforeUniverseCreationModule`
+- Upvalue no longer captured by `_`: `t_1 (write)`
+- Upvalue no longer captured by `_`: `var60 (write)`
+- New function: `var83`
+- New upvalue captured by `_`: `fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1`
+- New upvalue captured by `_`: `sessionId`
+- New upvalue captured by `_`: `universeId`
+- New upvalue captured by `_`: `var86 (write)`
+- New upvalue captured by `isHydrateCancelled`: `var86 (write)`
+- Upvalue no longer captured by `isHydrateCancelled`: `var73 (write)`
+- New function: `_`
+- New upvalue captured by `hydrateKnownSession`: `fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1`
+- New upvalue captured by `hydrateKnownSession`: `var86 (write)`
+- Upvalue no longer captured by `hydrateKnownSession`: `fFlagBuildExperienceChatHistoryLoadingSkeletonModule`
+- Upvalue no longer captured by `hydrateKnownSession`: `var73 (write)`
+- New upvalue captured by `refreshKnownSession`: `var88 (write)`
+- Upvalue no longer captured by `refreshKnownSession`: `var75 (write)`
+- New function: `_`
+- New function: `_`
+- New upvalue captured by `updateComposerImage`: `var73 (write)`
+- Upvalue no longer captured by `updateComposerImage`: `var60 (write)`
+- New upvalue captured by `setComposerImages`: `var73 (write)`
+- Upvalue no longer captured by `setComposerImages`: `var60 (write)`
+- New function: `var100`
+- New function: `var110`
+- New upvalue captured by `tryFocus`: `var111 (write)`
+- Upvalue no longer captured by `tryFocus`: `var98 (write)`
+- Removed function: `var70`
+- Removed function: `var97`
+- New variable: `fFlagBuildAdUpsellModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Ads/AdUpsellCard.luau`
+- New variable: `fillBehavior`
+- New variable: `inputSize`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/BuildChatPage/BuildChatPageView.luau`
+- New variable: `fFlagBuildAdUpsellModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/BuildChatPage/useBuildChatPageViewModel.luau`
+- New function: `onAdUpsellCreate`
+- New function: `onAdUpsellDismiss`
+- New function: `onAdUpsellImpression`
+- New function: `onAdCampaignSheetClose`
+- New function: `onAdCampaignSheetCreate`
+- Parameter removed from `_` (2 -> 1 params)
+- New upvalue captured by `_`: `universeConfigurationModule`
+- New function: `getResolvedSessionId`
+- New function: `_`
+- New variable: `fFlagBuildAdUpsellModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/Chat/ChatMessageList.luau`
+- New variable: `chatConstantsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/GameConfigurations/PublishFooter/PublishFooter.luau`
+- New function: `_`
+- New upvalue captured by `publish`: `audience`
+- New upvalue captured by `publish`: `fFlagBuildAdUpsellModule`
+- New upvalue captured by `publish`: `isMenuPublishPublicModule`
+- New upvalue captured by `publish`: `privacyType`
+- New upvalue captured by `publish`: `var25 (write)`
+- New upvalue captured by `publish`: `var26 (write)`
+- Upvalue no longer captured by `publish`: `var24 (write)`
+- New variable: `isMenuPublishPublicModule`
+- New variable: `fFlagBuildAdUpsellModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/LocalizationStrings.luau`
+- New function: `formatAdUpsellCongrats`
+- New function: `formatAdCampaignSheetDescription`
+- New function: `formatAdCampaignSheetTitle`
+- New function: `formatAdCampaignSheetDate`
+- New function: `formatAdCampaignSheetRunDates`
+- New function: `formatAdCampaignSheetLegalText`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Storage/BuildAppStorage.luau`
+- Parameter removed from `_` (2 -> 1 params)
+- New parameter added to `_` (1 -> 2 params)
+- New function: `makeEmptyAdUpsellScheduler`
+- New function: `pruneUniverseCap`
+- New function: `sanitizeAdUpsellScheduler`
+- New upvalue captured by `createBuildAppStorage`: `fFlagBuildAdUpsellModule`
+- New upvalue captured by `createBuildAppStorage`: `makeEmptyAdUpsellScheduler`
+- New upvalue captured by `createBuildAppStorage`: `pruneUniverseCap`
+- New upvalue captured by `createBuildAppStorage`: `sanitizeAdUpsellScheduler`
+- New function: `tryReadData`
+- New function: `tryReadDataStrict`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New upvalue captured by `getAgentSpecVersion`: `tryReadData`
+- Upvalue no longer captured by `getAgentSpecVersion`: `readData`
+- New upvalue captured by `setAgentSpecVersion`: `fFlagBuildAdUpsellModule`
+- New upvalue captured by `setAgentSpecVersion`: `tryReadData`
+- Upvalue no longer captured by `setAgentSpecVersion`: `readData`
+- New function: `var21`
+- New upvalue captured by `getUnpublishedPlaytestModeTooltipDisplayCount`: `tryReadData`
+- New upvalue captured by `getUnpublishedPlaytestModeTooltipDisplayCount`: `var12 (write)`
+- Upvalue no longer captured by `getUnpublishedPlaytestModeTooltipDisplayCount`: `readData`
+- Upvalue no longer captured by `getUnpublishedPlaytestModeTooltipDisplayCount`: `var3 (write)`
+- New upvalue captured by `incrementUnpublishedPlaytestModeTooltipDisplayCount`: `fFlagBuildAdUpsellModule`
+- New upvalue captured by `incrementUnpublishedPlaytestModeTooltipDisplayCount`: `tryReadData`
+- New upvalue captured by `incrementUnpublishedPlaytestModeTooltipDisplayCount`: `var12 (write)`
+- Upvalue no longer captured by `incrementUnpublishedPlaytestModeTooltipDisplayCount`: `readData`
+- Upvalue no longer captured by `incrementUnpublishedPlaytestModeTooltipDisplayCount`: `var3 (write)`
+- New function: `_`
+- New upvalue captured by `wasPushNotificationsUpsellShownToday`: `tryReadData`
+- New upvalue captured by `wasPushNotificationsUpsellShownToday`: `var9 (write)`
+- Upvalue no longer captured by `wasPushNotificationsUpsellShownToday`: `readData`
+- Upvalue no longer captured by `wasPushNotificationsUpsellShownToday`: `var1 (write)`
+- New upvalue captured by `markPushNotificationsUpsellShown`: `fFlagBuildAdUpsellModule`
+- New upvalue captured by `markPushNotificationsUpsellShown`: `tryReadData`
+- New upvalue captured by `markPushNotificationsUpsellShown`: `var9 (write)`
+- Upvalue no longer captured by `markPushNotificationsUpsellShown`: `readData`
+- Upvalue no longer captured by `markPushNotificationsUpsellShown`: `var1 (write)`
+- New function: `_`
+- New function: `loadAdUpsell`
+- New function: `retryAdUpsellRead`
+- New function: `persistCachedAdUpsell`
+- New function: `scheduleAdUpsellWriteRetry`
+- New function: `retryWrite`
+- New function: `persistAdUpsellMutation`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `rememberEvent`
+- New function: `pruneAnchorCaps`
+- New function: `addMilestone`
+- New function: `_`
+- New function: `recordAdUpsellEvent`
+- New function: `getAdUpsellState`
+- New function: `recordAdUpsellCompletedTurn`
+- New function: `recordAdUpsellPublish`
+- New function: `attachPendingAdUpsellMilestones`
+- New function: `pruneAdUpsellAnchors`
+- New function: `markAdUpsellAnchorImpressed`
+- New function: `markAdUpsellDismissedPermanently`
+- New upvalue captured by `isPushNotificationsUpsellDismissedPermanently`: `tryReadData`
+- New upvalue captured by `isPushNotificationsUpsellDismissedPermanently`: `var10 (write)`
+- Upvalue no longer captured by `isPushNotificationsUpsellDismissedPermanently`: `readData`
+- Upvalue no longer captured by `isPushNotificationsUpsellDismissedPermanently`: `var2 (write)`
+- New upvalue captured by `markPushNotificationsUpsellDismissedPermanently`: `fFlagBuildAdUpsellModule`
+- New upvalue captured by `markPushNotificationsUpsellDismissedPermanently`: `tryReadData`
+- New upvalue captured by `markPushNotificationsUpsellDismissedPermanently`: `var10 (write)`
+- Upvalue no longer captured by `markPushNotificationsUpsellDismissedPermanently`: `readData`
+- Upvalue no longer captured by `markPushNotificationsUpsellDismissedPermanently`: `var2 (write)`
+- New function: `_`
+- New upvalue captured by `clearSessionCacheForTests`: `var10 (write)`
+- New upvalue captured by `clearSessionCacheForTests`: `var11 (write)`
+- New upvalue captured by `clearSessionCacheForTests`: `var12 (write)`
+- New upvalue captured by `clearSessionCacheForTests`: `var13 (write)`
+- New upvalue captured by `clearSessionCacheForTests`: `var14 (write)`
+- New upvalue captured by `clearSessionCacheForTests`: `var15 (write)`
+- New upvalue captured by `clearSessionCacheForTests`: `var16 (write)`
+- New upvalue captured by `clearSessionCacheForTests`: `var17 (write)`
+- New upvalue captured by `clearSessionCacheForTests`: `var18 (write)`
+- New upvalue captured by `clearSessionCacheForTests`: `var9 (write)`
+- Upvalue no longer captured by `clearSessionCacheForTests`: `var1 (write)`
+- Upvalue no longer captured by `clearSessionCacheForTests`: `var2 (write)`
+- Upvalue no longer captured by `clearSessionCacheForTests`: `var3 (write)`
+- Removed function: `readData`
+- New variable: `buildExperience`
+- New variable: `fFlagBuildAdUpsellModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CreatorAgentChat/publishToolUtils.luau`
+- New parameter added to `getToolCallPublishedVersionNumber` (1 -> 2 params)
+- Upvalue no longer captured by `getToolCallPublishedVersionNumber`: `fFlagCreatorAgentChatParseDirectPublishVersion`
+- New parameter added to `getLatestSuccessfulResult` (1 -> 2 params)
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PurchasePrompt/PurchasePrompt/Components/ProductPurchase/ProductPurchaseContainer.luau`
+- New function: `BalanceNotShowingInExperimentIssueFix`
+- New upvalue captured by `determinePrompt`: `fFlagEnableInExperienceOffersPurchaseFlow`
+- Removed function: `cancelButtonPressed`
+- New variable: `fFlagEnableInExperienceOffersPurchaseFlow`
+- New variable: `fetchInGameItemCartPricingModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PurchasePrompt/PurchasePrompt/Components/RobuxUpsell/RobuxUpsellContainer.luau`
+- New upvalue captured by `init`: `fFlagEnableInExperienceOffersPurchaseFlow`
+- New upvalue captured by `init`: `requestTypeModule`
+- New upvalue captured by `fetchCartPricingForPurchasePrompt`: `fFlagEnableInExperienceOffersPurchaseFlow`
+- New upvalue captured by `fetchCartPricingForPurchasePrompt`: `requestTypeModule`
+- New variable: `fetchInGameItemCartPricingModule`
+- New variable: `requestTypeModule`
+- New variable: `sharedFlagsModule`
+- New variable: `fFlagEnableInExperienceOffersPurchaseFlow`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PurchasePrompt/PurchasePrompt/Selectors/selectCartPricingOverride.luau`
+- New parameter added to `_` (1 -> 2 params)
+- New upvalue captured by `_`: `fFlagEnableInExperienceOffersPurchaseFlow`
+- New upvalue captured by `_`: `requestTypeModule`
+- New variable: `parent`
+- New variable: `requestTypeModule`
+- New variable: `fFlagEnableInExperienceOffersPurchaseFlow`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PurchasePrompt/PurchasePrompt/Thunks/initiatePurchase.luau`
+- New variable: `fetchInGameItemCartPricingModule`
+- New variable: `fFlagEnableInExperienceOffersPurchaseFlow`
+- New variable: `appContextModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags.luau`
+- New variable: `sduiChartsPlaceholderMergeStrategySupport`
+- Removed variable: `fFlagSduiInputDataMergeStrategyModule`
+- Removed variable: `fFlagSduiInputDataMergeStrategyModule_1`
+
+
 ## 12642 - 2026-08-26 08:58
 
 ### New files

@@ -13,7 +13,6 @@ local getSduiComponentRegistryModule = require(sduiCoreSystem.getSduiComponentRe
 local validateInterfaceModule = require(sduiCoreSystem.validateInterface)
 local fFlagSduiNestedComponentListProp = require(parent.SharedFlags).FFlagSduiNestedComponentListProp
 local fFlagSduiPoolBackedFeed = require(parent.SharedFlags).FFlagSduiPoolBackedFeed
-local sduiDataBindingShallowEquals = game:DefineFastFlag("SduiDataBindingShallowEquals", false)
 
 local function SduiErrorComponent(_)
 	-- upvalues: reactModule (ref)
@@ -112,19 +111,19 @@ local function buildWrappedComponent(p1, p2, p3)
 end
 
 return function(p4)
-	-- upvalues: reactModule (ref), buildWrappedComponent (ref), compareSduiPropsModule (ref), fFlagSduiPoolBackedFeed (ref), signalsModule (ref), sduiDataBindingShallowEquals (ref), tutilsModule (ref), signalsReactModule (ref)
+	-- upvalues: reactModule (ref), buildWrappedComponent (ref), compareSduiPropsModule (ref), fFlagSduiPoolBackedFeed (ref), signalsModule (ref), tutilsModule (ref), signalsReactModule (ref)
 	return {
 		SduiClientBindingThinWrapper = reactModule.memo(function(p5)
 			-- upvalues: buildWrappedComponent (copy), p4 (ref)
 			return buildWrappedComponent(p4, p5)
 		end, compareSduiPropsModule),
 		SduiDataBindingWrapper = reactModule.memo(function(p5)
-			-- upvalues: fFlagSduiPoolBackedFeed (copy), reactModule (copy), signalsModule (copy), sduiDataBindingShallowEquals (copy), tutilsModule (copy), signalsReactModule (copy), buildWrappedComponent (copy), p4 (ref)
+			-- upvalues: fFlagSduiPoolBackedFeed (copy), reactModule (copy), signalsModule (copy), tutilsModule (copy), signalsReactModule (copy), buildWrappedComponent (copy), p4 (ref)
 			local propSignals = p5.componentConfig.propSignals
 			local isComponentFilteredSignal = p5.componentConfig.isComponentFilteredSignal
 			local var7 = if fFlagSduiPoolBackedFeed then p5.extraLocalPropSignals else nil
 			local var8 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-				-- upvalues: propSignals (ref), isComponentFilteredSignal (ref), var7 (ref), signalsModule (copy), fFlagSduiPoolBackedFeed (copy), sduiDataBindingShallowEquals (copy), tutilsModule (copy)
+				-- upvalues: propSignals (ref), isComponentFilteredSignal (ref), var7 (ref), signalsModule (copy), fFlagSduiPoolBackedFeed (copy), tutilsModule (copy)
 				assert(propSignals or (isComponentFilteredSignal or var7), "propSignals, isComponentFilteredSignal, or extraLocalPropSignals must exist")
 				
 				return signalsModule.createComputed(function(p6)
@@ -145,7 +144,7 @@ return function(p4)
 						t.__isComponentFiltered = true
 					end
 					return t
-				end, if sduiDataBindingShallowEquals then tutilsModule.shallowEqual else nil)
+				end, tutilsModule.shallowEqual)
 			end, {
 				propSignals,
 				isComponentFilteredSignal,

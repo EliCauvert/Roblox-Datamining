@@ -39,6 +39,7 @@ local useSessionSummaryModule = require(script.Parent.Chat.useSessionSummary)
 local fFlagEnableBuildExperienceScrollPerformanceTrackingModule = require(script.Parent.Flags.FFlagEnableBuildExperienceScrollPerformanceTracking)
 local var8 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then require(script.Parent.Telemetry.useScrollPerformanceTracker) else nil
 local fFlagBuildBackButtonChevronModule = require(script.Parent.Flags.FFlagBuildBackButtonChevron)
+local fFlagBuildAdUpsellModule = require(script.Parent.Flags.FFlagBuildAdUpsell)
 local fFlagEnableBuildAdPromotionModule = require(script.Parent.Flags.FFlagEnableBuildAdPromotion)
 local _ = require(script.Parent.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local getBuildExperienceRefreshStoreModule = require(script.Parent.Stores.GetBuildExperienceRefreshStore)
@@ -324,21 +325,22 @@ local list = {
 	{
 		BuildChat = {
 			screen = function(p3)
-				-- upvalues: buildNavigationParamsModule (ref), getBuildExperienceRefreshStoreModule (ref), useBuildPageLayoutModule (ref), useOnScreenKeyboardVisibleModule (ref), reactModule (ref), buildOverflowMenuScreensModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), var4 (ref), fFlagEnableBuildAdPromotionModule (ref), buildChatPageModule (ref), fullscreenPageWithSafeArea (ref), privateInvitesPickerHostModule (ref)
+				-- upvalues: buildNavigationParamsModule (ref), getBuildExperienceRefreshStoreModule (ref), useBuildPageLayoutModule (ref), fFlagBuildAdUpsellModule (ref), useNavigationFocus (ref), useOnScreenKeyboardVisibleModule (ref), reactModule (ref), buildOverflowMenuScreensModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), var4 (ref), fFlagEnableBuildAdPromotionModule (ref), buildChatPageModule (ref), fullscreenPageWithSafeArea (ref), privateInvitesPickerHostModule (ref)
 				local navigation = p3.navigation
 				local target = buildNavigationParamsModule.getTarget(navigation)
 				local var11 = getBuildExperienceRefreshStoreModule()
 				local var12 = useBuildPageLayoutModule()
-				local var13 = useOnScreenKeyboardVisibleModule()
-				local var14, var15 = reactModule.useState(false)
-				local var16 = if target ~= nil then nil else target.universeId
+				local var13 = if fFlagBuildAdUpsellModule then useNavigationFocus() else true
+				local var14 = useOnScreenKeyboardVisibleModule()
+				local var15, var16 = reactModule.useState(false)
+				local var17 = if target ~= nil then nil else target.universeId
 				
 				return reactModule.createElement(reactModule.Fragment, nil, {
 					Page = reactModule.createElement(fullscreenPageWithSafeArea, {
 						includeStatusBar = true,
 						BackgroundColor3 = var12.tokens.Color.Surface.Surface_0.Color3,
 						BackgroundTransparency = var12.tokens.Color.Surface.Surface_0.Transparency,
-						includeBottomBar = var12.shouldIncludeBottomBar and not var13
+						includeBottomBar = var12.shouldIncludeBottomBar and not var14
 					}, {
 						Page = if target ~= nil then nil else reactModule.createElement(buildChatPageModule, {
 							target = target,
@@ -367,25 +369,26 @@ local list = {
 								navigation.navigate(buildOverflowMenuScreensModule.SCREEN_BY_PAGE[p4], { target = target })
 							end, { navigation, target }),
 							onOpenInvitePicker = reactModule.useCallback(function()
-								-- upvalues: var15 (ref)
-								var15(true)
+								-- upvalues: var16 (ref)
+								var16(true)
 							end, {}),
 							onNavigateToResolvedTarget = reactModule.useCallback(function(p4)
 								-- upvalues: navigation (ref), var11 (ref)
 								navigation.setParams({ target = p4 })
 								var11.bumpRefreshTick()
-							end, { navigation, var11 })
+							end, { navigation, var11 }),
+							isFocused = if fFlagBuildAdUpsellModule then var13 else nil
 						})
 					}),
-					Picker = if var14 and var16 ~= nil then reactModule.createElement(privateInvitesPickerHostModule, {
-						universeId = var16,
+					Picker = if var15 and var17 ~= nil then reactModule.createElement(privateInvitesPickerHostModule, {
+						universeId = var17,
 						onClose = reactModule.useCallback(function()
-							-- upvalues: var15 (ref)
-							var15(false)
+							-- upvalues: var16 (ref)
+							var16(false)
 						end, {}),
 						onInvitesSent = reactModule.useCallback(function()
-							-- upvalues: var15 (ref), navigation (ref), buildOverflowMenuScreensModule (copy), target (ref)
-							var15(false)
+							-- upvalues: var16 (ref), navigation (ref), buildOverflowMenuScreensModule (copy), target (ref)
+							var16(false)
 							navigation.navigate(buildOverflowMenuScreensModule.Screens.BuildPlaytestInviteManagement, { target = target })
 						end, { navigation, target })
 					}) else nil
