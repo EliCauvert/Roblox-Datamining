@@ -1870,13 +1870,16 @@ Feature.Build.Description.RaiseLimitOrWait,Aumenta il tuo limite giornaliero di 
 Feature.Build.Description.RatingAgreement,"Pubblicando, confermi che questa classificazione dei contenuti è corretta."
 Feature.Build.Description.RestoreLatest,Questa versione diventerà la tua ultima versione pubblicata.
 Feature.Build.Description.RevertToVersion,Conferma per ripristinare l'ultima modifica e tornare a {VERSION}.
+Feature.Build.Description.ShareLatest,Condividi le modifiche apportate alla tua ultima versione.
 Feature.Build.Description.VersionChanges,Spiega ai giocatori cosa è cambiato in questa versione.
 Feature.Build.Header.AccessSharing,Accesso e condivisione
+Feature.Build.Header.AllVersions,Tutte le versioni
 Feature.Build.Header.ContentMaturity,Maturità contenuti
 Feature.Build.Header.CustomAnswer,Risposta personalizzata
 Feature.Build.Header.GameDetails,Dettagli del gioco
 Feature.Build.Header.Overview,Panoramica
 Feature.Build.Header.PastCampaigns,Campagne passate
+Feature.Build.Header.UpdateDetails,Aggiorna i dettagli
 Feature.Build.Label.Access,Accesso
 Feature.Build.Label.AdClicks,Clic sugli annunci
 Feature.Build.Label.AdViews,Visualizzazioni degli annunci
@@ -2007,6 +2010,7 @@ Feature.Build.Label.ToolThumbnailRunning,Impostazione miniatura del gioco in cor
 Feature.Build.Label.UniverseNumber,Universo {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Sconosciuto
 Feature.Build.Label.UnlimitedUsed,{USED} utilizzati • Senza limiti
+Feature.Build.Label.UpdateTitleDesc,Aggiorna titolo e descrizione
 Feature.Build.Label.Updated,Aggiornato
 Feature.Build.Label.Usage,Utilizzo
 Feature.Build.Label.UsageUsed,{USED} utilizzato
@@ -2123,8 +2127,10 @@ Feature.Build.Title.RevertLastChange,Ripristinare l'ultima modifica?
 Feature.Build.Title.Tasks,Attività
 Feature.Build.Title.TurnActivity,Gira attività
 Feature.Build.Title.VersionHistory,Cronologia versioni
+Feature.Build.Title.VersionInfo,Informazioni versione
 Feature.Build.Title.VersionInformation,Informazioni sulla versione
 Feature.Build.Title.VersionNumber,Versione {VERSION}
+Feature.Build.Title.Versions,Versioni
 Feature.Build.Title.WhatsIncluded,Cosa è incluso?
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Consenti
@@ -2778,6 +2784,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Il nome visualizzato non è di
 Feature.DisplayName.ErrorMessage.NameTooLong,Il nome visualizzato deve includere al massimo 20 caratteri.
 Feature.DisplayName.ErrorMessage.NameTooShort,
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Il nome visualizzato contiene caratteri non supportati.
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,Per {num} giorno
 Feature.Durables.BottomBar.RentalDurationPlural,Per {num} giorni
 Feature.Durables.FTUX.Tooltip,Scegli per quanti giorni vuoi possedere l'articolo. Il timer si avvia dopo l'acquisto.
@@ -2788,6 +2795,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} giorno
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} giorni
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Opzioni
 Feature.Durables.Label.ItemExpires,L'articolo scade
+Feature.Durables.PartiallyExpiredItems.BodyText,Alcuni articoli di questo avatar salvato sono scaduti e sono stati rimossi.
+Feature.Durables.PartiallyExpiredItems.TitleText,Articoli scaduti
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} giorni (inizia dopo l'acquisto)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,Nessuna connessione a Internet
@@ -3529,6 +3538,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Modifica nome
 Feature.Profile.Heading.EditDisplayName,Modifica Nome visualizzato
 Feature.Profile.Heading.InsufficientFunds,Fondi Insufficienti
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,Cornice del profilo
+Feature.Profile.Heading.ProfilePictureSaved,Immagine del profilo salvata correttamente
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Statistiche
 Feature.Profile.Heading.Username,Nome Utente
@@ -4110,6 +4121,7 @@ Feature.Subscription.Text.PerMonth,/mese
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,Il tuo avatar è stato ripristinato per il seguente motivo: {rule}. Puoi continuare a utilizzare il Marketplace ma le modifiche al tuo avatar non verranno salvate fino alle ore {time}.
 Feature.Timeout.Prompt.SaveTitleText,Il salvataggio è disabilitato per il momento
+Feature.Timeout.Prompt.TitleText,Abbiamo ripristinato il tuo avatar
 Feature.Timeout.WarningBanner.DisabledMessage,Salvataggio dell'avatar disabilitato
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Salvataggio dell'avatar disabilitato fino alle ore {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Sbloccato

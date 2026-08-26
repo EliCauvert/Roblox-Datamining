@@ -1889,13 +1889,16 @@ Feature.Build.Description.RaiseLimitOrWait,"Zwiększ swój dzienny limit Robuxó
 Feature.Build.Description.RatingAgreement,"Publikując, potwierdzasz, że ta ocena treści jest prawidłowa."
 Feature.Build.Description.RestoreLatest,Ta wersja stanie się Twoją najnowszą opublikowaną wersją.
 Feature.Build.Description.RevertToVersion,"Potwierdź, aby cofnąć ostatnią zmianę i wrócić do wersji {VERSION}."
+Feature.Build.Description.ShareLatest,Udostępnij informacje dotyczące zmian w najnowszej wersji.
 Feature.Build.Description.VersionChanges,"Powiedz graczom, co zmieniło się w tej wersji."
 Feature.Build.Header.AccessSharing,Dostęp i udostępnianie
+Feature.Build.Header.AllVersions,Wszystkie wersje
 Feature.Build.Header.ContentMaturity,Poziom treści dla dorosłych
 Feature.Build.Header.CustomAnswer,Odpowiedź niestandardowa
 Feature.Build.Header.GameDetails,Szczegóły gry
 Feature.Build.Header.Overview,Przegląd
 Feature.Build.Header.PastCampaigns,Poprzednie kampanie
+Feature.Build.Header.UpdateDetails,Zaktualizuj szczegóły
 Feature.Build.Label.Access,Dostęp
 Feature.Build.Label.AdClicks,Kliknięcia reklam
 Feature.Build.Label.AdViews,Wyświetlenia reklam
@@ -2026,6 +2029,7 @@ Feature.Build.Label.ToolThumbnailRunning,Ustawiam miniaturę gry
 Feature.Build.Label.UniverseNumber,Uniwersum {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Brak informacji
 Feature.Build.Label.UnlimitedUsed,Wykorzystano {USED} • Brak limitu
+Feature.Build.Label.UpdateTitleDesc,Zaktualizuj tytuł i opis
 Feature.Build.Label.Updated,Zaktualizowano
 Feature.Build.Label.Usage,Użycie
 Feature.Build.Label.UsageUsed,Wykorzystano {USED}
@@ -2142,8 +2146,10 @@ Feature.Build.Title.RevertLastChange,Cofnąć ostatnią zmianę?
 Feature.Build.Title.Tasks,Zadania
 Feature.Build.Title.TurnActivity,Obróć aktywność
 Feature.Build.Title.VersionHistory,Historia wersji
-Feature.Build.Title.VersionInformation,Informacje o wersji
+Feature.Build.Title.VersionInfo,Informacje o wersji
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,Wersja {VERSION}
+Feature.Build.Title.Versions,Wersje
 Feature.Build.Title.WhatsIncluded,Co jest uwzględnione?
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Zezwól
@@ -2797,6 +2803,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Nazwa wyświetlana jest niedos
 Feature.DisplayName.ErrorMessage.NameTooLong,Nazwa wyświetlana powinna zawierać maksymalnie 20 znaków
 Feature.DisplayName.ErrorMessage.NameTooShort,Nazwa wyświetlana powinna zawierać co najmniej 3 znaki
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Nazwa wyświetlana zawiera nieobsługiwane znaki
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,Na {num} dzień
 Feature.Durables.BottomBar.RentalDurationPlural,Na {num} dni
 Feature.Durables.FTUX.Tooltip,"Wybierz, przez ile dni chcesz posiadać ten przedmiot. Licznik czasu uruchamia się po zakupie."
@@ -2807,6 +2814,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} dzień
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} dni
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Opcje
 Feature.Durables.Label.ItemExpires,Termin wygaśnięcia
+Feature.Durables.PartiallyExpiredItems.BodyText,Niektóre elementy tego zapisanego awatara wygasły i zostały usunięte.
+Feature.Durables.PartiallyExpiredItems.TitleText,Przedmioty wygasły
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} dni (licznik czasu uruchamia się po zakupie)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,Brak połączenia z Internetem
@@ -3548,6 +3557,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edycja nazwy
 Feature.Profile.Heading.EditDisplayName,Edytuj nazwę wyświetlaną
 Feature.Profile.Heading.InsufficientFunds,Za mało środków
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,Ramka profilu
+Feature.Profile.Heading.ProfilePictureSaved,Zdjęcie profilowe zostało zapisane
 Feature.Profile.Heading.ProfileQRCode,Udostępnianie kodu QR
 Feature.Profile.Heading.Statistics,Statystyki
 Feature.Profile.Heading.Username,
@@ -4129,6 +4140,7 @@ Feature.Subscription.Text.PerMonth,/miesiąc
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"Twój awatar został zresetowany z powodu {rule}. Nadal możesz korzystać z Rynku, ale zmiany w awatarze nie zostaną zapisane do {time}."
 Feature.Timeout.Prompt.SaveTitleText,Zapisywanie jest obecnie wyłączone
+Feature.Timeout.Prompt.TitleText,Zresetowaliśmy Twojego awatara
 Feature.Timeout.WarningBanner.DisabledMessage,Zapisywanie awatara zostało wyłączone
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Zapisywanie awatara zostało wyłączone do {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Odblokowano

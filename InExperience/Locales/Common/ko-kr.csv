@@ -1888,13 +1888,16 @@ Feature.Build.Description.RaiseLimitOrWait,"계속 제작하려면 일일 Robux 
 Feature.Build.Description.RatingAgreement,게시하면 이 콘텐츠 등급이 정확하다는 데 동의하는 것으로 간주됩니다.
 Feature.Build.Description.RestoreLatest,이 버전이 최신 게시 버전이 됩니다.
 Feature.Build.Description.RevertToVersion,확인을 눌러 최신 변경 사항을 복구하고 {VERSION} 버전으로 돌아가세요.
+Feature.Build.Description.ShareLatest,최신 버전에서 변경된 사항을 공유하세요.
 Feature.Build.Description.VersionChanges,이 버전에서 변경된 사항을 플레이어에게 알려주세요.
 Feature.Build.Header.AccessSharing,액세스 및 공유
+Feature.Build.Header.AllVersions,모든 버전
 Feature.Build.Header.ContentMaturity,콘텐츠 수위
 Feature.Build.Header.CustomAnswer,사용자 정의 답변
 Feature.Build.Header.GameDetails,게임 세부 정보
 Feature.Build.Header.Overview,
 Feature.Build.Header.PastCampaigns,과거 캠페인
+Feature.Build.Header.UpdateDetails,세부 정보 업데이트
 Feature.Build.Label.Access,액세스
 Feature.Build.Label.AdClicks,광고 클릭 수
 Feature.Build.Label.AdViews,광고 조회수
@@ -2025,6 +2028,7 @@ Feature.Build.Label.ToolThumbnailRunning,게임 섬네일 설정 중
 Feature.Build.Label.UniverseNumber,{UNIVERSE_ID} 유니버스
 Feature.Build.Label.Unknown,알 수 없음
 Feature.Build.Label.UnlimitedUsed,{USED} 사용됨 • 한도 없음
+Feature.Build.Label.UpdateTitleDesc,제목 및 설명 업데이트
 Feature.Build.Label.Updated,업데이트 시간
 Feature.Build.Label.Usage,사용량
 Feature.Build.Label.UsageUsed,{USED} 사용됨
@@ -2141,8 +2145,10 @@ Feature.Build.Title.RevertLastChange,마지막 변경 사항을 되돌리시겠�
 Feature.Build.Title.Tasks,작업
 Feature.Build.Title.TurnActivity,턴 활동
 Feature.Build.Title.VersionHistory,버전 기록
-Feature.Build.Title.VersionInformation,버전 정보
+Feature.Build.Title.VersionInfo,버전 정보
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,{VERSION} 버전
+Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,포함 사항
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,허용
@@ -2797,6 +2803,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,표시 이름을 사용할 수
 Feature.DisplayName.ErrorMessage.NameTooLong,표시 이름의 최대 길이는 20자입니다
 Feature.DisplayName.ErrorMessage.NameTooShort,표시 이름의 길이는 최소 3자 이상이어야 합니다
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,표시 이름에 지원되지 않는 문자가 있습니다
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,{num}일 동안
 Feature.Durables.BottomBar.RentalDurationPlural,
 Feature.Durables.FTUX.Tooltip,아이템을 보유할 기간을 선택하세요. 구매 후 타이머가 시작됩니다.
@@ -2807,6 +2814,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num}일
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,옵션
 Feature.Durables.Label.ItemExpires,아이템 만료 일자
+Feature.Durables.PartiallyExpiredItems.BodyText,저장된 아바타의 일부 아이템이 만료되어 삭제되었습니다.
+Feature.Durables.PartiallyExpiredItems.TitleText,만료된 아이템
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days}일(구매 후 시작)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,인터넷에 연결되지 않음
@@ -3549,6 +3558,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,이름 편집
 Feature.Profile.Heading.EditDisplayName,표시 이름 편집
 Feature.Profile.Heading.InsufficientFunds,비용 부족
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,프로필 프레임
+Feature.Profile.Heading.ProfilePictureSaved,프로필 사진이 성공적으로 저장되었습니다
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,통계
 Feature.Profile.Heading.Username,
@@ -4130,6 +4141,7 @@ Feature.Subscription.Text.PerMonth,/월
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,아바타가 {rule}에 따라 재설정되었습니다. 마켓플레이스는 계속 사용할 수 있지만 {time}까지 아바타 변경 사항은 저장되지 않습니다.
 Feature.Timeout.Prompt.SaveTitleText,현재 저장 기능이 비활성화되어 있습니다
+Feature.Timeout.Prompt.TitleText,아바타를 재설정했습니다
 Feature.Timeout.WarningBanner.DisabledMessage,아바타 저장이 비활성화됨
 Feature.Timeout.WarningBanner.DisabledUntilMessage,{time}까지 아바타 저장이 비활성화됨
 Feature.Toast.Heading.PurchaseMessage.Success,

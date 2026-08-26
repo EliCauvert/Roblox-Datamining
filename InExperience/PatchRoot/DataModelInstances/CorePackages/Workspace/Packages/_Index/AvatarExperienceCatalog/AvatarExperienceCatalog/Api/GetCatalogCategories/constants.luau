@@ -1,0 +1,4 @@
+﻿return {
+	FETCH_CATALOG_CATEGORIES_LATENCY_COUNTER_NAME = "NetworkFetchCatalogCategoriesLatency",
+	FETCH_CATALOG_CATEGORIES_MODEL_MISMATCH_COUNTER_NAME = "NetworkFetchCatalogCategoriesModelMismatch"
+}

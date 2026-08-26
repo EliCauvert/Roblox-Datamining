@@ -1888,13 +1888,16 @@ Feature.Build.Description.RaiseLimitOrWait,提高每日 Robux 上限以繼續創
 Feature.Build.Description.RatingAgreement,發佈即表示您同意此內容分級準確無誤。
 Feature.Build.Description.RestoreLatest,此版本將成為你的最新發佈版本。
 Feature.Build.Description.RevertToVersion,確認以還原最新變更並回到 {VERSION}。
+Feature.Build.Description.ShareLatest,分享最新版本的變更內容。
 Feature.Build.Description.VersionChanges,告訴玩家此版本有哪些變更。
 Feature.Build.Header.AccessSharing,存取權與分享
+Feature.Build.Header.AllVersions,所有版本
 Feature.Build.Header.ContentMaturity,成年適宜內容
 Feature.Build.Header.CustomAnswer,自訂答案
 Feature.Build.Header.GameDetails,遊戲詳情
 Feature.Build.Header.Overview,概覽
 Feature.Build.Header.PastCampaigns,過往的廣告活動
+Feature.Build.Header.UpdateDetails,更新詳細資訊
 Feature.Build.Label.Access,存取權
 Feature.Build.Label.AdClicks,廣告點擊次數
 Feature.Build.Label.AdViews,廣告觀看次數
@@ -2025,6 +2028,7 @@ Feature.Build.Label.ToolThumbnailRunning,正在設定遊戲縮圖
 Feature.Build.Label.UniverseNumber,宇宙 {UNIVERSE_ID}
 Feature.Build.Label.Unknown,未知
 Feature.Build.Label.UnlimitedUsed,已使用 {USED} • 無上限
+Feature.Build.Label.UpdateTitleDesc,更新標題和說明
 Feature.Build.Label.Updated,已更新
 Feature.Build.Label.Usage,使用量
 Feature.Build.Label.UsageUsed,已使用 {USED}
@@ -2141,8 +2145,10 @@ Feature.Build.Title.RevertLastChange,是否要還原上次的變更？
 Feature.Build.Title.Tasks,任務
 Feature.Build.Title.TurnActivity,回合活動
 Feature.Build.Title.VersionHistory,版本歷史紀錄
-Feature.Build.Title.VersionInformation,版本資訊
+Feature.Build.Title.VersionInfo,版本資訊
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,版本 {VERSION}
+Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,包含哪些內容？
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,允許
@@ -2796,6 +2802,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,顯示名稱無法使用
 Feature.DisplayName.ErrorMessage.NameTooLong,顯示名稱應含有 20 個字元以下
 Feature.DisplayName.ErrorMessage.NameTooShort,顯示名稱至少要有 3 個字元
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,顯示名稱含有未支援的字元
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,{num} 天
 Feature.Durables.BottomBar.RentalDurationPlural,
 Feature.Durables.FTUX.Tooltip,選擇想擁有該物品的天數。計時器會在購買後開始。
@@ -2806,6 +2813,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,選項
 Feature.Durables.Label.ItemExpires,物品有效期限
+Feature.Durables.PartiallyExpiredItems.BodyText,此已儲存虛擬人偶的部分道具已過期並已移除。
+Feature.Durables.PartiallyExpiredItems.TitleText,道具已過期
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} 天（購買後開始計算）
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,若要依據歐盟《數位服務法》 檢舉違法內容，請前往：https://www.roblox.com/illegal-content-reporting
 Feature.EmptyStatePage.Message.NoInternet,沒有網路連線
@@ -3547,6 +3556,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,編輯名稱
 Feature.Profile.Heading.EditDisplayName,編輯顯示名稱
 Feature.Profile.Heading.InsufficientFunds,資金不足
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,個人檔案外框
+Feature.Profile.Heading.ProfilePictureSaved,已成功儲存個人檔案照片
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,數據
 Feature.Profile.Heading.Username,
@@ -4128,6 +4139,7 @@ Feature.Subscription.Text.PerMonth,/ 月
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,由於{rule}，你的虛擬人偶已重置。你仍然可以使用市集，但虛擬人偶的變更將不會儲存，時間持續至 {time} 為止。
 Feature.Timeout.Prompt.SaveTitleText,目前已停用儲存功能
+Feature.Timeout.Prompt.TitleText,你的虛擬人偶已重置
 Feature.Timeout.WarningBanner.DisabledMessage,已停用虛擬人偶儲存功能
 Feature.Timeout.WarningBanner.DisabledUntilMessage,虛擬人偶儲存功能已停用，時間持續至 {time} 為止
 Feature.Toast.Heading.PurchaseMessage.Success,已解鎖

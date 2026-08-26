@@ -1869,13 +1869,16 @@ Feature.Build.Description.RaiseLimitOrWait,قم بزيادة الحد اليوم
 Feature.Build.Description.RatingAgreement,من خلال النشر، فإنك توافق على دقة تصنيف هذا المحتوى.
 Feature.Build.Description.RestoreLatest,سيصبح هذا الإصدار أحدث إصدار منشور لك.
 Feature.Build.Description.RevertToVersion,تأكيد التراجع عن التغيير الأخير والرجوع إلى {VERSION}.
+Feature.Build.Description.ShareLatest,شارك التغييرات التي أُجريت على أحدث إصدار لديك.
 Feature.Build.Description.VersionChanges,أخبر اللاعبين بما تغير في هذا الإصدار.
 Feature.Build.Header.AccessSharing,إمكانية الوصول والمشاركة
+Feature.Build.Header.AllVersions,جميع الإصدارات
 Feature.Build.Header.ContentMaturity,حساسية المحتوى
 Feature.Build.Header.CustomAnswer,إجابة مخصصة
 Feature.Build.Header.GameDetails,تفاصيل اللعبة
 Feature.Build.Header.Overview,نظرة عامة
 Feature.Build.Header.PastCampaigns,الحملات السابقة
+Feature.Build.Header.UpdateDetails,تحديث التفاصيل
 Feature.Build.Label.Access,الوصول
 Feature.Build.Label.AdClicks,عدد مرات الضغط على الإعلان
 Feature.Build.Label.AdViews,عدد مرات عرض الإعلان
@@ -2006,6 +2009,7 @@ Feature.Build.Label.ToolThumbnailRunning,جارٍ إعداد الصورة الم
 Feature.Build.Label.UniverseNumber,الكون {UNIVERSE_ID}
 Feature.Build.Label.Unknown,غير معروف
 Feature.Build.Label.UnlimitedUsed,تم استخدام {USED} • بلا حد أقصى
+Feature.Build.Label.UpdateTitleDesc,حدِّث العنوان والوصف
 Feature.Build.Label.Updated,تم التحديث
 Feature.Build.Label.Usage,الاستخدام
 Feature.Build.Label.UsageUsed,تم استخدام {USED}
@@ -2122,8 +2126,10 @@ Feature.Build.Title.RevertLastChange,هل تريد التراجع عن التغ�
 Feature.Build.Title.Tasks,المهام
 Feature.Build.Title.TurnActivity,نشاط الدور
 Feature.Build.Title.VersionHistory,سجل الإصدارات
-Feature.Build.Title.VersionInformation,معلومات الإصدار
+Feature.Build.Title.VersionInfo,معلومات الإصدار
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,الإصدار {VERSION}
+Feature.Build.Title.Versions,الإصدارات
 Feature.Build.Title.WhatsIncluded,ما الذي تشمله الحملة؟
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,السماح
@@ -2777,6 +2783,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,اسم العرض غير مت�
 Feature.DisplayName.ErrorMessage.NameTooLong,لا يمكن أن يحتوي الاسم على أكثر من 20 حرفاً
 Feature.DisplayName.ErrorMessage.NameTooShort,لا بد أن يكون اسم العرض 3 أحرف على الأقل
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,اسم العرض يحتوي على أحرف غير مدعومة
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,لمدة {num} يوم
 Feature.Durables.BottomBar.RentalDurationPlural,لمدة {num} من الأيام
 Feature.Durables.FTUX.Tooltip,اختَر عدد الأيام التي تريد امتلاك العنصر فيها. يبدأ المؤقت بعد الشراء.
@@ -2787,6 +2794,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} يوم
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} من الأيام
 Feature.Durables.ItemDetails.WearTimeOptions.Title,الخيارات
 Feature.Durables.Label.ItemExpires,انتهاء صلاحية العنصر
+Feature.Durables.PartiallyExpiredItems.BodyText,انتهت صلاحية بعض العناصر في هذا الأفاتار المحفوظ وتمت إزالتها.
+Feature.Durables.PartiallyExpiredItems.TitleText,انتهت صلاحية العناصر
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} من الأيام (تبدأ بعد الشراء)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,للإبلاغ عن محتوى غير قانوني كما حدده قانون الخدمات الرقمية الأوروبي، يرجى زيارة الموقع التالي: https://www.roblox.com/illegal-content-reporting
 Feature.EmptyStatePage.Message.NoInternet,لا يوجد اتصال بالإنترنت
@@ -3528,6 +3537,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,تحرير الاسم
 Feature.Profile.Heading.EditDisplayName,تعديل اسم العرض
 Feature.Profile.Heading.InsufficientFunds,رصيد غير كافي
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,إطار الملف الشخصي
+Feature.Profile.Heading.ProfilePictureSaved,تم حفظ صورة الملف الشخصي بنجاح
 Feature.Profile.Heading.ProfileQRCode,مشاركة رمز QR
 Feature.Profile.Heading.Statistics,الإحصائيات
 Feature.Profile.Heading.Username,
@@ -4109,6 +4120,7 @@ Feature.Subscription.Text.PerMonth,/ شهر
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,تمت إعادة تعيين أفاتارك بسبب {rule}. لا يزال بإمكانك استخدام المتجر، ولكن لن يتم حفظ التغييرات التي تطرأ على أفاتارك حتى {time}.
 Feature.Timeout.Prompt.SaveTitleText,تم تعطيل الحفظ في الوقت الحالي
+Feature.Timeout.Prompt.TitleText,أعدنا تعيين أفاتارك
 Feature.Timeout.WarningBanner.DisabledMessage,تم تعطيل حفظ الأفاتار
 Feature.Timeout.WarningBanner.DisabledUntilMessage,تم تعطيل حفظ أفاتارك حتى {time}
 Feature.Toast.Heading.PurchaseMessage.Success,فتح القفل

@@ -26,6 +26,7 @@ local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOv
 local _ = require(buildExperience.Chat.useChatSessionCore)
 local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
 local fFlagBuildExperienceAssetLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceAssetLibrary)
+local fFlagBuildExperienceRemoveAgentTaskUiModule = require(buildExperience.Flags.FFlagBuildExperienceRemoveAgentTaskUi)
 local fFlagEnableBuildExperienceScrollPerformanceTrackingModule = require(buildExperience.Flags.FFlagEnableBuildExperienceScrollPerformanceTracking)
 local fFlagEnableBuildOverflowMenuForNewGamesModule = require(buildExperience.Flags.FFlagEnableBuildOverflowMenuForNewGames)
 local fFlagBuildExperienceChatImageAttachmentsModule = require(buildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
@@ -76,7 +77,7 @@ local function toTodoItems(p3)
 end
 
 return function(p4)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildAdUpsellModule (ref), useTokens (ref), reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var3 (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), chatConstantsModule (ref), pushNotificationsUpsellCardModule (ref), var1 (ref), view (ref), fFlagBuildExperienceAssetLibraryModule (ref), subagentTaskStatus (ref), subagentStatusModule (ref), fFlagBuildDesktopReadinessModule (ref), buyMoreRobuxCardModule (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), iconButton (ref), iconName (ref), inputSize (ref), text (ref), playButtonModule (ref), buttonVariant (ref), agentDetailMenuModule (ref), buildOverflowMenuButtonModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), scrollView (ref), foundationModule (ref), divider (ref), toTodoItems (ref), var2 (ref)
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildAdUpsellModule (ref), useTokens (ref), reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var3 (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), chatConstantsModule (ref), pushNotificationsUpsellCardModule (ref), var1 (ref), view (ref), subagentTaskStatus (ref), subagentStatusModule (ref), fFlagBuildDesktopReadinessModule (ref), buyMoreRobuxCardModule (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), iconButton (ref), iconName (ref), inputSize (ref), text (ref), playButtonModule (ref), buttonVariant (ref), agentDetailMenuModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), buildOverflowMenuButtonModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), scrollView (ref), foundationModule (ref), divider (ref), toTodoItems (ref), var2 (ref)
 	local var4 = if fFlagBuildLocalization then useLocalization({
 		composerPlaceholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER,
 		adUpsellCongrats = if fFlagBuildAdUpsellModule then if p4.adUpsellFreePromotionsRemaining == 1 then localizationStringsModule.AD_UPSELL_CONGRATS_SINGULAR else {
@@ -90,7 +91,7 @@ return function(p4)
 	if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then
 		var3("LuaApp_Build_Chat_Scroll", var6)
 	end
-	local var7
+	local var7, v
 	local var8 = reactModule.useCallback(function(p5)
 		-- upvalues: var6 (ref), p4 (ref)
 		var6.current = p5
@@ -109,7 +110,8 @@ return function(p4)
 		end
 		var7 = nil
 	end
-	taskState = chatMessageListModule({
+	taskState = not fFlagBuildExperienceRemoveAgentTaskUiModule
+	selectedChipGroupName = chatMessageListModule({
 		messages = p4.messages,
 		clockBinding = p4.clockBinding,
 		localToolActions = p4.localToolActions,
@@ -118,18 +120,18 @@ return function(p4)
 		onPlaytest = p4.onPlaytest,
 		isPlaytestLoading = p4.isPlaytestLoading
 	})
-	selectedChipGroupName = false
+	local var9 = false
 	
-	for i, v in p4.messages do
+	for v, v in p4.messages do
 		if v.kind == "user_message" then
-			selectedChipGroupName = true
+			var9 = true
 			break
 		end
 	end
 	local MESSAGE_LAYOUT_ORDER_STRIDE = chatConstantsModule.MESSAGE_LAYOUT_ORDER_STRIDE
 	
-	if p4.showPushNotificationsUpsell and selectedChipGroupName and p4.isAssistantResponding then
-		taskState.PushNotificationsUpsell = reactModule.createElement(pushNotificationsUpsellCardModule, {
+	if p4.showPushNotificationsUpsell and var9 and p4.isAssistantResponding then
+		selectedChipGroupName.PushNotificationsUpsell = reactModule.createElement(pushNotificationsUpsellCardModule, {
 			LayoutOrder = (#p4.messages + 1) * MESSAGE_LAYOUT_ORDER_STRIDE,
 			isRequestPending = p4.isPushNotificationsRequestPending,
 			shouldOpenSettings = p4.shouldOpenPushNotificationsSettings,
@@ -141,21 +143,21 @@ return function(p4)
 	if fFlagBuildAdUpsellModule then
 		local t = {}
 		
-		for i_1, v_2 in p4.adUpsellCards do
-			local anchorIndex = t[v_2.anchorIndex] or {}
-			table.insert(anchorIndex, v_2)
-			t[v_2.anchorIndex] = anchorIndex
+		for i_1, v_1 in p4.adUpsellCards do
+			local anchorIndex = t[v_1.anchorIndex] or {}
+			table.insert(anchorIndex, v_1)
+			t[v_1.anchorIndex] = anchorIndex
 		end
-		for i_2, v_3 in t do
+		for i_2, v_2 in t do
 			local t_1 = {}
 			local t_2 = {}
 			
-			for i_3, v_4 in v_3 do
-				table.insert(t_2, v_4.id)
-				t_1[v_4.id] = reactModule.createElement(var1, {
-					anchorId = v_4.id,
-					order = v_4.order,
-					isImpressed = v_4.isImpressed,
+			for i_3, v_3 in v_2 do
+				table.insert(t_2, v_3.id)
+				t_1[v_3.id] = reactModule.createElement(var1, {
+					anchorId = v_3.id,
+					order = v_3.order,
+					isImpressed = v_3.isImpressed,
 					congratsText = if fFlagBuildLocalization then var4.adUpsellCongrats else localizationStringsModule.formatAdUpsellCongrats(p4.adUpsellFreePromotionsRemaining),
 					isCreatePending = p4.isAdUpsellCreatePending,
 					isPageVisible = p4.isAdUpsellVisible,
@@ -165,7 +167,7 @@ return function(p4)
 					scrollingFrameRef = var6
 				})
 			end
-			taskState[`AdUpsellGroup:{table.concat(t_2, "|")}`] = reactModule.createElement(view, {
+			selectedChipGroupName[`AdUpsellGroup:{table.concat(t_2, "|")}`] = reactModule.createElement(view, {
 				tag = "col gap-medium size-full-0 auto-y",
 				LayoutOrder = i_2 * MESSAGE_LAYOUT_ORDER_STRIDE + 1,
 				testId = `AdUpsellGroup.{i_2}`
@@ -174,27 +176,27 @@ return function(p4)
 	end
 	local t = {}
 	
-	if not fFlagBuildExperienceAssetLibraryModule and p4.taskState ~= nil then
-		for i_1, v_2 in p4.taskState.groups do
-			local var9 = if v_2.isLoading then subagentTaskStatus.InProgress elseif v_2.isComplete then subagentTaskStatus.Done else subagentTaskStatus.Pending
+	if taskState and p4.taskState ~= nil then
+		for i_1, v_1 in p4.taskState.groups do
+			local var10 = if v_1.isLoading then subagentTaskStatus.InProgress elseif v_1.isComplete then subagentTaskStatus.Done else subagentTaskStatus.Pending
 			t[`Group{i_1}`] = reactModule.createElement(subagentStatusModule.Root, {
 				layoutOrder = i_1,
-				text = v_2.name,
-				isChecked = v_2.isComplete,
+				text = v_1.name,
+				isChecked = v_1.isComplete,
 				onActivated = function()
-					-- upvalues: p4 (ref), v_2 (ref)
-					p4.onChipActivated(v_2.name)
+					-- upvalues: p4 (ref), v_1 (ref)
+					p4.onChipActivated(v_1.name)
 				end,
-				testId = `BuildChatPage.SubagentStatus.{v_2.name}`
+				testId = `BuildChatPage.SubagentStatus.{v_1.name}`
 			}, {
-				Indicator = if var9 ~= subagentTaskStatus.Pending then nil else reactModule.createElement(subagentStatusModule.LoadingIndicator, {
-					status = var9,
-					testId = `BuildChatPage.SubagentStatus.{v_2.name}.Indicator`
+				Indicator = if var10 ~= subagentTaskStatus.Pending then nil else reactModule.createElement(subagentStatusModule.LoadingIndicator, {
+					status = var10,
+					testId = `BuildChatPage.SubagentStatus.{v_1.name}.Indicator`
 				})
 			})
 		end
 	end
-	local var10 = reactModule.createElement(view, {
+	local var11 = reactModule.createElement(view, {
 		testId = "BuildChatPage.ActionBody",
 		LayoutOrder = if fFlagBuildDesktopReadinessModule then nil else 3,
 		tag = {
@@ -229,8 +231,9 @@ return function(p4)
 			onStop = p4.onStop
 		})
 	})
+	v = reactModule.createElement
 	
-	return reactModule.createElement(view, {
+	return v(view, {
 		tag = "col align-x-center size-full bg-surface-0",
 		onAbsolutePositionChanged = p4.onPageMetricsChanged,
 		onAbsoluteSizeChanged = p4.onPageMetricsChanged,
@@ -267,14 +270,19 @@ return function(p4)
 					onActivated = p4.onPlayActivated,
 					variant = buttonVariant.Utility
 				}),
-				AgentDetail = reactModule.createElement(agentDetailMenuModule, {
-					layoutOrder = 4,
+				AgentDetail = if taskState then reactModule.createElement(agentDetailMenuModule, { layoutOrder = 4, onActivated = p4.onOpenAgentsPage }) else nil,
+				AssetLibrary = if fFlagBuildExperienceAssetLibraryModule then reactModule.createElement(iconButton, {
+					LayoutOrder = 5,
+					isCircular = true,
+					testId = "build-header-asset-library-menu",
+					icon = iconName.SquaresGridPlus,
 					isDisabled = p4.isAgentDetailDisabled,
-					icon = p4.agentDetailIcon,
-					onActivated = p4.onOpenAgentsPage
-				}),
+					onActivated = p4.onOpenAssetLibraryPage,
+					size = inputSize.Medium,
+					variant = buttonVariant.Utility
+				}) else nil,
 				Overflow = reactModule.createElement(buildOverflowMenuButtonModule, {
-					layoutOrder = 5,
+					layoutOrder = 6,
 					icon = iconName.ThreeDotsHorizontal,
 					isDisabled = not fFlagEnableBuildOverflowMenuForNewGamesModule and p4.target.universeId == nil,
 					hasPublishedTurn = p4.hasPublishedTurn,
@@ -291,7 +299,7 @@ return function(p4)
 					onOpenGetUsersPage = p4.onOpenGetUsersPage
 				})
 			}),
-			SubagentStatus = if fFlagBuildExperienceAssetLibraryModule or not p4.hasTaskGroups then nil else reactModule.createElement(scrollView, {
+			SubagentStatus = if taskState and p4.hasTaskGroups then reactModule.createElement(scrollView, {
 				LayoutOrder = 2,
 				tag = "composition-content-header size-full-0 auto-y padding-bottom-small",
 				testId = "BuildChatPage.SubagentStatus",
@@ -306,7 +314,7 @@ return function(p4)
 					ScrollingDirection = Enum.ScrollingDirection.X,
 					scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility.None
 				}
-			}, t),
+			}, t) else nil,
 			Divider = reactModule.createElement(divider, {
 				LayoutOrder = 3,
 				testId = "BuildChatPage.HeaderDivider",
@@ -339,7 +347,7 @@ return function(p4)
 					["size-full"] = p4.isChatEmpty,
 					["size-full-0 auto-y padding-y-large"] = not p4.isChatEmpty
 				}
-			}, taskState)
+			}, selectedChipGroupName)
 		}),
 		Actions = if fFlagBuildDesktopReadinessModule then reactModule.createElement(view, {
 			LayoutOrder = 3,
@@ -348,13 +356,13 @@ return function(p4)
 				["composition-layout-detail"] = true,
 				["size-full-0 auto-y"] = true
 			}
-		}, { ActionBody = var10 }) else var10,
-		TodoBottomSheet = reactModule.createElement(subagentStatusModule.TodoBottomSheet, {
+		}, { ActionBody = var11 }) else var11,
+		TodoBottomSheet = if taskState then reactModule.createElement(subagentStatusModule.TodoBottomSheet, {
 			title = if var7 ~= nil then "" else var7.name,
 			items = toTodoItems(var7),
 			isOpen = var7 ~= nil,
 			onClose = p4.onChipBottomSheetClose
-		}),
+		}) else nil,
 		AdCampaignSheet = if fFlagBuildAdUpsellModule and p4.isAdCampaignSheetOpen and p4.isAdUpsellVisible then reactModule.createElement(var2, {
 			isOpen = true,
 			onClose = p4.onAdCampaignSheetClose,

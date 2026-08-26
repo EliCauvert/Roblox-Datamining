@@ -2,6 +2,7 @@
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local icon = foundationModule.Icon
+local skeleton = foundationModule.Skeleton
 local text = foundationModule.Text
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
@@ -9,19 +10,25 @@ local iconName = foundationModule.Enums.IconName
 local iconPosition = foundationModule.Enums.IconPosition
 local iconSize = foundationModule.Enums.IconSize
 local iconVariant = foundationModule.Enums.IconVariant
+local radius = foundationModule.Enums.Radius
 
 return function(p1)
-	-- upvalues: useTokens (ref), iconName (ref), iconPosition (ref), reactModule (ref), view (ref), text (ref), icon (ref), iconSize (ref), iconVariant (ref)
+	-- upvalues: useTokens (ref), iconName (ref), iconPosition (ref), reactModule (ref), view (ref), text (ref), skeleton (ref), radius (ref), icon (ref), iconSize (ref), iconVariant (ref)
 	local var1 = useTokens()
 	local testId = p1.testId or "StatsCardView"
 	local var2 = if p1.isDeltaPositive then var1.Color.System.Success else var1.Color.Content.Default
 	local var3 = if p1.isDeltaPositive then iconName.ArrowWideShortUp else iconName.ArrowWideShortDown
 	local var4 = (p1.statIconPosition or iconPosition.Left) == iconPosition.Left
 	local var5 = (p1.deltaIconPosition or iconPosition.Left) == iconPosition.Left
+	local var6 = p1.isSelected == true
 	
 	return reactModule.createElement(view, {
-		tag = "col gap-xsmall size-full-0 auto-y padding-large stroke-standard stroke-default radius-large clip",
 		LayoutOrder = p1.layoutOrder,
+		tag = {
+			["col gap-xsmall size-full-0 auto-y padding-large stroke-standard radius-large clip"] = true,
+			["stroke-emphasis bg-surface-100"] = var6,
+			["stroke-default"] = not var6
+		},
 		testId = testId,
 		onActivated = p1.onActivated
 	}, {
@@ -35,7 +42,14 @@ return function(p1)
 		StatRow = reactModule.createElement(view, {
 			LayoutOrder = 2,
 			tag = "row align-y-center gap-small size-full-0 auto-y"
-		}, {
+		}, if p1.isLoading then {
+			Loading = reactModule.createElement(skeleton, {
+				LayoutOrder = 1,
+				Size = UDim2.new(1, 0, 0, var1.Size.Size_500),
+				radius = radius.Small,
+				testId = `{testId}-loading`
+			})
+		} else {
 			Stat = reactModule.createElement(view, {
 				LayoutOrder = 1,
 				tag = "row align-y-center gap-xsmall auto-xy"

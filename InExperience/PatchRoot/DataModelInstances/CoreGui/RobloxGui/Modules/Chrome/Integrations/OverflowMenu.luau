@@ -43,6 +43,8 @@ local fFlagTokenizeUnibarConstantsWithStyleProvider = require(chrome.ChromeShare
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local fFlagShowGameAgeRating = sharedFlagsModule.FFlagShowGameAgeRating
 local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
+local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
+local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
 local appChatEnabledChromeDropdownFtuxTooltip = game:DefineFastFlag("AppChatEnabledChromeDropdownFtuxTooltip", false)
 local avatarSwitcherFtuxTooltip = game:DefineFastFlag("AvatarSwitcherFtuxTooltip", false)
 local fFlagEnableInExperienceShop = game:DefineFastFlag("InExperienceShopFtuxTooltip", false) and sharedFlagsModule.FFlagEnableInExperienceShop
@@ -163,6 +165,12 @@ if fFlagEnableNewBackpack then
 	end)
 else
 	var1 = var10
+end
+if fFlagEnableSideSheet and fFlagSideSheetFocusNav and fFlagEnableConsoleExpControls then
+	var1:connect(function(p1)
+		-- upvalues: serviceModule (ref)
+		serviceModule:setHideShortcutBar("Backpack", p1)
+	end)
 end
 chromeUtilsModule.setCoreGuiAvailability(serviceModule:register({
 	id = "backpack",

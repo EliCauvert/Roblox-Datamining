@@ -1871,14 +1871,56 @@ Feature.Build.Action.UpdateRating,Update rating
 Feature.Build.Action.UpdateWithChanges,Update with changes
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,View usage
+Feature.Build.Analytics.AnalyzeChatPrompt,What's my {analyzeName} for the past {days} days?
+Feature.Build.Analytics.AnalyzeName.Arppu,average revenue per paying user
+Feature.Build.Analytics.AnalyzeName.D1Retention,day-1 retention
+Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,daily active users
+Feature.Build.Analytics.AnalyzeName.PayerConversion,payer conversion
+Feature.Build.Analytics.AnalyzeName.PlaythroughRate,playthrough rate
+Feature.Build.Analytics.AnalyzeName.TotalPlaytime,total playtime
+Feature.Build.Analytics.Description.Arppu,Average revenue per paying user divides total Robux earned by the number of paying players. It shows how much each buyer spends on average.
+Feature.Build.Analytics.Description.D1Retention,Day-1 retention measures how many first-time players come back one day later. It's an early signal of how sticky your experience is.
+Feature.Build.Analytics.Description.DailyActiveUsers,Daily active users counts the distinct players who launched your experience each day. Track it to see how many people keep coming back and to spot growth or drop-off.
+Feature.Build.Analytics.Description.PayerConversion,Payer conversion is the percentage of players who spent Robux in your experience. Use it to gauge how well your monetization turns players into buyers.
+Feature.Build.Analytics.Description.PlaythroughRate,Playthrough rate is the percentage of visits that completed a full play session. Higher rates suggest players find your experience easy to get into and worth finishing.
+Feature.Build.Analytics.Description.TotalPlaytime,Total playtime sums the time all players spent in your experience over the period. Rising playtime usually signals more engaging sessions.
 Feature.Build.Analytics.DurationHours,{number} hrs
+Feature.Build.Analytics.KeyStats,Key stats
+Feature.Build.Analytics.LastMonth,Last month
+Feature.Build.Analytics.LastWeek,
+Feature.Build.Analytics.Likes,Likes
+Feature.Build.Analytics.Month.Apr,
+Feature.Build.Analytics.Month.Aug,
+Feature.Build.Analytics.Month.Dec,
+Feature.Build.Analytics.Month.Feb,
+Feature.Build.Analytics.Month.Jan,
+Feature.Build.Analytics.Month.Jul,Jul
+Feature.Build.Analytics.Month.Jun,Jun
+Feature.Build.Analytics.Month.Mar,
+Feature.Build.Analytics.Month.May,
+Feature.Build.Analytics.Month.Nov,
+Feature.Build.Analytics.Month.Oct,
+Feature.Build.Analytics.Month.Sep,Sep
+Feature.Build.Analytics.NoData,No data available
+Feature.Build.Analytics.Overview,Overview
 Feature.Build.Analytics.Percent,{number}%
+Feature.Build.Analytics.Players,Players
+Feature.Build.Analytics.Sheet.Analyze,Analyze
+Feature.Build.Analytics.Sheet.ViewInOverview,View in Overview
+Feature.Build.Analytics.Summary.Arppu,Average Robux earned per paying player.
+Feature.Build.Analytics.Summary.D1Retention,Share of new players who return the next day.
+Feature.Build.Analytics.Summary.DailyActiveUsers,Unique players who joined during the selected period.
+Feature.Build.Analytics.Summary.PayerConversion,Share of players who made a purchase.
+Feature.Build.Analytics.Summary.PlaythroughRate,Share of sessions that reached a full playthrough.
+Feature.Build.Analytics.Summary.TotalPlaytime,Total hours players spent in your experience.
 Feature.Build.Analytics.Title.Arppu,ARPPU
+Feature.Build.Analytics.Title.ConcurrentUsers,Total players
 Feature.Build.Analytics.Title.D1Retention,D1 retention
 Feature.Build.Analytics.Title.DailyActiveUsers,Daily active users
 Feature.Build.Analytics.Title.PayerConversion,Payer conversion
 Feature.Build.Analytics.Title.PlaythroughRate,Playthrough rate
 Feature.Build.Analytics.Title.TotalPlaytime,Total playtime
+Feature.Build.Analytics.Visits,Visits
 Feature.Build.Content.NewGame,New game
 Feature.Build.Description.AdCampaignModerationReview,All ad campaigns are reviewed by Roblox moderation. This process may take up to 24 hours.
 Feature.Build.Description.AdCampaignSheetRunDates,Runs {startDate} – {endDate}
@@ -1911,18 +1953,22 @@ Feature.Build.Description.RaiseLimitOrWait,"Increase your daily Robux limit to k
 Feature.Build.Description.RatingAgreement,"By publishing, you agree that this content rating is accurate."
 Feature.Build.Description.RestoreLatest,This version will become your latest published version.
 Feature.Build.Description.RevertToVersion,Confirm to revert the latest change and go back to {VERSION}.
+Feature.Build.Description.ShareLatest,Share what’s changed in your latest version.
 Feature.Build.Description.VersionChanges,Tell players what's changed in this version.
 Feature.Build.Header.AccessSharing,Access & sharing
+Feature.Build.Header.AllVersions,All versions
 Feature.Build.Header.ContentMaturity,Content maturity
 Feature.Build.Header.CustomAnswer,Custom answer
 Feature.Build.Header.GameDetails,Game details
-Feature.Build.Header.Overview,Overview
+Feature.Build.Header.Overview,
 Feature.Build.Header.PastCampaigns,Past campaigns
+Feature.Build.Header.UpdateDetails,Update details
 Feature.Build.Label.Access,Access
 Feature.Build.Label.AdClicks,Ad clicks
 Feature.Build.Label.AdViews,Ad views
 Feature.Build.Label.AdditionalUsage,Additional Build usage
 Feature.Build.Label.AdditionalUsed,{USED} of {LIMIT} used
+Feature.Build.Label.AdsManager,Ads Manager
 Feature.Build.Label.All,
 Feature.Build.Label.AmountAvailable,{AMOUNT} available
 Feature.Build.Label.Autosaved,Autosaved
@@ -2049,6 +2095,7 @@ Feature.Build.Label.ToolThumbnailRunning,Setting game thumbnail
 Feature.Build.Label.UniverseNumber,Universe {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Unknown
 Feature.Build.Label.UnlimitedUsed,{USED} used • No limit
+Feature.Build.Label.UpdateTitleDesc,Update title & description
 Feature.Build.Label.Updated,Updated
 Feature.Build.Label.Usage,Usage
 Feature.Build.Label.UsageUsed,{USED} used
@@ -2169,8 +2216,10 @@ Feature.Build.Title.RevertLastChange,Revert last change?
 Feature.Build.Title.Tasks,Tasks
 Feature.Build.Title.TurnActivity,Turn activity
 Feature.Build.Title.VersionHistory,Version history
+Feature.Build.Title.VersionInfo,Version information
 Feature.Build.Title.VersionInformation,Version Information
 Feature.Build.Title.VersionNumber,Version {VERSION}
+Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,What's included?
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Allow
@@ -2825,6 +2874,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Display name is not available
 Feature.DisplayName.ErrorMessage.NameTooLong,Display name should have 20 characters at the most
 Feature.DisplayName.ErrorMessage.NameTooShort,Display name should have at least 3 characters
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Display name contains unsupported characters
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,For {num} day
 Feature.Durables.BottomBar.RentalDurationPlural,For {num} days
 Feature.Durables.FTUX.Tooltip,Choose how many days you want to own the item. The timer starts after purchase.
@@ -2835,6 +2885,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} day
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} days
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Options
 Feature.Durables.Label.ItemExpires,Item expires
+Feature.Durables.PartiallyExpiredItems.BodyText,Some items in this saved avatar expired and were removed.
+Feature.Durables.PartiallyExpiredItems.TitleText,Items expired
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} days (Starts after purchase)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,No internet connection
@@ -3584,6 +3636,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edit Name
 Feature.Profile.Heading.EditDisplayName,Edit Display Name
 Feature.Profile.Heading.InsufficientFunds,Insufficient Funds
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,Profile frame
+Feature.Profile.Heading.ProfilePictureSaved,Profile picture saved successfully
 Feature.Profile.Heading.ProfileQRCode,Share QR Code
 Feature.Profile.Heading.Statistics,Statistics
 Feature.Profile.Heading.Username,
@@ -4170,6 +4224,7 @@ Feature.Subscription.Text.PerMonth,/month
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"Your avatar was reset for {rule}. You can still use the Marketplace, but changes to your avatar will not save until {time}."
 Feature.Timeout.Prompt.SaveTitleText,Saving is disabled for now
+Feature.Timeout.Prompt.TitleText,We reset your avatar
 Feature.Timeout.WarningBanner.DisabledMessage,Avatar saving disabled
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Avatar saving disabled until {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Unlocked

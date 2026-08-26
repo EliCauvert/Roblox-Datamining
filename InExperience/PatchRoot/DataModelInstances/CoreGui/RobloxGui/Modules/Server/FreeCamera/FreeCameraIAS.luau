@@ -6,6 +6,7 @@ local tan = math.tan
 local playersService = game:GetService("Players")
 local runService = game:GetService("RunService")
 local starterGuiService = game:GetService("StarterGui")
+local starterPlayerService = game:GetService("StarterPlayer")
 local userInputService = game:GetService("UserInputService")
 local workspaceService = game:GetService("Workspace")
 local lightingService = game:GetService("Lighting")
@@ -362,6 +363,11 @@ local ok_5, status_6 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFreecamIASRefactor3")
 end)
 local status_6_1 = ok_5 and status_6
+local _ = nil
+local ok_6, status_7 = pcall(function()
+	return UserSettings():IsUserFeatureEnabled("UserFreecamIASRefactor4")
+end)
+local status_7_1 = ok_6 and status_7
 local var10 = false
 local var11, var12 = (function(p1, p2)
 	-- upvalues: currentCamera (write), lightingService (ref)
@@ -1245,66 +1251,81 @@ local _ = function(p11, p12, p13)
 end
 
 ;(function()
-	-- upvalues: t (ref), var26 (write), createAction (ref), t_6 (ref), t_7 (ref), t_9 (write), vector3_1 (write), var31 (ref), var32 (write), status_3_1 (write), var33 (write), var36 (write), t_10 (write), nextEnabledIndex (write), list_2 (write), var34 (write), var35 (write), isDisabled (write)
+	-- upvalues: t (ref), status_7_1 (write), starterPlayerService (ref), var26 (write), createAction (ref), t_6 (ref), t_7 (ref), t_9 (write), vector3_1 (write), var31 (ref), var32 (write), status_3_1 (write), var33 (write), var36 (write), t_10 (write), nextEnabledIndex (write), list_2 (write), var34 (write), var35 (write), isDisabled (write)
+	local var39
 	local actions = t.Actions
+	local _ = nil
+	
+	if status_7_1 then
+		local freecamInput = Instance.new("Folder")
+		freecamInput.Name = "FreecamInput"
+		freecamInput.Parent = starterPlayerService
+		script.Destroying:Connect(function()
+			-- upvalues: freecamInput (ref)
+			freecamInput:Destroy()
+		end)
+		var39 = freecamInput
+	else
+		var39 = script
+	end
 	local freecamToggleContext = Instance.new("InputContext")
 	freecamToggleContext.Name = "FreecamToggleContext"
 	freecamToggleContext.Priority = 3000
 	freecamToggleContext.Sink = false
 	freecamToggleContext.Enabled = true
-	freecamToggleContext.Parent = script
+	freecamToggleContext.Parent = var39
 	var26 = createAction(freecamToggleContext, actions.Toggle)
 	local freecamInputContext = Instance.new("InputContext")
 	freecamInputContext.Name = "FreecamInputContext"
 	freecamInputContext.Priority = 2000
 	freecamInputContext.Sink = true
 	freecamInputContext.Enabled = false
-	freecamInputContext.Parent = script
+	freecamInputContext.Parent = var39
 	t_6._sinkContext = freecamInputContext
 	t_7.Pan = createAction(freecamInputContext, actions.Pan)
 	t_7.MovementMove = createAction(freecamInputContext, actions.MovementMove)
 	t_7.MovementElevate = createAction(freecamInputContext, actions.MovementElevate)
 	t_7.Fov = createAction(freecamInputContext, actions.Fov)
 	t_7.Shift = createAction(freecamInputContext, actions.Shift)
-	local var39 = createAction(freecamInputContext, actions.Tilt)
-	t_7.Tilt = var39
+	local var40 = createAction(freecamInputContext, actions.Tilt)
+	t_7.Tilt = var40
 	local _ = nil
 	local threshold = t.DoubleTap.Threshold
 	local debounce = t.DoubleTap.Debounce
 	
-	local var40 = function()
+	local var41 = function()
 		-- upvalues: vector3_1 (copy), var31 (copy), var32 (copy)
 		vector3_1 = Vector3.new(vector3_1.x, vector3_1.y, 0)
 		var31:Reset(0)
 		var32 = true
 	end
 	
-	local var41 = nil
-	local var42 = 0
+	local var42 = nil
+	local var43 = 0
 	
 	t_9 = function()
-		-- upvalues: var41 (write)
-		var116 = nil
+		-- upvalues: var42 (write)
+		var118 = nil
 	end
 	
 	local function detect(p11)
-		-- upvalues: var41 (write), threshold (ref), var42 (write), debounce (ref), var40 (ref)
+		-- upvalues: var42 (write), threshold (ref), var43 (write), debounce (ref), var41 (ref)
 		if math.abs(p11) > 0.01 then
 			local processTime = os.clock()
 			
-			if var41 == nil or processTime - var41 > threshold then
-				var41 = processTime
-			elseif debounce <= processTime - var42 then
-				var40()
+			if var42 == nil or processTime - var42 > threshold then
 				var42 = processTime
+			elseif debounce <= processTime - var43 then
+				var41()
+				var43 = processTime
 			end
-			var41 = nil
+			var42 = nil
 			
 			return
 		end
 	end
 	
-	var39.StateChanged:Connect(function(p11)
+	var40.StateChanged:Connect(function(p11)
 		-- upvalues: var32 (copy), detect (write)
 		if not var32 then
 			detect(p11)
@@ -1327,11 +1348,11 @@ end
 				
 				return
 			elseif #t_10 > 0 then
-				local var43 = t_10[#t_10]
-				local var44 = nextEnabledIndex(var43.modes, var43.index, -1)
+				local var44 = t_10[#t_10]
+				local var45 = nextEnabledIndex(var44.modes, var44.index, -1)
 				
-				if var44 < var43.index then
-					var43.index = var44
+				if var45 < var44.index then
+					var44.index = var45
 					
 					return
 				end
@@ -1339,10 +1360,10 @@ end
 				
 				return
 			else
-				local var45 = nextEnabledIndex(list_2, var34, -1)
+				local var46 = nextEnabledIndex(list_2, var34, -1)
 				
-				if var45 < var34 then
-					var34 = var45
+				if var46 < var34 then
+					var34 = var46
 					
 					return
 				end
@@ -1378,8 +1399,8 @@ end
 				
 				return
 			elseif #t_10 > 0 then
-				local var43 = t_10[#t_10]
-				var43.index = nextEnabledIndex(var43.modes, var43.index, 1)
+				local var44 = t_10[#t_10]
+				var44.index = nextEnabledIndex(var44.modes, var44.index, 1)
 				
 				return
 			end
@@ -1389,46 +1410,46 @@ end
 		elseif not var33 then return end
 		if var35 then return end
 		if #t_10 > 0 then
-			local var44 = t_10[#t_10]
-			var44.index = var44.index % #var44.modes + 1
+			local var45 = t_10[#t_10]
+			var45.index = var45.index % #var45.modes + 1
 			
 			return
 		end
-		local var45 = list_2[var34]
+		local var46 = list_2[var34]
 		
-		if var45.type == "group" then
-			table.insert(t_10, { index = 1, modes = var45.modes, groupName = var45.name })
+		if var46.type == "group" then
+			table.insert(t_10, { index = 1, modes = var46.modes, groupName = var46.name })
 			
 			return
-		elseif var45.type == "toggle" then
-			var45.toggle()
+		elseif var46.type == "toggle" then
+			var46.toggle()
 			
 			return
-		elseif var45.type == "cycle" then
-			local var46 = var45.items()
+		elseif var46.type == "cycle" then
+			local var47 = var46.items()
 			
-			if #var46 > 0 then
-				var45.setIndex(var45.getIndex() % #var46 + 1)
+			if #var47 > 0 then
+				var46.setIndex(var46.getIndex() % #var47 + 1)
 				
 				return
 			end
-		elseif var45.type == "action" then
-			var45.action()
+		elseif var46.type == "action" then
+			var46.action()
 			
 			return
-		elseif var45.type == "axis" then
+		elseif var46.type == "axis" then
 			var35 = true
 		end
 	end)
-	local var43 = createAction(freecamInputContext, actions.ModeAxis)
-	var43.StateChanged:Connect(function(p11)
+	local var44 = createAction(freecamInputContext, actions.ModeAxis)
+	var44.StateChanged:Connect(function(p11)
 		-- upvalues: var33 (copy), status_3_1 (copy), t_10 (copy), list_2 (copy), var34 (copy), var36 (copy), isDisabled (copy), var35 (copy)
 		local index
 		if not var33 or p11 == 0 then return end
 		if status_3_1 then
 			if #t_10 > 0 then
-				local var44 = t_10[#t_10]
-				index = var44.modes[var44.index]
+				local var45 = t_10[#t_10]
+				index = var45.modes[var45.index]
 			else
 				index = list_2[var34]
 			end
@@ -1438,15 +1459,15 @@ end
 					
 					return
 				elseif index.type == "cycle" then
-					local var45 = index.items()
+					local var46 = index.items()
 					
-					if #var45 <= 0 then return end
+					if #var46 <= 0 then return end
 					if p11 > 0 then
-						index.setIndex(index.getIndex() % #var45 + 1)
+						index.setIndex(index.getIndex() % #var46 + 1)
 						
 						return
 					end
-					index.setIndex((index.getIndex() - 2) % #var45 + 1)
+					index.setIndex((index.getIndex() - 2) % #var46 + 1)
 					
 					return
 				elseif index.type == "action" then
@@ -1484,8 +1505,8 @@ end
 		elseif var35 then return end
 		if #t_10 > 0 then
 			if #t_10 > 0 then
-				local var46 = t_10[#t_10]
-				index = var46.modes[var46.index]
+				local var47 = t_10[#t_10]
+				index = var47.modes[var47.index]
 			else
 				index = list_2[var34]
 			end
@@ -1498,15 +1519,15 @@ end
 				
 				return
 			elseif index.type == "cycle" then
-				local var47 = index.items()
+				local var48 = index.items()
 				
-				if #var47 == 0 then return end
+				if #var48 == 0 then return end
 				if p11 > 0 then
-					index.setIndex(index.getIndex() % #var47 + 1)
+					index.setIndex(index.getIndex() % #var48 + 1)
 					
 					return
 				elseif p11 < 0 then
-					index.setIndex((index.getIndex() - 2) % #var47 + 1)
+					index.setIndex((index.getIndex() - 2) % #var48 + 1)
 					
 					return
 				end
@@ -1523,7 +1544,7 @@ end
 			var34 = (var34 - 2) % #list_2 + 1
 		end
 	end)
-	t_7.ModeAxis = var43
+	t_7.ModeAxis = var44
 end)()
 
 function t_6.Movement()
@@ -1665,7 +1686,7 @@ function t_6.getModeHint()
 	if #t_10 > 0 then
 		local index
 		local var40 = t_10[#t_10]
-		local text = "[\226\134\145] Back  [\226\134\147] " .. var148.modes[var40.index % #var40.modes + 1].name
+		local text = "[\226\134\145] Back  [\226\134\147] " .. var152.modes[var40.index % #var40.modes + 1].name
 		
 		if #t_10 > 0 then
 			local var41 = t_10[#t_10]
@@ -1678,7 +1699,7 @@ function t_6.getModeHint()
 		
 		return {
 			nav = text,
-			action = if var42 then "[\226\134\144][\226\134\146] " .. var151 else ""
+			action = if var42 then "[\226\134\144][\226\134\146] " .. var155 else ""
 		}
 	elseif var35 then
 		local type = var39.type
@@ -1686,7 +1707,7 @@ function t_6.getModeHint()
 		
 		return {
 			nav = "[\226\134\145] Back",
-			action = if var43 then "[\226\134\144][\226\134\146] " .. var152 else ""
+			action = if var43 then "[\226\134\144][\226\134\146] " .. var156 else ""
 		}
 	end
 	local type = var39.type
@@ -1976,17 +1997,17 @@ if status_3_1 then
 			var40.frame.Visible = true
 			
 			if var43 and not var44 then
-				var40.nameLabel.Text = "> " .. var171.name
+				var40.nameLabel.Text = "> " .. var175.name
 				var40.nameLabel.TextColor3 = Color3.new(1, 1, 1)
 				var40.nameLabel.Font = Enum.Font.GothamMedium
 				var40.frame.BackgroundTransparency = if var41 then 0.88 else 1
 			elseif var44 then
-				var40.nameLabel.Text = "  " .. var171.name
+				var40.nameLabel.Text = "  " .. var175.name
 				var40.nameLabel.TextColor3 = Color3.fromRGB(80, 80, 80)
 				var40.nameLabel.Font = Enum.Font.GothamMedium
 				var40.frame.BackgroundTransparency = 1
 			else
-				var40.nameLabel.Text = "  " .. var171.name
+				var40.nameLabel.Text = "  " .. var175.name
 				var40.nameLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
 				var40.nameLabel.Font = Enum.Font.GothamMedium
 				var40.frame.BackgroundTransparency = 1

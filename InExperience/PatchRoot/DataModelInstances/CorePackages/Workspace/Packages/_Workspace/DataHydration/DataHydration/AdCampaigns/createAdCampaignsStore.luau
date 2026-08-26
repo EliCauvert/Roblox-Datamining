@@ -34,6 +34,10 @@ return function(p1)
 			-- upvalues: var2 (ref)
 			return var2.getAndFetchItem("0")
 		end,
+		isAdCampaignsRequestInQueueOrInFlight = function()
+			-- upvalues: var2 (ref)
+			return var2.isRequestInQueueOrInFlight("0")
+		end,
 		updateAdCampaigns = function(p2)
 			-- upvalues: var1 (ref)
 			var1.replaceItem("0", p2)

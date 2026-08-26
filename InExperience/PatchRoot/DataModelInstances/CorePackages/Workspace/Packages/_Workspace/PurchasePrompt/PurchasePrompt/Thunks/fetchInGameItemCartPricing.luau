@@ -1,6 +1,8 @@
 ﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local parent = purchasePrompt.Parent
 local httpService = game:GetService("HttpService")
-local productPurchaseSurface = require(purchasePrompt.Parent.PurchasePromptLite).Enums.ProductPurchaseSurface
+local playersService = game:GetService("Players")
+local productPurchaseSurface = require(parent.PurchasePromptLite).Enums.ProductPurchaseSurface
 local promiseModule = require(purchasePrompt.Promise)
 local networkModule = require(purchasePrompt.Services.Network)
 local thunkModule = require(purchasePrompt.Thunk)
@@ -35,9 +37,9 @@ local function resolveProductIdentifier(p1)
 end
 
 return function(p1)
-	-- upvalues: thunkModule (ref), list_1 (ref), networkModule (ref), getInGameItemCartPricingRequestedItemsModule (ref), resolveProductIdentifier (ref), promiseModule (ref), list (ref), getProductTypeFromRequestTypeModule (ref), httpService (ref), setCartPricingFetchingModule (ref), postInGameItemCartPricingModule (ref), setCartPricingFetchFailedModule (ref), setCartPricingResponseModule (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref)
+	-- upvalues: thunkModule (ref), list_1 (ref), networkModule (ref), getInGameItemCartPricingRequestedItemsModule (ref), resolveProductIdentifier (ref), promiseModule (ref), playersService (ref), list (ref), getProductTypeFromRequestTypeModule (ref), httpService (ref), setCartPricingFetchingModule (ref), postInGameItemCartPricingModule (ref), setCartPricingFetchFailedModule (ref), setCartPricingResponseModule (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref)
 	return thunkModule.new(script.Name, list_1, function(p2, p3)
-		-- upvalues: networkModule (copy), getInGameItemCartPricingRequestedItemsModule (copy), resolveProductIdentifier (copy), promiseModule (copy), list (copy), getProductTypeFromRequestTypeModule (copy), httpService (copy), setCartPricingFetchingModule (copy), postInGameItemCartPricingModule (copy), p1 (ref), setCartPricingFetchFailedModule (copy), setCartPricingResponseModule (copy), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy)
+		-- upvalues: networkModule (copy), getInGameItemCartPricingRequestedItemsModule (copy), resolveProductIdentifier (copy), promiseModule (copy), playersService (copy), list (copy), getProductTypeFromRequestTypeModule (copy), httpService (copy), setCartPricingFetchingModule (copy), postInGameItemCartPricingModule (copy), p1 (ref), setCartPricingFetchFailedModule (copy), setCartPricingResponseModule (copy), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy)
 		local var1 = p3[networkModule]
 		local state = p2:getState()
 		local var2 = getInGameItemCartPricingRequestedItemsModule(resolveProductIdentifier(state))
@@ -45,6 +47,7 @@ return function(p1)
 		if var2 == nil or #var2 == 0 then
 			return promiseModule.resolve(nil)
 		end
+		local userId = playersService.LocalPlayer.UserId
 		local purchaseAnalyticsMetadata = state.purchaseAnalyticsMetadata
 		local surface = purchaseAnalyticsMetadata and purchaseAnalyticsMetadata.surface
 		local var3 = if surface == nil or table.find(list, surface) == nil then "DEVELOPER_SHOP" else "ROBLOX_SHOP"
@@ -59,7 +62,7 @@ return function(p1)
 			return cartPricing ~= nil and cartPricing.requestId == var5
 		end
 		
-		return postInGameItemCartPricingModule(var1, var3, var2, p1, surface, var4):andThen(function(p4)
+		return postInGameItemCartPricingModule(var1, userId, var3, var2, p1, surface, var4):andThen(function(p4)
 			-- upvalues: p2 (ref), var5 (ref), setCartPricingFetchFailedModule (copy), setCartPricingResponseModule (copy)
 			local cartPricing = p2:getState().cartPricing
 			

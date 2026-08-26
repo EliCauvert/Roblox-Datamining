@@ -33,6 +33,7 @@ local privacyType = universeConfigurationModule.PrivacyType
 local fFlagEnableShareSheet = sharedFlagsModule.FFlagEnableShareSheet
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagEnableProvisionalRatingModule = require(buildExperience.Flags.FFlagEnableProvisionalRating)
+local fFlagBuildPublishNavigationSheetModule = require(buildExperience.Flags.FFlagBuildPublishNavigationSheet)
 local fFlagBuildPublishAccountTooNewErrorModule = require(buildExperience.Flags.FFlagBuildPublishAccountTooNewError)
 local fFlagBuildRehydrateOnPublishModule = require(buildExperience.Flags.FFlagBuildRehydrateOnPublish)
 local fFlagBuildExperienceTooltipsLightDismissModule = require(buildExperience.Flags.FFlagBuildExperienceTooltipsLightDismiss)
@@ -88,6 +89,7 @@ local function PreviewButton(p2)
 	}) else nil).preview else localizationStringsModule.GAME_CONFIGURATION_PREVIEW
 	local var3 = useStore()
 	local var4 = useNavigation()
+	local onPreview = p2.onPreview
 	
 	return reactModule.createElement(button, {
 		LayoutOrder = 2,
@@ -96,7 +98,7 @@ local function PreviewButton(p2)
 		variant = buttonVariant.Standard,
 		fillBehavior = fillBehavior.Fill,
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: getRootNavigation (copy), var4 (ref), openGameDetails (copy), p2 (ref), var3 (ref)
+			-- upvalues: getRootNavigation (copy), var4 (ref), openGameDetails (copy), p2 (ref), var3 (ref), onPreview (ref)
 			local var5
 			local var6 = getRootNavigation(var4)
 			local var7 = tostring(p2.target.universeId)
@@ -114,14 +116,18 @@ local function PreviewButton(p2)
 				var5 = cloned
 			end
 			openGameDetails(var7, var5, { source = "BuildExperiencePublish" })(var3)
-		end, { var4, p2.target.universeId, var3 }),
+			
+			if onPreview then
+				onPreview()
+			end
+		end, { var4, p2.target.universeId, var3, onPreview }),
 		width = UDim.new(1, 0),
 		testId = `{p2.actionsTestId}-preview`
 	})
 end
 
 return function(p2)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useSharePublishedExperience (ref), signalsReactModule (ref), placeVersionHistoryModule (ref), reactModule (ref), signalsModule (ref), universeConfigurationModule (ref), fFlagEnableProvisionalRatingModule (ref), gameConfigurationLabelsModule (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), useOpenWebView (ref), fFlagEnableShareSheet (ref), sharePublishedExperience (ref), privacyType (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), getVersionInformationStoreModule (ref), sendBuildExperienceEventModule (ref), var1 (ref), fFlagBuildAdUpsellModule (ref), isMenuPublishPublicModule (ref), buildPublicAudiences (ref), fFlagBuildRehydrateOnPublishModule (ref), experienceGuidelinesModule (ref), t (ref), debug (ref), fFlagBuildPublishAccountTooNewErrorModule (ref), view (ref), privateShareTooltipModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), snackbar (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), PreviewButton (ref), friendsOnlyShareDialogModule (ref)
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useSharePublishedExperience (ref), signalsReactModule (ref), placeVersionHistoryModule (ref), reactModule (ref), signalsModule (ref), universeConfigurationModule (ref), fFlagEnableProvisionalRatingModule (ref), gameConfigurationLabelsModule (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), useOpenWebView (ref), fFlagEnableShareSheet (ref), sharePublishedExperience (ref), privacyType (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), getVersionInformationStoreModule (ref), sendBuildExperienceEventModule (ref), var1 (ref), fFlagBuildAdUpsellModule (ref), isMenuPublishPublicModule (ref), buildPublicAudiences (ref), fFlagBuildRehydrateOnPublishModule (ref), experienceGuidelinesModule (ref), t (ref), debug (ref), fFlagBuildPublishAccountTooNewErrorModule (ref), view (ref), fFlagBuildPublishNavigationSheetModule (ref), privateShareTooltipModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), snackbar (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), PreviewButton (ref), friendsOnlyShareDialogModule (ref)
 	local GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR, GAME_CONFIGURATION_CREATOR_HUB, GAME_CONFIGURATION_LINK_COPIED, GAME_CONFIGURATION_PUBLISH, GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR, GAME_CONFIGURATION_PUBLISH_ERROR, GAME_CONFIGURATION_PUBLISH_SUCCESS, GAME_CONFIGURATION_SHARE, GAME_CONFIGURATION_UPDATE_RATING
 	local var2 = if fFlagBuildLocalization then useLocalization({
 		accountTooNewError = localizationStringsModule.GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR,
@@ -243,7 +249,10 @@ return function(p2)
 	
 	return reactModule.createElement(view, {
 		LayoutOrder = 3,
-		tag = "col gap-small size-full-0 auto-y bg-surface-0"
+		tag = {
+			["col gap-small size-full-0 auto-y"] = true,
+			["bg-surface-0"] = not fFlagBuildPublishNavigationSheetModule
+		}
 	}, {
 		PublishSnackbarWrapper = if var15 ~= "" then nil else reactModule.createElement(view, {
 			LayoutOrder = 1,
@@ -430,7 +439,11 @@ return function(p2)
 				width = UDim.new(1, 0),
 				testId = `{testId}-publish`
 			}),
-			Preview = if p2.showPreviewButton == false then nil else reactModule.createElement(PreviewButton, { target = p2.target, actionsTestId = testId })
+			Preview = if p2.showPreviewButton == false then nil else reactModule.createElement(PreviewButton, {
+				target = p2.target,
+				actionsTestId = testId,
+				onPreview = p2.onPreview
+			})
 		}),
 		FriendsOnlyShareDialog = if var17 == "friends" and audience == privacyType.FriendsOnly then reactModule.createElement(friendsOnlyShareDialogModule, { onCancel = var23, onShare = var21 }) else nil
 	})
