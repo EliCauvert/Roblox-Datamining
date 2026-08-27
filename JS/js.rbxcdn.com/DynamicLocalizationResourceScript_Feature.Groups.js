@@ -1183,7 +1183,7 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Label.SupportTicketDetailsSubtitle": "How can the creator help? Report details are kept private.",
     "Label.SupportTicketWhereField": "Where did this happen?",
     "Label.SupportTicketDeviceField": "What device are you using?",
-    "Label.SupportTicketScreenshotsHint": "Select up to 3 images to help the creator see your issue.",
+    "Label.SupportTicketScreenshotsHint": "Select up to three images. All images are subject to moderation.",
     "Label.SupportTicketShareUserInfo": "Share user information with creator",
     "Label.SupportTicketShareUserInfoHint": "This helps the creator support the correct account.",
     "Label.SupportTicketDetails": "Details",
@@ -1331,6 +1331,8 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Message.UpdateRolesetPropertiesVisibilityPublic": "Visibility: Public",
     "Message.UpdateRolesetPosition": "{actor} updated roleset {roleSetName}'s position from {oldPosition} to {newPosition}",
     "Message.UpdateRolesetPositionBelowRole": "below {roleAboveName}",
-    "Label.UpdateRoleProperties": "Update Role Properties"
+    "Label.UpdateRoleProperties": "Update Role Properties",
+    "Error.SupportTicketOpenLimitReached": "You’ve reached the limit for open support tickets. Visit your Experience Support History to resolve open tickets.",
+    "Error.SupportTicketIneligible": "You can’t submit a bug report for this experience right now."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Groups");

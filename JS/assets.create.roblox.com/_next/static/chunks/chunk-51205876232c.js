@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "d2d93675-7e90-060e-f40c-6fef90848a38")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "a0fc5654-fd26-de0c-7b43-914543c04c9b")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 605050, e => {
@@ -100,35 +100,38 @@
     var t = e.i(416340),
         n = e.i(237401);
     e.s(["default", 0, (e, r) => {
-        let i = (0, n.useRouter)();
+        let i = (0, n.useRouter)(),
+            o = i.query;
         return [(0, t.useMemo)(() => {
-            let t = {};
-            for (let n of e) t[n] = i.query[n];
-            return t
-        }, [e, i.query]), (0, t.useCallback)(function(t) {
+            let t = null != o ? o : {},
+                n = {};
+            for (let r of e) n[r] = t[r];
+            return n
+        }, [e, o]), (0, t.useCallback)(function(t) {
             var n;
             let o = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {
                     skipHistory: !1
                 },
-                a = {
-                    ...i.query
+                a = null != (n = i.query) ? n : {},
+                l = {
+                    ...a
                 };
             e.forEach(e => {
                 if (!Object.hasOwn(t, e)) return;
                 let n = t[e];
-                null == n ? delete a[e] : Array.isArray(n) ? a[e] = n.map(e => e.toString()) : a[e] = n.toString()
-            }), n = i.query, Array.from(new Set([...Object.keys(n), ...Object.keys(a)])).every(e => ((e, t) => {
+                null == n ? delete l[e] : Array.isArray(n) ? l[e] = n.map(e => e.toString()) : l[e] = n.toString()
+            }), Array.from(new Set([...Object.keys(a), ...Object.keys(l)])).every(e => ((e, t) => {
                 if (null == e && null == t) return !0;
                 if (null == e || null == t) return !1;
                 let n = Array.isArray(e) ? e : [e],
                     r = Array.isArray(t) ? t : [t];
                 return n.length === r.length && n.every((e, t) => e === r[t])
-            })(n[e], a[e])) || (o.skipHistory ? i.replace({
+            })(a[e], l[e])) || (o.skipHistory ? i.replace({
                 pathname: i.pathname,
-                query: a
+                query: l
             }) : i.push({
                 pathname: i.pathname,
-                query: a
+                query: l
             }, void 0, r))
         }, [i, e, r])]
     }, "normalizeSingleQueryParam", 0, e => {
@@ -1191,5 +1194,5 @@
     }])
 }]);
 
-//# debugId=d2d93675-7e90-060e-f40c-6fef90848a38
-//# sourceMappingURL=13-u8gqhhhlrn.js.map
+//# debugId=a0fc5654-fd26-de0c-7b43-914543c04c9b
+//# sourceMappingURL=2ymha_1evvzek.js.map

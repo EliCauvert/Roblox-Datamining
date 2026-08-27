@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "3cb111d4-6dcc-6920-553e-a3504c3b0dc3")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "602b5281-67da-3ae0-c720-4a66b4bf9c51")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 522829, e => {
@@ -71,7 +71,7 @@
     }])
 }, 545154, 595028, e => {
     "use strict";
-    var t = e.i(352421),
+    var t = e.i(507786),
         r = {},
         n = function(e, t, n, a, i) {
             var o = new Worker(r[t] || (r[t] = URL.createObjectURL(new Blob([e + ';addEventListener("error",function(e){e=e.error;postMessage({$e$:[e.message,e.code,e.stack]})})'], {
@@ -90,8 +90,8 @@
         i = Uint16Array,
         o = Int32Array,
         s = new a([0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0, 0, 0, 0]),
-        c = new a([0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 0, 0]),
-        u = new a([16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15]),
+        u = new a([0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 0, 0]),
+        c = new a([16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15]),
         l = function(e, t) {
             for (var r = new i(31), n = 0; n < 31; ++n) r[n] = t += 1 << e[n - 1];
             for (var a = new o(r[30]), n = 1; n < 30; ++n)
@@ -105,22 +105,22 @@
         h = d.b,
         m = d.r;
     h[28] = 258, m[258] = 28;
-    for (var p = l(c, 0), f = p.b, y = p.r, g = new i(32768), v = 0; v < 32768; ++v) {
+    for (var p = l(u, 0), f = p.b, y = p.r, g = new i(32768), v = 0; v < 32768; ++v) {
         var b = (43690 & v) >> 1 | (21845 & v) << 1;
         b = (61680 & (b = (52428 & b) >> 2 | (13107 & b) << 2)) >> 4 | (3855 & b) << 4, g[v] = ((65280 & b) >> 8 | (255 & b) << 8) >> 1
     }
     for (var A = function(e, t, r) {
             for (var n, a = e.length, o = 0, s = new i(t); o < a; ++o) e[o] && ++s[e[o] - 1];
-            var c = new i(t);
-            for (o = 1; o < t; ++o) c[o] = c[o - 1] + s[o - 1] << 1;
+            var u = new i(t);
+            for (o = 1; o < t; ++o) u[o] = u[o - 1] + s[o - 1] << 1;
             if (r) {
                 n = new i(1 << t);
-                var u = 15 - t;
+                var c = 15 - t;
                 for (o = 0; o < a; ++o)
                     if (e[o])
-                        for (var l = o << 4 | e[o], d = t - e[o], h = c[e[o] - 1]++ << d, m = h | (1 << d) - 1; h <= m; ++h) n[g[h] >> u] = l
+                        for (var l = o << 4 | e[o], d = t - e[o], h = u[e[o] - 1]++ << d, m = h | (1 << d) - 1; h <= m; ++h) n[g[h] >> c] = l
             } else
-                for (n = new i(a), o = 0; o < a; ++o) e[o] && (n[o] = g[c[e[o] - 1]++] >> 15 - e[o]);
+                for (n = new i(a), o = 0; o < a; ++o) e[o] && (n[o] = g[u[e[o] - 1]++] >> 15 - e[o]);
             return n
         }, D = new a(288), v = 0; v < 144; ++v) D[v] = 8;
     for (var v = 144; v < 256; ++v) D[v] = 9;
@@ -189,7 +189,7 @@
                             P = I(e, g + 10, 15) + 4,
                             k = U + I(e, g + 5, 31) + 1;
                         g += 14;
-                        for (var B = new a(k), x = new a(19), H = 0; H < P; ++H) x[u[H]] = I(e, g + 3 * H, 7);
+                        for (var B = new a(k), x = new a(19), H = 0; H < P; ++H) x[c[H]] = I(e, g + 3 * H, 7);
                         g += 3 * P;
                         for (var G = R(x), Q = (1 << G) - 1, L = A(x, G, 1), H = 0; H < k;) {
                             var F = L[I(e, g, Q)];
@@ -246,7 +246,7 @@
                         en || O(3), g += 15 & en;
                         var q = f[ea];
                         if (ea > 3) {
-                            var er = c[ea];
+                            var er = u[ea];
                             q += _(e, g) & (1 << er) - 1, g += er
                         }
                         if (g > T) {
@@ -288,9 +288,9 @@
                 l: 0
             };
             if (1 == o) {
-                var c = new a(r[0].s + 1);
-                return c[r[0].s] = 1, {
-                    t: c,
+                var u = new a(r[0].s + 1);
+                return u[r[0].s] = 1, {
+                    t: u,
                     l: 1
                 }
             }
@@ -300,20 +300,20 @@
                 s: -1,
                 f: 25001
             });
-            var u = r[0],
+            var c = r[0],
                 l = r[1],
                 d = 0,
                 h = 1,
                 m = 2;
             for (r[0] = {
                     s: -1,
-                    f: u.f + l.f,
-                    l: u,
+                    f: c.f + l.f,
+                    l: c,
                     r: l
-                }; h != o - 1;) u = r[r[d].f < r[m].f ? d++ : m++], l = r[d != h && r[d].f < r[m].f ? d++ : m++], r[h++] = {
+                }; h != o - 1;) c = r[r[d].f < r[m].f ? d++ : m++], l = r[d != h && r[d].f < r[m].f ? d++ : m++], r[h++] = {
                 s: -1,
-                f: u.f + l.f,
-                l: u,
+                f: c.f + l.f,
+                l: c,
                 r: l
             };
             for (var p = s[0].s, n = 1; n < o; ++n) s[n].s > p && (p = s[n].s);
@@ -353,8 +353,8 @@
             for (var t = e.length; t && !e[--t];);
             for (var r = new i(++t), n = 0, a = e[0], o = 1, s = function(e) {
                     r[n++] = e
-                }, c = 1; c <= t; ++c)
-                if (e[c] == a && c != t) ++o;
+                }, u = 1; u <= t; ++u)
+                if (e[u] == a && u != t) ++o;
                 else {
                     if (!a && o > 2) {
                         for (; o > 138; o -= 138) s(32754);
@@ -364,7 +364,7 @@
                         o > 2 && (s(o - 3 << 5 | 8208), o = 0)
                     }
                     for (; o--;) s(a);
-                    o = 1, a = e[c]
+                    o = 1, a = e[u]
                 } return {
                 c: r.subarray(0, n),
                 n: t
@@ -385,7 +385,7 @@
             P(t, p++, r), ++a[256];
             for (var f, y, g, v, b = B(a, 15), S = b.t, E = b.l, R = B(o, 15), I = R.t, _ = R.l, N = H(S), M = N.c, V = N.n, O = H(I), U = O.c, x = O.n, L = new i(19), F = 0; F < M.length; ++F) ++L[31 & M[F]];
             for (var F = 0; F < U.length; ++F) ++L[31 & U[F]];
-            for (var K = B(L, 7), j = K.t, z = K.l, Y = 19; Y > 4 && !j[u[Y - 1]]; --Y);
+            for (var K = B(L, 7), j = K.t, z = K.l, Y = 19; Y > 4 && !j[c[Y - 1]]; --Y);
             var q = m + 5 << 3,
                 X = G(a, D) + G(o, C) + l,
                 W = G(a, S) + G(o, I) + l + 14 + 3 * Y + G(L, j) + 2 * L[16] + 3 * L[17] + 7 * L[18];
@@ -394,7 +394,7 @@
                 f = A(S, E, 0), y = S, g = A(I, _, 0), v = I;
                 var $ = A(j, z, 0);
                 P(t, p, V - 257), P(t, p + 5, x - 1), P(t, p + 10, Y - 4), p += 14;
-                for (var F = 0; F < Y; ++F) P(t, p + 3 * F, j[u[F]]);
+                for (var F = 0; F < Y; ++F) P(t, p + 3 * F, j[c[F]]);
                 p += 3 * Y;
                 for (var J = [M, U], Z = 0; Z < 2; ++Z)
                     for (var ee = J[Z], F = 0; F < ee.length; ++F) {
@@ -408,17 +408,17 @@
                     var et = er >> 18 & 31;
                     k(t, p, f[et + 257]), p += y[et + 257], et > 7 && (P(t, p, er >> 23 & 31), p += s[et]);
                     var en = 31 & er;
-                    k(t, p, g[en]), p += v[en], en > 3 && (k(t, p, er >> 5 & 8191), p += c[en])
+                    k(t, p, g[en]), p += v[en], en > 3 && (k(t, p, er >> 5 & 8191), p += u[en])
                 } else k(t, p, f[er]), p += y[er]
             }
             return k(t, p, f[256]), p + y[256]
         },
         F = new o([65540, 131080, 131088, 131104, 262176, 1048704, 1048832, 2114560, 2117632]),
         K = new a(0),
-        j = function(e, t, r, n, u, l) {
+        j = function(e, t, r, n, c, l) {
             var d = l.z || e.length,
-                h = new a(n + d + 5 * (1 + Math.ceil(d / 7e3)) + u),
-                p = h.subarray(n, h.length - u),
+                h = new a(n + d + 5 * (1 + Math.ceil(d / 7e3)) + c),
+                p = h.subarray(n, h.length - c),
                 f = l.l,
                 g = 7 & (l.r || 0);
             if (t) {
@@ -460,7 +460,7 @@
                             R[P++] = 0x10000000 | m[z] << 18 | y[Y];
                             var ei = 31 & m[z],
                                 eo = 31 & y[Y];
-                            O += s[ei] + c[eo], ++I[257 + ei], ++_[eo], k = U + z, ++V
+                            O += s[ei] + u[eo], ++I[257 + ei], ++_[eo], k = U + z, ++V
                         } else R[P++] = e[U], ++I[e[U]]
                     }
                 }
@@ -473,7 +473,7 @@
                 }
                 l.i = d
             }
-            return M(h, 0, n + N(g) + u)
+            return M(h, 0, n + N(g) + c)
         },
         z = function() {
             for (var e = new Int32Array(256), t = 0; t < 256; ++t) {
@@ -529,18 +529,18 @@
         $ = function(e, t, r) {
             for (var n = e(), a = e.toString(), i = a.slice(a.indexOf("[") + 1, a.lastIndexOf("]")).replace(/\s+/g, "").split(","), o = 0; o < n.length; ++o) {
                 var s = n[o],
-                    c = i[o];
+                    u = i[o];
                 if ("function" == typeof s) {
-                    t += ";" + c + "=";
-                    var u = s.toString();
+                    t += ";" + u + "=";
+                    var c = s.toString();
                     if (s.prototype)
-                        if (-1 != u.indexOf("[native code]")) {
-                            var l = u.indexOf(" ", 8) + 1;
-                            t += u.slice(l, u.indexOf("(", l))
+                        if (-1 != c.indexOf("[native code]")) {
+                            var l = c.indexOf(" ", 8) + 1;
+                            t += c.slice(l, c.indexOf("(", l))
                         } else
-                            for (var d in t += u, s.prototype) t += ";" + c + ".prototype." + d + "=" + s.prototype[d].toString();
-                    else t += u
-                } else r[c] = s
+                            for (var d in t += c, s.prototype) t += ";" + u + ".prototype." + d + "=" + s.prototype[d].toString();
+                    else t += c
+                } else r[u] = s
             }
             return t
         },
@@ -552,20 +552,20 @@
         },
         ee = function(e, t, r, a) {
             if (!J[r]) {
-                for (var i = "", o = {}, s = e.length - 1, c = 0; c < s; ++c) i = $(e[c], i, o);
+                for (var i = "", o = {}, s = e.length - 1, u = 0; u < s; ++u) i = $(e[u], i, o);
                 J[r] = {
                     c: $(e[s], i, o),
                     e: o
                 }
             }
-            var u = W({}, J[r].e);
-            return n(J[r].c + ";onmessage=function(e){for(var k in e.data)self[k]=e.data[k];onmessage=" + t.toString() + "}", r, u, Z(u), a)
+            var c = W({}, J[r].e);
+            return n(J[r].c + ";onmessage=function(e){for(var k in e.data)self[k]=e.data[k];onmessage=" + t.toString() + "}", r, c, Z(c), a)
         },
         et = function() {
-            return [a, i, o, s, c, u, h, f, S, E, g, V, A, R, I, _, N, M, O, U, eT, ei, eo]
+            return [a, i, o, s, u, c, h, f, S, E, g, V, A, R, I, _, N, M, O, U, eT, ei, eo]
         },
         er = function() {
-            return [a, i, o, s, c, u, m, y, w, D, T, C, g, F, K, A, P, k, B, x, H, G, Q, L, N, M, j, X, eC, ei]
+            return [a, i, o, s, u, c, m, y, w, D, T, C, g, F, K, A, P, k, B, x, H, G, Q, L, N, M, j, X, eC, ei]
         },
         en = function() {
             return [ep, ef]
@@ -590,19 +590,19 @@
                     t.data[0] ? (e.push(t.data[0], t.data[1]), postMessage([t.data[0].length])) : e.flush(t.data[1])
                 }
         },
-        ec = function(e, t, r, n, a, i, o) {
-            var s, c = ee(e, n, a, function(e, r) {
-                e ? (c.terminate(), t.ondata.call(t, e)) : Array.isArray(r) ? 1 == r.length ? (t.queuedSize -= r[0], t.ondrain && t.ondrain(r[0])) : (r[1] && c.terminate(), t.ondata.call(t, e, r[0], r[1])) : o(r)
+        eu = function(e, t, r, n, a, i, o) {
+            var s, u = ee(e, n, a, function(e, r) {
+                e ? (u.terminate(), t.ondata.call(t, e)) : Array.isArray(r) ? 1 == r.length ? (t.queuedSize -= r[0], t.ondrain && t.ondrain(r[0])) : (r[1] && u.terminate(), t.ondata.call(t, e, r[0], r[1])) : o(r)
             });
-            c.postMessage(r), t.queuedSize = 0, t.push = function(e, r) {
-                t.ondata || O(5), s && t.ondata(O(4, 0, 1), null, !!r), t.queuedSize += e.length, c.postMessage([e, s = r], e.buffer instanceof ArrayBuffer ? [e.buffer] : [])
+            u.postMessage(r), t.queuedSize = 0, t.push = function(e, r) {
+                t.ondata || O(5), s && t.ondata(O(4, 0, 1), null, !!r), t.queuedSize += e.length, u.postMessage([e, s = r], e.buffer instanceof ArrayBuffer ? [e.buffer] : [])
             }, t.terminate = function() {
-                c.terminate()
+                u.terminate()
             }, i && (t.flush = function(e) {
-                c.postMessage([0, e])
+                u.postMessage([0, e])
             })
         },
-        eu = function(e, t) {
+        ec = function(e, t) {
             return e[t] | e[t + 1] << 8
         },
         el = function(e, t) {
@@ -686,7 +686,7 @@
             }, e
         }(),
         eD = function(e, t) {
-            ec([er, function() {
+            eu([er, function() {
                 return [es, eA]
             }], this, eb.call(this, e, t), function(e) {
                 onmessage = es(new eA(e.data))
@@ -722,7 +722,7 @@
             }, e
         }(),
         eS = function(e, t) {
-            ec([et, function() {
+            eu([et, function() {
                 return [es, ew]
             }], this, eb.call(this, e, t), function(e) {
                 onmessage = es(new ew(e.data))
@@ -766,7 +766,7 @@
         }(),
         eR = function(e, t) {
             var r = this;
-            ec([et, en, function() {
+            eu([et, en, function() {
                 return [es, ew, eE]
             }], this, eb.call(this, e, t), function(e) {
                 var t = new eE(e.data);
@@ -802,7 +802,7 @@
             }, e
         }()),
         e_ = function(e, t) {
-            ec([et, ea, function() {
+            eu([et, ea, function() {
                 return [es, ew, eI]
             }], this, eb.call(this, e, t), function(e) {
                 onmessage = es(new eI(e.data))
@@ -868,15 +868,15 @@
             return r
         }
         if (eV) return eV.encode(e);
-        for (var i = e.length, o = new a(e.length + (e.length >> 1)), s = 0, c = function(e) {
+        for (var i = e.length, o = new a(e.length + (e.length >> 1)), s = 0, u = function(e) {
                 o[s++] = e
             }, n = 0; n < i; ++n) {
             if (s + 5 > o.length) {
-                var u = new a(s + 8 + (i - n << 1));
-                u.set(o), o = u
+                var c = new a(s + 8 + (i - n << 1));
+                c.set(o), o = c
             }
             var l = e.charCodeAt(n);
-            l < 128 || t ? c(l) : (l < 2048 ? c(192 | l >> 6) : (l > 55295 && l < 57344 ? (c(240 | (l = 65536 + (1047552 & l) | 1023 & e.charCodeAt(++n)) >> 18), c(128 | l >> 12 & 63)) : c(224 | l >> 12), c(128 | l >> 6 & 63)), c(128 | 63 & l))
+            l < 128 || t ? u(l) : (l < 2048 ? u(192 | l >> 6) : (l > 55295 && l < 57344 ? (u(240 | (l = 65536 + (1047552 & l) | 1023 & e.charCodeAt(++n)) >> 18), u(128 | l >> 12 & 63)) : u(224 | l >> 12), u(128 | l >> 6 & 63)), u(128 | 63 & l))
         }
         return M(o, 0, s)
     }
@@ -917,12 +917,12 @@
         },
         eH = function(e, t, r, n, a, i, o) {
             var s = 0xffffffff == a,
-                c = 0xffffffff == i,
-                u = 0xffffffff == o,
+                u = 0xffffffff == i,
+                c = 0xffffffff == o,
                 l = t + r;
-            if (n && s + c + u) {
-                for (; t + 4 < l; t += 4 + eu(e, t + 2))
-                    if (1 == eu(e, t)) return [s ? ed(e, t + 4 + 8 * c) : a, c ? ed(e, t + 4) : i, u ? ed(e, t + 4 + 8 * (c + s)) : o, 1];
+            if (n && s + u + c) {
+                for (; t + 4 < l; t += 4 + ec(e, t + 2))
+                    if (1 == ec(e, t)) return [s ? ed(e, t + 4 + 8 * u) : a, u ? ed(e, t + 4) : i, c ? ed(e, t + 4 + 8 * (u + s)) : o, 1];
                 n < 2 && O(13)
             }
             return [a, i, o, 0]
@@ -937,16 +937,16 @@
             return t
         },
         eQ = function(e, t, r, n, a, i, o, s) {
-            var c = n.length,
-                u = r.extra,
+            var u = n.length,
+                c = r.extra,
                 l = s && s.length,
-                d = eG(u);
+                d = eG(c);
             eh(e, t, null != o ? 0x2014b50 : 0x4034b50), t += 4, null != o && (e[t++] = 20, e[t++] = r.os), e[t] = 20, t += 2, e[t++] = r.flag << 1 | (i < 0 && 8), e[t++] = a && 8, e[t++] = 255 & r.compression, e[t++] = r.compression >> 8;
             var h = new Date(null == r.mtime ? Date.now() : r.mtime),
                 m = h.getFullYear() - 1980;
-            if ((m < 0 || m > 119) && O(10), eh(e, t, m << 25 | h.getMonth() + 1 << 21 | h.getDate() << 16 | h.getHours() << 11 | h.getMinutes() << 5 | h.getSeconds() >> 1), t += 4, -1 != i && (eh(e, t, r.crc), eh(e, t + 4, i < 0 ? -i - 2 : i), eh(e, t + 8, r.size)), eh(e, t + 12, c), eh(e, t + 14, d), t += 16, null != o && (eh(e, t, l), eh(e, t + 6, r.attrs), eh(e, t + 10, o), t += 14), e.set(n, t), t += c, d)
-                for (var p in u) {
-                    var f = u[p],
+            if ((m < 0 || m > 119) && O(10), eh(e, t, m << 25 | h.getMonth() + 1 << 21 | h.getDate() << 16 | h.getHours() << 11 | h.getMinutes() << 5 | h.getSeconds() >> 1), t += 4, -1 != i && (eh(e, t, r.crc), eh(e, t + 4, i < 0 ? -i - 2 : i), eh(e, t + 8, r.size)), eh(e, t + 12, u), eh(e, t + 14, d), t += 16, null != o && (eh(e, t, l), eh(e, t + 6, r.attrs), eh(e, t + 10, o), t += 14), e.set(n, t), t += u, d)
+                for (var p in c) {
+                    var f = c[p],
                         y = f.length;
                     eh(e, t, +p), eh(e, t + 2, y), e.set(f, t + 4), t += 4 + y
                 }
@@ -1004,11 +1004,11 @@
                 i = e.comment,
                 o = i && ek(i),
                 s = n != e.filename.length || o && i.length != o.length,
-                c = n + eG(e.extra) + 30;
+                u = n + eG(e.extra) + 30;
             n > 65535 && this.ondata(O(11, 0, 1), null, !1);
-            var u = new a(c);
-            eQ(u, 0, e, r, s, -1);
-            var l = [u],
+            var c = new a(u);
+            eQ(c, 0, e, r, s, -1);
+            var l = [c],
                 d = function() {
                     for (var e = 0, r = l; e < r.length; e++) {
                         var n = r[e];
@@ -1039,7 +1039,7 @@
                 if (r) t.ondata(r, n, i), t.terminate();
                 else if (f += n.length, l.push(n), i) {
                     var o = new a(16);
-                    eh(o, 0, 0x8074b50), eh(o, 4, e.crc), eh(o, 8, f), eh(o, 12, e.size), l.push(o), p.c = f, p.b = c + f + 16, p.crc = e.crc, p.size = e.size, h && p.r(), h = 1
+                    eh(o, 0, 0x8074b50), eh(o, 4, e.crc), eh(o, 8, f), eh(o, 12, e.size), l.push(o), p.c = f, p.b = u + f + 16, p.crc = e.crc, p.size = e.size, h && p.r(), h = 1
                 } else h && d()
             }, this.u.push(p)
         }
@@ -1056,8 +1056,8 @@
             var o = i[n];
             r += 46 + o.f.length + eG(o.extra) + (o.o ? o.o.length : 0)
         }
-        for (var s = new a(r + 22), c = 0, u = this.u; c < u.length; c++) {
-            var o = u[c];
+        for (var s = new a(r + 22), u = 0, c = this.u; u < c.length; u++) {
+            var o = c[u];
             eQ(s, e, o, o.f, o.u, -o.c - 2, t, o.o), e += 46 + o.f.length + eG(o.extra) + (o.o ? o.o.length : 0), t += o.b
         }
         eL(s, e, this.u.length, r, t), this.ondata(null, s, !0), this.d = 2
@@ -1110,24 +1110,24 @@
         } else {
             var o = 0,
                 s = 0,
-                c = void 0,
-                u = void 0;
-            this.p.length ? e.length ? ((u = new a(this.p.length + e.length)).set(this.p), u.set(e, this.p.length)) : u = this.p : u = e;
-            for (var l = u.length, d = this.c, h = d && this.d, m = this; s < l - 4 && "break" !== function() {
-                    var e = el(u, s);
+                u = void 0,
+                c = void 0;
+            this.p.length ? e.length ? ((c = new a(this.p.length + e.length)).set(this.p), c.set(e, this.p.length)) : c = this.p : c = e;
+            for (var l = c.length, d = this.c, h = d && this.d, m = this; s < l - 4 && "break" !== function() {
+                    var e = el(c, s);
                     if (0x4034b50 == e) {
-                        o = 1, c = s, m.d = null, m.c = 0;
-                        var t = eu(u, s + 6),
-                            n = eu(u, s + 8),
-                            a = eu(u, s + 26),
-                            i = eu(u, s + 28);
+                        o = 1, u = s, m.d = null, m.c = 0;
+                        var t = ec(c, s + 6),
+                            n = ec(c, s + 8),
+                            a = ec(c, s + 26),
+                            i = ec(c, s + 28);
                         if (l > s + 30 + a + i) {
                             var h, p = [];
                             m.k.unshift(p), o = 2;
-                            var f = el(u, s + 18),
-                                y = el(u, s + 22),
-                                g = eB(u.subarray(s + 30, s += 30 + a), !(2048 & t)),
-                                v = eH(u, s, i, 2, f, y, 0),
+                            var f = el(c, s + 18),
+                                y = el(c, s + 22),
+                                g = eB(c.subarray(s + 30, s += 30 + a), !(2048 & t)),
+                                v = eH(c, s, i, 2, f, y, 0),
                                 b = v[0],
                                 A = v[1],
                                 D = v[3];
@@ -1157,16 +1157,16 @@
                         return "break"
                     }
                     if (d) {
-                        if (0x8074b50 == e) return c = s += 12 + (-2 == d && 8), o = 3, m.c = 0, "break";
-                        else if (0x2014b50 == e) return c = s -= 4, o = 3, m.c = 0, "break"
+                        if (0x8074b50 == e) return u = s += 12 + (-2 == d && 8), o = 3, m.c = 0, "break";
+                        else if (0x2014b50 == e) return u = s -= 4, o = 3, m.c = 0, "break"
                     }
                 }(); ++s);
             if (this.p = K, d < 0) {
-                var p = o ? u.subarray(0, c - 12 - (-2 == d && 8) - (0x8074b50 == el(u, c - 16) && 4)) : u.subarray(0, s);
+                var p = o ? c.subarray(0, u - 12 - (-2 == d && 8) - (0x8074b50 == el(c, u - 16) && 4)) : c.subarray(0, s);
                 h ? h.push(p, !!o) : this.k[+(2 == o)].push(p)
             }
-            if (2 & o) return this.push(u.subarray(s), t);
-            this.p = u.subarray(s)
+            if (2 & o) return this.push(c.subarray(s), t);
+            this.p = c.subarray(s)
         }
         t && (this.c && O(13), this.p = null)
     }, eW.prototype.register = function(e) {
@@ -1243,7 +1243,7 @@
         ti = e => "string" == typeof e && e.trim().length > 0,
         to = e => ti(e) && (0, e1.isNumericUIMetric)(e),
         ts = e => "string" == typeof e || "number" == typeof e,
-        tc = e => {
+        tu = e => {
             let t = (0, e3.getUIMetricFromAtomicMetricLike)(e.metric);
             if (!to(t)) return (0, eJ.default)('Cannot serialize non-numeric computed metric source "'.concat(String(t), '".')), null;
             let r = {
@@ -1262,7 +1262,7 @@
             })(e.pseudoDimensionValues, (0, e3.isCustomEventsAtomicMetricLike)(e.metric) ? e.metric.aggregationType : void 0);
             return n && (r.p = n), r
         },
-        tu = e => {
+        tc = e => {
             let t, r = (e => {
                 var t, r;
                 if (e && (void 0 !== e.a || void 0 !== e.p)) return {
@@ -1340,22 +1340,22 @@
                         setVersion: i,
                         createUnsupportedVersionError: o = e4,
                         createMigrationGapError: s = e7
-                    } = e, c = t, u = a(t);
-                    if (u > n) throw o(u, n);
-                    let l = u,
+                    } = e, u = t, c = a(t);
+                    if (c > n) throw o(c, n);
+                    let l = c,
                         d = r.length + 1,
                         h = 0;
                     for (; l < n && h < d;) {
                         let e = l,
                             t = r.find(t => t.fromVersion === e);
                         if (!t) throw s(e, n);
-                        let o = t.migrate(c),
-                            u = a(o);
-                        if (u !== e && u !== t.toVersion) throw s(e, n, "Migration step ".concat(e, " -> ").concat(t.toVersion, " produced version ").concat(u, "."));
-                        c = i(o, t.toVersion), l = t.toVersion, h += 1
+                        let o = t.migrate(u),
+                            c = a(o);
+                        if (c !== e && c !== t.toVersion) throw s(e, n, "Migration step ".concat(e, " -> ").concat(t.toVersion, " produced version ").concat(c, "."));
+                        u = i(o, t.toVersion), l = t.toVersion, h += 1
                     }
                     if (l !== n) throw s(l, n, "Migration pipeline did not converge after ".concat(h, " steps (stopped at version ").concat(l, ")."));
-                    return i(c, n)
+                    return i(u, n)
                 })({
                     document: e,
                     registry: tn,
@@ -1380,14 +1380,14 @@
                     return !(!ts(t) || !(0, e0.isValidEnumValue)(e$.RAQIV2Dimension, t) || (0, e2.default)(t)) && t !== e$.RAQIV2Dimension.CustomEventName && Array.isArray(r) && r.every(e => "string" == typeof e) && (void 0 === n || ts(n) && (0, e0.isValidEnumValue)(eZ.AnalyticsQueryGatewayAPIFilterOperation, n) && n !== eZ.AnalyticsQueryGatewayAPIFilterOperation.Invalid)
                 })(e)))) && (void 0 === t.c || !!ti(t.c)) && (void 0 === t.p || !!((r = t.p) && "object" == typeof r && (void 0 === r.a || ts(r.a) && (0, e0.isValidEnumValue)(e$.RAQIV2AggregationType, r.a)) && (void 0 === r.p || ts(r.p) && (0, e0.isValidEnumValue)(e$.RAQIV2PercentileType, r.p)) && 1))
             }))) return null;
-        let [i, ...o] = a.s, s = tu(i), c = [];
+        let [i, ...o] = a.s, s = tc(i), u = [];
         for (let e of o) {
-            let t = tu(e);
+            let t = tc(e);
             if (!t) return null;
-            c.push(t)
+            u.push(t)
         }
         return s ? {
-            sources: [s, ...c],
+            sources: [s, ...u],
             formula: a.f,
             name: ti(a.n) ? a.n : void 0,
             l7Smoothing: 1 === a.l
@@ -1395,7 +1395,7 @@
     }, "serializeComputedMetricToQueryParam", 0, e => {
         let t = [];
         for (let r of e.sources) {
-            let e = tc(r);
+            let e = tu(r);
             if (!e) return null;
             t.push(e)
         }
@@ -1536,36 +1536,34 @@
         }
     }], 318727);
     let s = "chart-empty-slot:",
-        c = e => "Component" === e.type && "Chart" === e.component.type ? e.component.chart : null;
+        u = e => "Component" === e.type && "Chart" === e.component.type ? e.component.chart : null;
 
-    function u(e) {
+    function c(e) {
         return e.flatMap(e => {
             let t;
             if ("Component" === e.type) {
-                let t = c(e);
+                let t = u(e);
                 return t ? [{
                     columnCount: 1,
                     tiles: [t]
                 }] : []
             }
-            let r = (t = e.children.map(c)).length > 0 && t.every(e => null !== e) ? t.filter(e => null !== e) : null;
-            if (r) {
-                var n = r,
-                    a = "Grid" === e.type ? e.columnCount : r.length > 1 ? 2 : 1;
-                if (1 !== a && 2 !== a) throw Error("Malformed dashboard layout: chart row columnCount must be 1 or ".concat(2, ", received ").concat(a, "."));
-                if (0 === n.length) throw Error("Malformed dashboard layout: a chart row must contain at least one tile.");
-                if (1 === a) return n.map(e => ({
-                    columnCount: a,
+            let r = (t = e.children.map(u)).length > 0 && t.every(e => null !== e) ? t.filter(e => null !== e) : null;
+            if (r) return function(e, t) {
+                if (0 === e.length) return [];
+                let r = 1 === t ? 1 : 2;
+                if (1 === r) return e.map(e => ({
+                    columnCount: r,
                     tiles: [e]
                 }));
-                let t = [];
-                for (let e = 0; e < n.length; e += 2) t.push({
-                    columnCount: a,
-                    tiles: n.slice(e, e + 2)
+                let n = [];
+                for (let t = 0; t < e.length; t += 2) n.push({
+                    columnCount: r,
+                    tiles: e.slice(t, t + 2)
                 });
-                return t
-            }
-            return u(e.children)
+                return n
+            }(r, "Grid" === e.type ? 1 === e.columnCount ? 1 : 2 : r.length > 1 ? 2 : 1);
+            return c(e.children)
         })
     }
     e.s(["getEmptyChartSlotTarget", 0, e => {
@@ -1578,30 +1576,30 @@
         let t, r = !!(t = e[e.length - 1]) && 2 === o(t) && 1 === i(t).length,
             n = [],
             a = 0;
-        return e.forEach((t, c) => {
-            let u = i(t),
+        return e.forEach((t, u) => {
+            let c = i(t),
                 l = o(t),
                 d = 1 === l ? 2 : 1;
-            (u.forEach((e, t) => {
+            (c.forEach((e, t) => {
                 n.push({
                     kind: "tile",
                     tileId: e.tileId,
                     tile: e,
-                    rowIndex: c,
+                    rowIndex: u,
                     itemIndex: t,
                     order: a,
                     columnSpan: d
                 }), a += 1
-            }), !(l <= u.length)) && (n.push({
+            }), !(l <= c.length)) && (n.push({
                 kind: "empty-slot",
-                emptySlotId: "".concat(s).concat(c),
-                rowIndex: c,
+                emptySlotId: "".concat(s).concat(u),
+                rowIndex: u,
                 order: a,
                 columnSpan: 1,
-                isAddPlaceholderSlot: r && c === e.length - 1
+                isAddPlaceholderSlot: r && u === e.length - 1
             }), a += 1)
         }), n
-    }, "selectChartRowsFromLayoutNodes", 0, u], 413311);
+    }, "selectChartRowsFromLayoutNodes", 0, c], 413311);
     let l = [];
 
     function d(e) {
@@ -1670,7 +1668,7 @@
         })
     }
     e.s(["getChartRows", 0, function(e) {
-        return u(d(e).bodyNodes.filter(e => !v(e)))
+        return c(d(e).bodyNodes.filter(e => !v(e)))
     }, "getDashboardSurface", 0, d, "getSummaryCards", 0, b, "withChartRows", 0, function(e, t) {
         let r = d(e),
             n = b(e);
@@ -1694,8 +1692,8 @@
         i = e.i(118413),
         o = e.i(834046),
         s = e.i(759283),
-        c = e.i(283561),
-        u = e.i(721281),
+        u = e.i(283561),
+        c = e.i(721281),
         l = e.i(379843),
         d = e.i(296150),
         h = e.i(436025),
@@ -2027,8 +2025,8 @@
                 } = e;
                 Array.isArray(r) && 0 !== r.length && "string" == typeof n || B("".concat(t, " is not a valid computed metric."));
                 let [o, ...s] = r.map((e, r) => {
-                    var n, a, i, o, s, c;
-                    let u;
+                    var n, a, i, o, s, u;
+                    let c;
                     P(e) || B("".concat(t, ".sources[").concat(r, "] must be an object."));
                     let l = null != (n = null != (a = e.sourceKey) ? a : e.source_key) ? n : e.key;
                     ("string" != typeof l || 0 === l.length) && B("".concat(t, ".sources[").concat(r, "].sourceKey must be set."));
@@ -2037,7 +2035,7 @@
                     let h = null != (i = d.customEventMetric) ? i : d.custom_event_metric;
                     if (P(h)) {
                         let e, n = null != (s = h.customEventName) ? s : h.custom_event_name;
-                        "string" != typeof n && B("".concat(t, ".sources[").concat(r, "].metric.customEventMetric is invalid.")), u = {
+                        "string" != typeof n && B("".concat(t, ".sources[").concat(r, "].metric.customEventMetric is invalid.")), c = {
                             metric: g.RAQIV2UIMetric.CustomEventsV2,
                             customEventName: n,
                             ...void 0 !== h.aggregation ? {
@@ -2045,8 +2043,8 @@
                             } : {}
                         }
                     } else {
-                        let e = null != (c = d.metricKey) ? c : d.metric_key;
-                        "string" != typeof e && B("".concat(t, ".sources[").concat(r, "].metric.metricKey must be set.")), (0, C.isMetricKey)(e) || B("".concat(t, ".sources[").concat(r, "].metric.metricKey is unsupported.")), u = e
+                        let e = null != (u = d.metricKey) ? u : d.metric_key;
+                        "string" != typeof e && B("".concat(t, ".sources[").concat(r, "].metric.metricKey must be set.")), (0, C.isMetricKey)(e) || B("".concat(t, ".sources[").concat(r, "].metric.metricKey is unsupported.")), c = e
                     }
                     let m = void 0 === e.filters ? void 0 : F(e.filters, "".concat(t, ".sources[").concat(r, "].filters")),
                         p = null == m ? void 0 : m.map(e => {
@@ -2058,7 +2056,7 @@
                         });
                     return {
                         key: l,
-                        metric: u,
+                        metric: c,
                         ...void 0 !== p ? {
                             filters: p
                         } : {},
@@ -2097,7 +2095,7 @@
     }
 
     function W(e, t) {
-        var r, n, a, i, o, s, c, u, l;
+        var r, n, a, i, o, s, u, c, l;
         let d;
         if (null == e) return {};
         P(e) || B("".concat(t, " must be an object."));
@@ -2105,7 +2103,7 @@
             m = P(h) ? h.granularity : void 0,
             p = void 0 === m ? void 0 : I[k(m)],
             f = null != (n = e.annotationOptions) ? n : e.annotation_options,
-            y = P(f) ? (d = null != (u = K(null != (l = f.defaultAnnotationTypeKeys) ? l : f.default_annotation_type_keys, "".concat(t, ".annotationOptions.defaultAnnotationTypeKeys"), C.isDefaultAnnotationType)) ? u : [], {
+            y = P(f) ? (d = null != (c = K(null != (l = f.defaultAnnotationTypeKeys) ? l : f.default_annotation_type_keys, "".concat(t, ".annotationOptions.defaultAnnotationTypeKeys"), C.isDefaultAnnotationType)) ? c : [], {
                 supportedAnnotationTypes: (0, A.resolveCustomDashboardSupportedAnnotationTypes)(d),
                 defaultAnnotationTypes: d,
                 showAnnotationsControl: "boolean" == typeof f.showAnnotationsControl ? f.showAnnotationsControl : "boolean" != typeof f.show_annotations_control || f.show_annotations_control
@@ -2142,7 +2140,7 @@
                         }
                     }(null != (n = a.defaultSelection) ? n : a.default_selection, "".concat(t, ".dateRange.defaultSelection"))
                 }
-            }(null != (c = e.timeRangeOptions) ? c : e.time_range_options, "".concat(t, ".timeRangeOptions")),
+            }(null != (u = e.timeRangeOptions) ? u : e.time_range_options, "".concat(t, ".timeRangeOptions")),
             filterDimensions: b,
             defaultFilters: v,
             breakdownDimensions: D,
@@ -2195,10 +2193,10 @@
                 type: "Chart",
                 chart: function(e, t) {
                     var r, n, a, i, o;
-                    let s, c;
+                    let s, u;
                     P(e) || B("".concat(t, " must be an object."));
-                    let u = null != (r = e.tileId) ? r : e.tile_id;
-                    ("string" != typeof u || 0 === u.length) && B("".concat(t, ".tileId must be set."));
+                    let c = null != (r = e.tileId) ? r : e.tile_id;
+                    ("string" != typeof c || 0 === c.length) && B("".concat(t, ".tileId must be set."));
                     let d = null != (n = e.dataSpec) ? n : e.data_spec,
                         h = null != (a = e.chartSpec) ? a : e.chart_spec;
                     P(d) && P(h) || B("".concat(t, " must include dataSpec and chartSpec.")), Array.isArray(d.metrics) || B("".concat(t, ".dataSpec.metrics must be an array."));
@@ -2210,11 +2208,11 @@
                         (0, C.isChartAggregation)(e) || B("Unsupported chart aggregation ".concat(e, ".")), s = e
                     }
                     let y = null != (o = d.breakdownDimensionKeys) ? o : d.breakdown_dimension_keys;
-                    Array.isArray(y) && (y.every(e => "string" == typeof e) || B("".concat(t, ".dataSpec.breakdownDimensionKeys must contain strings.")), c = y);
+                    Array.isArray(y) && (y.every(e => "string" == typeof e) || B("".concat(t, ".dataSpec.breakdownDimensionKeys must contain strings.")), u = y);
                     let g = void 0 !== p ? H(p, E, "granularity") : l.DEFAULT_CHART_GRANULARITY;
                     return {
                         type: "Chart",
-                        tileId: u,
+                        tileId: c,
                         ..."string" == typeof e.title ? {
                             title: e.title
                         } : {},
@@ -2233,8 +2231,8 @@
                             ...void 0 !== s ? {
                                 aggregation: s
                             } : {},
-                            ...void 0 !== c ? {
-                                breakdownDimensions: c
+                            ...void 0 !== u ? {
+                                breakdownDimensions: u
                             } : {},
                             granularity: g,
                             filters: F(d.filters, "".concat(t, ".dataSpec.filters"))
@@ -2277,7 +2275,7 @@
         switch (e.type) {
             case "Component":
                 var t, r, n, a, i, o;
-                let s, c, u;
+                let s, u, c;
                 return {
                     component: "SummaryCard" === (t = e.component).type ? {
                         summaryCard: {
@@ -2295,14 +2293,14 @@
                             if (!e) return;
                             let t = {};
                             return void 0 !== e.genreBenchmark && (t.genreBenchmark = e.genreBenchmark), void 0 !== e.similarExperienceBenchmark && (t.similarExperienceBenchmark = e.similarExperienceBenchmark), void 0 !== e.topExperienceBenchmark && (t.topExperienceBenchmark = e.topExperienceBenchmark), void 0 !== e.previousPeriod && ("boolean" != typeof e.previousPeriod && B("Backend v1 cannot persist configured previous-period comparison offsets."), t.previousPeriod = e.previousPeriod), void 0 !== e.quota && (t.quota = e.quota), Object.keys(t).length > 0 ? t : void 0
-                        }((a = t.chart).chartSpec.overlays), c = null == (o = a.dataSpec.metrics[0]) ? void 0 : o.metric, u = null != (i = a.dataSpec.aggregation) ? i : void 0 !== c ? (0, D.resolveDefaultChartAggregation)(c) : g.RAQIV2AggregationType.Average, {
+                        }((a = t.chart).chartSpec.overlays), u = null == (o = a.dataSpec.metrics[0]) ? void 0 : o.metric, c = null != (i = a.dataSpec.aggregation) ? i : void 0 !== u ? (0, D.resolveDefaultChartAggregation)(u) : g.RAQIV2AggregationType.Average, {
                             tileId: a.tileId,
                             ...void 0 !== a.title ? {
                                 title: a.title
                             } : {},
                             dataSpec: {
                                 metrics: a.dataSpec.metrics.map($),
-                                aggregation: x(u, _, "aggregation"),
+                                aggregation: x(c, _, "aggregation"),
                                 ...a.dataSpec.breakdownDimensions ? {
                                     breakdownDimensionKeys: [...a.dataSpec.breakdownDimensions]
                                 } : {},
@@ -2480,7 +2478,7 @@
 
     function ei(e) {
         var t, r, n, a, i, o, s;
-        let c, u, d = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : l.EMPTY_DASHBOARD_CONFIG,
+        let u, c, d = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : l.EMPTY_DASHBOARD_CONFIG,
             h = en(e),
             m = null != (t = e.universeId) ? t : 0,
             p = null != (r = et(e.createdTime)) ? r : new Date(0).toISOString(),
@@ -2497,7 +2495,7 @@
             universeId: m,
             name: (0, C.validateDashboardName)(null != (a = e.name) ? a : ""),
             description: (0, C.validateDashboardDescription)(null != (i = e.description) ? i : void 0),
-            status: (c = (o = e).latestPublishedDocumentId, u = null != (s = o.latestPublishedVersion) ? s : 0, c || u > 0 ? "published" : "draft"),
+            status: (u = (o = e).latestPublishedDocumentId, c = null != (s = o.latestPublishedVersion) ? s : 0, u || c > 0 ? "published" : "draft"),
             isPinned: g,
             pinnedAt: g ? et(e.pinnedTime) : void 0,
             createdAt: p,
@@ -2554,7 +2552,7 @@
     function es(e, t) {
         return "".concat(e, ":").concat(t)
     }
-    let ec = class {
+    let eu = class {
         async list(e, t) {
             return this.withApiErrors(e, void 0, async () => {
                 var r, n, a;
@@ -2616,15 +2614,15 @@
                 void 0 !== r.name && (i.name = r.name), void 0 !== r.description && (i.description = r.description);
                 let {
                     config: o
-                } = r, s = void 0 !== i.name || void 0 !== i.description, c = void 0 !== o;
-                if (!s && !c) return this.get(e, t);
-                let u = await this.ensureTokens(e, t),
+                } = r, s = void 0 !== i.name || void 0 !== i.description, u = void 0 !== o;
+                if (!s && !u) return this.get(e, t);
+                let c = await this.ensureTokens(e, t),
                     l = null == n ? void 0 : n.expectedVersion;
                 if (void 0 !== o) {
                     let r = await this.client.publishDashboard({
                         universeId: e,
                         dashboardId: t,
-                        expectedHeadEtag: this.requireHeadEtag(u, t, l),
+                        expectedHeadEtag: this.requireHeadEtag(c, t, l),
                         document: ea(o),
                         ...s ? {
                             metadataPatch: i
@@ -2635,7 +2633,7 @@
                     let r = await this.client.updateDashboardMetadata({
                         universeId: e,
                         dashboardId: t,
-                        expectedHeadEtag: this.requireHeadEtag(u, t, l),
+                        expectedHeadEtag: this.requireHeadEtag(c, t, l),
                         patch: i
                     });
                     this.rememberMetadata(e, r)
@@ -2674,32 +2672,29 @@
                         nextTileId: (0, h.createTileId)()
                     }),
                     s = await this.ensureTokens(e, t),
-                    c = await this.client.publishDashboard({
+                    u = await this.client.publishDashboard({
                         universeId: e,
                         dashboardId: t,
                         expectedHeadEtag: this.requireHeadEtag(s, t, null == n ? void 0 : n.expectedVersion),
                         document: ea(i)
                     });
-                this.rememberMetadata(e, c.metadata);
-                let u = eo(c);
+                this.rememberMetadata(e, u.metadata);
+                let c = eo(u);
                 return this.emit({
                     universeId: e,
                     dashboardId: t,
                     eventType: "add-chart-tile"
                 }), {
-                    document: u,
+                    document: c,
                     tile: o
                 }
             })
         }
         async delete(e, t) {
             return this.withApiErrors(e, t, async () => {
-                this.ensureAvailable();
-                let r = await this.ensureTokens(e, t);
-                await this.client.deleteDashboard({
+                this.ensureAvailable(), await this.client.deleteDashboard({
                     universeId: e,
-                    dashboardId: t,
-                    expectedHeadEtag: this.requireHeadEtag(r, t)
+                    dashboardId: t
                 }), this.tokens.delete(es(e, t)), this.emit({
                     universeId: e,
                     dashboardId: t,
@@ -2747,7 +2742,7 @@
         }
         async unpublish(e, t) {
             return this.withApiErrors(e, t, async () => {
-                throw this.ensureAvailable(), new c.CustomDashboardNotAvailableError
+                throw this.ensureAvailable(), new u.CustomDashboardNotAvailableError
             })
         }
         async pin(e, t) {
@@ -2769,30 +2764,37 @@
             this.disposed = !0, this.listeners.clear(), this.tokens.clear()
         }
         async updatePinned(e, t, r) {
-            return this.withApiErrors(e, t, async () => {
-                this.ensureAvailable();
-                let n = await this.ensureTokens(e, t),
-                    a = await this.client.updateDashboardMetadata({
+            let n;
+            this.ensureAvailable();
+            for (let a = 0; a < 3; a += 1) try {
+                return await this.withApiErrors(e, t, async () => {
+                    this.ensureAvailable();
+                    let n = await this.ensureTokens(e, t),
+                        a = await this.client.updateDashboardMetadata({
+                            universeId: e,
+                            dashboardId: t,
+                            expectedHeadEtag: this.requireHeadEtag(n, t),
+                            patch: {
+                                isPinned: r
+                            }
+                        });
+                    return this.rememberMetadata(e, a), this.emit({
                         universeId: e,
                         dashboardId: t,
-                        expectedHeadEtag: this.requireHeadEtag(n, t),
-                        patch: {
-                            isPinned: r
-                        }
-                    });
-                return this.rememberMetadata(e, a), this.emit({
-                    universeId: e,
-                    dashboardId: t,
-                    eventType: r ? "pin" : "unpin"
-                }), this.get(e, t)
-            })
+                        eventType: r ? "pin" : "unpin"
+                    }), this.get(e, t)
+                })
+            } catch (e) {
+                if (n = e, !(e instanceof u.CustomDashboardVersionConflictError) || 2 === a) throw e
+            }
+            throw n
         }
         async ensureTokens(e, t) {
             let r = this.tokens.get(es(e, t));
             if (r) return r;
             await this.get(e, t);
             let n = this.tokens.get(es(e, t));
-            if (!n) throw new c.CustomDashboardVersionConflictError(t);
+            if (!n) throw new u.CustomDashboardVersionConflictError(t);
             return n
         }
         rememberMetadata(e, t) {
@@ -2801,19 +2803,19 @@
                 i = es(e, a),
                 o = this.tokens.get(i),
                 s = t && null != (n = t.headEtag) ? n : void 0,
-                c = o && o.headEtag === s ? o.revision : (null != (r = null == o ? void 0 : o.revision) ? r : 0) + 1,
-                u = new Map(null == o ? void 0 : o.headEtagsByRevision);
-            s && u.set(c, s);
+                u = o && o.headEtag === s ? o.revision : (null != (r = null == o ? void 0 : o.revision) ? r : 0) + 1,
+                c = new Map(null == o ? void 0 : o.headEtagsByRevision);
+            s && c.set(u, s);
             let l = {
                 headEtag: s,
-                revision: c,
-                headEtagsByRevision: u
+                revision: u,
+                headEtagsByRevision: c
             };
             return a && this.tokens.set(i, l), l
         }
         requireHeadEtag(e, t, r) {
             let n = void 0 === r ? e.headEtag : e.headEtagsByRevision.get(r);
-            if (!n) throw new c.CustomDashboardVersionConflictError(t);
+            if (!n) throw new u.CustomDashboardVersionConflictError(t);
             return n
         }
         async refreshTokens(e, t) {
@@ -2838,12 +2840,12 @@
                     pageToken: t
                 } : void 0),
                 s = [...a, ...null != (r = o.dashboards) ? r : []],
-                c = null != (n = o.nextPageToken) ? n : void 0,
-                u = null != i ? i : o.capabilities;
-            return c ? this.listAllDashboards(e, c, s, u) : {
+                u = null != (n = o.nextPageToken) ? n : void 0,
+                c = null != i ? i : o.capabilities;
+            return u ? this.listAllDashboards(e, u, s, c) : {
                 dashboards: s,
-                ...void 0 === u ? {} : {
-                    capabilities: u
+                ...void 0 === c ? {} : {
+                    capabilities: c
                 }
             }
         }
@@ -2857,21 +2859,21 @@
             })
         }
         ensureAvailable() {
-            if (this.disposed) throw new c.CustomDashboardNotAvailableError
+            if (this.disposed) throw new u.CustomDashboardNotAvailableError
         }
         async withApiErrors(e, t, r) {
             try {
                 return await r()
             } catch (n) {
                 let r = (0, y.mapCustomDashboardsApiError)(n, t);
-                throw r instanceof c.CustomDashboardVersionConflictError && void 0 !== e && t && await this.refreshTokens(e, t), r
+                throw r instanceof u.CustomDashboardVersionConflictError && void 0 !== e && t && await this.refreshTokens(e, t), r
             }
         }
         constructor(e = (0, f.createDefaultCustomDashboardsApiClient)()) {
-            (0, u._)(this, "client", void 0), (0, u._)(this, "listeners", new Set), (0, u._)(this, "tokens", new Map), (0, u._)(this, "disposed", !1), this.client = e
+            (0, c._)(this, "client", void 0), (0, c._)(this, "listeners", new Set), (0, c._)(this, "tokens", new Map), (0, c._)(this, "disposed", !1), this.client = e
         }
     };
-    var eu = e.i(650040),
+    var ec = e.i(650040),
         el = e.i(718389);
 
     function ed(e) {
@@ -2883,7 +2885,7 @@
     }
 
     function eh(e) {
-        return e instanceof c.CustomDashboardNotFoundError
+        return e instanceof u.CustomDashboardNotFoundError
     }
 
     function em(e) {
@@ -2954,13 +2956,13 @@
                 try {
                     return await this.ensureLocalDashboard(e, t), em(await this.localService.duplicate(e, t, r))
                 } catch (e) {
-                    if (!eh(e) && !(e instanceof c.CustomDashboardNotAvailableError)) throw e
+                    if (!eh(e) && !(e instanceof u.CustomDashboardNotAvailableError)) throw e
                 }
                 return this.forkApiDashboardToLocal(e, t, r)
             }
             async forkApiDashboardToLocal(e, t, r) {
                 var n, a, i;
-                let o, s, c, u, l = await this.apiService.get(e, t),
+                let o, s, u, c, l = await this.apiService.get(e, t),
                     d = await this.localService.list(e);
                 return em(await this.localService.create({
                     universeId: e,
@@ -2968,10 +2970,10 @@
                     description: l.description,
                     createdByUserId: r.createdByUserId,
                     createdByUsername: r.createdByUsername,
-                    config: (i = l.config, c = (0, eu.getSummaryCards)(i).map(e => ed(e)), u = (0, eu.getChartRows)(i).map(e => ({
+                    config: (i = l.config, u = (0, ec.getSummaryCards)(i).map(e => ed(e)), c = (0, ec.getChartRows)(i).map(e => ({
                         ...e,
                         tiles: e.tiles.map(e => ed(e))
-                    })), (0, eu.withChartRows)((0, eu.withSummaryCards)(i, c), u))
+                    })), (0, ec.withChartRows)((0, ec.withSummaryCards)(i, u), c))
                 }))
             }
             async publish(e, t, r) {
@@ -2993,7 +2995,7 @@
                 try {
                     await this.ensureLocalDashboard(e, t)
                 } catch (e) {
-                    if (e instanceof c.CustomDashboardNotAvailableError) return null;
+                    if (e instanceof u.CustomDashboardNotAvailableError) return null;
                     throw e
                 }
                 return this.localService.getVersion(e, t)
@@ -3013,12 +3015,12 @@
                 try {
                     return em(await this.localService.get(e, t))
                 } catch (e) {
-                    if (eh(e)) throw new c.CustomDashboardNotAvailableError;
+                    if (eh(e)) throw new u.CustomDashboardNotAvailableError;
                     throw e
                 }
             }
             constructor(e) {
-                (0, u._)(this, "localService", void 0), (0, u._)(this, "apiService", void 0), this.localService = e.localService, this.apiService = e.apiService
+                (0, c._)(this, "localService", void 0), (0, c._)(this, "apiService", void 0), this.localService = e.localService, this.apiService = e.apiService
             }
         },
         eg = {
@@ -3074,16 +3076,16 @@
             }
             assertUnderUniverseCap(e) {
                 var t, r;
-                if ((null != (t = null == (r = this.peekUniverseMap(e)) ? void 0 : r.size) ? t : 0) >= l.MAX_DASHBOARDS_PER_UNIVERSE) throw new c.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the per-universe cap of ").concat(l.MAX_DASHBOARDS_PER_UNIVERSE, " dashboards. Delete one to create another."))
+                if ((null != (t = null == (r = this.peekUniverseMap(e)) ? void 0 : r.size) ? t : 0) >= l.MAX_DASHBOARDS_PER_UNIVERSE) throw new u.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the per-universe cap of ").concat(l.MAX_DASHBOARDS_PER_UNIVERSE, " dashboards. Delete one to create another."))
             }
             assertUnderPinnedCap(e, t) {
                 let r = this.peekUniverseMap(e);
-                if (r && Array.from(r.values()).filter(e => e.document.isPinned && e.document.id !== t).length >= l.MAX_PINNED_DASHBOARDS) throw new c.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the pinned-dashboard cap of ").concat(l.MAX_PINNED_DASHBOARDS, ". Unpin one to pin another."))
+                if (r && Array.from(r.values()).filter(e => e.document.isPinned && e.document.id !== t).length >= l.MAX_PINNED_DASHBOARDS) throw new u.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the pinned-dashboard cap of ").concat(l.MAX_PINNED_DASHBOARDS, ". Unpin one to pin another."))
             }
             loadOrThrow(e, t) {
                 let r = this.peekUniverseMap(e),
                     n = null == r ? void 0 : r.get(t);
-                if (!r || !n) throw new c.CustomDashboardNotFoundError(t);
+                if (!r || !n) throw new u.CustomDashboardNotFoundError(t);
                 return {
                     universeMap: r,
                     record: n
@@ -3094,31 +3096,31 @@
                     universeMap: i,
                     record: o
                 } = this.loadOrThrow(e, t);
-                if ((null == a ? void 0 : a.expectedVersion) !== void 0 && a.expectedVersion !== o.version) throw new c.CustomDashboardVersionConflictError(t);
+                if ((null == a ? void 0 : a.expectedVersion) !== void 0 && a.expectedVersion !== o.version) throw new u.CustomDashboardVersionConflictError(t);
                 let s = this.clock.isoNow(),
-                    u = {
+                    c = {
                         ...o.document,
                         ...n(s),
                         updatedAt: s
                     };
                 return i.set(t, {
-                    document: u,
+                    document: c,
                     version: o.version + 1
                 }), this.emit({
                     universeId: e,
                     dashboardId: t,
                     eventType: r
-                }), u
+                }), c
             }
             async applyUpdateMutation(e, t, r, n, a) {
                 let {
                     universeMap: i,
                     record: o
                 } = this.loadOrThrow(e, t);
-                if ((null == a ? void 0 : a.expectedVersion) !== void 0 && a.expectedVersion !== o.version) throw new c.CustomDashboardVersionConflictError(t);
+                if ((null == a ? void 0 : a.expectedVersion) !== void 0 && a.expectedVersion !== o.version) throw new u.CustomDashboardVersionConflictError(t);
                 let {
                     document: s,
-                    result: u
+                    result: c
                 } = n(o, this.clock.isoNow());
                 return i.set(t, {
                     document: s,
@@ -3127,7 +3129,7 @@
                     universeId: e,
                     dashboardId: t,
                     eventType: r
-                }), u
+                }), c
             }
             async list(e, t) {
                 let r = this.peekUniverseMap(e);
@@ -3189,15 +3191,15 @@
                     universeMap: a,
                     record: i
                 } = this.loadOrThrow(e, t);
-                if ((null == n ? void 0 : n.expectedVersion) !== void 0 && n.expectedVersion !== i.version) throw new c.CustomDashboardVersionConflictError(t);
+                if ((null == n ? void 0 : n.expectedVersion) !== void 0 && n.expectedVersion !== i.version) throw new u.CustomDashboardVersionConflictError(t);
                 let o = void 0 !== r.name ? (0, C.validateDashboardName)(r.name) : i.document.name,
                     s = void 0 !== r.description ? (0, C.validateDashboardDescription)(r.description) : i.document.description,
-                    u = void 0 !== r.config ? (0, C.validateCustomDashboardConfig)(r.config) : i.document.config,
+                    c = void 0 !== r.config ? (0, C.validateCustomDashboardConfig)(r.config) : i.document.config,
                     l = {
                         ...i.document,
                         name: o,
                         description: s,
-                        config: u,
+                        config: c,
                         updatedAt: this.clock.isoNow(),
                         ...(null == n ? void 0 : n.actor) ? {
                             updatedByUserId: n.actor.userId,
@@ -3256,12 +3258,12 @@
                 let a = this.clock.isoNow(),
                     i = this.dedupeName(e, n.name),
                     o = () => this.idFactory.nextTileId(),
-                    s = (0, eu.getSummaryCards)(n.config).map(e => ed(e, o)),
-                    c = (0, eu.getChartRows)(n.config).map(e => ({
+                    s = (0, ec.getSummaryCards)(n.config).map(e => ed(e, o)),
+                    u = (0, ec.getChartRows)(n.config).map(e => ({
                         ...e,
                         tiles: e.tiles.map(e => ed(e, o))
                     })),
-                    u = {
+                    c = {
                         ...n,
                         id: this.idFactory.nextDashboardId(),
                         name: i,
@@ -3275,16 +3277,16 @@
                         createdByUsername: r.createdByUsername,
                         updatedByUserId: r.createdByUserId,
                         updatedByUsername: r.createdByUsername,
-                        config: (0, eu.withChartRows)((0, eu.withSummaryCards)(n.config, s), c)
+                        config: (0, ec.withChartRows)((0, ec.withSummaryCards)(n.config, s), u)
                     };
-                return this.getOrCreateUniverseMap(e).set(u.id, {
-                    document: u,
+                return this.getOrCreateUniverseMap(e).set(c.id, {
+                    document: c,
                     version: 1
                 }), this.emit({
                     universeId: e,
-                    dashboardId: u.id,
+                    dashboardId: c.id,
                     eventType: "duplicate"
-                }), u
+                }), c
             }
             async publish(e, t, r) {
                 return this.applyMutation(e, t, "publish", e => ({
@@ -3325,7 +3327,7 @@
             }
             constructor(e = {}) {
                 var t, r, n;
-                (0, u._)(this, "store", new Map), (0, u._)(this, "listeners", new Set), (0, u._)(this, "clock", void 0), (0, u._)(this, "idFactory", void 0), (0, u._)(this, "duplicateNameSuffixes", void 0), this.clock = null != (t = e.clock) ? t : eg, this.idFactory = null != (r = e.idFactory) ? r : h.defaultIdFactory, this.duplicateNameSuffixes = null != (n = e.duplicateNameSuffixes) ? n : eA
+                (0, c._)(this, "store", new Map), (0, c._)(this, "listeners", new Set), (0, c._)(this, "clock", void 0), (0, c._)(this, "idFactory", void 0), (0, c._)(this, "duplicateNameSuffixes", void 0), this.clock = null != (t = e.clock) ? t : eg, this.idFactory = null != (r = e.idFactory) ? r : h.defaultIdFactory, this.duplicateNameSuffixes = null != (n = e.duplicateNameSuffixes) ? n : eA
             }
         },
         ew = [{
@@ -3375,14 +3377,14 @@
                     let t = e.code,
                         r = e.name;
                     return 22 === t || "QuotaExceededError" === r || "NS_ERROR_DOM_QUOTA_REACHED" === r
-                }(e)) throw new c.CustomDashboardQuotaExceededError;
-            if (e instanceof c.CustomDashboardStorageWriteError) throw e;
-            throw new c.CustomDashboardStorageWriteError(e)
+                }(e)) throw new u.CustomDashboardQuotaExceededError;
+            if (e instanceof u.CustomDashboardStorageWriteError) throw e;
+            throw new u.CustomDashboardStorageWriteError(e)
         }
     }
 
     function eN(e, t) {
-        if (Object.keys(t).length >= l.MAX_DASHBOARDS_PER_UNIVERSE) throw new c.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the per-universe cap of ").concat(l.MAX_DASHBOARDS_PER_UNIVERSE, " dashboards. Delete one to create another."))
+        if (Object.keys(t).length >= l.MAX_DASHBOARDS_PER_UNIVERSE) throw new u.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the per-universe cap of ").concat(l.MAX_DASHBOARDS_PER_UNIVERSE, " dashboards. Delete one to create another."))
     }
     let eM = class {
             getCorruptedRecordsForUniverse(e) {
@@ -3400,7 +3402,7 @@
                 this.disposed || this.storageListenerAttached || (window.addEventListener("storage", this.handleStorageEvent), this.storageListenerAttached = !0)
             }
             requireStorage() {
-                if (this.disposed) throw new c.CustomDashboardNotAvailableError;
+                if (this.disposed) throw new u.CustomDashboardNotAvailableError;
                 let e = function() {
                     try {
                         var e;
@@ -3409,7 +3411,7 @@
                         return null
                     }
                 }();
-                if (!e) throw new c.CustomDashboardNotAvailableError;
+                if (!e) throw new u.CustomDashboardNotAvailableError;
                 return this.ensureStorageListener(), e
             }
             emit(e) {
@@ -3429,7 +3431,7 @@
             }
             readMaterialised(e) {
                 var t, r, n;
-                let a, i, o, s, u = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "throwOnUnreadable",
+                let a, i, o, s, c = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "throwOnUnreadable",
                     d = this.requireStorage(),
                     h = d.getItem(eR(e)),
                     m = this.materialisedByUniverse.get(e);
@@ -3459,7 +3461,7 @@
                     } : eI(e, t, r)
                 }(d, e, h);
                 if (!p.ok) {
-                    if (this.storageUnreadableByUniverse.set(e, p.unreadableSidecarKey), "throwOnUnreadable" === u) throw new c.CustomDashboardStorageUnreadableError(p.unreadableSidecarKey);
+                    if (this.storageUnreadableByUniverse.set(e, p.unreadableSidecarKey), "throwOnUnreadable" === c) throw new u.CustomDashboardStorageUnreadableError(p.unreadableSidecarKey);
                     return {
                         storage: d,
                         records: {},
@@ -3474,13 +3476,13 @@
                     mutatedOnRead: v
                 } = (t = p.bucket, a = {}, i = {}, o = [], s = !1, Object.entries(null != (r = t.records) ? r : {}).forEach(t => {
                     var r;
-                    let [n, u] = t;
-                    if (!u || "object" != typeof u) {
+                    let [n, c] = t;
+                    if (!c || "object" != typeof c) {
                         i[n] = {
                             version: 1,
                             migrationFailed: !0,
                             reason: "record was not an object",
-                            raw: u
+                            raw: c
                         }, o.push({
                             id: n,
                             reason: "record was not an object",
@@ -3488,20 +3490,20 @@
                         });
                         return
                     }
-                    if ((0, eS.isRecord)(u) && !0 === u.migrationFailed) {
-                        i[n] = u, o.push({
+                    if ((0, eS.isRecord)(c) && !0 === c.migrationFailed) {
+                        i[n] = c, o.push({
                             id: n,
-                            reason: u.reason,
+                            reason: c.reason,
                             code: "OTHER"
                         });
                         return
                     }
-                    if (!(0, eS.isRecord)(u) || "number" != typeof u.version || !("document" in u)) {
+                    if (!(0, eS.isRecord)(c) || "number" != typeof c.version || !("document" in c)) {
                         i[n] = {
                             version: 1,
                             migrationFailed: !0,
                             reason: "record was not a live persisted record",
-                            raw: u
+                            raw: c
                         }, o.push({
                             id: n,
                             reason: "record was not a live persisted record",
@@ -3512,7 +3514,7 @@
                     let {
                         document: d,
                         version: h
-                    } = u, m = (0, eS.isRecord)(d) ? d : {}, p = "number" == typeof m.schemaVersion ? m.schemaVersion : void 0;
+                    } = c, m = (0, eS.isRecord)(d) ? d : {}, p = "number" == typeof m.schemaVersion ? m.schemaVersion : void 0;
                     try {
                         let t = (r = {
                             schemaVersion: p,
@@ -3522,35 +3524,35 @@
                                     ...e
                                 },
                                 a = "number" == typeof e.schemaVersion ? e.schemaVersion : 0;
-                            if (a > r) throw new c.CustomDashboardUnsupportedSchemaError(a, r);
+                            if (a > r) throw new u.CustomDashboardUnsupportedSchemaError(a, r);
                             let i = a,
                                 o = t.length + 1,
                                 s = 0;
                             for (; i < r && s < o;) {
                                 let e = i,
                                     a = t.find(t => t.fromVersion === e);
-                                if (!a) throw new c.CustomDashboardMigrationGapError(e, r);
+                                if (!a) throw new u.CustomDashboardMigrationGapError(e, r);
                                 let o = a.migrate(n),
-                                    u = o.schemaVersion;
-                                if ("number" == typeof u && u !== e && u !== a.toVersion) throw new c.CustomDashboardMigrationGapError(e, r, "Migration step ".concat(e, " → ").concat(a.toVersion, " produced schemaVersion ").concat(u, "."));
+                                    c = o.schemaVersion;
+                                if ("number" == typeof c && c !== e && c !== a.toVersion) throw new u.CustomDashboardMigrationGapError(e, r, "Migration step ".concat(e, " → ").concat(a.toVersion, " produced schemaVersion ").concat(c, "."));
                                 n = {
                                     ...o,
                                     schemaVersion: a.toVersion
                                 }, i = a.toVersion, s += 1
                             }
-                            if (i !== r) throw new c.CustomDashboardMigrationGapError(i, r, "Migration pipeline did not converge after ".concat(s, " steps (stopped at version ").concat(i, ")."));
+                            if (i !== r) throw new u.CustomDashboardMigrationGapError(i, r, "Migration pipeline did not converge after ".concat(s, " steps (stopped at version ").concat(i, ")."));
                             return {
                                 ...n,
                                 schemaVersion: r
                             }
                         }(r, ew, l.CUSTOM_DASHBOARD_CURRENT_SCHEMA_VERSION));
                         p !== t.schemaVersion && (s = !0);
-                        let u = (0, C.validateCustomDashboardDocument)({
+                        let c = (0, C.validateCustomDashboardDocument)({
                             ...t,
                             universeId: e
                         });
-                        if (u.id !== n) {
-                            let e = 'bucket key "'.concat(n, '" does not match document.id "').concat(u.id, '"');
+                        if (c.id !== n) {
+                            let e = 'bucket key "'.concat(n, '" does not match document.id "').concat(c.id, '"');
                             i[n] = {
                                 version: "number" == typeof h ? h : 1,
                                 migrationFailed: !0,
@@ -3563,12 +3565,12 @@
                             }), s = !0;
                             return
                         }
-                        a[u.id] = {
-                            document: u,
+                        a[c.id] = {
+                            document: c,
                             version: "number" == typeof h ? h : 1
                         }
                     } catch (r) {
-                        let e = r instanceof c.CustomDashboardUnsupportedSchemaError,
+                        let e = r instanceof u.CustomDashboardUnsupportedSchemaError,
                             t = r instanceof Error ? r.message : String(r);
                         i[n] = {
                             version: "number" == typeof h ? h : 1,
@@ -3623,7 +3625,7 @@
                 let {
                     records: r
                 } = this.readMaterialised(e), n = r[t];
-                if (!n) throw new c.CustomDashboardNotFoundError(t);
+                if (!n) throw new u.CustomDashboardNotFoundError(t);
                 return n.document
             }
             async getVersion(e, t) {
@@ -3711,8 +3713,8 @@
             async addChartTile(e, t, r, n) {
                 let a = this.commit(e, e => {
                     let a = e[t];
-                    if (!a) throw new c.CustomDashboardNotFoundError(t);
-                    if ((null == n ? void 0 : n.expectedVersion) !== void 0 && n.expectedVersion !== a.version) throw new c.CustomDashboardVersionConflictError(t);
+                    if (!a) throw new u.CustomDashboardNotFoundError(t);
+                    if ((null == n ? void 0 : n.expectedVersion) !== void 0 && n.expectedVersion !== a.version) throw new u.CustomDashboardVersionConflictError(t);
                     let {
                         config: i,
                         tile: o
@@ -3720,7 +3722,7 @@
                         config: a.document.config,
                         tile: r.tile,
                         nextTileId: this.idFactory.nextTileId()
-                    }), s = this.clock.isoNow(), u = {
+                    }), s = this.clock.isoNow(), c = {
                         ...a.document,
                         config: i,
                         updatedAt: s,
@@ -3733,12 +3735,12 @@
                         next: {
                             ...e,
                             [t]: {
-                                document: u,
+                                document: c,
                                 version: a.version + 1
                             }
                         },
                         result: {
-                            document: u,
+                            document: c,
                             tile: o
                         }
                     }
@@ -3751,7 +3753,7 @@
             }
             async delete(e, t) {
                 this.commit(e, e => {
-                    if (!e[t]) throw new c.CustomDashboardNotFoundError(t);
+                    if (!e[t]) throw new u.CustomDashboardNotFoundError(t);
                     let r = {
                         ...e
                     };
@@ -3770,14 +3772,14 @@
                 let n = this.commit(e, n => {
                     var a;
                     let i = null == (a = n[t]) ? void 0 : a.document;
-                    if (!i) throw new c.CustomDashboardNotFoundError(t);
+                    if (!i) throw new u.CustomDashboardNotFoundError(t);
                     eN(e, n);
                     let o = Object.values(n).map(e => e.document.name),
                         s = (0, p.buildDuplicateDashboardName)(o, i.name, this.duplicateNameSuffixes),
-                        u = this.clock.isoNow(),
+                        c = this.clock.isoNow(),
                         l = () => this.idFactory.nextTileId(),
-                        d = (0, eu.getSummaryCards)(i.config).map(e => ed(e, l)),
-                        h = (0, eu.getChartRows)(i.config).map(e => ({
+                        d = (0, ec.getSummaryCards)(i.config).map(e => ed(e, l)),
+                        h = (0, ec.getChartRows)(i.config).map(e => ({
                             ...e,
                             tiles: e.tiles.map(e => ed(e, l))
                         })),
@@ -3789,13 +3791,13 @@
                             isPinned: !1,
                             pinnedAt: void 0,
                             publishedAt: void 0,
-                            createdAt: u,
-                            updatedAt: u,
+                            createdAt: c,
+                            updatedAt: c,
                             createdByUserId: r.createdByUserId,
                             createdByUsername: r.createdByUsername,
                             updatedByUserId: r.createdByUserId,
                             updatedByUsername: r.createdByUsername,
-                            config: (0, eu.withChartRows)((0, eu.withSummaryCards)(i.config, d), h)
+                            config: (0, ec.withChartRows)((0, ec.withSummaryCards)(i.config, d), h)
                         };
                     return {
                         next: {
@@ -3828,8 +3830,8 @@
             async pin(e, t) {
                 let r = this.commit(e, r => {
                     let n = r[t];
-                    if (!n) throw new c.CustomDashboardNotFoundError(t);
-                    if (Object.values(r).filter(e => e.document.isPinned && e.document.id !== t).length >= l.MAX_PINNED_DASHBOARDS) throw new c.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the pinned-dashboard cap of ").concat(l.MAX_PINNED_DASHBOARDS, ". Unpin one to pin another."));
+                    if (!n) throw new u.CustomDashboardNotFoundError(t);
+                    if (Object.values(r).filter(e => e.document.isPinned && e.document.id !== t).length >= l.MAX_PINNED_DASHBOARDS) throw new u.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the pinned-dashboard cap of ").concat(l.MAX_PINNED_DASHBOARDS, ". Unpin one to pin another."));
                     let a = this.clock.isoNow(),
                         i = {
                             ...n.document,
@@ -3874,8 +3876,8 @@
             async applyMutation(e, t, r, n, a) {
                 let i = this.commit(e, e => {
                     let r = e[t];
-                    if (!r) throw new c.CustomDashboardNotFoundError(t);
-                    if ((null == a ? void 0 : a.expectedVersion) !== void 0 && a.expectedVersion !== r.version) throw new c.CustomDashboardVersionConflictError(t);
+                    if (!r) throw new u.CustomDashboardNotFoundError(t);
+                    if ((null == a ? void 0 : a.expectedVersion) !== void 0 && a.expectedVersion !== r.version) throw new u.CustomDashboardVersionConflictError(t);
                     let i = this.clock.isoNow(),
                         o = {
                             ...r.document,
@@ -3901,7 +3903,7 @@
             }
             constructor(e = {}) {
                 var t, r, n;
-                (0, u._)(this, "listeners", new Set), (0, u._)(this, "storageListenerAttached", !1), (0, u._)(this, "disposed", !1), (0, u._)(this, "corruptedByUniverse", new Map), (0, u._)(this, "storageUnreadableByUniverse", new Map), (0, u._)(this, "materialisedByUniverse", new Map), (0, u._)(this, "clock", void 0), (0, u._)(this, "idFactory", void 0), (0, u._)(this, "onPersistError", void 0), (0, u._)(this, "duplicateNameSuffixes", void 0), (0, u._)(this, "handleStorageEvent", e => {
+                (0, c._)(this, "listeners", new Set), (0, c._)(this, "storageListenerAttached", !1), (0, c._)(this, "disposed", !1), (0, c._)(this, "corruptedByUniverse", new Map), (0, c._)(this, "storageUnreadableByUniverse", new Map), (0, c._)(this, "materialisedByUniverse", new Map), (0, c._)(this, "clock", void 0), (0, c._)(this, "idFactory", void 0), (0, c._)(this, "onPersistError", void 0), (0, c._)(this, "duplicateNameSuffixes", void 0), (0, c._)(this, "handleStorageEvent", e => {
                     if (!e.key) return;
                     let t = function(e) {
                         if (!e.startsWith(eT)) return null;
@@ -3925,34 +3927,34 @@
                 return this.inner.get(e, t)
             }
             async create(e) {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             }
             async createAndPublish(e) {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             }
             async update(e, t, r, n) {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             }
             async addChartTile(e, t, r, n) {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             }
             async delete(e, t) {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             }
             async duplicate(e, t, r) {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             }
             async publish(e, t, r) {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             }
             async unpublish(e, t) {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             }
             async pin(e, t) {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             }
             async unpin(e, t) {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             }
             suggestDefaultName(e) {
                 return this.inner.suggestDefaultName(e)
@@ -3968,7 +3970,7 @@
                 null == (e = (t = this.inner).dispose) || e.call(t)
             }
             constructor(e) {
-                (0, u._)(this, "inner", void 0), this.inner = e
+                (0, c._)(this, "inner", void 0), this.inner = e
             }
         },
         eO = {
@@ -3977,40 +3979,40 @@
                 migrationFailedCount: 0
             }),
             async get() {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             },
             async create() {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             },
             async createAndPublish() {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             },
             async update() {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             },
             async addChartTile() {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             },
             async delete() {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             },
             async duplicate() {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             },
             async publish() {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             },
             async unpublish() {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             },
             async pin() {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             },
             async unpin() {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             },
             async suggestDefaultName() {
-                throw new c.CustomDashboardNotAvailableError
+                throw new u.CustomDashboardNotAvailableError
             },
             getVersion: async () => null,
             subscribe: () => () => void 0
@@ -4029,7 +4031,7 @@
             canMutateDashboards: a = !0,
             isApiBacked: i = !1,
             children: o
-        } = e, s = (0, r.useRef)(new Map), c = (0, r.useCallback)(e => {
+        } = e, s = (0, r.useRef)(new Map), u = (0, r.useCallback)(e => {
             var t;
             if (n) return n;
             let r = (t = e).isEnabled ? t.isApiBackendEnabled ? t.canSaveCustomDashboards ? "enabled:api:writable" : t.isLocalStorageEnabled ? "enabled:hybrid" : "enabled:api:readonly" : t.isLocalStorageEnabled ? "enabled:localStorage" : "enabled:inMemory" : "disabled",
@@ -4038,7 +4040,7 @@
             let i = function(e) {
                 if (!e.isEnabled) return eO;
                 if (e.isApiBackendEnabled) {
-                    let t = new ec((0, f.createDefaultCustomDashboardsApiClient)());
+                    let t = new eu((0, f.createDefaultCustomDashboardsApiClient)());
                     return e.canSaveCustomDashboards ? t : e.isLocalStorageEnabled ? new ey({
                         apiService: t,
                         localService: eU()
@@ -4047,7 +4049,7 @@
                 return e.isLocalStorageEnabled ? eU() : new eC
             }(e);
             return s.current.set(r, i), i
-        }, [n]), u = null != n ? n : eO;
+        }, [n]), c = null != n ? n : eO;
         (0, r.useEffect)(() => {
             let e = s.current;
             return () => {
@@ -4058,21 +4060,21 @@
             }
         }, []);
         let l = (0, r.useMemo)(() => ({
-            service: u,
+            service: c,
             isReady: void 0 !== n,
             isApiBacked: !!n && i,
             canMutateDashboards: !!n && a,
-            getServiceForConfig: c
-        }), [a, c, i, u, n]);
+            getServiceForConfig: u
+        }), [a, u, i, c, n]);
         return (0, t.jsx)(eP.Provider, {
             value: l,
             children: o
         })
     }, "UniverseFlaggedCustomDashboardProvider", 0, e => {
         let {
-            children: c
-        } = e, u = (0, r.useContext)(eP);
-        if (!u) throw Error("UniverseFlaggedCustomDashboardProvider must be used within CustomDashboardServiceProvider.");
+            children: u
+        } = e, c = (0, r.useContext)(eP);
+        if (!c) throw Error("UniverseFlaggedCustomDashboardProvider must be used within CustomDashboardServiceProvider.");
         let l = function() {
                 let e = (0, n.useRouter)().query.id;
                 if ("string" == typeof e) {
@@ -4110,21 +4112,21 @@
                 isApiBackendEnabled: b,
                 canSaveCustomDashboards: !m && d
             } : null, [d, A, b, f, g, m, D]),
-            w = (0, r.useMemo)(() => C ? u.getServiceForConfig(C) : u.service, [u, C]),
-            S = (0, r.useMemo)(() => C ? !!C.isEnabled && (!C.isApiBackendEnabled || C.canSaveCustomDashboards || C.isLocalStorageEnabled) : u.canMutateDashboards, [u.canMutateDashboards, C]),
+            w = (0, r.useMemo)(() => C ? c.getServiceForConfig(C) : c.service, [c, C]),
+            S = (0, r.useMemo)(() => C ? !!C.isEnabled && (!C.isApiBackendEnabled || C.canSaveCustomDashboards || C.isLocalStorageEnabled) : c.canMutateDashboards, [c.canMutateDashboards, C]),
             T = (0, r.useMemo)(() => {
                 var e;
                 return {
-                    ...u,
+                    ...c,
                     service: w,
                     isReady: null !== C,
                     isApiBacked: null != (e = null == C ? void 0 : C.isApiBackendEnabled) && e,
                     canMutateDashboards: S
                 }
-            }, [S, u, C, w]);
+            }, [S, c, C, w]);
         return (0, t.jsx)(eP.Provider, {
             value: T,
-            children: c
+            children: u
         })
     }, "useCanMutateCustomDashboards", 0, function() {
         let e = (0, r.useContext)(eP);
@@ -4164,8 +4166,8 @@
         i = e.i(36826),
         o = e.i(494315),
         s = e.i(908374),
-        c = e.i(545154),
-        u = e.i(283561),
+        u = e.i(545154),
+        c = e.i(283561),
         l = e.i(379843);
 
     function d(e) {
@@ -4211,23 +4213,23 @@
     }
 
     function D(e, t) {
-        if (!A(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an object."));
+        if (!A(e)) throw new c.CustomDashboardValidationError(t, "".concat(t, " must be an object."));
         return e
     }
 
     function C(e, t) {
-        if ("string" != typeof e) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be a string."));
+        if ("string" != typeof e) throw new c.CustomDashboardValidationError(t, "".concat(t, " must be a string."));
         return e
     }
 
     function w(e, t) {
         let r = C(e, t);
-        if (0 === r.length) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be non-empty."));
+        if (0 === r.length) throw new c.CustomDashboardValidationError(t, "".concat(t, " must be non-empty."));
         return r
     }
 
     function S(e, t) {
-        if ("number" != typeof e || !Number.isFinite(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be a finite number."));
+        if ("number" != typeof e || !Number.isFinite(e)) throw new c.CustomDashboardValidationError(t, "".concat(t, " must be a finite number."));
         return e
     }
 
@@ -4239,7 +4241,7 @@
             relativeOffset: function(e, t) {
                 if (void 0 !== e) {
                     if ("string" == typeof e && v.ComparisonOffset.some(t => t === e)) return e;
-                    throw new u.CustomDashboardValidationError(t, "".concat(t, " must be a valid comparison offset."))
+                    throw new c.CustomDashboardValidationError(t, "".concat(t, " must be a valid comparison offset."))
                 }
             }(r.relativeOffset, "".concat(t, ".relativeOffset")),
             customStartTimeMs: function(e, t) {
@@ -4249,14 +4251,14 @@
     }
 
     function E(e, t) {
-        if ("boolean" != typeof e) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be a boolean."));
+        if ("boolean" != typeof e) throw new c.CustomDashboardValidationError(t, "".concat(t, " must be a boolean."));
         return e
     }
 
     function R(e, t) {
         let r = C(e, t),
             n = Date.parse(r);
-        if (!b.test(r) || !Number.isFinite(n)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an ISO-8601 timestamp."));
+        if (!b.test(r) || !Number.isFinite(n)) throw new c.CustomDashboardValidationError(t, "".concat(t, " must be an ISO-8601 timestamp."));
         return r
     }
 
@@ -4306,7 +4308,7 @@
     }
 
     function J(e) {
-        return $(e) || e === z
+        return $(e) || e === z || e === K || e === j
     }
 
     function Z(e) {
@@ -4338,26 +4340,26 @@
     }
     let eo = I(function(e, t) {
             let r = C(e, t);
-            if (!ee(r)) throw new u.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known chart aggregation.'));
+            if (!ee(r)) throw new c.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known chart aggregation.'));
             return r
         }),
         es = I(function(e, t) {
-            if ("none" !== e && "weekly" !== e) throw new u.CustomDashboardValidationError(t, "".concat(t, ' must be "none" or "weekly".'));
+            if ("none" !== e && "weekly" !== e) throw new c.CustomDashboardValidationError(t, "".concat(t, ' must be "none" or "weekly".'));
             return e
         }),
-        ec = I(function(e, t) {
+        eu = I(function(e, t) {
             let r = C(e, t);
-            if (r !== l.SummaryCardTitleSource.Auto && r !== l.SummaryCardTitleSource.Custom) throw new u.CustomDashboardValidationError(t, "".concat(t, ' must be "Auto" or "Custom".'));
+            if (r !== l.SummaryCardTitleSource.Auto && r !== l.SummaryCardTitleSource.Custom) throw new c.CustomDashboardValidationError(t, "".concat(t, ' must be "Auto" or "Custom".'));
             return r
         });
 
-    function eu(e, t) {
+    function ec(e, t) {
         let r = D(e, t),
             n = w(r.pseudoDimensionKey, "".concat(t, ".pseudoDimensionKey"));
-        if (n !== K && n !== j) throw new u.CustomDashboardValidationError("".concat(t, ".pseudoDimensionKey"), "".concat(t, ".pseudoDimensionKey must be a supported pseudo-dimension key."));
+        if (n !== K && n !== j) throw new c.CustomDashboardValidationError("".concat(t, ".pseudoDimensionKey"), "".concat(t, ".pseudoDimensionKey must be a supported pseudo-dimension key."));
         let a = w(r.variantKey, "".concat(t, ".variantKey"));
-        if (n === K && !en(a)) throw new u.CustomDashboardValidationError("".concat(t, ".variantKey"), "".concat(t, ".variantKey must be a known RAQI percentile for PercentileType."));
-        if (n === j && !er(a)) throw new u.CustomDashboardValidationError("".concat(t, ".variantKey"), "".concat(t, ".variantKey must be a known RAQI aggregation for AggregationType."));
+        if (n === K && !en(a)) throw new c.CustomDashboardValidationError("".concat(t, ".variantKey"), "".concat(t, ".variantKey must be a known RAQI percentile for PercentileType."));
+        if (n === j && !er(a)) throw new c.CustomDashboardValidationError("".concat(t, ".variantKey"), "".concat(t, ".variantKey must be a known RAQI aggregation for AggregationType."));
         return {
             pseudoDimensionKey: n,
             variantKey: a
@@ -4374,34 +4376,34 @@
                     if (r || n) return !0
                 }
                 return !1
-            }(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " contains unsupported control characters."));
+            }(e)) throw new c.CustomDashboardValidationError(t, "".concat(t, " contains unsupported control characters."));
         return e
     }
 
     function ed(e) {
         let t = el(V(e), "name");
-        if (0 === t.length) throw new u.CustomDashboardValidationError("name", "Dashboard name is required.");
-        if (t.length > l.MAX_DASHBOARD_NAME_LENGTH) throw new u.CustomDashboardValidationError("name", "Dashboard name cannot exceed ".concat(l.MAX_DASHBOARD_NAME_LENGTH, " characters."));
+        if (0 === t.length) throw new c.CustomDashboardValidationError("name", "Dashboard name is required.");
+        if (t.length > l.MAX_DASHBOARD_NAME_LENGTH) throw new c.CustomDashboardValidationError("name", "Dashboard name cannot exceed ".concat(l.MAX_DASHBOARD_NAME_LENGTH, " characters."));
         return t
     }
 
     function eh(e) {
         if (void 0 === e) return;
         let t = el(V(e), "description");
-        if (t.length > l.MAX_DASHBOARD_DESCRIPTION_LENGTH) throw new u.CustomDashboardValidationError("description", "Description cannot exceed ".concat(l.MAX_DASHBOARD_DESCRIPTION_LENGTH, " characters."));
+        if (t.length > l.MAX_DASHBOARD_DESCRIPTION_LENGTH) throw new c.CustomDashboardValidationError("description", "Description cannot exceed ".concat(l.MAX_DASHBOARD_DESCRIPTION_LENGTH, " characters."));
         return 0 === t.length ? void 0 : t
     }
 
     function em(e, t) {
         if (null == e) return [];
-        if (!Array.isArray(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
+        if (!Array.isArray(e)) throw new c.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
         return e.map((e, r) => {
             let n = D(e, "".concat(t, "[").concat(r, "]")),
                 a = el(w(n.dimension, "".concat(t, "[").concat(r, "].dimension")), "".concat(t, "[").concat(r, "].dimension")),
                 {
                     values: i
                 } = n;
-            if (!Array.isArray(i) || 0 === i.length || !i.every(ei)) throw new u.CustomDashboardValidationError("".concat(t, "[").concat(r, "].values"), "".concat(t, "[").concat(r, "].values must be a non-empty array of non-empty strings."));
+            if (!Array.isArray(i) || 0 === i.length || !i.every(ei)) throw new c.CustomDashboardValidationError("".concat(t, "[").concat(r, "].values"), "".concat(t, "[").concat(r, "].values must be a non-empty array of non-empty strings."));
             return {
                 dimension: a,
                 values: i.map((e, n) => el(e, "".concat(t, "[").concat(r, "].values[").concat(n, "]")))
@@ -4410,23 +4412,23 @@
     }
 
     function ep(e, t) {
-        if (null == e) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
+        if (null == e) throw new c.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
         return em(e, t)
     }
 
     function ef(e, t) {
         if (null == e) return;
         let r = el(V(C(e, t)), t);
-        if (r.length > l.MAX_TILE_TITLE_LENGTH) throw new u.CustomDashboardValidationError(t, "Tile title cannot exceed ".concat(l.MAX_TILE_TITLE_LENGTH, " characters."));
+        if (r.length > l.MAX_TILE_TITLE_LENGTH) throw new c.CustomDashboardValidationError(t, "Tile title cannot exceed ".concat(l.MAX_TILE_TITLE_LENGTH, " characters."));
         return 0 === r.length ? void 0 : r
     }
 
     function ey(e, t) {
         if (null == e) return;
-        if (!Array.isArray(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
+        if (!Array.isArray(e)) throw new c.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
         let r = e.map((e, r) => {
             let n = w(e, "".concat(t, "[").concat(r, "]"));
-            if (!$(n)) throw new u.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a canonical RAQI dimension."));
+            if (!$(n)) throw new c.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a canonical RAQI dimension."));
             return n
         });
         return r.length > 0 ? r : void 0
@@ -4434,10 +4436,10 @@
 
     function eg(e, t) {
         if (null == e) return;
-        if (!Array.isArray(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
+        if (!Array.isArray(e)) throw new c.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
         let r = e.map((e, r) => {
             let n = w(e, "".concat(t, "[").concat(r, "]"));
-            if (!Z(n)) throw new u.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a known annotation type."));
+            if (!Z(n)) throw new c.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a known annotation type."));
             return n
         });
         return r.length > 0 ? r : void 0
@@ -4445,8 +4447,8 @@
 
     function ev(e, t) {
         let r, n = D(e, t),
-            a = (r = eA(n.variantSelections, "".concat(t, ".variantSelections"), eu)).length > 0 ? r : void 0;
-        if (void 0 !== n.metricKey && null !== n.metricKey && void 0 !== n.computedMetric && null !== n.computedMetric) throw new u.CustomDashboardValidationError(t, "".concat(t, " must not include both metricKey and computedMetric."));
+            a = (r = eA(n.variantSelections, "".concat(t, ".variantSelections"), ec)).length > 0 ? r : void 0;
+        if (void 0 !== n.metricKey && null !== n.metricKey && void 0 !== n.computedMetric && null !== n.computedMetric) throw new c.CustomDashboardValidationError(t, "".concat(t, " must not include both metricKey and computedMetric."));
         return void 0 !== n.computedMetric && null !== n.computedMetric ? {
             computedMetric: function(e, t) {
                 if (! function(e) {
@@ -4458,17 +4460,17 @@
                             l7Smoothing: a
                         } = e;
                         return !!Array.isArray(t) && 0 !== t.length && "string" == typeof r && 0 !== r.trim().length && (void 0 === n || "string" == typeof n) && (void 0 === a || "boolean" == typeof a) && t.every(e => A(e) && "string" == typeof e.key && e.key.length > 0 && void 0 !== e.metric)
-                    }(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be a computed metric object."));
-                let r = (0, c.serializeComputedMetricToQueryParam)(e),
-                    n = (0, c.deserializeComputedMetricFromQueryParam)(r);
-                if (!r || !n) throw new u.CustomDashboardValidationError(t, "".concat(t, " is not a supported computed metric."));
+                    }(e)) throw new c.CustomDashboardValidationError(t, "".concat(t, " must be a computed metric object."));
+                let r = (0, u.serializeComputedMetricToQueryParam)(e),
+                    n = (0, u.deserializeComputedMetricFromQueryParam)(r);
+                if (!r || !n) throw new c.CustomDashboardValidationError(t, "".concat(t, " is not a supported computed metric."));
                 return n
             }(n.computedMetric, "".concat(t, ".computedMetric")),
             variantSelections: a
         } : {
             metricKey: function(e, t) {
                 let r = C(e, t);
-                if (!ea(r)) throw new u.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known RAQI metric.'));
+                if (!ea(r)) throw new c.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known RAQI metric.'));
                 return r
             }(n.metricKey, "".concat(t, ".metricKey")),
             variantSelections: a
@@ -4487,7 +4489,7 @@
 
     function eA(e, t, r) {
         if (null == e) return [];
-        if (!Array.isArray(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
+        if (!Array.isArray(e)) throw new c.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
         return e.map((e, n) => r(e, "".concat(t, "[").concat(n, "]")))
     }
 
@@ -4501,14 +4503,14 @@
                     type: "Chart",
                     chart: function(e, t) {
                         let r = D(e, t);
-                        if ("Chart" !== r.type) throw new u.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "Chart".'));
+                        if ("Chart" !== r.type) throw new c.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "Chart".'));
                         return function(e, t) {
                             let r = D(e.dataSpec, "".concat(t, ".dataSpec")),
                                 n = D(e.chartSpec, "".concat(t, ".chartSpec")),
                                 i = C(n.chartType, "".concat(t, ".chartSpec.chartType"));
-                            if (!X(k, i)) throw new u.CustomDashboardValidationError("".concat(t, ".chartSpec.chartType"), "".concat(t, '.chartSpec.chartType "').concat(i, '" is not supported.'));
+                            if (!X(k, i)) throw new c.CustomDashboardValidationError("".concat(t, ".chartSpec.chartType"), "".concat(t, '.chartSpec.chartType "').concat(i, '" is not supported.'));
                             let s = A(n.overlays) ? n.overlays : void 0,
-                                c = s ? {
+                                u = s ? {
                                     genreBenchmark: M(s.genreBenchmark, "".concat(t, ".chartSpec.overlays.genreBenchmark")),
                                     similarExperienceBenchmark: M(s.similarExperienceBenchmark, "".concat(t, ".chartSpec.overlays.similarExperienceBenchmark")),
                                     topExperienceBenchmark: M(s.topExperienceBenchmark, "".concat(t, ".chartSpec.overlays.topExperienceBenchmark")),
@@ -4517,13 +4519,13 @@
                                 } : void 0,
                                 l = eA(r.metrics, "".concat(t, ".dataSpec.metrics"), eb),
                                 d = i === a.ChartType.Table;
-                            if (!d && 1 !== l.length) throw new u.CustomDashboardValidationError("".concat(t, ".dataSpec.metrics"), "".concat(t, ".dataSpec.metrics must contain exactly one metric."));
-                            if (d && (l.length < 1 || l.length > o.MAX_TABLE_METRIC_COLUMNS)) throw new u.CustomDashboardValidationError("".concat(t, ".dataSpec.metrics"), "".concat(t, ".dataSpec.metrics must contain between 1 and ").concat(o.MAX_TABLE_METRIC_COLUMNS, " metrics for table charts."));
+                            if (!d && 1 !== l.length) throw new c.CustomDashboardValidationError("".concat(t, ".dataSpec.metrics"), "".concat(t, ".dataSpec.metrics must contain exactly one metric."));
+                            if (d && (l.length < 1 || l.length > o.MAX_TABLE_METRIC_COLUMNS)) throw new c.CustomDashboardValidationError("".concat(t, ".dataSpec.metrics"), "".concat(t, ".dataSpec.metrics must contain between 1 and ").concat(o.MAX_TABLE_METRIC_COLUMNS, " metrics for table charts."));
                             let h = r.breakdownDimensions,
                                 m = null == h ? void 0 : eA(h, "".concat(t, ".dataSpec.breakdownDimensions"), (e, t) => {
                                     var r;
                                     let n = null != (r = N(e, t)) ? r : "";
-                                    if (n.length > 0 && !J(n)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be a persistable breakdown dimension."));
+                                    if (n.length > 0 && !J(n)) throw new c.CustomDashboardValidationError(t, "".concat(t, " must be a persistable breakdown dimension."));
                                     return n
                                 }).filter(e => e.length > 0);
                             return {
@@ -4536,14 +4538,14 @@
                                     breakdownDimensions: m,
                                     granularity: function(e, t) {
                                         let r = C(e, t);
-                                        if (!X(P, r)) throw new u.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known time interval.'));
+                                        if (!X(P, r)) throw new c.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known time interval.'));
                                         return r
                                     }(r.granularity, "".concat(t, ".dataSpec.granularity")),
                                     filters: ep(r.filters, "".concat(t, ".dataSpec.filters"))
                                 },
                                 chartSpec: {
                                     chartType: i,
-                                    overlays: c,
+                                    overlays: u,
                                     smoothing: es(n.smoothing, "".concat(t, ".chartSpec.smoothing"))
                                 }
                             }
@@ -4557,21 +4559,21 @@
                     type: "SummaryCard",
                     summaryCard: function(e, t) {
                         let r = D(e, t);
-                        if ("SummaryCard" !== r.type) throw new u.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "SummaryCard".'));
+                        if ("SummaryCard" !== r.type) throw new c.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "SummaryCard".'));
                         let n = A(r.overlays) ? r.overlays : void 0,
                             a = ev(r.metric, "".concat(t, ".metric")),
                             i = function(e, t) {
                                 let r = C(e, t);
-                                if (!(X(O, r) || x.test(r))) throw new u.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known summary-card aggregation.'));
+                                if (!(X(O, r) || x.test(r))) throw new c.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known summary-card aggregation.'));
                                 return r
                             }(r.aggregation, "".concat(t, ".aggregation")),
                             o = a.metricKey ? g(a.metricKey, i) : i;
-                        if (!o) throw new u.CustomDashboardValidationError("".concat(t, ".aggregation"), "".concat(t, ".aggregation is not supported by the selected metric."));
+                        if (!o) throw new c.CustomDashboardValidationError("".concat(t, ".aggregation"), "".concat(t, ".aggregation is not supported by the selected metric."));
                         return {
                             type: "SummaryCard",
                             tileId: w(r.tileId, "".concat(t, ".tileId")),
                             title: ef(r.title, "".concat(t, ".title")),
-                            titleSource: ec(r.titleSource, "".concat(t, ".titleSource")),
+                            titleSource: eu(r.titleSource, "".concat(t, ".titleSource")),
                             metric: a,
                             aggregation: o,
                             overlays: n ? {
@@ -4582,13 +4584,13 @@
                     }(e.summaryCard, "".concat(t, ".component.summaryCard"))
                 }
             };
-            throw new u.CustomDashboardValidationError("".concat(t, ".component.type"), "".concat(t, '.component.type must be "Chart" or "SummaryCard".'))
+            throw new c.CustomDashboardValidationError("".concat(t, ".component.type"), "".concat(t, '.component.type must be "Chart" or "SummaryCard".'))
         }
         if ("Grid" === r.type) {
             let e = r.columnCount;
-            if (1 !== e && 2 !== e) throw new u.CustomDashboardValidationError("".concat(t, ".columnCount"), "".concat(t, ".columnCount must be 1 or 2."));
+            if (1 !== e && 2 !== e) throw new c.CustomDashboardValidationError("".concat(t, ".columnCount"), "".concat(t, ".columnCount must be 1 or 2."));
             let n = eA(r.children, "".concat(t, ".children"), eD);
-            if (0 === n.length || n.length > e && !n.every(d)) throw new u.CustomDashboardValidationError("".concat(t, ".children"), "".concat(t, ".children must contain between 1 and ").concat(e, " child node(s)."));
+            if (0 === n.length || n.length > e && !n.every(d)) throw new c.CustomDashboardValidationError("".concat(t, ".children"), "".concat(t, ".children must contain between 1 and ").concat(e, " child node(s)."));
             return {
                 type: "Grid",
                 columnCount: e,
@@ -4599,7 +4601,7 @@
             type: r.type,
             children: eA(r.children, "".concat(t, ".children"), eD)
         };
-        throw new u.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "Component", "Grid", "Flex", or "Stack".'))
+        throw new c.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "Component", "Grid", "Flex", or "Stack".'))
     }
 
     function eC(e) {
@@ -4609,21 +4611,21 @@
             } = t,
             a = D(e, "config"),
             i = D(a.page, "config.page");
-        if (i.mode !== l.DashboardPageMode.Untabbed) throw new u.CustomDashboardValidationError("config.page.mode", 'config.page.mode must be "Untabbed" in v1.');
+        if (i.mode !== l.DashboardPageMode.Untabbed) throw new c.CustomDashboardValidationError("config.page.mode", 'config.page.mode must be "Untabbed" in v1.');
         let o = D(i.surface, "config.page.surface"),
             s = eA(o.bodyNodes, "config.page.surface.bodyNodes", eD),
-            c = new Set,
+            u = new Set,
             d = 0,
             h = 0,
             f = (e, t, r) => {
-                if (c.has(e)) throw new u.CustomDashboardValidationError(r, 'Duplicate tileId "'.concat(e, '".'));
-                c.add(e), "Chart" === t ? h += 1 : d += 1
+                if (u.has(e)) throw new c.CustomDashboardValidationError(r, 'Duplicate tileId "'.concat(e, '".'));
+                u.add(e), "Chart" === t ? h += 1 : d += 1
             };
         if (s.forEach((e, t) => (function e(t, r, n) {
                 "Component" === t.type ? r("Chart" === t.component.type ? t.component.chart.tileId : t.component.summaryCard.tileId, t.component.type, "".concat(n, ".component.").concat("Chart" === t.component.type ? "chart" : "summaryCard", ".tileId")) : t.children.forEach((t, a) => e(t, r, "".concat(n, ".children[").concat(a, "]")))
             })(e, f, "config.page.surface.bodyNodes[".concat(t, "]"))), r) {
-            if (d > l.MAX_SUMMARY_CARDS_PER_DASHBOARD) throw new u.CustomDashboardValidationError("config.page.surface.bodyNodes", "A dashboard may have at most ".concat(l.MAX_SUMMARY_CARDS_PER_DASHBOARD, " summary cards."));
-            if (h > l.MAX_CHART_TILES_PER_DASHBOARD) throw new u.CustomDashboardValidationError("config.page.surface.bodyNodes", "A dashboard may have at most ".concat(l.MAX_CHART_TILES_PER_DASHBOARD, " chart tiles."))
+            if (d > l.MAX_SUMMARY_CARDS_PER_DASHBOARD) throw new c.CustomDashboardValidationError("config.page.surface.bodyNodes", "A dashboard may have at most ".concat(l.MAX_SUMMARY_CARDS_PER_DASHBOARD, " summary cards."));
+            if (h > l.MAX_CHART_TILES_PER_DASHBOARD) throw new c.CustomDashboardValidationError("config.page.surface.bodyNodes", "A dashboard may have at most ".concat(l.MAX_CHART_TILES_PER_DASHBOARD, " chart tiles."))
         }
         return {
             page: {
@@ -4640,15 +4642,15 @@
                                 if ("None" === r.type) return {
                                     type: "None"
                                 };
-                                if ("DateRange" !== r.type) throw new u.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "None" or "DateRange".'));
+                                if ("DateRange" !== r.type) throw new c.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "None" or "DateRange".'));
                                 return {
                                     type: "DateRange",
                                     defaultSelection: function(e, t) {
                                         if (null == e) return;
                                         let r = D(e, t);
                                         if ("Relative" === r.type) {
-                                            if (!et(r.rangeType) || r.rangeType === n.RAQIV2DateRangeType.Custom) throw new u.CustomDashboardValidationError("".concat(t, ".rangeType"), "".concat(t, ".rangeType must be a preset date range."));
-                                            if (!m(r.rangeType)) throw new u.CustomDashboardValidationError("".concat(t, ".rangeType"), "".concat(t, ".rangeType must span less than ").concat(56, " days."));
+                                            if (!et(r.rangeType) || r.rangeType === n.RAQIV2DateRangeType.Custom) throw new c.CustomDashboardValidationError("".concat(t, ".rangeType"), "".concat(t, ".rangeType must be a preset date range."));
+                                            if (!m(r.rangeType)) throw new c.CustomDashboardValidationError("".concat(t, ".rangeType"), "".concat(t, ".rangeType must span less than ").concat(56, " days."));
                                             return {
                                                 type: "Relative",
                                                 rangeType: r.rangeType
@@ -4657,15 +4659,15 @@
                                         if ("Custom" === r.type) {
                                             let e = S(r.startTimeMs, "".concat(t, ".startTimeMs")),
                                                 n = S(r.endTimeMs, "".concat(t, ".endTimeMs"));
-                                            if (e > n) throw new u.CustomDashboardValidationError(t, "".concat(t, " custom startTimeMs must be before endTimeMs."));
-                                            if (!p(e, n)) throw new u.CustomDashboardValidationError(t, "".concat(t, " custom date range must span less than ").concat(56, " days."));
+                                            if (e > n) throw new c.CustomDashboardValidationError(t, "".concat(t, " custom startTimeMs must be before endTimeMs."));
+                                            if (!p(e, n)) throw new c.CustomDashboardValidationError(t, "".concat(t, " custom date range must span less than ").concat(56, " days."));
                                             return {
                                                 type: "Custom",
                                                 startTimeMs: e,
                                                 endTimeMs: n
                                             }
                                         }
-                                        throw new u.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "Relative" or "Custom".'))
+                                        throw new c.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "Relative" or "Custom".'))
                                     }(r.defaultSelection, "".concat(t, ".defaultSelection"))
                                 }
                             }(a.timeRangeOptions, "".concat(t, ".timeRangeOptions")),
@@ -4674,10 +4676,10 @@
                             breakdownDimensions: ey(a.breakdownDimensions, "".concat(t, ".breakdownDimensions")),
                             defaultBreakdown: function(e, t) {
                                 if (null == e) return;
-                                if (!Array.isArray(e)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
+                                if (!Array.isArray(e)) throw new c.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
                                 let r = e.map((e, r) => {
                                     let n = w(e, "".concat(t, "[").concat(r, "]"));
-                                    if (!W(n)) throw new u.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a known RAQI dimension."));
+                                    if (!W(n)) throw new c.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a known RAQI dimension."));
                                     return n
                                 });
                                 return r.length > 0 ? r : void 0
@@ -4685,7 +4687,7 @@
                             defaultGranularity: function(e, t) {
                                 if (null == e) return;
                                 let r = w(e, t);
-                                if (!L.includes(r)) throw new u.CustomDashboardValidationError(t, "".concat(t, " must be a known granularity."));
+                                if (!L.includes(r)) throw new c.CustomDashboardValidationError(t, "".concat(t, " must be a known granularity."));
                                 return r
                             }(a.defaultGranularity, "".concat(t, ".defaultGranularity")),
                             annotationOptions: function(e, t) {
@@ -4707,15 +4709,15 @@
     }
     e.s(["isCanonicalRAQIV2Dimension", 0, $, "isChartAggregation", 0, ee, "isDateRangeType", 0, et, "isDefaultAnnotationType", 0, Z, "isDefaultBreakdownDimension", 0, W, "isMetricKey", 0, ea, "isPersistableBreakdownDimension", 0, J, "isRAQIV2AggregationType", 0, er, "isRAQIV2PercentileType", 0, en, "validateCustomDashboardConfig", 0, eC, "validateCustomDashboardDocument", 0, function(e) {
         let t, r = D(e, "document");
-        if (r.schemaVersion !== l.CUSTOM_DASHBOARD_CURRENT_SCHEMA_VERSION) throw new u.CustomDashboardValidationError("schemaVersion", "schemaVersion must equal ".concat(l.CUSTOM_DASHBOARD_CURRENT_SCHEMA_VERSION, " (got ").concat(String(r.schemaVersion), "). Run applyMigrations first."));
+        if (r.schemaVersion !== l.CUSTOM_DASHBOARD_CURRENT_SCHEMA_VERSION) throw new c.CustomDashboardValidationError("schemaVersion", "schemaVersion must equal ".concat(l.CUSTOM_DASHBOARD_CURRENT_SCHEMA_VERSION, " (got ").concat(String(r.schemaVersion), "). Run applyMigrations first."));
         let {
             status: n
         } = r;
-        if (!("string" == typeof n && X(B, n))) throw new u.CustomDashboardValidationError("status", 'status must be "draft" or "published".');
+        if (!("string" == typeof n && X(B, n))) throw new c.CustomDashboardValidationError("status", 'status must be "draft" or "published".');
         void 0 !== r.description && null !== r.description && (t = eh(C(r.description, "description")));
         let a = E(r.isPinned, "isPinned"),
             i = a ? _(r.pinnedAt, "pinnedAt") : void 0;
-        if (void 0 === r.config || null === r.config) throw new u.CustomDashboardValidationError("config", "config is required. Service-layer create() must substitute EMPTY_DASHBOARD_CONFIG before validation.");
+        if (void 0 === r.config || null === r.config) throw new c.CustomDashboardValidationError("config", "config is required. Service-layer create() must substitute EMPTY_DASHBOARD_CONFIG before validation.");
         return {
             id: w(r.id, "id"),
             schemaVersion: l.CUSTOM_DASHBOARD_CURRENT_SCHEMA_VERSION,
@@ -4776,17 +4778,17 @@
         o = t.RAQIV2UIPseudoDimension.PercentileType,
         s = t.RAQIV2AggregationType.Average;
     e.s(["resolveDefaultChartAggregation", 0, function(e) {
-        let c = function(e) {
+        let u = function(e) {
             var r;
             for (let n of null != (r = e.variantSelections) ? r : [])
                 if (n.pseudoDimensionKey === i && (0, a.isValidEnumValue)(t.RAQIV2AggregationType, n.variantKey) || n.pseudoDimensionKey === o && (0, a.isValidEnumValue)(t.RAQIV2PercentileType, n.variantKey)) return n.variantKey
         }(e);
-        if (void 0 !== c) return c;
+        if (void 0 !== u) return u;
         if (e.computedMetric) {
             let [n] = e.computedMetric.sources;
             if (n && (0, r.isCustomEventsAtomicMetricLike)(n.metric)) {
-                var u;
-                return null != (u = n.metric.aggregationType) ? u : t.RAQIV2AggregationType.Sum
+                var c;
+                return null != (c = n.metric.aggregationType) ? c : t.RAQIV2AggregationType.Sum
             }
             return s
         }
@@ -4820,23 +4822,23 @@
     e.s(["DUPLICATE_COPY_NUMBERED_SUFFIX_START", 0, 2, "buildDuplicateDashboardName", 0, function(e, t, i) {
         let o = new Set(Array.from(e, e => e.trim())),
             s = " ".concat(i.first),
-            c = "".concat(n(t, s)).concat(s);
-        return o.has(c) ? r(a(e, e => {
+            u = "".concat(n(t, s)).concat(s);
+        return o.has(u) ? r(a(e, e => {
             let r = " ".concat(i.numbered(e));
             return "".concat(n(t, r)).concat(r)
-        }, 2, 1e3)) : c
+        }, 2, 1e3)) : u
     }, "clipDashboardName", 0, r, "findUnusedNumberedName", 0, a, "suggestDefaultName", 0, function(e) {
         return r(a(e, e => "Dashboard #".concat(e)))
     }], 10560);
     var i = e.i(721281),
         o = e.i(619130),
         s = e.i(650502);
-    let c = (0, o.default)({
+    let u = (0, o.default)({
         baseUrl: (0, s.getBEDEV2ServiceBasePath)("analytics-custom-dashboards"),
         credentials: "include",
         enableMrRouter: !0
     });
-    class u extends Error {
+    class c extends Error {
         constructor(e, t, r) {
             super(t), (0, i._)(this, "status", void 0), (0, i._)(this, "body", void 0), this.name = "CustomDashboardsApiRequestError", this.status = e, this.body = r
         }
@@ -4895,11 +4897,11 @@
                     } : {}
                 }
             }(t),
-            c = null != (n = null != (a = null == s ? void 0 : s.message) ? a : null == s || null == (i = s.error) ? void 0 : i.message) ? n : "HTTP ".concat(o);
-        throw new u(o, c, s)
+            u = null != (n = null != (a = null == s ? void 0 : s.message) ? a : null == s || null == (i = s.error) ? void 0 : i.message) ? n : "HTTP ".concat(o);
+        throw new c(o, u, s)
     }
-    e.s(["CustomDashboardsApiRequestError", 0, u, "createDefaultCustomDashboardsApiClient", 0, function() {
-        let e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : c;
+    e.s(["CustomDashboardsApiRequestError", 0, c, "createDefaultCustomDashboardsApiClient", 0, function() {
+        let e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : u;
         return {
             async listDashboards(t, r) {
                 let {
@@ -4947,8 +4949,8 @@
                     document: o
                 } = t, {
                     data: s,
-                    error: c,
-                    response: u
+                    error: u,
+                    response: c
                 } = await e.POST("/v1/universes/{universeId}/custom-dashboards", {
                     params: {
                         path: {
@@ -4962,7 +4964,7 @@
                         document: o
                     }
                 });
-                return (c || !s) && h(u, c), null != (r = s.dashboard) ? r : {}
+                return (u || !s) && h(c, u), null != (r = s.dashboard) ? r : {}
             },
             async updateDashboardMetadata(t) {
                 var r;
@@ -4973,8 +4975,8 @@
                     patch: o
                 } = t, {
                     data: s,
-                    error: c,
-                    response: u
+                    error: u,
+                    response: c
                 } = await e.PATCH("/v1/universes/{universeId}/custom-dashboards/{dashboardId}/metadata", {
                     params: {
                         path: {
@@ -4989,7 +4991,7 @@
                         patch: l(o)
                     }
                 });
-                return (c || !s) && h(u, c), null != (r = s.metadata) ? r : {}
+                return (u || !s) && h(c, u), null != (r = s.metadata) ? r : {}
             },
             async publishDashboard(t) {
                 var r;
@@ -4999,13 +5001,13 @@
                     expectedHeadEtag: i,
                     document: o,
                     metadataPatch: s
-                } = t, c = void 0 === s ? void 0 : l(s), u = {
+                } = t, u = void 0 === s ? void 0 : l(s), c = {
                     universeId: n,
                     dashboardId: a,
                     expectedHeadEtag: i,
                     document: o,
-                    ...void 0 !== c && Object.keys(c).length > 0 ? {
-                        metadataPatch: c
+                    ...void 0 !== u && Object.keys(u).length > 0 ? {
+                        metadataPatch: u
                     } : {}
                 }, {
                     data: d,
@@ -5018,7 +5020,7 @@
                             dashboardId: a
                         }
                     },
-                    body: u
+                    body: c
                 });
                 return (m || !d) && h(p, m), null != (r = d.dashboard) ? r : {}
             },
@@ -5031,8 +5033,8 @@
                     name: o
                 } = t, {
                     data: s,
-                    error: c,
-                    response: u
+                    error: u,
+                    response: c
                 } = await e.POST("/v1/universes/{universeId}/custom-dashboards/{dashboardId}/duplicate", {
                     params: {
                         path: {
@@ -5045,16 +5047,15 @@
                         name: o
                     }
                 });
-                return (c || !s) && h(u, c), null != (r = s.dashboard) ? r : {}
+                return (u || !s) && h(c, u), null != (r = s.dashboard) ? r : {}
             },
             async deleteDashboard(t) {
                 let {
                     universeId: r,
-                    dashboardId: n,
-                    expectedHeadEtag: a
+                    dashboardId: n
                 } = t, {
-                    error: i,
-                    response: o
+                    error: a,
+                    response: i
                 } = await e.POST("/v1/universes/{universeId}/custom-dashboards/{dashboardId}/delete", {
                     params: {
                         path: {
@@ -5064,11 +5065,10 @@
                     },
                     body: {
                         universeId: r,
-                        dashboardId: n,
-                        expectedHeadEtag: a
+                        dashboardId: n
                     }
                 });
-                i && h(o, i)
+                a && h(i, a)
             },
             async filterDashboardText(t) {
                 let {
@@ -5092,8 +5092,8 @@
                     }
                 });
                 if ((o || !i) && h(s, o), "boolean" != typeof i.isFiltered) {
-                    var c;
-                    throw new u(null != (c = null == s ? void 0 : s.status) ? c : 0, "Response is missing isFiltered")
+                    var u;
+                    throw new c(null != (u = null == s ? void 0 : s.status) ? u : 0, "Response is missing isFiltered")
                 }
                 return {
                     isFiltered: i.isFiltered
@@ -5103,10 +5103,10 @@
     }], 852209);
     var m = e.i(283561);
     e.s(["mapCustomDashboardsApiError", 0, function(e, t) {
-        var r, n, a, i, o, s, c, l, d;
+        var r, n, a, i, o, s, u, l, d;
         if (e instanceof m.CustomDashboardServiceError) return e;
-        if (!(e instanceof u)) return new m.CustomDashboardStorageWriteError(e);
-        let h = null != (i = null != (o = null == (s = e.body) ? void 0 : s.message) ? o : null == (l = e.body) || null == (c = l.error) ? void 0 : c.message) ? i : e.message,
+        if (!(e instanceof c)) return new m.CustomDashboardStorageWriteError(e);
+        let h = null != (i = null != (o = null == (s = e.body) ? void 0 : s.message) ? o : null == (l = e.body) || null == (u = l.error) ? void 0 : u.message) ? i : e.message,
             p = (null != (d = "".concat(null != h ? h : "", " ").concat(null != (r = null == (a = e.body) || null == (n = a.error) ? void 0 : n.status) ? r : "")) ? d : "").toUpperCase().replaceAll("-", "_");
         return 404 === e.status || p.includes("NOT_FOUND") ? new m.CustomDashboardNotFoundError(null != t ? t : "unknown") : 409 === e.status || p.includes("VERSION_CONFLICT") || p.includes("CONFLICT") ? new m.CustomDashboardVersionConflictError(null != t ? t : "unknown") : 429 === e.status || p.includes("QUOTA_EXCEEDED") || p.includes("RESOURCE_EXHAUSTED") ? new m.CustomDashboardQuotaExceededError(h) : 401 === e.status || p.includes("UNAUTHENTICATED") ? new m.CustomDashboardUnauthenticatedError(h) : 403 === e.status || p.includes("PERMISSION_DENIED") ? new m.CustomDashboardPermissionDeniedError(h) : 400 === e.status || p.includes("VALIDATION_FAILED") || p.includes("INVALID_ARGUMENT") ? new m.CustomDashboardValidationError("document", null != h ? h : "Invalid custom dashboard.") : 503 === e.status || p.includes("UNAVAILABLE") ? new m.CustomDashboardNotAvailableError : new m.CustomDashboardStorageWriteError(e)
     }], 482922);
@@ -5124,5 +5124,5 @@
     }], 302610)
 }]);
 
-//# debugId=3cb111d4-6dcc-6920-553e-a3504c3b0dc3
-//# sourceMappingURL=1t9wekv1lgrl_.js.map
+//# debugId=602b5281-67da-3ae0-c720-4a66b4bf9c51
+//# sourceMappingURL=0h29edjvtschh.js.map

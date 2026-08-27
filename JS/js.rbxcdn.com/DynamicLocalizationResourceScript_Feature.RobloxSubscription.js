@@ -191,8 +191,9 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Label.RobuxEarned": "Robux earned",
     "Label.PendingRobux": "Pending Robux",
     "Heading.ReferralHistory": "Referral history",
-    "Heading.InteractWithPlus": "Interact with Plus",
+    "Heading.InteractWithPlus": "Get more out of Plus",
     "Heading.ReferralRecipientEntry": "Join Plus to get {amount} Robux",
-    "Description.ReferralPendingRequest": "{displayName} referred you to Plus"
+    "Description.ReferralPendingRequest": "{displayName} referred you to Plus",
+    "Label.ReferralPendingRequestSummary": "{displayName} referred you"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.RobloxSubscription");
