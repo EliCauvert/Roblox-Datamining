@@ -1,1 +1,0 @@
-﻿return math.max(0, game:DefineFastInt("BuildAdUpsellCompletedTurnGap", 8))

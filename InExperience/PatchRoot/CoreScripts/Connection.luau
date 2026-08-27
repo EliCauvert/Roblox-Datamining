@@ -106,7 +106,7 @@ local fFlagConnectionAmpParentalApprovalUpsell = require(corePackagesService.Wor
 local fFlagConnectionParentalApprovalLeaveOnly = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionParentalApprovalLeaveOnly
 local fFlagConnectionUpsellAnalytics = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionUpsellAnalytics
 local fFlagUniversalFeatureRestrictionReceivers = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagUniversalFeatureRestrictionReceivers
-local isPioneerLaunch = require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch
+local fFlagDebugEnablePioneerUX = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagDebugEnablePioneerUX
 local fFlagErrorPromptUseLeaveGameHelper = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagErrorPromptUseLeaveGameHelper
 local leaveGameModule = require(robloxGui.Modules.Settings.leaveGame)
 local addCollaborationCoreGatedConnectionError2 = game:DefineFastFlag("AddCollaborationCoreGatedConnectionError2", false)
@@ -344,14 +344,14 @@ local var14 = function()
 end
 
 local var15 = function()
-	-- upvalues: telemetryService (ref), t (ref), fFlagErrorPromptUseLeaveGameHelper (ref), leaveGameModule (ref), isPioneerLaunch (ref), guiService (ref), runService (ref)
+	-- upvalues: telemetryService (ref), t (ref), fFlagErrorPromptUseLeaveGameHelper (ref), leaveGameModule (ref), fFlagDebugEnablePioneerUX (ref), guiService (ref), runService (ref)
 	telemetryService:LogCounter(t, { customFields = { selectedItem = "LeaveInitiated" } }, 1)
 	
 	if fFlagErrorPromptUseLeaveGameHelper then
 		leaveGameModule(false, {
 			inhibitAppRating = true,
 			telemetryContext = "ErrorPrompt",
-			shouldNativeExit = isPioneerLaunch()
+			shouldNativeExit = fFlagDebugEnablePioneerUX
 		})
 		
 		return
@@ -827,7 +827,7 @@ if connectionEnableAutoReconnect then
 		}
 	}
 end
-if isPioneerLaunch() then
+if fFlagDebugEnablePioneerUX then
 	for i, v in pairs(t_6) do
 		for i_1, v_1 in ipairs(v) do
 			if v_1.Callback == var15 or v_1.Callback == var19 then

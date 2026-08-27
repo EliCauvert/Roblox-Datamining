@@ -190,6 +190,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation ha {
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation contiene Curve con troppe chiavi. La quantità massima consentita è di {maxAllowed}. Correggi l'animazione.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation contiene più di {maxAllowed} elemento/i MarkerCurve. La quantità massima di discendenti è {maxAllowed}: elimina tutti i duplicati.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation contiene una MarkerCurve con {count} Marker. La quantità massima consentita è di {maxAllowed}. Correggi l'animazione.
+Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"L'animazione pubblicata indica una traslazione massima della parte di {taggedTranslation} stud, ma i suoi dati di animazione calcolano {calculatedTranslation} stud. Ripubblica l'animazione."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation contiene un elemento child imprevisto: {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Le teste dinamiche nel marketplace devono essere adeguatamente incorniciate in modo che i vertici degli occhi e della bocca all'interno della gabbia siano allineati con quelli della mesh. Migliora l'incorniciatura e il suo allineamento con la mesh.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Impossibile rilevare il sorriso della testa dinamica. Regola i punti di riferimento della gabbia per la bocca in modo che corrispondano a dove si trova la bocca sulla testa e assicurati che possa mostrare il sorriso.
@@ -200,10 +201,6 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Le teste dinamiche sul market
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Impossibile rilevare se l'occhio destro della testa dinamica sia chiuso o meno. Regola i punti di riferimento della gabbia per l'occhio destro in modo che corrispondano a dove si trova l'occhio destro sulla testa e assicurati che possa essere chiuso.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Impossibile rilevare l'espressione accigliata della testa dinamica. Regola i punti di riferimento della gabbia per la bocca in modo che corrispondano a dove si trova la bocca sulla testa e assicurati che possa mostrare tale espressione.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Questa risorsa utilizza mappe emissive che sono disponibili solo per i creatori del programma Trusted Creator. Rimuovi tutti i contenuti delle mappe emissive o partecipa al programma prima di caricare.
-Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Nell'animazione pubblicata manca un valore valido di traslazione massima della parte. Ripubblica l'animazione.
-Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Nell'animazione pubblicata manca un indicatore di emote UGC valido. Ripubblica l'animazione.
-Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Non è stato possibile calcolare la traslazione massima della parte dai dati dell'animazione pubblicata. Ripubblica l'animazione.
-Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"L'animazione pubblicata indica una traslazione massima della parte di {taggedTranslation} stud, ma i suoi dati di animazione calcolano {calculatedTranslation} stud. Ripubblica l'animazione."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,La proprietà InternalOverrideFACSData su FaceControls deve essere vuota al momento del caricamento.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"È stato rilevato che FACs ha espanso la testa del {modPercent}%, ma l'alterazione della testa è contraria alle norme del marketplace per le animazioni facciali."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"È stato rilevato che FACs ha ridotto la testa del {modPercent}%, ma l'alterazione della testa è contraria alle norme del marketplace per le animazioni facciali."
@@ -1816,7 +1813,6 @@ Feature.Build.Action.CopyText,Copia testo
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
 Feature.Build.Action.DontAskAgain,Non chiedermelo più
-Feature.Build.Action.DontShowAgain,Non mostrare più
 Feature.Build.Action.HideAutosaved,Nascondi salvataggi automatici
 Feature.Build.Action.ManageLimit,Gestisci limite
 Feature.Build.Action.Next,
@@ -1842,19 +1838,16 @@ Feature.Build.Action.UpdateWithChanges,Aggiorna con modifiche
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Visualizza utilizzo
 Feature.Build.Content.NewGame,Nuovo gioco
-Feature.Build.Description.AdCampaignModerationReview,Tutte le campagne pubblicitarie vengono esaminate dalla moderazione di Roblox. Questo processo può richiedere fino a 24 ore.
-Feature.Build.Description.AdCampaignSheetRunDates,In esecuzione dal {startDate} al {endDate}
-Feature.Build.Description.AdvertisingAgreement,"Se procedi, accetti i {advertisingTermsStart}Termini pubblicitari{advertisingTermsEnd} e gli {advertisingStandardsStart}Standard Pubblicitari di Roblox{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"Se archivi questo gioco, verrà rimosso da Costruisci. Puoi ancora accedervi e ripristinarlo dall'Hub Creatore o da Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Usa i tuoi Robux per acquistare automaticamente un utilizzo aggiuntivo di Build mentre crei. Puoi impostare un limite di spesa giornaliero in qualsiasi momento.
 Feature.Build.Description.BoostAudienceForPlays,Aumenta il tuo pubblico per ottenere più riproduzioni.
+Feature.Build.Description.BoostGameAudience,Aumenta il pubblico del tuo gioco
 Feature.Build.Description.BuildIdeaGame,Trasforma le tue idee in un gioco
 Feature.Build.Description.BuildReplyNotif,Ricevi una notifica quando Build ha una risposta per te.
 Feature.Build.Description.BuyRobuxToCreate,Acquista più Robux per continuare a creare o attendi che il tuo utilizzo gratuito di Costruisci venga ripristinato domani.
 Feature.Build.Description.BuyUsageOrWait,Acquista più utilizzo di Build con Robux o attendi il ripristino del limite giornaliero.
 Feature.Build.Description.CampaignRunDates,La tua campagna sarà attiva dal giorno {startDate} al giorno {endDate}
 Feature.Build.Description.ChoosePlaytesters,Scegli gli amici che ti aiuteranno nel test di giocabilità.
-Feature.Build.Description.EarnedRobuxAppliedFirst,"Se hai guadagnato Robux, questi verranno applicati per primi al costo della campagna pubblicitaria."
 Feature.Build.Description.EnableBuildNotifs,Attiva le notifiche dalle impostazioni del tuo dispositivo per ricevere aggiornamenti da Build.
 Feature.Build.Description.FriendsLinkOnly,Solo i tuoi amici possono accedere a questo link. Modifica l'impostazione Pubblico del tuo gioco se vuoi che più persone possano giocare.
 Feature.Build.Description.GameCreationDone,Ho completato la creazione e la pubblicazione del tuo gioco. Puoi aprirlo per eseguire il test di giocabilità.
@@ -1868,21 +1861,17 @@ Feature.Build.Description.PlaytestLatest,Stai testando la tua ultima versione. P
 Feature.Build.Description.PlaytestLocked,Puoi iniziare il playtest dopo aver creato il tuo primo gioco.
 Feature.Build.Description.PlaytesterAccess,Aggiungi amici come playtester o modifica l'impostazione Pubblico del tuo gioco per consentire a più persone di giocare.
 Feature.Build.Description.PrivateShare,Modifica l'impostazione Pubblico del tuo gioco per condividerlo.
-Feature.Build.Description.PromoteGameWithAdCampaign,Aumenta il tuo pubblico con una campagna pubblicitaria di {durationDays} giorni e fai scoprire il tuo gioco.
 Feature.Build.Description.RaiseLimitOrWait,Aumenta il tuo limite giornaliero di Robux per continuare a creare o attendi che venga ripristinato domani.
 Feature.Build.Description.RatingAgreement,"Pubblicando, confermi che questa classificazione dei contenuti è corretta."
 Feature.Build.Description.RestoreLatest,Questa versione diventerà la tua ultima versione pubblicata.
 Feature.Build.Description.RevertToVersion,Conferma per ripristinare l'ultima modifica e tornare a {VERSION}.
-Feature.Build.Description.ShareLatest,Condividi le modifiche apportate alla tua ultima versione.
 Feature.Build.Description.VersionChanges,Spiega ai giocatori cosa è cambiato in questa versione.
 Feature.Build.Header.AccessSharing,Accesso e condivisione
-Feature.Build.Header.AllVersions,Tutte le versioni
 Feature.Build.Header.ContentMaturity,Maturità contenuti
 Feature.Build.Header.CustomAnswer,Risposta personalizzata
 Feature.Build.Header.GameDetails,Dettagli del gioco
 Feature.Build.Header.Overview,Panoramica
 Feature.Build.Header.PastCampaigns,Campagne passate
-Feature.Build.Header.UpdateDetails,Aggiorna i dettagli
 Feature.Build.Label.Access,Accesso
 Feature.Build.Label.AdClicks,Clic sugli annunci
 Feature.Build.Label.AdViews,Visualizzazioni degli annunci
@@ -1904,9 +1893,7 @@ Feature.Build.Label.Deleted,Eliminato
 Feature.Build.Label.DescribeIdea,Descrivi un'idea
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,Fine
-Feature.Build.Label.EasyPerformanceReport,Report sulle prestazioni semplificato
 Feature.Build.Label.Error,
-Feature.Build.Label.Free,Gratis
 Feature.Build.Label.FreeBuildUsage,Utilizzo gratuito di Build
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Riservata agli amici
@@ -1920,7 +1907,6 @@ Feature.Build.Label.InputNeeded,Input necessario
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitata
 Feature.Build.Label.Loading,
-Feature.Build.Label.MaximizeForGamePlays,Massimizza per le partite giocate
 Feature.Build.Label.Models3D,Modelli 3D
 Feature.Build.Label.NoLimit,Senza limiti
 Feature.Build.Label.NotStarted,Non iniziata
@@ -1945,7 +1931,6 @@ Feature.Build.Label.SelectOption,Seleziona un'opzione
 Feature.Build.Label.ShareAddedFriends,Condividi con gli amici che hai aggiunto
 Feature.Build.Label.Shared,Condiviso
 Feature.Build.Label.Sounds,Suoni
-Feature.Build.Label.TargetAllRobloxPlayers,Rivolgiti a tutti i giocatori Roblox
 Feature.Build.Label.Thinking,Sto pensando...
 Feature.Build.Label.Title,Titolo
 Feature.Build.Label.TitleDescription,Titolo e descrizione
@@ -2013,7 +1998,6 @@ Feature.Build.Label.ToolThumbnailRunning,Impostazione miniatura del gioco in cor
 Feature.Build.Label.UniverseNumber,Universo {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Sconosciuto
 Feature.Build.Label.UnlimitedUsed,{USED} utilizzati • Senza limiti
-Feature.Build.Label.UpdateTitleDesc,Aggiorna titolo e descrizione
 Feature.Build.Label.Updated,Aggiornato
 Feature.Build.Label.Usage,Utilizzo
 Feature.Build.Label.UsageUsed,{USED} utilizzato
@@ -2072,7 +2056,6 @@ Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} di {MAX_INVITES} playtest
 Feature.Build.Message.PublicPublishFailed,"Il tuo gioco è stato pubblicato, ma non è stato possibile renderlo pubblico. Riprova."
 Feature.Build.Message.PublishExpandAudience,Pubblica per ampliare il tuo pubblico
 Feature.Build.Message.PublishNotReverted,La tua pubblicazione non è stata ripristinata. Riprova.
-Feature.Build.Message.PublishPromotionUpsell,Congratulazioni per la pubblicazione del tuo gioco! Hai {promotionCount} promozioni gratuite a disposizione per ottenere più giocatori su Roblox.
 Feature.Build.Message.PublishReverted,Pubblicazione ripristinata.
 Feature.Build.Message.QuestionnaireNeeded,Questo gioco è stato modificato al di fuori di Build. Compila il questionario sui contenuti per pubblicarlo.
 Feature.Build.Message.ReadyToPlay,Il tuo gioco è pronto per essere giocato su Roblox!
@@ -2100,7 +2083,6 @@ Feature.Build.Notification.Message.Review,Riprendi la chat di Costruire per esam
 Feature.Build.Notification.Title.Finished,Creazione terminata
 Feature.Build.Notification.Title.NeedInput,La creazione ha bisogno del tuo contributo
 Feature.Build.Title.AdCampaignActive,La campagna pubblicitaria è attiva
-Feature.Build.Title.AdCampaignDuration,Campagna pubblicitaria di {durationDays} giorni
 Feature.Build.Title.AddFriendsToPlaytest,Aggiungi gli amici che ti aiuteranno nel test di giocabilità
 Feature.Build.Title.ArchiveThisGame,Archiviare questo gioco?
 Feature.Build.Title.AssetLibrary,Libreria
@@ -2123,18 +2105,14 @@ Feature.Build.Title.GetUsers,Ottieni utenti
 Feature.Build.Title.NoRobuxForUsage,Nessun Robux rimasto per l'utilizzo di Build
 Feature.Build.Title.Playtesters,Tester di gioco
 Feature.Build.Title.PlaytestersOnlyPlay,Solo i playtester possono giocare
-Feature.Build.Title.PromoteGame,Promuovi il tuo gioco
 Feature.Build.Title.PromoteGameFree,Promuovi il tuo gioco gratuitamente
 Feature.Build.Title.PushNotifications,Notifiche push
 Feature.Build.Title.RevertLastChange,Ripristinare l'ultima modifica?
 Feature.Build.Title.Tasks,Attività
 Feature.Build.Title.TurnActivity,Gira attività
 Feature.Build.Title.VersionHistory,Cronologia versioni
-Feature.Build.Title.VersionInfo,Informazioni versione
 Feature.Build.Title.VersionInformation,Informazioni sulla versione
 Feature.Build.Title.VersionNumber,Versione {VERSION}
-Feature.Build.Title.Versions,Versioni
-Feature.Build.Title.WhatsIncluded,Cosa è incluso?
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Consenti
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -2493,7 +2471,7 @@ Feature.Catalog.LabelAnyPrice,Qualsiasi prezzo
 Feature.Catalog.LabelClassicHeads,
 Feature.Catalog.LabelCollectibles,Collezionabili
 Feature.Catalog.LabelContentDeleted,Contenuto eliminato
-Feature.Catalog.LabelFree,
+Feature.Catalog.LabelFree,Gratis
 Feature.Catalog.LabelNoResellers,Nessun rivenditore
 Feature.Catalog.LabelOffSale,
 Feature.Catalog.LabelPants,
@@ -3755,7 +3733,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Buone notizie
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Ottieni Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus non è disponibile qui
-Feature.SafetyDashboard.Heading.AccountStatus.V2,"Stato dell'account, violazioni e ricorsi"
+Feature.SafetyDashboard.Heading.AccountStatus,Stato dell'account
 Feature.Schools.Label.Classmates,Compagni di classe
 Feature.Screentime.Content.ScreentimeLimitDialog,Hai raggiunto il limite giornaliero di tempo davanti allo schermo. Torna domani per accedere di nuovo a Roblox.
 Feature.SecurityFeedback.Header.NewLogin,Avviso di nuova attività

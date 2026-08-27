@@ -13,10 +13,9 @@ local useLegacyVisibilityMirrorModule = require(parent.Hooks.useLegacyVisibility
 local leaderboardTabsModule = require(parent.Components.Presentation.LeaderboardTabs)
 local platformLeaderboardViewModule = require(parent.Components.Presentation.PlatformLeaderboardView)
 local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
-local fFlagPlayerListTwoTabsOnLegacyPerformanceModule = require(parent.Flags.FFlagPlayerListTwoTabsOnLegacyPerformance)
 
 return reactModule.memo(function(value)
-	-- upvalues: reactModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), inExperienceLocalesModule (ref), localizationService (ref), fFlagPlayerListTwoTabsOnLegacyPerformanceModule (ref), useLegacyVisibilityMirrorModule (ref), signalsReactModule (ref), view (ref), platformLeaderboardViewModule (ref), leaderboardTabsModule (ref), localizationProvider (ref), foundationProvider (ref), theme (ref)
+	-- upvalues: reactModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), inExperienceLocalesModule (ref), localizationService (ref), useLegacyVisibilityMirrorModule (ref), signalsReactModule (ref), view (ref), platformLeaderboardViewModule (ref), leaderboardTabsModule (ref), localizationProvider (ref), foundationProvider (ref), theme (ref)
 	local server, server_1 = reactModule.useState("server")
 	local var1 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useMemo(function()
 		-- upvalues: inExperienceLocalesModule (copy), localizationService (copy)
@@ -26,7 +25,7 @@ return reactModule.memo(function(value)
 		-- upvalues: server_1 (ref)
 		server_1("server")
 	end, {})
-	local var3 = if server ~= "server" then not (if fFlagPlayerListTwoTabsOnLegacyPerformanceModule then value.isVisible else signalsReactModule.useSignalState(useLegacyVisibilityMirrorModule(value.isVisible))) else true
+	local var3 = if server ~= "server" then not signalsReactModule.useSignalState(useLegacyVisibilityMirrorModule(value.isVisible)) else true
 	local var4 = value.platformBodyHeight == nil
 	local var5 = if var3 then if var4 then reactModule.createElement("Frame", {
 		Name = "LegacyTwoTabsServerBody",

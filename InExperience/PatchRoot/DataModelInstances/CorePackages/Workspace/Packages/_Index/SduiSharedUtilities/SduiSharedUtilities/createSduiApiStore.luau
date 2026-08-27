@@ -31,17 +31,18 @@ local fFlagSduiClientTemplateCache = require(parent.SharedFlags).FFlagSduiClient
 local fFlagSduiAlwaysCacheWithIdentifier = require(parent.SharedFlags).FFlagSduiAlwaysCacheWithIdentifier
 local fFlagLuaAppSduiStreamingChunkedResponses = require(parent.SharedFlags).FFlagLuaAppSduiStreamingChunkedResponses
 local fFlagSduiErrorCleanup = require(parent.SharedFlags).FFlagSduiErrorCleanup
+local fFlagSduiInputDataMergeStrategy = require(parent.SharedFlags).FFlagSduiInputDataMergeStrategy
 local fFlagSduiDismissPromptAction = require(parent.SharedFlags).FFlagSduiDismissPromptAction
 local fFlagSduiApiStoreExposeGetInputData = require(parent.SharedFlags).FFlagSduiApiStoreExposeGetInputData
-local fFlagAppChatConversationTrustedFriendUpsellBanner = require(parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
 local fFlagSduiApiStoreOnSuccessAndRefresh = require(parent.SharedFlags).FFlagSduiApiStoreOnSuccessAndRefresh
+local fFlagSduiRenderPerf = require(parent.SharedFlags).FFlagSduiRenderPerf
 local fFlagSduiPaginatePostBody = require(parent.SharedFlags).FFlagSduiPaginatePostBody
 local sduiPageRequestPriority = game:DefineFastInt("SduiPageRequestPriority", 1)
 local resolveSduiCacheEntryModule = require(sduiSharedUtilities.resolveSduiCacheEntry)
 local accumulateSduiCacheSubEntriesModule = require(sduiSharedUtilities.accumulateSduiCacheSubEntries)
 
 return function()
-	-- upvalues: createDataCache (ref), fFlagSduiApiStoreOnSuccessAndRefresh (ref), signalsModule (ref), promiseModule (ref), fFlagSduiProtobufJsonDecode (ref), sduiResponseType (ref), fFlagSduiConfigFetchTakesPostBody (ref), fFlagLuaAppSduiStreamingChunkedResponses (ref), makeProtobufJsonResponseDecoder (ref), makeProtoResponseDecoder (ref), handleSduiApiResponseModule (ref), sduiProtobufResponseHelpersModule (ref), fFlagSduiPaginatePostBody (ref), fFlagSduiAllowNoConfigsBuilt (ref), fFlagSduiClientTemplateCache (ref), createSduiStreamingResponseHandlerModule (ref), accumulateSduiCacheSubEntriesModule (ref), httpService (ref), sduiApiStorePostConfigModule (ref), sduiPageRequestPriority (ref), sduiPageAnalyticsModule (ref), sduiRequestStatus (ref), fFlagSduiErrorCleanup (ref), sduiLogger (ref), sduiErrors (ref), fFlagSduiChartsSupport (ref), sduiParseHelpers (ref), sduiEnableClearOnEmptyResponse (ref), cryoModule (ref), createDataResolver (ref), resolveSduiCacheEntryModule (ref), fFlagSduiAlwaysCacheWithIdentifier (ref), fFlagAppChatConversationTrustedFriendUpsellBanner (ref), fFlagSduiDismissPromptAction (ref), fFlagSduiApiStoreExposeGetInputData (ref)
+	-- upvalues: createDataCache (ref), fFlagSduiApiStoreOnSuccessAndRefresh (ref), signalsModule (ref), promiseModule (ref), fFlagSduiProtobufJsonDecode (ref), sduiResponseType (ref), fFlagSduiConfigFetchTakesPostBody (ref), fFlagLuaAppSduiStreamingChunkedResponses (ref), makeProtobufJsonResponseDecoder (ref), makeProtoResponseDecoder (ref), handleSduiApiResponseModule (ref), sduiProtobufResponseHelpersModule (ref), fFlagSduiPaginatePostBody (ref), fFlagSduiAllowNoConfigsBuilt (ref), fFlagSduiInputDataMergeStrategy (ref), fFlagSduiClientTemplateCache (ref), createSduiStreamingResponseHandlerModule (ref), accumulateSduiCacheSubEntriesModule (ref), httpService (ref), sduiApiStorePostConfigModule (ref), fFlagSduiRenderPerf (ref), sduiPageRequestPriority (ref), sduiPageAnalyticsModule (ref), sduiRequestStatus (ref), fFlagSduiErrorCleanup (ref), sduiLogger (ref), sduiErrors (ref), fFlagSduiChartsSupport (ref), sduiParseHelpers (ref), sduiEnableClearOnEmptyResponse (ref), cryoModule (ref), createDataResolver (ref), resolveSduiCacheEntryModule (ref), fFlagSduiAlwaysCacheWithIdentifier (ref), fFlagSduiDismissPromptAction (ref), fFlagSduiApiStoreExposeGetInputData (ref)
 	local var1 = createDataCache()
 	local t = {}
 	local t_1 = {}
@@ -93,7 +94,7 @@ return function()
 		supportsMultiGet = false,
 		cache = var1,
 		fetchFn = function(p1, p2)
-			-- upvalues: t (ref), promiseModule (copy), fFlagSduiProtobufJsonDecode (copy), sduiResponseType (copy), fFlagSduiConfigFetchTakesPostBody (copy), fFlagLuaAppSduiStreamingChunkedResponses (copy), makeProtobufJsonResponseDecoder (copy), makeProtoResponseDecoder (copy), handleSduiApiResponseModule (copy), sduiProtobufResponseHelpersModule (copy), getInputDataSignals (ref), fFlagSduiPaginatePostBody (copy), fFlagSduiAllowNoConfigsBuilt (copy), fFlagSduiClientTemplateCache (copy), createSduiStreamingResponseHandlerModule (copy), fFlagSduiApiStoreOnSuccessAndRefresh (copy), accumulateSduiCacheSubEntriesModule (copy), var1 (ref), httpService (copy), sduiApiStorePostConfigModule (copy), sduiPageRequestPriority (copy), t_1 (ref), sduiPageAnalyticsModule (copy), sduiRequestStatus (copy), fFlagSduiErrorCleanup (copy), sduiLogger (copy), sduiErrors (copy), fFlagSduiChartsSupport (copy), t_2 (ref), sduiParseHelpers (copy), sduiEnableClearOnEmptyResponse (copy), cryoModule (copy)
+			-- upvalues: t (ref), promiseModule (copy), fFlagSduiProtobufJsonDecode (copy), sduiResponseType (copy), fFlagSduiConfigFetchTakesPostBody (copy), fFlagLuaAppSduiStreamingChunkedResponses (copy), makeProtobufJsonResponseDecoder (copy), makeProtoResponseDecoder (copy), handleSduiApiResponseModule (copy), sduiProtobufResponseHelpersModule (copy), getInputDataSignals (ref), fFlagSduiPaginatePostBody (copy), fFlagSduiAllowNoConfigsBuilt (copy), fFlagSduiInputDataMergeStrategy (copy), fFlagSduiClientTemplateCache (copy), createSduiStreamingResponseHandlerModule (copy), fFlagSduiApiStoreOnSuccessAndRefresh (copy), accumulateSduiCacheSubEntriesModule (copy), var1 (ref), httpService (copy), sduiApiStorePostConfigModule (copy), fFlagSduiRenderPerf (copy), sduiPageRequestPriority (copy), t_1 (ref), sduiPageAnalyticsModule (copy), sduiRequestStatus (copy), fFlagSduiErrorCleanup (copy), sduiLogger (copy), sduiErrors (copy), fFlagSduiChartsSupport (copy), t_2 (ref), sduiParseHelpers (copy), sduiEnableClearOnEmptyResponse (copy), cryoModule (copy)
 			local var3 = t[p1]
 			
 			if not var3 then
@@ -109,7 +110,7 @@ return function()
 			local var7 = if var4 then makeProtobufJsonResponseDecoder(var3.apiProto) else makeProtoResponseDecoder(var3.apiProto)
 			
 			local function processSduiResponse(p3)
-				-- upvalues: var3 (ref), p2 (ref), handleSduiApiResponseModule (copy), loadTimer (ref), var7 (ref), sduiProtobufResponseHelpersModule (copy), getInputDataSignals (copy), fFlagLuaAppSduiStreamingChunkedResponses (copy), var6 (ref), fFlagSduiPaginatePostBody (copy), fFlagSduiAllowNoConfigsBuilt (copy), fFlagSduiClientTemplateCache (copy)
+				-- upvalues: var3 (ref), p2 (ref), handleSduiApiResponseModule (copy), loadTimer (ref), var7 (ref), sduiProtobufResponseHelpersModule (copy), getInputDataSignals (copy), fFlagLuaAppSduiStreamingChunkedResponses (copy), var6 (ref), fFlagSduiPaginatePostBody (copy), fFlagSduiAllowNoConfigsBuilt (copy), fFlagSduiInputDataMergeStrategy (copy), fFlagSduiClientTemplateCache (copy)
 				return handleSduiApiResponseModule({
 					response = p3,
 					loadTimer = loadTimer,
@@ -125,7 +126,7 @@ return function()
 					buildNextPageUrl = var3.buildNextPageUrl,
 					buildNextPagePostBody = if fFlagSduiPaginatePostBody then var3.buildNextPagePostBody else nil,
 					allowNoConfigsBuilt = if fFlagSduiAllowNoConfigsBuilt then var3.allowNoConfigsBuilt else nil,
-					mergeStrategy = var3.mergeStrategy,
+					mergeStrategy = if fFlagSduiInputDataMergeStrategy then var3.mergeStrategy else nil,
 					enableTemplateCache = if fFlagSduiClientTemplateCache then var3.enableTemplateCache else nil
 				})
 			end
@@ -158,7 +159,7 @@ return function()
 				},
 				Body = if fFlagSduiConfigFetchTakesPostBody and postConfig then sduiApiStorePostConfigModule.getBodyFromPostConfig(postConfig) else nil,
 				OnMessage = if var9 then var9.handleChunk else nil,
-				Priority = sduiPageRequestPriority
+				Priority = if fFlagSduiRenderPerf then sduiPageRequestPriority else nil
 			})
 			
 			return promiseModule.new(function(p3, p4)
@@ -370,14 +371,6 @@ return function()
 	return {
 		fetchIfNeeded = fetchIfNeeded,
 		isInFlight = isInFlight,
-		clearConfigEntries = if fFlagAppChatConversationTrustedFriendUpsellBanner then function(p9)
-			-- upvalues: var1 (ref)
-			if typeof(p9) == "string" and p9 ~= "" then
-				var1.replaceItems({ [p9] = {} })
-				
-				return
-			end
-		end else nil,
 		dismissEntry = if fFlagSduiDismissPromptAction then function(p9)
 			-- upvalues: t (ref), var2 (ref), var1 (ref)
 			local t_1 = {}
@@ -408,7 +401,7 @@ return function()
 			return t_1
 		end else nil,
 		seedFromDecodedResponse = function(p10)
-			-- upvalues: t (ref), sduiResponseType (copy), var2 (ref), handleSduiApiResponseModule (copy), sduiProtobufResponseHelpersModule (copy), getInputDataSignals (ref), sduiLogger (copy), sduiErrors (copy), sduiParseHelpers (copy), fFlagAppChatConversationTrustedFriendUpsellBanner (copy), var1 (ref), accumulateSduiCacheSubEntriesModule (copy)
+			-- upvalues: t (ref), sduiResponseType (copy), var2 (ref), handleSduiApiResponseModule (copy), sduiProtobufResponseHelpersModule (copy), getInputDataSignals (ref), sduiLogger (copy), sduiErrors (copy), sduiParseHelpers (copy), accumulateSduiCacheSubEntriesModule (copy), var1 (ref)
 			local configKey = p10.configKey
 			local loadTimer = p10.loadTimer
 			loadTimer.logUiRequestQueued()
@@ -446,11 +439,6 @@ return function()
 					name = p10.surfaceKey
 				}, p10.surfaceKey)
 				error(status)
-			end
-			if fFlagAppChatConversationTrustedFriendUpsellBanner and p10.replace then
-				var1.replaceItems({ [configKey] = status })
-				
-				return
 			end
 			var1.updateItems({
 				[configKey] = accumulateSduiCacheSubEntriesModule(status, var38)

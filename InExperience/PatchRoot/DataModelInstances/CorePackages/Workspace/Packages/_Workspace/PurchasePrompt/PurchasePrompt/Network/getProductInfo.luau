@@ -9,8 +9,6 @@ local isCreatorStoreAssetTypeModule = require(parent.Utils.isCreatorStoreAssetTy
 local getAssetInfoUtilModule = require(parent.Utils.getAssetInfoUtil)
 local getCreatorStoreProductInfoUtilModule = require(parent.Utils.getCreatorStoreProductInfoUtil)
 local getExperienceProductInfoUtilModule = require(parent.Utils.getExperienceProductInfoUtil)
-local getExperienceProductImageUrlModule = require(parent.Utils.getExperienceProductImageUrl)
-local fFlagExperiencePurchaseFallbackToGameIconModule = require(parent.Flags.FFlagExperiencePurchaseFallbackToGameIcon)
 local handleLooksProductInfoResultModule = require(parent.Utils.handleLooksProductInfoResult)
 local productTypeEnum = require(parent.types).ProductTypeEnum
 local fFlagEnableUnifiedProductPurchaseFlow = require(parent.Parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
@@ -45,7 +43,7 @@ local function fetchRefreshedPrice(p1, p2, p3, p4)
 end
 
 return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: getAssetInfoModule (ref), getAssetInfoUtilModule (ref), promiseModule (ref), purchaseErrorModule (ref), isCreatorStoreAssetTypeModule (ref), getCreatorStoreProductInfoModule (ref), getCreatorStoreProductInfoUtilModule (ref), fFlagEnableFetchCartPricingDuringInExperience (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), fetchRefreshedPrice (ref), fFlagFixTimedOptionRefreshModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), productTypeEnum (ref), fFlagExperiencePurchaseFallbackToGameIconModule (ref), getExperienceProductInfoUtilModule (ref), getExperienceProductImageUrlModule (ref), fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (ref), handleLooksProductInfoResultModule (ref), fFlagRefreshLookPriceOnRetryAfterUpsellModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), getFFlagDiscountInfoForSubscriptionPurchaseModalLua (ref)
+	-- upvalues: getAssetInfoModule (ref), getAssetInfoUtilModule (ref), promiseModule (ref), purchaseErrorModule (ref), isCreatorStoreAssetTypeModule (ref), getCreatorStoreProductInfoModule (ref), getCreatorStoreProductInfoUtilModule (ref), fFlagEnableFetchCartPricingDuringInExperience (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), fetchRefreshedPrice (ref), fFlagFixTimedOptionRefreshModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), productTypeEnum (ref), getExperienceProductInfoUtilModule (ref), fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (ref), handleLooksProductInfoResultModule (ref), fFlagRefreshLookPriceOnRetryAfterUpsellModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), getFFlagDiscountInfoForSubscriptionPurchaseModalLua (ref)
 	if p3 == Enum.InfoType.Asset then
 		local var1 = getAssetInfoModule(p1, p2):andThen(function(p7)
 			-- upvalues: getAssetInfoUtilModule (copy), promiseModule (copy), purchaseErrorModule (copy), isCreatorStoreAssetTypeModule (copy), getCreatorStoreProductInfoModule (copy), p1 (ref), p2 (ref), getCreatorStoreProductInfoUtilModule (copy), fFlagEnableFetchCartPricingDuringInExperience (copy), p3 (ref), p6 (ref)
@@ -123,8 +121,8 @@ return function(p1, p2, p3, p4, p5, p6)
 		end) else var1
 	end
 	return if fFlagEnableUnifiedProductPurchaseFlow and p3 == productTypeEnum.Experience then p1.getExperienceProductInfo(p2):andThen(function(p7)
-		-- upvalues: p4 (ref), fFlagExperiencePurchaseFallbackToGameIconModule (copy), getExperienceProductInfoUtilModule (copy), getExperienceProductImageUrlModule (copy), p2 (ref), promiseModule (copy), purchaseErrorModule (copy)
-		if p7 and p7.data and (p7.data[1] and p4.name) and (fFlagExperiencePurchaseFallbackToGameIconModule or p4.imageUrl) then
+		-- upvalues: p4 (ref), getExperienceProductInfoUtilModule (copy), promiseModule (copy), purchaseErrorModule (copy)
+		if p7 and p7.data and (p7.data[1] and p4.name) and p4.imageUrl then
 			local var2 = getExperienceProductInfoUtilModule.fromProduct(p7.data[1])
 			
 			return {
@@ -133,7 +131,7 @@ return function(p1, p2, p3, p4, p5, p6)
 				ProductId = var2.productId,
 				SellerId = var2.sellerId,
 				Name = p4.name,
-				ImageUrl = if fFlagExperiencePurchaseFallbackToGameIconModule then getExperienceProductImageUrlModule(p4.imageUrl, p2) else p4.imageUrl
+				ImageUrl = p4.imageUrl
 			}
 		end
 		return promiseModule.reject(purchaseErrorModule.UnknownFailureNoItemName)

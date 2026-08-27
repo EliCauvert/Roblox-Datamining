@@ -6,7 +6,6 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
-local fFlagBuildVersionHistoryUpdatesModule = require(buildExperience.Flags.FFlagBuildVersionHistoryUpdates)
 local badge = foundationModule.Badge
 local button = foundationModule.Button
 local text = foundationModule.Text
@@ -23,7 +22,8 @@ local function _(p1, p2, p3, p4)
 end
 
 return function(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagBuildVersionHistoryUpdatesModule (ref), badge (ref), badgeShape (ref), badgeVariant (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), badge (ref), badgeShape (ref), badgeVariant (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
+	local badgeText
 	local testId = p1.testId or "version-history-card"
 	local var1 = if fFlagBuildLocalization then useLocalization({
 		autosaved = localizationStringsModule.VERSION_HISTORY_AUTOSAVED,
@@ -32,26 +32,12 @@ return function(p1)
 		restore = localizationStringsModule.VERSION_HISTORY_RESTORE
 	}) else nil
 	local var2 = if fFlagBuildLocalization then var1.restore else localizationStringsModule.VERSION_HISTORY_RESTORE
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
-		p1.onRestore()
-	end, { p1.onRestore })
-	local var4 = nil
 	
-	if not fFlagBuildVersionHistoryUpdatesModule then
-		local var5
-		if fFlagBuildLocalization then
-			local badgeText = p1.badgeText
-			var5 = if badgeText == localizationStringsModule.VERSION_HISTORY_AUTOSAVED then var1.autosaved elseif badgeText == localizationStringsModule.VERSION_HISTORY_PREVIOUSLY_PUBLISHED then var1.previouslyPublished elseif badgeText == localizationStringsModule.VERSION_HISTORY_PUBLISHED then var1.published else badgeText
-		else
-			var5 = p1.badgeText
-		end
-		var4 = if var5 then reactModule.createElement(badge, {
-			LayoutOrder = 2,
-			text = var5,
-			shape = badgeShape.Box,
-			variant = badgeVariant.Neutral
-		}) else nil
+	if fFlagBuildLocalization then
+		local badgeText_1 = p1.badgeText
+		badgeText = if badgeText_1 == localizationStringsModule.VERSION_HISTORY_AUTOSAVED then var1.autosaved elseif badgeText_1 == localizationStringsModule.VERSION_HISTORY_PREVIOUSLY_PUBLISHED then var1.previouslyPublished elseif badgeText_1 == localizationStringsModule.VERSION_HISTORY_PUBLISHED then var1.published else badgeText_1
+	else
+		badgeText = p1.badgeText
 	end
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y stroke-standard stroke-default radius-large clip bg-surface-100",
@@ -62,24 +48,7 @@ return function(p1)
 			LayoutOrder = 1,
 			tag = "col size-full-0 auto-y padding-x-large padding-bottom-large padding-top-medium"
 		}, {
-			Header = if fFlagBuildVersionHistoryUpdatesModule then reactModule.createElement(view, {
-				LayoutOrder = 1,
-				tag = "col align-x-left align-y-top gap-xxsmall size-full-0 auto-y",
-				testId = `{testId}-header`
-			}, {
-				Version = reactModule.createElement(text, {
-					LayoutOrder = 1,
-					tag = "size-full-0 auto-y text-caption-medium text-align-x-left content-muted",
-					Text = p1.versionLabel,
-					testId = `{testId}-version`
-				}),
-				Title = reactModule.createElement(text, {
-					LayoutOrder = 2,
-					tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
-					Text = p1.title,
-					testId = `{testId}-title`
-				})
-			}) else reactModule.createElement(view, {
+			Header = reactModule.createElement(view, {
 				LayoutOrder = 1,
 				tag = "col gap-xxsmall size-full-0 auto-y"
 			}, {
@@ -97,7 +66,12 @@ return function(p1)
 						tag = "shrink auto-xy text-title-medium text-wrap text-align-x-left text-truncate-none content-emphasis",
 						Text = p1.title
 					}),
-					Badge = var4
+					Badge = if badgeText then reactModule.createElement(badge, {
+						LayoutOrder = 2,
+						text = badgeText,
+						shape = badgeShape.Box,
+						variant = badgeVariant.Neutral
+					}) else nil
 				})
 			}),
 			Slot = reactModule.createElement(view, {
@@ -117,7 +91,10 @@ return function(p1)
 						variant = buttonVariant.Standard,
 						fillBehavior = fillBehavior.Fill,
 						isDisabled = p1.isRestoreDisabled,
-						onActivated = var3,
+						onActivated = reactModule.useCallback(function()
+							-- upvalues: p1 (ref)
+							p1.onRestore()
+						end, { p1.onRestore }),
 						testId = `{testId}-restore`
 					})
 				})

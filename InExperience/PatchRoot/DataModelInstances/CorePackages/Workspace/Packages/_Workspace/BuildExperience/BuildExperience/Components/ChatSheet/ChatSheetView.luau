@@ -102,8 +102,7 @@ return function(p1)
 		TopBarPillMenu = if p1.topBarPillMenuTarget ~= nil then nil else reactModule.createElement(buildPillMenuPortalModule, {
 			testId = "build-pill-menu",
 			sheet = var5,
-			target = p1.topBarPillMenuTarget,
-			onOpenChat = p1.onOpenChat
+			target = p1.topBarPillMenuTarget
 		})
 	})
 end

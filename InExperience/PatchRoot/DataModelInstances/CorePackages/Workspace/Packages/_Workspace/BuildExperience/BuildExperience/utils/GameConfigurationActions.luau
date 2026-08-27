@@ -23,11 +23,6 @@ local function getCreatorHubConfigureUrl(p1)
 	return var1({ universeId = p1 })
 end
 
-local function getCreatorHubAnalyticsUrl(p1, p2)
-	-- upvalues: urlBuilder (ref)
-	return urlBuilder.fromString(`create:dashboard/creations/experiences/\{universeId}/{p2}`)({ universeId = p1 })
-end
-
 local function getExperienceQuestionnaireUrl(p1)
 	-- upvalues: var2 (ref)
 	return var2({ universeId = p1 })
@@ -148,7 +143,6 @@ end
 return {
 	PublishFailureStage = { SetAudience = "set_audience" },
 	getCreatorHubConfigureUrl = getCreatorHubConfigureUrl,
-	getCreatorHubAnalyticsUrl = getCreatorHubAnalyticsUrl,
 	publishExperience = function(p2)
 		-- upvalues: saveAndPublishPlace (ref), fFlagBuildRehydrateOnPublishModule (ref), universeActivationModule (ref), setAudiencesForPublish (ref), promiseModule (ref), debug (ref), buildExperienceSecondActivateAfterSetAudiences (ref), universeConfigurationModule (ref), rehydrateGameMetadataModule (ref)
 		local var3

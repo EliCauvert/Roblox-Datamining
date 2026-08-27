@@ -23,10 +23,6 @@ local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).i
 local default = require(script.Parent.ChatIconVisibleSignals).default
 local signalsUtilsModule = require(corePackagesService.Workspace.Packages.SignalsUtils)
 local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome).Enums.SideSheetPlacement
-
-if require(robloxGui.Modules.Flags.FFlagDebugDisableExperienceChatMain) then
-	return nil
-end
 local expChatModule = require(corePackagesService.Workspace.Packages.ExpChat)
 local focusNavigationStore = expChatModule.Stores.GetFocusNavigationStore(false)
 local shouldSuppressUnreadForTabMetadata = expChatModule.shouldSuppressUnreadForTabMetadata

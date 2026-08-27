@@ -9,12 +9,11 @@ local getAssistantBuildStoreModule = require(buildExperience.Stores.GetAssistant
 local getCreatorAgentResumeStoreModule = require(buildExperience.Stores.GetCreatorAgentResumeStore)
 local getCurrentExperienceProjectModule = require(buildExperience.utils.getCurrentExperienceProject)
 local _ = require(script.Parent.ChatSheetView)
-local fFlagBuildExperienceAnalytics = require(parent.SharedFlags).FFlagBuildExperienceAnalytics
 
 local function noop() end
 
 return function(p1)
-	-- upvalues: noop (ref), getAssistantBuildStoreModule (ref), signalsReactModule (ref), getCreatorAgentResumeStoreModule (ref), getCurrentExperienceProjectModule (ref), useChatSessionCoreModule (ref), useChatPlaytestFooterModule (ref), fFlagBuildExperienceAnalytics (ref), reactModule (ref)
+	-- upvalues: noop (ref), getAssistantBuildStoreModule (ref), signalsReactModule (ref), getCreatorAgentResumeStoreModule (ref), getCurrentExperienceProjectModule (ref), useChatSessionCoreModule (ref), useChatPlaytestFooterModule (ref), reactModule (ref)
 	local onClose = p1.onClose or noop
 	local var1 = p1.isOpen == nil or p1.isOpen
 	local var2 = signalsReactModule.useSignalState(getAssistantBuildStoreModule().getIsDisabled)
@@ -29,25 +28,6 @@ return function(p1)
 		hydrateHistoryWhen = var1
 	})
 	local var6 = useChatPlaytestFooterModule(var5, "ChatSheetPlaytestCta")
-	local var7 = noop
-	
-	if fFlagBuildExperienceAnalytics then
-		local var8, var9 = reactModule.useState(nil)
-		var7 = reactModule.useCallback(function(p2)
-			-- upvalues: var5 (ref), var9 (ref)
-			var5.setComposerText(p2)
-			var9(p2)
-		end, { var5.setComposerText })
-		reactModule.useEffect(function()
-			-- upvalues: var8 (ref), var5 (ref), var9 (ref)
-			if var8 == nil then return end
-			var5.setComposerText(var8)
-			
-			if var5.sendMessage() then
-				var9(nil)
-			end
-		end, { var8, var5.sendMessage, var5.setComposerText })
-	end
 	reactModule.useEffect(function()
 		-- upvalues: var1 (ref), var2 (ref), onClose (ref)
 		if var1 and var2 then
@@ -92,7 +72,6 @@ return function(p1)
 		canSendWhileResponding = var5.canSendWhileResponding,
 		onSend = var5.sendMessage,
 		onStop = var5.stopAssistantResponse,
-		onOpenChat = var7,
 		topBarPillMenuTarget = p1.topBarPillMenuTarget
 	}
 end

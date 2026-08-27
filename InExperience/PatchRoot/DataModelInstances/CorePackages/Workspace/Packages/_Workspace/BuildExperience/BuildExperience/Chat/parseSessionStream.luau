@@ -1,9 +1,8 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local creatorAgentChatModule = require(buildExperience.Parent.DataHydration.CreatorAgentChat)
-local chatTypesModule = require(script.Parent.chatTypes)
-local fFlagBuildAdUpsellModule = require(buildExperience.Flags.FFlagBuildAdUpsell)
-local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
+local _ = require(script.Parent.chatTypes)
 local fFlagBuildExperienceChatImageAttachmentsModule = require(buildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
+local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
 local fFlagBuildExperienceSinglePlaytestCardModule = require(buildExperience.Flags.FFlagBuildExperienceSinglePlaytestCard)
 local publishToolUtils = creatorAgentChatModule.PublishToolUtils
 local turnStateReducer = creatorAgentChatModule.TurnStateReducer
@@ -279,7 +278,7 @@ local function buildTurnFeedbackIds(p11, p12)
 end
 
 return function(p11, p12)
-	-- upvalues: parseChatItems (ref), buildUserMessageItem (ref), turnStateReducer (ref), publishToolUtils (ref), subagentTasks (ref), fFlagBuildAdUpsellModule (ref), buildTurnFeedbackIds (ref), fFlagBuildExperienceSinglePlaytestCardModule (ref), chatTypesModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildAgentRollbackModule (ref)
+	-- upvalues: parseChatItems (ref), buildUserMessageItem (ref), turnStateReducer (ref), publishToolUtils (ref), subagentTasks (ref), buildTurnFeedbackIds (ref), fFlagBuildExperienceSinglePlaytestCardModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildAgentRollbackModule (ref)
 	local sequenceIds
 	local sessionId = p12.sessionId
 	local cloned = table.clone(p11)
@@ -316,46 +315,44 @@ return function(p11, p12)
 			continue
 		end
 		local turnState = v_1.turnState
-		local var20 = p12.optimisticCancelledStartSequenceId ~= nil and (v_1.startSequenceId == p12.optimisticCancelledStartSequenceId and not turnState.isDone)
 		
-		if var20 then
+		if p12.optimisticCancelledStartSequenceId ~= nil and v_1.startSequenceId == p12.optimisticCancelledStartSequenceId and not turnState.isDone then
 			turnState = turnStateReducer.applySessionUpdate(turnState, {
 				sessionUpdate = "state_change",
 				state = "idle",
 				stop_reason = "cancelled"
 			}, nil)
 		end
-		local var21 = publishToolUtils.includesPublishPlaceTool(turnState)
+		local var20 = publishToolUtils.includesPublishPlaceTool(turnState)
 		
-		if var21 then
+		if var20 then
 			var17 = true
 		end
-		local var22 = subagentTasks.fromTurnState(turnState)
+		local var21 = subagentTasks.fromTurnState(turnState)
 		
-		if var22 ~= nil then
-			var18 = var22
+		if var21 ~= nil then
+			var18 = var21
 		end
-		local var23 = if sessionId == nil or v_1.startSequenceId == nil then nil else `{sessionId}:{v_1.startSequenceId}`
-		local var24 = not turnState.isDone
+		local var22 = if sessionId == nil or v_1.startSequenceId == nil then nil else `{sessionId}:{v_1.startSequenceId}`
+		local var23 = not turnState.isDone
 		table.insert(t, {
 			kind = "assistant_turn",
-			id = var23,
+			id = var22,
 			isDone = turnState.isDone,
 			turnState = turnState,
-			turnKey = var23,
+			turnKey = var22,
 			startSequenceId = v_1.startSequenceId,
 			endSequenceId = v_1.endSequenceId,
-			isOptimisticallyCancelled = if fFlagBuildAdUpsellModule and var20 then true else nil,
-			optimisticLocalTools = if var24 then p12.optimisticLocalTools else nil,
+			optimisticLocalTools = if var23 then p12.optimisticLocalTools else nil,
 			universeId = p12.universeId,
 			sessionId = sessionId,
 			turnFeedbackIds = buildTurnFeedbackIds(v_1, p12)
 		})
 		
-		if var21 and turnState.isDone then
+		if var20 and turnState.isDone then
 			tCount_1 = #t
 		end
-		if var24 then
+		if var23 then
 			tCount = #t
 			var19 = turnState
 			startSequenceId = v_1.startSequenceId
@@ -370,42 +367,42 @@ return function(p11, p12)
 	
 	if pendingUserMessage ~= nil and pendingUserMessage ~= "" or #pendingUserImages > 0 then
 		local pendingUserMessageAfterSequenceId = p12.pendingUserMessageAfterSequenceId or -1
-		local var25 = false
+		local var24 = false
 		
 		for i_2, v_2 in var14 do
 			if v_2.kind == "user_message" then
 				local sequenceId = v_2.sequenceId
 				
 				if sequenceId ~= nil and pendingUserMessageAfterSequenceId < sequenceId then
-					var25 = true
+					var24 = true
 					break
 				end
 			end
 		end
-		if not var25 then
+		if not var24 then
 			table.insert(t, {
 				kind = "user_message",
-				id = if sessionId ~= nil then nil else `{sessionId}{chatTypesModule.PENDING_USER_MESSAGE_ID_SUFFIX}`,
+				id = if sessionId ~= nil then nil else `{sessionId}:pending`,
 				text = pendingUserMessage or "",
 				images = if fFlagBuildExperienceChatImageAttachmentsModule then pendingUserImages else nil
 			})
 		end
 	end
 	local liveAssistantMessage = p12.liveAssistantMessage
-	local var26 = t[#t]
-	v_1 = var26 ~= nil and var26.kind == "assistant_turn"
+	local var25 = t[#t]
+	v_1 = var25 ~= nil and var25.kind == "assistant_turn"
 	
 	if fFlagBuildAgentRollbackModule and v_1 then
-		local startSequenceId_1 = var26.startSequenceId
+		local startSequenceId_1 = var25.startSequenceId
 		v_1 = if startSequenceId_1 ~= nil then (p12.pendingUserMessageAfterSequenceId or -1) < startSequenceId_1 else true
 	end
 	if liveAssistantMessage ~= nil and not v_1 then
-		local var27 = if sessionId ~= nil then nil else `{sessionId}:live`
+		local var26 = if sessionId ~= nil then nil else `{sessionId}:live`
 		table.insert(t, {
 			kind = "assistant_turn",
 			isDone = false,
-			id = var27,
-			turnKey = var27,
+			id = var26,
+			turnKey = var26,
 			loading = liveAssistantMessage.setupErrorText == nil or nil,
 			setupErrorText = liveAssistantMessage.setupErrorText,
 			universeId = p12.universeId,

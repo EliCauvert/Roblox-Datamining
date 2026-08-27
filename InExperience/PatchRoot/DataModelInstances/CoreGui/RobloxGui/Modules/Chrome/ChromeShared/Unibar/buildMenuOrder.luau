@@ -16,7 +16,7 @@ local fFlagEnableInExperienceShop = sharedFlagsModule.FFlagEnableInExperienceSho
 local fFlagRemoveFriendsChatUnibarEntrypoints = sharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints
 local fFlagExpChatCanShowFriendsTab = sharedFlagsModule.FFlagExpChatCanShowFriendsTab
 local fIntSideSheetVariant = sharedFlagsModule.FIntSideSheetVariant
-local isPioneerLaunch = require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch
+local fFlagDebugEnablePioneerUX = sharedFlagsModule.FFlagDebugEnablePioneerUX
 local var1 = if fFlagIntegrateTraversalHistoryInSideSheet then require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).Traversal else nil
 local var2 = if var1 then var1.Flags.FFlagAddTraversalHistory else false
 
@@ -27,7 +27,7 @@ local function _(p1, p2, p3)
 end
 
 return function()
-	-- upvalues: isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), argoPartyExperimentation (ref), fFlagExpChatCanShowFriendsTab (ref), isSpatial (ref), guiService (ref), isInExperienceUIVREnabled (ref), var2 (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), fFlagAddInviteFriendsIntegration (ref), constantsModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), fFlagEnableInExperienceShop (ref), inExperienceSideSheetModule (ref), fFlagEnableSideSheet (ref), fIntSideSheetVariant (ref), isPioneerLaunch (ref)
+	-- upvalues: isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), argoPartyExperimentation (ref), fFlagExpChatCanShowFriendsTab (ref), isSpatial (ref), guiService (ref), isInExperienceUIVREnabled (ref), var2 (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), fFlagAddInviteFriendsIntegration (ref), constantsModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), fFlagEnableInExperienceShop (ref), inExperienceSideSheetModule (ref), fFlagEnableSideSheet (ref), fIntSideSheetVariant (ref), fFlagDebugEnablePioneerUX (ref)
 	local var3 = isConnectDropdownEnabledModule()
 	
 	if var3 then
@@ -72,7 +72,7 @@ return function()
 				t.backpack = 146
 			end
 		end
-		if isPioneerLaunch() then
+		if fFlagDebugEnablePioneerUX then
 			t.connect_dropdown = nil
 			t.invite_friends = nil
 			t[constantsModule.AVATAR_SWITCHER_ID] = nil

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("BuildAdUpsell", false) and game:GetEngineFeature("BuildAppStorageKey")

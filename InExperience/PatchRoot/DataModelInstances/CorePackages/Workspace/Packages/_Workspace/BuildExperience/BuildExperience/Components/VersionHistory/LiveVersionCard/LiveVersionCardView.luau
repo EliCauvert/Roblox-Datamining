@@ -94,19 +94,19 @@ return function(p1)
 			tag = "row align-y-center gap-small auto-xy padding-x-small padding-y-xsmall radius-small bg-action-standard",
 			testId = `{testId}-metrics`
 		}, {
-			TotalVisits = if p1.totalVisits == nil and not p1.isTotalVisitsLoading then nil else reactModule.createElement(MetricItem, {
-				layoutOrder = 1,
-				iconName = iconName.Eye,
-				value = p1.totalVisits,
-				isLoading = p1.isTotalVisitsLoading,
-				testId = `{testId}-total-visits`
-			}),
 			TotalUpVotes = if p1.totalUpVotes == nil and not p1.isTotalUpVotesLoading then nil else reactModule.createElement(MetricItem, {
-				layoutOrder = 2,
+				layoutOrder = 1,
 				iconName = iconName.ThumbUp,
 				value = p1.totalUpVotes,
 				isLoading = p1.isTotalUpVotesLoading,
 				testId = `{testId}-total-up-votes`
+			}),
+			TotalVisits = if p1.totalVisits == nil and not p1.isTotalVisitsLoading then nil else reactModule.createElement(MetricItem, {
+				layoutOrder = 2,
+				iconName = iconName.Eye,
+				value = p1.totalVisits,
+				isLoading = p1.isTotalVisitsLoading,
+				testId = `{testId}-total-visits`
 			})
 		})
 	else

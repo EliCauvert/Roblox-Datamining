@@ -6,6 +6,7 @@ local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEna
 local channelChipModule = require(script.Parent.ChannelChip)
 local chatAutocompleteDropdownModule = require(script.Parent.Autocomplete.ChatAutocompleteDropdown)
 local useChatAutocompleteEngineModule = require(script.Parent.Autocomplete.useChatAutocompleteEngine)
+local expChatFixInputBarSendEligibility = game:DefineFastFlag("ExpChatFixInputBarSendEligibility", false)
 local expChatComposerFigmaParity = game:DefineFastFlag("ExpChatComposerFigmaParity", false)
 
 local function _(p1, p2)
@@ -29,8 +30,7 @@ local function deriveBackgroundStyle(value, p1, p2)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), fFlagExpChatEnableFriendsTab (ref), reactModule (ref), useChatAutocompleteEngineModule (ref), chatAutocompleteDropdownModule (ref), expChatComposerFigmaParity (ref), deriveBackgroundStyle (ref), reactIsModule (ref), channelChipModule (ref)
-	local createElement_3
+	-- upvalues: foundationModule (ref), fFlagExpChatEnableFriendsTab (ref), reactModule (ref), useChatAutocompleteEngineModule (ref), expChatFixInputBarSendEligibility (ref), chatAutocompleteDropdownModule (ref), expChatComposerFigmaParity (ref), deriveBackgroundStyle (ref), reactIsModule (ref), channelChipModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local themedColors = p1.themedColors
 	local var2 = if themedColors then var1.Color.Surface.Surface_100.Color3 else var1.DarkMode.Surface.Surface_100.Color3
@@ -115,13 +115,17 @@ return reactModule.memo(function(p1)
 			p1.onFocusLost()
 		end
 	end, { var14, p1.onFocusLost, textBoxRef, var7.interceptSend })
-	reactModule.useEffect(function()
-		-- upvalues: canLocalUserChat (ref), var10 (ref)
-		if not canLocalUserChat then
-			var10(true)
-		end
-	end, { canLocalUserChat })
-	local var19 = var9 or not canLocalUserChat
+	
+	if expChatFixInputBarSendEligibility then
+		reactModule.useEffect(function()
+			-- upvalues: canLocalUserChat (ref), var10 (ref)
+			if not canLocalUserChat then
+				var10(true)
+			end
+		end, { canLocalUserChat })
+	end
+	local createElement_3
+	local var19 = if expChatFixInputBarSendEligibility then var9 or not canLocalUserChat else var9
 	local createElement = reactModule.createElement
 	local view = foundationModule.View
 	local t = {

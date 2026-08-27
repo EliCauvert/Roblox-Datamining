@@ -15,7 +15,6 @@ local placeVersionHistoryModule = require(parent.DataHydration.PlaceVersionHisto
 local universeConfigurationModule = require(parent.DataHydration.UniverseConfiguration)
 local universeActivationModule = require(parent.DataHydration.UniverseActivation)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local isMenuPublishPublicModule = require(script.Parent.isMenuPublishPublic)
 local friendsOnlyShareDialogModule = require(buildExperience.Components.ShareAudience.FriendsOnlyShareDialog)
 local privateShareTooltipModule = require(buildExperience.Components.ShareAudience.PrivateShareTooltip)
 local contentMaturityUtilsModule = require(buildExperience.utils.ContentMaturityUtils)
@@ -33,12 +32,9 @@ local privacyType = universeConfigurationModule.PrivacyType
 local fFlagEnableShareSheet = sharedFlagsModule.FFlagEnableShareSheet
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagEnableProvisionalRatingModule = require(buildExperience.Flags.FFlagEnableProvisionalRating)
-local fFlagBuildPublishNavigationSheetModule = require(buildExperience.Flags.FFlagBuildPublishNavigationSheet)
 local fFlagBuildPublishAccountTooNewErrorModule = require(buildExperience.Flags.FFlagBuildPublishAccountTooNewError)
 local fFlagBuildRehydrateOnPublishModule = require(buildExperience.Flags.FFlagBuildRehydrateOnPublish)
 local fFlagBuildExperienceTooltipsLightDismissModule = require(buildExperience.Flags.FFlagBuildExperienceTooltipsLightDismiss)
-local fFlagBuildAdUpsellModule = require(buildExperience.Flags.FFlagBuildAdUpsell)
-local var1 = if fFlagBuildAdUpsellModule then require(buildExperience.Stores.GetAdUpsellEventStore) else nil
 local useStore = require(parent.RoactUtils).Hooks.RoactRodux.useStore
 local getRootNavigation = navigationModule.getRootNavigation
 local useNavigation = navigationModule.useNavigation
@@ -84,52 +80,47 @@ end
 
 local function PreviewButton(p2)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useStore (ref), useNavigation (ref), reactModule (ref), getRootNavigation (ref), openGameDetails (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
-	local var2 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
+	local var1 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
 		preview = localizationStringsModule.GAME_CONFIGURATION_PREVIEW
 	}) else nil).preview else localizationStringsModule.GAME_CONFIGURATION_PREVIEW
-	local var3 = useStore()
-	local var4 = useNavigation()
-	local onPreview = p2.onPreview
+	local var2 = useStore()
+	local var3 = useNavigation()
 	
 	return reactModule.createElement(button, {
 		LayoutOrder = 2,
-		text = var2,
+		text = var1,
 		size = inputSize.Medium,
 		variant = buttonVariant.Standard,
 		fillBehavior = fillBehavior.Fill,
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: getRootNavigation (copy), var4 (ref), openGameDetails (copy), p2 (ref), var3 (ref), onPreview (ref)
-			local var5
-			local var6 = getRootNavigation(var4)
-			local var7 = tostring(p2.target.universeId)
+			-- upvalues: getRootNavigation (copy), var3 (ref), openGameDetails (copy), p2 (ref), var2 (ref)
+			local var4
+			local var5 = getRootNavigation(var3)
+			local var6 = tostring(p2.target.universeId)
 			
-			if typeof(var6.clearAppScreens) == "function" then
-				var5 = var6
+			if typeof(var5.clearAppScreens) == "function" then
+				var4 = var5
 			else
-				local cloned = table.clone(var6)
+				local cloned = table.clone(var5)
 				
 				function cloned.clearAppScreens(p3)
-					-- upvalues: var6 (ref)
-					var6.dispatch({ type = "ClearAppScreensAction", routeNames = p3 })
+					-- upvalues: var5 (ref)
+					var5.dispatch({ type = "ClearAppScreensAction", routeNames = p3 })
 				end
 				
-				var5 = cloned
+				var4 = cloned
 			end
-			openGameDetails(var7, var5, { source = "BuildExperiencePublish" })(var3)
-			
-			if onPreview then
-				onPreview()
-			end
-		end, { var4, p2.target.universeId, var3, onPreview }),
+			openGameDetails(var6, var4, { source = "BuildExperiencePublish" })(var2)
+		end, { var3, p2.target.universeId, var2 }),
 		width = UDim.new(1, 0),
 		testId = `{p2.actionsTestId}-preview`
 	})
 end
 
 return function(p2)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useSharePublishedExperience (ref), signalsReactModule (ref), placeVersionHistoryModule (ref), reactModule (ref), signalsModule (ref), universeConfigurationModule (ref), fFlagEnableProvisionalRatingModule (ref), gameConfigurationLabelsModule (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), useOpenWebView (ref), fFlagEnableShareSheet (ref), sharePublishedExperience (ref), privacyType (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), getVersionInformationStoreModule (ref), sendBuildExperienceEventModule (ref), var1 (ref), fFlagBuildAdUpsellModule (ref), isMenuPublishPublicModule (ref), buildPublicAudiences (ref), fFlagBuildRehydrateOnPublishModule (ref), experienceGuidelinesModule (ref), t (ref), debug (ref), fFlagBuildPublishAccountTooNewErrorModule (ref), view (ref), fFlagBuildPublishNavigationSheetModule (ref), privateShareTooltipModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), snackbar (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), PreviewButton (ref), friendsOnlyShareDialogModule (ref)
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useSharePublishedExperience (ref), signalsReactModule (ref), placeVersionHistoryModule (ref), reactModule (ref), signalsModule (ref), universeConfigurationModule (ref), fFlagEnableProvisionalRatingModule (ref), gameConfigurationLabelsModule (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), useOpenWebView (ref), fFlagEnableShareSheet (ref), sharePublishedExperience (ref), privacyType (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), getVersionInformationStoreModule (ref), sendBuildExperienceEventModule (ref), buildPublicAudiences (ref), fFlagBuildRehydrateOnPublishModule (ref), experienceGuidelinesModule (ref), t (ref), debug (ref), fFlagBuildPublishAccountTooNewErrorModule (ref), view (ref), privateShareTooltipModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), snackbar (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), PreviewButton (ref), friendsOnlyShareDialogModule (ref)
 	local GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR, GAME_CONFIGURATION_CREATOR_HUB, GAME_CONFIGURATION_LINK_COPIED, GAME_CONFIGURATION_PUBLISH, GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR, GAME_CONFIGURATION_PUBLISH_ERROR, GAME_CONFIGURATION_PUBLISH_SUCCESS, GAME_CONFIGURATION_SHARE, GAME_CONFIGURATION_UPDATE_RATING
-	local var2 = if fFlagBuildLocalization then useLocalization({
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		accountTooNewError = localizationStringsModule.GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR,
 		creatorHub = localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB,
 		linkCopied = localizationStringsModule.GAME_CONFIGURATION_LINK_COPIED,
@@ -151,15 +142,15 @@ return function(p2)
 	local _ = nil
 	
 	if fFlagBuildLocalization then
-		GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR = var2.accountTooNewError
-		GAME_CONFIGURATION_CREATOR_HUB = var2.creatorHub
-		GAME_CONFIGURATION_LINK_COPIED = var2.linkCopied
-		GAME_CONFIGURATION_PUBLISH = var2.publish
-		GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR = var2.publishAudienceError
-		GAME_CONFIGURATION_PUBLISH_ERROR = var2.publishError
-		GAME_CONFIGURATION_PUBLISH_SUCCESS = var2.publishSuccess
-		GAME_CONFIGURATION_SHARE = var2.share
-		GAME_CONFIGURATION_UPDATE_RATING = var2.updateRating
+		GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR = var1.accountTooNewError
+		GAME_CONFIGURATION_CREATOR_HUB = var1.creatorHub
+		GAME_CONFIGURATION_LINK_COPIED = var1.linkCopied
+		GAME_CONFIGURATION_PUBLISH = var1.publish
+		GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR = var1.publishAudienceError
+		GAME_CONFIGURATION_PUBLISH_ERROR = var1.publishError
+		GAME_CONFIGURATION_PUBLISH_SUCCESS = var1.publishSuccess
+		GAME_CONFIGURATION_SHARE = var1.share
+		GAME_CONFIGURATION_UPDATE_RATING = var1.updateRating
 	else
 		GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR = localizationStringsModule.GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR
 		GAME_CONFIGURATION_CREATOR_HUB = localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB
@@ -171,103 +162,100 @@ return function(p2)
 		GAME_CONFIGURATION_SHARE = localizationStringsModule.GAME_CONFIGURATION_SHARE
 		GAME_CONFIGURATION_UPDATE_RATING = localizationStringsModule.GAME_CONFIGURATION_UPDATE_RATING
 	end
-	local var3 = useSharePublishedExperience(p2.target.universeId)
-	local var4 = signalsReactModule.useSignalState(placeVersionHistoryModule.getPlaceVersionHistoryStore)
-	local var5 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: p2 (ref), signalsModule (copy), var4 (ref)
-		return if p2.target.placeId == nil then signalsModule.createSignal(nil) else var4.getAndFetchHistory(p2.target.placeId).data
-	end, { var4, p2.target.placeId }))
-	local var6 = if var5 then var5.placeVersions[1] else nil
-	local var7 = signalsReactModule.useSignalState(universeConfigurationModule.getUniverseConfigurationStore)
-	local var8 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: fFlagEnableProvisionalRatingModule (copy), signalsModule (copy), var7 (ref), p2 (ref)
-		return if fFlagEnableProvisionalRatingModule then var7.getAndFetchSummary(p2.target.universeId).data else signalsModule.createSignal(nil)
-	end, { var7, p2.target.universeId }))
-	local audience = gameConfigurationLabelsModule.getAudience(signalsReactModule.useSignalState(var7.getAndFetchConfiguration(p2.target.universeId).data))
-	local var9 = false
-	local var10 = nil
+	local var2 = useSharePublishedExperience(p2.target.universeId)
+	local var3 = signalsReactModule.useSignalState(placeVersionHistoryModule.getPlaceVersionHistoryStore)
+	local var4 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: p2 (ref), signalsModule (copy), var3 (ref)
+		return if p2.target.placeId == nil then signalsModule.createSignal(nil) else var3.getAndFetchHistory(p2.target.placeId).data
+	end, { var3, p2.target.placeId }))
+	local var5 = if var4 then var4.placeVersions[1] else nil
+	local var6 = signalsReactModule.useSignalState(universeConfigurationModule.getUniverseConfigurationStore)
+	local var7 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: fFlagEnableProvisionalRatingModule (copy), signalsModule (copy), var6 (ref), p2 (ref)
+		return if fFlagEnableProvisionalRatingModule then var6.getAndFetchSummary(p2.target.universeId).data else signalsModule.createSignal(nil)
+	end, { var6, p2.target.universeId }))
+	local audience = gameConfigurationLabelsModule.getAudience(signalsReactModule.useSignalState(var6.getAndFetchConfiguration(p2.target.universeId).data))
+	local var8 = false
+	local var9 = nil
 	
 	if fFlagEnableProvisionalRatingModule then
-		local var11 = signalsReactModule.useSignalState(universeActivationModule.getUniverseActivationStore)
-		var10 = var11
-		var9 = reactModule.useMemo(function()
+		local var10 = signalsReactModule.useSignalState(universeActivationModule.getUniverseActivationStore)
+		var9 = var10
+		var8 = reactModule.useMemo(function()
 			-- upvalues: contentMaturityUtilsModule (copy), p2 (ref)
 			return contentMaturityUtilsModule.isSealBroken(p2.target.universeId) and contentMaturityUtilsModule.isContentUnrated(p2.target.universeId)
 		end, {
 			signalsReactModule.useSignalState(reactModule.useMemo(function()
-				-- upvalues: var11 (ref), p2 (ref)
-				return var11.getAndFetchEligibility(p2.target.universeId)
-			end, { var11, p2.target.universeId }).data),
+				-- upvalues: var10 (ref), p2 (ref)
+				return var10.getAndFetchEligibility(p2.target.universeId)
+			end, { var10, p2.target.universeId }).data),
 			p2.target.universeId
 		})
 	end
-	local var12 = useOpenWebView()
-	local var13, var14 = reactModule.useState(false)
-	local var15, var16 = reactModule.useState("")
-	local var17, var18 = reactModule.useState(nil)
-	local var19 = var15 == GAME_CONFIGURATION_PUBLISH_SUCCESS and (p2.target.placeId ~= nil and audience ~= nil)
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var16 (ref), var18 (ref)
-		var16("")
-		var18(nil)
+	local var11 = useOpenWebView()
+	local var12, var13 = reactModule.useState(false)
+	local var14, var15 = reactModule.useState("")
+	local var16, var17 = reactModule.useState(nil)
+	local var18 = var14 == GAME_CONFIGURATION_PUBLISH_SUCCESS and (p2.target.placeId ~= nil and audience ~= nil)
+	local var19 = reactModule.useCallback(function()
+		-- upvalues: var15 (ref), var17 (ref)
+		var15("")
+		var17(nil)
 	end, {})
-	local var21 = reactModule.useCallback(function()
-		-- upvalues: p2 (ref), var18 (ref), fFlagEnableShareSheet (copy), var3 (ref), sharePublishedExperience (copy), GAME_CONFIGURATION_LINK_COPIED (write), var16 (ref)
+	local var20 = reactModule.useCallback(function()
+		-- upvalues: p2 (ref), var17 (ref), fFlagEnableShareSheet (copy), var2 (ref), sharePublishedExperience (copy), GAME_CONFIGURATION_LINK_COPIED (write), var15 (ref)
 		if p2.target.placeId == nil then return end
-		var18(nil)
+		var17(nil)
 		
 		if fFlagEnableShareSheet then
-			var3(p2.target.placeId)
+			var2(p2.target.placeId)
 			
 			return
 		end
-		local var22 = sharePublishedExperience(p2.target.placeId)
+		local var21 = sharePublishedExperience(p2.target.placeId)
 		
-		if var22 ~= nil and var22.copiedToClipboard and GAME_CONFIGURATION_LINK_COPIED ~= nil then
-			var16(GAME_CONFIGURATION_LINK_COPIED)
+		if var21 ~= nil and var21.copiedToClipboard and GAME_CONFIGURATION_LINK_COPIED ~= nil then
+			var15(GAME_CONFIGURATION_LINK_COPIED)
 		end
-	end, { GAME_CONFIGURATION_LINK_COPIED, p2.target.placeId, var3 })
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: audience (ref), privacyType (copy), var18 (ref), var17 (ref), var21 (ref)
+	end, { GAME_CONFIGURATION_LINK_COPIED, p2.target.placeId, var2 })
+	local var21 = reactModule.useCallback(function()
+		-- upvalues: audience (ref), privacyType (copy), var17 (ref), var16 (ref), var20 (ref)
 		if audience == privacyType.Private then
-			var18(if var17 == "private" then nil else "private")
+			var17(if var16 == "private" then nil else "private")
 			
 			return
 		elseif audience == privacyType.FriendsOnly then
-			var18("friends")
+			var17("friends")
 			
 			return
 		elseif audience == privacyType.Public then
-			var21()
+			var20()
 		end
-	end, { audience, var17, var21 })
-	local var23 = reactModule.useCallback(function()
-		-- upvalues: var18 (ref)
-		var18(nil)
+	end, { audience, var16, var20 })
+	local var22 = reactModule.useCallback(function()
+		-- upvalues: var17 (ref)
+		var17(nil)
 	end, {})
 	local testId = `{p2.testId}.actions`
 	
 	return reactModule.createElement(view, {
 		LayoutOrder = 3,
-		tag = {
-			["col gap-small size-full-0 auto-y"] = true,
-			["bg-surface-0"] = not fFlagBuildPublishNavigationSheetModule
-		}
+		tag = "col gap-small size-full-0 auto-y bg-surface-0"
 	}, {
-		PublishSnackbarWrapper = if var15 ~= "" then nil else reactModule.createElement(view, {
+		PublishSnackbarWrapper = if var14 ~= "" then nil else reactModule.createElement(view, {
 			LayoutOrder = 1,
 			tag = "row align-x-center size-full-0 auto-y padding-x-large"
 		}, {
 			PublishSnackbar = reactModule.createElement(privateShareTooltipModule, {
 				LayoutOrder = 1,
-				isOpen = var17 == "private" and audience == privacyType.Private,
-				onPressedOutside = if fFlagBuildExperienceTooltipsLightDismissModule then var23 else nil
+				isOpen = var16 == "private" and audience == privacyType.Private,
+				onPressedOutside = if fFlagBuildExperienceTooltipsLightDismissModule then var22 else nil
 			}, {
 				Snackbar = reactModule.createElement(snackbar, {
 					LayoutOrder = 1,
-					title = var15,
-					action = if var19 then { text = GAME_CONFIGURATION_SHARE, onActivated = var22 } else nil,
-					onClose = if var19 then nil else var20,
+					title = var14,
+					action = if var18 then { text = GAME_CONFIGURATION_SHARE, onActivated = var21 } else nil,
+					onClose = if var18 then nil else var19,
 					testId = `{p2.testId}.publish-snackbar`
 				})
 			})
@@ -279,25 +267,25 @@ return function(p2)
 		}, {
 			Publish = fFlagEnableProvisionalRatingModule and reactModule.createElement(button, {
 				LayoutOrder = 1,
-				text = if var9 then GAME_CONFIGURATION_UPDATE_RATING else GAME_CONFIGURATION_PUBLISH,
+				text = if var8 then GAME_CONFIGURATION_UPDATE_RATING else GAME_CONFIGURATION_PUBLISH,
 				size = inputSize.Medium,
 				variant = buttonVariant.Emphasis,
 				fillBehavior = fillBehavior.Fill,
 				isDisabled = p2.target.placeId == nil,
-				isLoading = var13,
-				onActivated = if var9 then reactModule.useCallback(function()
-					-- upvalues: var12 (ref), gameConfigurationActionsModule (copy), p2 (ref), GAME_CONFIGURATION_CREATOR_HUB (write), refreshPublishEligibilityModule (copy)
-					var12(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p2.target.universeId), GAME_CONFIGURATION_CREATOR_HUB, function()
+				isLoading = var12,
+				onActivated = if var8 then reactModule.useCallback(function()
+					-- upvalues: var11 (ref), gameConfigurationActionsModule (copy), p2 (ref), GAME_CONFIGURATION_CREATOR_HUB (write), refreshPublishEligibilityModule (copy)
+					var11(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p2.target.universeId), GAME_CONFIGURATION_CREATOR_HUB, function()
 						-- upvalues: refreshPublishEligibilityModule (copy), p2 (copy)
 						refreshPublishEligibilityModule(p2.target.universeId)
 					end)
 				end, {
 					GAME_CONFIGURATION_CREATOR_HUB,
-					var12,
+					var11,
 					p2.target.universeId
 				}) else reactModule.useCallback(function()
-					-- upvalues: var13 (ref), p2 (ref), getVersionInformationStoreModule (copy), var6 (ref), sendBuildExperienceEventModule (copy), var14 (ref), var20 (ref), var1 (copy), var8 (ref), fFlagBuildAdUpsellModule (copy), isMenuPublishPublicModule (copy), audience (ref), privacyType (copy), fFlagEnableProvisionalRatingModule (copy), gameConfigurationActionsModule (copy), buildPublicAudiences (copy), fFlagBuildRehydrateOnPublishModule (copy), var10 (write), contentMaturityUtilsModule (copy), experienceGuidelinesModule (copy), t (copy), debug (copy), var7 (ref), var4 (ref), var16 (ref), GAME_CONFIGURATION_PUBLISH_SUCCESS (write), fFlagBuildPublishAccountTooNewErrorModule (copy), GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR (write), GAME_CONFIGURATION_PUBLISH_ERROR (write), GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR (write)
-					if var13 then return end
+					-- upvalues: var12 (ref), p2 (ref), getVersionInformationStoreModule (copy), var5 (ref), sendBuildExperienceEventModule (copy), var13 (ref), var19 (ref), var7 (ref), fFlagEnableProvisionalRatingModule (copy), gameConfigurationActionsModule (copy), buildPublicAudiences (copy), fFlagBuildRehydrateOnPublishModule (copy), var9 (write), contentMaturityUtilsModule (copy), experienceGuidelinesModule (copy), t (copy), debug (copy), var6 (ref), var3 (ref), var15 (ref), GAME_CONFIGURATION_PUBLISH_SUCCESS (write), fFlagBuildPublishAccountTooNewErrorModule (copy), GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR (write), GAME_CONFIGURATION_PUBLISH_ERROR (write), GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR (write)
+					if var12 then return end
 					local placeId = p2.target.placeId
 					
 					if placeId == nil then return end
@@ -308,41 +296,25 @@ return function(p2)
 					if draft ~= nil and draft.placeId == placeId then
 						title = if draft.title == "" then nil else draft.title
 						description = if draft.description == "" then nil else draft.description
-					elseif var6 ~= nil then
-						title = var6.title
-						description = var6.description
+					elseif var5 ~= nil then
+						title = var5.title
+						description = var5.description
 					end
-					local var24
+					local var23
 					sendBuildExperienceEventModule("PUBLISH_CLICK", {
 						universeId = p2.target.universeId,
 						placeId = placeId,
 						conversationId = p2.target.sessionId
 					})
-					var14(true)
-					var20()
-					local var25 = "save_and_publish"
-					local var26 = false
-					
-					local function _(p3)
-						-- upvalues: var1 (copy), p2 (copy), var26 (write)
-						if typeof(p3) ~= "table" and (p3.status == "success" and (typeof(p3.version) == "string" and p3.version ~= "")) then
-							var1(false).reportMenuPublish(p2.target.universeId, p2.target.sessionId, p3.version, var26)
-							
-							return
-						end
-					end
+					var13(true)
+					var19()
+					local var24 = "save_and_publish"
 					
 					local function publish(p3)
-						-- upvalues: var25 (write), var8 (copy), fFlagBuildAdUpsellModule (copy), var26 (write), isMenuPublishPublicModule (copy), audience (copy), privacyType (copy), fFlagEnableProvisionalRatingModule (copy), gameConfigurationActionsModule (copy), p2 (copy), placeId (ref), title (write), description (write), buildPublicAudiences (copy)
-						var25 = "save_and_publish"
-						p3 = p3 or var8
+						-- upvalues: var24 (write), var7 (copy), fFlagEnableProvisionalRatingModule (copy), gameConfigurationActionsModule (copy), p2 (copy), placeId (ref), title (write), description (write), buildPublicAudiences (copy)
+						var24 = "save_and_publish"
+						p3 = p3 or var7
 						
-						if fFlagBuildAdUpsellModule then
-							var26 = isMenuPublishPublicModule({
-								isCurrentlyPublic = audience == privacyType.Public,
-								isActive = p3 ~= nil and p3.isActive == true
-							})
-						end
 						return if fFlagEnableProvisionalRatingModule then gameConfigurationActionsModule.publishExperience({
 							universeId = p2.target.universeId,
 							placeId = placeId,
@@ -359,10 +331,10 @@ return function(p2)
 					
 					local _ = nil
 					
-					if fFlagEnableProvisionalRatingModule and fFlagBuildRehydrateOnPublishModule and var10 ~= nil then
-						var25 = "refresh_eligibility"
-						var24 = var10.refreshEligibility(p2.target.universeId):andThen(function()
-							-- upvalues: contentMaturityUtilsModule (copy), p2 (copy), experienceGuidelinesModule (copy), t (copy), debug (copy), var25 (write), var7 (copy), publish (ref)
+					if fFlagEnableProvisionalRatingModule and fFlagBuildRehydrateOnPublishModule and var9 ~= nil then
+						var24 = "refresh_eligibility"
+						var23 = var9.refreshEligibility(p2.target.universeId):andThen(function()
+							-- upvalues: contentMaturityUtilsModule (copy), p2 (copy), experienceGuidelinesModule (copy), t (copy), debug (copy), var24 (write), var6 (copy), publish (ref)
 							if contentMaturityUtilsModule.isSealBroken(p2.target.universeId) and contentMaturityUtilsModule.isContentUnrated(p2.target.universeId) then
 								return experienceGuidelinesModule.getExperienceGuidelinesStore().refreshDetailedGuidelines(p2.target.universeId):andThen(function()
 									-- upvalues: t (copy)
@@ -377,74 +349,67 @@ return function(p2)
 									return t
 								end)
 							end
-							var25 = "refresh_summary"
+							var24 = "refresh_summary"
 							
-							return var7.refreshSummary(p2.target.universeId):andThen(function(p3)
+							return var6.refreshSummary(p2.target.universeId):andThen(function(p3)
 								-- upvalues: publish (copy)
 								return publish(p3)
 							end)
 						end)
 					else
-						var24 = publish()
+						var23 = publish()
 					end
-					var24:andThen(function(p3)
-						-- upvalues: t (copy), fFlagBuildAdUpsellModule (copy), var1 (copy), p2 (copy), var26 (write), getVersionInformationStoreModule (copy), placeId (ref), var4 (copy), var16 (copy), GAME_CONFIGURATION_PUBLISH_SUCCESS (copy)
+					var23:andThen(function(p3)
+						-- upvalues: t (copy), getVersionInformationStoreModule (copy), placeId (ref), var3 (copy), var15 (copy), GAME_CONFIGURATION_PUBLISH_SUCCESS (copy)
 						if p3 == t then return end
 						if not (typeof(p3) ~= "table" and (p3.status == "success" and (typeof(p3.version) == "string" and p3.version ~= ""))) then
 							error({
 								errorMessage = "save_and_publish expected status=success and a non-empty version; " .. `got status={tostring(p3.status)}, version={tostring(p3.version)}`
 							})
 						end
-						if fFlagBuildAdUpsellModule and (typeof(p3) ~= "table" and (p3.status == "success" and (typeof(p3.version) == "string" and p3.version ~= ""))) then
-							var1(false).reportMenuPublish(p2.target.universeId, p2.target.sessionId, p3.version, var26)
-						end
 						getVersionInformationStoreModule().clearDraft(placeId)
-						var4.fetchHistory(placeId)
-						var16(GAME_CONFIGURATION_PUBLISH_SUCCESS)
+						var3.fetchHistory(placeId)
+						var15(GAME_CONFIGURATION_PUBLISH_SUCCESS)
 					end):catch(function(p3)
-						-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), fFlagBuildPublishAccountTooNewErrorModule (copy), GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR (copy), GAME_CONFIGURATION_PUBLISH_ERROR (copy), GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR (copy), getVersionInformationStoreModule (copy), placeId (ref), var4 (copy), debug (copy), var25 (write), p2 (copy), var16 (copy)
+						-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), fFlagBuildPublishAccountTooNewErrorModule (copy), GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR (copy), GAME_CONFIGURATION_PUBLISH_ERROR (copy), GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR (copy), getVersionInformationStoreModule (copy), placeId (ref), var3 (copy), debug (copy), var24 (write), p2 (copy), var15 (copy)
 						local isTable = typeof(p3) == "table"
-						local var27 = fFlagBuildRehydrateOnPublishModule and (isTable and p3.stage == gameConfigurationActionsModule.PublishFailureStage.SetAudience)
-						local var28 = var27
+						local var25 = fFlagBuildRehydrateOnPublishModule and (isTable and p3.stage == gameConfigurationActionsModule.PublishFailureStage.SetAudience)
+						local var26 = var25
 						
-						if var28 then
+						if var26 then
 							local publishResult = p3.publishResult
-							var28 = typeof(publishResult) ~= "table" and (publishResult.status == "success" and (typeof(publishResult.version) == "string" and publishResult.version ~= ""))
+							var26 = typeof(publishResult) ~= "table" and (publishResult.status == "success" and (typeof(publishResult.version) == "string" and publishResult.version ~= ""))
 						end
-						local var29 = if fFlagBuildPublishAccountTooNewErrorModule and (isTable and p3.responseCode == 16) then GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR elseif var28 then GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR else GAME_CONFIGURATION_PUBLISH_ERROR
+						local var27 = if fFlagBuildPublishAccountTooNewErrorModule and (isTable and p3.responseCode == 16) then GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR elseif var26 then GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR else GAME_CONFIGURATION_PUBLISH_ERROR
 						
-						if var28 then
+						if var26 then
 							getVersionInformationStoreModule().clearDraft(placeId)
-							var4.fetchHistory(placeId)
+							var3.fetchHistory(placeId)
 						end
 						debug.log("warn", "build_experience publish failed", {
 							errorMessage = if isTable and p3.errorMessage ~= nil then tostring(p3.errorMessage) else tostring(p3),
 							placeId = placeId,
 							responseCode = if isTable then p3.responseCode else nil,
-							stage = if var27 then gameConfigurationActionsModule.PublishFailureStage.SetAudience else var25,
+							stage = if var25 then gameConfigurationActionsModule.PublishFailureStage.SetAudience else var24,
 							universeId = p2.target.universeId
 						})
-						var16(var29)
+						var15(var27)
 					end):finally(function()
-						-- upvalues: var14 (copy)
-						var14(false)
+						-- upvalues: var13 (copy)
+						var13(false)
 					end)
 				end, {
-					if fFlagBuildAdUpsellModule then audience else nil, var20, var13, var4,
-					p2.target.placeId, p2.target.sessionId, p2.target.universeId, var6, var10,
-					var7, var8, GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR,
+					var19, var12, var3, p2.target.placeId, p2.target.sessionId,
+					p2.target.universeId, var5, var9, var6, var7,
+					GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR,
 					GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR, GAME_CONFIGURATION_PUBLISH_ERROR,
 					GAME_CONFIGURATION_PUBLISH_SUCCESS
 				}),
 				width = UDim.new(1, 0),
 				testId = `{testId}-publish`
 			}),
-			Preview = if p2.showPreviewButton == false then nil else reactModule.createElement(PreviewButton, {
-				target = p2.target,
-				actionsTestId = testId,
-				onPreview = p2.onPreview
-			})
+			Preview = if p2.showPreviewButton == false then nil else reactModule.createElement(PreviewButton, { target = p2.target, actionsTestId = testId })
 		}),
-		FriendsOnlyShareDialog = if var17 == "friends" and audience == privacyType.FriendsOnly then reactModule.createElement(friendsOnlyShareDialogModule, { onCancel = var23, onShare = var21 }) else nil
+		FriendsOnlyShareDialog = if var16 == "friends" and audience == privacyType.FriendsOnly then reactModule.createElement(friendsOnlyShareDialogModule, { onCancel = var22, onShare = var20 }) else nil
 	})
 end

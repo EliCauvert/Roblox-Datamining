@@ -6,16 +6,18 @@ local splitDottedPathModule = require(sduiCoreSystem.ClientBinding.splitDottedPa
 local _ = require(parent.Signals)
 local fFlagSduiFormatArgFormatters = require(parent.SharedFlags).FFlagSduiFormatArgFormatters
 local fFlagSduiClientPageScope = require(parent.SharedFlags).FFlagSduiClientPageScope
+local fFlagSduiRenderPerf = require(parent.SharedFlags).FFlagSduiRenderPerf
 
 return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: splitDottedPathModule (ref), sduiPropUtilsModule (ref), fFlagSduiClientPageScope (ref), fFlagSduiFormatArgFormatters (ref)
+	-- upvalues: fFlagSduiRenderPerf (ref), splitDottedPathModule (ref), sduiPropUtilsModule (ref), fFlagSduiClientPageScope (ref), fFlagSduiFormatArgFormatters (ref)
 	if p2 then
 		for i, v in p2 do
 			if v.kind then
 				local type = v.kind.type
 				
 				if type == "binding_path" then
-					local var1, _ = sduiPropUtilsModule.resolveBindingPathValue(p4 or false, splitDottedPathModule(v.kind.value), p3, p1, nil, false, if fFlagSduiClientPageScope then p6 else nil)
+					local value = v.kind.value
+					local var1, _ = sduiPropUtilsModule.resolveBindingPathValue(p4 or false, if fFlagSduiRenderPerf then splitDottedPathModule(value) else string.split(value, "."), p3, p1, nil, false, if fFlagSduiClientPageScope then p6 else nil)
 					p5[i] = var1
 				elseif type == "literal" then
 					local value = v.kind.value and (v.kind.value.kind and v.kind.value.kind.value)

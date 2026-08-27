@@ -11,6 +11,7 @@ local fFlagSduiStringPropToString = require(parent.SharedFlags).FFlagSduiStringP
 local fFlagSduiPropParsersShouldHandleTokens = require(parent.SharedFlags).FFlagSduiPropParsersShouldHandleTokens
 local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAppSduiColorPropMigration
 local fFlagSduiFocusNavActionsStructured = require(parent.SharedFlags).FFlagSduiFocusNavActionsStructured
+local fFlagSduiRenderPerf = require(parent.SharedFlags).FFlagSduiRenderPerf
 local fFlagSduiUnwrapStructPropEnvelope = require(parent.SharedFlags).FFlagSduiUnwrapStructPropEnvelope
 
 local function applyTokenScaling(p1, p2)
@@ -18,11 +19,11 @@ local function applyTokenScaling(p1, p2)
 end
 
 local function resolveTokenValueToNumber(p1, p2)
-	-- upvalues: splitDottedPathModule (ref)
+	-- upvalues: fFlagSduiRenderPerf (ref), splitDottedPathModule (ref)
 	local var1 = string.sub(p2, 1, 1) == "-"
 	local var2 = if var1 then string.sub(p2, 2) else p2
 	local var3 = p1
-	local var4 = splitDottedPathModule(var2)
+	local var4 = if fFlagSduiRenderPerf then splitDottedPathModule(var2) else string.split(var2, ".")
 	local var22Count = #var4
 	
 	for i, v in var4 do

@@ -10,7 +10,7 @@ local campaignStatsModule = require(parent.DataHydration.CampaignStats)
 local _ = require(script.Parent.AdsStatsView)
 local _ = require(script.Parent.PastCampaignRow)
 local _ = require(buildExperience.Components.Analytics.StatsCard.StatsCard)
-local analyticsUnitModule = require(buildExperience.Analytics.AnalyticsUnit)
+local statsCardUnitModule = require(buildExperience.Components.Analytics.StatsCard.StatsCardUnit)
 local statsCardValueFormatModule = require(buildExperience.Components.Analytics.StatsCard.StatsCardValueFormat)
 local foundationModule = require(parent.Foundation)
 local iconName = foundationModule.Enums.IconName
@@ -61,21 +61,21 @@ local function formatDateRange(p1, p2, p3)
 end
 
 local _ = function(p1, p2, p3)
-	-- upvalues: analyticsUnitModule (ref), statsCardValueFormatModule (ref), iconPosition (ref)
+	-- upvalues: statsCardUnitModule (ref), statsCardValueFormatModule (ref), iconPosition (ref)
 	return {
 		deltaValue = 0,
 		title = p1,
 		statValue = p2,
-		statUnit = analyticsUnitModule.Scalar,
+		statUnit = statsCardUnitModule.Scalar,
 		statValueFormat = statsCardValueFormatModule.Regular,
 		statIcon = p3,
 		statIconPosition = iconPosition.Left,
-		deltaUnit = analyticsUnitModule.Percent
+		deltaUnit = statsCardUnitModule.Percent
 	}
 end
 
 return function(p1, p2, p3, p4)
-	-- upvalues: useGetAdCampaignsModule (ref), useGetCampaignStatsModule (ref), reactModule (ref), useLocalization (ref), localizationStringsModule (ref), localizationModule (ref), WINDOW_DAYS (ref), t (ref), iconName (ref), analyticsUnitModule (ref), statsCardValueFormatModule (ref), iconPosition (ref), formatDateRange (ref)
+	-- upvalues: useGetAdCampaignsModule (ref), useGetCampaignStatsModule (ref), reactModule (ref), useLocalization (ref), localizationStringsModule (ref), localizationModule (ref), WINDOW_DAYS (ref), t (ref), iconName (ref), statsCardUnitModule (ref), statsCardValueFormatModule (ref), iconPosition (ref), formatDateRange (ref)
 	local var1, var2 = useGetAdCampaignsModule(p2)
 	local var3, var4 = useGetCampaignStatsModule(p1, p3)
 	local var5 = reactModule.useMemo(function()
@@ -100,7 +100,7 @@ return function(p1, p2, p3, p4)
 	local dateRange = var6.dateRange
 	local var7 = if var2 ~= "Failed" then var4 == "Failed" else true
 	local var8 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), var3 (ref), var5 (ref), WINDOW_DAYS (copy), p1 (ref), t (copy), gamePlays (ref), iconName (copy), analyticsUnitModule (copy), statsCardValueFormatModule (copy), iconPosition (copy), adClicks (ref), adViews (ref), playTime (ref), formatDateRange (copy), dateRange (ref)
+		-- upvalues: var1 (ref), var3 (ref), var5 (ref), WINDOW_DAYS (copy), p1 (ref), t (copy), gamePlays (ref), iconName (copy), statsCardUnitModule (copy), statsCardValueFormatModule (copy), iconPosition (copy), adClicks (ref), adViews (ref), playTime (ref), formatDateRange (copy), dateRange (ref)
 		local var9 = var1 or {}
 		local var10 = var3 or {}
 		local var11 = var5 - WINDOW_DAYS * 86400000
@@ -137,46 +137,46 @@ return function(p1, p2, p3, p4)
 		end)
 		
 		local function buildSummaryCards(p5)
-			-- upvalues: gamePlays (copy), iconName (copy), analyticsUnitModule (copy), statsCardValueFormatModule (copy), iconPosition (copy), adClicks (copy), adViews (copy), playTime (copy)
+			-- upvalues: gamePlays (copy), iconName (copy), statsCardUnitModule (copy), statsCardValueFormatModule (copy), iconPosition (copy), adClicks (copy), adViews (copy), playTime (copy)
 			return {
 				{
 					deltaValue = 0,
 					title = gamePlays,
 					statValue = p5.plays,
-					statUnit = analyticsUnitModule.Scalar,
+					statUnit = statsCardUnitModule.Scalar,
 					statValueFormat = statsCardValueFormatModule.Regular,
 					statIcon = iconName.CirclePlay,
 					statIconPosition = iconPosition.Left,
-					deltaUnit = analyticsUnitModule.Percent
+					deltaUnit = statsCardUnitModule.Percent
 				},
 				{
 					deltaValue = 0,
 					title = adClicks,
 					statValue = p5.adClicks,
-					statUnit = analyticsUnitModule.Scalar,
+					statUnit = statsCardUnitModule.Scalar,
 					statValueFormat = statsCardValueFormatModule.Regular,
 					statIcon = iconName.Crosshairs,
 					statIconPosition = iconPosition.Left,
-					deltaUnit = analyticsUnitModule.Percent
+					deltaUnit = statsCardUnitModule.Percent
 				},
 				{
 					deltaValue = 0,
 					title = adViews,
 					statValue = p5.adViews,
-					statUnit = analyticsUnitModule.Scalar,
+					statUnit = statsCardUnitModule.Scalar,
 					statValueFormat = statsCardValueFormatModule.Regular,
 					statIcon = iconName.Eye,
 					statIconPosition = iconPosition.Left,
-					deltaUnit = analyticsUnitModule.Percent
+					deltaUnit = statsCardUnitModule.Percent
 				},
 				{
 					deltaValue = 0,
 					title = playTime,
 					statValue = p5.playtimeSeconds / 60,
-					statUnit = analyticsUnitModule.Temporal,
+					statUnit = statsCardUnitModule.Temporal,
 					statIcon = iconName.Clock,
 					statIconPosition = iconPosition.Left,
-					deltaUnit = analyticsUnitModule.Percent
+					deltaUnit = statsCardUnitModule.Percent
 				}
 			}
 		end

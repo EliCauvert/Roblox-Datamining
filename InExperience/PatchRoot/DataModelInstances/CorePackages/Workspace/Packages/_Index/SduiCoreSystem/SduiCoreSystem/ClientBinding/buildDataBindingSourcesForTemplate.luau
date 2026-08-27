@@ -12,6 +12,7 @@ local fFlagSduiMarketplaceCatalogCategorySupport = sharedFlagsModule.FFlagSduiMa
 local fFlagSduiMarketplaceCatalogSortSupport = sharedFlagsModule.FFlagSduiMarketplaceCatalogSortSupport
 local fFlagSduiHydrationFetchIfMissing = sharedFlagsModule.FFlagSduiHydrationFetchIfMissing
 local fFlagSduiDevStoreSeeAllSupport = sharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
+local fFlagSduiRenderPerf = sharedFlagsModule.FFlagSduiRenderPerf
 local t = {
 	[sduiDataBindingContentTypeModule.badge] = { "badge_id" },
 	[sduiDataBindingContentTypeModule.creator] = { "creator_key" },
@@ -30,7 +31,7 @@ local t = {
 }
 
 return function(p1, p2)
-	-- upvalues: protoVariableMapperModule (ref), splitDottedPathModule (ref), tryGetPathFromDataModule (ref), t (ref), fFlagSduiHydrationFetchIfMissing (ref)
+	-- upvalues: protoVariableMapperModule (ref), fFlagSduiRenderPerf (ref), splitDottedPathModule (ref), tryGetPathFromDataModule (ref), t (ref), fFlagSduiHydrationFetchIfMissing (ref)
 	local t_1 = {}
 	
 	for i, v in p2 do
@@ -47,7 +48,7 @@ return function(p1, p2)
 		if type == "literal" and value then
 			var3 = value
 		elseif type == "input_path" and value then
-			var2, var15 = tryGetPathFromDataModule(p1, splitDottedPathModule(value))
+			var2, var15 = tryGetPathFromDataModule(p1, if fFlagSduiRenderPerf then splitDottedPathModule(value) else string.split(value, "."))
 			
 			if var2 and var15 ~= nil then
 				var3 = var15

@@ -38,10 +38,6 @@ return function(p1)
 			-- upvalues: var2 (ref)
 			return var2.getAndFetchItem(tostring(p2))
 		end,
-		isCampaignStatsRequestInQueueOrInFlight = function(p2)
-			-- upvalues: var2 (ref)
-			return var2.isRequestInQueueOrInFlight(tostring(p2))
-		end,
 		updateCampaignStats = function(p2, p3)
 			-- upvalues: var1 (ref)
 			var1.replaceItem(tostring(p2), p3)

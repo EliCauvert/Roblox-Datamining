@@ -30,7 +30,6 @@ local getFFlagEnableCrossExpVoice = require(corePackagesService.Workspace.Packag
 local fStringReactSchedulingContext = require(corePackagesService.Workspace.Packages.SharedFlags).FStringReactSchedulingContext
 local luaAppEnableToastNotificationsCoreScripts4 = game:DefineFastFlag("LuaAppEnableToastNotificationsCoreScripts4", false)
 local disableLuobuWarningToast = game:DefineFastFlag("DisableLuobuWarningToast", false)
-local fFlagDebugDisableExperienceChatMainModule = require(robloxGui.Modules.Flags.FFlagDebugDisableExperienceChatMain)
 local getFFlagVoiceUserAgency3Module = require(robloxGui.Modules.Flags.GetFFlagVoiceUserAgency3)
 local getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule = require(robloxGui.Modules.Flags.GetFFlagLuaInExperienceCoreScriptsGameInviteUnification)
 local enableSendCameraAccessAnalytics = game:DefineFastFlag("EnableSendCameraAccessAnalytics", false)
@@ -357,10 +356,7 @@ coroutine.wrap(function()
 		trustAndSafetyIXPManager.default:initialize()
 	end
 end)()
-
-if not fFlagDebugDisableExperienceChatMainModule then
-	scriptContextService:AddCoreScriptLocal("CoreScripts/ExperienceChatMain", robloxGui)
-end
+scriptContextService:AddCoreScriptLocal("CoreScripts/ExperienceChatMain", robloxGui)
 scriptContextService:AddCoreScriptLocal("CoreScripts/ChatEmoteUsage", script.Parent)
 
 if luaAppEnableToastNotificationsCoreScripts4 then

@@ -44,12 +44,10 @@ return {
 				local localizedDescription = v.localizedDescription
 				
 				if type(offerId) == "string" and offerId ~= "" and (type(localizedDescription) == "string" and localizedDescription ~= "") then
-					local expirationTimeUtc = v.expirationTimeUtc
 					table.insert(t, {
 						offerId = offerId,
 						localizedDescription = decodeLuauUnicodeEscapesModule(localizedDescription),
-						selected = v.selected == true,
-						expirationTimeUtc = if type(expirationTimeUtc) == "string" and expirationTimeUtc ~= "" then expirationTimeUtc else nil
+						selected = v.selected == true
 					})
 				end
 			end

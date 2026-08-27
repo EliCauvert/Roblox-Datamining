@@ -14,12 +14,13 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local socialCountsItemModule = require(profilePlatform.Components.UserProfileHeader.SocialCountsItem)
 local textKeysModule = require(profilePlatform.Common.TextKeys)
+local fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule = require(profilePlatform.Flags.FFlagProfilePlatformUpdateUXForNonSocialCommunities)
 local fFlagEnablePressingCommunityOwnerInPeekViewModule = require(profilePlatform.Flags.FFlagEnablePressingCommunityOwnerInPeekView)
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
 return function(p1)
-	-- upvalues: useDispatch (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), fFlagEnablePressingCommunityOwnerInPeekViewModule (ref), appPage (ref), enumsModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), horizontalPageMargin (ref), view (ref), image (ref), text (ref), socialCountsItemModule (ref), abbreviateCount (ref)
+	-- upvalues: useDispatch (ref), useLocalization (ref), textKeysModule (ref), fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule (ref), reactModule (ref), fFlagEnablePressingCommunityOwnerInPeekViewModule (ref), appPage (ref), enumsModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), horizontalPageMargin (ref), view (ref), image (ref), text (ref), socialCountsItemModule (ref), abbreviateCount (ref)
 	local var2 = useDispatch()
 	local var3 = useLocalization({
 		byOwner = { textKeysModule.ByOwner, ownerName = p1.ownerName },
@@ -85,10 +86,10 @@ return function(p1)
 			Counts = reactModule.createElement(view, { LayoutOrder = 2, tag = "size-full-0 auto-xy" }, {
 				MembersCount = reactModule.createElement(socialCountsItemModule, {
 					layoutOrder = 1,
-					text = reactModule.useMemo(function()
+					text = if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule then if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule then reactModule.useMemo(function()
 						-- upvalues: p1 (ref), var3 (ref)
 						return if p1.hasSocialModules then var3.members elseif p1.membersCount == 1 then var3.follower else var3.followers
-					end, { var3, p1.membersCount, p1.hasSocialModules }),
+					end, { var3, p1.membersCount, p1.hasSocialModules }) else nil else var3.members,
 					count = abbreviateCount(p1.membersCount),
 					onActivated = function() end
 				})

@@ -12,14 +12,14 @@ local enums = foundationModule.Enums
 local iconSize = enums.IconSize
 local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = require(parent.Localization).Hooks.useLocalization
-local isPioneerLaunch = require(parent.PioneerUtils).isPioneerLaunch
+local fFlagDebugEnablePioneerUX = require(parent.SharedFlags).FFlagDebugEnablePioneerUX
 local tiltLockupModule = require(script.Parent.Components.TiltLockup)
 local tiltLoadingScreenStatusPanelModule = require(script.Parent.Components.TiltLoadingScreenStatusPanel)
 local fFlagTiltLoadingScreenConsoleHints = require(parent.SharedFlags).FFlagTiltLoadingScreenConsoleHints
 local _ = require(script.Parent.Types)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), fFlagTiltLoadingScreenConsoleHints (ref), reactModule (ref), view (ref), isPioneerLaunch (ref), iconButton (ref), enums (ref), icon (ref), iconSize (ref), text (ref), tiltLockupModule (ref), badge (ref), tiltLoadingScreenStatusPanelModule (ref), progress (ref), progressShape (ref)
+	-- upvalues: useTokens (ref), useLocalization (ref), fFlagTiltLoadingScreenConsoleHints (ref), reactModule (ref), view (ref), fFlagDebugEnablePioneerUX (ref), iconButton (ref), enums (ref), icon (ref), iconSize (ref), text (ref), tiltLockupModule (ref), badge (ref), tiltLoadingScreenStatusPanelModule (ref), progress (ref), progressShape (ref)
 	local var1
 	local var2 = useTokens()
 	local var3 = useLocalization({
@@ -55,7 +55,7 @@ return reactModule.memo(function(p1)
 				bottom = UDim.new(0, p1.safeAreaInsets.bottom)
 			}
 		}, {
-			CancelButton = if isPioneerLaunch() or p1.isDirectionalInput then nil else reactModule.createElement(view, {
+			CancelButton = if fFlagDebugEnablePioneerUX or p1.isDirectionalInput then nil else reactModule.createElement(view, {
 				tag = "col align-x-left align-y-top size-full padding-xlarge",
 				ZIndex = 2
 			}, {
@@ -68,7 +68,7 @@ return reactModule.memo(function(p1)
 					onActivated = p1.onCancel
 				})
 			}),
-			GamepadCancelHint = if isPioneerLaunch() or not p1.isDirectionalInput then nil else reactModule.createElement(view, {
+			GamepadCancelHint = if fFlagDebugEnablePioneerUX or not p1.isDirectionalInput then nil else reactModule.createElement(view, {
 				tag = "col align-x-left align-y-bottom size-full padding-xlarge",
 				ZIndex = 2,
 				testId = "tilt-loading-screen-gamepad-cancel-hint"

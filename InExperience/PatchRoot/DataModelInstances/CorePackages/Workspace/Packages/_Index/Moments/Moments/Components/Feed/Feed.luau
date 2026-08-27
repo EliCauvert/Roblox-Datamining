@@ -185,6 +185,10 @@ return function(p1)
 			current.scrollToIndex(1)
 		end
 	end, { var12 })
+	reactModule.useImperativeHandle(p1.controllerRef, function()
+		-- upvalues: var20 (ref), var19 (ref)
+		return { prependMoment = var20, refresh = var19 }
+	end, { var20, var19 })
 	local var21 = reactModule.useCallback(function(p2)
 		-- upvalues: logMomentViewBeganModule (copy), var9 (ref)
 		if p2.kind == "moment" then
@@ -209,14 +213,6 @@ return function(p1)
 			})
 		end, { var9, source }) else nil
 	})
-	reactModule.useImperativeHandle(p1.controllerRef, function()
-		-- upvalues: var20 (ref), var19 (ref), var22 (ref)
-		return {
-			prependMoment = var20,
-			refresh = var19,
-			flushView = var22.flushView
-		}
-	end, { var20, var19, var22.flushView })
 	local var23 = reactModule.useRef(var4)
 	reactModule.useEffect(function()
 		-- upvalues: var23 (ref), var4 (ref), var12 (ref), var21 (ref)

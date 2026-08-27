@@ -130,7 +130,7 @@ return {
 			}
 		}
 	end,
-	[enumsModule.ProfileActions.ViewFullProfile] = function(p1)
+	[enumsModule.ProfileActions.ViewFullProfile] = if require(profilePlatform.Flags.FFlagProfilePlatformUpdateUXForNonSocialCommunities) then function(p1)
 		-- upvalues: buttonVariant (ref), enumsModule (ref), profileTypes (ref), eventNamesModule (ref), appPage (ref), urlBuilder (ref), urlBase (ref), textKeysModule (ref), getProfilePlatformModule (ref), getAvailableCommunityComponentsModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
 		return {
 			variant = buttonVariant.SubEmphasis,
@@ -168,7 +168,7 @@ return {
 				end
 			}
 		}
-	end,
+	end else nil,
 	[enumsModule.ProfileActions.LeaveCommunity] = function(p1)
 		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), groupsNetworkingModule (ref), getProfilePlatformModule (ref), getAvailableCommunityComponentsModule (ref)
 		return {

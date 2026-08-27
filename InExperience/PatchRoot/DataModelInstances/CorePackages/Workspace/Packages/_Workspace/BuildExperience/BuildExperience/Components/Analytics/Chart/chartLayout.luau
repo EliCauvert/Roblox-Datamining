@@ -1,1 +1,0 @@
-﻿return { PLOT_HEIGHT = 110 }

@@ -318,7 +318,7 @@ local function postInGameItemCartPricing(p1)
 	-- upvalues: replaced_1 (ref), httpService (ref), promiseModule (ref), request (ref)
 	local t = {
 		Method = "POST",
-		Url = replaced_1 .. "checkout/v1/cart-pricing",
+		Url = replaced_1 .. "checkout-api/v1/cart-pricing",
 		Body = httpService:JSONEncode(p1),
 		Headers = {
 			["Content-Type"] = "application/json",

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXPendingLookModerationStatus", false) and require(script.Parent.FFlagAXMigrateOutfitsToUserInventory)

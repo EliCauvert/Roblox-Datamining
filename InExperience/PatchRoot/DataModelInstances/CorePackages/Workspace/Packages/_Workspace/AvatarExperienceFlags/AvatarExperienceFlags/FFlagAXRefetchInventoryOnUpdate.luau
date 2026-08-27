@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXRefetchInventoryOnUpdate", false) and require(script.Parent.FFlagAXMigrateOutfitsToUserInventory)

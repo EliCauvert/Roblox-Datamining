@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnableInExperienceOffersPurchaseFlow2", false)
+﻿return game:DefineFastFlag("EnableInExperienceOffersPurchaseFlow", false)

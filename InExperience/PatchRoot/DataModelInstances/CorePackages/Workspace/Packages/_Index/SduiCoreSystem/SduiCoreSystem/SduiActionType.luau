@@ -19,7 +19,6 @@
 	OpenExperienceStoreSeeAll = "OpenExperienceStoreSeeAll",
 	OpenGameFeedbackForm = "OpenGameFeedbackForm",
 	AiOverviewFeedback = "AiOverviewFeedback",
-	OpenProfileFramesEditor = "OpenProfileFramesEditor",
 	OpenProfile = "OpenProfile",
 	OpenGameDetails = "OpenGameDetails",
 	OpenJoinFriends = "OpenJoinFriends",

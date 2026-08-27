@@ -13,6 +13,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local playButton = require(parent.GamePlayButton).PlayButton
 local useImageLoadFadeModule = require(script.Parent.Parent.useImageLoadFade)
 local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox = sharedFlagsModule.FFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox
 local fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox = sharedFlagsModule.FFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox
 local fFlagLuaAppLaunchWhenLoadingEdp = sharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
 local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp = sharedFlagsModule.FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp
@@ -41,7 +42,7 @@ local function VerifiedBadgeIcon()
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), fFlagSduiScalePlayButtonAndImageSizes (ref), useImageLoadFadeModule (ref), reactModule (ref), view (ref), image (ref), skeleton (ref), text (ref), radius (ref), VerifiedBadgeIcon (ref), fFlagLuaAppSduiEdpFallbackAttributionFromCache (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), edpFallbackActionBarPlayButtonWidth (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref)
+	-- upvalues: useTokens (ref), fFlagSduiScalePlayButtonAndImageSizes (ref), useImageLoadFadeModule (ref), reactModule (ref), view (ref), image (ref), skeleton (ref), text (ref), radius (ref), VerifiedBadgeIcon (ref), fFlagLuaAppSduiEdpFallbackAttributionFromCache (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), edpFallbackActionBarPlayButtonWidth (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref)
 	local var1 = useTokens()
 	local isSmallScreen = p1.isSmallScreen
 	local var2 = p1.isLoading == true
@@ -175,7 +176,7 @@ return reactModule.memo(function(p1)
 					launchSource = p1.launchSource,
 					experienceJoinData = p1.experienceJoinData,
 					placeId = p1.placeIdOverride,
-					useUIBloxButton = fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox,
+					useUIBloxButton = if fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox then fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox else true,
 					buttonSize = buttonSize.Large,
 					width = UDim.new(0, if fFlagSduiScalePlayButtonAndImageSizes then edpFallbackActionBarPlayButtonWidth * var1.Config.UI.Scale else edpFallbackActionBarPlayButtonWidth),
 					launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil,

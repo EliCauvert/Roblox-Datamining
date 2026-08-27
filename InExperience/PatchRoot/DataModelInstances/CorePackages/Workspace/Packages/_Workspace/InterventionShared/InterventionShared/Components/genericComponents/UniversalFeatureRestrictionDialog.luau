@@ -24,7 +24,6 @@ return reactModule.memo(function(p1)
 	local badUtterances = moderationDetail.badUtterances
 	local labelTranslationKey = moderationDetail.labelTranslationKey
 	local messageToUser = moderationDetail.messageToUser
-	local violation = moderationDetail.violation
 	local var1 = determineUFRInterventionTypeModule(moderationDetail.punishmentTypeDescription)
 	local var2 = useParsedBadUtterancesModule(badUtterances or {}, { labelTranslationKey = labelTranslationKey })
 	local joined = table.concat(var2.textItems, "\n")
@@ -71,7 +70,6 @@ return reactModule.memo(function(p1)
 		formattedEndDate = var3.formattedEndDate,
 		countdownText = var3.countdownText,
 		onAppeal = p1.onAppeal,
-		shouldOpenAppealsPortal = var4.shouldOpenAppealsPortal,
-		violationUid = if violation then violation.uid else nil
+		shouldOpenAppealsPortal = var4.shouldOpenAppealsPortal
 	})
 end)

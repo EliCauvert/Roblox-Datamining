@@ -7,7 +7,6 @@
 	HyperPlum = "HyperPlum",
 	InfernoBlast = "InfernoBlast",
 	Kids = "Kids",
-	KidsClassic = "KidsClassic",
 	KineticEnergy = "KineticEnergy",
 	LavaGlow = "LavaGlow",
 	NebulaDrift = "NebulaDrift",
