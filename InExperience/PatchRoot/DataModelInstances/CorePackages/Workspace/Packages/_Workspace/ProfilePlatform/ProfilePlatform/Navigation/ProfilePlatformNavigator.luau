@@ -21,12 +21,10 @@ local momentsGridPageModule = require(profilePlatform.Components.Moments.Moments
 local momentsFeedPageModule = require(profilePlatform.Components.Moments.MomentsFeedPage)
 local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
 local fFlagProfilePlatformEnableMomentsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableMoments)
-local reactModule = require(parent.React)
 local roactNavigationModule = require(parent.RoactNavigation)
 local fFlagAddVideoToCommunityProfile = require(parent.SharedFlags).FFlagAddVideoToCommunityProfile
 local fFlagEditProfileBackgroundEnabled = require(parent.SharedFlags).FFlagEditProfileBackgroundEnabled
 local fFlagEnableCommunityVerificationModalModule = require(profilePlatform.Flags.FFlagEnableCommunityVerificationModal)
-local fFlagEditProfileImageV2Enabled = require(parent.SharedFlags).FFlagEditProfileImageV2Enabled
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 local t = {
 	overlayEnabled = true,
@@ -45,11 +43,6 @@ local function _(p1)
 		-- upvalues: t_1 (copy), p1 (ref)
 		return if p2.navigation.getParam("fullBleed") then t_1 else p1
 	end
-end
-
-local function LazyEditProfileImageContainer(p1)
-	-- upvalues: profilePlatform (ref), reactModule (ref)
-	return reactModule.createElement(require(profilePlatform.Components.EditProfileImage.EditProfileImageContainer), p1)
 end
 
 local list = {
@@ -156,33 +149,6 @@ table.insert(list, {
 	}
 })
 
-if fFlagEditProfileImageV2Enabled then
-	local t_4 = {}
-	local editProfileImageProfilePlatform = enumsModule_1.Screens.EditProfileImageProfilePlatform
-	local t_5 = { screen = LazyEditProfileImageContainer }
-	
-	if fFlagAXEnableProfileTab then
-		local t_6 = {
-			overlayEnabled = true,
-			overlayTransparency = 1,
-			absorbInput = true
-		}
-		
-		local var2 = function(p1)
-			-- upvalues: t_1 (ref), t_6 (ref)
-			return if p1.navigation.getParam("fullBleed") then t_1 else t_6
-		end
-	else
-		local var2 = {
-			overlayEnabled = true,
-			overlayTransparency = 1,
-			absorbInput = true
-		}
-	end
-	t_5.navigationOptions = var2
-	t_4[editProfileImageProfilePlatform] = t_5
-	table.insert(list, t_4)
-end
 if fFlagSocialEnableProfileInspectAndBuy then
 	table.insert(list, {
 		[enumsModule.Screens.InspectAvatarSheet] = {

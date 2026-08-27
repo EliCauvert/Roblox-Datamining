@@ -16,9 +16,8 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local enums = foundationModule.Enums
 local useLocalization = localizationModule.Hooks.useLocalization
-local sharedFlagsModule = require(parent_1.SharedFlags)
-local fIntAutoJoinNewServerTimeMs = sharedFlagsModule.FIntAutoJoinNewServerTimeMs
-local fFlagDebugEnablePioneerUX = sharedFlagsModule.FFlagDebugEnablePioneerUX
+local fIntAutoJoinNewServerTimeMs = require(parent_1.SharedFlags).FIntAutoJoinNewServerTimeMs
+local isPioneerLaunch = require(parent_1.PioneerUtils).isPioneerLaunch
 
 local function _(p1)
 	-- upvalues: coreGuiService (ref), localizationService (ref)
@@ -36,7 +35,7 @@ local function _(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), fIntAutoJoinNewServerTimeMs (ref), runService (ref), constantsModule (ref), coreGuiService (ref), localizationService (ref), view (ref), enums (ref), text (ref), progress (ref), button (ref), fFlagDebugEnablePioneerUX (ref), footerModule (ref)
+	-- upvalues: useLocalization (ref), reactModule (ref), fIntAutoJoinNewServerTimeMs (ref), runService (ref), constantsModule (ref), coreGuiService (ref), localizationService (ref), view (ref), enums (ref), text (ref), progress (ref), button (ref), isPioneerLaunch (ref), footerModule (ref)
 	local var1
 	local var2 = useLocalization({
 		antiAddictionText = "Authentication.Login.WeChat.AntiAddictionText",
@@ -126,13 +125,13 @@ return reactModule.memo(function(p1)
 		var10()
 		p1.onJoinTheLine(if var9.current then math.floor((os.clock() - var9.current) * 1000) else nil)
 	end, { p1.onJoinTheLine, var10 })
-	local var1 = reactModule.useCallback(function()
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), var9 (ref)
 		p1.onJoinNewServer(if var9.current then math.floor((os.clock() - var9.current) * 1000) else nil)
 	end, { p1.onJoinNewServer })
-	local var1 = p1.status == constantsModule.QUEUED_STATE and p1.queueTreatment == constantsModule.JOIN_NEW_SERVER_TREATMENT
-	local var2 = p1.status == constantsModule.QUEUED_STATE and (p1.queueTreatment == constantsModule.AUTO_JOIN_TREATMENT and (p1.followUserId > 0 and var6))
-	local var3 = if p1.status == constantsModule.QUEUED_STATE and p1.followUserId > 0 and p1.queueTreatment ~= nil then if var6 then var2.friendsServerIsFullJoiningNewServer else var2.friendsServerIsFullWaitingToJoin else nil
+	local var15 = p1.status == constantsModule.QUEUED_STATE and p1.queueTreatment == constantsModule.JOIN_NEW_SERVER_TREATMENT
+	local var16 = p1.status == constantsModule.QUEUED_STATE and (p1.queueTreatment == constantsModule.AUTO_JOIN_TREATMENT and (p1.followUserId > 0 and var6))
+	local var17 = if p1.status == constantsModule.QUEUED_STATE and p1.followUserId > 0 and p1.queueTreatment ~= nil then if var6 then var2.friendsServerIsFullJoiningNewServer else var2.friendsServerIsFullWaitingToJoin else nil
 	local status = ({
 		Joining = var2.statusJoining,
 		GameEnded = var2.statusGameEnded,
@@ -174,11 +173,11 @@ return reactModule.memo(function(p1)
 				tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-center content-system-contrast",
 				Text = var2.antiAddictionText
 			}) else nil,
-			QueueDescription = if var3 then reactModule.createElement(text, {
+			QueueDescription = if var17 then reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-title-medium content-system-contrast",
 				testId = "tilt-loading-screen-queue-description",
-				Text = var3
+				Text = var17
 			}) else nil,
 			StatusText = if var1 ~= "" then nil else reactModule.createElement(text, {
 				LayoutOrder = 3,
@@ -196,7 +195,7 @@ return reactModule.memo(function(p1)
 				value = var4
 			})
 		}) else nil,
-		JoinNewServerAction = if var1 then reactModule.createElement(view, {
+		JoinNewServerAction = if var15 then reactModule.createElement(view, {
 			LayoutOrder = 3,
 			tag = "col align-x-center gap-xsmall auto-xy"
 		}, {
@@ -208,11 +207,11 @@ return reactModule.memo(function(p1)
 			Button = reactModule.createElement(button, {
 				LayoutOrder = 2,
 				testId = "tilt-loading-screen-join-new-server",
-				onActivated = var1,
+				onActivated = var14,
 				text = var2.joinNewServer
 			})
 		}) else nil,
-		JoinTheLineAction = if var2 then reactModule.createElement(view, {
+		JoinTheLineAction = if var16 then reactModule.createElement(view, {
 			LayoutOrder = 4,
 			tag = "col align-x-center gap-xsmall auto-xy"
 		}, {
@@ -228,7 +227,7 @@ return reactModule.memo(function(p1)
 				text = var2.joinTheLine
 			})
 		}) else nil,
-		RobloxWordmark = if fFlagDebugEnablePioneerUX then reactModule.createElement(footerModule, {
+		RobloxWordmark = if isPioneerLaunch() then reactModule.createElement(footerModule, {
 			LayoutOrder = 5,
 			textTestId = "tilt-loading-screen-pre-logo-text",
 			wordmarkTestId = "tilt-loading-screen-roblox-wordmark"

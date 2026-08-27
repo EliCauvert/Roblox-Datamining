@@ -5,8 +5,8 @@ local editProfileLandingModule = require(editProfile.Components.EditProfileLandi
 local editProfileLandingV2Module = require(editProfile.Components.EditProfileLanding.EditProfileLandingV2)
 local fFlagEditProfileLandingV2EnabledModule = require(editProfile.Flags.FFlagEditProfileLandingV2Enabled)
 local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
 local useEffect = reactModule.useEffect
+local _ = require(parent.AvatarExperienceNavigation)
 local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local var1 = require(parent.UserProfiles).Stores.UserProfileStore.get()
 local editProfileStoreModule = require(editProfile.Stores.EditProfileStore)
@@ -16,16 +16,15 @@ local constantsModule = require(editProfile.Common.Constants)
 local useLocalRobuxBalance = require(parent.RobloxAppHooks).useLocalRobuxBalance
 local useRealNamesInDisplayNamesEnabledModule = require(editProfile.Hooks.useRealNamesInDisplayNamesEnabled)
 local focusNavigatorWrapperModule = require(editProfile.Utils.FocusNavigatorWrapper)
-local fFlagEditProfilePPEStartOnEmotesPageModule = require(editProfile.Flags.FFlagEditProfilePPEStartOnEmotesPage)
 local useSignalState = require(parent.SignalsReact).useSignalState
 local dataHydrationTypes = require(parent.DataHydration).DataHydrationTypes
 local var2 = require(parent.Signals).createSignal("")
 local analyticsServiceV2Module = require(editProfile.Analytics.AnalyticsServiceV2)
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 local fFlagAXPPEReturnToEntrySurface = require(parent.SharedFlags).FFlagAXPPEReturnToEntrySurface
-local fFlagEditProfileImageV2Enabled = require(parent.SharedFlags).FFlagEditProfileImageV2Enabled
 local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
+local fFlagEditProfilePPEStartOnEmotesPageModule = require(editProfile.Flags.FFlagEditProfilePPEStartOnEmotesPage)
 local roactNavigationModule = require(parent.RoactNavigation)
 local navigationEvents = roactNavigationModule.NavigationEvents
 local editProfileIXPLayer = game:DefineFastString("EditProfileIXPLayer", "Social.EditProfilePage")
@@ -60,26 +59,8 @@ local function getCoveredPage(p1, p2)
 	return nil, nil
 end
 
-local function openEditProfileImageFromProfilePlatform(p3, p4)
-	-- upvalues: fFlagAXEnableProfileTab (ref), enumsModule (ref)
-	local t = {}
-	
-	if p4 and p4.mode then
-		t.mode = p4.mode
-	end
-	if fFlagAXEnableProfileTab and p3.getParam and p3.getParam("fullBleed") == true then
-		t.fullBleed = true
-	end
-	if next(t) == nil then
-		p3.navigate(enumsModule.Screens.EditProfileImageProfilePlatform)
-		
-		return
-	end
-	p3.navigate(enumsModule.Screens.EditProfileImageProfilePlatform, t)
-end
-
 return function(p3)
-	-- upvalues: useLocalUserId (ref), useRealNamesInDisplayNamesEnabledModule (ref), profileRefreshSignal (ref), reactModule (ref), focusNavigationUtilsModule (ref), reactFocusNavigationModule (ref), useEffect (ref), fFlagAXEnableProfileTab (ref), analyticsServiceV2Module (ref), enumsModule (ref), constantsModule (ref), useLocalRobuxBalance (ref), fFlagEditProfileImageV2Enabled (ref), openEditProfileImageFromProfilePlatform (ref), fFlagAXPPEReturnToEntrySurface (ref), fFlagEditProfilePPEStartOnEmotesPageModule (ref), getCoveredPage (ref), roactNavigationModule (ref), var1 (ref), useSignalState (ref), var2 (ref), editProfileStoreModule (ref), dataHydrationTypes (ref), focusNavigatorWrapperModule (ref), navigationEvents (ref), IXPService (ref), editProfileIXPLayer (ref), fFlagEditProfileLandingV2EnabledModule (ref), editProfileLandingV2Module (ref), cryoModule (ref), editProfileLandingModule (ref)
+	-- upvalues: useLocalUserId (ref), useRealNamesInDisplayNamesEnabledModule (ref), profileRefreshSignal (ref), reactModule (ref), focusNavigationUtilsModule (ref), reactFocusNavigationModule (ref), useEffect (ref), fFlagAXEnableProfileTab (ref), analyticsServiceV2Module (ref), enumsModule (ref), constantsModule (ref), useLocalRobuxBalance (ref), fFlagAXPPEReturnToEntrySurface (ref), fFlagEditProfilePPEStartOnEmotesPageModule (ref), getCoveredPage (ref), roactNavigationModule (ref), var1 (ref), useSignalState (ref), var2 (ref), editProfileStoreModule (ref), dataHydrationTypes (ref), focusNavigatorWrapperModule (ref), navigationEvents (ref), IXPService (ref), editProfileIXPLayer (ref), fFlagEditProfileLandingV2EnabledModule (ref), editProfileLandingV2Module (ref), editProfileLandingModule (ref)
 	local var7 = useLocalUserId()
 	local var8 = useRealNamesInDisplayNamesEnabledModule()
 	
@@ -150,14 +131,10 @@ return function(p3)
 	end
 	
 	local var19 = function()
-		-- upvalues: analyticsServiceV2Module (copy), fFlagEditProfileImageV2Enabled (copy), openEditProfileImageFromProfilePlatform (copy), p3 (ref), fFlagAXPPEReturnToEntrySurface (copy), fFlagEditProfilePPEStartOnEmotesPageModule (copy), enumsModule (copy), getCoveredPage (copy), roactNavigationModule (copy)
+		-- upvalues: analyticsServiceV2Module (copy), fFlagAXPPEReturnToEntrySurface (copy), fFlagEditProfilePPEStartOnEmotesPageModule (copy), enumsModule (copy), p3 (ref), getCoveredPage (copy), roactNavigationModule (copy)
 		analyticsServiceV2Module.sendOpenAvatarMarketplace()
 		
-		if fFlagEditProfileImageV2Enabled then
-			openEditProfileImageFromProfilePlatform(p3.navigation)
-			
-			return
-		elseif fFlagAXPPEReturnToEntrySurface then
+		if fFlagAXPPEReturnToEntrySurface then
 			local var20 = if fFlagEditProfilePPEStartOnEmotesPageModule then enumsModule.Screens.ProfilePictureEditorEmotes else enumsModule.Screens.ProfilePictureEditorCamera
 			local var21 = p3.navigation._dangerouslyGetParent()
 			local state = var21 and var21.state
@@ -226,11 +203,6 @@ return function(p3)
 				IXPService:LogUserLayerExposure(editProfileIXPLayer)
 			end
 		}),
-		EditProfileLanding = if fFlagEditProfileLandingV2EnabledModule then reactModule.createElement(editProfileLandingV2Module, cryoModule.Dictionary.join(t_1, {
-			onProfileFramesActivated = function()
-				-- upvalues: openEditProfileImageFromProfilePlatform (copy), p3 (ref), enumsModule (copy)
-				openEditProfileImageFromProfilePlatform(p3.navigation, { mode = enumsModule.EditProfileImageMode.FramesOnly })
-			end
-		})) else reactModule.createElement(editProfileLandingModule, t_1)
+		EditProfileLanding = if fFlagEditProfileLandingV2EnabledModule then reactModule.createElement(editProfileLandingV2Module, t_1) else reactModule.createElement(editProfileLandingModule, t_1)
 	})
 end

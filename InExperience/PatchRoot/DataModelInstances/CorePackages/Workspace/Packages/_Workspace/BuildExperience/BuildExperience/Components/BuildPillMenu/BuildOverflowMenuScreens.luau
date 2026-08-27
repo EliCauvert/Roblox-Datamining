@@ -418,9 +418,14 @@ return {
 			title = var1,
 			closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft,
 			onClose = reactModule.useCallback(function()
-				-- upvalues: navigation (ref)
+				-- upvalues: screenProps (ref), navigation (ref)
+				if screenProps.onClose then
+					screenProps.onClose()
+					
+					return
+				end
 				navigation.goBack()
-			end, { navigation }),
+			end, { navigation, screenProps.onClose }),
 			scrollPerformanceIntervalName = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then "LuaApp_Build_Stats_Scroll" else nil,
 			content = reactModule.createElement(require(buildExperience.Components.Analytics.Overview.AnalyticsOverview), {
 				universeId = var3.universeId,

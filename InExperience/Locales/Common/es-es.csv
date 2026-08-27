@@ -207,7 +207,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation tien
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation contiene Curves con demasiadas claves. {maxAllowed} es el máximo por Curve. Corrige la animación.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation contiene más de {maxAllowed} MarkerCurve(s). Asegúrate de que no haya más de {maxAllowed} MarkerCurve(s) secundario(s).
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation contiene una MarkerCurve con {count} marcadores. {maxAllowed} es el máximo por MarkerCurve. Corrige la animación.
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"La animación publicada especifica una traslación máxima de la parte de {taggedTranslation} studs, pero sus datos de animación calculan {calculatedTranslation} studs. Vuelve a publicar la animación."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation contiene un elemento secundario inesperado: {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Las cabezas dinámicas en el mercado deben estar correctamente enjauladas para que los vértices de los ojos y la boca en la jaula se alineen con los vértices de la malla. Mejora tu enjaulamiento y su alineación con la malla.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,No se puede detectar la expresión de sonrisa en la cabeza dinámica. Ajusta los puntos de referencia de la jaula de la boca para que coincidan con la ubicación de la boca en la cabeza y asegúrate de que pueda mostrar la expresión de sonrisa.
@@ -218,6 +217,10 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Las cabezas dinámicas en el 
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,No se puede detectar la expresión de cierre del ojo derecho en la cabeza dinámica. Ajusta los puntos de referencia de la jaula del ojo derecho para que coincidan con la ubicación del ojo en la cabeza y asegúrate de que pueda cerrarse.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,No se puede detectar la expresión de mueca en la cabeza dinámica. Ajusta los puntos de referencia de la jaula de la boca para que coincidan con la ubicación de la boca en la cabeza y asegúrate de que pueda mostrar la expresión de mueca.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Este recurso utiliza mapas emisivos que solo están disponibles para los creadores del Programa de creadores de confianza. Elimina todo el contenido de mapas emisivos o únete al programa antes de subirlo.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,A la animación publicada le falta un valor válido de traslación máxima de la parte. Vuelve a publicar la animación.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,A la animación publicada le falta un marcador de emote UGC válido. Vuelve a publicar la animación.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,No se pudo calcular la traslación máxima de la parte a partir de los datos de la animación publicada. Vuelve a publicar la animación.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"La animación publicada especifica una traslación máxima de la parte de {taggedTranslation} studs, pero sus datos de animación calculan {calculatedTranslation} studs. Vuelve a publicar la animación."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,La propiedad InternalOverrideFACSData en FaceControls debe estar vacía al cargar.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Se detectó que FACs agrandó tu cabeza al {modPercent}%, pero alterar la cabeza va en contra de la política del mercado para las animaciones faciales."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Se detectó que FACs redujo tu cabeza al {modPercent}%, pero alterar la cabeza va en contra de la política del mercado para las animaciones faciales."
@@ -2804,7 +2807,6 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Nombre de visualización no di
 Feature.DisplayName.ErrorMessage.NameTooLong,El nombre de visualización debe tener un máximo de 20 caracteres
 Feature.DisplayName.ErrorMessage.NameTooShort,El nombre de visualización debe tener al menos 3 caracteres
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,El nombre de visualización contiene caracteres no compatibles
-Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,Por {num} día
 Feature.Durables.BottomBar.RentalDurationPlural,Por {num} días
 Feature.Durables.FTUX.Tooltip,Elige cuántos días quieres tener el objeto. El temporizador comienza después de la compra.
@@ -2815,8 +2817,6 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} día
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} días
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Opciones
 Feature.Durables.Label.ItemExpires,El objeto caduca
-Feature.Durables.PartiallyExpiredItems.BodyText,Algunos objetos de este avatar guardado vencieron y fueron eliminados.
-Feature.Durables.PartiallyExpiredItems.TitleText,Objetos vencidos
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} días (comienza después de la compra)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,"Para denunciar contenido ilegal según lo estipulado por la Ley de Servicios Digitales de la UE, visita https://www.roblox.com/illegal-content-reporting"
 Feature.EmptyStatePage.Message.NoInternet,Sin conexión a internet
@@ -3558,8 +3558,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Editar nombre
 Feature.Profile.Heading.EditDisplayName,Editar nombre de visualización
 Feature.Profile.Heading.InsufficientFunds,Fondos insuficientes
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,Marco del perfil
-Feature.Profile.Heading.ProfilePictureSaved,Imagen de perfil guardada correctamente
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Estadísticas
 Feature.Profile.Heading.Username,Nombre de usuario
@@ -4141,7 +4139,6 @@ Feature.Subscription.Text.PerMonth,al mes
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"Tu avatar se restableció para {rule}. Aún puedes usar el Mercado, pero los cambios en tu avatar no se guardarán hasta el {time}."
 Feature.Timeout.Prompt.SaveTitleText,La función de guardar está desactivada por ahora
-Feature.Timeout.Prompt.TitleText,Restablecimos tu avatar
 Feature.Timeout.WarningBanner.DisabledMessage,Guardar avatar desactivado
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Guardar avatar desactivado hasta las {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Desbloqueado

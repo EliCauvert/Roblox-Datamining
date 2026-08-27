@@ -1,15 +1,16 @@
 ﻿local editProfile = script:FindFirstAncestor("EditProfile")
 local parent = editProfile.Parent
-require(parent.UIBlox).init(require(parent.Dev.RobloxAppUIBloxConfig))
 local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.Dev.ReactRoblox)
 local roactRoduxModule = require(parent.RoactRodux)
 local roduxModule = require(parent.Rodux)
+local UIBloxModule = require(parent.UIBlox)
 local cryoModule = require(parent.Cryo)
 local styleModule = require(parent.Style)
 local apolloClientModule = require(parent.ApolloClient)
 local foundationModule = require(parent.Foundation)
 local mockLocale = require(parent.Dev.SocialTestHelpers).StoryHelpers.mockLocale
+UIBloxModule.init(require(parent.Dev.RobloxAppUIBloxConfig))
 local foundationProvider = foundationModule.FoundationProvider
 local styleProviderWithDefaultTheme = styleModule.StyleProviderWithDefaultTheme
 local designTokenProvider = require(parent.Style).DesignTokenProvider

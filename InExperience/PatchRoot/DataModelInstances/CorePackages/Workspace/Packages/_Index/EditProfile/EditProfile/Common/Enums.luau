@@ -7,10 +7,8 @@
 		EditProfileToast = "EditProfileToast",
 		AvatarCatalog = "Catalog",
 		ProfilePictureEditorCamera = "ProfilePictureEditorCamera",
-		ProfilePictureEditorEmotes = "ProfilePictureEditorEmotes",
-		EditProfileImageProfilePlatform = "EditProfileImageProfilePlatform"
+		ProfilePictureEditorEmotes = "ProfilePictureEditorEmotes"
 	},
-	EditProfileImageMode = { Default = "default", FramesOnly = "framesOnly" },
 	RequestMethods = {
 		GET = "GET",
 		POST = "POST",

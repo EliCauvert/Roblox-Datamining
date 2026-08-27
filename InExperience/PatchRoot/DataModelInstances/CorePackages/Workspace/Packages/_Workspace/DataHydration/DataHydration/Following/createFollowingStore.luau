@@ -4,9 +4,11 @@ local createDataCacheModule = require(dataHydration.createDataCache)
 local createDataResolverModule = require(dataHydration.createDataResolver)
 local _ = require(dataHydration.DataHydrationTypes)
 local cryoModule = require(parent.Cryo)
+local promiseModule = require(parent.Promise)
 local fFlagLuaAppDataHydrationOptimisticMutationLayer = require(parent.SharedFlags).FFlagLuaAppDataHydrationOptimisticMutationLayer
 local requestsModule = require(script.Parent.Requests)
 local _ = require(script.Parent.FollowingStoreTypes)
+local classifyFollowingErrorModule = require(script.Parent.classifyFollowingError)
 game:DefineFastInt("FollowingStoreProcessDelaySec", 1)
 
 local function _()
@@ -18,7 +20,7 @@ local _ = function(p1)
 end
 
 return function()
-	-- upvalues: createDataCacheModule (ref), requestsModule (ref), createDataResolverModule (ref), cryoModule (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref)
+	-- upvalues: createDataCacheModule (ref), requestsModule (ref), createDataResolverModule (ref), cryoModule (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), promiseModule (ref), classifyFollowingErrorModule (ref)
 	local var1 = createDataCacheModule()
 	local var2 = createDataCacheModule()
 	
@@ -138,6 +140,23 @@ return function()
 	local var15 = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var9.getOptimisticCachedItem else var9.getCachedItem
 	local var16 = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var9.getOptimisticAndFetchItem else var9.getAndFetchItem
 	
+	local function writeFollowing(p7, p8, p9, p10)
+		-- upvalues: var5 (ref), promiseModule (copy), classifyFollowingErrorModule (copy)
+		var5.setMutation(p7, p8)
+		
+		return p9(p7, p10):andThen(function()
+			-- upvalues: var5 (copy), p7 (ref), p8 (ref)
+			var5.commitMutation(p7)
+			
+			return { type = "success", isFollowing = p8 }
+		end, function(p11)
+			-- upvalues: var5 (copy), p7 (ref), promiseModule (copy), classifyFollowingErrorModule (copy)
+			var5.clearMutation(p7)
+			
+			return promiseModule.reject(classifyFollowingErrorModule(p11))
+		end)
+	end
+	
 	return {
 		GetIsFollowing = function(p7, p8)
 			-- upvalues: var13 (ref), var9 (ref), var14 (ref)
@@ -146,6 +165,14 @@ return function()
 		GetIsFollowed = function(p7, p8)
 			-- upvalues: var15 (ref), var5 (ref), var16 (ref)
 			return if p8 and p8.skipFetch then var15(p7) elseif var5.isRequestInQueueOrInFlight(p7) then var15(p7) else var16(p7)
+		end,
+		Follow = function(p7, p8)
+			-- upvalues: writeFollowing (ref), requestsModule (copy)
+			return writeFollowing(p7, true, requestsModule.FollowUser, p8)
+		end,
+		Unfollow = function(p7, p8)
+			-- upvalues: writeFollowing (ref), requestsModule (copy)
+			return writeFollowing(p7, false, requestsModule.UnfollowUser, p8)
 		end,
 		clear = function()
 			-- upvalues: var5 (ref), var9 (ref)

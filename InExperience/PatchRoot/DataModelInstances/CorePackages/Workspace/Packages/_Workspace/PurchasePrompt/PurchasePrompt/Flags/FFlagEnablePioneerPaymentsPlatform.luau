@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnablePioneerPaymentsPlatform", false)
+﻿return game:DefineFastFlag("EnablePioneerPaymentsPlatform2", false)

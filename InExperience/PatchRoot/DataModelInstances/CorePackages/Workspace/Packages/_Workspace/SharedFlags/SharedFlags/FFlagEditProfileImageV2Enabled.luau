@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EditProfileImageV2Enabled2", false) and (game:GetEngineFeature("AvatarEditorServiceApplyProfileConfigurationEnabled") and game:GetEngineFeature("ThumbnailCustomizationsInProfileConfigurationEnabled") and require(script.Parent.FFlagVirtualizedFeedFooterWrapperProp))
+﻿return game:DefineFastFlag("EditProfileImageV2Enabled", false) and game:GetEngineFeature("AvatarEditorServiceApplyProfileConfigurationEnabled")

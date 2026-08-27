@@ -8,6 +8,7 @@ local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
 local fFlagBuildVersionHistoryUpdatesModule = require(buildExperience.Flags.FFlagBuildVersionHistoryUpdates)
+local latestVersionCardViewModule = require(script.Parent.LatestVersionCard.LatestVersionCardView)
 local liveVersionCardViewModule = require(script.Parent.LiveVersionCard.LiveVersionCardView)
 local restoreVersionDialogModule = require(script.Parent.RestoreVersionDialog)
 local versionHistoryCardModule = require(script.Parent.VersionHistoryCard)
@@ -31,7 +32,7 @@ local function VersionHistoryContent(p1)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), var2 (ref), fFlagBuildAgentRollbackModule (ref), versionHistoryUtilsModule (ref), versionHistoryCardModule (ref), view (ref), checkbox (ref), text (ref), fFlagBuildVersionHistoryUpdatesModule (ref), useScaledValue (ref), versionHistorySectionModule (ref), liveVersionCardViewModule (ref), sheet (ref), VersionHistoryContent (ref), restoreVersionDialogModule (ref)
+	-- upvalues: reactModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), var2 (ref), fFlagBuildAgentRollbackModule (ref), fFlagBuildVersionHistoryUpdatesModule (ref), latestVersionCardViewModule (ref), versionHistoryUtilsModule (ref), versionHistoryCardModule (ref), view (ref), checkbox (ref), text (ref), useScaledValue (ref), versionHistorySectionModule (ref), liveVersionCardViewModule (ref), sheet (ref), VersionHistoryContent (ref), restoreVersionDialogModule (ref)
 	local VERSION_HISTORY_HIDE_AUTOSAVED, var3
 	local testId = p1.testId or "version-history-bottom-sheet"
 	local scrollingFrameRef = p1.scrollingFrameRef or reactModule.useRef(nil)
@@ -81,35 +82,37 @@ return function(p1)
 			LayoutOrder = 3,
 			tag = "col gap-medium size-full-0 auto-y padding-bottom-large"
 		}, reactModule.useMemo(function()
-			-- upvalues: p1 (ref), fFlagBuildLocalization (copy), var8 (ref), versionHistoryUtilsModule (copy), testId (ref), reactModule (copy), versionHistoryCardModule (copy), var12 (ref)
+			-- upvalues: fFlagBuildVersionHistoryUpdatesModule (copy), p1 (ref), reactModule (copy), latestVersionCardViewModule (copy), fFlagBuildLocalization (copy), var8 (ref), versionHistoryUtilsModule (copy), testId (ref), versionHistoryCardModule (copy), var12 (ref)
 			local t = {}
+			local var13 = fFlagBuildVersionHistoryUpdatesModule and p1.latestVersion ~= nil
 			
+			if var13 then
+				t.LatestVersionCard = reactModule.createElement(latestVersionCardViewModule, p1.latestVersion)
+			end
 			for i, v in p1.entries do
-				local _ = nil
-				
-				if if fFlagBuildLocalization then if var8 then not v.isAutosaved else not var8 else versionHistoryUtilsModule.shouldShowEntry(v.badgeText, var8) then
-					t[v.id] = reactModule.createElement(versionHistoryCardModule, {
-						layoutOrder = i,
-						versionLabel = v.versionLabel,
-						title = v.title,
-						description = v.description,
-						badgeText = v.badgeText,
-						isRestoreDisabled = p1.isRestoreDisabled,
-						onRestore = function()
-							-- upvalues: var12 (copy), v (ref)
-							var12(v)
-						end,
-						testId = `{testId}-card-{v.id}`
-					})
+				if not var13 or i ~= 1 then
+					local _ = nil
+					
+					if if fFlagBuildLocalization then if var8 then not v.isAutosaved else not var8 else versionHistoryUtilsModule.shouldShowEntry(v.badgeText, var8) then
+						t[v.id] = reactModule.createElement(versionHistoryCardModule, {
+							layoutOrder = i,
+							versionLabel = v.versionLabel,
+							title = v.title,
+							description = v.description,
+							badgeText = v.badgeText,
+							isRestoreDisabled = p1.isRestoreDisabled,
+							onRestore = function()
+								-- upvalues: var12 (copy), v (ref)
+								var12(v)
+							end,
+							testId = `{testId}-card-{v.id}`
+						})
+					end
 				end
 			end
 			return t
 		end, {
-			p1.entries,
-			p1.isRestoreDisabled,
-			var8,
-			var12,
-			testId
+			p1.entries, p1.isRestoreDisabled, p1.latestVersion, var8, var12, testId
 		}))
 	}
 	
@@ -167,14 +170,14 @@ return function(p1)
 				if fFlagBuildAgentRollbackModule then
 					if p1.isRestoreDisabled or var6 then return end
 					var7(true)
-					local var13 = p1.onRestore(var4)
+					local var14 = p1.onRestore(var4)
 					
-					if var13 == nil then
+					if var14 == nil then
 						var7(false)
 						
 						return
 					end
-					var13:andThen(function()
+					var14:andThen(function()
 						-- upvalues: var7 (copy), var5 (copy), p1 (copy)
 						var7(false)
 						var5(nil)

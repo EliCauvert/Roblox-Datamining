@@ -16,8 +16,6 @@ return reactModule.createContext({
 		previousView = function() end,
 		itemDetails = function() end,
 		itemOrBundleDetails = if fFlagProfilePlatformEnableStore then function() end else nil,
-		preparePurchaseItem = function() end,
-		shopForMoreEmotes = function() end,
 		catalogSearch = if fFlagProfilePlatformEnableStore then function() end else nil,
 		inspectAvatar = if require(parent.SharedFlags).FFlagAddIEMProfilePage then function() end else nil,
 		editEmotes = if fFlagProfilePlatformEnableEditAppearanceMenuModule then function() end else nil,

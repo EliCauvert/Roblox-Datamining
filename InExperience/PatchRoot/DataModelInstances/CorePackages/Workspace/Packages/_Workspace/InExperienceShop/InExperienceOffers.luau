@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.InExperienceOffers.InExperienceOffers)
+﻿return require(script.Parent.Parent.Parent._Workspace.InExperienceOffers.InExperienceOffers)

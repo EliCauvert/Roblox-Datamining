@@ -7,10 +7,9 @@ local enumsModule = require(profilePlatform.Common.Enums)
 local _ = require(profilePlatform.Components.CTARow.Types)
 local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local profileTypes = enumsModule.ProfileTypes
-local fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule = require(profilePlatform.Flags.FFlagProfilePlatformUpdateUXForNonSocialCommunities)
 
 return {
-	[enumsModule.ProfileActions.Follow] = if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule then function(p1)
+	[enumsModule.ProfileActions.Follow] = function(p1)
 		-- upvalues: buttonVariant (ref), enumsModule (ref), profileTypes (ref), eventNamesModule (ref), groupsNetworkingModule (ref), getProfilePlatformModule (ref), getAvailableCommunityComponentsModule (ref)
 		return {
 			variant = buttonVariant.Standard,
@@ -32,8 +31,8 @@ return {
 				end
 			}
 		}
-	end else nil,
-	[enumsModule.ProfileActions.Unfollow] = if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule then function(p1)
+	end,
+	[enumsModule.ProfileActions.Unfollow] = function(p1)
 		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), groupsNetworkingModule (ref), getProfilePlatformModule (ref), getAvailableCommunityComponentsModule (ref)
 		return {
 			text = p1.localized[enumsModule.ProfileActions.Unfollow],
@@ -54,5 +53,5 @@ return {
 				end
 			}
 		}
-	end else nil
+	end
 }

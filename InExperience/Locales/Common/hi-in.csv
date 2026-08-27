@@ -190,7 +190,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation म�
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation में बहुत ज़्यादा की (key) वाले Curves हैं. हर Curve में ज़्यादा से ज़्यादा {maxAllowed} की (key) हो सकती हैं. कृपया ऐनिमेशन को ठीक करें.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation में {maxAllowed} से ज़्यादा  MarkerCurve हैं. कृपया पक्का करें कि {maxAllowed} से ज़्यादा MarkerCurve डिसेंडेंट्स न हों.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation में {count} मार्कर्स वाला MarkerCurve है. हर MarkerCurve में ज़्यादा से ज़्यादा {maxAllowed} मार्कर्स हो सकते हैं. कृपया ऐनिमेशन को ठीक करें.
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"पब्लिश किए गए ऐनिमेशन में, पार्ट की ज़्यादा से ज़्यादा मूवमेंट {taggedTranslation} स्टड हो सकती है, लेकिन ऐनिमेशन के असल डेटा के मताबिक मूवमेंट {calculatedTranslation} स्टड है. कृपया ऐनिमेशन को फिर से पब्लिश करें."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation में एक अनचाहा सब-फ़ोल्डर मौजूद है : {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"मार्केटप्लेस पर डायनैमिक हेड को ठीक से केज किया जाना चाहिए, ताकि केज पर मौजूद आँखों और मुँह के वर्टिस, मेश वर्टिस के साथ लाइन अप हो जाएँ. कृपया अपनी केजिंग और मेश के साथ उसके अलाइनमेंट को बेहतर बनाएँ."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,डायनैमिक हेड के लिए मुस्कुराहट वाला एक्सप्रेशन नहीं मिल रहा है. कृपया मुँह के लिए केज लैंडमार्क को एडजस्ट करें ताकि वह सिर पर मुँह की जगह से मैच करे और पक्का करें कि वह मुस्कुराहट वाला एक्सप्रेशन दिखा सके.
@@ -201,6 +200,10 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"मार्केटप्�
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,"डायनैमिक हेड के लिए दाहिनी आँख बंद करने का एक्सप्रेशन नहीं मिल रहा है. कृपया दाहिनी आँख के लिए केज लैंडमार्क को एडजस्ट करें, ताकि वह सिर पर दाहिनी आँख की जगह से मैच करे और पक्का करें कि उसे बंद किया जा सकता है."
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,"डायनैमिक हेड के लिए फ़्राउन एक्सप्रेशन का पता नहीं लगाया जा सकता. कृपया मुँह के लिए केज लैंडमार्क को एडजस्ट करें, ताकि वह सिर पर मुँह से मैच करे और पक्का करें कि यह फ़्राउन एक्सप्रेशन दिखा सकता है."
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,"यह ऐसेट एमिसिव मैप का इस्तेमाल करता है, जो सिर्फ़ 'भरोसेमंद क्रिएटर प्रोग्राम' में शामिल क्रिएटर्स के लिए उपलब्ध हैं. कृपया सभी एमिसिव मैप कॉन्टेंट हटा दें या अपलोड करने से पहले प्रोग्राम में शामिल हो जाएँ."
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,"पब्लिश किए गए ऐनिमेशन में, एक 'मैक्सिमम पार्ट ट्रांसलेशन' की मान्य वैल्यू मौजूद नहीं है. कृपया ऐनिमेशन को फिर से पब्लिश करें."
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,पब्लिश किए गए ऐनिमेशन में एक मान्य UGC emote मार्कर मौजूद नहीं है. कृपया ऐनिमेशन को फिर से पब्लिश करें.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,पब्लिश किए गए ऐनिमेशन डेटा से 'मैक्सिमम पार्ट ट्रांसलेशन' का हिसाब नहीं लगाया जा सका. कृपया ऐनिमेशन को फिर से पब्लिश करें.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"पब्लिश किए गए ऐनिमेशन में, {taggedTranslation} स्टड का 'मैक्सिमम पार्ट ट्रांसलेशन' हो सकता है, लेकिन ऐनिमेशन के असल डेटा के मताबिक यह {calculatedTranslation} स्टड है. कृपया ऐनिमेशन को फिर से पब्लिश करें."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls पर InternalOverrideFACSData प्रॉपर्टी अपलोड के समय खाली होनी चाहिए.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACs को आपके सिर को {modPercent}% तक फैलाते हुए पाया गया, लेकिन सिर में बदलाव करना 'चेहरे के ऐनिमेशन के लिए मार्केटप्लेस पॉलिसी' के खिलाफ़ है."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FACs को आपके सिर को {modPercent}% तक सिकोड़ते हुए पाया गया, लेकिन सिर में बदलाव करना 'चेहरे के ऐनिमेशन के लिए मार्केटप्लेस पॉलिसी' के खिलाफ़ है."
@@ -1821,6 +1824,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,मुझे नोटिफ़ाई करें
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,सेटिंग्स खोलें
+Feature.Build.Action.Play,खेलें
 Feature.Build.Action.Playtest,प्लेटेस्ट
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
@@ -1838,6 +1842,9 @@ Feature.Build.Action.UpdateWithChanges,बदलावों के साथ �
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,इस्तेमाल देखें
 Feature.Build.Content.NewGame,नया गेम
+Feature.Build.Description.AdCampaignModerationReview,सभी ऐड कैंपेन को Roblox मॉडरेशन द्वारा रिव्यू किया जाता है. इस काम में 24 घंटे तक लग सकते हैं.
+Feature.Build.Description.AdCampaignSheetRunDates,{startDate} – {endDate} तक चलता है
+Feature.Build.Description.AdvertisingAgreement,आगे बढ़ने का मतलब है कि आप {advertisingTermsStart}Roblox की ऐडवरटाइज़िंग की शर्तों{advertisingTermsEnd} और {advertisingStandardsStart}ऐडवरटाइज़िंग स्टैंडर्ड{advertisingStandardsEnd} से सहमत हैं.
 Feature.Build.Description.ArchiveRemoval,"अगर इस गेम को आर्काइव किया जाता है, तो इसे 'बिल्ड' से हटा दिया जाएगा. आपके पास अभी भी Creator Hub या Roblox Studio से इसे ऐक्सेस और रीस्टोर करने की सुविधा रहेगी."
 Feature.Build.Description.AutoBuyUsage,"क्रिएट करते समय, बिल्ड का अतिरिक्त इस्तेमाल अपने-आप खरीदने के लिए अपने Robux का इस्तेमाल करें. आप जब चाहें, रोज़ाना खर्च की लिमिट सेट की जा सकती है."
 Feature.Build.Description.BoostAudienceForPlays,"ज़्यादा प्ले पाने के लिए, अपनी ऑडियंस बढ़ाएँ."
@@ -1847,6 +1854,7 @@ Feature.Build.Description.BuyRobuxToCreate,"क्रिएट करना ज�
 Feature.Build.Description.BuyUsageOrWait,Robux की मदद से बिल्ड का ज़्यादा इस्तेमाल खरीदें या अपनी रोज़ाना की लिमिट के रीसेट होने का इंतज़ार करें.
 Feature.Build.Description.CampaignRunDates,आपका कैंपेन {startDate} – {endDate} तक चलेगा
 Feature.Build.Description.ChoosePlaytesters,प्ले-टेस्ट में आपकी मदद करने के लिए फ़्रेंड्स चुनें.
+Feature.Build.Description.EarnedRobuxAppliedFirst,"अगर आपने Robux कमाए हैं, तो उनका इस्तेमाल सबसे पहले ऐड कैंपेन की लागत पर किया जाएगा."
 Feature.Build.Description.EnableBuildNotifs,"बिल्ड से अपडेट्स पाने के लिए, अपने डिवाइस की सेटिंग्स में नोटिफ़िकेशंस चालू करें."
 Feature.Build.Description.FriendsLinkOnly,"सिर्फ़ आपके फ़्रेंड्स ही इस लिंक को ऐक्सेस कर सकते हैं. अगर आपका मन है कि ज़्यादा लोग खेलें, तो अपने गेम की ऑडियंस सेटिंग बदलें."
 Feature.Build.Description.GameCreationDone,मैंने आपका गेम बनाने और पब्लिश करने का काम पूरा कर लिया है. इसे प्ले-टेस्ट करने के लिए खोला जा सकता है.
@@ -1860,17 +1868,24 @@ Feature.Build.Description.PlaytestLatest,"आपने अपने सबसे
 Feature.Build.Description.PlaytestLocked,"अपना पहला गेम क्रिएट करने के बाद, प्लेटेस्टिंग शुरू की जा सकती है."
 Feature.Build.Description.PlaytesterAccess,"दोस्तों को प्लेटेस्टर के रूप में जोड़ें या ज़्यादा लोगों को खेलने देने के लिए, अपने गेम की ऑडियंस सेटिंग बदलें."
 Feature.Build.Description.PrivateShare,"इसे शेयर करने के लिए, अपने गेम की ऑडियंस सेटिंग बदलें."
+Feature.Build.Description.PromoteGameWithAdCampaign,"{durationDays}-दिन के ऐड कैंपेन की मदद से, अपनी ऑडियंस बढ़ाएँ और अपने गेम को लोगों की नज़रों में लाएँ."
 Feature.Build.Description.RaiseLimitOrWait,"क्रिएट करना जारी रखने के लिए, अपनी रोज़ाना की Robux लिमिट बढ़ाएँ या कल उसके रीसेट होने का इंतज़ार करें."
 Feature.Build.Description.RatingAgreement,पब्लिश करने का मतलब है कि आपने सहमति दी है कि यह कॉन्टेंट रेटिंग सटीक है.
 Feature.Build.Description.RestoreLatest,यह वर्ज़न आपका सबसे हाल में पब्लिश किया गया वर्ज़न बन जाएगा.
 Feature.Build.Description.RevertToVersion,सबसे नए बदलाव को रिवर्ट करने के लिए कन्फ़र्म करें और {VERSION} पर वापस जाएँ.
+Feature.Build.Description.ShareLatest,शेयर करें कि आपके सबसे नए वर्ज़न में क्या बदला है.
 Feature.Build.Description.VersionChanges,खिलाड़ियों को इस वर्ज़न में हुए बदलावों के बारे में बताएँ.
 Feature.Build.Header.AccessSharing,ऐक्सेस और शेयरिंग
+Feature.Build.Header.AllVersions,सभी वर्ज़न
 Feature.Build.Header.ContentMaturity,कॉन्टेंट मैच्योरिटी
 Feature.Build.Header.CustomAnswer,कस्टम जवाब
 Feature.Build.Header.GameDetails,गेम की जानकारी
 Feature.Build.Header.Overview,ओवरव्यू
+Feature.Build.Header.PastCampaigns,पिछले कैंपेन
+Feature.Build.Header.UpdateDetails,जानकारी अपडेट करें
 Feature.Build.Label.Access,ऐक्सेस
+Feature.Build.Label.AdClicks,ऐड पर क्लिक्स
+Feature.Build.Label.AdViews,ऐड पर व्यूज़
 Feature.Build.Label.AdditionalUsage,अतिरिक्त बिल्ड का इस्तेमाल
 Feature.Build.Label.AdditionalUsed,{LIMIT} में से {USED} इस्तेमाल किया गया
 Feature.Build.Label.All,
@@ -1884,14 +1899,18 @@ Feature.Build.Label.ContentRating,कॉन्टेंट रेटिंग
 Feature.Build.Label.Created,क्रिएट किया गया
 Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
+Feature.Build.Label.DateRange,{startDate} – {endDate}
 Feature.Build.Label.Deleted,डिलीट किया गया
 Feature.Build.Label.DescribeIdea,किसी आइडिया के बारे में बताएँ
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,
+Feature.Build.Label.EasyPerformanceReport,आसान परफ़ॉर्मेंस रिपोर्ट
 Feature.Build.Label.Error,
+Feature.Build.Label.Free,फ़्री
 Feature.Build.Label.FreeBuildUsage,मुफ़्त बिल्ड का इस्तेमाल
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,सिर्फ़ फ़्रेंड्स के लिए
+Feature.Build.Label.GamePlays,गेम प्ले
 Feature.Build.Label.GetMoreBuildUsage,बिल्ड का और इस्तेमाल पाएँ
 Feature.Build.Label.Hi,हैलो
 Feature.Build.Label.IconThumbnails,आइकॉन और थंबनेल
@@ -1901,11 +1920,13 @@ Feature.Build.Label.InputNeeded,इनपुट चाहिए
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,सीमित
 Feature.Build.Label.Loading,लोड किया जा रहा है...
+Feature.Build.Label.MaximizeForGamePlays,गेम प्ले की संख्या ज़्यादा से ज़्यादा बढ़ाएँ
 Feature.Build.Label.Models3D,3D मॉडल
 Feature.Build.Label.NoLimit,कोई लिमिट नहीं
 Feature.Build.Label.NotStarted,शुरू नहीं हुआ
 Feature.Build.Label.Pending,पेंडिंग
 Feature.Build.Label.PercentUsed,{PERCENT}% इस्तेमाल किया गया
+Feature.Build.Label.PlayTime,खेलने में बीता समय
 Feature.Build.Label.PreviouslyPublished,पहले पब्लिश किया गया
 Feature.Build.Label.Private,प्राइवेट
 Feature.Build.Label.Public,पब्लिक
@@ -1924,6 +1945,7 @@ Feature.Build.Label.SelectOption,कोई विकल्प चुनें
 Feature.Build.Label.ShareAddedFriends,"उन फ़्रेंड्स के साथ शेयर करें, जिन्हें आपने जोड़ा है"
 Feature.Build.Label.Shared,शेयर किया गया
 Feature.Build.Label.Sounds,साउंड
+Feature.Build.Label.TargetAllRobloxPlayers,सभी Roblox प्लेयर्स को टार्गेट करें
 Feature.Build.Label.Thinking,प्रोसेस कर रहा है
 Feature.Build.Label.Title,टाइटल
 Feature.Build.Label.TitleDescription,टाइटल और विवरण
@@ -1991,6 +2013,7 @@ Feature.Build.Label.ToolThumbnailRunning,गेम थंबनेल सेट 
 Feature.Build.Label.UniverseNumber,यूनिवर्स {UNIVERSE_ID}
 Feature.Build.Label.Unknown,अज्ञात
 Feature.Build.Label.UnlimitedUsed,{USED} इस्तेमाल किए गए • कोई लिमिट नहीं
+Feature.Build.Label.UpdateTitleDesc,टाइटल और विवरण अपडेट करें
 Feature.Build.Label.Updated,अपडेट किया गया
 Feature.Build.Label.Usage,इस्तेमाल
 Feature.Build.Label.UsageUsed,{USED} इस्तेमाल किया गया
@@ -2003,6 +2026,7 @@ Feature.Build.Label.VersionTitleDesc,वर्ज़न का टाइटल �
 Feature.Build.Label.Video,वीडियो
 Feature.Build.Message.AccountRequirements,"आपका अकाउंट, बिल्ड इस्तेमाल करने की शर्तों को पूरा नहीं करता."
 Feature.Build.Message.AccountTooNew,आपका अकाउंट बिल्कुल नया होने की वजह से पब्लिश नहीं किया जा सकता. 2 दिन बाद फिर से कोशिश करें.
+Feature.Build.Message.AdPerformanceLoadFailed,ऐड परफ़ॉर्मेंस लोड नहीं हो सकी
 Feature.Build.Message.AllFriendsAdded,आपने अपने सभी फ़्रेंड्स को प्लेटेस्टर्स के रूप में जोड़ लिया है.
 Feature.Build.Message.AnswerBuildQuestion,नीचे बिल्ड के सवाल का जवाब दें.
 Feature.Build.Message.AssetDetailsUnavailable,ऐसेट की जानकारी उपलब्ध नहीं है.
@@ -2076,6 +2100,7 @@ Feature.Build.Notification.Message.Review,"रिज़ल्ट रिव्य
 Feature.Build.Notification.Title.Finished,बिल्ड पूरा हुआ
 Feature.Build.Notification.Title.NeedInput,बिल्ड के लिए आपके इनपुट की ज़रूरत है
 Feature.Build.Title.AdCampaignActive,ऐड कैंपेन ऐक्टिव है
+Feature.Build.Title.AdCampaignDuration,{durationDays}-दिन का ऐड कैंपेन
 Feature.Build.Title.AddFriendsToPlaytest,प्ले-टेस्ट में आपकी मदद करने के लिए फ़्रेंड्स जोड़ें
 Feature.Build.Title.ArchiveThisGame,इस गेम को आर्काइव में भेजना है?
 Feature.Build.Title.AssetLibrary,लाइब्रेरी
@@ -2094,17 +2119,22 @@ Feature.Build.Title.FriendsOnlyPlay,सिर्फ़ फ़्रेंड्�
 Feature.Build.Title.GameCreationDone,गेम क्रिएशन पूरा हुआ
 Feature.Build.Title.GamePrivate,यह गेम प्राइवेट है
 Feature.Build.Title.GenericError,
+Feature.Build.Title.GetUsers,यूज़र्स पाएँ
 Feature.Build.Title.NoRobuxForUsage,बिल्ड के इस्तेमाल के लिए कोई Robux नहीं बचा
 Feature.Build.Title.Playtesters,प्लेटेस्टर्स
 Feature.Build.Title.PlaytestersOnlyPlay,सिर्फ़ प्लेटेस्टर्स खेल सकते हैं
+Feature.Build.Title.PromoteGame,अपने गेम को प्रमोट करें
 Feature.Build.Title.PromoteGameFree,अपने गेम को फ़्री में प्रमोट करें
 Feature.Build.Title.PushNotifications,पुश नोटिफ़िकेशंस
 Feature.Build.Title.RevertLastChange,पिछला बदलाव रिवर्ट करना है?
 Feature.Build.Title.Tasks,टास्क
 Feature.Build.Title.TurnActivity,टर्न ऐक्टिविटी
 Feature.Build.Title.VersionHistory,वर्ज़न हिस्ट्री
-Feature.Build.Title.VersionInformation,वर्ज़न की जानकारी
+Feature.Build.Title.VersionInfo,वर्ज़न की जानकारी
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,वर्ज़न {VERSION}
+Feature.Build.Title.Versions,
+Feature.Build.Title.WhatsIncluded,क्या-क्या शामिल है?
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,अनुमति दें
 Feature.Captures.Action.AllowPhotoAccessAccepted,परमिशन दें
@@ -2326,7 +2356,7 @@ Feature.Catalog.Label.Filter.Sorts,छाँटें
 Feature.Catalog.Label.Filter.TotalValue,कुल मूल्य
 Feature.Catalog.Label.Filter.UnavailableItems,अनुपलब्ध आइटम
 Feature.Catalog.Label.FreeItemConfirmation,आप {creatorName} से {itemName} फ़्री में लेना चाहेंगे?
-Feature.Catalog.Label.FreeUpperCase,फ़्री
+Feature.Catalog.Label.FreeUpperCase,
 Feature.Catalog.Label.FromPrice,{itemPrice} से शुरू
 Feature.Catalog.Label.FrontAccessories,फ़्रंट ऐक्सेसरीज़
 Feature.Catalog.Label.FullBodies,फ़ुल बॉडीज़
@@ -2757,7 +2787,6 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,डिसप्ले ना�
 Feature.DisplayName.ErrorMessage.NameTooLong,डिसप्ले नाम में ज़्यादा-से-ज़्यादा 20 कैरेक्टर होने चाहिए
 Feature.DisplayName.ErrorMessage.NameTooShort,डिसप्ले नाम में कम-से-कम 3 कैरेक्टर होने चाहिए
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,डिसप्ले नाम में सपोर्ट न करने वाले कैरेक्टर हैं
-Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,{num} दिन के लिए
 Feature.Durables.BottomBar.RentalDurationPlural,{num} दिनों के लिए
 Feature.Durables.FTUX.Tooltip,चुनें कि आपको कितने दिनों तक आइटम का मालिक बनना है. खरीदने के बाद टाइमर शुरू होता है.
@@ -2768,8 +2797,6 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} दिन
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,विकल्प
 Feature.Durables.Label.ItemExpires,आइटम की समयसीमा खत्म हो रही है
-Feature.Durables.PartiallyExpiredItems.BodyText,सेव किए गए इस अवतार में कुछ आइटम की समय-सीमा खत्म हो गई है और उन्हें हटा दिया गया है.
-Feature.Durables.PartiallyExpiredItems.TitleText,आइटम की समय-सीमा खत्म हो गई है
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} दिन (खरीदारी के बाद शुरू)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,"EU डिजिटल सर्विसेज़ ऐक्ट के तहत गैर-कानूनी कॉन्टेंट की रिपोर्ट करने के लिए, यहाँ जाएँ : https://www.roblox.com/illegal-content-reporting"
 Feature.EmptyStatePage.Message.NoInternet,इंटरनेट कनेक्शन नहीं है
@@ -2787,7 +2814,7 @@ Feature.ExperienceDetails.Label.NotPlayable,खेलने लायक नह�
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,इस एक्सपीरिएंस को खेलने का मतलब है कि मैं इस नोट्स से सहमत हूँ
 Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
-Feature.ExperienceDetails.PlayButtonText.Play,खेलें
+Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,डेमो खेलें
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,अनलॉक करें
@@ -3511,8 +3538,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,नाम एडिट करे�
 Feature.Profile.Heading.EditDisplayName,डिसप्ले नाम एडिट करें
 Feature.Profile.Heading.InsufficientFunds,फ़ंड काफ़ी नहीं हैं
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,प्रोफ़ाइल फ़्रेम
-Feature.Profile.Heading.ProfilePictureSaved,प्रोफ़ाइल फ़ोटो सेव हो गई
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,आँकड़े
 Feature.Profile.Heading.Username,
@@ -3730,7 +3755,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,अच्छी खबर
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus लें
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus यहाँ उपलब्ध नहीं है
-Feature.SafetyDashboard.Heading.AccountStatus.V2,अकाउंट का स्टेटस और उल्लंघन
+Feature.SafetyDashboard.Heading.AccountStatus.V2,"अकाउंट का स्टेटस, उल्लंघन और अपील"
 Feature.Schools.Label.Classmates,क्लासमेट
 Feature.Screentime.Content.ScreentimeLimitDialog,आपकी डेली स्क्रीन टाइम लिमिट पूरी हो गई हैं. फिर से Roblox ऐक्सेस करने के लिए कल वापस आएं.
 Feature.SecurityFeedback.Header.NewLogin,नया ऐक्टिविटी अलर्ट
@@ -4095,7 +4120,6 @@ Feature.Subscription.Text.PerMonth,/महीना
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"{rule} के लिए आपका अवतार रीसेट कर दिया गया था. अभी भी मार्केटप्लेस का इस्तेमाल किया जा सकता है, लेकिन आपके अवतार में किए गए बदलाव {time} तक सेव नहीं होंगे."
 Feature.Timeout.Prompt.SaveTitleText,सेव करने की सुविधा अभी बंद है
-Feature.Timeout.Prompt.TitleText,हमने आपका अवतार रीसेट कर दिया है
 Feature.Timeout.WarningBanner.DisabledMessage,अवतार सेव करने की सुविधा बंद है
 Feature.Timeout.WarningBanner.DisabledUntilMessage,अवतार सेव करने की सुविधा {time} तक बंद है
 Feature.Toast.Heading.PurchaseMessage.Success,अनलॉक हो गया है
