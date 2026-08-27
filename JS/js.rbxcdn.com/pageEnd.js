@@ -1,5 +1,5 @@
-; // bundle: pageEnd___2b39155c6706a4760c46bd961edb82c6_m
-; // files: ~/Generated/js/Roblox_TranslationResources_Common_PresenceResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_LoginResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_OneTimePasscodeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_CaptchaResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceAuthenticatorResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceTwoStepVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProofOfWorkChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReauthenticationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RostileChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_SecurityQuestionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PrivateAccessTokenChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DeviceIntegrityChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_VerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSettingsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_FeaturesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProfileBadgesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_AccountSwitchResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_ControlsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RecommendationsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_MessagesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AlertsAndOptionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_VisitGameResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DownloadLandingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ShopDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_RedeemGameCardResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_NotApprovedResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_PasskeyResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TrackingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSecurityPromptResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_IdVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AgeVerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ParentsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_FriendsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Verification_IdentityResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AssetTypesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_PurchaseDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TradesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Notifications_NotificationStreamResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PlayerSearchResultsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReportAbuseResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ChatResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PremiumResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemModelResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_GameLaunchGuestModeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_UserAgreementsResources_en_us_standard.js
+; // bundle: pageEnd___929361adf451a45aa76f2a2a79f886bc_m
+; // files: ~/Generated/js/Roblox_TranslationResources_Common_PresenceResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_LoginResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_OneTimePasscodeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_CaptchaResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceAuthenticatorResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceTwoStepVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProofOfWorkChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReauthenticationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RostileChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_SecurityQuestionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PrivateAccessTokenChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DeviceIntegrityChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_VerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSettingsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_AccountSwitchResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_ControlsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RecommendationsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_FeaturesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProfileBadgesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_MessagesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AlertsAndOptionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_VisitGameResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DownloadLandingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ShopDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_RedeemGameCardResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_NotApprovedResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_PasskeyResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TrackingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSecurityPromptResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_IdVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AgeVerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ParentsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_FriendsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Verification_IdentityResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AssetTypesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_PurchaseDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TradesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Notifications_NotificationStreamResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PlayerSearchResultsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReportAbuseResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ChatResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PremiumResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemModelResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_GameLaunchGuestModeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_UserAgreementsResources_en_us_standard.js
 
 ; // ~/Generated/js/Roblox_TranslationResources_Common_PresenceResources_en_us_standard.js
 var Roblox = Roblox || {};
@@ -567,127 +567,6 @@ Roblox.Lang['Feature.AccountSettings'] = {
 };
 Roblox.Lang['AccountSettingsResources'] = Roblox.Lang['Feature.AccountSettings'];
 
-; // ~/Generated/js/Roblox_TranslationResources_CommonUI_FeaturesResources_en_us_standard.js
-var Roblox = Roblox || {};
-Roblox.Lang = Roblox.Lang || {};
-Roblox.Lang['CommonUI.Features'] = {
-    "Action.BackToTop": "Back To Top",
-    "Action.Buy": "Buy",
-    "Action.BuyAccess": "Buy Access",
-    "Action.Cancel": "Cancel",
-    "Action.Ok": "Ok",
-    "Action.sUpgradeNow": "Upgrade Now",
-    "ActionsGetPremium": "Get Premium",
-    "ActionsPremium": "Premium",
-    "BuyAccessToGameForModal": "Would you like to buy access to the Place: {placeName} from {creatorName} for {robux}?",
-    "Description.CopyRightMessage": "©2018 Roblox Corporation. Roblox, the Roblox logo and Powering Imagination are among our registered and unregistered trademarks in the U.S. and other countries.",
-    "Description.CopyRightMessageDynamicYear": "©{copyrightYear} Roblox Corporation. Roblox, the Roblox logo and Powering Imagination are among our registered and unregistered trademarks in the U.S. and other countries.",
-    "Description.UnsupportedLanguage": "While some experiences may use the selected language, it is not fully supported by roblox.com.",
-    "Description.UnsupportedLanguageModal": "{userLanguage} is currently unavailable on roblox.com. You will see in-game content in {platformLanguage}, and roblox.com has been set to English.",
-    "Heading.BuyItem": "Buy Item",
-    "Heading.ConfigurePrivateServer": "Configure Private Server",
-    "Heading.Marketplace": "Marketplace",
-    "Heading.PrivateServers": "Private Servers",
-    "Heading.UnsupportedLanguage": "Unsupported Language",
-    "Heading.VisibleAgeOver13": " 13+",
-    "Label.AboutUs": "About Us",
-    "Label.Accessibility": "Accessibility",
-    "Label.AuthenticationError": "Authentication Error",
-    "Label.Avatar": "Avatar",
-    "Label.AvatarShop": "Avatar Shop",
-    "Label.Badges": "Badges",
-    "Label.Careers": "Careers",
-    "Label.CatalogMarketplaceAvatarStore": "Shop Roblox Catalog, Marketplace & Avatar Store",
-    "Label.Charts": "Charts",
-    "Label.Configure": "Configure",
-    "Label.ConfigureGame": "Configure Experience",
-    "Label.ConfigurePlace": "Configure Place",
-    "Label.ConfigurePrivateServer": "Configure VIP Server",
-    "Label.ContactUs": "Contact Us",
-    "Label.ContactUsSub": "Get help fixing a problem",
-    "Label.Create": "Create",
-    "Label.CreateGame": "Create Experience",
-    "Label.CreateGroup": "Create Community",
-    "Label.CreatorMarketplace": "Creator Marketplace",
-    "Label.DevSubs": "Subscriptions",
-    "Label.Discover": "Discover",
-    "Label.DisplayName": "Display Name",
-    "Label.Experience": "Experiences",
-    "Label.Favorites": "Favorites",
-    "Label.Feeds": "My Feed",
-    "Label.GiftCards": "Buy Gift Cards",
-    "Label.Help": "Help",
-    "Label.HelpAndSafety": "Help & Safety",
-    "Label.HelpCenter": "Help Center",
-    "Label.HelpCenterSub": "Quick answers to common questions",
-    "Label.Jobs": "Jobs",
-    "Label.Library": "Library",
-    "Label.Merch": "Merchandise",
-    "Label.MyMoney": "My Transactions",
-    "Label.OfficialStore": "Official Store",
-    "Label.Parents": "Parents",
-    "Label.PlaceStatistics": "Place Statistics",
-    "Label.Players": "People",
-    "Label.Privacy": "Privacy",
-    "Label.RealNameVerified": "Real Name Verified",
-    "Label.RedeemRobloxCards": "Redeem Roblox Cards",
-    "Label.ReportAppeals": "Violations & Appeals",
-    "Label.ReportAppealsSub": "Review or report violations",
-    "Label.Robux10PercentMore": "10% More",
-    "Label.SafetyAndSupport": "Safety & Support",
-    "Label.sAvatar": "Avatar",
-    "Label.sBlog": "Blog",
-    "Label.sBuyGiftCard": "Buy Gift Card",
-    "Label.sCatalog": "Catalog",
-    "Label.sDevelop": "Develop",
-    "Label.sEvents": "Events",
-    "Label.sForum": "Forum",
-    "Label.sFriends": "Friends",
-    "Label.sGames": "Discover",
-    "Label.sGroups": "Communities",
-    "Label.sHome": "Home",
-    "Label.sInventory": "Inventory",
-    "Label.sLogin": "Log In",
-    "Label.sMessages": "Messages",
-    "Label.sProfile": "Profile",
-    "Label.sRobux": "Robux",
-    "Label.sSearch": "Search",
-    "Label.sSearchPhrase": "Search \"{phrase}\" in {location}",
-    "Label.sSearchPhraseV2": "in {location}",
-    "Label.sShop": "Shop",
-    "Label.sSignUp": "Sign Up",
-    "Label.Store": "Store",
-    "Label.sTrade": "Trade",
-    "Label.Support": "Support",
-    "Label.Terms": "Terms",
-    "Label.TermsOfUse": "Terms of Use",
-    "Label.Thanks": "Thanks",
-    "Label.TheHunt": "Roblox Events",
-    "Label.Upgrade": "Upgrade",
-    "Lable.sBuyRobux": "Buy Robux"
-};
-Roblox.Lang['FeaturesResources'] = Roblox.Lang['CommonUI.Features'];
-
-; // ~/Generated/js/Roblox_TranslationResources_Feature_ProfileBadgesResources_en_us_standard.js
-var Roblox = Roblox || {};
-Roblox.Lang = Roblox.Lang || {};
-Roblox.Lang['Feature.ProfileBadges'] = {
-    "action.close": "Close",
-    "Creator.PremiumBadgeIconAccessibilityText": "Premium Badge Icon",
-    "Creator.VerifiedBadgeIconAccessibilityText": "Verified Badge Icon",
-    "DisplayNameChangeWithVerifiedBadge": "Important: This change will result in the loss of your verified badge.\n\nYour display name can only be changed once every 7 days.",
-    "GroupNameChangeWithVerifiedBadge": "the verified badge will be removed.",
-    "Heading.PlayerAssetsBadges": "Badges",
-    "Heading.RobloxBadge": "Roblox Badges",
-    "ThisActionWillRemoveTheVerifiedBadge": "The verified badge will be removed.",
-    "TwoSVWithVerifiedBadge": "Disabling 2-Step Verification will result in the loss of your verified badge and make your account less secure. Are you sure you want to proceed?",
-    "UsernameChangeWithVerifiedBadge": "Important: This change will result in the loss of your verified badge.\n\nYour original account creation date will carry over to your new username.",
-    "VerifiedBadgeInfo": "This badge verifies that the holder is a notable and authentic creator, brand, or public figure.",
-    "VerifiedBadgeInfoLink": "Learn More",
-    "VerifiedBadgeInfoTitle": "Verified Badge"
-};
-Roblox.Lang['ProfileBadgesResources'] = Roblox.Lang['Feature.ProfileBadges'];
-
 ; // ~/Generated/js/Roblox_TranslationResources_Authentication_AccountSwitchResources_en_us_standard.js
 var Roblox = Roblox || {};
 Roblox.Lang = Roblox.Lang || {};
@@ -842,6 +721,127 @@ Roblox.Lang['Feature.Recommendations'] = {
     "Label.Xbox": "Xbox"
 };
 Roblox.Lang['RecommendationsResources'] = Roblox.Lang['Feature.Recommendations'];
+
+; // ~/Generated/js/Roblox_TranslationResources_CommonUI_FeaturesResources_en_us_standard.js
+var Roblox = Roblox || {};
+Roblox.Lang = Roblox.Lang || {};
+Roblox.Lang['CommonUI.Features'] = {
+    "Action.BackToTop": "Back To Top",
+    "Action.Buy": "Buy",
+    "Action.BuyAccess": "Buy Access",
+    "Action.Cancel": "Cancel",
+    "Action.Ok": "Ok",
+    "Action.sUpgradeNow": "Upgrade Now",
+    "ActionsGetPremium": "Get Premium",
+    "ActionsPremium": "Premium",
+    "BuyAccessToGameForModal": "Would you like to buy access to the Place: {placeName} from {creatorName} for {robux}?",
+    "Description.CopyRightMessage": "©2018 Roblox Corporation. Roblox, the Roblox logo and Powering Imagination are among our registered and unregistered trademarks in the U.S. and other countries.",
+    "Description.CopyRightMessageDynamicYear": "©{copyrightYear} Roblox Corporation. Roblox, the Roblox logo and Powering Imagination are among our registered and unregistered trademarks in the U.S. and other countries.",
+    "Description.UnsupportedLanguage": "While some experiences may use the selected language, it is not fully supported by roblox.com.",
+    "Description.UnsupportedLanguageModal": "{userLanguage} is currently unavailable on roblox.com. You will see in-game content in {platformLanguage}, and roblox.com has been set to English.",
+    "Heading.BuyItem": "Buy Item",
+    "Heading.ConfigurePrivateServer": "Configure Private Server",
+    "Heading.Marketplace": "Marketplace",
+    "Heading.PrivateServers": "Private Servers",
+    "Heading.UnsupportedLanguage": "Unsupported Language",
+    "Heading.VisibleAgeOver13": " 13+",
+    "Label.AboutUs": "About Us",
+    "Label.Accessibility": "Accessibility",
+    "Label.AuthenticationError": "Authentication Error",
+    "Label.Avatar": "Avatar",
+    "Label.AvatarShop": "Avatar Shop",
+    "Label.Badges": "Badges",
+    "Label.Careers": "Careers",
+    "Label.CatalogMarketplaceAvatarStore": "Shop Roblox Catalog, Marketplace & Avatar Store",
+    "Label.Charts": "Charts",
+    "Label.Configure": "Configure",
+    "Label.ConfigureGame": "Configure Experience",
+    "Label.ConfigurePlace": "Configure Place",
+    "Label.ConfigurePrivateServer": "Configure VIP Server",
+    "Label.ContactUs": "Contact Us",
+    "Label.ContactUsSub": "Get help fixing a problem",
+    "Label.Create": "Create",
+    "Label.CreateGame": "Create Experience",
+    "Label.CreateGroup": "Create Community",
+    "Label.CreatorMarketplace": "Creator Marketplace",
+    "Label.DevSubs": "Subscriptions",
+    "Label.Discover": "Discover",
+    "Label.DisplayName": "Display Name",
+    "Label.Experience": "Experiences",
+    "Label.Favorites": "Favorites",
+    "Label.Feeds": "My Feed",
+    "Label.GiftCards": "Buy Gift Cards",
+    "Label.Help": "Help",
+    "Label.HelpAndSafety": "Help & Safety",
+    "Label.HelpCenter": "Help Center",
+    "Label.HelpCenterSub": "Quick answers to common questions",
+    "Label.Jobs": "Jobs",
+    "Label.Library": "Library",
+    "Label.Merch": "Merchandise",
+    "Label.MyMoney": "My Transactions",
+    "Label.OfficialStore": "Official Store",
+    "Label.Parents": "Parents",
+    "Label.PlaceStatistics": "Place Statistics",
+    "Label.Players": "People",
+    "Label.Privacy": "Privacy",
+    "Label.RealNameVerified": "Real Name Verified",
+    "Label.RedeemRobloxCards": "Redeem Roblox Cards",
+    "Label.ReportAppeals": "Violations & Appeals",
+    "Label.ReportAppealsSub": "Review or report violations",
+    "Label.Robux10PercentMore": "10% More",
+    "Label.SafetyAndSupport": "Safety & Support",
+    "Label.sAvatar": "Avatar",
+    "Label.sBlog": "Blog",
+    "Label.sBuyGiftCard": "Buy Gift Card",
+    "Label.sCatalog": "Catalog",
+    "Label.sDevelop": "Develop",
+    "Label.sEvents": "Events",
+    "Label.sForum": "Forum",
+    "Label.sFriends": "Friends",
+    "Label.sGames": "Discover",
+    "Label.sGroups": "Communities",
+    "Label.sHome": "Home",
+    "Label.sInventory": "Inventory",
+    "Label.sLogin": "Log In",
+    "Label.sMessages": "Messages",
+    "Label.sProfile": "Profile",
+    "Label.sRobux": "Robux",
+    "Label.sSearch": "Search",
+    "Label.sSearchPhrase": "Search \"{phrase}\" in {location}",
+    "Label.sSearchPhraseV2": "in {location}",
+    "Label.sShop": "Shop",
+    "Label.sSignUp": "Sign Up",
+    "Label.Store": "Store",
+    "Label.sTrade": "Trade",
+    "Label.Support": "Support",
+    "Label.Terms": "Terms",
+    "Label.TermsOfUse": "Terms of Use",
+    "Label.Thanks": "Thanks",
+    "Label.TheHunt": "Roblox Events",
+    "Label.Upgrade": "Upgrade",
+    "Lable.sBuyRobux": "Buy Robux"
+};
+Roblox.Lang['FeaturesResources'] = Roblox.Lang['CommonUI.Features'];
+
+; // ~/Generated/js/Roblox_TranslationResources_Feature_ProfileBadgesResources_en_us_standard.js
+var Roblox = Roblox || {};
+Roblox.Lang = Roblox.Lang || {};
+Roblox.Lang['Feature.ProfileBadges'] = {
+    "action.close": "Close",
+    "Creator.PremiumBadgeIconAccessibilityText": "Premium Badge Icon",
+    "Creator.VerifiedBadgeIconAccessibilityText": "Verified Badge Icon",
+    "DisplayNameChangeWithVerifiedBadge": "Important: This change will result in the loss of your verified badge.\n\nYour display name can only be changed once every 7 days.",
+    "GroupNameChangeWithVerifiedBadge": "the verified badge will be removed.",
+    "Heading.PlayerAssetsBadges": "Badges",
+    "Heading.RobloxBadge": "Roblox Badges",
+    "ThisActionWillRemoveTheVerifiedBadge": "The verified badge will be removed.",
+    "TwoSVWithVerifiedBadge": "Disabling 2-Step Verification will result in the loss of your verified badge and make your account less secure. Are you sure you want to proceed?",
+    "UsernameChangeWithVerifiedBadge": "Important: This change will result in the loss of your verified badge.\n\nYour original account creation date will carry over to your new username.",
+    "VerifiedBadgeInfo": "This badge verifies that the holder is a notable and authentic creator, brand, or public figure.",
+    "VerifiedBadgeInfoLink": "Learn More",
+    "VerifiedBadgeInfoTitle": "Verified Badge"
+};
+Roblox.Lang['ProfileBadgesResources'] = Roblox.Lang['Feature.ProfileBadges'];
 
 ; // ~/Generated/js/Roblox_TranslationResources_CommonUI_MessagesResources_en_us_standard.js
 var Roblox = Roblox || {};
