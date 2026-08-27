@@ -33,10 +33,7 @@ return function(p1)
 		safetyDashboard = {
 			main = p1.fromString("www:safety-dashboard?t_source={source|app}"),
 			violation = p1.fromString("www:safety-dashboard?vid={id}&t_source={source|app}"),
-			violations = function(p2)
-				-- upvalues: p1 (ref)
-				return p1.fromString("www:safety-dashboard?t_source={source|app}")(p2) .. "#/violations"
-			end
+			violations = p1.fromString("www:safety-dashboard?view=violations&t_source={source|app}")
 		},
 		appealsPortal = {
 			main = p1.fromString("www:report-appeals?t_source={source|app}"),

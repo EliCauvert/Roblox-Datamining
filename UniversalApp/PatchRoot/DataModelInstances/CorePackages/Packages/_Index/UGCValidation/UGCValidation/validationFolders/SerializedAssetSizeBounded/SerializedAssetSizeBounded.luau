@@ -1,12 +1,9 @@
 ﻿local serializationService = game:GetService("SerializationService")
-local UGCValidationService = game:GetService("UGCValidationService")
 local parent = script.Parent.Parent.Parent
 local constantsModule = require(parent.Constants)
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidateSerializedAssetSizeBoundedModule = require(parent.flags.getFFlagUGCValidateSerializedAssetSizeBounded)
-local getEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysicsModule = require(parent.flags.getEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysics)
 local getFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesDefault)
 local t = {
 	categories = constantsModule.AllAssetUploadCategories,
@@ -15,7 +12,7 @@ local t = {
 		validationEnumsModule.SharedDataMember.uploadCategory,
 		validationEnumsModule.SharedDataMember.consumerConfig
 	},
-	fflag = getFFlagUGCValidateSerializedAssetSizeBoundedModule
+	fflag = require(parent.flags.getFFlagUGCValidateSerializedAssetSizeBounded)
 }
 local t_1 = {
 	[validationEnumsModule.UploadCategory.TORSO_AND_LIMBS] = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesTorsoAndLimbs),
@@ -25,15 +22,15 @@ local t_1 = {
 }
 
 function t.run(p1, p2)
-	-- upvalues: validationEnumsModule (ref), getEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysicsModule (ref), UGCValidationService (ref), serializationService (ref), t_1 (ref), getFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule (ref), errorSourceStringsModule (ref)
+	-- upvalues: validationEnumsModule (ref), serializationService (ref), t_1 (ref), getFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule (ref), errorSourceStringsModule (ref)
 	if p2.consumerConfig.consumerEnv ~= validationEnumsModule.ConsumerEnv.Backend then return end
-	local var1 = if getEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysicsModule() then UGCValidationService:GetSerializedSizeExcludingCollisionAsync(p2.entrypointInput) else buffer.len(serializationService:SerializeInstancesAsync(p2.entrypointInput))
-	local var2 = (t_1[p2.uploadCategory] or getFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule)()
+	local byteLength = buffer.len(serializationService:SerializeInstancesAsync(p2.entrypointInput))
+	local var1 = (t_1[p2.uploadCategory] or getFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule)()
 	
-	if var2 < var1 then
+	if var1 < byteLength then
 		p1:fail(errorSourceStringsModule.Keys.SerializedAssetTooLarge, {
-			sizeBytes = tostring(var1),
-			maxSizeBytes = tostring(var2)
+			sizeBytes = tostring(byteLength),
+			maxSizeBytes = tostring(var1)
 		})
 	end
 end

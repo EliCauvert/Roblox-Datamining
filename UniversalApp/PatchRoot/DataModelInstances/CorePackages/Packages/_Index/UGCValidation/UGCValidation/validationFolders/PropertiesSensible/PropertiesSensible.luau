@@ -9,7 +9,6 @@ local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent
 local getFIntUGCValidateMaxHSRDataLenModule = require(parent.flags.getFIntUGCValidateMaxHSRDataLen)
 local getFFlagUGCValidateWrapDataCapsModule = require(parent.flags.getFFlagUGCValidateWrapDataCaps)
 local getFIntUGCValidateMaxHSRMeshIdDataLenModule = require(parent.flags.getFIntUGCValidateMaxHSRMeshIdDataLen)
-local getFFlagUGCValidateDisallowAeroMeshDataModule = require(parent.flags.getFFlagUGCValidateDisallowAeroMeshData)
 local describeProblematicPropertiesModule = require(script.Parent.describeProblematicProperties)
 local list = {
 	validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
@@ -48,15 +47,12 @@ local function walkInstanceTree(p1, p2, p3)
 end
 
 function t.run(p4, p5)
-	-- upvalues: getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), getFIntUGCValidateMaxHSRDataLenModule (ref), getFFlagUGCValidateDisallowAeroMeshDataModule (ref), getFFlagUGCValidateWrapDataCapsModule (ref), validationEnumsModule (ref), list (ref), getFIntUGCValidateMaxHSRMeshIdDataLenModule (ref), walkInstanceTree (ref)
+	-- upvalues: getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), getFIntUGCValidateMaxHSRDataLenModule (ref), getFFlagUGCValidateWrapDataCapsModule (ref), validationEnumsModule (ref), list (ref), getFIntUGCValidateMaxHSRMeshIdDataLenModule (ref), walkInstanceTree (ref)
 	if not getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then return end
 	local t = {
 		HiddenSurfaceRemovalAsset = { HSRData = getFIntUGCValidateMaxHSRDataLenModule() }
 	}
 	
-	if getFFlagUGCValidateDisallowAeroMeshDataModule() then
-		t.MeshPart = { AeroMeshData = 0 }
-	end
 	if getFFlagUGCValidateWrapDataCapsModule() then
 		local consumerEnv = p5.consumerConfig.consumerEnv
 		local var3 = consumerEnv == validationEnumsModule.ConsumerEnv.Backend

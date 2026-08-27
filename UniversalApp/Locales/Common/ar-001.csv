@@ -208,11 +208,13 @@ Authentication.AccountSwitch.Action.SwitchAccount,تبديل الحسابات
 Authentication.AccountSwitch.Description.AccountLimit.2,لقد وصلت إلى الحد الأقصى المسموح به لعدد الحسابات. لإضافة حساب جديد، يُرجى إزالة أحد الحسابات الحالية أولاً.
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,المتابعة باسم {username} ستؤدي إلى تسجيل خروجك من حساباتك الأخرى.
 Authentication.AccountSwitch.Description.LogoutConfirmation,يتعين عليك تسجيل الخروج من حسابات Roblox الأخرى على هذا الجهاز قبل إضافة حساب جديد
+Authentication.AccountSwitch.Description.ParentLogoutConfirmation,يتعين عليك تسجيل الخروج من حساباتك الأخرى في Roblox من على هذا الجهاز قبل إضافة حساب جديد مع امتيازات رقابة الوالدين
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,الرجاء إعادة المحاولة لاحقًا
 Authentication.AccountSwitch.Description.RemoveAllAccounts,بمجرد تسجيل الخروج، ستتم إزالة كل الحسابات من هذا الجهاز.
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,إذا قمت بذلك، فلن يظهر هذا الحساب على هذا الجهاز بعد الآن، ما لم تُسجِّل الدخول مرة أخرى. ستتم إعادتك إلى الصفحة الرئيسية.
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,حاول تسجيل دخول مباشرة
-Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,لا يمكن تبديل الحسابات
+Authentication.AccountSwitch.Header.CantSwitchAccounts,لا يمكن تبديل الحسابات
+Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Header.RemoveCurrentAccount,هل تريد إزالة الحساب الحالي؟
 Authentication.AccountSwitch.Header.SignOutOtherAccounts,هل تريد تسجيل الخروج من الحسابات الأخرى؟
@@ -698,6 +700,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,يحتوي CurveAni
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,تحتوي CurveAnimation على Curves بها عدد كبير جدًا من المفاتيح. الحد الأقصى لكل Curve هو {maxAllowed}. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,تحتوي CurveAnimation على أكثر من {maxAllowed} من عناصر MarkerCurve. يُرجى التأكد من عدم وجود أكثر من {maxAllowed} من عناصر MarkerCurve التابعة.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,تحتوي CurveAnimation على MarkerCurve به {count} من العلامات. الحد الأقصى لكل MarkerCurve هو {maxAllowed}. يُرجى إصلاح الحركة.
+Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,تحدد الحركة المنشورة الحد الأقصى لإزاحة الجزء وهو {taggedTranslation} من الأزرار، لكن بيانات الحركة الخاصة بها تُحسب على أنها {calculatedTranslation} من الأزرار. يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,تحتوي CurveAnimation على عنصر فرعي غير متوقع: {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,يجب أن تكون الرؤوس الديناميكية في المتجر محصورة بشكل صحيح بحيث تصطف قمم العينين والفم على القفص مع قمم الشبكة. يرجى تحسين القفص ومحاذاته مع الشبكة.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,تعذّر اكتشاف تعبير الابتسامة للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالفم لتتطابق مع موضع الفم على الرأس والتأكد من إمكانية إظهار تعبير الابتسامة.
@@ -708,10 +711,6 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,يجب أن تكون الرؤ�
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,تعذّر اكتشاف تعبير إغلاق العين اليمنى للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالعين اليمنى لتتطابق مع موضع العين اليمنى على الرأس والتأكد من إمكانية إغلاقها.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,تعذّر اكتشاف تعبير العبوس للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالفم لتتطابق مع موضع الفم على الرأس والتأكد من إمكانية إظهار تعبير العبوس.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,يستخدم هذا الأصل خرائط إضاءة ذاتية متاحة فقط للمصممين في برنامج المصممين الموثوق بهم. يُرجى إزالة محتوى خرائط الإضاءة الذاتية بالكامل أو الانضمام إلى البرنامج قبل الرفع.
-Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,تفتقد الحركة المنشورة إلى قيمة صالحة للحد الأقصى لإزاحة الأجزاء. يُرجى إعادة نشر الحركة.
-Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,تفتقد الحركة المنشورة إلى علامة حركة تعبيرية صالحة من تصميم المستخدم (UGC). يُرجى إعادة نشر الحركة.
-Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,تعذَّر حساب الحد الأقصى لإزاحة الجزء من بيانات الحركة المنشورة. يُرجى إعادة نشر الحركة.
-Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,تحدد الحركة المنشورة الحد الأقصى لإزاحة الجزء بمقدار {taggedTranslation} من الأزرار، لكن بيانات الحركة الخاصة بها تُحسب لتكون {calculatedTranslation} من الأزرار. يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,يجب أن تكون خاصية InternalOverrideFACSData في FaceControls فارغة عند الرفع.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,تم اكتشاف أن نظام FACS قام بتوسيع حجم رأسك إلى {modPercent}%، لكن تعديل الرأس مخالف لسياسة المتجر المتعلقة بحركات الوجه.
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,تم اكتشاف أن نظام FACS قام بتقليص حجم رأسك إلى {modPercent}%، لكن تغيير الرأس مخالف لسياسة المتجر المتعلقة بحركات الوجه.
@@ -2157,7 +2156,6 @@ Feature.Build.Action.CopyText,نسخ النص
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
 Feature.Build.Action.DontAskAgain,عدم السؤال مرة أخرى
-Feature.Build.Action.DontShowAgain,عدم الإظهار مرة أخرى
 Feature.Build.Action.HideAutosaved,إخفاء ما تم حفظه تلقائيًا
 Feature.Build.Action.ManageLimit,إدارة الحد
 Feature.Build.Action.Next,
@@ -2183,19 +2181,16 @@ Feature.Build.Action.UpdateWithChanges,التحديث بالتغييرات
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,عرض الاستخدام
 Feature.Build.Content.NewGame,لعبة جديدة
-Feature.Build.Description.AdCampaignModerationReview,تتم مراجعة جميع الحملات الإعلانية من قِبل فريق الإشراف لدى منصّة Roblox. قد تستغرق هذه العملية ما يصل إلى 24 ساعة.
-Feature.Build.Description.AdCampaignSheetRunDates,سيتم تشغيل حملتك من {startDate} إلى {endDate}
-Feature.Build.Description.AdvertisingAgreement,من خلال المتابعة، فإنك توافق على {advertisingTermsStart}شروط الإعلان{advertisingTermsEnd} و{advertisingStandardsStart}معايير الإعلان{advertisingStandardsEnd} لدى منصّة Roblox.
 Feature.Build.Description.ArchiveRemoval,إذا قمت بأرشفة هذه اللعبة، فستتم إزالتها من ميزة Build. سيظل بإمكانك الوصول إليها واستعادتها من مركز المصمم أو من Roblox Studio.
 Feature.Build.Description.AutoBuyUsage,استخدم عملات Robux لشراء المزيد من استخدام ميزة Build تلقائيًا أثناء الإنشاء. يمكنك تعيين حد الإنفاق اليومي في أي وقت.
 Feature.Build.Description.BoostAudienceForPlays,زوِّد أعداد جمهورك لتحقيق المزيد من عمليات التشغيل.
+Feature.Build.Description.BoostGameAudience,عزّز جمهور لعبتك
 Feature.Build.Description.BuildIdeaGame,حوّل أفكارك إلى لعبة
 Feature.Build.Description.BuildReplyNotif,احصل على إشعار عندما يكون لدى ميزة Build رد لك.
 Feature.Build.Description.BuyRobuxToCreate,اشترِ المزيد من عملات Robux لمواصلة الإنشاء، أو انتظر حتى تتم إعادة تعيين استخدام ميزة Build المجاني غدًا.
 Feature.Build.Description.BuyUsageOrWait,اشترِ المزيد من استخدام ميزة Build باستخدام عملات Robux، أو انتظر حتى تتم إعادة تعيين الحد اليومي.
-Feature.Build.Description.CampaignRunDates,
+Feature.Build.Description.CampaignRunDates,سيتم تشغيل حملتك من {startDate} إلى {endDate}
 Feature.Build.Description.ChoosePlaytesters,اختر الأصدقاء لمساعدتك في اختبار اللعب.
-Feature.Build.Description.EarnedRobuxAppliedFirst,إذا كنت قد ربحت عملات Robux، فسيتم تطبيقها أولًا لتغطية تكلفة الحملة الإعلانية.
 Feature.Build.Description.EnableBuildNotifs,يمكنك تشغيل الإشعارات من إعدادات جهازك للحصول على التحديثات من ميزة Build.
 Feature.Build.Description.FriendsLinkOnly,يمكن فقط لأصدقائك الوصول إلى هذا الرابط. غيّر إعدادات الجمهور للعبتك إذا كنت تريد أن يلعبها المزيد من الأشخاص.
 Feature.Build.Description.GameCreationDone,لقد أكملت إنشاء لعبتك ونشرها. يمكنك فتحها لاختبار اللعب.
@@ -2209,21 +2204,17 @@ Feature.Build.Description.PlaytestLatest,أنت تختبر اللعب لأحدث
 Feature.Build.Description.PlaytestLocked,يمكنك بدء اختبار اللعب بعد إنشاء لعبتك الأولى.
 Feature.Build.Description.PlaytesterAccess,أضف الأصدقاء كمختبري لعب أو غيّر إعدادات الجمهور للعبتك للسماح للمزيد من الأشخاص باللعب.
 Feature.Build.Description.PrivateShare,غيّر إعدادات الجمهور للعبتك لمشاركتها.
-Feature.Build.Description.PromoteGameWithAdCampaign,زوِّد أعداد جمهورك من خلال حملة إعلانية لمدة {durationDays} من الأيام واجعل لعبتك متاحة للاكتشاف.
 Feature.Build.Description.RaiseLimitOrWait,قم بزيادة الحد اليومي لديك من عملات Robux لمواصلة الإنشاء، أو انتظر حتى تتم إعادة تعيينه غدًا.
 Feature.Build.Description.RatingAgreement,من خلال النشر، فإنك توافق على دقة تصنيف هذا المحتوى.
 Feature.Build.Description.RestoreLatest,سيصبح هذا الإصدار أحدث إصدار منشور لك.
 Feature.Build.Description.RevertToVersion,تأكيد التراجع عن التغيير الأخير والرجوع إلى {VERSION}.
-Feature.Build.Description.ShareLatest,شارك التغييرات التي أُجريت على أحدث إصدار لديك.
 Feature.Build.Description.VersionChanges,أخبر اللاعبين بما تغير في هذا الإصدار.
 Feature.Build.Header.AccessSharing,إمكانية الوصول والمشاركة
-Feature.Build.Header.AllVersions,جميع الإصدارات
 Feature.Build.Header.ContentMaturity,حساسية المحتوى
 Feature.Build.Header.CustomAnswer,إجابة مخصصة
 Feature.Build.Header.GameDetails,تفاصيل اللعبة
 Feature.Build.Header.Overview,نظرة عامة
 Feature.Build.Header.PastCampaigns,الحملات السابقة
-Feature.Build.Header.UpdateDetails,تحديث التفاصيل
 Feature.Build.Label.Access,الوصول
 Feature.Build.Label.AdClicks,عدد مرات الضغط على الإعلان
 Feature.Build.Label.AdViews,عدد مرات عرض الإعلان
@@ -2245,9 +2236,7 @@ Feature.Build.Label.Deleted,تم الحذف
 Feature.Build.Label.DescribeIdea,صِف فكرتك
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,
-Feature.Build.Label.EasyPerformanceReport,تقرير أداء مبسط
 Feature.Build.Label.Error,
-Feature.Build.Label.Free,مجانًا
 Feature.Build.Label.FreeBuildUsage,استخدام ميزة Build المجاني
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
@@ -2261,7 +2250,6 @@ Feature.Build.Label.InputNeeded,الإدخال مطلوب
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,محدودة
 Feature.Build.Label.Loading,
-Feature.Build.Label.MaximizeForGamePlays,زوِّد عدد مرات تشغيل اللعبة إلى أقصى حد
 Feature.Build.Label.Models3D,النماذج ثلاثية الأبعاد
 Feature.Build.Label.NoLimit,لا يوجد حدّ
 Feature.Build.Label.NotStarted,لم يتم البدء
@@ -2286,7 +2274,6 @@ Feature.Build.Label.SelectOption,حدّد خيارًا
 Feature.Build.Label.ShareAddedFriends,مشاركة مع الأصدقاء الذين أضفتهم
 Feature.Build.Label.Shared,تمت المشاركة
 Feature.Build.Label.Sounds,الأصوات
-Feature.Build.Label.TargetAllRobloxPlayers,استهدف جميع اللاعبين على منصّة Roblox
 Feature.Build.Label.Thinking,جارٍ التفكير
 Feature.Build.Label.Title,العنوان
 Feature.Build.Label.TitleDescription,العنوان والوصف
@@ -2354,7 +2341,6 @@ Feature.Build.Label.ToolThumbnailRunning,جارٍ إعداد الصورة الم
 Feature.Build.Label.UniverseNumber,الكون {UNIVERSE_ID}
 Feature.Build.Label.Unknown,غير معروف
 Feature.Build.Label.UnlimitedUsed,تم استخدام {USED} • بلا حد أقصى
-Feature.Build.Label.UpdateTitleDesc,حدِّث العنوان والوصف
 Feature.Build.Label.Updated,تم التحديث
 Feature.Build.Label.Usage,الاستخدام
 Feature.Build.Label.UsageUsed,تم استخدام {USED}
@@ -2413,7 +2399,6 @@ Feature.Build.Message.PlaytestersAdded,تمت إضافة {INVITED_COUNT} من أ
 Feature.Build.Message.PublicPublishFailed,تم نشر لعبتك، ولكن تعذَّر جعلها عامة. حاول مرة أخرى.
 Feature.Build.Message.PublishExpandAudience,يمكنك النشر لتوسيع نطاق جمهورك
 Feature.Build.Message.PublishNotReverted,لم يتم التراجع عن عملية النشر. حاوِل مرة أخرى.
-Feature.Build.Message.PublishPromotionUpsell,تهانينا على نشر لعبتك! لديك {promotionCount} من العروض الخاصة المجانية المتاحة لجذب المزيد من اللاعبين على منصّة Roblox.
 Feature.Build.Message.PublishReverted,تم التراجع عن النشر.
 Feature.Build.Message.QuestionnaireNeeded,تم تحرير هذه اللعبة خارج ميزة Build. أكمل استبيان المحتوى للنشر.
 Feature.Build.Message.ReadyToPlay,لعبتك جاهزة للتشغيل على منصّة Roblox!
@@ -2441,7 +2426,6 @@ Feature.Build.Notification.Message.Review,استأنف الدردشة مع مي�
 Feature.Build.Notification.Title.Finished,اكتملت ميزة Build
 Feature.Build.Notification.Title.NeedInput,ميزة Build بحاجة إلى إدخالك
 Feature.Build.Title.AdCampaignActive,الحملة الإعلانية نشطة
-Feature.Build.Title.AdCampaignDuration,حملة إعلانية لمدة {durationDays} من الأيام
 Feature.Build.Title.AddFriendsToPlaytest,أضف الأصدقاء لمساعدتك في اختبار اللعب
 Feature.Build.Title.ArchiveThisGame,هل تريد أرشفة هذه اللعبة؟
 Feature.Build.Title.AssetLibrary,المكتبة
@@ -2464,18 +2448,14 @@ Feature.Build.Title.GetUsers,الحصول على المستخدمين
 Feature.Build.Title.NoRobuxForUsage,لم يتبقَ أي عملات Robux لاستخدام ميزة Build
 Feature.Build.Title.Playtesters,مختبرو اللعب
 Feature.Build.Title.PlaytestersOnlyPlay,يمكن لمختبري اللعب فقط تشغيل اللعبة
-Feature.Build.Title.PromoteGame,روّج للعبتك
 Feature.Build.Title.PromoteGameFree,روّج للعبتك مجانًا
 Feature.Build.Title.PushNotifications,الإشعارات الفورية
 Feature.Build.Title.RevertLastChange,هل تريد التراجع عن التغيير الأخير؟
 Feature.Build.Title.Tasks,المهام
 Feature.Build.Title.TurnActivity,نشاط الدور
 Feature.Build.Title.VersionHistory,سجل الإصدارات
-Feature.Build.Title.VersionInfo,معلومات الإصدار
-Feature.Build.Title.VersionInformation,
+Feature.Build.Title.VersionInformation,معلومات الإصدار
 Feature.Build.Title.VersionNumber,الإصدار {VERSION}
-Feature.Build.Title.Versions,الإصدارات
-Feature.Build.Title.WhatsIncluded,ما الذي تشمله الحملة؟
 Feature.BuyRobux.Heading.Banner,شراء Robux
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,لا، شكرًا
@@ -2641,7 +2621,7 @@ Feature.Catalog.Label.Filter.Sorts,فرز
 Feature.Catalog.Label.Filter.TotalValue,القيمة الإجمالية
 Feature.Catalog.Label.Filter.UnavailableItems,العناصر غير المتاحة
 Feature.Catalog.Label.FreeItemConfirmation,هل تريد الحصول على {itemName} من {creatorName} مجانًا؟
-Feature.Catalog.Label.FreeUpperCase,
+Feature.Catalog.Label.FreeUpperCase,مجانًا
 Feature.Catalog.Label.FromPrice,من {itemPrice}
 Feature.Catalog.Label.FrontAccessories,أكسسوارات الأمام
 Feature.Catalog.Label.FullBodies,الأجساد الكاملة
@@ -4611,7 +4591,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,خبر سار
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,اشترِك في Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,اشتراك Roblox Plus غير متاح هنا
-Feature.SafetyDashboard.Heading.AccountStatus.V2,حالة الحساب، والانتهاكات، والاستئنافات
+Feature.SafetyDashboard.Heading.AccountStatus,حالة الحساب
 Feature.Schools.Action.AlreadyGraduated,لقد تخرجت بالفعل
 Feature.Schools.Action.CantFindSchool,هل لا تستطيع العثور على مدرستك؟
 Feature.Schools.Action.Continue,

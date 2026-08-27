@@ -1,5 +1,5 @@
-﻿game:DefineFastFlag("UGCValidateSerializedAssetSizeBounded2", false)
+﻿game:DefineFastFlag("UGCValidateSerializedAssetSizeBounded", false)
 
 return function()
-	return game:GetFastFlag("UGCValidateSerializedAssetSizeBounded2")
+	return game:GetFastFlag("UGCValidateSerializedAssetSizeBounded")
 end

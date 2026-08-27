@@ -225,10 +225,12 @@ Authentication.AccountSwitch.Action.SwitchAccount,Chuyển đổi tài khoản
 Authentication.AccountSwitch.Description.AccountLimit.2,"Bạn đã đạt giới hạn số lượng tài khoản. Để thêm tài khoản mới, vui lòng xóa bớt một tài khoản trước."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,"Nếu tiếp tục với tư cách {username}, bạn sẽ được đăng xuất khỏi các tài khoản khác."
 Authentication.AccountSwitch.Description.LogoutConfirmation,Bạn sẽ cần đăng xuất khỏi các tài khoản Roblox khác trên thiết bị này trước khi thêm tài khoản mới
+Authentication.AccountSwitch.Description.ParentLogoutConfirmation,Bạn sẽ cần đăng xuất khỏi các tài khoản Roblox khác của mình trên thiết bị này trước khi thêm tài khoản mới với đặc quyền của phụ huynh
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Vui lòng thử lại sau
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Sau khi bạn đăng xuất, tất cả các tài khoản sẽ bị xóa khỏi thiết bị này."
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,"Nếu thực hiện thao tác này, bạn sẽ không còn thấy tài khoản này trên thiết bị này nữa, trừ trường hợp đăng nhập lại. Bạn sẽ quay lại trang đích."
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,Hãy thử đăng nhập trực tiếp
+Authentication.AccountSwitch.Header.CantSwitchAccounts,Không Thể Chuyển Đổi Tài Khoản
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,Không thể chuyển tài khoản
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Header.RemoveCurrentAccount,Bạn muốn xóa tài khoản hiện tại?
@@ -716,6 +718,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation có 
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation chứa các Đường cong có quá nhiều khóa. Mỗi Đường cong chỉ được phép có tối đa {maxAllowed} khóa. Vui lòng sửa lại hiệu ứng động này.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation chứa nhiều hơn {maxAllowed} MarkerCurve. Đảm bảo không có quá {maxAllowed} mục con MarkerCurve.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation chứa một MarkerCurve có {count} Điểm mốc. Mỗi MarkerCurve chỉ được phép có tối đa {maxAllowed} Điểm mốc. Vui lòng sửa lại hiệu ứng động này.
+Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"Hiệu ứng động đã đăng chỉ định độ dịch chuyển tối đa của bộ phận là {taggedTranslation} stud, nhưng dữ liệu hiệu ứng động của nó lại được tính thành {calculatedTranslation} stud. Vui lòng đăng lại hiệu ứng động này."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation chứa mục con ngoài dự kiến: {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Đầu hiệu ứng động trên chợ phải được căn khung bao đúng chuẩn sao cho các đỉnh của mắt và miệng trên khung bao khớp với các đỉnh của lưới bề mặt. Vui lòng căn khung bao chính xác hơn sao cho khớp với lưới bề mặt.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Không phát hiện được biểu cảm mỉm cười cho Đầu hiệu ứng động. Hãy điều chỉnh các điểm mốc của khung bao cho miệng để khớp với vị trí miệng trên đầu và đảm bảo miệng thể hiện được biểu cảm mỉm cười.
@@ -726,10 +729,6 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Đầu hiệu ứng động t
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Không phát hiện được biểu cảm nhắm mắt phải cho Đầu hiệu ứng động. Vui lòng điều chỉnh các điểm mốc của khung bao cho mắt phải để khớp với vị trí mắt phải trên đầu và đảm bảo mắt có thể nhắm lại.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Không phát hiện được biểu cảm nhăn mặt cho Đầu hiệu ứng động. Vui lòng điều chỉnh các điểm mốc của khung bao cho miệng để khớp với vị trí miệng trên đầu và đảm bảo miệng thể hiện được biểu cảm nhăn mặt.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Tài sản này sử dụng bản đồ phát sáng chỉ dành cho nhà sáng tạo tham gia Chương trình Nhà sáng tạo đáng tin cậy. Vui lòng xóa tất cả nội dung chứa bản đồ phát sáng hoặc tham gia chương trình trước khi tải lên.
-Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Hiệu ứng động đã đăng bị thiếu giá trị dịch chuyển tối đa hợp lệ của bộ phận. Vui lòng đăng lại hiệu ứng động này.
-Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Hiệu ứng động đã đăng bị thiếu điểm đánh dấu biểu cảm UGC hợp lệ. Vui lòng đăng lại hiệu ứng động này.
-Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Không thể tính toán độ dịch chuyển tối đa của bộ phận dựa trên dữ liệu hiệu ứng động đã đăng. Vui lòng đăng lại hiệu ứng động này.
-Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Hiệu ứng động đã đăng cho biết độ dịch chuyển tối đa của bộ phận là {taggedTranslation} stud, nhưng kết quả tính toán dựa trên dữ liệu của hiệu ứng động này cho kết quả là {calculatedTranslation} stud. Vui lòng đăng lại hiệu ứng động này."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Thuộc tính InternalOverrideFACSData trên FaceControls phải để trống khi tải lên.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACS phát hiện đầu của bạn bị phóng to lên {modPercent}%, tuy nhiên việc thay đổi kích thước đầu là vi phạm chính sách về chợ đối với hiệu ứng khuôn mặt."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FACS phát hiện đầu của bạn bị thu nhỏ còn {modPercent}%, tuy nhiên việc thay đổi kích thước đầu là vi phạm chính sách về chợ đối với hiệu ứng khuôn mặt."
@@ -2177,7 +2176,6 @@ Feature.Build.Action.CopyText,Sao chép văn bản
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
 Feature.Build.Action.DontAskAgain,Không hỏi lại
-Feature.Build.Action.DontShowAgain,Không hiển thị lại
 Feature.Build.Action.HideAutosaved,Ẩn phiên bản lưu tự động
 Feature.Build.Action.ManageLimit,Quản lý hạn mức
 Feature.Build.Action.Next,
@@ -2203,19 +2201,16 @@ Feature.Build.Action.UpdateWithChanges,Cập nhật các thay đổi
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Xem mức sử dụng
 Feature.Build.Content.NewGame,Trò chơi mới
-Feature.Build.Description.AdCampaignModerationReview,Mọi chiến dịch quảng cáo đều được đội ngũ kiểm duyệt của Roblox xem xét. Quá trình này có thể mất đến 24 giờ.
-Feature.Build.Description.AdCampaignSheetRunDates,Chạy từ {startDate} – {endDate}
-Feature.Build.Description.AdvertisingAgreement,"Bằng việc tiếp tục, bạn đồng ý với {advertisingTermsStart}Điều khoản quảng cáo{advertisingTermsEnd} và {advertisingStandardsStart}Tiêu chuẩn quảng cáo của Roblox{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"Nếu bạn lưu trữ trò chơi này, trò chơi sẽ bị gỡ khỏi Build. Bạn vẫn có thể truy cập và khôi phục trò chơi từ Trung tâm nhà sáng tạo hoặc Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Dùng Robux của bạn để tự động mua thêm lượt sử dụng Build trong quá trình sáng tạo. Bạn có thể cài đặt hạn mức chi tiêu hằng ngày bất cứ lúc nào.
 Feature.Build.Description.BoostAudienceForPlays,Thu hút thêm đối tượng để tăng số lượt chơi.
+Feature.Build.Description.BoostGameAudience,Giúp trò chơi tiếp cận được nhiều đối tượng hơn
 Feature.Build.Description.BuildIdeaGame,Biến ý tưởng thành trò chơi
 Feature.Build.Description.BuildReplyNotif,Nhận thông báo khi Build gửi phản hồi cho bạn.
 Feature.Build.Description.BuyRobuxToCreate,Hãy mua thêm Robux để tiếp tục sáng tạo hoặc chờ đến ngày mai để lượt sử dụng Build miễn phí của bạn được làm mới.
 Feature.Build.Description.BuyUsageOrWait,"Dùng Robux để mua thêm lượt sử dụng Build, hoặc đợi hạn mức hằng ngày được làm mới."
 Feature.Build.Description.CampaignRunDates,Chiến dịch của bạn sẽ diễn ra từ {startDate} – {endDate}
 Feature.Build.Description.ChoosePlaytesters,Chọn bạn bè để giúp bạn chơi thử.
-Feature.Build.Description.EarnedRobuxAppliedFirst,"Nếu bạn kiếm được Robux, số Robux này sẽ được ưu tiên trừ vào chi phí của chiến dịch quảng cáo."
 Feature.Build.Description.EnableBuildNotifs,Bật thông báo trong phần cài đặt của thiết bị để nhận thông tin cập nhật từ Build.
 Feature.Build.Description.FriendsLinkOnly,Chỉ bạn bè của bạn mới có thể truy cập đường liên kết này. Hãy thay đổi cài đặt Đối tượng của trò chơi nếu bạn muốn có nhiều người chơi hơn.
 Feature.Build.Description.GameCreationDone,Tôi đã tạo xong và đăng trò chơi của bạn. Bạn đã có thể mở lên để chơi thử.
@@ -2229,21 +2224,17 @@ Feature.Build.Description.PlaytestLatest,Bạn đang chơi thử phiên bản m�
 Feature.Build.Description.PlaytestLocked,Bạn có thể bắt đầu chơi thử sau khi tạo trò chơi đầu tiên.
 Feature.Build.Description.PlaytesterAccess,Hãy thêm bạn bè làm người chơi thử hoặc thay đổi cài đặt Đối tượng của trò chơi để cho phép có thêm người chơi.
 Feature.Build.Description.PrivateShare,Hãy thay đổi cài đặt Đối tượng của trò chơi để chia sẻ.
-Feature.Build.Description.PromoteGameWithAdCampaign,Thu hút thêm người chơi bằng chiến dịch quảng cáo dài {durationDays} ngày và giúp trò chơi của bạn tiếp cận được nhiều người hơn.
 Feature.Build.Description.RaiseLimitOrWait,"Tăng hạn mức Robux hằng ngày của bạn để tiếp tục sáng tạo, hoặc đợi hạn mức làm mới vào ngày mai."
 Feature.Build.Description.RatingAgreement,"Bằng việc đăng, bạn đồng ý rằng mức phân loại nội dung này là chính xác."
 Feature.Build.Description.RestoreLatest,Phiên bản này sẽ trở thành phiên bản mới nhất được đăng của bạn.
 Feature.Build.Description.RevertToVersion,Xác nhận trả về bản thay đổi gần nhất và quay lại {VERSION}.
-Feature.Build.Description.ShareLatest,Chia sẻ về những thay đổi trong phiên bản mới nhất của bạn.
 Feature.Build.Description.VersionChanges,Cho người chơi biết điều gì đã thay đổi trong phiên bản này.
 Feature.Build.Header.AccessSharing,Quyền truy cập và chia sẻ
-Feature.Build.Header.AllVersions,Tất cả các phiên bản
 Feature.Build.Header.ContentMaturity,Mức độ nội dung người lớn
 Feature.Build.Header.CustomAnswer,Câu trả lời tùy chỉnh
 Feature.Build.Header.GameDetails,Chi tiết về trò chơi
 Feature.Build.Header.Overview,Tổng quan
 Feature.Build.Header.PastCampaigns,Các chiến dịch trước
-Feature.Build.Header.UpdateDetails,Chi tiết bản cập nhật
 Feature.Build.Label.Access,Quyền truy cập
 Feature.Build.Label.AdClicks,Lượt nhấp vào quảng cáo
 Feature.Build.Label.AdViews,Lượt xem quảng cáo
@@ -2265,9 +2256,7 @@ Feature.Build.Label.Deleted,Đã xóa
 Feature.Build.Label.DescribeIdea,Mô tả ý tưởng
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,Hoàn tất
-Feature.Build.Label.EasyPerformanceReport,Báo cáo hiệu suất dễ dàng
 Feature.Build.Label.Error,
-Feature.Build.Label.Free,Miễn phí
 Feature.Build.Label.FreeBuildUsage,Lượt sử dụng Build miễn phí
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
@@ -2281,7 +2270,6 @@ Feature.Build.Label.InputNeeded,Cần thông tin đầu vào
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Giới hạn
 Feature.Build.Label.Loading,
-Feature.Build.Label.MaximizeForGamePlays,Tăng tối đa lượt chơi
 Feature.Build.Label.Models3D,Mô hình 3D
 Feature.Build.Label.NoLimit,Không giới hạn
 Feature.Build.Label.NotStarted,Chưa bắt đầu
@@ -2306,7 +2294,6 @@ Feature.Build.Label.SelectOption,Chọn một tùy chọn
 Feature.Build.Label.ShareAddedFriends,Chia sẻ với bạn bè mà bạn đã thêm
 Feature.Build.Label.Shared,Đã chia sẻ
 Feature.Build.Label.Sounds,Âm thanh
-Feature.Build.Label.TargetAllRobloxPlayers,Nhắm đến tất cả người chơi Roblox
 Feature.Build.Label.Thinking,Đang tư duy
 Feature.Build.Label.Title,Tiêu đề
 Feature.Build.Label.TitleDescription,Tiêu đề và mô tả
@@ -2374,7 +2361,6 @@ Feature.Build.Label.ToolThumbnailRunning,Đang đặt hình nhỏ cho trò chơi
 Feature.Build.Label.UniverseNumber,Vũ trụ {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Không xác định
 Feature.Build.Label.UnlimitedUsed,Đã dùng {USED} • Không giới hạn
-Feature.Build.Label.UpdateTitleDesc,Cập nhật tiêu đề và mô tả
 Feature.Build.Label.Updated,Thời gian cập nhật
 Feature.Build.Label.Usage,Sử dụng
 Feature.Build.Label.UsageUsed,Đã dùng {USED}
@@ -2433,7 +2419,6 @@ Feature.Build.Message.PlaytestersAdded,Đã thêm {INVITED_COUNT} trên {MAX_INV
 Feature.Build.Message.PublicPublishFailed,Trò chơi của bạn đã được đăng nhưng chưa đăng công khai. Vui lòng thử lại.
 Feature.Build.Message.PublishExpandAudience,Đăng để mở rộng đối tượng của bạn
 Feature.Build.Message.PublishNotReverted,Không hủy đăng được. Vui lòng thử lại.
-Feature.Build.Message.PublishPromotionUpsell,Chúc mừng bạn đã đăng trò chơi thành công! Bạn có {promotionCount} lượt quảng cáo miễn phí để thu hút thêm người chơi trên Roblox.
 Feature.Build.Message.PublishReverted,Đã hủy đăng.
 Feature.Build.Message.QuestionnaireNeeded,Trò chơi này đã được chỉnh sửa bên ngoài Build. Vui lòng trả lời khảo sát nội dung để đăng.
 Feature.Build.Message.ReadyToPlay,Trò chơi của bạn đã sẵn sàng để chơi trên Roblox!
@@ -2461,7 +2446,6 @@ Feature.Build.Notification.Message.Review,Hãy quay lại đoạn trò chuyện 
 Feature.Build.Notification.Title.Finished,Đã tạo dựng xong
 Feature.Build.Notification.Title.NeedInput,Tính năng Tạo dựng cần bạn cung cấp thông tin
 Feature.Build.Title.AdCampaignActive,Chiến dịch quảng cáo đang hoạt động
-Feature.Build.Title.AdCampaignDuration,Chiến dịch quảng cáo dài {durationDays} ngày
 Feature.Build.Title.AddFriendsToPlaytest,Thêm bạn bè để giúp bạn chơi thử
 Feature.Build.Title.ArchiveThisGame,Lưu trữ trò chơi này?
 Feature.Build.Title.AssetLibrary,Thư viện
@@ -2484,18 +2468,14 @@ Feature.Build.Title.GetUsers,Thu hút người dùng
 Feature.Build.Title.NoRobuxForUsage,Không còn Robux để sử dụng Build
 Feature.Build.Title.Playtesters,Người chơi thử
 Feature.Build.Title.PlaytestersOnlyPlay,Chỉ người chơi thử mới có thể chơi
-Feature.Build.Title.PromoteGame,Quảng bá trò chơi của bạn
 Feature.Build.Title.PromoteGameFree,Quảng bá trò chơi của bạn miễn phí
 Feature.Build.Title.PushNotifications,Thông báo đẩy
 Feature.Build.Title.RevertLastChange,Trả về bản thay đổi gần nhất?
 Feature.Build.Title.Tasks,Nhiệm vụ
 Feature.Build.Title.TurnActivity,Hoạt động trong lượt
 Feature.Build.Title.VersionHistory,Lịch sử phiên bản
-Feature.Build.Title.VersionInfo,Thông tin phiên bản
-Feature.Build.Title.VersionInformation,
+Feature.Build.Title.VersionInformation,Thông tin phiên bản
 Feature.Build.Title.VersionNumber,Phiên bản {VERSION}
-Feature.Build.Title.Versions,
-Feature.Build.Title.WhatsIncluded,Bao gồm những gì?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,"Không, cảm ơn"
@@ -4631,7 +4611,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Tin vui cho bạn
 Feature.RobloxSubscription.Title.GenericError,Đã gặp lỗi
 Feature.RobloxSubscription.Title.GetBlackbird,Mua gói Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Gói Roblox Plus không hỗ trợ nền tảng này
-Feature.SafetyDashboard.Heading.AccountStatus.V2,"Trạng thái tài khoản, vi phạm và khiếu nại"
+Feature.SafetyDashboard.Heading.AccountStatus,Trạng thái tài khoản
 Feature.Schools.Action.AlreadyGraduated,Tôi đã tốt nghiệp
 Feature.Schools.Action.CantFindSchool,Bạn không tìm thấy trường học của mình?
 Feature.Schools.Action.Continue,

@@ -96,8 +96,10 @@ Authentication.AccountSwitch.Action.CreateNewAccount,Создать новый �
 Authentication.AccountSwitch.Action.LogoutAllAccounts,Выйти из всех аккаунтов
 Authentication.AccountSwitch.Action.SwitchAccount,Переключить аккаунт
 Authentication.AccountSwitch.Description.LogoutConfirmation,"Нужно будет выйти из других аккаунтов Roblox на этом устройстве, прежде чем добавлять новый"
+Authentication.AccountSwitch.Description.ParentLogoutConfirmation,"Нужно будет выйти из других аккаунтов Roblox на этом устройстве, прежде чем добавлять новый аккаунт с родительскими правами"
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Повтори попытку позже
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,Попробуй войти в аккаунт
+Authentication.AccountSwitch.Header.CantSwitchAccounts,Невозможно переключить аккаунт
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Heading.SwitchAccount,
 Authentication.AccountSwitch.Label.AccountLimitReached.2,"Выйди, чтобы добавить новый аккаунт."

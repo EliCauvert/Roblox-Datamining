@@ -225,10 +225,12 @@ Authentication.AccountSwitch.Action.SwitchAccount,アカウントを切り替え
 Authentication.AccountSwitch.Description.AccountLimit.2,アカウント数の上限に達しました。新しいアカウントを追加するには、まずアカウントを削除してください。
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,{username}として続行すると、他のアカウントからログアウトされます。
 Authentication.AccountSwitch.Description.LogoutConfirmation,新しいアカウントを追加する前に、このデバイスで他のRobloxアカウントからログアウトする必要があります
+Authentication.AccountSwitch.Description.ParentLogoutConfirmation,保護者権限のある新しいアカウントを追加する前に、このデバイスで他のRobloxアカウントからログアウトする必要があります
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,後でもう一度お試しください
 Authentication.AccountSwitch.Description.RemoveAllAccounts,ログアウトすると、すべてのアカウントがこのデバイスから削除されます。
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,削除すると、もう一度ログインしない限り、このアカウントはこのデバイス上で表示されなくなり、ランディングページに戻ります。
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,直接、ログインしてみてください
+Authentication.AccountSwitch.Header.CantSwitchAccounts,アカウントを切り替えできません
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,アカウントを切り替えることができません
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Header.RemoveCurrentAccount,現在のアカウントを削除しますか？
@@ -716,6 +718,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimationに�
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimationに、キーの数が多すぎるCurveが含まれています。Curveあたりのキーの最大数は{maxAllowed}件です。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimationに、{maxAllowed}件を超えるMarkerCurveが含まれています。MarkerCurveの子孫は{maxAllowed}件以下にしてください。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimationに、マーカーが{count}件あるMarkerCurveが含まれています。MarkerCurveあたりのマーカーの最大数は{maxAllowed}件です。アニメーションを修正してください。
+Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,公開されたアニメーションでは、パーツの最大変位が{taggedTranslation}マスに指定されていますが、アニメーションデータでは{calculatedTranslation}マスと計算されています。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimationに、予期しない子が含まれています：{childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,マーケットプレイスの「動く頭」は、ケージの目と口の頂点がメッシュの頂点と一致するように、適切に合わせる必要があります。ケージとメッシュとの位置合わせを改善してください。
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,動く頭の笑顔の表情を検出できません。口のケージのランドマークを調整して、頭の口の位置に合わせ、笑顔の表情ができるようにしてください。
@@ -726,10 +729,6 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,マーケットプレイス上
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,動く頭の右目を閉じた表情を検出できません。右目のケージのランドマークを調整して、頭の右目の位置に合わせ、閉じられるようにしてください。
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,動く頭のしかめっ面の表情を検出できません。口のケージのランドマークを調整して、頭の口の位置に合わせ、しかめっ面の表情ができるようにしてください。
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,このアセットは、信頼できるクリエータープログラムのクリエーターのみが利用できるエミッシブマップを使用しています。アップロードする前に、すべてのエミッシブマップコンテンツを削除するか、プログラムに参加してください。
-Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,公開されたアニメーションには有効なパーツの最大移動量がありません。アニメーションを再公開してください。
-Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,公開されたアニメーションには有効なUGCリアクションマーカーがありません。アニメーションを再公開してください。
-Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,公開されたアニメーションデータからパーツの最大移動量を計算できませんでした。アニメーションを再公開してください。
-Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,公開されたアニメーションでは、パーツの最大移動量が{taggedTranslation}マスに指定されていますが、アニメーションデータでは{calculatedTranslation}マスと計算されています。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,アップロード時、FaceControlsのInternalOverrideFACSDataプロパティは空にする必要があります。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,頭部を{modPercent}%に拡大するFACS（表情コーディングシステム）が検出されましたが、頭部の変更は表情アニメーションに関するマーケットプレイスのポリシーに違反します。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,頭部を{modPercent}%に縮小するFACS（表情コーディングシステム）が検出されましたが、頭部の変更は表情アニメーションに関するマーケットプレイスのポリシーに違反します。
@@ -2176,7 +2175,6 @@ Feature.Build.Action.CopyText,テキストをコピー
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
 Feature.Build.Action.DontAskAgain,今後表示しない
-Feature.Build.Action.DontShowAgain,
 Feature.Build.Action.HideAutosaved,自動保存済みバージョンを非表示
 Feature.Build.Action.ManageLimit,限度額を管理
 Feature.Build.Action.Next,
@@ -2184,7 +2182,6 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,通知する
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,設定を開く
-Feature.Build.Action.Play,
 Feature.Build.Action.Playtest,プレイテスト
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,公開する
@@ -2202,19 +2199,16 @@ Feature.Build.Action.UpdateWithChanges,変更を反映して更新
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,使用量を表示
 Feature.Build.Content.NewGame,新規のゲーム
-Feature.Build.Description.AdCampaignModerationReview,すべての広告キャンペーンはRobloxによる審査の対象となります。審査には最大24時間かかる場合があります。
-Feature.Build.Description.AdCampaignSheetRunDates,実施期間：{startDate}～{endDate}
-Feature.Build.Description.AdvertisingAgreement,続行すると、{advertisingTermsStart}Roblox広告基準{advertisingTermsEnd}および{advertisingStandardsStart}広告基準{advertisingStandardsEnd}に同意したものとみなされます。
 Feature.Build.Description.ArchiveRemoval,このゲームをアーカイブすると、[ビルド]から削除されます。これは、クリエーターハブまたはRoblox Studioから引き続きアクセスして復元できます。
 Feature.Build.Description.AutoBuyUsage,Robuxを使って、作成中に追加のビルド使用量を自動的に購入しましょう。1日あたりの課金限度額はいつでも設定できます。
 Feature.Build.Description.BoostAudienceForPlays,オーディエンスを拡大して、プレイ数を増やしましょう。
+Feature.Build.Description.BoostGameAudience,ゲームのオーディエンスを増やしましょう
 Feature.Build.Description.BuildIdeaGame,アイデアをゲームに変えよう
 Feature.Build.Description.BuildReplyNotif,ビルドで返信が届いたときに通知を受け取りましょう。
 Feature.Build.Description.BuyRobuxToCreate,作成を続けるには、Robuxをさらに購入するか、明日になって無料のビルド使用量がリセットされるのをお待ちください。
 Feature.Build.Description.BuyUsageOrWait,Robuxでビルド使用量をさらに購入するか、1日あたりの限度額がリセットされるのをお待ちください。
 Feature.Build.Description.CampaignRunDates,キャンペーンは、{startDate}～{endDate}に実施されます。
 Feature.Build.Description.ChoosePlaytesters,プレイテストに協力してもらう友達を選択してください。
-Feature.Build.Description.EarnedRobuxAppliedFirst,獲得済みRobuxをお持ちの場合、広告キャンペーンの費用にはそちらが先に充当されます。
 Feature.Build.Description.EnableBuildNotifs,ビルドからの最新情報を受け取るには、デバイス設定で通知を有効化してください。
 Feature.Build.Description.FriendsLinkOnly,このリンクにアクセスできるのはあなたの友達のみです。より多くの人にプレイしてもらいたい場合は、ゲームのオーディエンス設定を変更してください。
 Feature.Build.Description.GameCreationDone,ゲームの作成と公開が完了しました。ゲームを開いてプレイテストできます。
@@ -2228,24 +2222,17 @@ Feature.Build.Description.PlaytestLatest,最新バージョンのプレイテス
 Feature.Build.Description.PlaytestLocked,プレイテストは、最初のゲームを制作した後に開始可能です。
 Feature.Build.Description.PlaytesterAccess,友達をプレイテスターとして追加するか、ゲームのオーディエンス設定を変更して、より多くの人にプレイしてもらいましょう。
 Feature.Build.Description.PrivateShare,ゲームのオーディエンス設定を変更してシェアしてください。
-Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}日間の広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう。
 Feature.Build.Description.RaiseLimitOrWait,作成を続けるには、1日あたりのRobux限度額を増やすか、明日になってリセットされるのをお待ちください。
 Feature.Build.Description.RatingAgreement,公開することで、このコンテンツレーティングが正確であることに同意したものとみなされます。
 Feature.Build.Description.RestoreLatest,このバージョンが、公開済みの最新バージョンになります。
 Feature.Build.Description.RevertToVersion,確認して最後の変更を元に戻し、{VERSION}に戻ります。
-Feature.Build.Description.ShareLatest,最新バージョンの変更内容を共有しましょう。
 Feature.Build.Description.VersionChanges,このバージョンで変更された点をプレイヤーに伝えましょう。
 Feature.Build.Header.AccessSharing,アクセスとシェア
-Feature.Build.Header.AllVersions,すべてのバージョン
 Feature.Build.Header.ContentMaturity,コンテンツ成熟度
 Feature.Build.Header.CustomAnswer,カスタムの回答
 Feature.Build.Header.GameDetails,ゲームの詳細
 Feature.Build.Header.Overview,概要
-Feature.Build.Header.PastCampaigns,過去のキャンペーン
-Feature.Build.Header.UpdateDetails,アップデート内容
 Feature.Build.Label.Access,アクセス
-Feature.Build.Label.AdClicks,広告クリック数
-Feature.Build.Label.AdViews,広告表示回数
 Feature.Build.Label.AdditionalUsage,追加のビルド使用量
 Feature.Build.Label.AdditionalUsed,{USED}/{LIMIT}使用済み
 Feature.Build.Label.All,
@@ -2259,18 +2246,14 @@ Feature.Build.Label.ContentRating,コンテンツのレーティング
 Feature.Build.Label.Created,作成済み
 Feature.Build.Label.CreatedDate,{YEAR}年{MONTH}月{DAY}日
 Feature.Build.Label.CreatorHub,クリエーターハブ
-Feature.Build.Label.DateRange,{startDate}〜{endDate}
 Feature.Build.Label.Deleted,削除済み
 Feature.Build.Label.DescribeIdea,アイデアを説明してください
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,
-Feature.Build.Label.EasyPerformanceReport,わかりやすいパフォーマンスレポート
 Feature.Build.Label.Error,
-Feature.Build.Label.Free,無料
 Feature.Build.Label.FreeBuildUsage,無料のビルド使用量
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,友達限定
-Feature.Build.Label.GamePlays,プレイ数
 Feature.Build.Label.GetMoreBuildUsage,もっとビルド使用量を獲得
 Feature.Build.Label.Hi,こんにちは
 Feature.Build.Label.IconThumbnails,アイコンとサムネイル
@@ -2280,13 +2263,11 @@ Feature.Build.Label.InputNeeded,入力が必要です
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,限定
 Feature.Build.Label.Loading,読み込み中...
-Feature.Build.Label.MaximizeForGamePlays,プレイ数を最大化
 Feature.Build.Label.Models3D,3Dモデル
 Feature.Build.Label.NoLimit,制限なし
 Feature.Build.Label.NotStarted,開始していません
 Feature.Build.Label.Pending,保留中
 Feature.Build.Label.PercentUsed,{PERCENT}%使用済み
-Feature.Build.Label.PlayTime,プレイ時間
 Feature.Build.Label.PreviouslyPublished,以前に公開済み
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,
@@ -2305,7 +2286,6 @@ Feature.Build.Label.SelectOption,オプションを選択
 Feature.Build.Label.ShareAddedFriends,追加した友達とシェア
 Feature.Build.Label.Shared,シェア済み
 Feature.Build.Label.Sounds,サウンド
-Feature.Build.Label.TargetAllRobloxPlayers,すべてのRobloxプレイヤーを対象にする
 Feature.Build.Label.Thinking,考え中
 Feature.Build.Label.Title,タイトル
 Feature.Build.Label.TitleDescription,タイトルと詳細
@@ -2373,7 +2353,6 @@ Feature.Build.Label.ToolThumbnailRunning,ゲームのサムネイルを設定し
 Feature.Build.Label.UniverseNumber,ユニバース{UNIVERSE_ID}
 Feature.Build.Label.Unknown,不明
 Feature.Build.Label.UnlimitedUsed,{USED}使用済み • 制限なし
-Feature.Build.Label.UpdateTitleDesc,タイトルと詳細を更新
 Feature.Build.Label.Updated,最終更新
 Feature.Build.Label.Usage,使用量
 Feature.Build.Label.UsageUsed,{USED}使用済み
@@ -2386,7 +2365,6 @@ Feature.Build.Label.VersionTitleDesc,バージョンタイトルと詳細
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,アカウントがビルドを使用するための要件を満たしていません。
 Feature.Build.Message.AccountTooNew,お持ちのアカウントは公開するには新しすぎます。2日目になってからもう一度お試しください。
-Feature.Build.Message.AdPerformanceLoadFailed,広告のパフォーマンスを読み込めませんでした
 Feature.Build.Message.AllFriendsAdded,すべての友達をプレイテスターとして追加しました。
 Feature.Build.Message.AnswerBuildQuestion,以下のビルドの質問に答えてください。
 Feature.Build.Message.AssetDetailsUnavailable,アセットの詳細は表示できません。
@@ -2432,7 +2410,6 @@ Feature.Build.Message.PlaytestersAdded,{MAX_INVITES}人中{INVITED_COUNT}人の�
 Feature.Build.Message.PublicPublishFailed,ゲームは公開手続きが行われましたが、公開できませんでした。もう一度お試しください。
 Feature.Build.Message.PublishExpandAudience,公開してオーディエンスを拡大
 Feature.Build.Message.PublishNotReverted,公開は元に戻りませんでした。もう一度お試しください。
-Feature.Build.Message.PublishPromotionUpsell,ゲームの公開、おめでとうございます！Robloxでさらに多くのプレイヤーを獲得するために、無料プロモーションを{promotionCount}回利用できます。
 Feature.Build.Message.PublishReverted,公開を元に戻しました。
 Feature.Build.Message.QuestionnaireNeeded,このゲームはビルド外で編集されました。公開するには、コンテンツに関する質問フォームに回答してください。
 Feature.Build.Message.ReadyToPlay,あなたのゲームをRobloxでプレイするための準備完了です！
@@ -2460,7 +2437,6 @@ Feature.Build.Notification.Message.Review,結果を確認するには、ビル�
 Feature.Build.Notification.Title.Finished,ビルドが完了しました
 Feature.Build.Notification.Title.NeedInput,ビルドを続けるには入力が必要です
 Feature.Build.Title.AdCampaignActive,広告キャンペーンが有効です
-Feature.Build.Title.AdCampaignDuration,{durationDays}日間の広告キャンペーン
 Feature.Build.Title.AddFriendsToPlaytest,プレイテストに協力してもらう友達を追加してください
 Feature.Build.Title.ArchiveThisGame,このゲームをアーカイブしますか？
 Feature.Build.Title.AssetLibrary,ライブラリ
@@ -2479,22 +2455,17 @@ Feature.Build.Title.FriendsOnlyPlay,友達だけがプレイできます
 Feature.Build.Title.GameCreationDone,ゲームの作成が完了しました
 Feature.Build.Title.GamePrivate,このゲームは非公開です
 Feature.Build.Title.GenericError,
-Feature.Build.Title.GetUsers,ユーザーを獲得
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
 Feature.Build.Title.Playtesters,プレイテスター
 Feature.Build.Title.PlaytestersOnlyPlay,プレイテスターだけがプレイできます
-Feature.Build.Title.PromoteGame,ゲームを宣伝
 Feature.Build.Title.PromoteGameFree,ゲームを無料で宣伝する
 Feature.Build.Title.PushNotifications,プッシュ通知
 Feature.Build.Title.RevertLastChange,最後の変更を元に戻しますか？
 Feature.Build.Title.Tasks,タスク
 Feature.Build.Title.TurnActivity,ターン内のアクティビティ
 Feature.Build.Title.VersionHistory,バージョン履歴
-Feature.Build.Title.VersionInfo,バージョン情報
-Feature.Build.Title.VersionInformation,
+Feature.Build.Title.VersionInformation,バージョン情報
 Feature.Build.Title.VersionNumber,バージョン{VERSION}
-Feature.Build.Title.Versions,
-Feature.Build.Title.WhatsIncluded,含まれるもの
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,しない
@@ -2660,7 +2631,7 @@ Feature.Catalog.Label.Filter.Sorts,
 Feature.Catalog.Label.Filter.TotalValue,総額
 Feature.Catalog.Label.Filter.UnavailableItems,利用できないアイテム
 Feature.Catalog.Label.FreeItemConfirmation,{creatorName} さんから{itemName} を無料でゲットしますか？
-Feature.Catalog.Label.FreeUpperCase,
+Feature.Catalog.Label.FreeUpperCase,無料
 Feature.Catalog.Label.FromPrice,送信者： {itemPrice}
 Feature.Catalog.Label.FrontAccessories,正面用アクセサリ
 Feature.Catalog.Label.FullBodies,
@@ -4628,7 +4599,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,うれしいお知らせで�
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plusを取得する
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plusはこちらではご利用いただけません
-Feature.SafetyDashboard.Heading.AccountStatus.V2,アカウント状況、違反、異議申し立て
+Feature.SafetyDashboard.Heading.AccountStatus,アカウント状況
 Feature.Schools.Action.AlreadyGraduated,卒業済みです
 Feature.Schools.Action.CantFindSchool,学校が見つからない場合
 Feature.Schools.Action.Continue,
