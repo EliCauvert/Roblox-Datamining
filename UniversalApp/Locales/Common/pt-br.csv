@@ -716,7 +716,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,A CurveAnimation te
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,A CurveAnimation contém Curvas com chaves em excesso. O máximo por Curva é {maxAllowed}. Corrija a animação.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,A CurveAnimation contém mais de {maxAllowed} MarkerCurve(s). Confirme se não há mais de {maxAllowed} MarkerCurve(s) descendente(s).
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,A CurveAnimation contém uma MarkerCurve com {count} marcadores. O máximo por MarkerCurve é {maxAllowed}. Corrija a animação.
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"A animação publicada indica uma translação máxima da parte de {taggedTranslation} rebites, mas seus dados de animação resultam em {calculatedTranslation} rebites. Publique a animação novamente."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,A CurveAnimation contém um elemento filho inesperado: {childName} 
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,As cabeças dinâmicas disponíveis no mercado devem ser devidamente organizadas em gaiolas para que os vértices dos olhos e da boca na gaiola estejam alinhados com os vértices da malha. Aprimore a organização em gaiolas e seu alinhamento com a malha.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Não é possível identificar a expressão de sorriso para a cabeça dinâmica. Ajuste os pontos de referência da gaiola para que a boca corresponda ao local da boca na cabeça e confira se ela pode mostrar a expressão de sorriso.
@@ -727,6 +726,10 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"As cabeças dinâmicas dispon
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Não é possível identificar a expressão de olho direito fechado para a cabeça dinâmica. Ajuste os pontos de referência da gaiola para que o olho direito corresponda ao local do olho direito na cabeça e confira se ele pode se fechar.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Não é possível identificar a expressão de careta para a cabeça dinâmica. Ajuste os pontos de referência da gaiola para que a boca corresponda ao local da boca na cabeça e confira se ela pode mostrar a expressão de careta.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Este ativo usa mapas emissivos que só estão disponíveis para criadores no Programa de Criadores Confiáveis. Remova todo o conteúdo do mapa emissivo ou participe do programa para enviar.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,A animação publicada não tem um valor válido de translação máxima da parte. Publique a animação novamente.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,A animação publicada não tem um marcador de emote UGC válido. Publique a animação novamente.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Não foi possível calcular a translação máxima da parte a partir dos dados da animação publicada. Publique a animação novamente.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"A animação publicada indica uma translação máxima da parte de {taggedTranslation} rebites, mas seus dados de animação resultam em {calculatedTranslation} rebites. Publique a animação novamente."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,A propriedade InternalOverrideFACSData em FaceControls deve estar vazia no envio.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Foi detectado que o SCAF - Sistema de Codificação de Ações Faciais expandiu sua cabeça para {modPercent}%, mas alterar a cabeça é contra a política do mercado para animações faciais."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Foi detectado que o SCAF - Sistema de Codificação de Ações Faciais encolheu sua cabeça para {modPercent}%, mas alterar a cabeça é contra a política do mercado para animações faciais."
@@ -4445,7 +4448,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Editar nome
 Feature.Profile.Heading.EditDisplayName,Editar nome de exibição
 Feature.Profile.Heading.InsufficientFunds,Saldo insuficiente
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,Moldura do perfil
 Feature.Profile.Heading.ProfilePictureSaved,Imagem de perfil salva com sucesso
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Estatísticas

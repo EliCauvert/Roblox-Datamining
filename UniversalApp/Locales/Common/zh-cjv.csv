@@ -661,6 +661,7 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_RequiredSkinningTransfer,{asse
 Common.UGCValidation.ErrorLabel.AccessorySkinning_RigidIsSkinned,刚性配饰包含不受支持的蒙皮数据。请确保不要同时导入骨骼与网格
 Common.UGCValidation.ErrorLabel.AccessorySkinning_TransferJointWithoutAutoSkin,手柄包含接头“{jointName}”，仅当 WrapLayer.AutoSkin 设置为 EnabledOverride 时才允许这样做。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,通过蒙皮绑定到转移关节的顶点必须完全加权。
+Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,动画包套装缺少预期的动画类型：{missingAnimationTypes}。每个动画类型必须有一个 R15Anim 文件夹，其中包含与其预期完全一致的 StringValue 子项。
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,动画“{animationName}”的权重值为 {weight}，但权重必须大于 0。请修改该动画。
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,在{ParentPath}中找不到名为{ExpectedName}的所需{ExpectedClass}
@@ -709,7 +710,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation 拥�
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation 包含关键帧过多的 Curve。每个 Curve 最多只能有 {maxAllowed} 个关键帧。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation 包含超过 {maxAllowed} 个 MarkerCurve。请确保 MarkerCurve 的子对象数量不超过 {maxAllowed} 个。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation 包含带 {count} 个标记的 MarkerCurve。每个 MarkerCurve 最多只能有 {maxAllowed} 个标记。请修改该动画。
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,已发布的动画指定了部件的最大位移为 {taggedTranslation} 格，但根据动画数据计算出的位移为 {calculatedTranslation} 格。请重新发布该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation 包含不应存在的子级：{childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,商城中的动态头部必须正确置入笼架，以便笼架上的眼睛和嘴巴顶点与网格顶点对齐。请调整笼架位置，使其与网格对齐。
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,无法检测到动态头部的微笑表情。请调整嘴巴的笼架标记，使其与头部的嘴巴位置相匹配，并确保它可以显示微笑表情。
@@ -720,6 +720,10 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,商城中的动态头部必须
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,无法检测到动态头部的右眼闭合表情。请调整右眼的笼架标记，使其与头部右眼的位置相匹配，并确保其可以闭合。
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,无法检测到动态头部的皱眉表情。请调整嘴部的笼架标记，使其与头部的嘴巴位置相匹配，并确保它可以显示皱眉表情。
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,此素材使用了发光贴图，这些贴图仅限“受信任创作者计划”创作者使用。请移除所有发光贴图内容或加入该计划后再上传。
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,已发布的动画缺少有效的部件最大位移值。请重新发布该动画。
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,已发布的动画缺少有效的用户生成内容动作标记。请重新发布该动画。
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,无法根据已发布的动画数据计算部件的最大位移。请重新发布该动画。
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,已发布的动画指定了部件的最大位移为 {taggedTranslation} 格，但根据动画数据计算出的位移为 {calculatedTranslation} 格。请重新发布该动画。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,上传时，FaceControls 上的 InternalOverrideFACSData 属性必须为空。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,检测到 FACS 将你的头部扩大到 {modPercent}%，但修改头部大小违反了脸部动画的商城政策。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,检测到 FACS 将你的头部缩小到 {modPercent}%，但修改头部大小违反了脸部动画的商城政策。
@@ -2204,6 +2208,7 @@ Feature.Build.Action.Settings,
 Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,分享链接
 Feature.Build.Action.ShowMore,
+Feature.Build.Action.Stats,
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,更新评级
 Feature.Build.Action.UpdateWithChanges,应用更改
@@ -4012,6 +4017,7 @@ Feature.NotApproved.Description.AvatarBrokeRules,请更改你的虚拟形象。�
 Feature.NotApproved.Description.AvatarViolation,此为可删除的内容
 Feature.NotApproved.Description.Ban,您的账户已被停用。在 {date} 后可以对其进行重新激活。
 Feature.NotApproved.Description.Ban.V2,由于违规记录，你的帐户已被停用。你可以在 {date} 之后重新激活帐户。
+Feature.NotApproved.Description.BannedDescription.Kids,
 Feature.NotApproved.Description.Behavior,你的行为
 Feature.NotApproved.Description.BrokeRulesBanned,由于多次或严重违反规则，我们已封禁你的帐户。
 Feature.NotApproved.Description.BrokeRulesGeneric,你的行为打破了我们社区的规则。
@@ -4091,6 +4097,7 @@ Feature.NotApproved.Description.SecondChance.Details,你现在可以回到游戏
 Feature.NotApproved.Description.SecondChance.Second,鉴于你以往的表现良好，这一次你可以免于帐户封禁处罚。
 Feature.NotApproved.Description.SuspendedUntil,
 Feature.NotApproved.Description.Violation,经管理员审查，您在罗布乐思的部分行为构成了对我方{startLink}服务条款{endLink}的违反。
+Feature.NotApproved.Description.WarningDescription.Kids,
 Feature.NotApproved.Heading.AccountBanned,帐户被封禁
 Feature.NotApproved.Heading.AccountDeleted,账户已被删除
 Feature.NotApproved.Heading.AccountTerminated,帐户已被停用
@@ -4536,7 +4543,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,编辑名称
 Feature.Profile.Heading.EditDisplayName,编辑昵称
 Feature.Profile.Heading.InsufficientFunds,资金不足
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,个人资料边框
 Feature.Profile.Heading.ProfilePictureSaved,个人资料图片已成功保存
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,统计资料

@@ -698,7 +698,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,يحتوي CurveAni
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,تحتوي CurveAnimation على Curves بها عدد كبير جدًا من المفاتيح. الحد الأقصى لكل Curve هو {maxAllowed}. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,تحتوي CurveAnimation على أكثر من {maxAllowed} من عناصر MarkerCurve. يُرجى التأكد من عدم وجود أكثر من {maxAllowed} من عناصر MarkerCurve التابعة.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,تحتوي CurveAnimation على MarkerCurve به {count} من العلامات. الحد الأقصى لكل MarkerCurve هو {maxAllowed}. يُرجى إصلاح الحركة.
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,تحدد الحركة المنشورة الحد الأقصى لإزاحة الجزء وهو {taggedTranslation} من الأزرار، لكن بيانات الحركة الخاصة بها تُحسب على أنها {calculatedTranslation} من الأزرار. يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,تحتوي CurveAnimation على عنصر فرعي غير متوقع: {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,يجب أن تكون الرؤوس الديناميكية في المتجر محصورة بشكل صحيح بحيث تصطف قمم العينين والفم على القفص مع قمم الشبكة. يرجى تحسين القفص ومحاذاته مع الشبكة.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,تعذّر اكتشاف تعبير الابتسامة للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالفم لتتطابق مع موضع الفم على الرأس والتأكد من إمكانية إظهار تعبير الابتسامة.
@@ -709,6 +708,10 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,يجب أن تكون الرؤ�
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,تعذّر اكتشاف تعبير إغلاق العين اليمنى للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالعين اليمنى لتتطابق مع موضع العين اليمنى على الرأس والتأكد من إمكانية إغلاقها.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,تعذّر اكتشاف تعبير العبوس للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالفم لتتطابق مع موضع الفم على الرأس والتأكد من إمكانية إظهار تعبير العبوس.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,يستخدم هذا الأصل خرائط إضاءة ذاتية متاحة فقط للمصممين في برنامج المصممين الموثوق بهم. يُرجى إزالة محتوى خرائط الإضاءة الذاتية بالكامل أو الانضمام إلى البرنامج قبل الرفع.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,تفتقد الحركة المنشورة إلى قيمة صالحة للحد الأقصى لإزاحة الأجزاء. يُرجى إعادة نشر الحركة.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,تفتقد الحركة المنشورة إلى علامة حركة تعبيرية صالحة من تصميم المستخدم (UGC). يُرجى إعادة نشر الحركة.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,تعذَّر حساب الحد الأقصى لإزاحة الجزء من بيانات الحركة المنشورة. يُرجى إعادة نشر الحركة.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,تحدد الحركة المنشورة الحد الأقصى لإزاحة الجزء بمقدار {taggedTranslation} من الأزرار، لكن بيانات الحركة الخاصة بها تُحسب لتكون {calculatedTranslation} من الأزرار. يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,يجب أن تكون خاصية InternalOverrideFACSData في FaceControls فارغة عند الرفع.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,تم اكتشاف أن نظام FACS قام بتوسيع حجم رأسك إلى {modPercent}%، لكن تعديل الرأس مخالف لسياسة المتجر المتعلقة بحركات الوجه.
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,تم اكتشاف أن نظام FACS قام بتقليص حجم رأسك إلى {modPercent}%، لكن تغيير الرأس مخالف لسياسة المتجر المتعلقة بحركات الوجه.
@@ -4424,7 +4427,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,تحرير الاسم
 Feature.Profile.Heading.EditDisplayName,تعديل اسم العرض
 Feature.Profile.Heading.InsufficientFunds,رصيد غير كافي
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,إطار الملف الشخصي
 Feature.Profile.Heading.ProfilePictureSaved,تم حفظ صورة الملف الشخصي بنجاح
 Feature.Profile.Heading.ProfileQRCode,مشاركة رمز QR
 Feature.Profile.Heading.Statistics,الإحصائيات

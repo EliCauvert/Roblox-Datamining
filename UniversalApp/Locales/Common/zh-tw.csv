@@ -715,7 +715,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation 具�
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation 包含的 Curve 含有過多索引鍵（每個 Curve 的上限為 {maxAllowed} 個）。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation 包含 {maxAllowed} 個以上的 MarkerCurve。請確保 MarkerCurve 後代的數量不超過 {maxAllowed} 個。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation 包含一個含有 {count} 個 Marker 的 MarkerCurve（每個 MarkerCurve 的上限為 {maxAllowed} 個）。請修正此動畫。
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,已發佈的動畫指定部位的最大平移距離為 {taggedTranslation} 個磚塊，但其動畫資料計算出為 {calculatedTranslation} 個磚塊。請重新發佈此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation 包含未預期的子資料夾類型：{childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,市集上的動態頭部必須妥善置於圍籠中，以便圍籠上的眼睛和嘴巴頂點與網格頂點對齊。請改善置於圍籠及其與網格的對齊情況。
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,無法偵測到動態頭部微笑的表情。請根據嘴巴在頭部上的位置，調整嘴巴的圍籠地標，並確保嘴巴是微笑的狀態。
@@ -726,6 +725,10 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,市集上的動態頭部必須
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,無法偵測到動態頭部閉上右眼的表情。請根據右眼在頭部上的位置，調整右眼的圍籠地標，並確保眼睛是閉上的狀態。
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,無法偵測到動態頭部皺眉的表情。請根據嘴巴在頭部上的位置，調整嘴巴的圍籠地標，並確保是皺眉的表情。
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,此素材使用僅供「信任創作者計畫」中的創作者使用的發光貼圖。請移除所有發光貼圖內容，或在上傳前加入該計畫。
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,已發佈的動畫缺少有效的部位最大平移距離值。請重新發佈此動畫。
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,已發佈的動畫缺少有效的 UGC 動作標記。請重新發佈此動畫。
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,無法從已發佈的動畫資料中，計算部位的最大平移距離。請重新發佈此動畫。
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,已發佈的動畫指定部位的最大平移距離為 {taggedTranslation} 個磚塊，但其動畫資料計算出為 {calculatedTranslation} 個磚塊。請重新發佈此動畫。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls 上的 InternalOverrideFACSData 屬性在上傳時，必須為空。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,FACS 偵測到你的頭部被放大至 {modPercent}%，但更改頭部的行為違反了市集的臉部動畫政策。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,FACS 偵測到你的頭部被縮小至 {modPercent}%，但更改頭部的行為違反了市集的臉部動畫政策。
@@ -4443,7 +4446,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,編輯名稱
 Feature.Profile.Heading.EditDisplayName,編輯顯示名稱
 Feature.Profile.Heading.InsufficientFunds,資金不足
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,個人檔案外框
 Feature.Profile.Heading.ProfilePictureSaved,已成功儲存個人檔案照片
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,數據
