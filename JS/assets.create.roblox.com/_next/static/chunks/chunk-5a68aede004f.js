@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "43e2f4bd-d05d-20ab-7154-3ff6e23c8cae")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "d596cd92-0518-c0cc-27cb-26108c4baed8")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 730530, e => {
@@ -88,8 +88,8 @@
         r = e.i(260022);
     (0, r.getProductionCreatorHubUrl)("global");
     let o = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/reference/engine/classes/Player#GetJoinData"),
-        i = (0, r.resolveUrl)("developerArticleProductsInGamePurchasesUrl", "production", "global"),
-        n = (0, r.resolveUrl)("developerArticleBadgesSpecialGameAwardsUrl", "production", "global"),
+        n = (0, r.resolveUrl)("developerArticleProductsInGamePurchasesUrl", "production", "global"),
+        i = (0, r.resolveUrl)("developerArticleBadgesSpecialGameAwardsUrl", "production", "global"),
         l = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/game-passes"),
         u = (0, r.resolveUrl)("developerArticleCreateVipServerUrl", "production", "global"),
         d = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/publish-experiences-and-places#release-to-the-public");
@@ -110,9 +110,9 @@
     let g = (0, r.resolveUrl)("ugcSubscriptionTermsOfUseUrl", "production", "global"),
         P = (0, r.resolveUrl)("robloxTermsOfUseUrl", "production", "global"),
         S = (0, r.resolveUrl)("advertisingStandardsUrl", "production", "global"),
-        R = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/account-verification"),
-        T = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/avatar-creation-token");
-    e.s(["ACCOUNT_VERIFICATION_URL", 0, R, "ASSET_ACCESS_PRIVACY", 0, c, "BADGE_LEARN_MORE_URL", 0, n, "CREATOR_STORE_VERIFICATION_URL", 0, L, "DEVELOPER_PRODUCT_LEARN_MORE_URL", 0, i, "DISTRIBUTE_MODELS", 0, p, "LAUNCH_DATA_LEARN_MORE_URL", 0, o, "MARKETPLACE_POLICY", 0, b, "MOMENTS_LEARN_MORE_URL", 0, "https://about.roblox.com/newsroom/2025/09/roblox-moments-user-generated-discovery", "PASS_LEARN_MORE_URL", 0, l, "PRIVATE_SERVER_LEARN_MORE_URL", 0, u, "PUBLISHING_ADVANCE", 0, y, "RELEASE_EXPERIENCE_TO_PUBLIC_URL", 0, d, "ROBLOX_ADVERTISING_STANDARDS", 0, S, "ROBLOX_COMMUNITY_STANDARDS", 0, m, "ROBLOX_TERMS_OF_USE", 0, P, "SALE_LOCATION_LEARN_MORE_URL", 0, f, "SUBSCRIPTION_LEARN_MORE_PRICING_URL", 0, A, "SUBSCRIPTION_LEARN_MORE_PRODUCT_TYPES_URL", 0, v, "SUBSCRIPTION_LEARN_MORE_URL", 0, h, "SUBSCRIPTION_TERMS_OF_USE", 0, g, "TOKEN_LEARN_MORE_URL", 0, T], 253536);
+        T = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/production/publishing/account-verification"),
+        R = "".concat((0, r.getProductionCreatorHubUrl)("global"), "/docs/production/monetization/avatar-creation-token");
+    e.s(["ACCOUNT_VERIFICATION_URL", 0, T, "ASSET_ACCESS_PRIVACY", 0, c, "BADGE_LEARN_MORE_URL", 0, i, "CREATOR_STORE_VERIFICATION_URL", 0, L, "DEVELOPER_PRODUCT_LEARN_MORE_URL", 0, n, "DISTRIBUTE_MODELS", 0, p, "LAUNCH_DATA_LEARN_MORE_URL", 0, o, "MARKETPLACE_POLICY", 0, b, "MOMENTS_LEARN_MORE_URL", 0, "https://about.roblox.com/newsroom/2025/09/roblox-moments-user-generated-discovery", "PASS_LEARN_MORE_URL", 0, l, "PRIVATE_SERVER_LEARN_MORE_URL", 0, u, "PUBLISHING_ADVANCE", 0, y, "RELEASE_EXPERIENCE_TO_PUBLIC_URL", 0, d, "ROBLOX_ADVERTISING_STANDARDS", 0, S, "ROBLOX_COMMUNITY_STANDARDS", 0, m, "ROBLOX_TERMS_OF_USE", 0, P, "SALE_LOCATION_LEARN_MORE_URL", 0, f, "SUBSCRIPTION_LEARN_MORE_PRICING_URL", 0, A, "SUBSCRIPTION_LEARN_MORE_PRODUCT_TYPES_URL", 0, v, "SUBSCRIPTION_LEARN_MORE_URL", 0, h, "SUBSCRIPTION_TERMS_OF_USE", 0, g, "TOKEN_LEARN_MORE_URL", 0, R], 253536);
     let w = {
             [a.default.Place]: s.default.Game,
             [a.default.SharedExperiences]: s.default.Game,
@@ -163,6 +163,7 @@
             [a.default.UpcomingEvent]: s.default.Event,
             [a.default.StorePreviewVideo]: s.default.LibraryAsset,
             [a.default.GamePreviewVideo]: s.default.LibraryAsset,
+            [a.default.TextDocument]: s.default.LibraryAsset,
             [a.default.AssetPermissionRequests]: s.default.Game
         },
         k = {
@@ -278,6 +279,7 @@
             [a.default.Moments]: "Label.Moments",
             [a.default.StorePreviewVideo]: "Label.StorePreviewVideo",
             [a.default.GamePreviewVideo]: "Label.GamePreviewVideo",
+            [a.default.TextDocument]: "Label.TextDocuments",
             [a.default.AssetPermissionRequests]: "Label.Requests"
         },
         x = {
@@ -330,6 +332,7 @@
             [a.default.Moments]: "Label.Moments",
             [a.default.StorePreviewVideo]: "Label.StorePreviewVideo",
             [a.default.GamePreviewVideo]: "Label.GamePreviewVideo",
+            [a.default.TextDocument]: "Label.TextDocument",
             [a.default.AssetPermissionRequests]: "Label.Requests"
         },
         U = {
@@ -438,18 +441,18 @@
             [s.default.Alert]: null
         },
         N = {
-            [s.default.Badge]: n,
-            [s.default.DeveloperProduct]: i,
+            [s.default.Badge]: i,
+            [s.default.DeveloperProduct]: n,
             [s.default.GamePass]: l,
             [s.default.CatalogAsset]: f,
             [s.default.ExperienceSubscription]: h,
-            [s.default.AvatarCreationToken]: T,
+            [s.default.AvatarCreationToken]: R,
             [s.default.Look]: void 0
         };
     e.s(["AllSettlePromiseFailed", 0, "rejected", "AllSettlePromiseSuccess", 0, "fulfilled", "assetFullNameKeys", 0, C, "assetTypeToItemType", 0, w, "assetTypeToSingularNameKeys", 0, x, "itemFullNameKeys", 0, U, "itemTypeToCreatePath", 0, q, "itemTypeToLearnMoreUrl", 0, N, "itemTypeToNameKeys", 0, M, "itemTypeToPath", 0, k, "itemTypeToReorderPath", 0, O, "itemTypeToReturnPolicyType", 0, E, "itemTypeToSingularNameKeys", 0, G, "itemTypeToThumbnailType", 0, I, "toastDurationTime", 0, 3e3, "uninitializedUniverseId", 0, -1], 759283)
 }, 307529, e => {
     "use strict";
-    var t, a = ((t = a || {}).Place = "Place", t.MyExperiences = "MyExperiences", t.SharedExperiences = "SharedExperiences", t.TShirt = "TShirt", t.Shirt = "Shirt", t.Pants = "Pants", t.Hat = "Hat", t.HairAccessory = "HairAccessory", t.FaceAccessory = "FaceAccessory", t.NeckAccessory = "NeckAccessory", t.ShoulderAccessory = "ShoulderAccessory", t.FrontAccessory = "FrontAccessory", t.BackAccessory = "BackAccessory", t.WaistAccessory = "WaistAccessory", t.TShirtAccessory = "TShirtAccessory", t.ShirtAccessory = "ShirtAccessory", t.PantsAccessory = "PantsAccessory", t.JacketAccessory = "JacketAccessory", t.SweaterAccessory = "SweaterAccessory", t.ShortsAccessory = "ShortsAccessory", t.DressSkirtAccessory = "DressSkirtAccessory", t.EyebrowAccessory = "EyebrowAccessory", t.EyelashAccessory = "EyelashAccessory", t.FaceMakeup = "FaceMakeup", t.LipMakeup = "LipMakeup", t.EyeMakeup = "EyeMakeup", t.AvatarBackground = "AvatarBackground", t.AvatarLooks = "AvatarLooks", t.Showcase = "Showcase", t.Decal = "Decal", t.Image = "Image", t.Audio = "Audio", t.Model = "Model", t.Mesh = "Mesh", t.MeshPart = "MeshPart", t.Plugin = "Plugin", t.EmoteAnimation = "EmoteAnimation", t.Animation = "Animation", t.Video = "Video", t.Event = "Event", t.UpcomingEvent = "UpcomingEvent", t.DraftEvent = "DraftEvent", t.PastEvent = "PastEvent", t.FontFamily = "FontFamily", t.ShareLink = "ShareLink", t.Moments = "Moments", t.StorePreviewVideo = "StorePreviewVideo", t.GamePreviewVideo = "GamePreviewVideo", t.AllCatalogAsset = "All", t.AssetPermissionRequests = "AssetPermissionRequests", t);
+    var t, a = ((t = a || {}).Place = "Place", t.MyExperiences = "MyExperiences", t.SharedExperiences = "SharedExperiences", t.TShirt = "TShirt", t.Shirt = "Shirt", t.Pants = "Pants", t.Hat = "Hat", t.HairAccessory = "HairAccessory", t.FaceAccessory = "FaceAccessory", t.NeckAccessory = "NeckAccessory", t.ShoulderAccessory = "ShoulderAccessory", t.FrontAccessory = "FrontAccessory", t.BackAccessory = "BackAccessory", t.WaistAccessory = "WaistAccessory", t.TShirtAccessory = "TShirtAccessory", t.ShirtAccessory = "ShirtAccessory", t.PantsAccessory = "PantsAccessory", t.JacketAccessory = "JacketAccessory", t.SweaterAccessory = "SweaterAccessory", t.ShortsAccessory = "ShortsAccessory", t.DressSkirtAccessory = "DressSkirtAccessory", t.EyebrowAccessory = "EyebrowAccessory", t.EyelashAccessory = "EyelashAccessory", t.FaceMakeup = "FaceMakeup", t.LipMakeup = "LipMakeup", t.EyeMakeup = "EyeMakeup", t.AvatarBackground = "AvatarBackground", t.AvatarLooks = "AvatarLooks", t.Showcase = "Showcase", t.Decal = "Decal", t.Image = "Image", t.Audio = "Audio", t.Model = "Model", t.Mesh = "Mesh", t.MeshPart = "MeshPart", t.Plugin = "Plugin", t.EmoteAnimation = "EmoteAnimation", t.Animation = "Animation", t.Video = "Video", t.TextDocument = "TextDocument", t.Event = "Event", t.UpcomingEvent = "UpcomingEvent", t.DraftEvent = "DraftEvent", t.PastEvent = "PastEvent", t.FontFamily = "FontFamily", t.ShareLink = "ShareLink", t.Moments = "Moments", t.StorePreviewVideo = "StorePreviewVideo", t.GamePreviewVideo = "GamePreviewVideo", t.AllCatalogAsset = "All", t.AssetPermissionRequests = "AssetPermissionRequests", t);
     e.s(["default", 0, a])
 }, 251622, e => {
     "use strict";
@@ -484,7 +487,7 @@
 
     function r(e, t, a, s) {
         return new(a || (a = Promise))(function(r, o) {
-            function i(e) {
+            function n(e) {
                 try {
                     l(s.next(e))
                 } catch (e) {
@@ -492,7 +495,7 @@
                 }
             }
 
-            function n(e) {
+            function i(e) {
                 try {
                     l(s.throw(e))
                 } catch (e) {
@@ -504,7 +507,7 @@
                 var t;
                 e.done ? r(e.value) : ((t = e.value) instanceof a ? t : new a(function(e) {
                     e(t)
-                })).then(i, n)
+                })).then(n, i)
             }
             l((s = s.apply(e, t || [])).next())
         })
@@ -520,16 +523,16 @@
                 trys: [],
                 ops: []
             },
-            i = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype);
-        return i.next = n(0), i.throw = n(1), i.return = n(2), "function" == typeof Symbol && (i[Symbol.iterator] = function() {
+            n = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype);
+        return n.next = i(0), n.throw = i(1), n.return = i(2), "function" == typeof Symbol && (n[Symbol.iterator] = function() {
             return this
-        }), i;
+        }), n;
 
-        function n(n) {
+        function i(i) {
             return function(l) {
-                var u = [n, l];
+                var u = [i, l];
                 if (a) throw TypeError("Generator is already executing.");
-                for (; i && (i = 0, u[0] && (o = 0)), o;) try {
+                for (; n && (n = 0, u[0] && (o = 0)), o;) try {
                     if (a = 1, s && (r = 2 & u[0] ? s.return : u[0] ? s.throw || ((r = s.return) && r.call(s), 0) : s.next) && !(r = r.call(s, u[1])).done) return r;
                     switch (s = 0, r && (u = [2 & u[0], r.value]), u[0]) {
                         case 0:
@@ -583,7 +586,7 @@
     }
     "function" == typeof SuppressedError && SuppressedError;
 
-    function i(e, a) {
+    function n(e, a) {
         var s;
         return null == e ? e : {
             creator: (0, t.exists)(e, "creator") ? null == (s = e.creator) ? s : {
@@ -596,7 +599,7 @@
         }
     }
 
-    function n(e, a) {
+    function i(e, a) {
         return null == e ? e : {
             moderationState: (0, t.exists)(e, "moderationState") ? e.moderationState : void 0
         }
@@ -640,8 +643,8 @@
             displayName: (0, t.exists)(e, "displayName") ? e.displayName : void 0,
             description: (0, t.exists)(e, "description") ? e.description : void 0,
             assetType: (0, t.exists)(e, "assetType") ? e.assetType : void 0,
-            creationContext: (0, t.exists)(e, "creationContext") ? i(e.creationContext) : void 0,
-            moderationResult: (0, t.exists)(e, "moderationResult") ? n(e.moderationResult) : void 0,
+            creationContext: (0, t.exists)(e, "creationContext") ? n(e.creationContext) : void 0,
+            moderationResult: (0, t.exists)(e, "moderationResult") ? i(e.moderationResult) : void 0,
             published: (0, t.exists)(e, "published") ? e.published : void 0,
             icon: (0, t.exists)(e, "icon") ? e.icon : void 0,
             previews: (0, t.exists)(e, "previews") ? null === e.previews ? null : e.previews.map(l) : void 0,
@@ -721,8 +724,8 @@
         return null == (a = e) ? a : {
             path: (0, t.exists)(a, "path") ? a.path : void 0,
             createTime: (0, t.exists)(a, "createTime") ? null === a.createTime ? null : new Date(a.createTime) : void 0,
-            creationContext: (0, t.exists)(a, "creationContext") ? i(a.creationContext) : void 0,
-            moderationResult: (0, t.exists)(a, "moderationResult") ? n(a.moderationResult) : void 0,
+            creationContext: (0, t.exists)(a, "creationContext") ? n(a.creationContext) : void 0,
+            moderationResult: (0, t.exists)(a, "moderationResult") ? i(a.moderationResult) : void 0,
             published: (0, t.exists)(a, "published") ? a.published : void 0
         }
     }
@@ -783,7 +786,7 @@
             }
             return s(a, e), a.prototype.assetsArchiveAssetRaw = function(e, a) {
                 return r(this, void 0, void 0, function() {
-                    var s, r, i;
+                    var s, r, n;
                     return o(this, function(o) {
                         switch (o.label) {
                             case 0:
@@ -796,7 +799,7 @@
                                     query: s
                                 }, a)];
                             case 1:
-                                return i = o.sent(), [2, new t.JSONApiResponse(i, function(e) {
+                                return n = o.sent(), [2, new t.JSONApiResponse(n, function(e) {
                                     return p(e)
                                 })]
                         }
@@ -817,23 +820,23 @@
                 })
             }, a.prototype.assetsCreateAssetRaw = function(e, a) {
                 return r(this, void 0, void 0, function() {
-                    var s, r, i, n;
+                    var s, r, n, i;
                     return o(this, function(o) {
                         switch (o.label) {
                             case 0:
                                 if (null === e.fileContent || void 0 === e.fileContent) throw new t.RequiredError("fileContent", "Required parameter requestParameters.fileContent was null or undefined when calling assetsCreateAsset.");
-                                return s = {}, r = {}, i = (0, t.canConsumeForm)([{
+                                return s = {}, r = {}, n = (0, t.canConsumeForm)([{
                                     contentType: "multipart/form-data"
-                                }]) ? new FormData : new URLSearchParams, void 0 !== e.fileContent && i.append("fileContent", e.fileContent), void 0 !== e.request && i.append("request", JSON.stringify(f(e.request))), [4, this.request({
+                                }]) ? new FormData : new URLSearchParams, void 0 !== e.fileContent && n.append("fileContent", e.fileContent), void 0 !== e.request && n.append("request", JSON.stringify(f(e.request))), [4, this.request({
                                     path: "/v1/assets",
                                     schemaPath: "/v1/assets",
                                     method: "POST",
                                     headers: r,
                                     query: s,
-                                    body: i
+                                    body: n
                                 }, a)];
                             case 1:
-                                return n = o.sent(), [2, new t.JSONApiResponse(n, function(e) {
+                                return i = o.sent(), [2, new t.JSONApiResponse(i, function(e) {
                                     return L(e)
                                 })]
                         }
@@ -854,7 +857,7 @@
                 })
             }, a.prototype.assetsGetAssetRaw = function(e, a) {
                 return r(this, void 0, void 0, function() {
-                    var s, r, i;
+                    var s, r, n;
                     return o(this, function(o) {
                         switch (o.label) {
                             case 0:
@@ -867,7 +870,7 @@
                                     query: s
                                 }, a)];
                             case 1:
-                                return i = o.sent(), [2, new t.JSONApiResponse(i, function(e) {
+                                return n = o.sent(), [2, new t.JSONApiResponse(n, function(e) {
                                     return p(e)
                                 })]
                         }
@@ -888,7 +891,7 @@
                 })
             }, a.prototype.assetsRestoreAssetRaw = function(e, a) {
                 return r(this, void 0, void 0, function() {
-                    var s, r, i;
+                    var s, r, n;
                     return o(this, function(o) {
                         switch (o.label) {
                             case 0:
@@ -901,7 +904,7 @@
                                     query: s
                                 }, a)];
                             case 1:
-                                return i = o.sent(), [2, new t.JSONApiResponse(i, function(e) {
+                                return n = o.sent(), [2, new t.JSONApiResponse(n, function(e) {
                                     return p(e)
                                 })]
                         }
@@ -922,23 +925,23 @@
                 })
             }, a.prototype.assetsUpdateAssetRaw = function(e, a) {
                 return r(this, void 0, void 0, function() {
-                    var s, r, i, n;
+                    var s, r, n, i;
                     return o(this, function(o) {
                         switch (o.label) {
                             case 0:
                                 if (null === e.assetId || void 0 === e.assetId) throw new t.RequiredError("assetId", "Required parameter requestParameters.assetId was null or undefined when calling assetsUpdateAsset.");
-                                return s = {}, e.updateMask && (s.updateMask = e.updateMask.join(t.COLLECTION_FORMATS.csv)), r = {}, i = (0, t.canConsumeForm)([{
+                                return s = {}, e.updateMask && (s.updateMask = e.updateMask.join(t.COLLECTION_FORMATS.csv)), r = {}, n = (0, t.canConsumeForm)([{
                                     contentType: "multipart/form-data"
-                                }]) ? new FormData : new URLSearchParams, void 0 !== e.fileContent && i.append("fileContent", e.fileContent), void 0 !== e.request && i.append("request", JSON.stringify(f(e.request))), [4, this.request({
+                                }]) ? new FormData : new URLSearchParams, void 0 !== e.fileContent && n.append("fileContent", e.fileContent), void 0 !== e.request && n.append("request", JSON.stringify(f(e.request))), [4, this.request({
                                     path: "/v1/assets/{assetId}".replace("{".concat("assetId", "}"), encodeURIComponent(String(e.assetId))),
                                     schemaPath: "/v1/assets/{assetId}",
                                     method: "PATCH",
                                     headers: r,
                                     query: s,
-                                    body: i
+                                    body: n
                                 }, a)];
                             case 1:
-                                return n = o.sent(), [2, new t.JSONApiResponse(n, function(e) {
+                                return i = o.sent(), [2, new t.JSONApiResponse(i, function(e) {
                                     return L(e)
                                 })]
                         }
@@ -965,7 +968,7 @@
             }
             s(a, e), a.prototype.assetsGetAssetVersionRaw = function(e, a) {
                 return r(this, void 0, void 0, function() {
-                    var s, r, i;
+                    var s, r, n;
                     return o(this, function(o) {
                         switch (o.label) {
                             case 0:
@@ -979,7 +982,7 @@
                                     query: s
                                 }, a)];
                             case 1:
-                                return i = o.sent(), [2, new t.JSONApiResponse(i, function(e) {
+                                return n = o.sent(), [2, new t.JSONApiResponse(n, function(e) {
                                     return v(e)
                                 })]
                         }
@@ -1000,7 +1003,7 @@
                 })
             }, a.prototype.assetsListAssetVersionsRaw = function(e, a) {
                 return r(this, void 0, void 0, function() {
-                    var s, r, i;
+                    var s, r, n;
                     return o(this, function(o) {
                         switch (o.label) {
                             case 0:
@@ -1013,7 +1016,7 @@
                                     query: s
                                 }, a)];
                             case 1:
-                                return i = o.sent(), [2, new t.JSONApiResponse(i, function(e) {
+                                return n = o.sent(), [2, new t.JSONApiResponse(n, function(e) {
                                     return null == e ? e : {
                                         assetVersions: (0, t.exists)(e, "assetVersions") ? null === e.assetVersions ? null : e.assetVersions.map(v) : void 0,
                                         nextPageToken: (0, t.exists)(e, "nextPageToken") ? e.nextPageToken : void 0
@@ -1037,7 +1040,7 @@
                 })
             }, a.prototype.assetsRollbackAssetVersionRaw = function(e, a) {
                 return r(this, void 0, void 0, function() {
-                    var s, r, i;
+                    var s, r, n;
                     return o(this, function(o) {
                         switch (o.label) {
                             case 0:
@@ -1055,7 +1058,7 @@
                                     }(e.rollbackAssetVersionRequest)
                                 }, a)];
                             case 1:
-                                return i = o.sent(), [2, new t.JSONApiResponse(i, function(e) {
+                                return n = o.sent(), [2, new t.JSONApiResponse(n, function(e) {
                                     return v(e)
                                 })]
                         }
@@ -1081,7 +1084,7 @@
             }
             return s(a, e), a.prototype.assetsCreateAssetWithMultipartUploadRaw = function(e, a) {
                 return r(this, void 0, void 0, function() {
-                    var s, r, i;
+                    var s, r, n;
                     return o(this, function(o) {
                         switch (o.label) {
                             case 0:
@@ -1094,7 +1097,7 @@
                                     body: m(e.multipartUploadStartRequest)
                                 }, a)];
                             case 1:
-                                return i = o.sent(), [2, new t.JSONApiResponse(i, function(e) {
+                                return n = o.sent(), [2, new t.JSONApiResponse(n, function(e) {
                                     return y(e)
                                 })]
                         }
@@ -1115,7 +1118,7 @@
                 })
             }, a.prototype.assetsMultipartUploadAbortRaw = function(e, a) {
                 return r(this, void 0, void 0, function() {
-                    var s, r, i;
+                    var s, r, n;
                     return o(this, function(o) {
                         switch (o.label) {
                             case 0:
@@ -1128,7 +1131,7 @@
                                     query: s
                                 }, a)];
                             case 1:
-                                return i = o.sent(), [2, new t.VoidApiResponse(i)]
+                                return n = o.sent(), [2, new t.VoidApiResponse(n)]
                         }
                     })
                 })
@@ -1145,7 +1148,7 @@
                 })
             }, a.prototype.assetsMultipartUploadChunkCompleteRaw = function(e, a) {
                 return r(this, void 0, void 0, function() {
-                    var s, r, i;
+                    var s, r, n;
                     return o(this, function(o) {
                         switch (o.label) {
                             case 0:
@@ -1164,7 +1167,7 @@
                                     }(e.multipartUploadChunkCompleteRequest)
                                 }, a)];
                             case 1:
-                                return i = o.sent(), [2, new t.VoidApiResponse(i)]
+                                return n = o.sent(), [2, new t.VoidApiResponse(n)]
                         }
                     })
                 })
@@ -1181,7 +1184,7 @@
                 })
             }, a.prototype.assetsMultipartUploadCompleteRaw = function(e, a) {
                 return r(this, void 0, void 0, function() {
-                    var s, r, i;
+                    var s, r, n;
                     return o(this, function(o) {
                         switch (o.label) {
                             case 0:
@@ -1194,7 +1197,7 @@
                                     query: s
                                 }, a)];
                             case 1:
-                                return i = o.sent(), [2, new t.JSONApiResponse(i, function(e) {
+                                return n = o.sent(), [2, new t.JSONApiResponse(n, function(e) {
                                     return L(e)
                                 })]
                         }
@@ -1215,7 +1218,7 @@
                 })
             }, a.prototype.assetsUpdateAssetWithMultipartUploadRaw = function(e, a) {
                 return r(this, void 0, void 0, function() {
-                    var s, r, i;
+                    var s, r, n;
                     return o(this, function(o) {
                         switch (o.label) {
                             case 0:
@@ -1229,7 +1232,7 @@
                                     body: m(e.multipartUploadStartRequest)
                                 }, a)];
                             case 1:
-                                return i = o.sent(), [2, new t.JSONApiResponse(i, function(e) {
+                                return n = o.sent(), [2, new t.JSONApiResponse(n, function(e) {
                                     return y(e)
                                 })]
                         }
@@ -1256,7 +1259,7 @@
             }
             return s(a, e), a.prototype.assetsGetOperationRaw = function(e, a) {
                 return r(this, void 0, void 0, function() {
-                    var s, r, i;
+                    var s, r, n;
                     return o(this, function(o) {
                         switch (o.label) {
                             case 0:
@@ -1269,7 +1272,7 @@
                                     query: s
                                 }, a)];
                             case 1:
-                                return i = o.sent(), [2, new t.JSONApiResponse(i, function(e) {
+                                return n = o.sent(), [2, new t.JSONApiResponse(n, function(e) {
                                     return L(e)
                                 })]
                         }
@@ -1296,7 +1299,7 @@
         }
         s(a, e), a.prototype.usersListAssetQuotasRaw = function(e, a) {
             return r(this, void 0, void 0, function() {
-                var s, r, i;
+                var s, r, n;
                 return o(this, function(o) {
                     switch (o.label) {
                         case 0:
@@ -1309,7 +1312,7 @@
                                 query: s
                             }, a)];
                         case 1:
-                            return i = o.sent(), [2, new t.JSONApiResponse(i, function(e) {
+                            return n = o.sent(), [2, new t.JSONApiResponse(n, function(e) {
                                 return null == e ? e : {
                                     assetQuotas: (0, t.exists)(e, "assetQuotas") ? null === e.assetQuotas ? null : e.assetQuotas.map(h) : void 0,
                                     nextPageToken: (0, t.exists)(e, "nextPageToken") ? e.nextPageToken : void 0
@@ -1433,5 +1436,5 @@
     }, "MultipartUploadApi", 0, P, "PreviewFromJSON", 0, l, "UploadStatusApi", 0, S])
 }]);
 
-//# debugId=43e2f4bd-d05d-20ab-7154-3ff6e23c8cae
-//# sourceMappingURL=15hfckikn1yw1.js.map
+//# debugId=d596cd92-0518-c0cc-27cb-26108c4baed8
+//# sourceMappingURL=11k7r4gpowdjd.js.map

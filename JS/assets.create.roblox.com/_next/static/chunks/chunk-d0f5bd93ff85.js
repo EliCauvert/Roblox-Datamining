@@ -3,12 +3,12 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "45325629-d125-71b3-1a90-ff3217c45c95")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "7cea63a0-66dc-8c7d-c7c9-b78dd687d1f9")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 117236, e => {
     "use strict";
-    var t = e.i(536306),
+    var t = e.i(507766),
         r = e.i(959222),
         s = e.i(54842),
         n = e.i(913893),
@@ -161,6 +161,9 @@
             }, {
                 type: a.Asset.Animation,
                 nameKey: "Label.Animations"
+            }, {
+                type: a.Asset.TextDocument,
+                nameKey: "Label.Text"
             }]
         }, {
             type: a.Asset.Moments,
@@ -1133,5 +1136,5 @@
     }])
 }]);
 
-//# debugId=45325629-d125-71b3-1a90-ff3217c45c95
-//# sourceMappingURL=2j6rgjlpnv5qa.js.map
+//# debugId=7cea63a0-66dc-8c7d-c7c9-b78dd687d1f9
+//# sourceMappingURL=0fqq2ez-1kwyy.js.map

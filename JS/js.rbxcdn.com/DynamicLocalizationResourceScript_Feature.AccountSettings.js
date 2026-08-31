@@ -1885,6 +1885,19 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Heading.IARCRatingSetting": "Content maturity setting",
     "Label.RobuxTransferLimits": "robux transfer limits",
     "Description.ExperienceChatOnlyDisclaimer": "This setting only applies to experience chat, not to chat features added by the creator of a game",
-    "Description.DirectChatOnlyDisclaimer": "This setting only applies to direct chat, not to chat features added by the creator of a game"
+    "Description.DirectChatOnlyDisclaimer": "This setting only applies to direct chat, not to chat features added by the creator of a game",
+    "Message.RobuxTransferLimitExceedRangeError": "Please input a number between 0 and {maxTransferLimit}",
+    "Heading.TransferLimits": "Transfer limits",
+    "Description.ParentSide.RobuxTransferLimits": "Set a limit for how much Robux your child can transfer per day and per month, up to the maximum allowed by Roblox. Roblox provides a higher maximum if your child has secured their account with two-step verification.",
+    "Label.MaximumDailyRobuxTransferLimit": "Maximum daily limit: {maxTransferLimit} Robux",
+    "Label.MaximumMonthlyRobuxTransferLimit": "Maximum monthly limit: {maxTransferLimit} Robux",
+    "Message.RobuxTransferLimitOrderingError": "The daily limit cannot be higher than the monthly limit.",
+    "Label.DailyRobuxTransferLimitValue": "{limit} daily",
+    "Label.MonthlyRobuxTransferLimitValue": "{limit} monthly",
+    "Action.Label.AskParentForHigherTransferLimits": "Ask parent for higher limits",
+    "Description.AskParentForHigherTransferLimits": "Ask your parent to approve a higher limit.",
+    "Label.WaitingForParentToChangeTransferLimits": "Waiting for your parent",
+    "Description.WaitingForParentToChangeTransferLimits": "You asked your parent to change your transfer limits.",
+    "Heading.RobuxTransferLimits": "Robux transfer limits"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSettings");

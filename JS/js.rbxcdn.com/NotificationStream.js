@@ -574,11 +574,11 @@
                         S = b.notificationSourceType;
 
                     function N(e, t) {
-                        return U.apply(this, arguments)
+                        return T.apply(this, arguments)
                     }
 
-                    function U() {
-                        return (U = m(regeneratorRuntime.mark((function e(t, i) {
+                    function T() {
+                        return (T = m(regeneratorRuntime.mark((function e(t, i) {
                             var n, a, o, c;
                             return regeneratorRuntime.wrap((function(e) {
                                 for (;;) switch (e.prev = e.next) {
@@ -1340,6 +1340,9 @@
                                                 d.sendEventWithTarget(d.eventNames.notificationStream.follow, d.context.click, v()), i.followGameAsync(c.library.currentUserId, p.universeId).then((function() {
                                                     p.isUnfollowed = !1, p.updateMessage || o.getGameUpdatesAsync([p.universeId], c.library.gameUpdateModels, null), b()
                                                 }))
+                                            },
+                                            onMetaActionsOpenChange: function(e) {
+                                                d.sendEventWithTarget(e ? d.eventNames.notificationStream.openMetaActions : d.eventNames.notificationStream.closeMetaActions, d.context.click, v())
                                             }
                                         };
                                     c.$watch((function() {
@@ -2629,7 +2632,7 @@
             a.A, o.A
         }()
 }();
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/af28eadb8a5be05dda2aac639b7b4a69-notificationStream.bundle.min.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/931aee09cc129c27616ad52e7ac47b27-notificationStream.bundle.min.js.map
 
 /* Bundle detector */
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("NotificationStream");

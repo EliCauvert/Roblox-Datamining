@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "76cda4b8-acb6-699d-05b7-2e3247e30ac6")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "042346d8-27ca-4b85-a726-c0cb0c596cb1")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 656350, t => {
@@ -75,7 +75,7 @@
         writable: !0,
         configurable: !0
     });
-    var S, T, E, q, k, A, C, I, j, L, O, N, _, D, M, U, B, V, F, G, W, H, K, J, z, X, Q, $, Z, Y, ee, et, en, er, ei, ea, eo, es, eu, ec, el, ed, ef, eh, ep, ev, em, ey, eg, eb, ew, ex, eP, eR, eS, eT, eE, eq, ek, eA, eC, eI, ej, eL, eO, eN, e_, eD, eM, eU, eB, eV, eF, eG, eW, eH, eK, eJ, ez, eX, eQ, e$, eZ, eY, e0, e1, e2, e4, e3, e6, e8, e5, e9, e7, te, tt, tn, tr, ti, ta, to, ts, tu, tc, tl, td, tf, th, tp, tv, tm, ty, tg, tb, tw, tx, tP, tR, tS, tT, tE, tq, tk, tA, tC, tI, tj, tL, tO, tN, t_, tD, tM, tU, tB, tV, tF, tG, tW, tH, tK, tJ, tz, tX, tQ, t$, tZ, tY, t0, t1, t2, t4, t3, t6, t8, t5, t9, t7, ne, nt, nn, nr, ni, na, no, ns, nu, nc, nl, nd, nf, nh, np, nv, nm, ny, ng, nb, nw, nx, nP, nR, nS, nT, nE, nq, nk, nA, nC, nI, nj, nL, nO, nN, n_, nD, nM, nU, nB, nV, nF, nG, nW, nH, nK, nJ, nz, nX, nQ, n$, nZ, nY, n0, n1, n2, n4, n3, n6, n8, n5, n9, n7, re, rt, rn, rr, ri, ra, ro, rs, ru, rc, rl, rd, rf, rh, rp, rv, rm, ry, rg, rb, rw, rx, rP, rR, rS, rT, rE, rq, rk, rA, rC, rI, rj, rL, rO, rN, r_, rD, rM, rU, rB, rV, rF, rG, rW, rH, rK, rJ, rz, rX, rQ, r$, rZ, rY, r0, r1, r2, r4, r3, r6, r8, r5, r9, r7, ie, it, ir, ii, ia, io, is, iu, ic, il, id, ih, ip, iv, im = t.i(929036),
+    var S, T, E, q, k, A, C, I, j, L, O, N, D, _, M, U, B, V, F, G, W, H, K, J, z, X, Q, $, Z, Y, ee, et, en, er, ei, ea, eo, es, eu, ec, el, ed, ef, eh, ep, ev, em, ey, eg, eb, ew, ex, eP, eR, eS, eT, eE, eq, ek, eA, eC, eI, ej, eL, eO, eN, eD, e_, eM, eU, eB, eV, eF, eG, eW, eH, eK, eJ, ez, eX, eQ, e$, eZ, eY, e0, e1, e2, e4, e3, e6, e8, e5, e9, e7, te, tt, tn, tr, ti, ta, to, ts, tu, tc, tl, td, tf, th, tp, tv, tm, ty, tg, tb, tw, tx, tP, tR, tS, tT, tE, tq, tk, tA, tC, tI, tj, tL, tO, tN, tD, t_, tM, tU, tB, tV, tF, tG, tW, tH, tK, tJ, tz, tX, tQ, t$, tZ, tY, t0, t1, t2, t4, t3, t6, t8, t5, t9, t7, ne, nt, nn, nr, ni, na, no, ns, nu, nc, nl, nd, nf, nh, np, nv, nm, ny, ng, nb, nw, nx, nP, nR, nS, nT, nE, nq, nk, nA, nC, nI, nj, nL, nO, nN, nD, n_, nM, nU, nB, nV, nF, nG, nW, nH, nK, nJ, nz, nX, nQ, n$, nZ, nY, n0, n1, n2, n4, n3, n6, n8, n5, n9, n7, re, rt, rn, rr, ri, ra, ro, rs, ru, rc, rl, rd, rf, rh, rp, rv, rm, ry, rg, rb, rw, rx, rP, rR, rS, rT, rE, rq, rk, rA, rC, rI, rj, rL, rO, rN, rD, r_, rM, rU, rB, rV, rF, rG, rW, rH, rK, rJ, rz, rX, rQ, r$, rZ, rY, r0, r1, r2, r4, r3, r6, r8, r5, r9, r7, ie, it, ir, ii, ia, io, is, iu, ic, il, id, ih, ip, iv, im = t.i(929036),
         iy = {};
 
     function ig() {
@@ -129,7 +129,7 @@
     var iS = {};
 
     function iT() {
-        return _ ? N : (_ = 1, N = function(t, n) {
+        return D ? N : (D = 1, N = function(t, n) {
             return {
                 enumerable: !(1 & t),
                 configurable: !(2 & t),
@@ -140,13 +140,13 @@
     }
 
     function iE() {
-        if (M) return D;
+        if (M) return _;
         M = 1;
         var t = iP(),
             n = Function.prototype,
             r = n.call,
             i = t && n.bind.bind(r, r);
-        return D = t ? i : function(t) {
+        return _ = t ? i : function(t) {
             return function() {
                 return r.apply(t, arguments)
             }
@@ -241,7 +241,7 @@
         return en ? et : (en = 1, et = iE()({}.isPrototypeOf))
     }
 
-    function i_() {
+    function iD() {
         if (ei) return er;
         ei = 1;
         var t = ig().navigator,
@@ -249,11 +249,11 @@
         return er = n ? String(n) : ""
     }
 
-    function iD() {
+    function i_() {
         if (eo) return ea;
         eo = 1;
         var t, n, r = ig(),
-            i = i_(),
+            i = iD(),
             a = r.process,
             o = r.Deno,
             s = a && a.versions || o && o.version,
@@ -264,7 +264,7 @@
     function iM() {
         if (eu) return es;
         eu = 1;
-        var t = iD(),
+        var t = i_(),
             n = iw(),
             r = ig().String;
         return es = !!Object.getOwnPropertySymbols && !n(function() {
@@ -435,8 +435,8 @@
         if (eU) return eM;
         eU = 1;
         var t = function() {
-                if (eD) return e_;
-                eD = 1;
+                if (e_) return eD;
+                e_ = 1;
                 var t = iR(),
                     n = iL(),
                     r = iB(),
@@ -457,7 +457,7 @@
                     o = iZ(),
                     s = TypeError,
                     u = o("toPrimitive");
-                return e_ = function(o, c) {
+                return eD = function(o, c) {
                     if (!n(o) || r(o)) return o;
                     var l, d = i(o, u);
                     if (d) {
@@ -1001,8 +1001,8 @@
     }
 
     function ab() {
-        if (t_) return tN;
-        t_ = 1;
+        if (tD) return tN;
+        tD = 1;
         var t = i6();
         return tN = function() {
             var n = t(this),
@@ -1084,7 +1084,7 @@
             a = ag(),
             o = ab(),
             s = function() {
-                if (tM) return tD;
+                if (tM) return t_;
                 tM = 1;
                 var t = iw(),
                     n = ig().RegExp,
@@ -1095,7 +1095,7 @@
                     i = r || t(function() {
                         return !n("a", "y").sticky
                     });
-                return tD = {
+                return t_ = {
                     BROKEN_CARET: r || t(function() {
                         var t = n("^r", "gy");
                         return t.lastIndex = 2, null !== t.exec("str")
@@ -1367,8 +1367,8 @@
     }
 
     function aL() {
-        if (n_) return nN;
-        n_ = 1;
+        if (nD) return nN;
+        nD = 1;
         var t = ay(),
             n = iG(),
             r = iA(),
@@ -1400,7 +1400,7 @@
             o = ac(),
             s = iN(),
             u = function() {
-                if (nM) return nD;
+                if (nM) return n_;
                 nM = 1;
                 var t = iR(),
                     n = iF(),
@@ -1408,7 +1408,7 @@
                     i = iV(),
                     a = aL(),
                     o = TypeError;
-                return nD = function(s, u) {
+                return n_ = function(s, u) {
                     var c = arguments.length < 2 ? a(s) : u;
                     if (n(c)) return r(t(c, s));
                     throw new o(i(s) + " is not iterable")
@@ -1486,7 +1486,7 @@
         return nH ? nW : (nH = 1, nW = ig())
     }
 
-    function a_() {
+    function aD() {
         if (nz) return nJ;
         nz = 1;
         var t = ag();
@@ -1495,13 +1495,13 @@
         }
     }
 
-    function aD() {
+    function a_() {
         if (nQ) return nX;
         nQ = 1;
         var t = ix(),
             n = iw(),
             r = i6(),
-            i = a_(),
+            i = aD(),
             a = Error.prototype.toString;
         return nX = n(function() {
             if (t) {
@@ -1678,7 +1678,7 @@
         return ro = function(i, f, p, S, T, E, q) {
             o(p, f, S);
             var k, A, C, I = function(t) {
-                    if (t === T && _) return _;
+                    if (t === T && D) return D;
                     if (!g && t && t in O) return O[t];
                     switch (t) {
                         case w:
@@ -1696,14 +1696,14 @@
                 L = !1,
                 O = i.prototype,
                 N = O[b] || O["@@iterator"] || T && O[T],
-                _ = !g && N || I(T),
-                D = "Array" === f && O.entries || N;
-            if (D && (k = s(D.call(new i))) !== Object.prototype && k.next && (!r && s(k) !== y && (u ? u(k, y) : a(k[b]) || d(k, b, R)), c(k, j, !0, !0), r && (h[j] = R)), v && T === x && N && N.name !== x && (!r && m ? l(O, "name", x) : (L = !0, _ = function() {
+                D = !g && N || I(T),
+                _ = "Array" === f && O.entries || N;
+            if (_ && (k = s(_.call(new i))) !== Object.prototype && k.next && (!r && s(k) !== y && (u ? u(k, y) : a(k[b]) || d(k, b, R)), c(k, j, !0, !0), r && (h[j] = R)), v && T === x && N && N.name !== x && (!r && m ? l(O, "name", x) : (L = !0, D = function() {
                     return n(N, this)
                 })), T)
                 if (A = {
                         values: I(x),
-                        keys: E ? _ : I(w),
+                        keys: E ? D : I(w),
                         entries: I(P)
                     }, q)
                     for (C in A) !g && !L && C in O || d(O, C, A[C]);
@@ -1712,9 +1712,9 @@
                     proto: !0,
                     forced: g || L
                 }, A);
-            return (!r || q) && O[b] !== _ && d(O, b, _, {
+            return (!r || q) && O[b] !== D && d(O, b, D, {
                 name: T
-            }), h[f] = _, A
+            }), h[f] = D, A
         }
     }
 
@@ -1885,13 +1885,13 @@
                     q && (L = !!~R(g, "u") || !!~R(g, "v"), u.lastIndex = 0);
                     for (var k = []; null !== (N = y(u, f)) && (P(k, N), q);) "" === d(N[0]) && (u.lastIndex = h(f, l(u.lastIndex), L));
                     for (var A = "", C = 0, I = 0; I < k.length; I++) {
-                        for (var j, L, O, N = k[I], _ = d(N[0]), D = b(w(c(N.index), f.length), 0), M = [], U = 1; U < N.length; U++) P(M, void 0 === (j = N[U]) ? j : String(j));
+                        for (var j, L, O, N = k[I], D = d(N[0]), _ = b(w(c(N.index), f.length), 0), M = [], U = 1; U < N.length; U++) P(M, void 0 === (j = N[U]) ? j : String(j));
                         var B = N.groups;
                         if (p) {
-                            var V = x([_], M, D, f);
+                            var V = x([D], M, _, f);
                             void 0 !== B && P(V, B), O = d(t(r, void 0, V))
-                        } else O = v(_, f, D, M, B, r);
-                        D >= C && (A += S(f, C, D) + O, C = D + _.length)
+                        } else O = v(D, f, _, M, B, r);
+                        _ >= C && (A += S(f, C, _) + O, C = _ + D.length)
                     }
                     return A + S(f, C)
                 }]
@@ -2346,8 +2346,8 @@
         var t = aP(),
             n = aQ(),
             r = function() {
-                if (r_) return rN;
-                r_ = 1;
+                if (rD) return rN;
+                rD = 1;
                 var t = aa();
                 return rN = function(n, r, i) {
                     for (var a in r) t(n, a, r[a], i);
@@ -2361,14 +2361,14 @@
             u = aF(),
             c = aG(),
             l = function() {
-                if (rM) return rD;
+                if (rM) return r_;
                 rM = 1;
                 var t = iO(),
                     n = aQ(),
                     r = iZ(),
                     i = ix(),
                     a = r("species");
-                return rD = function(r) {
+                return r_ = function(r) {
                     var o = t(r);
                     i && o && !o[a] && n(o, a, {
                         configurable: !0,
@@ -2483,7 +2483,7 @@
         if (rK) return rH;
         rK = 1;
         var t = ig(),
-            n = i_(),
+            n = iD(),
             r = iq(),
             i = function(t) {
                 return n.slice(0, t.length) === t
@@ -2673,7 +2673,7 @@
         iu = 1;
         var t = ig(),
             n = iw(),
-            r = iD(),
+            r = i_(),
             i = aZ(),
             a = t.structuredClone;
         return is = !!a && !n(function() {
@@ -2747,7 +2747,7 @@
         if (!n$) {
             n$ = 1;
             var t = aa(),
-                n = aD(),
+                n = a_(),
                 r = Error.prototype;
             r.toString !== n && t(r, "toString", n)
         }
@@ -2852,8 +2852,8 @@
                 l = iQ(),
                 d = aJ(),
                 f = i6(),
-                h = aD(),
-                p = a_(),
+                h = a_(),
+                p = aD(),
                 v = a0(),
                 m = a1(),
                 y = ar(),
@@ -2913,11 +2913,11 @@
                 N = O || i(function() {
                     return T.toString !== h || "2: 1" !== String(new R(1, 2))
                 }),
-                _ = O || i(function() {
+                D = O || i(function() {
                     return 25 !== new R(1, "DataCloneError").code
                 }),
-                D = O || 25 !== R[x] || 25 !== S[x],
-                M = b ? N || _ || D : O;
+                _ = O || 25 !== R[x] || 25 !== S[x],
+                M = b ? N || D || _ : O;
             t({
                 global: !0,
                 constructor: !0,
@@ -2927,7 +2927,7 @@
             });
             var U = n(w),
                 B = U.prototype;
-            for (var V in N && (b || R === U) && u(B, "toString", h), _ && g && R === U && c(B, "code", j(function() {
+            for (var V in N && (b || R === U) && u(B, "toString", h), D && g && R === U && c(B, "code", j(function() {
                     return A(f(this).name)
                 })), v)
                 if (l(v, V)) {
@@ -2948,7 +2948,7 @@
                 o = iQ(),
                 s = aJ(),
                 u = az(),
-                c = a_(),
+                c = aD(),
                 l = a0(),
                 d = a1(),
                 f = ix(),
@@ -3153,8 +3153,8 @@
                 L = r.PerformanceMark,
                 O = i("DOMException"),
                 N = P.Map,
-                _ = P.has,
-                D = P.get,
+                D = P.has,
+                _ = P.get,
                 M = P.set,
                 U = R.Set,
                 B = R.add,
@@ -3220,7 +3220,7 @@
                     return t && t.items && t.files ? t : null
                 },
                 es = function(t, n, i) {
-                    if (_(n, t)) return D(n, t);
+                    if (D(n, t)) return _(n, t);
                     if ("SharedArrayBuffer" === (i || v(t))) a = en ? en(t) : t;
                     else {
                         var a, o, s, c, l, d, f = r.DataView;
@@ -3244,7 +3244,7 @@
                 ec = function(t, n) {
                     if (f(t) && er("Symbol"), !d(t)) return t;
                     if (n) {
-                        if (_(n, t)) return D(n, t)
+                        if (D(n, t)) return _(n, t)
                     } else n = new N;
                     var a, o, s, c, l, h, p, w, P = v(t);
                     switch (P) {
@@ -3444,7 +3444,7 @@
                         G(f, p(t))
                     });
                     for (var m = 0, y = b(f), g = new U; m < y;) {
-                        if (a = v(i = f[m++]), s = void 0, "ArrayBuffer" === a ? V(g, i) : _(n, i)) throw new O("Duplicate transferable", X);
+                        if (a = v(i = f[m++]), s = void 0, "ArrayBuffer" === a ? V(g, i) : D(n, i)) throw new O("Duplicate transferable", X);
                         if ("ArrayBuffer" === a) {
                             B(g, i);
                             continue
@@ -3825,9 +3825,9 @@
         oO = t.i(79187);
     t.i(550742);
     var oN = t.i(540513),
-        o_ = t.i(507786);
+        oD = t.i(507786);
     t.i(865800);
-    var oD = t.i(780247),
+    var o_ = t.i(780247),
         oM = t.i(571957),
         oU = t.i(33106),
         oB = t.i(379666),
@@ -3884,7 +3884,7 @@
         }
     }).exports = oz, oz.through = oz;
     var oX = Object.prototype.toString,
-        oQ = "function" == typeof o_.Buffer.alloc && "function" == typeof o_.Buffer.allocUnsafe && "function" == typeof o_.Buffer.from,
+        oQ = "function" == typeof oD.Buffer.alloc && "function" == typeof oD.Buffer.allocUnsafe && "function" == typeof oD.Buffer.from,
         o$ = {},
         oZ = Array.isArray || function(t) {
             return "[object Array]" == Object.prototype.toString.call(t)
@@ -4483,14 +4483,14 @@
         null !== n.writechunk && n.writecb && !n.transforming ? (n.transforming = !0, this._transform(n.writechunk, n.writeencoding, n.afterTransform)) : n.needTransform = !0
     }, oY.inherits = o4, oY.inherits(sR, sx), sR.prototype._transform = function(t, n, r) {
         r(null, t)
-    }, sN = o$, s_ = oM.default, (sN = ({
+    }, sN = o$, sD = oM.default, (sN = ({
         get exports() {
             return o$
         },
         set exports(e) {
             o$ = e
         }
-    }).exports = so).Stream = s_, sN.Readable = sN, sN.Writable = sg(), sN.Duplex = sy(), sN.Transform = sx, sN.PassThrough = sR;
+    }).exports = so).Stream = sD, sN.Readable = sN, sN.Writable = sg(), sN.Duplex = sy(), sN.Transform = sx, sN.PassThrough = sR;
     var sS = function(t, n, r) {
             if ("number" == typeof t) throw TypeError('"value" argument must not be a number');
             return "ArrayBuffer" === oX.call(t).slice(8, -1) ? function(t, n, r) {
@@ -4499,11 +4499,11 @@
                 if (i < 0) throw RangeError("'offset' is out of bounds");
                 if (void 0 === r) r = i;
                 else if ((r >>>= 0) > i) throw RangeError("'length' is out of bounds");
-                return oQ ? o_.Buffer.from(t.slice(n, n + r)) : new o_.Buffer(new Uint8Array(t.slice(n, n + r)))
+                return oQ ? oD.Buffer.from(t.slice(n, n + r)) : new oD.Buffer(new Uint8Array(t.slice(n, n + r)))
             }(t, n, r) : "string" == typeof t ? function(t, n) {
-                if ("string" == typeof n && "" !== n || (n = "utf8"), !o_.Buffer.isEncoding(n)) throw TypeError('"encoding" must be a valid string encoding');
-                return oQ ? o_.Buffer.from(t, n) : new o_.Buffer(t, n)
-            }(t, n) : oQ ? o_.Buffer.from(t) : new o_.Buffer(t)
+                if ("string" == typeof n && "" !== n || (n = "utf8"), !oD.Buffer.isEncoding(n)) throw TypeError('"encoding" must be a valid string encoding');
+                return oQ ? oD.Buffer.from(t, n) : new oD.Buffer(t, n)
+            }(t, n) : oQ ? oD.Buffer.from(t) : new oD.Buffer(t)
         },
         sT = o$.Transform;
     o4(sq, sT);
@@ -4539,7 +4539,7 @@
     sq.prototype._transform = function(t, n, r) {
         var i = 0,
             a = 0;
-        for (this._prev && (t = o_.Buffer.concat([this._prev, t]), i = this._prev.length - 1, a = this._offset, this._prev = null, this._offset = 0); i < t.length; i++) {
+        for (this._prev && (t = oD.Buffer.concat([this._prev, t]), i = this._prev.length - 1, a = this._offset, this._prev = null, this._offset = 0); i < t.length; i++) {
             var o = t[i];
             if (this._last.push(o), this._last.length > 9 && this._last.shift(), this.raw) {
                 var s = this._testRaw(t, a, i);
@@ -4567,7 +4567,7 @@
         "text" === this.state && this._pushState("text"), this.push(null), t()
     }, sq.prototype._pushState = function(t) {
         if (0 !== this.buffers.length) {
-            var n = o_.Buffer.concat(this.buffers);
+            var n = oD.Buffer.concat(this.buffers);
             this.buffers = [], this.push([t, n])
         }
     }, sq.prototype._getChar = function(t) {
@@ -4589,11 +4589,11 @@
         var i = this.raw;
         if (sk(this._last, i)) {
             this.buffers.push(t.slice(n, r + 1));
-            var a = (t = o_.Buffer.concat(this.buffers)).length - i.length;
+            var a = (t = oD.Buffer.concat(this.buffers)).length - i.length;
             return [t.slice(0, a), t.slice(a)]
         }
     };
-    var sI, sj, sL, sO, sN, s_, sD, sM, sU, sB = {},
+    var sI, sj, sL, sO, sN, sD, s_, sM, sU, sB = {},
         sV = {},
         sF = {},
         sG = {
@@ -4606,7 +4606,7 @@
         };
 
     function sW() {
-        return sD || (sD = 1, void 0 !== p.default && p.default.version && 0 !== p.default.version.indexOf("v0.") && (0 !== p.default.version.indexOf("v1.") || 0 === p.default.version.indexOf("v1.8.")) ? sG.exports = p.default : sG.exports = {
+        return s_ || (s_ = 1, void 0 !== p.default && p.default.version && 0 !== p.default.version.indexOf("v0.") && (0 !== p.default.version.indexOf("v1.") || 0 === p.default.version.indexOf("v1.8.")) ? sG.exports = p.default : sG.exports = {
             nextTick: function(t, n, r, i) {
                 if ("function" != typeof t) throw TypeError('"callback" argument must be a function');
                 var a, o, s = arguments.length;
@@ -5575,9 +5575,9 @@
         },
         uO = new Date,
         uN = function(t, n) {
-            ub || (ub = n, uw = t, ux = new Date, uM(removeEventListener), u_())
+            ub || (ub = n, uw = t, ux = new Date, uM(removeEventListener), uD())
         },
-        u_ = function() {
+        uD = function() {
             if (uw >= 0 && uw < ux - uO) {
                 var t = {
                     entryType: "first-input",
@@ -5592,7 +5592,7 @@
                 }), uP = []
             }
         },
-        uD = function(t) {
+        u_ = function(t) {
             if (t.cancelable) {
                 var n, r, i, a = (t.timeStamp > 1e12 ? new Date : performance.now()) - t.timeStamp;
                 "pointerdown" == t.type ? (n = function() {
@@ -5606,7 +5606,7 @@
         },
         uM = function(t) {
             ["mousedown", "keydown", "touchstart", "pointerdown"].forEach(function(n) {
-                return t(n, uD, uL)
+                return t(n, u_, uL)
             })
         };
     let uU = null;
@@ -9986,31 +9986,41 @@
         cI = t.i(964956),
         cj = t.i(109182),
         cL = t.i(157700),
-        cO = t.i(239328),
-        cN = t.i(954119),
+        cO = t.i(523426),
+        cN = t.i(239328),
+        cD = t.i(954119),
         c_ = t.i(134731),
-        cD = t.i(165136),
-        cM = t.i(779433),
-        cU = t.i(428993),
-        cB = t.i(9436),
-        cV = t.i(846130),
-        cF = t.i(360894),
-        cG = t.i(704211),
-        cW = t.i(92174),
-        cH = t.i(926415),
-        cK = t.i(242002);
-    let cJ = (0, cL.defineFlag)({
+        cM = t.i(165136),
+        cU = t.i(779433),
+        cB = t.i(428993),
+        cV = t.i(9436),
+        cF = t.i(846130),
+        cG = t.i(360894),
+        cW = t.i(704211),
+        cH = t.i(92174),
+        cK = t.i(926415),
+        cJ = t.i(242002);
+    let cz = (0, cL.defineFlag)({
         namespace: "groups",
         name: "isUnifiedUiEnabled",
         defaultValue: !1
     });
-    var cz = t.i(967230),
-        cX = t.i(82899),
-        cQ = t.i(477797),
-        c$ = t.i(100022),
-        cZ = t.i(494192);
-    let cY = [{
-        flag: cO.enableUgcFolders,
+    var cX = t.i(967230),
+        cQ = t.i(82899),
+        c$ = t.i(477797),
+        cZ = t.i(100022),
+        cY = t.i(494192);
+    let c0 = [{
+        flag: cO.enhancedAntiCheatAccess,
+        metadata: {
+            namespace: "anti-cheat",
+            name: "enhancedAntiCheatAccess",
+            defaultValue: !1,
+            valueType: "boolean",
+            contextType: "universe"
+        }
+    }, {
+        flag: cN.enableUgcFolders,
         metadata: {
             namespace: "avatar-marketplace",
             name: "enableUGCFolders",
@@ -10019,7 +10029,7 @@
             contextType: "static"
         }
     }, {
-        flag: cO.enableTaxonomyBasedCreatorDashboard,
+        flag: cN.enableTaxonomyBasedCreatorDashboard,
         metadata: {
             namespace: "avatar-marketplace",
             name: "enableTaxonomyBasedCreatorDashboard",
@@ -10028,7 +10038,7 @@
             contextType: "static"
         }
     }, {
-        flag: cO.enableCreatorShowcases,
+        flag: cN.enableCreatorShowcases,
         metadata: {
             namespace: "avatar-marketplace",
             name: "enableCreatorShowcases",
@@ -10037,7 +10047,7 @@
             contextType: "static"
         }
     }, {
-        flag: cO.isAutoPublishPreferencesEnabled,
+        flag: cN.isAutoPublishPreferencesEnabled,
         metadata: {
             namespace: "avatar-marketplace",
             name: "isAutoPublishPreferencesEnabled",
@@ -10046,7 +10056,16 @@
             contextType: "static"
         }
     }, {
-        flag: cN.creatorAnalytics,
+        flag: cN.enableGetItemCollectibleDetails,
+        metadata: {
+            namespace: "avatar-marketplace",
+            name: "enableGetItemCollectibleDetails",
+            defaultValue: !1,
+            valueType: "boolean",
+            contextType: "static"
+        }
+    }, {
+        flag: cD.creatorAnalytics,
         metadata: {
             namespace: "communities",
             name: "CreatorAnalytics",
@@ -10109,7 +10128,7 @@
             contextType: "static"
         }
     }, {
-        flag: cD.isExperiencePreviewEnabled,
+        flag: cM.isExperiencePreviewEnabled,
         metadata: {
             namespace: "content-licensing",
             name: "isExperiencePreviewEnabled",
@@ -10118,7 +10137,7 @@
             contextType: "universe"
         }
     }, {
-        flag: cD.enableIpPlatformLicenseRecommendations,
+        flag: cM.enableIpPlatformLicenseRecommendations,
         metadata: {
             namespace: "content-licensing",
             name: "enableIpPlatformLicenseRecommendations",
@@ -10127,7 +10146,7 @@
             contextType: "static"
         }
     }, {
-        flag: cD.isIpLicensingEarningsEnabled,
+        flag: cM.isIpLicensingEarningsEnabled,
         metadata: {
             namespace: "content-licensing",
             name: "isIpLicensingEarningsEnabled",
@@ -10136,7 +10155,7 @@
             contextType: "static"
         }
     }, {
-        flag: cD.isImageAttachmentEnabledInLicenseApplication,
+        flag: cM.isImageAttachmentEnabledInLicenseApplication,
         metadata: {
             namespace: "content-licensing",
             name: "isImageAttachmentEnabledInLicenseApplication",
@@ -10145,7 +10164,7 @@
             contextType: "static"
         }
     }, {
-        flag: cD.isShowcaseExperiencesEnabled,
+        flag: cM.isShowcaseExperiencesEnabled,
         metadata: {
             namespace: "content-licensing",
             name: "isShowcaseExperiencesEnabled",
@@ -10154,7 +10173,7 @@
             contextType: "static"
         }
     }, {
-        flag: cD.isIgnoreMatchEnabled,
+        flag: cM.isIgnoreMatchEnabled,
         metadata: {
             namespace: "content-licensing",
             name: "isIgnoreMatchEnabled",
@@ -10163,7 +10182,7 @@
             contextType: "static"
         }
     }, {
-        flag: cD.isAvatarItemLicensingEnabled,
+        flag: cM.isAvatarItemLicensingEnabled,
         metadata: {
             namespace: "content-licensing",
             name: "isAvatarItemLicensingEnabled",
@@ -10172,7 +10191,7 @@
             contextType: "static"
         }
     }, {
-        flag: cD.isInGameSalesLicensingEnabled,
+        flag: cM.isInGameSalesLicensingEnabled,
         metadata: {
             namespace: "content-licensing",
             name: "isInGameSalesLicensingEnabled",
@@ -10181,7 +10200,7 @@
             contextType: "static"
         }
     }, {
-        flag: cD.isIphInGameSalesAvatarMarketplaceSalesLicenseCreationEnabled,
+        flag: cM.isIphInGameSalesAvatarMarketplaceSalesLicenseCreationEnabled,
         metadata: {
             namespace: "content-licensing",
             name: "isIphInGameSalesAvatarMarketplaceSalesLicenseCreationEnabled",
@@ -10190,7 +10209,7 @@
             contextType: "static"
         }
     }, {
-        flag: cM.questionnaireV2Allowlist,
+        flag: cU.questionnaireV2Allowlist,
         metadata: {
             namespace: "content-suitability",
             name: "questionnaireV2Allowlist",
@@ -10199,7 +10218,7 @@
             contextType: "static"
         }
     }, {
-        flag: cM.questionnaireV2Q1Release,
+        flag: cU.questionnaireV2Q1Release,
         metadata: {
             namespace: "content-suitability",
             name: "questionnaireV2Q1Release",
@@ -10208,7 +10227,7 @@
             contextType: "static"
         }
     }, {
-        flag: cM.questionnaireSectionStepperEnabled,
+        flag: cU.questionnaireSectionStepperEnabled,
         metadata: {
             namespace: "content-suitability",
             name: "questionnaireSectionStepperEnabled",
@@ -10478,7 +10497,7 @@
             contextType: "static"
         }
     }, {
-        flag: cU.isRevenueShareAgreementsEnabled,
+        flag: cB.isRevenueShareAgreementsEnabled,
         metadata: {
             namespace: "creator-business",
             name: "isRevenueShareAgreementsEnabled",
@@ -10487,7 +10506,7 @@
             contextType: "static"
         }
     }, {
-        flag: cU.enableVirtualTransactionsTab,
+        flag: cB.enableVirtualTransactionsTab,
         metadata: {
             namespace: "creator-business",
             name: "enableVirtualTransactionsTab",
@@ -10496,7 +10515,7 @@
             contextType: "static"
         }
     }, {
-        flag: cB.isBadgeDefaultIconEnabled,
+        flag: cV.isBadgeDefaultIconEnabled,
         metadata: {
             namespace: "creator-creations",
             name: "isBadgeDefaultIconEnabled",
@@ -10505,7 +10524,7 @@
             contextType: "static"
         }
     }, {
-        flag: cB.isMomentsUploadEnabled,
+        flag: cV.isMomentsUploadEnabled,
         metadata: {
             namespace: "creator-creations",
             name: "isMomentsUploadEnabled",
@@ -10514,7 +10533,7 @@
             contextType: "static"
         }
     }, {
-        flag: cB.isMomentsSitetestUrlParsingEnabled,
+        flag: cV.isMomentsSitetestUrlParsingEnabled,
         metadata: {
             namespace: "creator-creations",
             name: "isMomentsSitetestUrlParsingEnabled",
@@ -10523,7 +10542,16 @@
             contextType: "static"
         }
     }, {
-        flag: cB.isMomentsUploadLanguageSelectEnabled,
+        flag: cV.isTextDocumentEnabled,
+        metadata: {
+            namespace: "creator-creations",
+            name: "isTextDocumentEnabled",
+            defaultValue: !1,
+            valueType: "boolean",
+            contextType: "static"
+        }
+    }, {
+        flag: cV.isMomentsUploadLanguageSelectEnabled,
         metadata: {
             namespace: "creator-creations",
             name: "isMomentsUploadLanguageSelectEnabled",
@@ -10532,7 +10560,7 @@
             contextType: "static"
         }
     }, {
-        flag: cB.isMomentsFeedIdEnabled,
+        flag: cV.isMomentsFeedIdEnabled,
         metadata: {
             namespace: "creator-creations",
             name: "isMomentsFeedIdEnabled",
@@ -10541,7 +10569,7 @@
             contextType: "static"
         }
     }, {
-        flag: cV.enablePlayerSupport,
+        flag: cF.enablePlayerSupport,
         metadata: {
             namespace: "creator-gameops",
             name: "enablePlayerSupport",
@@ -10550,7 +10578,7 @@
             contextType: "universe"
         }
     }, {
-        flag: cV.enablePlayerHostedEvents,
+        flag: cF.enablePlayerHostedEvents,
         metadata: {
             namespace: "creator-gameops",
             name: "enablePlayerHostedEvents",
@@ -10559,7 +10587,7 @@
             contextType: "static"
         }
     }, {
-        flag: cV.enablePlayerSupportCreatorTicketReroute,
+        flag: cF.enablePlayerSupportCreatorTicketReroute,
         metadata: {
             namespace: "creator-gameops",
             name: "enablePlayerSupportCreatorTicketReroute",
@@ -10568,7 +10596,7 @@
             contextType: "static"
         }
     }, {
-        flag: cF.creatorRoadmapEnabled,
+        flag: cG.creatorRoadmapEnabled,
         metadata: {
             namespace: "creator-roadmap",
             name: "creatorRoadmapEnabled",
@@ -10577,7 +10605,7 @@
             contextType: "static"
         }
     }, {
-        flag: cG.isCsmExtendedMetricsEnabled,
+        flag: cW.isCsmExtendedMetricsEnabled,
         metadata: {
             namespace: "creator-services-insights",
             name: "isCsmExtendedMetricsEnabled",
@@ -10586,7 +10614,7 @@
             contextType: "static"
         }
     }, {
-        flag: cW.shouldUseWatermarkFiatCalculation,
+        flag: cH.shouldUseWatermarkFiatCalculation,
         metadata: {
             namespace: "devex",
             name: "shouldUseWatermarkFiatCalculation",
@@ -10595,7 +10623,7 @@
             contextType: "static"
         }
     }, {
-        flag: cW.isTaxDocumentationEnabled,
+        flag: cH.isTaxDocumentationEnabled,
         metadata: {
             namespace: "devex",
             name: "isTaxDocumentationEnabled",
@@ -10604,7 +10632,7 @@
             contextType: "static"
         }
     }, {
-        flag: cH.isBandwidthNetworkTabEnabled,
+        flag: cK.isBandwidthNetworkTabEnabled,
         metadata: {
             namespace: "engine-networking",
             name: "isBandwidthNetworkTabEnabled",
@@ -10613,7 +10641,7 @@
             contextType: "static"
         }
     }, {
-        flag: cK.isHomeAcquisitionSignalsEnabled,
+        flag: cJ.isHomeAcquisitionSignalsEnabled,
         metadata: {
             namespace: "game-discovery-serving",
             name: "isHomeAcquisitionSignalsEnabled",
@@ -10622,7 +10650,7 @@
             contextType: "universe"
         }
     }, {
-        flag: cJ,
+        flag: cz,
         metadata: {
             namespace: "groups",
             name: "isUnifiedUiEnabled",
@@ -10631,7 +10659,7 @@
             contextType: "static"
         }
     }, {
-        flag: cz.isAdsPageRedesignEnabled,
+        flag: cX.isAdsPageRedesignEnabled,
         metadata: {
             namespace: "immersive-ads",
             name: "isAdsPageRedesignEnabled",
@@ -10640,7 +10668,7 @@
             contextType: "static"
         }
     }, {
-        flag: cz.isManagedRewardedTabEnabled,
+        flag: cX.isManagedRewardedTabEnabled,
         metadata: {
             namespace: "immersive-ads",
             name: "isManagedRewardedTabEnabled",
@@ -10649,7 +10677,7 @@
             contextType: "static"
         }
     }, {
-        flag: cX.isLeaderboardConfigsEnabled,
+        flag: cQ.isLeaderboardConfigsEnabled,
         metadata: {
             namespace: "leaderboards",
             name: "isLeaderboardConfigsEnabled",
@@ -10658,7 +10686,7 @@
             contextType: "static"
         }
     }, {
-        flag: cQ.mockManagedPricingSummary,
+        flag: c$.mockManagedPricingSummary,
         metadata: {
             namespace: "monetization",
             name: "mockManagedPricingSummary",
@@ -10667,7 +10695,7 @@
             contextType: "static"
         }
     }, {
-        flag: cQ.mockManagedPricingEvents,
+        flag: c$.mockManagedPricingEvents,
         metadata: {
             namespace: "monetization",
             name: "mockManagedPricingEvents",
@@ -10676,7 +10704,7 @@
             contextType: "static"
         }
     }, {
-        flag: cQ.mockHardCodedPrices,
+        flag: c$.mockHardCodedPrices,
         metadata: {
             namespace: "monetization",
             name: "mockHardCodedPrices",
@@ -10685,7 +10713,7 @@
             contextType: "static"
         }
     }, {
-        flag: cQ.mockManagedPricingProductWrites,
+        flag: c$.mockManagedPricingProductWrites,
         metadata: {
             namespace: "monetization",
             name: "mockManagedPricingProductWrites",
@@ -10694,7 +10722,7 @@
             contextType: "static"
         }
     }, {
-        flag: cQ.isProductArchiveEnabled,
+        flag: c$.isProductArchiveEnabled,
         metadata: {
             namespace: "monetization",
             name: "isProductArchiveEnabled",
@@ -10703,7 +10731,16 @@
             contextType: "static"
         }
     }, {
-        flag: c$.enablePayoutWatermarkContributions,
+        flag: c$.mockShopItemsExternalEligibility,
+        metadata: {
+            namespace: "monetization",
+            name: "mockShopItemsExternalEligibility",
+            defaultValue: !1,
+            valueType: "boolean",
+            contextType: "static"
+        }
+    }, {
+        flag: cZ.enablePayoutWatermarkContributions,
         metadata: {
             namespace: "payouts",
             name: "enablePayoutWatermarkContributions",
@@ -10712,7 +10749,7 @@
             contextType: "group"
         }
     }, {
-        flag: cZ.presetChatEnabled,
+        flag: cY.presetChatEnabled,
         metadata: {
             namespace: "preset-chat",
             name: "presetChatEnabled",
@@ -10721,9 +10758,9 @@
             contextType: "static"
         }
     }];
-    var c0 = t.i(745873);
-    let c1 = null,
-        c2 = (0, cj.default)(() => t.A(73576).then(t => {
+    var c1 = t.i(745873);
+    let c2 = null,
+        c4 = (0, cj.default)(() => t.A(73576).then(t => {
             let {
                 FloatingDraggableWidget: n
             } = t;
@@ -10734,22 +10771,22 @@
             },
             ssr: !1
         }),
-        c4 = () => {
+        c3 = () => {
             let t = (0, ol.useRouter)(),
-                n = (0, c0.useCurrentGroup)(),
+                n = (0, c1.useCurrentGroup)(),
                 [r, i] = (0, oc.useState)(!1);
             (0, oc.useEffect)(() => {
                 let t = !0;
                 return async function() {
                     try {
-                        null != c1 || (c1 = (0, cL.initFlags)({
+                        null != c2 || (c2 = (0, cL.initFlags)({
                             applicationId: "creator-dashboard",
                             baseUrl: "https://apis.roblox.com"
                         }).enableOverrides({
                             mode: "authorized-only",
                             useDefault: !0
                         }));
-                        let n = await c1;
+                        let n = await c2;
                         t && i(n)
                     } catch (n) {
                         t && i(!1)
@@ -10771,13 +10808,13 @@
                     } : {}
                 }
             }, [n, t.query]);
-            return r ? (0, v.jsx)(c2, {
-                flags: cY,
+            return r ? (0, v.jsx)(c4, {
+                flags: c0,
                 contexts: a
             }) : null
         };
-    var c3 = t.i(911502);
-    let c6 = t => {
+    var c6 = t.i(911502);
+    let c8 = t => {
         let {
             providers: n,
             children: r
@@ -10787,11 +10824,11 @@
             children: i
         })
     };
-    var c8 = t.i(893949),
-        c5 = t.i(413019),
-        c9 = t.i(758835),
-        c7 = t.i(823062);
-    let le = t => {
+    var c5 = t.i(893949),
+        c9 = t.i(413019),
+        c7 = t.i(758835),
+        le = t.i(823062);
+    let lt = t => {
         let {
             children: n,
             unifiedLogger: r,
@@ -10801,19 +10838,19 @@
         } = (0, ol.useRouter)(), s = (0, oc.useMemo)(() => {
             if (o) return "".concat(window.location.origin).concat(o)
         }, [o]);
-        return (0, v.jsx)(c7.UnifiedLoggerProvider, {
+        return (0, v.jsx)(le.UnifiedLoggerProvider, {
             unifiedLogger: a,
             pageLoggerConfig: i,
             path: s,
             children: n
         })
     };
-    var lt = t.i(681559),
-        ln = t.i(272749),
-        lr = t.i(252842);
-    let li = ["https://vitals.vercel-insights.com/v1/vitals"];
-    var la = t.i(120654);
-    let lo = t => {
+    var ln = t.i(681559),
+        lr = t.i(272749),
+        li = t.i(252842);
+    let la = ["https://vitals.vercel-insights.com/v1/vitals"];
+    var lo = t.i(120654);
+    let ls = t => {
         let {
             children: n
         } = t, {
@@ -10821,10 +10858,10 @@
         } = (0, cw.useAuthentication)(), i = (0, oc.useRef)(window.aegis);
         (0, oc.useEffect)(() => {
             i.current && i.current.setConfig({
-                beforeReport: t => !(t.msg && li.some(n => t.msg.includes(n))),
+                beforeReport: t => !(t.msg && la.some(n => t.msg.includes(n))),
                 api: {
                     retCodeHandler(t, n, r) {
-                        let i = !(r.status === lr.StatusCodes.FORBIDDEN && r.headers.has("x-csrf-token") || r.status === lr.StatusCodes.OK || r.status === lr.StatusCodes.ACCEPTED),
+                        let i = !(r.status === li.StatusCodes.FORBIDDEN && r.headers.has("x-csrf-token") || r.status === li.StatusCodes.OK || r.status === li.StatusCodes.ACCEPTED),
                             a = "unknown";
                         try {
                             let n = JSON.parse(t);
@@ -10847,16 +10884,16 @@
             captureError: () => {},
             reportEvent: () => {}
         }), [i]);
-        return (0, v.jsx)(la.default.Provider, {
+        return (0, v.jsx)(lo.default.Provider, {
             value: a,
             children: n
         })
     };
-    var ls = t.i(37819),
-        lu = t.i(431346),
-        lc = t.i(881670);
-    let ll = "".concat("".concat("https://assets.create.roblox.com/44ee813b14fe230ca133fc1520e8add03760695d/assets", "/opengraph"), "/global_og_image.png"),
-        ld = (0, oO.withTranslation)(t => {
+    var lu = t.i(37819),
+        lc = t.i(431346),
+        ll = t.i(881670);
+    let ld = "".concat("".concat("https://assets.create.roblox.com/e8ff258305912c678ed7687007b3d9ecc0cfa8b6/assets", "/opengraph"), "/global_og_image.png"),
+        lf = (0, oO.withTranslation)(t => {
             let {
                 openGraphMetadata: {
                     title: n,
@@ -10865,8 +10902,8 @@
                 }
             } = t, {
                 translate: a
-            } = (0, oO.useTranslation)(), o = new URL(ll, "https://create.roblox.com").href, s = (0, lu.useTheme)();
-            return (0, v.jsxs)(ls.HubMeta, {
+            } = (0, oO.useTranslation)(), o = new URL(ld, "https://create.roblox.com").href, s = (0, lc.useTheme)();
+            return (0, v.jsxs)(lu.HubMeta, {
                 seoTitle: a("Label.CreatorDashboard"),
                 ogTitle: n,
                 description: r,
@@ -10903,31 +10940,43 @@
                     content: i
                 }, "og:locale")]
             })
-        }, [lc.TranslationNamespace.Features]);
-    var lf = t.i(956728),
-        lh = t.i(157310),
-        lp = t.i(605836),
-        lv = t.i(182012),
-        lm = t.i(252082),
-        ly = t.i(220754),
-        lg = t.i(377282),
-        lb = t.i(708064),
-        lw = t.i(599721),
-        lx = t.i(734341),
-        lP = t.i(685104),
-        lP = lP,
-        lR = t.i(722380),
-        lS = t.i(286840),
-        lT = t.i(583555);
+        }, [ll.TranslationNamespace.Features]),
+        lh = (0, oO.withTranslation)(t => {
+            let {
+                children: n
+            } = t, {
+                open: r,
+                dialog: i
+            } = (0, c5.default)();
+            return (0, v.jsxs)(oL.NavigationStudioLauncherProvider, {
+                openStudio: r,
+                children: [n, i]
+            })
+        }, [ll.TranslationNamespace.Creations]);
+    var lp = t.i(956728),
+        lv = t.i(157310),
+        lm = t.i(605836),
+        ly = t.i(182012),
+        lg = t.i(252082),
+        lb = t.i(220754),
+        lw = t.i(377282),
+        lx = t.i(708064),
+        lP = t.i(599721),
+        lR = t.i(734341),
+        lS = t.i(685104),
+        lS = lS,
+        lT = t.i(722380),
+        lE = t.i(286840),
+        lq = t.i(583555);
     t.i(427542), t.i(937793);
-    var lE = t.i(133017);
-    let lq = lx.$constructor("ZodMiniType", (t, n) => {
+    var lk = t.i(133017);
+    let lA = lR.$constructor("ZodMiniType", (t, n) => {
             if (!t._zod) throw Error("Uninitialized schema in ZodMiniType.");
-            lR.$ZodType.init(t, n), t.def = n, t.type = n.type, t.parse = (n, r) => lE.parse(t, n, r, {
+            lT.$ZodType.init(t, n), t.def = n, t.type = n.type, t.parse = (n, r) => lk.parse(t, n, r, {
                 callee: t.parse
-            }), t.safeParse = (n, r) => lE.safeParse(t, n, r), t.parseAsync = async (n, r) => lE.parseAsync(t, n, r, {
+            }), t.safeParse = (n, r) => lk.safeParse(t, n, r), t.parseAsync = async (n, r) => lk.parseAsync(t, n, r, {
                 callee: t.parseAsync
-            }), t.safeParseAsync = async (n, r) => lE.safeParseAsync(t, n, r), t.check = function() {
+            }), t.safeParseAsync = async (n, r) => lk.safeParseAsync(t, n, r), t.check = function() {
                 for (var r, i = arguments.length, a = Array(i), o = 0; o < i; o++) a[o] = arguments[o];
                 return t.clone({
                     ...n,
@@ -10943,111 +10992,111 @@
                 }, {
                     parent: !0
                 })
-            }, t.with = t.check, t.clone = (n, r) => lS.clone(t, n, r), t.brand = () => t, t.register = (n, r) => (n.add(t, r), t), t.apply = n => n(t)
+            }, t.with = t.check, t.clone = (n, r) => lE.clone(t, n, r), t.brand = () => t, t.register = (n, r) => (n.add(t, r), t), t.apply = n => n(t)
         }),
-        lk = lx.$constructor("ZodMiniString", (t, n) => {
-            lR.$ZodString.init(t, n), lq.init(t, n)
+        lC = lR.$constructor("ZodMiniString", (t, n) => {
+            lT.$ZodString.init(t, n), lA.init(t, n)
         });
 
-    function lA(t) {
-        return lT._string(lk, t)
+    function lI(t) {
+        return lq._string(lC, t)
     }(t, n) => {
-        lR.$ZodStringFormat.init(t, n), lk.init(t, n)
+        lT.$ZodStringFormat.init(t, n), lC.init(t, n)
     }, (t, n) => {
-        lR.$ZodBigInt.init(t, n), lq.init(t, n)
+        lT.$ZodBigInt.init(t, n), lA.init(t, n)
     };
-    let lC = lx.$constructor("ZodMiniUnknown", (t, n) => {
-            lR.$ZodUnknown.init(t, n), lq.init(t, n)
+    let lj = lR.$constructor("ZodMiniUnknown", (t, n) => {
+            lT.$ZodUnknown.init(t, n), lA.init(t, n)
         }),
-        lI = lx.$constructor("ZodMiniArray", (t, n) => {
-            lR.$ZodArray.init(t, n), lq.init(t, n)
+        lL = lR.$constructor("ZodMiniArray", (t, n) => {
+            lT.$ZodArray.init(t, n), lA.init(t, n)
         });
-
-    function lj(t, n) {
-        return new lI({
-            type: "array",
-            element: t,
-            ...lS.normalizeParams(n)
-        })
-    }
-    let lL = lx.$constructor("ZodMiniObject", (t, n) => {
-        lR.$ZodObject.init(t, n), lq.init(t, n), lS.defineLazy(t, "shape", () => n.shape)
-    });
 
     function lO(t, n) {
         return new lL({
-            type: "object",
-            shape: null != t ? t : {},
-            ...lS.normalizeParams(n)
+            type: "array",
+            element: t,
+            ...lE.normalizeParams(n)
         })
     }
-    let lN = lx.$constructor("ZodMiniUnion", (t, n) => {
-            lR.$ZodUnion.init(t, n), lq.init(t, n)
-        }),
-        l_ = lx.$constructor("ZodMiniRecord", (t, n) => {
-            lR.$ZodRecord.init(t, n), lq.init(t, n)
-        }),
-        lD = lx.$constructor("ZodMiniLiteral", (t, n) => {
-            lR.$ZodLiteral.init(t, n), lq.init(t, n)
-        });
-
-    function lM(t, n) {
-        return new lD({
-            type: "literal",
-            values: Array.isArray(t) ? t : [t],
-            ...lS.normalizeParams(n)
-        })
-    }
-    let lU = lx.$constructor("ZodMiniOptional", (t, n) => {
-        lR.$ZodOptional.init(t, n), lq.init(t, n)
+    let lN = lR.$constructor("ZodMiniObject", (t, n) => {
+        lT.$ZodObject.init(t, n), lA.init(t, n), lE.defineLazy(t, "shape", () => n.shape)
     });
 
-    function lB(t) {
+    function lD(t, n) {
+        return new lN({
+            type: "object",
+            shape: null != t ? t : {},
+            ...lE.normalizeParams(n)
+        })
+    }
+    let l_ = lR.$constructor("ZodMiniUnion", (t, n) => {
+            lT.$ZodUnion.init(t, n), lA.init(t, n)
+        }),
+        lM = lR.$constructor("ZodMiniRecord", (t, n) => {
+            lT.$ZodRecord.init(t, n), lA.init(t, n)
+        }),
+        lU = lR.$constructor("ZodMiniLiteral", (t, n) => {
+            lT.$ZodLiteral.init(t, n), lA.init(t, n)
+        });
+
+    function lB(t, n) {
         return new lU({
+            type: "literal",
+            values: Array.isArray(t) ? t : [t],
+            ...lE.normalizeParams(n)
+        })
+    }
+    let lV = lR.$constructor("ZodMiniOptional", (t, n) => {
+        lT.$ZodOptional.init(t, n), lA.init(t, n)
+    });
+
+    function lF(t) {
+        return new lV({
             type: "optional",
             innerType: t
         })
     }(t, n) => {
-        lR.$ZodPipe.init(t, n), lq.init(t, n)
+        lT.$ZodPipe.init(t, n), lA.init(t, n)
     };
-    let lV = lx.$constructor("ZodMiniCustom", (t, n) => {
-        lR.$ZodCustom.init(t, n), lq.init(t, n)
+    let lG = lR.$constructor("ZodMiniCustom", (t, n) => {
+        lT.$ZodCustom.init(t, n), lA.init(t, n)
     });
 
-    function lF(t) {
+    function lW(t) {
         let n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-        return lT._refine(lV, t, n)
+        return lq._refine(lG, t, n)
     }
-    lT.describe, lT.meta;
-    var lG = t.i(694257),
-        lW = t.i(608972),
-        lH = t.i(256539),
-        lK = t.i(685245),
-        lJ = (0, oc.createContext)(void 0),
-        lz = t => {
+    lq.describe, lq.meta;
+    var lH = t.i(694257),
+        lK = t.i(608972),
+        lJ = t.i(256539),
+        lz = t.i(685245),
+        lX = (0, oc.createContext)(void 0),
+        lQ = t => {
             let {
                 config: n,
                 children: r
             } = t;
-            return (0, v.jsx)(lJ.Provider, {
+            return (0, v.jsx)(lX.Provider, {
                 value: n,
                 children: r
             })
         },
-        lX = () => {
-            let t = (0, oc.useContext)(lJ);
+        l$ = () => {
+            let t = (0, oc.useContext)(lX);
             if (!t) throw Error("useNotApprovedUIConfig must be used within a NotApprovedUIProvider");
             return t
         },
-        lQ = ((i = lQ || {}).AccountReactivationPageRendered = "accountReactivationPageRendered", i.PageRendered = "pageRendered", i.UnmappedViolationKey = "unmappedViolationKey", i.CheckboxChecked = "checkboxChecked", i.LogoutClicked = "logoutClicked", i.ReactivateClicked = "reactivateClicked", i.ParentVerificationClicked = "parentVerificationClicked", i.EmailVerificationClicked = "emailVerificationClicked", i.TermsOfUseClicked = "termsOfUseClicked", i.AppealsProcessClicked = "appealsProcessClicked", i.CommunityGuidelineClicked = "communityGuidelineClicked", i.UGCGuidelinesClicked = "ugcGuidelinesClicked", i.AppealsPortalClicked = "appealsPortalClicked", i.ContinueClicked = "continueClicked", i.BackClicked = "backClicked", i.SecondChanceReactivateClicked = "secondChanceReactivateClicked", i.MissingTranslation = "missingTranslation", i.Error = "error", i.VerificationRedirectRendered = "verificationRedirectRendered", i.AccountReactivationRedirectRendered = "accountReactivationRedirectRendered", i),
-        l$ = ((a = l$ || {}).NotApprovedPage = "NotApprovedPageV2", a);
+        lZ = ((i = lZ || {}).AccountReactivationPageRendered = "accountReactivationPageRendered", i.PageRendered = "pageRendered", i.UnmappedViolationKey = "unmappedViolationKey", i.CheckboxChecked = "checkboxChecked", i.LogoutClicked = "logoutClicked", i.ReactivateClicked = "reactivateClicked", i.ParentVerificationClicked = "parentVerificationClicked", i.EmailVerificationClicked = "emailVerificationClicked", i.TermsOfUseClicked = "termsOfUseClicked", i.AppealsProcessClicked = "appealsProcessClicked", i.CommunityGuidelineClicked = "communityGuidelineClicked", i.UGCGuidelinesClicked = "ugcGuidelinesClicked", i.AppealsPortalClicked = "appealsPortalClicked", i.ContinueClicked = "continueClicked", i.BackClicked = "backClicked", i.SecondChanceReactivateClicked = "secondChanceReactivateClicked", i.MissingTranslation = "missingTranslation", i.Error = "error", i.VerificationRedirectRendered = "verificationRedirectRendered", i.AccountReactivationRedirectRendered = "accountReactivationRedirectRendered", i),
+        lY = ((a = lY || {}).NotApprovedPage = "NotApprovedPageV2", a);
 
-    function lZ() {
+    function l0() {
         let {
             sendAnalyticsEvent: t,
             platform: n,
             readOnly: r
-        } = lX();
+        } = l$();
         return (0, oc.useCallback)((i, a) => {
             null != r && r || t({
                 eventName: "NotApprovedPageEvent",
@@ -11061,9 +11110,9 @@
             })
         }, [t, n, r])
     }
-    var lY = "UserSafety.NotApprovedPage.UserID",
-        l0 = ((o = l0 || {}).Warn = "Warn", o.Delete = "Delete", o.Hour1 = "Ban 1 Hour", o.Hour6 = "Ban 6 Hours", o.Day1 = "Ban 1 Day", o.Day3 = "Ban 3 Days", o.Day7 = "Ban 7 Days", o.Day14 = "Ban 14 Days", o.Day30 = "Ban 30 Days", o.Day60 = "Ban 60 Days", o.Month6 = "Ban 6 Months", o.Year1 = "Ban 1 Year", o),
-        l1 = {
+    var l1 = "UserSafety.NotApprovedPage.UserID",
+        l2 = ((o = l2 || {}).Warn = "Warn", o.Delete = "Delete", o.Hour1 = "Ban 1 Hour", o.Hour6 = "Ban 6 Hours", o.Day1 = "Ban 1 Day", o.Day3 = "Ban 3 Days", o.Day7 = "Ban 7 Days", o.Day14 = "Ban 14 Days", o.Day30 = "Ban 30 Days", o.Day60 = "Ban 60 Days", o.Month6 = "Ban 6 Months", o.Year1 = "Ban 1 Year", o),
+        l4 = {
             "Ban 1 Hour": "Heading.SuspendedOneHour",
             "Ban 6 Hours": "Heading.SuspendedSixHours",
             "Ban 1 Day": "Heading.SuspendedOneDay",
@@ -11077,7 +11126,7 @@
             Warn: "Heading.Warning",
             Delete: "Heading.Banned"
         },
-        l2 = {
+        l3 = {
             "Label.Type.Avatar": "Label.TypePlural.Avatar",
             "Label.Type.Audio": "Label.TypePlural.Audio",
             "Label.Type.AvatarAccessory": "Label.TypePlural.AvatarAccessory",
@@ -11094,15 +11143,15 @@
             "Label.Type.Video": "Label.TypePlural.Video",
             "Label.Type.Voice": "Label.TypePlural.Voice"
         },
-        l4 = "Email";
+        l6 = "Email";
 
-    function l3(t, n, r) {
-        if (r === l4 || "VPC" === r) return !0;
+    function l8(t, n, r) {
+        if (r === l6 || "VPC" === r) return !0;
         let i = new Date(n) < new Date;
         return "Warn" === t || "Delete" !== t && i
     }
-    var l6 = (0, oc.createContext)(void 0),
-        l8 = t => {
+    var l5 = (0, oc.createContext)(void 0),
+        l9 = t => {
             var n, r;
             let {
                 pages: i,
@@ -11140,17 +11189,17 @@
                     hasNavigatedForward: d
                 }
             }, [c, h, p, b, w, m, y, x, i, o, a, d]);
-            return (0, v.jsx)(l6.Provider, {
+            return (0, v.jsx)(l5.Provider, {
                 value: P,
                 children: u
             })
         },
-        l5 = () => {
-            let t = (0, oc.useContext)(l6);
+        l7 = () => {
+            let t = (0, oc.useContext)(l5);
             if (!t) throw Error("usePageNavigation must be used within PageNavigationProvider");
             return t
         },
-        l9 = t => {
+        de = t => {
             let {
                 punishmentData: n,
                 commutationEligibility: r
@@ -11158,7 +11207,7 @@
                 isFirstPage: i,
                 currentPageConfigs: a,
                 currentPageName: o
-            } = l5(), s = a.map(t => {
+            } = l7(), s = a.map(t => {
                 if (!t.getIsVisible(n, o, r)) return null;
                 let i = t.renderComponent;
                 return (0, v.jsx)("div", {
@@ -11172,14 +11221,14 @@
                 children: s
             })
         },
-        l7 = () => {
-            let t = lX().translate,
+        dt = () => {
+            let t = l$().translate,
                 {
                     onLogout: n
-                } = lX(),
-                r = lZ(),
+                } = l$(),
+                r = l0(),
                 [i, a] = (0, oc.useState)(!1),
-                o = (0, lv.useMutation)({
+                o = (0, ly.useMutation)({
                     mutationFn: async () => {
                         await n()
                     },
@@ -11194,29 +11243,29 @@
                     },
                     retry: 0
                 });
-            return (0, v.jsxs)(lm.Popover, {
-                children: [(0, v.jsx)(lm.PopoverTrigger, {
+            return (0, v.jsxs)(lg.Popover, {
+                children: [(0, v.jsx)(lg.PopoverTrigger, {
                     asChild: !0,
-                    children: (0, v.jsx)(lb.IconButton, {
+                    children: (0, v.jsx)(lx.IconButton, {
                         icon: "icon-filled-three-dots-vertical",
                         ariaLabel: t("Label.OpenMenu"),
                         variant: "Utility",
                         size: "Medium"
                     })
-                }), (0, v.jsx)(lm.PopoverContent, {
+                }), (0, v.jsx)(lg.PopoverContent, {
                     side: "bottom",
                     align: "end",
                     ariaLabel: t("Label.MenuContent"),
-                    children: (0, v.jsx)(ly.Menu, {
+                    children: (0, v.jsx)(lb.Menu, {
                         size: "Medium",
-                        children: (0, v.jsx)(ly.MenuItem, {
+                        children: (0, v.jsx)(lb.MenuItem, {
                             value: "one",
                             title: t("Action.LogOut"),
                             onSelect: () => {
                                 o.mutate()
                             },
                             disabled: i,
-                            trailing: i ? (0, v.jsx)(lg.ProgressCircle, {
+                            trailing: i ? (0, v.jsx)(lw.ProgressCircle, {
                                 size: "Small",
                                 ariaLabel: t("Label.LogoutProgress"),
                                 variant: "Indeterminate"
@@ -11226,13 +11275,13 @@
                 })]
             })
         },
-        de = () => {
-            let t = lX().translate,
+        dn = () => {
+            let t = l$().translate,
                 {
                     getProgress: n
-                } = l5(),
+                } = l7(),
                 r = n();
-            return (0, v.jsx)(lw.ProgressBar, {
+            return (0, v.jsx)(lP.ProgressBar, {
                 value: r,
                 ariaLabel: t("Label.PageProgress"),
                 style: {
@@ -11240,12 +11289,12 @@
                 }
             })
         },
-        dt = () => {
-            let t = lX().translate,
+        dr = () => {
+            let t = l$().translate,
                 {
                     goToPreviousPage: n
-                } = l5();
-            return (0, v.jsx)(lb.IconButton, {
+                } = l7();
+            return (0, v.jsx)(lx.IconButton, {
                 size: "Medium",
                 variant: "Utility",
                 icon: "icon-filled-chevron-large-left",
@@ -11255,26 +11304,26 @@
                 ariaLabel: t("Action.Back")
             })
         },
-        dn = t => {
+        di = t => {
             var n;
             let {
                 punishmentData: r
             } = t, {
                 isFirstPage: i,
                 totalPages: a
-            } = l5(), {
+            } = l7(), {
                 readOnly: o
-            } = lX(), s = lX().translate, {
+            } = l$(), s = l$().translate, {
                 punishmentTypeDescription: u,
                 verificationCategory: c
-            } = r, l = c ? s("Heading.Suspended") : s(null != (n = l1[u]) ? n : "") || s("Heading.Suspended");
+            } = r, l = c ? s("Heading.Suspended") : s(null != (n = l4[u]) ? n : "") || s("Heading.Suspended");
             return i ? (0, v.jsx)("div", {
                 "data-testid": "not-approved-dialog-header",
                 children: (0, v.jsxs)("div", {
                     className: "flex justify-between items-center gap-medium",
                     children: [(0, v.jsxs)("div", {
                         className: "flex gap-small items-center padding-y-medium",
-                        children: [(0, v.jsx)(lp.Icon, {
+                        children: [(0, v.jsx)(lm.Icon, {
                             name: "Delete" === u ? "icon-regular-circle-slash" : "icon-regular-triangle-exclamation",
                             size: "Large",
                             className: "Warn" !== u || c ? "content-system-alert" : "content-system-warning"
@@ -11282,24 +11331,24 @@
                             className: "text-heading-small",
                             children: l
                         })]
-                    }), !o && (0, v.jsx)(l7, {})]
+                    }), !o && (0, v.jsx)(dt, {})]
                 })
             }) : (0, v.jsx)("div", {
                 "data-testid": "not-approved-dialog-header",
                 children: (0, v.jsxs)("div", {
                     className: "flex flex-col gap-large items-start",
-                    children: [(0, v.jsx)(dt, {}), a > 2 && (0, v.jsx)(de, {})]
+                    children: [(0, v.jsx)(dr, {}), a > 2 && (0, v.jsx)(dn, {})]
                 })
             })
         },
-        dr = t => {
+        da = t => {
             let {
                 punishmentData: n,
                 setIsDialogOpen: r
             } = t, {
                 CurrentCtaComponent: i,
                 currentPageName: a
-            } = l5();
+            } = l7();
             return i ? (0, v.jsx)("div", {
                 className: "flex flex-col gap-large justify-between medium:items-end",
                 children: (0, v.jsx)(i, {
@@ -11308,7 +11357,7 @@
                 }, a)
             }) : null
         },
-        di = t => {
+        ds = t => {
             let {
                 readOnly: n
             } = t;
@@ -11321,7 +11370,7 @@
                 })]
             })
         },
-        da = () => (0, v.jsxs)("div", {
+        du = () => (0, v.jsxs)("div", {
             className: "flex flex-col gap-large",
             "data-testid": "loading-skeleton-content",
             children: [(0, v.jsx)("div", {
@@ -11342,30 +11391,30 @@
                 })]
             })]
         }),
-        ds = () => (0, v.jsx)("div", {
+        dc = () => (0, v.jsx)("div", {
             className: "shrink-0 flex width-full justify-end medium:flex-row",
             children: (0, v.jsx)("div", {
                 className: "bg-shift-100 height-[40px] width-full medium:width-[90px] radius-medium"
             })
         }),
-        du = () => {
+        dl = () => {
             let {
                 readOnly: t
-            } = lX();
+            } = l$();
             return t ? null : (0, v.jsx)("div", {
                 className: "shrink-0 flex justify-end items-center",
-                children: (0, v.jsx)(l7, {})
+                children: (0, v.jsx)(dt, {})
             })
         },
-        dc = t => {
+        dd = t => {
             let {
                 error: n
-            } = t, r = lX().translate;
+            } = t, r = l$().translate;
             return n && console.error(n), (0, v.jsx)("div", {
                 className: "flex flex-col height-full min-height-0",
                 children: (0, v.jsxs)("div", {
                     className: "grow-1 flex flex-col items-center justify-center gap-medium padding-xxlarge radius-medium bg-surface-100 width-full min-height-[225px]",
-                    children: [(0, v.jsx)(lp.Icon, {
+                    children: [(0, v.jsx)(lm.Icon, {
                         name: "icon-regular-triangle-exclamation",
                         size: "XLarge"
                     }), (0, v.jsx)("span", {
@@ -11375,55 +11424,55 @@
                 })
             })
         };
-    lx.config(lP.en());
-    var dl = lO({
-            type: lM("platform"),
-            displayMeta: lB(lO({
-                lowercaseKey: lA().check(lG.minLength(1)),
-                capitalizedKey: lA().check(lG.minLength(1)),
-                icon: lA()
+    lR.config(lS.en());
+    var df = lD({
+            type: lB("platform"),
+            displayMeta: lF(lD({
+                lowercaseKey: lI().check(lH.minLength(1)),
+                capitalizedKey: lI().check(lH.minLength(1)),
+                icon: lI()
             })),
-            elements: lB(lj(lT._unknown(lC)))
+            elements: lF(lO(lq._unknown(lj)))
         }),
-        dd = new lN({
+        dh = new l_({
             type: "union",
-            options: [lO({
-                type: lM("text"),
-                labelKey: lA(),
-                text: lB(lA()),
-                textKey: lB(lA()),
-                textKeyParameters: lB((s = lA(), new l_((u = lA()) && u._zod ? {
+            options: [lD({
+                type: lB("text"),
+                labelKey: lI(),
+                text: lF(lI()),
+                textKey: lF(lI()),
+                textKeyParameters: lF((s = lI(), new lM((u = lI()) && u._zod ? {
                     type: "record",
                     keyType: s,
                     valueType: u,
-                    ...lS.normalizeParams(void 0)
+                    ...lE.normalizeParams(void 0)
                 } : {
                     type: "record",
-                    keyType: lA(),
+                    keyType: lI(),
                     valueType: s,
-                    ...lS.normalizeParams(u)
+                    ...lE.normalizeParams(u)
                 })))
-            }).check(lF(t => void 0 !== t.text || void 0 !== t.textKey, {
+            }).check(lW(t => void 0 !== t.text || void 0 !== t.textKey, {
                 message: "Either 'text' or 'textKey' must be provided"
-            }), lF(t => !t.textKeyParameters || void 0 !== t.textKey, {
+            }), lW(t => !t.textKeyParameters || void 0 !== t.textKey, {
                 message: "'textKeyParameters' requires 'textKey' to be provided"
-            })), lO({
-                type: lM("image"),
-                labelKey: lA(),
-                url: lA(),
-                altLabelKey: lB(lA())
+            })), lD({
+                type: lB("image"),
+                labelKey: lI(),
+                url: lI(),
+                altLabelKey: lF(lI())
             })],
-            ...lS.normalizeParams(void 0)
-        }),
-        df = t => {
-            let n = dd.safeParse(t);
-            return !!n.success || (console.warn("Failed to parse platform element: ", n.error), !1)
-        },
-        dh = lO({
-            ...dl.shape,
-            elements: lB(lj(dd))
+            ...lE.normalizeParams(void 0)
         }),
         dp = t => {
+            let n = dh.safeParse(t);
+            return !!n.success || (console.warn("Failed to parse platform element: ", n.error), !1)
+        },
+        dv = lD({
+            ...df.shape,
+            elements: lF(lO(dh))
+        }),
+        dm = t => {
             let n = t.violation;
             if (!n) return !1;
             let {
@@ -11431,25 +11480,25 @@
             } = n;
             if (!r || !(t => {
                     if ("platform" !== t.type) return !1;
-                    let n = dl.safeParse(t);
+                    let n = df.safeParse(t);
                     return !!n.success || (console.warn("Failed to parse platform evidence: ", n.error), !1)
                 })(r)) return !1;
-            let i = null == (a = r.elements) ? void 0 : a.filter(t => df(t));
+            let i = null == (a = r.elements) ? void 0 : a.filter(t => dp(t));
             if (!i || 0 === i.length) return !1;
             var a, o = {
                 ...r,
                 elements: i
             };
             if ("platform" !== o.type) return !1;
-            let s = dh.safeParse(o);
+            let s = dv.safeParse(o);
             return !!s.success || (console.warn("Failed to parse platform evidence fully typed: ", s.error), !1)
         },
-        dv = (0, oc.createContext)(void 0),
-        dm = t => {
+        dy = (0, oc.createContext)(void 0),
+        dg = t => {
             let {
                 enableIxp: n = !1,
                 children: r
-            } = t, i = lX().translate, {
+            } = t, i = l$().translate, {
                 data: a,
                 isLoading: o,
                 error: s
@@ -11457,8 +11506,8 @@
                 let {
                     httpGet: t,
                     userModerationApiUrl: n
-                } = lX();
-                return (0, lh.useQuery)({
+                } = l$();
+                return (0, lv.useQuery)({
                     queryKey: ["not-approved-data"],
                     queryFn: () => t("".concat(n, "/v1/not-approved")),
                     staleTime: 1 / 0
@@ -11472,13 +11521,13 @@
                     enabled: n
                 } = t, {
                     ixp: r
-                } = lX();
-                return (0, lh.useQuery)({
-                    queryKey: ["ixp/".concat(lY)],
+                } = l$();
+                return (0, lv.useQuery)({
+                    queryKey: ["ixp/".concat(l1)],
                     queryFn: async () => {
                         if (!r) return {};
                         try {
-                            return await r.fetchLayer(lY)
+                            return await r.fetchLayer(l1)
                         } catch (t) {
                             return {}
                         }
@@ -11495,8 +11544,8 @@
                 let {
                     httpGet: t,
                     apiGatewayUrl: n
-                } = lX();
-                return (0, lh.useQuery)({
+                } = l$();
+                return (0, lv.useQuery)({
                     queryKey: ["commutation-eligibility"],
                     queryFn: async () => {
                         try {
@@ -11512,7 +11561,7 @@
             })(), h = (null == a ? void 0 : a.punishedUserId) ? a : void 0, p = (0, oc.useMemo)(() => {
                 let t = new Set,
                     n = new Set;
-                if ((null == h ? void 0 : h.violation) && dp(h)) h.violation.abuseTypeTranslationKeys.forEach(r => {
+                if ((null == h ? void 0 : h.violation) && dm(h)) h.violation.abuseTypeTranslationKeys.forEach(r => {
                     t.add(i(r)), n.add(r)
                 });
                 else {
@@ -11533,25 +11582,25 @@
                 ixpData: u,
                 commutationEligibility: d
             }), [m, s, h, p, u, d]);
-            return (0, v.jsx)(dv.Provider, {
+            return (0, v.jsx)(dy.Provider, {
                 value: y,
                 children: r
             })
         },
-        dy = () => {
-            let t = (0, oc.useContext)(dv);
+        db = () => {
+            let t = (0, oc.useContext)(dy);
             if (!t) throw Error("useNotApprovedPagePunishment must be used within a NotApprovedPagePunishmentProvider");
             return t
         },
-        dg = (0, oc.createContext)(void 0),
-        db = t => {
+        dw = (0, oc.createContext)(void 0),
+        dx = t => {
             let {
                 children: n
             } = t, {
                 currentPage: r,
                 currentPageName: i,
                 unmappedViolationKeys: a
-            } = l5(), o = lZ(), s = (0, oc.useRef)(Date.now()), u = (0, oc.useRef)(r), c = (0, oc.useRef)(i), l = (0, oc.useRef)(!0), d = () => Date.now() - s.current;
+            } = l7(), o = l0(), s = (0, oc.useRef)(Date.now()), u = (0, oc.useRef)(r), c = (0, oc.useRef)(i), l = (0, oc.useRef)(!0), d = () => Date.now() - s.current;
             (0, oc.useEffect)(() => {
                 a.forEach(t => {
                     o("unmappedViolationKey", {
@@ -11580,17 +11629,17 @@
                 h = (0, oc.useMemo)(() => ({
                     sendPageEvent: f
                 }), [f]);
-            return (0, v.jsx)(dg.Provider, {
+            return (0, v.jsx)(dw.Provider, {
                 value: h,
                 children: n
             })
         },
-        dw = () => {
-            let t = (0, oc.useContext)(dg);
+        dP = () => {
+            let t = (0, oc.useContext)(dw);
             if (!t) throw Error("usePageAnalytics must be used within PageAnalyticsProvider");
             return t
         },
-        dx = {
+        dR = {
             ruleTitle: "Heading.RuleExplanation.Dating",
             ruleSubtitle: "SubHeading.RuleExplanation.Dating",
             ruleDescription: "Description.RuleExplanation.Dating",
@@ -11598,7 +11647,7 @@
             importanceDescription: "Description.RuleImportance.Dating",
             policyKey: "dating"
         },
-        dP = {
+        dS = {
             ruleTitle: "Heading.RuleExplanation.BullyingHarassmentDiscrimination",
             ruleSubtitle: "SubHeading.RuleExplanation.BullyingHarassmentDiscrimination",
             ruleDescription: "Description.RuleExplanation.BullyingHarassmentDiscrimination",
@@ -11606,7 +11655,7 @@
             importanceDescription: "Description.RuleImportance.BullyingHarassmentDiscrimination",
             policyKey: "bullying-harassment-discrimination"
         },
-        dR = {
+        dT = {
             ruleTitle: "Heading.RuleExplanation.MisusingRobloxSystems",
             ruleSubtitle: "SubHeading.RuleExplanation.MisusingRobloxSystems",
             ruleDescription: "Description.RuleExplanation.MisusingRobloxSystems",
@@ -11615,7 +11664,7 @@
             importanceDescription: "Description.RuleImportance.MisusingRobloxSystems",
             policyKey: "misusing-roblox-systems"
         },
-        dS = {
+        dE = {
             ruleTitle: "Heading.RuleExplanation.PII",
             ruleSubtitle: "SubHeading.RuleExplanation.PII",
             ruleDescription: "Description.RuleExplanation.PII",
@@ -11624,7 +11673,7 @@
             importanceDescription: "Description.RuleImportance.PII",
             policyKey: "pii"
         },
-        dT = {
+        dq = {
             ruleTitle: "Heading.RuleExplanation.SSHAndIllegalRegulatedActivities",
             ruleSubtitle: "SubHeading.RuleExplanation.SSHAndIllegalRegulatedActivities",
             ruleDescription: "Description.RuleExplanation.SSHAndIllegalRegulatedActivities",
@@ -11633,10 +11682,10 @@
             importanceDescription: "Description.RuleImportance.SSHAndIllegalRegulatedActivities",
             policyKey: "ssh-and-illegal-regulated-activities"
         },
-        dE = {
-            "Label.AbuseType.CheatandExploits": dR,
-            "Label.AbuseType.ContestsandSweepstakes": dT,
-            "Label.AbuseType.Dating": dx,
+        dk = {
+            "Label.AbuseType.CheatandExploits": dT,
+            "Label.AbuseType.ContestsandSweepstakes": dq,
+            "Label.AbuseType.Dating": dR,
             "Label.AbuseType.DirectingUsersOffPlatform": {
                 ruleTitle: "Heading.RuleExplanation.DirectingUsersOffPlatform",
                 ruleSubtitle: "SubHeading.RuleExplanation.DirectingUsersOffPlatform",
@@ -11645,21 +11694,21 @@
                 importanceDescription: "Description.RuleImportance.DirectingUsersOffPlatform",
                 policyKey: "directing-users-off-platform"
             },
-            "Label.AbuseType.DiscriminatoryContent": dP,
-            "Label.AbuseType.DisruptiveAudio": dR,
-            "Label.AbuseType.EncouragingDangerousBehavior": dT,
-            "Label.AbuseType.ExtortionandBlackmail": dP,
-            "Label.AbuseType.Harassment": dP,
-            "Label.AbuseType.IllegalandRegulatedContent": dT,
-            "Label.AbuseType.Impersonation": dP,
-            "Label.AbuseType.IrlDangerousActivities": dT,
-            "Label.AbuseType.MisusingRobloxSystems": dR,
-            "Label.AbuseType.OffPlatformSpeechandBehavior": dP,
-            "Label.AbuseType.PrivacyAskingforPII": dS,
-            "Label.AbuseType.PrivacyGivingPII": dS,
-            "Label.AbuseType.RealLifeThreats": dP,
-            "Label.AbuseType.Scamming": dR,
-            "Label.AbuseType.SexualContent": dx,
+            "Label.AbuseType.DiscriminatoryContent": dS,
+            "Label.AbuseType.DisruptiveAudio": dT,
+            "Label.AbuseType.EncouragingDangerousBehavior": dq,
+            "Label.AbuseType.ExtortionandBlackmail": dS,
+            "Label.AbuseType.Harassment": dS,
+            "Label.AbuseType.IllegalandRegulatedContent": dq,
+            "Label.AbuseType.Impersonation": dS,
+            "Label.AbuseType.IrlDangerousActivities": dq,
+            "Label.AbuseType.MisusingRobloxSystems": dT,
+            "Label.AbuseType.OffPlatformSpeechandBehavior": dS,
+            "Label.AbuseType.PrivacyAskingforPII": dE,
+            "Label.AbuseType.PrivacyGivingPII": dE,
+            "Label.AbuseType.RealLifeThreats": dS,
+            "Label.AbuseType.Scamming": dT,
+            "Label.AbuseType.SexualContent": dR,
             "Label.AbuseType.Spam": {
                 ruleTitle: "Heading.RuleExplanation.Spam",
                 ruleSubtitle: "SubHeading.RuleExplanation.Spam",
@@ -11668,7 +11717,7 @@
                 importanceDescription: "Description.RuleImportance.Spam",
                 policyKey: "spam"
             },
-            "Label.AbuseType.SuicideSelfHarm": dT,
+            "Label.AbuseType.SuicideSelfHarm": dq,
             "Label.AbuseType.Swearing": {
                 ruleTitle: "Heading.RuleExplanation.Swearing",
                 ruleSubtitle: "SubHeading.RuleExplanation.Swearing",
@@ -11677,7 +11726,7 @@
                 importanceDescription: "Description.RuleImportance.Swearing",
                 policyKey: "swearing"
             },
-            "Label.AbuseType.ThreatsOrAbuseOfRobloxEmployeesOrAffiliates": dP,
+            "Label.AbuseType.ThreatsOrAbuseOfRobloxEmployeesOrAffiliates": dS,
             "Label.AbuseType.ViolentContentAndGore": {
                 ruleTitle: "Heading.RuleExplanation.ViolentContentAndGore",
                 ruleSubtitle: "SubHeading.RuleExplanation.ViolentContentAndGore",
@@ -11686,7 +11735,7 @@
                 importanceDescription: "Description.RuleImportance.ViolentContentAndGore",
                 policyKey: "violent-content-and-gore"
             },
-            "Label.AbuseType.VirtualCasino": dT,
+            "Label.AbuseType.VirtualCasino": dq,
             "Label.Sublabel.RealLifeEvents": {
                 ruleTitle: "Heading.RuleExplanation.RealLifeEvents",
                 ruleSubtitle: "SubHeading.RuleExplanation.RealLifeEvents",
@@ -11696,17 +11745,17 @@
                 importanceDescription: "Description.RuleImportance.RealLifeEvents",
                 policyKey: "real-life-events"
             },
-            "Label.Sublabel.RomanceOrSex": dx
+            "Label.Sublabel.RomanceOrSex": dR
         },
-        dq = "{startLink}",
-        dk = "{endLink}",
-        dA = (t, n) => (r, i, a, o) => {
+        dA = "{startLink}",
+        dC = "{endLink}",
+        dI = (t, n) => (r, i, a, o) => {
             var s;
             let [u, c] = t(r, {
-                startLink: dq,
-                endLink: dk,
+                startLink: dA,
+                endLink: dC,
                 ...a
-            }).split(dq, 2), [l, d] = null != (s = null == c ? void 0 : c.split(dk, 2)) ? s : [];
+            }).split(dA, 2), [l, d] = null != (s = null == c ? void 0 : c.split(dC, 2)) ? s : [];
             return (0, v.jsxs)("p", {
                 className: "text-body-large",
                 children: [u, (0, v.jsx)("a", {
@@ -11720,14 +11769,14 @@
                 }), d]
             })
         },
-        dC = {
-            getIsVisible: t => [l4, "VPC"].includes(t.verificationCategory),
+        dj = {
+            getIsVisible: t => [l6, "VPC"].includes(t.verificationCategory),
             renderComponent: t => {
                 let {
                     punishmentData: n
-                } = t, r = lX().translate, {
+                } = t, r = l$().translate, {
                     websiteUrl: i
-                } = lX(), a = dA(r), {
+                } = l$(), a = dI(r), {
                     verificationCategory: o
                 } = n, s = "".concat(i, "/"), u = a("VPC" === o ? "Label.ParentReactivationNotice" : "Label.EmailReactivationNotice", s);
                 return (0, v.jsxs)("div", {
@@ -11740,14 +11789,14 @@
             },
             configName: "chargeback-steps"
         },
-        dI = {
+        dL = {
             getIsVisible: t => "Delete" !== t.punishmentTypeDescription,
             renderComponent: t => {
                 let {
                     punishmentData: n
-                } = t, r = lX().translate, i = lZ(), {
+                } = t, r = l$().translate, i = l0(), {
                     hasEducationalPages: a
-                } = l5(), {
+                } = l7(), {
                     showUGCAvatarGuidelinesLink: o,
                     context: s
                 } = n, u = null == s ? void 0 : s.IS_ALT_INFORMED;
@@ -11764,7 +11813,7 @@
                         }), u && (0, v.jsx)("p", {
                             className: "text-body-large",
                             children: r("Description.LinkedAccounts")
-                        }), (!!o || !a) && (0, v.jsx)(lW.Button, {
+                        }), (!!o || !a) && (0, v.jsx)(lK.Button, {
                             as: "a",
                             href: o ? "https://create.roblox.com/docs/marketplace/marketplace-policy#general-creation-guidelines" : "https://en.help.roblox.com/hc/en-us/articles/203313410-Roblox-Community-Standards",
                             target: "_blank",
@@ -11781,9 +11830,9 @@
             },
             configName: "prevention-steps"
         },
-        dj = function(t, n, r, i) {
+        dO = function(t, n, r, i) {
             if ("Delete" === r) return i("Description.BrokeRulesBanned");
-            let a = l2[null != n ? n : ""],
+            let a = l3[null != n ? n : ""],
                 o = a ? i(a) : "";
             return t.length > 0 ? o ? i("Description.BrokeRulesTypePolicy.V2", {
                 type: o,
@@ -11794,18 +11843,18 @@
                 type: o
             }) : i("Description.BrokeRulesGeneric")
         },
-        dL = {
+        dN = {
             getIsVisible: () => !0,
             renderComponent: t => {
                 var n, r, i;
                 let {
                     punishmentData: a
-                } = t, o = lX().translate, {
+                } = t, o = l$().translate, {
                     violationReasons: s
-                } = dy(), {
+                } = db(), {
                     violation: u,
                     punishmentTypeDescription: c
-                } = a, l = null == u || null == (i = u.evidence) || null == (r = i.displayMeta) ? void 0 : r.capitalizedKey, d = dj(null != (n = null == s ? void 0 : s.translatedReasons) ? n : [], l, c, o);
+                } = a, l = null == u || null == (i = u.evidence) || null == (r = i.displayMeta) ? void 0 : r.capitalizedKey, d = dO(null != (n = null == s ? void 0 : s.translatedReasons) ? n : [], l, c, o);
                 return (0, v.jsx)("span", {
                     className: "text-body-medium",
                     children: d
@@ -11813,36 +11862,36 @@
             },
             configName: "punishment-description"
         },
-        dO = () => {
+        dD = () => {
             let {
                 websiteUrl: t,
                 platform: n,
                 onAppealsRedirect: r
-            } = lX(), {
+            } = l$(), {
                 ixpData: i
-            } = dy(), a = lZ();
+            } = db(), a = l0();
             return {
                 handleAppealsClick: (0, oc.useCallback)(() => {
                     (a("appealsPortalClicked"), r) ? r(): i && "FFlagEnableSafetyDashboard" in i && !0 === i.FFlagEnableSafetyDashboard ? window.open("".concat(t, "/safety-dashboard?t_source=").concat(encodeURIComponent(n)), "_blank", "noopener,noreferrer") : window.open("".concat(t, "/report-appeals?t_source=nap-web"), "_blank", "noopener,noreferrer")
                 }, [a, r, i, t, n])
             }
         },
-        dN = {
+        d_ = {
             getIsVisible: (t, n, r) => {
                 var i;
                 return !(null != (i = null == r ? void 0 : r.educational_pass_eligible) && i) || "second-chance-intro" === n
             },
             renderComponent: () => {
-                let t = lX().translate,
+                let t = l$().translate,
                     {
                         handleAppealsClick: n
-                    } = dO();
+                    } = dD();
                 return (0, v.jsxs)("div", {
                     className: "flex flex-col gap-medium",
                     children: [(0, v.jsx)("p", {
                         className: "text-body-large",
                         children: t("Description.Mistake.V3")
-                    }), (0, v.jsx)(lW.Button, {
+                    }), (0, v.jsx)(lK.Button, {
                         variant: "Standard",
                         size: "Small",
                         onClick: n,
@@ -11852,11 +11901,11 @@
             },
             configName: "report-mistake"
         },
-        d_ = t => {
+        dM = t => {
             let {
                 url: n,
                 altLabelKey: r
-            } = t, i = lX().translate, [a, o] = (0, oc.useState)(!0);
+            } = t, i = l$().translate, [a, o] = (0, oc.useState)(!0);
             return (0, v.jsxs)("div", {
                 className: "flex aspect-1-1 justify-center items-center bg-shift-200 radius-medium",
                 children: [(0, v.jsx)("img", {
@@ -11875,7 +11924,7 @@
                 }), (0, v.jsx)("div", {
                     "data-testid": "spinner-container",
                     className: a ? void 0 : "hidden",
-                    children: (0, v.jsx)(lg.ProgressCircle, {
+                    children: (0, v.jsx)(lw.ProgressCircle, {
                         ariaLabel: i("Label.LoadingImage"),
                         size: "Medium",
                         variant: "Indeterminate"
@@ -11883,7 +11932,7 @@
                 })]
             })
         },
-        dD = t => new Date(t).toLocaleString(void 0, {
+        dU = t => new Date(t).toLocaleString(void 0, {
             month: "long",
             day: "numeric",
             year: "numeric",
@@ -11891,13 +11940,13 @@
             minute: "numeric"
         });
 
-    function dM() {
+    function dB() {
         let {
             formatFullDate: t
-        } = lX();
-        return null != t ? t : dD
+        } = l$();
+        return null != t ? t : dU
     }
-    var dU = t => {
+    var dV = t => {
             let {
                 fieldLabel: n,
                 fieldValue: r,
@@ -11918,23 +11967,23 @@
                 })]
             })
         },
-        dB = () => {
-            let t = lX().translate,
+        dF = () => {
+            let t = l$().translate,
                 {
                     handleAppealsClick: n
-                } = dO(),
+                } = dD(),
                 {
                     readOnly: r
-                } = lX();
-            return r ? null : (0, v.jsx)(lW.Button, {
+                } = l$();
+            return r ? null : (0, v.jsx)(lK.Button, {
                 onClick: n,
                 variant: "Standard",
                 size: "Small",
                 children: t("Action.ViewMore")
             })
         },
-        dV = {
-            getIsVisible: dp,
+        dG = {
+            getIsVisible: dm,
             renderComponent: t => {
                 var n, r;
                 let {
@@ -11942,13 +11991,13 @@
                 } = t, {
                     violation: a,
                     consequenceTransparencyMessage: o
-                } = i, s = lX().translate, u = dM(), c = lZ(), l = null == a || null == (r = a.evidence) ? void 0 : r.elements, d = null != (n = null == l ? void 0 : l.filter(t => df(t))) ? n : [], f = [], h = [];
+                } = i, s = l$().translate, u = dB(), c = l0(), l = null == a || null == (r = a.evidence) ? void 0 : r.elements, d = null != (n = null == l ? void 0 : l.filter(t => dp(t))) ? n : [], f = [], h = [];
                 d.forEach(t => {
                     var n;
-                    "image" === t.type ? f.push((0, v.jsx)(d_, {
+                    "image" === t.type ? f.push((0, v.jsx)(dM, {
                         url: t.url,
                         altLabelKey: t.labelKey
-                    }, t.url)) : h.push((0, v.jsx)(dU, {
+                    }, t.url)) : h.push((0, v.jsx)(dV, {
                         fieldLabel: s(t.labelKey),
                         fieldValue: t.textKey ? ((t, n, r, i) => {
                             if (!r) return t(n);
@@ -11974,22 +12023,22 @@
                         children: f[0]
                     }), (0, v.jsxs)("div", {
                         className: "flex flex-col gap-small width-full",
-                        children: [h, (0, v.jsx)(dU, {
+                        children: [h, (0, v.jsx)(dV, {
                             fieldLabel: s("Label.ReviewDate"),
                             fieldValue: u(i.beginDate)
-                        }), o && (0, v.jsx)(dU, {
+                        }), o && (0, v.jsx)(dV, {
                             fieldLabel: s("Label.DecisionMethod"),
                             fieldValue: o
-                        }), (0, v.jsx)(dB, {})]
+                        }), (0, v.jsx)(dF, {})]
                     })]
                 })
             },
             configName: "violation-evidence"
         },
-        dF = t => {
+        dW = t => {
             let {
                 badUtterances: n
-            } = t, [r, i] = (0, oc.useState)(!1), a = lX().translate;
+            } = t, [r, i] = (0, oc.useState)(!1), a = l$().translate;
             return (0, v.jsxs)("div", {
                 className: "flex flex-col gap-small",
                 children: [(0, v.jsxs)("div", {
@@ -12013,7 +12062,7 @@
                             children: t.utteranceText
                         }, t.utteranceText))]
                     })]
-                }), n.length > 4 && (0, v.jsx)(lW.Button, {
+                }), n.length > 4 && (0, v.jsx)(lK.Button, {
                     className: "self-start margin-left-[-7px]",
                     variant: "Link",
                     size: "XSmall",
@@ -12025,42 +12074,42 @@
                 })]
             })
         },
-        dG = {
+        dH = {
             getIsVisible: t => {
                 var n, r;
-                return !dp(t) && (null != (n = null == (r = t.badUtterances) ? void 0 : r.length) ? n : 0) > 0
+                return !dm(t) && (null != (n = null == (r = t.badUtterances) ? void 0 : r.length) ? n : 0) > 0
             },
             renderComponent: t => {
                 let {
                     punishmentData: n
-                } = t, r = lX().translate, i = dM(), {
+                } = t, r = l$().translate, i = dB(), {
                     badUtterances: a,
                     consequenceTransparencyMessage: o
                 } = n;
                 return (0, v.jsxs)("div", {
                     className: "flex flex-col gap-small",
                     "data-testid": "bad-utterances",
-                    children: [(0, v.jsx)(dF, {
+                    children: [(0, v.jsx)(dW, {
                         badUtterances: null != a ? a : []
-                    }), (0, v.jsx)(lH.Divider, {}), (0, v.jsx)(dU, {
+                    }), (0, v.jsx)(lJ.Divider, {}), (0, v.jsx)(dV, {
                         fieldLabel: r("Label.ReviewDate"),
                         fieldValue: i(n.beginDate)
-                    }), o && (0, v.jsx)(dU, {
+                    }), o && (0, v.jsx)(dV, {
                         fieldLabel: r("Label.DecisionMethod"),
                         fieldValue: o
-                    }), (0, v.jsx)(dB, {})]
+                    }), (0, v.jsx)(dF, {})]
                 })
             },
             configName: "bad-utterances"
         },
-        dW = {
+        dK = {
             getIsVisible: t => {
                 var n, r;
-                return !dp(t) && (null != (n = null == (r = t.badUtterances) ? void 0 : r.length) ? n : 0) === 0
+                return !dm(t) && (null != (n = null == (r = t.badUtterances) ? void 0 : r.length) ? n : 0) === 0
             },
             renderComponent: t => {
-                let n = lX().translate,
-                    r = dM(),
+                let n = l$().translate,
+                    r = dB(),
                     {
                         punishmentData: i
                     } = t,
@@ -12071,23 +12120,23 @@
                 return (0, v.jsxs)("div", {
                     className: "flex flex-col gap-small",
                     "data-testid": "simple-evidence",
-                    children: [(0, v.jsx)(dU, {
+                    children: [(0, v.jsx)(dV, {
                         fieldLabel: n("Label.ReviewDate"),
                         fieldValue: r(a)
-                    }), o && (0, v.jsx)(dU, {
+                    }), o && (0, v.jsx)(dV, {
                         fieldLabel: n("Label.DecisionMethod"),
                         fieldValue: o
-                    }), (0, v.jsx)(dB, {})]
+                    }), (0, v.jsx)(dF, {})]
                 })
             },
             configName: "simple-evidence"
         },
-        dH = {
+        dJ = {
             getIsVisible: () => !0,
             renderComponent: t => {
                 let {
                     punishmentData: n
-                } = t, r = lX().translate, i = [dV, dG, dW].map(t => t.getIsVisible(n) ? (0, v.jsx)("div", {
+                } = t, r = l$().translate, i = [dG, dH, dK].map(t => t.getIsVisible(n) ? (0, v.jsx)("div", {
                     children: t.renderComponent({
                         punishmentData: n
                     })
@@ -12112,10 +12161,10 @@
             },
             configName: "rewiewed-evidence"
         },
-        dK = {
+        dz = {
             getIsVisible: () => !0,
             renderComponent: () => {
-                let t = lX().translate;
+                let t = l$().translate;
                 return (0, v.jsxs)("div", {
                     className: "flex flex-col gap-medium",
                     children: [(0, v.jsx)("span", {
@@ -12129,10 +12178,10 @@
             },
             configName: "second-chance-conclusion"
         },
-        dJ = {
+        dX = {
             getIsVisible: () => !0,
             renderComponent: () => {
-                let t = lX().translate;
+                let t = l$().translate;
                 return (0, v.jsxs)("div", {
                     className: "flex flex-col gap-large",
                     children: [(0, v.jsx)("span", {
@@ -12146,14 +12195,14 @@
             },
             configName: "second-chance-intro"
         },
-        dz = {
+        dQ = {
             getIsVisible: () => !0,
             renderComponent: t => {
                 var n;
-                let r = lX().translate,
+                let r = l$().translate,
                     {
                         violationReasons: i
-                    } = dy(),
+                    } = db(),
                     {
                         punishmentData: a
                     } = t,
@@ -12168,10 +12217,10 @@
                         children: r("Label.WhatHappened")
                     }), (0, v.jsxs)("div", {
                         className: "padding-large bg-shift-100 radius-medium flex flex-col gap-small",
-                        children: [(0, v.jsx)(dU, {
+                        children: [(0, v.jsx)(dV, {
                             fieldLabel: r("Label.Reason"),
                             fieldValue: (null != (n = null == i ? void 0 : i.translatedReasons) ? n : []).join(", ") || r("Label.AbuseType.Other")
-                        }), (0, v.jsx)(dU, {
+                        }), (0, v.jsx)(dV, {
                             fieldLabel: r("Label.ModeratorNote"),
                             fieldValue: o || r("Description.Violation", {
                                 startLink: "",
@@ -12184,14 +12233,14 @@
             },
             configName: "what-happened"
         },
-        dX = t => t.split("\n").map(t => t.trim()).filter(Boolean),
-        dQ = t => ({
+        d$ = t => t.split("\n").map(t => t.trim()).filter(Boolean),
+        dZ = t => ({
             getIsVisible: () => !0,
             renderComponent: () => {
-                let n = lX().translate,
-                    r = dX(n(t.description)),
+                let n = l$().translate,
+                    r = d$(n(t.description)),
                     i = t.descriptionBullets ? n(t.descriptionBullets) : void 0,
-                    a = i ? dX(i) : [];
+                    a = i ? d$(i) : [];
                 return (0, v.jsxs)("div", {
                     className: "flex flex-col gap-medium",
                     "data-testid": t.policyKey,
@@ -12227,13 +12276,13 @@
             },
             configName: t.policyKey
         }),
-        d$ = t => {
+        dY = t => {
             let {
                 isDisabled: n = !1
-            } = t, r = lX().translate, {
+            } = t, r = l$().translate, {
                 goToNextPage: i
-            } = l5();
-            return (0, v.jsx)(lW.Button, {
+            } = l7();
+            return (0, v.jsx)(lK.Button, {
                 variant: "Emphasis",
                 size: "Medium",
                 onClick: i,
@@ -12242,11 +12291,11 @@
                 children: r("Action.Continue")
             })
         },
-        dZ = t => {
+        d0 = t => {
             let {
                 setIsDialogOpen: n
-            } = t, r = lX().translate;
-            return (0, v.jsx)(lW.Button, {
+            } = t, r = l$().translate;
+            return (0, v.jsx)(lK.Button, {
                 variant: "Emphasis",
                 size: "Medium",
                 onClick: () => {
@@ -12257,11 +12306,11 @@
                 children: r("Action.OK")
             })
         },
-        dY = ((c = dY || {})[c.Reactivate = 0] = "Reactivate", c[c.Paused = 1] = "Paused", c[c.VerifyEmail = 2] = "VerifyEmail", c[c.VerifyVPC = 3] = "VerifyVPC", c),
-        d0 = t => {
+        d1 = ((c = d1 || {})[c.Reactivate = 0] = "Reactivate", c[c.Paused = 1] = "Paused", c[c.VerifyEmail = 2] = "VerifyEmail", c[c.VerifyVPC = 3] = "VerifyVPC", c),
+        d2 = t => {
             let {
                 onClose: n
-            } = t, r = lX().translate;
+            } = t, r = l$().translate;
             return (0, v.jsxs)("div", {
                 className: "width-full flex gap-large items-center justify-between radius-medium padding-medium stroke-system-alert stroke-standard maf-error-alert",
                 style: {
@@ -12270,14 +12319,14 @@
                 "data-testid": "error-alert",
                 children: [(0, v.jsxs)("div", {
                     className: "flex gap-small items-center",
-                    children: [(0, v.jsx)(lp.Icon, {
+                    children: [(0, v.jsx)(lm.Icon, {
                         name: "icon-filled-circle-x",
                         className: "content-system-alert"
                     }), (0, v.jsx)("span", {
                         className: "text-body-medium",
                         children: r("Heading.Error")
                     })]
-                }), (0, v.jsx)(lb.IconButton, {
+                }), (0, v.jsx)(lx.IconButton, {
                     icon: "icon-regular-x-small",
                     ariaLabel: "Close",
                     onClick: n,
@@ -12288,26 +12337,26 @@
                 })]
             })
         },
-        d1 = t => {
+        d4 = t => {
             let n, {
                     proceedAction: r,
                     setIsDialogOpen: i,
                     isAgreed: a,
                     isDisabled: o = !1
                 } = t,
-                s = lX().translate,
+                s = l$().translate,
                 {
                     sendPageEvent: u
-                } = dw(),
+                } = dP(),
                 {
                     userModerationApiUrl: c,
                     httpPost: l,
                     onVerifyEmail: d,
                     onVerifyParent: f,
                     onAccountReactivated: h
-                } = lX(),
+                } = l$(),
                 [p, m] = (0, oc.useState)(!1),
-                y = (0, lv.useMutation)({
+                y = (0, ly.useMutation)({
                     mutationFn: () => l("".concat(c, "/v1/not-approved/reactivate")),
                     onSuccess: async () => {
                         await new Promise(t => {
@@ -12360,11 +12409,11 @@
                 }
             };
             return (0, v.jsxs)(oc.Fragment, {
-                children: [y.isError && (0, v.jsx)(d0, {
+                children: [y.isError && (0, v.jsx)(d2, {
                     onClose: () => {
                         y.reset()
                     }
-                }), (0, v.jsx)(lW.Button, {
+                }), (0, v.jsx)(lK.Button, {
                     onClick: () => {
                         g().catch(t => {
                             console.warn("NotApprovedProceedButton onClick error", t instanceof Error ? t.message : "unknown")
@@ -12379,25 +12428,25 @@
                 })]
             })
         },
-        d2 = function(t) {
+        d3 = function(t) {
             let {
                 punishmentTypeDescription: n,
                 endDate: r,
                 verificationCategory: i
             } = t;
             switch (i) {
-                case l4:
+                case l6:
                     return 2;
                 case "VPC":
                     return 3;
                 default:
-                    return +!l3(n, r, i)
+                    return +!l8(n, r, i)
             }
         },
-        d4 = t => {
+        d6 = t => {
             let {
                 endDate: n
-            } = t, r = lX().translate, i = ((t, n) => {
+            } = t, r = l$().translate, i = ((t, n) => {
                 let r = new Date(t),
                     i = Date.now();
                 if (Number.isNaN(r.getTime())) return n("Label.Hours", {
@@ -12418,7 +12467,7 @@
             return (0, v.jsxs)("div", {
                 "data-testid": "suspension-duration-alert",
                 className: "flex flex-wrap gap-small bg-shift-100 padding-x-medium padding-y-small stroke-standard stroke-default items-center radius-medium",
-                children: [(0, v.jsx)(lp.Icon, {
+                children: [(0, v.jsx)(lm.Icon, {
                     name: "icon-filled-triangle-exclamation",
                     className: "content-system-warning"
                 }), (0, v.jsx)("span", {
@@ -12430,33 +12479,33 @@
                 })]
             })
         },
-        d3 = t => {
+        d8 = t => {
             let {
                 punishmentData: n,
                 setIsDialogOpen: r
-            } = t, i = lX().translate, a = lZ(), {
+            } = t, i = l$().translate, a = l0(), {
                 endDate: o,
                 punishmentTypeDescription: s
-            } = n, u = d2(n), [c, l] = (0, oc.useState)(!1), [d, f] = (0, oc.useState)(!1);
+            } = n, u = d3(n), [c, l] = (0, oc.useState)(!1), [d, f] = (0, oc.useState)(!1);
             return (0, oc.useEffect)(() => {
                 let t;
-                return Object.values(l0).includes(s) && s.startsWith("Ban") && (t = setTimeout(() => {
+                return Object.values(l2).includes(s) && s.startsWith("Ban") && (t = setTimeout(() => {
                     f(t => !t)
                 }, 6e4)), () => {
                     clearTimeout(t)
                 }
             }, [d, s]), 1 === u ? (0, v.jsxs)("div", {
                 className: "flex flex-col gap-large medium:flex-row",
-                children: [(0, v.jsx)(d4, {
+                children: [(0, v.jsx)(d6, {
                     endDate: o
-                }), (0, v.jsx)(d1, {
+                }), (0, v.jsx)(d4, {
                     proceedAction: u,
                     setIsDialogOpen: r,
                     isAgreed: c,
                     isDisabled: !0
                 })]
             }) : (0, v.jsxs)(oc.Fragment, {
-                children: [(0, v.jsx)(lK.Checkbox, {
+                children: [(0, v.jsx)(lz.Checkbox, {
                     label: i("Label.RuleAcknowledgment"),
                     placement: "Start",
                     size: "Small",
@@ -12466,7 +12515,7 @@
                     },
                     className: "self-start",
                     "data-testid": "rule-confirmation-checkbox"
-                }), (0, v.jsx)(d1, {
+                }), (0, v.jsx)(d4, {
                     proceedAction: u,
                     setIsDialogOpen: r,
                     isAgreed: c,
@@ -12474,12 +12523,12 @@
                 })]
             })
         },
-        d6 = () => {
-            let t = lX().translate,
+        d5 = () => {
+            let t = l$().translate,
                 {
                     handleAppealsClick: n
-                } = dO();
-            return (0, v.jsx)(lW.Button, {
+                } = dD();
+            return (0, v.jsx)(lK.Button, {
                 variant: "SoftEmphasis",
                 size: "Medium",
                 onClick: n,
@@ -12487,24 +12536,24 @@
                 children: t("Action.ReportMistake")
             })
         },
-        d8 = async (t, n) => n("".concat(t, "/moderation-appeal-service/v2/consequence-commutation"), {
+        d9 = async (t, n) => n("".concat(t, "/moderation-appeal-service/v2/consequence-commutation"), {
             type: "EDUCATIONAL_PASS"
-        }), d5 = () => {
-            let t = lX().translate,
+        }), d7 = () => {
+            let t = l$().translate,
                 {
                     sendPageEvent: n
-                } = dw(),
+                } = dP(),
                 {
                     httpPost: r,
                     apiGatewayUrl: i,
                     onAccountReactivated: a
-                } = lX(),
+                } = l$(),
                 {
                     handleAppealsClick: o
-                } = dO(),
+                } = dD(),
                 [s, u] = (0, oc.useState)(!1),
-                c = (0, lv.useMutation)({
-                    mutationFn: () => d8(i, r),
+                c = (0, ly.useMutation)({
+                    mutationFn: () => d9(i, r),
                     onMutate: () => {
                         u(!0), n("secondChanceReactivateClicked")
                     },
@@ -12519,13 +12568,13 @@
                     retry: 0
                 });
             return (0, v.jsxs)(oc.Fragment, {
-                children: [c.isError && (0, v.jsx)(d0, {
+                children: [c.isError && (0, v.jsx)(d2, {
                     onClose: () => {
                         c.reset()
                     }
                 }), (0, v.jsxs)("div", {
                     className: "flex flex-col gap-small medium:flex-row-reverse",
-                    children: [(0, v.jsx)(lW.Button, {
+                    children: [(0, v.jsx)(lK.Button, {
                         onClick: () => {
                             c.mutate()
                         },
@@ -12536,7 +12585,7 @@
                         isLoading: s,
                         isDisabled: s,
                         children: t("Action.OK")
-                    }), (0, v.jsx)(lW.Button, {
+                    }), (0, v.jsx)(lK.Button, {
                         onClick: o,
                         variant: "Standard",
                         size: "Medium",
@@ -12545,11 +12594,11 @@
                     })]
                 })]
             })
-        }, d9 = () => {
-            let t = lX().translate,
+        }, fe = () => {
+            let t = l$().translate,
                 [n, r] = (0, oc.useState)(!1);
             return (0, v.jsxs)(oc.Fragment, {
-                children: [(0, v.jsx)(lK.Checkbox, {
+                children: [(0, v.jsx)(lz.Checkbox, {
                     label: t("Label.RuleAcknowledgment"),
                     placement: "Start",
                     size: "Small",
@@ -12559,23 +12608,23 @@
                     },
                     className: "self-start",
                     "data-testid": "understand-continue-checkbox"
-                }), (0, v.jsx)(d$, {
+                }), (0, v.jsx)(dY, {
                     isDisabled: !n
                 })]
             })
-        }, d7 = t => {
+        }, ft = t => {
             let {
                 onOpenChange: n,
                 children: r
             } = t, {
                 readOnly: i
-            } = lX(), {
+            } = l$(), {
                 punishmentData: a,
                 violationReasons: o,
                 isLoading: s,
                 error: u,
                 commutationEligibility: c
-            } = dy(), l = null == o ? void 0 : o.untranslatedReasons, d = (0, oc.useMemo)(() => (null != l ? l : []).some(t => t in dE), [l]), {
+            } = db(), l = null == o ? void 0 : o.untranslatedReasons, d = (0, oc.useMemo)(() => (null != l ? l : []).some(t => t in dk), [l]), {
                 pages: f,
                 unmappedViolationKeys: h
             } = (0, oc.useMemo)(() => a ? ((t, n, r, i) => {
@@ -12585,29 +12634,29 @@
                     d = null != (a = null == r ? void 0 : r.educational_pass_eligible) && a;
                 if (c.push({
                         pageName: "intro",
-                        pageItems: [dL, dz, dH],
-                        CtaComponent: l ? d6 : d$
+                        pageItems: [dN, dQ, dJ],
+                        CtaComponent: l ? d5 : dY
                     }), l) return {
                     pages: c,
                     unmappedViolationKeys: []
                 };
                 d && !i && c.push({
                     pageName: "second-chance-intro",
-                    pageItems: [dJ, dN],
-                    CtaComponent: d$
+                    pageItems: [dX, d_],
+                    CtaComponent: dY
                 });
                 let {
                     educationalPages: f,
                     unmappedViolationKeys: h
                 } = (o = [], s = new Set, u = new Set, n.forEach(t => {
-                    let n = dE[t];
+                    let n = dk[t];
                     if (!n) return void s.add(t);
                     if (u.has(n.policyKey)) return;
                     u.add(n.policyKey);
-                    let r = d && !i ? d9 : d$;
+                    let r = d && !i ? fe : dY;
                     o.push({
                         pageName: "policy-rule-".concat(n.policyKey),
-                        pageItems: [dQ({
+                        pageItems: [dZ({
                             title: n.ruleTitle,
                             subtitle: n.ruleSubtitle,
                             description: n.ruleDescription,
@@ -12617,7 +12666,7 @@
                         CtaComponent: r
                     }), o.push({
                         pageName: "policy-importance-".concat(n.policyKey),
-                        pageItems: [dQ({
+                        pageItems: [dZ({
                             title: n.importanceTitle,
                             description: n.importanceDescription,
                             policyKey: n.policyKey
@@ -12630,12 +12679,12 @@
                 });
                 return c.push(...f), c.push({
                     pageName: "resolution",
-                    pageItems: [dI, dC, dN],
-                    CtaComponent: i ? dZ : d ? d9 : d3
+                    pageItems: [dL, dj, d_],
+                    CtaComponent: i ? d0 : d ? fe : d8
                 }), d && !i && c.push({
                     pageName: "second-chance-conclusion",
-                    pageItems: [dK],
-                    CtaComponent: d5
+                    pageItems: [dz],
+                    CtaComponent: d7
                 }), {
                     pages: c,
                     unmappedViolationKeys: h
@@ -12645,49 +12694,49 @@
                 unmappedViolationKeys: []
             }, [a, l, c, i]);
             return s ? r({
-                header: (0, v.jsx)(di, {
+                header: (0, v.jsx)(ds, {
                     readOnly: !!i
                 }),
-                body: (0, v.jsx)(da, {}),
-                ctas: (0, v.jsx)(ds, {})
+                body: (0, v.jsx)(du, {}),
+                ctas: (0, v.jsx)(dc, {})
             }) : u || !a ? r({
-                header: (0, v.jsx)(du, {}),
-                body: (0, v.jsx)(dc, {
+                header: (0, v.jsx)(dl, {}),
+                body: (0, v.jsx)(dd, {
                     error: u
                 })
-            }) : (0, v.jsx)(l8, {
+            }) : (0, v.jsx)(l9, {
                 pages: f,
                 unmappedViolationKeys: h,
                 hasEducationalPages: d,
                 commutationEligibility: c,
-                children: (0, v.jsx)(db, {
+                children: (0, v.jsx)(dx, {
                     children: r({
-                        header: (0, v.jsx)(dn, {
+                        header: (0, v.jsx)(di, {
                             punishmentData: a
                         }),
-                        body: (0, v.jsx)(l9, {
+                        body: (0, v.jsx)(de, {
                             punishmentData: a,
                             commutationEligibility: c
                         }),
-                        ctas: (0, v.jsx)(dr, {
+                        ctas: (0, v.jsx)(da, {
                             punishmentData: a,
                             setIsDialogOpen: n
                         })
                     })
                 })
             })
-        }, fe = t => {
+        }, fn = t => {
             let {
                 impressionEvent: n
             } = t, {
                 translate: r,
                 websiteUrl: i,
                 onLogout: a
-            } = lX(), o = lZ(), s = dA(r, o), [u, c] = (0, oc.useState)(!1);
+            } = l$(), o = l0(), s = dI(r, o), [u, c] = (0, oc.useState)(!1);
             (0, oc.useEffect)(() => {
                 o(n)
             }, [o, n]);
-            let l = (0, lv.useMutation)({
+            let l = (0, ly.useMutation)({
                 mutationFn: async () => {
                     await a()
                 },
@@ -12702,22 +12751,22 @@
                 },
                 retry: 0
             });
-            return (0, v.jsx)(lf.Dialog, {
+            return (0, v.jsx)(lp.Dialog, {
                 open: !0,
                 isModal: !0,
                 size: "Medium",
                 hasCloseAffordance: !1,
-                children: (0, v.jsxs)(lf.DialogContent, {
+                children: (0, v.jsxs)(lp.DialogContent, {
                     className: "[&_p]:margin-none [&_h2]:margin-none",
-                    children: [(0, v.jsxs)(lf.DialogBody, {
+                    children: [(0, v.jsxs)(lp.DialogBody, {
                         className: "gap-large flex flex-col",
-                        children: [(0, v.jsx)(lf.DialogTitle, {
+                        children: [(0, v.jsx)(lp.DialogTitle, {
                             className: "text-heading-large margin-none",
                             children: r("Heading.AccountIssue")
                         }), s("Description.ResolveIssue", i)]
-                    }), (0, v.jsxs)(lf.DialogFooter, {
+                    }), (0, v.jsxs)(lp.DialogFooter, {
                         className: "flex justify-end gap-small flex-col-reverse medium:flex-row",
-                        children: [(0, v.jsx)(lW.Button, {
+                        children: [(0, v.jsx)(lK.Button, {
                             variant: "Standard",
                             size: "Medium",
                             isLoading: u,
@@ -12726,7 +12775,7 @@
                                 l.mutate()
                             },
                             children: r("Action.Logout")
-                        }), (0, v.jsx)(lW.Button, {
+                        }), (0, v.jsx)(lK.Button, {
                             variant: "Emphasis",
                             size: "Medium",
                             onClick: () => {
@@ -12737,7 +12786,7 @@
                     })]
                 })
             })
-        }, ft = t => {
+        }, fr = t => {
             var n;
             let {
                 open: r,
@@ -12750,34 +12799,34 @@
                 shouldShowGenericFallback: d,
                 ixp: f,
                 readOnly: h
-            } = lX(), p = lZ(), {
+            } = l$(), p = l0(), {
                 punishmentData: m,
                 isLoading: y,
                 error: g,
                 ixpData: b
-            } = dy(), w = b && "FFlagEnableSafetyDashboard" in b, x = !y && !g && void 0 !== m, P = !y && !g && !m;
+            } = db(), w = b && "FFlagEnableSafetyDashboard" in b, x = !y && !g && void 0 !== m, P = !y && !g && !m;
             if ((0, oc.useEffect)(() => {
                     if (m) {
                         var t;
                         p((null == (t = m.context) ? void 0 : t.SelfServiceDeactivated) ? "accountReactivationPageRendered" : "pageRendered", {
                             interventionId: m.interventionId,
                             punishedUserId: m.punishedUserId,
-                            isReactivationEligible: l3(m.punishmentTypeDescription, m.endDate, m.verificationCategory),
+                            isReactivationEligible: l8(m.punishmentTypeDescription, m.endDate, m.verificationCategory),
                             verificationCategory: m.verificationCategory
                         })
                     }
                 }, [m]), (0, oc.useEffect)(() => {
-                    w && !h && m && (null == f || f.logExposure(lY))
+                    w && !h && m && (null == f || f.logExposure(l1))
                 }, [w, h, m, f]), P && !h) return null;
             if (x && (null == (n = m.context) ? void 0 : n.SelfServiceDeactivated)) return l ? (0, v.jsx)(oc.Fragment, {
                 children: l()
-            }) : (0, v.jsx)(fe, {
+            }) : (0, v.jsx)(fn, {
                 impressionEvent: "accountReactivationRedirectRendered"
             });
             let R = x && (null == d ? void 0 : d(m));
-            return R ? (0, v.jsx)(fe, {
+            return R ? (0, v.jsx)(fn, {
                 impressionEvent: R
-            }) : (0, v.jsx)(lf.Dialog, {
+            }) : (0, v.jsx)(lp.Dialog, {
                 open: null != r ? r : a,
                 size: "Large",
                 hasCloseAffordance: !!h,
@@ -12786,14 +12835,14 @@
                 onOpenChange: h ? t => {
                     t || u(!1)
                 } : void 0,
-                children: (0, v.jsx)(lf.DialogContent, {
+                children: (0, v.jsx)(lp.DialogContent, {
                     className: "width-full [&_p]:margin-none [&_h2]:margin-none",
                     onOpenAutoFocus: t => {
                         t.preventDefault()
                     },
-                    children: (0, v.jsx)(lf.DialogBody, {
+                    children: (0, v.jsx)(lp.DialogBody, {
                         className: "flex flex-col height-[85vh] max-height-[800px]",
-                        children: (0, v.jsx)(d7, {
+                        children: (0, v.jsx)(ft, {
                             onOpenChange: u,
                             children: t => {
                                 let {
@@ -12803,7 +12852,7 @@
                                 } = t;
                                 return (0, v.jsxs)("div", {
                                     className: "flex flex-col gap-large height-full min-height-0",
-                                    children: [(0, v.jsx)(lf.DialogTitle, {
+                                    children: [(0, v.jsx)(lp.DialogTitle, {
                                         className: "padding-none",
                                         children: n
                                     }), (0, v.jsxs)("div", {
@@ -12829,7 +12878,7 @@
                     })
                 })
             })
-        }, fn = new ok.QueryClient({
+        }, fi = new ok.QueryClient({
             defaultOptions: {
                 queries: {
                     refetchOnWindowFocus: !1,
@@ -12838,23 +12887,23 @@
                     staleTime: 6e4
                 }
             }
-        }), fr = function(t) {
+        }), fa = function(t) {
             let {
                 open: n,
                 onClose: r
             } = t;
             return (0, v.jsx)(oA.QueryClientProvider, {
-                client: fn,
-                children: (0, v.jsx)(dm, {
+                client: fi,
+                children: (0, v.jsx)(dg, {
                     enableIxp: !0,
-                    children: (0, v.jsx)(ft, {
+                    children: (0, v.jsx)(fr, {
                         open: n,
                         onClose: r
                     })
                 })
             })
-        }, fi = t.i(894244), fa = t.i(839165);
-    let fo = function() {
+        }, fo = t.i(894244), fs = t.i(839165);
+    let fu = function() {
             let {
                 translate: t
             } = (0, oO.useTranslation)(), n = (0, cw.useAuthentication)(), r = (0, ol.useRouter)(), i = "https://usermoderation.".concat("roblox.com"), a = "https://apis.roblox.com", o = "https://".concat("roblox.com"), s = "CreatorHub", u = (0, oc.useCallback)(t => {
@@ -12863,8 +12912,8 @@
                     context: t.context,
                     properties: t.properties
                 })
-            }, []), c = (0, oc.useCallback)(t => !!t.verificationCategory && lQ.VerificationRedirectRendered, []), l = (0, oc.useCallback)(async () => {
-                let t = await (0, fi.getAuthorizationEndpoint)({
+            }, []), c = (0, oc.useCallback)(t => !!t.verificationCategory && lZ.VerificationRedirectRendered, []), l = (0, oc.useCallback)(async () => {
+                let t = await (0, fo.getAuthorizationEndpoint)({
                     redirectUri: "https://create.roblox.com"
                 });
                 await n.logout(), await r.push(t)
@@ -12873,8 +12922,8 @@
             }, [r]);
             return (0, oc.useMemo)(() => ({
                 translate: t,
-                httpGet: fa.authenticatedHttpGet,
-                httpPost: fa.authenticatedHttpPost,
+                httpGet: fs.authenticatedHttpGet,
+                httpPost: fs.authenticatedHttpPost,
                 userModerationApiUrl: i,
                 apiGatewayUrl: a,
                 websiteUrl: o,
@@ -12885,55 +12934,55 @@
                 onAccountReactivated: d
             }), [t, i, a, o, u, s, c, l, d])
         },
-        fs = () => {
-            let t = fo();
-            return (0, v.jsx)(lz, {
+        fc = () => {
+            let t = fu();
+            return (0, v.jsx)(lQ, {
                 config: t,
-                children: (0, v.jsx)(fr, {})
+                children: (0, v.jsx)(fa, {})
             })
         },
-        fu = (0, oO.withTranslation)(() => {
+        fl = (0, oO.withTranslation)(() => {
             let {
                 themeMode: t
             } = (0, cb.useThemeMode)();
             return (0, v.jsx)(cR.UIThemeProvider, {
                 theme: t,
-                children: (0, v.jsx)(fs, {})
+                children: (0, v.jsx)(fc, {})
             })
-        }, [lc.TranslationNamespace.NotApproved, lc.TranslationNamespace.Moderation, lc.TranslationNamespace.AppealsPortal, lc.TranslationNamespace.CommonUIControls, lc.TranslationNamespace.Error, lc.TranslationNamespace.DashboardModeration]),
-        fc = () => {
+        }, [ll.TranslationNamespace.NotApproved, ll.TranslationNamespace.Moderation, ll.TranslationNamespace.AppealsPortal, ll.TranslationNamespace.CommonUIControls, ll.TranslationNamespace.Error, ll.TranslationNamespace.DashboardModeration]),
+        fd = () => {
             let {
                 status: t
             } = (0, cw.useAuthentication)();
-            return "moderated" === t ? (0, v.jsx)(fu, {}) : null
+            return "moderated" === t ? (0, v.jsx)(fl, {}) : null
         };
-    var fl = t.i(921500);
-    let fd = (0, cj.default)(() => t.A(14667), {
+    var ff = t.i(921500);
+    let fh = (0, cj.default)(() => t.A(14667), {
             loadableGenerated: {
                 modules: [573249]
             },
             ssr: !1
         }),
-        ff = t => {
+        fp = t => {
             let {
                 children: n
             } = t;
-            return (0, v.jsx)(fl.UniversalFeatureRestrictionsProvider, {
-                Surface: fd,
+            return (0, v.jsx)(ff.UniversalFeatureRestrictionsProvider, {
+                Surface: fh,
                 children: n
             })
         };
-    var fh = t.i(336964);
+    var fv = t.i(336964);
 
-    function fp(t) {
+    function fm(t) {
         return "object" == typeof t && null !== t && "Component" in t
     }
 
-    function fv(t) {
+    function fy(t) {
         var n;
         let {
             store: r
-        } = t, i = null != r ? r : fh.dialogStore, {
+        } = t, i = null != r ? r : fv.dialogStore, {
             render: a,
             options: o,
             isOpen: s
@@ -12943,16 +12992,16 @@
                 let t = setTimeout(() => i.clearContent(), 150);
                 return () => clearTimeout(t)
             }, [s, o, i]), null === a) return null;
-        if ((null == o ? void 0 : o.mode) === "standalone" && fp(a)) return (0, oc.createElement)(a.Component, {
+        if ((null == o ? void 0 : o.mode) === "standalone" && fm(a)) return (0, oc.createElement)(a.Component, {
             ...a.props,
             open: s,
             onOpenChange: t => {
                 t || i.close()
             }
         });
-        let u = null != o ? o : fh.DEFAULT_RESOLVED_CONTENT_OPTIONS,
-            c = fp(a) ? (0, oc.createElement)(a.Component, a.props) : a;
-        return (0, v.jsx)(lf.Dialog, {
+        let u = null != o ? o : fv.DEFAULT_RESOLVED_CONTENT_OPTIONS,
+            c = fm(a) ? (0, oc.createElement)(a.Component, a.props) : a;
+        return (0, v.jsx)(lp.Dialog, {
             open: s,
             onOpenChange: t => {
                 t || i.close()
@@ -12967,60 +13016,60 @@
             children: c
         })
     }
-    var fm = t.i(959819),
-        fy = t.i(209534);
+    var fg = t.i(959819),
+        fb = t.i(209534);
 
-    function fg() {
+    function fw() {
         let {
             current: t
-        } = (0, oc.useSyncExternalStore)(fy.snackbarStore.subscribe, fy.snackbarStore.getSnapshot, fy.snackbarStore.getSnapshot);
-        return null === t ? null : (0, v.jsx)(fm.Snackbar, {
+        } = (0, oc.useSyncExternalStore)(fb.snackbarStore.subscribe, fb.snackbarStore.getSnapshot, fb.snackbarStore.getSnapshot);
+        return null === t ? null : (0, v.jsx)(fg.Snackbar, {
             ...t.props,
-            onClose: () => fy.snackbarStore.dismiss()
+            onClose: () => fb.snackbarStore.dismiss()
         }, t.id)
     }
-    var fb = t.i(943758);
-    let fw = (0, oc.createContext)({
+    var fx = t.i(943758);
+    let fP = (0, oc.createContext)({
         primarySidebarExpanded: !1,
         setPrimarySidebarExpanded: () => {
             throw Error("Function not implemented. You may be trying to use this context outside of a provider.")
         }
     });
-    fw.displayName = "LeftNavigationStateContext";
-    let fx = t => {
+    fP.displayName = "LeftNavigationStateContext";
+    let fR = t => {
         let {
             children: n
         } = t, [r, i] = (0, oc.useState)(!0), a = (0, oc.useMemo)(() => ({
             primarySidebarExpanded: r,
             setPrimarySidebarExpanded: i
         }), [r]);
-        return (0, v.jsx)(fw.Provider, {
+        return (0, v.jsx)(fP.Provider, {
             value: a,
             children: n
         })
     };
-    var fP = t.i(729904),
-        fR = t.i(486736),
-        fS = t.i(47033),
-        fT = t.i(199834),
-        fE = t.i(291037),
-        fq = t.i(649319),
-        fk = t.i(982234),
-        fA = t.i(196990),
-        fC = t.i(533968),
-        fI = t.i(210205);
-    let fj = {
-            [fS.AgreementType.ChildrenPrivacyPolicy]: "Label.ChildrenPrivacyPolicy",
-            [fS.AgreementType.ConsentFlow]: "Label.ConsentFlow",
-            [fS.AgreementType.LuobuThirdPartyDataUse]: "Label.LuobuThirdPartyDataUse",
-            [fS.AgreementType.PersonalInformationPolicy]: "Label.PersonalInformationPolicy",
-            [fS.AgreementType.PrivacyPolicy]: "Label.PrivacyPolicy",
-            [fS.AgreementType.RefundTerms]: "Label.RefundTerms",
-            [fS.AgreementType.RiderTerms]: "Label.RiderTerms",
-            [fS.AgreementType.TermsOfService]: "Label.TermsOfService"
+    var fS = t.i(729904),
+        fT = t.i(486736),
+        fE = t.i(47033),
+        fq = t.i(199834),
+        fk = t.i(291037),
+        fA = t.i(649319),
+        fC = t.i(982234),
+        fI = t.i(196990),
+        fj = t.i(533968),
+        fL = t.i(210205);
+    let fO = {
+            [fE.AgreementType.ChildrenPrivacyPolicy]: "Label.ChildrenPrivacyPolicy",
+            [fE.AgreementType.ConsentFlow]: "Label.ConsentFlow",
+            [fE.AgreementType.LuobuThirdPartyDataUse]: "Label.LuobuThirdPartyDataUse",
+            [fE.AgreementType.PersonalInformationPolicy]: "Label.PersonalInformationPolicy",
+            [fE.AgreementType.PrivacyPolicy]: "Label.PrivacyPolicy",
+            [fE.AgreementType.RefundTerms]: "Label.RefundTerms",
+            [fE.AgreementType.RiderTerms]: "Label.RiderTerms",
+            [fE.AgreementType.TermsOfService]: "Label.TermsOfService"
         },
-        fL = ["/v1-studio-login"],
-        fO = (0, oO.withTranslation)(() => {
+        fN = ["/v1-studio-login"],
+        fD = (0, oO.withTranslation)(() => {
             let t = (0, ol.useRouter)(),
                 {
                     translate: n
@@ -13034,7 +13083,7 @@
                     captureError: o,
                     error: s,
                     info: u
-                } = (0, fI.useMetricsMonitoring)(),
+                } = (0, fL.useMetricsMonitoring)(),
                 [c, l] = (0, oc.useState)(!1),
                 [d, f] = (0, oc.useState)(!1),
                 [h, p] = (0, oc.useState)([]),
@@ -13043,11 +13092,11 @@
                         if (r <= 0) return void s("User Agreement accept failed after retried ".concat(3, " times"));
                         try {
                             var i;
-                            let a = null == (i = (await fA.userAgreementsClient.acceptUserAgreements(t)).results) ? void 0 : i.reduce((t, n) => 0 !== n.errorCode ? [...t, n.agreementId] : t, []);
+                            let a = null == (i = (await fI.userAgreementsClient.acceptUserAgreements(t)).results) ? void 0 : i.reduce((t, n) => 0 !== n.errorCode ? [...t, n.agreementId] : t, []);
                             a && a.length > 0 && await n(a, r - 1)
                         } catch (a) {
-                            let i = (0, fC.getResponseFromError)(a);
-                            (null == i ? void 0 : i.status) === lr.StatusCodes.UNAUTHORIZED ? (u("User Agreement accept failed with 401 from backend"), await ol.default.push("/login")) : (s("User Agreement accept failed with status code ".concat(null == i ? void 0 : i.status)), await n(t, r - 1))
+                            let i = (0, fj.getResponseFromError)(a);
+                            (null == i ? void 0 : i.status) === li.StatusCodes.UNAUTHORIZED ? (u("User Agreement accept failed with 401 from backend"), await ol.default.push("/login")) : (s("User Agreement accept failed with status code ".concat(null == i ? void 0 : i.status)), await n(t, r - 1))
                         }
                     }
                     await n(t, 3)
@@ -13067,8 +13116,8 @@
                 }, [m, h]),
                 b = (0, oc.useCallback)(async () => {
                     try {
-                        let t = fA.userAgreementsClient.getUserAgreements({
-                                clientType: fS.ClientType.Studio
+                        let t = fI.userAgreementsClient.getUserAgreements({
+                                clientType: fE.ClientType.Studio
                             }),
                             n = await t;
                         n.length > 0 && (p([...n]), l(!0))
@@ -13077,15 +13126,15 @@
                     }
                 }, [o, s]);
             return (0, oc.useEffect)(() => {
-                (null == r ? void 0 : r.id) === void 0 || a.current || !t.isReady || fL.some(n => t.pathname.startsWith(n)) || (b(), a.current = !0)
-            }, [r, b, t.isReady, t.pathname]), (0, v.jsx)(fE.Dialog, {
+                (null == r ? void 0 : r.id) === void 0 || a.current || !t.isReady || fN.some(n => t.pathname.startsWith(n)) || (b(), a.current = !0)
+            }, [r, b, t.isReady, t.pathname]), (0, v.jsx)(fk.Dialog, {
                 open: c,
-                children: (0, v.jsx)(fq.DialogTemplate, {
+                children: (0, v.jsx)(fA.DialogTemplate, {
                     onConfirm: g,
                     onCancel: y,
                     title: n("Heading.AgreementsUpdate"),
                     content: (0, v.jsxs)(v.Fragment, {
-                        children: [(0, v.jsx)(fT.Typography, {
+                        children: [(0, v.jsx)(fq.Typography, {
                             component: "p",
                             variant: "body1",
                             children: n("Description.AgreementsUpdate")
@@ -13094,10 +13143,10 @@
                                 var r;
                                 let i;
                                 return (0, v.jsx)("li", {
-                                    children: (0, v.jsx)(fk.Link, {
+                                    children: (0, v.jsx)(fC.Link, {
                                         href: t.displayUrl,
                                         target: "__blank",
-                                        children: (r = t.agreementType, void 0 === (i = fj[r]) ? n(i) : r)
+                                        children: (r = t.agreementType, void 0 === (i = fO[r]) ? n(i) : r)
                                     })
                                 }, t.id)
                             })
@@ -13108,19 +13157,19 @@
                     loading: d
                 })
             })
-        }, [lc.TranslationNamespace.AgreementsUpdate]),
+        }, [ll.TranslationNamespace.AgreementsUpdate]),
         {
-            authenticationApi: fN
+            authenticationApi: f_
         } = {
             authenticationApi: ch
         },
         {
-            discoveryApi: f_
+            discoveryApi: fM
         } = uV.ApplicationAuthorizationsClient,
         {
-            usersApi: fD
+            usersApi: fU
         } = cp.UsersClient,
-        fM = (r = cq.default, t => {
+        fB = (r = cq.default, t => {
             var n, i, a, o, s, u, c, l, d;
             let f, h;
             return r.logWebVitalsEvent({
@@ -13144,24 +13193,24 @@
                 }
             })
         }),
-        fU = (uT && (f = null != (l = document.querySelector('meta[name="'.concat("emotion-insertion-point-mui", '"]'))) ? l : void 0, h = null != (d = document.querySelector('meta[name="'.concat("emotion-insertion-point-tss", '"]'))) ? d : void 0), {
-            muiCache: (0, oD.c)({
+        fV = (uT && (f = null != (l = document.querySelector('meta[name="'.concat("emotion-insertion-point-mui", '"]'))) ? l : void 0, h = null != (d = document.querySelector('meta[name="'.concat("emotion-insertion-point-tss", '"]'))) ? d : void 0), {
+            muiCache: (0, o_.c)({
                 key: uR,
                 prepend: !0,
                 insertionPoint: f
             }),
-            tssCache: (0, oD.c)({
+            tssCache: (0, o_.c)({
                 key: uS,
                 insertionPoint: h
             })
         });
     (0, oN.createThumbnailsClient)((0, cv.getBEDEV1ServiceBasePath)("thumbnails"));
-    let fB = {
-            locale: ln.defaultLocale,
-            nativeName: ln.defaultNativeName
+    let fF = {
+            locale: lr.defaultLocale,
+            nativeName: lr.defaultNativeName
         },
-        fV = new lt.TranslationResourceProvider(fB, ln.fallbackLocale),
-        fF = t => {
+        fG = new ln.TranslationResourceProvider(fF, lr.fallbackLocale),
+        fW = t => {
             let {
                 children: n,
                 universeId: r
@@ -13202,33 +13251,33 @@
                 children: n
             })
         },
-        fG = {
-            defaultLocale: ln.defaultLocale,
-            title: ln.defaultMetadataJson["OpenGraph.Title"],
-            description: ln.defaultMetadataJson["OpenGraph.Description"]
+        fH = {
+            defaultLocale: lr.defaultLocale,
+            title: lr.defaultMetadataJson["OpenGraph.Title"],
+            description: lr.defaultMetadataJson["OpenGraph.Description"]
         },
-        fW = t => t,
-        fH = () => ((() => {
+        fK = t => t,
+        fJ = () => ((() => {
             let {
                 trackerClient: t
             } = (0, cT.useEventTrackerProvider)(), n = (0, oc.useCallback)(() => {
-                let n = (0, c5.loadPageEventModel)();
+                let n = (0, c9.loadPageEventModel)();
                 t.sendEvent(n)
             }, [t]);
-            (0, c9.default)(void 0, n), (0, oc.useEffect)(() => n(), [n]), (0, oc.useEffect)(() => {
+            (0, c7.default)(void 0, n), (0, oc.useEffect)(() => n(), [n]), (0, oc.useEffect)(() => {
                 cq.default.trackPageLoad()
             }, [])
-        })(), (0, od.useReportWebVitals)(fM), null),
-        fK = t => {
+        })(), (0, od.useReportWebVitals)(fB), null),
+        fz = t => {
             let {
                 children: n
             } = t, {
                 settings: r,
                 isFetched: i
-            } = (0, fR.useSettings)();
+            } = (0, fT.useSettings)();
             return (0, v.jsx)(oL.NavigationConfigsProvider, {
                 currentProduct: "CreatorDashboard",
-                environment: (0, fP.default)(),
+                environment: (0, fS.default)(),
                 robloxEnvironment: "production",
                 target: "global",
                 drawerVariant: "belowAppBar",
@@ -13240,7 +13289,7 @@
                 children: n
             })
         },
-        fJ = new ok.QueryClient({
+        fX = new ok.QueryClient({
             defaultOptions: {
                 queries: {
                     refetchOnWindowFocus: !1,
@@ -13248,8 +13297,8 @@
                 }
             }
         }),
-        fz = (0, oC.initializeAuthStore)(),
-        fX = t => {
+        fQ = (0, oC.initializeAuthStore)(),
+        f$ = t => {
             var n;
             let {
                 Component: r,
@@ -13257,42 +13306,42 @@
                 cache: a
             } = t, {
                 query: o
-            } = (0, ol.useRouter)(), s = "string" == typeof o.id ? Number(o.id) : 0, u = null != (n = r.getPageLayout) ? n : fW, c = (0, oc.useMemo)(() => ({
-                ...fG,
+            } = (0, ol.useRouter)(), s = "string" == typeof o.id ? Number(o.id) : 0, u = null != (n = r.getPageLayout) ? n : fK, c = (0, oc.useMemo)(() => ({
+                ...fH,
                 ...r.pageMetadata
             }), [r.pageMetadata]);
             return (0, oj.useMaintenanceObserver)("https://create.roblox.com"), (0, oc.useEffect)(() => {
                 uE()
             }, []), cE.default.setUnifiedLoggerClient(cq.default), (0, v.jsx)(oq, {
                 children: (0, v.jsx)(uq, {
-                    cache: null != a ? a : fU,
-                    children: (0, v.jsxs)(c6, {
-                        providers: [(0, v.jsx)(fb.BreadcrumbItemNameProvider, {}), (0, v.jsx)(oA.QueryClientProvider, {
-                            client: fJ
-                        }), (0, v.jsx)(cC.CustomDashboardServiceProvider, {}), (0, v.jsx)(cC.UniverseFlaggedCustomDashboardProvider, {}), (0, v.jsx)(fF, {
+                    cache: null != a ? a : fV,
+                    children: (0, v.jsxs)(c8, {
+                        providers: [(0, v.jsx)(fx.BreadcrumbItemNameProvider, {}), (0, v.jsx)(oA.QueryClientProvider, {
+                            client: fX
+                        }), (0, v.jsx)(cC.CustomDashboardServiceProvider, {}), (0, v.jsx)(cC.UniverseFlaggedCustomDashboardProvider, {}), (0, v.jsx)(fW, {
                             universeId: s
-                        }), (0, v.jsx)(le, {
+                        }), (0, v.jsx)(lt, {
                             pageLoggerConfig: r.loggerConfig
                         }), (0, v.jsx)(cT.EventTrackerProvider, {
                             trackerClient: cE.default
                         }), (0, v.jsx)(oC.RobloxAuthenticationProvider, {
                             clientId: "4273917941353191905",
-                            authenticationClient: fN,
-                            discoveryClient: f_,
-                            usersClient: fD,
-                            store: fz
-                        }), (0, v.jsx)(c0.GroupsProvider, {}), (0, v.jsx)(cx, {}), (0, v.jsx)(cS, {
+                            authenticationClient: f_,
+                            discoveryClient: fM,
+                            usersClient: fU,
+                            store: fQ
+                        }), (0, v.jsx)(c1.GroupsProvider, {}), (0, v.jsx)(cx, {}), (0, v.jsx)(cS, {
                             themeElement: "u" > typeof document ? document.documentElement : void 0
                         }), (0, v.jsx)(oO.LocalizationProvider, {
-                            provider: fV
+                            provider: fG
                         }), (0, v.jsx)(uk.SnackbarProvider, {}), (0, v.jsx)(uA.DialogProvider, {}), (0, v.jsx)(cP.default, {}), (0, v.jsx)(oN.ThumbnailsProvider, {
                             baseUrl: cE.eventStreamBaseUrl
-                        }), (0, v.jsx)(fR.SettingsProvider, {}), (0, v.jsx)(fK, {}), (0, v.jsx)(c8.ThemeAwareStudioResourcesProvider, {}), (0, v.jsx)(lo, {}), (0, v.jsx)(c3.default, {}), (0, v.jsx)(fx, {}), (0, v.jsx)(oI.CookieConsentProvider, {
+                        }), (0, v.jsx)(fT.SettingsProvider, {}), (0, v.jsx)(fz, {}), (0, v.jsx)(c5.ThemeAwareStudioResourcesProvider, {}), (0, v.jsx)(lh, {}), (0, v.jsx)(ls, {}), (0, v.jsx)(c6.default, {}), (0, v.jsx)(fR, {}), (0, v.jsx)(oI.CookieConsentProvider, {
                             robloxSiteDomain: "roblox.com"
-                        }), (0, v.jsx)(uB.AgeVerificationUpsellProvider, {}), (0, v.jsx)(ff, {})],
-                        children: [(0, v.jsx)(fH, {}), (0, v.jsx)(cg, {
-                            provider: fV
-                        }), (0, v.jsx)(fg, {}), (0, v.jsx)(fv, {}), (0, v.jsx)(fc, {}), (0, v.jsx)(fO, {}), (0, v.jsx)(c4, {}), (0, v.jsx)(ld, {
+                        }), (0, v.jsx)(uB.AgeVerificationUpsellProvider, {}), (0, v.jsx)(fp, {})],
+                        children: [(0, v.jsx)(fJ, {}), (0, v.jsx)(cg, {
+                            provider: fG
+                        }), (0, v.jsx)(fw, {}), (0, v.jsx)(fy, {}), (0, v.jsx)(fd, {}), (0, v.jsx)(fD, {}), (0, v.jsx)(c3, {}), (0, v.jsx)(lf, {
                             openGraphMetadata: c
                         }), u((0, v.jsx)(r, {
                             ...i
@@ -13303,7 +13352,7 @@
                 })
             })
         };
-    t.s(["CustomApp", 0, fX, "default", 0, fX, "reportWebVitals", 0, fM], 656350)
+    t.s(["CustomApp", 0, f$, "default", 0, f$, "reportWebVitals", 0, fB], 656350)
 }, 681109, (t, n, r) => {
     let i = "/_app";
     (window.__NEXT_P = window.__NEXT_P || []).push([i, () => t.r(656350)]), n.hot && n.hot.dispose(function() {
@@ -13520,15 +13569,15 @@
                 }))
             },
             N = [],
-            _ = new Map,
-            D = 0,
+            D = new Map,
+            _ = 0,
             M = [],
             U = function(t) {
                 if (M.forEach(function(n) {
                         return n(t)
                     }), t.interactionId || "first-input" === t.entryType) {
                     var n = N[N.length - 1],
-                        r = _.get(t.interactionId);
+                        r = D.get(t.interactionId);
                     if (r || N.length < 10 || t.duration > n.latency) {
                         if (r) t.duration > r.latency ? (r.entries = [t], r.latency = t.duration) : t.duration === r.latency && t.startTime === r.entries[0].startTime && r.entries.push(t);
                         else {
@@ -13537,12 +13586,12 @@
                                 latency: t.duration,
                                 entries: [t]
                             };
-                            _.set(i.id, i), N.push(i)
+                            D.set(i.id, i), N.push(i)
                         }
                         N.sort(function(t, n) {
                             return n.latency - t.latency
                         }), N.length > 10 && N.splice(10).forEach(function(t) {
-                            return _.delete(t.id)
+                            return D.delete(t.id)
                         })
                     }
                 }
@@ -13560,7 +13609,7 @@
                         s = function(t) {
                             B(function() {
                                 t.forEach(U);
-                                var n, r = (n = Math.min(N.length - 1, Math.floor(((i ? C : performance.interactionCount || 0) - D) / 50)), N[n]);
+                                var n, r = (n = Math.min(N.length - 1, Math.floor(((i ? C : performance.interactionCount || 0) - _) / 50)), N[n]);
                                 r && r.latency !== o.value && (o.value = r.latency, o.entries = r.entries, a())
                             })
                         },
@@ -13573,7 +13622,7 @@
                     }), y(function() {
                         s(u.takeRecords()), a(!0)
                     }), l(function() {
-                        D = 0, N.length = 0, _.clear(), a = v(t, o = h("INP"), V, n.reportAllChanges)
+                        _ = 0, N.length = 0, D.clear(), a = v(t, o = h("INP"), V, n.reportAllChanges)
                     }))
                 }))
             },
@@ -13710,5 +13759,5 @@
     n.exports = t.r(959610)
 }]);
 
-//# debugId=76cda4b8-acb6-699d-05b7-2e3247e30ac6
-//# sourceMappingURL=2tzipejvv41vd.js.map
+//# debugId=042346d8-27ca-4b85-a726-c0cb0c596cb1
+//# sourceMappingURL=0p61v-uaz3_oa.js.map

@@ -1256,7 +1256,7 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Action.CommunityCompletionEventCard": "Create event",
     "Label.Private": "Private",
     "Action.RemoveTicket": "Remove ticket",
-    "Message.UpdateRolesetPermissions": "{actor} updated roleset {rolesetName} on {entityType} {entityName}.",
+    "Message.UpdateRolesetPermissions": "{actor} updated roleset {rolesetName}'s permissions on {entityType} {entityName}.",
     "Message.UpdateRoleSetPermissionsAdded": "Added: {addedPermissions}.",
     "Message.UpdateRoleSetPermissionsRemoved": "Removed: {removedPermissions}.",
     "Action.LearnMoreLinkButton": "Learn more",

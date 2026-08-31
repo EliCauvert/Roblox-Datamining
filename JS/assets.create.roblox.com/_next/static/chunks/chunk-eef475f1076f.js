@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "602b5281-67da-3ae0-c720-4a66b4bf9c51")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "89008704-49fa-f185-d0f8-9850e5aa814c")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 522829, e => {
@@ -1573,32 +1573,30 @@
             rowIndex: t
         } : null
     }, "selectChartPlacements", 0, function(e) {
-        let t, r = !!(t = e[e.length - 1]) && 2 === o(t) && 1 === i(t).length,
-            n = [],
-            a = 0;
-        return e.forEach((t, u) => {
-            let c = i(t),
-                l = o(t),
-                d = 1 === l ? 2 : 1;
-            (c.forEach((e, t) => {
-                n.push({
+        let t = [],
+            r = 0;
+        return e.forEach((e, n) => {
+            let a = i(e),
+                u = o(e),
+                c = 1 === u ? 2 : 1;
+            (a.forEach((e, a) => {
+                t.push({
                     kind: "tile",
                     tileId: e.tileId,
                     tile: e,
-                    rowIndex: u,
-                    itemIndex: t,
-                    order: a,
-                    columnSpan: d
-                }), a += 1
-            }), !(l <= c.length)) && (n.push({
+                    rowIndex: n,
+                    itemIndex: a,
+                    order: r,
+                    columnSpan: c
+                }), r += 1
+            }), !(u <= a.length)) && (t.push({
                 kind: "empty-slot",
-                emptySlotId: "".concat(s).concat(u),
-                rowIndex: u,
-                order: a,
-                columnSpan: 1,
-                isAddPlaceholderSlot: r && u === e.length - 1
-            }), a += 1)
-        }), n
+                emptySlotId: "".concat(s).concat(n),
+                rowIndex: n,
+                order: r,
+                columnSpan: 1
+            }), r += 1)
+        }), t
     }, "selectChartRowsFromLayoutNodes", 0, c], 413311);
     let l = [];
 
@@ -5124,5 +5122,5 @@
     }], 302610)
 }]);
 
-//# debugId=602b5281-67da-3ae0-c720-4a66b4bf9c51
-//# sourceMappingURL=0h29edjvtschh.js.map
+//# debugId=89008704-49fa-f185-d0f8-9850e5aa814c
+//# sourceMappingURL=0gxk1a_1hli8w.js.map

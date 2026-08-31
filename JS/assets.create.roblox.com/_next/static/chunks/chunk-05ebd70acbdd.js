@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "178e0e5f-51ff-1d93-7228-c5066f1e93d8")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "b772dc54-fb32-d74f-572b-1e60415e9a46")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 730530, e => {
@@ -163,6 +163,7 @@
             [t.default.UpcomingEvent]: r.default.Event,
             [t.default.StorePreviewVideo]: r.default.LibraryAsset,
             [t.default.GamePreviewVideo]: r.default.LibraryAsset,
+            [t.default.TextDocument]: r.default.LibraryAsset,
             [t.default.AssetPermissionRequests]: r.default.Game
         },
         T = {
@@ -278,6 +279,7 @@
             [t.default.Moments]: "Label.Moments",
             [t.default.StorePreviewVideo]: "Label.StorePreviewVideo",
             [t.default.GamePreviewVideo]: "Label.GamePreviewVideo",
+            [t.default.TextDocument]: "Label.TextDocuments",
             [t.default.AssetPermissionRequests]: "Label.Requests"
         },
         M = {
@@ -330,6 +332,7 @@
             [t.default.Moments]: "Label.Moments",
             [t.default.StorePreviewVideo]: "Label.StorePreviewVideo",
             [t.default.GamePreviewVideo]: "Label.GamePreviewVideo",
+            [t.default.TextDocument]: "Label.TextDocument",
             [t.default.AssetPermissionRequests]: "Label.Requests"
         },
         G = {
@@ -353,7 +356,7 @@
             [r.default.Look]: "Label.Looks",
             [r.default.Alert]: "Heading.Alerts"
         },
-        z = {
+        D = {
             [r.default.Game]: "Label.Game",
             [r.default.CatalogAsset]: "Label.AvatarItem",
             [r.default.Bundle]: "Label.AvatarItem",
@@ -374,7 +377,7 @@
             [r.default.Look]: "Label.Looks",
             [r.default.Alert]: "Heading.Alert"
         },
-        D = {
+        z = {
             [r.default.Game]: "Heading.Game",
             [r.default.CatalogAsset]: "Heading.AvatarItem",
             [r.default.Bundle]: "Heading.AvatarItem",
@@ -446,10 +449,10 @@
             [r.default.AvatarCreationToken]: C,
             [r.default.Look]: void 0
         };
-    e.s(["AllSettlePromiseFailed", 0, "rejected", "AllSettlePromiseSuccess", 0, "fulfilled", "assetFullNameKeys", 0, R, "assetTypeToItemType", 0, S, "assetTypeToSingularNameKeys", 0, M, "itemFullNameKeys", 0, G, "itemTypeToCreatePath", 0, w, "itemTypeToLearnMoreUrl", 0, B, "itemTypeToNameKeys", 0, z, "itemTypeToPath", 0, T, "itemTypeToReorderPath", 0, I, "itemTypeToReturnPolicyType", 0, k, "itemTypeToSingularNameKeys", 0, D, "itemTypeToThumbnailType", 0, x, "toastDurationTime", 0, 3e3, "uninitializedUniverseId", 0, -1], 759283)
+    e.s(["AllSettlePromiseFailed", 0, "rejected", "AllSettlePromiseSuccess", 0, "fulfilled", "assetFullNameKeys", 0, R, "assetTypeToItemType", 0, S, "assetTypeToSingularNameKeys", 0, M, "itemFullNameKeys", 0, G, "itemTypeToCreatePath", 0, w, "itemTypeToLearnMoreUrl", 0, B, "itemTypeToNameKeys", 0, D, "itemTypeToPath", 0, T, "itemTypeToReorderPath", 0, I, "itemTypeToReturnPolicyType", 0, k, "itemTypeToSingularNameKeys", 0, z, "itemTypeToThumbnailType", 0, x, "toastDurationTime", 0, 3e3, "uninitializedUniverseId", 0, -1], 759283)
 }, 307529, e => {
     "use strict";
-    var a, t = ((a = t || {}).Place = "Place", a.MyExperiences = "MyExperiences", a.SharedExperiences = "SharedExperiences", a.TShirt = "TShirt", a.Shirt = "Shirt", a.Pants = "Pants", a.Hat = "Hat", a.HairAccessory = "HairAccessory", a.FaceAccessory = "FaceAccessory", a.NeckAccessory = "NeckAccessory", a.ShoulderAccessory = "ShoulderAccessory", a.FrontAccessory = "FrontAccessory", a.BackAccessory = "BackAccessory", a.WaistAccessory = "WaistAccessory", a.TShirtAccessory = "TShirtAccessory", a.ShirtAccessory = "ShirtAccessory", a.PantsAccessory = "PantsAccessory", a.JacketAccessory = "JacketAccessory", a.SweaterAccessory = "SweaterAccessory", a.ShortsAccessory = "ShortsAccessory", a.DressSkirtAccessory = "DressSkirtAccessory", a.EyebrowAccessory = "EyebrowAccessory", a.EyelashAccessory = "EyelashAccessory", a.FaceMakeup = "FaceMakeup", a.LipMakeup = "LipMakeup", a.EyeMakeup = "EyeMakeup", a.AvatarBackground = "AvatarBackground", a.AvatarLooks = "AvatarLooks", a.Showcase = "Showcase", a.Decal = "Decal", a.Image = "Image", a.Audio = "Audio", a.Model = "Model", a.Mesh = "Mesh", a.MeshPart = "MeshPart", a.Plugin = "Plugin", a.EmoteAnimation = "EmoteAnimation", a.Animation = "Animation", a.Video = "Video", a.Event = "Event", a.UpcomingEvent = "UpcomingEvent", a.DraftEvent = "DraftEvent", a.PastEvent = "PastEvent", a.FontFamily = "FontFamily", a.ShareLink = "ShareLink", a.Moments = "Moments", a.StorePreviewVideo = "StorePreviewVideo", a.GamePreviewVideo = "GamePreviewVideo", a.AllCatalogAsset = "All", a.AssetPermissionRequests = "AssetPermissionRequests", a);
+    var a, t = ((a = t || {}).Place = "Place", a.MyExperiences = "MyExperiences", a.SharedExperiences = "SharedExperiences", a.TShirt = "TShirt", a.Shirt = "Shirt", a.Pants = "Pants", a.Hat = "Hat", a.HairAccessory = "HairAccessory", a.FaceAccessory = "FaceAccessory", a.NeckAccessory = "NeckAccessory", a.ShoulderAccessory = "ShoulderAccessory", a.FrontAccessory = "FrontAccessory", a.BackAccessory = "BackAccessory", a.WaistAccessory = "WaistAccessory", a.TShirtAccessory = "TShirtAccessory", a.ShirtAccessory = "ShirtAccessory", a.PantsAccessory = "PantsAccessory", a.JacketAccessory = "JacketAccessory", a.SweaterAccessory = "SweaterAccessory", a.ShortsAccessory = "ShortsAccessory", a.DressSkirtAccessory = "DressSkirtAccessory", a.EyebrowAccessory = "EyebrowAccessory", a.EyelashAccessory = "EyelashAccessory", a.FaceMakeup = "FaceMakeup", a.LipMakeup = "LipMakeup", a.EyeMakeup = "EyeMakeup", a.AvatarBackground = "AvatarBackground", a.AvatarLooks = "AvatarLooks", a.Showcase = "Showcase", a.Decal = "Decal", a.Image = "Image", a.Audio = "Audio", a.Model = "Model", a.Mesh = "Mesh", a.MeshPart = "MeshPart", a.Plugin = "Plugin", a.EmoteAnimation = "EmoteAnimation", a.Animation = "Animation", a.Video = "Video", a.TextDocument = "TextDocument", a.Event = "Event", a.UpcomingEvent = "UpcomingEvent", a.DraftEvent = "DraftEvent", a.PastEvent = "PastEvent", a.FontFamily = "FontFamily", a.ShareLink = "ShareLink", a.Moments = "Moments", a.StorePreviewVideo = "StorePreviewVideo", a.GamePreviewVideo = "GamePreviewVideo", a.AllCatalogAsset = "All", a.AssetPermissionRequests = "AssetPermissionRequests", a);
     e.s(["default", 0, t])
 }, 251622, e => {
     "use strict";
@@ -520,6 +523,7 @@
             getCreateExperienceSubscriptionUrl: e => "/dashboard/creations/experiences/".concat(e, "/experience-subscriptions/create"),
             getUserBansUrl: e => "/dashboard/creations/experiences/".concat(e, "/safety/bans"),
             getAddUsersToBanUrl: e => "/dashboard/creations/experiences/".concat(e, "/safety/bans/add"),
+            getAntiCheatUrl: e => "/dashboard/creations/experiences/".concat(e, "/safety/anti-cheat"),
             getAnalyticsOverviewUrl: () => "/dashboard/analytics",
             getAnalyticsUrl: e => "/dashboard/creations/experiences/".concat(e, "/analytics"),
             getAnalyticsPerformanceUrl: e => "/dashboard/creations/experiences/".concat(e, "/analytics/performance"),
@@ -734,5 +738,5 @@
     e.s(["creatorHub", 0, a])
 }]);
 
-//# debugId=178e0e5f-51ff-1d93-7228-c5066f1e93d8
-//# sourceMappingURL=0yn5gp2ofb02r.js.map
+//# debugId=b772dc54-fb32-d74f-572b-1e60415e9a46
+//# sourceMappingURL=41-u15wj1ry_k.js.map

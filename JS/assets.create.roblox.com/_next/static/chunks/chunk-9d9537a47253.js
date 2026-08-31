@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "cd499b3f-a5d8-3cbb-a3a3-7a7c537f923a")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "57879c6b-e3e6-b02a-b781-a4da89b35288")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 177608, 232474, 634877, 966501, e => {
@@ -1528,11 +1528,23 @@
                         translate: a
                     } = e;
                     return ea({
-                        key: "Heading.Bans"
+                        key: "Heading.Moderation"
                     }, a)
                 },
                 breadcrumbType: ee.default.Bans,
                 getLinkPath: e => Z.creatorHub.dashboard.getUserBansUrl(Number(e.baseId))
+            },
+            "anti-cheat": {
+                displayName: e => {
+                    let {
+                        translate: a
+                    } = e;
+                    return ea({
+                        key: "Heading.Moderation"
+                    }, a)
+                },
+                breadcrumbType: ee.default.AntiCheat,
+                getLinkPath: e => Z.creatorHub.dashboard.getAntiCheatUrl(Number(e.baseId))
             },
             add: {
                 displayName: e => {
@@ -3359,5 +3371,5 @@
     }, "useCookieConsentContext", 0, M], 260241)
 }]);
 
-//# debugId=cd499b3f-a5d8-3cbb-a3a3-7a7c537f923a
-//# sourceMappingURL=17qi5wr23rim-.js.map
+//# debugId=57879c6b-e3e6-b02a-b781-a4da89b35288
+//# sourceMappingURL=2aumwudlibq9z.js.map

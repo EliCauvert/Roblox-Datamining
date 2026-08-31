@@ -178,7 +178,7 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Message.ReferralLinkError": "We could not create your link. Please try again later.",
     "Label.ReferralLinkCopied": "Link copied",
     "Action.CopyReferralLink": "Copy link",
-    "Description.ReferralEntry": "Invite someone to Plus",
+    "Description.ReferralEntry": "Invite someone to join Plus",
     "Heading.ReferralEntry": "Share Plus to get {amount} Robux",
     "Heading.ReferralCard": "Share Plus, get {amount} Robux",
     "Action.ReferralInvite": "Invite",
@@ -195,6 +195,9 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Heading.ReferralRecipientEntry": "Join Plus to get {amount} Robux",
     "Description.ReferralPendingRequest": "{displayName} referred you to Plus",
     "Label.ReferralPendingRequestSummary": "{displayName} referred you",
-    "Description.ReferralTerms": "By clicking \"Copy link\", I agree to the {linkStart}Roblox Plus Referral Program Terms{linkEnd}."
+    "Description.ReferralTerms": "By clicking \"Copy link\", I agree to the {linkStart}Roblox Plus Referral Program Terms{linkEnd}.",
+    "Description.ProfileFramesDiscoveryBanner": "Make your profile stand out with a new frame",
+    "Heading.ProfileFramesDiscoveryBanner": "Plus exclusive frames are here",
+    "Action.Get": "Get"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.RobloxSubscription");

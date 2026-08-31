@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "64638c77-1804-d5fb-cbed-26ec90f57d8d")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "48a5f134-47ee-69a7-5501-6d6772a9fe0d")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 531007, e => {
@@ -1187,17 +1187,21 @@
                     }
                 }
             }
+        },
+        b = e => {
+            let t = a.RAQIV2MetricDisplayConfig[e],
+                i = t.valueType === a.RAQIV2MetricValueType.Numeric ? C[e] : P[e],
+                n = {
+                    ...A,
+                    ...t,
+                    ...i
+                },
+                r = I[e];
+            return null != r && (n.unit = r.unit, n.decimalPrecision = r.decimalPrecision), n
         };
-    e.s(["RAQIV2MetricValueRendererType", () => D, "default", 0, e => {
-        let t = a.RAQIV2MetricDisplayConfig[e],
-            i = t.valueType === a.RAQIV2MetricValueType.Numeric ? C[e] : P[e],
-            n = {
-                ...A,
-                ...t,
-                ...i
-            },
-            r = I[e];
-        return null != r && (n.unit = r.unit, n.decimalPrecision = r.decimalPrecision), n
+    e.s(["RAQIV2MetricValueRendererType", () => D, "default", 0, b, "getPreferredChartType", 0, e => {
+        var t;
+        return e && null != (t = b(e).exploreModeChartType) ? t : o.ChartType.Spline
     }, "isNumericUIMetric", 0, e => {
         var t;
         return h(e) && (null == (t = a.RAQIV2MetricDisplayConfig[e]) ? void 0 : t.valueType) === a.RAQIV2MetricValueType.Numeric
@@ -3039,5 +3043,5 @@
     }])
 }]);
 
-//# debugId=64638c77-1804-d5fb-cbed-26ec90f57d8d
-//# sourceMappingURL=0aglk2gd_eon_.js.map
+//# debugId=48a5f134-47ee-69a7-5501-6d6772a9fe0d
+//# sourceMappingURL=0py9vqjd2jne6.js.map

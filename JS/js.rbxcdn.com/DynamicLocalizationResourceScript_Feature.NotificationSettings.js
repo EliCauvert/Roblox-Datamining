@@ -81,6 +81,7 @@ Roblox.LangDynamic["Feature.NotificationSettings"] = {
     "Description.ParentDisabledGameNotifications": "Your parent has disabled all game notifications on your account.",
     "Description.ParentEnforcedDoNotDisturb": "Do not disturb is enabled for this account. Ask a parent to disable it.",
     "Description.TurnOnEmail": "Turn on email notifications",
-    "Label.RecommendedOffers": "Recommended Offers"
+    "Label.RecommendedOffers": "Recommended Offers",
+    "Label.FriendPresence": "Friend Presence"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.NotificationSettings");

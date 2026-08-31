@@ -48,6 +48,9 @@ Roblox.LangDynamic["Feature.Accessibility"] = {
     "AppTheme.HyperPlum": "Hyper Plum",
     "AppTheme.QuantumPulse": "Quantum Pulse",
     "AppTheme.CategoryDynamic": "Dynamic",
-    "AppTheme.CategoryCalm": "Calm"
+    "AppTheme.CategoryCalm": "Calm",
+    "Heading.ExclusiveThemes": "Exclusive themes",
+    "Description.DeviceAppThemeExclusive": "Explore Plus exclusive themes to customize your experience. Try them now and subscribe to save your selection.",
+    "AppTheme.Classic": "Classic"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Accessibility");
