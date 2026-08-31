@@ -415,11 +415,11 @@ function t:_setupReskin()
 			playerListVisibilityStore.setVisible(true)
 		end)
 	end
-	playerContextualMenuStore.setContextMenuOpener(function(p1, p2, p3)
+	playerContextualMenuStore.setContextMenuOpener(function(p1, p2, p3, p4)
 		-- upvalues: contextMenuControllerModule (ref), playerContextualMenuStore (copy), status (ref)
 		task.spawn(function()
-			-- upvalues: contextMenuControllerModule (copy), p1 (ref), playerContextualMenuStore (copy), status (copy), p2 (ref), p3 (ref)
-			local var6 = contextMenuControllerModule.buildMenuData(p1, playerContextualMenuStore.closeContextMenu, status)
+			-- upvalues: contextMenuControllerModule (copy), p1 (ref), playerContextualMenuStore (copy), status (copy), p4 (ref), p2 (ref), p3 (ref)
+			local var6 = contextMenuControllerModule.buildMenuData(p1, playerContextualMenuStore.closeContextMenu, status, p4)
 			
 			if p1.Parent == nil then
 				return
@@ -534,7 +534,7 @@ function t:_setupReskin()
 	end
 	
 	local function setupPlayerInfoRequests()
-		-- upvalues: playersService (copy), playerRelationshipStore (copy), makePlayerInfoRequestsModule (copy), self (ref), playerIconInfoStore (copy), blockingUtilityModule (copy), fFlagBadgeVisibilitySettingEnabled (copy), robloxReplicatedStorageService (copy)
+		-- upvalues: playersService (copy), playerRelationshipStore (copy), makePlayerInfoRequestsModule (copy), self (ref), playerIconInfoStore (copy), playerContextualMenuStore (copy), blockingUtilityModule (copy), fFlagBadgeVisibilitySettingEnabled (copy), robloxReplicatedStorageService (copy)
 		local t = {
 			getState = function()
 				-- upvalues: playersService (copy)
@@ -567,6 +567,16 @@ function t:_setupReskin()
 			playerIconInfoStore.removePlayer(p1.UserId)
 			playerRelationshipStore.removePlayer(p1.UserId)
 		end)
+		
+		local function _(p1, p2)
+			-- upvalues: playerContextualMenuStore (copy)
+			local menuData = playerContextualMenuStore.getMenuData(false)
+			
+			if menuData ~= nil and menuData.player == p1 then
+				playerContextualMenuStore.openContextMenu(p1, menuData.anchorPosition, p2)
+			end
+		end
+		
 		self._reskinBlockedStatusConn = blockingUtilityModule:GetBlockedStatusChangedEvent():Connect(function(p1, p2)
 			-- upvalues: playerRelationshipStore (copy)
 			local var8 = tonumber(p1)
@@ -576,8 +586,13 @@ function t:_setupReskin()
 			end
 		end)
 		self._reskinFriendStatusConn = playersService.LocalPlayer.FriendStatusChanged:Connect(function(p1, p2)
-			-- upvalues: playerRelationshipStore (copy)
+			-- upvalues: playerRelationshipStore (copy), playerContextualMenuStore (copy)
 			playerRelationshipStore.patchPlayerRelationship(p1.UserId, { friendStatus = p2 })
+			local menuData = playerContextualMenuStore.getMenuData(false)
+			
+			if menuData ~= nil and menuData.player == p1 then
+				playerContextualMenuStore.openContextMenu(p1, menuData.anchorPosition, p2)
+			end
 		end)
 		
 		if fFlagBadgeVisibilitySettingEnabled then

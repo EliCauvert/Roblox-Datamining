@@ -27,7 +27,7 @@ local function noOp()
 end
 
 return function(p1)
-	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), getTopBarStoreModule (ref), useSignalState (ref), useChatPlacementContext (ref), useLocalization (ref), appHeaderBarModule (ref), createBackFuncModule (ref), fFlagFriendsCallingClientGateDEV (ref), reactModule (ref), foundationModule (ref), noOp (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), getFFlagIsSquadEnabled (ref), enumScreensModule (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), squadButtonSourceEnum (ref), headerBarTitleLeftAlignedModule (ref), chatTopBarBaseModule (ref)
+	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), getTopBarStoreModule (ref), useSignalState (ref), useChatPlacementContext (ref), useLocalization (ref), appHeaderBarModule (ref), createBackFuncModule (ref), reactModule (ref), fFlagFriendsCallingClientGateDEV (ref), foundationModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), getFFlagIsSquadEnabled (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), enumScreensModule (ref), squadButtonSourceEnum (ref), headerBarTitleLeftAlignedModule (ref), chatTopBarBaseModule (ref), noOp (ref)
 	if not fFlagAppChatTopBarConfigDrivenModule() then
 		return nil
 	end
@@ -49,53 +49,53 @@ return function(p1)
 		navigateToRootStack = navigation.getScreenProps("navigateToRootStack", nil),
 		isRoot = isRoot
 	})) else nil
-	local var5 = nil
+	local var5 = reactModule.useCallback(function()
+		-- upvalues: fFlagFriendsCallingClientGateDEV (copy), conversationId (ref)
+		if not fFlagFriendsCallingClientGateDEV then return end
+		if conversationId then
+			game:GetService("CallingService"):CreateCall({}, conversationId)
+		end
+	end, { conversationId })
+	local var6 = if fFlagFriendsCallingClientGateDEV and conversationId then function()
+		-- upvalues: reactModule (copy), foundationModule (copy), var5 (ref), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy)
+		return reactModule.createElement(foundationModule.View, { tag = "row align-x-right align-y-center auto-xy" }, {
+			CallButton = reactModule.createElement(foundationModule.IconButton, {
+				isCircular = true,
+				icon = foundationModule.Enums.IconName.Phone,
+				size = foundationModule.Enums.InputSize.Medium,
+				onActivated = var5,
+				testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatConversationTopBarButton("call") else nil
+			})
+		})
+	end elseif getFFlagIsSquadEnabled() and conversationId then function()
+		-- upvalues: reactModule (copy), foundationModule (copy), squadComponentAccessWrapperModule (copy), conversationId (ref), squadJoinButtonModule (copy), navigation (ref), enumScreensModule (copy), squadButtonSourceEnum (copy), var2 (ref)
+		return reactModule.createElement(foundationModule.View, { tag = "row align-x-right auto-xy" }, {
+			GroupUpButton = reactModule.createElement(squadComponentAccessWrapperModule, { parentChannelId = conversationId }, reactModule.createElement(squadJoinButtonModule, {
+				isFullWidth = false,
+				isInCard = false,
+				layoutOrder = 0,
+				shouldAnimate = true,
+				shouldShowSignifier = true,
+				conversationId = conversationId,
+				onActivated = function()
+					-- upvalues: navigation (copy), enumScreensModule (copy), conversationId (copy)
+					navigation.navigate(enumScreensModule.SquadLobby, { conversationId = conversationId })
+				end,
+				squadButtonSource = squadButtonSourceEnum.ChatConversationScreen,
+				squadLocation = var2.chatPlacement
+			}))
+		})
+	end else nil
 	
-	if fFlagFriendsCallingClientGateDEV and conversationId then
-		var5 = function()
-			-- upvalues: reactModule (copy), foundationModule (copy), noOp (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy)
-			return reactModule.createElement(foundationModule.View, { tag = "row align-x-right align-y-center auto-xy" }, {
-				CallButton = reactModule.createElement(foundationModule.IconButton, {
-					isCircular = true,
-					icon = foundationModule.Enums.IconName.Phone,
-					size = foundationModule.Enums.InputSize.Medium,
-					onActivated = noOp,
-					testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatConversationTopBarButton("call") else nil
-				})
-			})
-		end
-	elseif getFFlagIsSquadEnabled() and conversationId then
-		local var6 = function()
-			-- upvalues: navigation (ref), enumScreensModule (copy), conversationId (ref)
-			navigation.navigate(enumScreensModule.SquadLobby, { conversationId = conversationId })
-		end
-		
-		var5 = function()
-			-- upvalues: reactModule (copy), foundationModule (copy), squadComponentAccessWrapperModule (copy), conversationId (ref), squadJoinButtonModule (copy), var6 (ref), squadButtonSourceEnum (copy), var2 (ref)
-			return reactModule.createElement(foundationModule.View, { tag = "row align-x-right auto-xy" }, {
-				GroupUpButton = reactModule.createElement(squadComponentAccessWrapperModule, { parentChannelId = conversationId }, reactModule.createElement(squadJoinButtonModule, {
-					isFullWidth = false,
-					isInCard = false,
-					layoutOrder = 0,
-					shouldAnimate = true,
-					shouldShowSignifier = true,
-					conversationId = conversationId,
-					onActivated = var6,
-					squadButtonSource = squadButtonSourceEnum.ChatConversationScreen,
-					squadLocation = var2.chatPlacement
-				}))
-			})
-		end
-	end
 	return reactModule.createElement(chatTopBarBaseModule, {
 		screenName = screenName,
 		navigation = navigation,
 		renderLeft = noOp,
 		renderCenter = function()
-			-- upvalues: headerText (ref), var3 (ref), reactModule (copy), headerBarTitleLeftAlignedModule (copy), var4 (ref), var5 (write), conversationId (ref), navigateToChatDetails (ref), rightPaddingOverride (ref)
+			-- upvalues: headerText (ref), var3 (ref), reactModule (copy), headerBarTitleLeftAlignedModule (copy), var4 (ref), var6 (ref), conversationId (ref), navigateToChatDetails (ref), rightPaddingOverride (ref)
 			return reactModule.createElement(headerBarTitleLeftAlignedModule, {
 				renderLeft = var4,
-				renderRight = var5,
+				renderRight = var6,
 				titleText = if headerText.shouldLocalize then var3.headerText else headerText.raw or "",
 				conversationId = conversationId or "",
 				navigateToChatDetails = navigateToChatDetails or function() end,

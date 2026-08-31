@@ -5,35 +5,34 @@ local _ = require(parent.types)
 local unifiedPurchaseTelemetryModule = require(parent.Events.UnifiedPurchaseTelemetry)
 local logUnifiedPurchaseTelemetryCounterModule = require(parent.Utils.logUnifiedPurchaseTelemetryCounter)
 
-local function _(p1, p2, p3)
-	local t = { featureKey = p1, items = p2 }
+local function buildRequestBody(p1, p2, p3, p4)
+	local t = { userId = p1, featureKey = p2, items = p3 }
 	
-	if p3 ~= nil then
-		t.offerSelections = { selectionType = "EXCLUDED", offers = p3 }
+	if p4 ~= nil and #p4 > 0 then
+		local t_1 = {}
+		
+		for i, v in p4 do
+			table.insert(t_1, {
+				selectionType = "OFFER_SELECTION_TYPE_EXCLUDED",
+				offerId = v
+			})
+		end
+		t.offerSelections = t_1
 	end
 	return t
 end
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: promiseModule (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref)
-	if p3 == nil or #p3 == 0 or p1.postInGameItemCartPricing == nil then
-		return promiseModule.resolve(nil)
-	end
-	local postInGameItemCartPricing = p1.postInGameItemCartPricing
-	local t = { featureKey = p2, items = p3 }
-	
-	if p4 ~= nil then
-		t.offerSelections = { selectionType = "EXCLUDED", offers = p4 }
-	end
-	return postInGameItemCartPricing(t):andThen(function(p7)
-		-- upvalues: logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), p5 (ref), p6 (ref)
-		logUnifiedPurchaseTelemetryCounterModule(unifiedPurchaseTelemetryModule.UnifiedCartPricingFetchSucceededCounter, p5, p6)
+return function(p5, p6, p7, p8, p9, p10, p11)
+	-- upvalues: promiseModule (ref), buildRequestBody (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref)
+	return if p8 == nil or #p8 == 0 or p5.postInGameItemCartPricing == nil then promiseModule.resolve(nil) else p5.postInGameItemCartPricing(buildRequestBody(p6, p7, p8, p9)):andThen(function(p12)
+		-- upvalues: logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), p10 (ref), p11 (ref)
+		logUnifiedPurchaseTelemetryCounterModule(unifiedPurchaseTelemetryModule.UnifiedCartPricingFetchSucceededCounter, p10, p11)
 		
-		return p7
-	end):catch(function(p7)
-		-- upvalues: logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), p5 (ref), p6 (ref)
-		logUnifiedPurchaseTelemetryCounterModule(unifiedPurchaseTelemetryModule.UnifiedCartPricingFetchFailedCounter, p5, p6)
-		warn(string.format("postInGameItemCartPricing failed: %s", tostring(p7)))
+		return p12
+	end):catch(function(p12)
+		-- upvalues: logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), p10 (ref), p11 (ref)
+		logUnifiedPurchaseTelemetryCounterModule(unifiedPurchaseTelemetryModule.UnifiedCartPricingFetchFailedCounter, p10, p11)
+		warn(string.format("postInGameItemCartPricing failed: %s", tostring(p12)))
 		
 		return nil
 	end)

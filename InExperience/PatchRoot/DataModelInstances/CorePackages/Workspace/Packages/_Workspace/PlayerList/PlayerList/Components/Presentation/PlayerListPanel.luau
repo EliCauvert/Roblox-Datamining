@@ -27,7 +27,7 @@ local PANEL_RECESS_TRANSPARENCY = useSlideOpenCloseAnimationModule.PANEL_RECESS_
 local computeStatColumnsModule = require(parent.Common.computeStatColumns)
 local playerListVisibilityStoreModule = require(parent.Common.PlayerListVisibilityStore)
 local playerContextualMenuStoreModule = require(parent.Common.PlayerContextualMenuStore)
-local openContextMenu = playerContextualMenuStoreModule.openContextMenu
+local toggleContextMenu = playerContextualMenuStoreModule.toggleContextMenu
 local constantsModule = require(parent.Common.Constants)
 local panelHeaderModule = require(parent.Components.Presentation.PanelHeader)
 local columnHeaderRowModule = require(parent.Components.Presentation.ColumnHeaderRow)
@@ -73,7 +73,7 @@ local function renderWithSlideAndZoomDecorations(p1, p2, p3, p4, p5, p6, p7)
 end
 
 local function PlayerListPanelContent(p1)
-	-- upvalues: useLeaderboardStoreModule (ref), var1 (ref), var2 (ref), signalsReactModule (ref), fFlagPlayerListTwoTabsModule (ref), usePlatformLeaderboardModule (ref), fallbackSignalsModule (ref), usePanelLayoutModule (ref), useTokens (ref), usePreferredBackgroundStyleModule (ref), playerListVisibilityStoreModule (ref), reactModule (ref), playerContextualMenuStoreModule (ref), openContextMenu (ref), reactOtterModule (ref), MOBILE_ZOOM_SPRING (ref), MENU_ZOOM_CLOSED_SCALE (ref), PANEL_RECESS_SCALE (ref), PANEL_RECESS_TRANSPARENCY (ref), createZoomDecorations (ref), useReportPanelContentHeightModule (ref), panelContentHeightStoreModule (ref), computeStatColumnsModule (ref), constantsModule (ref), consoleFocusScrollViewModule (ref), teamListViewModule (ref), scrollView (ref), entryViewModule (ref), columnHeaderRowModule (ref), panelHeaderModule (ref), foundationModule (ref), view (ref), renderWithSlideAndZoomDecorations (ref), tabbedLeaderboardBodyModule (ref)
+	-- upvalues: useLeaderboardStoreModule (ref), var1 (ref), var2 (ref), signalsReactModule (ref), fFlagPlayerListTwoTabsModule (ref), usePlatformLeaderboardModule (ref), fallbackSignalsModule (ref), usePanelLayoutModule (ref), useTokens (ref), usePreferredBackgroundStyleModule (ref), playerListVisibilityStoreModule (ref), reactModule (ref), playerContextualMenuStoreModule (ref), toggleContextMenu (ref), reactOtterModule (ref), MOBILE_ZOOM_SPRING (ref), MENU_ZOOM_CLOSED_SCALE (ref), PANEL_RECESS_SCALE (ref), PANEL_RECESS_TRANSPARENCY (ref), createZoomDecorations (ref), useReportPanelContentHeightModule (ref), panelContentHeightStoreModule (ref), computeStatColumnsModule (ref), constantsModule (ref), consoleFocusScrollViewModule (ref), teamListViewModule (ref), scrollView (ref), entryViewModule (ref), columnHeaderRowModule (ref), panelHeaderModule (ref), foundationModule (ref), view (ref), renderWithSlideAndZoomDecorations (ref), tabbedLeaderboardBodyModule (ref)
 	local var3 = p1.isSmallTouchDevice == true
 	local title = p1.title
 	local platformLeaderboardOverride = p1.platformLeaderboardOverride
@@ -98,7 +98,7 @@ local function PlayerListPanelContent(p1)
 			return
 		end
 	end, {})
-	local var15 = if var13 then openContextMenu else nil
+	local var15 = if var13 then toggleContextMenu else nil
 	local var16 = signalsReactModule.useSignalState(playerContextualMenuStoreModule.getMenuData) ~= nil
 	local var17, var18 = reactOtterModule.useAnimatedBinding(0)
 	reactModule.useEffect(function()

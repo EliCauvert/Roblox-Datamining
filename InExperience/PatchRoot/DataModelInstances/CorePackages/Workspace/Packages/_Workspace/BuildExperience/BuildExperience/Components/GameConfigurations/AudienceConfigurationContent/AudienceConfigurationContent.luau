@@ -15,9 +15,11 @@ local contentMaturityUtilsModule = require(buildExperience.utils.ContentMaturity
 local gameConfigurationActionsModule = require(buildExperience.utils.GameConfigurationActions)
 local formatErrorModule = require(buildExperience.utils.formatError)
 local refreshPublishEligibilityModule = require(buildExperience.utils.refreshPublishEligibility)
+local refreshAdCampaignEligibilityModule = require(buildExperience.utils.refreshAdCampaignEligibility)
 local fFlagBuildAudiencePublishPromptModule = require(buildExperience.Flags.FFlagBuildAudiencePublishPrompt)
 local fFlagBuildExperienceTooltipsLightDismissModule = require(buildExperience.Flags.FFlagBuildExperienceTooltipsLightDismiss)
 local fFlagBuildRehydrateOnPublishModule = require(buildExperience.Flags.FFlagBuildRehydrateOnPublish)
+local fFlagEnableBuildAdPromotionModule = require(buildExperience.Flags.FFlagEnableBuildAdPromotion)
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local debug = creatorAgentChatModule.debug
 local icon = foundationModule.Icon
@@ -291,7 +293,7 @@ local _ = function(p3)
 end
 
 local function useAudienceController(p3)
-	-- upvalues: useAudienceStores (ref), reactModule (ref), fFlagBuildAudiencePublishPromptModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), useAudienceData (ref), useQuestionnaireHandler (ref), getAudiencesForValue (ref), fFlagBuildRehydrateOnPublishModule (ref), gameConfigurationActionsModule (ref), universeConfigurationModule (ref), debug (ref), formatErrorModule (ref), contentMaturityUtilsModule (ref)
+	-- upvalues: useAudienceStores (ref), reactModule (ref), fFlagBuildAudiencePublishPromptModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), useAudienceData (ref), useQuestionnaireHandler (ref), getAudiencesForValue (ref), fFlagBuildRehydrateOnPublishModule (ref), gameConfigurationActionsModule (ref), universeConfigurationModule (ref), fFlagEnableBuildAdPromotionModule (ref), refreshAdCampaignEligibilityModule (ref), debug (ref), formatErrorModule (ref), contentMaturityUtilsModule (ref)
 	local var1 = useAudienceStores()
 	local var2, var3 = reactModule.useState(nil)
 	local var4, var5 = reactModule.useState(false)
@@ -329,7 +331,7 @@ local function useAudienceController(p3)
 	
 	return {
 		handleAudienceActivated = reactModule.useCallback(function(p4)
-			-- upvalues: var9 (ref), var13 (ref), getAudiencesForValue (copy), configurationData (ref), var3 (ref), var5 (ref), var1 (ref), p3 (ref), fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), universeConfigurationModule (copy), debug (copy), formatErrorModule (copy), fFlagBuildAudiencePublishPromptModule (copy), isNonPrivateLocked (ref), var6 (write), contentMaturityUtilsModule (copy), isEligibilityResolved (ref)
+			-- upvalues: var9 (ref), var13 (ref), getAudiencesForValue (copy), configurationData (ref), var3 (ref), var5 (ref), var1 (ref), p3 (ref), fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), universeConfigurationModule (copy), fFlagEnableBuildAdPromotionModule (copy), refreshAdCampaignEligibilityModule (copy), debug (copy), formatErrorModule (copy), fFlagBuildAudiencePublishPromptModule (copy), isNonPrivateLocked (ref), var6 (write), contentMaturityUtilsModule (copy), isEligibilityResolved (ref)
 			local function _()
 				-- upvalues: var9 (copy), p4 (ref)
 				var9(function(p5)
@@ -339,7 +341,7 @@ local function useAudienceController(p3)
 			end
 			
 			local function applyAudienceChange()
-				-- upvalues: var13 (copy), getAudiencesForValue (copy), p4 (ref), configurationData (copy), var9 (copy), var3 (copy), var5 (copy), var1 (copy), p3 (copy), fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), universeConfigurationModule (copy), debug (copy), formatErrorModule (copy)
+				-- upvalues: var13 (copy), getAudiencesForValue (copy), p4 (ref), configurationData (copy), var9 (copy), var3 (copy), var5 (copy), var1 (copy), p3 (copy), fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), universeConfigurationModule (copy), fFlagEnableBuildAdPromotionModule (copy), refreshAdCampaignEligibilityModule (copy), debug (copy), formatErrorModule (copy)
 				if var13 then
 					return
 				end
@@ -348,7 +350,7 @@ local function useAudienceController(p3)
 				var3(p4)
 				var5(true)
 				var1.universeActivationStore.setAudiences(p3, var14):andThen(function(p5)
-					-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), p3 (copy), var1 (copy), universeConfigurationModule (copy), var14 (ref), debug (copy), formatErrorModule (copy), var3 (copy), var5 (copy)
+					-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), p3 (copy), var1 (copy), universeConfigurationModule (copy), var14 (ref), fFlagEnableBuildAdPromotionModule (copy), refreshAdCampaignEligibilityModule (copy), debug (copy), formatErrorModule (copy), var3 (copy), var5 (copy)
 					if fFlagBuildRehydrateOnPublishModule then
 						gameConfigurationActionsModule.updateCachedAudience(p3, p5.audiences)
 					else
@@ -358,7 +360,10 @@ local function useAudienceController(p3)
 						})
 					end
 					var1.universeActivationStore.activate(p3):andThen(function()
-						-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), var1 (copy), p3 (copy)
+						-- upvalues: fFlagEnableBuildAdPromotionModule (copy), refreshAdCampaignEligibilityModule (copy), p3 (copy), fFlagBuildRehydrateOnPublishModule (copy), var1 (copy)
+						if fFlagEnableBuildAdPromotionModule then
+							refreshAdCampaignEligibilityModule(p3)
+						end
 						if not fFlagBuildRehydrateOnPublishModule then
 							var1.universeConfigurationStore.fetchConfiguration(p3)
 						end

@@ -11,8 +11,11 @@ local launchPlaytestWithLoadingStateModule = require(buildExperience.utils.launc
 local getPrivatePlaytestersStore = require(parent.DataHydration.PrivatePlaytesters).getPrivatePlaytestersStore
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
 local fFlagBuildExperiencePrivateInvitesModule = require(buildExperience.Flags.FFlagBuildExperiencePrivateInvites)
+local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
+local fFlagBuildVersionHistoryUpdatesModule = require(buildExperience.Flags.FFlagBuildVersionHistoryUpdates)
 local fFlagEnableBuildAdPromotionModule = require(buildExperience.Flags.FFlagEnableBuildAdPromotion)
 local fFlagBuildExperienceShareUseUniverseSummary = require(parent.SharedFlags).FFlagBuildExperienceShareUseUniverseSummary
+local fFlagBuildExperienceAnalytics = require(parent.SharedFlags).FFlagBuildExperienceAnalytics
 local privacyType = universeConfigurationModule.PrivacyType
 
 local function _()
@@ -84,13 +87,20 @@ end
 local t = {
 	id = "get-users",
 	text = localizationStringsModule.BUILD_MENU_GET_USERS,
+	isDisabled = function(p1)
+		return p1.getUsersUniverseEligible ~= true
+	end,
+	getTrailingText = function(p1)
+		-- upvalues: localizationStringsModule (ref)
+		return if (p1.getUsersFreeCreditsRemaining or 0) > 0 then localizationStringsModule.BUILD_MENU_GET_USERS_FREE_TAG else nil
+	end,
 	onActivated = function()
 		return { type = "openGetUsers" }
 	end
 }
 
 return function()
-	-- upvalues: localizationStringsModule (ref), isAssistantDisabled (ref), onAssistantActivated (ref), isPlaytestDisabled (ref), onPlaytestActivated (ref), getPublishText (ref), fFlagBuildExperiencePrivateInvitesModule (ref), onShareActivated (ref), isVersionHistoryDisabled (ref), onVersionHistoryActivated (ref), isInviteToPlaytestDisabled (ref), sendBuildExperienceEventModule (ref), signalsModule (ref), reactModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), fFlagEnableBuildAdPromotionModule (ref), t (ref)
+	-- upvalues: localizationStringsModule (ref), isAssistantDisabled (ref), onAssistantActivated (ref), isPlaytestDisabled (ref), onPlaytestActivated (ref), getPublishText (ref), fFlagBuildExperiencePrivateInvitesModule (ref), onShareActivated (ref), fFlagBuildVersionHistoryUpdatesModule (ref), isVersionHistoryDisabled (ref), onVersionHistoryActivated (ref), isInviteToPlaytestDisabled (ref), sendBuildExperienceEventModule (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceManageDevProductModule (ref), signalsModule (ref), reactModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), universeConfigurationModule (ref), fFlagBuildExperienceShareUseUniverseSummary (ref), gameConfigurationLabelsModule (ref), fFlagEnableBuildAdPromotionModule (ref), privacyType (ref), t (ref)
 	local list = {
 		{
 			items = {
@@ -135,7 +145,7 @@ return function()
 				},
 				{
 					id = "version-history",
-					text = localizationStringsModule.BUILD_MENU_VERSION_HISTORY,
+					text = if fFlagBuildVersionHistoryUpdatesModule then localizationStringsModule.BUILD_MENU_VERSIONS else localizationStringsModule.BUILD_MENU_VERSION_HISTORY,
 					isDisabled = isVersionHistoryDisabled,
 					onActivated = onVersionHistoryActivated
 				}
@@ -160,12 +170,41 @@ return function()
 			end
 		})
 	end
+	local t_1 = nil
+	
+	if fFlagBuildExperienceAnalytics then
+		t_1 = {
+			items = {
+				{
+					id = "stats",
+					text = localizationStringsModule.BUILD_MENU_STATS,
+					onActivated = function()
+						return { type = "openPage", page = "stats" }
+					end
+				}
+			}
+		}
+		table.insert(list, t_1)
+	end
+	if fFlagBuildExperienceManageDevProductModule then
+		table.insert(list, 1, {
+			items = {
+				{
+					id = "monetization",
+					text = localizationStringsModule.BUILD_MENU_MONETIZATION,
+					onActivated = function()
+						return { type = "openPage", page = "monetization" }
+					end
+				}
+			}
+		})
+	end
 	local var1 = signalsModule.createSignal(list)
 	
 	return {
 		getItems = var1,
 		useItems = function(p1)
-			-- upvalues: reactModule (copy), signalsModule (copy), fFlagBuildExperiencePrivateInvitesModule (copy), getPrivatePlaytestersStore (copy), signalsReactModule (copy), var1 (ref), fFlagEnableBuildAdPromotionModule (copy), t (copy)
+			-- upvalues: reactModule (copy), signalsModule (copy), fFlagBuildExperiencePrivateInvitesModule (copy), getPrivatePlaytestersStore (copy), signalsReactModule (copy), fFlagBuildExperienceAnalytics (copy), universeConfigurationModule (copy), fFlagBuildExperienceShareUseUniverseSummary (copy), gameConfigurationLabelsModule (copy), var1 (ref), fFlagEnableBuildAdPromotionModule (copy), privacyType (copy), t_1 (write), t (copy)
 			local var2 = if p1 ~= nil then nil else p1.universeId
 			local var3 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 				-- upvalues: signalsModule (copy), fFlagBuildExperiencePrivateInvitesModule (copy), var2 (ref), getPrivatePlaytestersStore (copy)
@@ -174,24 +213,48 @@ return function()
 					return if fFlagBuildExperiencePrivateInvitesModule and var2 ~= nil then #getPrivatePlaytestersStore(false).getAndFetchInvitedPlayers(var2).players(p2) else 0
 				end)
 			end, { var2 }))
-			local var4 = signalsReactModule.useSignalState(var1)
-			local var5 = fFlagEnableBuildAdPromotionModule and (p1 ~= nil and p1.canOpenGetUsers == true)
-			
-			return if p1 == nil then {} elseif fFlagBuildExperiencePrivateInvitesModule or var5 then reactModule.useMemo(function()
-				-- upvalues: var4 (ref), var5 (ref), t (copy)
-				local cloned = table.clone(var4)
-				
-				if var5 then
-					local var6 = cloned[1]
+			local var4 = if fFlagBuildExperienceAnalytics then signalsReactModule.useSignalState(reactModule.useMemo(function()
+				-- upvalues: signalsModule (copy), var2 (ref), universeConfigurationModule (copy), fFlagBuildExperienceShareUseUniverseSummary (copy), gameConfigurationLabelsModule (copy)
+				return signalsModule.createComputed(function(p2)
+					-- upvalues: var2 (copy), universeConfigurationModule (copy), fFlagBuildExperienceShareUseUniverseSummary (copy), gameConfigurationLabelsModule (copy)
+					if var2 == nil then
+						return nil
+					end
+					local universeConfigurationStore = universeConfigurationModule.getUniverseConfigurationStore()
 					
-					if var6 ~= nil then
-						local cloned_1 = table.clone(var6.items)
+					return gameConfigurationLabelsModule.getAudience(if fFlagBuildExperienceShareUseUniverseSummary then universeConfigurationStore.getAndFetchSummary(var2).data(p2) else universeConfigurationStore.getAndFetchConfiguration(var2).data(p2))
+				end)
+			end, { var2 })) else nil
+			local var5 = signalsReactModule.useSignalState(var1)
+			local var6 = fFlagEnableBuildAdPromotionModule and (p1 ~= nil and (p1.canOpenGetUsers == true and p1.getUsersUserEligible == true))
+			
+			return if p1 == nil then {} else reactModule.useMemo(function()
+				-- upvalues: fFlagBuildExperienceAnalytics (copy), var4 (write), privacyType (copy), fFlagBuildExperiencePrivateInvitesModule (copy), var6 (ref), var5 (ref), t_1 (copy), t (copy)
+				local var7 = fFlagBuildExperienceAnalytics and var4 ~= privacyType.Public
+				
+				if not fFlagBuildExperiencePrivateInvitesModule and not var7 and not var6 then
+					return var5
+				end
+				local cloned = table.clone(var5)
+				
+				if var7 then
+					local index = table.find(cloned, t_1)
+					
+					if index ~= nil then
+						table.remove(cloned, index)
+					end
+				end
+				if var6 then
+					local var8 = cloned[1]
+					
+					if var8 ~= nil then
+						local cloned_1 = table.clone(var8.items)
 						table.insert(cloned_1, t)
 						cloned[1] = { items = cloned_1 }
 					end
 				end
 				return cloned
-			end, { var4, var3, var5 }) else var4
+			end, { var5, var3, var4, var6 })
 		end
 	}
 end

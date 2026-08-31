@@ -14,13 +14,11 @@ local chatLandingTelemetryEventsModule = require(script:FindFirstAncestor("ChatL
 local chatLandingTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatLandingTelemetryLayer)
 local fFlagAppIaScrollAway = require(parent.SharedFlags).FFlagAppIaScrollAway
 local partyPageCarouselExperimentation = require(parent.SocialExperiments).PartyPageCarouselExperimentation
-local fFlagAppChatUseNewConversationRowModule = require(appChat.Flags.FFlagAppChatUseNewConversationRow)
-local fFlagAppChatConversationStoreModule = require(appChat.Flags.FFlagAppChatConversationStore)
-local fFlagAppChatSignalsMessageStoreModule = require(appChat.Flags.FFlagAppChatSignalsMessageStore)
+local signalsMigrationConfigModule = require(appChat.Flags.SignalsMigrationConfig)
 local fFlagAppChatUseUltimateListConversationListModule = require(appChat.Flags.FFlagAppChatUseUltimateListConversationList)
 local conversationListWithTopBar = roactModule.PureComponent:extend("ConversationListWithTopBar")
-local fFlagAppChatSignalsMessageStoreModule_1 = fFlagAppChatUseNewConversationRowModule and (fFlagAppChatConversationStoreModule and fFlagAppChatSignalsMessageStoreModule)
-local fFlagAppChatUseUltimateListConversationListModule_1 = fFlagAppChatSignalsMessageStoreModule_1 and fFlagAppChatUseUltimateListConversationListModule
+local shouldUseFoundationConversationRow = signalsMigrationConfigModule.shouldUseFoundationConversationRow
+local fFlagAppChatUseUltimateListConversationListModule_1 = shouldUseFoundationConversationRow and fFlagAppChatUseUltimateListConversationListModule
 local conversationListModule = require(script.Parent.ConversationList)
 local var1 = false
 local var2 = nil
@@ -168,24 +166,23 @@ function conversationListWithTopBar.init(p1)
 end
 
 function conversationListWithTopBar.render(p1)
-	-- upvalues: withAnalyticsModule (ref), withTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), partyPageCarouselExperimentation (ref), fFlagAppChatSignalsMessageStoreModule_1 (ref), fFlagAppIaScrollAway (ref), fFlagAppChatUseUltimateListConversationListModule_1 (ref), conversationListModule (ref), var1 (write), var2 (write), roactModule (ref)
+	-- upvalues: withAnalyticsModule (ref), withTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), partyPageCarouselExperimentation (ref), shouldUseFoundationConversationRow (ref), fFlagAppIaScrollAway (ref), fFlagAppChatUseUltimateListConversationListModule_1 (ref), conversationListModule (ref), var1 (write), var2 (write), roactModule (ref)
 	return withAnalyticsModule(function(p2)
-		-- upvalues: withTelemetryModule (copy), chatLandingTelemetryLayerModule (copy), p1 (ref), partyPageCarouselExperimentation (copy), fFlagAppChatSignalsMessageStoreModule_1 (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), conversationListModule (copy), var1 (copy), var2 (copy), roactModule (copy)
+		-- upvalues: withTelemetryModule (copy), chatLandingTelemetryLayerModule (copy), p1 (ref), partyPageCarouselExperimentation (copy), shouldUseFoundationConversationRow (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), conversationListModule (copy), var1 (copy), var2 (copy), roactModule (copy)
 		return withTelemetryModule(chatLandingTelemetryLayerModule.Context)(function(p3)
-			-- upvalues: p1 (copy), p2 (ref), partyPageCarouselExperimentation (copy), fFlagAppChatSignalsMessageStoreModule_1 (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), conversationListModule (copy), var1 (copy), var2 (copy), roactModule (copy)
+			-- upvalues: p1 (copy), p2 (ref), partyPageCarouselExperimentation (copy), shouldUseFoundationConversationRow (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), conversationListModule (copy), var1 (copy), var2 (copy), roactModule (copy)
 			local t = {
 				Size = UDim2.fromScale(1, 1),
 				itemList = if p1.props.filterText and p1.props.filterText:match("%S") then p1.state.filteredItemList else p1.props.itemList,
 				loadNext = p1.loadNext(p2),
 				isDebugEnabled = p1.props.isDebugEnabled,
-				isWideMode = if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() or fFlagAppChatSignalsMessageStoreModule_1 then p1.props.isWideMode else nil,
+				isWideMode = if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() or shouldUseFoundationConversationRow then p1.props.isWideMode else nil,
 				filterText = p1.props.filterText,
 				onActivated = p1.onActivated,
 				entryHeight = p1.props.entryHeight,
 				navigateToSquadLobby = p1.props.navigateToSquadLobby,
 				isInExperience = p1.props.isInExperience,
 				localUserId = p1.props.localUserId,
-				rowProps = { showBackground = not p1.props.isInExperience },
 				navigateToConversationFromUserId = if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then p1.props.navigateToConversationFromUserId else nil,
 				navigateToQuickStartSquadInviteFriends = if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then p1.props.navigateToQuickStartSquadInviteFriends else nil,
 				shouldShowPhoneVerificationUpsell = p1.props.shouldShowPhoneVerificationUpsell,
@@ -199,7 +196,7 @@ function conversationListWithTopBar.render(p1)
 				fireConversationClickedEvent = p1.fireClickEvent
 			}
 			
-			if fFlagAppChatSignalsMessageStoreModule_1 then
+			if shouldUseFoundationConversationRow then
 				t.canAccessParty = p1.props.canAccessParty
 			end
 			if fFlagAppChatUseUltimateListConversationListModule_1 then

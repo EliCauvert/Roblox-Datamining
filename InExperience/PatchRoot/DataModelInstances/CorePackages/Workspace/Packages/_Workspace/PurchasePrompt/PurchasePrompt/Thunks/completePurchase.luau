@@ -13,16 +13,36 @@ local logUnifiedPurchaseTelemetryCounterModule = require(parent.Utils.logUnified
 local unifiedPurchaseTelemetryModule = require(parent.Events.UnifiedPurchaseTelemetry)
 local sendUnifiedPurchaseEventLogModule = require(parent.Utils.sendUnifiedPurchaseEventLog)
 local unifiedPurchaseEventNameEnumModule = require(parent.Enums.UnifiedPurchaseEventNameEnum)
+local fFlagEnableInExperienceOffersPurchaseFlow = require(parent.Parent.SharedFlags).FFlagEnableInExperienceOffersPurchaseFlow
+local getFeatureKeyForSurfaceModule = require(parent.Utils.getFeatureKeyForSurface)
+local inExperienceOffersModule = require(parent.Parent.InExperienceOffers)
 
 return function(p1)
-	-- upvalues: thunkModule (ref), workspaceService (ref), purchaseCompleteRecievedModule (ref), AXEnsureOfferBannerRefetchUnified (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref), sendUnifiedPurchaseEventLogModule (ref), unifiedPurchaseEventNameEnumModule (ref), fFlagSkipCompletionModalForMarketplace (ref), setPromptStateModule (ref), promptStateModule (ref), completeRequestModule (ref)
+	-- upvalues: thunkModule (ref), workspaceService (ref), purchaseCompleteRecievedModule (ref), AXEnsureOfferBannerRefetchUnified (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), inExperienceOffersModule (ref), getFeatureKeyForSurfaceModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref), sendUnifiedPurchaseEventLogModule (ref), unifiedPurchaseEventNameEnumModule (ref), fFlagSkipCompletionModalForMarketplace (ref), setPromptStateModule (ref), promptStateModule (ref), completeRequestModule (ref)
 	return thunkModule.new(script.Name, {}, function(p2, _)
-		-- upvalues: workspaceService (copy), purchaseCompleteRecievedModule (copy), AXEnsureOfferBannerRefetchUnified (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), p1 (ref), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), sendUnifiedPurchaseEventLogModule (copy), unifiedPurchaseEventNameEnumModule (copy), fFlagSkipCompletionModalForMarketplace (copy), setPromptStateModule (copy), promptStateModule (copy), completeRequestModule (copy)
+		-- upvalues: workspaceService (copy), purchaseCompleteRecievedModule (copy), AXEnsureOfferBannerRefetchUnified (copy), fFlagEnableInExperienceOffersPurchaseFlow (copy), inExperienceOffersModule (copy), getFeatureKeyForSurfaceModule (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), p1 (ref), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), sendUnifiedPurchaseEventLogModule (copy), unifiedPurchaseEventNameEnumModule (copy), fFlagSkipCompletionModalForMarketplace (copy), setPromptStateModule (copy), promptStateModule (copy), completeRequestModule (copy)
 		local var1 = workspaceService.DistributedGameTime - p2:getState().purchasingStartTime
 		p2:dispatch(purchaseCompleteRecievedModule())
 		
 		if AXEnsureOfferBannerRefetchUnified then
 			p2:flush()
+		end
+		if fFlagEnableInExperienceOffersPurchaseFlow then
+			local purchaseAnalyticsMetadata = p2:getState().purchaseAnalyticsMetadata
+			
+			if purchaseAnalyticsMetadata then
+				local offersStore = inExperienceOffersModule.getOffersStore(false)
+				local offers = offersStore.getOffers(false)
+				local featureKeys = inExperienceOffersModule.FeatureKeys
+				
+				if getFeatureKeyForSurfaceModule(purchaseAnalyticsMetadata.surface) == featureKeys.RobloxShop then
+					if inExperienceOffersModule.Utils.getOffersForKey(offers, featureKeys.RobloxShop) ~= nil then
+						offersStore.fetchOffers({ featureKeys.RobloxShop })
+					end
+				elseif inExperienceOffersModule.Utils.getOffersForKey(offers, featureKeys.DeveloperShop) ~= nil then
+					offersStore.fetchOffers({ featureKeys.DeveloperShop })
+				end
+			end
 		end
 		if fFlagEnableUnifiedProductPurchaseFlow and p2:getState().isUserEligibleForUnifiedPurchaseFlow then
 			local state = p2:getState()

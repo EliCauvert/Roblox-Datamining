@@ -13,8 +13,6 @@ local publishFooterModule = require(buildExperience.Components.GameConfiguration
 local publishLatestPreviewCardModule = require(buildExperience.Components.GameConfigurations.PublishPreviewCard.PublishLatestPreviewCard)
 local publishPreviewCardModule = require(buildExperience.Components.GameConfigurations.PublishPreviewCard.PublishPreviewCard)
 local fFlagEnableBuildExperienceScrollPerformanceTrackingModule = require(buildExperience.Flags.FFlagEnableBuildExperienceScrollPerformanceTracking)
-local fFlagEnableProvisionalRatingModule = require(buildExperience.Flags.FFlagEnableProvisionalRating)
-local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local publishStatusModule = require(buildExperience.Chat.PublishStatus)
 local view = foundationModule.View
 local t = {
@@ -49,7 +47,7 @@ local function PublishPreview(p1)
 end
 
 return function(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), PublishPreview (ref), publishConfigurationContentContainerModule (ref), gameConfigurationContentModule (ref), view (ref), fFlagEnableProvisionalRatingModule (ref), overflowMenuPageShellModule (ref), t (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), t_1 (ref), publishFooterModule (ref)
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), PublishPreview (ref), publishConfigurationContentContainerModule (ref), gameConfigurationContentModule (ref), view (ref), overflowMenuPageShellModule (ref), t (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), t_1 (ref), publishFooterModule (ref)
 	local var1 = if fFlagBuildLocalization then useLocalization({
 		loading = localizationStringsModule.BUILD_MENU_LOADING,
 		publish = localizationStringsModule.BUILD_MENU_PUBLISH,
@@ -81,7 +79,7 @@ return function(p1)
 		onClose = p1.onClose,
 		content = if var2 then reactModule.createElement(view, { tag = "col gap-large size-full-0 auto-y" }, { LeadingContent = var2, GameConfigurationContent = var3 }) else var3,
 		scrollPerformanceIntervalName = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then t_1[p1.page] else nil,
-		footer = if p1.page == "publish" and (if p1.showPreviewButton == false then fFlagEnableProvisionalRatingModule else true) then reactModule.createElement(publishFooterModule, {
+		footer = if p1.page == "publish" then reactModule.createElement(publishFooterModule, {
 			target = {
 				universeId = p1.target.universeId,
 				placeId = p1.target.placeId,

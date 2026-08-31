@@ -21,6 +21,18 @@ local orientation = foundationModule.Enums.Orientation
 local skeleton = foundationModule.Skeleton
 local radius = foundationModule.Enums.Radius
 local useTokens = foundationModule.Hooks.useTokens
+local inputHandlersModule = require(parent.InputHandlers)
+local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
+local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
+local useFocusRoot = focusNavigationUtilsModule.useFocusRoot
+local useDefaultFocusBehavior = require(parent.ReactFocusNavigation).useDefaultFocusBehavior
+local t = {
+	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
+	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
+}
+local responsiveModule = require(parent.Responsive)
+local useLastInput = responsiveModule.useLastInput
 local userRow = require(parent.UserList).UserRow
 local userProfilesModule = require(parent.UserProfiles)
 local useUserProfilesFetch = userProfilesModule.Hooks.useUserProfilesFetch
@@ -45,16 +57,17 @@ local fFlagAppChatEnableU13ChatOptIn = require(parent.SharedFlags).FFlagAppChatE
 local fFlagFriendsChatEnableConversationConsent = require(parent.SharedFlags).FFlagFriendsChatEnableConversationConsent
 local fFlagSupportViewingUserProfileOnOSAModule = require(appChat.Flags.FFlagSupportViewingUserProfileOnOSA)
 local appChatGroupOsaViewDetailsUrl = game:DefineFastString("AppChatGroupOsaViewDetailsUrl", "https://en.help.roblox.com/hc/en-us/articles/360000432483-Party-chat-In-App")
+local addFocusNavigationToGroupOSADialog = game:DefineFastFlag("AddFocusNavigationToGroupOSADialog", false)
 local inlineRichTextModule = require(parent.InlineRichText)
 local renderer = inlineRichTextModule.Renderer
 local linkBehavior = inlineRichTextModule.Enums.LinkBehavior
 local useAppPolicyModule = require(appChat.Hooks.useAppPolicy)
 local var1 = game.PlaceId > 0
-local t = { source = nil, createdAt = nil, title = "" }
+local t_1 = { source = nil, createdAt = nil, title = "" }
 local conversationListOverlay = constantsModule.ModalSequence.ConversationListOverlay
 local osaContextCard = constantsModule.OptInVariant.OsaContextCard
 local accept = constantsModule.ModalAction.Accept
-local t_1 = {
+local t_2 = {
 	disablePortal = false,
 	hasBackdrop = true,
 	dialogSize = dialogSize.Medium,
@@ -69,8 +82,8 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t_1 (ref), fFlagAppChatEnableU13ChatOptIn (ref), osaContextCard (ref), useDispatch (ref), useStore (ref), useLocalUserId (ref), useTokens (ref), useAppPolicyModule (ref), reactModule (ref), var1 (ref), linkBehavior (ref), useEffect (ref), useTelemetryModule (ref), appTelemetryLayerModule (ref), conversationListOverlayTelemetryModule (ref), squadExternalContractContext (ref), useGetConversationFromIdModule (ref), t (ref), shouldShowU13ChatOptInForConversationModule (ref), constantsModule (ref), fFlagFriendsChatEnableConversationConsent (ref), API (ref), name (ref), getConversationStoreModule (ref), receivedConversationModule (ref), conversationRoduxSeedModule (ref), useSelector (ref), getDeepValue2Module (ref), appChatNetworkingModule (ref), useUserProfilesFetch (ref), userProfilesModule (ref), dateTime (ref), getCombinedNameFromId (ref), conversationModule (ref), useLocalization (ref), appChatGroupOsaViewDetailsUrl (ref), userRow (ref), foundationModule (ref), badgeVariant (ref), fFlagSupportViewingUserProfileOnOSAModule (ref), modalTelemetryModule (ref), squadPromptType (ref), useRecordModalSequenceResponseForConversationModule (ref), accept (ref), conversationListOverlay (ref), API_1 (ref), skeleton (ref), radius (ref), dialog (ref), renderer (ref), orientation (ref), buttonVariant (ref)
-	local var2 = cryoModule.Dictionary.union(t_1, p1)
+	-- upvalues: cryoModule (ref), t_2 (ref), fFlagAppChatEnableU13ChatOptIn (ref), osaContextCard (ref), useDispatch (ref), useStore (ref), useLocalUserId (ref), useTokens (ref), useAppPolicyModule (ref), reactModule (ref), var1 (ref), linkBehavior (ref), useEffect (ref), useTelemetryModule (ref), appTelemetryLayerModule (ref), conversationListOverlayTelemetryModule (ref), squadExternalContractContext (ref), useGetConversationFromIdModule (ref), t_1 (ref), shouldShowU13ChatOptInForConversationModule (ref), constantsModule (ref), fFlagFriendsChatEnableConversationConsent (ref), API (ref), name (ref), getConversationStoreModule (ref), receivedConversationModule (ref), conversationRoduxSeedModule (ref), useSelector (ref), getDeepValue2Module (ref), appChatNetworkingModule (ref), useUserProfilesFetch (ref), userProfilesModule (ref), dateTime (ref), getCombinedNameFromId (ref), conversationModule (ref), useLocalization (ref), appChatGroupOsaViewDetailsUrl (ref), userRow (ref), foundationModule (ref), badgeVariant (ref), fFlagSupportViewingUserProfileOnOSAModule (ref), modalTelemetryModule (ref), addFocusNavigationToGroupOSADialog (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), useDefaultFocusBehavior (ref), useLastInput (ref), responsiveModule (ref), squadPromptType (ref), useRecordModalSequenceResponseForConversationModule (ref), accept (ref), conversationListOverlay (ref), API_1 (ref), skeleton (ref), radius (ref), dialog (ref), renderer (ref), orientation (ref), buttonVariant (ref)
+	local var2 = cryoModule.Dictionary.union(t_2, p1)
 	local var3 = if fFlagAppChatEnableU13ChatOptIn then var2.modalVariant else osaContextCard
 	local var4 = useDispatch()
 	local var5 = useStore()
@@ -107,7 +120,7 @@ return function(p1)
 	end, { var12, var2.impressionId, var2.conversationId, var3 })
 	local var13 = reactModule.useContext(squadExternalContractContext)
 	local var14 = useGetConversationFromIdModule(var2.conversationId)
-	local var15 = var14 or t
+	local var15 = var14 or t_1
 	
 	if fFlagAppChatEnableU13ChatOptIn then
 		local var16 = var3
@@ -228,9 +241,9 @@ return function(p1)
 			local var29 = var17 and var17[var28]
 			
 			if not var29 then
-				name:debug("Metadata not found for participant: " .. var59)
+				name:debug("Metadata not found for participant: " .. var70)
 			end
-			t["Participant_" .. var59] = reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = i }, {
+			t["Participant_" .. var70] = reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = i }, {
 				Row = reactModule.createElement(userRow, {
 					layoutMode = "wide",
 					entityId = var28,
@@ -272,27 +285,55 @@ return function(p1)
 		var2.conversationId,
 		var3
 	})
-	local var31 = reactModule.useCallback(function()
+	local var31 = if addFocusNavigationToGroupOSADialog then useFocusRoot({
+		isAutoFocusRoot = true,
+		shouldRestoreFocus = false,
+		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
+		eventHandlers = if addFocusNavigationToGroupOSADialog then reactModule.useMemo(function()
+			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var30 (ref)
+			return {
+				[focusNavigationEventNameEnum.NavigateBack] = {
+					handler = inputHandlersModule.onRelease(function(p2)
+						-- upvalues: var30 (copy)
+						var30()
+						p2:cancel()
+					end)
+				}
+			}
+		end, { var30 }) else nil,
+		eventMap = t
+	}) else nil
+	local var32 = nil
+	local var33 = nil
+	
+	if addFocusNavigationToGroupOSADialog then
+		local var34, var35 = useDefaultFocusBehavior(var31)
+		var32 = var34
+		var33 = var35
+	end
+	local var36 = addFocusNavigationToGroupOSADialog and (if addFocusNavigationToGroupOSADialog then useLastInput() else nil) == responsiveModule.Input.Directional
+	local var37 = reactModule.useCallback(function()
 		-- upvalues: var13 (ref), var5 (ref), squadPromptType (copy)
 		var13.setSquadPrompt(var5, {
 			hideCancelButton = true,
 			promptType = squadPromptType.Error
 		})
 	end, { var13.setSquadPrompt, var5 })
-	local var32 = useRecordModalSequenceResponseForConversationModule(var2.conversationId)
-	local var33 = not var14 or ((var15.source == "channels" and var17 == nil) or (var18 ~= nil and var23))
+	local var38 = useRecordModalSequenceResponseForConversationModule(var2.conversationId)
+	local var39 = not var14 or ((var15.source == "channels" and var17 == nil) or (var18 ~= nil and var23))
 	
 	return reactModule.createElement(dialog.Root, {
+		ref = if addFocusNavigationToGroupOSADialog then var33 else nil,
 		size = var2.dialogSize,
-		onClose = var30,
+		onClose = if addFocusNavigationToGroupOSADialog and var36 then nil else var30,
 		hasBackdrop = var2.hasBackdrop,
 		disablePortal = var2.disablePortal
 	}, {
-		DialogTitle = not var33 and reactModule.createElement(dialog.Title, {
+		DialogTitle = not var39 and reactModule.createElement(dialog.Title, {
 			LayoutOrder = 1,
 			text = if var24 then if var25 then var26.inviterTitleText else var26.inviterTitleTextOneToOne else var26.titleText
 		}),
-		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, if var33 then reactModule.useMemo(function()
+		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, if var39 then reactModule.useMemo(function()
 			-- upvalues: reactModule (copy), foundationModule (copy), skeleton (copy), var7 (ref), radius (copy)
 			return reactModule.createElement(foundationModule.View, {
 				tag = "col gap-medium size-full-0 auto-y margin-top-small"
@@ -340,15 +381,16 @@ return function(p1)
 			var26.subtitleText, var26.footerText, var27, var7.Color.Content.Default,
 			var7.Typography.BodyMedium, var9
 		})),
-		DialogActions = not var33 and reactModule.createElement(dialog.Actions, {
+		DialogActions = not var39 and reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 3,
 			orientation = orientation.Vertical,
 			actions = {
 				{
 					text = var26.joinButtonText,
 					variant = buttonVariant.Emphasis,
+					ref = if addFocusNavigationToGroupOSADialog then var32 else nil,
 					onActivated = reactModule.useCallback(function()
-						-- upvalues: var10 (ref), var11 (ref), var3 (write), modalTelemetryModule (copy), var2 (ref), var12 (ref), conversationListOverlayTelemetryModule (copy), var32 (ref), accept (copy), conversationListOverlay (copy), cryoModule (copy), name (copy), var31 (ref)
+						-- upvalues: var10 (ref), var11 (ref), var3 (write), modalTelemetryModule (copy), var2 (ref), var12 (ref), conversationListOverlayTelemetryModule (copy), var38 (ref), accept (copy), conversationListOverlay (copy), cryoModule (copy), name (copy), var37 (ref)
 						if var10 then
 							return
 						end
@@ -360,23 +402,23 @@ return function(p1)
 							impressionId = var2.impressionId
 						}
 						var12.emit(conversationListOverlayTelemetryModule.Events.ModalAction, t)
-						var32(accept, conversationListOverlay, nil, var3):andThen(function()
+						var38(accept, conversationListOverlay, nil, var3):andThen(function()
 							-- upvalues: var12 (copy), conversationListOverlayTelemetryModule (copy), cryoModule (copy), t (ref), modalTelemetryModule (copy), var2 (copy)
 							var12.emit(conversationListOverlayTelemetryModule.Events.ModalActionResult, cryoModule.Dictionary.union(t, {
 								actionResult = modalTelemetryModule.Enums.ModalActionResults.Success
 							}))
 							var2.onJoin()
 						end):catch(function(p2)
-							-- upvalues: var12 (copy), conversationListOverlayTelemetryModule (copy), cryoModule (copy), t (ref), modalTelemetryModule (copy), name (copy), var31 (copy), var2 (copy)
+							-- upvalues: var12 (copy), conversationListOverlayTelemetryModule (copy), cryoModule (copy), t (ref), modalTelemetryModule (copy), name (copy), var37 (copy), var2 (copy)
 							var12.emit(conversationListOverlayTelemetryModule.Events.ModalActionResult, cryoModule.Dictionary.union(t, {
 								actionResult = modalTelemetryModule.Enums.ModalActionResults.Failure
 							}))
 							name:warning(`Error in GroupOSADialog Join-> RecordModalSequenceResponse: {tostring(p2)}`)
-							var31()
+							var37()
 							var2.onClose()
 						end)
 					end, {
-						var2.onJoin, var2.onClose, var31, var32, var4, var2.conversationId, var3,
+						var2.onJoin, var2.onClose, var37, var38, var4, var2.conversationId, var3,
 						var12, var2.impressionId, var10
 					}),
 					isDisabled = var10
@@ -385,7 +427,7 @@ return function(p1)
 					text = var26.declineButtonText,
 					variant = buttonVariant.Standard,
 					onActivated = reactModule.useCallback(function()
-						-- upvalues: var10 (ref), var11 (ref), var3 (write), modalTelemetryModule (copy), var2 (ref), var12 (ref), conversationListOverlayTelemetryModule (copy), var15 (ref), conversationModule (copy), var4 (ref), API_1 (copy), var6 (ref), cryoModule (copy), name (copy), var31 (ref)
+						-- upvalues: var10 (ref), var11 (ref), var3 (write), modalTelemetryModule (copy), var2 (ref), var12 (ref), conversationListOverlayTelemetryModule (copy), var15 (ref), conversationModule (copy), var4 (ref), API_1 (copy), var6 (ref), cryoModule (copy), name (copy), var37 (ref)
 						if var10 then return end
 						var11(true)
 						local t = {
@@ -405,12 +447,12 @@ return function(p1)
 									}))
 									var2.onDecline()
 								end):catch(function(p2)
-									-- upvalues: var12 (copy), conversationListOverlayTelemetryModule (copy), cryoModule (copy), t (ref), modalTelemetryModule (copy), name (copy), var31 (copy), var2 (copy)
+									-- upvalues: var12 (copy), conversationListOverlayTelemetryModule (copy), cryoModule (copy), t (ref), modalTelemetryModule (copy), name (copy), var37 (copy), var2 (copy)
 									var12.emit(conversationListOverlayTelemetryModule.Events.ModalActionResult, cryoModule.Dictionary.union(t, {
 										actionResult = modalTelemetryModule.Enums.ModalActionResults.Failure
 									}))
 									name:warning(`Error in GroupOSADialog Decline -> RemoveUserFromConversation: {tostring(p2)}`)
-									var31()
+									var37()
 									var2.onClose()
 								end)
 								
@@ -422,7 +464,7 @@ return function(p1)
 							var2.onDecline()
 						end
 					end, {
-						var2.onDecline, var2.onClose, var31, var4, var2.conversationId, var3,
+						var2.onDecline, var2.onClose, var37, var4, var2.conversationId, var3,
 						var15, var6, var12, var2.impressionId, var10, var6
 					}),
 					isDisabled = var10

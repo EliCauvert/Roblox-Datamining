@@ -15,6 +15,7 @@ local responsiveModule = require(parent.Responsive)
 local fFlagBackpackResponsiveUnits = require(parent.SharedFlags).FFlagBackpackResponsiveUnits
 local systemModule = require(parent.System)
 local enableHotbarHide = game:DefineFastFlag("EnableHotbarHide", false)
+local fFlagStudioDeviceSimVRSwitchFixes = require(parent.SharedFlags).FFlagStudioDeviceSimVRSwitchFixes
 local t = {
 	OpenClose = nil,
 	IsHotbarVisible = false,
@@ -1369,11 +1370,14 @@ function gamepadDisconnected()
 end
 
 function gamepadConnected()
-	-- upvalues: VRService (ref), var31 (write), var10 (write), guiService (ref), var25 (write), var28 (write), var8 (write), contextActionService (ref), var36 (write), var14 (write)
+	-- upvalues: VRService (ref), var31 (write), var10 (write), fFlagStudioDeviceSimVRSwitchFixes (ref), guiService (ref), var25 (write), var28 (write), var8 (write), contextActionService (ref), var36 (write), var14 (write)
 	if not VRService.VREnabled then
 		var31 = true
 		
 		if var10 then
+			if fFlagStudioDeviceSimVRSwitchFixes then
+				guiService:RemoveSelectionGroup("RBXBackpackSelection")
+			end
 			guiService:AddSelectionParent("RBXBackpackSelection", var10)
 		end
 		if var25 >= 1 and var28 and not var8 then

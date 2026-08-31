@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnableBuildAdPromotion", false)
+﻿return game:DefineFastFlag("EnableBuildAdPromotion2", false)

@@ -19,6 +19,7 @@
 	FeedEmptyCreationStarted = "FeedEmptyCreationStarted",
 	FeedDraftUploaded = "FeedDraftUploaded",
 	MomentCreationStarted = "MomentCreationStarted",
+	MomentCreationEntryResolved = "MomentCreationEntryResolved",
 	MomentCreationPermissionGranted = "MomentCreationPermissionGranted",
 	MomentCreationPermissionDenied = "MomentCreationPermissionDenied",
 	MomentItemDeleted = "MomentItemDeleted",

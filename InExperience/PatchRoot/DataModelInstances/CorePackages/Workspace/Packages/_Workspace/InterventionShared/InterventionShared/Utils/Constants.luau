@@ -91,7 +91,7 @@
 		ModeratorNoteLabel = "Feature.NotApproved.Label.ModeratorNote",
 		OkText = "Feature.AppealsPortal.Action.OK",
 		AppealsPortalTitleText = "Feature.AppealsPortal.Label.ReportAndAppeals",
-		AccountStatusTitleText = "Feature.SafetyDashboard.Heading.AccountStatus",
+		AccountStatusTitleText = "Feature.SafetyDashboard.Heading.AccountStatus.V2",
 		AvatarKickWarningTitle = "Notifications.SafetyAvatarModeration.Label.NotificationTypeInExpWarn",
 		AvatarKickWarningDescription = "Notifications.SafetyAvatarModeration.Description.NotificationTypeInExpWarnMsg",
 		Thanks = "CommonUI.Features.Label.Thanks"

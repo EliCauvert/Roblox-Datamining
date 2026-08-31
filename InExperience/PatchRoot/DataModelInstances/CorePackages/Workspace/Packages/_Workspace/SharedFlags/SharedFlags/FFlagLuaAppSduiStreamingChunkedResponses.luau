@@ -1,1 +1,1 @@
-﻿return require(script.Parent.FFlagSduiInputDataMergeStrategy) and game:DefineFastFlag("LuaAppSduiStreamingChunkedResponses", false)
+﻿return game:DefineFastFlag("LuaAppSduiStreamingChunkedResponses", false)

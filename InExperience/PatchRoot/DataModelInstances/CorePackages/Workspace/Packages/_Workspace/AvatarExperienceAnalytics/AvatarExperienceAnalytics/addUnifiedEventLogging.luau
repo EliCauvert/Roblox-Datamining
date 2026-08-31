@@ -2,6 +2,7 @@
 local unifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
 local avatarExperienceFlagsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceFlags)
 local fFlagAXMISEnableMultiShoppingUnifiedEvents = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
+local fFlagAXSkipTapDetection = avatarExperienceFlagsModule.FFlagAXSkipTapDetection
 local fFlagAXUnifiedImpressionsOnThumbnail = avatarExperienceFlagsModule.FFlagAXUnifiedImpressionsOnThumbnail
 local t = {
 	table = true,
@@ -11,7 +12,7 @@ local t = {
 }
 
 return function(p1, p2, p3)
-	-- upvalues: collectionService (ref), unifiedEventLogConstantsModule (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), t (ref)
+	-- upvalues: collectionService (ref), unifiedEventLogConstantsModule (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), fFlagAXSkipTapDetection (ref), t (ref)
 	if not p1.current then return end
 	collectionService:AddTag(p1.current, unifiedEventLogConstantsModule.TAG_NAME)
 	
@@ -26,6 +27,9 @@ return function(p1, p2, p3)
 	end
 	if fFlagAXUnifiedImpressionsOnThumbnail and p3 and p3.skipImpressionDetection then
 		p1.current:SetAttribute(unifiedEventLogConstantsModule.SKIP_IMPRESSION_DETECTION, true)
+	end
+	if fFlagAXSkipTapDetection then
+		p1.current:SetAttribute(unifiedEventLogConstantsModule.SKIP_TAP_DETECTION, if p3 and p3.skipTapDetection then true else nil)
 	end
 	if p2 then
 		for i, v in p2 do

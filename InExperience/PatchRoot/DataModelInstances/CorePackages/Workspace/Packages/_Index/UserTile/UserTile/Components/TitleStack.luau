@@ -5,6 +5,7 @@ local foundationModule = require(parent.Foundation)
 local useTokens = foundationModule.Hooks.useTokens
 local llama = require(parent.LuaSocialLibrariesDeps).llama
 local useLocalization = require(parent.Localization).Hooks.useLocalization
+local verifiedBadgeModule = require(parent.VerifiedBadges.VerifiedBadge)
 local constantsModule = require(userTile.Constants)
 local layoutModeModule = require(script.Parent.Parent.Enums.LayoutMode)
 local textKeysModule = require(userTile.TextKeys)
@@ -28,10 +29,11 @@ local fFlagUserTileAddContextualInfoIcon = require(parent.SharedFlags).FFlagUser
 local userTileRemoveContextualInfoTag = game:DefineFastFlag("UserTileRemoveContextualInfoTag", false)
 local fFlagUserTileTitleStackAddExtraInfo = require(parent.SharedFlags).FFlagUserTileTitleStackAddExtraInfo
 local fFlagUserTileUnfilteredChatIndicator = require(parent.SharedFlags).FFlagUserTileUnfilteredChatIndicator
+local fFlagUnifyVerifiedBadgeComponent = require(parent.SharedFlags).FFlagUnifyVerifiedBadgeComponent
 local t = { layoutOrder = 2 }
 
 return function(p1)
-	-- upvalues: llama (ref), t (ref), useTokens (ref), layoutModeModule (ref), reactModule (ref), image (ref), fFlagUserTileTitleStackAddExtraInfo (ref), fFlagUserTileShowShimmerWhenLoadingModule (ref), constantsModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), fFlagUserTileTextTCIndicator (ref), useLocalization (ref), textKeysModule (ref), fFlagUserTileUnfilteredChatIndicator (ref), view (ref), skeleton (ref), radius (ref), fFlagProfilePlatformNewProfileHeader (ref), text (ref), fFlagUserTileShowBadges (ref), foundationModule (ref), fFlagEnableMobileGameJoinCard (ref), stateLayerAffordance (ref), fFlagUserTileAddContextualInfoIcon (ref), icon (ref), iconSize (ref), userTileRemoveContextualInfoTag (ref)
+	-- upvalues: llama (ref), t (ref), useTokens (ref), layoutModeModule (ref), reactModule (ref), image (ref), fFlagUserTileTitleStackAddExtraInfo (ref), fFlagUserTileShowShimmerWhenLoadingModule (ref), constantsModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), fFlagUserTileTextTCIndicator (ref), useLocalization (ref), textKeysModule (ref), fFlagUserTileUnfilteredChatIndicator (ref), view (ref), skeleton (ref), radius (ref), fFlagProfilePlatformNewProfileHeader (ref), text (ref), fFlagUserTileShowBadges (ref), fFlagUnifyVerifiedBadgeComponent (ref), verifiedBadgeModule (ref), iconSize (ref), foundationModule (ref), fFlagEnableMobileGameJoinCard (ref), stateLayerAffordance (ref), fFlagUserTileAddContextualInfoIcon (ref), icon (ref), userTileRemoveContextualInfoTag (ref)
 	local var1
 	p1 = llama.Dictionary.join(t, p1 or {})
 	local var2 = useTokens()
@@ -133,7 +135,7 @@ return function(p1)
 					["text-align-x-center"] = p1.layoutMode == layoutModeModule.compact,
 					LayoutOrder = 2
 				}, {
-					VerifiedBadge = p1.isVerified and reactModule.createElement(view, { tag = "auto-xy content-default", LayoutOrder = 2 }, {
+					VerifiedBadge = p1.isVerified and (if fFlagUnifyVerifiedBadgeComponent then reactModule.createElement(verifiedBadgeModule, { LayoutOrder = 2, size = iconSize.Large }) else reactModule.createElement(view, { tag = "auto-xy content-default", LayoutOrder = 2 }, {
 						VerifiedBackplateIcon = reactModule.createElement(foundationModule.Icon, {
 							ZIndex = 1,
 							name = foundationModule.Enums.IconName.VerifiedBackplate,
@@ -150,7 +152,7 @@ return function(p1)
 							AnchorPoint = Vector2.new(0, 0),
 							Position = UDim2.fromScale(0, 0)
 						})
-					}),
+					})),
 					SubscriptionBadge = if var10 then reactModule.createElement(foundationModule.Icon, {
 						LayoutOrder = 3,
 						name = foundationModule.Enums.IconName.RobloxPlus,
@@ -255,7 +257,7 @@ return function(p1)
 					["text-align-x-left"] = p1.layoutMode == layoutModeModule.wide
 				},
 				fontStyle = p1.subtitleStyle or var2.Typography.BodyMedium,
-				Text = (if fFlagUserTileUnfilteredChatIndicator and not var17 then "" else " \226\128\162 ") .. var23.trustedLabel,
+				Text = (if fFlagUserTileUnfilteredChatIndicator and not var17 then "" else " \226\128\162 ") .. var24.trustedLabel,
 				TextTruncate = customTextTruncation
 			})
 		else
@@ -275,7 +277,7 @@ return function(p1)
 					["text-align-x-left"] = p1.layoutMode == layoutModeModule.wide
 				},
 				fontStyle = p1.subtitleStyle or var2.Typography.BodyMedium,
-				Text = (if var17 or var16 then " \226\128\162 " else "") .. var23.unfilteredChatLabel,
+				Text = (if var17 or var16 then " \226\128\162 " else "") .. var24.unfilteredChatLabel,
 				TextTruncate = customTextTruncation
 			})
 		else

@@ -15,11 +15,10 @@ local gameConfigurationLabelsModule = require(buildExperience.utils.GameConfigur
 local refreshPublishEligibilityModule = require(buildExperience.utils.refreshPublishEligibility)
 local fFlagMyStatsMediaSelector = sharedFlagsModule.FFlagMyStatsMediaSelector
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
-local fFlagEnableProvisionalRatingModule = require(buildExperience.Flags.FFlagEnableProvisionalRating)
 local fFlagBuildRehydrateOnPublishModule = require(buildExperience.Flags.FFlagBuildRehydrateOnPublish)
 
 return function(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useOpenWebView (ref), experienceGuidelinesModule (ref), reactModule (ref), signalsReactModule (ref), fFlagEnableProvisionalRatingModule (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), fFlagBuildRehydrateOnPublishModule (ref), gameConfigurationLabelsModule (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), fFlagMyStatsMediaSelector (ref)
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useOpenWebView (ref), experienceGuidelinesModule (ref), reactModule (ref), signalsReactModule (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), fFlagBuildRehydrateOnPublishModule (ref), gameConfigurationLabelsModule (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), fFlagMyStatsMediaSelector (ref)
 	local GAME_CONFIGURATION_CREATOR_HUB, GAME_CONFIGURATION_LOADING, GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER
 	local var1 = if fFlagBuildLocalization then useLocalization({
 		creatorHub = localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB,
@@ -46,27 +45,24 @@ return function(p1)
 		return experienceGuidelinesStore.getAndFetchDetailedGuidelines(p1.universeId)
 	end, { experienceGuidelinesStore, p1.universeId }).data)
 	local var4 = nil
-	local var5 = nil
-	local var6 = false
+	local _ = nil
+	local _ = false
+	local universeActivationStore = universeActivationModule.getUniverseActivationStore()
+	local var5 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: universeActivationStore (ref), p1 (ref)
+		return universeActivationStore.getAndFetchEligibility(p1.universeId)
+	end, { universeActivationStore, p1.universeId }).data)
+	local var6 = contentMaturityUtilsModule.isContentUnrated(p1.universeId)
+	local var7 = contentMaturityUtilsModule.isSealBroken(p1.universeId)
+	local var8 = if var5 then var5.provisionalRating else nil
+	local var9 = var6 and (not fFlagBuildRehydrateOnPublishModule or not var7)
 	
-	if fFlagEnableProvisionalRatingModule then
-		local universeActivationStore = universeActivationModule.getUniverseActivationStore()
-		local var7 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-			-- upvalues: universeActivationStore (ref), p1 (ref)
-			return universeActivationStore.getAndFetchEligibility(p1.universeId)
-		end, { universeActivationStore, p1.universeId }).data)
-		local var8 = contentMaturityUtilsModule.isContentUnrated(p1.universeId)
-		local var9 = contentMaturityUtilsModule.isSealBroken(p1.universeId)
-		var5 = if var7 then var7.provisionalRating else nil
-		var6 = var8 and (not fFlagBuildRehydrateOnPublishModule or not var9)
-		
-		if var9 and var8 then
-			var4 = GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER
-		end
+	if var7 and var6 then
+		var4 = GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER
 	end
 	return {
 		buildMaturityBannerText = var4,
-		contentMaturityText = gameConfigurationLabelsModule.getContentMaturityText(var3, var5, var6) or GAME_CONFIGURATION_LOADING,
+		contentMaturityText = gameConfigurationLabelsModule.getContentMaturityText(var3, var8, var9) or GAME_CONFIGURATION_LOADING,
 		onOpenIconAndThumbnails = if fFlagMyStatsMediaSelector then p1.onOpenMediaSelectionPage else reactModule.useCallback(function()
 			-- upvalues: var2 (ref), gameConfigurationActionsModule (copy), p1 (ref), GAME_CONFIGURATION_CREATOR_HUB (write)
 			var2(gameConfigurationActionsModule.getCreatorHubConfigureUrl(p1.universeId), GAME_CONFIGURATION_CREATOR_HUB)
@@ -81,7 +77,6 @@ return function(p1)
 		end, { GAME_CONFIGURATION_CREATOR_HUB, var2, p1.universeId }),
 		onOpenVersionTitleDescriptionPage = p1.onOpenVersionTitleDescriptionPage,
 		onOpenVersionHistory = p1.onOpenVersionHistory,
-		showVersionTitleDescription = fFlagEnableProvisionalRatingModule,
 		layoutOrder = p1.layoutOrder,
 		testId = p1.testId
 	}

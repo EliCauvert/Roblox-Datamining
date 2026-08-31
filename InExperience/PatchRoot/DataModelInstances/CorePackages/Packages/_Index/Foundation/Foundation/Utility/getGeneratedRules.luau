@@ -108,6 +108,16 @@ local t_1 = {
 			return require(foundation.Generated.StyleRules.Kids.LightAttribute)
 		end
 	},
+	[themeNameModule.KidsClassic] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.KidsClassic.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.KidsClassic.LightAttribute)
+		end
+	},
 	[themeNameModule.KineticEnergy] = {
 		Dark = function()
 			-- upvalues: foundation (ref)

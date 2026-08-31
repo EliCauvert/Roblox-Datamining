@@ -19,6 +19,7 @@ local editProfileHeaderBarModule = require(editProfile.BaseComponents.EditProfil
 local textKeysModule = require(editProfile.Common.TextKeys)
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 local fFlagFixNonTruncatedTextModule = require(editProfile.Flags.FFlagFixNonTruncatedText)
+local var1 = if require(parent.SharedFlags).FFlagEditProfileFramesEnabled then require(editProfile.Components.EditProfileLanding.EditProfileProfileFramesSection) else nil
 local editProfileLandingTrailingWidthRatio = tonumber(game:DefineFastString("EditProfileLandingTrailingWidthRatio", "0.4")) or 0.4
 local t = {
 	isContained = true,
@@ -38,28 +39,28 @@ local function renderRowTrailing(p1, p2, p3, p4)
 end
 
 return function(p1)
-	-- upvalues: useProfileCardWidth (ref), useTokens (ref), fFlagAXEnableProfileTab (ref), textKeysModule (ref), useLocalization (ref), reactModule (ref), view (ref), editProfileHeaderBarModule (ref), userTileModule (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), list (ref), t (ref), renderRowTrailing (ref), fFlagFixNonTruncatedTextModule (ref)
-	local var1 = useProfileCardWidth()
-	local var2 = useTokens()
-	local var3 = fFlagAXEnableProfileTab and p1.fullBleed == true
-	local var4 = useLocalization({
+	-- upvalues: useProfileCardWidth (ref), useTokens (ref), fFlagAXEnableProfileTab (ref), textKeysModule (ref), useLocalization (ref), reactModule (ref), view (ref), editProfileHeaderBarModule (ref), userTileModule (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), list (ref), t (ref), renderRowTrailing (ref), fFlagFixNonTruncatedTextModule (ref), var1 (ref)
+	local var2 = useProfileCardWidth()
+	local var3 = useTokens()
+	local var4 = fFlagAXEnableProfileTab and p1.fullBleed == true
+	local var5 = useLocalization({
 		TopBarTitle = textKeysModule.Title,
 		UsernameLabel = textKeysModule.Username,
 		DisplayNameLabel = if p1.isPolicyEnabled then textKeysModule.AgedUpDisplayName else textKeysModule.DisplayName,
 		BioLabel = textKeysModule.About,
 		BioPlaceholder = textKeysModule.AboutPlaceholder
 	})
-	local size400 = var2.Size.Size_400
+	local size400 = var3.Size.Size_400
 	
 	return reactModule.createElement(view, {
 		tag = if fFlagAXEnableProfileTab then {
 			["col items-start bg-surface-0"] = true,
-			["position-top-right anchor-top-right"] = not var3,
-			["size-full-full"] = var3
+			["position-top-right anchor-top-right"] = not var4,
+			["size-full-full"] = var4
 		} else "col items-start position-top-right anchor-top-right bg-surface-0",
-		Size = if var3 then nil else UDim2.new(0, var1, 1, 0)
+		Size = if var4 then nil else UDim2.new(0, var2, 1, 0)
 	}, {
-		TopBar = reactModule.createElement(editProfileHeaderBarModule, { onClose = p1.onClose, headerText = var4.TopBarTitle }),
+		TopBar = reactModule.createElement(editProfileHeaderBarModule, { onClose = p1.onClose, headerText = var5.TopBarTitle }),
 		EditableComponents = reactModule.createElement(view, {
 			tag = "col gap-xxlarge size-full-0 auto-y padding-xlarge"
 		}, {
@@ -96,25 +97,30 @@ return function(p1)
 				EditDisplayNameRow = reactModule.createElement(list.Item, {
 					testId = "EditDisplayNameRow",
 					LayoutOrder = 1,
-					title = var4.DisplayNameLabel,
-					trailing = renderRowTrailing(p1.areNamesLoading, p1.displayName, size400, if fFlagFixNonTruncatedTextModule then var1 else nil),
+					title = var5.DisplayNameLabel,
+					trailing = renderRowTrailing(p1.areNamesLoading, p1.displayName, size400, if fFlagFixNonTruncatedTextModule then var2 else nil),
 					onActivated = if p1.areNamesLoading then nil else { onActivated = p1.settingButtonOnActivated.displayName },
 					ref = p1.firstItemRef
 				}),
 				UsernameEditRow = reactModule.createElement(list.Item, {
 					testId = "UsernameEditRow",
 					LayoutOrder = 2,
-					title = var4.UsernameLabel,
-					trailing = renderRowTrailing(p1.areNamesLoading, p1.username, size400, if fFlagFixNonTruncatedTextModule then var1 else nil),
+					title = var5.UsernameLabel,
+					trailing = renderRowTrailing(p1.areNamesLoading, p1.username, size400, if fFlagFixNonTruncatedTextModule then var2 else nil),
 					onActivated = if p1.areNamesLoading then nil else { onActivated = p1.settingButtonOnActivated.username }
 				}),
 				BioEditRow = reactModule.createElement(list.Item, {
 					testId = "BioEditRow",
 					LayoutOrder = 3,
-					title = var4.BioLabel,
-					trailing = renderRowTrailing(p1.isBioLoading, if p1.bioText == "" or p1.bioText == nil then var4.BioPlaceholder else string.gsub(p1.bioText, "\n", " "), size400, if fFlagFixNonTruncatedTextModule then var1 else nil),
+					title = var5.BioLabel,
+					trailing = renderRowTrailing(p1.isBioLoading, if p1.bioText == "" or p1.bioText == nil then var5.BioPlaceholder else string.gsub(p1.bioText, "\n", " "), size400, if fFlagFixNonTruncatedTextModule then var2 else nil),
 					onActivated = if p1.isBioLoading then nil else { onActivated = p1.settingButtonOnActivated.bio }
 				})
+			}),
+			ProfileFramesList = if var1 ~= nil then nil else reactModule.createElement(var1, {
+				layoutOrder = 3,
+				userId = p1.userId,
+				onActivated = p1.onProfileFramesActivated
 			})
 		})
 	})

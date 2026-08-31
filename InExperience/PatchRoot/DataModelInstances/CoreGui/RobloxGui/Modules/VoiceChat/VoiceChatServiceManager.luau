@@ -68,10 +68,14 @@ local fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule = require(roblox
 local fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule = require(script.Parent.Flags.FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToast)
 local fFlagVoiceRewarmTelemetry = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagVoiceRewarmTelemetry
 local guardVoiceInExpUpsellVariant = game:DefineFastFlag("GuardVoiceInExpUpsellVariant", false)
+local alwaysSetJoinVoiceButtonContext = game:DefineFastFlag("AlwaysSetJoinVoiceButtonContext", false)
 local _ = {
 	FAE_UPSELL = "FaeUpsell",
 	VOICE_FTUX = "VoiceFtux",
-	REWARM = "Rewarm"
+	REWARM = "Rewarm",
+	AGE_CHECK_TOAST = "AgeCheckToast",
+	PHONE_UPSELL = "PhoneUpsell",
+	IN_EXP_UPSELL = "InExpUpsell"
 }
 local _ = {
 	REJOIN_PREVIOUS_CHANNEL = "RejoinPreviousChannel",
@@ -1646,7 +1650,7 @@ function t:EligibleForAgeCheckToast()
 end
 
 function t:ShouldShowJoinVoice()
-	-- upvalues: getFFlagEnableVoiceUxUpdates (ref), fFlagVoiceRewarmTelemetry (ref), voiceChatCoreModule (ref), showJoinVoiceWhenDisconnectedV3 (ref), getFFlagOnlyEnableJoinVoiceInVoiceEnabledUniversesModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), getFFlagEnableInExpPhoneVoiceUpsellEntrypoints (ref), constantsModule (ref)
+	-- upvalues: getFFlagEnableVoiceUxUpdates (ref), fFlagVoiceRewarmTelemetry (ref), voiceChatCoreModule (ref), showJoinVoiceWhenDisconnectedV3 (ref), getFFlagOnlyEnableJoinVoiceInVoiceEnabledUniversesModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), alwaysSetJoinVoiceButtonContext (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), getFFlagEnableInExpPhoneVoiceUpsellEntrypoints (ref), constantsModule (ref)
 	if getFFlagEnableVoiceUxUpdates() then
 		if fFlagVoiceRewarmTelemetry then
 			if self:EligibleForFaeUpsell() then
@@ -1662,11 +1666,24 @@ function t:ShouldShowJoinVoice()
 				
 				return true
 			elseif self:EligibleForAgeCheckToast() then
+				if alwaysSetJoinVoiceButtonContext then
+					self.joinVoiceButtonContext = "AgeCheckToast"
+				end
 				return true
+			else
+				local var18 = self:UserInInExperienceUpsellTreatment()
+				local var19 = self:UserOnlyEligibleForVoice() or self:UserVoiceEnabled()
+				
+				if getFFlagIntegratePhoneUpsellJoinVoice() and getFFlagEnableInExpPhoneVoiceUpsellEntrypoints() and (not var19 and not self:UserVoiceEnabled()) and self:FetchPhoneVerificationUpsell(constantsModule.IN_EXP_PHONE_UPSELL_IXP_LAYER) == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then
+					if alwaysSetJoinVoiceButtonContext then
+						self.joinVoiceButtonContext = "PhoneUpsell"
+					end
+					return true
+				elseif alwaysSetJoinVoiceButtonContext and var18 and var19 then
+					self.joinVoiceButtonContext = "InExpUpsell"
+				end
+				return var18 and var19
 			end
-			local var18 = self:UserOnlyEligibleForVoice() or self:UserVoiceEnabled()
-			
-			return if getFFlagIntegratePhoneUpsellJoinVoice() and getFFlagEnableInExpPhoneVoiceUpsellEntrypoints() and (not var18 and not self:UserVoiceEnabled()) and self:FetchPhoneVerificationUpsell(constantsModule.IN_EXP_PHONE_UPSELL_IXP_LAYER) == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then true else self:UserInInExperienceUpsellTreatment() and var18
 		elseif self:EligibleForFaeUpsell() or self:HasSeamlessVoiceFeature(voiceChatCoreModule.Constants.SeamlessVoiceFeatures.InitialJoinVoice) and self:GetVoiceConnectCookie() == "" or showJoinVoiceWhenDisconnectedV3 and self:GetVoiceRewarmCookie() == "" and self:VoiceChatEnded() then
 			return true
 		end

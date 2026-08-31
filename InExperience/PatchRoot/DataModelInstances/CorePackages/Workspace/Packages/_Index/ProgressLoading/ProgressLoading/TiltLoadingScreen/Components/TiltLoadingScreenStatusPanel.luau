@@ -16,9 +16,8 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local enums = foundationModule.Enums
 local useLocalization = localizationModule.Hooks.useLocalization
-local sharedFlagsModule = require(parent_1.SharedFlags)
-local fIntAutoJoinNewServerTimeMs = sharedFlagsModule.FIntAutoJoinNewServerTimeMs
-local fFlagDebugEnablePioneerUX = sharedFlagsModule.FFlagDebugEnablePioneerUX
+local fIntAutoJoinNewServerTimeMs = require(parent_1.SharedFlags).FIntAutoJoinNewServerTimeMs
+local isPioneerLaunch = require(parent_1.PioneerUtils).isPioneerLaunch
 
 local function _(p1)
 	-- upvalues: coreGuiService (ref), localizationService (ref)
@@ -36,7 +35,7 @@ local function _(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), fIntAutoJoinNewServerTimeMs (ref), runService (ref), constantsModule (ref), coreGuiService (ref), localizationService (ref), view (ref), enums (ref), text (ref), progress (ref), button (ref), fFlagDebugEnablePioneerUX (ref), footerModule (ref)
+	-- upvalues: useLocalization (ref), reactModule (ref), fIntAutoJoinNewServerTimeMs (ref), runService (ref), constantsModule (ref), coreGuiService (ref), localizationService (ref), view (ref), enums (ref), text (ref), progress (ref), button (ref), isPioneerLaunch (ref), footerModule (ref)
 	local var1
 	local var2 = useLocalization({
 		antiAddictionText = "Authentication.Login.WeChat.AntiAddictionText",
@@ -228,7 +227,7 @@ return reactModule.memo(function(p1)
 				text = var2.joinTheLine
 			})
 		}) else nil,
-		RobloxWordmark = if fFlagDebugEnablePioneerUX then reactModule.createElement(footerModule, {
+		RobloxWordmark = if isPioneerLaunch() then reactModule.createElement(footerModule, {
 			LayoutOrder = 5,
 			textTestId = "tilt-loading-screen-pre-logo-text",
 			wordmarkTestId = "tilt-loading-screen-roblox-wordmark"

@@ -18,6 +18,7 @@ local userSignalsModule = require(parent.UserSignals)
 local abuseVectorModule = require(parent.GenericAbuseReporting.AbuseVector)
 local openDynamicAbuseReportModule = require(parent.GenericAbuseReporting.OpenDynamicAbuseReport)
 local notInterestedUserSignalTelemetryEventConfigsModule = require(gameTile.NotInterestedUserSignalTelemetryEventConfigs)
+local activateGameNotInterestedModule = require(gameTile.activateGameNotInterested)
 local sendNotInterestedFeedbackFormAnalyticsModule = require(gameTile.sendNotInterestedFeedbackFormAnalytics)
 local tileOverflowMenuItems = require(gameTile.GameTileConstants).TileOverflowMenuItems
 local closeCentralOverlay = centralOverlayModule.Thunks.CloseCentralOverlay
@@ -41,9 +42,10 @@ local fFlagLuaAppEnableSponsoredReportAd = sharedFlagsModule.FFlagLuaAppEnableSp
 local fFlagLuaAppNotInterestedReportPlaceId = sharedFlagsModule.FFlagLuaAppNotInterestedReportPlaceId
 local fFlagLuaAppEnableHomepageOneByTwoTile = sharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
 local fFlagLuaAppContinueSortInstantPlay = sharedFlagsModule.FFlagLuaAppContinueSortInstantPlay
+local fFlagLuaAppExtractNotInterestedHelper = sharedFlagsModule.FFlagLuaAppExtractNotInterestedHelper
 
 return function(p1, p2)
-	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), useLocalization (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppContinueSortInstantPlay (ref), reactModule (ref), userSignalTypes (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), flaggedMutedError (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), postSendUserSignal (ref), httpService (ref), mutedError (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppFixExplicitFeedbackTelemetry (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref), tileOverflowMenuItems (ref), setCentralOverlay (ref), centralOverlayType (ref), iconName (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref)
+	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), useLocalization (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppContinueSortInstantPlay (ref), reactModule (ref), userSignalTypes (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), flaggedMutedError (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), postSendUserSignal (ref), httpService (ref), mutedError (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppFixExplicitFeedbackTelemetry (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref), tileOverflowMenuItems (ref), fFlagLuaAppExtractNotInterestedHelper (ref), activateGameNotInterestedModule (ref), setCentralOverlay (ref), centralOverlayType (ref), iconName (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref)
 	local var1 = useDispatch()
 	local var2 = useRoactService(roactNetworking)
 	local var3 = useLocalization({
@@ -88,7 +90,7 @@ return function(p1, p2)
 		}
 	end, { var3 })
 	local var5 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: var4 (ref), userSignalTypes (copy), fFlagLuaAppNotInterestedReportPlaceId (copy), p3 (ref), flaggedMutedError (copy), var1 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), closeCentralOverlay (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy), setNetworkingErrorToast (copy), postSendUserSignal (copy), var2 (ref), httpService (copy), collectionId (ref), mutedError (copy), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), sendNotInterestedFeedbackFormAnalyticsModule (copy), fFlagLuaAppFixExplicitFeedbackTelemetry (copy)
+		-- upvalues: var4 (ref), userSignalTypes (copy), fFlagLuaAppNotInterestedReportPlaceId (copy), p1 (ref), flaggedMutedError (copy), var1 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), closeCentralOverlay (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy), setNetworkingErrorToast (copy), postSendUserSignal (copy), var2 (ref), httpService (copy), collectionId (ref), mutedError (copy), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), sendNotInterestedFeedbackFormAnalyticsModule (copy), fFlagLuaAppFixExplicitFeedbackTelemetry (copy)
 		local var6 = false
 		local t = {}
 		
@@ -100,27 +102,27 @@ return function(p1, p2)
 			end
 		end
 		if var6 then
-			if fFlagLuaAppNotInterestedReportPlaceId and (not p3.placeId or p3.placeId == "") then
+			if fFlagLuaAppNotInterestedReportPlaceId and (not p1.placeId or p1.placeId == "") then
 				flaggedMutedError("NotInterestedReportPlaceIdMissing", "Place report opened without a place id")
 			else
-				var6(openDynamicAbuseReportModule({
+				var1(openDynamicAbuseReportModule({
 					abuseVector = abuseVectorModule.Place,
-					targetId = if fFlagLuaAppNotInterestedReportPlaceId then p3.placeId else p3.universeId,
+					targetId = if fFlagLuaAppNotInterestedReportPlaceId then p1.placeId else p1.universeId,
 					onClose = function()
-						-- upvalues: var6 (copy), closeCentralOverlay (copy)
-						var6(closeCentralOverlay())
+						-- upvalues: var1 (copy), closeCentralOverlay (copy)
+						var1(closeCentralOverlay())
 					end
 				}))
 			end
 		end
-		if not p3.appPage then
+		if not p1.appPage then
 			default:logRobloxTelemetryCounter(notInterestedUserSignalTelemetryEventConfigsModule.NotInterestedMissingAppPage, 1)
-			var6(setNetworkingErrorToast())
+			var1(setNetworkingErrorToast())
 			
 			return
 		end
 		local ok, status = pcall(function()
-			-- upvalues: postSendUserSignal (copy), var2 (copy), httpService (copy), userSignalTypes (copy), p4 (ref), t (ref), p3 (copy), collectionId (copy), var6 (copy), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
+			-- upvalues: postSendUserSignal (copy), var2 (copy), httpService (copy), userSignalTypes (copy), p4 (ref), t (ref), p1 (copy), collectionId (copy), var1 (copy), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
 			postSendUserSignal(var2, {
 				stringValue = httpService:JSONEncode({
 					formId = userSignalTypes.NotInterestedFeedbackFormId.NotInterestedFeedback1,
@@ -129,16 +131,16 @@ return function(p1, p2)
 					items = t
 				})
 			}, {
-				id = p3.universeId,
-				assetType = if p3.isSponsored then userSignalTypes.AssetType.SponsoredGame else userSignalTypes.AssetType.Game,
+				id = p1.universeId,
+				assetType = if p1.isSponsored then userSignalTypes.AssetType.SponsoredGame else userSignalTypes.AssetType.Game,
 				signalOrigin = {
-					productSurface = p3.appPage,
+					productSurface = p1.appPage,
 					topicId = collectionId,
 					subIds = { collectionId }
 				}
 			}, userSignalTypes.SignalValueType.String, userSignalTypes.SignalType.NotInterestedFeedback):catch(function(p5)
-				-- upvalues: var6 (copy), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
-				var6(setNetworkingErrorToast(p5))
+				-- upvalues: var1 (copy), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
+				var1(setNetworkingErrorToast(p5))
 				default:logRobloxTelemetryCounter(notInterestedUserSignalTelemetryEventConfigsModule.NotInterestedUserSignalFailed, 1)
 			end)
 		end)
@@ -149,189 +151,207 @@ return function(p1, p2)
 		if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
 			sendNotInterestedFeedbackFormAnalyticsModule({
 				actionType = "NotInterestedFeedbackFormSubmitted",
-				ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p3.appPage,
-				universeId = p3.universeId,
+				ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p1.appPage,
+				universeId = p1.universeId,
 				sortId = collectionId
-			}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p3.appPage else nil)
+			}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p1.appPage else nil)
 		end
 	end, {
-		var2, var4, var3, p3.universeId,
-		if fFlagLuaAppNotInterestedReportPlaceId then p3.placeId else nil, p3.appPage,
-		collectionId, var6, p3.isSponsored
+		var2, var4, var3, p1.universeId,
+		if fFlagLuaAppNotInterestedReportPlaceId then p1.placeId else nil, p1.appPage,
+		collectionId, var1, p1.isSponsored
 	})
-	local var6 = nil
 	local var7 = nil
+	local var8 = nil
 	
 	if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
-		var6 = reactModule.useCallback(function(p5)
-			-- upvalues: sendNotInterestedFeedbackFormAnalyticsModule (copy), fFlagLuaAppFixExplicitFeedbackTelemetry (copy), p5 (ref), collectionId (ref)
+		var7 = reactModule.useCallback(function(p5)
+			-- upvalues: sendNotInterestedFeedbackFormAnalyticsModule (copy), fFlagLuaAppFixExplicitFeedbackTelemetry (copy), p1 (ref), collectionId (ref)
 			if p5 then
 				return
 			end
 			sendNotInterestedFeedbackFormAnalyticsModule({
 				actionType = "NotInterestedFeedbackFormClosedWithoutSubmit",
-				ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p5.appPage,
-				universeId = p5.universeId,
+				ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p1.appPage,
+				universeId = p1.universeId,
 				sortId = collectionId
-			}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p5.appPage else nil)
-		end, { p3.appPage, p3.universeId, collectionId })
-		var7 = reactModule.useCallback(function()
-			-- upvalues: sendNotInterestedFeedbackFormAnalyticsModule (copy), fFlagLuaAppFixExplicitFeedbackTelemetry (copy), p3 (ref), collectionId (ref)
+			}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p1.appPage else nil)
+		end, { p1.appPage, p1.universeId, collectionId })
+		var8 = reactModule.useCallback(function()
+			-- upvalues: sendNotInterestedFeedbackFormAnalyticsModule (copy), fFlagLuaAppFixExplicitFeedbackTelemetry (copy), p1 (ref), collectionId (ref)
 			sendNotInterestedFeedbackFormAnalyticsModule({
 				actionType = "NotInterestedFeedbackFormOpened",
-				ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p3.appPage,
-				universeId = p3.universeId,
+				ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p1.appPage,
+				universeId = p1.universeId,
 				sortId = collectionId
-			}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p3.appPage else nil)
-		end, { p3.appPage, p3.universeId, collectionId })
+			}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p1.appPage else nil)
+		end, { p1.appPage, p1.universeId, collectionId })
 	end
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), var4 (ref), var5 (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), var6 (write), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (copy)
+	local var9 = reactModule.useMemo(function()
+		-- upvalues: var3 (ref), var4 (ref), var5 (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), var7 (write), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (copy)
 		return {
 			dialogTitle = var3.dialogTitle,
 			dialogText = var3.dialogText,
 			checkboxListTitle = var3.checkboxListTitle,
 			checkboxItems = var4,
 			onSubmit = var5,
-			onClose = if fFlagLuaAppNotInterestedFeedbackFormTelemetry then var6 else nil,
+			onClose = if fFlagLuaAppNotInterestedFeedbackFormTelemetry then var7 else nil,
 			showTermsOfUseDisclaimer = if fFlagLuaAppMakeDisclaimerOptInForFeedbackForm then false else nil
 		}
 	end, {
 		var3,
 		var4,
 		var5,
-		if fFlagLuaAppNotInterestedFeedbackFormTelemetry then var6 else nil
+		if fFlagLuaAppNotInterestedFeedbackFormTelemetry then var7 else nil
 	})
-	local var6 = if fFlagLuaAppContinueSortInstantPlay then reactModule.useCallback(function()
-		-- upvalues: p3 (ref), p4 (ref), tileOverflowMenuItems (copy)
-		if p3.onGameDetailsActivated then
-			p3.onGameDetailsActivated()
+	local var10 = if fFlagLuaAppContinueSortInstantPlay then reactModule.useCallback(function()
+		-- upvalues: p1 (ref), p2 (ref), tileOverflowMenuItems (copy)
+		if p1.onGameDetailsActivated then
+			p1.onGameDetailsActivated()
 		end
-		if p4 then
-			p4(tileOverflowMenuItems.GameDetails)
+		if p2 then
+			p2(tileOverflowMenuItems.GameDetails)
 		end
-	end, { p3.onGameDetailsActivated, p4 }) else nil
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: p3 (ref), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy), var6 (ref), setNetworkingErrorToast (copy), setCentralOverlay (copy), centralOverlayType (copy), var6 (ref), iconName (copy), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), var7 (write), postSendUserSignal (copy), var7 (ref), userSignalTypes (copy), collectionId (ref), mutedError (copy), p4 (ref), tileOverflowMenuItems (copy)
-		if not p3.appPage then
+	end, { p1.onGameDetailsActivated, p2 }) else nil
+	local var11 = if fFlagLuaAppExtractNotInterestedHelper then reactModule.useCallback(function()
+		-- upvalues: activateGameNotInterestedModule (copy), p1 (ref), collectionId (ref), var1 (ref), var3 (ref), var2 (ref), p2 (ref), tileOverflowMenuItems (copy)
+		if activateGameNotInterestedModule({
+			appPage = p1.appPage,
+			collectionId = collectionId,
+			dispatch = var1,
+			isSponsored = p1.isSponsored,
+			localizedStrings = var3,
+			networking = var2,
+			placeId = p1.placeId,
+			setGameHidden = p1.setGameHidden,
+			universeId = p1.universeId
+		}) and p2 then
+			p2(tileOverflowMenuItems.NotInterested)
+		end
+	end, {
+		collectionId, var1, var3, var2, p2, p1.appPage, p1.isSponsored, p1.placeId,
+		p1.setGameHidden, p1.universeId
+	}) else reactModule.useCallback(function()
+		-- upvalues: p1 (ref), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy), var1 (ref), setNetworkingErrorToast (copy), setCentralOverlay (copy), centralOverlayType (copy), var9 (ref), iconName (copy), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), var8 (write), postSendUserSignal (copy), var2 (ref), userSignalTypes (copy), collectionId (ref), mutedError (copy), p2 (ref), tileOverflowMenuItems (copy)
+		if not p1.appPage then
 			default:logRobloxTelemetryCounter(notInterestedUserSignalTelemetryEventConfigsModule.NotInterestedMissingAppPage, 1)
-			var6(setNetworkingErrorToast())
+			var1(setNetworkingErrorToast())
 			
 			return
 		end
-		p3.setGameHidden(p3.universeId, true)
-		var6(setCentralOverlay(centralOverlayType.ProvideFeedbackToast, {
-			feedbackFormProps = var6,
+		p1.setGameHidden(p1.universeId, true)
+		var1(setCentralOverlay(centralOverlayType.ProvideFeedbackToast, {
+			feedbackFormProps = var9,
 			toastIcon = iconName.CircleMinus,
-			onToastActivated = if fFlagLuaAppNotInterestedFeedbackFormTelemetry then var7 else nil
+			onToastActivated = if fFlagLuaAppNotInterestedFeedbackFormTelemetry then var8 else nil
 		}))
 		local ok, status = pcall(function()
-			-- upvalues: postSendUserSignal (copy), var7 (copy), p3 (copy), userSignalTypes (copy), collectionId (copy), var6 (copy), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
-			postSendUserSignal(var7, { boolValue = true }, {
-				id = p3.universeId,
-				assetType = if p3.isSponsored then userSignalTypes.AssetType.SponsoredGame else userSignalTypes.AssetType.Game,
+			-- upvalues: postSendUserSignal (copy), var2 (copy), p1 (copy), userSignalTypes (copy), collectionId (copy), var1 (copy), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
+			postSendUserSignal(var2, { boolValue = true }, {
+				id = p1.universeId,
+				assetType = if p1.isSponsored then userSignalTypes.AssetType.SponsoredGame else userSignalTypes.AssetType.Game,
 				signalOrigin = {
-					productSurface = p3.appPage,
+					productSurface = p1.appPage,
 					topicId = collectionId,
 					subIds = { collectionId }
 				}
 			}, userSignalTypes.SignalValueType.Bool, userSignalTypes.SignalType.NotInterested):catch(function(p5)
-				-- upvalues: p5 (copy), var6 (copy), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
-				p5.setGameHidden(p5.universeId, false)
-				var6(setNetworkingErrorToast(p5))
+				-- upvalues: p1 (copy), var1 (copy), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
+				p1.setGameHidden(p1.universeId, false)
+				var1(setNetworkingErrorToast(p5))
 				default:logRobloxTelemetryCounter(notInterestedUserSignalTelemetryEventConfigsModule.NotInterestedUserSignalFailed, 1)
 			end)
 		end)
 		
 		if not ok then
-			p3.setGameHidden(p3.universeId, false)
+			p1.setGameHidden(p1.universeId, false)
 			mutedError(status)
 		end
-		if p4 then
-			p4(tileOverflowMenuItems.NotInterested)
+		if p2 then
+			p2(tileOverflowMenuItems.NotInterested)
 		end
 	end, {
-		var7, p3.setGameHidden, var6, var6, p3.universeId, collectionId, p3.appPage,
-		p4, p3.isSponsored,
-		if fFlagLuaAppNotInterestedFeedbackFormTelemetry then var7 else nil
+		var2, p1.setGameHidden, var1, var9, p1.universeId, collectionId, p1.appPage,
+		p2, p1.isSponsored,
+		if fFlagLuaAppNotInterestedFeedbackFormTelemetry then var8 else nil
 	})
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), setCentralOverlay (copy), centralOverlayType (copy), p3 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), p4 (ref), tileOverflowMenuItems (copy)
-		var6(setCentralOverlay(centralOverlayType.WhyThisAdModal, {
-			universeId = p3.universeId,
-			payerName = p3.payerName,
-			sponsoredUserCohort = p3.sponsoredUserCohort,
-			contentType = if fFlagLuaAppEnableHomepageOneByTwoTile then p3.contentType else nil
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: var1 (ref), setCentralOverlay (copy), centralOverlayType (copy), p1 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), p2 (ref), tileOverflowMenuItems (copy)
+		var1(setCentralOverlay(centralOverlayType.WhyThisAdModal, {
+			universeId = p1.universeId,
+			payerName = p1.payerName,
+			sponsoredUserCohort = p1.sponsoredUserCohort,
+			contentType = if fFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
 		}))
 		
-		if p4 then
-			p4(tileOverflowMenuItems.WhyThisAd)
+		if p2 then
+			p2(tileOverflowMenuItems.WhyThisAd)
 		end
 	end, {
-		var6, p3.universeId, p3.payerName, p3.sponsoredUserCohort,
-		if fFlagLuaAppEnableHomepageOneByTwoTile then p3.contentType else nil, p4
+		var1, p1.universeId, p1.payerName, p1.sponsoredUserCohort,
+		if fFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil, p2
 	})
-	local var6 = if fFlagLuaAppEnableSponsoredReportAd then reactModule.useCallback(function()
-		-- upvalues: p3 (ref), flaggedMutedError (copy), var6 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), closeCentralOverlay (copy), p4 (ref), tileOverflowMenuItems (copy)
-		if not p3.adId then
+	local var13 = if fFlagLuaAppEnableSponsoredReportAd then reactModule.useCallback(function()
+		-- upvalues: p1 (ref), flaggedMutedError (copy), var1 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), closeCentralOverlay (copy), p2 (ref), tileOverflowMenuItems (copy)
+		if not p1.adId then
 			flaggedMutedError("ReportSponsoredAdError", "Report ad clicked without valid target ad id")
 			
 			return
 		end
-		var6(openDynamicAbuseReportModule({
+		var1(openDynamicAbuseReportModule({
 			abuseVector = abuseVectorModule.AdV2,
-			targetId = p3.adId,
+			targetId = p1.adId,
 			onClose = function()
-				-- upvalues: var6 (copy), closeCentralOverlay (copy)
-				var6(closeCentralOverlay())
+				-- upvalues: var1 (copy), closeCentralOverlay (copy)
+				var1(closeCentralOverlay())
 			end
 		}))
 		
-		if p4 then
-			p4(tileOverflowMenuItems.ReportAd)
+		if p2 then
+			p2(tileOverflowMenuItems.ReportAd)
 		end
-	end, { var6, p3.adId, p4 }) else nil
+	end, { var1, p1.adId, p2 }) else nil
 	
 	return reactModule.useMemo(function()
-		-- upvalues: fFlagLuaAppContinueSortInstantPlay (copy), p3 (ref), tileOverflowMenuItems (copy), var3 (ref), var6 (ref), var7 (ref), var6 (ref), fFlagLuaAppEnableSponsoredReportAd (copy), iconName (copy), var6 (ref)
+		-- upvalues: fFlagLuaAppContinueSortInstantPlay (copy), p1 (ref), tileOverflowMenuItems (copy), var3 (ref), var10 (ref), var11 (write), var12 (ref), fFlagLuaAppEnableSponsoredReportAd (copy), iconName (copy), var13 (ref)
 		local t = {}
 		
-		if fFlagLuaAppContinueSortInstantPlay and p3.availableMenuItems[tileOverflowMenuItems.GameDetails] then
+		if fFlagLuaAppContinueSortInstantPlay and p1.availableMenuItems[tileOverflowMenuItems.GameDetails] then
 			table.insert(t, {
 				icon = "icons/actions/info",
 				id = tileOverflowMenuItems.GameDetails,
 				text = var3.gameDetails,
-				onActivated = var6
+				onActivated = var10
 			})
 		end
-		if p3.availableMenuItems[tileOverflowMenuItems.NotInterested] then
+		if p1.availableMenuItems[tileOverflowMenuItems.NotInterested] then
 			table.insert(t, {
 				icon = "icons/actions/block",
 				id = tileOverflowMenuItems.NotInterested,
 				text = var3.notInterested,
-				onActivated = var7
+				onActivated = var11
 			})
 		end
-		if p3.availableMenuItems[tileOverflowMenuItems.WhyThisAd] then
+		if p1.availableMenuItems[tileOverflowMenuItems.WhyThisAd] then
 			table.insert(t, {
 				icon = "icons/actions/info",
 				id = tileOverflowMenuItems.WhyThisAd,
 				text = var3.whyThisAd,
-				onActivated = var6
+				onActivated = var12
 			})
 		end
-		if fFlagLuaAppEnableSponsoredReportAd and p3.availableMenuItems[tileOverflowMenuItems.ReportAd] then
+		if fFlagLuaAppEnableSponsoredReportAd and p1.availableMenuItems[tileOverflowMenuItems.ReportAd] then
 			table.insert(t, {
 				icon = iconName.Flag,
 				id = tileOverflowMenuItems.ReportAd,
 				text = var3.reportAd,
-				onActivated = var6
+				onActivated = var13
 			})
 		end
 		return t
 	end, {
-		if fFlagLuaAppContinueSortInstantPlay then var6 else nil, var7, var3, var6,
-		p3.isSponsored, p3.availableMenuItems,
-		if fFlagLuaAppEnableSponsoredReportAd then var6 else nil
+		if fFlagLuaAppContinueSortInstantPlay then var10 else nil, var11, var3, var12,
+		p1.isSponsored, p1.availableMenuItems,
+		if fFlagLuaAppEnableSponsoredReportAd then var13 else nil
 	})
 end

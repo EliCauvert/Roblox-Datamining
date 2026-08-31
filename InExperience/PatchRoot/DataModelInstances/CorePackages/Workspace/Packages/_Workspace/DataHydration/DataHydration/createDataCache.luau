@@ -8,17 +8,16 @@ local dataStatus = require(dataHydration.DataHydrationTypes).DataStatus
 local getLocalPlayerUserId = require(dataHydration.DataHydrationUtils).getLocalPlayerUserId
 local luaAppDataCacheBatch = game:DefineFastFlag("LuaAppDataCacheBatch", false)
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppDataHydrationSanitizeItem = sharedFlagsModule.FFlagLuaAppDataHydrationSanitizeItem
 local fFlagLuaAppDataHydrationOptimisticMutationLayer = sharedFlagsModule.FFlagLuaAppDataHydrationOptimisticMutationLayer
 local fFlagMigrateGameInfoToStore = sharedFlagsModule.FFlagMigrateGameInfoToStore
 local luaAppDefaultDataTtlSec = game:DefineFastInt("LuaAppDefaultDataTtlSec", 3600)
 local luaAppDefaultFailedDataTtlSec = game:DefineFastInt("LuaAppDefaultFailedDataTtlSec", 60)
 
 return function(p1, p2, p3)
-	-- upvalues: luaAppDefaultDataTtlSec (ref), luaAppDefaultFailedDataTtlSec (ref), fFlagLuaAppDataHydrationSanitizeItem (ref), signalsModule (ref), dataStatus (ref), luaAppDataCacheBatch (ref), signalsExperimentalModule (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), cryoModule (ref), fFlagMigrateGameInfoToStore (ref), getLocalPlayerUserId (ref), playersService (ref)
+	-- upvalues: luaAppDefaultDataTtlSec (ref), luaAppDefaultFailedDataTtlSec (ref), signalsModule (ref), dataStatus (ref), luaAppDataCacheBatch (ref), signalsExperimentalModule (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), cryoModule (ref), fFlagMigrateGameInfoToStore (ref), getLocalPlayerUserId (ref), playersService (ref)
 	p1 = p1 or luaAppDefaultDataTtlSec
 	p2 = p2 or luaAppDefaultFailedDataTtlSec
-	local var1 = if fFlagLuaAppDataHydrationSanitizeItem and p3 then p3.sanitizeItem else nil
+	local var1 = if p3 then p3.sanitizeItem else nil
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}

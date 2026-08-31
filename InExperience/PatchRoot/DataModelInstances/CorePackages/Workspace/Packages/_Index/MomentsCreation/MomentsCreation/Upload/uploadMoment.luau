@@ -21,6 +21,8 @@ local _game = game
 local captureServiceUploadUniverseIdOverrideEngineFeature = game:GetEngineFeature("CaptureServiceUploadUniverseIdOverride")
 local captureServiceStartUploadCoreScriptBypassEngineFeature = game:GetEngineFeature("CaptureServiceStartUploadCoreScriptBypass")
 game:DefineFastString("MomentsUploadUniverseId", "8357232245")
+game:DefineFastInt("MomentsUploadPollIntervalSeconds", 5)
+game:DefineFastInt("MomentsUploadMaxPollAttempts", 120)
 
 local function _(p1)
 	-- upvalues: enumName (ref)
@@ -75,13 +77,13 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 	end
 	
 	local _ = function(p11, p12, p13)
-		-- upvalues: fFlagMomentsRealtimeSessionTelemetry (copy), fFlagMomentsUploadOutcomeTelemetry (copy), momentsCommonModule (copy), gameId (ref), p11 (ref), p9 (ref), fireAnalyticsEventModule (copy), eventNames (copy)
+		-- upvalues: fFlagMomentsRealtimeSessionTelemetry (copy), fFlagMomentsUploadOutcomeTelemetry (copy), momentsCommonModule (copy), gameId (ref), p1 (ref), p9 (ref), fireAnalyticsEventModule (copy), eventNames (copy)
 		if fFlagMomentsRealtimeSessionTelemetry then
 			momentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", if fFlagMomentsUploadOutcomeTelemetry then p13 else nil)
 		end
 		if not gameId and not p12 then return end
 		if gameId then
-			p11.localId = tostring(p11.LocalId)
+			p11.localId = tostring(p1.LocalId)
 			p11.creationSessionId = p9
 		end
 		fireAnalyticsEventModule(eventNames.UploadCaptureFailed, p11)
@@ -92,7 +94,7 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 		local ok_1
 		if getFFlagMomentsUseUploadPostAsync() then
 			loggerModule:debug("event=path_selected path=post_upload localId={}", string.gsub(string.gsub(enumName(p1.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"))
-			local var2 = makePostMetadataModule(var2)
+			local var2 = makePostMetadataModule(var1)
 			local editingFlowMomentPublished = eventNames.EditingFlowMomentPublished
 			local var3 = makeCreationEventFieldsModule.makeCaptureDescriptorFields(p1)
 			
@@ -167,8 +169,8 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 			if ok_1 then
 				if status == Enum.UploadCaptureResult.Success then
 					local ok_2, status_1 = pcall(function()
-						-- upvalues: p10 (copy), p1 (copy), var2 (copy), p3 (copy)
-						p10:UploadCaptureAndPostMoment(p1, var2, p3)
+						-- upvalues: p10 (copy), p1 (copy), var1 (copy), p3 (copy)
+						p10:UploadCaptureAndPostMoment(p1, var1, p3)
 					end)
 					loggerModule:debug("event=registration localId={} pcallSuccess={} errorClass={}", string.gsub(string.gsub(enumName(p1.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), tostring(ok_2), if ok_2 then "none" else typeof(status_1))
 					
@@ -202,9 +204,11 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 						fireAnalyticsEventModule(editingFlowMomentPublished, var4)
 						local var5 = false
 						local var6 = nil
+						local momentsUploadPollIntervalSecondsFastInt = game:GetFastInt("MomentsUploadPollIntervalSeconds")
+						local momentsUploadMaxPollAttemptsFastInt = game:GetFastInt("MomentsUploadMaxPollAttempts")
 						
-						for i = 1, 120 do
-							task.wait(5)
+						for i = 1, momentsUploadMaxPollAttemptsFastInt do
+							task.wait(momentsUploadPollIntervalSecondsFastInt)
 							local ok_3, status_2, var7 = pcall(function()
 								-- upvalues: p10 (copy), var24 (ref)
 								return p10:CheckUploadCaptureStatusAsync(var24)
@@ -315,7 +319,7 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 							
 							return
 						end
-						loggerModule:debug("event=poll_timeout localId={} attempts={}", string.gsub(string.gsub(enumName(p1.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), tostring(120))
+						loggerModule:debug("event=poll_timeout localId={} attempts={}", string.gsub(string.gsub(enumName(p1.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), tostring(momentsUploadMaxPollAttemptsFastInt))
 						p5.setFailed("Timeout")
 						p6.triggerToast({ title = p4.failedTitle, text = p4.failedBody })
 						local t = {
@@ -389,8 +393,8 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 		else
 			loggerModule:debug("event=path_selected path=fallback localId={}", string.gsub(string.gsub(enumName(p1.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"))
 			ok_1, status = pcall(function()
-				-- upvalues: p10 (copy), p1 (copy), var2 (copy), p3 (copy)
-				p10:UploadCaptureAndPostMoment(p1, var2, p3)
+				-- upvalues: p10 (copy), p1 (copy), var1 (copy), p3 (copy)
+				p10:UploadCaptureAndPostMoment(p1, var1, p3)
 			end)
 			
 			if ok_1 or not gameId then

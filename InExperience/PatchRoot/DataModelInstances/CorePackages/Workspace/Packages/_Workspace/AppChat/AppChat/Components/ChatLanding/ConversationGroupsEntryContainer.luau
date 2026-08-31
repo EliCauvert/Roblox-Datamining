@@ -15,13 +15,13 @@ local images = UIBloxModule.App.ImageSet.Images
 local iconName = foundationModule.Enums.IconName
 local domLocatorsModule = require(appChat.Utils.DomLocators)
 local customConversationListEntryModule = require(script.Parent.CustomConversationListEntry)
-local customConversationListRowModule = require(script.Parent.CustomConversationListRow)
-local fFlagAppChatCustomConversationListRowModule = require(appChat.Flags.FFlagAppChatCustomConversationListRow)
+local customConversationListRowModule = require(script.Parent.CustomConversationListRow.CustomConversationListRow)
+local fFlagAppChatUseFoundationCustomConversationListRowModule = require(appChat.Flags.FFlagAppChatUseFoundationCustomConversationListRow)
 local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local groups = images["icons/menu/groups"]
 
 function ConversationGroupsEntryContainer(p1)
-	-- upvalues: getFFlagCommunitiesUseVisualConfigUtil (ref), getAppChatCommunitiesVisualConfigModule (ref), useLocalization (ref), getFFlagUseCommunitiesTranslation (ref), reactModule (ref), luaAppNavigationContextModule (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), images (ref), groups (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), chatLandingTelemetryEventsModule (ref), fFlagAppChatCustomConversationListRowModule (ref), customConversationListRowModule (ref), iconName (ref), customConversationListEntryModule (ref)
+	-- upvalues: getFFlagCommunitiesUseVisualConfigUtil (ref), getAppChatCommunitiesVisualConfigModule (ref), useLocalization (ref), getFFlagUseCommunitiesTranslation (ref), reactModule (ref), luaAppNavigationContextModule (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), images (ref), groups (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), chatLandingTelemetryEventsModule (ref), fFlagAppChatUseFoundationCustomConversationListRowModule (ref), customConversationListRowModule (ref), iconName (ref), customConversationListEntryModule (ref)
 	local var1 = if getFFlagCommunitiesUseVisualConfigUtil() then getAppChatCommunitiesVisualConfigModule() else nil
 	local var2 = useLocalization({
 		createAndExploreGroupsText = "Feature.SocialTab.Label.CreateAndExploreGroups",
@@ -37,7 +37,7 @@ function ConversationGroupsEntryContainer(p1)
 		var3.navigateToGroups()
 	end, { var4, var3 })
 	
-	return if fFlagAppChatCustomConversationListRowModule then reactModule.createElement(customConversationListRowModule, {
+	return if fFlagAppChatUseFoundationCustomConversationListRowModule then reactModule.createElement(customConversationListRowModule, {
 		key = "ConversationGroupsEntry",
 		entryHeight = p1.entryHeight,
 		entryIcon = iconName.ThreePeople,

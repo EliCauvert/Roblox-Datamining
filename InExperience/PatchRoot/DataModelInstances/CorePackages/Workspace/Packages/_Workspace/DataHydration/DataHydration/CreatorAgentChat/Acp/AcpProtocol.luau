@@ -21,7 +21,8 @@ return {
 		SessionUpdateInfo = "_roblox/session/update_info",
 		SessionReadTasks = "_roblox/session/read_tasks",
 		SessionSaveAndPublish = "_roblox/session/save_and_publish",
-		AdCampaignEligibility = "_roblox/ad_campaign/eligibility"
+		AdCampaignEligibility = "_roblox/ad_campaign/eligibility",
+		AdCampaignCreate = "_roblox/ad_campaign/create"
 	},
 	Notifications = { SessionUpdate = "session/update" },
 	ErrorCodes = {

@@ -11,6 +11,7 @@ local UGCValidateMakeupDecalUVProperties = game:DefineFastFlag("UGCValidateMakeu
 local getFFlagUGCValidationAllowEngineDefaultPartSurfacesModule = require(parent.flags.getFFlagUGCValidationAllowEngineDefaultPartSurfaces)
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 local getFFlagUGCValidateMakeupCategoryParityModule = require(parent.flags.getFFlagUGCValidateMakeupCategoryParity)
+local getFFlagUGCValidateDisallowAeroMeshDataModule = require(parent.flags.getFFlagUGCValidateDisallowAeroMeshData)
 
 local function _(p1)
 	local t = {}
@@ -278,6 +279,9 @@ t.PROPERTIES = {
 		}
 	},
 	Part = { Shape = Enum.PartType.Block },
+	MeshPart = {
+		FluidFidelity = if getFFlagUGCValidateDisallowAeroMeshDataModule() then Enum.FluidFidelity.Automatic else nil
+	},
 	SurfaceAppearance = {
 		AlphaMode = if getFFlagUGCValidationEyebrowEyelashSupportModule() then {
 			{
@@ -449,6 +453,8 @@ t.ContentType = "Content-Type"
 t.ApplicationJson = "application/json"
 t.GUIDAttributeName = "RBXGUID"
 t.GUIDAttributeMaxLength = 100
+t.EmoteIsUGCAttributeName = "RBXisUGCEmote"
+t.EmoteMaxPartTranslationAttributeName = "RBXmaxPartTranslation"
 t.AlternateMeshIdAttributeName = "RBX_ALT_MESH_ID"
 t.MESH_CONTENT_TYPE = {
 	RENDER_MESH = "RenderMesh",

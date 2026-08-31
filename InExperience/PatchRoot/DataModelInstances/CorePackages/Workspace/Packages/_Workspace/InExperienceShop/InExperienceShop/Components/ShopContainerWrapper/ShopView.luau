@@ -6,9 +6,13 @@ local view = foundationModule.View
 local tabs = foundationModule.Tabs
 local fillBehavior = foundationModule.Enums.FillBehavior
 local useTokens = foundationModule.Hooks.useTokens
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagEnableUserOffers = sharedFlagsModule.FFlagEnableUserOffers
 local topBarModule = require(inExperienceShop.Components.TopBar)
-local var1 = if require(parent.SharedFlags).FFlagEnableReportingFlowForExperienceShop then require(inExperienceShop.Components.ShopAbuseReportOverlay) else nil
+local var1 = if sharedFlagsModule.FFlagEnableReportingFlowForExperienceShop then require(inExperienceShop.Components.ShopAbuseReportOverlay) else nil
 local searchInputContainerModule = require(inExperienceShop.Components.SearchInput.SearchInputContainer)
+local offerDetailsDialogModule = require(inExperienceShop.Components.OfferDialogs.OfferDetailsDialog)
+local offerTermsDialogModule = require(inExperienceShop.Components.OfferDialogs.OfferTermsDialog)
 local shopHomePageContainerModule = require(inExperienceShop.Components.ShopHomePage.ShopHomePageContainer)
 local categoryPageContainerModule = require(inExperienceShop.Components.CategoryPage.CategoryPageContainer)
 local searchResultsContainerModule = require(inExperienceShop.Components.SearchResultsPage.SearchResultsContainer)
@@ -16,13 +20,15 @@ local itemDetailsContainerModule = require(inExperienceShop.Components.ItemDetai
 local creatorEarlyAccessBannerModule = require(inExperienceShop.Components.CreatorEarlyAccessBanner)
 local _ = require(inExperienceShop.Types)
 local findSectionModule = require(inExperienceShop.Utils.findSection)
+local offerDialogStateModule = require(inExperienceShop.Components.OfferDialogs.OfferDialogState)
+local _ = require(inExperienceShop.Hooks.useShopOfferChip)
 local fFlagEnableCreatorEarlyAccessBannerInShopModule = require(inExperienceShop.Flags.FFlagEnableCreatorEarlyAccessBannerInShop)
 local fFlagRemoveBottomPaddingInExperienceShopModule = require(inExperienceShop.Flags.FFlagRemoveBottomPaddingInExperienceShop)
 local fFlagShopBlockClickPassThroughModule = require(inExperienceShop.Flags.FFlagShopBlockClickPassThrough)
 local _ = require(inExperienceShop.Hooks.useShopReportOverflow)
 
 return function(p1)
-	-- upvalues: findSectionModule (ref), reactModule (ref), view (ref), searchInputContainerModule (ref), topBarModule (ref), fFlagRemoveBottomPaddingInExperienceShopModule (ref), fFlagShopBlockClickPassThroughModule (ref), useTokens (ref), fFlagEnableCreatorEarlyAccessBannerInShopModule (ref), creatorEarlyAccessBannerModule (ref), tabs (ref), fillBehavior (ref), searchResultsContainerModule (ref), shopHomePageContainerModule (ref), categoryPageContainerModule (ref), itemDetailsContainerModule (ref), var1 (ref)
+	-- upvalues: findSectionModule (ref), reactModule (ref), view (ref), searchInputContainerModule (ref), topBarModule (ref), fFlagEnableUserOffers (ref), fFlagRemoveBottomPaddingInExperienceShopModule (ref), fFlagShopBlockClickPassThroughModule (ref), useTokens (ref), fFlagEnableCreatorEarlyAccessBannerInShopModule (ref), creatorEarlyAccessBannerModule (ref), tabs (ref), fillBehavior (ref), searchResultsContainerModule (ref), shopHomePageContainerModule (ref), categoryPageContainerModule (ref), itemDetailsContainerModule (ref), var1 (ref), offerDialogStateModule (ref), offerDetailsDialogModule (ref), offerTermsDialogModule (ref)
 	local isSearchOpen = p1.isSearchOpen
 	local var2 = not isSearchOpen and #p1.tabs > 0
 	local selectedItem = p1.selectedItem
@@ -44,7 +50,11 @@ return function(p1)
 			isOverflowMenuOpen = p1.isOverflowMenuOpen,
 			onOverflowActivated = p1.onOverflowActivated,
 			onOverflowMenuClosed = p1.onOverflowMenuClosed,
-			onMenuItemActivated = p1.onMenuItemActivated
+			onMenuItemActivated = p1.onMenuItemActivated,
+			showOfferChip = if fFlagEnableUserOffers then p1.offer.showOfferChip else false,
+			offerChipText = if fFlagEnableUserOffers then p1.offer.offerChipText else nil,
+			offerChipIcon = if fFlagEnableUserOffers then p1.offer.offerChipIcon else nil,
+			onOfferChipActivated = if fFlagEnableUserOffers then p1.offer.onOfferChipActivated else nil
 		}) else nil
 	})
 	local var5 = fFlagRemoveBottomPaddingInExperienceShopModule()
@@ -129,6 +139,17 @@ return function(p1)
 			abuseVector = p1.topBarReportSession.abuseVector,
 			targetId = p1.topBarReportSession.targetId,
 			onClose = p1.onTopBarReportClose
+		}) else nil,
+		OfferDetails = if fFlagEnableUserOffers and p1.offer.offerDialog == offerDialogStateModule.Details and p1.offer.offerModal ~= nil then reactModule.createElement(offerDetailsDialogModule, {
+			modal = p1.offer.offerModal,
+			expirationTimeInUTC = p1.offer.offerExpirationTimeInUTC,
+			onShopNow = p1.offer.onOfferShopNow,
+			onViewTerms = p1.offer.onOfferViewTerms,
+			onClose = p1.offer.onOfferDetailsClose
+		}) else nil,
+		OfferTerms = if fFlagEnableUserOffers and p1.offer.offerDialog == offerDialogStateModule.Terms and (p1.offer.offerModal ~= nil and p1.offer.offerModal.termsAndConditions ~= nil) then reactModule.createElement(offerTermsDialogModule, {
+			terms = p1.offer.offerModal.termsAndConditions,
+			onClose = p1.offer.onOfferTermsClose
 		}) else nil
 	})
 end

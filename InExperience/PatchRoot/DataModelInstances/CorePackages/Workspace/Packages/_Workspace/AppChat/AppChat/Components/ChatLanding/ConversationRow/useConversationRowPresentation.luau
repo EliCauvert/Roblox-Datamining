@@ -139,6 +139,7 @@ return function(p1)
 		showSquadButton = var24,
 		showTimestamp = var25,
 		showUnread = var26,
+		showBackground = if p1.showBackground ~= nil then not chatPlacementContextModule.isPlacementInExperience(var18.chatPlacement) else p1.showBackground,
 		squadLocation = var18.chatPlacement,
 		participants = if var4 ~= nil then nil else var4.participants,
 		rowRef = var28,

@@ -1,13 +1,16 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
+﻿local moments = script:FindFirstAncestor("Moments")
+local parent = moments.Parent
+local sharedFlagsModule = require(parent.SharedFlags)
 local signalsModule = require(parent.Signals)
-local fFlagMyStatsMediaSelector = require(parent.SharedFlags).FFlagMyStatsMediaSelector
+local fFlagMomentsCreationEntryOutcomeModule = require(moments.Flags.FFlagMomentsCreationEntryOutcome)
+local fFlagMyStatsMediaSelector = sharedFlagsModule.FFlagMyStatsMediaSelector
 
 local function _(p1)
 	return p1.CaptureType == Enum.CaptureType.Video and p1.TimeLength ~= nil and p1.TimeLength < 1
 end
 
 return function(p1, p2, p3)
-	-- upvalues: signalsModule (ref), fFlagMyStatsMediaSelector (ref)
+	-- upvalues: signalsModule (ref), fFlagMyStatsMediaSelector (ref), fFlagMomentsCreationEntryOutcomeModule (ref)
 	p1 = p1 or game:GetService("CaptureService")
 	p3 = p3 or {}
 	local var1, var2 = signalsModule.createSignal({})
@@ -32,9 +35,9 @@ return function(p1, p2, p3)
 	end
 	
 	local function _()
-		-- upvalues: p1 (ref), fFlagMyStatsMediaSelector (copy), p3 (ref), var5 (write), var4 (ref), p2 (ref), appendCurrentPage (ref), var1 (ref)
+		-- upvalues: p1 (ref), fFlagMyStatsMediaSelector (copy), p3 (ref), var5 (write), var4 (ref), p2 (ref), fFlagMomentsCreationEntryOutcomeModule (copy), appendCurrentPage (ref), var1 (ref)
 		task.spawn(function()
-			-- upvalues: p1 (copy), fFlagMyStatsMediaSelector (copy), p3 (copy), var5 (copy), var4 (copy), p2 (copy), appendCurrentPage (copy), var1 (copy)
+			-- upvalues: p1 (copy), fFlagMyStatsMediaSelector (copy), p3 (copy), var5 (copy), var4 (copy), p2 (copy), fFlagMomentsCreationEntryOutcomeModule (copy), appendCurrentPage (copy), var1 (copy)
 			local ok, status = pcall(function()
 				-- upvalues: p1 (copy), fFlagMyStatsMediaSelector (copy), p3 (copy), var5 (copy)
 				local var7, var8 = p1:ReadCapturesFromGalleryAsync(if fFlagMyStatsMediaSelector then p3 else {}, true)
@@ -55,7 +58,7 @@ return function(p1, p2, p3)
 				var4(true)
 				
 				if p2 ~= nil then
-					p2({}, false)
+					p2({}, false, if not fFlagMomentsCreationEntryOutcomeModule then if ok and status == Enum.ReadCapturesFromGalleryResult.NeedPermission then "permission_denied" else "read_error" else nil)
 				end
 			end
 		end)
@@ -80,7 +83,7 @@ return function(p1, p2, p3)
 	end
 	
 	task.spawn(function()
-		-- upvalues: p1 (ref), fFlagMyStatsMediaSelector (copy), p3 (ref), var5 (write), var4 (ref), p2 (ref), appendCurrentPage (ref), var1 (ref)
+		-- upvalues: p1 (ref), fFlagMyStatsMediaSelector (copy), p3 (ref), var5 (write), var4 (ref), p2 (ref), fFlagMomentsCreationEntryOutcomeModule (copy), appendCurrentPage (ref), var1 (ref)
 		local ok, status = pcall(function()
 			-- upvalues: p1 (copy), fFlagMyStatsMediaSelector (copy), p3 (copy), var5 (copy)
 			local var7, var8 = p1:ReadCapturesFromGalleryAsync(if fFlagMyStatsMediaSelector then p3 else {}, true)
@@ -100,7 +103,7 @@ return function(p1, p2, p3)
 			var4(true)
 			
 			if p2 ~= nil then
-				p2({}, false)
+				p2({}, false, if not fFlagMomentsCreationEntryOutcomeModule then if ok and status == Enum.ReadCapturesFromGalleryResult.NeedPermission then "permission_denied" else "read_error" else nil)
 			end
 		end
 	end)

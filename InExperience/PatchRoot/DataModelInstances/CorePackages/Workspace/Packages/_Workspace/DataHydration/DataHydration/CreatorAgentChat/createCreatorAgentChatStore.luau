@@ -441,6 +441,15 @@ return function(p3)
 		return rpcCallSync(acpProtocolModule.Methods.AdCampaignEligibility, p7, require(script.Parent.decodeAdCampaignEligibilityResult))
 	end
 	
+	local function adCampaignCreate(p7)
+		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
+		assert(typeof(p7) == "table", "adCampaignCreate requires params")
+		assert(typeof(p7.universeId) == "number" and p7.universeId > 0, "universeId must be a positive number")
+		assert(typeof(p7.idempotencyKey) == "string" and p7.idempotencyKey ~= "", "idempotencyKey is required")
+		
+		return rpcCallSync(acpProtocolModule.Methods.AdCampaignCreate, p7, require(script.Parent.decodeAdCampaignCreateResult))
+	end
+	
 	local _ = function(p7, p8, p9, p10)
 		-- upvalues: createTurnHandleModule (copy), acpProtocolModule (copy), rpcCall (ref), p3 (ref), var1 (write), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref)
 		local var16, var17 = createTurnHandleModule(p7, p8, function()
@@ -677,6 +686,7 @@ return function(p3)
 		sessionUpdateInfo = sessionUpdateInfo,
 		sessionSaveAndPublish = sessionSaveAndPublish,
 		adCampaignEligibility = adCampaignEligibility,
+		adCampaignCreate = adCampaignCreate,
 		ingestSessionHistory = ingestSessionHistory,
 		ingestFrame = function(p15, p16)
 			-- upvalues: ingestFrameHandlerModule (copy), logger (ref), var26 (ref), t_1 (ref), t_2 (ref), unregisterHandle (ref)

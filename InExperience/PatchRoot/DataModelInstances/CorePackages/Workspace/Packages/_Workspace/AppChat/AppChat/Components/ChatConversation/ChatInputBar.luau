@@ -24,6 +24,8 @@ local sendButtonClickActionResultModule = require(appChat.Analytics.Enums.SendBu
 local _ = require(appChat.types)
 local fFlagAppChatReplyComposeBarContainerModule = require(appChat.Flags.FFlagAppChatReplyComposeBarContainer)
 local fFlagAppChatGamepadSendButtonNavModule = require(appChat.Flags.FFlagAppChatGamepadSendButtonNav)
+local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
+local useChatWideModeFocusModule = require(appChat.Contexts.ChatWideModeFocus.useChatWideModeFocus)
 local t = {
 	initialInputText = "",
 	placeholderText = "Write a message",
@@ -55,7 +57,7 @@ local function heightOfNLines(p1, p2, p3, p4)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), userInputService (ref), useChatPagePaddingModule (ref), foundationModule (ref), useStyle (ref), heightOfNLines (ref), useKeystrokeCollectionModule (ref), isMessageValidModule (ref), text (ref), sendButtonClickActionResultModule (ref), isKeyCodePressedModule (ref), useInputConnectionsModule (ref), fFlagAppChatReplyComposeBarContainerModule (ref), useIsSpatial (ref), fFlagAppChatGamepadSendButtonNavModule (ref), chatInputBoxDisabledModule (ref), callbackInputBox (ref), builderIconsModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), userInputService (ref), useChatPagePaddingModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), useChatWideModeFocusModule (ref), foundationModule (ref), useStyle (ref), heightOfNLines (ref), useKeystrokeCollectionModule (ref), isMessageValidModule (ref), text (ref), sendButtonClickActionResultModule (ref), isKeyCodePressedModule (ref), useInputConnectionsModule (ref), fFlagAppChatReplyComposeBarContainerModule (ref), useIsSpatial (ref), fFlagAppChatGamepadSendButtonNavModule (ref), chatInputBoxDisabledModule (ref), callbackInputBox (ref), builderIconsModule (ref)
 	local var1 = cryoModule.Dictionary.union(t, p1)
 	local var2, var3 = reactModule.useState(0)
 	local var4, var5 = reactModule.useState(0)
@@ -80,133 +82,134 @@ return reactModule.memo(function(p1)
 	local var14 = reactModule.useRef(var1.textChangedFallback or not userInputService.KeyboardEnabled)
 	local var15, var16 = reactModule.useBinding(var12.current ~= "")
 	useChatPagePaddingModule()
-	local var17 = foundationModule.Hooks.useTokens()
-	local var18 = useStyle()
-	local font = var18.Font.Body.Font
-	local var19 = var18.Font.BaseSize * var18.Font.Body.RelativeSize
-	local var20 = reactModule.useMemo(function()
-		-- upvalues: heightOfNLines (copy), font (ref), var19 (ref), var2 (ref)
-		return heightOfNLines(4, font, var19, var2)
-	end, { font, var19, var2 })
+	local var17 = if fFlagAppChatConsoleFocusFixesModule then useChatWideModeFocusModule() else nil
+	local var18 = foundationModule.Hooks.useTokens()
+	local var19 = useStyle()
+	local font = var19.Font.Body.Font
+	local var20 = var19.Font.BaseSize * var19.Font.Body.RelativeSize
 	local var21 = reactModule.useMemo(function()
-		-- upvalues: heightOfNLines (copy), font (ref), var19 (ref)
-		return heightOfNLines(1, font, var19)
-	end, { font, var19 })
-	local var22 = useKeystrokeCollectionModule({
+		-- upvalues: heightOfNLines (copy), font (ref), var20 (ref), var2 (ref)
+		return heightOfNLines(4, font, var20, var2)
+	end, { font, var20, var2 })
+	local var22 = reactModule.useMemo(function()
+		-- upvalues: heightOfNLines (copy), font (ref), var20 (ref)
+		return heightOfNLines(1, font, var20)
+	end, { font, var20 })
+	local var23 = useKeystrokeCollectionModule({
 		eventLoggingFunc = var1.eventLoggingFunc,
 		maxKeystrokeDataLength = var1.maxKeystrokeDataLength
 	})
-	local var23 = reactModule.useCallback(function()
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref), isMessageValidModule (copy), var1 (ref)
 		return var12.current and isMessageValidModule(var12.current, var1.maxCharacterLength)
 	end, { var1.maxCharacterLength })
-	local var24 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
-	local var25 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), var8 (write), text (copy), sendButtonClickActionResultModule (copy), var23 (ref), isMessageValidModule (copy), var1 (ref), var24 (ref), var10 (ref), var9 (write), var16 (ref), var22 (ref)
-		local var26
-		local var27 = text.Trim(if var8.current then var8.current.Text or "" else var12.current)
+	local var25 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
+	local var26 = reactModule.useCallback(function()
+		-- upvalues: var12 (ref), var8 (write), text (copy), sendButtonClickActionResultModule (copy), var24 (ref), isMessageValidModule (copy), var1 (ref), var25 (ref), var10 (ref), var9 (write), var16 (ref), var23 (ref)
+		local var27
+		local var28 = text.Trim(if var8.current then var8.current.Text or "" else var12.current)
 		local _ = sendButtonClickActionResultModule.None
 		
-		if var23() and isMessageValidModule(var27, var1.maxCharacterLength) then
+		if var24() and isMessageValidModule(var28, var1.maxCharacterLength) then
 			if var8.current then
 				var8.current.Text = ""
 			end
-			if var24 and var24.focusedGuiObject:getValue() == var10.current then
-				var24:focusGuiObject(var9.current, false)
+			if var25 and var25.focusedGuiObject:getValue() == var10.current then
+				var25:focusGuiObject(var9.current, false)
 			end
 			var12.current = ""
 			var16(false)
 			
-			if var27 == "/shrug" then
+			if var28 == "/shrug" then
 				var1.onSendChat("\194\175\\_(\227\131\132)_/\194\175")
 			else
-				var1.onSendChat(var27)
+				var1.onSendChat(var28)
 			end
-			var26 = sendButtonClickActionResultModule.WillSend
+			var27 = sendButtonClickActionResultModule.WillSend
 			local listRef = var1.messageListRef and (var1.messageListRef.current and var1.messageListRef.current._listRef)
 			
 			if listRef then
 				listRef:scrollToOffset({ offset = 0 })
 			end
 		else
-			var26 = if not var23() then sendButtonClickActionResultModule.ButtonInactive else sendButtonClickActionResultModule.MessageInvalid
+			var27 = if not var24() then sendButtonClickActionResultModule.ButtonInactive else sendButtonClickActionResultModule.MessageInvalid
 		end
-		var1.onSendBtnClicked(var26)
-		var22.sendKeystrokeEventOnSend()
+		var1.onSendBtnClicked(var27)
+		var23.sendKeystrokeEventOnSend()
 	end, {
-		var23,
+		var24,
 		var1.onSendChat,
 		var1.onSendBtnClicked,
-		var22.sendKeystrokeEventOnSend,
-		var24
+		var23.sendKeystrokeEventOnSend,
+		var25
 	})
-	local var26 = useInputConnectionsModule({
+	local var27 = useInputConnectionsModule({
 		userInputService = var1.userInputService,
 		onInputBegan = reactModule.useCallback(function(p2, _)
-			-- upvalues: var22 (ref), var14 (ref), isKeyCodePressedModule (copy), var1 (ref), var25 (ref)
-			if var22 and not var14.current and p2.UserInputType == Enum.UserInputType.Keyboard then
-				var22.recordKeystroke(true, p2.KeyCode)
+			-- upvalues: var23 (ref), var14 (ref), isKeyCodePressedModule (copy), var1 (ref), var26 (ref)
+			if var23 and not var14.current and p2.UserInputType == Enum.UserInputType.Keyboard then
+				var23.recordKeystroke(true, p2.KeyCode)
 			end
 			if isKeyCodePressedModule({ p2 }, Enum.KeyCode.Return, Enum.KeyCode.KeypadEnter) and not isKeyCodePressedModule(var1.userInputService:GetKeysPressed(), Enum.KeyCode.LeftShift, Enum.KeyCode.RightShift) then
-				var25()
+				var26()
 			end
 		end, {
 			var1.userInputService,
-			var22.recordKeystroke,
-			var22.sendKeystrokeEventOnSend,
-			var25
+			var23.recordKeystroke,
+			var23.sendKeystrokeEventOnSend,
+			var26
 		}),
 		onInputEnded = reactModule.useCallback(function(p2, _)
-			-- upvalues: var22 (ref), var14 (ref)
-			if var22 and not var14.current and p2.UserInputType == Enum.UserInputType.Keyboard then
-				var22.recordKeystroke(false, p2.KeyCode)
+			-- upvalues: var23 (ref), var14 (ref)
+			if var23 and not var14.current and p2.UserInputType == Enum.UserInputType.Keyboard then
+				var23.recordKeystroke(false, p2.KeyCode)
 			end
-		end, { var22.recordKeystroke }),
+		end, { var23.recordKeystroke }),
 		onFocusLost = var1.onFocusLost
 	})
-	local var27 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: text (copy), font (ref), var19 (ref), var20 (ref), fFlagAppChatReplyComposeBarContainerModule (copy), var17 (ref), var1 (ref)
-		local var28 = var19 + math.min(text.GetTextHeight(p2, font, var19, p3), var20) + (if fFlagAppChatReplyComposeBarContainerModule then 0 else var17.Padding.Medium * 2)
+	local var28 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: text (copy), font (ref), var20 (ref), var21 (ref), fFlagAppChatReplyComposeBarContainerModule (copy), var18 (ref), var1 (ref)
+		local var29 = var20 + math.min(text.GetTextHeight(p2, font, var20, p3), var21) + (if fFlagAppChatReplyComposeBarContainerModule then 0 else var18.Padding.Medium * 2)
 		
 		if var1.onHeightChanged then
-			var1.onHeightChanged(var28)
+			var1.onHeightChanged(var29)
 		end
-		return var28
+		return var29
 	end, {
-		var17,
-		var20,
+		var18,
+		var21,
 		var1.onHeightChanged,
 		font,
-		var19
+		var20
 	})
-	local var28 = reactModule.useCallback(function(p2)
-		-- upvalues: var13 (ref), var12 (ref), var16 (ref), var7 (ref), var23 (ref), var22 (ref), var14 (ref), var27 (ref), var2 (ref), var5 (ref), var1 (ref)
+	local var29 = reactModule.useCallback(function(p2)
+		-- upvalues: var13 (ref), var12 (ref), var16 (ref), var7 (ref), var24 (ref), var23 (ref), var14 (ref), var28 (ref), var2 (ref), var5 (ref), var1 (ref)
 		if not var13.current then return end
 		var12.current = p2
 		var16(p2 ~= "")
-		var7(var23())
+		var7(var24())
 		
-		if var22 and var14.current then
-			var22.recordTextChange(p2)
+		if var23 and var14.current then
+			var23.recordTextChange(p2)
 		end
-		var5(var27(p2, var2))
+		var5(var28(p2, var2))
 		
 		if var1.onTextChanged then
 			var1.onTextChanged(p2)
 		end
 	end, {
-		var22.recordTextChange,
-		var27,
+		var23.recordTextChange,
+		var28,
 		var1.onTextChanged,
 		var2
 	})
-	local var29 = reactModule.useCallback(function(p2)
-		-- upvalues: var27 (ref), var12 (ref), var3 (ref), var5 (ref)
-		local var30 = var27(var12.current, p2.AbsoluteSize.X)
+	local var30 = reactModule.useCallback(function(p2)
+		-- upvalues: var28 (ref), var12 (ref), var3 (ref), var5 (ref)
+		local var31 = var28(var12.current, p2.AbsoluteSize.X)
 		var3(p2.AbsoluteSize.X)
-		var5(var30)
-	end, { var27 })
-	local var30 = reactModule.useCallback(function()
+		var5(var31)
+	end, { var28 })
+	local var31 = reactModule.useCallback(function()
 		-- upvalues: var8 (write)
 		if var8.current then
 			var8.current:CaptureFocus()
@@ -244,9 +247,9 @@ return reactModule.memo(function(p1)
 		end
 	end, {})
 	local moreMenuEnabled = var1.moreMenuEnabled
-	local var31 = useIsSpatial()
-	local var32 = if var4 ~= 0 then var27(var12.current, var2) else var4
-	local var33 = var19 + var21
+	local var32 = useIsSpatial()
+	local var33 = if var4 ~= 0 then var28(var12.current, var2) else var4
+	local var34 = var20 + var22
 	local isDisabled = var1.isDisabled
 	
 	return reactModule.createElement(foundationModule.View, {
@@ -255,7 +258,7 @@ return reactModule.memo(function(p1)
 			["padding-x-xlarge"] = not moreMenuEnabled,
 			fill = moreMenuEnabled
 		},
-		Size = UDim2.new(if moreMenuEnabled then 0 else 1, 0, 0, var32),
+		Size = UDim2.new(if moreMenuEnabled then 0 else 1, 0, 0, var33),
 		LayoutOrder = var1.LayoutOrder,
 		onAbsolutePositionChanged = var1.onPositionChanged
 	}, {
@@ -266,50 +269,51 @@ return reactModule.memo(function(p1)
 				["stroke-emphasis stroke-thick"] = not isDisabled,
 				["stroke-alert"] = isDisabled
 			},
-			onActivated = var30,
+			onActivated = var31,
 			ref = bubble,
-			cornerRadius = UDim.new(0, var33 / 2),
+			cornerRadius = UDim.new(0, var34 / 2),
 			selection = {
 				Selectable = true,
-				NextSelectionRight = if fFlagAppChatGamepadSendButtonNavModule then var10 else nil
+				NextSelectionRight = if fFlagAppChatGamepadSendButtonNavModule then var10 else nil,
+				NextSelectionLeft = if fFlagAppChatConsoleFocusFixesModule and var17 then var17.conversationListRef else nil
 			},
-			cursor = { offset = 0, radius = UDim.new(0, var33 / 2) }
+			cursor = { offset = 0, radius = UDim.new(0, var34 / 2) }
 		}, {
 			inputBoxWrapper = reactModule.createElement(foundationModule.View, {
 				tag = "size-0-full fill padding-left-large",
 				LayoutOrder = 1,
 				padding = {
-					top = UDim.new(0, var19 / 2),
-					bottom = UDim.new(0, var19 / 2)
+					top = UDim.new(0, var20 / 2),
+					bottom = UDim.new(0, var20 / 2)
 				}
 			}, {
 				inputBox = if isDisabled then reactModule.createElement(chatInputBoxDisabledModule, {
 					bodyText = var1.inputBarDisabledText,
 					font = font,
-					contentSize = var19,
+					contentSize = var20,
 					endTimestamp = var1.disabledEndTimestampDisplay,
 					onActivated = var1.onDisabledInputBarActivated
 				}) else reactModule.createElement(callbackInputBox, {
 					initialInputText = var1.initialInputText,
 					inputTextFont = font,
-					inputTextColor3 = var18.Theme.TextEmphasis.Color,
-					inputTextSize = var19,
+					inputTextColor3 = var19.Theme.TextEmphasis.Color,
+					inputTextSize = var20,
 					inputTextXAlignment = Enum.TextXAlignment.Left,
 					inputTextYAlignment = Enum.TextYAlignment.Center,
 					placeholderText = var1.placeholderText,
-					placeholderTextColor3 = var18.Theme.TextMuted.Color,
-					placeholderTextTransparency = var18.Theme.TextMuted.Transparency,
+					placeholderTextColor3 = var19.Theme.TextMuted.Color,
+					placeholderTextTransparency = var19.Theme.TextMuted.Transparency,
 					clipsDescendants = false,
-					multiLine = not var31,
+					multiLine = not var32,
 					manualFocusRelease = true,
 					textWrapped = true,
-					focusChangedCallback = var26.focusChanged,
+					focusChangedCallback = var27.focusChanged,
 					clearButtonDisabled = true,
 					clearButtonSize = 0,
-					textChangedCallback = var28,
-					[reactModule.Change.AbsoluteSize] = var29,
+					textChangedCallback = var29,
+					[reactModule.Change.AbsoluteSize] = var30,
 					inputBoxRef = var8,
-					returnPressedFromOnScreenKeyboardCallback = if var31 then var25 else nil
+					returnPressedFromOnScreenKeyboardCallback = if var32 then var26 else nil
 				})
 			}),
 			sendButtonColumn = reactModule.createElement(foundationModule.View, {
@@ -319,7 +323,7 @@ return reactModule.memo(function(p1)
 			}, {
 				sendButtonWrapper = reactModule.createElement(foundationModule.View, {
 					tag = "col flex-around padding-small",
-					Size = UDim2.new(0, var33, 0, var33)
+					Size = UDim2.new(0, var34, 0, var34)
 				}, {
 					sendButton = reactModule.createElement(foundationModule.View, {
 						tag = {
@@ -327,18 +331,18 @@ return reactModule.memo(function(p1)
 							["bg-action-emphasis"] = var6,
 							["bg-action-standard"] = not var6
 						},
-						Size = UDim2.new(0, var33 - var17.Padding.Small, 0, var33 - var17.Padding.Small),
+						Size = UDim2.new(0, var34 - var18.Padding.Small, 0, var34 - var18.Padding.Small),
 						isDisabled = not var6,
-						onActivated = var25,
+						onActivated = var26,
 						selection = { Selectable = true, NextSelectionLeft = var9 },
 						cursor = {
-							radius = UDim.new(0, var33 / 2),
-							offset = var17.Padding.Small / 2
+							radius = UDim.new(0, var34 / 2),
+							offset = var18.Padding.Small / 2
 						},
 						ref = var10
 					}, {
 						sendButtonIcon = reactModule.createElement(foundationModule.Icon, {
-							style = var17.Color.ActionEmphasis.Foreground,
+							style = var18.Color.ActionEmphasis.Foreground,
 							size = foundationModule.Enums.IconSize.Small,
 							name = builderIconsModule.Icon.ArrowLargeUp
 						})

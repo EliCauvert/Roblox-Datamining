@@ -24,6 +24,7 @@ local dateTime = require(parent.Time).DateTime
 local chatConversationMoreMenuModule = require(script.Parent.ChatConversationMoreMenu)
 local keyboardOffsetEventHandlerModule = require(script.Parent.KeyboardOffsetEventHandler)
 local globalLongPressSignalModule = require(script.Parent.Utils.GlobalLongPressSignal)
+local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
 local getReplyingToStoreModule = require(appChat.Stores.GetReplyingToStore)
 local fFlagAppChatSignalsReplyStoreModule = require(appChat.Flags.FFlagAppChatSignalsReplyStore)
 local fFlagAppChatReplyComposeBarContainerModule = require(appChat.Flags.FFlagAppChatReplyComposeBarContainer)
@@ -190,14 +191,14 @@ function chatConversation.init(p1)
 			local var3
 			if p6 and p6.source == "friends" then
 				name:info("Creating a conversation for friend conversation {} via onSendChat", p3)
-				var3, var42 = p7(p3, p5):await()
+				var3, var43 = p7(p3, p5):await()
 				
-				if var3 and var42 then
-					name:debug("Created conversation {} for friend conversation {} via onSendChat", var42.id, p3)
-					p3 = var42.id
-					p8(var42.id)
+				if var3 and var43 then
+					name:debug("Created conversation {} for friend conversation {} via onSendChat", var43.id, p3)
+					p3 = var43.id
+					p8(var43.id)
 				else
-					name:error("Could not create conversation. Error: {}", tostring(var42))
+					name:error("Could not create conversation. Error: {}", tostring(var43))
 					
 					return
 				end
@@ -424,11 +425,11 @@ function chatConversation.init(p1)
 end
 
 function chatConversation.didMount(p1)
-	-- upvalues: focusBehaviorsModule (ref), appChatNewChatInputBarIxpEnabled (ref), IXPService (ref), appChatNewChatInputBarIxpLayer (ref)
+	-- upvalues: fFlagAppChatConsoleFocusFixesModule (ref), focusBehaviorsModule (ref), appChatNewChatInputBarIxpEnabled (ref), IXPService (ref), appChatNewChatInputBarIxpLayer (ref)
 	p1.isMounted = true
 	p1.markAsRead(p1.props.markConversationAsRead, p1.props.conversationId)()
 	local value = p1.inputBarRef:getValue()
-	p1.focusNavigationService:registerFocusBehavior(p1.conversationViewRef:getValue(), focusBehaviorsModule.mostRecentOrDefault(value))
+	p1.focusNavigationService:registerFocusBehavior(p1.conversationViewRef:getValue(), if fFlagAppChatConsoleFocusFixesModule then focusBehaviorsModule.default(value) else focusBehaviorsModule.mostRecentOrDefault(value))
 	
 	if not p1.props.wideMode and p1.focusNavigationService.focusedGuiObject:getValue() ~= nil then
 		p1.focusNavigationService:focusGuiObject(value)
@@ -445,11 +446,22 @@ function chatConversation.willUpdate(p1, p2, _)
 end
 
 function chatConversation.didUpdate(p1, p2, p3)
-	-- upvalues: fFlagAppChatPerfTrackingModule (ref)
+	-- upvalues: fFlagAppChatConsoleFocusFixesModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), fFlagAppChatPerfTrackingModule (ref)
 	if p1.props.wideMode and p1.props.navigation.getParam("navigatedWithFocus") then
 		local value = p1.inputBarRef:getValue()
 		p1.props.navigation.setParams({ navigatedWithFocus = false })
 		p1.focusNavigationService:focusGuiObject(value)
+	end
+	if fFlagAppChatConsoleFocusFixesModule and p2.conversationId == p1.props.conversationId then
+		local var3 = if fFlagAppChatSignalsReplyStoreModule then p1.props.replyingToMessageId else p1.props.replyingToMessage
+		
+		if var3 ~= nil and var3 ~= (if fFlagAppChatSignalsReplyStoreModule then p2.replyingToMessageId else p2.replyingToMessage) and p1.focusNavigationService.focusedGuiObject:getValue() ~= nil then
+			local value = p1.inputBarRef:getValue()
+			
+			if value then
+				p1.focusNavigationService:focusGuiObject(value)
+			end
+		end
 	end
 	if p2.conversationId ~= p1.props.conversationId then
 		if fFlagAppChatPerfTrackingModule then
@@ -466,14 +478,14 @@ function chatConversation.didUpdate(p1, p2, p3)
 		p1.reportInputBarReady(p1.state.inputBarHeight)
 	end
 	local listRef = p1.messageListRef and (p1.messageListRef.current and p1.messageListRef.current._listRef)
-	local var3 = listRef and (listRef._scrollRef and listRef._scrollRef.getNativeScrollRef())
-	local var4 = p1.state.messageListHeight - p3.messageListHeight
+	local var4 = listRef and (listRef._scrollRef and listRef._scrollRef.getNativeScrollRef())
+	local var5 = p1.state.messageListHeight - p3.messageListHeight
 	
-	if listRef and var3 and (p3.messageListHeight ~= 0 and var4 ~= 0) then
-		local var5 = p1.calculateScrollOffset(var3._nativeRef.current)
+	if listRef and var4 and (p3.messageListHeight ~= 0 and var5 ~= 0) then
+		local var6 = p1.calculateScrollOffset(var4._nativeRef.current)
 		
-		if var5 <= 0 then return end
-		listRef:scrollToOffset({ offset = var5 + var4 })
+		if var6 <= 0 then return end
+		listRef:scrollToOffset({ offset = var6 + var5 })
 	end
 end
 

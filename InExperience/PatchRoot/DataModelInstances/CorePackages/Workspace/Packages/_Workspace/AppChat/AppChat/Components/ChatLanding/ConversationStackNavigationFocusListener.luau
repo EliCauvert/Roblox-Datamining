@@ -9,6 +9,8 @@ local roactUtilsModule = require(parent.RoactUtils)
 local squadExternalContractProviderModule = require(parent.SquadsCore.SquadExternalContractProvider)
 local mutedError = require(parent.Loggers).mutedError
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
+local getFirstFocusableDescendant = focusNavigationUtilsModule.getFirstFocusableDescendant
+local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
 local squadExternalContractContext = squadExternalContractProviderModule.SquadExternalContractContext
 local squadPromptType = require(parent.SquadsCore.Enums).SquadPromptType
 local leaveSquad = require(parent.SquadsCore.Thunks).leaveSquad
@@ -21,28 +23,36 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), reactFocusNavigationModule (ref), squadExternalContractContext (ref), useCurrentSquadParentChannelId (ref), enumScreensModule (ref), leaveSquad (ref), squadPromptType (ref), mutedError (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), t (ref)
+	-- upvalues: useDispatch (ref), reactModule (ref), reactFocusNavigationModule (ref), squadExternalContractContext (ref), useCurrentSquadParentChannelId (ref), fFlagAppChatConsoleFocusFixesModule (ref), getFirstFocusableDescendant (ref), enumScreensModule (ref), leaveSquad (ref), squadPromptType (ref), mutedError (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), t (ref)
 	local var1 = useDispatch()
 	local var2 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
 	local var3 = reactModule.useContext(squadExternalContractContext)
 	local var4 = useCurrentSquadParentChannelId()
 	local var5 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), var2 (ref)
+		-- upvalues: p1 (ref), var2 (ref), fFlagAppChatConsoleFocusFixesModule (copy), getFirstFocusableDescendant (copy)
 		local conversationStackNavigator = p1.navigation.getChildNavigation("ConversationStackNavigator")
 		
 		if var2 and conversationStackNavigator and conversationStackNavigator.state.index == 1 then
 			local value = var2.focusedGuiObject:getValue()
 			
 			if value ~= nil and value:IsDescendantOf(p1.rightContainerRef.current) then
+				if fFlagAppChatConsoleFocusFixesModule and p1.conversationPanelRef.current and (value:IsDescendantOf(p1.conversationPanelRef.current) and p1.conversationTopBarRef.current) then
+					local var6 = getFirstFocusableDescendant(p1.conversationTopBarRef.current)
+					
+					if var6 then
+						var2:focusGuiObject(var6, true)
+						p2:cancel()
+						
+						return
+					end
+				end
 				var2:focusGuiObject(p1.leftContainerRef.current, true)
 				p2:cancel()
 			end
 		end
 	end, {
-		p1.navigation,
-		p1.leftContainerRef,
-		p1.rightContainerRef,
-		var2
+		p1.navigation, p1.leftContainerRef, p1.rightContainerRef,
+		p1.conversationTopBarRef, p1.conversationPanelRef, var2
 	})
 	local var6 = reactModule.useCallback(function(p2)
 		-- upvalues: p1 (ref), enumScreensModule (copy), var4 (ref), var1 (ref), leaveSquad (copy), squadPromptType (copy), var3 (ref), mutedError (copy)

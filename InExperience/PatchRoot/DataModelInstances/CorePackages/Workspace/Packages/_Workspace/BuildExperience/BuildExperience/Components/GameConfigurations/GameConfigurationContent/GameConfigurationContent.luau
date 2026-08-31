@@ -30,12 +30,11 @@ local view = foundationModule.View
 local iconName = foundationModule.Enums.IconName
 local captureServiceStartUploadCoreScriptBypass = sharedFlagsModule.FFlagMyStatsMediaSelector and (captureService.PromptCaptureGalleryPermissionAsync and game:GetEngineFeature("CaptureServiceStartUploadCoreScriptBypass"))
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
-local fFlagEnableProvisionalRatingModule = require(buildExperience.Flags.FFlagEnableProvisionalRating)
 local fFlagBuildRehydrateOnPublishModule = require(buildExperience.Flags.FFlagBuildRehydrateOnPublish)
 local privacyType = universeConfigurationModule.PrivacyType
 
 return function(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), localizationModule (ref), useOpenWebView (ref), useArchiveGameFlowModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), useExperienceShareFlowModule (ref), universeConfigurationModule (ref), experienceGuidelinesModule (ref), signalsReactModule (ref), gameConfigurationLabelsModule (ref), privacyType (ref), fFlagEnableProvisionalRatingModule (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), fFlagBuildRehydrateOnPublishModule (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), captureServiceStartUploadCoreScriptBypass (ref), iconName (ref), getPrivatePlaytestersStore (ref), signalsModule (ref), view (ref), gameConfigurationListModule (ref), buildMaturityBannerModule (ref), text (ref), archiveGameDialogModule (ref), experienceShareOverlaysModule (ref)
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), localizationModule (ref), useOpenWebView (ref), useArchiveGameFlowModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), useExperienceShareFlowModule (ref), universeConfigurationModule (ref), experienceGuidelinesModule (ref), signalsReactModule (ref), gameConfigurationLabelsModule (ref), privacyType (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), fFlagBuildRehydrateOnPublishModule (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), captureServiceStartUploadCoreScriptBypass (ref), iconName (ref), getPrivatePlaytestersStore (ref), signalsModule (ref), view (ref), gameConfigurationListModule (ref), buildMaturityBannerModule (ref), text (ref), archiveGameDialogModule (ref), experienceShareOverlaysModule (ref)
 	local GAME_CONFIGURATION_ACCESS, GAME_CONFIGURATION_ACCESS_AND_SHARING, GAME_CONFIGURATION_ACCESS_BODY, GAME_CONFIGURATION_ARCHIVE_GAME, GAME_CONFIGURATION_AUDIENCE, GAME_CONFIGURATION_CONTENT_RATING, GAME_CONFIGURATION_CREATOR_HUB, GAME_CONFIGURATION_CREATOR_HUB_DESCRIPTION, GAME_CONFIGURATION_AUDIENCE_FRIENDS_ONLY, GAME_CONFIGURATION_GAME_DETAILS, GAME_CONFIGURATION_GAME_DETAILS_BODY, GAME_CONFIGURATION_ICON_AND_THUMBNAILS, GAME_CONFIGURATION_LOADING, GAME_CONFIGURATION_AUDIENCE_PRIVATE, PRIVATE_INVITES_ROW_DESCRIPTION, PRIVATE_INVITES_ROW_LOAD_ERROR, PRIVATE_INVITES_ROW_TITLE, PRIVATE_INVITES_ROW_TITLE_EMPTY, PRIVATE_INVITES_SHARE_LINK, GAME_CONFIGURATION_AUDIENCE_PUBLIC, GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER, GAME_CONFIGURATION_TITLE_AND_DESCRIPTION, GAME_CONFIGURATION_AUDIENCE_UNKNOWN
 	local testId = p1.testId or "game-configuration-content"
 	local var1 = if fFlagBuildLocalization then useLocalization({
@@ -155,28 +154,25 @@ return function(p1)
 	local var11 = nil
 	local var12 = nil
 	local var13 = false
+	local var14 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: universeActivationModule (copy), p1 (ref)
+		return universeActivationModule.getUniverseActivationStore().getAndFetchEligibility(p1.universeId)
+	end, { p1.universeId }).data)
+	local var15 = reactModule.useMemo(function()
+		-- upvalues: contentMaturityUtilsModule (copy), p1 (ref)
+		return contentMaturityUtilsModule.isSealBroken(p1.universeId)
+	end, { var14, p1.universeId })
+	local var16 = reactModule.useMemo(function()
+		-- upvalues: contentMaturityUtilsModule (copy), p1 (ref)
+		return contentMaturityUtilsModule.isContentUnrated(p1.universeId)
+	end, { var14, p1.universeId })
 	
-	if fFlagEnableProvisionalRatingModule then
-		local var14 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-			-- upvalues: universeActivationModule (copy), p1 (ref)
-			return universeActivationModule.getUniverseActivationStore().getAndFetchEligibility(p1.universeId)
-		end, { p1.universeId }).data)
-		local var15 = reactModule.useMemo(function()
-			-- upvalues: contentMaturityUtilsModule (copy), p1 (ref)
-			return contentMaturityUtilsModule.isSealBroken(p1.universeId)
-		end, { var14, p1.universeId })
-		local var16 = reactModule.useMemo(function()
-			-- upvalues: contentMaturityUtilsModule (copy), p1 (ref)
-			return contentMaturityUtilsModule.isContentUnrated(p1.universeId)
-		end, { var14, p1.universeId })
-		
-		if fFlagBuildRehydrateOnPublishModule then
-			var12 = if var14 then var14.provisionalRating else nil
-			var13 = var16 and not var15
-		end
-		if var15 and var16 then
-			var11 = GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER
-		end
+	if fFlagBuildRehydrateOnPublishModule then
+		var12 = if var14 then var14.provisionalRating else nil
+		var13 = var16 and not var15
+	end
+	if var15 and var16 then
+		var11 = GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER
 	end
 	local var17 = gameConfigurationLabelsModule.getContentMaturityText(var8, var12, var13) or GAME_CONFIGURATION_LOADING
 	local var18 = reactModule.useCallback(function()

@@ -10,9 +10,10 @@ local sduiPlaceholderWrapper = require(parent.SduiSharedContent).SduiPlaceholder
 local sduiVariableItemWidthCarouselModule = require(serverDrivenUi.Content.Collections.SduiVariableItemWidthCarousel)
 local fFlagSduiOptionImpressionsEventName = require(parent.SharedFlags).FFlagSduiOptionImpressionsEventName
 local fFlagSduiChartsSortDetailGenreFilter = require(parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
+local luaAppNilCheckOptionItemConfigs = game:DefineFastFlag("LuaAppNilCheckOptionItemConfigs", false)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), sduiErrorType (ref), sduiComponentType (ref), fFlagSduiChartsSortDetailGenreFilter (ref), cryoModule (ref), sduiVariableItemWidthCarouselModule (ref), fFlagSduiOptionImpressionsEventName (ref), sduiPlaceholderWrapper (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), sduiErrorType (ref), sduiComponentType (ref), fFlagSduiChartsSortDetailGenreFilter (ref), luaAppNilCheckOptionItemConfigs (ref), cryoModule (ref), sduiVariableItemWidthCarouselModule (ref), fFlagSduiOptionImpressionsEventName (ref), sduiPlaceholderWrapper (ref)
 	local sduiContext = p1.sduiContext
 	local paddingBetweenOptionSelectorAndCollection = p1.paddingBetweenOptionSelectorAndCollection or useTokens().Size.Size_400
 	local var1, var2 = reactModule.useState(nil)
@@ -95,7 +96,16 @@ return reactModule.memo(function(p1)
 			numUpdatesToDelayImpressions = p1.numUpdatesToDelayImpressions,
 			appCompositionEnabled = p1.appCompositionEnabled,
 			items = reactModule.useMemo(function()
-				-- upvalues: p1 (ref), cryoModule (copy), var3 (ref), var5 (ref)
+				-- upvalues: luaAppNilCheckOptionItemConfigs (copy), p1 (ref), sduiContext (ref), sduiErrorType (copy), sduiComponentType (copy), cryoModule (copy), var3 (ref), var5 (ref)
+				if luaAppNilCheckOptionItemConfigs and (not p1.optionItemConfigs or not p1.optionsData) then
+					sduiContext.dependencies.logger.reportError(sduiErrorType.InvalidProps, {
+						componentType = sduiComponentType.OptionSelectorCollection,
+						message = `Missing {if not p1.optionItemConfigs then "optionItemConfigs" else "optionsData"} prop`,
+						propName = if not p1.optionItemConfigs then "optionItemConfigs" else "optionsData"
+					}, sduiContext.appPage)
+					
+					return {}
+				end
 				local t = {}
 				
 				for i, v in p1.optionItemConfigs do

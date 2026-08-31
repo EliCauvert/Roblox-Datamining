@@ -558,6 +558,25 @@ return function(p2)
 				message = "universeId is required",
 				code = acpProtocolModule.ErrorCodes.InvalidParams
 			}
+		end,
+		[acpProtocolModule.Methods.AdCampaignCreate] = function(p9)
+			-- upvalues: acpProtocolModule (copy)
+			if typeof(p9.universeId) ~= "number" or p9.universeId <= 0 then
+				return nil, {
+					message = "universeId is required",
+					code = acpProtocolModule.ErrorCodes.InvalidParams
+				}
+			elseif typeof(p9.idempotencyKey) == "string" and p9.idempotencyKey ~= "" then
+				return {
+					campaignId = "mock_campaign_0001",
+					status = "in_review",
+					toolCallId = p9.toolCallId
+				}, nil
+			end
+			return nil, {
+				message = "idempotencyKey is required",
+				code = acpProtocolModule.ErrorCodes.InvalidParams
+			}
 		end
 	}
 	
@@ -589,7 +608,7 @@ return function(p2)
 			local method = t_1[p9.method]
 			
 			if method == nil then
-				return jsonError(p9.id, acpProtocolModule.ErrorCodes.MethodNotFound, "Method not found: " .. p47.method, 404)
+				return jsonError(p9.id, acpProtocolModule.ErrorCodes.MethodNotFound, "Method not found: " .. p48.method, 404)
 			end
 			ok, status, var58 = pcall(method, p9.params or {})
 			

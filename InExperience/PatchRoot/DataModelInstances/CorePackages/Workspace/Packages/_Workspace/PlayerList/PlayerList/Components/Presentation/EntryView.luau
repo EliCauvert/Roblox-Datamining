@@ -51,7 +51,7 @@ local function useEntryViewCore(p7)
 	local var3 = reactModule.useCallback(function()
 		-- upvalues: p7 (ref), var2 (ref)
 		if p7.onActivated then
-			p7.onActivated(p7.player, if var2.current then var2.current.AbsolutePosition else nil)
+			p7.onActivated(p7.player, if var2.current then var2.current.AbsolutePosition else nil, var2.current)
 		end
 	end, { p7.player, p7.onActivated })
 	local playerEntry = p7.leaderboardStore.getPlayerEntry(p7.player, false)

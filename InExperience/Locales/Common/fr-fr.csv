@@ -160,6 +160,7 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_RequiredSkinningTransfer,{asse
 Common.UGCValidation.ErrorLabel.AccessorySkinning_RigidIsSkinned,L'accessoire rigide contient des données de skinning qui ne sont pas prises en charge. Assure-toi que les os ne sont pas importés avec le maillage
 Common.UGCValidation.ErrorLabel.AccessorySkinning_TransferJointWithoutAutoSkin,"Le contrôleur contient l'articulation {jointName}, qui n'est autorisée que lorsque WrapLayer.AutoSkin est défini sur EnabledOverride."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,Les sommets associés via skinning aux articulations de transfert doivent être entièrement pondérés.
+Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,Le pack d'animations contient un identifiant d'animation en double « {animationId} » utilisé par plusieurs clips : {instancePaths}. Chaque clip d'animation doit faire référence à un élément d'animation unique.
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,Le pack d'animations ne contient pas le(s) type(s) d'animation attendu(s) : {missingAnimationTypes}. Chaque type d'animation doit contenir un dossier R15Anim comprenant précisément les enfants StringValue attendus.
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,"L'animation « {animationName} » a une valeur Weight de {weight}, mais celle-ci doit être supérieure à 0. Corrige l'animation."
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Impossible de trouver l'élément de catégorie « {ExpectedClass} » appelé « {ExpectedName} » dans l'emplacement « {ParentPath} ».
@@ -207,7 +208,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation a {c
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation contient des Curves avec trop de clés. Le maximum par Curve est de {maxAllowed}. Merci de corriger l'animation.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation contient plus de {maxAllowed} descendants MarkerCurve. Veille à ce qu'il n'en contienne pas plus de {maxAllowed}.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation contient un MarkerCurve avec {count} marqueurs. Le maximum par MarkerCurve est de {maxAllowed}. Merci de corriger l'animation.
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"L'animation publiée spécifie une translation maximale de {taggedTranslation} studs, mais ses données d'animation donnent une valeur de {calculatedTranslation} studs. Republie l'animation."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation contient un enfant inattendu : {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Les têtes dynamiques du Marketplace doivent être correctement placées afin que les sommets des yeux et de la bouche sur la cage soient alignés avec les sommets du maillage. Améliore ta cage et son alignement avec le maillage.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Impossible de détecter le sourire pour la tête dynamique. Ajuste les points de repère de la cage pour que la bouche soit correctement positionnée et puisse sourire.
@@ -218,6 +218,10 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Les têtes dynamiques du Mark
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Impossible de détecter la fermeture de l'œil droit pour la tête dynamique. Ajuste les points de repère de la cage pour que l'œil droit soit correctement positionné et puisse se fermer.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Impossible de détecter le froncement de sourcils pour la tête dynamique. Ajuste les points de repère de la cage pour que la bouche soit correctement positionnée et puisse froncer.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Ce contenu utilise des cartes émissives qui ne sont disponibles que pour les créateurs du programme des créateurs de confiance. Supprime tout contenu de cartes émissives ou rejoins le programme avant de l'importer.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Il manque une valeur de translation maximale valide à l'animation publiée. Republie l'animation.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Il manque un marqueur d'emote UGC valide à l'animation publiée. Republie l'animation.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,La translation maximale n'a pas pu être calculée à partir des données de l'animation publiée. Republie l'animation.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"L'animation publiée spécifie une translation maximale de {taggedTranslation} studs, mais ses données d'animation donnent une valeur de {calculatedTranslation} studs. Republie l'animation."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,La propriété InternalOverrideFACSData sur FaceControls doit être vide lors de l'importation.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Nous avons détecté que le système de codage facial est en train d'agrandir la tête à {modPercent} %, alors la modification de la tête est contraire à la politique de la marketplace relative aux animations faciales."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Nous avons détecté que le système de codage facial est en train de réduire la tête à {modPercent} %, alors que la modification de la tête est contraire à la politique de la marketplace relative aux animations faciales."
@@ -361,14 +365,14 @@ CommonUI.Features.Label.AddFriend,Ajouter un(e) ami(e)
 CommonUI.Features.Label.Badges,Badges
 CommonUI.Features.Label.Charts,Charts
 CommonUI.Features.Label.Chat,Chat
-CommonUI.Features.Label.Connect,Connexion
-CommonUI.Features.Label.Connection,
+CommonUI.Features.Label.Connect,Amis
+CommonUI.Features.Label.Connection,Connexion
 CommonUI.Features.Label.Connections,Connexions
 CommonUI.Features.Label.ControllerBar.HoldPrefix,Maintenir enfoncé
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,pour jouer
 CommonUI.Features.Label.CreateGames,Créer
-CommonUI.Features.Label.Friends,Amis
+CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,Expériences
 CommonUI.Features.Label.GiftCards,Acheter des cartes-cadeaux
 CommonUI.Features.Label.Groups,Communautés
@@ -838,6 +842,12 @@ CoreScripts.InGameMenu.GameSettings.SwitchToAdvancedSettings,Paramètres avancé
 CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,Paramètres personnalisés
 CoreScripts.InGameMenu.GameSettings.UINavToggle,Bascule de navigation de l'interface utilisateur
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,La touche « \ » permet d'entrer et de sortir du mode de navigation de l'interface utilisateur
+CoreScripts.InGameMenu.GameSettings.UIScale,Échelle de l'interface utilisateur
+CoreScripts.InGameMenu.GameSettings.UIScaleLargest,Maximale
+CoreScripts.InGameMenu.GameSettings.UIScaleMode,Mode de mise à l'échelle de l'interface utilisateur
+CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,Auto
+CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,Manuel
+CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,Minimale
 CoreScripts.InGameMenu.GameSettings.VREnabled,Mode VR
 CoreScripts.InGameMenu.GameSettings.VRSmoothRotationEnabled,Rotation VR Smooth activée
 CoreScripts.InGameMenu.GameSettings.VRSteppedRotationEnabled,Rotation progressive VR activée
@@ -1307,11 +1317,14 @@ Feature.Avatar.Action.Zoom,Zoomer
 Feature.Avatar.AvatarWidgetTitle,Explorer les styles
 Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,Publier
 Feature.Avatar.BackgroundGeneration.Action.Upload,Importer
 Feature.Avatar.BackgroundGeneration.Action.View,Voir
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Crée des arrière-plans avec Plus.
+Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,"Si tu quittes cette page, cet arrière-plan sera supprimé."
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Ta création est prête à l'emploi.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Cet arrière-plan a été généré avec l'IA. En le publiant, tu confirmes qu'il respecte les normes de la communauté Roblox et qu'il n'utilise aucun contenu dont tu n'as pas les droits. Il sera examiné avant d'apparaître dans ton inventaire et les items publiés ne pourront plus être modifiés."
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Cet arrière-plan a été généré avec l'IA. En l'important, tu confirmes qu'il respecte les normes de la communauté Roblox et qu'il n'utilise aucun contenu dont tu n'as pas les droits. Il sera examiné avant d'apparaître dans ton inventaire. Une fois importés, les items ne peuvent plus être modifiés."
@@ -1332,6 +1345,7 @@ Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Décris ton arrière-plan�
 Feature.Avatar.BackgroundGeneration.Status.Generating,Génération de ton arrière-plan…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Préparation de ton arrière-plan…
 Feature.Avatar.BackgroundGeneration.Title,Créer un arrière-plan
+Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,Supprimer cet arrière-plan ?
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publier dans l'inventaire
 Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
@@ -1818,6 +1832,7 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Bloquer {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Le fait de bloquer cet utilisateur lui enlève son statut de Connexion ou de follower. Il ne pourra plus vous envoyer de messages, de demandes ou d'invitations.<br /><br />Il ne sera pas notifié que vous l'avez bloqué."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Bloquer cet utilisateur lui retire son statut d'ami ou de follower. Il ne pourra plus t'envoyer de messages, de demandes ou d'invitations.<br /><br />Il ne saura pas que tu l'as bloqué."
+Feature.Build.Action.Add,
 Feature.Build.Action.AddFriends,Ajouter des amis
 Feature.Build.Action.AddPlaytester,Ajouter un testeur
 Feature.Build.Action.AddPlaytesters,Ajouter des testeurs
@@ -1831,7 +1846,9 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Copier le texte
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,Ne plus afficher
+Feature.Build.Action.DontShowAgain,
 Feature.Build.Action.HideAutosaved,Masquer les sauvegardes automatiques
 Feature.Build.Action.ManageLimit,Gérer la limite
 Feature.Build.Action.Next,
@@ -1845,28 +1862,84 @@ Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,Publier la dernière version
 Feature.Build.Action.Restore,Restaurer
+Feature.Build.Action.Resume,
 Feature.Build.Action.Revert,Rétablir
 Feature.Build.Action.SetDailyLimit,Définir une limite quotidienne
 Feature.Build.Action.SetLimit,Définir une limite
 Feature.Build.Action.Settings,
 Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,Partager le lien
+Feature.Build.Action.ShowMore,
+Feature.Build.Action.Stats,Stats
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Mettre à jour la classification
 Feature.Build.Action.UpdateWithChanges,Mettre à jour avec les modifications
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Voir l'utilisation
+Feature.Build.Analytics.AnalyzeChatPrompt,Que donne ma métrique {analyzeName} sur les {days} derniers jours ?
+Feature.Build.Analytics.AnalyzeName.Arppu,revenu moyen par utilisateur payant
+Feature.Build.Analytics.AnalyzeName.D1Retention,rétention au jour 1
+Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,utilisateurs actifs quotidiens
+Feature.Build.Analytics.AnalyzeName.PayerConversion,conversion des payeurs
+Feature.Build.Analytics.AnalyzeName.PlaythroughRate,taux de complétion
+Feature.Build.Analytics.AnalyzeName.TotalPlaytime,temps de jeu total
+Feature.Build.Analytics.Description.Arppu,Le revenu moyen par utilisateur payant correspond au total de Robux gagnés divisé par le nombre de joueurs payants. Il indique combien chaque acheteur dépense en moyenne.
+Feature.Build.Analytics.Description.D1Retention,La rétention au jour 1 mesure le nombre de nouveaux joueurs qui reviennent le lendemain. C'est un indicateur précoce de l'attractivité de ton expérience.
+Feature.Build.Analytics.Description.DailyActiveUsers,Le nombre d'utilisateurs actifs quotidiens correspond au nombre de joueurs distincts qui lancent ton expérience chaque jour. Suis cette donnée pour voir combien de personnes continuent de revenir et repérer les phases de croissance ou de baisse.
+Feature.Build.Analytics.Description.PayerConversion,Le taux de conversion des payeurs correspond au pourcentage de joueurs qui ont dépensé des Robux dans ton expérience. Utilise-le pour évaluer l'efficacité de ta monétisation à convertir les joueurs en acheteurs.
+Feature.Build.Analytics.Description.PlaythroughRate,Le taux de complétion correspond au pourcentage de visites aboutissant à une session de jeu complète. Un taux élevé indique généralement que les joueurs prennent facilement ton expérience en main et ont un intérêt à aller jusqu'au bout.
+Feature.Build.Analytics.Description.TotalPlaytime,Le temps de jeu total correspond au temps cumulé passé par les joueurs dans ton expérience au cours de la période. Une augmentation indique généralement des sessions plus engageantes.
+Feature.Build.Analytics.DurationHours,{number} h
+Feature.Build.Analytics.KeyStats,Stats clés
+Feature.Build.Analytics.LastMonth,Le mois dernier
+Feature.Build.Analytics.LastWeek,
+Feature.Build.Analytics.Likes,Likes
+Feature.Build.Analytics.Month.Apr,
+Feature.Build.Analytics.Month.Aug,
+Feature.Build.Analytics.Month.Dec,
+Feature.Build.Analytics.Month.Feb,
+Feature.Build.Analytics.Month.Jan,
+Feature.Build.Analytics.Month.Jul,Juil.
+Feature.Build.Analytics.Month.Jun,
+Feature.Build.Analytics.Month.Mar,
+Feature.Build.Analytics.Month.May,
+Feature.Build.Analytics.Month.Nov,
+Feature.Build.Analytics.Month.Oct,
+Feature.Build.Analytics.Month.Sep,
+Feature.Build.Analytics.NoData,Aucune donnée disponible
+Feature.Build.Analytics.Overview,Vue d'ensemble
+Feature.Build.Analytics.Percent,{number} %
+Feature.Build.Analytics.Players,Joueurs
+Feature.Build.Analytics.Sheet.Analyze,Analyser
+Feature.Build.Analytics.Sheet.ViewInOverview,Voir dans la vue d'ensemble
+Feature.Build.Analytics.Summary.Arppu,Nombre moyen de Robux gagnés par joueur payant.
+Feature.Build.Analytics.Summary.D1Retention,Part des nouveaux joueurs qui reviennent le lendemain.
+Feature.Build.Analytics.Summary.DailyActiveUsers,Joueurs uniques ayant rejoint l'expérience pendant la période sélectionnée.
+Feature.Build.Analytics.Summary.PayerConversion,Part des joueurs ayant effectué un achat.
+Feature.Build.Analytics.Summary.PlaythroughRate,Part des sessions étant allées au bout de l'expérience.
+Feature.Build.Analytics.Summary.TotalPlaytime,Nombre total d'heures passées par les joueurs dans ton expérience.
+Feature.Build.Analytics.Title.Arppu,ARPPU
+Feature.Build.Analytics.Title.ConcurrentUsers,Total de joueurs
+Feature.Build.Analytics.Title.D1Retention,Rétention J 1
+Feature.Build.Analytics.Title.DailyActiveUsers,Utilisateurs actifs quotidiens
+Feature.Build.Analytics.Title.PayerConversion,Conversion des payeurs
+Feature.Build.Analytics.Title.PlaythroughRate,Taux de jeu
+Feature.Build.Analytics.Title.TotalPlaytime,Temps de jeu total
+Feature.Build.Analytics.Visits,Visites
 Feature.Build.Content.NewGame,Nouveau jeu
+Feature.Build.Description.AdCampaignModerationReview,Toutes les campagnes publicitaires sont examinées par l'équipe de modération de Roblox. Ce processus peut prendre jusqu'à 24 heures.
+Feature.Build.Description.AdCampaignSheetRunDates,Diffusion : du {startDate} au {endDate}
+Feature.Build.Description.AdvertisingAgreement,"En continuant, tu acceptes les {advertisingTermsStart}Conditions d'utilisation{advertisingTermsEnd} et les {advertisingStandardsStart}normes{advertisingStandardsEnd} de la publicité sur Roblox."
 Feature.Build.Description.ArchiveRemoval,"Si tu archives ce jeu, il sera supprimé dans Construire. Tu peux toujours y accéder et le restaurer depuis le Hub Création ou Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Utilise tes Robux pour acheter automatiquement des capacités d'utilisation supplémentaires de Construire au fur et à mesure que tu crées. Tu peux définir une limite de dépenses quotidienne à tout moment.
 Feature.Build.Description.BoostAudienceForPlays,Élargis ton audience pour attirer plus de joueurs.
-Feature.Build.Description.BoostGameAudience,Atteins un plus grand nombre de joueurs
 Feature.Build.Description.BuildIdeaGame,Transforme tes idées en un jeu
 Feature.Build.Description.BuildReplyNotif,Recevoir une notification lorsque tu reçois une réponse dans Construire.
 Feature.Build.Description.BuyRobuxToCreate,"Achète plus de Robux pour continuer à créer, ou attends que ton utilisation gratuite de la fonctionnalité Construire soit réinitialisée demain."
 Feature.Build.Description.BuyUsageOrWait,Achète plus de capacités d'utilisation de Construire avec des Robux ou attends que ta limite quotidienne soit réinitialisée.
 Feature.Build.Description.CampaignRunDates,Ta campagne se déroulera du {startDate} au {endDate} 
 Feature.Build.Description.ChoosePlaytesters,Choisis des amis pour t'aider à tester le jeu.
+Feature.Build.Description.EarnedRobuxAppliedFirst,"Si tu as gagné des Robux, ceux-ci seront d'abord utilisés pour couvrir le coût de la campagne publicitaire."
 Feature.Build.Description.EnableBuildNotifs,Active les notifications dans les paramètres de ton appareil pour recevoir les mises à jour de Construire.
 Feature.Build.Description.FriendsLinkOnly,Seuls tes amis peuvent accéder à ce lien. Modifie le paramètre Public de ton jeu si tu souhaites que davantage de personnes y jouent.
 Feature.Build.Description.GameCreationDone,J'ai terminé la création et la publication de ton jeu. Tu peux l'ouvrir pour le tester.
@@ -1880,22 +1953,27 @@ Feature.Build.Description.PlaytestLatest,Tu es en train de tester ta dernière v
 Feature.Build.Description.PlaytestLocked,Crée ton premier jeu pour commencer à le tester.
 Feature.Build.Description.PlaytesterAccess,Ajoute des amis en tant que testeurs ou modifie le paramètre Public de ton jeu pour permettre à davantage de personnes d'y jouer.
 Feature.Build.Description.PrivateShare,Modifie le paramètre Public de ton jeu pour le partager.
+Feature.Build.Description.PromoteGameWithAdCampaign,Booste ton audience avec une campagne publicitaire de {durationDays} jours pour faire découvrir ton jeu.
 Feature.Build.Description.RaiseLimitOrWait,"Augmente ta limite quotidienne de Robux pour continuer à créer, ou attends la réinitialisation demain."
 Feature.Build.Description.RatingAgreement,"En publiant, tu confirmes que cette classification du contenu est exacte."
 Feature.Build.Description.RestoreLatest,Cette version deviendra ta dernière version publiée.
 Feature.Build.Description.RevertToVersion,Confirme pour annuler la dernière modification et restaurer la version {VERSION}.
+Feature.Build.Description.ShareLatest,Présente les nouveautés de cette dernière version.
 Feature.Build.Description.VersionChanges,Indique aux joueurs ce qui a changé dans cette version.
 Feature.Build.Header.AccessSharing,Accès et partage
+Feature.Build.Header.AllVersions,Toutes les versions
 Feature.Build.Header.ContentMaturity,Maturité du contenu
 Feature.Build.Header.CustomAnswer,Réponse personnalisée
 Feature.Build.Header.GameDetails,Infos sur le jeu
-Feature.Build.Header.Overview,Vue d'ensemble
+Feature.Build.Header.Overview,
 Feature.Build.Header.PastCampaigns,Campagnes passées
+Feature.Build.Header.UpdateDetails,Modifier les détails
 Feature.Build.Label.Access,Accès
 Feature.Build.Label.AdClicks,Clics sur l'annonce
 Feature.Build.Label.AdViews,Vues de l'annonce
 Feature.Build.Label.AdditionalUsage,Utilisation supplémentaire de Construire
 Feature.Build.Label.AdditionalUsed,{USED} sur {LIMIT} utilisé(s)
+Feature.Build.Label.AdsManager,Gestionnaires des annonces publicitaires
 Feature.Build.Label.All,
 Feature.Build.Label.AmountAvailable,Montant disponible : {AMOUNT}
 Feature.Build.Label.Autosaved,Sauvegarde automatique
@@ -1903,6 +1981,7 @@ Feature.Build.Label.Available,disponible
 Feature.Build.Label.BackToBuild,Retour à la construction
 Feature.Build.Label.Building,Construction...
 Feature.Build.Label.CaptureLibrary,Bibliothèque de captures
+Feature.Build.Label.CaptureSelectionCount,Sélection : {SELECTED_COUNT}/{MAX_SELECTIONS}
 Feature.Build.Label.ContentRating,Classification du contenu
 Feature.Build.Label.Created,Créé
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
@@ -1912,7 +1991,9 @@ Feature.Build.Label.Deleted,Supprimé
 Feature.Build.Label.DescribeIdea,Décris une idée
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,
+Feature.Build.Label.EasyPerformanceReport,Rapport de performances accessible
 Feature.Build.Label.Error,
+Feature.Build.Label.Free,Gratuit
 Feature.Build.Label.FreeBuildUsage,Utilisation gratuite de Construire
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Amis uniquement
@@ -1925,7 +2006,9 @@ Feature.Build.Label.InProgress,En cours
 Feature.Build.Label.InputNeeded,Saisie requise
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limité
+Feature.Build.Label.Live,En ligne
 Feature.Build.Label.Loading,Chargement…
+Feature.Build.Label.MaximizeForGamePlays,Maximise le nombre de parties jouées
 Feature.Build.Label.Models3D,Modèles 3D
 Feature.Build.Label.NoLimit,Pas de limite
 Feature.Build.Label.NotStarted,Non commencé
@@ -1950,6 +2033,7 @@ Feature.Build.Label.SelectOption,Sélectionner une option
 Feature.Build.Label.ShareAddedFriends,Partager avec les amis que tu as ajoutés
 Feature.Build.Label.Shared,Partagé
 Feature.Build.Label.Sounds,Sons
+Feature.Build.Label.TargetAllRobloxPlayers,Cible tous les joueurs sur Roblox
 Feature.Build.Label.Thinking,Réflexion
 Feature.Build.Label.Title,Titre
 Feature.Build.Label.TitleDescription,Titre et description
@@ -2017,6 +2101,7 @@ Feature.Build.Label.ToolThumbnailRunning,Définition de la miniature du jeu
 Feature.Build.Label.UniverseNumber,Univers {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Inconnu
 Feature.Build.Label.UnlimitedUsed,{USED} utilisé(s) • Pas de limite
+Feature.Build.Label.UpdateTitleDesc,Modifier le titre et la description
 Feature.Build.Label.Updated,Mis à jour
 Feature.Build.Label.Usage,Utilisation
 Feature.Build.Label.UsageUsed,{USED} utilisé(s)
@@ -2029,7 +2114,14 @@ Feature.Build.Label.VersionTitleDesc,Titre et description de la version
 Feature.Build.Label.Video,Vidéo
 Feature.Build.Message.AccountRequirements,Ton compte ne répond pas aux exigences pour utiliser la fonctionnalité Construire.
 Feature.Build.Message.AccountTooNew,Ton compte est trop récent pour publier. Réessaye lorsqu'il aura 2 jours.
+Feature.Build.Message.AdCampaignCreateFailed,Impossible de créer ta campagne. Réessaie.
+Feature.Build.Message.AdCampaignCreated,Campagne publicitaire créée
 Feature.Build.Message.AdPerformanceLoadFailed,Impossible de charger les performances de l'annonce
+Feature.Build.Message.AdsPromotionBannerSubtitle,Élargis ton audience gratuitement
+Feature.Build.Message.AdsPromotionBannerTitle,Il te reste {promotionCount} promotions gratuites
+Feature.Build.Message.AdsPromotionBannerTitleSingular,Il te reste 1 promotion gratuite
+Feature.Build.Message.AdsStatsEmpty,Développe ton audience avec une campagne publicitaire pour faire découvrir ton jeu
+Feature.Build.Message.AdsStatsEmptyFree,Développe ton audience avec une campagne publicitaire gratuite pour faire découvrir ton jeu
 Feature.Build.Message.AllFriendsAdded,Tu as ajouté tous tes amis en tant que testeurs.
 Feature.Build.Message.AnswerBuildQuestion,Réponds à la question de la fonctionnalité Construire ci-dessous.
 Feature.Build.Message.AssetDetailsUnavailable,Les détails du contenu sont indisponibles.
@@ -2059,12 +2151,14 @@ Feature.Build.Message.GamePublishFailed,Tes modifications n'ont pas pu être pub
 Feature.Build.Message.GameShared,Jeu partagé
 Feature.Build.Message.GameSharedWith,Jeu partagé avec {DISPLAY_NAME}
 Feature.Build.Message.HiDisplayName,"Bonjour {DISPLAY_NAME}, "
+Feature.Build.Message.ImageUploadFailed,Impossible d'importer tes images. Réessaye.
 Feature.Build.Message.InvalidMessage,Une erreur s'est produite avec ton message. Modifie-le et réessaye.
 Feature.Build.Message.InvitesLoadFailed,Impossible de charger les invitations
 Feature.Build.Message.LimitBelowSpend,La limite ne peut pas être inférieure aux {ALREADY_SPENT} Robux déjà dépensés aujourd'hui.
 Feature.Build.Message.LinkCopied,Lien copié dans le presse-papiers.
 Feature.Build.Message.LoadingVersions,Chargement de l'historique des versions…
 Feature.Build.Message.NoAssetsFound,Aucun contenu trouvé.
+Feature.Build.Message.NoCapturesAvailable,Aucune capture disponible
 Feature.Build.Message.NoDescriptionProvided,Aucune description fournie.
 Feature.Build.Message.NoFriendsToAdd,Tu n'as pas encore d'amis à ajouter. Trouve d'abord des personnes avec qui te connecter sur Roblox.
 Feature.Build.Message.NoResults,
@@ -2075,6 +2169,8 @@ Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} testeurs sur {MAX_INVITE
 Feature.Build.Message.PublicPublishFailed,"Ton jeu a été publié, mais n'a pas pu être rendu public. Réessaye."
 Feature.Build.Message.PublishExpandAudience,Publie pour élargir ton public
 Feature.Build.Message.PublishNotReverted,Ta publication n'a pas été rétablie. Réessaie.
+Feature.Build.Message.PublishPromotionUpsell,"Ton jeu est publié, félicitations ! Profite de {promotionCount} promotions gratuites pour attirer plus de joueurs sur Roblox."
+Feature.Build.Message.PublishPromotionUpsellSingular,"Félicitations, ton jeu est publié ! Profite d'une promotion gratuite pour attirer plus de joueurs sur Roblox."
 Feature.Build.Message.PublishReverted,Publication annulée.
 Feature.Build.Message.QuestionnaireNeeded,Ce jeu a été modifié en dehors de Construire. Remplis le questionnaire sur le contenu pour le publier.
 Feature.Build.Message.ReadyToPlay,Les joueurs peuvent jouer à ton jeu sur Roblox !
@@ -2102,7 +2198,11 @@ Feature.Build.Notification.Message.Review,Reprends ton chat dans Construire pour
 Feature.Build.Notification.Title.Finished,Construire : terminé
 Feature.Build.Notification.Title.NeedInput,Construire a besoin de ton avis
 Feature.Build.Title.AdCampaignActive,La campagne publicitaire est active
+Feature.Build.Title.AdCampaignDuration,Campagne publicitaire de {durationDays} jours
 Feature.Build.Title.AddFriendsToPlaytest,Ajoute des amis pour t'aider à tester le jeu
+Feature.Build.Title.AddImages,Ajouter des images
+Feature.Build.Title.AdsStatsEmpty,Lancer une campagne
+Feature.Build.Title.AdsStatsEmptyFree,Lance ta première campagne
 Feature.Build.Title.ArchiveThisGame,Archiver ce jeu ?
 Feature.Build.Title.AssetLibrary,Bibliothèque
 Feature.Build.Title.Audience,
@@ -2124,14 +2224,18 @@ Feature.Build.Title.GetUsers,Obtenir des utilisateurs
 Feature.Build.Title.NoRobuxForUsage,Il ne reste plus de Robux pour utiliser Construire
 Feature.Build.Title.Playtesters,Testeurs
 Feature.Build.Title.PlaytestersOnlyPlay,Seuls les testeurs peuvent y jouer
+Feature.Build.Title.PromoteGame,Fais la promotion de ton jeu
 Feature.Build.Title.PromoteGameFree,Fais la promotion de ton jeu gratuitement
 Feature.Build.Title.PushNotifications,Notifications push
 Feature.Build.Title.RevertLastChange,Annuler la dernière modification ?
 Feature.Build.Title.Tasks,Tâches
 Feature.Build.Title.TurnActivity,Activité de ce tour
 Feature.Build.Title.VersionHistory,Historique des versions
+Feature.Build.Title.VersionInfo,Détails de la version
 Feature.Build.Title.VersionInformation,Informations sur la version
 Feature.Build.Title.VersionNumber,Version {VERSION}
+Feature.Build.Title.Versions,Versions
+Feature.Build.Title.WhatsIncluded,Qu'est-ce qui est inclus ?
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Permettre
 Feature.Captures.Action.AllowPhotoAccessAccepted,Autoriser
@@ -2490,7 +2594,7 @@ Feature.Catalog.LabelAnyPrice,Tous les prix
 Feature.Catalog.LabelClassicHeads,
 Feature.Catalog.LabelCollectibles,Items de collection
 Feature.Catalog.LabelContentDeleted,Contenu supprimé
-Feature.Catalog.LabelFree,Gratuit
+Feature.Catalog.LabelFree,
 Feature.Catalog.LabelNoResellers,Aucun revendeur
 Feature.Catalog.LabelOffSale,Plus à vendre
 Feature.Catalog.LabelPants,
@@ -2784,6 +2888,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Le nom affiché n'est pas disp
 Feature.DisplayName.ErrorMessage.NameTooLong,Le nom d'affichage doit comporter 20 caractères au maximum
 Feature.DisplayName.ErrorMessage.NameTooShort,Le nom d'affichage doit avoir au moins 3 caractères
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Le nom d'affichage contient des caractères non acceptés
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,Pendant {num} jour
 Feature.Durables.BottomBar.RentalDurationPlural,Pendant {num} jours
 Feature.Durables.FTUX.Tooltip,"Choisis la durée, en jours, pendant laquelle tu souhaites avoir l'item. Le compte à rebours démarre après l'achat."
@@ -2794,6 +2899,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} jour
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} jours
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Options
 Feature.Durables.Label.ItemExpires,L'item arrive à expiration
+Feature.Durables.PartiallyExpiredItems.BodyText,Certains items de cet avatar enregistré ont expiré et ont été supprimés.
+Feature.Durables.PartiallyExpiredItems.TitleText,Items expirés
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} jours (démarre après l'achat)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,Aucune connexion Internet
@@ -2992,7 +3099,7 @@ Feature.Friends.Label.MutualFriendsTitle,{numConnections} amis en commun
 Feature.Friends.Label.NewConnection,Nouvelle connexion
 Feature.Friends.Label.NewFriend,Nouvel ami
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
-Feature.Friends.Label.NoConnectionYet,{name} n'a pas encore de connexion.
+Feature.Friends.Label.NoFriendsYet,{name} n'a pas encore d'amis.
 Feature.Friends.Label.NowTrusted,{username} est maintenant un ami de confiance
 Feature.Friends.Label.PYMK,Personnes que tu peux connaître
 Feature.Friends.Label.Pending,
@@ -3263,8 +3370,17 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,{number} jours
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,un jour
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time}
 Feature.InExperienceShop.Label.BonusItem,Item bonus
+Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.NoDescription,Aucune description
 Feature.InExperienceShop.Label.PreviewBanner,Ceci est un aperçu de ta boutique dans Roblox Studio. Les joueurs ne peuvent pas le voir.
+Feature.InExperienceShop.Label.Timer.Day.Plural,
+Feature.InExperienceShop.Label.Timer.Day.Singular,1 jour
+Feature.InExperienceShop.Label.Timer.Hour.Plural,{number} heures
+Feature.InExperienceShop.Label.Timer.Hour.Singular,1 heure
+Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} minutes
+Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minute
+Feature.InExperienceShop.Label.Timer.Second.Plural,{number} secondes
+Feature.InExperienceShop.Label.Timer.Second.Singular,1 seconde
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Tu confirmes vouloir supprimer définitivement cet item de ton inventaire ? Si tu changes d'avis, tu devras l'obtenir à nouveau dans une expérience."
 Feature.Item.Label.DeleteItemUndercase,Supprimer l'item
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
@@ -3535,6 +3651,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Modifier le nom
 Feature.Profile.Heading.EditDisplayName,Modifier nom d'affichage
 Feature.Profile.Heading.InsufficientFunds,Fonds insuffisants
 Feature.Profile.Heading.NicknameRequestSent,Demande d'amitié envoyée
+Feature.Profile.Heading.ProfileFrame,Cadre du profil
+Feature.Profile.Heading.ProfilePictureSaved,Photo de profil enregistrée avec succès
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Statistiques
 Feature.Profile.Heading.Username,Nom d'utilisateur 
@@ -3752,12 +3870,12 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Bonne nouvelle !
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Obtenir Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus n'est pas disponible ici
-Feature.SafetyDashboard.Heading.AccountStatus,Statut du compte
+Feature.SafetyDashboard.Heading.AccountStatus.V2,"Statut du compte, violations et appels"
 Feature.Schools.Label.Classmates,Camarades de classe
 Feature.Screentime.Content.ScreentimeLimitDialog,Tu as atteint ta limite quotidienne de temps d'écran. Reviens demain pour accéder à nouveau à Roblox.
 Feature.SecurityFeedback.Header.NewLogin,Alerte nouvelle activité
 Feature.Settings.Label.Error,
-Feature.SettingsHub.Action.AllowInSettings,Autoriser depuis les paramètres
+Feature.SettingsHub.Action.AllowInSettings,Autoriser dans les paramètres
 Feature.SettingsHub.Action.Block,
 Feature.SettingsHub.Action.Cancel,
 Feature.SettingsHub.Action.CancelSearch,
@@ -4116,6 +4234,7 @@ Feature.Subscription.Text.PerMonth,/mois
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"Ton avatar a été réinitialisé pour la raison suivante : {rule}. Tu peux toujours utiliser la Marketplace, mais les modifications apportées à ton avatar ne seront pas enregistrées jusqu'au {time}."
 Feature.Timeout.Prompt.SaveTitleText,L'enregistrement est désactivé pour le moment
+Feature.Timeout.Prompt.TitleText,Nous avons réinitialisé ton avatar
 Feature.Timeout.WarningBanner.DisabledMessage,Enregistrement de l'avatar désactivé
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Enregistrement de l'avatar désactivé jusqu'au {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Débloqué
@@ -4679,7 +4798,7 @@ InGame.PlayerList.Retry,
 InGame.Presence.Label.InGame,
 InGame.Presence.Label.InStudio,En Studio
 InGame.Presence.Label.Offline,Hors ligne
-InGame.Presence.Label.Online,En ligne
+InGame.Presence.Label.Online,
 InGame.UnknownNamespace.BACKPACK_SEARCH,
 InGame.UnknownNamespace.GameChat.FriendChatNotifier.JoinMessage,Ton ami(e) {RBX_NAME} a rejoint l'expérience.
 InGame.UnknownNamespace.GameChat_ChatCommandsTeller_MuteCommand,/mute <interlocuteur> : bâillonne un interlocuteur.

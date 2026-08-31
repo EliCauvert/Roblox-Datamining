@@ -1,6 +1,8 @@
 ﻿local playersService = game:GetService("Players")
 local telemetryService = game:GetService("TelemetryService")
-local loggingProtocolModule = require(script:FindFirstAncestor("GameJoinCard").Parent.LoggingProtocol)
+local parent = script:FindFirstAncestor("GameJoinCard").Parent
+local loggingProtocolModule = require(parent.LoggingProtocol)
+local fFlagGameJoinCardAnalyticsCardId = require(parent.SharedFlags).FFlagGameJoinCardAnalyticsCardId
 local ageCheckUpsellOutcome = require(script.Parent.AnalyticsConstants).AgeCheckUpsellOutcome
 local gameJoinCardAnalyticsThrottleHundredthsPercent = game:DefineFastInt("GameJoinCardAnalyticsThrottleHundredthsPercent", 10000)
 local t = {
@@ -49,7 +51,7 @@ local function _(p1)
 end
 
 local function buildGameJoinCardCommonFields(p1)
-	-- upvalues: playersService (ref)
+	-- upvalues: playersService (ref), fFlagGameJoinCardAnalyticsCardId (ref)
 	local t = {}
 	local localPlayer = playersService.LocalPlayer
 	
@@ -71,6 +73,9 @@ local function buildGameJoinCardCommonFields(p1)
 	end
 	if p1.absolutePosition ~= nil then
 		t.carouselAbsolutePosition = math.floor(p1.absolutePosition)
+	end
+	if fFlagGameJoinCardAnalyticsCardId and p1.joinGameCardId and p1.joinGameCardId ~= "" then
+		t.joinGameCardId = p1.joinGameCardId
 	end
 	return t
 end

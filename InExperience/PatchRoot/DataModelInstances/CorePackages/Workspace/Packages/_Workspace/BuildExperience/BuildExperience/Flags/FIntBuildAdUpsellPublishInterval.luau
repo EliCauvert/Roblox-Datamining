@@ -1,0 +1,1 @@
+﻿return math.max(0, game:DefineFastInt("BuildAdUpsellPublishInterval", 5))

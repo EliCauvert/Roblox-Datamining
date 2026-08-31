@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXBackgroundGenerationAnalytics", false) and (require(script.Parent.FFlagAXBackgroundGeneration) and (require(script.Parent.FFlagAXItemDetailsIxpExposure) and require(script.Parent.FFlagAXSkipTapDetection)))

@@ -90,6 +90,7 @@ local function assembleMenuItems(p1)
 		local var9 = p1.friendStatus == Enum.FriendStatus.Friend
 		local t_1 = {
 			key = "friend",
+			onceGroup = "friending",
 			label = var7,
 			icon = var8,
 			onActivated = p1.actions.onFriend
@@ -113,7 +114,11 @@ local function assembleMenuItems(p1)
 		table.insert(t, t_1)
 		
 		if p1.friendStatus == Enum.FriendStatus.FriendRequestReceived then
-			local t_2 = { key = "decline", telemetryAction = "friend_decline" }
+			local t_2 = {
+				key = "decline",
+				telemetryAction = "friend_decline",
+				onceGroup = "friending"
+			}
 			local var11 = "InGame.PlayerDropDown.Decline"
 			ok, status = pcall(function()
 				-- upvalues: robloxTranslatorModule (copy), var11 (ref)
@@ -176,7 +181,7 @@ local function assembleMenuItems(p1)
 end
 
 return {
-	buildMenuData = function(p1, p2, p3)
+	buildMenuData = function(p1, p2, p3, p4)
 		-- upvalues: localPlayer (ref), blockingUtilityModule (ref), assembleMenuItems (ref), guiService (ref), rbxAnalyticsService (ref), requestFriendshipModule (ref), playerContextualMenuStore (ref), playerListVisibilityStore (ref), robloxGui (ref), openReportDialog (ref), buildMenuHeader (ref)
 		local userId = p1.UserId
 		local var6 = localPlayer ~= nil and p1 == localPlayer
@@ -188,10 +193,15 @@ return {
 				-- upvalues: var7 (write), blockingUtilityModule (copy), userId (ref)
 				var7 = blockingUtilityModule:IsPlayerBlockedByUserId(userId)
 			end)
-			pcall(function()
-				-- upvalues: unknown (write), localPlayer (copy), p1 (ref)
-				unknown = localPlayer:GetFriendStatus(p1)
-			end)
+			
+			if p4 == nil then
+				pcall(function()
+					-- upvalues: unknown (write), localPlayer (copy), p1 (ref)
+					unknown = localPlayer:GetFriendStatus(p1)
+				end)
+			else
+				unknown = p4
+			end
 		end
 		return {
 			player = p1,
@@ -203,22 +213,23 @@ return {
 				inspectMenuEnabled = guiService:GetInspectMenuEnabled(),
 				actions = {
 					onFriend = function()
-						-- upvalues: unknown (write), rbxAnalyticsService (copy), localPlayer (copy), p1 (ref), requestFriendshipModule (copy), p2 (ref)
+						-- upvalues: unknown (write), rbxAnalyticsService (copy), localPlayer (copy), p1 (ref), requestFriendshipModule (copy)
 						if unknown == Enum.FriendStatus.Friend or unknown == Enum.FriendStatus.FriendRequestSent then
 							rbxAnalyticsService:TrackEvent("Game", "RevokeFriendship", "PlayerDropDown")
 							localPlayer:RevokeFriendship(p1)
+							
+							return
 						elseif unknown == Enum.FriendStatus.FriendRequestReceived then
 							requestFriendshipModule(p1, true)()
-						else
-							requestFriendshipModule(p1)()
+							
+							return
 						end
-						p2()
+						requestFriendshipModule(p1)()
 					end,
 					onDecline = function()
-						-- upvalues: rbxAnalyticsService (copy), localPlayer (copy), p1 (ref), p2 (ref)
+						-- upvalues: rbxAnalyticsService (copy), localPlayer (copy), p1 (ref)
 						rbxAnalyticsService:TrackEvent("Game", "DeclineFriendship", "PlayerDropDown")
 						localPlayer:RevokeFriendship(p1)
-						p2()
 					end,
 					onExamine = function()
 						-- upvalues: p3 (ref), playerContextualMenuStore (copy), playerListVisibilityStore (copy), guiService (copy), userId (ref), p2 (ref)

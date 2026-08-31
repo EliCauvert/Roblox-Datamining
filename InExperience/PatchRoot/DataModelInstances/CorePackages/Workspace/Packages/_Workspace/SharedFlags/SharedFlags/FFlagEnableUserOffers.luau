@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnableUserOffers", false)
+﻿return game:DefineFastFlag("EnableUserOffers2", false)

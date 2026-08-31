@@ -16,7 +16,6 @@ local fFlagLuaAppDataHydrationTotalVisitsGameInfoStore = require(parent.SharedFl
 local getFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds = require(parent.SharedFlags).GetFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds
 local fFlagLuaAppDataHydrationUpdateItem = require(parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
-local fFlagLuaAppDataHydrationSanitizeItem = require(parent.SharedFlags).FFlagLuaAppDataHydrationSanitizeItem
 local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
 local var1 = if fFlagLuaAppInExperienceDetailsPrompt then getFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds() else nil
 
@@ -29,7 +28,7 @@ local function sanitizeGameInfo(p1)
 end
 
 return function()
-	-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (ref), createDataCacheModule (ref), var1 (ref), fFlagLuaAppDataHydrationSanitizeItem (ref), sanitizeGameInfo (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), dashModule (ref), fetchGameDetailsModule (ref), gameInfoStoreTypesModule (ref), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (ref), fFlagLuaAppDataHydrationTotalVisitsGameInfoStore (ref), fFlagMigrateGameInfoToStore (ref), fFlagLuaAppDataHydrationUpdateItem (ref), fFlagSduiExperienceDetailsSupport (ref)
+	-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (ref), createDataCacheModule (ref), var1 (ref), sanitizeGameInfo (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), dashModule (ref), fetchGameDetailsModule (ref), gameInfoStoreTypesModule (ref), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (ref), fFlagLuaAppDataHydrationTotalVisitsGameInfoStore (ref), fFlagMigrateGameInfoToStore (ref), fFlagLuaAppDataHydrationUpdateItem (ref), fFlagSduiExperienceDetailsSupport (ref)
 	local t = {}
 	
 	local function _(p1, p2)
@@ -39,7 +38,7 @@ return function()
 		end
 	end
 	
-	local var2 = if fFlagLuaAppInExperienceDetailsPrompt then createDataCacheModule(var1, nil, if fFlagLuaAppDataHydrationSanitizeItem then { sanitizeItem = sanitizeGameInfo } else nil) else createDataCacheModule(nil, nil, if fFlagLuaAppDataHydrationSanitizeItem then { sanitizeItem = sanitizeGameInfo } else nil)
+	local var2 = if fFlagLuaAppInExperienceDetailsPrompt then createDataCacheModule(var1, nil, { sanitizeItem = sanitizeGameInfo }) else createDataCacheModule(nil, nil, { sanitizeItem = sanitizeGameInfo })
 	local var3 = createDataResolverModule({
 		cache = var2,
 		logError = if fFlagLuaAppInExperienceDetailsPrompt then function(p1)

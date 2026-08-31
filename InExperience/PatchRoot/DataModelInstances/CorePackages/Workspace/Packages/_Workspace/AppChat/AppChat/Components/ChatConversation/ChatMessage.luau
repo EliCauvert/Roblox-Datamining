@@ -201,6 +201,7 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 							isLastMessageInMessageGroup = var1.isLastMessageInMessageGroup,
 							isLastIncomingChatMessage = var1.isLastIncomingChatMessage,
 							isPressed = if p3 then p3.isPressed else nil,
+							bubbleRef = if p3 then p3.bubbleRef else nil,
 							maxWidth = if fFlagAppChatEnableAutotranslationModule then var3(var5, var6, fontSize, bodyLarge.Font, var1.translatedText) else var3(var5, var6, fontSize, bodyLarge.Font),
 							messageDefaultNoticeText = var1.messageDefaultNoticeText,
 							messageModeratedNoticeText = var1.messageModeratedNoticeText,

@@ -87,14 +87,11 @@ return function(p1)
 		}
 	}
 	local t = {}
-	
-	if p1.showVersionTitleDescription then
-		table.insert(t, {
-			id = "version-title-description",
-			title = PUBLISH_VERSION_TITLE_DESCRIPTION,
-			onActivated = p1.onOpenVersionTitleDescriptionPage
-		})
-	end
+	table.insert(t, {
+		id = "version-title-description",
+		title = PUBLISH_VERSION_TITLE_DESCRIPTION,
+		onActivated = p1.onOpenVersionTitleDescriptionPage
+	})
 	table.insert(t, {
 		id = "version-history",
 		title = VERSION_HISTORY_TITLE,

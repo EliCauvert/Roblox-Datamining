@@ -42,7 +42,7 @@ local appChatPerfChatLandingPaginationOnStartReachedUnits = game:DefineFastInt("
 local appChatPerfChatLandingPaginationOnEndReachedUnits = game:DefineFastInt("AppChatPerfChatLandingPaginationOnEndReachedUnits", 10)
 local partyPageCarouselExperimentation = require(parent.SocialExperiments).PartyPageCarouselExperimentation
 local name = require(script.Parent.Logger):new(script.Name)
-local fFlagAppChatSignalsMessageStore = require(appChat.Flags.FFlagAppChatUseNewConversationRow) and (require(appChat.Flags.FFlagAppChatConversationStore) and require(appChat.Flags.FFlagAppChatSignalsMessageStore))
+local shouldUseFoundationConversationRow = require(appChat.Flags.SignalsMigrationConfig).shouldUseFoundationConversationRow
 local conversationList = roactModule.PureComponent:extend("ConversationList")
 conversationList.defaultProps = {
 	focusIndex = 1,
@@ -74,7 +74,7 @@ local function _(p1)
 end
 
 function conversationList.init(p1)
-	-- upvalues: conversationList (ref), fFlagAppChatPerfTrackingModule (ref), signal (ref), appPage (ref), constants (ref), fFlagAppIaScrollAway (ref), fFlagEnableScrollAwayContentScrollableFix (ref), visibilityControl (ref), partyPageCarouselExperimentation (ref), memoize (ref), enums (ref), roactModule (ref), chatLandingModalContainerModule (ref), conversationGroupsEntryContainerModule (ref), partyQuickStartContainerModule (ref), reactModule (ref), socialCarouselModule (ref), fFlagAppChatSignalsMessageStore (ref), conversationRowModule (ref), conversationEntryModule (ref), focusNavigationService (ref), coreGui (ref), appChatPerfExperimentation (ref), squadQuickStartExperimentation (ref), fFlagAppChatRemoveConversationListDividerIxpEnabledModule (ref), IXPService (ref), fStringAppChatRemoveConversationListDividerIxpLayerModule (ref), fFlagAppChatTimestampInSubtitleIxpEnabledModule (ref), fStringAppChatTimestampInSubtitleIxpLayerModule (ref)
+	-- upvalues: conversationList (ref), fFlagAppChatPerfTrackingModule (ref), signal (ref), appPage (ref), constants (ref), fFlagAppIaScrollAway (ref), fFlagEnableScrollAwayContentScrollableFix (ref), visibilityControl (ref), partyPageCarouselExperimentation (ref), memoize (ref), enums (ref), roactModule (ref), chatLandingModalContainerModule (ref), conversationGroupsEntryContainerModule (ref), partyQuickStartContainerModule (ref), reactModule (ref), socialCarouselModule (ref), shouldUseFoundationConversationRow (ref), conversationRowModule (ref), conversationEntryModule (ref), focusNavigationService (ref), coreGui (ref), appChatPerfExperimentation (ref), squadQuickStartExperimentation (ref), fFlagAppChatRemoveConversationListDividerIxpEnabledModule (ref), IXPService (ref), fStringAppChatRemoveConversationListDividerIxpLayerModule (ref), fFlagAppChatTimestampInSubtitleIxpEnabledModule (ref), fStringAppChatTimestampInSubtitleIxpLayerModule (ref)
 	conversationList.ENTRY_HEIGHT = p1.props.entryHeight
 	
 	if fFlagAppChatPerfTrackingModule then
@@ -139,7 +139,7 @@ function conversationList.init(p1)
 	end
 	
 	function p1.renderItem(p2, _)
-		-- upvalues: roactModule (copy), chatLandingModalContainerModule (copy), conversationGroupsEntryContainerModule (copy), p1 (ref), partyQuickStartContainerModule (copy), partyPageCarouselExperimentation (copy), reactModule (copy), socialCarouselModule (copy), var1 (ref), constants (copy), fFlagAppIaScrollAway (copy), fFlagAppChatSignalsMessageStore (copy), conversationRowModule (copy), conversationEntryModule (copy)
+		-- upvalues: roactModule (copy), chatLandingModalContainerModule (copy), conversationGroupsEntryContainerModule (copy), p1 (ref), partyQuickStartContainerModule (copy), partyPageCarouselExperimentation (copy), reactModule (copy), socialCarouselModule (copy), var1 (ref), constants (copy), fFlagAppIaScrollAway (copy), shouldUseFoundationConversationRow (copy), conversationRowModule (copy), conversationEntryModule (copy)
 		local item = p2.item
 		
 		return if item.isChatLandingModal then roactModule.createElement(chatLandingModalContainerModule, {}) elseif item.isGroupLink then roactModule.createElement(conversationGroupsEntryContainerModule, { entryHeight = p1.ENTRY_HEIGHT }) elseif p1.isPartyQuickStartEnabled() and item.isQuickStartLink then roactModule.createElement(partyQuickStartContainerModule, { entryHeight = p1.ENTRY_HEIGHT }) elseif partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and item.isSocialCarousel then reactModule.createElement(socialCarouselModule.Entry, {
@@ -151,7 +151,7 @@ function conversationList.init(p1)
 		}) elseif fFlagAppIaScrollAway and item.isCanvasTopPadding then roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, item.height)
-		}) elseif fFlagAppChatSignalsMessageStore then reactModule.createElement(conversationRowModule, {
+		}) elseif shouldUseFoundationConversationRow then reactModule.createElement(conversationRowModule, {
 			entryHeight = p1.ENTRY_HEIGHT,
 			conversationId = tostring(item.id),
 			isSquadEnabled = p1.props.canAccessParty == true,
@@ -161,7 +161,6 @@ function conversationList.init(p1)
 			key = "ConversationEntry" .. tostring(item.id),
 			fireImpressionEvent = p1.props.fireConversationImpressionEvent,
 			fireClickEvent = p1.props.fireConversationClickedEvent,
-			showBackground = (p1.props.rowProps or {}).showBackground,
 			localUserId = p1.props.localUserId,
 			debugCellValue = if p1.props.isDebugEnabled then tostring(item.id) else nil
 		}) else roactModule.createElement(conversationEntryModule, {

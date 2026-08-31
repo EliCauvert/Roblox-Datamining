@@ -14,15 +14,15 @@ local images = UIBloxModule.App.ImageSet.Images
 local iconName = foundationModule.Enums.IconName
 local domLocatorsModule = require(appChat.Utils.DomLocators)
 local customConversationListEntryModule = require(script.Parent.CustomConversationListEntry)
-local customConversationListRowModule = require(script.Parent.CustomConversationListRow)
-local fFlagAppChatCustomConversationListRowModule = require(appChat.Flags.FFlagAppChatCustomConversationListRow)
+local customConversationListRowModule = require(script.Parent.CustomConversationListRow.CustomConversationListRow)
+local fFlagAppChatUseFoundationCustomConversationListRowModule = require(appChat.Flags.FFlagAppChatUseFoundationCustomConversationListRow)
 local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local enumScreensModule = require(appChat.EnumScreens)
 local var1 = if game.PlaceId > 0 then tostring(game.PlaceId) else nil
 local var2 = if game.GameId > 0 then tostring(game.GameId) else nil
 
 function PartyQuickStartContainer(p1)
-	-- upvalues: useAnalyticsModule (ref), useChatPlacementContext (ref), useNavigation (ref), useLocalization (ref), reactModule (ref), httpService (ref), eventNamesModule (ref), var1 (ref), var2 (ref), enumScreensModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), fFlagAppChatCustomConversationListRowModule (ref), customConversationListRowModule (ref), iconName (ref), customConversationListEntryModule (ref), images (ref)
+	-- upvalues: useAnalyticsModule (ref), useChatPlacementContext (ref), useNavigation (ref), useLocalization (ref), reactModule (ref), httpService (ref), eventNamesModule (ref), var1 (ref), var2 (ref), enumScreensModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), fFlagAppChatUseFoundationCustomConversationListRowModule (ref), customConversationListRowModule (ref), iconName (ref), customConversationListEntryModule (ref), images (ref)
 	local var3 = useAnalyticsModule()
 	local var4 = useChatPlacementContext()
 	local var5 = useNavigation()
@@ -43,7 +43,7 @@ function PartyQuickStartContainer(p1)
 	end, { var3, var5, var4.chatPlacement })
 	local var8 = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingConversationListHeader("startParty") else nil
 	
-	return if fFlagAppChatCustomConversationListRowModule then reactModule.createElement(customConversationListRowModule, {
+	return if fFlagAppChatUseFoundationCustomConversationListRowModule then reactModule.createElement(customConversationListRowModule, {
 		entryHeight = p1.entryHeight,
 		entryIcon = iconName.PersonPlay,
 		onActivated = var7,

@@ -2,7 +2,6 @@
 local sharedFlagsModule = require(profilePlatform.Parent.SharedFlags)
 local enumsModule = require(profilePlatform.Common.Enums)
 local profileTypes = enumsModule.ProfileTypes
-local fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule = require(profilePlatform.Flags.FFlagProfilePlatformUpdateUXForNonSocialCommunities)
 local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
 local fFlagProfilePlatformEditBackgroundMenuItemModule = require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
 local fFlagProfilePlatformEnableEditLookModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditLook)
@@ -74,12 +73,10 @@ table.insert(t, enumsModule.ProfileActions.LeaveCommunity)
 table.insert(t, enumsModule.ProfileActions.MakePrimaryCommunity)
 table.insert(t, enumsModule.ProfileActions.RemovePrimaryCommunity)
 table.insert(t, enumsModule.ProfileActions.Report)
+table.insert(t, enumsModule.ProfileActions.ViewFullProfile)
+table.insert(t, enumsModule.ProfileActions.Follow)
+table.insert(t, enumsModule.ProfileActions.Unfollow)
 
-if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule then
-	table.insert(t, enumsModule.ProfileActions.ViewFullProfile)
-	table.insert(t, enumsModule.ProfileActions.Follow)
-	table.insert(t, enumsModule.ProfileActions.Unfollow)
-end
 return {
 	[profileTypes.User] = list,
 	[profileTypes.Community] = t,

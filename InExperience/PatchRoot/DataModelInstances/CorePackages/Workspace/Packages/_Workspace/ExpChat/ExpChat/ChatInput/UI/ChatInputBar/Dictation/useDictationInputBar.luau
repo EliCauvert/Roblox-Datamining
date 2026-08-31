@@ -20,8 +20,14 @@ local fIntLinkingProtocolFetchTimeoutMS = sharedFlagsModule.FIntLinkingProtocolF
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 local fFlagExpChatDictationFTUXModule = require(expChat.Flags.FFlagExpChatDictationFTUX)
 local fFlagExpChatDictationU13PolicyToastModule = require(expChat.Flags.FFlagExpChatDictationU13PolicyToast)
+local fFlagExpChatDictationMicToastFixModule = require(expChat.Flags.FFlagExpChatDictationMicToastFix)
 local expChatDictationMicToastAnalytics = game:DefineFastFlag("ExpChatDictationMicToastAnalytics", false)
-local linkingResumeOnDataModelThread = require(expChat.Flags.FFlagExpChatDictationMicToastFix) and game:GetEngineFeature("LinkingResumeOnDataModelThread")
+local list = {
+	"CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody",
+	"CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate"
+}
+local expChatDictationNoMicAccessToastBodyKeyIndex = list[game:DefineFastInt("ExpChatDictationNoMicAccessToastBodyKeyIndex", 1)] or list[1]
+local linkingResumeOnDataModelThread = fFlagExpChatDictationMicToastFixModule and game:GetEngineFeature("LinkingResumeOnDataModelThread")
 local localizationModule = require(expChat.Localization)
 local universeChatSystemMessageAddedModule = require(expChat.Actions.UniverseChatSystemMessageAdded)
 local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
@@ -56,7 +62,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatDictationFTUXModule (ref), useDispatch (ref), useDictationTelemetryModule (ref), expChatDictationMicToastAnalytics (ref), useDictationEligibilityModule (ref), useIsLocalUserUnder13Module (ref), u13PolicyToastStorageModule (ref), useAsync (ref), linkingResumeOnDataModelThread (ref), fFlagEnableRetryForLinkingProtocolFetch (ref), fIntLinkingProtocolFetchRetries (ref), default (ref), settingsRoute (ref), fIntLinkingProtocolFetchTimeoutMS (ref), localizationModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), universeChatSystemMessageAddedModule (ref), dictationErrorReason (ref), dictationAnalyticsModule (ref), setUIBloxToast (ref), useTranscribedSamplesModule (ref), dictationModeModule (ref), fFlagExpChatDictationU13PolicyToastModule (ref), permissionStatus (ref), useDictation (ref), signalsReactModule (ref), dictationState (ref), fFlagExpChatLongPressContinuousDictation (ref), fFlagExpChatContinuousDictation (ref), useDictationFTUXModule (ref), useLongPressModule (ref)
+	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatDictationFTUXModule (ref), useDispatch (ref), useDictationTelemetryModule (ref), expChatDictationMicToastAnalytics (ref), useDictationEligibilityModule (ref), useIsLocalUserUnder13Module (ref), u13PolicyToastStorageModule (ref), useAsync (ref), linkingResumeOnDataModelThread (ref), fFlagEnableRetryForLinkingProtocolFetch (ref), fIntLinkingProtocolFetchRetries (ref), default (ref), settingsRoute (ref), fIntLinkingProtocolFetchTimeoutMS (ref), localizationModule (ref), expChatDictationNoMicAccessToastBodyKeyIndex (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), universeChatSystemMessageAddedModule (ref), dictationErrorReason (ref), dictationAnalyticsModule (ref), setUIBloxToast (ref), useTranscribedSamplesModule (ref), dictationModeModule (ref), fFlagExpChatDictationU13PolicyToastModule (ref), permissionStatus (ref), useDictation (ref), signalsReactModule (ref), dictationState (ref), fFlagExpChatLongPressContinuousDictation (ref), fFlagExpChatContinuousDictation (ref), useDictationFTUXModule (ref), useLongPressModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local var2 = foundationModule.Hooks.useCursor({
 		radius = UDim.new(0, var1.Radius.Circle),
@@ -83,7 +89,7 @@ return function(p1)
 		if not linkingResumeOnDataModelThread then
 			return false
 		elseif not fFlagEnableRetryForLinkingProtocolFetch then
-			var15, var65 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
+			var15, var68 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
 			
 			return var15 and var16 == true
 		end
@@ -110,11 +116,11 @@ return function(p1)
 		transcriptionFailedText = "CoreScripts.TextChat.ChatWindow.TranscriptionFailed",
 		transcriptionLanguageUnsupportedText = "CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported",
 		noMicAccessToastHeader = "CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader",
-		noMicAccessToastBody = "CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody",
 		u13PolicyToastHeader = "CoreScripts.TextChat.ChatWindow.DictationU13PolicyToastHeader",
 		u13PolicyToastBody = "CoreScripts.TextChat.ChatWindow.DictationU13PolicyToastBody",
 		u13MicAccessToastHeader = "CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader",
-		u13MicAccessToastBody = "CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody"
+		u13MicAccessToastBody = "CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody",
+		noMicAccessToastBody = expChatDictationNoMicAccessToastBodyKeyIndex
 	})
 	local var18 = if var17.transcriptionFailedText and var17.transcriptionFailedText ~= "" then var17.transcriptionFailedText else "Sorry did not get that! Try to speak again."
 	local var19 = if var17.transcriptionLanguageUnsupportedText and var17.transcriptionLanguageUnsupportedText ~= "" then var17.transcriptionLanguageUnsupportedText else "Sorry, that language isn't supported yet."
