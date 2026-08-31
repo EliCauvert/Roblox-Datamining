@@ -225,12 +225,10 @@ Authentication.AccountSwitch.Action.SwitchAccount,Beralih Akun
 Authentication.AccountSwitch.Description.AccountLimit.2,"Kamu telah mencapai batas akun. Untuk menambahkan akun baru, hapus satu akun terlebih dahulu."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,"Dengan melanjutkan sebagai {username}, kamu akan log out dari akunmu yang lain."
 Authentication.AccountSwitch.Description.LogoutConfirmation,Kamu harus log out dari akun Roblox kamu yang lain di perangkat ini sebelum menambahkan akun baru
-Authentication.AccountSwitch.Description.ParentLogoutConfirmation,Kamu harus log out dari akun Roblox kamu yang lain di perangkat ini sebelum menambahkan akun baru dengan hak istimewa orang tua
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Coba lagi nanti
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Setelah kamu log out, semua akun akan dihapus dari perangkat ini."
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,"Jika kamu melakukan ini, kamu tidak akan lagi melihat akun ini di perangkat ini, kecuali kamu log in kembali. Kamu akan kembali ke halaman arahan."
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,Coba log in secara langsung
-Authentication.AccountSwitch.Header.CantSwitchAccounts,Tidak Dapat Beralih Akun
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,Tidak dapat beralih akun
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Header.RemoveCurrentAccount,Hapus akun saat ini?
@@ -671,6 +669,7 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_RequiredSkinningTransfer,"{ass
 Common.UGCValidation.ErrorLabel.AccessorySkinning_RigidIsSkinned,Aksesori kaku memiliki data skinning yang tidak didukung. Pastikan tulang tidak diimpor bersama mesh
 Common.UGCValidation.ErrorLabel.AccessorySkinning_TransferJointWithoutAutoSkin,"Handle berisi sendi {jointName}, yang hanya diperbolehkan jika WrapLayer.AutoSkin diatur ke EnabledOverride."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,Verteks yang terikat ke sendi transfer harus memiliki bobot penuh.
+Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,Bundel paket animasi berisi ID animasi duplikat '{animationId}' yang digunakan oleh beberapa klip: {instancePaths}. Setiap klip animasi harus merujuk ke aset animasi yang unik.
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,Bundel paket animasi tidak memiliki tipe animasi yang diharapkan: {missingAnimationTypes}. Setiap tipe animasi harus memiliki 1 Folder R15Anim yang tepat berisi children StringValue yang diharapkan.
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,"Animasi '{animationName}' memiliki nilai Bobot {weight}, tetapi Bobot harus lebih besar dari 0. Perbaiki animasi."
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Tidak dapat menemukan {ExpectedClass} yang diperlukan bernama {ExpectedName} di dalam {ParentPath}
@@ -718,7 +717,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation memi
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation berisi Curve dengan terlalu banyak key. Jumlah maksimum yang diizinkan per Curve adalah {maxAllowed}. Perbaiki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation berisi lebih dari {maxAllowed} MarkerCurve. Pastikan descendant MarkerCurve tidak lebih dari {maxAllowed}.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation berisi MarkerCurve dengan {count} Marker. Jumlah maksimum yang diizinkan per MarkerCurve adalah {maxAllowed}. Perbaiki animasi.
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"Animasi yang dipublikasikan menetapkan translasi maksimum bagian sebesar {taggedTranslation} kotak, tetapi hasil perhitungan data animasinya adalah {calculatedTranslation} kotak. Publikasikan ulang animasi."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation berisi child yang tidak diharapkan: {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Kepala Dinamis di marketplace harus dikurung dengan benar sehingga titik lengkung mata dan mulut pada cage sejajar dengan titik lengkung mesh. Tingkatkan kurungan (caging) dan keselarasan dengan mesh.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Tidak dapat mendeteksi ekspresi senyum untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mulut agar sesuai dengan posisi mulut di kepala dan pastikan mulut dapat menunjukkan ekspresi senyum.
@@ -729,6 +727,10 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Kepala Dinamis di marketplace
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Tidak dapat mendeteksi ekspresi mata kanan tertutup untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mata kanan agar sesuai dengan posisi mata kanan di kepala dan pastikan mata tersebut dapat ditutup.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Tidak dapat mendeteksi ekspresi cemberut untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mulut agar sesuai dengan posisi mulut di kepala dan pastikan mulut dapat menunjukkan ekspresi cemberut.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Aset ini menggunakan peta emisif yang hanya tersedia untuk kreator dalam Program Kreator Tepercaya. Hapus semua konten peta emisif atau gabung ke program sebelum meng-upload.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Animasi yang dipublikasikan tidak memiliki nilai translasi maksimum bagian yang valid. Publikasikan ulang animasi.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Animasi yang dipublikasikan tidak memiliki penanda emote UGC yang valid. Publikasikan ulang animasi.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Translasi maksimum bagian tidak dapat dihitung dari data animasi yang dipublikasikan. Publikasikan ulang animasi.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Animasi yang dipublikasikan menetapkan translasi maksimum bagian sebesar {taggedTranslation} kotak, tetapi hasil perhitungan data animasinya adalah {calculatedTranslation} kotak. Publikasikan ulang animasi."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Properti InternalOverrideFACSData pada FaceControls harus kosong saat proses upload.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FAC terdeteksi memperbesar kepala Anda menjadi {modPercent}%, tetapi mengubah kepala bertentangan dengan kebijakan marketplace untuk animasi wajah."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FAC terdeteksi memperkecil kepala Anda menjadi {modPercent}%, tetapi mengubah kepala bertentangan dengan kebijakan marketplace untuk animasi wajah."
@@ -1178,6 +1180,7 @@ Feature.Accessibility.Action.ScrollUp,Scroll ke Atas
 Feature.Accessibility.AppTheme.CategoryCalm,Tenang
 Feature.Accessibility.AppTheme.CategoryDynamic,Dinamis
 Feature.Accessibility.AppTheme.CircuitRush,Lesat Sirkuit
+Feature.Accessibility.AppTheme.Classic,Klasik
 Feature.Accessibility.AppTheme.CosmicDust,Debu Kosmik
 Feature.Accessibility.AppTheme.Default,
 Feature.Accessibility.AppTheme.ElectricLime,Hijau Elektrik
@@ -1194,7 +1197,8 @@ Feature.Accessibility.AppTheme.StarBurst,Kilau Bintang
 Feature.Accessibility.AppTheme.SuperCharge,Energi Prima
 Feature.Accessibility.Description.AppThemeMode,Pilih mode aplikasi. Perangkatmu yang lain tidak akan terpengaruh.
 Feature.Accessibility.Description.DeviceAppTheme,Pilih tema aplikasi. Ini akan terlihat di semua tipe perangkat.
-Feature.Accessibility.Description.DeviceAppThemeUpsell,Jelajahi tema eksklusif Plus untuk menyesuaikan pengalaman virtualmu. Coba sekarang dan subscribe untuk menyimpan pilihanmu.
+Feature.Accessibility.Description.DeviceAppThemeExclusive,Jelajahi tema eksklusif Plus untuk menyesuaikan pengalaman virtualmu. Coba sekarang dan subscribe untuk menyimpan pilihanmu.
+Feature.Accessibility.Description.DeviceAppThemeUpsell,
 Feature.Accessibility.Description.DeviceLevelTheme,Pilih tema untuk perangkat ini. (Catatan: Pengaturan ini tidak akan mengubah tampilan Roblox-mu di perangkat lain.)
 Feature.Accessibility.Description.Haptics,Mengendalikan getaran keseluruhan aplikasi Roblox
 Feature.Accessibility.Description.LaunchAtStartup,Luncurkan Roblox secara otomatis saat saya memulai komputer
@@ -1216,6 +1220,7 @@ Feature.Accessibility.Heading.DeviceAppTheme,Tema aplikasi
 Feature.Accessibility.Heading.DeviceLevelTheme,Tema level perangkat
 Feature.Accessibility.Heading.DevicePreferences,Preferensi Perangkat
 Feature.Accessibility.Heading.DevicePreferencesV2,
+Feature.Accessibility.Heading.ExclusiveThemes,Tema eksklusif
 Feature.Accessibility.Heading.LaunchAtLogin,Luncurkan saat log in
 Feature.Accessibility.Heading.LaunchAtStartup,Luncurkan saat startup
 Feature.Accessibility.Heading.MinimizeToTray,Perkecil ke tray saat ditutup
@@ -1660,11 +1665,14 @@ Feature.Avatar.Action.Zoom,Memperbesar
 Feature.Avatar.AvatarWidgetTitle,Jelajahi Gaya
 Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,Publikasikan
 Feature.Avatar.BackgroundGeneration.Action.Upload,Upload
 Feature.Avatar.BackgroundGeneration.Action.View,
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Buat latar belakang dengan Plus.
+Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,"Jika kamu keluar sekarang, latar belakang ini akan dihapus."
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Kreasimu siap digunakan.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Latar belakang ini dibuat dengan AI. Dengan memublikasikan, kamu mengonfirmasi bahwa latar belakang ini mematuhi Standar Komunitas Roblox dan tidak menggunakan konten yang haknya tidak kamu miliki. Latar belakang ini akan di-review sebelum muncul di inventarismu, dan item yang dipublikasikan tidak dapat diedit."
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Latar belakang ini dibuat dengan AI. Dengan meng-upload, kamu mengonfirmasi bahwa latar belakang ini mematuhi Standar Komunitas Roblox dan tidak menggunakan konten yang haknya tidak kamu miliki. Latar belakang ini akan di-review sebelum muncul di inventarismu. Item yang di-upload tidak dapat diedit."
@@ -1685,6 +1693,7 @@ Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Deskripsikan latar belakan
 Feature.Avatar.BackgroundGeneration.Status.Generating,Membuat latar belakangmu…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Mempersiapkan latar belakangmu…
 Feature.Avatar.BackgroundGeneration.Title,Buat Latar Belakang
+Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,Hapus latar belakang ini?
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publikasikan ke inventaris
 Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
@@ -2162,6 +2171,7 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Blokir {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Memblokir pengguna ini akan menghapusnya sebagai Koneksi atau pengikut. Dia tidak akan dapat mengirim pesan, permintaan, atau undangan kepadamu.<br /><br />Dia tidak akan diberi tahu bahwa kamu memblokirnya."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Memblokir pengguna ini akan menghapusnya sebagai teman atau pengikut. Dia tidak akan dapat mengirim pesan, permintaan, atau undangan kepadamu.<br /><br />Dia tidak akan diberi tahu bahwa kamu memblokirnya."
+Feature.Build.Action.Add,Tambah
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,Tambahkan playtester
 Feature.Build.Action.AddPlaytesters,
@@ -2175,7 +2185,9 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Salin teks
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,Jangan tanya lagi
+Feature.Build.Action.DontShowAgain,Jangan tampilkan lagi
 Feature.Build.Action.HideAutosaved,Sembunyikan yang disimpan otomatis
 Feature.Build.Action.ManageLimit,Kelola batas
 Feature.Build.Action.Next,
@@ -2183,33 +2195,90 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,Beri saya notifikasi
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Buka pengaturan
+Feature.Build.Action.Play,Mainkan
 Feature.Build.Action.Playtest,Playtest
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,Publikasikan yang terbaru
 Feature.Build.Action.Restore,Pulihkan
+Feature.Build.Action.Resume,CV
 Feature.Build.Action.Revert,
 Feature.Build.Action.SetDailyLimit,Atur batas harian
 Feature.Build.Action.SetLimit,Atur batas
 Feature.Build.Action.Settings,
 Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,Bagikan link
+Feature.Build.Action.ShowMore,
+Feature.Build.Action.Stats,Statistik
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Perbarui rating
 Feature.Build.Action.UpdateWithChanges,Perbarui dengan perubahan
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Lihat penggunaan
+Feature.Build.Analytics.AnalyzeChatPrompt,Berapa {analyzeName} saya selama {days} hari terakhir?
+Feature.Build.Analytics.AnalyzeName.Arppu,pendapatan rata-rata per pengguna berbayar
+Feature.Build.Analytics.AnalyzeName.D1Retention,retensi hari pertama
+Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,pengguna aktif harian
+Feature.Build.Analytics.AnalyzeName.PayerConversion,konversi pengguna nongratis
+Feature.Build.Analytics.AnalyzeName.PlaythroughRate,tingkat penyelesaian
+Feature.Build.Analytics.AnalyzeName.TotalPlaytime,total waktu main
+Feature.Build.Analytics.Description.Arppu,Rata-rata pendapatan per pengguna berbayar adalah total Robux yang diperoleh dibagi jumlah pemain berbayar. Ini menunjukkan jumlah rata-rata yang dibelanjakan setiap pembeli.
+Feature.Build.Analytics.Description.D1Retention,Retensi hari pertama mengukur berapa banyak pemain yang baru pertama kali bermain yang kembali 1 hari kemudian. Ini adalah indikator awal seberapa menarik pengalaman virtualmu.
+Feature.Build.Analytics.Description.DailyActiveUsers,Pengguna aktif harian menghitung pemain unik yang meluncurkan pengalaman virtualmu setiap hari. Lacak untuk melihat berapa banyak orang yang terus kembali dan untuk melihat pertumbuhan atau penurunan.
+Feature.Build.Analytics.Description.PayerConversion,Konversi pengguna nongratis adalah persentase pemain yang membelanjakan Robux di pengalaman virtualmu. Gunakan untuk mengukur seberapa efektif monetisasimu mengubah pemain menjadi pembeli.
+Feature.Build.Analytics.Description.PlaythroughRate,Tingkat penyelesaian adalah persentase kunjungan yang menyelesaikan seluruh sesi bermain. Tingkat yang lebih tinggi menunjukkan bahwa pemain merasa pengalaman virtualmu mudah dimainkan dan layak diselesaikan.
+Feature.Build.Analytics.Description.TotalPlaytime,Total waktu main adalah jumlah waktu yang dihabiskan semua pemain di pengalaman virtualmu selama periode tersebut. Peningkatan waktu main biasanya menandakan sesi yang lebih menarik.
+Feature.Build.Analytics.DurationHours,{number} j
+Feature.Build.Analytics.KeyStats,Statistik utama
+Feature.Build.Analytics.LastMonth,Bulan lalu
+Feature.Build.Analytics.LastWeek,
+Feature.Build.Analytics.Likes,Suka
+Feature.Build.Analytics.Month.Apr,
+Feature.Build.Analytics.Month.Aug,
+Feature.Build.Analytics.Month.Dec,
+Feature.Build.Analytics.Month.Feb,
+Feature.Build.Analytics.Month.Jan,
+Feature.Build.Analytics.Month.Jul,Jul
+Feature.Build.Analytics.Month.Jun,Jun
+Feature.Build.Analytics.Month.Mar,
+Feature.Build.Analytics.Month.May,
+Feature.Build.Analytics.Month.Nov,
+Feature.Build.Analytics.Month.Oct,
+Feature.Build.Analytics.Month.Sep,
+Feature.Build.Analytics.NoData,Tidak ada data yang tersedia
+Feature.Build.Analytics.Overview,Ringkasan
+Feature.Build.Analytics.Percent,{number}%
+Feature.Build.Analytics.Players,Pemain
+Feature.Build.Analytics.Sheet.Analyze,Analisis
+Feature.Build.Analytics.Sheet.ViewInOverview,Lihat di Ringkasan
+Feature.Build.Analytics.Summary.Arppu,Rata-rata Robux yang diperoleh per pemain berbayar.
+Feature.Build.Analytics.Summary.D1Retention,Persentase pemain baru yang kembali pada hari berikutnya.
+Feature.Build.Analytics.Summary.DailyActiveUsers,Pemain unik yang bergabung selama periode yang dipilih.
+Feature.Build.Analytics.Summary.PayerConversion,Persentase pemain yang melakukan pembelian.
+Feature.Build.Analytics.Summary.PlaythroughRate,Persentase sesi yang selesai sepenuhnya.
+Feature.Build.Analytics.Summary.TotalPlaytime,Total jam yang dihabiskan pemain di pengalaman virtualmu.
+Feature.Build.Analytics.Title.Arppu,Pendapatan Rata-rata per Pengguna Berbayar
+Feature.Build.Analytics.Title.ConcurrentUsers,Total pemain
+Feature.Build.Analytics.Title.D1Retention,Retensi hari ke-1
+Feature.Build.Analytics.Title.DailyActiveUsers,Pengguna aktif harian
+Feature.Build.Analytics.Title.PayerConversion,Konversi pengguna nongratis
+Feature.Build.Analytics.Title.PlaythroughRate,Tingkat penyelesaian
+Feature.Build.Analytics.Title.TotalPlaytime,Total waktu main
+Feature.Build.Analytics.Visits,Kunjungan
 Feature.Build.Content.NewGame,Game baru
+Feature.Build.Description.AdCampaignModerationReview,Semua kampanye iklan di-review oleh moderasi Roblox. Proses ini bisa membutuhkan waktu hingga 24 jam.
+Feature.Build.Description.AdCampaignSheetRunDates,Berlangsung {startDate}—{endDate}
+Feature.Build.Description.AdvertisingAgreement,"Dengan melanjutkan, kamu menyetujui {advertisingTermsStart}Ketentuan Periklanan{advertisingTermsEnd} dan {advertisingStandardsStart}Standar Periklanan Roblox{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"Jika kamu mengarsipkan game ini, game ini akan dihapus dari Build. Kamu masih dapat mengakses dan memulihkannya dari Pusat Kreator atau Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Gunakan Robux-mu untuk membeli kuota penggunaan Build tambahan secara otomatis saat kamu berkreasi. Kamu dapat menetapkan batas pemakaian uang harian kapan saja.
 Feature.Build.Description.BoostAudienceForPlays,Jangkau lebih banyak audiens agar game-mu makin ramai.
-Feature.Build.Description.BoostGameAudience,Tambah audiens game-mu
 Feature.Build.Description.BuildIdeaGame,Ubah idemu menjadi game
 Feature.Build.Description.BuildReplyNotif,Dapatkan notifikasi saat Build memiliki balasan untukmu.
 Feature.Build.Description.BuyRobuxToCreate,"Beli lebih banyak Robux untuk terus berkreasi, atau tunggu hingga kuota penggunaan Build gratismu direset besok."
 Feature.Build.Description.BuyUsageOrWait,"Beli lebih banyak kuota penggunaan Build dengan Robux, atau tunggu hingga batas harianmu direset."
 Feature.Build.Description.CampaignRunDates,Kampanyemu akan berlangsung {startDate}—{endDate}
 Feature.Build.Description.ChoosePlaytesters,Pilih teman untuk membantumu melakukan playtest.
+Feature.Build.Description.EarnedRobuxAppliedFirst,"Jika kamu punya perolehan Robux, Robux tersebut akan digunakan terlebih dahulu untuk membayar biaya kampanye iklan."
 Feature.Build.Description.EnableBuildNotifs,Aktifkan notifikasi di pengaturan perangkatmu untuk mendapatkan update dari Build.
 Feature.Build.Description.FriendsLinkOnly,Hanya temanmu yang dapat mengakses link ini. Ubah pengaturan Audiens game-mu jika kamu ingin lebih banyak pengguna memainkannya.
 Feature.Build.Description.GameCreationDone,Saya telah selesai membuat dan memublikasikan game-mu. Kamu dapat membukanya untuk melakukan playtest.
@@ -2223,19 +2292,27 @@ Feature.Build.Description.PlaytestLatest,Kamu sedang melakukan playtest pada ver
 Feature.Build.Description.PlaytestLocked,Kamu dapat memulai playtest setelah membuat game pertamamu.
 Feature.Build.Description.PlaytesterAccess,Tambahkan teman sebagai playtester atau ubah pengaturan Audiens game-mu agar lebih banyak pengguna dapat memainkannya.
 Feature.Build.Description.PrivateShare,Ubah pengaturan Audiens game-mu untuk membagikannya.
+Feature.Build.Description.PromoteGameWithAdCampaign,Jangkau lebih banyak audiens dengan kampanye iklan {durationDays} hari agar game-mu lebih mudah ditemukan.
 Feature.Build.Description.RaiseLimitOrWait,"Tingkatkan batas harian Robux-mu untuk terus berkreasi, atau tunggu hingga direset besok."
 Feature.Build.Description.RatingAgreement,"Dengan memublikasikan, kamu menyetujui bahwa rating konten ini akurat."
 Feature.Build.Description.RestoreLatest,Versi ini akan menjadi versi publikasi terbarumu.
 Feature.Build.Description.RevertToVersion,Konfirmasi untuk membatalkan perubahan terakhir dan kembali ke {VERSION}.
+Feature.Build.Description.ShareLatest,Bagikan apa yang berubah di versi terbarumu.
 Feature.Build.Description.VersionChanges,Beri tahu pemain perubahan pada versi ini.
 Feature.Build.Header.AccessSharing,Akses & berbagi
+Feature.Build.Header.AllVersions,Semua versi
 Feature.Build.Header.ContentMaturity,Kedewasaan konten
 Feature.Build.Header.CustomAnswer,Jawaban kustom
 Feature.Build.Header.GameDetails,Detail game
-Feature.Build.Header.Overview,Ringkasan
+Feature.Build.Header.Overview,
+Feature.Build.Header.PastCampaigns,Kampanye sebelumnya
+Feature.Build.Header.UpdateDetails,Perbarui detail
 Feature.Build.Label.Access,Akses
+Feature.Build.Label.AdClicks,Klik iklan
+Feature.Build.Label.AdViews,Tayangan iklan
 Feature.Build.Label.AdditionalUsage,Kuota penggunaan Build tambahan
 Feature.Build.Label.AdditionalUsed,{USED} dari {LIMIT} digunakan
+Feature.Build.Label.AdsManager,Manajer Iklan
 Feature.Build.Label.All,
 Feature.Build.Label.AmountAvailable,{AMOUNT} tersedia
 Feature.Build.Label.Autosaved,Disimpan otomatis
@@ -2243,18 +2320,23 @@ Feature.Build.Label.Available,tersedia
 Feature.Build.Label.BackToBuild,Kembali ke Build
 Feature.Build.Label.Building,Membangun...
 Feature.Build.Label.CaptureLibrary,Perpustakaan Media
+Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} dari {MAX_SELECTIONS} dipilih
 Feature.Build.Label.ContentRating,Rating konten
 Feature.Build.Label.Created,Dibuat
 Feature.Build.Label.CreatedDate,"{DAY} {MONTH}, {YEAR}"
 Feature.Build.Label.CreatorHub,Pusat Kreator
+Feature.Build.Label.DateRange,{startDate}—{endDate}
 Feature.Build.Label.Deleted,Dihapus
 Feature.Build.Label.DescribeIdea,Deskripsikan ide
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,
+Feature.Build.Label.EasyPerformanceReport,Laporan performa mudah
 Feature.Build.Label.Error,Kesalahan
+Feature.Build.Label.Free,Gratis
 Feature.Build.Label.FreeBuildUsage,Penggunaan Build gratis
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Khusus teman
+Feature.Build.Label.GamePlays,Game dimainkan
 Feature.Build.Label.GetMoreBuildUsage,Dapatkan lebih banyak kuota penggunaan Build
 Feature.Build.Label.Hi,Hai
 Feature.Build.Label.IconThumbnails,Ikon & thumbnail
@@ -2263,12 +2345,15 @@ Feature.Build.Label.InProgress,Sedang berlangsung
 Feature.Build.Label.InputNeeded,Input diperlukan
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Terbatas
+Feature.Build.Label.Live,Live
 Feature.Build.Label.Loading,
+Feature.Build.Label.MaximizeForGamePlays,Maksimalkan agar game lebih banyak dimainkan
 Feature.Build.Label.Models3D,Model 3D
 Feature.Build.Label.NoLimit,Tidak ada batas
 Feature.Build.Label.NotStarted,Belum dimulai
 Feature.Build.Label.Pending,Pending
 Feature.Build.Label.PercentUsed,{PERCENT}% digunakan
+Feature.Build.Label.PlayTime,Waktu bermain
 Feature.Build.Label.PreviouslyPublished,Dipublikasikan sebelumnya
 Feature.Build.Label.Private,Privat
 Feature.Build.Label.Public,Publik
@@ -2287,6 +2372,7 @@ Feature.Build.Label.SelectOption,Pilih opsi
 Feature.Build.Label.ShareAddedFriends,Bagikan kepada teman yang kamu tambahkan
 Feature.Build.Label.Shared,Dibagikan
 Feature.Build.Label.Sounds,Suara
+Feature.Build.Label.TargetAllRobloxPlayers,Targetkan semua pemain Roblox
 Feature.Build.Label.Thinking,Sedang memproses
 Feature.Build.Label.Title,Judul
 Feature.Build.Label.TitleDescription,Judul & deskripsi
@@ -2354,6 +2440,7 @@ Feature.Build.Label.ToolThumbnailRunning,Mengatur thumbnail game
 Feature.Build.Label.UniverseNumber,Universe {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Tidak Diketahui
 Feature.Build.Label.UnlimitedUsed,{USED} digunakan • Tidak ada batas
+Feature.Build.Label.UpdateTitleDesc,Ubah judul & deskripsi
 Feature.Build.Label.Updated,Di-update
 Feature.Build.Label.Usage,Penggunaan
 Feature.Build.Label.UsageUsed,{USED} digunakan
@@ -2366,6 +2453,14 @@ Feature.Build.Label.VersionTitleDesc,Judul & deskripsi versi
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,Akunmu tidak memenuhi persyaratan untuk menggunakan Build.
 Feature.Build.Message.AccountTooNew,Akunmu terlalu baru untuk dipublikasikan. Coba lagi setelah 2 hari.
+Feature.Build.Message.AdCampaignCreateFailed,Tidak dapat membuat kampanyemu. Coba lagi.
+Feature.Build.Message.AdCampaignCreated,Kampanye iklan telah dibuat
+Feature.Build.Message.AdPerformanceLoadFailed,Tidak dapat me-load performa iklan
+Feature.Build.Message.AdsPromotionBannerSubtitle,Jangkau lebih banyak audiens secara gratis
+Feature.Build.Message.AdsPromotionBannerTitle,Kamu masih punya {promotionCount} promosi gratis
+Feature.Build.Message.AdsPromotionBannerTitleSingular,Kamu masih punya 1 promosi gratis
+Feature.Build.Message.AdsStatsEmpty,Jangkau lebih banyak audiens dengan kampanye iklan agar game-mu lebih mudah ditemukan
+Feature.Build.Message.AdsStatsEmptyFree,Jangkau lebih banyak audiens dengan kampanye iklan gratis agar game-mu lebih mudah ditemukan
 Feature.Build.Message.AllFriendsAdded,Kamu telah menambahkan semua temanmu sebagai playtester.
 Feature.Build.Message.AnswerBuildQuestion,Jawab pertanyaan Build di bawah ini.
 Feature.Build.Message.AssetDetailsUnavailable,Detail aset tidak tersedia.
@@ -2395,12 +2490,14 @@ Feature.Build.Message.GamePublishFailed,Game-mu tidak dapat dipublikasikan. Coba
 Feature.Build.Message.GameShared,Game telah dibagikan
 Feature.Build.Message.GameSharedWith,Game dibagikan kepada {DISPLAY_NAME}
 Feature.Build.Message.HiDisplayName,"Hai, {DISPLAY_NAME}"
+Feature.Build.Message.ImageUploadFailed,Gambar-mu tidak dapat di-upload. Coba lagi.
 Feature.Build.Message.InvalidMessage,"Terjadi kesalahan pada pesanmu. Edit pesan, lalu coba lagi."
 Feature.Build.Message.InvitesLoadFailed,Tidak dapat me-load undangan
 Feature.Build.Message.LimitBelowSpend,Batasan tidak boleh kurang dari {ALREADY_SPENT} Robux yang sudah digunakan hari ini.
 Feature.Build.Message.LinkCopied,Link disalin ke clipboard.
 Feature.Build.Message.LoadingVersions,Me-load riwayat versi...
 Feature.Build.Message.NoAssetsFound,Tidak ada aset yang ditemukan.
+Feature.Build.Message.NoCapturesAvailable,Tidak ada media yang tersedia
 Feature.Build.Message.NoDescriptionProvided,Tidak ada deskripsi yang diberikan.
 Feature.Build.Message.NoFriendsToAdd,Kamu belum memiliki teman untuk ditambahkan. Temukan pengguna untuk terhubung di Roblox terlebih dahulu.
 Feature.Build.Message.NoResults,
@@ -2411,6 +2508,8 @@ Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} dari {MAX_INVITES} playte
 Feature.Build.Message.PublicPublishFailed,"Game-mu telah dipublikasikan, tetapi tidak dapat dibuat publik. Coba lagi."
 Feature.Build.Message.PublishExpandAudience,Publikasikan untuk memperluas audiensmu
 Feature.Build.Message.PublishNotReverted,Publikasimu gagal dibatalkan. Coba lagi.
+Feature.Build.Message.PublishPromotionUpsell,"Selamat, akhirnya game kamu rilis! Kamu punya {promotionCount} promosi gratis yang tersedia untuk menjangkau lebih banyak pemain di Roblox."
+Feature.Build.Message.PublishPromotionUpsellSingular,"Selamat, akhirnya game kamu rilis! Kamu punya 1 promosi gratis yang tersedia untuk menjangkau lebih banyak pemain di Roblox."
 Feature.Build.Message.PublishReverted,Membatalkan publikasi.
 Feature.Build.Message.QuestionnaireNeeded,Game ini diedit di luar Build. Selesaikan kuesioner konten untuk memublikasikannya.
 Feature.Build.Message.ReadyToPlay,Game-mu siap dimainkan di Roblox!
@@ -2433,12 +2532,16 @@ Feature.Build.Message.WhatToCreate,Apa yang ingin kamu buat hari ini?
 Feature.Build.Message.WorkedMinutesSeconds,Bekerja selama {MINUTES}mnt{REM_SECONDS}dtk
 Feature.Build.Message.WorkedSeconds,Bekerja selama {SECONDS}dtk
 Feature.Build.Message.WorkingOnTasks,Mengerjakan tugasmu
-Feature.Build.Notification.Message.Continue,Teruskan chat build-mu untuk melanjutkan.
-Feature.Build.Notification.Message.Review,Teruskan chat build-mu untuk me-review hasilnya.
+Feature.Build.Notification.Message.Continue,Teruskan chat Build-mu untuk melanjutkan.
+Feature.Build.Notification.Message.Review,Teruskan chat Build-mu untuk me-review hasilnya.
 Feature.Build.Notification.Title.Finished,Build selesai
 Feature.Build.Notification.Title.NeedInput,Build membutuhkan input darimu
 Feature.Build.Title.AdCampaignActive,Kampanye iklan aktif
+Feature.Build.Title.AdCampaignDuration,Kampanye iklan {durationDays} hari
 Feature.Build.Title.AddFriendsToPlaytest,Tambahkan teman untuk membantumu melakukan playtest
+Feature.Build.Title.AddImages,Tambahkan gambar
+Feature.Build.Title.AdsStatsEmpty,Mulai kampanye
+Feature.Build.Title.AdsStatsEmptyFree,Mulai kampanye pertamamu
 Feature.Build.Title.ArchiveThisGame,Arsipkan game ini?
 Feature.Build.Title.AssetLibrary,Perpustakaan
 Feature.Build.Title.Audience,Audiens
@@ -2456,17 +2559,22 @@ Feature.Build.Title.FriendsOnlyPlay,Hanya teman yang bisa memainkannya
 Feature.Build.Title.GameCreationDone,Pembuatan game selesai
 Feature.Build.Title.GamePrivate,Game ini privat
 Feature.Build.Title.GenericError,Terjadi kesalahan
+Feature.Build.Title.GetUsers,Dapatkan pengguna
 Feature.Build.Title.NoRobuxForUsage,Tidak ada Robux yang tersisa untuk penggunaan Build
 Feature.Build.Title.Playtesters,Playtester
 Feature.Build.Title.PlaytestersOnlyPlay,Hanya playtester yang bisa memainkannya
+Feature.Build.Title.PromoteGame,Promosikan game-mu
 Feature.Build.Title.PromoteGameFree,Promosikan game-mu secara gratis
 Feature.Build.Title.PushNotifications,Notifikasi Push
 Feature.Build.Title.RevertLastChange,Batalkan perubahan terakhir?
 Feature.Build.Title.Tasks,Tugas
 Feature.Build.Title.TurnActivity,Aktivitas chat saat ini
 Feature.Build.Title.VersionHistory,Riwayat versi
+Feature.Build.Title.VersionInfo,Informasi versi
 Feature.Build.Title.VersionInformation,Informasi Versi
 Feature.Build.Title.VersionNumber,Versi {VERSION}
+Feature.Build.Title.Versions,
+Feature.Build.Title.WhatsIncluded,Dapat apa saja?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,"Tidak, terima kasih"
@@ -2769,7 +2877,7 @@ Feature.Catalog.LabelAnyPrice,Harga Berapa Saja
 Feature.Catalog.LabelClassicHeads,
 Feature.Catalog.LabelCollectibles,Item Koleksi
 Feature.Catalog.LabelContentDeleted,Konten Dihapus
-Feature.Catalog.LabelFree,Gratis
+Feature.Catalog.LabelFree,
 Feature.Catalog.LabelNoResellers,Tidak Ada Reseller
 Feature.Catalog.LabelOffSale,Tidak Dijual
 Feature.Catalog.LabelPants,Celana
@@ -3349,7 +3457,7 @@ Feature.Friends.Label.MyProfile,Profil Saya
 Feature.Friends.Label.NewConnection,Koneksi Baru
 Feature.Friends.Label.NewFriend,Teman Baru
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
-Feature.Friends.Label.NoConnectionYet,{name} belum memiliki koneksi apa pun.
+Feature.Friends.Label.NoFriendsYet,{name} belum berteman dengan siapa pun.
 Feature.Friends.Label.NowTrusted,{username} sekarang adalah teman tepercaya
 Feature.Friends.Label.OneMutual,1 koneksi bersama
 Feature.Friends.Label.PYMK,Pengguna yang Mungkin Kamu Kenal
@@ -3518,7 +3626,7 @@ Feature.GameDetails.Label.TooRepetitive,Terlalu repetitif
 Feature.GameDetails.Label.Unavailable,
 Feature.GameDetails.Label.Updated,
 Feature.GameDetails.Label.Upvoted,Mendukung
-Feature.GameDetails.Label.Visits,Kunjungan
+Feature.GameDetails.Label.Visits,
 Feature.GameDetails.Label.VoiceChat,
 Feature.GameDetails.Label.VoiceEnabled,Suara Diaktifkan
 Feature.GameDetails.Label.Votes,{votes} Suara
@@ -3773,6 +3881,14 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} lagi
+Feature.InExperienceShop.Label.Timer.Day.Plural,{number} hari
+Feature.InExperienceShop.Label.Timer.Day.Singular,1 hari
+Feature.InExperienceShop.Label.Timer.Hour.Plural,{number} jam
+Feature.InExperienceShop.Label.Timer.Hour.Singular,1 jam
+Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} menit
+Feature.InExperienceShop.Label.Timer.Minute.Singular,1 menit
+Feature.InExperienceShop.Label.Timer.Second.Plural,{number} detik
+Feature.InExperienceShop.Label.Timer.Second.Singular,1 detik
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Kamu yakin ingin menghapus item ini dari inventarismu secara permanen? Jika kamu berubah pikiran, kamu harus mendapatkannya lagi di pengalaman virtual."
 Feature.Item.Label.DeleteItemUndercase,Hapus item
 Feature.Landing.Action.PlayNow,Main sekarang
@@ -3827,7 +3943,7 @@ Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Potong Video
 Feature.Moments.Description.CommunityStandards,Periksa Standar Komunitas untuk melihat informasi selengkapnya tentang hal yang boleh dan tidak boleh kamu katakan.
 Feature.Moments.Description.EmptyCapturesLibrary,Mediamu akan muncul di sini.
-Feature.Moments.Description.GenerateTextFeedbackDisclosure,Teks buatan AI. Review sebelum memosting. Kamu bertanggung jawab atas apa yang dipublikasikan.
+Feature.Moments.Description.GenerateTextFeedbackDisclosure,Buatan AI. Review sebelum memosting. Kamu bertanggung jawab atas apa yang dipublikasikan.
 Feature.Moments.Description.HowToCaptureStep1,"Aktifkan Media, gabung ke Pengalaman Virtual, dan pilih menu hamburger"
 Feature.Moments.Description.HowToCaptureStep2,Aktifkan kendali Media
 Feature.Moments.Description.HowToCaptureStep3,Ambil foto dan video gameplay
@@ -3921,6 +4037,7 @@ Feature.NotApproved.Description.AvatarBrokeRules,"Ubah avatarmu. Dalam waktu dek
 Feature.NotApproved.Description.AvatarViolation,INI DAPAT DIHAPUS
 Feature.NotApproved.Description.Ban,Akun kamu telah dinonaktifkan. Kamu dapat mengaktifkannya kembali setelah {date}.
 Feature.NotApproved.Description.Ban.V2,Akunmu ditangguhkan karena riwayat pelanggaranmu. Kamu boleh mengaktifkan ulang akunmu setelah {date}.
+Feature.NotApproved.Description.BannedDescription.Kids,Kamu tidak dapat menggunakan akun ini lagi.
 Feature.NotApproved.Description.Behavior,Perilakumu
 Feature.NotApproved.Description.BrokeRulesBanned,Kami memblokir akunmu karena pelanggaran peraturan yang berulang atau serius.
 Feature.NotApproved.Description.BrokeRulesGeneric,Perilakumu melanggar peraturan komunitas ini.
@@ -3934,15 +4051,20 @@ Feature.NotApproved.Description.CommunityStandards,Patuhi {startLink}Standar Kom
 Feature.NotApproved.Description.Delete,Akun kamu telah diterminasi.
 Feature.NotApproved.Description.FollowTheRules,Pastikan kamu tahu peraturan dan mematuhinya.
 Feature.NotApproved.Description.Foreshadow,"Kami dapat memberimu penangguhan yang lebih lama, atau bahkan memblokir akunmu, jika kamu terus melanggar peraturan."
+Feature.NotApproved.Description.Foreshadow.Kids,"Jika terus melanggar aturan, akunmu mungkin akan ditangguhkan lebih lama. Atau diblokir."
 Feature.NotApproved.Description.LinkedAccounts,Konsekuensi didasarkan pada perilakumu di semua akun yang terhubung.
 Feature.NotApproved.Description.ManualDetectionAutomatedDecision,Kami menggunakan otomatisasi saat membuat keputusan ini
 Feature.NotApproved.Description.ManualDetectionAutomatedDecision.V2,Kami menggunakan sistem otomatis untuk membuat keputusan ini.
 Feature.NotApproved.Description.Mistake,Kamu dapat mengajukan banding atau meminta kami untuk me-review keputusan ini di sini.
+Feature.NotApproved.Description.Mistake.Kids,Apakah kami melakukan kesalahan? Kamu dapat mengajukan banding.
 Feature.NotApproved.Description.Mistake.V2,Apakah kami membuat kesalahan? Kamu dapat mengajukan banding atau meminta kami untuk me-review keputusan ini di sini.
 Feature.NotApproved.Description.Mistake.V3,"Jika menurutmu kami telah membuat kesalahan, kamu bisa mengajukan banding atas keputusan ini."
 Feature.NotApproved.Description.PluralViolation,Salah satu {type} milikmu
 Feature.NotApproved.Description.ReactivationNotice,"Pilih ‘Lanjutkan’ untuk me-review aturan kami, kemudian kamu dapat langsung bermain."
 Feature.NotApproved.Description.ReviewProcess,Kami me-review aktivitasmu menggunakan teknologi dan secara manual.
+Feature.NotApproved.Description.RuleExplanation.Bullets.Bullying.Kids,"Bersikap baik, jangan mengganggu orang. 
+Jangan mengancam untuk menyakiti siapa pun. 
+Lindungi informasi pribadi orang lain."
 Feature.NotApproved.Description.RuleExplanation.Bullets.MisusingRobloxSystems,"Berpura-pura menjadi orang lain
 Melaporkan pengguna atas hal yang tidak terjadi
 Berbohong untuk menipu pengguna agar melakukan sesuatu
@@ -3960,6 +4082,13 @@ Tantangan fisik berbahaya termasuk tren online di dunia nyata
 Hal ilegal atau berbahaya seperti alkohol dan narkoba
 Perjudian, taruhan, atau game peluang untuk mendapatkan hadiah
 Instruksi untuk membuat senjata di dunia nyata"
+Feature.NotApproved.Description.RuleExplanation.Bullets.SexualContent.Kids,"Kita tetap berteman di Roblox.
+Kita tidak menggoda, berciuman, atau berkencan.
+Avatar kita mengenakan pakaian yang sopan."
+Feature.NotApproved.Description.RuleExplanation.Bullets.SharingPII.Kids,"Password
+Nama asli, alamat, nomor ponsel, atau email
+Nama pengguna akun lain
+Foto orang"
 Feature.NotApproved.Description.RuleExplanation.BullyingHarassmentDiscrimination,"Tidak pernah dibenarkan untuk mengatakan hal kasar kepada seseorang atau tentang orang lain. Ini termasuk mengancam untuk menyakitinya, seperti dengan membagikan informasi pribadi atau menyakitinya di kehidupan nyata. 
 Dilarang bersikap kasar kepada seseorang atau mengucilkannya karena identitas, apa yang ia yakini, atau tempat asalnya."
 Feature.NotApproved.Description.RuleExplanation.Dating,"Saat chat, tetaplah bersikap ramah dan bukan menggoda. Perilaku romantis seperti berciuman atau berkencan tidak diperbolehkan. Pakaian avatar juga tidak boleh terlalu terbuka."
@@ -3970,9 +4099,14 @@ Feature.NotApproved.Description.RuleExplanation.PII,"Untuk menjaga keamanan semu
 Feature.NotApproved.Description.RuleExplanation.RealLifeEvents,"Dilarang bersikap tidak sopan terhadap momen tertentu yang terjadi di dunia nyata. Hal ini termasuk merekonstruksi atau mengolok-olok peristiwa atau orang yang terlibat di dalamnya, terutama jika peristiwa tersebut menyedihkan atau menakutkan bagi banyak orang.
 Ini mencakup:"
 Feature.NotApproved.Description.RuleExplanation.SSHAndIllegalRegulatedActivities,"Tidak boleh membuat konten, chat, atau bercanda tentang hal-hal yang berbahaya atau merugikan, seperti:"
+Feature.NotApproved.Description.RuleExplanation.SharingPII.Kids,Jangan bagikan:
 Feature.NotApproved.Description.RuleExplanation.Spam,Tidak boleh mengirim pesan dengan kata-kata yang sama berulang-ulang.
 Feature.NotApproved.Description.RuleExplanation.Swearing,"Jangan menggunakan sumpah serapah. Ini termasuk menggunakan kesalahan ejaan, simbol, atau metode lain untuk mencoba menghindari sistem deteksi."
 Feature.NotApproved.Description.RuleExplanation.ViolentContentAndGore,"Dilarang menampilkan kekerasan realistis atau apa pun yang membuatnya terlihat seperti orang, hewan, atau karakter yang terluka parah secara fisik atau emosional."
+Feature.NotApproved.Description.RuleImportance.Bullets.SharingPII.Kids,"Di dunia digital, mungkin sulit untuk mengetahui siapa yang bisa dipercaya.
+Orang asing bisa menggunakan infomu untuk menemukanmu.
+Berbagi password bisa membuat orang lain mencuri akun atau Robux-mu."
+Feature.NotApproved.Description.RuleImportance.Bullying.Kids,Bersikap jahat dapat menyakiti hati pengguna lain. Bersikap baik memastikan Roblox tetap menyenangkan untuk semua orang.
 Feature.NotApproved.Description.RuleImportance.BullyingHarassmentDiscrimination,"Agar komunitas kami tetap menyenangkan bagi semua pengguna, kami tidak menggunakan kata-kata atau tindakan yang membuat seseorang merasa tidak aman atau tidak nyaman. Roblox terbuka untuk semua ras, etnis, identitas gender, kemampuan, orientasi seksual, dan agama."
 Feature.NotApproved.Description.RuleImportance.Dating,"Dengan menjaga chat dan avatar tetap berfokus pada pertemanan, membantu semua pengguna merasa nyaman."
 Feature.NotApproved.Description.RuleImportance.DirectingUsersOffPlatform,"Roblox memiliki perlindungan keamanan untuk menjaga agar chat dan interaksi tetap aman. Link bisa membawamu ke situs web palsu yang terlihat seperti Roblox untuk mencuri akun dan item-mu. Situs ini juga bisa berisi gambar atau video yang tidak pantas. Jika kamu menukarkan Robux atau item di luar Roblox, pengguna bisa berbohong dan tidak memberikan apa yang mereka janjikan."
@@ -3981,12 +4115,15 @@ Feature.NotApproved.Description.RuleImportance.MisusingRobloxSystems,
 Feature.NotApproved.Description.RuleImportance.PII,"Jika orang asing mengetahui identitasmu di kehidupan nyata, ia bisa mencoba menghubungimu di luar Roblox. Ini berbahaya karena sulit untuk mengetahui secara online apakah seseorang itu baik atau jahat. Karena itu, kami juga tidak pernah membagikan password. Seseorang bisa mencuri akunmu dan semua yang telah kamu peroleh."
 Feature.NotApproved.Description.RuleImportance.RealLifeEvents,"Bagi mereka yang mengalaminya, melihat peristiwa tersebut direkonstruksi atau dijadikan bahan candaan bisa sangat menyakitkan."
 Feature.NotApproved.Description.RuleImportance.SSHAndIllegalRegulatedActivities,"Berbagi konten tentang menyakiti diri sendiri atau orang lain bukanlah tindakan aman. Jika kamu mengalami masa sulit, bicaralah dengan orang dewasa yang kamu percayai. Hal-hal seperti berbagi aksi berbahaya bisa menginspirasi pengguna lain untuk mencobanya dan terluka parah. Dengan tidak membagikan hal-hal ini, kamu membantu menjaga keamanan dirimu dan semua pengguna di Roblox."
+Feature.NotApproved.Description.RuleImportance.SexualContent.Kids,Chat dan avatar yang sopan memastikan Roblox menyenangkan bagi semua orang.
 Feature.NotApproved.Description.RuleImportance.Spam,Spam membuat percakapan sulit diikuti dan mengganggu kesenangan.
 Feature.NotApproved.Description.RuleImportance.Swearing,"Roblox terbuka untuk semua orang, termasuk anak-anak. Kami menggunakan kata-kata yang penuh hormat dan ramah untuk seluruh komunitas kami."
 Feature.NotApproved.Description.RuleImportance.ViolentContentAndGore,Komunitas kami juga terdiri dari anak-anak. Melihat kekerasan ekstrem bisa membuat mereka takut dan tidak nyaman.
 Feature.NotApproved.Description.SecondChance.Details,Kamu bisa kembali bermain sekarang. Kamu tidak akan bisa mengajukan banding atas keputusan ini nanti.
 Feature.NotApproved.Description.SecondChance.Second,Kali ini kamu tidak ditangguhkan karena sebelumnya telah berperilaku secara bertanggung jawab.
+Feature.NotApproved.Description.SuspendedUntil,Akunmu ditangguhkan hingga {date} pukul {time}.
 Feature.NotApproved.Description.Violation,Pemantauan konten telah menetapkan bahwa perilaku kamu di Roblox telah melanggar {startLink}Ketentuan Penggunaan{endLink} kami.
+Feature.NotApproved.Description.WarningDescription.Kids,Kamu melanggar aturan. Akunmu dapat ditangguhkan jika pelanggaran ini terus berlanjut.
 Feature.NotApproved.Heading.AccountBanned,Akun Diblokir
 Feature.NotApproved.Heading.AccountDeleted,Akun Dihapus
 Feature.NotApproved.Heading.AccountTerminated,Akun Diakhiri
@@ -4001,6 +4138,8 @@ Feature.NotApproved.Heading.BannedOneMinute,Diblokir Selama 1 Menit
 Feature.NotApproved.Heading.BannedOneSecond,Diblokir Selama 1 Detik
 Feature.NotApproved.Heading.Error,Terjadi kesalahan yang tidak diketahui. Coba lagi nanti.
 Feature.NotApproved.Heading.ReactivationNotice,Kembali bermain
+Feature.NotApproved.Heading.RecentlyChecked,Temuan kami baru-baru ini
+Feature.NotApproved.Heading.RuleExplanation.Bullying.Kids,Perlakukan orang lain dengan hormat
 Feature.NotApproved.Heading.RuleExplanation.BullyingHarassmentDiscrimination,Buat semua pengguna merasa diterima
 Feature.NotApproved.Heading.RuleExplanation.Dating,Tetap di zona teman
 Feature.NotApproved.Heading.RuleExplanation.DirectingUsersOffPlatform,Tetap di Roblox
@@ -4008,10 +4147,13 @@ Feature.NotApproved.Heading.RuleExplanation.MisusingRobloxSystems,Bermain dengan
 Feature.NotApproved.Heading.RuleExplanation.PII,Jaga informasi pribadi
 Feature.NotApproved.Heading.RuleExplanation.RealLifeEvents,Bersikaplah bijak terhadap peristiwa kehidupan nyata
 Feature.NotApproved.Heading.RuleExplanation.SSHAndIllegalRegulatedActivities,Jaga kesehatan pikiran dan tubuh
+Feature.NotApproved.Heading.RuleExplanation.SexualContent.Kids,Tetap sopan
+Feature.NotApproved.Heading.RuleExplanation.SharingPII.Kids,Jaga informasi pribadimu
 Feature.NotApproved.Heading.RuleExplanation.Spam,Biarkan percakapan mengalir
 Feature.NotApproved.Heading.RuleExplanation.Swearing,Gunakan kata-kata yang baik dan penuh hormat
 Feature.NotApproved.Heading.RuleExplanation.ViolentContentAndGore,Tetap tenang dan terus bermain
 Feature.NotApproved.Heading.RuleImportance,Mengapa ini penting?
+Feature.NotApproved.Heading.RuleImportance.Kids,Mengapa ini penting
 Feature.NotApproved.Heading.SecondChance,"Pelajari aturan ini, lalu langsung kembali bermain"
 Feature.NotApproved.Heading.SecondChance.Details,Tidak ingin ditangguhkan kali ini?
 Feature.NotApproved.Heading.Suspended,Ditangguhkan
@@ -4026,6 +4168,8 @@ Feature.NotApproved.Heading.SuspendedSixtyDays,Ditangguhkan selama 60 hari
 Feature.NotApproved.Heading.SuspendedThirtyDays,Ditangguhkan selama 30 hari
 Feature.NotApproved.Heading.SuspendedThreeDays,Ditangguhkan selama 3 hari
 Feature.NotApproved.Heading.Warning,
+Feature.NotApproved.Heading.WhatNext,Apa yang terjadi selanjutnya
+Feature.NotApproved.Heading.Why,Mengapa?
 Feature.NotApproved.Label.AbuseType.AccountTheft,Pencurian Akun
 Feature.NotApproved.Label.AbuseType.AdultContent,Konten Dewasa
 Feature.NotApproved.Label.AbuseType.Advertisement,
@@ -4033,6 +4177,8 @@ Feature.NotApproved.Label.AbuseType.Advertising,Mengiklankan
 Feature.NotApproved.Label.AbuseType.AssetOwnership,Kepemilikan Aset
 Feature.NotApproved.Label.AbuseType.Billing,
 Feature.NotApproved.Label.AbuseType.BlockedContent,Konten yang Diblokir
+Feature.NotApproved.Label.AbuseType.Bullying.Kids,Perundungan (Bullying)
+Feature.NotApproved.Label.AbuseType.Bullying.Note.Kids,Kami menemukan kata-kata yang menyakitkan hati dalam aktivitasmu.
 Feature.NotApproved.Label.AbuseType.Chargeback,Tagihan Balik
 Feature.NotApproved.Label.AbuseType.CheatandExploits,Kecurangan dan Eksploitasi
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,Membahayakan Anak (Child Endangerment)
@@ -4110,6 +4256,10 @@ Feature.NotApproved.Label.AbuseType.Scamming,
 Feature.NotApproved.Label.AbuseType.SeekingSexualContent,Mencari Konten Seksual
 Feature.NotApproved.Label.AbuseType.SexualAdultContent,Konten Seksual/Dewasa
 Feature.NotApproved.Label.AbuseType.SexualContent,
+Feature.NotApproved.Label.AbuseType.SexualContent.Kids,Konten dewasa
+Feature.NotApproved.Label.AbuseType.SexualContent.Note.Kids,"Kami menemukan kata-kata atau gambar yang tidak pantas untuk anak-anak. Misalnya, foto telanjang atau konten romantis."
+Feature.NotApproved.Label.AbuseType.SharingPII.Kids,Membagikan informasi pribadi
+Feature.NotApproved.Label.AbuseType.SharingPII.Note.Kids,"Kami menemukan hal-hal seperti nama asli, nomor ponsel, atau foto orang sungguhan."
 Feature.NotApproved.Label.AbuseType.Shock,Syok
 Feature.NotApproved.Label.AbuseType.Spam,
 Feature.NotApproved.Label.AbuseType.SuggestiveSexualizedImagery,Gambar Seksual
@@ -4127,7 +4277,7 @@ Feature.NotApproved.Label.AbuseType.VirtualCasino.Note,"Roblox tidak mengizinkan
 Feature.NotApproved.Label.ChargebackNextSteps,Selanjutnya apa yang harus saya lakukan?
 Feature.NotApproved.Label.CommunityStandards,Standar Komunitas
 Feature.NotApproved.Label.ConsoleDeviceNoticeUA,Log in ke Roblox.com di perangkat yang berbeda untuk mulai mengaktifkan kembali akunmu.
-Feature.NotApproved.Label.Days,{number} hari
+Feature.NotApproved.Label.Days,
 Feature.NotApproved.Label.Decision,Keputusan
 Feature.NotApproved.Label.DecisionMethod,Metode keputusan
 Feature.NotApproved.Label.DecisionMethod.V2,Cara kami me-review ini
@@ -4299,8 +4449,8 @@ Feature.Notifications.Action.PushUpsellAllow,Izinkan
 Feature.Notifications.Action.PushUpsellNotNow,
 Feature.Notifications.Action.SnoozeFifteenMinutes,5 menit
 Feature.Notifications.Action.SnoozeFourHours,4 jam
-Feature.Notifications.Action.SnoozeOneDay,1 hari
-Feature.Notifications.Action.SnoozeOneHour,1 jam
+Feature.Notifications.Action.SnoozeOneDay,
+Feature.Notifications.Action.SnoozeOneHour,
 Feature.Notifications.Action.UntilITurnItBackOn,Sampai saya mengaktifkannya lagi
 Feature.Notifications.Heading.PushUpsellChat,Jangan sampai hubungan putus
 Feature.Notifications.Heading.PushUpsellGeneric,Jangan lewatkan
@@ -4357,7 +4507,7 @@ Feature.PlayerSearchResults.Label.YouAreFriends,Kalian berteman
 Feature.Profile.Action.AboutThisProfile,Tentang profil ini
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Menerima Teman
-Feature.Profile.Action.Add,Tambah
+Feature.Profile.Action.Add,
 Feature.Profile.Action.AddNickname,Tambahkan Nama
 Feature.Profile.Action.AllRequestsIgnored,Semua Permintaan Diabaikan
 Feature.Profile.Action.Chat,
@@ -4416,9 +4566,10 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edit Nama
 Feature.Profile.Heading.EditDisplayName,Edit Nama Display
 Feature.Profile.Heading.InsufficientFunds,Dana Tidak Cukup
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,Bingkai profil
 Feature.Profile.Heading.ProfilePictureSaved,Foto profil berhasil disimpan
 Feature.Profile.Heading.ProfileQRCode,Bagikan Kode QR
-Feature.Profile.Heading.Statistics,Statistik
+Feature.Profile.Heading.Statistics,
 Feature.Profile.Heading.Username,
 Feature.Profile.Heading.UsernameUpdated,Nama Pengguna Di-update
 Feature.Profile.Label.AboutDetailsHeading,Tentang {name}
@@ -4600,7 +4751,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Kabar baik
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Dapatkan Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus tidak tersedia di sini
-Feature.SafetyDashboard.Heading.AccountStatus,Status akun
+Feature.SafetyDashboard.Heading.AccountStatus.V2,"Status akun, pelanggaran, dan banding"
 Feature.Schools.Action.AlreadyGraduated,Saya sudah lulus
 Feature.Schools.Action.CantFindSchool,Tidak dapat menemukan sekolahmu?
 Feature.Schools.Action.Continue,
@@ -4643,6 +4794,7 @@ Feature.Schools.Error.OtpExpired,Kode ini sudah kedaluwarsa.
 Feature.Schools.Error.OtpInvalidFormat,Format kode ini tidak valid.
 Feature.Schools.Error.OtpTooManyAttempts,Jumlah upayamu hari ini sudah mencapai batas maksimum.
 Feature.Schools.Error.SomethingWentWrong,
+Feature.Schools.Error.UnidaysEmailNotFound,UNiDAYS tidak dapat menemukan email ini.
 Feature.Schools.Filter.AllYears,Semua tahun
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,Tahun kelulusan
@@ -4715,7 +4867,7 @@ Feature.Settings.Label.Recommended,Direkomendasikan
 Feature.Settings.Label.SharedContent,Konten yang Dibagikan
 Feature.Settings.Subheading.AccountSettingsScan,Scan Kode QR
 Feature.Settings.Subheading.AccountSettingsWebsite,Kunjungi Situs Web
-Feature.SettingsHub.Action.AllowInSettings,Izinkan di Pengaturan
+Feature.SettingsHub.Action.AllowInSettings,Izinkan di pengaturan
 Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,

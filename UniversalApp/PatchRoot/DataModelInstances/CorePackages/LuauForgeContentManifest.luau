@@ -1,3 +1,3 @@
 ﻿return table.freeze({
-	deferred = Content.fromUri("rbxassetid://112111195800924&version=18")
+	deferred = Content.fromUri("rbxasset://models/UniversalApp/deferred.rbxm")
 })

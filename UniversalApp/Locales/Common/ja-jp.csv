@@ -225,12 +225,10 @@ Authentication.AccountSwitch.Action.SwitchAccount,アカウントを切り替え
 Authentication.AccountSwitch.Description.AccountLimit.2,アカウント数の上限に達しました。新しいアカウントを追加するには、まずアカウントを削除してください。
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,{username}として続行すると、他のアカウントからログアウトされます。
 Authentication.AccountSwitch.Description.LogoutConfirmation,新しいアカウントを追加する前に、このデバイスで他のRobloxアカウントからログアウトする必要があります
-Authentication.AccountSwitch.Description.ParentLogoutConfirmation,保護者権限のある新しいアカウントを追加する前に、このデバイスで他のRobloxアカウントからログアウトする必要があります
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,後でもう一度お試しください
 Authentication.AccountSwitch.Description.RemoveAllAccounts,ログアウトすると、すべてのアカウントがこのデバイスから削除されます。
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,削除すると、もう一度ログインしない限り、このアカウントはこのデバイス上で表示されなくなり、ランディングページに戻ります。
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,直接、ログインしてみてください
-Authentication.AccountSwitch.Header.CantSwitchAccounts,アカウントを切り替えできません
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,アカウントを切り替えることができません
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Header.RemoveCurrentAccount,現在のアカウントを削除しますか？
@@ -671,6 +669,7 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_RequiredSkinningTransfer,{asse
 Common.UGCValidation.ErrorLabel.AccessorySkinning_RigidIsSkinned,リジッド（固定）アクセサリーには、サポートされていないスキニングデータが含まれます。必ず、メッシュと一緒にボーンがインポートされないようにしてください。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_TransferJointWithoutAutoSkin,Handle（ハンドル）には{jointName}のジョイント が含まれており 、これはWrapLayer.AutoSkinがEnabledOverrideに設定されている場合にのみ許可されます。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,転送ジョイントにスキニングされた頂点は、完全に重み付けされている必要があります。
+Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,アニメーションパックのバンドルに、複数のクリップ（{instancePaths}）で使用されている重複したアニメーションID「{animationId}」が含まれています。各アニメーションクリップは、一意のアニメーションアセットを参照する必要があります。
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,アニメーションパックバンドルに、必要なアニメーションタイプ「{missingAnimationTypes}」が不足しています。各アニメーションタイプにはR15Animフォルダが1つ備わり、その中には必要なStringValueの子要素が正確に含まれていなければなりません。
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,アニメーション「{animationName}」のウェイトの値が{weight}になっていますが、ウェイトは0より大きい必要があります。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,{ParentPath}内で必要な{ExpectedClass}クラス「{ExpectedName}」が見つかりません。
@@ -718,7 +717,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimationに�
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimationに、キーの数が多すぎるCurveが含まれています。Curveあたりのキーの最大数は{maxAllowed}件です。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimationに、{maxAllowed}件を超えるMarkerCurveが含まれています。MarkerCurveの子孫は{maxAllowed}件以下にしてください。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimationに、マーカーが{count}件あるMarkerCurveが含まれています。MarkerCurveあたりのマーカーの最大数は{maxAllowed}件です。アニメーションを修正してください。
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,公開されたアニメーションでは、パーツの最大変位が{taggedTranslation}マスに指定されていますが、アニメーションデータでは{calculatedTranslation}マスと計算されています。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimationに、予期しない子が含まれています：{childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,マーケットプレイスの「動く頭」は、ケージの目と口の頂点がメッシュの頂点と一致するように、適切に合わせる必要があります。ケージとメッシュとの位置合わせを改善してください。
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,動く頭の笑顔の表情を検出できません。口のケージのランドマークを調整して、頭の口の位置に合わせ、笑顔の表情ができるようにしてください。
@@ -729,6 +727,10 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,マーケットプレイス上
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,動く頭の右目を閉じた表情を検出できません。右目のケージのランドマークを調整して、頭の右目の位置に合わせ、閉じられるようにしてください。
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,動く頭のしかめっ面の表情を検出できません。口のケージのランドマークを調整して、頭の口の位置に合わせ、しかめっ面の表情ができるようにしてください。
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,このアセットは、信頼できるクリエータープログラムのクリエーターのみが利用できるエミッシブマップを使用しています。アップロードする前に、すべてのエミッシブマップコンテンツを削除するか、プログラムに参加してください。
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,公開されたアニメーションには有効なパーツの最大移動量がありません。アニメーションを再公開してください。
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,公開されたアニメーションには有効なUGCリアクションマーカーがありません。アニメーションを再公開してください。
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,公開されたアニメーションデータからパーツの最大移動量を計算できませんでした。アニメーションを再公開してください。
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,公開されたアニメーションでは、パーツの最大移動量が{taggedTranslation}マスに指定されていますが、アニメーションデータでは{calculatedTranslation}マスと計算されています。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,アップロード時、FaceControlsのInternalOverrideFACSDataプロパティは空にする必要があります。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,頭部を{modPercent}%に拡大するFACS（表情コーディングシステム）が検出されましたが、頭部の変更は表情アニメーションに関するマーケットプレイスのポリシーに違反します。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,頭部を{modPercent}%に縮小するFACS（表情コーディングシステム）が検出されましたが、頭部の変更は表情アニメーションに関するマーケットプレイスのポリシーに違反します。
@@ -1177,6 +1179,7 @@ Feature.Accessibility.Action.ScrollUp,上スクロール
 Feature.Accessibility.AppTheme.CategoryCalm,穏やか
 Feature.Accessibility.AppTheme.CategoryDynamic,動的
 Feature.Accessibility.AppTheme.CircuitRush,サイバーグリーン
+Feature.Accessibility.AppTheme.Classic,クラシック
 Feature.Accessibility.AppTheme.CosmicDust,宇宙の粉
 Feature.Accessibility.AppTheme.Default,
 Feature.Accessibility.AppTheme.ElectricLime,ネオンライム
@@ -1193,6 +1196,7 @@ Feature.Accessibility.AppTheme.StarBurst,星のキラメキ
 Feature.Accessibility.AppTheme.SuperCharge,スーパーチャージ
 Feature.Accessibility.Description.AppThemeMode,アプリのモードを選択してください。他のデバイスには影響しません。
 Feature.Accessibility.Description.DeviceAppTheme,アプリのテーマを選択してください。これはすべてのデバイスタイプに反映されます。
+Feature.Accessibility.Description.DeviceAppThemeExclusive,Plus限定テーマを試して、Robloxの表示をカスタマイズしましょう。定期購入すると、選択したテーマを保存できます。
 Feature.Accessibility.Description.DeviceAppThemeUpsell,Plus限定のテーマを閲覧して、体験をカスタマイズしましょう。今すぐ試して、選択したテーマを保存するには定期購入してください。
 Feature.Accessibility.Description.DeviceLevelTheme,このデバイスのテーマを選択してください。（注：他のデバイスでのRobloxの表示は変わりません。）
 Feature.Accessibility.Description.Haptics,Robloxアプリでバイブレーション全般をコントロール。
@@ -1215,6 +1219,7 @@ Feature.Accessibility.Heading.DeviceAppTheme,アプリテーマ
 Feature.Accessibility.Heading.DeviceLevelTheme,デバイスのテーマ
 Feature.Accessibility.Heading.DevicePreferences,
 Feature.Accessibility.Heading.DevicePreferencesV2,
+Feature.Accessibility.Heading.ExclusiveThemes,限定テーマ
 Feature.Accessibility.Heading.LaunchAtLogin,ログイン時に起動
 Feature.Accessibility.Heading.LaunchAtStartup,スタートアップを起動する
 Feature.Accessibility.Heading.MinimizeToTray,閉じるときにトレイに最小化する
@@ -1659,11 +1664,14 @@ Feature.Avatar.Action.Zoom,ズーム
 Feature.Avatar.AvatarWidgetTitle,コーデを楽しもう
 Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,この画面にとどまる
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,破棄する
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,公開
 Feature.Avatar.BackgroundGeneration.Action.Upload,アップロード
 Feature.Avatar.BackgroundGeneration.Action.View,
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Plusで背景を作成。
+Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,この画面を離れると、背景は破棄されます。
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,作成した背景を使用できるようになりました。
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,この背景はAIで生成されました。公開すると、この背景がRobloxコミュニティ基準に準拠し、利用する権利のないコンテンツを使用していないことを確認したものとみなされます。持ち物に表示される前に審査が行われ、公開したアイテムは編集できません。
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,この背景はAIで生成されました。アップロードすると、この背景がRobloxコミュニティ基準に準拠し、利用する権利のないコンテンツを使用していないことを確認したものとみなされます。アップロードしたアイテムは持ち物に表示される前に審査が行われ、編集はできません。
@@ -1684,6 +1692,7 @@ Feature.Avatar.BackgroundGeneration.PromptPlaceholder,作成したい背景を�
 Feature.Avatar.BackgroundGeneration.Status.Generating,背景を生成しています…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,背景を準備しています…
 Feature.Avatar.BackgroundGeneration.Title,背景を作成
+Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,この背景を破棄しますか？
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,持ち物に公開
 Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
@@ -2161,6 +2170,7 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,{DisplayName} さんをブロックしますか？
 Feature.BlockingModal.Message.BlockConfirmation,このユーザーをブロックするとつながりまたはフォロワーから削除されます。ブロックされた人は、あなたにメッセージやリクエスト、招待状を送れなくなります。<br /><br />あなたがブロックしたことは相手に通知されません。
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,このユーザーをブロックすると友達またはフォロワーから削除されます。ブロックされた人は、あなたにメッセージやリクエスト、招待状を送れなくなります。<br /><br />あなたがブロックしたことは相手に通知されません。
+Feature.Build.Action.Add,
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,プレイテスターを追加
 Feature.Build.Action.AddPlaytesters,
@@ -2174,7 +2184,9 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,テキストをコピー
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,今後表示しない
+Feature.Build.Action.DontShowAgain,
 Feature.Build.Action.HideAutosaved,自動保存済みバージョンを非表示
 Feature.Build.Action.ManageLimit,限度額を管理
 Feature.Build.Action.Next,
@@ -2182,33 +2194,90 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,通知する
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,設定を開く
+Feature.Build.Action.Play,
 Feature.Build.Action.Playtest,プレイテスト
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,公開する
 Feature.Build.Action.PublishLatest,最新のものを公開
 Feature.Build.Action.Restore,復元
+Feature.Build.Action.Resume,
 Feature.Build.Action.Revert,
 Feature.Build.Action.SetDailyLimit,1日あたりの限度額を設定
 Feature.Build.Action.SetLimit,限度額を設定
 Feature.Build.Action.Settings,
 Feature.Build.Action.Share,シェア
 Feature.Build.Action.ShareLink,リンクを共有
+Feature.Build.Action.ShowMore,
+Feature.Build.Action.Stats,統計
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,レーティングを更新
 Feature.Build.Action.UpdateWithChanges,変更を反映して更新
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,使用量を表示
+Feature.Build.Analytics.AnalyzeChatPrompt,過去{days}日間の{analyzeName}は？
+Feature.Build.Analytics.AnalyzeName.Arppu,有料ユーザーあたりの平均収益
+Feature.Build.Analytics.AnalyzeName.D1Retention,1日目のリテンション
+Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,1日あたりのアクティブユーザー数
+Feature.Build.Analytics.AnalyzeName.PayerConversion,有料ユーザーコンバージョン
+Feature.Build.Analytics.AnalyzeName.PlaythroughRate,プレイスルー率
+Feature.Build.Analytics.AnalyzeName.TotalPlaytime,合計プレイ時間
+Feature.Build.Analytics.Description.Arppu,有料ユーザーあたりの平均収益は、獲得したRobuxの合計を支払いプレイヤー数で割ったものです。各購入者が平均でどれだけRobuxを使っているかを示します。
+Feature.Build.Analytics.Description.D1Retention,1日目のリテンションは、初回プレイヤーのうち、1日後に再びプレイした人数を測定します。バーチャル空間が継続してプレイされる可能性を早い段階で示す指標です。
+Feature.Build.Analytics.Description.DailyActiveUsers,1日あたりのアクティブユーザー数は、毎日バーチャル空間を起動したユニークプレイヤーの数です。この指標を追跡することで、再訪するプレイヤーの数や、その増減を把握できます。
+Feature.Build.Analytics.Description.PayerConversion,有料ユーザーコンバージョン率は、バーチャル空間内でRobuxを使ったプレイヤーの割合です。収益化によってプレイヤーを購入者にどの程度転換できているかを測る指標です。
+Feature.Build.Analytics.Description.PlaythroughRate,プレイスルー率は、最後まで完了したプレイセッションの割合です。この割合が高いほど、プレイヤーがバーチャル空間を始めやすく、最後までプレイする価値があると感じていることを示します。
+Feature.Build.Analytics.Description.TotalPlaytime,合計プレイ時間は、その期間にすべてのプレイヤーがバーチャル空間で過ごした時間の合計です。プレイ時間の増加は通常、プレイセッションの魅力が高まっていることを示します。
+Feature.Build.Analytics.DurationHours,{number}時間
+Feature.Build.Analytics.KeyStats,主な指標
+Feature.Build.Analytics.LastMonth,先月
+Feature.Build.Analytics.LastWeek,
+Feature.Build.Analytics.Likes,いいね数
+Feature.Build.Analytics.Month.Apr,
+Feature.Build.Analytics.Month.Aug,
+Feature.Build.Analytics.Month.Dec,
+Feature.Build.Analytics.Month.Feb,
+Feature.Build.Analytics.Month.Jan,
+Feature.Build.Analytics.Month.Jul,
+Feature.Build.Analytics.Month.Jun,
+Feature.Build.Analytics.Month.Mar,
+Feature.Build.Analytics.Month.May,
+Feature.Build.Analytics.Month.Nov,
+Feature.Build.Analytics.Month.Oct,
+Feature.Build.Analytics.Month.Sep,
+Feature.Build.Analytics.NoData,利用可能なデータなし
+Feature.Build.Analytics.Overview,概要
+Feature.Build.Analytics.Percent,{number}%
+Feature.Build.Analytics.Players,プレイヤー
+Feature.Build.Analytics.Sheet.Analyze,分析
+Feature.Build.Analytics.Sheet.ViewInOverview,概要で表示
+Feature.Build.Analytics.Summary.Arppu,有料プレイヤー1人あたりの平均Robux収益。
+Feature.Build.Analytics.Summary.D1Retention,翌日再度プレイした新規プレイヤーの割合。
+Feature.Build.Analytics.Summary.DailyActiveUsers,選択した期間内に参加したユニークプレイヤー数。
+Feature.Build.Analytics.Summary.PayerConversion,購入を行ったプレイヤーの割合。
+Feature.Build.Analytics.Summary.PlaythroughRate,最後までプレイされたセッションの割合。
+Feature.Build.Analytics.Summary.TotalPlaytime,プレイヤーがあなたのバーチャル空間内で過ごした合計時間。
+Feature.Build.Analytics.Title.Arppu,ARPPU
+Feature.Build.Analytics.Title.ConcurrentUsers,合計プレイヤー数
+Feature.Build.Analytics.Title.D1Retention,D1リテンション
+Feature.Build.Analytics.Title.DailyActiveUsers,
+Feature.Build.Analytics.Title.PayerConversion,
+Feature.Build.Analytics.Title.PlaythroughRate,
+Feature.Build.Analytics.Title.TotalPlaytime,
+Feature.Build.Analytics.Visits,訪問数
 Feature.Build.Content.NewGame,新規のゲーム
+Feature.Build.Description.AdCampaignModerationReview,すべての広告キャンペーンはRobloxによる審査の対象となります。審査には最大24時間かかる場合があります。
+Feature.Build.Description.AdCampaignSheetRunDates,実施期間：{startDate}～{endDate}
+Feature.Build.Description.AdvertisingAgreement,続行すると、{advertisingTermsStart}Roblox広告基準{advertisingTermsEnd}および{advertisingStandardsStart}広告基準{advertisingStandardsEnd}に同意したものとみなされます。
 Feature.Build.Description.ArchiveRemoval,このゲームをアーカイブすると、[ビルド]から削除されます。これは、クリエーターハブまたはRoblox Studioから引き続きアクセスして復元できます。
 Feature.Build.Description.AutoBuyUsage,Robuxを使って、作成中に追加のビルド使用量を自動的に購入しましょう。1日あたりの課金限度額はいつでも設定できます。
 Feature.Build.Description.BoostAudienceForPlays,オーディエンスを拡大して、プレイ数を増やしましょう。
-Feature.Build.Description.BoostGameAudience,ゲームのオーディエンスを増やしましょう
 Feature.Build.Description.BuildIdeaGame,アイデアをゲームに変えよう
 Feature.Build.Description.BuildReplyNotif,ビルドで返信が届いたときに通知を受け取りましょう。
 Feature.Build.Description.BuyRobuxToCreate,作成を続けるには、Robuxをさらに購入するか、明日になって無料のビルド使用量がリセットされるのをお待ちください。
 Feature.Build.Description.BuyUsageOrWait,Robuxでビルド使用量をさらに購入するか、1日あたりの限度額がリセットされるのをお待ちください。
 Feature.Build.Description.CampaignRunDates,キャンペーンは、{startDate}～{endDate}に実施されます。
 Feature.Build.Description.ChoosePlaytesters,プレイテストに協力してもらう友達を選択してください。
+Feature.Build.Description.EarnedRobuxAppliedFirst,獲得済みRobuxをお持ちの場合、広告キャンペーンの費用にはそちらが先に充当されます。
 Feature.Build.Description.EnableBuildNotifs,ビルドからの最新情報を受け取るには、デバイス設定で通知を有効化してください。
 Feature.Build.Description.FriendsLinkOnly,このリンクにアクセスできるのはあなたの友達のみです。より多くの人にプレイしてもらいたい場合は、ゲームのオーディエンス設定を変更してください。
 Feature.Build.Description.GameCreationDone,ゲームの作成と公開が完了しました。ゲームを開いてプレイテストできます。
@@ -2222,19 +2291,27 @@ Feature.Build.Description.PlaytestLatest,最新バージョンのプレイテス
 Feature.Build.Description.PlaytestLocked,プレイテストは、最初のゲームを制作した後に開始可能です。
 Feature.Build.Description.PlaytesterAccess,友達をプレイテスターとして追加するか、ゲームのオーディエンス設定を変更して、より多くの人にプレイしてもらいましょう。
 Feature.Build.Description.PrivateShare,ゲームのオーディエンス設定を変更してシェアしてください。
+Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}日間の広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう。
 Feature.Build.Description.RaiseLimitOrWait,作成を続けるには、1日あたりのRobux限度額を増やすか、明日になってリセットされるのをお待ちください。
 Feature.Build.Description.RatingAgreement,公開することで、このコンテンツレーティングが正確であることに同意したものとみなされます。
 Feature.Build.Description.RestoreLatest,このバージョンが、公開済みの最新バージョンになります。
 Feature.Build.Description.RevertToVersion,確認して最後の変更を元に戻し、{VERSION}に戻ります。
+Feature.Build.Description.ShareLatest,最新バージョンの変更内容を共有しましょう。
 Feature.Build.Description.VersionChanges,このバージョンで変更された点をプレイヤーに伝えましょう。
 Feature.Build.Header.AccessSharing,アクセスとシェア
+Feature.Build.Header.AllVersions,すべてのバージョン
 Feature.Build.Header.ContentMaturity,コンテンツ成熟度
 Feature.Build.Header.CustomAnswer,カスタムの回答
 Feature.Build.Header.GameDetails,ゲームの詳細
-Feature.Build.Header.Overview,概要
+Feature.Build.Header.Overview,
+Feature.Build.Header.PastCampaigns,過去のキャンペーン
+Feature.Build.Header.UpdateDetails,アップデート内容
 Feature.Build.Label.Access,アクセス
+Feature.Build.Label.AdClicks,広告クリック数
+Feature.Build.Label.AdViews,広告表示回数
 Feature.Build.Label.AdditionalUsage,追加のビルド使用量
 Feature.Build.Label.AdditionalUsed,{USED}/{LIMIT}使用済み
+Feature.Build.Label.AdsManager,広告管理
 Feature.Build.Label.All,
 Feature.Build.Label.AmountAvailable,残り{AMOUNT}
 Feature.Build.Label.Autosaved,自動保存済み
@@ -2242,18 +2319,23 @@ Feature.Build.Label.Available,利用可能
 Feature.Build.Label.BackToBuild,ビルドに戻る
 Feature.Build.Label.Building,制作中…
 Feature.Build.Label.CaptureLibrary,切り抜きライブラリ
+Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} / {MAX_SELECTIONS}点を選択済み
 Feature.Build.Label.ContentRating,コンテンツのレーティング
 Feature.Build.Label.Created,作成済み
 Feature.Build.Label.CreatedDate,{YEAR}年{MONTH}月{DAY}日
 Feature.Build.Label.CreatorHub,クリエーターハブ
+Feature.Build.Label.DateRange,{startDate}〜{endDate}
 Feature.Build.Label.Deleted,削除済み
 Feature.Build.Label.DescribeIdea,アイデアを説明してください
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,
+Feature.Build.Label.EasyPerformanceReport,わかりやすいパフォーマンスレポート
 Feature.Build.Label.Error,
+Feature.Build.Label.Free,無料
 Feature.Build.Label.FreeBuildUsage,無料のビルド使用量
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,友達限定
+Feature.Build.Label.GamePlays,プレイ数
 Feature.Build.Label.GetMoreBuildUsage,もっとビルド使用量を獲得
 Feature.Build.Label.Hi,こんにちは
 Feature.Build.Label.IconThumbnails,アイコンとサムネイル
@@ -2262,12 +2344,15 @@ Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,入力が必要です
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,限定
+Feature.Build.Label.Live,公開中
 Feature.Build.Label.Loading,読み込み中...
+Feature.Build.Label.MaximizeForGamePlays,プレイ数を最大化
 Feature.Build.Label.Models3D,3Dモデル
 Feature.Build.Label.NoLimit,制限なし
 Feature.Build.Label.NotStarted,開始していません
 Feature.Build.Label.Pending,保留中
 Feature.Build.Label.PercentUsed,{PERCENT}%使用済み
+Feature.Build.Label.PlayTime,プレイ時間
 Feature.Build.Label.PreviouslyPublished,以前に公開済み
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,
@@ -2286,6 +2371,7 @@ Feature.Build.Label.SelectOption,オプションを選択
 Feature.Build.Label.ShareAddedFriends,追加した友達とシェア
 Feature.Build.Label.Shared,シェア済み
 Feature.Build.Label.Sounds,サウンド
+Feature.Build.Label.TargetAllRobloxPlayers,すべてのRobloxプレイヤーを対象にする
 Feature.Build.Label.Thinking,考え中
 Feature.Build.Label.Title,タイトル
 Feature.Build.Label.TitleDescription,タイトルと詳細
@@ -2353,6 +2439,7 @@ Feature.Build.Label.ToolThumbnailRunning,ゲームのサムネイルを設定し
 Feature.Build.Label.UniverseNumber,ユニバース{UNIVERSE_ID}
 Feature.Build.Label.Unknown,不明
 Feature.Build.Label.UnlimitedUsed,{USED}使用済み • 制限なし
+Feature.Build.Label.UpdateTitleDesc,タイトルと詳細を更新
 Feature.Build.Label.Updated,最終更新
 Feature.Build.Label.Usage,使用量
 Feature.Build.Label.UsageUsed,{USED}使用済み
@@ -2365,6 +2452,14 @@ Feature.Build.Label.VersionTitleDesc,バージョンタイトルと詳細
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,アカウントがビルドを使用するための要件を満たしていません。
 Feature.Build.Message.AccountTooNew,お持ちのアカウントは公開するには新しすぎます。2日目になってからもう一度お試しください。
+Feature.Build.Message.AdCampaignCreateFailed,キャンペーンを作成できませんでした。もう一度お試しください。
+Feature.Build.Message.AdCampaignCreated,広告キャンペーンが作成されました
+Feature.Build.Message.AdPerformanceLoadFailed,広告のパフォーマンスを読み込めませんでした
+Feature.Build.Message.AdsPromotionBannerSubtitle,オーディエンスを無料で拡大しましょう
+Feature.Build.Message.AdsPromotionBannerTitle,無料プロモーションがあと{promotionCount}回残っています
+Feature.Build.Message.AdsPromotionBannerTitleSingular,無料プロモーションが1回残っています
+Feature.Build.Message.AdsStatsEmpty,広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう
+Feature.Build.Message.AdsStatsEmptyFree,無料の広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう
 Feature.Build.Message.AllFriendsAdded,すべての友達をプレイテスターとして追加しました。
 Feature.Build.Message.AnswerBuildQuestion,以下のビルドの質問に答えてください。
 Feature.Build.Message.AssetDetailsUnavailable,アセットの詳細は表示できません。
@@ -2394,12 +2489,14 @@ Feature.Build.Message.GamePublishFailed,ゲームを公開できませんでし�
 Feature.Build.Message.GameShared,ゲームをシェアしました
 Feature.Build.Message.GameSharedWith,{DISPLAY_NAME}さんとゲームをシェアしました
 Feature.Build.Message.HiDisplayName,こんにちは、{DISPLAY_NAME}さん
+Feature.Build.Message.ImageUploadFailed,画像をアップロードできませんでした。もう一度お試しください。
 Feature.Build.Message.InvalidMessage,メッセージに問題が発生しました。編集してから、もう一度お試しください。
 Feature.Build.Message.InvitesLoadFailed,招待を読み込めませんでした
 Feature.Build.Message.LimitBelowSpend,限度額は、今日すでに使用した{ALREADY_SPENT}Robux未満にすることはできません。
 Feature.Build.Message.LinkCopied,リンクをクリップボードにコピーしました。
 Feature.Build.Message.LoadingVersions,バージョン履歴を読み込み中...
 Feature.Build.Message.NoAssetsFound,アセットが見つかりません。
+Feature.Build.Message.NoCapturesAvailable,添付できる切り抜きはありません
 Feature.Build.Message.NoDescriptionProvided,詳細がありません。
 Feature.Build.Message.NoFriendsToAdd,まだ追加する友達がいません。まずはRobloxでつながる人を見つけましょう。
 Feature.Build.Message.NoResults,
@@ -2410,6 +2507,8 @@ Feature.Build.Message.PlaytestersAdded,{MAX_INVITES}人中{INVITED_COUNT}人の�
 Feature.Build.Message.PublicPublishFailed,ゲームは公開手続きが行われましたが、公開できませんでした。もう一度お試しください。
 Feature.Build.Message.PublishExpandAudience,公開してオーディエンスを拡大
 Feature.Build.Message.PublishNotReverted,公開は元に戻りませんでした。もう一度お試しください。
+Feature.Build.Message.PublishPromotionUpsell,ゲームの公開、おめでとうございます！Robloxでさらに多くのプレイヤーを獲得するために、無料プロモーションを{promotionCount}回利用できます。
+Feature.Build.Message.PublishPromotionUpsellSingular,ゲームの公開、おめでとうございます！Robloxでさらに多くのプレイヤーを獲得するために、無料プロモーションを1回利用できます。
 Feature.Build.Message.PublishReverted,公開を元に戻しました。
 Feature.Build.Message.QuestionnaireNeeded,このゲームはビルド外で編集されました。公開するには、コンテンツに関する質問フォームに回答してください。
 Feature.Build.Message.ReadyToPlay,あなたのゲームをRobloxでプレイするための準備完了です！
@@ -2437,7 +2536,11 @@ Feature.Build.Notification.Message.Review,結果を確認するには、ビル�
 Feature.Build.Notification.Title.Finished,ビルドが完了しました
 Feature.Build.Notification.Title.NeedInput,ビルドを続けるには入力が必要です
 Feature.Build.Title.AdCampaignActive,広告キャンペーンが有効です
+Feature.Build.Title.AdCampaignDuration,{durationDays}日間の広告キャンペーン
 Feature.Build.Title.AddFriendsToPlaytest,プレイテストに協力してもらう友達を追加してください
+Feature.Build.Title.AddImages,画像を追加
+Feature.Build.Title.AdsStatsEmpty,キャンペーンを開始
+Feature.Build.Title.AdsStatsEmptyFree,最初のキャンペーンを開始
 Feature.Build.Title.ArchiveThisGame,このゲームをアーカイブしますか？
 Feature.Build.Title.AssetLibrary,ライブラリ
 Feature.Build.Title.Audience,オーディエンス
@@ -2455,17 +2558,22 @@ Feature.Build.Title.FriendsOnlyPlay,友達だけがプレイできます
 Feature.Build.Title.GameCreationDone,ゲームの作成が完了しました
 Feature.Build.Title.GamePrivate,このゲームは非公開です
 Feature.Build.Title.GenericError,
+Feature.Build.Title.GetUsers,ユーザーを獲得
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
 Feature.Build.Title.Playtesters,プレイテスター
 Feature.Build.Title.PlaytestersOnlyPlay,プレイテスターだけがプレイできます
+Feature.Build.Title.PromoteGame,ゲームを宣伝
 Feature.Build.Title.PromoteGameFree,ゲームを無料で宣伝する
 Feature.Build.Title.PushNotifications,プッシュ通知
 Feature.Build.Title.RevertLastChange,最後の変更を元に戻しますか？
 Feature.Build.Title.Tasks,タスク
 Feature.Build.Title.TurnActivity,ターン内のアクティビティ
 Feature.Build.Title.VersionHistory,バージョン履歴
-Feature.Build.Title.VersionInformation,バージョン情報
+Feature.Build.Title.VersionInfo,バージョン情報
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,バージョン{VERSION}
+Feature.Build.Title.Versions,
+Feature.Build.Title.WhatsIncluded,含まれるもの
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,しない
@@ -2631,7 +2739,7 @@ Feature.Catalog.Label.Filter.Sorts,
 Feature.Catalog.Label.Filter.TotalValue,総額
 Feature.Catalog.Label.Filter.UnavailableItems,利用できないアイテム
 Feature.Catalog.Label.FreeItemConfirmation,{creatorName} さんから{itemName} を無料でゲットしますか？
-Feature.Catalog.Label.FreeUpperCase,無料
+Feature.Catalog.Label.FreeUpperCase,
 Feature.Catalog.Label.FromPrice,送信者： {itemPrice}
 Feature.Catalog.Label.FrontAccessories,正面用アクセサリ
 Feature.Catalog.Label.FullBodies,
@@ -3140,7 +3248,7 @@ Feature.Durables.PartiallyExpiredItems.BodyText,この保存されたアバタ�
 Feature.Durables.PartiallyExpiredItems.TitleText,アイテムの有効期限が切れました
 Feature.Durables.PurchaseModal.SuccessMessage,{itemName}の有効期限が{number}日間延長されました。
 Feature.Durables.TimeRemaining.Days,{number}日
-Feature.Durables.TimeRemaining.Hours,{number}時間
+Feature.Durables.TimeRemaining.Hours,
 Feature.Durables.TimeRemaining.Minutes,{number}分
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days}日間（購入後から開始）
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,EU・デジタルサービス法に基づく違法コンテンツを報告するにはこちらへ。 https://www.roblox.com/illegal-content-reporting
@@ -3350,7 +3458,7 @@ Feature.Friends.Label.MyProfile,
 Feature.Friends.Label.NewConnection,新しいつながり
 Feature.Friends.Label.NewFriend,新しい友達
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount} 件以上
-Feature.Friends.Label.NoConnectionYet,{name}さんにはまだつながりがありません。
+Feature.Friends.Label.NoFriendsYet,{name}さんにはまだ友達がいません。
 Feature.Friends.Label.NowTrusted,{username}さんが信頼する友達になりました
 Feature.Friends.Label.OneMutual,
 Feature.Friends.Label.PYMK,知り合いかも
@@ -3519,7 +3627,7 @@ Feature.GameDetails.Label.TooRepetitive,繰り返しが多すぎる
 Feature.GameDetails.Label.Unavailable,
 Feature.GameDetails.Label.Updated,更新済み
 Feature.GameDetails.Label.Upvoted,「いいね」済み
-Feature.GameDetails.Label.Visits,訪問数
+Feature.GameDetails.Label.Visits,
 Feature.GameDetails.Label.VoiceChat,
 Feature.GameDetails.Label.VoiceEnabled,ボイス有効化済み
 Feature.GameDetails.Label.Votes,{votes} 票
@@ -3774,6 +3882,14 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,残り{time}
+Feature.InExperienceShop.Label.Timer.Day.Plural,
+Feature.InExperienceShop.Label.Timer.Day.Singular,
+Feature.InExperienceShop.Label.Timer.Hour.Plural,
+Feature.InExperienceShop.Label.Timer.Hour.Singular,
+Feature.InExperienceShop.Label.Timer.Minute.Plural,
+Feature.InExperienceShop.Label.Timer.Minute.Singular,
+Feature.InExperienceShop.Label.Timer.Second.Plural,{number}秒
+Feature.InExperienceShop.Label.Timer.Second.Singular,1秒
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,このアイテムを持ち物から永久に削除しますか？もし気が変わった場合は、バーチャル空間で再び獲得する必要があります。
 Feature.Item.Label.DeleteItemUndercase,アイテムを削除
 Feature.Landing.Action.PlayNow,今すぐプレイ
@@ -3828,7 +3944,7 @@ Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,ビデオをトリミング
 Feature.Moments.Description.CommunityStandards,発言できることとできないことの詳細については、コミュニティ基準を確認してください。
 Feature.Moments.Description.EmptyCapturesLibrary,ここに切り抜きが表示されます。
-Feature.Moments.Description.GenerateTextFeedbackDisclosure,AIが生成したテキストです。投稿前にご確認ください。公開された内容に対する責任はご自身にあります。
+Feature.Moments.Description.GenerateTextFeedbackDisclosure,AIが生成したものです。投稿前にご確認ください。公開された内容に対する責任はご自身にあります。
 Feature.Moments.Description.HowToCaptureStep1,切り抜きが有効になっているバーチャル空間に参加し、ハンバーガーメニューを選択します
 Feature.Moments.Description.HowToCaptureStep2,切り抜き操作を有効化します
 Feature.Moments.Description.HowToCaptureStep3,ゲームプレイの写真とビデオを切り抜きます
@@ -3922,6 +4038,7 @@ Feature.NotApproved.Description.AvatarBrokeRules,アバターを変更してく�
 Feature.NotApproved.Description.AvatarViolation,これは削除される可能性があります
 Feature.NotApproved.Description.Ban,アカウントが停止されました。 {date} 以降、再開できます。
 Feature.NotApproved.Description.Ban.V2,違反履歴によりアカウントが一時停止されました。 {date} 以降、再開できます。
+Feature.NotApproved.Description.BannedDescription.Kids,このアカウントは今後利用できません。
 Feature.NotApproved.Description.Behavior,あなたの行動: 
 Feature.NotApproved.Description.BrokeRulesBanned,度重なるルール違反または重大なルール違反により、お使いのアカウントを停止しました。
 Feature.NotApproved.Description.BrokeRulesGeneric,あなたの言動に、当社のコミュニティルール違反がありました。
@@ -3935,15 +4052,20 @@ Feature.NotApproved.Description.CommunityStandards,Robloxをあらゆる年齢�
 Feature.NotApproved.Description.Delete,アカウントは削除されました。
 Feature.NotApproved.Description.FollowTheRules,ルールを知って、従ってください。
 Feature.NotApproved.Description.Foreshadow,ルール違反を続けると、使用の一時停止が長くなり、アカウントがそのものが停止される場合があります。
+Feature.NotApproved.Description.Foreshadow.Kids,さらにルール違反があった場合、一時停止期間が延長されたり、アクセス停止となったりする可能性もあります。
 Feature.NotApproved.Description.LinkedAccounts,対応は、リンクされたすべてのアカウントでの行動に基づいて判断されます。
 Feature.NotApproved.Description.ManualDetectionAutomatedDecision,当社はこの決定を自動的に行いました
 Feature.NotApproved.Description.ManualDetectionAutomatedDecision.V2,自動化されたシステムを使用して、この決定をしました。
 Feature.NotApproved.Description.Mistake,この決定に対して、ここで異議申し立てするか、当社による審査をリクエストできます。
+Feature.NotApproved.Description.Mistake.Kids,何かの間違いであると考えられる場合は、異議申し立てが可能です。
 Feature.NotApproved.Description.Mistake.V2,何か間違いがありましたか？ こちらから異議申し立てまたは決定のレビューを依頼できます。
 Feature.NotApproved.Description.Mistake.V3,当社の判断に誤りがあると思われる場合は、この決定に異議を申し立てることができます。
 Feature.NotApproved.Description.PluralViolation,{type} のうちの1つ
 Feature.NotApproved.Description.ReactivationNotice,[続行]を選択してルールを確認してください。その後すぐにプレイできるようになります。
 Feature.NotApproved.Description.ReviewProcess,テクノロジーと人の手の両方であなたのアクティビティを審査します。
+Feature.NotApproved.Description.RuleExplanation.Bullets.Bullying.Kids,"思いやりを持って、いじめはやめましょう。
+誰かを傷つけると脅すのはやめましょう。
+他の人の個人情報を守りましょう。"
 Feature.NotApproved.Description.RuleExplanation.Bullets.MisusingRobloxSystems,"なりすまし
 実際には起きていないことについてユーザーを虚偽に報告する行為
 嘘をついて他人に何かをさせる行為
@@ -3961,6 +4083,13 @@ Feature.NotApproved.Description.RuleExplanation.Bullets.SSHAndIllegalRegAct,"自
 アルコールや薬物など、違法または危険なもの
 賞品を賭けたギャンブル、賭博、または運まかせのゲーム
 現実世界で武器を作るための手順や方法"
+Feature.NotApproved.Description.RuleExplanation.Bullets.SexualContent.Kids,"Robloxでは友達の関係を保ちます。
+いちゃついたり、キスしたり、デートしたりしません。
+アバターは、露出の少ない服を着ています。"
+Feature.NotApproved.Description.RuleExplanation.Bullets.SharingPII.Kids,"パスワード
+実名、住所、電話番号、メールアドレス
+他のアカウントのユーザー名
+人物の写真"
 Feature.NotApproved.Description.RuleExplanation.BullyingHarassmentDiscrimination,"相手に直接意地悪なことを言ったり、特定の人について意地悪な発言をしたりすることは決して許されません。これには、個人情報を共有したり、現実世界で傷つけるような行為をほのめかしたりすることも含まれます。
 また、誰かの性格や信念、出身地を理由に意地悪や排除をすることもルール違反です。"
 Feature.NotApproved.Description.RuleExplanation.Dating,チャットは親しみやすい雰囲気で行い、いちゃつくようなやり取りは控えましょう。キスやデートなどの恋愛的な行為も禁止されています。また、アバターの服装を過度に露出したものにしないようにすることも大切です。
@@ -3970,9 +4099,14 @@ Feature.NotApproved.Description.RuleExplanation.PII,すべてのユーザーと�
 Feature.NotApproved.Description.RuleExplanation.RealLifeEvents,"実際に起きた特定の出来事に対する失礼な言動はルール違反です。これには、特に多くの人にとって悲しく恐ろしい出来事やその関係者たちを再現したり、からかったりすることも含まれます。
 これには以下が含まれます："
 Feature.NotApproved.Description.RuleExplanation.SSHAndIllegalRegulatedActivities,次のような内容を含む危険または有害なコンテンツの作成、チャット、ジョークは厳重に禁止されています。
+Feature.NotApproved.Description.RuleExplanation.SharingPII.Kids,次の情報は共有しないでください。
 Feature.NotApproved.Description.RuleExplanation.Spam,同一のメッセージ何度も送信することは禁止されています。
 Feature.NotApproved.Description.RuleExplanation.Swearing,暴言の使用は固く禁止されており、これには誤字や記号などを使って検出を避けようとする行為も含まれます。
 Feature.NotApproved.Description.RuleExplanation.ViolentContentAndGore,リアルな暴力や、人・動物・キャラクターが深刻な身体的または精神的な傷を負っているように見える表現を掲載することは、ルール違反です。
+Feature.NotApproved.Description.RuleImportance.Bullets.SharingPII.Kids,"オンライン上では、信頼できる人を見分けるのは難しい場合があります。
+知らない人が、あなたの情報を使ってあなたを見つけ出すことがあります。
+パスワードを他の人と共有すると、アカウントやRobuxを盗まれてしまう可能性があります。"
+Feature.NotApproved.Description.RuleImportance.Bullying.Kids,意地悪な行為は他のプレイヤーを傷つけます。思いやりを持つことで、Robloxを誰にとっても楽しい場所に保つことができます。
 Feature.NotApproved.Description.RuleImportance.BullyingHarassmentDiscrimination,コミュニティを誰にとっても楽しいものに保つため、誰かを不安にさせたり、不快にさせたりするような言動は行わないでください。Robloxは、あらゆる人種、民族、性自認、能力、性的指向、宗教の方々のためのものです。
 Feature.NotApproved.Description.RuleImportance.Dating,チャットとアバターのやり取りを友情に重点を置いたものにすることで、誰もが安心して楽しめるようになります。
 Feature.NotApproved.Description.RuleImportance.DirectingUsersOffPlatform,Robloxは、チャットおよびやり取りの安全性を維持するための安全保護機能を提供しています。リンクをクリックすると、Robloxに似せた偽サイトに誘導され、アカウントやアイテムを盗まれる危険があるほか、不適切な写真や動画が掲載されたサイトに誘導される場合もあります。また、Roblox外でRobuxやアイテムを取引すると、相手が約束を守らず、品物を受け取れないことがあります。
@@ -3981,12 +4115,15 @@ Feature.NotApproved.Description.RuleImportance.MisusingRobloxSystems,
 Feature.NotApproved.Description.RuleImportance.PII,見知らぬ人があなたの現実世界での身元を知ると、Robloxの外で連絡を取ろうとすることがあります。オンラインで相手が信頼できる人かどうかを判断するのは難しいため、これは危険です。そのため、パスワードは絶対に他人と共有しないでください。共有した場合、第三者にアカウントや獲得したアイテムを盗まれる可能性があります。
 Feature.NotApproved.Description.RuleImportance.RealLifeEvents,これらを実際に体験した人は、再現されたり面白おかしく扱われたりすると、動揺し嫌な思いをするでしょう。
 Feature.NotApproved.Description.RuleImportance.SSHAndIllegalRegulatedActivities,自分や他の人を傷つけるコンテンツを共有するのは危険です。もし困っていることがあれば、信頼できる大人に相談することが大切です。危険な行為を示すコンテンツを共有すると、他の人が真似して深刻な怪我につながるおそれがあります。このようなコンテンツを共有せず、ご自身とRobloxを利用する全員の安全を守りましょう。
+Feature.NotApproved.Description.RuleImportance.SexualContent.Kids,友人関係を維持したチャットとアバターで、Robloxを誰にとっても楽しい場所にしましょう。
 Feature.NotApproved.Description.RuleImportance.Spam,迷惑メッセージは会話の流れを追いにくくし、楽しみを妨げます。
 Feature.NotApproved.Description.RuleImportance.Swearing,Robloxは、子どもを含むすべての人のためのプラットフォームです。コミュニティ全体に敬意を払い、誰もが心地よく感じる言葉づかいを心がけましょう。
 Feature.NotApproved.Description.RuleImportance.ViolentContentAndGore,当コミュニティには小さなお子様も参加しているため、過度な暴力表現があると、怖がったり不安を感じたりすることがあります。
 Feature.NotApproved.Description.SecondChance.Details,プレイに戻れるようになりました。この決定に対して後から異議を申し立てることはできません。
 Feature.NotApproved.Description.SecondChance.Second,これまで責任ある行動をされてきたため、今回は一時停止の対象にはなりません。
+Feature.NotApproved.Description.SuspendedUntil,{date}{time}まで一時停止されています。
 Feature.NotApproved.Description.Violation,コンテンツ審査スタッフがあなたのRobloxでの言動を当社の{startLink}利用規約{endLink}に違反していると判断しました。
+Feature.NotApproved.Description.WarningDescription.Kids,ルール違反がありました。これが続くと、一時停止処分となる場合があります。
 Feature.NotApproved.Heading.AccountBanned,アカウントが停止されました
 Feature.NotApproved.Heading.AccountDeleted,
 Feature.NotApproved.Heading.AccountTerminated,
@@ -4001,6 +4138,8 @@ Feature.NotApproved.Heading.BannedOneMinute,1分間、アクセス停止され�
 Feature.NotApproved.Heading.BannedOneSecond,1秒間、アクセス停止されました
 Feature.NotApproved.Heading.Error,不明なエラーが発生しました。後でもう一度お試しください。
 Feature.NotApproved.Heading.ReactivationNotice,プレイに戻る
+Feature.NotApproved.Heading.RecentlyChecked,最近のチェック内容
+Feature.NotApproved.Heading.RuleExplanation.Bullying.Kids,人に敬意を持って接する
 Feature.NotApproved.Heading.RuleExplanation.BullyingHarassmentDiscrimination,誰もが快適に過ごせる空間を作る
 Feature.NotApproved.Heading.RuleExplanation.Dating,友達同士の関係を保つ
 Feature.NotApproved.Heading.RuleExplanation.DirectingUsersOffPlatform,Robloxでやり取りを完結
@@ -4008,10 +4147,13 @@ Feature.NotApproved.Heading.RuleExplanation.MisusingRobloxSystems,公平かつ�
 Feature.NotApproved.Heading.RuleExplanation.PII,個人情報を保護
 Feature.NotApproved.Heading.RuleExplanation.RealLifeEvents,実際の出来事に配慮すること
 Feature.NotApproved.Heading.RuleExplanation.SSHAndIllegalRegulatedActivities,健やかな心と体でプレイを楽しむ
+Feature.NotApproved.Heading.RuleExplanation.SexualContent.Kids,友人関係を保つ
+Feature.NotApproved.Heading.RuleExplanation.SharingPII.Kids,個人情報は非公開に
 Feature.NotApproved.Heading.RuleExplanation.Spam,和やかに会話をする
 Feature.NotApproved.Heading.RuleExplanation.Swearing,敬意と親しみやすさを意識した言葉づかい
 Feature.NotApproved.Heading.RuleExplanation.ViolentContentAndGore,落ち着いた状態でプレイ
 Feature.NotApproved.Heading.RuleImportance,これが重要な理由
+Feature.NotApproved.Heading.RuleImportance.Kids,
 Feature.NotApproved.Heading.SecondChance,この基本ルールを学んだら、すぐプレイに戻りましょう
 Feature.NotApproved.Heading.SecondChance.Details,今回のみ一時停止を回避するという結果に同意されますか？
 Feature.NotApproved.Heading.Suspended,一時停止中
@@ -4026,6 +4168,8 @@ Feature.NotApproved.Heading.SuspendedSixtyDays,60日間、アクセスが一時�
 Feature.NotApproved.Heading.SuspendedThirtyDays,30日間、アクセスが一時停止されました
 Feature.NotApproved.Heading.SuspendedThreeDays,3日間、アクセスが一時停止されました
 Feature.NotApproved.Heading.Warning,
+Feature.NotApproved.Heading.WhatNext,今後の流れ
+Feature.NotApproved.Heading.Why,その理由：
 Feature.NotApproved.Label.AbuseType.AccountTheft,アカウント窃盗
 Feature.NotApproved.Label.AbuseType.AdultContent,成人向けコンテンツ
 Feature.NotApproved.Label.AbuseType.Advertisement,
@@ -4033,6 +4177,8 @@ Feature.NotApproved.Label.AbuseType.Advertising,
 Feature.NotApproved.Label.AbuseType.AssetOwnership,アセットの所有権
 Feature.NotApproved.Label.AbuseType.Billing,支払い
 Feature.NotApproved.Label.AbuseType.BlockedContent,BlockedContent
+Feature.NotApproved.Label.AbuseType.Bullying.Kids,いじめ
+Feature.NotApproved.Label.AbuseType.Bullying.Note.Kids,あなたのアクティビティに、他人を傷つけるような言葉が見つかりました。
 Feature.NotApproved.Label.AbuseType.Chargeback,チャージバック
 Feature.NotApproved.Label.AbuseType.CheatandExploits,チートとエクスプロイト
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,児童を危険にさらすこと
@@ -4110,6 +4256,10 @@ Feature.NotApproved.Label.AbuseType.Scamming,
 Feature.NotApproved.Label.AbuseType.SeekingSexualContent,性的な内容を求めること
 Feature.NotApproved.Label.AbuseType.SexualAdultContent,性的または成人向けの内容
 Feature.NotApproved.Label.AbuseType.SexualContent,
+Feature.NotApproved.Label.AbuseType.SexualContent.Kids,アダルトコンテンツ
+Feature.NotApproved.Label.AbuseType.SexualContent.Note.Kids,子どもには不適切な言葉や画像が見つかりました。例えば、ヌード写真や恋愛関連のものなどです。
+Feature.NotApproved.Label.AbuseType.SharingPII.Kids,個人情報のシェア
+Feature.NotApproved.Label.AbuseType.SharingPII.Note.Kids,実名、電話番号、または実在の人物の写真などが見つかりました。
 Feature.NotApproved.Label.AbuseType.Shock,ショックな内容
 Feature.NotApproved.Label.AbuseType.Spam,
 Feature.NotApproved.Label.AbuseType.SuggestiveSexualizedImagery,挑発的・性的なイメージ
@@ -4415,9 +4565,10 @@ Feature.Profile.Heading.EditAgedUpDisplayName,名前を編集
 Feature.Profile.Heading.EditDisplayName,表示名を編集
 Feature.Profile.Heading.InsufficientFunds,資金が足りません
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,プロフィールフレーム
 Feature.Profile.Heading.ProfilePictureSaved,プロフィール写真が正常に保存されました
 Feature.Profile.Heading.ProfileQRCode,
-Feature.Profile.Heading.Statistics,統計
+Feature.Profile.Heading.Statistics,
 Feature.Profile.Heading.Username,
 Feature.Profile.Heading.UsernameUpdated,ユーザネームが更新されました
 Feature.Profile.Label.AboutDetailsHeading,{name}について
@@ -4550,7 +4701,7 @@ Feature.ReportAbuse.Message.UserTextMuted,このバーチャル空間内では�
 Feature.ReportAbuse.Message.UserTextMutedErrorDoesNotExist,{name} さんが見つかりません。すでにバーチャル空間から退出している可能性があります。
 Feature.ReportAbuse.Message.UserTextMutedErrorSelf,自分のチャットはブロックできません。
 Feature.ReportAbuse.Message.UserTextMutedSystem,ユーザー（ ‘{name}’ ）はミュートされています。元に戻すには ‘/unmute {name}' と入力してください。
-Feature.ReportAbuse.Problem.Bullying,いじめ
+Feature.ReportAbuse.Problem.Bullying,
 Feature.ReportAbuse.Problem.Cheating,
 Feature.ReportAbuse.Problem.Dating,恋愛関係・性的内容
 Feature.ReportAbuse.Problem.Hate,ヘイト
@@ -4599,7 +4750,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,うれしいお知らせで�
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plusを取得する
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plusはこちらではご利用いただけません
-Feature.SafetyDashboard.Heading.AccountStatus,アカウント状況
+Feature.SafetyDashboard.Heading.AccountStatus.V2,アカウント状況、違反、異議申し立て
 Feature.Schools.Action.AlreadyGraduated,卒業済みです
 Feature.Schools.Action.CantFindSchool,学校が見つからない場合
 Feature.Schools.Action.Continue,
@@ -4642,6 +4793,7 @@ Feature.Schools.Error.OtpExpired,このコードは有効期限切れです。
 Feature.Schools.Error.OtpInvalidFormat,このコードは形式が無効です。
 Feature.Schools.Error.OtpTooManyAttempts,本日の最大試行回数に達しました。
 Feature.Schools.Error.SomethingWentWrong,
+Feature.Schools.Error.UnidaysEmailNotFound,UNiDAYSでこのメールアドレスが見つかりません。
 Feature.Schools.Filter.AllYears,すべての年
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,卒業年

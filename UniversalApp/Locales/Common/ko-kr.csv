@@ -226,13 +226,11 @@ Authentication.AccountSwitch.Action.SwitchAccount,계정 전환
 Authentication.AccountSwitch.Description.AccountLimit.2,계정 한도에 도달했습니다. 새 계정을 추가하려면 먼저 계정을 삭제하세요.
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,{username} 계정으로 계속 진행하면 다른 계정에서 로그아웃됩니다.
 Authentication.AccountSwitch.Description.LogoutConfirmation,새 계정을 추가하려면 먼저 이 기기의 다른 Roblox 계정에서 로그아웃해야 합니다
-Authentication.AccountSwitch.Description.ParentLogoutConfirmation,보호자 권한이 있는 새 계정을 추가하려면 먼저 이 기기의 다른 Roblox 계정에서 로그아웃해야 합니다
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,나중에 다시 시도하세요
 Authentication.AccountSwitch.Description.RemoveAllAccounts,로그아웃하면 이 기기에서 모든 계정이 삭제됩니다.
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,삭제 시에는 다시 로그인하지 않는 한 이 기기에 더 이상 해당 계정이 표시되지 않습니다. 랜딩 페이지로 다시 이동합니다.
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,직접 로그인해 보세요
-Authentication.AccountSwitch.Header.CantSwitchAccounts,계정을 전환할 수 없음
-Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,
+Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,계정을 전환할 수 없음
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Header.RemoveCurrentAccount,현재 계정을 삭제하시겠어요?
 Authentication.AccountSwitch.Header.SignOutOtherAccounts,다른 계정에서 로그아웃할까요?
@@ -672,6 +670,7 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_RequiredSkinningTransfer,{asse
 Common.UGCValidation.ErrorLabel.AccessorySkinning_RigidIsSkinned,리지드 액세서리에 지원되지 않는 스키닝 데이터가 있습니다. 메시와 함께 본을 가져오지 않도록 하세요.
 Common.UGCValidation.ErrorLabel.AccessorySkinning_TransferJointWithoutAutoSkin,"핸들에 조인트 {jointName}이(가) 포함되어 있으며, 이는 WrapLayer.AutoSkin이 EnabledOverride로 설정된 경우에만 허용됩니다."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,조인트를 전달하기 위해 스킨이 적용된 버텍스에는 완전한 가중치를 적용해야 합니다.
+Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,애니메이션 팩 번들에 여러 클립에서 사용되는 중복 애니메이션 ID '{animationId}'이(가) 포함되어 있습니다: {instancePaths}. 각 애니메이션 클립은 고유한 애니메이션 자산을 참조해야 합니다.
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,애니메이션 팩 번들에 예상되는 애니메이션 유형이 없습니다: {missingAnimationTypes}. 각 애니메이션 유형에는 예상되는 StringValue 하위 항목을 정확히 포함하는 R15Anim 폴더가 하나 있어야 합니다.
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,애니메이션 '{animationName}'의 가중치 값이 {weight}입니다. 가중치는 0보다 커야 합니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,필요한 {ExpectedClass}의 {ExpectedName}을(를) {ParentPath} 내에서 찾지 못했습니다
@@ -719,7 +718,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation에 {
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation의 Curve에 대한 키 개수가 너무 많습니다. Curve당 최대 개수는 {maxAllowed}개입니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation에 {maxAllowed}개 이상의 MarkerCurve가 포함되어 있습니다. MarkerCurve 하위 항목은 {maxAllowed}개 이하여야 합니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation에 마커 {count}개가 포함된 MarkerCurve가 있습니다. MarkerCurve당 최대 개수는 {maxAllowed}개입니다. 애니메이션을 수정하세요.
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"게시된 애니메이션은 최대 부위 이동 거리를 {taggedTranslation} 스터드로 지정했지만, 애니메이션 데이터에서는 {calculatedTranslation} 스터드로 계산됩니다. 애니메이션을 다시 게시하세요."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation에 예상치 못한 자식 항목({childName})이 포함되어 있습니다.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,마켓플레이스의 다이내믹 헤드는 케이징을 적절히 처리하여 케이지의 눈과 입 정점이 메시 정점과 일치해야 합니다. 케이징과 메시의 정렬을 개선하세요.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,다이내믹 헤드의 미소 표정을 감지할 수 없습니다. 입의 케이지 랜드마크를 조정하여 머리에서 입이 있는 위치와 일치시키고 미소 표정을 지을 수 있는지 확인하세요.
@@ -730,6 +728,10 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"마켓플레이스의 다이�
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,다이내믹 헤드의 오른쪽 눈 감기 표정을 감지할 수 없습니다. 오른쪽 눈의 케이지 랜드마크를 조정하여 머리의 오른쪽 눈과 일치시키고 감을 수 있는지 확인하세요.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,다이내믹 헤드의 찡그린 표정을 감지할 수 없습니다. 입의 케이지 랜드마크를 조정하여 머리에서 입이 있는 위치와 일치시키고 찡그린 표정을 지을 수 있는지 확인하세요.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,이 애셋은 신뢰할 수 있는 크리에이터 프로그램에 속한 크리에이터만 사용할 수 있는 발광형 맵을 사용합니다. 업로드하기 전에 모든 발광형 맵 콘텐츠를 제거하거나 프로그램에 참여하세요.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,게시된 애니메이션에 유효한 최대 부위 이동 거리 값이 없습니다. 애니메이션을 다시 게시하세요.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,게시된 애니메이션에 유효한 UGC 감정 표현 마커가 없습니다. 애니메이션을 다시 게시하세요.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,게시된 애니메이션 데이터에서 최대 부위 이동 거리를 계산할 수 없습니다. 애니메이션을 다시 게시하세요.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"게시된 애니메이션은 최대 부위 이동 거리를 {taggedTranslation} 스터드로 지정했지만, 애니메이션 데이터에서는 {calculatedTranslation} 스터드로 계산됩니다. 애니메이션을 다시 게시하세요."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls의 InternalOverrideFACSData 속성은 업로드 시 비워두어야 합니다.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,FACS(표정 코딩 시스템)이 사용자의 머리가 {modPercent}% 확대된 것을 감지했습니다. 머리를 변경하는 것은 얼굴 애니메이션에 대한 마켓플레이스 정책에 위배됩니다.
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,FACS(표정 코딩 시스템)이 사용자의 머리가 {modPercent}% 축소된 것을 감지했습니다. 머리를 변경하는 것은 얼굴 애니메이션에 대한 마켓플레이스 정책에 위배됩니다.
@@ -884,7 +886,7 @@ CommonUI.Features.Label.ChannelWithChannelName,채널: {channelName}
 CommonUI.Features.Label.Charts,차트
 CommonUI.Features.Label.Chat,채팅
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
-CommonUI.Features.Label.Connect,연결
+CommonUI.Features.Label.Connect,친구
 CommonUI.Features.Label.Connection,인맥
 CommonUI.Features.Label.Connections,
 CommonUI.Features.Label.ControllerBar.HoldPrefix,길게 누르기:
@@ -895,7 +897,7 @@ CommonUI.Features.Label.CreationCenter,게임 창작물 센터
 CommonUI.Features.Label.DevSubs,가입
 CommonUI.Features.Label.Discover,둘러보기
 CommonUI.Features.Label.ForYou,추천
-CommonUI.Features.Label.Friends,친구
+CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,체험
 CommonUI.Features.Label.Games,게임
 CommonUI.Features.Label.GiftCards,기프트 카드 구매
@@ -1179,6 +1181,7 @@ Feature.Accessibility.Action.ScrollUp,위로 스크롤
 Feature.Accessibility.AppTheme.CategoryCalm,차분함
 Feature.Accessibility.AppTheme.CategoryDynamic,다이내믹
 Feature.Accessibility.AppTheme.CircuitRush,회로 돌진
+Feature.Accessibility.AppTheme.Classic,클래식
 Feature.Accessibility.AppTheme.CosmicDust,우주의 가루
 Feature.Accessibility.AppTheme.Default,
 Feature.Accessibility.AppTheme.ElectricLime,짜릿한 라임
@@ -1195,6 +1198,7 @@ Feature.Accessibility.AppTheme.StarBurst,별 폭발
 Feature.Accessibility.AppTheme.SuperCharge,슈퍼 충전
 Feature.Accessibility.Description.AppThemeMode,앱 모드를 선택하세요. 다른 기기에는 영향을 주지 않습니다.
 Feature.Accessibility.Description.DeviceAppTheme,앱 테마를 선택하세요. 모든 기기 유형에 반영됩니다.
+Feature.Accessibility.Description.DeviceAppThemeExclusive,Plus 전용 테마를 둘러보고 체험을 맞춤화하세요. 지금 테마를 사용해 보고 구독하여 선택한 테마를 저장하세요.
 Feature.Accessibility.Description.DeviceAppThemeUpsell,Plus 전용 테마를 둘러보고 체험을 맞춤화하세요. 지금 테마를 사용해보고 구독하여 선택한 테마를 저장하세요.
 Feature.Accessibility.Description.DeviceLevelTheme,이 기기의 테마를 선택하세요.(참고: 다른 기기의 Roblox 표시 방식은 변경되지 않습니다.)
 Feature.Accessibility.Description.Haptics,Roblox 앱의 전체적인 진동을 조절합니다
@@ -1217,6 +1221,7 @@ Feature.Accessibility.Heading.DeviceAppTheme,앱 테마
 Feature.Accessibility.Heading.DeviceLevelTheme,기기 레벨 테마
 Feature.Accessibility.Heading.DevicePreferences,기기 기본 설정
 Feature.Accessibility.Heading.DevicePreferencesV2,
+Feature.Accessibility.Heading.ExclusiveThemes,특별 테마
 Feature.Accessibility.Heading.LaunchAtLogin,로그인 시 시작
 Feature.Accessibility.Heading.LaunchAtStartup,시작 시 실행
 Feature.Accessibility.Heading.MinimizeToTray,닫기 시 트레이로 최소화
@@ -1661,11 +1666,14 @@ Feature.Avatar.Action.Zoom,줌
 Feature.Avatar.AvatarWidgetTitle,스타일 탐색
 Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,삭제 취소
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,
 Feature.Avatar.BackgroundGeneration.Action.Upload,업로드하기
 Feature.Avatar.BackgroundGeneration.Action.View,
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Plus로 배경을 만드세요.
+Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,지금 나가면 이 배경이 삭제됩니다.
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,작품을 사용할 준비가 되었습니다.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"이 배경은 AI로 생성되었습니다. 게시하면 Roblox 커뮤니티 규정을 준수하며 권한이 없는 콘텐츠를 사용하지 않는다고 확인하는 것으로 간주됩니다. 인벤토리에 표시되기 전에 검토를 거치며, 게시된 아이템은 수정할 수 없습니다."
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,이 배경은 AI로 생성되었습니다. 업로드하면 Roblox 커뮤니티 규정을 준수하며 권한이 없는 콘텐츠를 사용하지 않는다고 확인하는 것으로 간주됩니다. 인벤토리에 표시되기 전에 검토를 거칩니다. 업로드된 아이템은 수정할 수 없습니다.
@@ -1686,6 +1694,7 @@ Feature.Avatar.BackgroundGeneration.PromptPlaceholder,배경을 설명해 주세
 Feature.Avatar.BackgroundGeneration.Status.Generating,배경 생성 중...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,배경 준비 중...
 Feature.Avatar.BackgroundGeneration.Title,배경 만들기
+Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,이 배경을 삭제하시겠어요?
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,인벤토리에 게시
 Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
@@ -2163,6 +2172,7 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,{DisplayName} 님을 차단할까요?
 Feature.BlockingModal.Message.BlockConfirmation,"이 사용자를 차단하면 인맥 또는 팔로워 목록에서 삭제되며, 메시지, 요청, 초대 등을 나에게 보낼 수 없게 됩니다.<br /><br />차단한 사실은 상대에게 알려지지 않습니다."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"이 사용자를 차단하면 친구 또는 팔로워 목록에서 삭제됩니다. 상대가 메시지나 요청, 초대 등을 내게 보낼 수 없습니다.<br /><br />차단한 사실은 상대에게 알려지지 않습니다."
+Feature.Build.Action.Add,
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,플레이테스터 추가
 Feature.Build.Action.AddPlaytesters,
@@ -2176,7 +2186,9 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,텍스트 복사
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,다시 묻지 않음
+Feature.Build.Action.DontShowAgain,다시 표시하지 않음
 Feature.Build.Action.HideAutosaved,자동 저장된 버전 숨기기
 Feature.Build.Action.ManageLimit,한도 관리
 Feature.Build.Action.Next,
@@ -2190,28 +2202,84 @@ Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,최신 게시
 Feature.Build.Action.Restore,복원
+Feature.Build.Action.Resume,다시 시작
 Feature.Build.Action.Revert,
 Feature.Build.Action.SetDailyLimit,일일 한도 설정
 Feature.Build.Action.SetLimit,한도 설정
 Feature.Build.Action.Settings,
 Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,링크 공유
+Feature.Build.Action.ShowMore,
+Feature.Build.Action.Stats,통계
 Feature.Build.Action.Submit,제출하기
 Feature.Build.Action.UpdateRating,등급 업데이트
 Feature.Build.Action.UpdateWithChanges,변경 사항으로 업데이트
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,사용량 보기
+Feature.Build.Analytics.AnalyzeChatPrompt,지난 {days}일 동안의 내 {analyzeName}은(는) 어떻게 되나요?
+Feature.Build.Analytics.AnalyzeName.Arppu,유료 사용자당 평균 수익
+Feature.Build.Analytics.AnalyzeName.D1Retention,1일 차 유지율
+Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,일일 활성 사용자 수
+Feature.Build.Analytics.AnalyzeName.PayerConversion,유료 사용자 전환
+Feature.Build.Analytics.AnalyzeName.PlaythroughRate,플레이스루 비율
+Feature.Build.Analytics.AnalyzeName.TotalPlaytime,총 플레이타임
+Feature.Build.Analytics.Description.Arppu,유료 사용자당 평균 수익은 획득한 총 Robux를 유료 플레이어 수로 나눈 값입니다. 각 구매자가 평균적으로 지출하는 금액을 보여줍니다.
+Feature.Build.Analytics.Description.D1Retention,1일 차 유지율은 처음 참가한 플레이어들 중 하루 뒤에 다시 방문하는 플레이어의 수를 측정합니다. 체험의 지속성을 초기에 파악할 수 있는 지표입니다.
+Feature.Build.Analytics.Description.DailyActiveUsers,일일 활성 사용자 수는 매일 체험을 시작하는 고유 플레이어 수를 나타냅니다. 이 수치를 추적하여 지속적으로 재방문하는 플레이어 수를 확인하고 성장 또는 감소 추이를 파악하세요.
+Feature.Build.Analytics.Description.PayerConversion,유료 사용자 전환은 체험 내에서 Robux를 지출한 플레이어의 비율입니다. 이를 사용하여 수익 창출이 플레이어를 구매자로 얼마나 효과적으로 전환하고 있는지 측정할 수 있습니다.
+Feature.Build.Analytics.Description.PlaythroughRate,플레이스루 비율은 전체 플레이 세션을 완료한 방문자의 비율입니다. 비율이 높다는 것은 플레이어가 체험을 쉽게 시작하고 끝까지 플레이할 가치가 있다고 생각하는 것을 의미합니다.
+Feature.Build.Analytics.Description.TotalPlaytime,총 플레이타임은 해당 기간 동안 모든 플레이어가 체험에 소요한 시간을 합산한 것입니다. 플레이타임이 증가하면 일반적으로 더 많은 참여 세션이 있다는 신호입니다.
+Feature.Build.Analytics.DurationHours,{number}시간
+Feature.Build.Analytics.KeyStats,주요 통계
+Feature.Build.Analytics.LastMonth,지난달
+Feature.Build.Analytics.LastWeek,
+Feature.Build.Analytics.Likes,좋아요
+Feature.Build.Analytics.Month.Apr,
+Feature.Build.Analytics.Month.Aug,
+Feature.Build.Analytics.Month.Dec,
+Feature.Build.Analytics.Month.Feb,
+Feature.Build.Analytics.Month.Jan,
+Feature.Build.Analytics.Month.Jul,
+Feature.Build.Analytics.Month.Jun,
+Feature.Build.Analytics.Month.Mar,
+Feature.Build.Analytics.Month.May,
+Feature.Build.Analytics.Month.Nov,
+Feature.Build.Analytics.Month.Oct,
+Feature.Build.Analytics.Month.Sep,
+Feature.Build.Analytics.NoData,사용 가능한 데이터 없음
+Feature.Build.Analytics.Overview,개요
+Feature.Build.Analytics.Percent,{number}%
+Feature.Build.Analytics.Players,플레이어
+Feature.Build.Analytics.Sheet.Analyze,분석
+Feature.Build.Analytics.Sheet.ViewInOverview,개요에서 보기
+Feature.Build.Analytics.Summary.Arppu,유료 플레이어 1인당 평균 Robux 수입.
+Feature.Build.Analytics.Summary.D1Retention,다음 날 다시 플레이하는 신규 플레이어 비율.
+Feature.Build.Analytics.Summary.DailyActiveUsers,선택한 기간 동안 참가한 고유 플레이어 수.
+Feature.Build.Analytics.Summary.PayerConversion,구매한 플레이어의 비율.
+Feature.Build.Analytics.Summary.PlaythroughRate,전체 플레이스루에 도달한 세션의 비율.
+Feature.Build.Analytics.Summary.TotalPlaytime,플레이어가 내 체험에서 보낸 총 시간.
+Feature.Build.Analytics.Title.Arppu,ARPPU
+Feature.Build.Analytics.Title.ConcurrentUsers,총 플레이어
+Feature.Build.Analytics.Title.D1Retention,
+Feature.Build.Analytics.Title.DailyActiveUsers,
+Feature.Build.Analytics.Title.PayerConversion,
+Feature.Build.Analytics.Title.PlaythroughRate,
+Feature.Build.Analytics.Title.TotalPlaytime,
+Feature.Build.Analytics.Visits,방문 수
 Feature.Build.Content.NewGame,새 게임
+Feature.Build.Description.AdCampaignModerationReview,모든 광고 캠페인은 Roblox 규정 준수 팀에서 검토합니다. 이 절차에는 최대 24시간이 소요될 수 있습니다.
+Feature.Build.Description.AdCampaignSheetRunDates,{startDate}~{endDate} 실행
+Feature.Build.Description.AdvertisingAgreement,계속 진행하면 {advertisingTermsStart}Roblox 광고 약관{advertisingTermsEnd} 및 {advertisingStandardsStart}광고 규정{advertisingStandardsEnd}에 동의하는 것으로 간주됩니다.
 Feature.Build.Description.ArchiveRemoval,이 게임을 보관하면 해당 게임이 Build에서 삭제됩니다. 크리에이터 허브 또는 Roblox Studio에서 계속 액세스하고 복원할 수 있습니다.
 Feature.Build.Description.AutoBuyUsage,Robux를 사용하여 제작할 때 추가 Build 사용량을 자동으로 구매하세요. 언제든지 일일 지출 한도를 설정할 수 있습니다.
 Feature.Build.Description.BoostAudienceForPlays,오디언스를 확대하여 더 많은 플레이를 확보하세요.
-Feature.Build.Description.BoostGameAudience,게임의 오디언스 확대
 Feature.Build.Description.BuildIdeaGame,나만의 아이디어로 게임을 만들어 보세요
 Feature.Build.Description.BuildReplyNotif,Build에서 답변이 있을 때 알림을 받으세요.
 Feature.Build.Description.BuyRobuxToCreate,"계속 제작하려면 Robux를 더 구매하거나, 내일 무료 Build 사용량이 초기화될 때까지 기다리세요."
 Feature.Build.Description.BuyUsageOrWait,"Robux로 Build 사용량을 더 구매하거나, 일일 한도가 초기화될 때까지 기다리세요."
 Feature.Build.Description.CampaignRunDates,캠페인은 {startDate}~{endDate} 에 실행됩니다.
 Feature.Build.Description.ChoosePlaytesters,플레이테스트를 도와줄 친구를 선택하세요.
+Feature.Build.Description.EarnedRobuxAppliedFirst,"Robux를 획득한 경우, 해당 Robux가 광고 캠페인 비용에 우선 적용됩니다."
 Feature.Build.Description.EnableBuildNotifs,Build에서 보내는 최신 소식을 받으려면 기기 설정에서 알림을 켜세요.
 Feature.Build.Description.FriendsLinkOnly,친구만 이 링크에 액세스할 수 있습니다. 더 많은 사람이 플레이하기를 원하시면 게임의 대상 설정을 변경하세요.
 Feature.Build.Description.GameCreationDone,게임 생성 및 게시가 완료되었습니다. 게임을 열어 플레이테스트할 수 있습니다.
@@ -2225,22 +2293,27 @@ Feature.Build.Description.PlaytestLatest,최신 버전을 플레이테스트하�
 Feature.Build.Description.PlaytestLocked,첫 게임을 만든 후 플레이테스트를 시작할 수 있습니다.
 Feature.Build.Description.PlaytesterAccess,친구를 플레이테스터로 추가하거나 게임의 대상 설정을 변경하여 더 많은 사람이 플레이할 수 있도록 하세요.
 Feature.Build.Description.PrivateShare,게임을 공유하려면 게임의 대상 설정을 변경하세요.
+Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}일 광고 캠페인으로 오디언스를 확대하고 게임을 홍보하세요.
 Feature.Build.Description.RaiseLimitOrWait,"계속 제작하려면 일일 Robux 한도를 늘리거나, 내일 초기화될 때까지 기다리세요."
 Feature.Build.Description.RatingAgreement,게시하면 이 콘텐츠 등급이 정확하다는 데 동의하는 것으로 간주됩니다.
 Feature.Build.Description.RestoreLatest,이 버전이 최신 게시 버전이 됩니다.
 Feature.Build.Description.RevertToVersion,확인을 눌러 최신 변경 사항을 복구하고 {VERSION} 버전으로 돌아가세요.
+Feature.Build.Description.ShareLatest,최신 버전에서 변경된 사항을 공유하세요.
 Feature.Build.Description.VersionChanges,이 버전에서 변경된 사항을 플레이어에게 알려주세요.
 Feature.Build.Header.AccessSharing,액세스 및 공유
+Feature.Build.Header.AllVersions,모든 버전
 Feature.Build.Header.ContentMaturity,콘텐츠 수위
 Feature.Build.Header.CustomAnswer,사용자 정의 답변
 Feature.Build.Header.GameDetails,게임 세부 정보
-Feature.Build.Header.Overview,개요
+Feature.Build.Header.Overview,
 Feature.Build.Header.PastCampaigns,과거 캠페인
+Feature.Build.Header.UpdateDetails,세부 정보 업데이트
 Feature.Build.Label.Access,액세스
 Feature.Build.Label.AdClicks,광고 클릭 수
 Feature.Build.Label.AdViews,광고 조회수
 Feature.Build.Label.AdditionalUsage,추가 Build 사용량
 Feature.Build.Label.AdditionalUsed,{LIMIT} 중 {USED} 사용됨
+Feature.Build.Label.AdsManager,광고 관리자
 Feature.Build.Label.All,
 Feature.Build.Label.AmountAvailable,{AMOUNT} 이용 가능
 Feature.Build.Label.Autosaved,자동 저장됨
@@ -2248,6 +2321,7 @@ Feature.Build.Label.Available,이용 가능
 Feature.Build.Label.BackToBuild,빌드로 돌아가기
 Feature.Build.Label.Building,제작 중...
 Feature.Build.Label.CaptureLibrary,캡처 라이브러리
+Feature.Build.Label.CaptureSelectionCount,{MAX_SELECTIONS}개 중 {SELECTED_COUNT}개 선택됨
 Feature.Build.Label.ContentRating,콘텐츠 등급
 Feature.Build.Label.Created,제작 정보
 Feature.Build.Label.CreatedDate,{YEAR}년 {MONTH}월 {DAY}일
@@ -2257,7 +2331,9 @@ Feature.Build.Label.Deleted,삭제됨
 Feature.Build.Label.DescribeIdea,아이디어 설명
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,
+Feature.Build.Label.EasyPerformanceReport,간편한 성과 보고서
 Feature.Build.Label.Error,
+Feature.Build.Label.Free,무료
 Feature.Build.Label.FreeBuildUsage,무료 Build 사용량
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
@@ -2270,7 +2346,9 @@ Feature.Build.Label.InProgress,진행 중
 Feature.Build.Label.InputNeeded,입력 필요
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,제한됨
+Feature.Build.Label.Live,라이브
 Feature.Build.Label.Loading,
+Feature.Build.Label.MaximizeForGamePlays,게임 플레이 횟수 극대화
 Feature.Build.Label.Models3D,3D 모델
 Feature.Build.Label.NoLimit,한도 없음
 Feature.Build.Label.NotStarted,시작 전
@@ -2295,6 +2373,7 @@ Feature.Build.Label.SelectOption,옵션 선택
 Feature.Build.Label.ShareAddedFriends,추가한 친구와 공유
 Feature.Build.Label.Shared,공유 완료
 Feature.Build.Label.Sounds,사운드
+Feature.Build.Label.TargetAllRobloxPlayers,모든 Roblox 플레이어를 대상으로 하세요
 Feature.Build.Label.Thinking,생각 중
 Feature.Build.Label.Title,제목
 Feature.Build.Label.TitleDescription,제목 및 설명
@@ -2362,6 +2441,7 @@ Feature.Build.Label.ToolThumbnailRunning,게임 섬네일 설정 중
 Feature.Build.Label.UniverseNumber,{UNIVERSE_ID} 유니버스
 Feature.Build.Label.Unknown,알 수 없음
 Feature.Build.Label.UnlimitedUsed,{USED} 사용됨 • 한도 없음
+Feature.Build.Label.UpdateTitleDesc,제목 및 설명 업데이트
 Feature.Build.Label.Updated,업데이트 시간
 Feature.Build.Label.Usage,사용량
 Feature.Build.Label.UsageUsed,{USED} 사용됨
@@ -2374,7 +2454,14 @@ Feature.Build.Label.VersionTitleDesc,버전 이름 및 설명
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,회원님의 계정이 Build 사용 요건을 충족하지 않습니다.
 Feature.Build.Message.AccountTooNew,계정을 새로 만든 지 얼마 안 돼서 게시할 수 없습니다. 2일 후에 다시 시도해 보세요.
+Feature.Build.Message.AdCampaignCreateFailed,캠페인을 생성하지 못했습니다. 다시 시도해 보세요.
+Feature.Build.Message.AdCampaignCreated,광고 캠페인 생성됨
 Feature.Build.Message.AdPerformanceLoadFailed,광고 실적을 불러올 수 없습니다
+Feature.Build.Message.AdsPromotionBannerSubtitle,무료로 오디언스를 확대하세요
+Feature.Build.Message.AdsPromotionBannerTitle,무료 프로모션이 {promotionCount}건 남았습니다
+Feature.Build.Message.AdsPromotionBannerTitleSingular,무료 프로모션이 1건 남았습니다
+Feature.Build.Message.AdsStatsEmpty,광고 캠페인으로 오디언스를 확대하고 게임을 홍보하세요
+Feature.Build.Message.AdsStatsEmptyFree,무료 광고 캠페인으로 오디언스를 확대하고 게임을 홍보하세요
 Feature.Build.Message.AllFriendsAdded,모든 친구를 플레이테스터로 추가했습니다.
 Feature.Build.Message.AnswerBuildQuestion,아래에서 Build의 질문에 답하세요.
 Feature.Build.Message.AssetDetailsUnavailable,애셋 세부 정보를 이용할 수 없습니다.
@@ -2404,12 +2491,14 @@ Feature.Build.Message.GamePublishFailed,게임을 게시하지 못했습니다. 
 Feature.Build.Message.GameShared,게임 공유됨
 Feature.Build.Message.GameSharedWith,{DISPLAY_NAME} 님에게 게임 공유됨
 Feature.Build.Message.HiDisplayName,"{DISPLAY_NAME} 님, 안녕하세요"
+Feature.Build.Message.ImageUploadFailed,이미지를 업로드하지 못했습니다. 다시 시도해 보세요.
 Feature.Build.Message.InvalidMessage,메시지에 문제가 발생했어요. 메시지를 수정하고 다시 시도하세요.
 Feature.Build.Message.InvitesLoadFailed,초대를 불러오지 못함
 Feature.Build.Message.LimitBelowSpend,오늘 이미 사용한 {ALREADY_SPENT} Robux 미만으로 한도를 설정할 수 없습니다.
 Feature.Build.Message.LinkCopied,링크가 클립보드에 복사되었습니다.
 Feature.Build.Message.LoadingVersions,버전 기록을 불러오는 중...
 Feature.Build.Message.NoAssetsFound,애셋을 찾을 수 없습니다.
+Feature.Build.Message.NoCapturesAvailable,사용 가능한 캡처가 없습니다.
 Feature.Build.Message.NoDescriptionProvided,설명을 입력하지 않았습니다.
 Feature.Build.Message.NoFriendsToAdd,아직 추가할 친구가 없습니다. 먼저 Roblox에서 친구를 찾아보세요.
 Feature.Build.Message.NoResults,
@@ -2420,6 +2509,8 @@ Feature.Build.Message.PlaytestersAdded,{MAX_INVITES}명 중 {INVITED_COUNT}명�
 Feature.Build.Message.PublicPublishFailed,게임이 게시되었지만 공개되지 못했습니다. 다시 시도하세요.
 Feature.Build.Message.PublishExpandAudience,오디언스를 확대하려면 게시하세요
 Feature.Build.Message.PublishNotReverted,게시한 내용을 되돌리지 못했습니다. 다시 시도하세요.
+Feature.Build.Message.PublishPromotionUpsell,게임 게시가 완료되었습니다. 축하드립니다! Roblox에서 더 많은 플레이어를 확보할 수 있는 무료 프로모션이 {promotionCount}건 있습니다.
+Feature.Build.Message.PublishPromotionUpsellSingular,게임 게시가 완료되었습니다. 축하드립니다! Roblox에서 더 많은 플레이어를 확보할 수 있는 무료 프로모션이 1건 있습니다.
 Feature.Build.Message.PublishReverted,게시를 되돌렸습니다.
 Feature.Build.Message.QuestionnaireNeeded,이 게임은 Build 외부에서 편집되었습니다. 게시하려면 콘텐츠 설문지를 작성해 주세요.
 Feature.Build.Message.ReadyToPlay,게임을 Roblox에서 플레이할 준비가 되었습니다!
@@ -2447,7 +2538,11 @@ Feature.Build.Notification.Message.Review,결과를 검토하려면 빌드 채�
 Feature.Build.Notification.Title.Finished,빌드 완료
 Feature.Build.Notification.Title.NeedInput,빌드에 대한 의견 필요
 Feature.Build.Title.AdCampaignActive,광고 캠페인이 활성화되었습니다
+Feature.Build.Title.AdCampaignDuration,{durationDays}일 광고 캠페인
 Feature.Build.Title.AddFriendsToPlaytest,플레이테스트를 도와줄 친구 추가
+Feature.Build.Title.AddImages,이미지 추가
+Feature.Build.Title.AdsStatsEmpty,캠페인 시작하기
+Feature.Build.Title.AdsStatsEmptyFree,첫 번째 캠페인 시작하기
 Feature.Build.Title.ArchiveThisGame,이 게임을 보관하시겠어요?
 Feature.Build.Title.AssetLibrary,라이브러리
 Feature.Build.Title.Audience,오디언스
@@ -2469,14 +2564,18 @@ Feature.Build.Title.GetUsers,사용자 가져오기
 Feature.Build.Title.NoRobuxForUsage,Build 사용량을 위한 Robux가 남아 있지 않음
 Feature.Build.Title.Playtesters,플레이테스터
 Feature.Build.Title.PlaytestersOnlyPlay,플레이테스터만 플레이할 수 있습니다
+Feature.Build.Title.PromoteGame,게임을 홍보하세요
 Feature.Build.Title.PromoteGameFree,게임을 무료로 홍보하세요
 Feature.Build.Title.PushNotifications,푸시 알림
 Feature.Build.Title.RevertLastChange,마지막 변경 사항을 되돌리시겠어요?
 Feature.Build.Title.Tasks,작업
 Feature.Build.Title.TurnActivity,턴 활동
 Feature.Build.Title.VersionHistory,버전 기록
-Feature.Build.Title.VersionInformation,버전 정보
+Feature.Build.Title.VersionInfo,버전 정보
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,{VERSION} 버전
+Feature.Build.Title.Versions,
+Feature.Build.Title.WhatsIncluded,포함 사항
 Feature.BuyRobux.Heading.Banner,Robux 구매
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,아니요 안 할래요
@@ -2643,7 +2742,7 @@ Feature.Catalog.Label.Filter.Sorts,정렬
 Feature.Catalog.Label.Filter.TotalValue,총계
 Feature.Catalog.Label.Filter.UnavailableItems,이용 불가 아이템
 Feature.Catalog.Label.FreeItemConfirmation,{creatorName}의 {itemName}(을)를 무료로 받으시겠어요?
-Feature.Catalog.Label.FreeUpperCase,무료
+Feature.Catalog.Label.FreeUpperCase,
 Feature.Catalog.Label.FromPrice,최저가: {itemPrice}
 Feature.Catalog.Label.FrontAccessories,전면 장신구
 Feature.Catalog.Label.FullBodies,
@@ -3152,7 +3251,7 @@ Feature.Durables.PartiallyExpiredItems.BodyText,저장된 아바타의 일부 �
 Feature.Durables.PartiallyExpiredItems.TitleText,만료된 아이템
 Feature.Durables.PurchaseModal.SuccessMessage,{itemName}이(가) {number}일 연장되었습니다.
 Feature.Durables.TimeRemaining.Days,{number}일
-Feature.Durables.TimeRemaining.Hours,{number}시간
+Feature.Durables.TimeRemaining.Hours,
 Feature.Durables.TimeRemaining.Minutes,{number}분
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days}일(구매 후 시작)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,유럽 연합 디지털 서비스법에 따른 불법 콘텐츠를 신고하려면 다음 페이지를 방문하세요. https://www.roblox.com/illegal-content-reporting
@@ -3362,7 +3461,7 @@ Feature.Friends.Label.MyProfile,내 프로필
 Feature.Friends.Label.NewConnection,새로운 인맥
 Feature.Friends.Label.NewFriend,새 친구
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
-Feature.Friends.Label.NoConnectionYet,{name} 님은 아직 인맥이 없습니다.
+Feature.Friends.Label.NoFriendsYet,{name} 님은 아직 친구가 없습니다.
 Feature.Friends.Label.NowTrusted,{username} 님이 이제 신뢰할 수 있는 친구가 되었습니다
 Feature.Friends.Label.OneMutual,
 Feature.Friends.Label.PYMK,아는 사이일 수 있는 사람
@@ -3531,7 +3630,7 @@ Feature.GameDetails.Label.TooRepetitive,너무 반복적임
 Feature.GameDetails.Label.Unavailable,
 Feature.GameDetails.Label.Updated,업데이트 날짜
 Feature.GameDetails.Label.Upvoted,추천함
-Feature.GameDetails.Label.Visits,방문 수
+Feature.GameDetails.Label.Visits,
 Feature.GameDetails.Label.VoiceChat,
 Feature.GameDetails.Label.VoiceEnabled,음성 채팅 사용
 Feature.GameDetails.Label.Votes,{votes}표
@@ -3787,6 +3886,14 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} 남음
+Feature.InExperienceShop.Label.Timer.Day.Plural,
+Feature.InExperienceShop.Label.Timer.Day.Singular,
+Feature.InExperienceShop.Label.Timer.Hour.Plural,
+Feature.InExperienceShop.Label.Timer.Hour.Singular,
+Feature.InExperienceShop.Label.Timer.Minute.Plural,
+Feature.InExperienceShop.Label.Timer.Minute.Singular,
+Feature.InExperienceShop.Label.Timer.Second.Plural,{number}초
+Feature.InExperienceShop.Label.Timer.Second.Singular,1초
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,이 아이템을 인벤토리에서 영구적으로 삭제할까요? 마음이 바뀐다면 해당 아이템을 체험에서 다시 획득해야 합니다.
 Feature.Item.Label.DeleteItemUndercase,아이템 삭제
 Feature.Landing.Action.PlayNow,지금 플레이
@@ -3841,7 +3948,7 @@ Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,동영상 잘라내기
 Feature.Moments.Description.CommunityStandards,허용되는 표현과 금지되는 표현에 대한 자세한 내용은 커뮤니티 규정을 확인하세요.
 Feature.Moments.Description.EmptyCapturesLibrary,내 캡처가 표시되는 곳입니다.
-Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI가 생성한 텍스트입니다. 게시하기 전에 검토하세요. 게시된 내용에 대한 책임은 사용자에게 있습니다.
+Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI가 생성했습니다. 게시하기 전에 검토하세요. 게시된 내용에 대한 책임은 사용자에게 있습니다.
 Feature.Moments.Description.HowToCaptureStep1,캡처가 활성화된 체험에 참가해서 햄버거 메뉴를 선택합니다.
 Feature.Moments.Description.HowToCaptureStep2,캡처 제어를 활성화합니다.
 Feature.Moments.Description.HowToCaptureStep3,게임 플레이 사진 및 동영상을 캡처합니다.
@@ -3935,6 +4042,7 @@ Feature.NotApproved.Description.AvatarBrokeRules,아바타를 변경해 주세�
 Feature.NotApproved.Description.AvatarViolation,삭제될 수 있습니다
 Feature.NotApproved.Description.Ban,계정이 비활성화되었습니다. {date}일 후에 재활성화할 수 있습니다.
 Feature.NotApproved.Description.Ban.V2,위반 이력에 따라 계정이 일시 정지되었습니다. {date} 이후에 다시 활성화할 수 있습니다.
+Feature.NotApproved.Description.BannedDescription.Kids,더 이상 이 계정을 사용할 수 없습니다.
 Feature.NotApproved.Description.Behavior,회원님의 행동
 Feature.NotApproved.Description.BrokeRulesBanned,규칙을 반복해서 위반하거나 위반 정도가 심각해 사용자의 계정을 정지했습니다.
 Feature.NotApproved.Description.BrokeRulesGeneric,커뮤니티 규칙에 맞지 않는 행동을 하셨습니다.
@@ -3948,15 +4056,20 @@ Feature.NotApproved.Description.CommunityStandards,모든 연령대의 사용자
 Feature.NotApproved.Description.Delete,계정이 영구 정지되었습니다.
 Feature.NotApproved.Description.FollowTheRules,규칙을 파악하고 준수하세요.
 Feature.NotApproved.Description.Foreshadow,"규칙을 계속 위반할 경우, 이용 정지 기간이 늘어나거나 계정이 영구 정지될 수 있습니다."
+Feature.NotApproved.Description.Foreshadow.Kids,규정을 더 많이 위반하면 더 오랜 기간 이용이 정지될 수 있습니다. 또는 이용이 차단될 수 있습니다.
 Feature.NotApproved.Description.LinkedAccounts,관련 조치는 연결된 모든 계정에서 발생한 사용자의 행동을 기반으로 결정됩니다.
 Feature.NotApproved.Description.ManualDetectionAutomatedDecision,본 결정은 자동화에 의해 진행되었습니다
 Feature.NotApproved.Description.ManualDetectionAutomatedDecision.V2,Roblox는 자동화된 시스템을 사용해 해당 결정을 내렸습니다.
 Feature.NotApproved.Description.Mistake,여기서 이 결정에 관해 이의를 신청하거나 재검토를 요청할 수 있습니다.
+Feature.NotApproved.Description.Mistake.Kids,오류가 있었나요? 이의를 신청할 수 있습니다.
 Feature.NotApproved.Description.Mistake.V2,오류가 있나요? 여기서 이 결정에 관해 이의를 신청하거나 재검토를 요청할 수 있습니다.
 Feature.NotApproved.Description.Mistake.V3,판단에 실수가 있었다고 생각되는 경우 이 결정에 대한 이의를 신청할 수 있습니다.
 Feature.NotApproved.Description.PluralViolation,내 {type} 중 하나
 Feature.NotApproved.Description.ReactivationNotice,'계속'을 선택하여 규칙을 검토하고 바로 플레이를 즐기세요.
 Feature.NotApproved.Description.ReviewProcess,회원님의 활동에는 기술 및 인적 검토가 모두 적용됩니다.
+Feature.NotApproved.Description.RuleExplanation.Bullets.Bullying.Kids,"항상 친절한 태도로 다른 사람을 괴롭히지 마세요. 
+다른 사람을 해치겠다고 위협하지 마세요. 
+다른 사람의 개인정보를 보호하세요."
 Feature.NotApproved.Description.RuleExplanation.Bullets.MisusingRobloxSystems,"다른 사람을 사칭하는 행위
 실제로 발생하지 않은 일에 대한 사용자 신고
 사람들을 속여 무언가를 하게 하는 행위
@@ -3974,6 +4087,13 @@ Feature.NotApproved.Description.RuleExplanation.Bullets.SSHAndIllegalRegAct,"자
 주류 및 마약과 같은 불법 또는 위험한 행위
 상금을 위한 도박, 베팅 또는 기회 게임
 현실 세계에서 무기를 만드는 방법"
+Feature.NotApproved.Description.RuleExplanation.Bullets.SexualContent.Kids,"우리는 Roblox에서 친구로 지냅니다.
+우리는 추파를 던지거나, 키스하거나, 데이트를 하지 않습니다.
+우리 아바타는 지나치게 노출된 옷을 입지 않습니다."
+Feature.NotApproved.Description.RuleExplanation.Bullets.SharingPII.Kids,"비밀번호
+실명, 주소, 전화번호 또는 이메일
+다른 계정의 사용자 이름
+인물 사진"
 Feature.NotApproved.Description.RuleExplanation.BullyingHarassmentDiscrimination,"다른 사람에게 또는 특정인에 대해 불쾌한 말을 하는 것은 절대 허용되지 않습니다. 여기에는 개인 정보를 공유하거나 실제로 상처를 주는 등의 방식으로 다른 사람에게 해를 끼치겠다고 위협하는 것도 포함됩니다. 
 또한 정체성, 믿음 또는 출신 지역에 따라 다른 사람을 배제하거나 불쾌하게 대하는 것도 규칙에 위배됩니다."
 Feature.NotApproved.Description.RuleExplanation.Dating,"채팅할 때는 친근하게 대하고, 추파를 던지지 마세요. 키스나 데이트와 같은 애정 표현은 허용되지 않습니다. 또한, 아바타의 옷차림이 지나치게 노출이 심하지 않게 주의하세요."
@@ -3984,9 +4104,14 @@ Feature.NotApproved.Description.RuleExplanation.PII,모든 사용자와 계정�
 Feature.NotApproved.Description.RuleExplanation.RealLifeEvents,"현실 세계에서 일어난 특정 사건에 무례한 태도를 취하는 것은 규칙에 위배됩니다. 여기에는 많은 사람에게 슬픔이나 공포심을 일으킨 사건이나 해당 사건에 연루된 사람을 재현하거나 조롱하는 것이 포함됩니다.
 다음과 같은 상황이 포함됩니다."
 Feature.NotApproved.Description.RuleExplanation.SSHAndIllegalRegulatedActivities,"다음과 같은 위험하거나 유해한 주제에 대해 콘텐츠를 제작하거나, 채팅하거나, 농담하는 것은 절대 허용되지 않습니다."
+Feature.NotApproved.Description.RuleExplanation.SharingPII.Kids,다음 정보는 공유하지 마세요:
 Feature.NotApproved.Description.RuleExplanation.Spam,같은 말을 반복해서 메시지로 보내는 것은 허용되지 않습니다.
 Feature.NotApproved.Description.RuleExplanation.Swearing,"욕설은 절대 허용되지 않습니다. 여기에는 탐지 시스템을 우회하기 위해 오타, 기호 또는 기타 방법을 사용하는 것도 포함됩니다."
 Feature.NotApproved.Description.RuleExplanation.ViolentContentAndGore,"사실적인 폭력을 표현하거나 사람, 동물 또는 캐릭터가 신체적 또는 정서적으로 심각한 상처를 입은 것처럼 보이게 하는 것은 규칙에 위배됩니다."
+Feature.NotApproved.Description.RuleImportance.Bullets.SharingPII.Kids,"온라인에서 누구를 신뢰해야 할지 알기 어려울 수 있습니다.
+낯선 사람이 내 정보를 사용하여 나를 찾을 수 있습니다.
+비밀번호를 공유하면 다른 사람이 내 계정이나 Robux를 탈취할 수 있습니다."
+Feature.NotApproved.Description.RuleImportance.Bullying.Kids,나쁜 행동은 다른 플레이어에게 상처를 줍니다. 친절하게 행동하면 모두가 Roblox를 즐길 수 있습니다.
 Feature.NotApproved.Description.RuleImportance.BullyingHarassmentDiscrimination,"모두가 즐거운 커뮤니티를 만들기 위해, 타인을 불안하거나 불편하게 만드는 말이나 행동을 하지 않아야 합니다. Roblox는 모든 인종, 민족, 성 정체성, 능력, 성적 취향 및 종교를 위한 공간입니다."
 Feature.NotApproved.Description.RuleImportance.Dating,채팅과 아바타를 우정에 집중하면 모두가 편안한 환경을 조성할 수 있습니다.
 Feature.NotApproved.Description.RuleImportance.DirectingUsersOffPlatform,"Roblox는 채팅과 상호작용을 안전하게 유지해 주는 안전 보호 기능을 갖추고 있습니다. 사용자의 계정과 아이템을 탈취하기 위한 가짜 웹사이트로 연결되는 링크는 Roblox와 똑같이 꾸며진 외관을 갖고 있습니다. 또한, 해당 사이트에는 부적절한 사진이나 동영상이 포함되어 있을 수 있습니다. Roblox 외부에서 Robux나 아이템을 거래하는 경우, 상대방이 약속한 사항을 제공하지 않고 거짓말을 할 수 있습니다."
@@ -3995,12 +4120,15 @@ Feature.NotApproved.Description.RuleImportance.MisusingRobloxSystems,
 Feature.NotApproved.Description.RuleImportance.PII,"낯선 사람이 현실에서 내가 누구인지 알아내면, Roblox 외부에서 연락을 시도할 수 있습니다. 온라인에서는 상대가 좋은 사람인지 나쁜 사람인지 알기 어렵기 때문에 위험한 상황이 발생할 수 있습니다. 이런 이유로 비밀번호는 절대 공유하지 않아야 합니다. 누군가가 내 계정과 내가 얻은 모든 것을 탈취할 수 있기 때문입니다."
 Feature.NotApproved.Description.RuleImportance.RealLifeEvents,이러한 상황을 겪은 사람은 상황이 재현되거나 조롱당하는 것을 보고 큰 불쾌감을 느낄 수 있습니다.
 Feature.NotApproved.Description.RuleImportance.SSHAndIllegalRegulatedActivities,자신이나 다른 사람을 해치는 콘텐츠를 공유하는 것은 안전하지 않습니다. 힘든 시간을 보내고 있다면 믿을 수 있는 어른과 대화를 나누는 것이 중요합니다. 위험한 스턴트를 공유하는 등의 행동은 다른 사람들이 그런 스턴트를 시도하다가 심각한 부상을 입게 할 위험이 있습니다. 이러한 내용을 공유하지 않는 것이 자신과 Roblox의 모든 사람을 안전하게 지키는 길입니다.
+Feature.NotApproved.Description.RuleImportance.SexualContent.Kids,친근한 채팅과 아바타로 모두가 Roblox를 즐길 수 있습니다.
 Feature.NotApproved.Description.RuleImportance.Spam,스팸은 대화를 방해하고 재미를 망칩니다.
 Feature.NotApproved.Description.RuleImportance.Swearing,Roblox는 어린 아이들을 포함한 모든 사람을 위한 공간입니다. 우리는 커뮤니티 전체를 존중하고 반기는 단어를 사용합니다.
 Feature.NotApproved.Description.RuleImportance.ViolentContentAndGore,"우리 커뮤니티에는 어린아이들도 포함되어 있으며, 극단적인 폭력을 목격할 경우, 아이들이 공포감이나 불안감을 느낄 수 있습니다."
 Feature.NotApproved.Description.SecondChance.Details,이제 다시 게임을 즐길 수 있습니다. 나중에 이 결정에 대한 이의 신청을 할 수 없습니다.
 Feature.NotApproved.Description.SecondChance.Second,과거에 책임감 있게 행동하셨기 때문에 이번 한 번은 계정 이용 정지를 면할 수 있었습니다.
+Feature.NotApproved.Description.SuspendedUntil,{date} {time}까지 이용이 일시 중지됩니다 .
 Feature.NotApproved.Description.Violation,회원님은 Roblox의 {startLink}이용 약관{endLink}을 위반한 것으로 확인되었습니다.
+Feature.NotApproved.Description.WarningDescription.Kids,규칙을 위반하셨습니다. 같은 일이 계속 발생할 경우 계정이 일시 정지될 수 있습니다.
 Feature.NotApproved.Heading.AccountBanned,계정 이용이 정지됨
 Feature.NotApproved.Heading.AccountDeleted,
 Feature.NotApproved.Heading.AccountTerminated,계정이 종료되었습니다
@@ -4015,6 +4143,8 @@ Feature.NotApproved.Heading.BannedOneMinute,1분 일시 정지
 Feature.NotApproved.Heading.BannedOneSecond,1초 일시 정지
 Feature.NotApproved.Heading.Error,알 수 없는 오류가 발생했어요. 나중에 다시 시도하세요.
 Feature.NotApproved.Heading.ReactivationNotice,다시 게임을 즐기세요
+Feature.NotApproved.Heading.RecentlyChecked,최근 확인한 사항
+Feature.NotApproved.Heading.RuleExplanation.Bullying.Kids,다른 사용자를 존중하는 마음으로 대해 주세요
 Feature.NotApproved.Heading.RuleExplanation.BullyingHarassmentDiscrimination,모든 사람을 환영해 주세요
 Feature.NotApproved.Heading.RuleExplanation.Dating,친구 사이로만 지내기
 Feature.NotApproved.Heading.RuleExplanation.DirectingUsersOffPlatform,Roblox에서만 활동하기
@@ -4022,10 +4152,13 @@ Feature.NotApproved.Heading.RuleExplanation.MisusingRobloxSystems,공정하고 �
 Feature.NotApproved.Heading.RuleExplanation.PII,개인 정보 보호
 Feature.NotApproved.Heading.RuleExplanation.RealLifeEvents,실제 사건을 존중하는 태도 보이기
 Feature.NotApproved.Heading.RuleExplanation.SSHAndIllegalRegulatedActivities,건강한 마음과 몸 유지하기
+Feature.NotApproved.Heading.RuleExplanation.SexualContent.Kids,친근한 분위기 유지하기
+Feature.NotApproved.Heading.RuleExplanation.SharingPII.Kids,내 정보를 비공개로 유지하세요
 Feature.NotApproved.Heading.RuleExplanation.Spam,대화를 유도하세요
 Feature.NotApproved.Heading.RuleExplanation.Swearing,친절하고 정중한 단어를 사용하세요
 Feature.NotApproved.Heading.RuleExplanation.ViolentContentAndGore,침착하게 플레이하세요
 Feature.NotApproved.Heading.RuleImportance,이러한 방침이 중요한 이유는 무엇인가요?
+Feature.NotApproved.Heading.RuleImportance.Kids,이러한 태도가 중요한 이유
 Feature.NotApproved.Heading.SecondChance,이 규칙을 숙지하고 즉시 게임을 다시 즐기세요.
 Feature.NotApproved.Heading.SecondChance.Details,이번 한 번만 이용 정지를 피하시겠어요?
 Feature.NotApproved.Heading.Suspended,이용 정지됨
@@ -4040,6 +4173,8 @@ Feature.NotApproved.Heading.SuspendedSixtyDays,60일 이용 정지
 Feature.NotApproved.Heading.SuspendedThirtyDays,30일 이용 정지
 Feature.NotApproved.Heading.SuspendedThreeDays,3일 이용 정지
 Feature.NotApproved.Heading.Warning,주의
+Feature.NotApproved.Heading.WhatNext,다음 단계
+Feature.NotApproved.Heading.Why,이유가 무엇인가요?
 Feature.NotApproved.Label.AbuseType.AccountTheft,계정 도난
 Feature.NotApproved.Label.AbuseType.AdultContent,성인용 콘텐츠
 Feature.NotApproved.Label.AbuseType.Advertisement,
@@ -4047,6 +4182,8 @@ Feature.NotApproved.Label.AbuseType.Advertising,
 Feature.NotApproved.Label.AbuseType.AssetOwnership,애셋 소유권
 Feature.NotApproved.Label.AbuseType.Billing,비용 청구
 Feature.NotApproved.Label.AbuseType.BlockedContent,BlockedContent
+Feature.NotApproved.Label.AbuseType.Bullying.Kids,괴롭힘
+Feature.NotApproved.Label.AbuseType.Bullying.Note.Kids,회원님의 활동에서 상처를 주는 단어가 발견되었습니다.
 Feature.NotApproved.Label.AbuseType.Chargeback,지불 거절
 Feature.NotApproved.Label.AbuseType.CheatandExploits,치트 및 익스플로잇(핵 사용)
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,아동 학대
@@ -4081,7 +4218,7 @@ Feature.NotApproved.Label.AbuseType.Exploiting,익스플로잇
 Feature.NotApproved.Label.AbuseType.ExtortionandBlackmail,협박 및 갈취
 Feature.NotApproved.Label.AbuseType.GangImages,범죄 단체 이미지
 Feature.NotApproved.Label.AbuseType.Grooming,그루밍
-Feature.NotApproved.Label.AbuseType.Harassment,괴롭힘
+Feature.NotApproved.Label.AbuseType.Harassment,
 Feature.NotApproved.Label.AbuseType.HiddenMessageClothing,숨겨진 메시지의 복장
 Feature.NotApproved.Label.AbuseType.IllegalandRegulatedContent,불법 및 규제 대상 콘텐츠
 Feature.NotApproved.Label.AbuseType.IllicitSubstance,불법 약물
@@ -4124,6 +4261,10 @@ Feature.NotApproved.Label.AbuseType.Scamming,
 Feature.NotApproved.Label.AbuseType.SeekingSexualContent,성적인 콘텐츠 찾기
 Feature.NotApproved.Label.AbuseType.SexualAdultContent,성적 또는 성인용 콘텐츠
 Feature.NotApproved.Label.AbuseType.SexualContent,
+Feature.NotApproved.Label.AbuseType.SexualContent.Kids,성인 콘텐츠
+Feature.NotApproved.Label.AbuseType.SexualContent.Note.Kids,아동에게 적합하지 않은 단어 또는 사진이 발견되었습니다. 누드 사진이나 로맨스와 같은 내용이죠.
+Feature.NotApproved.Label.AbuseType.SharingPII.Kids,
+Feature.NotApproved.Label.AbuseType.SharingPII.Note.Kids,"실명, 전화번호 또는 실제 사람의 사진과 같은 항목을 발견했습니다."
 Feature.NotApproved.Label.AbuseType.Shock,충격적인 내용
 Feature.NotApproved.Label.AbuseType.Spam,
 Feature.NotApproved.Label.AbuseType.SuggestiveSexualizedImagery,외설적이거나 선정적인 이미지
@@ -4430,9 +4571,10 @@ Feature.Profile.Heading.EditAgedUpDisplayName,이름 편집
 Feature.Profile.Heading.EditDisplayName,표시 이름 편집
 Feature.Profile.Heading.InsufficientFunds,비용 부족
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,프로필 프레임
 Feature.Profile.Heading.ProfilePictureSaved,프로필 사진이 성공적으로 저장되었습니다
 Feature.Profile.Heading.ProfileQRCode,
-Feature.Profile.Heading.Statistics,통계
+Feature.Profile.Heading.Statistics,
 Feature.Profile.Heading.Username,
 Feature.Profile.Heading.UsernameUpdated,사용자 이름을 업데이트했습니다
 Feature.Profile.Label.AboutDetailsHeading,{name} 정보
@@ -4614,7 +4756,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,좋은 소식
 Feature.RobloxSubscription.Title.GenericError,오류가 발생했습니다
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus 구독하기
 Feature.RobloxSubscription.Title.UnsupportedPlatform,여기에서는 Roblox Plus를 이용할 수 없습니다
-Feature.SafetyDashboard.Heading.AccountStatus,계정 상태
+Feature.SafetyDashboard.Heading.AccountStatus.V2,"계정 상태, 규정 위반 및 이의 신청"
 Feature.Schools.Action.AlreadyGraduated,이미 졸업했습니다
 Feature.Schools.Action.CantFindSchool,재학 중인 학교를 찾을 수 없나요?
 Feature.Schools.Action.Continue,
@@ -4657,6 +4799,7 @@ Feature.Schools.Error.OtpExpired,이 코드는 만료되었습니다.
 Feature.Schools.Error.OtpInvalidFormat,이 코드의 형식이 유효하지 않습니다.
 Feature.Schools.Error.OtpTooManyAttempts,일일 최대 시도 횟수에 도달했습니다.
 Feature.Schools.Error.SomethingWentWrong,
+Feature.Schools.Error.UnidaysEmailNotFound,UNiDAYS에서 본 이메일을 찾을 수 없습니다.
 Feature.Schools.Filter.AllYears,모든 연도
 Feature.Schools.Filter.Apply,적용하기
 Feature.Schools.Filter.GradYear,졸업 연도
@@ -4828,7 +4971,7 @@ Feature.Squads.Action.Start,
 Feature.Squads.Action.Switch,
 Feature.Squads.Action.TapToStartNewParty,탭해 새 파티를 시작하세요
 Feature.Squads.Action.View,
-Feature.Squads.Action.VoiceErrorGeneral,
+Feature.Squads.Action.VoiceErrorGeneral,연결
 Feature.Squads.Action.VoiceErrorPartyNotVoiceEligible,
 Feature.Squads.Action.VoiceErrorUserIneligible,
 Feature.Squads.Action.WaitingForParty,파티를 기다리는 중
@@ -5283,7 +5426,7 @@ InGame.CommonUI.Button.Retry,
 InGame.CommonUI.Label.FAQWebviewTitle,음성 관련 자주 묻는 질문
 InGame.ConnectionError.Action.JoinNewServer,새 서버에 참가
 InGame.ConnectionError.Action.JoinTheLine,대기열 합류
-InGame.ConnectionError.Action.Restart,다시 시작
+InGame.ConnectionError.Action.Restart,
 InGame.ConnectionError.Description.DontWantToWait,기다리는 게 싫으신가요?
 InGame.ConnectionError.Description.FriendsServerIsFullJoiningNewServer,친구의 서버 정원이 가득 찼습니다. 새로운 서버에 참가하는 중입니다.
 InGame.ConnectionError.Description.FriendsServerIsFullWaitingToJoin,친구의 서버 정원이 가득 찼습니다. 참가를 기다리는 중입니다.

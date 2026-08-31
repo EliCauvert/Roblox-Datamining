@@ -225,13 +225,11 @@ Authentication.AccountSwitch.Action.SwitchAccount,Konto wechseln
 Authentication.AccountSwitch.Description.AccountLimit.2,"Du hast dein Kontolimit erreicht. Um ein neues Konto hinzuzufügen, musst du zuerst ein Konto entfernen."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,"Wenn du als {username} fortfährst, wirst du von deinen anderen Konten abgemeldet."
 Authentication.AccountSwitch.Description.LogoutConfirmation,"Du musst dich von deinen anderen Roblox-Konten auf diesem Gerät abmelden, bevor du ein neues Konto hinzufügen kannst"
-Authentication.AccountSwitch.Description.ParentLogoutConfirmation,"Du musst dich von deinen anderen Roblox-Konten auf diesem Gerät abmelden, bevor du ein neues Konto mit Elternrechten hinzufügen kannst"
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Bitte versuche es später erneut
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Sobald du dich abmeldest, werden alle Konten von diesem Gerät entfernt."
 Authentication.AccountSwitch.Description.RemoveCurrentAccount,"Wenn du dies tust, wird dieses Konto auf diesem Gerät nicht mehr angezeigt, es sei denn, du meldest dich erneut an. Du kehrst zur Startseite zurück."
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,Versuche dich direkt anzumelden
-Authentication.AccountSwitch.Header.CantSwitchAccounts,Konten können nicht gewechselt werden
-Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,
+Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,Konten können nicht gewechselt werden
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Header.RemoveCurrentAccount,Aktuelles Konto entfernen?
 Authentication.AccountSwitch.Header.SignOutOtherAccounts,Von anderen Konten abmelden?
@@ -671,6 +669,7 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_RequiredSkinningTransfer,{asse
 Common.UGCValidation.ErrorLabel.AccessorySkinning_RigidIsSkinned,"Das starre Accessoire enthält Skinning-Daten, die nicht unterstützt werden. Achte darauf, dass die Knochen nicht zusammen mit dem Mesh importiert werden."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_TransferJointWithoutAutoSkin,"Der Ziehpunkt enthält die Verbindung {jointName}, die nur zulässig ist, wenn WrapLayer.AutoSkin auf EnabledOverride festgelegt ist."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,"Eckpunkte, die mit einem Skin für Übertragungsverbindungen versehen sind, müssen vollständig gewichtet sein."
+Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,"Das Animationspaket-Bundle enthält eine doppelte Animations-ID ""{animationId}"", die von mehreren Clips verwendet wird: {instancePaths}. Jeder Animationsclip muss auf ein eindeutiges Animationsobjekt verweisen."
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,"Im Animationspaket-Bundle fehlen die erwarteten Animationstypen: {missingAnimationTypes}. Jeder Animationstyp muss einen R15Anim-Ordner haben, der genau seine erwarteten StringValue-Unterordner enthält."
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,"Die Animation ""{animationName}"" hat einen Gewichtswert von {weight}, aber das Gewicht muss größer als 0 sein. Bitte korrigiere die Animation."
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Die gesuchte {ExpectedClass} mit dem Namen {ExpectedName} konnte in {ParentPath} nicht gefunden werden.
@@ -718,7 +717,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation hat 
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation enthält Kurven mit zu vielen Schlüsseln. Es sind maximal {maxAllowed} pro Kurve erlaubt. Bitte korrigiere die Animation.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,"CurveAnimation enthält mehr als {maxAllowed} MarkerCurve(s). Bitte stelle sicher, dass es nicht mehr als {maxAllowed} MarkerCurve-Unterelemente gibt."
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation enthält eine MarkerCurve mit {count} Markern. {maxAllowed} ist die maximale Anzahl pro MarkerCurve. Bitte korrigiere die Animation.
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"Die veröffentlichte Animation gibt eine maximale Verschiebung eines Parts von {taggedTranslation} Noppen an, aber ihre Animationsdaten ergeben {calculatedTranslation} Noppen. Bitte veröffentliche die Animation erneut."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation enthält ein unerwartetes untergeordnetes Element: {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Dynamische Köpfe auf dem Marktplatz müssen ordnungsgemäß gecaged sein, damit die Augen- und Mundscheitelpunkte auf dem Cage mit den Mesh-Scheitelpunkten übereinstimmen. Bitte verbessere deine Cages und deren Ausrichtung mit dem Netz."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,"Der Ausdruck ""Lächeln"" für den dynamischen Kopf kann nicht erkannt werden. Bitte passe die Cage-Orientierungspunkte für den Mund so an, dass sie mit der Position des Mundes auf dem Kopf übereinstimmen, und stelle sicher, dass er den Ausdruck ""Lächeln"" zeigen kann."
@@ -729,6 +727,10 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Dynamische Köpfe auf dem Mar
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,"Der Ausdruck ""Rechtes Auge geschlossen"" kann für den dynamischen Kopf nicht erkannt werden. Bitte passe die Cage-Orientierungspunkte für das rechte Auge so an, dass sie mit der Position des rechten Auges auf dem Kopf übereinstimmen, und stelle sicher, dass es geschlossen werden kann."
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,"Der Ausdruck ""Stirnrunzeln"" für den dynamischen Kopf kann nicht erkannt werden. Bitte passe die Cage-Orientierungspunkte für den Mund so an, dass sie mit der Position des Mundes auf dem Kopf übereinstimmen, und stelle sicher, dass er den Ausdruck ""Stirnrunzeln"" zeigen kann."
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,"Dieses Objekt verwendet Emissionskarten, die nur für Creator im Programm für vertraute Creator verfügbar sind. Bitte entferne alle Emissionskarteninhalte oder tritt dem Programm vor dem Hochladen bei."
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Der veröffentlichten Animation fehlt ein gültiger maximaler Wert für die Teileverschiebung. Bitte veröffentliche die Animation erneut.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Der veröffentlichten Animation fehlt ein gültiger UGC-Emote-Marker. Bitte veröffentliche die Animation erneut.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Die maximale Teileverschiebung konnte nicht aus den veröffentlichten Animationsdaten berechnet werden. Bitte veröffentliche die Animation erneut.
+Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Die veröffentlichte Animation gibt eine maximale Teilverschiebung von {taggedTranslation} Noppen an, aber ihre Animationsdaten ergeben {calculatedTranslation} Noppen. Bitte veröffentliche die Animation erneut."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Die Eigenschaft InternalOverrideFACSData auf FaceControls muss beim Hochladen leer sein.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Wir haben festgestellt, dass FACS deinen Kopf auf {modPercent} % vergrößert hat. Die Änderung des Kopfes verstößt jedoch gegen die Marktplatzrichtlinien für Gesichtsanimationen."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Wir haben festgestellt, dass FACS deinen Kopf auf {modPercent} % verkleinert hat. Die Änderung des Kopfes verstößt jedoch gegen die Marktplatzrichtlinien für Gesichtsanimationen."
@@ -883,7 +885,7 @@ CommonUI.Features.Label.ChannelWithChannelName,Kanal: {channelName}
 CommonUI.Features.Label.Charts,Charts
 CommonUI.Features.Label.Chat,Chat
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
-CommonUI.Features.Label.Connect,Verbinden
+CommonUI.Features.Label.Connect,Freunde
 CommonUI.Features.Label.Connection,Connection
 CommonUI.Features.Label.Connections,Connections
 CommonUI.Features.Label.ControllerBar.HoldPrefix,Halten
@@ -894,7 +896,7 @@ CommonUI.Features.Label.CreationCenter,Creation Center
 CommonUI.Features.Label.DevSubs,Abos
 CommonUI.Features.Label.Discover,Entdecke
 CommonUI.Features.Label.ForYou,Für dich
-CommonUI.Features.Label.Friends,Freunde
+CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,Experiences
 CommonUI.Features.Label.Games,Spiele
 CommonUI.Features.Label.GiftCards,Geschenkgutscheine kaufen
@@ -1172,6 +1174,7 @@ Feature.Accessibility.Action.ScrollUp,Nach oben scrollen
 Feature.Accessibility.AppTheme.CategoryCalm,Ruhig
 Feature.Accessibility.AppTheme.CategoryDynamic,Dynamisch
 Feature.Accessibility.AppTheme.CircuitRush,Rennfieber
+Feature.Accessibility.AppTheme.Classic,Klassisch
 Feature.Accessibility.AppTheme.CosmicDust,Kosmischer Staub
 Feature.Accessibility.AppTheme.Default,
 Feature.Accessibility.AppTheme.ElectricLime,Giftgrün
@@ -1188,7 +1191,8 @@ Feature.Accessibility.AppTheme.StarBurst,Sternenexplosion
 Feature.Accessibility.AppTheme.SuperCharge,Superladung
 Feature.Accessibility.Description.AppThemeMode,Wähle einen App-Modus aus. Deine anderen Geräte sind davon nicht betroffen.
 Feature.Accessibility.Description.DeviceAppTheme,Wähle ein App-Design aus. Dieses wird auf allen Gerätetypen angezeigt.
-Feature.Accessibility.Description.DeviceAppThemeUpsell,"Entdecke exklusive Plus-Themen, um deine Experience individuell anzupassen. Probiere sie jetzt aus und schließe ein Abo ab, um deine Auswahl zu speichern."
+Feature.Accessibility.Description.DeviceAppThemeExclusive,"Entdecke exklusive Plus-Themen, um deine Experience individuell anzupassen. Probiere sie jetzt aus und schließe ein Abo ab, um deine Auswahl zu speichern."
+Feature.Accessibility.Description.DeviceAppThemeUpsell,
 Feature.Accessibility.Description.DeviceLevelTheme,"Wähle ein Design für dieses Gerät. (Hinweis: Dies ändert nicht, wie Roblox auf deinen anderen Geräten dargestellt wird.)"
 Feature.Accessibility.Description.Haptics,Steuere die allgemeine Vibration der Roblox-App
 Feature.Accessibility.Description.LaunchAtStartup,"Roblox automatisch starten, wenn ich meinen Computer hochfahre"
@@ -1210,6 +1214,7 @@ Feature.Accessibility.Heading.DeviceAppTheme,App-Design
 Feature.Accessibility.Heading.DeviceLevelTheme,Design auf Geräteebene
 Feature.Accessibility.Heading.DevicePreferences,
 Feature.Accessibility.Heading.DevicePreferencesV2,
+Feature.Accessibility.Heading.ExclusiveThemes,Exklusive Designs
 Feature.Accessibility.Heading.LaunchAtLogin,Beim Anmelden starten
 Feature.Accessibility.Heading.LaunchAtStartup,Beim Hochfahren starten
 Feature.Accessibility.Heading.MinimizeToTray,Beim Schließen in der Taskleiste minimieren
@@ -1654,11 +1659,14 @@ Feature.Avatar.Action.Zoom,Zoomen
 Feature.Avatar.AvatarWidgetTitle,Stile entdecken
 Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,Hier bleiben
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,Veröffentlichen
 Feature.Avatar.BackgroundGeneration.Action.Upload,Hochladen
 Feature.Avatar.BackgroundGeneration.Action.View,
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Erstelle Hintergründe mit Plus.
+Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,"Wenn du jetzt gehst, wird dieser Hintergrund verworfen."
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Deine Kreation kann jetzt genutzt werden.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Dieser Hintergrund wurde mit KI generiert. Durch die Veröffentlichung bestätigst du, dass er den Community-Regeln von Roblox entspricht und keine Inhalte verwendet, an denen du keine Rechte hast. Er wird überprüft, bevor er in deinem Inventar erscheint. Veröffentlichte Artikel können nicht bearbeitet werden."
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Dieser Hintergrund wurde mit KI generiert. Durch das Hochladen bestätigst du, dass er den Community-Regeln von Roblox entspricht und keine Inhalte verwendet, an denen du keine Rechte hast. Er wird überprüft, bevor er in deinem Inventar erscheint. Hochgeladene Artikel können nicht bearbeitet werden."
@@ -1679,6 +1687,7 @@ Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Beschreibe deinen Hintergr
 Feature.Avatar.BackgroundGeneration.Status.Generating,Dein Hintergrund wird generiert …
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Dein Hintergrund wird vorbereitet …
 Feature.Avatar.BackgroundGeneration.Title,Hintergrund erstellen
+Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,Diesen Hintergrund verwerfen?
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Im Inventar veröffentlichen
 Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
@@ -2156,6 +2165,7 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,{DisplayName} blockieren?
 Feature.BlockingModal.Message.BlockConfirmation,"Wenn du diese Person blockierst, wird sie als Connection oder Follower entfernt. Er oder sie kann dir keine Nachrichten, Anfragen oder Einladungen mehr senden.<br /><br />Die Person wird nicht darüber benachrichtigt, dass du sie blockiert hast."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Wenn du diesen Benutzer blockierst, wird er als Freund oder Follower entfernt. Er oder sie kann dir keine Nachrichten, Anfragen oder Einladungen mehr senden.<br /><br />Der Benutzer wird nicht darüber benachrichtigt, dass du ihn oder sie blockiert hast."
+Feature.Build.Action.Add,
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,Spieletester hinzufügen
 Feature.Build.Action.AddPlaytesters,
@@ -2169,7 +2179,9 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Text kopieren
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,Nicht erneut fragen
+Feature.Build.Action.DontShowAgain,Nicht erneut anzeigen
 Feature.Build.Action.HideAutosaved,Automatisch gespeicherte Elemente verbergen
 Feature.Build.Action.ManageLimit,Limit verwalten
 Feature.Build.Action.Next,
@@ -2183,28 +2195,84 @@ Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,Neueste Version veröffentlichen
 Feature.Build.Action.Restore,Wiederherstellen
+Feature.Build.Action.Resume,
 Feature.Build.Action.Revert,
 Feature.Build.Action.SetDailyLimit,Lege ein tägliches Limit fest
 Feature.Build.Action.SetLimit,Limit festlegen
 Feature.Build.Action.Settings,
 Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,Freigabelink
+Feature.Build.Action.ShowMore,
+Feature.Build.Action.Stats,Statistiken
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Bewertung aktualisieren
 Feature.Build.Action.UpdateWithChanges,Mit Änderungen aktualisieren
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Kontingent anzeigen
+Feature.Build.Analytics.AnalyzeChatPrompt,"Wie schneidet mein Inhalt im Bereich ""{analyzeName}"" innerhalb der letzten {days} Tage ab?"
+Feature.Build.Analytics.AnalyzeName.Arppu,durchschnittlicher Umsatz pro zahlendem Benutzer
+Feature.Build.Analytics.AnalyzeName.D1Retention,Beibehaltung – Tag 1
+Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,täglich aktive Benutzer
+Feature.Build.Analytics.AnalyzeName.PayerConversion,Umwandlung in zahlende Benutzer
+Feature.Build.Analytics.AnalyzeName.PlaythroughRate,Durchspielrate
+Feature.Build.Analytics.AnalyzeName.TotalPlaytime,Gesamtspielzeit
+Feature.Build.Analytics.Description.Arppu,"Der durchschnittliche Umsatz pro zahlendem Benutzer ergibt sich aus dem gesamten verdienten Robux geteilt durch die Anzahl der zahlenden Spieler. Dieser Wert zeigt, wie viel jeder Käufer im Durchschnitt ausgibt."
+Feature.Build.Analytics.Description.D1Retention,"Die Beibehaltung am ersten Tag misst, wie viele Erstspieler einen Tag später zurückkehren. Dies ist ein erstes Signal dafür, wie ansprechend deine Experience ist."
+Feature.Build.Analytics.Description.DailyActiveUsers,"""Täglich aktive Benutzer"" zählt die einzelnen Spieler, die deine Experience an einem Tag gestartet haben. Verfolge diese Metrik, um zu sehen, wie viele Personen immer wieder zurückkommen, und um Wachstum oder Rückgang zu erkennen."
+Feature.Build.Analytics.Description.PayerConversion,"Die Umwandlung in zahlende Benutzer ist der Prozentsatz der Spieler, die Robux in deiner Experience ausgegeben haben. Verwende diese Metrik, um zu messen, wie gut deine Monetarisierungsstrategie Spieler in Käufer verwandelt."
+Feature.Build.Analytics.Description.PlaythroughRate,"Die Durchspielrate ist der Prozentsatz der Besuche, bei denen eine vollständige Spielsitzung abgeschlossen wurde. Höhere Raten deuten darauf hin, dass die Spieler deine Experience leicht zugänglich finden und es für sie lohnenswert ist, sie zu beenden."
+Feature.Build.Analytics.Description.TotalPlaytime,"Die Gesamtspielzeit summiert die Zeit, die alle Spieler im angegebenen Zeitraum in deiner Experience verbracht haben. Ein Ansteigen der Spielzeit signalisiert in der Regel ansprechendere Sitzungen."
+Feature.Build.Analytics.DurationHours,{number} Stunden
+Feature.Build.Analytics.KeyStats,Wichtige Statistiken
+Feature.Build.Analytics.LastMonth,Letzter Monat
+Feature.Build.Analytics.LastWeek,
+Feature.Build.Analytics.Likes,Likes
+Feature.Build.Analytics.Month.Apr,
+Feature.Build.Analytics.Month.Aug,
+Feature.Build.Analytics.Month.Dec,
+Feature.Build.Analytics.Month.Feb,
+Feature.Build.Analytics.Month.Jan,
+Feature.Build.Analytics.Month.Jul,Jul.
+Feature.Build.Analytics.Month.Jun,Jun.
+Feature.Build.Analytics.Month.Mar,
+Feature.Build.Analytics.Month.May,
+Feature.Build.Analytics.Month.Nov,
+Feature.Build.Analytics.Month.Oct,
+Feature.Build.Analytics.Month.Sep,
+Feature.Build.Analytics.NoData,Keine Daten verfügbar
+Feature.Build.Analytics.Overview,Übersicht
+Feature.Build.Analytics.Percent,{number} %
+Feature.Build.Analytics.Players,Spieler
+Feature.Build.Analytics.Sheet.Analyze,Analysieren
+Feature.Build.Analytics.Sheet.ViewInOverview,In der Übersicht anzeigen
+Feature.Build.Analytics.Summary.Arppu,Durchschnittlich verdiente Robux pro zahlendem Spieler.
+Feature.Build.Analytics.Summary.D1Retention,"Anteil der neuen Spieler, die am nächsten Tag zurückkehren."
+Feature.Build.Analytics.Summary.DailyActiveUsers,"Einzelne Spieler, die im ausgewählten Zeitraum beigetreten sind."
+Feature.Build.Analytics.Summary.PayerConversion,"Anteil der Spieler, die einen Kauf getätigt haben."
+Feature.Build.Analytics.Summary.PlaythroughRate,"Anteil der Sitzungen, die deine Experience vollständig durchgespielt haben."
+Feature.Build.Analytics.Summary.TotalPlaytime,"Gesamtzahl der Stunden, die Spieler in deiner Experience verbracht haben."
+Feature.Build.Analytics.Title.Arppu,Durchschnittlicher Erlös pro zahlendem Benutzer (ARPPU)
+Feature.Build.Analytics.Title.ConcurrentUsers,Spieler insgesamt
+Feature.Build.Analytics.Title.D1Retention,Beibehaltung – T1
+Feature.Build.Analytics.Title.DailyActiveUsers,Täglich aktive Benutzer
+Feature.Build.Analytics.Title.PayerConversion,
+Feature.Build.Analytics.Title.PlaythroughRate,
+Feature.Build.Analytics.Title.TotalPlaytime,
+Feature.Build.Analytics.Visits,Besuche
 Feature.Build.Content.NewGame,Neues Spiel
+Feature.Build.Description.AdCampaignModerationReview,Alle Werbekampagnen werden vom Roblox-Moderationsteam überprüft. Dieser Vorgang kann bis zu 24 Stunden dauern.
+Feature.Build.Description.AdCampaignSheetRunDates,Läuft vom {startDate} bis zum {endDate}
+Feature.Build.Description.AdvertisingAgreement,"Indem du fortfährst, stimmst du den {advertisingTermsStart}Werbebedingungen{advertisingTermsEnd} und {advertisingStandardsStart}Werberichtlinien{advertisingStandardsEnd} von Roblox zu."
 Feature.Build.Description.ArchiveRemoval,"Wenn du dieses Spiel archivierst, wird es aus Build entfernt. Du kannst weiterhin im Creator Hub oder in Roblox Studio darauf zugreifen und es wiederherstellen."
 Feature.Build.Description.AutoBuyUsage,"Verwende deine Robux, um beim Erstellen automatisch zusätzliches Build-Kontingent zu kaufen. Du kannst jederzeit ein tägliches Ausgabenlimit festlegen."
 Feature.Build.Description.BoostAudienceForPlays,Vergrößere deine Zielgruppe für mehr Spieler.
-Feature.Build.Description.BoostGameAudience,Vergrößere die Zielgruppe deines Spiels
 Feature.Build.Description.BuildIdeaGame,Mache aus deinen Ideen ein Spiel
 Feature.Build.Description.BuildReplyNotif,"Erhalte Benachrichtigungen, wenn Build eine Antwort für dich hat."
 Feature.Build.Description.BuyRobuxToCreate,"Kaufe mehr Robux, um weiter zu erstellen, oder warte, bis dein kostenloses Build-Kontingent morgen zurückgesetzt wird."
 Feature.Build.Description.BuyUsageOrWait,"Kaufe mehr Build-Kontingent mit Robux oder warte, bis dein Tageslimit zurückgesetzt wird."
 Feature.Build.Description.CampaignRunDates,Deine Kampagne läuft von {startDate}–{endDate}.
 Feature.Build.Description.ChoosePlaytesters,"Wähle Freunde aus, die dir beim Spieltest helfen."
+Feature.Build.Description.EarnedRobuxAppliedFirst,"Wenn du Robux verdient hast, werden diese zuerst auf die Kosten der Werbekampagne angerechnet."
 Feature.Build.Description.EnableBuildNotifs,"Aktiviere Benachrichtigungen in deinen Geräteeinstellungen, um Updates von Build zu erhalten."
 Feature.Build.Description.FriendsLinkOnly,"Nur deine Freunde können auf diesen Link zugreifen. Ändere die Zielgruppeneinstellung deines Spiels, wenn du möchtest, dass mehr Personen spielen."
 Feature.Build.Description.GameCreationDone,"Ich habe die Erstellung und Veröffentlichung deines Spiels abgeschlossen. Du kannst es öffnen, um es zu testen."
@@ -2218,22 +2286,27 @@ Feature.Build.Description.PlaytestLatest,"Du testest gerade die neueste Version.
 Feature.Build.Description.PlaytestLocked,"Du kannst mit dem Spieltest beginnen, nachdem du dein erstes Spiel erstellt hast."
 Feature.Build.Description.PlaytesterAccess,"Füge Freunde als Spieltester hinzu oder ändere die Zielgruppeneinstellung deines Spiels, damit mehr Personen spielen können."
 Feature.Build.Description.PrivateShare,"Ändere die Zielgruppeneinstellung deines Spiels, um es zu teilen."
+Feature.Build.Description.PromoteGameWithAdCampaign,"Vergrößere deine Zielgruppe mit einer {durationDays}-tägigen Werbekampagne und sorge dafür, dass dein Spiel besser entdeckt wird."
 Feature.Build.Description.RaiseLimitOrWait,"Erhöhe dein tägliches Robux-Limit, um weiter zu erstellen, oder warte, bis es morgen zurückgesetzt wird."
 Feature.Build.Description.RatingAgreement,"Durch die Veröffentlichung erklärst du dich damit einverstanden, dass diese Inhaltseinstufung korrekt ist."
 Feature.Build.Description.RestoreLatest,Diese Version wird zu Ihrer neuesten veröffentlichten Version.
 Feature.Build.Description.RevertToVersion,"Bestätige, dass du die letzte Änderung rückgängig machen und zu {VERSION} zurückzukehren möchtest."
+Feature.Build.Description.ShareLatest,"Beschreibe, was sich alles in der neuesten Version geändert hat."
 Feature.Build.Description.VersionChanges,"Teile den Spielern mit, was sich in dieser Version geändert hat."
 Feature.Build.Header.AccessSharing,Zugriff und Teilen
+Feature.Build.Header.AllVersions,Alle Versionen
 Feature.Build.Header.ContentMaturity,Inhaltseinstufung
 Feature.Build.Header.CustomAnswer,Benutzerdefinierte Antwort
 Feature.Build.Header.GameDetails,Spielinfos
-Feature.Build.Header.Overview,Übersicht
+Feature.Build.Header.Overview,
 Feature.Build.Header.PastCampaigns,Frühere Kampagnen
+Feature.Build.Header.UpdateDetails,Details aktualisieren
 Feature.Build.Label.Access,Zugriff
 Feature.Build.Label.AdClicks,Anzeigenklicks
 Feature.Build.Label.AdViews,Anzeigenaufrufe
 Feature.Build.Label.AdditionalUsage,Zusätzliches Build-Kontingent
 Feature.Build.Label.AdditionalUsed,{USED} von {LIMIT} verwendet
+Feature.Build.Label.AdsManager,Ads Manager
 Feature.Build.Label.All,
 Feature.Build.Label.AmountAvailable,{AMOUNT} verfügbar
 Feature.Build.Label.Autosaved,Automatisch gespeichert
@@ -2241,6 +2314,7 @@ Feature.Build.Label.Available,Verfügbar
 Feature.Build.Label.BackToBuild,Zurück zu Build
 Feature.Build.Label.Building,Wird erstellt …
 Feature.Build.Label.CaptureLibrary,Aufnahmen-Bibliothek
+Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} von {MAX_SELECTIONS} ausgewählt
 Feature.Build.Label.ContentRating,Altersfreigabe
 Feature.Build.Label.Created,Erstellt
 Feature.Build.Label.CreatedDate,{DAY}. {MONTH} {YEAR}
@@ -2250,7 +2324,9 @@ Feature.Build.Label.Deleted,Gelöscht
 Feature.Build.Label.DescribeIdea,Beschreibe eine Idee
 Feature.Build.Label.Description,
 Feature.Build.Label.Done,
+Feature.Build.Label.EasyPerformanceReport,Einfacher Leistungsbericht
 Feature.Build.Label.Error,
+Feature.Build.Label.Free,Gratis
 Feature.Build.Label.FreeBuildUsage,Kostenloses Build-Kontingent
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
@@ -2263,7 +2339,9 @@ Feature.Build.Label.InProgress,In Arbeit
 Feature.Build.Label.InputNeeded,Eingabe erforderlich
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitiert
+Feature.Build.Label.Live,Live
 Feature.Build.Label.Loading,Wird geladen …
+Feature.Build.Label.MaximizeForGamePlays,Für maximale Spielaufrufe optimieren
 Feature.Build.Label.Models3D,3D-Modelle
 Feature.Build.Label.NoLimit,Kein Limit
 Feature.Build.Label.NotStarted,Nicht begonnen
@@ -2288,6 +2366,7 @@ Feature.Build.Label.SelectOption,Wähle eine Option
 Feature.Build.Label.ShareAddedFriends,"Mit Freunden teilen, die du hinzugefügt hast"
 Feature.Build.Label.Shared,Geteilt
 Feature.Build.Label.Sounds,Sounds
+Feature.Build.Label.TargetAllRobloxPlayers,Alle Roblox-Spieler erreichen
 Feature.Build.Label.Thinking,Denkt nach
 Feature.Build.Label.Title,Titel
 Feature.Build.Label.TitleDescription,Titel und Beschreibung
@@ -2355,6 +2434,7 @@ Feature.Build.Label.ToolThumbnailRunning,Vorschaubild des Spiels wird festgelegt
 Feature.Build.Label.UniverseNumber,Universum {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Unbekannt
 Feature.Build.Label.UnlimitedUsed,{USED} verwendet • Kein Limit
+Feature.Build.Label.UpdateTitleDesc,Titel und Beschreibung aktualisieren
 Feature.Build.Label.Updated,Aktualisiert
 Feature.Build.Label.Usage,Kontingent
 Feature.Build.Label.UsageUsed,{USED} verwendet
@@ -2367,7 +2447,14 @@ Feature.Build.Label.VersionTitleDesc,Versionstitel und Beschreibung
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,Dein Konto erfüllt nicht die Anforderungen für die Nutzung von Build.
 Feature.Build.Message.AccountTooNew,"Dein Konto ist zu neu, um etwas zu veröffentlichen. Bitte versuche es erneut, wenn es 2 Tage alt ist."
+Feature.Build.Message.AdCampaignCreateFailed,Deine Kampagne konnte nicht erstellt werden. Bitte versuche es erneut.
+Feature.Build.Message.AdCampaignCreated,Werbekampagne erstellt
 Feature.Build.Message.AdPerformanceLoadFailed,Anzeigenleistung konnte nicht geladen werden
+Feature.Build.Message.AdsPromotionBannerSubtitle,Vergrößere kostenlos deine Zielgruppe
+Feature.Build.Message.AdsPromotionBannerTitle,Du hast noch {promotionCount} kostenlose Werbeaktionen
+Feature.Build.Message.AdsPromotionBannerTitleSingular,Du hast noch 1 kostenlose Werbeaktion
+Feature.Build.Message.AdsStatsEmpty,"Vergrößere deine Zielgruppe mit einer Werbekampagne und sorge dafür, dass dein Spiel besser entdeckt wird"
+Feature.Build.Message.AdsStatsEmptyFree,"Vergrößere deine Zielgruppe mit einer kostenlosen Werbekampagne und sorge dafür, dass dein Spiel besser entdeckt wird"
 Feature.Build.Message.AllFriendsAdded,Du hast alle deine Freunde als Spieletester hinzugefügt.
 Feature.Build.Message.AnswerBuildQuestion,Beantworte unten die Frage von Build.
 Feature.Build.Message.AssetDetailsUnavailable,Objekt-Infos sind nicht verfügbar.
@@ -2397,12 +2484,14 @@ Feature.Build.Message.GamePublishFailed,Dein Spiel konnten nicht veröffentlicht
 Feature.Build.Message.GameShared,Spiel wurde geteilt
 Feature.Build.Message.GameSharedWith,Spiel wurde mit {DISPLAY_NAME} geteilt
 Feature.Build.Message.HiDisplayName,"Hallo {DISPLAY_NAME},"
+Feature.Build.Message.ImageUploadFailed,Deine Bilder konnten nicht hochgeladen werden. Bitte versuche es erneut.
 Feature.Build.Message.InvalidMessage,Bei deiner Nachricht ist etwas schiefgelaufen. Bearbeite sie und versuche es erneut.
 Feature.Build.Message.InvitesLoadFailed,Einladungen konnten nicht geladen werden
 Feature.Build.Message.LimitBelowSpend,"Das Limit darf nicht unter den {ALREADY_SPENT} Robux liegen, die heute bereits ausgegeben wurden."
 Feature.Build.Message.LinkCopied,Link in Zwischenablage kopiert
 Feature.Build.Message.LoadingVersions,Versionsverlauf wird geladen …
 Feature.Build.Message.NoAssetsFound,Keine Objekte gefunden.
+Feature.Build.Message.NoCapturesAvailable,Keine Aufnahmen verfügbar
 Feature.Build.Message.NoDescriptionProvided,Keine Beschreibung vorhanden.
 Feature.Build.Message.NoFriendsToAdd,"Du hast noch keine Freunde, die du hinzufügen kannst. Finde zuerst Personen, mit denen du dich auf Roblox verbinden kannst."
 Feature.Build.Message.NoResults,
@@ -2413,6 +2502,8 @@ Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} von {MAX_INVITES} Spielet
 Feature.Build.Message.PublicPublishFailed,"Dein Spiel wurde veröffentlicht, konnte aber nicht öffentlich gemacht werden. Bitte versuche es erneut."
 Feature.Build.Message.PublishExpandAudience,"Veröffentliche, um deine Zielgruppe zu vergrößern"
 Feature.Build.Message.PublishNotReverted,Deine Veröffentlichung wurde nicht rückgängig gemacht. Bitte versuche es erneut.
+Feature.Build.Message.PublishPromotionUpsell,"Herzlichen Glückwunsch zur Veröffentlichung deines Spiels! Du hast {promotionCount} kostenlose Werbeaktionen zur Verfügung, um mehr Spieler auf Roblox zu gewinnen."
+Feature.Build.Message.PublishPromotionUpsellSingular,"Herzlichen Glückwunsch zur Veröffentlichung deines Spiels! Dir steht 1 kostenlose Werbeaktion zur Verfügung, um mehr Spieler auf Roblox zu gewinnen."
 Feature.Build.Message.PublishReverted,Veröffentlichung zurückgesetzt.
 Feature.Build.Message.QuestionnaireNeeded,"Dieses Spiel wurde außerhalb von Build bearbeitet. Fülle den Inhaltsfragebogen aus, um es zu veröffentlichen."
 Feature.Build.Message.ReadyToPlay,"Dein Spiel ist bereit, auf Roblox gespielt zu werden!"
@@ -2440,7 +2531,11 @@ Feature.Build.Notification.Message.Review,"Setze deinen Build-Chat fort, um das 
 Feature.Build.Notification.Title.Finished,Build abgeschlossen
 Feature.Build.Notification.Title.NeedInput,Build benötigt deine Eingabe
 Feature.Build.Title.AdCampaignActive,Werbekampagne ist aktiv
+Feature.Build.Title.AdCampaignDuration,{durationDays}-tägige Werbekampagne
 Feature.Build.Title.AddFriendsToPlaytest,"Füge Freunde hinzu, die dir beim Spieltest helfen"
+Feature.Build.Title.AddImages,Bilder hinzufügen
+Feature.Build.Title.AdsStatsEmpty,Kampagne starten
+Feature.Build.Title.AdsStatsEmptyFree,Deine erste Kampagne starten
 Feature.Build.Title.ArchiveThisGame,Dieses Spiel archivieren?
 Feature.Build.Title.AssetLibrary,Bibliothek
 Feature.Build.Title.Audience,Zielgruppe
@@ -2462,14 +2557,18 @@ Feature.Build.Title.GetUsers,Benutzer gewinnen
 Feature.Build.Title.NoRobuxForUsage,Keine Robux mehr für das Build-Kontingent übrig
 Feature.Build.Title.Playtesters,Spieletester
 Feature.Build.Title.PlaytestersOnlyPlay,Nur Spieletester können spielen
+Feature.Build.Title.PromoteGame,Bewirb dein Spiel
 Feature.Build.Title.PromoteGameFree,Bewirb dein Spiel kostenlos
 Feature.Build.Title.PushNotifications,Push-Benachrichtigungen
 Feature.Build.Title.RevertLastChange,Letzte Änderung rückgängig machen?
 Feature.Build.Title.Tasks,Aufgaben
 Feature.Build.Title.TurnActivity,Aktivität drehen
 Feature.Build.Title.VersionHistory,Versionsverlauf
-Feature.Build.Title.VersionInformation,Versionsinformationen
+Feature.Build.Title.VersionInfo,Versionsinformationen
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,Version {VERSION}
+Feature.Build.Title.Versions,Versionen
+Feature.Build.Title.WhatsIncluded,Was ist enthalten?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,"Nein, danke"
@@ -2772,7 +2871,7 @@ Feature.Catalog.LabelAnyPrice,Beliebiger Preis
 Feature.Catalog.LabelClassicHeads,
 Feature.Catalog.LabelCollectibles,Sammlerobjekte
 Feature.Catalog.LabelContentDeleted,Inhalt gelöscht
-Feature.Catalog.LabelFree,Gratis
+Feature.Catalog.LabelFree,
 Feature.Catalog.LabelNoResellers,Keine Wiederverkäufer
 Feature.Catalog.LabelOffSale,Nicht käuflich
 Feature.Catalog.LabelPants,
@@ -3354,7 +3453,7 @@ Feature.Friends.Label.MyProfile,Mein Profil
 Feature.Friends.Label.NewConnection,Neue Connection
 Feature.Friends.Label.NewFriend,Neuer Freund
 Feature.Friends.Label.NewFriendRequestsMax,>{maxRequestsCount}
-Feature.Friends.Label.NoConnectionYet,{name} hat noch keine Connections.
+Feature.Friends.Label.NoFriendsYet,{name} hat noch keine Freunde.
 Feature.Friends.Label.NowTrusted,{username} ist jetzt ein vertrauter Freund
 Feature.Friends.Label.OneMutual,1 gemeinsame
 Feature.Friends.Label.PYMK,"Leute, die du vielleicht kennst"
@@ -3523,7 +3622,7 @@ Feature.GameDetails.Label.TooRepetitive,Zu repetitiv
 Feature.GameDetails.Label.Unavailable,
 Feature.GameDetails.Label.Updated,
 Feature.GameDetails.Label.Upvoted,Für gut befunden
-Feature.GameDetails.Label.Visits,Besuche
+Feature.GameDetails.Label.Visits,
 Feature.GameDetails.Label.VoiceChat,
 Feature.GameDetails.Label.VoiceEnabled,Sprache aktiviert
 Feature.GameDetails.Label.Votes,{votes} Stimmen
@@ -3778,6 +3877,14 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Noch {time}
+Feature.InExperienceShop.Label.Timer.Day.Plural,{number} Tage
+Feature.InExperienceShop.Label.Timer.Day.Singular,
+Feature.InExperienceShop.Label.Timer.Hour.Plural,
+Feature.InExperienceShop.Label.Timer.Hour.Singular,1 Stunde
+Feature.InExperienceShop.Label.Timer.Minute.Plural,{number}  Minuten
+Feature.InExperienceShop.Label.Timer.Minute.Singular,1 Minute
+Feature.InExperienceShop.Label.Timer.Second.Plural,{number} Sekunden
+Feature.InExperienceShop.Label.Timer.Second.Singular,1 Sekunde
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Möchtest du diesen Artikel wirklich dauerhaft aus deinem Inventar löschen? Wenn du deine Meinung änderst, musst du ihn erneut in einer Experience verdienen."
 Feature.Item.Label.DeleteItemUndercase,Artikel löschen
 Feature.Landing.Action.PlayNow,Jetzt spielen
@@ -3832,7 +3939,7 @@ Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Video zuschneiden
 Feature.Moments.Description.CommunityStandards,"In den Community-Regeln findest du weitere Informationen darüber, was du schreiben darfst und was nicht."
 Feature.Moments.Description.EmptyCapturesLibrary,Hier werden deine Aufnahmen angezeigt.
-Feature.Moments.Description.GenerateTextFeedbackDisclosure,"KI-generierter Text. Überprüfe ihn vor der Veröffentlichung – du bist verantwortlich für das, was veröffentlicht wird."
+Feature.Moments.Description.GenerateTextFeedbackDisclosure,"KI-generiert. Überprüfe den Inhalt vor der Veröffentlichung – du bist verantwortlich für das, was veröffentlicht wird."
 Feature.Moments.Description.HowToCaptureStep1,"Tritt einer Experience bei, bei der Aufnahmen aktiviert sind, und wähle das Hamburger-Menü aus"
 Feature.Moments.Description.HowToCaptureStep2,Aktiviere die Aufnahme-Steuerung
 Feature.Moments.Description.HowToCaptureStep3,Fotos und Videos des Gameplays aufnehmen
@@ -3926,6 +4033,7 @@ Feature.NotApproved.Description.AvatarBrokeRules,"Bitte ändere deinen Avatar. I
 Feature.NotApproved.Description.AvatarViolation,DAS KANN GELÖSCHT WERDEN
 Feature.NotApproved.Description.Ban,Dein Konto wurde deaktiviert. Du kannst es nach dem {date} neu aktivieren.
 Feature.NotApproved.Description.Ban.V2,Dein Konto wurde aufgrund deiner bisherigen Verstöße gesperrt. Du kannst es nach dem {date} wieder aktivieren.
+Feature.NotApproved.Description.BannedDescription.Kids,Du kannst dieses Konto nicht mehr nutzen.
 Feature.NotApproved.Description.Behavior,Dein Verhalten
 Feature.NotApproved.Description.BrokeRulesBanned,Wir haben dein Konto wegen wiederholter oder schwerwiegender Regelverstöße gesperrt.
 Feature.NotApproved.Description.BrokeRulesGeneric,Dein Verhalten hat gegen die Regeln unserer Community verstoßen.
@@ -3939,15 +4047,20 @@ Feature.NotApproved.Description.CommunityStandards,"Bitte halte dich an die {sta
 Feature.NotApproved.Description.Delete,Dein Konto wurde aufgelöst.
 Feature.NotApproved.Description.FollowTheRules,"Stelle sicher, dass du die Regeln kennst und sie befolgst."
 Feature.NotApproved.Description.Foreshadow,"Wir können dich länger sperren oder sogar dein Konto schließen, wenn du weiterhin gegen die Regeln verstößt."
+Feature.NotApproved.Description.Foreshadow.Kids,"Wenn du gegen weitere Regeln verstößt, wirst du möglicherweise für einen längeren Zeitraum oder dauerhaft gesperrt."
 Feature.NotApproved.Description.LinkedAccounts,Die Konsequenzen basieren auf deinem Verhalten in allen verknüpften Konten.
 Feature.NotApproved.Description.ManualDetectionAutomatedDecision,"Wir haben Automatisierung verwendet, um diese Entscheidung zu treffen"
 Feature.NotApproved.Description.ManualDetectionAutomatedDecision.V2,"Wir haben automatisierte Systeme verwendet, um diese Entscheidung zu treffen."
 Feature.NotApproved.Description.Mistake,"Du kannst hier Widerspruch einlegen oder uns bitten, diese Entscheidung zu überprüfen."
+Feature.NotApproved.Description.Mistake.Kids,Haben wir einen Fehler gemacht? Dann kannst du Widerspruch einlegen.
 Feature.NotApproved.Description.Mistake.V2,"Haben wir einen Fehler gemacht? Du kannst hier Widerspruch einlegen oder uns bitten, diese Entscheidung zu überprüfen."
 Feature.NotApproved.Description.Mistake.V3,"Wenn du der Meinung bist, dass wir einen Fehler gemacht haben, kannst du gegen diese Entscheidung Widerspruch erheben."
 Feature.NotApproved.Description.PluralViolation,"Einer deiner Artikel vom Typ ""{type}"""
 Feature.NotApproved.Description.ReactivationNotice,"Wähle ""Weiter"" aus, um unsere Regeln zu lesen. Danach kannst du sofort spielen."
 Feature.NotApproved.Description.ReviewProcess,Wir überprüfen deine Aktivitäten sowohl mit technologischen Mitteln als auch manuell.
+Feature.NotApproved.Description.RuleExplanation.Bullets.Bullying.Kids,"Sei freundlich und ärgere andere nicht.
+Drohe niemandem mit Gewalt.
+Schütze die persönlichen Daten anderer."
 Feature.NotApproved.Description.RuleExplanation.Bullets.MisusingRobloxSystems,"Vorgeben, jemand zu sein, der du nicht bist
 Benutzer für Dinge zu melden, die nicht passiert sind
 Lügen, um Personen dazu zu bringen, etwas zu tun
@@ -3965,6 +4078,13 @@ Gefährliche körperliche Challenges, einschließlich Online-Trends in der reale
 Dinge, die illegal oder gefährlich sind, wie Alkohol und Drogen
 Glücksspiel, Wetten oder Gewinnspiele
 Anweisungen zur Herstellung von Waffen in der realen Welt"
+Feature.NotApproved.Description.RuleExplanation.Bullets.SexualContent.Kids,"Auf Roblox bleiben wir Freunde.
+Wir flirten nicht, küssen uns nicht und gehen nicht auf Dates.
+Unsere Avatare tragen Kleidung, die nicht zu viel zeigt."
+Feature.NotApproved.Description.RuleExplanation.Bullets.SharingPII.Kids,"Passwörter
+Echte Namen, Adressen, Telefonnummern oder E-Mail-Adressen
+Benutzernamen für andere Konten
+Fotos von Personen"
 Feature.NotApproved.Description.RuleExplanation.BullyingHarassmentDiscrimination,"Es ist nie in Ordnung, gemeine Dinge zu jemandem oder über eine andere Person zu sagen. Dazu gehört auch die Androhung, ihnen Schaden zuzufügen, indem man beispielsweise ihre privaten Informationen weitergibt oder sie im wirklichen Leben verletzt. 
 Es verstößt auch gegen die Regeln, gemein zu jemandem zu sein oder ihn auszuschließen, weil er ist, wie er ist, weil er glaubt, was er glaubt, oder weil er herkommt, wo er herkommt."
 Feature.NotApproved.Description.RuleExplanation.Dating,"Bleib freundlich und flirte beim Chatten nicht zu sehr. Romantische Verhaltensweisen wie Küssen oder Daten sind nicht erlaubt. Es ist auch wichtig, dass die Kleidung auf deinem Avatar nicht zu freizügig ist."
@@ -3975,9 +4095,14 @@ Feature.NotApproved.Description.RuleExplanation.PII,"Um die Sicherheit von allen
 Feature.NotApproved.Description.RuleExplanation.RealLifeEvents,"Es verstößt gegen die Regeln, sich respektlos über reale Ereignisse zu äußern. Dazu gehört auch die Nachstellung von oder der Spott über Ereignisse oder die daran beteiligten Personen, insbesondere wenn diese für viele Menschen traurig oder beängstigend sind.
 Dazu gehören:"
 Feature.NotApproved.Description.RuleExplanation.SSHAndIllegalRegulatedActivities,"Es ist niemals akzeptabel, Inhalte über gefährliche oder schädliche Dinge zu erstellen, darüber zu chatten oder Witze zu machen, wie zum Beispiel:"
+Feature.NotApproved.Description.RuleExplanation.SharingPII.Kids,Teile folgende Informationen nicht mit anderen:
 Feature.NotApproved.Description.RuleExplanation.Spam,"Es ist nie in Ordnung, immer wieder dieselben Wörter zu schreiben."
 Feature.NotApproved.Description.RuleExplanation.Swearing,"Es ist nie in Ordnung, Schimpfwörter zu verwenden. Dazu gehört auch die Verwendung von Rechtschreibfehlern, Symbolen oder anderen Tricks, um die Erkennungssysteme zu umgehen."
 Feature.NotApproved.Description.RuleExplanation.ViolentContentAndGore,"Es verstößt gegen die Regeln, realistische Gewalt oder etwas zu zeigen, das den Anschein erweckt, dass eine Person, ein Tier oder eine Figur ernsthaft körperlich oder emotional verletzt wird."
+Feature.NotApproved.Description.RuleImportance.Bullets.SharingPII.Kids,"In der Online-Welt ist es manchmal schwer zu wissen, wem du vertrauen kannst.
+Fremde Personen können deine Informationen verwenden, um dich zu finden.
+Wenn du Passwörter teilst, können andere dein Konto oder deine Robux stehlen."
+Feature.NotApproved.Description.RuleImportance.Bullying.Kids,"Gemein sein verletzt andere Spieler. Freundlichkeit sorgt dafür, dass alle sich auf Roblox wohl fühlen."
 Feature.NotApproved.Description.RuleImportance.BullyingHarassmentDiscrimination,"Damit unsere Community für alle Spaß macht, verwenden wir keine Wörter oder Handlungen, die dazu führen, dass sich jemand unsicher oder unwohl fühlt. Roblox ist für Personen aller Herkünfte, Ethnien, Geschlechtsidentitäten, Fähigkeiten, sexuellen Orientierungen und Religionen gemacht."
 Feature.NotApproved.Description.RuleImportance.Dating,"Wenn Chats und Avatare für Freundschaften gemacht sind, fühlen sich alle wohl."
 Feature.NotApproved.Description.RuleImportance.DirectingUsersOffPlatform,"Roblox hat Sicherheitsmaßnahmen, damit Chats und Interaktionen sicher bleiben. Links können dich zu gefälschten Websites führen, die wie Roblox aussehen, um dort dein Konto und deine Artikel zu stehlen. Die Websites könnten auch unangemessene Bilder oder Videos enthalten. Wenn du Robux oder Artikel außerhalb von Roblox handelst, wirst du vielleicht angelogen und erhältst nicht, was dir versprochen wurde."
@@ -3986,12 +4111,15 @@ Feature.NotApproved.Description.RuleImportance.MisusingRobloxSystems,
 Feature.NotApproved.Description.RuleImportance.PII,"Wenn ein Fremder herausfindet, wer du im wirklichen Leben bist, kann er versuchen, dich außerhalb von Roblox zu kontaktieren. Dies kann gefährlich sein, da man im Internet nicht immer wissen kann, ob jemand gerade gute oder schlechte Absichten hat. Deshalb teilen wir auch nie Passwörter. Jemand könnte sonst dein Konto und alles, was du verdient hast, stehlen."
 Feature.NotApproved.Description.RuleImportance.RealLifeEvents,"Für jemanden, der diese Dinge erlebt hat, kann es sehr erschütternd sein, wenn sie nachgestellt werden oder über sie Witze gemacht werden."
 Feature.NotApproved.Description.RuleImportance.SSHAndIllegalRegulatedActivities,"Das Teilen von Inhalten, in denen du dich selbst oder andere verletzt, ist nicht sicher. Wenn du gerade eine schwere Zeit durchmachst, ist es wichtig, mit einem Erwachsenen zu sprechen, dem du vertraust. Dinge wie das Teilen gefährlicher Stunts können andere dazu inspirieren, sie auszuprobieren und sich ernsthaft zu verletzen. Indem du diese Dinge nicht teilst, hilfst du, dich selbst und alle auf Roblox zu schützen."
+Feature.NotApproved.Description.RuleImportance.SexualContent.Kids,"Freundliche Chats und Avatare sorgen dafür, dass alle sich auf Roblox wohl fühlen."
 Feature.NotApproved.Description.RuleImportance.Spam,"Durch Spam wird es schwer, Gesprächen zu folgen und es stört den Spaß."
 Feature.NotApproved.Description.RuleImportance.Swearing,"Roblox ist für alle gemacht, auch für kleine Kinder. Wir verwenden Wörter, die respektvoll und einladend für unsere gesamte Community sind."
 Feature.NotApproved.Description.RuleImportance.ViolentContentAndGore,"Auch kleine Kinder gehören unserer Community an, und extreme Gewalt kann für sie beängstigend und beunruhigend sein."
 Feature.NotApproved.Description.SecondChance.Details,Du kannst jetzt wieder spielen. Du kannst später keinen Widerspruch mehr gegen diese Entscheidung erheben.
 Feature.NotApproved.Description.SecondChance.Second,"Du kannst eine Suspendierung dieses eine Mal vermeiden, weil du dich in der Vergangenheit verantwortungsbewusst verhalten hast."
+Feature.NotApproved.Description.SuspendedUntil,Du bist bis zum {date} um {time} gesperrt.
 Feature.NotApproved.Description.Violation,"Unser Inhaltsmoderationsteam hat festgestellt, dass dein Verhalten auf Roblox gegen unsere {startLink}Nutzungsbedingungen{endLink} verstoßen hat."
+Feature.NotApproved.Description.WarningDescription.Kids,"Du hast gegen eine Regel verstoßen. Wenn du gegen weitere Regeln verstößt, kann dein Konto gesperrt werden."
 Feature.NotApproved.Heading.AccountBanned,
 Feature.NotApproved.Heading.AccountDeleted,
 Feature.NotApproved.Heading.AccountTerminated,Konto gekündigt
@@ -4006,6 +4134,8 @@ Feature.NotApproved.Heading.BannedOneMinute,Für 1 Minute gesperrt
 Feature.NotApproved.Heading.BannedOneSecond,Für 1 Sekunde gesperrt
 Feature.NotApproved.Heading.Error,Ein unbekannter Fehler ist aufgetreten. Bitte versuche es später erneut.
 Feature.NotApproved.Heading.ReactivationNotice,
+Feature.NotApproved.Heading.RecentlyChecked,Das haben wir kürzlich überprüft
+Feature.NotApproved.Heading.RuleExplanation.Bullying.Kids,Behandle andere mit Respekt
 Feature.NotApproved.Heading.RuleExplanation.BullyingHarassmentDiscrimination,"Sorge dafür, dass sich alle willkommen fühlen"
 Feature.NotApproved.Heading.RuleExplanation.Dating,Bitte bleib in der Friendzone
 Feature.NotApproved.Heading.RuleExplanation.DirectingUsersOffPlatform,Bleib auf Roblox
@@ -4013,10 +4143,13 @@ Feature.NotApproved.Heading.RuleExplanation.MisusingRobloxSystems,Spiele fair un
 Feature.NotApproved.Heading.RuleExplanation.PII,Schütze private Informationen
 Feature.NotApproved.Heading.RuleExplanation.RealLifeEvents,Gehe bedacht mit realen Ereignissen um
 Feature.NotApproved.Heading.RuleExplanation.SSHAndIllegalRegulatedActivities,Bewahre dir einen gesunden Geist und Körper
+Feature.NotApproved.Heading.RuleExplanation.SexualContent.Kids,Bleib freundlich
+Feature.NotApproved.Heading.RuleExplanation.SharingPII.Kids,Schütze deine persönlichen Daten
 Feature.NotApproved.Heading.RuleExplanation.Spam,Lass Gespräche fließen
 Feature.NotApproved.Heading.RuleExplanation.Swearing,Verwende freundliche und respektvolle Worte
 Feature.NotApproved.Heading.RuleExplanation.ViolentContentAndGore,Ruhe bewahren und weiterspielen
 Feature.NotApproved.Heading.RuleImportance,Warum ist das wichtig?
+Feature.NotApproved.Heading.RuleImportance.Kids,Warum das wichtig ist
 Feature.NotApproved.Heading.SecondChance,Lerne diese Regel und spiele sofort weiter
 Feature.NotApproved.Heading.SecondChance.Details,Dieses eine Mal eine Suspendierung vermeiden?
 Feature.NotApproved.Heading.Suspended,
@@ -4031,6 +4164,8 @@ Feature.NotApproved.Heading.SuspendedSixtyDays,Für 60 Tage gesperrt
 Feature.NotApproved.Heading.SuspendedThirtyDays,30 Tage lang gesperrt
 Feature.NotApproved.Heading.SuspendedThreeDays,Für 3 Tage gesperrt
 Feature.NotApproved.Heading.Warning,
+Feature.NotApproved.Heading.WhatNext,Was als Nächstes passiert
+Feature.NotApproved.Heading.Why,Warum?
 Feature.NotApproved.Label.AbuseType.AccountTheft,Kontodiebstahl
 Feature.NotApproved.Label.AbuseType.AdultContent,Nicht jugendfreie Inhalte
 Feature.NotApproved.Label.AbuseType.Advertisement,
@@ -4038,6 +4173,8 @@ Feature.NotApproved.Label.AbuseType.Advertising,
 Feature.NotApproved.Label.AbuseType.AssetOwnership,Objektbesitz
 Feature.NotApproved.Label.AbuseType.Billing,
 Feature.NotApproved.Label.AbuseType.BlockedContent,Gesperrter Inhalt
+Feature.NotApproved.Label.AbuseType.Bullying.Kids,Mobbing
+Feature.NotApproved.Label.AbuseType.Bullying.Note.Kids,Wir haben verletzende Worte in deiner Aktivität gefunden.
 Feature.NotApproved.Label.AbuseType.Chargeback,Rückbuchung
 Feature.NotApproved.Label.AbuseType.CheatandExploits,Cheat und Exploits
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,Kindesgefährdung
@@ -4115,6 +4252,10 @@ Feature.NotApproved.Label.AbuseType.Scamming,
 Feature.NotApproved.Label.AbuseType.SeekingSexualContent,Suche nach sexuellen Inhalten
 Feature.NotApproved.Label.AbuseType.SexualAdultContent,Sexueller/Nicht judgendfreier Inhalt
 Feature.NotApproved.Label.AbuseType.SexualContent,Sexueller Inhalt
+Feature.NotApproved.Label.AbuseType.SexualContent.Kids,
+Feature.NotApproved.Label.AbuseType.SexualContent.Note.Kids,"Wir haben Wörter oder Bilder entdeckt, die für Kinder nicht geeignet sind. Dazu zählen Dinge wie Nacktfotos oder romantische Inhalte."
+Feature.NotApproved.Label.AbuseType.SharingPII.Kids,Teilen privater Informationen
+Feature.NotApproved.Label.AbuseType.SharingPII.Note.Kids,"Wir haben Dinge wie einen echten Namen, eine Telefonnummer oder Fotos von echten Personen entdeckt."
 Feature.NotApproved.Label.AbuseType.Shock,Schock
 Feature.NotApproved.Label.AbuseType.Spam,
 Feature.NotApproved.Label.AbuseType.SuggestiveSexualizedImagery,Suggestive/Sexualisierte Bilder
@@ -4132,7 +4273,7 @@ Feature.NotApproved.Label.AbuseType.VirtualCasino.Note,"Roblox erlaubt nicht die
 Feature.NotApproved.Label.ChargebackNextSteps,Wie geht es weiter?
 Feature.NotApproved.Label.CommunityStandards,Community-Regeln
 Feature.NotApproved.Label.ConsoleDeviceNoticeUA,"Bitte melde dich auf einem separaten Gerät bei Roblox.com an, um dein Konto zu reaktivieren."
-Feature.NotApproved.Label.Days,{number} Tage
+Feature.NotApproved.Label.Days,
 Feature.NotApproved.Label.Decision,Entscheidung
 Feature.NotApproved.Label.DecisionMethod,Entscheidungsmethode
 Feature.NotApproved.Label.DecisionMethod.V2,Wie wir dies überprüft haben
@@ -4421,9 +4562,10 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Namen bearbeiten
 Feature.Profile.Heading.EditDisplayName,Anzeigenamen bearbeiten
 Feature.Profile.Heading.InsufficientFunds,Zu wenig Guthaben
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,Profilrahmen
 Feature.Profile.Heading.ProfilePictureSaved,Profilbild erfolgreich gespeichert
 Feature.Profile.Heading.ProfileQRCode,
-Feature.Profile.Heading.Statistics,Statistiken
+Feature.Profile.Heading.Statistics,
 Feature.Profile.Heading.Username,
 Feature.Profile.Heading.UsernameUpdated,Benutzername aktualisiert
 Feature.Profile.Label.AboutDetailsHeading,Über {name}
@@ -4553,7 +4695,7 @@ Feature.ReportAbuse.Message.UserTextMuted,Du erhältst in dieser Experience kein
 Feature.ReportAbuse.Message.UserTextMutedErrorDoesNotExist,Wir konnten {name} nicht finden. Möglicherweise hat der Benutzer die Experience bereits verlassen.
 Feature.ReportAbuse.Message.UserTextMutedErrorSelf,Du kannst keine Chats von dir selbst blockieren.
 Feature.ReportAbuse.Message.UserTextMutedSystem,"""{name}"" wurde stummgeschaltet. Gib ""/unmute {name}"" im Chatfenster ein, um den Vorgang rückgängig zu machen."
-Feature.ReportAbuse.Problem.Bullying,Mobbing
+Feature.ReportAbuse.Problem.Bullying,
 Feature.ReportAbuse.Problem.Cheating,
 Feature.ReportAbuse.Problem.Dating,Dating/Sex
 Feature.ReportAbuse.Problem.Hate,Hass
@@ -4602,7 +4744,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Gute Neuigkeiten
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus holen
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus ist hier nicht verfügbar
-Feature.SafetyDashboard.Heading.AccountStatus,Kontostatus
+Feature.SafetyDashboard.Heading.AccountStatus.V2,"Kontostatus, Verstöße und Widersprüche"
 Feature.Schools.Action.AlreadyGraduated,Ich habe bereits meinen Abschluss gemacht
 Feature.Schools.Action.CantFindSchool,Du kannst deine Schule nicht finden?
 Feature.Schools.Action.Continue,
@@ -4645,6 +4787,7 @@ Feature.Schools.Error.OtpExpired,Dieser Code ist abgelaufen.
 Feature.Schools.Error.OtpInvalidFormat,Dieser Code hat ein ungültiges Format.
 Feature.Schools.Error.OtpTooManyAttempts,Du hast heute die maximale Anzahl an Versuchen erreicht.
 Feature.Schools.Error.SomethingWentWrong,
+Feature.Schools.Error.UnidaysEmailNotFound,UNiDAYS kann diese E-Mail-Adresse nicht finden.
 Feature.Schools.Filter.AllYears,Alle Jahre
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,Abschlussjahr
@@ -4771,7 +4914,7 @@ Feature.SocialShare.Response.Error.Subtext,Versuche es später erneut.
 Feature.SocialShare.ShareWithPeopleYouKnow,"Mit Leuten teilen, die du kennst"
 Feature.SocialTab.Label.AddFriendHint,"Drücke hier, um Freunde hinzuzufügen"
 Feature.SocialTab.Label.AddFriendHintBody,Mit Freunden macht Roblox extra Spaß!
-Feature.SocialTab.Label.Connect,
+Feature.SocialTab.Label.Connect,Verbinden
 Feature.SocialTab.Label.CreateAndExploreGroups,Erstelle und entdecke Communitys
 Feature.SocialTab.Label.Groups,
 Feature.SongDetails.Action.Favorite,Zu Favoriten
