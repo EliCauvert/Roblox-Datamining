@@ -1,5 +1,5 @@
-; // bundle: pageEnd___929361adf451a45aa76f2a2a79f886bc_m
-; // files: ~/Generated/js/Roblox_TranslationResources_Common_PresenceResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_LoginResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_OneTimePasscodeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_CaptchaResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceAuthenticatorResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceTwoStepVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProofOfWorkChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReauthenticationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RostileChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_SecurityQuestionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PrivateAccessTokenChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DeviceIntegrityChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_VerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSettingsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_AccountSwitchResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_ControlsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RecommendationsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_FeaturesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProfileBadgesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_MessagesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AlertsAndOptionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_VisitGameResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DownloadLandingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ShopDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_RedeemGameCardResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_NotApprovedResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_PasskeyResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TrackingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSecurityPromptResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_IdVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AgeVerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ParentsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_FriendsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Verification_IdentityResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AssetTypesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_PurchaseDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TradesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Notifications_NotificationStreamResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PlayerSearchResultsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReportAbuseResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ChatResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PremiumResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemModelResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_GameLaunchGuestModeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_UserAgreementsResources_en_us_standard.js
+; // bundle: pageEnd___5218a5f39f53d96b40c1a57fbda0f83f_m
+; // files: ~/Generated/js/Roblox_TranslationResources_Common_PresenceResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_LoginResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_OneTimePasscodeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_CaptchaResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceAuthenticatorResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ForceTwoStepVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProofOfWorkChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReauthenticationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RostileChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_SecurityQuestionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PrivateAccessTokenChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DeviceIntegrityChallengeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_VerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSettingsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_AccountSwitchResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_ControlsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_RecommendationsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_FeaturesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ProfileBadgesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_MessagesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AlertsAndOptionsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_VisitGameResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_DownloadLandingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ShopDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_RedeemGameCardResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_NotApprovedResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Authentication_PasskeyResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TrackingResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AccountSecurityPromptResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_IdVerificationResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AgeVerificationUpsellResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ParentsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_FriendsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Verification_IdentityResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Common_AssetTypesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Purchasing_PurchaseDialogResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_TradesResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Notifications_NotificationStreamResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PlayerSearchResultsResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ReportAbuseResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ChatResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_AppealsPortalResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_PremiumResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_ItemModelResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_Feature_GameLaunchGuestModeResources_en_us_standard.js, ~/Generated/js/Roblox_TranslationResources_CommonUI_UserAgreementsResources_en_us_standard.js
 
 ; // ~/Generated/js/Roblox_TranslationResources_Common_PresenceResources_en_us_standard.js
 var Roblox = Roblox || {};
@@ -1740,7 +1740,7 @@ Roblox.Lang['Feature.Friends'] = {
     "Action.FindFriends": "Find Friends",
     "Action.Follow": "Follow",
     "Action.Ignore": "Ignore",
-    "Action.IgnoreAll": "Ignore All",
+    "Action.IgnoreAll": "Ignore all",
     "Action.IgnoreAllFriendRequestsPrompt": "Are you sure you want to ignore all friend requests?",
     "Action.InviteProviderFriends": "Invite {provider} Friends",
     "Action.JoinGame": "Join",
@@ -2672,6 +2672,70 @@ Roblox.Lang['Feature.Chat'] = {
     "Response.PartyInvite": "You received a party Invite."
 };
 Roblox.Lang['ChatResources'] = Roblox.Lang['Feature.Chat'];
+
+; // ~/Generated/js/Roblox_TranslationResources_Feature_AppealsPortalResources_en_us_standard.js
+var Roblox = Roblox || {};
+Roblox.Lang = Roblox.Lang || {};
+Roblox.Lang['Feature.AppealsPortal'] = {
+    "Action.RequestAppeal": "Request Appeal",
+    "Description.AppealAccepted": "We have reviewed your appeal. This activity is not in violation of Roblox Community Standards. Any consequence related to this activity is reversed.",
+    "Description.AppealDenied": "We have reviewed your appeal. This activity is still in violation of Roblox Community Standards.",
+    "Description.AppealDeniedWithAdjustment": "We have reviewed your appeal. This activity is still in violation of Roblox Community Standards. However, we’ve updated the violation category.",
+    "Description.AppealRequested": "We have received your appeal request. Thanks for bringing this to our attention. We'll follow up with an update soon.",
+    "Description.AppealsNotFound": "Appeals information not found",
+    "Description.ContentRemovalDescription2": "View past violations and manage your appeals. All content and behavior must adhere to the {link}Roblox Community Standards{linkEnd}.",
+    "Description.ItemRemovalDescription3": "This {type} was removed because it goes against {link}Roblox Community Standards{linkEnd}.",
+    "Description.LearnMore": "Learn more about appeals {link}here{linkEnd}.",
+    "Description.MaxAppealsHit": "You've reached the maximum number of appeals. You may no longer appeal this {assetType}.",
+    "Description.RequestAppealReview2": "Reviews are based on {link}Roblox Community Standards{linkEnd}",
+    "Description.SupportLinkFallback2": "If you would like to appeal something not shown here please visit {link}Support{linkEnd}",
+    "Description.SupportOther": "Appeal something not shown",
+    "Label.AdditionalInfoSubmitted": "Additional info submitted",
+    "Label.AdditionalInfoSubmitted2": "Your appeal comment: {style}\"{userMsg}\"{styleEnd}.",
+    "Label.AppealAccepted": "Appeal accepted",
+    "Label.AppealByDate": "You can appeal by {date}",
+    "Label.AppealDenied": "Appeal denied",
+    "Label.AppealRequested": "Appeal received",
+    "Label.AppealSubmitted": "Appeal submitted",
+    "Label.AssetId": "Asset ID",
+    "Label.AssetName": "Asset Name",
+    "Label.BundleId": "Bundle ID",
+    "Label.BundleName": "Bundle Name",
+    "Label.Details": "Details",
+    "Label.IDArg": "ID: {id}",
+    "Label.ItemStatus.InReview": "Review in progress",
+    "Label.ItemStatus.ReviewComplete": "Review Complete",
+    "Label.ItemStatus.SeeDetails": "See details",
+    "Label.ItemStatus.WindowClosed": "Appeal window closed",
+    "Label.ReportAndAppeals": "Violations & Appeals",
+    "Label.RequestAppealPlaceholder": "Additional info (optional)",
+    "Label.RoboloxCommunityStandards": "Roblox Community Standards",
+    "Label.Time.Short.day": "d",
+    "Label.Time.Short.hour": "h",
+    "Label.Time.Short.min": "m",
+    "Label.TimeAgo": "{time} ago",
+    "Label.Type.Audio": "Audio",
+    "Label.Type.AvatarAccessory": "Avatar Accessory",
+    "Label.Type.Bundle": "Bundle",
+    "Label.Type.Experience": "Experience",
+    "Label.Type.Image": "Image",
+    "Label.Type.Mesh": "Mesh",
+    "Label.Type.Model": "Model",
+    "Label.Type.Plugin": "Plugin",
+    "Label.TypeLower.Audio": "audio",
+    "Label.TypeLower.AvatarAccessory": "avatar accessory",
+    "Label.TypeLower.Bundle": "bundle",
+    "Label.TypeLower.Experience": "experience",
+    "Label.TypeLower.Image": "image",
+    "Label.TypeLower.Mesh": "mesh",
+    "Label.TypeLower.Model": "model",
+    "Label.TypeLower.Plugin": "plugin",
+    "Label.TypeRemoved": "{type} removed",
+    "Label.TypeRestored": "{type} restored",
+    "Label.UploadTime": "Upload Time",
+    "Label.Violation": "Violation"
+};
+Roblox.Lang['AppealsPortalResources'] = Roblox.Lang['Feature.AppealsPortal'];
 
 ; // ~/Generated/js/Roblox_TranslationResources_Feature_PremiumResources_en_us_standard.js
 var Roblox = Roblox || {};

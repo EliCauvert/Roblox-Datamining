@@ -451,6 +451,10 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "Description.VPCRequestIarcEsrbM": "Content is generally suitable for ages 17 and up. May contain intense violence, blood and gore, sexual content and/or strong language.",
     "Description.VPCRequestIarcEsrbAo": "Content suitable only for adults ages 18 and up. May include prolonged scenes of intense violence, graphic sexual content and/or gambling with real currency.",
     "Description.VPCRequestRobuxTransferLimits": "This will update the daily and monthly limits on the amount of Robux your child can transfer.",
-    "Heading.ConversationalRequest.RobuxTransferLimits": "Set your child's Robux transfer limits"
+    "Heading.ConversationalRequest.RobuxTransferLimits": "Set your child's Robux transfer limits",
+    "Email.PrivatePlaytest.Subject": "Private Playtest is coming to Roblox",
+    "Email.PrivatePlaytest.Intro": "Your child will soon get access to Private Playtest. This feature allows your child to test games created by friends in similar age groups and trusted friends, before these games may be rated or published to our games catalog for kids and young teens.",
+    "Email.PrivatePlaytest.Control": "You will be able to control who can join your child's private playtests within {aTagWithHref}{parentalControlsLink}{hrefEnd}Parental Controls{htmlCloseAHref}.",
+    "Email.PrivatePlaytest.Closing": "Thanks,{lineBreak}Roblox"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Parents");

@@ -1,182 +1,205 @@
-/*! For license information please see friends.bundle.min.js.LICENSE.txt */ ! function() {
+! function() {
+    try {
+        var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
+        e.SENTRY_RELEASE = {
+            id: "acf0747f2632b776ccfd686b0564bd5dc288a261"
+        };
+        var r = (new e.Error).stack;
+        r && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[r] = "f96d859a-3a09-4824-8fda-68482ff280a3", e._sentryDebugIdIdentifier = "sentry-dbid-f96d859a-3a09-4824-8fda-68482ff280a3")
+    } catch (e) {}
+}(),
+function() {
     var e = {
-            452: function(e, t) {
-                var r;
-                ! function() {
+            611: function(e) {
+                function r(e) {
+                    return e && "u" > typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e
+                }!
+                /*!
+                	Copyright (c) 2018 Jed Watson.
+                	Licensed under the MIT License (MIT), see
+                	http://jedwatson.github.io/classnames
+                */
+                function() {
                     "use strict";
-                    var n = {}.hasOwnProperty;
+                    var t = {}.hasOwnProperty;
 
-                    function a() {
-                        for (var e = "", t = 0; t < arguments.length; t++) {
-                            var r = arguments[t];
-                            r && (e = o(e, i(r)))
+                    function n() {
+                        for (var e = "", a = 0; a < arguments.length; a++) {
+                            var o = arguments[a];
+                            o && (e = i(e, function(e) {
+                                if ("string" == typeof e || "number" == typeof e) return e;
+                                if ((void 0 === e ? "undefined" : r(e)) !== "object") return "";
+                                if (Array.isArray(e)) return n.apply(null, e);
+                                if (e.toString !== Object.prototype.toString && !e.toString.toString().includes("[native code]")) return e.toString();
+                                var a = "";
+                                for (var o in e) t.call(e, o) && e[o] && (a = i(a, o));
+                                return a
+                            }(o)))
                         }
                         return e
                     }
 
-                    function i(e) {
-                        if ("string" == typeof e || "number" == typeof e) return e;
-                        if ("object" != typeof e) return "";
-                        if (Array.isArray(e)) return a.apply(null, e);
-                        if (e.toString !== Object.prototype.toString && !e.toString.toString().includes("[native code]")) return e.toString();
-                        var t = "";
-                        for (var r in e) n.call(e, r) && e[r] && (t = o(t, r));
-                        return t
+                    function i(e, r) {
+                        return r ? e ? e + " " + r : e + r : e
                     }
-
-                    function o(e, t) {
-                        return t ? e ? e + " " + t : e + t : e
-                    }
-                    e.exports ? (a.default = a, e.exports = a) : void 0 === (r = function() {
-                        return a
-                    }.apply(t, [])) || (e.exports = r)
+                    e.exports ? (n.default = n, e.exports = n) : "function" == typeof define && "object" === r(define.amd) && define.amd ? define("classnames", [], function() {
+                        return n
+                    }) : window.classNames = n
                 }()
             }
         },
-        t = {};
+        r = {};
 
-    function r(n) {
-        var a = t[n];
-        if (void 0 !== a) return a.exports;
-        var i = t[n] = {
+    function t(n) {
+        var i = r[n];
+        if (void 0 !== i) return i.exports;
+        var a = r[n] = {
             exports: {}
         };
-        return e[n](i, i.exports, r), i.exports
+        return e[n](a, a.exports, t), a.exports
     }
-    r.n = function(e) {
-            var t = e && e.__esModule ? function() {
+    t.m = e, t.n = function(e) {
+            var r = e && e.__esModule ? function() {
                 return e.default
             } : function() {
                 return e
             };
-            return r.d(t, {
-                a: t
-            }), t
-        }, r.d = function(e, t) {
-            for (var n in t) r.o(t, n) && !r.o(e, n) && Object.defineProperty(e, n, {
+            return t.d(r, {
+                a: r
+            }), r
+        }, t.d = function(e, r) {
+            for (var n in r) t.o(r, n) && !t.o(e, n) && Object.defineProperty(e, n, {
                 enumerable: !0,
-                get: t[n]
+                get: r[n]
             })
-        }, r.o = function(e, t) {
-            return Object.prototype.hasOwnProperty.call(e, t)
-        },
+        }, t.o = function(e, r) {
+            return Object.prototype.hasOwnProperty.call(e, r)
+        }, t.r = function(e) {
+            "u" > typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
+                value: "Module"
+            }), Object.defineProperty(e, "__esModule", {
+                value: !0
+            })
+        }, t.rv = function() {
+            return "1.7.12"
+        }, t.ruid = "bundler=rspack@1.7.12",
         function() {
             "use strict";
-            var e = React,
-                t = r.n(e),
-                n = ReactDOM,
-                a = CoreUtilities,
-                i = Redux,
-                o = ReduxThunk,
-                u = r.n(o),
-                s = ReactRedux,
-                l = TanstackQuery,
-                c = ReactUtilities,
-                d = "SET_FRIENDS",
-                f = "LOAD_MORE_FRIENDS",
-                m = "SET_METADATA",
-                p = "SET_TABLOADER",
-                v = "SET_ERROR_TYPE",
-                h = [],
-                y = function() {
-                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : h,
-                        t = arguments.length > 1 ? arguments[1] : void 0;
-                    switch (t.type) {
-                        case d:
-                            return t.friends;
-                        case f:
-                            return e.concat(t.friends);
-                        default:
-                            return e
-                    }
-                },
-                b = Roblox;
+            var e, r, n, i, a = window.ReactJSX,
+                o = window.Roblox["core-scripts"].util.ready,
+                s = t.n(o),
+                u = window.Roblox["core-scripts"].react,
+                l = window.React,
+                c = t.n(l),
+                d = window.Redux,
+                f = window.ReduxThunk,
+                p = t.n(f),
+                m = window.ReactRedux,
+                y = window.TanstackQuery,
+                h = window.ReactUtilities,
+                v = "SET_FRIENDS",
+                b = "LOAD_MORE_FRIENDS",
+                g = "SET_METADATA",
+                S = "SET_TABLOADER",
+                E = "SET_ERROR_TYPE";
 
-            function E() {
+            function T(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
+                return n
+            }
+
+            function R(e) {
+                return function(e) {
+                    if (Array.isArray(e)) return T(e)
+                }(e) || function(e) {
+                    if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
+                }(e) || function(e) {
+                    if (e) {
+                        if ("string" == typeof e) return T(e, void 0);
+                        var r = Object.prototype.toString.call(e).slice(8, -1);
+                        if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return T(e, void 0)
+                    }
+                }(e) || function() {
+                    throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                }()
+            }
+            var F = [],
+                I = window.Roblox;
+
+            function w() {
                 var e = /\/users\/(\d+)\//g.exec(window.location.pathname);
                 return e ? e[1] : null
             }
-
-            function g(e, t) {
-                var r = Object.keys(e);
-                if (Object.getOwnPropertySymbols) {
-                    var n = Object.getOwnPropertySymbols(e);
-                    t && (n = n.filter((function(t) {
-                        return Object.getOwnPropertyDescriptor(e, t).enumerable
-                    }))), r.push.apply(r, n)
-                }
-                return r
-            }
-
-            function S(e) {
-                for (var t = 1; t < arguments.length; t++) {
-                    var r = null != arguments[t] ? arguments[t] : {};
-                    t % 2 ? g(Object(r), !0).forEach((function(t) {
-                        R(e, t, r[t])
-                    })) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(r)) : g(Object(r)).forEach((function(t) {
-                        Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(r, t))
-                    }))
-                }
-                return e
-            }
-
-            function R(e, t, r) {
-                return t in e ? Object.defineProperty(e, t, {
-                    value: r,
-                    enumerable: !0,
-                    configurable: !0,
-                    writable: !0
-                }) : e[t] = r, e
-            }
-            var F = E() || b.CurrentUser.userId,
-                T = {
-                    profileUserId: F,
-                    isMyProfile: F === b.CurrentUser.userId,
+            var C = w() || I.CurrentUser.userId,
+                x = {
+                    profileUserId: C,
+                    isMyProfile: C === I.CurrentUser.userId,
                     isNearbyUpsellEnabled: !1,
                     isFriendsUserDataStoreCacheEnabled: !0,
                     onlyShowContents: !1,
                     userName: "",
                     displayName: ""
                 },
-                I = function() {
-                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : T,
-                        t = arguments.length > 1 ? arguments[1] : void 0,
-                        r = window.location.search.match("onlyShowContents") || !1;
-                    return t.type === m ? S(S(S({}, {
-                        onlyShowContents: r
-                    }), e), t.data) : e
-                },
-                C = {
+                N = {
                     isLoading: !1
                 },
-                N = function() {
-                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : C,
-                        t = arguments.length > 1 ? arguments[1] : void 0;
-                    return t.type === p ? t.data : e
-                },
-                w = function() {
-                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : null,
-                        t = arguments.length > 1 ? arguments[1] : void 0;
-                    return t.type === v ? t.errorType : e
-                },
-                A = (0, i.combineReducers)({
-                    friends: y,
-                    metadata: I,
-                    tabLoader: N,
-                    errorType: w
-                }),
-                O = PropTypes,
-                D = r.n(O),
-                P = ReactStyleGuide,
-                x = r(452),
-                L = r.n(x),
-                q = CoreRobloxUtilities,
-                U = function(e) {
-                    return {
-                        type: m,
-                        data: e
+                A = (0, d.combineReducers)({
+                    friends: function() {
+                        var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : F,
+                            r = arguments.length > 1 ? arguments[1] : void 0;
+                        switch (r.type) {
+                            case v:
+                                return r.friends;
+                            case b:
+                                return R(e).concat(R(r.friends));
+                            default:
+                                return e
+                        }
+                    },
+                    metadata: function() {
+                        var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : x,
+                            r = arguments.length > 1 ? arguments[1] : void 0,
+                            t = window.location.search.match("onlyShowContents") || !1;
+                        return r.type === g ? function(e) {
+                            for (var r = 1; r < arguments.length; r++) {
+                                var t = null != arguments[r] ? arguments[r] : {},
+                                    n = Object.keys(t);
+                                "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(t).filter(function(e) {
+                                    return Object.getOwnPropertyDescriptor(t, e).enumerable
+                                }))), n.forEach(function(r) {
+                                    var n;
+                                    n = t[r], r in e ? Object.defineProperty(e, r, {
+                                        value: n,
+                                        enumerable: !0,
+                                        configurable: !0,
+                                        writable: !0
+                                    }) : e[r] = n
+                                })
+                            }
+                            return e
+                        }({}, {
+                            onlyShowContents: t
+                        }, e, r.data) : e
+                    },
+                    tabLoader: function() {
+                        var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : N,
+                            r = arguments.length > 1 ? arguments[1] : void 0;
+                        return r.type === S ? r.data : e
+                    },
+                    errorType: function() {
+                        var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : null,
+                            r = arguments.length > 1 ? arguments[1] : void 0;
+                        return r.type === E ? r.errorType : e
                     }
-                },
+                }),
+                O = window.PropTypes,
+                j = t.n(O),
+                P = window.ReactStyleGuide,
+                D = t(611),
+                L = t.n(D),
+                U = window.CoreRobloxUtilities,
                 _ = {
                     FRIENDS_EMPTY: "Label.NoResults",
                     CONNECTIONS_FILTER: {
@@ -199,10 +222,10 @@
                     },
                     FILTER_STATUS_OPTIONS_DEFAULT: "Label.All",
                     LIST_TYPE: {
-                        friends: q.userInfoService.TYPE.FRIENDS,
-                        following: q.userInfoService.TYPE.FOLLOWINGS,
-                        followers: q.userInfoService.TYPE.FOLLOWERS,
-                        "friend-requests": q.userInfoService.TYPE.FRIENDREQUESTS
+                        friends: U.userInfoService.TYPE.FRIENDS,
+                        following: U.userInfoService.TYPE.FOLLOWINGS,
+                        followers: U.userInfoService.TYPE.FOLLOWERS,
+                        "friend-requests": U.userInfoService.TYPE.FRIENDREQUESTS
                     },
                     START_PAGE: 1,
                     MAX_PER_PAGE: 18,
@@ -295,381 +318,330 @@
                     }
                 };
 
-            function M(e, t) {
-                return function(e) {
-                    if (Array.isArray(e)) return e
-                }(e) || function(e, t) {
-                    if ("undefined" == typeof Symbol || !(Symbol.iterator in Object(e))) return;
-                    var r = [],
-                        n = !0,
-                        a = !1,
-                        i = void 0;
-                    try {
-                        for (var o, u = e[Symbol.iterator](); !(n = (o = u.next()).done) && (r.push(o.value), !t || r.length !== t); n = !0);
-                    } catch (e) {
-                        a = !0, i = e
-                    } finally {
-                        try {
-                            n || null == u.return || u.return()
-                        } finally {
-                            if (a) throw i
-                        }
-                    }
-                    return r
-                }(e, t) || function(e, t) {
-                    if (!e) return;
-                    if ("string" == typeof e) return k(e, t);
-                    var r = Object.prototype.toString.call(e).slice(8, -1);
-                    "Object" === r && e.constructor && (r = e.constructor.name);
-                    if ("Map" === r || "Set" === r) return Array.from(e);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return k(e, t)
-                }(e, t) || function() {
-                    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }()
-            }
-
-            function k(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var r = 0, n = new Array(t); r < t; r++) n[r] = e[r];
+            function q(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
                 return n
             }
-            var j = _.MAX_FRIENDS_STATUS,
-                B = _.FRIENDS_ERROR_TYPE,
-                G = _.MAX_FRIENDS_CODE,
-                Q = _.FLOODED_STATUS,
-                H = function(e) {
+            var M = _.MAX_FRIENDS_STATUS,
+                k = _.FRIENDS_ERROR_TYPE,
+                B = _.MAX_FRIENDS_CODE,
+                G = _.FLOODED_STATUS,
+                z = function(e) {
                     return {
-                        type: v,
+                        type: E,
                         errorType: e
                     }
                 },
-                z = function(e) {
-                    return function(t) {
+                Q = function(e) {
+                    return function(r) {
                         if (e) {
-                            var r = M(e.data.errors, 1)[0];
+                            var t, n = (function(e) {
+                                if (Array.isArray(e)) return e
+                            }(t = e.data.errors) || function(e) {
+                                var r, t, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                                if (null != n) {
+                                    var i = [],
+                                        a = !0,
+                                        o = !1;
+                                    try {
+                                        for (n = n.call(e); !(a = (r = n.next()).done) && (i.push(r.value), 1 !== i.length); a = !0);
+                                    } catch (e) {
+                                        o = !0, t = e
+                                    } finally {
+                                        try {
+                                            a || null == n.return || n.return()
+                                        } finally {
+                                            if (o) throw t
+                                        }
+                                    }
+                                    return i
+                                }
+                            }(t) || function(e) {
+                                if (e) {
+                                    if ("string" == typeof e) return q(e, 1);
+                                    var r = Object.prototype.toString.call(e).slice(8, -1);
+                                    if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
+                                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return q(e, 1)
+                                }
+                            }(t) || function() {
+                                throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                            }())[0];
                             switch (e.status) {
-                                case j:
-                                    r.code === G.currentUser && t(H(B.currentUser)), r.code === G.receiverUser && t(H(B.receiverUser));
+                                case M:
+                                    n.code === B.currentUser && r(z(k.currentUser)), n.code === B.receiverUser && r(z(k.receiverUser));
                                     break;
-                                case Q:
-                                    t(H(B.flooded));
+                                case G:
+                                    r(z(k.flooded));
                                     break;
                                 default:
-                                    t(H(B.general))
+                                    r(z(k.general))
                             }
                         }
                     }
                 },
-                W = b.EnvironmentUrls.apiGatewayUrl,
-                V = b.EnvironmentUrls.friendsApi,
-                Y = b.EnvironmentUrls.thumbnailsApi,
-                J = (b.EnvironmentUrls.presenceApi, b.EnvironmentUrls.gamesApi),
-                X = (b.EnvironmentUrls.usersApi, function(e) {
-                    return "/users/".concat(e, "/profile")
-                }),
-                $ = function(e) {
-                    var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : null,
-                        r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : null;
+                H = window.CoreUtilities,
+                W = I.EnvironmentUrls.apiGatewayUrl,
+                V = I.EnvironmentUrls.friendsApi,
+                Y = I.EnvironmentUrls.thumbnailsApi,
+                J = (I.EnvironmentUrls.presenceApi, I.EnvironmentUrls.gamesApi),
+                X = (I.EnvironmentUrls.usersApi, function(e) {
+                    var r = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : null,
+                        t = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : null;
                     return {
                         retryable: !0,
                         withCredentials: !0,
-                        url: "".concat(W, "/access-management/v1/upsell-feature-access?featureName=").concat(e).concat(t ? "&extraParameters=".concat(t) : "").concat(r ? "&successfulActions=".concat(r) : "")
+                        url: "".concat(W, "/access-management/v1/upsell-feature-access?featureName=").concat(e).concat(r ? "&extraParameters=".concat(r) : "").concat(t ? "&successfulActions=".concat(t) : "")
                     }
-                },
-                K = function(e) {
-                    var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : null,
-                        r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : null,
+                }),
+                $ = function(e) {
+                    var r = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : null,
+                        t = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : null,
                         n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : null;
                     return {
                         retryable: !0,
                         withCredentials: !0,
-                        url: "".concat(W, "/access-management/v1/upsell-feature-access?featureName=").concat(e).concat(t ? "&extraParameters=".concat(t) : "").concat(r ? "&successfulActions=".concat(r) : "").concat(n ? "&namespace=".concat(encodeURIComponent(n)) : "")
+                        url: "".concat(W, "/access-management/v1/upsell-feature-access?featureName=").concat(e).concat(r ? "&extraParameters=".concat(r) : "").concat(t ? "&successfulActions=".concat(t) : "").concat(n ? "&namespace=".concat(encodeURIComponent(n)) : "")
                     }
-                },
-                Z = _.FRIENDTABS,
-                ee = function() {
-                    return "".concat(V, "/v1/metadata")
-                },
-                te = function(e) {
-                    return {
-                        retryable: !1,
-                        withCredentials: !0,
-                        url: "".concat(V, "/v1/users/").concat(e, "/decline-friend-request")
+                };
+
+            function K(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
+                return n
+            }
+
+            function Z(e) {
+                return function(e) {
+                    if (Array.isArray(e)) return K(e)
+                }(e) || function(e) {
+                    if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
+                }(e) || function(e) {
+                    if (e) {
+                        if ("string" == typeof e) return K(e, void 0);
+                        var r = Object.prototype.toString.call(e).slice(8, -1);
+                        if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return K(e, void 0)
                     }
-                },
-                re = function(e) {
-                    return {
-                        retryable: !1,
-                        withCredentials: !0,
-                        url: "".concat(V, "/v1/users/").concat(e, "/accept-friend-request")
-                    }
-                },
-                ne = function() {
-                    return {
-                        retryable: !1,
-                        withCredentials: !0,
-                        url: "".concat(V, "/v1/user/friend-requests/decline-all")
-                    }
-                },
-                ae = function(e) {
-                    return {
-                        retryable: !1,
-                        withCredentials: !0,
-                        url: "".concat(V, "/v1/users/").concat(e, "/follow")
-                    }
-                },
-                ie = function(e) {
-                    return {
-                        retryable: !1,
-                        withCredentials: !0,
-                        url: "".concat(V, "/v1/users/").concat(e, "/unfollow")
-                    }
-                },
-                oe = function(e) {
-                    return {
-                        retryable: !1,
-                        withCredentials: !0,
-                        url: "".concat(V, "/v1/users/").concat(e, "/unfriend")
-                    }
-                },
-                ue = function() {
-                    return "".concat(Y, "/v1/users/avatar-headshot?size=150x150&format=png")
-                },
-                se = function() {
-                    return {
-                        retryable: !0,
-                        withCredentials: !0,
-                        url: "".concat(J, "/v1/games/multiget-playability-status")
-                    }
-                },
-                le = function() {
-                    return "".concat(V, "/v1/user/friend-requests/count")
-                },
-                ce = function(e) {
-                    return "".concat(V, "/v1/users/").concat(e, "/followers/count")
-                },
-                de = function(e) {
-                    return "".concat(V, "/v1/users/").concat(e, "/followings/count")
-                },
-                fe = function() {
-                    return "".concat(J, "/v1/games")
-                },
-                me = function(e, t, r, n) {
-                    var a = r ? "1" : "",
-                        i = n ? 36 : 18;
-                    return {
-                        retryable: !1,
-                        withCredentials: !0,
-                        url: "".concat(V, "/v1/users/").concat(e, "/friends/find?limit=").concat(i, "&cursor=").concat(t, "&userSort=").concat(a)
-                    }
-                },
-                pe = function(e, t, r) {
-                    var n = r ? 36 : 18;
-                    return {
-                        retryable: !1,
-                        withCredentials: !0,
-                        url: "".concat(V, "/v1/users/").concat(e, "/friends/find?limit=").concat(n, "&cursor=").concat(t, "&findFriendsType=").concat(_.FIND_FRIENDS_TYPES.TrustedFriends)
-                    }
-                },
-                ve = function(e, t, r, n) {
-                    var a = n ? 36 : 18;
-                    return {
-                        retryable: !1,
-                        withCredentials: !0,
-                        url: "".concat(V, "/v1/users/").concat(e, "/friends/search?limit=").concat(a, "&cursor=").concat(t, "&query=").concat(r)
-                    }
-                },
-                he = function(e) {
-                    return {
-                        retryable: !1,
-                        withCredentials: !0,
-                        url: "".concat(V, "/v1/users/").concat(e, "/friends/count")
-                    }
-                },
-                ye = function() {
-                    return {
-                        retryable: !1,
-                        withCredentials: !0,
-                        url: "".concat(V, "/v1/my/new-friend-requests")
-                    }
-                },
-                be = function(e) {
-                    return {
-                        retryable: !0,
-                        withCredentials: !0,
-                        url: "".concat(V, "/v1/my/trusted-friends/").concat(e, "/status")
-                    }
-                },
-                Ee = {
+                }(e) || function() {
+                    throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                }()
+            }
+            var ee = _.FRIENDTABS,
+                er = {
                     userId: 0,
                     getFriendsTypeName: function(e) {
                         switch (e) {
-                            case Z.FRIENDREQUESTS:
+                            case ee.FRIENDREQUESTS:
                                 return "FriendRequests";
-                            case Z.FOLLOWING:
+                            case ee.FOLLOWING:
                                 return "Following";
-                            case Z.FOLLOWERS:
+                            case ee.FOLLOWERS:
                                 return "Followers";
-                            case Z.FRIENDS:
+                            case ee.FRIENDS:
                             default:
                                 return "AllFriends"
                         }
                     },
                     setUserId: function(e) {
-                        this.userId = E() || e
+                        this.userId = w() || e
                     },
                     getMetadata: function(e) {
-                        var t = {
-                                url: ee(),
-                                retryable: !0,
-                                withCredentials: !0
-                            },
-                            r = {
-                                targetUserId: e
-                            };
-                        return a.httpService.get(t, r)
-                    },
-                    acceptFriendRequest: function(e) {
-                        var t = re(e);
-                        return a.httpService.post(t)
-                    },
-                    declineFriendRequest: function(e) {
-                        var t = te(e);
-                        return a.httpService.post(t, {})
-                    },
-                    declineAllFriendRequests: function() {
-                        var e = ne();
-                        return a.httpService.post(e, {})
-                    },
-                    follow: function(e, t) {
-                        var r = ae(e);
-                        return a.httpService.post(r, t, !0)
-                    },
-                    unfollow: function(e) {
-                        var t = ie(e),
-                            r = {
-                                targetUserId: e
-                            };
-                        return a.httpService.post(t, r)
-                    },
-                    unfriend: function(e) {
-                        var t = oe(e);
-                        return a.httpService.post(t, {})
-                    },
-                    getAvatarHeadshots: function(e) {
-                        var t = {
-                            url: ue(),
+                        return H.httpService.get({
+                            url: "".concat(V, "/v1/metadata"),
                             retryable: !0,
                             withCredentials: !0
-                        };
-                        return a.httpService.buildBatchPromises(e, 50, t).then((function(e) {
-                            return e && e.length > 0 ? e.reduce((function(e, t) {
-                                var r = t.data.data;
-                                return e.concat(r)
-                            }), []) : []
-                        })).catch((function() {
+                        }, {
+                            targetUserId: e
+                        })
+                    },
+                    acceptFriendRequest: function(e) {
+                        var r, t = (r = e, {
+                            retryable: !1,
+                            withCredentials: !0,
+                            url: "".concat(V, "/v1/users/").concat(r, "/accept-friend-request")
+                        });
+                        return H.httpService.post(t)
+                    },
+                    declineFriendRequest: function(e) {
+                        var r, t = (r = e, {
+                            retryable: !1,
+                            withCredentials: !0,
+                            url: "".concat(V, "/v1/users/").concat(r, "/decline-friend-request")
+                        });
+                        return H.httpService.post(t, {})
+                    },
+                    declineAllFriendRequests: function() {
+                        return H.httpService.post({
+                            retryable: !1,
+                            withCredentials: !0,
+                            url: "".concat(V, "/v1/user/friend-requests/decline-all")
+                        }, {})
+                    },
+                    follow: function(e, r) {
+                        var t, n = (t = e, {
+                            retryable: !1,
+                            withCredentials: !0,
+                            url: "".concat(V, "/v1/users/").concat(t, "/follow")
+                        });
+                        return H.httpService.post(n, r, !0)
+                    },
+                    unfollow: function(e) {
+                        var r, t = (r = e, {
+                            retryable: !1,
+                            withCredentials: !0,
+                            url: "".concat(V, "/v1/users/").concat(r, "/unfollow")
+                        });
+                        return H.httpService.post(t, {
+                            targetUserId: e
+                        })
+                    },
+                    unfriend: function(e) {
+                        var r, t = (r = e, {
+                            retryable: !1,
+                            withCredentials: !0,
+                            url: "".concat(V, "/v1/users/").concat(r, "/unfriend")
+                        });
+                        return H.httpService.post(t, {})
+                    },
+                    getAvatarHeadshots: function(e) {
+                        return H.httpService.buildBatchPromises(e, 50, {
+                            url: "".concat(Y, "/v1/users/avatar-headshot?size=150x150&format=png"),
+                            retryable: !0,
+                            withCredentials: !0
+                        }).then(function(e) {
+                            return e && e.length > 0 ? e.reduce(function(e, r) {
+                                var t = r.data.data;
+                                return Z(e).concat(Z(t))
+                            }, []) : []
+                        }).catch(function() {
                             return []
-                        }))
+                        })
                     },
                     getGamePlayabilities: function(e) {
-                        var t = se();
-                        return a.httpService.get(t, {
+                        return H.httpService.get({
+                            retryable: !0,
+                            withCredentials: !0,
+                            url: "".concat(J, "/v1/games/multiget-playability-status")
+                        }, {
                             universeIds: e
                         })
                     },
                     getFriendsRequestCount: function() {
-                        var e = {
-                            url: le(),
+                        return H.httpService.get({
+                            url: "".concat(V, "/v1/user/friend-requests/count"),
                             retryable: !0,
                             withCredentials: !0
-                        };
-                        return a.httpService.get(e)
+                        })
                     },
                     getFollowersCount: function(e) {
-                        var t = {
-                            url: ce(e),
+                        var r, t = {
+                            url: (r = e, "".concat(V, "/v1/users/").concat(r, "/followers/count")),
                             retryable: !0,
                             withCredentials: !0
                         };
-                        return a.httpService.get(t)
+                        return H.httpService.get(t)
                     },
                     getFollowingsCount: function(e) {
-                        var t = {
-                            url: de(e),
+                        var r, t = {
+                            url: (r = e, "".concat(V, "/v1/users/").concat(r, "/followings/count")),
                             retryable: !0,
                             withCredentials: !0
                         };
-                        return a.httpService.get(t)
+                        return H.httpService.get(t)
                     },
                     getGames: function(e) {
-                        var t = {
-                                url: fe(),
-                                retryable: !0,
-                                withCredentials: !0
-                            },
-                            r = {
-                                universeIds: e
-                            };
-                        return a.httpService.get(t, r)
+                        return H.httpService.get({
+                            url: "".concat(J, "/v1/games"),
+                            retryable: !0,
+                            withCredentials: !0
+                        }, {
+                            universeIds: e
+                        })
                     },
-                    getPaginatedFriends: function(e, t, r, n) {
-                        var i = me(e, t, r, n);
-                        return a.httpService.get(i)
+                    getPaginatedFriends: function(e, r, t, n) {
+                        var i, a, o, s, u = (i = e, a = r, o = t, s = n, {
+                            retryable: !1,
+                            withCredentials: !0,
+                            url: "".concat(V, "/v1/users/").concat(i, "/friends/find?limit=").concat(s ? 36 : 18, "&cursor=").concat(a, "&userSort=").concat(o ? "1" : "")
+                        });
+                        return H.httpService.get(u)
                     },
-                    getSearchedFriends: function(e, t, r, n) {
-                        var i = ve(e, t, r, n);
-                        return a.httpService.get(i)
+                    getSearchedFriends: function(e, r, t, n) {
+                        var i, a, o, s, u = (i = e, a = r, o = t, s = n, {
+                            retryable: !1,
+                            withCredentials: !0,
+                            url: "".concat(V, "/v1/users/").concat(i, "/friends/search?limit=").concat(s ? 36 : 18, "&cursor=").concat(a, "&query=").concat(o)
+                        });
+                        return H.httpService.get(u)
                     },
                     getFriendsCount: function(e) {
-                        var t = he(e);
-                        return a.httpService.get(t)
+                        var r, t = (r = e, {
+                            retryable: !1,
+                            withCredentials: !0,
+                            url: "".concat(V, "/v1/users/").concat(r, "/friends/count")
+                        });
+                        return H.httpService.get(t)
                     },
                     clearNewFriendRequests: function() {
-                        var e = ye();
-                        return a.httpService.delete(e, {})
+                        return H.httpService.delete({
+                            retryable: !1,
+                            withCredentials: !0,
+                            url: "".concat(V, "/v1/my/new-friend-requests")
+                        }, {})
                     },
                     getTrustedConnectionStatus: function(e) {
-                        return a.httpService.get(be(e))
+                        var r;
+                        return H.httpService.get((r = e, {
+                            retryable: !0,
+                            withCredentials: !0,
+                            url: "".concat(V, "/v1/my/trusted-friends/").concat(r, "/status")
+                        }))
                     },
-                    getPaginatedTrustedConnections: function(e, t, r, n) {
-                        var i = pe(e, t, n);
-                        return a.httpService.get(i)
+                    getPaginatedTrustedConnections: function(e, r, t, n) {
+                        var i, a, o, s = (i = e, a = r, o = n, {
+                            retryable: !1,
+                            withCredentials: !0,
+                            url: "".concat(V, "/v1/users/").concat(i, "/friends/find?limit=").concat(o ? 36 : 18, "&cursor=").concat(a, "&findFriendsType=").concat(_.FIND_FRIENDS_TYPES.TrustedFriends)
+                        });
+                        return H.httpService.get(s)
                     }
-                };
-            var ge = _.LIST_TYPE,
-                Se = _.CACHE_CRITERIA,
-                Re = _.FRIEND_REQUEST_COUNT_EVENT,
-                Fe = (0, s.connect)((function(e) {
+                },
+                et = _.LIST_TYPE,
+                en = _.CACHE_CRITERIA,
+                ei = _.FRIEND_REQUEST_COUNT_EVENT,
+                ea = (0, m.connect)(function(e) {
                     return {
                         friends: e.friends,
                         metadata: e.metadata,
                         tabLoader: e.tabLoader,
                         errorType: e.errorType
                     }
-                }), (function(e) {
+                }, function(e) {
                     return {
-                        setMetadata: function(t) {
-                            e(U(t))
+                        setMetadata: function(r) {
+                            e({
+                                type: g,
+                                data: r
+                            })
                         },
                         setFriends: function() {
-                            e(function(e) {
-                                return {
-                                    type: d,
-                                    friends: e
-                                }
-                            }(arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : []))
+                            var r = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [];
+                            e({
+                                type: v,
+                                friends: r
+                            })
                         },
                         loadMoreFriends: function() {
-                            e(function(e) {
-                                return {
-                                    type: f,
-                                    friends: e
-                                }
-                            }(arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : []))
+                            var r = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [];
+                            e({
+                                type: b,
+                                friends: r
+                            })
                         },
                         enableTabLoader: function() {
                             e({
-                                type: p,
+                                type: S,
                                 data: {
                                     isLoading: !0
                                 }
@@ -677,1051 +649,1548 @@
                         },
                         disableTabLoader: function() {
                             e({
-                                type: p,
+                                type: S,
                                 data: {
                                     isLoading: !1
                                 }
                             })
                         },
                         clearError: function() {
-                            e(H(null))
+                            e(z(null))
                         },
-                        followFriend: function(t, r) {
-                            return Ee.follow(t, r).catch((function(t) {
+                        followFriend: function(r, t) {
+                            return er.follow(r, t).catch(function(r) {
                                 if (function(e) {
-                                        var t, r, n;
-                                        return !((null == e ? void 0 : e.status) !== _.FORBIDDEN_STATUS || null == e || null === (t = e.data) || void 0 === t || null === (r = t.errors) || void 0 === r || !r.length || (null === (n = e.data.errors[0]) || void 0 === n ? void 0 : n.code) !== _.CAPTCHA_CODE)
-                                    }(t) && !r) throw new Error(function(e) {
-                                    var t, r;
-                                    return null == e || null === (t = e.data) || void 0 === t || null === (r = t.errors[0]) || void 0 === r ? void 0 : r.fieldData
-                                }(t));
-                                e(z(t))
-                            }))
+                                        if ((null == e ? void 0 : e.status) === _.FORBIDDEN_STATUS) {
+                                            var r, t, n;
+                                            if ((null == e || null == (t = e.data) || null == (r = t.errors) ? void 0 : r.length) && (null == (n = e.data.errors[0]) ? void 0 : n.code) === _.CAPTCHA_CODE) return !0
+                                        }
+                                        return !1
+                                    }(r) && !t) {
+                                    var n, i;
+                                    throw Error(null == r || null == (i = r.data) || null == (n = i.errors[0]) ? void 0 : n.fieldData)
+                                }
+                                e(Q(r))
+                            })
                         },
-                        unfollowFriend: function(t) {
-                            return Ee.unfollow(t).catch((function(t) {
-                                return e(z(t))
-                            }))
+                        unfollowFriend: function(r) {
+                            return er.unfollow(r).catch(function(r) {
+                                return e(Q(r))
+                            })
                         },
-                        acceptFriendRequest: function(t) {
-                            return function(r) {
-                                return Ee.acceptFriendRequest(r.id).then((function() {
-                                    return t(r.id)
-                                })).then((function() {
-                                    q.userInfoService.refreshCacheData(ge["friend-requests"], Se)
-                                })).catch((function(t) {
-                                    return e(z(t))
-                                }))
+                        acceptFriendRequest: function(r) {
+                            return function(t) {
+                                return er.acceptFriendRequest(t.id).then(function() {
+                                    return r(t.id)
+                                }).then(function() {
+                                    U.userInfoService.refreshCacheData(et["friend-requests"], en)
+                                }).catch(function(r) {
+                                    return e(Q(r))
+                                })
                             }
                         },
-                        declineFriendRequest: function(t) {
-                            return function(r) {
-                                return Ee.declineFriendRequest(r.id).then((function() {
-                                    return t(r.id)
-                                })).then((function() {
-                                    q.userInfoService.refreshCacheData(ge["friend-requests"], Se).then((function() {
-                                        document.dispatchEvent(new CustomEvent(Re))
-                                    }))
-                                })).catch((function(t) {
-                                    return e(z(t))
-                                }))
+                        declineFriendRequest: function(r) {
+                            return function(t) {
+                                return er.declineFriendRequest(t.id).then(function() {
+                                    return r(t.id)
+                                }).then(function() {
+                                    U.userInfoService.refreshCacheData(et["friend-requests"], en).then(function() {
+                                        document.dispatchEvent(new CustomEvent(ei))
+                                    })
+                                }).catch(function(r) {
+                                    return e(Q(r))
+                                })
                             }
                         },
                         declineAllFriendRequests: function() {
-                            return Ee.declineAllFriendRequests().then((function(e) {
-                                var t;
-                                return q.userInfoService.refreshCacheData(ge["friend-requests"], Se).then((function() {
-                                    document.dispatchEvent(new CustomEvent(Re))
-                                })), null === (t = e.data) || void 0 === t ? void 0 : t.backgrounded
-                            })).catch((function(t) {
-                                return e(z(t))
-                            }))
+                            return er.declineAllFriendRequests().then(function(e) {
+                                var r;
+                                return U.userInfoService.refreshCacheData(et["friend-requests"], en).then(function() {
+                                    document.dispatchEvent(new CustomEvent(ei))
+                                }), null == (r = e.data) ? void 0 : r.backgrounded
+                            }).catch(function(r) {
+                                return e(Q(r))
+                            })
                         },
-                        unfriend: function(t) {
-                            return Ee.unfriend(t).catch((function(t) {
-                                return e(z(t))
-                            }))
+                        unfriend: function(r) {
+                            return er.unfriend(r).catch(function(r) {
+                                return e(Q(r))
+                            })
                         },
-                        getGamePlayabilities: Ee.getGamePlayabilities
+                        getGamePlayabilities: er.getGamePlayabilities
                     }
-                })),
-                Te = {
+                }),
+                eo = {
                     common: ["Common.Presence", "CommonUI.Features"],
                     feature: "Feature.Friends"
                 },
-                Ie = HeaderScripts,
-                Ce = (ReactJSX, Roblox["core-scripts"].guac),
-                Ne = Roblox["core-scripts"].http.http;
+                es = window.HeaderScripts,
+                eu = window.RobloxUserProfiles,
+                el = window.Roblox["core-scripts"].http.http;
 
-            function we(e, t) {
-                var r;
-                if ("undefined" == typeof Symbol || null == e[Symbol.iterator]) {
-                    if (Array.isArray(e) || (r = Oe(e)) || t && e && "number" == typeof e.length) {
-                        r && (e = r);
-                        var n = 0,
-                            a = function() {};
-                        return {
-                            s: a,
-                            n: function() {
-                                return n >= e.length ? {
-                                    done: !0
-                                } : {
-                                    done: !1,
-                                    value: e[n++]
-                                }
-                            },
-                            e: function(e) {
-                                throw e
-                            },
-                            f: a
-                        }
-                    }
-                    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }
-                var i, o = !0,
-                    u = !1;
-                return {
-                    s: function() {
-                        r = e[Symbol.iterator]()
-                    },
-                    n: function() {
-                        var e = r.next();
-                        return o = e.done, e
-                    },
-                    e: function(e) {
-                        u = !0, i = e
-                    },
-                    f: function() {
-                        try {
-                            o || null == r.return || r.return()
-                        } finally {
-                            if (u) throw i
-                        }
-                    }
-                }
-            }
-
-            function Ae(e) {
-                return function(e) {
-                    if (Array.isArray(e)) return De(e)
-                }(e) || function(e) {
-                    if ("undefined" != typeof Symbol && Symbol.iterator in Object(e)) return Array.from(e)
-                }(e) || Oe(e) || function() {
-                    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }()
-            }
-
-            function Oe(e, t) {
-                if (e) {
-                    if ("string" == typeof e) return De(e, t);
-                    var r = Object.prototype.toString.call(e).slice(8, -1);
-                    return "Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r ? Array.from(e) : "Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r) ? De(e, t) : void 0
-                }
-            }
-
-            function De(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var r = 0, n = new Array(t); r < t; r++) n[r] = e[r];
+            function ec(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
                 return n
             }
 
-            function Pe(e, t, r, n, a, i, o) {
+            function ed(e, r, t, n, i, a, o) {
                 try {
-                    var u = e[i](o),
-                        s = u.value
+                    var s = e[a](o),
+                        u = s.value
                 } catch (e) {
-                    return void r(e)
+                    t(e);
+                    return
                 }
-                u.done ? t(s) : Promise.resolve(s).then(n, a)
+                s.done ? r(u) : Promise.resolve(u).then(n, i)
+            }
+            var ef = function(e) {
+                var r;
+                return (r = function() {
+                    var r, t, n, i, a, o, s, u, l, c, d, f;
+                    return function(e, r) {
+                        var t, n, i, a = {
+                                label: 0,
+                                sent: function() {
+                                    if (1 & i[0]) throw i[1];
+                                    return i[1]
+                                },
+                                trys: [],
+                                ops: []
+                            },
+                            o = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
+                            s = Object.defineProperty;
+                        return s(o, "next", {
+                            value: u(0)
+                        }), s(o, "throw", {
+                            value: u(1)
+                        }), s(o, "return", {
+                            value: u(2)
+                        }), "function" == typeof Symbol && s(o, Symbol.iterator, {
+                            value: function() {
+                                return this
+                            }
+                        }), o;
+
+                        function u(s) {
+                            return function(u) {
+                                var l = [s, u];
+                                if (t) throw TypeError("Generator is already executing.");
+                                for (; o && (o = 0, l[0] && (a = 0)), a;) try {
+                                    if (t = 1, n && (i = 2 & l[0] ? n.return : l[0] ? n.throw || ((i = n.return) && i.call(n), 0) : n.next) && !(i = i.call(n, l[1])).done) return i;
+                                    switch (n = 0, i && (l = [2 & l[0], i.value]), l[0]) {
+                                        case 0:
+                                        case 1:
+                                            i = l;
+                                            break;
+                                        case 4:
+                                            return a.label++, {
+                                                value: l[1],
+                                                done: !1
+                                            };
+                                        case 5:
+                                            a.label++, n = l[1], l = [0];
+                                            continue;
+                                        case 7:
+                                            l = a.ops.pop(), a.trys.pop();
+                                            continue;
+                                        default:
+                                            if (!(i = (i = a.trys).length > 0 && i[i.length - 1]) && (6 === l[0] || 2 === l[0])) {
+                                                a = 0;
+                                                continue
+                                            }
+                                            if (3 === l[0] && (!i || l[1] > i[0] && l[1] < i[3])) {
+                                                a.label = l[1];
+                                                break
+                                            }
+                                            if (6 === l[0] && a.label < i[1]) {
+                                                a.label = i[1], i = l;
+                                                break
+                                            }
+                                            if (i && a.label < i[2]) {
+                                                a.label = i[2], a.ops.push(l);
+                                                break
+                                            }
+                                            i[2] && a.ops.pop(), a.trys.pop();
+                                            continue
+                                    }
+                                    l = r.call(e, a)
+                                } catch (e) {
+                                    l = [6, e], n = 0
+                                } finally {
+                                    t = i = 0
+                                }
+                                if (5 & l[0]) throw l[1];
+                                return {
+                                    value: l[0] ? l[1] : void 0,
+                                    done: !0
+                                }
+                            }
+                        }
+                    }(this, function(p) {
+                        switch (p.label) {
+                            case 0:
+                                var m;
+                                if (0 === (t = function(e) {
+                                        if (Array.isArray(e)) return ec(e)
+                                    }(m = new Set(e)) || function(e) {
+                                        if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
+                                    }(m) || function(e) {
+                                        if (e) {
+                                            if ("string" == typeof e) return ec(e, void 0);
+                                            var r = Object.prototype.toString.call(e).slice(8, -1);
+                                            if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
+                                            if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return ec(e, void 0)
+                                        }
+                                    }(m) || function() {
+                                        throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                                    }()).length) return [2, {}];
+                                return n = {
+                                    url: "".concat(I.EnvironmentUrls.apiGatewayUrl, "/user-profile-api/v1/user/profiles/get-profiles"),
+                                    retryable: !0,
+                                    withCredentials: !0
+                                }, i = {
+                                    userIds: t,
+                                    fields: ["hasRobloxSubscription"]
+                                }, [4, el.post(n, i)];
+                            case 1:
+                                a = p.sent().data, o = {}, s = !0, u = !1, l = void 0;
+                                try {
+                                    for (c = (null != (r = a.profileDetails) ? r : [])[Symbol.iterator](); !(s = (d = c.next()).done); s = !0) o[(f = d.value).userId] = !0 === f.hasRobloxSubscription
+                                } catch (e) {
+                                    u = !0, l = e
+                                } finally {
+                                    try {
+                                        s || null == c.return || c.return()
+                                    } finally {
+                                        if (u) throw l
+                                    }
+                                }
+                                return [2, o]
+                        }
+                    })
+                }, function() {
+                    var e = this,
+                        t = arguments;
+                    return new Promise(function(n, i) {
+                        var a = r.apply(e, t);
+
+                        function o(e) {
+                            ed(a, n, i, o, s, "next", e)
+                        }
+
+                        function s(e) {
+                            ed(a, n, i, o, s, "throw", e)
+                        }
+                        o(void 0)
+                    })
+                })()
+            };
+
+            function ep(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
+                return n
             }
 
-            function xe(e) {
-                return xe = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) {
-                    return typeof e
-                } : function(e) {
-                    return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e
-                }, xe(e)
+            function em(e, r, t, n, i, a, o) {
+                try {
+                    var s = e[a](o),
+                        u = s.value
+                } catch (e) {
+                    t(e);
+                    return
+                }
+                s.done ? r(u) : Promise.resolve(u).then(n, i)
             }
-            var Le = "web-plus-identity-badge",
-                qe = function() {
-                    var e, t = (0, l.useQuery)({
-                        queryKey: ["guac/".concat(Le)],
+            var ey = new Map,
+                eh = !1,
+                ev = function() {
+                    var e;
+                    return (e = function() {
+                        var e, r, t, n, i, a, o, s, u, l, c, d, f, p, m, y, h, v, b, g, S, E, T, R, F, I, w, C, x, N;
+                        return function(e, r) {
+                            var t, n, i, a = {
+                                    label: 0,
+                                    sent: function() {
+                                        if (1 & i[0]) throw i[1];
+                                        return i[1]
+                                    },
+                                    trys: [],
+                                    ops: []
+                                },
+                                o = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
+                                s = Object.defineProperty;
+                            return s(o, "next", {
+                                value: u(0)
+                            }), s(o, "throw", {
+                                value: u(1)
+                            }), s(o, "return", {
+                                value: u(2)
+                            }), "function" == typeof Symbol && s(o, Symbol.iterator, {
+                                value: function() {
+                                    return this
+                                }
+                            }), o;
+
+                            function u(s) {
+                                return function(u) {
+                                    var l = [s, u];
+                                    if (t) throw TypeError("Generator is already executing.");
+                                    for (; o && (o = 0, l[0] && (a = 0)), a;) try {
+                                        if (t = 1, n && (i = 2 & l[0] ? n.return : l[0] ? n.throw || ((i = n.return) && i.call(n), 0) : n.next) && !(i = i.call(n, l[1])).done) return i;
+                                        switch (n = 0, i && (l = [2 & l[0], i.value]), l[0]) {
+                                            case 0:
+                                            case 1:
+                                                i = l;
+                                                break;
+                                            case 4:
+                                                return a.label++, {
+                                                    value: l[1],
+                                                    done: !1
+                                                };
+                                            case 5:
+                                                a.label++, n = l[1], l = [0];
+                                                continue;
+                                            case 7:
+                                                l = a.ops.pop(), a.trys.pop();
+                                                continue;
+                                            default:
+                                                if (!(i = (i = a.trys).length > 0 && i[i.length - 1]) && (6 === l[0] || 2 === l[0])) {
+                                                    a = 0;
+                                                    continue
+                                                }
+                                                if (3 === l[0] && (!i || l[1] > i[0] && l[1] < i[3])) {
+                                                    a.label = l[1];
+                                                    break
+                                                }
+                                                if (6 === l[0] && a.label < i[1]) {
+                                                    a.label = i[1], i = l;
+                                                    break
+                                                }
+                                                if (i && a.label < i[2]) {
+                                                    a.label = i[2], a.ops.push(l);
+                                                    break
+                                                }
+                                                i[2] && a.ops.pop(), a.trys.pop();
+                                                continue
+                                        }
+                                        l = r.call(e, a)
+                                    } catch (e) {
+                                        l = [6, e], n = 0
+                                    } finally {
+                                        t = i = 0
+                                    }
+                                    if (5 & l[0]) throw l[1];
+                                    return {
+                                        value: l[0] ? l[1] : void 0,
+                                        done: !0
+                                    }
+                                }
+                            }
+                        }(this, function(A) {
+                            switch (A.label) {
+                                case 0:
+                                    var O;
+                                    if (e = ey, ey = new Map, eh = !1, 0 === e.size) return [2];
+                                    r = function(e) {
+                                        if (Array.isArray(e)) return ep(e)
+                                    }(O = e.keys()) || function(e) {
+                                        if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
+                                    }(O) || function(e) {
+                                        if (e) {
+                                            if ("string" == typeof e) return ep(e, void 0);
+                                            var r = Object.prototype.toString.call(e).slice(8, -1);
+                                            if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
+                                            if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return ep(e, void 0)
+                                        }
+                                    }(O) || function() {
+                                        throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                                    }(), A.label = 1;
+                                case 1:
+                                    return A.trys.push([1, 3, , 4]), [4, ef(r)];
+                                case 2:
+                                    t = A.sent(), n = !0, i = !1, a = void 0;
+                                    try {
+                                        for (o = r[Symbol.iterator](); !(n = (s = o.next()).done); n = !0) {
+                                            u = s.value, c = null != (l = e.get(u)) ? l : [], d = !0, f = !1, p = void 0;
+                                            try {
+                                                for (m = c[Symbol.iterator](); !(d = (y = m.next()).done); d = !0)(0, y.value.resolve)(!0 === t[u])
+                                            } catch (e) {
+                                                f = !0, p = e
+                                            } finally {
+                                                try {
+                                                    d || null == m.return || m.return()
+                                                } finally {
+                                                    if (f) throw p
+                                                }
+                                            }
+                                        }
+                                    } catch (e) {
+                                        i = !0, a = e
+                                    } finally {
+                                        try {
+                                            n || null == o.return || o.return()
+                                        } finally {
+                                            if (i) throw a
+                                        }
+                                    }
+                                    return [3, 4];
+                                case 3:
+                                    h = A.sent(), v = !0, b = !1, g = void 0;
+                                    try {
+                                        for (S = r[Symbol.iterator](); !(v = (E = S.next()).done); v = !0) {
+                                            T = E.value, F = null != (R = e.get(T)) ? R : [], I = !0, w = !1, C = void 0;
+                                            try {
+                                                for (x = F[Symbol.iterator](); !(I = (N = x.next()).done); I = !0)(0, N.value.reject)(h)
+                                            } catch (e) {
+                                                w = !0, C = e
+                                            } finally {
+                                                try {
+                                                    I || null == x.return || x.return()
+                                                } finally {
+                                                    if (w) throw C
+                                                }
+                                            }
+                                        }
+                                    } catch (e) {
+                                        b = !0, g = e
+                                    } finally {
+                                        try {
+                                            v || null == S.return || S.return()
+                                        } finally {
+                                            if (b) throw g
+                                        }
+                                    }
+                                    return [3, 4];
+                                case 4:
+                                    return [2]
+                            }
+                        })
+                    }, function() {
+                        var r = this,
+                            t = arguments;
+                        return new Promise(function(n, i) {
+                            var a = e.apply(r, t);
+
+                            function o(e) {
+                                em(a, n, i, o, s, "next", e)
+                            }
+
+                            function s(e) {
+                                em(a, n, i, o, s, "throw", e)
+                            }
+                            o(void 0)
+                        })
+                    })()
+                },
+                eb = window.Roblox["core-scripts"].guac,
+                eg = "web-plus-identity-badge",
+                eS = function(e) {
+                    return (void 0 === e ? "undefined" : e && "u" > typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e) == "object" && null !== e
+                },
+                eE = function() {
+                    var e = (0, y.useQuery)({
+                        queryKey: ["guac/".concat(eg)],
                         queryFn: function() {
-                            return (0, Ce.callBehaviour)(Le)
+                            return (0, eb.callBehaviour)(eg)
                         },
                         staleTime: 1 / 0
                     }).data;
-                    return "object" === xe(e = t) && null !== e && !0 === t.plusIdentityBadgeEnabled
-                },
-                Ue = function() {
-                    var e, t = (e = regeneratorRuntime.mark((function e(t) {
-                        var r, n, a, i, o, u, s, l, c, d;
-                        return regeneratorRuntime.wrap((function(e) {
-                            for (;;) switch (e.prev = e.next) {
-                                case 0:
-                                    if (0 !== (n = Ae(new Set(t))).length) {
-                                        e.next = 3;
-                                        break
-                                    }
-                                    return e.abrupt("return", {});
-                                case 3:
-                                    return a = {
-                                        url: "".concat(b.EnvironmentUrls.apiGatewayUrl, "/user-profile-api/v1/user/profiles/get-profiles"),
-                                        retryable: !0,
-                                        withCredentials: !0
-                                    }, i = {
-                                        userIds: n,
-                                        fields: ["hasRobloxSubscription"]
-                                    }, e.next = 7, Ne.post(a, i);
-                                case 7:
-                                    o = e.sent, u = o.data, s = {}, l = we(null !== (r = u.profileDetails) && void 0 !== r ? r : []);
-                                    try {
-                                        for (l.s(); !(c = l.n()).done;) d = c.value, s[d.userId] = !0 === d.hasRobloxSubscription
-                                    } catch (e) {
-                                        l.e(e)
-                                    } finally {
-                                        l.f()
-                                    }
-                                    return e.abrupt("return", s);
-                                case 13:
-                                case "end":
-                                    return e.stop()
-                            }
-                        }), e)
-                    })), function() {
-                        var t = this,
-                            r = arguments;
-                        return new Promise((function(n, a) {
-                            var i = e.apply(t, r);
-
-                            function o(e) {
-                                Pe(i, n, a, o, u, "next", e)
-                            }
-
-                            function u(e) {
-                                Pe(i, n, a, o, u, "throw", e)
-                            }
-                            o(void 0)
-                        }))
-                    });
-                    return function(e) {
-                        return t.apply(this, arguments)
-                    }
-                }(),
-                _e = RobloxUserProfiles,
-                Me = function() {
-                    return Me = Object.assign || function(e) {
-                        for (var t, r = 1, n = arguments.length; r < n; r++)
-                            for (var a in t = arguments[r]) Object.prototype.hasOwnProperty.call(t, a) && (e[a] = t[a]);
-                        return e
-                    }, Me.apply(this, arguments)
+                    return eS(e) && !0 === e.plusIdentityBadgeEnabled
                 };
 
-            function ke(e, t) {
-                var r = {};
-                for (var n in e) Object.prototype.hasOwnProperty.call(e, n) && t.indexOf(n) < 0 && (r[n] = e[n]);
-                if (null != e && "function" == typeof Object.getOwnPropertySymbols) {
-                    var a = 0;
-                    for (n = Object.getOwnPropertySymbols(e); a < n.length; a++) t.indexOf(n[a]) < 0 && Object.prototype.propertyIsEnumerable.call(e, n[a]) && (r[n[a]] = e[n[a]])
-                }
-                return r
-            }
-
-            function je(e) {
-                var t, r, n = "";
-                if ("string" == typeof e || "number" == typeof e) n += e;
-                else if ("object" == typeof e)
-                    if (Array.isArray(e))
-                        for (t = 0; t < e.length; t++) e[t] && (r = je(e[t])) && (n && (n += " "), n += r);
-                    else
-                        for (t in e) e[t] && (n && (n += " "), n += t);
+            function eT(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
                 return n
             }
-            var Be = function() {
-                    for (var e, t, r = 0, n = ""; r < arguments.length;)(e = arguments[r++]) && (t = je(e)) && (n && (n += " "), n += t);
+            var eR = function(e) {
+                    var r = eE(),
+                        t = (0, l.useMemo)(function() {
+                            var r;
+                            return ((function(e) {
+                                if (Array.isArray(e)) return eT(e)
+                            })(r = new Set(e)) || function(e) {
+                                if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
+                            }(r) || function(e) {
+                                if (e) {
+                                    if ("string" == typeof e) return eT(e, void 0);
+                                    var r = Object.prototype.toString.call(e).slice(8, -1);
+                                    if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
+                                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return eT(e, void 0)
+                                }
+                            }(r) || function() {
+                                throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                            }()).sort(function(e, r) {
+                                return e - r
+                            })
+                        }, [e]),
+                        n = (0, y.useQueries)({
+                            queries: t.map(function(e) {
+                                return {
+                                    queryKey: ["identity-badges/plusStatus/byUser", e],
+                                    queryFn: function() {
+                                        return new Promise(function(r, t) {
+                                            var n, i = null != (n = ey.get(e)) ? n : [];
+                                            i.push({
+                                                resolve: r,
+                                                reject: t
+                                            }), ey.set(e, i), eh || (eh = !0, queueMicrotask(function() {
+                                                ev().catch(function() {})
+                                            }))
+                                        })
+                                    },
+                                    enabled: r,
+                                    staleTime: 1 / 0
+                                }
+                            })
+                        }),
+                        i = {},
+                        a = !1;
+                    return t.forEach(function(e, r) {
+                        var t, o;
+                        i[e] = (null == (t = n[r]) ? void 0 : t.data) === !0, (null == (o = n[r]) ? void 0 : o.isFetching) && (a = !0)
+                    }), {
+                        data: i,
+                        isLoading: a
+                    }
+                },
+                eF = function() {
+                    for (var e, r, t = 0, n = "", i = arguments.length; t < i; t++)(e = arguments[t]) && (r = function e(r) {
+                        var t, n, i = "";
+                        if ("string" == typeof r || "number" == typeof r) i += r;
+                        else if ("object" == (void 0 === r ? "undefined" : r && "u" > typeof Symbol && r.constructor === Symbol ? "symbol" : typeof r))
+                            if (Array.isArray(r)) {
+                                var a = r.length;
+                                for (t = 0; t < a; t++) r[t] && (n = e(r[t])) && (i && (i += " "), i += n)
+                            } else
+                                for (n in r) r[n] && (i && (i += " "), i += n);
+                        return i
+                    }(e)) && (n && (n += " "), n += r);
                     return n
                 },
-                Ge = function() {
-                    return t().createElement("div", {
-                        role: "presentation",
-                        className: "absolute inset-[0] transition-colors group-hover/interactable:bg-[var(--color-state-hover)] group-active/interactable:bg-[var(--color-state-press)] group-disabled/interactable:bg-none"
+                eI = function(e) {
+                    var r = e.className;
+                    return c().createElement("div", {
+                        "aria-hidden": !0,
+                        "data-testid": "foundation-web-state-layer",
+                        className: eF("absolute inset-[0] transition-colors group-hover/interactable:bg-[var(--color-state-hover)] group-active/interactable:bg-[var(--color-state-press)] group-disabled/interactable:bg-none", r)
                     })
-                },
-                Qe = {
+                };
+
+            function ew(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
+                return n
+            }
+
+            function eC(e) {
+                if (Array.isArray(e)) return e
+            }
+
+            function ex() {
+                throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+            }
+
+            function eN(e, r) {
+                if (e) {
+                    if ("string" == typeof e) return ew(e, r);
+                    var t = Object.prototype.toString.call(e).slice(8, -1);
+                    if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                    if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return ew(e, r)
+                }
+            }
+            var eA = {
                     XSmall: "size-[var(--icon-size-xsmall)]",
                     Small: "size-[var(--icon-size-small)]",
                     Medium: "size-[var(--icon-size-medium)]",
                     Large: "size-[var(--icon-size-large)]",
-                    XLarge: "size-[var(--icon-size-xlarge)]"
+                    XLarge: "size-[var(--icon-size-xlarge)]",
+                    XXLarge: "size-[var(--icon-size-xxlarge)]"
                 },
-                He = t().forwardRef((function(e, r) {
-                    var n = e.name,
-                        a = e.size,
-                        i = void 0 === a ? "Medium" : a,
-                        o = e.className;
-                    e.children;
-                    var u = ke(e, ["name", "size", "className", "children"]);
-                    return t().createElement("span", Me({
-                        ref: r,
-                        role: "presentation",
-                        className: Be("grow-0 shrink-0 basis-auto icon", n, Qe[i], o)
-                    }, u))
-                }));
-            He.displayName = "Icon";
-            var ze = {
+                eO = c().forwardRef(function(e, r) {
+                    var t, n = eC(t = [e, r]) || function(e) {
+                            if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
+                        }(t) || eN(t) || ex(),
+                        i = n[0],
+                        a = n.slice(1),
+                        o = i.name,
+                        s = i.size,
+                        u = i.className,
+                        l = (i.children, function(e, r) {
+                            if (null == e) return {};
+                            var t, n, i, a = {};
+                            if ("u" > typeof Reflect && Reflect.ownKeys) {
+                                for (i = 0, t = Reflect.ownKeys(Object(e)); i < t.length; i++) n = t[i], !(r.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (a[n] = e[n]);
+                                return a
+                            }
+                            if (a = function(e, r) {
+                                    if (null == e) return {};
+                                    var t, n, i = {},
+                                        a = Object.getOwnPropertyNames(e);
+                                    for (n = 0; n < a.length; n++) t = a[n], !(r.indexOf(t) >= 0) && Object.prototype.propertyIsEnumerable.call(e, t) && (i[t] = e[t]);
+                                    return i
+                                }(e, r), Object.getOwnPropertySymbols)
+                                for (i = 0, t = Object.getOwnPropertySymbols(e); i < t.length; i++) n = t[i], !(r.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (a[n] = e[n]);
+                            return a
+                        }(i, ["name", "size", "className", "children"])),
+                        d = (eC(a) || function(e) {
+                            var r, t, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                            if (null != n) {
+                                var i = [],
+                                    a = !0,
+                                    o = !1;
+                                try {
+                                    for (n = n.call(e); !(a = (r = n.next()).done) && (i.push(r.value), 1 !== i.length); a = !0);
+                                } catch (e) {
+                                    o = !0, t = e
+                                } finally {
+                                    try {
+                                        a || null == n.return || n.return()
+                                    } finally {
+                                        if (o) throw t
+                                    }
+                                }
+                                return i
+                            }
+                        }(a) || eN(a, 1) || ex())[0];
+                    return c().createElement("span", function(e) {
+                        for (var r = 1; r < arguments.length; r++) {
+                            var t = null != arguments[r] ? arguments[r] : {},
+                                n = Object.keys(t);
+                            "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(t).filter(function(e) {
+                                return Object.getOwnPropertyDescriptor(t, e).enumerable
+                            }))), n.forEach(function(r) {
+                                var n;
+                                n = t[r], r in e ? Object.defineProperty(e, r, {
+                                    value: n,
+                                    enumerable: !0,
+                                    configurable: !0,
+                                    writable: !0
+                                }) : e[r] = n
+                            })
+                        }
+                        return e
+                    }({
+                        ref: d,
+                        "aria-hidden": !0,
+                        "data-testid": "foundation-web-icon",
+                        className: eF("grow-0 shrink-0 basis-auto icon", o, eA[void 0 === s ? "Medium" : s], u)
+                    }, l))
+                });
+
+            function ej(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
+                return n
+            }
+
+            function eP(e) {
+                if (Array.isArray(e)) return e
+            }
+
+            function eD() {
+                throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+            }
+
+            function eL(e) {
+                for (var r = 1; r < arguments.length; r++) {
+                    var t = null != arguments[r] ? arguments[r] : {},
+                        n = Object.keys(t);
+                    "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(t).filter(function(e) {
+                        return Object.getOwnPropertyDescriptor(t, e).enumerable
+                    }))), n.forEach(function(r) {
+                        var n;
+                        n = t[r], r in e ? Object.defineProperty(e, r, {
+                            value: n,
+                            enumerable: !0,
+                            configurable: !0,
+                            writable: !0
+                        }) : e[r] = n
+                    })
+                }
+                return e
+            }
+
+            function eU(e, r) {
+                return r = null != r ? r : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(r)) : (function(e) {
+                    var r = Object.keys(e);
+                    if (Object.getOwnPropertySymbols) {
+                        var t = Object.getOwnPropertySymbols(e);
+                        r.push.apply(r, t)
+                    }
+                    return r
+                })(Object(r)).forEach(function(t) {
+                    Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(r, t))
+                }), e
+            }
+
+            function e_(e, r) {
+                if (null == e) return {};
+                var t, n, i, a = {};
+                if ("u" > typeof Reflect && Reflect.ownKeys) {
+                    for (i = 0, t = Reflect.ownKeys(Object(e)); i < t.length; i++) n = t[i], !(r.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (a[n] = e[n]);
+                    return a
+                }
+                if (a = function(e, r) {
+                        if (null == e) return {};
+                        var t, n, i = {},
+                            a = Object.getOwnPropertyNames(e);
+                        for (n = 0; n < a.length; n++) t = a[n], !(r.indexOf(t) >= 0) && Object.prototype.propertyIsEnumerable.call(e, t) && (i[t] = e[t]);
+                        return i
+                    }(e, r), Object.getOwnPropertySymbols)
+                    for (i = 0, t = Object.getOwnPropertySymbols(e); i < t.length; i++) n = t[i], !(r.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (a[n] = e[n]);
+                return a
+            }
+
+            function eq(e, r) {
+                if (e) {
+                    if ("string" == typeof e) return ej(e, r);
+                    var t = Object.prototype.toString.call(e).slice(8, -1);
+                    if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                    if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return ej(e, r)
+                }
+            }
+            eO.displayName = "Icon";
+            var eM = {
                     Small: "XSmall",
                     Medium: "Small",
                     Large: "Medium"
                 },
-                We = {
+                ek = {
                     Small: ["height-600", "text-label-small"],
                     Medium: ["height-800", "text-label-medium"],
                     Large: ["height-1000", "text-label-medium"]
                 },
-                Ve = {
+                eB = {
                     Small: "padding-left-small",
                     Medium: "padding-left-medium",
                     Large: "padding-left-large"
                 },
-                Ye = {
+                eG = {
                     Small: "padding-left-small",
                     Medium: "padding-left-medium",
                     Large: "padding-left-medium"
                 },
-                Je = {
+                ez = {
                     Small: "padding-right-small",
                     Medium: "padding-right-medium",
                     Large: "padding-right-large"
                 },
-                Xe = {
+                eQ = {
                     Small: "padding-right-small",
                     Medium: "padding-right-medium",
                     Large: "padding-right-medium"
                 },
-                $e = {
+                eH = {
                     Small: "padding-left-xsmall",
                     Medium: "padding-left-[var(--size-150)]",
                     Large: "padding-left-small"
                 },
-                Ke = {
+                eW = {
                     Small: "padding-right-[var(--size-150)]",
                     Medium: "padding-right-small",
                     Large: "padding-right-[var(--size-250)]"
                 },
-                Ze = {
+                eV = {
                     Standard: "bg-shift-300",
                     Utility: "bg-none"
                 },
-                et = (0, e.forwardRef)((function(e, r) {
-                    var n = e.className,
-                        a = e.style,
-                        i = e.text,
-                        o = e.isDisabled,
-                        u = void 0 !== o && o,
-                        s = e.size,
-                        l = void 0 === s ? "Medium" : s,
-                        c = e.variant,
-                        d = void 0 === c ? "Standard" : c,
-                        f = e.leading,
-                        m = e.trailing,
-                        p = ke(e, ["className", "style", "text", "isDisabled", "size", "variant", "leading", "trailing"]),
-                        v = Be(u ? "opacity-[0.5]" : ["relative clip group/interactable focus-visible:outline-focus disabled:outline-none", "cursor-pointer"], "relative flex justify-center items-center radius-circle stroke-none", null == f ? Ve[l] : Ye[l], null == m ? Je[l] : Xe[l], We[l], n),
-                        h = t().createElement(t().Fragment, null, t().createElement(Ge, null), f && t().createElement(He, {
-                            name: f,
-                            size: ze[l]
-                        }), t().createElement("span", {
-                            className: Be("text-no-wrap text-truncate-end", null != f && $e[l], null != m && Ke[l])
-                        }, i), m && t().createElement(He, {
-                            name: m,
-                            size: ze[l]
+                eY = {
+                    Small: "size-[var(--icon-size-xsmall)]",
+                    Medium: "size-[var(--icon-size-small)]",
+                    Large: "size-[var(--icon-size-medium)]"
+                },
+                eJ = function(e) {
+                    var r = e.iconName,
+                        t = e.node,
+                        n = e.size;
+                    return null != r ? c().createElement(eO, {
+                        name: r,
+                        size: eM[n]
+                    }) : null != t ? c().createElement("span", {
+                        className: eF("inline-flex items-center justify-center shrink-0", eY[n])
+                    }, t) : null
+                },
+                eX = (0, l.forwardRef)(function(e, r) {
+                    var t, n = eP(t = [e, r]) || function(e) {
+                            if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
+                        }(t) || eq(t) || eD(),
+                        i = n[0],
+                        a = n.slice(1),
+                        o = i.className,
+                        s = i.style,
+                        u = i.text,
+                        l = i.isDisabled,
+                        d = void 0 !== l && l,
+                        f = i.size,
+                        p = void 0 === f ? "Medium" : f,
+                        m = i.variant,
+                        y = void 0 === m ? "Standard" : m,
+                        h = i.leadingIconName,
+                        v = i.leadingIconNode,
+                        b = i.trailingIconName,
+                        g = i.trailingIconNode,
+                        S = e_(i, ["className", "style", "text", "isDisabled", "size", "variant", "leadingIconName", "leadingIconNode", "trailingIconName", "trailingIconNode"]),
+                        E = (eP(a) || function(e) {
+                            var r, t, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                            if (null != n) {
+                                var i = [],
+                                    a = !0,
+                                    o = !1;
+                                try {
+                                    for (n = n.call(e); !(a = (r = n.next()).done) && (i.push(r.value), 1 !== i.length); a = !0);
+                                } catch (e) {
+                                    o = !0, t = e
+                                } finally {
+                                    try {
+                                        a || null == n.return || n.return()
+                                    } finally {
+                                        if (o) throw t
+                                    }
+                                }
+                                return i
+                            }
+                        }(a) || eq(a, 1) || eD())[0],
+                        T = null != h || null != v,
+                        R = null != b || null != g,
+                        F = eF(d ? "opacity-[0.5]" : ["relative clip group/interactable focus-visible:outline-focus disabled:outline-none", "cursor-pointer"], "relative flex justify-center items-center radius-circle stroke-none", T ? eG[p] : eB[p], R ? eQ[p] : ez[p], ek[p], o),
+                        I = c().createElement(c().Fragment, null, c().createElement(eI, null), c().createElement(eJ, {
+                            iconName: h,
+                            node: v,
+                            size: p
+                        }), c().createElement("span", {
+                            className: eF("padding-y-xsmall text-no-wrap text-truncate-end", T && eH[p], R && eW[p])
+                        }, u), c().createElement(eJ, {
+                            iconName: b,
+                            node: g,
+                            size: p
                         })),
-                        y = Me({
+                        w = eL({
                             textDecoration: "none"
-                        }, a);
-                    if ("a" === p.as) {
-                        p.as;
-                        var b = p.href,
-                            E = ke(p, ["as", "href"]);
-                        return t().createElement("a", Me({
-                            ref: r
-                        }, E, {
-                            "aria-disabled": u,
-                            href: u ? void 0 : b,
-                            className: Be(v, Ze[d], "content-action-utility"),
-                            style: y
-                        }), h)
+                        }, s);
+                    if ("a" === S.as) {
+                        S.as;
+                        var C = S.href,
+                            x = e_(S, ["as", "href"]);
+                        return c().createElement("a", eU(eL({
+                            ref: E
+                        }, x), {
+                            "aria-disabled": d,
+                            href: d ? void 0 : C,
+                            className: eF(F, eV[y], "content-action-utility"),
+                            style: w
+                        }), I)
                     }
-                    p.as;
-                    var g = p.isChecked,
-                        S = p.onCheckedChange,
-                        R = ke(p, ["as", "isChecked", "onCheckedChange"]);
-                    return t().createElement("button", Me({
-                        ref: r,
+                    S.as;
+                    var N = S.isChecked,
+                        A = S.onCheckedChange,
+                        O = e_(S, ["as", "isChecked", "onCheckedChange"]);
+                    return c().createElement("button", eU(eL({
+                        ref: E,
                         type: "button"
-                    }, R, {
-                        className: Be(g ? "bg-inverse-surface-0" : Ze[d], g ? "content-inverse-emphasis" : "content-action-utility", v),
-                        style: y,
-                        "aria-pressed": g,
-                        disabled: u,
-                        onClick: null == S ? void 0 : function() {
-                            return S(!g)
+                    }, O), {
+                        className: eF(N ? "bg-inverse-surface-0" : eV[y], N ? "content-inverse-emphasis" : "content-action-utility", F),
+                        style: w,
+                        "aria-pressed": N,
+                        disabled: d,
+                        onClick: null == A ? void 0 : function() {
+                            return A(!N)
                         }
-                    }), h)
-                }));
+                    }), I)
+                });
 
-            function tt(e, t) {
-                return function(e) {
-                    if (Array.isArray(e)) return e
-                }(e) || function(e, t) {
-                    if ("undefined" == typeof Symbol || !(Symbol.iterator in Object(e))) return;
-                    var r = [],
-                        n = !0,
-                        a = !1,
-                        i = void 0;
-                    try {
-                        for (var o, u = e[Symbol.iterator](); !(n = (o = u.next()).done) && (r.push(o.value), !t || r.length !== t); n = !0);
-                    } catch (e) {
-                        a = !0, i = e
-                    } finally {
-                        try {
-                            n || null == u.return || u.return()
-                        } finally {
-                            if (a) throw i
-                        }
-                    }
-                    return r
-                }(e, t) || function(e, t) {
-                    if (!e) return;
-                    if ("string" == typeof e) return rt(e, t);
-                    var r = Object.prototype.toString.call(e).slice(8, -1);
-                    "Object" === r && e.constructor && (r = e.constructor.name);
-                    if ("Map" === r || "Set" === r) return Array.from(e);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return rt(e, t)
-                }(e, t) || function() {
-                    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }()
-            }
-
-            function rt(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var r = 0, n = new Array(t); r < t; r++) n[r] = e[r];
+            function e$(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
                 return n
             }
-            var nt = (0, e.createContext)(),
-                at = function(r) {
-                    var n = r.children,
-                        a = tt((0, e.useState)(0), 2),
-                        i = a[0],
-                        o = a[1],
-                        u = tt((0, e.useState)(null), 2),
-                        s = u[0],
-                        l = u[1],
-                        c = tt((0, e.useState)(null), 2),
+
+            function eK(e, r) {
+                return function(e) {
+                    if (Array.isArray(e)) return e
+                }(e) || function(e, r) {
+                    var t, n, i = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                    if (null != i) {
+                        var a = [],
+                            o = !0,
+                            s = !1;
+                        try {
+                            for (i = i.call(e); !(o = (t = i.next()).done) && (a.push(t.value), !r || a.length !== r); o = !0);
+                        } catch (e) {
+                            s = !0, n = e
+                        } finally {
+                            try {
+                                o || null == i.return || i.return()
+                            } finally {
+                                if (s) throw n
+                            }
+                        }
+                        return a
+                    }
+                }(e, r) || function(e, r) {
+                    if (e) {
+                        if ("string" == typeof e) return e$(e, r);
+                        var t = Object.prototype.toString.call(e).slice(8, -1);
+                        if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return e$(e, r)
+                    }
+                }(e, r) || function() {
+                    throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                }()
+            }
+            var eZ = (0, l.createContext)(),
+                e0 = function(e) {
+                    var r = e.children,
+                        t = eK((0, l.useState)(0), 2),
+                        n = t[0],
+                        i = t[1],
+                        o = eK((0, l.useState)(null), 2),
+                        s = o[0],
+                        u = o[1],
+                        c = eK((0, l.useState)(null), 2),
                         d = c[0],
                         f = c[1],
-                        m = tt((0, e.useState)(null), 2),
-                        p = m[0],
-                        v = m[1],
-                        h = tt((0, e.useState)([]), 2),
-                        y = h[0],
+                        p = eK((0, l.useState)(null), 2),
+                        m = p[0],
+                        y = p[1],
+                        h = eK((0, l.useState)([]), 2),
+                        v = h[0],
                         b = h[1],
-                        E = tt((0, e.useState)(null), 2),
-                        g = E[0],
-                        S = E[1],
-                        R = tt((0, e.useState)(!1), 2),
-                        F = R[0],
-                        T = R[1],
-                        I = tt((0, e.useState)(!1), 2),
-                        C = I[0],
-                        N = I[1],
-                        w = tt((0, e.useState)(!1), 2),
-                        A = w[0],
-                        O = w[1],
-                        D = tt((0, e.useState)(!1), 2),
-                        P = D[0],
-                        x = D[1],
-                        L = tt((0, e.useState)(!1), 2),
-                        q = L[0],
-                        U = L[1],
-                        _ = tt((0, e.useState)({}), 2),
-                        M = _[0],
-                        k = _[1],
-                        j = tt((0, e.useState)(!0), 2),
-                        B = {
-                            friendsCount: i,
-                            setFriendsCount: o,
+                        g = eK((0, l.useState)(null), 2),
+                        S = g[0],
+                        E = g[1],
+                        T = eK((0, l.useState)(!1), 2),
+                        R = T[0],
+                        F = T[1],
+                        I = eK((0, l.useState)(!1), 2),
+                        w = I[0],
+                        C = I[1],
+                        x = eK((0, l.useState)(!1), 2),
+                        N = x[0],
+                        A = x[1],
+                        O = eK((0, l.useState)(!1), 2),
+                        j = O[0],
+                        P = O[1],
+                        D = eK((0, l.useState)(!1), 2),
+                        L = D[0],
+                        U = D[1],
+                        _ = eK((0, l.useState)({}), 2),
+                        q = _[0],
+                        M = _[1],
+                        k = eK((0, l.useState)(!0), 2),
+                        B = k[0],
+                        G = k[1];
+                    return (0, a.jsx)(eZ.Provider, {
+                        value: {
+                            friendsCount: n,
+                            setFriendsCount: i,
                             friendsNameFilter: s,
-                            setFriendsNameFilter: l,
+                            setFriendsNameFilter: u,
                             friendsStatusFilter: d,
                             setFriendsStatusFilter: f,
-                            friendsSort: p,
-                            setFriendsSort: v,
-                            paginatedFriends: y,
+                            friendsSort: m,
+                            setFriendsSort: y,
+                            paginatedFriends: v,
                             setPaginatedFriends: b,
-                            filterBarEnabled: g,
-                            setFilterBarEnabled: S,
-                            showJoinGameButtonInFriendCardDesktopOnly: q,
+                            filterBarEnabled: S,
+                            setFilterBarEnabled: E,
+                            showJoinGameButtonInFriendCardDesktopOnly: L,
                             setShowJoinGameButtonInFriendCardDesktopOnly: U,
-                            friendRequestIdToUniverseSourceMap: M,
-                            setFriendRequestIdToUniverseSourceMap: k,
-                            showFriendRecs: j[0],
-                            setShowFriendRecs: j[1],
-                            isTrustedFilterEnabled: F,
-                            setIsTrustedFilterEnabled: T,
-                            trustedConnectionsAmpPolicyLoaded: C,
-                            setTrustedConnectionsAmpPolicyLoaded: N,
-                            canAccessTrustedConnections: A,
-                            setCanAccessTrustedConnections: O,
-                            isTcManagementHubEnabled: P,
-                            setIsTcManagementHubEnabled: x
-                        };
-                    return t().createElement(nt.Provider, {
-                        value: B
-                    }, n)
+                            friendRequestIdToUniverseSourceMap: q,
+                            setFriendRequestIdToUniverseSourceMap: M,
+                            showFriendRecs: B,
+                            setShowFriendRecs: G,
+                            isTrustedFilterEnabled: R,
+                            setIsTrustedFilterEnabled: F,
+                            trustedConnectionsAmpPolicyLoaded: w,
+                            setTrustedConnectionsAmpPolicyLoaded: C,
+                            canAccessTrustedConnections: N,
+                            setCanAccessTrustedConnections: A,
+                            isTcManagementHubEnabled: j,
+                            setIsTcManagementHubEnabled: P
+                        },
+                        children: r
+                    })
                 };
 
-            function it(e, t) {
-                return function(e) {
-                    if (Array.isArray(e)) return e
-                }(e) || function(e, t) {
-                    if ("undefined" == typeof Symbol || !(Symbol.iterator in Object(e))) return;
-                    var r = [],
-                        n = !0,
-                        a = !1,
-                        i = void 0;
-                    try {
-                        for (var o, u = e[Symbol.iterator](); !(n = (o = u.next()).done) && (r.push(o.value), !t || r.length !== t); n = !0);
-                    } catch (e) {
-                        a = !0, i = e
-                    } finally {
-                        try {
-                            n || null == u.return || u.return()
-                        } finally {
-                            if (a) throw i
-                        }
-                    }
-                    return r
-                }(e, t) || function(e, t) {
-                    if (!e) return;
-                    if ("string" == typeof e) return ot(e, t);
-                    var r = Object.prototype.toString.call(e).slice(8, -1);
-                    "Object" === r && e.constructor && (r = e.constructor.name);
-                    if ("Map" === r || "Set" === r) return Array.from(e);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return ot(e, t)
-                }(e, t) || function() {
-                    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }()
-            }
-
-            function ot(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var r = 0, n = new Array(t); r < t; r++) n[r] = e[r];
+            function e1(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
                 return n
             }
 
-            function ut(r) {
-                var n, a, i, o = r.handleSearchValueChange,
-                    u = r.translate,
-                    s = it((0, e.useState)(""), 2),
-                    l = s[0],
-                    c = s[1],
-                    d = (0, e.useCallback)((n = function(e) {
-                        o((e || "").trim())
-                    }, a = 300, function() {
-                        for (var e = arguments.length, t = new Array(e), r = 0; r < e; r++) t[r] = arguments[r];
-                        clearTimeout(i), i = setTimeout((function() {
-                            return n.apply(void 0, t)
-                        }), a)
-                    }), []);
-                return t().createElement("div", {
-                    className: "friends-filter-searchbar-container form-control input-field"
-                }, t().createElement("span", {
-                    className: "icon-search"
-                }), t().createElement("input", {
-                    className: "friends-filter-searchbar-input",
-                    type: "text",
-                    value: l || "",
-                    onChange: function(e) {
-                        c(e.target.value || void 0), d(e.target.value)
-                    },
-                    placeholder: u("Label.FilterFriends")
-                }))
+            function e2(e, r) {
+                if (e) {
+                    if ("string" == typeof e) return e1(e, r);
+                    var t = Object.prototype.toString.call(e).slice(8, -1);
+                    if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                    if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return e1(e, r)
+                }
             }
-            at.propTypes = {
-                children: D().node.isRequired
-            }, ut.propTypes = {
-                handleSearchValueChange: D().func.isRequired,
-                translate: D().func.isRequired
+
+            function e3(e) {
+                var r, t, n, i = e.handleSearchValueChange,
+                    o = e.translate,
+                    s = function(e) {
+                        if (Array.isArray(e)) return e
+                    }(r = (0, l.useState)("")) || function(e) {
+                        var r, t, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                        if (null != n) {
+                            var i = [],
+                                a = !0,
+                                o = !1;
+                            try {
+                                for (n = n.call(e); !(a = (r = n.next()).done) && (i.push(r.value), 2 !== i.length); a = !0);
+                            } catch (e) {
+                                o = !0, t = e
+                            } finally {
+                                try {
+                                    a || null == n.return || n.return()
+                                } finally {
+                                    if (o) throw t
+                                }
+                            }
+                            return i
+                        }
+                    }(r) || e2(r, 2) || function() {
+                        throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                    }(),
+                    u = s[0],
+                    c = s[1],
+                    d = (0, l.useCallback)((t = function(e) {
+                        i((e || "").trim())
+                    }, function() {
+                        for (var e = arguments.length, r = Array(e), i = 0; i < e; i++) r[i] = arguments[i];
+                        clearTimeout(n), n = setTimeout.apply(void 0, [t, 300].concat(function(e) {
+                            if (Array.isArray(e)) return e1(e)
+                        }(r) || function(e) {
+                            if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
+                        }(r) || e2(r) || function() {
+                            throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                        }()))
+                    }), []);
+                return (0, a.jsxs)("div", {
+                    className: "friends-filter-searchbar-container form-control input-field",
+                    children: [(0, a.jsx)("span", {
+                        className: "icon-search"
+                    }), (0, a.jsx)("input", {
+                        className: "friends-filter-searchbar-input",
+                        type: "text",
+                        value: u || "",
+                        onChange: function(e) {
+                            c(e.target.value || void 0), d(e.target.value)
+                        },
+                        placeholder: o("Label.FilterFriends")
+                    })]
+                })
+            }
+            e0.propTypes = {
+                children: j().node.isRequired
+            }, e3.propTypes = {
+                handleSearchValueChange: j().func.isRequired,
+                translate: j().func.isRequired
             };
-            var st = (0, c.withTranslations)(Fe(ut), Te),
-                lt = q.eventStreamService.eventTypes,
-                ct = {
+            var e6 = (0, h.withTranslations)(ea(e3), eo),
+                e8 = U.eventStreamService.eventTypes,
+                e4 = {
                     filterFriendsByName: {
                         name: "filterFriendsByName",
-                        type: lt.formInteraction,
+                        type: e8.formInteraction,
                         context: "friends",
                         requiredParams: ["query"]
                     },
                     filterFriendsByStatus: {
                         name: "filterFriendsByStatus",
-                        type: lt.formInteraction,
+                        type: e8.formInteraction,
                         context: "friends",
                         requiredParams: ["status"]
                     }
                 };
 
-            function dt(r) {
-                r.translate;
-                var n = (0, e.useContext)(nt),
-                    a = (n.friendsStatusFilter, n.setFriendsNameFilter),
-                    i = (n.setFriendsStatusFilter, n.setIsTrustedFilterEnabled);
-                return t().createElement("div", {
-                    className: "friends-filter"
-                }, t().createElement(st, {
-                    handleSearchValueChange: function(e) {
-                        q.eventStreamService.sendEvent(ct.filterFriendsByName, {
-                            query: e
-                        }), a(e), i(!1)
-                    }
-                }))
+            function e5(e) {
+                e.translate;
+                var r = (0, l.useContext)(eZ),
+                    t = (r.friendsStatusFilter, r.setFriendsNameFilter),
+                    n = (r.setFriendsStatusFilter, r.setIsTrustedFilterEnabled);
+                return (0, a.jsx)("div", {
+                    className: "friends-filter",
+                    children: (0, a.jsx)(e6, {
+                        handleSearchValueChange: function(e) {
+                            U.eventStreamService.sendEvent(e4.filterFriendsByName, {
+                                query: e
+                            }), t(e), n(!1)
+                        }
+                    })
+                })
             }
-            dt.propTypes = {
-                translate: D().func.isRequired
+            _.FILTER_STATUS_OPTIONS, _.FILTER_STATUS_OPTIONS_DEFAULT, e5.propTypes = {
+                translate: j().func.isRequired
             };
-            var ft = (0, c.withTranslations)(Fe(dt), Te);
+            var e7 = (0, h.withTranslations)(ea(e5), eo);
 
-            function mt(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var r = 0, n = new Array(t); r < t; r++) n[r] = e[r];
+            function e9(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
                 return n
             }
-            var pt, vt, ht = _.FRIENDTABS,
-                yt = _.FRIEND_FILTER_OPTIONS,
-                bt = q.dataStores.userDataStore.maxFriendRequestNotificationCount,
-                Et = (0, P.createModal)(),
-                gt = (vt = 2, function(e) {
+            var re = _.FRIENDTABS,
+                rr = _.FRIEND_FILTER_OPTIONS,
+                rt = U.dataStores.userDataStore.maxFriendRequestNotificationCount,
+                rn = function(e) {
                     if (Array.isArray(e)) return e
-                }(pt = Et) || function(e, t) {
-                    if ("undefined" != typeof Symbol && Symbol.iterator in Object(e)) {
-                        var r = [],
-                            n = !0,
-                            a = !1,
-                            i = void 0;
+                }(e = (0, P.createModal)()) || function(e) {
+                    var r, t, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                    if (null != n) {
+                        var i = [],
+                            a = !0,
+                            o = !1;
                         try {
-                            for (var o, u = e[Symbol.iterator](); !(n = (o = u.next()).done) && (r.push(o.value), !t || r.length !== t); n = !0);
+                            for (n = n.call(e); !(a = (r = n.next()).done) && (i.push(r.value), 2 !== i.length); a = !0);
                         } catch (e) {
-                            a = !0, i = e
+                            o = !0, t = e
                         } finally {
                             try {
-                                n || null == u.return || u.return()
+                                a || null == n.return || n.return()
                             } finally {
-                                if (a) throw i
+                                if (o) throw t
                             }
                         }
-                        return r
+                        return i
                     }
-                }(pt, vt) || function(e, t) {
+                }(e) || function(e) {
                     if (e) {
-                        if ("string" == typeof e) return mt(e, t);
+                        if ("string" == typeof e) return e9(e, 2);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
-                        return "Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r ? Array.from(e) : "Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r) ? mt(e, t) : void 0
+                        if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return e9(e, 2)
                     }
-                }(pt, vt) || function() {
-                    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }()),
-                St = gt[0],
-                Rt = gt[1];
+                }(e) || function() {
+                    throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                }(),
+                ri = rn[0],
+                ra = rn[1];
 
-            function Ft(r) {
-                var n = r.translate,
-                    a = r.title,
-                    i = r.currentTab,
-                    o = r.tooltipMsg,
-                    u = r.declineAllFriendRequests,
-                    s = r.refreshFriendsList,
-                    l = r.isMyProfile,
-                    c = r.updateFilter,
-                    d = (0, e.useContext)(nt),
-                    f = d.friendsCount,
-                    m = d.isTrustedFilterEnabled,
-                    p = d.canAccessTrustedConnections,
-                    v = d.trustedConnectionsAmpPolicyLoaded,
-                    h = d.isTcManagementHubEnabled,
-                    y = i === ht.FRIENDREQUESTS && f > 0,
-                    b = "(".concat(f, ")");
-                return f >= bt && i !== ht.FRIENDS && (b = "(".concat(bt, "+)")), t().createElement("div", null, t().createElement("div", {
-                    className: "container-header"
-                }, t().createElement("div", {
-                    className: "friends-subtitle"
-                }, t().createElement("h2", null, a, " ", b), t().createElement(P.Tooltip, {
-                    id: "friendsTooltip",
-                    placement: "bottom",
-                    content: o
-                }, t().createElement("span", {
-                    className: "icon-moreinfo"
-                })), i === ht.FRIENDS && !m && t().createElement(ft, null)), i === ht.FRIENDS && l && h && t().createElement(t().Fragment, null, t().createElement("div", {
-                    className: "chip-filters-container"
-                }, t().createElement(et, {
-                    text: n("Label.All"),
-                    isChecked: !m,
-                    onCheckedChange: function() {
-                        c(yt.ALL)
-                    }
-                }), t().createElement(et, {
-                    text: n("TrustedConnection.Label.Trusted"),
-                    isChecked: m,
-                    onCheckedChange: function() {
-                        c(yt.TRUSTED)
-                    }
-                })), m && v && function(e, r) {
-                    return e ? t().createElement("div", {
-                        className: "education-text-container"
-                    }, t().createElement("span", null, r("Description.DoMoreWithTrustedFriends")), " ", t().createElement("a", {
-                        className: "learn-more-link",
-                        rel: "noreferrer",
-                        target: "_blank",
-                        href: "https://en.help.roblox.com/hc/articles/46158344285204"
-                    }, r("LinkText.LearnMore"))) : t().createElement("div", {
-                        className: "education-text-container"
-                    }, t().createElement("span", null, r("Description.TrustedFriendsUnavailable")))
-                }(p, n)), y && t().createElement(P.Button, {
-                    variant: "control",
-                    size: "xs",
-                    className: "ignore-button see-all-link",
-                    onClick: function() {
-                        return u().then((function(e) {
-                            e ? Rt.open() : s()
-                        }))
-                    }
-                }, n("Action.IgnoreAll")), t().createElement(St, {
-                    title: n("Action.IgnoreAll"),
-                    body: n("Label.DeclineAllBackgrounded"),
-                    neutralButtonText: n("Label.Ok")
-                })))
+            function ro(e) {
+                var r = e.translate,
+                    t = e.title,
+                    n = e.currentTab,
+                    i = e.tooltipMsg,
+                    o = e.declineAllFriendRequests,
+                    s = e.refreshFriendsList,
+                    u = e.isMyProfile,
+                    d = e.updateFilter,
+                    f = (0, l.useContext)(eZ),
+                    p = f.friendsCount,
+                    m = f.isTrustedFilterEnabled,
+                    y = f.canAccessTrustedConnections,
+                    h = f.trustedConnectionsAmpPolicyLoaded,
+                    v = f.isTcManagementHubEnabled,
+                    b = n === re.FRIENDREQUESTS && p > 0,
+                    g = "(".concat(p, ")");
+                return p >= rt && n !== re.FRIENDS && (g = "(".concat(rt, "+)")), (0, a.jsx)("div", {
+                    children: (0, a.jsxs)("div", {
+                        className: "container-header",
+                        children: [(0, a.jsxs)("div", {
+                            className: "friends-subtitle",
+                            children: [(0, a.jsxs)("h2", {
+                                children: [t, " ", g]
+                            }), (0, a.jsx)(P.Tooltip, {
+                                id: "friendsTooltip",
+                                placement: "bottom",
+                                content: i,
+                                children: (0, a.jsx)("span", {
+                                    className: "icon-moreinfo"
+                                })
+                            }), n === re.FRIENDS && !m && (0, a.jsx)(e7, {})]
+                        }), n === re.FRIENDS && u && v && (0, a.jsxs)(c().Fragment, {
+                            children: [(0, a.jsxs)("div", {
+                                className: "chip-filters-container",
+                                children: [(0, a.jsx)(eX, {
+                                    text: r("Label.All"),
+                                    isChecked: !m,
+                                    onCheckedChange: function() {
+                                        d(rr.ALL)
+                                    }
+                                }), (0, a.jsx)(eX, {
+                                    text: r("TrustedConnection.Label.Trusted"),
+                                    isChecked: m,
+                                    onCheckedChange: function() {
+                                        d(rr.TRUSTED)
+                                    }
+                                })]
+                            }), m && h && (y ? (0, a.jsxs)("div", {
+                                className: "education-text-container",
+                                children: [(0, a.jsx)("span", {
+                                    children: r("Description.DoMoreWithTrustedFriends")
+                                }), "\xa0", (0, a.jsx)("a", {
+                                    className: "learn-more-link",
+                                    rel: "noreferrer",
+                                    target: "_blank",
+                                    href: "https://en.help.roblox.com/hc/articles/46158344285204",
+                                    children: r("LinkText.LearnMore")
+                                })]
+                            }) : (0, a.jsx)("div", {
+                                className: "education-text-container",
+                                children: (0, a.jsx)("span", {
+                                    children: r("Description.TrustedFriendsUnavailable")
+                                })
+                            }))]
+                        }), b && (0, a.jsx)(P.Button, {
+                            variant: "control",
+                            size: "xs",
+                            className: "ignore-button see-all-link",
+                            onClick: function() {
+                                return o().then(function(e) {
+                                    e ? ra.open() : s()
+                                })
+                            },
+                            children: r("Action.IgnoreAll")
+                        }), (0, a.jsx)(ri, {
+                            title: r("Action.IgnoreAll"),
+                            body: r("Label.DeclineAllBackgrounded"),
+                            neutralButtonText: r("Label.Ok")
+                        })]
+                    })
+                })
             }
-            Ft.propTypes = {
-                translate: D().func.isRequired,
-                title: D().string.isRequired,
-                currentTab: D().string.isRequired,
-                tooltipMsg: D().string.isRequired,
-                declineAllFriendRequests: D().func.isRequired,
-                refreshFriendsList: D().func.isRequired,
-                isMyProfile: D().bool.isRequired,
-                updateFilter: D().func.isRequired
+            ro.propTypes = {
+                translate: j().func.isRequired,
+                title: j().string.isRequired,
+                currentTab: j().string.isRequired,
+                tooltipMsg: j().string.isRequired,
+                declineAllFriendRequests: j().func.isRequired,
+                refreshFriendsList: j().func.isRequired,
+                isMyProfile: j().bool.isRequired,
+                updateFilter: j().func.isRequired
             };
-            var Tt = (0, c.withTranslations)(Fe(Ft), Te),
-                It = RobloxThumbnails,
-                Ct = RobloxPresence,
-                Nt = r.n(Ct),
-                wt = function(e) {
+            var rs = (0, h.withTranslations)(ea(ro), eo),
+                ru = window.RobloxThumbnails,
+                rl = window.RobloxPresence,
+                rc = t.n(rl),
+                rd = function(e) {
                     var r = e.children;
-                    return t().createElement("div", {
-                        className: "avatar-card-footer avatar-card-label"
-                    }, r)
+                    return (0, a.jsx)("div", {
+                        className: "avatar-card-footer avatar-card-label",
+                        children: r
+                    })
                 };
-            wt.propTypes = {
-                children: D().node.isRequired
-            };
-            var At = wt;
 
-            function Ot(e, t) {
-                return function(e) {
-                    if (Array.isArray(e)) return e
-                }(e) || function(e, t) {
-                    if ("undefined" == typeof Symbol || !(Symbol.iterator in Object(e))) return;
-                    var r = [],
-                        n = !0,
-                        a = !1,
-                        i = void 0;
-                    try {
-                        for (var o, u = e[Symbol.iterator](); !(n = (o = u.next()).done) && (r.push(o.value), !t || r.length !== t); n = !0);
-                    } catch (e) {
-                        a = !0, i = e
-                    } finally {
-                        try {
-                            n || null == u.return || u.return()
-                        } finally {
-                            if (a) throw i
-                        }
-                    }
-                    return r
-                }(e, t) || function(e, t) {
-                    if (!e) return;
-                    if ("string" == typeof e) return Dt(e, t);
-                    var r = Object.prototype.toString.call(e).slice(8, -1);
-                    "Object" === r && e.constructor && (r = e.constructor.name);
-                    if ("Map" === r || "Set" === r) return Array.from(e);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Dt(e, t)
-                }(e, t) || function() {
-                    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }()
-            }
-
-            function Dt(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var r = 0, n = new Array(t); r < t; r++) n[r] = e[r];
+            function rf(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
                 return n
             }
-            var Pt = _.FRIENDTABS,
-                xt = _.EVENTS,
-                Lt = _.FRIENDS_REQUEST_LIST_CONTEXT,
-                qt = _.PLUS_SIGN,
-                Ut = _.MUTUAL_FRIENDS_SHOW_COUNT,
-                _t = _.UNAVAILABLE_FRIEND_NAME,
-                Mt = q.dataStores.userDataStore,
-                kt = function(r) {
-                    var n, a = r.id,
-                        i = r.name,
-                        o = r.displayName,
-                        u = r.verifiedBadgeData,
-                        s = r.isRobloxPlus,
-                        l = r.isDeleted,
-                        c = r.friendRequestSentFromInGame,
-                        d = r.friendRequestSentFromQrCode,
-                        f = r.friendRequestSentAt,
-                        m = r.sourceUniverse,
-                        p = r.mutualFriends,
-                        v = (r.position, r.currentTab),
-                        h = r.isMyProfile,
-                        y = r.translate,
-                        E = r.unfollowFriend,
-                        g = r.unfriend,
-                        S = r.followFriend,
-                        R = r.acceptFriendRequestThenRemoveCard,
-                        F = r.declineFriendRequestThenRemoveCard,
-                        T = r.refreshFriendsList,
-                        I = r.presence,
-                        C = Ot((0, e.useState)(!0), 2),
-                        N = C[0],
-                        w = C[1],
-                        A = Ot((0, e.useState)(!1), 2),
-                        O = A[0],
-                        D = A[1],
-                        x = Ot((0, e.useState)(!1), 2),
-                        L = x[0],
-                        U = x[1],
-                        M = Ot((0, e.useState)(""), 2),
-                        k = M[0],
-                        j = M[1],
-                        B = Ot((0, e.useState)(""), 2),
-                        G = B[0],
-                        Q = B[1],
-                        H = Ot((0, e.useState)(!1), 2),
-                        z = H[0],
-                        W = H[1],
-                        V = function(e) {
-                            return q.entityUrl.game.getRelativePath(e)
+
+            function rp(e, r) {
+                return function(e) {
+                    if (Array.isArray(e)) return e
+                }(e) || function(e, r) {
+                    var t, n, i = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                    if (null != i) {
+                        var a = [],
+                            o = !0,
+                            s = !1;
+                        try {
+                            for (i = i.call(e); !(o = (t = i.next()).done) && (a.push(t.value), !r || a.length !== r); o = !0);
+                        } catch (e) {
+                            s = !0, n = e
+                        } finally {
+                            try {
+                                o || null == i.return || i.return()
+                            } finally {
+                                if (s) throw n
+                            }
+                        }
+                        return a
+                    }
+                }(e, r) || function(e, r) {
+                    if (e) {
+                        if ("string" == typeof e) return rf(e, r);
+                        var t = Object.prototype.toString.call(e).slice(8, -1);
+                        if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return rf(e, r)
+                    }
+                }(e, r) || function() {
+                    throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                }()
+            }
+            rd.propTypes = {
+                children: j().node.isRequired
+            };
+            var rm = _.FRIENDTABS,
+                ry = _.EVENTS,
+                rh = _.FRIENDS_REQUEST_LIST_CONTEXT,
+                rv = _.PLUS_SIGN,
+                rb = _.MUTUAL_FRIENDS_SHOW_COUNT,
+                rg = _.UNAVAILABLE_FRIEND_NAME,
+                rS = U.dataStores.userDataStore,
+                rE = function(e) {
+                    var r, t, n, i, o, s, u = e.id,
+                        c = e.name,
+                        d = e.displayName,
+                        f = e.verifiedBadgeData,
+                        p = e.isRobloxPlus,
+                        m = e.isDeleted,
+                        y = e.friendRequestSentFromInGame,
+                        h = e.friendRequestSentFromQrCode,
+                        v = e.friendRequestSentAt,
+                        b = e.sourceUniverse,
+                        g = e.mutualFriends,
+                        S = (e.position, e.currentTab),
+                        E = e.isMyProfile,
+                        T = e.translate,
+                        R = e.unfollowFriend,
+                        F = e.unfriend,
+                        w = e.followFriend,
+                        C = e.acceptFriendRequestThenRemoveCard,
+                        x = e.declineFriendRequestThenRemoveCard,
+                        N = e.refreshFriendsList,
+                        A = e.presence,
+                        O = rp((0, l.useState)(!0), 2),
+                        j = O[0],
+                        D = O[1],
+                        L = rp((0, l.useState)(!1), 2),
+                        q = L[0],
+                        M = L[1],
+                        k = rp((0, l.useState)(!1), 2),
+                        B = k[0],
+                        G = k[1],
+                        z = rp((0, l.useState)(""), 2),
+                        Q = z[0],
+                        H = z[1],
+                        W = rp((0, l.useState)(""), 2),
+                        V = W[0],
+                        Y = W[1],
+                        J = rp((0, l.useState)(!1), 2),
+                        X = J[0],
+                        $ = J[1],
+                        K = function(e) {
+                            return U.entityUrl.game.getRelativePath(e)
                         },
-                        Y = v === Pt.FOLLOWING && h && !z,
-                        J = v === Pt.FRIENDREQUESTS && h,
-                        $ = v === Pt.FRIENDS && l && h,
-                        K = X(a),
-                        Z = (null == m ? void 0 : m.name) && (null == m ? void 0 : m.rootPlaceId),
-                        ee = p.length > 0,
-                        te = t().createElement(Ct.PresenceStatusLabel, {
-                            userId: a,
-                            translate: y,
-                            linkUrlGetter: V,
+                        Z = S === rm.FOLLOWING && E && !X,
+                        ee = S === rm.FRIENDREQUESTS && E,
+                        et = S === rm.FRIENDS && m && E,
+                        en = (r = u, "/users/".concat(r, "/profile")),
+                        ei = (null == b ? void 0 : b.name) && (null == b ? void 0 : b.rootPlaceId),
+                        ea = g.length > 0,
+                        eo = (0, a.jsx)(rl.PresenceStatusLabel, {
+                            userId: u,
+                            translate: T,
+                            linkUrlGetter: K,
                             linkClassNames: ["avatar-status-link", "text-link"]
                         }),
-                        re = "",
-                        ne = !1,
-                        ae = (0, e.useContext)(nt).showJoinGameButtonInFriendCardDesktopOnly,
-                        ie = (0, Ct.usePresence)(a, I),
-                        oe = Ot((0, e.useState)(I.isPlayable), 2),
-                        ue = oe[0],
-                        se = oe[1];
-                    (0, e.useEffect)((function() {
-                        ie.userPresenceType === Ct.PresenceType.Game && (ie.universeId === I.universeId ? se(I.isPlayable) : Ee.getGamePlayabilities([ie.universeId]).then((function(e) {
-                            var t, r;
-                            se(null !== (t = null == e || null === (r = e.data[0]) || void 0 === r ? void 0 : r.isPlayable) && void 0 !== t && t)
-                        })))
-                    }), [ie]);
-                    var le = ie.placeId,
-                        ce = (ie.gameId, Ot((0, e.useState)(!1), 2)),
-                        de = ce[0],
-                        fe = ce[1];
-                    (0, e.useEffect)((function() {
-                        Ee.getTrustedConnectionStatus(a).then((function(e) {
-                            fe(e.data.status === _.TRUSTED_FRIEND_STATUS.TrustedFriends)
+                        es = "",
+                        eu = !1,
+                        el = (0, l.useContext)(eZ).showJoinGameButtonInFriendCardDesktopOnly,
+                        ec = (0, rl.usePresence)(u, A),
+                        ed = rp((0, l.useState)(A.isPlayable), 2),
+                        ef = ed[0],
+                        ep = ed[1];
+                    (0, l.useEffect)(function() {
+                        ec.userPresenceType === rl.PresenceType.Game && (ec.universeId === A.universeId ? ep(A.isPlayable) : er.getGamePlayabilities([ec.universeId]).then(function(e) {
+                            var r, t;
+                            ep(null != (r = null == e || null == (t = e.data[0]) ? void 0 : t.isPlayable) && r)
                         }))
-                    }), [a]);
-                    var me, pe, ve, he, ye;
-                    if (v === Pt.FRIENDS || v === Pt.FOLLOWING) {
-                        if (ie.userPresenceType === Ct.PresenceType.Game) {
-                            var be = (ye = V(le), ue && ae ? {
-                                lastLocationLink: ye,
-                                truncateFirstLine: !0,
-                                footer: t().createElement(P.Button, {
-                                    onClick: function() {
-                                        return e = a, void b.GameLauncher.followPlayerIntoGame(e);
-                                        var e
-                                    },
-                                    size: "sm",
-                                    width: "full",
-                                    variant: "growth"
-                                }, y("Action.JoinGame"))
-                            } : {
-                                lastLocationLink: ye,
-                                truncateFirstLine: !1,
-                                footer: null
+                    }, [ec]);
+                    var em = ec.placeId,
+                        ey = ec.gameId,
+                        eh = function(e, r, t) {
+                            I.GameLauncher.followPlayerIntoGame(r)
+                        },
+                        ev = rp((0, l.useState)(!1), 2),
+                        eb = ev[0],
+                        eg = ev[1];
+                    (0, l.useEffect)(function() {
+                        er.getTrustedConnectionStatus(u).then(function(e) {
+                            eg(e.data.status === _.TRUSTED_FRIEND_STATUS.TrustedFriends)
+                        })
+                    }, [u]);
+                    S === rm.FRIENDS || S === rm.FOLLOWING ? (ec.userPresenceType === rl.PresenceType.Game && (t = K(em), eu = (s = ef && el ? {
+                        lastLocationLink: t,
+                        truncateFirstLine: !0,
+                        footer: (0, a.jsx)(P.Button, {
+                            onClick: function() {
+                                return eh(em, u, ey)
+                            },
+                            size: "sm",
+                            width: "full",
+                            variant: "growth",
+                            children: T("Action.JoinGame")
+                        })
+                    } : {
+                        lastLocationLink: t,
+                        truncateFirstLine: !1,
+                        footer: null
+                    }).truncateFirstLine, o = s.footer), S !== rm.FOLLOWING || j || (es = T("Label.Unfollowed"))) : S === rm.FRIENDREQUESTS && (eo = "", ea ? (n = function(e) {
+                        var r = e.slice(0, rb).map(function(e) {
+                            return (0, a.jsx)("li", {
+                                className: "text-overflow",
+                                children: e
+                            })
+                        });
+                        if (e.length > rb) {
+                            var t = T("Message.More", {
+                                plusSign: rv,
+                                remainingCount: e.length - rb
                             });
-                            ne = be.truncateFirstLine, n = be.footer
+                            r.push((0, a.jsx)("li", {
+                                className: "text-overflow",
+                                children: t
+                            }))
                         }
-                        v !== Pt.FOLLOWING || N || (re = y("Label.Unfollowed"))
-                    } else if (v === Pt.FRIENDREQUESTS) {
-                        te = "";
-                        ee ? (he = function(e) {
-                            var r = e.slice(0, Ut).map((function(e) {
-                                return t().createElement("li", {
-                                    className: "text-overflow"
-                                }, e)
-                            }));
-                            if (e.length > Ut) {
-                                var n = e.length - Ut,
-                                    a = y("Message.More", {
-                                        plusSign: qt,
-                                        remainingCount: n
-                                    });
-                                r.push(t().createElement("li", {
-                                    className: "text-overflow"
-                                }, a))
-                            }
-                            return r
-                        }(ve = p), n = t().createElement(P.Tooltip, {
-                            id: "mutual-friends-tooltip",
-                            placement: "bottom",
-                            content: he
-                        }, t().createElement("span", {
-                            className: "mutual-friends-tooltip-label"
-                        }, y("Label.WebMutualFriend", {
-                            mutualConnectionsCount: ve.length
-                        })))) : Z ? (me = m.rootPlaceId, pe = V(me), n = t().createElement(e.Fragment, null, y("Label.SentFrom"), " ", t().createElement("a", {
-                            href: pe,
-                            className: "text-link avatar-card-footer-link"
-                        }, m.name))) : d && (n = y("Label.SentFromQrCode"))
-                    }
-                    l && (te = y("Label.Inactive"));
-                    var ge = t().createElement(It.Thumbnail2d, {
-                        type: It.ThumbnailTypes.avatarHeadshot,
-                        size: It.DefaultThumbnailSize,
-                        targetId: a,
+                        return r
+                    }(g), o = (0, a.jsx)(P.Tooltip, {
+                        id: "mutual-friends-tooltip",
+                        placement: "bottom",
+                        content: n,
+                        children: (0, a.jsx)("span", {
+                            className: "mutual-friends-tooltip-label",
+                            children: T("Label.WebMutualFriend", {
+                                mutualConnectionsCount: g.length
+                            })
+                        })
+                    })) : ei ? (i = K(b.rootPlaceId), o = (0, a.jsxs)(l.Fragment, {
+                        children: [T("Label.SentFrom"), " ", (0, a.jsx)("a", {
+                            href: i,
+                            className: "text-link avatar-card-footer-link",
+                            children: b.name
+                        })]
+                    })) : h && (o = T("Label.SentFromQrCode"))), m && (eo = T("Label.Inactive"));
+                    var eS = (0, a.jsx)(ru.Thumbnail2d, {
+                        type: ru.ThumbnailTypes.avatarHeadshot,
+                        size: ru.DefaultThumbnailSize,
+                        targetId: u,
+                        includeProfileFrame: !0,
                         containerClass: "avatar-card-image"
                     });
-                    return (0, e.useEffect)((function() {
-                        var e = {
+                    return (0, l.useEffect)(function() {
+                        I.CaptchaService.openCaptcha({
                             captchaActionType: "followUser",
-                            captchaActivated: L,
+                            captchaActivated: B,
                             captchaError: function() {
-                                U(!1)
+                                G(!1)
                             },
                             captchaSuccess: function(e) {
-                                U(!1), S(a, e).then((function() {
-                                    return w(!0)
-                                }))
+                                G(!1), w(u, e).then(function() {
+                                    return D(!0)
+                                })
                             },
                             captchaReturnTokenInSuccessCb: !0,
                             captchaDismissed: function() {
-                                U(!1)
+                                G(!1)
                             },
                             endCaptcha: function() {
-                                U(!1)
+                                G(!1)
                             },
                             inputParams: {
-                                dataExchange: k,
-                                unifiedCaptchaId: G
+                                dataExchange: Q,
+                                unifiedCaptchaId: V
                             }
-                        };
-                        b.CaptchaService.openCaptcha(e)
-                    }), [L]), t().createElement(P.AvatarCardItem.Default, {
-                        id: a,
-                        disableCard: l || O || a < 0
-                    }, t().createElement(P.AvatarCardItem.Content, null, t().createElement(P.AvatarCardItem.Headshot, {
-                        imageLink: l ? "" : K,
-                        statusIcon: t().createElement(Ct.PresenceStatusIcon, {
-                            translate: y,
-                            userId: a
-                        }),
-                        thumbnail: ge
-                    }), t().createElement(P.AvatarCardItem.Caption, {
-                        name: null != i ? i : y(_t),
-                        displayName: null != o ? o : y(_t),
-                        nameLink: l ? "" : K,
-                        labelFirstLine: te,
-                        labelSecondLine: re,
-                        footer: n && t().createElement(At, null, n),
-                        hasMenu: Y || $,
-                        truncateFirstLine: ne,
-                        verifiedBadgeData: u,
-                        isRobloxPlus: s,
-                        isTrustedConnection: de
-                    }), Y && t().createElement(P.AvatarCardItem.Menu, null, N && t().createElement(P.AvatarCardItem.MenuItem, {
-                        className: "friend-unfollow",
-                        title: y("Action.Unfollow"),
-                        onClick: function(e) {
-                            e.preventDefault(), E(a).then((function() {
-                                return w(!1)
-                            })), l && (W(!0), Mt.clearUserDataStoreCache())
-                        }
-                    }), !N && t().createElement(P.AvatarCardItem.MenuItem, {
-                        className: "friend-follow",
-                        title: y("Action.Follow"),
-                        onClick: function(e) {
-                            e.preventDefault(), S(a).then((function() {
-                                return w(!0)
-                            }), (function(e) {
-                                var t = e.message;
-                                try {
-                                    var r = JSON.parse(t);
-                                    j(r.dxBlob), Q(r.unifiedCaptchaId)
-                                } catch (e) {
-                                    j(t)
-                                }
-                                U(!0)
-                            }))
-                        }
-                    })), $ && t().createElement(P.AvatarCardItem.Menu, null, t().createElement(P.AvatarCardItem.MenuItem, {
-                        className: "friend-unfriend",
-                        title: y("Label.RemoveFriend"),
-                        onClick: function() {
-                            g(a).then(T)
-                        }
-                    }))), J && t().createElement(P.AvatarCardItem.ButtonGroup, null, t().createElement(P.Button, {
-                        isLoading: O,
-                        className: "ignore-friend",
-                        onClick: function() {
-                            D(!0), F({
-                                id: a
-                            }).finally((function() {
-                                D(!1)
-                            }))
-                        },
-                        variant: "secondary",
-                        size: "md"
-                    }, y("Action.Ignore")), t().createElement(P.Button, {
-                        isLoading: O,
-                        className: "accept-friend",
-                        onClick: function() {
-                            D(!0), R({
-                                id: a
-                            }).then((function() {
-                                var e = {
-                                    senderUserId: a,
-                                    currentUserId: b.CurrentUser.userId,
-                                    sentFromInGame: c,
-                                    sentFromQrCode: d,
-                                    timeFriendRequestWasSent: f
-                                };
-                                b.EventStream.SendEvent(xt.ACCEPTED_FRIEND_REQUEST, Lt, e)
-                            })).finally((function() {
-                                D(!1)
-                            }))
-                        },
-                        variant: "cta",
-                        size: "md"
-                    }, y("Action.Accept"))))
+                        })
+                    }, [B]), (0, a.jsxs)(P.AvatarCardItem.Default, {
+                        id: u,
+                        disableCard: m || q || u < 0,
+                        children: [(0, a.jsxs)(P.AvatarCardItem.Content, {
+                            children: [(0, a.jsx)(P.AvatarCardItem.Headshot, {
+                                imageLink: m ? "" : en,
+                                statusIcon: (0, a.jsx)(rl.PresenceStatusIcon, {
+                                    translate: T,
+                                    userId: u
+                                }),
+                                thumbnail: eS
+                            }), (0, a.jsx)(P.AvatarCardItem.Caption, {
+                                name: null != c ? c : T(rg),
+                                displayName: null != d ? d : T(rg),
+                                nameLink: m ? "" : en,
+                                labelFirstLine: eo,
+                                labelSecondLine: es,
+                                footer: o && (0, a.jsx)(rd, {
+                                    children: o
+                                }),
+                                hasMenu: Z || et,
+                                truncateFirstLine: eu,
+                                verifiedBadgeData: f,
+                                isRobloxPlus: p,
+                                isTrustedConnection: eb
+                            }), Z && (0, a.jsxs)(P.AvatarCardItem.Menu, {
+                                children: [j && (0, a.jsx)(P.AvatarCardItem.MenuItem, {
+                                    className: "friend-unfollow",
+                                    title: T("Action.Unfollow"),
+                                    onClick: function(e) {
+                                        e.preventDefault(), R(u).then(function() {
+                                            return D(!1)
+                                        }), m && ($(!0), rS.clearUserDataStoreCache())
+                                    }
+                                }), !j && (0, a.jsx)(P.AvatarCardItem.MenuItem, {
+                                    className: "friend-follow",
+                                    title: T("Action.Follow"),
+                                    onClick: function(e) {
+                                        e.preventDefault(), w(u).then(function() {
+                                            return D(!0)
+                                        }, function(e) {
+                                            var r = e.message;
+                                            try {
+                                                var t = JSON.parse(r);
+                                                H(t.dxBlob), Y(t.unifiedCaptchaId)
+                                            } catch (e) {
+                                                H(r)
+                                            }
+                                            G(!0)
+                                        })
+                                    }
+                                })]
+                            }), et && (0, a.jsx)(P.AvatarCardItem.Menu, {
+                                children: (0, a.jsx)(P.AvatarCardItem.MenuItem, {
+                                    className: "friend-unfriend",
+                                    title: T("Label.RemoveFriend"),
+                                    onClick: function() {
+                                        F(u).then(N)
+                                    }
+                                })
+                            })]
+                        }), ee && (0, a.jsxs)(P.AvatarCardItem.ButtonGroup, {
+                            children: [(0, a.jsx)(P.Button, {
+                                isLoading: q,
+                                className: "ignore-friend",
+                                onClick: function() {
+                                    M(!0), x({
+                                        id: u
+                                    }).finally(function() {
+                                        M(!1)
+                                    })
+                                },
+                                variant: "secondary",
+                                size: "md",
+                                children: T("Action.Ignore")
+                            }), (0, a.jsx)(P.Button, {
+                                isLoading: q,
+                                className: "accept-friend",
+                                onClick: function() {
+                                    M(!0), C({
+                                        id: u
+                                    }).then(function() {
+                                        var e = {
+                                            senderUserId: u,
+                                            currentUserId: I.CurrentUser.userId,
+                                            sentFromInGame: y,
+                                            sentFromQrCode: h,
+                                            timeFriendRequestWasSent: v
+                                        };
+                                        I.EventStream.SendEvent(ry.ACCEPTED_FRIEND_REQUEST, rh, e)
+                                    }).finally(function() {
+                                        M(!1)
+                                    })
+                                },
+                                variant: "cta",
+                                size: "md",
+                                children: T("Action.Accept")
+                            })]
+                        })]
+                    })
                 };
-            kt.defaultProps = {
+            rE.defaultProps = {
                 verifiedBadgeData: null,
                 isRobloxPlus: !1,
                 isDeleted: !1,
@@ -1731,1153 +2200,1280 @@
                 presence: {
                     universeId: void 0
                 }
-            }, kt.propTypes = {
-                id: D().number.isRequired,
-                name: D().string.isRequired,
-                displayName: D().string.isRequired,
-                verifiedBadgeData: D().shape({
-                    hasVerifiedBadge: D().bool,
-                    titleText: D().string
+            }, rE.propTypes = {
+                id: j().number.isRequired,
+                name: j().string.isRequired,
+                displayName: j().string.isRequired,
+                verifiedBadgeData: j().shape({
+                    hasVerifiedBadge: j().bool,
+                    titleText: j().string
                 }),
-                isRobloxPlus: D().bool,
-                isDeleted: D().bool,
-                friendRequestSentFromInGame: D().bool.isRequired,
-                friendRequestSentFromQrCode: D().bool.isRequired,
-                friendRequestSentAt: D().string,
-                sourceUniverse: D().shape({
-                    name: D().string,
-                    rootPlaceId: D().number
+                isRobloxPlus: j().bool,
+                isDeleted: j().bool,
+                friendRequestSentFromInGame: j().bool.isRequired,
+                friendRequestSentFromQrCode: j().bool.isRequired,
+                friendRequestSentAt: j().string,
+                sourceUniverse: j().shape({
+                    name: j().string,
+                    rootPlaceId: j().number
                 }),
-                mutualFriends: D().arrayOf(D().string),
-                position: D().number.isRequired,
-                currentTab: D().string.isRequired,
-                isMyProfile: D().bool.isRequired,
-                translate: D().func.isRequired,
-                unfollowFriend: D().func.isRequired,
-                unfriend: D().func.isRequired,
-                followFriend: D().func.isRequired,
-                acceptFriendRequestThenRemoveCard: D().func.isRequired,
-                declineFriendRequestThenRemoveCard: D().func.isRequired,
-                refreshFriendsList: D().func.isRequired,
-                presence: D().shape({
-                    isPlayable: D().bool.isRequired,
-                    universeId: D().number
+                mutualFriends: j().arrayOf(j().string),
+                position: j().number.isRequired,
+                currentTab: j().string.isRequired,
+                isMyProfile: j().bool.isRequired,
+                translate: j().func.isRequired,
+                unfollowFriend: j().func.isRequired,
+                unfriend: j().func.isRequired,
+                followFriend: j().func.isRequired,
+                acceptFriendRequestThenRemoveCard: j().func.isRequired,
+                declineFriendRequestThenRemoveCard: j().func.isRequired,
+                refreshFriendsList: j().func.isRequired,
+                presence: j().shape({
+                    isPlayable: j().bool.isRequired,
+                    universeId: j().number
                 })
             };
-            var jt = (0, c.withTranslations)(Fe(kt), Te),
-                Bt = _.FRIENDS_EMPTY;
+            var rT = (0, h.withTranslations)(ea(rE), eo),
+                rR = _.FRIENDS_EMPTY;
 
-            function Gt(r) {
-                var n = r.translate,
-                    a = r.currentTab,
-                    i = r.isMyProfile,
-                    o = r.tooltipMsg,
-                    u = r.title,
-                    s = r.acceptFriendRequest,
-                    c = r.declineFriendRequest,
-                    d = r.refreshFriendsList,
-                    f = r.setFriends,
-                    m = r.updateFilter,
-                    p = (0, e.useContext)(nt),
-                    v = p.paginatedFriends,
-                    h = p.friendRequestIdToUniverseSourceMap,
-                    y = [_e.UserProfileField.Names.CombinedName, _e.UserProfileField.Names.Username, _e.UserProfileField.IsVerified, _e.UserProfileField.IsDeleted],
-                    b = (0, e.useMemo)((function() {
-                        return v.map((function(e) {
+            function rF(e) {
+                var r = e.translate,
+                    t = e.currentTab,
+                    n = e.isMyProfile,
+                    i = e.tooltipMsg,
+                    o = e.title,
+                    s = e.acceptFriendRequest,
+                    u = e.declineFriendRequest,
+                    c = e.refreshFriendsList,
+                    d = e.setFriends,
+                    f = e.updateFilter,
+                    p = (0, l.useContext)(eZ),
+                    m = p.paginatedFriends,
+                    y = p.friendRequestIdToUniverseSourceMap,
+                    h = [eu.UserProfileField.Names.CombinedName, eu.UserProfileField.Names.Username, eu.UserProfileField.IsVerified, eu.UserProfileField.IsDeleted],
+                    v = (0, l.useMemo)(function() {
+                        return m.map(function(e) {
                             return e.id
-                        }))
-                    }), [v]),
-                    E = (0, _e.useUserProfiles)(b, y).data,
-                    g = function(t) {
-                        var r = qe(),
-                            n = (0, e.useMemo)((function() {
-                                return Ae(new Set(t)).sort((function(e, t) {
-                                    return e - t
-                                }))
-                            }), [t]),
-                            a = n.join(","),
-                            i = (0, l.useQuery)({
-                                queryKey: ["identity-badges/plusStatus", a],
-                                queryFn: function() {
-                                    return Ue(n)
-                                },
-                                enabled: r && n.length > 0,
-                                staleTime: 1 / 0
-                            }),
-                            o = i.data;
-                        return {
-                            data: null != o ? o : {},
-                            isLoading: i.isFetching
-                        }
-                    }(b),
-                    S = g.data,
-                    R = function(e) {
-                        return e((function(e) {
-                            f(v.filter((function(t) {
-                                return t.id !== e
-                            })))
-                        }))
+                        })
+                    }, [m]),
+                    b = (0, eu.useUserProfiles)(v, h).data,
+                    g = eR(v).data,
+                    S = function(e) {
+                        return e(function(e) {
+                            d(m.filter(function(r) {
+                                return r.id !== e
+                            }))
+                        })
                     },
-                    F = R(s),
-                    T = R(c);
-                return t().createElement("div", {
-                    className: "friends-content section"
-                }, t().createElement(Tt, {
-                    title: u,
-                    tooltipMsg: o,
-                    currentTab: a,
-                    isMyProfile: i,
-                    refreshFriendsList: d,
-                    updateFilter: m
-                }), v.length > 0 ? t().createElement(P.AvatarCardList, {
-                    data: v
-                }, (function(e, r) {
-                    var n, o, u, s, l, c, f, m, p;
-                    return t().createElement(jt, {
-                        key: r,
-                        currentTab: a,
-                        isMyProfile: i,
-                        refreshFriendsList: d,
-                        position: r,
-                        id: e.id,
-                        name: null == E || null === (n = E[e.id]) || void 0 === n ? void 0 : n.names.username,
-                        displayName: null == E || null === (o = E[e.id]) || void 0 === o ? void 0 : o.names.combinedName,
-                        verifiedBadgeData: {
-                            hasVerifiedBadge: null !== (u = null == E || null === (s = E[e.id]) || void 0 === s ? void 0 : s.isVerified) && void 0 !== u && u
-                        },
-                        isRobloxPlus: !0 === (null == S ? void 0 : S[e.id]),
-                        isDeleted: null !== (l = null == E || null === (c = E[e.id]) || void 0 === c ? void 0 : c.isDeleted) && void 0 !== l && l,
-                        friendRequestSentFromInGame: null !== (null == e || null === (f = e.friendRequest) || void 0 === f ? void 0 : f.sourceUniverseId),
-                        friendRequestSentFromQrCode: "QrCode" === (null == e || null === (m = e.friendRequest) || void 0 === m ? void 0 : m.originSourceType),
-                        friendRequestSentAt: null == e || null === (p = e.friendRequest) || void 0 === p ? void 0 : p.sentAt,
-                        sourceUniverse: (null == e ? void 0 : e.id) in h ? h[e.id] : null,
-                        mutualFriends: (null == e ? void 0 : e.mutualFriendsList) || [],
-                        presence: e.presence,
-                        unfollowFriend: e.unfollowFriend,
-                        unfriend: e.unfriend,
-                        followFriend: e.followFriend,
-                        acceptFriendRequestThenRemoveCard: F,
-                        declineFriendRequestThenRemoveCard: T
-                    })
-                })) : t().createElement("div", {
-                    className: "section-content-off"
-                }, " ", n(Bt)))
+                    E = S(s),
+                    T = S(u);
+                return (0, a.jsxs)("div", {
+                    className: "friends-content section",
+                    children: [(0, a.jsx)(rs, {
+                        title: o,
+                        tooltipMsg: i,
+                        currentTab: t,
+                        isMyProfile: n,
+                        refreshFriendsList: c,
+                        updateFilter: f
+                    }), m.length > 0 ? (0, a.jsx)(P.AvatarCardList, {
+                        data: m,
+                        children: function(e, r) {
+                            var i, o, s, u, l, d, f, p, m;
+                            return (0, a.jsx)(rT, {
+                                currentTab: t,
+                                isMyProfile: n,
+                                refreshFriendsList: c,
+                                position: r,
+                                id: e.id,
+                                name: null == b || null == (s = b[e.id]) ? void 0 : s.names.username,
+                                displayName: null == b || null == (u = b[e.id]) ? void 0 : u.names.combinedName,
+                                verifiedBadgeData: {
+                                    hasVerifiedBadge: null != (i = null == b || null == (l = b[e.id]) ? void 0 : l.isVerified) && i
+                                },
+                                isRobloxPlus: (null == g ? void 0 : g[e.id]) === !0,
+                                isDeleted: null != (o = null == b || null == (d = b[e.id]) ? void 0 : d.isDeleted) && o,
+                                friendRequestSentFromInGame: (null == e || null == (f = e.friendRequest) ? void 0 : f.sourceUniverseId) !== null,
+                                friendRequestSentFromQrCode: (null == e || null == (p = e.friendRequest) ? void 0 : p.originSourceType) === "QrCode",
+                                friendRequestSentAt: null == e || null == (m = e.friendRequest) ? void 0 : m.sentAt,
+                                sourceUniverse: (null == e ? void 0 : e.id) in y ? y[e.id] : null,
+                                mutualFriends: (null == e ? void 0 : e.mutualFriendsList) || [],
+                                presence: e.presence,
+                                unfollowFriend: e.unfollowFriend,
+                                unfriend: e.unfriend,
+                                followFriend: e.followFriend,
+                                acceptFriendRequestThenRemoveCard: E,
+                                declineFriendRequestThenRemoveCard: T
+                            }, r)
+                        }
+                    }) : (0, a.jsxs)("div", {
+                        className: "section-content-off",
+                        children: [" ", r(rR)]
+                    })]
+                })
             }
-            Gt.defaultProps = {}, Gt.propTypes = {
-                translate: D().func.isRequired,
-                currentTab: D().string.isRequired,
-                isMyProfile: D().bool.isRequired,
-                tooltipMsg: D().string.isRequired,
-                title: D().string.isRequired,
-                acceptFriendRequest: D().func.isRequired,
-                declineFriendRequest: D().func.isRequired,
-                refreshFriendsList: D().func.isRequired,
-                setFriends: D().func.isRequired,
-                updateFilter: D().func.isRequired
+            rF.defaultProps = {}, rF.propTypes = {
+                translate: j().func.isRequired,
+                currentTab: j().string.isRequired,
+                isMyProfile: j().bool.isRequired,
+                tooltipMsg: j().string.isRequired,
+                title: j().string.isRequired,
+                acceptFriendRequest: j().func.isRequired,
+                declineFriendRequest: j().func.isRequired,
+                refreshFriendsList: j().func.isRequired,
+                setFriends: j().func.isRequired,
+                updateFilter: j().func.isRequired
             };
-            var Qt, Ht = (0, c.withTranslations)(Fe(Gt), Te);
+            var rI = (0, h.withTranslations)(ea(rF), eo);
 
-            function zt(e, t, r) {
-                return t in e ? Object.defineProperty(e, t, {
-                    value: r,
+            function rw(e, r, t) {
+                return r in e ? Object.defineProperty(e, r, {
+                    value: t,
                     enumerable: !0,
                     configurable: !0,
                     writable: !0
-                }) : e[t] = r, e
+                }) : e[r] = t, e
             }
-            var Wt = _.FRIENDTABS,
-                Vt = {
+            var rC = _.FRIENDTABS,
+                rx = {
                     friendshipDestroyed: "FriendshipDestroyed",
                     friendshipCreated: "FriendshipCreated",
                     friendshipDeclined: "FriendshipDeclined",
                     friendshipRequested: "FriendshipRequested"
                 },
-                Yt = {
-                    FRIENDS_NOTIFICATIONS: Vt,
+                rN = {
+                    FRIENDS_NOTIFICATIONS: rx,
                     PRESENCE_NOTIFICATIONS: {
                         presenceChanged: "PresenceChanged"
                     },
                     FRIENDS_EVENT_TYPE: "FriendshipNotifications",
                     PRESENCE_EVENT_TYPE: "PresenceBulkNotifications",
-                    TAB_EVENTS_MAP: (Qt = {}, zt(Qt, Wt.FRIENDS, [Vt.friendshipDestroyed, Vt.friendshipCreated]), zt(Qt, Wt.FRIENDREQUESTS, [Vt.friendshipRequested, Vt.friendshipDeclined, Vt.friendshipCreated]), Qt)
+                    TAB_EVENTS_MAP: (rw(i = {}, rC.FRIENDS, [rx.friendshipDestroyed, rx.friendshipCreated]), rw(i, rC.FRIENDREQUESTS, [rx.friendshipRequested, rx.friendshipDeclined, rx.friendshipCreated]), i)
                 },
-                Jt = (b.EnvironmentUrls.accountSettingsApi, b.EnvironmentUrls.apiGatewayUrl),
-                Xt = function() {
-                    return {
-                        url: "".concat(Jt, "/user-blocking-api/v1/users/batch-check-reciprocal-block"),
-                        withCredentials: !0
-                    }
-                },
-                $t = function(e, t, r, n) {
-                    return new(r || (r = Promise))((function(a, i) {
-                        function o(e) {
-                            try {
-                                s(n.next(e))
-                            } catch (e) {
-                                i(e)
-                            }
-                        }
+                rA = (I.EnvironmentUrls.accountSettingsApi, I.EnvironmentUrls.apiGatewayUrl);
 
-                        function u(e) {
-                            try {
-                                s(n.throw(e))
-                            } catch (e) {
-                                i(e)
-                            }
+            function rO(e, r, t, n, i, a, o) {
+                try {
+                    var s = e[a](o),
+                        u = s.value
+                } catch (e) {
+                    t(e);
+                    return
+                }
+                s.done ? r(u) : Promise.resolve(u).then(n, i)
+            }
+
+            function rj(e) {
+                return function() {
+                    var r = this,
+                        t = arguments;
+                    return new Promise(function(n, i) {
+                        var a = e.apply(r, t);
+
+                        function o(e) {
+                            rO(a, n, i, o, s, "next", e)
                         }
 
                         function s(e) {
-                            var t;
-                            e.done ? a(e.value) : (t = e.value, t instanceof r ? t : new r((function(e) {
-                                e(t)
-                            }))).then(o, u)
+                            rO(a, n, i, o, s, "throw", e)
                         }
-                        s((n = n.apply(e, t || [])).next())
-                    }))
-                },
-                Kt = function(e, t) {
-                    var r, n, a, i, o = {
+                        o(void 0)
+                    })
+                }
+            }
+
+            function rP(e, r) {
+                var t, n, i, a = {
                         label: 0,
                         sent: function() {
-                            if (1 & a[0]) throw a[1];
-                            return a[1]
+                            if (1 & i[0]) throw i[1];
+                            return i[1]
                         },
                         trys: [],
                         ops: []
-                    };
-                    return i = {
-                        next: u(0),
-                        throw: u(1),
-                        return: u(2)
-                    }, "function" == typeof Symbol && (i[Symbol.iterator] = function() {
+                    },
+                    o = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
+                    s = Object.defineProperty;
+                return s(o, "next", {
+                    value: u(0)
+                }), s(o, "throw", {
+                    value: u(1)
+                }), s(o, "return", {
+                    value: u(2)
+                }), "function" == typeof Symbol && s(o, Symbol.iterator, {
+                    value: function() {
                         return this
-                    }), i;
-
-                    function u(i) {
-                        return function(u) {
-                            return function(i) {
-                                if (r) throw new TypeError("Generator is already executing.");
-                                for (; o;) try {
-                                    if (r = 1, n && (a = 2 & i[0] ? n.return : i[0] ? n.throw || ((a = n.return) && a.call(n), 0) : n.next) && !(a = a.call(n, i[1])).done) return a;
-                                    switch (n = 0, a && (i = [2 & i[0], a.value]), i[0]) {
-                                        case 0:
-                                        case 1:
-                                            a = i;
-                                            break;
-                                        case 4:
-                                            return o.label++, {
-                                                value: i[1],
-                                                done: !1
-                                            };
-                                        case 5:
-                                            o.label++, n = i[1], i = [0];
-                                            continue;
-                                        case 7:
-                                            i = o.ops.pop(), o.trys.pop();
-                                            continue;
-                                        default:
-                                            if (!(a = o.trys, (a = a.length > 0 && a[a.length - 1]) || 6 !== i[0] && 2 !== i[0])) {
-                                                o = 0;
-                                                continue
-                                            }
-                                            if (3 === i[0] && (!a || i[1] > a[0] && i[1] < a[3])) {
-                                                o.label = i[1];
-                                                break
-                                            }
-                                            if (6 === i[0] && o.label < a[1]) {
-                                                o.label = a[1], a = i;
-                                                break
-                                            }
-                                            if (a && o.label < a[2]) {
-                                                o.label = a[2], o.ops.push(i);
-                                                break
-                                            }
-                                            a[2] && o.ops.pop(), o.trys.pop();
-                                            continue
-                                    }
-                                    i = t.call(e, o)
-                                } catch (e) {
-                                    i = [6, e], n = 0
-                                } finally {
-                                    r = a = 0
-                                }
-                                if (5 & i[0]) throw i[1];
-                                return {
-                                    value: i[0] ? i[1] : void 0,
-                                    done: !0
-                                }
-                            }([i, u])
-                        }
                     }
-                },
-                Zt = function(e) {
-                    return $t(void 0, void 0, Promise, (function() {
-                        var t;
-                        return Kt(this, (function(r) {
-                            switch (r.label) {
+                }), o;
+
+                function u(s) {
+                    return function(u) {
+                        var l = [s, u];
+                        if (t) throw TypeError("Generator is already executing.");
+                        for (; o && (o = 0, l[0] && (a = 0)), a;) try {
+                            if (t = 1, n && (i = 2 & l[0] ? n.return : l[0] ? n.throw || ((i = n.return) && i.call(n), 0) : n.next) && !(i = i.call(n, l[1])).done) return i;
+                            switch (n = 0, i && (l = [2 & l[0], i.value]), l[0]) {
                                 case 0:
-                                    return t = parseInt(b.CurrentUser.userId, 10), Number.isNaN(t) || !t ? [2, {
-                                        users: [{
-                                            isBlocked: !1,
-                                            isBlockingViewer: !1,
-                                            userId: 0
-                                        }]
-                                    }] : [4, a.httpService.post(Xt(), {
-                                        userIds: e,
-                                        requesterUserId: t
-                                    })];
                                 case 1:
-                                    return [2, r.sent().data]
-                            }
-                        }))
-                    }))
-                };
-
-            function er(e, t, r, n, a, i, o) {
-                try {
-                    var u = e[i](o),
-                        s = u.value
-                } catch (e) {
-                    return void r(e)
-                }
-                u.done ? t(s) : Promise.resolve(s).then(n, a)
-            }
-
-            function tr(e) {
-                return function() {
-                    var t = this,
-                        r = arguments;
-                    return new Promise((function(n, a) {
-                        var i = e.apply(t, r);
-
-                        function o(e) {
-                            er(i, n, a, o, u, "next", e)
-                        }
-
-                        function u(e) {
-                            er(i, n, a, o, u, "throw", e)
-                        }
-                        o(void 0)
-                    }))
-                }
-            }
-            var rr = function() {
-                    var e = tr(regeneratorRuntime.mark((function e(t, r, n) {
-                        var i, o, u, s;
-                        return regeneratorRuntime.wrap((function(e) {
-                            for (;;) switch (e.prev = e.next) {
-                                case 0:
-                                    return i = r ? btoa(JSON.stringify(r)) : null, o = $(t, i, n), e.next = 4, a.httpService.get(o);
+                                    i = l;
+                                    break;
                                 case 4:
-                                    return u = e.sent, s = u.data, e.abrupt("return", s);
+                                    return a.label++, {
+                                        value: l[1],
+                                        done: !1
+                                    };
+                                case 5:
+                                    a.label++, n = l[1], l = [0];
+                                    continue;
                                 case 7:
-                                case "end":
-                                    return e.stop()
-                            }
-                        }), e)
-                    })));
-                    return function(t, r, n) {
-                        return e.apply(this, arguments)
-                    }
-                }(),
-                nr = function() {
-                    var e = tr(regeneratorRuntime.mark((function e(t, r, n, i) {
-                        var o, u, s, l;
-                        return regeneratorRuntime.wrap((function(e) {
-                            for (;;) switch (e.prev = e.next) {
-                                case 0:
-                                    return o = r ? btoa(JSON.stringify(r)) : null, u = K(t, o, n, i), e.next = 4, a.httpService.get(u);
-                                case 4:
-                                    return s = e.sent, l = s.data, e.abrupt("return", l);
-                                case 7:
-                                case "end":
-                                    return e.stop()
-                            }
-                        }), e)
-                    })));
-                    return function(t, r, n, a) {
-                        return e.apply(this, arguments)
-                    }
-                }();
-
-            function ar(e, t, r, n, a, i, o) {
-                try {
-                    var u = e[i](o),
-                        s = u.value
-                } catch (e) {
-                    return void r(e)
-                }
-                u.done ? t(s) : Promise.resolve(s).then(n, a)
-            }
-
-            function ir(e) {
-                return function() {
-                    var t = this,
-                        r = arguments;
-                    return new Promise((function(n, a) {
-                        var i = e.apply(t, r);
-
-                        function o(e) {
-                            ar(i, n, a, o, u, "next", e)
-                        }
-
-                        function u(e) {
-                            ar(i, n, a, o, u, "throw", e)
-                        }
-                        o(void 0)
-                    }))
-                }
-            }
-            var or = function() {
-                    var e = ir(regeneratorRuntime.mark((function e(t) {
-                        var r;
-                        return regeneratorRuntime.wrap((function(e) {
-                            for (;;) switch (e.prev = e.next) {
-                                case 0:
-                                    return e.prev = 0, e.next = 3, rr("MustHideConnections", [{
-                                        name: "vieweeUserId",
-                                        type: "UserId",
-                                        value: "".concat(t)
-                                    }]);
-                                case 3:
-                                    return r = e.sent, e.abrupt("return", "Granted" === (null == r ? void 0 : r.access));
-                                case 7:
-                                    e.prev = 7, e.t0 = e.catch(0), console.debug(e.t0);
-                                case 10:
-                                    return e.abrupt("return", !0);
-                                case 11:
-                                case "end":
-                                    return e.stop()
-                            }
-                        }), e, null, [
-                            [0, 7]
-                        ])
-                    })));
-                    return function(t) {
-                        return e.apply(this, arguments)
-                    }
-                }(),
-                ur = function() {
-                    var e = ir(regeneratorRuntime.mark((function e(t) {
-                        var r;
-                        return regeneratorRuntime.wrap((function(e) {
-                            for (;;) switch (e.prev = e.next) {
-                                case 0:
-                                    return e.prev = 0, e.next = 3, Zt([parseInt(t, 10)]);
-                                case 3:
-                                    if (!(null != (r = e.sent) && r.users && r.users.length > 0)) {
-                                        e.next = 6;
+                                    l = a.ops.pop(), a.trys.pop();
+                                    continue;
+                                default:
+                                    if (!(i = (i = a.trys).length > 0 && i[i.length - 1]) && (6 === l[0] || 2 === l[0])) {
+                                        a = 0;
+                                        continue
+                                    }
+                                    if (3 === l[0] && (!i || l[1] > i[0] && l[1] < i[3])) {
+                                        a.label = l[1];
                                         break
                                     }
-                                    return e.abrupt("return", r.users[0].isBlockingViewer);
-                                case 6:
-                                    e.next = 11;
-                                    break;
-                                case 8:
-                                    e.prev = 8, e.t0 = e.catch(0), console.debug(e.t0);
-                                case 11:
-                                    return e.abrupt("return", !0);
-                                case 12:
-                                case "end":
-                                    return e.stop()
+                                    if (6 === l[0] && a.label < i[1]) {
+                                        a.label = i[1], i = l;
+                                        break
+                                    }
+                                    if (i && a.label < i[2]) {
+                                        a.label = i[2], a.ops.push(l);
+                                        break
+                                    }
+                                    i[2] && a.ops.pop(), a.trys.pop();
+                                    continue
                             }
-                        }), e, null, [
-                            [0, 8]
-                        ])
-                    })));
-                    return function(t) {
-                        return e.apply(this, arguments)
+                            l = r.call(e, a)
+                        } catch (e) {
+                            l = [6, e], n = 0
+                        } finally {
+                            t = i = 0
+                        }
+                        if (5 & l[0]) throw l[1];
+                        return {
+                            value: l[0] ? l[1] : void 0,
+                            done: !0
+                        }
                     }
-                }();
-
-            function sr(e, t, r, n, a, i, o) {
-                try {
-                    var u = e[i](o),
-                        s = u.value
-                } catch (e) {
-                    return void r(e)
                 }
-                u.done ? t(s) : Promise.resolve(s).then(n, a)
             }
 
-            function lr(e) {
+            function rD(e, r, t, n, i, a, o) {
+                try {
+                    var s = e[a](o),
+                        u = s.value
+                } catch (e) {
+                    t(e);
+                    return
+                }
+                s.done ? r(u) : Promise.resolve(u).then(n, i)
+            }
+
+            function rL(e) {
                 return function() {
-                    var t = this,
-                        r = arguments;
-                    return new Promise((function(n, a) {
-                        var i = e.apply(t, r);
+                    var r = this,
+                        t = arguments;
+                    return new Promise(function(n, i) {
+                        var a = e.apply(r, t);
 
                         function o(e) {
-                            sr(i, n, a, o, u, "next", e)
+                            rD(a, n, i, o, s, "next", e)
                         }
 
-                        function u(e) {
-                            sr(i, n, a, o, u, "throw", e)
+                        function s(e) {
+                            rD(a, n, i, o, s, "throw", e)
                         }
                         o(void 0)
-                    }))
+                    })
                 }
             }
 
-            function cr(e, t) {
-                var r = Object.keys(e);
-                if (Object.getOwnPropertySymbols) {
-                    var n = Object.getOwnPropertySymbols(e);
-                    t && (n = n.filter((function(t) {
-                        return Object.getOwnPropertyDescriptor(e, t).enumerable
-                    }))), r.push.apply(r, n)
+            function rU(e, r) {
+                var t, n, i, a = {
+                        label: 0,
+                        sent: function() {
+                            if (1 & i[0]) throw i[1];
+                            return i[1]
+                        },
+                        trys: [],
+                        ops: []
+                    },
+                    o = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
+                    s = Object.defineProperty;
+                return s(o, "next", {
+                    value: u(0)
+                }), s(o, "throw", {
+                    value: u(1)
+                }), s(o, "return", {
+                    value: u(2)
+                }), "function" == typeof Symbol && s(o, Symbol.iterator, {
+                    value: function() {
+                        return this
+                    }
+                }), o;
+
+                function u(s) {
+                    return function(u) {
+                        var l = [s, u];
+                        if (t) throw TypeError("Generator is already executing.");
+                        for (; o && (o = 0, l[0] && (a = 0)), a;) try {
+                            if (t = 1, n && (i = 2 & l[0] ? n.return : l[0] ? n.throw || ((i = n.return) && i.call(n), 0) : n.next) && !(i = i.call(n, l[1])).done) return i;
+                            switch (n = 0, i && (l = [2 & l[0], i.value]), l[0]) {
+                                case 0:
+                                case 1:
+                                    i = l;
+                                    break;
+                                case 4:
+                                    return a.label++, {
+                                        value: l[1],
+                                        done: !1
+                                    };
+                                case 5:
+                                    a.label++, n = l[1], l = [0];
+                                    continue;
+                                case 7:
+                                    l = a.ops.pop(), a.trys.pop();
+                                    continue;
+                                default:
+                                    if (!(i = (i = a.trys).length > 0 && i[i.length - 1]) && (6 === l[0] || 2 === l[0])) {
+                                        a = 0;
+                                        continue
+                                    }
+                                    if (3 === l[0] && (!i || l[1] > i[0] && l[1] < i[3])) {
+                                        a.label = l[1];
+                                        break
+                                    }
+                                    if (6 === l[0] && a.label < i[1]) {
+                                        a.label = i[1], i = l;
+                                        break
+                                    }
+                                    if (i && a.label < i[2]) {
+                                        a.label = i[2], a.ops.push(l);
+                                        break
+                                    }
+                                    i[2] && a.ops.pop(), a.trys.pop();
+                                    continue
+                            }
+                            l = r.call(e, a)
+                        } catch (e) {
+                            l = [6, e], n = 0
+                        } finally {
+                            t = i = 0
+                        }
+                        if (5 & l[0]) throw l[1];
+                        return {
+                            value: l[0] ? l[1] : void 0,
+                            done: !0
+                        }
+                    }
                 }
-                return r
             }
 
-            function dr(e) {
-                for (var t = 1; t < arguments.length; t++) {
-                    var r = null != arguments[t] ? arguments[t] : {};
-                    t % 2 ? cr(Object(r), !0).forEach((function(t) {
-                        fr(e, t, r[t])
-                    })) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(r)) : cr(Object(r)).forEach((function(t) {
-                        Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(r, t))
-                    }))
+            function r_(e, r, t, n, i, a, o) {
+                try {
+                    var s = e[a](o),
+                        u = s.value
+                } catch (e) {
+                    t(e);
+                    return
+                }
+                s.done ? r(u) : Promise.resolve(u).then(n, i)
+            }
+
+            function rq(e) {
+                return function() {
+                    var r = this,
+                        t = arguments;
+                    return new Promise(function(n, i) {
+                        var a = e.apply(r, t);
+
+                        function o(e) {
+                            r_(a, n, i, o, s, "next", e)
+                        }
+
+                        function s(e) {
+                            r_(a, n, i, o, s, "throw", e)
+                        }
+                        o(void 0)
+                    })
+                }
+            }
+
+            function rM(e, r) {
+                var t, n, i, a = {
+                        label: 0,
+                        sent: function() {
+                            if (1 & i[0]) throw i[1];
+                            return i[1]
+                        },
+                        trys: [],
+                        ops: []
+                    },
+                    o = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
+                    s = Object.defineProperty;
+                return s(o, "next", {
+                    value: u(0)
+                }), s(o, "throw", {
+                    value: u(1)
+                }), s(o, "return", {
+                    value: u(2)
+                }), "function" == typeof Symbol && s(o, Symbol.iterator, {
+                    value: function() {
+                        return this
+                    }
+                }), o;
+
+                function u(s) {
+                    return function(u) {
+                        var l = [s, u];
+                        if (t) throw TypeError("Generator is already executing.");
+                        for (; o && (o = 0, l[0] && (a = 0)), a;) try {
+                            if (t = 1, n && (i = 2 & l[0] ? n.return : l[0] ? n.throw || ((i = n.return) && i.call(n), 0) : n.next) && !(i = i.call(n, l[1])).done) return i;
+                            switch (n = 0, i && (l = [2 & l[0], i.value]), l[0]) {
+                                case 0:
+                                case 1:
+                                    i = l;
+                                    break;
+                                case 4:
+                                    return a.label++, {
+                                        value: l[1],
+                                        done: !1
+                                    };
+                                case 5:
+                                    a.label++, n = l[1], l = [0];
+                                    continue;
+                                case 7:
+                                    l = a.ops.pop(), a.trys.pop();
+                                    continue;
+                                default:
+                                    if (!(i = (i = a.trys).length > 0 && i[i.length - 1]) && (6 === l[0] || 2 === l[0])) {
+                                        a = 0;
+                                        continue
+                                    }
+                                    if (3 === l[0] && (!i || l[1] > i[0] && l[1] < i[3])) {
+                                        a.label = l[1];
+                                        break
+                                    }
+                                    if (6 === l[0] && a.label < i[1]) {
+                                        a.label = i[1], i = l;
+                                        break
+                                    }
+                                    if (i && a.label < i[2]) {
+                                        a.label = i[2], a.ops.push(l);
+                                        break
+                                    }
+                                    i[2] && a.ops.pop(), a.trys.pop();
+                                    continue
+                            }
+                            l = r.call(e, a)
+                        } catch (e) {
+                            l = [6, e], n = 0
+                        } finally {
+                            t = i = 0
+                        }
+                        if (5 & l[0]) throw l[1];
+                        return {
+                            value: l[0] ? l[1] : void 0,
+                            done: !0
+                        }
+                    }
+                }
+            }
+
+            function rk(e, r, t, n, i, a, o) {
+                try {
+                    var s = e[a](o),
+                        u = s.value
+                } catch (e) {
+                    t(e);
+                    return
+                }
+                s.done ? r(u) : Promise.resolve(u).then(n, i)
+            }
+
+            function rB(e) {
+                return function() {
+                    var r = this,
+                        t = arguments;
+                    return new Promise(function(n, i) {
+                        var a = e.apply(r, t);
+
+                        function o(e) {
+                            rk(a, n, i, o, s, "next", e)
+                        }
+
+                        function s(e) {
+                            rk(a, n, i, o, s, "throw", e)
+                        }
+                        o(void 0)
+                    })
+                }
+            }
+
+            function rG(e) {
+                for (var r = 1; r < arguments.length; r++) {
+                    var t = null != arguments[r] ? arguments[r] : {},
+                        n = Object.keys(t);
+                    "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(t).filter(function(e) {
+                        return Object.getOwnPropertyDescriptor(t, e).enumerable
+                    }))), n.forEach(function(r) {
+                        var n;
+                        n = t[r], r in e ? Object.defineProperty(e, r, {
+                            value: n,
+                            enumerable: !0,
+                            configurable: !0,
+                            writable: !0
+                        }) : e[r] = n
+                    })
                 }
                 return e
             }
 
-            function fr(e, t, r) {
-                return t in e ? Object.defineProperty(e, t, {
-                    value: r,
-                    enumerable: !0,
-                    configurable: !0,
-                    writable: !0
-                }) : e[t] = r, e
-            }
-            var mr = q.dataStores.userDataStore,
-                pr = _.MAX_PER_PAGE,
-                vr = _.FRIENDTABS,
-                hr = _.SORT_ORDER,
-                yr = _.CACHE_CRITERIA,
-                br = Yt.TAB_EVENTS_MAP,
-                Er = Yt.FRIENDS_EVENT_TYPE,
-                gr = !b.CurrentUser.isAuthenticated,
-                Sr = function() {
-                    var e = lr(regeneratorRuntime.mark((function e(t, r) {
-                        return regeneratorRuntime.wrap((function(e) {
-                            for (;;) switch (e.prev = e.next) {
-                                case 0:
-                                    if (!r) {
-                                        e.next = 2;
-                                        break
-                                    }
-                                    return e.abrupt("return", !1);
-                                case 2:
-                                    return e.next = 4, ur(t);
-                                case 4:
-                                    if (!e.sent) {
-                                        e.next = 6;
-                                        break
-                                    }
-                                    return e.abrupt("return", !0);
-                                case 6:
-                                    return e.abrupt("return", or(t));
-                                case 7:
-                                case "end":
-                                    return e.stop()
-                            }
-                        }), e)
-                    })));
-                    return function(t, r) {
-                        return e.apply(this, arguments)
+            function rz(e, r) {
+                return r = null != r ? r : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(r)) : (function(e) {
+                    var r = Object.keys(e);
+                    if (Object.getOwnPropertySymbols) {
+                        var t = Object.getOwnPropertySymbols(e);
+                        r.push.apply(r, t)
                     }
-                }(),
-                Rr = function(e) {
-                    var t = e.currentTab,
-                        r = e.profileUserId,
+                    return r
+                })(Object(r)).forEach(function(t) {
+                    Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(r, t))
+                }), e
+            }
+
+            function rQ(e, r) {
+                var t, n, i, a = {
+                        label: 0,
+                        sent: function() {
+                            if (1 & i[0]) throw i[1];
+                            return i[1]
+                        },
+                        trys: [],
+                        ops: []
+                    },
+                    o = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
+                    s = Object.defineProperty;
+                return s(o, "next", {
+                    value: u(0)
+                }), s(o, "throw", {
+                    value: u(1)
+                }), s(o, "return", {
+                    value: u(2)
+                }), "function" == typeof Symbol && s(o, Symbol.iterator, {
+                    value: function() {
+                        return this
+                    }
+                }), o;
+
+                function u(s) {
+                    return function(u) {
+                        var l = [s, u];
+                        if (t) throw TypeError("Generator is already executing.");
+                        for (; o && (o = 0, l[0] && (a = 0)), a;) try {
+                            if (t = 1, n && (i = 2 & l[0] ? n.return : l[0] ? n.throw || ((i = n.return) && i.call(n), 0) : n.next) && !(i = i.call(n, l[1])).done) return i;
+                            switch (n = 0, i && (l = [2 & l[0], i.value]), l[0]) {
+                                case 0:
+                                case 1:
+                                    i = l;
+                                    break;
+                                case 4:
+                                    return a.label++, {
+                                        value: l[1],
+                                        done: !1
+                                    };
+                                case 5:
+                                    a.label++, n = l[1], l = [0];
+                                    continue;
+                                case 7:
+                                    l = a.ops.pop(), a.trys.pop();
+                                    continue;
+                                default:
+                                    if (!(i = (i = a.trys).length > 0 && i[i.length - 1]) && (6 === l[0] || 2 === l[0])) {
+                                        a = 0;
+                                        continue
+                                    }
+                                    if (3 === l[0] && (!i || l[1] > i[0] && l[1] < i[3])) {
+                                        a.label = l[1];
+                                        break
+                                    }
+                                    if (6 === l[0] && a.label < i[1]) {
+                                        a.label = i[1], i = l;
+                                        break
+                                    }
+                                    if (i && a.label < i[2]) {
+                                        a.label = i[2], a.ops.push(l);
+                                        break
+                                    }
+                                    i[2] && a.ops.pop(), a.trys.pop();
+                                    continue
+                            }
+                            l = r.call(e, a)
+                        } catch (e) {
+                            l = [6, e], n = 0
+                        } finally {
+                            t = i = 0
+                        }
+                        if (5 & l[0]) throw l[1];
+                        return {
+                            value: l[0] ? l[1] : void 0,
+                            done: !0
+                        }
+                    }
+                }
+            }
+            var rH = U.dataStores.userDataStore,
+                rW = _.MAX_PER_PAGE,
+                rV = _.FRIENDTABS,
+                rY = _.SORT_ORDER,
+                rJ = _.CACHE_CRITERIA,
+                rX = rN.TAB_EVENTS_MAP,
+                r$ = rN.FRIENDS_EVENT_TYPE,
+                rK = !I.CurrentUser.isAuthenticated,
+                rZ = function() {
+                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : rJ;
+                    return rz(rG({}, e), {
+                        CACHE_CRITERIA: rJ
+                    })
+                };
+
+            function r0(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
+                return n
+            }
+
+            function r1(e, r) {
+                return function(e) {
+                    if (Array.isArray(e)) return e
+                }(e) || function(e, r) {
+                    var t, n, i = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                    if (null != i) {
+                        var a = [],
+                            o = !0,
+                            s = !1;
+                        try {
+                            for (i = i.call(e); !(o = (t = i.next()).done) && (a.push(t.value), !r || a.length !== r); o = !0);
+                        } catch (e) {
+                            s = !0, n = e
+                        } finally {
+                            try {
+                                o || null == i.return || i.return()
+                            } finally {
+                                if (s) throw n
+                            }
+                        }
+                        return a
+                    }
+                }(e, r) || function(e, r) {
+                    if (e) {
+                        if ("string" == typeof e) return r0(e, r);
+                        var t = Object.prototype.toString.call(e).slice(8, -1);
+                        if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return r0(e, r)
+                    }
+                }(e, r) || function() {
+                    throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                }()
+            }
+            var r2 = function(e) {
+                    var r = e.currentTab,
+                        t = e.profileUserId,
                         n = e.currentCursor,
-                        a = e.useCache,
-                        i = e.refreshCache,
-                        o = void 0 !== i && i,
-                        u = e.fetchMutualFriends,
-                        s = void 0 !== u && u,
-                        l = e.isMyProfile,
-                        c = void 0 !== l && l,
-                        d = e.friendsNameFilter,
-                        f = void 0 === d ? null : d,
-                        m = e.queryChanged,
-                        p = void 0 !== m && m,
-                        v = e.isTrustedFilterEnabled,
-                        h = void 0 === v ? null : v,
-                        y = new Promise((function() {
+                        i = e.useCache,
+                        a = e.refreshCache,
+                        o = e.fetchMutualFriends,
+                        s = e.isMyProfile,
+                        u = void 0 !== s && s,
+                        l = e.friendsNameFilter,
+                        c = void 0 === l ? null : l,
+                        d = e.queryChanged,
+                        f = void 0 !== d && d,
+                        p = e.isTrustedFilterEnabled,
+                        m = void 0 === p ? null : p,
+                        y = new Promise(function() {
                             return {
                                 friendsData: []
                             }
-                        })),
-                        b = function(e) {
-                            var t = e.userData,
-                                r = e.prevCursor,
+                        }),
+                        h = function(e) {
+                            var r = e.userData,
+                                t = e.prevCursor,
                                 n = e.nextCursor,
-                                a = [];
-                            if (t && t.length > 0)
-                                for (var i = 0; i < t.length; i++) {
-                                    var o, u, s = null === (o = t[i]) || void 0 === o || null === (u = o.presence) || void 0 === u ? void 0 : u.universeId;
-                                    s && a.push(s)
+                                i = [];
+                            if (r && r.length > 0)
+                                for (var a = 0; a < r.length; a++) {
+                                    var o, s, u = null == (s = r[a]) || null == (o = s.presence) ? void 0 : o.universeId;
+                                    u && i.push(u)
                                 }
-                            return a.length > 0 ? Ee.getGamePlayabilities(a).then((function(e) {
-                                var a = e.data,
-                                    i = {};
-                                if (a && a.length)
-                                    for (var o = 0; o < a.length; o++) {
-                                        var u = a[o];
-                                        i[u.universeId] = u.isPlayable
+                            return i.length > 0 ? er.getGamePlayabilities(i).then(function(e) {
+                                var i = e.data,
+                                    a = {};
+                                if (i && i.length)
+                                    for (var o = 0; o < i.length; o++) {
+                                        var s = i[o];
+                                        a[s.universeId] = s.isPlayable
                                     }
-                                return t.forEach((function(e) {
-                                    e.presence && (e.presence.isPlayable = i[e.presence.universeId])
-                                })), {
-                                    friendsData: t,
-                                    prev: r,
+                                return r.forEach(function(e) {
+                                    e.presence && (e.presence.isPlayable = a[e.presence.universeId])
+                                }), {
+                                    friendsData: r,
+                                    prev: t,
                                     next: n
                                 }
-                            })).catch((function() {
+                            }).catch(function() {
                                 return {
-                                    friendsData: t,
-                                    prev: r,
+                                    friendsData: r,
+                                    prev: t,
                                     next: n
                                 }
-                            })) : {
-                                friendsData: t,
-                                prev: r,
+                            }) : {
+                                friendsData: r,
+                                prev: t,
                                 next: n
                             }
                         },
-                        E = function() {
-                            var e = lr(regeneratorRuntime.mark((function e(t) {
-                                var r, n, a, i, o, u;
-                                return regeneratorRuntime.wrap((function(e) {
-                                    for (;;) switch (e.prev = e.next) {
+                        v = function(e) {
+                            var r = e.userData,
+                                t = e.prevCursor,
+                                n = e.nextCursor;
+                            return rB(function() {
+                                var e;
+                                return rQ(this, function(i) {
+                                    switch (i.label) {
                                         case 0:
-                                            return r = t.userData, n = t.prevCursor, a = t.nextCursor, e.prev = 1, e.next = 4, Nt().getPresenceProvider().getPresences(r.map((function(e) {
+                                            return i.trys.push([0, 2, , 3]), [4, rc().getPresenceProvider().getPresences(r.map(function(e) {
                                                 return e.id
-                                            })));
-                                        case 4:
-                                            return i = e.sent, o = new Map(i.map((function(e) {
+                                            }))];
+                                        case 1:
+                                            return e = new Map(i.sent().map(function(e) {
                                                 return [e.userId, e]
-                                            }))), u = r.map((function(e) {
-                                                var t;
-                                                return dr(dr({}, e), {}, {
-                                                    presence: null !== (t = o.get(e.id)) && void 0 !== t ? t : {}
-                                                })
-                                            })), e.abrupt("return", {
-                                                userData: u,
-                                                prevCursor: n,
-                                                nextCursor: a
-                                            });
-                                        case 10:
-                                            return e.prev = 10, e.t0 = e.catch(1), e.abrupt("return", {
+                                            })), [2, {
+                                                userData: r.map(function(r) {
+                                                    var t;
+                                                    return rz(rG({}, r), {
+                                                        presence: null != (t = e.get(r.id)) ? t : {}
+                                                    })
+                                                }),
+                                                prevCursor: t,
+                                                nextCursor: n
+                                            }];
+                                        case 2:
+                                            return i.sent(), [2, {
                                                 userData: r,
-                                                prevCursor: n,
-                                                nextCursor: a
-                                            });
-                                        case 13:
-                                        case "end":
-                                            return e.stop()
-                                    }
-                                }), e, null, [
-                                    [1, 10]
-                                ])
-                            })));
-                            return function(t) {
-                                return e.apply(this, arguments)
-                            }
-                        }(),
-                        g = function() {
-                            var e = lr(regeneratorRuntime.mark((function e(t) {
-                                var n, a, i;
-                                return regeneratorRuntime.wrap((function(e) {
-                                    for (;;) switch (e.prev = e.next) {
-                                        case 0:
-                                            return n = t.userData, a = t.prevCursor, i = t.nextCursor, e.next = 3, Sr(r, c);
+                                                prevCursor: t,
+                                                nextCursor: n
+                                            }];
                                         case 3:
-                                            if (!e.sent) {
-                                                e.next = 5;
-                                                break
-                                            }
-                                            return e.abrupt("return", {
+                                            return [2]
+                                    }
+                                })
+                            })()
+                        },
+                        b = function(e) {
+                            var r = e.userData,
+                                n = e.prevCursor,
+                                i = e.nextCursor;
+                            return rB(function() {
+                                return rQ(this, function(e) {
+                                    switch (e.label) {
+                                        case 0:
+                                            return [4, rB(function() {
+                                                return rQ(this, function(e) {
+                                                    switch (e.label) {
+                                                        case 0:
+                                                            if (u) return [2, !1];
+                                                            return [4, rq(function() {
+                                                                var e;
+                                                                return rM(this, function(r) {
+                                                                    switch (r.label) {
+                                                                        case 0:
+                                                                            var n;
+                                                                            return r.trys.push([0, 2, , 3]), [4, (n = [parseInt(t, 10)], rj(function() {
+                                                                                var e;
+                                                                                return rP(this, function(r) {
+                                                                                    switch (r.label) {
+                                                                                        case 0:
+                                                                                            if (Number.isNaN(e = parseInt(I.CurrentUser.userId, 10)) || !e) return [2, {
+                                                                                                users: [{
+                                                                                                    isBlocked: !1,
+                                                                                                    isBlockingViewer: !1,
+                                                                                                    userId: 0
+                                                                                                }]
+                                                                                            }];
+                                                                                            return [4, H.httpService.post({
+                                                                                                url: "".concat(rA, "/user-blocking-api/v1/users/batch-check-reciprocal-block"),
+                                                                                                withCredentials: !0
+                                                                                            }, {
+                                                                                                userIds: n,
+                                                                                                requesterUserId: e
+                                                                                            })];
+                                                                                        case 1:
+                                                                                            return [2, r.sent().data]
+                                                                                    }
+                                                                                })
+                                                                            })())];
+                                                                        case 1:
+                                                                            if ((null == (e = r.sent()) ? void 0 : e.users) && e.users.length > 0) return [2, e.users[0].isBlockingViewer];
+                                                                            return [3, 3];
+                                                                        case 2:
+                                                                            return console.debug(r.sent()), [3, 3];
+                                                                        case 3:
+                                                                            return [2, !0]
+                                                                    }
+                                                                })
+                                                            })()];
+                                                        case 1:
+                                                            if (e.sent()) return [2, !0];
+                                                            return [2, rq(function() {
+                                                                var e;
+                                                                return rM(this, function(r) {
+                                                                    switch (r.label) {
+                                                                        case 0:
+                                                                            var n;
+                                                                            return r.trys.push([0, 2, , 3]), [4, (n = [{
+                                                                                name: "vieweeUserId",
+                                                                                type: "UserId",
+                                                                                value: "".concat(t)
+                                                                            }], rL(function() {
+                                                                                var e;
+                                                                                return rU(this, function(r) {
+                                                                                    switch (r.label) {
+                                                                                        case 0:
+                                                                                            return e = X("MustHideConnections", n ? btoa(JSON.stringify(n)) : null, void 0), [4, H.httpService.get(e)];
+                                                                                        case 1:
+                                                                                            return [2, r.sent().data]
+                                                                                    }
+                                                                                })
+                                                                            })())];
+                                                                        case 1:
+                                                                            return [2, (null == (e = r.sent()) ? void 0 : e.access) === "Granted"];
+                                                                        case 2:
+                                                                            return console.debug(r.sent()), [3, 3];
+                                                                        case 3:
+                                                                            return [2, !0]
+                                                                    }
+                                                                })
+                                                            })()]
+                                                    }
+                                                })
+                                            })()];
+                                        case 1:
+                                            if (e.sent()) return [2, {
                                                 userData: [],
                                                 prevCursor: null,
                                                 nextCursor: null
-                                            });
-                                        case 5:
-                                            return e.abrupt("return", {
-                                                userData: n,
-                                                prevCursor: a,
+                                            }];
+                                            return [2, {
+                                                userData: r,
+                                                prevCursor: n,
                                                 nextCursor: i
-                                            });
-                                        case 6:
-                                        case "end":
-                                            return e.stop()
+                                            }]
                                     }
-                                }), e)
-                            })));
-                            return function(t) {
-                                return e.apply(this, arguments)
-                            }
-                        }(),
-                        S = function() {
-                            return dr(dr({}, arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : yr), {}, {
-                                CACHE_CRITERIA: yr
-                            })
-                        }({
-                            useCache: a,
-                            refreshCache: o
+                                })
+                            })()
+                        },
+                        g = rZ({
+                            useCache: i,
+                            refreshCache: void 0 !== a && a
                         });
-                    switch (t) {
-                        case vr.FRIENDS:
-                            if (null == f || "" === f) y = (null === h || !1 === h ? Ee.getPaginatedFriends : Ee.getPaginatedTrustedConnections)(r, 0 === n || p ? "" : n, c, p).then((function(e) {
+                    switch (r) {
+                        case rV.FRIENDS:
+                            y = null == c || "" === c ? (null === m || !1 === m ? er.getPaginatedFriends : er.getPaginatedTrustedConnections)(t, 0 === n || f ? "" : n, u, f).then(function(e) {
                                 return {
                                     userData: e.data.PageItems,
                                     prevCursor: e.data.PreviousCursor,
                                     nextCursor: e.data.NextCursor
                                 }
-                            })).then(g).then(E).then(b);
-                            else y = Ee.getSearchedFriends(r, 0 === n || p ? "" : n, f, p).then((function(e) {
+                            }).then(b).then(v).then(h) : er.getSearchedFriends(t, 0 === n || f ? "" : n, c, f).then(function(e) {
                                 return {
                                     userData: e.data.PageItems,
                                     prevCursor: e.data.PreviousCursor,
                                     nextCursor: e.data.NextCursor
                                 }
-                            })).then(g).then(E).then(b);
+                            }).then(b).then(v).then(h);
                             break;
-                        case vr.FOLLOWERS:
-                            y = mr.getFollowers({
-                                userId: r,
+                        case rV.FOLLOWERS:
+                            y = rH.getFollowers({
+                                userId: t,
                                 cursor: n,
-                                sortOrder: hr.desc,
-                                limit: pr,
-                                isGuest: gr
-                            }, S).then(g).then(b);
+                                sortOrder: rY.desc,
+                                limit: rW,
+                                isGuest: rK
+                            }, g).then(b).then(h);
                             break;
-                        case vr.FOLLOWING:
-                            y = mr.getFollowings({
-                                userId: r,
+                        case rV.FOLLOWING:
+                            y = rH.getFollowings({
+                                userId: t,
                                 cursor: n,
-                                sortOrder: hr.desc,
-                                limit: pr,
-                                isGuest: gr
-                            }, S).then(g).then(b);
+                                sortOrder: rY.desc,
+                                limit: rW,
+                                isGuest: rK
+                            }, g).then(b).then(h);
                             break;
-                        case vr.FRIENDREQUESTS:
-                            (0 === n || p) && Ee.clearNewFriendRequests(), y = mr.getFriendsRequests({
-                                userId: r,
+                        case rV.FRIENDREQUESTS:
+                            (0 === n || f) && er.clearNewFriendRequests(), y = rH.getFriendsRequests({
+                                userId: t,
                                 cursor: n,
-                                limit: pr,
-                                fetchMutualFriends: s,
-                                isGuest: gr
-                            }, S).then(b);
-                            break;
-                        default:
-                            return y.catch(console.debug)
+                                limit: rW,
+                                fetchMutualFriends: void 0 !== o && o,
+                                isGuest: rK
+                            }, g).then(h)
                     }
                     return y.catch(console.debug)
-                };
-
-            function Fr(e, t) {
-                return function(e) {
-                    if (Array.isArray(e)) return e
-                }(e) || function(e, t) {
-                    if ("undefined" == typeof Symbol || !(Symbol.iterator in Object(e))) return;
-                    var r = [],
-                        n = !0,
-                        a = !1,
-                        i = void 0;
-                    try {
-                        for (var o, u = e[Symbol.iterator](); !(n = (o = u.next()).done) && (r.push(o.value), !t || r.length !== t); n = !0);
-                    } catch (e) {
-                        a = !0, i = e
-                    } finally {
-                        try {
-                            n || null == u.return || u.return()
-                        } finally {
-                            if (a) throw i
-                        }
-                    }
-                    return r
-                }(e, t) || function(e, t) {
-                    if (!e) return;
-                    if ("string" == typeof e) return Tr(e, t);
-                    var r = Object.prototype.toString.call(e).slice(8, -1);
-                    "Object" === r && e.constructor && (r = e.constructor.name);
-                    if ("Map" === r || "Set" === r) return Array.from(e);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Tr(e, t)
-                }(e, t) || function() {
-                    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }()
-            }
-
-            function Tr(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var r = 0, n = new Array(t); r < t; r++) n[r] = e[r];
-                return n
-            }
-            var Ir = Rr,
-                Cr = function(e, t) {
-                    if (gr) return function() {};
-                    var r = function(r) {
-                            r && r.Type && br[e].includes(r.Type) && t(r.Type)
+                },
+                r3 = function(e, r) {
+                    if (rK) return function() {};
+                    var t = function(t) {
+                            t && t.Type && rX[e].includes(t.Type) && r(t.Type)
                         },
-                        n = b.RealTime.Factory.GetClient();
-                    return n.Subscribe(Er, r),
+                        n = I.RealTime.Factory.GetClient();
+                    return n.Subscribe(r$, t),
                         function() {
-                            n.Unsubscribe(Er, r)
+                            n.Unsubscribe(r$, t)
                         }
                 },
-                Nr = _.START_PAGE,
-                wr = _.MAX_PER_PAGE,
-                Ar = _.FRIENDTABS,
-                Or = _.SORT_OPTIONS,
-                Dr = _.EVENTS,
-                Pr = _.FRIENDS_REQUEST_LIST_CONTEXT,
-                xr = _.DEVICE_TYPES,
-                Lr = _.FRIEND_FILTER_OPTIONS;
+                r6 = _.START_PAGE,
+                r8 = _.MAX_PER_PAGE,
+                r4 = _.FRIENDTABS,
+                r5 = _.SORT_OPTIONS,
+                r7 = _.EVENTS,
+                r9 = _.FRIENDS_REQUEST_LIST_CONTEXT,
+                te = _.DEVICE_TYPES,
+                tr = _.FRIEND_FILTER_OPTIONS;
 
-            function qr(r) {
-                var n = r.currentTab,
-                    a = r.metadata,
-                    i = a.profileUserId,
-                    o = a.isMyProfile,
-                    u = a.onlyShowContents,
-                    s = r.friends,
-                    l = r.setFriends,
-                    c = r.loadMoreFriends,
-                    d = r.tooltipMsg,
-                    f = r.title,
-                    m = r.enableTabLoader,
-                    p = r.disableTabLoader,
-                    v = (r.tabLoader, Fr((0, e.useState)(Nr), 2)),
-                    h = v[0],
-                    y = v[1],
-                    E = Fr((0, e.useState)(0), 2),
-                    g = E[0],
-                    S = E[1],
-                    R = Fr((0, e.useState)(null), 2),
-                    F = R[0],
-                    T = R[1],
-                    I = (0, e.useContext)(nt),
-                    C = I.friendsCount,
-                    N = I.setFriendsCount,
-                    w = I.friendsNameFilter,
-                    A = I.setFriendsNameFilter,
-                    O = I.friendsStatusFilter,
-                    D = I.setFriendsStatusFilter,
-                    x = I.friendsSort,
-                    L = I.paginatedFriends,
-                    q = I.setPaginatedFriends,
-                    U = I.setFriendRequestIdToUniverseSourceMap,
-                    _ = I.isTrustedFilterEnabled,
-                    M = I.setIsTrustedFilterEnabled,
-                    k = Ie.deviceMeta.getDeviceMeta(),
-                    j = (null == k ? void 0 : k.isDesktop) && (null == k ? void 0 : k.deviceType) === xr.computer,
-                    B = "%2c";
-                (0, e.useEffect)((function() {
-                    if (n === Ar.FRIENDREQUESTS && 0 !== L.length) {
-                        var e = L.filter((function(e) {
+            function tt(e) {
+                var r = e.currentTab,
+                    t = e.metadata,
+                    n = t.profileUserId,
+                    i = t.isMyProfile,
+                    o = t.onlyShowContents,
+                    s = e.friends,
+                    u = e.setFriends,
+                    d = e.loadMoreFriends,
+                    f = e.tooltipMsg,
+                    p = e.title,
+                    m = e.enableTabLoader,
+                    y = e.disableTabLoader;
+                e.tabLoader;
+                var h = r1((0, l.useState)(r6), 2),
+                    v = h[0],
+                    b = h[1],
+                    g = r1((0, l.useState)(0), 2),
+                    S = g[0],
+                    E = g[1],
+                    T = r1((0, l.useState)(null), 2),
+                    R = T[0],
+                    F = T[1],
+                    w = (0, l.useContext)(eZ),
+                    C = w.friendsCount,
+                    x = w.setFriendsCount,
+                    N = w.friendsNameFilter,
+                    A = w.setFriendsNameFilter,
+                    O = w.friendsStatusFilter,
+                    j = w.setFriendsStatusFilter,
+                    D = w.friendsSort,
+                    L = w.paginatedFriends,
+                    U = w.setPaginatedFriends,
+                    _ = w.setFriendRequestIdToUniverseSourceMap,
+                    q = w.isTrustedFilterEnabled,
+                    M = w.setIsTrustedFilterEnabled,
+                    k = es.deviceMeta.getDeviceMeta(),
+                    B = (null == k ? void 0 : k.isDesktop) && (null == k ? void 0 : k.deviceType) === te.computer;
+                (0, l.useEffect)(function() {
+                    if (r === r4.FRIENDREQUESTS && 0 !== L.length) {
+                        var e = L.filter(function(e) {
                             return e && e.friendRequest && e.friendRequest.sourceUniverseId
-                        })).map((function(e) {
+                        }).map(function(e) {
                             return e.friendRequest.sourceUniverseId
-                        }));
-                        0 !== e.length && Ee.getGames(e).then((function(e) {
-                            var t;
-                            if (null != e && null !== (t = e.data) && void 0 !== t && t.data) {
-                                var r = e.data.data,
-                                    n = L.reduce((function(e, t) {
-                                        var n;
-                                        if (null != t && null !== (n = t.friendRequest) && void 0 !== n && n.sourceUniverseId) {
-                                            var a = t.friendRequest.sourceUniverseId,
-                                                i = r.find((function(e) {
-                                                    return e.id === a
-                                                }));
-                                            i && (e[t.id] = i)
-                                        }
-                                        return e
-                                    }), {});
-                                U(n)
+                        });
+                        0 !== e.length && er.getGames(e).then(function(e) {
+                            var r;
+                            if (null == e || null == (r = e.data) ? void 0 : r.data) {
+                                var t = e.data.data;
+                                _(L.reduce(function(e, r) {
+                                    var n;
+                                    if (null == r || null == (n = r.friendRequest) ? void 0 : n.sourceUniverseId) {
+                                        var i = r.friendRequest.sourceUniverseId,
+                                            a = t.find(function(e) {
+                                                return e.id === i
+                                            });
+                                        a && (e[r.id] = a)
+                                    }
+                                    return e
+                                }, {}))
                             }
-                        }))
+                        })
                     }
-                }), [L, n]), n === Ar.FRIENDS && (x === Or.ALPHABETICAL ? s.sort((function(e, t) {
-                    return e.displayName.toLowerCase() < t.displayName.toLowerCase() ? -1 : e.displayName.toLowerCase() > t.displayName.toLowerCase() ? 1 : 0
-                })) : x === Or.STATUS && s.sort((function(e, t) {
-                    if (e.presence.userPresenceType === t.presence.userPresenceType) {
-                        if (e.displayName.toLowerCase() < t.displayName.toLowerCase()) return -1;
-                        if (e.displayName.toLowerCase() > t.displayName.toLowerCase()) return 1
+                }, [L, r]), r === r4.FRIENDS && (D === r5.ALPHABETICAL ? s.sort(function(e, r) {
+                    return e.displayName.toLowerCase() < r.displayName.toLowerCase() ? -1 : +(e.displayName.toLowerCase() > r.displayName.toLowerCase())
+                }) : D === r5.STATUS && s.sort(function(e, r) {
+                    if (e.presence.userPresenceType === r.presence.userPresenceType) {
+                        if (e.displayName.toLowerCase() < r.displayName.toLowerCase()) return -1;
+                        if (e.displayName.toLowerCase() > r.displayName.toLowerCase()) return 1
                     }
-                    return 2 === e.presence.userPresenceType ? -1 : 2 === t.presence.userPresenceType || e.presence.userPresenceType < t.presence.userPresenceType ? 1 : e.presence.userPresenceType > t.presence.userPresenceType ? -1 : 0
-                })));
+                    return 2 === e.presence.userPresenceType ? -1 : 2 === r.presence.userPresenceType || e.presence.userPresenceType < r.presence.userPresenceType ? 1 : e.presence.userPresenceType > r.presence.userPresenceType ? -1 : 0
+                }));
                 var G = function(e, t) {
-                        if (n === Ar.FRIENDREQUESTS) {
-                            var r = t.slice((e - 1) * wr, e * wr).length,
+                        if (r === r4.FRIENDREQUESTS) {
+                            var i = t.slice((e - 1) * r8, e * r8).length,
                                 a = {
-                                    currentUserId: parseInt(i, 10),
+                                    currentUserId: parseInt(n, 10),
                                     pageNumber: e,
-                                    numberOfFriendRequestsCurrentlyDisplayed: r
+                                    numberOfFriendRequestsCurrentlyDisplayed: i
                                 };
-                            b.EventStream.SendEvent(Dr.FRIEND_REQUESTS_DISPLAYED, Pr, a);
-                            var o = t.map((function(e) {
+                            I.EventStream.SendEvent(r7.FRIEND_REQUESTS_DISPLAYED, r9, a);
+                            var o = t.map(function(e) {
                                     return e.friendRequest.senderId
-                                })).join(B),
-                                u = t.map((function(e) {
+                                }).join("%2c"),
+                                s = t.map(function(e) {
                                     return e.mutualFriendsList && e.mutualFriendsList.length > 0 ? "T" : "F"
-                                })).join(B),
-                                s = t.map((function(e) {
+                                }).join("%2c"),
+                                u = t.map(function(e) {
                                     return e.friendRequest && e.friendRequest.sourceUniverseId ? "T" : "F"
-                                })).join(B),
+                                }).join("%2c"),
                                 l = Array.from({
                                     length: t.length
-                                }, (function(e, t) {
-                                    return t + 1
-                                })).join(B);
-                            b.EventStream.SendEvent(Dr.FRIENDS_LANDING_PAGE_LOAD, "friendsLanding", {
+                                }, function(e, r) {
+                                    return r + 1
+                                }).join("%2c");
+                            I.EventStream.SendEvent(r7.FRIENDS_LANDING_PAGE_LOAD, "friendsLanding", {
                                 target: "www",
                                 requestingUserId: o,
-                                mutualFriendsContext: u,
-                                gamesContext: s,
+                                mutualFriendsContext: s,
+                                gamesContext: u,
                                 absPosition: l
                             })
                         }
                     },
-                    Q = s.slice((h - 1) * wr, h * wr);
-                (0, e.useEffect)((function() {
-                    JSON.stringify(L) !== JSON.stringify(Q) && q(Q)
-                }), [s, w, O, x, h]);
-                var H = Fr((0, e.useState)(JSON.stringify(s)), 2),
-                    z = H[0],
-                    W = H[1],
-                    V = Math.max(Math.ceil(s.length / wr), 1),
-                    Y = F || h > Nr || V > 1 || C > wr,
-                    J = !!F || h < V;
-                h > V && y(V);
+                    z = s.slice((v - 1) * r8, v * r8);
+                (0, l.useEffect)(function() {
+                    JSON.stringify(L) !== JSON.stringify(z) && U(z)
+                }, [s, N, O, D, v]);
+                var Q = r1((0, l.useState)(JSON.stringify(s)), 2),
+                    H = Q[0],
+                    W = Q[1],
+                    V = Math.max(Math.ceil(s.length / r8), 1),
+                    Y = R || v > r6 || V > 1 || C > r8,
+                    J = !!R || v < V;
+                v > V && b(V);
                 var X = function() {
                         m();
                         var e = function(e) {
-                            var t = e.friendsData,
-                                r = e.next;
-                            l(t), T(r), p()
+                            var r = e.friendsData,
+                                t = e.next;
+                            u(r), F(t), y()
                         };
-                        Ir({
-                            currentTab: Ar.FRIENDS,
-                            profileUserId: i,
+                        r2({
+                            currentTab: r4.FRIENDS,
+                            profileUserId: n,
                             useCache: !1,
                             refreshCache: !0,
-                            isMyProfile: o,
-                            friendsNameFilter: w,
-                            isTrustedFilterEnabled: _
-                        }).then((function(t) {
-                            Ar.FRIENDS === n && e(t)
-                        })), Ir({
-                            currentTab: Ar.FRIENDREQUESTS,
-                            profileUserId: i,
-                            currentCursor: g,
+                            isMyProfile: i,
+                            friendsNameFilter: N,
+                            isTrustedFilterEnabled: q
+                        }).then(function(t) {
+                            r4.FRIENDS === r && e(t)
+                        }), r2({
+                            currentTab: r4.FRIENDREQUESTS,
+                            profileUserId: n,
+                            currentCursor: S,
                             useCache: !1,
                             refreshCache: !0,
-                            isMyProfile: o,
-                            friendsNameFilter: w
-                        }).then((function(t) {
-                            Ar.FRIENDREQUESTS === n && e(t)
-                        }))
+                            isMyProfile: i,
+                            friendsNameFilter: N
+                        }).then(function(t) {
+                            r4.FRIENDREQUESTS === r && e(t)
+                        })
                     },
-                    $ = (0, e.useCallback)((function(e) {
-                        l([]), T(null), S(0), A(null), M(e === Lr.TRUSTED)
-                    }), []);
-                (0, e.useEffect)((function() {
-                    m(), l([]), N(0), A(null), D(null)
-                }), []), (0, e.useEffect)((function() {
-                    if (null != w) {
-                        y(Nr), T(null);
+                    $ = (0, l.useCallback)(function(e) {
+                        u([]), F(null), E(0), A(null), M(e === tr.TRUSTED)
+                    }, []);
+                return (0, l.useEffect)(function() {
+                    m(), u([]), x(0), A(null), j(null)
+                }, []), (0, l.useEffect)(function() {
+                    if (null != N) {
+                        b(r6), F(null);
                         var e = !0;
                         m();
-                        var t = Cr(n, X);
-                        return Ir({
-                                currentTab: n,
-                                profileUserId: i,
-                                currentCursor: g,
+                        var t = r3(r, X);
+                        return r2({
+                                currentTab: r,
+                                profileUserId: n,
+                                currentCursor: S,
                                 useCache: !1,
-                                isMyProfile: o,
-                                friendsNameFilter: w,
+                                isMyProfile: i,
+                                friendsNameFilter: N,
                                 queryChanged: !0
-                            }).then((function(t) {
-                                var r = t.friendsData,
-                                    n = t.next;
-                                e && (l(r), T(n), p(), G(h, r))
-                            })),
+                            }).then(function(r) {
+                                var t = r.friendsData,
+                                    n = r.next;
+                                e && (u(t), F(n), y(), G(v, t))
+                            }),
                             function() {
                                 e = !1, t()
                             }
                     }
                     return function() {}
-                }), [w]), (0, e.useEffect)((function() {
+                }, [N]), (0, l.useEffect)(function() {
                     var e = !0;
                     m();
-                    var t = Cr(n, X);
-                    return Ir({
-                            currentTab: n,
-                            profileUserId: i,
-                            currentCursor: g,
+                    var t = r3(r, X);
+                    return r2({
+                            currentTab: r,
+                            profileUserId: n,
+                            currentCursor: S,
                             useCache: !1,
-                            isMyProfile: o,
-                            friendsNameFilter: w,
-                            isTrustedFilterEnabled: _
-                        }).then((function(t) {
-                            var r = t.friendsData,
-                                n = t.next;
-                            e && (c(r), T(n), p(), G(h, r))
-                        })),
+                            isMyProfile: i,
+                            friendsNameFilter: N,
+                            isTrustedFilterEnabled: q
+                        }).then(function(r) {
+                            var t = r.friendsData,
+                                n = r.next;
+                            e && (d(t), F(n), y(), G(v, t))
+                        }),
                         function() {
                             e = !1, t()
                         }
-                }), [n, g, i, _]), (0, e.useEffect)((function() {
-                    F && !g && S(F)
-                }), [F, g]), (0, e.useEffect)((function() {
-                    var e = !0;
+                }, [r, S, n, q]), (0, l.useEffect)(function() {
+                    R && !S && E(R)
+                }, [R, S]), (0, l.useEffect)(function() {
+                    var e = !0,
+                        t = JSON.stringify(s);
+                    if (H !== t) switch (W(t), r) {
+                        case r4.FRIENDS:
+                            er.getFriendsCount(n).then(function(r) {
+                                var t = r.data.count;
+                                e && x(t)
+                            });
+                            break;
+                        case r4.FOLLOWING:
+                            er.getFollowingsCount(n).then(function(r) {
+                                var t = r.data.count;
+                                e && x(t)
+                            });
+                            break;
+                        case r4.FOLLOWERS:
+                            er.getFollowersCount(n).then(function(r) {
+                                var t = r.data.count;
+                                e && x(t)
+                            });
+                            break;
+                        case r4.FRIENDREQUESTS:
+                            i && er.getFriendsRequestCount().then(function(r) {
+                                var t = r.data.count;
+                                if (e) {
+                                    x(t);
+                                    var i = {
+                                        currentUserId: parseInt(n, 10),
+                                        numberOfFriendRequests: t
+                                    };
+                                    I.EventStream.SendEvent(r7.TOTAL_FRIEND_REQUESTS_RETRIEVED, r9, i)
+                                }
+                            })
+                    }
                     return function() {
-                            var t = JSON.stringify(s);
-                            if (z !== t) switch (W(t), n) {
-                                case Ar.FRIENDS:
-                                    Ee.getFriendsCount(i).then((function(t) {
-                                        var r = t.data.count;
-                                        e && N(r)
-                                    }));
-                                    break;
-                                case Ar.FOLLOWING:
-                                    Ee.getFollowingsCount(i).then((function(t) {
-                                        var r = t.data.count;
-                                        e && N(r)
-                                    }));
-                                    break;
-                                case Ar.FOLLOWERS:
-                                    Ee.getFollowersCount(i).then((function(t) {
-                                        var r = t.data.count;
-                                        e && N(r)
-                                    }));
-                                    break;
-                                case Ar.FRIENDREQUESTS:
-                                    o && Ee.getFriendsRequestCount().then((function(t) {
-                                        var r = t.data.count;
-                                        if (e) {
-                                            N(r);
-                                            var n = {
-                                                currentUserId: parseInt(i, 10),
-                                                numberOfFriendRequests: r
-                                            };
-                                            b.EventStream.SendEvent(Dr.TOTAL_FRIEND_REQUESTS_RETRIEVED, Pr, n)
-                                        }
-                                    }))
-                            }
-                        }(),
-                        function() {
-                            e = !1
+                        e = !1
+                    }
+                }, [r, s]), (0, a.jsxs)(c().Fragment, {
+                    children: [(0, a.jsx)(rI, {
+                        isMyProfile: i,
+                        tooltipMsg: f,
+                        title: p,
+                        currentTab: r,
+                        onlyShowContents: o,
+                        refreshFriendsList: X,
+                        updateFilter: $
+                    }), Y && (0, a.jsx)(P.Pagination, {
+                        current: v,
+                        hasNext: J,
+                        onChange: function(e) {
+                            e > v && e >= V && R && E(R || 0), b(e), G(e, s)
                         }
-                }), [n, s]);
-                var K = Y ? "mutual-friends-extra-padding-with-pagination" : "mutual-friends-extra-padding-without-pagination";
-                return t().createElement(t().Fragment, null, t().createElement(Ht, {
-                    isMyProfile: o,
-                    tooltipMsg: d,
-                    title: f,
-                    currentTab: n,
-                    onlyShowContents: u,
-                    refreshFriendsList: X,
-                    updateFilter: $
-                }), Y && t().createElement(P.Pagination, {
-                    current: h,
-                    hasNext: J,
-                    onChange: function(e) {
-                        e > h && e >= V && F && S(F || 0), y(e), G(e, s)
-                    }
-                }), n === Ar.FRIENDREQUESTS && !j && t().createElement("div", {
-                    className: K
-                }))
+                    }), r === r4.FRIENDREQUESTS && !B && (0, a.jsx)("div", {
+                        className: Y ? "mutual-friends-extra-padding-with-pagination" : "mutual-friends-extra-padding-without-pagination"
+                    })]
+                })
             }
-            qr.defaultProps = {
+            tt.defaultProps = {
                 friends: []
-            }, qr.propTypes = {
-                friends: D().arrayOf(D().any),
-                setFriends: D().func.isRequired,
-                loadMoreFriends: D().func.isRequired,
-                metadata: D().objectOf(D().any).isRequired,
-                tooltipMsg: D().string.isRequired,
-                title: D().string.isRequired,
-                currentTab: D().string.isRequired,
-                enableTabLoader: D().func.isRequired,
-                disableTabLoader: D().func.isRequired,
-                tabLoader: D().objectOf(D().any).isRequired
+            }, tt.propTypes = {
+                friends: j().arrayOf(j().any),
+                setFriends: j().func.isRequired,
+                loadMoreFriends: j().func.isRequired,
+                metadata: j().objectOf(j().any).isRequired,
+                tooltipMsg: j().string.isRequired,
+                title: j().string.isRequired,
+                currentTab: j().string.isRequired,
+                enableTabLoader: j().func.isRequired,
+                disableTabLoader: j().func.isRequired,
+                tabLoader: j().objectOf(j().any).isRequired
             };
-            var Ur = Fe(qr),
-                _r = function(e) {
+            var tn = ea(tt),
+                ti = function(e) {
                     var r = e.title,
-                        n = e.show;
-                    return t().createElement("div", {
-                        className: "page-header section"
-                    }, n && t().createElement("div", {
-                        className: "container-header"
-                    }, t().createElement("h1", {
-                        className: "friends-title"
-                    }, r)))
+                        t = e.show;
+                    return (0, a.jsx)("div", {
+                        className: "page-header section",
+                        children: t && (0, a.jsx)("div", {
+                            className: "container-header",
+                            children: (0, a.jsx)("h1", {
+                                className: "friends-title",
+                                children: r
+                            })
+                        })
+                    })
                 };
-            _r.propTypes = {
-                title: D().string.isRequired,
-                show: D().bool.isRequired
+            ti.propTypes = {
+                title: j().string.isRequired,
+                show: j().bool.isRequired
             };
-            var Mr, kr = _r,
-                jr = b.EnvironmentUrls.apiGatewayUrl,
-                Br = function() {
-                    return jr + "/product-experimentation-platform/v1/projects/1/layers/Social.Friends/values"
+            var ta = I.EnvironmentUrls.apiGatewayUrl,
+                to = function(e) {
+                    var r = {
+                        parameters: e.join(",")
+                    };
+                    return H.httpService.get({
+                        url: "".concat(ta, "/product-experimentation-platform/v1/projects/1/layers/Social.Friends/values"),
+                        timeout: 2e3,
+                        withCredentials: !0
+                    }, r)
                 },
-                Gr = function(e) {
-                    var t = {
-                            url: Br(),
-                            timeout: 2e3,
-                            withCredentials: !0
-                        },
-                        r = {
-                            parameters: e.join(",")
-                        };
-                    return a.httpService.get(t, r)
-                };
-            ! function(e) {
-                e.FriendRecommendationSource = "friend_recommendation_source", e.JoinButtonFriendCard = "show_join_game_button_in_friend_card", e.JoinButtonFriendCardDesktopOnly = "show_join_game_button_in_friend_card_desktop_only", e.TcManagementHub = "show_tc_management_hub"
-            }(Mr || (Mr = {}));
-            var Qr = Mr,
-                Hr = "friendRecommendations",
-                zr = "accept",
-                Wr = "request",
-                Vr = "displayed";
-            var Yr = {
-                    emitCarouselDisplayedEvent: function(e, t, r) {
-                        b.EventStream.SendEvent(Hr, Vr, {
-                            uid: e,
-                            numberOfRecommendations: r,
-                            variant: t
-                        })
-                    },
-                    emitAcceptedFriendRequestEvent: function(e, t) {
-                        b.EventStream.SendEvent(Hr, zr, {
-                            uid: e,
-                            recipientId: t
-                        })
-                    },
-                    emitFriendRequestSentEvent: function(e, t) {
-                        b.EventStream.SendEvent(Hr, Wr, {
-                            uid: e,
-                            recipientId: t
-                        })
-                    }
+                ts = ((r = ts || {}).FriendRecommendationSource = "friend_recommendation_source", r.JoinButtonFriendCard = "show_join_game_button_in_friend_card", r.JoinButtonFriendCardDesktopOnly = "show_join_game_button_in_friend_card_desktop_only", r.TcManagementHub = "show_tc_management_hub", r),
+                tu = "friendRecommendations",
+                tl = function(e, r, t) {
+                    I.EventStream.SendEvent(tu, "displayed", {
+                        uid: e,
+                        numberOfRecommendations: t,
+                        variant: r
+                    })
                 },
-                Jr = b.EnvironmentUrls.friendsApi;
-            var Xr = {
-                getFriendRecommendations: function(e) {
-                    var t = {
+                tc = function(e, r) {
+                    I.EventStream.SendEvent(tu, "accept", {
+                        uid: e,
+                        recipientId: r
+                    })
+                },
+                td = function(e, r) {
+                    I.EventStream.SendEvent(tu, "request", {
+                        uid: e,
+                        recipientId: r
+                    })
+                },
+                tf = I.EnvironmentUrls.friendsApi,
+                tp = function(e) {
+                    var r = {
                         retryable: !0,
                         withCredentials: !0,
-                        url: "".concat(Jr, "/v1/users/").concat(e, "/friends/recommendations")
+                        url: "".concat(tf, "/v1/users/").concat(e, "/friends/recommendations")
                     };
-                    return a.httpService.get(t).then((function(e) {
-                        return e.data.data.map((function(e) {
+                    return H.httpService.get(r).then(function(e) {
+                        return e.data.data.map(function(e) {
                             return {
                                 userName: e.name,
                                 displayName: e.displayName,
@@ -2885,686 +3481,779 @@
                                 pendingRequest: null != e.friendRequest,
                                 mutualFriendsList: e.mutualFriendsList
                             }
-                        }))
-                    }))
+                        })
+                    })
                 },
-                sendOrAcceptFriendRequest: function(e, t) {
-                    return t ? function(e) {
-                        var t = {
-                                retryable: !1,
-                                withCredentials: !0,
-                                url: "".concat(Jr, "/v1/users/").concat(e, "/accept-friend-request")
-                            },
-                            r = a.httpService.post(t);
-                        return r.then((function() {
-                            return Yr.emitAcceptedFriendRequestEvent(b.CurrentUser.userId, e)
-                        }), (function() {})), r
-                    }(e) : function(e) {
-                        var t = {
-                                retryable: !1,
-                                withCredentials: !0,
-                                url: "".concat(Jr, "/v1/users/").concat(e, "/request-friendship")
-                            },
-                            r = a.httpService.post(t, {
-                                friendshipOriginSourceType: "recommendations"
-                            });
-                        return r.then((function() {
-                            return Yr.emitFriendRequestSentEvent(b.CurrentUser.userId, e)
-                        }), (function() {})), r
-                    }(e)
+                tm = function(e, r) {
+                    var t, n, i, a;
+                    return r ? (t = {
+                        retryable: !1,
+                        withCredentials: !0,
+                        url: "".concat(tf, "/v1/users/").concat(e, "/accept-friend-request")
+                    }, (n = H.httpService.post(t)).then(function() {
+                        return tc(I.CurrentUser.userId, e)
+                    }, function() {}), n) : (i = {
+                        retryable: !1,
+                        withCredentials: !0,
+                        url: "".concat(tf, "/v1/users/").concat(e, "/request-friendship")
+                    }, (a = H.httpService.post(i, {
+                        friendshipOriginSourceType: "recommendations"
+                    })).then(function() {
+                        return td(I.CurrentUser.userId, e)
+                    }, function() {}), a)
                 },
-                getFriendCount: function(e) {
-                    var t = {
+                ty = function(e) {
+                    var r = {
                         retryable: !0,
                         withCredentials: !0,
-                        url: "".concat(Jr, "/v1/users/").concat(e, "/friends/count")
+                        url: "".concat(tf, "/v1/users/").concat(e, "/friends/count")
                     };
-                    return a.httpService.get(t)
-                }
-            };
+                    return H.httpService.get(r)
+                };
 
-            function $r(e, t) {
-                return function(e) {
-                    if (Array.isArray(e)) return e
-                }(e) || function(e, t) {
-                    if ("undefined" == typeof Symbol || !(Symbol.iterator in Object(e))) return;
-                    var r = [],
-                        n = !0,
-                        a = !1,
-                        i = void 0;
-                    try {
-                        for (var o, u = e[Symbol.iterator](); !(n = (o = u.next()).done) && (r.push(o.value), !t || r.length !== t); n = !0);
-                    } catch (e) {
-                        a = !0, i = e
-                    } finally {
-                        try {
-                            n || null == u.return || u.return()
-                        } finally {
-                            if (a) throw i
-                        }
-                    }
-                    return r
-                }(e, t) || function(e, t) {
-                    if (!e) return;
-                    if ("string" == typeof e) return Kr(e, t);
-                    var r = Object.prototype.toString.call(e).slice(8, -1);
-                    "Object" === r && e.constructor && (r = e.constructor.name);
-                    if ("Map" === r || "Set" === r) return Array.from(e);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Kr(e, t)
-                }(e, t) || function() {
-                    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }()
-            }
-
-            function Kr(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var r = 0, n = new Array(t); r < t; r++) n[r] = e[r];
+            function th(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
                 return n
             }
-            var Zr = t().useState,
-                en = _.PLUS_SIGN,
-                tn = _.MUTUAL_FRIENDS_SHOW_COUNT;
+            var tv = c().useState,
+                tb = _.PLUS_SIGN,
+                tg = _.MUTUAL_FRIENDS_SHOW_COUNT;
 
-            function rn(e) {
-                var r = e.userId,
-                    n = e.userName,
-                    i = e.displayName,
-                    o = e.pendingRequest,
+            function tS(e) {
+                var r, t, n = e.userId,
+                    i = e.userName,
+                    o = e.displayName,
+                    s = e.pendingRequest,
                     u = e.mutualFriends,
-                    s = e.setError,
-                    l = e.translate,
-                    c = $r(Zr(!1), 2),
-                    d = c[0],
-                    f = c[1],
-                    m = null != u && u.length > 0;
-                var p;
-                return t().createElement("div", {
-                    className: "friend-recommendation-item"
-                }, t().createElement("a", {
-                    href: b.Endpoints.getAbsoluteUrl("/users/".concat(r, "/profile")),
-                    className: "friend-recommendation-link"
-                }, t().createElement("span", {
-                    className: "avatar-container avatar-headshot text-link"
-                }, t().createElement(It.Thumbnail2d, {
-                    type: It.ThumbnailTypes.avatarHeadshot,
-                    size: It.ThumbnailAvatarHeadshotSize.size96,
-                    targetId: r,
-                    imgClassName: "avatar-card-image"
-                })), t().createElement("div", {
-                    className: "friend-recommendation-info"
-                }, t().createElement("span", {
-                    className: "text-overflow friend-name font-caption-header friend-recommendation-name"
-                }, i), t().createElement("span", {
-                    className: "text-overflow text-secondary friend-recommendation-name"
-                }, a.concatTexts.concat(["", n], a.concatTexts.connectors.at, !1)), o && d ? t().createElement("span", {
-                    className: "text-overflow text-secondary friend-recommendation-name"
-                }, l("Label.YouAreFriends")) : m && (p = function(e) {
-                    var r = e.slice(0, tn).map((function(e) {
-                        return t().createElement("li", {
-                            className: "text-overflow"
-                        }, e)
-                    }));
-                    if (e.length > tn) {
-                        var n = e.length - tn,
-                            a = l("Message.More", {
-                                plusSign: en,
-                                remainingCount: n
-                            });
-                        r.push(t().createElement("li", {
-                            className: "text-overflow"
-                        }, a))
-                    }
-                    return r
-                }(u), t().createElement(P.Tooltip, {
-                    id: "mutual-friends-tooltip",
-                    placement: "bottom",
-                    content: p
-                }, t().createElement("span", {
-                    className: "text-overflow text-secondary mutual-friends-tooltip-label friend-recommendation-name"
-                }, l("Label.MutualFriend", {
-                    mutualFriendsCount: u.length
-                })))))), !(o && d) && t().createElement("button", {
-                    type: "button",
-                    className: L()("btn-control-md full-size add-friend-button ", {
-                        disabled: d
-                    }),
-                    onClick: function() {
-                        return s(""), void Xr.sendOrAcceptFriendRequest(r, o).then((function() {
-                            return f(!0)
-                        }), (function(e) {
-                            var t, r;
-                            null != e && null !== (t = e.data) && void 0 !== t && null !== (r = t.errors[0]) && void 0 !== r && r.userFacingMessage ? s(e.data.errors[0].userFacingMessage) : s(l("Label.MiscError"))
-                        }))
-                    }
-                }, t().createElement("span", {
-                    className: d ? "icon-sandglass" : o ? "icon-acceptfriend" : "icon-addfriend"
-                })))
-            }
-            rn.defaultProps = {
-                mutualFriends: []
-            }, rn.propTypes = {
-                userId: D().number.isRequired,
-                userName: D().string.isRequired,
-                displayName: D().string.isRequired,
-                pendingRequest: D().bool.isRequired,
-                mutualFriends: D().arrayOf(D().string),
-                setError: D().func.isRequired,
-                translate: D().func.isRequired
-            };
-            var nn = rn;
-
-            function an(e, t) {
-                return function(e) {
-                    if (Array.isArray(e)) return e
-                }(e) || function(e, t) {
-                    if ("undefined" == typeof Symbol || !(Symbol.iterator in Object(e))) return;
-                    var r = [],
-                        n = !0,
-                        a = !1,
-                        i = void 0;
-                    try {
-                        for (var o, u = e[Symbol.iterator](); !(n = (o = u.next()).done) && (r.push(o.value), !t || r.length !== t); n = !0);
-                    } catch (e) {
-                        a = !0, i = e
-                    } finally {
-                        try {
-                            n || null == u.return || u.return()
-                        } finally {
-                            if (a) throw i
+                    l = e.setError,
+                    c = e.translate,
+                    d = function(e) {
+                        if (Array.isArray(e)) return e
+                    }(r = tv(!1)) || function(e) {
+                        var r, t, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                        if (null != n) {
+                            var i = [],
+                                a = !0,
+                                o = !1;
+                            try {
+                                for (n = n.call(e); !(a = (r = n.next()).done) && (i.push(r.value), 2 !== i.length); a = !0);
+                            } catch (e) {
+                                o = !0, t = e
+                            } finally {
+                                try {
+                                    a || null == n.return || n.return()
+                                } finally {
+                                    if (o) throw t
+                                }
+                            }
+                            return i
                         }
-                    }
-                    return r
-                }(e, t) || function(e, t) {
-                    if (!e) return;
-                    if ("string" == typeof e) return on(e, t);
-                    var r = Object.prototype.toString.call(e).slice(8, -1);
-                    "Object" === r && e.constructor && (r = e.constructor.name);
-                    if ("Map" === r || "Set" === r) return Array.from(e);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return on(e, t)
-                }(e, t) || function() {
-                    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }()
+                    }(r) || function(e) {
+                        if (e) {
+                            if ("string" == typeof e) return th(e, 2);
+                            var r = Object.prototype.toString.call(e).slice(8, -1);
+                            if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
+                            if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return th(e, 2)
+                        }
+                    }(r) || function() {
+                        throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                    }(),
+                    f = d[0],
+                    p = d[1],
+                    m = null != u && u.length > 0;
+                return (0, a.jsxs)("div", {
+                    className: "friend-recommendation-item",
+                    children: [(0, a.jsxs)("a", {
+                        href: I.Endpoints.getAbsoluteUrl("/users/".concat(n, "/profile")),
+                        className: "friend-recommendation-link",
+                        children: [(0, a.jsx)("span", {
+                            className: "avatar-container avatar-headshot text-link",
+                            children: (0, a.jsx)(ru.Thumbnail2d, {
+                                type: ru.ThumbnailTypes.avatarHeadshot,
+                                size: ru.ThumbnailAvatarHeadshotSize.size96,
+                                targetId: n,
+                                includeProfileFrame: !0,
+                                imgClassName: "avatar-card-image"
+                            })
+                        }), (0, a.jsxs)("div", {
+                            className: "friend-recommendation-info",
+                            children: [(0, a.jsx)("span", {
+                                className: "text-overflow friend-name font-caption-header friend-recommendation-name",
+                                children: o
+                            }), (0, a.jsx)("span", {
+                                className: "text-overflow text-secondary friend-recommendation-name",
+                                children: H.concatTexts.concat(["", i], H.concatTexts.connectors.at, !1)
+                            }), s && f ? (0, a.jsx)("span", {
+                                className: "text-overflow text-secondary friend-recommendation-name",
+                                children: c("Label.YouAreFriends")
+                            }) : m && (t = function(e) {
+                                var r = e.slice(0, tg).map(function(e) {
+                                    return (0, a.jsx)("li", {
+                                        className: "text-overflow",
+                                        children: e
+                                    })
+                                });
+                                if (e.length > tg) {
+                                    var t = c("Message.More", {
+                                        plusSign: tb,
+                                        remainingCount: e.length - tg
+                                    });
+                                    r.push((0, a.jsx)("li", {
+                                        className: "text-overflow",
+                                        children: t
+                                    }))
+                                }
+                                return r
+                            }(u), (0, a.jsx)(P.Tooltip, {
+                                id: "mutual-friends-tooltip",
+                                placement: "bottom",
+                                content: t,
+                                children: (0, a.jsx)("span", {
+                                    className: "text-overflow text-secondary mutual-friends-tooltip-label friend-recommendation-name",
+                                    children: c("Label.MutualFriend", {
+                                        mutualFriendsCount: u.length
+                                    })
+                                })
+                            }))]
+                        })]
+                    }), !(s && f) && (0, a.jsx)("button", {
+                        type: "button",
+                        className: L()("btn-control-md full-size add-friend-button ", {
+                            disabled: f
+                        }),
+                        onClick: function() {
+                            l(""), tm(n, s).then(function() {
+                                return p(!0)
+                            }, function(e) {
+                                var r, t;
+                                (null == e || null == (t = e.data) || null == (r = t.errors[0]) ? void 0 : r.userFacingMessage) ? l(e.data.errors[0].userFacingMessage): l(c("Label.MiscError"))
+                            })
+                        },
+                        children: (0, a.jsx)("span", {
+                            className: f ? "icon-sandglass" : s ? "icon-acceptfriend" : "icon-addfriend"
+                        })
+                    })]
+                })
             }
 
-            function on(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var r = 0, n = new Array(t); r < t; r++) n[r] = e[r];
+            function tE(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
                 return n
             }
-            var un = t().useState,
-                sn = t().useEffect,
-                ln = t().useRef;
 
-            function cn(e) {
+            function tT(e, r) {
+                return function(e) {
+                    if (Array.isArray(e)) return e
+                }(e) || function(e, r) {
+                    var t, n, i = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                    if (null != i) {
+                        var a = [],
+                            o = !0,
+                            s = !1;
+                        try {
+                            for (i = i.call(e); !(o = (t = i.next()).done) && (a.push(t.value), !r || a.length !== r); o = !0);
+                        } catch (e) {
+                            s = !0, n = e
+                        } finally {
+                            try {
+                                o || null == i.return || i.return()
+                            } finally {
+                                if (s) throw n
+                            }
+                        }
+                        return a
+                    }
+                }(e, r) || function(e, r) {
+                    if (e) {
+                        if ("string" == typeof e) return tE(e, r);
+                        var t = Object.prototype.toString.call(e).slice(8, -1);
+                        if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return tE(e, r)
+                    }
+                }(e, r) || function() {
+                    throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                }()
+            }
+            tS.defaultProps = {
+                mutualFriends: []
+            }, tS.propTypes = {
+                userId: j().number.isRequired,
+                userName: j().string.isRequired,
+                displayName: j().string.isRequired,
+                pendingRequest: j().bool.isRequired,
+                mutualFriends: j().arrayOf(j().string),
+                setError: j().func.isRequired,
+                translate: j().func.isRequired
+            };
+            var tR = c().useState,
+                tF = c().useEffect,
+                tI = c().useRef;
+
+            function tw(e) {
                 var r = e.friendRecommendations,
-                    n = e.translate,
-                    a = e.setError,
+                    t = e.translate,
+                    n = e.setError,
                     i = e.cardWidth,
                     o = e.contentWidth,
-                    u = an(un(0), 2),
-                    s = u[0],
-                    l = u[1],
-                    c = an(un(0), 2),
+                    s = tT(tR(0), 2),
+                    u = s[0],
+                    l = s[1],
+                    c = tT(tR(0), 2),
                     d = c[0],
                     f = c[1],
-                    m = an(un(!1), 2),
-                    p = m[0],
-                    v = m[1],
-                    h = an(un(!0), 2),
-                    y = h[0],
+                    p = tT(tR(!1), 2),
+                    m = p[0],
+                    y = p[1],
+                    h = tT(tR(!0), 2),
+                    v = h[0],
                     b = h[1],
-                    E = an(un(-1), 2),
-                    g = E[0],
-                    S = E[1],
-                    R = ln(null),
-                    F = ln(null),
-                    T = function() {
-                        return Math.floor(o(R) / i(F))
+                    g = tT(tR(-1), 2),
+                    S = g[0],
+                    E = g[1],
+                    T = tI(null),
+                    R = tI(null),
+                    F = function() {
+                        return Math.floor(o(T) / i(R))
                     };
-                sn((function() {
-                    i(F) && f(-s * i(F))
-                }), [s, g]), sn((function() {
-                    v(i(F) && i(F) * r.length > o(R))
-                }), [i.current, o.current, g]), sn((function() {
-                    !p && s > 0 && l(0)
-                }), [p, s]), sn((function() {
-                    window.addEventListener("resize", (function() {
-                        S(window.innerWidth), b(!1)
-                    })), S(0)
-                }), []);
+                tF(function() {
+                    i(R) && f(-u * i(R))
+                }, [u, S]), tF(function() {
+                    y(i(R) && i(R) * r.length > o(T))
+                }, [i.current, o.current, S]), tF(function() {
+                    !m && u > 0 && l(0)
+                }, [m, u]), tF(function() {
+                    window.addEventListener("resize", function() {
+                        E(window.innerWidth), b(!1)
+                    }), E(0)
+                }, []);
                 var I = [];
-                r.forEach((function(e) {
-                    I.push(t().createElement("li", {
-                        ref: F,
-                        "user-id": e.userId,
-                        className: "list-item friend-recommendations-list-item"
-                    }, t().createElement(nn, {
-                        userId: e.userId,
-                        userName: e.userName,
-                        displayName: e.displayName,
-                        pendingRequest: e.pendingRequest,
-                        mutualFriends: e.mutualFriendsList,
-                        setError: a,
-                        translate: n
-                    })))
-                }));
-                var C = function(e) {
-                        i(F) && (e ? l(Math.max(0, s - T())) : s + T() < I.length && l(s + T()), b(!0))
+                r.forEach(function(e) {
+                    I.push((0, a.jsx)("li", {
+                        ref: R,
+                        "data-user-id": e.userId,
+                        className: "list-item friend-recommendations-list-item",
+                        children: (0, a.jsx)(tS, {
+                            userId: e.userId,
+                            userName: e.userName,
+                            displayName: e.displayName,
+                            pendingRequest: e.pendingRequest,
+                            mutualFriends: e.mutualFriendsList,
+                            setError: n,
+                            translate: t
+                        })
+                    }))
+                });
+                var w = function(e) {
+                        i(R) && (e ? l(Math.max(0, u - F())) : u + F() < I.length && l(u + F()), b(!0))
                     },
-                    N = function(e) {
-                        var t = "";
-                        return p ? (e && 0 === s || !e && s + T() >= I.length) && (t = " disabled") : t = " hidden", "scroller".concat(e ? "" : " next").concat(t)
+                    C = function(e) {
+                        var r = "";
+                        return m ? (e && 0 === u || !e && u + F() >= I.length) && (r = " disabled") : r = " hidden", "scroller".concat(e ? "" : " next").concat(r)
                     };
-                return t().createElement("div", {
+                return (0, a.jsxs)("div", {
                     className: L()("section-content remove-panel friend-recommendations-content", {
-                        "friend-recommendations-content-with-scrollers": p
-                    })
-                }, t().createElement("button", {
-                    type: "button",
-                    className: N(!0),
-                    onClick: function() {
-                        return C(!0)
-                    }
-                }, t().createElement("div", {
-                    className: "arrow"
-                }, t().createElement("span", {
-                    className: "icon-games-carousel-left"
-                }))), t().createElement("div", {
-                    ref: R,
-                    className: L()("friend-recommendations-container", {
-                        "animate-scroll": y
+                        "friend-recommendations-content-with-scrollers": m
                     }),
-                    style: {
-                        left: "".concat(d, "px")
-                    }
-                }, t().createElement("ul", {
-                    className: "hlist"
-                }, I)), t().createElement("button", {
-                    type: "button",
-                    className: N(!1),
-                    onClick: function() {
-                        return C(!1)
-                    }
-                }, t().createElement("div", {
-                    className: "arrow"
-                }, t().createElement("span", {
-                    className: "icon-games-carousel-right"
-                }))))
+                    children: [(0, a.jsx)("button", {
+                        type: "button",
+                        className: C(!0),
+                        onClick: function() {
+                            return w(!0)
+                        },
+                        children: (0, a.jsx)("div", {
+                            className: "arrow",
+                            children: (0, a.jsx)("span", {
+                                className: "icon-games-carousel-left"
+                            })
+                        })
+                    }), (0, a.jsx)("div", {
+                        ref: T,
+                        className: L()("friend-recommendations-container", {
+                            "animate-scroll": v
+                        }),
+                        style: {
+                            left: "".concat(d, "px")
+                        },
+                        children: (0, a.jsx)("ul", {
+                            className: "hlist",
+                            children: I
+                        })
+                    }), (0, a.jsx)("button", {
+                        type: "button",
+                        className: C(!1),
+                        onClick: function() {
+                            return w(!1)
+                        },
+                        children: (0, a.jsx)("div", {
+                            className: "arrow",
+                            children: (0, a.jsx)("span", {
+                                className: "icon-games-carousel-right"
+                            })
+                        })
+                    })]
+                })
             }
-            cn.propTypes = {
-                friendRecommendations: D().array.isRequired,
-                translate: D().func.isRequired,
-                setError: D().func.isRequired,
-                cardWidth: D().func,
-                contentWidth: D().func
-            }, cn.defaultProps = {
+            tw.propTypes = {
+                friendRecommendations: j().array.isRequired,
+                translate: j().func.isRequired,
+                setError: j().func.isRequired,
+                cardWidth: j().func,
+                contentWidth: j().func
+            }, tw.defaultProps = {
                 cardWidth: function(e) {
-                    var t, r;
-                    return null == e || null === (t = e.current) || void 0 === t || null === (r = t.getBoundingClientRect()) || void 0 === r ? void 0 : r.width
+                    var r, t;
+                    return null == e || null == (t = e.current) || null == (r = t.getBoundingClientRect()) ? void 0 : r.width
                 },
                 contentWidth: function(e) {
-                    var t, r;
-                    return null == e || null === (t = e.current) || void 0 === t || null === (r = t.getBoundingClientRect()) || void 0 === r ? void 0 : r.width
+                    var r, t;
+                    return null == e || null == (t = e.current) || null == (r = t.getBoundingClientRect()) ? void 0 : r.width
                 }
             };
-            var dn, fn = cn;
-            ! function(e) {
-                e.None = "none", e.Frequents = "frequents"
-            }(dn || (dn = {}));
-            var mn = dn;
+            var tC = ((n = tC || {}).None = "none", n.Frequents = "frequents", n);
 
-            function pn(e, t, r, n, a, i, o) {
-                try {
-                    var u = e[i](o),
-                        s = u.value
-                } catch (e) {
-                    return void r(e)
-                }
-                u.done ? t(s) : Promise.resolve(s).then(n, a)
-            }
-
-            function vn(e, t) {
-                return function(e) {
-                    if (Array.isArray(e)) return e
-                }(e) || function(e, t) {
-                    if ("undefined" == typeof Symbol || !(Symbol.iterator in Object(e))) return;
-                    var r = [],
-                        n = !0,
-                        a = !1,
-                        i = void 0;
-                    try {
-                        for (var o, u = e[Symbol.iterator](); !(n = (o = u.next()).done) && (r.push(o.value), !t || r.length !== t); n = !0);
-                    } catch (e) {
-                        a = !0, i = e
-                    } finally {
-                        try {
-                            n || null == u.return || u.return()
-                        } finally {
-                            if (a) throw i
-                        }
-                    }
-                    return r
-                }(e, t) || function(e, t) {
-                    if (!e) return;
-                    if ("string" == typeof e) return hn(e, t);
-                    var r = Object.prototype.toString.call(e).slice(8, -1);
-                    "Object" === r && e.constructor && (r = e.constructor.name);
-                    if ("Map" === r || "Set" === r) return Array.from(e);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return hn(e, t)
-                }(e, t) || function() {
-                    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }()
-            }
-
-            function hn(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var r = 0, n = new Array(t); r < t; r++) n[r] = e[r];
+            function tx(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
                 return n
             }
-            var yn = t().useState,
-                bn = t().useEffect,
-                En = vn((0, P.createModal)(), 2),
-                gn = En[0],
-                Sn = En[1];
 
-            function Rn(e) {
+            function tN(e, r, t, n, i, a, o) {
+                try {
+                    var s = e[a](o),
+                        u = s.value
+                } catch (e) {
+                    t(e);
+                    return
+                }
+                s.done ? r(u) : Promise.resolve(u).then(n, i)
+            }
+
+            function tA(e, r) {
+                return function(e) {
+                    if (Array.isArray(e)) return e
+                }(e) || function(e, r) {
+                    var t, n, i = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                    if (null != i) {
+                        var a = [],
+                            o = !0,
+                            s = !1;
+                        try {
+                            for (i = i.call(e); !(o = (t = i.next()).done) && (a.push(t.value), !r || a.length !== r); o = !0);
+                        } catch (e) {
+                            s = !0, n = e
+                        } finally {
+                            try {
+                                o || null == i.return || i.return()
+                            } finally {
+                                if (s) throw n
+                            }
+                        }
+                        return a
+                    }
+                }(e, r) || function(e, r) {
+                    if (e) {
+                        if ("string" == typeof e) return tx(e, r);
+                        var t = Object.prototype.toString.call(e).slice(8, -1);
+                        if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return tx(e, r)
+                    }
+                }(e, r) || function() {
+                    throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                }()
+            }
+            var tO = c().useState,
+                tj = c().useEffect,
+                tP = tA((0, P.createModal)(), 2),
+                tD = tP[0],
+                tL = tP[1];
+
+            function tU(e) {
                 var r = e.translate,
-                    n = vn(yn([]), 2),
-                    a = n[0],
-                    i = n[1],
-                    o = vn(yn(!1), 2),
-                    u = o[0],
-                    s = o[1],
-                    l = vn(yn(""), 2),
+                    t = tA(tO([]), 2),
+                    n = t[0],
+                    i = t[1],
+                    o = tA(tO(!1), 2),
+                    s = o[0],
+                    u = o[1],
+                    l = tA(tO(""), 2),
                     c = l[0],
                     d = l[1];
-                return bn((function() {
+                return (tj(function() {
                     var e;
-                    (e = regeneratorRuntime.mark((function e() {
-                        var t, r, n, a, o;
-                        return regeneratorRuntime.wrap((function(e) {
-                            for (;;) switch (e.prev = e.next) {
-                                case 0:
-                                    return e.prev = 0, e.next = 3, Gr([Qr.FriendRecommendationSource]);
-                                case 3:
-                                    if (r = e.sent, null === (t = r.data) || void 0 === t || !t[Qr.FriendRecommendationSource] || r.data[Qr.FriendRecommendationSource] === mn.None) {
-                                        e.next = 13;
-                                        break
+                    (e = function() {
+                        var e, r, t, n, a;
+                        return function(e, r) {
+                            var t, n, i, a = {
+                                    label: 0,
+                                    sent: function() {
+                                        if (1 & i[0]) throw i[1];
+                                        return i[1]
+                                    },
+                                    trys: [],
+                                    ops: []
+                                },
+                                o = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
+                                s = Object.defineProperty;
+                            return s(o, "next", {
+                                value: u(0)
+                            }), s(o, "throw", {
+                                value: u(1)
+                            }), s(o, "return", {
+                                value: u(2)
+                            }), "function" == typeof Symbol && s(o, Symbol.iterator, {
+                                value: function() {
+                                    return this
+                                }
+                            }), o;
+
+                            function u(s) {
+                                return function(u) {
+                                    var l = [s, u];
+                                    if (t) throw TypeError("Generator is already executing.");
+                                    for (; o && (o = 0, l[0] && (a = 0)), a;) try {
+                                        if (t = 1, n && (i = 2 & l[0] ? n.return : l[0] ? n.throw || ((i = n.return) && i.call(n), 0) : n.next) && !(i = i.call(n, l[1])).done) return i;
+                                        switch (n = 0, i && (l = [2 & l[0], i.value]), l[0]) {
+                                            case 0:
+                                            case 1:
+                                                i = l;
+                                                break;
+                                            case 4:
+                                                return a.label++, {
+                                                    value: l[1],
+                                                    done: !1
+                                                };
+                                            case 5:
+                                                a.label++, n = l[1], l = [0];
+                                                continue;
+                                            case 7:
+                                                l = a.ops.pop(), a.trys.pop();
+                                                continue;
+                                            default:
+                                                if (!(i = (i = a.trys).length > 0 && i[i.length - 1]) && (6 === l[0] || 2 === l[0])) {
+                                                    a = 0;
+                                                    continue
+                                                }
+                                                if (3 === l[0] && (!i || l[1] > i[0] && l[1] < i[3])) {
+                                                    a.label = l[1];
+                                                    break
+                                                }
+                                                if (6 === l[0] && a.label < i[1]) {
+                                                    a.label = i[1], i = l;
+                                                    break
+                                                }
+                                                if (i && a.label < i[2]) {
+                                                    a.label = i[2], a.ops.push(l);
+                                                    break
+                                                }
+                                                i[2] && a.ops.pop(), a.trys.pop();
+                                                continue
+                                        }
+                                        l = r.call(e, a)
+                                    } catch (e) {
+                                        l = [6, e], n = 0
+                                    } finally {
+                                        t = i = 0
                                     }
-                                    return e.next = 7, Xr.getFriendCount(b.CurrentUser.userId);
-                                case 7:
-                                    if (a = e.sent, !(void 0 !== (null === (n = a.data) || void 0 === n ? void 0 : n.count) && a.data.count < 200)) {
-                                        e.next = 13;
-                                        break
+                                    if (5 & l[0]) throw l[1];
+                                    return {
+                                        value: l[0] ? l[1] : void 0,
+                                        done: !0
                                     }
-                                    return e.next = 11, Xr.getFriendRecommendations(b.CurrentUser.userId);
-                                case 11:
-                                    (o = e.sent).length > 0 && (s(!0), i(o), Yr.emitCarouselDisplayedEvent(b.CurrentUser.userId, r.data[Qr.FriendRecommendationSource], o.length));
-                                case 13:
-                                    e.next = 18;
-                                    break;
-                                case 15:
-                                    e.prev = 15, e.t0 = e.catch(0), console.error(e.t0);
-                                case 18:
-                                case "end":
-                                    return e.stop()
+                                }
                             }
-                        }), e, null, [
-                            [0, 15]
-                        ])
-                    })), function() {
-                        var t = this,
-                            r = arguments;
-                        return new Promise((function(n, a) {
-                            var i = e.apply(t, r);
+                        }(this, function(o) {
+                            switch (o.label) {
+                                case 0:
+                                    return o.trys.push([0, 5, , 6]), [4, to([ts.FriendRecommendationSource])];
+                                case 1:
+                                    if (!((null == (e = (r = o.sent()).data) ? void 0 : e[ts.FriendRecommendationSource]) && r.data[ts.FriendRecommendationSource] !== tC.None)) return [3, 4];
+                                    return [4, ty(I.CurrentUser.userId)];
+                                case 2:
+                                    if (!(void 0 !== (null == (t = (n = o.sent()).data) ? void 0 : t.count) && n.data.count < 200)) return [3, 4];
+                                    return [4, tp(I.CurrentUser.userId)];
+                                case 3:
+                                    (a = o.sent()).length > 0 && (u(!0), i(a), tl(I.CurrentUser.userId, r.data[ts.FriendRecommendationSource], a.length)), o.label = 4;
+                                case 4:
+                                    return [3, 6];
+                                case 5:
+                                    return console.error(o.sent()), [3, 6];
+                                case 6:
+                                    return [2]
+                            }
+                        })
+                    }, function() {
+                        var r = this,
+                            t = arguments;
+                        return new Promise(function(n, i) {
+                            var a = e.apply(r, t);
 
                             function o(e) {
-                                pn(i, n, a, o, u, "next", e)
+                                tN(a, n, i, o, s, "next", e)
                             }
 
-                            function u(e) {
-                                pn(i, n, a, o, u, "throw", e)
+                            function s(e) {
+                                tN(a, n, i, o, s, "throw", e)
                             }
                             o(void 0)
-                        }))
+                        })
                     })()
-                }), []), bn((function() {
-                    "" !== c && Sn.open().catch((function() {
+                }, []), tj(function() {
+                    "" !== c && tL.open().catch(function() {
                         return d("")
-                    }))
-                }), [c]), u ? t().createElement("div", {
-                    className: "section col-xs-12 friend-recommendations-section"
-                }, t().createElement("div", {
-                    className: "container-header"
-                }, t().createElement("h4", null, r("Label.FriendRecommendationsHeader"))), t().createElement(fn, {
-                    friendRecommendations: a,
-                    translate: r,
-                    setError: d
-                }), t().createElement(gn, {
-                    title: r("Label.ErrorHeader"),
-                    body: c,
-                    neutralButtonText: r("Action.OK")
-                })) : t().createElement("div", null)
+                    })
+                }, [c]), s) ? (0, a.jsxs)("div", {
+                    className: "section col-xs-12 friend-recommendations-section",
+                    children: [(0, a.jsx)("div", {
+                        className: "container-header",
+                        children: (0, a.jsx)("h4", {
+                            children: r("Label.FriendRecommendationsHeader")
+                        })
+                    }), (0, a.jsx)(tw, {
+                        friendRecommendations: n,
+                        translate: r,
+                        setError: d
+                    }), (0, a.jsx)(tD, {
+                        title: r("Label.ErrorHeader"),
+                        body: c,
+                        neutralButtonText: r("Action.OK")
+                    })]
+                }) : (0, a.jsx)("div", {})
             }
-            Rn.propTypes = {
-                translate: D().func.isRequired
-            };
-            var Fn = Rn;
 
-            function Tn(e) {
+            function t_(e) {
                 var r = e.translate;
-                return t().createElement(Fn, {
+                return (0, a.jsx)(tU, {
                     translate: r
                 })
             }
-            Tn.propTypes = {
-                translate: D().func.isRequired
+            tU.propTypes = {
+                translate: j().func.isRequired
+            }, t_.propTypes = {
+                translate: j().func.isRequired
             };
-            var In = (0, c.withTranslations)(Tn, {
+            var tq = (0, h.withTranslations)(t_, {
                 common: [],
                 feature: "Feature.FriendRecommendations"
             });
 
-            function Cn(e, t) {
-                return function(e) {
-                    if (Array.isArray(e)) return e
-                }(e) || function(e, t) {
-                    if ("undefined" == typeof Symbol || !(Symbol.iterator in Object(e))) return;
-                    var r = [],
-                        n = !0,
-                        a = !1,
-                        i = void 0;
-                    try {
-                        for (var o, u = e[Symbol.iterator](); !(n = (o = u.next()).done) && (r.push(o.value), !t || r.length !== t); n = !0);
-                    } catch (e) {
-                        a = !0, i = e
-                    } finally {
-                        try {
-                            n || null == u.return || u.return()
-                        } finally {
-                            if (a) throw i
-                        }
-                    }
-                    return r
-                }(e, t) || function(e, t) {
-                    if (!e) return;
-                    if ("string" == typeof e) return Nn(e, t);
-                    var r = Object.prototype.toString.call(e).slice(8, -1);
-                    "Object" === r && e.constructor && (r = e.constructor.name);
-                    if ("Map" === r || "Set" === r) return Array.from(e);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Nn(e, t)
-                }(e, t) || function() {
-                    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }()
-            }
-
-            function Nn(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var r = 0, n = new Array(t); r < t; r++) n[r] = e[r];
+            function tM(e, r) {
+                (null == r || r > e.length) && (r = e.length);
+                for (var t = 0, n = Array(r); t < r; t++) n[t] = e[t];
                 return n
             }
-            var wn = _.FRIENDTABS,
-                An = _.FRIENDS_ERROR,
-                On = _.SORT_OPTIONS,
-                Dn = b.CurrentUser.userId,
-                Pn = Cn((0, P.createModal)(), 2),
-                xn = Pn[0],
-                Ln = Pn[1];
 
-            function qn(r) {
-                var n, a = r.translate,
-                    i = r.metadata,
+            function tk(e, r) {
+                return function(e) {
+                    if (Array.isArray(e)) return e
+                }(e) || function(e, r) {
+                    var t, n, i = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                    if (null != i) {
+                        var a = [],
+                            o = !0,
+                            s = !1;
+                        try {
+                            for (i = i.call(e); !(o = (t = i.next()).done) && (a.push(t.value), !r || a.length !== r); o = !0);
+                        } catch (e) {
+                            s = !0, n = e
+                        } finally {
+                            try {
+                                o || null == i.return || i.return()
+                            } finally {
+                                if (s) throw n
+                            }
+                        }
+                        return a
+                    }
+                }(e, r) || function(e, r) {
+                    if (e) {
+                        if ("string" == typeof e) return tM(e, r);
+                        var t = Object.prototype.toString.call(e).slice(8, -1);
+                        if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return tM(e, r)
+                    }
+                }(e, r) || function() {
+                    throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                }()
+            }
+            var tB = _.FRIENDTABS,
+                tG = _.FRIENDS_ERROR,
+                tz = _.SORT_OPTIONS,
+                tQ = I.CurrentUser.userId,
+                tH = tk((0, P.createModal)(), 2),
+                tW = tH[0],
+                tV = tH[1];
+
+            function tY(e) {
+                var r, t, n = e.translate,
+                    i = e.metadata,
                     o = i.isMyProfile,
-                    u = i.profileUserId,
-                    s = (i.userName, i.displayName),
-                    l = i.isFriendsFilterBarEnabled,
-                    c = i.isFriendsPageSortExperimentEnabled,
-                    d = i.isSortFriendsInApiExperimentEnabled,
-                    f = (i.shouldDisplayFriendRequestContext, r.setMetadata),
-                    m = r.errorType,
-                    p = r.clearError;
-                if ((0, e.useEffect)((function() {
-                        document.title = "".concat(a("Label.Friends"), " - Roblox")
-                    }), [a]), o) n = a("Heading.MyFriends");
-                else {
-                    n = a("Heading.UsersFriends", {
-                        username: s
+                    s = i.profileUserId,
+                    u = (i.userName, i.displayName),
+                    c = i.isFriendsFilterBarEnabled,
+                    d = i.isFriendsPageSortExperimentEnabled,
+                    f = i.isSortFriendsInApiExperimentEnabled,
+                    p = (i.shouldDisplayFriendRequestContext, e.setMetadata),
+                    m = e.errorType,
+                    y = e.clearError;
+                (0, l.useEffect)(function() {
+                    document.title = "".concat(n("Label.Friends"), " - Roblox")
+                }, [n]), r = o ? n("Heading.MyFriends") : n("Heading.UsersFriends", {
+                    username: u
+                });
+                var h = tG[m] || {},
+                    v = tk((0, l.useState)(!1), 2),
+                    b = v[0],
+                    g = v[1],
+                    S = (0, l.useContext)(eZ),
+                    E = S.setFriendsSort,
+                    T = S.setFilterBarEnabled,
+                    R = S.setShowJoinGameButtonInFriendCardDesktopOnly,
+                    F = S.showFriendRecs,
+                    I = S.setTrustedConnectionsAmpPolicyLoaded,
+                    w = S.setCanAccessTrustedConnections,
+                    C = S.isTcManagementHubEnabled,
+                    x = S.setIsTcManagementHubEnabled;
+                (0, l.useEffect)(function() {
+                    er.getMetadata(s).then(function(e) {
+                        p(e.data)
                     })
-                }
-                var v = An[m] || {},
-                    h = Cn((0, e.useState)(!1), 2),
-                    y = h[0],
-                    b = h[1],
-                    E = (0, e.useContext)(nt),
-                    g = E.setFriendsSort,
-                    S = E.setFilterBarEnabled,
-                    R = E.setShowJoinGameButtonInFriendCardDesktopOnly,
-                    F = E.showFriendRecs,
-                    T = E.setTrustedConnectionsAmpPolicyLoaded,
-                    I = E.setCanAccessTrustedConnections,
-                    C = E.isTcManagementHubEnabled,
-                    N = E.setIsTcManagementHubEnabled;
-                (0, e.useEffect)((function() {
-                    Ee.getMetadata(u).then((function(e) {
-                        var t = e.data;
-                        f(t)
-                    }))
-                }), []), (0, e.useEffect)((function() {
-                    C && nr(_.AMP_FEATURE_NAMES.IsUserInTcEligibleCountry, null, null, _.AMP_NAMESPACES.ConnectionGraphCore).then((function(e) {
-                        var t = e.access;
-                        I("Granted" === t), T(!0)
-                    })).catch((function() {
-                        I(!1)
-                    }))
-                }), [C]), (0, e.useEffect)((function() {
-                    S(l)
-                }), [l]), (0, e.useEffect)((function() {
-                    Gr([Qr.JoinButtonFriendCard, Qr.JoinButtonFriendCardDesktopOnly, Qr.TcManagementHub]).then((function(e) {
-                        var t = e.data;
-                        g(On.API), null != t && t[Qr.JoinButtonFriendCardDesktopOnly] && R(t[Qr.JoinButtonFriendCardDesktopOnly]), null != t && t[Qr.TcManagementHub] && N(!0)
-                    })).catch((function() {
-                        g(On.ALPHABETICAL), R(!1)
-                    })).finally((function() {
-                        b(!0)
-                    }))
-                }), [c, d]), (0, e.useEffect)((function() {
-                    m && Ln.open().catch((function() {
-                        p()
-                    }))
-                }), [m]);
-                var w, A = [{
+                }, []), (0, l.useEffect)(function() {
+                    if (C) {
+                        var e, r;
+                        (e = _.AMP_FEATURE_NAMES.IsUserInTcEligibleCountry, r = _.AMP_NAMESPACES.ConnectionGraphCore, rL(function() {
+                            var t;
+                            return rU(this, function(n) {
+                                switch (n.label) {
+                                    case 0:
+                                        return t = $(e, null, null, r), [4, H.httpService.get(t)];
+                                    case 1:
+                                        return [2, n.sent().data]
+                                }
+                            })
+                        })()).then(function(e) {
+                            w("Granted" === e.access), I(!0)
+                        }).catch(function() {
+                            w(!1)
+                        })
+                    }
+                }, [C]), (0, l.useEffect)(function() {
+                    T(c)
+                }, [c]), (0, l.useEffect)(function() {
+                    to([ts.JoinButtonFriendCard, ts.JoinButtonFriendCardDesktopOnly, ts.TcManagementHub]).then(function(e) {
+                        var r = e.data;
+                        E(tz.API), (null == r ? void 0 : r[ts.JoinButtonFriendCardDesktopOnly]) && R(r[ts.JoinButtonFriendCardDesktopOnly]), (null == r ? void 0 : r[ts.TcManagementHub]) && x(!0)
+                    }).catch(function() {
+                        E(tz.ALPHABETICAL), R(!1)
+                    }).finally(function() {
+                        g(!0)
+                    })
+                }, [d, f]), (0, l.useEffect)(function() {
+                    m && tV.open().catch(function() {
+                        y()
+                    })
+                }, [m]);
+                var N = [{
                     id: "friends",
                     path: "/friends",
                     title: "Label.Friends",
-                    name: wn.FRIENDS,
+                    name: tB.FRIENDS,
                     tooltipMsg: "Message.FriendsTabTooltip",
                     isDefault: !0,
-                    show: null != Dn
+                    show: null != tQ
                 }, {
                     id: "following",
                     path: "/following",
                     title: "Label.Following",
-                    name: wn.FOLLOWING,
+                    name: tB.FOLLOWING,
                     tooltipMsg: "Message.FollowingTabTooltip"
                 }, {
                     id: "followers",
                     path: "/followers",
                     title: "Label.Followers",
-                    name: wn.FOLLOWERS,
+                    name: tB.FOLLOWERS,
                     tooltipMsg: "Message.FollowerTabTooltip"
                 }, {
                     id: "requests",
                     path: "/friend-requests",
                     title: "Label.Requests",
-                    name: wn.FRIENDREQUESTS,
+                    name: tB.FRIENDREQUESTS,
                     tooltipMsg: "Message.FriendsTabTooltip",
                     show: o
                 }];
-                return w = y ? A.reduce((function(e, r) {
-                    var n = r.path,
+                return t = b ? N.reduce(function(e, r) {
+                    var t = r.path,
                         i = r.title,
-                        u = r.name,
-                        s = r.tooltipMsg,
+                        s = r.name,
+                        u = r.tooltipMsg,
                         l = r.show,
-                        c = void 0 === l || l,
-                        d = r.isDefault,
-                        f = r.id;
-                    return c && e.push(t().createElement(P.SimpleTabs.Tab, {
-                        id: f,
-                        key: u,
-                        path: n,
-                        title: a(i),
+                        c = r.isDefault,
+                        d = r.id;
+                    return (void 0 === l || l) && e.push((0, a.jsx)(P.SimpleTabs.Tab, {
+                        id: d,
+                        path: t,
+                        title: n(i),
                         className: L()({
                             "subtract-item": !o,
-                            "signed-out": !Dn
+                            "signed-out": !tQ
                         }),
-                        name: u,
-                        isDefault: d
-                    }, t().createElement(Ur, {
-                        title: a(i),
-                        currentTab: u,
-                        tooltipMsg: a(s)
-                    }))), e
-                }), []) : null, t().createElement("div", {
-                    className: "row page-content"
-                }, t().createElement(kr, {
-                    title: n,
-                    show: !0
-                }), t().createElement(xn, {
-                    title: m && a(v.titleText),
-                    body: m && a(v.bodyText),
-                    neutralButtonText: m && a(v.neutralButtonText),
-                    footerText: m && v.footerText && a(v.footerText)
-                }), F && t().createElement(In, null), t().createElement(P.SimpleTabs, {
-                    type: P.SimpleTabs.types.Hash,
-                    hashType: "hashbang",
-                    isScrollable: !0
-                }, w), t().createElement("div", {
-                    id: "react-captcha-container"
-                }))
+                        name: s,
+                        isDefault: c,
+                        children: (0, a.jsx)(tn, {
+                            title: n(i),
+                            currentTab: s,
+                            tooltipMsg: n(u)
+                        })
+                    }, s)), e
+                }, []) : null, (0, a.jsxs)("div", {
+                    className: "row page-content",
+                    children: [(0, a.jsx)(ti, {
+                        title: r,
+                        show: !0
+                    }), (0, a.jsx)(tW, {
+                        title: m && n(h.titleText),
+                        body: m && n(h.bodyText),
+                        neutralButtonText: m && n(h.neutralButtonText),
+                        footerText: m && h.footerText && n(h.footerText)
+                    }), F && (0, a.jsx)(tq, {}), (0, a.jsx)(P.SimpleTabs, {
+                        type: P.SimpleTabs.types.Hash,
+                        hashType: "hashbang",
+                        isScrollable: !0,
+                        children: t
+                    }), (0, a.jsx)("div", {
+                        id: "react-captcha-container"
+                    })]
+                })
             }
-            Ee.setUserId(Dn), qn.defaultProps = {
+            er.setUserId(tQ), tY.defaultProps = {
                 metadata: {},
                 errorType: null
-            }, qn.propTypes = {
-                translate: D().func.isRequired,
-                metadata: D().objectOf(D().any),
-                setMetadata: D().func.isRequired,
-                errorType: D().string,
-                clearError: D().func.isRequired
+            }, tY.propTypes = {
+                translate: j().func.isRequired,
+                metadata: j().objectOf(j().any),
+                setMetadata: j().func.isRequired,
+                errorType: j().string,
+                clearError: j().func.isRequired
             };
-            var Un = (0, c.withTranslations)(Fe(qn), Te),
-                _n = (0, i.createStore)(A, (0, i.applyMiddleware)(u()));
-            (0, a.ready)((function() {
-                (0, n.render)(t().createElement(l.QueryClientProvider, {
-                    client: c.queryClient
-                }, t().createElement(s.Provider, {
-                    store: _n
-                }, t().createElement(at, null, t().createElement(Un, null)))), document.getElementById("friends-container") || document.getElementById("friends-web-app"))
-            }))
-        }()
-}();
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/9187d208be88c16d7f0988a1fb86988a-friends.bundle.min.js.map
+            var tJ = (0, h.withTranslations)(ea(tY), eo),
+                tX = (0, d.createStore)(A, (0, d.applyMiddleware)(p()));
 
-/* Bundle detector */
-window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("Friends");
+            function t$() {
+                return (0, a.jsx)(y.QueryClientProvider, {
+                    client: h.queryClient,
+                    children: (0, a.jsx)(m.Provider, {
+                        store: tX,
+                        children: (0, a.jsx)(e0, {
+                            children: (0, a.jsx)(tJ, {})
+                        })
+                    })
+                })
+            }
+            s()(function() {
+                var e = document.getElementById("friends-container") || document.getElementById("friends-web-app");
+                e && (0, u.renderWithErrorBoundary)((0, a.jsx)(t$, {}), e)
+            })
+        }()
+}(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("Friends");
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/friends-c8293dadbc05ab45.js.map

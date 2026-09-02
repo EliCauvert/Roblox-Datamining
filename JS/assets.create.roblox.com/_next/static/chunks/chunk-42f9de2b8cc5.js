@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "8c192936-f38e-bac0-fb5b-f4d5888a6dd4")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "af6163de-91f6-3229-b342-7228ad1dc71a")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 656350, t => {
@@ -10883,7 +10883,7 @@
     var lu = t.i(37819),
         lc = t.i(431346),
         ll = t.i(881670);
-    let ld = "".concat("".concat("https://assets.create.roblox.com/d3d59f2ecddf652f6d3a23f10dd62efe6d42376d/assets", "/opengraph"), "/global_og_image.png"),
+    let ld = "".concat("".concat("https://assets.create.roblox.com/92ed60d6289a8d60223be2e0842b716c5398330a/assets", "/opengraph"), "/global_og_image.png"),
         lf = (0, oO.withTranslation)(t => {
             let {
                 openGraphMetadata: {
@@ -13750,5 +13750,5 @@
     n.exports = t.r(959610)
 }]);
 
-//# debugId=8c192936-f38e-bac0-fb5b-f4d5888a6dd4
-//# sourceMappingURL=3-w04l-bdhlz_.js.map
+//# debugId=af6163de-91f6-3229-b342-7228ad1dc71a
+//# sourceMappingURL=3o5h9yw73if82.js.map

@@ -1,0 +1,37 @@
+var Roblox = Roblox || {};
+Roblox.LangDynamic = Roblox.LangDynamic || {};
+Roblox.LangDynamic["Feature.UniversalFeatureRestrictions"] = {
+    "AbuseVector.RobloxKick.DialogBody.Suspended": "You can't play this game because your behavior broke the rules.",
+    "AbuseVector.RobloxKick.DialogTitle.Suspended.Minute": "Roblox suspended you from this game for 1 minute",
+    "AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes": "Roblox suspended you from this game for {number} minutes",
+    "AbuseVector.RobloxKick.DialogTitle.Suspended.Hour": "Roblox suspended you from this game for 1 hour",
+    "AbuseVector.RobloxKick.DialogTitle.Suspended.Hours": "Roblox suspended you from this game for {number} hours",
+    "AbuseVector.RobloxKick.DialogTitle.Suspended.Day": "Roblox suspended you from this game for 1 day",
+    "AbuseVector.RobloxKick.DialogTitle.Suspended.Days": "Roblox suspended you from this game for {number} days",
+    "Generic.DialogTitle.Suspended.Minute": "We suspended you from {abuseVector} for 1 minute",
+    "Generic.DialogTitle.Suspended.Minutes": "We suspended you from {abuseVector} for {number} minutes",
+    "Generic.DialogTitle.Suspended.Hour": "We suspended you from {abuseVector} for 1 hour",
+    "Generic.DialogTitle.Suspended.Hours": "We suspended you from {abuseVector} for {number} hours",
+    "Generic.DialogTitle.Suspended.Day": "We suspended you from {abuseVector} for 1 day",
+    "Generic.DialogTitle.Suspended.Days": "We suspended you from {abuseVector} for {number} days",
+    "AbuseVector.RobloxKick.DialogBody.Banned": "You have been banned from playing this game because of repeated or serious rule-breaking.",
+    "AbuseVector.RobloxKick.DialogTitle.Banned": "Roblox banned you from this game",
+    "AbuseVector.TextChat": "Text Chat",
+    "AbuseVector.TextChat.DialogBody.Suspended": "You can’t use chat because one or more of your messages broke the rules. If you break the rules again, you could be banned.",
+    "Generic.DialogBody.Banned": "You can't use this feature because your behavior broke the rules of our community.",
+    "Generic.DialogBody.Suspended": "You can't use this feature because your behavior broke the rules of our community. If you break the rules again, you could be banned.",
+    "Generic.DialogBody.Nudge": "You may be suspended from using this feature if you continue to break the rules of our community.",
+    "AbuseVector.TextChat.DialogBody.Nudge": "Your text chat may be suspended if you break the rules again.",
+    "AbuseVector.TextChat.DialogBody.Banned": "You can’t use chat because one or more of your messages broke the rules.",
+    "AbuseVector.Generic": "this feature",
+    "Generic.DialogTitle.Banned": "We banned you from {abuseVector}",
+    "Generic.DialogTitle.Nudge": "Your {abuseVector} usage breaks the rules",
+    "AbuseVector.TextChat.DialogTitle.Nudge": "Your text chat breaks the rules",
+    "AbuseVector.AgeVerification": "Age Verification",
+    "AbuseVector.PartyChat": "Party Chat",
+    "AbuseVector.RightsManagement": "Rights Management",
+    "Action.OK": "OK",
+    "AbuseVector.AgeVerification.DialogTitle.Suspended": "Age checks suspended",
+    "AbuseVector.AgeVerification.DialogBody.Suspended": "You can't check your age right now because you've repeatedly broken our Community Standards. You can try again after the restriction ends."
+};
+window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.UniversalFeatureRestrictions");

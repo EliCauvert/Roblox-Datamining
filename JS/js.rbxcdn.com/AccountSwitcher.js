@@ -6388,7 +6388,8 @@
                         containerClass: "avatar-card-image",
                         type: gr.ThumbnailTypes.avatarHeadshot,
                         targetId: n,
-                        size: gr.ThumbnailAvatarHeadshotSize.size60
+                        size: gr.ThumbnailAvatarHeadshotSize.size60,
+                        includeProfileFrame: !0
                     })), o().createElement("div", {
                         className: "account-selection-name-container"
                     }, o().createElement("p", {
@@ -6813,7 +6814,8 @@
                         containerClass: "avatar-card-image",
                         type: gr.ThumbnailTypes.avatarHeadshot,
                         targetId: r.id,
-                        size: gr.ThumbnailAvatarHeadshotSize.size60
+                        size: gr.ThumbnailAvatarHeadshotSize.size60,
+                        includeProfileFrame: !0
                     })), o().createElement("div", {
                         className: "account-selection-name-container"
                     }, o().createElement("p", {
@@ -8592,7 +8594,7 @@
             })
         }()
 }();
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/62e087fa6359b4c9d22f8c5699a2a827-accountSwitcher.bundle.min.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/b347b814f546db9238c401f60b7fcd47-accountSwitcher.bundle.min.js.map
 
 /* Bundle detector */
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("AccountSwitcher");
