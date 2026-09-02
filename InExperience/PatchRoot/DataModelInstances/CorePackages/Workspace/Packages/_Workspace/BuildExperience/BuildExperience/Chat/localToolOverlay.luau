@@ -54,6 +54,13 @@ return function()
 				p2.submittedToolCallIds[p1] = true
 			end)
 		end,
+		clearSubmitted = function(p1)
+			-- upvalues: updateOptimistic (ref)
+			updateOptimistic(function(p2)
+				-- upvalues: p1 (ref)
+				p2.submittedToolCallIds[p1] = nil
+			end)
+		end,
 		setAskUserTool = function(value)
 			-- upvalues: updateOptimistic (ref)
 			updateOptimistic(function(p1)

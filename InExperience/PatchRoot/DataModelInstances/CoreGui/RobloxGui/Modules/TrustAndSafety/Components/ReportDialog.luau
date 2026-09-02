@@ -17,15 +17,8 @@ local constantsModule = require(parent.Resources.Constants)
 local sendReportModule = require(parent.Thunks.SendReport)
 local textEntryFieldModule = require(parent.Components.TextEntryField)
 local modalDialogModule = require(parent.Components.ModalDialog)
-local screenshotDialogModule = require(parent.Components.ReportAnything.ScreenshotDialog)
-local screenshotFlowStepHandlerModule = require(parent.Components.ReportAnything.ScreenshotFlowStepHandler)
 local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
 local sessionUtilityModule = require(parent.Utility.SessionUtility)
-local screenshotHelperModule = require(parent.Utility.ScreenshotHelper)
-local getFFlagReportAnythingScreenshotModule = require(parent.Flags.GetFFlagReportAnythingScreenshot)
-local getFFlagReportAnythingMultistepScreenshotModule = require(parent.Flags.GetFFlagReportAnythingMultistepScreenshot)
-local screenshotAnnotatedModule = require(parent.Actions.ScreenshotAnnotated)
-local filterIdentifiedAvatarsModule = require(parent.Thunks.FilterIdentifiedAvatars)
 local provider = UIBloxModule.Core.Style.Provider
 local withStyle = UIBloxModule.Core.Style.withStyle
 local buttonStack = UIBloxModule.App.Button.ButtonStack
@@ -64,14 +57,11 @@ reportDialog.validateProps = tModule.strictInterface({
 	targetPlayer = tModule.optional(playerInterfaceModule),
 	placeName = tModule.string,
 	screenSize = tModule.Vector2,
-	screenshotAnnotationPoints = tModule.array(tModule.Vector2),
 	navigateBack = tModule.optional(tModule.callback),
 	canNavigateBack = tModule.optional(tModule.boolean),
 	sendReport = tModule.callback,
 	closeDialog = tModule.optional(tModule.callback),
-	screenshotAnnotated = tModule.optional(tModule.callback),
-	reportCategory = tModule.optional(tModule.string),
-	currentPage = tModule.string
+	reportCategory = tModule.optional(tModule.string)
 })
 
 function reportDialog.init(p1)
@@ -100,11 +90,6 @@ function reportDialog.init(p1)
 	function p1.onCancel()
 		-- upvalues: p1 (ref)
 		p1.props.closeDialog(p1.state.reasonText, p1.state.descriptionText ~= "")
-	end
-	
-	function p1.onScreenshotAnnotated(p2)
-		-- upvalues: p1 (ref)
-		p1.props.screenshotAnnotated(p1.props.reportCategory, p1.props.reportType, p2)
 	end
 end
 
@@ -302,7 +287,7 @@ function reportDialog.categoryTitle(p2)
 end
 
 function reportDialog.render(p2)
-	-- upvalues: withLocalizationModule (ref), getFFlagReportAnythingScreenshotModule (ref), constantsModule (ref), getFFlagReportAnythingMultistepScreenshotModule (ref), reactModule (ref), screenshotFlowStepHandlerModule (ref), screenshotHelperModule (ref), screenshotDialogModule (ref), roactModule (ref), modalDialogModule (ref), buttonStack (ref), buttonType (ref)
+	-- upvalues: withLocalizationModule (ref), roactModule (ref), modalDialogModule (ref), buttonStack (ref), buttonType (ref)
 	return withLocalizationModule({
 		cancelText = "CoreScripts.InGameMenu.Cancel",
 		reportText = "CoreScripts.InGameMenu.Report.SendReport",
@@ -310,23 +295,8 @@ function reportDialog.render(p2)
 		toastDefaultDescription = "CoreScripts.InGameMenu.Report.Confirmation.ThanksForReportDescription",
 		titleText = p2:categoryTitle()
 	})(function(p3)
-		-- upvalues: getFFlagReportAnythingScreenshotModule (copy), p2 (ref), constantsModule (copy), getFFlagReportAnythingMultistepScreenshotModule (copy), reactModule (copy), screenshotFlowStepHandlerModule (copy), screenshotHelperModule (copy), screenshotDialogModule (copy), roactModule (copy), modalDialogModule (copy), buttonStack (copy), buttonType (copy)
-		return if not (not getFFlagReportAnythingScreenshotModule() or p2.props.currentPage ~= constantsModule.Page.ScreenshotDialog) then if getFFlagReportAnythingMultistepScreenshotModule() then reactModule.createElement(screenshotFlowStepHandlerModule, {
-			titleText = "Highlight What's Wrong",
-			entryPoint = "experience",
-			dismissAction = p2.onCancel,
-			screenshot = screenshotHelperModule:GetScreenshotContentId(),
-			skipAnnotationAction = function() end,
-			restartAction = function() end,
-			reportAction = function() end
-		}) else reactModule.createElement(screenshotDialogModule, {
-			titleText = "Highlight What's Wrong",
-			screenshot = screenshotHelperModule:GetScreenshotContentId(),
-			backAction = if p2.props.canNavigateBack then p2.navigateBack else nil,
-			dismissAction = p2.onCancel,
-			reportAction = p2.onScreenshotAnnotated,
-			initialAnnotationPoints = p2.props.screenshotAnnotationPoints
-		}) else roactModule.createElement(modalDialogModule, {
+		-- upvalues: roactModule (copy), modalDialogModule (copy), p2 (ref), buttonStack (copy), buttonType (copy)
+		return roactModule.createElement(modalDialogModule, {
 			visible = p2.props.isReportDialogOpen,
 			screenSize = p2.props.screenSize,
 			titleText = p3.titleText,
@@ -375,16 +345,14 @@ return roactRoduxModule.UNSTABLE_connect2(function(p2, _)
 	return {
 		reportCategory = p2.report.reportCategory,
 		isReportDialogOpen = p2.report.currentPage == constantsModule.Page.ReportForm,
-		currentPage = p2.report.currentPage,
 		reportType = p2.report.reportType,
 		targetPlayer = p2.report.targetPlayer,
 		canNavigateBack = #p2.report.history > 1,
 		placeName = p2.placeInfo.name,
-		screenSize = p2.displayOptions.screenSize,
-		screenshotAnnotationPoints = p2.report.screenshotAnnotationPoints
+		screenSize = p2.displayOptions.screenSize
 	}
 end, function(p2)
-	-- upvalues: navigateBackModule (ref), sendAnalyticsModule (ref), constantsModule (ref), endReportFlowModule (ref), sessionUtilityModule (ref), filterIdentifiedAvatarsModule (ref), screenshotAnnotatedModule (ref), sendReportModule (ref)
+	-- upvalues: navigateBackModule (ref), sendAnalyticsModule (ref), constantsModule (ref), endReportFlowModule (ref), sessionUtilityModule (ref), sendReportModule (ref)
 	return {
 		navigateBack = function(p3, p4)
 			-- upvalues: p2 (ref), navigateBackModule (copy), sendAnalyticsModule (copy), constantsModule (copy)
@@ -404,11 +372,6 @@ end, function(p2)
 				descriptionTextChanged = p4
 			})
 			sessionUtilityModule.endAbuseReportSession()
-		end,
-		screenshotAnnotated = function(p3, p4, p5)
-			-- upvalues: p2 (ref), filterIdentifiedAvatarsModule (copy), screenshotAnnotatedModule (copy)
-			p2(filterIdentifiedAvatarsModule(p5))
-			p2(screenshotAnnotatedModule(p3, p4, p5))
 		end,
 		sendReport = function(p3, p4, p5, p6, p7, p8, p9)
 			-- upvalues: p2 (ref), sendReportModule (copy)

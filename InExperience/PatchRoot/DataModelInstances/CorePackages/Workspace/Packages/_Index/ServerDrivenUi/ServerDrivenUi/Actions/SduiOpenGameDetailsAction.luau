@@ -11,7 +11,6 @@ local sduiParsers = sduiCoreSystemModule.SduiParsers
 local sduiErrors = sduiCoreSystemModule.SduiErrors
 local fFlagEnableExperienceDetailsBottomSheet = require(parent.SharedFlags).FFlagEnableExperienceDetailsBottomSheet
 local fFlagLuaAppEdpBottomSheetPeekViewEvents = require(parent.SharedFlags).FFlagLuaAppEdpBottomSheetPeekViewEvents
-local fFlagSduiChartsSupport = require(parent.SharedFlags).FFlagSduiChartsSupport
 local fFlagSduiEdpPrefetchPlayability = require(parent.SharedFlags).FFlagSduiEdpPrefetchPlayability
 local fFlagLuaAppSduiEdpEnabled = require(parent.SharedFlags).FFlagLuaAppSduiEdpEnabled
 local fFlagSduiEdpInheritGameDetailSourceSession = require(parent.SharedFlags).FFlagSduiEdpInheritGameDetailSourceSession
@@ -19,7 +18,7 @@ local fFlagLuaAppAddSeeAllFlagToGameDetailReferral = require(parent.SharedFlags)
 local t = {}
 
 return function(p1, p2, p3)
-	-- upvalues: sduiErrors (ref), getInputModeStore (ref), t (ref), findAnalyticsFieldInAncestors (ref), intervalPerformanceTracker (ref), sduiParsers (ref), fFlagLuaAppAddSeeAllFlagToGameDetailReferral (ref), sponsoredGamesRecordClick (ref), calculateRowPositionFields (ref), fFlagSduiChartsSupport (ref), fFlagSduiEdpInheritGameDetailSourceSession (ref), openGameDetails (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), fFlagEnableExperienceDetailsBottomSheet (ref), appPage (ref), fFlagSduiEdpPrefetchPlayability (ref), fFlagLuaAppSduiEdpEnabled (ref)
+	-- upvalues: sduiErrors (ref), getInputModeStore (ref), t (ref), findAnalyticsFieldInAncestors (ref), intervalPerformanceTracker (ref), sduiParsers (ref), fFlagLuaAppAddSeeAllFlagToGameDetailReferral (ref), sponsoredGamesRecordClick (ref), calculateRowPositionFields (ref), fFlagSduiEdpInheritGameDetailSourceSession (ref), openGameDetails (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), fFlagEnableExperienceDetailsBottomSheet (ref), appPage (ref), fFlagSduiEdpPrefetchPlayability (ref), fFlagLuaAppSduiEdpEnabled (ref)
 	p3.dependencies.logger.reportCounter(sduiErrors.SduiCounterName.OpenGameDetailsAction, { name = getInputModeStore(false).getLastInputType(false) }, true)
 	local var1 = if p1 then p1.actionParams else t
 	local var2 = findAnalyticsFieldInAncestors("itemComponentType", p2)
@@ -63,7 +62,7 @@ return function(p1, p2, p3)
 		sponsoredGamesRecordClick(dependencies.networking, tostring(var5))
 	end
 	local var11 = calculateRowPositionFields(var3, itemsPerRow, startRowNumber)
-	local var12 = if fFlagSduiChartsSupport then findAnalyticsFieldInAncestors("appliedFilters", p2) else nil
+	local var12 = findAnalyticsFieldInAncestors("appliedFilters", p2)
 	
 	if fFlagSduiEdpInheritGameDetailSourceSession and var1.inheritReferralSession == true then
 		dependencies.gameAnalytics.reportOpenGameDetailFromGameDetail(placeId, var3, totalNumberOfItems_1, var4, var5, tostring(universeId), p3.appPage, findAnalyticsFieldInAncestors("hostUniverseId", p2))

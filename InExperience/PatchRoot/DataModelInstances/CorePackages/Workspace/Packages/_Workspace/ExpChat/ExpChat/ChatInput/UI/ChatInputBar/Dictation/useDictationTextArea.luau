@@ -1,5 +1,6 @@
 ﻿local expChat = script:FindFirstAncestor("ExpChat")
 local reactModule = require(expChat.Parent.React)
+local fFlagExpChatComposerInputBarFigmaParityModule = require(expChat.Flags.FFlagExpChatComposerInputBarFigmaParity)
 local localizationModule = require(expChat.Localization)
 local _ = require(script.Parent.useDictationInputBar)
 
@@ -8,7 +9,7 @@ local function _(startValue, endValue, alpha)
 end
 
 return function(p1, p2)
-	-- upvalues: localizationModule (ref), reactModule (ref)
+	-- upvalues: localizationModule (ref), fFlagExpChatComposerInputBarFigmaParityModule (ref), reactModule (ref)
 	local var1 = localizationModule.useLocalization({
 		transcribingText = "CoreScripts.TextChat.ChatWindow.Transcribing"
 	})
@@ -17,7 +18,7 @@ return function(p1, p2)
 	local var4 = if p1 then p1.chatInputBarSettings else nil
 	local var5 = if p1 then p1.state else nil
 	local var6 = if p1 then p1.isTranscribing else false
-	local var7 = if p2.showPlaceholderText then 0.5 else 0
+	local var7 = if p2.showPlaceholderText and not fFlagExpChatComposerInputBarFigmaParityModule then 0.5 else 0
 	local var8 = reactModule.useMemo(function()
 		-- upvalues: var3 (ref), p2 (ref), var7 (ref), reactModule (copy)
 		return if var3 == nil then p2.transparencyValue:map(function(p3)

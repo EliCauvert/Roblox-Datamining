@@ -4,14 +4,12 @@ local foundationModule = require(parent.Foundation)
 local localizationModule = require(parent.Localization)
 local markdownModule = require(parent.Markdown)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local signalsReactModule = require(parent.SignalsReact)
 local useLocalization = localizationModule.Hooks.useLocalization
 local localizationRoactContext = localizationModule.LocalizationRoactContext
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local _ = require(buildExperience.Chat.chatTypes)
 local turnProjectionModule = require(buildExperience.Chat.turnProjection)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagBuildExperienceCopyChatMessagesModule = require(buildExperience.Flags.FFlagBuildExperienceCopyChatMessages)
 local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local fFlagBuildEventsUpdate1Module = require(buildExperience.Flags.FFlagBuildEventsUpdate1)
@@ -65,19 +63,19 @@ local function _(p1)
 end
 
 local function AnswerStackSection(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), optionSelectorModule (ref), answerStackModule (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), optionSelectorModule (ref), answerStackModule (ref)
 	local var2
-	local var3 = if fFlagBuildLocalization then useLocalization({
+	local var3 = useLocalization({
 		customAnswer = localizationStringsModule.ANSWER_STACK_CUSTOM_ANSWER,
 		next = localizationStringsModule.ANSWER_STACK_NEXT,
 		submit = localizationStringsModule.ANSWER_STACK_SUBMIT
-	}) else nil
+	})
 	local prompt = p1.prompt
 	local question = prompt.question
 	local customResponseText = prompt.customResponseText
 	local var4 = p1.isActive == true
 	local isMultiSelect = question.responseType == "multi_select"
-	local var5 = if prompt.isLastQuestion == false then if fFlagBuildLocalization then var3.next else localizationStringsModule.ANSWER_STACK_NEXT elseif fFlagBuildLocalization then var3.submit else localizationStringsModule.ANSWER_STACK_SUBMIT
+	local var5 = if prompt.isLastQuestion == false then var3.next else var3.submit
 	local createElement = reactModule.createElement
 	local t = {
 		tag = "col gap-medium size-full-0 auto-y",
@@ -96,7 +94,7 @@ local function AnswerStackSection(p1)
 		var2 = reactModule.createElement(optionSelectorModule, {
 			LayoutOrder = 2,
 			isSelected = true,
-			title = if fFlagBuildLocalization then var3.customAnswer else localizationStringsModule.ANSWER_STACK_CUSTOM_ANSWER,
+			title = var3.customAnswer,
 			description = customResponseText,
 			testId = `AnswerStack.{question.id}.CustomAnswer`,
 			onActivated = function() end
@@ -167,28 +165,22 @@ local function PlanProposalSection(p1)
 end
 
 local function AgentMessageSegment(p1)
-	-- upvalues: useReactiveValue (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), localizationRoactContext (ref), foundationModule (ref), getMarkdownRendererPropsModule (ref), view (ref), icon (ref), iconName (ref), iconVariant (ref), iconSize (ref), text (ref), markdownViewer (ref)
-	local var2
-	local var3 = useReactiveValue(p1.segment.text)
+	-- upvalues: useReactiveValue (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), localizationRoactContext (ref), foundationModule (ref), getMarkdownRendererPropsModule (ref), view (ref), icon (ref), iconName (ref), iconVariant (ref), iconSize (ref), text (ref), markdownViewer (ref)
+	local var2 = useReactiveValue(p1.segment.text)
 	local _ = nil
+	local var3 = useLocalization({
+		assistantResponseFailed = localizationStringsModule.CHAT_ASSISTANT_RESPONSE_FAILED,
+		assistantStopped = localizationStringsModule.CHAT_ASSISTANT_STOPPED
+	})
+	local var4 = reactModule.useContext(localizationRoactContext)
+	local var5 = if var2 == localizationStringsModule.CHAT_ASSISTANT_RESPONSE_FAILED then var3.assistantResponseFailed elseif var2 == localizationStringsModule.CHAT_ASSISTANT_STOPPED then var3.assistantStopped else var2
 	
-	if fFlagBuildLocalization then
-		local var4 = useLocalization({
-			assistantResponseFailed = localizationStringsModule.CHAT_ASSISTANT_RESPONSE_FAILED,
-			assistantStopped = localizationStringsModule.CHAT_ASSISTANT_STOPPED
-		})
-		local var5 = reactModule.useContext(localizationRoactContext)
-		var2 = if var3 == localizationStringsModule.CHAT_ASSISTANT_RESPONSE_FAILED then var4.assistantResponseFailed elseif var3 == localizationStringsModule.CHAT_ASSISTANT_STOPPED then var4.assistantStopped else var3
-		
-		if p1.segment.errorCode ~= nil then
-			var2 = var5:Format(localizationStringsModule.CHAT_ERROR_CODE_TEXT, { ERROR_CODE = p1.segment.errorCode, ERROR_TEXT = var2 })
-		end
-	else
-		var2 = if p1.segment.errorCode ~= nil then var3 else localizationStringsModule.formatChatTurnFailureMessage(var3, p1.segment.errorCode)
+	if p1.segment.errorCode ~= nil then
+		var5 = var4:Format(localizationStringsModule.CHAT_ERROR_CODE_TEXT, { ERROR_CODE = p1.segment.errorCode, ERROR_TEXT = var5 })
 	end
 	local var6 = foundationModule.Hooks.useTokens()
 	
-	return if var2 == "" then nil elseif p1.segment.isError then reactModule.createElement(view, {
+	return if var5 == "" then nil elseif p1.segment.isError then reactModule.createElement(view, {
 		tag = "row align-y-center gap-xsmall size-full-0 auto-y",
 		testId = "ChatTurnBlock.ErrorMessage",
 		LayoutOrder = p1.LayoutOrder
@@ -204,10 +196,10 @@ local function AgentMessageSegment(p1)
 		Text = reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = "fill text-body-medium text-wrap text-align-x-left content-emphasis",
-			Text = var2
+			Text = var5
 		})
 	}) else reactModule.createElement(markdownViewer, {
-		Markdown = var2,
+		Markdown = var5,
 		WrapperProps = {
 			tag = "size-full-0 auto-y text-body-medium content-emphasis",
 			LayoutOrder = p1.LayoutOrder
@@ -272,55 +264,49 @@ local function renderWorkSegment(p1, p2, p3, p4, p5)
 end
 
 local function TurnWorkSegment(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useReactiveValue (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), foundationModule (ref), renderWorkSegment (ref), view (ref), stateLayerAffordance (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
-	local var2, var3
+	-- upvalues: useReactiveValue (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), foundationModule (ref), renderWorkSegment (ref), view (ref), stateLayerAffordance (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
 	local _ = nil
-	
-	if fFlagBuildLocalization then
-		local var4 = useReactiveValue(p1.segment.label or "")
-		local workedDurationSeconds = p1.segment.workedDurationSeconds
-		var2 = if workedDurationSeconds ~= nil then nil else math.max(0, math.floor(workedDurationSeconds + 0.5))
-		local actionCount = p1.segment.actionCount or 0
-		local var5 = useLocalization({
-			summary = if var2 == nil or var2 >= 60 then if var2 ~= nil then if actionCount == 1 then localizationStringsModule.CHAT_ONE_TASK_COMPLETED elseif actionCount > 1 then {
-				localizationStringsModule.CHAT_TASKS_COMPLETED,
-				NUM_COMPLETED_TASKS = actionCount
-			} else nil else {
-				localizationStringsModule.CHAT_WORKED_MINUTES_SECONDS,
-				MINUTES = math.floor(var2 / 60),
-				REM_SECONDS = var2 % 60
-			} else {
-				localizationStringsModule.CHAT_WORKED_SECONDS,
-				SECONDS = var2
-			},
-			turnActivity = localizationStringsModule.CHAT_TURN_ACTIVITY
-		})
-		var3 = if var2 == nil and actionCount <= 0 then if var4 == localizationStringsModule.CHAT_TURN_ACTIVITY then var5.turnActivity else var4 else var5.summary
-	else
-		var3 = useReactiveValue(p1.segment.label)
-	end
+	local var2 = useReactiveValue(p1.segment.label or "")
+	local workedDurationSeconds = p1.segment.workedDurationSeconds
+	local var3 = if workedDurationSeconds ~= nil then nil else math.max(0, math.floor(workedDurationSeconds + 0.5))
+	local actionCount = p1.segment.actionCount or 0
+	local var4 = useLocalization({
+		summary = if var3 == nil or var3 >= 60 then if var3 ~= nil then if actionCount == 1 then localizationStringsModule.CHAT_ONE_TASK_COMPLETED elseif actionCount > 1 then {
+			localizationStringsModule.CHAT_TASKS_COMPLETED,
+			NUM_COMPLETED_TASKS = actionCount
+		} else nil else {
+			localizationStringsModule.CHAT_WORKED_MINUTES_SECONDS,
+			MINUTES = math.floor(var3 / 60),
+			REM_SECONDS = var3 % 60
+		} else {
+			localizationStringsModule.CHAT_WORKED_SECONDS,
+			SECONDS = var3
+		},
+		turnActivity = localizationStringsModule.CHAT_TURN_ACTIVITY
+	})
+	local var5 = if var3 == nil and actionCount <= 0 then if var2 == localizationStringsModule.CHAT_TURN_ACTIVITY then var4.turnActivity else var2 else var4.summary
 	local var6 = useReactiveValue(p1.segment.segments)
-	var55, var50 = reactModule.useState(false)
-	local var7 = foundationModule.Hooks.useTokens()
+	local var7, var8 = reactModule.useState(false)
+	local var9 = foundationModule.Hooks.useTokens()
 	local isDone = p1.isDone
-	local var8 = not p1.isDone or var55
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		var2(function(p2)
+	local var10 = not p1.isDone or var7
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: var8 (ref)
+		var8(function(p2)
 			return not p2
 		end)
 	end, {})
 	local t = {}
 	
-	if var8 then
-		local var10 = 1
+	if var10 then
+		local var12 = 1
 		
 		for i, v in var6 do
-			local var11 = renderWorkSegment(v, var10, p1.markdownTextStyle, p1.clockBinding, p1.localToolActions)
+			local var13 = renderWorkSegment(v, var12, p1.markdownTextStyle, p1.clockBinding, p1.localToolActions)
 			
-			if var11 ~= nil then
-				t[v.key] = var11
-				var10 += 1
+			if var13 ~= nil then
+				t[v.key] = var13
+				var12 += 1
 			end
 		end
 	end
@@ -333,22 +319,22 @@ local function TurnWorkSegment(p1)
 			LayoutOrder = 1,
 			tag = "row align-y-center gap-xsmall size-full-0 auto-y padding-y-xxsmall",
 			testId = "ChatTurnBlock.TurnWork.Summary",
-			onActivated = var9,
+			onActivated = var11,
 			stateLayer = { affordance = stateLayerAffordance.None }
 		}, {
 			Chevron = reactModule.createElement(icon, {
 				LayoutOrder = 1,
-				name = if var55 then iconName.ChevronLargeDown else iconName.ChevronLargeRight,
+				name = if var7 then iconName.ChevronLargeDown else iconName.ChevronLargeRight,
 				size = iconSize.XSmall,
-				style = var7.Color.Content.Muted
+				style = var9.Color.Content.Muted
 			}),
 			Label = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "fill text-body-medium text-wrap text-align-x-left content-muted",
-				Text = var3
+				Text = var5
 			})
 		}) else nil,
-		Work = if var8 then reactModule.createElement(view, {
+		Work = if var10 then reactModule.createElement(view, {
 			testId = "ChatTurnBlock.TurnWork.Content",
 			LayoutOrder = if isDone then 2 else 1,
 			tag = {
@@ -372,7 +358,7 @@ return reactModule.memo(function(p2)
 	local sessionId = turn.sessionId
 	local isDone = turn.isDone
 	local isLatestPublishTurn = turn.isLatestPublishTurn
-	local var12 = reactModule.useMemo(function()
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: turnState (ref), turnProjectionModule (copy), turnKey (ref), universeId (ref), sessionId (ref), startSequenceId (ref), endSequenceId (ref), optimisticLocalTools (ref), isLatestPublishTurn (ref), setupErrorText (ref)
 		return if turnState == nil then if setupErrorText == nil then turnProjectionModule.projectLoadingTurnSegments({ turnKey = turnKey }) else turnProjectionModule.projectSetupErrorSegments(setupErrorText, { turnKey = turnKey }) else turnProjectionModule.projectActiveTurnSegments(turnState, {
 			turnKey = turnKey,
@@ -387,71 +373,71 @@ return reactModule.memo(function(p2)
 		turnState, turnKey, startSequenceId, endSequenceId, optimisticLocalTools,
 		setupErrorText, universeId, sessionId, isLatestPublishTurn
 	})
-	local var13 = reactModule.useRef(nil)
+	local var15 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: isDone (ref), var13 (ref), reportTurnActivityGapModule (copy), universeId (ref)
+		-- upvalues: isDone (ref), var15 (ref), reportTurnActivityGapModule (copy), universeId (ref)
 		if isDone then
-			var13.current = nil
+			var15.current = nil
 			
 			return
 		end
 		local processTime = os.clock()
-		reportTurnActivityGapModule.log(if var13.current ~= nil then 0 else (processTime - var13.current) * 1000, var13.current == nil, universeId)
-		var13.current = processTime
-	end, { isDone, var12, universeId })
-	local var14 = useReactiveValue(turn.turnFeedbackIds or t)
+		reportTurnActivityGapModule.log(if var15.current ~= nil then 0 else (processTime - var15.current) * 1000, var15.current == nil, universeId)
+		var15.current = processTime
+	end, { isDone, var14, universeId })
+	local var16 = useReactiveValue(turn.turnFeedbackIds or t)
 	local localToolActions = p2.localToolActions or t_1
 	local emphasis = foundationModule.Hooks.useTokens().Color.Content.Emphasis
-	local var15 = if fFlagBuildExperienceCopyChatMessagesModule and turnState ~= nil then turnProjectionModule.getFinalAssistantMessageText(turnState) else nil
+	local var17 = if fFlagBuildExperienceCopyChatMessagesModule and turnState ~= nil then turnProjectionModule.getFinalAssistantMessageText(turnState) else nil
 	local onPlaytest = p2.onPlaytest
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: sendBuildExperienceEventModule (copy), var14 (ref), fFlagBuildEventsUpdate1Module (copy), onPlaytest (ref)
+	local var18 = reactModule.useCallback(function()
+		-- upvalues: sendBuildExperienceEventModule (copy), var16 (ref), fFlagBuildEventsUpdate1Module (copy), onPlaytest (ref)
 		sendBuildExperienceEventModule("PLAYTEST_CLICK", {
-			universeId = var14.universeId,
-			placeId = var14.placeId,
-			conversationId = var14.sessionId,
-			messageId = var14.sequenceId
+			universeId = var16.universeId,
+			placeId = var16.placeId,
+			conversationId = var16.sessionId,
+			messageId = var16.sequenceId
 		}, if fFlagBuildEventsUpdate1Module then { context = "chat_widget" } else nil)
 		
 		if onPlaytest ~= nil then
 			onPlaytest()
 		end
-	end, { onPlaytest, var14 })
-	local var17 = reactModule.useRef(false)
+	end, { onPlaytest, var16 })
+	local var19 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), onPlaytest (ref), var12 (ref), sendBuildExperienceEventModule (copy), var14 (ref)
-		if var17.current or onPlaytest == nil then return end
-		local var18 = false
+		-- upvalues: var19 (ref), onPlaytest (ref), var14 (ref), sendBuildExperienceEventModule (copy), var16 (ref)
+		if var19.current or onPlaytest == nil then return end
+		local var20 = false
 		
-		for i, v in var12 do
+		for i, v in var14 do
 			if v.kind == "playtest_cta" then
-				var18 = true
+				var20 = true
 				break
 			end
 		end
-		if var18 then
-			var17.current = true
+		if var20 then
+			var19.current = true
 			sendBuildExperienceEventModule("PLAYTEST_IMPRESSION", {
-				universeId = var14.universeId,
-				placeId = var14.placeId,
-				conversationId = var14.sessionId,
-				messageId = var14.sequenceId
+				universeId = var16.universeId,
+				placeId = var16.placeId,
+				conversationId = var16.sessionId,
+				messageId = var16.sequenceId
 			})
 			
 			return
 		end
-	end, { var12, onPlaytest, var14 })
+	end, { var14, onPlaytest, var16 })
 	local t_2 = {}
-	local var19 = 1
+	local var21 = 1
 	
-	for i, v in var12 do
-		local var20 = nil
+	for i, v in var14 do
+		local var22 = nil
 		
 		if v.kind == "agent_message" or v.kind == "activity_summary" or v.kind == "client_tool" then
-			var20 = renderWorkSegment(v, var19, emphasis, p2.clockBinding, localToolActions)
+			var22 = renderWorkSegment(v, var21, emphasis, p2.clockBinding, localToolActions)
 		elseif v.kind == "turn_work" then
-			var20 = reactModule.createElement(TurnWorkSegment, {
-				LayoutOrder = var19,
+			var22 = reactModule.createElement(TurnWorkSegment, {
+				LayoutOrder = var21,
 				segment = v,
 				isDone = isDone,
 				markdownTextStyle = emphasis,
@@ -459,15 +445,15 @@ return reactModule.memo(function(p2)
 				localToolActions = localToolActions
 			})
 		elseif v.kind == "playtest_cta" and onPlaytest ~= nil then
-			var20 = reactModule.createElement(playtestCompletedCardModule, {
-				LayoutOrder = var19,
-				onPlaytest = var16,
+			var22 = reactModule.createElement(playtestCompletedCardModule, {
+				LayoutOrder = var21,
+				onPlaytest = var18,
 				isLoading = p2.isPlaytestLoading
 			})
 		end
-		if var20 ~= nil then
-			t_2[v.key] = var20
-			var19 += 1
+		if var22 ~= nil then
+			t_2[v.key] = var22
+			var21 += 1
 		end
 	end
 	return reactModule.createElement(view, {
@@ -487,8 +473,8 @@ return reactModule.memo(function(p2)
 			Feedback = if isDone then reactModule.createElement(agentTurnFeedbackModule, {
 				LayoutOrder = 2,
 				testId = "ChatTurnBlock.UserFeedback",
-				messageText = if fFlagBuildExperienceCopyChatMessagesModule then var15 else nil,
-				turnFeedbackIds = var14
+				messageText = if fFlagBuildExperienceCopyChatMessagesModule then var17 else nil,
+				turnFeedbackIds = var16
 			}) else nil
 		})
 	})

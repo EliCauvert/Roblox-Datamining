@@ -20,6 +20,7 @@ return function(p1)
 	local var3 = var2 == responsiveModule.Input.Pointer
 	local var4 = getPlaybackDetectionMethod(var2, var3)
 	local var5, var6 = reactModule.useState(false)
+	local var7 = if p1.videoPlaybackContext then p1.videoPlaybackContext.videoPlaybackCoordinator else nil
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -35,7 +36,19 @@ return function(p1)
 			extraLocalProps = {
 				defaultLoadingImageComponent = p1.imageComponent,
 				isPlaybackEnabledByClient = var5,
-				cornerRadius = cornerRadius
+				cornerRadius = cornerRadius,
+				onVideoLoaded = reactModule.useCallback(function(p2, p3)
+					-- upvalues: var7 (ref), p1 (ref)
+					if var7 and p1.videoAnalytics then
+						p1.videoAnalytics.reportVideoLoad(nil, var7.currentPlaybackSessionId, p2, p3)
+					end
+				end, { p1.videoAnalytics, var7 }),
+				onVideoLooped = reactModule.useCallback(function()
+					-- upvalues: var7 (ref), p1 (ref)
+					if var7 and p1.videoAnalytics and p1.videoAnalytics.reportVideoLoop then
+						p1.videoAnalytics.reportVideoLoop(nil, var7.currentPlaybackSessionId)
+					end
+				end, { p1.videoAnalytics, var7 })
 			}
 		}) else p1.imageComponent,
 		PlaybackDetector = if p1.videoPlayer then reactModule.createElement(videoUtilsModule.VideoPlaybackDetector, {
@@ -51,9 +64,11 @@ return function(p1)
 				-- upvalues: var6 (ref)
 				var6(p2)
 			end, {}),
+			videoAnalytics = p1.videoAnalytics,
 			videoDwellTimeInSec = p1.videoDwellTimeInSec,
 			videoVisiblePercent = p1.videoVisiblePercent,
 			isVideoEligible = p1.isVideoEligible,
+			onVideoIneligible = p1.onVideoIneligible,
 			onPlaybackCandidate = p1.onPlaybackCandidate,
 			viewportVideoAutoplayController = if p1.videoPlaybackContext then p1.videoPlaybackContext.viewportVideoAutoplayController else nil
 		}) else nil

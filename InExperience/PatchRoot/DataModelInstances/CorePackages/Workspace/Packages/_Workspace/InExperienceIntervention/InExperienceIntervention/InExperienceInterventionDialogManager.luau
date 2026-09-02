@@ -117,6 +117,7 @@ function InExperienceInterventionDialogManager(p1)
 				bodyOverride = var4 and var4.bodyOverride,
 				onAppeal = var4 and var4.onAppeal,
 				onShownCallback = var4 and var4.onShown,
+				onAcknowledgementSuccess = var4 and var4.onAcknowledgementSuccess,
 				analyticsEventId = var4 and var4.analyticsEventId
 			})
 		}) elseif fFlagTemporaryAvatarKickWarningDialogModule and treatmentType == constants.TreatmentType.TemporaryAvatarKickWarning then reactModule.createElement(var2, {}, {

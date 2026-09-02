@@ -5,8 +5,9 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local thirdPartyUserService = game:GetService("ThirdPartyUserService")
 local default = require(parent.LoggingProtocol).default
 local useProperty = require(parent.GuiObjectUtils).useProperty
+local fFlagLuaAppSkipStartupRouteHop = require(parent.SharedFlags).FFlagLuaAppSkipStartupRouteHop
 
-return if thirdPartyUserService and thirdPartyUserService.IsSingleSignOnSupported and thirdPartyUserService:IsSingleSignOnSupported() then function(_)
+return if fFlagLuaAppSkipStartupRouteHop and require(parent.AppCommonLib).isPlatformSingleSignOnSupported(thirdPartyUserService) or not fFlagLuaAppSkipStartupRouteHop and thirdPartyUserService and (thirdPartyUserService.IsSingleSignOnSupported and thirdPartyUserService:IsSingleSignOnSupported()) then function(_)
 	-- upvalues: useNavigation (ref), useProperty (ref), thirdPartyUserService (ref), reactModule (ref), default (ref), appPage (ref)
 	local var1 = useNavigation()
 	local var2 = useProperty(thirdPartyUserService, "HasActiveUser")

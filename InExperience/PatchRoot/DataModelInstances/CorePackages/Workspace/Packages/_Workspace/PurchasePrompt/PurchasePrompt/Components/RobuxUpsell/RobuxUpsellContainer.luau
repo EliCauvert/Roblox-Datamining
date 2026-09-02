@@ -3,8 +3,6 @@ local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
 local parent = purchasePrompt.Parent
 local roact = require(parent.PurchasePromptDeps).Roact
 local reactModule = require(parent.React)
-local _ = require(parent.IAPExperience)
-local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local coreScriptsRootProvider = require(parent.CoreScriptsRoactCommon).CoreScriptsRootProvider
 local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local focusRoot = focusNavigationUtilsModule.FocusRoot
@@ -22,7 +20,6 @@ local launchRobuxUpsellModule = require(purchasePrompt.Thunks.launchRobuxUpsell)
 local openRobuxStoreModule = require(purchasePrompt.Thunks.openRobuxStore)
 local openSecuritySettingsModule = require(purchasePrompt.Thunks.openSecuritySettings)
 local openTermsOfUseModule = require(purchasePrompt.Thunks.openTermsOfUse)
-local _ = require(purchasePrompt.Thunks.initiatePurchasePrecheck)
 local initiateUserPurchaseSettingsPrecheckModule = require(purchasePrompt.Thunks.initiateUserPurchaseSettingsPrecheck)
 local fetchCartPricingModule = require(purchasePrompt.Thunks.fetchCartPricing)
 local fetchInGameItemCartPricingModule = require(purchasePrompt.Thunks.fetchInGameItemCartPricing)
@@ -42,9 +39,7 @@ local fFlagSetMenuOnPurchasePromptModule = require(purchasePrompt.Flags.FFlagSet
 local upsellSuggestionsAPIMaxPackages = require(parent.SharedFlags).UpsellSuggestionsAPIMaxPackages
 local robuxUpsellOverlayModule = require(script.Parent.RobuxUpsellOverlay)
 local appPage = require(parent.RobloxAppEnums).AppPage
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableDiscountInfoInUnifiedPurchaseModal = sharedFlagsModule.FFlagEnableDiscountInfoInUnifiedPurchaseModal
-local fFlagEnableInExperienceOffersPurchaseFlow = sharedFlagsModule.FFlagEnableInExperienceOffersPurchaseFlow
+local fFlagEnableInExperienceOffersPurchaseFlow = require(parent.SharedFlags).FFlagEnableInExperienceOffersPurchaseFlow
 local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local fFlagSkipBuyDelayForExperienceShopModule = require(purchasePrompt.Flags.FFlagSkipBuyDelayForExperienceShop)
 local name = roact.Component:extend(script.Name)
@@ -85,7 +80,7 @@ function name.init(p1)
 end
 
 function name.createElement(p1)
-	-- upvalues: purchaseFlowModule (ref), isLinksAllowedModule (ref), roact (ref), robuxUpsellOverlayModule (ref), fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), upsellSuggestionsAPIMaxPackages (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), getPlayerPriceModule (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), externalEventConnectionModule (ref), guiService (ref), fFlagSetMenuOnPurchasePromptModule (ref)
+	-- upvalues: purchaseFlowModule (ref), isLinksAllowedModule (ref), roact (ref), robuxUpsellOverlayModule (ref), upsellSuggestionsAPIMaxPackages (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), getPlayerPriceModule (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), externalEventConnectionModule (ref), guiService (ref), fFlagSetMenuOnPurchasePromptModule (ref)
 	local props = p1.props
 	local state = p1.state
 	
@@ -101,7 +96,7 @@ function name.createElement(p1)
 	}, {
 		Prompt = roact.createElement(robuxUpsellOverlayModule, {
 			screenSize = state.screenSize,
-			virtualItemPrice = if fFlagEnableDiscountInfoInUnifiedPurchaseModal then props.virtualItemPrice else nil,
+			virtualItemPrice = props.virtualItemPrice,
 			requestType = props.requestType,
 			promptState = props.promptState,
 			purchaseFlow = props.purchaseFlow,
@@ -193,7 +188,7 @@ if fFlagEnableUnifiedProductPurchaseFlow then
 	end
 end
 return connectToStoreModule(function(p1)
-	-- upvalues: isMockingPurchasesModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), selectedRobuxPackageModule (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), selectPriceModule (ref), selectCartPricingResponseModule (ref), selectIsCartPricingFetchingModule (ref)
+	-- upvalues: isMockingPurchasesModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), selectedRobuxPackageModule (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), selectPriceModule (ref), selectCartPricingResponseModule (ref), selectIsCartPricingFetchingModule (ref)
 	local var2 = isMockingPurchasesModule(p1.promptRequest.requestType)
 	local var3 = nil
 	
@@ -228,7 +223,7 @@ return connectToStoreModule(function(p1)
 		humanoidModel = p1.promptRequest.humanoidModel,
 		isUserEligibleForUnifiedPurchaseFlow = if fFlagEnableUnifiedProductPurchaseFlow then p1.isUserEligibleForUnifiedPurchaseFlow else nil,
 		purchaseAnalyticsMetadata = if fFlagEnableUnifiedProductPurchaseFlow then p1.purchaseAnalyticsMetadata else nil,
-		virtualItemPrice = if fFlagEnableDiscountInfoInUnifiedPurchaseModal then selectPriceModule(p1) else nil,
+		virtualItemPrice = selectPriceModule(p1),
 		collectibleItemId = if fFlagPurchasePromptCartPricingEnabledModule then var3 else nil,
 		cartPricingResponse = if fFlagPurchasePromptCartPricingEnabledModule then selectCartPricingResponseModule(p1) else nil,
 		isCartPricingLoading = if fFlagPurchasePromptCartPricingEnabledModule then selectIsCartPricingFetchingModule(p1) else nil,

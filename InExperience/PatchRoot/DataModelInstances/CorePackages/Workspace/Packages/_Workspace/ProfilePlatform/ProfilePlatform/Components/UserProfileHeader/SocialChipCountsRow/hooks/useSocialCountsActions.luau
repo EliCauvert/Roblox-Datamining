@@ -10,6 +10,7 @@ local navigateDown = navigationRoduxModule.Thunks.NavigateDown
 local textKeysModule = require(profilePlatform.Common.TextKeys)
 local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
+local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
 local useNavigation = require(parent.Navigation).useNavigation
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnectionsHub
@@ -18,12 +19,13 @@ local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3D
 local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
 return function(p1, p2, p3, p4, p5)
-	-- upvalues: useDispatch (ref), useNavigation (ref), reactModule (ref), appPage (ref), eventNamesModule (ref), fFlagEnableSocialTabsPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), url (ref), textKeysModule (ref), fFlagCreateConnectionsHub (ref), urlBuilder (ref), fFlagConnectionsToFriendsRename (ref)
+	-- upvalues: useDispatch (ref), useNavigation (ref), fFlagEnableSocialTabsPage (ref), useProfileFormFactorModule (ref), reactModule (ref), appPage (ref), eventNamesModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), url (ref), textKeysModule (ref), fFlagCreateConnectionsHub (ref), urlBuilder (ref), fFlagConnectionsToFriendsRename (ref)
 	local var2 = useDispatch()
 	local var3 = useNavigation()
+	local var4 = if fFlagEnableSocialTabsPage then not useProfileFormFactorModule().isFullView else nil
 	
 	return reactModule.useMemo(function()
-		-- upvalues: p4 (ref), appPage (copy), p3 (ref), eventNamesModule (copy), fFlagEnableSocialTabsPage (copy), p2 (ref), p1 (ref), p5 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy), url (copy), textKeysModule (copy), fFlagCreateConnectionsHub (copy), var3 (ref), urlBuilder (copy), fFlagConnectionsToFriendsRename (copy)
+		-- upvalues: p4 (ref), appPage (copy), p3 (ref), eventNamesModule (copy), fFlagEnableSocialTabsPage (copy), p2 (ref), p1 (ref), p5 (ref), var4 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy), url (copy), textKeysModule (copy), fFlagCreateConnectionsHub (copy), var3 (ref), urlBuilder (copy), fFlagConnectionsToFriendsRename (copy)
 		local function buildTabConfig()
 			-- upvalues: p4 (copy), appPage (copy)
 			local t = {}
@@ -44,7 +46,7 @@ return function(p1, p2, p3, p4, p5)
 		
 		return {
 			mutualFriendsCount = function()
-				-- upvalues: p3 (copy), eventNamesModule (copy), fFlagEnableSocialTabsPage (copy), p2 (copy), appPage (copy), p1 (copy), p5 (copy), buildTabConfig (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (copy), navigateDown (copy), p4 (copy)
+				-- upvalues: p3 (copy), eventNamesModule (copy), fFlagEnableSocialTabsPage (copy), p2 (copy), appPage (copy), p1 (copy), p5 (copy), buildTabConfig (ref), var4 (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (copy), navigateDown (copy), p4 (copy)
 				p3.fireAnalyticsEvent(eventNamesModule.MutualFriendsButton)
 				
 				if fFlagEnableSocialTabsPage and not p2 then
@@ -55,7 +57,8 @@ return function(p1, p2, p3, p4, p5)
 							profileId = p1,
 							title = p5,
 							initialTabId = appPage.SocialTabsMutuals,
-							tabConfig = buildTabConfig()
+							tabConfig = buildTabConfig(),
+							dockToProfilePanel = var4
 						}
 					}
 					
@@ -114,7 +117,7 @@ return function(p1, p2, p3, p4, p5)
 				var2(navigateDown(t))
 			end,
 			friendsCount = function()
-				-- upvalues: p3 (copy), eventNamesModule (copy), p2 (copy), fFlagCreateConnectionsHub (copy), var3 (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (copy), navigateDown (copy), fFlagEnableSocialTabsPage (copy), p1 (copy), p5 (copy), buildTabConfig (ref), urlBuilder (copy), fFlagConnectionsToFriendsRename (copy), textKeysModule (copy)
+				-- upvalues: p3 (copy), eventNamesModule (copy), p2 (copy), fFlagCreateConnectionsHub (copy), var3 (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (copy), navigateDown (copy), fFlagEnableSocialTabsPage (copy), p1 (copy), p5 (copy), buildTabConfig (ref), var4 (copy), urlBuilder (copy), fFlagConnectionsToFriendsRename (copy), textKeysModule (copy)
 				p3.fireAnalyticsEvent(eventNamesModule.FriendsButton)
 				
 				if p2 then
@@ -149,7 +152,8 @@ return function(p1, p2, p3, p4, p5)
 							profileId = p1,
 							title = p5,
 							initialTabId = appPage.SocialTabsFriends,
-							tabConfig = buildTabConfig()
+							tabConfig = buildTabConfig(),
+							dockToProfilePanel = var4
 						}
 					}
 					
@@ -180,6 +184,8 @@ return function(p1, p2, p3, p4, p5)
 			end
 		}
 	end, {
-		p1, p2, p3, var2, p4, if fFlagEnableSocialTabsPage then p5 else nil
+		p1, p2, p3, var2, p4, if fFlagEnableSocialTabsPage then p5 or "" else nil,
+		if fFlagEnableSocialTabsPage then var4 else nil,
+		if fFlagEnableSocialTabsPage then var3 else nil
 	})
 end

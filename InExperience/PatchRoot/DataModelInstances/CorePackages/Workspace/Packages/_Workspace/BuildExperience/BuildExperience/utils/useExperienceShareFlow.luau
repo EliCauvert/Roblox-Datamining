@@ -1,34 +1,24 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local logger = require(parent.Loggers).Logger
 local universeConfigurationModule = require(parent.DataHydration.UniverseConfiguration)
 local gameConfigurationLabelsModule = require(buildExperience.utils.GameConfigurationLabels)
-local sharePublishedExperienceModule = require(buildExperience.utils.sharePublishedExperience)
-local sharePublishedExperience = sharePublishedExperienceModule.sharePublishedExperience
-local useSharePublishedExperience = sharePublishedExperienceModule.useSharePublishedExperience
+local useSharePublishedExperience = require(buildExperience.utils.sharePublishedExperience).useSharePublishedExperience
 local sharePrivateExperienceModule = require(buildExperience.utils.sharePrivateExperience)
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
 local fFlagBuildExperiencePrivateInvitesModule = require(buildExperience.Flags.FFlagBuildExperiencePrivateInvites)
-local fFlagBuildExperienceShareUseUniverseSummary = sharedFlagsModule.FFlagBuildExperienceShareUseUniverseSummary
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local privacyType = universeConfigurationModule.PrivacyType
 local var1 = signalsModule.createSignal(nil)
 
 return function(p1, p2)
-	-- upvalues: fFlagBuildLocalization (ref), useSharePublishedExperience (ref), reactModule (ref), var1 (ref), universeConfigurationModule (ref), fFlagBuildExperienceShareUseUniverseSummary (ref), signalsReactModule (ref), sharePublishedExperience (ref), gameConfigurationLabelsModule (ref), privacyType (ref), fFlagBuildExperiencePrivateInvitesModule (ref), sendBuildExperienceEventModule (ref), sharePrivateExperienceModule (ref), logger (ref)
-	local var2 = if fFlagBuildLocalization then useSharePublishedExperience(p1) else nil
+	-- upvalues: useSharePublishedExperience (ref), reactModule (ref), var1 (ref), universeConfigurationModule (ref), signalsReactModule (ref), gameConfigurationLabelsModule (ref), privacyType (ref), fFlagBuildExperiencePrivateInvitesModule (ref), sendBuildExperienceEventModule (ref), sharePrivateExperienceModule (ref), logger (ref)
+	local var2 = useSharePublishedExperience(p1)
 	local var3 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: p1 (ref), var1 (copy), universeConfigurationModule (copy), fFlagBuildExperienceShareUseUniverseSummary (copy)
-		if p1 == nil then
-			return var1
-		end
-		local universeConfigurationStore = universeConfigurationModule.getUniverseConfigurationStore()
-		
-		return if fFlagBuildExperienceShareUseUniverseSummary then universeConfigurationStore.getAndFetchSummary(p1).data else universeConfigurationStore.getAndFetchConfiguration(p1).data
+		-- upvalues: p1 (ref), var1 (copy), universeConfigurationModule (copy)
+		return if p1 == nil then var1 else universeConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p1).data
 	end, { p1 }))
 	local none, none_1 = reactModule.useState("none")
 	local var4, var5 = reactModule.useState(false)
@@ -38,14 +28,9 @@ return function(p1, p2)
 		none_1("none")
 	end, {})
 	local var7 = reactModule.useCallback(function()
-		-- upvalues: p2 (ref), fFlagBuildLocalization (copy), var2 (ref), sharePublishedExperience (copy)
+		-- upvalues: p2 (ref), var2 (ref)
 		if p2 ~= nil then
-			if fFlagBuildLocalization then
-				var2(p2)
-				
-				return
-			end
-			sharePublishedExperience(p2)
+			var2(p2)
 		end
 	end, { p2, var2 })
 	local var8 = reactModule.useMemo(function()

@@ -21,7 +21,6 @@ local var1 = require(expChat.Stores.GetFocusNavigationStore)(false)
 local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local expChatPerfTracker = require(parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
 local fFlagExpChatPerfTrackerTabName = require(parent.ChatUIPrimitives).Flags.FFlagExpChatPerfTrackerTabName
-local fFlagExpChatFixChannelBarInitialWidthModule = require(expChat.Flags.FFlagExpChatFixChannelBarInitialWidth)
 local fFlagExpChatLogTabClickedModule = require(expChat.Flags.FFlagExpChatLogTabClicked)
 local fFlagGlobalTextChatAddPlaySessionFieldModule = require(expChat.Flags.FFlagGlobalTextChatAddPlaySessionField)
 local getChatLayoutStoreModule = require(expChat.Stores.GetChatLayoutStore)
@@ -48,7 +47,7 @@ local function setTransparency(value, p1)
 end
 
 return function(p1)
-	-- upvalues: configModule (ref), reactModule (ref), fFlagExpChatFixChannelBarInitialWidthModule (ref), signalsReactModule (ref), getChatLayoutStoreModule (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), var1 (ref), reactFocusNavigationModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatEnableFriendsTab (ref), channelTabModule (ref), expChatPerfTracker (ref), fFlagExpChatPerfTrackerTabName (ref), fFlagExpChatLogTabClickedModule (ref), analytics (ref), var2 (ref), setTransparency (ref), textChatService (ref), useInterpolatedClientSettingsModule (ref), fFlagExpChatChannelBarDropdownZIndexFixModule (ref), color_1 (ref), imageSetLabel (ref), cycleDown (ref), color (ref)
+	-- upvalues: configModule (ref), reactModule (ref), signalsReactModule (ref), getChatLayoutStoreModule (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), var1 (ref), reactFocusNavigationModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatEnableFriendsTab (ref), channelTabModule (ref), expChatPerfTracker (ref), fFlagExpChatPerfTrackerTabName (ref), fFlagExpChatLogTabClickedModule (ref), analytics (ref), var2 (ref), setTransparency (ref), textChatService (ref), useInterpolatedClientSettingsModule (ref), fFlagExpChatChannelBarDropdownZIndexFixModule (ref), color_1 (ref), imageSetLabel (ref), cycleDown (ref), color (ref)
 	local var4 = 0
 	
 	for i in pairs(p1.allChannelTabs) do
@@ -57,7 +56,7 @@ return function(p1)
 	local var5 = configModule.ChatWindowSize.Y.Scale * p1.chatWindowSettings.HeightScale * configModule.ChatWindowMaxWidth
 	local var6, var7 = reactModule.useState(false)
 	local var8, var9 = reactModule.useState(false)
-	local var10 = if fFlagExpChatFixChannelBarInitialWidthModule then signalsReactModule.useSignalState(getChatLayoutStoreModule(false).getChatWindowWidth) else nil
+	local var10 = signalsReactModule.useSignalState(getChatLayoutStoreModule(false).getChatWindowWidth)
 	local var11, var12 = reactModule.useState(1024)
 	local var13 = nil
 	local var14 = nil
@@ -72,7 +71,7 @@ return function(p1)
 	local var19 = if fFlagExpChatFocusChannelBarSupportModule then reactFocusNavigationModule.useFocusGuiObject() else nil
 	local var20 = if fFlagExpChatFocusChannelBarSupportModule then useSelectionCursor(cursorKind.Invisible) else nil
 	local var21 = if fFlagExpChatFocusChannelBarSupportModule then useSelectionCursor(cursorKind.RoundedSlot) else nil
-	local var22 = if fFlagExpChatFixChannelBarInitialWidthModule then var10 or var11 else var11
+	local var22 = var10 or var11
 	local var23 = var22 < var4 * configModule.ChannelTabsSettings.MinTabWidth
 	local var24 = if not var23 then var4 else math.floor((var22 - configModule.ChannelTabsSettings.DropdownIconContainerWidth) / configModule.ChannelTabsSettings.MinTabWidth)
 	local var25 = (var22 - (if var23 then configModule.ChannelTabsSettings.DropdownIconContainerWidth else 0)) / var24
@@ -211,8 +210,8 @@ return function(p1)
 		ContentContainer = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = UDim2.fromScale(1, 1),
-			ClipsDescendants = if fFlagExpChatFixChannelBarInitialWidthModule then true else nil
+			ClipsDescendants = true,
+			Size = UDim2.fromScale(1, 1)
 		}, t),
 		TopCorner = reactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,

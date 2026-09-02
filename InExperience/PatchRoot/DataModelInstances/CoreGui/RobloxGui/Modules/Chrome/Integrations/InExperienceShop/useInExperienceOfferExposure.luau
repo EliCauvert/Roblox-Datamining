@@ -4,8 +4,10 @@ local reactModule = require(corePackagesService.Packages.React)
 local signalsModule = require(corePackagesService.Packages.Signals)
 local inExperienceOffersModule = require(corePackagesService.Workspace.Packages.InExperienceOffers)
 local localStoreModule = require(chrome.ChromeShared.Service.LocalStore)
+local fFlagOfferNotifyOnGlobalIcon = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagOfferNotifyOnGlobalIcon
 local getOffersStore = inExperienceOffersModule.getOffersStore
 local isNotificationEligible = inExperienceOffersModule.Utils.isNotificationEligible
+local notificationLocation = inExperienceOffersModule.NotificationLocation
 local inExperienceOfferExposureStorageKey = game:DefineFastString("InExperienceOfferExposureStorageKey", "InExperienceOfferExposure")
 local inExperienceOfferExposureMaxStoredOffers = game:DefineFastInt("InExperienceOfferExposureMaxStoredOffers", 50)
 local t = {}
@@ -80,18 +82,23 @@ local function tallyExposures(p2, p3)
 end
 
 return function()
-	-- upvalues: reactModule (ref), getOffersStore (ref), loadPersistedTally (ref), signalsModule (ref), tallyExposures (ref)
+	-- upvalues: reactModule (ref), getOffersStore (ref), loadPersistedTally (ref), signalsModule (ref), fFlagOfferNotifyOnGlobalIcon (ref), notificationLocation (ref), tallyExposures (ref)
 	reactModule.useEffect(function()
-		-- upvalues: getOffersStore (copy), loadPersistedTally (copy), signalsModule (copy), tallyExposures (copy)
+		-- upvalues: getOffersStore (copy), loadPersistedTally (copy), signalsModule (copy), fFlagOfferNotifyOnGlobalIcon (copy), notificationLocation (copy), tallyExposures (copy)
 		local var6 = getOffersStore(false)
 		var6.hydrateOfferExposureSnapshot(loadPersistedTally())
 		
 		return signalsModule.createEffect(function(p4)
-			-- upvalues: var6 (ref), tallyExposures (copy)
-			if var6.getIsShopAvailable(p4) then
+			-- upvalues: fFlagOfferNotifyOnGlobalIcon (copy), var6 (ref), notificationLocation (copy), tallyExposures (copy)
+			if fFlagOfferNotifyOnGlobalIcon then
+				if var6.getOfferNotificationShownWithEnum(p4) == notificationLocation.None then
+					return
+				end
+			elseif var6.getIsShopAvailable(p4) then
 				tallyExposures(var6.getOffers(p4), var6.getOfferExposureSnapshot(p4))
 				
 				return
+			else
 			end
 		end)
 	end, {})

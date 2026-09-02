@@ -8,6 +8,7 @@ local t = {
 		return string.gsub(localizationStringsModule.MONETIZATION_DEFAULT_PRODUCT_NAME, "{PRODUCT_ID}", tostring(p1))
 	end,
 	priceUnavailable = localizationStringsModule.MONETIZATION_PRICE_UNAVAILABLE,
+	productType = localizationStringsModule.AGENT_DEV_PRODUCT_TITLE,
 	onSale = localizationStringsModule.MONETIZATION_ON_SALE,
 	offSale = localizationStringsModule.MONETIZATION_OFF_SALE
 }
@@ -19,11 +20,13 @@ local function mapProduct(p1, p2)
 		id = tostring(p1.productId),
 		name = p1.name or p2.formatDefaultProductName(p1.productId),
 		price = if var1 ~= nil then p2.priceUnavailable else tostring(var1),
+		priceInRobux = var1,
+		isForSale = p1.isForSale == true,
 		isManagedPricingEnabled = p1.isManagedPricingEnabled,
-		kind = if p1.isForSale == true then p2.onSale else p2.offSale,
+		kind = p2.productType,
+		saleStatus = if p1.isForSale == true then p2.onSale else p2.offSale,
 		image = if p1.iconImageAssetId ~= nil then nil else `rbxassetid://{p1.iconImageAssetId}`,
-		description = p1.description or "",
-		regionalPrices = {}
+		description = p1.description or ""
 	}
 end
 

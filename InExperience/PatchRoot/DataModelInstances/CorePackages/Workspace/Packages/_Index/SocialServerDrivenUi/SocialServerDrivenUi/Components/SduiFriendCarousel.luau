@@ -9,7 +9,6 @@ local flyoutSidePanelIXP = require(parent.SharedExperimentDefinition).FlyoutSide
 local openProfileQRCodePageBridgeModule = require(socialServerDrivenUi.System.OpenProfileQRCodePageBridge)
 local fFlagEnableFlyoutFriendsHeaderFix = sharedFlagsModule.FFlagEnableFlyoutFriendsHeaderFix
 local fFlagFlyoutHideFriendsHeader = socialCarouselModule.Flags.FFlagFlyoutHideFriendsHeader
-local fFlagLuaAppAddSortDataToSocialCarouselClicks = sharedFlagsModule.FFlagLuaAppAddSortDataToSocialCarouselClicks
 local fFlagLuaAppCompositionAlways = sharedFlagsModule.FFlagLuaAppCompositionAlways
 local fFlagLuaAppFriendsSortHeaderByPosition = sharedFlagsModule.FFlagLuaAppFriendsSortHeaderByPosition
 local fFlagLuaAppHomeFriendsRemoveItemImpressions = sharedFlagsModule.FFlagLuaAppHomeFriendsRemoveItemImpressions
@@ -35,7 +34,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: findAnalyticsField (ref), fFlagLuaAppAddSortDataToSocialCarouselClicks (ref), reactModule (ref), socialCarouselModule (ref), fFlagLuaAppHomeFriendsRemoveItemImpressions (ref), SORT_SELECTION_ORDER_BASE (ref), SORT_INDEX_SELECTION_ORDER_MULTIPLIER (ref), fFlagLuaAppFriendsSortHeaderByPosition (ref), fIntLuaAppFriendsSortHeaderMaxHiddenPosition (ref), fFlagFlyoutHideFriendsHeader (ref), fFlagEnableFlyoutFriendsHeaderFix (ref), flyoutSidePanelIXP (ref), fFlagLuaAppCompositionAlways (ref), fFlagSocialCarouselShareQREnabled (ref), openProfileQRCodePageBridgeModule (ref)
+	-- upvalues: findAnalyticsField (ref), reactModule (ref), socialCarouselModule (ref), fFlagLuaAppHomeFriendsRemoveItemImpressions (ref), SORT_SELECTION_ORDER_BASE (ref), SORT_INDEX_SELECTION_ORDER_MULTIPLIER (ref), fFlagLuaAppFriendsSortHeaderByPosition (ref), fIntLuaAppFriendsSortHeaderMaxHiddenPosition (ref), fFlagFlyoutHideFriendsHeader (ref), fFlagEnableFlyoutFriendsHeaderFix (ref), flyoutSidePanelIXP (ref), fFlagLuaAppCompositionAlways (ref), fFlagSocialCarouselShareQREnabled (ref), openProfileQRCodePageBridgeModule (ref)
 	local collectionPosition = tonumber(findAnalyticsField("collectionPosition", p1.analyticsContext.analyticsData or {}, -1)) or -1
 	
 	return reactModule.createElement(socialCarouselModule.Entry, {
@@ -47,7 +46,7 @@ return function(p1)
 			scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal,
 			skipItemImpressionsLog = if fFlagLuaAppHomeFriendsRemoveItemImpressions then true else nil
 		},
-		sortAnalyticsData = if fFlagLuaAppAddSortDataToSocialCarouselClicks then if fFlagLuaAppAddSortDataToSocialCarouselClicks then reactModule.useMemo(function()
+		sortAnalyticsData = reactModule.useMemo(function()
 			-- upvalues: collectionPosition (ref), p1 (ref)
 			return {
 				sortIndex = collectionPosition,
@@ -60,7 +59,7 @@ return function(p1)
 			p1.sduiContext.appPage,
 			p1.sortId,
 			p1.startRow
-		}) else nil else nil,
+		}),
 		refreshSignal = p1.refreshSignal,
 		selectionOrderBase = SORT_SELECTION_ORDER_BASE + collectionPosition * SORT_INDEX_SELECTION_ORDER_MULTIPLIER,
 		source = socialCarouselModule.Constants.ANALYTICS.SRC.HOMEPAGE_FRIENDS_CAROUSEL,

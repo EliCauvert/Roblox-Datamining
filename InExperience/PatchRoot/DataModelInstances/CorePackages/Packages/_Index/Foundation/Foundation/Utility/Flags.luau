@@ -29,7 +29,6 @@ return {
 	FoundationBaseMenuSubmenuMaxHeight = safeFlagsModule.createGetFFlag("FoundationBaseMenuSubmenuMaxHeight")(),
 	FoundationImageContentSupport = safeFlagsModule.createGetFFlag("FoundationImageContentSupport")(),
 	FoundationInteractableSecondaryActivated = safeFlagsModule.createGetFFlag("FoundationInteractableSecondaryActivated")(),
-	FoundationSliderOffloadDraggingMath = safeFlagsModule.createGetFFlag("FoundationSliderOffloadDraggingMath")(),
 	FoundationViewMemoizationChanges = safeFlagsModule.createGetFFlag("FoundationViewMemoizationChanges")(),
 	FoundationAvatarIncludeProfileFrame = safeFlagsModule.createGetFFlag("FoundationAvatarIncludeProfileFrame")(),
 	FoundationOptionSelectorGroupFixes = safeFlagsModule.createGetFFlag("FoundationOptionSelectorGroupFixes")(),
@@ -76,5 +75,6 @@ return {
 	FoundationProviderStableEmptyTable = safeFlagsModule.createGetFFlag("FoundationProviderStableEmptyTable")(),
 	FoundationSliderBeta = safeFlagsModule.createGetFFlag("FoundationSliderBeta")(),
 	FoundationStyleRulePseudoName = safeFlagsModule.createGetFFlag("FoundationStyleRulePseudoName")(),
-	FoundationThemedTypography = var9 and (var10 and safeFlagsModule.createGetFFlag("FoundationThemedTypography")())
+	FoundationThemedTypography = var9 and (var10 and safeFlagsModule.createGetFFlag("FoundationThemedTypography")()),
+	FoundationSliderOffloadDraggingMath = safeFlagsModule.createGetFFlag("FoundationSliderOffloadDraggingMath2")()
 }

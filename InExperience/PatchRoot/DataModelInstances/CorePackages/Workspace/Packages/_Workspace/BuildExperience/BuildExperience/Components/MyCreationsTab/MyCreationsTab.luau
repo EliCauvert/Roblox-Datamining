@@ -8,7 +8,6 @@ local foundationModule = require(parent.Foundation)
 local localizationModule = require(parent.Localization)
 local luaSocialLibrariesDepsModule = require(parent.LuaSocialLibrariesDeps)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = localizationModule.Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local _ = require(parent.DataHydration.CreatorAgentChat)
@@ -32,16 +31,14 @@ local chatConstantsModule = require(script.Parent.Parent.Parent.Chat.chatConstan
 local _ = require(script.Parent.Parent.Parent.Chat.chatTypes)
 local getSearchQueryStoreModule = require(script.Parent.Parent.Parent.Stores.GetSearchQueryStore)
 local _ = require(script.Parent.Parent.Parent.Stores.GetSearchQueryStore.createSearchQueryStore)
-local fFlagEnableBuildExperienceScrollPerformanceTrackingModule = require(script.Parent.Parent.Parent.Flags.FFlagEnableBuildExperienceScrollPerformanceTracking)
 local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
 local var9 = not fFlagBuildAddSearchIconAndMoveSearchbarModule and require(buildExperience.Flags.FFlagBuildExperienceStableMyCreationsListItems)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
-local var10 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then require(script.Parent.Parent.Parent.Telemetry.useScrollPerformanceTracker) else nil
-local var11 = if fFlagBuildAddSearchIconAndMoveSearchbarModule then require(script.Parent.ExperienceResultsList) else nil
-local var12 = if fFlagBuildAddSearchIconAndMoveSearchbarModule then require(script.Parent.ExperienceResultsLoadingSkeleton) else nil
+local useScrollPerformanceTrackerModule = require(script.Parent.Parent.Parent.Telemetry.useScrollPerformanceTracker)
+local var10 = if fFlagBuildAddSearchIconAndMoveSearchbarModule then require(script.Parent.ExperienceResultsList) else nil
+local var11 = if fFlagBuildAddSearchIconAndMoveSearchbarModule then require(script.Parent.ExperienceResultsLoadingSkeleton) else nil
 local useMyCreationsResultsModule = require(script.Parent.useMyCreationsResults)
-local var13 = if not fFlagBuildAddSearchIconAndMoveSearchbarModule then 2 else nil
-local var14 = if not fFlagBuildAddSearchIconAndMoveSearchbarModule then function(p1, p2, p3)
+local var12 = if not fFlagBuildAddSearchIconAndMoveSearchbarModule then 2 else nil
+local var13 = if not fFlagBuildAddSearchIconAndMoveSearchbarModule then function(p1, p2, p3)
 	-- upvalues: reactModule (ref), view (ref), var2 (ref), var6 (ref)
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-medium",
@@ -72,7 +69,7 @@ local var14 = if not fFlagBuildAddSearchIconAndMoveSearchbarModule then function
 		})
 	})
 end else nil
-local var15 = if not fFlagBuildAddSearchIconAndMoveSearchbarModule then reactModule.memo(function(p1)
+local var14 = if not fFlagBuildAddSearchIconAndMoveSearchbarModule then reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), view (ref), var1 (ref), var3 (ref), var4 (ref), var5 (ref), list (ref)
 	return reactModule.createElement(list.Item, {
 		LayoutOrder = p1.LayoutOrder,
@@ -113,9 +110,9 @@ local var15 = if not fFlagBuildAddSearchIconAndMoveSearchbarModule then reactMod
 end) else nil
 
 return function(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), getSearchQueryStoreModule (ref), fFlagBuildAddSearchIconAndMoveSearchbarModule (ref), var7 (ref), reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var10 (ref), fFlagBuildExperienceMyCreationsUseUniverseListModule (ref), useMyCreationsResultsModule (ref), chatConstantsModule (ref), playersService (ref), var12 (ref), var14 (ref), list (ref), iconName (ref), var8 (ref), view (ref), inputSize (ref), buildEmptyStateModule (ref), var11 (ref), var9 (ref), var15 (ref), var1 (ref), var3 (ref), var4 (ref), var5 (ref), var13 (ref), refreshScrollingFrame (ref), fFlagBuildDesktopReadinessModule (ref)
-	local mYCREATIONSBUILDWITHAI, mYCREATIONSLOADERROR, mYCREATIONSNEWGAME
-	local var16 = if fFlagBuildLocalization then useLocalization({
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), getSearchQueryStoreModule (ref), fFlagBuildAddSearchIconAndMoveSearchbarModule (ref), var7 (ref), reactModule (ref), useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceMyCreationsUseUniverseListModule (ref), useMyCreationsResultsModule (ref), chatConstantsModule (ref), playersService (ref), var11 (ref), var13 (ref), list (ref), iconName (ref), var8 (ref), view (ref), inputSize (ref), buildEmptyStateModule (ref), var10 (ref), var9 (ref), var14 (ref), var1 (ref), var3 (ref), var4 (ref), var5 (ref), var12 (ref), refreshScrollingFrame (ref), fFlagBuildDesktopReadinessModule (ref)
+	local var15
+	local var16 = useLocalization({
 		building = localizationStringsModule.MY_CREATIONS_BUILDING,
 		buildWithAI = localizationStringsModule.MY_CREATIONS_BUILD_WITH_AI,
 		inputNeeded = localizationStringsModule.MY_CREATIONS_INPUT_NEEDED,
@@ -126,33 +123,19 @@ return function(p1)
 		publiclyUnavailable = localizationStringsModule.MY_CREATIONS_PUBLICLY_UNAVAILABLE,
 		ready = localizationStringsModule.MY_CREATIONS_READY,
 		restricted = localizationStringsModule.MY_CREATIONS_RESTRICTED
-	}) else nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	
-	if fFlagBuildLocalization then
-		mYCREATIONSBUILDWITHAI = var16.buildWithAI
-		mYCREATIONSLOADERROR = var16.loadError
-		mYCREATIONSNEWGAME = var16.newGame
-	else
-		mYCREATIONSBUILDWITHAI = localizationStringsModule.MY_CREATIONS_BUILD_WITH_AI
-		mYCREATIONSLOADERROR = localizationStringsModule.MY_CREATIONS_LOAD_ERROR
-		mYCREATIONSNEWGAME = localizationStringsModule.MY_CREATIONS_NEW_GAME
-	end
+	})
+	local buildWithAI = var16.buildWithAI
+	local loadError = var16.loadError
+	local newGame = var16.newGame
 	local searchQueryStore = p1.searchQueryStore or getSearchQueryStoreModule()
 	local var17 = p1.isFocused ~= false
 	local var18 = if not fFlagBuildAddSearchIconAndMoveSearchbarModule then var7() else nil
 	local var19 = reactModule.useRef(nil)
 	local var20 = reactModule.useRef(false)
-	
-	if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then
-		var10("LuaApp_Build_Home_Scroll", var19)
-	end
-	local var21
-	local var22 = if fFlagBuildAddSearchIconAndMoveSearchbarModule then searchQueryStore.useShowEmptyState() else false
-	local var23 = if fFlagBuildExperienceMyCreationsUseUniverseListModule then searchQueryStore.useDraftQuery() else nil
-	local var24 = useMyCreationsResultsModule({
+	useScrollPerformanceTrackerModule("LuaApp_Build_Home_Scroll", var19)
+	local var21 = if fFlagBuildAddSearchIconAndMoveSearchbarModule then searchQueryStore.useShowEmptyState() else false
+	local var22 = if fFlagBuildExperienceMyCreationsUseUniverseListModule then searchQueryStore.useDraftQuery() else nil
+	local var23 = useMyCreationsResultsModule({
 		creatorAgentChatStore = p1.creatorAgentChatStore,
 		configurationStore = p1.configurationStore,
 		searchStore = p1.searchStore,
@@ -162,17 +145,17 @@ return function(p1)
 		pollingIntervalSeconds = p1.pollingIntervalSeconds,
 		userId = p1.userId
 	})
-	local displayedItems = var24.displayedItems
-	local items = var24.items
-	local hasPendingSummary = var24.hasPendingSummary
-	local listStatus = var24.listStatus
-	local sourceItemCount = var24.sourceItemCount
-	local hasDisplayedResult = var24.hasDisplayedResult
-	local failedLoadMore = var24.failedLoadMore
-	local retryLoadMore = var24.retryLoadMore
-	local refresh = var24.refresh
-	local loadMoreIfNeeded = var24.loadMoreIfNeeded
-	local var25 = reactModule.useCallback(function()
+	local displayedItems = var23.displayedItems
+	local items = var23.items
+	local hasPendingSummary = var23.hasPendingSummary
+	local listStatus = var23.listStatus
+	local sourceItemCount = var23.sourceItemCount
+	local hasDisplayedResult = var23.hasDisplayedResult
+	local failedLoadMore = var23.failedLoadMore
+	local retryLoadMore = var23.retryLoadMore
+	local refresh = var23.refresh
+	local loadMoreIfNeeded = var23.loadMoreIfNeeded
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: var20 (ref), p1 (ref), chatConstantsModule (copy), playersService (copy)
 		var20.current = true
 		p1.onOpenChat({
@@ -183,53 +166,53 @@ return function(p1)
 	end, { p1.onOpenChat })
 	
 	if fFlagBuildExperienceMyCreationsUseUniverseListModule then
-		var21 = var24.hasCompletedFocusedRefresh
+		var15 = var23.hasCompletedFocusedRefresh
 		
-		if var21 then
-			var21 = false
+		if var15 then
+			var15 = false
 			
-			if var24.sessionListStatus == "Ready" then
-				var21 = false
+			if var23.sessionListStatus == "Ready" then
+				var15 = false
 				
-				if var24.sessionCount == 0 then
-					var21 = var23 == ""
-					var21 = nil
+				if var23.sessionCount == 0 then
+					var15 = var22 == ""
+					var15 = nil
 				end
 			end
 		end
 	else
-		var21 = var24.hasCompletedFocusedRefresh and (listStatus == "Ready" and sourceItemCount == 0)
+		var15 = var23.hasCompletedFocusedRefresh and (listStatus == "Ready" and sourceItemCount == 0)
 	end
 	local t
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var17 (ref), var21 (ref), var20 (ref), var25 (ref)
-		if p1.autoOpenNewGame ~= false and var17 and (var21 and not var20.current) then
-			var25()
+		-- upvalues: p1 (ref), var17 (ref), var15 (ref), var20 (ref), var24 (ref)
+		if p1.autoOpenNewGame ~= false and var17 and (var15 and not var20.current) then
+			var24()
 		end
-	end, { var21, var25, var17, p1.autoOpenNewGame })
-	local var26 = reactModule.useCallback(function()
-		-- upvalues: var24 (ref), fFlagBuildAddSearchIconAndMoveSearchbarModule (copy), reactModule (copy), var12 (copy), var14 (copy), var18 (ref)
-		return if var24.isLoadingMore then if fFlagBuildAddSearchIconAndMoveSearchbarModule then reactModule.createElement(var12, {
+	end, { var15, var24, var17, p1.autoOpenNewGame })
+	local var25 = reactModule.useCallback(function()
+		-- upvalues: var23 (ref), fFlagBuildAddSearchIconAndMoveSearchbarModule (copy), reactModule (copy), var11 (copy), var13 (copy), var18 (ref)
+		return if var23.isLoadingMore then if fFlagBuildAddSearchIconAndMoveSearchbarModule then reactModule.createElement(var11, {
 			LayoutOrder = 1,
 			index = 1,
 			testIdPrefix = "MyCreationsTab"
-		}) else var14(1, 1, var18) else nil
-	end, { var24.isLoadingMore, var18 })
-	local var27 = if fFlagBuildAddSearchIconAndMoveSearchbarModule then reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), list (copy), iconName (copy), mYCREATIONSNEWGAME (write), mYCREATIONSBUILDWITHAI (write), var25 (ref)
+		}) else var13(1, 1, var18) else nil
+	end, { var23.isLoadingMore, var18 })
+	local var26 = if fFlagBuildAddSearchIconAndMoveSearchbarModule then reactModule.useMemo(function()
+		-- upvalues: reactModule (copy), list (copy), iconName (copy), newGame (ref), buildWithAI (ref), var24 (ref)
 		return {
 			CreateRow = reactModule.createElement(list.Item, {
 				LayoutOrder = 1,
 				leading = iconName.PlusLarge,
-				title = mYCREATIONSNEWGAME,
-				description = mYCREATIONSBUILDWITHAI,
-				onActivated = var25
+				title = newGame,
+				description = buildWithAI,
+				onActivated = var24
 			})
 		}
-	end, { mYCREATIONSBUILDWITHAI, var25, mYCREATIONSNEWGAME }) else nil
+	end, { buildWithAI, var24, newGame }) else nil
 	local _ = nil
 	
-	if var22 then
+	if var21 then
 		t = {
 			SearchEmptyState = reactModule.createElement(var8, { testId = "MyCreationsTab.SearchEmptyState" })
 		}
@@ -245,9 +228,9 @@ return function(p1)
 					CreateRow = reactModule.createElement(list.Item, {
 						LayoutOrder = 1,
 						leading = iconName.PlusLarge,
-						title = mYCREATIONSNEWGAME,
-						description = mYCREATIONSBUILDWITHAI,
-						onActivated = var25
+						title = newGame,
+						description = buildWithAI,
+						onActivated = var24
 					})
 				}),
 				EmptyState = reactModule.createElement(view, {
@@ -261,7 +244,7 @@ return function(p1)
 		}
 	elseif fFlagBuildAddSearchIconAndMoveSearchbarModule then
 		t = {
-			ExperienceList = reactModule.createElement(var11, {
+			ExperienceList = reactModule.createElement(var10, {
 				firstResultLayoutOrder = 2,
 				testIdPrefix = "MyCreationsTab",
 				items = items,
@@ -271,9 +254,9 @@ return function(p1)
 				listStatus = listStatus,
 				failedLoadMore = failedLoadMore,
 				retryLoadMore = retryLoadMore,
-				loadError = mYCREATIONSLOADERROR,
+				loadError = loadError,
 				onOpenChat = p1.onOpenChat,
-				leadingItems = var27
+				leadingItems = var26
 			})
 		}
 	else
@@ -281,18 +264,18 @@ return function(p1)
 			CreateRow = reactModule.createElement(list.Item, {
 				LayoutOrder = 1,
 				leading = iconName.PlusLarge,
-				title = mYCREATIONSNEWGAME,
-				description = mYCREATIONSBUILDWITHAI,
-				onActivated = var25
+				title = newGame,
+				description = buildWithAI,
+				onActivated = var24
 			})
 		}
 		
 		if hasDisplayedResult and #displayedItems > 0 then
 			for i_1, v in items do
-				local var28 = if fFlagBuildExperienceMyCreationsUseUniverseListModule then "U" .. v.universeId else "S" .. v.sessionId
+				local var27 = if fFlagBuildExperienceMyCreationsUseUniverseListModule then "U" .. v.universeId else "S" .. v.sessionId
 				
 				if var9 then
-					t_1[var28] = reactModule.createElement(var15, {
+					t_1[var27] = reactModule.createElement(var14, {
 						LayoutOrder = i_1 + 1,
 						sessionId = v.sessionId,
 						universeId = v.universeId,
@@ -309,7 +292,7 @@ return function(p1)
 					local gameIcon = v.gameIcon
 					local placeId = v.placeId
 					local visibilityLabel = v.visibilityLabel
-					t_1[var28] = reactModule.createElement(list.Item, {
+					t_1[var27] = reactModule.createElement(list.Item, {
 						LayoutOrder = i_1 + 1,
 						leading = { iconName = gameIcon },
 						title = experienceName,
@@ -339,17 +322,17 @@ return function(p1)
 				end
 			end
 		elseif listStatus == "NotReady" or hasPendingSummary then
-			for i = 1, var13 do
-				t_1[`Loading{i}`] = var14(i, i + 1, var18)
+			for i = 1, var12 do
+				t_1[`Loading{i}`] = var13(i, i + 1, var18)
 			end
 		elseif listStatus == "Failed" then
-			t_1.Error = reactModule.createElement(list.Item, { LayoutOrder = 2, title = mYCREATIONSLOADERROR })
+			t_1.Error = reactModule.createElement(list.Item, { LayoutOrder = 2, title = loadError })
 		end
 		if failedLoadMore then
 			t_1.LoadMoreError = reactModule.createElement(list.Item, {
 				testId = "MyCreationsTab.LoadMoreError",
 				LayoutOrder = #items + 2,
-				title = mYCREATIONSLOADERROR,
+				title = loadError,
 				onActivated = retryLoadMore
 			})
 		end
@@ -361,7 +344,7 @@ return function(p1)
 			}, t_1)
 		}
 	end
-	local var29 = reactModule.createElement(view, {
+	local var28 = reactModule.createElement(view, {
 		tag = "composition-content-body col size-full-0 auto-y",
 		testId = "MyCreationsTab.ContentBody"
 	}, t)
@@ -369,10 +352,10 @@ return function(p1)
 	return reactModule.createElement(refreshScrollingFrame, {
 		usesBuilderIcon = true,
 		refresh = refresh,
-		ref = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then var19 else nil,
+		ref = var19,
 		onCanvasPositionChangedCallback = loadMoreIfNeeded,
 		onCanvasSizeChangedCallback = loadMoreIfNeeded,
-		createFooter = var26,
+		createFooter = var25,
 		scrollingElementProps = {
 			LayoutOrder = p1.LayoutOrder,
 			ZIndex = 1,
@@ -391,6 +374,6 @@ return function(p1)
 				["composition-layout-detail"] = true,
 				["size-full-0 auto-y"] = true
 			}
-		}, { ContentBody = var29 })
-	} else { ContentBody = var29 })
+		}, { ContentBody = var28 })
+	} else { ContentBody = var28 })
 end

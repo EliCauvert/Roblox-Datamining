@@ -12,6 +12,7 @@ local cellsEqual = sduiPoolStoreLayoutModule.cellsEqual
 local EMPTY_CELLS = sduiPoolStoreLayoutModule.EMPTY_CELLS
 local fFlagLuaAppEnableNxMRoduxApportioning = require(parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
 local fFlagSduiCollectionGridRevealRows = require(parent.SharedFlags).FFlagSduiCollectionGridRevealRows
+local fFlagSduiVerticalFeedProgressiveFillOnScroll = require(parent.SharedFlags).FFlagSduiVerticalFeedProgressiveFillOnScroll
 local frozen = table.freeze({})
 
 local function sectionConfigsEqual(p1, p2)
@@ -19,7 +20,7 @@ local function sectionConfigsEqual(p1, p2)
 end
 
 local function createSduiPoolStore()
-	-- upvalues: fFlagSduiCollectionGridRevealRows (ref), signalsModule (ref), sectionConfigsEqual (ref), getMainCollectionLayoutStore (ref), frozen (ref), EMPTY_CELLS (ref), makePoolGetSpanConfig (ref), processOneGrid (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), layoutToCells (ref), cellsEqual (ref)
+	-- upvalues: fFlagSduiCollectionGridRevealRows (ref), signalsModule (ref), sectionConfigsEqual (ref), getMainCollectionLayoutStore (ref), frozen (ref), EMPTY_CELLS (ref), makePoolGetSpanConfig (ref), processOneGrid (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), layoutToCells (ref), cellsEqual (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (ref)
 	local t = {}
 	local t_1 = {}
 	local var1 = if fFlagSduiCollectionGridRevealRows then {} else nil
@@ -56,12 +57,12 @@ local function createSduiPoolStore()
 	
 	local var5 = if fFlagSduiCollectionGridRevealRows then function(p1)
 		-- upvalues: var1 (ref), signalsModule (copy)
-		local var6 = var6[p1]
+		local var6 = var1[p1]
 		
 		if var6 == nil then
 			local var7, var8 = signalsModule.createSignal(nil)
 			var6 = { get = var7, set = var8 }
-			var6[p1] = var6
+			var1[p1] = var6
 		end
 		return var6
 	end else nil
@@ -73,13 +74,13 @@ local function createSduiPoolStore()
 		
 		if var7 == nil then
 			local var8 = signalsModule.createComputed(function(p2)
-				-- upvalues: p2 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), t (copy), var3 (copy), getMainCollectionLayoutStore (copy), frozen (copy), var6 (copy), EMPTY_CELLS (copy), makePoolGetSpanConfig (copy), processOneGrid (copy), fFlagLuaAppEnableNxMRoduxApportioning (copy), layoutToCells (copy)
-				local var9 = t_1[p2]
+				-- upvalues: p1 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), t (copy), var3 (copy), getMainCollectionLayoutStore (copy), frozen (copy), var6 (copy), EMPTY_CELLS (copy), makePoolGetSpanConfig (copy), processOneGrid (copy), fFlagLuaAppEnableNxMRoduxApportioning (copy), layoutToCells (copy)
+				local var9 = t_1[p1]
 				
 				if var9 == nil then
 					local var10, var11 = signalsModule.createSignal(nil, sectionConfigsEqual)
 					var9 = { get = var10, set = var11 }
-					t_1[p2] = var9
+					t_1[p1] = var9
 				end
 				local var12 = var9.get(p2)
 				
@@ -99,7 +100,7 @@ local function createSduiPoolStore()
 				if var16 == nil or #var16.items == 0 then
 					return nil
 				end
-				local var17 = var11(p2) or getMainCollectionLayoutStore(p2)
+				local var17 = var3(p2) or getMainCollectionLayoutStore(p2)
 				local var18 = var17.getItemsPerRow[if typeof(var16.collectionItemSize) == "string" and var17.getItemsPerRow[var16.collectionItemSize] ~= nil then var16.collectionItemSize else "Medium"](p2)
 				
 				if var18 <= 0 then
@@ -109,7 +110,7 @@ local function createSduiPoolStore()
 				local var20 = frozen
 				
 				if var12.prevSectionInPoolId ~= nil then
-					local var21 = var14(var12.prevSectionInPoolId)(p2)
+					local var21 = var6(var12.prevSectionInPoolId)(p2)
 					
 					if var21 == nil then
 						return nil
@@ -161,26 +162,26 @@ local function createSduiPoolStore()
 					pendingSpanTiles = frozen
 				}
 			end)
-			t_2[p2] = var10
+			t_2[p1] = var8
 			
-			return var10
+			return var8
 		end
-		return var9
+		return var7
 	end
 	
-	local _ = function(p3)
-		-- upvalues: t_3 (ref), signalsModule (copy), t_1 (ref), sectionConfigsEqual (copy), var14 (write)
+	local function getRowCountComputed(p3)
+		-- upvalues: t_3 (ref), signalsModule (copy), t_1 (ref), sectionConfigsEqual (copy), var6 (write)
 		local var26 = t_3[p3]
 		
 		if var26 == nil then
 			local var27 = signalsModule.createComputed(function(p4)
-				-- upvalues: p4 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var14 (copy)
-				local var28 = t_1[p4]
+				-- upvalues: p3 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var6 (copy)
+				local var28 = t_1[p3]
 				
 				if var28 == nil then
 					local var29, var30 = signalsModule.createSignal(nil, sectionConfigsEqual)
 					var28 = { get = var29, set = var30 }
-					t_1[p4] = var28
+					t_1[p3] = var28
 				end
 				local var31 = var28.get(p4)
 				
@@ -189,7 +190,7 @@ local function createSduiPoolStore()
 				elseif var31.poolId == nil or var31.numberOfRows > 0 then
 					return var31.numberOfRows
 				end
-				local var32 = var14(p4)(p4)
+				local var32 = var6(p3)(p4)
 				
 				return if var32 == nil then 0 else var32.actualRowCount
 			end)
@@ -201,24 +202,24 @@ local function createSduiPoolStore()
 	end
 	
 	local _ = function(p3)
-		-- upvalues: var10 (ref), signalsModule (copy), t_3 (ref), t_1 (ref), sectionConfigsEqual (copy), var14 (write), var13 (write)
-		local var26 = var10[p3]
+		-- upvalues: var2 (ref), signalsModule (copy), t_3 (ref), t_1 (ref), sectionConfigsEqual (copy), var6 (write), var5 (write)
+		local var26 = var2[p3]
 		
 		if var26 == nil then
 			local var27 = signalsModule.createComputed(function(p4)
-				-- upvalues: p4 (ref), t_3 (copy), signalsModule (copy), t_1 (copy), sectionConfigsEqual (copy), var14 (copy), var13 (copy)
+				-- upvalues: p3 (ref), t_3 (copy), signalsModule (copy), t_1 (copy), sectionConfigsEqual (copy), var6 (copy), var5 (copy)
 				local var28
-				local var29 = t_3[p4]
+				local var29 = t_3[p3]
 				
 				if var29 == nil then
 					local var30 = signalsModule.createComputed(function(p5)
-						-- upvalues: p5 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var14 (copy)
-						local var31 = t_1[p5]
+						-- upvalues: p3 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var6 (copy)
+						local var31 = t_1[p3]
 						
 						if var31 == nil then
 							local var32, var33 = signalsModule.createSignal(nil, sectionConfigsEqual)
 							var31 = { get = var32, set = var33 }
-							t_1[p5] = var31
+							t_1[p3] = var31
 						end
 						local var34 = var31.get(p5)
 						
@@ -227,21 +228,21 @@ local function createSduiPoolStore()
 						elseif var34.poolId == nil or var34.numberOfRows > 0 then
 							return var34.numberOfRows
 						end
-						local var35 = var14(p5)(p5)
+						local var35 = var6(p3)(p5)
 						
 						return if var35 == nil then 0 else var35.actualRowCount
 					end)
-					t_3[p4] = var30
+					t_3[p3] = var30
 					var28 = var30
 				else
 					var28 = var29
 				end
 				var28 = var28(p4)
-				local var31 = var13(p4).get(p4)
+				local var31 = var5(p3).get(p4)
 				
 				return if var31 == nil then var28 else math.min(math.max(math.floor(var31), 0), var28)
 			end)
-			var27[p3] = var27
+			var2[p3] = var27
 			
 			return var27
 		end
@@ -250,251 +251,252 @@ local function createSduiPoolStore()
 	
 	local _ = nil
 	
-	local var11 = function(p3)
-		-- upvalues: t_4 (ref), signalsModule (copy), t_1 (ref), sectionConfigsEqual (copy), var11 (write), fFlagSduiCollectionGridRevealRows (copy), var10 (ref), t_3 (ref), var14 (write), var13 (write)
-		local var26 = t_4[p3]
+	local var26 = function(p3)
+		-- upvalues: t_4 (ref), signalsModule (copy), t_1 (ref), sectionConfigsEqual (copy), var26 (write), fFlagSduiCollectionGridRevealRows (copy), var2 (ref), t_3 (ref), var6 (write), var5 (write)
+		local var27 = t_4[p3]
 		
-		if var26 == nil then
-			local var27 = signalsModule.createComputed(function(p4)
-				-- upvalues: p4 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var11 (copy), fFlagSduiCollectionGridRevealRows (copy), var27 (copy), t_3 (copy), var14 (copy), var13 (copy)
-				local var28 = t_1[p4]
+		if var27 == nil then
+			local var28 = signalsModule.createComputed(function(p4)
+				-- upvalues: p3 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var26 (copy), fFlagSduiCollectionGridRevealRows (copy), var2 (copy), t_3 (copy), var6 (copy), var5 (copy)
+				local var29 = t_1[p3]
 				
-				if var28 == nil then
-					local var29, var30 = signalsModule.createSignal(nil, sectionConfigsEqual)
-					var28 = { get = var29, set = var30 }
-					t_1[p4] = var28
+				if var29 == nil then
+					local var30, var31 = signalsModule.createSignal(nil, sectionConfigsEqual)
+					var29 = { get = var30, set = var31 }
+					t_1[p3] = var29
 				end
-				local var31 = var28.get(p4)
+				local var32 = var29.get(p4)
 				
-				if var31 == nil or var31.prevSectionId == nil then
+				if var32 == nil or var32.prevSectionId == nil then
 					return 1
 				end
-				local var32
-				local var33 = var30(var31.prevSectionId)(p4)
+				local var33
+				local var34 = var26(var32.prevSectionId)(p4)
 				
 				if fFlagSduiCollectionGridRevealRows then
-					local prevSectionId = var31.prevSectionId
-					local var34 = var29[prevSectionId]
+					local prevSectionId = var32.prevSectionId
+					local var35 = var2[prevSectionId]
 					
-					if var34 == nil then
-						local var35 = signalsModule.createComputed(function(p5)
-							-- upvalues: prevSectionId (ref), t_3 (copy), signalsModule (copy), t_1 (copy), sectionConfigsEqual (copy), var33 (copy), var32 (copy)
-							local var36
-							local var37 = t_3[prevSectionId]
+					if var35 == nil then
+						local var36 = signalsModule.createComputed(function(p5)
+							-- upvalues: prevSectionId (ref), t_3 (copy), signalsModule (copy), t_1 (copy), sectionConfigsEqual (copy), var6 (copy), var5 (copy)
+							local var37
+							local var38 = t_3[prevSectionId]
 							
-							if var37 == nil then
-								local var38 = signalsModule.createComputed(function(p6)
-									-- upvalues: prevSectionId (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var33 (copy)
-									local var39 = t_1[prevSectionId]
+							if var38 == nil then
+								local var39 = signalsModule.createComputed(function(p6)
+									-- upvalues: prevSectionId (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var6 (copy)
+									local var40 = t_1[prevSectionId]
 									
-									if var39 == nil then
-										local var40, var41 = signalsModule.createSignal(nil, sectionConfigsEqual)
-										var39 = { get = var40, set = var41 }
-										t_1[prevSectionId] = var39
+									if var40 == nil then
+										local var41, var42 = signalsModule.createSignal(nil, sectionConfigsEqual)
+										var40 = { get = var41, set = var42 }
+										t_1[prevSectionId] = var40
 									end
-									local var42 = var39.get(p6)
+									local var43 = var40.get(p6)
 									
-									if var42 == nil then
+									if var43 == nil then
 										return 0
-									elseif var42.poolId == nil or var42.numberOfRows > 0 then
-										return var42.numberOfRows
+									elseif var43.poolId == nil or var43.numberOfRows > 0 then
+										return var43.numberOfRows
 									end
-									local var43 = var33(prevSectionId)(p6)
+									local var44 = var6(prevSectionId)(p6)
 									
-									return if var43 == nil then 0 else var43.actualRowCount
+									return if var44 == nil then 0 else var44.actualRowCount
 								end)
-								t_3[prevSectionId] = var38
-								var36 = var38
+								t_3[prevSectionId] = var39
+								var37 = var39
 							else
-								var36 = var37
+								var37 = var38
 							end
-							var36 = var36(p5)
-							local var39 = var32(prevSectionId).get(p5)
+							var37 = var37(p5)
+							local var40 = var5(prevSectionId).get(p5)
 							
-							return if var39 == nil then var36 else math.min(math.max(math.floor(var39), 0), var36)
+							return if var40 == nil then var37 else math.min(math.max(math.floor(var40), 0), var37)
 						end)
-						var29[prevSectionId] = var35
-						var32 = var35
+						var2[prevSectionId] = var36
+						var33 = var36
 					else
-						var32 = var34
+						var33 = var35
 					end
-					var32 = var32(p4)
+					var33 = var33(p4)
 				else
-					local prevSectionId = var31.prevSectionId
-					local var32 = t_3[prevSectionId]
+					local prevSectionId = var32.prevSectionId
+					local var37 = t_3[prevSectionId]
 					
-					if var32 == nil then
-						local var33 = signalsModule.createComputed(function(p5)
-							-- upvalues: prevSectionId (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var33 (copy)
-							local var36 = t_1[prevSectionId]
-							
-							if var36 == nil then
-								local var37, var38 = signalsModule.createSignal(nil, sectionConfigsEqual)
-								var36 = { get = var37, set = var38 }
-								t_1[prevSectionId] = var36
-							end
-							local var39 = var36.get(p5)
+					if var37 == nil then
+						local var38 = signalsModule.createComputed(function(p5)
+							-- upvalues: prevSectionId (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var6 (copy)
+							local var39 = t_1[prevSectionId]
 							
 							if var39 == nil then
-								return 0
-							elseif var39.poolId == nil or var39.numberOfRows > 0 then
-								return var39.numberOfRows
+								local var40, var41 = signalsModule.createSignal(nil, sectionConfigsEqual)
+								var39 = { get = var40, set = var41 }
+								t_1[prevSectionId] = var39
 							end
-							local var40 = var33(prevSectionId)(p5)
+							local var42 = var39.get(p5)
 							
-							return if var40 == nil then 0 else var40.actualRowCount
+							if var42 == nil then
+								return 0
+							elseif var42.poolId == nil or var42.numberOfRows > 0 then
+								return var42.numberOfRows
+							end
+							local var43 = var6(prevSectionId)(p5)
+							
+							return if var43 == nil then 0 else var43.actualRowCount
 						end)
-						t_3[prevSectionId] = var33
-						var32 = var33
+						t_3[prevSectionId] = var38
+						var33 = var38
 					else
-						var32 = var32
+						var33 = var37
 					end
-					var32 = var32(p4)
+					var33 = var33(p4)
 				end
-				return var33 + var32
+				return var34 + var33
 			end)
-			t_4[p3] = var27
+			t_4[p3] = var28
 			
-			return var27
+			return var28
 		end
-		return var26
+		return var27
 	end
 	
 	return {
 		getSectionInfo = function(p3)
-			-- upvalues: signalsModule (copy), t_1 (ref), sectionConfigsEqual (copy), t_5 (ref), var14 (write), EMPTY_CELLS (copy), cellsEqual (copy), var11 (write), t_3 (ref)
+			-- upvalues: signalsModule (copy), t_1 (ref), sectionConfigsEqual (copy), t_5 (ref), var6 (write), EMPTY_CELLS (copy), cellsEqual (copy), var26 (write), t_3 (ref)
 			return signalsModule.createComputed(function(p4)
-				-- upvalues: p4 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), t_5 (copy), var14 (copy), EMPTY_CELLS (copy), cellsEqual (copy), var11 (copy), t_3 (copy)
-				local var26 = t_1[p4]
+				-- upvalues: p3 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), t_5 (copy), var6 (copy), EMPTY_CELLS (copy), cellsEqual (copy), var26 (copy), t_3 (copy)
+				local var27 = t_1[p3]
 				
-				if var26 == nil then
-					local var27, var28 = signalsModule.createSignal(nil, sectionConfigsEqual)
-					var26 = { get = var27, set = var28 }
-					t_1[p4] = var26
+				if var27 == nil then
+					local var28, var29 = signalsModule.createSignal(nil, sectionConfigsEqual)
+					var27 = { get = var28, set = var29 }
+					t_1[p3] = var27
 				end
-				if var26.get(p4) == nil then
+				if var27.get(p4) == nil then
 					return nil
 				end
-				local var29
+				local var30
 				local t = {}
-				local var30 = t_5[p4]
+				local var31 = t_5[p3]
 				
-				if var30 == nil then
-					local var31 = signalsModule.createComputed(function(p5)
-						-- upvalues: var31 (copy), p5 (ref), EMPTY_CELLS (copy)
-						local var32 = var31(p5)(p5)
+				if var31 == nil then
+					local var32 = signalsModule.createComputed(function(p5)
+						-- upvalues: var6 (copy), p3 (ref), EMPTY_CELLS (copy)
+						local var33 = var6(p3)(p5)
 						
-						return if var32 == nil then EMPTY_CELLS else var32.cells
+						return if var33 == nil then EMPTY_CELLS else var33.cells
 					end, cellsEqual)
-					t_5[p4] = var31
-					var29 = var31
+					t_5[p3] = var32
+					var30 = var32
 				else
-					var29 = var30
+					var30 = var31
 				end
-				local var32
-				t.cells = var29(p4)
-				t.startRow = var28(p4)(p4)
-				local var33 = t_3[p4]
+				local var33
+				t.cells = var30(p4)
+				t.startRow = var26(p3)(p4)
+				local var34 = t_3[p3]
 				
-				if var33 == nil then
-					local var34 = signalsModule.createComputed(function(p5)
-						-- upvalues: p5 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var31 (copy)
-						local var35 = t_1[p5]
+				if var34 == nil then
+					local var35 = signalsModule.createComputed(function(p5)
+						-- upvalues: p3 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var6 (copy)
+						local var36 = t_1[p3]
 						
-						if var35 == nil then
-							local var36, var37 = signalsModule.createSignal(nil, sectionConfigsEqual)
-							var35 = { get = var36, set = var37 }
-							t_1[p5] = var35
+						if var36 == nil then
+							local var37, var38 = signalsModule.createSignal(nil, sectionConfigsEqual)
+							var36 = { get = var37, set = var38 }
+							t_1[p3] = var36
 						end
-						local var38 = var35.get(p5)
+						local var39 = var36.get(p5)
 						
-						if var38 == nil then
+						if var39 == nil then
 							return 0
-						elseif var38.poolId == nil or var38.numberOfRows > 0 then
-							return var38.numberOfRows
+						elseif var39.poolId == nil or var39.numberOfRows > 0 then
+							return var39.numberOfRows
 						end
-						local var39 = var31(p5)(p5)
+						local var40 = var6(p3)(p5)
 						
-						return if var39 == nil then 0 else var39.actualRowCount
+						return if var40 == nil then 0 else var40.actualRowCount
 					end)
-					t_3[p4] = var34
-					var32 = var34
+					t_3[p3] = var35
+					var33 = var35
 				else
-					var32 = var33
+					var33 = var34
 				end
-				t.actualRowCount = var32(p4)
+				t.actualRowCount = var33(p4)
 				
 				return t
 			end)
 		end,
-		getSectionStartRow = var11,
+		getSectionStartRow = var26,
+		getSectionRowCount = if fFlagSduiVerticalFeedProgressiveFillOnScroll then getRowCountComputed else nil,
 		getSectionCells = function(p3)
-			-- upvalues: t_5 (ref), signalsModule (copy), var14 (write), EMPTY_CELLS (copy), cellsEqual (copy)
-			local var26 = t_5[p3]
+			-- upvalues: t_5 (ref), signalsModule (copy), var6 (write), EMPTY_CELLS (copy), cellsEqual (copy)
+			local var27 = t_5[p3]
 			
-			if var26 == nil then
-				local var27 = signalsModule.createComputed(function(p4)
-					-- upvalues: var14 (copy), p4 (ref), EMPTY_CELLS (copy)
-					local var28 = var14(p4)(p4)
+			if var27 == nil then
+				local var28 = signalsModule.createComputed(function(p4)
+					-- upvalues: var6 (copy), p3 (ref), EMPTY_CELLS (copy)
+					local var29 = var6(p3)(p4)
 					
-					return if var28 == nil then EMPTY_CELLS else var28.cells
+					return if var29 == nil then EMPTY_CELLS else var29.cells
 				end, cellsEqual)
-				t_5[p3] = var27
+				t_5[p3] = var28
 				
-				return var27
+				return var28
 			end
-			return var26
+			return var27
 		end,
 		setSectionDisplayedRowCount = if fFlagSduiCollectionGridRevealRows then function(p3, p4)
-			-- upvalues: var13 (write)
-			var13(p3).set(p4)
+			-- upvalues: var5 (write)
+			var5(p3).set(p4)
 		end else nil,
 		setPools = function(value)
 			-- upvalues: t (ref), signalsModule (copy)
 			for i, v in value do
-				local var26 = t[i]
+				local var27 = t[i]
 				
-				if var26 == nil then
-					local var27, var28 = signalsModule.createSignal(nil)
-					var26 = { get = var27, set = var28 }
-					t[i] = var26
+				if var27 == nil then
+					local var28, var29 = signalsModule.createSignal(nil)
+					var27 = { get = var28, set = var29 }
+					t[i] = var27
 				end
-				var26.set(v)
+				var27.set(v)
 			end
 		end,
 		setSections = function(value)
 			-- upvalues: t_1 (ref), signalsModule (copy), sectionConfigsEqual (copy)
 			local t = {}
-			local var29 = nil
+			local var30 = nil
 			
 			for i, v in value do
 				local sectionId = v.sectionId
 				local poolId = v.poolId
-				local var30 = nil
+				local var31 = nil
 				
 				if poolId ~= nil then
-					var30 = t[poolId]
+					var31 = t[poolId]
 					t[poolId] = sectionId
 				end
-				local var31 = t_1[sectionId]
+				local var32 = t_1[sectionId]
 				
-				if var31 == nil then
-					local var32, var33 = signalsModule.createSignal(nil, sectionConfigsEqual)
-					var31 = { get = var32, set = var33 }
-					t_1[sectionId] = var31
+				if var32 == nil then
+					local var33, var34 = signalsModule.createSignal(nil, sectionConfigsEqual)
+					var32 = { get = var33, set = var34 }
+					t_1[sectionId] = var32
 				end
-				var31.set({
+				var32.set({
 					poolId = poolId,
 					numberOfRows = v.numberOfRows,
-					prevSectionInPoolId = var30,
-					prevSectionId = var29
+					prevSectionInPoolId = var31,
+					prevSectionId = var30
 				})
-				var29 = sectionId
+				var30 = sectionId
 			end
 		end,
 		setLayoutStore = function(value)
-			-- upvalues: var32 (ref)
-			var32(value)
+			-- upvalues: var4 (ref)
+			var4(value)
 		end
 	}
 end
@@ -504,14 +506,14 @@ local tbl = setmetatable({}, { __mode = "v" })
 return {
 	getSduiPoolStore = function(p3)
 		-- upvalues: tbl (ref), createSduiPoolStore (ref)
-		local var29 = tbl[p3]
+		local var30 = tbl[p3]
 		
-		if var29 == nil then
-			local var30 = createSduiPoolStore()
-			tbl[p3] = var30
+		if var30 == nil then
+			local var31 = createSduiPoolStore()
+			tbl[p3] = var31
 			
-			return var30
+			return var31
 		end
-		return var29
+		return var30
 	end
 }

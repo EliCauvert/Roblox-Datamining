@@ -17,7 +17,6 @@ local playabilityStatusEnum = require(parent.DiscoveryTypes).PlayabilityStatusEn
 local apiFetchShowAgeVerificationOverlay = require(parent.VoiceChat).AgeVerificationOverlay.ApiFetchShowAgeVerificationOverlay
 local promiseModule = require(parent.Promise)
 local getFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds = require(parent.SharedFlags).GetFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds
-local luaAppFetchContentMaturityWithPlayability = game:DefineFastFlag("LuaAppFetchContentMaturityWithPlayability", false)
 local runService = game:GetService("RunService")
 local t = {}
 
@@ -38,12 +37,12 @@ local function hasContentMaturity(p1, p2)
 end
 
 local function _(p1, p2, p3)
-	-- upvalues: luaAppFetchContentMaturityWithPlayability (ref), playabilityStatusEnum (ref), hasContentMaturity (ref)
-	return luaAppFetchContentMaturityWithPlayability and (p3 == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and not hasContentMaturity(p1, p2))
+	-- upvalues: playabilityStatusEnum (ref), hasContentMaturity (ref)
+	return p3 == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and not hasContentMaturity(p1, p2)
 end
 
 local function playButtonDataFetchPromises(p1, p2, p3, p4, p5)
-	-- upvalues: apiFetchGameDetails (ref), retrievalStatus (ref), fetchGamePlayabilityAndProductInfo (ref), luaAppFetchContentMaturityWithPlayability (ref), playabilityStatusEnum (ref), hasContentMaturity (ref), apiFetchAgeRecommendations (ref), promiseModule (ref), apiFetchShowAgeVerificationOverlay (ref), fetchUserGameVotes (ref)
+	-- upvalues: apiFetchGameDetails (ref), retrievalStatus (ref), fetchGamePlayabilityAndProductInfo (ref), playabilityStatusEnum (ref), hasContentMaturity (ref), apiFetchAgeRecommendations (ref), promiseModule (ref), apiFetchShowAgeVerificationOverlay (ref), fetchUserGameVotes (ref)
 	local t = {}
 	
 	if apiFetchGameDetails.GetFetchingStatus(p2:getState(), p3) ~= retrievalStatus.Fetching and (p4 or p2:getState().GameDetails[p3] == nil) then
@@ -52,15 +51,10 @@ local function playButtonDataFetchPromises(p1, p2, p3, p4, p5)
 	local fetchingStatus = fetchGamePlayabilityAndProductInfo.GetFetchingStatus(p2:getState(), p3)
 	
 	if p4 or p5 or (fetchingStatus == retrievalStatus.NotStarted or fetchingStatus == retrievalStatus.Failed) then
-		local var1 = p2:dispatch(fetchGamePlayabilityAndProductInfo.Fetch(p1, p3))
-		
-		if luaAppFetchContentMaturityWithPlayability then
-			var1 = var1:andThen(function(p6)
-				-- upvalues: p2 (ref), p3 (ref), luaAppFetchContentMaturityWithPlayability (copy), playabilityStatusEnum (copy), hasContentMaturity (copy), apiFetchAgeRecommendations (copy), p1 (ref), promiseModule (copy)
-				return if luaAppFetchContentMaturityWithPlayability and (p6 == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and not hasContentMaturity(p2:getState(), p3)) then p2:dispatch(apiFetchAgeRecommendations.Fetch(p1, p3)) else promiseModule.resolve(p6)
-			end)
-		end
-		table.insert(t, var1)
+		table.insert(t, p2:dispatch(fetchGamePlayabilityAndProductInfo.Fetch(p1, p3)):andThen(function(p6)
+			-- upvalues: p2 (ref), p3 (ref), playabilityStatusEnum (copy), hasContentMaturity (copy), apiFetchAgeRecommendations (copy), p1 (ref), promiseModule (copy)
+			return if p6 == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and not hasContentMaturity(p2:getState(), p3) then p2:dispatch(apiFetchAgeRecommendations.Fetch(p1, p3)) else promiseModule.resolve(p6)
+		end))
 	end
 	if game:GetEngineFeature("VoiceChatSupported") and apiFetchShowAgeVerificationOverlay.GetFetchingStatus(p2:getState(), p3) ~= retrievalStatus.Fetching and (p4 or p2:getState().ShowAgeVerificationOverlay[p3] == nil) then
 		table.insert(t, p2:dispatch(apiFetchShowAgeVerificationOverlay.Fetch(p1, p3)))
@@ -72,7 +66,7 @@ local function playButtonDataFetchPromises(p1, p2, p3, p4, p5)
 end
 
 function t.IsLoading(p1, p2)
-	-- upvalues: apiFetchGameDetails (ref), retrievalStatus (ref), fetchGamePlayabilityAndProductInfo (ref), luaAppFetchContentMaturityWithPlayability (ref), playabilityStatusEnum (ref), hasContentMaturity (ref), apiFetchAgeRecommendations (ref), apiFetchShowAgeVerificationOverlay (ref)
+	-- upvalues: apiFetchGameDetails (ref), retrievalStatus (ref), fetchGamePlayabilityAndProductInfo (ref), playabilityStatusEnum (ref), hasContentMaturity (ref), apiFetchAgeRecommendations (ref), apiFetchShowAgeVerificationOverlay (ref)
 	local fetchingStatus = apiFetchGameDetails.GetFetchingStatus(p1, p2)
 	
 	if fetchingStatus == retrievalStatus.NotStarted or fetchingStatus == retrievalStatus.Fetching then
@@ -82,19 +76,19 @@ function t.IsLoading(p1, p2)
 	
 	if fetchingStatus_1 == retrievalStatus.NotStarted or fetchingStatus_1 == retrievalStatus.Fetching then
 		return true
-	elseif luaAppFetchContentMaturityWithPlayability then
-		local var1 = p1.PlayabilityStatus and p1.PlayabilityStatus[p2]
+	end
+	local fetchingStatus_2
+	local var1 = p1.PlayabilityStatus and p1.PlayabilityStatus[p2]
+	
+	if var1 and (var1.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and not hasContentMaturity(p1, p2)) then
+		fetchingStatus_2 = apiFetchAgeRecommendations.GetFetchingStatus(p1, p2)
 		
-		if var1 and (luaAppFetchContentMaturityWithPlayability and (var1.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and not hasContentMaturity(p1, p2))) then
-			local fetchingStatus_2 = apiFetchAgeRecommendations.GetFetchingStatus(p1, p2)
+		if fetchingStatus_2 == retrievalStatus.NotStarted or fetchingStatus_2 == retrievalStatus.Fetching then
+			return true
+		elseif game:GetEngineFeature("VoiceChatSupported") then
+			fetchingStatus_2 = apiFetchShowAgeVerificationOverlay.GetFetchingStatus(p1, p2)
 			
-			if fetchingStatus_2 == retrievalStatus.NotStarted or fetchingStatus_2 == retrievalStatus.Fetching then
-				return true
-			elseif game:GetEngineFeature("VoiceChatSupported") then
-				local fetchingStatus_2 = apiFetchShowAgeVerificationOverlay.GetFetchingStatus(p1, p2)
-				
-				return fetchingStatus_2 == retrievalStatus.NotStarted or fetchingStatus_2 == retrievalStatus.Fetching
-			end
+			return fetchingStatus_2 == retrievalStatus.NotStarted or fetchingStatus_2 == retrievalStatus.Fetching
 		end
 	end
 end

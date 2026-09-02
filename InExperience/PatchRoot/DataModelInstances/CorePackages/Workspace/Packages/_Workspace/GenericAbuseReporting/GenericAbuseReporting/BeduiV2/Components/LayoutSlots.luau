@@ -30,8 +30,8 @@ local var4 = reactModule.forwardRef(function(p1, _)
 		LayoutOrder = p1.layoutOrder
 	}, {
 		Title = reactModule.createElement(textWithTranslationModule, {
+			tag = "size-full-0 auto-y text-title-large",
 			input = p1.input,
-			tag = `size-full-0 auto-y text-title-large {p1.tag or ""}`,
 			layoutOrder = p1.layoutOrder
 		}),
 		Subtitle = p1.subtitle and reactModule.createElement(subtitleModule, {
@@ -41,19 +41,11 @@ local var4 = reactModule.forwardRef(function(p1, _)
 	})
 end)
 local t = {
-	Body = reactModule.forwardRef(function(p1, p2)
-		-- upvalues: reactModule (ref), sheet (ref)
-		return reactModule.createElement(sheet.Content, { ref = p2 }, p1.children)
-	end),
-	Actions = reactModule.forwardRef(function(p1, p2)
-		-- upvalues: reactModule (ref), sheet (ref)
-		return reactModule.createElement(sheet.Actions, { ref = p2 }, p1.children)
-	end),
 	Title = reactModule.forwardRef(function(p1, _)
 		-- upvalues: reactModule (ref), textWithTranslationModule (ref)
 		return reactModule.createElement(textWithTranslationModule, {
+			tag = "size-full-0 auto-y text-heading-medium",
 			input = p1.input,
-			tag = `size-full-0 auto-y text-heading-medium {p1.tag or ""}`,
 			layoutOrder = p1.layoutOrder
 		})
 	end),
@@ -78,35 +70,6 @@ return {
 	INLINE_LANDSCAPE_WIDTH = 468,
 	sheetSlots = t,
 	inlineSlots = {
-		Body = reactModule.forwardRef(function(p1, p2)
-			-- upvalues: useIsSlideAnimating (ref), reactModule (ref), view (ref)
-			return reactModule.createElement(view, { tag = "fill size-full-0", ref = p2 }, reactModule.createElement("ScrollingFrame", {
-				ZIndex = 2,
-				BackgroundTransparency = 1,
-				BorderSizePixel = 0,
-				Selectable = false,
-				ScrollBarThickness = 1,
-				Size = UDim2.new(1, 0, 1, 0),
-				AutomaticCanvasSize = Enum.AutomaticSize.Y,
-				CanvasSize = UDim2.new(1, 0, 0, 0),
-				ScrollingDirection = Enum.ScrollingDirection.Y,
-				ScrollBarImageTransparency = useIsSlideAnimating():map(function(p3)
-					return if p3 then 1 else 0
-				end)
-			}, reactModule.createElement(view, {
-				tag = "align-x-center size-full-0 auto-y margin-bottom-medium"
-			}, reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, p1.children))))
-		end),
-		Actions = reactModule.forwardRef(function(p1, p2)
-			-- upvalues: reactModule (ref), view (ref)
-			return reactModule.createElement(view, {
-				tag = "size-full-0 auto-y align-x-center padding-bottom-small",
-				ref = p2
-			}, reactModule.createElement(view, {
-				tag = "row size-full-0 auto-y gap-medium position-bottom-center",
-				ZIndex = 2
-			}, p1.children))
-		end),
 		Title = var4,
 		Layout = reactModule.forwardRef(function(p1, p2)
 			-- upvalues: reactModule (ref), var1 (ref), useTokens (ref), useIsSlideAnimating (ref), view (ref)

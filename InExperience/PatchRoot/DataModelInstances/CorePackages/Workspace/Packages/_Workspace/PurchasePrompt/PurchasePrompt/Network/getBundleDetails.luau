@@ -3,7 +3,6 @@ local purchaseErrorModule = require(parent.Enums.PurchaseError)
 local promiseModule = require(parent.Promise)
 local _ = require(parent.Parent.LuauPolyfill)
 local fFlagRefreshPriceOnRetryAfterUpsellModule = require(parent.Flags.FFlagRefreshPriceOnRetryAfterUpsell)
-local fFlagEnableDiscountInfoInUnifiedPurchaseModal = require(parent.Parent.SharedFlags).FFlagEnableDiscountInfoInUnifiedPurchaseModal
 local fFlagEnableFetchCartPricingDuringInExperience = require(parent.Parent.SharedFlags).FFlagEnableFetchCartPricingDuringInExperience
 local getCatalogItemDetailsModule = require(parent.Network.getCatalogItemDetails)
 local getResellersModule = require(parent.Network.getResellers)
@@ -28,10 +27,8 @@ local function convertDiscountInfoToPriceDiscountDetails(p1)
 end
 
 local function normalizeBundleFields(p2)
-	-- upvalues: fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), convertDiscountInfoToPriceDiscountDetails (ref)
-	if not fFlagEnableDiscountInfoInUnifiedPurchaseModal then
-		return p2
-	elseif not p2.UserBasePriceInRobux then
+	-- upvalues: convertDiscountInfoToPriceDiscountDetails (ref)
+	if not p2.UserBasePriceInRobux then
 		local discountInformation = p2.discountInformation
 		p2.UserBasePriceInRobux = p2.BasePriceInRobux or ((if discountInformation then discountInformation.originalPrice else nil) or (p2.PriceInRobux or ((if p2.product then p2.product.priceInRobux else nil) or 0)))
 	end

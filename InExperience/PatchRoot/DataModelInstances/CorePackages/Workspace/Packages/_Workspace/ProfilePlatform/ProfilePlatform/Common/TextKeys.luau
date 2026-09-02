@@ -63,6 +63,8 @@ return {
 	FriendRequestSent = "Feature.Friends.Action.FriendRequestSent",
 	ConnectionRequestSent = if fFlagConnectionsToFriendsRename then nil else "Feature.Friends.Action.ConnectionRequestSent",
 	RequestIgnored = "Feature.AddFriends.Action.RequestIgnored",
+	Followed = "Feature.Friends.Label.Followed",
+	Unfollowed = "Feature.Friends.Label.Unfollowed",
 	SomethingIsWrong = "Feature.Toast.NetworkingError.SomethingIsWrong",
 	UserBlocked = "Feature.Profile.Action.UserBlocked",
 	LinkCopied = "Feature.Catalog.Toast.LinkCopied",

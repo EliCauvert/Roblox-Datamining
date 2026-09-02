@@ -1,4 +1,5 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
+﻿local var1
+local chrome = script:FindFirstAncestor("Chrome")
 local corePackagesService = game:GetService("CorePackages")
 local reactModule = require(corePackagesService.Packages.React)
 local serviceModule = require(chrome.Service)
@@ -18,8 +19,8 @@ local playerListManagerModule = require(robloxGui.Modules.PlayerList.PlayerListM
 local emotesMenuMasterModule = require(robloxGui.Modules.EmotesMenu.EmotesMenuMaster)
 local fFlagEnableNewBackpack = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableNewBackpack
 local signal = require(corePackagesService.Workspace.Packages.AppCommonLib).Signal
-local var1 = if fFlagEnableNewBackpack then require(corePackagesService.Workspace.Packages.System).Features else nil
-local var2 = if not fFlagEnableNewBackpack then require(robloxGui.Modules.BackpackScript) else nil
+local var2 = if fFlagEnableNewBackpack then require(corePackagesService.Workspace.Packages.System).Features else nil
+local var3 = if not fFlagEnableNewBackpack then require(robloxGui.Modules.BackpackScript) else nil
 local useMappedSignal = chromeModule.Hooks.useMappedSignal
 local getFFlagIsSquadEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagIsSquadEnabled
 local useAppPolicy = require(corePackagesService.Workspace.Packages.UniversalAppPolicy).useAppPolicy
@@ -38,7 +39,8 @@ local getFIntRobloxConnectFtuxDismissDelayMsModule = require(chrome.Flags.GetFIn
 local getFFlagEnableAppChatInExperience = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagEnableAppChatInExperience
 local getShouldShowPlatformChatBasedOnPolicyModule = require(chrome.Flags.GetShouldShowPlatformChatBasedOnPolicy)
 local fixInventoryFilledIcon = game:DefineFastFlag("FixInventoryFilledIcon", false)
-local fFlagTokenizeUnibarConstantsWithStyleProvider = require(chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
+local flagsModule = require(chrome.ChromeShared.Flags)
+local fFlagTokenizeUnibarConstantsWithStyleProvider = flagsModule.FFlagTokenizeUnibarConstantsWithStyleProvider
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local fFlagShowGameAgeRating = sharedFlagsModule.FFlagShowGameAgeRating
 local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
@@ -48,22 +50,18 @@ local appChatEnabledChromeDropdownFtuxTooltip = game:DefineFastFlag("AppChatEnab
 local avatarSwitcherFtuxTooltip = game:DefineFastFlag("AvatarSwitcherFtuxTooltip", false)
 local fFlagEnableInExperienceShop = game:DefineFastFlag("InExperienceShopFtuxTooltip", false) and sharedFlagsModule.FFlagEnableInExperienceShop
 local fFlagMenuOfferTooltip = sharedFlagsModule.FFlagMenuOfferTooltip
+local fFlagChromeNineDotActivityIndicator = sharedFlagsModule.FFlagOfferNineDotActivityIndicator and flagsModule.FFlagChromeNineDotActivityIndicator
 local useInExperienceOfferExposureModule = require(chrome.Integrations.InExperienceShop.useInExperienceOfferExposure)
-local var3 = if fFlagEnableInExperienceShop then require(chrome.Integrations.InExperienceShop.InExperienceShopFtuxTooltip) else nil
-local menuOfferTooltipModule = nil
-local usePublishShopAvailabilityModule = nil
-
-if fFlagMenuOfferTooltip then
-	menuOfferTooltipModule = require(chrome.Integrations.InExperienceShop.MenuOfferTooltip)
-	usePublishShopAvailabilityModule = require(chrome.Integrations.InExperienceShop.usePublishShopAvailability)
-end
-local var4
+local var4 = if fFlagChromeNineDotActivityIndicator then require(chrome.Integrations.InExperienceShop.useOfferNineDotActivityIndicator) else nil
+local var5 = if fFlagEnableInExperienceShop then require(chrome.Integrations.InExperienceShop.InExperienceShopFtuxTooltip) else nil
+local var6 = if fFlagMenuOfferTooltip then require(chrome.Integrations.InExperienceShop.MenuOfferTooltip) else nil
+local var7 = if fFlagMenuOfferTooltip or fFlagChromeNineDotActivityIndicator then require(chrome.Integrations.InExperienceShop.usePublishShopAvailability) else nil
 local unibarConnectTooltipPriority = game:DefineFastInt("UnibarConnectTooltipPriority", 2000)
-local var5 = getFFlagEnableAppChatInExperience() and (appChatEnabledChromeDropdownFtuxTooltip and getShouldShowPlatformChatBasedOnPolicyModule())
+local var8 = getFFlagEnableAppChatInExperience() and (appChatEnabledChromeDropdownFtuxTooltip and getShouldShowPlatformChatBasedOnPolicyModule())
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local inExperienceUIVRIXP = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).InExperienceUIVRIXP
 local SELFIE_VIEW_ID = constantsModule.SELFIE_VIEW_ID
-local var6 = mappedSignal.new(playerListManagerModule:GetSetVisibleChangedEvent().Event, function()
+local var9 = mappedSignal.new(playerListManagerModule:GetSetVisibleChangedEvent().Event, function()
 	-- upvalues: playerListManagerModule (ref)
 	return playerListManagerModule:GetSetVisible()
 end)
@@ -91,19 +89,19 @@ chromeUtilsModule.setCoreGuiAvailability(serviceModule:register({
 			playerListManagerModule:SetVisibility(not playerListManagerModule:GetSetVisible())
 		end)
 	end,
-	isActivated = var6,
+	isActivated = var9,
 	components = {
 		Icon = function(_)
-			-- upvalues: commonIconModule (ref), var6 (ref)
-			return commonIconModule("icons/controls/leaderboardOff", "icons/controls/leaderboardOn", var6)
+			-- upvalues: commonIconModule (ref), var9 (ref)
+			return commonIconModule("icons/controls/leaderboardOff", "icons/controls/leaderboardOn", var9)
 		end
 	}
 }), Enum.CoreGuiType.PlayerList)
-local var7 = mappedSignal.new(emotesMenuMasterModule.EmotesMenuToggled.Event, function()
+local var10 = mappedSignal.new(emotesMenuMasterModule.EmotesMenuToggled.Event, function()
 	-- upvalues: emotesMenuMasterModule (ref)
 	return emotesMenuMasterModule:isOpen()
 end)
-local var8 = serviceModule:register({
+local var11 = serviceModule:register({
 	id = "emotes",
 	label = "CoreScripts.TopBar.Emotes",
 	sideSheetPlacement = sideSheetPlacement.Vertical,
@@ -123,30 +121,30 @@ local var8 = serviceModule:register({
 			emotesMenuMasterModule:open()
 		end)
 	end,
-	isActivated = var7,
+	isActivated = var10,
 	components = {
 		Icon = function(_)
-			-- upvalues: commonIconModule (ref), var7 (ref)
-			return commonIconModule("icons/controls/emoteOff", "icons/controls/emoteOn", var7)
+			-- upvalues: commonIconModule (ref), var10 (ref)
+			return commonIconModule("icons/controls/emoteOff", "icons/controls/emoteOn", var10)
 		end
 	}
 })
-local var9 = false
+local var12 = false
 local menuIsVisible = emotesMenuMasterModule.MenuIsVisible
 
 function updateEmoteAvailability()
-	-- upvalues: var9 (write), menuIsVisible (write), var8 (ref)
-	if var9 and menuIsVisible then
-		var8.availability:available()
+	-- upvalues: var12 (write), menuIsVisible (write), var11 (ref)
+	if var12 and menuIsVisible then
+		var11.availability:available()
 		
 		return
 	end
-	var8.availability:unavailable()
+	var11.availability:unavailable()
 end
 
-chromeUtilsModule.setCoreGuiAvailability(var8, Enum.CoreGuiType.EmotesMenu, function(p1)
-	-- upvalues: var9 (write)
-	var9 = p1
+chromeUtilsModule.setCoreGuiAvailability(var11, Enum.CoreGuiType.EmotesMenu, function(p1)
+	-- upvalues: var12 (write)
+	var12 = p1
 	updateEmoteAvailability()
 end)
 emotesMenuMasterModule.MenuVisibilityChanged.Event:Connect(function()
@@ -154,29 +152,29 @@ emotesMenuMasterModule.MenuVisibilityChanged.Event:Connect(function()
 	menuIsVisible = emotesMenuMasterModule.MenuIsVisible
 	updateEmoteAvailability()
 end)
-local var10 = if not fFlagEnableNewBackpack then mappedSignal.new(var2.StateChanged.Event, function()
-	-- upvalues: var2 (ref)
-	return var2.IsOpen
+local var13 = if not fFlagEnableNewBackpack then mappedSignal.new(var3.StateChanged.Event, function()
+	-- upvalues: var3 (ref)
+	return var3.IsOpen
 end) else nil
 local _ = nil
 
 if fFlagEnableNewBackpack then
-	local var11 = signal.new()
-	var1.onVisibilityChanged(var1.FeatureName.Backpack, function()
-		-- upvalues: var11 (ref)
-		var11:fire()
+	local var14 = signal.new()
+	var2.onVisibilityChanged(var2.FeatureName.Backpack, function()
+		-- upvalues: var14 (ref)
+		var14:fire()
 		
 		return nil
 	end)
-	var4 = mappedSignal.new(var11, function()
-		-- upvalues: var1 (ref)
-		return var1.getVisibility(var1.FeatureName.Backpack)
+	var1 = mappedSignal.new(var14, function()
+		-- upvalues: var2 (ref)
+		return var2.getVisibility(var2.FeatureName.Backpack)
 	end)
 else
-	var4 = var10
+	var1 = var13
 end
 if fFlagEnableSideSheet and fFlagSideSheetFocusNav and fFlagEnableConsoleExpControls then
-	var4:connect(function(p1)
+	var1:connect(function(p1)
 		-- upvalues: serviceModule (ref)
 		serviceModule:setHideShortcutBar("Backpack", p1)
 	end)
@@ -186,46 +184,46 @@ chromeUtilsModule.setCoreGuiAvailability(serviceModule:register({
 	label = "CoreScripts.TopBar.Inventory",
 	sideSheetPlacement = sideSheetPlacement.Page,
 	activated = function(_)
-		-- upvalues: fFlagEnableNewBackpack (ref), var1 (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), inExperienceUIVRIXP (ref), chromeIntegrationUtilsModule (ref), var2 (ref)
+		-- upvalues: fFlagEnableNewBackpack (ref), var2 (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), inExperienceUIVRIXP (ref), chromeIntegrationUtilsModule (ref), var3 (ref)
 		if fFlagEnableNewBackpack then
-			if var1.getVisibility(var1.FeatureName.Backpack) then
-				var1.toggleVisibility(var1.FeatureName.Backpack)
+			if var2.getVisibility(var2.FeatureName.Backpack) then
+				var2.toggleVisibility(var2.FeatureName.Backpack)
 				
 				return
 			elseif isInExperienceUIVREnabled and isSpatial() and not inExperienceUIVRIXP:isMovePanelToCenter() then
-				var1.toggleVisibility(var1.FeatureName.Backpack)
+				var2.toggleVisibility(var2.FeatureName.Backpack)
 				
 				return
 			end
 			chromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function()
-				-- upvalues: var1 (copy)
-				var1.toggleVisibility(var1.FeatureName.Backpack)
+				-- upvalues: var2 (copy)
+				var2.toggleVisibility(var2.FeatureName.Backpack)
 			end)
 			
 			return
-		elseif var2.IsOpen then
-			var2:OpenClose()
+		elseif var3.IsOpen then
+			var3:OpenClose()
 			
 			return
 		elseif isInExperienceUIVREnabled and isSpatial() and not inExperienceUIVRIXP:isMovePanelToCenter() then
-			var2:OpenClose()
+			var3:OpenClose()
 			
 			return
 		end
 		chromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function()
-			-- upvalues: var2 (copy)
-			var2:OpenClose()
+			-- upvalues: var3 (copy)
+			var3:OpenClose()
 		end)
 	end,
-	isActivated = var4,
+	isActivated = var1,
 	components = {
 		Icon = function(_)
-			-- upvalues: commonIconModule (ref), fixInventoryFilledIcon (ref), var10 (ref)
-			return commonIconModule("icons/menu/inventoryOff", if fixInventoryFilledIcon then "icons/menu/inventoryOn" else "icons/menu/inventory", var10)
+			-- upvalues: commonIconModule (ref), fixInventoryFilledIcon (ref), var13 (ref)
+			return commonIconModule("icons/menu/inventoryOff", if fixInventoryFilledIcon then "icons/menu/inventoryOn" else "icons/menu/inventory", var13)
 		end
 	}
 }), Enum.CoreGuiType.Backpack)
-local var12 = serviceModule:register({
+local var15 = serviceModule:register({
 	id = "respawn",
 	label = "CoreScripts.InGameMenu.QuickActions.Respawn",
 	sideSheetPlacement = sideSheetPlacement.Vertical,
@@ -243,13 +241,13 @@ local var12 = serviceModule:register({
 })
 
 function updateRespawn(p1)
-	-- upvalues: var12 (ref)
+	-- upvalues: var15 (ref)
 	if p1 then
-		var12.availability:available()
+		var15.availability:available()
 		
 		return
 	end
-	var12.availability:unavailable()
+	var15.availability:unavailable()
 end
 
 task.defer(function()
@@ -258,28 +256,30 @@ task.defer(function()
 	settingsHubModule.RespawnBehaviourChangedEvent.Event:connect(updateRespawn)
 	updateRespawn(settingsHubModule:GetRespawnBehaviour())
 end)
-local var13 = serviceModule:currentSubMenu()
-local var14 = mappedSignal.new(var13:signal(), function()
-	-- upvalues: var13 (ref)
-	return var13:get() == "nine_dot"
+local var16 = serviceModule:currentSubMenu()
+local var17 = mappedSignal.new(var16:signal(), function()
+	-- upvalues: var16 (ref)
+	return var16:get() == "nine_dot"
 end)
 
 if serviceModule:orderAlignment():get() == Enum.HorizontalAlignment.Right then
-	var14:connect(function(p1)
+	var17:connect(function(p1)
 		-- upvalues: playerListManagerModule (ref)
 		playerListManagerModule:SetMinimized(p1)
 	end)
 end
 function HamburgerButton(p1)
-	-- upvalues: useStyle (ref), fFlagMenuOfferTooltip (ref), reactModule (ref), usePublishShopAvailabilityModule (write), useInExperienceOfferExposureModule (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), var14 (ref), useMappedSignal (ref), var5 (ref), commonFtuxTooltipModule (ref), unibarConnectTooltipPriority (ref), getFFlagIsSquadEnabled (ref), getFStringConnectTooltipLocalStorageKeyModule (ref), getFIntRobloxConnectFtuxShowDelayMsModule (ref), getFIntRobloxConnectFtuxDismissDelayMsModule (ref), fFlagShowGameAgeRating (ref), useAppPolicy (ref), fFlagEnableSideSheet (ref), selectionCursorProvider (ref), menuIconModule (ref), imageSetLabel (ref), images (ref), selfieViewModule (ref), serviceModule (ref), SELFIE_VIEW_ID (ref), avatarSwitcherFtuxTooltip (ref), avatarSwitcherFtuxTooltipModule (ref), fFlagEnableInExperienceShop (ref), var3 (write), menuOfferTooltipModule (write)
+	-- upvalues: useStyle (ref), fFlagMenuOfferTooltip (ref), reactModule (ref), fFlagChromeNineDotActivityIndicator (ref), var7 (write), useInExperienceOfferExposureModule (ref), var4 (write), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), var17 (ref), useMappedSignal (ref), var8 (ref), commonFtuxTooltipModule (ref), unibarConnectTooltipPriority (ref), getFFlagIsSquadEnabled (ref), getFStringConnectTooltipLocalStorageKeyModule (ref), getFIntRobloxConnectFtuxShowDelayMsModule (ref), getFIntRobloxConnectFtuxDismissDelayMsModule (ref), fFlagShowGameAgeRating (ref), useAppPolicy (ref), fFlagEnableSideSheet (ref), selectionCursorProvider (ref), menuIconModule (ref), imageSetLabel (ref), images (ref), selfieViewModule (ref), serviceModule (ref), SELFIE_VIEW_ID (ref), avatarSwitcherFtuxTooltip (ref), avatarSwitcherFtuxTooltipModule (ref), fFlagEnableInExperienceShop (ref), var5 (write), var6 (write)
 	local toggleTransition = p1.toggleTransition
-	local var15 = useStyle()
-	local var16 = nil
+	local var18 = useStyle()
+	local var19 = if fFlagMenuOfferTooltip then reactModule.useRef(nil) else nil
 	
-	if fFlagMenuOfferTooltip then
-		var16 = reactModule.useRef(nil)
-		usePublishShopAvailabilityModule()
+	if fFlagMenuOfferTooltip or fFlagChromeNineDotActivityIndicator then
+		var7()
 		useInExperienceOfferExposureModule()
+	end
+	if fFlagChromeNineDotActivityIndicator then
+		var4()
 	end
 	local ICON_SIZE, MEDIUM_ICON_SIZE
 	local _ = nil
@@ -287,9 +287,9 @@ function HamburgerButton(p1)
 	local _ = nil
 	
 	if fFlagTokenizeUnibarConstantsWithStyleProvider then
-		local var17 = unibarStyle.use()
-		ICON_SIZE = var17.ICON_SIZE
-		MEDIUM_ICON_SIZE = var17.MEDIUM_ICON_SIZE
+		local var20 = unibarStyle.use()
+		ICON_SIZE = var20.ICON_SIZE
+		MEDIUM_ICON_SIZE = var20.MEDIUM_ICON_SIZE
 	else
 		ICON_SIZE = constantsModule.ICON_SIZE
 		MEDIUM_ICON_SIZE = constantsModule.MEDIUM_ICON_SIZE
@@ -297,11 +297,11 @@ function HamburgerButton(p1)
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		Size = UDim2.new(0, ICON_SIZE, 0, ICON_SIZE),
-		ref = if fFlagMenuOfferTooltip then var16 else nil,
-		BackgroundColor3 = var15.Theme.BackgroundOnHover.Color,
+		ref = if fFlagMenuOfferTooltip then var19 else nil,
+		BackgroundColor3 = var18.Theme.BackgroundOnHover.Color,
 		BackgroundTransparency = toggleTransition:map(function(p2)
-			-- upvalues: var15 (ref)
-			return 1 - (1 - var15.Theme.BackgroundOnHover.Transparency) * p2
+			-- upvalues: var18 (ref)
+			return 1 - (1 - var18.Theme.BackgroundOnHover.Transparency) * p2
 		end)
 	}, {
 		reactModule.createElement("UICorner", { Name = "Corner", CornerRadius = UDim.new(1, 0) }),
@@ -326,10 +326,10 @@ function HamburgerButton(p1)
 				
 				return UDim2.new(0, ICON_SIZE * p2, 0, ICON_SIZE * p2)
 			end),
-			ImageColor3 = var15.Theme.IconEmphasis.Color,
+			ImageColor3 = var18.Theme.IconEmphasis.Color,
 			ImageTransparency = toggleTransition:map(function(p2)
-				-- upvalues: var15 (ref)
-				return p2 * var15.Theme.IconEmphasis.Transparency
+				-- upvalues: var18 (ref)
+				return p2 * var18.Theme.IconEmphasis.Transparency
 			end)
 		}) else nil,
 		if not fFlagEnableSideSheet then reactModule.createElement(imageSetLabel, {
@@ -342,18 +342,18 @@ function HamburgerButton(p1)
 				-- upvalues: MEDIUM_ICON_SIZE (write)
 				return UDim2.new(0, MEDIUM_ICON_SIZE * p2, 0, MEDIUM_ICON_SIZE * p2)
 			end),
-			ImageColor3 = var15.Theme.IconEmphasis.Color,
+			ImageColor3 = var18.Theme.IconEmphasis.Color,
 			ImageTransparency = toggleTransition:map(function(p2)
-				-- upvalues: var15 (ref)
-				return (1 - p2) * var15.Theme.IconEmphasis.Transparency
+				-- upvalues: var18 (ref)
+				return (1 - p2) * var18.Theme.IconEmphasis.Transparency
 			end)
 		}) else nil,
-		if selfieViewModule.useCameraOn() and not serviceModule:isWindowOpen(SELFIE_VIEW_ID) and not (var14 and useMappedSignal(var14) or false) then reactModule.createElement(selfieViewModule.CameraStatusDot, {
+		if selfieViewModule.useCameraOn() and not serviceModule:isWindowOpen(SELFIE_VIEW_ID) and not (var17 and useMappedSignal(var17) or false) then reactModule.createElement(selfieViewModule.CameraStatusDot, {
 			Name = "CameraStatusDot",
 			ZIndex = 2,
 			Position = UDim2.new(1, -4, 1, -7)
 		}) else nil,
-		if var5 then commonFtuxTooltipModule({
+		if var8 then commonFtuxTooltipModule({
 			id = "CONNECT_TOOLTIP",
 			priority = unibarConnectTooltipPriority,
 			isIconVisible = p1.visible,
@@ -364,8 +364,8 @@ function HamburgerButton(p1)
 			dismissDelay = getFIntRobloxConnectFtuxDismissDelayMsModule()
 		}) else nil,
 		if avatarSwitcherFtuxTooltip then reactModule.createElement(avatarSwitcherFtuxTooltipModule, { visible = p1.visible }) else nil,
-		if fFlagEnableInExperienceShop then reactModule.createElement(var3, { visible = p1.visible }) else nil,
-		if fFlagMenuOfferTooltip then reactModule.createElement(menuOfferTooltipModule, { anchorRef = var16, visible = p1.visible }) else nil
+		if fFlagEnableInExperienceShop then reactModule.createElement(var5, { visible = p1.visible }) else nil,
+		if fFlagMenuOfferTooltip then reactModule.createElement(var6, { anchorRef = var19, visible = p1.visible }) else nil
 	})
 end
 
@@ -375,7 +375,7 @@ return serviceModule:register({
 	label = if fFlagEnableSideSheet then "CoreScripts.TopBar.RobloxMenu" else "CoreScripts.TopBar.MoreMenu",
 	sideSheetPlacement = sideSheetPlacement.None,
 	hotkeyCodes = if fFlagEnableSideSheet then { Enum.KeyCode.Escape } else nil,
-	isActivated = var14,
+	isActivated = var17,
 	components = {
 		Icon = function(p1)
 			-- upvalues: reactModule (ref)

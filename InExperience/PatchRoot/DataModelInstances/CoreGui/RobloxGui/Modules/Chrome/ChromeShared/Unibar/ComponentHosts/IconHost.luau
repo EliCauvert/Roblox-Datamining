@@ -10,7 +10,9 @@ local var1 = if fFlagEnableWhatsNew then require(corePackagesService.Workspace.P
 local flagsModule = require(script.Parent.Parent.Parent.Parent.Flags)
 local fFlagUnibarMenuOpenHamburger = flagsModule.FFlagUnibarMenuOpenHamburger
 local fFlagUnibarMenuOpenSubmenu = flagsModule.FFlagUnibarMenuOpenSubmenu
-local fFlagTokenizeUnibarConstantsWithStyleProvider = require(chromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
+local flagsModule_1 = require(chromeShared.Flags)
+local fFlagChromeNineDotActivityIndicator = flagsModule_1.FFlagChromeNineDotActivityIndicator
+local fFlagTokenizeUnibarConstantsWithStyleProvider = flagsModule_1.FFlagTokenizeUnibarConstantsWithStyleProvider
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
 local foundationModule = require(corePackagesService.Packages.Foundation)
 local useCursor = foundationModule.Hooks.useCursor
@@ -26,12 +28,12 @@ local serviceModule = require(chromeShared.Service)
 local chromeAnalyticsModule = require(chromeShared.Analytics.ChromeAnalytics)
 local unibarStyle = require(corePackagesService.Workspace.Packages.Chrome).UnibarStyle
 local useObservableValueModule = require(chromeShared.Hooks.useObservableValue)
-local useNotificationCountModule = require(chromeShared.Hooks.useNotificationCount)
-local useMappedObservableValueModule = require(chromeShared.Hooks.useMappedObservableValue)
 local useMappedObservableValueBindingModule = require(chromeShared.Hooks.useMappedObservableValueBinding)
 local useTimeHysteresisModule = require(chromeShared.Hooks.useTimeHysteresis)
 local shouldRejectMultiTouchModule = require(chromeShared.Utility.shouldRejectMultiTouch)
 local chatNotificationBadgeModule = require(script.Parent.ChatNotificationBadge)
+local nineDotActivityIndicatorModule = require(script.Parent.NineDotActivityIndicator)
+local nineDotNotificationBadgeModule = require(script.Parent.NineDotNotificationBadge)
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local isSpatial = nil
 local panel3DInSpatialUI = nil
@@ -62,7 +64,6 @@ if isInExperienceUIVREnabled then
 	end
 end
 local var3 = if fFlagEnableConsoleExpControls then require(chromeShared.Parent.Parent.TopBar.Components.MenuIconContext) else nil
-local useBindingForUnreadChat = game:DefineFastFlag("UseBindingForUnreadChat", false)
 local t = {}
 
 function areTooltipsDisplaying()
@@ -85,84 +86,72 @@ function logTooltipState(p1, p2)
 end
 
 function NotificationBadge(p1)
-	-- upvalues: useBindingForUnreadChat (ref), reactModule (ref), useNotificationCountModule (ref), useMappedObservableValueModule (ref), serviceModule (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref)
+	-- upvalues: reactModule (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), fFlagChromeNineDotActivityIndicator (ref), nineDotActivityIndicatorModule (ref)
 	if not p1.integration then
 		return nil
-	end
-	local var4 = nil
-	local _ = nil
-	local var5 = nil
-	local var6 = nil
-	local _ = nil
-	local hideNotificationCountWhileOpen = false
-	
-	if useBindingForUnreadChat then
-		local var7 = if p1.integration.integration then p1.integration.integration.notification else nil
-		local var8, var9 = reactModule.useBinding(var7 and var7:get().value or 0)
-		var4 = var8
-		local var10 = var9
-		local var11, var12 = reactModule.useState(false)
-		var6 = var11
-		local var13 = var12
-		reactModule.useEffect(function()
-			-- upvalues: var7 (ref), var13 (write), var10 (write)
-			if var7 then
-				local var14 = var7:connect(function()
-					-- upvalues: var7 (copy), var13 (copy), var10 (copy)
-					local value = var7:get().value or 0
-					var13(value > 0)
-					var10(value)
-				end)
-				
-				return function()
-					-- upvalues: var14 (ref)
-					var14:disconnect()
-				end
-			end
-		end, { p1.integration.integration.id })
-	else
-		var5 = if useMappedObservableValueModule(serviceModule:currentSubMenu(), function(p2)
-			-- upvalues: p1 (ref)
-			return p2 == p1.integration.id
-		end) then 0 else useNotificationCountModule(p1.integration.integration)
-		
-		if p1.integration and p1.integration.integration then
-			hideNotificationCountWhileOpen = p1.integration.integration.hideNotificationCountWhileOpen or false
-		end
 	end
 	local ICON_BADGE_OFFSET_X, ICON_BADGE_OFFSET_Y
 	local _ = nil
 	local _ = nil
 	local _ = nil
+	local _ = nil
+	local var4 = if p1.integration.integration then p1.integration.integration.notification else nil
+	local var5, var6 = reactModule.useBinding(var4 and var4:get().value or 0)
+	local var7 = var6
+	local var8, var9 = reactModule.useState(false)
+	local var10 = var9
+	reactModule.useEffect(function()
+		-- upvalues: var4 (ref), var10 (write), var7 (write)
+		if var4 then
+			local var11 = var4:connect(function()
+				-- upvalues: var4 (copy), var10 (copy), var7 (copy)
+				local value = var4:get().value or 0
+				var10(value > 0)
+				var7(value)
+			end)
+			
+			return function()
+				-- upvalues: var11 (ref)
+				var11:disconnect()
+			end
+		end
+	end, { p1.integration.integration.id })
+	local _ = nil
+	local _ = nil
+	local _ = nil
 	
 	if fFlagTokenizeUnibarConstantsWithStyleProvider then
-		local var14 = unibarStyle.use()
-		ICON_BADGE_OFFSET_X = var14.ICON_BADGE_OFFSET_X
-		ICON_BADGE_OFFSET_Y = var14.ICON_BADGE_OFFSET_Y
+		local var11 = unibarStyle.use()
+		ICON_BADGE_OFFSET_X = var11.ICON_BADGE_OFFSET_X
+		ICON_BADGE_OFFSET_Y = var11.ICON_BADGE_OFFSET_Y
 	else
 		ICON_BADGE_OFFSET_X = constantsModule.ICON_BADGE_OFFSET_X
 		ICON_BADGE_OFFSET_Y = constantsModule.ICON_BADGE_OFFSET_Y
 	end
 	local minBadgeCount = p1.minBadgeCount or 0
-	local _ = nil
+	local var12 = var8 or minBadgeCount > 0
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ZIndex = 2,
 		Size = UDim2.fromScale(1, 1),
-		Visible = p1.toggleTransition and p1.toggleTransition:map(function(p2)
-			-- upvalues: hideNotificationCountWhileOpen (write)
-			return if hideNotificationCountWhileOpen then p2 < 0.5 else true
+		Visible = p1.toggleTransition and p1.toggleTransition:map(function(_)
+			return true
 		end) or true
 	}, {
-		Badge = if if useBindingForUnreadChat then var6 or minBadgeCount > 0 elseif var5 <= 0 then minBadgeCount > 0 else true then reactModule.createElement(statusIndicator, {
-			value = if useBindingForUnreadChat then var4:map(function(p2)
+		Badge = if var12 then reactModule.createElement(statusIndicator, {
+			value = var5:map(function(p2)
 				-- upvalues: minBadgeCount (ref)
 				return math.min(math.max(p2, minBadgeCount), 99)
-			end) else math.min(math.max(var5, minBadgeCount), 99),
+			end),
 			variant = if flags.FoundationStatusIndicatorVariantExperiment then statusIndicatorVariant.Contrast_Experiment else statusIndicatorVariant.Emphasis,
 			AnchorPoint = Vector2.new(0, 0),
 			Position = UDim2.new(0, ICON_BADGE_OFFSET_X, 0, ICON_BADGE_OFFSET_Y)
+		}) else nil,
+		ActivityIndicator = if fFlagChromeNineDotActivityIndicator and p1.integration.id == "nine_dot" then reactModule.createElement(nineDotActivityIndicatorModule, {
+			hasNotificationBadge = var12,
+			position = UDim2.new(0, ICON_BADGE_OFFSET_X, 0, ICON_BADGE_OFFSET_Y),
+			visible = p1.showNineDotActivityIndicator == true
 		}) else nil
 	})
 end
@@ -317,7 +306,7 @@ function TooltipButton(p1)
 	local var26 = reactModule.useCallback(function(p2)
 		-- upvalues: fFlagEnableConsoleExpControls (copy), serviceModule (copy), reactModule (copy), interactable (copy), constantsModule (copy), p1 (ref), var6 (write), var22 (ref), var7 (ref), fFlagUnibarMenuOpenHamburger (copy), fFlagUnibarMenuOpenSubmenu (copy), useCursor (copy), foundationModule (copy), var21 (write), secondaryAction (ref), var25 (ref), var23 (ref), var24 (ref), isInExperienceUIVREnabled (copy), var19 (ref), var20 (write), var18 (ref), var8 (ref)
 		return reactModule.createElement(interactable, {
-			Name = (if fFlagEnableConsoleExpControls then constantsModule.ICON_NAME_PREFIX else "IconHitArea_") .. p8.integration.id,
+			Name = (if fFlagEnableConsoleExpControls then constantsModule.ICON_NAME_PREFIX else "IconHitArea_") .. p6.integration.id,
 			Size = var6,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundTransparency = 1,
@@ -471,7 +460,7 @@ function TooltipButton(p1)
 end
 
 function IconHost(p1)
-	-- upvalues: reactModule (ref), useStyle (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), useMappedObservableValueBindingModule (ref), serviceModule (ref), chatNotificationBadgeModule (ref), fFlagEnableConsoleExpControls (ref), fFlagEnableWhatsNew (ref), var1 (ref)
+	-- upvalues: reactModule (ref), useStyle (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), useMappedObservableValueBindingModule (ref), serviceModule (ref), chatNotificationBadgeModule (ref), fFlagChromeNineDotActivityIndicator (ref), nineDotNotificationBadgeModule (ref), fFlagEnableConsoleExpControls (ref), fFlagEnableWhatsNew (ref), var1 (ref)
 	if not p1.integration or not p1.integration.component then
 		warn("IconHost has no component to render")
 	end
@@ -511,6 +500,9 @@ function IconHost(p1)
 			visible = var4
 		}),
 		if p1.integration.id == "chat" then reactModule.createElement(chatNotificationBadgeModule, {
+			iconHostProps = p1,
+			NotificationBadge = NotificationBadge
+		}) elseif fFlagChromeNineDotActivityIndicator and p1.integration.id == "nine_dot" then reactModule.createElement(nineDotNotificationBadgeModule, {
 			iconHostProps = p1,
 			NotificationBadge = NotificationBadge
 		}) else reactModule.createElement(NotificationBadge, p1),

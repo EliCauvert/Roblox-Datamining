@@ -1,6 +1,7 @@
 ﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
 local viewRecyclerModule = require(viewRecyclerReact.Parent.ViewRecycler)
 local itemHooksModule = require(viewRecyclerReact.ReactAdapter.ItemHooks)
+local recyclableViewReadinessModule = require(viewRecyclerReact.ReactAdapter.RecyclableViewReadiness)
 local recyclingScopeModule = require(viewRecyclerReact.ReactAdapter.RecyclingScope)
 local recyclingViewportModule = require(viewRecyclerReact.ReactAdapter.RecyclingViewport)
 local virtualListModule = require(viewRecyclerReact.ReactAdapter.VirtualList)
@@ -9,7 +10,7 @@ local createRecyclableComponentModule = require(viewRecyclerReact.ReactAdapter.c
 local createRecyclableViewModule = require(viewRecyclerReact.ReactAdapter.createRecyclableView)
 
 return function(p1)
-	-- upvalues: virtualListModule (ref), recyclingScopeModule (ref), recyclingViewportModule (ref), createPinnedItemModule (ref), createRecyclableComponentModule (ref), createRecyclableViewModule (ref), itemHooksModule (ref), viewRecyclerModule (ref), viewRecyclerReact (ref)
+	-- upvalues: virtualListModule (ref), recyclingScopeModule (ref), recyclingViewportModule (ref), createPinnedItemModule (ref), createRecyclableComponentModule (ref), createRecyclableViewModule (ref), itemHooksModule (ref), recyclableViewReadinessModule (ref), viewRecyclerModule (ref), viewRecyclerReact (ref)
 	return table.freeze({
 		VirtualList = virtualListModule.create(p1),
 		RecyclingScope = recyclingScopeModule.create(p1),
@@ -17,10 +18,11 @@ return function(p1)
 		createPinnedItem = createPinnedItemModule,
 		createRecyclableComponent = createRecyclableComponentModule,
 		createRecyclableView = createRecyclableViewModule,
-		useItemValue = itemHooksModule.useItemValue,
-		useItemBinding = itemHooksModule.useItemBinding,
 		useRecyclingState = itemHooksModule.useRecyclingState,
 		useRecyclingSignal = itemHooksModule.useRecyclingSignal,
+		useRecyclingItem = itemHooksModule.useRecyclingItem,
+		useRecyclingAssignment = itemHooksModule.useRecyclingAssignment,
+		RecyclableViewReadiness = recyclableViewReadinessModule,
 		DataSource = viewRecyclerModule.DataSource,
 		Diagnostics = viewRecyclerModule.Diagnostics,
 		Layout = viewRecyclerModule.Layout,
@@ -30,7 +32,10 @@ return function(p1)
 		AutoScrollPolicy = viewRecyclerModule.AutoScrollPolicy,
 		AutoScrollTarget = viewRecyclerModule.AutoScrollTarget,
 		ScrollAlignment = viewRecyclerModule.ScrollAlignment,
+		ScrollDirection = viewRecyclerModule.ScrollDirection,
 		ScrollObservationKind = viewRecyclerModule.ScrollObservationKind,
+		PinnedPosition = viewRecyclerModule.PinnedPosition,
+		IdentityKind = viewRecyclerModule.IdentityKind,
 		DataPrefetchEdge = viewRecyclerModule.DataPrefetchEdge,
 		DataSourceChangeType = viewRecyclerModule.DataSourceChangeType,
 		VirtualizerCommandType = viewRecyclerModule.VirtualizerCommandType,

@@ -2,10 +2,8 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local default = require(parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local _ = require(buildExperience.Chat.chatTypes)
 local fFlagBuildExperienceCopyChatMessagesModule = require(buildExperience.Flags.FFlagBuildExperienceCopyChatMessages)
 local fFlagBuildExperienceRichTextUserMessagesModule = require(buildExperience.Flags.FFlagBuildExperienceRichTextUserMessages)
@@ -78,8 +76,8 @@ local function UserMessageBubble(p1)
 end
 
 local function CopyableUserMessageBubble(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagBuildExperienceUserMessageHapticFeedbackModule (ref), var2 (ref), iconName (ref), menu (ref), popoverAlign (ref), default (ref), popoverSide (ref), inputSize (ref), UserMessageBubble (ref)
-	local var3 = if fFlagBuildLocalization then useLocalization({ copyText = localizationStringsModule.CHAT_COPY_TEXT }) else nil
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagBuildExperienceUserMessageHapticFeedbackModule (ref), var2 (ref), iconName (ref), menu (ref), popoverAlign (ref), default (ref), popoverSide (ref), inputSize (ref), UserMessageBubble (ref)
+	local var3 = useLocalization({ copyText = localizationStringsModule.CHAT_COPY_TEXT })
 	local var4, var5 = reactModule.useState(false)
 	local var6 = if fFlagBuildExperienceUserMessageHapticFeedbackModule then var2() else nil
 	
@@ -91,7 +89,7 @@ local function CopyableUserMessageBubble(p1)
 			{
 				id = "copy-text",
 				icon = iconName.TwoStackedSquares,
-				text = if fFlagBuildLocalization then var3.copyText else localizationStringsModule.CHAT_COPY_TEXT
+				text = var3.copyText
 			}
 		},
 		onActivated = function(p2)

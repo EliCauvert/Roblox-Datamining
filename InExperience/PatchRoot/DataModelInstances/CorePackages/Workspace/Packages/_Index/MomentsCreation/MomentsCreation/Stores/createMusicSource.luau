@@ -1,7 +1,10 @@
 ﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local dashModule = require(momentsCreation.Parent.Dash)
+local parent = momentsCreation.Parent
+local dashModule = require(parent.Dash)
+local momentsCommonModule = require(parent.MomentsCommon)
 local constantsModule = require(momentsCreation.Constants)
 local _ = require(momentsCreation.Types.Music)
+local reportMusicSearchCounts = momentsCommonModule.Analytics.reportMusicSearchCounts
 
 local function formatMusic(p1)
 	local t = {}
@@ -24,7 +27,7 @@ local function formatMusic(p1)
 end
 
 return function(p2)
-	-- upvalues: dashModule (ref), constantsModule (ref), formatMusic (ref)
+	-- upvalues: dashModule (ref), constantsModule (ref), formatMusic (ref), reportMusicSearchCounts (ref)
 	local function _()
 		-- upvalues: p2 (ref)
 		return p2 or game:GetService("AssetService")
@@ -32,7 +35,7 @@ return function(p2)
 	
 	return {
 		searchMusic = function(p3, p4)
-			-- upvalues: p2 (ref), dashModule (copy), constantsModule (copy), formatMusic (copy)
+			-- upvalues: p2 (ref), dashModule (copy), constantsModule (copy), formatMusic (copy), reportMusicSearchCounts (copy)
 			local p5 = p2 or game:GetService("AssetService")
 			local audioSearchParams = Instance.new("AudioSearchParams")
 			audioSearchParams.SearchKeyword = p3
@@ -45,7 +48,11 @@ return function(p2)
 					table.insert(t, v.Id)
 				end
 			end
-			return if #t == 0 then {} else formatMusic(p5:GetAudioMetadataAsync(t))
+			local var2 = if #t == 0 then {} else p5:GetAudioMetadataAsync(t)
+			local var3 = formatMusic(var2)
+			reportMusicSearchCounts(#var2, #var3, { queryPresent = p3 ~= "" })
+			
+			return var3
 		end,
 		getMetadata = function(p6)
 			-- upvalues: formatMusic (copy), p2 (ref)

@@ -3,10 +3,8 @@ local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local localizationModule = require(parent.Localization)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local localizationService = game:GetService("LocalizationService")
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local localizationRoactContext = localizationModule.LocalizationRoactContext
 local numberLocalization = localizationModule.NumberLocalization
 local useLocalization = localizationModule.Hooks.useLocalization
@@ -18,11 +16,7 @@ local fillBehavior = foundationModule.Enums.FillBehavior
 local inputSize = foundationModule.Enums.InputSize
 
 local function formatSummary(p1, p2, p3)
-	-- upvalues: fFlagBuildLocalization (ref)
-	return if fFlagBuildLocalization then p1:Format(p2, p3) else string.gsub(p2, "{([%w_]+)}", function(p4)
-		-- upvalues: p3 (ref)
-		return p3[p4] or `{p4}`
-	end)
+	return p1:Format(p2, p3)
 end
 
 local function summaryText(p1, p2, p3, p4)
@@ -64,28 +58,28 @@ local function summaryText(p1, p2, p3, p4)
 end
 
 return function(p1)
-	-- upvalues: fFlagBuildLocalization (ref), reactModule (ref), localizationRoactContext (ref), useLocalization (ref), localizationStringsModule (ref), agentCardModule (ref), summaryText (ref), agentCardActionsModule (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
-	local var1 = if fFlagBuildLocalization then reactModule.useContext(localizationRoactContext) else nil
-	local var2 = if fFlagBuildLocalization then useLocalization({
+	-- upvalues: reactModule (ref), localizationRoactContext (ref), useLocalization (ref), localizationStringsModule (ref), agentCardModule (ref), summaryText (ref), agentCardActionsModule (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
+	local var1 = reactModule.useContext(localizationRoactContext)
+	local var2 = useLocalization({
 		title = localizationStringsModule.AGENT_DEV_PRODUCT_TITLE,
 		approve = localizationStringsModule.AGENT_DEV_PRODUCT_APPROVE,
 		reject = localizationStringsModule.AGENT_DEV_PRODUCT_REJECT,
 		defaultName = localizationStringsModule.AGENT_DEV_PRODUCT_DEFAULT_NAME,
 		unavailablePrice = localizationStringsModule.AGENT_DEV_PRODUCT_PRICE_UNAVAILABLE
-	}) else nil
+	})
 	local testId = p1.testId or "agent-dev-product-card"
 	local var3 = p1.isActionDisabled == true
 	
 	return reactModule.createElement(agentCardModule, {
-		title = if fFlagBuildLocalization then var2.title else localizationStringsModule.AGENT_DEV_PRODUCT_TITLE,
-		textContent = summaryText(p1, var1, if fFlagBuildLocalization then var2.defaultName else localizationStringsModule.AGENT_DEV_PRODUCT_DEFAULT_NAME, if fFlagBuildLocalization then var2.unavailablePrice else localizationStringsModule.AGENT_DEV_PRODUCT_PRICE_UNAVAILABLE),
+		title = var2.title,
+		textContent = summaryText(p1, var1, var2.defaultName, var2.unavailablePrice),
 		layoutOrder = p1.layoutOrder,
 		testId = testId
 	}, {
 		Actions = reactModule.createElement(agentCardActionsModule, nil, {
 			Approve = reactModule.createElement(button, {
 				LayoutOrder = 1,
-				text = if fFlagBuildLocalization then var2.approve else localizationStringsModule.AGENT_DEV_PRODUCT_APPROVE,
+				text = var2.approve,
 				size = inputSize.Small,
 				variant = buttonVariant.Emphasis,
 				fillBehavior = fillBehavior.Fill,
@@ -101,7 +95,7 @@ return function(p1)
 			}),
 			Reject = reactModule.createElement(button, {
 				LayoutOrder = 2,
-				text = if fFlagBuildLocalization then var2.reject else localizationStringsModule.AGENT_DEV_PRODUCT_REJECT,
+				text = var2.reject,
 				size = inputSize.Small,
 				variant = buttonVariant.Standard,
 				fillBehavior = fillBehavior.Fill,

@@ -67,8 +67,57 @@ local function showOsaOverlay(p1, p2, p3, p4, p5, p6, p7)
 	})
 end
 
+local function activateConversation(p1, p2, p3, p4, p5)
+	-- upvalues: constantsModule (ref), httpService (ref), showOsaOverlay (ref), normalizeConversationForTelemetryModule (ref)
+	if not p1.hasConversation then return end
+	local conversationId = p1.conversationId
+	local conversation = p2.getConversation(conversationId, false)
+	
+	if conversation == nil then return end
+	local var1 = nil
+	local var2 = if p1.shouldShowU13ChatOptIn then constantsModule.OptInVariant.ChatOptInInfoCard elseif p1.shouldShowOSA then constantsModule.OptInVariant.OsaContextCard else nil
+	
+	if var2 then
+		var1 = httpService:GenerateGUID(false)
+		showOsaOverlay(conversationId, var1, var2, p1.conversationType, if p1.onActivated then function(p6)
+			-- upvalues: p2 (ref), p1 (ref)
+			local conversation = p2.getConversation(p6, false)
+			
+			if conversation then
+				p1.onActivated(conversation)
+			end
+		end else nil, p3, p4)
+	elseif p1.onActivated then
+		p1.onActivated(conversation)
+	end
+	if p1.fireClickEvent then
+		p1.fireClickEvent(normalizeConversationForTelemetryModule(conversation), p5, var1)
+	end
+end
+
+local function activateSquad(p1, p2, p3, p4, p5)
+	-- upvalues: constantsModule (ref), fFlagAppChatSquadJoinButtonU13OSAModule (ref), conversationModule (ref), httpService (ref), showOsaOverlay (ref)
+	local var1 = if p3 then p1.conversationId else p2
+	
+	if p1.hasConversation then
+		local var2 = if p1.shouldShowOSA then constantsModule.OptInVariant.OsaContextCard elseif fFlagAppChatSquadJoinButtonU13OSAModule and p1.shouldShowU13ChatOptIn and p1.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION then constantsModule.OptInVariant.ChatOptInInfoCard else nil
+		
+		if var2 then
+			showOsaOverlay(var1, httpService:GenerateGUID(false), var2, p1.conversationType, p1.onSquadJoinButtonActivated, p4, p5)
+			
+			return
+		elseif p1.onSquadJoinButtonActivated then
+			p1.onSquadJoinButtonActivated(var1)
+		end
+		return
+	elseif p1.onSquadJoinButtonActivated then
+		p1.onSquadJoinButtonActivated(var1)
+	end
+end
+
 return function(p1)
-	-- upvalues: reactModule (ref), useNavigation (ref), useDispatch (ref), getConversationStoreModule (ref), constantsModule (ref), httpService (ref), showOsaOverlay (ref), normalizeConversationForTelemetryModule (ref), fFlagAppChatSquadJoinButtonU13OSAModule (ref), conversationModule (ref)
+	-- upvalues: reactModule (ref), useNavigation (ref), useDispatch (ref), getConversationStoreModule (ref), activateConversation (ref), activateSquad (ref)
+	local getCurrentOptions = p1.getCurrentOptions
 	local conversationId = p1.conversationId
 	local hasConversation = p1.hasConversation
 	local shouldShowOSA = p1.shouldShowOSA
@@ -84,56 +133,51 @@ return function(p1)
 	local var3 = useDispatch()
 	local var4 = getConversationStoreModule(false)
 	
-	return {
+	return if getCurrentOptions == nil then {
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: hasConversation (ref), var4 (ref), conversationId (ref), shouldShowU13ChatOptIn (ref), shouldShowOSA (ref), constantsModule (copy), httpService (copy), showOsaOverlay (copy), conversationType (ref), onActivated (ref), var3 (ref), var2 (ref), fireClickEvent (ref), normalizeConversationForTelemetryModule (copy), var1 (ref)
-			if not hasConversation then return end
-			local conversation = var4.getConversation(conversationId, false)
-			
-			if conversation == nil then return end
-			local var5 = nil
-			local var6 = if shouldShowU13ChatOptIn then constantsModule.OptInVariant.ChatOptInInfoCard elseif shouldShowOSA then constantsModule.OptInVariant.OsaContextCard else nil
-			
-			if var6 then
-				var5 = httpService:GenerateGUID(false)
-				showOsaOverlay(conversationId, var5, var6, conversationType, if onActivated then function(p2)
-					-- upvalues: var4 (copy), onActivated (copy)
-					local conversation = var4.getConversation(p2, false)
-					
-					if conversation then
-						onActivated(conversation)
-					end
-				end else nil, var3, var2)
-			elseif onActivated then
-				onActivated(conversation)
-			end
-			if fireClickEvent then
-				fireClickEvent(normalizeConversationForTelemetryModule(conversation), var1.current, var5)
-			end
+			-- upvalues: activateConversation (copy), conversationId (ref), hasConversation (ref), shouldShowOSA (ref), shouldShowU13ChatOptIn (ref), conversationType (ref), onActivated (ref), fireClickEvent (ref), var4 (ref), var3 (ref), var2 (ref), var1 (ref)
+			activateConversation({
+				conversationId = conversationId,
+				hasConversation = hasConversation,
+				shouldShowOSA = shouldShowOSA,
+				shouldShowU13ChatOptIn = shouldShowU13ChatOptIn,
+				conversationType = conversationType,
+				onActivated = onActivated,
+				fireClickEvent = fireClickEvent
+			}, var4, var3, var2, var1.current)
 		end, {
 			hasConversation, conversationId, conversationType, shouldShowOSA,
 			shouldShowU13ChatOptIn, onActivated, fireClickEvent, var3, var2, var4
 		}),
 		onSquadActivated = reactModule.useCallback(function(p2)
-			-- upvalues: hasConversation (ref), onSquadJoinButtonActivated (ref), shouldShowOSA (ref), shouldShowU13ChatOptIn (ref), conversationType (ref), constantsModule (copy), fFlagAppChatSquadJoinButtonU13OSAModule (copy), conversationModule (copy), httpService (copy), showOsaOverlay (copy), var3 (ref), var2 (ref)
-			if hasConversation then
-				local var5 = if shouldShowOSA then constantsModule.OptInVariant.OsaContextCard elseif fFlagAppChatSquadJoinButtonU13OSAModule and shouldShowU13ChatOptIn and conversationType == conversationModule.Type.MULTI_USER_CONVERSATION then constantsModule.OptInVariant.ChatOptInInfoCard else nil
-				
-				if var5 then
-					showOsaOverlay(p2, httpService:GenerateGUID(false), var5, conversationType, onSquadJoinButtonActivated, var3, var2)
-					
-					return
-				elseif onSquadJoinButtonActivated then
-					onSquadJoinButtonActivated(p2)
-				end
-				return
-			elseif onSquadJoinButtonActivated then
-				onSquadJoinButtonActivated(p2)
-			end
+			-- upvalues: activateSquad (copy), conversationId (ref), hasConversation (ref), shouldShowOSA (ref), shouldShowU13ChatOptIn (ref), conversationType (ref), onSquadJoinButtonActivated (ref), var3 (ref), var2 (ref)
+			activateSquad({
+				conversationId = conversationId,
+				hasConversation = hasConversation,
+				shouldShowOSA = shouldShowOSA,
+				shouldShowU13ChatOptIn = shouldShowU13ChatOptIn,
+				conversationType = conversationType,
+				onSquadJoinButtonActivated = onSquadJoinButtonActivated
+			}, p2, false, var3, var2)
 		end, {
 			hasConversation, conversationId, conversationType, shouldShowOSA,
 			shouldShowU13ChatOptIn, onSquadJoinButtonActivated, var3, var2,
 			var4.getConversation
 		})
+	} else {
+		onActivated = reactModule.useCallback(function()
+			-- upvalues: getCurrentOptions (ref), activateConversation (copy), var4 (ref), var3 (ref), var2 (ref), var1 (ref)
+			if getCurrentOptions == nil then
+				return
+			end
+			activateConversation(getCurrentOptions(), var4, var3, var2, var1.current)
+		end, { var3, var2, var4, getCurrentOptions }),
+		onSquadActivated = reactModule.useCallback(function(p2)
+			-- upvalues: getCurrentOptions (ref), activateSquad (copy), var3 (ref), var2 (ref)
+			if getCurrentOptions == nil then
+				return
+			end
+			activateSquad(getCurrentOptions(), p2, true, var3, var2)
+		end, { var3, var2, getCurrentOptions })
 	}
 end

@@ -6,10 +6,8 @@ local modules = robloxGui.Modules
 local reactModule = require(corePackagesService.Packages.React)
 local reactRobloxModule = require(corePackagesService.Packages.ReactRoblox)
 local fFlagRefactorPeoplePageModule = require(modules.Settings.Flags.FFlagRefactorPeoplePage)
-local renderPeoplePageOnTabSwitch = game:DefineFastFlag("RenderPeoplePageOnTabSwitch", false)
 local fFlagRelocateMobileMenuButtonsModule = require(modules.Settings.Flags.FFlagRelocateMobileMenuButtons)
 local fIntRelocateMobileMenuButtonsVariantModule = require(modules.Settings.Flags.FIntRelocateMobileMenuButtonsVariant)
-local fFlagIEMFocusNavPeoplePageToButtons = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagIEMFocusNavPeoplePageToButtons
 local var1 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
 local var2 = if var1 then require(robloxGui.Modules.Chrome.ChromeShared.Service.LocalStore) else nil
 local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
@@ -27,7 +25,6 @@ local focusNavigationUtilsModule = require(corePackagesService.Workspace.Package
 local focusRoot = focusNavigationUtilsModule.FocusRoot
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local coreScriptsRootProvider = require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
-local useRegistryEntry = focusNavigationUtilsModule.FocusNavigableSurfaceRegistry.useRegistryEntry
 local var4 = if fFlagRefactorPeoplePageModule() then require(corePackagesService.Workspace.Packages.PeopleReactView).Constants else nil
 local flags = peopleServiceModule.getService("Flags")
 local getFFlagAddPeoplePageCardLayout = flags.GetFFlagAddPeoplePageCardLayout
@@ -41,15 +38,15 @@ local var5 = nil
 local var6, var7 = signalsModule.createSignal(false)
 
 local function PeopleFocusRoot(p1)
-	-- upvalues: useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnum (ref), reactModule (ref), focusRoot (ref), fFlagIEMFocusNavPeoplePageToButtons (ref)
+	-- upvalues: reactModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	return reactModule.createElement(focusRoot, {
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.RouterView,
-		isAutoFocusRoot = if fFlagIEMFocusNavPeoplePageToButtons then false else useRegistryEntry(focusNavigableSurfaceIdentifierEnum.CentralOverlay) == nil
+		isAutoFocusRoot = false,
+		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.RouterView
 	}, p1.children)
 end
 
 return if fFlagRefactorPeoplePageModule() then (function()
-	-- upvalues: corePackagesService (ref), settingsPageFactoryModule (ref), var4 (write), uiblox (ref), builderIconsModule (ref), var3 (ref), fFlagRelocateMobileMenuButtonsModule (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), var5 (write), getFFlagPeoplePageLazyRenderCards (ref), fFlagEnablePeopleListLazyRender (ref), fFlagPeopleCardsEnableVirtualizedGrid (ref), fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (ref), fFlagPeoplePageFlipVolumePopoverToFitViewport (ref), fFlagPeoplePageDismissCardMenuOnScrollOutOfView (ref), signalsReactModule (ref), var6 (ref), reactModule (ref), coreScriptsRootProvider (ref), localizationProvider (ref), PeopleFocusRoot (ref), blockingModalScreenModule (ref), var1 (ref), getFFlagAddPeoplePageCardLayout (ref), var2 (ref), reactRobloxModule (ref), renderPeoplePageOnTabSwitch (ref), var7 (ref), fFlagIEMFocusNavPeoplePageToButtons (ref), settingsShowSignal (ref)
+	-- upvalues: corePackagesService (ref), settingsPageFactoryModule (ref), var4 (write), uiblox (ref), builderIconsModule (ref), var3 (ref), fFlagRelocateMobileMenuButtonsModule (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), var5 (write), getFFlagPeoplePageLazyRenderCards (ref), fFlagEnablePeopleListLazyRender (ref), fFlagPeopleCardsEnableVirtualizedGrid (ref), fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (ref), fFlagPeoplePageFlipVolumePopoverToFitViewport (ref), fFlagPeoplePageDismissCardMenuOnScrollOutOfView (ref), signalsReactModule (ref), var6 (ref), reactModule (ref), coreScriptsRootProvider (ref), localizationProvider (ref), PeopleFocusRoot (ref), blockingModalScreenModule (ref), var1 (ref), getFFlagAddPeoplePageCardLayout (ref), var2 (ref), reactRobloxModule (ref), var7 (ref), settingsShowSignal (ref)
 	local peopleReactView = require(corePackagesService.Workspace.Packages.PeopleReactView).PeopleReactView
 	local peopleServiceModule = require(corePackagesService.Workspace.Packages.PeopleService)
 	local var8 = settingsPageFactoryModule:CreateNewPage()
@@ -62,13 +59,13 @@ return if fFlagRefactorPeoplePageModule() then (function()
 	local settingsHubService = peopleServiceModule.getService("SettingsHubService")
 	settingsHubService.register(var8)
 	
-	function var27.CreateMenuButtonsContainer(_)
+	function var26.CreateMenuButtonsContainer(_)
 		-- upvalues: settingsHubService (ref)
 		settingsHubService.setShowMenuButtonsContainer(true)
 	end
 	
 	if fFlagRelocateMobileMenuButtonsModule and fIntRelocateMobileMenuButtonsVariantModule == 2 then
-		function var27.UnmountMenuButtonsContainer(_)
+		function var26.UnmountMenuButtonsContainer(_)
 			-- upvalues: settingsHubService (ref)
 			settingsHubService.setShowMenuButtonsContainer(false)
 		end
@@ -104,37 +101,27 @@ return if fFlagRefactorPeoplePageModule() then (function()
 	end
 	
 	var8.Displayed.Event:Connect(function()
-		-- upvalues: renderPeoplePageOnTabSwitch (copy), var6 (copy), createReactTree (ref), var7 (copy), fFlagIEMFocusNavPeoplePageToButtons (copy), var8 (ref)
-		if not renderPeoplePageOnTabSwitch or not var6(false) then
+		-- upvalues: var6 (copy), createReactTree (ref), var7 (copy), var8 (ref)
+		if not var6(false) then
 			createReactTree()
 			var7(true)
 		end
-		if fFlagIEMFocusNavPeoplePageToButtons then
-			local menuContainer = var8.Page:FindFirstAncestor("MenuContainer")
+		local menuContainer = var8.Page:FindFirstAncestor("MenuContainer")
+		
+		if menuContainer then
+			local bottomButtonFrame = menuContainer:FindFirstChild("BottomButtonFrame", true)
 			
-			if menuContainer then
-				local bottomButtonFrame = menuContainer:FindFirstChild("BottomButtonFrame", true)
-				
-				if bottomButtonFrame then
-					bottomButtonFrame.SelectionBehaviorUp = Enum.SelectionBehavior.Escape
-				end
+			if bottomButtonFrame then
+				bottomButtonFrame.SelectionBehaviorUp = Enum.SelectionBehavior.Escape
 			end
 		end
 	end)
-	
-	if renderPeoplePageOnTabSwitch then
-		settingsShowSignal:connect(function(p1)
-			-- upvalues: var7 (copy)
-			if not p1 then
-				var7(false)
-			end
-		end)
-	else
-		var8.Hidden.Event:Connect(function()
-			-- upvalues: var7 (copy)
+	settingsShowSignal:connect(function(p1)
+		-- upvalues: var7 (copy)
+		if not p1 then
 			var7(false)
-		end)
-	end
+		end
+	end)
 	var8.Page.Size = UDim2.new(1, 0, 0, 0)
 	var8.Page.AutomaticSize = Enum.AutomaticSize.Y
 	

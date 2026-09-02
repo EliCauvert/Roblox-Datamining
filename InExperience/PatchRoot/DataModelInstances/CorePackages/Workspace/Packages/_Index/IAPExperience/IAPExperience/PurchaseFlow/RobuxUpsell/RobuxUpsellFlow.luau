@@ -60,7 +60,6 @@ game:DefineFastFlag("EnableSchematizedInGameRobuxUpsellEvent2", false)
 local fixUnifiedUpsellCompletionModal = game:DefineFastFlag("FixUnifiedUpsellCompletionModal", false)
 local _ = require(parent_1.ProductPurchase.PricingTypes)
 local _ = require(parent_1.ProductPurchase.v3.UnifiedProductPurchaseModalTypes)
-local fFlagEnableDiscountInfoInUnifiedPurchaseModal = require(parent_2.SharedFlags).FFlagEnableDiscountInfoInUnifiedPurchaseModal
 local fFlagPurchasePromptFetchCartPricing = require(parent_2.SharedFlags).FFlagPurchasePromptFetchCartPricing
 local fFlagEnableOffersOnInExperienceSurface = require(parent_2.SharedFlags).FFlagEnableOffersOnInExperienceSurface
 local _ = require(parent_1.Api.PaymentsGateway.GetUpsellSuggestionsTypes)
@@ -74,7 +73,7 @@ function name.init(p1)
 		isDelayedInput = props.isDelayedInput
 	}
 	
-	function p0.closeModal()
+	function p0.DisableNonSchematizedInGameRobuxUpsellEvent()
 		-- upvalues: p1 (ref)
 		local props = p1.props
 		p1:reportUserInput("Cancel")
@@ -128,7 +127,7 @@ function name.closeCentralOverlay(p1)
 end
 
 function name.constructRobuxUpsellPromptAnimatorObj(p1)
-	-- upvalues: robuxUpsellFlowStateModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (ref), getAppContextModule (ref), roactModule (ref), unifiedRobuxUpsellModalV2Module (ref), fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagPurchasePromptFetchCartPricing (ref), unifiedRobuxUpsellModalModule (ref), fFlagEnableOffersOnInExperienceSurface (ref), overlayInGameMenuModule (ref), robuxUpsellModalMultiplePackageModule (ref), shouldShowNewUpsellModalExperimentModule (ref), desktopUpsellExperimentModule (ref), robuxUpsellModalModule (ref), robuxUpsellPromptModule (ref), fFlagMobilePopularItemBadgingExperimentEnabledModule (ref)
+	-- upvalues: robuxUpsellFlowStateModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (ref), getAppContextModule (ref), roactModule (ref), unifiedRobuxUpsellModalV2Module (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagPurchasePromptFetchCartPricing (ref), unifiedRobuxUpsellModalModule (ref), fFlagEnableOffersOnInExperienceSurface (ref), overlayInGameMenuModule (ref), robuxUpsellModalMultiplePackageModule (ref), shouldShowNewUpsellModalExperimentModule (ref), desktopUpsellExperimentModule (ref), robuxUpsellModalModule (ref), robuxUpsellPromptModule (ref), fFlagMobilePopularItemBadgingExperimentEnabledModule (ref)
 	local props = p1.props
 	local state = p1.state
 	p1:BindCancelAction()
@@ -157,7 +156,7 @@ function name.constructRobuxUpsellPromptAnimatorObj(p1)
 			})
 		end else nil,
 		renderChildren = function()
-			-- upvalues: fFlagEnableUnifiedProductPurchaseFlow (copy), props (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (copy), getAppContextModule (copy), roactModule (copy), unifiedRobuxUpsellModalV2Module (copy), fFlagEnableDiscountInfoInUnifiedPurchaseModal (copy), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), fFlagPurchasePromptFetchCartPricing (copy), p1 (ref), state (ref), unifiedRobuxUpsellModalModule (copy), fFlagEnableOffersOnInExperienceSurface (copy), overlayInGameMenuModule (copy), robuxUpsellModalMultiplePackageModule (copy), shouldShowNewUpsellModalExperimentModule (copy), desktopUpsellExperimentModule (copy), robuxUpsellModalModule (copy), robuxUpsellPromptModule (copy), fFlagMobilePopularItemBadgingExperimentEnabledModule (copy)
+			-- upvalues: fFlagEnableUnifiedProductPurchaseFlow (copy), props (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (copy), getAppContextModule (copy), roactModule (copy), unifiedRobuxUpsellModalV2Module (copy), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), fFlagPurchasePromptFetchCartPricing (copy), p1 (ref), state (ref), unifiedRobuxUpsellModalModule (copy), fFlagEnableOffersOnInExperienceSurface (copy), overlayInGameMenuModule (copy), robuxUpsellModalMultiplePackageModule (copy), shouldShowNewUpsellModalExperimentModule (copy), desktopUpsellExperimentModule (copy), robuxUpsellModalModule (copy), robuxUpsellPromptModule (copy), fFlagMobilePopularItemBadgingExperimentEnabledModule (copy)
 			return if fFlagEnableUnifiedProductPurchaseFlow and props.useUnifiedProductPurchaseModal then if fFlagAddCenterDialogForUnifiedPurchaseModal and getAppContextModule() == "UA" then roactModule.createElement(unifiedRobuxUpsellModalV2Module, {
 				product = {
 					model = props.model,
@@ -165,7 +164,7 @@ function name.constructRobuxUpsellPromptAnimatorObj(p1)
 					itemName = props.itemName,
 					itemRobuxCost = props.itemRobuxCost,
 					badgeType = props.virtualItemBadgeType,
-					itemPrice = if fFlagEnableDiscountInfoInUnifiedPurchaseModal then props.virtualItemPrice else nil
+					itemPrice = props.virtualItemPrice
 				},
 				userBalance = props.beforeRobuxBalance,
 				upsellSuggestions = props.upsellSuggestions,
@@ -212,7 +211,7 @@ function name.constructRobuxUpsellPromptAnimatorObj(p1)
 					itemName = props.itemName,
 					itemRobuxCost = props.itemRobuxCost,
 					badgeType = props.virtualItemBadgeType,
-					itemPrice = if fFlagEnableDiscountInfoInUnifiedPurchaseModal then props.virtualItemPrice else nil
+					itemPrice = props.virtualItemPrice
 				},
 				userBalance = props.beforeRobuxBalance,
 				upsellSuggestions = props.upsellSuggestions,

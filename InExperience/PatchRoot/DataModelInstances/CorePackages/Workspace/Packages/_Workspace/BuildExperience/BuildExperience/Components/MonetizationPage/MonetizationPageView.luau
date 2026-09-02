@@ -3,30 +3,39 @@ local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local overflowMenuPageShellModule = require(buildExperience.Components.BuildPillMenu.OverflowMenuPageShell)
+local badge = foundationModule.Badge
 local button = foundationModule.Button
-local divider = foundationModule.Divider
 local icon = foundationModule.Icon
-local iconButton = foundationModule.IconButton
 local image = foundationModule.Image
 local text = foundationModule.Text
+local textArea = foundationModule.TextArea
+local textInput = foundationModule.TextInput
 local toggle = foundationModule.Toggle
 local view = foundationModule.View
+local badgeShape = foundationModule.Enums.BadgeShape
+local badgeSize = foundationModule.Enums.BadgeSize
+local badgeVariant = foundationModule.Enums.BadgeVariant
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local fillBehavior = foundationModule.Enums.FillBehavior
 local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local inputSize = foundationModule.Enums.InputSize
+local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local useTokens = foundationModule.Hooks.useTokens
+local uDim2 = UDim2.new(0.333333333333, -8, 0, 0)
 
 local function ProductCard(p1)
-	-- upvalues: reactModule (ref), view (ref), image (ref), text (ref), icon (ref), iconName (ref), iconSize (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), view (ref), uDim2 (ref), stateLayerAffordance (ref), badge (ref), badgeShape (ref), badgeSize (ref), badgeVariant (ref), image (ref), text (ref), icon (ref), iconName (ref), iconSize (ref)
 	local product = p1.product
+	local var1 = useTokens()
 	
 	return reactModule.createElement(view, {
-		tag = "col fill auto-y",
+		tag = "col auto-y radius-medium",
 		LayoutOrder = p1.LayoutOrder,
 		onActivated = p1.onActivated,
-		stateLayer = {},
+		selection = { Selectable = true },
+		Size = uDim2,
+		stateLayer = { affordance = stateLayerAffordance.None },
 		testId = `monetization-product-{product.id}`
 	}, {
 		Media = reactModule.createElement(view, {
@@ -35,10 +44,20 @@ local function ProductCard(p1)
 			tag = "radius-medium clip bg-surface-200",
 			Size = UDim2.new(1, 0, 0, 109)
 		}, {
+			SaleStatus = if product.saleStatus ~= nil then nil else reactModule.createElement(badge, {
+				ZIndex = 2,
+				Position = UDim2.fromOffset(var1.Gap.Small, var1.Gap.Small),
+				shape = badgeShape.Pill,
+				size = badgeSize.Small,
+				text = product.saleStatus,
+				testId = `monetization-product-sale-status-{product.id}`,
+				variant = badgeVariant.OverMedia
+			}),
 			Image = if product.image ~= nil then nil else reactModule.createElement(image, {
 				tag = "size-full",
 				Image = product.image,
-				ScaleType = Enum.ScaleType.Fit
+				ScaleType = Enum.ScaleType.Fit,
+				testId = `monetization-product-image-{product.id}`
 			})
 		}),
 		Title = reactModule.createElement(text, {
@@ -96,110 +115,6 @@ local function ProductRow(p1)
 	}, t)
 end
 
-local function OptionRow(p2)
-	-- upvalues: reactModule (ref), view (ref), text (ref), toggle (ref), inputSize (ref)
-	return reactModule.createElement(view, {
-		tag = "row align-y-center gap-large size-full-0 auto-y padding-x-large padding-y-medium",
-		LayoutOrder = p2.LayoutOrder
-	}, {
-		Copy = reactModule.createElement(view, { LayoutOrder = 1, tag = "col fill gap-xxsmall auto-y" }, {
-			Title = reactModule.createElement(text, {
-				LayoutOrder = 1,
-				tag = "size-full-0 auto-y text-title-medium text-align-x-left content-emphasis",
-				Text = p2.title
-			}),
-			Description = reactModule.createElement(text, {
-				LayoutOrder = 2,
-				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
-				Text = p2.description
-			})
-		}),
-		Toggle = reactModule.createElement(toggle, {
-			LayoutOrder = 2,
-			label = "",
-			isChecked = p2.isChecked,
-			onActivated = p2.onActivated,
-			size = inputSize.Medium,
-			testId = p2.testId
-		})
-	})
-end
-
-local function OptionsSection(p2)
-	-- upvalues: reactModule (ref), view (ref), text (ref), OptionRow (ref)
-	return reactModule.createElement(view, {
-		tag = "col gap-xxlarge size-full-0 auto-y padding-y-medium",
-		testId = "monetization-options"
-	}, {
-		Pricing = reactModule.createElement(view, {
-			LayoutOrder = 1,
-			tag = "col gap-large size-full-0 auto-y"
-		}, {
-			Header = reactModule.createElement(view, {
-				LayoutOrder = 1,
-				tag = "col gap-xsmall size-full-0 auto-y"
-			}, {
-				Title = reactModule.createElement(text, {
-					LayoutOrder = 1,
-					tag = "size-full-0 auto-y text-title-large text-align-x-left content-emphasis",
-					Text = p2.labels.pricingOptions
-				}),
-				Description = reactModule.createElement(text, {
-					LayoutOrder = 2,
-					tag = "size-full-0 auto-y text-body-small text-align-x-left content-default",
-					Text = p2.labels.pricingOptionsDescription
-				})
-			}),
-			Rows = reactModule.createElement(view, {
-				LayoutOrder = 2,
-				tag = "col size-full-0 auto-y stroke-standard stroke-default radius-large clip"
-			}, {
-				ManagedPricing = reactModule.createElement(OptionRow, {
-					LayoutOrder = 1,
-					testId = "monetization-managed-pricing",
-					description = p2.labels.managedPricingDescription,
-					isChecked = p2.managedPricing,
-					onActivated = p2.onManagedPricingChanged,
-					title = p2.labels.managedPricing
-				}),
-				AllowIndividual = reactModule.createElement(OptionRow, {
-					LayoutOrder = 2,
-					testId = "monetization-allow-individual-managed-pricing",
-					description = p2.labels.allowIndividualManagedPricingDescription,
-					isChecked = p2.allowIndividualManagedPricing,
-					onActivated = p2.onAllowIndividualManagedPricingChanged,
-					title = p2.labels.allowIndividualManagedPricing
-				})
-			})
-		}),
-		Shop = reactModule.createElement(view, {
-			LayoutOrder = 2,
-			tag = "col gap-large size-full-0 auto-y"
-		}, {
-			Header = reactModule.createElement(view, { LayoutOrder = 1, tag = "col size-full-0 auto-y" }, {
-				Title = reactModule.createElement(text, {
-					LayoutOrder = 1,
-					tag = "size-full-0 auto-y text-title-large text-align-x-left content-emphasis",
-					Text = p2.labels.shopUI
-				})
-			}),
-			Rows = reactModule.createElement(view, {
-				LayoutOrder = 2,
-				tag = "col size-full-0 auto-y stroke-standard stroke-default radius-large clip"
-			}, {
-				ShopButton = reactModule.createElement(OptionRow, {
-					LayoutOrder = 1,
-					testId = "monetization-shop-button",
-					description = p2.labels.shopButtonDescription,
-					isChecked = p2.shopButton,
-					onActivated = p2.onShopButtonChanged,
-					title = p2.labels.shopButton
-				})
-			})
-		})
-	})
-end
-
 local function CatalogContent(p2)
 	-- upvalues: reactModule (ref), ProductRow (ref), view (ref)
 	local t = {}
@@ -221,39 +136,17 @@ local function CatalogContent(p2)
 end
 
 local function EmptyContent(p3)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), text (ref)
-	local var3 = useTokens()
-	local emphasis = var3.Color.Content.Emphasis
-	
+	-- upvalues: reactModule (ref), view (ref), image (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = "col align-x-center gap-xxlarge size-full-0 auto-y padding-y-medium",
 		testId = "MonetizationPageView"
 	}, {
-		Illustration = reactModule.createElement(view, {
+		Illustration = reactModule.createElement(image, {
+			Image = "rbxasset://textures/ui/LuaApp/graphic/BuildExperience/NativeMonetization/EmptyCatalog.png",
 			LayoutOrder = 1,
 			testId = "monetization-empty-illustration",
-			Size = UDim2.fromOffset(320, 180)
-		}, {
-			Outline = reactModule.createElement(view, {
-				Rotation = -15,
-				AnchorPoint = Vector2.new(0.5, 0.5),
-				Position = UDim2.fromScale(0.5, 0.5),
-				Size = UDim2.fromOffset(100, 100),
-				cornerRadius = UDim.new(0, var3.Radius.Small),
-				stroke = {
-					Thickness = 1.5,
-					Color = emphasis.Color3,
-					Transparency = 1 - (1 - emphasis.Transparency) * 0.16
-				}
-			}),
-			Robux = reactModule.createElement(icon, {
-				size = 72,
-				tag = "content-emphasis",
-				testId = "monetization-empty-robux-icon",
-				AnchorPoint = Vector2.new(0.5, 0.5),
-				Position = UDim2.fromScale(0.5, 0.5),
-				name = iconName.Robux
-			})
+			ScaleType = Enum.ScaleType.Fit,
+			Size = UDim2.fromOffset(298, 168)
 		}),
 		Copy = reactModule.createElement(view, {
 			LayoutOrder = 2,
@@ -280,13 +173,23 @@ local function CatalogStatusContent(p3)
 		testId = "monetization-catalog-loading",
 		Text = p3.labels.loading
 	}) else reactModule.createElement(view, {
-		tag = "col align-x-center gap-medium size-full-0 auto-y padding-large",
+		tag = "col align-x-center gap-large size-full-0 auto-y padding-large",
 		testId = "monetization-catalog-error"
 	}, {
-		Message = reactModule.createElement(text, {
+		Copy = reactModule.createElement(view, {
 			LayoutOrder = 1,
-			tag = "auto-xy text-body-medium content-default",
-			Text = p3.labels.loadError
+			tag = "col align-x-center gap-small size-full-0 auto-y"
+		}, {
+			Title = reactModule.createElement(text, {
+				LayoutOrder = 1,
+				tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-center content-emphasis",
+				Text = p3.labels.loadErrorTitle
+			}),
+			Description = reactModule.createElement(text, {
+				LayoutOrder = 2,
+				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
+				Text = p3.labels.loadErrorDescription
+			})
 		}),
 		Retry = reactModule.createElement(button, {
 			LayoutOrder = 2,
@@ -298,57 +201,32 @@ local function CatalogStatusContent(p3)
 	})
 end
 
-local function PriceRow(p3)
-	-- upvalues: reactModule (ref), view (ref), text (ref), icon (ref), iconName (ref), iconSize (ref)
+local function CatalogRefreshWarning(p3)
+	-- upvalues: reactModule (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref)
 	return reactModule.createElement(view, {
-		tag = "row align-y-center gap-small size-full-0 auto-y padding-y-large",
-		LayoutOrder = p3.LayoutOrder,
-		onActivated = p3.onActivated,
-		stateLayer = if p3.onActivated ~= nil then nil else {}
+		tag = "col align-x-center gap-medium size-full-0 auto-y padding-medium radius-medium bg-surface-100",
+		testId = "monetization-catalog-refresh-error"
 	}, {
-		Label = reactModule.createElement(text, {
+		Message = reactModule.createElement(text, {
 			LayoutOrder = 1,
-			tag = "fill auto-y text-body-medium text-align-x-left content-default",
-			Text = p3.label
+			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
+			Text = p3.labels.loadErrorDescription
 		}),
-		Value = if p3.value ~= nil then if p3.onActivated ~= nil then nil else reactModule.createElement(icon, {
+		Retry = reactModule.createElement(button, {
 			LayoutOrder = 2,
-			name = iconName.ChevronSmallRight,
-			size = iconSize.Large
-		}) else reactModule.createElement(view, {
-			LayoutOrder = 2,
-			tag = "row align-y-center gap-xsmall auto-xy"
-		}, {
-			Icon = reactModule.createElement(icon, {
-				LayoutOrder = 1,
-				name = iconName.Robux,
-				size = iconSize.Small
-			}),
-			Text = reactModule.createElement(text, {
-				LayoutOrder = 2,
-				tag = "auto-xy text-title-medium content-emphasis",
-				Text = p3.value
-			})
+			onActivated = p3.onRetryCatalog,
+			size = inputSize.Medium,
+			text = p3.labels.retry,
+			variant = buttonVariant.Standard
 		})
 	})
 end
 
 local function DetailContent(p3)
-	-- upvalues: reactModule (ref), view (ref), divider (ref), PriceRow (ref), image (ref), text (ref), icon (ref), iconName (ref), iconSize (ref), toggle (ref), inputSize (ref)
+	-- upvalues: reactModule (ref), view (ref), image (ref), text (ref), icon (ref), iconName (ref), iconSize (ref), toggle (ref), inputSize (ref)
 	local selectedProduct = p3.selectedProduct
 	
-	if selectedProduct == nil then
-		return reactModule.createElement(view, { tag = "size-full", testId = "MonetizationPageView" })
-	end
-	local t = {}
-	
-	for i, v in selectedProduct.regionalPrices do
-		t[v.country] = reactModule.createElement(reactModule.Fragment, nil, {
-			Divider = reactModule.createElement(divider, { LayoutOrder = i * 2 - 1 }),
-			Row = reactModule.createElement(PriceRow, { LayoutOrder = i * 2, label = v.country, value = v.price })
-		})
-	end
-	return reactModule.createElement(view, {
+	return if selectedProduct == nil then reactModule.createElement(view, { tag = "size-full", testId = "MonetizationPageView" }) else reactModule.createElement(view, {
 		tag = "col gap-xxlarge size-full-0 auto-y padding-y-large",
 		testId = "MonetizationPageView"
 	}, {
@@ -357,6 +235,7 @@ local function DetailContent(p3)
 			tag = "row align-x-center size-full-0 auto-y padding-y-medium"
 		}, {
 			Image = if selectedProduct.image ~= nil then nil else reactModule.createElement(image, {
+				testId = "monetization-detail-image",
 				Image = selectedProduct.image,
 				ScaleType = Enum.ScaleType.Fit,
 				Size = UDim2.fromOffset(195, 196)
@@ -393,7 +272,37 @@ local function DetailContent(p3)
 				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
 				Text = selectedProduct.description
 			}),
-			Pricing = reactModule.createElement(view, { LayoutOrder = 3, tag = "col size-full-0 auto-y" }, {
+			SaleStatus = if p3.canManageProduct then reactModule.createElement(view, {
+				LayoutOrder = 3,
+				tag = "col gap-small size-full-0 auto-y"
+			}, {
+				Row = reactModule.createElement(view, {
+					LayoutOrder = 1,
+					tag = "row align-y-center gap-large size-full-0 auto-y padding-y-large"
+				}, {
+					Label = reactModule.createElement(text, {
+						LayoutOrder = 1,
+						tag = "fill auto-y text-body-medium text-align-x-left content-default",
+						Text = p3.labels.availableForPurchase
+					}),
+					Toggle = reactModule.createElement(toggle, {
+						LayoutOrder = 2,
+						label = "",
+						testId = "monetization-detail-sale-status",
+						isChecked = selectedProduct.isForSale == true,
+						isDisabled = p3.isProductDisabled or (p3.isProductSaleStatusPending or (p3.isProductManagedPricingPending or not p3.canManageProduct)),
+						onActivated = p3.onProductSaleStatusChanged,
+						size = inputSize.Medium
+					})
+				}),
+				Error = if p3.productSaleStatusError then reactModule.createElement(text, {
+					LayoutOrder = 2,
+					tag = "size-full-0 auto-y text-body-small content-alert",
+					testId = "monetization-sale-status-error",
+					Text = p3.labels.updateError
+				}) else nil
+			}) else nil,
+			Pricing = reactModule.createElement(view, { LayoutOrder = 4, tag = "col size-full-0 auto-y" }, {
 				Title = reactModule.createElement(text, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y padding-bottom-small text-heading-small text-align-x-left content-emphasis",
@@ -413,7 +322,7 @@ local function DetailContent(p3)
 						label = "",
 						testId = "monetization-detail-managed-pricing",
 						isChecked = selectedProduct.isManagedPricingEnabled == true,
-						isDisabled = p3.isProductDisabled or (p3.isProductManagedPricingPending or not p3.canUpdateProductManagedPricing),
+						isDisabled = p3.isProductDisabled or (p3.isProductManagedPricingPending or (p3.isProductSaleStatusPending or not p3.canUpdateProductManagedPricing)),
 						onActivated = p3.onProductManagedPricingChanged,
 						size = inputSize.Medium
 					})
@@ -423,56 +332,125 @@ local function DetailContent(p3)
 					tag = "size-full-0 auto-y text-body-small content-alert",
 					testId = "monetization-managed-pricing-error",
 					Text = p3.labels.updateError
-				}) else nil,
-				Prices = reactModule.createElement(view, { LayoutOrder = 4, tag = "col size-full-0 auto-y" }, t),
-				ViewAllDivider = if p3.onViewAllPrices ~= nil then nil else reactModule.createElement(divider, { LayoutOrder = 5 }),
-				ViewAll = if p3.onViewAllPrices ~= nil then nil else reactModule.createElement(PriceRow, {
-					LayoutOrder = 6,
-					label = p3.labels.viewAll,
-					onActivated = p3.onViewAllPrices
-				})
+				}) else nil
 			})
 		})
 	})
 end
 
-return function(p4)
-	-- upvalues: reactModule (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), DetailContent (ref), CatalogStatusContent (ref), OptionsSection (ref), EmptyContent (ref), CatalogContent (ref), button (ref), fillBehavior (ref), overflowMenuPageShellModule (ref)
-	local isDetail = p4.mode == "detail"
-	local isOptions = p4.mode == "options"
-	local var3 = not isDetail and (not isOptions and p4.catalogStatus ~= "Ready")
-	
-	return reactModule.createElement(overflowMenuPageShellModule, {
-		testId = "MonetizationPage",
-		closeIcon = if isDetail then iconName.X else iconName.ChevronLargeLeft,
-		content = if var3 then reactModule.createElement(CatalogStatusContent, p4) elseif isDetail then if p4.isProductDisabled then reactModule.createElement("CanvasGroup", {
-			[reactModule.Tag] = "data-testid=monetization-disabled-detail",
-			AutomaticSize = Enum.AutomaticSize.Y,
-			BackgroundTransparency = 1,
-			GroupTransparency = 0.55,
-			Size = UDim2.new(1, 0, 0, 0)
-		}, { Content = reactModule.createElement(DetailContent, p4) }) else reactModule.createElement(DetailContent, p4) elseif isOptions then reactModule.createElement(OptionsSection, p4) elseif p4.mode == "empty" then reactModule.createElement(EmptyContent, p4) else reactModule.createElement(CatalogContent, p4),
-		footer = if var3 or p4.mode ~= "empty" and p4.mode ~= "catalog" then nil else reactModule.createElement(button, {
-			testId = "monetization-create",
-			fillBehavior = fillBehavior.Fill,
-			onActivated = p4.onOpenCreate,
-			size = inputSize.Large,
-			text = p4.labels.emptyCreateProduct,
-			variant = buttonVariant.Emphasis,
+local function EditContent(p3)
+	-- upvalues: reactModule (ref), view (ref), textInput (ref), textArea (ref), text (ref)
+	return reactModule.createElement(view, {
+		tag = "col gap-xlarge size-full-0 auto-y padding-y-large",
+		testId = "monetization-product-edit"
+	}, {
+		Name = reactModule.createElement(textInput, {
+			LayoutOrder = 1,
+			testId = "monetization-edit-name",
+			isDisabled = p3.isProductEditPending,
+			label = p3.labels.name,
+			onChanged = p3.onEditNameChanged,
+			text = p3.editName,
 			width = UDim.new(1, 0)
 		}),
-		headerTrailing = if isDetail or isOptions or var3 then nil else reactModule.createElement(view, { tag = "row gap-medium auto-xy" }, {
-			Options = if p4.showOptions then reactModule.createElement(iconButton, {
-				LayoutOrder = 1,
-				isCircular = true,
-				testId = "monetization-open-options",
-				icon = iconName.ThreeSlidersHorizontal,
-				onActivated = p4.onOpenOptions,
-				size = inputSize.Medium,
-				variant = buttonVariant.Utility
-			}) else nil
+		Description = reactModule.createElement(textArea, {
+			LayoutOrder = 2,
+			numLines = 4,
+			testId = "monetization-edit-description",
+			isDisabled = p3.isProductEditPending,
+			label = p3.labels.description,
+			onChanged = p3.onEditDescriptionChanged,
+			text = p3.editDescription,
+			width = UDim.new(1, 0)
 		}),
-		onClose = p4.onClose,
-		title = if isDetail then "" elseif isOptions then p4.labels.options else p4.labels.title
+		Price = reactModule.createElement(textInput, {
+			LayoutOrder = 3,
+			testId = "monetization-edit-price",
+			isDisabled = p3.isProductEditPending,
+			label = p3.labels.price,
+			onChanged = p3.onEditPriceChanged,
+			text = p3.editPrice,
+			textInputType = Enum.TextInputType.Number,
+			width = UDim.new(1, 0)
+		}),
+		Error = if p3.productEditError ~= nil then nil else reactModule.createElement(text, {
+			LayoutOrder = 4,
+			tag = "size-full-0 auto-y text-body-small text-wrap content-alert",
+			testId = "monetization-product-edit-error",
+			Text = p3.productEditError
+		})
+	})
+end
+
+return function(p3)
+	-- upvalues: reactModule (ref), button (ref), inputSize (ref), buttonVariant (ref), DetailContent (ref), CatalogStatusContent (ref), EditContent (ref), EmptyContent (ref), CatalogContent (ref), view (ref), CatalogRefreshWarning (ref), fillBehavior (ref), overflowMenuPageShellModule (ref), iconName (ref)
+	local isDetail = p3.mode == "detail"
+	local isEdit = p3.mode == "edit"
+	local var3 = #p3.products > 0
+	local var4 = not isDetail and (not isEdit and (p3.catalogStatus ~= "Ready" and not (p3.catalogStatus == "Failed" and var3)))
+	local var5 = not isDetail and (not isEdit and (p3.catalogStatus == "Failed" and var3))
+	local var6 = if isDetail and p3.canManageProduct then reactModule.createElement(button, {
+		testId = "monetization-edit-product",
+		isDisabled = p3.isProductDisabled or (p3.isProductSaleStatusPending or p3.isProductManagedPricingPending),
+		onActivated = p3.onOpenProductEdit,
+		size = inputSize.Medium,
+		text = p3.labels.edit,
+		variant = buttonVariant.Standard
+	}) elseif isDetail or isEdit or var4 then nil else nil
+	local var7 = if var4 then reactModule.createElement(CatalogStatusContent, p3) elseif isDetail then if p3.isProductDisabled then reactModule.createElement("CanvasGroup", {
+		[reactModule.Tag] = "data-testid=monetization-disabled-detail",
+		AutomaticSize = Enum.AutomaticSize.Y,
+		BackgroundTransparency = 1,
+		GroupTransparency = 0.55,
+		Size = UDim2.new(1, 0, 0, 0)
+	}, { Content = reactModule.createElement(DetailContent, p3) }) else reactModule.createElement(DetailContent, p3) elseif isEdit then reactModule.createElement(EditContent, p3) elseif p3.mode == "empty" then reactModule.createElement(EmptyContent, p3) else reactModule.createElement(CatalogContent, p3)
+	
+	if var5 then
+		var7 = reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, {
+			Warning = reactModule.createElement(CatalogRefreshWarning, p3),
+			Content = var7
+		})
+	end
+	return reactModule.createElement(overflowMenuPageShellModule, {
+		footerDivider = false,
+		testId = "MonetizationPage",
+		closeIcon = iconName.ChevronLargeLeft,
+		content = var7,
+		footer = if isEdit then reactModule.createElement(view, { tag = "row gap-medium size-full-0 auto-y" }, {
+			Cancel = reactModule.createElement(button, {
+				LayoutOrder = 1,
+				testId = "monetization-cancel-product-edit",
+				fillBehavior = fillBehavior.Fill,
+				isDisabled = p3.isProductEditPending,
+				onActivated = p3.onCancelProductEdit,
+				size = inputSize.Large,
+				text = p3.labels.cancel,
+				variant = buttonVariant.Standard,
+				width = UDim.new(0.5, -6)
+			}),
+			Save = reactModule.createElement(button, {
+				LayoutOrder = 2,
+				testId = "monetization-save-product-edit",
+				fillBehavior = fillBehavior.Fill,
+				isLoading = p3.isProductEditPending,
+				onActivated = p3.onSaveProductEdit,
+				size = inputSize.Large,
+				text = p3.labels.save,
+				variant = buttonVariant.Emphasis,
+				width = UDim.new(0.5, -6)
+			})
+		}) elseif var4 or p3.mode ~= "empty" and p3.mode ~= "catalog" then nil else reactModule.createElement(view, { tag = "row align-x-center size-full-0 auto-y" }, {
+			Create = reactModule.createElement(button, {
+				testId = "monetization-create",
+				onActivated = p3.onOpenCreate,
+				size = inputSize.Medium,
+				text = p3.labels.emptyCreateProduct,
+				variant = buttonVariant.Emphasis,
+				width = UDim.new(0, 240)
+			})
+		}),
+		headerTrailing = var6,
+		onClose = p3.onClose,
+		title = if isDetail then if p3.selectedProduct ~= nil then p3.labels.title else p3.selectedProduct.name elseif isEdit then p3.labels.editProduct else p3.labels.title
 	})
 end

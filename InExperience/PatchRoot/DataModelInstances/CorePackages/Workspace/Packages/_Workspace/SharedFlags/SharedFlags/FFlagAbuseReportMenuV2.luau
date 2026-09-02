@@ -1,1 +1,0 @@
-﻿return require(script.Parent.FFlagAddAbilityToDisableIGMScroll) and game:DefineFastFlag("AbuseReportMenuV2", false)

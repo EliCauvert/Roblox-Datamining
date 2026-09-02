@@ -25,9 +25,7 @@ local joinGamePlayButton = require(parent.DiscoveryAnalytics).Points.joinGamePla
 local unlockPlayIntent = require(parent.DiscoveryAnalytics).Events.unlockPlayIntent
 local invalidPlayIntent = require(parent.DiscoveryAnalytics).Events.invalidPlayIntent
 local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestService
-local robloxAppUpdateModule = require(parent.RobloxAppUpdate)
-local checkForUpdate = robloxAppUpdateModule.Thunks.CheckForUpdate
-local handleUpdate = robloxAppUpdateModule.HandleUpdate
+local handleUpdate = require(parent.RobloxAppUpdate).HandleUpdate
 local useGameProductInfoSelector = require(parent.GameProductInfoRodux).useGameProductInfoSelector
 local useGameInfosSelector = require(parent.GameInfosRodux).useGameInfosSelector
 local useGameIconSelector = require(parent.GameIconRodux).GameIcons.useGameIconSelector
@@ -40,7 +38,6 @@ local getIsUserEligibleForUnifiedPurchaseFlow = purchasePromptLiteModule.getIsUs
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local getFFlagLuaAppEnableVirtualEventPlaceId = require(parent.SharedFlags).GetFFlagLuaAppEnableVirtualEventPlaceId
 local fFlagShipUnifiedPurchaseFlowToPaidAccess = require(parent.SharedFlags).FFlagShipUnifiedPurchaseFlowToPaidAccess
-local fFlagCheckForUpdatePromise = require(parent.SharedFlags).FFlagCheckForUpdatePromise
 local createExperienceInvite = require(parent.Squads.Thunks).CreateExperienceInvite
 local squadExternalContractContext = require(parent.SquadsCore.SquadExternalContractProvider).SquadExternalContractContext
 local squadExperienceInviteType = require(parent.SquadsCore.Enums).SquadExperienceInviteType
@@ -61,7 +58,7 @@ local fFlagMigrateGameIconsToStore = require(parent.SharedFlags).FFlagMigrateGam
 local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
 
 return function(p1, p2, p3, _, p4, p5, p6, p7)
-	-- upvalues: useRoactService (ref), roactAnalytics (ref), appUpdateService (ref), appEventIngestService (ref), useDispatch (ref), useSelector (ref), fFlagMigrateGameInfoToStore (ref), gameHydrationReactModule (ref), useGameInfosSelector (ref), useGameProductInfoSelector (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagMigrateGameIconsToStore (ref), useGameIconSelector (ref), useRouteName (ref), getFFlagIsSquadEnabled (ref), reactModule (ref), squadExternalContractContext (ref), getFFlagLuaAppEnableVirtualEventPlaceId (ref), usePlayButtonLaunchGameModule (ref), fFlagLuaAppPlayableUxTreatment (ref), usePlayButtonLaunchWithUxTreatmentModule (ref), usePlayButtonLaunchAfterSeventeenPlusUpsellModule (ref), useAgeVerificationOverlayCallbackModule (ref), roactNetworking (ref), fFlagLuaAppLaunchWhenLoadingForce (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), autoUpgradeEngineFeatureOnlyEngineFeature (ref), fFlagCheckForUpdatePromise (ref), handleUpdate (ref), canPerformBinaryUpdateEnabledEngineFeature (ref), checkForUpdate (ref), joinGamePlayButton (ref), playButtonReferralSourceModule (ref), gamePlayButtonShareLinkAnalyticsModule (ref), playButtonStatesModule (ref), closeCentralOverlay (ref), fetchGamePlayabilityAndProductInfo (ref), openCentralOverlayForPurchaseGameModule (ref), fFlagShipUnifiedPurchaseFlowToPaidAccess (ref), openCentralOverlayForUnifiedPurchasePromptModule (ref), productPurchaseSurface (ref), getIsUserEligibleForUnifiedPurchaseFlow (ref), apiPostPreparePurchaseModule (ref), unlockPlayIntent (ref), invalidPlayIntent (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref), createExperienceInvite (ref), fFlagEnableSquadRegroupExperimentation (ref), squadExperienceInviteSource (ref), fFlagEnablePrivatePartyStartJoin (ref), squadExperienceInviteType (ref), includeWaitingForPartyInCondition (ref)
+	-- upvalues: useRoactService (ref), roactAnalytics (ref), appUpdateService (ref), appEventIngestService (ref), useDispatch (ref), useSelector (ref), fFlagMigrateGameInfoToStore (ref), gameHydrationReactModule (ref), useGameInfosSelector (ref), useGameProductInfoSelector (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagMigrateGameIconsToStore (ref), useGameIconSelector (ref), useRouteName (ref), getFFlagIsSquadEnabled (ref), reactModule (ref), squadExternalContractContext (ref), getFFlagLuaAppEnableVirtualEventPlaceId (ref), usePlayButtonLaunchGameModule (ref), fFlagLuaAppPlayableUxTreatment (ref), usePlayButtonLaunchWithUxTreatmentModule (ref), usePlayButtonLaunchAfterSeventeenPlusUpsellModule (ref), useAgeVerificationOverlayCallbackModule (ref), roactNetworking (ref), fFlagLuaAppLaunchWhenLoadingForce (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), autoUpgradeEngineFeatureOnlyEngineFeature (ref), handleUpdate (ref), canPerformBinaryUpdateEnabledEngineFeature (ref), joinGamePlayButton (ref), playButtonReferralSourceModule (ref), gamePlayButtonShareLinkAnalyticsModule (ref), playButtonStatesModule (ref), closeCentralOverlay (ref), fetchGamePlayabilityAndProductInfo (ref), openCentralOverlayForPurchaseGameModule (ref), fFlagShipUnifiedPurchaseFlowToPaidAccess (ref), openCentralOverlayForUnifiedPurchasePromptModule (ref), productPurchaseSurface (ref), getIsUserEligibleForUnifiedPurchaseFlow (ref), apiPostPreparePurchaseModule (ref), unlockPlayIntent (ref), invalidPlayIntent (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref), createExperienceInvite (ref), fFlagEnableSquadRegroupExperimentation (ref), squadExperienceInviteSource (ref), fFlagEnablePrivatePartyStartJoin (ref), squadExperienceInviteType (ref), includeWaitingForPartyInCondition (ref)
 	local var1 = useRoactService(roactAnalytics)
 	local var2 = useRoactService(appUpdateService)
 	local var3 = useRoactService(appEventIngestService)
@@ -120,7 +117,7 @@ return function(p1, p2, p3, _, p4, p5, p6, p7)
 			local var17 = useRoactService(roactNetworking)
 			local fFlagLuaAppLaunchWhenLoadingForce_1 = fFlagLuaAppLaunchWhenLoadingForce or fFlagLuaAppLaunchWhenLoadingEdp and p7 == true
 			local var18 = reactModule.useCallback(function(p8, p9)
-				-- upvalues: var16 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), var15 (ref), autoUpgradeEngineFeatureOnlyEngineFeature (copy), fFlagCheckForUpdatePromise (copy), handleUpdate (copy), var4 (ref), var2 (ref), canPerformBinaryUpdateEnabledEngineFeature (copy), var1 (ref), p3 (ref), checkForUpdate (copy)
+				-- upvalues: var16 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), var15 (ref), autoUpgradeEngineFeatureOnlyEngineFeature (copy), handleUpdate (copy), var4 (ref), var2 (ref), canPerformBinaryUpdateEnabledEngineFeature (copy), var1 (ref), p3 (ref)
 				local _ = nil
 				local var19 = if game:GetEngineFeature("VoiceChatSupported") then function()
 					-- upvalues: var16 (copy), p8 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), p9 (ref)
@@ -130,16 +127,12 @@ return function(p1, p2, p3, _, p4, p5, p6, p7)
 					var15(p8, if fFlagLuaAppDemoModePlayButtonTelemetry then p9 else nil)
 				end
 				
-				if not autoUpgradeEngineFeatureOnlyEngineFeature then
-					var19()
-					
-					return
-				elseif fFlagCheckForUpdatePromise then
+				if autoUpgradeEngineFeatureOnlyEngineFeature then
 					handleUpdate(var4, var2, canPerformBinaryUpdateEnabledEngineFeature, var1, p3, var19)
 					
 					return
 				end
-				var4(checkForUpdate(var2, canPerformBinaryUpdateEnabledEngineFeature, var1, var19, { ctx = p3 }))
+				var19()
 			end, {
 				var1, var2, canPerformBinaryUpdateEnabledEngineFeature, p3, var16, var15,
 				var4

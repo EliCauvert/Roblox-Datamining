@@ -318,6 +318,54 @@ local function createBuildAppStorage(p3, p4)
 		end
 	end
 	
+	local function getChatDraft(p5)
+		-- upvalues: tryReadData (ref)
+		local _, var19 = tryReadData()
+		local chatDrafts = var19.chatDrafts
+		
+		if type(chatDrafts) ~= "table" then
+			return nil
+		end
+		local var20 = chatDrafts[p5]
+		
+		return if type(var20) == "string" and var20 ~= "" then var20 else nil
+	end
+	
+	local function setChatDraft(value, p5)
+		-- upvalues: tryReadData (ref), p4 (ref), p3 (ref)
+		local var19, var20
+		local _ = function(p6)
+			-- upvalues: value (ref), p5 (ref)
+			local var21 = if type(p6.chatDrafts) == "table" then table.clone(p6.chatDrafts) else {}
+			var21[value] = if p5 ~= "" then nil else p5
+			p6.chatDrafts = var21
+		end
+		
+		local var21, var22 = tryReadData()
+		
+		if var21 then
+			var19 = true
+			var20 = var22
+		else
+			local var23, var24 = tryReadData()
+			var19 = var23
+			var20 = var24
+		end
+		if not var19 then
+			return false
+		end
+		local var25 = if type(var20.chatDrafts) == "table" then table.clone(var20.chatDrafts) else {}
+		var25[value] = if p5 ~= "" then nil else p5
+		var20.chatDrafts = var25
+		local ok, status = pcall(p4.JSONEncode, p4, var20)
+		
+		return if ok and type(status) == "string" then pcall(function()
+			-- upvalues: p3 (copy), status (ref)
+			p3:SetItem("BuildAppStorageKey", status)
+			p3:Flush()
+		end) else false
+	end
+	
 	local function getUnpublishedPlaytestModeTooltipDisplayCount()
 		-- upvalues: tryReadData (ref), var12 (write)
 		local _, var19 = tryReadData()
@@ -752,6 +800,8 @@ local function createBuildAppStorage(p3, p4)
 		AD_UPSELL_SCHEDULER_VERSION = 3,
 		getAgentSpecVersion = getAgentSpecVersion,
 		setAgentSpecVersion = setAgentSpecVersion,
+		getChatDraft = getChatDraft,
+		setChatDraft = setChatDraft,
 		getUnpublishedPlaytestModeTooltipDisplayCount = getUnpublishedPlaytestModeTooltipDisplayCount,
 		incrementUnpublishedPlaytestModeTooltipDisplayCount = incrementUnpublishedPlaytestModeTooltipDisplayCount,
 		wasPushNotificationsUpsellShownToday = wasPushNotificationsUpsellShownToday,
@@ -1063,6 +1113,8 @@ return {
 	AD_UPSELL_SCHEDULER_VERSION = 3,
 	getAgentSpecVersion = var35.getAgentSpecVersion,
 	setAgentSpecVersion = var35.setAgentSpecVersion,
+	getChatDraft = var35.getChatDraft,
+	setChatDraft = var35.setChatDraft,
 	getUnpublishedPlaytestModeTooltipDisplayCount = var35.getUnpublishedPlaytestModeTooltipDisplayCount,
 	incrementUnpublishedPlaytestModeTooltipDisplayCount = var35.incrementUnpublishedPlaytestModeTooltipDisplayCount,
 	wasPushNotificationsUpsellShownToday = var35.wasPushNotificationsUpsellShownToday,

@@ -16,6 +16,7 @@ return function(p1)
 			text = p1.text,
 			placeholder = p1.placeholder,
 			onChanged = p1.onChanged,
+			onFocusLost = p1.onFocusLost,
 			ref = p1.inputRef,
 			width = UDim.new(1, 0)
 		})

@@ -17,6 +17,7 @@ local fFlagUseNavigationSelectors = sharedFlagsModule.FFlagUseNavigationSelector
 local fFlagLuaAppSduiEdpEnabled = sharedFlagsModule.FFlagLuaAppSduiEdpEnabled
 local fFlagSduiEdpPrefetchPlayability = sharedFlagsModule.FFlagSduiEdpPrefetchPlayability
 local fFlagFixSduiEdpTtiPeekCategory = sharedFlagsModule.FFlagFixSduiEdpTtiPeekCategory
+local fFlagFixSduiEdpTtiColdStart = sharedFlagsModule.FFlagFixSduiEdpTtiColdStart
 local robloxAppNavigationModule = require(parent.RobloxAppNavigation)
 local var1 = if fFlagSignalsNavP3Dispatch then robloxAppNavigationModule.NavigationCommands else nil
 local var2 = if fFlagSignalsNavP3fGameDetails then robloxAppNavigationModule.AppNavigationRegistry else nil
@@ -33,9 +34,9 @@ local fFlagEDPTTITrackingEnabled = gameDetailTelemetryModule.FFlagEDPTTITracking
 local EDPTTIConstants = gameDetailTelemetryModule.EDPTTIConstants
 
 return function(p1, p2, p3, p4)
-	-- upvalues: fFlagSignalsNavP3fGameDetails (ref), var2 (ref), fFlagUseNavigationSelectors (ref), selectors (ref), fFlagEDPTTITrackingEnabled (ref), EDPTTIManager (ref), EDPTTIConstants (ref), fFlagLuaAppSduiEdpEnabled (ref), fFlagFixSduiEdpTtiPeekCategory (ref), displayModule (ref), responsiveModule (ref), deviceType (ref), sduiSurfaceLoadTimeTracker (ref), getExperienceDetailsPageKeyModule (ref), cryoModule (ref), fFlagSduiEdpPrefetchPlayability (ref), fetchGamePlayButtonData (ref), fetchExperienceDetailsPageModule (ref), formFactor (ref), useGameDetailsPeekViewModule (ref), appPage (ref), peekViewState (ref), setGameDetailsPeekViewStateModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), fFlagSignalsNavP2NavigationPrimitives (ref), navigateDown (ref)
+	-- upvalues: fFlagSignalsNavP3fGameDetails (ref), var2 (ref), fFlagUseNavigationSelectors (ref), selectors (ref), fFlagEDPTTITrackingEnabled (ref), fFlagFixSduiEdpTtiColdStart (ref), fFlagLuaAppSduiEdpEnabled (ref), EDPTTIManager (ref), EDPTTIConstants (ref), fFlagFixSduiEdpTtiPeekCategory (ref), displayModule (ref), responsiveModule (ref), deviceType (ref), sduiSurfaceLoadTimeTracker (ref), getExperienceDetailsPageKeyModule (ref), cryoModule (ref), fFlagSduiEdpPrefetchPlayability (ref), fetchGamePlayButtonData (ref), fetchExperienceDetailsPageModule (ref), formFactor (ref), useGameDetailsPeekViewModule (ref), appPage (ref), peekViewState (ref), setGameDetailsPeekViewStateModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), fFlagSignalsNavP2NavigationPrimitives (ref), navigateDown (ref)
 	return function(p5)
-		-- upvalues: fFlagSignalsNavP3fGameDetails (copy), var2 (copy), fFlagUseNavigationSelectors (copy), selectors (copy), fFlagEDPTTITrackingEnabled (copy), EDPTTIManager (copy), EDPTTIConstants (copy), fFlagLuaAppSduiEdpEnabled (copy), fFlagFixSduiEdpTtiPeekCategory (copy), displayModule (copy), responsiveModule (copy), deviceType (copy), sduiSurfaceLoadTimeTracker (copy), getExperienceDetailsPageKeyModule (copy), p1 (ref), p3 (write), cryoModule (copy), fFlagSduiEdpPrefetchPlayability (copy), p4 (ref), fetchGamePlayButtonData (copy), fetchExperienceDetailsPageModule (copy), formFactor (copy), useGameDetailsPeekViewModule (copy), appPage (copy), peekViewState (copy), setGameDetailsPeekViewStateModule (copy), p2 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), fFlagSignalsNavP2NavigationPrimitives (copy), navigateDown (copy)
+		-- upvalues: fFlagSignalsNavP3fGameDetails (copy), var2 (copy), fFlagUseNavigationSelectors (copy), selectors (copy), fFlagEDPTTITrackingEnabled (copy), fFlagFixSduiEdpTtiColdStart (copy), fFlagLuaAppSduiEdpEnabled (copy), EDPTTIManager (copy), EDPTTIConstants (copy), fFlagFixSduiEdpTtiPeekCategory (copy), displayModule (copy), responsiveModule (copy), deviceType (copy), sduiSurfaceLoadTimeTracker (copy), getExperienceDetailsPageKeyModule (copy), p1 (ref), p3 (write), cryoModule (copy), fFlagSduiEdpPrefetchPlayability (copy), p4 (ref), fetchGamePlayButtonData (copy), fetchExperienceDetailsPageModule (copy), formFactor (copy), useGameDetailsPeekViewModule (copy), appPage (copy), peekViewState (copy), setGameDetailsPeekViewStateModule (copy), p2 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), fFlagSignalsNavP2NavigationPrimitives (copy), navigateDown (copy)
 		local state = p5:getState()
 		local formFactor_1 = state.FormFactor
 		local viewState = state.GameDetailsPeekView.viewState
@@ -45,7 +46,7 @@ return function(p1, p2, p3, p4)
 		elseif fFlagUseNavigationSelectors then
 			if selectors.selectNavigationLocked(state) then return end
 		elseif state.Navigation.lockNavigationActions then return end
-		if fFlagEDPTTITrackingEnabled then
+		if fFlagEDPTTITrackingEnabled and (not fFlagFixSduiEdpTtiColdStart or not fFlagLuaAppSduiEdpEnabled) then
 			EDPTTIManager.startTracking(EDPTTIConstants.EDP_ENTRY_PATH.GAME_DETAIL_OPEN_GAME_DETAILS)
 		end
 		if fFlagLuaAppSduiEdpEnabled then

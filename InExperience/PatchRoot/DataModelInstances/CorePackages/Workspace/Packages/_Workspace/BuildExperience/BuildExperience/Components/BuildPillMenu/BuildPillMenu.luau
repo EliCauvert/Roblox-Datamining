@@ -9,14 +9,17 @@ local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 local agentDetailMenuModule = require(script.Parent.AgentDetailMenu)
 local buildOverflowMenuButtonModule = require(script.Parent.BuildOverflowMenuButton)
+local stopPlaytestButtonModule = require(script.Parent.StopPlaytestButton)
 local getBuildOverflowMenuStoreModule = require(buildExperience.Stores.GetBuildOverflowMenuStore)
 local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local publishStatusModule = require(buildExperience.Chat.PublishStatus)
+local leaveExperienceModule = require(buildExperience.utils.leaveExperience)
 local fFlagBuildExperienceAssetLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceAssetLibrary)
 local fFlagBuildExperienceRemoveAgentTaskUiModule = require(buildExperience.Flags.FFlagBuildExperienceRemoveAgentTaskUi)
+local fFlagBuildExperienceMenuImprovementsModule = require(buildExperience.Flags.FFlagBuildExperienceMenuImprovements)
 
 return function(p1)
-	-- upvalues: getBuildOverflowMenuStoreModule (ref), publishStatusModule (ref), reactModule (ref), view (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), agentDetailMenuModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), buildOverflowMenuButtonModule (ref)
+	-- upvalues: getBuildOverflowMenuStoreModule (ref), publishStatusModule (ref), reactModule (ref), view (ref), fFlagBuildExperienceMenuImprovementsModule (ref), stopPlaytestButtonModule (ref), leaveExperienceModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), agentDetailMenuModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), buildOverflowMenuButtonModule (ref)
 	local var1 = publishStatusModule.usePublishStatus(p1.target)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
@@ -27,6 +30,13 @@ return function(p1)
 			LayoutOrder = p1.layoutOrder,
 			testId = p1.testId
 		}, {
+			StopPlaytest = if fFlagBuildExperienceMenuImprovementsModule then reactModule.createElement(stopPlaytestButtonModule, {
+				layoutOrder = 0,
+				onActivated = function()
+					-- upvalues: leaveExperienceModule (copy)
+					leaveExperienceModule()
+				end
+			}) else nil,
 			AgentDetail = if not fFlagBuildExperienceRemoveAgentTaskUiModule then reactModule.createElement(agentDetailMenuModule, {
 				layoutOrder = 1,
 				onActivated = p1.onOpenAgentsPage or function() end

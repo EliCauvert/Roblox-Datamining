@@ -2,10 +2,10 @@
 local telemetryService = game:GetService("TelemetryService")
 local t = {
 	eventName = "buildExperienceEvent",
-	description = "Client events for Build tab interactions, playtesting, private invites, the asset library, and ad-upsell impressions and clicks.",
+	description = "Client events for Build tab interactions, playtesting, private invites, monetization, the asset library, and ad-upsell impressions and clicks.",
 	backends = { "Points", "EventIngest" },
 	throttlingPercentage = game:DefineFastInt("BuildExperienceEventThrottleHundredthsPercent", 0),
-	lastUpdated = { 2026, 8, 22 }
+	lastUpdated = { 2026, 8, 27 }
 }
 
 return function(p1, p2, p3)

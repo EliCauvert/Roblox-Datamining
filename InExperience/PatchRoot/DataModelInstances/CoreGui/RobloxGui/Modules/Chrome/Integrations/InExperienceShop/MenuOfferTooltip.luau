@@ -6,6 +6,14 @@ local foundationModule = require(corePackagesService.Packages.Foundation)
 local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
 local inExperienceOffersModule = require(corePackagesService.Workspace.Packages.InExperienceOffers)
 local useMappedSignal = require(corePackagesService.Workspace.Packages.Chrome).Hooks.useMappedSignal
+local fFlagOfferNotifyOnGlobalIcon = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagOfferNotifyOnGlobalIcon
+local inExperienceShopModule = nil
+local toggleInExperienceShopWindow = nil
+
+if fFlagOfferNotifyOnGlobalIcon then
+	inExperienceShopModule = require(corePackagesService.Workspace.Packages.InExperienceShop)
+	toggleInExperienceShopWindow = require(chrome.Integrations.InExperienceShop.ShopWindowLayout).toggleInExperienceShopWindow
+end
 local serviceModule = require(chrome.Service)
 local constantsModule = require(chrome.ChromeShared.Unibar.Constants)
 local tooltipContextModule = require(chrome.ChromeShared.Unibar.Tooltips.TooltipContext)
@@ -25,8 +33,8 @@ local menuOfferTooltipPriority = game:DefineFastInt("MenuOfferTooltipPriority", 
 local menuOfferTooltipShowDelayMs = game:DefineFastInt("MenuOfferTooltipShowDelayMs", 1500)
 local menuOfferTooltipDismissDelayMs = game:DefineFastInt("MenuOfferTooltipDismissDelayMs", 7000)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useOffersForKey (ref), featureKeys (ref), useSignalState (ref), getOffersStore (ref), reactModule (ref), isNotificationEligible (ref), selectActiveOffer (ref), constantsModule (ref), serviceModule (ref), tooltipContextModule (ref), useIsTooltipTurnModule (ref), useMappedSignal (ref), menuOfferTooltipPriority (ref), menuOfferTooltipShowDelayMs (ref), menuOfferTooltipDismissDelayMs (ref), guiService (ref), buttonVariant (ref), overlayProvider (ref), educationalTooltip (ref), popoverSide (ref), popoverAlign (ref)
+local function MenuOfferTooltipContent(p1)
+	-- upvalues: useOffersForKey (ref), featureKeys (ref), useSignalState (ref), getOffersStore (ref), reactModule (ref), isNotificationEligible (ref), selectActiveOffer (ref), constantsModule (ref), serviceModule (ref), toggleInExperienceShopWindow (write), tooltipContextModule (ref), useIsTooltipTurnModule (ref), useMappedSignal (ref), fFlagOfferNotifyOnGlobalIcon (ref), menuOfferTooltipPriority (ref), menuOfferTooltipShowDelayMs (ref), menuOfferTooltipDismissDelayMs (ref), guiService (ref), buttonVariant (ref), overlayProvider (ref), educationalTooltip (ref), popoverSide (ref), popoverAlign (ref)
 	local var1 = useOffersForKey(featureKeys.RobloxShop)
 	local var2 = useSignalState(getOffersStore(false).getOfferExposureSnapshot)
 	local var3 = reactModule.useMemo(function()
@@ -54,12 +62,17 @@ return reactModule.memo(function(p1)
 		var7(true)
 	end, {})
 	local var9 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref), constantsModule (copy), serviceModule (copy)
+		-- upvalues: var8 (ref), constantsModule (copy), serviceModule (copy), toggleInExperienceShopWindow (copy), getOffersStore (copy)
 		var8()
 		local iNEXPERIENCESHOPID = constantsModule.IN_EXPERIENCE_SHOP_ID
 		
-		if serviceModule:isIntegrationValid(iNEXPERIENCESHOPID) and not serviceModule:isWindowOpen(iNEXPERIENCESHOPID) then
+		if serviceModule:isWindowOpen(iNEXPERIENCESHOPID) then return end
+		if serviceModule:isIntegrationValid(iNEXPERIENCESHOPID) then
 			serviceModule:activate(iNEXPERIENCESHOPID)
+			
+			return
+		elseif toggleInExperienceShopWindow and getOffersStore(false).getIsInExperienceShopGlobalIconAvailable(false) then
+			toggleInExperienceShopWindow()
 		end
 	end, { var8 })
 	local var10 = if var3 ~= nil then nil else var3.presentationData.tooltip
@@ -72,12 +85,17 @@ return reactModule.memo(function(p1)
 		var13.current = var12
 	end, { var12 })
 	local iNEXPERIENCESHOPID = serviceModule:integrations()[constantsModule.IN_EXPERIENCE_SHOP_ID]
-	local var14 = var10 ~= nil and (p1.visible == true and (useMappedSignal(if iNEXPERIENCESHOPID then iNEXPERIENCESHOPID.availability else nil) == serviceModule.AvailabilitySignal.Available and (var4 and not var6)))
+	local var14 = if fFlagOfferNotifyOnGlobalIcon then useSignalState(getOffersStore(false).getHasInExperienceShopOpened) else false
+	local var15 = var10 ~= nil and (p1.visible == true and (useMappedSignal(if iNEXPERIENCESHOPID then iNEXPERIENCESHOPID.availability else nil) == serviceModule.AvailabilitySignal.Available and (var4 and not var6)))
+	
+	if fFlagOfferNotifyOnGlobalIcon then
+		var15 = var10 ~= nil and (p1.visible == true and (var4 and (not var6 and not var14)))
+	end
 	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), var14 (ref), menuOfferTooltipPriority (copy), menuOfferTooltipShowDelayMs (copy), menuOfferTooltipDismissDelayMs (copy)
+		-- upvalues: var13 (ref), var15 (write), menuOfferTooltipPriority (copy), menuOfferTooltipShowDelayMs (copy), menuOfferTooltipDismissDelayMs (copy)
 		local current = var13.current
 		
-		if var14 and current ~= nil then
+		if var15 and current ~= nil then
 			current.registerTooltip("MENU_OFFER_TOOLTIP", menuOfferTooltipPriority, menuOfferTooltipShowDelayMs, menuOfferTooltipDismissDelayMs)
 			
 			return function()
@@ -86,12 +104,12 @@ return reactModule.memo(function(p1)
 			end
 		end
 		return nil
-	end, { var14, var11 })
-	local MENU_OFFER_TOOLTIP_1 = var14 and MENU_OFFER_TOOLTIP
+	end, { var15, var11 })
+	local MENU_OFFER_TOOLTIP_1 = var15 and MENU_OFFER_TOOLTIP
 	reactModule.useEffect(function()
-		-- upvalues: var14 (ref), serviceModule (copy), var8 (ref), guiService (copy)
-		if var14 then
-			local var15 = serviceModule:onIntegrationActivated():connect(function()
+		-- upvalues: var15 (write), serviceModule (copy), var8 (ref), guiService (copy)
+		if var15 then
+			local var16 = serviceModule:onIntegrationActivated():connect(function()
 				-- upvalues: var8 (copy)
 				var8()
 			end)
@@ -101,13 +119,13 @@ return reactModule.memo(function(p1)
 			end)
 			
 			return function()
-				-- upvalues: var15 (ref), menuOpenedConnection (ref)
-				var15:disconnect()
+				-- upvalues: var16 (ref), menuOpenedConnection (ref)
+				var16:disconnect()
 				menuOpenedConnection:Disconnect()
 			end
 		end
 		return nil
-	end, { var14, var8 })
+	end, { var15, var8 })
 	
 	return if var10 == nil or not MENU_OFFER_TOOLTIP_1 then nil else reactModule.createElement(overlayProvider, nil, {
 		Tooltip = reactModule.createElement(educationalTooltip, {
@@ -128,4 +146,23 @@ return reactModule.memo(function(p1)
 			onPressedOutside = var8
 		})
 	})
+end
+
+return reactModule.memo(function(p2)
+	-- upvalues: fFlagOfferNotifyOnGlobalIcon (ref), useSignalState (ref), getOffersStore (ref), serviceModule (ref), constantsModule (ref), useMappedSignal (ref), inExperienceShopModule (write), reactModule (ref), MenuOfferTooltipContent (ref)
+	if fFlagOfferNotifyOnGlobalIcon then
+		local var4 = useSignalState(getOffersStore(false).getIsInExperienceShopGlobalIconAvailable)
+		local iNEXPERIENCESHOPID = serviceModule:integrations()[constantsModule.IN_EXPERIENCE_SHOP_ID]
+		local var5 = useMappedSignal(if iNEXPERIENCESHOPID then iNEXPERIENCESHOPID.availability else nil) == serviceModule.AvailabilitySignal.Available
+		local var6 = useSignalState(function(p3)
+			-- upvalues: inExperienceShopModule (copy)
+			local getShopGlobalIconStore = inExperienceShopModule.GetShopGlobalIconStore
+			
+			return if getShopGlobalIconStore then getShopGlobalIconStore(p3).getIconInstance(p3) else nil
+		end)
+		local var7 = reactModule.useRef(var6)
+		var7.current = var6
+		
+		return if var4 then if var7.current == nil then nil else reactModule.createElement(MenuOfferTooltipContent, { visible = true, anchorRef = var7 }) elseif var5 then reactModule.createElement(MenuOfferTooltipContent, p2) else nil
+	end
 end)

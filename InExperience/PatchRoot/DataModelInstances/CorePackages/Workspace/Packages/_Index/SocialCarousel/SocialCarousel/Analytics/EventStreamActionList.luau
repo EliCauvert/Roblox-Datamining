@@ -9,7 +9,6 @@ local eventTypes = enums.EventTypes
 local eventNamesModule = require(script.Parent.EventNames)
 local constantsModule = require(socialCarousel.Common.Constants)
 local fIntSocialCarouselShowRecsLimit = require(socialCarousel.Flags).FIntSocialCarouselShowRecsLimit
-local fFlagLuaAppAddSortDataToSocialCarouselClicks = sharedFlagsModule.FFlagLuaAppAddSortDataToSocialCarouselClicks
 local fFlagSocialCarouselShareQREnabled = sharedFlagsModule.FFlagSocialCarouselShareQREnabled
 local fFlagLuaAppUserSeenCollectionUnifiedFields = sharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 
@@ -23,12 +22,12 @@ return {
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = {
 			btn = constantsModule.ANALYTICS.BTN_VALUES.OPEN_PEOPLE_LIST,
-			contentType = if fFlagLuaAppAddSortDataToSocialCarouselClicks then constantsModule.ANALYTICS.CONTENT_TYPE else nil,
-			actionType = if fFlagLuaAppAddSortDataToSocialCarouselClicks then constantsModule.ANALYTICS.ACTION_TYPES.OPEN_PROFILE else nil
+			contentType = constantsModule.ANALYTICS.CONTENT_TYPE,
+			actionType = constantsModule.ANALYTICS.ACTION_TYPES.OPEN_PROFILE
 		},
 		formatRulesForAdditionalInfo = {
 			absolutePosition = var1,
-			positionInRow = if fFlagLuaAppAddSortDataToSocialCarouselClicks then var1 else nil,
+			positionInRow = var1,
 			recommendationContextType = formatRecommendationContextType,
 			friendId = var1,
 			friendStatus = var1,

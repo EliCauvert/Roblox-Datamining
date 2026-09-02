@@ -6,7 +6,6 @@ local signalsModule = require(parent.Signals)
 local signalsExperimentalModule = require(parent.SignalsExperimental)
 local dataStatus = require(dataHydration.DataHydrationTypes).DataStatus
 local getLocalPlayerUserId = require(dataHydration.DataHydrationUtils).getLocalPlayerUserId
-local luaAppDataCacheBatch = game:DefineFastFlag("LuaAppDataCacheBatch", false)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppDataHydrationOptimisticMutationLayer = sharedFlagsModule.FFlagLuaAppDataHydrationOptimisticMutationLayer
 local fFlagMigrateGameInfoToStore = sharedFlagsModule.FFlagMigrateGameInfoToStore
@@ -14,7 +13,7 @@ local luaAppDefaultDataTtlSec = game:DefineFastInt("LuaAppDefaultDataTtlSec", 36
 local luaAppDefaultFailedDataTtlSec = game:DefineFastInt("LuaAppDefaultFailedDataTtlSec", 60)
 
 return function(p1, p2, p3)
-	-- upvalues: luaAppDefaultDataTtlSec (ref), luaAppDefaultFailedDataTtlSec (ref), signalsModule (ref), dataStatus (ref), luaAppDataCacheBatch (ref), signalsExperimentalModule (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), cryoModule (ref), fFlagMigrateGameInfoToStore (ref), getLocalPlayerUserId (ref), playersService (ref)
+	-- upvalues: luaAppDefaultDataTtlSec (ref), luaAppDefaultFailedDataTtlSec (ref), signalsModule (ref), dataStatus (ref), signalsExperimentalModule (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), cryoModule (ref), fFlagMigrateGameInfoToStore (ref), getLocalPlayerUserId (ref), playersService (ref)
 	p1 = p1 or luaAppDefaultDataTtlSec
 	p2 = p2 or luaAppDefaultFailedDataTtlSec
 	local var1 = if p3 then p3.sanitizeItem else nil
@@ -75,75 +74,46 @@ return function(p1, p2, p3)
 	end
 	
 	local function replaceItems(p6)
-		-- upvalues: p1 (ref), luaAppDataCacheBatch (copy), getOrCreateSignals (ref), var1 (ref), t_2 (write), dataStatus (copy), t_3 (write), signalsExperimentalModule (copy)
+		-- upvalues: p1 (ref), getOrCreateSignals (ref), var1 (ref), t_2 (write), dataStatus (copy), t_3 (write), signalsExperimentalModule (copy)
 		local var4 = os.clock() + p1
-		
-		if luaAppDataCacheBatch then
-			signalsExperimentalModule.batch(function()
-				-- upvalues: p6 (ref), getOrCreateSignals (copy), var1 (copy), t_2 (copy), dataStatus (copy), t_3 (copy), var4 (ref)
-				for i, v in p6 do
-					local _, var5 = getOrCreateSignals(i)
-					var5(if var1 then var1(v) else v)
-					t_2[i](dataStatus.Ready)
-					t_3[i] = var4
-				end
-			end)
-			
-			return
-		end
-		for i, v in p6 do
-			local _, var5 = getOrCreateSignals(i)
-			var5(if var1 then var1(v) else v)
-			t_2[i](dataStatus.Ready)
-			t_3[i] = var4
-		end
+		signalsExperimentalModule.batch(function()
+			-- upvalues: p6 (ref), getOrCreateSignals (copy), var1 (copy), t_2 (copy), dataStatus (copy), t_3 (copy), var4 (ref)
+			for i, v in p6 do
+				local _, var5 = getOrCreateSignals(i)
+				var5(if var1 then var1(v) else v)
+				t_2[i](dataStatus.Ready)
+				t_3[i] = var4
+			end
+		end)
 	end
 	
 	local function updateItems(p7, p8)
-		-- upvalues: p1 (ref), luaAppDataCacheBatch (copy), getOrCreateSignals (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), cryoModule (copy), var1 (ref), t_2 (write), dataStatus (copy), fFlagMigrateGameInfoToStore (copy), t_3 (write), signalsExperimentalModule (copy)
-		local var6 = os.clock() + p1
-		
-		if luaAppDataCacheBatch then
-			signalsExperimentalModule.batch(function()
-				-- upvalues: p7 (ref), getOrCreateSignals (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), cryoModule (copy), var1 (copy), t_2 (copy), dataStatus (copy), fFlagMigrateGameInfoToStore (copy), p8 (ref), t_3 (copy), var6 (ref)
-				for i, v in p7 do
-					local var7, var8 = getOrCreateSignals(i)
-					local var9 = var7.data(false)
-					local var10 = if var9 and type(var9) == "table" and type(v) == "table" then if fFlagLuaAppDataHydrationOptimisticMutationLayer then cryoModule.Dictionary.join(var9, v) else cryoModule.Dictionary.union(var9, v) else v
-					var8(if var1 then var1(var10) else var10)
-					t_2[i](dataStatus.Ready)
-					
-					if not fFlagMigrateGameInfoToStore then
-						t_3[i] = var6
-					elseif p8 ~= false then
-						t_3[i] = var6
-					end
+		-- upvalues: p1 (ref), getOrCreateSignals (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), cryoModule (copy), var1 (ref), t_2 (write), dataStatus (copy), fFlagMigrateGameInfoToStore (copy), t_3 (write), signalsExperimentalModule (copy)
+		local var5 = os.clock() + p1
+		signalsExperimentalModule.batch(function()
+			-- upvalues: p7 (ref), getOrCreateSignals (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), cryoModule (copy), var1 (copy), t_2 (copy), dataStatus (copy), fFlagMigrateGameInfoToStore (copy), p8 (ref), t_3 (copy), var5 (ref)
+			for i, v in p7 do
+				local var6, var7 = getOrCreateSignals(i)
+				local var8 = var6.data(false)
+				local var9 = if var8 and type(var8) == "table" and type(v) == "table" then if fFlagLuaAppDataHydrationOptimisticMutationLayer then cryoModule.Dictionary.join(var8, v) else cryoModule.Dictionary.union(var8, v) else v
+				var7(if var1 then var1(var9) else var9)
+				t_2[i](dataStatus.Ready)
+				
+				if not fFlagMigrateGameInfoToStore then
+					t_3[i] = var5
+				elseif p8 ~= false then
+					t_3[i] = var5
 				end
-			end)
-			
-			return
-		end
-		for i, v in p7 do
-			local var7, var8 = getOrCreateSignals(i)
-			local var9 = var7.data(false)
-			local var10 = if var9 and type(var9) == "table" and type(v) == "table" then if fFlagLuaAppDataHydrationOptimisticMutationLayer then cryoModule.Dictionary.join(var9, v) else cryoModule.Dictionary.union(var9, v) else v
-			var8(if var1 then var1(var10) else var10)
-			t_2[i](dataStatus.Ready)
-			
-			if not fFlagMigrateGameInfoToStore then
-				t_3[i] = var6
-			elseif p8 ~= false then
-				t_3[i] = var6
 			end
-		end
+		end)
 	end
 	
 	local function updateItem(p9, p10, p11)
 		-- upvalues: getOrCreateSignals (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), cryoModule (copy), var1 (ref), t_2 (write), dataStatus (copy), fFlagMigrateGameInfoToStore (copy), t_3 (write), p1 (ref)
-		local var11, var12 = getOrCreateSignals(p9)
-		local var13 = var11.data(false)
-		local var14 = if var13 and type(var13) == "table" and type(p10) == "table" then if fFlagLuaAppDataHydrationOptimisticMutationLayer then cryoModule.Dictionary.join(var13, p10) else cryoModule.Dictionary.union(var13, p10) else p10
-		var12(if var1 then var1(var14) else var14)
+		local var6, var7 = getOrCreateSignals(p9)
+		local var8 = var6.data(false)
+		local var9 = if var8 and type(var8) == "table" and type(p10) == "table" then if fFlagLuaAppDataHydrationOptimisticMutationLayer then cryoModule.Dictionary.join(var8, p10) else cryoModule.Dictionary.union(var8, p10) else p10
+		var7(if var1 then var1(var9) else var9)
 		t_2[p9](dataStatus.Ready)
 		
 		if fFlagMigrateGameInfoToStore then
@@ -161,17 +131,17 @@ return function(p1, p2, p3)
 	
 	local function replaceItem(p9, p10)
 		-- upvalues: getOrCreateSignals (ref), var1 (ref), t_2 (write), dataStatus (copy), t_3 (write), p1 (ref)
-		local _, var11 = getOrCreateSignals(p9)
-		var11(if var1 then var1(p10) else p10)
+		local _, var6 = getOrCreateSignals(p9)
+		var6(if var1 then var1(p10) else p10)
 		t_2[p9](dataStatus.Ready)
 		t_3[p9] = os.clock() + p1
 	end
 	
 	local function resetFailedItem(value)
 		-- upvalues: t (write), dataStatus (copy), t_2 (write)
-		local var11 = t[value]
+		local var6 = t[value]
 		
-		if var11 and var11.status(false) == dataStatus.Failed then
+		if var6 and var6.status(false) == dataStatus.Failed then
 			t_2[value](dataStatus.NotReady)
 		end
 	end
@@ -179,37 +149,26 @@ return function(p1, p2, p3)
 	local function resetFailedItems(value)
 		-- upvalues: t (write), dataStatus (copy), t_2 (write)
 		for i, v in value do
-			local var11 = t[v]
+			local var6 = t[v]
 			
-			if var11 and var11.status(false) == dataStatus.Failed then
+			if var6 and var6.status(false) == dataStatus.Failed then
 				t_2[v](dataStatus.NotReady)
 			end
 		end
 	end
 	
 	local function markItemsAsFailed(p9)
-		-- upvalues: p2 (ref), luaAppDataCacheBatch (copy), t_2 (write), dataStatus (copy), t_3 (write), signalsExperimentalModule (copy)
-		local var12 = os.clock() + p2
-		
-		if luaAppDataCacheBatch then
-			signalsExperimentalModule.batch(function()
-				-- upvalues: p9 (ref), t_2 (copy), dataStatus (copy), t_3 (copy), var12 (ref)
-				for i, v in p9 do
-					if t_2[v] then
-						t_2[v](dataStatus.Failed)
-					end
-					t_3[v] = var12
+		-- upvalues: p2 (ref), t_2 (write), dataStatus (copy), t_3 (write), signalsExperimentalModule (copy)
+		local var7 = os.clock() + p2
+		signalsExperimentalModule.batch(function()
+			-- upvalues: p9 (ref), t_2 (copy), dataStatus (copy), t_3 (copy), var7 (ref)
+			for i, v in p9 do
+				if t_2[v] then
+					t_2[v](dataStatus.Failed)
 				end
-			end)
-			
-			return
-		end
-		for i, v in p9 do
-			if t_2[v] then
-				t_2[v](dataStatus.Failed)
+				t_3[v] = var7
 			end
-			t_3[v] = var12
-		end
+		end)
 	end
 	
 	local function clear()
@@ -220,13 +179,13 @@ return function(p1, p2, p3)
 		t_2 = {}
 	end
 	
-	local var13 = getLocalPlayerUserId()
-	local var14 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-		-- upvalues: getLocalPlayerUserId (copy), var13 (write), clear (ref)
-		local var15 = getLocalPlayerUserId()
+	local var8 = getLocalPlayerUserId()
+	local var9 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
+		-- upvalues: getLocalPlayerUserId (copy), var8 (write), clear (ref)
+		local var10 = getLocalPlayerUserId()
 		
-		if var15 ~= var13 then
-			var13 = var15
+		if var10 ~= var8 then
+			var8 = var10
 			clear()
 		end
 	end)
@@ -243,10 +202,10 @@ return function(p1, p2, p3)
 		resetFailedItems = resetFailedItems,
 		clear = clear,
 		dispose = function()
-			-- upvalues: var14 (write), clear (ref)
-			if var14 then
-				var14:Disconnect()
-				var14 = nil
+			-- upvalues: var9 (write), clear (ref)
+			if var9 then
+				var9:Disconnect()
+				var9 = nil
 			end
 			clear()
 		end

@@ -70,6 +70,7 @@ local t = {
 	},
 	OsaAcknowledgementStatus = appChatNetworkingModule.Constants.OsaAcknowledgementStatusResponse,
 	UserOptedIntoChatMessagesStatus = appChatNetworkingModule.Constants.UserOptedIntoChatMessagesStatusResponse,
+	CallButtonEligibility = { Eligible = "eligible", Ineligible = "ineligible" },
 	Source = {
 		Friends = "friends",
 		Channels = "channels",
@@ -99,6 +100,7 @@ function t.mockBase()
 		hasGroupUp = false,
 		isUserLeaving = false,
 		fetchingOlderMessages = false,
+		callButtonEligibility = nil,
 		previewMessageId = nil,
 		previewContent = nil,
 		title = "test",
@@ -147,7 +149,8 @@ function t.response(p2)
 		preview_message = if p2.preview_message then p2.preview_message else nil,
 		hasGroupUp = if p2.hasGroupUp then p2.hasGroupUp else false,
 		osa_acknowledgement_status = if p2.osa_acknowledgement_status then p2.osa_acknowledgement_status else nil,
-		user_opted_into_chat_messages = if p2.user_opted_into_chat_messages then p2.user_opted_into_chat_messages else nil
+		user_opted_into_chat_messages = if p2.user_opted_into_chat_messages then p2.user_opted_into_chat_messages else nil,
+		call_button_eligibility = p2.call_button_eligibility
 	}
 end
 
@@ -174,6 +177,7 @@ function t.fromChannelsApi(p2)
 	t_1.moderationType = p2.moderation_type
 	t_1.userPendingStatus = p2.user_pending_status
 	t_1.participantPendingStatus = p2.participant_pending_status
+	t_1.callButtonEligibility = p2.call_button_eligibility
 	local previewMessage = p2.preview_message
 	
 	if previewMessage then

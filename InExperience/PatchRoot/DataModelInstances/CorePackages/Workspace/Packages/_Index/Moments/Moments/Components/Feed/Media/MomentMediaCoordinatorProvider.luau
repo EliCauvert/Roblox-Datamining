@@ -13,9 +13,11 @@ end)
 local reactModule = require(parent.React)
 local sharedFlagsModule = require(parent.SharedFlags)
 local signalsModule = require(parent.Signals)
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
+local useSignalState = require(parent.SignalsReact).useSignalState
 local enableAudioPlaybackInApp = require(parent.MediaPlayback).enableAudioPlaybackInApp
-local media = require(parent.MomentsCommon).Media
+local momentsCommonModule = require(parent.MomentsCommon)
+local media = momentsCommonModule.Media
+local getMomentsCapabilities = momentsCommonModule.Stores.GetMomentsCapabilities
 local fFlagMomentsAutoplayAmpPolicy = sharedFlagsModule.FFlagMomentsAutoplayAmpPolicy
 local _ = require(moments.Components.Feed.FeedTypes)
 local createFeedMediaSourceModule = require(script.Parent.createFeedMediaSource)
@@ -51,11 +53,9 @@ local function defaultCreateCoordinator(p1)
 end
 
 return function(p1)
-	-- upvalues: fFlagMomentsAutoplayAmpPolicy (ref), useAppPolicy (ref), defaultCreateCoordinator (ref), reactModule (ref), signalsModule (ref), userInputService (ref), var1 (write), createFeedMediaSourceModule (ref), media (ref)
+	-- upvalues: fFlagMomentsAutoplayAmpPolicy (ref), useSignalState (ref), getMomentsCapabilities (ref), defaultCreateCoordinator (ref), reactModule (ref), signalsModule (ref), userInputService (ref), var1 (write), createFeedMediaSourceModule (ref), media (ref)
 	local pager = p1.pager
-	local var2 = if fFlagMomentsAutoplayAmpPolicy then useAppPolicy(function(p2)
-		return p2.getMomentsCanAutoPlay()
-	end) else nil
+	local var2 = if fFlagMomentsAutoplayAmpPolicy then useSignalState(getMomentsCapabilities(false).getIsAutoPlayEnabled) else nil
 	local playbackActive = p1.playbackActive
 	local createCoordinator = p1.createCoordinator or defaultCreateCoordinator
 	local var3 = reactModule.useMemo(function()

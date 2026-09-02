@@ -9,21 +9,13 @@ local view = foundationModule.View
 local text = foundationModule.Text
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local getPeriodTypeDisplayLabelModule = require(robloxSubscriptionPurchaseApp.Utils.getPeriodTypeDisplayLabel)
-local fFlagSupportFreeTrialPriceRowModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagSupportFreeTrialPriceRow)
 
 return function(p1)
-	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), fFlagSupportFreeTrialPriceRowModule (ref), getPeriodTypeDisplayLabelModule (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref)
-	local var1
-	local var2 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getRobloxSubscriptionProduct)
-	local localizedPriceDisplayString = var2 and var2.LocalizedPriceDisplayString
-	local periodType = var2 and var2.PeriodType
-	
-	if fFlagSupportFreeTrialPriceRowModule then
-		var1 = p1.isFreeTrial == true
-		var1 = nil
-	else
-		var1 = false
-	end
+	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), getPeriodTypeDisplayLabelModule (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref)
+	local var1 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getRobloxSubscriptionProduct)
+	local localizedPriceDisplayString = var1 and var1.LocalizedPriceDisplayString
+	local periodType = var1 and var1.PeriodType
+	local var2 = p1.isFreeTrial == true
 	local var3 = useLocalization({
 		periodType = getPeriodTypeDisplayLabelModule(periodType or "", false)
 	})
@@ -33,23 +25,23 @@ return function(p1)
 			price = localizedPriceDisplayString or "",
 			periodType = var3.periodType
 		},
-		freeTrialPrice = if fFlagSupportFreeTrialPriceRowModule then {
+		freeTrialPrice = {
 			"Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2",
 			boldStart = "<b>",
 			boldEnd = "</b>",
 			price = localizedPriceDisplayString or "",
 			periodType = var3.periodType
-		} else nil
+		}
 	})
 	
-	return if not (not localizedPriceDisplayString or not periodType) then reactModule.createElement(view, {
+	return if localizedPriceDisplayString and periodType then reactModule.createElement(view, {
 		tag = "row auto-y size-full-0 align-y-center align-x-left gap-small",
 		LayoutOrder = p1.layoutOrder
 	}, {
 		Price = reactModule.createElement(text, {
 			tag = "size-full-0 auto-y text-title-medium content-emphasis text-align-x-left",
-			Text = if fFlagSupportFreeTrialPriceRowModule and var1 then var4.freeTrialPrice else var4.price,
-			RichText = if fFlagSupportFreeTrialPriceRowModule and var1 then true else nil
+			Text = if var2 then var4.freeTrialPrice else var4.price,
+			RichText = if var2 then true else nil
 		})
 	}) else nil
 end

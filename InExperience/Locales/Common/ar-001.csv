@@ -1297,18 +1297,20 @@ Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,استكشاف الأنماط
 Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
-Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,البقاء هنا
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,
 Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,
 Feature.Avatar.BackgroundGeneration.Action.Upload,رفع
 Feature.Avatar.BackgroundGeneration.Action.View,عرض
+Feature.Avatar.BackgroundGeneration.Action.ViewExclusiveBackgrounds,
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,أنشئ خلفيات باستخدام اشتراك Plus.
-Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,إذا قمت بالخروج الآن، فسيتم تجاهل هذه الخلفية.
+Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,لم يتم نشر الخلفية بعد. إذا قمت بالخروج الآن، فستفقدها.
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,منتجك جاهز للاستخدام.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,تم إنشاء هذه الخلفية باستخدام الذكاء الاصطناعي. ومن خلال النشر، فإنك تؤكد أنها تتبع معايير مجتمع منصّة Roblox ولا تستخدم محتوى لا تملك الحق في استخدامه. ستتم مراجعتها قبل ظهورها في مقتنياتك، ولا يمكن تحرير العناصر المنشورة.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,تم إنشاء هذه الخلفية باستخدام الذكاء الاصطناعي. ومن خلال الرفع، فإنك تؤكد أنها تتبع معايير مجتمع منصّة Roblox ولا تستخدم محتوى لا تملك الحق في استخدامه. ستتم مراجعتها قبل ظهورها في مقتنياتك، ولا يمكن تحرير العناصر المرفوعة.
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,افتح خلفيات حصرية مجانية مع اشتراك Plus.
+Feature.Avatar.BackgroundGeneration.Description.ViewExclusiveBackgrounds,استكشِف خلفياتك الحصرية المجانية من اشتراك Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,لم يستوفِ العنصر معايير المجتمع
 Feature.Avatar.BackgroundGeneration.Error.LimitReached,لقد وصلت إلى الحد الأقصى للاستخدام. حاول مرة أخرى لاحقًا لمواصلة التخصيص.
 Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,لقد وصلت إلى الحد الأقصى للاستخدام. حاول مرة أخرى غدًا لمواصلة التخصيص.
@@ -1325,11 +1327,13 @@ Feature.Avatar.BackgroundGeneration.PromptPlaceholder,صِف الخلفية...
 Feature.Avatar.BackgroundGeneration.Status.Generating,جارٍ إنشاء الخلفية...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,جارٍ تحضير الخلفية...
 Feature.Avatar.BackgroundGeneration.Title,إنشاء خلفية
-Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,هل تريد تجاهل هذه الخلفية؟
+Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,هل تريد الخروج دون النشر؟
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,النشر في المقتنيات
 Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
 Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,الرفع إلى المقتنيات
+Feature.Avatar.BackgroundGeneration.Tooltip.CreateBackground,أنشئ خلفيات مجانًا مع اشتراك Plus!
+Feature.Avatar.BackgroundGeneration.Tooltip.PublishBackground,النشر في مقتنياتك
 Feature.Avatar.Backgrounds.Title,الخلفيات
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,التعديل غير متاح لنمط الجسد هذا.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,الرجوع إلى ألوان الجسد الأصلية
@@ -1817,6 +1821,7 @@ Feature.Build.Action.AddFriends,إضافة أصدقاء
 Feature.Build.Action.AddPlaytester,إضافة مختبر لعب
 Feature.Build.Action.AddPlaytesters,إضافة مختبري لعب
 Feature.Build.Action.AddToPlaytest,إضافة إلى اختبار اللعب
+Feature.Build.Action.Approve,موافقة
 Feature.Build.Action.Archive,أرشفة
 Feature.Build.Action.ArchiveGame,أرشفة اللعبة
 Feature.Build.Action.Build,
@@ -1825,10 +1830,13 @@ Feature.Build.Action.BuyRobux,شراء عملات Robux
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,نسخ النص
 Feature.Build.Action.Create,
+Feature.Build.Action.CreateDeveloperProduct,
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,عدم السؤال مرة أخرى
 Feature.Build.Action.DontShowAgain,عدم الإظهار مرة أخرى
+Feature.Build.Action.EarnRobux,اربح عملات Robux
+Feature.Build.Action.Edit,تحرير
 Feature.Build.Action.HideAutosaved,إخفاء ما تم حفظه تلقائيًا
 Feature.Build.Action.ManageLimit,إدارة الحد
 Feature.Build.Action.Next,
@@ -1841,9 +1849,12 @@ Feature.Build.Action.Playtest,اختبار اللعب
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,نشر الإصدار الأحدث
+Feature.Build.Action.Reject,رفض
 Feature.Build.Action.Restore,استعادة
 Feature.Build.Action.Resume,استئناف
+Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,تراجع
+Feature.Build.Action.Save,
 Feature.Build.Action.SetDailyLimit,تعيين حد يومي
 Feature.Build.Action.SetLimit,تعيين الحد
 Feature.Build.Action.Settings,
@@ -1907,6 +1918,7 @@ Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,الزيارات
 Feature.Build.Content.NewGame,لعبة جديدة
+Feature.Build.Description.ActivateDeveloperProduct,طرح منتج المطوّر {PRODUCT_ID} للبيع.
 Feature.Build.Description.AdCampaignModerationReview,تتم مراجعة جميع الحملات الإعلانية من قِبل فريق الإشراف لدى منصّة Roblox. قد تستغرق هذه العملية ما يصل إلى 24 ساعة.
 Feature.Build.Description.AdCampaignSheetRunDates,سيتم تشغيل حملتك من {startDate} إلى {endDate}
 Feature.Build.Description.AdvertisingAgreement,من خلال المتابعة، فإنك توافق على {advertisingTermsStart}شروط الإعلان{advertisingTermsEnd} و{advertisingStandardsStart}معايير الإعلان{advertisingStandardsEnd} لدى منصّة Roblox.
@@ -1919,6 +1931,8 @@ Feature.Build.Description.BuyRobuxToCreate,اشترِ المزيد من عملا
 Feature.Build.Description.BuyUsageOrWait,اشترِ المزيد من استخدام ميزة Build باستخدام عملات Robux، أو انتظر حتى تتم إعادة تعيين الحد اليومي.
 Feature.Build.Description.CampaignRunDates,
 Feature.Build.Description.ChoosePlaytesters,اختر الأصدقاء لمساعدتك في اختبار اللعب.
+Feature.Build.Description.CreateDeveloperProduct,"إنشاء ""{NAME}"" مقابل {PRICE} من عملات Robux، غير معروض للبيع."
+Feature.Build.Description.DeactivateDeveloperProduct,إيقاف بيع منتج المطوّر {PRODUCT_ID}.
 Feature.Build.Description.EarnedRobuxAppliedFirst,إذا كنت قد ربحت عملات Robux، فسيتم تطبيقها أولًا لتغطية تكلفة الحملة الإعلانية.
 Feature.Build.Description.EnableBuildNotifs,يمكنك تشغيل الإشعارات من إعدادات جهازك للحصول على التحديثات من ميزة Build.
 Feature.Build.Description.FriendsLinkOnly,يمكن فقط لأصدقائك الوصول إلى هذا الرابط. غيّر إعدادات الجمهور للعبتك إذا كنت تريد أن يلعبها المزيد من الأشخاص.
@@ -1928,6 +1942,8 @@ Feature.Build.Description.HubSettings,يمكنك إدارة جميع الإعد�
 Feature.Build.Description.InviteFriendLimit,اختر ما يصل إلى {MAX_INVITES} من الأصدقاء، ثم شارك رابط اللعبة.
 Feature.Build.Description.MakeAudienceAvail,انشر تجربتك لتكون متاحة لهذا الجمهور.
 Feature.Build.Description.ManageAppearance,يمكنك إدارة كيفية ظهور لعبتك للآخرين.
+Feature.Build.Description.ManageDeveloperProduct,إدارة منتج المطوّر.
+Feature.Build.Description.NoMonetizationProducts,صِف عنصرًا ترغب في إنشائه لبدء كسب عملات Robux في لعبتك
 Feature.Build.Description.PlayAfterPublish,اختر من يمكنه اللعب بعد نشر هذه التجربة.
 Feature.Build.Description.PlaytestLatest,أنت تختبر اللعب لأحدث إصدار لديك. انشره عندما تكون مستعدًا لمشاركته.
 Feature.Build.Description.PlaytestLocked,يمكنك بدء اختبار اللعب بعد إنشاء لعبتك الأولى.
@@ -1939,7 +1955,13 @@ Feature.Build.Description.RatingAgreement,من خلال النشر، فإنك ت
 Feature.Build.Description.RestoreLatest,سيصبح هذا الإصدار أحدث إصدار منشور لك.
 Feature.Build.Description.RevertToVersion,تأكيد التراجع عن التغيير الأخير والرجوع إلى {VERSION}.
 Feature.Build.Description.ShareLatest,شارك التغييرات التي أُجريت على أحدث إصدار لديك.
+Feature.Build.Description.UpdateDeveloperProduct,تحديث منتج المطوّر {PRODUCT_ID}.
 Feature.Build.Description.VersionChanges,أخبر اللاعبين بما تغير في هذا الإصدار.
+Feature.Build.Error.DeveloperProductDescriptionTooLong,يجب أن يتكون الوصف من 1000 حرفٍ أو أقل.
+Feature.Build.Error.DeveloperProductNameRequired,أدخل اسم المنتج.
+Feature.Build.Error.DeveloperProductNameTooLong,يجب أن يتكون الاسم من 50 حرفًا أو أقل.
+Feature.Build.Error.DeveloperProductPriceInvalid,"ينبغي أن يكون السعر عددًا صحيحًا من 1 إلى 1,000,000,000 من عملات Robux."
+Feature.Build.Error.DeveloperProductTextModerated,تم تغيير نص هذا المنتج من قِبل فريق الإشراف لدى منصّة Roblox. جرّب صياغة مختلفة.
 Feature.Build.Header.AccessSharing,إمكانية الوصول والمشاركة
 Feature.Build.Header.AllVersions,جميع الإصدارات
 Feature.Build.Header.ContentMaturity,حساسية المحتوى
@@ -1958,6 +1980,7 @@ Feature.Build.Label.All,
 Feature.Build.Label.AmountAvailable,الاستخدام المتاح: {AMOUNT}
 Feature.Build.Label.Autosaved,تم الحفظ تلقائيًا
 Feature.Build.Label.Available,المتاح
+Feature.Build.Label.AvailableForPurchase,متاح للشراء
 Feature.Build.Label.BackToBuild,الرجوع إلى البناء
 Feature.Build.Label.Building,جارٍ البناء...
 Feature.Build.Label.CaptureLibrary,مكتبة اللقطات
@@ -1967,9 +1990,15 @@ Feature.Build.Label.Created,تم الإنشاء
 Feature.Build.Label.CreatedDate,{MONTH} {DAY}، {YEAR}
 Feature.Build.Label.CreatorHub,مركز المصمم
 Feature.Build.Label.DateRange,{startDate} – {endDate}
+Feature.Build.Label.DefaultDeveloperProduct,المنتج {PRODUCT_ID}
+Feature.Build.Label.DefaultDeveloperProductName,منتج المطوّر
 Feature.Build.Label.Deleted,تم الحذف
 Feature.Build.Label.DescribeIdea,صِف فكرتك
 Feature.Build.Label.Description,
+Feature.Build.Label.DeveloperProductDescription,الوصف: {DESCRIPTION}
+Feature.Build.Label.DeveloperProductName,"الاسم: ""{NAME}"""
+Feature.Build.Label.DeveloperProductPrice,السعر: {PRICE} من عملات Robux
+Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,تقرير أداء مبسط
 Feature.Build.Label.Error,
@@ -1990,18 +2019,25 @@ Feature.Build.Label.Live,مباشر
 Feature.Build.Label.Loading,
 Feature.Build.Label.MaximizeForGamePlays,زوِّد عدد مرات تشغيل اللعبة إلى أقصى حد
 Feature.Build.Label.Models3D,النماذج ثلاثية الأبعاد
+Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,لا يوجد حدّ
 Feature.Build.Label.NotStarted,لم يتم البدء
+Feature.Build.Label.OffSale,غير معروض للبيع
+Feature.Build.Label.OnSale,معروض للبيع
 Feature.Build.Label.Pending,معلّق
 Feature.Build.Label.PercentUsed,تم استخدام {PERCENT}%
 Feature.Build.Label.PlayTime,وقت اللعب
 Feature.Build.Label.PreviouslyPublished,تم النشر سابقًا
+Feature.Build.Label.Price,السعر
+Feature.Build.Label.PriceUnavailable,--
+Feature.Build.Label.Pricing,التسعير
 Feature.Build.Label.Private,خاص
 Feature.Build.Label.Public,عامّ
 Feature.Build.Label.PubliclyUnavailable,غير متاحة علنًا
 Feature.Build.Label.Published,منشور
 Feature.Build.Label.Purchased,تم الشراء
 Feature.Build.Label.Ready,جاهزة
+Feature.Build.Label.RegionalPricing,التسعير الإقليمي
 Feature.Build.Label.ResetsDaily,تتم إعادة التعيين يوميًا
 Feature.Build.Label.RestoredVersion,تمت استعادة {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
@@ -2177,6 +2213,9 @@ Feature.Build.Notification.Message.Continue,استأنف الدردشة مع م�
 Feature.Build.Notification.Message.Review,استأنف الدردشة مع ميزة Build لمراجعة النتيجة.
 Feature.Build.Notification.Title.Finished,اكتملت ميزة Build
 Feature.Build.Notification.Title.NeedInput,ميزة Build بحاجة إلى إدخالك
+Feature.Build.Placeholder.DescribeProduct,صِف ما تريد بيعه
+Feature.Build.Placeholder.DescribeProductUpdate,صِف تحديثًا
+Feature.Build.Prompt.CreateDeveloperProduct,ساعدني في إنشاء منتج المطوّر، وربطه باللعبة، والتحقق من التغييرات ونشرها، وجعله متاحًا للشراء.
 Feature.Build.Title.AdCampaignActive,الحملة الإعلانية نشطة
 Feature.Build.Title.AdCampaignDuration,حملة إعلانية لمدة {durationDays} من الأيام
 Feature.Build.Title.AddFriendsToPlaytest,أضف الأصدقاء لمساعدتك في اختبار اللعب
@@ -2194,6 +2233,8 @@ Feature.Build.Title.ChangesNotLive,تغييراتك لم تُنشر بعد
 Feature.Build.Title.ChatBuildUnavailable,ميزة Build غير متوفرة.
 Feature.Build.Title.Content,المحتوى
 Feature.Build.Title.DailyRobuxReached,تم الوصول إلى الحد اليومي المسموح به من عملات Robux
+Feature.Build.Title.DeveloperProduct,
+Feature.Build.Title.EditDeveloperProduct,تحرير المنتج
 Feature.Build.Title.ExperienceAudience,جمهور التجربة
 Feature.Build.Title.FreeUsageReached,تم الوصول إلى حد استخدام ميزة Build المجاني
 Feature.Build.Title.FriendsOnlyPlay,يمكن للأصدقاء فقط اللعب
@@ -2201,6 +2242,7 @@ Feature.Build.Title.GameCreationDone,اكتمل إنشاء اللعبة
 Feature.Build.Title.GamePrivate,هذه اللعبة خاصة
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,الحصول على المستخدمين
+Feature.Build.Title.NoMonetizationProducts,ابدأ الكسب في لعبتك
 Feature.Build.Title.NoRobuxForUsage,لم يتبقَ أي عملات Robux لاستخدام ميزة Build
 Feature.Build.Title.Playtesters,مختبرو اللعب
 Feature.Build.Title.PlaytestersOnlyPlay,يمكن لمختبري اللعب فقط تشغيل اللعبة
@@ -2504,7 +2546,7 @@ Feature.Catalog.Label.PrePremiumPrice,(سعر العنصر:
 Feature.Catalog.Label.Premium,Premium
 Feature.Catalog.Label.PremiumDiscount,أنت توفّر {percent}% مع Premium
 Feature.Catalog.Label.PremiumOnly,متاح لمستخدمي Premium فقط
-Feature.Catalog.Label.Price,السعر
+Feature.Catalog.Label.Price,
 Feature.Catalog.Label.PriceColon,السعر:
 Feature.Catalog.Label.PriceFromResale,{itemPrice} من إعادة البيع
 Feature.Catalog.Label.PriceHighToLow,السعر مرتفع إلى منخفض
@@ -2652,7 +2694,7 @@ Feature.Chat.Action.Continue,
 Feature.Chat.Action.Copy,نسخ
 Feature.Chat.Action.Create,
 Feature.Chat.Action.Delete,
-Feature.Chat.Action.Edit,تحرير
+Feature.Chat.Action.Edit,
 Feature.Chat.Action.GroupOSADoNotJoin,عدم الانضمام
 Feature.Chat.Action.GroupOSAJoin,
 Feature.Chat.Action.LearnMore,
@@ -3049,6 +3091,7 @@ Feature.Friends.Label.ConnectionsRecentlyPlayed,<b>{numberOfConnections} من ج
 Feature.Friends.Label.ContactsCaption,لمساعدتك وأصدقائك في العثور على بعضكم على Roblox، سيقوم Roblox بمزامنة جهات اتصالك بانتظام وتخزين المستخدمين الذين تتطابق معهم. يمكنك تغيير هذا الخيار متى ما شئت في إعدادات الحساب.
 Feature.Friends.Label.FewestInteractions,تفاعلات أقلّ
 Feature.Friends.Label.FindFriendsHintBody,اتصل بالأصدقاء الذين تعرفهم بالفعل أو اكتشف أصدقاء جدد.
+Feature.Friends.Label.Followed,تمت المتابعة
 Feature.Friends.Label.Follower,متابع
 Feature.Friends.Label.Followers,المتابعون لي
 Feature.Friends.Label.Following,أتابعهم
@@ -3094,6 +3137,7 @@ Feature.Friends.Label.SearchFriends,
 Feature.Friends.Label.SentFromWithContext,أرسلت من {gameName}
 Feature.Friends.Label.SingularMutualFriend,صديق مشترك
 Feature.Friends.Label.Suggested,مقترح
+Feature.Friends.Label.Unfollowed,تم إلغاء المتابعة
 Feature.Friends.Label.YourLinkedParent,أحد حساب الوالدين المرتبط بحسابك
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,هل تريد أن نوصي بك لمستخدمي Roblox الذين لديهم رقم هاتفك؟
@@ -3351,7 +3395,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,تبقى {time}
 Feature.InExperienceShop.Label.BonusItem,عنصر مكافأة
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
+Feature.InExperienceShop.Label.EndTime,ينتهي خلال {timeRemaining}
 Feature.InExperienceShop.Label.NoDescription,لا يوجد وصف
+Feature.InExperienceShop.Label.OfferEndTime,ينتهي {offer} خلال {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,هذه معاينة لمتجرك في Roblox Studio. لا يرى اللاعبون هذه المعاينة.
 Feature.InExperienceShop.Label.Timer.Day.Plural,{number} من الأيام
 Feature.InExperienceShop.Label.Timer.Day.Singular,يوم واحد
@@ -3574,7 +3620,6 @@ Feature.Profile.Action.AboutThisProfile,حول هذا الملف الشخصي
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
-Feature.Profile.Action.AddNickname,إضافة اسم
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,نسخ رابط الملف الشخصي
 Feature.Profile.Action.EditAppearance,تحرير المظهر
@@ -3587,17 +3632,13 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,مشاركة الملف الشخصي
 Feature.Profile.Action.ShareProfileLink,مشاركة رابط الملف الشخصي
-Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
 Feature.Profile.Action.UserBlocked,المستخدم محظور
 Feature.Profile.Action.ViewFullProfile,عرض الملف الشخصي بأكمله
 Feature.Profile.Action.ViewProfile,
 Feature.Profile.Description.AboutModalCaption,شارك الآخرين المزيد عنك. للحفاظ على سلامتك، لا تشارك أي معلومات شخصية.
-Feature.Profile.Description.EnterNicknameTextbox,أدخل لقبك
 Feature.Profile.Description.InspectAndBuy,اضغط لرؤية إطلالتهم وشرائها.
-Feature.Profile.Description.NicknamePrivacy,فقط {displayName} سيرى هذا.
-Feature.Profile.Description.NicknamePrivacyNoDisplayName,فقط هذا المستخدم سيرى هذا.
 Feature.Profile.Description.QrCodeDescription,اسمح للأشخاص الآخرين بمسح كود الاستجابة السريعة (QR) للتواصل معك على منصّة Roblox. المستخدمون الذين تم التحقُّق من أن أعمارهم 13 عامًا فأكثر والذين يتصلون عبر المسح المباشر لكود الاستجابة السريعة (QR) سيصبحون أصدقاء موثوق بهم.
 Feature.Profile.Description.QrCodeDescription.FriendsRename,اسمح للأشخاص الآخرين بمسح كود الاستجابة السريعة (QR) للتواصل على منصّة Roblox. المستخدمون الذين تم التحقُّق من أن أعمارهم 13 عامًا أو أكثر والذين يتصلون عبر المسح المباشر لكود الاستجابة السريعة (QR) سيصبحون أصدقاء موثوقين.
 Feature.Profile.Description.QrCodeScanning,السماح للآخرين بمسح رمز QR الخاص بك على Roblox باستخدام كاميرتهم لإضافتك بسرعة كصديق!
@@ -3605,11 +3646,8 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,يمكنك التع
 Feature.Profile.Description.RecognizeFriendsByCustomName,التمييز بين أصدقائك بسهولة أكبر عن طريق تحديد اسم مخصص لهم. الأسماء المستوردة من دفتر جهات الاتصال والأسماء المخصصة تراها أنتَ فقط.
 Feature.Profile.Description.SaySomething,اكتب شيئًا عنك (يراه الآخرون)
 Feature.Profile.Description.ScanQR,اسمح للأشخاص الذين تعرفهم بمسح كود QR لإضافتك.
-Feature.Profile.Description.SelectNicknameDropdown,حدد اسمًا
 Feature.Profile.Description.SetCustomName,"تعيين اسم مخصص لـ <font weight=""medium"">{displayName}</font>."
 Feature.Profile.Description.SetCustomNameNoDisplayName,تعيين اسم مخصص.
-Feature.Profile.Description.SetNicknamePrompt,أضف اسمًا لـ {displayName} ليسهل التعرف عليك.
-Feature.Profile.Description.SetNicknamePromptNoDisplayName,أضف اسمًا لهذا المستخدم ليتعرف عليك.
 Feature.Profile.Description.SocialNetworksCaptionEveryone,مرئي حاليًا للجميع.
 Feature.Profile.Description.SocialNetworksCaptionFollowers,أنت مرئيّ حاليًّا لأصدقائك والمستخدمين الذين تتابعهم والمستخدمين الذي يتابعونك.
 Feature.Profile.Description.SocialNetworksCaptionFollowing,مرئي حاليًا للأصدقاء والمستخدمين الذين تتابعهم.
@@ -3630,7 +3668,6 @@ Feature.Profile.Heading.DisplayNameUpdated,تم تحديث اسم العرض
 Feature.Profile.Heading.EditAgedUpDisplayName,تحرير الاسم
 Feature.Profile.Heading.EditDisplayName,تعديل اسم العرض
 Feature.Profile.Heading.InsufficientFunds,رصيد غير كافي
-Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileFrame,إطار الملف الشخصي
 Feature.Profile.Heading.ProfilePictureSaved,تم حفظ صورة الملف الشخصي بنجاح
 Feature.Profile.Heading.ProfileQRCode,مشاركة رمز QR
@@ -3650,7 +3687,6 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"يمكنك تغيير اس�
 Feature.Profile.Label.AgedUpDisplayNameTooShort,لا بد أن يكون اسم العرض 3 أحرف على الأقل.
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,اسم مخصص
-Feature.Profile.Label.CustomNicknameDropdown,تعيين اسم مخصص
 Feature.Profile.Label.CustomizeName,تخصيص الاسم
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,هذا هو الاسم العام الأساسي الذي سيراه المستخدمون الآخرون على Roblox.
@@ -3658,12 +3694,6 @@ Feature.Profile.Label.DisplayNameFailed,لا يمكن حفظ اسم العرض. 
 Feature.Profile.Label.DisplayNameModalCaption,يمكنك تغيير اسم العرض مرة واحدة فقط كل 7 أيام.
 Feature.Profile.Label.DisplayNameTooShort,
 Feature.Profile.Label.EditBackground,
-Feature.Profile.Label.NicknameErrorMessageInvalid,الاسم غير صالح.
-Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,يحتوي الاسم على أحرف غير مدعومة.
-Feature.Profile.Label.NicknameErrorMessageModerated,الاسم غير ملائم على Roblox.
-Feature.Profile.Label.NicknameErrorMessageThrottled,لقد سبق وغيرت اسمك اليوم.
-Feature.Profile.Label.NicknameErrorMessageTooLong,لا يمكن أن يحتوي الاسم على أكثر من 20 حرفًا.
-Feature.Profile.Label.NicknameErrorMessageTooShort,لا بد أن يحتوي الاسم على حرفين على الأقل.
 Feature.Profile.Label.NoBioYet,لم تتم إضافة سيرة ذاتية حتى الآن
 Feature.Profile.Label.NoPreviousName,لا توجد أسماء سابقة
 Feature.Profile.Label.NoSocialLink,لا توجد روابط للتواصل الاجتماعي حتى الآن
@@ -3673,7 +3703,6 @@ Feature.Profile.Label.QRCodeFriendRequest,أرسلت من رمز QR
 Feature.Profile.Label.RecentAgedUpDisplayName,"لقد غيّرت اسم العرض الخاص بك مؤخرًا. يمكنك تغيير اسم العرض مرة واحدة فقط كل 7 أيام.
 "
 Feature.Profile.Label.RecentDisplayName,لقد غيّرت اسم العرض الخاص بك مؤخرًا. يمكنك تغيير اسم العرض مرة واحدة فقط كل 7 أيام.
-Feature.Profile.Label.TimeToChangeNickname,يمكنك تغيير اسمك في {hours} من الساعات.
 Feature.Profile.Label.UnableToJoin,تعذر الانضمام
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b> يلعب الآن <b>{experienceName}</b>
 Feature.Profile.Label.UsernameDescription,هذا الاسم الفريد خاص بك وحدك على Roblox. سيكلفك تغيير اسمك {icon}{price}.
@@ -4761,7 +4790,7 @@ InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,
 InGame.PlayerDropDown.ConfirmUnfriend,اضغط لتأكيد إلغاء الصداقة
-InGame.PlayerDropDown.Decline,رفض
+InGame.PlayerDropDown.Decline,
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} وصل للحد الأقصى للأصدقاء.
 InGame.PlayerDropDown.Report,الإبلاغ عن إساءة
@@ -4814,6 +4843,7 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,المساعدة على تحسين �
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,ساعِد المصمّم في تحسين هذه التجربة
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,لا يمكنك الشراء
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,انضم إلى التجربة لتحصيل عمليات الشراء السابقة قبل شراء المزيد من المنتجات.
+Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,انضم لتحصيل عملية الشراء
 Roblox.ReferralRewards.AdditionalCreatorTerms,شروط المصمّم الإضافية
 Roblox.ReferralRewards.Expires,وقت الانتهاء
 Roblox.ReferralRewards.ReferralProgramTerms,شروط برنامج الإحالة

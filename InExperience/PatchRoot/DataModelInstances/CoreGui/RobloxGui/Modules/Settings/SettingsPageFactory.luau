@@ -1,5 +1,4 @@
 ﻿local guiService = game:GetService("GuiService")
-local httpService = game:GetService("HttpService")
 local userGameSettingsService = UserSettings():GetService("UserGameSettings")
 local corePackagesService = game:GetService("CorePackages")
 local coreGuiService = game:GetService("CoreGui")
@@ -18,10 +17,9 @@ local fFlagIEMFocusNavSupportNewButtonsModule = require(script.Parent.Flags.FFla
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local fFlagIEMTabFocusNav = sharedFlagsModule.FFlagIEMTabFocusNav
 local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
-local fFlagIEMFocusNavPeoplePageToButtons = sharedFlagsModule.FFlagIEMFocusNavPeoplePageToButtons
 
 local function Initialize()
-	-- upvalues: fFlagEnableSideSheet (ref), signal (ref), fFlagIEMTabFocusNav (ref), create (ref), utilityModule (ref), var1 (ref), themeModule (ref), fFlagIEMFocusNavPeoplePageToButtons (ref), guiService (ref), httpService (ref), fFlagIEMSettingsGroupsModule (ref), fFlagIEMFocusNavSupportNewButtonsModule (ref), coreGuiService (ref), userGameSettingsService (ref), getFFlagFixIGMTabTransitionsModule (ref), tweenService (ref)
+	-- upvalues: fFlagEnableSideSheet (ref), signal (ref), fFlagIEMTabFocusNav (ref), create (ref), utilityModule (ref), var1 (ref), themeModule (ref), guiService (ref), fFlagIEMSettingsGroupsModule (ref), fFlagIEMFocusNavSupportNewButtonsModule (ref), coreGuiService (ref), userGameSettingsService (ref), getFFlagFixIGMTabTransitionsModule (ref), tweenService (ref)
 	local hidden = {
 		HubRef = nil,
 		LastSelectedObject = nil,
@@ -55,7 +53,7 @@ local function Initialize()
 	
 	if utilityModule:IsSmallTouchScreen() then
 		hidden.TabHeader.Size = UDim2.new(0, 84, 1, 0)
-	elseif var2 then
+	elseif var1 then
 		hidden.TabHeader.Size = UDim2.new(0, 220, 1, 0)
 	end
 	if fFlagIEMTabFocusNav then
@@ -114,7 +112,7 @@ local function Initialize()
 	if utilityModule:IsSmallTouchScreen() then
 		var4.TextSize = themeModule.textSize(18)
 		UITextSizeConstraint.MaxTextSize = themeModule.textSize(18)
-	elseif var2 then
+	elseif var1 then
 		var4.TextSize = themeModule.textSize(48)
 		UITextSizeConstraint.MaxTextSize = themeModule.textSize(48)
 	end
@@ -149,11 +147,11 @@ local function Initialize()
 	var4.Size = UDim2.new(0, 0, 0, 0)
 	var4.AutomaticSize = Enum.AutomaticSize.XY
 	utilityModule:OnResized(hidden.TabHeader, function()
-		-- upvalues: hidden (ref), utilityModule (copy), var3 (ref), var2 (copy), themeModule (copy), var5 (ref), var4 (ref)
+		-- upvalues: hidden (ref), utilityModule (copy), var3 (ref), var1 (copy), themeModule (copy), var5 (ref), var4 (ref)
 		if not hidden.TabHeader then return end
 		if utilityModule:IsSmallTouchScreen() then
 			var3.Size = UDim2.new(0, 34, 0, 28)
-		elseif var2 then
+		elseif var1 then
 			var3.Size = UDim2.new(0, 88, 0, 74)
 		else
 			local iconSize = themeModule.getIconSize(themeModule.IconSize.Medium)
@@ -195,12 +193,7 @@ local function Initialize()
 		SortOrder = Enum.SortOrder.LayoutOrder,
 		Parent = hidden.Page
 	})
-	
-	if fFlagIEMFocusNavPeoplePageToButtons then
-		hidden.Page.SelectionGroup = true
-	else
-		guiService:AddSelectionParent(httpService:GenerateGUID(false), hidden.Page)
-	end
+	hidden.Page.SelectionGroup = true
 	hidden.Displaying = Instance.new("BindableEvent")
 	hidden.Displaying.Name = "Displaying"
 	hidden.Displayed = Instance.new("BindableEvent")
@@ -264,7 +257,7 @@ local function Initialize()
 	end
 	
 	function hidden.Display(_, p2, p3)
-		-- upvalues: hidden (ref), var3 (ref), var4 (ref), userGameSettingsService (copy), getFFlagFixIGMTabTransitionsModule (copy), var6 (write), tweenService (copy)
+		-- upvalues: hidden (ref), var3 (ref), var4 (ref), userGameSettingsService (copy), getFFlagFixIGMTabTransitionsModule (copy), var2 (write), tweenService (copy)
 		hidden.OpenStateChangedCount += 1
 		
 		if hidden.TabHeader then
@@ -278,7 +271,7 @@ local function Initialize()
 		local uDim2 = UDim2.new(0, 0, 0, 0)
 		
 		local var7 = function()
-			-- upvalues: userGameSettingsService (copy), p2 (ref), getFFlagFixIGMTabTransitionsModule (copy), hidden (copy), uDim2 (ref), var7 (copy)
+			-- upvalues: userGameSettingsService (copy), p2 (ref), getFFlagFixIGMTabTransitionsModule (copy), hidden (copy), uDim2 (ref), var2 (copy)
 			if userGameSettingsService.ReducedMotion then
 				p2.InnerCanvasGroupShow.Visible = false
 			end
@@ -289,7 +282,7 @@ local function Initialize()
 				hidden.Page.Position = uDim2
 			end
 			hidden.Page.Visible = true
-			var7 = true
+			var2 = true
 			hidden.Displayed:Fire()
 		end
 		
@@ -306,7 +299,7 @@ local function Initialize()
 				hidden.Page.Position = uDim2
 			end
 			hidden.Page.Visible = true
-			var7 = true
+			var2 = true
 			hidden.Displayed:Fire()
 			
 			return
@@ -319,7 +312,7 @@ local function Initialize()
 			local innerCanvasGroupShow = tweenService:Create(p2.InnerCanvasGroupShow, TweenInfo.new(0.25), { GroupTransparency = 0 })
 			innerCanvasGroupShow:Play()
 			innerCanvasGroupShow.Completed:Connect(function()
-				-- upvalues: hidden (copy), p2 (ref), userGameSettingsService (copy), getFFlagFixIGMTabTransitionsModule (copy), uDim2 (ref), var7 (copy)
+				-- upvalues: hidden (copy), p2 (ref), userGameSettingsService (copy), getFFlagFixIGMTabTransitionsModule (copy), uDim2 (ref), var2 (copy)
 				hidden.Page.Parent = p2
 				
 				if userGameSettingsService.ReducedMotion then
@@ -332,7 +325,7 @@ local function Initialize()
 					hidden.Page.Position = uDim2
 				end
 				hidden.Page.Visible = true
-				var7 = true
+				var2 = true
 				hidden.Displayed:Fire()
 			end)
 			
@@ -342,7 +335,7 @@ local function Initialize()
 	end
 	
 	function hidden.Hide(_, p2, p3, p4, p5, p6, p7)
-		-- upvalues: hidden (ref), var3 (ref), var4 (ref), userGameSettingsService (copy), var6 (write), tweenService (copy)
+		-- upvalues: hidden (ref), var3 (ref), var4 (ref), userGameSettingsService (copy), var2 (write), tweenService (copy)
 		hidden.OpenStateChangedCount += 1
 		
 		if hidden.TabHeader then
@@ -354,18 +347,18 @@ local function Initialize()
 			local uDim2 = UDim2.new(1 * p2, 0, 0, 0)
 			
 			local var7 = function()
-				-- upvalues: userGameSettingsService (copy), p7 (ref), p6 (ref), hidden (copy), p3 (ref), var7 (copy)
+				-- upvalues: userGameSettingsService (copy), p7 (ref), p6 (ref), hidden (copy), p3 (ref), var2 (copy)
 				if userGameSettingsService.ReducedMotion and p7 then
 					p6.InnerCanvasGroupHide.Visible = false
 				end
 				hidden.Page.Visible = false
 				hidden.Page.Position = UDim2.new(hidden.TabPosition - p3, 0, 0, 0)
-				var7 = false
+				var2 = false
 				hidden.Hidden:Fire()
 			end
 			
 			local var8 = function()
-				-- upvalues: p4 (ref), hidden (copy), uDim2 (ref), userGameSettingsService (copy), p7 (ref), p6 (ref), p3 (ref), var7 (copy), tweenService (copy), var7 (ref)
+				-- upvalues: p4 (ref), hidden (copy), uDim2 (ref), userGameSettingsService (copy), p7 (ref), p6 (ref), p3 (ref), var2 (copy), tweenService (copy), var7 (ref)
 				if p4 then
 					hidden.Page.Position = uDim2
 					
@@ -374,7 +367,7 @@ local function Initialize()
 					end
 					hidden.Page.Visible = false
 					hidden.Page.Position = UDim2.new(hidden.TabPosition - p3, 0, 0, 0)
-					var7 = false
+					var2 = false
 					hidden.Hidden:Fire()
 					
 					return
@@ -385,7 +378,7 @@ local function Initialize()
 					local innerCanvasGroupHide = tweenService:Create(p6.InnerCanvasGroupHide, TweenInfo.new(0.25), { GroupTransparency = 1 })
 					innerCanvasGroupHide:Play()
 					innerCanvasGroupHide.Completed:Connect(function()
-						-- upvalues: hidden (copy), p6 (copy), uDim2 (copy), userGameSettingsService (copy), p7 (copy), p3 (copy), var7 (copy)
+						-- upvalues: hidden (copy), p6 (copy), uDim2 (copy), userGameSettingsService (copy), p7 (copy), p3 (copy), var2 (copy)
 						hidden.Page.Parent = p6
 						hidden.Page.Position = uDim2
 						
@@ -394,7 +387,7 @@ local function Initialize()
 						end
 						hidden.Page.Visible = false
 						hidden.Page.Position = UDim2.new(hidden.TabPosition - p3, 0, 0, 0)
-						var7 = false
+						var2 = false
 						hidden.Hidden:Fire()
 					end)
 					
@@ -419,8 +412,8 @@ local function Initialize()
 	end
 	
 	function hidden.GetDisplayed(_)
-		-- upvalues: var6 (write)
-		return var6
+		-- upvalues: var2 (write)
+		return var2
 	end
 	
 	function hidden.GetVisibility(_)

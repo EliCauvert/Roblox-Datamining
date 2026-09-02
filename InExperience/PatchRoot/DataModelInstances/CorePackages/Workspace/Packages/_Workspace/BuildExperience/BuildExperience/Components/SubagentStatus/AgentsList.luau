@@ -3,7 +3,6 @@ local parent = buildExperience.Parent
 local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local loadingIndicatorModule = require(script.Parent.LoadingIndicator)
@@ -17,7 +16,6 @@ local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local useScaledValue = foundationModule.Hooks.useScaledValue
 local useTokens = foundationModule.Hooks.useTokens
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local subagentTaskCategory = creatorAgentChatModule.SubagentTaskCategory
 local list = {
 	subagentTaskCategory.Gameplay,
@@ -59,11 +57,6 @@ local function getDisplayGroups(p1)
 	return t_1
 end
 
-local function _(p2)
-	-- upvalues: localizationStringsModule (ref)
-	return if #p2.tasks == 0 then localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED elseif p2.isComplete then localizationStringsModule.formatSubagentStatusCompletedTasks(#p2.tasks) else localizationStringsModule.SUBAGENT_STATUS_BUILDING
-end
-
 local function AgentTaskList(p2)
 	-- upvalues: reactModule (ref), scrollView (ref), scrollBarVisibility (ref), view (ref), stateLayerAffordance (ref)
 	local var1, var2 = reactModule.useBinding(0)
@@ -100,17 +93,17 @@ local function AgentTaskList(p2)
 end
 
 local function AgentCard(p2)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), t (ref), reactModule (ref), view (ref), text (ref), loadingIndicatorModule (ref), icon (ref), iconSize (ref), AgentTaskList (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), t (ref), reactModule (ref), view (ref), text (ref), loadingIndicatorModule (ref), icon (ref), iconSize (ref), AgentTaskList (ref)
 	local group = p2.group
-	local var1 = if fFlagBuildLocalization then useLocalization({
+	local var1 = useLocalization({
 		building = localizationStringsModule.SUBAGENT_STATUS_BUILDING,
 		completedTasks = {
 			localizationStringsModule.SUBAGENT_STATUS_COMPLETED_TASKS,
 			COUNT = #group.tasks
 		},
 		notStarted = localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED
-	}) else nil
-	local var2 = if fFlagBuildLocalization then if #group.tasks == 0 then var1.notStarted elseif group.isComplete then var1.completedTasks else var1.building elseif #group.tasks == 0 then localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED elseif group.isComplete then localizationStringsModule.formatSubagentStatusCompletedTasks(#group.tasks) else localizationStringsModule.SUBAGENT_STATUS_BUILDING
+	})
+	local var2 = if #group.tasks == 0 then var1.notStarted elseif group.isComplete then var1.completedTasks else var1.building
 	local name = t[group.name]
 	local var3 = reactModule.useCallback(function()
 		-- upvalues: p2 (ref), group (ref)

@@ -1,26 +1,20 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local sharedFlagsModule = require(parent.SharedFlags)
+local creatorAgentChatModule = require(buildExperience.Parent.DataHydration.CreatorAgentChat)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local _ = require(script.Parent.chatTypes)
 local turnDisplayModule = require(script.Parent.turnDisplay)
 local fFlagBuildExperienceSinglePlaytestCardModule = require(buildExperience.Flags.FFlagBuildExperienceSinglePlaytestCard)
 local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
+local fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule = require(buildExperience.Flags.FFlagBuildExperienceShowThinkingAfterAskUserSubmit)
 local fFlagBuildExperienceExcludeUserWaitFromTurnDurationModule = require(buildExperience.Flags.FFlagBuildExperienceExcludeUserWaitFromTurnDuration)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local publishToolUtils = creatorAgentChatModule.PublishToolUtils
 local studioAskUserTool = creatorAgentChatModule.StudioAskUserTool
 local studioProposePlanTool = creatorAgentChatModule.StudioProposePlanTool
 local ASSISTANT_STOPPED_TEXT = turnDisplayModule.ASSISTANT_STOPPED_TEXT
 local countToolCalls = turnDisplayModule.countToolCalls
-local formatStepCount = turnDisplayModule.formatStepCount
-local getActiveActivityLabel = turnDisplayModule.getActiveActivityLabel
 local getAskUserActivityLabel = turnDisplayModule.getAskUserActivityLabel
-local getCompletedActivityLabel = turnDisplayModule.getCompletedActivityLabel
 local getLocalToolWaitSeconds = turnDisplayModule.getLocalToolWaitSeconds
 local getSummaryToolActivity = turnDisplayModule.getSummaryToolActivity
-local getTurnWorkedDurationLabel = turnDisplayModule.getTurnWorkedDurationLabel
 local t = {
 	submittedToolCallIds = {},
 	askUserByToolCallId = {},
@@ -119,57 +113,36 @@ local _ = function(p5, p6, p7, p8)
 end
 
 local function makeCompletedActivitySummary(p5, p6)
-	-- upvalues: fFlagBuildLocalization (ref), getSummaryToolActivity (ref), getCompletedActivityLabel (ref), countToolCalls (ref)
-	if #p5 == 0 then
-		return nil
-	end
-	local var3 = nil
-	local var4 = nil
-	
-	if fFlagBuildLocalization then
-		var4 = getSummaryToolActivity(p5, "completed")
-	else
-		var3 = getCompletedActivityLabel(p5)
-	end
-	return {
+	-- upvalues: getSummaryToolActivity (ref), countToolCalls (ref)
+	return if #p5 == 0 then nil else {
 		kind = "activity_summary",
 		summaryKind = "completed",
 		isLoading = false,
 		key = p6,
-		label = var3,
-		summaryToolActivity = var4,
+		summaryToolActivity = getSummaryToolActivity(p5, "completed"),
 		activityItems = p5,
 		actionCount = countToolCalls(p5)
 	}
 end
 
 local function makeActiveActivitySummary(p5, p6, p7, p8, p9)
-	-- upvalues: fFlagBuildLocalization (ref), getSummaryToolActivity (ref), localizationStringsModule (ref), getActiveActivityLabel (ref)
+	-- upvalues: getSummaryToolActivity (ref), localizationStringsModule (ref)
 	if #p5 == 0 and not p6 then
 		return nil
 	end
-	local var3
 	local _ = nil
-	local var4 = nil
+	local var3 = if p8 == nil then getSummaryToolActivity(p5, "active") else nil
+	local var4 = p8
 	
-	if fFlagBuildLocalization then
-		if p8 == nil then
-			var4 = getSummaryToolActivity(p5, "active")
-		end
-		var3 = p8
-		
-		if var3 == nil and var4 == nil then
-			var3 = localizationStringsModule.CHAT_ASSISTANT_LOADING
-		end
-	else
-		var3 = p8 or getActiveActivityLabel(p5, p6)
+	if var4 == nil and var3 == nil then
+		var4 = localizationStringsModule.CHAT_ASSISTANT_LOADING
 	end
 	return {
 		kind = "activity_summary",
 		summaryKind = "active",
 		key = p7,
-		label = var3,
-		summaryToolActivity = var4,
+		label = var4,
+		summaryToolActivity = var3,
 		activityItems = p5,
 		isLoading = p6,
 		isWaitingForLocalTool = p9
@@ -390,13 +363,15 @@ local function projectLocalToolSegments(p13, p14, p15, p16, p17, p18)
 	return if #var10 > 0 then var10 elseif fFlagBuildExperienceManageDevProductModule then projectDevProductSegments(p13, p14, p15, p18) else {}
 end
 
-local _ = function(p13, p14, p15)
-	-- upvalues: studioAskUserTool (ref), getAskUserActivityLabel (ref)
+local function getActiveAskUserActivityLabel(p13, p14, p15)
+	-- upvalues: fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (ref), localizationStringsModule (ref), studioAskUserTool (ref), getAskUserActivityLabel (ref)
 	local var9 = p15.askUserByToolCallId[p14]
 	local var10 = p13.toolCalls[p14]
 	
 	if var9 == nil or var10 == nil then
 		return nil
+	elseif fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule and p15.submittedToolCallIds[p14] then
+		return localizationStringsModule.CHAT_ASSISTANT_LOADING
 	end
 	local var11 = studioAskUserTool.extractQuestionsFromToolCall(var10)
 	
@@ -409,7 +384,7 @@ local _ = function(p13, p14, p15)
 end
 
 local function projectWorkSegments(p13, p14, p15, p16)
-	-- upvalues: getAnsweredPromptsByToolCallId (ref), getCompletedPlansByToolCallId (ref), makeSegmentKey (ref), makeActiveActivitySummary (ref), makeCompletedActivitySummary (ref), projectLocalToolSegments (ref), studioAskUserTool (ref), getAskUserActivityLabel (ref), contentBlocksToText (ref)
+	-- upvalues: getAnsweredPromptsByToolCallId (ref), getCompletedPlansByToolCallId (ref), makeSegmentKey (ref), makeActiveActivitySummary (ref), makeCompletedActivitySummary (ref), projectLocalToolSegments (ref), getActiveAskUserActivityLabel (ref), contentBlocksToText (ref)
 	local t = {}
 	local t_1 = {}
 	local var9 = nil
@@ -460,7 +435,6 @@ local function projectWorkSegments(p13, p14, p15, p16)
 			local var15 = projectLocalToolSegments(p13, p14, var13.toolCallId, var11, var12, p15)
 			
 			if #var15 > 0 then
-				local v_1
 				flushActivity(false, v)
 				
 				for i_2, v_1 in var15 do
@@ -486,22 +460,7 @@ local function projectWorkSegments(p13, p14, p15, p16)
 					if t_3 ~= nil then
 						table.insert(t_1, t_3)
 					end
-					local toolCallId = var13.toolCallId
-					local var16 = p15.askUserByToolCallId[toolCallId]
-					i_2 = p13.toolCalls[toolCallId]
-					
-					if var16 == nil or i_2 == nil then
-						var9 = nil
-					else
-						v_1 = studioAskUserTool.extractQuestionsFromToolCall(i_2)
-						
-						if v_1 == nil then
-							var9 = nil
-						else
-							local currentIndex = v_1[var16.currentIndex]
-							var9 = getAskUserActivityLabel(#v_1, if currentIndex ~= nil then nil else #currentIndex.options)
-						end
-					end
+					var9 = getActiveAskUserActivityLabel(p13, var13.toolCallId, p15)
 				end
 			elseif var13.kind == "tool_call" then
 				local toolCallId = p13.toolCalls[var13.toolCallId]
@@ -519,20 +478,20 @@ local function projectWorkSegments(p13, p14, p15, p16)
 			end
 		end
 	end
-	local var17 = contentBlocksToText(p13.pendingAgentMessageContent)
+	local var16 = contentBlocksToText(p13.pendingAgentMessageContent)
 	
-	if var17 ~= "" then
+	if var16 ~= "" then
 		flushActivity(false, p13.pendingAgentMessageSequenceIndex)
-		local var18 = if var17 == "" then nil else {
+		local var17 = if var16 == "" then nil else {
 			kind = "agent_message",
 			isError = nil,
 			errorCode = nil,
 			key = if p13.pendingAgentMessageSequenceIndex ~= nil then makeSegmentKey(p14, "pending-agent-message") else makeSegmentKey(p14, "agent-message", p13.pendingAgentMessageSequenceIndex),
-			text = var17
+			text = var16
 		}
 		
-		if var18 ~= nil then
-			table.insert(t, var18)
+		if var17 ~= nil then
+			table.insert(t, var17)
 		end
 	end
 	flushActivity(true, nil)
@@ -541,48 +500,44 @@ local function projectWorkSegments(p13, p14, p15, p16)
 end
 
 local function makeTurnWorkSegment(p17, p18, p19, p20, p21, p22)
-	-- upvalues: countActionsInSegments (ref), fFlagBuildLocalization (ref), localizationStringsModule (ref), getTurnWorkedDurationLabel (ref), makeSegmentKey (ref)
+	-- upvalues: countActionsInSegments (ref), localizationStringsModule (ref), makeSegmentKey (ref)
 	if #p18 == 0 then
 		return nil
 	end
-	local var19 = countActionsInSegments(p18)
+	local var18 = countActionsInSegments(p18)
 	local CHAT_TURN_ACTIVITY = nil
-	local var20 = nil
+	local var19 = nil
 	
-	if fFlagBuildLocalization then
-		if p19 ~= nil and p20 ~= nil and p21 ~= nil then
-			local var21 = p19[p20]
-			local var22 = p19[p21]
-			local var23 = if var21 ~= nil then nil else var21.emittedTime
-			local var24 = if var22 ~= nil then nil else var22.emittedTime
-			local var25 = if var23 == nil or var23 == "" then nil else DateTime.fromIsoDate(var23)
-			local var26 = if var24 == nil or var24 == "" then nil else DateTime.fromIsoDate(var24)
-			
-			if var25 ~= nil and var26 ~= nil then
-				local var27 = (var26.UnixTimestampMillis - var25.UnixTimestampMillis) / 1000
-				var20 = if p22 ~= nil then var27 else math.max(0, var27 - p22)
-			end
+	if p19 ~= nil and p20 ~= nil and p21 ~= nil then
+		local var20 = p19[p20]
+		local var21 = p19[p21]
+		local var22 = if var20 ~= nil then nil else var20.emittedTime
+		local var23 = if var21 ~= nil then nil else var21.emittedTime
+		local var24 = if var22 == nil or var22 == "" then nil else DateTime.fromIsoDate(var22)
+		local var25 = if var23 == nil or var23 == "" then nil else DateTime.fromIsoDate(var23)
+		
+		if var24 ~= nil and var25 ~= nil then
+			local var26 = (var25.UnixTimestampMillis - var24.UnixTimestampMillis) / 1000
+			var19 = if p22 ~= nil then var26 else math.max(0, var26 - p22)
 		end
-		if var20 == nil and var19 == 0 then
-			CHAT_TURN_ACTIVITY = localizationStringsModule.CHAT_TURN_ACTIVITY
-		end
-	else
-		CHAT_TURN_ACTIVITY = getTurnWorkedDurationLabel(p19, p20, p21, var19, p22)
+	end
+	if var19 == nil and var18 == 0 then
+		CHAT_TURN_ACTIVITY = localizationStringsModule.CHAT_TURN_ACTIVITY
 	end
 	return {
 		kind = "turn_work",
 		key = makeSegmentKey(p17, "work"),
 		label = CHAT_TURN_ACTIVITY,
 		segments = p18,
-		actionCount = var19,
-		workedDurationSeconds = var20
+		actionCount = var18,
+		workedDurationSeconds = var19
 	}
 end
 
 local function addTerminalAssistantMessageSegments(a, b, p17)
 	-- upvalues: getAssistantMessageTexts (ref), makeSegmentKey (ref)
 	for i, v in getAssistantMessageTexts(b) do
-		local var19 = if v == "" then nil else {
+		local var18 = if v == "" then nil else {
 			kind = "agent_message",
 			isError = nil,
 			errorCode = nil,
@@ -590,66 +545,55 @@ local function addTerminalAssistantMessageSegments(a, b, p17)
 			text = v
 		}
 		
-		if var19 ~= nil then
-			table.insert(a, var19)
+		if var18 ~= nil then
+			table.insert(a, var18)
 		end
 	end
 end
 
 local function projectTurnSegments(p18, p19, p20)
-	-- upvalues: projectWorkSegments (ref), fFlagBuildExperienceExcludeUserWaitFromTurnDurationModule (ref), getLocalToolWaitSeconds (ref), makeTurnWorkSegment (ref), addTerminalAssistantMessageSegments (ref), fFlagBuildLocalization (ref), localizationStringsModule (ref), turnDisplayModule (ref), makeSegmentKey (ref), ASSISTANT_STOPPED_TEXT (ref), publishToolUtils (ref), fFlagBuildExperienceSinglePlaytestCardModule (ref)
+	-- upvalues: projectWorkSegments (ref), fFlagBuildExperienceExcludeUserWaitFromTurnDurationModule (ref), getLocalToolWaitSeconds (ref), makeTurnWorkSegment (ref), addTerminalAssistantMessageSegments (ref), localizationStringsModule (ref), makeSegmentKey (ref), ASSISTANT_STOPPED_TEXT (ref), publishToolUtils (ref), fFlagBuildExperienceSinglePlaytestCardModule (ref)
 	local turnKey
 	if p19.turnKey == nil then
 		local sessionId = p19.sessionId or (if p18 ~= nil then "pending-session" else p18.sessionId)
-		local var20 = if p19.turnFeedbackIds == nil or typeof(p19.turnFeedbackIds) == "function" then nil else p19.turnFeedbackIds.sequenceId
-		turnKey = if var20 ~= nil then sessionId else `{sessionId}:{var20}`
+		local var19 = if p19.turnFeedbackIds == nil or typeof(p19.turnFeedbackIds) == "function" then nil else p19.turnFeedbackIds.sequenceId
+		turnKey = if var19 ~= nil then sessionId else `{sessionId}:{var19}`
 	else
 		turnKey = p19.turnKey
 	end
 	local t = {}
-	local var21 = makeTurnWorkSegment(turnKey, projectWorkSegments(p18, turnKey, p20, not p18.isDone), p18.eventMetaBySequenceId, p19.startSequenceId, p19.endSequenceId, if fFlagBuildExperienceExcludeUserWaitFromTurnDurationModule then getLocalToolWaitSeconds(p18) else nil)
+	local var20 = makeTurnWorkSegment(turnKey, projectWorkSegments(p18, turnKey, p20, not p18.isDone), p18.eventMetaBySequenceId, p19.startSequenceId, p19.endSequenceId, if fFlagBuildExperienceExcludeUserWaitFromTurnDurationModule then getLocalToolWaitSeconds(p18) else nil)
 	
-	if var21 ~= nil then
-		table.insert(t, var21)
+	if var20 ~= nil then
+		table.insert(t, var20)
 	end
 	addTerminalAssistantMessageSegments(t, p18, turnKey)
 	
 	if p18.status == "failed" or p18.stopReason == "error" then
-		local CHAT_ASSISTANT_RESPONSE_FAILED, errorCode
-		local _ = nil
-		local _ = nil
-		
-		if fFlagBuildLocalization then
-			CHAT_ASSISTANT_RESPONSE_FAILED = localizationStringsModule.CHAT_ASSISTANT_RESPONSE_FAILED
-			errorCode = p18.errorCode
-		else
-			CHAT_ASSISTANT_RESPONSE_FAILED = turnDisplayModule.formatTurnFailureMessage(p18)
-			errorCode = nil
-		end
-		local var22 = CHAT_ASSISTANT_RESPONSE_FAILED
-		local var23 = if var22 == "" then nil else {
+		local CHAT_ASSISTANT_RESPONSE_FAILED = localizationStringsModule.CHAT_ASSISTANT_RESPONSE_FAILED
+		local var21 = if CHAT_ASSISTANT_RESPONSE_FAILED == "" then nil else {
 			kind = "agent_message",
 			isError = true,
 			key = makeSegmentKey(turnKey, "failure"),
-			text = var22,
-			errorCode = errorCode
+			text = CHAT_ASSISTANT_RESPONSE_FAILED,
+			errorCode = p18.errorCode
 		}
 		
-		if var23 ~= nil then
-			table.insert(t, var23)
+		if var21 ~= nil then
+			table.insert(t, var21)
 		end
 	elseif p18.status == "cancelled" or p18.stopReason == "cancelled" then
-		local var24 = ASSISTANT_STOPPED_TEXT
-		local var25 = if var24 == "" then nil else {
+		local var22 = ASSISTANT_STOPPED_TEXT
+		local var23 = if var22 == "" then nil else {
 			kind = "agent_message",
 			isError = nil,
 			errorCode = nil,
 			key = makeSegmentKey(turnKey, "cancelled"),
-			text = var24
+			text = var22
 		}
 		
-		if var25 ~= nil then
-			table.insert(t, var25)
+		if var23 ~= nil then
+			table.insert(t, var23)
 		end
 	end
 	if p18.isDone and publishToolUtils.includesPublishPlaceTool(p18) and (not fFlagBuildExperienceSinglePlaytestCardModule or p19.showPlaytestCta == true) then
@@ -662,41 +606,38 @@ local function projectTurnSegments(p18, p19, p20)
 end
 
 return {
-	formatStepCount = formatStepCount,
 	getFinalAssistantMessageText = getFinalAssistantMessageText,
 	projectActiveTurnSegments = function(p18, p19)
 		-- upvalues: projectTurnSegments (ref), t (ref)
 		return projectTurnSegments(p18, p19 or {}, if p19 and p19.optimisticLocalTools then p19.optimisticLocalTools else t)
 	end,
 	projectLoadingTurnSegments = function(p18)
-		-- upvalues: makeActiveActivitySummary (ref), makeSegmentKey (ref), countActionsInSegments (ref), fFlagBuildLocalization (ref), localizationStringsModule (ref), getTurnWorkedDurationLabel (ref)
+		-- upvalues: makeActiveActivitySummary (ref), makeSegmentKey (ref), countActionsInSegments (ref), localizationStringsModule (ref)
 		local turnKey
 		if p18 == nil then
 			turnKey = "loading"
 		elseif p18.turnKey == nil then
 			local sessionId = p18.sessionId or "pending-session"
-			local var20 = if p18.turnFeedbackIds == nil or typeof(p18.turnFeedbackIds) == "function" then nil else p18.turnFeedbackIds.sequenceId
-			turnKey = if var20 ~= nil then sessionId else `{sessionId}:{var20}`
+			local var19 = if p18.turnFeedbackIds == nil or typeof(p18.turnFeedbackIds) == "function" then nil else p18.turnFeedbackIds.sequenceId
+			turnKey = if var19 ~= nil then sessionId else `{sessionId}:{var19}`
 		else
 			turnKey = p18.turnKey
 		end
 		local t_1
-		local var21 = makeActiveActivitySummary({}, true, makeSegmentKey(turnKey, "activity-trailing"), nil)
+		local var20 = makeActiveActivitySummary({}, true, makeSegmentKey(turnKey, "activity-trailing"), nil)
 		local t = {}
 		
-		if var21 ~= nil then
-			table.insert(t, var21)
+		if var20 ~= nil then
+			table.insert(t, var20)
 		end
 		if #t == 0 then
 			t_1 = nil
 		else
-			local var22 = countActionsInSegments(t)
+			local var21 = countActionsInSegments(t)
 			local CHAT_TURN_ACTIVITY = nil
-			local var23 = nil
+			local var22 = nil
 			
-			if not fFlagBuildLocalization then
-				CHAT_TURN_ACTIVITY = getTurnWorkedDurationLabel(nil, nil, nil, var22, nil)
-			elseif var23 == nil and var22 == 0 then
+			if var22 == nil and var21 == 0 then
 				CHAT_TURN_ACTIVITY = localizationStringsModule.CHAT_TURN_ACTIVITY
 			end
 			t_1 = {
@@ -704,8 +645,8 @@ return {
 				key = makeSegmentKey(turnKey, "work"),
 				label = CHAT_TURN_ACTIVITY,
 				segments = t,
-				actionCount = var22,
-				workedDurationSeconds = var23
+				actionCount = var21,
+				workedDurationSeconds = var22
 			}
 		end
 		return if t_1 == nil then {} else { t_1 }
@@ -717,8 +658,8 @@ return {
 			turnKey = "setup-error"
 		elseif p18.turnKey == nil then
 			local sessionId = p18.sessionId or "pending-session"
-			local var20 = if p18.turnFeedbackIds == nil or typeof(p18.turnFeedbackIds) == "function" then nil else p18.turnFeedbackIds.sequenceId
-			turnKey = if var20 ~= nil then sessionId else `{sessionId}:{var20}`
+			local var19 = if p18.turnFeedbackIds == nil or typeof(p18.turnFeedbackIds) == "function" then nil else p18.turnFeedbackIds.sequenceId
+			turnKey = if var19 ~= nil then sessionId else `{sessionId}:{var19}`
 		else
 			turnKey = p18.turnKey
 		end

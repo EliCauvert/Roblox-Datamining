@@ -104,6 +104,10 @@ return reactModule.memo(function(p1)
 					acknowledgeable = p1.acknowledgeable,
 					abuseVector = p1.abuseVectorForAnalytics
 				})
+				
+				if p1.onAcknowledgementSuccess then
+					p1.onAcknowledgementSuccess()
+				end
 			end):catch(function(p2)
 				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var10 (copy), var9 (copy)
 				interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissFailed, {
@@ -120,7 +124,8 @@ return reactModule.memo(function(p1)
 		end
 	end, {
 		p1.acknowledgeable, var2, p1.interventionTypeForAnalytics, var10,
-		var9.current, p1.eventId, p1.abuseVectorForAnalytics
+		var9.current, p1.eventId, p1.abuseVectorForAnalytics,
+		p1.onAcknowledgementSuccess
 	})
 	local var17 = useCallback(function()
 		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var10 (ref), var9 (ref), fFlagUniversalFeatureRestrictionReceivers (copy), var16 (ref), var2 (ref), postDismissInterventionModule (copy)
@@ -148,6 +153,10 @@ return reactModule.memo(function(p1)
 					acknowledgeable = p1.acknowledgeable,
 					abuseVector = p1.abuseVectorForAnalytics
 				})
+				
+				if p1.onAcknowledgementSuccess then
+					p1.onAcknowledgementSuccess()
+				end
 			end):catch(function(p2)
 				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var10 (copy), var9 (copy)
 				interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissFailed, {
@@ -165,7 +174,8 @@ return reactModule.memo(function(p1)
 		p1.onDismiss()
 	end, {
 		p1.onDismiss, p1.interventionTypeForAnalytics, var10, var9.current,
-		p1.eventId, p1.abuseVectorForAnalytics, p1.acknowledgeable, var2, var16
+		p1.eventId, p1.abuseVectorForAnalytics, p1.acknowledgeable, var2, var16,
+		p1.onAcknowledgementSuccess
 	})
 	local var18 = useCallback(function()
 		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var10 (ref), var9 (ref), fFlagUniversalFeatureRestrictionReceivers (copy), var16 (ref), notificationModalsManagerModule (copy), accept (copy), var11 (ref), var1 (ref), VRService (copy), var12 (ref), default (ref), var13 (ref), var14 (ref)

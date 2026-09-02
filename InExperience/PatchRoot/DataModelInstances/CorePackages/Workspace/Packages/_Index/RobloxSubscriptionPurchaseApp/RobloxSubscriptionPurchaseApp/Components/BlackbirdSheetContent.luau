@@ -29,7 +29,6 @@ local robloxSubscriptionUpsellTelemetryModule = require(robloxSubscriptionPurcha
 local promptStateModule = require(robloxSubscriptionPurchaseApp.Enums.PromptState)
 local signalsReactModule = require(parent.SignalsReact)
 local fFlagSupportFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagSupportFreeTrial)
-local fFlagSupportFreeTrialPriceRowModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagSupportFreeTrialPriceRow)
 local fFlagRobloxPlusFAEFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusFAEFreeTrial)
 local t = {
 	[promptStateModule.SubscriptionPurchaseInProgress] = true,
@@ -37,7 +36,7 @@ local t = {
 }
 
 return function()
-	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), signalsReactModule (ref), useLocalization (ref), isRobloxSubscriptionProductFreeTrialModule (ref), reactModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), promptStateModule (ref), finalizeRobloxSubscriptionUpsellFlowModule (ref), completeRobloxSubscriptionUpsellFlowModule (ref), performRobloxSubscriptionPurchaseModule (ref), t (ref), sheet (ref), view (ref), text (ref), getIconRichText (ref), iconName (ref), handleBackButtonActionModule (ref), robloxSubscriptionPriceRowModule (ref), fFlagSupportFreeTrialPriceRowModule (ref), robloxSubscriptionFeatureListModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), legalDisclosureModule (ref), fFlagSupportFreeTrialModule (ref)
+	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), signalsReactModule (ref), useLocalization (ref), isRobloxSubscriptionProductFreeTrialModule (ref), reactModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), promptStateModule (ref), finalizeRobloxSubscriptionUpsellFlowModule (ref), completeRobloxSubscriptionUpsellFlowModule (ref), performRobloxSubscriptionPurchaseModule (ref), t (ref), sheet (ref), view (ref), text (ref), getIconRichText (ref), iconName (ref), handleBackButtonActionModule (ref), robloxSubscriptionPriceRowModule (ref), robloxSubscriptionFeatureListModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), legalDisclosureModule (ref), fFlagSupportFreeTrialModule (ref)
 	local createElement_2
 	local var1 = robloxSubscriptionStoreModule.get()
 	local var2 = if fFlagRobloxPlusFAEFreeTrialModule then var1.getOnCtaOverride() else nil
@@ -117,10 +116,7 @@ return function()
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
 					Text = var7
-				}) else reactModule.createElement(robloxSubscriptionPriceRowModule, {
-					layoutOrder = 1,
-					isFreeTrial = if fFlagSupportFreeTrialPriceRowModule then var6 else nil
-				}),
+				}) else reactModule.createElement(robloxSubscriptionPriceRowModule, { layoutOrder = 1, isFreeTrial = var6 }),
 				FeatureList = reactModule.createElement(robloxSubscriptionFeatureListModule, { layoutOrder = 2, noPurchaseMethodRequired = var10 })
 			})
 		})

@@ -16,13 +16,12 @@ local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedF
 local fFlagInExperienceReportClosingBugfix = sharedFlagsModule.FFlagInExperienceReportClosingBugfix
 local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
 local fFlagHideShortcutsOnReportDropdownModule = require(robloxGui.Modules.AbuseReportMenu.Flags.FFlagHideShortcutsOnReportDropdown)
-local fFlagAbuseReportMenuV2 = sharedFlagsModule.FFlagAbuseReportMenuV2
 local fFlagReportFocusNavIEMButtonsModule = require(robloxGui.Modules.AbuseReportMenu.Flags.FFlagReportFocusNavIEMButtons)
 local fFlagStandardizeSafetyIcon = sharedFlagsModule.FFlagStandardizeSafetyIcon
-local fFlagAbuseReportMenuV2_1 = game:DefineFastFlag("SwitchOverToAbuseReportMenuV2", false) and fFlagAbuseReportMenuV2
+local switchOverToAbuseReportMenuV2 = game:DefineFastFlag("SwitchOverToAbuseReportMenuV2", false)
 local _ = nil
 local var3 = (function()
-	-- upvalues: robloxGui (ref), utilityModule (ref), uiblox (ref), fFlagStandardizeSafetyIcon (ref), iconName (ref), iconVariant (ref), builderIconsModule (ref), fFlagEnableSideSheet (ref), fFlagAbuseReportMenuV2 (ref), fFlagAbuseReportMenuV2_1 (ref), roactModule (ref), abuseReportMenuV2 (ref), abuseReportMenu (ref), fFlagInExperienceReportClosingBugfix (ref), var1 (ref), var2 (ref), fFlagHideShortcutsOnReportDropdownModule (ref), fFlagReportFocusNavIEMButtonsModule (ref)
+	-- upvalues: robloxGui (ref), utilityModule (ref), uiblox (ref), fFlagStandardizeSafetyIcon (ref), iconName (ref), iconVariant (ref), builderIconsModule (ref), fFlagEnableSideSheet (ref), switchOverToAbuseReportMenuV2 (ref), roactModule (ref), abuseReportMenuV2 (ref), abuseReportMenu (ref), fFlagInExperienceReportClosingBugfix (ref), var1 (ref), var2 (ref), fFlagHideShortcutsOnReportDropdownModule (ref), fFlagReportFocusNavIEMButtonsModule (ref)
 	local reportAbuseMenuNewContainerPage = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	
 	function reportAbuseMenuNewContainerPage._onHiddenCallback() end
@@ -103,8 +102,8 @@ local var3 = (function()
 	reportAbuseMenuNewContainerPage.Page.Name = "ReportAbuseMenuNewContainerPage"
 	reportAbuseMenuNewContainerPage.ShouldShowBottomBar = not fFlagEnableSideSheet
 	reportAbuseMenuNewContainerPage.ShouldShowHubBar = true
-	reportAbuseMenuNewContainerPage.ShouldDisableDefaultScroll = fFlagAbuseReportMenuV2 and fFlagAbuseReportMenuV2_1
-	roactModule.mount(roactModule.createElement(if fFlagAbuseReportMenuV2_1 then abuseReportMenuV2 else abuseReportMenu, {
+	reportAbuseMenuNewContainerPage.ShouldDisableDefaultScroll = switchOverToAbuseReportMenuV2
+	roactModule.mount(roactModule.createElement(if switchOverToAbuseReportMenuV2 then abuseReportMenuV2 else abuseReportMenu, {
 		hideReportTab = function()
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
 			reportAbuseMenuNewContainerPage:HideMenu()
@@ -142,8 +141,8 @@ local var3 = (function()
 			reportAbuseMenuNewContainerPage:showReportSentPage(p1)
 		end,
 		onReportComplete = function(p1)
-			-- upvalues: fFlagInExperienceReportClosingBugfix (copy), var4 (copy), var2 (copy), reportAbuseMenuNewContainerPage (ref)
-			if fFlagInExperienceReportClosingBugfix and var4 then
+			-- upvalues: fFlagInExperienceReportClosingBugfix (copy), var1 (copy), var2 (copy), reportAbuseMenuNewContainerPage (ref)
+			if fFlagInExperienceReportClosingBugfix and var1 then
 				var2:setShortcutBar(nil)
 			end
 			reportAbuseMenuNewContainerPage:showAlert(p1, "Ok", function()
@@ -151,7 +150,7 @@ local var3 = (function()
 				reportAbuseMenuNewContainerPage:HideMenu()
 			end)
 		end,
-		onDropdownMenuOpenChange = if fFlagHideShortcutsOnReportDropdownModule and var4 then function(p1)
+		onDropdownMenuOpenChange = if fFlagHideShortcutsOnReportDropdownModule and var1 then function(p1)
 			-- upvalues: var2 (copy)
 			var2:setHideShortcutBar("InExperienceReportDropdown", p1)
 		end else nil,

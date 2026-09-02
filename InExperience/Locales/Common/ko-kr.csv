@@ -1316,18 +1316,20 @@ Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,스타일 탐색
 Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
-Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,삭제 취소
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,
 Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,
 Feature.Avatar.BackgroundGeneration.Action.Upload,업로드하기
 Feature.Avatar.BackgroundGeneration.Action.View,보기
+Feature.Avatar.BackgroundGeneration.Action.ViewExclusiveBackgrounds,
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Plus로 배경을 만드세요.
-Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,지금 나가면 이 배경이 삭제됩니다.
+Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,배경이 아직 게시되지 않았습니다. 지금 나가면 배경이 삭제됩니다.
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,작품을 사용할 준비가 되었습니다.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"이 배경은 AI로 생성되었습니다. 게시하면 Roblox 커뮤니티 규정을 준수하며 권한이 없는 콘텐츠를 사용하지 않는다고 확인하는 것으로 간주됩니다. 인벤토리에 표시되기 전에 검토를 거치며, 게시된 아이템은 수정할 수 없습니다."
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,이 배경은 AI로 생성되었습니다. 업로드하면 Roblox 커뮤니티 규정을 준수하며 권한이 없는 콘텐츠를 사용하지 않는다고 확인하는 것으로 간주됩니다. 인벤토리에 표시되기 전에 검토를 거칩니다. 업로드된 아이템은 수정할 수 없습니다.
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Plus로 무료 전용 배경을 잠금 해제하세요.
+Feature.Avatar.BackgroundGeneration.Description.ViewExclusiveBackgrounds,무료 Plus 전용 배경을 확인해 보세요.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,아이템이 커뮤니티 규정을 충족하지 않습니다
 Feature.Avatar.BackgroundGeneration.Error.LimitReached,사용량 한도에 도달했습니다. 꾸미기를 계속하려면 나중에 다시 시도하세요.
 Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,사용량 한도에 도달했습니다. 꾸미기를 계속하려면 내일 다시 시도하세요.
@@ -1344,11 +1346,13 @@ Feature.Avatar.BackgroundGeneration.PromptPlaceholder,배경을 설명해 주세
 Feature.Avatar.BackgroundGeneration.Status.Generating,배경 생성 중...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,배경 준비 중...
 Feature.Avatar.BackgroundGeneration.Title,배경 만들기
-Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,이 배경을 삭제하시겠어요?
+Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,게시하지 않고 나갈까요?
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,인벤토리에 게시
 Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
 Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,인벤토리에 업로드
+Feature.Avatar.BackgroundGeneration.Tooltip.CreateBackground,Plus로 무료로 배경을 만드세요!
+Feature.Avatar.BackgroundGeneration.Tooltip.PublishBackground,
 Feature.Avatar.Backgrounds.Title,배경
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,이 신체 스타일은 조정할 수 없습니다.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,원래 신체의 색상으로 설정
@@ -1836,6 +1840,7 @@ Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,플레이테스터 추가
 Feature.Build.Action.AddPlaytesters,
 Feature.Build.Action.AddToPlaytest,플레이테스트에 추가
+Feature.Build.Action.Approve,승인
 Feature.Build.Action.Archive,보관
 Feature.Build.Action.ArchiveGame,게임 보관
 Feature.Build.Action.Build,
@@ -1844,10 +1849,13 @@ Feature.Build.Action.BuyRobux,Robux 구매하기
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,텍스트 복사
 Feature.Build.Action.Create,
+Feature.Build.Action.CreateDeveloperProduct,
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,다시 묻지 않음
 Feature.Build.Action.DontShowAgain,
+Feature.Build.Action.EarnRobux,Robux 획득
+Feature.Build.Action.Edit,편집
 Feature.Build.Action.HideAutosaved,자동 저장된 버전 숨기기
 Feature.Build.Action.ManageLimit,한도 관리
 Feature.Build.Action.Next,
@@ -1860,9 +1868,12 @@ Feature.Build.Action.Playtest,플레이테스트
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,최신 게시
+Feature.Build.Action.Reject,거절
 Feature.Build.Action.Restore,복원
 Feature.Build.Action.Resume,다시 시작
+Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,
+Feature.Build.Action.Save,
 Feature.Build.Action.SetDailyLimit,일일 한도 설정
 Feature.Build.Action.SetLimit,한도 설정
 Feature.Build.Action.Settings,
@@ -1926,6 +1937,7 @@ Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,방문 수
 Feature.Build.Content.NewGame,새 게임
+Feature.Build.Description.ActivateDeveloperProduct,개발자 상품 {PRODUCT_ID}을(를) 판매하세요.
 Feature.Build.Description.AdCampaignModerationReview,모든 광고 캠페인은 Roblox 규정 준수 팀에서 검토합니다. 이 절차에는 최대 24시간이 소요될 수 있습니다.
 Feature.Build.Description.AdCampaignSheetRunDates,{startDate}~{endDate} 실행
 Feature.Build.Description.AdvertisingAgreement,계속 진행하면 {advertisingTermsStart}Roblox 광고 약관{advertisingTermsEnd} 및 {advertisingStandardsStart}광고 규정{advertisingStandardsEnd}에 동의하는 것으로 간주됩니다.
@@ -1938,6 +1950,8 @@ Feature.Build.Description.BuyRobuxToCreate,"계속 제작하려면 Robux를 더 
 Feature.Build.Description.BuyUsageOrWait,"Robux로 Build 사용량을 더 구매하거나, 일일 한도가 초기화될 때까지 기다리세요."
 Feature.Build.Description.CampaignRunDates,캠페인은 {startDate}~{endDate} 에 실행됩니다.
 Feature.Build.Description.ChoosePlaytesters,플레이테스트를 도와줄 친구를 선택하세요.
+Feature.Build.Description.CreateDeveloperProduct,"{PRICE} Robux로 ""{NAME}""을(를) 만듭니다(판매 중단)."
+Feature.Build.Description.DeactivateDeveloperProduct,개발자 상품 {PRODUCT_ID}을(를) 판매 중단합니다.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"Robux를 획득한 경우, 해당 Robux가 광고 캠페인 비용에 우선 적용됩니다."
 Feature.Build.Description.EnableBuildNotifs,Build에서 보내는 최신 소식을 받으려면 기기 설정에서 알림을 켜세요.
 Feature.Build.Description.FriendsLinkOnly,친구만 이 링크에 액세스할 수 있습니다. 더 많은 사람이 플레이하기를 원하시면 게임의 대상 설정을 변경하세요.
@@ -1947,6 +1961,8 @@ Feature.Build.Description.HubSettings,크리에이터 허브에서 모든 설정
 Feature.Build.Description.InviteFriendLimit,친구를 최대 {MAX_INVITES}명 선택한 후 게임 링크를 공유하세요.
 Feature.Build.Description.MakeAudienceAvail,이 대상에게 체험을 제공하려면 게시하세요.
 Feature.Build.Description.ManageAppearance,게임이 다른 사람에게 표시되는 방식을 관리하세요.
+Feature.Build.Description.ManageDeveloperProduct,개발자 상품을 관리합니다.
+Feature.Build.Description.NoMonetizationProducts,게임 내에서 Robux를 획득하기 위해 만들고자 하는 아이템에 대해 설명해 주세요
 Feature.Build.Description.PlayAfterPublish,이 체험을 게시한 후 플레이할 수 있는 사람을 선택하세요.
 Feature.Build.Description.PlaytestLatest,최신 버전을 플레이테스트하고 있습니다. 공유할 준비가 되면 게시하세요.
 Feature.Build.Description.PlaytestLocked,첫 게임을 만든 후 플레이테스트를 시작할 수 있습니다.
@@ -1958,7 +1974,13 @@ Feature.Build.Description.RatingAgreement,게시하면 이 콘텐츠 등급이 �
 Feature.Build.Description.RestoreLatest,이 버전이 최신 게시 버전이 됩니다.
 Feature.Build.Description.RevertToVersion,확인을 눌러 최신 변경 사항을 복구하고 {VERSION} 버전으로 돌아가세요.
 Feature.Build.Description.ShareLatest,최신 버전에서 변경된 사항을 공유하세요.
+Feature.Build.Description.UpdateDeveloperProduct,개발자 상품 {PRODUCT_ID}을(를) 업데이트하세요.
 Feature.Build.Description.VersionChanges,이 버전에서 변경된 사항을 플레이어에게 알려주세요.
+Feature.Build.Error.DeveloperProductDescriptionTooLong,"설명은 1,000자 이하여야 합니다."
+Feature.Build.Error.DeveloperProductNameRequired,상품 이름을 입력하세요.
+Feature.Build.Error.DeveloperProductNameTooLong,이름은 50자 이하여야 합니다.
+Feature.Build.Error.DeveloperProductPriceInvalid,"가격은 1~1,000,000,000 Robux 사이의 정수여야 합니다."
+Feature.Build.Error.DeveloperProductTextModerated,Roblox 규정 준수 팀이 이 제품의 텍스트를 변경했습니다. 다른 표현을 사용해 보세요.
 Feature.Build.Header.AccessSharing,액세스 및 공유
 Feature.Build.Header.AllVersions,모든 버전
 Feature.Build.Header.ContentMaturity,콘텐츠 수위
@@ -1977,6 +1999,7 @@ Feature.Build.Label.All,
 Feature.Build.Label.AmountAvailable,{AMOUNT} 이용 가능
 Feature.Build.Label.Autosaved,자동 저장됨
 Feature.Build.Label.Available,이용 가능
+Feature.Build.Label.AvailableForPurchase,구매 가능
 Feature.Build.Label.BackToBuild,빌드로 돌아가기
 Feature.Build.Label.Building,제작 중...
 Feature.Build.Label.CaptureLibrary,캡처 라이브러리
@@ -1986,9 +2009,15 @@ Feature.Build.Label.Created,제작 정보
 Feature.Build.Label.CreatedDate,{YEAR}년 {MONTH}월 {DAY}일
 Feature.Build.Label.CreatorHub,크리에이터 허브
 Feature.Build.Label.DateRange,{startDate}~{endDate}
+Feature.Build.Label.DefaultDeveloperProduct,상품 {PRODUCT_ID}
+Feature.Build.Label.DefaultDeveloperProductName,개발자 상품
 Feature.Build.Label.Deleted,삭제됨
 Feature.Build.Label.DescribeIdea,아이디어 설명
 Feature.Build.Label.Description,
+Feature.Build.Label.DeveloperProductDescription,설명: {DESCRIPTION}
+Feature.Build.Label.DeveloperProductName,"이름: ""{NAME}"""
+Feature.Build.Label.DeveloperProductPrice,가격: {PRICE} Robux
+Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,간편한 성과 보고서
 Feature.Build.Label.Error,
@@ -2009,18 +2038,25 @@ Feature.Build.Label.Live,라이브
 Feature.Build.Label.Loading,
 Feature.Build.Label.MaximizeForGamePlays,게임 플레이 횟수 극대화
 Feature.Build.Label.Models3D,3D 모델
+Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,한도 없음
 Feature.Build.Label.NotStarted,시작 전
+Feature.Build.Label.OffSale,판매 중단
+Feature.Build.Label.OnSale,판매 중
 Feature.Build.Label.Pending,보류 중
 Feature.Build.Label.PercentUsed,{PERCENT}% 사용됨
 Feature.Build.Label.PlayTime,플레이 시간
 Feature.Build.Label.PreviouslyPublished,이전에 게시됨
+Feature.Build.Label.Price,가격
+Feature.Build.Label.PriceUnavailable,--
+Feature.Build.Label.Pricing,가격 책정
 Feature.Build.Label.Private,비공개
 Feature.Build.Label.Public,공개
 Feature.Build.Label.PubliclyUnavailable,공개적으로 이용 불가
 Feature.Build.Label.Published,게시됨
 Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,준비
+Feature.Build.Label.RegionalPricing,지역별 가격
 Feature.Build.Label.ResetsDaily,매일 재설정
 Feature.Build.Label.RestoredVersion,{VERSION} 복원됨
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
@@ -2196,6 +2232,9 @@ Feature.Build.Notification.Message.Continue,계속하려면 빌드 채팅을 다
 Feature.Build.Notification.Message.Review,결과를 검토하려면 빌드 채팅을 다시 시작하세요.
 Feature.Build.Notification.Title.Finished,빌드 완료
 Feature.Build.Notification.Title.NeedInput,빌드에 대한 의견 필요
+Feature.Build.Placeholder.DescribeProduct,판매하고자 하는 제품에 대해 설명해 주세요
+Feature.Build.Placeholder.DescribeProductUpdate,업데이트 설명
+Feature.Build.Prompt.CreateDeveloperProduct,"개발자 상품을 만들고, 게임에 연결하고, 변경 사항을 확인 및 게시하고, 구매할 수 있도록 도와주세요."
 Feature.Build.Title.AdCampaignActive,광고 캠페인이 활성화되었습니다
 Feature.Build.Title.AdCampaignDuration,{durationDays}일 광고 캠페인
 Feature.Build.Title.AddFriendsToPlaytest,플레이테스트를 도와줄 친구 추가
@@ -2213,6 +2252,8 @@ Feature.Build.Title.ChangesNotLive,변경 사항이 아직 라이브 상태가 �
 Feature.Build.Title.ChatBuildUnavailable,Build를 이용할 수 없습니다.
 Feature.Build.Title.Content,콘텐츠
 Feature.Build.Title.DailyRobuxReached,일일 Robux 한도에 도달함
+Feature.Build.Title.DeveloperProduct,
+Feature.Build.Title.EditDeveloperProduct,상품 편집
 Feature.Build.Title.ExperienceAudience,체험 오디언스
 Feature.Build.Title.FreeUsageReached,무료 Build 사용량 한도에 도달함
 Feature.Build.Title.FriendsOnlyPlay,친구만 플레이할 수 있습니다
@@ -2220,6 +2261,7 @@ Feature.Build.Title.GameCreationDone,게임 제작 완료
 Feature.Build.Title.GamePrivate,비공개 게임입니다
 Feature.Build.Title.GenericError,오류 발생
 Feature.Build.Title.GetUsers,사용자 가져오기
+Feature.Build.Title.NoMonetizationProducts,게임 내에서 수익을 올리세요
 Feature.Build.Title.NoRobuxForUsage,Build 사용량을 위한 Robux가 남아 있지 않음
 Feature.Build.Title.Playtesters,플레이테스터
 Feature.Build.Title.PlaytestersOnlyPlay,플레이테스터만 플레이할 수 있습니다
@@ -2373,7 +2415,7 @@ Feature.Catalog.Heading.SetPrice,정가
 Feature.Catalog.Heading.ShowBodyParts,신체 파트 표시
 Feature.Catalog.Heading.ShowHeadType,머리 유형 표시
 Feature.Catalog.Heading.ShowShoes,신발 표시
-Feature.Catalog.Heading.TakeOffSale,판매 중단
+Feature.Catalog.Heading.TakeOffSale,
 Feature.Catalog.HeroWidget.BundleTitle,Korblox Pactbreaker가 등장합니다
 Feature.Catalog.HeroWidget.CapsuleDescription,
 Feature.Catalog.HeroWidget.CapsulePoolDescription,
@@ -2386,7 +2428,7 @@ Feature.Catalog.Label.AlreadyOwned,이미 보유 중인 아이템입니다
 Feature.Catalog.Label.Animation,
 Feature.Catalog.Label.Attributes,특성
 Feature.Catalog.Label.Attribution,제작 장소:
-Feature.Catalog.Label.AvailableForSale,판매 중
+Feature.Catalog.Label.AvailableForSale,
 Feature.Catalog.Label.AvailableToPremiumMembers,Premium을 이용 중이므로 구매 가능합니다
 Feature.Catalog.Label.Avatar,
 Feature.Catalog.Label.AvatarEmoteSelection,
@@ -2524,7 +2566,7 @@ Feature.Catalog.Label.PrePremiumPrice,(아이템 가격:
 Feature.Catalog.Label.Premium,
 Feature.Catalog.Label.PremiumDiscount,Premium을 이용 중이므로 {percent}% 할인이 적용됩니다
 Feature.Catalog.Label.PremiumOnly,Premium 사용자만 이용 가능합니다
-Feature.Catalog.Label.Price,가격
+Feature.Catalog.Label.Price,
 Feature.Catalog.Label.PriceColon,가격:
 Feature.Catalog.Label.PriceFromResale,재판매 가격 {itemPrice}
 Feature.Catalog.Label.PriceHighToLow,높은 가격순
@@ -2672,7 +2714,7 @@ Feature.Chat.Action.Continue,
 Feature.Chat.Action.Copy,복사
 Feature.Chat.Action.Create,
 Feature.Chat.Action.Delete,
-Feature.Chat.Action.Edit,편집
+Feature.Chat.Action.Edit,
 Feature.Chat.Action.GroupOSADoNotJoin,거절하기
 Feature.Chat.Action.GroupOSAJoin,참가하기
 Feature.Chat.Action.LearnMore,자세한 정보
@@ -3069,6 +3111,7 @@ Feature.Friends.Label.ConnectionsRecentlyPlayed,<b>{numberOfConnections}명의 �
 Feature.Friends.Label.ContactsCaption,"Roblox는 이곳에서 나와 친구가 서로를 찾을 수 있도록 돕기 위해, 연락처를 정기적으로 동기화하고 일치하는 사용자를 저장합니다. 본 설정은 계정 설정 메뉴에서 언제든지 변경할 수 있습니다."
 Feature.Friends.Label.FewestInteractions,거의 대화하지 않는 친구
 Feature.Friends.Label.FindFriendsHintBody,이미 알고 있는 친구와 소통하거나 새로운 친구를 찾으세요.
+Feature.Friends.Label.Followed,팔로우함
 Feature.Friends.Label.Follower,팔로워
 Feature.Friends.Label.Followers,
 Feature.Friends.Label.Following,팔로잉
@@ -3114,6 +3157,7 @@ Feature.Friends.Label.SearchFriends,
 Feature.Friends.Label.SentFromWithContext,전송 위치: {gameName}
 Feature.Friends.Label.SingularMutualFriend,
 Feature.Friends.Label.Suggested,추천
+Feature.Friends.Label.Unfollowed,언팔로우됨
 Feature.Friends.Label.YourLinkedParent,연결된 보호자
 Feature.Friends.LinkText.LearnMore,자세히 알아보기
 Feature.Friends.Message.DiscoverableSettings,내 휴대폰 번호를 알고 있는 Roblox 사용자에게 나를 추천할까요?
@@ -3372,7 +3416,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} 남음
 Feature.InExperienceShop.Label.BonusItem,보너스 아이템
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
+Feature.InExperienceShop.Label.EndTime,{timeRemaining} 후 종료
 Feature.InExperienceShop.Label.NoDescription,설명 없음
+Feature.InExperienceShop.Label.OfferEndTime,{offer} {timeRemaining} 후 종료
 Feature.InExperienceShop.Label.PreviewBanner,Roblox Studio 내 회원님의 상점 미리 보기입니다. 플레이어에게는 이 미리 보기가 표시되지 않습니다.
 Feature.InExperienceShop.Label.Timer.Day.Plural,{number}일
 Feature.InExperienceShop.Label.Timer.Day.Singular,
@@ -3595,7 +3641,6 @@ Feature.Profile.Action.AboutThisProfile,프로필 정보
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
-Feature.Profile.Action.AddNickname,이름 추가
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,프로필 링크 복사
 Feature.Profile.Action.EditAppearance,모습 편집
@@ -3608,17 +3653,13 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,프로필 공유
 Feature.Profile.Action.ShareProfileLink,프로필 링크 공유
-Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
 Feature.Profile.Action.UserBlocked,사용자 차단됨
 Feature.Profile.Action.ViewFullProfile,전체 프로필 보기
 Feature.Profile.Action.ViewProfile,
 Feature.Profile.Description.AboutModalCaption,다른 사람들에게 자신을 소개하세요. 보안을 위해 개인정보는 공유하지 마세요.
-Feature.Profile.Description.EnterNicknameTextbox,닉네임을 입력하세요
 Feature.Profile.Description.InspectAndBuy,클릭하여 해당 친구의 룩을 보고 쇼핑하세요.
-Feature.Profile.Description.NicknamePrivacy,{displayName} 님만 볼 수 있습니다.
-Feature.Profile.Description.NicknamePrivacyNoDisplayName,이 사용자만 볼 수 있습니다.
 Feature.Profile.Description.QrCodeDescription,다른 사람들이 Roblox에서 내 QR 코드를 스캔하여 나와 연결하도록 허용하세요. 실시간 QR 스캔을 통해 연결되고 연령 인증을 완료한 만 13세 이상 사용자는 신뢰할 수 있는 친구로 설정됩니다.
 Feature.Profile.Description.QrCodeDescription.FriendsRename,
 Feature.Profile.Description.QrCodeScanning,"사람들이 QR 스캐너나 기기의 카메라로 내 Roblox QR 코드를 스캔하면, 바로 나를 친구로 추가할 수 있어요!"
@@ -3626,11 +3667,8 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,맞춤 이름을 �
 Feature.Profile.Description.RecognizeFriendsByCustomName,
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,아는 사람이 내 QR 코드를 스캔해 나를 추가하도록 합니다.
-Feature.Profile.Description.SelectNicknameDropdown,이름을 선택하세요
 Feature.Profile.Description.SetCustomName,"<font weight=""medium"">{displayName}</font> 님의 맞춤 이름을 만드세요."
 Feature.Profile.Description.SetCustomNameNoDisplayName,맞춤 이름을 설정하세요.
-Feature.Profile.Description.SetNicknamePrompt,{displayName} 님이 나를 알아볼 수 있도록 이름을 추가하세요.
-Feature.Profile.Description.SetNicknamePromptNoDisplayName,이 사용자가 나를 알아볼 수 있도록 이름을 추가하세요.
 Feature.Profile.Description.SocialNetworksCaptionEveryone,현재 모두에게 보입니다.
 Feature.Profile.Description.SocialNetworksCaptionFollowers,"현재 친구, 내가 팔로우하는 사용자, 내 팔로워에게 보입니다."
 Feature.Profile.Description.SocialNetworksCaptionFollowing,현재 친구와 내가 팔로우하는 사용자에게 보입니다.
@@ -3651,7 +3689,6 @@ Feature.Profile.Heading.DisplayNameUpdated,표시 이름이 업데이트되었�
 Feature.Profile.Heading.EditAgedUpDisplayName,이름 편집
 Feature.Profile.Heading.EditDisplayName,표시 이름 편집
 Feature.Profile.Heading.InsufficientFunds,비용 부족
-Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileFrame,프로필 프레임
 Feature.Profile.Heading.ProfilePictureSaved,프로필 사진이 성공적으로 저장되었습니다
 Feature.Profile.Heading.ProfileQRCode,
@@ -3671,7 +3708,6 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"이름은 7일에 한 번�
 Feature.Profile.Label.AgedUpDisplayNameTooShort,이름의 길이는 최소 3자 이상이어야 합니다.
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,맞춤 이름
-Feature.Profile.Label.CustomNicknameDropdown,맞춤 이름 설정
 Feature.Profile.Label.CustomizeName,맞춤 이름 설정하기
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,Roblox에서 다른 사용자에게 표시되는 기본 공개 이름입니다.
@@ -3679,12 +3715,6 @@ Feature.Profile.Label.DisplayNameFailed,표시 이름을 저장할 수 없습니
 Feature.Profile.Label.DisplayNameModalCaption,표시 이름은 7일에 한 번만 변경할 수 있습니다.
 Feature.Profile.Label.DisplayNameTooShort,표시 이름의 길이는 최소 3자 이상이어야 합니다.
 Feature.Profile.Label.EditBackground,
-Feature.Profile.Label.NicknameErrorMessageInvalid,유효하지 않은 이름입니다.
-Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,이름에 지원되지 않는 문자가 포함되어 있습니다.
-Feature.Profile.Label.NicknameErrorMessageModerated,Roblox에서 사용하기에 적합하지 않은 이름입니다.
-Feature.Profile.Label.NicknameErrorMessageThrottled,오늘 이미 이름을 변경했습니다.
-Feature.Profile.Label.NicknameErrorMessageTooLong,이름의 길이는 최대 20자 이하여야 합니다.
-Feature.Profile.Label.NicknameErrorMessageTooShort,이름의 길이는 최소 2자 이상이어야 합니다.
 Feature.Profile.Label.NoBioYet,아직 소개가 없습니다
 Feature.Profile.Label.NoPreviousName,이전 이름 없음
 Feature.Profile.Label.NoSocialLink,아직 소셜 링크 없음
@@ -3694,7 +3724,6 @@ Feature.Profile.Label.QRCodeFriendRequest,QR 코드에서 전송됨
 Feature.Profile.Label.RecentAgedUpDisplayName,"최근에 변경한 적이 있는 이름입니다. 이름은 7일에 한 번만 변경할 수 있습니다.
 "
 Feature.Profile.Label.RecentDisplayName,최근에 변경한 적이 있는 표시 이름입니다. 표시 이름은 7일에 한 번만 변경할 수 있습니다.
-Feature.Profile.Label.TimeToChangeNickname,{hours}시간 후에 이름을 변경할 수 있습니다.
 Feature.Profile.Label.UnableToJoin,참가할 수 없음
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b> 님이 <b>{experienceName}</b> 체험을 플레이하고 있어요.
 Feature.Profile.Label.UsernameDescription,Roblox에서 사용하는 이름입니다. 사용자 이름 변경 비용은 {icon}{price}입니다.
@@ -4782,7 +4811,7 @@ InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,
 InGame.PlayerDropDown.ConfirmUnfriend,눌러서 친구 끊기 확인
-InGame.PlayerDropDown.Decline,거절
+InGame.PlayerDropDown.Decline,
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} 님의 친구 수가 최대 한도에 도달했어요.
 InGame.PlayerDropDown.Report,
@@ -4835,6 +4864,7 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,체험 개선에 도움 주기
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,크리에이터의 체험 개선을 도와주세요
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,제품을 더 구매하기 전에 체험에 참가해 이전에 구매한 제품을 사용하세요.
+Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,구매한 아이템을 사용하려면 입장하세요
 Roblox.ReferralRewards.AdditionalCreatorTerms,추가 크리에이터 약관
 Roblox.ReferralRewards.Expires,만료
 Roblox.ReferralRewards.ReferralProgramTerms,추천 프로그램 약관

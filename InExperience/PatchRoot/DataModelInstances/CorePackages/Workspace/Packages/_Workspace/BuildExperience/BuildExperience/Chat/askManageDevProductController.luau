@@ -1,39 +1,39 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local developerProductModule = require(parent.DataHydration.DeveloperProduct)
+local creatorAgentChatModule = require(buildExperience.Parent.DataHydration.CreatorAgentChat)
 local fFlagBuildExperienceToolResultFailureRecoveryModule = require(buildExperience.Flags.FFlagBuildExperienceToolResultFailureRecovery)
 local _ = require(script.Parent.chatTypes)
 local chatConstantsModule = require(script.Parent.chatConstants)
 local _ = require(script.Parent.localToolOverlay)
+local createManageDevProductStoreModule = require(script.Parent.createManageDevProductStore)
 local toolControllerUtilsModule = require(script.Parent.toolControllerUtils)
 local studioManageDevProductTool = creatorAgentChatModule.StudioManageDevProductTool
 local debug = creatorAgentChatModule.debug
 local awaitRequestState = toolControllerUtilsModule.awaitRequestState
 local getToolCallOrder = toolControllerUtilsModule.getToolCallOrder
+local var1 = createManageDevProductStoreModule()
 
 local function awaitPromise(p1)
 	-- upvalues: chatConstantsModule (ref)
-	local var1 = nil
 	local var2 = nil
-	local var3 = false
+	local var3 = nil
+	local var4 = false
 	p1:andThen(function(p2)
-		-- upvalues: var1 (write), var3 (write)
-		var1 = p2
-		var3 = true
-	end, function(p2)
-		-- upvalues: var2 (write), var3 (write)
+		-- upvalues: var2 (write), var4 (write)
 		var2 = p2
-		var3 = true
+		var4 = true
+	end, function(p2)
+		-- upvalues: var3 (write), var4 (write)
+		var3 = p2
+		var4 = true
 	end)
-	local var4 = os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS
-	while os.clock() < var4 do
+	local var5 = os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS
+	while os.clock() < var5 do
 		task.wait()
 	end
 	p1:cancel()
-	var2 = "The request timed out and its outcome is unknown. List developer products before retrying."
+	var3 = "The request timed out and its outcome is unknown. List developer products before retrying."
 	
-	return var1, u355
+	return var2, u359
 end
 
 local function _(p2)
@@ -48,19 +48,19 @@ end
 
 local function awaitMutation(p2)
 	-- upvalues: awaitPromise (ref)
-	local var5, var6 = awaitPromise(p2)
+	local var6, var7 = awaitPromise(p2)
 	
-	if var5 ~= nil then
-		return var5, nil
+	if var6 ~= nil then
+		return var6, nil
 	end
-	local var7 = nil
+	local var8 = nil
 	
-	if typeof(var6) == "table" and typeof(var6.errorMessage) == "string" then
-		return var7, var6.errorMessage
-	elseif var6 == nil then
-		return var7, "The request timed out."
+	if typeof(var7) == "table" and typeof(var7.errorMessage) == "string" then
+		return var8, var7.errorMessage
+	elseif var7 == nil then
+		return var8, "The request timed out."
 	end
-	return var7, tostring(var6)
+	return var8, tostring(var7)
 end
 
 local _ = function(p2, p3, p4)
@@ -82,16 +82,15 @@ local function moderationError(p2, p3)
 end
 
 return function(p2, p3, p4, p5)
-	-- upvalues: developerProductModule (ref), awaitMutation (ref), debug (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), awaitRequestState (ref), chatConstantsModule (ref), moderationError (ref), detailCodeForFailure (ref), studioManageDevProductTool (ref), awaitPromise (ref), getToolCallOrder (ref)
-	local developerProductStore = developerProductModule.getDeveloperProductStore()
-	local var5 = nil
-	local t = {}
+	-- upvalues: var1 (ref), awaitMutation (ref), debug (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), awaitRequestState (ref), chatConstantsModule (ref), moderationError (ref), detailCodeForFailure (ref), studioManageDevProductTool (ref), awaitPromise (ref), getToolCallOrder (ref)
 	local var6 = nil
+	local t = {}
+	local var7 = nil
 	local _ = nil
 	local _ = nil
 	
 	local function performMutation(p6)
-		-- upvalues: awaitMutation (copy), developerProductStore (ref)
+		-- upvalues: awaitMutation (copy), var1 (ref)
 		local universeId = p6.universeId
 		
 		if universeId == nil then
@@ -100,7 +99,7 @@ return function(p2, p3, p4, p5)
 			if p6.name == nil or p6.name == "" or p6.priceInRobux == nil then
 				return nil, "A name and price are required to create a developer product."
 			end
-			return awaitMutation(developerProductStore.create(universeId, {
+			return awaitMutation(var1.create(universeId, {
 				name = p6.name,
 				description = p6.description,
 				priceInRobux = p6.priceInRobux
@@ -108,15 +107,15 @@ return function(p2, p3, p4, p5)
 		elseif p6.productId == nil then
 			return nil, "A productId is required for this action."
 		elseif p6.action == "update" then
-			return awaitMutation(developerProductStore.update(universeId, p6.productId, {
+			return awaitMutation(var1.update(universeId, p6.productId, {
 				name = p6.name,
 				description = p6.description,
 				priceInRobux = p6.priceInRobux
 			}))
 		elseif p6.action == "activate" then
-			return awaitMutation(developerProductStore.activate(universeId, p6.productId))
+			return awaitMutation(var1.activate(universeId, p6.productId))
 		elseif p6.action == "deactivate" then
-			return awaitMutation(developerProductStore.deactivate(universeId, p6.productId))
+			return awaitMutation(var1.deactivate(universeId, p6.productId))
 		end
 		return nil, ("Unsupported action '%s'."):format(p6.action)
 	end
@@ -149,10 +148,10 @@ return function(p2, p3, p4, p5)
 	end
 	
 	local function submitResult(p6, p7, p8, p9)
-		-- upvalues: p2 (ref), debug (copy), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), p5 (ref), p4 (ref), awaitRequestState (copy), chatConstantsModule (copy), p3 (ref), var5 (write)
-		local var7 = p2.submitActiveToolResult(p7, p8, p6.turnId, p6.referenceId)
+		-- upvalues: p2 (ref), debug (copy), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), p5 (ref), p4 (ref), awaitRequestState (copy), chatConstantsModule (copy), p3 (ref), var6 (write)
+		local var8 = p2.submitActiveToolResult(p7, p8, p6.turnId, p6.referenceId)
 		
-		if var7 == nil then
+		if var8 == nil then
 			debug.log("warn", "manage_developer_product tool_result submit aborted (no active session)", { toolCallId = p6.toolCallId })
 			
 			if fFlagBuildExperienceToolResultFailureRecoveryModule then
@@ -181,19 +180,19 @@ return function(p2, p3, p4, p5)
 				return
 			end
 		else
-			local var8 = awaitRequestState(var7.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
+			local var9 = awaitRequestState(var8.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
 			
-			if var8.status == "succeeded" then
+			if var9.status == "succeeded" then
 				p3[p6.toolCallId] = true
 				p4.markSubmitted(p6.toolCallId)
 				p4.removeDevProductAction(p6.toolCallId)
 				
-				if var5 == p6 then
-					var5 = nil
+				if var6 == p6 then
+					var6 = nil
 				end
 				return
 			elseif fFlagBuildExperienceToolResultFailureRecoveryModule then
-				local errorCode = var8.errorCode
+				local errorCode = var9.errorCode
 				p6.submitted = false
 				
 				if p5 ~= nil then
@@ -219,7 +218,7 @@ return function(p2, p3, p4, p5)
 				turnId = p6.turnId,
 				referenceId = p6.referenceId,
 				action = p6.action,
-				state = debug.formatRequestState(var8)
+				state = debug.formatRequestState(var9)
 			})
 		end
 	end
@@ -229,52 +228,52 @@ return function(p2, p3, p4, p5)
 		local result, resultError
 		local _ = nil
 		local _ = nil
-		local var7 = nil
+		local var8 = nil
 		
 		if p6.attempted then
 			result = p6.result
 			resultError = p6.resultError
-			var7 = p6.resultDetailCode
+			var8 = p6.resultDetailCode
 		else
 			p6.attempted = true
-			local var8, var9 = performMutation(p6)
-			result = var8
-			resultError = var9
+			local var9, var10 = performMutation(p6)
+			result = var9
+			resultError = var10
 			
 			if result ~= nil then
 				resultError = moderationError(p6, result)
 				
 				if resultError ~= nil then
-					var7 = "name_moderated"
+					var8 = "name_moderated"
 				end
 			end
 			p6.result = result
 			p6.resultError = resultError
 			
-			if resultError ~= nil and var7 == nil then
-				var7 = detailCodeForFailure(p6.action, resultError)
+			if resultError ~= nil and var8 == nil then
+				var8 = detailCodeForFailure(p6.action, resultError)
 			end
-			p6.resultDetailCode = var7
+			p6.resultDetailCode = var8
 		end
-		local var10, var11
+		local var11, var12
 		local _ = nil
 		local _ = nil
 		
 		if result == nil or resultError ~= nil then
-			var10 = studioManageDevProductTool.formatResultContent({
+			var11 = studioManageDevProductTool.formatResultContent({
 				status = "error",
 				action = p6.action,
-				detailCode = var7,
+				detailCode = var8,
 				message = resultError or "The developer product change failed.",
 				product = result
 			})
-			var11 = true
+			var12 = true
 		else
-			local var12, var13 = studioManageDevProductTool.formatResultContent({ status = "ok", action = p6.action, product = result })
-			var10 = var12
+			local var13, var14 = studioManageDevProductTool.formatResultContent({ status = "ok", action = p6.action, product = result })
 			var11 = var13
+			var12 = var14
 		end
-		submitResult(p6, var10, var11, nil)
+		submitResult(p6, var11, var12, nil)
 	end
 	
 	local function submitRejection(p6, p7)
@@ -299,207 +298,207 @@ return function(p2, p3, p4, p5)
 	end
 	
 	local function onApproveImpl()
-		-- upvalues: var5 (write), p4 (ref), submitApproval (ref)
-		if var5 == nil or var5.submitted then
+		-- upvalues: var6 (write), p4 (ref), submitApproval (ref)
+		if var6 == nil or var6.submitted then
 			return
 		end
-		var5.submitted = true
+		var6.submitted = true
 		p4.setDevProductTool({
 			isApproved = true,
 			isRejected = false,
-			toolCallId = var5.toolCallId,
-			callOrder = var5.callOrder,
-			action = var5.action,
-			name = var5.name,
-			description = var5.description,
-			priceInRobux = var5.priceInRobux,
-			productId = var5.productId
+			toolCallId = var6.toolCallId,
+			callOrder = var6.callOrder,
+			action = var6.action,
+			name = var6.name,
+			description = var6.description,
+			priceInRobux = var6.priceInRobux,
+			productId = var6.productId
 		})
 		task.spawn(function()
-			-- upvalues: submitApproval (copy), var5 (ref)
-			submitApproval(var5)
+			-- upvalues: submitApproval (copy), var6 (ref)
+			submitApproval(var6)
 		end)
 	end
 	
 	local function onRejectImpl()
-		-- upvalues: var5 (write), p4 (ref), submitRejection (ref)
-		if var5 == nil or var5.submitted then
+		-- upvalues: var6 (write), p4 (ref), submitRejection (ref)
+		if var6 == nil or var6.submitted then
 			return
 		end
-		var5.submitted = true
+		var6.submitted = true
 		p4.setDevProductTool({
 			isApproved = false,
 			isRejected = true,
-			toolCallId = var5.toolCallId,
-			callOrder = var5.callOrder,
-			action = var5.action,
-			name = var5.name,
-			description = var5.description,
-			priceInRobux = var5.priceInRobux,
-			productId = var5.productId
+			toolCallId = var6.toolCallId,
+			callOrder = var6.callOrder,
+			action = var6.action,
+			name = var6.name,
+			description = var6.description,
+			priceInRobux = var6.priceInRobux,
+			productId = var6.productId
 		})
 		task.spawn(function()
-			-- upvalues: submitRejection (copy), var5 (ref)
-			submitRejection(var5, nil)
+			-- upvalues: submitRejection (copy), var6 (ref)
+			submitRejection(var6, nil)
 		end)
 	end
 	
 	local function runListRequest(p6, p7, p8, p9)
-		-- upvalues: p2 (ref), developerProductStore (ref), awaitPromise (copy), studioManageDevProductTool (copy), t (ref), p3 (ref), awaitRequestState (copy), chatConstantsModule (copy), debug (copy)
-		local var7
+		-- upvalues: p2 (ref), var1 (ref), awaitPromise (copy), studioManageDevProductTool (copy), t (ref), p3 (ref), awaitRequestState (copy), chatConstantsModule (copy), debug (copy)
+		local var8
 		local universeId = p2.universeId
-		local var8 = nil
+		local var9 = nil
 		local _ = nil
 		
 		if universeId == nil then
-			var7 = "No universe is associated with this session."
+			var8 = "No universe is associated with this session."
 		else
-			local var9, var10
-			local var11, var12 = awaitPromise(developerProductStore.list(universeId))
+			local var10, var11
+			local var12, var13 = awaitPromise(var1.list(universeId))
 			
-			if var11 == nil then
-				var9 = nil
-				var10 = if typeof(var12) == "table" and typeof(var12.errorMessage) == "string" then var12.errorMessage elseif var12 == nil then "The request timed out." else tostring(var12)
-			else
-				var9 = var11
+			if var12 == nil then
 				var10 = nil
+				var11 = if typeof(var13) == "table" and typeof(var13.errorMessage) == "string" then var13.errorMessage elseif var13 == nil then "The request timed out." else tostring(var13)
+			else
+				var10 = var12
+				var11 = nil
 			end
-			var8 = var9
-			var7 = var10
+			var9 = var10
+			var8 = var11
 		end
-		local var13, var14
+		local var14, var15
 		local _ = nil
 		local _ = nil
 		
-		if var8 == nil then
-			var13 = studioManageDevProductTool.formatResultContent({
+		if var9 == nil then
+			var14 = studioManageDevProductTool.formatResultContent({
 				status = "error",
 				action = "list",
 				detailCode = "list_failed",
-				message = var7 or "Could not list developer products."
+				message = var8 or "Could not list developer products."
 			})
-			var14 = true
+			var15 = true
 		else
-			local var15, var16 = studioManageDevProductTool.formatResultContent({
+			local var16, var17 = studioManageDevProductTool.formatResultContent({
 				status = "ok",
 				action = "list",
-				count = #var8.developerProducts,
-				products = var8.developerProducts,
-				nextPageToken = var8.nextPageToken,
-				truncated = var8.nextPageToken ~= nil
+				count = #var9.developerProducts,
+				products = var9.developerProducts,
+				nextPageToken = var9.nextPageToken,
+				truncated = var9.nextPageToken ~= nil
 			})
-			var13 = var15
 			var14 = var16
+			var15 = var17
 		end
-		local var17 = p2.submitActiveToolResult(var13, var14, p7, p8)
+		local var18 = p2.submitActiveToolResult(var14, var15, p7, p8)
 		t[p6] = nil
 		
-		if var17 == nil then
+		if var18 == nil then
 			p3[p6] = nil
 			
 			return
 		end
-		local var18 = awaitRequestState(var17.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
+		local var19 = awaitRequestState(var18.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
 		
-		if var18.status ~= "succeeded" then
+		if var19.status ~= "succeeded" then
 			p3[p6] = nil
 			
-			if var18.status == "pending" then
-				var17.dispose()
+			if var19.status == "pending" then
+				var18.dispose()
 			end
 			debug.log("warn", "manage_developer_product list submit failed", {
 				sessionId = p9,
 				toolCallId = p6,
-				state = debug.formatRequestState(var18)
+				state = debug.formatRequestState(var19)
 			})
 		end
 	end
 	
 	local _ = function()
-		-- upvalues: var5 (write), p4 (ref), var6 (write)
-		if var5 ~= nil then
-			p4.removeDevProductTool(var5.toolCallId)
-			p4.removeDevProductAction(var5.toolCallId)
+		-- upvalues: var6 (write), p4 (ref), var7 (write)
+		if var6 ~= nil then
+			p4.removeDevProductTool(var6.toolCallId)
+			p4.removeDevProductAction(var6.toolCallId)
 		end
-		var5 = nil
 		var6 = nil
+		var7 = nil
 	end
 	
 	return {
 		syncManageDevProductRequests = function(p6)
-			-- upvalues: studioManageDevProductTool (copy), p3 (ref), var5 (write), p4 (ref), var6 (write), t (ref), p2 (ref), awaitRequestState (copy), chatConstantsModule (copy), runListRequest (ref), getToolCallOrder (copy), onApproveImpl (write), onRejectImpl (write), debug (copy)
-			local var7, var8, var9, var10 = studioManageDevProductTool.findManageDevProductRequestInTurnState(p6, p3)
+			-- upvalues: studioManageDevProductTool (copy), p3 (ref), var6 (write), p4 (ref), var7 (write), t (ref), p2 (ref), awaitRequestState (copy), chatConstantsModule (copy), runListRequest (ref), getToolCallOrder (copy), onApproveImpl (write), onRejectImpl (write), debug (copy)
+			local var8, var9, var10, var11 = studioManageDevProductTool.findManageDevProductRequestInTurnState(p6, p3)
 			
-			if var7 == nil then
-				if var5 ~= nil then
-					p4.removeDevProductTool(var5.toolCallId)
-					p4.removeDevProductAction(var5.toolCallId)
+			if var8 == nil then
+				if var6 ~= nil then
+					p4.removeDevProductTool(var6.toolCallId)
+					p4.removeDevProductAction(var6.toolCallId)
 				end
-				var5 = nil
 				var6 = nil
+				var7 = nil
 				
 				return false
 			else
-				local var11 = studioManageDevProductTool.parseManageDevProductInput(var8)
+				local var12 = studioManageDevProductTool.parseManageDevProductInput(var9)
 				
-				if var11 == nil then
-					if t[var7] then
+				if var12 == nil then
+					if t[var8] then
 						return true
 					end
-					t[var7] = true
+					t[var8] = true
 					task.spawn(function()
-						-- upvalues: studioManageDevProductTool (copy), p2 (copy), var9 (ref), var10 (ref), t (copy), var7 (ref), awaitRequestState (copy), chatConstantsModule (copy), p3 (copy)
-						local var12 = p2.submitActiveToolResult(studioManageDevProductTool.formatResultContent({
+						-- upvalues: studioManageDevProductTool (copy), p2 (copy), var10 (ref), var11 (ref), t (copy), var8 (ref), awaitRequestState (copy), chatConstantsModule (copy), p3 (copy)
+						local var13 = p2.submitActiveToolResult(studioManageDevProductTool.formatResultContent({
 							status = "error",
 							action = "unknown",
 							detailCode = "invalid_arguments",
 							message = "The developer-product request was malformed."
-						}), true, var9, var10)
-						t[var7] = nil
+						}), true, var10, var11)
+						t[var8] = nil
 						
-						if var12 == nil then return end
-						local var13 = awaitRequestState(var12.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
+						if var13 == nil then return end
+						local var14 = awaitRequestState(var13.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
 						
-						if var13.status == "succeeded" then
-							p3[var7] = true
+						if var14.status == "succeeded" then
+							p3[var8] = true
 							
 							return
-						elseif var13.status == "pending" then
-							var12.dispose()
+						elseif var14.status == "pending" then
+							var13.dispose()
 						end
 					end)
 					
 					return true
-				elseif studioManageDevProductTool.getActionKind(var11.action) == "read" then
-					if t[var7] then
+				elseif studioManageDevProductTool.getActionKind(var12.action) == "read" then
+					if t[var8] then
 						return true
 					end
-					p3[var7] = true
-					t[var7] = true
+					p3[var8] = true
+					t[var8] = true
 					task.spawn(function()
-						-- upvalues: runListRequest (copy), var7 (ref), var9 (ref), var10 (ref), p6 (ref)
-						runListRequest(var7, var9, var10, p6.sessionId)
+						-- upvalues: runListRequest (copy), var8 (ref), var10 (ref), var11 (ref), p6 (ref)
+						runListRequest(var8, var10, var11, p6.sessionId)
 					end)
 					
 					return true
-				elseif var7 ~= var6 then
-					var6 = var7
+				elseif var8 ~= var7 then
+					var7 = var8
 					local t_1 = {
 						submitted = false,
 						attempted = false,
 						sessionId = p6.sessionId,
-						toolCallId = var7,
-						callOrder = getToolCallOrder(p6, var7),
-						turnId = var9,
-						referenceId = var10,
+						toolCallId = var8,
+						callOrder = getToolCallOrder(p6, var8),
+						turnId = var10,
+						referenceId = var11,
 						universeId = p2.universeId,
-						action = var11.action,
-						name = var11.name,
-						description = var11.description,
-						priceInRobux = var11.priceInRobux,
-						productId = var11.productId
+						action = var12.action,
+						name = var12.name,
+						description = var12.description,
+						priceInRobux = var12.priceInRobux,
+						productId = var12.productId
 					}
-					var5 = t_1
+					var6 = t_1
 					p4.setDevProductTool({
 						isApproved = false,
 						isRejected = false,
@@ -511,56 +510,56 @@ return function(p2, p3, p4, p5)
 						priceInRobux = t_1.priceInRobux,
 						productId = t_1.productId
 					})
-					p4.setDevProductAction(var7, onApproveImpl, onRejectImpl)
+					p4.setDevProductAction(var8, onApproveImpl, onRejectImpl)
 					debug.log("info", "manage_developer_product proposal displayed", {
-						toolCallId = var7,
-						turnId = var9,
-						referenceId = var10,
-						action = var11.action
+						toolCallId = var8,
+						turnId = var10,
+						referenceId = var11,
+						action = var12.action
 					})
 				end
 				return true
 			end
 		end,
 		stopPending = function()
-			-- upvalues: t (ref), p3 (ref), var5 (write), p4 (ref), var6 (write)
-			local var7 = false
+			-- upvalues: t (ref), p3 (ref), var6 (write), p4 (ref), var7 (write)
+			local var8 = false
 			
 			for i in t do
 				t[i] = nil
 				p3[i] = nil
-				var7 = true
+				var8 = true
 			end
-			if var5 ~= nil and not var5.submitted then
-				var5.submitted = true
-				p4.removeDevProductTool(var5.toolCallId)
-				p4.removeDevProductAction(var5.toolCallId)
-				var5 = nil
+			if var6 ~= nil and not var6.submitted then
+				var6.submitted = true
+				p4.removeDevProductTool(var6.toolCallId)
+				p4.removeDevProductAction(var6.toolCallId)
 				var6 = nil
-				var7 = true
+				var7 = nil
+				var8 = true
 			end
-			return var7
+			return var8
 		end,
 		trySubmitComposerText = function(p6)
-			-- upvalues: var5 (write), p4 (ref), submitRejection (ref)
-			if var5 == nil or var5.submitted then
+			-- upvalues: var6 (write), p4 (ref), submitRejection (ref)
+			if var6 == nil or var6.submitted then
 				return false
 			end
-			var5.submitted = true
+			var6.submitted = true
 			p4.setDevProductTool({
 				isApproved = false,
 				isRejected = true,
-				toolCallId = var5.toolCallId,
-				callOrder = var5.callOrder,
-				action = var5.action,
-				name = var5.name,
-				description = var5.description,
-				priceInRobux = var5.priceInRobux,
-				productId = var5.productId
+				toolCallId = var6.toolCallId,
+				callOrder = var6.callOrder,
+				action = var6.action,
+				name = var6.name,
+				description = var6.description,
+				priceInRobux = var6.priceInRobux,
+				productId = var6.productId
 			})
 			task.spawn(function()
-				-- upvalues: submitRejection (copy), var5 (ref), p6 (ref)
-				submitRejection(var5, p6)
+				-- upvalues: submitRejection (copy), var6 (ref), p6 (ref)
+				submitRejection(var6, p6)
 			end)
 			
 			return true

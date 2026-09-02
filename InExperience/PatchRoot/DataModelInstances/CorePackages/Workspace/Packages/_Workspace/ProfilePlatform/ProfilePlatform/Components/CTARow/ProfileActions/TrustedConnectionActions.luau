@@ -63,7 +63,32 @@ return {
 			}
 		}
 	end else nil,
-	[enumsModule.ProfileActions.AddTrustedConnectionViaLink] = function(p1)
+	[enumsModule.ProfileActions.AddTrustedConnectionViaLink] = if require(profilePlatform.Flags.FFlagFixTFLinksVRGating) then if fFlagProfilePlatformAddTC then function(p1)
+		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), sources (ref), appPage (ref), refreshProfilePlatformActionInfoModule (ref)
+		return {
+			text = p1.localized[enumsModule.ProfileActions.AddTrustedConnection],
+			onActivated = {
+				[profileTypes.User] = function()
+					-- upvalues: p1 (ref), eventNamesModule (copy), sources (copy), appPage (copy), refreshProfilePlatformActionInfoModule (copy)
+					p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonAddTrustedConnection, {
+						buttonSurface = p1.buttonSurface,
+						modalVariantOverride = sources.ShareLinkSender
+					})
+					p1.navigation.push(appPage.TrustedContactsModal, {
+						props = {
+							userId = p1.profileId,
+							source = sources.ProfilePlatform,
+							modalVariantOverride = sources.ShareLinkSender,
+							onRequestSent = function()
+								-- upvalues: p1 (copy), refreshProfilePlatformActionInfoModule (copy)
+								return p1.dispatch(refreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))
+							end
+						}
+					})
+				end
+			}
+		}
+	end else nil else function(p1)
 		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), sources (ref), appPage (ref), refreshProfilePlatformActionInfoModule (ref)
 		return {
 			text = p1.localized[enumsModule.ProfileActions.AddTrustedConnection],

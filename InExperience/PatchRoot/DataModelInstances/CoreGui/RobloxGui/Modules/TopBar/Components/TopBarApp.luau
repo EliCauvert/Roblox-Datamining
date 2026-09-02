@@ -71,6 +71,10 @@ local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
 local fFlagShowGameAgeRating = sharedFlagsModule.FFlagShowGameAgeRating
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
+local fFlagShowSwitchServerButton = fFlagEnableSideSheet and sharedFlagsModule.FFlagShowSwitchServerButton
+local switchServerModule = require(corePackagesService.Workspace.Packages.SwitchServer)
+local switchServerConfirmation = switchServerModule.SwitchServerConfirmation
+local getSwitchServerStore = switchServerModule.GetSwitchServerStore
 local unibarModule = nil
 local keepOutAreasHandlerModule = nil
 local analyticsModule = nil
@@ -149,7 +153,7 @@ topBarApp.validateProps = tModule.strictInterface({
 })
 
 function topBarApp.init(p1)
-	-- upvalues: roactModule (ref), signalsModule (ref), displayModule (ref), fFlagAddUILessMode (ref), stores (ref), fIntAddUILessModeVariant (ref), tweenService (ref), localStoreModule (write), constantsModule_1 (write), UILessTooltipDuration (ref), settingsHubModule (ref), constantsModule (ref), contextActionService (ref), fFlagTopBarSignalizeMenuOpen (ref), settingsShowSignal (ref), fFlagTopBarSignalizeKeepOutAreas (ref), coreGuiCommonModule (ref), enabled (ref), chrome (ref), fFlagEnableConsoleExpControls (ref), gamepadConnectorModule (write), reactModule (ref), fFlagEnableInExperienceShop (ref), inExperienceShopModule (ref), fFlagCenterInExperienceShopWindow (ref), textChatService (ref)
+	-- upvalues: roactModule (ref), signalsModule (ref), displayModule (ref), fFlagAddUILessMode (ref), stores (ref), fIntAddUILessModeVariant (ref), tweenService (ref), localStoreModule (write), constantsModule_1 (write), UILessTooltipDuration (ref), settingsHubModule (ref), constantsModule (ref), contextActionService (ref), fFlagTopBarSignalizeMenuOpen (ref), settingsShowSignal (ref), fFlagTopBarSignalizeKeepOutAreas (ref), coreGuiCommonModule (ref), enabled (ref), chrome (ref), fFlagEnableConsoleExpControls (ref), gamepadConnectorModule (write), reactModule (ref), fFlagEnableInExperienceShop (ref), inExperienceShopModule (ref), fFlagCenterInExperienceShopWindow (ref), textChatService (ref), fFlagShowSwitchServerButton (ref), getSwitchServerStore (ref)
 	local var6, var7 = roactModule.createBinding(UDim2.new())
 	p1.unibarRightSidePosition = var6
 	p1.setUnibarRightSidePosition = var7
@@ -333,6 +337,17 @@ function topBarApp.init(p1)
 			p1:setState({ chatVersion = textChatService.ChatVersion })
 		end)
 	end
+	if fFlagShowSwitchServerButton then
+		p1.disposeSwitchServerEffect = signalsModule.createEffect(function(p2)
+			-- upvalues: getSwitchServerStore (copy), p1 (ref)
+			local var19 = getSwitchServerStore(false)
+			p1:setState({
+				shouldEnableSwitchServer = var19.shouldEnableSwitchServer(p2),
+				isConfirmationOpen = var19.isConfirmationOpen(p2)
+			})
+		end)
+		p1.setConfirmationOpen = getSwitchServerStore(false).setConfirmationOpen
+	end
 end
 
 function topBarApp.didMount(p1)
@@ -370,7 +385,7 @@ function topBarApp.didMount(p1)
 end
 
 function topBarApp.willUnmount(p1)
-	-- upvalues: enabled (ref), fFlagEnableConsoleExpControls (ref), fFlagEnableInExperienceShop (ref), fFlagAddUILessMode (ref), fIntAddUILessModeVariant (ref), contextActionService (ref), fFlagTopBarSignalizeMenuOpen (ref), fFlagTopBarSignalizeKeepOutAreas (ref)
+	-- upvalues: enabled (ref), fFlagEnableConsoleExpControls (ref), fFlagEnableInExperienceShop (ref), fFlagAddUILessMode (ref), fIntAddUILessModeVariant (ref), contextActionService (ref), fFlagTopBarSignalizeMenuOpen (ref), fFlagTopBarSignalizeKeepOutAreas (ref), fFlagShowSwitchServerButton (ref)
 	if enabled() then
 		if p1.orderAlignmentConnection then
 			p1.orderAlignmentConnection:disconnect()
@@ -419,6 +434,9 @@ function topBarApp.willUnmount(p1)
 	end
 	if fFlagTopBarSignalizeKeepOutAreas and p1.keepOutAreasStore then
 		p1.keepOutAreasStore.cleanup()
+	end
+	if fFlagShowSwitchServerButton and p1.disposeSwitchServerEffect then
+		p1.disposeSwitchServerEffect()
 	end
 end
 
@@ -492,7 +510,7 @@ function topBarApp.renderUnibarFrame(p1, p2)
 end
 
 function topBarApp.renderWithStyle(p1, p2)
-	-- upvalues: enabled (ref), constantsModule_2 (ref), fFlagAppNavMyStatsTab (ref), buildExperienceModule (ref), VRService (ref), fFlagEnableInExperienceShop (ref), constantsModule_1 (write), fFlagTopBarSignalizeMenuOpen (ref), tenFootInterfaceModule (ref), roactModule (ref), voiceStateContextModule (ref), var5 (ref), default (ref), isInExperienceUIVREnabled (ref), menuIconModule (ref), fFlagEnableConsoleExpControls (ref), fFlagTopBarSignalizeKeepOutAreas (ref), selectionCursorProvider (ref), fFlagEnablePlaytestModeUnibar (ref), playtestModeThemeProviderModule (ref), isSpatial (ref), fFlagTopBarSignalizeScreenSize (ref), connectionModule (ref), playtestModeTooltipModule (ref), fFlagEnableTeamTestLua (ref), unpublishedPlaytestModeTooltip (ref), fFlagEnableUISelector (ref), reactModule (ref), coreGuiCommonModule (ref), gamepadMenuModule (write), fFlagAddMenuNavigationToggleDialog (write), menuNavigationToggleDialogModule (write), fFlagGamepadNavigationDialogABTestModule (ref), gamepadNavigationDialogModule (ref), useNewHeadsetDisconnectDialog (ref), headsetDisconnectDialog (ref), headsetMenuModule (ref), keepOutAreasHandlerModule (write), hurtOverlayModule (ref), fFlagEnableSideSheet (ref), isNewTiltIconEnabledModule (ref), fFlagAddUILessMode (ref), fIntAddUILessModeVariant (ref), withLocalization (ref), unibarModule (write), isNewInGameMenuEnabledModule (ref), interactable (ref), robloxGui (ref), controlState (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), var1 (ref), imageSetButton (ref), songbirdModule (ref), var3 (write), getFFlagEnableCrossExpVoice (ref), partyMicBinderModule (ref), analyticsModule (write), fFlagAddTraversalBackButton (ref), view (ref), traversalBackButtonModule (ref), var4 (ref), healthBarModule (ref), buildPillMenuPortalHost (ref), shopGlobalIcon (ref), fFlagExperienceShopNewIconography (ref), commonIconModule (write), chatIconModule (ref), moreMenuModule (ref)
+	-- upvalues: enabled (ref), constantsModule_2 (ref), fFlagAppNavMyStatsTab (ref), buildExperienceModule (ref), VRService (ref), fFlagEnableInExperienceShop (ref), constantsModule_1 (write), fFlagTopBarSignalizeMenuOpen (ref), tenFootInterfaceModule (ref), roactModule (ref), voiceStateContextModule (ref), var5 (ref), default (ref), isInExperienceUIVREnabled (ref), menuIconModule (ref), fFlagEnableConsoleExpControls (ref), fFlagTopBarSignalizeKeepOutAreas (ref), selectionCursorProvider (ref), fFlagEnablePlaytestModeUnibar (ref), playtestModeThemeProviderModule (ref), isSpatial (ref), fFlagTopBarSignalizeScreenSize (ref), connectionModule (ref), playtestModeTooltipModule (ref), fFlagEnableTeamTestLua (ref), unpublishedPlaytestModeTooltip (ref), fFlagEnableUISelector (ref), reactModule (ref), coreGuiCommonModule (ref), gamepadMenuModule (write), fFlagAddMenuNavigationToggleDialog (write), menuNavigationToggleDialogModule (write), fFlagGamepadNavigationDialogABTestModule (ref), gamepadNavigationDialogModule (ref), fFlagShowSwitchServerButton (ref), switchServerConfirmation (ref), useNewHeadsetDisconnectDialog (ref), headsetDisconnectDialog (ref), headsetMenuModule (ref), keepOutAreasHandlerModule (write), hurtOverlayModule (ref), fFlagEnableSideSheet (ref), isNewTiltIconEnabledModule (ref), fFlagAddUILessMode (ref), fIntAddUILessModeVariant (ref), withLocalization (ref), unibarModule (write), isNewInGameMenuEnabledModule (ref), interactable (ref), robloxGui (ref), controlState (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), var1 (ref), imageSetButton (ref), songbirdModule (ref), var3 (write), getFFlagEnableCrossExpVoice (ref), partyMicBinderModule (ref), analyticsModule (write), fFlagAddTraversalBackButton (ref), view (ref), traversalBackButtonModule (ref), var4 (ref), healthBarModule (ref), buildPillMenuPortalHost (ref), shopGlobalIcon (ref), fFlagExperienceShopNewIconography (ref), commonIconModule (write), chatIconModule (ref), moreMenuModule (ref)
 	local var6 = enabled()
 	local var7 = if p1.state.unibarAlignment ~= nil then p1.state.unibarAlignment else Enum.HorizontalAlignment.Right
 	local var8 = constantsModule_2.ScreenSideOffset * p1.state.UiScale
@@ -570,6 +588,9 @@ function topBarApp.renderWithStyle(p1, p2)
 			GamepadConnector = if fFlagEnableConsoleExpControls then p1.GamepadConnector else nil
 		}) else nil,
 		GamepadNavigationDialog = if fFlagGamepadNavigationDialogABTestModule then roactModule.createElement(gamepadNavigationDialogModule) else nil,
+		SwitchServerConfirmation = if fFlagShowSwitchServerButton and p1.state.shouldEnableSwitchServer and p1.state.isConfirmationOpen then reactModule.createElement(switchServerConfirmation, {
+			setSwitchServerConfirmationOpen = p1.setConfirmationOpen
+		}) else nil,
 		HeadsetMenu = if useNewHeadsetDisconnectDialog then roactModule.createElement(headsetDisconnectDialog) else roactModule.createElement(headsetMenuModule),
 		VRBottomBar = if VRService.VREnabled then var21 else nil,
 		KeepOutAreasHandler = if fFlagTopBarSignalizeKeepOutAreas or not keepOutAreasHandlerModule then nil else roactModule.createElement(keepOutAreasHandlerModule),

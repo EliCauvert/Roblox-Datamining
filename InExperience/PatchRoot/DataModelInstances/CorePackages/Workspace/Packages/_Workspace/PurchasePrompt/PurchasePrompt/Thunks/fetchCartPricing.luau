@@ -10,6 +10,7 @@ local logUnifiedPurchaseTelemetryCounterModule = require(purchasePrompt.Utils.lo
 local unifiedPurchaseTelemetryModule = require(purchasePrompt.Events.UnifiedPurchaseTelemetry)
 local fFlagPurchasePromptOfferMarginUpsellEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptOfferMarginUpsellEnabled)
 local fFlagEnableFetchCartPricingDuringInExperience = require(purchasePrompt.Parent.SharedFlags).FFlagEnableFetchCartPricingDuringInExperience
+local disableInExpMarketplaceOffersTemp = game:DefineFastFlag("DisableInExpMarketplaceOffersTemp", false)
 local setCartPricingFetchingModule = require(purchasePrompt.Actions.SetCartPricingFetching)
 local setCartPricingResponseModule = require(purchasePrompt.Actions.SetCartPricingResponse)
 local setCartPricingFetchFailedModule = require(purchasePrompt.Actions.SetCartPricingFetchFailed)
@@ -28,9 +29,9 @@ local function _(p1)
 end
 
 return function(p1, p2)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), fFlagEnableFetchCartPricingDuringInExperience (ref), getCartPricingRequestedItemsForCartPricingModule (ref), promiseModule (ref), fFlagPurchasePromptOfferMarginUpsellEnabledModule (ref), getProductTypeFromRequestTypeModule (ref), httpService (ref), setCartPricingFetchingModule (ref), postCartPricingModule (ref), setCartPricingFetchFailedModule (ref), setCartPricingResponseModule (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref)
+	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), fFlagEnableFetchCartPricingDuringInExperience (ref), getCartPricingRequestedItemsForCartPricingModule (ref), promiseModule (ref), fFlagPurchasePromptOfferMarginUpsellEnabledModule (ref), getProductTypeFromRequestTypeModule (ref), httpService (ref), setCartPricingFetchingModule (ref), postCartPricingModule (ref), disableInExpMarketplaceOffersTemp (ref), setCartPricingFetchFailedModule (ref), setCartPricingResponseModule (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref)
 	return thunkModule.new(script.Name, list, function(p3, p4)
-		-- upvalues: networkModule (copy), fFlagEnableFetchCartPricingDuringInExperience (copy), getCartPricingRequestedItemsForCartPricingModule (copy), p2 (ref), promiseModule (copy), fFlagPurchasePromptOfferMarginUpsellEnabledModule (copy), getProductTypeFromRequestTypeModule (copy), httpService (copy), setCartPricingFetchingModule (copy), postCartPricingModule (copy), p1 (ref), setCartPricingFetchFailedModule (copy), setCartPricingResponseModule (copy), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy)
+		-- upvalues: networkModule (copy), fFlagEnableFetchCartPricingDuringInExperience (copy), getCartPricingRequestedItemsForCartPricingModule (copy), p2 (ref), promiseModule (copy), fFlagPurchasePromptOfferMarginUpsellEnabledModule (copy), getProductTypeFromRequestTypeModule (copy), httpService (copy), setCartPricingFetchingModule (copy), postCartPricingModule (copy), p1 (ref), disableInExpMarketplaceOffersTemp (copy), setCartPricingFetchFailedModule (copy), setCartPricingResponseModule (copy), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy)
 		local purchaseOptions
 		local var1 = p4[networkModule]
 		local state = p3:getState()
@@ -85,7 +86,12 @@ return function(p1, p2)
 			end
 			
 			return postCartPricingModule(var1, purchaseOptions, p1, productInfo, var3):andThen(function(p5)
-				-- upvalues: p3 (ref), collectibleItemId (ref), setCartPricingFetchFailedModule (copy), setCartPricingResponseModule (copy)
+				-- upvalues: disableInExpMarketplaceOffersTemp (copy), p2 (copy), p3 (ref), setCartPricingFetchFailedModule (copy), collectibleItemId (ref), setCartPricingResponseModule (copy)
+				if disableInExpMarketplaceOffersTemp and p2 then
+					p3:dispatch(setCartPricingFetchFailedModule())
+					
+					return nil
+				end
 				local cartPricing = p3:getState().cartPricing
 				
 				if not (cartPricing ~= nil and cartPricing.requestId == collectibleItemId) then

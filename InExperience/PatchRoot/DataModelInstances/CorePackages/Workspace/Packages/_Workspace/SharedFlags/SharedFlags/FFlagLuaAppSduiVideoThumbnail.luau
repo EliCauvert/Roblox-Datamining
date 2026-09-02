@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppSduiVideoThumbnailDev", false)
+﻿return game:DefineFastFlag("LuaAppSduiVideoThumbnail2", false)

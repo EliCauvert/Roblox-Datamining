@@ -2,6 +2,8 @@
 	Search = "Search",
 	TabForward = "TabForward",
 	TabBackward = "TabBackward",
+	PageForward = "PageForward",
+	PageBackward = "PageBackward",
 	HoldToPlay = "HoldToPlay",
 	HoldToJoinFriend = "HoldToJoinFriend",
 	NavigateBack = "NavigateBack",

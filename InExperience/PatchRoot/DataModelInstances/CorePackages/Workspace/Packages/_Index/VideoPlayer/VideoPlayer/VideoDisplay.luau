@@ -5,9 +5,10 @@ local reactModule = require(parent.React)
 local argCheckModule = require(parent.ArgCheck)
 local videoPlayerWrapperModule = require(script.Parent.VideoPlayerWrapper)
 local videoLoadingStateModule = require(script.Parent.VideoLoadingState)
+local luaAppFixStartPlaybackProgress = game:DefineFastFlag("LuaAppFixStartPlaybackProgress", false)
 
 return function(p1)
-	-- upvalues: reactModule (ref), videoLoadingStateModule (ref), userGameSettingsService (ref), argCheckModule (ref), runService (ref), videoPlayerWrapperModule (ref)
+	-- upvalues: reactModule (ref), videoLoadingStateModule (ref), luaAppFixStartPlaybackProgress (ref), userGameSettingsService (ref), argCheckModule (ref), runService (ref), videoPlayerWrapperModule (ref)
 	local var1 = reactModule.useRef(nil)
 	local videoPlayerRef = p1.videoPlayerRef or reactModule.useRef(nil)
 	local var2 = reactModule.useRef(0)
@@ -24,7 +25,15 @@ return function(p1)
 	var11.current = p1.onAspectRatioChanged
 	local var12 = reactModule.useRef(nil)
 	var12.current = p1.onVideoProgressChanged
-	local var13 = reactModule.useCallback(function(p2)
+	local var13 = nil
+	local var14 = nil
+	
+	if luaAppFixStartPlaybackProgress then
+		var13 = reactModule.useRef(p1.startPlaybackProgress)
+		var13.current = p1.startPlaybackProgress
+		var14 = reactModule.useRef(false)
+	end
+	local var15 = reactModule.useCallback(function(p2)
 		-- upvalues: var8 (ref), var9 (ref)
 		var8(p2)
 		
@@ -32,7 +41,7 @@ return function(p1)
 			var9.current(p2)
 		end
 	end, {})
-	local var14 = reactModule.useCallback(function()
+	local var16 = reactModule.useCallback(function()
 		-- upvalues: var2 (ref), p1 (ref)
 		var2.current += 1
 		
@@ -53,7 +62,7 @@ return function(p1)
 		if videoPlaybackStateRef == nil then
 			return
 		end
-		local var15 = function()
+		local var17 = function()
 			-- upvalues: videoPlayerRef (copy), var2 (copy), var3 (copy), userGameSettingsService (copy)
 			local current = videoPlayerRef.current
 			
@@ -67,37 +76,44 @@ return function(p1)
 			} else nil
 		end
 		
-		videoPlaybackStateRef.current = var15
+		videoPlaybackStateRef.current = var17
 		
 		return function()
-			-- upvalues: videoPlaybackStateRef (ref), var15 (ref)
-			if videoPlaybackStateRef.current == var15 then
+			-- upvalues: videoPlaybackStateRef (ref), var17 (ref)
+			if videoPlaybackStateRef.current == var17 then
 				videoPlaybackStateRef.current = nil
 			end
 		end
 	end, { p1.videoPlaybackStateRef })
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), shouldStartPlayback (ref), var13 (ref), videoLoadingStateModule (copy), videoPlayerRef (ref), argCheckModule (copy), p1 (ref), var10 (ref), var11 (ref)
+		-- upvalues: var6 (ref), shouldStartPlayback (ref), var15 (ref), videoLoadingStateModule (copy), videoPlayerRef (ref), argCheckModule (copy), luaAppFixStartPlaybackProgress (copy), var13 (write), var14 (write), p1 (ref), var10 (ref), var11 (ref)
 		var6(false)
 		
 		if shouldStartPlayback then
 			local current = videoPlayerRef.current
 			argCheckModule.assert(current ~= nil, "VideoDisplay expects videoPlayer ref to be set before loading")
-			var13(videoLoadingStateModule.Loading)
-			local var15 = false
+			var15(videoLoadingStateModule.Loading)
+			local var17 = false
 			task.spawn(function()
-				-- upvalues: current (ref), var15 (write), var13 (copy), videoLoadingStateModule (copy), p1 (copy), var10 (copy), var11 (copy), var6 (copy)
+				-- upvalues: current (ref), var17 (write), var15 (copy), videoLoadingStateModule (copy), luaAppFixStartPlaybackProgress (copy), var13 (copy), var14 (copy), p1 (copy), var10 (copy), var11 (copy), var6 (copy)
 				local currentTime = tick()
 				local ok, status = pcall(function()
 					-- upvalues: current (copy)
 					return current:LoadAsync()
 				end)
 				
-				if var15 then return end
+				if var17 then return end
 				if not ok or status ~= Enum.AssetFetchStatus.Success then
-					var13(videoLoadingStateModule.Failed)
+					var15(videoLoadingStateModule.Failed)
 					
 					return
+				elseif luaAppFixStartPlaybackProgress then
+					local current_1 = var13.current
+					
+					if current_1 ~= nil then
+						current.TimePosition = math.clamp(current_1, 0, 1) * current.TimeLength
+						var14.current = true
+					end
 				elseif p1.startPlaybackProgress ~= nil then
 					current.TimePosition = math.clamp(p1.startPlaybackProgress, 0, 1) * current.TimeLength
 				end
@@ -110,17 +126,17 @@ return function(p1)
 					var11.current(resolution.X / resolution.Y)
 				end
 				var6(true)
-				var13(videoLoadingStateModule.Loaded)
+				var15(videoLoadingStateModule.Loaded)
 			end)
 			
 			return function()
-				-- upvalues: var15 (write)
-				var15 = true
+				-- upvalues: var17 (write)
+				var17 = true
 			end
 		end
-		var13(videoLoadingStateModule.Idle)
+		var15(videoLoadingStateModule.Idle)
 	end, { p1.video, shouldStartPlayback })
-	local var15 = reactModule.useCallback(function()
+	local var17 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref), var3 (ref), p1 (ref)
 		var4.current = true
 		var3.current += 1
@@ -130,12 +146,14 @@ return function(p1)
 		end
 	end, { p1.onVideoEnded })
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), videoPlayerRef (ref), argCheckModule (copy), var4 (ref), p1 (ref)
+		-- upvalues: var5 (ref), videoPlayerRef (ref), argCheckModule (copy), luaAppFixStartPlaybackProgress (copy), var14 (write), var4 (ref), p1 (ref)
 		if not var5 then return end
 		local current = videoPlayerRef.current
 		argCheckModule.assert(current ~= nil, "VideoDisplay expects videoPlayer ref to be set before playback")
 		
-		if var4.current and p1.shouldStartPlayback then
+		if luaAppFixStartPlaybackProgress and var14.current then
+			var14.current = false
+		elseif var4.current and p1.shouldStartPlayback then
 			current.TimePosition = 0
 			var4.current = false
 		elseif p1.shouldStartPlayback and not p1.preservePlaybackPosition then
@@ -208,8 +226,8 @@ return function(p1)
 				looped = p1.looped,
 				videoPlayerRef = videoPlayerRef,
 				videoDisplayRef = var1,
-				onVideoLooped = var14,
-				onVideoEnded = var15
+				onVideoLooped = var16,
+				onVideoEnded = var17
 			})
 		})
 	})

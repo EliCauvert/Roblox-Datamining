@@ -14,7 +14,7 @@ local loggerModule = require(script.Parent.Logger)
 local configModule = require(expChat.Config)
 local dictationAnalyticsModule = require(expChat.ChatInput.UI.ChatInputBar.Dictation.DictationAnalytics)
 local computeEditDistanceModule = require(expChat.ChatInput.UI.ChatInputBar.Dictation.computeEditDistance)
-local expChatFlipDictationPriority = game:DefineFastFlag("ExpChatFlipDictationPriority", false)
+local expChatFlipDictationPriorityV2 = game:DefineFastFlag("ExpChatFlipDictationPriorityV2", false)
 
 local function _(p1)
 	-- upvalues: configModule (ref)
@@ -40,7 +40,7 @@ local getFFlagExpChatProtectedChatInternalAPIs = sharedFlagsModule.getFFlagExpCh
 local fFlagExpChatDictation = sharedFlagsModule.FFlagExpChatDictation
 
 return function(p1)
-	-- upvalues: playersService (ref), autoCastCommand (ref), RBXWhisperCommand (ref), promiseModule (ref), loggerModule (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), chatTranslationGlobalToggledModule (ref), analytics (ref), chatTranslationMessageToggledModule (ref), chatInputBarResetTargetChannel (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), getTransparencyStoreModule (ref), runVirtualChatCommandModule (ref), commands (ref), textChatService (ref), expChatFlipDictationPriority (ref), fFlagExpChatDictatedSpeechEnabledModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), list (ref), configModule (ref), fFlagExpChatDictation (ref), dictationAnalyticsModule (ref), computeEditDistanceModule (ref), expChatUseVirtualCommandRunner (ref), globalCommands (ref), runGlobalChatCommandModule (ref)
+	-- upvalues: playersService (ref), autoCastCommand (ref), RBXWhisperCommand (ref), promiseModule (ref), loggerModule (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), chatTranslationGlobalToggledModule (ref), analytics (ref), chatTranslationMessageToggledModule (ref), chatInputBarResetTargetChannel (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), getTransparencyStoreModule (ref), runVirtualChatCommandModule (ref), commands (ref), textChatService (ref), expChatFlipDictationPriorityV2 (ref), fFlagExpChatDictatedSpeechEnabledModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), list (ref), configModule (ref), fFlagExpChatDictation (ref), dictationAnalyticsModule (ref), computeEditDistanceModule (ref), expChatUseVirtualCommandRunner (ref), globalCommands (ref), runGlobalChatCommandModule (ref)
 	return {
 		activateWhisperMode = function(p2)
 			-- upvalues: playersService (copy), autoCastCommand (copy), RBXWhisperCommand (copy), promiseModule (copy), loggerModule (copy)
@@ -96,7 +96,7 @@ return function(p1)
 			getTransparencyStoreModule(false).resetAllTransparency()
 		end,
 		onSendChat = function(p2, p3, p4)
-			-- upvalues: runVirtualChatCommandModule (copy), playersService (copy), commands (copy), textChatService (copy), loggerModule (copy), promiseModule (copy), expChatFlipDictationPriority (copy), fFlagExpChatDictatedSpeechEnabledModule (copy), getFFlagExpChatProtectedChatInternalAPIs (copy), list (copy), configModule (copy), fFlagExpChatDictation (copy), dictationAnalyticsModule (copy), analytics (copy), computeEditDistanceModule (copy)
+			-- upvalues: runVirtualChatCommandModule (copy), playersService (copy), commands (copy), textChatService (copy), loggerModule (copy), promiseModule (copy), expChatFlipDictationPriorityV2 (copy), fFlagExpChatDictatedSpeechEnabledModule (copy), getFFlagExpChatProtectedChatInternalAPIs (copy), list (copy), configModule (copy), fFlagExpChatDictation (copy), dictationAnalyticsModule (copy), analytics (copy), computeEditDistanceModule (copy)
 			if string.sub(p2, 1, 1) == "/" and runVirtualChatCommandModule(p2, if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0, commands.getVirtualLocalEnabledCommands(), "RBXGeneral") then return end
 			local chatInputBarConfiguration = textChatService:FindFirstChildOfClass("ChatInputBarConfiguration")
 			local var1 = if chatInputBarConfiguration then chatInputBarConfiguration.TargetTextChannel else nil
@@ -104,12 +104,14 @@ return function(p1)
 			
 			if var1 then
 				promiseModule.try(function()
-					-- upvalues: expChatFlipDictationPriority (copy), fFlagExpChatDictatedSpeechEnabledModule (copy), p4 (ref), var1 (write), p2 (ref), getFFlagExpChatProtectedChatInternalAPIs (copy), list (copy), playersService (copy), configModule (copy), fFlagExpChatDictation (copy), p3 (ref), dictationAnalyticsModule (copy), analytics (copy), computeEditDistanceModule (copy)
-					if expChatFlipDictationPriority then
+					-- upvalues: expChatFlipDictationPriorityV2 (copy), fFlagExpChatDictatedSpeechEnabledModule (copy), p4 (ref), var1 (write), p2 (ref), getFFlagExpChatProtectedChatInternalAPIs (copy), list (copy), playersService (copy), configModule (copy), fFlagExpChatDictation (copy), p3 (ref), dictationAnalyticsModule (copy), analytics (copy), computeEditDistanceModule (copy)
+					if expChatFlipDictationPriorityV2 then
 						if fFlagExpChatDictatedSpeechEnabledModule and p4 then
 							var1:SendDictatedSpeechAsync(p2)
 						elseif getFFlagExpChatProtectedChatInternalAPIs() then
 							var1:SendInternalAsync(p2)
+						else
+							var1:SendAsync(p2)
 						end
 					elseif getFFlagExpChatProtectedChatInternalAPIs() then
 						var1:SendInternalAsync(p2)
