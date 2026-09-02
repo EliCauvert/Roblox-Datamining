@@ -3,12 +3,12 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "eb56382b-c3ed-2dc6-019c-9b19e1fcfda1")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "cd9efa96-ad54-e646-56a4-c1d722295b0e")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 418162, 696564, e => {
     "use strict";
-    var s, t, n, a = e.i(536306),
+    var s, t, n, a = e.i(398515),
         o = e.i(671376),
         r = e.i(759283),
         i = e.i(927868),
@@ -379,6 +379,10 @@
                 asset: o.Asset.AvatarBackground,
                 apiType: a.V1ItemsByCreatorGetAssetTypeEnum.NUMBER_92
             },
+            [o.Asset.TextDocument]: {
+                asset: o.Asset.TextDocument,
+                apiType: a.V1ItemsByCreatorGetAssetTypeEnum.NUMBER_0
+            },
             [o.Asset.AssetPermissionRequests]: {
                 asset: o.Asset.AssetPermissionRequests,
                 apiType: a.V1ItemsByCreatorGetAssetTypeEnum.NUMBER_0
@@ -459,7 +463,7 @@
     }, "getItemTypeChipIconSrc", 0, function(e, s) {
         let t = e.toLowerCase(),
             n = I.has(t) ? "".concat(t, "accessory") : t;
-        return "".concat("".concat("https://assets.create.roblox.com/44ee813b14fe230ca133fc1520e8add03760695d/assets", "/unifiedFeeSystem"), "/").concat(s ? "".concat(n, ".svg") : "".concat(n, "_black.svg"))
+        return "".concat("".concat("https://assets.create.roblox.com/d3d59f2ecddf652f6d3a23f10dd62efe6d42376d/assets", "/unifiedFeeSystem"), "/").concat(s ? "".concat(n, ".svg") : "".concat(n, "_black.svg"))
     }, "getPublishPageUrl", 0, function(e, s) {
         return "/dashboard/creations/".concat(r.itemTypeToPath[e], "/").concat(s, "/publish")
     }, "getTaxonomyDisplayName", 0, function(e, s) {
@@ -1245,5 +1249,5 @@
     e.s(["DialogContentText", () => s.D])
 }]);
 
-//# debugId=eb56382b-c3ed-2dc6-019c-9b19e1fcfda1
-//# sourceMappingURL=03j15xl6hhayi.js.map
+//# debugId=cd9efa96-ad54-e646-56a4-c1d722295b0e
+//# sourceMappingURL=2hs3pn8ijmnhy.js.map

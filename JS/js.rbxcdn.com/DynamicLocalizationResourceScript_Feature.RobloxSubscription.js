@@ -178,7 +178,7 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Message.ReferralLinkError": "We could not create your link. Please try again later.",
     "Label.ReferralLinkCopied": "Link copied",
     "Action.CopyReferralLink": "Copy link",
-    "Description.ReferralEntry": "Invite someone to join Plus",
+    "Description.ReferralEntry": "Invite someone to join Roblox Plus",
     "Heading.ReferralEntry": "Share Plus to get {amount} Robux",
     "Heading.ReferralCard": "Share Plus, get {amount} Robux",
     "Action.ReferralInvite": "Invite",
@@ -198,6 +198,16 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Description.ReferralTerms": "By clicking \"Copy link\", I agree to the {linkStart}Roblox Plus Referral Program Terms{linkEnd}.",
     "Description.ProfileFramesDiscoveryBanner": "Make your profile stand out with a new frame",
     "Heading.ProfileFramesDiscoveryBanner": "Plus exclusive frames are here",
-    "Action.Get": "Get"
+    "Action.Get": "Get",
+    "Description.Benefit.DiscountBaseSubtitleV2": "{discountPercentTier1} off for the first {discountTier1Days} days, then {discountPercentTier2} off",
+    "Description.Benefit.DiscountBaseV2": "Discounts on items, avatars, and more",
+    "Description.Benefit.AvatarBackground": "Avatar backgrounds",
+    "Description.Benefit.AvatarBackgroundSubtitle": "Choose or create a background for your avatar",
+    "Description.Benefit.ProfileFrames": "Profile frames",
+    "Description.Benefit.ProfileFramesSubtitle": "Customize your avatar with exclusive frames",
+    "Description.Benefit.AppThemes": "App themes",
+    "Description.Benefit.AppThemesSubtitle": "Change the color of your platform background",
+    "Description.Benefit.Referral": "Refer people to Plus",
+    "Description.Benefit.ReferralSubtitle": "Earn {amount} Robux per referral"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.RobloxSubscription");

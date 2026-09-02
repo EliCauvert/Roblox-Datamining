@@ -2,10 +2,10 @@
     try {
         var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "35f87875510b805545cfa8c44cf9d06830107f4f"
+            id: "2ab5671a0b5c5baafbb3eaa157aa3fefa435052b"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "9ac7dfce-d7a5-462d-a35f-86d1738bfa20", e._sentryDebugIdIdentifier = "sentry-dbid-9ac7dfce-d7a5-462d-a35f-86d1738bfa20")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "3a4055a2-3634-43f7-8d28-2400909b2a05", e._sentryDebugIdIdentifier = "sentry-dbid-3a4055a2-3634-43f7-8d28-2400909b2a05")
     } catch (e) {}
 }(),
 function() {
@@ -92228,4 +92228,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("UserSettings");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/userSettings-c6becccff33a5af9.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/userSettings-2afc5d7fdadd7ad0.js.map

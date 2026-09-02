@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "6a592d04-dac2-ae73-14b5-765523c2289d")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "be54992a-da08-060a-7c5c-d1efb0f01ee0")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 639102, e => {
@@ -1083,17 +1083,17 @@
         }
     }(n.BaseAPI);
     var b = e.i(272593);
-    let w = new l((0, b.createClientConfiguration)("clientsettingscdn", "bedev1", {
+    let g = new l((0, b.createClientConfiguration)("clientsettingscdn", "bedev1", {
             credentials: "omit"
         })),
-        g = new y((0, b.createClientConfiguration)("clientsettings", "bedev1"));
+        w = new y((0, b.createClientConfiguration)("clientsettings", "bedev1"));
     var I = ((t = {}).RCCService = "RCCService", t.WindowsPlayer = "WindowsPlayer", t.WindowsStudio = "WindowsStudio64", t.MacPlayer = "MacPlayer", t.MacStudio = "MacStudio", t.WindowsStudioCJV = "WindowsStudio64CJV", t.MacStudioCJV = "MacStudioCJV", t.WindowsPlayerCJV = "WindowsPlayerCJV", t.MacPlayerCJV = "MacPlayerCJV", t);
     e.s(["EClientBinaryType", () => I, "channelClient", 0, {
-        getUserChannel: e => g.v2UserChannelGet({
+        getUserChannel: e => w.v2UserChannelGet({
             binaryType: e
         })
     }, "settingsClient", 0, {
-        getApplicationSettings: () => w.v1SettingsApplicationGet({
+        getApplicationSettings: () => g.v1SettingsApplicationGet({
             applicationName: "CreatorDashboard"
         })
     }], 639102)
@@ -2288,7 +2288,7 @@
     }], 486736)
 }, 429246, e => {
     "use strict";
-    var t, n = ((t = {}).enableExample = "enableExample", t.enableActivityFeedLocation = "enableActivityFeedLocation", t.enableDevexMaintenanceBanner = "enableDevexMaintenanceBanner", t.affiliateProgramAllowlist = "affiliateProgramAllowlist", t.enablePlayerFeedback = "enablePlayerFeedback", t.enablePlayerFeedbackUnrated = "enablePlayerFeedbackUnrated", t.enablePlayerFeedbackCategoryResetBeforeResponse = "enablePlayerFeedbackCategoryResetBeforeResponse", t.enableEnvironments = "enableEnvironments", t.enableYourPlaceCreationExperimentDate = "enableYourPlaceCreationExperimentDate", t.creatorRewardsAllowlist = "creatorRewardsAllowlist", t.unratedExperienceBannerLink = "unratedExperienceBannerLink", t.enableRentables = "enableRentables", t.rentablesPostLaunchWhitelist = "rentablesPostLaunchWhitelist", t.enableMakeupAssets = "enableMakeupAssets", t.enableQuestionnaireHelpDialog = "enableQuestionnaireHelpDialog", t.ageVerificationUpsellBannerStartDate = "ageVerificationUpsellBannerStartDate", t.ageVerificationUpsellBannerEndDate = "ageVerificationUpsellBannerEndDate", t.ageVerificationUpsellBannerHighPriorityDate = "ageVerificationUpsellBannerHighPriorityDate", t.ageVerificationUpsellGetStartedUrl = "ageVerificationUpsellGetStartedUrl", t.ageVerificationUpsellViewDetailsUrl = "ageVerificationUpsellViewDetailsUrl", t.serverManagementDevAllowlist = "serverManagementDevAllowlist", t.enableSignalRCrossTab = "enableSignalRCrossTab", t.enableImageTranslationEnrollment = "enableImageTranslationEnrollment", t.enableSharedTranslationListComponents = "enableSharedTranslationListComponents", t.showTaxonomyOnAvatarItemAnalyticsTab = "showTaxonomyOnAvatarItemAnalyticsTab", t.enableSecureTeleports = "enableSecureTeleports", t.serverManagementIncreaseRestartDelay = "serverManagementIncreaseRestartDelay", t.serverManagementCustomPayloadReady = "serverManagementCustomPayloadReady", t.serverManagementShowShutdownServers = "serverManagementShowShutdownServers", t.establishTrustUpsellGetStartedUrl = "establishTrustUpsellGetStartedUrl", t.establishTrustUpsellViewDetailsUrl = "establishTrustUpsellViewDetailsUrl", t.starterPlaceTemplateId = "starterPlaceTemplateId", t.enableTalentHubV2 = "enableTalentHubV2", t.enableTalentHubV2M2 = "enableTalentHubV2M2", t.enablePlaceModerationCheckBeforeStudioOpen = "enablePlaceModerationCheckBeforeStudioOpen", t.enableIpPlatformConditionalOffers = "enableIpPlatformConditionalOffers", t.impactedBannerScoutMaxPages = "impactedBannerScoutMaxPages", t.impactedExperiencesDevForumUrl = "impactedExperiencesDevForumUrl", t.impactedExperiencesAgeLearnMoreUrl = "impactedExperiencesAgeLearnMoreUrl", t.enableGroupModerationPage = "enableGroupModerationPage", t.impactedExperiencesMaxUniverseIds = "impactedExperiencesMaxUniverseIds", t.isHdEnabled = "isHdEnabled", t.enableReducedMarketplaceVisibilityBanner = "enableReducedMarketplaceVisibilityBanner", t.enableCoreContentGatedBanner = "enableCoreContentGatedBanner", t.publishEligibilityDevForumUrl = "publishEligibilityDevForumUrl", t.enableAudioUploadRevamp = "enableAudioUploadRevamp", t.enableRtbfSetting = "enableRtbfSetting", t.rtbfSettingAllowlist = "rtbfSettingAllowlist", t.enableAvatarAnimations = "enableAvatarAnimations", t.enableAvatarBackgrounds = "enableAvatarBackgrounds", t.enableIpPlatformDecoupleListingCreationFromLicenseCreation = "enableIpPlatformDecoupleListingCreationFromLicenseCreation", t.serverManagementShowServerLogs = "serverManagementShowServerLogs", t.enable2D3DUnificationBanner = "enable2D3DUnificationBanner", t.unification2D3DBannerLearnMoreUrl = "unification2D3DBannerLearnMoreUrl", t.enableUgcUploadPublishBlockBanner = "enableUgcUploadPublishBlockBanner", t.enableDataStoreRequestSourceAnalytics = "enableDataStoreRequestSourceAnalytics", t.enableIpPlatformMatchesTableEsIndexImprovements = "enableIpPlatformMatchesTableEsIndexImprovements", t.enableEmissive = "enableEmissive", t.presetChatMinPresetsPerCategory = "presetChatMinPresetsPerCategory", t.presetChatMaxPresetsPerCategory = "presetChatMaxPresetsPerCategory", t);
+    var t, n = ((t = {}).enableExample = "enableExample", t.enableActivityFeedLocation = "enableActivityFeedLocation", t.enableDevexMaintenanceBanner = "enableDevexMaintenanceBanner", t.affiliateProgramAllowlist = "affiliateProgramAllowlist", t.enablePlayerFeedback = "enablePlayerFeedback", t.enablePlayerFeedbackUnrated = "enablePlayerFeedbackUnrated", t.enablePlayerFeedbackCategoryResetBeforeResponse = "enablePlayerFeedbackCategoryResetBeforeResponse", t.enableEnvironments = "enableEnvironments", t.enableYourPlaceCreationExperimentDate = "enableYourPlaceCreationExperimentDate", t.creatorRewardsAllowlist = "creatorRewardsAllowlist", t.unratedExperienceBannerLink = "unratedExperienceBannerLink", t.enableRentables = "enableRentables", t.rentablesPostLaunchWhitelist = "rentablesPostLaunchWhitelist", t.enableMakeupAssets = "enableMakeupAssets", t.enableQuestionnaireHelpDialog = "enableQuestionnaireHelpDialog", t.ageVerificationUpsellBannerStartDate = "ageVerificationUpsellBannerStartDate", t.ageVerificationUpsellBannerEndDate = "ageVerificationUpsellBannerEndDate", t.ageVerificationUpsellBannerHighPriorityDate = "ageVerificationUpsellBannerHighPriorityDate", t.ageVerificationUpsellGetStartedUrl = "ageVerificationUpsellGetStartedUrl", t.ageVerificationUpsellViewDetailsUrl = "ageVerificationUpsellViewDetailsUrl", t.serverManagementDevAllowlist = "serverManagementDevAllowlist", t.enableSignalRCrossTab = "enableSignalRCrossTab", t.enableImageTranslationEnrollment = "enableImageTranslationEnrollment", t.enableImageTranslationListingTab = "enableImageTranslationListingTab", t.enableSharedTranslationListComponents = "enableSharedTranslationListComponents", t.showTaxonomyOnAvatarItemAnalyticsTab = "showTaxonomyOnAvatarItemAnalyticsTab", t.enableSecureTeleports = "enableSecureTeleports", t.serverManagementIncreaseRestartDelay = "serverManagementIncreaseRestartDelay", t.serverManagementCustomPayloadReady = "serverManagementCustomPayloadReady", t.serverManagementShowShutdownServers = "serverManagementShowShutdownServers", t.establishTrustUpsellGetStartedUrl = "establishTrustUpsellGetStartedUrl", t.establishTrustUpsellViewDetailsUrl = "establishTrustUpsellViewDetailsUrl", t.starterPlaceTemplateId = "starterPlaceTemplateId", t.enableTalentHubV2 = "enableTalentHubV2", t.enableTalentHubV2M2 = "enableTalentHubV2M2", t.enablePlaceModerationCheckBeforeStudioOpen = "enablePlaceModerationCheckBeforeStudioOpen", t.enableIpPlatformConditionalOffers = "enableIpPlatformConditionalOffers", t.impactedBannerScoutMaxPages = "impactedBannerScoutMaxPages", t.impactedExperiencesDevForumUrl = "impactedExperiencesDevForumUrl", t.impactedExperiencesAgeLearnMoreUrl = "impactedExperiencesAgeLearnMoreUrl", t.enableGroupModerationPage = "enableGroupModerationPage", t.impactedExperiencesMaxUniverseIds = "impactedExperiencesMaxUniverseIds", t.isHdEnabled = "isHdEnabled", t.enableReducedMarketplaceVisibilityBanner = "enableReducedMarketplaceVisibilityBanner", t.enableCoreContentGatedBanner = "enableCoreContentGatedBanner", t.publishEligibilityDevForumUrl = "publishEligibilityDevForumUrl", t.enableAudioUploadRevamp = "enableAudioUploadRevamp", t.enableRtbfSetting = "enableRtbfSetting", t.rtbfSettingAllowlist = "rtbfSettingAllowlist", t.enableAvatarAnimations = "enableAvatarAnimations", t.enableAvatarBackgrounds = "enableAvatarBackgrounds", t.enableIpPlatformDecoupleListingCreationFromLicenseCreation = "enableIpPlatformDecoupleListingCreationFromLicenseCreation", t.serverManagementShowServerLogs = "serverManagementShowServerLogs", t.enable2D3DUnificationBanner = "enable2D3DUnificationBanner", t.unification2D3DBannerLearnMoreUrl = "unification2D3DBannerLearnMoreUrl", t.enableUgcUploadPublishBlockBanner = "enableUgcUploadPublishBlockBanner", t.enableDataStoreRequestSourceAnalytics = "enableDataStoreRequestSourceAnalytics", t.enableIpPlatformMatchesTableEsIndexImprovements = "enableIpPlatformMatchesTableEsIndexImprovements", t.enableEmissive = "enableEmissive", t.presetChatMinPresetsPerCategory = "presetChatMinPresetsPerCategory", t.presetChatMaxPresetsPerCategory = "presetChatMaxPresetsPerCategory", t);
     let r = {
         enableExample: !1,
         enableActivityFeedLocation: !1,
@@ -2313,6 +2313,7 @@
         serverManagementDevAllowlist: "",
         enableSignalRCrossTab: !1,
         enableImageTranslationEnrollment: !1,
+        enableImageTranslationListingTab: !1,
         enableSharedTranslationListComponents: !1,
         showTaxonomyOnAvatarItemAnalyticsTab: !1,
         enableSecureTeleports: !1,
@@ -2354,5 +2355,5 @@
     e.s(["FeatureFlagName", () => n, "featureFlagDefaults", 0, r])
 }]);
 
-//# debugId=6a592d04-dac2-ae73-14b5-765523c2289d
-//# sourceMappingURL=19d9f7swtihhq.js.map
+//# debugId=be54992a-da08-060a-7c5c-d1efb0f01ee0
+//# sourceMappingURL=1x_enbmum8wdl.js.map

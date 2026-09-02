@@ -38,6 +38,10 @@ Roblox.LangDynamic["Feature.PersonalizedBonus"] = {
     "Notification.Title.LimitedTimeAvatarItemBonus": "Limited-Time Avatar Item with Robux",
     "Notification.Body.LimitedTimeAvatarItemBonus": "You received the {itemName}, check your inventory!",
     "Notification.Action.TryOn": "Try on",
-    "Description.GoldCrownOfOzymandias": "Gold Crown of Ozymandias"
+    "Description.GoldCrownOfOzymandias": "Gold Crown of Ozymandias",
+    "Message.BonusRobux.InboxMessageReceiptSubject": "You got bonus Robux",
+    "Message.BonusRobux.InboxMessageReceiptBody": "Your purchase included {bonusRobuxAmount} free bonus Robux.{lineBreak}Thank you and enjoy your Robux.",
+    "Description.BonusRobuxIncluded": "Your purchase includes {amount} bonus Robux.",
+    "Label.BonusRobuxTag": "{amount} bonus"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.PersonalizedBonus");

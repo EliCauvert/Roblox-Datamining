@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "50b42802-d2bd-461a-5a20-d900f0925dc1")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "0337f01f-484b-611a-a1f9-910302f9b975")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 962059, e => {
@@ -150,7 +150,7 @@
         O = e.i(109182),
         U = e.i(959222),
         B = e.i(37819),
-        z = e.i(377282),
+        z = e.i(329781),
         V = e.i(169722),
         F = e.i(714039),
         q = e.i(686197),
@@ -194,9 +194,9 @@
     var Q = e.i(339544),
         J = e.i(475642),
         X = e.i(211461),
-        Z = e.i(608972),
-        $ = e.i(956728),
-        ee = e.i(978989),
+        Z = e.i(888379),
+        $ = e.i(287184),
+        ee = e.i(562146),
         et = e.i(211388);
     let en = "CreatorHub.MomentsCreations.local",
         ei = e => "".concat(en, ".").concat(e),
@@ -725,7 +725,7 @@
         }
     }
 
-    function e5(e, t) {
+    function e3(e, t) {
         var n, i, a;
         return null == e ? e : {
             assetId: (0, ez.exists)(e, "assetId") ? e.assetId : void 0,
@@ -752,7 +752,7 @@
         }
     }
 
-    function e3(e, t) {
+    function e5(e, t) {
         var n;
         return null == e ? e : {
             status: (0, ez.exists)(e, "status") ? e.status : void 0,
@@ -820,7 +820,7 @@
             id: (0, ez.exists)(t, "id") ? t.id : void 0,
             feedItemId: (0, ez.exists)(t, "feedItemId") ? t.feedItemId : void 0,
             type: (0, ez.exists)(t, "type") ? t.type : void 0,
-            captionedAssetMoment: (0, ez.exists)(t, "captionedAssetMoment") ? e5(t.captionedAssetMoment) : void 0,
+            captionedAssetMoment: (0, ez.exists)(t, "captionedAssetMoment") ? e3(t.captionedAssetMoment) : void 0,
             primaryCta: (0, ez.exists)(t, "primaryCta") ? tt(t.primaryCta) : void 0,
             owner: (0, ez.exists)(t, "owner") ? e9(t.owner) : void 0,
             visibilityStatus: (0, ez.exists)(t, "visibilityStatus") ? t.visibilityStatus : void 0,
@@ -844,7 +844,7 @@
             id: (0, ez.exists)(t, "id") ? t.id : void 0,
             feedItemId: (0, ez.exists)(t, "feedItemId") ? t.feedItemId : void 0,
             type: (0, ez.exists)(t, "type") ? t.type : void 0,
-            captionedAssetMoment: (0, ez.exists)(t, "captionedAssetMoment") ? e5(t.captionedAssetMoment) : void 0,
+            captionedAssetMoment: (0, ez.exists)(t, "captionedAssetMoment") ? e3(t.captionedAssetMoment) : void 0,
             primaryCta: (0, ez.exists)(t, "primaryCta") ? tt(t.primaryCta) : void 0,
             owner: (0, ez.exists)(t, "owner") ? e9(t.owner) : void 0,
             visibilityStatus: (0, ez.exists)(t, "visibilityStatus") ? t.visibilityStatus : void 0,
@@ -983,7 +983,7 @@
                                 }, t)];
                             case 1:
                                 return a = s.sent(), [2, new ez.JSONApiResponse(a, function(e) {
-                                    return e3(e)
+                                    return e5(e)
                                 })]
                         }
                     })
@@ -1016,7 +1016,7 @@
                                 }, t)];
                             case 1:
                                 return a = s.sent(), [2, new ez.JSONApiResponse(a, function(e) {
-                                    return e3(e)
+                                    return e5(e)
                                 })]
                         }
                     })
@@ -2582,13 +2582,13 @@
             })]
         })
     }, [_.TranslationNamespace.Creations]);
-    var t$ = e.i(119673),
+    var t$ = e.i(233693),
         t0 = e.i(392782);
     let t1 = "UniverseId",
         t2 = "PlaceId",
         t4 = /(?:https?:\/\/)?create\.roblox\.com\/dashboard\/creations\/experiences\/(\d+)/,
-        t5 = /(?:https?:\/\/)?(?:www\.)?roblox\.com(?:\/[A-Za-z]{2}(?:-[A-Za-z0-9]{2,3})?)?\/games\/(\d+)/,
-        t3 = /^\d+$/,
+        t3 = /(?:https?:\/\/)?(?:www\.)?roblox\.com(?:\/[A-Za-z]{2}(?:-[A-Za-z0-9]{2,3})?)?\/games\/(\d+)/,
+        t5 = /^\d+$/,
         t7 = [{
             regex: /(?:https?:\/\/)?create\.sitetest\d\.robloxlabs\.com\/dashboard\/creations\/experiences\/(\d+)/,
             idType: t1
@@ -2609,10 +2609,10 @@
                 regex: t4,
                 idType: t1
             }, {
-                regex: t5,
+                regex: t3,
                 idType: t2
             }, ...r && null != l && l ? t7 : [], {
-                regex: t3,
+                regex: t5,
                 idType: t1
             }], [l, r]), x = (0, a.useMemo)(() => d.trim().length > 0 && f.some(e => {
                 let {
@@ -2629,7 +2629,7 @@
                         return t.test(l)
                     });
                 if (!u) return;
-                let m = u.idType === t1 && t3.test(l) ? Number(l) : Number(null == (e = u.regex.exec(l)) ? void 0 : e[1]);
+                let m = u.idType === t1 && t5.test(l) ? Number(l) : Number(null == (e = u.regex.exec(l)) ? void 0 : e[1]);
                 if (!m || !Number.isFinite(m)) return;
                 let h = {
                     inputValue: l,
@@ -2712,9 +2712,9 @@
                 })]
             })
         }, [_.TranslationNamespace.Creations, _.TranslationNamespace.Controls]);
-    var t9 = e.i(634733),
-        t6 = e.i(605836),
-        ne = e.i(220754);
+    var t9 = e.i(382368),
+        t6 = e.i(725074),
+        ne = e.i(678547);
     let nt = (0, s.withTranslation)(e => {
         let {
             value: t,
@@ -3182,7 +3182,7 @@
                 })
             })
         };
-    var nv = e.i(368313);
+    var nv = e.i(691468);
     let nf = e => {
             let {
                 selected: t,
@@ -3258,84 +3258,68 @@
         nM = e.i(665357),
         nj = e.i(131385),
         nE = e.i(643093);
-    let nP = (0, nw.makeStyles)()({
-            chipRow: {
-                display: "flex",
-                flexWrap: "wrap",
-                alignItems: "center",
-                gap: 8,
-                border: "none",
-                margin: 0,
-                padding: 0,
-                minInlineSize: "auto"
-            }
-        }),
-        nk = () => {
-            var e;
-            let {
-                classes: {
-                    chipRow: t
-                }
-            } = nP(), {
-                translate: n
-            } = (0, s.useTranslation)(), o = (0, nM.default)(), r = null != (e = (0, nA.default)()) && e, [{
-                activeTab: l
-            }, d] = (0, G.useQueryParams)(["activeTab", "filterIndex"]), {
-                l1Options: u,
-                activeL1Key: c
-            } = (0, nj.default)(!0), m = (0, g.isAllAssetTypesActiveTab)(l), p = (0, g.isAvatarLooksActiveTab)(l), h = (0, a.useCallback)(e => {
-                e && d({
-                    activeTab: (0, g.buildTaxonomyActiveTab)(e),
-                    filterIndex: 0
-                })
-            }, [d]), v = (0, a.useCallback)(() => {
-                d({
-                    activeTab: (0, g.buildTaxonomyActiveTab)(g.ALL_ASSET_TYPES_L1_KEY),
-                    filterIndex: 0
-                })
-            }, [d]), f = (0, a.useCallback)(() => {
-                d({
-                    activeTab: (0, g.buildTaxonomyActiveTab)(g.AVATAR_LOOKS_L1_KEY),
-                    filterIndex: 0
-                })
-            }, [d]), x = n("Label.Categories");
-            return 0 !== u.length || m ? (0, i.jsxs)("fieldset", {
-                className: t,
-                "aria-label": x,
-                children: [r && (0, i.jsx)(nv.Chip, {
-                    text: n("Label.Avatars"),
+    let nP = () => {
+        var e;
+        let {
+            translate: t
+        } = (0, s.useTranslation)(), n = (0, nM.default)(), o = null != (e = (0, nA.default)()) && e, [{
+            activeTab: r
+        }, l] = (0, G.useQueryParams)(["activeTab", "filterIndex"]), {
+            l1Options: d,
+            activeL1Key: u
+        } = (0, nj.default)(!0), c = (0, g.isAllAssetTypesActiveTab)(r), m = (0, g.isAvatarLooksActiveTab)(r), p = (0, a.useCallback)(e => {
+            e && l({
+                activeTab: (0, g.buildTaxonomyActiveTab)(e),
+                filterIndex: 0
+            })
+        }, [l]), h = (0, a.useCallback)(() => {
+            l({
+                activeTab: (0, g.buildTaxonomyActiveTab)(g.ALL_ASSET_TYPES_L1_KEY),
+                filterIndex: 0
+            })
+        }, [l]), v = (0, a.useCallback)(() => {
+            l({
+                activeTab: (0, g.buildTaxonomyActiveTab)(g.AVATAR_LOOKS_L1_KEY),
+                filterIndex: 0
+            })
+        }, [l]), f = t("Label.Categories");
+        return 0 !== d.length || c ? (0, i.jsxs)("fieldset", {
+            className: "flex wrap items-center gap-small stroke-none margin-none padding-none [min-inline-size:auto]",
+            "aria-label": f,
+            children: [o && (0, i.jsx)(nv.Chip, {
+                text: t("Label.Avatars"),
+                size: "Medium",
+                variant: "Standard",
+                isChecked: m,
+                onCheckedChange: v
+            }), d.map(e => {
+                var n;
+                return (0, i.jsx)(nv.Chip, {
+                    text: (0, nE.taxonomyOptionLabel)(e, t),
                     size: "Medium",
                     variant: "Standard",
-                    isChecked: p,
-                    onCheckedChange: f
-                }), u.map(e => {
-                    var t;
-                    return (0, i.jsx)(nv.Chip, {
-                        text: (0, nE.taxonomyOptionLabel)(e, n),
-                        size: "Medium",
-                        variant: "Standard",
-                        isChecked: e.taxonomyKey === c,
-                        onCheckedChange: () => h(e.taxonomyKey)
-                    }, null != (t = e.taxonomyKey) ? t : e.nameKey)
-                }), o && (0, i.jsx)(nv.Chip, {
-                    text: n("Label.AllAssetTypes"),
-                    size: "Medium",
-                    variant: "Standard",
-                    isChecked: m,
-                    onCheckedChange: v
-                })]
-            }) : null
-        };
-    var nL = e.i(638016),
-        nR = e.i(157310),
-        nN = e.i(348558),
-        nD = e.i(100226);
-    let nO = (e, t) => {
+                    isChecked: e.taxonomyKey === u,
+                    onCheckedChange: () => p(e.taxonomyKey)
+                }, null != (n = e.taxonomyKey) ? n : e.nameKey)
+            }), n && (0, i.jsx)(nv.Chip, {
+                text: t("Label.AllAssetTypes"),
+                size: "Medium",
+                variant: "Standard",
+                isChecked: c,
+                onCheckedChange: h
+            })]
+        }) : null
+    };
+    var nk = e.i(638016),
+        nL = e.i(157310),
+        nR = e.i(348558),
+        nN = e.i(100226);
+    let nD = (e, t) => {
             let {
                 settings: n
-            } = (0, x.useSettings)(), i = C(), s = (0, nM.default)(), o = (0, nA.default)(), r = (0, nD.default)(), l = (0, nN.default)(), {
+            } = (0, x.useSettings)(), i = C(), s = (0, nM.default)(), o = (0, nA.default)(), r = (0, nN.default)(), l = (0, nR.default)(), {
                 data: d
-            } = (0, nR.useQuery)({
+            } = (0, nL.useQuery)({
                 queryKey: ["avatar-items-entry-point-asset-types"],
                 queryFn: y.getAvatarItemsEntryPointAssetTypes,
                 staleTime: 3e5
@@ -3345,7 +3329,7 @@
                 return null != (a = null == (u = e.menuItem.submenuItems) ? void 0 : u.filter(a => I.default.isMenuItemEnabled(a, n, t, "Label.AvatarItems" === e.menuItem.nameKey ? null == d ? void 0 : d.has(a.type) : void 0, d, i, s, o, r, l))) ? a : []
             }, [e.menuItem.submenuItems, e.menuItem.nameKey, n, t, d, i, s, o, r, l])
         },
-        nU = (0, nw.makeStyles)()(e => ({
+        nO = (0, nw.makeStyles)()(e => ({
             subMenuContainer: {
                 maxWidth: "100%",
                 position: "relative",
@@ -3378,7 +3362,7 @@
                 marginRight: 8
             }
         })),
-        nB = e => {
+        nU = e => {
             let {
                 menuState: t,
                 onMenuStateChange: n,
@@ -3392,11 +3376,11 @@
                     chip: c
                 },
                 cx: m
-            } = nU(), p = (0, a.useRef)(null), {
+            } = nO(), p = (0, a.useRef)(null), {
                 translate: h
             } = (0, s.useTranslation)(), [v, f] = (0, a.useState)(0), [x, g] = (0, a.useState)(0), [b, y] = (0, a.useState)(0), {
                 isTaxonomyMode: T
-            } = (0, nL.default)(I.default.getAssetType(t)), C = nO(t, o), w = (0, a.useMemo)(() => v <= 0, [v]), S = (0, a.useMemo)(() => v + b >= x, [v, x, b]), A = () => {
+            } = (0, nk.default)(I.default.getAssetType(t)), C = nD(t, o), w = (0, a.useMemo)(() => v <= 0, [v]), S = (0, a.useMemo)(() => v + b >= x, [v, x, b]), A = () => {
                 var e, t, n;
                 let i = null == p ? void 0 : p.current;
                 f(null != (e = null == i ? void 0 : i.scrollLeft) ? e : 0), g(null != (t = null == i ? void 0 : i.scrollWidth) ? t : 0), y(null != (n = null == i ? void 0 : i.offsetWidth) ? n : 0)
@@ -3407,7 +3391,7 @@
                 return e && (e.addEventListener("scroll", A), t.observe(e)), () => {
                     e && (e.removeEventListener("scroll", A), t.unobserve(e))
                 }
-            }, []), T) ? (0, i.jsx)(nk, {}) : (0, i.jsxs)(nS.Flex, {
+            }, []), T) ? (0, i.jsx)(nP, {}) : (0, i.jsxs)(nS.Flex, {
                 classes: {
                     root: r
                 },
@@ -3469,26 +3453,26 @@
                 })]
             })
         };
-    var nz = e.i(54842),
-        nV = e.i(774807),
-        nF = e.i(558826),
-        nq = e.i(872204),
-        nG = e.i(39128),
-        n_ = e.i(54369),
-        nH = e.i(220552),
-        nK = e.i(573672),
-        nW = e.i(310634),
-        nY = e.i(556030),
-        nQ = e.i(517379),
-        nJ = e.i(199834),
-        nX = e.i(239328),
-        nZ = e.i(776344),
-        n$ = e.i(823062),
-        n0 = e.i(198528),
-        n1 = e.i(949599),
-        n2 = e.i(704443),
-        n4 = e.i(696564),
-        n5 = e.i(418162);
+    var nB = e.i(54842),
+        nz = e.i(774807),
+        nV = e.i(558826),
+        nF = e.i(872204),
+        nq = e.i(39128),
+        nG = e.i(54369),
+        n_ = e.i(220552),
+        nH = e.i(573672),
+        nK = e.i(310634),
+        nW = e.i(556030),
+        nY = e.i(517379),
+        nQ = e.i(199834),
+        nJ = e.i(239328),
+        nX = e.i(776344),
+        nZ = e.i(823062),
+        n$ = e.i(198528),
+        n0 = e.i(949599),
+        n1 = e.i(704443),
+        n2 = e.i(696564),
+        n4 = e.i(418162);
     let n3 = (0, nw.makeStyles)()(e => ({
         toolbarContainer: {
             [e.breakpoints.down("Large")]: {
@@ -3516,31 +3500,31 @@
             marginRight: 12
         }
     }));
-    var n7 = e.i(291037),
-        n8 = e.i(777004),
-        n9 = e.i(899819),
-        n6 = e.i(447055),
-        ie = e.i(242788),
-        it = e.i(854705),
-        ii = e.i(235684),
-        ia = e.i(210598),
-        is = e.i(904090),
-        io = e.i(196945),
-        ir = e.i(913893),
-        il = e.i(185915);
+    var n5 = e.i(291037),
+        n7 = e.i(777004),
+        n8 = e.i(899819),
+        n9 = e.i(447055),
+        n6 = e.i(242788),
+        ie = e.i(854705),
+        it = e.i(235684),
+        ii = e.i(210598),
+        ia = e.i(904090),
+        is = e.i(196945),
+        io = e.i(913893),
+        ir = e.i(185915);
 
-    function id(e) {
+    function il(e) {
         if (void 0 === e.id || void 0 === e.autoPublishEnabled) throw Error("Publishing preferences response was malformed");
         return e
     }
+    async function id(e) {
+        return il(await io.default.getPublishingPreferences(e))
+    }
     async function iu(e) {
-        return id(await ir.default.getPublishingPreferences(e))
+        return il(await io.default.createPublishingPreferences(e))
     }
-    async function ic(e) {
-        return id(await ir.default.createPublishingPreferences(e))
-    }
-    var im = e.i(812141);
-    let ip = e => {
+    var ic = e.i(812141);
+    let im = e => {
         let {
             label: t,
             children: n,
@@ -3554,18 +3538,18 @@
                     className: "text-label-large ".concat(null != s ? s : ""),
                     children: t
                 }), n]
-            }), (0, i.jsx)(nG.Divider, {})]
+            }), (0, i.jsx)(nq.Divider, {})]
         })
     };
 
-    function ih(e) {
+    function ip(e) {
         return 4 === e || 2 === e
     }
 
-    function iv(e, t, n) {
+    function ih(e, t, n) {
         return e && t && "all" === n ? 1 : e && t && "specific" === n ? 4 : e && !t ? 3 : !e && t ? 2 : 0
     }
-    let ix = e => {
+    let iv = e => {
         var t;
         let {
             open: n,
@@ -3574,13 +3558,13 @@
             translate: r
         } = (0, s.useTranslation)(), {
             enqueue: l
-        } = (0, io.useSnackbar)(), {
+        } = (0, is.useSnackbar)(), {
             user: d
         } = (0, E.useAuthentication)(), u = (0, f.useCurrentGroup)(), c = null == u ? void 0 : u.id, {
             data: m
-        } = (0, im.default)(ir.default), p = null != (t = null == m ? void 0 : m.maxCollectiblePrice) ? t : n4.DefaultMaxCollectiblePrice, [h, v] = (0, a.useState)(!0), [x, g] = (0, a.useState)(!1), [b, y] = (0, a.useState)(!1), [I, T] = (0, a.useState)(""), [C, w] = (0, a.useState)(""), [S, A] = (0, a.useState)(!0), [M, j] = (0, a.useState)(!0), [P, k] = (0, a.useState)(!0), [L, R] = (0, a.useState)("all"), [N, D] = (0, a.useState)(""), [O, U] = (0, a.useState)(!1);
+        } = (0, ic.default)(io.default), p = null != (t = null == m ? void 0 : m.maxCollectiblePrice) ? t : n2.DefaultMaxCollectiblePrice, [h, v] = (0, a.useState)(!0), [x, g] = (0, a.useState)(!1), [b, y] = (0, a.useState)(!1), [I, T] = (0, a.useState)(""), [C, w] = (0, a.useState)(""), [S, A] = (0, a.useState)(!0), [M, j] = (0, a.useState)(!0), [P, k] = (0, a.useState)(!0), [L, R] = (0, a.useState)("all"), [N, D] = (0, a.useState)(""), [O, U] = (0, a.useState)(!1);
         (0, a.useEffect)(() => {
-            n && iu(c).then(e => {
+            n && id(c).then(e => {
                 T(String(e.priceOffset)), w(e.priceInRobux > 0 ? String(e.priceInRobux) : ""), A(e.enableRegionalPricing), y(e.isRentalOptIn);
                 let t = function(e) {
                     switch (e) {
@@ -3605,7 +3589,7 @@
                 j(t.sellInMarketplace), k(t.sellInExperiences), R(t.experienceLocationMode), e.places.length > 0 && D(e.places.join(","))
             }).catch(e => {
                 var t;
-                (null == (t = (0, il.default)(e)) ? void 0 : t.status) !== 404 && (U(!0), l({
+                (null == (t = (0, ir.default)(e)) ? void 0 : t.status) !== 404 && (U(!0), l({
                     message: r("Message.ErrorProcessingRequest"),
                     autoHide: !0,
                     autoHideDuration: 3e3,
@@ -3620,9 +3604,9 @@
                 if (null == d ? void 0 : d.id) {
                     g(!0);
                     try {
-                        let e = iv(M, P, L),
-                            t = ih(e) ? N.split(",").filter(Boolean).map(e => Number(e)) : [];
-                        await ic({
+                        let e = ih(M, P, L),
+                            t = ip(e) ? N.split(",").filter(Boolean).map(e => Number(e)) : [];
+                        await iu({
                             creatorUserId: d.id,
                             creatorGroupId: c,
                             publishingType: 2,
@@ -3678,8 +3662,8 @@
                     D(t)
                 }
             }, []),
-            G = h || x || O || !M && !P || "" === I || "" === C || 0 >= Number(C) || ih(iv(M, P, L)) && 0 === N.split(",").filter(Boolean).length;
-        return (0, i.jsxs)(n7.Dialog, {
+            G = h || x || O || !M && !P || "" === I || "" === C || 0 >= Number(C) || ip(ih(M, P, L)) && 0 === N.split(",").filter(Boolean).length;
+        return (0, i.jsxs)(n5.Dialog, {
             open: n,
             onClose: o,
             maxWidth: "Medium",
@@ -3687,7 +3671,7 @@
             PaperProps: {
                 className: "[width:580px]"
             },
-            children: [(0, i.jsx)(n9.DialogTitle, {
+            children: [(0, i.jsx)(n8.DialogTitle, {
                 className: "padding-bottom-none",
                 children: (0, i.jsxs)("div", {
                     className: "flex justify-between items-start",
@@ -3699,29 +3683,29 @@
                         onClick: o,
                         size: "small",
                         color: "inherit",
-                        children: (0, i.jsx)(n6.CloseIcon, {})
+                        children: (0, i.jsx)(n9.CloseIcon, {})
                     })]
                 })
-            }), (0, i.jsxs)(n8.DialogContent, {
+            }), (0, i.jsxs)(n7.DialogContent, {
                 className: "padding-top-small",
-                children: [(0, i.jsx)(nJ.Typography, {
+                children: [(0, i.jsx)(nQ.Typography, {
                     variant: "body2",
                     className: "[opacity:0.7] padding-bottom-medium",
                     children: r("Description.StudioPublishSettingsSubtitle")
-                }), (0, i.jsx)(ip, {
+                }), (0, i.jsx)(im, {
                     label: r("Label.Availability"),
                     children: (0, i.jsx)("span", {
                         className: "text-label-large [margin-left:12px]",
                         children: r("Label.NonLimited")
                     })
-                }), (0, i.jsx)(ip, {
+                }), (0, i.jsx)(im, {
                     label: r("Label.TimedOption"),
-                    children: (0, i.jsx)(nQ.Switch, {
+                    children: (0, i.jsx)(nY.Switch, {
                         checked: b,
                         onChange: () => y(e => !e),
                         "aria-label": "Timed Option"
                     })
-                }), (0, i.jsx)(ip, {
+                }), (0, i.jsx)(im, {
                     label: r("Label.PriceConfigurations"),
                     className: "grid [grid-template-columns:175px_1fr] padding-y-large gap-xsmall",
                     labelClassName: "padding-top-small",
@@ -3729,7 +3713,7 @@
                         className: "flex flex-col [flex:1] gap-xsmall",
                         children: [(0, i.jsxs)("div", {
                             className: "flex items-center gap-xsmall",
-                            children: [(0, i.jsx)(ia.TextField, {
+                            children: [(0, i.jsx)(ii.TextField, {
                                 id: "price-offset",
                                 label: "",
                                 placeholder: r("Placeholder.AmountAbovePriceFloor"),
@@ -3738,17 +3722,17 @@
                                 value: I,
                                 onChange: V,
                                 fullWidth: !0
-                            }), (0, i.jsx)(is.Tooltip, {
+                            }), (0, i.jsx)(ia.Tooltip, {
                                 title: r("Tooltip.AmountAbovePriceFloor"),
                                 children: (0, i.jsx)(nI.IconButton, {
                                     "aria-label": "price offset info",
                                     size: "small",
-                                    children: (0, i.jsx)(ie.InfoOutlinedIcon, {})
+                                    children: (0, i.jsx)(n6.InfoOutlinedIcon, {})
                                 })
                             })]
                         }), (0, i.jsxs)("div", {
                             className: "flex items-center gap-xsmall",
-                            children: [(0, i.jsx)(ia.TextField, {
+                            children: [(0, i.jsx)(ii.TextField, {
                                 id: "price-floor-minimum",
                                 label: "",
                                 placeholder: r("Placeholder.DoNotPriceBelow"),
@@ -3757,26 +3741,26 @@
                                 value: C,
                                 onChange: F,
                                 fullWidth: !0
-                            }), (0, i.jsx)(is.Tooltip, {
+                            }), (0, i.jsx)(ia.Tooltip, {
                                 title: r("Tooltip.MinimumPriceFloor"),
                                 children: (0, i.jsx)(nI.IconButton, {
                                     "aria-label": "minimum price info",
                                     size: "small",
-                                    children: (0, i.jsx)(ie.InfoOutlinedIcon, {})
+                                    children: (0, i.jsx)(n6.InfoOutlinedIcon, {})
                                 })
                             })]
                         })]
                     })
-                }), (0, i.jsx)(ip, {
+                }), (0, i.jsx)(im, {
                     label: r("Label.RegionalPricing"),
-                    children: (0, i.jsx)(nQ.Switch, {
+                    children: (0, i.jsx)(nY.Switch, {
                         checked: S,
                         onChange: () => A(e => !e),
                         "aria-label": "Regional Pricing"
                     })
-                }), (0, i.jsx)(ip, {
+                }), (0, i.jsx)(im, {
                     label: r("Label.SellInMarketplace"),
-                    children: (0, i.jsx)(nQ.Switch, {
+                    children: (0, i.jsx)(nY.Switch, {
                         checked: M,
                         onChange: () => {
                             let e = !M;
@@ -3784,22 +3768,22 @@
                         },
                         "aria-label": "Sell in Marketplace"
                     })
-                }), (0, i.jsx)(ip, {
+                }), (0, i.jsx)(im, {
                     label: r("Label.SellInExperiences"),
-                    children: (0, i.jsx)(nQ.Switch, {
+                    children: (0, i.jsx)(nY.Switch, {
                         checked: P,
                         onChange: () => k(e => !e),
                         "aria-label": "Sell in experiences"
                     })
                 }), P && (0, i.jsxs)(i.Fragment, {
-                    children: [(0, i.jsx)(nG.Divider, {}), (0, i.jsxs)("div", {
+                    children: [(0, i.jsx)(nq.Divider, {}), (0, i.jsxs)("div", {
                         className: "padding-y-large",
                         children: [(0, i.jsxs)("div", {
                             className: "grid [grid-template-columns:175px_1fr] items-center",
                             children: [(0, i.jsx)("span", {
                                 className: "text-label-large",
                                 children: r("Label.ExperienceLocations")
-                            }), (0, i.jsxs)(ii.RadioGroup, {
+                            }), (0, i.jsxs)(it.RadioGroup, {
                                 row: !0,
                                 value: L,
                                 onChange: e => {
@@ -3807,18 +3791,18 @@
                                     ("all" === t || "specific" === t) && R(t)
                                 },
                                 className: "flex flex-row no-wrap gap-xsmall [margin-left:12px]",
-                                children: [(0, i.jsx)(n_.FormControlLabel, {
+                                children: [(0, i.jsx)(nG.FormControlLabel, {
                                     value: "all",
                                     disabled: !M,
-                                    control: (0, i.jsx)(it.Radio, {
+                                    control: (0, i.jsx)(ie.Radio, {
                                         "aria-label": r("Label.AllGames"),
                                         size: "small"
                                     }),
                                     label: r("Label.AllGames"),
                                     className: "margin-right-medium"
-                                }), (0, i.jsx)(n_.FormControlLabel, {
+                                }), (0, i.jsx)(nG.FormControlLabel, {
                                     value: "specific",
-                                    control: (0, i.jsx)(it.Radio, {
+                                    control: (0, i.jsx)(ie.Radio, {
                                         "aria-label": r("Label.SpecificExperiences"),
                                         size: "small"
                                     }),
@@ -3827,7 +3811,7 @@
                             })]
                         }), "specific" === L && (0, i.jsxs)("div", {
                             className: "[margin-left:187px] [margin-top:10px]",
-                            children: [(0, i.jsx)(ia.TextField, {
+                            children: [(0, i.jsx)(ii.TextField, {
                                 id: "place-ids",
                                 label: "",
                                 placeholder: r("Placeholder.EnterExperienceIDs"),
@@ -3836,7 +3820,7 @@
                                 value: N,
                                 onChange: q,
                                 fullWidth: !0
-                            }), (0, i.jsxs)(nJ.Typography, {
+                            }), (0, i.jsxs)(nQ.Typography, {
                                 variant: "caption",
                                 className: "[opacity:0.6] block [margin-top:4px]",
                                 children: [N ? N.split(",").filter(Boolean).length : 0, "/", 5, " ", r("Label.ExperiencesCount")]
@@ -3846,7 +3830,7 @@
                 })]
             }), (0, i.jsxs)("div", {
                 className: "flex padding-x-large padding-y-medium gap-small",
-                children: [(0, i.jsx)(nq.Button, {
+                children: [(0, i.jsx)(nF.Button, {
                     variant: "contained",
                     color: "primaryBrand",
                     onClick: z,
@@ -3854,7 +3838,7 @@
                     size: "large",
                     className: "[flex:1] radius-medium",
                     children: r("Action.Save")
-                }), (0, i.jsx)(nq.Button, {
+                }), (0, i.jsx)(nF.Button, {
                     variant: "contained",
                     color: "secondary",
                     onClick: o,
@@ -3865,9 +3849,9 @@
             })]
         })
     };
-    var ig = e.i(186214),
-        ib = e.i(759283);
-    let iy = (e, t) => {
+    var ix = e.i(186214),
+        ig = e.i(759283);
+    let ib = (e, t) => {
         switch (null == e ? void 0 : e.code) {
             case void 0:
             default:
@@ -3930,9 +3914,9 @@
                 return "Message.GrantedItemCannotBePublished"
         }
     };
-    var iI = e.i(685245),
-        iT = e.i(431498);
-    let iC = (0, nw.makeStyles)()(e => ({
+    var iy = e.i(919448),
+        iI = e.i(431498);
+    let iT = (0, nw.makeStyles)()(e => ({
             dialogPaper: {
                 minWidth: 376,
                 maxWidth: 480
@@ -4010,9 +3994,9 @@
                 minWidth: 0
             }
         })),
-        iw = ["makeup", "clothing", "accessories"],
-        iS = ["clothing", "makeup"],
-        iA = {
+        iC = ["makeup", "clothing", "accessories"],
+        iw = ["clothing", "makeup"],
+        iS = {
             makeup: {
                 all: "Label.AllMakeup",
                 short: "Label.Makeup"
@@ -4027,10 +4011,10 @@
             }
         };
 
-    function iM(e) {
-        return e ? iA.clothing.all : "Label.ClothingOnlyTShirtsPantsSweaters"
+    function iA(e) {
+        return e ? iS.clothing.all : "Label.ClothingOnlyTShirtsPantsSweaters"
     }
-    let ij = (0, s.withTranslation)(e => {
+    let iM = (0, s.withTranslation)(e => {
         let t, {
                 open: n,
                 onClose: o,
@@ -4043,14 +4027,14 @@
             {
                 classes: u,
                 cx: c
-            } = iC(),
+            } = iT(),
             {
                 enqueue: m,
                 close: p
-            } = (0, io.useSnackbar)(),
+            } = (0, is.useSnackbar)(),
             h = (0, f.useCurrentGroup)(),
             v = !1 !== r.showCategorySubtypeDropdowns,
-            x = (0, a.useMemo)(() => v ? iw : iS, [v]),
+            x = (0, a.useMemo)(() => v ? iC : iw, [v]),
             [g, b] = (0, a.useState)({
                 clothing: !1,
                 makeup: !1,
@@ -4115,24 +4099,24 @@
                 if (!l || null === A) return void o();
                 let e = x.flatMap(e => E[e] ? j[e].filter(e => y[e]) : []);
                 try {
-                    await ir.default.bulkUpdateCollectible(P.uuidService.generateRandomUuid(), null == h ? void 0 : h.id, e.map(e => (0, n5.translateAssetType)(e)), "enable" === A), m({
+                    await io.default.bulkUpdateCollectible(P.uuidService.generateRandomUuid(), null == h ? void 0 : h.id, e.map(e => (0, n4.translateAssetType)(e)), "enable" === A), m({
                         message: d("Message.TimedOptionSettingsApplied"),
                         anchorOrigin: {
                             vertical: "bottom",
                             horizontal: "center"
                         },
-                        autoHideDuration: ib.toastDurationTime,
+                        autoHideDuration: ig.toastDurationTime,
                         autoHide: !0,
                         onClose: p
                     }), window.location.reload(), o()
                 } catch (e) {
                     m({
-                        message: d(iy(await (0, tv.default)(e), "Error.Unknown")),
+                        message: d(ib(await (0, tv.default)(e), "Error.Unknown")),
                         anchorOrigin: {
                             vertical: "bottom",
                             horizontal: "center"
                         },
-                        autoHideDuration: ib.toastDurationTime,
+                        autoHideDuration: ig.toastDurationTime,
                         autoHide: !0,
                         onClose: p
                     })
@@ -4147,17 +4131,17 @@
                 if (0 === t.length) return null;
                 let n = t.filter(e => y[e]);
                 if (0 === n.length) return null;
-                if (n.length === t.length) return d("clothing" === e ? iM(v) : iA[e].all);
-                let i = d(iA[e].short),
-                    a = n.map(e => d(ib.assetFullNameKeys[e])).join(", ");
+                if (n.length === t.length) return d("clothing" === e ? iA(v) : iS[e].all);
+                let i = d(iS[e].short),
+                    a = n.map(e => d(ig.assetFullNameKeys[e])).join(", ");
                 return "".concat(i, " (").concat(a, ")")
             }).filter(e => null !== e), [y, j, E, v, d, x]),
             U = (0, a.useMemo)(() => x.some(e => E[e] && j[e].some(e => y[e])), [y, j, E, x]),
             B = (0, i.jsxs)(i.Fragment, {
-                children: [(0, i.jsx)(ig.DialogContentText, {
+                children: [(0, i.jsx)(ix.DialogContentText, {
                     className: u.descriptionText,
                     children: d("Description.BulkUpdateAllTimedOptions")
-                }), (0, i.jsx)(nZ.default, {
+                }), (0, i.jsx)(nX.default, {
                     flexDirection: "column",
                     classes: {
                         root: u.checkboxList
@@ -4167,7 +4151,7 @@
                         if (!E[e]) return null;
                         let n = g[e],
                             s = "timed-options-bulk-".concat(e, "-subtypes"),
-                            o = d("clothing" === e ? iM(v) : iA[e].all);
+                            o = d("clothing" === e ? iA(v) : iS[e].all);
                         return (0, i.jsxs)(a.default.Fragment, {
                             children: [(0, i.jsxs)("div", {
                                 className: u.categoryRow,
@@ -4185,10 +4169,10 @@
                                         categoryName: o
                                     }),
                                     color: "inherit",
-                                    children: (0, i.jsx)(iT.ChevronRightIcon, {
+                                    children: (0, i.jsx)(iI.ChevronRightIcon, {
                                         className: c(n ? u.expandToggleExpanded : u.expandToggleCollapsed)
                                     })
-                                }) : null, (0, i.jsx)(iI.Checkbox, {
+                                }) : null, (0, i.jsx)(iy.Checkbox, {
                                     label: o,
                                     size: "Small",
                                     placement: "Start",
@@ -4217,8 +4201,8 @@
                             }), v && n ? (0, i.jsx)("div", {
                                 id: s,
                                 className: u.subtypeIndent,
-                                children: t.map(e => (0, i.jsx)(iI.Checkbox, {
-                                    label: d(ib.assetFullNameKeys[e]),
+                                children: t.map(e => (0, i.jsx)(iy.Checkbox, {
+                                    label: d(ig.assetFullNameKeys[e]),
                                     size: "Small",
                                     placement: "Start",
                                     isChecked: y[e],
@@ -4232,12 +4216,12 @@
                             }) : null]
                         }, e)
                     })(e))
-                }), (0, i.jsxs)(nZ.default, {
+                }), (0, i.jsxs)(nX.default, {
                     flexDirection: "row",
                     classes: {
                         root: u.buttonContainer
                     },
-                    children: [(0, i.jsx)(nq.Button, {
+                    children: [(0, i.jsx)(nF.Button, {
                         variant: "contained",
                         color: "secondary",
                         onClick: L,
@@ -4245,7 +4229,7 @@
                         className: u.actionButton,
                         disabled: !U,
                         children: d("Action.Enable")
-                    }), (0, i.jsx)(nq.Button, {
+                    }), (0, i.jsx)(nF.Button, {
                         variant: "contained",
                         color: "secondary",
                         onClick: R,
@@ -4257,7 +4241,7 @@
                 })]
             });
         return w && (t = "enable" === A ? "Description.ThisWillEnableTimedOptionsFor" : "Description.ThisWillDisableTimedOptionsFor", B = (0, i.jsxs)(i.Fragment, {
-            children: [(0, i.jsx)(ig.DialogContentText, {
+            children: [(0, i.jsx)(ix.DialogContentText, {
                 className: u.descriptionText,
                 children: d(t)
             }), O.length > 0 && (0, i.jsx)("ul", {
@@ -4265,22 +4249,22 @@
                 children: O.map(e => (0, i.jsx)("li", {
                     children: e
                 }, e))
-            }), (0, i.jsx)(ig.DialogContentText, {
+            }), (0, i.jsx)(ix.DialogContentText, {
                 className: u.descriptionText,
                 children: d("Description.ThisWillAlsoReplaceAnyItemLevelSettings")
-            }), (0, i.jsxs)(nZ.default, {
+            }), (0, i.jsxs)(nX.default, {
                 flexDirection: "row",
                 classes: {
                     root: u.buttonContainer
                 },
-                children: [(0, i.jsx)(nq.Button, {
+                children: [(0, i.jsx)(nF.Button, {
                     variant: "contained",
                     color: "primaryBrand",
                     onClick: N,
                     size: "medium",
                     className: u.actionButton,
                     children: d("Action.Confirm")
-                }), (0, i.jsx)(nq.Button, {
+                }), (0, i.jsx)(nF.Button, {
                     variant: "contained",
                     color: "secondary",
                     onClick: D,
@@ -4289,7 +4273,7 @@
                     children: d("Action.Cancel")
                 })]
             })]
-        })), (0, i.jsxs)(n7.Dialog, {
+        })), (0, i.jsxs)(n5.Dialog, {
             open: n,
             onClose: k,
             maxWidth: "Small",
@@ -4297,7 +4281,7 @@
             classes: {
                 paper: u.dialogPaper
             },
-            children: [(0, i.jsxs)(n9.DialogTitle, {
+            children: [(0, i.jsxs)(n8.DialogTitle, {
                 className: u.dialogTitle,
                 children: [(0, i.jsx)("span", {
                     className: u.dialogTitleText,
@@ -4308,19 +4292,19 @@
                     size: "small",
                     className: u.closeButton,
                     color: "inherit",
-                    children: (0, i.jsx)(n6.CloseIcon, {})
+                    children: (0, i.jsx)(n9.CloseIcon, {})
                 })]
-            }), (0, i.jsx)(n8.DialogContent, {
+            }), (0, i.jsx)(n7.DialogContent, {
                 className: u.dialogContent,
                 children: B
             })]
         })
     }, [_.TranslationNamespace.ConfigureItem, _.TranslationNamespace.Creations, _.TranslationNamespace.AssetTypes]);
 
-    function iE(e) {
+    function ij(e) {
         return "Tshirt" === e ? m.Asset.TShirt : "TshirtAccessory" === e ? m.Asset.TShirtAccessory : e
     }
-    let iP = (0, nw.makeStyles)()(e => ({
+    let iE = (0, nw.makeStyles)()(e => ({
             dialogContent: {
                 padding: e.spacing(3),
                 minWidth: 300
@@ -4344,7 +4328,7 @@
                 marginLeft: "auto"
             }
         })),
-        ik = (0, s.withTranslation)(e => {
+        iP = (0, s.withTranslation)(e => {
             let t, n, o, r, {
                     open: l,
                     onClose: d
@@ -4355,11 +4339,11 @@
                 } = (0, s.useTranslation)(),
                 {
                     classes: p
-                } = iP(),
+                } = iE(),
                 {
                     enqueue: h,
                     close: v
-                } = (0, io.useSnackbar)(),
+                } = (0, is.useSnackbar)(),
                 x = (0, f.useCurrentGroup)(),
                 [g, b] = (0, a.useState)(null),
                 [y, I] = (0, a.useState)(() => P.uuidService.generateRandomUuid()),
@@ -4371,9 +4355,9 @@
                 }),
                 [w, S] = (0, a.useState)(!1);
             (0, a.useEffect)(() => {
-                l ? (b(null), I(P.uuidService.generateRandomUuid()), (0, n4.getValidTimedOptionsTypes)().then(() => {
-                    let e = new Set(n4.ValidTimedOptionsAssetTypes.map(e => iE(e))),
-                        t = 3 === e.size && Array.from(n1.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).every(t => e.has(t));
+                l ? (b(null), I(P.uuidService.generateRandomUuid()), (0, n2.getValidTimedOptionsTypes)().then(() => {
+                    let e = new Set(n2.ValidTimedOptionsAssetTypes.map(e => ij(e))),
+                        t = 3 === e.size && Array.from(n0.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).every(t => e.has(t));
                     if (S(t), t) C({
                         showClothing: !1,
                         showMakeup: !1,
@@ -4381,10 +4365,10 @@
                         showCategorySubtypeDropdowns: !0
                     });
                     else {
-                        let t = [...e].every(e => n1.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e) || n1.MAKEUP_ASSET_TYPES.includes(e)),
+                        let t = [...e].every(e => n0.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e) || n0.MAKEUP_ASSET_TYPES.includes(e)),
                             n = e.has(m.Asset.EyeMakeup),
-                            i = n1.CLOTHING_ASSET_TYPES.some(t => e.has(t) && !n1.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(t)),
-                            a = Array.from(n1.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(t => e.has(t));
+                            i = n0.CLOTHING_ASSET_TYPES.some(t => e.has(t) && !n0.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(t)),
+                            a = Array.from(n0.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(t => e.has(t));
                         C({
                             showClothing: i || a,
                             showMakeup: n,
@@ -4396,24 +4380,24 @@
             }, [l]);
             let A = (0, a.useCallback)(async () => {
                     try {
-                        await ir.default.bulkUpdateCollectible(y, null == x ? void 0 : x.id, [64, 66, 68], !0 === g), h({
+                        await io.default.bulkUpdateCollectible(y, null == x ? void 0 : x.id, [64, 66, 68], !0 === g), h({
                             message: u("Message.TimedOptionSettingsApplied"),
                             anchorOrigin: {
                                 vertical: "bottom",
                                 horizontal: "center"
                             },
-                            autoHideDuration: ib.toastDurationTime,
+                            autoHideDuration: ig.toastDurationTime,
                             autoHide: !0,
                             onClose: v
                         }), window.location.reload(), d()
                     } catch (e) {
                         h({
-                            message: u(iy(await (0, tv.default)(e), "Error.Unknown")),
+                            message: u(ib(await (0, tv.default)(e), "Error.Unknown")),
                             anchorOrigin: {
                                 vertical: "bottom",
                                 horizontal: "center"
                             },
-                            autoHideDuration: ib.toastDurationTime,
+                            autoHideDuration: ig.toastDurationTime,
                             autoHide: !0,
                             onClose: v
                         })
@@ -4423,22 +4407,22 @@
                     d()
                 }, [d]),
                 j = !w,
-                E = j ? (t = new Set(n4.ValidTimedOptionsAssetTypes.map(e => iE(e))), n = n1.CLOTHING_ASSET_TYPES.some(e => t.has(e) && !n1.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e)), o = Array.from(n1.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(e => t.has(e)), r = T.showCategorySubtypeDropdowns && (!o || n) ? n1.CLOTHING_ASSET_TYPES.filter(e => t.has(e)) : Array.from(n1.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).filter(e => t.has(e)), {
+                E = j ? (t = new Set(n2.ValidTimedOptionsAssetTypes.map(e => ij(e))), n = n0.CLOTHING_ASSET_TYPES.some(e => t.has(e) && !n0.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES.has(e)), o = Array.from(n0.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).some(e => t.has(e)), r = T.showCategorySubtypeDropdowns && (!o || n) ? n0.CLOTHING_ASSET_TYPES.filter(e => t.has(e)) : Array.from(n0.ORIGINAL_TIMED_OPTIONS_ASSET_TYPES).filter(e => t.has(e)), {
                     clothing: r,
-                    makeup: n1.MAKEUP_ASSET_TYPES.filter(e => t.has(e)),
-                    accessories: T.showCategorySubtypeDropdowns ? n1.ACCESSORY_ASSET_TYPES.filter(e => t.has(e)) : []
+                    makeup: n0.MAKEUP_ASSET_TYPES.filter(e => t.has(e)),
+                    accessories: T.showCategorySubtypeDropdowns ? n0.ACCESSORY_ASSET_TYPES.filter(e => t.has(e)) : []
                 }) : void 0;
-            return j ? (0, i.jsx)(ij, {
+            return j ? (0, i.jsx)(iM, {
                 open: l,
                 onClose: M,
                 categoryFlags: T,
                 assetTypesByCategory: E
-            }) : (0, i.jsxs)(n7.Dialog, {
+            }) : (0, i.jsxs)(n5.Dialog, {
                 open: l,
                 onClose: M,
                 maxWidth: "Small",
                 color: "primaryBrand",
-                children: [(0, i.jsxs)(n9.DialogTitle, {
+                children: [(0, i.jsxs)(n8.DialogTitle, {
                     className: p.dialogTitle,
                     children: [(0, i.jsx)("span", {
                         children: null === g ? u("Action.TimedOptions") : u("Action.Confirm")
@@ -4448,20 +4432,20 @@
                         size: "small",
                         className: p.closeButton,
                         color: "inherit",
-                        children: (0, i.jsx)(n6.CloseIcon, {})
+                        children: (0, i.jsx)(n9.CloseIcon, {})
                     })]
-                }), (0, i.jsx)(n8.DialogContent, {
+                }), (0, i.jsx)(n7.DialogContent, {
                     className: p.dialogContent,
                     children: null === g ? (0, i.jsxs)(i.Fragment, {
-                        children: [(0, i.jsx)(ig.DialogContentText, {
+                        children: [(0, i.jsx)(ix.DialogContentText, {
                             className: p.descriptionText,
                             children: u("Description.BulkUpdateTimedOptions")
-                        }), (0, i.jsxs)(nZ.default, {
+                        }), (0, i.jsxs)(nX.default, {
                             flexDirection: "column",
                             classes: {
                                 root: p.buttonContainer
                             },
-                            children: [(0, i.jsx)(nq.Button, {
+                            children: [(0, i.jsx)(nF.Button, {
                                 variant: "contained",
                                 color: "secondary",
                                 onClick: () => {
@@ -4470,7 +4454,7 @@
                                 size: "large",
                                 className: p.actionButton,
                                 children: u("Action.TurnAllOn")
-                            }), (0, i.jsx)(nq.Button, {
+                            }), (0, i.jsx)(nF.Button, {
                                 variant: "contained",
                                 color: "secondary",
                                 onClick: () => {
@@ -4482,7 +4466,7 @@
                             })]
                         })]
                     }) : (0, i.jsxs)(i.Fragment, {
-                        children: [(0, i.jsx)(ig.DialogContentText, {
+                        children: [(0, i.jsx)(ix.DialogContentText, {
                             className: p.descriptionText,
                             children: g ? c("Description.BulkUpdateOnConfirmation", [{
                                 opening: "boldStart",
@@ -4497,19 +4481,19 @@
                                     children: e
                                 })
                             }])
-                        }), (0, i.jsxs)(nZ.default, {
+                        }), (0, i.jsxs)(nX.default, {
                             flexDirection: "column",
                             classes: {
                                 root: p.buttonContainer
                             },
-                            children: [(0, i.jsx)(nq.Button, {
+                            children: [(0, i.jsx)(nF.Button, {
                                 variant: "contained",
                                 color: "primaryBrand",
                                 onClick: A,
                                 size: "large",
                                 className: p.actionButton,
                                 children: u("Action.Confirm")
-                            }), (0, i.jsx)(nq.Button, {
+                            }), (0, i.jsx)(nF.Button, {
                                 variant: "contained",
                                 color: "secondary",
                                 onClick: M,
@@ -4522,10 +4506,10 @@
                 })]
             })
         }, [_.TranslationNamespace.ConfigureItem, _.TranslationNamespace.Creations]),
-        iL = Object.values(U.SearchSortParameter),
-        iR = Object.values(nz.EventSortBy),
-        iN = ["publishSettings"],
-        iD = e => {
+        ik = Object.values(U.SearchSortParameter),
+        iL = Object.values(nB.EventSortBy),
+        iR = ["publishSettings"],
+        iN = e => {
             var t;
             let {
                 menuState: n
@@ -4533,10 +4517,10 @@
                 translate: o
             } = (0, s.useTranslation)(), {
                 unifiedLogger: r
-            } = (0, n$.useUnifiedLoggerProvider)(), {
+            } = (0, nZ.useUnifiedLoggerProvider)(), {
                 ready: l,
                 value: d
-            } = (0, u.useFlag)(nX.isAutoPublishPreferencesEnabled), {
+            } = (0, u.useFlag)(nJ.isAutoPublishPreferencesEnabled), {
                 isFetched: c
             } = (0, f.useGroups)(), {
                 classes: {
@@ -4547,7 +4531,7 @@
                 }
             } = n3(), [b, T] = (0, a.useState)(!1), [C, w] = (0, a.useState)(!1), [S, A] = (0, a.useState)(0), [M, E] = (0, a.useState)(!1), [k, L] = (0, a.useState)(!1), [R, N] = (0, a.useState)(null);
             (0, a.useEffect)(() => {
-                (0, n4.getValidTimedOptionsTypes)().then(() => {
+                (0, n2.getValidTimedOptionsTypes)().then(() => {
                     L(!0)
                 })
             }, []);
@@ -4567,10 +4551,10 @@
             } = (0, J.default)(), [{
                 filterIndex: Q,
                 publishSettings: X
-            }] = (0, G.useQueryParams)(["filterIndex", "publishSettings"]), Z = (0, a.useContext)(j).isResolving, [, $] = (0, G.useQueryParams)(["activeTab", "filterIndex"]), [, ee] = (0, G.useQueryParams)(iN), et = (0, a.useMemo)(() => {
+            }] = (0, G.useQueryParams)(["filterIndex", "publishSettings"]), Z = (0, a.useContext)(j).isResolving, [, $] = (0, G.useQueryParams)(["activeTab", "filterIndex"]), [, ee] = (0, G.useQueryParams)(iR), et = (0, a.useMemo)(() => {
                 let e = I.default.getAssetType(n);
                 return e !== m.Asset.AllCatalogAsset || Number(Q) > 0 ? e : g.TAXONOMY_HOST_ASSET
-            }, [n, Q]), en = (et in n1.AvatarMenuMap || et === m.Asset.AllCatalogAsset) && d, ei = (0, n0.normalizeSingleQueryParam)(X), ea = !!en && c && !Z && !M && ("true" === ei || "1" === ei);
+            }, [n, Q]), en = (et in n0.AvatarMenuMap || et === m.Asset.AllCatalogAsset) && d, ei = (0, n$.normalizeSingleQueryParam)(X), ea = !!en && c && !Z && !M && ("true" === ei || "1" === ei);
             (0, a.useEffect)(() => {
                 l && c && !Z && void 0 !== ei && (ea || ee({
                     publishSettings: null
@@ -4588,8 +4572,8 @@
                 {
                     canUseTaxonomy: eo,
                     isTaxonomyMode: er
-                } = (0, nL.default)(et),
-                el = nO(n, (0, f.useCurrentGroup)()),
+                } = (0, nk.default)(et),
+                el = nD(n, (0, f.useCurrentGroup)()),
                 {
                     isSortable: ed,
                     isArchivable: eu
@@ -4618,12 +4602,12 @@
                         value: t
                     } = e.target;
                     if (et === m.Asset.MyExperiences || et === m.Asset.SharedExperiences) {
-                        if (!iL.includes(t)) return;
+                        if (!ik.includes(t)) return;
                         O(e => ({
                             ...e,
                             [m.Asset.Place]: t
                         }))
-                    } else iR.includes(t) && O(e => ({
+                    } else iL.includes(t) && O(e => ({
                         ...e,
                         [et]: t
                     }))
@@ -4649,27 +4633,27 @@
                 eb = (0, a.useMemo)(() => eg ? Object.values(U.SearchSortParameter).map(e => ({
                     value: e,
                     labelKey: y.universeSortTranslationKeys[e]
-                })) : Object.values(nz.EventSortBy).map(e => ({
+                })) : Object.values(nB.EventSortBy).map(e => ({
                     value: e,
                     labelKey: y.eventSortTranslationKeys[e]
                 })), [eg]),
-                ey = (0, a.useMemo)(() => eg ? D[m.Asset.Place] : (0, n2.getSortForAssetType)(et, D), [eg, D, et]),
+                ey = (0, a.useMemo)(() => eg ? D[m.Asset.Place] : (0, n1.getSortForAssetType)(et, D), [eg, D, et]),
                 eI = (0, a.useMemo)(() => {
                     var e, t;
                     if (!k) return !1;
                     let i = er || null == Q ? void 0 : Number(Q);
-                    if (void 0 !== i && n1.AvatarMenuMap[et]) {
-                        let e = n1.AvatarMenuMap[et][i];
-                        if (e) return (0, n5.getIsRentableType)(e.assetType, e.bundleType)
+                    if (void 0 !== i && n0.AvatarMenuMap[et]) {
+                        let e = n0.AvatarMenuMap[et][i];
+                        if (e) return (0, n4.getIsRentableType)(e.assetType, e.bundleType)
                     }
-                    return (0, n5.getIsRentableType)(null != (e = null == (t = n.submenuItem) ? void 0 : t.type) ? e : et, void 0)
+                    return (0, n4.getIsRentableType)(null != (e = null == (t = n.submenuItem) ? void 0 : t.type) ? e : et, void 0)
                 }, [et, Q, er, null == (t = n.submenuItem) ? void 0 : t.type, k]);
             if (ep) return null;
             let eT = et === m.Asset.MyExperiences || et === m.Asset.SharedExperiences || eu || eo || et === m.Asset.MeshPart,
                 eC = et === m.Asset.MyExperiences || et === m.Asset.SharedExperiences,
                 ew = et === m.Asset.Decal || et === m.Asset.MeshPart,
                 eS = !en && !eI && !!(et === m.Asset.MyExperiences || eC || eu && et);
-            return (0, i.jsxs)(nZ.Flex, {
+            return (0, i.jsxs)(nX.Flex, {
                 flexDirection: "row",
                 justifyContent: "flex-start",
                 alignItems: "flex-start",
@@ -4677,29 +4661,29 @@
                 classes: {
                     root: p
                 },
-                children: [eT && (0, i.jsxs)(nZ.Flex, {
+                children: [eT && (0, i.jsxs)(nX.Flex, {
                     alignItems: "center",
                     gap: 1,
                     flexDirection: "row",
-                    children: [eS && (0, i.jsx)(nJ.Typography, {
+                    children: [eS && (0, i.jsx)(nQ.Typography, {
                         marginRight: "16px",
                         children: o("Label.ShowPrefix")
-                    }), et === m.Asset.MyExperiences && (0, i.jsx)(n_.FormControlLabel, {
-                        control: (0, i.jsx)(nQ.Switch, {
+                    }), et === m.Asset.MyExperiences && (0, i.jsx)(nG.FormControlLabel, {
+                        control: (0, i.jsx)(nY.Switch, {
                             checked: H,
                             onChange: () => K(e => !e),
                             "aria-label": o("Label.Public")
                         }),
                         label: o("Label.Public")
-                    }), eC && (0, i.jsx)(n_.FormControlLabel, {
-                        control: (0, i.jsx)(nQ.Switch, {
+                    }), eC && (0, i.jsx)(nG.FormControlLabel, {
+                        control: (0, i.jsx)(nY.Switch, {
                             checked: q,
                             onChange: ex,
                             "aria-label": o("Label.Impacted")
                         }),
                         label: o("Label.Impacted")
                     }), eI && !en && (0, i.jsxs)(i.Fragment, {
-                        children: [(0, i.jsx)(nq.Button, {
+                        children: [(0, i.jsx)(nF.Button, {
                             variant: "contained",
                             color: "secondary",
                             onClick: ef,
@@ -4707,29 +4691,29 @@
                                 root: v
                             },
                             children: o("Action.TimedOptions")
-                        }), (0, i.jsx)(nG.Divider, {
+                        }), (0, i.jsx)(nq.Divider, {
                             orientation: "vertical",
                             flexItem: !0,
                             classes: {
                                 root: x
                             }
                         })]
-                    }), eu && et && (0, i.jsx)(n_.FormControlLabel, {
-                        control: (0, i.jsx)(nQ.Switch, {
+                    }), eu && et && (0, i.jsx)(nG.FormControlLabel, {
+                        control: (0, i.jsx)(nY.Switch, {
                             checked: V,
                             onChange: () => F(e => !e),
                             "aria-label": en ? o("Action.ShowArchived") : o("Label.Archived")
                         }),
                         label: en ? o("Action.ShowArchived") : o("Label.Archived")
-                    }), eo && (0, i.jsx)(n_.FormControlLabel, {
-                        control: (0, i.jsx)(nQ.Switch, {
+                    }), eo && (0, i.jsx)(nG.FormControlLabel, {
+                        control: (0, i.jsx)(nY.Switch, {
                             checked: er,
                             onChange: em,
                             "aria-label": ec
                         }),
                         label: ec
                     }), en && (0, i.jsxs)(i.Fragment, {
-                        children: [(0, i.jsx)(nG.Divider, {
+                        children: [(0, i.jsx)(nq.Divider, {
                             orientation: "vertical",
                             flexItem: !0,
                             classes: {
@@ -4740,8 +4724,8 @@
                             size: "medium",
                             color: "secondary",
                             onClick: e => N(e.currentTarget),
-                            children: (0, i.jsx)(nY.SettingsIcon, {})
-                        }), (0, i.jsxs)(nH.Menu, {
+                            children: (0, i.jsx)(nW.SettingsIcon, {})
+                        }), (0, i.jsxs)(n_.Menu, {
                             anchorEl: R,
                             open: null != R,
                             onClose: () => N(null),
@@ -4754,40 +4738,40 @@
                                 horizontal: "right"
                             },
                             className: "margin-top-small",
-                            children: [eI && (0, i.jsx)(nK.MenuItem, {
+                            children: [eI && (0, i.jsx)(nH.MenuItem, {
                                 onClick: () => {
                                     N(null), ef()
                                 },
-                                children: (0, i.jsx)(nJ.Typography, {
+                                children: (0, i.jsx)(nQ.Typography, {
                                     variant: "body1",
                                     children: o("Action.TimedOptions")
                                 })
-                            }), (0, i.jsx)(nK.MenuItem, {
+                            }), (0, i.jsx)(nH.MenuItem, {
                                 onClick: () => {
                                     N(null), A(e => e + 1), w(!0)
                                 },
-                                children: (0, i.jsx)(nJ.Typography, {
+                                children: (0, i.jsx)(nQ.Typography, {
                                     variant: "body1",
                                     children: o("Action.StudioPublishSettings")
                                 })
                             })]
                         })]
-                    }), ew && (0, i.jsx)(n_.FormControlLabel, {
-                        control: (0, i.jsx)(nQ.Switch, {
+                    }), ew && (0, i.jsx)(nG.FormControlLabel, {
+                        control: (0, i.jsx)(nY.Switch, {
                             "aria-label": o("Label.OnCreatorStore"),
                             checked: W,
                             onChange: () => Y(e => !e)
                         }),
                         label: o("Label.OnCreatorStore")
                     })]
-                }), ed && (0, i.jsxs)(nZ.Flex, {
+                }), ed && (0, i.jsxs)(nX.Flex, {
                     flexDirection: "row",
                     classes: {
                         root: h
                     },
                     alignItems: "center",
                     flexWrap: "nowrap",
-                    children: [(0, i.jsx)(nW.Select, {
+                    children: [(0, i.jsx)(nK.Select, {
                         variant: "outlined",
                         margin: "dense",
                         size: "small",
@@ -4797,7 +4781,7 @@
                         inputProps: {
                             "aria-label": o("Label.SortBy")
                         },
-                        children: eb.map(e => (0, i.jsx)(nK.MenuItem, {
+                        children: eb.map(e => (0, i.jsx)(nH.MenuItem, {
                             value: e.value,
                             children: o(e.labelKey)
                         }, e.value))
@@ -4805,22 +4789,22 @@
                         "aria-label": o("Heading.SortOrder"),
                         onClick: ev,
                         size: "large",
-                        children: B === P.SortOrder.Asc ? (0, i.jsx)(nF.ArrowUpwardIcon, {
+                        children: B === P.SortOrder.Asc ? (0, i.jsx)(nV.ArrowUpwardIcon, {
                             color: "secondary"
-                        }) : (0, i.jsx)(nV.ArrowDownwardIcon, {
+                        }) : (0, i.jsx)(nz.ArrowDownwardIcon, {
                             color: "secondary"
                         })
                     })]
-                }), (0, i.jsx)(ik, {
+                }), (0, i.jsx)(iP, {
                     open: b,
                     onClose: () => T(!1)
-                }), (0, i.jsx)(ix, {
+                }), (0, i.jsx)(iv, {
                     open: C || ea,
                     onClose: es
                 }, S)]
             })
         },
-        iO = e => {
+        iD = e => {
             let {
                 menuState: t,
                 onMenuStateChange: n,
@@ -4836,30 +4820,30 @@
                     children: t.menuItem.type === m.Asset.Moments ? (0, i.jsxs)(i.Fragment, {
                         children: [(0, i.jsx)(nx, {}), (0, i.jsx)(nh, {})]
                     }) : (0, i.jsxs)(i.Fragment, {
-                        children: [t.submenuItem && (0, i.jsx)(nB, {
+                        children: [t.submenuItem && (0, i.jsx)(nU, {
                             menuState: t,
                             onMenuStateChange: n,
                             group: s
-                        }), (0, i.jsx)(iD, {
+                        }), (0, i.jsx)(iN, {
                             menuState: t
                         })]
                     })
                 })]
             })
         };
-    var iU = e.i(450727),
-        iB = e.i(71375),
-        iz = e.i(83560),
-        iV = e.i(576069),
-        iF = e.i(134817);
-    let iq = [];
+    var iO = e.i(450727),
+        iU = e.i(71375),
+        iB = e.i(83560),
+        iz = e.i(576069),
+        iV = e.i(134817);
+    let iF = [];
 
-    function iG(e) {
+    function iq(e) {
         return null != e.universeId ? e.universeId : "experienceId" in e && "number" == typeof e.experienceId ? e.experienceId : void 0
     }
-    var i_ = e.i(897350),
-        iH = e.i(533030);
-    let iK = (e, t) => {
+    var iG = e.i(312985),
+        i_ = e.i(183321);
+    let iH = (e, t) => {
             let {
                 user: n
             } = (0, E.useAuthentication)(), {
@@ -4892,8 +4876,8 @@
                 }
             }, [e, i, l, r]), l) ? l : i ? d : null
         },
-        iW = "block width-full height-full max-w-full max-h-full object-contain",
-        iY = e => {
+        iK = "block width-full height-full max-w-full max-h-full object-contain",
+        iW = e => {
             let {
                 children: t
             } = e;
@@ -4903,15 +4887,15 @@
                 children: t
             })
         },
-        iQ = e => {
+        iY = e => {
             let {
                 thumbnailUrl: t,
                 videoUrl: n
             } = e;
-            return n ? (0, i.jsx)(iY, {
+            return n ? (0, i.jsx)(iW, {
                 children: (0, i.jsx)("video", {
                     "aria-label": "Moment video preview",
-                    className: "radius-medium ".concat(iW),
+                    className: "radius-medium ".concat(iK),
                     controls: !0,
                     playsInline: !0,
                     poster: t,
@@ -4920,15 +4904,15 @@
                         kind: "captions"
                     })
                 })
-            }) : t ? (0, i.jsx)(iY, {
+            }) : t ? (0, i.jsx)(iW, {
                 children: (0, i.jsx)("img", {
                     alt: "Moment thumbnail preview",
-                    className: "radius-medium ".concat(iW),
+                    className: "radius-medium ".concat(iK),
                     src: t
                 })
-            }) : (0, i.jsx)(iY, {})
+            }) : (0, i.jsx)(iW, {})
         },
-        iJ = (0, s.withTranslation)(e => {
+        iQ = (0, s.withTranslation)(e => {
             var t, n, o;
             let {
                 moment: r,
@@ -4948,13 +4932,13 @@
                 var e, t, n, i;
                 let a;
                 return r && ((a = {
-                    id: null != (i = iG(n = r)) ? i : 0,
+                    id: null != (i = iq(n = r)) ? i : 0,
                     name: n.experienceName
                 }).id > 0 || (null != (e = null == (t = a.name) ? void 0 : t.length) ? e : 0) > 0) ? a : void 0
             }), [T, C] = (0, a.useState)(() => {
                 var e;
                 return null != (e = null == r ? void 0 : r.description) ? e : ""
-            }), [w, S] = (0, a.useState)(), A = null != (t = null != w ? w : null == r ? void 0 : r.locale) ? t : b, M = (null == r ? void 0 : r.status) === er && !0 === r.hasLocalVideo, j = iK((null == r ? void 0 : r.status) === er ? r.draftId : null, {
+            }), [w, S] = (0, a.useState)(), A = null != (t = null != w ? w : null == r ? void 0 : r.locale) ? t : b, M = (null == r ? void 0 : r.status) === er && !0 === r.hasLocalVideo, j = iH((null == r ? void 0 : r.status) === er ? r.draftId : null, {
                 enabled: l && M,
                 thumbnailUrl: null == r ? void 0 : r.thumbnailUrl,
                 videoUrl: null == r ? void 0 : r.videoUrl
@@ -4994,17 +4978,17 @@
                 _ = !F && null != c && (q && M || B),
                 H = null != m,
                 K = T.length >= 140;
-            return (0, i.jsx)(i_.SheetRoot, {
+            return (0, i.jsx)(iG.SheetRoot, {
                 open: l,
                 onOpenChange: O,
-                children: (0, i.jsxs)(i_.SheetContent, {
+                children: (0, i.jsxs)(iG.SheetContent, {
                     closeLabel: f("Action.Close"),
                     largeScreenVariant: "side",
-                    children: [(0, i.jsx)(i_.SheetTitle, {
+                    children: [(0, i.jsx)(iG.SheetTitle, {
                         children: f("Heading.EditMoment")
-                    }), (0, i.jsxs)(i_.SheetBody, {
+                    }), (0, i.jsxs)(iG.SheetBody, {
                         className: "flex flex-col gap-y-medium padding-top-small padding-bottom-large",
-                        children: [(0, i.jsx)(iQ, {
+                        children: [(0, i.jsx)(iY, {
                             thumbnailUrl: null != (n = null == j ? void 0 : j.thumbnailUrl) ? n : r.thumbnailUrl,
                             videoUrl: null != (o = null == j ? void 0 : j.videoUrl) ? o : r.videoUrl
                         }), G ? (0, i.jsx)(i.Fragment, {
@@ -5041,7 +5025,7 @@
                         }) : null, (0, i.jsx)("div", {
                             className: "flex flex-col gap-y-xsmall width-full padding-top-small",
                             children: G ? (0, i.jsxs)(i.Fragment, {
-                                children: [(0, i.jsx)(iH.TextArea, {
+                                children: [(0, i.jsx)(i_.TextArea, {
                                     id: "edit-moment-description-".concat(U),
                                     label: f("MomentsTable.Header.Description"),
                                     rows: 3,
@@ -5067,7 +5051,7 @@
                                 })]
                             })
                         })]
-                    }), (0, i.jsx)(i_.SheetActions, {
+                    }), (0, i.jsx)(iG.SheetActions, {
                         className: "width-full",
                         children: (0, i.jsxs)("div", {
                             className: "flex gap-small width-full",
@@ -5098,20 +5082,20 @@
                 })
             })
         }, [_.TranslationNamespace.Creations, _.TranslationNamespace.Controls]);
-    var iX = e.i(696490),
-        iZ = e.i(493924);
-    let i$ = e => {
+    var iJ = e.i(388506),
+        iX = e.i(493924);
+    let iZ = e => {
         let {
             onCreateClick: t
         } = e, {
             translate: n
         } = (0, s.useTranslation)();
-        return (0, i.jsx)(iZ.default, {
+        return (0, i.jsx)(iX.default, {
             title: n("Heading.ReachPlayersDirectlyInMoments"),
             size: "large",
             illustration: "videos",
             description: (0, i.jsxs)(i.Fragment, {
-                children: [n("Description.UploadExternalVideosToMoments"), " ", (0, i.jsx)(iX.Link, {
+                children: [n("Description.UploadExternalVideosToMoments"), " ", (0, i.jsx)(iJ.Link, {
                     "aria-label": n("Label.LearnMore"),
                     href: ng.MOMENTS_LEARN_MORE_URL,
                     target: "_blank",
@@ -5131,20 +5115,20 @@
             })
         })
     };
-    var i0 = e.i(197649),
-        i1 = e.i(708064),
-        i2 = e.i(390398),
-        i4 = e.i(516674),
-        i5 = e.i(125677),
+    var i$ = e.i(197649),
+        i0 = e.i(339724),
+        i1 = e.i(174519),
+        i2 = e.i(23696),
+        i4 = e.i(125677),
         i3 = e.i(20227),
-        i7 = e.i(494601);
-    let i8 = {
+        i5 = e.i(494601);
+    let i7 = {
             [es]: "bg-system-success",
             [eo]: "bg-system-warning",
             [er]: "bg-surface-300",
             [el]: "bg-system-alert"
         },
-        i9 = e => {
+        i8 = e => {
             let {
                 status: t,
                 label: n
@@ -5153,17 +5137,17 @@
                 className: "inline-flex items-center gap-xsmall",
                 children: [(0, i.jsx)("span", {
                     "aria-hidden": !0,
-                    className: "size-[8px] radius-circle shrink-0 ".concat(i8[t]),
+                    className: "size-[8px] radius-circle shrink-0 ".concat(i7[t]),
                     "data-testid": "moment-status-dot-".concat(t)
                 }), (0, i.jsx)("span", {
                     children: n
                 })]
             })
         };
-    var i6 = e.i(252082),
-        ae = e.i(540513),
-        at = e.i(914040);
-    let an = (0, s.withTranslation)(e => {
+    var i9 = e.i(838775),
+        i6 = e.i(540513),
+        ae = e.i(914040);
+    let at = (0, s.withTranslation)(e => {
             let t, {
                     moment: n
                 } = e,
@@ -5172,7 +5156,7 @@
                 } = (0, s.useTranslation)(),
                 r = n.status === er,
                 l = r && !0 === n.hasLocalVideo,
-                d = iK(r ? n.draftId : null, {
+                d = iH(r ? n.draftId : null, {
                     enabled: l,
                     thumbnailUrl: n.thumbnailUrl,
                     videoUrl: n.videoUrl
@@ -5199,13 +5183,13 @@
             }) : null != u ? (0, i.jsx)("div", {
                 className: "radius-small clip size-[48px]",
                 "data-testid": "moment-video-thumbnail-image",
-                children: (0, i.jsx)(ae.Thumbnail2d, {
+                children: (0, i.jsx)(i6.Thumbnail2d, {
                     alt: "",
                     containerClass: "block",
                     imgClassName: "[object-fit:cover]",
-                    returnPolicy: ae.ReturnPolicy.PlaceHolder,
+                    returnPolicy: i6.ReturnPolicy.PlaceHolder,
                     targetId: u,
-                    type: ae.ThumbnailTypes.assetThumbnail
+                    type: i6.ThumbnailTypes.assetThumbnail
                 })
             }) : (0, i.jsx)("div", {
                 "aria-hidden": !0,
@@ -5223,7 +5207,7 @@
             }) : null != u && (x = (0, i.jsx)("div", {
                 "aria-label": p,
                 className: "radius-medium clip max-width-[500px] max-height-[500px] bg-surface-200",
-                children: (0, i.jsx)(at.RobloxVideoPlayer, {
+                children: (0, i.jsx)(ae.RobloxVideoPlayer, {
                     videoAssetId: String(u),
                     environment: "production",
                     src: void 0,
@@ -5232,10 +5216,10 @@
                     loop: !0,
                     muted: !0
                 })
-            })), h) ? (0, i.jsxs)(i6.Popover, {
+            })), h) ? (0, i.jsxs)(i9.Popover, {
                 open: c,
                 onOpenChange: m,
-                children: [(0, i.jsx)(i6.PopoverAnchor, {
+                children: [(0, i.jsx)(i9.PopoverAnchor, {
                     asChild: !0,
                     children: (0, i.jsx)("button", {
                         "aria-label": p,
@@ -5247,7 +5231,7 @@
                         onBlur: f,
                         children: t
                     })
-                }), (0, i.jsx)(i6.PopoverContent, {
+                }), (0, i.jsx)(i9.PopoverContent, {
                     align: "start",
                     ariaLabel: p,
                     className: "outline-none",
@@ -5256,12 +5240,12 @@
                 })]
             }) : t
         }, [_.TranslationNamespace.Creations]),
-        ai = [10, 25, 50],
-        aa = {
+        an = [10, 25, 50],
+        ai = {
             [es]: "MomentsTable.NoActiveMoments",
             [er]: "MomentsTable.NoDraftMoments"
         },
-        as = e => {
+        aa = e => {
             let {
                 moment: t,
                 disabled: n,
@@ -5293,7 +5277,7 @@
                 })]
             })
         },
-        ao = e => {
+        as = e => {
             let {
                 moment: t,
                 editLabel: n,
@@ -5311,44 +5295,44 @@
             }, [t, u]), x = (0, a.useCallback)(() => {
                 t.status === er && (null == m || m(t.draftId))
             }, [t, m]);
-            return (0, i.jsxs)(i2.TableRow, {
+            return (0, i.jsxs)(i1.TableRow, {
                 isHoverable: !0,
                 "data-testid": "moment-row-".concat(h),
-                children: [(0, i.jsx)(i2.TableCell, {
-                    children: (0, i.jsx)(an, {
+                children: [(0, i.jsx)(i1.TableCell, {
+                    children: (0, i.jsx)(at, {
                         moment: t
                     })
-                }), (0, i.jsx)(i2.TableCell, {
+                }), (0, i.jsx)(i1.TableCell, {
                     children: t.experienceName
-                }), (0, i.jsx)(i2.TableCell, {
+                }), (0, i.jsx)(i1.TableCell, {
                     children: t.status === es ? (0, i.jsx)("span", {
                         "data-testid": "moment-description-".concat(h),
                         children: t.description || "-"
-                    }) : (0, i.jsx)(as, {
+                    }) : (0, i.jsx)(aa, {
                         moment: t,
                         disabled: null != o && o === h,
                         onBlur: c
                     }, "moment-description-".concat(h, "-").concat(t.modifiedAt))
-                }), l ? (0, i.jsx)(i2.TableCell, {
+                }), l ? (0, i.jsx)(i1.TableCell, {
                     children: (0, i.jsx)("span", {
                         "data-testid": "moment-content-language-".concat(h),
                         children: tL(t.locale)
                     })
-                }) : null, (0, i.jsx)(i2.TableCell, {
-                    children: (0, i.jsx)(i9, {
+                }) : null, (0, i.jsx)(i1.TableCell, {
+                    children: (0, i.jsx)(i8, {
                         label: d,
                         status: t.status
                     })
-                }), (0, i.jsx)(i2.TableCell, {
+                }), (0, i.jsx)(i1.TableCell, {
                     align: "end",
                     children: (0, i.jsxs)("div", {
                         className: "inline-flex items-center gap-xsmall",
-                        children: [(0, i.jsx)(i4.Tooltip, {
+                        children: [(0, i.jsx)(i2.Tooltip, {
                             position: "top-center",
                             title: n,
-                            children: (0, i.jsx)(i4.TooltipTrigger, {
+                            children: (0, i.jsx)(i2.TooltipTrigger, {
                                 asChild: !0,
-                                children: (0, i.jsx)(i1.IconButton, {
+                                children: (0, i.jsx)(i0.IconButton, {
                                     ariaLabel: n,
                                     icon: "icon-regular-pencil",
                                     size: "Small",
@@ -5369,7 +5353,7 @@
                 })]
             })
         },
-        ar = (0, s.withTranslation)(e => {
+        ao = (0, s.withTranslation)(e => {
             let {
                 moments: t,
                 onEditMoment: n,
@@ -5387,7 +5371,7 @@
                     gridContainer: h,
                     createButtonContainer: v
                 }
-            } = (0, i7.default)(), {
+            } = (0, i5.default)(), {
                 statusTab: f
             } = tQ(), x = tH(), g = (0, a.useCallback)(e => {
                 switch (e) {
@@ -5413,7 +5397,7 @@
                 resetKey: f
             }), {
                 currentPage: S
-            } = (0, i5.useCurrentPage)(y, {
+            } = (0, i4.useCurrentPage)(y, {
                 page: I,
                 rowsPerPage: T,
                 hasNextPage: !!b && u,
@@ -5430,42 +5414,42 @@
             return (0, i.jsx)("div", {
                 className: h,
                 children: (0, i.jsx)("div", {
-                    className: (0, i0.clsx)(v, "flex flex-col gap-xlarge width-full self-stretch"),
+                    className: (0, i$.clsx)(v, "flex flex-col gap-xlarge width-full self-stretch"),
                     children: (0, i.jsxs)("div", {
                         className: "flex flex-col gap-y-medium width-full",
-                        children: [(0, i.jsxs)(i2.Table, {
+                        children: [(0, i.jsxs)(i1.Table, {
                             className: "width-full",
                             variant: "Framed",
-                            children: [(0, i.jsx)(i2.TableHeader, {
-                                children: (0, i.jsxs)(i2.TableRow, {
-                                    children: [(0, i.jsx)(i2.TableHeaderCell, {
+                            children: [(0, i.jsx)(i1.TableHeader, {
+                                children: (0, i.jsxs)(i1.TableRow, {
+                                    children: [(0, i.jsx)(i1.TableHeaderCell, {
                                         children: p("MomentsTable.Header.Moments")
-                                    }), (0, i.jsx)(i2.TableHeaderCell, {
+                                    }), (0, i.jsx)(i1.TableHeaderCell, {
                                         children: p("MomentsTable.Header.ExperienceName")
-                                    }), (0, i.jsx)(i2.TableHeaderCell, {
+                                    }), (0, i.jsx)(i1.TableHeaderCell, {
                                         children: p("MomentsTable.Header.Description")
-                                    }), x ? (0, i.jsx)(i2.TableHeaderCell, {
+                                    }), x ? (0, i.jsx)(i1.TableHeaderCell, {
                                         children: p("CreateMomentModal.LanguageInput.Label")
-                                    }) : null, (0, i.jsx)(i2.TableHeaderCell, {
+                                    }) : null, (0, i.jsx)(i1.TableHeaderCell, {
                                         children: p("MomentsTable.Header.Status")
-                                    }), (0, i.jsx)(i2.TableHeaderCell, {
+                                    }), (0, i.jsx)(i1.TableHeaderCell, {
                                         align: "end",
                                         children: " "
                                     })]
                                 })
-                            }), (0, i.jsx)(i2.TableBody, {
-                                children: 0 === y.length ? (0, i.jsx)(i2.TableRow, {
-                                    children: (0, i.jsx)(i2.TableCell, {
+                            }), (0, i.jsx)(i1.TableBody, {
+                                children: 0 === y.length ? (0, i.jsx)(i1.TableRow, {
+                                    children: (0, i.jsx)(i1.TableCell, {
                                         colSpan: x ? 6 : 5,
                                         align: "center",
                                         className: "padding-y-xxlarge",
                                         children: (0, i.jsx)("span", {
                                             className: "text-body-medium content-muted block padding-y-xxlarge",
                                             "data-testid": "moments-table-empty-filter-message",
-                                            children: p(aa[f])
+                                            children: p(ai[f])
                                         })
                                     })
-                                }) : S.map(e => (0, i.jsx)(ao, {
+                                }) : S.map(e => (0, i.jsx)(as, {
                                     moment: e,
                                     editLabel: j,
                                     publishingDraftId: l,
@@ -5477,11 +5461,11 @@
                                     onPublishMoment: r
                                 }, tK(e)))
                             })]
-                        }), y.length > 0 ? (0, i.jsx)(i2.TablePagination, {
+                        }), y.length > 0 ? (0, i.jsx)(i1.TablePagination, {
                             page: I,
                             rowsPerPage: T,
                             totalRows: y.length,
-                            rowsPerPageOptions: ai,
+                            rowsPerPageOptions: an,
                             onPageChange: M,
                             onRowsPerPageChange: w
                         }) : null]
@@ -5489,7 +5473,7 @@
                 })
             })
         }, [_.TranslationNamespace.Creations, _.TranslationNamespace.Controls]),
-        al = (0, s.withTranslation)(e => {
+        ar = (0, s.withTranslation)(e => {
             let {
                 onRetry: t
             } = e, {
@@ -5507,11 +5491,11 @@
                 "data-testid": "moments-creator-eligibility-error-banner"
             })
         }, [_.TranslationNamespace.Error]);
-    var ad = e.i(917852);
-    let au = () => {
-            window.open(ad.idVerificationActionUrl, "_blank", "noopener,noreferrer")
+    var al = e.i(917852);
+    let ad = () => {
+            window.open(al.idVerificationActionUrl, "_blank", "noopener,noreferrer")
         },
-        ac = (0, s.withTranslation)(() => {
+        au = (0, s.withTranslation)(() => {
             let {
                 translate: e
             } = (0, s.useTranslation)();
@@ -5523,11 +5507,11 @@
                 title: e("Heading.MomentsIdVerificationRequired"),
                 description: e("Message.MomentsIdVerificationRequired"),
                 primaryActionLabel: e("Label.VerifyId"),
-                onPrimaryAction: au,
+                onPrimaryAction: ad,
                 "data-testid": "moments-id-verification-banner"
             })
         }, [_.TranslationNamespace.Creations]),
-        am = () => {
+        ac = () => {
             var e;
             (() => {
                 let {
@@ -5551,7 +5535,7 @@
                 isLoading: l,
                 isError: d,
                 refetch: u
-            } = (0, iV.useCreatorEligibility)(), c = null != (e = null == r ? void 0 : r.creatorEligibility.includes(iU.CreatorEligibilityEnum.IdVerified)) && e, m = l || d || !c, p = !l && !d && !c, h = (0, a.useCallback)(() => {
+            } = (0, iz.useCreatorEligibility)(), c = null != (e = null == r ? void 0 : r.creatorEligibility.includes(iO.CreatorEligibilityEnum.IdVerified)) && e, m = l || d || !c, p = !l && !d && !c, h = (0, a.useCallback)(() => {
                 u()
             }, [u]), [v, f] = (0, a.useState)(!1), [x, g] = (0, a.useState)(null), [b, y] = (0, a.useState)({}), {
                 moments: I,
@@ -5697,7 +5681,7 @@
                         for (let n of e)
                             for (let e of n.moments) t.set(tK(e), e);
                         return [...t.values()]
-                    }(n.pages) : iq, [n]),
+                    }(n.pages) : iF, [n]),
                     p = null != (e = null == n ? void 0 : n.pages.length) ? e : 0,
                     h = (0, a.useCallback)(() => {
                         r({
@@ -5706,7 +5690,7 @@
                         })
                     }, [r]),
                     v = l && !u;
-                (0, iF.useBackgroundPageLoader)({
+                (0, iV.useBackgroundPageLoader)({
                     hasNextPage: v,
                     fetchNextPage: h,
                     disabled: s
@@ -5766,17 +5750,17 @@
                     G()
                 }, [G]),
                 ee = (0, a.useCallback)(() => {
-                    (0, iz.toast)({
+                    (0, iB.toast)({
                         title: t("Message.MomentPublishedError")
                     })
                 }, [t]),
                 et = (0, a.useCallback)(() => {
-                    (0, iz.toast)({
+                    (0, iB.toast)({
                         title: t("Message.MomentDeletedError")
                     })
                 }, [t]),
                 en = (0, a.useCallback)(() => {
-                    (0, iz.toast)({
+                    (0, iB.toast)({
                         title: t("Message.MomentUploadStarted"),
                         icon: "icon-filled-circle-check"
                     })
@@ -5791,7 +5775,7 @@
                                 momentId: e.momentId,
                                 feedItemId: e.feedItemId
                             },
-                            experienceId: iG(e),
+                            experienceId: iq(e),
                             isLocalMoment: t,
                             userId: o
                         };
@@ -5836,7 +5820,7 @@
                     M.current = !0;
                     let n = {
                         draftId: e,
-                        experienceId: iG(t),
+                        experienceId: iq(t),
                         isLocalMoment: !0,
                         userId: o
                     };
@@ -5852,13 +5836,13 @@
                 eo = (0, a.useCallback)(e => {
                     e.status === er && es(e.draftId)
                 }, [es]);
-            return O && k !== er && !W ? (0, i.jsx)(iB.default, {
+            return O && k !== er && !W ? (0, i.jsx)(iU.default, {
                 onReload: $
             }) : (!U || W) && (R || W) ? (0, i.jsxs)("div", {
                 className: "flex grow-1 flex-col gap-medium self-stretch width-full",
-                children: [d ? (0, i.jsx)(al, {
+                children: [d ? (0, i.jsx)(ar, {
                     onRetry: h
-                }) : null, p ? (0, i.jsx)(ac, {}) : null, W ? (0, i.jsx)(ar, {
+                }) : null, p ? (0, i.jsx)(au, {}) : null, W ? (0, i.jsx)(ao, {
                     moments: K,
                     hasNextPage: N,
                     fetchNextPage: D,
@@ -5870,10 +5854,10 @@
                     isPublishDisabled: m
                 }) : (0, i.jsx)("div", {
                     className: "flex grow-1 flex-col items-center justify-center self-stretch width-full",
-                    children: (0, i.jsx)(i$, {
+                    children: (0, i.jsx)(iZ, {
                         onCreateClick: nm
                     })
-                }), (0, i.jsx)(iJ, {
+                }), (0, i.jsx)(iQ, {
                     moment: J,
                     open: v,
                     onOpenChange: Z,
@@ -5893,16 +5877,16 @@
                 })
             })
         },
-        ap = {
+        am = {
             width: "100%",
             height: "100%"
         },
-        ah = (0, nw.makeStyles)()(e => ({
+        ap = (0, nw.makeStyles)()(e => ({
             section: {
-                ...ap
+                ...am
             },
             container: {
-                ...ap
+                ...am
             },
             title: {
                 marginBottom: e.spacing(1),
@@ -5916,90 +5900,90 @@
                 padding: 0
             }
         })),
-        av = (0, O.default)(() => e.A(202045), {
+        ah = (0, O.default)(() => e.A(202045), {
             loadableGenerated: {
                 modules: [623728]
             },
             ssr: !1
         }),
-        af = (0, O.default)(() => e.A(378869), {
+        av = (0, O.default)(() => e.A(378869), {
             loadableGenerated: {
                 modules: [518808]
             },
             ssr: !1
         }),
-        ax = (0, O.default)(() => e.A(580854), {
+        af = (0, O.default)(() => e.A(580854), {
             loadableGenerated: {
                 modules: [427685]
             },
             ssr: !1
         }),
-        ag = (0, O.default)(() => e.A(307640), {
+        ax = (0, O.default)(() => e.A(307640), {
             loadableGenerated: {
                 modules: [48220]
             },
             ssr: !1
         }),
-        ab = (0, O.default)(() => e.A(114198), {
+        ag = (0, O.default)(() => e.A(114198), {
             loadableGenerated: {
                 modules: [595604]
             },
             ssr: !1
         }),
-        ay = (0, O.default)(() => e.A(558217), {
+        ab = (0, O.default)(() => e.A(558217), {
             loadableGenerated: {
                 modules: [333771]
             },
             ssr: !1
         }),
-        aI = (0, O.default)(() => e.A(546234), {
+        ay = (0, O.default)(() => e.A(546234), {
             loadableGenerated: {
                 modules: [82873]
             },
             ssr: !1
         }),
-        aT = (0, O.default)(() => e.A(85397), {
+        aI = (0, O.default)(() => e.A(85397), {
             loadableGenerated: {
                 modules: [973472]
             },
             ssr: !1
         }),
-        aC = (0, O.default)(() => e.A(890748), {
+        aT = (0, O.default)(() => e.A(890748), {
             loadableGenerated: {
                 modules: [835459]
             },
             ssr: !1
         }),
-        aw = (0, O.default)(() => e.A(68996), {
+        aC = (0, O.default)(() => e.A(68996), {
             loadableGenerated: {
                 modules: [565869]
             },
             ssr: !1
         }),
-        aS = (0, O.default)(() => e.A(441969), {
+        aw = (0, O.default)(() => e.A(441969), {
             loadableGenerated: {
                 modules: [415945]
             },
             ssr: !1
         }),
-        aA = (0, O.default)(() => e.A(481709), {
+        aS = (0, O.default)(() => e.A(481709), {
             loadableGenerated: {
                 modules: [947274]
             },
             ssr: !1
         }),
-        aM = (0, O.default)(() => e.A(272047), {
+        aA = (0, O.default)(() => e.A(272047), {
             loadableGenerated: {
                 modules: [616027]
             },
             ssr: !1
         });
 
-    function aj(e) {
+    function aM(e) {
         let t = (0, h.readQueryValue)(e);
         return void 0 === t ? m.Asset.MyExperiences : (0, p.isValidEnumValue)(m.Asset, t) ? t : m.Asset.MyExperiences
     }
-    let aE = (0, s.withTranslation)(e => {
+    let aj = (0, s.withTranslation)(e => {
             let {
                 verificationMetadata: t,
                 currentGroup: n,
@@ -6009,11 +5993,11 @@
                 resetAllFilters: u
             } = (0, J.default)(), {
                 settings: c
-            } = (0, x.useSettings)(), p = C(), h = (0, nN.default)(), v = (0, nM.default)(), f = (0, nA.default)(), T = (0, nD.default)(), {
+            } = (0, x.useSettings)(), p = C(), h = (0, nR.default)(), v = (0, nM.default)(), f = (0, nA.default)(), T = (0, nN.default)(), {
                 translate: w
             } = (0, s.useTranslation)(), S = (0, b.default)(), A = (0, a.useRef)(void 0), M = (0, a.useMemo)(() => [], []), j = (0, g.isTaxonomyActiveTab)(l.activeTab), E = j || (0, g.isRecentsActiveTab)(l.activeTab), P = (0, a.useMemo)(() => {
                 let e = (0, g.isAllAssetTypesActiveTab)(l.activeTab) ? m.Asset.AllCatalogAsset : g.TAXONOMY_HOST_ASSET;
-                return I.default.getMenuState(E ? e : aj(l.activeTab), M)
+                return I.default.getMenuState(E ? e : aM(l.activeTab), M)
             }, [l.activeTab, M, E]);
             (0, a.useEffect)(() => {
                 (0, g.isRecentsActiveTab)(l.activeTab) && d({
@@ -6027,7 +6011,7 @@
                         section: L,
                         container: R
                     }
-                } = ah(),
+                } = ap(),
                 N = (0, a.useCallback)(e => {
                     if (P.menuItem === e.menuItem && P.submenuItem === e.submenuItem) return;
                     if ((0, g.shouldOpenTaxonomyView)({
@@ -6045,9 +6029,9 @@
                     })
                 }, [P.menuItem, P.submenuItem, d, S]),
                 D = (0, a.useMemo)(() => {
-                    let e = aj(l.activeTab);
+                    let e = aM(l.activeTab);
                     if (void 0 === p && e === m.Asset.Moments || void 0 === v && e === m.Asset.AllCatalogAsset || void 0 === f && e === m.Asset.AvatarLooks || void 0 === T && e === m.Asset.Showcase) return P;
-                    let t = aj(l.activeTab) === m.Asset.TextDocument;
+                    let t = aM(l.activeTab) === m.Asset.TextDocument;
                     if (void 0 === h && t) return P;
                     let i = I.default.getValidMenuState(k, P, c, n, void 0, void 0, p, v, f, T, h);
                     if (i !== P) {
@@ -6077,22 +6061,22 @@
                 $ = (0, X.isDevelopmentItemAsset)(O, h),
                 ee = (0, a.useMemo)(() => {
                     var e, t;
-                    return $ ? (0, i.jsx)(aA, {
+                    return $ ? (0, i.jsx)(aS, {
                         groupId: null == n ? void 0 : n.id,
                         useTabNavigationSpacing: !1,
                         userId: null == o ? void 0 : o.id
-                    }) : O === m.Asset.Decal ? (0, i.jsx)(ax, {
+                    }) : O === m.Asset.Decal ? (0, i.jsx)(af, {
                         groupId: null == n ? void 0 : n.id
-                    }) : O === m.Asset.Animation ? (0, i.jsx)(af, {
+                    }) : O === m.Asset.Animation ? (0, i.jsx)(av, {
                         groupId: null == n ? void 0 : n.id
-                    }) : O === m.Asset.Audio || O === m.Asset.Video ? (0, i.jsx)(ag, {
+                    }) : O === m.Asset.Audio || O === m.Asset.Video ? (0, i.jsx)(ax, {
                         mediaAssetType: O,
                         groupId: null == n ? void 0 : n.id
-                    }) : O === m.Asset.Plugin ? (0, i.jsx)(aI, {
+                    }) : O === m.Asset.Plugin ? (0, i.jsx)(ay, {
                         groupId: null == n ? void 0 : n.id
-                    }) : O === m.Asset.Model ? (0, i.jsx)(ay, {
+                    }) : O === m.Asset.Model ? (0, i.jsx)(ab, {
                         groupId: null == n ? void 0 : n.id
-                    }) : O === m.Asset.MeshPart ? (0, i.jsx)(ab, {
+                    }) : O === m.Asset.MeshPart ? (0, i.jsx)(ag, {
                         groupId: null == n ? void 0 : n.id
                     }) : O === m.Asset.TextDocument ? (0, i.jsx)("div", {
                         className: "flex justify-center items-center padding-y-xxlarge",
@@ -6101,18 +6085,18 @@
                             size: "Large",
                             variant: "Indeterminate"
                         })
-                    }) : O === m.Asset.ShareLink ? (0, i.jsx)(aw, {}) : O === m.Asset.Moments ? (0, i.jsx)(am, {}) : O === m.Asset.AssetPermissionRequests ? (0, i.jsx)(aM, {}) : O === m.Asset.Showcase ? (0, i.jsx)(aT, {
+                    }) : O === m.Asset.ShareLink ? (0, i.jsx)(aC, {}) : O === m.Asset.Moments ? (0, i.jsx)(ac, {}) : O === m.Asset.AssetPermissionRequests ? (0, i.jsx)(aA, {}) : O === m.Asset.Showcase ? (0, i.jsx)(aI, {
                         groupId: null == n ? void 0 : n.id
-                    }) : O === m.Asset.AllCatalogAsset || O === m.Asset.AvatarLooks || O === m.Asset.AvatarBackground ? (0, i.jsx)(av, {
+                    }) : O === m.Asset.AllCatalogAsset || O === m.Asset.AvatarLooks || O === m.Asset.AvatarBackground ? (0, i.jsx)(ah, {
                         assetType: O,
                         groupId: null == n ? void 0 : n.id
-                    }) : O === m.Asset.Image || O === m.Asset.Mesh ? (0, i.jsx)(aC, {
+                    }) : O === m.Asset.Image || O === m.Asset.Mesh ? (0, i.jsx)(aT, {
                         primitiveAssetType: O,
                         groupId: null == n ? void 0 : n.id
-                    }) : K ? (0, i.jsx)(av, {
+                    }) : K ? (0, i.jsx)(ah, {
                         assetType: O,
                         groupId: null == n ? void 0 : n.id
-                    }) : (0, i.jsx)(aS, {
+                    }) : (0, i.jsx)(aw, {
                         assetType: O,
                         creatorType: (null == n ? void 0 : n.id) ? U.SearchCreatorType.Group : U.SearchCreatorType.User,
                         creatorTargetId: null != (e = null != (t = null == n ? void 0 : n.id) ? t : null == o ? void 0 : o.id) ? e : 0
@@ -6130,7 +6114,7 @@
                         className: R,
                         children: [(0, i.jsx)(F.AgeVerificationUpsellBanner, {
                             trackingPage: F.AgeVerificationUpsellPage.Creations
-                        }), !$ && (0, i.jsx)(iO, {
+                        }), !$ && (0, i.jsx)(iD, {
                             menuState: D,
                             onMenuStateChange: N,
                             verificationMetadata: t,
@@ -6140,7 +6124,7 @@
                 })]
             })
         }, [_.TranslationNamespace.AssetTypes, _.TranslationNamespace.Controls, _.TranslationNamespace.Creations, _.TranslationNamespace.Error, _.TranslationNamespace.Navigation, _.TranslationNamespace.ShareLinksManagement, _.TranslationNamespace.ExperienceReleases, _.TranslationNamespace.Taxonomy]),
-        aP = () => {
+        aE = () => {
             let e = (0, f.useCurrentGroup)(),
                 {
                     user: t
@@ -6155,7 +6139,7 @@
                     o(t)
                 })
             }, []), (0, i.jsx)(N, {
-                children: (0, i.jsx)(aE, {
+                children: (0, i.jsx)(aj, {
                     verificationMetadata: n,
                     currentGroup: e,
                     currentUser: t,
@@ -6163,10 +6147,10 @@
                 })
             })
         };
-    var ak = e.i(675330),
-        aL = e.i(177608),
-        aR = e.i(796266);
-    let aN = () => {
+    var aP = e.i(675330),
+        ak = e.i(177608),
+        aL = e.i(796266);
+    let aR = () => {
             var e;
             let {
                 translate: t
@@ -6178,12 +6162,12 @@
                 children: null != (e = null == n ? void 0 : n.label) ? e : t("Heading.Creations")
             })
         },
-        aD = e => {
+        aN = e => {
             let {
                 children: t
             } = e;
-            return (0, i.jsx)(aL.default, {
-                title: (0, i.jsx)(aN, {}),
+            return (0, i.jsx)(ak.default, {
+                title: (0, i.jsx)(aR, {}),
                 secondaryRail: (0, i.jsx)(M, {}),
                 secondarySize: "small",
                 noBreadCrumbs: !0,
@@ -6192,28 +6176,28 @@
                 })
             })
         },
-        aO = () => {
+        aD = () => {
             let {
                 isResolving: e
-            } = (0, aR.default)(), t = (0, a.useMemo)(() => ({
+            } = (0, aL.default)(), t = (0, a.useMemo)(() => ({
                 isResolving: e
             }), [e]);
             return (0, i.jsx)(l.default, {
-                children: (0, i.jsx)(ak.default, {
+                children: (0, i.jsx)(aP.default, {
                     children: (0, i.jsx)(o.default, {
                         children: (0, i.jsx)(j.Provider, {
                             value: t,
-                            children: (0, i.jsx)(aP, {})
+                            children: (0, i.jsx)(aE, {})
                         })
                     })
                 })
             })
         };
-    aO.getPageLayout = e => (0, i.jsx)(aD, {
+    aD.getPageLayout = e => (0, i.jsx)(aN, {
         children: e
-    }), aO.loggerConfig = {
+    }), aD.loggerConfig = {
         rosId: "3539"
-    }, e.s(["default", 0, aO], 962059)
+    }, e.s(["default", 0, aD], 962059)
 }, 748348, (e, t, n) => {
     let i = "/dashboard/creations";
     (window.__NEXT_P = window.__NEXT_P || []).push([i, () => e.r(962059)]), t.hot && t.hot.dispose(function() {
@@ -6221,5 +6205,5 @@
     })
 }]);
 
-//# debugId=50b42802-d2bd-461a-5a20-d900f0925dc1
-//# sourceMappingURL=3lj_7u5r0odes.js.map
+//# debugId=0337f01f-484b-611a-a1f9-910302f9b975
+//# sourceMappingURL=093b74ttu8ql5.js.map
