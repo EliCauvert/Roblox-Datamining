@@ -23,35 +23,42 @@ local flaggedMutedError = loggersModule.flaggedMutedError
 local mutedError = loggersModule.mutedError
 local notInterestedUserSignalTelemetryEventConfigsModule = require(gameTile.NotInterestedUserSignalTelemetryEventConfigs)
 local sendNotInterestedFeedbackFormAnalyticsModule = require(gameTile.sendNotInterestedFeedbackFormAnalytics)
+local fFlagLuaAppFixExplicitFeedbackTelemetry = sharedFlagsModule.FFlagLuaAppFixExplicitFeedbackTelemetry
 local fFlagLuaAppMakeDisclaimerOptInForFeedbackForm = sharedFlagsModule.FFlagLuaAppMakeDisclaimerOptInForFeedbackForm
 local fFlagLuaAppNotInterestedFeedbackFormTelemetry = sharedFlagsModule.FFlagLuaAppNotInterestedFeedbackFormTelemetry
 local fFlagLuaAppNotInterestedReportPlaceId = sharedFlagsModule.FFlagLuaAppNotInterestedReportPlaceId
 
 local function _(p1, p2, p3, p4)
-	-- upvalues: fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref)
+	-- upvalues: fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppFixExplicitFeedbackTelemetry (ref)
 	if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
-		sendNotInterestedFeedbackFormAnalyticsModule({ universeId = p2, sortId = p3, actionType = p4 }, p1)
+		sendNotInterestedFeedbackFormAnalyticsModule({
+			ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p1,
+			universeId = p2,
+			sortId = p3,
+			actionType = p4
+		}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p1 else nil)
 		
 		return
 	end
 end
 
 local _ = function(p1, p2, p3, p4)
-	-- upvalues: fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref)
+	-- upvalues: fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppFixExplicitFeedbackTelemetry (ref)
 	if p1 then return end
 	if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
 		sendNotInterestedFeedbackFormAnalyticsModule({
 			actionType = "NotInterestedFeedbackFormClosedWithoutSubmit",
+			ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p2,
 			universeId = p3,
 			sortId = p4
-		}, p2)
+		}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p2 else nil)
 		
 		return
 	end
 end
 
 local function onFeedbackFormSubmitted(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: userSignalTypes (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), flaggedMutedError (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), postSendUserSignal (ref), httpService (ref), setNetworkingErrorToast (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), mutedError (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref)
+	-- upvalues: userSignalTypes (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), flaggedMutedError (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), postSendUserSignal (ref), httpService (ref), setNetworkingErrorToast (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), mutedError (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppFixExplicitFeedbackTelemetry (ref)
 	local var1 = if p9 then userSignalTypes.AssetType.SponsoredGame else userSignalTypes.AssetType.Game
 	local t = {}
 	local var2 = false
@@ -104,16 +111,17 @@ local function onFeedbackFormSubmitted(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 	if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
 		sendNotInterestedFeedbackFormAnalyticsModule({
 			actionType = "NotInterestedFeedbackFormSubmitted",
+			ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p4,
 			universeId = p10,
 			sortId = p5
-		}, p4)
+		}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p4 else nil)
 		
 		return
 	end
 end
 
 return function(p11)
-	-- upvalues: default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), userSignalTypes (ref), setCentralOverlay (ref), centralOverlayType (ref), onFeedbackFormSubmitted (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref), circleMinus (ref), postSendUserSignal (ref), mutedError (ref)
+	-- upvalues: default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), userSignalTypes (ref), setCentralOverlay (ref), centralOverlayType (ref), onFeedbackFormSubmitted (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppFixExplicitFeedbackTelemetry (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref), circleMinus (ref), postSendUserSignal (ref), mutedError (ref)
 	local appPage = p11.appPage
 	
 	if not appPage then
@@ -164,14 +172,15 @@ return function(p11)
 				onFeedbackFormSubmitted(p12, p13, list, appPage, collectionId, dispatch, networking, placeId, p11.isSponsored, universeId)
 			end,
 			onClose = if fFlagLuaAppNotInterestedFeedbackFormTelemetry then function(p12)
-				-- upvalues: appPage (ref), universeId (ref), collectionId (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), sendNotInterestedFeedbackFormAnalyticsModule (copy)
+				-- upvalues: appPage (ref), universeId (ref), collectionId (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), sendNotInterestedFeedbackFormAnalyticsModule (copy), fFlagLuaAppFixExplicitFeedbackTelemetry (copy)
 				if p12 then return end
 				if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
 					sendNotInterestedFeedbackFormAnalyticsModule({
 						actionType = "NotInterestedFeedbackFormClosedWithoutSubmit",
+						ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else appPage,
 						universeId = universeId,
 						sortId = collectionId
-					}, appPage)
+					}, if fFlagLuaAppFixExplicitFeedbackTelemetry then appPage else nil)
 					
 					return
 				end
@@ -180,13 +189,14 @@ return function(p11)
 		},
 		toastIcon = circleMinus,
 		onToastActivated = if fFlagLuaAppNotInterestedFeedbackFormTelemetry then function()
-			-- upvalues: appPage (ref), universeId (ref), collectionId (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), sendNotInterestedFeedbackFormAnalyticsModule (copy)
+			-- upvalues: appPage (ref), universeId (ref), collectionId (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), sendNotInterestedFeedbackFormAnalyticsModule (copy), fFlagLuaAppFixExplicitFeedbackTelemetry (copy)
 			if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
 				sendNotInterestedFeedbackFormAnalyticsModule({
 					actionType = "NotInterestedFeedbackFormOpened",
+					ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else appPage,
 					universeId = universeId,
 					sortId = collectionId
-				}, appPage)
+				}, if fFlagLuaAppFixExplicitFeedbackTelemetry then appPage else nil)
 				
 				return
 			end

@@ -215,7 +215,6 @@ local function EditProfileImageBody(p1)
 		height = previewHeight,
 		cutoutSize = cutoutSize,
 		cutoutTopOffset = cutoutTopOffset,
-		isCameraControlBarDisabled = not isSplit,
 		fieldOfViewDeg = constantsModule.CameraFieldOfViewDeg,
 		fieldOfViewForDistanceScaleDeg = cutoutFieldOfViewDeg,
 		distanceScale = preview.distanceScale,

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.SwitchServer.SwitchServer)
+﻿return require(script.Parent.Parent.Parent._Index.SwitchServer.SwitchServer)

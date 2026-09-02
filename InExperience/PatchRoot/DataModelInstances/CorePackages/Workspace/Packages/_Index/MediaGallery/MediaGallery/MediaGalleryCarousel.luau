@@ -6,16 +6,14 @@ local foundationModule = require(parent.Foundation)
 local useTokens = foundationModule.Hooks.useTokens
 local useCursor = foundationModule.Hooks.useCursor
 local cursorType = foundationModule.Enums.CursorType
-local appCommonLibModule = require(parent.AppCommonLib)
-local signal = appCommonLibModule.Signal
+local signal = require(parent.AppCommonLib).Signal
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
-local fFlagLuaAppMediaGalleryGamepadSupport = require(parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 local responsiveModule = require(parent.Responsive)
 local useBreakpointXOrSmaller = responsiveModule.useBreakpointXOrSmaller
 local useLastInput = responsiveModule.useLastInput
 local useGamepadSupports = require(parent.RoactUtils).Hooks.useGamepadSupports
 local luaAppMediaGalleryGamepadSupportsPagingIcons = game:DefineFastFlag("LuaAppMediaGalleryGamepadSupportsPagingIcons", false)
-local var1 = if fFlagLuaAppMediaGalleryGamepadSupport then { Enum.KeyCode.ButtonL2, Enum.KeyCode.ButtonR2 } else { Enum.KeyCode.ButtonL1, Enum.KeyCode.ButtonR1 }
+local list = { Enum.KeyCode.ButtonL1, Enum.KeyCode.ButtonR1 }
 local carouselScrollButtons = require(parent.CollectionViews).CarouselScrollButtons
 local videoUtilsModule = require(parent.VideoUtils)
 local videoPlaybackCoordinator = videoUtilsModule.VideoPlaybackCoordinator
@@ -40,24 +38,24 @@ local function getVisibleIndices(p1, p2)
 	local t = {}
 	
 	for i = 1, SLIDING_WINDOW_SIZE do
-		local var2 = p2 + i - math.floor(SLIDING_WINDOW_SIZE / 2) - 1
+		local var1 = p2 + i - math.floor(SLIDING_WINDOW_SIZE / 2) - 1
 		
-		if var2 >= 1 and var2 <= p1 then
-			table.insert(t, var2)
+		if var1 >= 1 and var1 <= p1 then
+			table.insert(t, var1)
 		end
 	end
 	return t
 end
 
 return reactModule.memo(function(p3)
-	-- upvalues: useTokens (ref), mediaGalleryConstantsModule (ref), reactModule (ref), isValidIdentifierModule (ref), isYouTubeVideoModule (ref), isAudioPlaybackAllowedForDeviceModule (ref), enableAudioPlaybackInApp (ref), useSnapScrollModule (ref), getVisibleIndices (ref), signal (ref), videoPlaybackCoordinator (ref), useAutoAdvanceModule (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), useLastInput (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), appCommonLibModule (ref), luaAppMediaGalleryGamepadSupportsPagingIcons (ref), useGamepadSupports (ref), var1 (ref), useCursor (ref), cursorType (ref), useCarouselGamepadInputModule (ref), useTouchDragScrollModule (ref), fFlagSduiExperienceDetailsSupport (ref), mediaGalleryVideoItemModule (ref), mediaGalleryImageItemModule (ref), userInputService (ref), mediaGalleryPageIndicatorsModule (ref), carouselScrollButtons (ref), roundIconButton (ref)
+	-- upvalues: useTokens (ref), mediaGalleryConstantsModule (ref), reactModule (ref), isValidIdentifierModule (ref), isYouTubeVideoModule (ref), isAudioPlaybackAllowedForDeviceModule (ref), enableAudioPlaybackInApp (ref), useSnapScrollModule (ref), getVisibleIndices (ref), signal (ref), videoPlaybackCoordinator (ref), useAutoAdvanceModule (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), useLastInput (ref), luaAppMediaGalleryGamepadSupportsPagingIcons (ref), useGamepadSupports (ref), list (ref), useCursor (ref), cursorType (ref), useCarouselGamepadInputModule (ref), useTouchDragScrollModule (ref), fFlagSduiExperienceDetailsSupport (ref), mediaGalleryVideoItemModule (ref), mediaGalleryImageItemModule (ref), userInputService (ref), mediaGalleryPageIndicatorsModule (ref), carouselScrollButtons (ref), roundIconButton (ref)
 	local t_2
-	local var3 = useTokens()
-	local itemPadding = p3.itemPadding or var3.Padding.Medium
+	local var2 = useTokens()
+	local itemPadding = p3.itemPadding or var2.Padding.Medium
 	local aspectRatio = p3.aspectRatio or mediaGalleryConstantsModule.ITEM_ASPECT_RATIO
-	local cornerRadius = p3.cornerRadius or var3.Radius.Medium
+	local cornerRadius = p3.cornerRadius or var2.Radius.Medium
 	local itemsCount = #p3.items
-	local var4 = reactModule.useMemo(function()
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: p3 (ref), isValidIdentifierModule (copy), isYouTubeVideoModule (copy)
 		for i, v in p3.items do
 			if isValidIdentifierModule(v.videoId) and not isYouTubeVideoModule(v.assetTypeId) then
@@ -67,12 +65,12 @@ return reactModule.memo(function(p3)
 		return false
 	end, { p3.items })
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), isAudioPlaybackAllowedForDeviceModule (copy), enableAudioPlaybackInApp (copy)
-		if var4 and isAudioPlaybackAllowedForDeviceModule() then
+		-- upvalues: var3 (ref), isAudioPlaybackAllowedForDeviceModule (copy), enableAudioPlaybackInApp (copy)
+		if var3 and isAudioPlaybackAllowedForDeviceModule() then
 			task.delay(0, enableAudioPlaybackInApp)
 		end
-	end, { var4 })
-	local var5 = useSnapScrollModule({
+	end, { var3 })
+	local var4 = useSnapScrollModule({
 		itemCount = itemsCount,
 		itemPadding = itemPadding,
 		springConfig = mediaGalleryConstantsModule.SPRING_CONFIG,
@@ -84,40 +82,40 @@ return reactModule.memo(function(p3)
 			end
 		end, { p3.onMediaChanged })
 	})
-	local var6 = getVisibleIndices(itemsCount, var5.currentIndex)
+	local var5 = getVisibleIndices(itemsCount, var4.currentIndex)
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: signal (copy)
+		return signal.new()
+	end, {})
 	local var7 = reactModule.useMemo(function()
 		-- upvalues: signal (copy)
 		return signal.new()
 	end, {})
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: signal (copy)
-		return signal.new()
-	end, {})
-	local var9, var10 = reactModule.useState(true)
-	local var11, var12 = reactModule.useState(false)
+	local var8, var9 = reactModule.useState(true)
+	local var10, var11 = reactModule.useState(false)
 	local videoPlaybackCoordinator_1 = p3.videoPlaybackCoordinator or reactModule.useMemo(function()
 		-- upvalues: videoPlaybackCoordinator (copy)
 		return videoPlaybackCoordinator.new()
 	end, {})
-	local var13 = useAutoAdvanceModule({
+	local var12 = useAutoAdvanceModule({
 		enabled = p3.autoAdvanceEnabled ~= false,
 		intervalSeconds = p3.autoAdvanceIntervalSeconds,
-		galleryRef = var5.scrollingFrameRef,
+		galleryRef = var4.scrollingFrameRef,
 		isMediaGalleryOccluded = p3.isMediaGalleryOccluded,
-		isAutoAdvanceTimerSuspended = var11,
+		isAutoAdvanceTimerSuspended = var10,
 		scrollRight = reactModule.useCallback(function()
-			-- upvalues: var5 (ref)
-			var5.scrollInDirection("Right", true)
-		end, { var5.scrollInDirection })
+			-- upvalues: var4 (ref)
+			var4.scrollInDirection("Right", true)
+		end, { var4.scrollInDirection })
 	})
-	local var14 = reactModule.useCallback(function(p4, p5)
-		-- upvalues: var13 (ref), var5 (ref)
-		var13.resetProgress()
-		var5.scrollInDirection(p4, p5)
-	end, { var13.resetProgress, var5.scrollInDirection })
-	local var15 = if useBreakpointXOrSmaller(responsiveModule.Keys.Small) then var3.Size.Size_400 else var3.Size.Size_700
-	local gradientOverlayHeight = p3.gradientOverlayHeight or var3.Size.Size_200 + var15 + var3.Size.Size_1000
-	local var16 = reactModule.useMemo(function()
+	local var13 = reactModule.useCallback(function(p4, p5)
+		-- upvalues: var12 (ref), var4 (ref)
+		var12.resetProgress()
+		var4.scrollInDirection(p4, p5)
+	end, { var12.resetProgress, var4.scrollInDirection })
+	local var14 = if useBreakpointXOrSmaller(responsiveModule.Keys.Small) then var2.Size.Size_400 else var2.Size.Size_700
+	local gradientOverlayHeight = p3.gradientOverlayHeight or var2.Size.Size_200 + var14 + var2.Size.Size_1000
+	local var15 = reactModule.useMemo(function()
 		-- upvalues: p3 (ref), videoPlaybackCoordinator_1 (ref)
 		return {
 			videoAnalyticsData = {
@@ -134,43 +132,43 @@ return reactModule.memo(function(p3)
 		p3.analyticsSourceId,
 		videoPlaybackCoordinator_1
 	})
-	local var17 = if p3.fullscreenEnabled == false then nil else p3.onFullscreenToggle
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: var17 (ref), var5 (ref)
-		if var17 then
-			var17(var5.currentIndex)
+	local var16 = if p3.fullscreenEnabled == false then nil else p3.onFullscreenToggle
+	local var17 = reactModule.useCallback(function()
+		-- upvalues: var16 (ref), var4 (ref)
+		if var16 then
+			var16(var4.currentIndex)
 		end
-	end, { var17, var5.currentIndex })
-	local var19 = if fFlagLuaAppMediaGalleryGamepadSupport and appCommonLibModule.isSpatial() then responsiveModule.Input.Pointer else useLastInput()
-	local var20 = var19 == responsiveModule.Input.Directional
-	local var21 = if luaAppMediaGalleryGamepadSupportsPagingIcons then useGamepadSupports(var1, var19) else false
-	local var22 = if luaAppMediaGalleryGamepadSupportsPagingIcons then var20 and var21 else var20
-	local var23 = if var19 ~= responsiveModule.Input.Pointer then luaAppMediaGalleryGamepadSupportsPagingIcons and not var21 else true
+	end, { var16, var4.currentIndex })
+	local var18 = useLastInput()
+	local var19 = var18 == responsiveModule.Input.Directional
+	local var20 = if luaAppMediaGalleryGamepadSupportsPagingIcons then useGamepadSupports(list, var18) else false
+	local var21 = if luaAppMediaGalleryGamepadSupportsPagingIcons then var19 and var20 else var19
+	local var22 = if var18 ~= responsiveModule.Input.Pointer then luaAppMediaGalleryGamepadSupportsPagingIcons and not var20 else true
+	local var23 = reactModule.useCallback(function()
+		-- upvalues: var13 (ref)
+		var13("Left")
+	end, { var13 })
 	local var24 = reactModule.useCallback(function()
-		-- upvalues: var14 (ref)
-		var14("Left")
-	end, { var14 })
-	local var25 = reactModule.useCallback(function()
-		-- upvalues: var14 (ref)
-		var14("Right")
-	end, { var14 })
-	local var26 = useCursor(cursorType.Invisible)
-	local var27 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref), var7 (ref)
-		if var11 then
-			var7:fire()
+		-- upvalues: var13 (ref)
+		var13("Right")
+	end, { var13 })
+	local var25 = useCursor(cursorType.Invisible)
+	local var26 = reactModule.useCallback(function()
+		-- upvalues: var10 (ref), var6 (ref)
+		if var10 then
+			var6:fire()
 		end
-	end, { var11, var7 })
-	local var28 = useCarouselGamepadInputModule({
+	end, { var10, var6 })
+	local var27 = useCarouselGamepadInputModule({
 		isFullscreen = p3.isFullscreen,
-		isVideoActive = var11,
-		isMuted = var9,
-		toggleMuteSignal = var8,
-		onFullscreenToggle = var18,
-		scrollLeft = var24,
-		scrollRight = var25
+		isVideoActive = var10,
+		isMuted = var8,
+		toggleMuteSignal = var7,
+		onFullscreenToggle = var17,
+		scrollLeft = var23,
+		scrollRight = var24
 	})
-	useTouchDragScrollModule(var5.scrollingFrameRef, var5.scrollInDirection)
+	useTouchDragScrollModule(var4.scrollingFrameRef, var4.scrollInDirection)
 	local t = {
 		Layout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -179,11 +177,11 @@ return reactModule.memo(function(p3)
 		})
 	}
 	
-	for i, v in var6 do
+	for i, v in var5 do
 		t_2 = p3.items[v]
 		
 		if t_2 then
-			local var29
+			local var28
 			local _ = nil
 			
 			if isValidIdentifierModule(t_2.videoId) and not isYouTubeVideoModule(t_2.assetTypeId) then
@@ -193,18 +191,18 @@ return reactModule.memo(function(p3)
 					Size = UDim2.fromScale(1, 1),
 					itemIndex = v,
 					overlay = t_2.overlay,
-					currentIndex = var5.currentIndex,
+					currentIndex = var4.currentIndex,
 					videoPlaybackCoordinator = videoPlaybackCoordinator_1,
-					toggleVideoPlaybackSignal = var7,
-					toggleMuteSignal = var8,
-					onVideoEnded = var13.onVideoEnded,
-					onVideoProgressChanged = var13.onVideoProgressChanged,
-					onMutedChanged = var10,
-					setIsVideoActive = var12,
+					toggleVideoPlaybackSignal = var6,
+					toggleMuteSignal = var7,
+					onVideoEnded = var12.onVideoEnded,
+					onVideoProgressChanged = var12.onVideoProgressChanged,
+					onMutedChanged = var9,
+					setIsVideoActive = var11,
 					isFullscreen = p3.isFullscreen,
 					isMediaGalleryOccluded = p3.isMediaGalleryOccluded,
 					videoAnalytics = p3.videoAnalytics,
-					videoAnalyticsContext = var16,
+					videoAnalyticsContext = var15,
 					videoDwellTimeHundredthsSec = p3.videoDwellTimeHundredthsSec,
 					videoVisiblePercent = p3.videoVisiblePercent,
 					autoplay = p3.autoplay,
@@ -221,16 +219,16 @@ return reactModule.memo(function(p3)
 						t_1[i_1] = v_1
 					end
 				end
-				var29 = reactModule.createElement(mediaGalleryVideoItemModule, t_1)
+				var28 = reactModule.createElement(mediaGalleryVideoItemModule, t_1)
 				t["Item" .. v] = reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					LayoutOrder = v,
-					Size = var5.absoluteSizeBinding:map(function(p4)
+					Size = var4.absoluteSizeBinding:map(function(p4)
 						-- upvalues: aspectRatio (ref)
 						return UDim2.new(1, 0, 0, p4.X / aspectRatio)
 					end)
-				}, { Content = var29 })
+				}, { Content = var28 })
 			end
 			local t_1 = {
 				imageId = t_2.imageId,
@@ -252,23 +250,23 @@ return reactModule.memo(function(p3)
 					t_1[i_1] = v_1
 				end
 			end
-			var29 = reactModule.createElement(mediaGalleryImageItemModule, t_1)
+			var28 = reactModule.createElement(mediaGalleryImageItemModule, t_1)
 		end
 	end
-	local size500 = var3.Size.Size_500
-	local size350 = var3.Size.Size_350
+	local size500 = var2.Size.Size_500
+	local size350 = var2.Size.Size_350
 	local t_1 = {}
 	t_2 = {
 		BackgroundTransparency = 1,
 		Size = p3.Size or UDim2.fromScale(1, 1),
 		AnchorPoint = p3.AnchorPoint,
 		Position = p3.Position,
-		ref = var28,
+		ref = var27,
 		AutoButtonColor = false,
 		Text = "",
-		[reactModule.Event.Activated] = var27,
+		[reactModule.Event.Activated] = var26,
 		SelectionBehaviorRight = Enum.SelectionBehavior.Stop,
-		SelectionImageObject = if p3.isFullscreen then var26 else nil,
+		SelectionImageObject = if p3.isFullscreen then var25 else nil,
 		SelectionGroup = true
 	}
 	t_1.Carousel = reactModule.createElement("TextButton", t_2, {
@@ -277,28 +275,28 @@ return reactModule.memo(function(p3)
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.fromScale(0, 0.5),
-			Size = var5.absoluteSizeBinding:map(function(p4)
+			Size = var4.absoluteSizeBinding:map(function(p4)
 				-- upvalues: aspectRatio (ref)
 				return UDim2.new(1, 0, 0, p4.X / aspectRatio)
 			end),
 			AutomaticCanvasSize = Enum.AutomaticSize.XY,
-			CanvasPosition = var5.canvasPosition,
+			CanvasPosition = var4.canvasPosition,
 			ScrollingEnabled = false,
 			ScrollBarImageTransparency = 1,
 			ScrollBarThickness = 0,
 			ScrollingDirection = Enum.ScrollingDirection.X,
 			ClipsDescendants = true,
 			ZIndex = 1,
-			[reactModule.Change.AbsoluteSize] = var5.onAbsoluteSizeChanged,
-			ref = var5.scrollingFrameRef
+			[reactModule.Change.AbsoluteSize] = var4.onAbsoluteSizeChanged,
+			ref = var4.scrollingFrameRef
 		}, t),
 		PageIndicators = if itemsCount > 1 and p3.showPageIndicators ~= false and not p3.isFullscreen then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 2,
 			AnchorPoint = Vector2.new(0.5, 1),
 			AutomaticSize = Enum.AutomaticSize.X,
-			Size = UDim2.fromOffset(0, var3.Size.Size_200),
-			Position = UDim2.new(0.5, 0, 1, -var15)
+			Size = UDim2.fromOffset(0, var2.Size.Size_200),
+			Position = UDim2.new(0.5, 0, 1, -var14)
 		}, {
 			UIListLayout = reactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
@@ -306,47 +304,47 @@ return reactModule.memo(function(p3)
 				Padding = UDim.new(0, size350),
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
-			PageLeftGamepadIcon = if var22 then reactModule.createElement("ImageLabel", {
+			PageLeftGamepadIcon = if var21 then reactModule.createElement("ImageLabel", {
 				BackgroundTransparency = 1,
 				LayoutOrder = -1,
-				Image = userInputService:GetImageForKeyCode(if fFlagLuaAppMediaGalleryGamepadSupport then Enum.KeyCode.ButtonL2 else Enum.KeyCode.ButtonL1),
-				ImageTransparency = if var5.currentIndex <= 1 then 0.5 else nil,
+				Image = userInputService:GetImageForKeyCode(Enum.KeyCode.ButtonL1),
+				ImageTransparency = if var4.currentIndex <= 1 then 0.5 else nil,
 				Size = UDim2.fromOffset(size500, size500)
 			}) else nil,
 			Indicators = reactModule.createElement(mediaGalleryPageIndicatorsModule, {
 				useSpring = true,
 				numberOfItems = itemsCount,
 				startIndex = p3.startIndex or 1,
-				currentItemProgressBinding = var13.progressBinding,
-				mediaGalleryScrolledSignal = var5.scrolledSignal,
+				currentItemProgressBinding = var12.progressBinding,
+				mediaGalleryScrolledSignal = var4.scrolledSignal,
 				springConfig = mediaGalleryConstantsModule.SPRING_CONFIG
 			}),
-			PageRightGamepadIcon = if var22 then reactModule.createElement("ImageLabel", {
+			PageRightGamepadIcon = if var21 then reactModule.createElement("ImageLabel", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
-				Image = userInputService:GetImageForKeyCode(if fFlagLuaAppMediaGalleryGamepadSupport then Enum.KeyCode.ButtonR2 else Enum.KeyCode.ButtonR1),
-				ImageTransparency = if itemsCount <= var5.currentIndex then 0.5 else nil,
+				Image = userInputService:GetImageForKeyCode(Enum.KeyCode.ButtonR1),
+				ImageTransparency = if itemsCount <= var4.currentIndex then 0.5 else nil,
 				Size = UDim2.fromOffset(size500, size500)
 			}) else nil
 		}) else nil,
-		ScrollButtons = if var23 and not p3.isMediaGalleryOccluded then reactModule.createElement(carouselScrollButtons, {
+		ScrollButtons = if var22 and not p3.isMediaGalleryOccluded then reactModule.createElement(carouselScrollButtons, {
 			ZIndex = 10,
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.fromScale(0.5, 0),
-			Size = UDim2.new(1, if p3.isFullscreen then 0 else var3.Size.Size_1000, 1, 0),
-			buttonOffsetFromEdge = if p3.isFullscreen then var3.Size.Size_500 else nil,
-			leftScrollingEnabled = var5.currentIndex > 1,
-			rightScrollingEnabled = var5.currentIndex < itemsCount,
-			handleScrollLeft = var24,
-			handleScrollRight = var25
+			Size = UDim2.new(1, if p3.isFullscreen then 0 else var2.Size.Size_1000, 1, 0),
+			buttonOffsetFromEdge = if p3.isFullscreen then var2.Size.Size_500 else nil,
+			leftScrollingEnabled = var4.currentIndex > 1,
+			rightScrollingEnabled = var4.currentIndex < itemsCount,
+			handleScrollLeft = var23,
+			handleScrollRight = var24
 		}) else nil,
-		FullscreenButton = if var17 then reactModule.createElement(roundIconButton, {
+		FullscreenButton = if var16 then reactModule.createElement(roundIconButton, {
 			ZIndex = 4,
 			Selectable = false,
 			icon = if p3.isFullscreen then "two-arrows-to-center" else "two-arrows-from-center",
-			onActivated = var18,
+			onActivated = var17,
 			AnchorPoint = Vector2.new(1, 0),
-			Position = UDim2.new(1, -var3.Size.Size_500, 0, var3.Size.Size_500)
+			Position = UDim2.new(1, -var2.Size.Size_500, 0, var2.Size.Size_500)
 		}) else nil,
 		CarouselOverlay = if p3.overlay then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -354,7 +352,7 @@ return reactModule.memo(function(p3)
 			Size = UDim2.fromScale(1, 1)
 		}, { Overlay = p3.overlay }) else nil,
 		SizeConstraint = reactModule.createElement("UISizeConstraint", {
-			MinSize = var5.absoluteSizeBinding:map(function(p4)
+			MinSize = var4.absoluteSizeBinding:map(function(p4)
 				-- upvalues: aspectRatio (ref)
 				return Vector2.new(0, p4.X / aspectRatio)
 			end)

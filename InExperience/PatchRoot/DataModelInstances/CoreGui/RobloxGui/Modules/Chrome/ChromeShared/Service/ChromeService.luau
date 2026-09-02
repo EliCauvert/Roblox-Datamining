@@ -28,7 +28,6 @@ local chromeDeprecateMRUs = game:DefineFastFlag("ChromeDeprecateMRUs", false)
 local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
 local fIntSideSheetVariant = sharedFlagsModule.FIntSideSheetVariant
 local fFlagEnableChromeWindowsNotInMenu = require(chromeShared.Flags).FFlagEnableChromeWindowsNotInMenu
-local fFlagChromeNineDotActivityIndicator = require(chromeShared.Flags).FFlagChromeNineDotActivityIndicator
 local _ = nil
 local _ = nil
 local _ = nil
@@ -59,7 +58,7 @@ function createUnibarLayoutInfo(p1, p2)
 end
 
 function t.new()
-	-- upvalues: localizationService (ref), fFlagEnableConsoleExpControls (ref), shortcutServiceModule (ref), chromeUtilsModule (ref), observableValue (ref), notifySignal (ref), localization (ref), fFlagChromeNineDotActivityIndicator (ref), signal (ref), isInExperienceUIVREnabled (ref), t (ref), viewportUtilModule (ref), chromeDeprecateMRUs (ref), focusOnChromeSignal (ref), focusOffChromeSignal (ref)
+	-- upvalues: localizationService (ref), fFlagEnableConsoleExpControls (ref), shortcutServiceModule (ref), chromeUtilsModule (ref), observableValue (ref), notifySignal (ref), localization (ref), signal (ref), isInExperienceUIVREnabled (ref), t (ref), viewportUtilModule (ref), chromeDeprecateMRUs (ref), focusOnChromeSignal (ref), focusOffChromeSignal (ref)
 	local t_1 = {
 		_shortcutService = if fFlagEnableConsoleExpControls then shortcutServiceModule.new() else nil,
 		_layout = chromeUtilsModule.ObservableValue.new(createUnibarLayoutInfo(Vector2.zero, Vector2.zero)),
@@ -84,8 +83,6 @@ function t.new()
 		_localizedLabelKeys = {},
 		_currentShortcutBar = observableValue.new(nil),
 		_notificationIndicator = observableValue.new(nil),
-		_nineDotActivityIndicatorVisible = if fFlagChromeNineDotActivityIndicator then observableValue.new(false) else nil,
-		_nineDotActivityIndicatorKeys = if fFlagChromeNineDotActivityIndicator then {} else nil,
 		_orderAlignment = observableValue.new(Enum.HorizontalAlignment.Left),
 		_onIntegrationRegistered = signal.new(),
 		_onIntegrationActivated = signal.new(),
@@ -111,12 +108,6 @@ function t.new()
 		t_1._shortcutService.onShortcutBarChanged:connect(function(p1)
 			-- upvalues: tbl (ref)
 			tbl._currentShortcutBar:set(p1)
-		end)
-	end
-	if fFlagChromeNineDotActivityIndicator then
-		t_1._currentSubMenu:connect(function()
-			-- upvalues: tbl (ref)
-			tbl:updateNineDotActivityIndicatorVisible()
 		end)
 	end
 	focusOnChromeSignal:connect(function(p1)
@@ -169,19 +160,6 @@ function t:notificationIndicator()
 	return self._notificationIndicator
 end
 
-function t:nineDotActivityIndicatorVisible()
-	return self._nineDotActivityIndicatorVisible
-end
-
-function t:setNineDotActivityIndicatorVisible(vectorB, p1)
-	self._nineDotActivityIndicatorKeys[vectorB] = if p1 then true else nil
-	self:updateNineDotActivityIndicatorVisible()
-end
-
-function t:updateNineDotActivityIndicatorVisible()
-	self._nineDotActivityIndicatorVisible:set(if self._currentSubMenu:get() == "nine_dot" then false else next(self._nineDotActivityIndicatorKeys) ~= nil)
-end
-
 function t:toggleSubMenu(p1)
 	-- upvalues: fFlagEnableSideSheet (ref), toggleSideSheet (write)
 	if fFlagEnableSideSheet and toggleSideSheet then
@@ -189,7 +167,7 @@ function t:toggleSubMenu(p1)
 		
 		return
 	elseif not self._subMenuConfig[p1] then
-		warn("Not a valid subMenuId:" .. p9)
+		warn("Not a valid subMenuId:" .. p8)
 		
 		return
 	elseif self._currentSubMenu:get() == p1 then
@@ -891,7 +869,7 @@ function t:activate(p7, p8)
 			end)
 			
 			if not ok then
-				warn("ChromeService: activate error thrown for " .. p49)
+				warn("ChromeService: activate error thrown for " .. p48)
 				var13 = status
 			end
 		elseif self._subMenuConfig[p7] then

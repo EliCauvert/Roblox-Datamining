@@ -37,6 +37,7 @@ local postSendUserSignal = userSignalsModule.PostSendUserSignal
 local userSignalTypes = userSignalsModule.UserSignalTypes
 local fFlagLuaAppMakeDisclaimerOptInForFeedbackForm = sharedFlagsModule.FFlagLuaAppMakeDisclaimerOptInForFeedbackForm
 local fFlagLuaAppNotInterestedFeedbackFormTelemetry = sharedFlagsModule.FFlagLuaAppNotInterestedFeedbackFormTelemetry
+local fFlagLuaAppFixExplicitFeedbackTelemetry = sharedFlagsModule.FFlagLuaAppFixExplicitFeedbackTelemetry
 local fFlagLuaAppEnableSponsoredReportAd = sharedFlagsModule.FFlagLuaAppEnableSponsoredReportAd
 local fFlagLuaAppNotInterestedReportPlaceId = sharedFlagsModule.FFlagLuaAppNotInterestedReportPlaceId
 local fFlagLuaAppEnableHomepageOneByTwoTile = sharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
@@ -44,7 +45,7 @@ local fFlagLuaAppContinueSortInstantPlay = sharedFlagsModule.FFlagLuaAppContinue
 local fFlagLuaAppExtractNotInterestedHelper = sharedFlagsModule.FFlagLuaAppExtractNotInterestedHelper
 
 return function(p1, p2)
-	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), useLocalization (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppContinueSortInstantPlay (ref), reactModule (ref), userSignalTypes (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), flaggedMutedError (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), postSendUserSignal (ref), httpService (ref), mutedError (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref), tileOverflowMenuItems (ref), fFlagLuaAppExtractNotInterestedHelper (ref), activateGameNotInterestedModule (ref), setCentralOverlay (ref), centralOverlayType (ref), iconName (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref)
+	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), useLocalization (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppContinueSortInstantPlay (ref), reactModule (ref), userSignalTypes (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), flaggedMutedError (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), postSendUserSignal (ref), httpService (ref), mutedError (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppFixExplicitFeedbackTelemetry (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref), tileOverflowMenuItems (ref), fFlagLuaAppExtractNotInterestedHelper (ref), activateGameNotInterestedModule (ref), setCentralOverlay (ref), centralOverlayType (ref), iconName (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref)
 	local var1 = useDispatch()
 	local var2 = useRoactService(roactNetworking)
 	local var3 = useLocalization({
@@ -89,7 +90,7 @@ return function(p1, p2)
 		}
 	end, { var3 })
 	local var5 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: var4 (ref), userSignalTypes (copy), fFlagLuaAppNotInterestedReportPlaceId (copy), p1 (ref), flaggedMutedError (copy), var1 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), closeCentralOverlay (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy), setNetworkingErrorToast (copy), postSendUserSignal (copy), var2 (ref), httpService (copy), collectionId (ref), mutedError (copy), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), sendNotInterestedFeedbackFormAnalyticsModule (copy)
+		-- upvalues: var4 (ref), userSignalTypes (copy), fFlagLuaAppNotInterestedReportPlaceId (copy), p1 (ref), flaggedMutedError (copy), var1 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), closeCentralOverlay (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy), setNetworkingErrorToast (copy), postSendUserSignal (copy), var2 (ref), httpService (copy), collectionId (ref), mutedError (copy), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), sendNotInterestedFeedbackFormAnalyticsModule (copy), fFlagLuaAppFixExplicitFeedbackTelemetry (copy)
 		local var6 = false
 		local t = {}
 		
@@ -150,9 +151,10 @@ return function(p1, p2)
 		if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
 			sendNotInterestedFeedbackFormAnalyticsModule({
 				actionType = "NotInterestedFeedbackFormSubmitted",
+				ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p1.appPage,
 				universeId = p1.universeId,
 				sortId = collectionId
-			}, p1.appPage)
+			}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p1.appPage else nil)
 		end
 	end, {
 		var2, var4, var3, p1.universeId,
@@ -164,23 +166,25 @@ return function(p1, p2)
 	
 	if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
 		var7 = reactModule.useCallback(function(p5)
-			-- upvalues: sendNotInterestedFeedbackFormAnalyticsModule (copy), p1 (ref), collectionId (ref)
+			-- upvalues: sendNotInterestedFeedbackFormAnalyticsModule (copy), fFlagLuaAppFixExplicitFeedbackTelemetry (copy), p1 (ref), collectionId (ref)
 			if p5 then
 				return
 			end
 			sendNotInterestedFeedbackFormAnalyticsModule({
 				actionType = "NotInterestedFeedbackFormClosedWithoutSubmit",
+				ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p1.appPage,
 				universeId = p1.universeId,
 				sortId = collectionId
-			}, p1.appPage)
+			}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p1.appPage else nil)
 		end, { p1.appPage, p1.universeId, collectionId })
 		var8 = reactModule.useCallback(function()
-			-- upvalues: sendNotInterestedFeedbackFormAnalyticsModule (copy), p1 (ref), collectionId (ref)
+			-- upvalues: sendNotInterestedFeedbackFormAnalyticsModule (copy), fFlagLuaAppFixExplicitFeedbackTelemetry (copy), p1 (ref), collectionId (ref)
 			sendNotInterestedFeedbackFormAnalyticsModule({
 				actionType = "NotInterestedFeedbackFormOpened",
+				ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p1.appPage,
 				universeId = p1.universeId,
 				sortId = collectionId
-			}, p1.appPage)
+			}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p1.appPage else nil)
 		end, { p1.appPage, p1.universeId, collectionId })
 	end
 	local var9 = reactModule.useMemo(function()

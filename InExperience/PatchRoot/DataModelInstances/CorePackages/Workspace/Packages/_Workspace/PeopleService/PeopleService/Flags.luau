@@ -21,6 +21,7 @@
 	FIntPerUserVoiceVolumeUnmutedViaSliderThrottleHundredthsPercent = require(script.Analytics.FIntPerUserVoiceVolumeUnmutedViaSliderThrottleHundredthsPercent),
 	GetFFlagNewPeoplePageIcons = require(script.UI.FFlagNewPeoplePageIcons),
 	GetFFlagNewPeopleButtonOrder = require(script.UI.FFlagNewPeopleButtonOrder),
+	FFlagShowSwitchServerButton = require(script.UI.FFlagShowSwitchServerButton),
 	GetFFlagAddPeoplePageCardLayout = require(script.UI.FFlagAddPeoplePageCardLayout),
 	GetFFlagPeoplePageEnablePersonSignalStore = require(script.UI.FFlagPeoplePageEnablePersonSignalStore),
 	GetFFlagPeoplePageLazyRenderCards = require(script.UI.FFlagPeoplePageLazyRenderCards),

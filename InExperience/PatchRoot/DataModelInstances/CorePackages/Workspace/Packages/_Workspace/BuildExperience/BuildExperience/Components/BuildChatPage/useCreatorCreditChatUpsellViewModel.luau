@@ -2,12 +2,14 @@
 local parent = buildExperience.Parent
 local creatorCreditModule = require(parent.DataHydration.CreatorCredit)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
 local signalsReactModule = require(parent.SignalsReact)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local creatorCreditConfigModule = require(buildExperience.CreatorCreditConfig)
 local useOpenBuyRobuxWebViewModule = require(buildExperience.Components.CreatorCreditSheet.useOpenBuyRobuxWebView)
 local useRefreshCreatorCreditOnUnhideModule = require(buildExperience.Components.CreatorCreditSheet.useRefreshCreatorCreditOnUnhide)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
 local function _(p1)
 	-- upvalues: creatorCreditConfigModule (ref)
@@ -15,8 +17,8 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), creatorCreditModule (ref), reactModule (ref), signalsReactModule (ref), creatorCreditConfigModule (ref), useOpenBuyRobuxWebViewModule (ref), useRefreshCreatorCreditOnUnhideModule (ref)
-	local var1 = useLocalization({
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), creatorCreditModule (ref), reactModule (ref), signalsReactModule (ref), creatorCreditConfigModule (ref), useOpenBuyRobuxWebViewModule (ref), useRefreshCreatorCreditOnUnhideModule (ref)
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		adjustLimit = localizationStringsModule.CREATOR_CREDIT_ADJUST_LIMIT_BUTTON,
 		buyMoreDescription = localizationStringsModule.CREATOR_CREDIT_BUY_MORE_ROBUX_DESCRIPTION,
 		buyMoreTitle = localizationStringsModule.CREATOR_CREDIT_BUY_MORE_ROBUX_TITLE,
@@ -27,7 +29,7 @@ return function(p1)
 		freeTrialTitle = localizationStringsModule.CREATOR_CREDIT_FREE_TRIAL_EXHAUSTED_TITLE,
 		notNow = localizationStringsModule.CREATOR_CREDIT_NOT_NOW_BUTTON,
 		viewUsage = localizationStringsModule.CREATOR_CREDIT_VIEW_USAGE_BUTTON
-	})
+	}) else nil
 	local creatorCreditStore = creatorCreditModule.getCreatorCreditStore(false)
 	local var2 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: creatorCreditStore (ref)
@@ -116,29 +118,52 @@ return function(p1)
 	if not var15 then
 		var15 = if var2 == nil then nil elseif var2.allowed ~= nil then if var2.freeTrialRemaining > 0 then nil elseif not var2.limitSettings.additionalUsageEnabled then if var2.robuxBalance < creatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "InsufficientRobuxBalance" elseif var2.limitSettings.dailyLimitSet and var2.limitRemaining < creatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "DailyLimitReached" else nil else "FreeTrialExhausted" elseif var2.allowed then nil else var2.reason
 	end
+	local buyMoreTitle, buyMoreDescription, buyRobux, viewUsage
 	local _ = nil
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local buyMoreTitle = var1.buyMoreTitle
-	local buyMoreDescription = var1.buyMoreDescription
-	local buyRobux = var1.buyRobux
-	local viewUsage = var1.viewUsage
+	
+	if fFlagBuildLocalization then
+		buyMoreTitle = var1.buyMoreTitle
+		buyMoreDescription = var1.buyMoreDescription
+		buyRobux = var1.buyRobux
+		viewUsage = var1.viewUsage
+	else
+		buyMoreTitle = localizationStringsModule.CREATOR_CREDIT_BUY_MORE_ROBUX_TITLE
+		buyMoreDescription = localizationStringsModule.CREATOR_CREDIT_BUY_MORE_ROBUX_DESCRIPTION
+		buyRobux = localizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_SHEET_CONFIRM
+		viewUsage = localizationStringsModule.CREATOR_CREDIT_VIEW_USAGE_BUTTON
+	end
 	local var16 = var12
 	local var17 = var13
 	
 	if var15 == "FreeTrialExhausted" then
-		buyMoreTitle = var1.freeTrialTitle
-		buyMoreDescription = var1.freeTrialDescription
-		buyRobux = var1.viewUsage
-		viewUsage = var1.notNow
+		if fFlagBuildLocalization then
+			buyMoreTitle = var1.freeTrialTitle
+			buyMoreDescription = var1.freeTrialDescription
+			buyRobux = var1.viewUsage
+			viewUsage = var1.notNow
+		else
+			buyMoreTitle = localizationStringsModule.CREATOR_CREDIT_FREE_TRIAL_EXHAUSTED_TITLE
+			buyMoreDescription = localizationStringsModule.CREATOR_CREDIT_FREE_TRIAL_EXHAUSTED_DESCRIPTION
+			buyRobux = localizationStringsModule.CREATOR_CREDIT_VIEW_USAGE_BUTTON
+			viewUsage = localizationStringsModule.CREATOR_CREDIT_NOT_NOW_BUTTON
+		end
 		var16 = var13
 		var17 = var14
 	elseif var15 == "DailyLimitReached" then
-		buyMoreTitle = var1.dailyLimitTitle
-		buyMoreDescription = var1.dailyLimitDescription
-		buyRobux = var1.adjustLimit
-		viewUsage = var1.notNow
+		if fFlagBuildLocalization then
+			buyMoreTitle = var1.dailyLimitTitle
+			buyMoreDescription = var1.dailyLimitDescription
+			buyRobux = var1.adjustLimit
+			viewUsage = var1.notNow
+		else
+			buyMoreTitle = localizationStringsModule.CREATOR_CREDIT_DAILY_LIMIT_REACHED_TITLE
+			buyMoreDescription = localizationStringsModule.CREATOR_CREDIT_DAILY_LIMIT_REACHED_DESCRIPTION
+			buyRobux = localizationStringsModule.CREATOR_CREDIT_ADJUST_LIMIT_BUTTON
+			viewUsage = localizationStringsModule.CREATOR_CREDIT_NOT_NOW_BUTTON
+		end
 		var16 = var13
 		var17 = var14
 	end

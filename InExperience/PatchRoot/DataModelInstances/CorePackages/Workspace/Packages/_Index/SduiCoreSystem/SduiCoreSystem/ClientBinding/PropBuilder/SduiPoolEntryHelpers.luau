@@ -8,7 +8,6 @@ local _ = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryNormaliz
 local sduiListEntryRendererModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryRenderer)
 local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 local fFlagSduiCollectionGridRevealRows = require(parent.SharedFlags).FFlagSduiCollectionGridRevealRows
-local fFlagSduiVerticalFeedProgressiveFillOnScroll = require(parent.SharedFlags).FFlagSduiVerticalFeedProgressiveFillOnScroll
 
 local function resolvePoolDataGetter(p1, p2, p3, p4)
 	-- upvalues: sduiPropUtilsModule (ref)
@@ -209,7 +208,7 @@ return {
 	sectionsHaveMultiRow = sectionsHaveMultiRow,
 	ingestPoolSections = ingestPoolSections,
 	createPoolEntryFns = function(p7, p8, p9, p10, p11, p12, p13)
-		-- upvalues: ingestPoolSections (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (ref), fFlagSduiCollectionGridRevealRows (ref), sduiListEntryRendererModule (ref)
+		-- upvalues: ingestPoolSections (ref), fFlagSduiCollectionGridRevealRows (ref), sduiListEntryRendererModule (ref)
 		local var9 = ingestPoolSections(p7, p12, p10, p13)
 		local var10 = nil
 		local var11 = nil
@@ -230,13 +229,12 @@ return {
 			end
 			
 			var11 = function(p14, _)
-				-- upvalues: var9 (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (copy), fFlagSduiCollectionGridRevealRows (copy)
+				-- upvalues: var9 (ref), fFlagSduiCollectionGridRevealRows (copy)
 				local identifier = p14.identifier
 				
 				return if typeof(identifier) == "string" then {
 					_requiresDataBinding = true,
 					startRowGetter = var9.getSectionStartRow(identifier),
-					numberOfRowsGetter = if fFlagSduiVerticalFeedProgressiveFillOnScroll then var9.getSectionRowCount(identifier) else nil,
 					setDisplayedRowCount = if fFlagSduiCollectionGridRevealRows then function(p15)
 						-- upvalues: var9 (copy), identifier (ref)
 						var9.setSectionDisplayedRowCount(identifier, p15)

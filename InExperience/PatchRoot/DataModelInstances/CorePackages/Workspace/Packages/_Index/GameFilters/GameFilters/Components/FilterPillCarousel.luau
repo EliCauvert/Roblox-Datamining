@@ -10,10 +10,11 @@ local useCollectionImpressionsSignal = require(parent.CollectionViews).useCollec
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local filterPillModule = require(gameFilters.Components.FilterPill)
 local fFlagLuaAppUseFrameBoundsImpressions = require(parent.SharedFlags).FFlagLuaAppUseFrameBoundsImpressions
+local fFlagLuaAppHideEmptyCarouselHeader = require(parent.SharedFlags).FFlagLuaAppHideEmptyCarouselHeader
 local _ = require(gameFilters.FilterCallbackTypes)
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), useCollectionImpressionsSignal (ref), filterPillModule (ref), cryoModule (ref), variableItemWidthCarousel (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), useCollectionImpressionsSignal (ref), fFlagLuaAppHideEmptyCarouselHeader (ref), filterPillModule (ref), cryoModule (ref), variableItemWidthCarousel (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref)
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useState({})
 	local var4 = reactModule.useRef(nil)
@@ -23,7 +24,7 @@ return function(p1)
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		FilterCarousel = reactModule.createElement(variableItemWidthCarousel, {
 			scrollButtonEnabled = true,
-			title = if p1.title and p1.title ~= "" then reactModule.useCallback(function()
+			title = if fFlagLuaAppHideEmptyCarouselHeader and (not p1.title or p1.title == "") then "" elseif fFlagLuaAppHideEmptyCarouselHeader or p1.title then reactModule.useCallback(function()
 				-- upvalues: var1 (ref), reactModule (copy), p1 (ref)
 				local bodyMedium = var1.Typography.BodyMedium
 				local muted = var1.Color.Content.Muted

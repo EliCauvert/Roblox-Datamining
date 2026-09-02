@@ -15,9 +15,10 @@ local registerDiscoveryUiComponentsModule = require(serverDrivenUi.Content.regis
 local useSduiDependenciesModule = require(serverDrivenUi.System.useSduiDependencies)
 local useSduiSocialDataModule = require(serverDrivenUi.DataStore.useSduiSocialData)
 local sduiInGameFriendsDataModule = require(serverDrivenUi.DataStore.SduiInGameFriendsData)
+local fFlagSduiAppPolicyBindings = require(parent.SharedFlags).FFlagSduiAppPolicyBindings
 
 return reactModule.memo(function()
-	-- upvalues: reactModule (ref), sduiInstrumentation (ref), useSduiDependenciesModule (ref), getSduiServiceDependenciesStore (ref), useTokens (ref), getSduiTokensStore (ref), useAppPolicy (ref), getSduiPolicyStore (ref), registerDiscoveryActionsModule (ref), registerDiscoveryUiComponentsModule (ref), registerDiscoveryImpressionsModule (ref), registerDiscoveryActionTelemetryHandlersModule (ref), useSduiSocialDataModule (ref), sduiInGameFriendsDataModule (ref)
+	-- upvalues: reactModule (ref), sduiInstrumentation (ref), useSduiDependenciesModule (ref), getSduiServiceDependenciesStore (ref), useTokens (ref), getSduiTokensStore (ref), fFlagSduiAppPolicyBindings (ref), useAppPolicy (ref), getSduiPolicyStore (ref), registerDiscoveryActionsModule (ref), registerDiscoveryUiComponentsModule (ref), registerDiscoveryImpressionsModule (ref), registerDiscoveryActionTelemetryHandlersModule (ref), useSduiSocialDataModule (ref), sduiInGameFriendsDataModule (ref)
 	local var1 = useSduiDependenciesModule(reactModule.useMemo(function()
 		-- upvalues: sduiInstrumentation (copy)
 		return sduiInstrumentation.new()
@@ -31,13 +32,16 @@ return reactModule.memo(function()
 		-- upvalues: getSduiTokensStore (copy), var2 (ref)
 		getSduiTokensStore().setTokens(var2)
 	end, { var2 })
-	local var3 = useAppPolicy(function(p1)
-		return p1
-	end)
-	reactModule.useEffect(function()
-		-- upvalues: getSduiPolicyStore (copy), var3 (ref)
-		getSduiPolicyStore().setAppPolicy(var3)
-	end, { var3 })
+	
+	if fFlagSduiAppPolicyBindings then
+		local var3 = useAppPolicy(function(p1)
+			return p1
+		end)
+		reactModule.useEffect(function()
+			-- upvalues: getSduiPolicyStore (copy), var3 (ref)
+			getSduiPolicyStore().setAppPolicy(var3)
+		end, { var3 })
+	end
 	reactModule.useEffect(function()
 		-- upvalues: registerDiscoveryActionsModule (copy), registerDiscoveryUiComponentsModule (copy), registerDiscoveryImpressionsModule (copy), registerDiscoveryActionTelemetryHandlersModule (copy)
 		registerDiscoveryActionsModule()

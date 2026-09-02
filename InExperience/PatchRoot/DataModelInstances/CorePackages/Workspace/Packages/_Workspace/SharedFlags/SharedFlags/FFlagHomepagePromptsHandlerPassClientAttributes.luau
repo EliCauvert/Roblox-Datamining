@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("HomepagePromptsHandlerPassClientAttributes", false) and require(script.Parent.FFlagPromptsHandlerEnabled)

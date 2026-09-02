@@ -61,6 +61,9 @@ end
 local fFlagTopBarRefactor = require(corePackagesService.Workspace.Packages.InExperienceTopBar).Flags.FFlagTopBarRefactor
 require(corePackagesService.Workspace.Packages.ExperimentCacheManager).ExperimentCacheManager.default:initialize()
 
+if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagReactTelemetryEnabled then
+	require(corePackagesService.Packages.ReactTelemetry).customFields.context = "in_experience"
+end
 if game:DefineFastFlag("LuaAppUseAppHttpStoreInExperience", false) then
 	require(corePackagesService.Workspace.Packages.HttpStore).Instance._create({})
 end

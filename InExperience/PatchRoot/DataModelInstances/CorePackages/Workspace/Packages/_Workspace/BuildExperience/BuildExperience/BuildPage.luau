@@ -45,24 +45,26 @@ local adsManagerMenuButtonModule = require(script.Parent.Components.Ads.AdsManag
 local adCampaignCreatedToastModule = require(script.Parent.Components.Ads.AdCampaignCreatedToast)
 local _ = require(script.Parent.Chat.chatTypes)
 local useSessionSummaryModule = require(script.Parent.Chat.useSessionSummary)
-local useScrollPerformanceTrackerModule = require(script.Parent.Telemetry.useScrollPerformanceTracker)
+local fFlagEnableBuildExperienceScrollPerformanceTrackingModule = require(script.Parent.Flags.FFlagEnableBuildExperienceScrollPerformanceTracking)
+local var8 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then require(script.Parent.Telemetry.useScrollPerformanceTracker) else nil
 local fFlagBuildBackButtonChevronModule = require(script.Parent.Flags.FFlagBuildBackButtonChevron)
 local fFlagBuildAdUpsellModule = require(script.Parent.Flags.FFlagBuildAdUpsell)
 local fFlagEnableBuildAdPromotionModule = require(script.Parent.Flags.FFlagEnableBuildAdPromotion)
 local _ = require(script.Parent.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local getBuildExperienceRefreshStoreModule = require(script.Parent.Stores.GetBuildExperienceRefreshStore)
-local var8 = if fFlagBuildAddSearchIconAndMoveSearchbarModule then require(script.Parent.Stores.GetSearchQueryStore) else nil
+local var9 = if fFlagBuildAddSearchIconAndMoveSearchbarModule then require(script.Parent.Stores.GetSearchQueryStore) else nil
 local _ = require(script.Parent.Stores.GetSearchQueryStore.createSearchQueryStore)
 local buildNavigationParamsModule = require(script.Parent.utils.BuildNavigationParams)
 local resumeBuildChatModule = require(script.Parent.utils.resumeBuildChat)
 local useBuildPageLayoutModule = require(script.Parent.utils.useBuildPageLayout)
 local useOnScreenKeyboardVisibleModule = require(script.Parent.utils.useOnScreenKeyboardVisible)
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagBuildPublishNavigationSheetModule = require(script.Parent.Flags.FFlagBuildPublishNavigationSheet)
 local fFlagBuildExperienceAnalytics = sharedFlagsModule.FFlagBuildExperienceAnalytics
-local var9 = not sharedFlagsModule.FFlagEnableBuildTabOverride
+local var10 = not sharedFlagsModule.FFlagEnableBuildTabOverride
 local buildEligibilityDialogModule = require(script.Parent.Components.BuildEligibilityDialog)
 local useBuildPageEligibilityModule = require(script.Parent.useBuildPageEligibility)
-local var10 = if fFlagBuildPublishNavigationSheetModule then require(script.Parent.Components.PublishSheet.PublishSheetController) else nil
+local var11 = if fFlagBuildPublishNavigationSheetModule then require(script.Parent.Components.PublishSheet.PublishSheetController) else nil
 local t = {
 	BuildHome = "BuildHome",
 	BuildSearch = "BuildSearch",
@@ -115,52 +117,52 @@ local _ = function(p3)
 end
 
 local function BuildHomeScreen(p3)
-	-- upvalues: useBuildPageLayoutModule (ref), useNavigationFocus (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), t (ref), resumeBuildChatModule (ref), fFlagBuildAddSearchIconAndMoveSearchbarModule (ref), var8 (ref), view (ref), buildSearchBarModule (ref), fullscreenPageWithSafeArea (ref), buildPageHeaderModule (ref), myCreationsTabModule (ref)
+	-- upvalues: useBuildPageLayoutModule (ref), useNavigationFocus (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), t (ref), resumeBuildChatModule (ref), fFlagBuildAddSearchIconAndMoveSearchbarModule (ref), var9 (ref), view (ref), buildSearchBarModule (ref), fullscreenPageWithSafeArea (ref), buildPageHeaderModule (ref), myCreationsTabModule (ref)
 	local screenProps = p3.screenProps or {}
 	local navigation = p3.navigation
-	local var11 = useBuildPageLayoutModule()
-	local var12 = useNavigationFocus()
-	local tokens = var11.tokens
-	local fallbackExperienceName = useLocalization({
+	local var12 = useBuildPageLayoutModule()
+	local var13 = useNavigationFocus()
+	local tokens = var12.tokens
+	local var14 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
 		fallbackExperienceName = localizationStringsModule.BUILD_ASSISTANT_FALLBACK_NAME
-	}).fallbackExperienceName
-	local var13 = reactModule.useCallback(function(p4)
+	}) else nil).fallbackExperienceName else nil
+	local var15 = reactModule.useCallback(function(p4)
 		-- upvalues: navigation (ref), t (copy)
 		navigation.navigate(t.BuildChat, { target = p4 })
 	end, { navigation })
 	reactModule.useEffect(function()
-		-- upvalues: resumeBuildChatModule (copy), screenProps (ref), fallbackExperienceName (ref), var13 (ref)
+		-- upvalues: resumeBuildChatModule (copy), screenProps (ref), var14 (ref), var15 (ref)
 		return resumeBuildChatModule({
 			universeId = screenProps.universeId,
 			sessionId = screenProps.sessionId,
 			creatorAgentChatStore = screenProps.creatorAgentChatStore,
 			configurationStore = screenProps.configurationStore,
-			fallbackExperienceName = fallbackExperienceName,
-			onOpenChat = var13
+			fallbackExperienceName = var14,
+			onOpenChat = var15
 		})
 	end, {
-		var13, screenProps.universeId, screenProps.sessionId,
+		var15, screenProps.universeId, screenProps.sessionId,
 		screenProps.resumeRequestId, screenProps.creatorAgentChatStore,
-		screenProps.configurationStore, fallbackExperienceName
+		screenProps.configurationStore, var14
 	})
-	local var14 = if fFlagBuildAddSearchIconAndMoveSearchbarModule then screenProps.searchQueryStore or var8() else nil
+	local var16 = if fFlagBuildAddSearchIconAndMoveSearchbarModule then screenProps.searchQueryStore or var9() else nil
 	
 	return reactModule.createElement(fullscreenPageWithSafeArea, {
 		includeStatusBar = true,
 		BackgroundColor3 = tokens.Color.Surface.Surface_0.Color3,
 		BackgroundTransparency = tokens.Color.Surface.Surface_0.Transparency,
-		includeBottomBar = var11.shouldIncludeBottomBar
+		includeBottomBar = var12.shouldIncludeBottomBar
 	}, {
 		Page = reactModule.createElement(view, { tag = "col align-x-center size-full bg-surface-0" }, {
 			Header = reactModule.createElement(buildPageHeaderModule, {
 				LayoutOrder = 1,
-				height = var11.topBarHeight,
-				searchQueryStore = var14,
+				height = var12.topBarHeight,
+				searchQueryStore = var16,
 				onOpenSearch = if fFlagBuildAddSearchIconAndMoveSearchbarModule then reactModule.useCallback(function()
-					-- upvalues: var14 (ref), navigation (ref), t (copy)
-					var14.beginSearch()
-					navigation.navigate(t.BuildSearch, { searchQueryStore = var14 })
-				end, { navigation, var14 }) else nil
+					-- upvalues: var16 (ref), navigation (ref), t (copy)
+					var16.beginSearch()
+					navigation.navigate(t.BuildSearch, { searchQueryStore = var16 })
+				end, { navigation, var16 }) else nil
 			}),
 			Content = reactModule.createElement(view, {
 				LayoutOrder = 2,
@@ -181,9 +183,9 @@ local function BuildHomeScreen(p3)
 					configurationStore = screenProps.configurationStore,
 					searchStore = if fFlagBuildAddSearchIconAndMoveSearchbarModule then screenProps.searchStore else nil,
 					searchQueryStore = screenProps.searchQueryStore,
-					isFocused = var12,
+					isFocused = var13,
 					autoOpenNewGame = screenProps.universeId == nil and screenProps.sessionId == nil,
-					onOpenChat = var13
+					onOpenChat = var15
 				})
 			})
 		})
@@ -192,71 +194,74 @@ end
 
 local function BuildSearchResults(p3)
 	-- upvalues: reactModule (ref), var3 (ref), var5 (ref)
-	local var11 = p3.searchQueryStore.useDraftQuery()
+	local var12 = p3.searchQueryStore.useDraftQuery()
 	local current = p3.closingSnapshot.current
-	local var12 = if current ~= nil then p3.results else current.results
+	local var13 = if current ~= nil then p3.results else current.results
 	
-	return if if current == nil then if var11 ~= "" then if var11 == var12.query then var12.isSettledNoResults else true else true else current.showEmptyState then reactModule.createElement(var3, { testId = "SearchPage.EmptyState" }) else reactModule.createElement(var5, {
+	return if if current == nil then if var12 ~= "" then if var12 == var13.query then var13.isSettledNoResults else true else true else current.showEmptyState then reactModule.createElement(var3, { testId = "SearchPage.EmptyState" }) else reactModule.createElement(var5, {
 		testIdPrefix = "SearchPage",
-		items = var12.items,
-		hasDisplayedItems = #var12.displayedItems > 0,
-		hasDisplayedResult = var12.hasDisplayedResult,
-		hasPendingSummary = var12.hasPendingSummary,
-		listStatus = var12.listStatus,
-		failedLoadMore = var12.failedLoadMore,
-		retryLoadMore = var12.retryLoadMore,
-		loadError = var12.loadError,
+		items = var13.items,
+		hasDisplayedItems = #var13.displayedItems > 0,
+		hasDisplayedResult = var13.hasDisplayedResult,
+		hasPendingSummary = var13.hasPendingSummary,
+		listStatus = var13.listStatus,
+		failedLoadMore = var13.failedLoadMore,
+		retryLoadMore = var13.retryLoadMore,
+		loadError = var13.loadError,
 		onOpenChat = p3.onOpenChat
 	})
 end
 
 local function BuildSearchScreen(p3)
-	-- upvalues: useBuildPageLayoutModule (ref), useNavigationFocus (ref), useOnScreenKeyboardVisibleModule (ref), var8 (ref), var1 (ref), useLocalization (ref), reactModule (ref), t (ref), var7 (ref), useScrollPerformanceTrackerModule (ref), var6 (ref), fullscreenPageWithSafeArea (ref), var2 (ref), BuildSearchResults (ref)
+	-- upvalues: useBuildPageLayoutModule (ref), useNavigationFocus (ref), useOnScreenKeyboardVisibleModule (ref), var9 (ref), var1 (ref), useLocalization (ref), reactModule (ref), t (ref), var7 (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var8 (ref), var6 (ref), fullscreenPageWithSafeArea (ref), var2 (ref), BuildSearchResults (ref)
 	local screenProps = p3.screenProps or {}
 	local navigation = p3.navigation
-	local var11 = useBuildPageLayoutModule()
-	local var12 = useNavigationFocus()
-	local var13 = useOnScreenKeyboardVisibleModule()
-	local searchQueryStore = navigation.getParam("searchQueryStore") or (screenProps.searchQueryStore or var8())
-	local var14 = var1.useSignalBinding(searchQueryStore.getDraftQuery)
-	local var15 = useLocalization({ searchbarPlaceholder = "Feature.Build.Label.SearchGames" })
-	local var16 = reactModule.useCallback(function(p4)
+	local var12 = useBuildPageLayoutModule()
+	local var13 = useNavigationFocus()
+	local var14 = useOnScreenKeyboardVisibleModule()
+	local searchQueryStore = navigation.getParam("searchQueryStore") or (screenProps.searchQueryStore or var9())
+	local var15 = var1.useSignalBinding(searchQueryStore.getDraftQuery)
+	local var16 = useLocalization({ searchbarPlaceholder = "Feature.Build.Label.SearchGames" })
+	local var17 = reactModule.useCallback(function(p4)
 		-- upvalues: navigation (ref), t (copy)
 		navigation.navigate(t.BuildChat, { target = p4 })
 	end, { navigation })
-	local var17 = var7({
+	local var18 = var7({
 		creatorAgentChatStore = screenProps.creatorAgentChatStore,
 		configurationStore = screenProps.configurationStore,
 		searchStore = screenProps.searchStore,
 		searchQueryStore = searchQueryStore,
-		isFocused = var12
+		isFocused = var13
 	})
-	local var18 = reactModule.useRef(nil)
-	local current = var18.current
-	local var19 = var14:map(function(p4)
-		-- upvalues: var18 (ref)
-		local current = var18.current
+	local var19 = reactModule.useRef(nil)
+	local current = var19.current
+	local var20 = var15:map(function(p4)
+		-- upvalues: var19 (ref)
+		local current = var19.current
 		
 		return if current == nil then p4 else current.query
 	end)
-	local var20 = if current ~= nil then var17 else current.results
-	local var21 = reactModule.useRef(nil)
-	useScrollPerformanceTrackerModule("LuaApp_Build_Search_Scroll", var21)
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: var20 (ref), reactModule (copy), var6 (copy)
-		return if var20.isLoadingMore then reactModule.createElement(var6, { LayoutOrder = 1, index = 1, testIdPrefix = "SearchPage" }) else nil
-	end, { var20.isLoadingMore })
+	local var21 = if current ~= nil then var18 else current.results
+	local var22 = reactModule.useRef(nil)
+	
+	if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then
+		var8("LuaApp_Build_Search_Scroll", var22)
+	end
 	local var23 = reactModule.useCallback(function()
-		-- upvalues: searchQueryStore (ref), var18 (ref), var17 (ref), navigation (ref)
+		-- upvalues: var21 (ref), reactModule (copy), var6 (copy)
+		return if var21.isLoadingMore then reactModule.createElement(var6, { LayoutOrder = 1, index = 1, testIdPrefix = "SearchPage" }) else nil
+	end, { var21.isLoadingMore })
+	local var24 = reactModule.useCallback(function()
+		-- upvalues: searchQueryStore (ref), var19 (ref), var18 (ref), navigation (ref)
 		local draftQuery = searchQueryStore.getDraftQuery()
-		var18.current = {
+		var19.current = {
 			query = draftQuery,
-			results = var17,
-			showEmptyState = if draftQuery ~= "" then if draftQuery == var17.query then var17.isSettledNoResults else true else true
+			results = var18,
+			showEmptyState = if draftQuery ~= "" then if draftQuery == var18.query then var18.isSettledNoResults else true else true
 		}
 		searchQueryStore.endSearch()
 		navigation.goBack()
-	end, { var18, navigation, var17, searchQueryStore })
+	end, { var19, navigation, var18, searchQueryStore })
 	reactModule.useEffect(function()
 		-- upvalues: searchQueryStore (ref)
 		searchQueryStore.beginSearch()
@@ -266,31 +271,31 @@ local function BuildSearchScreen(p3)
 	
 	return reactModule.createElement(fullscreenPageWithSafeArea, {
 		includeStatusBar = true,
-		BackgroundColor3 = var11.tokens.Color.Surface.Surface_0.Color3,
-		BackgroundTransparency = var11.tokens.Color.Surface.Surface_0.Transparency,
-		includeBottomBar = var11.shouldIncludeBottomBar and not var13
+		BackgroundColor3 = var12.tokens.Color.Surface.Surface_0.Color3,
+		BackgroundTransparency = var12.tokens.Color.Surface.Surface_0.Transparency,
+		includeBottomBar = var12.shouldIncludeBottomBar and not var14
 	}, {
 		Page = reactModule.createElement(var2, {
 			showEmptyState = false,
-			ref = var21,
-			createFooter = var22,
-			onBack = var23,
-			onCanvasPositionChangedCallback = var20.loadMoreIfNeeded,
-			onCanvasSizeChangedCallback = var20.loadMoreIfNeeded,
-			refresh = var20.refresh,
+			ref = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then var22 else nil,
+			createFooter = var23,
+			onBack = var24,
+			onCanvasPositionChangedCallback = var21.loadMoreIfNeeded,
+			onCanvasSizeChangedCallback = var21.loadMoreIfNeeded,
+			refresh = var21.refresh,
 			searchBarProps = {
 				clear = searchQueryStore.clear,
 				onFocusGained = searchQueryStore.beginSearch,
-				placeholder = var15.searchbarPlaceholder,
-				query = var19,
+				placeholder = var16.searchbarPlaceholder,
+				query = var20,
 				setQuery = searchQueryStore.setQuery,
-				shouldFocus = var12
+				shouldFocus = var13
 			}
 		}, {
 			ExperienceResults = reactModule.createElement(BuildSearchResults, {
-				closingSnapshot = var18,
-				onOpenChat = var16,
-				results = var17,
+				closingSnapshot = var19,
+				onOpenChat = var17,
+				results = var18,
 				searchQueryStore = searchQueryStore
 			})
 		})
@@ -298,35 +303,34 @@ local function BuildSearchScreen(p3)
 end
 
 local function BuildGetUsersScreen(p3)
-	-- upvalues: useBuildPageLayoutModule (ref), buildNavigationParamsModule (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), useAdsStatsPageViewModelModule (ref), adsStatsViewModule (ref), view (ref), button (ref), iconName (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), fullscreenPageWithSafeArea (ref), overflowMenuPageShellModule (ref), adsManagerMenuButtonModule (ref), fFlagBuildBackButtonChevronModule (ref), overlayProvider (ref), adCampaignCreatedToastModule (ref)
+	-- upvalues: useBuildPageLayoutModule (ref), buildNavigationParamsModule (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), useAdsStatsPageViewModelModule (ref), adsStatsViewModule (ref), view (ref), button (ref), iconName (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), fullscreenPageWithSafeArea (ref), overflowMenuPageShellModule (ref), adsManagerMenuButtonModule (ref), fFlagBuildBackButtonChevronModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), overlayProvider (ref), adCampaignCreatedToastModule (ref)
 	local navigation = p3.navigation
-	local var11 = useBuildPageLayoutModule()
+	local var12 = useBuildPageLayoutModule()
 	local target = buildNavigationParamsModule.getTarget(navigation)
-	local var12 = if target ~= nil then nil else target.universeId
+	local var13 = if target ~= nil then nil else target.universeId
 	local pageTitle = useLocalization({
 		pageTitle = localizationStringsModule.ADS_STATS_PAGE_TITLE
 	}).pageTitle
-	local var13 = reactModule.useCallback(function()
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: navigation (ref)
 		navigation.goBack()
 	end, { navigation })
-	local var14 = useAdsStatsPageViewModelModule(var12)
-	local var15 = reactModule.createElement(adsStatsViewModule, var14)
-	local var16, var17 = reactModule.useState(nil)
+	local var15 = useAdsStatsPageViewModelModule(var13)
+	local var16 = reactModule.createElement(adsStatsViewModule, var15)
+	local var17, var18 = reactModule.useState(nil)
 	
 	return reactModule.createElement(fullscreenPageWithSafeArea, {
 		includeStatusBar = true,
-		BackgroundColor3 = var11.tokens.Color.Surface.Surface_0.Color3,
-		BackgroundTransparency = var11.tokens.Color.Surface.Surface_0.Transparency,
-		includeBottomBar = var11.shouldIncludeBottomBar
+		BackgroundColor3 = var12.tokens.Color.Surface.Surface_0.Color3,
+		BackgroundTransparency = var12.tokens.Color.Surface.Surface_0.Transparency,
+		includeBottomBar = var12.shouldIncludeBottomBar
 	}, {
 		Page = reactModule.createElement(overflowMenuPageShellModule, {
-			scrollPerformanceIntervalName = "LuaApp_Build_GetUsers_Scroll",
 			testId = "BuildPage.GetUsersPage",
 			title = pageTitle,
-			onClose = var13,
-			content = var15,
-			footer = if var14.isLoading or var14.isFailed then nil else reactModule.createElement(view, {
+			onClose = var14,
+			content = var16,
+			footer = if var15.isLoading or var15.isFailed then nil else reactModule.createElement(view, {
 				tag = "col size-full-0 auto-y",
 				testId = "BuildPage.GetUsers.Footer"
 			}, {
@@ -334,7 +338,7 @@ local function BuildGetUsersScreen(p3)
 					LayoutOrder = 1,
 					tag = "size-full-0",
 					testId = "BuildPage.GetUsers.ToastAnchor",
-					ref = var17
+					ref = var18
 				}),
 				Actions = reactModule.createElement(view, {
 					LayoutOrder = 2,
@@ -343,29 +347,30 @@ local function BuildGetUsersScreen(p3)
 				}, {
 					Create = reactModule.createElement(button, {
 						testId = "BuildPage.GetUsers.Create",
-						text = var14.createButtonText,
-						icon = if var14.createButtonIsExternal then iconName.ArrowUpRightFromSquare else nil,
+						text = var15.createButtonText,
+						icon = if var15.createButtonIsExternal then iconName.ArrowUpRightFromSquare else nil,
 						size = inputSize.Large,
 						variant = buttonVariant.Emphasis,
 						fillBehavior = fillBehavior.Fill,
 						width = UDim.new(1, 0),
-						isLoading = var14.isPromotionCreatePending,
-						onActivated = var14.onCreatePrimary
+						isLoading = var15.isPromotionCreatePending,
+						onActivated = var15.onCreatePrimary
 					})
 				})
 			}),
-			disableScrolling = not var14.isLoading and (not var14.isFailed and not var14.hasCampaigns),
+			disableScrolling = not var15.isLoading and (not var15.isFailed and not var15.hasCampaigns),
 			headerTrailing = reactModule.createElement(adsManagerMenuButtonModule, {
 				testId = "BuildPage.GetUsersPage.AdsManagerMenu",
-				universeId = var12
+				universeId = var13
 			}),
-			closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft
+			closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft,
+			scrollPerformanceIntervalName = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then "LuaApp_Build_GetUsers_Scroll" else nil
 		}),
-		SuccessToast = if var14.showCreateSuccessToast and var16 ~= nil then reactModule.createElement(overlayProvider, { gui = var16 }, {
+		SuccessToast = if var15.showCreateSuccessToast and var17 ~= nil then reactModule.createElement(overlayProvider, { gui = var17 }, {
 			Toast = reactModule.createElement(adCampaignCreatedToastModule, {
 				testId = "BuildPage.GetUsers.SuccessToast",
-				onClose = var14.onDismissCreateSuccessToast,
-				title = var14.createSuccessToastText
+				onClose = var15.onDismissCreateSuccessToast,
+				title = var15.createSuccessToastText
 			})
 		}) else nil
 	})
@@ -376,28 +381,28 @@ local list = {
 	{
 		[t.BuildChat] = {
 			screen = function(p3)
-				-- upvalues: buildNavigationParamsModule (ref), fFlagBuildExperienceAnalytics (ref), getBuildExperienceRefreshStoreModule (ref), useBuildPageLayoutModule (ref), fFlagBuildAdUpsellModule (ref), useNavigationFocus (ref), useOnScreenKeyboardVisibleModule (ref), reactModule (ref), fFlagBuildPublishNavigationSheetModule (ref), buildOverflowMenuScreensModule (ref), t (ref), fFlagBuildExperienceAssetLibraryModule (ref), var4 (ref), fFlagEnableBuildAdPromotionModule (ref), buildChatPageModule (ref), fullscreenPageWithSafeArea (ref), privateInvitesPickerHostModule (ref), var10 (ref)
+				-- upvalues: buildNavigationParamsModule (ref), fFlagBuildExperienceAnalytics (ref), getBuildExperienceRefreshStoreModule (ref), useBuildPageLayoutModule (ref), fFlagBuildAdUpsellModule (ref), useNavigationFocus (ref), useOnScreenKeyboardVisibleModule (ref), reactModule (ref), fFlagBuildPublishNavigationSheetModule (ref), buildOverflowMenuScreensModule (ref), t (ref), fFlagBuildExperienceAssetLibraryModule (ref), var4 (ref), fFlagEnableBuildAdPromotionModule (ref), buildChatPageModule (ref), fullscreenPageWithSafeArea (ref), privateInvitesPickerHostModule (ref), var11 (ref)
 				local navigation = p3.navigation
 				local target = buildNavigationParamsModule.getTarget(navigation)
-				local var11 = if fFlagBuildExperienceAnalytics then buildNavigationParamsModule.getInitialPrompt(navigation) else nil
-				local var12 = getBuildExperienceRefreshStoreModule()
-				local var13 = useBuildPageLayoutModule()
-				local var14 = if fFlagBuildAdUpsellModule then useNavigationFocus() else true
-				local var15 = useOnScreenKeyboardVisibleModule()
-				local var16, var17 = reactModule.useState(false)
-				local var18, var19 = reactModule.useState(false)
-				local var20 = if target ~= nil then nil else target.universeId
+				local var12 = if fFlagBuildExperienceAnalytics then buildNavigationParamsModule.getInitialPrompt(navigation) else nil
+				local var13 = getBuildExperienceRefreshStoreModule()
+				local var14 = useBuildPageLayoutModule()
+				local var15 = if fFlagBuildAdUpsellModule then useNavigationFocus() else true
+				local var16 = useOnScreenKeyboardVisibleModule()
+				local var17, var18 = reactModule.useState(false)
+				local var19, var20 = reactModule.useState(false)
+				local var21 = if target ~= nil then nil else target.universeId
 				
 				return reactModule.createElement(reactModule.Fragment, nil, {
 					Page = reactModule.createElement(fullscreenPageWithSafeArea, {
 						includeStatusBar = true,
-						BackgroundColor3 = var13.tokens.Color.Surface.Surface_0.Color3,
-						BackgroundTransparency = var13.tokens.Color.Surface.Surface_0.Transparency,
-						includeBottomBar = var13.shouldIncludeBottomBar and not var15
+						BackgroundColor3 = var14.tokens.Color.Surface.Surface_0.Color3,
+						BackgroundTransparency = var14.tokens.Color.Surface.Surface_0.Transparency,
+						includeBottomBar = var14.shouldIncludeBottomBar and not var16
 					}, {
 						Page = if target ~= nil then nil else reactModule.createElement(buildChatPageModule, {
 							target = target,
-							initialPrompt = var11,
+							initialPrompt = var12,
 							onClose = reactModule.useCallback(function()
 								-- upvalues: navigation (ref)
 								navigation.goBack()
@@ -419,49 +424,49 @@ local list = {
 								navigation.navigate(t.BuildGetUsers, { target = target })
 							end, { navigation, target }) else nil,
 							onOpenConfigurationPage = reactModule.useCallback(function(p4)
-								-- upvalues: fFlagBuildPublishNavigationSheetModule (copy), var19 (ref), buildOverflowMenuScreensModule (copy), navigation (ref), target (ref)
+								-- upvalues: fFlagBuildPublishNavigationSheetModule (copy), var20 (ref), buildOverflowMenuScreensModule (copy), navigation (ref), target (ref)
 								if fFlagBuildPublishNavigationSheetModule and p4 == "publish" then
-									var19(true)
+									var20(true)
 									
 									return
 								end
-								local var21 = buildOverflowMenuScreensModule.SCREEN_BY_PAGE[p4]
+								local var22 = buildOverflowMenuScreensModule.SCREEN_BY_PAGE[p4]
 								
-								if var21 == nil then
+								if var22 == nil then
 									return
 								end
-								navigation.navigate(var21, { target = target })
+								navigation.navigate(var22, { target = target })
 							end, { navigation, target }),
 							onOpenInvitePicker = reactModule.useCallback(function()
-								-- upvalues: var17 (ref)
-								var17(true)
+								-- upvalues: var18 (ref)
+								var18(true)
 							end, {}),
 							onNavigateToResolvedTarget = reactModule.useCallback(function(p4)
-								-- upvalues: navigation (ref), var12 (ref)
+								-- upvalues: navigation (ref), var13 (ref)
 								navigation.setParams({ target = p4 })
-								var12.bumpRefreshTick()
-							end, { navigation, var12 }),
-							isFocused = if fFlagBuildAdUpsellModule then var14 else nil
+								var13.bumpRefreshTick()
+							end, { navigation, var13 }),
+							isFocused = if fFlagBuildAdUpsellModule then var15 else nil
 						})
 					}),
-					Picker = if var16 and var20 ~= nil then reactModule.createElement(privateInvitesPickerHostModule, {
-						universeId = var20,
+					Picker = if var17 and var21 ~= nil then reactModule.createElement(privateInvitesPickerHostModule, {
+						universeId = var21,
 						onClose = reactModule.useCallback(function()
-							-- upvalues: var17 (ref)
-							var17(false)
+							-- upvalues: var18 (ref)
+							var18(false)
 						end, {}),
 						onInvitesSent = reactModule.useCallback(function()
-							-- upvalues: var17 (ref), navigation (ref), buildOverflowMenuScreensModule (copy), target (ref)
-							var17(false)
+							-- upvalues: var18 (ref), navigation (ref), buildOverflowMenuScreensModule (copy), target (ref)
+							var18(false)
 							navigation.navigate(buildOverflowMenuScreensModule.Screens.BuildPlaytestInviteManagement, { target = target })
 						end, { navigation, target })
 					}) else nil,
-					PublishSheet = if fFlagBuildPublishNavigationSheetModule and target ~= nil and target.universeId ~= nil then reactModule.createElement(var10, {
-						isOpen = var18,
+					PublishSheet = if fFlagBuildPublishNavigationSheetModule and target ~= nil and target.universeId ~= nil then reactModule.createElement(var11, {
+						isOpen = var19,
 						target = target,
 						onClose = reactModule.useCallback(function()
-							-- upvalues: var19 (ref)
-							var19(false)
+							-- upvalues: var20 (ref)
+							var20(false)
 						end, {}),
 						navigateToSubPage = reactModule.useCallback(function(p4, p5)
 							-- upvalues: navigation (ref)
@@ -510,30 +515,29 @@ local list = {
 	{
 		[t.BuildAgents] = {
 			screen = function(p3)
-				-- upvalues: useBuildPageLayoutModule (ref), useLiveSubagentTaskState (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), t (ref), buildNavigationParamsModule (ref), subagentStatusModule (ref), fullscreenPageWithSafeArea (ref), overflowMenuPageShellModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref)
+				-- upvalues: useBuildPageLayoutModule (ref), useLiveSubagentTaskState (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), t (ref), buildNavigationParamsModule (ref), subagentStatusModule (ref), fullscreenPageWithSafeArea (ref), overflowMenuPageShellModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref)
 				local navigation = p3.navigation
-				local var11 = useBuildPageLayoutModule()
-				local var12 = useLiveSubagentTaskState(navigation)
+				local var12 = useBuildPageLayoutModule()
+				local var13 = useLiveSubagentTaskState(navigation)
 				
 				return reactModule.createElement(fullscreenPageWithSafeArea, {
 					includeStatusBar = true,
-					BackgroundColor3 = var11.tokens.Color.Surface.Surface_0.Color3,
-					BackgroundTransparency = var11.tokens.Color.Surface.Surface_0.Transparency,
-					includeBottomBar = var11.shouldIncludeBottomBar
+					BackgroundColor3 = var12.tokens.Color.Surface.Surface_0.Color3,
+					BackgroundTransparency = var12.tokens.Color.Surface.Surface_0.Transparency,
+					includeBottomBar = var12.shouldIncludeBottomBar
 				}, {
 					Page = reactModule.createElement(overflowMenuPageShellModule, {
-						scrollPerformanceIntervalName = "LuaApp_Build_Agents_Scroll",
 						testId = "BuildPage.AgentsPage",
-						title = useLocalization({
+						title = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
 							agents = localizationStringsModule.SUBAGENT_STATUS_AGENTS
-						}).agents,
+						}) else nil).agents else localizationStringsModule.SUBAGENT_STATUS_AGENTS,
 						onClose = reactModule.useCallback(function()
 							-- upvalues: navigation (ref)
 							navigation.goBack()
 						end, { navigation }),
 						content = reactModule.createElement(subagentStatusModule.AgentsList, {
 							testId = "BuildPage.AgentsList",
-							groups = if var12 ~= nil then {} else var12.groups,
+							groups = if var13 ~= nil then {} else var13.groups,
 							onAgentActivated = reactModule.useCallback(function(p4)
 								-- upvalues: navigation (ref), t (copy), buildNavigationParamsModule (copy)
 								navigation.navigate(t.BuildAgentDetails, {
@@ -542,7 +546,8 @@ local list = {
 								})
 							end, { navigation })
 						}),
-						closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft
+						closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft,
+						scrollPerformanceIntervalName = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then "LuaApp_Build_Agents_Scroll" else nil
 					})
 				})
 			end
@@ -551,41 +556,41 @@ local list = {
 	{
 		[t.BuildAgentDetails] = {
 			screen = function(p3)
-				-- upvalues: useBuildPageLayoutModule (ref), useLiveSubagentTaskState (ref), buildNavigationParamsModule (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), subagentStatusModule (ref), view (ref), fullscreenPageWithSafeArea (ref), overflowMenuPageShellModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref)
-				local var11
+				-- upvalues: useBuildPageLayoutModule (ref), useLiveSubagentTaskState (ref), buildNavigationParamsModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), subagentStatusModule (ref), view (ref), fullscreenPageWithSafeArea (ref), overflowMenuPageShellModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref)
+				local var12
 				local navigation = p3.navigation
-				local var12 = useBuildPageLayoutModule()
-				local var13 = useLiveSubagentTaskState(navigation)
+				local var13 = useBuildPageLayoutModule()
+				local var14 = useLiveSubagentTaskState(navigation)
 				local subagentTaskGroupName = buildNavigationParamsModule.getSubagentTaskGroupName(navigation)
 				
-				if var13 == nil or subagentTaskGroupName == nil then
-					var11 = nil
+				if var14 == nil or subagentTaskGroupName == nil then
+					var12 = nil
 				else
-					for i, v in var13.groups do
+					for i, v in var14.groups do
 						if v.name == subagentTaskGroupName then
-							var11 = v
+							var12 = v
 						end
 					end
-					var11 = nil
+					var12 = nil
 				end
 				return reactModule.createElement(fullscreenPageWithSafeArea, {
 					includeStatusBar = true,
-					BackgroundColor3 = var12.tokens.Color.Surface.Surface_0.Color3,
-					BackgroundTransparency = var12.tokens.Color.Surface.Surface_0.Transparency,
-					includeBottomBar = var12.shouldIncludeBottomBar
+					BackgroundColor3 = var13.tokens.Color.Surface.Surface_0.Color3,
+					BackgroundTransparency = var13.tokens.Color.Surface.Surface_0.Transparency,
+					includeBottomBar = var13.shouldIncludeBottomBar
 				}, {
 					Page = reactModule.createElement(overflowMenuPageShellModule, {
-						scrollPerformanceIntervalName = "LuaApp_Build_AgentDetails_Scroll",
 						testId = "BuildPage.AgentDetailsPage",
-						title = subagentTaskGroupName or useLocalization({
+						title = subagentTaskGroupName or (if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
 							agents = localizationStringsModule.SUBAGENT_STATUS_AGENTS
-						}).agents,
+						}) else nil).agents else localizationStringsModule.SUBAGENT_STATUS_AGENTS),
 						onClose = reactModule.useCallback(function()
 							-- upvalues: navigation (ref)
 							navigation.goBack()
 						end, { navigation }),
-						content = if var11 ~= nil then reactModule.createElement(view, { tag = "size-full" }) else reactModule.createElement(subagentStatusModule.AgentDetailsList, { testId = "BuildPage.AgentDetailsList", group = var11 }),
-						closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft
+						content = if var12 ~= nil then reactModule.createElement(view, { tag = "size-full" }) else reactModule.createElement(subagentStatusModule.AgentDetailsList, { testId = "BuildPage.AgentDetailsList", group = var12 }),
+						closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft,
+						scrollPerformanceIntervalName = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then "LuaApp_Build_AgentDetails_Scroll" else nil
 					})
 				})
 			end
@@ -594,29 +599,29 @@ local list = {
 	{
 		[t.BuildCreatorCredit] = {
 			screen = function(p4)
-				-- upvalues: useBuildPageLayoutModule (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), creatorCreditPageContainerModule (ref), fullscreenPageWithSafeArea (ref), overflowMenuPageShellModule (ref), creatorCreditBalanceChipContainerModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref)
+				-- upvalues: useBuildPageLayoutModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), creatorCreditPageContainerModule (ref), fullscreenPageWithSafeArea (ref), overflowMenuPageShellModule (ref), creatorCreditBalanceChipContainerModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref)
 				local navigation = p4.navigation
-				local var14 = useBuildPageLayoutModule()
+				local var15 = useBuildPageLayoutModule()
 				
 				return reactModule.createElement(fullscreenPageWithSafeArea, {
 					includeStatusBar = true,
-					BackgroundColor3 = var14.tokens.Color.Surface.Surface_0.Color3,
-					BackgroundTransparency = var14.tokens.Color.Surface.Surface_0.Transparency,
-					includeBottomBar = var14.shouldIncludeBottomBar
+					BackgroundColor3 = var15.tokens.Color.Surface.Surface_0.Color3,
+					BackgroundTransparency = var15.tokens.Color.Surface.Surface_0.Transparency,
+					includeBottomBar = var15.shouldIncludeBottomBar
 				}, {
 					Page = reactModule.createElement(overflowMenuPageShellModule, {
-						scrollPerformanceIntervalName = "LuaApp_Build_CreatorCredit_Scroll",
 						testId = "BuildPage.CreatorCreditPage",
-						title = useLocalization({
+						title = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
 							pageTitle = localizationStringsModule.CREATOR_CREDIT_PAGE_TITLE
-						}).pageTitle,
+						}) else nil).pageTitle else localizationStringsModule.CREATOR_CREDIT_PAGE_TITLE,
 						onClose = reactModule.useCallback(function()
 							-- upvalues: navigation (ref)
 							navigation.goBack()
 						end, { navigation }),
 						content = reactModule.createElement(creatorCreditPageContainerModule, nil),
 						headerTrailing = reactModule.createElement(creatorCreditBalanceChipContainerModule),
-						closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft
+						closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft,
+						scrollPerformanceIntervalName = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then "LuaApp_Build_CreatorCredit_Scroll" else nil
 					})
 				})
 			end
@@ -651,19 +656,19 @@ if fFlagBuildExperienceAssetLibraryModule then
 	})
 	table.insert(list, { [var4.Screens.Detail] = { screen = var4.DetailScreen } })
 end
-local var14 = roactNavigationModule.createAppContainer(roactNavigationModule.createRobloxStackNavigator(list, { initialRouteName = t.BuildHome }))
+local var15 = roactNavigationModule.createAppContainer(roactNavigationModule.createRobloxStackNavigator(list, { initialRouteName = t.BuildHome }))
 
 return function(p4)
-	-- upvalues: useBuildPageEligibilityModule (ref), var9 (ref), reactModule (ref), var14 (ref), buildEligibilityDialogModule (ref), view (ref), loading (ref), iconSize (ref)
-	local var15 = useBuildPageEligibilityModule.useBuildPageEligibility(var9)
+	-- upvalues: useBuildPageEligibilityModule (ref), var10 (ref), reactModule (ref), var15 (ref), buildEligibilityDialogModule (ref), view (ref), loading (ref), iconSize (ref)
+	local var16 = useBuildPageEligibilityModule.useBuildPageEligibility(var10)
 	
-	return if var15.canEnterBuild then reactModule.createElement(var14, { screenProps = p4 or {} }) elseif var15.status == useBuildPageEligibilityModule.Status.Ineligible then reactModule.createElement(buildEligibilityDialogModule, {
+	return if var16.canEnterBuild then reactModule.createElement(var15, { screenProps = p4 or {} }) elseif var16.status == useBuildPageEligibilityModule.Status.Ineligible then reactModule.createElement(buildEligibilityDialogModule, {
 		variant = useBuildPageEligibilityModule.Status.Ineligible,
-		onDismiss = var15.onDialogDismiss
-	}) elseif var15.status == useBuildPageEligibilityModule.Status.Error then reactModule.createElement(buildEligibilityDialogModule, {
+		onDismiss = var16.onDialogDismiss
+	}) elseif var16.status == useBuildPageEligibilityModule.Status.Error then reactModule.createElement(buildEligibilityDialogModule, {
 		variant = useBuildPageEligibilityModule.Status.Error,
-		onDismiss = var15.onDialogDismiss
-	}) elseif var15.status == useBuildPageEligibilityModule.Status.Refreshing then reactModule.createElement(view, {
+		onDismiss = var16.onDialogDismiss
+	}) elseif var16.status == useBuildPageEligibilityModule.Status.Refreshing then reactModule.createElement(view, {
 		tag = "col align-x-center align-y-center size-full",
 		testId = "BuildPage.EligibilityLoading"
 	}, {

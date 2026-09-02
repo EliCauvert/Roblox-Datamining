@@ -9,6 +9,7 @@ return {
 	BUILD_CHAT_PAGE_TITLE = localizationStringsModule.CHAT_BUILD_CHAT_PAGE_TITLE,
 	ASSISTANT_LOADING_TEXT = localizationStringsModule.CHAT_ASSISTANT_LOADING,
 	ASSISTANT_STILL_WORKING_TEXT = localizationStringsModule.CHAT_ASSISTANT_STILL_WORKING,
+	formatAssistantLoadingText = localizationStringsModule.formatChatThinkingDuration,
 	ASSISTANT_STATUS_SWAP_INTERVAL_SECONDS = game:DefineFastInt("BuildExperienceAssistantStatusSwapIntervalSeconds", 10),
 	ASSISTANT_THINKING_DURATION_SUFFIX_DELAY_SECONDS = game:DefineFastInt("BuildExperienceAssistantThinkingDurationSuffixDelaySeconds", 10),
 	MESSAGE_LAYOUT_ORDER_STRIDE = if require(buildExperience.Flags.FFlagBuildAdUpsell) then 10 else 1,

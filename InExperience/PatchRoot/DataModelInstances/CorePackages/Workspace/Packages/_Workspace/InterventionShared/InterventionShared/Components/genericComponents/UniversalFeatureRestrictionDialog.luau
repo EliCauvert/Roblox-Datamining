@@ -12,26 +12,25 @@ local genericInterventionDialogModule = require(interventionShared.Components.ge
 local _ = require(interventionShared.Utils.Types)
 local useParsedBadUtterancesModule = require(interventionShared.Hooks.useParsedBadUtterances)
 local useRestrictionEndDateInfoModule = require(interventionShared.Hooks.useRestrictionEndDateInfo)
-local fFlagUFRAppealsAndModNoteFixModule = require(interventionShared.Flags.FFlagUFRAppealsAndModNoteFix)
 local fFlagUFRFriendsChatIXPExposureModule = require(interventionShared.Flags.FFlagUFRFriendsChatIXPExposure)
 local fFlagUFRImprovementsModule = require(interventionShared.Flags.FFlagUFRImprovements)
 
 return reactModule.memo(function(p1)
-	-- upvalues: fFlagUFRAppealsAndModNoteFixModule (ref), constantsModule (ref), determineUFRInterventionTypeModule (ref), useParsedBadUtterancesModule (ref), useRestrictionEndDateInfoModule (ref), determineAppealsStateModule (ref), useEffect (ref), fFlagUFRFriendsChatIXPExposureModule (ref), IXPService (ref), appUserLayers (ref), fFlagUFRImprovementsModule (ref), useCallback (ref), reactModule (ref), genericInterventionDialogModule (ref)
+	-- upvalues: determineUFRInterventionTypeModule (ref), useParsedBadUtterancesModule (ref), useRestrictionEndDateInfoModule (ref), determineAppealsStateModule (ref), useEffect (ref), fFlagUFRFriendsChatIXPExposureModule (ref), constantsModule (ref), IXPService (ref), appUserLayers (ref), fFlagUFRImprovementsModule (ref), useCallback (ref), reactModule (ref), genericInterventionDialogModule (ref)
 	local moderationDetail = p1.moderationDetail
 	local consequenceTransparencyMessage = moderationDetail.consequenceTransparencyMessage
 	local interventionId = moderationDetail.interventionId
 	local acknowledgeable = moderationDetail.acknowledgeable
 	local badUtterances = moderationDetail.badUtterances
 	local labelTranslationKey = moderationDetail.labelTranslationKey
+	local messageToUser = moderationDetail.messageToUser
 	local violation = moderationDetail.violation
-	local var1 = if fFlagUFRAppealsAndModNoteFixModule and p1.abuseVector ~= constantsModule.AbuseVectorType.RobloxExperienceKick then nil else moderationDetail.messageToUser
-	local var2 = determineUFRInterventionTypeModule(moderationDetail.punishmentTypeDescription)
-	local var3 = useParsedBadUtterancesModule(badUtterances or {}, { labelTranslationKey = labelTranslationKey })
-	local joined = table.concat(var3.textItems, "\n")
-	local joined_1 = table.concat(var3.abuseTypes, ", ")
-	local var4 = useRestrictionEndDateInfoModule(moderationDetail.endDate)
-	local var5 = determineAppealsStateModule({
+	local var1 = determineUFRInterventionTypeModule(moderationDetail.punishmentTypeDescription)
+	local var2 = useParsedBadUtterancesModule(badUtterances or {}, { labelTranslationKey = labelTranslationKey })
+	local joined = table.concat(var2.textItems, "\n")
+	local joined_1 = table.concat(var2.abuseTypes, ", ")
+	local var3 = useRestrictionEndDateInfoModule(moderationDetail.endDate)
+	local var4 = determineAppealsStateModule({
 		onAppeal = p1.onAppeal,
 		beginDate = moderationDetail.beginDate,
 		endDate = moderationDetail.endDate,
@@ -51,8 +50,8 @@ return reactModule.memo(function(p1)
 		useDetailedLayout = true,
 		titleText = p1.titleOverride or (if fFlagUFRImprovementsModule then moderationDetail.title or "" else "Chat suspended for 2 days"),
 		bodyText = p1.bodyOverride or (if fFlagUFRImprovementsModule then moderationDetail.body or "" else "You can't use chat because one or more of your messages broke the rules. If you break the rules again, you could be banned."),
-		userNote = var1,
-		isAppealable = var5.isAppealable,
+		userNote = messageToUser,
+		isAppealable = var4.isAppealable,
 		evidence = joined,
 		violationReason = joined_1,
 		onDismiss = useCallback(function()
@@ -67,13 +66,12 @@ return reactModule.memo(function(p1)
 		interventionId = interventionId,
 		acknowledgeable = acknowledgeable,
 		eventId = p1.analyticsEventId or interventionId,
-		interventionTypeForAnalytics = var2,
+		interventionTypeForAnalytics = var1,
 		abuseVectorForAnalytics = p1.abuseVector,
-		formattedEndDate = var4.formattedEndDate,
-		countdownText = var4.countdownText,
+		formattedEndDate = var3.formattedEndDate,
+		countdownText = var3.countdownText,
 		onAppeal = p1.onAppeal,
-		onAcknowledgementSuccess = p1.onAcknowledgementSuccess,
-		shouldOpenAppealsPortal = var5.shouldOpenAppealsPortal,
+		shouldOpenAppealsPortal = var4.shouldOpenAppealsPortal,
 		violationUid = if violation then violation.uid else nil
 	})
 end)

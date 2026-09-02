@@ -7,6 +7,7 @@ local sduiErrors = sduiCoreSystemModule.SduiErrors
 local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
 local sduiParsers = sduiCoreSystemModule.SduiParsers
 local fFlagLuaAppAddComponentTypeToSearchImpressions = require(parent.SharedFlags).FFlagLuaAppAddComponentTypeToSearchImpressions
+local fFlagSduiChartsSupport = require(parent.SharedFlags).FFlagSduiChartsSupport
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagSduiSearchResultsPageEnabled = require(parent.SharedFlags).FFlagSduiSearchResultsPageEnabled
 local t = {}
@@ -26,7 +27,7 @@ local var1 = function(p1)
 end
 
 return function(p2, p3, p4, p5, p6)
-	-- upvalues: sduiErrors (ref), t (ref), cryoModule (ref), var1 (ref), sduiParsers (ref), appPage (ref), fFlagSduiSearchResultsPageEnabled (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), fFlagSduiExperienceDetailsSupport (ref), sduiParseHelpers (ref)
+	-- upvalues: sduiErrors (ref), t (ref), cryoModule (ref), var1 (ref), sduiParsers (ref), appPage (ref), fFlagSduiSearchResultsPageEnabled (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiChartsSupport (ref), sduiParseHelpers (ref)
 	if not p5 then
 		p2.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogGameImpressions, {
 			name = "SduiGameImpressionsHandler",
@@ -68,12 +69,12 @@ return function(p2, p3, p4, p5, p6)
 		sendGameImpressions.sendFromGameDetails(p2.dependencies.eventIngest, p2.dependencies.appAnalytics, p3, t_1, tostring(p5.refId))
 		
 		return
-	elseif p5.seeAllFlag then
+	elseif fFlagSduiChartsSupport and p5.seeAllFlag then
 		sendGameImpressions.sendFromSeeAll(p2.dependencies.eventIngest, p2.dependencies.appAnalytics, p3, t_1, p2.appPage, tostring(p5.collectionId), p5.gameSetTargetId, nil, p5.appliedFilters, p5.isWideTiles or false)
 		
 		return
 	end
-	sendGameImpressions.sendFromTopicContents(p2.dependencies.eventIngest, p2.dependencies.appAnalytics, p3, t_1, p2.appPage, tostring(p5.collectionId), p5.collectionPosition, p6, p5.gameSetTargetId, nil, p5.itemsPerRow, p5.isWideTiles or false, var3, p5.appliedFilters, nil, function(p7)
+	sendGameImpressions.sendFromTopicContents(p2.dependencies.eventIngest, p2.dependencies.appAnalytics, p3, t_1, p2.appPage, tostring(p5.collectionId), p5.collectionPosition, p6, if fFlagSduiChartsSupport then p5.gameSetTargetId else nil, nil, p5.itemsPerRow, p5.isWideTiles or false, var3, if fFlagSduiChartsSupport then p5.appliedFilters else nil, nil, function(p7)
 		-- upvalues: sduiParseHelpers (copy), p5 (ref), p2 (ref), sduiErrors (copy), var3 (ref)
 		p2.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogGameImpressions, {
 			name = "SduiGameImpressionsHandler",

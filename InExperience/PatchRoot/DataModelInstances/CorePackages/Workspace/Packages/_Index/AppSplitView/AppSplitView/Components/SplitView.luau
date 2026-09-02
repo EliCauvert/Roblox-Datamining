@@ -85,15 +85,7 @@ return reactModule.memo(function(p1)
 		supportPosition = var14.supportPosition
 		supportSize = var14.supportSize
 	end
-	local var17
-	local var18 = p1.supportResizerAbovePane == true
-	local var19 = if var7 then 4 elseif var12 and not var13 and not var18 then 3 else 1
-	local contentPosition = var14.contentPosition
-	local contentSize = var14.contentSize
-	local createElement = reactModule.createElement
-	local fragment = reactModule.Fragment
-	local var20 = nil
-	local t_1 = {
+	return reactModule.createElement(reactModule.Fragment, nil, {
 		CompositionStyleSheet = reactModule.createElement(compositionStyleSheet),
 		NavigationPane = if p1.navigationPane then reactModule.createElement(view, {
 			ZIndex = 1,
@@ -105,8 +97,8 @@ return reactModule.memo(function(p1)
 		ContentPane = reactModule.createElement(view, {
 			ZIndex = 1,
 			tag = compositionTags.ContentRegion.Root,
-			Position = contentPosition,
-			Size = contentSize,
+			Position = var14.contentPosition,
+			Size = var14.contentSize,
 			Interactable = var11,
 			backgroundStyle = t,
 			onAbsoluteSizeChanged = p1.onContentRegionRectChanged,
@@ -116,28 +108,19 @@ return reactModule.memo(function(p1)
 			tag = var16,
 			Position = supportPosition,
 			Size = supportSize,
-			ZIndex = var19,
+			ZIndex = if var7 then 4 elseif var12 and not var13 then 3 else 1,
 			backgroundStyle = t,
 			onAbsoluteSizeChanged = var15,
 			onAbsolutePositionChanged = p1.onSupportRegionRectChanged
-		}, { Slot = p1.supportPane.element }) else nil
-	}
-	
-	if var12 then
-		var17 = reactModule.createElement
-		var17 = var17(paneResizerModule, {
+		}, { Slot = p1.supportPane.element }) else nil,
+		SupportResizer = if var12 then reactModule.createElement(paneResizerModule, {
 			Name = "SupportResizer",
 			interactive = var13,
 			position = var14.resizerPosition,
 			hitWidth = var14.resizerHitWidth,
-			ZIndex = if var13 or var18 then 3 else 2,
+			ZIndex = if var13 then 3 else 2,
 			onDrag = if var13 then var14.onResizerDrag else nil,
 			onDragEnd = if var13 then var14.onResizerDragEnd else nil
-		})
-	else
-		var17 = nil
-	end
-	t_1.SupportResizer = var17
-	
-	return createElement(fragment, var20, t_1)
+		}) else nil
+	})
 end)

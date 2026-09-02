@@ -2,7 +2,7 @@
 	GetVisibleRange = "GetVisibleRange",
 	GetMountedRange = "GetMountedRange",
 	GetScrollState = "GetScrollState",
-	CaptureScrollAnchorSnapshot = "CaptureScrollAnchorSnapshot",
+	CaptureScrollSnapshot = "CaptureScrollSnapshot",
 	GetContentLength = "GetContentLength",
 	GetContentStartOffset = "GetContentStartOffset",
 	GetItemLayout = "GetItemLayout",

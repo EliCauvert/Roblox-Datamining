@@ -2,8 +2,10 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagBuildVersionHistoryUpdatesModule = require(buildExperience.Flags.FFlagBuildVersionHistoryUpdates)
 local badge = foundationModule.Badge
 local button = foundationModule.Button
@@ -21,27 +23,32 @@ local function _(p1, p2, p3, p4)
 end
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagBuildVersionHistoryUpdatesModule (ref), badge (ref), badgeShape (ref), badgeVariant (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagBuildVersionHistoryUpdatesModule (ref), badge (ref), badgeShape (ref), badgeVariant (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
 	local testId = p1.testId or "version-history-card"
-	local var1 = useLocalization({
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		autosaved = localizationStringsModule.VERSION_HISTORY_AUTOSAVED,
 		previouslyPublished = localizationStringsModule.VERSION_HISTORY_PREVIOUSLY_PUBLISHED,
 		published = localizationStringsModule.VERSION_HISTORY_PUBLISHED,
 		restore = localizationStringsModule.VERSION_HISTORY_RESTORE
-	})
-	local restore = var1.restore
-	local var2 = reactModule.useCallback(function()
+	}) else nil
+	local var2 = if fFlagBuildLocalization then var1.restore else localizationStringsModule.VERSION_HISTORY_RESTORE
+	local var3 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref)
 		p1.onRestore()
 	end, { p1.onRestore })
-	local var3 = nil
+	local var4 = nil
 	
 	if not fFlagBuildVersionHistoryUpdatesModule then
-		local badgeText = p1.badgeText
-		local var4 = if badgeText == localizationStringsModule.VERSION_HISTORY_AUTOSAVED then var1.autosaved elseif badgeText == localizationStringsModule.VERSION_HISTORY_PREVIOUSLY_PUBLISHED then var1.previouslyPublished elseif badgeText == localizationStringsModule.VERSION_HISTORY_PUBLISHED then var1.published else badgeText
-		var3 = if var4 then reactModule.createElement(badge, {
+		local var5
+		if fFlagBuildLocalization then
+			local badgeText = p1.badgeText
+			var5 = if badgeText == localizationStringsModule.VERSION_HISTORY_AUTOSAVED then var1.autosaved elseif badgeText == localizationStringsModule.VERSION_HISTORY_PREVIOUSLY_PUBLISHED then var1.previouslyPublished elseif badgeText == localizationStringsModule.VERSION_HISTORY_PUBLISHED then var1.published else badgeText
+		else
+			var5 = p1.badgeText
+		end
+		var4 = if var5 then reactModule.createElement(badge, {
 			LayoutOrder = 2,
-			text = var4,
+			text = var5,
 			shape = badgeShape.Box,
 			variant = badgeVariant.Neutral
 		}) else nil
@@ -90,7 +97,7 @@ return function(p1)
 						tag = "shrink auto-xy text-title-medium text-wrap text-align-x-left text-truncate-none content-emphasis",
 						Text = p1.title
 					}),
-					Badge = var3
+					Badge = var4
 				})
 			}),
 			Slot = reactModule.createElement(view, {
@@ -105,12 +112,12 @@ return function(p1)
 				}),
 				RestoreRow = reactModule.createElement(view, { tag = "row size-full-0 auto-y", LayoutOrder = 2 }, {
 					Restore = reactModule.createElement(button, {
-						text = restore,
+						text = var2,
 						size = inputSize.Small,
 						variant = buttonVariant.Standard,
 						fillBehavior = fillBehavior.Fill,
 						isDisabled = p1.isRestoreDisabled,
-						onActivated = var2,
+						onActivated = var3,
 						testId = `{testId}-restore`
 					})
 				})

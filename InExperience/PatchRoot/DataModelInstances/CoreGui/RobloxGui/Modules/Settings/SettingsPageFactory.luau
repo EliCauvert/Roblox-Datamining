@@ -1,4 +1,5 @@
 ﻿local guiService = game:GetService("GuiService")
+local httpService = game:GetService("HttpService")
 local userGameSettingsService = UserSettings():GetService("UserGameSettings")
 local corePackagesService = game:GetService("CorePackages")
 local coreGuiService = game:GetService("CoreGui")
@@ -17,9 +18,10 @@ local fFlagIEMFocusNavSupportNewButtonsModule = require(script.Parent.Flags.FFla
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local fFlagIEMTabFocusNav = sharedFlagsModule.FFlagIEMTabFocusNav
 local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
+local fFlagIEMFocusNavPeoplePageToButtons = sharedFlagsModule.FFlagIEMFocusNavPeoplePageToButtons
 
 local function Initialize()
-	-- upvalues: fFlagEnableSideSheet (ref), signal (ref), fFlagIEMTabFocusNav (ref), create (ref), utilityModule (ref), var1 (ref), themeModule (ref), guiService (ref), fFlagIEMSettingsGroupsModule (ref), fFlagIEMFocusNavSupportNewButtonsModule (ref), coreGuiService (ref), userGameSettingsService (ref), getFFlagFixIGMTabTransitionsModule (ref), tweenService (ref)
+	-- upvalues: fFlagEnableSideSheet (ref), signal (ref), fFlagIEMTabFocusNav (ref), create (ref), utilityModule (ref), var1 (ref), themeModule (ref), fFlagIEMFocusNavPeoplePageToButtons (ref), guiService (ref), httpService (ref), fFlagIEMSettingsGroupsModule (ref), fFlagIEMFocusNavSupportNewButtonsModule (ref), coreGuiService (ref), userGameSettingsService (ref), getFFlagFixIGMTabTransitionsModule (ref), tweenService (ref)
 	local hidden = {
 		HubRef = nil,
 		LastSelectedObject = nil,
@@ -193,7 +195,12 @@ local function Initialize()
 		SortOrder = Enum.SortOrder.LayoutOrder,
 		Parent = hidden.Page
 	})
-	hidden.Page.SelectionGroup = true
+	
+	if fFlagIEMFocusNavPeoplePageToButtons then
+		hidden.Page.SelectionGroup = true
+	else
+		guiService:AddSelectionParent(httpService:GenerateGUID(false), hidden.Page)
+	end
 	hidden.Displaying = Instance.new("BindableEvent")
 	hidden.Displaying.Name = "Displaying"
 	hidden.Displayed = Instance.new("BindableEvent")

@@ -47,8 +47,7 @@ return function(p1)
 			end
 		end, { p1.controllerRef }),
 		inputAllowed = usePreferredInputModule() == Enum.PreferredInput.Touch and useFormFactor() == formFactor.MobilePortrait,
-		reducedMotion = usePreferences().reducedMotion,
-		coveringOverlay = p1.coveringOverlay
+		reducedMotion = usePreferences().reducedMotion
 	})
 	
 	return nil

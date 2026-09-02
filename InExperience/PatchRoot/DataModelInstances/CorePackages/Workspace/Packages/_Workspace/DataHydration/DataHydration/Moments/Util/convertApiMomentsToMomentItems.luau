@@ -1,12 +1,8 @@
 ﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local momentsTypesModule = require(parent.MomentsTypes)
-local sharedFlagsModule = require(parent.SharedFlags)
+local momentsTypesModule = require(dataHydration.Parent.MomentsTypes)
 local _ = require(dataHydration.Moments.MomentsStoreTypes)
-local convertApiMomentCommentsModule = require(dataHydration.Moments.Util.convertApiMomentComments)
 local fFlagMomentsStickerOverlayNormalizationModule = require(dataHydration.Moments.FFlagMomentsStickerOverlayNormalization)
 local fFlagMomentsRequireApiFeedItemIdModule = require(dataHydration.Moments.FFlagMomentsRequireApiFeedItemId)
-local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
 local momentStatus = momentsTypesModule.Enums.MomentStatus
 local builderSansMedium = Enum.Font.BuilderSansMedium
 local color3 = Color3.new(0, 0, 0)
@@ -158,7 +154,7 @@ local _ = function(p2)
 end
 
 local function convertApiMomentToMomentItem(p3)
-	-- upvalues: fFlagMomentsRequireApiFeedItemIdModule (ref), normalizeCaptureEdits (ref), momentStatus (ref), fFlagMomentsComments (ref), convertApiMomentCommentsModule (ref)
+	-- upvalues: fFlagMomentsRequireApiFeedItemIdModule (ref), normalizeCaptureEdits (ref), momentStatus (ref)
 	local captionedAssetMoment = p3.captionedAssetMoment
 	local owner = p3.owner
 	local entityId = p3.entityId or p3.id
@@ -206,13 +202,6 @@ local function convertApiMomentToMomentItem(p3)
 	t.recommendationMetadata = { feedItemId = feedItemId, tracingId = p3.feedSessionId }
 	t.status = var9
 	
-	if fFlagMomentsComments then
-		local var11 = convertApiMomentCommentsModule(p3.comments)
-		
-		if var11 ~= nil then
-			t.comments = var11
-		end
-	end
 	return t
 end
 
@@ -224,10 +213,10 @@ return function(p4)
 		return t
 	end
 	for i, v in ipairs(p4) do
-		local var12 = convertApiMomentToMomentItem(v)
+		local var11 = convertApiMomentToMomentItem(v)
 		
-		if var12 ~= nil then
-			table.insert(t, var12)
+		if var11 ~= nil then
+			table.insert(t, var11)
 		end
 	end
 	return t

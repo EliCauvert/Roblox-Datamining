@@ -1,6 +1,4 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local _ = require(viewRecycler.Core.Enums.ScrollDirection)
-local _ = require(viewRecycler.Core.Types)
+﻿local _ = require(script:FindFirstAncestor("ViewRecycler").Core.Types)
 
 local function _(p1, p2)
 	assert(p1 >= 0 and p1 % 1 == 0, `OverscanPolicy: {p2} must be a non-negative integer`)

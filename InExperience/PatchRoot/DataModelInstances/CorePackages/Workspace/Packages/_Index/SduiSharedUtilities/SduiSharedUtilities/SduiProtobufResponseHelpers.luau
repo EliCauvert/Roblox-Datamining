@@ -8,6 +8,7 @@ local fFlagSduiHydrationDataCamelCaseTopLevelKeys = require(parent.SharedFlags).
 local fFlagSduiHydrationDataCamelCasePropertyKeys = require(parent.SharedFlags).FFlagSduiHydrationDataCamelCasePropertyKeys
 local fFlagEnableHomepagePromptsForModalsAndBanners = require(parent.SharedFlags).FFlagEnableHomepagePromptsForModalsAndBanners
 local fFlagPromptsHandlerEnabled = require(parent.SharedFlags).FFlagPromptsHandlerEnabled
+local fFlagSduiPageEntrySurfacing = require(parent.SharedFlags).FFlagSduiPageEntrySurfacing
 local fFlagSduiClientTemplateCache = require(parent.SharedFlags).FFlagSduiClientTemplateCache
 
 local function decodeProto(p1, p2)
@@ -54,7 +55,7 @@ return {
 		end
 	end,
 	parsePageEntriesFromResponse = function(p1)
-		-- upvalues: fFlagSduiUniversalPageEntry (ref), fFlagEnableHomepagePromptsForModalsAndBanners (ref), fFlagPromptsHandlerEnabled (ref), parseSurfacing (ref)
+		-- upvalues: fFlagSduiUniversalPageEntry (ref), fFlagEnableHomepagePromptsForModalsAndBanners (ref), fFlagPromptsHandlerEnabled (ref), fFlagSduiPageEntrySurfacing (ref), parseSurfacing (ref)
 		local t = {}
 		
 		if p1.page_entries then
@@ -69,7 +70,7 @@ return {
 					componentInputData = var1,
 					title = v.page_entry.title,
 					category = if var2 == nil or var2 == "" then nil else var2,
-					surfacing = parseSurfacing(v.page_entry.surfacing)
+					surfacing = if fFlagSduiPageEntrySurfacing then parseSurfacing(v.page_entry.surfacing) else nil
 				})
 			end
 		end

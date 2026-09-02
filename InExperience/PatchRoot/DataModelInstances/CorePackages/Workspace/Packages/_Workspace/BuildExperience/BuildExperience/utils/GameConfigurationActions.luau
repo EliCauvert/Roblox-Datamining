@@ -13,6 +13,7 @@ local rehydrateGameMetadataModule = require(buildExperience.utils.rehydrateGameM
 local buildExperienceSetAudiencesMaxRetries = game:DefineFastInt("BuildExperienceSetAudiencesMaxRetries", 3)
 local buildExperienceSetAudiencesRetryDelayMs = game:DefineFastInt("BuildExperienceSetAudiencesRetryDelayMs", 3000)
 local buildExperienceSecondActivateAfterSetAudiences = game:DefineFastFlag("BuildExperienceSecondActivateAfterSetAudiences", false)
+local fFlagBuildRehydrateOnPublishModule = require(buildExperience.Flags.FFlagBuildRehydrateOnPublish)
 local debug = creatorAgentChatModule.debug
 local var1 = urlBuilder.fromString("create:dashboard/creations/experiences/{universeId}/configure")
 local var2 = urlBuilder.fromString("create:dashboard/creations/experiences/{universeId}/experience-questionnaire")
@@ -74,6 +75,11 @@ local function updateTitleDescription(p1, p2, p3)
 	end)
 end
 
+local function _(p1, p2, p3)
+	-- upvalues: universeConfigurationModule (ref)
+	universeConfigurationModule.getUniverseConfigurationStore().updateSummary(p1, { isActive = true, privacyType = p3, audiences = p2 })
+end
+
 local function buildPublicAudiences(p1)
 	-- upvalues: universeActivationModule (ref)
 	local t = {}
@@ -100,7 +106,7 @@ local function updateCachedAudience(p2, p3, p4)
 	})
 end
 
-local function _(p2)
+local _ = function(p2)
 	-- upvalues: universeActivationModule (ref)
 	return p2 ~= nil and table.find(p2, universeActivationModule.Audience.Public) ~= nil
 end
@@ -114,25 +120,28 @@ local _ = function(p2, p3)
 end
 
 local function setAudiencesForPublish(value, p2, p3)
-	-- upvalues: buildPublicAudiences (ref), promiseModule (ref), buildExperienceSetAudiencesMaxRetries (ref), buildExperienceSetAudiencesRetryDelayMs (ref), updateCachedAudience (ref), universeActivationModule (ref), debug (ref)
-	local var3 = buildPublicAudiences(p3)
+	-- upvalues: fFlagBuildRehydrateOnPublishModule (ref), buildPublicAudiences (ref), promiseModule (ref), buildExperienceSetAudiencesMaxRetries (ref), buildExperienceSetAudiencesRetryDelayMs (ref), updateCachedAudience (ref), universeActivationModule (ref), debug (ref)
+	local var3 = if fFlagBuildRehydrateOnPublishModule then buildPublicAudiences(p3) else p3
 	
 	return promiseModule.retryWithDelay(function()
 		-- upvalues: value (ref), p2 (ref), var3 (ref)
 		return value.setAudiences(p2, var3)
 	end, buildExperienceSetAudiencesMaxRetries, buildExperienceSetAudiencesRetryDelayMs / 1000):andThen(function(p4)
-		-- upvalues: updateCachedAudience (copy), p2 (ref), universeActivationModule (copy), debug (copy), promiseModule (copy)
-		updateCachedAudience(p2, p4.audiences, true)
-		local audiences = p4.audiences
-		
-		if audiences ~= nil and table.find(audiences, universeActivationModule.Audience.Public) ~= nil then
-			return p4
+		-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), updateCachedAudience (copy), p2 (ref), universeActivationModule (copy), debug (copy), promiseModule (copy)
+		if fFlagBuildRehydrateOnPublishModule then
+			updateCachedAudience(p2, p4.audiences, true)
+			local audiences = p4.audiences
+			
+			if audiences ~= nil and table.find(audiences, universeActivationModule.Audience.Public) ~= nil then
+				return p4
+			else
+				debug.log("warn", "GameConfigurationActions set audience missing Public", { universeId = p2 })
+				
+				return promiseModule.reject({
+					errorMessage = "setAudiences did not return a Public audience"
+				})
+			end
 		end
-		debug.log("warn", "GameConfigurationActions set audience missing Public", { universeId = p2 })
-		
-		return promiseModule.reject({
-			errorMessage = "setAudiences did not return a Public audience"
-		})
 	end)
 end
 
@@ -141,7 +150,7 @@ return {
 	getCreatorHubConfigureUrl = getCreatorHubConfigureUrl,
 	getCreatorHubAnalyticsUrl = getCreatorHubAnalyticsUrl,
 	publishExperience = function(p2)
-		-- upvalues: saveAndPublishPlace (ref), universeActivationModule (ref), setAudiencesForPublish (ref), promiseModule (ref), debug (ref), buildExperienceSecondActivateAfterSetAudiences (ref), rehydrateGameMetadataModule (ref)
+		-- upvalues: saveAndPublishPlace (ref), fFlagBuildRehydrateOnPublishModule (ref), universeActivationModule (ref), setAudiencesForPublish (ref), promiseModule (ref), debug (ref), buildExperienceSecondActivateAfterSetAudiences (ref), universeConfigurationModule (ref), rehydrateGameMetadataModule (ref)
 		local var3
 		local _ = nil
 		
@@ -154,31 +163,11 @@ return {
 			})
 		end
 		
-		if p2.isActive then
-			local universeActivationStore = universeActivationModule.getUniverseActivationStore()
-			var3 = saveAndPublishPlace({
-				placeId = p2.placeId,
-				title = p2.title,
-				description = p2.description
-			}):andThen(function(p3)
-				-- upvalues: setAudiencesForPublish (copy), universeActivationStore (ref), p2 (ref), promiseModule (copy)
-				return setAudiencesForPublish(universeActivationStore, p2.universeId, p2.audiences):andThen(function()
-					-- upvalues: p3 (ref)
-					return p3
-				end, function(p4)
-					-- upvalues: promiseModule (copy), p3 (ref)
-					return promiseModule.reject({
-						stage = "set_audience",
-						errorMessage = if typeof(p4) == "table" and p4.errorMessage ~= nil then tostring(p4.errorMessage) else tostring(p4),
-						publishResult = p3
-					})
-				end)
-			end)
-		else
+		if not p2.isActive then
 			local universeActivationStore = universeActivationModule.getUniverseActivationStore()
 			debug.log("info", "GameConfigurationActions publish activate-and-set-audience started", { universeId = p2.universeId, placeId = p2.placeId })
 			
-			local function _()
+			local function setPublicAudience()
 				-- upvalues: setAudiencesForPublish (copy), universeActivationStore (ref), p2 (ref), buildExperienceSecondActivateAfterSetAudiences (copy), debug (copy)
 				return setAudiencesForPublish(universeActivationStore, p2.universeId, p2.audiences):andThen(function()
 					-- upvalues: buildExperienceSecondActivateAfterSetAudiences (copy), universeActivationStore (copy), p2 (copy), debug (copy)
@@ -189,7 +178,7 @@ return {
 				end)
 			end
 			
-			var3 = universeActivationStore.activate(p2.universeId):andThen(function()
+			var3 = if fFlagBuildRehydrateOnPublishModule then universeActivationStore.activate(p2.universeId):andThen(function()
 				-- upvalues: publishPlace (ref)
 				return publishPlace()
 			end):andThen(function(p3)
@@ -211,12 +200,51 @@ return {
 						publishResult = p3
 					})
 				end)
+			end) else universeActivationStore.activate(p2.universeId):andThen(function()
+				-- upvalues: setPublicAudience (ref)
+				return setPublicAudience()
+			end):andThen(function()
+				-- upvalues: p2 (ref), universeConfigurationModule (copy), publishPlace (ref)
+				universeConfigurationModule.getUniverseConfigurationStore().updateSummary(p2.universeId, {
+					isActive = true,
+					privacyType = universeConfigurationModule.PrivacyType.Public,
+					audiences = p2.audiences
+				})
+				
+				return publishPlace()
 			end)
+		elseif fFlagBuildRehydrateOnPublishModule then
+			local universeActivationStore = universeActivationModule.getUniverseActivationStore()
+			var3 = saveAndPublishPlace({
+				placeId = p2.placeId,
+				title = p2.title,
+				description = p2.description
+			}):andThen(function(p3)
+				-- upvalues: setAudiencesForPublish (copy), universeActivationStore (ref), p2 (ref), promiseModule (copy)
+				return setAudiencesForPublish(universeActivationStore, p2.universeId, p2.audiences):andThen(function()
+					-- upvalues: p3 (ref)
+					return p3
+				end, function(p4)
+					-- upvalues: promiseModule (copy), p3 (ref)
+					return promiseModule.reject({
+						stage = "set_audience",
+						errorMessage = if typeof(p4) == "table" and p4.errorMessage ~= nil then tostring(p4.errorMessage) else tostring(p4),
+						publishResult = p3
+					})
+				end)
+			end)
+		else
+			var3 = saveAndPublishPlace({
+				placeId = p2.placeId,
+				title = p2.title,
+				description = p2.description
+			})
 		end
 		return var3:finally(function()
-			-- upvalues: rehydrateGameMetadataModule (copy), p2 (ref), var3 (write)
-			rehydrateGameMetadataModule(p2.universeId)
-			
+			-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), rehydrateGameMetadataModule (copy), p2 (ref), var3 (write)
+			if fFlagBuildRehydrateOnPublishModule then
+				rehydrateGameMetadataModule(p2.universeId)
+			end
 			return var3
 		end)
 	end,

@@ -13,6 +13,7 @@ return function()
 		context = var2.context,
 		formatSuccessSnackbarText = var2.formatSuccessSnackbarText,
 		messagePlaceholder = var2.messagePlaceholder,
+		onClose = var1.hide,
 		onCloseWithReason = var1.hide,
 		telemetryId = var2.telemetryId,
 		url = var2.url

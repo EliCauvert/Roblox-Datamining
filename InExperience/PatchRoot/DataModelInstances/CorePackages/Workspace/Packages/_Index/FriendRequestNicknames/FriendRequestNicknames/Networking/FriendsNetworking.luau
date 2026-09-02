@@ -1,0 +1,1 @@
+﻿return require(script.Parent.Parent.Parent.FriendsNetworking).config({ roduxNetworking = require(script.Parent.RoduxNetworking) })

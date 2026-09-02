@@ -222,7 +222,10 @@ local function useShopViewModel(p1)
 			if fFlagEnableUserOffers then
 				var35(x < constantsModule.COMPACT_BREAKPOINT_WIDTH)
 			end
-		end, { setItemsPerRow, var35 }),
+		end, {
+			setItemsPerRow,
+			if fFlagEnableUserOffers then var35 else nil
+		}),
 		isReportingEnabled = var36.isReportingEnabled,
 		isOverflowMenuOpen = var36.isOverflowMenuOpen,
 		topBarReportSession = var36.reportSession,

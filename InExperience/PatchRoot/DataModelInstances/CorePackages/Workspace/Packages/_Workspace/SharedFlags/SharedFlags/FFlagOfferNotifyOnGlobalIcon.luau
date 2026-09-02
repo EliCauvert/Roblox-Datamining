@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("OfferNotifyOnGlobalIcon", false) and require(script.Parent.FFlagEnableUserOffers)

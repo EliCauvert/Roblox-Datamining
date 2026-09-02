@@ -13,17 +13,17 @@ local _ = require(viewRecyclerReact.Parent.Signals)
 local _ = viewRecyclerModule.DataSource
 local virtualListShellModule = require(viewRecyclerReact.ReactAdapter.Private.VirtualListShell)
 local useReconciledDataSourceModule = require(viewRecyclerReact.ReactAdapter.Private.useReconciledDataSource)
-local useVirtualListModule = require(viewRecyclerReact.ReactAdapter.Private.useVirtualList)
+local useVirtualListRuntimeModule = require(viewRecyclerReact.ReactAdapter.Private.useVirtualListRuntime)
 local createElement = reactModule.createElement
 
 return {
 	create = function(p1)
-		-- upvalues: recyclingScopeModule (ref), createElement (ref), virtualListShellModule (ref), useVirtualListModule (ref), useReconciledDataSourceModule (ref), reactModule (ref), recyclingScopeContextModule (ref), recyclableViewRegistryModule (ref)
+		-- upvalues: recyclingScopeModule (ref), createElement (ref), virtualListShellModule (ref), useVirtualListRuntimeModule (ref), useReconciledDataSourceModule (ref), reactModule (ref), recyclingScopeContextModule (ref), recyclableViewRegistryModule (ref)
 		local var1 = recyclingScopeModule.create(p1)
 		
 		local function VirtualListRenderer(p2)
-			-- upvalues: createElement (copy), virtualListShellModule (copy), useVirtualListModule (copy)
-			return createElement(virtualListShellModule, useVirtualListModule(p2))
+			-- upvalues: createElement (copy), virtualListShellModule (copy), useVirtualListRuntimeModule (copy)
+			return createElement(virtualListShellModule, useVirtualListRuntimeModule(p2))
 		end
 		
 		local function DeclarativeVirtualList(p2)

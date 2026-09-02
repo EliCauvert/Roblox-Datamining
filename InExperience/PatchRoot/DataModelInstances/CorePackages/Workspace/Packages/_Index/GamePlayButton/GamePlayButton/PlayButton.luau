@@ -27,6 +27,7 @@ local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiE
 local fFlagLuaAppPlayButtonLoadingDurationTelemetry = require(parent.SharedFlags).FFlagLuaAppPlayButtonLoadingDurationTelemetry
 local fFlagLuaAppUpdatePlayButtonText = require(parent.SharedFlags).FFlagLuaAppUpdatePlayButtonText
 local fFlagLuaAppLogExposurePlayButtonUX = require(parent.SharedFlags).FFlagLuaAppLogExposurePlayButtonUX
+local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp = require(parent.SharedFlags).FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp
 local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce = require(parent.SharedFlags).FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce
 local fFlagLuaAppLaunchWhenLoadingEdp = require(parent.SharedFlags).FFlagLuaAppLaunchWhenLoadingEdp
 local fFlagLuaAppLaunchWhenLoadingForce = require(parent.SharedFlags).FFlagLuaAppLaunchWhenLoadingForce
@@ -37,7 +38,7 @@ local usePlayOnReleaseAfterUnmountModule = require(script.Parent.usePlayOnReleas
 local var1 = function() end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), useRoactService (ref), roactNetworking (ref), useSelector (ref), gamesProductInfoReducer (ref), tutilsModule (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), usePlayButtonStateModule (ref), playButtonStatesModule (ref), fFlagLuaAppLaunchWhenLoadingForce (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), useOnPlayButtonCallbackModule (ref), luaAppFixPlayButtonDefaultLaunchSource (ref), fFlagLuaAppUnifiedPlayButtonSquadMenuDirection (ref), menuDirection (ref), useOnPlaySquadButtonCallbackModule (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce (ref), usePlayOnReleaseAfterUnmountModule (ref), fFlagSduiExperienceDetailsSupport (ref), useLocalization (ref), fFlagLuaAppUpdatePlayButtonText (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), useUserExperiment (ref), appUserLayers (ref), fFlagLuaAppLogExposurePlayButtonUX (ref), IXPService (ref), useTokens (ref), fFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP (ref), fIntLuaAppPlayButtonSecondaryButtonGap (ref), legacyPlayButtonModule (ref), fFlagLuaAppEnablePlaySquadButton (ref), var1 (ref), playButtonGroupViewModule (ref)
+	-- upvalues: reactModule (ref), useRoactService (ref), roactNetworking (ref), useSelector (ref), gamesProductInfoReducer (ref), tutilsModule (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), usePlayButtonStateModule (ref), playButtonStatesModule (ref), fFlagLuaAppLaunchWhenLoadingForce (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), useOnPlayButtonCallbackModule (ref), luaAppFixPlayButtonDefaultLaunchSource (ref), fFlagLuaAppUnifiedPlayButtonSquadMenuDirection (ref), menuDirection (ref), useOnPlaySquadButtonCallbackModule (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref), usePlayOnReleaseAfterUnmountModule (ref), fFlagSduiExperienceDetailsSupport (ref), useLocalization (ref), fFlagLuaAppUpdatePlayButtonText (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), useUserExperiment (ref), appUserLayers (ref), fFlagLuaAppLogExposurePlayButtonUX (ref), IXPService (ref), useTokens (ref), fFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP (ref), fIntLuaAppPlayButtonSecondaryButtonGap (ref), legacyPlayButtonModule (ref), fFlagLuaAppEnablePlaySquadButton (ref), var1 (ref), playButtonGroupViewModule (ref)
 	local var2 = reactModule.useRef(false)
 	reactModule.useEffect(function()
 		-- upvalues: var2 (ref)
@@ -73,10 +74,11 @@ return reactModule.memo(function(p1)
 	local var9 = useOnPlayButtonCallbackModule(p1.universeId, p1.referralSource, if fFlagLuaAppPlayButtonLoadingDurationTelemetry then var5 else p1.eventContext or "PlayButton", nil, p1.launchSource or (if luaAppFixPlayButtonDefaultLaunchSource then "UnknownLaunchSource" else "LuaGameCard"), p1.experienceJoinData, p1.placeId, if fFlagLuaAppLaunchWhenLoadingEdp or fFlagLuaAppLaunchWhenLoadingForce then p1.launchWhenLoading else nil)
 	local var10 = if fFlagLuaAppUnifiedPlayButtonSquadMenuDirection and p1.squadButtonMenuDirection ~= nil then p1.squadButtonMenuDirection else menuDirection.Up
 	local var11 = useOnPlaySquadButtonCallbackModule(var10, playButtonState, p1.referralSource, p1.universeId)
-	local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 = fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce or p1.launchOnReleaseAfterUnmount == true
+	local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 = fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce or fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp and p1.launchOnReleaseAfterUnmount == true
 	local _ = nil
 	local _ = nil
-	local var12 = reactModule.useCallback(function(p2)
+	local useCallback = reactModule.useCallback
+	useCallback = useCallback(function(p2)
 		-- upvalues: fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 (ref), var2 (ref), p1 (ref), playButtonStatesModule (copy), var9 (ref)
 		if p2 == nil then return end
 		if not fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 and not var2.current then return end
@@ -94,21 +96,21 @@ return reactModule.memo(function(p1)
 		p1.onPurchaseRequiredCallback,
 		p1.reportExperienceLaunched,
 		p1.onActivated,
-		fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1
+		if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce or fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp then fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 else nil
 	})
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: useCallback (ref), playButtonState (write)
+		useCallback(playButtonState)
+	end, { useCallback, playButtonState })
 	local var13 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), playButtonState (write)
-		var12(playButtonState)
-	end, { var12, playButtonState })
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), secondaryPlayButtonState (write)
-		var12(secondaryPlayButtonState)
-	end, { var12, secondaryPlayButtonState })
-	var13 = usePlayOnReleaseAfterUnmountModule(var13)
-	local var15 = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 and var13 then var13.playButtonRef else nil
-	local var16 = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 and var13 then var13.loadingCaptureRef else nil
-	local var17 = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 then var13.onActivated else var13
-	local var18 = reactModule.useCallback(function(p2)
+		-- upvalues: useCallback (ref), secondaryPlayButtonState (write)
+		useCallback(secondaryPlayButtonState)
+	end, { useCallback, secondaryPlayButtonState })
+	var12 = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp or fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce then usePlayOnReleaseAfterUnmountModule(var12) else nil
+	local var14 = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 and var12 then var12.playButtonRef else nil
+	local var15 = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 and var12 then var12.loadingCaptureRef else nil
+	local var16 = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 then var12.onActivated else var12
+	local var17 = reactModule.useCallback(function(p2)
 		-- upvalues: var2 (ref), p1 (ref), var11 (ref)
 		if not var2.current then return end
 		if p1.onActivated then
@@ -119,16 +121,16 @@ return reactModule.memo(function(p1)
 	
 	if fFlagSduiExperienceDetailsSupport then
 		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), var17 (ref)
+			-- upvalues: p1 (ref), var16 (ref)
 			local onRegisterActivation = p1.onRegisterActivation
 			
 			if onRegisterActivation == nil then
 				return
 			end
-			return onRegisterActivation(var17)
-		end, { p1.onRegisterActivation, var17 })
+			return onRegisterActivation(var16)
+		end, { p1.onRegisterActivation, var16 })
 	end
-	local var19 = useLocalization({
+	local var18 = useLocalization({
 		join = "Feature.ExperienceDetails.PlayButtonText.ActionNeeded",
 		playDemo = "Feature.ExperienceDetails.PlayButtonText.PlayDemo",
 		unlock = "Feature.ExperienceDetails.PlayButtonText.Unlock",
@@ -137,20 +139,20 @@ return reactModule.memo(function(p1)
 		waitingForParty = "Feature.Squads.Action.WaitingForParty",
 		play = if fFlagLuaAppUpdatePlayButtonText then "Feature.ExperienceDetails.PlayButtonText.Play" else nil
 	})
+	local var19 = nil
 	local var20 = nil
 	local var21 = nil
-	local var22 = nil
 	
 	if fFlagLuaAppUnifyPlayButtonAllSurfacesIxp then
-		local var23, var24, var25 = useUserExperiment({ appUserLayers.PlayButtonUXExposureLayer }, function(p2)
+		local var22, var23, var24 = useUserExperiment({ appUserLayers.PlayButtonUXExposureLayer }, function(p2)
 			-- upvalues: appUserLayers (copy)
 			local playButtonUXExposureLayer = p2[appUserLayers.PlayButtonUXExposureLayer] or {}
 			
 			return playButtonUXExposureLayer.HasJoinTextButton, playButtonUXExposureLayer.HasIconPlayButton, playButtonUXExposureLayer.HasPlayButtonLoadingSkeleton
 		end, true)
+		var19 = var22
 		var20 = var23
 		var21 = var24
-		var22 = var25
 	end
 	if fFlagLuaAppLogExposurePlayButtonUX then
 		reactModule.useEffect(function()
@@ -158,23 +160,23 @@ return reactModule.memo(function(p1)
 			IXPService:LogUserLayerExposure(appUserLayers.PlayButtonUXExposureLayer)
 		end, {})
 	end
-	local var26 = useTokens()
+	local var25 = useTokens()
 	
 	if not fFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP or not p1.shouldUseModuleLegacyPlayButtonView then
 		return reactModule.createElement(playButtonGroupViewModule, {
 			playButtonState = playButtonState,
 			secondaryPlayButtonState = secondaryPlayButtonState,
 			gameProductInfo = var4,
-			localized = var19,
-			tokens = var26,
-			hasJoinTextPlayableButtonIxp = var20,
-			hasIconPlayButtonIxp = var21,
-			hasPlayButtonLoadingSkeletonIxp = var22,
-			onPlayButtonActivated = var17,
-			onSecondaryPlayButtonActivated = var14,
-			onPlaySquadButtonActivated = var18,
-			playButtonCaptureRef = var15,
-			loadingCaptureRef = var16,
+			localized = var18,
+			tokens = var25,
+			hasJoinTextPlayableButtonIxp = var19,
+			hasIconPlayButtonIxp = var20,
+			hasPlayButtonLoadingSkeletonIxp = var21,
+			onPlayButtonActivated = var16,
+			onSecondaryPlayButtonActivated = var13,
+			onPlaySquadButtonActivated = var17,
+			playButtonCaptureRef = var14,
+			loadingCaptureRef = var15,
 			shouldLaunchWhenLoading = fFlagLuaAppLaunchWhenLoadingForce_1,
 			shouldLaunchOnReleaseAfterUnmount = fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1,
 			squadButtonMenuDirection = var10,
@@ -195,18 +197,18 @@ return reactModule.memo(function(p1)
 			testId = p1.testId
 		})
 	end
-	local var27 = if var4 then var4.price else 0
-	local var28 = if var4 then var4.localizedFiatPrice else ""
+	local var26 = if var4 then var4.price else 0
+	local var27 = if var4 then var4.localizedFiatPrice else ""
 	
 	if secondaryPlayButtonState == nil then
 		return reactModule.createElement(legacyPlayButtonModule, {
 			Size = UDim2.new(p1.width or UDim.new(1, 0), UDim.new(1, 0)),
 			LayoutOrder = p1.LayoutOrder,
 			playButtonState = playButtonState,
-			price = var27,
-			localizedFiatPrice = var28,
-			onPlayButtonActivated = var17,
-			onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then var18 else nil,
+			price = var26,
+			localizedFiatPrice = var27,
+			onPlayButtonActivated = var16,
+			onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then var17 else nil,
 			testId = p1.testId
 		})
 	end
@@ -228,20 +230,20 @@ return reactModule.memo(function(p1)
 			LayoutOrder = 1,
 			Size = uDim2,
 			playButtonState = playButtonState,
-			price = var27,
-			localizedFiatPrice = var28,
-			onPlayButtonActivated = var17,
-			onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then var18 else nil,
+			price = var26,
+			localizedFiatPrice = var27,
+			onPlayButtonActivated = var16,
+			onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then var17 else nil,
 			testId = p1.testId
 		}),
 		SecondaryPlayButton = reactModule.createElement(legacyPlayButtonModule, {
 			LayoutOrder = 2,
 			Size = uDim2,
 			playButtonState = secondaryPlayButtonState,
-			price = var27,
-			localizedFiatPrice = var28,
-			onPlayButtonActivated = var14 or var1,
-			onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then var18 else nil,
+			price = var26,
+			localizedFiatPrice = var27,
+			onPlayButtonActivated = var13 or var1,
+			onPlaySquadButtonActivated = if fFlagLuaAppEnablePlaySquadButton then var17 else nil,
 			testId = if p1.testId then `{p1.testId}--secondary` else nil
 		})
 	})

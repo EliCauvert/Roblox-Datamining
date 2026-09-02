@@ -9,7 +9,9 @@ local layerCollectorProvider = require(parent.UIBlox).Core.Layout.LayerCollector
 local foundationProvider = require(parent.Foundation).FoundationProvider
 local localization = require(parent.InExperienceLocales).Localization
 local localizationProvider = require(parent.Localization).LocalizationProvider
-local fFlagHighlightModePreciseSelectionEnabled = require(parent.SharedFlags).FFlagHighlightModePreciseSelectionEnabled
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagHighlightModePreciseSelectionEnabled = sharedFlagsModule.FFlagHighlightModePreciseSelectionEnabled
+local fFlagAbuseReportMenuV2 = sharedFlagsModule.FFlagAbuseReportMenuV2
 local messageBusService = game:GetService("MessageBusService")
 local captureModeMessageId = messageBusService:GetMessageId("CaptureMode", "sceneSelectionExitReason")
 local sceneAnalysisModule = require(script.Analysis.SceneAnalysis)
@@ -27,7 +29,7 @@ return {
 	extractItemsFromInterpretations = sceneAnalysisModule.extractItemsFromInterpretations,
 	__setRandomGenerator = sceneAnalysisModule.__setRandomGenerator,
 	initialize = function()
-		-- upvalues: inGameAssetReportModeModule (ref), fFlagHighlightModePreciseSelectionEnabled (ref), getHighlightModeVariantModule (ref), highlightModeVariants (ref), t (ref), reactModule (ref), layerCollectorProvider (ref), foundationProvider (ref), roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), styleProviderWithDefaultTheme (ref), messageBusService (ref), captureModeMessageId (ref), experienceStateCaptureService (ref), coreGuiService (ref)
+		-- upvalues: inGameAssetReportModeModule (ref), fFlagHighlightModePreciseSelectionEnabled (ref), getHighlightModeVariantModule (ref), highlightModeVariants (ref), t (ref), reactModule (ref), layerCollectorProvider (ref), foundationProvider (ref), roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), styleProviderWithDefaultTheme (ref), fFlagAbuseReportMenuV2 (ref), messageBusService (ref), captureModeMessageId (ref), experienceStateCaptureService (ref), coreGuiService (ref)
 		local _ = nil
 		local var1 = inGameAssetReportModeModule
 		
@@ -52,13 +54,17 @@ return {
 						StyleProvider = reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true }, {
 							InGameAssetReportUI = roactModule.createElement(var1, {
 								backAction = function()
-									-- upvalues: messageBusService (copy), captureModeMessageId (copy), experienceStateCaptureService (copy)
-									messageBusService:Publish(captureModeMessageId, { reason = "back" })
+									-- upvalues: fFlagAbuseReportMenuV2 (copy), messageBusService (copy), captureModeMessageId (copy), experienceStateCaptureService (copy)
+									if fFlagAbuseReportMenuV2 then
+										messageBusService:Publish(captureModeMessageId, { reason = "back" })
+									end
 									experienceStateCaptureService:ToggleCaptureMode()
 								end,
 								onReportComplete = function()
-									-- upvalues: messageBusService (copy), captureModeMessageId (copy), experienceStateCaptureService (copy)
-									messageBusService:Publish(captureModeMessageId, { reason = "submit" })
+									-- upvalues: fFlagAbuseReportMenuV2 (copy), messageBusService (copy), captureModeMessageId (copy), experienceStateCaptureService (copy)
+									if fFlagAbuseReportMenuV2 then
+										messageBusService:Publish(captureModeMessageId, { reason = "submit" })
+									end
 									experienceStateCaptureService:ToggleCaptureMode()
 								end,
 								getIsSmallPortraitMode = function(p1)

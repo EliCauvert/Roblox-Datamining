@@ -3,7 +3,6 @@ local parent = appChat.Parent
 local httpService = game:GetService("HttpService")
 local cryoModule = require(parent.Cryo)
 local roactModule = require(parent.Roact)
-local reactModule = require(parent.React)
 local roactPaginator = require(appChat.SocialLibraries).RoactPaginator
 local searchFilterPredicate = require(appChat.SocialLibraries).Utils.searchFilterPredicate
 local memoize = require(parent.AppCommonLib).memoize
@@ -13,25 +12,16 @@ local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTra
 local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
 local chatLandingTelemetryEventsModule = require(script:FindFirstAncestor("ChatLanding").ChatLandingTelemetryEvents)
 local chatLandingTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatLandingTelemetryLayer)
-local displayModule = require(parent.Display)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local responsiveModule = require(parent.Responsive)
-local useAnimateScrollViewToSelection = require(parent.AppBlox).useAnimateScrollViewToSelection
 local fFlagAppIaScrollAway = require(parent.SharedFlags).FFlagAppIaScrollAway
 local partyPageCarouselExperimentation = require(parent.SocialExperiments).PartyPageCarouselExperimentation
 local signalsMigrationConfigModule = require(appChat.Flags.SignalsMigrationConfig)
 local fFlagAppChatUseUltimateListConversationListModule = require(appChat.Flags.FFlagAppChatUseUltimateListConversationList)
-local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
-local fFlagAppChatUseViewRecyclerConversationListModule = require(appChat.Flags.FFlagAppChatUseViewRecyclerConversationList)
 local conversationListWithTopBar = roactModule.PureComponent:extend("ConversationListWithTopBar")
 local shouldUseFoundationConversationRow = signalsMigrationConfigModule.shouldUseFoundationConversationRow
 local fFlagAppChatUseUltimateListConversationListModule_1 = shouldUseFoundationConversationRow and fFlagAppChatUseUltimateListConversationListModule
-local fFlagAppChatUseViewRecyclerConversationListModule_1 = shouldUseFoundationConversationRow and fFlagAppChatUseViewRecyclerConversationListModule
 local conversationListModule = require(script.Parent.ConversationList)
 local var1 = false
 local var2 = nil
-local var3 = false
-local var4 = nil
 
 local function _()
 	-- upvalues: var1 (write), var2 (write)
@@ -47,22 +37,6 @@ local function _()
 		var2 = status
 	end
 	return var2
-end
-
-local _ = function()
-	-- upvalues: var3 (write), var4 (write)
-	if var3 then
-		return var4
-	end
-	var3 = true
-	local ok, status = pcall(function()
-		return require(script.Parent.ConversationListViewRecycler)
-	end)
-	
-	if ok then
-		var4 = status
-	end
-	return var4
 end
 
 conversationListWithTopBar.defaultProps = {
@@ -129,12 +103,12 @@ function conversationListWithTopBar.init(p1)
 	
 	function p2.formatParticipantIds(p2)
 		-- upvalues: cryoModule (copy), httpService (copy)
-		local var5 = cryoModule.List.filterMap(p2 or {}, function(p3)
+		local var3 = cryoModule.List.filterMap(p2 or {}, function(p3)
 			return if p3.id then tonumber(p3.id) else nil
 		end)
 		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), var5 (ref)
-			return httpService:JSONEncode(var5)
+			-- upvalues: httpService (copy), var3 (ref)
+			return httpService:JSONEncode(var3)
 		end)
 		
 		return if ok then status else "[]"
@@ -192,11 +166,11 @@ function conversationListWithTopBar.init(p1)
 end
 
 function conversationListWithTopBar.render(p1)
-	-- upvalues: withAnalyticsModule (ref), withTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), partyPageCarouselExperimentation (ref), shouldUseFoundationConversationRow (ref), fFlagAppChatConsoleFocusFixesModule (ref), fFlagAppIaScrollAway (ref), fFlagAppChatUseUltimateListConversationListModule_1 (ref), fFlagAppChatUseViewRecyclerConversationListModule_1 (ref), conversationListModule (ref), var3 (write), var4 (write), var1 (write), var2 (write), roactModule (ref)
+	-- upvalues: withAnalyticsModule (ref), withTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), partyPageCarouselExperimentation (ref), shouldUseFoundationConversationRow (ref), fFlagAppIaScrollAway (ref), fFlagAppChatUseUltimateListConversationListModule_1 (ref), conversationListModule (ref), var1 (write), var2 (write), roactModule (ref)
 	return withAnalyticsModule(function(p2)
-		-- upvalues: withTelemetryModule (copy), chatLandingTelemetryLayerModule (copy), p1 (ref), partyPageCarouselExperimentation (copy), shouldUseFoundationConversationRow (copy), fFlagAppChatConsoleFocusFixesModule (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), fFlagAppChatUseViewRecyclerConversationListModule_1 (copy), conversationListModule (copy), var3 (copy), var4 (copy), var1 (copy), var2 (copy), roactModule (copy)
+		-- upvalues: withTelemetryModule (copy), chatLandingTelemetryLayerModule (copy), p1 (ref), partyPageCarouselExperimentation (copy), shouldUseFoundationConversationRow (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), conversationListModule (copy), var1 (copy), var2 (copy), roactModule (copy)
 		return withTelemetryModule(chatLandingTelemetryLayerModule.Context)(function(p3)
-			-- upvalues: p1 (copy), p2 (ref), partyPageCarouselExperimentation (copy), shouldUseFoundationConversationRow (copy), fFlagAppChatConsoleFocusFixesModule (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), fFlagAppChatUseViewRecyclerConversationListModule_1 (copy), conversationListModule (copy), var3 (copy), var4 (copy), var1 (copy), var2 (copy), roactModule (copy)
+			-- upvalues: p1 (copy), p2 (ref), partyPageCarouselExperimentation (copy), shouldUseFoundationConversationRow (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), conversationListModule (copy), var1 (copy), var2 (copy), roactModule (copy)
 			local t = {
 				Size = UDim2.fromScale(1, 1),
 				itemList = if p1.props.filterText and p1.props.filterText:match("%S") then p1.state.filteredItemList else p1.props.itemList,
@@ -216,10 +190,7 @@ function conversationListWithTopBar.render(p1)
 				shouldShowPartyUpsellFtux = p1.props.shouldShowPartyUpsellFtux,
 				dismissUnfilteredThreadsFtux = p1.props.dismissUnfilteredThreadsFtux,
 				showGroupsLink = p1.props.showGroupsLink,
-				listRef = if fFlagAppChatConsoleFocusFixesModule then p1.props.listRef else nil,
 				canvasTopPadding = if fFlagAppIaScrollAway then p1.props.canvasTopPadding else nil,
-				canvasBottomPadding = if fFlagAppChatConsoleFocusFixesModule and not p1.props.isInExperience then p1.props.deviceSafePadding.bottom else nil,
-				scrollEnabled = if fFlagAppChatConsoleFocusFixesModule then p1.props.scrollEnabled else nil,
 				fireConversationImpressionEvent = p1.fireConversationImpressionEvent(p3),
 				isPartyQuickStartEnabled = p1.props.isPartyQuickStartEnabled,
 				fireConversationClickedEvent = p1.fireClickEvent
@@ -228,36 +199,17 @@ function conversationListWithTopBar.render(p1)
 			if shouldUseFoundationConversationRow then
 				t.canAccessParty = p1.props.canAccessParty
 			end
-			if fFlagAppChatUseUltimateListConversationListModule_1 or fFlagAppChatUseViewRecyclerConversationListModule_1 then
+			if fFlagAppChatUseUltimateListConversationListModule_1 then
 				t.isLoadingNext = p1.props.conversationsIsFetching
 				t.isLoadingPrevious = p1.props.conversationsIsFetching
 				t.oldestConversationIsFetched = p1.props.oldestConversationIsFetched
 			end
-			local var5 = conversationListModule
+			local var3 = conversationListModule
 			
-			if fFlagAppChatUseViewRecyclerConversationListModule_1 then
-				local var6
-				if var3 then
-					var6 = var4
-				else
-					var3 = true
-					local ok, status = pcall(function()
-						return require(script.Parent.ConversationListViewRecycler)
-					end)
-					
-					if ok then
-						var4 = status
-					end
-					var6 = var4
-				end
-				if not var6 then
-					var6 = conversationListModule
-				end
-				var5 = var6
-			elseif fFlagAppChatUseUltimateListConversationListModule_1 then
-				local var7
+			if fFlagAppChatUseUltimateListConversationListModule_1 then
+				local var4
 				if var1 then
-					var7 = var2
+					var4 = var2
 				else
 					var1 = true
 					local ok, status = pcall(function()
@@ -267,17 +219,14 @@ function conversationListWithTopBar.render(p1)
 					if ok then
 						var2 = status
 					end
-					var7 = var2
+					var4 = var2
 				end
-				if not var7 then
-					var7 = conversationListModule
+				if not var4 then
+					var4 = conversationListModule
 				end
-				var5 = var7
+				var3 = var4
 			end
-			return roactModule.createElement("Frame", {
-				BackgroundTransparency = 1,
-				Size = if fFlagAppChatConsoleFocusFixesModule and not p1.props.isInExperience then UDim2.new(1, 0, 1, p1.props.deviceSafePadding.bottom) else UDim2.new(1, 0, 1, 0)
-			}, { conversationList = roactModule.createElement(var5, t) })
+			return roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, { conversationList = roactModule.createElement(var3, t) })
 		end)
 	end)
 end
@@ -297,21 +246,4 @@ function conversationListWithTopBar.willUnmount(p1)
 	p1.isMounted = false
 end
 
-return if fFlagAppChatConsoleFocusFixesModule then function(p1)
-	-- upvalues: useSignalState (ref), displayModule (ref), reactModule (ref), responsiveModule (ref), useAnimateScrollViewToSelection (ref), conversationListWithTopBar (ref)
-	local var5 = useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding)
-	local var6, var7 = reactModule.useState(nil)
-	local var8 = reactModule.useRef(nil)
-	local var9 = responsiveModule.useLastInput() == responsiveModule.Input.Directional
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var8 (ref), var7 (ref)
-		var7(var8.current and (var8.current._listRef._scrollRef.getNativeScrollRef() and var8.current._listRef._scrollRef.getNativeScrollRef()._nativeRef))
-	end)
-	useAnimateScrollViewToSelection(var6, 0.2)
-	local cloned = table.clone(p1)
-	cloned.deviceSafePadding = var5
-	cloned.listRef = var8
-	cloned.scrollEnabled = if var9 then if var6 ~= nil then var6.current == nil else true else not var9
-	
-	return reactModule.createElement(conversationListWithTopBar, cloned)
-end else conversationListWithTopBar
+return conversationListWithTopBar

@@ -61,6 +61,7 @@ local checkLeaveGameUpsellCooldown = game:DefineFastInt("CheckLeaveGameUpsellCoo
 local getServerChannelRetries = game:DefineFastInt("GetServerChannelRetries", 10)
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local flagsModule = require(script.Parent.Flags)
+local fFlagIEMFocusNavPeoplePageToButtons = sharedFlagsModule.FFlagIEMFocusNavPeoplePageToButtons
 local t = {
 	EngineFeatureRbxAnalyticsServiceExposePlaySessionId = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId"),
 	EngineFeatureTeleportHistoryButtons = game:GetEngineFeature("TeleportHistoryButtons"),
@@ -69,7 +70,6 @@ local t = {
 	FFlagPreventHiddenSwitchPage = game:DefineFastFlag("PreventHiddenSwitchPage", false),
 	FFlagLuaEnableGameInviteModalSettingsHub = game:DefineFastFlag("LuaEnableGameInviteModalSettingsHub", false),
 	FFlagFixDisableTopPaddingError = game:DefineFastFlag("FixDisableTopPaddingError", false),
-	FFlagWaitPlayerModuleStatus = game:DefineFastFlag("WaitPlayerModuleStatus", false),
 	GetFFlagLuaInExperienceCoreScriptsGameInviteUnification = require(robloxGui.Modules.Flags.GetFFlagLuaInExperienceCoreScriptsGameInviteUnification),
 	FFlagEnableInGameMenuDurationLogger = require(robloxGui.Modules.Common.Flags.GetFFlagEnableInGameMenuDurationLogger)(),
 	isNewInGameMenuEnabled = require(robloxGui.Modules.isNewInGameMenuEnabled),
@@ -113,11 +113,13 @@ local t = {
 	FFlagEnableSystemScrimInSettingsHub = game:DefineFastFlag("EnableSystemScrimInSettingsHub", false),
 	FFlagHelpPageIXPExposure = helpPageModule.Flags.FFlagHelpPageIXPExposure,
 	FStringHelpPageIXPLayer = helpPageModule.Flags.FStringHelpPageIXPLayer,
+	FFlagAddAbilityToDisableIGMScroll = sharedFlagsModule.FFlagAddAbilityToDisableIGMScroll,
 	FFlagFixDisabledScrollOnIos = game:DefineFastFlag("FixDisabledScrollOnIos", false),
 	FFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet,
 	FFlagSideSheetAndroidBack = game:DefineFastFlag("SideSheetAndroidBack", false),
 	FFlagAddInviteFriendsIntegration = sharedFlagsModule.FFlagAddInviteFriendsIntegration,
 	FFlagIntegrateTraversalHistoryInSideSheet = sharedFlagsModule.FFlagIntegrateTraversalHistoryInSideSheet,
+	FFlagImprovePageTitleCloseButton = game:DefineFastFlag("ImprovePageTitleCloseButton", false),
 	FFlagIGMSelectionGroup = game:DefineFastFlag("IGMSelectionGroup", false),
 	FFlagRemoveExitModal = require(robloxGui.Modules.Settings.Flags.FFlagRemoveExitModal),
 	FFlagEnableExitModalExposure = game:DefineFastFlag("EnableExitModalExposure", false)
@@ -292,7 +294,7 @@ local function createReactPage(p2)
 end
 
 local function CreateSettingsHub()
-	-- upvalues: t (ref), robloxGui (ref), var15 (ref), utilityModule (ref), var16 (ref), createSignal (ref), constantsModule_1 (ref), stores (ref), rbxAnalyticsService (ref), reactPageAnalyticsModule (ref), createReactPage (ref), themeModule (ref), contextActionService (ref), localizationService (ref), localization (ref), var2 (ref), create (ref), var8 (ref), userInputService (ref), platform (ref), default (ref), getCamMicPermissionsModule (ref), otterModule (ref), robloxTranslatorModule (ref), settingsHubRaceConditionFix (ref), starterGuiService (ref), inExperienceSideSheetModule (ref), telemetryService (ref), menuLeaveGameTelemetryConfigModule (ref), menuResetCharacterTelemetryConfigModule (ref), constantsModule (ref), menuResumeTelemetryConfigModule (ref), reactRobloxModule (ref), reactModule (ref), menuButtonsContainerModule (ref), flagsModule (ref), guiService (ref), uDim2_1 (ref), uDim2 (ref), SHIELD_INACTIVE_POSITION (ref), SETTINGS_SHIELD_TRANSPARENCY (ref), SETTINGS_SHIELD (ref), var3 (ref), fFlagLocalizeVersionLabels (ref), GetServerChannelBlocking (ref), var12 (write), var6 (write), runService (ref), httpRbxApiService (ref), httpService (ref), cachedPolicyServiceModule (ref), baseUrl (ref), var9 (ref), starterPlayerService (ref), playersService (ref), roactModule (ref), roactAppExperimentModule (ref), IXPService (ref), appStyleProvider (ref), dark (ref), menuBackButtonModule (ref), menuFrontButtonModule (ref), appFonts (ref), t_1 (ref), corePackagesService (ref), inExperienceAppChatModalModule (ref), inExperienceCapabilities (ref), foundationProvider (ref), foundationModule (ref), utilsModule (ref), switchTabHint (ref), isSubjectToDesktopPolicies (ref), settingsFullScreenTitleBarModule (ref), VRService (ref), gameSettings (ref), devConsoleMasterModule (ref), fixReportButtonCutOff (ref), cryoModule (ref), IXPServiceWrapper (ref), experienceMenuSessionManagerInstance (ref), reactPageSignalModule (ref), mouseIconOverrideService (ref), settingsHubCursorOverride (ref), checkLeaveGameUpsellCooldown (ref), tweenService (ref), perfUtilsModule (ref), var10 (write), chatSelectorModule (ref), fFlagEnableNewBackpack (ref), var1 (ref), var11 (write), gameInviteInviteExperimentVariant (write), var5 (write), var4 (write), gameInviteModalManager (write), gameInviteConstants (write), GetCorePackagesLoaded (ref), gameInviteAnalytics (ref), capturesPolicy (ref), isSpatial (ref), capturesAppModule (ref), getSideSheetVisibility (ref), toggleSideSheet (ref), leaveGameModule (ref), signalsModule (ref), portalWithFoundationStylelinkModule (ref), traversalHistoryMenu (ref), inExperienceMenuReactModule (ref), inExperienceMenuReactPageModule (ref)
+	-- upvalues: t (ref), robloxGui (ref), var15 (ref), utilityModule (ref), var16 (ref), createSignal (ref), constantsModule_1 (ref), stores (ref), rbxAnalyticsService (ref), reactPageAnalyticsModule (ref), createReactPage (ref), themeModule (ref), contextActionService (ref), localizationService (ref), localization (ref), var2 (ref), create (ref), var8 (ref), userInputService (ref), platform (ref), default (ref), getCamMicPermissionsModule (ref), otterModule (ref), robloxTranslatorModule (ref), settingsHubRaceConditionFix (ref), starterGuiService (ref), inExperienceSideSheetModule (ref), telemetryService (ref), menuLeaveGameTelemetryConfigModule (ref), menuResetCharacterTelemetryConfigModule (ref), constantsModule (ref), menuResumeTelemetryConfigModule (ref), reactRobloxModule (ref), reactModule (ref), menuButtonsContainerModule (ref), flagsModule (ref), guiService (ref), uDim2_1 (ref), uDim2 (ref), SHIELD_INACTIVE_POSITION (ref), SETTINGS_SHIELD_TRANSPARENCY (ref), SETTINGS_SHIELD (ref), var3 (ref), fFlagLocalizeVersionLabels (ref), GetServerChannelBlocking (ref), var12 (write), var6 (write), runService (ref), httpRbxApiService (ref), httpService (ref), cachedPolicyServiceModule (ref), baseUrl (ref), var9 (ref), starterPlayerService (ref), playersService (ref), fFlagIEMFocusNavPeoplePageToButtons (ref), roactModule (ref), roactAppExperimentModule (ref), IXPService (ref), appStyleProvider (ref), dark (ref), menuBackButtonModule (ref), menuFrontButtonModule (ref), appFonts (ref), t_1 (ref), corePackagesService (ref), inExperienceAppChatModalModule (ref), inExperienceCapabilities (ref), foundationProvider (ref), foundationModule (ref), utilsModule (ref), switchTabHint (ref), isSubjectToDesktopPolicies (ref), settingsFullScreenTitleBarModule (ref), VRService (ref), gameSettings (ref), devConsoleMasterModule (ref), fixReportButtonCutOff (ref), cryoModule (ref), IXPServiceWrapper (ref), experienceMenuSessionManagerInstance (ref), reactPageSignalModule (ref), mouseIconOverrideService (ref), settingsHubCursorOverride (ref), checkLeaveGameUpsellCooldown (ref), tweenService (ref), perfUtilsModule (ref), var10 (write), chatSelectorModule (ref), fFlagEnableNewBackpack (ref), var1 (ref), var11 (write), gameInviteInviteExperimentVariant (write), var5 (write), var4 (write), gameInviteModalManager (write), gameInviteConstants (write), GetCorePackagesLoaded (ref), gameInviteAnalytics (ref), capturesPolicy (ref), isSpatial (ref), capturesAppModule (ref), getSideSheetVisibility (ref), toggleSideSheet (ref), leaveGameModule (ref), signalsModule (ref), portalWithFoundationStylelinkModule (ref), traversalHistoryMenu (ref), inExperienceMenuReactModule (ref), inExperienceMenuReactPageModule (ref)
 	local t_2 = {
 		Visible = false,
 		Active = true,
@@ -974,7 +976,7 @@ local function CreateSettingsHub()
 	end else nil
 	
 	local function createGui()
-		-- upvalues: utilityModule (copy), t_2 (ref), create (copy), uDim2_1 (copy), uDim2 (copy), robloxGui (copy), SHIELD_INACTIVE_POSITION (copy), SETTINGS_SHIELD_TRANSPARENCY (copy), SETTINGS_SHIELD (copy), var3 (copy), t (copy), themeModule (copy), var2 (copy), fFlagLocalizeVersionLabels (copy), robloxTranslatorModule (copy), GetServerChannelBlocking (copy), var12 (copy), var6 (copy), runService (copy), httpRbxApiService (copy), httpService (copy), cachedPolicyServiceModule (copy), baseUrl (copy), var9 (copy), starterPlayerService (copy), playersService (copy), rbxAnalyticsService (copy), constantsModule (copy), guiService (copy), getCamMicPermissionsModule (copy), default (copy), roactModule (copy), roactAppExperimentModule (copy), IXPService (copy), appStyleProvider (copy), dark (copy), menuBackButtonModule (copy), menuFrontButtonModule (copy), appFonts (copy), otterModule (copy), t_1 (copy), userInputService (copy), setVisibilityInternal (write), var34 (ref), corePackagesService (copy), inExperienceAppChatModalModule (copy), removeBottomBarBindings (ref), constantsModule_1 (copy), inExperienceCapabilities (copy), addBottomBarButtonOld (ref), text_1 (write), var28 (write), var24 (ref), text_2 (write), buttonStartImageForKeyCode (ref), text (write), reactRobloxModule (copy), reactModule (copy), foundationProvider (copy), foundationModule (copy), utilsModule (copy), switchTabHint (copy), isSubjectToDesktopPolicies (copy), settingsFullScreenTitleBarModule (copy)
+		-- upvalues: utilityModule (copy), t_2 (ref), create (copy), uDim2_1 (copy), uDim2 (copy), robloxGui (copy), SHIELD_INACTIVE_POSITION (copy), SETTINGS_SHIELD_TRANSPARENCY (copy), SETTINGS_SHIELD (copy), var3 (copy), t (copy), themeModule (copy), var2 (copy), fFlagLocalizeVersionLabels (copy), robloxTranslatorModule (copy), GetServerChannelBlocking (copy), var12 (copy), var6 (copy), runService (copy), httpRbxApiService (copy), httpService (copy), cachedPolicyServiceModule (copy), baseUrl (copy), var9 (copy), starterPlayerService (copy), playersService (copy), rbxAnalyticsService (copy), constantsModule (copy), fFlagIEMFocusNavPeoplePageToButtons (copy), guiService (copy), getCamMicPermissionsModule (copy), default (copy), roactModule (copy), roactAppExperimentModule (copy), IXPService (copy), appStyleProvider (copy), dark (copy), menuBackButtonModule (copy), menuFrontButtonModule (copy), appFonts (copy), otterModule (copy), t_1 (copy), userInputService (copy), setVisibilityInternal (write), var34 (ref), corePackagesService (copy), inExperienceAppChatModalModule (copy), removeBottomBarBindings (ref), constantsModule_1 (copy), inExperienceCapabilities (copy), addBottomBarButtonOld (ref), text_1 (write), var28 (write), var24 (ref), text_2 (write), buttonStartImageForKeyCode (ref), text (write), reactRobloxModule (copy), reactModule (copy), foundationProvider (copy), foundationModule (copy), utilsModule (copy), switchTabHint (copy), isSubjectToDesktopPolicies (copy), settingsFullScreenTitleBarModule (copy)
 		local var36 = if utilityModule:IsSmallTouchScreen() then 5 else 0
 		t_2.ClippingShield = create("Frame")({
 			Name = "SettingsClippingShield",
@@ -1340,14 +1342,11 @@ local function CreateSettingsHub()
 			TextYAlignment = Enum.TextYAlignment.Center
 		})
 		spawn(function()
-			-- upvalues: robloxGui (copy), playersService (copy), t (copy), starterPlayerService (copy), fFlagLocalizeVersionLabels (copy), robloxTranslatorModule (copy), getOverridesPlayerScripts (ref), rbxAnalyticsService (copy), constantsModule (copy), t_2 (copy), var9 (copy), coreScriptVersionEnabledEngineFeature (ref), var3 (copy)
+			-- upvalues: robloxGui (copy), playersService (copy), fFlagLocalizeVersionLabels (copy), robloxTranslatorModule (copy), getOverridesPlayerScripts (ref), t (copy), rbxAnalyticsService (copy), constantsModule (copy), t_2 (copy), var9 (copy), coreScriptVersionEnabledEngineFeature (ref), var3 (copy)
 			local playerPermissionsModule = require(robloxGui.Modules.PlayerPermissionsModule)
 			
 			if not playersService.LocalPlayer then
 				playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
-			end
-			if t.FFlagWaitPlayerModuleStatus and starterPlayerService.PlayerModuleStatus == 0 then
-				starterPlayerService:GetPropertyChangedSignal("PlayerModuleStatus"):Wait()
 			end
 			local var39 = "PlayerScripts: "
 			
@@ -1464,11 +1463,14 @@ local function CreateSettingsHub()
 			AutomaticSize = Enum.AutomaticSize.XY,
 			Parent = t_2.MenuContainer
 		})
-		t_2.Page.SelectionGroup = true
-		t_2.Page.SelectionBehaviorUp = Enum.SelectionBehavior.Stop
-		t_2.Page.SelectionBehaviorDown = Enum.SelectionBehavior.Stop
-		t_2.Page.SelectionBehaviorLeft = Enum.SelectionBehavior.Stop
-		t_2.Page.SelectionBehaviorRight = Enum.SelectionBehavior.Stop
+		
+		if fFlagIEMFocusNavPeoplePageToButtons then
+			t_2.Page.SelectionGroup = true
+			t_2.Page.SelectionBehaviorUp = Enum.SelectionBehavior.Stop
+			t_2.Page.SelectionBehaviorDown = Enum.SelectionBehavior.Stop
+			t_2.Page.SelectionBehaviorLeft = Enum.SelectionBehavior.Stop
+			t_2.Page.SelectionBehaviorRight = Enum.SelectionBehavior.Stop
+		end
 		local page = t_2.Page
 		t_2.MenuContainerPadding = create("UIPadding")({ Parent = page })
 		
@@ -1555,6 +1557,18 @@ local function CreateSettingsHub()
 				PaddingRight = UDim.new(0, 12),
 				Parent = t_2.PageTitleHeader
 			})
+			
+			if not t.FFlagImprovePageTitleCloseButton then
+				t_2.PageTitleCloseButton = create("ImageButton")({
+					Name = "PageTitleCloseButton",
+					BackgroundTransparency = 1,
+					Image = "rbxasset://textures/ui/InspectMenu/x.png",
+					Size = UDim2.new(0, 16, 0, 16),
+					AnchorPoint = Vector2.new(1, 0.5),
+					Position = UDim2.new(1, 0, 0.5, 0),
+					Parent = t_2.PageTitleHeader
+				})
+			end
 			t_2.PageTitleLabel = create("TextLabel")({
 				Name = "Title",
 				BackgroundTransparency = 1,
@@ -1814,18 +1828,25 @@ local function CreateSettingsHub()
 		end
 		
 		if t.FFlagEnableSideSheet then
-			t_2.PageTitleCloseButton = utilityModule:MakeStyledImageButton("PageTitleClose", "rbxasset://textures/ui/InspectMenu/x.png", UDim2.new(0, 40, 0, 40), UDim2.new(0, 16, 0, 16), function()
-				-- upvalues: var42 (ref), constantsModule (copy)
-				var42(constantsModule.AnalyticsResumeXButtonSource)
-			end, nil, t_2, "DefaultButton")
-			t_2.PageTitleCloseButton.AnchorPoint = Vector2.new(1, 0.5)
-			t_2.PageTitleCloseButton.Position = UDim2.new(1, 0, 0.5, 0)
-			local border = t_2.PageTitleCloseButton:FindFirstChild("Border")
-			
-			if border then
-				border.Parent = nil
+			if t.FFlagImprovePageTitleCloseButton then
+				t_2.PageTitleCloseButton = utilityModule:MakeStyledImageButton("PageTitleClose", "rbxasset://textures/ui/InspectMenu/x.png", UDim2.new(0, 40, 0, 40), UDim2.new(0, 16, 0, 16), function()
+					-- upvalues: var42 (ref), constantsModule (copy)
+					var42(constantsModule.AnalyticsResumeXButtonSource)
+				end, nil, t_2, "DefaultButton")
+				t_2.PageTitleCloseButton.AnchorPoint = Vector2.new(1, 0.5)
+				t_2.PageTitleCloseButton.Position = UDim2.new(1, 0, 0.5, 0)
+				local border = t_2.PageTitleCloseButton:FindFirstChild("Border")
+				
+				if border then
+					border.Parent = nil
+				end
+				t_2.PageTitleCloseButton.Parent = t_2.PageTitleHeader
+			else
+				t_2.PageTitleCloseButton.Activated:Connect(function()
+					-- upvalues: var42 (ref), constantsModule (copy)
+					var42(constantsModule.AnalyticsResumeXButtonSource)
+				end)
 			end
-			t_2.PageTitleCloseButton.Parent = t_2.PageTitleHeader
 		end
 		if not t.FFlagMenuButtonsMountWithIEM and t.FFlagRelocateMobileMenuButtons and (t.FIntRelocateMobileMenuButtonsVariant == 1 or t.FIntRelocateMobileMenuButtonsVariant == 3 or t.FIntRelocateMobileMenuButtonsVariant == 2 and not utilityModule:IsSmallTouchScreen()) then
 			var34()
@@ -2665,63 +2686,77 @@ local function CreateSettingsHub()
 				end
 			end
 		end
-		local var60 = p14.IsPageClipped == true
-		t_2.PageViewClipper.ClipsDescendants = var60
-		t_2.PageView.ClipsDescendants = var60
-		t_2.PageViewInnerFrame.ClipsDescendants = var60
+		local var60
+		local var61 = p14.IsPageClipped == true
+		t_2.PageViewClipper.ClipsDescendants = var61
+		t_2.PageView.ClipsDescendants = var61
+		t_2.PageViewInnerFrame.ClipsDescendants = var61
 		t_2.Pages.CurrentPage = p14
 		t_2.Pages.CurrentPage:Display(t_2.PageViewInnerFrame, p17)
 		t_2.Pages.CurrentPage.Active = true
 		t_2.CurrentPageSignal:fire(if t_2.Pages.CurrentPage then t_2.Pages.CurrentPage.Page.Name else nil)
 		
 		if t.FFlagEnableSideSheet then
-			local var61
 			local currentPage = t_2.Pages.CurrentPage
 			local currentPage_1 = currentPage or t_2.Pages.CurrentPage
 			
 			if t.FFlagEnableSideSheet then
-				var61 = currentPage_1.ShouldShowHubBar == true
-				var61 = nil
+				var60 = currentPage_1.ShouldShowHubBar == true
+				var60 = nil
 			else
-				var61 = currentPage_1.ShouldShowBottomBar == true
+				var60 = currentPage_1.ShouldShowBottomBar == true
 			end
-			if var61 and currentPage.TabHeader then
+			if var60 and currentPage.TabHeader then
 				t_2.PageTitleLabel.Text = currentPage.TabHeader.TabLabel.Title.Text
 			else
 				t_2.PageTitleLabel.Text = ""
 			end
 		end
-		local _ = nil
-		local _ = t_2.Pages.CurrentPage
-		
-		if u9626 ~= nil and u9626.ShouldDisableDefaultScroll == true then
-			t_2.PageView.ScrollBarThickness = 0
-			t_2.PageView.ScrollingEnabled = false
-			t_2.PageView.CanvasPosition = Vector2.new(0, 0)
-			t_2.PageView.CanvasSize = UDim2.new(1, 0, 1, 0)
+		if t.FFlagAddAbilityToDisableIGMScroll then
+			local _ = nil
+			local _ = t_2.Pages.CurrentPage
 			
-			if t.FFlagFixDisabledScrollOnIos then
-				var20 = t_2.PageView:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
-					-- upvalues: t_2 (copy)
-					if t_2.PageView.CanvasPosition.Magnitude > 0 then
-						t_2.PageView.CanvasPosition = Vector2.new(0, 0)
-					end
-				end)
+			if u9680 ~= nil and u9680.ShouldDisableDefaultScroll == true then
+				t_2.PageView.ScrollBarThickness = 0
+				t_2.PageView.ScrollingEnabled = false
+				t_2.PageView.CanvasPosition = Vector2.new(0, 0)
+				t_2.PageView.CanvasSize = UDim2.new(1, 0, 1, 0)
+				
+				if t.FFlagFixDisabledScrollOnIos then
+					var20 = t_2.PageView:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
+						-- upvalues: t_2 (copy)
+						if t_2.PageView.CanvasPosition.Magnitude > 0 then
+							t_2.PageView.CanvasPosition = Vector2.new(0, 0)
+						end
+					end)
+				end
+			else
+				t_2.PageView.ScrollBarThickness = themeModule.DefaultScrollBarThickness
+				t_2.PageView.ScrollingEnabled = true
+			end
+		end
+		if t.FFlagAddAbilityToDisableIGMScroll then
+			local _ = nil
+			local _ = t_2.Pages.CurrentPage
+			var60 = u9686
+			
+			if not (var60 ~= nil and var60.ShouldDisableDefaultScroll == true) then
+				t_2.PageView.CanvasSize = UDim2.new(0, 0, 0, t_2.Pages.CurrentPage:GetSize().Y)
 			end
 		else
-			t_2.PageView.ScrollBarThickness = themeModule.DefaultScrollBarThickness
-			t_2.PageView.ScrollingEnabled = true
 			t_2.PageView.CanvasSize = UDim2.new(0, 0, 0, t_2.Pages.CurrentPage:GetSize().Y)
 		end
 		var19 = t_2.Pages.CurrentPage.Page.Changed:connect(function(p19)
-			-- upvalues: t_2 (copy)
+			-- upvalues: t (copy), t_2 (copy)
 			if p19 == "AbsoluteSize" then
-				local _ = nil
-				local _ = t_2.Pages.CurrentPage
-				local var62 = u10136
-				
-				if not (var62 ~= nil and var62.ShouldDisableDefaultScroll == true) then
-					t_2.PageView.CanvasSize = UDim2.new(0, 0, 0, t_2.Pages.CurrentPage:GetSize().Y)
+				if t.FFlagAddAbilityToDisableIGMScroll then
+					local _ = nil
+					local _ = t_2.Pages.CurrentPage
+					local var62 = u10223
+					
+					if not (var62 ~= nil and var62.ShouldDisableDefaultScroll == true) then
+						t_2.PageView.CanvasSize = UDim2.new(0, 0, 0, t_2.Pages.CurrentPage:GetSize().Y)
+					end
 				end
 			end
 		end)

@@ -9,9 +9,9 @@
 	ViewportCoordinator = require(script.RobloxAdapter.ViewportCoordinator),
 	Internal = table.freeze({
 		CanvasItemPlacer = require(script.RobloxAdapter.CanvasItemPlacer),
-		HostPlacement = require(script.RobloxAdapter.HostPlacement),
-		ScrollingFrameVirtualizer = require(script.RobloxAdapter.ScrollingFrameVirtualizer),
-		ScrollingFrameSync = require(script.RobloxAdapter.ScrollingFrameSync)
+		CanvasItemViewRuntime = require(script.RobloxAdapter.CanvasItemViewRuntime),
+		ScrollListHostRuntime = require(script.RobloxAdapter.ScrollListHostRuntime),
+		ScrollHostCoordinator = require(script.RobloxAdapter.ScrollHostCoordinator)
 	}),
 	["jest.config"] = script["jest.config"]
 })

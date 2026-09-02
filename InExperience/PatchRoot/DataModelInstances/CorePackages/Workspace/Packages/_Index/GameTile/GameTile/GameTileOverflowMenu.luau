@@ -54,6 +54,7 @@ local useSignalState = require(parent.SignalsReact).useSignalState
 local var1 = if fFlagSignalsNavP3fGameDetails then require(parent.NavigationRodux).GetLegacyNavigationStore else nil
 local fFlagLuaAppMakeDisclaimerOptInForFeedbackForm = sharedFlagsModule.FFlagLuaAppMakeDisclaimerOptInForFeedbackForm
 local fFlagLuaAppNotInterestedFeedbackFormTelemetry = sharedFlagsModule.FFlagLuaAppNotInterestedFeedbackFormTelemetry
+local fFlagLuaAppFixExplicitFeedbackTelemetry = sharedFlagsModule.FFlagLuaAppFixExplicitFeedbackTelemetry
 local fFlagLuaAppEnableSponsoredReportAd = sharedFlagsModule.FFlagLuaAppEnableSponsoredReportAd
 local fFlagLuaAppContinueSortInstantPlay = sharedFlagsModule.FFlagLuaAppContinueSortInstantPlay
 local fFlagLuaAppFixExplicitFeedbackConsoleTelemetry = sharedFlagsModule.FFlagLuaAppFixExplicitFeedbackConsoleTelemetry
@@ -63,7 +64,7 @@ local fFlagLuaAppGameTileNotInterestedDirectAction = sharedFlagsModule.FFlagLuaA
 local fFlagLuaAppExtractNotInterestedHelper = sharedFlagsModule.FFlagLuaAppExtractNotInterestedHelper
 
 return reactModule.memo(function(p1)
-	-- upvalues: fFlagLuaAppGameTileNotInterestedDirectAction (ref), useTokens (ref), useLastInput (ref), getOverflowMenuSignalStore (ref), reactModule (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppFixExplicitFeedbackConsoleTelemetry (ref), useGameTileOverflowMenuFocusNavigationModule (ref), useGameTileActionsModule (ref), fFlagSignalsNavP3fGameDetails (ref), useSignalState (ref), var1 (ref), useSelector (ref), fFlagUseNavigationSelectors (ref), selectors (ref), userInputService (ref), overflowMenu (ref), responsiveModule (ref), iconSize (ref), useDispatch (ref), useRoactService (ref), roactNetworking (ref), useLocalization (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppContinueSortInstantPlay (ref), userSignalTypes (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), flaggedMutedError (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), postSendUserSignal (ref), httpService (ref), mutedError (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref), tileOverflowMenuItems (ref), fFlagLuaAppExtractNotInterestedHelper (ref), activateGameNotInterestedModule (ref), setCentralOverlay (ref), centralOverlayType (ref), iconName (ref)
+	-- upvalues: fFlagLuaAppGameTileNotInterestedDirectAction (ref), useTokens (ref), useLastInput (ref), getOverflowMenuSignalStore (ref), reactModule (ref), fFlagLuaAppFixExplicitFeedbackTelemetry (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppFixExplicitFeedbackConsoleTelemetry (ref), useGameTileOverflowMenuFocusNavigationModule (ref), useGameTileActionsModule (ref), fFlagSignalsNavP3fGameDetails (ref), useSignalState (ref), var1 (ref), useSelector (ref), fFlagUseNavigationSelectors (ref), selectors (ref), userInputService (ref), overflowMenu (ref), responsiveModule (ref), iconSize (ref), useDispatch (ref), useRoactService (ref), roactNetworking (ref), useLocalization (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppContinueSortInstantPlay (ref), userSignalTypes (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), flaggedMutedError (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), postSendUserSignal (ref), httpService (ref), mutedError (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref), tileOverflowMenuItems (ref), fFlagLuaAppExtractNotInterestedHelper (ref), activateGameNotInterestedModule (ref), setCentralOverlay (ref), centralOverlayType (ref), iconName (ref)
 	local var2
 	if fFlagLuaAppGameTileNotInterestedDirectAction then
 		local var3 = useTokens()
@@ -87,15 +88,16 @@ return reactModule.memo(function(p1)
 		end, { p1.onMenuOpenChanged, joined })
 		local var7 = if not fFlagLuaAppFixExplicitFeedbackConsoleTelemetry then useGameTileOverflowMenuFocusNavigationModule(menuKey, p1.isSelected, p1.parentRef) else nil
 		local var8 = useGameTileActionsModule(p1, reactModule.useCallback(function(p2)
-			-- upvalues: p1 (ref), collectionId (ref), joined (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), gameTileOverflowMenuAction (copy)
+			-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (copy), p1 (ref), collectionId (ref), joined (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), gameTileOverflowMenuAction (copy)
 			gameTileOverflowMenuAction({
 				actionType = "GameTileOverflowMenuItemActivated",
+				ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p1.appPage,
 				universeId = p1.universeId,
 				sortId = collectionId,
 				menuItem = p2,
 				availableMenuItems = joined,
 				contentType = if fFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
-			}, p1.appPage)
+			}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p1.appPage else nil)
 		end, {
 			p1.appPage,
 			p1.universeId,
@@ -199,7 +201,7 @@ return reactModule.memo(function(p1)
 			}
 		end, { var14 })
 		local var18 = reactModule.useCallback(function(p2, p3)
-			-- upvalues: var17 (ref), userSignalTypes (copy), fFlagLuaAppNotInterestedReportPlaceId (copy), p1 (ref), flaggedMutedError (copy), var10 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), closeCentralOverlay (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy), setNetworkingErrorToast (copy), postSendUserSignal (copy), var13 (ref), httpService (copy), collectionId (ref), mutedError (copy), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), sendNotInterestedFeedbackFormAnalyticsModule (copy)
+			-- upvalues: var17 (ref), userSignalTypes (copy), fFlagLuaAppNotInterestedReportPlaceId (copy), p1 (ref), flaggedMutedError (copy), var10 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), closeCentralOverlay (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy), setNetworkingErrorToast (copy), postSendUserSignal (copy), var13 (ref), httpService (copy), collectionId (ref), mutedError (copy), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), sendNotInterestedFeedbackFormAnalyticsModule (copy), fFlagLuaAppFixExplicitFeedbackTelemetry (copy)
 			local var19 = false
 			local t = {}
 			
@@ -260,9 +262,10 @@ return reactModule.memo(function(p1)
 			if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
 				sendNotInterestedFeedbackFormAnalyticsModule({
 					actionType = "NotInterestedFeedbackFormSubmitted",
+					ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p1.appPage,
 					universeId = p1.universeId,
 					sortId = collectionId
-				}, p1.appPage)
+				}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p1.appPage else nil)
 			end
 		end, {
 			var13, var17, var14, p1.universeId,
@@ -274,23 +277,25 @@ return reactModule.memo(function(p1)
 		
 		if fFlagLuaAppNotInterestedFeedbackFormTelemetry then
 			var2 = reactModule.useCallback(function(p4)
-				-- upvalues: sendNotInterestedFeedbackFormAnalyticsModule (copy), p1 (ref), collectionId (ref)
+				-- upvalues: sendNotInterestedFeedbackFormAnalyticsModule (copy), fFlagLuaAppFixExplicitFeedbackTelemetry (copy), p1 (ref), collectionId (ref)
 				if p4 then
 					return
 				end
 				sendNotInterestedFeedbackFormAnalyticsModule({
 					actionType = "NotInterestedFeedbackFormClosedWithoutSubmit",
+					ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p1.appPage,
 					universeId = p1.universeId,
 					sortId = collectionId
-				}, p1.appPage)
+				}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p1.appPage else nil)
 			end, { p1.appPage, p1.universeId, collectionId })
 			var20 = reactModule.useCallback(function()
-				-- upvalues: sendNotInterestedFeedbackFormAnalyticsModule (copy), p1 (ref), collectionId (ref)
+				-- upvalues: sendNotInterestedFeedbackFormAnalyticsModule (copy), fFlagLuaAppFixExplicitFeedbackTelemetry (copy), p1 (ref), collectionId (ref)
 				sendNotInterestedFeedbackFormAnalyticsModule({
 					actionType = "NotInterestedFeedbackFormOpened",
+					ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p1.appPage,
 					universeId = p1.universeId,
 					sortId = collectionId
-				}, p1.appPage)
+				}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p1.appPage else nil)
 			end, { p1.appPage, p1.universeId, collectionId })
 		end
 		local var21 = reactModule.useMemo(function()
@@ -318,15 +323,16 @@ return reactModule.memo(function(p1)
 			end
 		end, { p1.onMenuOpenChanged, joined })
 		local var23 = reactModule.useCallback(function(p4)
-			-- upvalues: p1 (ref), collectionId (ref), joined (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), gameTileOverflowMenuAction (copy)
+			-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (copy), p1 (ref), collectionId (ref), joined (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), gameTileOverflowMenuAction (copy)
 			gameTileOverflowMenuAction({
 				actionType = "GameTileOverflowMenuItemActivated",
+				ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p1.appPage,
 				universeId = p1.universeId,
 				sortId = collectionId,
 				menuItem = p4,
 				availableMenuItems = joined,
 				contentType = if fFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
-			}, p1.appPage)
+			}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p1.appPage else nil)
 		end, {
 			p1.appPage,
 			p1.universeId,

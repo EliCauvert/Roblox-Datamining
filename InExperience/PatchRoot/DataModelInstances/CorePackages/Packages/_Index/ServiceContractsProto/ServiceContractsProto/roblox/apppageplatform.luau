@@ -3,7 +3,6 @@
 return {
 	badges = require(script.badges.v1beta1),
 	charts = require(script.charts.v1beta1),
-	communityprofile = require(script.communityprofile.v1beta1),
 	devstore = require(script.devstore.v1beta1),
 	experiencedetails = require(script.experiencedetails.v1beta1),
 	experienceevents = require(script.experienceevents.v1beta1),

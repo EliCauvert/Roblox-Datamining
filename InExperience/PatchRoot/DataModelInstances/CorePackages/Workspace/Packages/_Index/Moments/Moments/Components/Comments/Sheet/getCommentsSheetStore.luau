@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("Moments").Parent.Signals).createComputed(require(script.Parent.createCommentsSheetStore))

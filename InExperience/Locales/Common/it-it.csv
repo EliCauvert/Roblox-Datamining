@@ -3621,6 +3621,7 @@ Feature.Profile.Action.AboutThisProfile,Informazioni su questo profilo
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Accetta amico/a
 Feature.Profile.Action.Add,
+Feature.Profile.Action.AddNickname,Aggiungi nome
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Copia il link del profilo
 Feature.Profile.Action.EditAppearance,Modifica aspetto
@@ -3633,13 +3634,17 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,Condividi profilo
 Feature.Profile.Action.ShareProfileLink,Condividi il link del profilo
+Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
 Feature.Profile.Action.UserBlocked,Utente bloccato
 Feature.Profile.Action.ViewFullProfile,Visualizza il profilo completo
 Feature.Profile.Action.ViewProfile,
 Feature.Profile.Description.AboutModalCaption,"Fai sapere agli altri di più su di te. Tieniti al sicuro, non condividere dati personali."
+Feature.Profile.Description.EnterNicknameTextbox,Inserisci il tuo soprannome
 Feature.Profile.Description.InspectAndBuy,Clicca per vedere e acquistare il loro look.
+Feature.Profile.Description.NicknamePrivacy,Solo {displayName} vedrà questo.
+Feature.Profile.Description.NicknamePrivacyNoDisplayName,Solo questo utente lo vedrà.
 Feature.Profile.Description.QrCodeDescription,Consenti ad altri di scansionare il tuo codice QR per connettersi su Roblox. Gli utenti di età superiore ai 13 anni che si connettono tramite scansione QR in tempo reale saranno considerati amici affidabili.
 Feature.Profile.Description.QrCodeDescription.FriendsRename,
 Feature.Profile.Description.QrCodeScanning,Lascia che gli altri scansionino il tuo codice QR Roblox con la loro fotocamera del dispositivo per aggiungerti rapidamente come amico!
@@ -3647,8 +3652,11 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,Riconoscere più fa
 Feature.Profile.Description.RecognizeFriendsByCustomName,
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,Permetti alle persone che conosci di scansionare il tuo codice QR per aggiungerti.
+Feature.Profile.Description.SelectNicknameDropdown,Seleziona un nome
 Feature.Profile.Description.SetCustomName,"Imposta un nome personalizzato per <font weight=""medium"">{displayName}</font>."
 Feature.Profile.Description.SetCustomNameNoDisplayName,Imposta un nome personalizzato.
+Feature.Profile.Description.SetNicknamePrompt,Aggiungi un nome per {displayName} per riconoscerti.
+Feature.Profile.Description.SetNicknamePromptNoDisplayName,Aggiungi un nome per questo utente per farti riconoscere.
 Feature.Profile.Description.SocialNetworksCaptionEveryone,Attualmente visibile a tutti.
 Feature.Profile.Description.SocialNetworksCaptionFollowers,"Attualmente visibile agli amici, agli utenti che segui e ai tuoi follower."
 Feature.Profile.Description.SocialNetworksCaptionFollowing,Attualmente visibile agli amici e agli utenti che segui.
@@ -3669,6 +3677,7 @@ Feature.Profile.Heading.DisplayNameUpdated,Nome visualizzato aggiornato
 Feature.Profile.Heading.EditAgedUpDisplayName,Modifica nome
 Feature.Profile.Heading.EditDisplayName,Modifica Nome visualizzato
 Feature.Profile.Heading.InsufficientFunds,Fondi Insufficienti
+Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileFrame,Cornice del profilo
 Feature.Profile.Heading.ProfilePictureSaved,Immagine del profilo salvata correttamente
 Feature.Profile.Heading.ProfileQRCode,
@@ -3688,6 +3697,7 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"Il tuo nome visualizzato pu
 Feature.Profile.Label.AgedUpDisplayNameTooShort,Il nome visualizzato deve essere di almeno 3 caratteri.
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,Nome personalizzato
+Feature.Profile.Label.CustomNicknameDropdown,Imposta un nome personalizzato
 Feature.Profile.Label.CustomizeName,Personalizza nome
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,Questo è il nome pubblico principale che gli altri utenti vedranno per te su Roblox.
@@ -3695,6 +3705,12 @@ Feature.Profile.Label.DisplayNameFailed,Il nome visualizzato non può essere sal
 Feature.Profile.Label.DisplayNameModalCaption,Il tuo nome visualizzato può essere cambiato solo una volta ogni 7 giorni.
 Feature.Profile.Label.DisplayNameTooShort,
 Feature.Profile.Label.EditBackground,
+Feature.Profile.Label.NicknameErrorMessageInvalid,Il nome non è valido.
+Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,Il nome contiene caratteri non supportati.
+Feature.Profile.Label.NicknameErrorMessageModerated,Nome inappropriato per Roblox.
+Feature.Profile.Label.NicknameErrorMessageThrottled,Il tuo nome è già stato cambiato oggi.
+Feature.Profile.Label.NicknameErrorMessageTooLong,Il nome deve contenere almeno 20 caratteri.
+Feature.Profile.Label.NicknameErrorMessageTooShort,Il nome deve contenere almeno 2 caratteri.
 Feature.Profile.Label.NoBioYet,Ancora nessuna biografia
 Feature.Profile.Label.NoPreviousName,Nessun nome precedente
 Feature.Profile.Label.NoSocialLink,Ancora nessun collegamento social
@@ -3704,6 +3720,7 @@ Feature.Profile.Label.QRCodeFriendRequest,Inviato dal tuo codice QR
 Feature.Profile.Label.RecentAgedUpDisplayName,"Il tuo nome visualizzato è stato cambiato troppo di recente. Il tuo nome visualizzato può essere cambiato solo una volta ogni 7 giorni.
 "
 Feature.Profile.Label.RecentDisplayName,Il tuo nome visualizzato è stato cambiato troppo di recente. Il tuo nome visualizzato può essere cambiato solo una volta ogni 7 giorni.
+Feature.Profile.Label.TimeToChangeNickname,Puoi cambiare il tuo nome in {hours} ore.
 Feature.Profile.Label.UnableToJoin,Impossibile connettersi
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b> sta giocando all'esperienza <b>{experienceName}</b>
 Feature.Profile.Label.UsernameDescription,Questo è il tuo nome unico su Roblox. Cambiare il tuo nome utente ti costerà {icon}{price}.
@@ -4844,7 +4861,6 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,Aiuta a migliorare questa esperienza
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,Aiuta il creatore a migliorare questa esperienza
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,Impossibile completare l'acquisto
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,Unisciti all'esperienza per riscattare i tuoi acquisti precedenti prima di acquistare altri prodotti.
-Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,Unisciti per riscattare il tuo acquisto
 Roblox.ReferralRewards.AdditionalCreatorTerms,Termini aggiuntivi di servizio dei creatori
 Roblox.ReferralRewards.Expires,Scade
 Roblox.ReferralRewards.ReferralProgramTerms,Condizioni del programma di invito

@@ -1,6 +1,5 @@
 ﻿return {
 	AccountLinkingAlertType = require(script.AccountLinkingAlertType),
-	Alignment = require(script.Alignment),
 	AuthLocalStorageKeys = require(script.AuthLocalStorageKeys),
 	AppLoginCounterNames = require(script.AppLoginCounterNames),
 	AuthMemStorageKeys = require(script.AuthMemStorageKeys),

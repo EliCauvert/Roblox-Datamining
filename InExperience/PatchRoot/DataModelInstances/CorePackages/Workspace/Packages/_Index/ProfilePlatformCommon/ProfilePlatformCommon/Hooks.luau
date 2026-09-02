@@ -1,4 +1,3 @@
 ﻿return {
-	useProfileCardWidth = require(script.useProfileCardWidth),
-	useProfileDockedPanelWidth = require(script.useProfileDockedPanelWidth)
+	useProfileCardWidth = require(script.useProfileCardWidth)
 }

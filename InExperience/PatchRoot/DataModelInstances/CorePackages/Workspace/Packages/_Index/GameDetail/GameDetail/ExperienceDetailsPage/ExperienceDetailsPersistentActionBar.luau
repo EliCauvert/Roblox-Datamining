@@ -19,6 +19,7 @@ local roactServiceTagsModule = require(parent.RoactServiceTags)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox = sharedFlagsModule.FFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox
 local fFlagLuaAppLaunchWhenLoadingEdp = sharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
+local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp = sharedFlagsModule.FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp
 
 local function PersistentActionBarContextualMessage(p1)
 	-- upvalues: useRoactService (ref), roactServiceTagsModule (ref), useTokens (ref), reactModule (ref), usePlayButtonState (ref), usePlayButtonContextualMessage (ref), view (ref), text (ref), playButtonContextualMessageImpressionsDetector (ref), appPage (ref)
@@ -51,7 +52,7 @@ local function PersistentActionBarContextualMessage(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), view (ref), sduiFeatureEntryPoint (ref), appPage (ref), experienceDetailsPageConstantsModule (ref), experienceDetailsFallbackActionBarModule (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), PersistentActionBarContextualMessage (ref)
+	-- upvalues: reactModule (ref), view (ref), sduiFeatureEntryPoint (ref), appPage (ref), experienceDetailsPageConstantsModule (ref), experienceDetailsFallbackActionBarModule (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref), PersistentActionBarContextualMessage (ref)
 	return reactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
@@ -91,7 +92,6 @@ return reactModule.memo(function(p1)
 				}),
 				PersistentPlayButton = reactModule.createElement(view, { tag = "grow auto-y", LayoutOrder = 2 }, {
 					PlayBtn = reactModule.createElement(playButton, {
-						launchOnReleaseAfterUnmount = true,
 						testId = "--edp-persistent-play-button",
 						universeId = p1.universeId,
 						referralSource = p1.referralSource,
@@ -101,7 +101,8 @@ return reactModule.memo(function(p1)
 						placeId = p1.placeIdOverride,
 						buttonSize = buttonSize.Large,
 						fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-						launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil
+						launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil,
+						launchOnReleaseAfterUnmount = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp then true else nil
 					})
 				})
 			}),

@@ -15,6 +15,7 @@ local useImageLoadFadeModule = require(script.Parent.Parent.useImageLoadFade)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox = sharedFlagsModule.FFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox
 local fFlagLuaAppLaunchWhenLoadingEdp = sharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
+local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp = sharedFlagsModule.FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp
 local fFlagLuaAppSduiEdpFallbackAttributionFromCache = sharedFlagsModule.FFlagLuaAppSduiEdpFallbackAttributionFromCache
 local fFlagSduiScalePlayButtonAndImageSizes = sharedFlagsModule.FFlagSduiScalePlayButtonAndImageSizes
 
@@ -40,7 +41,7 @@ local function VerifiedBadgeIcon()
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), fFlagSduiScalePlayButtonAndImageSizes (ref), useImageLoadFadeModule (ref), reactModule (ref), view (ref), image (ref), skeleton (ref), text (ref), radius (ref), VerifiedBadgeIcon (ref), fFlagLuaAppSduiEdpFallbackAttributionFromCache (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), edpFallbackActionBarPlayButtonWidth (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref)
+	-- upvalues: useTokens (ref), fFlagSduiScalePlayButtonAndImageSizes (ref), useImageLoadFadeModule (ref), reactModule (ref), view (ref), image (ref), skeleton (ref), text (ref), radius (ref), VerifiedBadgeIcon (ref), fFlagLuaAppSduiEdpFallbackAttributionFromCache (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), edpFallbackActionBarPlayButtonWidth (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref)
 	local var1 = useTokens()
 	local isSmallScreen = p1.isSmallScreen
 	local var2 = p1.isLoading == true
@@ -166,7 +167,6 @@ return reactModule.memo(function(p1)
 				LayoutOrder = 4
 			}, {
 				PlayBtn = reactModule.createElement(playButton, {
-					launchOnReleaseAfterUnmount = true,
 					expandWidthForSecondaryPlayButton = true,
 					LayoutOrder = 1,
 					testId = "--edp-fallback-feed-play-button",
@@ -178,7 +178,8 @@ return reactModule.memo(function(p1)
 					useUIBloxButton = fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox,
 					buttonSize = buttonSize.Large,
 					width = UDim.new(0, if fFlagSduiScalePlayButtonAndImageSizes then edpFallbackActionBarPlayButtonWidth * var1.Config.UI.Scale else edpFallbackActionBarPlayButtonWidth),
-					launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil
+					launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil,
+					launchOnReleaseAfterUnmount = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp then true else nil
 				}),
 				OverflowSkeleton1 = if var2 then reactModule.createElement(skeleton, {
 					LayoutOrder = 2,

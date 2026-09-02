@@ -34,17 +34,16 @@ local fFlagEnablePartyVoiceChangersInLua = sharedFlagsModule.FFlagEnablePartyVoi
 local fFlagAppChatEnableDoubleOptIn = require(parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
 local fFlagAppChatConsolidateTrustedFriendsModalModule = require(appChat.Flags.FFlagAppChatConsolidateTrustedFriendsModal)
 local chatLandingStackNavigatorModule = require(script.Parent.chatLandingStackNavigator)
-local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
 local chatLandingStackNavigatorConnector = roactModule.Component:extend("ChatLandingStackNavigatorConnector")
 chatLandingStackNavigatorConnector.router = chatLandingStackNavigatorModule.router
 
 function chatLandingStackNavigatorConnector.render(p1)
-	-- upvalues: roactModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), chatLandingStackNavigatorModule (ref)
+	-- upvalues: roactModule (ref), chatLandingStackNavigatorModule (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		Size = UDim2.new(1, 0, 1, 0),
-		ClipsDescendants = if fFlagAppChatConsoleFocusFixesModule then nil else true
+		ClipsDescendants = true,
+		Size = UDim2.new(1, 0, 1, 0)
 	}, {
 		ChatLandingStackNavigator = roactModule.createElement(chatLandingStackNavigatorModule, p1.props)
 	})

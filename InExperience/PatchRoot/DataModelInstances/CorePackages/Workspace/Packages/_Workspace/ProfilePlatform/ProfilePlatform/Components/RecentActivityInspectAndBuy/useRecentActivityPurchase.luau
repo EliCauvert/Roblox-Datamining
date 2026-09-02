@@ -6,17 +6,14 @@ local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local getIsInsufficientRobuxError = require(parent.AvatarExperienceCommon).Utils.getIsInsufficientRobuxError
 local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
-local marketplaceUnifiedAction = require(parent.AvatarExperienceAnalytics).UnifiedEventLogEnums.MarketplaceUnifiedAction
 local _ = require(profilePlatform.Common.Types)
 local purchaseBulkItemsModule = require(profilePlatform.Networking.PurchaseBulkItems)
 local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
 local handlePurchaseItemsSuccessModule = require(profilePlatform.Components.InspectAvatar.HandlePurchaseItemsSuccess)
-local sendProfilePurchaseEventsModule = require(profilePlatform.Analytics.sendProfilePurchaseEvents)
-local fFlagProfileUnifiedPurchaseLoggingModule = require(profilePlatform.Flags.FFlagProfileUnifiedPurchaseLogging)
 local useRecentActivityPurchaseSelectionModule = require(script.Parent.useRecentActivityPurchaseSelection)
 
 return function(p1)
-	-- upvalues: useDispatch (ref), robloxAppHooksModule (ref), useProfileWrapperContextModule (ref), useRecentActivityPurchaseSelectionModule (ref), reactModule (ref), useLocalization (ref), fFlagProfileUnifiedPurchaseLoggingModule (ref), sendProfilePurchaseEventsModule (ref), marketplaceUnifiedAction (ref), purchaseBulkItemsModule (ref), handlePurchaseItemsSuccessModule (ref), getIsInsufficientRobuxError (ref), setCurrentToastMessage (ref)
+	-- upvalues: useDispatch (ref), robloxAppHooksModule (ref), useProfileWrapperContextModule (ref), useRecentActivityPurchaseSelectionModule (ref), reactModule (ref), useLocalization (ref), purchaseBulkItemsModule (ref), handlePurchaseItemsSuccessModule (ref), getIsInsufficientRobuxError (ref), setCurrentToastMessage (ref)
 	local var1 = useDispatch()
 	local var2 = robloxAppHooksModule.useLocalRobuxBalance()
 	local var3 = useProfileWrapperContextModule()
@@ -73,18 +70,15 @@ return function(p1)
 			var10(true)
 		end, { purchaseData, localUserId, var2 }),
 		onConfirmPurchase = reactModule.useCallback(function()
-			-- upvalues: var5 (ref), purchaseData (ref), localUserId (ref), var6 (ref), fFlagProfileUnifiedPurchaseLoggingModule (copy), sendProfilePurchaseEventsModule (copy), marketplaceUnifiedAction (copy), var3 (ref), purchaseBulkItemsModule (copy), handlePurchaseItemsSuccessModule (copy), var1 (ref), var12 (ref), var8 (ref), p1 (ref), getIsInsufficientRobuxError (copy), var10 (ref), setCurrentToastMessage (copy), var11 (ref)
-			if var5 or #purchaseData.lineItems == 0 or not localUserId then return end
-			var6(true)
-			
-			if fFlagProfileUnifiedPurchaseLoggingModule then
-				sendProfilePurchaseEventsModule(marketplaceUnifiedAction.PURCHASE_ATTEMPT, purchaseData.purchasedItems or {}, var3.profileType)
+			-- upvalues: var5 (ref), purchaseData (ref), localUserId (ref), var6 (ref), purchaseBulkItemsModule (copy), handlePurchaseItemsSuccessModule (copy), var3 (ref), var1 (ref), var12 (ref), var8 (ref), p1 (ref), getIsInsufficientRobuxError (copy), var10 (ref), setCurrentToastMessage (copy), var11 (ref)
+			if var5 or #purchaseData.lineItems == 0 or not localUserId then
+				return
 			end
+			var6(true)
 			purchaseBulkItemsModule({ userId = localUserId, lineItems = purchaseData.lineItems }):andThen(function(p2)
-				-- upvalues: handlePurchaseItemsSuccessModule (copy), fFlagProfileUnifiedPurchaseLoggingModule (copy), purchaseData (copy), var3 (copy), var1 (copy), var12 (copy), var8 (copy), p1 (copy)
+				-- upvalues: handlePurchaseItemsSuccessModule (copy), var3 (copy), var1 (copy), var12 (copy), var8 (copy), p1 (copy)
 				handlePurchaseItemsSuccessModule({
 					result = p2,
-					purchasedItems = if fFlagProfileUnifiedPurchaseLoggingModule then purchaseData.purchasedItems else nil,
 					profileWrapperContext = var3,
 					dispatch = var1,
 					localized = var12

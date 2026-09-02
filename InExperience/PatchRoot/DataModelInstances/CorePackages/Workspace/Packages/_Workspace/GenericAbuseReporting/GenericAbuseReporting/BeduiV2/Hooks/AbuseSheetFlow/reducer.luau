@@ -3,15 +3,22 @@ local httpService = game:GetService("HttpService")
 local localPlayer = game:GetService("Players").LocalPlayer
 local dashModule = require(parent.Dash)
 local _ = require(script.Parent.AbuseSheetFlowTypes)
+local fFlagAbuseReportMenuV2 = require(parent.SharedFlags).FFlagAbuseReportMenuV2
 
 local function getInitialState(p1, p2, p3)
-	-- upvalues: localPlayer (ref)
+	-- upvalues: localPlayer (ref), fFlagAbuseReportMenuV2 (ref)
 	return {
 		navigationState = "idle",
 		submissionState = "idle",
 		runId = p1,
 		userId = if localPlayer then localPlayer.UserId else 0,
-		stack = { { nodeId = p3, store = {}, enterTime = p2 } },
+		stack = {
+			{
+				nodeId = if fFlagAbuseReportMenuV2 then p3 else "root",
+				store = {},
+				enterTime = p2
+			}
+		},
 		openTime = p2
 	}
 end
@@ -35,7 +42,7 @@ return {
 		return t
 	end,
 	reducer = function(p2, p3)
-		-- upvalues: dashModule (ref), getInitialState (ref)
+		-- upvalues: dashModule (ref), fFlagAbuseReportMenuV2 (ref), getInitialState (ref)
 		local var1 = nil
 		
 		if p3.type == "gotoNode" then
@@ -92,16 +99,19 @@ return {
 			if not var4 then
 				error("Stack is empty, cannot update data")
 			end
-			if p3.payload.expectedFromNodeId ~= var4.nodeId then
-				return p2
-			elseif p2.navigationState == "idle" then
-				local var5 = dashModule.slice(p2.stack, 1, #p2.stack - 1)
-				table.insert(var5, dashModule.join(var4, { store = dashModule.join(var4.store, p3.payload.store) }))
-				var1 = dashModule.join(p2, { navigationState = "gotoNext", stack = var5 })
-				
-				return var1
+			if fFlagAbuseReportMenuV2 then
+				if p3.payload.expectedFromNodeId and p3.payload.expectedFromNodeId ~= var4.nodeId then
+					return p2
+				elseif p2.navigationState == "idle" then
+					local var5 = dashModule.slice(p2.stack, 1, #p2.stack - 1)
+					table.insert(var5, dashModule.join(var4, { store = dashModule.join(var4.store, p3.payload.store) }))
+					var1 = dashModule.join(p2, { navigationState = "gotoNext", stack = var5 })
+					
+					return var1
+				else
+					return p2
+				end
 			end
-			return p2
 		elseif p3.type == "navigateFailure" then
 			local var6 = dashModule.last(p2.stack)
 			

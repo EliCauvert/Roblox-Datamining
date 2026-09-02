@@ -4,10 +4,9 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppSduiOpenSearchResultsWithQueryAction = sharedFlagsModule.FFlagLuaAppSduiOpenSearchResultsWithQueryAction
 local fFlagLuaAppSduiQuerySuggestionClickedTelemetry = sharedFlagsModule.FFlagLuaAppSduiQuerySuggestionClickedTelemetry
-local fFlagLuaAppSduiGameTileFeedback = sharedFlagsModule.FFlagLuaAppSduiGameTileFeedback
 
 return function()
-	-- upvalues: getSduiTelemetryHandlerNameRegistry (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagLuaAppSduiOpenSearchResultsWithQueryAction (ref), fFlagLuaAppSduiQuerySuggestionClickedTelemetry (ref)
+	-- upvalues: getSduiTelemetryHandlerNameRegistry (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppSduiOpenSearchResultsWithQueryAction (ref), fFlagLuaAppSduiQuerySuggestionClickedTelemetry (ref)
 	getSduiTelemetryHandlerNameRegistry().registerTelemetryHandlers({
 		LeavingRoblox = {
 			lazyHandler = function()
@@ -57,11 +56,6 @@ return function()
 		GameDetailsSubpage = if fFlagSduiExperienceDetailsSupport then {
 			lazyHandler = function()
 				return require(script.Parent.SduiGameDetailsSubpageTelemetryHandler)
-			end
-		} else nil,
-		GameTileOverflowMenuNotInterested = if fFlagLuaAppSduiGameTileFeedback then {
-			lazyHandler = function()
-				return require(script.Parent.SduiGameTileOverflowMenuNotInterestedTelemetryHandler)
 			end
 		} else nil,
 		OpenSearchResultsWithQueryEdp = if fFlagLuaAppSduiOpenSearchResultsWithQueryAction then {

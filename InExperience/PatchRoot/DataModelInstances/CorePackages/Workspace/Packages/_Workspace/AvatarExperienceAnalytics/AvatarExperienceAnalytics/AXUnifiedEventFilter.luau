@@ -6,10 +6,8 @@ local widgetUiTreatment = unifiedEventLogEnumsModule.WidgetUiTreatment
 local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local sendAXCounterV2Module = require(script.Parent.sendAXCounterV2)
 local fFlagAXUnifiedImpressionsOnThumbnail = require(parent.AvatarExperienceFlags).FFlagAXUnifiedImpressionsOnThumbnail
-local fFlagAXFixHomeAvatarsUnifiedPurchase = require(parent.SharedFlags).FFlagAXFixHomeAvatarsUnifiedPurchase
 local AXSendPurchaseAttempt = game:DefineFastFlag("AXSendPurchaseAttempt", false)
 local AXUnifiedFilterWidgetLoadedAndUIImpression = game:DefineFastFlag("AXUnifiedFilterWidgetLoadedAndUIImpression", false)
-local AXAlignUnifiedFilterSearchKeyword = game:DefineFastFlag("AXAlignUnifiedFilterSearchKeyword", false)
 local t = {}
 local t_1 = {
 	AssetTypeIdStringToName = {},
@@ -74,14 +72,14 @@ function t.hasRequestIdForWidgetLog(p1)
 end
 
 function t.hasValidSizeAndPosition(p1)
-	-- upvalues: fFlagAXFixHomeAvatarsUnifiedPurchase (ref), marketplaceUnifiedAction (ref), unifiedLoggingSurface (ref)
+	-- upvalues: marketplaceUnifiedAction (ref)
 	local action = p1.action
 	
-	return if fFlagAXFixHomeAvatarsUnifiedPurchase and action == marketplaceUnifiedAction.PURCHASE_SUCCESS and (p1.surface == unifiedLoggingSurface.DISCOVERY_HOMEPAGE or p1.surface == unifiedLoggingSurface.DISCOVERY_SEARCH_RESULTS) then true elseif action == marketplaceUnifiedAction.ITEM_IMPRESSION or action == marketplaceUnifiedAction.ITEM_SELECTED or (action == marketplaceUnifiedAction.ITEM_DESELECTED or action == marketplaceUnifiedAction.PURCHASE_SUCCESS) then ((p1.screenSizeWidth or 0) > 0 and (p1.screenSizeHeight or 0) > 0) and (((p1.elementSizeWidth or 0) > 0 and (p1.elementSizeHeight or 0) > 0) and ((p1.gridPositionRow or 0) > 0 and (p1.gridPositionColumn or 0) > 0)) elseif action == marketplaceUnifiedAction.WIDGET_IMPRESSION then (p1.gridPositionRow or 0) > 0 and (p1.gridPositionColumn or 0) == 1 else true
+	return if action == marketplaceUnifiedAction.ITEM_IMPRESSION or action == marketplaceUnifiedAction.ITEM_SELECTED or (action == marketplaceUnifiedAction.ITEM_DESELECTED or action == marketplaceUnifiedAction.PURCHASE_SUCCESS) then ((p1.screenSizeWidth or 0) > 0 and (p1.screenSizeHeight or 0) > 0) and (((p1.elementSizeWidth or 0) > 0 and (p1.elementSizeHeight or 0) > 0) and ((p1.gridPositionRow or 0) > 0 and (p1.gridPositionColumn or 0) > 0)) elseif action == marketplaceUnifiedAction.WIDGET_IMPRESSION then (p1.gridPositionRow or 0) > 0 and (p1.gridPositionColumn or 0) == 1 else true
 end
 
 function t.hasValidFilter(p1)
-	-- upvalues: AXAlignUnifiedFilterSearchKeyword (ref), marketplaceUnifiedAction (ref), unifiedLoggingSurface (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), unifiedEventLogEnumsModule (ref)
+	-- upvalues: fFlagAXUnifiedImpressionsOnThumbnail (ref), marketplaceUnifiedAction (ref), unifiedLoggingSurface (ref), unifiedEventLogEnumsModule (ref)
 	local surface = p1.surface
 	local keyword = p1.keyword
 	local category = p1.category
@@ -91,10 +89,6 @@ function t.hasValidFilter(p1)
 	local filterPrice = p1.filterPrice
 	local filterCreatorsName = p1.filterCreatorsName
 	local filterCreators = p1.filterCreators
-	
-	if AXAlignUnifiedFilterSearchKeyword and keyword ~= nil then
-		return if keyword == "" then false else p1.action == marketplaceUnifiedAction.PURCHASE_ATTEMPT or p1.action == marketplaceUnifiedAction.PURCHASE_SUCCESS or (if surface ~= unifiedLoggingSurface.SEARCH_RESULTS then surface == unifiedLoggingSurface.ITEM_DETAILS else true)
-	end
 	local var1 = true
 	
 	if category == nil or category == "" then
@@ -106,7 +100,7 @@ function t.hasValidFilter(p1)
 	end
 	local var2 = true
 	
-	if not AXAlignUnifiedFilterSearchKeyword and (keyword or surface == unifiedLoggingSurface.SEARCH_RESULTS) then
+	if keyword or surface == unifiedLoggingSurface.SEARCH_RESULTS then
 		var2 = surface == unifiedLoggingSurface.SEARCH_RESULTS and (keyword ~= nil and keyword ~= "")
 	end
 	return var2 and (var1 and ((if filterPriceMin and filterPriceMin ~= "" or filterPriceMax and filterPriceMax ~= "" then filterPrice == unifiedEventLogEnumsModule.FiltersPrice.PRICE_RANGE else true) and (if filterCreatorsName and filterCreatorsName ~= "" then filterCreators == unifiedEventLogEnumsModule.FiltersCreators.CREATORS_BY_USERNAME else true)))
@@ -225,13 +219,13 @@ function t.filter(p1)
 			var10 ..= "hasValidEntityData "
 		end
 		if p1.action == marketplaceUnifiedAction.ITEM_IMPRESSION then
-			warn("Failed to send unified impression event. Failing Check(s): " .. var33)
+			warn("Failed to send unified impression event. Failing Check(s): " .. var32)
 		elseif p1.action == marketplaceUnifiedAction.ITEM_SELECTED then
-			warn("Failed to send unified click event. Failing Check(s): " .. var33)
+			warn("Failed to send unified click event. Failing Check(s): " .. var32)
 		elseif p1.action == marketplaceUnifiedAction.PURCHASE_SUCCESS then
-			warn("Failed to send unified purchase event. Failing Check(s): " .. var33)
+			warn("Failed to send unified purchase event. Failing Check(s): " .. var32)
 		else
-			warn("Failed to send unified event. Failing Check(s): " .. var33)
+			warn("Failed to send unified event. Failing Check(s): " .. var32)
 		end
 	end
 	sendAXCounterV2Module("AXUnifiedFilter", {

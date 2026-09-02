@@ -2,17 +2,20 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local buildMaturityBannerModule = require(buildExperience.Components.GameConfigurations.BuildMaturityBanner.BuildMaturityBanner)
 local gameConfigurationListModule = require(buildExperience.Components.GameConfigurations.GameConfigurationList.GameConfigurationList)
 local view = foundationModule.View
 local iconName = foundationModule.Enums.IconName
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), iconName (ref), reactModule (ref), view (ref), gameConfigurationListModule (ref), buildMaturityBannerModule (ref)
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), iconName (ref), reactModule (ref), view (ref), gameConfigurationListModule (ref), buildMaturityBannerModule (ref)
+	local PUBLISH_CONTENT_BODY, PUBLISH_CONTENT_MATURITY, PUBLISH_CONTENT_TITLE, GAME_CONFIGURATION_GAME_DETAILS, GAME_CONFIGURATION_GAME_DETAILS_BODY, GAME_CONFIGURATION_ICON_AND_THUMBNAILS, GAME_CONFIGURATION_TITLE_AND_DESCRIPTION, PUBLISH_VERSION_INFORMATION_BODY, PUBLISH_VERSION_INFORMATION_TITLE, VERSION_HISTORY_TITLE, PUBLISH_VERSION_TITLE_DESCRIPTION
 	local testId = p1.testId or "game-configuration-content"
-	local var1 = useLocalization({
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		contentBody = localizationStringsModule.PUBLISH_CONTENT_BODY,
 		contentMaturity = localizationStringsModule.PUBLISH_CONTENT_MATURITY,
 		contentTitle = localizationStringsModule.PUBLISH_CONTENT_TITLE,
@@ -24,34 +27,60 @@ return function(p1)
 		versionInformationTitle = localizationStringsModule.PUBLISH_VERSION_INFORMATION_TITLE,
 		versionHistory = localizationStringsModule.VERSION_HISTORY_TITLE,
 		versionTitleDescription = localizationStringsModule.PUBLISH_VERSION_TITLE_DESCRIPTION
-	})
-	local contentBody = var1.contentBody
-	local contentMaturity = var1.contentMaturity
-	local contentTitle = var1.contentTitle
-	local gameDetails = var1.gameDetails
-	local gameDetailsBody = var1.gameDetailsBody
-	local iconAndThumbnails = var1.iconAndThumbnails
-	local titleAndDescription = var1.titleAndDescription
-	local versionInformationBody = var1.versionInformationBody
-	local versionInformationTitle = var1.versionInformationTitle
-	local versionHistory = var1.versionHistory
-	local versionTitleDescription = var1.versionTitleDescription
+	}) else nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	
+	if fFlagBuildLocalization then
+		PUBLISH_CONTENT_BODY = var1.contentBody
+		PUBLISH_CONTENT_MATURITY = var1.contentMaturity
+		PUBLISH_CONTENT_TITLE = var1.contentTitle
+		GAME_CONFIGURATION_GAME_DETAILS = var1.gameDetails
+		GAME_CONFIGURATION_GAME_DETAILS_BODY = var1.gameDetailsBody
+		GAME_CONFIGURATION_ICON_AND_THUMBNAILS = var1.iconAndThumbnails
+		GAME_CONFIGURATION_TITLE_AND_DESCRIPTION = var1.titleAndDescription
+		PUBLISH_VERSION_INFORMATION_BODY = var1.versionInformationBody
+		PUBLISH_VERSION_INFORMATION_TITLE = var1.versionInformationTitle
+		VERSION_HISTORY_TITLE = var1.versionHistory
+		PUBLISH_VERSION_TITLE_DESCRIPTION = var1.versionTitleDescription
+	else
+		PUBLISH_CONTENT_BODY = localizationStringsModule.PUBLISH_CONTENT_BODY
+		PUBLISH_CONTENT_MATURITY = localizationStringsModule.PUBLISH_CONTENT_MATURITY
+		PUBLISH_CONTENT_TITLE = localizationStringsModule.PUBLISH_CONTENT_TITLE
+		GAME_CONFIGURATION_GAME_DETAILS = localizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS
+		GAME_CONFIGURATION_GAME_DETAILS_BODY = localizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS_BODY
+		GAME_CONFIGURATION_ICON_AND_THUMBNAILS = localizationStringsModule.GAME_CONFIGURATION_ICON_AND_THUMBNAILS
+		GAME_CONFIGURATION_TITLE_AND_DESCRIPTION = localizationStringsModule.GAME_CONFIGURATION_TITLE_AND_DESCRIPTION
+		PUBLISH_VERSION_INFORMATION_BODY = localizationStringsModule.PUBLISH_VERSION_INFORMATION_BODY
+		PUBLISH_VERSION_INFORMATION_TITLE = localizationStringsModule.PUBLISH_VERSION_INFORMATION_TITLE
+		VERSION_HISTORY_TITLE = localizationStringsModule.VERSION_HISTORY_TITLE
+		PUBLISH_VERSION_TITLE_DESCRIPTION = localizationStringsModule.PUBLISH_VERSION_TITLE_DESCRIPTION
+	end
 	local list = {
 		{
 			id = "icon-thumbnails",
-			title = iconAndThumbnails,
+			title = GAME_CONFIGURATION_ICON_AND_THUMBNAILS,
 			onActivated = p1.onOpenIconAndThumbnails
 		},
 		{
 			id = "title-description",
-			title = titleAndDescription,
+			title = GAME_CONFIGURATION_TITLE_AND_DESCRIPTION,
 			onActivated = p1.onOpenTitleDescriptionPage
 		}
 	}
 	local list_1 = {
 		{
 			id = "content-rating",
-			title = contentMaturity,
+			title = PUBLISH_CONTENT_MATURITY,
 			description = p1.contentMaturityText,
 			trailingIcon = iconName.ArrowUpRightFromSquare,
 			onActivated = p1.onOpenContentMaturity
@@ -60,12 +89,12 @@ return function(p1)
 	local t = {}
 	table.insert(t, {
 		id = "version-title-description",
-		title = versionTitleDescription,
+		title = PUBLISH_VERSION_TITLE_DESCRIPTION,
 		onActivated = p1.onOpenVersionTitleDescriptionPage
 	})
 	table.insert(t, {
 		id = "version-history",
-		title = versionHistory,
+		title = VERSION_HISTORY_TITLE,
 		onActivated = p1.onOpenVersionHistory
 	})
 	
@@ -76,15 +105,15 @@ return function(p1)
 	}, {
 		VersionInformation = reactModule.createElement(gameConfigurationListModule, {
 			layoutOrder = 1,
-			title = versionInformationTitle,
-			body = versionInformationBody,
+			title = PUBLISH_VERSION_INFORMATION_TITLE,
+			body = PUBLISH_VERSION_INFORMATION_BODY,
 			rows = t,
 			testId = `{testId}-version-information`
 		}),
 		GameDetails = reactModule.createElement(gameConfigurationListModule, {
 			layoutOrder = 2,
-			title = gameDetails,
-			body = gameDetailsBody,
+			title = GAME_CONFIGURATION_GAME_DETAILS,
+			body = GAME_CONFIGURATION_GAME_DETAILS_BODY,
 			rows = list,
 			testId = `{testId}-game-details`
 		}),
@@ -95,8 +124,8 @@ return function(p1)
 		}, {
 			Configuration = reactModule.createElement(gameConfigurationListModule, {
 				layoutOrder = 1,
-				title = contentTitle,
-				body = contentBody,
+				title = PUBLISH_CONTENT_TITLE,
+				body = PUBLISH_CONTENT_BODY,
 				rows = list_1,
 				testId = `{testId}-content`
 			}),

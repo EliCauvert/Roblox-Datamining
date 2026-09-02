@@ -4,7 +4,6 @@ local reactModule = require(parent.React)
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local inputHandlersModule = require(parent.InputHandlers)
 local useNavigation = require(parent.Navigation).useNavigation
-local fFlagFixDoubleBackNav = require(parent.SharedFlags).FFlagFixDoubleBackNav
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local canGoBack = require(parent.Navigation).canGoBack
 local focusNavigationEventNameEnumModule = require(focusNavigationUtils.FocusNavigationEventNameEnum)
@@ -35,7 +34,7 @@ local _ = function(p1, p2)
 end
 
 function useDefaultAppEventHandlers()
-	-- upvalues: useNavigation (ref), useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnumModule (ref), useFocusRegistryEntry (ref), useDescendantHasFocusModule (ref), useSelector (ref), reactFocusNavigationModule (ref), reactModule (ref), focusNavigationEventNameEnumModule (ref), inputHandlersModule (ref), canGoBack (ref), fFlagFixDoubleBackNav (ref)
+	-- upvalues: useNavigation (ref), useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnumModule (ref), useFocusRegistryEntry (ref), useDescendantHasFocusModule (ref), useSelector (ref), reactFocusNavigationModule (ref), reactModule (ref), focusNavigationEventNameEnumModule (ref), inputHandlersModule (ref), canGoBack (ref)
 	local var1 = useNavigation()
 	local var2 = useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.SearchBar)
 	local var3 = useFocusRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.SearchBar)
@@ -49,22 +48,19 @@ function useDefaultAppEventHandlers()
 	local var9 = var8 ~= nil
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var5 (ref), focusNavigationEventNameEnumModule (copy), inputHandlersModule (copy), canGoBack (copy), var1 (ref), var6 (ref), var4 (ref), fFlagFixDoubleBackNav (copy), var3 (ref), var2 (ref), var9 (ref), var8 (ref)
+		-- upvalues: var5 (ref), focusNavigationEventNameEnumModule (copy), inputHandlersModule (copy), canGoBack (copy), var1 (ref), var6 (ref), var4 (ref), var3 (ref), var2 (ref), var9 (ref), var8 (ref)
 		local t = {}
 		
 		if not var5 then
 			t[focusNavigationEventNameEnumModule.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p1)
-					-- upvalues: canGoBack (copy), var1 (copy), var6 (copy), var4 (copy), fFlagFixDoubleBackNav (copy)
+				handler = inputHandlersModule.onRelease(function(_)
+					-- upvalues: canGoBack (copy), var1 (copy), var6 (copy), var4 (copy)
 					if canGoBack(var1) then
 						var1.goBack(false)
+						
+						return
 					elseif var6 then
 						var4()
-					else
-						return
-					end
-					if fFlagFixDoubleBackNav then
-						p1.cancelled = true
 					end
 				end)
 			}

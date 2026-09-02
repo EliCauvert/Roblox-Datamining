@@ -1,6 +1,6 @@
 ﻿local checkAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8)
+return function(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: checkAndSendEventModule (ref)
 	local t = {}
 	
@@ -21,9 +21,6 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8)
 	end
 	if p7 then
 		t.ctype = p7
-	end
-	if p8 then
-		t.associatedText = p8
 	end
 	checkAndSendEventModule(p1, "authButtonClick", t)
 end

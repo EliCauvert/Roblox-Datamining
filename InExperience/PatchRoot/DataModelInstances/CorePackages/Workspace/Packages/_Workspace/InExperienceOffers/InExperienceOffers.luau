@@ -7,7 +7,6 @@ return {
 	getAllUserOffers = getAllUserOffersModule,
 	getOffersStore = getOffersStoreModule,
 	FeatureKeys = require(script.Enums.FeatureKey),
-	NotificationLocation = require(script.Enums.NotificationLocation),
 	OfferStatuses = require(script.Enums.OfferStatus),
 	Hooks = {
 		useOfferBadgeText = require(script.Hooks.useOfferBadgeText),

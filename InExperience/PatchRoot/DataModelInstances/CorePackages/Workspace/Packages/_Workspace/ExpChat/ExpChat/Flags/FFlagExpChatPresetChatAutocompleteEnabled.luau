@@ -1,3 +1,1 @@
-﻿local parent = script:FindFirstAncestor("ExpChat").Parent
-
-return game:DefineFastFlag("ExpChatPresetChatAutocompleteEnabled2", false) and (require(parent.SocialExperiments).ExpChatPresetChatAutocompleteExperimentation.isEnabled() and require(parent.ExpChatShared).Flags.FFlagExpChatPresetChatSendEnabled)
+﻿return game:DefineFastFlag("ExpChatPresetChatAutocompleteEnabled", false) and require(script:FindFirstAncestor("ExpChat").Parent.ExpChatShared).Flags.FFlagExpChatPresetChatSendEnabled

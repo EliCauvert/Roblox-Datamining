@@ -19,6 +19,7 @@ local builderIconsModule = require(corePackagesService.Packages.BuilderIcons)
 local _ = builderIconsModule.Migration
 local getFFlagVoiceUserAgencyEnableIXPModule = require(modules.Flags.GetFFlagVoiceUserAgencyEnableIXP)
 local getFStringVoiceUserAgencyIXPLayerNameModule = require(modules.Flags.GetFStringVoiceUserAgencyIXPLayerName)
+local fFlagManuallyMigrateDeprecatedIconUsage = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagManuallyMigrateDeprecatedIconUsage
 local voiceUserAgencyAlertInitTimeOffset = game:DefineFastInt("VoiceUserAgencyAlertInitTimeOffset", 5)
 local voiceUserAgencyAlertStartTimeOffset = game:DefineFastInt("VoiceUserAgencyAlertStartTimeOffset", 3)
 local voiceUserAgencyAlertTimerDuration = game:DefineFastInt("VoiceUserAgencyAlertTimerDuration", 7)
@@ -145,7 +146,7 @@ local function removeUserAgencyPrompt(p1, p2, p3)
 end
 
 local function showUserAgencyPrompt()
-	-- upvalues: getFFlagVoiceUserAgencyEnableIXPModule (ref), IXPServiceWrapper (ref), getFStringVoiceUserAgencyIXPLayerNameModule (ref), getAppStorageTable (ref), var2 (ref), name (ref), default (ref), constantsModule (ref), bindResetHistory (ref), rbxAnalyticsService (ref), userId (ref), coreGuiService (ref), create (ref), appFonts (ref), robloxTranslatorModule (ref), removeUserAgencyPrompt (ref), voiceUserAgencyAlertTimerDuration (ref), tweenService (ref), builderIconsModule (ref), images (ref), var1 (ref), textService (ref), voiceUserAgencyAdjustDescriptionText (ref), voiceUserAgencyAlertStartTimeOffset (ref)
+	-- upvalues: getFFlagVoiceUserAgencyEnableIXPModule (ref), IXPServiceWrapper (ref), getFStringVoiceUserAgencyIXPLayerNameModule (ref), getAppStorageTable (ref), var2 (ref), name (ref), default (ref), constantsModule (ref), bindResetHistory (ref), rbxAnalyticsService (ref), userId (ref), coreGuiService (ref), create (ref), appFonts (ref), robloxTranslatorModule (ref), removeUserAgencyPrompt (ref), voiceUserAgencyAlertTimerDuration (ref), tweenService (ref), fFlagManuallyMigrateDeprecatedIconUsage (ref), builderIconsModule (ref), images (ref), var1 (ref), textService (ref), voiceUserAgencyAdjustDescriptionText (ref), voiceUserAgencyAlertStartTimeOffset (ref)
 	local var4 = false
 	local var5 = false
 	
@@ -234,11 +235,17 @@ local function showUserAgencyPrompt()
 				removeUserAgencyPrompt(voiceUserAgency, var5, var4)
 			end
 		end)
-		local var10 = create("TextLabel")({
+		local var10 = if fFlagManuallyMigrateDeprecatedIconUsage then create("TextLabel")({
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
 			Text = builderIconsModule.Migration["icons/status/success_small"].name,
 			FontFace = builderIconsModule.Font[builderIconsModule.Migration["icons/status/success_small"].variant]
+		}) else create("ImageLabel")({
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1, 0, 1, 0),
+			Image = images["icons/status/success_small"].Image,
+			ImageRectOffset = images["icons/status/success_small"].ImageRectOffset,
+			ImageRectSize = images["icons/status/success_small"].ImageRectSize
 		})
 		local var11 = create("ImageButton")({
 			BackgroundTransparency = 1,

@@ -28,7 +28,6 @@ return {
 		RegisterCustomGetStateForAction = registerCustomGetStateForActionModule,
 		ClearScreens = require(script.NavigationActions.ClearScreens)
 	},
-	BackHandlerRegistry = require(script.BackHandlerRegistry),
 	Debug = {
 		logOnOverlayClosed = require(script.Debug.logOnOverlayClosed)
 	},

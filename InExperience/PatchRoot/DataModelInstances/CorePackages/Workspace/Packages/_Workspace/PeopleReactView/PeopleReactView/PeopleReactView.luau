@@ -5,7 +5,6 @@ local robloxAppEnumsModule = require(parent_1.RobloxAppEnums)
 local robloxAppHooksModule = require(parent_1.RobloxAppHooks)
 local foundationModule = require(parent_1.Foundation)
 local peopleServiceModule = require(parent_1.PeopleService)
-local switchServerModule = require(parent_1.SwitchServer)
 local useDeviceOrientation = robloxAppHooksModule.useDeviceOrientation
 local useGetPeopleServiceModule = require(parent.Hooks.useGetPeopleService)
 local useScrollingFrameStoreModule = require(parent.Hooks.useScrollingFrameStore)
@@ -17,11 +16,10 @@ local menuButtonsWrapperModule = require(parent.Components.MenuButtonsWrapper)
 local titleBarModule = require(parent.Components.TitleBar)
 local constantsModule = require(parent.Constants)
 local gameSettings = UserSettings().GameSettings
+local switchServerModule = require(parent_1.SwitchServer)
 local switchServerConfirmation = switchServerModule.SwitchServerConfirmation
 local switchServerTelemetry = switchServerModule.SwitchServerTelemetry
-local sharedFlagsModule = require(parent_1.SharedFlags)
-local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
-local fFlagShowSwitchServerButton = sharedFlagsModule.FFlagShowSwitchServerButton
+local fFlagEnableSideSheet = require(parent_1.SharedFlags).FFlagEnableSideSheet
 local flags = peopleServiceModule.getService("Flags")
 local getFFlagAddPeoplePageCardLayout = flags.GetFFlagAddPeoplePageCardLayout
 local getFFlagPeoplePageLazyRenderCards = flags.GetFFlagPeoplePageLazyRenderCards
@@ -33,6 +31,7 @@ local fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView = flags.FFlagPeoplePa
 local fFlagPeoplePageFlipVolumePopoverToFitViewport = flags.FFlagPeoplePageFlipVolumePopoverToFitViewport
 local fFlagPeoplePageDismissCardMenuOnScrollOutOfView = flags.FFlagPeoplePageDismissCardMenuOnScrollOutOfView
 local fFlagFixVirtualizedGridNumItems = flags.FFlagFixVirtualizedGridNumItems
+local fFlagShowSwitchServerButton = flags.FFlagShowSwitchServerButton
 
 return function(p1)
 	-- upvalues: getFFlagAddPeoplePageCardLayout (ref), useGetPeopleServiceModule (ref), reactModule (ref), peopleServiceModule (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), gameSettings (ref), getFFlagPeoplePagePostponeInitialRender (ref), getFFlagPeoplePageLazyRenderCards (ref), fFlagEnablePeopleListLazyRender (ref), fFlagPeopleCardsEnableVirtualizedGrid (ref), fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (ref), fFlagPeoplePageFlipVolumePopoverToFitViewport (ref), fFlagPeoplePageDismissCardMenuOnScrollOutOfView (ref), useScrollingFrameStoreModule (ref), fFlagFixVirtualizedGridNumItems (ref), fFlagPeoplePageRemoveUseMemoElements (ref), peopleCardsModule (ref), peopleListModule (ref), fFlagShowSwitchServerButton (ref), fFlagEnableSideSheet (ref), menuButtonsWrapperModule (ref), coreButtonRowModule (ref), constantsModule (ref), switchServerTelemetry (ref), titleBarModule (ref), view (ref), switchServerConfirmation (ref)

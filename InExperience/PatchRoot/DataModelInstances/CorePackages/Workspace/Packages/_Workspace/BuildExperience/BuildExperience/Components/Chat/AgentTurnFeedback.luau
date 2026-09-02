@@ -22,6 +22,7 @@ local getAgentRollbackRequestStoreModule = require(buildExperience.Stores.GetAge
 local getPlaytestLoadingStoreModule = require(buildExperience.Stores.GetPlaytestLoadingStore)
 local snackbar = foundationModule.Snackbar
 local iconName = foundationModule.Enums.IconName
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
 local var1, var2 = signalsModule.createSignal(false)
 local t = { get = var1, set = var2 }
@@ -77,33 +78,50 @@ local function _(value)
 end
 
 return function(p1)
-	-- upvalues: feedbackIconsModule (ref), reactModule (ref), localizationModule (ref), useLocalization (ref), localizationStringsModule (ref), fFlagEnableTeamTestLua (ref), fFlagBuildExperienceCopyChatMessagesModule (ref), useAgentMessageCopy (ref), getPlaytestLoadingStoreModule (ref), signalsReactModule (ref), fFlagBuildAgentRollbackModule (ref), getAgentRollbackRequestStoreModule (ref), var3 (ref), t (ref), t_1 (ref), signalsModule (ref), feedbackActionModule (ref), sendAgentTurnFeedbackModule (ref), userFeedbackModule (ref), agentRollbackSnackbarModule (ref), snackbar (ref), restoreVersionDialogModule (ref)
+	-- upvalues: feedbackIconsModule (ref), fFlagBuildLocalization (ref), reactModule (ref), localizationModule (ref), useLocalization (ref), localizationStringsModule (ref), fFlagEnableTeamTestLua (ref), fFlagBuildExperienceCopyChatMessagesModule (ref), useAgentMessageCopy (ref), getPlaytestLoadingStoreModule (ref), signalsReactModule (ref), fFlagBuildAgentRollbackModule (ref), getAgentRollbackRequestStoreModule (ref), var3 (ref), t (ref), t_1 (ref), signalsModule (ref), feedbackActionModule (ref), sendAgentTurnFeedbackModule (ref), userFeedbackModule (ref), agentRollbackSnackbarModule (ref), snackbar (ref), restoreVersionDialogModule (ref)
+	local CHAT_REVERT_FAILURE, CHAT_REVERT_SUCCESS, CHAT_REVERT_CONFIRMATION_TITLE, CHAT_REVERT_CONFIRMATION_DESCRIPTION
 	local turnFeedbackIds = p1.turnFeedbackIds
 	local var4 = if turnFeedbackIds ~= nil then nil else turnFeedbackIds.placeId
 	local var5 = if turnFeedbackIds ~= nil then nil else feedbackIconsModule.getRollbackTargetVersionNumber(turnFeedbackIds)
-	local var6 = reactModule.useContext(localizationModule.LocalizationRoactContext)
-	local var7 = useLocalization({
+	local var6 = if fFlagBuildLocalization then reactModule.useContext(localizationModule.LocalizationRoactContext) else nil
+	local var7 = if fFlagBuildLocalization then useLocalization({
 		revertConfirmationTitle = localizationStringsModule.CHAT_REVERT_CONFIRMATION_TITLE,
 		revertConfirmationDescription = localizationStringsModule.CHAT_REVERT_CONFIRMATION_DESCRIPTION,
 		revertFailure = localizationStringsModule.CHAT_REVERT_FAILURE,
 		revertSuccess = localizationStringsModule.CHAT_REVERT_SUCCESS
-	})
+	}) else nil
 	local _ = nil
 	local _ = nil
 	local _ = nil
 	local _ = nil
-	local revertFailure = var7.revertFailure
-	local revertSuccess = var7.revertSuccess
-	local revertConfirmationTitle = var7.revertConfirmationTitle
-	local revertConfirmationDescription = var7.revertConfirmationDescription
 	
-	if var5 ~= nil then
-		local var8 = var6:Format(if var5 < 10 then localizationStringsModule.VERSION_HISTORY_VERSION_PADDED else localizationStringsModule.VERSION_HISTORY_VERSION_COMPACT, { VERSION_NUMBER = var5 })
+	if fFlagBuildLocalization then
+		CHAT_REVERT_FAILURE = var7.revertFailure
+		CHAT_REVERT_SUCCESS = var7.revertSuccess
+		CHAT_REVERT_CONFIRMATION_TITLE = var7.revertConfirmationTitle
+		CHAT_REVERT_CONFIRMATION_DESCRIPTION = var7.revertConfirmationDescription
 		
-		if fFlagEnableTeamTestLua then
-			revertConfirmationDescription = var6:Format(localizationStringsModule.CHAT_REVERT_TO_VERSION, { VERSION = var8 })
-		else
-			revertConfirmationTitle = var8
+		if var5 ~= nil then
+			local var8 = var6:Format(if var5 < 10 then localizationStringsModule.VERSION_HISTORY_VERSION_PADDED else localizationStringsModule.VERSION_HISTORY_VERSION_COMPACT, { VERSION_NUMBER = var5 })
+			
+			if fFlagEnableTeamTestLua then
+				CHAT_REVERT_CONFIRMATION_DESCRIPTION = var6:Format(localizationStringsModule.CHAT_REVERT_TO_VERSION, { VERSION = var8 })
+			else
+				CHAT_REVERT_CONFIRMATION_TITLE = var8
+			end
+		end
+	else
+		CHAT_REVERT_FAILURE = localizationStringsModule.CHAT_REVERT_FAILURE
+		CHAT_REVERT_SUCCESS = localizationStringsModule.CHAT_REVERT_SUCCESS
+		CHAT_REVERT_CONFIRMATION_TITLE = localizationStringsModule.CHAT_REVERT_CONFIRMATION_TITLE
+		CHAT_REVERT_CONFIRMATION_DESCRIPTION = localizationStringsModule.CHAT_REVERT_CONFIRMATION_DESCRIPTION
+		
+		if var5 ~= nil then
+			if fFlagEnableTeamTestLua then
+				CHAT_REVERT_CONFIRMATION_DESCRIPTION = localizationStringsModule.formatChatRevertConfirmationDescription(var5)
+			else
+				CHAT_REVERT_CONFIRMATION_TITLE = localizationStringsModule.formatVersionHistoryVersionNumber(var5)
+			end
 		end
 	end
 	local var9, var10 = reactModule.useState(false)
@@ -155,15 +173,15 @@ return function(p1)
 			var24.set(true)
 		end, { var24 })
 		var27 = reactModule.useCallback(function()
-			-- upvalues: var24 (write), var16 (ref), revertSuccess (write)
+			-- upvalues: var24 (write), var16 (ref), CHAT_REVERT_SUCCESS (write)
 			var24.set(false)
-			var16(revertSuccess)
-		end, { var24, revertSuccess })
+			var16(CHAT_REVERT_SUCCESS)
+		end, { var24, CHAT_REVERT_SUCCESS })
 		var28 = reactModule.useCallback(function()
-			-- upvalues: var24 (write), var16 (ref), revertFailure (write)
+			-- upvalues: var24 (write), var16 (ref), CHAT_REVERT_FAILURE (write)
 			var24.set(false)
-			var16(revertFailure)
-		end, { var24, revertFailure })
+			var16(CHAT_REVERT_FAILURE)
+		end, { var24, CHAT_REVERT_FAILURE })
 	end
 	local var29 = reactModule.useCallback(function()
 		-- upvalues: var16 (ref)
@@ -211,10 +229,10 @@ return function(p1)
 		RevertDialog = if var9 and var5 ~= nil then reactModule.createElement(restoreVersionDialogModule, {
 			isOpen = true,
 			isLoading = if fFlagBuildAgentRollbackModule then var11 else nil,
-			title = revertConfirmationTitle,
-			description = revertConfirmationDescription,
+			title = CHAT_REVERT_CONFIRMATION_TITLE,
+			description = CHAT_REVERT_CONFIRMATION_DESCRIPTION,
 			onRestore = function()
-				-- upvalues: fFlagBuildAgentRollbackModule (copy), var10 (ref), var22 (ref), var25 (write), var24 (write), var14 (ref), feedbackActionModule (copy), sendAgentTurnFeedbackModule (copy), turnFeedbackIds (ref), var12 (ref), var16 (ref), feedbackIconsModule (copy), revertFailure (write), var26 (write), var27 (write), var28 (write)
+				-- upvalues: fFlagBuildAgentRollbackModule (copy), var10 (ref), var22 (ref), var25 (write), var24 (write), var14 (ref), feedbackActionModule (copy), sendAgentTurnFeedbackModule (copy), turnFeedbackIds (ref), var12 (ref), var16 (ref), feedbackIconsModule (copy), CHAT_REVERT_FAILURE (write), var26 (write), var27 (write), var28 (write)
 				if not fFlagBuildAgentRollbackModule then
 					var10(false)
 				end
@@ -233,9 +251,9 @@ return function(p1)
 						var12(false)
 						var10(false)
 					end):catch(function()
-						-- upvalues: var12 (copy), var16 (copy), revertFailure (copy)
+						-- upvalues: var12 (copy), var16 (copy), CHAT_REVERT_FAILURE (copy)
 						var12(false)
-						var16(revertFailure)
+						var16(CHAT_REVERT_FAILURE)
 					end)
 					
 					return

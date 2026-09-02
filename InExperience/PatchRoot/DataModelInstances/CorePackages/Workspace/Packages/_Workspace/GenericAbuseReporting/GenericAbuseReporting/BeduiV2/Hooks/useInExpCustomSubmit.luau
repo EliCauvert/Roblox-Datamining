@@ -128,26 +128,15 @@ return {
 			-- upvalues: submitPlaceReport (copy), p3 (ref)
 			return submitPlaceReport(p6, p3.reportAnythingSnapshotRef and p3.reportAnythingSnapshotRef.current)
 		end, { p3.reportAnythingSnapshotRef })
-		local var7 = reactModule.useCallback(function(p6)
-			-- upvalues: submitChatReportWithoutMessage (copy)
-			return submitChatReportWithoutMessage(p6)
-		end, {})
 		
 		return reactModule.useMemo(function()
-			-- upvalues: var3 (ref), var4 (ref), var5 (ref), var6 (ref), var7 (ref)
+			-- upvalues: var3 (ref), var4 (ref), var5 (ref), var6 (ref)
 			return {
 				voice = var3,
 				chat = var4,
 				avatar = var5,
-				place = var6,
-				legacyChat = var7
+				place = var6
 			}
-		end, {
-			var3,
-			var4,
-			var5,
-			var6,
-			var7
-		})
+		end, { var3, var4, var5, var6 })
 	end
 }

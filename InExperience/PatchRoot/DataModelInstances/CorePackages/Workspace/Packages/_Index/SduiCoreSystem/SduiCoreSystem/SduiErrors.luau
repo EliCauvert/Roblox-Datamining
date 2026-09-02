@@ -44,7 +44,6 @@ return {
 		FailedToOpenLink = "FailedToOpenLink",
 		FailedToPaginateRequest = "FailedToPaginateRequest",
 		FailedToParse = "FailedToParse",
-		FailedToPrewarmTemplates = "FailedToPrewarmTemplates",
 		FailedToParseProp = "FailedToParseProp",
 		FailedtoParseUrl = "FailedtoParseUrl",
 		FailedToUpdateDataStores = "FailedToUpdateDataStores",

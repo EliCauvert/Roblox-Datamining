@@ -12,11 +12,10 @@ local runVirtualChatCommandsModule = require(script.Parent.runVirtualChatCommand
 local getFFlagExpChatProtectedChatInternalAPIs = require(parent.SharedFlags).getFFlagExpChatProtectedChatInternalAPIs
 local getFFlagExpChatUseChatMuteStoreModule = require(script.Parent.getFFlagExpChatUseChatMuteStore)
 local fFlagExpChatTextChannelWindowThemeByBackgroundModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowThemeByBackground)
-local fFlagExpChatComposerFigmaParity = require(parent.SharedFlags).FFlagExpChatComposerFigmaParity
 local chatInputBarView = chatUIPrimitivesModule.ChatInputBarView
 
 return function(p1)
-	-- upvalues: foundationModule (ref), useCanSendToChannel (ref), useInExperienceLocalization (ref), reactModule (ref), messageWriterContextModule (ref), getFFlagExpChatUseChatMuteStoreModule (ref), runVirtualChatCommandsModule (ref), messageModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), textChannelWindowAnalyticsModule (ref), loggerModule (ref), chatInputBarView (ref), fFlagExpChatTextChannelWindowThemeByBackgroundModule (ref), fFlagExpChatComposerFigmaParity (ref)
+	-- upvalues: foundationModule (ref), useCanSendToChannel (ref), useInExperienceLocalization (ref), reactModule (ref), messageWriterContextModule (ref), getFFlagExpChatUseChatMuteStoreModule (ref), runVirtualChatCommandsModule (ref), messageModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), textChannelWindowAnalyticsModule (ref), loggerModule (ref), chatInputBarView (ref), fFlagExpChatTextChannelWindowThemeByBackgroundModule (ref)
 	local targetChannel = p1.targetChannel
 	local var1 = foundationModule.Hooks.useTokens()
 	local var2 = useCanSendToChannel(targetChannel, p1.localUserId)
@@ -90,7 +89,6 @@ return function(p1)
 		autocomplete = reactModule.useMemo(function()
 			return { commands = nil, emojis = true }
 		end, {}),
-		themedColors = fFlagExpChatTextChannelWindowThemeByBackgroundModule,
-		composerLayout = fFlagExpChatComposerFigmaParity
+		themedColors = fFlagExpChatTextChannelWindowThemeByBackgroundModule
 	})
 end

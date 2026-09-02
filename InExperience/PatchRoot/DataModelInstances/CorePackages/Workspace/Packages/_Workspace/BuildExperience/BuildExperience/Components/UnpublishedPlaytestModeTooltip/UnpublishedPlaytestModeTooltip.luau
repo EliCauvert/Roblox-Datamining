@@ -13,6 +13,7 @@ local overlayProvider = foundationModule.OverlayProvider
 local popoverSide = foundationModule.Enums.PopoverSide
 local popoverAlign = foundationModule.Enums.PopoverAlign
 local fIntUnpublishedPlaytestModeTooltipDisplayLimit = sharedFlagsModule.FIntUnpublishedPlaytestModeTooltipDisplayLimit
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
 local function _(p1)
 	-- upvalues: fIntUnpublishedPlaytestModeTooltipDisplayLimit (ref), buildModeLaunchModule (ref), buildAppStorageModule (ref)
@@ -20,11 +21,11 @@ local function _(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fIntUnpublishedPlaytestModeTooltipDisplayLimit (ref), buildModeLaunchModule (ref), buildAppStorageModule (ref), overlayProvider (ref), educationalTooltip (ref), popoverSide (ref), popoverAlign (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref)
-	local var1 = useLocalization({
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fIntUnpublishedPlaytestModeTooltipDisplayLimit (ref), buildModeLaunchModule (ref), buildAppStorageModule (ref), overlayProvider (ref), educationalTooltip (ref), popoverSide (ref), popoverAlign (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref)
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		description = localizationStringsModule.UNPUBLISHED_PLAYTEST_MODE_TOOLTIP_DESCRIPTION,
 		title = localizationStringsModule.UNPUBLISHED_PLAYTEST_MODE_TOOLTIP_TITLE
-	})
+	}) else nil
 	local useState = reactModule.useState
 	local anchorRef = p1.anchorRef
 	local var2 = fIntUnpublishedPlaytestModeTooltipDisplayLimit > 0 and (buildModeLaunchModule:hasBuildMode() and (buildAppStorageModule.getUnpublishedPlaytestModeTooltipDisplayCount() < fIntUnpublishedPlaytestModeTooltipDisplayLimit and (anchorRef ~= nil and anchorRef.current ~= nil)))
@@ -51,8 +52,8 @@ return reactModule.memo(function(p1)
 		Tooltip = reactModule.createElement(educationalTooltip, {
 			testId = "unpublished-playtest-mode-tooltip",
 			anchorRef = p1.anchorRef,
-			title = var1.title,
-			text = var1.description,
+			title = if fFlagBuildLocalization then var1.title else localizationStringsModule.UNPUBLISHED_PLAYTEST_MODE_TOOLTIP_TITLE,
+			text = if fFlagBuildLocalization then var1.description else localizationStringsModule.UNPUBLISHED_PLAYTEST_MODE_TOOLTIP_DESCRIPTION,
 			side = popoverSide.Bottom,
 			align = popoverAlign.Start,
 			isOpen = useState,

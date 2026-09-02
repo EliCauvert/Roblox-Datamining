@@ -8,11 +8,12 @@ local constants = require(parent.NavigationRodux).Constants
 local splitPaneContextModule = require(script.Parent.Parent.Context.SplitPaneContext)
 local splitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
 local computeSplitEligibilityModule = require(script.Parent.Parent.Utils.computeSplitEligibility)
+local supportPaneMode = appSplitViewModule.Enums.SupportPaneMode
 local splitPaneSlot = appSplitViewModule.Enums.SplitPaneSlot
 local tempRnSwitchNavigatorName = constants.TempRnSwitchNavigatorName
 
 return function(p1, p2)
-	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), computeSplitEligibilityModule (ref), reactModule (ref), splitPaneContextModule (ref), tempRnSwitchNavigatorName (ref), splitPaneSlot (ref), viewState (ref), roactNavigationModule (ref)
+	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), computeSplitEligibilityModule (ref), reactModule (ref), splitPaneContextModule (ref), tempRnSwitchNavigatorName (ref), splitPaneSlot (ref), viewState (ref), roactNavigationModule (ref), supportPaneMode (ref)
 	local options
 	local store = splitPaneStoreModule.getStore()
 	local var1 = signalsReactModule.useSignalState(store.getIsBreakpointEnabled)
@@ -75,10 +76,10 @@ return function(p1, p2)
 		end
 	end, { var5, var2, p1, store })
 	reactModule.useEffect(function()
-		-- upvalues: options (ref), var5 (ref), store (ref), p1 (ref), viewState (copy), splitPaneSlot (copy)
+		-- upvalues: options (ref), var5 (ref), store (ref), supportPaneMode (copy), p1 (ref), viewState (copy), splitPaneSlot (copy)
 		if options then return end
-		if var5 then
-			store.setTemporarySupportPaneMode(nil)
+		if var5 and store.getSupportPaneMode(false) ~= supportPaneMode.Normal then
+			store.setSupportPaneMode(supportPaneMode.Normal)
 		end
 		for i, v in p1 do
 			if v.viewState == viewState.Closing and v.descriptor.options.splitPaneEligibility == splitPaneSlot.Support then

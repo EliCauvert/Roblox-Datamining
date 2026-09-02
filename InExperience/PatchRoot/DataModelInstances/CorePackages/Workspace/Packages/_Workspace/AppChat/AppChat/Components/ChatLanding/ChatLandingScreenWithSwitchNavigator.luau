@@ -40,7 +40,6 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local getFFlagIsSquadEnabled = sharedFlagsModule.GetFFlagIsSquadEnabled
 local getFFlagEnableAppChatInExperience = sharedFlagsModule.GetFFlagEnableAppChatInExperience
 local appChatFixChatLandingContainerKeyPropConflict = game:DefineFastFlag("AppChatFixChatLandingContainerKeyPropConflict", false)
-local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
 local argoPartyExperimentation = require(parent.SocialExperiments).ArgoPartyExperimentation
 
 local function LeftContainerTelemetryProviders(p1)
@@ -201,7 +200,7 @@ function chatLandingScreenWithSwitchNavigator.init(p1)
 end
 
 function chatLandingScreenWithSwitchNavigator.render(p1)
-	-- upvalues: loggerModule (ref), argCheckModule (ref), withStyle (ref), roactModule (ref), LeftContainerTelemetryProviders (ref), topBarProviderModule (ref), enumScreensModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), fFlagAppChatTopBarConfigDrivenModule (ref), chatLandingTopBarModule (ref), createChatTopBarModule (ref), cryoModule (ref), chatLandingScreenModule (ref), chatSearchBoxModule (ref), providerModule (ref), appChatFixChatLandingContainerKeyPropConflict (ref), chatLandingContainerModule (ref), RightContainerTelemetryProviders (ref), conversationSwitchNavigatorModule (ref), reactModule (ref), contextModule (ref), conversationStackNavigationFocusListenerModule (ref)
+	-- upvalues: loggerModule (ref), argCheckModule (ref), withStyle (ref), roactModule (ref), LeftContainerTelemetryProviders (ref), topBarProviderModule (ref), enumScreensModule (ref), fFlagAppChatTopBarConfigDrivenModule (ref), chatLandingTopBarModule (ref), createChatTopBarModule (ref), cryoModule (ref), chatLandingScreenModule (ref), chatSearchBoxModule (ref), providerModule (ref), appChatFixChatLandingContainerKeyPropConflict (ref), chatLandingContainerModule (ref), RightContainerTelemetryProviders (ref), conversationSwitchNavigatorModule (ref), reactModule (ref), contextModule (ref), conversationStackNavigationFocusListenerModule (ref)
 	loggerModule:info("{screen} render")
 	local var1 = argCheckModule.isNotNil(p1.props.navigation, "navigation in ChatLandingScreenWithSwitchNavigator")
 	local key = var1 and var1.getParam("key", "") or ""
@@ -209,7 +208,7 @@ function chatLandingScreenWithSwitchNavigator.render(p1)
 	local topBarHeight = var1.getScreenProps("topBarHeight", 0)
 	
 	return withStyle(function(p2)
-		-- upvalues: roactModule (copy), LeftContainerTelemetryProviders (copy), topBarProviderModule (copy), enumScreensModule (copy), argCheckModule (copy), fFlagAppChatConsoleFocusFixesModule (copy), p1 (ref), fFlagAppChatTopBarConfigDrivenModule (copy), chatLandingTopBarModule (copy), var1 (ref), createChatTopBarModule (copy), cryoModule (copy), chatLandingScreenModule (copy), showSearchRow (ref), chatSearchBoxModule (copy), topBarHeight (ref), providerModule (copy), appChatFixChatLandingContainerKeyPropConflict (copy), chatLandingContainerModule (copy), key (ref), RightContainerTelemetryProviders (copy), conversationSwitchNavigatorModule (copy), reactModule (copy), contextModule (copy), conversationStackNavigationFocusListenerModule (copy)
+		-- upvalues: roactModule (copy), LeftContainerTelemetryProviders (copy), topBarProviderModule (copy), enumScreensModule (copy), argCheckModule (copy), p1 (ref), fFlagAppChatTopBarConfigDrivenModule (copy), chatLandingTopBarModule (copy), var1 (ref), createChatTopBarModule (copy), cryoModule (copy), chatLandingScreenModule (copy), showSearchRow (ref), chatSearchBoxModule (copy), topBarHeight (ref), providerModule (copy), appChatFixChatLandingContainerKeyPropConflict (copy), chatLandingContainerModule (copy), key (ref), RightContainerTelemetryProviders (copy), conversationSwitchNavigatorModule (copy), reactModule (copy), contextModule (copy), conversationStackNavigationFocusListenerModule (copy)
 		return reactModule.createElement(contextModule.Provider, { value = p1.wideModeFocusValue }, {
 			FocusListener = roactModule.createElement(conversationStackNavigationFocusListenerModule, {
 				navigation = var1,
@@ -222,7 +221,7 @@ function chatLandingScreenWithSwitchNavigator.render(p1)
 					LeftContainer = roactModule.createElement(topBarProviderModule, {
 						screenName = enumScreensModule.ChatLanding,
 						render = function(p3)
-							-- upvalues: enumScreensModule (copy), argCheckModule (copy), roactModule (copy), fFlagAppChatConsoleFocusFixesModule (copy), p1 (copy), fFlagAppChatTopBarConfigDrivenModule (copy), chatLandingTopBarModule (copy), var1 (copy), createChatTopBarModule (copy), cryoModule (copy), chatLandingScreenModule (copy), showSearchRow (copy), chatSearchBoxModule (copy), topBarHeight (copy), providerModule (copy), p2 (ref), appChatFixChatLandingContainerKeyPropConflict (copy), chatLandingContainerModule (copy), key (copy)
+							-- upvalues: enumScreensModule (copy), argCheckModule (copy), roactModule (copy), p1 (copy), fFlagAppChatTopBarConfigDrivenModule (copy), chatLandingTopBarModule (copy), var1 (copy), createChatTopBarModule (copy), cryoModule (copy), chatLandingScreenModule (copy), showSearchRow (copy), chatSearchBoxModule (copy), topBarHeight (copy), providerModule (copy), p2 (ref), appChatFixChatLandingContainerKeyPropConflict (copy), chatLandingContainerModule (copy), key (copy)
 							local screenTopBar = p3.getScreenTopBar(enumScreensModule.ChatLanding)
 							argCheckModule.isType(screenTopBar, "table", "screenTopBar")
 							
@@ -231,9 +230,6 @@ function chatLandingScreenWithSwitchNavigator.render(p1)
 								Position = UDim2.new(0, 0, 0, 0),
 								BackgroundTransparency = 1,
 								BorderSizePixel = 0,
-								SelectionGroup = if fFlagAppChatConsoleFocusFixesModule then true else nil,
-								SelectionBehaviorDown = if fFlagAppChatConsoleFocusFixesModule then Enum.SelectionBehavior.Stop else nil,
-								SelectionBehaviorUp = if fFlagAppChatConsoleFocusFixesModule then Enum.SelectionBehavior.Stop else nil,
 								[roactModule.Ref] = p1.leftContainerRef
 							}, {
 								layout = roactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
@@ -307,10 +303,7 @@ function chatLandingScreenWithSwitchNavigator.render(p1)
 						ClipsDescendants = true,
 						BackgroundTransparency = 1,
 						BorderSizePixel = 0,
-						[roactModule.Ref] = p1.rightContainerRef,
-						SelectionGroup = if fFlagAppChatConsoleFocusFixesModule then true else nil,
-						SelectionBehaviorDown = if fFlagAppChatConsoleFocusFixesModule then Enum.SelectionBehavior.Stop else nil,
-						SelectionBehaviorUp = if fFlagAppChatConsoleFocusFixesModule then Enum.SelectionBehavior.Stop else nil
+						[roactModule.Ref] = p1.rightContainerRef
 					}, {
 						Content = roactModule.createElement(providerModule, {
 							value = {

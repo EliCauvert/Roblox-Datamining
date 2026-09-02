@@ -1,9 +1,13 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
+local sharedFlagsModule = require(parent.SharedFlags)
 local signalsModule = require(parent.Signals)
 local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local universeConfigurationModule = require(parent.DataHydration.UniverseConfiguration)
+local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local _ = require(buildExperience.Chat.chatTypes)
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
+local BUILD_ASSISTANT_FALLBACK_NAME = localizationStringsModule.BUILD_ASSISTANT_FALLBACK_NAME
 
 local function _(p1)
 	if p1 == nil then
@@ -33,7 +37,7 @@ local function makeTarget(p1, p2, p3, p4)
 end
 
 return function(p1)
-	-- upvalues: creatorAgentChatModule (ref), universeConfigurationModule (ref), signalsModule (ref), makeTarget (ref)
+	-- upvalues: fFlagBuildLocalization (ref), BUILD_ASSISTANT_FALLBACK_NAME (ref), creatorAgentChatModule (ref), universeConfigurationModule (ref), signalsModule (ref), makeTarget (ref)
 	local sessionId = p1.sessionId
 	local var1 = typeof(sessionId) == "string" and sessionId ~= ""
 	local var2 = p1.universeId ~= nil and p1.universeId ~= 0
@@ -41,11 +45,11 @@ return function(p1)
 	if not var2 and not var1 then
 		return nil
 	end
-	local fallbackExperienceName = p1.fallbackExperienceName
-	local var3 = nil
+	local var3 = if fFlagBuildLocalization then p1.fallbackExperienceName else BUILD_ASSISTANT_FALLBACK_NAME
+	local var4 = nil
 	
 	if not var2 and var1 then
-		var3 = (p1.creatorAgentChatStore or creatorAgentChatModule.getCreatorAgentChatStore()).sessionLoad(sessionId)
+		var4 = (p1.creatorAgentChatStore or creatorAgentChatModule.getCreatorAgentChatStore()).sessionLoad(sessionId)
 	end
 	local configurationStore = p1.configurationStore
 	
@@ -57,45 +61,45 @@ return function(p1)
 		return configurationStore_1
 	end
 	
-	local var4 = false
+	local var5 = false
 	
 	return signalsModule.createEffect(function(p2)
-		-- upvalues: var4 (write), var2 (ref), p1 (ref), var3 (write), sessionId (ref), fallbackExperienceName (ref), configurationStore (write), universeConfigurationModule (copy), makeTarget (copy)
-		if var4 then return end
+		-- upvalues: var5 (write), var2 (ref), p1 (ref), var4 (write), sessionId (ref), var3 (ref), configurationStore (write), universeConfigurationModule (copy), makeTarget (copy)
+		if var5 then return end
 		local universeId
 		local _ = nil
 		
 		if var2 then
 			universeId = p1.universeId
-		elseif var3 == nil then
+		elseif var4 == nil then
 			universeId = nil
 		else
-			local var5 = var3.state(p2)
+			local var6 = var4.state(p2)
 			
-			if var5.status == "pending" then return end
-			if var5.status == "succeeded" then
-				local result = var5.result
+			if var6.status == "pending" then return end
+			if var6.status == "succeeded" then
+				local result = var6.result
 				
 				if result == nil then
 					universeId = nil
 				else
 					local meta = result._meta
-					local var6 = if meta ~= nil then nil else meta._roblox
-					local var7 = if var6 ~= nil then nil else var6.universeId
-					universeId = if typeof(var7) == "number" and var7 ~= 0 then var7 else nil
+					local var7 = if meta ~= nil then nil else meta._roblox
+					local var8 = if var7 ~= nil then nil else var7.universeId
+					universeId = if typeof(var8) == "number" and var8 ~= 0 then var8 else nil
 				end
 			else
 				universeId = nil
 			end
 		end
 		if universeId == nil then
-			var4 = true
+			var5 = true
 			p1.onOpenChat({
 				universeId = 0,
 				placeId = nil,
 				gameIcon = nil,
 				sessionId = sessionId,
-				experienceName = fallbackExperienceName
+				experienceName = var3
 			})
 			
 			return
@@ -107,7 +111,7 @@ return function(p1)
 		if andFetchSummary.status(p2) == "NotReady" then
 			return
 		end
-		var4 = true
-		p1.onOpenChat(makeTarget(universeId, sessionId, andFetchSummary.data(p2), fallbackExperienceName))
+		var5 = true
+		p1.onOpenChat(makeTarget(universeId, sessionId, andFetchSummary.data(p2), var3))
 	end)
 end

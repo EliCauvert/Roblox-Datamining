@@ -3,6 +3,7 @@ local parent = buildExperience.Parent
 local reactModule = require(parent.React)
 local useOpenWebView = require(parent.WebViewUtils).useOpenWebView
 local useLocalization = require(parent.Localization).Hooks.useLocalization
+local fFlagBuildLocalization = require(parent.SharedFlags).FFlagBuildLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local analyticsKeysModule = require(buildExperience.Analytics.AnalyticsKeys)
 local analyticsMetricModule = require(buildExperience.Analytics.AnalyticsMetric)
@@ -12,7 +13,7 @@ local gameConfigurationActionsModule = require(buildExperience.utils.GameConfigu
 local _ = require(script.Parent.MetricDetailSheetView)
 
 return function(p1)
-	-- upvalues: analyticsMetricModule (ref), useOpenWebView (ref), analyticsKeysModule (ref), useLocalization (ref), reactModule (ref), localizationStringsModule (ref), gameConfigurationActionsModule (ref)
+	-- upvalues: analyticsMetricModule (ref), useOpenWebView (ref), analyticsKeysModule (ref), useLocalization (ref), reactModule (ref), fFlagBuildLocalization (ref), localizationStringsModule (ref), gameConfigurationActionsModule (ref)
 	local metricId = analyticsMetricModule.MetricById[p1.metricId] or analyticsMetricModule.DailyActiveUsers
 	local var1 = useOpenWebView()
 	local t = {
@@ -47,9 +48,9 @@ return function(p1)
 		end
 		onClose()
 	end, { onOpenChat, analyzePrompt, var3, onClose })
-	local creatorHub = useLocalization({
+	local var5 = if fFlagBuildLocalization then useLocalization({
 		creatorHub = localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB
-	}).creatorHub
+	}).creatorHub else localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB
 	local overviewPath = metricId.overviewPath
 	local universeId = p1.universeId
 	
@@ -66,16 +67,16 @@ return function(p1)
 		viewInOverviewText = if t.viewInOverview == nil then "" else var2.viewInOverview,
 		onAnalyze = var4,
 		onViewInOverview = reactModule.useCallback(function()
-			-- upvalues: overviewPath (ref), var1 (ref), gameConfigurationActionsModule (copy), universeId (ref), creatorHub (ref), onClose (ref)
+			-- upvalues: overviewPath (ref), var1 (ref), gameConfigurationActionsModule (copy), universeId (ref), var5 (ref), onClose (ref)
 			if overviewPath ~= nil then
-				var1(gameConfigurationActionsModule.getCreatorHubAnalyticsUrl(universeId, overviewPath), creatorHub)
+				var1(gameConfigurationActionsModule.getCreatorHubAnalyticsUrl(universeId, overviewPath), var5)
 			end
 			onClose()
 		end, {
 			var1,
 			overviewPath,
 			universeId,
-			creatorHub,
+			var5,
 			onClose
 		}),
 		onClose = p1.onClose,

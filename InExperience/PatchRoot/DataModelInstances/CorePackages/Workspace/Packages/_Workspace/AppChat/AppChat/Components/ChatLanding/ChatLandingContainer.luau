@@ -5,7 +5,6 @@ local appCommonLibModule = require(parent.AppCommonLib)
 local appNavBarModule = require(parent.AppNavBar)
 local visibilityControl = appNavBarModule.VisibilityControl
 local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
 local componentsModule = require(parent.FriendsLanding.Components)
 local reactModule = require(parent.React)
 local roactRoduxModule = require(parent.RoactRodux)
@@ -62,11 +61,9 @@ local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTra
 local fFlagAppChatMessageTTIMilestonesModule = require(appChat.Flags.FFlagAppChatMessageTTIMilestones)
 local signalsMigrationConfigModule = require(appChat.Flags.SignalsMigrationConfig)
 local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
-local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
 local useCallback = reactModule.useCallback
 local useEffect = reactModule.useEffect
 local isVRAppBuild = appCommonLibModule.IsVRAppBuild
-local useTokens = foundationModule.Hooks.useTokens
 local useStyle = UIBloxModule.Core.Style.useStyle
 local useTextSizeOffset = UIBloxModule.Core.Style.useTextSizeOffset
 local noFriendsView = componentsModule.NoFriendsView
@@ -115,7 +112,7 @@ local _ = function(p3)
 end
 
 function ChatLandingContainer(p3)
-	-- upvalues: cryoModule (ref), t (ref), useAnalyticsModule (ref), useChatPlacementContext (ref), useDispatch (ref), useIsChatEnabledModule (ref), useIsGroupChatEnabledModule (ref), useIsChatEnabledFromReasonModule (ref), useIsInExperienceModule (ref), useAppChatIsWideModeModule (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), useIsAppLoadedModule (ref), useAreConversationsFetchingModule (ref), useHasConversationsModule (ref), useIsOldestConversationFetchedModule (ref), useLocalUserId (ref), useNavigation (ref), useStyle (ref), useTextSizeOffset (ref), useAnalyticsModule_1 (ref), fFlagAppChatConsoleFocusFixesModule (ref), useTokens (ref), fFlagCreateConnectionsHub (ref), useGetConversationsModule (ref), shouldReadConversationListFromSignalsStore (ref), useConversationListModule (ref), useEffect (ref), getConversationIdsModule (ref), name (ref), httpService (ref), usePrevious (ref), fetchConversationsByPageModule (ref), reactModule (ref), getOtherParticipantsModule (ref), useIsUserPendingModule (ref), conversationChannelsModule (ref), getConversationTitleModule (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), chatLandingTelemetryStateModule (ref), useEffectOnMount (ref), chatLandingTelemetryEventsModule (ref), useLocalization (ref), fFlagFriendsChatPlaceholderRenameFix (ref), useCallback (ref), partyPageCarouselExperimentation (ref), eventNamesModule (ref), var1 (ref), var2 (ref), enumScreensModule (ref), createConversationModule (ref), parseCreateConversationErrorsModule (ref), createConversationErrorModule (ref), useSelector (ref), useIsExternalNavigationAvailableModule (ref), fFlagAppIaScrollAway (ref), appNavBarModule (ref), useCanAccessPartyModule (ref), squadQuickStartExperimentation (ref), chatLoadingContainerModule (ref), noFriendsView (ref), emptyStateTypeModule (ref), appPage (ref), fFlagConnectionsToFriendsRename (ref), noConversationsLandingModule (ref), conversationListWithTopBarModule (ref), signalsMigrationConfigModule (ref), fFlagEnableScrollAwayContentScrollableFix (ref), visibilityControl (ref), getFFlagChatTabHideGroupsLinkOnVRModule (ref), isVRAppBuild (ref), fFlagAppChatTopBarSignalsStoreModule (ref), getTopBarStoreModule (ref), conversationGroupsEntryContainerModule (ref), useChatIsVisibleModule (ref), fFlagSignalsNavP3hMisc (ref)
+	-- upvalues: cryoModule (ref), t (ref), useAnalyticsModule (ref), useChatPlacementContext (ref), useDispatch (ref), useIsChatEnabledModule (ref), useIsGroupChatEnabledModule (ref), useIsChatEnabledFromReasonModule (ref), useIsInExperienceModule (ref), useAppChatIsWideModeModule (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), useIsAppLoadedModule (ref), useAreConversationsFetchingModule (ref), useHasConversationsModule (ref), useIsOldestConversationFetchedModule (ref), useLocalUserId (ref), useNavigation (ref), useStyle (ref), useTextSizeOffset (ref), useAnalyticsModule_1 (ref), fFlagCreateConnectionsHub (ref), useGetConversationsModule (ref), shouldReadConversationListFromSignalsStore (ref), useConversationListModule (ref), useEffect (ref), getConversationIdsModule (ref), name (ref), httpService (ref), usePrevious (ref), fetchConversationsByPageModule (ref), reactModule (ref), getOtherParticipantsModule (ref), useIsUserPendingModule (ref), conversationChannelsModule (ref), getConversationTitleModule (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), chatLandingTelemetryStateModule (ref), useEffectOnMount (ref), chatLandingTelemetryEventsModule (ref), useLocalization (ref), fFlagFriendsChatPlaceholderRenameFix (ref), useCallback (ref), partyPageCarouselExperimentation (ref), eventNamesModule (ref), var1 (ref), var2 (ref), enumScreensModule (ref), createConversationModule (ref), parseCreateConversationErrorsModule (ref), createConversationErrorModule (ref), useSelector (ref), useIsExternalNavigationAvailableModule (ref), fFlagAppIaScrollAway (ref), appNavBarModule (ref), useCanAccessPartyModule (ref), squadQuickStartExperimentation (ref), chatLoadingContainerModule (ref), noFriendsView (ref), emptyStateTypeModule (ref), appPage (ref), fFlagConnectionsToFriendsRename (ref), noConversationsLandingModule (ref), conversationListWithTopBarModule (ref), signalsMigrationConfigModule (ref), fFlagEnableScrollAwayContentScrollableFix (ref), visibilityControl (ref), getFFlagChatTabHideGroupsLinkOnVRModule (ref), isVRAppBuild (ref), fFlagAppChatTopBarSignalsStoreModule (ref), getTopBarStoreModule (ref), conversationGroupsEntryContainerModule (ref), useChatIsVisibleModule (ref), fFlagSignalsNavP3hMisc (ref)
 	local var3 = cryoModule.Dictionary.join(t, p3)
 	local var4 = useAnalyticsModule()
 	local var5 = useChatPlacementContext()
@@ -138,157 +135,156 @@ function ChatLandingContainer(p3)
 	local var18 = useLocalUserId()
 	local var19 = useNavigation()
 	local var20 = useStyle()
-	local var21 = useTextSizeOffset()
-	local var22 = useAnalyticsModule_1()
-	local var23 = if fFlagAppChatConsoleFocusFixesModule then (if fFlagAppChatConsoleFocusFixesModule then useTokens() else nil).Size.Size_1600 + 2 * var21 else 64 + 2 * var21
-	local var24 = if fFlagCreateConnectionsHub then var19.getScreenProps("navigateToLuaAppPages", {}) else nil
-	local var25 = useGetConversationsModule()
+	local var21 = useAnalyticsModule_1()
+	local var22 = 64 + 2 * useTextSizeOffset()
+	local var23 = if fFlagCreateConnectionsHub then var19.getScreenProps("navigateToLuaAppPages", {}) else nil
+	local var24 = useGetConversationsModule()
 	local t_1 = {}
 	local t_2 = {}
 	
 	if shouldReadConversationListFromSignalsStore then
-		local var26 = useConversationListModule(true)
-		t_1 = var26.items
-		t_2 = var26.listStatus
+		local var25 = useConversationListModule(true)
+		t_1 = var25.items
+		t_2 = var25.listStatus
 	end
-	local var27
-	local var28 = if shouldReadConversationListFromSignalsStore then t_1 else var25
+	local var26
+	local var27 = if shouldReadConversationListFromSignalsStore then t_1 else var24
 	
 	if shouldReadConversationListFromSignalsStore then
-		var27 = t_2.isFetchingConversations == true
-		var27 = nil
+		var26 = t_2.isFetchingConversations == true
+		var26 = nil
 	else
-		var27 = var15
+		var26 = var15
+	end
+	local var28
+	if shouldReadConversationListFromSignalsStore then
+		var28 = #t_1 > 0
+		var28 = nil
+	else
+		var28 = var16
 	end
 	local var29
 	if shouldReadConversationListFromSignalsStore then
-		var29 = #t_1 > 0
+		var29 = t_2.oldestConversationIsFetched == true
 		var29 = nil
 	else
-		var29 = var16
-	end
-	local var30
-	if shouldReadConversationListFromSignalsStore then
-		var30 = t_2.oldestConversationIsFetched == true
-		var30 = nil
-	else
-		var30 = var17
+		var29 = var17
 	end
 	if shouldReadConversationListFromSignalsStore then
 		useEffect(function()
-			-- upvalues: var25 (ref), t_1 (write), getConversationIdsModule (copy), name (copy), httpService (copy)
-			if #var25 == 0 and #t_1 == 0 then return end
-			local var31, ok, ok_1
-			local var32 = getConversationIdsModule(var25)
-			local var33 = getConversationIdsModule(t_1)
+			-- upvalues: var24 (ref), t_1 (write), getConversationIdsModule (copy), name (copy), httpService (copy)
+			if #var24 == 0 and #t_1 == 0 then return end
+			local var30, ok, ok_1
+			local var31 = getConversationIdsModule(var24)
+			local var32 = getConversationIdsModule(t_1)
 			
-			if #var32 == #var33 then
-				for ok, ok_1 in var32 do
-					if ok_1 ~= var33[ok] then
-						var31 = false
+			if #var31 == #var32 then
+				for ok, ok_1 in var31 do
+					if ok_1 ~= var32[ok] then
+						var30 = false
 					end
 				end
-				var31 = true
+				var30 = true
 			else
-				var31 = false
+				var30 = false
 			end
-			if not var31 then
-				var31 = name
-				local var34 = "Conversation list parity mismatch. Rodux ids: {}, Signals ids: {}"
+			if not var30 then
+				var30 = name
+				local var33 = "Conversation list parity mismatch. Rodux ids: {}, Signals ids: {}"
 				ok, ok_1 = pcall(function()
+					-- upvalues: httpService (copy), var31 (ref)
+					return httpService:JSONEncode(var31)
+				end)
+				local var34 = if ok then ok_1 else "[]"
+				ok_1, status_1 = pcall(function()
 					-- upvalues: httpService (copy), var32 (ref)
 					return httpService:JSONEncode(var32)
 				end)
-				local var35 = if ok then ok_1 else "[]"
-				ok_1, status_1 = pcall(function()
-					-- upvalues: httpService (copy), var33 (ref)
-					return httpService:JSONEncode(var33)
-				end)
-				var31:warning(var34, var35, if ok_1 then status_1 else "[]")
+				var30:warning(var33, var34, if ok_1 then status_1 else "[]")
 			end
-		end, { var25, t_1 })
+		end, { var24, t_1 })
 	end
-	local var31 = usePrevious(var7)
+	local var30 = usePrevious(var7)
 	useEffect(function()
-		-- upvalues: name (copy), var31 (ref), var7 (ref), var6 (ref), fetchConversationsByPageModule (copy)
-		name:debug("Comparing previousIsChatEnabled ({}) --> isChatEnabled ({})", var31, var7)
+		-- upvalues: name (copy), var30 (ref), var7 (ref), var6 (ref), fetchConversationsByPageModule (copy)
+		name:debug("Comparing previousIsChatEnabled ({}) --> isChatEnabled ({})", var30, var7)
 		
-		if var31 ~= nil and var31 ~= var7 and var7 then
+		if var30 ~= nil and var30 ~= var7 and var7 then
 			name:info("Chat has become enabled, fetching conversations")
 			var6(fetchConversationsByPageModule())
 		end
-	end, { var6, var7, var31 })
-	local var32, var33, var34 = reactModule.useMemo(function()
-		-- upvalues: var28 (ref), shouldReadConversationListFromSignalsStore (copy), cryoModule (copy), getOtherParticipantsModule (copy), var18 (ref), useIsUserPendingModule (copy), conversationChannelsModule (copy), getConversationTitleModule (copy), var8 (ref)
+	end, { var6, var7, var30 })
+	local var31, var32, var33 = reactModule.useMemo(function()
+		-- upvalues: var27 (ref), shouldReadConversationListFromSignalsStore (copy), cryoModule (copy), getOtherParticipantsModule (copy), var18 (ref), useIsUserPendingModule (copy), conversationChannelsModule (copy), getConversationTitleModule (copy), var8 (ref)
+		local var34 = 0
 		local var35 = 0
-		local var36 = 0
 		local t = {}
 		
-		for i, v in var28 do
-			local var37 = if shouldReadConversationListFromSignalsStore and v.otherParticipants == nil then cryoModule.Dictionary.join(v, { otherParticipants = getOtherParticipantsModule(v, var18) }) else v
+		for i, v in var27 do
+			local var36 = if shouldReadConversationListFromSignalsStore and v.otherParticipants == nil then cryoModule.Dictionary.join(v, { otherParticipants = getOtherParticipantsModule(v, var18) }) else v
 			
-			if useIsUserPendingModule(var37) then
+			if useIsUserPendingModule(var36) then
+				var34 += 1
+			end
+			if var36.moderationType == conversationChannelsModule.ModerationType.TrustedComms then
 				var35 += 1
 			end
-			if var37.moderationType == conversationChannelsModule.ModerationType.TrustedComms then
-				var36 += 1
-			end
-			local var38 = getConversationTitleModule(var37)
+			local var37 = getConversationTitleModule(var36)
 			
-			if var8 or var37.conversationType ~= "MultiUserConversation" then
-				table.insert(t, cryoModule.Dictionary.join(var37, { title = var38 }))
+			if var8 or var36.conversationType ~= "MultiUserConversation" then
+				table.insert(t, cryoModule.Dictionary.join(var36, { title = var37 }))
 			end
 		end
-		return t, var35, var36
+		return t, var34, var35
 	end, {
-		var28,
+		var27,
 		var8,
 		if shouldReadConversationListFromSignalsStore then var18 else nil
 	})
-	local var39 = useTelemetryModule(chatLandingTelemetryLayerModule.Context)
-	local emit = var39.emit
+	local var38 = useTelemetryModule(chatLandingTelemetryLayerModule.Context)
+	local emit = var38.emit
 	
 	if shouldReadConversationListFromSignalsStore then
-		local var40 = reactModule.useRef(var39.emit)
-		var40.current = var39.emit
+		local var39 = reactModule.useRef(var38.emit)
+		var39.current = var38.emit
 		
 		emit = function(...)
-			-- upvalues: var40 (ref)
-			var40.current(...)
+			-- upvalues: var39 (ref)
+			var39.current(...)
 		end
 	end
 	local frame
-	local var41 = chatLandingTelemetryStateModule.useSetState()
+	local var40 = chatLandingTelemetryStateModule.useSetState()
 	useEffect(function()
-		-- upvalues: var41 (ref), cryoModule (copy), var32 (ref), var33 (ref), var34 (ref)
-		var41(function(p4)
-			-- upvalues: cryoModule (copy), var32 (copy), var33 (copy), var34 (copy)
+		-- upvalues: var40 (ref), cryoModule (copy), var31 (ref), var32 (ref), var33 (ref)
+		var40(function(p4)
+			-- upvalues: cryoModule (copy), var31 (copy), var32 (copy), var33 (copy)
 			return cryoModule.Dictionary.join(p4, {
-				chatLandingListCount = #var32,
-				pendingConversationCount = var33,
-				unfilteredConversationCount = var34
+				chatLandingListCount = #var31,
+				pendingConversationCount = var32,
+				unfilteredConversationCount = var33
 			})
 		end)
-	end, { #var32, var33, var34, var41 })
+	end, { #var31, var32, var33, var40 })
 	useEffectOnMount(function()
-		-- upvalues: var39 (ref), chatLandingTelemetryEventsModule (copy), var7 (ref)
-		var39.emit(chatLandingTelemetryEventsModule.ScreenRendered, { isChatEnabled = var7 })
+		-- upvalues: var38 (ref), chatLandingTelemetryEventsModule (copy), var7 (ref)
+		var38.emit(chatLandingTelemetryEventsModule.ScreenRendered, { isChatEnabled = var7 })
 	end)
-	local var42 = useLocalization({
+	local var41 = useLocalization({
 		networkErrorText = "Feature.Toast.NetworkingError.SomethingIsWrong",
 		chatUnavailableWithUser = if fFlagFriendsChatPlaceholderRenameFix then "Feature.Chat.Message.ChatUnavailableWithUser" else "Feature.Chat.Message.PartyUnavailableWithUser"
 	})
-	local var43 = useCallback(function()
+	local var42 = useCallback(function()
 		-- upvalues: partyPageCarouselExperimentation (copy), httpService (copy), var4 (ref), eventNamesModule (copy), var5 (ref), var1 (copy), var2 (copy), var19 (ref), enumScreensModule (copy)
 		if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then
-			local var44 = httpService:GenerateGUID(false)
+			local var43 = httpService:GenerateGUID(false)
 			var4.fireAnalyticsEvent(eventNamesModule.ChatLandingPartyQuickStartButtonClicked, {
 				clickLocation = var5.chatPlacement,
-				partyAttemptId = var44,
+				partyAttemptId = var43,
 				placeId = var1,
 				universeId = var2
 			})
-			var19.navigate(enumScreensModule.QuickStartSquadInviteFriends, { uuid = var44 })
+			var19.navigate(enumScreensModule.QuickStartSquadInviteFriends, { uuid = var43 })
 		end
 	end, {
 		var4,
@@ -297,27 +293,27 @@ function ChatLandingContainer(p3)
 		var1,
 		var2
 	})
-	local var44 = useCallback(function(p4)
-		-- upvalues: partyPageCarouselExperimentation (copy), var6 (ref), createConversationModule (copy), var22 (ref), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), var19 (ref), enumScreensModule (copy), parseCreateConversationErrorsModule (copy), var42 (ref), eventNamesModule (copy), createConversationErrorModule (copy)
+	local var43 = useCallback(function(p4)
+		-- upvalues: partyPageCarouselExperimentation (copy), var6 (ref), createConversationModule (copy), var21 (ref), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), var19 (ref), enumScreensModule (copy), parseCreateConversationErrorsModule (copy), var41 (ref), eventNamesModule (copy), createConversationErrorModule (copy)
 		if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then
-			var6(createConversationModule("one_to_one", { p4 }, var22, "navigateToConversationFromSocialCarousel")):andThen(function(p5)
+			var6(createConversationModule("one_to_one", { p4 }, var21, "navigateToConversationFromSocialCarousel")):andThen(function(p5)
 				-- upvalues: fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), var19 (copy), enumScreensModule (copy)
 				if fFlagAppChatPerfTrackingModule then
 					appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = p5.id })
 				end
 				var19.navigate(enumScreensModule.ChatConversation, { conversationId = p5.id })
 			end):catch(function(p5)
-				-- upvalues: parseCreateConversationErrorsModule (copy), var42 (copy), var19 (copy), enumScreensModule (copy), var22 (copy), eventNamesModule (copy), createConversationErrorModule (copy)
+				-- upvalues: parseCreateConversationErrorsModule (copy), var41 (copy), var19 (copy), enumScreensModule (copy), var21 (copy), eventNamesModule (copy), createConversationErrorModule (copy)
 				var19.navigate(enumScreensModule.RoactChatToast, {
 					toastProps = {
 						toastContent = {
-							toastTitle = if parseCreateConversationErrorsModule(p5) == "participant_chat_disabled" then var42.chatUnavailableWithUser else var42.networkErrorText
+							toastTitle = if parseCreateConversationErrorsModule(p5) == "participant_chat_disabled" then var41.chatUnavailableWithUser else var41.networkErrorText
 						}
 					}
 				})
 				
-				if var22 then
-					var22.fireAnalyticsEvent(eventNamesModule.NewConversationCreated, {
+				if var21 then
+					var21.fireAnalyticsEvent(eventNamesModule.NewConversationCreated, {
 						createConversationResult = createConversationErrorModule.FetchConversationError
 					})
 				end
@@ -325,59 +321,59 @@ function ChatLandingContainer(p3)
 		end
 	end, {
 		var6,
-		var42,
+		var41,
 		parseCreateConversationErrorsModule,
 		var19,
-		var22
+		var21
 	})
-	local var45 = cryoModule.isEmpty(var32)
-	local var46 = useSelector(function(p4)
+	local var44 = cryoModule.isEmpty(var31)
+	local var45 = useSelector(function(p4)
 		return p4.ChatAppReducer.ChatSettings.retrievalStatus ~= "Done"
-	end) or (if var45 then var27 else var45 and var29)
+	end) or (if var44 then var26 else var44 and var28)
 	local _ = nil
+	local var46 = false
 	local var47 = false
 	local var48 = false
-	local var49 = false
-	local var50 = useIsExternalNavigationAvailableModule({
+	local var49 = useIsExternalNavigationAvailableModule({
 		enumScreensModule.AddFriends,
 		enumScreensModule.PrivacySettings,
 		enumScreensModule.Groups
 	})
-	local var51 = fFlagAppIaScrollAway and (not var12 and appNavBarModule.getScrollAwayEnabled())
-	local var52 = useCanAccessPartyModule()
-	local var53 = squadQuickStartExperimentation.getPartyQuickStartChangesEnabled() and var52
+	local var50 = fFlagAppIaScrollAway and (not var12 and appNavBarModule.getScrollAwayEnabled())
+	local var51 = useCanAccessPartyModule()
+	local var52 = squadQuickStartExperimentation.getPartyQuickStartChangesEnabled() and var51
 	
-	if var46 then
+	if var45 then
 		frame = reactModule.createElement(chatLoadingContainerModule, {
 			cellWidth = 375,
 			topBarHeight = var3.topBarHeight,
 			pageHeaderText = var3.pageHeaderText,
-			cellHeight = var23,
-			topPadding = if fFlagAppIaScrollAway and var51 then var3.topBarHeight else nil
+			cellHeight = var22,
+			topPadding = if fFlagAppIaScrollAway and var50 then var3.topBarHeight else nil
 		})
-		var47 = true
-	elseif var7 and (not var45 or not var14 or var27) then
+		var46 = true
+	elseif var7 and (not var44 or not var14 or var26) then
 		local filterText = `conversationListWithTopBar{var3.filterText}`
+		var46 = true
 		var47 = true
 		var48 = true
-		var49 = true
 		frame = reactModule.createElement(conversationListWithTopBarModule, cryoModule.Dictionary.join(var3, {
 			filterText = if var3.isShowingFilterBox then var3.filterText else nil,
 			key = filterText,
-			itemList = var32,
+			itemList = var31,
 			appLoaded = var14,
 			localUserId = var18,
-			conversationsIsFetching = var27,
-			oldestConversationIsFetched = var30,
-			entryHeight = var23,
+			conversationsIsFetching = var26,
+			oldestConversationIsFetched = var29,
+			entryHeight = var22,
 			isInExperience = var12,
 			isWideMode = if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() or signalsMigrationConfigModule.shouldUseFoundationConversationRow then var13 else nil,
-			navigateToConversationFromUserId = if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then var44 else nil,
-			navigateToQuickStartSquadInviteFriends = if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then var43 else nil,
-			showGroupsLink = var50[enumScreensModule.Groups],
-			canvasTopPadding = if fFlagAppIaScrollAway and var51 then var3.topBarHeight else nil,
-			canAccessParty = var52,
-			isPartyQuickStartEnabled = var53
+			navigateToConversationFromUserId = if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then var43 else nil,
+			navigateToQuickStartSquadInviteFriends = if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then var42 else nil,
+			showGroupsLink = var49[enumScreensModule.Groups],
+			canvasTopPadding = if fFlagAppIaScrollAway and var50 then var3.topBarHeight else nil,
+			canAccessParty = var51,
+			isPartyQuickStartEnabled = var52
 		}))
 	elseif var7 then
 		frame = reactModule.createElement("Frame", {
@@ -388,15 +384,15 @@ function ChatLandingContainer(p3)
 		}, {
 			NoFriendsView = reactModule.createElement(noFriendsView, {
 				pageRenderReport = function()
-					-- upvalues: var39 (ref), chatLandingTelemetryEventsModule (copy), emptyStateTypeModule (copy)
-					var39.emit(chatLandingTelemetryEventsModule.ChatEmptyStateScreenRendered, { emptyStateType = emptyStateTypeModule.NoFriendsView })
+					-- upvalues: var38 (ref), chatLandingTelemetryEventsModule (copy), emptyStateTypeModule (copy)
+					var38.emit(chatLandingTelemetryEventsModule.ChatEmptyStateScreenRendered, { emptyStateType = emptyStateTypeModule.NoFriendsView })
 				end,
 				openAddFriendsPage = function()
-					-- upvalues: var39 (ref), chatLandingTelemetryEventsModule (copy), fFlagCreateConnectionsHub (copy), var24 (ref), appPage (copy), var3 (ref)
-					var39.emit(chatLandingTelemetryEventsModule.ChatAddFriendsBtnClicked, {})
+					-- upvalues: var38 (ref), chatLandingTelemetryEventsModule (copy), fFlagCreateConnectionsHub (copy), var23 (ref), appPage (copy), var3 (ref)
+					var38.emit(chatLandingTelemetryEventsModule.ChatAddFriendsBtnClicked, {})
 					
 					if fFlagCreateConnectionsHub then
-						var24[appPage.CoHubAddConnections]()
+						var23[appPage.CoHubAddConnections]()
 						
 						return
 					end
@@ -405,29 +401,29 @@ function ChatLandingContainer(p3)
 				noFriendsHeaderKey = if fFlagConnectionsToFriendsRename then "Feature.Chat.Label.AddFriends" else "Feature.Chat.Label.AddConnections",
 				noFriendsTextLabelKey = if fFlagConnectionsToFriendsRename then "Feature.Chat.Text.NoFriends" else "Feature.Chat.Text.NoConnections",
 				addFriendsBtnLabelKey = if fFlagConnectionsToFriendsRename then "Feature.Chat.Label.AddFriends" else "Feature.Chat.Label.AddConnections",
-				addFriendsBtnEnabled = var50[enumScreensModule.AddFriends]
+				addFriendsBtnEnabled = var49[enumScreensModule.AddFriends]
 			})
 		})
-		var47 = true
+		var46 = true
 	else
 		frame = reactModule.createElement(noConversationsLandingModule, {
 			chatEnabled = var7,
 			privacySettingsEnabled = var9,
 			globalRulesEnabled = var10,
 			thirdPartyPrivacySettingsEnabled = var11,
-			canNavigateToPrivacySettings = var50[enumScreensModule.PrivacySettings],
-			canNavigateToAddFriends = var50[enumScreensModule.AddFriends],
+			canNavigateToPrivacySettings = var49[enumScreensModule.PrivacySettings],
+			canNavigateToAddFriends = var49[enumScreensModule.AddFriends],
 			onCallToAction = function(p4)
-				-- upvalues: var3 (ref), var39 (ref), chatLandingTelemetryEventsModule (copy), fFlagCreateConnectionsHub (copy), var24 (ref), appPage (copy)
+				-- upvalues: var3 (ref), var38 (ref), chatLandingTelemetryEventsModule (copy), fFlagCreateConnectionsHub (copy), var23 (ref), appPage (copy)
 				if p4 == "privacy" then
 					var3.navigateToPrivacy()
 					
 					return
 				elseif p4 == "friends" then
-					var39.emit(chatLandingTelemetryEventsModule.ChatAddFriendsBtnClicked, {})
+					var38.emit(chatLandingTelemetryEventsModule.ChatAddFriendsBtnClicked, {})
 					
 					if fFlagCreateConnectionsHub then
-						var24[appPage.CoHubAddConnections]()
+						var23[appPage.CoHubAddConnections]()
 						
 						return
 					end
@@ -435,8 +431,8 @@ function ChatLandingContainer(p3)
 				end
 			end,
 			fireRenderEvent = function(p4)
-				-- upvalues: emptyStateTypeModule (copy), var39 (ref), chatLandingTelemetryEventsModule (copy)
-				var39.emit(chatLandingTelemetryEventsModule.ChatEmptyStateScreenRendered, {
+				-- upvalues: emptyStateTypeModule (copy), var38 (ref), chatLandingTelemetryEventsModule (copy)
+				var38.emit(chatLandingTelemetryEventsModule.ChatEmptyStateScreenRendered, {
 					emptyStateType = if p4 == "friends" then emptyStateTypeModule.NoFriendsView elseif p4 == "privacy" then emptyStateTypeModule.ChatSettingsDisabledView elseif p4 == "regional" then emptyStateTypeModule.ChatUnavailableRegionView else emptyStateTypeModule.EmptyConversationList
 				})
 			end
@@ -444,88 +440,88 @@ function ChatLandingContainer(p3)
 	end
 	if fFlagAppIaScrollAway and fFlagEnableScrollAwayContentScrollableFix then
 		useEffect(function()
-			-- upvalues: var51 (ref), visibilityControl (copy), var49 (write)
-			if var51 then
-				visibilityControl.setContentScrollable(var49)
+			-- upvalues: var50 (ref), visibilityControl (copy), var48 (write)
+			if var50 then
+				visibilityControl.setContentScrollable(var48)
 				
 				return
 			end
-		end, { var49, var51 })
+		end, { var48, var50 })
 	end
 	if getFFlagChatTabHideGroupsLinkOnVRModule() and isVRAppBuild() then
-		var47 = true
+		var46 = true
 	end
 	if fFlagAppChatTopBarSignalsStoreModule then
 		useEffect(function()
-			-- upvalues: var12 (ref), getTopBarStoreModule (copy), enumScreensModule (copy), var48 (write)
+			-- upvalues: var12 (ref), getTopBarStoreModule (copy), enumScreensModule (copy), var47 (write)
 			if var12 then
-				getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.ChatLanding, { rightHidden = not var48 })
+				getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.ChatLanding, { rightHidden = not var47 })
 			end
-		end, { var48, var12 })
+		end, { var47, var12 })
 	else
 		local setScreenTopBar = var19.getScreenProps("setScreenTopBar", function() end)
 		useEffect(function()
-			-- upvalues: var12 (ref), setScreenTopBar (ref), enumScreensModule (copy), var48 (write)
+			-- upvalues: var12 (ref), setScreenTopBar (ref), enumScreensModule (copy), var47 (write)
 			if var12 then
-				setScreenTopBar(enumScreensModule.ChatLanding, { rightHidden = not var48 })
+				setScreenTopBar(enumScreensModule.ChatLanding, { rightHidden = not var47 })
 			end
-		end, { var48, setScreenTopBar, var12 })
+		end, { var47, setScreenTopBar, var12 })
 	end
 	local _ = nil
-	local var54 = if not var47 and var50[enumScreensModule.Groups] then reactModule.createElement(reactModule.Fragment, nil, {
-		UIPadding = if fFlagAppIaScrollAway and var51 then reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var3.topBarHeight) }) else nil,
-		groupsLink = reactModule.createElement(conversationGroupsEntryContainerModule, { entryHeight = var23 }),
+	local var53 = if not var46 and var49[enumScreensModule.Groups] then reactModule.createElement(reactModule.Fragment, nil, {
+		UIPadding = if fFlagAppIaScrollAway and var50 then reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var3.topBarHeight) }) else nil,
+		groupsLink = reactModule.createElement(conversationGroupsEntryContainerModule, { entryHeight = var22 }),
 		chatFrame = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = UDim2.new(1, 0, 1, -var23),
-			Position = UDim2.new(0, 0, 0, var23)
+			Size = UDim2.new(1, 0, 1, -var22),
+			Position = UDim2.new(0, 0, 0, var22)
 		}, { chatContainer = frame })
 	}) else frame
-	local var55 = useChatIsVisibleModule()
+	local var54 = useChatIsVisibleModule()
 	reactModule.useEffect(function()
-		-- upvalues: var55 (ref), emit (write), chatLandingTelemetryEventsModule (copy), var7 (ref), var46 (ref)
-		if var55 then
-			emit(chatLandingTelemetryEventsModule.AppChatVisible, { isChatEnabled = var7, isChatLoading = var46 })
+		-- upvalues: var54 (ref), emit (write), chatLandingTelemetryEventsModule (copy), var7 (ref), var45 (ref)
+		if var54 then
+			emit(chatLandingTelemetryEventsModule.AppChatVisible, { isChatEnabled = var7, isChatLoading = var45 })
 		end
-	end, { var55, var7, var46 })
+	end, { var54, var7, var45 })
 	
 	if fFlagAppChatPerfTrackingModule then
 		reactModule.useEffect(function()
-			-- upvalues: var55 (ref), var46 (ref), var7 (ref), name (copy), var32 (ref), appChatPerfTrackerModule (copy)
-			if not var55 then return end
-			local var56 = not var46 and var7
-			name:debug("TTI Ready Check (ChatLanding): isLoading={}, isChatEnabled={}, itemCount={}, ready={}", var46, var7, #var32, var56)
+			-- upvalues: var54 (ref), var45 (ref), var7 (ref), name (copy), var31 (ref), appChatPerfTrackerModule (copy)
+			if not var54 then return end
+			local var55 = not var45 and var7
+			name:debug("TTI Ready Check (ChatLanding): isLoading={}, isChatEnabled={}, itemCount={}, ready={}", var45, var7, #var31, var55)
 			
-			if var56 and appChatPerfTrackerModule.isActive(appChatPerfTrackerModule.Events.ChatLandingTTI) then
-				appChatPerfTrackerModule.finish(appChatPerfTrackerModule.Events.ChatLandingTTI, { numElementsRendered = #var32 })
+			if var55 and appChatPerfTrackerModule.isActive(appChatPerfTrackerModule.Events.ChatLandingTTI) then
+				appChatPerfTrackerModule.finish(appChatPerfTrackerModule.Events.ChatLandingTTI, { numElementsRendered = #var31 })
 			end
-		end, { var55, var46, var7, #var32 })
+		end, { var54, var45, var7, #var31 })
 	end
-	local var56 = reactModule.useRef({ isChatEnabled = var7, isChatLoading = var46 })
+	local var55 = reactModule.useRef({ isChatEnabled = var7, isChatLoading = var45 })
 	reactModule.useEffect(function()
-		-- upvalues: var56 (ref), var7 (ref), var46 (ref)
-		var56.current = { isChatEnabled = var7, isChatLoading = var46 }
-	end, { var7, var46 })
+		-- upvalues: var55 (ref), var7 (ref), var45 (ref)
+		var55.current = { isChatEnabled = var7, isChatLoading = var45 }
+	end, { var7, var45 })
 	useEffect(function()
-		-- upvalues: var55 (ref), emit (write), chatLandingTelemetryEventsModule (copy), var56 (ref)
+		-- upvalues: var54 (ref), emit (write), chatLandingTelemetryEventsModule (copy), var55 (ref)
 		return function()
-			-- upvalues: var55 (copy), emit (copy), chatLandingTelemetryEventsModule (copy), var56 (copy)
-			if var55 then
-				emit(chatLandingTelemetryEventsModule.AppChatClosed, var56.current)
+			-- upvalues: var54 (copy), emit (copy), chatLandingTelemetryEventsModule (copy), var55 (copy)
+			if var54 then
+				emit(chatLandingTelemetryEventsModule.AppChatClosed, var55.current)
 			end
 		end
-	end, { var55 })
+	end, { var54 })
 	
 	if not fFlagSignalsNavP3hMisc then
-		return var54
+		return var53
 	end
-	local var57 = reactModule.useRef(nil)
+	local var56 = reactModule.useRef(nil)
 	
-	if var55 or var57.current == nil then
-		var57.current = var54
+	if var54 or var56.current == nil then
+		var56.current = var53
 	end
-	return var57.current
+	return var56.current
 end
 
 return compose(roactRoduxModule.connect(nil, mapDispatchToPropsModule), roactPaginator.connect(function()

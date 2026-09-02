@@ -26,7 +26,6 @@ return function(p1)
 					}, var1.supportSlotChildren) else var1.renderSupportContent(var1.supportContentProps, var1.supportSlotChildren)
 				},
 				supportPaneMode = supportPaneMode,
-				supportResizerAbovePane = var1.supportResizerAbovePane,
 				onSupportPaneWidthChanged = var1.onSupportPaneWidthChanged,
 				onContentRegionRectChanged = var1.onContentRegionRectChanged
 			}, var1.primarySlotChildren),

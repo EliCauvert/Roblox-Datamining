@@ -3,8 +3,10 @@ local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
+local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local chatActionsRowModule = require(buildExperience.Components.Chat.ChatActionsRow)
 local textAreaModule = require(buildExperience.FoundationFork.TextArea)
 local var1 = if require(buildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then require(script.Parent.useHardwareInsets) else require(buildExperience.FoundationFork.Sheet.useHardwareInsets)
@@ -17,10 +19,10 @@ local useTokens = foundationModule.Hooks.useTokens
 local function noop() end
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), useTokens (ref), useOverlay (ref), var1 (ref), reactModule (ref), view (ref), textAreaModule (ref), noop (ref), inputSize (ref), chatActionsRowModule (ref), stateLayerAffordance (ref), reactRobloxModule (ref)
-	local var2 = useLocalization({
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), useOverlay (ref), var1 (ref), reactModule (ref), view (ref), textAreaModule (ref), noop (ref), inputSize (ref), chatActionsRowModule (ref), stateLayerAffordance (ref), reactRobloxModule (ref)
+	local var2 = if fFlagBuildLocalization then useLocalization({
 		composerPlaceholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER
-	})
+	}) else nil
 	local var3 = useTokens()
 	local var4 = useOverlay()
 	local bottom = var1(var4).bottom
@@ -57,7 +59,7 @@ return function(p1)
 				isDisabled = true,
 				testId = "--chat-sheet-launcher-composer",
 				onChanged = noop,
-				placeholder = p1.placeholder or var2.composerPlaceholder,
+				placeholder = p1.placeholder or (if fFlagBuildLocalization then var2.composerPlaceholder else localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER),
 				width = UDim.new(1, 0),
 				size = inputSize.Large,
 				trailingElement = reactModule.createElement(view, { tag = "auto-xy padding-x-xsmall padding-y-small" }, {

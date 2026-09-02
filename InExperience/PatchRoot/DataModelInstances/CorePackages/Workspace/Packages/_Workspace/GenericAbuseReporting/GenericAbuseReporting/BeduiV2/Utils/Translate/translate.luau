@@ -4,6 +4,7 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local getIconRichText = foundationModule.Utility.getIconRichText
 local iconName = foundationModule.Enums.IconName
 local fFlagUpdateTranslateInReportRevamp = sharedFlagsModule.FFlagUpdateTranslateInReportRevamp
+local fFlagAbuseReportMenuV2 = sharedFlagsModule.FFlagAbuseReportMenuV2
 
 local function mergeTranslationParams(p1, p2)
 	if type(p1) == "string" then
@@ -26,8 +27,8 @@ local function mergeTranslationParams(p1, p2)
 	}
 end
 
-local function getWrappedText(p3, p4)
-	-- upvalues: getIconRichText (ref), iconName (ref)
+local function getWrappedText(p3, p4, p5)
+	-- upvalues: fFlagAbuseReportMenuV2 (ref), getIconRichText (ref), iconName (ref)
 	local text = "{" .. p2.type .. "Start}"
 	local text_1 = "{" .. p2.type .. "End}"
 	
@@ -35,7 +36,7 @@ local function getWrappedText(p3, p4)
 		if p4:find(text) == nil or p4:find(text_1) == nil then
 			return p4, nil
 		end
-		return string.gsub(p4, `{text}(.-){text_1}`, "%1 " .. getIconRichText(iconName.ArrowUpRightFromSquare)), p3
+		return if fFlagAbuseReportMenuV2 then string.gsub(p4, `{text}(.-){text_1}`, "%1 " .. getIconRichText(iconName.ArrowUpRightFromSquare)) else p4:gsub(`{text}(.-){text_1}`, string.format("<font color=\"rgb(%d, %d, %d)\">%s</font>", math.floor(p5.R * 255), math.floor(p5.G * 255), math.floor(p5.B * 255), "%1")), p3
 	elseif p3.type == "strong" then
 		return string.gsub(string.gsub(p4, text, "<b>"), text_1, "</b>"), nil
 	end
@@ -84,7 +85,7 @@ return {
 		end
 		return var4:gsub("{%w+Start}(.-)({%w+End})", "%1"):gsub("{%w+Start}", ""):gsub("{%w+End}", "")
 	end,
-	translateIntoRichTextString = function(p5, p6)
+	translateIntoRichTextString = function(p5, p6, p7)
 		-- upvalues: fFlagUpdateTranslateInReportRevamp (ref), resolveParams (ref), getWrappedText (ref)
 		if p6 == nil then
 			return "", nil
@@ -111,7 +112,7 @@ return {
 		if p6.wrappers then
 			for i, v in pairs(p6.wrappers) do
 				local _ = nil
-				local var6, var7 = getWrappedText(v, var4)
+				local var6, var7 = getWrappedText(v, var4, p7)
 				var4 = var6
 				local var8 = var7
 				

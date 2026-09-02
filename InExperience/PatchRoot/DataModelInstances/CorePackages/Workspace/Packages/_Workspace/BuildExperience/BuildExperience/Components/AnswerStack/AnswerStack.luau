@@ -2,8 +2,10 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local optionSelectorModule = require(script.Parent.OptionSelector)
 local button = foundationModule.Button
 local view = foundationModule.View
@@ -29,11 +31,11 @@ local _ = function(p3)
 end
 
 return function(p3)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), optionSelectorModule (ref), view (ref), button (ref), inputSize (ref), buttonVariant (ref)
-	local var1 = useLocalization({
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), optionSelectorModule (ref), view (ref), button (ref), inputSize (ref), buttonVariant (ref)
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		selectAnOption = localizationStringsModule.ANSWER_STACK_SELECT_AN_OPTION,
 		submit = localizationStringsModule.ANSWER_STACK_SUBMIT
-	})
+	}) else nil
 	local onOptionSelected = p3.onOptionSelected
 	local options = p3.options
 	local isMulti = (p3.selectionMode or "single") == "multi"
@@ -94,7 +96,7 @@ return function(p3)
 			tag = "row align-x-right size-full-0 auto-y"
 		}, {
 			Button = reactModule.createElement(button, {
-				text = if var6 then var1.selectAnOption else p3.confirmLabel or var1.submit,
+				text = if var6 then if fFlagBuildLocalization then var1.selectAnOption else localizationStringsModule.ANSWER_STACK_SELECT_AN_OPTION else p3.confirmLabel or (if fFlagBuildLocalization then var1.submit else localizationStringsModule.ANSWER_STACK_SUBMIT),
 				size = inputSize.Medium,
 				variant = buttonVariant.Standard,
 				isDisabled = var6,
