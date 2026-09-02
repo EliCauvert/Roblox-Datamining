@@ -1,23 +1,24 @@
 ﻿local viewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
 local viewRecyclerModule = require(viewRecyclerRoblox.Parent.ViewRecycler)
+local scrollHostLifecyclePhaseModule = require(viewRecyclerRoblox.RobloxAdapter.ScrollHostLifecyclePhase)
 local axisMapModule = require(viewRecyclerRoblox.RobloxAdapter.axisMap)
 local createCoordinator = viewRecyclerModule.Adapter.ScrollPolicy.createCoordinator
 
 return {
 	new = function(p1)
-		-- upvalues: axisMapModule (ref), viewRecyclerModule (ref), createCoordinator (ref)
+		-- upvalues: scrollHostLifecyclePhaseModule (ref), axisMapModule (ref), viewRecyclerModule (ref), createCoordinator (ref)
 		local dispatch = p1.dispatch
 		local getSnapshot = p1.getSnapshot
 		local query = p1.query
 		local configuration = p1.getConfiguration()
 		local axis = configuration.axis
 		local dataSource = configuration.dataSource
-		local var1 = "disconnected"
-		local var2 = 0
-		local var3 = nil
+		local disconnected = scrollHostLifecyclePhaseModule.Disconnected
+		local var1 = 0
+		local var2 = nil
 		local t = {}
-		local var4 = 0
-		local var5 = nil
+		local var3 = 0
+		local var4 = nil
 		
 		local function _()
 			-- upvalues: configuration (write), p1 (ref)
@@ -69,12 +70,12 @@ return {
 		end
 		
 		local _ = function(p2)
-			-- upvalues: observeHostOffset (ref), viewRecyclerModule (copy), var5 (write)
+			-- upvalues: observeHostOffset (ref), viewRecyclerModule (copy), var4 (write)
 			observeHostOffset(viewRecyclerModule.ScrollObservationKind.Programmatic, p2)
-			var5 = p2
+			var4 = p2
 		end
 		
-		local var6 = createCoordinator({
+		local var5 = createCoordinator({
 			getItemCount = function()
 				-- upvalues: configuration (write)
 				return configuration.dataSource.getItemCount()
@@ -132,78 +133,78 @@ return {
 		})
 		
 		local function publishCanvas()
-			-- upvalues: getSnapshot (ref), p1 (ref), var1 (write), axisMapModule (copy), configuration (write), getViewportState (ref), var4 (write), observeHostOffset (ref), viewRecyclerModule (copy), var5 (write)
+			-- upvalues: getSnapshot (ref), p1 (ref), disconnected (write), scrollHostLifecyclePhaseModule (copy), axisMapModule (copy), configuration (write), getViewportState (ref), var3 (write), observeHostOffset (ref), viewRecyclerModule (copy), var4 (write)
 			local contentLength = getSnapshot().contentLength
 			local instance = p1.getInstance()
 			
 			if instance ~= nil then
-				if var1 ~= "synchronized" then
+				if disconnected ~= scrollHostLifecyclePhaseModule.Synchronized then
 					instance.CanvasSize = axisMapModule.canvasSizeFor(contentLength, configuration.axis)
 					
 					return contentLength
 				end
-				local var7 = getViewportState(instance)
-				var4 += 1
+				local var6 = getViewportState(instance)
+				var3 += 1
 				instance.CanvasSize = axisMapModule.canvasSizeFor(contentLength, configuration.axis)
-				local var8 = getViewportState(instance)
+				local var7 = getViewportState(instance)
 				
-				if var7 ~= nil and var8 ~= nil and var8.scrollOffset ~= var7.scrollOffset then
-					local scrollOffset = var8.scrollOffset
+				if var6 ~= nil and var7 ~= nil and var7.scrollOffset ~= var6.scrollOffset then
+					local scrollOffset = var7.scrollOffset
 					observeHostOffset(viewRecyclerModule.ScrollObservationKind.Programmatic, scrollOffset)
-					var5 = scrollOffset
+					var4 = scrollOffset
 				end
-				var4 -= 1
+				var3 -= 1
 			end
 			return contentLength
 		end
 		
 		local function applyProgrammaticScrollOffset(value)
-			-- upvalues: var1 (write), var4 (write), setHostScrollOffset (ref), p1 (ref), getViewportState (ref), observeHostOffset (ref), viewRecyclerModule (copy), var5 (write)
-			if var1 ~= "synchronized" then return end
-			assert(value == value and (value ~= 1e999 and value ~= -1e999), "ScrollHostCoordinator: invalid offset")
-			var4 += 1
+			-- upvalues: disconnected (write), scrollHostLifecyclePhaseModule (copy), var3 (write), setHostScrollOffset (ref), p1 (ref), getViewportState (ref), observeHostOffset (ref), viewRecyclerModule (copy), var4 (write)
+			if disconnected ~= scrollHostLifecyclePhaseModule.Synchronized then return end
+			assert(value == value and (value ~= 1e999 and value ~= -1e999), "ScrollingFrameSync: invalid offset")
+			var3 += 1
 			setHostScrollOffset(value)
-			local var7 = getViewportState(p1.getInstance())
+			local var6 = getViewportState(p1.getInstance())
 			
-			if var7 ~= nil then
-				local scrollOffset = var7.scrollOffset
+			if var6 ~= nil then
+				local scrollOffset = var6.scrollOffset
 				observeHostOffset(viewRecyclerModule.ScrollObservationKind.Programmatic, scrollOffset)
-				var5 = scrollOffset
+				var4 = scrollOffset
 			end
-			var4 -= 1
+			var3 -= 1
 		end
 		
 		local _ = function()
-			-- upvalues: t (ref), var3 (write), var5 (write)
+			-- upvalues: t (ref), var2 (write), var4 (write)
 			for i, v in t do
 				v:Disconnect()
 			end
 			table.clear(t)
-			var3 = nil
-			var5 = nil
+			var2 = nil
+			var4 = nil
 		end
 		
 		local function synchronizeViewport(p2)
-			-- upvalues: var1 (write), getViewportState (ref), dispatch (ref), viewRecyclerModule (copy), observeHostOffset (ref), var5 (write), var6 (ref), configuration (write)
-			if var1 ~= "synchronized" then return end
-			local var7 = getViewportState(p2)
+			-- upvalues: disconnected (write), scrollHostLifecyclePhaseModule (copy), getViewportState (ref), dispatch (ref), viewRecyclerModule (copy), observeHostOffset (ref), var4 (write), var5 (ref), configuration (write)
+			if disconnected ~= scrollHostLifecyclePhaseModule.Synchronized then return end
+			local var6 = getViewportState(p2)
 			
-			if var7 == nil then return end
+			if var6 == nil then return end
 			dispatch({
 				type = viewRecyclerModule.VirtualizerCommandType.SetViewportSize,
-				scrollAxisLength = var7.viewportLength,
-				crossAxisLength = var7.crossAxisLength
+				scrollAxisLength = var6.viewportLength,
+				crossAxisLength = var6.crossAxisLength
 			})
-			local var8 = getViewportState(p2)
+			local var7 = getViewportState(p2)
 			
-			if var8 ~= nil then
-				var7 = var8
+			if var7 ~= nil then
+				var6 = var7
 			end
-			local scrollOffset = var7.scrollOffset
+			local scrollOffset = var6.scrollOffset
 			observeHostOffset(viewRecyclerModule.ScrollObservationKind.Programmatic, scrollOffset)
-			var5 = scrollOffset
-			var6.onViewportChanged()
-			var6.checkEdges()
+			var4 = scrollOffset
+			var5.onViewportChanged()
+			var5.checkEdges()
 			local onViewportChanged = configuration.onViewportChanged
 			
 			if onViewportChanged ~= nil then
@@ -212,42 +213,42 @@ return {
 		end
 		
 		local function synchronizeScrollOffset(value)
-			-- upvalues: var1 (write), getViewportState (ref), var4 (write), var5 (write), observeHostOffset (ref), viewRecyclerModule (copy), var6 (ref), configuration (write)
-			if var1 ~= "synchronized" then return end
-			local var7 = getViewportState(value)
+			-- upvalues: disconnected (write), scrollHostLifecyclePhaseModule (copy), getViewportState (ref), var3 (write), var4 (write), observeHostOffset (ref), viewRecyclerModule (copy), var5 (ref), configuration (write)
+			if disconnected ~= scrollHostLifecyclePhaseModule.Synchronized then return end
+			local var6 = getViewportState(value)
 			
-			if var7 == nil then return end
-			local var8 = var4 == 0
+			if var6 == nil then return end
+			local var7 = var3 == 0
 			
-			if var8 and var5 ~= nil then
-				if math.abs(var7.scrollOffset - var5) < 0.5 then
-					var8 = false
+			if var7 and var4 ~= nil then
+				if math.abs(var6.scrollOffset - var4) < 0.5 then
+					var7 = false
 				else
-					var5 = nil
+					var4 = nil
 				end
 			end
-			if var8 then
-				observeHostOffset(viewRecyclerModule.ScrollObservationKind.User, var7.scrollOffset)
-				var6.onScrollOffsetChanged()
+			if var7 then
+				observeHostOffset(viewRecyclerModule.ScrollObservationKind.User, var6.scrollOffset)
+				var5.onScrollOffsetChanged()
 			end
-			var6.checkEdges()
+			var5.checkEdges()
 			local onScrollOffsetChanged = configuration.onScrollOffsetChanged
 			
 			if onScrollOffsetChanged ~= nil then
-				onScrollOffsetChanged(var7.scrollOffset)
+				onScrollOffsetChanged(var6.scrollOffset)
 			end
 		end
 		
 		local function connectHost(p2)
-			-- upvalues: var3 (write), t (ref), var5 (write), configuration (write), p1 (ref), publishCanvas (ref), synchronizeViewport (ref), synchronizeScrollOffset (ref)
-			if var3 == p2 then return end
+			-- upvalues: var2 (write), t (ref), var4 (write), configuration (write), p1 (ref), publishCanvas (ref), synchronizeViewport (ref), synchronizeScrollOffset (ref)
+			if var2 == p2 then return end
 			for i, v in t do
 				v:Disconnect()
 			end
 			table.clear(t)
-			var3 = nil
-			var5 = nil
-			var3 = p2
+			var2 = nil
+			var4 = nil
+			var2 = p2
 			
 			if p2 == nil or typeof(p2) ~= "Instance" then
 				return
@@ -267,19 +268,19 @@ return {
 		
 		return {
 			connect = function()
-				-- upvalues: var1 (write), var2 (write), configuration (write), p1 (ref), axis (write), dataSource (write), connectHost (ref), var6 (ref), publishCanvas (ref), synchronizeViewport (ref), synchronizeScrollOffset (ref), t (ref), var3 (write), var5 (write)
-				assert(var1 == "disconnected", "ScrollHostCoordinator: already connected")
-				var2 += 1
-				local var7 = var2
+				-- upvalues: disconnected (write), scrollHostLifecyclePhaseModule (copy), var1 (write), configuration (write), p1 (ref), axis (write), dataSource (write), connectHost (ref), var5 (ref), publishCanvas (ref), synchronizeViewport (ref), synchronizeScrollOffset (ref), t (ref), var2 (write), var4 (write)
+				assert(disconnected == scrollHostLifecyclePhaseModule.Disconnected, "ScrollingFrameSync: already connected")
+				var1 += 1
+				local var6 = var1
 				configuration = p1.getConfiguration()
 				axis = configuration.axis
 				dataSource = configuration.dataSource
-				var1 = "priming"
+				disconnected = scrollHostLifecyclePhaseModule.Priming
 				connectHost(p1.getInstance())
 				local ok, status = pcall(function()
-					-- upvalues: var1 (copy), var6 (copy), publishCanvas (copy), p1 (copy), synchronizeViewport (copy), synchronizeScrollOffset (copy)
-					var1 = "synchronized"
-					var6.onContentLengthChanged(publishCanvas())
+					-- upvalues: disconnected (copy), scrollHostLifecyclePhaseModule (copy), var5 (copy), publishCanvas (copy), p1 (copy), synchronizeViewport (copy), synchronizeScrollOffset (copy)
+					disconnected = scrollHostLifecyclePhaseModule.Synchronized
+					var5.onContentLengthChanged(publishCanvas())
 					local instance = p1.getInstance()
 					
 					if instance ~= nil then
@@ -289,38 +290,38 @@ return {
 				end)
 				
 				if not ok then
-					var1 = "disconnected"
+					disconnected = scrollHostLifecyclePhaseModule.Disconnected
 					
 					for i, v in t do
 						v:Disconnect()
 					end
 					table.clear(t)
-					var3 = nil
-					var5 = nil
+					var2 = nil
+					var4 = nil
 					error(status, 0)
 				end
-				local var8 = false
+				local var7 = false
 				
 				return function()
-					-- upvalues: var8 (write), var1 (copy), var2 (copy), var7 (ref), t (copy), var3 (copy), var5 (copy)
-					if var8 then return end
-					var8 = true
+					-- upvalues: var7 (write), disconnected (copy), scrollHostLifecyclePhaseModule (copy), var1 (copy), var6 (ref), t (copy), var2 (copy), var4 (copy)
+					if var7 then return end
+					var7 = true
 					
-					if var1 ~= "disconnected" and var2 == var7 then
-						var1 = "disconnected"
+					if disconnected ~= scrollHostLifecyclePhaseModule.Disconnected and var1 == var6 then
+						disconnected = scrollHostLifecyclePhaseModule.Disconnected
 						
 						for i, v in t do
 							v:Disconnect()
 						end
 						table.clear(t)
-						var3 = nil
-						var5 = nil
+						var2 = nil
+						var4 = nil
 					end
 				end
 			end,
-			hostChanged = function()
-				-- upvalues: var1 (write), configuration (write), p1 (ref), connectHost (ref), publishCanvas (ref), synchronizeViewport (ref), synchronizeScrollOffset (ref)
-				if var1 == "disconnected" then return end
+			scrollingFrameChanged = function()
+				-- upvalues: disconnected (write), scrollHostLifecyclePhaseModule (copy), configuration (write), p1 (ref), connectHost (ref), publishCanvas (ref), synchronizeViewport (ref), synchronizeScrollOffset (ref)
+				if disconnected == scrollHostLifecyclePhaseModule.Disconnected then return end
 				configuration = p1.getConfiguration()
 				local instance = p1.getInstance()
 				connectHost(instance)
@@ -332,18 +333,18 @@ return {
 				end
 			end,
 			configurationChanged = function()
-				-- upvalues: configuration (write), p1 (ref), dataSource (write), axis (write), var6 (ref), var1 (write), publishCanvas (ref), synchronizeViewport (ref), synchronizeScrollOffset (ref)
+				-- upvalues: configuration (write), p1 (ref), dataSource (write), axis (write), var5 (ref), disconnected (write), scrollHostLifecyclePhaseModule (copy), publishCanvas (ref), synchronizeViewport (ref), synchronizeScrollOffset (ref)
 				configuration = p1.getConfiguration()
-				local var9 = configuration
-				local var10 = var9.dataSource ~= dataSource
-				local var11 = var9.axis ~= axis
-				dataSource = var9.dataSource
-				axis = var9.axis
+				local var8 = configuration
+				local var9 = var8.dataSource ~= dataSource
+				local var10 = var8.axis ~= axis
+				dataSource = var8.dataSource
+				axis = var8.axis
 				
-				if var10 then
-					var6.onDataSourceReplaced()
+				if var9 then
+					var5.onDataSourceReplaced()
 				end
-				if var1 ~= "disconnected" and var11 then
+				if disconnected ~= scrollHostLifecyclePhaseModule.Disconnected and var10 then
 					local instance = p1.getInstance()
 					
 					if instance ~= nil then
@@ -352,28 +353,28 @@ return {
 						synchronizeScrollOffset(instance)
 					end
 				end
-				if var1 ~= "disconnected" then
-					var6.checkEdges()
+				if disconnected ~= scrollHostLifecyclePhaseModule.Disconnected then
+					var5.checkEdges()
 				end
 			end,
-			handleUpdate = function(p3, p4)
-				-- upvalues: var1 (write), configuration (write), p1 (ref), var6 (ref), publishCanvas (ref), viewRecyclerModule (copy), applyProgrammaticScrollOffset (ref)
-				if var1 == "disconnected" then return end
+			applyVirtualizerUpdate = function(p3, p4)
+				-- upvalues: disconnected (write), scrollHostLifecyclePhaseModule (copy), configuration (write), p1 (ref), var5 (ref), publishCanvas (ref), viewRecyclerModule (copy), applyProgrammaticScrollOffset (ref)
+				if disconnected == scrollHostLifecyclePhaseModule.Disconnected then return end
 				configuration = p1.getConfiguration()
 				
 				if p3.contentLength ~= p4.snapshot.contentLength then
-					var6.onContentLengthChanged(publishCanvas())
+					var5.onContentLengthChanged(publishCanvas())
 				end
 				for i, v in p4.effects do
 					if v.type == viewRecyclerModule.VirtualizerEffectType.ScrollPositionChanged then
 						publishCanvas()
 						applyProgrammaticScrollOffset(v.offset)
 					elseif v.type == viewRecyclerModule.VirtualizerEffectType.DataSourceChanged then
-						var6.onDataSourceChanged(v.changeBatch, v.before)
+						var5.onDataSourceChanged(v.changeBatch, v.before)
 					end
 				end
 			end,
-			isHostReady = function()
+			isReady = function()
 				-- upvalues: configuration (write), p1 (ref), getViewportState (ref)
 				configuration = p1.getConfiguration()
 				

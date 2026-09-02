@@ -7,7 +7,8 @@ local recyclingScopeContextModule = require(script.Parent.RecyclingScopeContext)
 local recyclingViewportContextModule = require(script.Parent.RecyclingViewportContext)
 local signalsModule = require(viewRecyclerReact.Parent.Signals)
 local useCompositionPlacementModule = require(script.Parent.useCompositionPlacement)
-local scrollListHostRuntime = viewRecyclerRobloxModule.Internal.ScrollListHostRuntime
+local _ = require(script.Parent.VirtualListShell)
+local scrollingFrameVirtualizer = viewRecyclerRobloxModule.Internal.ScrollingFrameVirtualizer
 
 local function _(value, p1)
 	if value == nil then return end
@@ -90,7 +91,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), recyclingScopeContextModule (ref), recyclingViewportContextModule (ref), signalsModule (ref), useCompositionPlacementModule (ref), scrollListHostRuntime (ref), listHostConfiguration (ref), corePolicy (ref), recyclableViewRegistryModule (ref), viewRecyclerModule (ref)
+	-- upvalues: reactModule (ref), recyclingScopeContextModule (ref), recyclingViewportContextModule (ref), signalsModule (ref), useCompositionPlacementModule (ref), scrollingFrameVirtualizer (ref), listHostConfiguration (ref), corePolicy (ref), recyclableViewRegistryModule (ref), viewRecyclerModule (ref)
 	local var1 = reactModule.useRef(p1)
 	var1.current = p1
 	local var2 = reactModule.useContext(recyclingScopeContextModule)
@@ -107,28 +108,28 @@ return function(p1)
 	local var7 = reactModule.useRef(nil)
 	local var8 = reactModule.useState(function()
 		-- upvalues: var2 (ref)
-		return var2.runtime.getRecyclingScope(var2.listOptions)
+		return var2.root.getScope(var2.listOptions)
 	end)
 	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), var2 (ref)
 		var8.setMaxPoolSize(var2.listOptions.maxPoolSize)
 	end, { var8, var2.listOptions.maxPoolSize })
-	local var9 = useCompositionPlacementModule(var2.runtime, var2.listOptions.maxPoolSize, var2.listOptions.diagnostics)
+	local var9 = useCompositionPlacementModule(var2.root, var2.listOptions.maxPoolSize, var2.listOptions.diagnostics)
 	local var10 = reactModule.useRef({
 		axis = p1.axis,
 		layout = p1.layout,
-		compositionPlacementManager = var9.manager
+		compositionPlacement = var9
 	})
 	var10.current = {
 		axis = p1.axis,
 		layout = p1.layout,
-		compositionPlacementManager = var9.manager
+		compositionPlacement = var9
 	}
 	local var11 = reactModule.useCallback(function(p2)
 		-- upvalues: var10 (ref)
 		local current = var10.current
 		p2.setStructuralPlacement(current.axis, current.layout.requiresItemMeasurement())
-		p2.setCompositionPlacementManager(current.compositionPlacementManager)
+		p2.setCompositionPlacement(current.compositionPlacement)
 	end, {})
 	local var12 = reactModule.useCallback(function(p2, p3)
 		-- upvalues: var11 (ref)
@@ -137,8 +138,8 @@ return function(p1)
 		end
 	end, { var11 })
 	local var13 = reactModule.useState(function()
-		-- upvalues: scrollListHostRuntime (copy), listHostConfiguration (copy), var1 (ref), var6 (ref), var7 (ref), corePolicy (copy), var8 (ref), recyclableViewRegistryModule (copy), p1 (ref), var3 (ref), var4 (ref), var12 (ref)
-		return scrollListHostRuntime.newForRecyclableViewRecords({
+		-- upvalues: scrollingFrameVirtualizer (copy), listHostConfiguration (copy), var1 (ref), var6 (ref), var7 (ref), corePolicy (copy), var8 (ref), recyclableViewRegistryModule (copy), p1 (ref), var3 (ref), var4 (ref), var12 (ref)
+		return scrollingFrameVirtualizer.newForRecyclableViews({
 			initialHostConfiguration = listHostConfiguration(var1.current),
 			initialHostTarget = {
 				scrollingFrame = var6.current,
@@ -159,11 +160,11 @@ return function(p1)
 				diagnostics = p1.diagnostics,
 				active = if var3 == nil then nil else var4.active
 			},
-			prepareItemViewAssignment = var12,
+			prepareAssignment = var12,
 			onItemViewAssignmentChanged = function(value, p2)
 				-- upvalues: var1 (copy)
 				if p2 == nil then
-					value.setCompositionPlacementManager(nil)
+					value.setCompositionPlacement(nil)
 				end
 				local instrumentation = var1.current._instrumentation
 				
@@ -241,7 +242,7 @@ return function(p1)
 			var11(v)
 		end
 	end, {
-		var9.manager,
+		var9,
 		var11,
 		p1.axis,
 		p1.layout,
@@ -295,7 +296,7 @@ return function(p1)
 		local t = {
 			scrollToIndex = function(p2, p3)
 				-- upvalues: var13 (copy), var13 (copy), viewRecyclerModule (copy)
-				if var13.isHostReady() then
+				if var13.isReady() then
 					var13.dispatch({
 						type = viewRecyclerModule.VirtualizerCommandType.ScrollToIndex,
 						index = p2,
@@ -323,16 +324,16 @@ return function(p1)
 					type = viewRecyclerModule.VirtualizerQueryType.GetScrollState
 				})
 			end,
-			captureScrollSnapshot = function()
+			captureScrollAnchorSnapshot = function()
 				-- upvalues: var13 (copy), viewRecyclerModule (copy)
 				return var13.query({
-					type = viewRecyclerModule.VirtualizerQueryType.CaptureScrollSnapshot
+					type = viewRecyclerModule.VirtualizerQueryType.CaptureScrollAnchorSnapshot
 				})
 			end,
-			restoreScrollSnapshot = function(p2)
+			restoreScrollAnchorSnapshot = function(p2)
 				-- upvalues: var13 (copy), viewRecyclerModule (copy)
 				return var13.dispatch({
-					type = viewRecyclerModule.VirtualizerCommandType.RestoreScrollSnapshot,
+					type = viewRecyclerModule.VirtualizerCommandType.RestoreScrollAnchorSnapshot,
 					snapshot = p2
 				}).result
 			end
@@ -358,7 +359,7 @@ return function(p1)
 			end
 			listRef.current = nil
 		end
-	end, { p1.listRef, var13.isHostReady, var13 })
+	end, { p1.listRef, var13.isReady, var13 })
 	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), var6 (ref)
 		local scrollingFrameRef = p1.scrollingFrameRef

@@ -1,29 +1,29 @@
 ﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
 local _ = require(viewRecycler.Core.DataSource)
 local placementTypesModule = require(viewRecycler.Core.Placement.PlacementTypes)
-local recordModule = require(viewRecycler.Internal.Record)
+local shallowTableModule = require(viewRecycler.Internal.ShallowTable)
 local _ = require(viewRecycler.Core.Types)
 local buildPlacementPlanModule = require(viewRecycler.Core.PinnedItems.buildPlacementPlan)
 local stickyIndexResolverModule = require(viewRecycler.Core.PinnedItems.StickyIndexResolver)
 local frozen = table.freeze({ "key", "value", "itemViewType" })
 
 local function _(p1, p2)
-	-- upvalues: recordModule (ref), frozen (ref)
-	return if p1 ~= p2 then p1 ~= nil and (p2 ~= nil and recordModule.containsEqual(p1, p2, frozen)) else true
+	-- upvalues: shallowTableModule (ref), frozen (ref)
+	return if p1 ~= p2 then p1 ~= nil and (p2 ~= nil and shallowTableModule.containsEqual(p1, p2, frozen)) else true
 end
 
 return function(p1, p2)
-	-- upvalues: stickyIndexResolverModule (ref), recordModule (ref), frozen (ref), buildPlacementPlanModule (ref), placementTypesModule (ref)
+	-- upvalues: stickyIndexResolverModule (ref), shallowTableModule (ref), frozen (ref), buildPlacementPlanModule (ref), placementTypesModule (ref)
 	local var1 = p2
 	local var2 = stickyIndexResolverModule(p1, var1.isItemStickyHeader)
 	local t = { revision = 1, length = 0, item = var1.pinnedStartItem }
 	local t_1 = { revision = 1, length = 0, item = var1.pinnedEndItem }
 	
 	local function _(value, p3)
-		-- upvalues: recordModule (copy), frozen (copy)
+		-- upvalues: shallowTableModule (copy), frozen (copy)
 		local item = value.item
 		
-		if if item ~= p3 then item ~= nil and (p3 ~= nil and recordModule.containsEqual(item, p3, frozen)) else true then
+		if if item ~= p3 then item ~= nil and (p3 ~= nil and shallowTableModule.containsEqual(item, p3, frozen)) else true then
 			return false
 		end
 		value.item = p3
@@ -107,14 +107,14 @@ return function(p1, p2)
 			}
 		end,
 		setOptions = function(value)
-			-- upvalues: var1 (write), var2 (ref), t (ref), recordModule (copy), frozen (copy), t_1 (ref)
+			-- upvalues: var1 (write), var2 (ref), t (ref), shallowTableModule (copy), frozen (copy), t_1 (ref)
 			local var3
 			var1 = value
 			local var4 = var2.setPredicate(value.isItemStickyHeader)
 			local pinnedStartItem = value.pinnedStartItem
 			local item = t.item
 			
-			if if item ~= pinnedStartItem then item ~= nil and (pinnedStartItem ~= nil and recordModule.containsEqual(item, pinnedStartItem, frozen)) else true then
+			if if item ~= pinnedStartItem then item ~= nil and (pinnedStartItem ~= nil and shallowTableModule.containsEqual(item, pinnedStartItem, frozen)) else true then
 				var3 = false
 			else
 				t.item = pinnedStartItem
@@ -127,7 +127,7 @@ return function(p1, p2)
 			local pinnedEndItem = value.pinnedEndItem
 			local item_1 = t_1.item
 			
-			if if item_1 ~= pinnedEndItem then item_1 ~= nil and (pinnedEndItem ~= nil and recordModule.containsEqual(item_1, pinnedEndItem, frozen)) else true then
+			if if item_1 ~= pinnedEndItem then item_1 ~= nil and (pinnedEndItem ~= nil and shallowTableModule.containsEqual(item_1, pinnedEndItem, frozen)) else true then
 				var5 = false
 			else
 				t_1.item = pinnedEndItem

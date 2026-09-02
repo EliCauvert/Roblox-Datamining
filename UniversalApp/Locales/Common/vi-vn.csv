@@ -861,11 +861,14 @@ CommonUI.Controls.Label.Wednesday,Thứ 4
 CommonUI.Controls.Label.WednesdayAbbreviated,T4
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,Không tìm thấy kết quả
+CommonUI.Features.Action.ClassicUnlockGetTheme,Nhận chủ đề
+CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,Đi
 CommonUI.Features.Action.LessLowercase,ẩn bớt
 CommonUI.Features.Action.MoreLowercase,xem thêm
 CommonUI.Features.Action.Send,
+CommonUI.Features.Heading.ClassicUnlock,Kỷ niệm 20 năm Roblox!
 CommonUI.Features.Heading.GameDetails,Chi tiết trải nghiệm
 CommonUI.Features.Label.About,Về sản phẩm
 CommonUI.Features.Label.AboutUs,Về chúng tôi
@@ -884,6 +887,8 @@ CommonUI.Features.Label.Catalog,Danh Mục Roblox
 CommonUI.Features.Label.ChannelWithChannelName,Kênh: {channelName}
 CommonUI.Features.Label.Charts,Bảng xếp hạng
 CommonUI.Features.Label.Chat,Trò chuyện
+CommonUI.Features.Label.ClassicUnlockDescription,Trải nghiệm giao diện cổ điển – thời gian có hạn
+CommonUI.Features.Label.ClassicUnlockManagementSnackbar,Quản lý chủ đề cổ điển trong phần cài đặt
 CommonUI.Features.Label.ClientCoreScriptVersion,Phiên bản-CoreScript-máy khách: {clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,Bạn bè
 CommonUI.Features.Label.Connection,Kết nối
@@ -1179,6 +1184,7 @@ Feature.Accessibility.Action.ScrollDown,Cuộn xuống
 Feature.Accessibility.Action.ScrollUp,Cuộn lên
 Feature.Accessibility.AppTheme.CategoryCalm,Êm dịu
 Feature.Accessibility.AppTheme.CategoryDynamic,Năng động
+Feature.Accessibility.AppTheme.CategorySpecial,Đặc biệt
 Feature.Accessibility.AppTheme.CircuitRush,Điện áp thần tốc
 Feature.Accessibility.AppTheme.Classic,Cổ điển
 Feature.Accessibility.AppTheme.CosmicDust,Bụi vũ trụ
@@ -1665,18 +1671,20 @@ Feature.Avatar.Action.Zoom,Thu Phóng
 Feature.Avatar.AvatarWidgetTitle,Khám phá phong cách
 Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
-Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,Ở lại
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,
 Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,
 Feature.Avatar.BackgroundGeneration.Action.Upload,Tải lên
 Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Action.ViewExclusiveBackgrounds,
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Tạo hình nền với Plus.
-Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,"Nếu bạn rời đi bây giờ, hình nền này sẽ bị hủy bỏ."
+Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,"Hình nền của bạn chưa được đăng. Nếu thoát bây giờ, bạn sẽ mất hình nền đó."
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Sản phẩm sáng tạo của bạn đã sẵn sàng để sử dụng.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Hình nền này được tạo bằng AI. Khi đăng tải, bạn xác nhận hình nền này tuân thủ Tiêu chuẩn cộng đồng Roblox và không sử dụng nội dung mà bạn không có quyền sử dụng. Hình nền sẽ được xét duyệt trước khi xuất hiện trong kho của bạn và các vật phẩm đã đăng sẽ không thể chỉnh sửa."
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Hình nền này được tạo bằng AI. Khi tải lên, bạn xác nhận hình nền này tuân thủ Tiêu chuẩn cộng đồng Roblox và không sử dụng nội dung mà bạn không có quyền sử dụng. Hình nền sẽ được xét duyệt trước khi xuất hiện trong kho của bạn. Không thể chỉnh sửa vật phẩm sau khi tải lên."
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Mở khóa miễn phí các hình nền dành riêng cho Plus.
+Feature.Avatar.BackgroundGeneration.Description.ViewExclusiveBackgrounds,Xem hình nền miễn phí dành riêng cho gói Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Vật phẩm không đáp ứng Tiêu chuẩn cộng đồng
 Feature.Avatar.BackgroundGeneration.Error.LimitReached,Bạn đã đạt hạn mức sử dụng. Hãy thử lại sau để tiếp tục tùy chỉnh.
 Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,Bạn đã đạt hạn mức sử dụng. Hãy thử lại vào ngày mai để tiếp tục tùy chỉnh.
@@ -1693,11 +1701,13 @@ Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Mô tả hình nền của
 Feature.Avatar.BackgroundGeneration.Status.Generating,Đang tạo hình nền của bạn…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Đang chuẩn bị hình nền của bạn…
 Feature.Avatar.BackgroundGeneration.Title,Tạo hình nền
-Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,Bỏ hình nền này?
+Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,Thoát mà không đăng?
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Đăng vào kho
 Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
 Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,Tải lên kho
+Feature.Avatar.BackgroundGeneration.Tooltip.CreateBackground,Tạo hình nền miễn phí với Plus!
+Feature.Avatar.BackgroundGeneration.Tooltip.PublishBackground,
 Feature.Avatar.Backgrounds.Title,Hình nền
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Không thể điều chỉnh kiểu thân này.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Chuyển về màu thân mặc định ban đầu
@@ -2176,6 +2186,7 @@ Feature.Build.Action.AddFriends,Thêm bạn
 Feature.Build.Action.AddPlaytester,Thêm người chơi thử
 Feature.Build.Action.AddPlaytesters,
 Feature.Build.Action.AddToPlaytest,Thêm vào danh sách chơi thử
+Feature.Build.Action.Approve,Phê duyệt
 Feature.Build.Action.Archive,Lưu trữ
 Feature.Build.Action.ArchiveGame,Lưu trữ trò chơi
 Feature.Build.Action.Build,
@@ -2184,10 +2195,13 @@ Feature.Build.Action.BuyRobux,Mua Robux
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Sao chép văn bản
 Feature.Build.Action.Create,
+Feature.Build.Action.CreateDeveloperProduct,
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,Không hỏi lại
 Feature.Build.Action.DontShowAgain,Không hiển thị lại
+Feature.Build.Action.EarnRobux,Kiếm Robux
+Feature.Build.Action.Edit,Chỉnh sửa
 Feature.Build.Action.HideAutosaved,Ẩn phiên bản lưu tự động
 Feature.Build.Action.ManageLimit,Quản lý hạn mức
 Feature.Build.Action.Next,
@@ -2200,9 +2214,12 @@ Feature.Build.Action.Playtest,Chơi thử
 Feature.Build.Action.Preview,Xem trước
 Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,Đăng bản mới nhất
+Feature.Build.Action.Reject,
 Feature.Build.Action.Restore,Khôi phục
 Feature.Build.Action.Resume,
+Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,Trả về phiên bản trước
+Feature.Build.Action.Save,
 Feature.Build.Action.SetDailyLimit,Thiết lập hạn mức hằng ngày
 Feature.Build.Action.SetLimit,Thiết lập hạn mức
 Feature.Build.Action.Settings,
@@ -2266,6 +2283,7 @@ Feature.Build.Analytics.Title.PlaythroughRate,Tỷ lệ hoàn thành lượt ch�
 Feature.Build.Analytics.Title.TotalPlaytime,Tổng thời gian chơi
 Feature.Build.Analytics.Visits,Lượt truy cập
 Feature.Build.Content.NewGame,Trò chơi mới
+Feature.Build.Description.ActivateDeveloperProduct,Đăng bán sản phẩm {PRODUCT_ID} của nhà phát triển.
 Feature.Build.Description.AdCampaignModerationReview,Mọi chiến dịch quảng cáo đều được đội ngũ kiểm duyệt của Roblox xem xét. Quá trình này có thể mất đến 24 giờ.
 Feature.Build.Description.AdCampaignSheetRunDates,Chạy từ {startDate} – {endDate}
 Feature.Build.Description.AdvertisingAgreement,"Bằng việc tiếp tục, bạn đồng ý với {advertisingTermsStart}Điều khoản quảng cáo{advertisingTermsEnd} và {advertisingStandardsStart}Tiêu chuẩn quảng cáo của Roblox{advertisingStandardsEnd}."
@@ -2278,6 +2296,8 @@ Feature.Build.Description.BuyRobuxToCreate,Hãy mua thêm Robux để tiếp t�
 Feature.Build.Description.BuyUsageOrWait,"Dùng Robux để mua thêm lượt sử dụng Build, hoặc đợi hạn mức hằng ngày được làm mới."
 Feature.Build.Description.CampaignRunDates,Chiến dịch của bạn sẽ diễn ra từ {startDate} – {endDate}
 Feature.Build.Description.ChoosePlaytesters,Chọn bạn bè để giúp bạn chơi thử.
+Feature.Build.Description.CreateDeveloperProduct,"Tạo ""{NAME}"" với giá {PRICE} Robux, không đăng bán."
+Feature.Build.Description.DeactivateDeveloperProduct,Ngừng bán sản phẩm {PRODUCT_ID} của nhà phát triển.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"Nếu bạn kiếm được Robux, số Robux này sẽ được ưu tiên trừ vào chi phí của chiến dịch quảng cáo."
 Feature.Build.Description.EnableBuildNotifs,Bật thông báo trong phần cài đặt của thiết bị để nhận thông tin cập nhật từ Build.
 Feature.Build.Description.FriendsLinkOnly,Chỉ bạn bè của bạn mới có thể truy cập đường liên kết này. Hãy thay đổi cài đặt Đối tượng của trò chơi nếu bạn muốn có nhiều người chơi hơn.
@@ -2287,6 +2307,8 @@ Feature.Build.Description.HubSettings,Quản lý tất cả cài đặt trong Tr
 Feature.Build.Description.InviteFriendLimit,"Chọn tối đa {MAX_INVITES} người bạn, sau đó chia sẻ đường liên kết đến trò chơi."
 Feature.Build.Description.MakeAudienceAvail,Đăng trải nghiệm của bạn để cho phép đối tượng này tham gia.
 Feature.Build.Description.ManageAppearance,Quản lý giao diện hiển thị của trò chơi với người khác.
+Feature.Build.Description.ManageDeveloperProduct,Quản lý sản phẩm của nhà phát triển.
+Feature.Build.Description.NoMonetizationProducts,Mô tả vật phẩm bạn muốn tạo để bắt đầu kiếm Robux trong trò chơi của mình
 Feature.Build.Description.PlayAfterPublish,Chọn đối tượng người chơi có thể tham gia sau khi bạn đăng trải nghiệm này.
 Feature.Build.Description.PlaytestLatest,Bạn đang chơi thử phiên bản mới nhất của mình. Hãy đăng phiên bản này khi bạn đã sẵn sàng chia sẻ.
 Feature.Build.Description.PlaytestLocked,Bạn có thể bắt đầu chơi thử sau khi tạo trò chơi đầu tiên.
@@ -2298,7 +2320,13 @@ Feature.Build.Description.RatingAgreement,"Bằng việc đăng, bạn đồng �
 Feature.Build.Description.RestoreLatest,Phiên bản này sẽ trở thành phiên bản mới nhất được đăng của bạn.
 Feature.Build.Description.RevertToVersion,Xác nhận trả về bản thay đổi gần nhất và quay lại {VERSION}.
 Feature.Build.Description.ShareLatest,Chia sẻ về những thay đổi trong phiên bản mới nhất của bạn.
+Feature.Build.Description.UpdateDeveloperProduct,Cập nhật sản phẩm của nhà phát triển {PRODUCT_ID}.
 Feature.Build.Description.VersionChanges,Cho người chơi biết điều gì đã thay đổi trong phiên bản này.
+Feature.Build.Error.DeveloperProductDescriptionTooLong,Nội dung mô tả không được quá 1.000 ký tự.
+Feature.Build.Error.DeveloperProductNameRequired,Nhập tên sản phẩm.
+Feature.Build.Error.DeveloperProductNameTooLong,Tên chỉ được chứa tối đa 50 ký tự.
+Feature.Build.Error.DeveloperProductPriceInvalid,Giá phải là một số nguyên từ 1 đến 1.000.000.000 Robux.
+Feature.Build.Error.DeveloperProductTextModerated,Bộ phận kiểm duyệt của Roblox đã thay đổi văn bản của sản phẩm này. Hãy thử dùng cách diễn đạt khác.
 Feature.Build.Header.AccessSharing,Quyền truy cập và chia sẻ
 Feature.Build.Header.AllVersions,Tất cả các phiên bản
 Feature.Build.Header.ContentMaturity,Mức độ nội dung người lớn
@@ -2317,6 +2345,7 @@ Feature.Build.Label.All,
 Feature.Build.Label.AmountAvailable,Còn {AMOUNT}
 Feature.Build.Label.Autosaved,Đã tự động lưu
 Feature.Build.Label.Available,còn lại
+Feature.Build.Label.AvailableForPurchase,Có thể mua
 Feature.Build.Label.BackToBuild,Quay lại phần Xây dựng
 Feature.Build.Label.Building,Đang xây dựng...
 Feature.Build.Label.CaptureLibrary,Thư viện ảnh/video
@@ -2326,9 +2355,15 @@ Feature.Build.Label.Created,Thời gian tạo
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} năm {YEAR}
 Feature.Build.Label.CreatorHub,Trung tâm nhà sáng tạo
 Feature.Build.Label.DateRange,{startDate} – {endDate}
+Feature.Build.Label.DefaultDeveloperProduct,Sản phẩm {PRODUCT_ID}
+Feature.Build.Label.DefaultDeveloperProductName,sản phẩm của nhà phát triển
 Feature.Build.Label.Deleted,Đã xóa
 Feature.Build.Label.DescribeIdea,Mô tả ý tưởng
 Feature.Build.Label.Description,
+Feature.Build.Label.DeveloperProductDescription,Mô tả: {DESCRIPTION}
+Feature.Build.Label.DeveloperProductName,"Tên: ""{NAME}"""
+Feature.Build.Label.DeveloperProductPrice,Giá: {PRICE} Robux
+Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,Hoàn tất
 Feature.Build.Label.EasyPerformanceReport,Báo cáo hiệu suất dễ dàng
 Feature.Build.Label.Error,
@@ -2349,18 +2384,25 @@ Feature.Build.Label.Live,Đã ra mắt
 Feature.Build.Label.Loading,
 Feature.Build.Label.MaximizeForGamePlays,Tăng tối đa lượt chơi
 Feature.Build.Label.Models3D,Mô hình 3D
+Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Không giới hạn
 Feature.Build.Label.NotStarted,Chưa bắt đầu
+Feature.Build.Label.OffSale,Ngừng bán
+Feature.Build.Label.OnSale,Đang bán
 Feature.Build.Label.Pending,Đang chờ xử lý
 Feature.Build.Label.PercentUsed,Đã dùng {PERCENT}%
 Feature.Build.Label.PlayTime,Thời gian chơi
 Feature.Build.Label.PreviouslyPublished,Đã đăng trước đây
+Feature.Build.Label.Price,Giá
+Feature.Build.Label.PriceUnavailable,--
+Feature.Build.Label.Pricing,Định giá
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,Công khai
 Feature.Build.Label.PubliclyUnavailable,Chưa phát hành công khai
 Feature.Build.Label.Published,Đã đăng
 Feature.Build.Label.Purchased,Đã mua
 Feature.Build.Label.Ready,Sẵn sàng
+Feature.Build.Label.RegionalPricing,Giá theo vùng
 Feature.Build.Label.ResetsDaily,Làm mới hằng ngày
 Feature.Build.Label.RestoredVersion,Đã khôi phục {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
@@ -2536,6 +2578,9 @@ Feature.Build.Notification.Message.Continue,Tiếp nối cuộc trò chuyện tr
 Feature.Build.Notification.Message.Review,Tiếp nối cuộc trò chuyện trong tính năng Tạo dựng để xem lại kết quả.
 Feature.Build.Notification.Title.Finished,Đã tạo dựng xong
 Feature.Build.Notification.Title.NeedInput,Tính năng Tạo dựng cần bạn cung cấp thông tin
+Feature.Build.Placeholder.DescribeProduct,Mô tả sản phẩm bạn muốn bán
+Feature.Build.Placeholder.DescribeProductUpdate,Mô tả thông tin trong bản cập nhật
+Feature.Build.Prompt.CreateDeveloperProduct,"Giúp tôi tạo một sản phẩm của nhà phát triển, đưa sản phẩm đó vào trò chơi, xác minh và đăng các thay đổi, rồi cho phép người dùng mua sản phẩm đó."
 Feature.Build.Title.AdCampaignActive,Chiến dịch quảng cáo đang hoạt động
 Feature.Build.Title.AdCampaignDuration,Chiến dịch quảng cáo dài {durationDays} ngày
 Feature.Build.Title.AddFriendsToPlaytest,Thêm bạn bè để giúp bạn chơi thử
@@ -2553,6 +2598,8 @@ Feature.Build.Title.ChangesNotLive,Nội dung bạn thay đổi chưa được �
 Feature.Build.Title.ChatBuildUnavailable,Build không sử dụng được.
 Feature.Build.Title.Content,Nội dung
 Feature.Build.Title.DailyRobuxReached,Đã dùng hết hạn mức Robux hằng ngày
+Feature.Build.Title.DeveloperProduct,Sản phẩm của nhà phát triển
+Feature.Build.Title.EditDeveloperProduct,Chỉnh sửa sản phẩm
 Feature.Build.Title.ExperienceAudience,Đối tượng của trải nghiệm
 Feature.Build.Title.FreeUsageReached,Đã hết lượt sử dụng Build miễn phí
 Feature.Build.Title.FriendsOnlyPlay,Chỉ bạn bè mới có thể chơi
@@ -2560,6 +2607,7 @@ Feature.Build.Title.GameCreationDone,Đã tạo xong trò chơi
 Feature.Build.Title.GamePrivate,Trò chơi này ở chế độ riêng tư
 Feature.Build.Title.GenericError,Đã xảy ra lỗi
 Feature.Build.Title.GetUsers,Thu hút người dùng
+Feature.Build.Title.NoMonetizationProducts,Bắt đầu kiếm tiền trong trò chơi của bạn
 Feature.Build.Title.NoRobuxForUsage,Không còn Robux để sử dụng Build
 Feature.Build.Title.Playtesters,Người chơi thử
 Feature.Build.Title.PlaytestersOnlyPlay,Chỉ người chơi thử mới có thể chơi
@@ -2807,7 +2855,7 @@ Feature.Catalog.Label.PrePremiumPrice,(Giá Vật Phẩm:
 Feature.Catalog.Label.Premium,Premium
 Feature.Catalog.Label.PremiumDiscount,Bạn tiết kiệm được {percent}% với Premium
 Feature.Catalog.Label.PremiumOnly,Chỉ dành cho người chơi Premium
-Feature.Catalog.Label.Price,Giá
+Feature.Catalog.Label.Price,
 Feature.Catalog.Label.PriceColon,Giá:
 Feature.Catalog.Label.PriceFromResale,{itemPrice} Từ Việc Bán Lại
 Feature.Catalog.Label.PriceHighToLow,Giá từ cao đến thấp
@@ -2955,7 +3003,7 @@ Feature.Chat.Action.Continue,
 Feature.Chat.Action.Copy,Sao chép
 Feature.Chat.Action.Create,
 Feature.Chat.Action.Delete,
-Feature.Chat.Action.Edit,Chỉnh sửa
+Feature.Chat.Action.Edit,
 Feature.Chat.Action.GroupOSADoNotJoin,Không tham gia
 Feature.Chat.Action.GroupOSAJoin,Tham gia
 Feature.Chat.Action.LearnMore,
@@ -3424,6 +3472,7 @@ Feature.Friends.Label.ContactsCaption,"Để giúp bạn và bạn bè tìm th�
 Feature.Friends.Label.FAEEligibleBanner.Body,
 Feature.Friends.Label.FewestInteractions,Ít Tương Tác Nhất
 Feature.Friends.Label.FindFriendsHintBody,Kết nối với bạn bè mà bạn biết hoặc khám phá những bạn mới.
+Feature.Friends.Label.Followed,Đã theo dõi
 Feature.Friends.Label.Follower,Người Theo Dõi
 Feature.Friends.Label.Followers,
 Feature.Friends.Label.Following,Đang Theo Dõi
@@ -3476,6 +3525,7 @@ Feature.Friends.Label.SearchPeople,Tìm Kiếm Người
 Feature.Friends.Label.SentFromWithContext,Gửi Từ {gameName}
 Feature.Friends.Label.SingularMutualFriend,bạn bè chung
 Feature.Friends.Label.Suggested,Gợi Ý
+Feature.Friends.Label.Unfollowed,Đã Hủy Theo Dõi
 Feature.Friends.Label.UnlockVoice,Mở Khóa Cuộc Nói Chuyện
 Feature.Friends.Label.YouAreFollowing,Bạn đang theo dõi
 Feature.Friends.Label.YourLinkedParent,Cha mẹ được liên kết
@@ -3883,6 +3933,7 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Còn {time}
+Feature.InExperienceShop.Label.EndTime,Kết thúc sau {timeRemaining}
 Feature.InExperienceShop.Label.Timer.Day.Plural,
 Feature.InExperienceShop.Label.Timer.Day.Singular,1 ngày
 Feature.InExperienceShop.Label.Timer.Hour.Plural,
@@ -4510,7 +4561,6 @@ Feature.Profile.Action.AboutThisProfile,Về hồ sơ này
 Feature.Profile.Action.Accept,Chấp Nhận
 Feature.Profile.Action.AcceptFriends,Chấp Nhận Làm Bạn
 Feature.Profile.Action.Add,
-Feature.Profile.Action.AddNickname,Thêm Tên
 Feature.Profile.Action.AllRequestsIgnored,Tất Cả Yêu Cầu Đã Bỏ Qua
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Sao Chép Liên Kết Hồ Sơ
@@ -4524,17 +4574,13 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,Chia sẻ hồ sơ
 Feature.Profile.Action.ShareProfileLink,Chia sẻ đường liên kết đến hồ sơ
-Feature.Profile.Action.SkipAddNickname,Bỏ Qua
 Feature.Profile.Action.SwitchAvatar,Đổi avatar
 Feature.Profile.Action.ToQRCode,Chia Sẻ Mã QR
 Feature.Profile.Action.UserBlocked,Người Chơi Bị Chặn
 Feature.Profile.Action.ViewFullProfile,Xem hồ sơ đầy đủ
 Feature.Profile.Action.ViewProfile,Xem hồ sơ
 Feature.Profile.Description.AboutModalCaption,"Hãy để những người chơi khác biết thêm về bạn. Tuy nhiên, hãy nhớ không chia sẻ thông tin cá nhân để tự bảo vệ bản thân bạn."
-Feature.Profile.Description.EnterNicknameTextbox,Nhập biệt danh của bạn
 Feature.Profile.Description.InspectAndBuy,Nhấp chuột để xem và chọn mua trang phục họ đang mặc.
-Feature.Profile.Description.NicknamePrivacy,Chỉ {displayName} mới thấy yêu cầu này.
-Feature.Profile.Description.NicknamePrivacyNoDisplayName,Chỉ một mình người dùng này mới thấy được.
 Feature.Profile.Description.QrCodeDescription,"Cho phép người khác quét mã QR để kết nối với bạn trên Roblox. Người dùng từ 13 tuổi trở lên, đã kiểm tra độ tuổi và kết nối qua tính năng quét QR trực tiếp sẽ trở thành Bạn bè đáng tin cậy."
 Feature.Profile.Description.QrCodeDescription.FriendsRename,"Cho phép người khác quét mã QR để kết nối với bạn trên Roblox. Người dùng từ 13 tuổi trở lên, đã kiểm tra độ tuổi và kết nối qua tính năng quét QR trực tiếp sẽ trở thành bạn bè đáng tin cậy."
 Feature.Profile.Description.QrCodeScanning,Để những người chơi khác quét mã QR Roblox của bạn bằng Máy Quét QR hoặc camera trên thiết bị của họ để kết bạn nhanh hơn!
@@ -4542,11 +4588,8 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,Đặt tên tùy ch
 Feature.Profile.Description.RecognizeFriendsByCustomName,Hãy đặt tên tuỳ chỉnh để dễ dàng nhận ra bạn bè hơn. Chỉ có bạn mới có thể nhìn thấy tên nhập từ danh bạ và tên tuỳ chỉnh.
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,Cho phép người quen quét mã QR để thêm bạn.
-Feature.Profile.Description.SelectNicknameDropdown,Chọn một tên
 Feature.Profile.Description.SetCustomName,"Đặt tên tuỳ chỉnh cho <font weight=""medium"">{displayName}</font>."
 Feature.Profile.Description.SetCustomNameNoDisplayName,Đặt tên tuỳ chỉnh.
-Feature.Profile.Description.SetNicknamePrompt,Thêm tên để {displayName} nhận ra bạn.
-Feature.Profile.Description.SetNicknamePromptNoDisplayName,Thêm tên để người dùng này nhận ra bạn.
 Feature.Profile.Description.SocialNetworksCaptionEveryone,Đang hiển thị cho tất cả mọi người.
 Feature.Profile.Description.SocialNetworksCaptionFollowers,"Đang hiển thị cho bạn bè, người dùng bạn đang theo dõi và người theo dõi của bạn."
 Feature.Profile.Description.SocialNetworksCaptionFollowing,Đang hiển thị cho bạn bè và người dùng mà bạn đang theo dõi.
@@ -4567,7 +4610,6 @@ Feature.Profile.Heading.DisplayNameUpdated,Đã Cập Nhật Tên Hiển Thị
 Feature.Profile.Heading.EditAgedUpDisplayName,Chỉnh Sửa Tên
 Feature.Profile.Heading.EditDisplayName,Chỉnh Sửa Tên Hiển Thị
 Feature.Profile.Heading.InsufficientFunds,Số Dư Không Đủ
-Feature.Profile.Heading.NicknameRequestSent,Đã Gửi Yêu Cầu Thêm Bạn Bè
 Feature.Profile.Heading.ProfileFrame,Khung hồ sơ
 Feature.Profile.Heading.ProfilePictureSaved,Đã lưu ảnh đại diện thành công
 Feature.Profile.Heading.ProfileQRCode,
@@ -4587,7 +4629,6 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"Bạn chỉ có thể đổ
 Feature.Profile.Label.AgedUpDisplayNameTooShort,Tên phải có ít nhất 3 ký tự.
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,Tên Tuỳ Chỉnh
-Feature.Profile.Label.CustomNicknameDropdown,Đặt Tên Tuỳ Chỉnh
 Feature.Profile.Label.CustomizeName,Tùy chỉnh tên
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,"Đây là tên công khai chính của bạn, những người dùng khác sẽ nhìn thấy tên này trên Roblox."
@@ -4595,12 +4636,6 @@ Feature.Profile.Label.DisplayNameFailed,Không thể lưu tên hiển thị. Vui
 Feature.Profile.Label.DisplayNameModalCaption,Bạn chỉ có thể đổi tên hiển thị một lần trong mỗi 7 ngày.
 Feature.Profile.Label.DisplayNameTooShort,Tên hiển thị phải có ít nhất 3 ký tự.
 Feature.Profile.Label.EditBackground,Chỉnh sửa nền
-Feature.Profile.Label.NicknameErrorMessageInvalid,Tên không hợp lệ.
-Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,Tên chứa các ký tự không được hỗ trợ.
-Feature.Profile.Label.NicknameErrorMessageModerated,Tên không phù hợp với Roblox.
-Feature.Profile.Label.NicknameErrorMessageThrottled,Tên của bạn đã được thay đổi trong hôm nay.
-Feature.Profile.Label.NicknameErrorMessageTooLong,Tên chỉ được dài tối đa 20 ký tự.
-Feature.Profile.Label.NicknameErrorMessageTooShort,Tên phải có ít nhất 2 ký tự.
 Feature.Profile.Label.NoBioYet,Chưa có tiểu sử
 Feature.Profile.Label.NoPreviousName,Không có tên trước đây
 Feature.Profile.Label.NoSocialLink,Chưa có liên kết mạng xã hội
@@ -4610,7 +4645,6 @@ Feature.Profile.Label.QRCodeFriendRequest,Được gửi từ mã QR của bạn
 Feature.Profile.Label.RecentAgedUpDisplayName,"Tên của bạn vừa mới được đổi gần đây. Bạn chỉ có thể đổi tên một lần trong mỗi 7 ngày.
 "
 Feature.Profile.Label.RecentDisplayName,Tên hiển thị của bạn vừa mới được đổi gần đây. Bạn chỉ có thể đổi tên hiển thị một lần trong mỗi 7 ngày.
-Feature.Profile.Label.TimeToChangeNickname,Bạn có thể đổi tên sau {hours} giờ.
 Feature.Profile.Label.UnableToJoin,Không thể Tham Gia
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b> đang chơi <b>{experienceName}</b>
 Feature.Profile.Label.UsernameDescription,Đây là tên độc nhất của bạn trên Roblox. Phí đổi tên tài khoản là {icon}{price}.
@@ -5122,7 +5156,7 @@ Feature.VerificationUpsell.Action.ContinueLogOut,Tiếp tục đăng xuất
 Feature.VerificationUpsell.Action.Edit,Chỉnh Sửa
 Feature.VerificationUpsell.Action.EditPhoneNumber,Chỉnh Sửa Số Điện Thoại
 Feature.VerificationUpsell.Action.EnableVoice,Bật Cuộc Nói Chuyện
-Feature.VerificationUpsell.Action.GenericSkip,
+Feature.VerificationUpsell.Action.GenericSkip,Bỏ Qua
 Feature.VerificationUpsell.Action.Logout,Vẫn đăng xuất
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
@@ -5353,6 +5387,7 @@ IAPExperience.PurchasePrompt.BuyRobuxAndSubscription,Mua Robux và gói đăng k
 IAPExperience.PurchasePrompt.Header.BuyAvatar,
 IAPExperience.PurchasePrompt.Header.BuyRobuxAndAvatar,Mua Robux và avatar
 IAPExperience.PurchasePrompt.Label.BlackbirdDiscount,Quyền lợi của gói Plus (giảm {discountPercentage}%)
+IAPExperience.PurchasePrompt.Label.BlackbirdDiscountEligibleItems,Quyền lợi của gói Plus (giảm {discountPercentage}% cho vật phẩm đủ điều kiện)
 IAPExperience.PurchasePrompt.Label.BlackbirdDiscountNoPercent,Quyền lợi của gói Plus
 IAPExperience.PurchasePrompt.Label.BlackbirdSummary,Tiết kiệm {robuxIcon} {savingsAmount} với gói Plus
 IAPExperience.PurchasePrompt.Label.GenericDiscount,Giảm giá (giảm {discountPercentage}%)

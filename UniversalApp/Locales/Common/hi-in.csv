@@ -843,11 +843,14 @@ CommonUI.Controls.Label.Wednesday,बुधवार
 CommonUI.Controls.Label.WednesdayAbbreviated,बुध
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,कोई रिज़ल्ट नहीं मिला
+CommonUI.Features.Action.ClassicUnlockGetTheme,थीम पाएँ
+CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,जाएँ
 CommonUI.Features.Action.LessLowercase,कम
 CommonUI.Features.Action.MoreLowercase,ज़्यादा
 CommonUI.Features.Action.Send,भेजें
+CommonUI.Features.Heading.ClassicUnlock,Roblox के 20 साल पूरे होने का जश्न मनाएँ!
 CommonUI.Features.Heading.GameDetails,एक्सपीरिएंस की जानकारी
 CommonUI.Features.Label.About,परिचय
 CommonUI.Features.Label.AboutUs,हमारे बारे में जानकारी
@@ -866,6 +869,8 @@ CommonUI.Features.Label.Catalog,Roblox कैटलॉग
 CommonUI.Features.Label.ChannelWithChannelName,चैनल: {channelName}
 CommonUI.Features.Label.Charts,चार्ट
 CommonUI.Features.Label.Chat,चैट करें
+CommonUI.Features.Label.ClassicUnlockDescription,सीमित समय के लिए क्लासिक लुक का मज़ा लें
+CommonUI.Features.Label.ClassicUnlockManagementSnackbar,सेटिंग्स में क्लासिक थीम मैनेज करें
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,फ़्रेंड्स
 CommonUI.Features.Label.Connection,कनेक्शन
@@ -1159,6 +1164,7 @@ Feature.Accessibility.Action.ScrollDown,नीचे स्क्रोल क�
 Feature.Accessibility.Action.ScrollUp,ऊपर स्क्रोल करें
 Feature.Accessibility.AppTheme.CategoryCalm,शांत
 Feature.Accessibility.AppTheme.CategoryDynamic,डायनैमिक
+Feature.Accessibility.AppTheme.CategorySpecial,विशेष
 Feature.Accessibility.AppTheme.CircuitRush,सर्किट रश
 Feature.Accessibility.AppTheme.Classic,क्लासिक
 Feature.Accessibility.AppTheme.CosmicDust,कॉस्मिक डस्ट
@@ -1645,18 +1651,20 @@ Feature.Avatar.Action.Zoom,ज़ूम करें
 Feature.Avatar.AvatarWidgetTitle,स्टाइल एक्सप्लोर करें
 Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
-Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,यहाँ बने रहें
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,
 Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,पब्लिश करें
 Feature.Avatar.BackgroundGeneration.Action.Upload,अपलोड करें
 Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Action.ViewExclusiveBackgrounds,
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Plus के साथ बैकग्राउंड क्रिएट करें.
-Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,"आपके अभी छोड़कर जाने पर, यह बैकग्राउंड हट जाएगा."
+Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,"आपका बैकग्राउंड अभी तक पब्लिश नहीं हुआ है. अगर आपने इसे अभी बिना पब्लिश किए हुए छोड़ा, तो इसे सेव नहीं किया जाएगा."
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,आपका क्रिएशन इस्तेमाल के लिए तैयार है.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"यह बैकग्राउंड AI से जनरेट किया गया था. इसे पब्लिश करने का मतलब है कि आपने यह कन्फ़र्म किया है कि यह Roblox कम्यूनिटी स्टैंडर्ड के मुताबिक है और इसमें ऐसा कॉन्टेंट इस्तेमाल नहीं किया गया है, जिसके अधिकार आपके पास नहीं हैं. आपकी इन्वेंट्री में दिखने से पहले इसका रिव्यू किया जाएगा और पब्लिश किए गए आइटम एडिट नहीं किए जा सकते."
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"यह बैकग्राउंड AI से जनरेट किया गया था. इसे अपलोड करने का मतलब है कि आपने यह कन्फ़र्म किया है कि यह Roblox कम्यूनिटी स्टैंडर्ड के मुताबिक है और इसमें ऐसा कॉन्टेंट इस्तेमाल नहीं किया गया है, जिसके अधिकार आपके पास नहीं हैं. आपकी इन्वेंट्री में दिखने से पहले इसका रिव्यू किया जाएगा. अपलोड किए गए आइटम एडिट नहीं किए जा सकते."
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Plus के साथ फ़्री एक्सक्लूसिव बैकग्राउंड पाएँ.
+Feature.Avatar.BackgroundGeneration.Description.ViewExclusiveBackgrounds,अपने फ़्री Plus एक्सक्लूसिव बैकग्राउंड देखें.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,"आइटम, कम्यूनिटी स्टैंडर्ड्स के मुताबिक नहीं था"
 Feature.Avatar.BackgroundGeneration.Error.LimitReached,"आपने इस्तेमाल करने की लिमिट पूरी कर ली है. कस्टमाइज़ करना जारी रखने के लिए, बाद में कोशिश करें."
 Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,"आपने इस्तेमाल करने की लिमिट पूरी कर ली है. कस्टमाइज़ करना जारी रखने के लिए, कल फिर से कोशिश करें."
@@ -1673,11 +1681,13 @@ Feature.Avatar.BackgroundGeneration.PromptPlaceholder,अपने बैकग�
 Feature.Avatar.BackgroundGeneration.Status.Generating,आपका बैकग्राउंड जेनरेट हो रहा है…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,आपका बैकग्राउंड तैयार हो रहा है…
 Feature.Avatar.BackgroundGeneration.Title,बैकग्राउंड क्रिएट करें
-Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,इस बैकग्राउंड को हटाना है?
+Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,पब्लिश किए बिना छोड़ना है?
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,इन्वेंट्री में पब्लिश करें
 Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
 Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,इन्वेंट्री में अपलोड करें
+Feature.Avatar.BackgroundGeneration.Tooltip.CreateBackground,Plus के साथ फ़्री में बैकग्राउंड क्रिएट करें!
+Feature.Avatar.BackgroundGeneration.Tooltip.PublishBackground,अपनी इन्वेंट्री में पब्लिश करें
 Feature.Avatar.Backgrounds.Title,बैकग्राउंड
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,इस बॉडी स्टाइल के लिए एडजस्टमेंट उपलब्ध नहीं है.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,डिफ़ॉल्ट रूप से ओरिजनल बॉडी कलर
@@ -2156,6 +2166,7 @@ Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,प्लेटेस्टर जोड़ें
 Feature.Build.Action.AddPlaytesters,प्लेटेस्टर्स जोड़ें
 Feature.Build.Action.AddToPlaytest,प्ले-टेस्ट में जोड़ें
+Feature.Build.Action.Approve,
 Feature.Build.Action.Archive,आर्काइव करें
 Feature.Build.Action.ArchiveGame,गेम को आर्काइव में भेजें
 Feature.Build.Action.Build,
@@ -2164,10 +2175,13 @@ Feature.Build.Action.BuyRobux,Robux खरीदें
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,टेक्स्ट कॉपी करें
 Feature.Build.Action.Create,
+Feature.Build.Action.CreateDeveloperProduct,
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,दोबारा न पूछें
 Feature.Build.Action.DontShowAgain,फिर से न दिखाएँ
+Feature.Build.Action.EarnRobux,Robux कमाएँ
+Feature.Build.Action.Edit,एडिट करें
 Feature.Build.Action.HideAutosaved,ऑटो-सेव किए गए छिपाएँ
 Feature.Build.Action.ManageLimit,लिमिट मैनेज करें
 Feature.Build.Action.Next,आगे बढ़ें
@@ -2180,9 +2194,12 @@ Feature.Build.Action.Playtest,प्लेटेस्ट
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,सबसे नया पब्लिश करें
+Feature.Build.Action.Reject,
 Feature.Build.Action.Restore,रीस्टोर करें
 Feature.Build.Action.Resume,
+Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,
+Feature.Build.Action.Save,
 Feature.Build.Action.SetDailyLimit,रोज़ाना लिमिट सेट करें
 Feature.Build.Action.SetLimit,लिमिट सेट करें
 Feature.Build.Action.Settings,
@@ -2246,6 +2263,7 @@ Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,विज़िट
 Feature.Build.Content.NewGame,नया गेम
+Feature.Build.Description.ActivateDeveloperProduct,डेवलपर प्रॉडक्ट {PRODUCT_ID} को बिक्री के लिए रखें.
 Feature.Build.Description.AdCampaignModerationReview,सभी ऐड कैंपेन को Roblox मॉडरेशन द्वारा रिव्यू किया जाता है. इस काम में 24 घंटे तक लग सकते हैं.
 Feature.Build.Description.AdCampaignSheetRunDates,{startDate} – {endDate} तक चलता है
 Feature.Build.Description.AdvertisingAgreement,आगे बढ़ने का मतलब है कि आप {advertisingTermsStart}Roblox की ऐडवरटाइज़िंग की शर्तों{advertisingTermsEnd} और {advertisingStandardsStart}ऐडवरटाइज़िंग स्टैंडर्ड{advertisingStandardsEnd} से सहमत हैं.
@@ -2258,6 +2276,8 @@ Feature.Build.Description.BuyRobuxToCreate,"क्रिएट करना ज�
 Feature.Build.Description.BuyUsageOrWait,Robux की मदद से बिल्ड का ज़्यादा इस्तेमाल खरीदें या अपनी रोज़ाना की लिमिट के रीसेट होने का इंतज़ार करें.
 Feature.Build.Description.CampaignRunDates,आपका कैंपेन {startDate} – {endDate} तक चलेगा
 Feature.Build.Description.ChoosePlaytesters,प्ले-टेस्ट में आपकी मदद करने के लिए फ़्रेंड्स चुनें.
+Feature.Build.Description.CreateDeveloperProduct,"{PRICE} Robux में ""{NAME}"" क्रिएट करें, बिक्री से हटाया गया."
+Feature.Build.Description.DeactivateDeveloperProduct,डेवलपर प्रॉडक्ट {PRODUCT_ID} को बिक्री से हटाएँ.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"अगर आपने Robux कमाए हैं, तो उनका इस्तेमाल सबसे पहले ऐड कैंपेन की लागत पर किया जाएगा."
 Feature.Build.Description.EnableBuildNotifs,"बिल्ड से अपडेट्स पाने के लिए, अपने डिवाइस की सेटिंग्स में नोटिफ़िकेशंस चालू करें."
 Feature.Build.Description.FriendsLinkOnly,"सिर्फ़ आपके फ़्रेंड्स ही इस लिंक को ऐक्सेस कर सकते हैं. अगर आपका मन है कि ज़्यादा लोग खेलें, तो अपने गेम की ऑडियंस सेटिंग बदलें."
@@ -2267,6 +2287,8 @@ Feature.Build.Description.HubSettings,Creator Hub पर सभी सेटि�
 Feature.Build.Description.InviteFriendLimit,"{MAX_INVITES} फ़्रेंड्स तक चुनें, फिर गेम का लिंक शेयर करें."
 Feature.Build.Description.MakeAudienceAvail,"अपने एक्सपीरिएंस को इस ऑडियंस के लिए उपलब्ध कराने के लिए, उसे पब्लिश करें."
 Feature.Build.Description.ManageAppearance,यह मैनेज करें कि आपका गेम दूसरों को कैसा दिखता है.
+Feature.Build.Description.ManageDeveloperProduct,डेवलपर प्रॉडक्ट मैनेज करें.
+Feature.Build.Description.NoMonetizationProducts,"उस आइटम के बारे में बताएँ, जिसे आपको अपने गेम में Robux कमाना शुरू करने के लिए क्रिएट करना है"
 Feature.Build.Description.PlayAfterPublish,यह चुनें कि इस एक्सपीरिएंस के पब्लिश होने के बाद इसे कौन-कौन खेल सकता है.
 Feature.Build.Description.PlaytestLatest,"आपने अपने सबसे नए वर्ज़न को प्लेटेस्ट किया है. जब आप शेयर करने के लिए तैयार हों, तो उसे पब्लिश करें."
 Feature.Build.Description.PlaytestLocked,"अपना पहला गेम क्रिएट करने के बाद, प्लेटेस्टिंग शुरू की जा सकती है."
@@ -2278,7 +2300,13 @@ Feature.Build.Description.RatingAgreement,पब्लिश करने का
 Feature.Build.Description.RestoreLatest,यह वर्ज़न आपका सबसे हाल में पब्लिश किया गया वर्ज़न बन जाएगा.
 Feature.Build.Description.RevertToVersion,सबसे नए बदलाव को रिवर्ट करने के लिए कन्फ़र्म करें और {VERSION} पर वापस जाएँ.
 Feature.Build.Description.ShareLatest,शेयर करें कि आपके सबसे नए वर्ज़न में क्या बदला है.
+Feature.Build.Description.UpdateDeveloperProduct,डेवलपर प्रॉडक्ट {PRODUCT_ID} को अपडेट करें.
 Feature.Build.Description.VersionChanges,खिलाड़ियों को इस वर्ज़न में हुए बदलावों के बारे में बताएँ.
+Feature.Build.Error.DeveloperProductDescriptionTooLong,"विवरण में 1,000 या इससे कम कैरेक्टर होने चाहिए."
+Feature.Build.Error.DeveloperProductNameRequired,प्रॉडक्ट का नाम डालें.
+Feature.Build.Error.DeveloperProductNameTooLong,नाम में 50 या इससे कम कैरेक्टर होने चाहिए.
+Feature.Build.Error.DeveloperProductPriceInvalid,"कीमत, 1 से 1,00,00,00,000 Robux तक के बीच का होल नंबर (पूर्णांक) होना चाहिए."
+Feature.Build.Error.DeveloperProductTextModerated,Roblox मॉडरेशन से इस प्रॉडक्ट का टेक्स्ट बदल गया है. अलग शब्दों का इस्तेमाल करके देखें.
 Feature.Build.Header.AccessSharing,ऐक्सेस और शेयरिंग
 Feature.Build.Header.AllVersions,सभी वर्ज़न
 Feature.Build.Header.ContentMaturity,कॉन्टेंट मैच्योरिटी
@@ -2297,6 +2325,7 @@ Feature.Build.Label.All,
 Feature.Build.Label.AmountAvailable,{AMOUNT} उपलब्ध हैं
 Feature.Build.Label.Autosaved,ऑटो-सेव किया गया
 Feature.Build.Label.Available,उपलब्ध है
+Feature.Build.Label.AvailableForPurchase,खरीदने के लिए उपलब्ध है
 Feature.Build.Label.BackToBuild,बिल्ड पर वापस जाएँ
 Feature.Build.Label.Building,बना रहा है...
 Feature.Build.Label.CaptureLibrary,कैप्चर लाइब्रेरी
@@ -2306,9 +2335,15 @@ Feature.Build.Label.Created,क्रिएट किया गया
 Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
 Feature.Build.Label.DateRange,{startDate} – {endDate}
+Feature.Build.Label.DefaultDeveloperProduct,प्रॉडक्ट {PRODUCT_ID}
+Feature.Build.Label.DefaultDeveloperProductName,डेवलपर प्रॉडक्ट
 Feature.Build.Label.Deleted,डिलीट किया गया
 Feature.Build.Label.DescribeIdea,किसी आइडिया के बारे में बताएँ
 Feature.Build.Label.Description,
+Feature.Build.Label.DeveloperProductDescription,विवरण : {DESCRIPTION}
+Feature.Build.Label.DeveloperProductName,"नाम : ""{NAME}"""
+Feature.Build.Label.DeveloperProductPrice,कीमत : {PRICE} Robux
+Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,आसान परफ़ॉर्मेंस रिपोर्ट
 Feature.Build.Label.Error,
@@ -2329,18 +2364,25 @@ Feature.Build.Label.Live,लाइव
 Feature.Build.Label.Loading,लोड किया जा रहा है...
 Feature.Build.Label.MaximizeForGamePlays,गेम प्ले की संख्या ज़्यादा से ज़्यादा बढ़ाएँ
 Feature.Build.Label.Models3D,3D मॉडल
+Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,कोई लिमिट नहीं
 Feature.Build.Label.NotStarted,शुरू नहीं हुआ
+Feature.Build.Label.OffSale,बिक्री के लिए उपलब्ध नहीं
+Feature.Build.Label.OnSale,बिक्री के लिए उपलब्ध
 Feature.Build.Label.Pending,पेंडिंग
 Feature.Build.Label.PercentUsed,{PERCENT}% इस्तेमाल किया गया
 Feature.Build.Label.PlayTime,खेलने में बीता समय
 Feature.Build.Label.PreviouslyPublished,पहले पब्लिश किया गया
+Feature.Build.Label.Price,कीमत
+Feature.Build.Label.PriceUnavailable,--
+Feature.Build.Label.Pricing,
 Feature.Build.Label.Private,प्राइवेट
 Feature.Build.Label.Public,पब्लिक
 Feature.Build.Label.PubliclyUnavailable,सभी के लिए उपलब्ध नहीं है
 Feature.Build.Label.Published,पब्लिश किया गया
 Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,तैयार
+Feature.Build.Label.RegionalPricing,इलाके के हिसाब से कीमत
 Feature.Build.Label.ResetsDaily,रोज़ाना रीसेट होता है
 Feature.Build.Label.RestoredVersion,{VERSION} रीस्टोर किया गया
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
@@ -2516,6 +2558,9 @@ Feature.Build.Notification.Message.Continue,"जारी रखने के �
 Feature.Build.Notification.Message.Review,"रिज़ल्ट रिव्यू करने के लिए, अपनी 'बिल्ड' चैट फिर से शुरू करें."
 Feature.Build.Notification.Title.Finished,बिल्ड पूरा हुआ
 Feature.Build.Notification.Title.NeedInput,बिल्ड के लिए आपके इनपुट की ज़रूरत है
+Feature.Build.Placeholder.DescribeProduct,बताएँ कि आपको क्या बेचना है
+Feature.Build.Placeholder.DescribeProductUpdate,कोई अपडेट बताएँ
+Feature.Build.Prompt.CreateDeveloperProduct,"डेवलपर प्रॉडक्ट बनाने, उसे गेम में जोड़ने, बदलावों को वेरिफ़ाई करके पब्लिश करने और उसे खरीदारी के लिए उपलब्ध कराने में मेरी मदद करें."
 Feature.Build.Title.AdCampaignActive,ऐड कैंपेन ऐक्टिव है
 Feature.Build.Title.AdCampaignDuration,{durationDays}-दिन का ऐड कैंपेन
 Feature.Build.Title.AddFriendsToPlaytest,प्ले-टेस्ट में आपकी मदद करने के लिए फ़्रेंड्स जोड़ें
@@ -2533,6 +2578,8 @@ Feature.Build.Title.ChangesNotLive,आपके बदलाव अभी तक
 Feature.Build.Title.ChatBuildUnavailable,बिल्ड उपलब्ध नहीं है.
 Feature.Build.Title.Content,कॉन्टेंट
 Feature.Build.Title.DailyRobuxReached,रोज़ाना की Robux लिमिट पूरी हो गई
+Feature.Build.Title.DeveloperProduct,
+Feature.Build.Title.EditDeveloperProduct,प्रॉडक्ट एडिट करें
 Feature.Build.Title.ExperienceAudience,एक्सपीरिएंस की ऑडियंस
 Feature.Build.Title.FreeUsageReached,मुफ़्त बिल्ड के इस्तेमाल की लिमिट पूरी हो गई
 Feature.Build.Title.FriendsOnlyPlay,सिर्फ़ फ़्रेंड्स ही खेल सकते हैं
@@ -2540,6 +2587,7 @@ Feature.Build.Title.GameCreationDone,गेम क्रिएशन पूर�
 Feature.Build.Title.GamePrivate,यह गेम प्राइवेट है
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,यूज़र्स पाएँ
+Feature.Build.Title.NoMonetizationProducts,अपने गेम में कमाना शुरू करें
 Feature.Build.Title.NoRobuxForUsage,बिल्ड के इस्तेमाल के लिए कोई Robux नहीं बचा
 Feature.Build.Title.Playtesters,प्लेटेस्टर्स
 Feature.Build.Title.PlaytestersOnlyPlay,सिर्फ़ प्लेटेस्टर्स खेल सकते हैं
@@ -2787,7 +2835,7 @@ Feature.Catalog.Label.PrePremiumPrice,(आइटम की कीमत:
 Feature.Catalog.Label.Premium,
 Feature.Catalog.Label.PremiumDiscount,Premium में {percent}% बचाएँ
 Feature.Catalog.Label.PremiumOnly,सिर्फ़ Premium यूज़र्स के लिए उपलब्ध है
-Feature.Catalog.Label.Price,कीमत
+Feature.Catalog.Label.Price,
 Feature.Catalog.Label.PriceColon,कीमत:
 Feature.Catalog.Label.PriceFromResale,रीसेल में {itemPrice}
 Feature.Catalog.Label.PriceHighToLow,"कीमत, ज़्यादा से कम"
@@ -2935,7 +2983,7 @@ Feature.Chat.Action.Continue,
 Feature.Chat.Action.Copy,कॉपी करें
 Feature.Chat.Action.Create,
 Feature.Chat.Action.Delete,
-Feature.Chat.Action.Edit,एडिट करें
+Feature.Chat.Action.Edit,
 Feature.Chat.Action.GroupOSADoNotJoin,जॉइन न करें
 Feature.Chat.Action.GroupOSAJoin,जॉइन करें
 Feature.Chat.Action.LearnMore,
@@ -3404,6 +3452,7 @@ Feature.Friends.Label.ContactsCaption,"Roblox पर आप और आपके 
 Feature.Friends.Label.FAEEligibleBanner.Body,
 Feature.Friends.Label.FewestInteractions,सबसे कम इंटरैक्शन
 Feature.Friends.Label.FindFriendsHintBody,"उन फ़्रेंड्स से जुड़ें, जिनसे आप पहले से जानते हैं या नए फ़्रेंड्स खोजें"
+Feature.Friends.Label.Followed,फ़ॉलो किया गया
 Feature.Friends.Label.Follower,फ़ॉलोअर
 Feature.Friends.Label.Followers,फ़ॉलोअर्स
 Feature.Friends.Label.Following,फ़ॉलो कर रहे हैं
@@ -3456,6 +3505,7 @@ Feature.Friends.Label.SearchPeople,
 Feature.Friends.Label.SentFromWithContext,{gameName} से भेजा गया
 Feature.Friends.Label.SingularMutualFriend,कॉमन फ़्रेंड
 Feature.Friends.Label.Suggested,सुझाया गया
+Feature.Friends.Label.Unfollowed,फ़ॉलो नहीं किया गया
 Feature.Friends.Label.UnlockVoice,वॉइस अनलॉक करें
 Feature.Friends.Label.YouAreFollowing,आप फ़ॉलो कर रहे/रही हैं
 Feature.Friends.Label.YourLinkedParent,आपके लिंक किए गए पेरेंट
@@ -3863,6 +3913,7 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} बाकी हैं
+Feature.InExperienceShop.Label.EndTime,{timeRemaining} में खत्म हो जाएगा
 Feature.InExperienceShop.Label.Timer.Day.Plural,{number} दिन
 Feature.InExperienceShop.Label.Timer.Day.Singular,
 Feature.InExperienceShop.Label.Timer.Hour.Plural,
@@ -4490,7 +4541,6 @@ Feature.Profile.Action.AboutThisProfile,इस प्रोफ़ाइल क�
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
-Feature.Profile.Action.AddNickname,नाम जोड़ें
 Feature.Profile.Action.AllRequestsIgnored,सभी रिक्वेस्ट इग्नोर की गईं
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,प्रोफ़ाइल लिंक कॉपी करें
@@ -4504,17 +4554,13 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,प्रोफ़ाइल शेयर करें
 Feature.Profile.Action.ShareProfileLink,प्रोफ़ाइल लिंक शेयर करें
-Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,QR कोड शेयर करें
 Feature.Profile.Action.UserBlocked,यूज़र को ब्लॉक किया गया
 Feature.Profile.Action.ViewFullProfile,पूरी प्रोफ़ाइल देखें
 Feature.Profile.Action.ViewProfile,
 Feature.Profile.Description.AboutModalCaption,दूसरों को अपने बारे में ज़्यादा जानकारी दें. खुद को सुरक्षित रखें. निजी जानकारी शेयर न करें.
-Feature.Profile.Description.EnterNicknameTextbox,अपना उपनाम डालें
 Feature.Profile.Description.InspectAndBuy,उनका लुक देखने और खरीदने के लिए क्लिक करें.
-Feature.Profile.Description.NicknamePrivacy,सिर्फ़ {displayName} के ज़रिए यह देखा जाएगा.
-Feature.Profile.Description.NicknamePrivacyNoDisplayName,सिर्फ़ इस यूज़र को यह दिखाई देगा.
 Feature.Profile.Description.QrCodeDescription,"Roblox पर आपसे कनेक्ट करने के लिए, दूसरों को अपना QR कोड स्कैन करने दें. लाइव QR स्कैन करके कनेक्ट करने वाले 13+ की उम्र वाले ऐसे यूज़र्स भरोसेमंद फ़्रेंड्स होंगे, जिनकी उम्र का वेरिफ़िकेशन हो चुका है."
 Feature.Profile.Description.QrCodeDescription.FriendsRename,
 Feature.Profile.Description.QrCodeScanning,"दूसरों को QR स्कैनर या उनके डिवाइस के कैमरे से अपना Roblox QR कोड स्कैन करने दें, ताकि वे आपको फ़्रेंड के तौर पर फटाफट जोड़ सकें!"
@@ -4522,11 +4568,8 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,कस्टम न
 Feature.Profile.Description.RecognizeFriendsByCustomName,
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,अपने जानने वाले लोगों को अनुमति दें कि वे आपका QR कोड स्कैन करके आपको जोड़ सकें.
-Feature.Profile.Description.SelectNicknameDropdown,कोई नाम चुनें
 Feature.Profile.Description.SetCustomName,"<font weight=""medium"">{displayName}</font> के लिए कस्टम नाम सेट करें."
 Feature.Profile.Description.SetCustomNameNoDisplayName,कस्टम नाम सेट करें.
-Feature.Profile.Description.SetNicknamePrompt,"{displayName} के लिए कोई नाम जोड़ें, ताकि आपको पहचाना जा सके."
-Feature.Profile.Description.SetNicknamePromptNoDisplayName,"इस यूज़र के लिए कोई नाम जोड़ें, ताकि आपको पहचाना जा सके."
 Feature.Profile.Description.SocialNetworksCaptionEveryone,फ़िलहाल सभी को दिखाई दे रहा है.
 Feature.Profile.Description.SocialNetworksCaptionFollowers,"इस समय आप अपने फ़्रेंड्स, अपने के ज़रिए फ़ॉलो किए जा रहे यूज़र्स और अपने फ़ॉलोअर्स के लिए विज़िबिल हैं."
 Feature.Profile.Description.SocialNetworksCaptionFollowing,इस समय आप फ़्रेंड्स और अपने के ज़रिए फ़ॉलो किए जा रहे यूज़र्स के लिए विज़िबिल हैं.
@@ -4547,7 +4590,6 @@ Feature.Profile.Heading.DisplayNameUpdated,डिसप्ले नाम अ�
 Feature.Profile.Heading.EditAgedUpDisplayName,नाम एडिट करें
 Feature.Profile.Heading.EditDisplayName,डिसप्ले नाम एडिट करें
 Feature.Profile.Heading.InsufficientFunds,फ़ंड काफ़ी नहीं हैं
-Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileFrame,प्रोफ़ाइल फ़्रेम
 Feature.Profile.Heading.ProfilePictureSaved,प्रोफ़ाइल फ़ोटो सेव हो गई
 Feature.Profile.Heading.ProfileQRCode,
@@ -4567,7 +4609,6 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"आपका डिसप�
 Feature.Profile.Label.AgedUpDisplayNameTooShort,नाम में कम से कम 3 कैरेक्टर होने चाहिए.
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,कस्टम नाम
-Feature.Profile.Label.CustomNicknameDropdown,कस्टम नाम सेट करें
 Feature.Profile.Label.CustomizeName,नाम कस्टमाइज़ करें
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,"यह आपका सार्वजनिक रूप से दिखने वाला नाम है, जो Roblox पर अन्य यूज़र्स को दिखेगा."
@@ -4575,12 +4616,6 @@ Feature.Profile.Label.DisplayNameFailed,डिसप्ले नाम से�
 Feature.Profile.Label.DisplayNameModalCaption,आपका डिसप्ले नाम हर 7 दिन में सिर्फ़ एक बार बदला जा सकता है
 Feature.Profile.Label.DisplayNameTooShort,डिसप्ले नाम में कम से कम 3 कैरेक्टर होने चाहिए.
 Feature.Profile.Label.EditBackground,
-Feature.Profile.Label.NicknameErrorMessageInvalid,नाम मान्य नहीं है.
-Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,नाम में सपोर्ट न करने वाले कैरेक्टर हैं.
-Feature.Profile.Label.NicknameErrorMessageModerated,नाम Roblox के लिए सही नहीं है.
-Feature.Profile.Label.NicknameErrorMessageThrottled,आपका नाम आज बदला जा चुका है.
-Feature.Profile.Label.NicknameErrorMessageTooLong,नाम में ज़्यादा से ज़्यादा 20 कैरेक्टर होने चाहिए.
-Feature.Profile.Label.NicknameErrorMessageTooShort,नाम में कम से कम 2 कैरेक्टर होने चाहिए.
 Feature.Profile.Label.NoBioYet,अभी तक कोई बायो नहीं दिया गया है
 Feature.Profile.Label.NoPreviousName,
 Feature.Profile.Label.NoSocialLink,अभी तक कोई सोशल लिंक नहीं है
@@ -4590,7 +4625,6 @@ Feature.Profile.Label.QRCodeFriendRequest,आपके QR कोड से भ�
 Feature.Profile.Label.RecentAgedUpDisplayName,"आपका डिसप्ले नाम हाल ही में बदला गया है. आपका डिसप्ले नाम हर 7 दिन में सिर्फ़ एक बार बदला जा सकता है.
 "
 Feature.Profile.Label.RecentDisplayName,आपका डिसप्ले नाम हाल ही में बदला गया है आपका डिसप्ले नाम हर 7 दिन में सिर्फ़ एक बार बदला जा सकता है.
-Feature.Profile.Label.TimeToChangeNickname,अपना नाम {hours} घंटों में बदला जा सकता है.
 Feature.Profile.Label.UnableToJoin,जॉइन नहीं किया जा सका
 Feature.Profile.Label.UserIsPlayingExperience,"<b>{userName}</b>, <b>{experienceName}</b> खेल रहे हैं"
 Feature.Profile.Label.UsernameDescription,Roblox पर यह आपका यूनीक नाम है. अपना यूज़रनेम बदलने में {icon}{price} का खर्च आएगा.

@@ -860,11 +860,14 @@ CommonUI.Controls.Label.Wednesday,星期三
 CommonUI.Controls.Label.WednesdayAbbreviated,週三
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,找不到結果
+CommonUI.Features.Action.ClassicUnlockGetTheme,取得主題
+CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,開始
 CommonUI.Features.Action.LessLowercase,更少
 CommonUI.Features.Action.MoreLowercase,更多
 CommonUI.Features.Action.Send,傳送
+CommonUI.Features.Heading.ClassicUnlock,慶祝 Roblox 20 週年！
 CommonUI.Features.Heading.GameDetails,體驗詳細資料
 CommonUI.Features.Label.About,關於
 CommonUI.Features.Label.AboutUs,關於我們
@@ -883,6 +886,8 @@ CommonUI.Features.Label.Catalog,Roblox 目錄
 CommonUI.Features.Label.ChannelWithChannelName,頻道：{channelName}
 CommonUI.Features.Label.Charts,圖表
 CommonUI.Features.Label.Chat,聊天
+CommonUI.Features.Label.ClassicUnlockDescription,限時享受經典外觀
+CommonUI.Features.Label.ClassicUnlockManagementSnackbar,在「設定」中管理經典主題
 CommonUI.Features.Label.ClientCoreScriptVersion,用戶端核心指令碼版本：{clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,好友
 CommonUI.Features.Label.Connection,聯繫對象
@@ -1178,6 +1183,7 @@ Feature.Accessibility.Action.ScrollDown,往下捲動
 Feature.Accessibility.Action.ScrollUp,往上捲動
 Feature.Accessibility.AppTheme.CategoryCalm,平靜
 Feature.Accessibility.AppTheme.CategoryDynamic,動態
+Feature.Accessibility.AppTheme.CategorySpecial,特殊
 Feature.Accessibility.AppTheme.CircuitRush,賽道狂飆深綠
 Feature.Accessibility.AppTheme.Classic,經典
 Feature.Accessibility.AppTheme.CosmicDust,宇宙粉塵紫
@@ -1664,18 +1670,20 @@ Feature.Avatar.Action.Zoom,縮放
 Feature.Avatar.AvatarWidgetTitle,探索造型
 Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
-Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,留在此處
+Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,
 Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,發佈
 Feature.Avatar.BackgroundGeneration.Action.Upload,上傳
 Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Action.ViewExclusiveBackgrounds,
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,透過 Plus 建立背景。
-Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,如果現在離開，將會捨棄此背景。
+Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,您的背景尚未發佈。現在離開將會失去背景。
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,你的創作已可使用。
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,此背景是由 AI 生成。發佈即表示您確認此背景符合 Roblox 社群標準，且未使用您無權使用的內容。此背景顯示在您的道具欄前會先經過審核，且已發佈的物品無法編輯。
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,此背景由 AI 生成。上傳即表示您確認此背景符合 Roblox 社群標準，且未使用您無權使用的內容。此背景顯示在您的道具欄之前會先經過審核。已上傳的物品無法編輯。
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,透過 Plus 解鎖免費專屬背景。
+Feature.Avatar.BackgroundGeneration.Description.ViewExclusiveBackgrounds,查看您的免費 Plus 專屬背景。
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,道具不符合社群標準
 Feature.Avatar.BackgroundGeneration.Error.LimitReached,你已達到使用量上限。若要繼續自訂，請稍後再試。
 Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,你已達到使用量上限。若要繼續自訂，請於明天再試。
@@ -1692,11 +1700,13 @@ Feature.Avatar.BackgroundGeneration.PromptPlaceholder,描述你的背景…
 Feature.Avatar.BackgroundGeneration.Status.Generating,正在生成你的背景…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,正在準備你的背景…
 Feature.Avatar.BackgroundGeneration.Title,建立背景
-Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,是否捨棄此背景？
+Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,要直接離開，而不發佈？
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,發佈至道具欄
 Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
 Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,上傳至道具欄
+Feature.Avatar.BackgroundGeneration.Tooltip.CreateBackground,透過 Plus 免費建立背景！
+Feature.Avatar.BackgroundGeneration.Tooltip.PublishBackground,
 Feature.Avatar.Backgrounds.Title,背景
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,無法針對這個身體造型進行調整。
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,預設為原始膚色
@@ -2175,6 +2185,7 @@ Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,新增遊戲測試員
 Feature.Build.Action.AddPlaytesters,
 Feature.Build.Action.AddToPlaytest,新增至試玩
+Feature.Build.Action.Approve,核准
 Feature.Build.Action.Archive,封存
 Feature.Build.Action.ArchiveGame,封存遊戲
 Feature.Build.Action.Build,
@@ -2183,10 +2194,13 @@ Feature.Build.Action.BuyRobux,購買 Robux
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,複製文字
 Feature.Build.Action.Create,
+Feature.Build.Action.CreateDeveloperProduct,
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,不要再詢問
 Feature.Build.Action.DontShowAgain,不要再顯示
+Feature.Build.Action.EarnRobux,賺取 Robux
+Feature.Build.Action.Edit,編輯
 Feature.Build.Action.HideAutosaved,隱藏自動儲存
 Feature.Build.Action.ManageLimit,管理上限
 Feature.Build.Action.Next,
@@ -2199,9 +2213,12 @@ Feature.Build.Action.Playtest,試玩
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,發佈最新版本
+Feature.Build.Action.Reject,
 Feature.Build.Action.Restore,復原
 Feature.Build.Action.Resume,恢復
+Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,
+Feature.Build.Action.Save,
 Feature.Build.Action.SetDailyLimit,設定每日上限
 Feature.Build.Action.SetLimit,設定上限
 Feature.Build.Action.Settings,
@@ -2265,6 +2282,7 @@ Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,造訪次數
 Feature.Build.Content.NewGame,新遊戲
+Feature.Build.Description.ActivateDeveloperProduct,販售開發者產品 {PRODUCT_ID}。
 Feature.Build.Description.AdCampaignModerationReview,所有廣告活動都會由 Roblox 審核。此流程最多可能需要 24 小時。
 Feature.Build.Description.AdCampaignSheetRunDates,投放時間 {startDate} – {endDate}
 Feature.Build.Description.AdvertisingAgreement,繼續操作，即表示您同意 {advertisingTermsStart}Roblox 廣告條款{advertisingTermsEnd}和{advertisingStandardsStart}廣告標準{advertisingStandardsEnd}。
@@ -2277,6 +2295,8 @@ Feature.Build.Description.BuyRobuxToCreate,購買更多 Robux 以繼續創作，
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 購買更多組建使用量，或等待每日上限重置。
 Feature.Build.Description.CampaignRunDates,你的活動將在 {startDate} – {endDate}期間投放
 Feature.Build.Description.ChoosePlaytesters,選擇好友協助你試玩。
+Feature.Build.Description.CreateDeveloperProduct,以 {PRICE} Robux 建立「{NAME}」，已下架。
+Feature.Build.Description.DeactivateDeveloperProduct,將開發者產品 {PRODUCT_ID} 下架。
 Feature.Build.Description.EarnedRobuxAppliedFirst,若已賺取 Robux，這些 Robux 將會優先用於支付廣告活動費用。
 Feature.Build.Description.EnableBuildNotifs,在裝置設定中啟用通知，以接收來自組建的最新消息。
 Feature.Build.Description.FriendsLinkOnly,只有你的好友能存取此連結。若希望有更多人玩，請變更遊戲的受眾設定。
@@ -2286,6 +2306,8 @@ Feature.Build.Description.HubSettings,在創作者中心管理所有設定
 Feature.Build.Description.InviteFriendLimit,選擇最多 {MAX_INVITES} 位好友，然後分享遊戲連結。
 Feature.Build.Description.MakeAudienceAvail,發佈體驗，讓此受眾可以存取。
 Feature.Build.Description.ManageAppearance,管理遊戲向其他人顯示的方式。
+Feature.Build.Description.ManageDeveloperProduct,管理開發者產品。
+Feature.Build.Description.NoMonetizationProducts,描述你想要建立的物品，以便在遊戲中開始賺取 Robux
 Feature.Build.Description.PlayAfterPublish,選擇發佈此體驗後可遊玩的對象。
 Feature.Build.Description.PlaytestLatest,你正在試玩最新版本。準備好分享後即可發佈。
 Feature.Build.Description.PlaytestLocked,建立第一個遊戲後，即可開始進行遊戲測試。
@@ -2297,7 +2319,13 @@ Feature.Build.Description.RatingAgreement,發佈即表示您同意此內容分�
 Feature.Build.Description.RestoreLatest,此版本將成為你的最新發佈版本。
 Feature.Build.Description.RevertToVersion,確認以還原最新變更並回到 {VERSION}。
 Feature.Build.Description.ShareLatest,分享最新版本的變更內容。
+Feature.Build.Description.UpdateDeveloperProduct,更新開發者產品 {PRODUCT_ID}。
 Feature.Build.Description.VersionChanges,告訴玩家此版本有哪些變更。
+Feature.Build.Error.DeveloperProductDescriptionTooLong,"說明長度不得超過 1,000 個字元。"
+Feature.Build.Error.DeveloperProductNameRequired,輸入產品名稱。
+Feature.Build.Error.DeveloperProductNameTooLong,名稱長度不得超過 50 個字元。
+Feature.Build.Error.DeveloperProductPriceInvalid,"價格須為 1 到 1,000,000,000 Robux 之間的整數。"
+Feature.Build.Error.DeveloperProductTextModerated,Roblox 審核人員已變更此產品的文字。請嘗試使用其他文字。
 Feature.Build.Header.AccessSharing,存取權與分享
 Feature.Build.Header.AllVersions,所有版本
 Feature.Build.Header.ContentMaturity,成年適宜內容
@@ -2316,6 +2344,7 @@ Feature.Build.Label.All,
 Feature.Build.Label.AmountAvailable,尚有 {AMOUNT} 次可使用
 Feature.Build.Label.Autosaved,已自動儲存
 Feature.Build.Label.Available,可供使用
+Feature.Build.Label.AvailableForPurchase,可供購買
 Feature.Build.Label.BackToBuild,返回建立
 Feature.Build.Label.Building,建立中...
 Feature.Build.Label.CaptureLibrary,截圖資料庫
@@ -2325,9 +2354,15 @@ Feature.Build.Label.Created,已建立
 Feature.Build.Label.CreatedDate,{MONTH} {DAY}，{YEAR}
 Feature.Build.Label.CreatorHub,創作者中心
 Feature.Build.Label.DateRange,{startDate} – {endDate}
+Feature.Build.Label.DefaultDeveloperProduct,產品 {PRODUCT_ID}
+Feature.Build.Label.DefaultDeveloperProductName,開發者產品
 Feature.Build.Label.Deleted,已刪除
 Feature.Build.Label.DescribeIdea,描述想法
 Feature.Build.Label.Description,
+Feature.Build.Label.DeveloperProductDescription,說明：{DESCRIPTION}
+Feature.Build.Label.DeveloperProductName,名稱：「{NAME}」
+Feature.Build.Label.DeveloperProductPrice,價格：{PRICE} Robux
+Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,簡單的成效報告
 Feature.Build.Label.Error,
@@ -2348,18 +2383,25 @@ Feature.Build.Label.Live,已發布
 Feature.Build.Label.Loading,
 Feature.Build.Label.MaximizeForGamePlays,最大化遊戲遊玩次數
 Feature.Build.Label.Models3D,3D 模型
+Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,無上限
 Feature.Build.Label.NotStarted,尚未開始
+Feature.Build.Label.OffSale,下架
+Feature.Build.Label.OnSale,販售中
 Feature.Build.Label.Pending,擱置
 Feature.Build.Label.PercentUsed,已使用 {PERCENT}%
 Feature.Build.Label.PlayTime,遊玩時間
 Feature.Build.Label.PreviouslyPublished,先前已發佈
+Feature.Build.Label.Price,價格
+Feature.Build.Label.PriceUnavailable,--
+Feature.Build.Label.Pricing,
 Feature.Build.Label.Private,私人
 Feature.Build.Label.Public,公開
 Feature.Build.Label.PubliclyUnavailable,尚未開放大眾遊玩
 Feature.Build.Label.Published,已發佈
 Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,就緒
+Feature.Build.Label.RegionalPricing,區域定價
 Feature.Build.Label.ResetsDaily,每日重置
 Feature.Build.Label.RestoredVersion,已還原 {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
@@ -2535,6 +2577,9 @@ Feature.Build.Notification.Message.Continue,若要繼續，請恢復組建聊天
 Feature.Build.Notification.Message.Review,若要查看結果，請恢復組建聊天。
 Feature.Build.Notification.Title.Finished,組建完成
 Feature.Build.Notification.Title.NeedInput,組建需要你的輸入
+Feature.Build.Placeholder.DescribeProduct,描述你想要銷售的產品
+Feature.Build.Placeholder.DescribeProductUpdate,描述一項更新
+Feature.Build.Prompt.CreateDeveloperProduct,協助我建立開發者產品、將其連接到遊戲中、驗證和發佈變更，並開放購買。
 Feature.Build.Title.AdCampaignActive,廣告活動已生效
 Feature.Build.Title.AdCampaignDuration,為期 {durationDays} 天的廣告活動
 Feature.Build.Title.AddFriendsToPlaytest,新增好友協助你試玩
@@ -2552,6 +2597,8 @@ Feature.Build.Title.ChangesNotLive,變更的內容尚未發佈
 Feature.Build.Title.ChatBuildUnavailable,無法使用組建。
 Feature.Build.Title.Content,內容
 Feature.Build.Title.DailyRobuxReached,已達每日 Robux 上限
+Feature.Build.Title.DeveloperProduct,
+Feature.Build.Title.EditDeveloperProduct,編輯產品
 Feature.Build.Title.ExperienceAudience,體驗受眾
 Feature.Build.Title.FreeUsageReached,已達到免費組建使用量上限
 Feature.Build.Title.FriendsOnlyPlay,只有好友可以遊玩
@@ -2559,6 +2606,7 @@ Feature.Build.Title.GameCreationDone,已完成遊戲創作
 Feature.Build.Title.GamePrivate,此遊戲僅限私人存取
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,取得使用者
+Feature.Build.Title.NoMonetizationProducts,開始在遊戲中賺取收入
 Feature.Build.Title.NoRobuxForUsage,沒有剩餘的 Robux 可用於購買組建使用量
 Feature.Build.Title.Playtesters,遊戲測試員
 Feature.Build.Title.PlaytestersOnlyPlay,只有遊戲測試員可以遊玩
@@ -2656,7 +2704,7 @@ Feature.Catalog.Heading.SetPrice,設定價格
 Feature.Catalog.Heading.ShowBodyParts,顯示身體部位
 Feature.Catalog.Heading.ShowHeadType,顯示頭部類型
 Feature.Catalog.Heading.ShowShoes,顯示鞋子
-Feature.Catalog.Heading.TakeOffSale,下架
+Feature.Catalog.Heading.TakeOffSale,
 Feature.Catalog.HeroWidget.BundleTitle,Korblox Pactbreaker 登場
 Feature.Catalog.HeroWidget.CapsuleDescription,
 Feature.Catalog.HeroWidget.CapsulePoolDescription,
@@ -2806,7 +2854,7 @@ Feature.Catalog.Label.PrePremiumPrice,(道具價格：
 Feature.Catalog.Label.Premium,
 Feature.Catalog.Label.PremiumDiscount,您是 Premium 會員，已省 {percent}%
 Feature.Catalog.Label.PremiumOnly,Premium 使用者限定
-Feature.Catalog.Label.Price,價格
+Feature.Catalog.Label.Price,
 Feature.Catalog.Label.PriceColon,價格：
 Feature.Catalog.Label.PriceFromResale,以{itemPrice}轉售
 Feature.Catalog.Label.PriceHighToLow,價格由高到低
@@ -2954,7 +3002,7 @@ Feature.Chat.Action.Continue,
 Feature.Chat.Action.Copy,複製
 Feature.Chat.Action.Create,
 Feature.Chat.Action.Delete,
-Feature.Chat.Action.Edit,編輯
+Feature.Chat.Action.Edit,
 Feature.Chat.Action.GroupOSADoNotJoin,不要加入
 Feature.Chat.Action.GroupOSAJoin,
 Feature.Chat.Action.LearnMore,
@@ -3423,6 +3471,7 @@ Feature.Friends.Label.ContactsCaption,為了幫助您和好友在 Roblox 找到�
 Feature.Friends.Label.FAEEligibleBanner.Body,
 Feature.Friends.Label.FewestInteractions,互動最少
 Feature.Friends.Label.FindFriendsHintBody,尋找您認識的好友或結交新的朋友。
+Feature.Friends.Label.Followed,已追蹤
 Feature.Friends.Label.Follower,追蹤者
 Feature.Friends.Label.Followers,
 Feature.Friends.Label.Following,追蹤中
@@ -3475,6 +3524,7 @@ Feature.Friends.Label.SearchPeople,
 Feature.Friends.Label.SentFromWithContext,來自 {gameName}
 Feature.Friends.Label.SingularMutualFriend,位共同好友
 Feature.Friends.Label.Suggested,建議給您
+Feature.Friends.Label.Unfollowed,已取消追蹤
 Feature.Friends.Label.UnlockVoice,解鎖語音
 Feature.Friends.Label.YouAreFollowing,您在追蹤
 Feature.Friends.Label.YourLinkedParent,已連結的家長
@@ -3882,6 +3932,7 @@ Feature.InExperienceIntervention.Label.Player,{username}：{evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,剩下 {time}
+Feature.InExperienceShop.Label.EndTime,{timeRemaining}後結束
 Feature.InExperienceShop.Label.Timer.Day.Plural,
 Feature.InExperienceShop.Label.Timer.Day.Singular,
 Feature.InExperienceShop.Label.Timer.Hour.Plural,
@@ -4509,7 +4560,6 @@ Feature.Profile.Action.AboutThisProfile,關於此個人檔案
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
-Feature.Profile.Action.AddNickname,新增名稱
 Feature.Profile.Action.AllRequestsIgnored,已忽略所有邀請
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,複製個人檔案連結
@@ -4523,17 +4573,13 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,分享個人檔案
 Feature.Profile.Action.ShareProfileLink,分享個人檔案連結
-Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,切換虛擬人偶
 Feature.Profile.Action.ToQRCode,
 Feature.Profile.Action.UserBlocked,已封鎖使用者
 Feature.Profile.Action.ViewFullProfile,檢視完整個人檔案
 Feature.Profile.Action.ViewProfile,
 Feature.Profile.Description.AboutModalCaption,讓其他玩家更認識您。請保護自己的安全，不要透露私人的詳細資訊。
-Feature.Profile.Description.EnterNicknameTextbox,輸入您的綽號
 Feature.Profile.Description.InspectAndBuy,按一下即可查看並購買他們的造型。
-Feature.Profile.Description.NicknamePrivacy,只有 {displayName} 會看到這個。
-Feature.Profile.Description.NicknamePrivacyNoDisplayName,只有此使用者會看到此內容。
 Feature.Profile.Description.QrCodeDescription,讓其他人掃描你的 QR 碼，即可在 Roblox 上互動交流。已完成年齡驗證且年滿 13 歲的使用者透過即時掃描 QR 碼，就能成為信任的好友。
 Feature.Profile.Description.QrCodeDescription.FriendsRename,讓其他人掃描你的 QR 碼，即可在 Roblox 上互動交流。已完成年齡驗證且年滿 13 歲的使用者透過即時掃描 QR 碼，便可成為信任的聯絡對象。
 Feature.Profile.Description.QrCodeScanning,讓其他人使用 QR 掃描儀掃描您的 Roblox QR 碼，快速新增您為好友！
@@ -4541,11 +4587,8 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,設定自訂名稱�
 Feature.Profile.Description.RecognizeFriendsByCustomName,設定自訂名稱即可更輕鬆辨識朋友。從聯絡人輸入的名稱和自訂名稱只會顯示給您本人。
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,讓認識的人掃描你的 QR 碼，將你新增為聯絡對象。
-Feature.Profile.Description.SelectNicknameDropdown,選擇名稱
 Feature.Profile.Description.SetCustomName,"設定<font weight=""medium"">{displayName}</font>的自訂名稱。"
 Feature.Profile.Description.SetCustomNameNoDisplayName,請設定自訂名稱。
-Feature.Profile.Description.SetNicknamePrompt,請新增名稱以方便 {displayName} 識別。
-Feature.Profile.Description.SetNicknamePromptNoDisplayName,請新增名稱以方便此使用者識別。
 Feature.Profile.Description.SocialNetworksCaptionEveryone,目前所有人都能看見。
 Feature.Profile.Description.SocialNetworksCaptionFollowers,目前好友、您追蹤的使用者和您的追蹤者可以看見。
 Feature.Profile.Description.SocialNetworksCaptionFollowing,目前好友和您追蹤的使用者可以看見。
@@ -4566,7 +4609,6 @@ Feature.Profile.Heading.DisplayNameUpdated,已更新顯示名稱
 Feature.Profile.Heading.EditAgedUpDisplayName,編輯名稱
 Feature.Profile.Heading.EditDisplayName,編輯顯示名稱
 Feature.Profile.Heading.InsufficientFunds,資金不足
-Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileFrame,個人檔案外框
 Feature.Profile.Heading.ProfilePictureSaved,已成功儲存個人檔案照片
 Feature.Profile.Heading.ProfileQRCode,
@@ -4586,7 +4628,6 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"您的名稱每 7 天只能
 Feature.Profile.Label.AgedUpDisplayNameTooShort,名稱至少要有 3 個字元。
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,自訂名稱
-Feature.Profile.Label.CustomNicknameDropdown,設定自訂名稱
 Feature.Profile.Label.CustomizeName,
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,這會是您在 Roblox 上向其他使用者顯示的主要公開名稱。
@@ -4594,12 +4635,6 @@ Feature.Profile.Label.DisplayNameFailed,無法儲存顯示名稱。請再試一�
 Feature.Profile.Label.DisplayNameModalCaption,您的顯示名稱每 7 天只能變更一次。
 Feature.Profile.Label.DisplayNameTooShort,顯示名稱至少要有 3 個字元。
 Feature.Profile.Label.EditBackground,
-Feature.Profile.Label.NicknameErrorMessageInvalid,名稱無效。
-Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,名稱含有不支援的字元。
-Feature.Profile.Label.NicknameErrorMessageModerated,此名稱含有 Roblox 認定的不當內容。
-Feature.Profile.Label.NicknameErrorMessageThrottled,您今天已變更過名稱。
-Feature.Profile.Label.NicknameErrorMessageTooLong,名稱最多 20 個字元。
-Feature.Profile.Label.NicknameErrorMessageTooShort,名稱至少要有 2 個字元。
 Feature.Profile.Label.NoBioYet,尚無簡介
 Feature.Profile.Label.NoPreviousName,沒有先前的名稱
 Feature.Profile.Label.NoSocialLink,尚無社交連結
@@ -4609,7 +4644,6 @@ Feature.Profile.Label.QRCodeFriendRequest,從您的 QR 碼傳送
 Feature.Profile.Label.RecentAgedUpDisplayName,"您近期已變更過名稱。每 7 天只能變更名稱一次。
 "
 Feature.Profile.Label.RecentDisplayName,近期已變更過顯示名稱。您的顯示名稱每 7 天只能變更一次。
-Feature.Profile.Label.TimeToChangeNickname,您可以在 {hours} 小時後變更名稱。
 Feature.Profile.Label.UnableToJoin,無法加入
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b> 正在玩<b>{experienceName}</b>
 Feature.Profile.Label.UsernameDescription,這是您在 Roblox 上的獨特名稱。變更您的使用者名稱需花費 {icon}{price}。

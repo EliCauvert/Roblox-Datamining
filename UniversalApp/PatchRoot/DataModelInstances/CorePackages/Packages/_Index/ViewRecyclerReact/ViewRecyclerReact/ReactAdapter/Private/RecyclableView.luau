@@ -1,14 +1,17 @@
 ﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
 local viewRecyclerModule = require(viewRecyclerReact.Parent.ViewRecycler)
+local hostPresentationPhaseModule = require(script.Parent.HostPresentationPhase)
+local placementKindModule = require(script.Parent.PlacementKind)
 local reactModule = require(viewRecyclerReact.Parent.React)
+local recyclableViewReadinessModule = require(viewRecyclerReact.ReactAdapter.RecyclableViewReadiness)
 local recyclableViewRegistryModule = require(script.Parent.RecyclableViewRegistry)
 local signalsModule = require(viewRecyclerReact.Parent.Signals)
 local signalsExperimentalModule = require(viewRecyclerReact.Parent.SignalsExperimental)
 
 return function(p1, p2, p3, p4, p5)
-	-- upvalues: recyclableViewRegistryModule (ref), signalsModule (ref), reactModule (ref), viewRecyclerModule (ref), signalsExperimentalModule (ref)
+	-- upvalues: recyclableViewRegistryModule (ref), signalsModule (ref), reactModule (ref), viewRecyclerModule (ref), placementKindModule (ref), hostPresentationPhaseModule (ref), recyclableViewReadinessModule (ref), signalsExperimentalModule (ref)
 	local metadata = recyclableViewRegistryModule.getMetadata(p2)
-	assert(metadata ~= nil, "RecyclableViewRecord: unknown Recyclable view type")
+	assert(metadata ~= nil, "RecyclableView: unknown Recyclable view type")
 	p4 = p4 or metadata.readiness
 	local var1 = if p5 == nil then metadata.hideWhilePending else p5
 	local var2, var3 = signalsModule.createSignal(p3)
@@ -37,8 +40,8 @@ return function(p1, p2, p3, p4, p5)
 	
 	local function bindHost(p6)
 		-- upvalues: var23 (write), var14 (write)
-		assert(not var23, "RecyclableViewRecord: cannot bind a destroyed host")
-		assert(var14 == nil, "RecyclableViewRecord: host is already bound")
+		assert(not var23, "RecyclableView: cannot bind a destroyed host")
+		assert(var14 == nil, "RecyclableView: host is already bound")
 		var14 = p6
 		local var24 = true
 		
@@ -51,56 +54,48 @@ return function(p1, p2, p3, p4, p5)
 		end
 	end
 	
-	local function valueSignal(value)
-		-- upvalues: var4 (ref), var17 (write)
-		local var24 = var4(value)
-		assert(var24 ~= nil, "RecyclableViewRecord: value read before first Assignment")
-		
-		return if var17 == "composition" then var24.value.props else var24.value
-	end
-	
 	local function itemSignal(value)
-		-- upvalues: var4 (ref)
+		-- upvalues: var4 (ref), var17 (write), placementKindModule (copy)
 		local var24 = var4(value)
-		assert(var24 ~= nil, "RecyclableViewRecord: item read before first Assignment")
+		assert(var24 ~= nil, "RecyclableView: item read before first Assignment")
 		
-		return var24.value
+		return if var17 == placementKindModule.Composition then var24.value.props else var24.value
 	end
 	
 	local function itemKeySignal(value)
 		-- upvalues: var4 (ref)
 		local var24 = var4(value)
-		assert(var24 ~= nil, "RecyclableViewRecord: item key read before first Assignment")
+		assert(var24 ~= nil, "RecyclableView: item key read before first Assignment")
 		
 		return var24.key
 	end
 	
 	local function _(p6)
-		-- upvalues: var19 (write), p4 (ref), var22 (write), var1 (ref), var23 (write), frame (ref)
-		local var24 = "hidden"
+		-- upvalues: var19 (write), hostPresentationPhaseModule (copy), p4 (ref), recyclableViewReadinessModule (copy), var22 (write), var1 (ref), var23 (write), frame (ref)
+		local hidden = hostPresentationPhaseModule.Hidden
 		
 		if var19 ~= nil then
-			if p4 == "ReadyOnAssignment" or var22 then
-				var24 = "presented"
+			if p4 == recyclableViewReadinessModule.ReadyOnAssignment or var22 then
+				hidden = hostPresentationPhaseModule.Presented
 			elseif not var1 then
-				var24 = "pending"
+				hidden = hostPresentationPhaseModule.Pending
 			end
 		end
 		p6.assignment = var19
 		p6.host = if var23 then nil else frame
-		p6.phase = var24
-		p6.visible = var19 ~= nil and var24 ~= "hidden"
+		p6.phase = hidden
+		p6.visible = var19 ~= nil and hidden ~= hostPresentationPhaseModule.Hidden
 		
 		return p6
 	end
 	
 	local function bindPlacement(p6, p7)
 		-- upvalues: var23 (write), var15 (write), var16 (write), var18 (write), var19 (write)
-		assert(not var23, "RecyclableViewRecord: cannot bind placement after destroy")
-		assert(p6 == nil == (p7 == nil), "RecyclableViewRecord: placement kind and port must be bound together")
+		assert(not var23, "RecyclableView: cannot bind placement after destroy")
+		assert(p6 == nil == (p7 == nil), "RecyclableView: placement kind and port must be bound together")
 		
 		if var15 == p7 then
-			assert(var16 == p6, "RecyclableViewRecord: one placement port cannot change kind")
+			assert(var16 == p6, "RecyclableView: one placement port cannot change kind")
 			
 			return
 		elseif var15 ~= nil then
@@ -113,7 +108,7 @@ return function(p1, p2, p3, p4, p5)
 	
 	local _ = function(p6)
 		-- upvalues: var23 (write), var19 (write), var14 (write), var15 (write), var18 (write)
-		assert(not var23, "RecyclableViewRecord: cannot publish after destroy")
+		assert(not var23, "RecyclableView: cannot publish after destroy")
 		
 		if p6 == nil and var19 ~= nil or var19 ~= nil and var19.key ~= p6.key then
 			local var24 = var14
@@ -128,21 +123,21 @@ return function(p1, p2, p3, p4, p5)
 	end
 	
 	local _ = function()
-		-- upvalues: var15 (write), t (ref), var19 (write), p4 (ref), var22 (write), var1 (ref), var23 (write), frame (ref)
+		-- upvalues: var15 (write), t (ref), var19 (write), hostPresentationPhaseModule (copy), p4 (ref), recyclableViewReadinessModule (copy), var22 (write), var1 (ref), var23 (write), frame (ref)
 		if var15 == nil then return end
-		local var24 = "hidden"
+		local hidden = hostPresentationPhaseModule.Hidden
 		
 		if var19 ~= nil then
-			if p4 == "ReadyOnAssignment" or var22 then
-				var24 = "presented"
+			if p4 == recyclableViewReadinessModule.ReadyOnAssignment or var22 then
+				hidden = hostPresentationPhaseModule.Presented
 			elseif not var1 then
-				var24 = "pending"
+				hidden = hostPresentationPhaseModule.Pending
 			end
 		end
 		t.assignment = var19
 		t.host = if var23 then nil else frame
-		t.phase = var24
-		t.visible = var19 ~= nil and var24 ~= "hidden"
+		t.phase = hidden
+		t.visible = var19 ~= nil and hidden ~= hostPresentationPhaseModule.Hidden
 		var15.apply(t)
 	end
 	
@@ -153,9 +148,9 @@ return function(p1, p2, p3, p4, p5)
 		signal = var2,
 		itemSignal = itemSignal,
 		itemKeySignal = itemKeySignal,
-		set = if p4 == "ReadyOnAssignment" then function(value)
-			-- upvalues: var23 (write), var19 (write), var14 (write), var15 (write), var18 (write), var3 (ref), var22 (write), var17 (write), var16 (write), var5 (ref), t (ref), p4 (ref), var1 (ref), frame (ref)
-			assert(not var23, "RecyclableViewRecord: cannot publish after destroy")
+		set = if p4 == recyclableViewReadinessModule.ReadyOnAssignment then function(value)
+			-- upvalues: var23 (write), var19 (write), var14 (write), var15 (write), var18 (write), var3 (ref), var22 (write), var17 (write), var16 (write), var5 (ref), t (ref), hostPresentationPhaseModule (copy), p4 (ref), recyclableViewReadinessModule (copy), var1 (ref), frame (ref)
+			assert(not var23, "RecyclableView: cannot publish after destroy")
 			local var24 = var19
 			
 			if value == nil and var24 ~= nil or var24 ~= nil and var24.key ~= value.key then
@@ -181,19 +176,19 @@ return function(p1, p2, p3, p4, p5)
 			
 			if var15 == nil then return end
 			local var26 = var19
-			local var27 = "hidden"
+			local hidden = hostPresentationPhaseModule.Hidden
 			
 			if var26 ~= nil then
-				var27 = "presented"
+				hidden = hostPresentationPhaseModule.Presented
 			end
 			t.assignment = var26
 			t.host = if var23 then nil else frame
-			t.phase = var27
-			t.visible = var26 ~= nil and var27 ~= "hidden"
+			t.phase = hidden
+			t.visible = var26 ~= nil and hidden ~= hostPresentationPhaseModule.Hidden
 			var15.apply(t)
 		end else function(value)
-			-- upvalues: var23 (write), var19 (write), var14 (write), var15 (write), var18 (write), var22 (write), var21 (write), signalsExperimentalModule (copy), var17 (write), var16 (write), var5 (ref), var9 (ref), var3 (ref), var7 (ref), t (ref), p4 (ref), var1 (ref), frame (ref)
-			assert(not var23, "RecyclableViewRecord: cannot publish after destroy")
+			-- upvalues: var23 (write), var19 (write), var14 (write), var15 (write), var18 (write), var22 (write), var21 (write), signalsExperimentalModule (copy), var17 (write), var16 (write), var5 (ref), var9 (ref), var3 (ref), var7 (ref), t (ref), hostPresentationPhaseModule (copy), p4 (ref), recyclableViewReadinessModule (copy), var1 (ref), frame (ref)
+			assert(not var23, "RecyclableView: cannot publish after destroy")
 			
 			if value == nil and var19 ~= nil or var19 ~= nil and var19.key ~= value.key then
 				local var24 = var14
@@ -234,43 +229,42 @@ return function(p1, p2, p3, p4, p5)
 				
 				if var26 == nil then return end
 				local var27 = var19
-				local var28 = "hidden"
+				local hidden = hostPresentationPhaseModule.Hidden
 				
 				if var27 ~= nil then
-					if p4 == "ReadyOnAssignment" or var22 then
-						var28 = "presented"
+					if p4 == recyclableViewReadinessModule.ReadyOnAssignment or var22 then
+						hidden = hostPresentationPhaseModule.Presented
 					elseif not var1 then
-						var28 = "pending"
+						hidden = hostPresentationPhaseModule.Pending
 					end
 				end
 				t.assignment = var27
 				t.host = if var23 then nil else frame
-				t.phase = var28
-				t.visible = var27 ~= nil and var28 ~= "hidden"
+				t.phase = hidden
+				t.visible = var27 ~= nil and hidden ~= hostPresentationPhaseModule.Hidden
 				var26.apply(t)
 			end
 		end,
-		valueSignal = valueSignal,
 		pending = var6,
 		contentRevision = var8,
 		commitContent = function(p6, p7)
-			-- upvalues: var19 (write), var23 (write), p4 (ref), var21 (write), var22 (write), var7 (ref), var15 (write), t (ref), var1 (ref), frame (ref)
-			if var23 or p4 ~= "ReadyOnCommit" or (var19 == nil or var19.generation ~= p6) or p7 ~= var21 then
+			-- upvalues: var19 (write), var23 (write), p4 (ref), recyclableViewReadinessModule (copy), var21 (write), var22 (write), var7 (ref), var15 (write), t (ref), hostPresentationPhaseModule (copy), var1 (ref), frame (ref)
+			if var23 or p4 ~= recyclableViewReadinessModule.ReadyOnCommit or (var19 == nil or var19.generation ~= p6) or p7 ~= var21 then
 				return false
 			end
 			var22 = true
 			var7(false)
 			
 			if var15 ~= nil then
-				local var24 = "hidden"
+				local hidden = hostPresentationPhaseModule.Hidden
 				
 				if var19 ~= nil then
-					var24 = "presented"
+					hidden = hostPresentationPhaseModule.Presented
 				end
 				t.assignment = var19
 				t.host = if var23 then nil else frame
-				t.phase = var24
-				t.visible = var19 ~= nil and var24 ~= "hidden"
+				t.phase = hidden
+				t.visible = var19 ~= nil and hidden ~= hostPresentationPhaseModule.Hidden
 				var15.apply(t)
 			end
 			return true
@@ -279,7 +273,7 @@ return function(p1, p2, p3, p4, p5)
 		readiness = p4,
 		hideWhilePending = var1,
 		structuralPlacement = var10,
-		compositionPlacementManager = var12,
+		compositionPlacement = var12,
 		setStructuralPlacement = function(value, p6)
 			-- upvalues: var20 (write), var11 (ref)
 			if var20.axis == value and var20.selfSizing == p6 then
@@ -288,7 +282,7 @@ return function(p1, p2, p3, p4, p5)
 			var20 = { axis = value, selfSizing = p6 }
 			var11(var20)
 		end,
-		setCompositionPlacementManager = var13,
+		setCompositionPlacement = var13,
 		portalFrame = function(_)
 			-- upvalues: var23 (write), frame (ref)
 			return if var23 then nil else frame

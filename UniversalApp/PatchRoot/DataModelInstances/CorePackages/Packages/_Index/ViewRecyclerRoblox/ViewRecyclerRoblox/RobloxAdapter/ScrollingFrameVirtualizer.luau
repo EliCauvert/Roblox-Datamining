@@ -1,12 +1,13 @@
 ﻿local viewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
 local viewRecyclerModule = require(viewRecyclerRoblox.Parent.ViewRecycler)
-local canvasItemViewRuntimeModule = require(viewRecyclerRoblox.RobloxAdapter.CanvasItemViewRuntime)
+local hostPlacementModule = require(viewRecyclerRoblox.RobloxAdapter.HostPlacement)
+local hostPresentationPhaseModule = require(viewRecyclerRoblox.RobloxAdapter.HostPresentationPhase)
 local _ = viewRecyclerModule.Layout
-local record = viewRecyclerModule.Adapter._Private.Record
+local shallowTable = viewRecyclerModule.Adapter._Private.ShallowTable
 local t = {
-	createCanvasRuntime = canvasItemViewRuntimeModule.new,
+	createHostPlacement = hostPlacementModule.new,
 	createCoreVirtualizer = viewRecyclerModule.Adapter.createVirtualizer,
-	createScrollHostCoordinator = require(viewRecyclerRoblox.RobloxAdapter.ScrollHostCoordinator).new
+	createScrollingFrameSync = require(viewRecyclerRoblox.RobloxAdapter.ScrollingFrameSync).new
 }
 local t_1 = {}
 local frozen = table.freeze({
@@ -16,22 +17,22 @@ local frozen = table.freeze({
 })
 
 local function _(p1, p2)
-	-- upvalues: record (ref), frozen (ref)
-	return not record.containsEqual(p1, p2, frozen)
+	-- upvalues: shallowTable (ref), frozen (ref)
+	return not shallowTable.containsEqual(p1, p2, frozen)
 end
 
 local function samePinnedItems(p1, p2)
-	-- upvalues: record (ref)
+	-- upvalues: shallowTable (ref)
 	local var1 = true
 	
 	if p1 ~= p2 then
 		var1 = false
 		
 		if p1.isItemStickyHeader == p2.isItemStickyHeader then
-			var1 = record.equal(p1.pinnedStartItem or {}, p2.pinnedStartItem or {})
+			var1 = shallowTable.equal(p1.pinnedStartItem or {}, p2.pinnedStartItem or {})
 			
 			if var1 then
-				var1 = record.equal
+				var1 = shallowTable.equal
 				var1 = var1(p1.pinnedEndItem or {}, p2.pinnedEndItem or {})
 			end
 		end
@@ -49,7 +50,7 @@ local _ = function(p1)
 end
 
 local function applyCorePolicy(p1, p2, p3)
-	-- upvalues: samePinnedItems (ref), record (ref), viewRecyclerModule (ref)
+	-- upvalues: samePinnedItems (ref), shallowTable (ref), viewRecyclerModule (ref)
 	local cloned = table.clone(p3)
 	
 	if cloned.overscanPolicy ~= nil then
@@ -58,7 +59,7 @@ local function applyCorePolicy(p1, p2, p3)
 	if p2 ~= nil and samePinnedItems(p2.pinnedItems, cloned.pinnedItems) then
 		cloned.pinnedItems = p2.pinnedItems
 	end
-	if p2 == nil or not record.equal(p2, cloned) then
+	if p2 == nil or not shallowTable.equal(p2, cloned) then
 		p1({
 			type = viewRecyclerModule.VirtualizerCommandType.SetPolicy,
 			policy = cloned
@@ -67,8 +68,8 @@ local function applyCorePolicy(p1, p2, p3)
 	return cloned
 end
 
-local function createRuntime(p1, p2, p3)
-	-- upvalues: t (ref), viewRecyclerModule (ref), applyCorePolicy (ref), record (ref), frozen (ref)
+local function createScrollingFrameVirtualizer(p1, p2, p3)
+	-- upvalues: t (ref), viewRecyclerModule (ref), applyCorePolicy (ref), shallowTable (ref), frozen (ref)
 	p3 = p3 or t
 	local initialHostConfiguration = p1.initialHostConfiguration
 	local initialHostTarget = p1.initialHostTarget
@@ -86,10 +87,10 @@ local function createRuntime(p1, p2, p3)
 	local var6 = nil
 	local var7 = false
 	
-	local function handleUpdate(p4, p5)
+	local function applyVirtualizerUpdate(p4, p5)
 		-- upvalues: var6 (write), var7 (write), viewRecyclerModule (copy), initialHostConfiguration (write)
 		if var6 ~= nil then
-			var6.handleUpdate(p4, p5)
+			var6.applyVirtualizerUpdate(p4, p5)
 		end
 		for i, v in if var7 then p5.effects else {} do
 			local _ = nil
@@ -136,7 +137,7 @@ local function createRuntime(p1, p2, p3)
 		return var8
 	end
 	
-	local var9 = p3.createCanvasRuntime({
+	local var9 = p3.createHostPlacement({
 		container = initialHostTarget.scrollingFrame,
 		viewportContainer = initialHostTarget.viewportOverlay,
 		axis = initialHostConfiguration.axis,
@@ -161,10 +162,10 @@ local function createRuntime(p1, p2, p3)
 	local cloned_1 = table.clone(core)
 	cloned_1.dataSource = initialHostConfiguration.dataSource
 	cloned_1.layout = initialHostConfiguration.layout
-	cloned_1.prepareItemViewAssignment = var10.prepare
-	cloned_1.postCommitItemViewAssignment = var10.postCommit
-	cloned_1.presentItemViewAssignment = var10.present
-	cloned_1.applyItemViewPlacementIntent = var9.applyPlacementIntent
+	cloned_1.prepareAssignment = var10.prepare
+	cloned_1.postCommitAssignment = var10.postCommit
+	cloned_1.presentAssignment = var10.present
+	cloned_1.applyPlacementIntent = var9.applyPlacementIntent
 	cloned_1.overscan = var4.overscan
 	cloned_1.overscanPolicy = var4.overscanPolicy
 	cloned_1.dataPrefetch = var4.dataPrefetch
@@ -174,9 +175,9 @@ local function createRuntime(p1, p2, p3)
 	cloned_1.pinnedStartItem = var4.pinnedItems.pinnedStartItem
 	cloned_1.pinnedEndItem = var4.pinnedItems.pinnedEndItem
 	cloned_1.preserveScrollPositionOnChange = var4.preserveScrollPositionOnChange
-	cloned_1.onUpdate = handleUpdate
+	cloned_1.onUpdate = applyVirtualizerUpdate
 	var5 = p3.createCoreVirtualizer(cloned_1)
-	var6 = p3.createScrollHostCoordinator({
+	var6 = p3.createScrollingFrameSync({
 		dispatch = dispatch,
 		getSnapshot = var5.getSnapshot,
 		query = var5.query,
@@ -196,13 +197,13 @@ local function createRuntime(p1, p2, p3)
 		query = var5.query,
 		connect = function()
 			-- upvalues: var1 (write), var2 (write), var6 (write), var3 (write)
-			assert(not var1, "ScrollListHostRuntime: cannot connect after destroy")
-			assert(not var2, "ScrollListHostRuntime: already connected")
+			assert(not var1, "ScrollingFrameVirtualizer: cannot connect after destroy")
+			assert(not var2, "ScrollingFrameVirtualizer: already connected")
 			var2 = true
 			local var11 = var6.connect()
 			local var12 = false
 			
-			local function disconnectRuntime()
+			local function disconnect()
 				-- upvalues: var12 (write), var2 (copy), var3 (copy), var11 (ref)
 				if var12 then
 					return
@@ -213,12 +214,12 @@ local function createRuntime(p1, p2, p3)
 				var11()
 			end
 			
-			var3 = disconnectRuntime
+			var3 = disconnect
 			
-			return disconnectRuntime
+			return disconnect
 		end,
 		update = function(p7)
-			-- upvalues: var1 (write), initialHostConfiguration (write), initialHostTarget (write), var9 (ref), dispatch (ref), viewRecyclerModule (copy), var4 (write), applyCorePolicy (copy), record (copy), frozen (copy), var6 (write)
+			-- upvalues: var1 (write), initialHostConfiguration (write), initialHostTarget (write), var9 (ref), dispatch (ref), viewRecyclerModule (copy), var4 (write), applyCorePolicy (copy), shallowTable (copy), frozen (copy), var6 (write)
 			if var1 then return end
 			local hostConfiguration = p7.hostConfiguration
 			local hostTarget = p7.hostTarget
@@ -260,14 +261,14 @@ local function createRuntime(p1, p2, p3)
 			end
 			var4 = applyCorePolicy(dispatch, var4, p7.corePolicy)
 			
-			if record.containsEqual(initialHostConfiguration, hostConfiguration, frozen) then
+			if shallowTable.containsEqual(initialHostConfiguration, hostConfiguration, frozen) then
 				var6.configurationChanged()
 			end
 			if var13 then
-				var6.hostChanged()
+				var6.scrollingFrameChanged()
 			end
 		end,
-		isHostReady = var6.isHostReady,
+		isReady = var6.isReady,
 		destroy = function()
 			-- upvalues: var1 (write), var3 (write), dispatch (ref), viewRecyclerModule (copy), var9 (ref)
 			if var1 then return end
@@ -283,9 +284,9 @@ local function createRuntime(p1, p2, p3)
 	}
 end
 
-function t_1.newForRecyclableViewRecords(p6, p7)
-	-- upvalues: createRuntime (ref)
-	return createRuntime(p6, function(p8, p9)
+function t_1.newForRecyclableViews(p6, p7)
+	-- upvalues: createScrollingFrameVirtualizer (ref)
+	return createScrollingFrameVirtualizer(p6, function(p8, p9)
 		local tbl = setmetatable({}, { __mode = "k" })
 		
 		local function _(p10)
@@ -335,10 +336,10 @@ function t_1.newForRecyclableViewRecords(p6, p7)
 				if set ~= nil then
 					set(p11)
 				end
-				local prepareItemViewAssignment = p9.prepareItemViewAssignment
+				local prepareAssignment = p9.prepareAssignment
 				
-				if prepareItemViewAssignment ~= nil then
-					prepareItemViewAssignment(p10, p11)
+				if prepareAssignment ~= nil then
+					prepareAssignment(p10, p11)
 				end
 				local onItemViewAssignmentChanged = p9.onItemViewAssignmentChanged
 				
@@ -351,30 +352,30 @@ function t_1.newForRecyclableViewRecords(p6, p7)
 end
 
 function t_1.newForGuiObjects(p6, p7)
-	-- upvalues: createRuntime (ref)
-	return createRuntime(p6, function(p8, p9)
-		-- upvalues: p6 (ref)
+	-- upvalues: createScrollingFrameVirtualizer (ref), hostPresentationPhaseModule (ref)
+	return createScrollingFrameVirtualizer(p6, function(p8, p9)
+		-- upvalues: p6 (ref), hostPresentationPhaseModule (copy)
 		return {
 			prepare = function(p10, p11)
-				-- upvalues: p8 (ref), p6 (copy)
+				-- upvalues: p8 (ref), p6 (copy), hostPresentationPhaseModule (copy)
 				if p11 == nil then
 					p8.applyHostState(p10, nil)
 					
 					return
 				end
 				p8.applyHostState(p10, {
-					phase = "hidden",
 					visible = false,
 					host = p6.getGuiObject(p10),
-					assignment = p11
+					assignment = p11,
+					phase = hostPresentationPhaseModule.Hidden
 				})
 			end,
 			postCommit = function(p10, p11)
 				-- upvalues: p9 (ref)
-				local prepareItemViewAssignment = p9.prepareItemViewAssignment
+				local prepareAssignment = p9.prepareAssignment
 				
-				if prepareItemViewAssignment ~= nil then
-					prepareItemViewAssignment(p10, p11)
+				if prepareAssignment ~= nil then
+					prepareAssignment(p10, p11)
 				end
 				local onItemViewAssignmentChanged = p9.onItemViewAssignmentChanged
 				
@@ -383,12 +384,12 @@ function t_1.newForGuiObjects(p6, p7)
 				end
 			end,
 			present = function(p10, p11)
-				-- upvalues: p8 (ref), p6 (copy)
+				-- upvalues: p8 (ref), p6 (copy), hostPresentationPhaseModule (copy)
 				p8.applyHostState(p10, {
-					phase = "presented",
 					visible = true,
 					host = p6.getGuiObject(p10),
-					assignment = p11
+					assignment = p11,
+					phase = hostPresentationPhaseModule.Presented
 				})
 			end
 		}
