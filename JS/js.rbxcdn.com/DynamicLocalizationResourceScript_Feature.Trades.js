@@ -157,6 +157,11 @@ Roblox.LangDynamic["Feature.Trades"] = {
     "Label.FreeTradesRemaining": "Free Trades: {number}/{maxNumber}",
     "Message.LowballTradesOnTrades": "Tired of lowball trades?<br />Update your Trade Quality setting.",
     "Label.Search": "Search",
-    "Label.NoResultsFound": "No results found"
+    "Label.NoResultsFound": "No results found",
+    "Label.UnlockUnlimitedTrades": "Unlock Unlimited Trades",
+    "Message.CompleteAsManyTradesAsYouWantWithPlus": "Complete as many trades as you want with Plus.",
+    "Action.Subscribe": "Subscribe",
+    "Message.FreeTradesLeftThisMonth": "{number}/{maxNumber} free trades left this month",
+    "Label.EndsDate": "Ends {date}"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Trades");

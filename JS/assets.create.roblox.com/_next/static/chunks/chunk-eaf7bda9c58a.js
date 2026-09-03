@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "356a141e-b749-bccd-2ba7-de6a4276eafd")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "1f2fdec3-b4c5-3b20-59bb-55f73372950c")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 118413, e => {
@@ -117,7 +117,7 @@
         M = (0, t.defineFlag)({
             namespace: "creator-analytics",
             name: "isCustomDashboardsEnabled",
-            defaultValue: !1
+            defaultValue: !0
         }),
         T = (0, t.defineFlag)({
             namespace: "creator-analytics",
@@ -127,7 +127,7 @@
         R = (0, t.defineFlag)({
             namespace: "creator-analytics",
             name: "isCustomDashboardsApiBackendEnabled",
-            defaultValue: !1
+            defaultValue: !0
         }),
         x = (0, t.defineFlag)({
             namespace: "creator-analytics",
@@ -1359,5 +1359,5 @@
     a.ab = "/ROOT/node_modules/.pnpm/next@16.3.0_@babel+core@7.29.0_@opentelemetry+api@1.9.1_@playwright+test@1.61.1_@types+_379fb98fecc9fc5f7bce6eca48d1b2a5/node_modules/next/dist/compiled/buffer/", t.exports = a(230)
 }]);
 
-//# debugId=356a141e-b749-bccd-2ba7-de6a4276eafd
-//# sourceMappingURL=2o6__q8ufnnz7.js.map
+//# debugId=1f2fdec3-b4c5-3b20-59bb-55f73372950c
+//# sourceMappingURL=2vgocd_r6mb3c.js.map
