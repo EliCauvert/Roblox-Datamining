@@ -862,14 +862,11 @@ CommonUI.Controls.Label.Wednesday,Miércoles
 CommonUI.Controls.Label.WednesdayAbbreviated,Mié
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,Sin resultados
-CommonUI.Features.Action.ClassicUnlockGetTheme,Obtener el tema
-CommonUI.Features.Action.ClassicUnlockManage,Administrar
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,Ir
 CommonUI.Features.Action.LessLowercase,menos
 CommonUI.Features.Action.MoreLowercase,más
 CommonUI.Features.Action.Send,
-CommonUI.Features.Heading.ClassicUnlock,¡Celebra los 20 años de Roblox!
 CommonUI.Features.Heading.GameDetails,Detalles de la experiencia
 CommonUI.Features.Label.About,Acerca de Roblox
 CommonUI.Features.Label.AboutUs,Quiénes somos
@@ -888,8 +885,6 @@ CommonUI.Features.Label.Catalog,Catálogo de Roblox
 CommonUI.Features.Label.ChannelWithChannelName,Canal: {channelName}
 CommonUI.Features.Label.Charts,Destacadas
 CommonUI.Features.Label.Chat,Chat
-CommonUI.Features.Label.ClassicUnlockDescription,Disfruta del look clásico por tiempo limitado
-CommonUI.Features.Label.ClassicUnlockManagementSnackbar,Administra el tema clásico en la configuración
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,Conectar
 CommonUI.Features.Label.Connection,Conexión
@@ -2187,7 +2182,6 @@ Feature.Build.Action.AddFriends,Añadir amistades
 Feature.Build.Action.AddPlaytester,Añadir probador de juego
 Feature.Build.Action.AddPlaytesters,Añadir evaluadores de juego
 Feature.Build.Action.AddToPlaytest,Añadir a la prueba de jugabilidad
-Feature.Build.Action.Approve,
 Feature.Build.Action.Archive,Archivar
 Feature.Build.Action.ArchiveGame,Archivar juego
 Feature.Build.Action.Build,
@@ -2297,8 +2291,6 @@ Feature.Build.Description.BuyRobuxToCreate,Compra más Robux para seguir creando
 Feature.Build.Description.BuyUsageOrWait,Compra más uso de la compilación con Robux o espera a que se restablezca tu límite diario.
 Feature.Build.Description.CampaignRunDates,Tu campaña se ejecutará del {startDate} al {endDate}
 Feature.Build.Description.ChoosePlaytesters,Elige amistades para que te ayuden con la prueba de juego.
-Feature.Build.Description.CreateDeveloperProduct,"Crea ""{NAME}"" por {PRICE} Robux, fuera de venta."
-Feature.Build.Description.DeactivateDeveloperProduct,Retira el producto {PRODUCT_ID} del desarrollador de la venta.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"Si has ganado Robux, estos se aplicarán primero al costo de la campaña publicitaria."
 Feature.Build.Description.EnableBuildNotifs,Activa las notificaciones en la configuración de tu dispositivo para recibir actualizaciones de la compilación.
 Feature.Build.Description.FriendsLinkOnly,Solo tus amistades pueden acceder a este enlace. Cambia la configuración de público de tu juego si quieres que más gente juegue.
@@ -2308,8 +2300,6 @@ Feature.Build.Description.HubSettings,Gestiona toda la configuración en el Cent
 Feature.Build.Description.InviteFriendLimit,Elige hasta {MAX_INVITES} amistades y luego comparte el enlace al juego.
 Feature.Build.Description.MakeAudienceAvail,Publica tu experiencia para que esté disponible para este público.
 Feature.Build.Description.ManageAppearance,Gestiona cómo se muestra tu juego a otras personas.
-Feature.Build.Description.ManageDeveloperProduct,Administra el producto del desarrollador.
-Feature.Build.Description.NoMonetizationProducts,Describe un artículo que quieras crear para comenzar a ganar Robux en tu juego
 Feature.Build.Description.PlayAfterPublish,Elige quién puede jugar después de que publiques esta experiencia.
 Feature.Build.Description.PlaytestLatest,Estás probando tu última versión. Publícala cuando tengas todo listo para compartirla.
 Feature.Build.Description.PlaytestLocked,Puedes comenzar la prueba de juego después de crear tu primer juego.
@@ -2323,8 +2313,6 @@ Feature.Build.Description.RevertToVersion,Confirma para revertir el último camb
 Feature.Build.Description.ShareLatest,Comparte lo que ha cambiado en tu última versión.
 Feature.Build.Description.UpdateDeveloperProduct,Actualizar producto del desarrollador {PRODUCT_ID}.
 Feature.Build.Description.VersionChanges,Dile a los jugadores qué cambió en esta versión.
-Feature.Build.Error.DeveloperProductDescriptionTooLong,La descripción debe tener 1000 caracteres o menos.
-Feature.Build.Error.DeveloperProductNameRequired,Ingresa un nombre para el producto.
 Feature.Build.Error.DeveloperProductNameTooLong,El nombre debe tener 50 caracteres o menos.
 Feature.Build.Error.DeveloperProductPriceInvalid,"El precio debe ser un número entero de 1 a 1,000,000,000 Robux."
 Feature.Build.Error.DeveloperProductTextModerated,La moderación de Roblox cambió el texto de este producto. Prueba con otras palabras.
@@ -2395,7 +2383,6 @@ Feature.Build.Label.PercentUsed,Se usó {PERCENT}%
 Feature.Build.Label.PlayTime,Tiempo de juego
 Feature.Build.Label.PreviouslyPublished,Publicado anteriormente
 Feature.Build.Label.Price,Precio
-Feature.Build.Label.PriceUnavailable,--
 Feature.Build.Label.Pricing,
 Feature.Build.Label.Private,Privada
 Feature.Build.Label.Public,Público
@@ -2579,8 +2566,6 @@ Feature.Build.Notification.Message.Continue,Reanuda tu chat de la compilación p
 Feature.Build.Notification.Message.Review,Reanuda tu chat de la compilación para revisar el resultado.
 Feature.Build.Notification.Title.Finished,Compilación finalizada
 Feature.Build.Notification.Title.NeedInput,La compilación necesita tu participación
-Feature.Build.Placeholder.DescribeProduct,Describe lo que quieres vender
-Feature.Build.Placeholder.DescribeProductUpdate,Describe una actualización
 Feature.Build.Prompt.CreateDeveloperProduct,"Ayúdame a crear un producto de desarrollador, integrarlo en el juego, verificar y publicar los cambios y ponerlo a la venta."
 Feature.Build.Title.AdCampaignActive,La campaña de anuncios está activa
 Feature.Build.Title.AdCampaignDuration,Campaña publicitaria de {durationDays} días
@@ -2599,8 +2584,6 @@ Feature.Build.Title.ChangesNotLive,Tus cambios aún no están activos
 Feature.Build.Title.ChatBuildUnavailable,La compilación no está disponible.
 Feature.Build.Title.Content,Contenido
 Feature.Build.Title.DailyRobuxReached,Se alcanzó el límite diario de Robux
-Feature.Build.Title.DeveloperProduct,Producto del desarrollador
-Feature.Build.Title.EditDeveloperProduct,Editar producto
 Feature.Build.Title.ExperienceAudience,Público de la experiencia
 Feature.Build.Title.FreeUsageReached,Se alcanzó el límite de uso gratuito de la compilación
 Feature.Build.Title.FriendsOnlyPlay,Solo las amistades pueden jugar
@@ -2608,7 +2591,6 @@ Feature.Build.Title.GameCreationDone,Se completó la creación del juego
 Feature.Build.Title.GamePrivate,Este juego es un servidor privado
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Obtener usuarios
-Feature.Build.Title.NoMonetizationProducts,Comienza a ganar en tu juego
 Feature.Build.Title.NoRobuxForUsage,No quedan Robux para el uso de la compilación
 Feature.Build.Title.Playtesters,Evaluadores de juego
 Feature.Build.Title.PlaytestersOnlyPlay,Solo los evaluadores de juego pueden jugar
@@ -3473,10 +3455,9 @@ Feature.Friends.Label.ContactsCaption,Roblox sincroniza regularmente tus contact
 Feature.Friends.Label.FAEEligibleBanner.Body,
 Feature.Friends.Label.FewestInteractions,Menor número de interacciones
 Feature.Friends.Label.FindFriendsHintBody,Conecta con personas que ya conoces o encuentra nuevas.
-Feature.Friends.Label.Followed,Siguiendo
 Feature.Friends.Label.Follower,Seguidor(a)
 Feature.Friends.Label.Followers,Seguidores
-Feature.Friends.Label.Following,
+Feature.Friends.Label.Following,Siguiendo
 Feature.Friends.Label.FollowsYou,Te sigue
 Feature.Friends.Label.Frequent,Jugado juntos
 Feature.Friends.Label.Friend,Amigo(a)
@@ -3934,7 +3915,6 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Quedan {time}
-Feature.InExperienceShop.Label.EndTime,Termina en {timeRemaining}
 Feature.InExperienceShop.Label.Timer.Day.Plural,{number} días
 Feature.InExperienceShop.Label.Timer.Day.Singular,1 día
 Feature.InExperienceShop.Label.Timer.Hour.Plural,
@@ -4562,6 +4542,7 @@ Feature.Profile.Action.AboutThisProfile,Acerca de este perfil
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
+Feature.Profile.Action.AddNickname,Añadir nombre
 Feature.Profile.Action.AllRequestsIgnored,Todas las solicitudes ignoradas
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Copiar enlace de perfil
@@ -4575,13 +4556,17 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,Compartir perfil
 Feature.Profile.Action.ShareProfileLink,Compartir enlace de perfil
+Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,Cambiar avatar
 Feature.Profile.Action.ToQRCode,
 Feature.Profile.Action.UserBlocked,Usuario bloqueado
 Feature.Profile.Action.ViewFullProfile,Ver perfil completo
 Feature.Profile.Action.ViewProfile,
 Feature.Profile.Description.AboutModalCaption,Deja que otros te conozcan mejor. Mantente a salvo; no compartas datos personales.
+Feature.Profile.Description.EnterNicknameTextbox,Ingresa tu apodo
 Feature.Profile.Description.InspectAndBuy,Haz clic para ver y comprar su atuendo.
+Feature.Profile.Description.NicknamePrivacy,Solo {displayName} verá esto.
+Feature.Profile.Description.NicknamePrivacyNoDisplayName,Solo este usuario verá esto.
 Feature.Profile.Description.QrCodeDescription,Permite que otros escaneen tu código QR para conectarse contigo en Roblox. Los usuarios mayores de 13 años que se conecten a través del escaneo QR en vivo serán Amigos de confianza.
 Feature.Profile.Description.QrCodeDescription.FriendsRename,Permite que otras personas escaneen tu código QR para conectarse contigo en Roblox. Los usuarios mayores de 13 años que se conecten mediante el escaneo en vivo del QR serán amigos de confianza.
 Feature.Profile.Description.QrCodeScanning,Permite que otras personas escaneen tu código QR de Roblox con el escáner QR para añadirte rápidamente como amistad.
@@ -4589,8 +4574,11 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,Reconoce tus conexi
 Feature.Profile.Description.RecognizeFriendsByCustomName,Reconoce a tus amigos más fácilmente estableciendo un nombre personalizado. Los nombres importados de contactos y nombres personalizados solo son visibles para ti.
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,Deja que la gente que conoces escanee tu código QR para añadirte.
+Feature.Profile.Description.SelectNicknameDropdown,Selecciona un nombre
 Feature.Profile.Description.SetCustomName,"Establece un nombre personalizado para <font weight=""medium"">{displayName}</font>."
 Feature.Profile.Description.SetCustomNameNoDisplayName,Establecer un nombre personalizado.
+Feature.Profile.Description.SetNicknamePrompt,Añade un nombre a {displayName} para que te reconozca.
+Feature.Profile.Description.SetNicknamePromptNoDisplayName,Añade un nombre para que este usuario te reconozca.
 Feature.Profile.Description.SocialNetworksCaptionEveryone,Actualmente visible para todos.
 Feature.Profile.Description.SocialNetworksCaptionFollowers,"Actualmente visible para amigos, usuarios que sigues y seguidores."
 Feature.Profile.Description.SocialNetworksCaptionFollowing,Actualmente visible para amigos y usuarios que sigues.
@@ -4611,6 +4599,7 @@ Feature.Profile.Heading.DisplayNameUpdated,Nombre de visualización actualizado
 Feature.Profile.Heading.EditAgedUpDisplayName,Editar nombre
 Feature.Profile.Heading.EditDisplayName,Editar nombre de visualización
 Feature.Profile.Heading.InsufficientFunds,Fondos insuficientes
+Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileFrame,Marco del perfil
 Feature.Profile.Heading.ProfilePictureSaved,Imagen de perfil guardada correctamente
 Feature.Profile.Heading.ProfileQRCode,
@@ -4630,6 +4619,7 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"Solo puedes cambiar de nomb
 Feature.Profile.Label.AgedUpDisplayNameTooShort,El nombre debe tener al menos 3 caracteres.
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,Nombre personalizado
+Feature.Profile.Label.CustomNicknameDropdown,Establecer nombre personalizado
 Feature.Profile.Label.CustomizeName,Personalizar nombre
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,Este es el nombre público principal que otros usuarios verán en Roblox.
@@ -4637,6 +4627,12 @@ Feature.Profile.Label.DisplayNameFailed,El nombre de visualización no se puede 
 Feature.Profile.Label.DisplayNameModalCaption,El nombre de visualización solo se puede cambiar una vez cada 7 días.
 Feature.Profile.Label.DisplayNameTooShort,El nombre de visualización debe tener al menos 3 caracteres.
 Feature.Profile.Label.EditBackground,
+Feature.Profile.Label.NicknameErrorMessageInvalid,El nombre no es válido.
+Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,El nombre contiene caracteres no admitidos.
+Feature.Profile.Label.NicknameErrorMessageModerated,El nombre es inadecuado para Roblox.
+Feature.Profile.Label.NicknameErrorMessageThrottled,Tu nombre ya cambió hoy.
+Feature.Profile.Label.NicknameErrorMessageTooLong,El nombre debe tener un máximo de 20 caracteres.
+Feature.Profile.Label.NicknameErrorMessageTooShort,El nombre debe tener al menos 2 caracteres.
 Feature.Profile.Label.NoBioYet,Aún no hay biografía
 Feature.Profile.Label.NoPreviousName,Sin nombres anteriores
 Feature.Profile.Label.NoSocialLink,Aún no hay enlaces sociales
@@ -4646,6 +4642,7 @@ Feature.Profile.Label.QRCodeFriendRequest,Enviado desde tu código QR
 Feature.Profile.Label.RecentAgedUpDisplayName,"Tu nombre cambió recientemente. Solo puedes cambiar de nombre una vez cada 7 días.
 "
 Feature.Profile.Label.RecentDisplayName,Tu nombre de usuario se cambió recientemente. Solo puede cambiarse una vez cada 7 días.
+Feature.Profile.Label.TimeToChangeNickname,Puedes cambiar tu nombre en {hours} horas.
 Feature.Profile.Label.UnableToJoin,No se puede unirse
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b> está jugando <b>{experienceName}</b>
 Feature.Profile.Label.UsernameDescription,Este es tu nombre único en Roblox. Cambiar tu nombre de usuario costará {icon}{price}.

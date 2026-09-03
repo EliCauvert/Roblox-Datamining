@@ -856,14 +856,11 @@ CommonUI.Controls.Label.Wednesday,星期三
 CommonUI.Controls.Label.WednesdayAbbreviated,周三
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,未找到结果
-CommonUI.Features.Action.ClassicUnlockGetTheme,获取主题
-CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,开始
 CommonUI.Features.Action.LessLowercase,收起
 CommonUI.Features.Action.MoreLowercase,展开
 CommonUI.Features.Action.Send,发送
-CommonUI.Features.Heading.ClassicUnlock,庆祝 Roblox 20 周年！
 CommonUI.Features.Heading.GameDetails,作品详情
 CommonUI.Features.Label.About,简介
 CommonUI.Features.Label.AboutUs,关于我们
@@ -882,8 +879,6 @@ CommonUI.Features.Label.Catalog,Roblox 商店
 CommonUI.Features.Label.ChannelWithChannelName,频道：{channelName}
 CommonUI.Features.Label.Charts,排行榜
 CommonUI.Features.Label.Chat,聊天
-CommonUI.Features.Label.ClassicUnlockDescription,限时体验经典外观
-CommonUI.Features.Label.ClassicUnlockManagementSnackbar,在“设置”中管理经典主题
 CommonUI.Features.Label.ClientCoreScriptVersion,客户端-CoreScript-版本：{clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,添加为联系人
 CommonUI.Features.Label.Connection,好友
@@ -1108,7 +1103,6 @@ CoreScripts.TextChat.ChatWindow.Transcribing,正在转录…
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,我们没有听清！请重试。
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,我们暂不支持该语言！
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,要使用麦克风，请前往设备设置，并授予 Roblox 麦克风权限。
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,无法访问麦克风
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,为了让你使用语音发送消息，我们将处理你的音频，并根据我们的隐私政策立即将语音删除。
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,你已开启语音转文字聊天功能
@@ -3930,7 +3924,6 @@ Feature.InExperienceIntervention.Label.Player,{username}：{evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,剩余 {time}
-Feature.InExperienceShop.Label.EndTime,{timeRemaining}后结束
 Feature.InExperienceShop.Label.Timer.Day.Plural,
 Feature.InExperienceShop.Label.Timer.Day.Singular,
 Feature.InExperienceShop.Label.Timer.Hour.Plural,
@@ -4564,6 +4557,7 @@ Feature.Profile.Action.AboutThisProfile,关于此个人资料
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
+Feature.Profile.Action.AddNickname,添加名称
 Feature.Profile.Action.AllRequestsIgnored,全部申请已忽略
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,复制个人资料链接
@@ -4577,13 +4571,17 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,分享个人资料
 Feature.Profile.Action.ShareProfileLink,分享个人资料链接
+Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,切换虚拟形象
 Feature.Profile.Action.ToQRCode,
 Feature.Profile.Action.UserBlocked,用户已屏蔽
 Feature.Profile.Action.ViewFullProfile,查看完整个人资料
 Feature.Profile.Action.ViewProfile,
 Feature.Profile.Description.AboutModalCaption,让其他玩家更好地了解你。请保护自身安全，不要泄露个人详细信息。
+Feature.Profile.Description.EnterNicknameTextbox,输入你的昵称
 Feature.Profile.Description.InspectAndBuy,点按以查看并购买其造型。
+Feature.Profile.Description.NicknamePrivacy,只有 {displayName} 能看到此内容。
+Feature.Profile.Description.NicknamePrivacyNoDisplayName,只有此用户才能看到此内容。
 Feature.Profile.Description.QrCodeDescription,让其他人扫描你的二维码，在 Roblox 上与你建立联系。已完成年龄验证的 13 岁及以上用户可通过扫描实时二维码建立联系，成为可信好友。
 Feature.Profile.Description.QrCodeDescription.FriendsRename,让其他人扫描你的二维码，在 Roblox 上与你建立联系。已完成年龄验证的 13 岁及以上用户通过扫描实时二维码建立联系，即可成为信赖的好友。
 Feature.Profile.Description.QrCodeScanning,让其他人使用二维码扫描器或设备摄像头以扫描你的 Roblox 二维码，快速添加你为好友！
@@ -4591,8 +4589,11 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,设置自定义名�
 Feature.Profile.Description.RecognizeFriendsByCustomName,
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,让你认识的人使用二维码来添加你。
+Feature.Profile.Description.SelectNicknameDropdown,选择名称
 Feature.Profile.Description.SetCustomName,"设置<font weight=""medium"">“{displayName}”</font>的自定义名称。"
 Feature.Profile.Description.SetCustomNameNoDisplayName,设置自定义名称。
+Feature.Profile.Description.SetNicknamePrompt,请添加名称，方便 {displayName} 识别。
+Feature.Profile.Description.SetNicknamePromptNoDisplayName,请添加名称，方便此用户识别。
 Feature.Profile.Description.SocialNetworksCaptionEveryone,当前对所有人可见。
 Feature.Profile.Description.SocialNetworksCaptionFollowers,当前仅对好友、你关注的用户及你的粉丝可见。
 Feature.Profile.Description.SocialNetworksCaptionFollowing,当前对你的好友和你关注的好友可见。
@@ -4613,6 +4614,7 @@ Feature.Profile.Heading.DisplayNameUpdated,昵称已更新
 Feature.Profile.Heading.EditAgedUpDisplayName,编辑名称
 Feature.Profile.Heading.EditDisplayName,编辑昵称
 Feature.Profile.Heading.InsufficientFunds,资金不足
+Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileFrame,个人资料边框
 Feature.Profile.Heading.ProfilePictureSaved,个人资料图片已成功保存
 Feature.Profile.Heading.ProfileQRCode,
@@ -4632,6 +4634,7 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"您的名称每 7 天只能
 Feature.Profile.Label.AgedUpDisplayNameTooShort,名称应至少包含 3 个字符。
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,自定义名称
+Feature.Profile.Label.CustomNicknameDropdown,设置自定义名称
 Feature.Profile.Label.CustomizeName,
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,这是你在 Roblox 上向其他用户显示的主要公开名称。
@@ -4639,6 +4642,12 @@ Feature.Profile.Label.DisplayNameFailed,无法保存昵称，请重试。
 Feature.Profile.Label.DisplayNameModalCaption,你的昵称每 7 天只能更改一次。
 Feature.Profile.Label.DisplayNameTooShort,昵称应至少包含 3 个字符。
 Feature.Profile.Label.EditBackground,
+Feature.Profile.Label.NicknameErrorMessageInvalid,名称无效。
+Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,名称包含不受支持的字符。
+Feature.Profile.Label.NicknameErrorMessageModerated,名称含有不当内容，无法在 Roblox 使用。
+Feature.Profile.Label.NicknameErrorMessageThrottled,你今天已更改过名称。
+Feature.Profile.Label.NicknameErrorMessageTooLong,名称应至少包含 20 个字符。
+Feature.Profile.Label.NicknameErrorMessageTooShort,名称应至少包含 2 个字符。
 Feature.Profile.Label.NoBioYet,暂无个人简介
 Feature.Profile.Label.NoPreviousName,暂无曾用名
 Feature.Profile.Label.NoSocialLink,暂无社交链接
@@ -4648,6 +4657,7 @@ Feature.Profile.Label.QRCodeFriendRequest,从你的二维码发送
 Feature.Profile.Label.RecentAgedUpDisplayName,"近期已更改过名称。您的名称每 7 天只能更改一次。
 "
 Feature.Profile.Label.RecentDisplayName,近期已更改过昵称，你的昵称每 7 天只能更改一次。
+Feature.Profile.Label.TimeToChangeNickname,你可以在 {hours} 小时候更改名称。
 Feature.Profile.Label.UnableToJoin,无法加入
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b>正在玩“<b>{experienceName}</b>”
 Feature.Profile.Label.UsernameDescription,这是你在 Roblox 上的独一无二的名称。更改你的用户名将花费 {icon}{price}。

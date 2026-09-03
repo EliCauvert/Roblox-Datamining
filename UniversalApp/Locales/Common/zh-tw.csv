@@ -860,14 +860,11 @@ CommonUI.Controls.Label.Wednesday,星期三
 CommonUI.Controls.Label.WednesdayAbbreviated,週三
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,找不到結果
-CommonUI.Features.Action.ClassicUnlockGetTheme,取得主題
-CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,開始
 CommonUI.Features.Action.LessLowercase,更少
 CommonUI.Features.Action.MoreLowercase,更多
 CommonUI.Features.Action.Send,傳送
-CommonUI.Features.Heading.ClassicUnlock,慶祝 Roblox 20 週年！
 CommonUI.Features.Heading.GameDetails,體驗詳細資料
 CommonUI.Features.Label.About,關於
 CommonUI.Features.Label.AboutUs,關於我們
@@ -886,8 +883,6 @@ CommonUI.Features.Label.Catalog,Roblox 目錄
 CommonUI.Features.Label.ChannelWithChannelName,頻道：{channelName}
 CommonUI.Features.Label.Charts,圖表
 CommonUI.Features.Label.Chat,聊天
-CommonUI.Features.Label.ClassicUnlockDescription,限時享受經典外觀
-CommonUI.Features.Label.ClassicUnlockManagementSnackbar,在「設定」中管理經典主題
 CommonUI.Features.Label.ClientCoreScriptVersion,用戶端核心指令碼版本：{clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,好友
 CommonUI.Features.Label.Connection,聯繫對象
@@ -3932,7 +3927,6 @@ Feature.InExperienceIntervention.Label.Player,{username}：{evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,剩下 {time}
-Feature.InExperienceShop.Label.EndTime,{timeRemaining}後結束
 Feature.InExperienceShop.Label.Timer.Day.Plural,
 Feature.InExperienceShop.Label.Timer.Day.Singular,
 Feature.InExperienceShop.Label.Timer.Hour.Plural,
@@ -4560,6 +4554,7 @@ Feature.Profile.Action.AboutThisProfile,關於此個人檔案
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
+Feature.Profile.Action.AddNickname,新增名稱
 Feature.Profile.Action.AllRequestsIgnored,已忽略所有邀請
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,複製個人檔案連結
@@ -4573,13 +4568,17 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,分享個人檔案
 Feature.Profile.Action.ShareProfileLink,分享個人檔案連結
+Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,切換虛擬人偶
 Feature.Profile.Action.ToQRCode,
 Feature.Profile.Action.UserBlocked,已封鎖使用者
 Feature.Profile.Action.ViewFullProfile,檢視完整個人檔案
 Feature.Profile.Action.ViewProfile,
 Feature.Profile.Description.AboutModalCaption,讓其他玩家更認識您。請保護自己的安全，不要透露私人的詳細資訊。
+Feature.Profile.Description.EnterNicknameTextbox,輸入您的綽號
 Feature.Profile.Description.InspectAndBuy,按一下即可查看並購買他們的造型。
+Feature.Profile.Description.NicknamePrivacy,只有 {displayName} 會看到這個。
+Feature.Profile.Description.NicknamePrivacyNoDisplayName,只有此使用者會看到此內容。
 Feature.Profile.Description.QrCodeDescription,讓其他人掃描你的 QR 碼，即可在 Roblox 上互動交流。已完成年齡驗證且年滿 13 歲的使用者透過即時掃描 QR 碼，就能成為信任的好友。
 Feature.Profile.Description.QrCodeDescription.FriendsRename,讓其他人掃描你的 QR 碼，即可在 Roblox 上互動交流。已完成年齡驗證且年滿 13 歲的使用者透過即時掃描 QR 碼，便可成為信任的聯絡對象。
 Feature.Profile.Description.QrCodeScanning,讓其他人使用 QR 掃描儀掃描您的 Roblox QR 碼，快速新增您為好友！
@@ -4587,8 +4586,11 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,設定自訂名稱�
 Feature.Profile.Description.RecognizeFriendsByCustomName,設定自訂名稱即可更輕鬆辨識朋友。從聯絡人輸入的名稱和自訂名稱只會顯示給您本人。
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,讓認識的人掃描你的 QR 碼，將你新增為聯絡對象。
+Feature.Profile.Description.SelectNicknameDropdown,選擇名稱
 Feature.Profile.Description.SetCustomName,"設定<font weight=""medium"">{displayName}</font>的自訂名稱。"
 Feature.Profile.Description.SetCustomNameNoDisplayName,請設定自訂名稱。
+Feature.Profile.Description.SetNicknamePrompt,請新增名稱以方便 {displayName} 識別。
+Feature.Profile.Description.SetNicknamePromptNoDisplayName,請新增名稱以方便此使用者識別。
 Feature.Profile.Description.SocialNetworksCaptionEveryone,目前所有人都能看見。
 Feature.Profile.Description.SocialNetworksCaptionFollowers,目前好友、您追蹤的使用者和您的追蹤者可以看見。
 Feature.Profile.Description.SocialNetworksCaptionFollowing,目前好友和您追蹤的使用者可以看見。
@@ -4609,6 +4611,7 @@ Feature.Profile.Heading.DisplayNameUpdated,已更新顯示名稱
 Feature.Profile.Heading.EditAgedUpDisplayName,編輯名稱
 Feature.Profile.Heading.EditDisplayName,編輯顯示名稱
 Feature.Profile.Heading.InsufficientFunds,資金不足
+Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileFrame,個人檔案外框
 Feature.Profile.Heading.ProfilePictureSaved,已成功儲存個人檔案照片
 Feature.Profile.Heading.ProfileQRCode,
@@ -4628,6 +4631,7 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"您的名稱每 7 天只能
 Feature.Profile.Label.AgedUpDisplayNameTooShort,名稱至少要有 3 個字元。
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,自訂名稱
+Feature.Profile.Label.CustomNicknameDropdown,設定自訂名稱
 Feature.Profile.Label.CustomizeName,
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,這會是您在 Roblox 上向其他使用者顯示的主要公開名稱。
@@ -4635,6 +4639,12 @@ Feature.Profile.Label.DisplayNameFailed,無法儲存顯示名稱。請再試一�
 Feature.Profile.Label.DisplayNameModalCaption,您的顯示名稱每 7 天只能變更一次。
 Feature.Profile.Label.DisplayNameTooShort,顯示名稱至少要有 3 個字元。
 Feature.Profile.Label.EditBackground,
+Feature.Profile.Label.NicknameErrorMessageInvalid,名稱無效。
+Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,名稱含有不支援的字元。
+Feature.Profile.Label.NicknameErrorMessageModerated,此名稱含有 Roblox 認定的不當內容。
+Feature.Profile.Label.NicknameErrorMessageThrottled,您今天已變更過名稱。
+Feature.Profile.Label.NicknameErrorMessageTooLong,名稱最多 20 個字元。
+Feature.Profile.Label.NicknameErrorMessageTooShort,名稱至少要有 2 個字元。
 Feature.Profile.Label.NoBioYet,尚無簡介
 Feature.Profile.Label.NoPreviousName,沒有先前的名稱
 Feature.Profile.Label.NoSocialLink,尚無社交連結
@@ -4644,6 +4654,7 @@ Feature.Profile.Label.QRCodeFriendRequest,從您的 QR 碼傳送
 Feature.Profile.Label.RecentAgedUpDisplayName,"您近期已變更過名稱。每 7 天只能變更名稱一次。
 "
 Feature.Profile.Label.RecentDisplayName,近期已變更過顯示名稱。您的顯示名稱每 7 天只能變更一次。
+Feature.Profile.Label.TimeToChangeNickname,您可以在 {hours} 小時後變更名稱。
 Feature.Profile.Label.UnableToJoin,無法加入
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b> 正在玩<b>{experienceName}</b>
 Feature.Profile.Label.UsernameDescription,這是您在 Roblox 上的獨特名稱。變更您的使用者名稱需花費 {icon}{price}。

@@ -7,7 +7,7 @@ local recyclingScopeModule = require(viewRecyclerReact.ReactAdapter.RecyclingSco
 local recyclingScopeContextModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclingScopeContext)
 local recyclingViewportContextModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclingViewportContext)
 local createElement = reactModule.createElement
-local shallowTable = viewRecyclerModule.Adapter._Private.ShallowTable
+local record = viewRecyclerModule.Adapter._Private.Record
 local frozen = table.freeze({ "axis", "activationMargin", "retentionMargin" })
 
 local function _(value, p1)
@@ -22,11 +22,11 @@ end
 
 return {
 	create = function(p1)
-		-- upvalues: recyclingScopeModule (ref), reactModule (ref), recyclingScopeContextModule (ref), shallowTable (ref), frozen (ref), viewRecyclerRobloxModule (ref), axis (ref), createElement (ref), recyclingViewportContextModule (ref)
+		-- upvalues: recyclingScopeModule (ref), reactModule (ref), recyclingScopeContextModule (ref), record (ref), frozen (ref), viewRecyclerRobloxModule (ref), axis (ref), createElement (ref), recyclingViewportContextModule (ref)
 		local var1 = recyclingScopeModule.create(p1)
 		
 		return function(p2)
-			-- upvalues: reactModule (copy), recyclingScopeContextModule (copy), shallowTable (copy), frozen (copy), viewRecyclerRobloxModule (copy), axis (copy), createElement (copy), recyclingViewportContextModule (copy), var1 (ref)
+			-- upvalues: reactModule (copy), recyclingScopeContextModule (copy), record (copy), frozen (copy), viewRecyclerRobloxModule (copy), axis (copy), createElement (copy), recyclingViewportContextModule (copy), var1 (ref)
 			local var2 = reactModule.useContext(recyclingScopeContextModule)
 			local var3 = reactModule.useState(function()
 				-- upvalues: p2 (ref)
@@ -36,7 +36,7 @@ return {
 					retentionMargin = p2.retentionMargin
 				}
 			end)
-			assert(shallowTable.containsEqual(p2, var3, frozen), "RecyclingViewport: axis and margins cannot change during its lifetime")
+			assert(record.containsEqual(p2, var3, frozen), "RecyclingViewport: axis and margins cannot change during its lifetime")
 			local var4 = reactModule.useState(function()
 				-- upvalues: viewRecyclerRobloxModule (copy), var3 (ref)
 				return viewRecyclerRobloxModule.ViewportCoordinator.new(var3)

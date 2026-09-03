@@ -1,7 +1,6 @@
 ﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
 assert(viewRecyclerReact ~= nil, "RowFixtures must be mounted under view-recycler-react")
 local reactModule = require(viewRecyclerReact.Parent.React)
-local signalsReactModule = require(viewRecyclerReact.Parent.SignalsReact)
 local recyclingStatsModule = require(script.Parent.RecyclingStats)
 local unknownModule = require(viewRecyclerReact)
 local createElement = reactModule.createElement
@@ -16,8 +15,8 @@ local list = {
 
 return {
 	SimpleRow = unknownModule.createRecyclableView(function(p1)
-		-- upvalues: signalsReactModule (ref), recyclingStatsModule (ref), createElement (ref)
-		local var1 = signalsReactModule.useSignalState(p1.itemSignal)
+		-- upvalues: unknownModule (ref), recyclingStatsModule (ref), createElement (ref)
+		local var1 = unknownModule.useItemValue(p1.valueSignal)
 		local var2 = recyclingStatsModule.useAssignment(var1.id)
 		
 		return createElement("TextLabel", {
@@ -29,13 +28,10 @@ return {
 			Text = if var2 == 0 then var1.label else `[mount {var2}] {var1.label}`,
 			TextColor3 = Color3.fromRGB(24, 25, 30)
 		})
-	end, {
-		hideWhilePending = true,
-		readiness = unknownModule.RecyclableViewReadiness.ReadyOnCommit
-	}),
+	end, { readiness = "ReadyOnCommit", hideWhilePending = true }),
 	MeasuredRow = unknownModule.createRecyclableView(function(p1)
-		-- upvalues: signalsReactModule (ref), recyclingStatsModule (ref), createElement (ref)
-		local var1 = signalsReactModule.useSignalState(p1.itemSignal)
+		-- upvalues: unknownModule (ref), recyclingStatsModule (ref), createElement (ref)
+		local var1 = unknownModule.useItemValue(p1.valueSignal)
 		local var2 = recyclingStatsModule.useAssignment(var1.id)
 		
 		return createElement("Frame", {
@@ -57,32 +53,25 @@ return {
 			}),
 			Padding = createElement("UIPadding", { PaddingBottom = UDim.new(0, var1.gap or 0) })
 		})
-	end, {
-		hideWhilePending = true,
-		readiness = unknownModule.RecyclableViewReadiness.ReadyOnCommit
-	}),
+	end, { readiness = "ReadyOnCommit", hideWhilePending = true }),
 	ImmediateSimpleRow = unknownModule.createRecyclableView(function(p1)
-		-- upvalues: signalsReactModule (ref), createElement (ref)
+		-- upvalues: unknownModule (ref), createElement (ref)
 		return createElement("TextLabel", {
 			BorderSizePixel = 0,
 			TextSize = 17,
-			BackgroundColor3 = signalsReactModule.useSignalBinding(function(p2)
-				-- upvalues: p1 (ref)
-				return Color3.fromHSV((tonumber(p1.itemSignal(p2).id) or 1) % 17 / 17, 0.25, 0.9)
+			BackgroundColor3 = unknownModule.useItemBinding(p1.valueSignal, function(p2)
+				return Color3.fromHSV((tonumber(p2.id) or 1) % 17 / 17, 0.25, 0.9)
 			end),
 			Font = Enum.Font.BuilderSans,
 			Size = UDim2.fromScale(1, 1),
-			Text = signalsReactModule.useSignalBinding(function(p2)
-				-- upvalues: p1 (ref)
-				return p1.itemSignal(p2).label
+			Text = unknownModule.useItemBinding(p1.valueSignal, function(p2)
+				return p2.label
 			end),
 			TextColor3 = Color3.fromRGB(24, 25, 30)
 		})
-	end, {
-		readiness = unknownModule.RecyclableViewReadiness.ReadyOnAssignment
-	}),
+	end, { readiness = "ReadyOnAssignment" }),
 	ImmediateMeasuredRow = unknownModule.createRecyclableView(function(p1)
-		-- upvalues: signalsReactModule (ref), createElement (ref)
+		-- upvalues: unknownModule (ref), createElement (ref)
 		return createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
@@ -96,23 +85,19 @@ return {
 				BackgroundColor3 = Color3.fromRGB(238, 238, 243),
 				Font = Enum.Font.BuilderSans,
 				Size = UDim2.fromScale(1, 0),
-				Text = signalsReactModule.useSignalBinding(function(p2)
-					-- upvalues: p1 (ref)
-					return p1.itemSignal(p2).label
+				Text = unknownModule.useItemBinding(p1.valueSignal, function(p2)
+					return p2.label
 				end),
 				TextColor3 = Color3.fromRGB(24, 25, 30),
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
 			Padding = createElement("UIPadding", {
-				PaddingBottom = signalsReactModule.useSignalBinding(function(p2)
-					-- upvalues: p1 (ref)
-					return UDim.new(0, p1.itemSignal(p2).gap or 0)
+				PaddingBottom = unknownModule.useItemBinding(p1.valueSignal, function(p2)
+					return UDim.new(0, p2.gap or 0)
 				end)
 			})
 		})
-	end, {
-		readiness = unknownModule.RecyclableViewReadiness.ReadyOnAssignment
-	}),
+	end, { readiness = "ReadyOnAssignment" }),
 	buildSimpleRows = function(p1, p2)
 		local list = table.create(p1)
 		

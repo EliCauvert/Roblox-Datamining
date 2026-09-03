@@ -3,7 +3,7 @@ local _ = require(viewRecycler.Core.DataSource)
 local _ = require(viewRecycler.Core.Layout)
 
 return table.freeze({
-	IdentityKind = require(viewRecycler.Core.Enums.IdentityKind),
+	IdentityKind = table.freeze({ Data = "data", Pinned = "pinned" }),
 	ITEM_PLACEMENT_KEYS = table.freeze({ "mainAxisOffset", "mainAxisLength", "zIndex" }),
-	PinnedPosition = require(viewRecycler.Core.Enums.PinnedPosition)
+	PinnedPosition = table.freeze({ Start = "start", Finish = "finish" })
 })

@@ -83,7 +83,7 @@ local function createPlacementRoutingFixture(p6, p7, p8)
 	local var6 = p8
 	local var7 = 0
 	local t = { key = "row", index = 1, value = "row", generation = 1 }
-	local var8 = p6.HostPlacement.new({
+	local var8 = p6.CanvasItemViewRuntime.new({
 		selfSizing = false,
 		container = scrollingFrame,
 		viewportContainer = if p7 then frame else nil,
@@ -120,7 +120,7 @@ local function createPlacementRoutingFixture(p6, p7, p8)
 		canvas = scrollingFrame,
 		overlay = frame,
 		host = frame_1,
-		hostPlacement = var8,
+		runtime = var8,
 		setPlacement = function(value, p9)
 			-- upvalues: var7 (write), var6 (write)
 			var7 = value
@@ -134,7 +134,7 @@ local function createPlacementRoutingFixture(p6, p7, p8)
 end
 
 local function _(p6)
-	p6.hostPlacement.destroy()
+	p6.runtime.destroy()
 	p6.host:Destroy()
 	p6.overlay:Destroy()
 	p6.canvas:Destroy()
@@ -195,15 +195,15 @@ local function placementRoutingWorkload(p6, p7, p8, p9, p10)
 			overlayHostOffset = var7.host.Position.Y.Offset
 		}
 	})
-	var6.hostPlacement.destroy()
+	var6.runtime.destroy()
 	var6.host:Destroy()
 	var6.overlay:Destroy()
 	var6.canvas:Destroy()
-	var7.hostPlacement.destroy()
+	var7.runtime.destroy()
 	var7.host:Destroy()
 	var7.overlay:Destroy()
 	var7.canvas:Destroy()
-	var8.hostPlacement.destroy()
+	var8.runtime.destroy()
 	var8.host:Destroy()
 	var8.overlay:Destroy()
 	var8.canvas:Destroy()
@@ -265,7 +265,7 @@ local function leaseLifecycleWorkload(p15, p16, p17, p18, p19)
 	-- upvalues: record (ref), responsibilityCatalogModule (ref)
 	local folder = Instance.new("Folder")
 	local frame = Instance.new("Frame")
-	local var14 = p15.HostPlacement.new({
+	local var14 = p15.CanvasItemViewRuntime.new({
 		selfSizing = false,
 		container = folder,
 		axis = p15.Axis.Y,
@@ -275,7 +275,7 @@ local function leaseLifecycleWorkload(p15, p16, p17, p18, p19)
 	local var15 = nil
 	local var16 = 0
 	local var17 = 0
-	local var18 = record(p17, responsibilityCatalogModule.Roblox.LeaseLifecycle, "integrated", "canvas-item-view-runtime-lease-lifecycle", "Transitions one HostPlacement host Lease through attachment and detachment without measurement work.", "leaseAttachDetachBatch", false, p18, p16.measure(function()
+	local var18 = record(p17, responsibilityCatalogModule.Roblox.LeaseLifecycle, "integrated", "canvas-item-view-runtime-lease-lifecycle", "Transitions one CanvasItemViewRuntime host Lease through attachment and detachment without measurement work.", "leaseAttachDetachBatch", false, p18, p16.measure(function()
 		-- upvalues: var16 (write), var17 (write), p18 (ref), var15 (write), var14 (ref), frame (ref), folder (ref)
 		var16 = 0
 		var17 = 0
@@ -357,7 +357,7 @@ local function createScrollHost(p20, p21)
 			}
 		end
 	}
-	local var22 = p20.ScrollingFrameSync.new({
+	local var22 = p20.ScrollHostCoordinator.new({
 		dispatch = t.dispatch,
 		getSnapshot = t.getSnapshot,
 		query = t.query,
@@ -391,7 +391,7 @@ local function createScrollHost(p20, p21)
 	end, function(p22)
 		-- upvalues: offset (write), var22 (ref), viewRecyclerModule (copy)
 		local t = { contentLength = offset }
-		var22.applyVirtualizerUpdate(t, {
+		var22.handleUpdate(t, {
 			snapshot = t,
 			effects = {
 				{
@@ -416,7 +416,7 @@ local function scrollSynchronizationWorkload(p20, p21, p22, p23, p24)
 	local var23 = p21.measure(function()
 		-- upvalues: p23 (ref), var19 (ref), var21 (ref), scrollingFrame (ref)
 		for i = 1, p23 do
-			var19.scrollingFrameChanged()
+			var19.hostChanged()
 			var21(i)
 			scrollingFrame.CanvasPosition = scrollingFrame.CanvasPosition
 		end

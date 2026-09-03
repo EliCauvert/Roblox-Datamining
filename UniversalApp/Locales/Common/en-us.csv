@@ -865,14 +865,11 @@ CommonUI.Controls.Label.Wednesday,Wednesday
 CommonUI.Controls.Label.WednesdayAbbreviated,We
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,No results found
-CommonUI.Features.Action.ClassicUnlockGetTheme,Get theme
-CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,Go
 CommonUI.Features.Action.LessLowercase,less
 CommonUI.Features.Action.MoreLowercase,more
 CommonUI.Features.Action.Send,Send
-CommonUI.Features.Heading.ClassicUnlock,Celebrate 20 years of Roblox!
 CommonUI.Features.Heading.GameDetails,Experience Details
 CommonUI.Features.Label.About,About
 CommonUI.Features.Label.AboutUs,About Us
@@ -891,8 +888,6 @@ CommonUI.Features.Label.Catalog,Roblox Catalog
 CommonUI.Features.Label.ChannelWithChannelName,Channel: {channelName}
 CommonUI.Features.Label.Charts,Charts
 CommonUI.Features.Label.Chat,Chat
-CommonUI.Features.Label.ClassicUnlockDescription,Enjoy the classic look for a limited time
-CommonUI.Features.Label.ClassicUnlockManagementSnackbar,Manage classic theme in settings
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,Friends
 CommonUI.Features.Label.Connection,Connection
@@ -1116,8 +1111,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox auto-generates summa
 CoreScripts.TextChat.ChatWindow.Transcribing,Transcribing...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,We didn’t catch that! Try again.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,We don't support that language just yet!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"To use your microphone, tap here to update your device settings."
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"To use your microphone, go to your device settings and grant Roblox microphone permission."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"To use your microphone, go to your device settings and grant Roblox microphone permission."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Can’t access microphone
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"To send messages with your voice, we’ll process your audio and delete it right away, per our privacy policy."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,You’ve enabled voice to text chat
@@ -3941,7 +3935,6 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} left
-Feature.InExperienceShop.Label.EndTime,Ends in {timeRemaining}
 Feature.InExperienceShop.Label.Timer.Day.Plural,{number} days
 Feature.InExperienceShop.Label.Timer.Day.Singular,1 day
 Feature.InExperienceShop.Label.Timer.Hour.Plural,{number} hours
@@ -4575,6 +4568,7 @@ Feature.Profile.Action.AboutThisProfile,About this profile
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
+Feature.Profile.Action.AddNickname,Add Name
 Feature.Profile.Action.AllRequestsIgnored,All Requests Ignored
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Copy Profile Link
@@ -4588,13 +4582,17 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,Share profile
 Feature.Profile.Action.ShareProfileLink,Share profile link
+Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,Switch avatar
 Feature.Profile.Action.ToQRCode,Share QR code
 Feature.Profile.Action.UserBlocked,User Blocked
 Feature.Profile.Action.ViewFullProfile,View full profile
 Feature.Profile.Action.ViewProfile,View profile
 Feature.Profile.Description.AboutModalCaption,"Let others know more about you. Keep yourself safe, do not share personal details."
+Feature.Profile.Description.EnterNicknameTextbox,Enter your nickname
 Feature.Profile.Description.InspectAndBuy,Click to see and shop their look.
+Feature.Profile.Description.NicknamePrivacy,Only {displayName} will see this.
+Feature.Profile.Description.NicknamePrivacyNoDisplayName,Only this user will see this.
 Feature.Profile.Description.QrCodeDescription,Let others scan your QR code to connect on Roblox. Age‑checked 13+ users who connect via live QR scan will be Trusted Friends.
 Feature.Profile.Description.QrCodeDescription.FriendsRename,Let others scan your QR code to connect on Roblox. Age-checked 13+ users who connect via live QR scan will be trusted friends.
 Feature.Profile.Description.QrCodeScanning,"Let others scan your Roblox QR code with the QR Scanner, or their device camera, to quickly add you as a friend!"
@@ -4602,8 +4600,11 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,Recognize friends m
 Feature.Profile.Description.RecognizeFriendsByCustomName,
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,Let people you know scan your QR code to add you.
+Feature.Profile.Description.SelectNicknameDropdown,Select a name
 Feature.Profile.Description.SetCustomName,"Set a custom name for <font weight=""medium"">{displayName}</font>."
 Feature.Profile.Description.SetCustomNameNoDisplayName,Set a custom name.
+Feature.Profile.Description.SetNicknamePrompt,Add a name for {displayName} to recognize you.
+Feature.Profile.Description.SetNicknamePromptNoDisplayName,Add a name for this user to recognize you.
 Feature.Profile.Description.SocialNetworksCaptionEveryone,Currently visible to everyone.
 Feature.Profile.Description.SocialNetworksCaptionFollowers,"Currently visible to friends, users you follow, and your followers."
 Feature.Profile.Description.SocialNetworksCaptionFollowing,Currently visible to friends and users you follow.
@@ -4624,6 +4625,7 @@ Feature.Profile.Heading.DisplayNameUpdated,Display Name Updated
 Feature.Profile.Heading.EditAgedUpDisplayName,Edit Name
 Feature.Profile.Heading.EditDisplayName,Edit Display Name
 Feature.Profile.Heading.InsufficientFunds,Insufficient Funds
+Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileFrame,Profile frame
 Feature.Profile.Heading.ProfilePictureSaved,Profile picture saved successfully
 Feature.Profile.Heading.ProfileQRCode,Share QR Code
@@ -4643,6 +4645,7 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"Your name can only be chang
 Feature.Profile.Label.AgedUpDisplayNameTooShort,Name should be at least 3 characters.
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,Custom Name
+Feature.Profile.Label.CustomNicknameDropdown,Set Custom Name
 Feature.Profile.Label.CustomizeName,Customize name
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,This is the primary public name other users will see for you on Roblox.
@@ -4650,6 +4653,12 @@ Feature.Profile.Label.DisplayNameFailed,Display name cannot be saved. Try again.
 Feature.Profile.Label.DisplayNameModalCaption,Your display name can only be changed once every 7 days.
 Feature.Profile.Label.DisplayNameTooShort,Display name should have at least 3 characters.
 Feature.Profile.Label.EditBackground,Edit Background
+Feature.Profile.Label.NicknameErrorMessageInvalid,Name is not valid.
+Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,Name contains unsupported characters.
+Feature.Profile.Label.NicknameErrorMessageModerated,Name is not appropriate for Roblox.
+Feature.Profile.Label.NicknameErrorMessageThrottled,Your name has already been changed today.
+Feature.Profile.Label.NicknameErrorMessageTooLong,Name should have at most 20 characters.
+Feature.Profile.Label.NicknameErrorMessageTooShort,Name should have at least 2 characters.
 Feature.Profile.Label.NoBioYet,No bio yet
 Feature.Profile.Label.NoPreviousName,No previous names
 Feature.Profile.Label.NoSocialLink,No social links yet
@@ -4659,6 +4668,7 @@ Feature.Profile.Label.QRCodeFriendRequest,Sent from your QR code
 Feature.Profile.Label.RecentAgedUpDisplayName,"Your name has been changed too recently. Your name can only be changed once every 7 days.
 "
 Feature.Profile.Label.RecentDisplayName,Your display name has been changed too recently. Your display name can only be changed once every 7 days.
+Feature.Profile.Label.TimeToChangeNickname,You can change your name in {hours} hours.
 Feature.Profile.Label.UnableToJoin,Unable to Join
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b> is playing <b>{experienceName}</b>
 Feature.Profile.Label.UsernameDescription,This is your unique name on Roblox. Changing your username will cost {icon}{price}.

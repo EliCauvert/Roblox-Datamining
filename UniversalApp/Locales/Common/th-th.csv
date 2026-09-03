@@ -844,14 +844,11 @@ CommonUI.Controls.Label.Wednesday,วันพุธ
 CommonUI.Controls.Label.WednesdayAbbreviated,เรา
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,ไม่พบผลการค้นหา
-CommonUI.Features.Action.ClassicUnlockGetTheme,รับธีม
-CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,ไป
 CommonUI.Features.Action.LessLowercase,แสดงน้อยลง
 CommonUI.Features.Action.MoreLowercase,แสดงเพิ่ม
 CommonUI.Features.Action.Send,
-CommonUI.Features.Heading.ClassicUnlock,Roblox ฉลองครบรอบ 20 ปี!
 CommonUI.Features.Heading.GameDetails,รายละเอียดประสบการณ์
 CommonUI.Features.Label.About,เกี่ยวกับ
 CommonUI.Features.Label.AboutUs,เกี่ยวกับเรา
@@ -870,8 +867,6 @@ CommonUI.Features.Label.Catalog,แค็ตตาล็อก Roblox
 CommonUI.Features.Label.ChannelWithChannelName,แชนเนล: {channelName}
 CommonUI.Features.Label.Charts,อันดับ
 CommonUI.Features.Label.Chat,แชท
-CommonUI.Features.Label.ClassicUnlockDescription,สนุกกับธีมคลาสสิกในเวลาจำกัด
-CommonUI.Features.Label.ClassicUnlockManagementSnackbar,จัดการธีมคลาสสิกในการตั้งค่า
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,เพื่อน
 CommonUI.Features.Label.Connection,คนรู้จัก
@@ -2169,7 +2164,6 @@ Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,เพิ่มผู้ทดลองเล่น
 Feature.Build.Action.AddPlaytesters,
 Feature.Build.Action.AddToPlaytest,เพิ่มไปยังการทดลองเล่น
-Feature.Build.Action.Approve,
 Feature.Build.Action.Archive,เก็บถาวร
 Feature.Build.Action.ArchiveGame,เก็บถาวรเกม
 Feature.Build.Action.Build,
@@ -2279,8 +2273,6 @@ Feature.Build.Description.BuyRobuxToCreate,ซื้อ Robux เพิ่มเ
 Feature.Build.Description.BuyUsageOrWait,ซื้อโควต้าการใช้งาน Build เพิ่มด้วย Robux หรือรอให้โควต้ารายวันของคุณรีเซ็ต
 Feature.Build.Description.CampaignRunDates,แคมเปญของคุณจะใช้งานได้ในช่วงวันที่ {startDate} - {endDate}
 Feature.Build.Description.ChoosePlaytesters,เลือกเพื่อนที่จะช่วยคุณทดลองเล่น
-Feature.Build.Description.CreateDeveloperProduct,"สร้าง ""{NAME}"" ในราคา {PRICE} Robux, ไม่ได้วางขาย"
-Feature.Build.Description.DeactivateDeveloperProduct,เลิกขายผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
 Feature.Build.Description.EarnedRobuxAppliedFirst,หากคุณได้รับ Robux จะมีการนำ Robux เหล่านั้นไปชำระค่าแคมเปญโฆษณาก่อน
 Feature.Build.Description.EnableBuildNotifs,เปิดการแจ้งเตือนในการตั้งค่าอุปกรณ์ของคุณเพื่อรับอัปเดตจาก Build
 Feature.Build.Description.FriendsLinkOnly,มีเพียงเพื่อนของคุณเท่านั้นที่สามารถเข้าถึงลิงก์นี้ได้ หากต้องการให้มีคนเล่นมากขึ้น ให้เปลี่ยนการตั้งค่ากลุ่มเป้าหมายของเกม
@@ -2290,8 +2282,6 @@ Feature.Build.Description.HubSettings,จัดการการตั้งค
 Feature.Build.Description.InviteFriendLimit,เลือกเพื่อนได้สูงสุด {MAX_INVITES} คน จากนั้นแชร์ลิงก์ไปยังเกม
 Feature.Build.Description.MakeAudienceAvail,เผยแพร่ประสบการณ์ของคุณเพื่อให้กลุ่มเป้าหมายนี้สามารถใช้งานได้
 Feature.Build.Description.ManageAppearance,จัดการวิธีแสดงเกมของคุณให้ผู้อื่นเห็น
-Feature.Build.Description.ManageDeveloperProduct,จัดการผลิตภัณฑ์นักพัฒนา
-Feature.Build.Description.NoMonetizationProducts,อธิบายไอเท็มที่คุณต้องการสร้างเพื่อเริ่มรับ Robux ในเกมของคุณ
 Feature.Build.Description.PlayAfterPublish,เลือกผู้ที่สามารถเล่นได้หลังจากที่คุณเผยแพร่ประสบการณ์นี้
 Feature.Build.Description.PlaytestLatest,คุณกำลังทดลองเล่นเวอร์ชันล่าสุดของคุณ พร้อมแชร์เมื่อไร ก็เผยแพร่ได้เลย
 Feature.Build.Description.PlaytestLocked,คุณสามารถเริ่มทดลองเล่นได้หลังจากที่สร้างเกมแรกของคุณ
@@ -2305,8 +2295,6 @@ Feature.Build.Description.RevertToVersion,ยืนยันเพื่อย�
 Feature.Build.Description.ShareLatest,แชร์ว่าเวอร์ชันล่าสุดของคุณมีอะไรเปลี่ยนแปลงไปบ้าง
 Feature.Build.Description.UpdateDeveloperProduct,อัปเดตผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
 Feature.Build.Description.VersionChanges,บอกผู้เล่นว่าเวอร์ชันนี้มีอะไรเปลี่ยนแปลงไปบ้าง
-Feature.Build.Error.DeveloperProductDescriptionTooLong,"คำอธิบายต้องมีความยาวไม่เกิน 1,000 อักขระ"
-Feature.Build.Error.DeveloperProductNameRequired,กรอกชื่อผลิตภัณฑ์
 Feature.Build.Error.DeveloperProductNameTooLong,ชื่อต้องมีความยาวไม่เกิน 50 อักขระ
 Feature.Build.Error.DeveloperProductPriceInvalid,"ราคาต้องเป็นจำนวนเต็มตั้งแต่ 1 ถึง 1,000,000,000 Robux"
 Feature.Build.Error.DeveloperProductTextModerated,ทีมกลั่นกรองของ Roblox เปลี่ยนข้อความของผลิตภัณฑ์นี้ ลองใช้ถ้อยคำอื่น
@@ -2377,7 +2365,6 @@ Feature.Build.Label.PercentUsed,ใช้ไปแล้ว {PERCENT}%
 Feature.Build.Label.PlayTime,เวลาเล่น
 Feature.Build.Label.PreviouslyPublished,เผยแพร่ไปก่อนหน้านี้
 Feature.Build.Label.Price,ราคา
-Feature.Build.Label.PriceUnavailable,--
 Feature.Build.Label.Pricing,การตั้งราคา
 Feature.Build.Label.Private,ส่วนตัว
 Feature.Build.Label.Public,สาธารณะ
@@ -2561,8 +2548,6 @@ Feature.Build.Notification.Message.Continue,กลับมาที่แชท
 Feature.Build.Notification.Message.Review,กลับมาที่แชท Build อีกครั้งเพื่อดูผลงาน
 Feature.Build.Notification.Title.Finished,Build ทำเสร็จแล้ว
 Feature.Build.Notification.Title.NeedInput,Build ต้องการอินพุตจากคุณ
-Feature.Build.Placeholder.DescribeProduct,อธิบายสิ่งที่คุณต้องการขาย
-Feature.Build.Placeholder.DescribeProductUpdate,อธิบายเกี่ยวกับการอัปเดต
 Feature.Build.Prompt.CreateDeveloperProduct,ช่วยฉันสร้างผลิตภัณฑ์นักพัฒนา เชื่อมโยงเข้ากับเกม ตรวจสอบและเผยแพร่การเปลี่ยนแปลง และเปิดให้ซื้อ
 Feature.Build.Title.AdCampaignActive,แคมเปญโฆษณาเปิดใช้งานอยู่
 Feature.Build.Title.AdCampaignDuration,แคมเปญโฆษณา {durationDays} วัน
@@ -2581,8 +2566,6 @@ Feature.Build.Title.ChangesNotLive,การเปลี่ยนแปลงข
 Feature.Build.Title.ChatBuildUnavailable,
 Feature.Build.Title.Content,เนื้อหา
 Feature.Build.Title.DailyRobuxReached,ใช้ Robux ครบตามวงเงินสูงสุดต่อวันแล้ว
-Feature.Build.Title.DeveloperProduct,
-Feature.Build.Title.EditDeveloperProduct,แก้ไขผลิตภัณฑ์
 Feature.Build.Title.ExperienceAudience,กลุ่มเป้าหมายของประสบการณ์
 Feature.Build.Title.FreeUsageReached,ใช้โควต้าการใช้งาน Build ฟรีหมดแล้ว
 Feature.Build.Title.FriendsOnlyPlay,เฉพาะเพื่อนเท่านั้นที่เล่นได้
@@ -2590,7 +2573,6 @@ Feature.Build.Title.GameCreationDone,สร้างเกมเรียบร�
 Feature.Build.Title.GamePrivate,เกมนี้เป็นแบบส่วนตัว
 Feature.Build.Title.GenericError,มีบางอย่างผิดปกติ
 Feature.Build.Title.GetUsers,ดึงดูดผู้ใช้
-Feature.Build.Title.NoMonetizationProducts,เริ่มสร้างรายได้ในเกมของคุณ
 Feature.Build.Title.NoRobuxForUsage,ไม่มี Robux เหลือสำหรับโควต้าการใช้งาน Build
 Feature.Build.Title.Playtesters,ผู้ทดลองเล่น
 Feature.Build.Title.PlaytestersOnlyPlay,เฉพาะผู้ทดลองเล่นเท่านั้นที่เล่นได้
@@ -3455,7 +3437,6 @@ Feature.Friends.Label.ContactsCaption,เพื่อช่วยให้คุ
 Feature.Friends.Label.FAEEligibleBanner.Body,
 Feature.Friends.Label.FewestInteractions,มีการโต้ตอบน้อยที่สุด
 Feature.Friends.Label.FindFriendsHintBody,เชื่อมต่อกับเพื่อนที่คุณรู้จักอยู่แล้วหรือหาเพื่อนใหม่ๆ
-Feature.Friends.Label.Followed,ติดตามแล้ว
 Feature.Friends.Label.Follower,ผู้ติดตาม
 Feature.Friends.Label.Followers,
 Feature.Friends.Label.Following,กำลังติดตาม
@@ -3916,7 +3897,6 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,เหลืออีก {time}
-Feature.InExperienceShop.Label.EndTime,สิ้นสุดใน {timeRemaining}
 Feature.InExperienceShop.Label.Timer.Day.Plural,
 Feature.InExperienceShop.Label.Timer.Day.Singular,
 Feature.InExperienceShop.Label.Timer.Hour.Plural,{number} ชั่วโมง
@@ -4544,6 +4524,7 @@ Feature.Profile.Action.AboutThisProfile,เกี่ยวกับโปรไ�
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
+Feature.Profile.Action.AddNickname,เพิ่มชื่อ
 Feature.Profile.Action.AllRequestsIgnored,ปฏิเสธคำขอทั้งหมดแล้ว
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,คัดลอกลิงก์โปรไฟล์
@@ -4557,13 +4538,17 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,แชร์โปรไฟล์
 Feature.Profile.Action.ShareProfileLink,แชร์ลิงก์โปรไฟล์
+Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,เปลี่ยนอวาตาร์
 Feature.Profile.Action.ToQRCode,แชร์รหัส QR
 Feature.Profile.Action.UserBlocked,บล็อคผู้ใช้นี้แล้ว
 Feature.Profile.Action.ViewFullProfile,ดูโปรไฟล์แบบเต็ม
 Feature.Profile.Action.ViewProfile,
 Feature.Profile.Description.AboutModalCaption,ข้อมูลนี้ช่วยให้ผู้อื่นรู้จักคุณมากยิ่งขึ้น แต่อย่าแชร์ข้อมูลส่วนตัวเพื่อรักษาความปลอดภัยให้กับตัวคุณเอง
+Feature.Profile.Description.EnterNicknameTextbox,กรอกชื่อเล่นของคุณ
 Feature.Profile.Description.InspectAndBuy,คลิกเพื่อดูและเลือกซื้อลุค
+Feature.Profile.Description.NicknamePrivacy,มีเพียงแค่ {displayName} เท่านั้นที่จะเห็นชื่อนี้
+Feature.Profile.Description.NicknamePrivacyNoDisplayName,เฉพาะผู้ใช้คนนี้เท่านั้นที่จะเห็นได้
 Feature.Profile.Description.QrCodeDescription,ให้ผู้อื่นสแกนรหัส QR ของคุณเพื่อเชื่อมต่อกันบน Roblox ผู้ใช้ที่มีอายุ 13 ปีขึ้นไปที่เชื่อมต่อผ่านการสแกน QR ที่คุณเผยแพร่จะจัดเป็นเพื่อนที่เชื่อได้
 Feature.Profile.Description.QrCodeDescription.FriendsRename,ให้ผู้อื่นสแกนรหัส QR ของคุณเพื่อเชื่อมต่อกับ Roblox ผู้ใช้ที่มีอายุ 13 ปีขึ้นไปและเชื่อมต่อผ่านการสแกน QR ที่คุณเผยแพร่จะถูกจัดเป็นเพื่อนที่เชื่อได้
 Feature.Profile.Description.QrCodeScanning,ผู้อื่นสามารถใช้เครื่องมือสแกน QR หรือกล้องบนอุปกรณ์ของตนสแกนรหัส QR ของคุณบน Roblox เพื่อเพิ่มคุณเป็นเพื่อนได้อย่างรวดเร็ว!
@@ -4571,8 +4556,11 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,เปลี่ย�
 Feature.Profile.Description.RecognizeFriendsByCustomName,จดจำเพื่อนได้ง่ายยิ่งขึ้นโดยการตั้งชื่อที่กำหนดเอง คุณเท่านั้นที่จะสามารถเห็นชื่อที่นำเข้าจากรายชื่อผู้ติดต่อและชื่อที่กำหนดเองนี้ได้
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,ให้ผู้ใช้ที่คุณรู้จักเพิ่มคุณด้วยการสแกนรหัส QR ของคุณ
+Feature.Profile.Description.SelectNicknameDropdown,เลือกชื่อ
 Feature.Profile.Description.SetCustomName,"ตั้งชื่อที่กำหนดเองสำหรับ <font weight=""medium"">""{displayName}""</font>"
 Feature.Profile.Description.SetCustomNameNoDisplayName,ตั้งชื่อที่กำหนดเอง
+Feature.Profile.Description.SetNicknamePrompt,เพิ่มชื่อเพื่อให้ {displayName} สามารถจำคุณได้
+Feature.Profile.Description.SetNicknamePromptNoDisplayName,เพิ่มชื่อเพื่อให้ผู้ใช้คนนี้สามารถจำคุณได้
 Feature.Profile.Description.SocialNetworksCaptionEveryone,ขณะนี้ทุกคนสามารถเห็นได้
 Feature.Profile.Description.SocialNetworksCaptionFollowers,ขณะนี้เพื่อน ผู้ใช้ที่คุณติดตาม และผู้ติดตามของคุณสามารถเห็นได้
 Feature.Profile.Description.SocialNetworksCaptionFollowing,ขณะนี้เพื่อนและผู้ใช้ที่คุณติดตามสามารถเห็นได้
@@ -4593,6 +4581,7 @@ Feature.Profile.Heading.DisplayNameUpdated,อัปเดตชื่อที�
 Feature.Profile.Heading.EditAgedUpDisplayName,แก้ไขชื่อ
 Feature.Profile.Heading.EditDisplayName,แก้ไขชื่อที่แสดง
 Feature.Profile.Heading.InsufficientFunds,เงินไม่เพียงพอ
+Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileFrame,กรอบโปรไฟล์
 Feature.Profile.Heading.ProfilePictureSaved,บันทึกภาพโปรไฟล์เรียบร้อยแล้ว
 Feature.Profile.Heading.ProfileQRCode,
@@ -4612,6 +4601,7 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"คุณสามารถ
 Feature.Profile.Label.AgedUpDisplayNameTooShort,
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,ชื่อที่กำหนดเอง
+Feature.Profile.Label.CustomNicknameDropdown,
 Feature.Profile.Label.CustomizeName,กำหนดชื่อด้วยตัวเอง
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,นี่คือชื่อสาธารณะหลักซึ่งผู้ใช้คนอื่นๆ จะเห็นชื่อนี้ของคุณบน Roblox
@@ -4619,6 +4609,12 @@ Feature.Profile.Label.DisplayNameFailed,ไม่สามารถบันท�
 Feature.Profile.Label.DisplayNameModalCaption,คุณสามารถเปลี่ยนชื่อที่แสดงของคุณได้เพียงหนึ่งครั้งในทุกๆ 7 วัน
 Feature.Profile.Label.DisplayNameTooShort,
 Feature.Profile.Label.EditBackground,
+Feature.Profile.Label.NicknameErrorMessageInvalid,
+Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,
+Feature.Profile.Label.NicknameErrorMessageModerated,
+Feature.Profile.Label.NicknameErrorMessageThrottled,ชื่อของคุณได้รับการเปลี่ยนแปลงไปแล้วในวันนี้
+Feature.Profile.Label.NicknameErrorMessageTooLong,
+Feature.Profile.Label.NicknameErrorMessageTooShort,ชื่อควรมีความยาวอย่างน้อย 2 อักขระ
 Feature.Profile.Label.NoBioYet,ยังไม่ได้ลงประวัติ
 Feature.Profile.Label.NoPreviousName,ไม่มีชื่อเดิม
 Feature.Profile.Label.NoSocialLink,ยังไม่มีลิงก์โซเชียล
@@ -4628,6 +4624,7 @@ Feature.Profile.Label.QRCodeFriendRequest,ส่งจากรหัส QR ข�
 Feature.Profile.Label.RecentAgedUpDisplayName,"คุณเพิ่งเปลี่ยนชื่อไปเมื่อไม่นานมานี้ คุณสามารถเปลี่ยนชื่อได้เพียงหนึ่งครั้งในทุกๆ 7 วัน
 "
 Feature.Profile.Label.RecentDisplayName,คุณเพิ่งเปลี่ยนชื่อที่แสดงเมื่อไม่นานมานี้ คุณสามารถเปลี่ยนชื่อที่แสดงได้เพียงหนึ่งครั้งในทุกๆ 7 วัน
+Feature.Profile.Label.TimeToChangeNickname,คุณจะสามารถเปลี่ยนชื่อของคุณได้ในอีก {hours} ชั่วโมง
 Feature.Profile.Label.UnableToJoin,ไม่สามารถเข้าร่วมได้
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b> กำลังเล่น <b>{experienceName}</b> อยู่
 Feature.Profile.Label.UsernameDescription,นี่คือชื่อที่ไม่ซ้ำใครของคุณบน Roblox การเปลี่ยนชื่อผู้ใช้จะต้องเสียค่าใช้จ่ายจำนวน {icon}{price}

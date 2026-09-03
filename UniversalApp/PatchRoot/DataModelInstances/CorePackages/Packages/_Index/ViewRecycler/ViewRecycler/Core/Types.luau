@@ -1,6 +1,4 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local _ = require(viewRecycler.Core.Enums.DataSourceChangeType)
-local _ = require(viewRecycler.Core.Enums.PinnedPosition)
+﻿local _ = require(script:FindFirstAncestor("ViewRecycler").Core.Enums.DataSourceChangeType)
 
 return {
 	EMPTY_INDEX_RANGE = table.freeze({ firstIndex = 1, lastIndex = 0 }),

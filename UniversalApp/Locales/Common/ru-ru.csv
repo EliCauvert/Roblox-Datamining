@@ -2566,6 +2566,7 @@ Feature.PlayerSearchResults.Label.YouAreFollowing,Твои подписки
 Feature.PlayerSearchResults.Label.YouAreFriends,Вы друзья
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
+Feature.Profile.Action.AddNickname,Добавить имя
 Feature.Profile.Action.AllRequestsIgnored,Все запросы проигнорированы
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Скопировать ссылку на профиль
@@ -2574,16 +2575,23 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,Поделиться профилем
 Feature.Profile.Action.ShareProfileLink,Поделись ссылкой на профиль
+Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.ToQRCode,Поделиться QR-кодом
 Feature.Profile.Action.UserBlocked,Пользователь заблокирован
 Feature.Profile.Action.ViewFullProfile,Посмотреть профиль
 Feature.Profile.Description.AboutModalCaption,"Пусть другие узнают больше о тебе. Оставайся в безопасности, не сообщай личные данные."
+Feature.Profile.Description.EnterNicknameTextbox,Введи свой никнейм
+Feature.Profile.Description.NicknamePrivacy,Будет видно только для {displayName}.
+Feature.Profile.Description.NicknamePrivacyNoDisplayName,Только этот пользователь увидит это.
 Feature.Profile.Description.QrCodeScanning,"Другие могут отсканировать твой QR-код Roblox с помощью сканера QR, чтобы быстро добавить тебя в друзья!"
 Feature.Profile.Description.RecognizeConnectionsByCustomName,"Узнавай контакты быстрее, установив индивидуальное имя для каждого. Имена, импортированные из контактов, и пользовательские имена видны только тебе."
 Feature.Profile.Description.RecognizeFriendsByCustomName,"Ты будешь быстрее узнавать друзей, задав им пользовательское имя. Имена, импортированные из контактов, и пользовательские имена видны только тебе."
 Feature.Profile.Description.SaySomething,
+Feature.Profile.Description.SelectNicknameDropdown,Выбрать имя
 Feature.Profile.Description.SetCustomName,"Придумай имя для <font weight=""medium"">{displayName}</font>."
 Feature.Profile.Description.SetCustomNameNoDisplayName,Настроить имя
+Feature.Profile.Description.SetNicknamePrompt,Добавь имя для {displayName} в целях распознавания
+Feature.Profile.Description.SetNicknamePromptNoDisplayName,Добавь имя для этого пользователя в целях распознавания
 Feature.Profile.Description.SocialNetworksCaptionEveryone,В настоящее время видно всем.
 Feature.Profile.Description.SocialNetworksCaptionFollowers,"В настоящее время видно для друзей, пользователей, на которых ты подписан(а) и твоих подписчиков."
 Feature.Profile.Description.SocialNetworksCaptionFollowing,"В настоящее время виден друзьям и пользователям, на которых ты подписываешься."
@@ -2600,6 +2608,7 @@ Feature.Profile.Heading.DisplayNameUpdated,Отображаемое имя об�
 Feature.Profile.Heading.EditAgedUpDisplayName,Редактировать имя
 Feature.Profile.Heading.EditDisplayName,Изменить отображаемое имя
 Feature.Profile.Heading.InsufficientFunds,Недостаточно средств
+Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Статистика
 Feature.Profile.Heading.Username,
@@ -2613,6 +2622,7 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"Имя можно меня�
 Feature.Profile.Label.AgedUpDisplayNameTooShort,Имя должно быть не менее 3 символов.
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,
+Feature.Profile.Label.CustomNicknameDropdown,Задать имя
 Feature.Profile.Label.CustomizeName,
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,"Это основное публичное имя, которое другие пользователи будут видеть в Roblox."
@@ -2620,10 +2630,17 @@ Feature.Profile.Label.DisplayNameFailed,Отображаемое имя не м�
 Feature.Profile.Label.DisplayNameModalCaption,Отображаемое имя может быть изменено только один раз каждые 7 дней.
 Feature.Profile.Label.DisplayNameTooShort,Отображаемое имя должно быть не менее 3 символов.
 Feature.Profile.Label.EditBackground,Изменить фон
+Feature.Profile.Label.NicknameErrorMessageInvalid,Имя не допустимо.
+Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,Имя содержит неподдерживаемые символы.
+Feature.Profile.Label.NicknameErrorMessageModerated,Имя не подходит для Roblox.
+Feature.Profile.Label.NicknameErrorMessageThrottled,Твоё имя уже было изменено сегодня
+Feature.Profile.Label.NicknameErrorMessageTooLong,Имя должно содержать не более 20 символов.
+Feature.Profile.Label.NicknameErrorMessageTooShort,Имя должно содержать не менее 2 символов.
 Feature.Profile.Label.PlayedTogetherInGameDescription,Играли вместе в: {experience_name}
 Feature.Profile.Label.QRCodeFriendRequest,С использованием QR-кода
 Feature.Profile.Label.RecentAgedUpDisplayName,Твоё имя было изменено совсем недавно. Его можно менять только один раз каждые 7 дней.
 Feature.Profile.Label.RecentDisplayName,Отображаемое имя было изменено совсем недавно. Его можно менять только один раз каждые 7 дней.
+Feature.Profile.Label.TimeToChangeNickname,Ты можешь изменить своё имя через {hours} ч.
 Feature.Profile.Label.UnableToJoin,Не удаётся присоединиться
 Feature.Profile.Label.UsernameDescription,Это твоё уникальное имя в Roblox. Изменение имени пользователя будет стоить {icon}{price}.
 Feature.Profile.Label.ViewDetails,

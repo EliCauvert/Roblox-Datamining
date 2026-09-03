@@ -861,14 +861,11 @@ CommonUI.Controls.Label.Wednesday,Rabu
 CommonUI.Controls.Label.WednesdayAbbreviated,Rab
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,Tidak ada hasil
-CommonUI.Features.Action.ClassicUnlockGetTheme,Dapatkan tema
-CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,Pergi
 CommonUI.Features.Action.LessLowercase,lebih sedikit
 CommonUI.Features.Action.MoreLowercase,lebih banyak
 CommonUI.Features.Action.Send,
-CommonUI.Features.Heading.ClassicUnlock,Rayakan 20 tahun Roblox!
 CommonUI.Features.Heading.GameDetails,Detail Pengalaman Virtual
 CommonUI.Features.Label.About,Tentang
 CommonUI.Features.Label.AboutUs,Tentang Kami
@@ -887,8 +884,6 @@ CommonUI.Features.Label.Catalog,Marketplace
 CommonUI.Features.Label.ChannelWithChannelName,Channel: {channelName}
 CommonUI.Features.Label.Charts,Teratas
 CommonUI.Features.Label.Chat,Chat
-CommonUI.Features.Label.ClassicUnlockDescription,Nikmati tampilan klasik untuk waktu terbatas
-CommonUI.Features.Label.ClassicUnlockManagementSnackbar,Kelola tema klasik di pengaturan
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,Koneksi
 CommonUI.Features.Label.Connection,
@@ -2186,7 +2181,6 @@ Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,Tambahkan playtester
 Feature.Build.Action.AddPlaytesters,
 Feature.Build.Action.AddToPlaytest,Tambahkan ke playtest
-Feature.Build.Action.Approve,Setujui
 Feature.Build.Action.Archive,Arsipkan
 Feature.Build.Action.ArchiveGame,Arsipkan game
 Feature.Build.Action.Build,
@@ -2296,8 +2290,6 @@ Feature.Build.Description.BuyRobuxToCreate,"Beli lebih banyak Robux untuk terus 
 Feature.Build.Description.BuyUsageOrWait,"Beli lebih banyak kuota penggunaan Build dengan Robux, atau tunggu hingga batas harianmu direset."
 Feature.Build.Description.CampaignRunDates,Kampanyemu akan berlangsung {startDate}—{endDate}
 Feature.Build.Description.ChoosePlaytesters,Pilih teman untuk membantumu melakukan playtest.
-Feature.Build.Description.CreateDeveloperProduct,"Buat ""{NAME}"" dengan membayar {PRICE} Robux, tidak dijual."
-Feature.Build.Description.DeactivateDeveloperProduct,Hentikan penjualan produk delevoper {PRODUCT_ID}.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"Jika kamu punya perolehan Robux, Robux tersebut akan digunakan terlebih dahulu untuk membayar biaya kampanye iklan."
 Feature.Build.Description.EnableBuildNotifs,Aktifkan notifikasi di pengaturan perangkatmu untuk mendapatkan update dari Build.
 Feature.Build.Description.FriendsLinkOnly,Hanya temanmu yang dapat mengakses link ini. Ubah pengaturan Audiens game-mu jika kamu ingin lebih banyak pengguna memainkannya.
@@ -2307,8 +2299,6 @@ Feature.Build.Description.HubSettings,Kelola semua pengaturan di Pusat Kreator
 Feature.Build.Description.InviteFriendLimit,"Pilih maksimal {MAX_INVITES} teman, lalu bagikan link game."
 Feature.Build.Description.MakeAudienceAvail,Publikasikan pengalaman virtualmu agar tersedia bagi audiens ini.
 Feature.Build.Description.ManageAppearance,Kelola tampilan game-mu bagi pengguna lain.
-Feature.Build.Description.ManageDeveloperProduct,Kelola produk developer.
-Feature.Build.Description.NoMonetizationProducts,Deskripsikan item yang ingin kamu buat untuk mulai memperoleh Robux di game-mu
 Feature.Build.Description.PlayAfterPublish,Pilih siapa yang bisa bermain setelah kamu memublikasikan pengalaman virtual ini.
 Feature.Build.Description.PlaytestLatest,Kamu sedang melakukan playtest pada versi terbarumu. Publikasikan saat kamu siap untuk membagikannya.
 Feature.Build.Description.PlaytestLocked,Kamu dapat memulai playtest setelah membuat game pertamamu.
@@ -2322,8 +2312,6 @@ Feature.Build.Description.RevertToVersion,Konfirmasi untuk membatalkan perubahan
 Feature.Build.Description.ShareLatest,Bagikan apa yang berubah di versi terbarumu.
 Feature.Build.Description.UpdateDeveloperProduct,Perbarui produk developer {PRODUCT_ID}.
 Feature.Build.Description.VersionChanges,Beri tahu pemain perubahan pada versi ini.
-Feature.Build.Error.DeveloperProductDescriptionTooLong,Deskripsi maksimal 1.000 karakter.
-Feature.Build.Error.DeveloperProductNameRequired,Masukkan nama produk.
 Feature.Build.Error.DeveloperProductNameTooLong,Nama harus terdiri dari maksimal 50 karakter.
 Feature.Build.Error.DeveloperProductPriceInvalid,Harga harus berupa bilangan bulat dari 1 hingga 1.000.000.000 Robux.
 Feature.Build.Error.DeveloperProductTextModerated,Moderasi Roblox mengubah teks produk ini. Coba kata-kata lain.
@@ -2394,7 +2382,6 @@ Feature.Build.Label.PercentUsed,{PERCENT}% digunakan
 Feature.Build.Label.PlayTime,Waktu bermain
 Feature.Build.Label.PreviouslyPublished,Dipublikasikan sebelumnya
 Feature.Build.Label.Price,Harga
-Feature.Build.Label.PriceUnavailable,--
 Feature.Build.Label.Pricing,
 Feature.Build.Label.Private,Privat
 Feature.Build.Label.Public,Publik
@@ -2578,8 +2565,6 @@ Feature.Build.Notification.Message.Continue,Teruskan chat Build-mu untuk melanju
 Feature.Build.Notification.Message.Review,Teruskan chat Build-mu untuk me-review hasilnya.
 Feature.Build.Notification.Title.Finished,Build selesai
 Feature.Build.Notification.Title.NeedInput,Build membutuhkan input darimu
-Feature.Build.Placeholder.DescribeProduct,Deskripsikan apa yang ingin kamu jual
-Feature.Build.Placeholder.DescribeProductUpdate,Deskripsikan perubahan
 Feature.Build.Prompt.CreateDeveloperProduct,"Bantu saya membuat produk developer, menghubungkannya ke game, memverifikasi dan memublikasikan perubahannya, serta membuatnya tersedia untuk dibeli."
 Feature.Build.Title.AdCampaignActive,Kampanye iklan aktif
 Feature.Build.Title.AdCampaignDuration,Kampanye iklan {durationDays} hari
@@ -2598,8 +2583,6 @@ Feature.Build.Title.ChangesNotLive,Perubahanmu belum tayang
 Feature.Build.Title.ChatBuildUnavailable,Build tidak tersedia.
 Feature.Build.Title.Content,Konten
 Feature.Build.Title.DailyRobuxReached,Batas Robux harian tercapai
-Feature.Build.Title.DeveloperProduct,Produk developer
-Feature.Build.Title.EditDeveloperProduct,Edit produk
 Feature.Build.Title.ExperienceAudience,Audiens pengalaman virtual
 Feature.Build.Title.FreeUsageReached,Batas penggunaan Build gratis tercapai
 Feature.Build.Title.FriendsOnlyPlay,Hanya teman yang bisa memainkannya
@@ -2607,7 +2590,6 @@ Feature.Build.Title.GameCreationDone,Pembuatan game selesai
 Feature.Build.Title.GamePrivate,Game ini privat
 Feature.Build.Title.GenericError,Terjadi kesalahan
 Feature.Build.Title.GetUsers,Dapatkan pengguna
-Feature.Build.Title.NoMonetizationProducts,Mulai hasilkan pendapatan di game-mu
 Feature.Build.Title.NoRobuxForUsage,Tidak ada Robux yang tersisa untuk penggunaan Build
 Feature.Build.Title.Playtesters,Playtester
 Feature.Build.Title.PlaytestersOnlyPlay,Hanya playtester yang bisa memainkannya
@@ -3470,7 +3452,6 @@ Feature.Friends.Label.ContactsCaption,"Untuk membantu kamu dan temanmu bertemu s
 Feature.Friends.Label.FAEEligibleBanner.Body,
 Feature.Friends.Label.FewestInteractions,Interaksi Paling Jarang
 Feature.Friends.Label.FindFriendsHintBody,Terhubung dengan teman kamu atau berteman dengan orang baru di Roblox.
-Feature.Friends.Label.Followed,Diikuti
 Feature.Friends.Label.Follower,Pengikut
 Feature.Friends.Label.Followers,
 Feature.Friends.Label.Following,Mengikuti
@@ -3931,7 +3912,6 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} lagi
-Feature.InExperienceShop.Label.EndTime,Berakhir dalam {timeRemaining}
 Feature.InExperienceShop.Label.Timer.Day.Plural,{number} hari
 Feature.InExperienceShop.Label.Timer.Day.Singular,1 hari
 Feature.InExperienceShop.Label.Timer.Hour.Plural,{number} jam
@@ -4559,6 +4539,7 @@ Feature.Profile.Action.AboutThisProfile,Tentang profil ini
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Menerima Teman
 Feature.Profile.Action.Add,
+Feature.Profile.Action.AddNickname,Tambahkan Nama
 Feature.Profile.Action.AllRequestsIgnored,Semua Permintaan Diabaikan
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,Salin Tautan Profil
@@ -4572,13 +4553,17 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,Bagikan profil
 Feature.Profile.Action.ShareProfileLink,Bagikan Tautan Profil
+Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,Beralih avatar
 Feature.Profile.Action.ToQRCode,Bagikan kode QR
 Feature.Profile.Action.UserBlocked,Pengguna Diblokir
 Feature.Profile.Action.ViewFullProfile,Lihat profil lengkap
 Feature.Profile.Action.ViewProfile,Lihat profil
 Feature.Profile.Description.AboutModalCaption,"Biarkan orang lain tahu lebih banyak tentang kamu, tetapi jaga keamanan dirimu, jangan bagikan detail pribadi."
+Feature.Profile.Description.EnterNicknameTextbox,Masukkan nama panggilanmu
 Feature.Profile.Description.InspectAndBuy,Klik untuk melihat dan membeli tampilannya.
+Feature.Profile.Description.NicknamePrivacy,Hanya {displayName} yang akan melihat nama ini.
+Feature.Profile.Description.NicknamePrivacyNoDisplayName,Hanya pengguna ini yang akan melihat nama ini.
 Feature.Profile.Description.QrCodeDescription,Izinkan pengguna lain men-scan kode QR-mu untuk terhubung di Roblox. Pengguna berusia 13+ yang usianya telah diperiksa dan terhubung melalui scan QR langsung akan menjadi Teman Tepercaya.
 Feature.Profile.Description.QrCodeDescription.FriendsRename,Izinkan pengguna lain men-scan kode QR-mu untuk terhubung di Roblox. Pengguna berusia 13+ yang usianya telah diperiksa dan terhubung melalui scan QR langsung akan menjadi teman tepercaya.
 Feature.Profile.Description.QrCodeScanning,Izinkan pengguna lain men-scan kode QR Roblox kamu dengan Scanner QR atau kamera perangkat mereka untuk dengan cepat menambahkanmu sebagai teman.
@@ -4586,8 +4571,11 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,Kenali teman secara
 Feature.Profile.Description.RecognizeFriendsByCustomName,Kenali teman secara lebih mudah dengan mengatur nama kustom untuk mereka. Nama yang diimpor dari kontak kamu dan nama kustom yang kamu buat hanya dapat dilihat oleh kamu.
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,Izinkan orang yang kamu kenal memindai kode QR-mu untuk menambahkanmu.
+Feature.Profile.Description.SelectNicknameDropdown,Pilih nama
 Feature.Profile.Description.SetCustomName,"Atur nama kustom untuk <font weight=""medium"">{displayName}</font>."
 Feature.Profile.Description.SetCustomNameNoDisplayName,Atur nama kustom.
+Feature.Profile.Description.SetNicknamePrompt,Tambahkan nama agar {displayName} dapat mengenalimu.
+Feature.Profile.Description.SetNicknamePromptNoDisplayName,Tambahkan nama agar pengguna ini dapat mengenalimu.
 Feature.Profile.Description.SocialNetworksCaptionEveryone,Saat ini terlihat oleh semua pengguna.
 Feature.Profile.Description.SocialNetworksCaptionFollowers,"Saat ini terlihat oleh teman, pengguna yang kamu ikuti, dan pengikutmu."
 Feature.Profile.Description.SocialNetworksCaptionFollowing,Saat ini terlihat oleh teman dan pengguna yang kamu ikuti.
@@ -4608,6 +4596,7 @@ Feature.Profile.Heading.DisplayNameUpdated,Nama Display Di-update
 Feature.Profile.Heading.EditAgedUpDisplayName,Edit Nama
 Feature.Profile.Heading.EditDisplayName,Edit Nama Display
 Feature.Profile.Heading.InsufficientFunds,Dana Tidak Cukup
+Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileFrame,Bingkai profil
 Feature.Profile.Heading.ProfilePictureSaved,Foto profil berhasil disimpan
 Feature.Profile.Heading.ProfileQRCode,Bagikan Kode QR
@@ -4627,6 +4616,7 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"Nama kamu hanya dapat diuba
 Feature.Profile.Label.AgedUpDisplayNameTooShort,Nama harus terdiri dari minimum 3 karakter.
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,Nama Kustom
+Feature.Profile.Label.CustomNicknameDropdown,Atur Nama Kustom
 Feature.Profile.Label.CustomizeName,Sesuaikan nama
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,Ini adalah nama publik utama yang akan dilihat oleh pengguna lain di Roblox.
@@ -4634,6 +4624,12 @@ Feature.Profile.Label.DisplayNameFailed,Nama display tidak dapat disimpan. Coba 
 Feature.Profile.Label.DisplayNameModalCaption,Nama display kamu hanya dapat diubah satu kali dalam 7 hari.
 Feature.Profile.Label.DisplayNameTooShort,Nama display harus terdiri dari minimum 3 karakter.
 Feature.Profile.Label.EditBackground,Edit Latar Belakang
+Feature.Profile.Label.NicknameErrorMessageInvalid,Nama tidak valid.
+Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,Nama mengandung karakter yang tidak didukung.
+Feature.Profile.Label.NicknameErrorMessageModerated,Nama tidak pantas untuk Roblox.
+Feature.Profile.Label.NicknameErrorMessageThrottled,Nama kamu sudah diubah hari ini.
+Feature.Profile.Label.NicknameErrorMessageTooLong,Nama tidak dapat lebih dari 20 karakter.
+Feature.Profile.Label.NicknameErrorMessageTooShort,Nama harus terdiri dari minimal 2 karakter.
 Feature.Profile.Label.NoBioYet,Belum ada bio
 Feature.Profile.Label.NoPreviousName,Tidak ada nama sebelumnya
 Feature.Profile.Label.NoSocialLink,Belum ada link media sosial
@@ -4643,6 +4639,7 @@ Feature.Profile.Label.QRCodeFriendRequest,Dikirim dari kode QR kamu
 Feature.Profile.Label.RecentAgedUpDisplayName,"Nama kamu baru saja diubah. Kamu dapat mengubahnya sekali dalam 7 hari.
 "
 Feature.Profile.Label.RecentDisplayName,Nama display kamu baru saja diubah. Kamu dapat mengubahnya sekali dalam 7 hari.
+Feature.Profile.Label.TimeToChangeNickname,Kamu dapat mengubah namamu dalam {hours} jam.
 Feature.Profile.Label.UnableToJoin,Tidak Dapat Bergabung
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b> sedang memainkan <b>{experienceName}</b>
 Feature.Profile.Label.UsernameDescription,Ini adalah nama unik kamu di Roblox. Mengubah nama pengguna kamu akan dikenakan biaya {icon}{price}.

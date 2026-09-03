@@ -111,8 +111,9 @@ return {
 			isLeaseCurrent = var3.isLeaseCurrent,
 			setMaxPoolSize = var3.setMaxPoolSize,
 			getScopeInventory = var3.getScopeInventory,
-			getVacantViews = var3.getVacantViews,
+			getVacantRecords = var3.getVacantRecords,
 			getItemViews = var3.getScopeInventory,
+			getVacantItemViews = var3.getVacantRecords,
 			updateItemView = itemViewAdapter.update,
 			destroy = function()
 				-- upvalues: var3 (ref)

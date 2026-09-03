@@ -862,14 +862,11 @@ CommonUI.Controls.Label.Wednesday,수요일
 CommonUI.Controls.Label.WednesdayAbbreviated,수
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,검색 결과 없음
-CommonUI.Features.Action.ClassicUnlockGetTheme,테마 받기
-CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,이동
 CommonUI.Features.Action.LessLowercase,간략히 보기
 CommonUI.Features.Action.MoreLowercase,
 CommonUI.Features.Action.Send,보내기
-CommonUI.Features.Heading.ClassicUnlock,Roblox 20주년을 기념하세요!
 CommonUI.Features.Heading.GameDetails,체험 설명
 CommonUI.Features.Label.About,소개
 CommonUI.Features.Label.AboutUs,회사 소개
@@ -888,8 +885,6 @@ CommonUI.Features.Label.Catalog,Roblox 카탈로그
 CommonUI.Features.Label.ChannelWithChannelName,채널: {channelName}
 CommonUI.Features.Label.Charts,차트
 CommonUI.Features.Label.Chat,채팅
-CommonUI.Features.Label.ClassicUnlockDescription,기간 한정 클래식 룩을 즐겨보세요
-CommonUI.Features.Label.ClassicUnlockManagementSnackbar,설정에서 클래식 테마 관리
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,친구
 CommonUI.Features.Label.Connection,인맥
@@ -3936,7 +3931,6 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} 남음
-Feature.InExperienceShop.Label.EndTime,{timeRemaining} 후 종료
 Feature.InExperienceShop.Label.Timer.Day.Plural,
 Feature.InExperienceShop.Label.Timer.Day.Singular,
 Feature.InExperienceShop.Label.Timer.Hour.Plural,
@@ -4564,6 +4558,7 @@ Feature.Profile.Action.AboutThisProfile,프로필 정보
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
+Feature.Profile.Action.AddNickname,이름 추가
 Feature.Profile.Action.AllRequestsIgnored,모든 요청이 무시됨
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,프로필 링크 복사
@@ -4577,13 +4572,17 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,프로필 공유
 Feature.Profile.Action.ShareProfileLink,프로필 링크 공유
+Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,아바타 전환
 Feature.Profile.Action.ToQRCode,
 Feature.Profile.Action.UserBlocked,사용자 차단됨
 Feature.Profile.Action.ViewFullProfile,전체 프로필 보기
 Feature.Profile.Action.ViewProfile,
 Feature.Profile.Description.AboutModalCaption,다른 사람들에게 자신을 소개하세요. 보안을 위해 개인정보는 공유하지 마세요.
+Feature.Profile.Description.EnterNicknameTextbox,닉네임을 입력하세요
 Feature.Profile.Description.InspectAndBuy,클릭하여 해당 친구의 룩을 보고 쇼핑하세요.
+Feature.Profile.Description.NicknamePrivacy,{displayName} 님만 볼 수 있습니다.
+Feature.Profile.Description.NicknamePrivacyNoDisplayName,이 사용자만 볼 수 있습니다.
 Feature.Profile.Description.QrCodeDescription,다른 사람들이 Roblox에서 내 QR 코드를 스캔하여 나와 연결하도록 허용하세요. 실시간 QR 스캔을 통해 연결되고 연령 인증을 완료한 만 13세 이상 사용자는 신뢰할 수 있는 친구로 설정됩니다.
 Feature.Profile.Description.QrCodeDescription.FriendsRename,
 Feature.Profile.Description.QrCodeScanning,"사람들이 QR 스캐너나 기기의 카메라로 내 Roblox QR 코드를 스캔하면, 바로 나를 친구로 추가할 수 있어요!"
@@ -4591,8 +4590,11 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,맞춤 이름을 �
 Feature.Profile.Description.RecognizeFriendsByCustomName,
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,아는 사람이 내 QR 코드를 스캔해 나를 추가하도록 합니다.
+Feature.Profile.Description.SelectNicknameDropdown,이름을 선택하세요
 Feature.Profile.Description.SetCustomName,"<font weight=""medium"">{displayName}</font> 님의 맞춤 이름을 만드세요."
 Feature.Profile.Description.SetCustomNameNoDisplayName,맞춤 이름을 설정하세요.
+Feature.Profile.Description.SetNicknamePrompt,{displayName} 님이 나를 알아볼 수 있도록 이름을 추가하세요.
+Feature.Profile.Description.SetNicknamePromptNoDisplayName,이 사용자가 나를 알아볼 수 있도록 이름을 추가하세요.
 Feature.Profile.Description.SocialNetworksCaptionEveryone,현재 모두에게 보입니다.
 Feature.Profile.Description.SocialNetworksCaptionFollowers,"현재 친구, 내가 팔로우하는 사용자, 내 팔로워에게 보입니다."
 Feature.Profile.Description.SocialNetworksCaptionFollowing,현재 친구와 내가 팔로우하는 사용자에게 보입니다.
@@ -4613,6 +4615,7 @@ Feature.Profile.Heading.DisplayNameUpdated,표시 이름이 업데이트되었�
 Feature.Profile.Heading.EditAgedUpDisplayName,이름 편집
 Feature.Profile.Heading.EditDisplayName,표시 이름 편집
 Feature.Profile.Heading.InsufficientFunds,비용 부족
+Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileFrame,프로필 프레임
 Feature.Profile.Heading.ProfilePictureSaved,프로필 사진이 성공적으로 저장되었습니다
 Feature.Profile.Heading.ProfileQRCode,
@@ -4632,6 +4635,7 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"이름은 7일에 한 번�
 Feature.Profile.Label.AgedUpDisplayNameTooShort,이름의 길이는 최소 3자 이상이어야 합니다.
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,맞춤 이름
+Feature.Profile.Label.CustomNicknameDropdown,맞춤 이름 설정
 Feature.Profile.Label.CustomizeName,맞춤 이름 설정하기
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,Roblox에서 다른 사용자에게 표시되는 기본 공개 이름입니다.
@@ -4639,6 +4643,12 @@ Feature.Profile.Label.DisplayNameFailed,표시 이름을 저장할 수 없습니
 Feature.Profile.Label.DisplayNameModalCaption,표시 이름은 7일에 한 번만 변경할 수 있습니다.
 Feature.Profile.Label.DisplayNameTooShort,표시 이름의 길이는 최소 3자 이상이어야 합니다.
 Feature.Profile.Label.EditBackground,
+Feature.Profile.Label.NicknameErrorMessageInvalid,유효하지 않은 이름입니다.
+Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,이름에 지원되지 않는 문자가 포함되어 있습니다.
+Feature.Profile.Label.NicknameErrorMessageModerated,Roblox에서 사용하기에 적합하지 않은 이름입니다.
+Feature.Profile.Label.NicknameErrorMessageThrottled,오늘 이미 이름을 변경했습니다.
+Feature.Profile.Label.NicknameErrorMessageTooLong,이름의 길이는 최대 20자 이하여야 합니다.
+Feature.Profile.Label.NicknameErrorMessageTooShort,이름의 길이는 최소 2자 이상이어야 합니다.
 Feature.Profile.Label.NoBioYet,아직 소개가 없습니다
 Feature.Profile.Label.NoPreviousName,이전 이름 없음
 Feature.Profile.Label.NoSocialLink,아직 소셜 링크 없음
@@ -4648,6 +4658,7 @@ Feature.Profile.Label.QRCodeFriendRequest,QR 코드에서 전송됨
 Feature.Profile.Label.RecentAgedUpDisplayName,"최근에 변경한 적이 있는 이름입니다. 이름은 7일에 한 번만 변경할 수 있습니다.
 "
 Feature.Profile.Label.RecentDisplayName,최근에 변경한 적이 있는 표시 이름입니다. 표시 이름은 7일에 한 번만 변경할 수 있습니다.
+Feature.Profile.Label.TimeToChangeNickname,{hours}시간 후에 이름을 변경할 수 있습니다.
 Feature.Profile.Label.UnableToJoin,참가할 수 없음
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b> 님이 <b>{experienceName}</b> 체험을 플레이하고 있어요.
 Feature.Profile.Label.UsernameDescription,Roblox에서 사용하는 이름입니다. 사용자 이름 변경 비용은 {icon}{price}입니다.
