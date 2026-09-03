@@ -1333,6 +1333,7 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Message.UpdateRolesetPositionBelowRole": "below {roleAboveName}",
     "Label.UpdateRoleProperties": "Update Role Properties",
     "Error.SupportTicketOpenLimitReached": "You’ve reached the limit for open support tickets. Visit your Experience Support History to resolve open tickets.",
-    "Error.SupportTicketIneligible": "You can’t submit a bug report for this experience right now."
+    "Error.SupportTicketIneligible": "You can’t submit a bug report for this experience right now.",
+    "Placeholder.PollQuestion": "Write your question"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Groups");
