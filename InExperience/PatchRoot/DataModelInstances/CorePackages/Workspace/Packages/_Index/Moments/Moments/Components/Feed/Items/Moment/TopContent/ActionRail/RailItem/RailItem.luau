@@ -10,8 +10,13 @@ local view = foundationModule.View
 local iconSize = foundationModule.Enums.IconSize
 local useTokens = foundationModule.Hooks.useTokens
 
-local function formatCount(p1)
-	return if p1 == nil then "" elseif p1 >= 1000000 then string.format("%.1fM", p1 / 1000000) elseif p1 >= 1000 then string.format("%.1fK", p1 / 1000) else tostring(p1)
+local function formatCount(p1, p2)
+	if p1 == nil then
+		return ""
+	end
+	local var1 = if p1 >= 1000000 then string.format("%.1fM", p1 / 1000000) elseif p1 >= 1000 then string.format("%.1fK", p1 / 1000) else tostring(p1)
+	
+	return if p2 then `{var1}+` else var1
 end
 
 return reactModule.memo(function(p1)
@@ -29,7 +34,8 @@ return reactModule.memo(function(p1)
 		LayoutOrder = p1.LayoutOrder,
 		isDisabled = p1.isDisabled,
 		onActivated = p1.onActivated,
-		ref = p1.nativeRef
+		ref = p1.nativeRef,
+		testId = p1.testId
 	}, {
 		Slot = if type(p1.slot) == "string" then reactModule.createElement(icon, {
 			LayoutOrder = var1(),
@@ -44,7 +50,10 @@ return reactModule.memo(function(p1)
 		Count = if count then reactModule.createElement(text, {
 			tag = "auto-xy text-caption-large text-align-x-center content-emphasis",
 			LayoutOrder = var1(),
-			Text = count:map(formatCount),
+			Text = count:map(function(p2)
+				-- upvalues: formatCount (copy), p1 (ref)
+				return formatCount(p2, p1.countIsCapped == true)
+			end),
 			Visible = count:map(function(p2)
 				return p2 ~= nil
 			end),

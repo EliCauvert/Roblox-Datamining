@@ -55,7 +55,8 @@ return {
 		PlayingSwimAnimation = require(script.Reducers.PlayingSwimAnimation),
 		ShouldDelaySaveManager = require(script.Reducers.ShouldDelaySaveManager),
 		CameraButton = require(script.Reducers.CameraButton),
-		ProfileConfiguration = require(script.Reducers.ProfileConfiguration)
+		ProfileConfiguration = require(script.Reducers.ProfileConfiguration),
+		OutfitTryOn = require(script.Reducers.OutfitTryOn)
 	},
 	Constants = require(script.Constants),
 	Utils = { ReducerUtils = require(script.Utils.ReducerUtils) },

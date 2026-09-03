@@ -12,6 +12,7 @@ local cellsEqual = sduiPoolStoreLayoutModule.cellsEqual
 local EMPTY_CELLS = sduiPoolStoreLayoutModule.EMPTY_CELLS
 local fFlagLuaAppEnableNxMRoduxApportioning = require(parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
 local fFlagSduiCollectionGridRevealRows = require(parent.SharedFlags).FFlagSduiCollectionGridRevealRows
+local fFlagSduiVerticalFeedProgressiveFillOnScroll = require(parent.SharedFlags).FFlagSduiVerticalFeedProgressiveFillOnScroll
 local frozen = table.freeze({})
 
 local function sectionConfigsEqual(p1, p2)
@@ -19,7 +20,7 @@ local function sectionConfigsEqual(p1, p2)
 end
 
 local function createSduiPoolStore()
-	-- upvalues: fFlagSduiCollectionGridRevealRows (ref), signalsModule (ref), sectionConfigsEqual (ref), getMainCollectionLayoutStore (ref), frozen (ref), EMPTY_CELLS (ref), makePoolGetSpanConfig (ref), processOneGrid (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), layoutToCells (ref), cellsEqual (ref)
+	-- upvalues: fFlagSduiCollectionGridRevealRows (ref), signalsModule (ref), sectionConfigsEqual (ref), getMainCollectionLayoutStore (ref), frozen (ref), EMPTY_CELLS (ref), makePoolGetSpanConfig (ref), processOneGrid (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), layoutToCells (ref), cellsEqual (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (ref)
 	local t = {}
 	local t_1 = {}
 	local var1 = if fFlagSduiCollectionGridRevealRows then {} else nil
@@ -168,7 +169,7 @@ local function createSduiPoolStore()
 		return var7
 	end
 	
-	local _ = function(p3)
+	local function getRowCountComputed(p3)
 		-- upvalues: t_3 (ref), signalsModule (copy), t_1 (ref), sectionConfigsEqual (copy), var6 (write)
 		local var26 = t_3[p3]
 		
@@ -428,6 +429,7 @@ local function createSduiPoolStore()
 			end)
 		end,
 		getSectionStartRow = var26,
+		getSectionRowCount = if fFlagSduiVerticalFeedProgressiveFillOnScroll then getRowCountComputed else nil,
 		getSectionCells = function(p3)
 			-- upvalues: t_5 (ref), signalsModule (copy), var6 (write), EMPTY_CELLS (copy), cellsEqual (copy)
 			local var27 = t_5[p3]

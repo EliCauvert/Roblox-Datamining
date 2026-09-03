@@ -41,7 +41,7 @@
 	resolveAlignment = function(p5, p6)
 		return if p5 == "start" then p6.ScrollAlignment.Start elseif p5 == "end" then p6.ScrollAlignment.End else p6.ScrollAlignment.Center
 	end,
-	resolvePresentationMode = function(p5, _)
-		return if p5 == "immediate" then "ReadyOnAssignment" else "ReadyOnCommit"
+	resolvePresentationMode = function(p5, p6)
+		return if p5 == "untilCommit" then p6.RecyclableViewReadiness.ReadyOnCommit else p6.RecyclableViewReadiness.ReadyOnAssignment
 	end
 }

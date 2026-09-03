@@ -29,15 +29,12 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local iconName = foundationModule.Enums.IconName
 local captureServiceStartUploadCoreScriptBypass = sharedFlagsModule.FFlagMyStatsMediaSelector and (captureService.PromptCaptureGalleryPermissionAsync and game:GetEngineFeature("CaptureServiceStartUploadCoreScriptBypass"))
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
-local fFlagBuildRehydrateOnPublishModule = require(buildExperience.Flags.FFlagBuildRehydrateOnPublish)
 local privacyType = universeConfigurationModule.PrivacyType
 
 return function(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), localizationModule (ref), useOpenWebView (ref), useArchiveGameFlowModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), useExperienceShareFlowModule (ref), universeConfigurationModule (ref), experienceGuidelinesModule (ref), signalsReactModule (ref), gameConfigurationLabelsModule (ref), privacyType (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), fFlagBuildRehydrateOnPublishModule (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), captureServiceStartUploadCoreScriptBypass (ref), iconName (ref), getPrivatePlaytestersStore (ref), signalsModule (ref), view (ref), gameConfigurationListModule (ref), buildMaturityBannerModule (ref), text (ref), archiveGameDialogModule (ref), experienceShareOverlaysModule (ref)
-	local GAME_CONFIGURATION_ACCESS, GAME_CONFIGURATION_ACCESS_AND_SHARING, GAME_CONFIGURATION_ACCESS_BODY, GAME_CONFIGURATION_ARCHIVE_GAME, GAME_CONFIGURATION_AUDIENCE, GAME_CONFIGURATION_CONTENT_RATING, GAME_CONFIGURATION_CREATOR_HUB, GAME_CONFIGURATION_CREATOR_HUB_DESCRIPTION, GAME_CONFIGURATION_AUDIENCE_FRIENDS_ONLY, GAME_CONFIGURATION_GAME_DETAILS, GAME_CONFIGURATION_GAME_DETAILS_BODY, GAME_CONFIGURATION_ICON_AND_THUMBNAILS, GAME_CONFIGURATION_LOADING, GAME_CONFIGURATION_AUDIENCE_PRIVATE, PRIVATE_INVITES_ROW_DESCRIPTION, PRIVATE_INVITES_ROW_LOAD_ERROR, PRIVATE_INVITES_ROW_TITLE, PRIVATE_INVITES_ROW_TITLE_EMPTY, PRIVATE_INVITES_SHARE_LINK, GAME_CONFIGURATION_AUDIENCE_PUBLIC, GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER, GAME_CONFIGURATION_TITLE_AND_DESCRIPTION, GAME_CONFIGURATION_AUDIENCE_UNKNOWN
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), localizationModule (ref), useOpenWebView (ref), useArchiveGameFlowModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), useExperienceShareFlowModule (ref), universeConfigurationModule (ref), experienceGuidelinesModule (ref), signalsReactModule (ref), gameConfigurationLabelsModule (ref), privacyType (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), captureServiceStartUploadCoreScriptBypass (ref), iconName (ref), getPrivatePlaytestersStore (ref), signalsModule (ref), view (ref), gameConfigurationListModule (ref), buildMaturityBannerModule (ref), text (ref), archiveGameDialogModule (ref), experienceShareOverlaysModule (ref)
 	local testId = p1.testId or "game-configuration-content"
-	local var1 = if fFlagBuildLocalization then useLocalization({
+	local var1 = useLocalization({
 		access = localizationStringsModule.GAME_CONFIGURATION_ACCESS,
 		accessAndSharing = localizationStringsModule.GAME_CONFIGURATION_ACCESS_AND_SHARING,
 		accessBody = localizationStringsModule.GAME_CONFIGURATION_ACCESS_BODY,
@@ -61,81 +58,31 @@ return function(p1)
 		questionnaireRequiredBanner = localizationStringsModule.GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER,
 		titleAndDescription = localizationStringsModule.GAME_CONFIGURATION_TITLE_AND_DESCRIPTION,
 		unknownAudience = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_UNKNOWN
-	}) else nil
-	local var2 = if fFlagBuildLocalization then reactModule.useContext(localizationModule.LocalizationRoactContext) else nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	
-	if fFlagBuildLocalization then
-		GAME_CONFIGURATION_ACCESS = var1.access
-		GAME_CONFIGURATION_ACCESS_AND_SHARING = var1.accessAndSharing
-		GAME_CONFIGURATION_ACCESS_BODY = var1.accessBody
-		GAME_CONFIGURATION_ARCHIVE_GAME = var1.archiveGame
-		GAME_CONFIGURATION_AUDIENCE = var1.audience
-		GAME_CONFIGURATION_CONTENT_RATING = var1.contentRating
-		GAME_CONFIGURATION_CREATOR_HUB = var1.creatorHub
-		GAME_CONFIGURATION_CREATOR_HUB_DESCRIPTION = var1.creatorHubDescription
-		GAME_CONFIGURATION_AUDIENCE_FRIENDS_ONLY = var1.friendsOnlyAudience
-		GAME_CONFIGURATION_GAME_DETAILS = var1.gameDetails
-		GAME_CONFIGURATION_GAME_DETAILS_BODY = var1.gameDetailsBody
-		GAME_CONFIGURATION_ICON_AND_THUMBNAILS = var1.iconAndThumbnails
-		GAME_CONFIGURATION_LOADING = var1.loading
-		GAME_CONFIGURATION_AUDIENCE_PRIVATE = var1.privateAudience
-		PRIVATE_INVITES_ROW_DESCRIPTION = var1.privateInvitesRowDescription
-		PRIVATE_INVITES_ROW_LOAD_ERROR = var1.privateInvitesRowLoadError
-		PRIVATE_INVITES_ROW_TITLE = var1.privateInvitesRowTitle
-		PRIVATE_INVITES_ROW_TITLE_EMPTY = var1.privateInvitesRowTitleEmpty
-		PRIVATE_INVITES_SHARE_LINK = var1.privateInvitesShareLink
-		GAME_CONFIGURATION_AUDIENCE_PUBLIC = var1.publicAudience
-		GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER = var1.questionnaireRequiredBanner
-		GAME_CONFIGURATION_TITLE_AND_DESCRIPTION = var1.titleAndDescription
-		GAME_CONFIGURATION_AUDIENCE_UNKNOWN = var1.unknownAudience
-	else
-		GAME_CONFIGURATION_ACCESS = localizationStringsModule.GAME_CONFIGURATION_ACCESS
-		GAME_CONFIGURATION_ACCESS_AND_SHARING = localizationStringsModule.GAME_CONFIGURATION_ACCESS_AND_SHARING
-		GAME_CONFIGURATION_ACCESS_BODY = localizationStringsModule.GAME_CONFIGURATION_ACCESS_BODY
-		GAME_CONFIGURATION_ARCHIVE_GAME = localizationStringsModule.GAME_CONFIGURATION_ARCHIVE_GAME
-		GAME_CONFIGURATION_AUDIENCE = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE
-		GAME_CONFIGURATION_CONTENT_RATING = localizationStringsModule.GAME_CONFIGURATION_CONTENT_RATING
-		GAME_CONFIGURATION_CREATOR_HUB = localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB
-		GAME_CONFIGURATION_CREATOR_HUB_DESCRIPTION = localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB_DESCRIPTION
-		GAME_CONFIGURATION_AUDIENCE_FRIENDS_ONLY = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_FRIENDS_ONLY
-		GAME_CONFIGURATION_GAME_DETAILS = localizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS
-		GAME_CONFIGURATION_GAME_DETAILS_BODY = localizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS_BODY
-		GAME_CONFIGURATION_ICON_AND_THUMBNAILS = localizationStringsModule.GAME_CONFIGURATION_ICON_AND_THUMBNAILS
-		GAME_CONFIGURATION_LOADING = localizationStringsModule.GAME_CONFIGURATION_LOADING
-		GAME_CONFIGURATION_AUDIENCE_PRIVATE = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_PRIVATE
-		PRIVATE_INVITES_ROW_DESCRIPTION = localizationStringsModule.PRIVATE_INVITES_ROW_DESCRIPTION
-		PRIVATE_INVITES_ROW_LOAD_ERROR = localizationStringsModule.PRIVATE_INVITES_ROW_LOAD_ERROR
-		PRIVATE_INVITES_ROW_TITLE = localizationStringsModule.PRIVATE_INVITES_ROW_TITLE
-		PRIVATE_INVITES_ROW_TITLE_EMPTY = localizationStringsModule.PRIVATE_INVITES_ROW_TITLE_EMPTY
-		PRIVATE_INVITES_SHARE_LINK = localizationStringsModule.PRIVATE_INVITES_SHARE_LINK
-		GAME_CONFIGURATION_AUDIENCE_PUBLIC = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_PUBLIC
-		GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER = localizationStringsModule.GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER
-		GAME_CONFIGURATION_TITLE_AND_DESCRIPTION = localizationStringsModule.GAME_CONFIGURATION_TITLE_AND_DESCRIPTION
-		GAME_CONFIGURATION_AUDIENCE_UNKNOWN = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_UNKNOWN
-	end
+	})
+	local var2 = reactModule.useContext(localizationModule.LocalizationRoactContext)
+	local access = var1.access
+	local accessAndSharing = var1.accessAndSharing
+	local accessBody = var1.accessBody
+	local archiveGame = var1.archiveGame
+	local audience = var1.audience
+	local contentRating = var1.contentRating
+	local creatorHub = var1.creatorHub
+	local creatorHubDescription = var1.creatorHubDescription
+	local friendsOnlyAudience = var1.friendsOnlyAudience
+	local gameDetails = var1.gameDetails
+	local gameDetailsBody = var1.gameDetailsBody
+	local iconAndThumbnails = var1.iconAndThumbnails
+	local loading = var1.loading
+	local privateAudience = var1.privateAudience
+	local privateInvitesRowDescription = var1.privateInvitesRowDescription
+	local privateInvitesRowLoadError = var1.privateInvitesRowLoadError
+	local privateInvitesRowTitle = var1.privateInvitesRowTitle
+	local privateInvitesRowTitleEmpty = var1.privateInvitesRowTitleEmpty
+	local privateInvitesShareLink = var1.privateInvitesShareLink
+	local publicAudience = var1.publicAudience
+	local questionnaireRequiredBanner = var1.questionnaireRequiredBanner
+	local titleAndDescription = var1.titleAndDescription
+	local unknownAudience = var1.unknownAudience
 	local var3 = useOpenWebView()
 	local var4 = useArchiveGameFlowModule()
 	local var5 = if fFlagBuildExperiencePrivateInvitesModule then useExperienceShareFlowModule(p1.universeId, p1.placeId) else nil
@@ -149,69 +96,58 @@ return function(p1)
 		return experienceGuidelinesModule.getExperienceGuidelinesStore().getAndFetchDetailedGuidelines(p1.universeId)
 	end, { p1.universeId }).data)
 	local var9 = if var7 then gameConfigurationLabelsModule.getAudience(var7) else nil
-	local _ = nil
-	local var10 = if var7 == nil then GAME_CONFIGURATION_LOADING elseif fFlagBuildLocalization then if var9 == privacyType.Private then GAME_CONFIGURATION_AUDIENCE_PRIVATE elseif var9 == privacyType.Public then GAME_CONFIGURATION_AUDIENCE_PUBLIC elseif var9 == privacyType.FriendsOnly then GAME_CONFIGURATION_AUDIENCE_FRIENDS_ONLY else gameConfigurationLabelsModule.getAudienceText(var7) or GAME_CONFIGURATION_AUDIENCE_UNKNOWN else gameConfigurationLabelsModule.getAudienceText(var7) or gameConfigurationLabelsModule.UNKNOWN_AUDIENCE_TEXT
+	local var10 = if var7 == nil then loading elseif var9 == privacyType.Private then privateAudience elseif var9 == privacyType.Public then publicAudience elseif var9 == privacyType.FriendsOnly then friendsOnlyAudience else gameConfigurationLabelsModule.getAudienceText(var7) or unknownAudience
 	local var11 = nil
-	local var12 = nil
-	local var13 = false
-	local var14 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+	local var12 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: universeActivationModule (copy), p1 (ref)
 		return universeActivationModule.getUniverseActivationStore().getAndFetchEligibility(p1.universeId)
 	end, { p1.universeId }).data)
-	local var15 = reactModule.useMemo(function()
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: contentMaturityUtilsModule (copy), p1 (ref)
 		return contentMaturityUtilsModule.isSealBroken(p1.universeId)
-	end, { var14, p1.universeId })
-	local var16 = reactModule.useMemo(function()
+	end, { var12, p1.universeId })
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: contentMaturityUtilsModule (copy), p1 (ref)
 		return contentMaturityUtilsModule.isContentUnrated(p1.universeId)
-	end, { var14, p1.universeId })
+	end, { var12, p1.universeId })
+	local var15 = if var12 then var12.provisionalRating else nil
+	local var16 = var14 and not var13
 	
-	if fFlagBuildRehydrateOnPublishModule then
-		var12 = if var14 then var14.provisionalRating else nil
-		var13 = var16 and not var15
+	if var13 and var14 then
+		var11 = questionnaireRequiredBanner
 	end
-	if var15 and var16 then
-		var11 = GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER
-	end
-	local var17 = gameConfigurationLabelsModule.getContentMaturityText(var8, var12, var13) or GAME_CONFIGURATION_LOADING
+	local var17 = gameConfigurationLabelsModule.getContentMaturityText(var8, var15, var16) or loading
 	local var18 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), gameConfigurationActionsModule (copy), p1 (ref), GAME_CONFIGURATION_CREATOR_HUB (write)
-		var3(gameConfigurationActionsModule.getCreatorHubConfigureUrl(p1.universeId), GAME_CONFIGURATION_CREATOR_HUB)
-	end, { GAME_CONFIGURATION_CREATOR_HUB, var3, p1.universeId })
+		-- upvalues: var3 (ref), gameConfigurationActionsModule (copy), p1 (ref), creatorHub (ref)
+		var3(gameConfigurationActionsModule.getCreatorHubConfigureUrl(p1.universeId), creatorHub)
+	end, { creatorHub, var3, p1.universeId })
 	local var19 = reactModule.useCallback(function()
-		-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), var3 (ref), gameConfigurationActionsModule (copy), p1 (ref), GAME_CONFIGURATION_CREATOR_HUB (write), refreshPublishEligibilityModule (copy)
-		if fFlagBuildRehydrateOnPublishModule then
-			var3(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p1.universeId), GAME_CONFIGURATION_CREATOR_HUB, function()
-				-- upvalues: refreshPublishEligibilityModule (copy), p1 (copy)
-				refreshPublishEligibilityModule(p1.universeId)
-			end)
-			
-			return
-		end
-		var3(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p1.universeId), GAME_CONFIGURATION_CREATOR_HUB)
-	end, { GAME_CONFIGURATION_CREATOR_HUB, var3, p1.universeId })
+		-- upvalues: var3 (ref), gameConfigurationActionsModule (copy), p1 (ref), creatorHub (ref), refreshPublishEligibilityModule (copy)
+		var3(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p1.universeId), creatorHub, function()
+			-- upvalues: refreshPublishEligibilityModule (copy), p1 (copy)
+			refreshPublishEligibilityModule(p1.universeId)
+		end)
+	end, { creatorHub, var3, p1.universeId })
 	local var20 = reactModule.useMemo(function()
-		-- upvalues: GAME_CONFIGURATION_ICON_AND_THUMBNAILS (write), captureServiceStartUploadCoreScriptBypass (copy), iconName (copy), p1 (ref), var18 (ref), GAME_CONFIGURATION_TITLE_AND_DESCRIPTION (write)
+		-- upvalues: iconAndThumbnails (ref), captureServiceStartUploadCoreScriptBypass (copy), iconName (copy), p1 (ref), var18 (ref), titleAndDescription (ref)
 		return {
 			{
 				id = "icon-thumbnails",
-				title = GAME_CONFIGURATION_ICON_AND_THUMBNAILS,
+				title = iconAndThumbnails,
 				trailingIcon = if captureServiceStartUploadCoreScriptBypass then nil else iconName.ArrowUpRightFromSquare,
 				onActivated = if captureServiceStartUploadCoreScriptBypass then p1.onOpenMediaSelectionPage else var18
 			},
 			{
 				id = "title-description",
 				trailingIcon = nil,
-				title = GAME_CONFIGURATION_TITLE_AND_DESCRIPTION,
+				title = titleAndDescription,
 				description = p1.experienceName,
 				onActivated = p1.onOpenTitleDescriptionPage
 			}
 		}
 	end, {
 		var18, p1.experienceName, p1.onOpenMediaSelectionPage,
-		p1.onOpenTitleDescriptionPage, GAME_CONFIGURATION_ICON_AND_THUMBNAILS,
-		GAME_CONFIGURATION_TITLE_AND_DESCRIPTION
+		p1.onOpenTitleDescriptionPage, iconAndThumbnails, titleAndDescription
 	})
 	local onOpenPlaytestPicker = p1.onOpenPlaytestPicker
 	local onOpenPlaytestManagement = p1.onOpenPlaytestManagement
@@ -234,25 +170,27 @@ return function(p1)
 			return if var22 == nil then "NotReady" else var22.status(p2)
 		end)
 	end, { var22 }))
-	local MAX_INVITES = getPrivatePlaytestersStore(false).MAX_INVITES
 	local var25 = if var21 then if var24 == "Ready" then if var23 > 0 then {
 		id = "playtest",
 		trailingIcon = nil,
-		title = PRIVATE_INVITES_ROW_TITLE,
-		description = if var23 > 0 then if fFlagBuildLocalization then var2:Format(localizationStringsModule.PRIVATE_INVITES_SENT, { INVITED_COUNT = var23, MAX_INVITES = MAX_INVITES }) else localizationStringsModule.formatPrivateInvitesSent(var23, MAX_INVITES) else nil,
+		title = privateInvitesRowTitle,
+		description = if var23 > 0 then var2:Format(localizationStringsModule.PRIVATE_INVITES_SENT, {
+			INVITED_COUNT = var23,
+			MAX_INVITES = getPrivatePlaytestersStore(false).MAX_INVITES
+		}) else nil,
 		onActivated = onOpenPlaytestManagement
 	} else {
 		id = "playtest",
 		trailingIcon = nil,
-		title = PRIVATE_INVITES_ROW_TITLE_EMPTY,
-		description = PRIVATE_INVITES_ROW_DESCRIPTION,
+		title = privateInvitesRowTitleEmpty,
+		description = privateInvitesRowDescription,
 		onActivated = onOpenPlaytestPicker
 	} else {
 		id = "playtest",
 		trailingIcon = nil,
 		onActivated = nil,
-		title = PRIVATE_INVITES_ROW_TITLE,
-		description = if var24 == "Failed" then PRIVATE_INVITES_ROW_LOAD_ERROR else GAME_CONFIGURATION_LOADING
+		title = privateInvitesRowTitle,
+		description = if var24 == "Failed" then privateInvitesRowLoadError else loading
 	} else nil
 	
 	return reactModule.createElement(view, {
@@ -262,8 +200,8 @@ return function(p1)
 	}, {
 		GameDetails = reactModule.createElement(gameConfigurationListModule, {
 			layoutOrder = 1,
-			title = GAME_CONFIGURATION_GAME_DETAILS,
-			body = GAME_CONFIGURATION_GAME_DETAILS_BODY,
+			title = gameDetails,
+			body = gameDetailsBody,
 			rows = var20,
 			testId = `{testId}-game-details`
 		}),
@@ -273,15 +211,15 @@ return function(p1)
 		}, {
 			Configuration = reactModule.createElement(gameConfigurationListModule, {
 				layoutOrder = 1,
-				title = if var21 then GAME_CONFIGURATION_ACCESS_AND_SHARING else GAME_CONFIGURATION_ACCESS,
-				body = GAME_CONFIGURATION_ACCESS_BODY,
+				title = if var21 then accessAndSharing else access,
+				body = accessBody,
 				rows = reactModule.useMemo(function()
-					-- upvalues: GAME_CONFIGURATION_AUDIENCE (write), var10 (write), p1 (ref), var25 (write), PRIVATE_INVITES_SHARE_LINK (write), var6 (ref), GAME_CONFIGURATION_CONTENT_RATING (write), var17 (ref), iconName (copy), var19 (ref)
+					-- upvalues: audience (ref), var10 (write), p1 (ref), var25 (write), privateInvitesShareLink (ref), var6 (ref), contentRating (ref), var17 (ref), iconName (copy), var19 (ref)
 					local list = {
 						{
 							id = "audience",
 							trailingIcon = nil,
-							title = GAME_CONFIGURATION_AUDIENCE,
+							title = audience,
 							description = var10,
 							onActivated = p1.onOpenAudiencePage
 						}
@@ -292,13 +230,13 @@ return function(p1)
 						table.insert(list, {
 							id = "playtest-share-link",
 							trailingIcon = nil,
-							title = PRIVATE_INVITES_SHARE_LINK,
+							title = privateInvitesShareLink,
 							onActivated = var6
 						})
 					end
 					table.insert(list, {
 						id = "content-rating",
-						title = GAME_CONFIGURATION_CONTENT_RATING,
+						title = contentRating,
 						description = var17,
 						trailingIcon = iconName.ArrowUpRightFromSquare,
 						onActivated = var19
@@ -306,9 +244,8 @@ return function(p1)
 					
 					return list
 				end, {
-					var10, var17, var19, var25, var6, p1.onOpenAudiencePage,
-					GAME_CONFIGURATION_AUDIENCE, GAME_CONFIGURATION_CONTENT_RATING,
-					PRIVATE_INVITES_SHARE_LINK
+					var10, var17, var19, var25, var6, p1.onOpenAudiencePage, audience,
+					contentRating, privateInvitesShareLink
 				}),
 				testId = `{testId}-access`
 			}),
@@ -316,23 +253,19 @@ return function(p1)
 		}),
 		CreatorHub = reactModule.createElement(gameConfigurationListModule, {
 			layoutOrder = 3,
-			title = GAME_CONFIGURATION_CREATOR_HUB,
+			title = creatorHub,
 			rows = reactModule.useMemo(function()
-				-- upvalues: GAME_CONFIGURATION_CREATOR_HUB (write), GAME_CONFIGURATION_CREATOR_HUB_DESCRIPTION (write), iconName (copy), var18 (ref)
+				-- upvalues: creatorHub (ref), creatorHubDescription (ref), iconName (copy), var18 (ref)
 				return {
 					{
 						id = "creator-hub",
-						title = GAME_CONFIGURATION_CREATOR_HUB,
-						description = GAME_CONFIGURATION_CREATOR_HUB_DESCRIPTION,
+						title = creatorHub,
+						description = creatorHubDescription,
 						trailingIcon = iconName.ArrowUpRightFromSquare,
 						onActivated = var18
 					}
 				}
-			end, {
-				GAME_CONFIGURATION_CREATOR_HUB,
-				GAME_CONFIGURATION_CREATOR_HUB_DESCRIPTION,
-				var18
-			}),
+			end, { creatorHub, creatorHubDescription, var18 }),
 			testId = `{testId}-creator-hub`
 		}),
 		ArchiveGame = reactModule.createElement(view, {
@@ -348,7 +281,7 @@ return function(p1)
 			Label = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "fill auto-y text-title-medium text-align-x-left content-default",
-				Text = GAME_CONFIGURATION_ARCHIVE_GAME
+				Text = archiveGame
 			})
 		}),
 		ArchiveDialog = reactModule.createElement(archiveGameDialogModule, {

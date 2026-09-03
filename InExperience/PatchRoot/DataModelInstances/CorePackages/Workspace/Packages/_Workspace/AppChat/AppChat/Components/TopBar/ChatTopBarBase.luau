@@ -1,6 +1,5 @@
 ﻿local appChat = script:FindFirstAncestor("AppChat")
 local parent = appChat.Parent
-local fFlagAppChatTopBarConfigDrivenModule = require(appChat.Flags.FFlagAppChatTopBarConfigDriven)
 local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
 local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
 local createBackFuncModule = require(script.Parent.createBackFunc)
@@ -23,10 +22,7 @@ local function noOp()
 end
 
 return function(p1)
-	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), reactModule (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), getTopBarStoreModule (ref), useSignalState (ref), fFlagAppIaScrollAway (ref), appHeaderBarModule (ref), useLocalization (ref), useStyle (ref), useTokens (ref), noOp (ref), createBackFuncModule (ref), appNavBarModule (ref), visibilityControl (ref), foundationModule (ref), headerBar (ref)
-	if not fFlagAppChatTopBarConfigDrivenModule() then
-		return nil
-	end
+	-- upvalues: reactModule (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), getTopBarStoreModule (ref), useSignalState (ref), fFlagAppIaScrollAway (ref), appHeaderBarModule (ref), useLocalization (ref), useStyle (ref), useTokens (ref), noOp (ref), createBackFuncModule (ref), appNavBarModule (ref), visibilityControl (ref), foundationModule (ref), headerBar (ref)
 	reactModule.useEffect(function()
 		-- upvalues: fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy)
 		if fFlagAppChatPerfTrackingModule then

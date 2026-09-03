@@ -2616,6 +2616,7 @@ Feature.Catalog.Label.Torso,
 Feature.Catalog.Label.TotalItemsParenthesis,合計（{itemCount}アイテム）
 Feature.Catalog.Label.TotalUnformatted,合計
 Feature.Catalog.Label.Tradable,取引可能
+Feature.Catalog.Label.Trending,人気急上昇
 Feature.Catalog.Label.TryOns,試着
 Feature.Catalog.Label.TryOnsMultiple,試着 ({numItems})
 Feature.Catalog.Label.Unlimited,無制限
@@ -3217,6 +3218,8 @@ Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,選択済みの友達（{s
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,興味なし
+Feature.GameDetails.Action.PauseVideo,ビデオを一時停止
+Feature.GameDetails.Action.PlayVideo,ビデオを再生
 Feature.GameDetails.Action.Report,
 Feature.GameDetails.Action.ReportAd,
 Feature.GameDetails.Action.Undo,
@@ -3638,7 +3641,6 @@ Feature.Profile.Action.AboutThisProfile,このプロフィールについて
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,友達を承認する
 Feature.Profile.Action.Add,
-Feature.Profile.Action.AddNickname,名前を追加
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,プロフィールのリンクをコピー
 Feature.Profile.Action.EditAppearance,外見を編集
@@ -3651,17 +3653,13 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,プロフィールを共有
 Feature.Profile.Action.ShareProfileLink,プロフィールのリンクを共有
-Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
 Feature.Profile.Action.UserBlocked,ユーザーがブロックされています
 Feature.Profile.Action.ViewFullProfile,プロフィール全体を表示
 Feature.Profile.Action.ViewProfile,プロフィールを表示
 Feature.Profile.Description.AboutModalCaption,みんなにあなたのことを知ってもらいましょう。安全を心がけて、詳しい個人情報を公開しないでください。
-Feature.Profile.Description.EnterNicknameTextbox,ニックネームを入力する
 Feature.Profile.Description.InspectAndBuy,クリックしてルックを確認し、購入しましょう。
-Feature.Profile.Description.NicknamePrivacy,{displayName} さんにしか表示されません。
-Feature.Profile.Description.NicknamePrivacyNoDisplayName,このユーザーにしか表示されません。
 Feature.Profile.Description.QrCodeDescription,QRコードをスキャンしてもらって、Robloxでつながろう。年齢確認済みの13歳以上のユーザーがQRコードの直接スキャンでつながった場合、「信頼できる友達」として追加されます。
 Feature.Profile.Description.QrCodeDescription.FriendsRename,他のユーザーにQRコードをスキャンしてもらって、Robloxでつながろう。年齢確認済みの13歳以上のユーザーはQRコードの直接スキャンでつながった場合、信頼する友達として追加されます。
 Feature.Profile.Description.QrCodeScanning,他の方にデバイスのカメラでRobloxのQRコードをスキャンしてもらうと、すぐに友達として追加できます！
@@ -3669,11 +3667,8 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,カスタム名を�
 Feature.Profile.Description.RecognizeFriendsByCustomName,カスタム名を設定すると友達が分かりやすく表示されるようになります。連絡先やカスタム名からインポートされた名前はあなたにしか表示されません。
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,QRコードのスキャンで知り合いに追加してもらいましょう。
-Feature.Profile.Description.SelectNicknameDropdown,名前を選択
 Feature.Profile.Description.SetCustomName,"<font weight=""medium"">{displayName}</font> のカスタム名を設定。"
 Feature.Profile.Description.SetCustomNameNoDisplayName,カスタム名を設定。
-Feature.Profile.Description.SetNicknamePrompt,みんなに分かるように {displayName} に名前を追加しましょう。
-Feature.Profile.Description.SetNicknamePromptNoDisplayName,このユーザーに分かるように名前を追加しましょう。
 Feature.Profile.Description.SocialNetworksCaptionEveryone,現在、全員に表示中。
 Feature.Profile.Description.SocialNetworksCaptionFollowers,現在、友達とフォロー中のユーザー、フォロワーに表示中。
 Feature.Profile.Description.SocialNetworksCaptionFollowing,現在、友達とフォロー中のユーザーだけに表示中。
@@ -3694,7 +3689,6 @@ Feature.Profile.Heading.DisplayNameUpdated,表示名が更新されました
 Feature.Profile.Heading.EditAgedUpDisplayName,名前を編集
 Feature.Profile.Heading.EditDisplayName,表示名を編集
 Feature.Profile.Heading.InsufficientFunds,資金が足りません
-Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileFrame,プロフィールフレーム
 Feature.Profile.Heading.ProfilePictureSaved,プロフィール写真が正常に保存されました
 Feature.Profile.Heading.ProfileQRCode,
@@ -3714,7 +3708,6 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"名前は7日に1回しか�
 Feature.Profile.Label.AgedUpDisplayNameTooShort,
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,カスタム名
-Feature.Profile.Label.CustomNicknameDropdown,カスタム名を設定
 Feature.Profile.Label.CustomizeName,名前をカスタマイズ
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,これはRoblox（ロブロックス）で他のユーザーに表示されるメインの公開名です。
@@ -3722,12 +3715,6 @@ Feature.Profile.Label.DisplayNameFailed,表示名は保存できません。も�
 Feature.Profile.Label.DisplayNameModalCaption,表示名は7日に1回しか変更できません。
 Feature.Profile.Label.DisplayNameTooShort,表示名は少なくとも3文字以上にしてください。
 Feature.Profile.Label.EditBackground,
-Feature.Profile.Label.NicknameErrorMessageInvalid,名前が無効です。
-Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,名前に対応していない文字が含まれています。
-Feature.Profile.Label.NicknameErrorMessageModerated,名前がRobloxでは適切ではありません。
-Feature.Profile.Label.NicknameErrorMessageThrottled,今日、名前がすでに変更済みです。
-Feature.Profile.Label.NicknameErrorMessageTooLong,名前は20文字以内にしてください。
-Feature.Profile.Label.NicknameErrorMessageTooShort,名前は2文字以上にしてください。
 Feature.Profile.Label.NoBioYet,説明文がありません
 Feature.Profile.Label.NoPreviousName,古い名前がありません
 Feature.Profile.Label.NoSocialLink,まだSNSリンクがありません
@@ -3737,7 +3724,6 @@ Feature.Profile.Label.QRCodeFriendRequest,QRコードから送信されました
 Feature.Profile.Label.RecentAgedUpDisplayName,"最近、名前が変更されています。名前は7日ごとに1回しか変更できません。
 "
 Feature.Profile.Label.RecentDisplayName,最近、ディスプレイ名が変更されています。表示名は7日ごとに1回しか変更できません。
-Feature.Profile.Label.TimeToChangeNickname,{hours} 時間後に名前を変更できます。
 Feature.Profile.Label.UnableToJoin,参加できません
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b>さんは<b>{experienceName}</b>をプレイ中
 Feature.Profile.Label.UsernameDescription,これはRoblox上でのあなたの一意の名前です。ユーザーネームの変更には {icon}{price} の費用がかかります。
@@ -4224,7 +4210,6 @@ Feature.Squads.Label.FindExperiencesPlayTogether,一緒にプレイできるバ�
 Feature.Squads.Label.FriendJoinedYourParty,{combinedName}さんがパーティに参加しました
 Feature.Squads.Label.InviteConnectionsConfirmation,選択済みのつながりをグループに招待しますか？
 Feature.Squads.Label.InviteFriendsConfirmation,選択済みの友達をグループに招待しますか？
-Feature.Squads.Label.InviteToSquad,仲良しグループに招待
 Feature.Squads.Label.InvitedToExperience,バーチャル空間に招待されました
 Feature.Squads.Label.JoinAnotherParty,パーティを切りかえ
 Feature.Squads.Label.JoinExperiencesTogether,一緒にバーチャル空間に参加
@@ -4531,6 +4516,7 @@ IAPExperience.PurchasePrompt.BuyRobuxAndSubscription,Robux購入とサブスク�
 IAPExperience.PurchasePrompt.Header.BuyAvatar,
 IAPExperience.PurchasePrompt.Header.BuyRobuxAndAvatar,Robuxとアバターを購入
 IAPExperience.PurchasePrompt.Label.BlackbirdDiscount,Plus特典（{discountPercentage}%オフ）
+IAPExperience.PurchasePrompt.Label.BlackbirdDiscountEligibleItems,Plus特典（対象アイテムが{discountPercentage}%オフ）
 IAPExperience.PurchasePrompt.Label.BlackbirdDiscountNoPercent,Plusの特典
 IAPExperience.PurchasePrompt.Label.BlackbirdSummary,Plusで{robuxIcon}{savingsAmount}お得に
 IAPExperience.PurchasePrompt.Label.GenericDiscount,割引（{discountPercentage}%オフ）
@@ -4878,6 +4864,7 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,このバーチャル空間の向上
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,このバーチャル空間の向上のためクリエーターに協力する
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,新しく製品を購入する前にバーチャル空間に参加して購入済みアイテムを引き換えましょう。
+Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,購入したものを受け取るには参加
 Roblox.ReferralRewards.AdditionalCreatorTerms,その他のクリエーター規約
 Roblox.ReferralRewards.Expires,
 Roblox.ReferralRewards.ReferralProgramTerms,紹介プログラム規約

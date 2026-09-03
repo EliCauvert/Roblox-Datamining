@@ -12,6 +12,7 @@ local fFlagSduiPropParsersShouldHandleTokens = require(parent.SharedFlags).FFlag
 local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAppSduiColorPropMigration
 local fFlagSduiFocusNavActionsStructured = require(parent.SharedFlags).FFlagSduiFocusNavActionsStructured
 local fFlagSduiUnwrapStructPropEnvelope = require(parent.SharedFlags).FFlagSduiUnwrapStructPropEnvelope
+local fFlagSduiParseProtoGradientFields = require(parent.SharedFlags).FFlagSduiParseProtoGradientFields
 
 local function applyTokenScaling(p1, p2)
 	return p1 * (if p2 then p2.Config.UI.Scale else 1)
@@ -23,10 +24,10 @@ local function resolveTokenValueToNumber(p1, p2)
 	local var2 = if var1 then string.sub(p2, 2) else p2
 	local var3 = p1
 	local var4 = splitDottedPathModule(var2)
-	local var22Count = #var4
+	local var27Count = #var4
 	
 	for i, v in var4 do
-		if i ~= var22Count and typeof(var3[v]) ~= "table" then
+		if i ~= var27Count and typeof(var3[v]) ~= "table" then
 			error(`Token path {var2} invalid`)
 		end
 		var3 = var3[v]
@@ -262,6 +263,51 @@ unwrapStruct = function(p6)
 	return t
 end
 
+local function parseArrayOfStruct(p7)
+	-- upvalues: parseStruct (ref)
+	if typeof(p7) ~= "table" then
+		return p7
+	end
+	local t = {}
+	
+	for i, v in p7 do
+		t[i] = parseStruct(v)
+	end
+	return t
+end
+
+local function parseToString(value)
+	return if value == nil then nil else tostring(value)
+end
+
+local function parseStringArray(p8)
+	return if typeof(p8) == "table" then p8.items or p8 else nil
+end
+
+local function parseColor3(p8)
+	if typeof(p8) == "Color3" then
+		return p8
+	elseif typeof(p8) == "string" then
+		local ok, status = pcall(function()
+			-- upvalues: p8 (ref)
+			return Color3.fromHex(p8)
+		end)
+		
+		return if ok then status else nil
+	elseif typeof(p8) == "table" and typeof(p8.Color3) == "Color3" then
+		return p8.Color3
+	end
+	error(`Could not resolve Color3 from input: {p8}`)
+end
+
+local t = {
+	startOpacity = 0,
+	endOpacity = 1,
+	degree = 270,
+	startColor = Color3.new(0, 0, 0),
+	endColor = Color3.new(0, 0, 0)
+}
+
 return {
 	parseUDim = var6,
 	parseUDim2 = var5,
@@ -271,38 +317,39 @@ return {
 	parseUiScaledUDim = parseUiScaledUDim,
 	parseUiScaledUDim2 = parseUiScaledUDim2,
 	parseStruct = parseStruct,
-	parseArrayOfStruct = function(p7)
-		-- upvalues: parseStruct (ref)
-		if typeof(p7) ~= "table" then
-			return p7
-		end
-		local t = {}
+	parseArrayOfStruct = parseArrayOfStruct,
+	parseStringArray = parseStringArray,
+	parseToString = if fFlagSduiStringPropToString then parseToString else nil,
+	parseColor3 = if fFlagLuaAppSduiColorPropMigration then parseColor3 else nil,
+	parseGradient = if fFlagSduiParseProtoGradientFields then function(p8)
+		-- upvalues: parseStruct (ref), t (ref), parseColor3 (ref)
+		local var9 = parseStruct(p8)
 		
-		for i, v in p7 do
-			t[i] = parseStruct(v)
+		if typeof(var9) ~= "table" then
+			error(`Could not resolve gradient from input: {p8}`)
 		end
-		return t
-	end,
-	parseStringArray = function(p8)
-		return if typeof(p8) == "table" then p8.items or p8 else nil
-	end,
-	parseToString = if fFlagSduiStringPropToString then function(value)
-		return if value == nil then nil else tostring(value)
-	end else nil,
-	parseColor3 = if fFlagLuaAppSduiColorPropMigration then function(p8)
-		if typeof(p8) == "Color3" then
-			return p8
-		elseif typeof(p8) == "string" then
-			local ok, status = pcall(function()
-				-- upvalues: p8 (ref)
-				return Color3.fromHex(p8)
-			end)
-			
-			return if ok then status else nil
-		elseif typeof(p8) == "table" and typeof(p8.Color3) == "Color3" then
-			return p8.Color3
+		local var10 = if var9.startColor == nil then t.startColor else parseColor3(var9.startColor)
+		local var11 = if var9.endColor == nil then t.endColor else parseColor3(var9.endColor)
+		
+		if var10 == nil or var11 == nil then
+			error(`Could not resolve gradient colors from input: {p8}`)
 		end
-		error(`Could not resolve Color3 from input: {p8}`)
+		if var9.startOpacity ~= nil and typeof(var9.startOpacity) ~= "number" then
+			error(`Could not resolve gradient startOpacity from input: {p8}`)
+		end
+		if var9.endOpacity ~= nil and typeof(var9.endOpacity) ~= "number" then
+			error(`Could not resolve gradient endOpacity from input: {p8}`)
+		end
+		if var9.degree ~= nil and typeof(var9.degree) ~= "number" then
+			error(`Could not resolve gradient degree from input: {p8}`)
+		end
+		return {
+			startColor = var10,
+			endColor = var11,
+			startOpacity = if var9.startOpacity == nil then t.startOpacity else var9.startOpacity,
+			endOpacity = if var9.endOpacity == nil then t.endOpacity else var9.endOpacity,
+			degree = if var9.degree == nil then t.degree else var9.degree
+		}
 	end else nil,
 	parseColorPropLegacy = if fFlagLuaAppSduiColorPropMigration then function(p8)
 		return if typeof(p8) == "string" then Color3.fromHex(p8) else p8

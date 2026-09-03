@@ -6,7 +6,6 @@ local productInfoReceivedModule = require(purchasePrompt.Actions.ProductInfoRece
 local bundleProductInfoReceivedModule = require(purchasePrompt.Actions.BundleProductInfoReceived)
 local itemTypeModule = require(purchasePrompt.Enums.ItemType)
 local getPreviewImageUrlModule = require(purchasePrompt.getPreviewImageUrl)
-local fFlagEnableUnifiedProductPurchaseFlow = require(purchasePrompt.Parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(purchasePrompt.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local fFlagUnifiedPurchaseOptimizeTTIMarketplace = require(purchasePrompt.Parent.SharedFlags).FFlagUnifiedPurchaseOptimizeTTIMarketplace
 local fFlagAXFixMISUpsellDiscountSummary = require(purchasePrompt.Parent.SharedFlags).FFlagAXFixMISUpsellDiscountSummary
@@ -19,7 +18,7 @@ local fFlagPurchasePromptFetchCartPricingForLooks = require(purchasePrompt.Paren
 
 return rodux.createReducer({}, {
 	[productInfoReceivedModule.name] = function(_, p1)
-		-- upvalues: fFlagUnifiedPurchaseOptimizeTTIMarketplace (ref), constantsModule (ref), getFFlagTranslateDevProductsModule (ref), normalizePriceDiscountDetailsModule (ref), fFlagAXFixMISUpsellDiscountSummary (ref), getPreviewImageUrlModule (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), productTypeEnum (ref)
+		-- upvalues: fFlagUnifiedPurchaseOptimizeTTIMarketplace (ref), constantsModule (ref), getFFlagTranslateDevProductsModule (ref), normalizePriceDiscountDetailsModule (ref), fFlagAXFixMISUpsellDiscountSummary (ref), getPreviewImageUrlModule (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), productTypeEnum (ref)
 		local productInfo = p1.productInfo
 		local var1 = ""
 		local var2 = ""
@@ -51,7 +50,7 @@ return rodux.createReducer({}, {
 			collectibleItemIds = if fFlagPurchasePromptFetchCartPricingForLooks then productInfo.CollectibleItemIds else nil,
 			cartPricingRequestedItems = if fFlagPurchasePromptFetchCartPricingForLooks then productInfo.CartPricingRequestedItems else nil,
 			collectibleProductId = var2,
-			productTargetId = if fFlagEnableUnifiedProductPurchaseFlow and productInfo.TargetId then productInfo.TargetId else nil,
+			productTargetId = if productInfo.TargetId then productInfo.TargetId else nil,
 			displayPrice = if fFlagEnableUnifiedPurchaseFlowForDevSubs and productInfo.ProductType == productTypeEnum.DeveloperSubscription then productInfo.DisplayPrice else nil
 		}
 	end,

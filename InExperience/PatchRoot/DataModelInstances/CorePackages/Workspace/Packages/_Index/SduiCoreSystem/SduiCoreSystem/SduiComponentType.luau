@@ -74,6 +74,7 @@
 	SingleItemCollection = "SingleItemCollection",
 	SlotOverlay = "SlotOverlay",
 	SongTile = "SongTile",
+	SponsoredTwoByOneTile = "SponsoredTwoByOneTile",
 	SubscriptionCell = "SubscriptionCell",
 	SystemBanner = "SystemBanner",
 	Text = "Text",

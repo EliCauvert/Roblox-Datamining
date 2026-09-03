@@ -7,7 +7,6 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local getSduiActionHandlerRegistry = sduiCoreSystemModule.getSduiActionHandlerRegistry
 local fFlagSduiActionsUpdateFiresOwnTelemetry = require(parent.SharedFlags).FFlagSduiActionsUpdateFiresOwnTelemetry
-local fFlagSduiChartsSupport = require(parent.SharedFlags).FFlagSduiChartsSupport
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagSduiCommunitySectionSupport = require(parent.SharedFlags).FFlagSduiCommunitySectionSupport
 local fFlagSduiDevStoreSeeAllSupport = require(parent.SharedFlags).FFlagSduiDevStoreSeeAllSupport
@@ -18,9 +17,11 @@ local fFlagRobloxPlusFAEFreeTrial = require(parent.SharedFlags).FFlagRobloxPlusF
 local fFlagSduiChartsSortDetailGenreFilter = require(parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
 local fFlagSduiAiOverviewEnabled = require(parent.SharedFlags).FFlagSduiAiOverviewEnabled
 local fFlagSduiPinShortcutAction = require(parent.SharedFlags).FFlagSduiPinShortcutAction
+local fFlagLuaAppSduiHomePageSupport = require(parent.SharedFlags).FFlagLuaAppSduiHomePageSupport
+local fFlagLuaAppSduiGameTileFeedback = require(parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 
 return function()
-	-- upvalues: sduiActionType (ref), serverDrivenUi (ref), fFlagRobloxPlusFAEFreeTrial (ref), fFlagSduiActionsUpdateFiresOwnTelemetry (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiOpenSearchResultsTabAction (ref), fFlagLuaAppSduiOpenSearchResultsWithQueryAction (ref), fFlagLuaAppUnlockUpsellSupport (ref), fFlagSduiAiOverviewEnabled (ref), fFlagLuaAppSduiUpdateUserSettingsAction (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiLaunchExperienceAction (ref), fFlagSduiChartsSupport (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref), fFlagSduiPinShortcutAction (ref), fFlagSduiCommunitySectionSupport (ref), getSduiActionHandlerRegistry (ref)
+	-- upvalues: sduiActionType (ref), serverDrivenUi (ref), fFlagRobloxPlusFAEFreeTrial (ref), fFlagSduiActionsUpdateFiresOwnTelemetry (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiOpenSearchResultsTabAction (ref), fFlagLuaAppSduiOpenSearchResultsWithQueryAction (ref), fFlagLuaAppUnlockUpsellSupport (ref), fFlagSduiAiOverviewEnabled (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagLuaAppSduiUpdateUserSettingsAction (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiLaunchExperienceAction (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagLuaAppSduiHomePageSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref), fFlagSduiPinShortcutAction (ref), fFlagSduiCommunitySectionSupport (ref), getSduiActionHandlerRegistry (ref)
 	getSduiActionHandlerRegistry().registerActionHandlerConfigs({
 		[sduiActionType.DismissDialog] = {
 			skipUnifiedLogging = false,
@@ -192,6 +193,13 @@ return function()
 				return require(serverDrivenUi.Actions.SduiOpenSponsoredTooltipAction)
 			end
 		},
+		[sduiActionType.SetGameTileNotInterested] = if fFlagLuaAppSduiGameTileFeedback then {
+			skipUnifiedLogging = true,
+			lazyHandler = function()
+				-- upvalues: serverDrivenUi (copy)
+				return require(serverDrivenUi.Actions.SduiSetGameTileNotInterestedAction)
+			end
+		} else nil,
 		[sduiActionType.OpenMarketplaceTryOn] = {
 			skipUnifiedLogging = false,
 			lazyHandler = function()
@@ -254,13 +262,13 @@ return function()
 				return require(serverDrivenUi.Actions.SduiLaunchExperienceAction)
 			end
 		} else nil,
-		[sduiActionType.OpenChartsSortDetail] = if fFlagSduiChartsSupport then {
+		[sduiActionType.OpenChartsSortDetail] = {
 			skipUnifiedLogging = false,
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiOpenChartsSortDetailAction)
 			end
-		} else nil,
+		},
 		[sduiActionType.OpenPurchasePrompt] = if fFlagSduiExperienceDetailsSupport or fFlagSduiDevStoreSeeAllSupport then {
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
@@ -280,13 +288,13 @@ return function()
 				return require(serverDrivenUi.Actions.SduiOpenSduiOverlayAction)
 			end
 		} else nil,
-		[sduiActionType.ApplyChartsFilter] = if fFlagSduiChartsSupport then {
+		[sduiActionType.ApplyChartsFilter] = {
 			skipUnifiedLogging = false,
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiApplyChartsFilterAction)
 			end
-		} else nil,
+		},
 		[sduiActionType.RefreshGamePasses] = if fFlagSduiExperienceDetailsSupport then {
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
@@ -327,6 +335,13 @@ return function()
 				return require(serverDrivenUi.Actions.SduiRefreshOmniRecommendationFeedItemAction)
 			end
 		},
+		[sduiActionType.RefreshHome] = if fFlagLuaAppSduiHomePageSupport then {
+			skipUnifiedLogging = false,
+			lazyHandler = function()
+				-- upvalues: serverDrivenUi (copy)
+				return require(serverDrivenUi.Actions.SduiRefreshHomeAction)
+			end
+		} else nil,
 		[sduiActionType.RefreshChartsSortDetail] = if fFlagSduiChartsSortDetailGenreFilter then {
 			skipUnifiedLogging = false,
 			lazyHandler = function()

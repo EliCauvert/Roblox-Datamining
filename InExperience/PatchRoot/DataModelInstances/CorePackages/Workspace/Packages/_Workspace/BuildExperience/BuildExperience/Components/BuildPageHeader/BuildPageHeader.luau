@@ -10,7 +10,6 @@ local UIBloxModule = require(parent.UIBlox)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildAddSearchIconAndMoveSearchbarModule = require(buildExperience.Flags.FFlagBuildAddSearchIconAndMoveSearchbar)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagEnableHomeRobloxLogo = sharedFlagsModule.FFlagEnableHomeRobloxLogo
 local headerBar = UIBloxModule.App.Bar.HeaderBar
 local button = foundationModule.Button
@@ -31,10 +30,10 @@ local _ = require(buildExperience.Stores.GetSearchQueryStore.createSearchQuerySt
 local buildSearchBarWidth = game:DefineFastInt("BuildSearchBarWidth", 400)
 
 local function renderFlyoutLeftHeader(p1)
-	-- upvalues: reactModule (ref), flyoutLeftHeader (ref), fFlagBuildLocalization (ref), localizationStringsModule (ref), fFlagEnableHomeRobloxLogo (ref), flyoutSidePanelIXP (ref)
+	-- upvalues: reactModule (ref), flyoutLeftHeader (ref), fFlagEnableHomeRobloxLogo (ref), flyoutSidePanelIXP (ref)
 	return reactModule.createElement(flyoutLeftHeader, {
 		isRobloxLogoEnabled = false,
-		titleText = if fFlagBuildLocalization then p1 else localizationStringsModule.BUILD_HEADER_TITLE,
+		titleText = p1,
 		isFlyoutEntrypointEnabled = if fFlagEnableHomeRobloxLogo then flyoutSidePanelIXP.isFlyoutSidePanelEnabled() else nil,
 		isAlternateEntryPointEnabled = flyoutSidePanelIXP.isAlternateEntryPointEnabled()
 	})
@@ -123,30 +122,30 @@ local function HeaderCenter(p1)
 end
 
 return function(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), flyoutSidePanelIXP (ref), reactModule (ref), fFlagBuildAddSearchIconAndMoveSearchbarModule (ref), displayModule (ref), signalsReactModule (ref), getSearchQueryStoreModule (ref), HeaderCenter (ref), creatorAgentChatModule (ref), AgentSpec (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), renderEmptyRight (ref), headerBar (ref), renderFlyoutLeftHeader (ref), agentSpecDebugSheetModule (ref)
-	local var1 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({ title = localizationStringsModule.BUILD_HEADER_TITLE }) else nil).title else localizationStringsModule.BUILD_HEADER_TITLE
-	local var2 = flyoutSidePanelIXP.isFlyoutSidePanelEnabled()
-	local var3, var4 = reactModule.useState(false)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), flyoutSidePanelIXP (ref), reactModule (ref), fFlagBuildAddSearchIconAndMoveSearchbarModule (ref), displayModule (ref), signalsReactModule (ref), getSearchQueryStoreModule (ref), HeaderCenter (ref), creatorAgentChatModule (ref), AgentSpec (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), renderEmptyRight (ref), headerBar (ref), renderFlyoutLeftHeader (ref), agentSpecDebugSheetModule (ref)
+	local title = useLocalization({ title = localizationStringsModule.BUILD_HEADER_TITLE }).title
+	local var1 = flyoutSidePanelIXP.isFlyoutSidePanelEnabled()
+	local var2, var3 = reactModule.useState(false)
+	local var4 = false
 	local var5 = false
-	local var6 = false
 	local searchQueryStore = nil
 	
 	if fFlagBuildAddSearchIconAndMoveSearchbarModule then
-		local var7 = signalsReactModule.useSignalState(displayModule.GetDisplayStore(false).getDisplaySize)
+		local var6 = signalsReactModule.useSignalState(displayModule.GetDisplayStore(false).getDisplaySize)
 		searchQueryStore = p1.searchQueryStore or getSearchQueryStoreModule()
-		var5 = var7 ~= Enum.DisplaySize.Small
-		var6 = var7 == Enum.DisplaySize.Small and p1.onOpenSearch ~= nil
+		var4 = var6 ~= Enum.DisplaySize.Small
+		var5 = var6 == Enum.DisplaySize.Small and p1.onOpenSearch ~= nil
 	end
-	local var8 = if fFlagBuildAddSearchIconAndMoveSearchbarModule and var5 then function()
+	local var7 = if fFlagBuildAddSearchIconAndMoveSearchbarModule and var4 then function()
 		-- upvalues: reactModule (copy), HeaderCenter (copy), searchQueryStore (write)
 		return reactModule.createElement(HeaderCenter, { searchQueryStore = searchQueryStore })
 	end else nil
-	local var9 = creatorAgentChatModule.experimentOverride.isEnabled()
-	local var10 = if var9 then reactModule.createElement(AgentSpec, {
+	local var8 = creatorAgentChatModule.experimentOverride.isEnabled()
+	local var9 = if var8 then reactModule.createElement(AgentSpec, {
 		LayoutOrder = if fFlagBuildAddSearchIconAndMoveSearchbarModule then 2 else nil,
 		onActivated = function()
-			-- upvalues: var4 (ref)
-			var4(true)
+			-- upvalues: var3 (ref)
+			var3(true)
 		end,
 		testId = if fFlagBuildAddSearchIconAndMoveSearchbarModule then "BuildPageHeader.AgentSpecButton" else nil
 	}) else nil
@@ -163,19 +162,19 @@ return function(p1)
 			barHeight = p1.height,
 			paddingLeft = UDim.new(0, 0),
 			paddingRight = UDim.new(0, 0),
-			renderLeft = if var2 then if fFlagBuildLocalization then function()
-				-- upvalues: renderFlyoutLeftHeader (copy), var1 (ref)
-				return renderFlyoutLeftHeader(var1)
-			end else renderFlyoutLeftHeader else nil,
-			title = if var2 then nil else var1,
-			renderCenter = var8,
-			renderRight = if not fFlagBuildAddSearchIconAndMoveSearchbarModule then if var6 or var9 then function()
-				-- upvalues: reactModule (copy), view (copy), var6 (write), iconButton (copy), iconName (copy), p1 (ref), inputSize (copy), buttonVariant (copy), var10 (ref)
+			renderLeft = if var1 then function()
+				-- upvalues: renderFlyoutLeftHeader (copy), title (ref)
+				return renderFlyoutLeftHeader(title)
+			end else nil,
+			title = if var1 then nil else title,
+			renderCenter = var7,
+			renderRight = if not fFlagBuildAddSearchIconAndMoveSearchbarModule then if var5 or var8 then function()
+				-- upvalues: reactModule (copy), view (copy), var5 (write), iconButton (copy), iconName (copy), p1 (ref), inputSize (copy), buttonVariant (copy), var9 (ref)
 				return reactModule.createElement(view, {
 					tag = "row align-y-center gap-medium auto-xy",
 					testId = "BuildPageHeader.RightActions"
 				}, {
-					Search = if var6 then reactModule.createElement(iconButton, {
+					Search = if var5 then reactModule.createElement(iconButton, {
 						LayoutOrder = 1,
 						isCircular = true,
 						testId = "BuildPageHeader.SearchButton",
@@ -184,17 +183,17 @@ return function(p1)
 						size = inputSize.Medium,
 						variant = buttonVariant.Utility
 					}) else nil,
-					AgentSpec = var10
+					AgentSpec = var9
 				})
-			end else renderEmptyRight elseif var9 then function()
-				-- upvalues: var10 (ref)
-				return var10
+			end else renderEmptyRight elseif var8 then function()
+				-- upvalues: var9 (ref)
+				return var9
 			end else nil
 		}),
-		AgentSpecSheet = if var3 then reactModule.createElement(agentSpecDebugSheetModule, {
+		AgentSpecSheet = if var2 then reactModule.createElement(agentSpecDebugSheetModule, {
 			onClose = function()
-				-- upvalues: var4 (ref)
-				var4(false)
+				-- upvalues: var3 (ref)
+				var3(false)
 			end
 		}) else nil
 	})

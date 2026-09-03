@@ -1,15 +1,19 @@
 ﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
+local sharedFlagsModule = require(parent.SharedFlags)
 local friendsSurfaceVisibility = require(parent.ExpChatShared).FriendsSurfaceVisibility
 local getFriendsChatNavigationStoreModule = require(script.Parent.Parent.Stores.GetFriendsChatNavigationStore)
 local getFriendsChatRealtimeStoreModule = require(script.Parent.Parent.Stores.GetFriendsChatRealtimeStore)
 local friendsChatRealtimeSubscriberModule = require(script.Parent.FriendsChatRealtimeSubscriber)
+local friendsCountRefetchBridgeModule = require(script.Parent.FriendsCountRefetchBridge)
 local friendsTabUnreadBridgeModule = require(script.Parent.FriendsTabUnreadBridge)
 local friendsChatTabNameModule = require(script.Parent.Parent.FriendsChatTabName)
+local fFlagFriendsChatHasFriendsGate = sharedFlagsModule.FFlagFriendsChatHasFriendsGate
+local fFlagExpChatCanShowFriendsTab = sharedFlagsModule.FFlagExpChatCanShowFriendsTab
 
 return function(p1)
-	-- upvalues: getFriendsChatRealtimeStoreModule (ref), signalsReactModule (ref), getFriendsChatNavigationStoreModule (ref), reactModule (ref), friendsChatTabNameModule (ref), friendsSurfaceVisibility (ref), friendsTabUnreadBridgeModule (ref), friendsChatRealtimeSubscriberModule (ref)
+	-- upvalues: getFriendsChatRealtimeStoreModule (ref), signalsReactModule (ref), getFriendsChatNavigationStoreModule (ref), reactModule (ref), friendsChatTabNameModule (ref), friendsSurfaceVisibility (ref), friendsTabUnreadBridgeModule (ref), fFlagFriendsChatHasFriendsGate (ref), fFlagExpChatCanShowFriendsTab (ref), friendsCountRefetchBridgeModule (ref), friendsChatRealtimeSubscriberModule (ref)
 	local var1 = signalsReactModule.useSignalState(getFriendsChatRealtimeStoreModule(false).getHasEnteredFriendsTab)
 	local var2 = signalsReactModule.useSignalState(getFriendsChatNavigationStoreModule(false).getSelectedConversationId)
 	reactModule.useEffect(function()
@@ -31,6 +35,7 @@ return function(p1)
 			selectedTabName = p1.selectedTabName,
 			isChatWindowVisible = p1.isChatWindowVisible
 		}),
+		countRefetchBridge = if fFlagFriendsChatHasFriendsGate and fFlagExpChatCanShowFriendsTab then reactModule.createElement(friendsCountRefetchBridgeModule) else nil,
 		subscriber = if var1 then reactModule.createElement(friendsChatRealtimeSubscriberModule, {
 			onActiveConversationMessageReceived = p1.onActiveConversationMessageReceived
 		}) else nil

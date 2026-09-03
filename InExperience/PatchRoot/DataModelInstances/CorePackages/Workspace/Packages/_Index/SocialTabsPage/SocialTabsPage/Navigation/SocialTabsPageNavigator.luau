@@ -4,6 +4,7 @@ local reactModule = require(parent.React)
 local roactNavigationModule = require(parent.RoactNavigation)
 local useNavigationProps = require(parent.RobloxAppNavigation).useNavigationProps
 local socialTabsPageModule = require(socialTabsPage.Components.SocialTabsPage)
+local useProfileDockedPanelWidth = require(parent.ProfilePlatformCommon).Hooks.useProfileDockedPanelWidth
 local var1 = roactNavigationModule.createRobloxSwitchNavigator(require(script.Parent.SocialTabsPageRouter), {
 	resetOnBlur = false,
 	keepVisitedScreensMounted = true,
@@ -11,7 +12,7 @@ local var1 = roactNavigationModule.createRobloxSwitchNavigator(require(script.Pa
 })
 
 local function SocialTabsPageNavigatorComponent(value)
-	-- upvalues: useNavigationProps (ref), reactModule (ref), var1 (ref), socialTabsPageModule (ref)
+	-- upvalues: useNavigationProps (ref), useProfileDockedPanelWidth (ref), reactModule (ref), var1 (ref), socialTabsPageModule (ref)
 	local navigation = value.navigation
 	local var2 = useNavigationProps(function(_, p1)
 		return {
@@ -19,7 +20,7 @@ local function SocialTabsPageNavigatorComponent(value)
 			title = p1.title,
 			initialTabId = p1.initialTabId,
 			tabConfig = p1.tabConfig,
-			pageWidth = p1.pageWidth
+			dockToProfilePanel = p1.dockToProfilePanel
 		}
 	end)
 	
@@ -32,7 +33,7 @@ local function SocialTabsPageNavigatorComponent(value)
 		profileId = var2.profileId,
 		title = var2.title,
 		initialTabId = var2.initialTabId,
-		pageWidth = var2.pageWidth
+		pageWidth = useProfileDockedPanelWidth(var2.dockToProfilePanel)
 	})
 end
 

@@ -168,6 +168,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation 包含�
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,CurveAnimation 中的身体部位距离 HumanoidRootPart 不能低于 {minHeight} 格或高于 {maxDistance} 格。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation 的子级 MarkerCurves 和 AnimationRigData 不能有子级
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,CurveAnimation 层级结构包含 Scripts、LocalScripts 或 ModuleScripts。请将它们移除。
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,加载 CurveAnimation 数据失败。动画素材可能无效或无法访问。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation 包含具有无效层级结构的身体部位文件夹“{folderName}”（包含不允许的子文件夹或设置不正确）
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchyDetail,
@@ -196,6 +197,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation 中�
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,在 CurveAnimation 的第 {time} 秒，身体部位“{bodyPart}”以 {speed} 度/秒的旋转速度移动。最大旋转速度为 {maxSpeed} 度/秒。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,在 CurveAnimation 的第 {time} 秒，身体部位“{bodyPart}”以 {speed} 格/秒的速度移动。最大速度为 {maxSpeed} 格/秒。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,CurveAnimation 中的身体部位“{bodyPart}”在帧之间移动的距离超过 {maxMovement} 格。请修改该动画。
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation 拥有 {count} 个子对象。允许的最大数量为 {maxAllowed} 个。请减少子对象数量。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation 包含关键帧过多的 Curve。每个 Curve 最多只能有 {maxAllowed} 个关键帧。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation 包含超过 {maxAllowed} 个 MarkerCurve。请确保 MarkerCurve 的子对象数量不超过 {maxAllowed} 个。
@@ -1050,6 +1052,7 @@ CoreScripts.TextChat.ChatWindow.Transcribing,正在转录…
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,我们没有听清！请重试。
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,我们暂不支持该语言！
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,要使用麦克风，请前往设备设置，并授予 Roblox 麦克风权限。
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,无法访问麦克风
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,为了让你使用语音发送消息，我们将处理你的音频，并根据我们的隐私政策立即将语音删除。
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,你已开启语音转文字聊天功能
@@ -1329,6 +1332,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,你已达到使用�
 Feature.Avatar.BackgroundGeneration.Error.Moderation,该指令不符合我们的指南。请尝试描述其他内容。
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,此背景不符合 Roblox 社区准则，因此未添加至你的道具栏。请尝试生成新背景。
 Feature.Avatar.BackgroundGeneration.Error.System,为你生成背景时出错。请重试。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus 专属
@@ -2609,6 +2616,7 @@ Feature.Catalog.Label.Torso,
 Feature.Catalog.Label.TotalItemsParenthesis,
 Feature.Catalog.Label.TotalUnformatted,合计
 Feature.Catalog.Label.Tradable,可交易
+Feature.Catalog.Label.Trending,热门
 Feature.Catalog.Label.TryOns,
 Feature.Catalog.Label.TryOnsMultiple,试穿 {numItems} 件
 Feature.Catalog.Label.Unlimited,无限
@@ -2872,7 +2880,7 @@ Feature.Chat.ShareGameToChat.NoFavoriteGames,无最近喜爱
 Feature.Chat.ShareGameToChat.NoFriendActivity,你没有好友动态
 Feature.Chat.ShareGameToChat.NoPopularGames,无热门挑战
 Feature.Chat.ShareGameToChat.NoRecentGames,无最近浏览
-Feature.Chat.ShareGameToChat.Popular,热门
+Feature.Chat.ShareGameToChat.Popular,
 Feature.Chat.ShareGameToChat.Recent,最近
 Feature.Chat.Text.NoConnections,你尚未添加任何联系人。若要开始，请在 Roblox 上查找并添加你的联系人。
 Feature.Chat.Text.NoFriends,你尚未添加任何好友。若要开始，请在 Roblox 上寻找并添加你的好友。
@@ -3209,6 +3217,8 @@ Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,已选择 {selectedCount} 
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,不感兴趣
+Feature.GameDetails.Action.PauseVideo,暂停视频
+Feature.GameDetails.Action.PlayVideo,播放视频
 Feature.GameDetails.Action.Report,
 Feature.GameDetails.Action.ReportAd,
 Feature.GameDetails.Action.Undo,撤消
@@ -3630,7 +3640,6 @@ Feature.Profile.Action.AboutThisProfile,关于此个人资料
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
-Feature.Profile.Action.AddNickname,添加名称
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,复制个人资料链接
 Feature.Profile.Action.EditAppearance,编辑外观
@@ -3643,17 +3652,13 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,分享个人资料
 Feature.Profile.Action.ShareProfileLink,分享个人资料链接
-Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
 Feature.Profile.Action.UserBlocked,用户已屏蔽
 Feature.Profile.Action.ViewFullProfile,查看完整个人资料
 Feature.Profile.Action.ViewProfile,
 Feature.Profile.Description.AboutModalCaption,让其他玩家更好地了解你。请保护自身安全，不要泄露个人详细信息。
-Feature.Profile.Description.EnterNicknameTextbox,输入你的昵称
 Feature.Profile.Description.InspectAndBuy,点按以查看并购买其造型。
-Feature.Profile.Description.NicknamePrivacy,只有 {displayName} 能看到此内容。
-Feature.Profile.Description.NicknamePrivacyNoDisplayName,只有此用户才能看到此内容。
 Feature.Profile.Description.QrCodeDescription,让其他人扫描你的二维码，在 Roblox 上与你建立联系。已完成年龄验证的 13 岁及以上用户可通过扫描实时二维码建立联系，成为可信好友。
 Feature.Profile.Description.QrCodeDescription.FriendsRename,让其他人扫描你的二维码，在 Roblox 上与你建立联系。已完成年龄验证的 13 岁及以上用户通过扫描实时二维码建立联系，即可成为信赖的好友。
 Feature.Profile.Description.QrCodeScanning,让其他人使用二维码扫描器或设备摄像头以扫描你的 Roblox 二维码，快速添加你为好友！
@@ -3661,11 +3666,8 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,设置自定义名�
 Feature.Profile.Description.RecognizeFriendsByCustomName,
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,让你认识的人使用二维码来添加你。
-Feature.Profile.Description.SelectNicknameDropdown,选择名称
 Feature.Profile.Description.SetCustomName,"设置<font weight=""medium"">“{displayName}”</font>的自定义名称。"
 Feature.Profile.Description.SetCustomNameNoDisplayName,设置自定义名称。
-Feature.Profile.Description.SetNicknamePrompt,请添加名称，方便 {displayName} 识别。
-Feature.Profile.Description.SetNicknamePromptNoDisplayName,请添加名称，方便此用户识别。
 Feature.Profile.Description.SocialNetworksCaptionEveryone,当前对所有人可见。
 Feature.Profile.Description.SocialNetworksCaptionFollowers,当前仅对好友、你关注的用户及你的粉丝可见。
 Feature.Profile.Description.SocialNetworksCaptionFollowing,当前对你的好友和你关注的好友可见。
@@ -3686,7 +3688,6 @@ Feature.Profile.Heading.DisplayNameUpdated,昵称已更新
 Feature.Profile.Heading.EditAgedUpDisplayName,编辑名称
 Feature.Profile.Heading.EditDisplayName,编辑昵称
 Feature.Profile.Heading.InsufficientFunds,资金不足
-Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileFrame,个人资料边框
 Feature.Profile.Heading.ProfilePictureSaved,个人资料图片已成功保存
 Feature.Profile.Heading.ProfileQRCode,
@@ -3706,7 +3707,6 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"您的名称每 7 天只能
 Feature.Profile.Label.AgedUpDisplayNameTooShort,名称应至少包含 3 个字符。
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,自定义名称
-Feature.Profile.Label.CustomNicknameDropdown,设置自定义名称
 Feature.Profile.Label.CustomizeName,
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,这是你在 Roblox 上向其他用户显示的主要公开名称。
@@ -3714,12 +3714,6 @@ Feature.Profile.Label.DisplayNameFailed,无法保存昵称，请重试。
 Feature.Profile.Label.DisplayNameModalCaption,你的昵称每 7 天只能更改一次。
 Feature.Profile.Label.DisplayNameTooShort,昵称应至少包含 3 个字符。
 Feature.Profile.Label.EditBackground,
-Feature.Profile.Label.NicknameErrorMessageInvalid,名称无效。
-Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,名称包含不受支持的字符。
-Feature.Profile.Label.NicknameErrorMessageModerated,名称含有不当内容，无法在 Roblox 使用。
-Feature.Profile.Label.NicknameErrorMessageThrottled,你今天已更改过名称。
-Feature.Profile.Label.NicknameErrorMessageTooLong,名称应至少包含 20 个字符。
-Feature.Profile.Label.NicknameErrorMessageTooShort,名称应至少包含 2 个字符。
 Feature.Profile.Label.NoBioYet,暂无个人简介
 Feature.Profile.Label.NoPreviousName,暂无曾用名
 Feature.Profile.Label.NoSocialLink,暂无社交链接
@@ -3729,7 +3723,6 @@ Feature.Profile.Label.QRCodeFriendRequest,从你的二维码发送
 Feature.Profile.Label.RecentAgedUpDisplayName,"近期已更改过名称。您的名称每 7 天只能更改一次。
 "
 Feature.Profile.Label.RecentDisplayName,近期已更改过昵称，你的昵称每 7 天只能更改一次。
-Feature.Profile.Label.TimeToChangeNickname,你可以在 {hours} 小时候更改名称。
 Feature.Profile.Label.UnableToJoin,无法加入
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b>正在玩“<b>{experienceName}</b>”
 Feature.Profile.Label.UsernameDescription,这是你在 Roblox 上的独一无二的名称。更改你的用户名将花费 {icon}{price}。
@@ -4221,7 +4214,6 @@ Feature.Squads.Label.FindExperiencesPlayTogether,寻找能够一起游玩的体�
 Feature.Squads.Label.FriendJoinedYourParty,{combinedName}已加入你的队伍
 Feature.Squads.Label.InviteConnectionsConfirmation,邀请这些联系人加入群组？
 Feature.Squads.Label.InviteFriendsConfirmation,邀请这些朋友加入群组？
-Feature.Squads.Label.InviteToSquad,邀请加入小队
 Feature.Squads.Label.InvitedToExperience,已受邀至体验
 Feature.Squads.Label.JoinAnotherParty,切换队伍
 Feature.Squads.Label.JoinExperiencesTogether,一起加入体验
@@ -4528,7 +4520,7 @@ IAPExperience.PurchasePrompt.BuyRobuxAndSubscription,购买 Robux 和订阅
 IAPExperience.PurchasePrompt.Header.BuyAvatar,
 IAPExperience.PurchasePrompt.Header.BuyRobuxAndAvatar,购买 Robux 和虚拟形象
 IAPExperience.PurchasePrompt.Label.BlackbirdDiscount,Plus 会员权益（{discountPercentage}% 优惠）
-IAPExperience.PurchasePrompt.Label.BlackbirdDiscountEligibleItems,
+IAPExperience.PurchasePrompt.Label.BlackbirdDiscountEligibleItems,Plus 会员权益（符合条件的道具可享 {discountPercentage}% 优惠）
 IAPExperience.PurchasePrompt.Label.BlackbirdDiscountNoPercent,Plus 权益
 IAPExperience.PurchasePrompt.Label.BlackbirdSummary,使用 Plus 订阅可节省 {robuxIcon} {savingsAmount}
 IAPExperience.PurchasePrompt.Label.GenericDiscount,折扣（减免 {discountPercentage}%）
@@ -4876,6 +4868,7 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,帮助改善这个体验
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,帮助创作者改善此体验
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,购买更多产品前，请先加入体验以兑换你先前的购买项目。
+Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,加入以兑换购买项目
 Roblox.ReferralRewards.AdditionalCreatorTerms,附加创作者条款
 Roblox.ReferralRewards.Expires,过期时间：
 Roblox.ReferralRewards.ReferralProgramTerms,推荐计划条款

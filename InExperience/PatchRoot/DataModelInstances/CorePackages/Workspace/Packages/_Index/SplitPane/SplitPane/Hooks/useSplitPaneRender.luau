@@ -58,40 +58,51 @@ return function(p1, p2, p3, p4)
 			end
 		end
 	end
-	local var9 = p1[1] ~= nil and (p1[1].descriptor ~= nil and (p1[1].descriptor.state ~= nil and p1[1].descriptor.state.routeName == tempRnSwitchNavigatorName))
-	local var10 = reactModule.useRef(0)
+	local var9
+	local var10 = p1[1] ~= nil and (p1[1].descriptor ~= nil and (p1[1].descriptor.state ~= nil and p1[1].descriptor.state.routeName == tempRnSwitchNavigatorName))
+	local var11 = reactModule.useRef(0)
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var5 (ref), var9 (ref), var1 (ref), supportPaneMode (copy), store (ref)
-		local current = var10.current
-		var10.current = var5
+		-- upvalues: var11 (ref), var5 (ref), var10 (ref), var1 (ref), supportPaneMode (copy), store (ref)
+		local current = var11.current
+		var11.current = var5
 		
-		if not var9 or var1 == supportPaneMode.Normal then return end
+		if not var10 or var1 == supportPaneMode.Normal then return end
 		if (current > 0 and var5 == 0) or (current == 0 and var5 > 0) then
 			store.setSupportPaneMode(supportPaneMode.Normal)
 		end
-	end, { var9, var5, store, var1 })
-	local var11 = if var5 > 0 then p3[var5] else nil
-	local var12 = if var11 ~= nil then {} else p1[var11].descriptor.options
-	
-	return {
-		primarySlotChildren = cloned,
-		supportSlotChildren = t,
-		overlaySlotChildren = t_1,
-		supportContentProps = {
-			hostNavigation = if var11 ~= nil then nil else p1[var11].descriptor.navigation,
-			hasDetailOnTop = var11 ~= nil,
-			paneCount = var5,
-			splitPaneExpandable = var12.splitPaneExpandable,
-			splitPaneCollapsible = var12.splitPaneCollapsible
-		},
-		supportWidth = var2,
-		supportMinWidth = store.getMinSupportWidth(),
-		supportMaxWidth = store.getMaxSupportWidth(),
-		onSupportPaneWidthChanged = store.setSupportWidth,
-		supportPaneMode = var1,
-		supportPaneResizable = var4.supportPaneResizable == true,
-		isBreakpointEnabled = var3,
-		renderSupportContent = var4.renderSupportContent,
-		onContentRegionRectChanged = var4.onContentRegionRectChanged
+	end, { var10, var5, store, var1 })
+	local var12 = if var5 > 0 then p3[var5] else nil
+	local var13 = if var12 ~= nil then {} else p1[var12].descriptor.options
+	local var14 = var12 ~= nil
+	local t_2 = {
+		hostNavigation = if var12 ~= nil then nil else p1[var12].descriptor.navigation,
+		hasDetailOnTop = var14,
+		paneCount = var5,
+		splitPaneExpandable = var13.splitPaneExpandable,
+		splitPaneCollapsible = var13.splitPaneCollapsible
 	}
+	
+	if var13.splitPaneCollapsible ~= true then
+		var9 = not var14
+		
+		if var9 then
+			var9 = not (var14 and var5 > 1)
+		end
+		return {
+			primarySlotChildren = cloned,
+			supportSlotChildren = t,
+			overlaySlotChildren = t_1,
+			supportContentProps = t_2,
+			supportWidth = var2,
+			supportMinWidth = store.getMinSupportWidth(),
+			supportMaxWidth = store.getMaxSupportWidth(),
+			onSupportPaneWidthChanged = store.setSupportWidth,
+			supportPaneMode = var1,
+			supportPaneResizable = var4.supportPaneResizable == true,
+			supportResizerAbovePane = not var9,
+			isBreakpointEnabled = var3,
+			renderSupportContent = var4.renderSupportContent,
+			onContentRegionRectChanged = var4.onContentRegionRectChanged
+		}
+	end
 end

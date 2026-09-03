@@ -19,7 +19,6 @@ local sduiCapabilitiesModule = require(sduiCoreSystem.ClientBinding.SduiCapabili
 local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiAppPolicyBindings = sharedFlagsModule.FFlagSduiAppPolicyBindings
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagSduiCommunitySectionSupport = sharedFlagsModule.FFlagSduiCommunitySectionSupport
 local fFlagLuaAppEdpKeepFullPageOnPortraitRotation = sharedFlagsModule.FFlagLuaAppEdpKeepFullPageOnPortraitRotation
@@ -290,7 +289,7 @@ end
 
 local t = {
 	responsive = true,
-	policy = if fFlagSduiAppPolicyBindings then true else nil,
+	policy = true,
 	clientPageScope = if fFlagSduiClientPageScope then true else nil,
 	capability = if fFlagSduiCapabilityBindings then true else nil
 }
@@ -301,7 +300,7 @@ local function isClientContentType(p4)
 end
 
 local function getFieldValueForClientContentType(p4, p5, p6, p7)
-	-- upvalues: fFlagSduiClientPageScope (ref), sduiDataBindingContentTypeModule (ref), getSduiClientPageScopeModule (ref), sduiDataBindingResponsiveFieldName (ref), displayModule (ref), responsiveModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppEdpKeepFullPageOnPortraitRotation (ref), fFlagSduiCapabilityBindings (ref), sduiCapabilitiesModule (ref), fFlagSduiAppPolicyBindings (ref), getSduiPolicyStoreModule (ref), resolveSduiPolicyFieldModule (ref), tryGetPathFromDataModule (ref)
+	-- upvalues: fFlagSduiClientPageScope (ref), sduiDataBindingContentTypeModule (ref), getSduiClientPageScopeModule (ref), sduiDataBindingResponsiveFieldName (ref), displayModule (ref), responsiveModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppEdpKeepFullPageOnPortraitRotation (ref), fFlagSduiCapabilityBindings (ref), sduiCapabilitiesModule (ref), getSduiPolicyStoreModule (ref), resolveSduiPolicyFieldModule (ref), tryGetPathFromDataModule (ref)
 	local var4
 	if fFlagSduiClientPageScope and p4 == sduiDataBindingContentTypeModule.clientPageScope then
 		var4 = if p7 then p7.configKey else nil
@@ -339,7 +338,7 @@ local function getFieldValueForClientContentType(p4, p5, p6, p7)
 			return viewportSize.X <= responsiveModule.BreakpointConfig.sizes[responsiveModule.Keys.Small].maxWidth and (viewportSize.X < viewportSize.Y and responsiveModule.GetInputModeStore(p6).getPreferredInputType(p6) == responsiveModule.Input.Touch)
 		elseif fFlagSduiCapabilityBindings and p4 == sduiDataBindingContentTypeModule.capability then
 			return if #p5 < 2 then nil else sduiCapabilitiesModule.isEnabled(p5[2])
-		elseif fFlagSduiAppPolicyBindings and p4 == sduiDataBindingContentTypeModule.policy then
+		elseif p4 == sduiDataBindingContentTypeModule.policy then
 			if #p5 < 2 then
 				return nil
 			end

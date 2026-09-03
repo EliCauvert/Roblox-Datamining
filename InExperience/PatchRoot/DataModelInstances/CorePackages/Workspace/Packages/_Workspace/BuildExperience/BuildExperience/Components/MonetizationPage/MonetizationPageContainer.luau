@@ -3,7 +3,6 @@ local parent = buildExperience.Parent
 local developerProductModule = require(parent.DataHydration.DeveloperProduct)
 local localizationModule = require(parent.Localization)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local monetizationPageViewModule = require(script.Parent.MonetizationPageView)
@@ -14,17 +13,16 @@ local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBui
 local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local var1 = signalsModule.createSignal(nil)
 local ready = signalsModule.createSignal("Ready")
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
 return function(p1)
-	-- upvalues: fFlagBuildLocalization (ref), reactModule (ref), localizationModule (ref), localizationStringsModule (ref), developerProductModule (ref), signalsReactModule (ref), var1 (ref), ready (ref), sendBuildExperienceEventModule (ref), mapDeveloperProductsToMonetizationProductsModule (ref), fFlagBuildExperienceManageDevProductModule (ref), useMonetizationPageViewModelModule (ref), monetizationPageViewModule (ref)
-	local var2 = if fFlagBuildLocalization then reactModule.useContext(localizationModule.LocalizationRoactContext) else nil
-	local var3 = if fFlagBuildLocalization then localizationModule.Hooks.useLocalization({
+	-- upvalues: reactModule (ref), localizationModule (ref), localizationStringsModule (ref), developerProductModule (ref), signalsReactModule (ref), var1 (ref), ready (ref), sendBuildExperienceEventModule (ref), mapDeveloperProductsToMonetizationProductsModule (ref), fFlagBuildExperienceManageDevProductModule (ref), useMonetizationPageViewModelModule (ref), monetizationPageViewModule (ref)
+	local var2 = reactModule.useContext(localizationModule.LocalizationRoactContext)
+	local var3 = localizationModule.Hooks.useLocalization({
 		priceUnavailable = localizationStringsModule.MONETIZATION_PRICE_UNAVAILABLE,
 		productType = localizationStringsModule.AGENT_DEV_PRODUCT_TITLE,
 		onSale = localizationStringsModule.MONETIZATION_ON_SALE,
 		offSale = localizationStringsModule.MONETIZATION_OFF_SALE
-	}) else nil
+	})
 	local developerProductStore = developerProductModule.getDeveloperProductStore()
 	local var4 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), developerProductStore (ref)
@@ -57,8 +55,8 @@ return function(p1)
 		p1.universeId
 	})
 	local var8 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), mapDeveloperProductsToMonetizationProductsModule (copy), var5 (ref), fFlagBuildLocalization (copy), var2 (ref), localizationStringsModule (copy), var3 (ref)
-		return if p1.products == nil then mapDeveloperProductsToMonetizationProductsModule(var5, if fFlagBuildLocalization then {
+		-- upvalues: p1 (ref), mapDeveloperProductsToMonetizationProductsModule (copy), var5 (ref), var2 (ref), localizationStringsModule (copy), var3 (ref)
+		return if p1.products == nil then mapDeveloperProductsToMonetizationProductsModule(var5, {
 			formatDefaultProductName = function(p2)
 				-- upvalues: var2 (copy), localizationStringsModule (copy)
 				return var2:Format(localizationStringsModule.MONETIZATION_DEFAULT_PRODUCT_NAME, { PRODUCT_ID = p2 })
@@ -67,7 +65,7 @@ return function(p1)
 			productType = var3.productType,
 			onSale = var3.onSale,
 			offSale = var3.offSale
-		} else nil) else p1.products
+		}) else p1.products
 	end, { var5, var3, var2, p1.products })
 	local var9 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), developerProductStore (ref)

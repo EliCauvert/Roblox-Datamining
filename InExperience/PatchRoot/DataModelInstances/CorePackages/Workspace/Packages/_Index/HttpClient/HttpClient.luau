@@ -15,5 +15,6 @@ return {
 	encodeRaw = require(script.encoders).encodeRaw,
 	decodeJson = decodersModule.decodeJson,
 	decodeLegacyJson = decodersModule.decodeLegacyJson,
+	FFlagHttpClientRetryExtensions = require(script.Flags.FFlagHttpClientRetryExtensions),
 	["jest.config"] = script["jest.config"]
 }

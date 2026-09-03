@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("FlyoutSidePanelUseProfileFrameThumbnail", false) and require(script.Parent.GetFFlagProfileFrameThumbnailEnabled)()

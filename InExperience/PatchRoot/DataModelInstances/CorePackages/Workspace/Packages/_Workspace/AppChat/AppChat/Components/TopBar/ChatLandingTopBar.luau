@@ -23,7 +23,6 @@ local images = UIBloxModule.App.ImageSet.Images
 local domLocatorsModule = require(appChat.Utils.DomLocators)
 local sharedFlagsModule = require(parent.SharedFlags)
 local getFFlagIsSquadEnabled = sharedFlagsModule.GetFFlagIsSquadEnabled
-local fFlagAppChatTopBarConfigDrivenModule = require(appChat.Flags.FFlagAppChatTopBarConfigDriven)
 local fFlagAppChatFoundationSearchInputModule = require(appChat.Flags.FFlagAppChatFoundationSearchInput)
 local fFlagEnableHeaderBarButtonsUpdate = sharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate
 local fFlagStreamNotificationBellEntryPoint = sharedFlagsModule.FFlagStreamNotificationBellEntryPoint
@@ -83,10 +82,7 @@ local var2 = function()
 end
 
 return function(p1)
-	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), constantsModule (ref), getTopBarStoreModule (ref), useSignalState (ref), useChatLandingVisibilityModule (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), useLocalization (ref), fFlagAppChatFoundationSearchInputModule (ref), var2 (ref), var1 (ref), reactModule (ref), enumScreensModule (ref), chatLandingTelemetryEventsModule (ref), flyoutLeftHeader (ref), flyoutSidePanelIXP (ref), fFlagEnableHeaderBarButtonsUpdate (ref), foundationModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), argoPartyExperimentation (ref), streamNotificationsBellIcon (ref), fFlagStreamNotificationBellEntryPoint (ref), appPage (ref), snoozeToastNotificationsButtonModule (ref), iconButton (ref), images (ref), getFFlagIsSquadEnabled (ref), chatTopBarBaseModule (ref)
-	if not fFlagAppChatTopBarConfigDrivenModule() then
-		return nil
-	end
+	-- upvalues: constantsModule (ref), getTopBarStoreModule (ref), useSignalState (ref), useChatLandingVisibilityModule (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), useLocalization (ref), fFlagAppChatFoundationSearchInputModule (ref), var2 (ref), var1 (ref), reactModule (ref), enumScreensModule (ref), chatLandingTelemetryEventsModule (ref), flyoutLeftHeader (ref), flyoutSidePanelIXP (ref), fFlagEnableHeaderBarButtonsUpdate (ref), foundationModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), argoPartyExperimentation (ref), streamNotificationsBellIcon (ref), fFlagStreamNotificationBellEntryPoint (ref), appPage (ref), snoozeToastNotificationsButtonModule (ref), iconButton (ref), images (ref), getFFlagIsSquadEnabled (ref), chatTopBarBaseModule (ref)
 	local screenName = p1.screenName
 	local navigation = p1.navigation
 	local isInExperience = navigation.getScreenProps("isInExperience", false)
@@ -118,23 +114,27 @@ return function(p1)
 		navigation.navigate(enumScreensModule.CreateNewChat)
 		var7.emit(chatLandingTelemetryEventsModule.ChatLandingComposeBtnClicked, {})
 	end, { var7, navigation })
-	local var12 = flyoutSidePanelIXP.isFlyoutSidePanelEnabled() and not isInExperience
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: reactModule (copy), flyoutLeftHeader (copy), var8 (ref), flyoutSidePanelIXP (copy)
+		return reactModule.createElement(flyoutLeftHeader, {
+			titleText = var8,
+			isFlyoutEntrypointEnabled = flyoutSidePanelIXP.isFlyoutSidePanelEnabled(),
+			isAlternateEntryPointEnabled = flyoutSidePanelIXP.isAlternateEntryPointEnabled()
+		})
+	end, { var8 })
+	local topBarShowSearch = var6.topBarShowSearch
+	local topBarShowCreateChatGroup = var6.topBarShowCreateChatGroup
+	local topBarShowNotifications = var6.topBarShowNotifications
+	local topBarShowSnoozeNotifications = var6.topBarShowSnoozeNotifications
+	local notificationCount = var6.notificationCount
+	local var13 = flyoutSidePanelIXP.isFlyoutSidePanelEnabled() and not isInExperience
 	
 	return reactModule.createElement(chatTopBarBaseModule, {
 		screenName = screenName,
 		navigation = navigation,
-		renderRight = if not shouldRenderCenter then function()
-			-- upvalues: rightHidden (ref), var6 (ref), fFlagEnableHeaderBarButtonsUpdate (copy), reactModule (copy), foundationModule (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy), var10 (ref), argoPartyExperimentation (copy), var11 (ref), streamNotificationsBellIcon (copy), fFlagStreamNotificationBellEntryPoint (copy), appPage (copy), snoozeToastNotificationsButtonModule (copy), var3 (ref), iconButton (copy), images (copy), getFFlagIsSquadEnabled (copy), wideMode (ref)
-			if rightHidden then
-				return nil
-			end
-			local topBarShowSearch = var6.topBarShowSearch
-			local topBarShowCreateChatGroup = var6.topBarShowCreateChatGroup
-			local topBarShowNotifications = var6.topBarShowNotifications
-			local topBarShowSnoozeNotifications = var6.topBarShowSnoozeNotifications
-			local notificationCount = var6.notificationCount
-			
-			return if fFlagEnableHeaderBarButtonsUpdate then reactModule.createElement(foundationModule.View, {
+		renderRight = if shouldRenderCenter then nil else reactModule.useCallback(function()
+			-- upvalues: rightHidden (ref), fFlagEnableHeaderBarButtonsUpdate (copy), reactModule (copy), foundationModule (copy), topBarShowSearch (ref), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy), var10 (ref), topBarShowCreateChatGroup (ref), argoPartyExperimentation (copy), var11 (ref), topBarShowNotifications (ref), streamNotificationsBellIcon (copy), notificationCount (ref), fFlagStreamNotificationBellEntryPoint (copy), appPage (copy), topBarShowSnoozeNotifications (ref), snoozeToastNotificationsButtonModule (copy), var3 (ref), iconButton (copy), images (copy), getFFlagIsSquadEnabled (copy), wideMode (ref)
+			return if rightHidden then nil elseif fFlagEnableHeaderBarButtonsUpdate then reactModule.createElement(foundationModule.View, {
 				tag = "row align-x-right align-y-center gap-xsmall auto-xy"
 			}, {
 				filter = if topBarShowSearch then reactModule.createElement(foundationModule.IconButton, {
@@ -205,16 +205,13 @@ return function(p1)
 				})),
 				snoozeChatNotifications = if topBarShowSnoozeNotifications then reactModule.createElement(snoozeToastNotificationsButtonModule, { layoutOrder = 4, size = UDim2.new(0, var3, 1, 0) }) else nil
 			})
-		end else nil,
+		end, {
+			var3, notificationCount, var11, var10, rightHidden, topBarShowCreateChatGroup,
+			topBarShowNotifications, topBarShowSearch, topBarShowSnoozeNotifications,
+			wideMode
+		}),
 		renderCenter = var9,
-		renderLeft = if var12 then function()
-			-- upvalues: reactModule (copy), flyoutLeftHeader (copy), var8 (ref), flyoutSidePanelIXP (copy)
-			return reactModule.createElement(flyoutLeftHeader, {
-				titleText = var8,
-				isFlyoutEntrypointEnabled = flyoutSidePanelIXP.isFlyoutSidePanelEnabled(),
-				isAlternateEntryPointEnabled = flyoutSidePanelIXP.isAlternateEntryPointEnabled()
-			})
-		end else nil,
-		hideTitle = var12
+		renderLeft = if var13 then var12 else nil,
+		hideTitle = var13
 	})
 end

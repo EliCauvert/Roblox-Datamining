@@ -19,11 +19,12 @@ local loggerModule = require(serverTriggeredModals.Logger)
 local reportPromptImpressionModule = require(serverTriggeredModals.reportPromptImpression)
 local sendModalImpressionEvent = require(parent.ServerTriggeredModalImpressions).sendModalImpressionEvent
 local fetchPromptsModule = require(serverTriggeredModals.SduiV2.fetchPrompts)
-local _ = require(serverTriggeredModals.SduiV2.PromptsEntryPoint)
+local promptsEntryPointModule = require(serverTriggeredModals.SduiV2.PromptsEntryPoint)
 local promptStyleModule = require(serverTriggeredModals.SduiV2.PromptStyle)
 local usePromptEntriesModule = require(serverTriggeredModals.SduiV2.usePromptEntries)
 local useModalSignalStoreModule = require(serverTriggeredModals.SignalStores.useModalSignalStore)
 local getEntryPointSurfaceConfigModule = require(script.Parent.getEntryPointSurfaceConfig)
+local getHomepagePromptsClientAttributesModule = require(script.Parent.Parent.getHomepagePromptsClientAttributes)
 local coachmarkRendererModule = require(script.Parent.CoachmarkRenderer)
 local surfaceBannerModule = require(script.Parent.SurfaceBanner)
 local fFlagSduiAllowNoConfigsBuilt = sharedFlagsModule.FFlagSduiAllowNoConfigsBuilt
@@ -36,142 +37,165 @@ local fFlagSduiSurfaceBannerAlwaysMounted = sharedFlagsModule.FFlagSduiSurfaceBa
 local fFlagAppIaScrollAway = sharedFlagsModule.FFlagAppIaScrollAway
 local fFlagSduiDismissPromptAction = sharedFlagsModule.FFlagSduiDismissPromptAction
 local fFlagHomepagePromptsPaddingFix = sharedFlagsModule.FFlagHomepagePromptsPaddingFix
+local fFlagHomepagePromptsHandlerPassClientAttributes = sharedFlagsModule.FFlagHomepagePromptsHandlerPassClientAttributes
 
 return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), fFlagSduiDismissPromptAction (ref), useStore (ref), useModalSignalStoreModule (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), reactModule (ref), getEntryPointSurfaceConfigModule (ref), signalsReactModule (ref), fFlagSduiAllowNoConfigsBuilt (ref), sduiLoadTimer (ref), fetchPromptsModule (ref), usePromptEntriesModule (ref), promptStyleModule (ref), setCentralOverlay (ref), centralOverlayType (ref), fFlagPromptsImpressionUsesTitle (ref), reportPromptImpressionModule (ref), loggerModule (ref), sendModalImpressionEvent (ref), fFlagPromptsHandlerCoachmarkEnabled (ref), fFlagSduiSurfaceBannerScrollAwaySticky (ref), fFlagAppIaScrollAway (ref), appNavBarModule (ref), fFlagSduiSurfaceBannerAlwaysMounted (ref), fFlagSduiSystemBannerComponent (ref), surfaceBannerModule (ref), sduiFeatureEntryPoint (ref), fFlagHomepagePromptsPaddingFix (ref), view (ref), coachmarkRendererModule (ref)
+	-- upvalues: useDispatch (ref), fFlagSduiDismissPromptAction (ref), useStore (ref), useModalSignalStoreModule (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), reactModule (ref), getEntryPointSurfaceConfigModule (ref), signalsReactModule (ref), fFlagHomepagePromptsHandlerPassClientAttributes (ref), promptsEntryPointModule (ref), getHomepagePromptsClientAttributesModule (ref), fFlagSduiAllowNoConfigsBuilt (ref), sduiLoadTimer (ref), fetchPromptsModule (ref), usePromptEntriesModule (ref), promptStyleModule (ref), setCentralOverlay (ref), centralOverlayType (ref), fFlagPromptsImpressionUsesTitle (ref), reportPromptImpressionModule (ref), loggerModule (ref), sendModalImpressionEvent (ref), fFlagPromptsHandlerCoachmarkEnabled (ref), fFlagSduiSurfaceBannerScrollAwaySticky (ref), fFlagAppIaScrollAway (ref), appNavBarModule (ref), fFlagSduiSurfaceBannerAlwaysMounted (ref), fFlagSduiSystemBannerComponent (ref), surfaceBannerModule (ref), sduiFeatureEntryPoint (ref), fFlagHomepagePromptsPaddingFix (ref), view (ref), coachmarkRendererModule (ref)
+	local var1
 	local entryPoint = p1.entryPoint
 	local promptStyle = p1.promptStyle
-	local var1 = useDispatch()
-	local var2 = if fFlagSduiDismissPromptAction then useStore() else nil
-	local var3 = useModalSignalStoreModule()
-	local var4 = if fFlagEdpGameLeavePromptsHandlerEnabled and p1.clientAttributes ~= nil then p1.clientAttributes.universeId else nil
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: fFlagEdpGameLeavePromptsHandlerEnabled (copy), getEntryPointSurfaceConfigModule (copy), entryPoint (ref), var4 (ref)
-		return if fFlagEdpGameLeavePromptsHandlerEnabled then getEntryPointSurfaceConfigModule(entryPoint, var4) else getEntryPointSurfaceConfigModule(entryPoint)
-	end, if fFlagEdpGameLeavePromptsHandlerEnabled then { entryPoint, var4 } else { entryPoint })
-	local var6 = signalsReactModule.useSignalState(var3.getHasShownGetter(entryPoint))
-	local var7 = signalsReactModule.useSignalState(var3.getMetadataGetter(entryPoint))
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: entryPoint (ref), var5 (ref), fFlagSduiAllowNoConfigsBuilt (copy), sduiLoadTimer (copy), fFlagEdpGameLeavePromptsHandlerEnabled (copy), p1 (ref)
-		return {
-			clearOnEmptyResponse = true,
-			entryPoint = entryPoint,
-			surfaceKey = var5.surfaceKey,
-			configKey = var5.configKey,
-			allowNoConfigsBuilt = if fFlagSduiAllowNoConfigsBuilt then true else nil,
-			loadTimer = sduiLoadTimer.createLoadTimer(var5.configKey),
-			clientAttributes = if fFlagEdpGameLeavePromptsHandlerEnabled then p1.clientAttributes else nil
-		}
-	end, if fFlagEdpGameLeavePromptsHandlerEnabled then { entryPoint, var5, p1.clientAttributes } else { entryPoint, var5 })
+	local var2 = useDispatch()
+	local var3 = if fFlagSduiDismissPromptAction then useStore() else nil
+	local var4 = useModalSignalStoreModule()
+	local var5 = if fFlagEdpGameLeavePromptsHandlerEnabled and p1.clientAttributes ~= nil then p1.clientAttributes.universeId else nil
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: fFlagEdpGameLeavePromptsHandlerEnabled (copy), getEntryPointSurfaceConfigModule (copy), entryPoint (ref), var5 (ref)
+		return if fFlagEdpGameLeavePromptsHandlerEnabled then getEntryPointSurfaceConfigModule(entryPoint, var5) else getEntryPointSurfaceConfigModule(entryPoint)
+	end, if fFlagEdpGameLeavePromptsHandlerEnabled then { entryPoint, var5 } else { entryPoint })
+	local var7 = signalsReactModule.useSignalState(var4.getHasShownGetter(entryPoint))
+	local var8 = signalsReactModule.useSignalState(var4.getMetadataGetter(entryPoint))
+	local _ = nil
+	
+	if fFlagHomepagePromptsHandlerPassClientAttributes then
+		local var9 = reactModule.useMemo(function()
+			-- upvalues: fFlagEdpGameLeavePromptsHandlerEnabled (copy), p1 (ref), entryPoint (ref), promptsEntryPointModule (copy), getHomepagePromptsClientAttributesModule (copy)
+			return if fFlagEdpGameLeavePromptsHandlerEnabled and p1.clientAttributes ~= nil then p1.clientAttributes elseif entryPoint == promptsEntryPointModule.HomepageLaunch then getHomepagePromptsClientAttributesModule() else nil
+		end, { entryPoint, p1.clientAttributes })
+		var1 = reactModule.useMemo(function()
+			-- upvalues: entryPoint (ref), var6 (ref), fFlagSduiAllowNoConfigsBuilt (copy), sduiLoadTimer (copy), var9 (ref)
+			return {
+				clearOnEmptyResponse = true,
+				entryPoint = entryPoint,
+				surfaceKey = var6.surfaceKey,
+				configKey = var6.configKey,
+				allowNoConfigsBuilt = if fFlagSduiAllowNoConfigsBuilt then true else nil,
+				loadTimer = sduiLoadTimer.createLoadTimer(var6.configKey),
+				clientAttributes = var9
+			}
+		end, { entryPoint, var6, var9 })
+	else
+		var1 = reactModule.useMemo(function()
+			-- upvalues: entryPoint (ref), var6 (ref), fFlagSduiAllowNoConfigsBuilt (copy), sduiLoadTimer (copy), fFlagEdpGameLeavePromptsHandlerEnabled (copy), p1 (ref)
+			return {
+				clearOnEmptyResponse = true,
+				entryPoint = entryPoint,
+				surfaceKey = var6.surfaceKey,
+				configKey = var6.configKey,
+				allowNoConfigsBuilt = if fFlagSduiAllowNoConfigsBuilt then true else nil,
+				loadTimer = sduiLoadTimer.createLoadTimer(var6.configKey),
+				clientAttributes = if fFlagEdpGameLeavePromptsHandlerEnabled then p1.clientAttributes else nil
+			}
+		end, if fFlagEdpGameLeavePromptsHandlerEnabled then { entryPoint, var6, p1.clientAttributes } else { entryPoint, var6 })
+	end
 	reactModule.useEffect(function()
-		-- upvalues: fetchPromptsModule (copy), var8 (ref)
-		fetchPromptsModule(var8)
-	end, { var8 })
-	local var9 = usePromptEntriesModule(var5.configKey, promptStyleModule.Modal)
-	local var10 = var9[1]
-	local var11 = if fFlagSduiDismissPromptAction then reactModule.useRef(nil) else nil
+		-- upvalues: fetchPromptsModule (copy), var1 (write)
+		fetchPromptsModule(var1)
+	end, { var1 })
+	local var10 = usePromptEntriesModule(var6.configKey, promptStyleModule.Modal)
+	local var11 = var10[1]
 	local var12 = if fFlagSduiDismissPromptAction then reactModule.useRef(nil) else nil
+	local var13 = if fFlagSduiDismissPromptAction then reactModule.useRef(nil) else nil
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var7 (ref), var10 (ref), var3 (ref), entryPoint (ref), var1 (ref), setCentralOverlay (copy), centralOverlayType (copy), var5 (ref), fFlagPromptsImpressionUsesTitle (copy), fFlagSduiDismissPromptAction (copy), var11 (ref), var12 (ref)
-		if var6 then return end
+		-- upvalues: var7 (ref), var8 (ref), var11 (ref), var4 (ref), entryPoint (ref), var2 (ref), setCentralOverlay (copy), centralOverlayType (copy), var6 (ref), fFlagPromptsImpressionUsesTitle (copy), fFlagSduiDismissPromptAction (copy), var12 (ref), var13 (ref)
 		if var7 then return end
-		if var10 == nil or var10.config == nil or (var10.identifier == nil or var10.robloxComponentType == nil) or var10.title == nil then return end
-		var3.setHasShown(entryPoint, true)
-		var1(setCentralOverlay(centralOverlayType.SduiPromptModal, {
-			configKey = var5.configKey,
-			appPage = var5.appPage,
-			modalId = var10.identifier,
-			modalType = if fFlagPromptsImpressionUsesTitle then var10.title else var10.robloxComponentType
+		if var8 then return end
+		if var11 == nil or var11.config == nil or (var11.identifier == nil or var11.robloxComponentType == nil) or var11.title == nil then return end
+		var4.setHasShown(entryPoint, true)
+		var2(setCentralOverlay(centralOverlayType.SduiPromptModal, {
+			configKey = var6.configKey,
+			appPage = var6.appPage,
+			modalId = var11.identifier,
+			modalType = if fFlagPromptsImpressionUsesTitle then var11.title else var11.robloxComponentType
 		}))
 		
 		if fFlagSduiDismissPromptAction then
-			var11.current = var10.title
-			var12.current = var10.identifier
+			var12.current = var11.title
+			var13.current = var11.identifier
 		end
 	end, {
-		var6, var7, var1, var3, var10, var5, entryPoint
+		var7, var8, var2, var4, var11, var6, entryPoint
 	})
 	
 	if fFlagSduiDismissPromptAction then
 		reactModule.useEffect(function()
-			-- upvalues: var11 (ref), var9 (ref), var12 (ref), var2 (ref), centralOverlayType (copy), var1 (ref), setCentralOverlay (copy)
-			local current = var11.current
+			-- upvalues: var12 (ref), var10 (ref), var13 (ref), var3 (ref), centralOverlayType (copy), var2 (ref), setCentralOverlay (copy)
+			local current = var12.current
 			
 			if current == nil then return end
-			for i, v in var9 do
+			for i, v in var10 do
 				if v.title == current then return end
 			end
-			local current_1 = var12.current
-			var11.current = nil
+			local current_1 = var13.current
 			var12.current = nil
-			local centralOverlay = var2:getState().CentralOverlay
+			var13.current = nil
+			local centralOverlay = var3:getState().CentralOverlay
 			
 			if centralOverlay ~= nil and centralOverlay.OverlayType == centralOverlayType.SduiPromptModal and (centralOverlay.Arguments ~= nil and centralOverlay.Arguments.modalId == current_1) then
-				var1(setCentralOverlay())
+				var2(setCentralOverlay())
 			end
-		end, { var9, var1, var2 })
+		end, { var10, var2, var3 })
 	end
-	local var13 = promptStyle == promptStyleModule.SurfaceBanner
-	local var14 = usePromptEntriesModule(var5.configKey, promptStyleModule.SurfaceBanner)
-	local var15 = if var13 then var14[1] else nil
-	local var16 = if var15 then var15.identifier else nil
-	local var17 = if var15 then if fFlagPromptsImpressionUsesTitle then var15.title else var15.robloxComponentType else nil
-	local var18 = promptStyle == promptStyleModule.InlineBanner
-	local var19 = if var18 then usePromptEntriesModule(var5.configKey, promptStyleModule.InlineBanner)[1] else nil
-	local var20 = if var19 then var19.identifier else nil
-	local var21 = if var19 then if fFlagPromptsImpressionUsesTitle then var19.title else var19.robloxComponentType else nil
+	local var14 = promptStyle == promptStyleModule.SurfaceBanner
+	local var15 = usePromptEntriesModule(var6.configKey, promptStyleModule.SurfaceBanner)
+	local var16 = if var14 then var15[1] else nil
+	local var17 = if var16 then var16.identifier else nil
+	local var18 = if var16 then if fFlagPromptsImpressionUsesTitle then var16.title else var16.robloxComponentType else nil
+	local var19 = promptStyle == promptStyleModule.InlineBanner
+	local var20 = if var19 then usePromptEntriesModule(var6.configKey, promptStyleModule.InlineBanner)[1] else nil
+	local var21 = if var20 then var20.identifier else nil
+	local var22 = if var20 then if fFlagPromptsImpressionUsesTitle then var20.title else var20.robloxComponentType else nil
 	reactModule.useEffect(function()
-		-- upvalues: var16 (ref), var17 (ref), reportPromptImpressionModule (copy), loggerModule (copy), sendModalImpressionEvent (copy)
-		if var16 and var17 then
-			reportPromptImpressionModule(var17, var16):catch(function()
+		-- upvalues: var17 (ref), var18 (ref), reportPromptImpressionModule (copy), loggerModule (copy), sendModalImpressionEvent (copy)
+		if var17 and var18 then
+			reportPromptImpressionModule(var18, var17):catch(function()
 				-- upvalues: loggerModule (copy)
 				loggerModule:warning("Failed to report prompt impression")
 			end)
-			sendModalImpressionEvent(var16, var17)
+			sendModalImpressionEvent(var17, var18)
 		end
-	end, { var16, var17 })
+	end, { var17, var18 })
 	reactModule.useEffect(function()
-		-- upvalues: var20 (ref), var21 (ref), reportPromptImpressionModule (copy), loggerModule (copy), sendModalImpressionEvent (copy)
-		if var20 and var21 then
-			reportPromptImpressionModule(var21, var20):catch(function()
+		-- upvalues: var21 (ref), var22 (ref), reportPromptImpressionModule (copy), loggerModule (copy), sendModalImpressionEvent (copy)
+		if var21 and var22 then
+			reportPromptImpressionModule(var22, var21):catch(function()
 				-- upvalues: loggerModule (copy)
 				loggerModule:warning("Failed to report prompt impression")
 			end)
-			sendModalImpressionEvent(var20, var21)
+			sendModalImpressionEvent(var21, var22)
 		end
-	end, { var20, var21 })
-	local var22 = false
+	end, { var21, var22 })
+	local var23 = false
 	
 	if fFlagPromptsHandlerCoachmarkEnabled then
-		for i, v in usePromptEntriesModule(var5.configKey, promptStyleModule.Coachmark) do
+		for i, v in usePromptEntriesModule(var6.configKey, promptStyleModule.Coachmark) do
 			if v.config and v.identifier and v.title then
-				var22 = true
+				var23 = true
 				break
 			end
 		end
 	end
-	local var23 = fFlagSduiSurfaceBannerScrollAwaySticky and (fFlagAppIaScrollAway and appNavBarModule.getScrollAwayEnabled())
-	local var24 = if var15 == nil then fFlagSduiSurfaceBannerAlwaysMounted else true
+	local var24 = fFlagSduiSurfaceBannerScrollAwaySticky and (fFlagAppIaScrollAway and appNavBarModule.getScrollAwayEnabled())
+	local var25 = if var16 == nil then fFlagSduiSurfaceBannerAlwaysMounted else true
 	local frame = nil
 	
-	if var13 then
-		frame = if fFlagSduiSystemBannerComponent and var24 and var23 then reactModule.createElement(surfaceBannerModule, {
-			identifier = if var15 then var15.identifier else nil,
-			configKey = var5.configKey,
-			appPage = var5.appPage,
+	if var14 then
+		frame = if fFlagSduiSystemBannerComponent and var25 and var24 then reactModule.createElement(surfaceBannerModule, {
+			identifier = if var16 then var16.identifier else nil,
+			configKey = var6.configKey,
+			appPage = var6.appPage,
 			surfaceBannerContent = p1.surfaceBannerContent
-		}) elseif fFlagSduiSystemBannerComponent and var24 then reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+		}) elseif fFlagSduiSystemBannerComponent and var25 then reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 			Layout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			SurfaceBanner = if var15 then reactModule.createElement(sduiFeatureEntryPoint, {
+			SurfaceBanner = if var16 then reactModule.createElement(sduiFeatureEntryPoint, {
 				shouldDisplayLoading = false,
 				shouldDisplayError = false,
 				LayoutOrder = 1,
-				configKey = var5.configKey,
-				identifier = var15.identifier,
-				appPage = var5.appPage
+				configKey = var6.configKey,
+				identifier = var16.identifier,
+				appPage = var6.appPage
 			}) else nil,
 			ContentContainer = reactModule.createElement("Frame", {
 				LayoutOrder = 2,
@@ -182,36 +206,36 @@ return reactModule.memo(function(p1)
 				Content = p1.surfaceBannerContent
 			})
 		}) else p1.surfaceBannerContent
-	elseif var18 then
-		frame = if var19 then reactModule.createElement(sduiFeatureEntryPoint, {
+	elseif var19 then
+		frame = if var20 then reactModule.createElement(sduiFeatureEntryPoint, {
 			shouldDisplayLoading = false,
 			shouldDisplayError = false,
-			configKey = var5.configKey,
-			identifier = var19.identifier,
-			appPage = var5.appPage
+			configKey = var6.configKey,
+			identifier = var20.identifier,
+			appPage = var6.appPage
 		}) else p1.inlineBannerFallback
 	end
-	if fFlagHomepagePromptsPaddingFix and var18 then
-		local var25 = var14[1] ~= nil
+	if fFlagHomepagePromptsPaddingFix and var19 then
+		local var26 = var15[1] ~= nil
 		
 		if frame ~= nil then
 			frame = reactModule.createElement(view, {
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
 				padding = {
-					top = if var25 and p1.topPadding ~= nil then UDim.new(0, p1.topPadding) else nil,
+					top = if var26 and p1.topPadding ~= nil then UDim.new(0, p1.topPadding) else nil,
 					bottom = if p1.bottomPadding ~= nil then UDim.new(0, p1.bottomPadding) else nil
 				}
 			}, { InlineBanner = frame })
-		elseif var25 and p1.topPadding then
+		elseif var26 and p1.topPadding then
 			frame = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, p1.topPadding)
 			})
 		end
 	end
-	return if fFlagPromptsHandlerCoachmarkEnabled and var22 then reactModule.createElement(reactModule.Fragment, nil, {
+	return if fFlagPromptsHandlerCoachmarkEnabled and var23 then reactModule.createElement(reactModule.Fragment, nil, {
 		Slot = frame,
-		Coachmarks = reactModule.createElement(coachmarkRendererModule, { surfaceConfig = var5, hasShownKey = entryPoint })
+		Coachmarks = reactModule.createElement(coachmarkRendererModule, { surfaceConfig = var6, hasShownKey = entryPoint })
 	}) else frame
 end)

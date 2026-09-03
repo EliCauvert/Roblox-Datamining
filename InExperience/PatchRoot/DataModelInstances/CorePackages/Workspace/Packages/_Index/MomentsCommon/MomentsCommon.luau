@@ -10,8 +10,9 @@ return {
 		GetFFlagEnableMomentTextGeneration = require(script.Flags.GetFFlagEnableMomentTextGeneration),
 		GetFFlagMomentsAnalyticsProducerPrereqs = require(script.Flags.GetFFlagMomentsAnalyticsProducerPrereqs),
 		GetFFlagMomentsCreationSaveDraft = require(script.Flags.GetFFlagMomentsCreationSaveDraft),
+		GetFFlagMomentsNonInfiniteScroll = require(script.Flags.GetFFlagMomentsNonInfiniteScroll),
 		GetFFlagMomentsStickerButton = require(script.Flags.GetFFlagMomentsStickerButton),
-		GetFFlagMomentsAnalyticsSchemaIdentity = require(script.Flags.GetFFlagMomentsAnalyticsSchemaIdentity),
+		FFlagMomentsFeedMediaLoadAttemptedEvent = require(script.Flags.FFlagMomentsFeedMediaLoadAttemptedEvent),
 		FFlagMomentsFeedHealthAnalytics = require(script.Flags.FFlagMomentsFeedHealthAnalytics),
 		FFlagMomentsMediaSmoothnessTelemetry = require(script.Flags.FFlagMomentsMediaSmoothnessTelemetry),
 		FFlagMomentsProfileGridInfiniteLoad = require(script.Flags.FFlagMomentsProfileGridInfiniteLoad),
@@ -62,9 +63,13 @@ return {
 		MomentMediaTile = require(script.Media.Components.MomentMediaTile),
 		useMomentMediaController = require(script.Media.Components.useMomentMediaController),
 		feedPlaybackSuspension = require(script.Media.feedPlaybackSuspension),
-		reportModalCovering = require(script.Media.reportModalCovering)
+		reportModalCovering = require(script.Media.reportModalCovering),
+		audioDuckingFastInts = require(script.Media.audioDuckingFastInts)
 	},
 	Performance = require(script.Performance),
+	Stores = {
+		GetMomentsCapabilities = require(script.Stores.GetMomentsCapabilities)
+	},
 	Utils = {
 		clampOverlayPosition = require(script.Utils.clampOverlayPosition),
 		clampTextOverlayPosition = require(script.Utils.clampOverlayPosition),

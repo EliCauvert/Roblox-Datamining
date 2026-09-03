@@ -6,9 +6,7 @@ local chatDetailsNavigationOptionsModule = require(script.Parent.ChatDetailsNavi
 local loggerModule = require(script.Parent.Logger)
 local fFlagAppChatIxpScreenExposureModule = require(appChat.Flags.FFlagAppChatIxpScreenExposure)
 local IXPNavigationUtilsModule = require(appChat.Utils.IXPNavigationUtils)
-local fFlagAppChatTopBarConfigDrivenModule = require(appChat.Flags.FFlagAppChatTopBarConfigDriven)
 local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
-local fFlagAppChatTopBarSignalsStoreModule = require(appChat.Flags.FFlagAppChatTopBarSignalsStore)
 local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local domLocatorsModule = require(appChat.Utils.DomLocators)
 local getFFlagAppChatEnableRootedNavigationModule = require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)
@@ -125,12 +123,10 @@ function chatDetailsScreen.render(p1)
 end
 
 function chatDetailsScreen.didMount(p1)
-	-- upvalues: loggerModule (ref), fFlagAppChatTopBarConfigDrivenModule (ref), fFlagAppChatTopBarSignalsStoreModule (ref), getTopBarStoreModule (ref), enumScreensModule (ref), chatDetailsNavigationOptionsModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), getRootedNavigationStoreModule (ref)
+	-- upvalues: loggerModule (ref), getTopBarStoreModule (ref), enumScreensModule (ref), chatDetailsNavigationOptionsModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), getRootedNavigationStoreModule (ref)
 	loggerModule:info("{screen} mounted")
+	getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.ChatDetails, chatDetailsNavigationOptionsModule.getTopBarConfig(p1.props.navigation))
 	
-	if fFlagAppChatTopBarConfigDrivenModule() or fFlagAppChatTopBarSignalsStoreModule then
-		getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.ChatDetails, chatDetailsNavigationOptionsModule.getTopBarConfig(p1.props.navigation))
-	end
 	if getFFlagAppChatEnableRootedNavigationModule() and p1.props.navigation.getParam("isRooted", false) then
 		getRootedNavigationStoreModule(false).completeNavigation(p1.props.navigation.getParam("rootedNavigationRequestId", nil))
 	end

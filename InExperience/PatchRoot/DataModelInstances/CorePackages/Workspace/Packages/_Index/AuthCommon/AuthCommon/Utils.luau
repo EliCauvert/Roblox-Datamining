@@ -16,6 +16,7 @@
 	recordLogin = require(script.recordLogin),
 	recordSignOut = require(script.recordSignOut),
 	updateLoginEntryData = require(script.updateLoginEntryData),
+	ensureLoginEntry = require(script.ensureLoginEntry),
 	record2svCompletion = require(script.record2svCompletion),
 	PreviousAccountEntry = require(script.PreviousAccountEntry),
 	parseCredentialsProtocolIsAvailableResponse = require(script.parseCredentialsProtocolIsAvailableResponse),

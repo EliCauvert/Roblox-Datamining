@@ -8,7 +8,6 @@ local enumScreensModule = require(appChat.EnumScreens)
 local configureTopBarWithNavigationOptionsModule = require(appChat.configureTopBarWithNavigationOptions)
 local conversationStackNavigatorModule = require(script.Parent.conversationStackNavigator)
 local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local fFlagAppChatTopBarConfigDrivenModule = require(appChat.Flags.FFlagAppChatTopBarConfigDriven)
 local chatConversationTopBarModule = require(appChat.Components.TopBar.ChatConversationTopBar)
 local chatTopBarBaseModule = require(appChat.Components.TopBar.ChatTopBarBase)
 local systemMenuTopBarModule = require(appChat.Components.TopBar.SystemMenuTopBar)
@@ -23,7 +22,7 @@ local t = {
 }
 
 function ConversationStackNavigatorConnector(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useChatWideModeFocusModule (ref), reactModule (ref), userGameSettingsService (ref), fFlagAppChatTopBarConfigDrivenModule (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), enumScreensModule (ref), chatConversationTopBarModule (ref), chatTopBarBaseModule (ref), squadAddFriendsIconButtonModule (ref), systemMenuTopBarModule (ref), fFlagAppChatConsoleFocusFixesModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useChatWideModeFocusModule (ref), reactModule (ref), userGameSettingsService (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), enumScreensModule (ref), chatConversationTopBarModule (ref), chatTopBarBaseModule (ref), squadAddFriendsIconButtonModule (ref), systemMenuTopBarModule (ref), fFlagAppChatConsoleFocusFixesModule (ref)
 	local var1 = cryoModule.Dictionary.union(t, p1)
 	local var2 = useStyle()
 	local var3 = useChatWideModeFocusModule()
@@ -50,41 +49,44 @@ function ConversationStackNavigatorConnector(p1)
 		var1.setRouter(var7.router)
 		
 		return var7
-	end, { var2.Theme.BackgroundDefault.Color, var4 })
+	end, {
+		var2.Theme.BackgroundDefault.Color,
+		var4,
+		var1.createNewNavigator,
+		var1.setRouter
+	})
 	local var7 = nil
 	
-	if fFlagAppChatTopBarConfigDrivenModule() then
-		if fFlagAppChatPerfTrackingModule then
-			appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.TopBarRenderInterval)
-		end
-		local state = var1.navigation and var1.navigation.state
-		local routeName = state and (state.routes and (state.index and (state.routes[state.index] and (state.routes[state.index].routeName or nil))))
-		
-		if routeName == enumScreensModule.ChatConversation then
-			var7 = reactModule.createElement(chatConversationTopBarModule, {
-				screenName = enumScreensModule.ChatConversation,
-				navigation = var1.navigation
-			})
-		elseif routeName == enumScreensModule.ChatDetails then
-			var7 = reactModule.createElement(chatTopBarBaseModule, {
-				screenName = enumScreensModule.ChatDetails,
-				navigation = var1.navigation
-			})
-		elseif routeName == enumScreensModule.SquadLobby then
-			var7 = reactModule.createElement(chatTopBarBaseModule, {
-				screenName = enumScreensModule.SquadLobby,
-				navigation = var1.navigation,
-				renderRight = function()
-					-- upvalues: reactModule (copy), squadAddFriendsIconButtonModule (copy), var1 (ref)
-					return reactModule.createElement(squadAddFriendsIconButtonModule, { navigation = var1.navigation })
-				end
-			})
-		elseif routeName == enumScreensModule.SquadInviteFriends then
-			var7 = reactModule.createElement(systemMenuTopBarModule, {
-				screenName = enumScreensModule.SquadInviteFriends,
-				navigation = var1.navigation
-			})
-		end
+	if fFlagAppChatPerfTrackingModule then
+		appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.TopBarRenderInterval)
+	end
+	local state = var1.navigation and var1.navigation.state
+	local routeName = state and (state.routes and (state.index and (state.routes[state.index] and (state.routes[state.index].routeName or nil))))
+	
+	if routeName == enumScreensModule.ChatConversation then
+		var7 = reactModule.createElement(chatConversationTopBarModule, {
+			screenName = enumScreensModule.ChatConversation,
+			navigation = var1.navigation
+		})
+	elseif routeName == enumScreensModule.ChatDetails then
+		var7 = reactModule.createElement(chatTopBarBaseModule, {
+			screenName = enumScreensModule.ChatDetails,
+			navigation = var1.navigation
+		})
+	elseif routeName == enumScreensModule.SquadLobby then
+		var7 = reactModule.createElement(chatTopBarBaseModule, {
+			screenName = enumScreensModule.SquadLobby,
+			navigation = var1.navigation,
+			renderRight = function()
+				-- upvalues: reactModule (copy), squadAddFriendsIconButtonModule (copy), var1 (ref)
+				return reactModule.createElement(squadAddFriendsIconButtonModule, { navigation = var1.navigation })
+			end
+		})
+	elseif routeName == enumScreensModule.SquadInviteFriends then
+		var7 = reactModule.createElement(systemMenuTopBarModule, {
+			screenName = enumScreensModule.SquadInviteFriends,
+			navigation = var1.navigation
+		})
 	end
 	var7 = var7 or var1.configureTopBar(var1.navigation)
 	local topBarHeight = var1.navigation.getScreenProps("topBarHeight", 0)
@@ -110,14 +112,17 @@ end
 local conversationStackNavigatorConnectorWrapper = reactModule.PureComponent:extend("ConversationStackNavigatorConnectorWrapper")
 conversationStackNavigatorConnectorWrapper.router = conversationStackNavigatorModule().router
 
+function conversationStackNavigatorConnectorWrapper.init(p1)
+	-- upvalues: conversationStackNavigatorConnectorWrapper (ref)
+	function p1.setRouter(p2)
+		-- upvalues: conversationStackNavigatorConnectorWrapper (copy)
+		conversationStackNavigatorConnectorWrapper.router = p2
+	end
+end
+
 function conversationStackNavigatorConnectorWrapper.render(p1)
-	-- upvalues: reactModule (ref), cryoModule (ref), conversationStackNavigatorConnectorWrapper (ref)
-	return reactModule.createElement(ConversationStackNavigatorConnector, cryoModule.Dictionary.join(p1.props, {
-		setRouter = function(value)
-			-- upvalues: conversationStackNavigatorConnectorWrapper (copy)
-			conversationStackNavigatorConnectorWrapper.router = value
-		end
-	}))
+	-- upvalues: reactModule (ref), cryoModule (ref)
+	return reactModule.createElement(ConversationStackNavigatorConnector, cryoModule.Dictionary.join(p1.props, { setRouter = p1.setRouter }))
 end
 
 return conversationStackNavigatorConnectorWrapper

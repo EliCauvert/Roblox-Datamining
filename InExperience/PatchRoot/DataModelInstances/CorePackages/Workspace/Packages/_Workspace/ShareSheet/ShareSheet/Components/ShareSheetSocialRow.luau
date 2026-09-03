@@ -1,9 +1,13 @@
-﻿local parent = script:FindFirstAncestor("ShareSheet").Parent
+﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
+local parent = shareSheet.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local useLocalization = require(parent.Localization).Hooks.useLocalization
 local skeleton = foundationModule.Skeleton
 local view = foundationModule.View
+local iconName = foundationModule.Enums.IconName
 local radius = foundationModule.Enums.Radius
+local fFlagSharePplPickerModule = require(shareSheet.Flags.FFlagSharePplPicker)
 local shareSheetRowModule = require(script.Parent.ShareSheetRow)
 local shareSheetItemContainerModule = require(script.Parent.ShareSheetItemContainer)
 local playersService = game:GetService("Players")
@@ -55,6 +59,8 @@ local function createSkeletonItems()
 	return t
 end
 
+local function onMoreActivated() end
+
 local function ShareSheetConversationItem(p3)
 	-- upvalues: reactModule (ref), shareSheetItemContainerModule (ref)
 	local conversation = p3.conversation
@@ -87,14 +93,17 @@ local function ShareSheetConversationItem(p3)
 end
 
 return function(p4)
-	-- upvalues: playersService (ref), createSkeletonItems (ref), reactModule (ref), ShareSheetConversationItem (ref), shareSheetRowModule (ref)
+	-- upvalues: playersService (ref), fFlagSharePplPickerModule (ref), useLocalization (ref), createSkeletonItems (ref), reactModule (ref), ShareSheetConversationItem (ref), shareSheetItemContainerModule (ref), iconName (ref), onMoreActivated (ref), shareSheetRowModule (ref)
 	local var4 = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0)
+	local var5 = if fFlagSharePplPickerModule then useLocalization({ more = "CommonUI.Features.Label.More" }) else nil
 	local t = {}
 	
 	if p4.isLoading or p4.conversationEligibility.isLoading then
 		t = createSkeletonItems()
 	else
-		for i, v in p4.conversationEligibility.eligibleConversations do
+		local eligibleConversations = p4.conversationEligibility.eligibleConversations
+		
+		for i, v in eligibleConversations do
 			local id = v.id
 			t[id] = reactModule.createElement(ShareSheetConversationItem, {
 				conversation = v,
@@ -102,6 +111,14 @@ return function(p4)
 				localUserId = var4,
 				onConversationActivated = p4.onConversationActivated,
 				LayoutOrder = i
+			})
+		end
+		if fFlagSharePplPickerModule then
+			t.More = reactModule.createElement(shareSheetItemContainerModule, {
+				icon = iconName.ThreeDotsHorizontal,
+				label = var5.more,
+				onActivated = onMoreActivated,
+				LayoutOrder = #eligibleConversations + 1
 			})
 		end
 	end

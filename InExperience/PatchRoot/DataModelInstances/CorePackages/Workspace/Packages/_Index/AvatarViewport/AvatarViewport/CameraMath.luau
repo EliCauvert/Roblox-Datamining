@@ -33,6 +33,11 @@ function t.adjustDistanceScaleByZoomGesture(p1, p2)
 	return t.clampDistanceScale(t.getCameraDistanceScaleFromSliderValue(math.clamp(t.getSliderValueFromCameraDistanceScale(p1) + p2 * 2, -constantsModule.SliderMax, constantsModule.SliderMax)))
 end
 
+function t.adjustDistanceScaleBySliderStep(p1, p2)
+	-- upvalues: t (ref), constantsModule (ref)
+	return t.clampDistanceScale(t.getCameraDistanceScaleFromSliderValue(math.clamp(t.getSliderValueFromCameraDistanceScale(p1) + p2, -constantsModule.SliderMax, constantsModule.SliderMax)))
+end
+
 t.PINCH_DELTA_TO_ZOOM_DELTA = 0.05
 
 return t

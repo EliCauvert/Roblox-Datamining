@@ -2,11 +2,9 @@
 local parent = moments.Parent
 local reactModule = require(parent.React)
 local reactOtterModule = require(parent.ReactOtter)
-local momentsCommonModule = require(parent.MomentsCommon)
-local analytics = momentsCommonModule.Analytics
+local analytics = require(parent.MomentsCommon).Analytics
 local fireAnalyticsEvent = analytics.fireAnalyticsEvent
 local eventNames = analytics.EventNames
-local getFFlagMomentsAnalyticsSchemaIdentity = momentsCommonModule.Flags.GetFFlagMomentsAnalyticsSchemaIdentity
 local makeFeedActionFieldsModule = require(moments.Analytics.makeFeedActionFields)
 local foundationModule = require(parent.Foundation)
 local skeleton = foundationModule.Skeleton
@@ -34,7 +32,7 @@ local t = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
 local char = utf8.char(57344)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), momentContextModule (ref), reactModule (ref), reactOtterModule (ref), useUsernameModule (ref), getFFlagMomentsCreatorVerifiedBadgeModule (ref), useCreatorVerifiedModule (ref), useMomentsHost (ref), fFlagMomentsFlushDwellBeforeNavigationModule (ref), feedContextModule (ref), getFFlagMomentsAnalyticsSchemaIdentity (ref), makeFeedActionFieldsModule (ref), fireAnalyticsEvent (ref), eventNames (ref), char (ref), view (ref), stateLayerAffordance (ref), controlState (ref), imageWithSkeletonModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), radius (ref), getColorStyleWithTransparencyModule (ref), t (ref), text (ref), skeleton (ref), vector2 (ref)
+	-- upvalues: useTokens (ref), momentContextModule (ref), reactModule (ref), reactOtterModule (ref), useUsernameModule (ref), getFFlagMomentsCreatorVerifiedBadgeModule (ref), useCreatorVerifiedModule (ref), useMomentsHost (ref), fFlagMomentsFlushDwellBeforeNavigationModule (ref), feedContextModule (ref), makeFeedActionFieldsModule (ref), fireAnalyticsEvent (ref), eventNames (ref), char (ref), view (ref), stateLayerAffordance (ref), controlState (ref), imageWithSkeletonModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), radius (ref), getColorStyleWithTransparencyModule (ref), t (ref), text (ref), skeleton (ref), vector2 (ref)
 	local var1 = useTokens()
 	local var2 = momentContextModule.useMoment()
 	local data = var2.store.getData(false)
@@ -55,32 +53,28 @@ return reactModule.memo(function(p1)
 	local openProfile = useMomentsHost().openProfile
 	local var10 = if fFlagMomentsFlushDwellBeforeNavigationModule then feedContextModule.useFeedOptional() else nil
 	local var11 = reactModule.useCallback(function()
-		-- upvalues: openProfile (ref), getFFlagMomentsAnalyticsSchemaIdentity (copy), makeFeedActionFieldsModule (copy), data (ref), fireAnalyticsEvent (copy), eventNames (copy), fFlagMomentsFlushDwellBeforeNavigationModule (copy), var10 (write)
+		-- upvalues: openProfile (ref), makeFeedActionFieldsModule (copy), data (ref), fireAnalyticsEvent (copy), eventNames (copy), fFlagMomentsFlushDwellBeforeNavigationModule (copy), var10 (write)
 		if openProfile ~= nil then
-			if getFFlagMomentsAnalyticsSchemaIdentity() then
-				local var12 = makeFeedActionFieldsModule(data.momentId, data.feedItemId, data.feedSessionId)
-				
-				if var12 ~= nil then
-					fireAnalyticsEvent(eventNames.ProfileCreatorInfoTapped, var12)
-				end
-			else
-				fireAnalyticsEvent(eventNames.ProfileCreatorInfoTapped, { userId = tostring(data.creatorId) })
+			local var12 = makeFeedActionFieldsModule(data.momentId, data.feedItemId, data.feedSessionId)
+			
+			if var12 ~= nil then
+				fireAnalyticsEvent(eventNames.ProfileCreatorInfoTapped, var12)
 			end
 			if fFlagMomentsFlushDwellBeforeNavigationModule and var10 ~= nil then
 				var10.flushView()
 			end
 			openProfile(data.creatorId)
 		end
-	end, if fFlagMomentsFlushDwellBeforeNavigationModule then if getFFlagMomentsAnalyticsSchemaIdentity() then {
+	end, if fFlagMomentsFlushDwellBeforeNavigationModule then {
 		openProfile, var10, data.creatorId, data.momentId, data.feedItemId,
 		data.feedSessionId
-	} else { openProfile, var10, data.creatorId } elseif getFFlagMomentsAnalyticsSchemaIdentity() then {
+	} else {
 		openProfile,
 		data.creatorId,
 		data.momentId,
 		data.feedItemId,
 		data.feedSessionId
-	} else { openProfile, data.creatorId })
+	})
 	local size800 = var1.Size.Size_800
 	local var12 = if var8 and var9 then `{var8} {char}` else var8
 	

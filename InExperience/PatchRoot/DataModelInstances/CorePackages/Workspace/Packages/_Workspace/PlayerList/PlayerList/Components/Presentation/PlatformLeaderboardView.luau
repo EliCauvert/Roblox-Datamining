@@ -39,7 +39,7 @@ return reactModule.memo(function(p1)
 	local scale = useTokens().Config.UI.Scale
 	local var6 = constantsModule.PLATFORM_ROW_HEIGHT * scale
 	local var7 = constantsModule.PLATFORM_HEADER_HEIGHT * scale
-	local var8 = 26 * scale
+	local var8 = constantsModule.PLATFORM_FOOTER_HEIGHT * scale
 	local var9 = constantsModule.PLATFORM_RANK_WIDTH * scale
 	local var10 = constantsModule.PLATFORM_SCORE_WIDTH * scale
 	local var11 = useReportPanelContentHeightModule(var7 + var6 + var8)

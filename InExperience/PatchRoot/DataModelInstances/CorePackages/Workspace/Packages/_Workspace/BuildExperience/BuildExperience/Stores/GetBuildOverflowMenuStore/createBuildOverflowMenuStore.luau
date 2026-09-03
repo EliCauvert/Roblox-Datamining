@@ -14,7 +14,7 @@ local fFlagBuildExperiencePrivateInvitesModule = require(buildExperience.Flags.F
 local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local fFlagBuildVersionHistoryUpdatesModule = require(buildExperience.Flags.FFlagBuildVersionHistoryUpdates)
 local fFlagEnableBuildAdPromotionModule = require(buildExperience.Flags.FFlagEnableBuildAdPromotion)
-local fFlagBuildExperienceShareUseUniverseSummary = require(parent.SharedFlags).FFlagBuildExperienceShareUseUniverseSummary
+local fFlagBuildExperienceMenuImprovementsModule = require(buildExperience.Flags.FFlagBuildExperienceMenuImprovements)
 local fFlagBuildExperienceAnalytics = require(parent.SharedFlags).FFlagBuildExperienceAnalytics
 local privacyType = universeConfigurationModule.PrivacyType
 
@@ -51,12 +51,11 @@ local function getPublishText(p1)
 end
 
 local function onShareActivated(p1)
-	-- upvalues: universeConfigurationModule (ref), fFlagBuildExperienceShareUseUniverseSummary (ref), gameConfigurationLabelsModule (ref), privacyType (ref)
+	-- upvalues: universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), privacyType (ref)
 	if p1.placeId == nil then
 		return nil
 	end
-	local universeConfigurationStore = universeConfigurationModule.getUniverseConfigurationStore()
-	local audience = gameConfigurationLabelsModule.getAudience(if fFlagBuildExperienceShareUseUniverseSummary then universeConfigurationStore.getAndFetchSummary(p1.universeId).data() else universeConfigurationStore.getAndFetchConfiguration(p1.universeId).data())
+	local audience = gameConfigurationLabelsModule.getAudience(universeConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p1.universeId).data())
 	
 	return if audience == privacyType.Private then { type = "showPrivateShareTooltip" } elseif audience == privacyType.FriendsOnly then { type = "confirmFriendsShare", placeId = p1.placeId } elseif audience == privacyType.Public then { type = "share", placeId = p1.placeId } else nil
 end
@@ -100,111 +99,134 @@ local t = {
 }
 
 return function()
-	-- upvalues: localizationStringsModule (ref), isAssistantDisabled (ref), onAssistantActivated (ref), isPlaytestDisabled (ref), onPlaytestActivated (ref), getPublishText (ref), fFlagBuildExperiencePrivateInvitesModule (ref), onShareActivated (ref), fFlagBuildVersionHistoryUpdatesModule (ref), isVersionHistoryDisabled (ref), onVersionHistoryActivated (ref), isInviteToPlaytestDisabled (ref), sendBuildExperienceEventModule (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceManageDevProductModule (ref), signalsModule (ref), reactModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), universeConfigurationModule (ref), fFlagBuildExperienceShareUseUniverseSummary (ref), gameConfigurationLabelsModule (ref), fFlagEnableBuildAdPromotionModule (ref), privacyType (ref), t (ref)
-	local list = {
-		{
-			items = {
-				{
-					id = "assistant",
-					text = localizationStringsModule.BUILD_MENU_BACK_TO_BUILD,
-					isDisabled = isAssistantDisabled,
-					onActivated = onAssistantActivated
-				},
-				{
-					id = "playtest",
-					text = localizationStringsModule.BUILD_MENU_PLAYTEST,
-					isDisabled = isPlaytestDisabled,
-					onActivated = onPlaytestActivated
-				}
-			}
-		},
-		{
-			items = {
-				{
-					id = "settings",
-					text = localizationStringsModule.BUILD_MENU_SETTINGS,
-					onActivated = function()
-						return { type = "openPage", page = "settings" }
-					end
-				},
-				{
-					id = "publish",
-					text = localizationStringsModule.BUILD_MENU_PUBLISH,
-					getText = getPublishText,
-					onActivated = function()
-						return { type = "openPage", page = "publish" }
-					end
-				},
-				{
-					id = "share",
-					text = localizationStringsModule.BUILD_MENU_SHARE,
-					onActivated = function(p1)
-						-- upvalues: fFlagBuildExperiencePrivateInvitesModule (copy), onShareActivated (copy)
-						return if fFlagBuildExperiencePrivateInvitesModule then { type = "share" } else onShareActivated(p1)
-					end
-				},
-				{
-					id = "version-history",
-					text = if fFlagBuildVersionHistoryUpdatesModule then localizationStringsModule.BUILD_MENU_VERSIONS else localizationStringsModule.BUILD_MENU_VERSION_HISTORY,
-					isDisabled = isVersionHistoryDisabled,
-					onActivated = onVersionHistoryActivated
-				}
-			}
-		}
+	-- upvalues: localizationStringsModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), onShareActivated (ref), fFlagBuildVersionHistoryUpdatesModule (ref), isVersionHistoryDisabled (ref), onVersionHistoryActivated (ref), isInviteToPlaytestDisabled (ref), sendBuildExperienceEventModule (ref), fFlagBuildExperienceMenuImprovementsModule (ref), isAssistantDisabled (ref), onAssistantActivated (ref), isPlaytestDisabled (ref), onPlaytestActivated (ref), getPublishText (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceManageDevProductModule (ref), signalsModule (ref), reactModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), fFlagEnableBuildAdPromotionModule (ref), privacyType (ref), t (ref)
+	local list
+	local t_1 = {
+		id = "settings",
+		text = localizationStringsModule.BUILD_MENU_SETTINGS,
+		onActivated = function()
+			return { type = "openPage", page = "settings" }
+		end
 	}
+	local t_2 = {
+		id = "share",
+		text = localizationStringsModule.BUILD_MENU_SHARE,
+		onActivated = function(p1)
+			-- upvalues: fFlagBuildExperiencePrivateInvitesModule (copy), onShareActivated (copy)
+			return if fFlagBuildExperiencePrivateInvitesModule then { type = "share" } else onShareActivated(p1)
+		end
+	}
+	local t_3 = {
+		id = "version-history",
+		text = if fFlagBuildVersionHistoryUpdatesModule then localizationStringsModule.BUILD_MENU_VERSIONS else localizationStringsModule.BUILD_MENU_VERSION_HISTORY,
+		isDisabled = isVersionHistoryDisabled,
+		onActivated = onVersionHistoryActivated
+	}
+	local t_4 = {
+		id = "invite-to-playtest",
+		text = localizationStringsModule.BUILD_MENU_INVITE_TO_PLAYTEST,
+		isDisabled = isInviteToPlaytestDisabled,
+		onActivated = function(p1)
+			-- upvalues: sendBuildExperienceEventModule (copy)
+			sendBuildExperienceEventModule("ADD_TO_PLAYTEST_CLICK", {
+				universeId = p1.universeId,
+				placeId = p1.placeId,
+				conversationId = p1.sessionId
+			}, { source = "overflow_menu" })
+			
+			return { type = "openInvitePicker" }
+		end
+	}
+	local t_5 = {
+		id = "stats",
+		text = localizationStringsModule.BUILD_MENU_STATS,
+		onActivated = function()
+			return { type = "openPage", page = "stats" }
+		end
+	}
+	local t_6 = {
+		id = "monetization",
+		text = localizationStringsModule.BUILD_MENU_MONETIZATION,
+		onActivated = function()
+			return { type = "openPage", page = "monetization" }
+		end
+	}
+	local _ = nil
+	local t_7 = nil
 	
-	if fFlagBuildExperiencePrivateInvitesModule then
-		table.insert(list[2].items, 2, {
-			id = "invite-to-playtest",
-			text = localizationStringsModule.BUILD_MENU_INVITE_TO_PLAYTEST,
-			isDisabled = isInviteToPlaytestDisabled,
-			onActivated = function(p1)
-				-- upvalues: sendBuildExperienceEventModule (copy)
-				sendBuildExperienceEventModule("ADD_TO_PLAYTEST_CLICK", {
-					universeId = p1.universeId,
-					placeId = p1.placeId,
-					conversationId = p1.sessionId
-				}, { source = "overflow_menu" })
-				
-				return { type = "openInvitePicker" }
-			end
-		})
-	end
-	local t_1 = nil
-	
-	if fFlagBuildExperienceAnalytics then
-		t_1 = {
-			items = {
-				{
-					id = "stats",
-					text = localizationStringsModule.BUILD_MENU_STATS,
-					onActivated = function()
-						return { type = "openPage", page = "stats" }
-					end
+	if fFlagBuildExperienceMenuImprovementsModule then
+		list = {
+			{
+				items = {
+					{
+						id = "publish",
+						text = localizationStringsModule.BUILD_MENU_PUBLISH,
+						onActivated = function()
+							return { type = "openPage", page = "publish" }
+						end
+					},
+					t_2,
+					t_3,
+					t_1
 				}
 			}
 		}
-		table.insert(list, t_1)
-	end
-	if fFlagBuildExperienceManageDevProductModule then
-		table.insert(list, 1, {
-			items = {
-				{
-					id = "monetization",
-					text = localizationStringsModule.BUILD_MENU_MONETIZATION,
-					onActivated = function()
-						return { type = "openPage", page = "monetization" }
-					end
+		
+		if fFlagBuildExperiencePrivateInvitesModule then
+			table.insert(list[1].items, 3, t_4)
+		end
+	else
+		list = {
+			{
+				items = {
+					{
+						id = "assistant",
+						text = localizationStringsModule.BUILD_MENU_BACK_TO_BUILD,
+						isDisabled = isAssistantDisabled,
+						onActivated = onAssistantActivated
+					},
+					{
+						id = "playtest",
+						text = localizationStringsModule.BUILD_MENU_PLAYTEST,
+						isDisabled = isPlaytestDisabled,
+						onActivated = onPlaytestActivated
+					}
+				}
+			},
+			{
+				items = {
+					t_1,
+					{
+						id = "publish",
+						text = localizationStringsModule.BUILD_MENU_PUBLISH,
+						getText = getPublishText,
+						onActivated = function()
+							return { type = "openPage", page = "publish" }
+						end
+					},
+					t_2,
+					t_3
 				}
 			}
-		})
+		}
+		
+		if fFlagBuildExperiencePrivateInvitesModule then
+			table.insert(list[2].items, 2, t_4)
+		end
+		if fFlagBuildExperienceAnalytics then
+			t_7 = { items = { t_5 } }
+			table.insert(list, t_7)
+		end
+	end
+	if fFlagBuildExperienceManageDevProductModule and not fFlagBuildExperienceMenuImprovementsModule then
+		table.insert(list, 1, { items = { t_6 } })
 	end
 	local var1 = signalsModule.createSignal(list)
 	
 	return {
 		getItems = var1,
 		useItems = function(p1)
-			-- upvalues: reactModule (copy), signalsModule (copy), fFlagBuildExperiencePrivateInvitesModule (copy), getPrivatePlaytestersStore (copy), signalsReactModule (copy), fFlagBuildExperienceAnalytics (copy), universeConfigurationModule (copy), fFlagBuildExperienceShareUseUniverseSummary (copy), gameConfigurationLabelsModule (copy), var1 (ref), fFlagEnableBuildAdPromotionModule (copy), privacyType (copy), t_1 (write), t (copy)
+			-- upvalues: reactModule (copy), signalsModule (copy), fFlagBuildExperiencePrivateInvitesModule (copy), getPrivatePlaytestersStore (copy), signalsReactModule (copy), fFlagBuildExperienceAnalytics (copy), universeConfigurationModule (copy), gameConfigurationLabelsModule (copy), var1 (ref), fFlagEnableBuildAdPromotionModule (copy), fFlagBuildExperienceMenuImprovementsModule (copy), privacyType (copy), t_5 (ref), fFlagBuildExperienceManageDevProductModule (copy), t_6 (ref), t (copy), t_7 (write)
 			local var2 = if p1 ~= nil then nil else p1.universeId
 			local var3 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 				-- upvalues: signalsModule (copy), fFlagBuildExperiencePrivateInvitesModule (copy), var2 (ref), getPrivatePlaytestersStore (copy)
@@ -214,46 +236,64 @@ return function()
 				end)
 			end, { var2 }))
 			local var4 = if fFlagBuildExperienceAnalytics then signalsReactModule.useSignalState(reactModule.useMemo(function()
-				-- upvalues: signalsModule (copy), var2 (ref), universeConfigurationModule (copy), fFlagBuildExperienceShareUseUniverseSummary (copy), gameConfigurationLabelsModule (copy)
+				-- upvalues: signalsModule (copy), var2 (ref), universeConfigurationModule (copy), gameConfigurationLabelsModule (copy)
 				return signalsModule.createComputed(function(p2)
-					-- upvalues: var2 (copy), universeConfigurationModule (copy), fFlagBuildExperienceShareUseUniverseSummary (copy), gameConfigurationLabelsModule (copy)
-					if var2 == nil then
-						return nil
-					end
-					local universeConfigurationStore = universeConfigurationModule.getUniverseConfigurationStore()
-					
-					return gameConfigurationLabelsModule.getAudience(if fFlagBuildExperienceShareUseUniverseSummary then universeConfigurationStore.getAndFetchSummary(var2).data(p2) else universeConfigurationStore.getAndFetchConfiguration(var2).data(p2))
+					-- upvalues: var2 (copy), universeConfigurationModule (copy), gameConfigurationLabelsModule (copy)
+					return if var2 == nil then nil else gameConfigurationLabelsModule.getAudience(universeConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(var2).data(p2))
 				end)
 			end, { var2 })) else nil
 			local var5 = signalsReactModule.useSignalState(var1)
 			local var6 = fFlagEnableBuildAdPromotionModule and (p1 ~= nil and (p1.canOpenGetUsers == true and p1.getUsersUserEligible == true))
 			
 			return if p1 == nil then {} else reactModule.useMemo(function()
-				-- upvalues: fFlagBuildExperienceAnalytics (copy), var4 (write), privacyType (copy), fFlagBuildExperiencePrivateInvitesModule (copy), var6 (ref), var5 (ref), t_1 (copy), t (copy)
-				local var7 = fFlagBuildExperienceAnalytics and var4 ~= privacyType.Public
-				
-				if not fFlagBuildExperiencePrivateInvitesModule and not var7 and not var6 then
-					return var5
-				end
-				local cloned = table.clone(var5)
-				
-				if var7 then
-					local index = table.find(cloned, t_1)
+				-- upvalues: fFlagBuildExperienceMenuImprovementsModule (copy), fFlagBuildExperienceAnalytics (copy), var4 (write), privacyType (copy), t_5 (copy), fFlagBuildExperienceManageDevProductModule (copy), t_6 (copy), var6 (ref), t (copy), fFlagBuildExperiencePrivateInvitesModule (copy), var5 (ref), t_7 (copy)
+				if fFlagBuildExperienceMenuImprovementsModule then
+					local t_1 = {}
 					
-					if index ~= nil then
-						table.remove(cloned, index)
+					if fFlagBuildExperienceAnalytics and var4 == privacyType.Public then
+						table.insert(t_1, t_5)
 					end
-				end
-				if var6 then
-					local var8 = cloned[1]
+					if fFlagBuildExperienceManageDevProductModule then
+						table.insert(t_1, t_6)
+					end
+					if var6 then
+						table.insert(t_1, t)
+					end
+					if #t_1 == 0 and not fFlagBuildExperiencePrivateInvitesModule then
+						return var5
+					end
+					local cloned = table.clone(var5)
 					
-					if var8 ~= nil then
-						local cloned_1 = table.clone(var8.items)
-						table.insert(cloned_1, t)
-						cloned[1] = { items = cloned_1 }
+					if #t_1 > 0 then
+						table.insert(cloned, 1, { items = t_1 })
 					end
+					return cloned
+				else
+					local var7 = fFlagBuildExperienceAnalytics and var4 ~= privacyType.Public
+					
+					if not fFlagBuildExperiencePrivateInvitesModule and not var7 and not var6 then
+						return var5
+					end
+					local cloned = table.clone(var5)
+					
+					if var7 then
+						local index = table.find(cloned, t_7)
+						
+						if index ~= nil then
+							table.remove(cloned, index)
+						end
+					end
+					if var6 then
+						local var8 = cloned[1]
+						
+						if var8 ~= nil then
+							local cloned_1 = table.clone(var8.items)
+							table.insert(cloned_1, t)
+							cloned[1] = { items = cloned_1 }
+						end
+					end
+					return cloned
 				end
-				return cloned
 			end, { var5, var3, var4, var6 })
 		end
 	}

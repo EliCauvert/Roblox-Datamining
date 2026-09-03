@@ -7,15 +7,18 @@ local displayModule = require(parent.Display)
 local drawerModule = require(parent.Drawer)
 local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local foundationModule = require(parent.Foundation)
+local isPioneerLaunch = require(parent.PioneerUtils).isPioneerLaunch
 local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
 local responsiveModule = require(parent.Responsive)
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
+local switchServerModule = require(parent.SwitchServer)
 local divider = foundationModule.Divider
 local drawerContainer = drawerModule.DrawerContainer
 local experienceDetailsRowModule = require(inExperienceSideSheet.Components.ExperienceDetailsRow)
 local footerModule = require(inExperienceSideSheet.Components.Footer)
+local userProfileRowModule = require(inExperienceSideSheet.Components.UserProfileRow)
 local scrollView = foundationModule.ScrollView
 local gridListModule = require(inExperienceSideSheet.Components.GridList)
 local verticalListModule = require(inExperienceSideSheet.Components.VerticalList)
@@ -30,6 +33,7 @@ local useBackgroundStyleModule = require(inExperienceSideSheet.Hooks.useBackgrou
 local useSideSheetFocusNavScrollViewAnimationModule = require(inExperienceSideSheet.Hooks.useSideSheetFocusNavScrollViewAnimation)
 local getIntegrationsStoreModule = require(inExperienceSideSheet.Stores.GetIntegrationsStore)
 local getSideSheetConfigStoreModule = require(inExperienceSideSheet.Stores.GetSideSheetConfigStore)
+local getSwitchServerStore = switchServerModule.GetSwitchServerStore
 local wrapWithProvidersModule = require(inExperienceSideSheet.Utils.wrapWithProviders)
 local getSideSheetVisibilityModule = require(inExperienceSideSheet.Utils.getSideSheetVisibility)
 local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
@@ -39,7 +43,9 @@ local fIntSideSheetVariant = sharedFlagsModule.FIntSideSheetVariant
 local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
 local fFlagEnableWhatsNew = sharedFlagsModule.FFlagEnableWhatsNew
 local fFlagUseAnimateScrollViewToSelectionHelper = sharedFlagsModule.FFlagUseAnimateScrollViewToSelectionHelper
+local fFlagShowSwitchServerButton = sharedFlagsModule.FFlagShowSwitchServerButton
 local var1 = if fFlagEnableWhatsNew then require(parent.WhatsNew).WhatsNewAnchor else nil
+local switchServerTelemetry = switchServerModule.SwitchServerTelemetry
 local list = {
 	Enum.KeyCode.Left, Enum.KeyCode.Right, Enum.KeyCode.Up, Enum.KeyCode.Down,
 	Enum.KeyCode.W, Enum.KeyCode.A, Enum.KeyCode.S, Enum.KeyCode.D
@@ -74,7 +80,7 @@ end
 local var3 = nil
 
 local function SideSheetContent(p1)
-	-- upvalues: useTokens (ref), useStyleSheet (ref), useBackgroundStyleModule (ref), signalsReactModule (ref), getDeviceSafePadding (ref), fFlagMountUnmountSideSheet (ref), useDrawerShouldMount (ref), getToggleIntegrations (ref), reactModule (ref), sidesheetAnalyticsModule (ref), fFlagSideSheetFocusNav (ref), useFocusGuiObject (write), useLastInputMode (ref), getSideSheetConfigStoreModule (ref), usePreferredInput (ref), signalsModule (ref), getSideSheetVisibilityModule (ref), responsiveModule (ref), mouseIconOverrideService (ref), contextActionService (ref), list (ref), toggleSideSheetModule (ref), fFlagUseAnimateScrollViewToSelectionHelper (ref), useSideSheetFocusNavScrollViewAnimationModule (ref), fIntSideSheetVariant (ref), t_1 (write), experienceDetailsRowModule (ref), view (ref), divider (ref), gridListModule (ref), verticalListModule (ref), var2 (ref), scrollView (ref), footerModule (ref), fFlagEnableWhatsNew (ref), var1 (ref), drawerContainer (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
+	-- upvalues: useTokens (ref), useStyleSheet (ref), useBackgroundStyleModule (ref), signalsReactModule (ref), getDeviceSafePadding (ref), fFlagMountUnmountSideSheet (ref), useDrawerShouldMount (ref), getToggleIntegrations (ref), reactModule (ref), sidesheetAnalyticsModule (ref), fFlagSideSheetFocusNav (ref), useFocusGuiObject (write), useLastInputMode (ref), getSideSheetConfigStoreModule (ref), usePreferredInput (ref), fFlagShowSwitchServerButton (ref), signalsModule (ref), getSideSheetVisibilityModule (ref), responsiveModule (ref), mouseIconOverrideService (ref), getSwitchServerStore (ref), switchServerTelemetry (ref), contextActionService (ref), list (ref), toggleSideSheetModule (ref), fFlagUseAnimateScrollViewToSelectionHelper (ref), useSideSheetFocusNavScrollViewAnimationModule (ref), fIntSideSheetVariant (ref), t_1 (write), isPioneerLaunch (ref), userProfileRowModule (ref), experienceDetailsRowModule (ref), view (ref), divider (ref), gridListModule (ref), verticalListModule (ref), var2 (ref), scrollView (ref), footerModule (ref), fFlagEnableWhatsNew (ref), var1 (ref), drawerContainer (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var4 = useTokens()
 	local var5 = useStyleSheet()
 	local var6 = useBackgroundStyleModule()
@@ -109,14 +115,15 @@ local function SideSheetContent(p1)
 	local var16 = reactModule.useRef(false)
 	local var17 = reactModule.useRef(false)
 	local var18 = usePreferredInput()
+	local var19 = if fFlagShowSwitchServerButton then reactModule.useRef(false) else nil
 	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), getSideSheetVisibilityModule (copy), p1 (ref), var16 (ref), var18 (ref), responsiveModule (copy), var17 (ref), mouseIconOverrideService (copy), fFlagSideSheetFocusNav (copy), var11 (write)
-		local var19 = signalsModule.createEffect(function(p2)
-			-- upvalues: getSideSheetVisibilityModule (copy), p1 (copy), var16 (copy), var18 (copy), responsiveModule (copy), var17 (copy), mouseIconOverrideService (copy), fFlagSideSheetFocusNav (copy), var11 (copy)
-			local var20 = getSideSheetVisibilityModule(p2)
+		-- upvalues: signalsModule (copy), getSideSheetVisibilityModule (copy), p1 (ref), var16 (ref), var18 (ref), responsiveModule (copy), var17 (ref), mouseIconOverrideService (copy), fFlagSideSheetFocusNav (copy), var11 (write), fFlagShowSwitchServerButton (copy), getSwitchServerStore (copy), var19 (write), switchServerTelemetry (copy)
+		local var20 = signalsModule.createEffect(function(p2)
+			-- upvalues: getSideSheetVisibilityModule (copy), p1 (copy), var16 (copy), var18 (copy), responsiveModule (copy), var17 (copy), mouseIconOverrideService (copy), fFlagSideSheetFocusNav (copy), var11 (copy), fFlagShowSwitchServerButton (copy), getSwitchServerStore (copy), var19 (copy), switchServerTelemetry (copy)
+			local var21 = getSideSheetVisibilityModule(p2)
 			
 			if p1.ChatSelector then
-				if var20 then
+				if var21 then
 					var16.current = p1.ChatSelector:GetVisibility()
 					p1.ChatSelector:SetVisible(false)
 				elseif var16.current then
@@ -125,24 +132,27 @@ local function SideSheetContent(p1)
 				end
 			end
 			if var18 == responsiveModule.Input.Pointer then
-				if var20 and not var17.current then
+				if var21 and not var17.current then
 					mouseIconOverrideService.push("InExperienceSideSheet", Enum.OverrideMouseIconBehavior.ForceShow)
 					var17.current = true
-				elseif not var20 and var17.current then
+				elseif not var21 and var17.current then
 					mouseIconOverrideService.pop("InExperienceSideSheet")
 					var17.current = false
 				end
 			end
 			if fFlagSideSheetFocusNav then
-				if var20 then
+				if var21 then
 					var11.current = false
-					
-					return
+				else
+					var11.current = nil
 				end
-				var11.current = nil
+			end
+			if var21 and fFlagShowSwitchServerButton and (getSwitchServerStore(p2).shouldEnableSwitchServer(p2) and not var19.current) then
+				var19.current = true
+				switchServerTelemetry.sendSwitchServerButtonActions({ event_type = "impression" })
 			end
 		end)
-		local var20 = if p1.ChatSelector then p1.ChatSelector.VisibilityStateChanged:connect(function(p2)
+		local var21 = if p1.ChatSelector then p1.ChatSelector.VisibilityStateChanged:connect(function(p2)
 			-- upvalues: getSideSheetVisibilityModule (copy), var16 (copy)
 			if getSideSheetVisibilityModule() and p2 then
 				var16.current = false
@@ -150,11 +160,11 @@ local function SideSheetContent(p1)
 		end) else nil
 		
 		return function()
-			-- upvalues: var19 (ref), var20 (write)
-			var19()
+			-- upvalues: var20 (ref), var21 (write)
+			var20()
 			
-			if var20 ~= nil then
-				var20:disconnect()
+			if var21 ~= nil then
+				var21:disconnect()
 			end
 		end
 	end, { p1.ChatSelector, var18 })
@@ -188,18 +198,18 @@ local function SideSheetContent(p1)
 			end
 		end, {})
 	end
-	local var19 = if fFlagSideSheetFocusNav and fFlagUseAnimateScrollViewToSelectionHelper then useSideSheetFocusNavScrollViewAnimationModule() else nil
-	local var20 = nil
+	local var20 = if fFlagSideSheetFocusNav and fFlagUseAnimateScrollViewToSelectionHelper then useSideSheetFocusNavScrollViewAnimationModule() else nil
+	local var21 = nil
 	
 	if fFlagSideSheetFocusNav then
-		var20 = if fIntSideSheetVariant == 2 or #var9 <= 0 then t_1.PageList else t_1.IntegrationsList
+		var21 = if fIntSideSheetVariant == 2 or #var9 <= 0 then t_1.PageList else t_1.IntegrationsList
 	end
 	if not var8 then
 		return nil
 	end
-	local var21
+	local var22
 	local t = {
-		ExperienceDetailsRow = reactModule.createElement(experienceDetailsRowModule, { layoutOrder = 0 }),
+		HeaderRow = if isPioneerLaunch() then reactModule.createElement(userProfileRowModule, { layoutOrder = 0 }) else reactModule.createElement(experienceDetailsRowModule, { layoutOrder = 0 }),
 		HeaderDivider = reactModule.createElement(view, {
 			tag = "size-full-0 auto-y padding-right-xlarge",
 			LayoutOrder = 1
@@ -207,23 +217,23 @@ local function SideSheetContent(p1)
 	}
 	
 	if #var9 <= 0 then
-		var21 = nil
+		var22 = nil
 	elseif fIntSideSheetVariant == 0 then
-		var21 = reactModule.createElement
-		var21 = var21(gridListModule, {
+		var22 = reactModule.createElement
+		var22 = var22(gridListModule, {
 			layoutOrder = 2,
 			integrationsGetter = getToggleIntegrations,
-			firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and var20 == t_1.IntegrationsList then var12 else nil
+			firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and var21 == t_1.IntegrationsList then var12 else nil
 		})
 	else
-		var21 = reactModule.createElement
-		var21 = var21(verticalListModule, {
+		var22 = reactModule.createElement
+		var22 = var22(verticalListModule, {
 			layoutOrder = if fIntSideSheetVariant == 2 then 4 else 2,
 			integrationsGetter = getToggleIntegrations,
-			firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and var20 == t_1.IntegrationsList then var12 else nil
+			firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and var21 == t_1.IntegrationsList then var12 else nil
 		})
 	end
-	t.IntegrationsList = var21
+	t.IntegrationsList = var22
 	t.PageDivider = if #var9 > 0 then reactModule.createElement(view, {
 		tag = "size-full-0 auto-y padding-right-xlarge",
 		LayoutOrder = 3
@@ -231,7 +241,7 @@ local function SideSheetContent(p1)
 	t.PageList = reactModule.createElement(verticalListModule, {
 		layoutOrder = if fIntSideSheetVariant == 2 then 2 else 4,
 		integrationsGetter = var2,
-		firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and var20 == t_1.PageList then var12 else nil
+		firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and var21 == t_1.PageList then var12 else nil
 	})
 	local createElement = reactModule.createElement
 	createElement = createElement(view, { tag = "col size-full", onAbsoluteSizeChanged = var15 }, {
@@ -251,7 +261,7 @@ local function SideSheetContent(p1)
 				SortOrder = Enum.SortOrder.LayoutOrder
 			},
 			selection = if fFlagSideSheetFocusNav then { Selectable = false } else nil,
-			scrollingFrameRef = if fFlagSideSheetFocusNav and fFlagUseAnimateScrollViewToSelectionHelper then var19 else nil
+			scrollingFrameRef = if fFlagSideSheetFocusNav and fFlagUseAnimateScrollViewToSelectionHelper then var20 else nil
 		}, t),
 		Footer = reactModule.createElement(footerModule, { layoutOrder = 2 })
 	})
@@ -259,15 +269,15 @@ local function SideSheetContent(p1)
 	if fFlagEnableWhatsNew then
 		createElement = reactModule.createElement(var1, { anchorId = "sideSheet", tag = "size-full" }, { SideSheetPanel = createElement })
 	end
-	local var22 = 300 - var4.Padding.XLarge
+	local var23 = 300 - var4.Padding.XLarge
 	
 	if fFlagSideSheetFocusNav then
-		var22 += var4.Padding.Small
+		var23 += var4.Padding.Small
 	end
 	return reactModule.createElement(drawerContainer, {
 		displayOrder = 12,
 		scrimIsModal = true,
-		menuWidth = var22,
+		menuWidth = var23,
 		leftOffset = var7.left + var4.Padding.XLarge,
 		topOffset = var7.top,
 		bottomOffset = var7.bottom,

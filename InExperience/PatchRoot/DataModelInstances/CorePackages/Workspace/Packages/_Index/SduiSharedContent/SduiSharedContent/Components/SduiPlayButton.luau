@@ -13,10 +13,9 @@ local getSduiFocusActivationStore = require(parent.SduiSharedUtilities).getSduiF
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppResetHoverOnSduiPlayButtonActivation = require(parent.SharedFlags).FFlagLuaAppResetHoverOnSduiPlayButtonActivation
 local fFlagLuaAppLaunchWhenLoadingEdp = require(parent.SharedFlags).FFlagLuaAppLaunchWhenLoadingEdp
-local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp = require(parent.SharedFlags).FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), getSduiActionHandlerRegistry (ref), sduiActionType (ref), findAnalyticsField (ref), fFlagSduiExperienceDetailsSupport (ref), useSduiReportExperienceLaunchedModule (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), executeAction (ref), getSduiFocusActivationStore (ref), playButton (ref), cryoModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref)
+	-- upvalues: reactModule (ref), getSduiActionHandlerRegistry (ref), sduiActionType (ref), findAnalyticsField (ref), fFlagSduiExperienceDetailsSupport (ref), useSduiReportExperienceLaunchedModule (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), executeAction (ref), getSduiFocusActivationStore (ref), playButton (ref), cryoModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref)
 	local analyticsContext = p1.analyticsContext
 	local placeId = p1.placeId or p1.rootPlaceId
 	
@@ -61,6 +60,6 @@ return reactModule.memo(function(p1)
 		eventContext = findAnalyticsField("eventContext", analyticsContext.analyticsData, "ExperienceTile"),
 		launchSource = if fFlagSduiExperienceDetailsSupport then if fFlagSduiExperienceDetailsSupport then findAnalyticsField("launchSource", analyticsContext.analyticsData) else nil else nil,
 		launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then p1.launchWhenLoading else nil,
-		launchOnReleaseAfterUnmount = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp then p1.launchOnReleaseAfterUnmount else nil
+		launchOnReleaseAfterUnmount = p1.launchOnReleaseAfterUnmount
 	}))
 end)

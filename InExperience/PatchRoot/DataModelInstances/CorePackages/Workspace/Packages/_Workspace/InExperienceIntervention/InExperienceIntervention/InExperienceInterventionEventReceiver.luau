@@ -18,13 +18,14 @@ local interventionTypes = interventionAnalytics.Constants.InterventionTypes
 local getFFlagGameJoinTimeoutChatAttemptEnabled = require(parent.SharedFlags).GetFFlagGameJoinTimeoutChatAttemptEnabled
 local fFlagAppChatUniversalFeatureRestriction = require(parent.SharedFlags).FFlagAppChatUniversalFeatureRestriction
 local fFlagUFRImprovementsModule = require(parent.InterventionShared.FFlagUFRImprovements)
+local fFlagUFRAppealsAndModNoteFixModule = require(parent.InterventionShared.FFlagUFRAppealsAndModNoteFix)
 local fFlagUniversalFeatureRestrictionReceivers = require(parent.SharedFlags).FFlagUniversalFeatureRestrictionReceivers
 local fFlagTemporaryAvatarKickWarningDialogModule = require(parent.InterventionShared.FFlagTemporaryAvatarKickWarningDialog)
 
 function InExperienceInterventionEventReceiver(p1)
-	-- upvalues: reactModule (ref), notificationService (ref), constants (ref), httpService (ref), interventionTreatmentConfigListModule (ref), fFlagTemporaryAvatarKickWarningDialogModule (ref), chatService (ref), getFFlagGameJoinTimeoutChatAttemptEnabled (ref), featureRestrictionManagerService (ref), getModerationDetail (ref), inExperienceInterventionAnalyticsModule (ref), fFlagUFRImprovementsModule (ref), determineUFRInterventionType (ref), interventionTypes (ref), fFlagAppChatUniversalFeatureRestriction (ref), chatInputBoxDisabledPressedSignal (ref), fFlagUniversalFeatureRestrictionReceivers (ref), featureRestrictionDisplaySignalModule (ref), interventionAnalytics (ref), featureRestrictionDisplayDirectSignalModule (ref)
+	-- upvalues: reactModule (ref), notificationService (ref), constants (ref), httpService (ref), interventionTreatmentConfigListModule (ref), fFlagTemporaryAvatarKickWarningDialogModule (ref), chatService (ref), getFFlagGameJoinTimeoutChatAttemptEnabled (ref), featureRestrictionManagerService (ref), getModerationDetail (ref), inExperienceInterventionAnalyticsModule (ref), fFlagUFRImprovementsModule (ref), determineUFRInterventionType (ref), interventionTypes (ref), fFlagAppChatUniversalFeatureRestriction (ref), chatInputBoxDisabledPressedSignal (ref), fFlagUniversalFeatureRestrictionReceivers (ref), featureRestrictionDisplaySignalModule (ref), interventionAnalytics (ref), fFlagUFRAppealsAndModNoteFixModule (ref), featureRestrictionDisplayDirectSignalModule (ref)
 	reactModule.useEffect(function()
-		-- upvalues: notificationService (copy), constants (copy), httpService (copy), interventionTreatmentConfigListModule (copy), p1 (ref), fFlagTemporaryAvatarKickWarningDialogModule (copy), chatService (copy), getFFlagGameJoinTimeoutChatAttemptEnabled (copy), featureRestrictionManagerService (copy), getModerationDetail (copy), inExperienceInterventionAnalyticsModule (copy), fFlagUFRImprovementsModule (copy), determineUFRInterventionType (copy), interventionTypes (copy), fFlagAppChatUniversalFeatureRestriction (copy), chatInputBoxDisabledPressedSignal (copy), fFlagUniversalFeatureRestrictionReceivers (copy), featureRestrictionDisplaySignalModule (copy), interventionAnalytics (copy), featureRestrictionDisplayDirectSignalModule (copy)
+		-- upvalues: notificationService (copy), constants (copy), httpService (copy), interventionTreatmentConfigListModule (copy), p1 (ref), fFlagTemporaryAvatarKickWarningDialogModule (copy), chatService (copy), getFFlagGameJoinTimeoutChatAttemptEnabled (copy), featureRestrictionManagerService (copy), getModerationDetail (copy), inExperienceInterventionAnalyticsModule (copy), fFlagUFRImprovementsModule (copy), determineUFRInterventionType (copy), interventionTypes (copy), fFlagAppChatUniversalFeatureRestriction (copy), chatInputBoxDisabledPressedSignal (copy), fFlagUniversalFeatureRestrictionReceivers (copy), featureRestrictionDisplaySignalModule (copy), interventionAnalytics (copy), fFlagUFRAppealsAndModNoteFixModule (copy), featureRestrictionDisplayDirectSignalModule (copy)
 		local robloxEventReceivedConnection = notificationService.RobloxEventReceived:Connect(function(p2)
 			-- upvalues: constants (copy), httpService (copy), interventionTreatmentConfigListModule (copy), p1 (copy), fFlagTemporaryAvatarKickWarningDialogModule (copy)
 			if p2.namespace == constants.FEATURE_INTERV_SIGNAL_NAMESPACE then
@@ -128,7 +129,7 @@ function InExperienceInterventionEventReceiver(p1)
 			})
 		end) else nil
 		local var3 = if fFlagUniversalFeatureRestrictionReceivers then featureRestrictionDisplaySignalModule:connect(function(p3)
-			-- upvalues: getModerationDetail (copy), interventionAnalytics (copy), constants (copy), p1 (copy)
+			-- upvalues: getModerationDetail (copy), interventionAnalytics (copy), constants (copy), fFlagUFRAppealsAndModNoteFixModule (copy), p1 (copy)
 			local abuseVector = p3.abuseVector
 			local options = p3.options
 			local var4 = nil

@@ -2,6 +2,7 @@
 local parent = script:FindFirstAncestor("InExperienceSideSheet").Parent
 local colorMode = require(parent.Foundation).Enums.ColorMode
 local chromeModule = require(parent.Chrome)
+local isPioneerLaunch = require(parent.PioneerUtils).isPioneerLaunch
 local localization = require(parent.InExperienceLocales).Localization
 local localizationProvider = require(parent.Localization).LocalizationProvider
 local reactModule = require(parent.React)
@@ -13,6 +14,9 @@ local UIBloxModule = require(parent.UIBlox)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableDrawerFocusNav = sharedFlagsModule.FFlagEnableDrawerFocusNav
 local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
+local universalAppPolicyModule = require(parent.UniversalAppPolicy)
+local appFeaturePolicies = universalAppPolicyModule.AppFeaturePolicies
+local roactAppPolicy = universalAppPolicyModule.RoactAppPolicy
 local constants = UIBloxModule.App.Style.Constants
 local uiModeStyleProvider = styleModule.UiModeStyleProvider
 local unibarStyle = chromeModule.UnibarStyle
@@ -29,12 +33,15 @@ local t = {
 }
 
 return function(p1, p2, p3)
-	-- upvalues: roduxModule (ref), reactModule (ref), fFlagEnableDrawerFocusNav (ref), roactNavigationModule (ref), t (ref), roactRoduxModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), fFlagSideSheetFocusNav (ref), unibarStyle (ref), reactFocusNavigationModule (ref), var1 (write), provider (ref)
+	-- upvalues: roduxModule (ref), isPioneerLaunch (ref), reactModule (ref), roactAppPolicy (ref), appFeaturePolicies (ref), fFlagEnableDrawerFocusNav (ref), roactNavigationModule (ref), t (ref), roactRoduxModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), fFlagSideSheetFocusNav (ref), unibarStyle (ref), reactFocusNavigationModule (ref), var1 (write), provider (ref)
 	p3 = p3 or roduxModule.Store.new(function(p4)
 		return p4 or {}
 	end)
 	local var2 = p1
 	
+	if isPioneerLaunch() then
+		var2 = reactModule.createElement(roactAppPolicy.Provider, { policy = { appFeaturePolicies } }, var2)
+	end
 	for i, v in p2 do
 		var2 = reactModule.createElement(v, nil, var2)
 	end

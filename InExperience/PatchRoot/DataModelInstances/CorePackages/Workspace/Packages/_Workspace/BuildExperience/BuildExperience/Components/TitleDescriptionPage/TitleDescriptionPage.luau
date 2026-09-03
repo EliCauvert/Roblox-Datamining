@@ -2,10 +2,8 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
 local gameConfigurationActionsModule = require(buildExperience.utils.GameConfigurationActions)
 local iconButton = foundationModule.IconButton
@@ -18,31 +16,20 @@ local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
 return function(p1)
-	-- upvalues: reactModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), gameConfigurationActionsModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), textInput (ref), textArea (ref)
-	local TITLE_DESCRIPTION_DESCRIPTION_LABEL, TITLE_DESCRIPTION_TITLE, TITLE_DESCRIPTION_TITLE_LABEL
+	-- upvalues: reactModule (ref), useLocalization (ref), localizationStringsModule (ref), gameConfigurationActionsModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), textInput (ref), textArea (ref)
 	local testId = p1.testId or "title-description-page"
 	local titleText = p1.titleText or ""
 	local descriptionText = p1.descriptionText or ""
 	local var1, var2 = reactModule.useBinding(titleText)
 	local var3, var4 = reactModule.useBinding(descriptionText)
-	local var5 = if fFlagBuildLocalization then useLocalization({
+	local var5 = useLocalization({
 		descriptionLabel = localizationStringsModule.TITLE_DESCRIPTION_DESCRIPTION_LABEL,
 		title = localizationStringsModule.TITLE_DESCRIPTION_TITLE,
 		titleLabel = localizationStringsModule.TITLE_DESCRIPTION_TITLE_LABEL
-	}) else nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	
-	if fFlagBuildLocalization then
-		TITLE_DESCRIPTION_DESCRIPTION_LABEL = var5.descriptionLabel
-		TITLE_DESCRIPTION_TITLE = var5.title
-		TITLE_DESCRIPTION_TITLE_LABEL = var5.titleLabel
-	else
-		TITLE_DESCRIPTION_DESCRIPTION_LABEL = localizationStringsModule.TITLE_DESCRIPTION_DESCRIPTION_LABEL
-		TITLE_DESCRIPTION_TITLE = localizationStringsModule.TITLE_DESCRIPTION_TITLE
-		TITLE_DESCRIPTION_TITLE_LABEL = localizationStringsModule.TITLE_DESCRIPTION_TITLE_LABEL
-	end
+	})
+	local descriptionLabel = var5.descriptionLabel
+	local title = var5.title
+	local titleLabel = var5.titleLabel
 	local var6 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), var1 (ref), var3 (ref), titleText (ref), descriptionText (ref), gameConfigurationActionsModule (copy)
 		local universeId = p1.universeId
@@ -98,7 +85,7 @@ return function(p1)
 			Title = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "fill auto-y text-heading-medium text-align-x-left text-truncate-end content-emphasis",
-				Text = TITLE_DESCRIPTION_TITLE
+				Text = title
 			})
 		}),
 		Content = reactModule.createElement(view, {
@@ -108,7 +95,7 @@ return function(p1)
 		}, {
 			TitleInput = reactModule.createElement(textInput, {
 				LayoutOrder = 1,
-				label = TITLE_DESCRIPTION_TITLE_LABEL,
+				label = titleLabel,
 				placeholder = p1.titlePlaceholder,
 				text = var1,
 				width = UDim.new(1, 0),
@@ -119,7 +106,7 @@ return function(p1)
 			DescriptionInput = reactModule.createElement(textArea, {
 				LayoutOrder = 2,
 				numLines = 4,
-				label = TITLE_DESCRIPTION_DESCRIPTION_LABEL,
+				label = descriptionLabel,
 				placeholder = p1.descriptionPlaceholder,
 				text = var3,
 				width = UDim.new(1, 0),

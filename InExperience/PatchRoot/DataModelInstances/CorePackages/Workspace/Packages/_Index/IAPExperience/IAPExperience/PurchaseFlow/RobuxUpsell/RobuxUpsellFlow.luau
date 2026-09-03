@@ -35,7 +35,6 @@ local shouldShowNewUpsellModalExperimentModule = require(parent_1.Utility.Experi
 local overlayInGameMenuModule = require(parent_1.Utility.overlayInGameMenu)
 local desktopUpsellExperimentModule = require(parent_1.Utility.Experiments.DesktopUpsellExperiment)
 local getEnableCentralOverlayForUpsellPromptModule = require(parent_1.Flags.getEnableCentralOverlayForUpsellPrompt)
-local fFlagEnableUnifiedProductPurchaseFlow = require(parent_2.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 local getAppContextModule = require(parent_1.Utility.getAppContext)
 local fFlagMobilePopularItemBadgingExperimentEnabledModule = require(parent_1.Flags.FFlagMobilePopularItemBadgingExperimentEnabled)
 local unifiedPurchaseCompletionModalV2Module = require(parent_1.Generic.UnifiedPurchaseCompletionModalV2)
@@ -127,7 +126,7 @@ function name.closeCentralOverlay(p1)
 end
 
 function name.constructRobuxUpsellPromptAnimatorObj(p1)
-	-- upvalues: robuxUpsellFlowStateModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (ref), getAppContextModule (ref), roactModule (ref), unifiedRobuxUpsellModalV2Module (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagPurchasePromptFetchCartPricing (ref), unifiedRobuxUpsellModalModule (ref), fFlagEnableOffersOnInExperienceSurface (ref), overlayInGameMenuModule (ref), robuxUpsellModalMultiplePackageModule (ref), shouldShowNewUpsellModalExperimentModule (ref), desktopUpsellExperimentModule (ref), robuxUpsellModalModule (ref), robuxUpsellPromptModule (ref), fFlagMobilePopularItemBadgingExperimentEnabledModule (ref)
+	-- upvalues: robuxUpsellFlowStateModule (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (ref), getAppContextModule (ref), roactModule (ref), unifiedRobuxUpsellModalV2Module (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagPurchasePromptFetchCartPricing (ref), unifiedRobuxUpsellModalModule (ref), fFlagEnableOffersOnInExperienceSurface (ref), overlayInGameMenuModule (ref), robuxUpsellModalMultiplePackageModule (ref), shouldShowNewUpsellModalExperimentModule (ref), desktopUpsellExperimentModule (ref), robuxUpsellModalModule (ref), robuxUpsellPromptModule (ref), fFlagMobilePopularItemBadgingExperimentEnabledModule (ref)
 	local props = p1.props
 	local state = p1.state
 	p1:BindCancelAction()
@@ -135,7 +134,7 @@ function name.constructRobuxUpsellPromptAnimatorObj(p1)
 	return {
 		shouldAnimate = props.shouldAnimate,
 		shouldShow = props.purchaseState == robuxUpsellFlowStateModule.PurchaseModal,
-		skipAnimation = if fFlagEnableUnifiedProductPurchaseFlow then props.useUnifiedProductPurchaseModal else nil,
+		skipAnimation = props.useUnifiedProductPurchaseModal,
 		onShown = if props.isDelayedInput then function()
 			-- upvalues: p1 (ref), props (ref)
 			p1:setState({ enableInputDelayed = true })
@@ -156,8 +155,8 @@ function name.constructRobuxUpsellPromptAnimatorObj(p1)
 			})
 		end else nil,
 		renderChildren = function()
-			-- upvalues: fFlagEnableUnifiedProductPurchaseFlow (copy), props (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (copy), getAppContextModule (copy), roactModule (copy), unifiedRobuxUpsellModalV2Module (copy), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), fFlagPurchasePromptFetchCartPricing (copy), p1 (ref), state (ref), unifiedRobuxUpsellModalModule (copy), fFlagEnableOffersOnInExperienceSurface (copy), overlayInGameMenuModule (copy), robuxUpsellModalMultiplePackageModule (copy), shouldShowNewUpsellModalExperimentModule (copy), desktopUpsellExperimentModule (copy), robuxUpsellModalModule (copy), robuxUpsellPromptModule (copy), fFlagMobilePopularItemBadgingExperimentEnabledModule (copy)
-			return if fFlagEnableUnifiedProductPurchaseFlow and props.useUnifiedProductPurchaseModal then if fFlagAddCenterDialogForUnifiedPurchaseModal and getAppContextModule() == "UA" then roactModule.createElement(unifiedRobuxUpsellModalV2Module, {
+			-- upvalues: props (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (copy), getAppContextModule (copy), roactModule (copy), unifiedRobuxUpsellModalV2Module (copy), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), fFlagPurchasePromptFetchCartPricing (copy), p1 (ref), state (ref), unifiedRobuxUpsellModalModule (copy), fFlagEnableOffersOnInExperienceSurface (copy), overlayInGameMenuModule (copy), robuxUpsellModalMultiplePackageModule (copy), shouldShowNewUpsellModalExperimentModule (copy), desktopUpsellExperimentModule (copy), robuxUpsellModalModule (copy), robuxUpsellPromptModule (copy), fFlagMobilePopularItemBadgingExperimentEnabledModule (copy)
+			return if props.useUnifiedProductPurchaseModal then if fFlagAddCenterDialogForUnifiedPurchaseModal and getAppContextModule() == "UA" then roactModule.createElement(unifiedRobuxUpsellModalV2Module, {
 				product = {
 					model = props.model,
 					itemIcon = props.itemIcon,
@@ -393,7 +392,7 @@ function name.constructU13ConfirmPromptAnimatorObj(p1)
 end
 
 function name.constructPurchaseErrorPromptAnimatorObj(p1)
-	-- upvalues: robuxUpsellFlowStateModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), purchaseErrorTypeModule (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (ref), roactModule (ref), unifiedRobuxUpsellModalTooExpensiveV2Module (ref), unifiedRobuxUpsellModalTooExpensiveModule (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), shouldShowNewUpsellModalExperimentModule (ref), desktopUpsellExperimentModule (ref), robuxUpsellModalTooExpensiveFallbackModule (ref), purchaseErrorPromptModule (ref)
+	-- upvalues: robuxUpsellFlowStateModule (ref), purchaseErrorTypeModule (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (ref), roactModule (ref), unifiedRobuxUpsellModalTooExpensiveV2Module (ref), unifiedRobuxUpsellModalTooExpensiveModule (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), shouldShowNewUpsellModalExperimentModule (ref), desktopUpsellExperimentModule (ref), robuxUpsellModalTooExpensiveFallbackModule (ref), purchaseErrorPromptModule (ref)
 	local props = p1.props
 	p1:BindCancelAction()
 	
@@ -401,8 +400,8 @@ function name.constructPurchaseErrorPromptAnimatorObj(p1)
 		shouldAnimate = props.shouldAnimate,
 		shouldShow = props.purchaseState == robuxUpsellFlowStateModule.Error,
 		renderChildren = function()
-			-- upvalues: fFlagEnableUnifiedProductPurchaseFlow (copy), props (ref), purchaseErrorTypeModule (copy), fFlagAddCenterDialogForUnifiedPurchaseModal (copy), roactModule (copy), unifiedRobuxUpsellModalTooExpensiveV2Module (copy), p1 (ref), unifiedRobuxUpsellModalTooExpensiveModule (copy), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), shouldShowNewUpsellModalExperimentModule (copy), desktopUpsellExperimentModule (copy), robuxUpsellModalTooExpensiveFallbackModule (copy), purchaseErrorPromptModule (copy)
-			return if fFlagEnableUnifiedProductPurchaseFlow and props.errorType == purchaseErrorTypeModule.NotEnoughRobuxInApp then if fFlagAddCenterDialogForUnifiedPurchaseModal then roactModule.createElement(unifiedRobuxUpsellModalTooExpensiveV2Module, {
+			-- upvalues: props (ref), purchaseErrorTypeModule (copy), fFlagAddCenterDialogForUnifiedPurchaseModal (copy), roactModule (copy), unifiedRobuxUpsellModalTooExpensiveV2Module (copy), p1 (ref), unifiedRobuxUpsellModalTooExpensiveModule (copy), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), shouldShowNewUpsellModalExperimentModule (copy), desktopUpsellExperimentModule (copy), robuxUpsellModalTooExpensiveFallbackModule (copy), purchaseErrorPromptModule (copy)
+			return if props.errorType == purchaseErrorTypeModule.NotEnoughRobuxInApp then if fFlagAddCenterDialogForUnifiedPurchaseModal then roactModule.createElement(unifiedRobuxUpsellModalTooExpensiveV2Module, {
 				product = {
 					model = props.model,
 					itemIcon = props.itemIcon,
@@ -519,7 +518,7 @@ function name.constructTwoStepRequiredAnimatorObj(p1)
 end
 
 function name.constructRobuxUpsellSuccessPromptAnimatorObj(p1)
-	-- upvalues: robuxUpsellFlowStateModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fixUnifiedUpsellCompletionModal (ref), getAppContextModule (ref), roactModule (ref), unifiedPurchaseCompletionModalV2Module (ref), unifiedPurchaseModalTypeEnumModule (ref), unifiedPurchaseCompletionModalModule (ref), robuxUpsellSuccessPromptModule (ref)
+	-- upvalues: robuxUpsellFlowStateModule (ref), fixUnifiedUpsellCompletionModal (ref), getAppContextModule (ref), roactModule (ref), unifiedPurchaseCompletionModalV2Module (ref), unifiedPurchaseModalTypeEnumModule (ref), unifiedPurchaseCompletionModalModule (ref), robuxUpsellSuccessPromptModule (ref)
 	local props = p1.props
 	p1:BindCancelAction()
 	
@@ -527,11 +526,11 @@ function name.constructRobuxUpsellSuccessPromptAnimatorObj(p1)
 		shouldAnimate = props.shouldAnimate,
 		shouldShow = props.purchaseState == robuxUpsellFlowStateModule.Success,
 		renderChildren = function()
-			-- upvalues: props (ref), fFlagEnableUnifiedProductPurchaseFlow (copy), fixUnifiedUpsellCompletionModal (copy), getAppContextModule (copy), roactModule (copy), unifiedPurchaseCompletionModalV2Module (copy), p1 (ref), unifiedPurchaseModalTypeEnumModule (copy), unifiedPurchaseCompletionModalModule (copy), robuxUpsellSuccessPromptModule (copy)
+			-- upvalues: props (ref), fixUnifiedUpsellCompletionModal (copy), getAppContextModule (copy), roactModule (copy), unifiedPurchaseCompletionModalV2Module (copy), p1 (ref), unifiedPurchaseModalTypeEnumModule (copy), unifiedPurchaseCompletionModalModule (copy), robuxUpsellSuccessPromptModule (copy)
 			local _ = 0
 			local var1 = props.beforeRobuxBalance - props.itemRobuxCost
 			
-			return if not (not fFlagEnableUnifiedProductPurchaseFlow or not props.useUnifiedProductPurchaseModal) then if fixUnifiedUpsellCompletionModal and getAppContextModule() == "UA" then roactModule.createElement(unifiedPurchaseCompletionModalV2Module, {
+			return if props.useUnifiedProductPurchaseModal then if fixUnifiedUpsellCompletionModal and getAppContextModule() == "UA" then roactModule.createElement(unifiedPurchaseCompletionModalV2Module, {
 				buttons = {
 					onActivated = function()
 						-- upvalues: p1 (copy), props (copy)

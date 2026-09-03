@@ -4,9 +4,11 @@ local sduiSurfaceLoadTimeTrackerModule = require(script.SduiSurfaceLoadTimeTrack
 local _ = require(script.SduiIntegrationTypes)
 local parent = script.Parent
 local _ = require(parent.SduiCoreSystem)
+local fFlagSduiClientDrivenTemplates = require(parent.SharedFlags).FFlagSduiClientDrivenTemplates
 
 return {
 	["jest.config"] = script["jest.config"],
+	["jest.mockDataModel.config"] = script["jest.mockDataModel.config"],
 	SduiFocusTags = require(script.FocusNavigation.SduiFocusTags),
 	OnNavigateBackWrapper = require(script.FocusNavigation.NavigateBackBindings).OnNavigateBackWrapper,
 	useOnNavigateBack = function(p1, p2)
@@ -35,7 +37,14 @@ return {
 	end,
 	createSduiApiStore = require(script.createSduiApiStore),
 	getSduiApiStore = require(script.getSduiApiStore),
+	fetchSduiTemplates = if fFlagSduiClientDrivenTemplates then function(p1, p2)
+		return require(script.fetchSduiTemplates)(p1, p2)
+	end else nil,
+	createTemplateApiRequestConfig = if fFlagSduiClientDrivenTemplates then function(p1)
+		return require(script.createTemplateApiRequestConfig)(p1)
+	end else nil,
 	handleSduiApiResponse = require(script.handleSduiApiResponse),
+	prewarmAppTemplatesOnLaunch = require(script.prewarmAppTemplatesOnLaunch),
 	SduiLoadTimer = sduiLoadTimerModule,
 	SduiSurfaceLoadTimeTracker = sduiSurfaceLoadTimeTrackerModule,
 	SduiPageEntryPoint = require(script.SduiPageEntryPoint),
@@ -59,6 +68,7 @@ return {
 	getSduiClientPageScope = require(parent.SduiCoreSystem).getSduiClientPageScope,
 	usePageScopeRef = require(parent.SduiCoreSystem).usePageScopeRef,
 	SduiCapabilities = require(parent.SduiCoreSystem).SduiCapabilities,
+	getSduiDataBinder = require(parent.SduiCoreSystem).getSduiDataBinder,
 	streamingFeedMergeStrategy = require(script.streamingFeedMergeStrategy),
 	buildSduiCollectionInfo = require(script.buildSduiCollectionInfo)
 }

@@ -3,20 +3,10 @@ local parent = moments.Parent
 local momentsCommonModule = require(parent.MomentsCommon)
 local _ = require(parent.MomentsTypes)
 local fFlagMomentsImpressionDestinationUniverseIdModule = require(moments.Flags.FFlagMomentsImpressionDestinationUniverseId)
-local getFFlagMomentsAnalyticsSchemaIdentity = momentsCommonModule.Flags.GetFFlagMomentsAnalyticsSchemaIdentity
 
 return function(p1, p2)
-	-- upvalues: getFFlagMomentsAnalyticsSchemaIdentity (ref), momentsCommonModule (ref), fFlagMomentsImpressionDestinationUniverseIdModule (ref)
+	-- upvalues: momentsCommonModule (ref), fFlagMomentsImpressionDestinationUniverseIdModule (ref)
 	local recommendationMetadata = p1.recommendationMetadata
-	
-	if not getFFlagMomentsAnalyticsSchemaIdentity() then
-		return {
-			viewMode = "vertical",
-			momentId = p1.momentId,
-			itemId = recommendationMetadata.feedItemId,
-			tracingId = recommendationMetadata.tracingId or ""
-		}
-	end
 	local feedItemId = recommendationMetadata.feedItemId
 	
 	if feedItemId == nil or feedItemId == "" then

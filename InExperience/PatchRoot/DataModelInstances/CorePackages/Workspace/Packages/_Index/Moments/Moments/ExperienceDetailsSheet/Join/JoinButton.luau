@@ -7,13 +7,15 @@ local useSignalState = require(parent.SignalsReact).useSignalState
 local _ = require(moments.ExperienceDetailsSheet.Types)
 local feedContextModule = require(moments.Components.Feed.FeedContext)
 local useJoinExperienceModule = require(script.Parent.useJoinExperience)
+local useJoinCtaImpressionModule = require(script.Parent.useJoinCtaImpression)
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
 local fFlagMomentsFixRecommendationImpressionLifecycleModule = require(moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useJoinExperienceModule (ref), useSignalState (ref), getMomentsPreferencesStoreModule (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), feedContextModule (ref), reactModule (ref), button (ref), foundationModule (ref)
+	-- upvalues: useJoinExperienceModule (ref), useSignalState (ref), getMomentsPreferencesStoreModule (ref), useJoinCtaImpressionModule (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), feedContextModule (ref), reactModule (ref), button (ref), foundationModule (ref)
 	local var1 = useJoinExperienceModule()
 	local var2 = useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting)
+	useJoinCtaImpressionModule(p1.isDisabled == true, p1.reportsImpression == true)
 	local var3 = if fFlagMomentsFixRecommendationImpressionLifecycleModule then feedContextModule.useFeedOptional() else nil
 	local context = p1.context
 	

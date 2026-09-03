@@ -25,6 +25,7 @@ local fFlagSduiTileImagePaddingInset = require(parent.SharedFlags).FFlagSduiTile
 local fFlagSduiGameIconSupport = require(parent.SharedFlags).FFlagSduiGameIconSupport
 local fFlagSduiTileThumbnailPadding = require(parent.SharedFlags).FFlagSduiTileThumbnailPadding
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
+local fFlagLuaAppSduiGameTileFeedback = require(parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 local sduiTileInsetImageModule = require(script.Parent.SduiTileInsetImage)
 local t = {}
 
@@ -68,7 +69,7 @@ local function maybeLayoutForButton(p1, p2, p3, p4, p5)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), fFlagSduiGameIconSupport (ref), contentProviderService (ref), textSizeModule (ref), useTokens (ref), fFlagSduiTileBottomButton (ref), fFlagSduiExperienceDetailsSupport (ref), getInputModeStore (ref), responsiveModule (ref), fFlagSduiTileHoldAction (ref), useTileHoldActionModule (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagSduiTileImagePaddingInset (ref), sduiTileInsetImageModule (ref), fFlagSduiTileThumbnailPadding (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), imageSetLabel (ref), fFlagLuaAppSduiVideoThumbnail (ref), sduiDefaultTileImageModule (ref), loadableImage (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), maybeLayoutForButton (ref), fFlagSduiTileTitleTextAlignment (ref), cryoModule (ref), t (ref), holdDetector (ref)
+	-- upvalues: reactModule (ref), fFlagSduiGameIconSupport (ref), contentProviderService (ref), textSizeModule (ref), useTokens (ref), fFlagSduiTileBottomButton (ref), fFlagSduiExperienceDetailsSupport (ref), getInputModeStore (ref), responsiveModule (ref), fFlagSduiTileHoldAction (ref), useTileHoldActionModule (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagSduiTileImagePaddingInset (ref), sduiTileInsetImageModule (ref), fFlagSduiTileThumbnailPadding (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), imageSetLabel (ref), fFlagLuaAppSduiVideoThumbnail (ref), sduiDefaultTileImageModule (ref), loadableImage (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), maybeLayoutForButton (ref), fFlagSduiTileTitleTextAlignment (ref), cryoModule (ref), t (ref), holdDetector (ref)
 	local layoutOrder = p1.layoutOrder
 	local anchorPoint = p1.anchorPoint
 	local automaticSize = p1.automaticSize
@@ -168,19 +169,59 @@ return reactModule.memo(function(p1)
 	end, { p1.onSelectionLost, p1.setCustomConditionState })
 	local var16 = if fFlagSduiTileHoldAction then useTileHoldActionModule(p1.holdActionConfig, p1.setGuiObject, p1.onActivated) else nil
 	local var17 = nil
-	local containmentPadding_1 = nil
 	local var18 = nil
 	local var19 = nil
 	
-	if not fFlagSduiTileDisableLegacyHover and p1.enableLegacyHoverState then
-		var17 = var11
-		containmentPadding_1 = p1.containmentPadding or var1.Padding.Medium
-		var18 = if var11 then UDim2.new(1, containmentPadding_1 * 2, 1, containmentPadding_1 * 2) else nil
-		var19 = if var11 then UDim2.new(0, -containmentPadding_1, 0, -containmentPadding_1) else nil
+	if fFlagLuaAppSduiGameTileFeedback then
+		local var20 = reactModule.useRef(false)
+		var17 = reactModule.useCallback(function(...)
+			-- upvalues: var20 (ref), p1 (ref)
+			var20.current = false
+			
+			if p1.onGuiStateChanged then
+				p1.onGuiStateChanged(...)
+			end
+		end, { p1.onGuiStateChanged })
+		var19 = reactModule.useCallback(function()
+			-- upvalues: var20 (ref), var16 (write), p1 (ref)
+			if var20.current then
+				var20.current = false
+				
+				return
+			elseif var16 then
+				var16.onActivated()
+				
+				return
+			elseif p1.onActivated then
+				p1.onActivated()
+			end
+		end, { var16, p1.onActivated })
+		var18 = reactModule.useCallback(function()
+			-- upvalues: p1 (ref), var20 (ref)
+			if p1.onTouchLongPress and not p1.isDisabled then
+				local current = var20.current
+				var20.current = true
+				
+				if not current then
+					p1.onTouchLongPress()
+				end
+			end
+		end, { p1.onTouchLongPress, p1.isDisabled })
 	end
-	local var20
-	local var21 = if fFlagSduiExperienceDetailsSupport then surface100.Transparency else 0
-	local var22 = if fFlagSduiTileImagePaddingInset and p1.imagePadding ~= nil then reactModule.createElement(sduiTileInsetImageModule, {
+	local var21 = nil
+	local containmentPadding_1 = nil
+	local var22 = nil
+	local var23 = nil
+	
+	if not fFlagSduiTileDisableLegacyHover and p1.enableLegacyHoverState then
+		var21 = var11
+		containmentPadding_1 = p1.containmentPadding or var1.Padding.Medium
+		var22 = if var11 then UDim2.new(1, containmentPadding_1 * 2, 1, containmentPadding_1 * 2) else nil
+		var23 = if var11 then UDim2.new(0, -containmentPadding_1, 0, -containmentPadding_1) else nil
+	end
+	local var24
+	local var25 = if fFlagSduiExperienceDetailsSupport then surface100.Transparency else 0
+	local var26 = if fFlagSduiTileImagePaddingInset and p1.imagePadding ~= nil then reactModule.createElement(sduiTileInsetImageModule, {
 		image = p1.image,
 		imageComponent = p1.imageComponent,
 		imagePadding = p1.imagePadding,
@@ -190,26 +231,28 @@ return reactModule.memo(function(p1)
 		backgroundStyle = p1.thumbnailBackgroundStyle
 	}) else nil
 	local createElement = reactModule.createElement
-	local var23 = "TextButton"
+	local var27 = "TextButton"
 	local t_1 = {
 		[reactModule.Tag] = if p1.testId then `data-testid={p1.testId}` else nil,
 		ref = if var16 then var16.tileRef else p1.setGuiObject,
-		Size = var18 or (size or UDim2.new(1, 0, 1, 0)),
-		Position = var19 or position,
+		Size = var22 or (size or UDim2.new(1, 0, 1, 0)),
+		Position = var23 or position,
 		AnchorPoint = anchorPoint,
 		LayoutOrder = layoutOrder,
 		ZIndex = zIndex,
 		SelectionImageObject = p1.sduiContext.dependencies.cursors.tileCursor,
-		Active = p1.isDisabled,
-		[reactModule.Event.Activated] = if var16 then var16.onActivated else p1.onActivated,
+		Active = if fFlagLuaAppSduiGameTileFeedback then not p1.isDisabled else p1.isDisabled,
+		[reactModule.Change.GuiState] = if fFlagLuaAppSduiGameTileFeedback then var17 else p1.onGuiStateChanged,
+		[reactModule.Event.Activated] = if fFlagLuaAppSduiGameTileFeedback then var19 elseif var16 then var16.onActivated else p1.onActivated,
 		[reactModule.Event.MouseEnter] = var12,
 		[reactModule.Event.MouseLeave] = var13,
 		[reactModule.Event.SelectionGained] = var14,
 		[reactModule.Event.SelectionLost] = var15,
+		[reactModule.Event.TouchLongPress] = if fFlagLuaAppSduiGameTileFeedback and p1.onTouchLongPress then var18 else nil,
 		ClipsDescendants = false,
 		Text = "",
 		TextTransparency = 1,
-		BackgroundTransparency = if isContained or var17 then var21 else 1,
+		BackgroundTransparency = if isContained or var21 then var25 else 1,
 		AutoButtonColor = false,
 		AutomaticSize = automaticSize or Enum.AutomaticSize.Y,
 		BackgroundColor3 = var8,
@@ -217,12 +260,12 @@ return reactModule.memo(function(p1)
 		SelectionOrder = selectionOrder
 	}
 	local t_2 = {
-		UIPadding = if fFlagSduiTileDisableLegacyHover then nil elseif var17 then reactModule.createElement("UIPadding", {
+		UIPadding = if fFlagSduiTileDisableLegacyHover then nil elseif var21 then reactModule.createElement("UIPadding", {
 			PaddingLeft = UDim.new(0, containmentPadding_1),
 			PaddingRight = UDim.new(0, containmentPadding_1),
 			PaddingTop = UDim.new(0, containmentPadding_1)
 		}) else nil,
-		UICorner = if isContained or not fFlagSduiTileDisableLegacyHover and var17 then reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, cornerRadius) }) else nil,
+		UICorner = if isContained or not fFlagSduiTileDisableLegacyHover and var21 then reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, cornerRadius) }) else nil,
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -247,7 +290,7 @@ return reactModule.memo(function(p1)
 			}, {
 				UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, cornerRadius) })
 			}) else nil,
-			Thumbnail = var22 or (if p1.imageComponent then p1.imageComponent elseif p1.image then if fFlagLuaAppSduiVideoThumbnail then reactModule.createElement(sduiDefaultTileImageModule, {
+			Thumbnail = var26 or (if p1.imageComponent then p1.imageComponent elseif p1.image then if fFlagLuaAppSduiVideoThumbnail then reactModule.createElement(sduiDefaultTileImageModule, {
 				image = p1.image,
 				thumbnailBackgroundStyle = p1.thumbnailBackgroundStyle,
 				isContained = isContained,
@@ -268,6 +311,7 @@ return reactModule.memo(function(p1)
 			}) else nil),
 			UIAspectRatioConstraint = reactModule.createElement("UIAspectRatioConstraint", { AspectRatio = var2 or 1 }),
 			ThumbnailOverlay = p1.thumbnailOverlayComponent,
+			OverflowMenu = if fFlagLuaAppSduiGameTileFeedback then p1.thumbnailOverflowMenuComponent else nil,
 			HoverOverlay = if var11 and (not fFlagSduiTileBottomButton or not var4) then reactModule.createElement("Frame", {
 				BackgroundColor3 = var1.Color.State.Hover.Color3,
 				BackgroundTransparency = var1.Color.State.Hover.Transparency,
@@ -331,20 +375,20 @@ return reactModule.memo(function(p1)
 				}),
 				Content = p1.bottomButtonComponent
 			}) else nil,
-			Z_3_ExtraOverflow = if fFlagSduiTileDisableLegacyHover then nil elseif var17 and p1.renderLegacyHoverState then reactModule.createElement("Frame", { ZIndex = -1, Size = UDim2.new(1, 0, 0, 0) }, {
+			Z_3_ExtraOverflow = if fFlagSduiTileDisableLegacyHover then nil elseif var21 and p1.renderLegacyHoverState then reactModule.createElement("Frame", { ZIndex = -1, Size = UDim2.new(1, 0, 0, 0) }, {
 				ExtraOverflow = p1.renderLegacyHoverState(containmentPadding_1, var8, cornerRadius)
 			}) else nil
-		}, p1.ctaButtonComponent, var1.Gap.Small, if isContained then containmentPadding else 0, var17))
+		}, p1.ctaButtonComponent, var1.Gap.Small, if isContained then containmentPadding else 0, var21))
 	}
 	
 	if p1.focusNavActionsComponent or p1.children then
-		var20 = reactModule.createElement
-		var20 = var20(reactModule.Fragment, nil, cryoModule.Dictionary.join(p1.children or t, { focusNavActions = p1.focusNavActionsComponent }))
+		var24 = reactModule.createElement
+		var24 = var24(reactModule.Fragment, nil, cryoModule.Dictionary.join(p1.children or t, { focusNavActions = p1.focusNavActionsComponent }))
 	else
-		var20 = nil
+		var24 = nil
 	end
-	t_2.ExtraChildren = var20
+	t_2.ExtraChildren = var24
 	t_2.HoldDetector = if var16 and var16.holdDetectorProps then reactModule.createElement(holdDetector, var16.holdDetectorProps) else nil
 	
-	return createElement(var23, t_1, t_2)
+	return createElement(var27, t_1, t_2)
 end)

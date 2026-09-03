@@ -13,6 +13,7 @@ local getFriendsChatRealtimeStoreModule = require(script.Parent.Parent.Stores.Ge
 local fFlagFriendsChatRefreshListForNewConversationModule = require(script.Parent.Parent.Flags.FFlagFriendsChatRefreshListForNewConversation)
 local fStringDebugFriendsChatConversationIdModule = require(script.Parent.Parent.Flags.FStringDebugFriendsChatConversationId)
 local name = expChatSharedModule.Logger:new(script.Name)
+local friendshipNotificationsModule = require(script.Parent.FriendshipNotifications)
 
 local function fetchNewerMessagesSafe(p1, p2)
 	-- upvalues: expChatConversationListAdapterModule (ref), getConversationMessageListStoreModule (ref), fetchNewerMessagesModule (ref), getFriendsChatRealtimeStoreModule (ref), playersService (ref), name (ref)
@@ -120,7 +121,7 @@ local _ = function(p7)
 end
 
 return function(p7)
-	-- upvalues: reactModule (ref), expChatConversationListAdapterModule (ref), name (ref), realtimeDeliveryModule (ref), classifyCommunicationChannelsEventModule (ref), fetchNewerMessagesSafe (ref), getFriendsChatNavigationStoreModule (ref), fetchConversationDetailsSafe (ref), fFlagFriendsChatRefreshListForNewConversationModule (ref), getFriendsChatRealtimeStoreModule (ref), fStringDebugFriendsChatConversationIdModule (ref)
+	-- upvalues: reactModule (ref), expChatConversationListAdapterModule (ref), name (ref), realtimeDeliveryModule (ref), classifyCommunicationChannelsEventModule (ref), fetchNewerMessagesSafe (ref), getFriendsChatNavigationStoreModule (ref), fetchConversationDetailsSafe (ref), fFlagFriendsChatRefreshListForNewConversationModule (ref), getFriendsChatRealtimeStoreModule (ref), fStringDebugFriendsChatConversationIdModule (ref), friendshipNotificationsModule (ref)
 	local onActiveConversationMessageReceived = p7.onActiveConversationMessageReceived
 	local var5 = reactModule.useRef(false)
 	local var6 = reactModule.useRef(0)
@@ -193,9 +194,9 @@ return function(p7)
 			fetchNewerMessagesSafe(var7, onActiveConversationMessageReceived)
 		end
 	end, {})
-	realtimeDeliveryModule.useRealtimeNamespace("FriendshipNotifications", function(p8)
-		-- upvalues: name (copy), var5 (ref), var6 (ref), expChatConversationListAdapterModule (copy)
-		if p8 == nil or p8.Type ~= "FriendshipCreated" then
+	realtimeDeliveryModule.useRealtimeNamespace(friendshipNotificationsModule.Namespace, function(p8)
+		-- upvalues: friendshipNotificationsModule (copy), name (copy), var5 (ref), var6 (ref), expChatConversationListAdapterModule (copy)
+		if p8 == nil or p8.Type ~= friendshipNotificationsModule.EventType.Created then
 			return
 		end
 		name:info(`Received friendship notification: {p8.Type}`)

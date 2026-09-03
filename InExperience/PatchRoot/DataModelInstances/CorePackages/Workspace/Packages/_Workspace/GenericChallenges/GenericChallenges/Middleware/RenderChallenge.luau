@@ -89,6 +89,10 @@ return function(p1)
 					p1.reject(challengeErrorModule.new(errorKindModule.Invalidated, p2.data))
 					var3:close()
 				end,
+				OnChallengeDisplayed = function(_)
+					-- upvalues: var3 (ref)
+					var3:setVisible(true)
+				end,
 				OnChallengeCompleted = function(p2)
 					-- upvalues: p1 (ref), completionDataToRawHeadersModule (copy), challengeIdHeader (ref), var4 (write), var3 (ref)
 					if p2.data ~= nil and p2.data.challengeType ~= nil and p2.data.metadata ~= nil then

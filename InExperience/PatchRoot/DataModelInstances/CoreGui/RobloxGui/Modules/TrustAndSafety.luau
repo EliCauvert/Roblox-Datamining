@@ -19,11 +19,8 @@ local _ = require(script.Actions.OpenReportDialog)
 local _ = require(script.Actions.OpenReportMenu)
 local beginReportFlowModule = require(script.Actions.BeginReportFlow)
 local setVoiceReportingFlowModule = require(script.Actions.SetVoiceReportingFlow)
-local identifyAvatarsModule = require(script.Thunks.IdentifyAvatars)
 local sessionUtilityModule = require(script.Utility.SessionUtility)
-local screenshotHookManagerModule = require(script.Utility.ScreenshotHookManager)
 local fetchPlaceInfoModule = require(script.Thunks.FetchPlaceInfo)
-local getFFlagReportAnythingScreenshotModule = require(script.Flags.GetFFlagReportAnythingScreenshot)
 local t = {
 	getInstance = function(p1)
 		if not p1._initialized then
@@ -72,21 +69,13 @@ local t = {
 		return var1
 	end,
 	openReportDialog = function(p1, p2, p3)
-		-- upvalues: setVoiceReportingFlowModule (ref), getFFlagReportAnythingScreenshotModule (ref), identifyAvatarsModule (ref), beginReportFlowModule (ref)
+		-- upvalues: setVoiceReportingFlowModule (ref), beginReportFlowModule (ref)
 		p1.store:dispatch(setVoiceReportingFlowModule(true))
-		
-		if getFFlagReportAnythingScreenshotModule() then
-			p1.store:dispatch(identifyAvatarsModule())
-		end
 		p1.store:dispatch(beginReportFlowModule(p2, p3))
 	end,
 	openReportMenu = function(p1)
-		-- upvalues: setVoiceReportingFlowModule (ref), getFFlagReportAnythingScreenshotModule (ref), identifyAvatarsModule (ref), beginReportFlowModule (ref)
+		-- upvalues: setVoiceReportingFlowModule (ref), beginReportFlowModule (ref)
 		p1.store:dispatch(setVoiceReportingFlowModule(true))
-		
-		if getFFlagReportAnythingScreenshotModule() then
-			p1.store:dispatch(identifyAvatarsModule())
-		end
 		p1.store:dispatch(beginReportFlowModule())
 	end
 }
@@ -107,13 +96,5 @@ return {
 		-- upvalues: sessionUtilityModule (ref), t (ref)
 		sessionUtilityModule.startAbuseReportSession(p1)
 		t:getInstance():openReportMenu()
-	end,
-	setPreReportScreenshotHook = function(value)
-		-- upvalues: screenshotHookManagerModule (ref)
-		screenshotHookManagerModule.setPreScreenshotHook(value)
-	end,
-	setPostReportScreenshotHook = function(value)
-		-- upvalues: screenshotHookManagerModule (ref)
-		screenshotHookManagerModule.setPostScreenshotHook(value)
 	end
 }

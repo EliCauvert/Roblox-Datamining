@@ -253,8 +253,12 @@ return function(p1)
 			})
 		} else {
 			NoResults = reactModule.createElement(text, {
-				tag = "text-body-medium text-align-x-center content-action-emphasis",
-				Text = var3.MusicNoResults
+				LayoutOrder = if var29 then 1 else nil,
+				Text = var3.MusicNoResults,
+				tag = {
+					["auto-y padding-top-large text-body-medium text-align-x-center content-action-emphasis"] = var29,
+					["text-body-medium text-align-x-center content-action-emphasis"] = not var29
+				}
 			})
 		})
 	})

@@ -16,7 +16,6 @@ local enumsModule = require(profilePlatform.Common.Enums)
 local makeProfileTileFieldsModule = require(profilePlatform.Analytics.makeProfileTileFields)
 local fireAnalyticsEvent = momentsCommonModule.Analytics.fireAnalyticsEvent
 local eventNames = momentsCommonModule.Analytics.EventNames
-local getFFlagMomentsAnalyticsSchemaIdentity = momentsCommonModule.Flags.GetFFlagMomentsAnalyticsSchemaIdentity
 local useNavigation = navigationModule.useNavigation
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local navigateDown = navigationRoduxModule.Thunks.NavigateDown
@@ -26,7 +25,7 @@ local fFlagProfileMomentsLoadFailureAnalyticsModule = require(profilePlatform.Fl
 local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
 return function(p1)
-	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useNavigation (ref), fFlagProfileMomentsFeedRootRoute (ref), useDispatch (ref), useUserMomentsModule (ref), fFlagProfileMomentsLoadFailureAnalyticsModule (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), eventNamesModule (ref), enumsModule (ref), getFFlagMomentsAnalyticsSchemaIdentity (ref), makeProfileTileFieldsModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), momentsCarouselModule (ref)
+	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useNavigation (ref), fFlagProfileMomentsFeedRootRoute (ref), useDispatch (ref), useUserMomentsModule (ref), fFlagProfileMomentsLoadFailureAnalyticsModule (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), eventNamesModule (ref), enumsModule (ref), makeProfileTileFieldsModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), momentsCarouselModule (ref)
 	local var2 = useProfileWrapperContextModule()
 	local var3 = useProfileAnalyticsContextModule()
 	local var4 = useNavigation()
@@ -52,19 +51,15 @@ return function(p1)
 			var4.navigate(enumsModule.Screens.MomentsAll, { extraProps = { profileId = profileId } })
 		end, { var3, var4, profileId }),
 		onSelectMoment = reactModule.useCallback(function(p2)
-			-- upvalues: getFFlagMomentsAnalyticsSchemaIdentity (copy), moments (ref), profileId (ref), makeProfileTileFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), var3 (ref), eventNamesModule (copy), fFlagProfileMomentsFeedRootRoute (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var5 (ref), navigateDown (copy), var4 (ref), enumsModule (copy)
-			if getFFlagMomentsAnalyticsSchemaIdentity() then
-				local var7 = moments[p2]
+			-- upvalues: moments (ref), profileId (ref), makeProfileTileFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), fFlagProfileMomentsFeedRootRoute (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var5 (ref), navigateDown (copy), var4 (ref), enumsModule (copy)
+			local var7 = moments[p2]
+			
+			if var7 and profileId then
+				local carousel = makeProfileTileFieldsModule.makeProfileTileInteractionFields(var7, profileId, "carousel", p2)
 				
-				if var7 and profileId then
-					local carousel = makeProfileTileFieldsModule.makeProfileTileInteractionFields(var7, profileId, "carousel", p2)
-					
-					if carousel then
-						fireAnalyticsEvent(eventNames.ProfileMomentSelected, carousel)
-					end
+				if carousel then
+					fireAnalyticsEvent(eventNames.ProfileMomentSelected, carousel)
 				end
-			else
-				var3.fireAnalyticsEvent(eventNamesModule.MomentOpened)
 			end
 			local t = {
 				targetUserId = tonumber(profileId) or 0,
@@ -91,9 +86,8 @@ return function(p1)
 			profileId,
 			moments
 		}),
-		onTileImpression = if getFFlagMomentsAnalyticsSchemaIdentity() then reactModule.useCallback(function(p2)
-			-- upvalues: getFFlagMomentsAnalyticsSchemaIdentity (copy), moments (ref), profileId (ref), makeProfileTileFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy)
-			if not getFFlagMomentsAnalyticsSchemaIdentity() then return end
+		onTileImpression = reactModule.useCallback(function(p2)
+			-- upvalues: moments (ref), profileId (ref), makeProfileTileFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy)
 			local var7 = moments[p2]
 			
 			if var7 and profileId and var7.recommendationMetadata then
@@ -103,6 +97,6 @@ return function(p1)
 					fireAnalyticsEvent(eventNames.ProfileMomentTileImpression, carousel)
 				end
 			end
-		end, { profileId, moments }) else nil
+		end, { profileId, moments })
 	})
 end

@@ -93,6 +93,7 @@ return {
 	ExpChatHiddenMessagesExpLayer = "ExperienceChat.HiddenMessages",
 	ExpChatSystemMessagesExpLayer = "ExperienceChat.SystemMessages",
 	ExpChatPresetChatLayer = "UniverseChat.PresetChat",
+	ExpChatPresetChatAutocompleteLayer = "UniverseChat.PresetChatAutocomplete",
 	ExperienceDetailsPageLayer = "PlayerApp.GameDetailsPage",
 	ExperienceDetailsPageExposureLayer = "PlayerApp.GameDetailsPage.Exposure",
 	ExperienceMenuLayer = "Experience.Menu",

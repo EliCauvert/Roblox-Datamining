@@ -30,6 +30,7 @@ local chatInputBoxDisabledPressedSignal = interventionSharedModule.Signals.chatI
 local interventionTreatmentShownSignal = interventionSharedModule.Signals.interventionTreatmentShownSignal
 local constants = interventionSharedModule.Utils.Constants
 local fFlagFriendsChatEnforceInputCharacterLimitModule = require(friendsChat.Flags.FFlagFriendsChatEnforceInputCharacterLimit)
+local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 local fFlagExpChatComposerFigmaParity = require(parent.SharedFlags).FFlagExpChatComposerFigmaParity
 local fFlagAppChatUniversalFeatureRestriction = require(parent.SharedFlags).FFlagAppChatUniversalFeatureRestriction
 local expChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
@@ -70,7 +71,7 @@ local function isSendResponseAccepted(p1)
 end
 
 return function(p1)
-	-- upvalues: foundationModule (ref), expChatConversationListAdapterModule (ref), useChatTimeoutDetailsFromHydrationModule (ref), signalsReactModule (ref), useChatWindowSettingsModule (ref), reactModule (ref), useChatInputBarSettingsModule (ref), useInExperienceLocalization (ref), chatUIPrimitivesModule (ref), inputTypeConstants (ref), getConversationInputPlaceholderModule (ref), userInputService (ref), useLocalization (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useInterpolatedClientSettingsModule (ref), useChatInputBarOnFocusModule (ref), getFriendsChatNavigationStoreModule (ref), useConsumeFocusInputBarRequestModule (ref), interventionTreatmentShownSignal (ref), constants (ref), httpService (ref), fFlagFriendsChatMessageSendPerfTrackingModule (ref), expChatPerfTracker (ref), friendsChatTabNameModule (ref), playersService (ref), name (ref), createConversationFromFriendPlaceholderModule (ref), getConversationMessageStoreModule (ref), getConversationMessageListStoreModule (ref), serializeParticipantIdsForTelemetryModule (ref), appChatNetworkingModule (ref), chatConversationTelemetryEventsModule (ref), getConversationMessageSentInfoModule (ref), isSendResponseAccepted (ref), signalsExperimentalModule (ref), ingestNewerMessagesModule (ref), sendMessageErrorModule (ref), fFlagAppChatUniversalFeatureRestriction (ref), parent (ref), chatInputBoxDisabledPressedSignal (ref), chatInputBoxDisabledModule (ref), resolveFadeModule (ref), layoutConstantsModule (ref), chatInputBarView (ref), fFlagExpChatComposerFigmaParity (ref), t (ref), fFlagFriendsChatEnforceInputCharacterLimitModule (ref), messageCharacterLimitModule (ref)
+	-- upvalues: foundationModule (ref), expChatConversationListAdapterModule (ref), useChatTimeoutDetailsFromHydrationModule (ref), signalsReactModule (ref), useChatWindowSettingsModule (ref), reactModule (ref), useChatInputBarSettingsModule (ref), useInExperienceLocalization (ref), chatUIPrimitivesModule (ref), inputTypeConstants (ref), getConversationInputPlaceholderModule (ref), userInputService (ref), useLocalization (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useInterpolatedClientSettingsModule (ref), useChatInputBarOnFocusModule (ref), getFriendsChatNavigationStoreModule (ref), useConsumeFocusInputBarRequestModule (ref), interventionTreatmentShownSignal (ref), constants (ref), httpService (ref), fFlagFriendsChatMessageSendPerfTrackingModule (ref), expChatPerfTracker (ref), friendsChatTabNameModule (ref), playersService (ref), name (ref), createConversationFromFriendPlaceholderModule (ref), getConversationMessageStoreModule (ref), getConversationMessageListStoreModule (ref), serializeParticipantIdsForTelemetryModule (ref), appChatNetworkingModule (ref), chatConversationTelemetryEventsModule (ref), getConversationMessageSentInfoModule (ref), isSendResponseAccepted (ref), signalsExperimentalModule (ref), ingestNewerMessagesModule (ref), sendMessageErrorModule (ref), fFlagAppChatUniversalFeatureRestriction (ref), parent (ref), fFlagAppChatReactiveFeatureRestrictions (ref), interventionSharedModule (ref), chatInputBoxDisabledPressedSignal (ref), chatInputBoxDisabledModule (ref), resolveFadeModule (ref), layoutConstantsModule (ref), chatInputBarView (ref), fFlagExpChatComposerFigmaParity (ref), t (ref), fFlagFriendsChatEnforceInputCharacterLimitModule (ref), messageCharacterLimitModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local conversationId = p1.conversationId
 	local var2 = expChatConversationListAdapterModule.isFriendPlaceholder(conversationId)
@@ -320,20 +321,32 @@ return function(p1)
 						endTimestamp = var4.timeoutEndTimestamp,
 						font = Enum.Font.BuilderSans,
 						onActivated = reactModule.useCallback(function()
-							-- upvalues: fFlagAppChatUniversalFeatureRestriction (copy), parent (copy), var26 (ref), chatInputBoxDisabledPressedSignal (copy), var4 (ref)
-							if fFlagAppChatUniversalFeatureRestriction then
-								require(parent.UniversalFeatureRestrictions.showFeatureRestriction)(require(parent.UniversalFeatureRestrictions.AbuseVector).PartyChat, {
-									onShown = var26,
-									onAppeal = function() end
+							-- upvalues: fFlagAppChatUniversalFeatureRestriction (copy), parent (copy), var26 (ref), fFlagAppChatReactiveFeatureRestrictions (copy), interventionSharedModule (copy), chatInputBoxDisabledPressedSignal (copy), var4 (ref)
+							if not fFlagAppChatUniversalFeatureRestriction then
+								chatInputBoxDisabledPressedSignal:fire({
+									endTimestamp = var4.timeoutEndTimestamp,
+									decisionEventId = var4.decisionEventId,
+									duration = var4.duration
 								})
 								
 								return
 							end
-							chatInputBoxDisabledPressedSignal:fire({
-								endTimestamp = var4.timeoutEndTimestamp,
-								decisionEventId = var4.decisionEventId,
-								duration = var4.duration
-							})
+							local abuseVectorModule = require(parent.UniversalFeatureRestrictions.AbuseVector)
+							local showFeatureRestrictionModule = require(parent.UniversalFeatureRestrictions.showFeatureRestriction)
+							local t = {
+								onShown = var26,
+								onAppeal = function() end
+							}
+							
+							if fFlagAppChatReactiveFeatureRestrictions then
+								local partyChatTimeoutReceivedSignal = interventionSharedModule.Signals.partyChatTimeoutReceivedSignal
+								
+								function t.onAcknowledgementSuccess()
+									-- upvalues: partyChatTimeoutReceivedSignal (ref)
+									partyChatTimeoutReceivedSignal:fire(nil)
+								end
+							end
+							showFeatureRestrictionModule(abuseVectorModule.PartyChat, t)
 						end, {
 							var26,
 							var4.timeoutEndTimestamp,

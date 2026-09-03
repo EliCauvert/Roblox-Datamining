@@ -24,13 +24,14 @@ local momentContextModule = require(script.Parent.Parent.MomentContext)
 local getExperienceDetailsSheetStoreModule = require(moments.ExperienceDetailsSheet.Sheet.getExperienceDetailsSheetStore)
 local joinButtonModule = require(moments.ExperienceDetailsSheet.Join.JoinButton)
 local fFlagMomentsFixRecommendationImpressionLifecycleModule = require(moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
+local fFlagMomentsJoinImpressionModule = require(moments.Flags.FFlagMomentsJoinImpression)
 local t = {
 	join = if require(moments.Flags.FFlagMomentsUpdateExperienceActionLabelText) then "Feature.Moments.Action.Play" else "Feature.Moments.Action.Join"
 }
 local char = utf8.char(57344)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), t (ref), useTokens (ref), momentContextModule (ref), useSignalState (ref), getMomentsPreferencesStoreModule (ref), getFFlagMomentsAndroidTvEnabledModule (ref), useIsTvRemoteDevice (ref), useExperienceDetailsModule (ref), useScaledValue (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), feedContextModule (ref), getRbxThumb (ref), foundationModule (ref), char (ref), reactModule (ref), imageWithSkeletonModule (ref), radius (ref), view (ref), text (ref), skeleton (ref), getExperienceDetailsSheetStoreModule (ref), button (ref), joinButtonModule (ref)
+	-- upvalues: useLocalization (ref), t (ref), useTokens (ref), momentContextModule (ref), useSignalState (ref), getMomentsPreferencesStoreModule (ref), getFFlagMomentsAndroidTvEnabledModule (ref), useIsTvRemoteDevice (ref), useExperienceDetailsModule (ref), useScaledValue (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), feedContextModule (ref), getRbxThumb (ref), foundationModule (ref), char (ref), reactModule (ref), imageWithSkeletonModule (ref), radius (ref), view (ref), text (ref), skeleton (ref), getExperienceDetailsSheetStoreModule (ref), button (ref), joinButtonModule (ref), fFlagMomentsJoinImpressionModule (ref)
 	local var1 = useLocalization(t)
 	local var2 = useTokens()
 	local store = momentContextModule.useMoment().store
@@ -66,7 +67,6 @@ return reactModule.memo(function(p1)
 			getExperienceDetailsSheetStoreModule(false).open({
 				placeId = var4,
 				universeId = var5,
-				itemId = data.feedItemId,
 				feedItemId = data.feedItemId,
 				tracingId = data.feedSessionId,
 				onBeforeJoin = if fFlagMomentsFixRecommendationImpressionLifecycleModule and var12 ~= nil then var12.flushView else nil
@@ -121,12 +121,12 @@ return reactModule.memo(function(p1)
 			context = {
 				placeId = var4,
 				universeId = var5,
-				itemId = data.feedItemId,
 				feedItemId = data.feedItemId,
 				tracingId = data.feedSessionId
 			},
 			text = var16,
-			isDisabled = var7
+			isDisabled = var7,
+			reportsImpression = fFlagMomentsJoinImpressionModule
 		})
 	})
 end)

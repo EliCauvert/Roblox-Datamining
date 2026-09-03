@@ -2,10 +2,8 @@
 local parent = buildExperience.Parent
 local _ = require(parent.DataHydration)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local publishBottomSheetModule = require(script.Parent.PublishBottomSheet)
 local gameInfoUtilsModule = require(buildExperience.utils.GameInfoUtils)
 
@@ -36,10 +34,10 @@ local function getEnrichedTarget(p1, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), getEnrichedTarget (ref), reactModule (ref), publishBottomSheetModule (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), getEnrichedTarget (ref), reactModule (ref), publishBottomSheetModule (ref)
 	return reactModule.createElement(publishBottomSheetModule, {
 		isOpen = p1.isOpen,
-		target = getEnrichedTarget(p1.target, p1.gameInfo, if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({ loading = localizationStringsModule.BUILD_MENU_LOADING }) else nil).loading else localizationStringsModule.BUILD_MENU_LOADING),
+		target = getEnrichedTarget(p1.target, p1.gameInfo, useLocalization({ loading = localizationStringsModule.BUILD_MENU_LOADING }).loading),
 		onClose = p1.onClose,
 		onOpenTitleDescriptionPage = p1.onOpenTitleDescriptionPage,
 		onOpenMediaSelectionPage = p1.onOpenMediaSelectionPage,

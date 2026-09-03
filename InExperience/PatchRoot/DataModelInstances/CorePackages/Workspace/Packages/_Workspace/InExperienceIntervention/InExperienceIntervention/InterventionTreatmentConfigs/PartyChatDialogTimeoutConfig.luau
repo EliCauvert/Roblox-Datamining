@@ -6,12 +6,18 @@ local interventionAnalytics = require(parent.InterventionShared).InterventionAna
 local interventionTreatmentShownSignal = require(parent.InterventionShared).Signals.interventionTreatmentShownSignal
 local partyChatTimeoutReceivedSignal = require(parent.InterventionShared).Signals.partyChatTimeoutReceivedSignal
 local showFeatureRestrictionFromRealtimeModule = require(parent.UniversalFeatureRestrictions.showFeatureRestrictionFromRealtime)
+local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 local fFlagAppChatUniversalFeatureRestriction = require(parent.SharedFlags).FFlagAppChatUniversalFeatureRestriction
 local _ = require(inExperienceIntervention.Utils.Types)
 
 local function onPartyChatTimeoutUFRShown()
 	-- upvalues: interventionTreatmentShownSignal (ref), constants (ref)
 	interventionTreatmentShownSignal:fire(constants.TreatmentType.PartyChatTimeoutDialog)
+end
+
+local function onPartyChatTimeoutAcknowledgementSuccess()
+	-- upvalues: partyChatTimeoutReceivedSignal (ref)
+	partyChatTimeoutReceivedSignal:fire(nil)
 end
 
 local function onPartyChatTimeoutUFRAppeal() end
@@ -31,11 +37,12 @@ return {
 		return p1.type == constants.NotificationDialogType.ChatTimeout and p1.abuseVector == constants.AbuseVectorType.PartyChat
 	end,
 	onTriggerVisualTreatment = function(p1, p2)
-		-- upvalues: fFlagAppChatUniversalFeatureRestriction (ref), showFeatureRestrictionFromRealtimeModule (ref), abuseVectorModule (ref), onPartyChatTimeoutUFRAppeal (ref), onPartyChatTimeoutUFRShown (ref), constants (ref)
+		-- upvalues: fFlagAppChatUniversalFeatureRestriction (ref), showFeatureRestrictionFromRealtimeModule (ref), abuseVectorModule (ref), onPartyChatTimeoutUFRAppeal (ref), onPartyChatTimeoutUFRShown (ref), fFlagAppChatReactiveFeatureRestrictions (ref), onPartyChatTimeoutAcknowledgementSuccess (ref), constants (ref)
 		if fFlagAppChatUniversalFeatureRestriction then
 			showFeatureRestrictionFromRealtimeModule(abuseVectorModule.PartyChat, p2, {
 				onAppeal = onPartyChatTimeoutUFRAppeal,
-				onShown = onPartyChatTimeoutUFRShown
+				onShown = onPartyChatTimeoutUFRShown,
+				onAcknowledgementSuccess = if fFlagAppChatReactiveFeatureRestrictions then onPartyChatTimeoutAcknowledgementSuccess else nil
 			})
 			
 			return

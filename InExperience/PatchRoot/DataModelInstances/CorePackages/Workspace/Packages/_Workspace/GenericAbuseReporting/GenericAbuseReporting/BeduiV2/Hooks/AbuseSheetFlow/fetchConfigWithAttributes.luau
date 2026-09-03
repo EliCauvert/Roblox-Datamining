@@ -5,7 +5,8 @@ local localizationService = game:GetService("LocalizationService")
 local argCheckModule = require(parent.ArgCheck)
 local url = require(parent.Http).Url
 local _ = require(genericAbuseReporting.Enums.AbuseVector)
-local var1 = if require(parent.SharedFlags).FFlagAbuseReportSubmissionTargetV4 then "&version=4" elseif require(parent.SharedFlags).FFlagAbuseReportInExpPlayerListV3 then "&version=3" else "&version=2"
+local fFlagAbuseReportSubmissionTargetV4 = require(parent.SharedFlags).FFlagAbuseReportSubmissionTargetV4
+local var1 = if game:DefineFastFlag("AbuseReportSubmissionLegacyChatV5", false) and fFlagAbuseReportSubmissionTargetV4 then "&version=5" elseif fFlagAbuseReportSubmissionTargetV4 then "&version=4" elseif require(parent.SharedFlags).FFlagAbuseReportInExpPlayerListV3 then "&version=3" else "&version=2"
 
 return function(p1, p2, p3)
 	-- upvalues: argCheckModule (ref), localizationService (ref), httpService (ref), url (ref), var1 (ref)

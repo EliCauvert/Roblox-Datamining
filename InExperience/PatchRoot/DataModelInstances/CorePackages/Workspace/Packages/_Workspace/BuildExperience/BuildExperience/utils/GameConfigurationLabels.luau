@@ -1,12 +1,10 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
 local _ = require(parent.DataHydration.ExperienceGuidelines)
-local sharedFlagsModule = require(parent.SharedFlags)
 local _ = require(parent.DataHydration.UniverseActivation)
 local universeConfigurationModule = require(parent.DataHydration.UniverseConfiguration)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local privacyType = universeConfigurationModule.PrivacyType
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local GAME_CONFIGURATION_AUDIENCE_UNKNOWN = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_UNKNOWN
 local t = {
 	[privacyType.Public] = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_PUBLIC,
@@ -32,7 +30,7 @@ local function getAudience(p1)
 end
 
 local function getAudienceText(p1)
-	-- upvalues: t_1 (ref), universeConfigurationModule (ref), fFlagBuildLocalization (ref), t (ref), GAME_CONFIGURATION_AUDIENCE_UNKNOWN (ref)
+	-- upvalues: t_1 (ref), universeConfigurationModule (ref), t (ref)
 	local privacyTypeForAudiences
 	if p1 == nil then
 		return nil
@@ -44,7 +42,7 @@ local function getAudienceText(p1)
 	else
 		privacyTypeForAudiences = universeConfigurationModule.getPrivacyTypeForAudiences(p1.audiences)
 	end
-	return if fFlagBuildLocalization then if privacyTypeForAudiences == nil then nil else t[privacyTypeForAudiences] elseif privacyTypeForAudiences == nil then GAME_CONFIGURATION_AUDIENCE_UNKNOWN else t[privacyTypeForAudiences]
+	return if privacyTypeForAudiences == nil then nil else t[privacyTypeForAudiences]
 end
 
 local function _(p1)

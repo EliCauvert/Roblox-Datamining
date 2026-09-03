@@ -35,5 +35,6 @@ return {
 	TraversalHistory = if require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).Traversal.Flags.FFlagAddTraversalHistory and sharedFlagsModule.FFlagIntegrateTraversalHistoryInSideSheet then require(script.Pages.TraversalHistory) else nil,
 	LeaveConfirmation = if fFlagEnableSideSheet then require(script.Pages.LeaveConfirmation) else nil,
 	RespawnConfirmation = if fFlagEnableSideSheet then require(script.Pages.RespawnConfirmation) else nil,
-	ShopEntrypoint = if sharedFlagsModule.FFlagEnableInExperienceShop then require(script.InExperienceShop.ShopEntrypoint) else nil
+	ShopEntrypoint = if sharedFlagsModule.FFlagEnableInExperienceShop then require(script.InExperienceShop.ShopEntrypoint) else nil,
+	SwitchServer = if fFlagEnableSideSheet and sharedFlagsModule.FFlagShowSwitchServerButton then require(script.SwitchServer) else nil
 }

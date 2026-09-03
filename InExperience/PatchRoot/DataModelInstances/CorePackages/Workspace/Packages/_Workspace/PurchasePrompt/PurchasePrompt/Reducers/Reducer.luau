@@ -1,6 +1,5 @@
 ﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
 local parent = purchasePrompt.Parent
-local fFlagEnableUnifiedProductPurchaseFlow = require(purchasePrompt.Parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 
 return require(parent.PurchasePromptDeps).Rodux.combineReducers({
 	promptRequest = require(script.Parent.PromptRequestReducer),
@@ -21,11 +20,11 @@ return require(parent.PurchasePromptDeps).Rodux.combineReducers({
 	buttonState = require(script.Parent.ButtonStateReducer),
 	subscriptionPurchaseInfo = require(script.Parent.SubscriptionPurchaseInfoReducer),
 	currentToastMessages = if require(purchasePrompt.Flags.GetFFlagEnableToastLiteRender)() then require(parent.ToastLite).Reducers.CurrentToastMessagesReducer else nil,
-	purchaseCallbacks = if fFlagEnableUnifiedProductPurchaseFlow then require(script.Parent.PurchaseCallbacksReducer) else nil,
-	postPurchaseActions = if fFlagEnableUnifiedProductPurchaseFlow then require(script.Parent.PostPurchaseActionsReducer) else nil,
-	productPayload = if fFlagEnableUnifiedProductPurchaseFlow then require(script.Parent.ProductPayloadReducer) else nil,
-	isUserEligibleForUnifiedPurchaseFlow = if fFlagEnableUnifiedProductPurchaseFlow then require(script.Parent.UnifiedPurchaseEligibilityReducer) else nil,
-	purchaseAnalyticsMetadata = if fFlagEnableUnifiedProductPurchaseFlow then require(script.Parent.PurchaseAnalyticsMetadataReducer) else nil,
+	purchaseCallbacks = require(script.Parent.PurchaseCallbacksReducer),
+	postPurchaseActions = require(script.Parent.PostPurchaseActionsReducer),
+	productPayload = require(script.Parent.ProductPayloadReducer),
+	isUserEligibleForUnifiedPurchaseFlow = require(script.Parent.UnifiedPurchaseEligibilityReducer),
+	purchaseAnalyticsMetadata = require(script.Parent.PurchaseAnalyticsMetadataReducer),
 	purchaseOptions = if require(purchasePrompt.Parent.SharedFlags).FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then require(script.Parent.PurchaseOptionsReducer) else nil,
 	robloxSubscriptionProducts = if require(purchasePrompt.Parent.SharedFlags).FFlagEnableBlackbirdUpsellInUnifiedPurchaseModal then require(script.Parent.RobloxSubscriptionProductsReducer) else nil,
 	cartPricing = if require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled) then require(script.Parent.CartPricingReducer) else nil

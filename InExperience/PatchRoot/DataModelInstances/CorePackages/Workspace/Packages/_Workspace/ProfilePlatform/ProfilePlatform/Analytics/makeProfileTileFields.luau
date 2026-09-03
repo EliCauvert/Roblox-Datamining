@@ -1,18 +1,9 @@
 ﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
 local momentsCommonModule = require(parent.MomentsCommon)
 local _ = require(parent.DataHydration.MomentsStoreTypes)
-local getFFlagMomentsAnalyticsSchemaIdentity = momentsCommonModule.Flags.GetFFlagMomentsAnalyticsSchemaIdentity
 
 local function buildTileFields(p1, p2, p3, p4, p5)
-	-- upvalues: getFFlagMomentsAnalyticsSchemaIdentity (ref), momentsCommonModule (ref)
-	if not getFFlagMomentsAnalyticsSchemaIdentity() then
-		local t = { userId = p2 }
-		local recommendationMetadata = p1.recommendationMetadata
-		t.itemId = if recommendationMetadata == nil then "" else recommendationMetadata.feedItemId or ""
-		t.gridIndex = tostring(p4)
-		
-		return t
-	end
+	-- upvalues: momentsCommonModule (ref)
 	local recommendationMetadata = p1.recommendationMetadata
 	local var1 = if recommendationMetadata ~= nil then nil else recommendationMetadata.feedItemId
 	
@@ -37,11 +28,6 @@ end
 
 return {
 	INTERACTION_OPEN = "open",
-	getTileMomentId = function(p1)
-		local recommendationMetadata = p1.recommendationMetadata
-		
-		return if recommendationMetadata == nil then "" else recommendationMetadata.feedItemId or ""
-	end,
 	makeProfileTileImpressionFields = function(p1, p2, p3, p4)
 		-- upvalues: buildTileFields (ref)
 		return buildTileFields(p1, p2, p3, p4, nil)

@@ -14,11 +14,11 @@ local getToastStoreModule = require(moments.Stores.GetToastStore)
 local readAppPolicyModule = require(script.Parent.readAppPolicy)
 
 return function(p1)
-	-- upvalues: getToastStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), fetchShareLinkModule (ref), fFlagMomentsCopyShareLinkWhenShareSheetUnavailableModule (ref), readAppPolicyModule (ref), default (ref), getShareCountsStoreModule (ref), makeFeedActionFieldsModule (ref), momentsCommonModule (ref), analytics (ref), eventNames (ref)
+	-- upvalues: getToastStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), fetchShareLinkModule (ref), fFlagMomentsCopyShareLinkWhenShareSheetUnavailableModule (ref), readAppPolicyModule (ref), default (ref), getShareCountsStoreModule (ref), makeFeedActionFieldsModule (ref), analytics (ref), eventNames (ref)
 	local momentId = p1.momentId
 	local strings = p1.strings
 	task.spawn(function()
-		-- upvalues: getToastStoreModule (copy), strings (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), p1 (ref), fetchShareLinkModule (copy), momentId (ref), fFlagMomentsCopyShareLinkWhenShareSheetUnavailableModule (copy), readAppPolicyModule (copy), default (copy), getShareCountsStoreModule (copy), makeFeedActionFieldsModule (copy), momentsCommonModule (copy), analytics (copy), eventNames (copy)
+		-- upvalues: getToastStoreModule (copy), strings (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), p1 (ref), fetchShareLinkModule (copy), momentId (ref), fFlagMomentsCopyShareLinkWhenShareSheetUnavailableModule (copy), readAppPolicyModule (copy), default (copy), getShareCountsStoreModule (copy), makeFeedActionFieldsModule (copy), analytics (copy), eventNames (copy)
 		local function _()
 			-- upvalues: getToastStoreModule (copy), strings (copy)
 			getToastStoreModule(false).triggerToast({ text = "", title = strings.linkCopyFailed })
@@ -67,7 +67,7 @@ return function(p1)
 		if p1.logAction then
 			p1.logAction({})
 		end
-		local var1 = makeFeedActionFieldsModule(momentId, p1.feedItemId, p1.feedSessionId, if momentsCommonModule.Flags.GetFFlagMomentsAnalyticsSchemaIdentity() then "share" else nil)
+		local var1 = makeFeedActionFieldsModule(momentId, p1.feedItemId, p1.feedSessionId, "share")
 		
 		if var1 then
 			analytics.fireAnalyticsEvent(eventNames.FeedShareButtonPressed, var1)

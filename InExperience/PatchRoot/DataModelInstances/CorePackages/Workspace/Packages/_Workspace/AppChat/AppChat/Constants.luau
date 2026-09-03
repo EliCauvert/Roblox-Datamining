@@ -181,11 +181,7 @@ local t = {
 		FOOTER_HEIGHT = 64
 	},
 	Decorators = { ICEBREAKER = { "icebreaker" } },
-	NavProps = {
-		WIDE_MODE = "wideMode",
-		TOP_BAR_HEIGHT = "topBarHeight",
-		SET_SCREEN_TOP_BAR = "setScreenTopBar"
-	},
+	NavProps = { WIDE_MODE = "wideMode", TOP_BAR_HEIGHT = "topBarHeight" },
 	OptInVariant = {
 		OsaContextCard = "OsaContextCard",
 		ChatOptInInfoCard = "ChatOptInInfoCard"

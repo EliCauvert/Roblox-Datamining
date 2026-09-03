@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXBackgroundGenerationDeepLink", false) and require(script.Parent.FFlagAXBackgroundGeneration)

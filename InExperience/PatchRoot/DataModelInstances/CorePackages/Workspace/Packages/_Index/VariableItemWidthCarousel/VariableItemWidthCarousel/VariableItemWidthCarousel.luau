@@ -11,7 +11,6 @@ local usePreferredInput = responsiveModule.usePreferredInput
 local useIsSpatial = responsiveModule.useIsSpatial
 local useVariableItemWidthScrollHandlersModule = require(variableItemWidthCarousel.useVariableItemWidthScrollHandlers)
 local fFlagLuaAppEnableVRCarouselScrolling = require(parent.SharedFlags).FFlagLuaAppEnableVRCarouselScrolling
-local fFlagLuaAppHideEmptyCarouselHeader = require(parent.SharedFlags).FFlagLuaAppHideEmptyCarouselHeader
 
 local function _(p1, p2, p3, p4)
 	-- upvalues: responsiveModule (ref), fFlagLuaAppEnableVRCarouselScrolling (ref)
@@ -25,12 +24,11 @@ local function _(p1, p2, p3, p4)
 end
 
 function VariableItemWidthCarousel(p1, p2)
-	-- upvalues: useDesignTokens (ref), useLastInput (ref), usePreferredInput (ref), useIsSpatial (ref), fFlagLuaAppHideEmptyCarouselHeader (ref), fFlagLuaAppEnableVRCarouselScrolling (ref), responsiveModule (ref), reactModule (ref), useVariableItemWidthScrollHandlersModule (ref), collectionHeader (ref), carouselScrollButtons (ref)
-	local var1
-	local var2 = useDesignTokens()
-	local var3 = useLastInput()
-	local var4 = usePreferredInput()
-	local var5 = useIsSpatial()
+	-- upvalues: useDesignTokens (ref), useLastInput (ref), usePreferredInput (ref), useIsSpatial (ref), fFlagLuaAppEnableVRCarouselScrolling (ref), responsiveModule (ref), reactModule (ref), useVariableItemWidthScrollHandlersModule (ref), collectionHeader (ref), carouselScrollButtons (ref)
+	local var1 = useDesignTokens()
+	local var2 = useLastInput()
+	local var3 = usePreferredInput()
+	local var4 = useIsSpatial()
 	local items = p1.items
 	local renderItem = p1.renderItem
 	local itemPadding = p1.itemPadding
@@ -38,31 +36,17 @@ function VariableItemWidthCarousel(p1, p2)
 	local sideMargin = p1.sideMargin or 0
 	local calculateItemWidth = p1.calculateItemWidth
 	local scrollingFrameRef = p1.scrollingFrameRef
-	local var6 = p1.title and p1.title ~= ""
-	
-	if fFlagLuaAppHideEmptyCarouselHeader then
-		var1 = var6
-		
-		if not var1 then
-			var1 = true
-			
-			if p1.subtitle == nil then
-				var1 = p1.tooltipInfoText ~= nil
-				var1 = nil
-			end
-		end
-	else
-		var1 = true
-	end
+	local var5 = p1.title and p1.title ~= ""
+	local var6 = var5 or (if p1.subtitle == nil then p1.tooltipInfoText ~= nil else true)
 	local scrollButtonsEnabled = p1.scrollButtonsEnabled
 	
 	if scrollButtonsEnabled then
-		local var7 = if fFlagLuaAppEnableVRCarouselScrolling then var5 else nil
+		local var7 = if fFlagLuaAppEnableVRCarouselScrolling then var4 else nil
 		
-		if not (if fFlagLuaAppEnableVRCarouselScrolling then true else not var5) then
+		if not (if fFlagLuaAppEnableVRCarouselScrolling then true else not var4) then
 			scrollButtonsEnabled = false
-		elseif var3 == responsiveModule.Input.Pointer then
-			scrollButtonsEnabled = if var4 == responsiveModule.Input.Directional then fFlagLuaAppEnableVRCarouselScrolling and var7 else true
+		elseif var2 == responsiveModule.Input.Pointer then
+			scrollButtonsEnabled = if var3 == responsiveModule.Input.Directional then fFlagLuaAppEnableVRCarouselScrolling and var7 else true
 		end
 	end
 	local var8
@@ -104,11 +88,11 @@ function VariableItemWidthCarousel(p1, p2)
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, if if fFlagLuaAppHideEmptyCarouselHeader then var1 else var6 then p1.headerContentPadding or var2.Size.Size_400 else 0)
+			Padding = UDim.new(0, if var6 then p1.headerContentPadding or var1.Size.Size_400 else 0)
 		})
 	}
 	
-	if var1 then
+	if var6 then
 		var8 = reactModule.createElement
 		var8 = var8(collectionHeader, {
 			LayoutOrder = 1,
@@ -118,7 +102,7 @@ function VariableItemWidthCarousel(p1, p2)
 			onActivateInfoIcon = p1.onActivateInfoIcon,
 			tooltipSupportsVR = p1.tooltipSupportsVR,
 			tooltipSupportsTenFootUi = p1.tooltipSupportsTenFootUi,
-			hideButton = if #items >= 1 then p1.hideHeaderButton or not var6 else true,
+			hideButton = if #items >= 1 then p1.hideHeaderButton or not var5 else true,
 			onActivate = p1.onActivateHeader,
 			buttonText = p1.headerButtonText
 		})
@@ -162,7 +146,7 @@ function VariableItemWidthCarousel(p1, p2)
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.new(0.5, 0, 0, 0),
 			Size = UDim2.new(1, 2 * sideMargin, 0, itemHeight),
-			buttonOffsetFromEdge = var2.Size.Size_200,
+			buttonOffsetFromEdge = var1.Size.Size_200,
 			handleScrollLeft = var10,
 			handleScrollRight = var11,
 			leftScrollingEnabled = var12,

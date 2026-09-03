@@ -22,7 +22,6 @@ local universalEconomicRestrictionsCounter = economicRestrictionsCounter.Univers
 local economicRestrictionsSurface = economicRestrictionsCounter.EconomicRestrictionsSurface
 local productPurchasePromptCounter = IAPExperienceModule.Counters.ProductPurchasePromptCounter.ProductPurchasePromptCounter
 local default = require(parent.LoggingProtocol).default
-local fFlagEnableUnifiedProductPurchaseFlow = require(parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 local fFlagPurchaseModalTimedOptionExtension = require(parent.SharedFlags).FFlagPurchaseModalTimedOptionExtension
 local unifiedPurchaseCompletionModal = IAPExperienceModule.UnifiedPurchaseCompletionModal
 local unifiedPurchaseCompletionModalV2 = IAPExperienceModule.UnifiedPurchaseCompletionModalV2
@@ -38,11 +37,11 @@ local function getPurchaseErrorText(p1, p2)
 end
 
 local function getModalContent(p1, p2)
-	-- upvalues: promptStateModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagPurchaseModalTimedOptionExtension (ref), formatTextWithParamsModule (ref), purchaseErrorModule (ref), formatEconomicRestrictionText (ref), fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (ref), getPurchaseErrorText (ref)
+	-- upvalues: promptStateModule (ref), fFlagPurchaseModalTimedOptionExtension (ref), formatTextWithParamsModule (ref), purchaseErrorModule (ref), formatEconomicRestrictionText (ref), fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (ref), getPurchaseErrorText (ref)
 	local promptState = p2.promptState
 	local purchaseError = p2.purchaseError
 	
-	return if promptState == promptStateModule.PurchaseComplete then if fFlagEnableUnifiedProductPurchaseFlow and p2.useUnifiedPurchaseCompletionModal then if p2.isMultiItem then {
+	return if promptState == promptStateModule.PurchaseComplete then if p2.useUnifiedPurchaseCompletionModal then if p2.isMultiItem then {
 		messageText = p1.MultiItemPurchaseCompleteBody,
 		titleText = p1.PurchaseCompleteTitle
 	} elseif fFlagPurchaseModalTimedOptionExtension and p2.completionMessage then {
@@ -121,7 +120,7 @@ local function getButtonStackInfo(p1, p2)
 end
 
 local function ProductPurchasePrompt(p1)
-	-- upvalues: fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (ref), addEconomicRestrictionKeysToLocalization (ref), useLocalization (ref), useMemo (ref), getModalContent (ref), useEffect (ref), fFlagFixPurchasingErrorCounterModule (ref), default (ref), productPurchasePromptCounter (ref), purchaseErrorModule (ref), promptStateModule (ref), universalEconomicRestrictionsCounter (ref), economicRestrictionsSurface (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (ref), appContextModule (ref), reactModule (ref), unifiedPurchaseCompletionModalV2 (ref), unifiedPurchaseCompletionModal (ref), interactiveAlert (ref), getButtonStackInfo (ref)
+	-- upvalues: fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (ref), addEconomicRestrictionKeysToLocalization (ref), useLocalization (ref), useMemo (ref), getModalContent (ref), useEffect (ref), fFlagFixPurchasingErrorCounterModule (ref), default (ref), productPurchasePromptCounter (ref), purchaseErrorModule (ref), promptStateModule (ref), universalEconomicRestrictionsCounter (ref), economicRestrictionsSurface (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (ref), appContextModule (ref), reactModule (ref), unifiedPurchaseCompletionModalV2 (ref), unifiedPurchaseCompletionModal (ref), interactiveAlert (ref), getButtonStackInfo (ref)
 	local t = {
 		PurchaseCompleteTitle = "IAPExperience.PurchasePrompt.Title.PurchaseCompleted",
 		PurchaseCompleteBody = "IAPExperience.PurchasePrompt.Body.PurchaseCompleted",
@@ -186,7 +185,7 @@ local function ProductPurchasePrompt(p1)
 		end
 	end, { p1.purchaseError })
 	
-	if not fFlagEnableUnifiedProductPurchaseFlow or not p1.useUnifiedPurchaseCompletionModal then
+	if not p1.useUnifiedPurchaseCompletionModal then
 		return reactModule.createElement(interactiveAlert, {
 			screenSize = p1.screenSize,
 			title = var2.titleText,

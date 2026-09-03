@@ -6,7 +6,6 @@ local purchaseCompleteRecievedModule = require(parent.Actions.PurchaseCompleteRe
 local promptStateModule = require(parent.Enums.PromptState)
 local thunkModule = require(parent.Thunk)
 local completeRequestModule = require(parent.Thunks.completeRequest)
-local fFlagEnableUnifiedProductPurchaseFlow = require(parent.Parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 local fFlagSkipCompletionModalForMarketplace = require(parent.Parent.SharedFlags).FFlagSkipCompletionModalForMarketplace
 local AXEnsureOfferBannerRefetchUnified = game:DefineFastFlag("AXEnsureOfferBannerRefetchUnified", false)
 local logUnifiedPurchaseTelemetryCounterModule = require(parent.Utils.logUnifiedPurchaseTelemetryCounter)
@@ -18,9 +17,9 @@ local getFeatureKeyForSurfaceModule = require(parent.Utils.getFeatureKeyForSurfa
 local inExperienceOffersModule = require(parent.Parent.InExperienceOffers)
 
 return function(p1)
-	-- upvalues: thunkModule (ref), workspaceService (ref), purchaseCompleteRecievedModule (ref), AXEnsureOfferBannerRefetchUnified (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), inExperienceOffersModule (ref), getFeatureKeyForSurfaceModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref), sendUnifiedPurchaseEventLogModule (ref), unifiedPurchaseEventNameEnumModule (ref), fFlagSkipCompletionModalForMarketplace (ref), setPromptStateModule (ref), promptStateModule (ref), completeRequestModule (ref)
+	-- upvalues: thunkModule (ref), workspaceService (ref), purchaseCompleteRecievedModule (ref), AXEnsureOfferBannerRefetchUnified (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), inExperienceOffersModule (ref), getFeatureKeyForSurfaceModule (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref), sendUnifiedPurchaseEventLogModule (ref), unifiedPurchaseEventNameEnumModule (ref), fFlagSkipCompletionModalForMarketplace (ref), setPromptStateModule (ref), promptStateModule (ref), completeRequestModule (ref)
 	return thunkModule.new(script.Name, {}, function(p2, _)
-		-- upvalues: workspaceService (copy), purchaseCompleteRecievedModule (copy), AXEnsureOfferBannerRefetchUnified (copy), fFlagEnableInExperienceOffersPurchaseFlow (copy), inExperienceOffersModule (copy), getFeatureKeyForSurfaceModule (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), p1 (ref), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), sendUnifiedPurchaseEventLogModule (copy), unifiedPurchaseEventNameEnumModule (copy), fFlagSkipCompletionModalForMarketplace (copy), setPromptStateModule (copy), promptStateModule (copy), completeRequestModule (copy)
+		-- upvalues: workspaceService (copy), purchaseCompleteRecievedModule (copy), AXEnsureOfferBannerRefetchUnified (copy), fFlagEnableInExperienceOffersPurchaseFlow (copy), inExperienceOffersModule (copy), getFeatureKeyForSurfaceModule (copy), p1 (ref), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), sendUnifiedPurchaseEventLogModule (copy), unifiedPurchaseEventNameEnumModule (copy), fFlagSkipCompletionModalForMarketplace (copy), setPromptStateModule (copy), promptStateModule (copy), completeRequestModule (copy)
 		local var1 = workspaceService.DistributedGameTime - p2:getState().purchasingStartTime
 		p2:dispatch(purchaseCompleteRecievedModule())
 		
@@ -44,7 +43,7 @@ return function(p1)
 				end
 			end
 		end
-		if fFlagEnableUnifiedProductPurchaseFlow and p2:getState().isUserEligibleForUnifiedPurchaseFlow then
+		if p2:getState().isUserEligibleForUnifiedPurchaseFlow then
 			local state = p2:getState()
 			local postPurchaseActions = state.postPurchaseActions
 			local postPurchaseActionsState = state.postPurchaseActionsState or {}

@@ -38,6 +38,9 @@ local fFlagLuaAppParentUpsellPolicy = require(parent.SharedFlags).FFlagLuaAppPar
 local fFlagLuaAppPlayButtonAmpAgeCheckFlow = require(parent.SharedFlags).FFlagLuaAppPlayButtonAmpAgeCheckFlow
 local fStringLuaAppPlayButtonAgeCheckAmpFeatureName = require(parent.SharedFlags).FStringLuaAppPlayButtonAgeCheckAmpFeatureName
 local fStringLuaAppPlayButtonAgeCheckAmpNameSpace = require(parent.SharedFlags).FStringLuaAppPlayButtonAgeCheckAmpNameSpace
+local fFlagLuaAppVpcUpsellNamespace = require(parent.SharedFlags).FFlagLuaAppVpcUpsellNamespace
+local fStringLuaAppVpcSettingsChangeAmpNameSpace = require(parent.SharedFlags).FStringLuaAppVpcSettingsChangeAmpNameSpace
+local fStringLuaAppVpcAccountManagementAmpNameSpace = require(parent.SharedFlags).FStringLuaAppVpcAccountManagementAmpNameSpace
 local fFlagLuaAppParentApprovedExperiences = require(parent.SharedFlags).FFlagLuaAppParentApprovedExperiences
 local getFFlagEnableAmpWizardVPCNavigationFix = require(parent.AmpUpsell).GetFFlagEnableAmpWizardVPCNavigationFix
 local fFlagEnablePlayButtonWizardVPCPrologueModule = require(gamePlayButton.Flags.FFlagEnablePlayButtonWizardVPCPrologue)
@@ -83,7 +86,7 @@ local var2 = (function(p2)
 end)(luaAppUpsellMaturityRatingToSettingMapping)
 
 return function(p2, p3, p4)
-	-- upvalues: useRoactService (ref), roactNetworking (ref), appEventIngestService (ref), useDispatch (ref), useSelector (ref), fFlagMigrateGameInfoToStore (ref), gameInfosReducer (ref), gameHydrationReactModule (ref), useLocalization (ref), fFlagLuaAppParentApprovedExperiences (ref), reactModule (ref), openAmpWizardContainer (ref), fFlagLuaAppPlayButtonAmpAgeCheckFlow (ref), fFlagLuaAppPlayButtonWizardCloseDelay (ref), fFlagEnablePlayButtonWizardVPCPrologueModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), openPlayButtonUpsellDialog (ref), openCloseOnlyInteractiveAlert (ref), navigateBack (ref), closeCentralOverlay (ref), fetchGamePlayButtonDataModule (ref), authButtonClick (ref), playButtonUpsellBodyModule (ref), getFFlagEnableAmpWizardVPCNavigationFix (ref), unlockPlayIntent (ref), playabilityStatusEnum (ref), fFlagLuaAppParentUpsellPolicy (ref), useAppPolicy (ref), fetchUserSettingsAndOptions (ref), flaggedMutedError (ref), var2 (ref), loggingProtocolModule (ref), unknownUpsellErrorEventHundredthsPercent (ref), dashModule (ref), fStringLuaAppPlayButtonAgeCheckAmpFeatureName (ref), fStringLuaAppPlayButtonAgeCheckAmpNameSpace (ref), delayedAmpWizardCompletionCallbackOverrideModule (ref), fIntLuaAppPlayButtonWizardCloseDelayMs (ref)
+	-- upvalues: useRoactService (ref), roactNetworking (ref), appEventIngestService (ref), useDispatch (ref), useSelector (ref), fFlagMigrateGameInfoToStore (ref), gameInfosReducer (ref), gameHydrationReactModule (ref), useLocalization (ref), fFlagLuaAppParentApprovedExperiences (ref), reactModule (ref), openAmpWizardContainer (ref), fFlagLuaAppPlayButtonAmpAgeCheckFlow (ref), fFlagLuaAppVpcUpsellNamespace (ref), fFlagLuaAppPlayButtonWizardCloseDelay (ref), fFlagEnablePlayButtonWizardVPCPrologueModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), openPlayButtonUpsellDialog (ref), openCloseOnlyInteractiveAlert (ref), navigateBack (ref), closeCentralOverlay (ref), fetchGamePlayButtonDataModule (ref), authButtonClick (ref), playButtonUpsellBodyModule (ref), getFFlagEnableAmpWizardVPCNavigationFix (ref), fStringLuaAppVpcAccountManagementAmpNameSpace (ref), fStringLuaAppVpcSettingsChangeAmpNameSpace (ref), unlockPlayIntent (ref), playabilityStatusEnum (ref), fFlagLuaAppParentUpsellPolicy (ref), useAppPolicy (ref), fetchUserSettingsAndOptions (ref), flaggedMutedError (ref), var2 (ref), loggingProtocolModule (ref), unknownUpsellErrorEventHundredthsPercent (ref), dashModule (ref), fStringLuaAppPlayButtonAgeCheckAmpFeatureName (ref), fStringLuaAppPlayButtonAgeCheckAmpNameSpace (ref), delayedAmpWizardCompletionCallbackOverrideModule (ref), fIntLuaAppPlayButtonWizardCloseDelayMs (ref)
 	local var3 = useRoactService(roactNetworking)
 	local var4 = useRoactService(appEventIngestService)
 	local var5 = useDispatch()
@@ -121,8 +124,8 @@ return function(p2, p3, p4)
 		askYourParentToAllowGameBodyText = if fFlagLuaAppParentApprovedExperiences then "Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body" else nil
 	})
 	local var11 = reactModule.useCallback(function(p5, p6, p7, p8, p9, p10, p11, p12)
-		-- upvalues: var5 (ref), openAmpWizardContainer (copy), fFlagLuaAppPlayButtonAmpAgeCheckFlow (copy), fFlagLuaAppPlayButtonWizardCloseDelay (copy), fFlagEnablePlayButtonWizardVPCPrologueModule (copy)
-		var5(openAmpWizardContainer(p5, p6, p7, p8, if fFlagLuaAppPlayButtonAmpAgeCheckFlow then p9 else nil, if fFlagLuaAppPlayButtonAmpAgeCheckFlow then p10 else nil, nil, nil, if fFlagLuaAppPlayButtonWizardCloseDelay then p11 else nil, if fFlagEnablePlayButtonWizardVPCPrologueModule and p12 then true else nil, if fFlagEnablePlayButtonWizardVPCPrologueModule then p12 else nil))
+		-- upvalues: var5 (ref), openAmpWizardContainer (copy), fFlagLuaAppPlayButtonAmpAgeCheckFlow (copy), fFlagLuaAppVpcUpsellNamespace (copy), fFlagLuaAppPlayButtonWizardCloseDelay (copy), fFlagEnablePlayButtonWizardVPCPrologueModule (copy)
+		var5(openAmpWizardContainer(p5, p6, p7, p8, if fFlagLuaAppPlayButtonAmpAgeCheckFlow then p9 else nil, if fFlagLuaAppPlayButtonAmpAgeCheckFlow or fFlagLuaAppVpcUpsellNamespace then p10 else nil, nil, nil, if fFlagLuaAppPlayButtonWizardCloseDelay then p11 else nil, if fFlagEnablePlayButtonWizardVPCPrologueModule and p12 then true else nil, if fFlagEnablePlayButtonWizardVPCPrologueModule then p12 else nil))
 	end, { var5 })
 	local var12 = reactModule.useCallback(function(p5, p6, p7, p8)
 		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var5 (ref), navigateDown (copy)
@@ -180,7 +183,7 @@ return function(p2, p3, p4)
 		var17()
 	end, { var16, var17 })
 	local var20 = if fFlagEnablePlayButtonWizardVPCPrologueModule then reactModule.useCallback(function(p5)
-		-- upvalues: var10 (ref), reactModule (copy), playButtonUpsellBodyModule (copy), var19 (ref), authButtonClick (copy)
+		-- upvalues: var10 (ref), fFlagLuaAppVpcUpsellNamespace (copy), reactModule (copy), playButtonUpsellBodyModule (copy), var19 (ref), authButtonClick (copy)
 		return {
 			config = {
 				cancelFirst = true,
@@ -188,6 +191,7 @@ return function(p2, p3, p4)
 				hasBackdrop = true,
 				onCloseCancels = true,
 				titleText = var10.askYourParentTitleText,
+				bodyText = if fFlagLuaAppVpcUpsellNamespace then p5 else nil,
 				bodyContent = reactModule.createElement(playButtonUpsellBodyModule, { bodyText = p5, onCloseModal = var19 }),
 				confirmText = var10.askYourParentActionButtonText,
 				cancelText = var10.askYourParentCancelButtonText
@@ -208,18 +212,18 @@ return function(p2, p3, p4)
 		var19
 	}) else nil
 	local var21 = reactModule.useCallback(function(p5, p6)
-		-- upvalues: var16 (ref), fFlagEnablePlayButtonWizardVPCPrologueModule (copy), authButtonClick (copy), fFlagLuaAppParentApprovedExperiences (copy), var11 (ref), getFFlagEnableAmpWizardVPCNavigationFix (copy), var17 (ref), var15 (ref), p2 (ref)
+		-- upvalues: var16 (ref), fFlagEnablePlayButtonWizardVPCPrologueModule (copy), authButtonClick (copy), fFlagLuaAppParentApprovedExperiences (copy), var11 (ref), getFFlagEnableAmpWizardVPCNavigationFix (copy), var17 (ref), var15 (ref), p2 (ref), fFlagLuaAppVpcUpsellNamespace (copy), fStringLuaAppVpcAccountManagementAmpNameSpace (copy), fStringLuaAppVpcSettingsChangeAmpNameSpace (copy)
 		var16()
 		
 		if not fFlagEnablePlayButtonWizardVPCPrologueModule then
 			authButtonClick("gameJoinContentMaturityLock", "askParent")
 		end
 		if fFlagLuaAppParentApprovedExperiences then
-			var11("CanApproveExperience", if getFFlagEnableAmpWizardVPCNavigationFix() then var17 else var15, { experienceManagementAction = "Approve", universeId = p2 }, "gameJoinContentMaturityLock", nil, nil, nil, if fFlagEnablePlayButtonWizardVPCPrologueModule then p6 else nil)
+			var11("CanApproveExperience", if getFFlagEnableAmpWizardVPCNavigationFix() then var17 else var15, { experienceManagementAction = "Approve", universeId = p2 }, "gameJoinContentMaturityLock", nil, if fFlagLuaAppVpcUpsellNamespace then fStringLuaAppVpcAccountManagementAmpNameSpace else nil, nil, if fFlagEnablePlayButtonWizardVPCPrologueModule then p6 else nil)
 			
 			return
 		end
-		var11("CanChangeSetting", if getFFlagEnableAmpWizardVPCNavigationFix() then var17 else var15, { contentAgeRestriction = p5 }, "gameJoinContentMaturityLock", nil, nil, nil, if fFlagEnablePlayButtonWizardVPCPrologueModule then p6 else nil)
+		var11("CanChangeSetting", if getFFlagEnableAmpWizardVPCNavigationFix() then var17 else var15, { contentAgeRestriction = p5 }, "gameJoinContentMaturityLock", nil, if fFlagLuaAppVpcUpsellNamespace then fStringLuaAppVpcSettingsChangeAmpNameSpace else nil, nil, if fFlagEnablePlayButtonWizardVPCPrologueModule then p6 else nil)
 	end, {
 		var11,
 		if getFFlagEnableAmpWizardVPCNavigationFix() then var17 else nil,

@@ -4,9 +4,8 @@ local userInputService = game:GetService("UserInputService")
 local upsellFlowModule = require(parent.Enums.UpsellFlow)
 local getUpsellFlowModule = require(parent.NativeUpsell.getUpsellFlow)
 local getAppFeaturePolicies = require(parent_1.UniversalAppPolicy).getAppFeaturePolicies
-local fFlagEnableUnifiedProductPurchaseFlow = require(parent_1.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 
 return function()
-	-- upvalues: userInputService (ref), getUpsellFlowModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), getAppFeaturePolicies (ref), upsellFlowModule (ref)
-	return if fFlagEnableUnifiedProductPurchaseFlow and getAppFeaturePolicies().getShouldUseDMCCALegalDisclosureInApp() then true else getUpsellFlowModule(userInputService:GetPlatform()) == upsellFlowModule.Web
+	-- upvalues: userInputService (ref), getUpsellFlowModule (ref), getAppFeaturePolicies (ref), upsellFlowModule (ref)
+	return if getAppFeaturePolicies().getShouldUseDMCCALegalDisclosureInApp() then true else getUpsellFlowModule(userInputService:GetPlatform()) == upsellFlowModule.Web
 end

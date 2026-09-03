@@ -2616,6 +2616,7 @@ Feature.Catalog.Label.Torso,
 Feature.Catalog.Label.TotalItemsParenthesis,
 Feature.Catalog.Label.TotalUnformatted,合計
 Feature.Catalog.Label.Tradable,可交易
+Feature.Catalog.Label.Trending,熱門
 Feature.Catalog.Label.TryOns,
 Feature.Catalog.Label.TryOnsMultiple,試穿（{numItems}）
 Feature.Catalog.Label.Unlimited,無限
@@ -2880,7 +2881,7 @@ Feature.Chat.ShareGameToChat.NoFavoriteGames,沒有最愛遊戲
 Feature.Chat.ShareGameToChat.NoFriendActivity,暫時沒有好友動態
 Feature.Chat.ShareGameToChat.NoPopularGames,無熱門體驗
 Feature.Chat.ShareGameToChat.NoRecentGames,沒有近期紀錄
-Feature.Chat.ShareGameToChat.Popular,熱門
+Feature.Chat.ShareGameToChat.Popular,
 Feature.Chat.ShareGameToChat.Recent,最近玩過
 Feature.Chat.Text.NoConnections,尚未新增任何聯繫對象。若要開始，請尋找並在 Roblox 上新增聯繫對象。
 Feature.Chat.Text.NoFriends,你尚未新增任何好友。若要開始，請在 Roblox 上尋找並新增好友。
@@ -3217,6 +3218,8 @@ Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,已選取 {selectedCount} 
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,沒有興趣
+Feature.GameDetails.Action.PauseVideo,暫停影片
+Feature.GameDetails.Action.PlayVideo,播放影片
 Feature.GameDetails.Action.Report,
 Feature.GameDetails.Action.ReportAd,
 Feature.GameDetails.Action.Undo,
@@ -3639,7 +3642,6 @@ Feature.Profile.Action.AboutThisProfile,關於此個人檔案
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
-Feature.Profile.Action.AddNickname,新增名稱
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,複製個人檔案連結
 Feature.Profile.Action.EditAppearance,編輯外觀
@@ -3652,17 +3654,13 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,分享個人檔案
 Feature.Profile.Action.ShareProfileLink,分享個人檔案連結
-Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
 Feature.Profile.Action.UserBlocked,
 Feature.Profile.Action.ViewFullProfile,檢視完整個人檔案
 Feature.Profile.Action.ViewProfile,
 Feature.Profile.Description.AboutModalCaption,讓其他玩家更認識您。請保護自己的安全，不要透露私人的詳細資訊。
-Feature.Profile.Description.EnterNicknameTextbox,輸入您的綽號
 Feature.Profile.Description.InspectAndBuy,按一下即可查看並購買他們的造型。
-Feature.Profile.Description.NicknamePrivacy,只有 {displayName} 會看到這個。
-Feature.Profile.Description.NicknamePrivacyNoDisplayName,只有此使用者會看到此內容。
 Feature.Profile.Description.QrCodeDescription,讓其他人掃描你的 QR 碼，即可在 Roblox 上互動交流。已完成年齡驗證且年滿 13 歲的使用者透過即時掃描 QR 碼，就能成為信任的好友。
 Feature.Profile.Description.QrCodeDescription.FriendsRename,讓其他人掃描你的 QR 碼，即可在 Roblox 上互動交流。已完成年齡驗證且年滿 13 歲的使用者透過即時掃描 QR 碼，便可成為信任的聯絡對象。
 Feature.Profile.Description.QrCodeScanning,讓其他人使用 QR 掃描儀掃描您的 Roblox QR 碼，快速新增您為好友！
@@ -3670,11 +3668,8 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,設定自訂名稱�
 Feature.Profile.Description.RecognizeFriendsByCustomName,設定自訂名稱即可更輕鬆辨識朋友。從聯絡人輸入的名稱和自訂名稱只會顯示給您本人。
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,讓認識的人掃描你的 QR 碼，將你新增為聯絡對象。
-Feature.Profile.Description.SelectNicknameDropdown,選擇名稱
 Feature.Profile.Description.SetCustomName,"設定<font weight=""medium"">{displayName}</font>的自訂名稱。"
 Feature.Profile.Description.SetCustomNameNoDisplayName,請設定自訂名稱。
-Feature.Profile.Description.SetNicknamePrompt,請新增名稱以方便 {displayName} 識別。
-Feature.Profile.Description.SetNicknamePromptNoDisplayName,請新增名稱以方便此使用者識別。
 Feature.Profile.Description.SocialNetworksCaptionEveryone,目前所有人都能看見。
 Feature.Profile.Description.SocialNetworksCaptionFollowers,目前好友、您追蹤的使用者和您的追蹤者可以看見。
 Feature.Profile.Description.SocialNetworksCaptionFollowing,目前好友和您追蹤的使用者可以看見。
@@ -3695,7 +3690,6 @@ Feature.Profile.Heading.DisplayNameUpdated,已更新顯示名稱
 Feature.Profile.Heading.EditAgedUpDisplayName,編輯名稱
 Feature.Profile.Heading.EditDisplayName,編輯顯示名稱
 Feature.Profile.Heading.InsufficientFunds,資金不足
-Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileFrame,個人檔案外框
 Feature.Profile.Heading.ProfilePictureSaved,已成功儲存個人檔案照片
 Feature.Profile.Heading.ProfileQRCode,
@@ -3715,7 +3709,6 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"您的名稱每 7 天只能
 Feature.Profile.Label.AgedUpDisplayNameTooShort,名稱至少要有 3 個字元。
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,自訂名稱
-Feature.Profile.Label.CustomNicknameDropdown,設定自訂名稱
 Feature.Profile.Label.CustomizeName,
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,這會是您在 Roblox 上向其他使用者顯示的主要公開名稱。
@@ -3723,12 +3716,6 @@ Feature.Profile.Label.DisplayNameFailed,無法儲存顯示名稱。請再試一�
 Feature.Profile.Label.DisplayNameModalCaption,您的顯示名稱每 7 天只能變更一次。
 Feature.Profile.Label.DisplayNameTooShort,顯示名稱至少要有 3 個字元。
 Feature.Profile.Label.EditBackground,
-Feature.Profile.Label.NicknameErrorMessageInvalid,名稱無效。
-Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,名稱含有不支援的字元。
-Feature.Profile.Label.NicknameErrorMessageModerated,此名稱含有 Roblox 認定的不當內容。
-Feature.Profile.Label.NicknameErrorMessageThrottled,您今天已變更過名稱。
-Feature.Profile.Label.NicknameErrorMessageTooLong,名稱最多 20 個字元。
-Feature.Profile.Label.NicknameErrorMessageTooShort,名稱至少要有 2 個字元。
 Feature.Profile.Label.NoBioYet,尚無簡介
 Feature.Profile.Label.NoPreviousName,沒有先前的名稱
 Feature.Profile.Label.NoSocialLink,尚無社交連結
@@ -3738,7 +3725,6 @@ Feature.Profile.Label.QRCodeFriendRequest,從您的 QR 碼傳送
 Feature.Profile.Label.RecentAgedUpDisplayName,"您近期已變更過名稱。每 7 天只能變更名稱一次。
 "
 Feature.Profile.Label.RecentDisplayName,近期已變更過顯示名稱。您的顯示名稱每 7 天只能變更一次。
-Feature.Profile.Label.TimeToChangeNickname,您可以在 {hours} 小時後變更名稱。
 Feature.Profile.Label.UnableToJoin,無法加入
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b> 正在玩<b>{experienceName}</b>
 Feature.Profile.Label.UsernameDescription,這是您在 Roblox 上的獨特名稱。變更您的使用者名稱需花費 {icon}{price}。
@@ -4225,7 +4211,6 @@ Feature.Squads.Label.FindExperiencesPlayTogether,尋找能夠一起遊玩的體�
 Feature.Squads.Label.FriendJoinedYourParty,{combinedName} 已加入你的 Party
 Feature.Squads.Label.InviteConnectionsConfirmation,要邀請這些聯繫對象到群組中嗎？
 Feature.Squads.Label.InviteFriendsConfirmation,要邀請這些好友到群組中嗎？
-Feature.Squads.Label.InviteToSquad,邀請到團隊
 Feature.Squads.Label.InvitedToExperience,已受邀至體驗
 Feature.Squads.Label.JoinAnotherParty,切換 Party
 Feature.Squads.Label.JoinExperiencesTogether,一起加入體驗
@@ -4532,6 +4517,7 @@ IAPExperience.PurchasePrompt.BuyRobuxAndSubscription,購買 Robux 和訂閱
 IAPExperience.PurchasePrompt.Header.BuyAvatar,
 IAPExperience.PurchasePrompt.Header.BuyRobuxAndAvatar,購買 Robux 和虛擬人偶
 IAPExperience.PurchasePrompt.Label.BlackbirdDiscount,Plus 權益（可享 {discountPercentage}% 折扣）
+IAPExperience.PurchasePrompt.Label.BlackbirdDiscountEligibleItems,Plus 權益（符合資格的道具可享 {discountPercentage}% 優惠）
 IAPExperience.PurchasePrompt.Label.BlackbirdDiscountNoPercent,Plus 權益
 IAPExperience.PurchasePrompt.Label.BlackbirdSummary,透過 Plus 省下 {robuxIcon} {savingsAmount}
 IAPExperience.PurchasePrompt.Label.GenericDiscount,折扣（可折 {discountPercentage}%）
@@ -4879,6 +4865,7 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,協助改善此體驗
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,協助創作者改善這項體驗
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,購買更多產品之前，請先加入體驗來兌換您先前的購買項目。
+Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,加入以兌換購買項目
 Roblox.ReferralRewards.AdditionalCreatorTerms,其他創作者條款
 Roblox.ReferralRewards.Expires,過期
 Roblox.ReferralRewards.ReferralProgramTerms,推薦計畫條款

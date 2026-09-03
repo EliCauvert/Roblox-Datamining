@@ -23,6 +23,7 @@ local appChatPersistentEventReceiversModule = require(appChat.Components.EventRe
 local useIsAppChatVisibleModule = require(appChat.App.Hooks.useIsAppChatVisible)
 local usePreventExperienceControlsModule = require(appChat.App.Hooks.usePreventExperienceControls)
 local useAppChatUpdateSessionModule = require(appChat.Hooks.useAppChatUpdateSession)
+local usePartyChatReactiveFeatureRestrictionModule = require(appChat.Hooks.usePartyChatReactiveFeatureRestriction)
 local styleModule = require(parent.Style)
 local uiModeStyleProvider = styleModule.UiModeStyleProvider
 local designTokenProvider = styleModule.DesignTokenProvider
@@ -35,6 +36,7 @@ local colorMode = foundationModule.Enums.ColorMode
 local overlayHostModule = require(appChat.Components.OSA.OverlayHost)
 local debugAppChatDisplayOnJoin = game:DefineFastFlag("DebugAppChatDisplayOnJoin", false)
 local appChatInExperienceDisplayOrder = game:DefineFastInt("AppChatInExperienceDisplayOrder", 5)
+local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local getFFlagAppChatInExpToastSnoozeMenuDismissFix = require(parent.SharedFlags).GetFFlagAppChatInExpToastSnoozeMenuDismissFix
 local partyPageCarouselExperimentation = require(parent.SocialExperiments).PartyPageCarouselExperimentation
@@ -72,7 +74,7 @@ function wrapWithFocusRoot(p1, p2, p3)
 end
 
 function InExperienceAppChat()
-	-- upvalues: reactModule (ref), useDispatch (ref), useIsAppChatVisibleModule (ref), debugAppChatDisplayOnJoin (ref), parentContainerContextModule (ref), getFFlagAppChatRequestedRouteModule (ref), fFlagEnableSideSheet (ref), fFlagSideSheetFocusNav (ref), fFlagEnableDrawerAnimatingHook (ref), useDrawerVisible (ref), useDrawerAnimating (ref), useParentContainerVisibilitySignalModule (ref), useAppChatUpdateSessionModule (ref), usePreventExperienceControlsModule (ref), setAppLoadedModule (ref), getAllFriendsAsyncModule (ref), partyPageCarouselExperimentation (ref), getLocalUserFriendsCountModule (ref), getLocalUser (ref), getFFlagIsSquadEnabled (ref), useSelector (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useAppPolicy (ref), fFlagEnableAppChatSnoozeMenuFocus (ref), notificationSnoozeMenuVisibleSignal (ref), enteredChatFromEntryPointModule (ref), socialCommonModule (ref), fFlagExpChatEnableFriendsTab (ref), squadEventReceiverModule (ref), appChatPersistentEventReceiversModule (ref), appChatToastManagerInExpModule (ref), getFFlagAppChatInExpToastSnoozeMenuDismissFix (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), designTokenProvider (ref), appChatInExperienceDisplayOrder (ref), squadOverlayModule (ref), layerCollectorProvider (ref), responsiveModule (ref), roactServices (ref), appSessionService (ref), sessionService (ref), inExperienceAppChatContainerModule (ref), overlayHostModule (ref), foundationModule (ref)
+	-- upvalues: reactModule (ref), useDispatch (ref), useIsAppChatVisibleModule (ref), debugAppChatDisplayOnJoin (ref), parentContainerContextModule (ref), getFFlagAppChatRequestedRouteModule (ref), fFlagEnableSideSheet (ref), fFlagSideSheetFocusNav (ref), fFlagEnableDrawerAnimatingHook (ref), useDrawerVisible (ref), useDrawerAnimating (ref), useParentContainerVisibilitySignalModule (ref), useAppChatUpdateSessionModule (ref), usePreventExperienceControlsModule (ref), fFlagAppChatReactiveFeatureRestrictions (ref), usePartyChatReactiveFeatureRestrictionModule (ref), setAppLoadedModule (ref), getAllFriendsAsyncModule (ref), partyPageCarouselExperimentation (ref), getLocalUserFriendsCountModule (ref), getLocalUser (ref), getFFlagIsSquadEnabled (ref), useSelector (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useAppPolicy (ref), fFlagEnableAppChatSnoozeMenuFocus (ref), notificationSnoozeMenuVisibleSignal (ref), enteredChatFromEntryPointModule (ref), socialCommonModule (ref), fFlagExpChatEnableFriendsTab (ref), squadEventReceiverModule (ref), appChatPersistentEventReceiversModule (ref), appChatToastManagerInExpModule (ref), getFFlagAppChatInExpToastSnoozeMenuDismissFix (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), designTokenProvider (ref), appChatInExperienceDisplayOrder (ref), squadOverlayModule (ref), layerCollectorProvider (ref), responsiveModule (ref), roactServices (ref), appSessionService (ref), sessionService (ref), inExperienceAppChatContainerModule (ref), overlayHostModule (ref), foundationModule (ref)
 	local var1 = reactModule.useRef(nil)
 	local var2 = useDispatch()
 	local var3, var4 = useIsAppChatVisibleModule(debugAppChatDisplayOnJoin)
@@ -105,6 +107,10 @@ function InExperienceAppChat()
 	useParentContainerVisibilitySignalModule()
 	useAppChatUpdateSessionModule(var3)
 	usePreventExperienceControlsModule(var3)
+	
+	if fFlagAppChatReactiveFeatureRestrictions then
+		usePartyChatReactiveFeatureRestrictionModule(var3)
+	end
 	reactModule.useEffect(function()
 		-- upvalues: var3 (ref), var2 (ref), setAppLoadedModule (copy), getAllFriendsAsyncModule (copy), partyPageCarouselExperimentation (copy), getLocalUserFriendsCountModule (copy)
 		if var3 then

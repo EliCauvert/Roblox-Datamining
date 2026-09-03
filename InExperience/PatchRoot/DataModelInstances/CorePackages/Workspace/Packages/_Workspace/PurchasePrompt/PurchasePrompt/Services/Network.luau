@@ -19,7 +19,6 @@ local enableDevSubscriptionPurchaseWithRobuxEngineFeature = game:GetEngineFeatur
 local getFFlagEnablePromptPurchaseRequestedV2Module = require(purchasePrompt.Flags.GetFFlagEnablePromptPurchaseRequestedV2)
 local getFFlagEnablePromptPurchaseRequestedV2Take2Module = require(purchasePrompt.Flags.GetFFlagEnablePromptPurchaseRequestedV2Take2)
 local getFFlagEnableCreatorStorePurchasingCutoverModule = require(purchasePrompt.Flags.GetFFlagEnableCreatorStorePurchasingCutover)
-local fFlagEnableUnifiedProductPurchaseFlow = require(parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule = require(purchasePrompt.Flags.FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsell)
 local fFlagEnableRequestLocationTypeForSduiPurchaseModule = require(purchasePrompt.Flags.FFlagEnableRequestLocationTypeForSduiPurchase)
@@ -600,7 +599,7 @@ end
 
 return {
 	new = function()
-		-- upvalues: promiseModule (ref), getABTestGroup (ref), getProductInfo (ref), getPlayerOwns (ref), performPurchase (ref), performPurchaseV2 (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), performCreatorStorePurchase (ref), loadAssetForEquip (ref), getAccountInfo (ref), getAssetInfo (ref), getBalanceInfo (ref), getBundleDetails (ref), getProductPurchasableDetails (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), getCatalogItemDetails (ref), getResellers (ref), getCreatorStoreProductInfo (ref), getPremiumProductInfo (ref), postPremiumImpression (ref), getPremiumUpsellPrecheck (ref), getSubscriptionPurchaseInfo (ref), performSubscriptionPurchase (ref), getPurchaseWarning (ref), postPurchaseWarningAcknowledge (ref), checkUserPurchaseSettings (ref), getVngShopUrl (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), performDevProductEdpPurchase (ref), getExperienceProductInfo (ref), performExperiencePurchase (ref), performLookPurchase (ref), getUnifiedPurchaseFlowUserEligibility (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), performDeveloperSubscriptionRobuxPurchase (ref), getSubscriptionProductInfo (ref), fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (ref), GetLookDetailsV2ProductInfo (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), postCartPricing (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), postInGameItemCartPricing (ref)
+		-- upvalues: promiseModule (ref), getABTestGroup (ref), getProductInfo (ref), getPlayerOwns (ref), performPurchase (ref), performPurchaseV2 (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), performCreatorStorePurchase (ref), loadAssetForEquip (ref), getAccountInfo (ref), getAssetInfo (ref), getBalanceInfo (ref), getBundleDetails (ref), getProductPurchasableDetails (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), getCatalogItemDetails (ref), getResellers (ref), getCreatorStoreProductInfo (ref), getPremiumProductInfo (ref), postPremiumImpression (ref), getPremiumUpsellPrecheck (ref), getSubscriptionPurchaseInfo (ref), performSubscriptionPurchase (ref), getPurchaseWarning (ref), postPurchaseWarningAcknowledge (ref), checkUserPurchaseSettings (ref), getVngShopUrl (ref), performDevProductEdpPurchase (ref), getExperienceProductInfo (ref), performExperiencePurchase (ref), performLookPurchase (ref), getUnifiedPurchaseFlowUserEligibility (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), performDeveloperSubscriptionRobuxPurchase (ref), getSubscriptionProductInfo (ref), fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (ref), GetLookDetailsV2ProductInfo (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), postCartPricing (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), postInGameItemCartPricing (ref)
 		local t = {
 			getABTestGroup = promiseModule.promisify(getABTestGroup),
 			getProductInfo = promiseModule.promisify(getProductInfo),
@@ -626,11 +625,11 @@ return {
 			postPurchaseWarningAcknowledge = promiseModule.promisify(postPurchaseWarningAcknowledge),
 			checkUserPurchaseSettings = promiseModule.promisify(checkUserPurchaseSettings),
 			getVngShopUrl = promiseModule.promisify(getVngShopUrl),
-			performDevProductEdpPurchase = if fFlagEnableUnifiedProductPurchaseFlow then promiseModule.promisify(performDevProductEdpPurchase) else nil,
-			getExperienceProductInfo = if fFlagEnableUnifiedProductPurchaseFlow then promiseModule.promisify(getExperienceProductInfo) else nil,
-			performExperiencePurchase = if fFlagEnableUnifiedProductPurchaseFlow then promiseModule.promisify(performExperiencePurchase) else nil,
-			performLookPurchase = if fFlagEnableUnifiedProductPurchaseFlow then promiseModule.promisify(performLookPurchase) else nil,
-			getUnifiedPurchaseFlowUserEligibility = if fFlagEnableUnifiedProductPurchaseFlow then promiseModule.promisify(getUnifiedPurchaseFlowUserEligibility) else nil,
+			performDevProductEdpPurchase = promiseModule.promisify(performDevProductEdpPurchase),
+			getExperienceProductInfo = promiseModule.promisify(getExperienceProductInfo),
+			performExperiencePurchase = promiseModule.promisify(performExperiencePurchase),
+			performLookPurchase = promiseModule.promisify(performLookPurchase),
+			getUnifiedPurchaseFlowUserEligibility = promiseModule.promisify(getUnifiedPurchaseFlowUserEligibility),
 			performDeveloperSubscriptionRobuxPurchase = if fFlagEnableUnifiedPurchaseFlowForDevSubs then promiseModule.promisify(performDeveloperSubscriptionRobuxPurchase) else nil,
 			getSubscriptionProductInfo = if fFlagEnableUnifiedPurchaseFlowForDevSubs then promiseModule.promisify(getSubscriptionProductInfo) else nil,
 			GetLookDetailsV2ProductInfo = if fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule then promiseModule.promisify(GetLookDetailsV2ProductInfo) else nil,

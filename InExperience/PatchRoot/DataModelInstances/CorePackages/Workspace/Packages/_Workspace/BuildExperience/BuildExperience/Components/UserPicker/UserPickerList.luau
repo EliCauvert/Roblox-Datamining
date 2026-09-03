@@ -2,7 +2,6 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local userPickerRowModule = require(script.Parent.UserPickerRow)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
@@ -12,7 +11,6 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local inputSize = foundationModule.Enums.InputSize
 local radius = foundationModule.Enums.Radius
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
 local function _(p1)
 	return string.gsub(p1, "^%s*(.-)%s*$", "%1")
@@ -46,10 +44,10 @@ local function renderSkeletonRow(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), renderSkeletonRow (ref), reactModule (ref), view (ref), text (ref), userPickerRowModule (ref), list (ref), inputSize (ref)
-	local var1 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), renderSkeletonRow (ref), reactModule (ref), view (ref), text (ref), userPickerRowModule (ref), list (ref), inputSize (ref)
+	local noResults = useLocalization({
 		noResults = localizationStringsModule.USER_PICKER_NO_RESULTS
-	}) else nil).noResults else localizationStringsModule.USER_PICKER_NO_RESULTS
+	}).noResults
 	local testId = p1.testId or "user-picker-list"
 	local userIds = p1.userIds
 	
@@ -65,9 +63,9 @@ return function(p1)
 			testId = `{testId}-loading`
 		}, t)
 	elseif #userIds == 0 and not p1.isLoading then
-		local var2 = if string.gsub(p1.searchText, "^%s*(.-)%s*$", "%1") ~= "" then p1.emptyText else var1
+		local var1 = if string.gsub(p1.searchText, "^%s*(.-)%s*$", "%1") ~= "" then p1.emptyText else noResults
 		
-		if var2 ~= nil then
+		if var1 ~= nil then
 			return reactModule.createElement(view, {
 				tag = "col align-x-center size-full-0 auto-y padding-y-xlarge",
 				LayoutOrder = p1.layoutOrder,
@@ -75,7 +73,7 @@ return function(p1)
 			}, {
 				Text = reactModule.createElement(text, {
 					tag = "auto-xy text-body-large text-align-x-center content-muted",
-					Text = var2
+					Text = var1
 				})
 			})
 		end

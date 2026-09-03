@@ -1,7 +1,6 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local getBuildPromptDraftStoreModule = require(buildExperience.Stores.GetBuildPromptDraftStore)
@@ -9,7 +8,6 @@ local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBui
 local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local _ = require(script.Parent.MonetizationPageView)
 local t = {}
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
 local function _(p1, p2, p3)
 	-- upvalues: sendBuildExperienceEventModule (ref)
@@ -60,7 +58,7 @@ local function useManageProductState(p1)
 	local var12, var13 = reactModule.useState(if p1 ~= nil then "" else p1.description)
 	local useState = reactModule.useState
 	local var14 = if p1 == nil or p1.priceInRobux == nil then "" else tostring(p1.priceInRobux)
-	useState, var24 = useState(var14)
+	useState, var23 = useState(var14)
 	
 	return {
 		selectedProductIdRef = var1,
@@ -82,8 +80,8 @@ local function useManageProductState(p1)
 end
 
 return function(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), t (ref), fFlagBuildExperienceManageDevProductModule (ref), reactModule (ref), t_1 (ref), useManageProductState (ref), sendBuildExperienceEventModule (ref), getBuildPromptDraftStoreModule (ref)
-	local var1 = if fFlagBuildLocalization then useLocalization({
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), t (ref), fFlagBuildExperienceManageDevProductModule (ref), reactModule (ref), t_1 (ref), useManageProductState (ref), sendBuildExperienceEventModule (ref), getBuildPromptDraftStoreModule (ref)
+	local var1 = useLocalization({
 		title = localizationStringsModule.MONETIZATION_TITLE,
 		emptyTitle = localizationStringsModule.MONETIZATION_EMPTY_TITLE,
 		emptyDescription = localizationStringsModule.MONETIZATION_EMPTY_DESCRIPTION,
@@ -109,33 +107,7 @@ return function(p1)
 		descriptionLengthError = localizationStringsModule.MONETIZATION_DESCRIPTION_LENGTH_ERROR,
 		priceError = localizationStringsModule.MONETIZATION_PRICE_ERROR,
 		moderationError = localizationStringsModule.MONETIZATION_MODERATION_ERROR
-	}) else {
-		title = localizationStringsModule.MONETIZATION_TITLE,
-		emptyTitle = localizationStringsModule.MONETIZATION_EMPTY_TITLE,
-		emptyDescription = localizationStringsModule.MONETIZATION_EMPTY_DESCRIPTION,
-		emptyCreateProduct = localizationStringsModule.MONETIZATION_EMPTY_CREATE_PRODUCT,
-		createProductPrompt = localizationStringsModule.MONETIZATION_CREATE_PRODUCT_PROMPT,
-		pricing = localizationStringsModule.MONETIZATION_PRICING,
-		regionalPricing = localizationStringsModule.MONETIZATION_REGIONAL_PRICING,
-		loading = localizationStringsModule.MONETIZATION_LOADING,
-		loadErrorTitle = localizationStringsModule.BUILD_ELIGIBILITY_ERROR_TITLE,
-		loadErrorDescription = localizationStringsModule.CHAT_ERROR_UPSTREAM_UNAVAILABLE,
-		updateError = localizationStringsModule.CHAT_DEFAULT_FAILURE,
-		retry = localizationStringsModule.MONETIZATION_RETRY,
-		availableForPurchase = localizationStringsModule.MONETIZATION_AVAILABLE_FOR_PURCHASE,
-		edit = localizationStringsModule.MONETIZATION_EDIT,
-		editProduct = localizationStringsModule.MONETIZATION_EDIT_PRODUCT,
-		name = localizationStringsModule.MONETIZATION_NAME,
-		description = localizationStringsModule.MONETIZATION_DESCRIPTION,
-		price = localizationStringsModule.MONETIZATION_PRICE,
-		cancel = localizationStringsModule.MONETIZATION_CANCEL,
-		save = localizationStringsModule.MONETIZATION_SAVE,
-		nameRequiredError = localizationStringsModule.MONETIZATION_NAME_REQUIRED_ERROR,
-		nameLengthError = localizationStringsModule.MONETIZATION_NAME_LENGTH_ERROR,
-		descriptionLengthError = localizationStringsModule.MONETIZATION_DESCRIPTION_LENGTH_ERROR,
-		priceError = localizationStringsModule.MONETIZATION_PRICE_ERROR,
-		moderationError = localizationStringsModule.MONETIZATION_MODERATION_ERROR
-	}
+	})
 	local products = p1.products or t
 	local var2 = if #products > 0 then "catalog" else "empty"
 	local var3 = if p1.initialMode == "detail" or fFlagBuildExperienceManageDevProductModule and p1.initialMode == "edit" then products[1] else nil

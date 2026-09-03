@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXBackgroundGenerationOptimisticGrant", false) and require(script.Parent.FFlagAXBackgroundGeneration)

@@ -23,7 +23,6 @@ local getFFlagRespectBalanceInfoForBundleUpsellInStudioModule = require(purchase
 local thunkModule = require(purchasePrompt.Thunk)
 local getPurchaseSurfaceModule = require(purchasePrompt.Utils.getPurchaseSurface)
 local _ = require(purchasePrompt.Flags.GetFFlagEnableLuobuInGameUpsell)
-local fFlagEnableUnifiedProductPurchaseFlow = require(purchasePrompt.Parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 local setIsUserEligibleForUnifiedPurchaseFlowModule = require(purchasePrompt.Actions.SetIsUserEligibleForUnifiedPurchaseFlow)
 local setPurchaseAnalyticsMetadataModule = require(purchasePrompt.Actions.SetPurchaseAnalyticsMetadata)
 local getFFlagFixLimitedBundleResalePrerequisiteModule = require(purchasePrompt.Flags.GetFFlagFixLimitedBundleResalePrerequisite)
@@ -82,9 +81,9 @@ end
 local list = { analyticsModule, networkModule }
 
 return function(_, p5, p6, p7, p8, p9, p10, p11)
-	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), networkModule (ref), bundleProductInfoReceivedModule (ref), accountInfoReceivedModule (ref), balanceInfoRecievedModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), setIsUserEligibleForUnifiedPurchaseFlowModule (ref), setPurchaseAnalyticsMetadataModule (ref), getPurchaseSurfaceModule (ref), getProductTypeFromRequestTypeModule (ref), fFlagUpdatePriceTelemetry (ref), selectPriceModule (ref), fFlagUnifiedPurchaseGamepassAddProductUniverseId (ref), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (ref), setRobloxSubscriptionProductsModule (ref), fFlagPurchasePromptOfferMarginUpsellEnabledModule (ref), selectCartPricingOverrideModule (ref), getFFlagFixLimitedBundleResalePrerequisiteModule (ref), meetsBundlePrerequisitesModule (ref), meetsBundlePrerequisites (ref), userInputService (ref), purchaseErrorModule (ref), runService (ref), getFFlagRespectBalanceInfoForBundleUpsellInStudioModule (ref), setPurchaseFlowModule (ref), purchaseFlowModule (ref), setPostPurchaseActionsModule (ref), getPaymentPlatformModule (ref), getRobuxUpsellSuggestionsModule (ref), promptNativeUpsellSuggestionsModule (ref), errorOccurredModule (ref), setPromptStateModule (ref), promptStateModule (ref)
+	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), networkModule (ref), bundleProductInfoReceivedModule (ref), accountInfoReceivedModule (ref), balanceInfoRecievedModule (ref), setIsUserEligibleForUnifiedPurchaseFlowModule (ref), setPurchaseAnalyticsMetadataModule (ref), getPurchaseSurfaceModule (ref), getProductTypeFromRequestTypeModule (ref), fFlagUpdatePriceTelemetry (ref), selectPriceModule (ref), fFlagUnifiedPurchaseGamepassAddProductUniverseId (ref), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (ref), setRobloxSubscriptionProductsModule (ref), fFlagPurchasePromptOfferMarginUpsellEnabledModule (ref), selectCartPricingOverrideModule (ref), getFFlagFixLimitedBundleResalePrerequisiteModule (ref), meetsBundlePrerequisitesModule (ref), meetsBundlePrerequisites (ref), userInputService (ref), purchaseErrorModule (ref), runService (ref), getFFlagRespectBalanceInfoForBundleUpsellInStudioModule (ref), setPurchaseFlowModule (ref), purchaseFlowModule (ref), setPostPurchaseActionsModule (ref), getPaymentPlatformModule (ref), getRobuxUpsellSuggestionsModule (ref), promptNativeUpsellSuggestionsModule (ref), errorOccurredModule (ref), setPromptStateModule (ref), promptStateModule (ref)
 	return thunkModule.new(script.Name, list, function(p12, p13)
-		-- upvalues: analyticsModule (copy), networkModule (copy), bundleProductInfoReceivedModule (copy), p5 (ref), accountInfoReceivedModule (copy), p6 (ref), balanceInfoRecievedModule (copy), p7 (ref), fFlagEnableUnifiedProductPurchaseFlow (copy), p10 (ref), setIsUserEligibleForUnifiedPurchaseFlowModule (copy), setPurchaseAnalyticsMetadataModule (copy), getPurchaseSurfaceModule (copy), getProductTypeFromRequestTypeModule (copy), fFlagUpdatePriceTelemetry (copy), selectPriceModule (copy), p8 (write), fFlagUnifiedPurchaseGamepassAddProductUniverseId (copy), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (copy), p11 (ref), setRobloxSubscriptionProductsModule (copy), fFlagPurchasePromptOfferMarginUpsellEnabledModule (copy), selectCartPricingOverrideModule (copy), getFFlagFixLimitedBundleResalePrerequisiteModule (copy), meetsBundlePrerequisitesModule (copy), p9 (ref), meetsBundlePrerequisites (copy), userInputService (copy), purchaseErrorModule (copy), runService (copy), getFFlagRespectBalanceInfoForBundleUpsellInStudioModule (copy), setPurchaseFlowModule (copy), purchaseFlowModule (copy), setPostPurchaseActionsModule (copy), getPaymentPlatformModule (copy), getRobuxUpsellSuggestionsModule (copy), promptNativeUpsellSuggestionsModule (copy), errorOccurredModule (copy), setPromptStateModule (copy), promptStateModule (copy)
+		-- upvalues: analyticsModule (copy), networkModule (copy), bundleProductInfoReceivedModule (copy), p5 (ref), accountInfoReceivedModule (copy), p6 (ref), balanceInfoRecievedModule (copy), p7 (ref), p10 (ref), setIsUserEligibleForUnifiedPurchaseFlowModule (copy), setPurchaseAnalyticsMetadataModule (copy), getPurchaseSurfaceModule (copy), getProductTypeFromRequestTypeModule (copy), fFlagUpdatePriceTelemetry (copy), selectPriceModule (copy), p8 (write), fFlagUnifiedPurchaseGamepassAddProductUniverseId (copy), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (copy), p11 (ref), setRobloxSubscriptionProductsModule (copy), fFlagPurchasePromptOfferMarginUpsellEnabledModule (copy), selectCartPricingOverrideModule (copy), getFFlagFixLimitedBundleResalePrerequisiteModule (copy), meetsBundlePrerequisitesModule (copy), p9 (ref), meetsBundlePrerequisites (copy), userInputService (copy), purchaseErrorModule (copy), runService (copy), getFFlagRespectBalanceInfoForBundleUpsellInStudioModule (copy), setPurchaseFlowModule (copy), purchaseFlowModule (copy), setPostPurchaseActionsModule (copy), getPaymentPlatformModule (copy), getRobuxUpsellSuggestionsModule (copy), promptNativeUpsellSuggestionsModule (copy), errorOccurredModule (copy), setPromptStateModule (copy), promptStateModule (copy)
 		local _ = p12:getState()
 		local _ = p13[analyticsModule]
 		local _ = p13[networkModule]
@@ -92,29 +91,27 @@ return function(_, p5, p6, p7, p8, p9, p10, p11)
 		p12:dispatch(accountInfoReceivedModule(p6))
 		p12:dispatch(balanceInfoRecievedModule(p7))
 		
-		if fFlagEnableUnifiedProductPurchaseFlow then
-			if p10 then
-				local isPremium, var4
-				p12:dispatch(setIsUserEligibleForUnifiedPurchaseFlowModule(true))
-				local state = p12:getState()
-				p12:dispatch(setPurchaseAnalyticsMetadataModule({
-					purchaseFlowUUID = state.purchaseFlowUUID,
-					surface = getPurchaseSurfaceModule(state.purchaseAnalyticsMetadata),
-					productType = getProductTypeFromRequestTypeModule(state.promptRequest.requestType),
-					productId = state.productInfo.productId,
-					productTargetId = state.productInfo.productTargetId,
-					saleLocationUniverseId = game.GameId or 0,
-					price = if fFlagUpdatePriceTelemetry then selectPriceModule(state).priceInRobux elseif state.productInfo.price then state.productInfo.price else p8,
-					productUniverseId = if fFlagUnifiedPurchaseGamepassAddProductUniverseId then state.purchaseAnalyticsMetadata.productUniverseId else nil,
-					userRobuxBalance = state.accountInfo.balance
-				}))
-				
-				if fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal and p11 then
-					p12:dispatch(setRobloxSubscriptionProductsModule(p11))
-				end
-			else
-				p12:dispatch(setIsUserEligibleForUnifiedPurchaseFlowModule(false))
+		if p10 then
+			local isPremium, var4
+			p12:dispatch(setIsUserEligibleForUnifiedPurchaseFlowModule(true))
+			local state = p12:getState()
+			p12:dispatch(setPurchaseAnalyticsMetadataModule({
+				purchaseFlowUUID = state.purchaseFlowUUID,
+				surface = getPurchaseSurfaceModule(state.purchaseAnalyticsMetadata),
+				productType = getProductTypeFromRequestTypeModule(state.promptRequest.requestType),
+				productId = state.productInfo.productId,
+				productTargetId = state.productInfo.productTargetId,
+				saleLocationUniverseId = game.GameId or 0,
+				price = if fFlagUpdatePriceTelemetry then selectPriceModule(state).priceInRobux elseif state.productInfo.price then state.productInfo.price else p8,
+				productUniverseId = if fFlagUnifiedPurchaseGamepassAddProductUniverseId then state.purchaseAnalyticsMetadata.productUniverseId else nil,
+				userRobuxBalance = state.accountInfo.balance
+			}))
+			
+			if fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal and p11 then
+				p12:dispatch(setRobloxSubscriptionProductsModule(p11))
 			end
+		else
+			p12:dispatch(setIsUserEligibleForUnifiedPurchaseFlowModule(false))
 		end
 		if p8 == nil then
 			isPremium = p6.isPremium
@@ -148,12 +145,12 @@ return function(_, p5, p6, p7, p8, p9, p10, p11)
 		
 		if runService:IsStudio() and (getFFlagRespectBalanceInfoForBundleUpsellInStudioModule() and (var12 and (var6 or not (if runService:IsStudio() then if getFFlagRespectBalanceInfoForBundleUpsellInStudioModule() then if var12 then p7.robux < var11 else nil else nil else nil)))) then
 			return p12:dispatch(setPromptStateModule(promptStateModule.PromptPurchase))
-		elseif not u464 then
+		elseif not u456 then
 			return p12:dispatch(errorOccurredModule(var4))
-		elseif fFlagEnableUnifiedProductPurchaseFlow and p10 then
+		elseif p10 then
 			p12:dispatch(setPurchaseFlowModule(purchaseFlowModule.RobuxUpsellV2))
 		end
-		if fFlagEnableUnifiedProductPurchaseFlow and p10 then
+		if p10 then
 			p12:dispatch(setPostPurchaseActionsModule({}))
 		end
 		local _ = var11 - p7.robux

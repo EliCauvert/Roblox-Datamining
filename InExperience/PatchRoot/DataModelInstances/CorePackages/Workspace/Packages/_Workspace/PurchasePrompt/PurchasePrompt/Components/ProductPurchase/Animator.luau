@@ -1,9 +1,7 @@
-﻿local parent = script:FindFirstAncestor("PurchasePrompt").Parent
-local purchasePromptDepsModule = require(parent.PurchasePromptDeps)
+﻿local purchasePromptDepsModule = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchasePromptDeps)
 local roact = purchasePromptDepsModule.Roact
 local otter = purchasePromptDepsModule.Otter
 local t = purchasePromptDepsModule.t
-local fFlagEnableUnifiedProductPurchaseFlow = require(parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 local name = roact.Component:extend(script.Name)
 local t_1 = { dampingRatio = 1, frequency = 1.6 }
 name.validateProps = t.interface({
@@ -14,7 +12,7 @@ name.validateProps = t.interface({
 })
 
 function name.init(p1)
-	-- upvalues: roact (ref), otter (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), t_1 (ref)
+	-- upvalues: roact (ref), otter (ref), t_1 (ref)
 	local var1, var2 = roact.createBinding(1)
 	p1.motor = otter.createSingleMotor(1)
 	p1.motor:start()
@@ -38,7 +36,7 @@ function name.init(p1)
 	p1.motor:onComplete(p1.onComplete)
 	local var3 = if p1.props.shouldShow then 0 else 1
 	
-	if fFlagEnableUnifiedProductPurchaseFlow and p1.props.skipAnimation then
+	if p1.props.skipAnimation then
 		p1.motor:stop()
 		var2(var3)
 		task.defer(function()
@@ -52,11 +50,11 @@ function name.init(p1)
 end
 
 function name.didUpdate(p1, p2, _)
-	-- upvalues: fFlagEnableUnifiedProductPurchaseFlow (ref), otter (ref), t_1 (ref)
-	if p2.shouldShow ~= p1.props.shouldShow or fFlagEnableUnifiedProductPurchaseFlow and p2.skipAnimation ~= p1.props.skipAnimation then
+	-- upvalues: otter (ref), t_1 (ref)
+	if p2.shouldShow ~= p1.props.shouldShow or p2.skipAnimation ~= p1.props.skipAnimation then
 		local var1 = if p1.props.shouldShow then 0 else 1
 		
-		if fFlagEnableUnifiedProductPurchaseFlow and p1.props.skipAnimation then
+		if p1.props.skipAnimation then
 			p1.motor:stop()
 			p1.setProgress(var1)
 			task.defer(function()

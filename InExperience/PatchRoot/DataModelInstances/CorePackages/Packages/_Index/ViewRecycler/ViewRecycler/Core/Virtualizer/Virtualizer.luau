@@ -15,12 +15,12 @@ local internal = virtualizerCommandTypeModule.Internal
 local virtualizerEffectTypeModule = require(viewRecycler.Core.Enums.VirtualizerEffectType)
 local virtualizerQueryTypeModule = require(viewRecycler.Core.Enums.VirtualizerQueryType)
 local _ = require(viewRecycler.Core.Virtualizer.VirtualizerSnapshot)
-local itemViewPresentationModule = require(viewRecycler.Core.Virtualizer.ItemViewPresentation)
+local listPresentationModule = require(viewRecycler.Core.Virtualizer.ListPresentation)
 local _ = require(viewRecycler.Core.RecyclingScope)
 local virtualizerEngineModule = require(viewRecycler.Core.Virtualizer.VirtualizerEngine)
 
 return function(p1)
-	-- upvalues: virtualizerEngineModule (ref), itemViewPresentationModule (ref), internal (ref), external (ref), virtualizerEffectTypeModule (ref), signalsModule (ref), virtualizerQueryTypeModule (ref)
+	-- upvalues: virtualizerEngineModule (ref), listPresentationModule (ref), internal (ref), external (ref), virtualizerEffectTypeModule (ref), signalsModule (ref), virtualizerQueryTypeModule (ref)
 	local var1 = virtualizerEngineModule({
 		dataSource = p1.dataSource,
 		layout = p1.layout,
@@ -36,13 +36,13 @@ return function(p1)
 		pinnedStartItem = p1.pinnedStartItem,
 		pinnedEndItem = p1.pinnedEndItem
 	})
-	local var2 = itemViewPresentationModule({
+	local var2 = listPresentationModule({
 		recyclingScope = p1.recyclingScope,
-		prepareDesiredAssignment = p1.prepareItemViewDesiredAssignment,
-		prepareItemViewAssignment = p1.prepareItemViewAssignment,
-		postCommitItemViewAssignment = p1.postCommitItemViewAssignment,
-		presentItemViewAssignment = p1.presentItemViewAssignment,
-		applyItemViewPlacementIntent = p1.applyItemViewPlacementIntent
+		prepareDesiredAssignment = p1.prepareDesiredAssignment,
+		prepareAssignment = p1.prepareAssignment,
+		postCommitAssignment = p1.postCommitAssignment,
+		presentAssignment = p1.presentAssignment,
+		applyPlacementIntent = p1.applyPlacementIntent
 	})
 	local dataSource = p1.dataSource
 	local var3 = nil

@@ -2,7 +2,6 @@
 local parent = appChat.Parent
 local enumScreensModule = require(appChat.EnumScreens)
 local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local fFlagAppChatTopBarConfigDrivenModule = require(appChat.Flags.FFlagAppChatTopBarConfigDriven)
 local domLocatorsModule = require(appChat.Utils.DomLocators)
 local chatTopBarBaseModule = require(script.Parent.ChatTopBarBase)
 local createBackFuncModule = require(script.Parent.createBackFunc)
@@ -29,10 +28,7 @@ local function noOp()
 end
 
 return function(p1)
-	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), getTopBarStoreModule (ref), useSignalState (ref), fFlagFriendsCallingClientGateDEV (ref), useCallButtonEligibilityModule (ref), useChatPlacementContext (ref), useLocalization (ref), appHeaderBarModule (ref), createBackFuncModule (ref), reactModule (ref), conversationChannelsModule (ref), getFFlagIsSquadEnabled (ref), foundationModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), enumScreensModule (ref), squadButtonSourceEnum (ref), headerBarTitleLeftAlignedModule (ref), chatTopBarBaseModule (ref), noOp (ref)
-	if not fFlagAppChatTopBarConfigDrivenModule() then
-		return nil
-	end
+	-- upvalues: getTopBarStoreModule (ref), useSignalState (ref), fFlagFriendsCallingClientGateDEV (ref), useCallButtonEligibilityModule (ref), useChatPlacementContext (ref), useLocalization (ref), appHeaderBarModule (ref), createBackFuncModule (ref), reactModule (ref), conversationChannelsModule (ref), getFFlagIsSquadEnabled (ref), foundationModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), enumScreensModule (ref), squadButtonSourceEnum (ref), headerBarTitleLeftAlignedModule (ref), chatTopBarBaseModule (ref), noOp (ref)
 	local screenName = p1.screenName
 	local navigation = p1.navigation
 	local var1 = useSignalState(getTopBarStoreModule(false).getScreenTopBar(screenName))

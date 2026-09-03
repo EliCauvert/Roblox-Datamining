@@ -11,16 +11,18 @@ pcall(function()
 end)
 local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
+local signalsReactModule = require(parent.SignalsReact)
 local enableAudioPlaybackInApp = require(parent.MediaPlayback).enableAudioPlaybackInApp
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local media = require(parent.MomentsCommon).Media
+local momentsCommonModule = require(parent.MomentsCommon)
+local media = momentsCommonModule.Media
+local getMomentsCapabilities = momentsCommonModule.Stores.GetMomentsCapabilities
 local _ = require(parent.DataHydration.MomentsStoreTypes)
 local toMediaItemModule = require(parent.Moments.ToMediaItem)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagMomentsAutoplayAmpPolicy = sharedFlagsModule.FFlagMomentsAutoplayAmpPolicy
 local fFlagProfileMomentsVideoPlaybackFix = sharedFlagsModule.FFlagProfileMomentsVideoPlaybackFix
-local fFlagMomentsCarouselVideoHandoff = sharedFlagsModule.FFlagMomentsCarouselVideoHandoff
 local fFlagProfileMomentsMuteCarouselAudioModule = require(profilePlatform.Flags.FFlagProfileMomentsMuteCarouselAudio)
+local useSignalState = signalsReactModule.useSignalState
 
 local function _()
 	-- upvalues: userInputService (ref)
@@ -28,7 +30,7 @@ local function _()
 end
 
 local function defaultCreateCoordinator(p1, p2)
-	-- upvalues: enableAudioPlaybackInApp (ref), coreGuiService (ref), fFlagProfileMomentsVideoPlaybackFix (ref), runService (ref), contentProviderService (ref), media (ref), fFlagMomentsCarouselVideoHandoff (ref)
+	-- upvalues: enableAudioPlaybackInApp (ref), coreGuiService (ref), fFlagProfileMomentsVideoPlaybackFix (ref), runService (ref), contentProviderService (ref), media (ref)
 	enableAudioPlaybackInApp()
 	local profileMomentsAudioOutput = Instance.new("AudioDeviceOutput")
 	profileMomentsAudioOutput.Name = "ProfileMomentsAudioOutput"
@@ -48,11 +50,9 @@ local function defaultCreateCoordinator(p1, p2)
 	return {
 		provider = var2,
 		dispose = function()
-			-- upvalues: fFlagMomentsCarouselVideoHandoff (copy), var3 (write), var2 (ref), profileMomentsAudioOutput (ref), profileMomentsMediaHost (ref)
-			if fFlagMomentsCarouselVideoHandoff then
-				if var3 then return end
-				var3 = true
-			end
+			-- upvalues: var3 (write), var2 (ref), profileMomentsAudioOutput (ref), profileMomentsMediaHost (ref)
+			if var3 then return end
+			var3 = true
 			var2.dispose()
 			profileMomentsAudioOutput:Destroy()
 			
@@ -64,12 +64,10 @@ local function defaultCreateCoordinator(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: fFlagMomentsAutoplayAmpPolicy (ref), useAppPolicy (ref), reactModule (ref), signalsModule (ref), userInputService (ref), var1 (write), toMediaItemModule (ref), defaultCreateCoordinator (ref), fFlagProfileMomentsMuteCarouselAudioModule (ref), fFlagMomentsCarouselVideoHandoff (ref), media (ref)
+	-- upvalues: fFlagMomentsAutoplayAmpPolicy (ref), useSignalState (ref), getMomentsCapabilities (ref), reactModule (ref), signalsModule (ref), userInputService (ref), var1 (write), toMediaItemModule (ref), defaultCreateCoordinator (ref), fFlagProfileMomentsMuteCarouselAudioModule (ref), media (ref)
 	local activeIndex = p1.activeIndex
 	local playbackActive = p1.playbackActive
-	local var2 = if fFlagMomentsAutoplayAmpPolicy then useAppPolicy(function(p2)
-		return p2.getMomentsCanAutoPlay()
-	end) else nil
+	local var2 = if fFlagMomentsAutoplayAmpPolicy then useSignalState(getMomentsCapabilities(false).getIsAutoPlayEnabled) else nil
 	local var3 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), activeIndex (ref)
 		local var4, var5 = signalsModule.createSignal(activeIndex)
@@ -182,12 +180,10 @@ return function(p1)
 			var12.dispose()
 		end
 	end, { var12 })
+	reactModule.useImperativeHandle(p1.handoffRef, function()
+		-- upvalues: var12 (ref)
+		return { release = var12.dispose }
+	end, { var12 })
 	
-	if fFlagMomentsCarouselVideoHandoff then
-		reactModule.useImperativeHandle(p1.handoffRef, function()
-			-- upvalues: var12 (ref)
-			return { release = var12.dispose }
-		end, { var12 })
-	end
 	return reactModule.createElement(media.MediaPreloadProvider.Provider, { controllerProvider = var12.provider }, p1.children)
 end

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnableInExperienceOfferExpiryBadge", false) and require(script.Parent.FFlagEnableUserOffers)

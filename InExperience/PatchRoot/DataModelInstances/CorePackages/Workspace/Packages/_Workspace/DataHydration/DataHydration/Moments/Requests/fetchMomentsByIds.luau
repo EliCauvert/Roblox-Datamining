@@ -6,16 +6,18 @@ local momentsTypesModule = require(parent.MomentsTypes)
 local sharedFlagsModule = require(parent.SharedFlags)
 local _ = require(dataHydration.Moments.MomentsStoreTypes)
 local convertApiMomentsToMomentItemsModule = require(dataHydration.Moments.Util.convertApiMomentsToMomentItems)
+local extractCommentsByFeedItemIdModule = require(dataHydration.Moments.Util.extractCommentsByFeedItemId)
 local extractReactionsByMomentIdModule = require(dataHydration.Moments.Util.extractReactionsByMomentId)
 local extractShareInfoByMomentIdModule = require(dataHydration.Moments.Util.extractShareInfoByMomentId)
 local constructApiUrlModule = require(dataHydration.Moments.Util.constructApiUrl)
 local momentsFixBatchedGetMomentsQueryParams = game:DefineFastFlag("MomentsFixBatchedGetMomentsQueryParams", false)
+local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local momentGetIdType = momentsTypesModule.Enums.MomentGetIdType
 local shareLinkTargetIdType = momentsTypesModule.Enums.ShareLinkTargetIdType
 
 return function(p1, p2, p3)
-	-- upvalues: constructApiUrlModule (ref), momentsFixBatchedGetMomentsQueryParams (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), shareLinkTargetIdType (ref), momentGetIdType (ref), httpModule (ref), httpClientModule (ref), convertApiMomentsToMomentItemsModule (ref), extractReactionsByMomentIdModule (ref), extractShareInfoByMomentIdModule (ref)
+	-- upvalues: constructApiUrlModule (ref), momentsFixBatchedGetMomentsQueryParams (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), shareLinkTargetIdType (ref), momentGetIdType (ref), httpModule (ref), httpClientModule (ref), convertApiMomentsToMomentItemsModule (ref), extractReactionsByMomentIdModule (ref), extractShareInfoByMomentIdModule (ref), fFlagMomentsComments (ref), extractCommentsByFeedItemIdModule (ref)
 	local var1, var2 = constructApiUrlModule("content-captures-api/v2/moments/get-moments")
 	local t = { Ids = table.concat(p1, ",") }
 	
@@ -32,11 +34,12 @@ return function(p1, p2, p3)
 		headers = var2,
 		network = p2,
 		decode = function(p4)
-			-- upvalues: convertApiMomentsToMomentItemsModule (copy), extractReactionsByMomentIdModule (copy), extractShareInfoByMomentIdModule (copy)
+			-- upvalues: convertApiMomentsToMomentItemsModule (copy), extractReactionsByMomentIdModule (copy), extractShareInfoByMomentIdModule (copy), fFlagMomentsComments (copy), extractCommentsByFeedItemIdModule (copy)
 			return {
 				moments = convertApiMomentsToMomentItemsModule(p4.items),
 				reactionsByMomentId = extractReactionsByMomentIdModule(p4.items),
-				shareInfoByMomentId = extractShareInfoByMomentIdModule(p4.items)
+				shareInfoByMomentId = extractShareInfoByMomentIdModule(p4.items),
+				commentsByFeedItemId = if fFlagMomentsComments then extractCommentsByFeedItemIdModule(p4.items) else nil
 			}
 		end
 	})

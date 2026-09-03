@@ -8,8 +8,12 @@
 	PEOPLE_MIN_WIDTH = 127,
 	PLATFORM_RANK_WIDTH = 40,
 	PLATFORM_SCORE_WIDTH = 80,
+	PLATFORM_PANEL_WIDTH = 320,
 	PLATFORM_ROW_HEIGHT = 30,
 	PLATFORM_HEADER_HEIGHT = 24,
+	PLATFORM_FOOTER_HEIGHT = 26,
+	PLATFORM_BODY_MIN_HEIGHT = 170,
+	LEGACY_PLATFORM_PANEL_MIN_HEIGHT = 210,
 	STATE_PANEL_TAG = "col fill size-full-0 padding-large gap-medium align-x-center align-y-center bg-over-media-0",
 	LEGACY_STATE_PANEL_TAG = "col fill size-full-0 padding-large gap-medium align-x-center align-y-center",
 	DESKTOP_MAX_STAT_COLUMNS = 3,
@@ -24,8 +28,6 @@
 	MOBILE_EDGE_GAP = 8,
 	TEAM_LAYOUT_MULTIPLIER = 10000,
 	ROW_FLEX_TAG = "row align-y-center padding-x-large gap-xsmall",
-	CONTEXT_MENU_WIDTH = 327,
-	PLATFORM_ROW_FLEX_TAG = "row align-y-center padding-x-large gap-xlarge",
 	CONSOLE_FOCUS_ISOLATE = {
 		SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 		SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
@@ -39,5 +41,7 @@
 		SelectionBehaviorRight = Enum.SelectionBehavior.Stop
 	},
 	NOT_SELECTABLE = { Selectable = false },
-	SELECTABLE = { Selectable = true }
+	SELECTABLE = { Selectable = true },
+	CONTEXT_MENU_WIDTH = 327,
+	PLATFORM_ROW_FLEX_TAG = "row align-y-center padding-x-large gap-xlarge"
 }

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AppChatConsoleFocusFixes", false)
+﻿return game:DefineFastFlag("AppChatConsoleFocusFixes2", false)

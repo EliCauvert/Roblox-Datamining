@@ -27,6 +27,10 @@ return function(p1, p2, p3, p4, p5, p6, p7)
 			p7(challengeErrorModule.new(errorKindModule.Invalidated, p8.data))
 			p3:close()
 		end,
+		OnChallengeDisplayed = function(_)
+			-- upvalues: p3 (ref)
+			p3:setVisible(true)
+		end,
 		OnChallengeCompleted = function(p8)
 			-- upvalues: p6 (ref), p4 (ref), completionDataToRawHeadersModule (copy), p1 (ref), p3 (ref)
 			if p8.data ~= nil and p8.data.challengeType ~= nil and p8.data.metadata ~= nil then

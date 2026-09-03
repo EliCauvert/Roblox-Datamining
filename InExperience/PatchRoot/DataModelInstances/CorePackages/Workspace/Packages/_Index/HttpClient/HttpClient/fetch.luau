@@ -6,6 +6,7 @@ local decodersModule = require(script.Parent.decoders)
 local encodersModule = require(script.Parent.encoders)
 local isSuccess = require(script.Parent.httpStatus).isSuccess
 local statusCodeActionsModule = require(script.Parent.statusCodeActions)
+local fFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
 local var1 = nil
 
 local function _()
@@ -62,7 +63,7 @@ local _ = function(p1)
 end
 
 return function(p2)
-	-- upvalues: encodersModule (ref), isSuccess (ref), asBuffer (ref), decodersModule (ref), createRequestModule (ref), withRetryModule (ref), createRequestInternalNetworkModule (ref), var1 (write), statusCodeActionsModule (ref)
+	-- upvalues: encodersModule (ref), isSuccess (ref), asBuffer (ref), decodersModule (ref), createRequestModule (ref), withRetryModule (ref), createRequestInternalNetworkModule (ref), var1 (write), statusCodeActionsModule (ref), fFlagHttpClientRetryExtensionsModule (ref)
 	local responseEncoding = p2.responseEncoding or "json"
 	local var3 = if (p2.requestEncoding or "json") == "protobuf" then encodersModule.encodeRaw("application/x-protobuf") else nil
 	local _ = nil
@@ -116,6 +117,8 @@ return function(p2)
 	end
 	var6 = var7
 	t.statusCodeActions = var6
+	t.onMessage = if fFlagHttpClientRetryExtensionsModule then p2.onMessage else nil
+	t.priority = if fFlagHttpClientRetryExtensionsModule then p2.priority else nil
 	
 	return createRequestModule(t)
 end

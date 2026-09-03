@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
 
-return if require(appChat.Flags.FFlagAppChatTopBarSignalsStore) then function(p1)
+return function(p1)
 	-- upvalues: getTopBarStoreModule (ref), signalsReactModule (ref), reactModule (ref)
 	local screenName = p1.screenName
 	local render = p1.render
@@ -20,5 +20,10 @@ return if require(appChat.Flags.FFlagAppChatTopBarSignalsStore) then function(p1
 			end,
 			setScreenTopBar = var1.setScreenTopBar
 		}
-	end, { screenName, var2 }))
-end else require(appChat.TopBarContext).Consumer
+	end, {
+		screenName,
+		var2,
+		var1.getScreenTopBar,
+		var1.setScreenTopBar
+	}))
+end

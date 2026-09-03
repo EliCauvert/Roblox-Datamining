@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EditProfileImageCameraControlBar", false) and require(script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
