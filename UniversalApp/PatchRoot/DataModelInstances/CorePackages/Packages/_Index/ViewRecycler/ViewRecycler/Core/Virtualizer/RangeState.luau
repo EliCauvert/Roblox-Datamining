@@ -1,11 +1,11 @@
 ﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local recordModule = require(viewRecycler.Internal.Record)
+local shallowTableModule = require(viewRecycler.Internal.ShallowTable)
 local typesModule = require(viewRecycler.Core.Types)
 local createEventModule = require(viewRecycler.Internal.createEvent)
 local INDEX_RANGE_KEYS = typesModule.INDEX_RANGE_KEYS
 
 return function()
-	-- upvalues: typesModule (ref), createEventModule (ref), recordModule (ref), INDEX_RANGE_KEYS (ref)
+	-- upvalues: typesModule (ref), createEventModule (ref), shallowTableModule (ref), INDEX_RANGE_KEYS (ref)
 	local EMPTY_INDEX_RANGE = typesModule.EMPTY_INDEX_RANGE
 	local var1 = false
 	local var2 = false
@@ -14,8 +14,8 @@ return function()
 	
 	return {
 		report = function(p1)
-			-- upvalues: var1 (write), recordModule (copy), EMPTY_INDEX_RANGE (write), INDEX_RANGE_KEYS (copy), var2 (write), var3 (write), var4 (ref)
-			if var1 and recordModule.containsEqual(EMPTY_INDEX_RANGE, p1, INDEX_RANGE_KEYS) then return end
+			-- upvalues: var1 (write), shallowTableModule (copy), EMPTY_INDEX_RANGE (write), INDEX_RANGE_KEYS (copy), var2 (write), var3 (write), var4 (ref)
+			if var1 and shallowTableModule.containsEqual(EMPTY_INDEX_RANGE, p1, INDEX_RANGE_KEYS) then return end
 			var1 = true
 			EMPTY_INDEX_RANGE = p1
 			var2 = false
@@ -25,8 +25,8 @@ return function()
 			end
 		end,
 		set = function(value)
-			-- upvalues: var1 (write), recordModule (copy), EMPTY_INDEX_RANGE (write), INDEX_RANGE_KEYS (copy), var2 (write)
-			if var1 and recordModule.containsEqual(EMPTY_INDEX_RANGE, value, INDEX_RANGE_KEYS) then
+			-- upvalues: var1 (write), shallowTableModule (copy), EMPTY_INDEX_RANGE (write), INDEX_RANGE_KEYS (copy), var2 (write)
+			if var1 and shallowTableModule.containsEqual(EMPTY_INDEX_RANGE, value, INDEX_RANGE_KEYS) then
 				return
 			end
 			var1 = true

@@ -1,15 +1,16 @@
 ﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
 local viewRecyclerRobloxModule = require(viewRecyclerReact.Parent.ViewRecyclerRoblox)
-local compositionPlacementContextModule = require(viewRecyclerReact.ReactAdapter.Private.CompositionPlacementContext)
 local reactModule = require(viewRecyclerReact.Parent.React)
+local recyclableViewContextModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclableViewContext)
+local recyclableViewReadinessModule = require(viewRecyclerReact.ReactAdapter.RecyclableViewReadiness)
 local recyclableViewRegistryModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclableViewRegistry)
 local reparentableHost = viewRecyclerRobloxModule.ReparentableHost
+local _ = require(viewRecyclerReact.ReactAdapter.Private.RecyclableView)
 local signalsReactModule = require(viewRecyclerReact.Parent.SignalsReact)
-local _ = require(viewRecyclerReact.ReactAdapter.Private.RecyclableViewRecord)
 local createElement = reactModule.createElement
 
-local function CommitReadyContent(p1)
-	-- upvalues: signalsReactModule (ref), reactModule (ref), createElement (ref)
+local function CommitObserver(p1)
+	-- upvalues: signalsReactModule (ref), reactModule (ref)
 	local itemView = p1.itemView
 	local var1 = signalsReactModule.useSignalState(itemView.signal)
 	local var2 = if var1 == nil then nil else var1.generation
@@ -21,23 +22,22 @@ local function CommitReadyContent(p1)
 		end
 	end, { var3, var2, itemView.commitContent })
 	
-	return createElement(p1.signalComponent, {
-		valueSignal = itemView.valueSignal,
-		pending = itemView.pending
-	})
+	return nil
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), reparentableHost (ref), recyclableViewRegistryModule (ref), createElement (ref), CommitReadyContent (ref), compositionPlacementContextModule (ref)
+	-- upvalues: reactModule (ref), reparentableHost (ref), recyclableViewRegistryModule (ref), createElement (ref), recyclableViewReadinessModule (ref), CommitObserver (ref), recyclableViewContextModule (ref)
 	local itemView = p1.itemView
 	local signal = itemView.signal
 	local var1 = itemView.portalFrame(false)
-	assert(var1 ~= nil, "ListItemViewHost: record host was destroyed before unmount")
+	assert(var1 ~= nil, "RecyclableViewHost: view host was destroyed before unmount")
 	local var2 = reactModule.useState(function()
 		-- upvalues: itemView (ref), signal (ref)
 		return {
-			manager = itemView.compositionPlacementManager,
-			parentSignal = signal
+			placement = itemView.compositionPlacement,
+			assignmentSignal = signal,
+			itemSignal = itemView.itemSignal,
+			itemKeySignal = itemView.itemKeySignal
 		}
 	end)
 	reactModule.useLayoutEffect(function()
@@ -62,18 +62,19 @@ return reactModule.memo(function(p1)
 		end
 	end, { itemView, var1 })
 	local metadata = recyclableViewRegistryModule.getMetadata(itemView.itemViewType)
-	assert(metadata ~= nil, "ListItemViewHost: unknown Recyclable view type")
-	
-	return p1.createPortal(createElement(compositionPlacementContextModule.Provider, { value = var2 }, {
+	assert(metadata ~= nil, "RecyclableViewHost: unknown Recyclable view type")
+	local t = {
 		Content = reactModule.useMemo(function()
-			-- upvalues: metadata (ref), createElement (copy), CommitReadyContent (copy), itemView (ref), itemView (ref)
-			return if metadata.readiness == "ReadyOnCommit" then createElement(CommitReadyContent, {
-				itemView = itemView,
-				signalComponent = metadata.signalComponent
-			}) else createElement(metadata.signalComponent, {
-				valueSignal = itemView.valueSignal,
+			-- upvalues: createElement (copy), metadata (ref), itemView (ref)
+			return createElement(metadata.signalComponent, {
+				itemSignal = itemView.itemSignal,
 				pending = itemView.pending
 			})
 		end, { itemView, metadata })
-	}), var1)
+	}
+	
+	if metadata.readiness == recyclableViewReadinessModule.ReadyOnCommit then
+		t.Observer = createElement(CommitObserver, { itemView = itemView })
+	end
+	return p1.createPortal(createElement(recyclableViewContextModule.Provider, { value = var2 }, t), var1)
 end)

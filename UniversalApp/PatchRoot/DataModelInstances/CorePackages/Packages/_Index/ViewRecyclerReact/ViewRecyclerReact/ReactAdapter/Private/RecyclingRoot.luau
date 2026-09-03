@@ -1,15 +1,15 @@
 ﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
 local viewRecyclerModule = require(viewRecyclerReact.Parent.ViewRecycler)
-local listItemViewHostModule = require(viewRecyclerReact.ReactAdapter.ListItemViewHost)
+local recyclableViewHostModule = require(viewRecyclerReact.ReactAdapter.RecyclableViewHost)
 local reactModule = require(viewRecyclerReact.Parent.React)
 local recyclableViewRegistryModule = require(script.Parent.RecyclableViewRegistry)
 local signalsExperimentalModule = require(viewRecyclerReact.Parent.SignalsExperimental)
-local recyclableViewRecordModule = require(script.Parent.RecyclableViewRecord)
+local recyclableViewModule = require(script.Parent.RecyclableView)
 local createElement = reactModule.createElement
 
 return {
 	new = function(p1)
-		-- upvalues: createElement (ref), listItemViewHostModule (ref), signalsExperimentalModule (ref), viewRecyclerModule (ref), recyclableViewRegistryModule (ref), recyclableViewRecordModule (ref)
+		-- upvalues: createElement (ref), recyclableViewHostModule (ref), signalsExperimentalModule (ref), viewRecyclerModule (ref), recyclableViewRegistryModule (ref), recyclableViewModule (ref)
 		local t = {}
 		local var1 = 1
 		local var2 = false
@@ -26,18 +26,18 @@ return {
 		local t_1 = {
 			allocateId = function()
 				-- upvalues: var2 (write), var1 (write)
-				assert(not var2, "RecyclingRuntime: cannot allocate after destroy")
+				assert(not var2, "RecyclingRoot: cannot allocate after destroy")
 				var1 += 1
 				
 				return var1
 			end,
 			addHosts = function(p2, p3, p4)
 				-- upvalues: var2 (write), t (ref), p1 (ref)
-				assert(not var2, "RecyclingRuntime: cannot add hosts after destroy")
+				assert(not var2, "RecyclingRoot: cannot add hosts after destroy")
 				local var4 = false
 				
 				for i, v in p2 do
-					assert(t[v] == nil, "RecyclingRuntime: resource host is already registered")
+					assert(t[v] == nil, "RecyclingRoot: resource host is already registered")
 					t[v] = { key = p3(v), render = p4(v) }
 					var4 = true
 				end
@@ -62,9 +62,9 @@ return {
 		}
 		
 		return {
-			getRecyclingScope = function(p6)
-				-- upvalues: var2 (write), var3 (write), t_1 (write), createElement (copy), listItemViewHostModule (copy), signalsExperimentalModule (copy), viewRecyclerModule (copy), recyclableViewRegistryModule (copy), recyclableViewRecordModule (copy)
-				assert(not var2, "RecyclingRuntime: cannot get a Recycling scope after destroy")
+			getScope = function(p6)
+				-- upvalues: var2 (write), var3 (write), t_1 (write), createElement (copy), recyclableViewHostModule (copy), signalsExperimentalModule (copy), viewRecyclerModule (copy), recyclableViewRegistryModule (copy), recyclableViewModule (copy)
+				assert(not var2, "RecyclingRoot: cannot get a Recycling scope after destroy")
 				
 				if var3 == nil then
 					local var6 = 0
@@ -72,7 +72,7 @@ return {
 					local t_2 = {}
 					
 					local function flushHosts()
-						-- upvalues: t_2 (ref), t_1 (copy), t (ref), createElement (copy), listItemViewHostModule (copy)
+						-- upvalues: t_2 (ref), t_1 (copy), t (ref), createElement (copy), recyclableViewHostModule (copy)
 						if #t_2 > 0 then
 							t_1.removeHosts(t_2)
 							
@@ -94,12 +94,12 @@ return {
 							end
 							if #t_3 > 0 then
 								t_1.addHosts(t_3, function(p7)
-									return `RecyclableViewRecord{p7.id}`
+									return `RecyclableView{p7.id}`
 								end, function(p7)
-									-- upvalues: createElement (copy), listItemViewHostModule (copy)
+									-- upvalues: createElement (copy), recyclableViewHostModule (copy)
 									return function(p8)
-										-- upvalues: createElement (copy), listItemViewHostModule (copy), p7 (ref)
-										return createElement(listItemViewHostModule, { itemView = p7, createPortal = p8 })
+										-- upvalues: createElement (copy), recyclableViewHostModule (copy), p7 (ref)
+										return createElement(recyclableViewHostModule, { itemView = p7, createPortal = p8 })
 									end
 								end)
 							end
@@ -123,10 +123,10 @@ return {
 						end,
 						adapter = {
 							create = function(p7)
-								-- upvalues: recyclableViewRegistryModule (copy), recyclableViewRecordModule (copy), t_1 (copy), t (ref)
+								-- upvalues: recyclableViewRegistryModule (copy), recyclableViewModule (copy), t_1 (copy), t (ref)
 								local metadata = recyclableViewRegistryModule.getMetadata(p7)
 								assert(metadata ~= nil, "RecyclingScope: cannot create an unregistered Recyclable view type")
-								local var8 = recyclableViewRecordModule(t_1.allocateId(), p7, nil, metadata.readiness, metadata.hideWhilePending)
+								local var8 = recyclableViewModule(t_1.allocateId(), p7, nil, metadata.readiness, metadata.hideWhilePending)
 								table.insert(t, var8)
 								
 								return var8
@@ -171,7 +171,7 @@ return {
 							end
 						end,
 						getScopeInventory = var7.getScopeInventory,
-						getVacantRecords = var7.getVacantRecords,
+						getVacantViews = var7.getVacantViews,
 						destroy = function()
 							-- upvalues: var7 (ref), var6 (write), flushHosts (ref)
 							var7.destroy()
@@ -186,7 +186,7 @@ return {
 				end
 				return var3
 			end,
-			getHostChildren = function(p7)
+			getPortalChildren = function(p7)
 				-- upvalues: t (ref)
 				local t_1 = {}
 				

@@ -1,15 +1,16 @@
 ﻿local viewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
 local viewRecyclerModule = require(viewRecyclerRoblox.Parent.ViewRecycler)
 local canvasItemPlacerModule = require(viewRecyclerRoblox.RobloxAdapter.CanvasItemPlacer)
+local hostPresentationPhaseModule = require(viewRecyclerRoblox.RobloxAdapter.HostPresentationPhase)
 local measurementBatcherModule = require(viewRecyclerRoblox.RobloxAdapter.MeasurementBatcher)
 local measurerModule = require(viewRecyclerRoblox.RobloxAdapter.Measurer)
 local reparentableHostModule = require(viewRecyclerRoblox.RobloxAdapter.ReparentableHost)
-local record = viewRecyclerModule.Adapter._Private.Record
+local shallowTable = viewRecyclerModule.Adapter._Private.ShallowTable
 local frozen = table.freeze({ "key", "generation" })
 
 return {
 	new = function(p1)
-		-- upvalues: measurementBatcherModule (ref), reparentableHostModule (ref), canvasItemPlacerModule (ref), measurerModule (ref), record (ref), frozen (ref)
+		-- upvalues: measurementBatcherModule (ref), reparentableHostModule (ref), canvasItemPlacerModule (ref), measurerModule (ref), shallowTable (ref), frozen (ref), hostPresentationPhaseModule (ref)
 		local t = {
 			container = p1.container,
 			viewportContainer = p1.viewportContainer,
@@ -109,7 +110,7 @@ return {
 		end
 		
 		local function applyPhysical(p2, p3)
-			-- upvalues: reparentableHostModule (copy), canvasItemPlacerModule (copy), p1 (ref), record (copy), frozen (copy), t (write), updateMeasurement (ref), reportPresentation (ref)
+			-- upvalues: reparentableHostModule (copy), canvasItemPlacerModule (copy), p1 (ref), shallowTable (copy), frozen (copy), t (write), hostPresentationPhaseModule (copy), updateMeasurement (ref), reportPresentation (ref)
 			local hostState = p3.hostState
 			local placementIntent = p3.placementIntent
 			
@@ -166,7 +167,7 @@ return {
 					end
 					return
 				elseif placementIntent == nil then return end
-				if record.containsEqual(placementIntent.assignment, assignment, frozen) then
+				if shallowTable.containsEqual(placementIntent.assignment, assignment, frozen) then
 					if p3.host ~= nil and p3.host ~= host then
 						if p3.host ~= nil then
 							reparentableHostModule.clearSelection(p3.host)
@@ -220,7 +221,7 @@ return {
 						end
 						canvasItemPlacerModule.place(host, container, geometry, p3.placerState, hostState.visible)
 						p3.host = host
-						local var5 = hostState.visible and hostState.phase == "presented"
+						local var5 = hostState.visible and hostState.phase == hostPresentationPhaseModule.Presented
 						local measurementIdentity = placementIntent.measurementIdentity
 						updateMeasurement(p3, if var5 and measurementIdentity ~= nil then table.clone(measurementIdentity) else nil)
 						reportPresentation(p2, p3, if var5 then assignment else nil)
@@ -255,14 +256,14 @@ return {
 		return {
 			applyHostState = function(p2, p3)
 				-- upvalues: var2 (write), getEntry (ref), applyPhysical (ref)
-				assert(not var2, "CanvasItemViewRuntime: cannot apply Host state after destroy")
+				assert(not var2, "HostPlacement: cannot apply Host state after destroy")
 				local var3 = getEntry(p2)
 				var3.hostState = p3
 				applyPhysical(p2, var3)
 			end,
 			applyPlacementIntent = function(p2, p3)
 				-- upvalues: var2 (write), getEntry (ref), applyPhysical (ref)
-				assert(not var2, "CanvasItemViewRuntime: cannot apply Placement intent after destroy")
+				assert(not var2, "HostPlacement: cannot apply Placement intent after destroy")
 				local var3 = getEntry(p2)
 				var3.placementIntent = p3
 				applyPhysical(p2, var3)

@@ -1,10 +1,12 @@
 ﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
 local viewRecyclerModule = require(viewRecyclerReact.Parent.ViewRecycler)
+local _ = require(script.Parent.HostPresentationPhase)
+local placementKindModule = require(script.Parent.PlacementKind)
 local _ = require(viewRecyclerReact.Parent.React)
 local _ = require(script.Parent.RecyclableViewRegistry)
 local _ = require(viewRecyclerReact.Parent.Signals)
 local reparentableHost = require(viewRecyclerReact.Parent.ViewRecyclerRoblox).ReparentableHost
-local record = viewRecyclerModule.Adapter._Private.Record
+local shallowTable = viewRecyclerModule.Adapter._Private.ShallowTable
 local frozen = table.freeze({ "key", "generation" })
 
 local function _(p1, p2)
@@ -13,7 +15,7 @@ end
 
 return {
 	new = function(p1, p2)
-		-- upvalues: reparentableHost (ref), record (ref), frozen (ref)
+		-- upvalues: reparentableHost (ref), shallowTable (ref), frozen (ref), placementKindModule (ref)
 		local t = {}
 		local tbl = setmetatable({}, { __mode = "k" })
 		local var1 = 1
@@ -25,7 +27,7 @@ return {
 		local tbl_1 = setmetatable({}, { __mode = "k" })
 		
 		local function getPortState(p3)
-			-- upvalues: tbl_1 (ref), t (ref), reparentableHost (copy), record (copy), frozen (copy)
+			-- upvalues: tbl_1 (ref), t (ref), reparentableHost (copy), shallowTable (copy), frozen (copy)
 			local var5 = tbl_1[p3]
 			
 			if var5 == nil then
@@ -37,11 +39,11 @@ return {
 					currentPlaceholder = nil,
 					currentAutomaticSize = nil,
 					port = nil,
-					record = p3
+					view = p3
 				}
 				t_1.port = {
 					apply = function(p4)
-						-- upvalues: t_1 (write), t (copy), p3 (ref), reparentableHost (copy), record (copy), frozen (copy)
+						-- upvalues: t_1 (write), t (copy), p3 (ref), reparentableHost (copy), shallowTable (copy), frozen (copy)
 						if p4 == nil then
 							t_1.pendingAssignment = nil
 							t_1.pendingPlacementId = nil
@@ -51,8 +53,8 @@ return {
 							t_1.currentAutomaticSize = nil
 							local var6 = if currentPlacementId == nil then nil else t[currentPlacementId]
 							
-							if var6 ~= nil and var6.record == p3 then
-								var6.record = nil
+							if var6 ~= nil and var6.view == p3 then
+								var6.view = nil
 							end
 							local var7 = p3.portalFrame(false)
 							
@@ -67,10 +69,10 @@ return {
 						else
 							local pendingAssignment = t_1.pendingAssignment or p3.signal(false)
 							local pendingPlacementId = t_1.pendingPlacementId or t_1.currentPlacementId
-							assert(pendingAssignment ~= nil, "CompositionPlacementManager: placement attach or update requires an Assignment")
-							assert(pendingPlacementId ~= nil, "CompositionPlacementManager: placement requires a destination")
+							assert(pendingAssignment ~= nil, "CompositionPlacement: placement attach or update requires an Assignment")
+							assert(pendingPlacementId ~= nil, "CompositionPlacement: placement requires a destination")
 							
-							if p4.assignment == nil or not record.containsEqual(p4.assignment, pendingAssignment, frozen) then return end
+							if p4.assignment == nil or not shallowTable.containsEqual(p4.assignment, pendingAssignment, frozen) then return end
 							t_1.pendingAssignment = nil
 							t_1.pendingPlacementId = nil
 							local currentPlacementId = t_1.currentPlacementId
@@ -78,18 +80,18 @@ return {
 							if currentPlacementId ~= nil and currentPlacementId ~= pendingPlacementId then
 								local var8 = t[currentPlacementId]
 								
-								if var8 ~= nil and var8.record == p3 then
-									var8.record = nil
+								if var8 ~= nil and var8.view == p3 then
+									var8.view = nil
 								end
 							end
 							t_1.currentPlacementId = pendingPlacementId
 							local var9 = t[pendingPlacementId]
 							
 							if var9 ~= nil then
-								var9.record = p3
+								var9.view = p3
 							end
 							local host = p4.host
-							assert(host ~= nil, "CompositionPlacementManager: cannot place a destroyed Recyclable view")
+							assert(host ~= nil, "CompositionPlacement: cannot place a destroyed Recyclable view")
 							local value = pendingAssignment.value
 							
 							if t_1.currentPlaceholder ~= value.placeholder or t_1.currentAutomaticSize ~= value.automaticSize or host.Parent ~= value.placeholder then
@@ -109,7 +111,7 @@ return {
 		end
 		
 		local function _(p3, p4)
-			-- upvalues: getPortState (ref)
+			-- upvalues: getPortState (ref), placementKindModule (copy)
 			if p4 == nil then
 				p3.bindPlacement(nil, nil)
 				
@@ -118,7 +120,7 @@ return {
 			local var5 = getPortState(p3)
 			var5.pendingAssignment = p4
 			var5.pendingPlacementId = p4.adapterData.placementId
-			p3.bindPlacement("composition", var5.port)
+			p3.bindPlacement(placementKindModule.Composition, var5.port)
 		end
 		
 		local _ = function(p3)
@@ -133,7 +135,7 @@ return {
 		end
 		
 		local function ensureReconciler()
-			-- upvalues: var4 (write), p1 (ref), getPortState (ref)
+			-- upvalues: var4 (write), p1 (ref), getPortState (ref), placementKindModule (copy)
 			if var4 == nil then
 				local t = {}
 				local t_1 = {}
@@ -158,7 +160,7 @@ return {
 				
 				local t_2 = {
 					update = function(p3)
-						-- upvalues: t (write), assignmentFor (ref), p1 (copy), t_1 (ref), getPortState (copy)
+						-- upvalues: t (write), assignmentFor (ref), p1 (copy), t_1 (ref), getPortState (copy), placementKindModule (copy)
 						local t_2 = {}
 						
 						for i, v in t do
@@ -171,7 +173,7 @@ return {
 						local t_7 = {}
 						
 						for i_1, v_1 in p3 do
-							assert(t_3[v_1.key] == nil, `CompositionPlacementManager: duplicate key "{v_1.key}"`)
+							assert(t_3[v_1.key] == nil, `CompositionPlacement: duplicate key "{v_1.key}"`)
 							t_3[v_1.key] = true
 							local key = t_2[v_1.key]
 							
@@ -183,7 +185,7 @@ return {
 								
 								if key.desired ~= v_1 then
 									key.assignment = assignmentFor(v_1, key.assignment.generation)
-									table.insert(t_7, { record = key.record, assignment = key.assignment })
+									table.insert(t_7, { view = key.view, assignment = key.assignment })
 								end
 								key.desired = v_1
 								table.insert(t_6, key)
@@ -191,7 +193,7 @@ return {
 						end
 						for i_1, v_2 in t do
 							if t_2[v_2.desired.key] == v_2 then
-								table.insert(t_4, { record = v_2.record, leaseToken = v_2.leaseToken })
+								table.insert(t_4, { view = v_2.view, leaseToken = v_2.leaseToken })
 							end
 						end
 						local var6 = p1.exchange(t_1, t_4, t_5)
@@ -199,46 +201,46 @@ return {
 						local t_8 = {}
 						
 						for i_3, v_3 in t_6 do
-							if v_3.record == nil then
+							if v_3.view == nil then
 								local var8 = var6.acquired[var7]
 								var7 += 1
-								v_3.record = var8.record
+								v_3.view = var8.view
 								v_3.leaseToken = var8.leaseToken
 								v_3.assignment = assignmentFor(v_3.desired)
-								table.insert(t_7, { record = var8.record, assignment = v_3.assignment })
+								table.insert(t_7, { view = var8.view, assignment = v_3.assignment })
 							end
-							t_8[v_3.record] = true
+							t_8[v_3.view] = true
 						end
 						for i_3, v_4 in t_4 do
-							if not t_8[v_4.record] then
-								table.insert(t_7, { assignment = nil, record = v_4.record })
+							if not t_8[v_4.view] then
+								table.insert(t_7, { assignment = nil, view = v_4.view })
 							end
 						end
 						t = t_6
 						
 						for i_3, v_5 in t_7 do
-							local record = v_5.record
+							local view = v_5.view
 							local assignment = v_5.assignment
 							
 							if assignment == nil then
-								record.bindPlacement(nil, nil)
+								view.bindPlacement(nil, nil)
 							else
-								local var9 = getPortState(record)
+								local var9 = getPortState(view)
 								var9.pendingAssignment = assignment
 								var9.pendingPlacementId = assignment.adapterData.placementId
-								record.bindPlacement("composition", var9.port)
+								view.bindPlacement(placementKindModule.Composition, var9.port)
 							end
 						end
 						for i_3, v_6 in t_7 do
-							v_6.record.set(v_6.assignment)
+							v_6.view.set(v_6.assignment)
 						end
 					end,
-					getRecords = function()
+					getViews = function()
 						-- upvalues: t (write)
 						local t_1 = {}
 						
 						for i, v in t do
-							table.insert(t_1, v.record)
+							table.insert(t_1, v.view)
 						end
 						return t_1
 					end
@@ -253,7 +255,7 @@ return {
 		return {
 			register = function(p4, p5, p6, p7, p8)
 				-- upvalues: var3 (write), tbl (ref), var1 (write), t (ref), t_2 (ref), var2 (write), p2 (ref), getPortState (ref), t_1 (ref)
-				assert(not var3, "CompositionPlacementManager: cannot register after destroy")
+				assert(not var3, "CompositionPlacement: cannot register after destroy")
 				local var10 = tbl[p5]
 				
 				if var10 == nil then
@@ -261,9 +263,9 @@ return {
 					var1 += 1
 					tbl[p5] = var10
 				end
-				assert(t[var10] == nil, "CompositionPlacementManager: placement is already registered")
+				assert(t[var10] == nil, "CompositionPlacement: placement is already registered")
 				t[var10] = {
-					record = nil,
+					view = nil,
 					viewType = p4,
 					parentSignal = p6,
 					props = p7,
@@ -287,8 +289,8 @@ return {
 						local placeholder = var12.placeholder
 						
 						if placeholder == value then return end
-						if placeholder ~= nil and var12.record ~= nil then
-							getPortState(var12.record).port.apply(nil)
+						if placeholder ~= nil and var12.view ~= nil then
+							getPortState(var12.view).port.apply(nil)
 						end
 						var12.placeholder = value
 						t_2[var10] = true
@@ -323,8 +325,8 @@ return {
 						local var12 = t[var10]
 						
 						if var12 == nil then return end
-						if var12.record ~= nil then
-							getPortState(var12.record).port.apply(nil)
+						if var12.view ~= nil then
+							getPortState(var12.view).port.apply(nil)
 						end
 						t[var10] = nil
 						t_1[var10] = nil
