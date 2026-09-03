@@ -233,6 +233,7 @@
 	FFlagAXRemoveExpiredItemsFromInventory = require(script.FFlagAXRemoveExpiredItemsFromInventory),
 	FFlagAXFixWidgetOnlyTabNoItemsFound = require(script.FFlagAXFixWidgetOnlyTabNoItemsFound),
 	FFlagAXFixControlBarSubMenuOverlap = require(script.FFlagAXFixControlBarSubMenuOverlap),
+	FFlagControlBarUseProfileFrameThumbnail = require(script.FFlagControlBarUseProfileFrameThumbnail),
 	FFlagAddTypesToWidgetItems = require(script.FFlagAddTypesToWidgetItems),
 	FFlagAXFixDeselectOutfitInManage = require(script.FFlagAXFixDeselectOutfitInManage),
 	FFlagAXMoveContextualActionButtons = require(script.FFlagAXMoveContextualActionButtons),
@@ -373,5 +374,8 @@
 	FFlagAXEnableMakeupOutfitCreation = require(script.FFlagAXEnableMakeupOutfitCreation),
 	FFlagAXFixVRControlBarFlicker = require(script.FFlagAXFixVRControlBarFlicker),
 	FFlagAXFixSearchLandingQuickButtonsOffset = require(script.FFlagAXFixSearchLandingQuickButtonsOffset),
-	FFlagAXAvatarPreviewPhotoboothMomentsButton = require(script.FFlagAXAvatarPreviewPhotoboothMomentsButton)
+	FFlagAXAvatarPreviewPhotoboothMomentsButton = require(script.FFlagAXAvatarPreviewPhotoboothMomentsButton),
+	FFlagAXFixR6CharacterPlacement = require(script.FFlagAXFixR6CharacterPlacement),
+	FFlagAXFixWidgetListSeeAllListReuse = require(script.FFlagAXFixWidgetListSeeAllListReuse),
+	FFlagAXCatalogHttpLinkSalesTypeFilter = require(script.FFlagAXCatalogHttpLinkSalesTypeFilter)
 }

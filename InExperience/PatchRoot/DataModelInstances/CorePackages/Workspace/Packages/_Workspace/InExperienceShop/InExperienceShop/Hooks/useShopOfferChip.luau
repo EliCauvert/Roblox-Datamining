@@ -9,10 +9,12 @@ local selectActiveOffer = inExperienceOffersModule.Utils.selectActiveOffer
 local useRemainingTimeText = inExperienceOffersModule.Hooks.useRemainingTimeText
 local offerDialogStateModule = require(inExperienceShop.Components.OfferDialogs.OfferDialogState)
 local useCloseOnCoreMenuModule = require(inExperienceShop.Hooks.useCloseOnCoreMenu)
+local useOfferModalTextModule = require(inExperienceShop.Hooks.useOfferModalText)
 local fFlagShopCloseOfferDialogOnCoreMenuModule = require(inExperienceShop.Flags.FFlagShopCloseOfferDialogOnCoreMenu)
+local fFlagShowLargerOfferBannerOnDesktopModule = require(inExperienceShop.Flags.FFlagShowLargerOfferBannerOnDesktop)
 
 return function(p1, p2)
-	-- upvalues: useOffersForKey (ref), reactModule (ref), selectActiveOffer (ref), useRemainingTimeText (ref), fFlagEnableUserOffers (ref), useLocalization (ref), offerDialogStateModule (ref), fFlagShopCloseOfferDialogOnCoreMenuModule (ref), useCloseOnCoreMenuModule (ref)
+	-- upvalues: useOffersForKey (ref), reactModule (ref), selectActiveOffer (ref), useRemainingTimeText (ref), fFlagEnableUserOffers (ref), useLocalization (ref), fFlagShowLargerOfferBannerOnDesktopModule (ref), useOfferModalTextModule (ref), offerDialogStateModule (ref), fFlagShopCloseOfferDialogOnCoreMenuModule (ref), useCloseOnCoreMenuModule (ref)
 	local var1 = useOffersForKey(p1)
 	local var2 = reactModule.useMemo(function()
 		-- upvalues: selectActiveOffer (copy), var1 (ref)
@@ -37,22 +39,26 @@ return function(p1, p2)
 	end
 	local var8 = if var3 ~= nil then nil else var3.modal
 	local var9 = if var2 ~= nil then nil else var2.expirationTimeInUTC
-	local var10, var11 = reactModule.useState(offerDialogStateModule.None)
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref), offerDialogStateModule (copy)
-		var11(offerDialogStateModule.Details)
-	end, {})
+	local var10 = if fFlagShowLargerOfferBannerOnDesktopModule then useOfferModalTextModule(if var8 then var8.body else "", if var8 then var4 else nil) else {
+		viewTermsText = "",
+		bodyText = if var8 then var8.body else ""
+	}
+	local var11, var12 = reactModule.useState(offerDialogStateModule.None)
 	local var13 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref), offerDialogStateModule (copy)
-		var11(offerDialogStateModule.Terms)
+		-- upvalues: var12 (ref), offerDialogStateModule (copy)
+		var12(offerDialogStateModule.Details)
 	end, {})
 	local var14 = reactModule.useCallback(function()
-		-- upvalues: var11 (ref), offerDialogStateModule (copy)
-		var11(offerDialogStateModule.None)
+		-- upvalues: var12 (ref), offerDialogStateModule (copy)
+		var12(offerDialogStateModule.Terms)
+	end, {})
+	local var15 = reactModule.useCallback(function()
+		-- upvalues: var12 (ref), offerDialogStateModule (copy)
+		var12(offerDialogStateModule.None)
 	end, {})
 	
 	if fFlagShopCloseOfferDialogOnCoreMenuModule then
-		useCloseOnCoreMenuModule(var14)
+		useCloseOnCoreMenuModule(var15)
 	end
 	return {
 		showOfferChip = var5,
@@ -60,11 +66,13 @@ return function(p1, p2)
 		offerChipIcon = icon,
 		offerModal = var8,
 		offerExpirationTimeInUTC = var9,
-		offerDialog = var10,
-		onOfferChipActivated = var12,
-		onOfferViewTerms = var13,
-		onOfferShopNow = var14,
-		onOfferDetailsClose = var14,
-		onOfferTermsClose = var14
+		offerBodyText = var10.bodyText,
+		offerViewTermsText = var10.viewTermsText,
+		offerDialog = var11,
+		onOfferChipActivated = var13,
+		onOfferViewTerms = var14,
+		onOfferShopNow = var15,
+		onOfferDetailsClose = var15,
+		onOfferTermsClose = var15
 	}
 end

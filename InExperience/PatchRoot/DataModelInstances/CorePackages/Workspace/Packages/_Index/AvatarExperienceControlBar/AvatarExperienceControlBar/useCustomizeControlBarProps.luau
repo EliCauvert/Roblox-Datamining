@@ -33,6 +33,7 @@ local fFlagAXResetAvatarButton = require(parent.AvatarExperienceFlags).FFlagAXRe
 local fFlagAXHideHeadAdjustmentForDefaultHead = require(parent.AvatarExperienceFlags).FFlagAXHideHeadAdjustmentForDefaultHead
 local fFlagAXFavoritesManagerNavEntry = require(parent.AvatarExperienceFlags).FFlagAXFavoritesManagerNavEntry
 local fFlagAXUseProfileIconEntryPoint = avatarExperienceFlagsModule.FFlagAXUseProfileIconEntryPoint
+local fFlagControlBarUseProfileFrameThumbnail = avatarExperienceFlagsModule.FFlagControlBarUseProfileFrameThumbnail
 local fFlagAXPPEReturnToEntrySurface = require(parent.SharedFlags).FFlagAXPPEReturnToEntrySurface
 local fFlagEditProfileImageV2Enabled = require(parent.SharedFlags).FFlagEditProfileImageV2Enabled
 local avatarHeadShot = constants.RbxthumbTypes.AvatarHeadShot
@@ -50,7 +51,7 @@ local function selectUserId(p1)
 end
 
 return function(p1)
-	-- upvalues: useSemanticTokensModule (ref), useNavigation (ref), fFlagAXUseProfileIconEntryPoint (ref), fFlagAXPPEReturnToEntrySurface (ref), useAvatarRoute (ref), avatarScreen (ref), useSelector (ref), selectColorAdjustmentButtonColor (ref), responsiveModule (ref), selectUserId (ref), useLocalization (ref), fFlagAXAvatarSharingEntryPoint (ref), fFlagAXPhotoboothFunctionality (ref), reactModule (ref), slotBasedEditorAnalytics (ref), menuItemEnumModule (ref), fFlagEditProfileImageV2Enabled (ref), t (ref), fFlagAXFavoritesManagerNavEntry (ref), fFlagAXHideHeadAdjustmentForDefaultHead (ref), selectHasDynamicHead (ref), fFlagAXResetAvatarButton (ref), useUndoRedoBarViewModelModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), avatarHeadShot (ref), fFlagAXRootSlotBasedEditorFlag (ref), fFlagAXMigrateBuilderIcons (ref), iconName (ref)
+	-- upvalues: useSemanticTokensModule (ref), useNavigation (ref), fFlagAXUseProfileIconEntryPoint (ref), fFlagAXPPEReturnToEntrySurface (ref), useAvatarRoute (ref), avatarScreen (ref), useSelector (ref), selectColorAdjustmentButtonColor (ref), responsiveModule (ref), selectUserId (ref), useLocalization (ref), fFlagAXAvatarSharingEntryPoint (ref), fFlagAXPhotoboothFunctionality (ref), reactModule (ref), slotBasedEditorAnalytics (ref), menuItemEnumModule (ref), fFlagEditProfileImageV2Enabled (ref), t (ref), fFlagAXFavoritesManagerNavEntry (ref), fFlagAXHideHeadAdjustmentForDefaultHead (ref), selectHasDynamicHead (ref), fFlagAXResetAvatarButton (ref), useUndoRedoBarViewModelModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), avatarHeadShot (ref), fFlagControlBarUseProfileFrameThumbnail (ref), fFlagAXRootSlotBasedEditorFlag (ref), fFlagAXMigrateBuilderIcons (ref), iconName (ref)
 	local var1 = useSemanticTokensModule()
 	local var2 = useNavigation()
 	local var3 = if fFlagAXUseProfileIconEntryPoint or fFlagAXPPEReturnToEntrySurface then useAvatarRoute() else nil
@@ -196,13 +197,13 @@ return function(p1)
 	
 	return {
 		config = reactModule.useMemo(function()
-			-- upvalues: menuItemEnumModule (copy), p1 (ref), getRbxthumbWithTypeSizeAndOptions (copy), var7 (ref), avatarHeadShot (copy), fFlagAXRootSlotBasedEditorFlag (copy), useCallback (ref), var9 (ref), fFlagAXUseProfileIconEntryPoint (copy), var4 (ref), fFlagAXMigrateBuilderIcons (copy), iconName (copy), slotBasedEditorAnalytics (copy), var8 (ref), var1 (ref), var10 (ref), var11 (ref), var12 (ref), fFlagAXHideHeadAdjustmentForDefaultHead (copy), var22 (ref), var13 (ref), var14 (ref), var5 (ref), var15 (ref), fFlagAXAvatarSharingEntryPoint (copy), var16 (write), var17 (write), var18 (ref), var6 (ref), var19 (ref), fFlagAXPhotoboothFunctionality (copy), var20 (write), fFlagAXFavoritesManagerNavEntry (copy), var21 (write), fFlagAXResetAvatarButton (copy), var23 (ref)
+			-- upvalues: menuItemEnumModule (copy), p1 (ref), getRbxthumbWithTypeSizeAndOptions (copy), var7 (ref), avatarHeadShot (copy), fFlagControlBarUseProfileFrameThumbnail (copy), fFlagAXRootSlotBasedEditorFlag (copy), useCallback (ref), var9 (ref), fFlagAXUseProfileIconEntryPoint (copy), var4 (ref), fFlagAXMigrateBuilderIcons (copy), iconName (copy), slotBasedEditorAnalytics (copy), var8 (ref), var1 (ref), var10 (ref), var11 (ref), var12 (ref), fFlagAXHideHeadAdjustmentForDefaultHead (copy), var22 (ref), var13 (ref), var14 (ref), var5 (ref), var15 (ref), fFlagAXAvatarSharingEntryPoint (copy), var16 (write), var17 (write), var18 (ref), var6 (ref), var19 (ref), fFlagAXPhotoboothFunctionality (copy), var20 (write), fFlagAXFavoritesManagerNavEntry (copy), var21 (write), fFlagAXResetAvatarButton (copy), var23 (ref)
 			local var24
 			local t = {}
 			local t_1 = {
 				type = "image",
 				id = menuItemEnumModule.Main.AvatarSwitcher,
-				thumbnailUrl = if p1.thumbnailUrl then p1.thumbnailUrl else getRbxthumbWithTypeSizeAndOptions(var7, avatarHeadShot, 150, true, true),
+				thumbnailUrl = if p1.thumbnailUrl then p1.thumbnailUrl else getRbxthumbWithTypeSizeAndOptions(var7, avatarHeadShot, 150, true, true, fFlagControlBarUseProfileFrameThumbnail),
 				onActivated = if fFlagAXRootSlotBasedEditorFlag then useCallback else var9,
 				visible = if fFlagAXUseProfileIconEntryPoint then not var4 else nil,
 				hideIndicator = if fFlagAXRootSlotBasedEditorFlag then true else nil
