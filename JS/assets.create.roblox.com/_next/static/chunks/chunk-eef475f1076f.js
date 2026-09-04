@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "9b34feec-48f4-27e6-295f-f4e473182852")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "d036ddd9-f168-3437-1393-13266e2febeb")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 522829, e => {
@@ -1478,6 +1478,7 @@
             let a = ["custom-dashboards", "universe", e, "list"];
             return t ? [...a, null != (r = t.pageSize) ? r : null, null != (n = t.pageToken) ? n : null] : a
         },
+        pinned: e => ["custom-dashboards", "universe", e, "pinned"],
         detail: (e, t) => ["custom-dashboards", "universe", e, "detail", t],
         suggestedName: e => ["custom-dashboards", "universe", e, "suggested-name"]
     }])
@@ -2568,6 +2569,15 @@
                 }
             })
         }
+        async listPinned(e) {
+            return this.withApiErrors(e, void 0, async () => {
+                var t;
+                return this.ensureAvailable(), (null != (t = (await this.client.listPinnedDashboards(e)).dashboards) ? t : []).filter(e => "string" == typeof e.dashboardId && e.dashboardId.length > 0 && "string" == typeof e.name).map(e => ({
+                    id: e.dashboardId,
+                    name: e.name
+                })).toSorted((e, t) => e.name !== t.name ? e.name < t.name ? -1 : 1 : e.id === t.id ? 0 : e.id < t.id ? -1 : 1)
+            })
+        }
         async get(e, t) {
             return this.withApiErrors(e, t, async () => {
                 this.ensureAvailable();
@@ -2940,6 +2950,18 @@
                     nextPageToken: r.nextPageToken,
                     migrationFailedCount: r.migrationFailedCount + n.migrationFailedCount
                 }
+            }
+            async listPinned(e) {
+                return this.apiService.listPinned ? this.apiService.listPinned(e) : (await this.apiService.list(e)).items.filter(e => e.isPinned).map(e => {
+                    let {
+                        id: t,
+                        name: r
+                    } = e;
+                    return {
+                        id: t,
+                        name: r
+                    }
+                })
             }
             async get(e, t) {
                 try {
@@ -3943,6 +3965,18 @@
             list(e, t) {
                 return this.inner.list(e, t)
             }
+            async listPinned(e) {
+                return this.inner.listPinned ? this.inner.listPinned(e) : (await this.inner.list(e)).items.filter(e => e.isPinned).map(e => {
+                    let {
+                        id: t,
+                        name: r
+                    } = e;
+                    return {
+                        id: t,
+                        name: r
+                    }
+                })
+            }
             get(e, t) {
                 return this.inner.get(e, t)
             }
@@ -4909,6 +4943,20 @@
                 });
                 return (a || !n) && p(i, a), n
             },
+            async listPinnedDashboards(t) {
+                let {
+                    data: r,
+                    error: n,
+                    response: a
+                } = await e.GET("/v1/universes/{universeId}/custom-dashboards/pinned", {
+                    params: {
+                        path: {
+                            universeId: t
+                        }
+                    }
+                });
+                return (n || !r) && p(a, n), r
+            },
             async getDashboard(t) {
                 var r;
                 let {
@@ -5154,5 +5202,5 @@
     }])
 }]);
 
-//# debugId=9b34feec-48f4-27e6-295f-f4e473182852
-//# sourceMappingURL=1_sns6nbbt3ix.js.map
+//# debugId=d036ddd9-f168-3437-1393-13266e2febeb
+//# sourceMappingURL=23yr46yz4oeb_.js.map
