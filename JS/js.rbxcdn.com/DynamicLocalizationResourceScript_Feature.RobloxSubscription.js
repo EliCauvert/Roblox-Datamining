@@ -166,6 +166,7 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Action.BannerEquip": "Equip",
     "Description.Benefit.DiscountV2": "10% off first 60 days, then 20% off items and avatars",
     "Description.Benefit.Discounts": "Discounts off in-game items, avatars, and more",
+    "Description.Benefit.ProfileFrameAppTheme": "Customize profile and app theme",
     "Description.Benefit.Customize": "Customize with profile frames and app themes",
     "Label.ReferralRewardRobux": "{amount} Robux",
     "Heading.ReferralShare": "Share Plus, get",
@@ -210,6 +211,8 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Description.Benefit.Referral": "Refer people to Plus",
     "Description.Benefit.ReferralSubtitle": "Earn {amount} Robux per referral",
     "Description.ProfileFramePlusUpsell": "Subscribe to Roblox Plus to explore benefits such as profile frames and more.",
-    "Title.SubscribeToPlus": "Subscribe to Plus"
+    "Title.SubscribeToPlus": "Subscribe to Plus",
+    "Description.Benefit.AppThemeAndFrame": "Customize profile and app theme",
+    "Description.Benefit.DiscountBuyRobux": "Up to {discountPercent} off on items and avatars"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.RobloxSubscription");

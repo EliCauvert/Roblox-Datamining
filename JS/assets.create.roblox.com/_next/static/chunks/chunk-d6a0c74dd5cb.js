@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "4ba276c2-23d9-1fce-722d-a657d6822e14")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "c92133a5-5659-d075-aa1e-67e037c88216")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 97782, e => {
@@ -1361,6 +1361,18 @@
                 },
                 breadcrumbType: ee.default.PersonalizedShop,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/monetization/shop")
+            },
+            "externally-hidden-developer-products": {
+                displayName: e => {
+                    let {
+                        translate: t
+                    } = e;
+                    return et({
+                        key: "Heading.ExternallyHiddenDeveloperProducts"
+                    }, t)
+                },
+                breadcrumbType: ee.default.ExternallyHiddenDeveloperProducts,
+                getLinkPath: e => Z.dashboard.getExternallyHiddenDeveloperProductsUrl(Number(e.baseId))
             },
             "hard-coded-prices": {
                 displayName: e => {
@@ -3283,7 +3295,7 @@
                     color: "secondary",
                     component: "span",
                     children: [z, (0, t.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/4fe077161a79d05cd4fff121676d1ac05d08db4e/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/45fad949904e53bd12cdf29a16100369de68cdc6/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -4709,5 +4721,5 @@
     }, "useCookieConsentContext", 0, B], 260241)
 }]);
 
-//# debugId=4ba276c2-23d9-1fce-722d-a657d6822e14
-//# sourceMappingURL=3gr96m9lxgr9s.js.map
+//# debugId=c92133a5-5659-d075-aa1e-67e037c88216
+//# sourceMappingURL=35minwc6hcuf2.js.map

@@ -525,6 +525,7 @@ Roblox.LangDynamic["Feature.Catalog"] = {
     "Label.EmissiveInfo": "Emissive item glows and gives off its own light, so it stays bright and visible even in dark environments.",
     "Label.ParticleEffectsInfo": "An item with particle effects gives off animated visuals, making it feel dynamic and alive.",
     "Action.Owned": "{count} owned",
-    "Action.Try": "Try"
+    "Action.Try": "Try",
+    "Message.SellingBelowAveragePrice": "This price is well below the recent average price of {averagePrice} Robux. Double-check the amount before you sell."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Catalog");
