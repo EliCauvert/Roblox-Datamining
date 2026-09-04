@@ -26,7 +26,7 @@ local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local useLocalization = localizationModule.Hooks.useLocalization
 
 return function(p1)
-	-- upvalues: useDispatch (ref), useLocalUserId (ref), useUserAvatarConfigurationsModule (ref), useProfileFramesModule (ref), useProfileFramesGatingModule (ref), useEditProfileImageDraftModule (ref), useEditProfileImageNavigationModule (ref), useEditProfileImageEmotesModule (ref), reactModule (ref), httpService (ref), constantsModule (ref), editProfileImageAnalyticsModule (ref), openProfileFramesSubscriptionUpsellModule (ref), useLocalization (ref), textKeysModule (ref), buildEditProfileImageAssetItemsModule (ref), useEditProfileImageSaveModule (ref), fFlagEditProfileFramesEnabled (ref), editProfileImageHelpersModule (ref), useFocusOnMountEffect (ref)
+	-- upvalues: useDispatch (ref), useLocalUserId (ref), useUserAvatarConfigurationsModule (ref), useProfileFramesModule (ref), useProfileFramesGatingModule (ref), reactModule (ref), useEditProfileImageDraftModule (ref), useEditProfileImageNavigationModule (ref), useEditProfileImageEmotesModule (ref), httpService (ref), constantsModule (ref), editProfileImageAnalyticsModule (ref), openProfileFramesSubscriptionUpsellModule (ref), useLocalization (ref), textKeysModule (ref), buildEditProfileImageAssetItemsModule (ref), useEditProfileImageSaveModule (ref), fFlagEditProfileFramesEnabled (ref), editProfileImageHelpersModule (ref), useFocusOnMountEffect (ref)
 	local var1 = useDispatch()
 	local var2 = useLocalUserId()
 	local var3, var4, var5 = useUserAvatarConfigurationsModule(var2)
@@ -37,7 +37,22 @@ return function(p1)
 		savedCloseupConfig = var3,
 		savedFrameAssetId = var4,
 		isSavedConfigLoading = var5,
-		showFrames = var8
+		showFrames = var8,
+		initialFrameAssetId = p1.initialFrameAssetId,
+		initialFrameSelectionRequestId = p1.initialFrameSelectionRequestId,
+		isInitialFrameSelectionLoading = p1.initialFrameAssetId ~= nil and var6.isLoading,
+		isInitialFrameAvailable = reactModule.useMemo(function()
+			-- upvalues: p1 (ref), var6 (ref)
+			if p1.initialFrameAssetId == nil then
+				return false
+			end
+			for i, v in var6.frameItems do
+				if v.id == p1.initialFrameAssetId then
+					return true
+				end
+			end
+			return false
+		end, { p1.initialFrameAssetId, var6.frameItems })
 	})
 	local var10 = useEditProfileImageNavigationModule({ mode = p1.mode })
 	local var11 = useEditProfileImageEmotesModule({ selectedEmoteId = var9.selectedEmoteId })

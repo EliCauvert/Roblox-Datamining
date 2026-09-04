@@ -1042,7 +1042,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,
 CoreScripts.TextChat.ChatWindow.Transcribing,กำลังถอดเสียง...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,เราฟังไม่ออก โปรดลองอีกครั้ง
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,เรายังไม่รองรับภาษานั้น!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,หากต้องการใช้ไมโครโฟนของคุณ ให้ไปที่การตั้งค่าอุปกรณ์แล้วให้สิทธิ์ Roblox ในการใช้ไมโครโฟน
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,หากต้องการใช้ไมโครโฟนของคุณ ให้แตะที่นี่เพื่ออัปเดตการตั้งค่าอุปกรณ์
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,หากต้องการใช้ไมโครโฟนของคุณ ให้ไปที่การตั้งค่าอุปกรณ์แล้วให้สิทธิ์ Roblox ในการใช้ไมโครโฟน
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,ไม่สามารถเข้าถึงไมโครโฟนได้
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,เมื่อส่งข้อความด้วยเสียง เราจะประมวลผลเสียงของคุณและลบออกทันทีตามนโยบายความเป็นส่วนตัวของเรา
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,คุณเปิดใช้งานการแชทด้วยข้อความแล้ว
@@ -4011,7 +4012,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,เราเข้าใจผิด
 Feature.SettingsHub.Prompt.JoinedVoiceChat,คุณได้เปิดใช้งานการแชทด้วยเสียงแล้ว
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,คุณเชื่อมต่อกับการแชทด้วยเสียงแล้ว
-Feature.SettingsHub.Prompt.LeaveVoiceChat,ยกเลิกการเชื่อมต่อแชทด้วยเสียงแล้ว
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,คุณได้ยกเลิกการเชื่อมต่อกับการแชทด้วยเสียงแล้ว
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,การใช้งานไมโครโฟนและกล้องถูกระงับ
 Feature.SettingsHub.Prompt.MicUseSuspended,การใช้ไมโครโฟนถูกระงับ

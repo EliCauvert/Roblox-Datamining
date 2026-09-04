@@ -1040,7 +1040,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,
 CoreScripts.TextChat.ChatWindow.Transcribing,جارٍ تحويل الكلام إلى نص...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,لم نتمكّن من سماعك! حاول مرة أخرى.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,لا ندعم هذه اللغة بعد!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,لاستخدام الميكروفون، انتقل إلى إعدادات جهازك وامنح إذن الميكروفون لمنصّة Roblox.
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,لاستخدام الميكروفون، اضغط هنا لتحديث إعدادات جهازك.
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,لاستخدام الميكروفون، انتقل إلى إعدادات جهازك وامنح Roblox إذن استخدام الميكروفون.
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,تعذَّر الوصول إلى الميكروفون
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,لإرسال الرسائل بصوتك، سنعالج ملفك الصوتي ونحذفه فورًا وفقًا لسياسة الخصوصية.
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,لقد قمت بتمكين تحويل الكلام إلى نص في الدردشة
@@ -4008,7 +4009,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,هل أخطأنا في قرارنا�
 Feature.SettingsHub.Prompt.JoinedVoiceChat,لقد انضممت إلى المحادثة الصوتية
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,أنت متصل بالمحادثة الصوتية
-Feature.SettingsHub.Prompt.LeaveVoiceChat,انقطع الاتصال بالمحادثة الصوتية
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,لقد قطعت الاتصال بالمحادثة الصوتية
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,استخدام الكاميرا والميكروفون غير مسموح
 Feature.SettingsHub.Prompt.MicUseSuspended,استخدام الميكروفون غير مسموح

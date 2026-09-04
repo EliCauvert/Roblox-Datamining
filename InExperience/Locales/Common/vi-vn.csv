@@ -1059,7 +1059,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,
 CoreScripts.TextChat.ChatWindow.Transcribing,Đang chuyển thành văn bản...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Chúng tôi chưa nghe rõ! Hãy thử lại.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Chúng tôi chưa hỗ trợ ngôn ngữ đó!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Để sử dụng micrô, hãy mở phần cài đặt của thiết bị rồi cấp quyền truy cập micrô cho Roblox."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Để sử dụng micrô, hãy nhấn vào đây để cập nhật tùy chọn cài đặt thiết bị của bạn."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"Để sử dụng micrô, hãy mở phần cài đặt của thiết bị rồi cấp quyền truy cập micrô cho Roblox."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Không thể truy cập micrô
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Để gửi tin nhắn bằng giọng nói, chúng tôi sẽ xử lý âm thanh của bạn và xóa ngay sau đó, theo đúng chính sách quyền riêng tư."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Bạn đã bật tính năng chuyển giọng nói thành văn bản
@@ -4028,7 +4029,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Chúng tôi đã nhầm lẫn?<br />
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Bạn đã tham gia Cuộc nói chuyện
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,Bạn Đã Tham Gia Cuộc Nói Chuyện
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Bạn đã kết nối với tính năng Nói chuyện
-Feature.SettingsHub.Prompt.LeaveVoiceChat,Đã ngắt kết nối khỏi cuộc nói chuyện
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Bạn đã ngắt kết nối với tính năng Nói chuyện
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Việc Sử Dụng Micrô và Camera Bị Tạm Ngưng
 Feature.SettingsHub.Prompt.MicUseSuspended,Việc sử dụng micrô đã bị tạm ngưng

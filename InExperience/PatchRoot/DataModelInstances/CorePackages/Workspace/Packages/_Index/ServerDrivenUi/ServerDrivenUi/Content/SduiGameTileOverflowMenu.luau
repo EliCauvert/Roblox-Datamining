@@ -20,6 +20,7 @@ return reactModule.memo(function(p1)
 		componentConfig = p1.componentConfig,
 		sduiContext = p1.sduiContext,
 		extraLocalProps = {
+			zIndex = 5,
 			anchorPoint = Vector2.new(1, 0),
 			buttonIconBackgroundStyle = var1.Color.OverMedia.OverMedia_0,
 			buttonSize = inputSize.Small,

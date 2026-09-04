@@ -34,6 +34,7 @@
 	OpenSongDetail = "OpenSongDetail",
 	OpenSponsoredTooltip = "OpenSponsoredTooltip",
 	SetGameTileNotInterested = "SetGameTileNotInterested",
+	UndoGameTileNotInterested = "UndoGameTileNotInterested",
 	PlayButtonClick = "PlayButtonClick",
 	DismissDialog = "DismissDialog",
 	DismissGameFeedback = "DismissGameFeedback",

@@ -1058,7 +1058,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,
 CoreScripts.TextChat.ChatWindow.Transcribing,텍스트로 변환 중...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,인식되지 않았습니다! 다시 시도하세요.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,해당 언어는 아직 지원되지 않습니다!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,마이크를 사용하려면 기기 설정으로 이동하여 Roblox에 마이크 권한을 부여하세요.
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,마이크를 사용하려면 여기를 탭하여 기기 설정을 업데이트하세요.
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,마이크를 사용하려면 기기 설정으로 이동하여 Roblox에 마이크 권한을 부여하세요.
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,마이크에 액세스할 수 없습니다
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"음성으로 메시지를 보내기 위해, 저희는 개인정보 처리방침에 따라 사용자의 오디오를 처리하고 즉시 삭제합니다."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,음성으로 텍스트 채팅을 사용하도록 설정하셨습니다
@@ -4029,7 +4030,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,오류가 발생했나요?<br /><u>�
 Feature.SettingsHub.Prompt.JoinedVoiceChat,음성 채팅에 참가했어요
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,음성 채팅에 참가했습니다
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,음성 채팅에 연결되었습니다
-Feature.SettingsHub.Prompt.LeaveVoiceChat,음성 채팅 연결 해제됨
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,음성 채팅 연결이 해제되었습니다
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,마이크 및 카메라 사용이 일시 정지됨
 Feature.SettingsHub.Prompt.MicUseSuspended,마이크 사용 일시 정지

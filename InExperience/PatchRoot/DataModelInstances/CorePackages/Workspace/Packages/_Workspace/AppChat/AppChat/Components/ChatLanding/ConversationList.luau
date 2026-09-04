@@ -198,10 +198,8 @@ function conversationList.init(p1)
 	
 	appChatPerfExperimentation.logExposure()
 	partyPageCarouselExperimentation.logExposure()
+	squadQuickStartExperimentation.logExposure()
 	
-	if squadQuickStartExperimentation.isLogExposureEnabled then
-		squadQuickStartExperimentation.logExposure()
-	end
 	if fFlagAppChatRemoveConversationListDividerIxpEnabledModule then
 		IXPService:LogFlagLinkedUserLayerExposure(fStringAppChatRemoveConversationListDividerIxpLayerModule)
 	end

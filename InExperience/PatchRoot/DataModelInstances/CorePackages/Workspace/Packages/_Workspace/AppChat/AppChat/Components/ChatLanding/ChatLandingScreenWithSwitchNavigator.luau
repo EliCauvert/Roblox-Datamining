@@ -24,6 +24,8 @@ local conversationStackNavigationFocusListenerModule = require(script.Parent.Con
 local IXPNavigationUtilsModule = require(appChat.Utils.IXPNavigationUtils)
 local resetForSquadLobbyForWideModeModule = require(appChat.Utils.resetForSquadLobbyForWideMode)
 local chatSearchBoxModule = require(script.Parent.ChatSearchBox)
+local chatLandingSearchRowModule = require(appChat.Components.TopBar.ChatLandingSearchRow)
+local fFlagAppChatFoundationSearchInputModule = require(appChat.Flags.FFlagAppChatFoundationSearchInput)
 local chatLandingContainerModule = require(script.Parent.ChatLandingContainer)
 local loggerModule = require(script.Parent.Logger)
 local getCurrentRouteModule = require(script.Parent.Utils.getCurrentRoute)
@@ -31,6 +33,7 @@ local withStyle = UIBloxModule.Style.withStyle
 local providerModule = require(appChat.Contexts.ChatPagePadding.Provider)
 local contextModule = require(appChat.Contexts.ChatWideModeFocus.Context)
 local useGetAndSetRefModule = require(appChat.Hooks.useGetAndSetRef)
+local useIsChatSearchAllowedModule = require(appChat.Hooks.useIsChatSearchAllowed)
 local sharedFlagsModule = require(parent.SharedFlags)
 local getFFlagIsSquadEnabled = sharedFlagsModule.GetFFlagIsSquadEnabled
 local getFFlagEnableAppChatInExperience = sharedFlagsModule.GetFFlagEnableAppChatInExperience
@@ -39,7 +42,7 @@ local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatCo
 local argoPartyExperimentation = require(parent.SocialExperiments).ArgoPartyExperimentation
 
 local function LeftContainerTelemetryProviders(p1)
-	-- upvalues: useGetAndSetRefModule (ref), reactModule (ref), chatLandingTelemetryStateModule (ref), chatLandingTelemetryLayerModule (ref)
+	-- upvalues: useGetAndSetRefModule (ref), reactModule (ref), fFlagAppChatFoundationSearchInputModule (ref), useIsChatSearchAllowedModule (ref), chatLandingTelemetryStateModule (ref), chatLandingTelemetryLayerModule (ref)
 	local var1, var2 = useGetAndSetRefModule({})
 	
 	return reactModule.createElement(chatLandingTelemetryStateModule.Provider, {
@@ -59,7 +62,7 @@ local function LeftContainerTelemetryProviders(p1)
 					unfilteredConversationCount = var3.unfilteredConversationCount
 				}
 			end, { var1 })
-		}, p1.children)
+		}, if p1.renderChildren then p1.renderChildren(if fFlagAppChatFoundationSearchInputModule then useIsChatSearchAllowedModule() else false) else p1.children)
 	})
 end
 
@@ -204,15 +207,16 @@ function chatLandingScreenWithSwitchNavigator.init(p1)
 end
 
 function chatLandingScreenWithSwitchNavigator.render(p1)
-	-- upvalues: loggerModule (ref), argCheckModule (ref), withStyle (ref), roactModule (ref), LeftContainerTelemetryProviders (ref), topBarProviderModule (ref), enumScreensModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), chatLandingTopBarModule (ref), chatSearchBoxModule (ref), providerModule (ref), appChatFixChatLandingContainerKeyPropConflict (ref), chatLandingContainerModule (ref), RightContainerTelemetryProviders (ref), conversationSwitchNavigatorModule (ref), reactModule (ref), contextModule (ref), conversationStackNavigationFocusListenerModule (ref)
+	-- upvalues: loggerModule (ref), argCheckModule (ref), withStyle (ref), fFlagAppChatFoundationSearchInputModule (ref), roactModule (ref), topBarProviderModule (ref), enumScreensModule (ref), chatLandingSearchRowModule (ref), chatSearchBoxModule (ref), fFlagAppChatConsoleFocusFixesModule (ref), chatLandingTopBarModule (ref), providerModule (ref), appChatFixChatLandingContainerKeyPropConflict (ref), chatLandingContainerModule (ref), LeftContainerTelemetryProviders (ref), RightContainerTelemetryProviders (ref), conversationSwitchNavigatorModule (ref), reactModule (ref), contextModule (ref), conversationStackNavigationFocusListenerModule (ref)
 	loggerModule:info("{screen} render")
 	local var1 = argCheckModule.isNotNil(p1.props.navigation, "navigation in ChatLandingScreenWithSwitchNavigator")
 	local key = var1 and var1.getParam("key", "") or ""
 	local showSearchRow = var1.getScreenProps("showSearchRow", true)
 	local topBarHeight = var1.getScreenProps("topBarHeight", 0)
+	local isInExperience = var1.getScreenProps("isInExperience", false)
 	
 	return withStyle(function(p2)
-		-- upvalues: roactModule (copy), LeftContainerTelemetryProviders (copy), topBarProviderModule (copy), enumScreensModule (copy), argCheckModule (copy), fFlagAppChatConsoleFocusFixesModule (copy), p1 (ref), chatLandingTopBarModule (copy), var1 (ref), showSearchRow (ref), chatSearchBoxModule (copy), topBarHeight (ref), providerModule (copy), appChatFixChatLandingContainerKeyPropConflict (copy), chatLandingContainerModule (copy), key (ref), RightContainerTelemetryProviders (copy), conversationSwitchNavigatorModule (copy), reactModule (copy), contextModule (copy), conversationStackNavigationFocusListenerModule (copy)
+		-- upvalues: fFlagAppChatFoundationSearchInputModule (copy), isInExperience (ref), showSearchRow (ref), roactModule (copy), topBarProviderModule (copy), enumScreensModule (copy), argCheckModule (copy), chatLandingSearchRowModule (copy), topBarHeight (ref), var1 (ref), chatSearchBoxModule (copy), fFlagAppChatConsoleFocusFixesModule (copy), p1 (ref), chatLandingTopBarModule (copy), providerModule (copy), appChatFixChatLandingContainerKeyPropConflict (copy), chatLandingContainerModule (copy), key (ref), LeftContainerTelemetryProviders (copy), RightContainerTelemetryProviders (copy), conversationSwitchNavigatorModule (copy), reactModule (copy), contextModule (copy), conversationStackNavigationFocusListenerModule (copy)
 		return reactModule.createElement(contextModule.Provider, { value = p1.wideModeFocusValue }, {
 			FocusListener = roactModule.createElement(conversationStackNavigationFocusListenerModule, {
 				navigation = var1,
@@ -221,76 +225,91 @@ function chatLandingScreenWithSwitchNavigator.render(p1)
 				conversationTopBarRef = p1.conversationTopBarRef,
 				conversationPanelRef = p1.conversationPanelRef
 			}, {
-				LeftContainerProviders = roactModule.createElement(LeftContainerTelemetryProviders, {}, {
-					LeftContainer = roactModule.createElement(topBarProviderModule, {
-						screenName = enumScreensModule.ChatLanding,
-						render = function(p3)
-							-- upvalues: enumScreensModule (copy), argCheckModule (copy), roactModule (copy), fFlagAppChatConsoleFocusFixesModule (copy), p1 (copy), chatLandingTopBarModule (copy), var1 (copy), showSearchRow (copy), chatSearchBoxModule (copy), topBarHeight (copy), providerModule (copy), p2 (ref), appChatFixChatLandingContainerKeyPropConflict (copy), chatLandingContainerModule (copy), key (copy)
-							local screenTopBar = p3.getScreenTopBar(enumScreensModule.ChatLanding)
-							argCheckModule.isType(screenTopBar, "table", "screenTopBar")
-							
-							return roactModule.createElement("Frame", {
-								Size = UDim2.new(0.37, 0, 1, 0),
-								Position = UDim2.new(0, 0, 0, 0),
-								BackgroundTransparency = 1,
-								BorderSizePixel = 0,
-								SelectionGroup = if fFlagAppChatConsoleFocusFixesModule then true else nil,
-								SelectionBehaviorDown = if fFlagAppChatConsoleFocusFixesModule then Enum.SelectionBehavior.Stop else nil,
-								SelectionBehaviorUp = if fFlagAppChatConsoleFocusFixesModule then Enum.SelectionBehavior.Stop else nil,
-								[roactModule.Ref] = p1.leftContainerRef
-							}, {
-								layout = roactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
-								leftTopBar = roactModule.createElement(chatLandingTopBarModule, {
-									screenName = enumScreensModule.ChatLanding,
-									navigation = var1
-								}),
-								filterBox = if showSearchRow then roactModule.createElement(chatSearchBoxModule, {
-									height = topBarHeight,
-									initialText = screenTopBar.filterText,
-									onFilter = function(p4)
-										-- upvalues: p3 (ref), enumScreensModule (copy)
-										p3.setScreenTopBar(enumScreensModule.ChatLanding, { filterText = p4 })
-									end
-								}) else nil,
-								content = roactModule.createElement(providerModule, {
-									value = {
-										left = var1.getScreenProps("appChatOuterPadding", 12),
-										right = var1.getScreenProps("appChatInnerPadding", 12)
-									}
-								}, {
-									ChatLanding = roactModule.createElement("Frame", {
+				LeftContainerProviders = roactModule.createElement(LeftContainerTelemetryProviders, {
+					renderChildren = function(p3)
+						-- upvalues: fFlagAppChatFoundationSearchInputModule (copy), isInExperience (copy), showSearchRow (copy), roactModule (copy), topBarProviderModule (copy), enumScreensModule (copy), argCheckModule (copy), chatLandingSearchRowModule (copy), topBarHeight (copy), var1 (copy), chatSearchBoxModule (copy), fFlagAppChatConsoleFocusFixesModule (copy), p1 (copy), chatLandingTopBarModule (copy), providerModule (copy), p2 (ref), appChatFixChatLandingContainerKeyPropConflict (copy), chatLandingContainerModule (copy), key (copy)
+						p3 = fFlagAppChatFoundationSearchInputModule and (not isInExperience and p3)
+						local showSearchRow_1 = showSearchRow or p3
+						
+						return {
+							LeftContainer = roactModule.createElement(topBarProviderModule, {
+								screenName = enumScreensModule.ChatLanding,
+								render = function(p4)
+									-- upvalues: enumScreensModule (copy), argCheckModule (copy), p3 (ref), showSearchRow_1 (ref), roactModule (copy), chatLandingSearchRowModule (copy), topBarHeight (copy), var1 (copy), chatSearchBoxModule (copy), fFlagAppChatConsoleFocusFixesModule (copy), p1 (copy), chatLandingTopBarModule (copy), providerModule (copy), p2 (copy), appChatFixChatLandingContainerKeyPropConflict (copy), chatLandingContainerModule (copy), key (copy)
+									local screenTopBar = p4.getScreenTopBar(enumScreensModule.ChatLanding)
+									argCheckModule.isType(screenTopBar, "table", "screenTopBar")
+									local shouldRenderCenter = screenTopBar.shouldRenderCenter or p3
+									
+									return roactModule.createElement("Frame", {
+										Size = UDim2.new(0.37, 0, 1, 0),
+										Position = UDim2.new(0, 0, 0, 0),
+										BackgroundTransparency = 1,
 										BorderSizePixel = 0,
-										LayoutOrder = 2,
-										Size = UDim2.new(1, 0, 1, (-var1.getScreenProps("topBarHeight", 0)) - (if showSearchRow then topBarHeight else 0)),
-										BackgroundTransparency = p2.Tokens.Color.None.Transparency
+										SelectionGroup = if fFlagAppChatConsoleFocusFixesModule then true else nil,
+										SelectionBehaviorDown = if fFlagAppChatConsoleFocusFixesModule then Enum.SelectionBehavior.Stop else nil,
+										SelectionBehaviorUp = if fFlagAppChatConsoleFocusFixesModule then Enum.SelectionBehavior.Stop else nil,
+										[roactModule.Ref] = p1.leftContainerRef
 									}, {
-										ChatLandingContainer = if appChatFixChatLandingContainerKeyPropConflict then nil else roactModule.createElement(chatLandingContainerModule, {
-											isShowingFilterBox = screenTopBar.shouldRenderCenter,
-											filterText = screenTopBar.filterText,
-											navigateToConversation = p1.navigateToConversation,
-											navigateToCreateChat = p1.navigateToCreateChat,
-											navigateToPrivacy = p1.navigateToPrivacy,
-											navigateToSquadLobby = p1.navigateToSquadLobby,
-											navigateToToast = p1.navigateToToast,
-											navigateToAddFriends = p1.props.navigation.getScreenProps("navigateToAddFriends", {}),
-											key = "ChatLanding" .. key
+										layout = roactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
+										leftTopBar = roactModule.createElement(chatLandingTopBarModule, {
+											screenName = enumScreensModule.ChatLanding,
+											navigation = var1
 										}),
-										if appChatFixChatLandingContainerKeyPropConflict then roactModule.createElement(chatLandingContainerModule, {
-											isShowingFilterBox = screenTopBar.shouldRenderCenter,
-											filterText = screenTopBar.filterText,
-											navigateToConversation = p1.navigateToConversation,
-											navigateToCreateChat = p1.navigateToCreateChat,
-											navigateToPrivacy = p1.navigateToPrivacy,
-											navigateToSquadLobby = p1.navigateToSquadLobby,
-											navigateToToast = p1.navigateToToast,
-											navigateToAddFriends = p1.props.navigation.getScreenProps("navigateToAddFriends", {}),
-											key = "ChatLanding" .. key
-										}) else nil
+										filterBox = if showSearchRow_1 then if p3 then roactModule.createElement(chatLandingSearchRowModule, {
+											hasExit = false,
+											LayoutOrder = 0,
+											testId = "ChatInlineSearch",
+											height = topBarHeight,
+											paddingHorizontal = var1.getScreenProps("appChatOuterPadding", 12)
+										}) else roactModule.createElement(chatSearchBoxModule, {
+											height = topBarHeight,
+											initialText = screenTopBar.filterText,
+											onFilter = function(p5)
+												-- upvalues: p4 (ref), enumScreensModule (copy)
+												p4.setScreenTopBar(enumScreensModule.ChatLanding, { filterText = p5 })
+											end
+										}) else nil,
+										content = roactModule.createElement(providerModule, {
+											value = {
+												left = var1.getScreenProps("appChatOuterPadding", 12),
+												right = var1.getScreenProps("appChatInnerPadding", 12)
+											}
+										}, {
+											ChatLanding = roactModule.createElement("Frame", {
+												BorderSizePixel = 0,
+												LayoutOrder = 2,
+												Size = UDim2.new(1, 0, 1, (-var1.getScreenProps("topBarHeight", 0)) - (if showSearchRow_1 then topBarHeight else 0)),
+												BackgroundTransparency = p2.Tokens.Color.None.Transparency
+											}, {
+												ChatLandingContainer = if appChatFixChatLandingContainerKeyPropConflict then nil else roactModule.createElement(chatLandingContainerModule, {
+													isShowingFilterBox = shouldRenderCenter,
+													filterText = screenTopBar.filterText,
+													navigateToConversation = p1.navigateToConversation,
+													navigateToCreateChat = p1.navigateToCreateChat,
+													navigateToPrivacy = p1.navigateToPrivacy,
+													navigateToSquadLobby = p1.navigateToSquadLobby,
+													navigateToToast = p1.navigateToToast,
+													navigateToAddFriends = p1.props.navigation.getScreenProps("navigateToAddFriends", {}),
+													key = "ChatLanding" .. key
+												}),
+												if appChatFixChatLandingContainerKeyPropConflict then roactModule.createElement(chatLandingContainerModule, {
+													isShowingFilterBox = shouldRenderCenter,
+													filterText = screenTopBar.filterText,
+													navigateToConversation = p1.navigateToConversation,
+													navigateToCreateChat = p1.navigateToCreateChat,
+													navigateToPrivacy = p1.navigateToPrivacy,
+													navigateToSquadLobby = p1.navigateToSquadLobby,
+													navigateToToast = p1.navigateToToast,
+													navigateToAddFriends = p1.props.navigation.getScreenProps("navigateToAddFriends", {}),
+													key = "ChatLanding" .. key
+												}) else nil
+											})
+										})
 									})
-								})
+								end
 							})
-						end
-					})
+						}
+					end
 				}),
 				Border = roactModule.createElement("Frame", {
 					BorderSizePixel = 0,

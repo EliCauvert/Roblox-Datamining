@@ -242,6 +242,7 @@ return reactModule.memo(function(p1)
 		ZIndex = zIndex,
 		SelectionImageObject = p1.sduiContext.dependencies.cursors.tileCursor,
 		Active = if fFlagLuaAppSduiGameTileFeedback then not p1.isDisabled else p1.isDisabled,
+		Selectable = if fFlagLuaAppSduiGameTileFeedback then p1.selectable else nil,
 		[reactModule.Change.GuiState] = if fFlagLuaAppSduiGameTileFeedback then var17 else p1.onGuiStateChanged,
 		[reactModule.Event.Activated] = if fFlagLuaAppSduiGameTileFeedback then var19 elseif var16 then var16.onActivated else p1.onActivated,
 		[reactModule.Event.MouseEnter] = var12,

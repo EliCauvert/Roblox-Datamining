@@ -8,10 +8,16 @@ local getAllUserOffersModule = require(inExperienceOffers.Api.getAllUserOffers)
 local offersDebugLoggerModule = require(inExperienceOffers.Internal.OffersDebugLogger)
 local _ = require(inExperienceOffers.Types)
 local mockGetAllUserOffersModule = require(inExperienceOffers.Mocks.MockGetAllUserOffers)
+local getSecondsUntilNextExpirationModule = require(inExperienceOffers.Utils.getSecondsUntilNextExpiration)
 local isNotificationEligibleModule = require(inExperienceOffers.Utils.isNotificationEligible)
+local featureKeyModule = require(inExperienceOffers.Enums.FeatureKey)
 local notificationLocationModule = require(inExperienceOffers.Enums.NotificationLocation)
 local fFlagEnableUserOffers = sharedFlagsModule.FFlagEnableUserOffers
+local fFlagOffersRespectExpirationModule = require(inExperienceOffers.Flags.FFlagOffersRespectExpiration)
 local fFlagUseMockUserOffersModule = require(inExperienceOffers.Flags.FFlagUseMockUserOffers)
+local fIntOfferExpirationRefetchBufferSecondsModule = require(inExperienceOffers.Flags.FIntOfferExpirationRefetchBufferSeconds)
+local fIntOfferExpirationRefetchJitterSecondsModule = require(inExperienceOffers.Flags.FIntOfferExpirationRefetchJitterSeconds)
+local fIntOfferExpirationRefetchMaxCountModule = require(inExperienceOffers.Flags.FIntOfferExpirationRefetchMaxCount)
 
 local function normalizePresentationData(p1)
 	if p1 == nil then
@@ -45,7 +51,7 @@ local function _(p2)
 end
 
 return function()
-	-- upvalues: createSessionScopedSignal (ref), signalsModule (ref), isNotificationEligibleModule (ref), notificationLocationModule (ref), fFlagUseMockUserOffersModule (ref), mockGetAllUserOffersModule (ref), getAllUserOffersModule (ref), normalizePresentationData (ref), fFlagEnableUserOffers (ref), offersDebugLoggerModule (ref)
+	-- upvalues: createSessionScopedSignal (ref), signalsModule (ref), isNotificationEligibleModule (ref), notificationLocationModule (ref), fFlagUseMockUserOffersModule (ref), mockGetAllUserOffersModule (ref), getAllUserOffersModule (ref), normalizePresentationData (ref), fFlagOffersRespectExpirationModule (ref), featureKeyModule (ref), fFlagEnableUserOffers (ref), offersDebugLoggerModule (ref), getSecondsUntilNextExpirationModule (ref), fIntOfferExpirationRefetchMaxCountModule (ref), fIntOfferExpirationRefetchBufferSecondsModule (ref), fIntOfferExpirationRefetchJitterSecondsModule (ref)
 	local var1, var2 = createSessionScopedSignal(nil)
 	local var3, var4 = createSessionScopedSignal(nil)
 	local var5, var6 = createSessionScopedSignal(false)
@@ -111,9 +117,22 @@ return function()
 	end
 	
 	local var19 = if fFlagUseMockUserOffersModule then mockGetAllUserOffersModule else getAllUserOffersModule
+	local var20 = nil
+	local var21 = nil
+	local var22 = 0
+	local var23 = 0
+	local scheduleExpirationRefetch = nil
+	
+	local function _()
+		-- upvalues: var21 (write)
+		if var21 ~= nil then
+			pcall(task.cancel, var21)
+			var21 = nil
+		end
+	end
 	
 	local function commitOffers(p4)
-		-- upvalues: normalizePresentationData (copy), var2 (ref)
+		-- upvalues: normalizePresentationData (copy), var2 (ref), fFlagOffersRespectExpirationModule (copy), scheduleExpirationRefetch (write)
 		local t = {}
 		
 		for i, v in p4.offers do
@@ -126,16 +145,122 @@ return function()
 			}
 			
 			for i_1, v_1 in t_1.featureKeys do
-				local var20 = t[v_1]
+				local var24 = t[v_1]
 				
-				if var20 == nil then
-					var20 = {}
-					t[v_1] = var20
+				if var24 == nil then
+					var24 = {}
+					t[v_1] = var24
 				end
-				table.insert(var20, t_1)
+				table.insert(var24, t_1)
 			end
 		end
 		var2(t)
+		
+		if fFlagOffersRespectExpirationModule then
+			scheduleExpirationRefetch(t)
+		end
+	end
+	
+	local function expireShopOffers()
+		-- upvalues: var1 (ref), featureKeyModule (copy), var2 (ref)
+		local var25 = var1(false)
+		
+		if var25 == nil or var25[featureKeyModule.RobloxShop] == nil then return end
+		local t = {}
+		
+		for i, v in var25 do
+			if i ~= featureKeyModule.RobloxShop then
+				t[i] = v
+			end
+		end
+		var2(t)
+	end
+	
+	local _ = function(p5, p6)
+		-- upvalues: var23 (write), commitOffers (ref)
+		if p5 == var23 then
+			commitOffers(p6)
+			
+			return
+		end
+	end
+	
+	local function fetchOffers(p5)
+		-- upvalues: fFlagEnableUserOffers (copy), fFlagOffersRespectExpirationModule (copy), var20 (write), var21 (write), var23 (write), var19 (ref), commitOffers (ref), offersDebugLoggerModule (copy), var1 (ref), scheduleExpirationRefetch (write)
+		if not fFlagEnableUserOffers then return end
+		if not fFlagOffersRespectExpirationModule then
+			var19(p5):andThen(commitOffers):catch(function(p6)
+				-- upvalues: offersDebugLoggerModule (copy)
+				offersDebugLoggerModule.log("fetchOffers failed: " .. tostring(p6))
+			end)
+			
+			return
+		end
+		var20 = p5
+		
+		if var21 ~= nil then
+			pcall(task.cancel, var21)
+			var21 = nil
+		end
+		var23 += 1
+		local var26 = var23
+		var19(p5):andThen(function(p6)
+			-- upvalues: var26 (ref), var23 (copy), commitOffers (copy)
+			if var26 == var23 then
+				commitOffers(p6)
+				
+				return
+			end
+		end):catch(function(p6)
+			-- upvalues: offersDebugLoggerModule (copy), var26 (ref), var23 (copy), var1 (copy), scheduleExpirationRefetch (copy)
+			offersDebugLoggerModule.log("fetchOffers failed: " .. tostring(p6))
+			
+			if var26 == var23 then
+				local var27 = var1(false)
+				
+				if var27 ~= nil then
+					scheduleExpirationRefetch(var27)
+				end
+			end
+		end)
+	end
+	
+	scheduleExpirationRefetch = function(p5)
+		-- upvalues: var21 (write), var20 (write), getSecondsUntilNextExpirationModule (copy), var22 (write), fIntOfferExpirationRefetchMaxCountModule (copy), fIntOfferExpirationRefetchBufferSecondsModule (copy), fIntOfferExpirationRefetchJitterSecondsModule (copy), var23 (write), var19 (ref), commitOffers (ref), offersDebugLoggerModule (copy), expireShopOffers (ref)
+		if var21 ~= nil then
+			pcall(task.cancel, var21)
+			var21 = nil
+		end
+		local var26 = getSecondsUntilNextExpirationModule(p5)
+		
+		if var20 == nil or var26 == nil then return end
+		if fIntOfferExpirationRefetchMaxCountModule <= var22 then return end
+		local var27 = var26 + fIntOfferExpirationRefetchBufferSecondsModule
+		
+		if fIntOfferExpirationRefetchJitterSecondsModule > 0 then
+			var27 += math.random() * fIntOfferExpirationRefetchJitterSecondsModule
+		end
+		var21 = task.delay(var27, function()
+			-- upvalues: var21 (copy), var22 (copy), var23 (copy), var19 (copy), var20 (ref), commitOffers (copy), offersDebugLoggerModule (copy), expireShopOffers (copy)
+			var21 = nil
+			var22 += 1
+			var19(var20):andThen(function(p6)
+				-- upvalues: var23 (ref), var23 (copy), commitOffers (copy)
+				if var23 == var23 then
+					commitOffers(p6)
+					
+					return
+				end
+			end):catch(function(p6)
+				-- upvalues: var23 (ref), var23 (copy), offersDebugLoggerModule (copy), expireShopOffers (copy)
+				if var23 == var23 then
+					offersDebugLoggerModule.log("expiration refetch failed, expiring shop offers: " .. tostring(p6))
+					expireShopOffers()
+					
+					return
+				end
+			end)
+		end)
 	end
 	
 	return {
@@ -146,17 +271,7 @@ return function()
 		getHasInExperienceShopOpened = var5,
 		getIsInExperienceShopGlobalIconAvailable = var7,
 		getIsShopAvailable = var9,
-		fetchOffers = function(p5)
-			-- upvalues: fFlagEnableUserOffers (copy), var19 (ref), commitOffers (ref), offersDebugLoggerModule (copy)
-			if fFlagEnableUserOffers then
-				var19(p5):andThen(commitOffers):catch(function(p6)
-					-- upvalues: offersDebugLoggerModule (copy)
-					offersDebugLoggerModule.log("fetchOffers failed: " .. tostring(p6))
-				end)
-				
-				return
-			end
-		end,
+		fetchOffers = fetchOffers,
 		hydrateOfferExposureSnapshot = hydrateOfferExposureSnapshot,
 		markInExperienceShopOpened = markInExperienceShopOpened,
 		setInExperienceShopGlobalIconAvailable = var8,

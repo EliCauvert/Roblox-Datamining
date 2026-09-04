@@ -1,10 +1,15 @@
-﻿local _ = require(script:FindFirstAncestor("InExperienceOffers").Types)
+﻿local inExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
+local _ = require(inExperienceOffers.Types)
+local fFlagOffersRespectExpirationModule = require(inExperienceOffers.Flags.FFlagOffersRespectExpiration)
+local isOfferExpiredModule = require(inExperienceOffers.Utils.isOfferExpired)
 local inExperienceOffersNotificationMaxExposureCount = game:DefineFastInt("InExperienceOffersNotificationMaxExposureCount", 3)
 local inExperienceOffersNotificationCooldownSeconds = game:DefineFastInt("InExperienceOffersNotificationCooldownSeconds", 86400)
 
 return function(p1, p2)
-	-- upvalues: inExperienceOffersNotificationMaxExposureCount (ref), inExperienceOffersNotificationCooldownSeconds (ref)
+	-- upvalues: fFlagOffersRespectExpirationModule (ref), isOfferExpiredModule (ref), inExperienceOffersNotificationMaxExposureCount (ref), inExperienceOffersNotificationCooldownSeconds (ref)
 	if p1.offerStatus ~= "AVAILABLE" then
+		return false
+	elseif fFlagOffersRespectExpirationModule and isOfferExpiredModule(p1) then
 		return false
 	end
 	local offerId = p2[p1.offerId]

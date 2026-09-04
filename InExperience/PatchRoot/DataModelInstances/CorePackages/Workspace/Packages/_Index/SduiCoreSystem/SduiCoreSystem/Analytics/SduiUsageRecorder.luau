@@ -1,15 +1,6 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local sduiUsageAnalyticsModule = require(sduiCoreSystem.Analytics.SduiUsageAnalytics)
-local fFlagSduiUsageTelemetry = require(sduiCoreSystem.Parent.SharedFlags).FFlagSduiUsageTelemetry
-local discoverySduiTypeUsageHundredthsPercent = game:DefineFastInt("DiscoverySduiTypeUsageHundredthsPercent", 0)
-local discoverySduiParamUsageHundredthsPercent = game:DefineFastInt("DiscoverySduiParamUsageHundredthsPercent", 0)
-local var1 = false
-local var2 = false
-
-if fFlagSduiUsageTelemetry then
-	var1 = math.random(10000) <= discoverySduiTypeUsageHundredthsPercent
-	var2 = math.random(10000) <= discoverySduiParamUsageHundredthsPercent
-end
+﻿local sduiUsageAnalyticsModule = require(script:FindFirstAncestor("SduiCoreSystem").Analytics.SduiUsageAnalytics)
+local var1 = math.random(10000) <= game:DefineFastInt("DiscoverySduiTypeUsageHundredthsPercent", 0)
+local var2 = math.random(10000) <= game:DefineFastInt("DiscoverySduiParamUsageHundredthsPercent", 0)
 local t = {}
 local t_1 = {}
 

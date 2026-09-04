@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("OffersRespectExpiration", false)

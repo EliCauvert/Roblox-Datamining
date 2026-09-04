@@ -40,7 +40,7 @@ local function SearchBackButton(p1)
 	})
 end
 
-local function SearchField()
+local function SearchField(p1)
 	-- upvalues: getTopBarStoreModule (ref), useSignalBinding (ref), getFilterText (ref), useSignalState (ref), getShouldAutoFocus (ref), reactModule (ref), enumScreensModule (ref), chatSearchFieldContainerModule (ref)
 	local setScreenTopBar = getTopBarStoreModule(false).setScreenTopBar
 	local var1 = useSignalBinding(getFilterText)
@@ -55,21 +55,39 @@ local function SearchField()
 	return reactModule.createElement(chatSearchFieldContainerModule, {
 		text = var1,
 		shouldAutoFocus = var2,
-		onChanged = reactModule.useCallback(function(p1)
+		onChanged = reactModule.useCallback(function(p2)
 			-- upvalues: setScreenTopBar (ref), enumScreensModule (copy)
-			setScreenTopBar(enumScreensModule.ChatLanding, { filterText = p1 })
+			setScreenTopBar(enumScreensModule.ChatLanding, { filterText = p2 })
 		end, { setScreenTopBar }),
-		onExit = reactModule.useCallback(function()
+		onExit = if p1.hasExit then reactModule.useCallback(function()
 			-- upvalues: setScreenTopBar (ref), enumScreensModule (copy)
 			setScreenTopBar(enumScreensModule.ChatLanding, { shouldRenderCenter = false, filterText = "" })
-		end, { setScreenTopBar })
+		end, { setScreenTopBar }) else nil,
+		testId = p1.testId
 	})
 end
 
-return function()
+return function(p1)
 	-- upvalues: reactModule (ref), foundationModule (ref), SearchBackButton (ref), SearchField (ref)
-	return reactModule.createElement(foundationModule.View, { tag = "row align-y-center gap-small size-full" }, {
-		back = reactModule.createElement(SearchBackButton, { LayoutOrder = 1 }),
-		field = reactModule.createElement(foundationModule.View, { tag = "grow auto-y", LayoutOrder = 2 }, { input = reactModule.createElement(SearchField) })
+	local var1 = p1.hasExit ~= false
+	local height = p1.height
+	local paddingHorizontal = p1.paddingHorizontal
+	
+	return reactModule.createElement(foundationModule.View, {
+		tag = {
+			["row align-y-center gap-small"] = true,
+			["size-full"] = height == nil
+		},
+		Size = if height then UDim2.new(1, 0, 0, height) else nil,
+		LayoutOrder = p1.LayoutOrder,
+		padding = if paddingHorizontal then {
+			left = UDim.new(0, paddingHorizontal),
+			right = UDim.new(0, paddingHorizontal)
+		} else nil
+	}, {
+		back = if var1 then reactModule.createElement(SearchBackButton, { LayoutOrder = 1 }) else nil,
+		field = reactModule.createElement(foundationModule.View, { tag = "grow auto-y", LayoutOrder = 2 }, {
+			input = reactModule.createElement(SearchField, { hasExit = var1, testId = p1.testId })
+		})
 	})
 end

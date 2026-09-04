@@ -126,8 +126,8 @@ function ParticipantDialogContainer(p1)
 		chatText = if fFlagEnableChatDetailsOpenChatModule then var1.chatText else nil,
 		reportUserText = var1.reportUserText,
 		removeFromGroupText = var1.removeFromGroupText,
-		chatUnavailableWithUser = if fFlagFriendsChatPlaceholderRenameFix then "Feature.Chat.Message.ChatUnavailableWithUser" else "",
-		networkErrorText = if fFlagFriendsChatPlaceholderRenameFix then "Feature.Toast.NetworkingError.SomethingIsWrong" else ""
+		chatUnavailableWithUser = if fFlagFriendsChatPlaceholderRenameFix then "Feature.Chat.Message.ChatUnavailableWithUser" else nil,
+		networkErrorText = if fFlagFriendsChatPlaceholderRenameFix then "Feature.Toast.NetworkingError.SomethingIsWrong" else nil
 	})
 	local viewUserProfile = useIsExternalNavigationAvailableModule({ enumScreensModule.ViewUserProfile })[enumScreensModule.ViewUserProfile]
 	local var12 = if fFlagAppChatEnableTrustedFriendEntryPointModule then useTrustedFriendActionModule(var1.participantId) else nil

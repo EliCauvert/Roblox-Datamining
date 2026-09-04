@@ -1058,7 +1058,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Robloxが、プレイヤー
 CoreScripts.TextChat.ChatWindow.Transcribing,文字起こし中...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,認識できませんでした。もう一度お試しください。
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,その言語にはまだ対応していません。
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,マイクを使用するには、デバイスの設定を開き、Robloxにマイクへのアクセスを許可してください。
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,マイクを使用するには、こちらをタップしてデバイス設定を更新してください。
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,マイクを使用するには、デバイスの設定を開き、Robloxにマイクの使用を許可してください。
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,マイクにアクセスできません
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,音声でメッセージを送信する場合、その音声は当社のプライバシーポリシーに従って処理され、すぐに削除されます。
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,音声文字起こしによるテキストチャットを有効化しました
@@ -4026,7 +4027,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,この措置が間違いによるも
 Feature.SettingsHub.Prompt.JoinedVoiceChat,ボイスチャットに参加しました
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,ボイスチャットに接続しています
-Feature.SettingsHub.Prompt.LeaveVoiceChat,ボイスチャットが切断されました
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,ボイスチャットから切断されました
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,マイクとカメラの使用が停止されました
 Feature.SettingsHub.Prompt.MicUseSuspended,マイクの使用停止中

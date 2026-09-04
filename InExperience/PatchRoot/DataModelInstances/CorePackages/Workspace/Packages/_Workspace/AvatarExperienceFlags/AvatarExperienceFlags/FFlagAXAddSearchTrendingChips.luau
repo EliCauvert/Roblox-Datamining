@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXAddSearchTrendingChips3", false)
+﻿return game:DefineFastFlag("AXAddSearchTrendingChips4", false)

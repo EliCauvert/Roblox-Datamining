@@ -11,13 +11,18 @@ return function(p1)
 	local savedFrameAssetId = p1.savedFrameAssetId
 	local isSavedConfigLoading = p1.isSavedConfigLoading
 	local showFrames = p1.showFrames
+	local initialFrameAssetId = p1.initialFrameAssetId
+	local initialFrameSelectionRequestId = p1.initialFrameSelectionRequestId
+	local isInitialFrameSelectionLoading = p1.isInitialFrameSelectionLoading
+	local isInitialFrameAvailable = p1.isInitialFrameAvailable
 	local var1, var2 = reactModule.useState(nil)
 	local var3, var4 = reactModule.useState(nil)
 	local var5, var6 = reactModule.useState(0)
 	local var7, var8 = reactModule.useState(1)
 	local var9 = reactModule.useRef(false)
 	local var10 = reactModule.useRef(false)
-	local var11 = reactModule.useCallback(function()
+	local var11 = reactModule.useRef(nil)
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: isSavedConfigLoading (ref), var2 (ref), savedCloseupConfig (ref), var6 (ref), var8 (ref), fFlagEditProfileFramesEnabled (copy), showFrames (ref), var4 (ref), savedFrameAssetId (ref), constantsModule (copy)
 		if isSavedConfigLoading then return end
 		var2(savedCloseupConfig.emoteAssetId)
@@ -53,14 +58,16 @@ return function(p1)
 		isSavedConfigLoading
 	})
 	reactModule.useEffect(function()
-		-- upvalues: fFlagEditProfileFramesEnabled (copy), showFrames (ref), var10 (ref), isSavedConfigLoading (ref), var4 (ref), savedFrameAssetId (ref), constantsModule (copy)
-		if fFlagEditProfileFramesEnabled and showFrames and (not var10.current and not isSavedConfigLoading) then
-			var10.current = true
-			var4(savedFrameAssetId or constantsModule.ProfileFrameNoneId)
-			
-			return
-		end
-	end, { savedFrameAssetId, isSavedConfigLoading, showFrames })
+		-- upvalues: initialFrameSelectionRequestId (ref), var11 (ref), fFlagEditProfileFramesEnabled (copy), showFrames (ref), var10 (ref), isSavedConfigLoading (ref), isInitialFrameSelectionLoading (ref), var4 (ref), initialFrameAssetId (ref), isInitialFrameAvailable (ref), savedFrameAssetId (ref), constantsModule (copy)
+		if not fFlagEditProfileFramesEnabled or not showFrames or var10.current and not (initialFrameSelectionRequestId ~= nil and initialFrameSelectionRequestId ~= var11.current) or (isSavedConfigLoading or isInitialFrameSelectionLoading) then return end
+		var10.current = true
+		var11.current = initialFrameSelectionRequestId
+		var4(if initialFrameAssetId == nil or not isInitialFrameAvailable then savedFrameAssetId or constantsModule.ProfileFrameNoneId else initialFrameAssetId)
+	end, {
+		initialFrameAssetId, initialFrameSelectionRequestId,
+		isInitialFrameSelectionLoading, isInitialFrameAvailable, savedFrameAssetId,
+		isSavedConfigLoading, showFrames
+	})
 	
 	return {
 		selectedEmoteId = var1,
@@ -87,6 +94,6 @@ return function(p1)
 			-- upvalues: var2 (ref)
 			var2(nil)
 		end, {}),
-		resetFromSavedConfig = var11
+		resetFromSavedConfig = var12
 	}
 end

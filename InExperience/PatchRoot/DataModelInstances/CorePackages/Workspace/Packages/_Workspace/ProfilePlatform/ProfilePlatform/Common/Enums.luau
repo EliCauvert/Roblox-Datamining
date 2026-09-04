@@ -46,6 +46,7 @@ return {
 		PendingIncomingTrustedConnection = "PendingIncomingTrustedConnection",
 		Block = "Block",
 		CannotAddFriend = "CannotAddFriend",
+		Call = if require(parent.SharedFlags).FFlagFriendsCallingClientGate_DEV then "Call" else "",
 		Chat = "Chat",
 		EditAlias = "EditAlias",
 		EditAppearance = if fFlagProfilePlatformEnableEditAppearanceMenuModule then "EditAppearance" else "",

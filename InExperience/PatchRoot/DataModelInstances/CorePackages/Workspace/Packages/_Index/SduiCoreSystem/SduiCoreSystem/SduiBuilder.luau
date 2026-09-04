@@ -14,7 +14,6 @@ local mapServerBindingProps = sduiCompatModule.mapServerBindingProps
 local serverBindingPropMap = sduiCompatModule.ServerBindingPropMap
 local sduiUsageRecorderModule = require(sduiCoreSystem.Analytics.SduiUsageRecorder)
 local recordV1ComponentUsageModule = require(sduiCoreSystem.Analytics.recordV1ComponentUsage)
-local fFlagSduiUsageTelemetry = require(parent.SharedFlags).FFlagSduiUsageTelemetry
 local t = {}
 
 return {
@@ -41,7 +40,7 @@ return {
 		}
 	end,
 	tryCreateEagerProcessedComponentConfig = function(p1, p2, p3, p4, p5)
-		-- upvalues: sduiErrorType (ref), tutilsModule (ref), validateInterfaceModule (ref), uiComponentInterface (ref), mapServerBindingProps (ref), serverBindingPropMap (ref), fFlagSduiUsageTelemetry (ref), recordV1ComponentUsageModule (ref), sduiUsageRecorderModule (ref), parsePropsModule (ref), sduiBuilderProcessingPhase (ref)
+		-- upvalues: sduiErrorType (ref), tutilsModule (ref), validateInterfaceModule (ref), uiComponentInterface (ref), mapServerBindingProps (ref), serverBindingPropMap (ref), recordV1ComponentUsageModule (ref), sduiUsageRecorderModule (ref), parsePropsModule (ref), sduiBuilderProcessingPhase (ref)
 		local instrumentation = p2.dependencies.instrumentation
 		instrumentation:startTimerFlow("EagerProcess")
 		
@@ -121,7 +120,7 @@ return {
 				}, p2.appPage)
 			end
 		end
-		if fFlagSduiUsageTelemetry and not var1.__usageRecorded then
+		if not var1.__usageRecorded then
 			recordV1ComponentUsageModule(p2.appPage, var1)
 			var1.__usageRecorded = true
 			sduiUsageRecorderModule.scheduleFlush()

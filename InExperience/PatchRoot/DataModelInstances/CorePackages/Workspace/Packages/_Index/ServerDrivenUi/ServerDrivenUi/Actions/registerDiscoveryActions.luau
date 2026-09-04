@@ -200,6 +200,13 @@ return function()
 				return require(serverDrivenUi.Actions.SduiSetGameTileNotInterestedAction)
 			end
 		} else nil,
+		[sduiActionType.UndoGameTileNotInterested] = if fFlagLuaAppSduiGameTileFeedback then {
+			skipUnifiedLogging = true,
+			lazyHandler = function()
+				-- upvalues: serverDrivenUi (copy)
+				return require(serverDrivenUi.Actions.SduiUndoGameTileNotInterestedAction)
+			end
+		} else nil,
 		[sduiActionType.OpenMarketplaceTryOn] = {
 			skipUnifiedLogging = false,
 			lazyHandler = function()

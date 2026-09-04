@@ -53,6 +53,7 @@ return {
 		
 		local var3 = false
 		local var4 = false
+		local var5 = nil
 		local t_1 = {
 			kind = "tts",
 			usesDecoder = false,
@@ -96,33 +97,40 @@ return {
 				var4 = false
 			end,
 			syncToClock = function(p3)
-				-- upvalues: var2 (write), var1 (write), var3 (write), startTime (ref), var4 (write)
+				-- upvalues: var2 (write), var1 (write), var3 (write), var5 (write), startTime (ref), var4 (write)
 				if var2 or var1 == nil or not var3 then return end
+				var5 = p3
+				local var6 = var5 ~= nil and var5 < p3
+				
 				if startTime <= p3 then
 					local maxValue = math.max(0, p3 - startTime)
 					
 					if var4 then
 						local timeLength = var1.TimeLength
+						local var7 = if timeLength > 0 then maxValue < timeLength else true
 						
-						if (if timeLength > 0 then maxValue < timeLength else true) and math.abs(var1.TimePosition - maxValue) > 0.1 then
-							var1.TimePosition = maxValue
+						if var7 then
+							var7 = maxValue - var1.TimePosition
 							
-							return
+							if var7 > 0.1 or var7 < -0.5 then
+								var1.TimePosition = maxValue
+								
+								return
+							end
 						end
-					else
-						local timeLength = var1.TimeLength
-						
-						if not (if timeLength > 0 then maxValue < timeLength else true) then return end
-						var1.TimePosition = maxValue
-						var1.PlaybackSpeed = 1
-						
-						if not var1.IsPlaying then
-							var1:Play()
-						end
-						var4 = true
-						
-						return
+					elseif not var6 then return end
+					local timeLength = var1.TimeLength
+					
+					if not (if timeLength > 0 then maxValue < timeLength else true) then return end
+					var1.TimePosition = maxValue
+					var1.PlaybackSpeed = 1
+					
+					if not var1.IsPlaying then
+						var1:Play()
 					end
+					var4 = true
+					
+					return
 				elseif var4 then
 					var1.PlaybackSpeed = 0
 					var1.TimePosition = 0

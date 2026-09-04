@@ -1058,7 +1058,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,
 CoreScripts.TextChat.ChatWindow.Transcribing,正在轉錄…
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,我們沒聽清楚，請再試一次。
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,我們尚未支援該語言。
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,若要使用麥克風，請前往裝置設定，並授予 Roblox 麥克風權限。
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,若要使用麥克風，請輕觸此處以更新裝置設定。
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,若要使用麥克風，請前往裝置設定，並授予 Roblox 麥克風權限。
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,無法存取麥克風
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,若要使用語音傳送訊息，我們會依據《隱私權政策》處理你的音訊，並立即將其刪除。
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,你已啟用語音轉文字聊天
@@ -4027,7 +4028,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,我們搞錯了嗎？<br /><u>回報
 Feature.SettingsHub.Prompt.JoinedVoiceChat,您已加入語音聊天
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,你已連接至語音聊天
-Feature.SettingsHub.Prompt.LeaveVoiceChat,語音聊天已斷線
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,你已中斷語音聊天
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,麥克風和相機暫時停用
 Feature.SettingsHub.Prompt.MicUseSuspended,已禁止麥克風功能

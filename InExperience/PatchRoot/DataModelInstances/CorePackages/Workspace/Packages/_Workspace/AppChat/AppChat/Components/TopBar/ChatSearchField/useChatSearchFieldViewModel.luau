@@ -21,16 +21,19 @@ return function(p1)
 	local var5 = reactModule.useRef(nil)
 	local var6 = reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, reactModule.useCallback(inputHandlersModule.onRelease(function(p2)
 		-- upvalues: var3 (ref), onExit (ref)
-		p2:cancel()
 		local current = var3.current
+		local var7 = current ~= Enum.KeyCode.None and (p2.eventData ~= nil and p2.eventData.KeyCode == current)
 		
-		if current == Enum.KeyCode.None or not p2.eventData or p2.eventData.KeyCode ~= current then
-			onExit()
+		if not var7 and onExit == nil then return end
+		p2:cancel()
+		
+		if var7 then
+			var3.current = Enum.KeyCode.None
 			
 			return
 		end
-		var3.current = Enum.KeyCode.None
-	end), { onExit }), nil, var5)
+		onExit()
+	end), { onExit or false }), nil, var5)
 	local var7 = reactFocusNavigationModule.useFocusGuiObject()
 	local var8 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
 	local var9 = reactModule.useCallback(function()
@@ -69,6 +72,7 @@ return function(p1)
 		onFocusLost = var4,
 		inputRef = var1,
 		containerRef = var6,
+		testId = p1.testId,
 		LayoutOrder = p1.LayoutOrder
 	}
 end

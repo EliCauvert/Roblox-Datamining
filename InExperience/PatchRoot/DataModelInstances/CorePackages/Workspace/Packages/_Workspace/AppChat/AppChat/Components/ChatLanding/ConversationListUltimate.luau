@@ -182,10 +182,8 @@ return reactModule.memo(function(p2)
 		
 		if p2.shouldLogHeaderEntryExposures ~= false then
 			partyPageCarouselExperimentation.logExposure()
+			squadQuickStartExperimentation.logExposure()
 			
-			if squadQuickStartExperimentation.isLogExposureEnabled then
-				squadQuickStartExperimentation.logExposure()
-			end
 			if fFlagAppChatRemoveConversationListDividerIxpEnabledModule then
 				IXPService:LogFlagLinkedUserLayerExposure(fStringAppChatRemoveConversationListDividerIxpLayerModule)
 			end

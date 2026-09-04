@@ -20,7 +20,6 @@ local validateInterfaceModule = require(sduiCoreSystem.validateInterface)
 local uiComponentInterface = sduiConfigTypesModule.UiComponentInterface
 local sduiUsageRecorderModule = require(sduiCoreSystem.Analytics.SduiUsageRecorder)
 local recordV1ComponentUsageModule = require(sduiCoreSystem.Analytics.recordV1ComponentUsage)
-local fFlagSduiUsageTelemetry = require(parent.SharedFlags).FFlagSduiUsageTelemetry
 local t = {}
 local var1 = nil
 
@@ -147,7 +146,7 @@ local var2 = reactModule.memo(function(p1)
 end, compareSduiPropsModule)
 
 return reactModule.memo(function(p2)
-	-- upvalues: sduiErrorType (ref), reactModule (ref), SduiErrorComponent (ref), validateInterfaceModule (ref), uiComponentInterface (ref), sduiErrorsModule (ref), fFlagSduiUsageTelemetry (ref), recordV1ComponentUsageModule (ref), sduiUsageRecorderModule (ref), sduiConditionalPropWrapperModule (ref), var2 (ref)
+	-- upvalues: sduiErrorType (ref), reactModule (ref), SduiErrorComponent (ref), validateInterfaceModule (ref), uiComponentInterface (ref), sduiErrorsModule (ref), recordV1ComponentUsageModule (ref), sduiUsageRecorderModule (ref), sduiConditionalPropWrapperModule (ref), var2 (ref)
 	if not p2.componentConfig then
 		p2.sduiContext.dependencies.logger.reportError(sduiErrorType.NilComponentConfig, { name = p2.debugName }, p2.sduiContext.appPage)
 		
@@ -166,7 +165,7 @@ return reactModule.memo(function(p2)
 			}, p2.sduiContext.appPage)
 		end
 	end
-	if fFlagSduiUsageTelemetry and not p2.componentConfig.__usageRecorded then
+	if not p2.componentConfig.__usageRecorded then
 		recordV1ComponentUsageModule(p2.sduiContext.appPage, p2.componentConfig)
 		p2.componentConfig.__usageRecorded = true
 		sduiUsageRecorderModule.scheduleFlush()

@@ -16,6 +16,7 @@ return function()
 	local var11, var12 = signalsModule.createSignal({ available = {}, active = {} })
 	local var13, var14 = signalsModule.createSignal({})
 	local var15, var16 = signalsModule.createSignal(constantsModule.MIN_COLUMNS)
+	local var17, var18 = signalsModule.createSignal(false)
 	
 	return {
 		store = {
@@ -27,13 +28,15 @@ return function()
 			getTrialAvailabilities = var11,
 			getBonusPromotionEligibility = var13,
 			getItemsPerRow = var15,
+			getShouldOpenToRobuxTab = var17,
 			onShopOpened = jest.fn(),
 			fetchAllShopData = jest.fn(),
 			prefetchWidgetsOnly = jest.fn(),
 			refreshShopItemInfo = jest.fn(),
 			fetchGamePassOwnership = jest.fn(),
 			pollGamePassOwnership = jest.fn(),
-			setItemsPerRow = var16
+			setItemsPerRow = var16,
+			setShouldOpenToRobuxTab = var18
 		},
 		setCategories = var2,
 		setSections = var4,

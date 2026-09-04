@@ -1040,7 +1040,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox genera automaticamen
 CoreScripts.TextChat.ChatWindow.Transcribing,Trascrizione in corso...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Non abbiamo capito! Riprova.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Non supportiamo ancora quella lingua!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Per utilizzare il microfono, vai alle impostazioni del tuo dispositivo e concedi a Roblox l'autorizzazione ad accedervi."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Per utilizzare il microfono, modifica qui le impostazioni del tuo dispositivo."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"Per utilizzare il microfono, vai alle impostazioni del tuo dispositivo e concedi a Roblox l'autorizzazione ad accedervi."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Impossibile accedere al microfono
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Per inviare messaggi con la tua voce, elaboreremo il tuo audio e lo cancelleremo subito, in conformità con la nostra informativa sulla privacy."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Hai abilitato la chat vocale
@@ -4009,7 +4010,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Pensi che ci sia stato un errore?<br
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Hai Partecipato alla Chat Vocale
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,Ti sei iscritto alla chat vocale
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Hai effettuato la connessione alla chat vocale
-Feature.SettingsHub.Prompt.LeaveVoiceChat,Chat vocale disconnessa
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Hai effettuato la disconnessione dalla chat vocale
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Uso del microfono e videocamera sospeso
 Feature.SettingsHub.Prompt.MicUseSuspended,Utilizzo microfono sospeso

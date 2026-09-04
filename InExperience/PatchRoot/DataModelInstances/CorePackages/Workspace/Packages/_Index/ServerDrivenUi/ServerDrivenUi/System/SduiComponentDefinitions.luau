@@ -588,6 +588,7 @@ function t_1.new()
 			universeId = parseStringProp,
 			placeId = parseStringProp,
 			collectionId = if fFlagLuaAppSduiGameTileFeedback then parseStringProp else nil,
+			hiddenStateComponent = if fFlagLuaAppSduiGameTileFeedback then parseLazyUiComponentProp else nil,
 			overflowMenuComponent = if fFlagLuaAppSduiGameTileFeedback then parseLazyUiComponentProp else nil,
 			disableHoldToPlay = parseBooleanProp,
 			ratingText = parseStringProp,
@@ -599,6 +600,11 @@ function t_1.new()
 		}
 	}
 	
+	if fFlagLuaAppSduiGameTileFeedback then
+		t_3._registeredComponents[sduiComponentType.GameTileHiddenState] = {
+			component = require(serverDrivenUi.Content.SduiGameTileHiddenState)
+		}
+	end
 	if fFlagSduiEnableHeroUnitBottomRow then
 		t_3._registeredComponents[sduiComponentType.HeroUnitBottomRow] = {
 			component = require(serverDrivenUi.Content.SduiHeroUnitBottomRow),

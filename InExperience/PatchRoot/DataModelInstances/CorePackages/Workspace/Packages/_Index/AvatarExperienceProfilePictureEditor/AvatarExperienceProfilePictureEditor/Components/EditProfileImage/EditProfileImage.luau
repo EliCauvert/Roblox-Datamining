@@ -107,6 +107,8 @@ local function EditProfileImageBody(p1)
 	local cutoutFieldOfViewDeg = var5.cutoutFieldOfViewDeg
 	local var6 = useEditProfileImageViewModelModule({
 		mode = p1.mode,
+		initialFrameAssetId = p1.initialFrameAssetId,
+		initialFrameSelectionRequestId = p1.initialFrameSelectionRequestId,
 		onClose = p1.onClose,
 		onSaveSuccess = p1.onSaveSuccess,
 		cutoutFieldOfViewDeg = cutoutFieldOfViewDeg
@@ -297,6 +299,8 @@ return function(p1)
 		})
 	}, reactModule.createElement(EditProfileImageBody, {
 		mode = p1.mode,
+		initialFrameAssetId = p1.initialFrameAssetId,
+		initialFrameSelectionRequestId = p1.initialFrameSelectionRequestId,
 		showCloseButton = p1.showCloseButton,
 		onClose = p1.onClose,
 		onSaveSuccess = p1.onSaveSuccess,

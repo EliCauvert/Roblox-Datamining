@@ -2400,7 +2400,6 @@ Feature.SettingsHub.Prompt.GotIt,
 Feature.SettingsHub.Prompt.IncorrectNudge,Видишь ошибку?<br /><u>Отправь отзыв.</u>
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Ты присоединяешься к голосовому чату
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
-Feature.SettingsHub.Prompt.LeaveVoiceChat,Голосовой чат отключён
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Приостановлено использование микрофона и камеры
 Feature.SettingsHub.Prompt.MicUseSuspended,Использование микрофона отключено
 Feature.SettingsHub.Prompt.MicrophonePermission,Не удаётся получить доступ к микрофону

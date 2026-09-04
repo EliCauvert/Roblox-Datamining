@@ -995,7 +995,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox erstellt automatisch
 CoreScripts.TextChat.ChatWindow.Transcribing,Wird transkribiert …
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Das haben wir nicht verstanden! Bitte versuche es erneut.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Diese Sprache wird noch nicht unterstützt!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Um dein Mikrofon zu verwenden, gehe zu deinen Geräteeinstellungen und erteile Roblox die Berechtigung, auf dein Mikrofon zuzugreifen."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Tippe hier, um deine Geräteeinstellungen zu aktualisieren, sodass du das Mikrofon verwenden kannst."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"Gehe zu deinen Geräteeinstellungen und erteile Roblox die Berechtigung, auf dein Mikrofon zuzugreifen, damit du es verwenden kannst."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Zugriff auf Mikrofon nicht möglich
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Damit du Nachrichten mit deiner Stimme senden kannst, verarbeiten wir dein Audio und löschen es gemäß unserer Datenschutzrichtlinie sofort wieder."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Du hast den Sprach-zu-Text-Chat aktiviert
@@ -3961,7 +3962,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Haben wir uns geirrt? <br /><u>Fehle
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Du hast Sprachchat aktiviert
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Du bist mit dem Sprachchat verbunden
-Feature.SettingsHub.Prompt.LeaveVoiceChat,Sprachchat getrennt
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Du hast die Verbindung zum Sprachchat getrennt
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Mikrofon- und Kameranutzung gesperrt
 Feature.SettingsHub.Prompt.MicUseSuspended,Mikrofonnutzung gesperrt

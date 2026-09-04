@@ -1059,7 +1059,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,
 CoreScripts.TextChat.ChatWindow.Transcribing,Transcription…
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Nous n'avons pas bien entendu ! Réessaie.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Cette langue n'est pas encore prise en charge !
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Pour utiliser ton microphone, rends-toi dans les paramètres de ton appareil, puis autorise l'accès pour Roblox."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Pour utiliser ton microphone, appuie ici afin de mettre à jour les paramètres de ton appareil."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"Pour utiliser ton microphone, rends-toi dans les paramètres de ton appareil, puis autorise l'accès pour Roblox."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Impossible d'accéder au microphone
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Pour transcrire tes messages vocaux en texte, nous traitons ton audio et le supprimons immédiatement, conformément à notre politique de confidentialité."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Chat vocal vers texte activé
@@ -4028,7 +4029,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Nous nous sommes trompés ?<br /><u
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Vous avez rejoint le Chat vocal
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Connecté(e) au chat vocal
-Feature.SettingsHub.Prompt.LeaveVoiceChat,Chat vocal déconnecté
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Déconnecté(e) du chat vocal
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Utilisation du microphone et de la caméra suspendue
 Feature.SettingsHub.Prompt.MicUseSuspended,Utilisation du microphone suspendue

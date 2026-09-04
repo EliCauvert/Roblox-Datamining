@@ -5,7 +5,7 @@ local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedF
 local fFlagEnableInExperienceAvatarSwitcher = sharedFlagsModule.FFlagEnableInExperienceAvatarSwitcher
 local fFlagAddInviteFriendsIntegration = sharedFlagsModule.FFlagAddInviteFriendsIntegration
 local fFlagAppNavMyStatsTab = sharedFlagsModule.FFlagAppNavMyStatsTab
-local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
+local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local argoPartyExperimentation = require(corePackagesService.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
 
 return {
@@ -33,8 +33,8 @@ return {
 	Gallery = require(script.Pages.Gallery),
 	Help = require(script.Pages.Help),
 	TraversalHistory = if require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).Traversal.Flags.FFlagAddTraversalHistory and sharedFlagsModule.FFlagIntegrateTraversalHistoryInSideSheet then require(script.Pages.TraversalHistory) else nil,
-	LeaveConfirmation = if fFlagEnableSideSheet then require(script.Pages.LeaveConfirmation) else nil,
-	RespawnConfirmation = if fFlagEnableSideSheet then require(script.Pages.RespawnConfirmation) else nil,
+	LeaveConfirmation = if isSideSheetEnabledModule then require(script.Pages.LeaveConfirmation) else nil,
+	RespawnConfirmation = if isSideSheetEnabledModule then require(script.Pages.RespawnConfirmation) else nil,
 	ShopEntrypoint = if sharedFlagsModule.FFlagEnableInExperienceShop then require(script.InExperienceShop.ShopEntrypoint) else nil,
-	SwitchServer = if fFlagEnableSideSheet and sharedFlagsModule.FFlagShowSwitchServerButton then require(script.SwitchServer) else nil
+	SwitchServer = if isSideSheetEnabledModule and sharedFlagsModule.FFlagShowSwitchServerButton then require(script.SwitchServer) else nil
 }

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXBackgroundGenerationInventoryUpsellBanner", false) and require(script.Parent.FFlagAXBackgroundGeneration)

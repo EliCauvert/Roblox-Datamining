@@ -34,6 +34,7 @@ return {
 	useNavigateToGameDetails = require(script.useNavigateToGameDetails),
 	NotInterestedUserSignalTelemetryEventConfigs = require(script.NotInterestedUserSignalTelemetryEventConfigs),
 	activateGameNotInterested = require(script.activateGameNotInterested),
+	undoGameNotInterested = require(script.undoGameNotInterested),
 	getGameTileHiddenStore = require(script.HiddenGameTile.getGameTileHiddenStore),
 	HiddenTileContent = require(script.HiddenGameTile.HiddenTileContent),
 	EmphasisGameTile = require(script.EmphasisGameTile),

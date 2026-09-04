@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AddFriendsPageUseSections", false) and (require(script.Parent.FFlagEnableGetFriendshipStatus) and (require(script.Parent.FFlagAddFriendsPresenceStoreMigration) and require(script.Parent.FFlagFriendsRequestsMergeListsWithoutDuplicates)))

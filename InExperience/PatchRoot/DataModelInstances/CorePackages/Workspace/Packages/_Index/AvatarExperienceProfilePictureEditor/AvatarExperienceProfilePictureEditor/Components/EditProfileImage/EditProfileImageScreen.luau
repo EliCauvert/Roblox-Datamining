@@ -15,6 +15,8 @@ return roactNavigationModule.withNavigationFocus(function(p1)
 	
 	return reactModule.createElement(editProfileImageModule, {
 		mode = if p1.navigation.getParam then p1.navigation.getParam("mode", enumsModule.EditProfileImageMode.Default) else enumsModule.EditProfileImageMode.Default,
+		initialFrameAssetId = p1.initialFrameAssetId,
+		initialFrameSelectionRequestId = p1.initialFrameSelectionRequestId,
 		showCloseButton = p1.isFocused ~= false,
 		onClose = reactModule.useCallback(function()
 			-- upvalues: closeProfilePictureEditorModule (copy), p1 (ref)

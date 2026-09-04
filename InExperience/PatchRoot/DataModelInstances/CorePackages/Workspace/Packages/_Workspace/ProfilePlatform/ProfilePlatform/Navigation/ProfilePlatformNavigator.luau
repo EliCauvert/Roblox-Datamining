@@ -28,6 +28,8 @@ local fFlagEditProfileBackgroundEnabled = require(parent.SharedFlags).FFlagEditP
 local fFlagEnableCommunityVerificationModalModule = require(profilePlatform.Flags.FFlagEnableCommunityVerificationModal)
 local fFlagEditProfileImageV2Enabled = require(parent.SharedFlags).FFlagEditProfileImageV2Enabled
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
+local fFlagAXHideBottomNavForEditProfileImage = require(parent.SharedFlags).FFlagAXHideBottomNavForEditProfileImage
+local fFlagEnableBottomNavOnMarketplace = require(parent.SharedFlags).FFlagEnableBottomNavOnMarketplace
 local t = {
 	overlayEnabled = true,
 	overlayTransparency = 0.5,
@@ -39,11 +41,13 @@ local t_1 = {
 	renderUnderlyingPage = true
 }
 
-local function _(p1)
+local function _(p1, p2)
 	-- upvalues: t_1 (ref)
-	return function(p2)
-		-- upvalues: t_1 (copy), p1 (ref)
-		return if p2.navigation.getParam("fullBleed") then t_1 else p1
+	p2 = p2 or t_1
+	
+	return function(p3)
+		-- upvalues: p2 (ref), p1 (ref)
+		return if p3.navigation.getParam("fullBleed") then p2 else p1
 	end
 end
 
@@ -52,48 +56,30 @@ local function LazyEditProfileImageContainer(p1)
 	return reactModule.createElement(require(profilePlatform.Components.EditProfileImage.EditProfileImageContainer), p1)
 end
 
-local list = {
-	{
-		[enumsModule.Screens.ProfileMain] = profilePlatformViewAdaptorModule
-	},
-	{
-		[enumsModule.Screens.EditProfilePage] = {
-			screen = editProfileLandingModule,
-			navigationOptions = if fFlagAXEnableProfileTab then function(p1)
-				-- upvalues: t_1 (ref), t (ref)
-				return if p1.navigation.getParam("fullBleed") then t_1 else t
-			end else t
-		}
-	},
-	{
-		[enumsModule.Screens.EditDisplayNameErrorModal] = {
-			screen = editDisplayNameErrorModalModule,
-			navigationOptions = t
-		}
-	},
-	{
-		[enumsModule.Screens.UsernameInsufficientFundsModal] = {
-			screen = usernameInsufficientFundsModalModule,
-			navigationOptions = t
-		}
-	},
-	{
-		[enumsModule.Screens.SetAliasModal] = { screen = setAliasModal, navigationOptions = t }
-	},
-	{
-		[enumsModule.Screens.ContextualMenu] = {
-			screen = profileContextualMenuModule,
-			navigationOptions = {
-				overlayEnabled = true,
-				overlayTransparency = 1,
-				absorbInput = false
-			}
-		}
-	}
+local t_2 = {}
+local t_3 = {
+	[enumsModule.Screens.ProfileMain] = profilePlatformViewAdaptorModule
 }
+local t_4 = {}
+local editProfilePage = enumsModule.Screens.EditProfilePage
+local t_5 = { screen = editProfileLandingModule }
+
+if fFlagAXEnableProfileTab then
+	local var1 = t_1
+	
+	local var2 = function(p1)
+		-- upvalues: var1 (ref), t (ref)
+		return if p1.navigation.getParam("fullBleed") then var1 else t
+	end
+else
+	local var2 = t
+end
+t_5.navigationOptions = var2
+t_4[editProfilePage] = t_5
+-- Unknown statement at pc 2: <SetList>
 
 if fFlagAddVideoToCommunityProfile then
-	table.insert(list, {
+	table.insert(t_2, {
 		[enumsModule.Screens.VideoFullscreen] = {
 			screen = videoFullscreenPageModule,
 			navigationOptions = t
@@ -101,7 +87,7 @@ if fFlagAddVideoToCommunityProfile then
 	})
 end
 if fFlagEnableCommunityVerificationModalModule then
-	table.insert(list, {
+	table.insert(t_2, {
 		[enumsModule.Screens.CommunityVerificationModal] = {
 			screen = communityVerificationModalModule,
 			navigationOptions = t
@@ -109,7 +95,7 @@ if fFlagEnableCommunityVerificationModalModule then
 	})
 end
 if fFlagEditProfileBackgroundEnabled then
-	table.insert(list, {
+	table.insert(t_2, {
 		[enumsModule.Screens.EditProfileBackground] = {
 			screen = editProfileBackgroundContainerModule,
 			navigationOptions = {
@@ -120,32 +106,33 @@ if fFlagEditProfileBackgroundEnabled then
 		}
 	})
 end
-local t_2 = {}
+local t_6 = {}
 local editProfileSubScreen = enumsModule_1.Screens.EditProfileSubScreen
-local t_3 = { screen = editProfileScreenViewAdapterModule }
+local t_7 = { screen = editProfileScreenViewAdapterModule }
 
 if fFlagAXEnableProfileTab then
-	local t_4 = {
+	local t_8 = {
 		overlayEnabled = true,
 		overlayTransparency = 0.5,
 		absorbInput = false
 	}
+	local var3 = t_1
 	
-	local var1 = function(p1)
-		-- upvalues: t_1 (ref), t_4 (ref)
-		return if p1.navigation.getParam("fullBleed") then t_1 else t_4
+	local var4 = function(p1)
+		-- upvalues: var3 (ref), t_8 (ref)
+		return if p1.navigation.getParam("fullBleed") then var3 else t_8
 	end
 else
-	local var1 = {
+	local var4 = {
 		overlayEnabled = true,
 		overlayTransparency = 0.5,
 		absorbInput = false
 	}
 end
-t_3.navigationOptions = var1
-t_2[editProfileSubScreen] = t_3
-table.insert(list, t_2)
-table.insert(list, {
+t_7.navigationOptions = var4
+t_6[editProfileSubScreen] = t_7
+table.insert(t_2, t_6)
+table.insert(t_2, {
 	[enumsModule_1.Screens.EditProfileToast] = {
 		screen = editProfileToastScreenModule,
 		navigationOptions = {
@@ -157,34 +144,39 @@ table.insert(list, {
 })
 
 if fFlagEditProfileImageV2Enabled then
-	local t_4 = {}
+	local var5 = if fFlagAXHideBottomNavForEditProfileImage and fFlagEnableBottomNavOnMarketplace then false else nil
+	local t_8 = {
+		overlayEnabled = true,
+		overlayTransparency = 1,
+		absorbInput = true,
+		tabBarVisible = var5
+	}
+	local t_9 = {
+		overlayEnabled = false,
+		absorbInput = true,
+		renderUnderlyingPage = true,
+		tabBarVisible = var5
+	}
+	local t_10 = {}
 	local editProfileImageProfilePlatform = enumsModule_1.Screens.EditProfileImageProfilePlatform
-	local t_5 = { screen = LazyEditProfileImageContainer }
+	local t_11 = { screen = LazyEditProfileImageContainer }
 	
 	if fFlagAXEnableProfileTab then
-		local t_6 = {
-			overlayEnabled = true,
-			overlayTransparency = 1,
-			absorbInput = true
-		}
+		local t_9_1 = t_9 or t_1
 		
-		local var2 = function(p1)
-			-- upvalues: t_1 (ref), t_6 (ref)
-			return if p1.navigation.getParam("fullBleed") then t_1 else t_6
+		local var6 = function(p1)
+			-- upvalues: t_9_1 (ref), t_8 (ref)
+			return if p1.navigation.getParam("fullBleed") then t_9_1 else t_8
 		end
 	else
-		local var2 = {
-			overlayEnabled = true,
-			overlayTransparency = 1,
-			absorbInput = true
-		}
+		local var6 = t_8
 	end
-	t_5.navigationOptions = var2
-	t_4[editProfileImageProfilePlatform] = t_5
-	table.insert(list, t_4)
+	t_11.navigationOptions = var6
+	t_10[editProfileImageProfilePlatform] = t_11
+	table.insert(t_2, t_10)
 end
 if fFlagSocialEnableProfileInspectAndBuy then
-	table.insert(list, {
+	table.insert(t_2, {
 		[enumsModule.Screens.InspectAvatarSheet] = {
 			screen = inspectAvatarSheetContainerModule,
 			navigationOptions = {
@@ -194,13 +186,13 @@ if fFlagSocialEnableProfileInspectAndBuy then
 			}
 		}
 	})
-	table.insert(list, {
+	table.insert(t_2, {
 		[enumsModule.Screens.PurchaseConfirmationModal] = {
 			screen = purchaseConfirmationModalModule,
 			navigationOptions = t
 		}
 	})
-	table.insert(list, {
+	table.insert(t_2, {
 		[enumsModule.Screens.InsufficientRobuxDialog] = {
 			screen = insufficientRobuxDialogModule,
 			navigationOptions = t
@@ -208,7 +200,7 @@ if fFlagSocialEnableProfileInspectAndBuy then
 	})
 end
 if fFlagProfilePlatformEnableMomentsModule then
-	table.insert(list, {
+	table.insert(t_2, {
 		[enumsModule.Screens.MomentsAll] = {
 			screen = momentsGridPageModule,
 			navigationOptions = {
@@ -218,14 +210,14 @@ if fFlagProfilePlatformEnableMomentsModule then
 			}
 		}
 	})
-	table.insert(list, {
+	table.insert(t_2, {
 		[enumsModule.Screens.MomentsFeed] = {
 			screen = momentsFeedPageModule,
 			navigationOptions = { overlayEnabled = false, absorbInput = true }
 		}
 	})
 end
-return roactNavigationModule.createRobloxStackNavigator(list, {
+return roactNavigationModule.createRobloxStackNavigator(t_2, {
 	defaultNavigationOptions = {
 		overlayEnabled = true,
 		absorbInput = true,

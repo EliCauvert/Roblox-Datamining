@@ -39,7 +39,8 @@ return reactModule.memo(function(p1)
 			hasOverflowButton = if fFlagLuaAppSduiGameTileFeedback then var2 else true,
 			shouldShowAnchor = if fFlagLuaAppSduiGameTileFeedback then var3 else true,
 			setFocusRef = if fFlagLuaAppSduiGameTileFeedback then p1.setFocusRef else nil,
-			onMenuOpenChanged = if fFlagLuaAppSduiGameTileFeedback then p1.onMenuOpenChanged else nil
+			onMenuOpenChanged = if fFlagLuaAppSduiGameTileFeedback then p1.onMenuOpenChanged else nil,
+			zIndex = if fFlagLuaAppSduiGameTileFeedback then p1.zIndex else nil
 		})
 	end
 	local var4 = useBackButtonBinding(reactModule.useCallback(function()
@@ -79,7 +80,8 @@ return reactModule.memo(function(p1)
 		buttonIsCircular = if fFlagSduiExperienceDetailsSupport then p1.buttonIsCircular else nil,
 		buttonTag = if fFlagSduiExperienceDetailsSupport then p1.buttonTag else nil,
 		setFocusRef = if fFlagLuaAppSduiGameTileFeedback and p1.setFocusRef then p1.setFocusRef else var4,
-		onMenuOpenChanged = if fFlagLuaAppSduiGameTileFeedback then p1.onMenuOpenChanged else nil
+		onMenuOpenChanged = if fFlagLuaAppSduiGameTileFeedback then p1.onMenuOpenChanged else nil,
+		zIndex = if fFlagLuaAppSduiGameTileFeedback then p1.zIndex else nil
 	}
 	
 	return if var6 then reactModule.createElement(foundationModule.View, { tag = "auto-xy", LayoutOrder = p1.layoutOrder }, {

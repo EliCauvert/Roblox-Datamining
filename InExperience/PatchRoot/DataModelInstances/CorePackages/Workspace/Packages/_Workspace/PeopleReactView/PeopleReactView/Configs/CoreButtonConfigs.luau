@@ -18,9 +18,9 @@ local fFlagShowSwitchServerButton = sharedFlagsModule.FFlagShowSwitchServerButto
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
 local fFlagHidePeoplePageInviteFriends = sharedFlagsModule.FFlagHidePeoplePageInviteFriends
 local fFlagAddInviteFriendsIntegration = sharedFlagsModule.FFlagAddInviteFriendsIntegration
-local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
 local fFlagPeopleTabUseSwitchServerModule = require(peopleReactView.Flags.FFlagPeopleTabUseSwitchServerModule)
-local var1 = fFlagEnableSideSheet and require(parent.PioneerUtils).isPioneerLaunch()
+local isSideSheetEnabledModule = require(parent.InExperienceSideSheetUtils.isSideSheetEnabled)
+local var1 = require(parent.PioneerUtils).isPioneerLaunch()
 local constantsModule = require(peopleReactView.Constants)
 local STANDARD_SERVER = coreScriptsCommonModule.Constants.STANDARD_SERVER
 local constants = switchServerModule.Constants
@@ -39,7 +39,7 @@ local function _()
 end
 
 return function(p1, p2)
-	-- upvalues: fFlagShowSwitchServerButton (ref), fFlagPeopleTabUseSwitchServerModule (ref), reactModule (ref), signalsModule (ref), runService (ref), robloxReplicatedStorageService (ref), useSignalState (ref), getSwitchServerStore (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), constantsModule (ref), constants (ref), peopleServiceModule (ref), useSignalBinding (ref), fFlagHidePeoplePageInviteFriends (ref), fFlagAddInviteFriendsIntegration (ref), fFlagEnableSideSheet (ref), getFFlagNewPeoplePageIcons (ref), var1 (ref), playersService (ref), STANDARD_SERVER (ref), fFlagEnablePeoplePageButtonOnMount (ref), var2 (write), switchServerTelemetry (ref)
+	-- upvalues: fFlagShowSwitchServerButton (ref), fFlagPeopleTabUseSwitchServerModule (ref), reactModule (ref), signalsModule (ref), runService (ref), robloxReplicatedStorageService (ref), useSignalState (ref), getSwitchServerStore (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), constantsModule (ref), constants (ref), peopleServiceModule (ref), useSignalBinding (ref), fFlagHidePeoplePageInviteFriends (ref), fFlagAddInviteFriendsIntegration (ref), isSideSheetEnabledModule (ref), getFFlagNewPeoplePageIcons (ref), var1 (ref), playersService (ref), STANDARD_SERVER (ref), fFlagEnablePeoplePageButtonOnMount (ref), var2 (write), switchServerTelemetry (ref)
 	local var3 = if fFlagShowSwitchServerButton and not fFlagPeopleTabUseSwitchServerModule then reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), runService (copy), robloxReplicatedStorageService (copy)
 		local var4, var5 = signalsModule.createSignal(nil)
@@ -96,10 +96,10 @@ return function(p1, p2)
 	end)
 	
 	return reactModule.useMemo(function()
-		-- upvalues: fFlagHidePeoplePageInviteFriends (copy), fFlagAddInviteFriendsIntegration (copy), fFlagEnableSideSheet (copy), var6 (ref), getFFlagNewPeoplePageIcons (copy), constantsModule (copy), var1 (copy), runService (copy), playersService (copy), settingsHubService (ref), peopleAnalyticsManager (ref), var10 (ref), allPlayersMuted (ref), var7 (ref), var8 (ref), peopleVoiceChatStore (ref), fFlagShowSwitchServerButton (copy), constants (copy), fFlagPeopleTabUseSwitchServerModule (copy), var5 (ref), var4 (ref), STANDARD_SERVER (copy), p2 (ref), fFlagEnablePeoplePageButtonOnMount (copy), var2 (copy), switchServerTelemetry (copy), var11 (ref), localMuted (ref), p1 (ref), var9 (ref)
+		-- upvalues: fFlagHidePeoplePageInviteFriends (copy), fFlagAddInviteFriendsIntegration (copy), isSideSheetEnabledModule (copy), var6 (ref), getFFlagNewPeoplePageIcons (copy), constantsModule (copy), var1 (copy), runService (copy), playersService (copy), settingsHubService (ref), peopleAnalyticsManager (ref), var10 (ref), allPlayersMuted (ref), var7 (ref), var8 (ref), peopleVoiceChatStore (ref), fFlagShowSwitchServerButton (copy), constants (copy), fFlagPeopleTabUseSwitchServerModule (copy), var5 (ref), var4 (ref), STANDARD_SERVER (copy), p2 (ref), fFlagEnablePeoplePageButtonOnMount (copy), var2 (copy), switchServerTelemetry (copy), var11 (ref), localMuted (ref), p1 (ref), var9 (ref)
 		local t = {}
 		
-		if not fFlagHidePeoplePageInviteFriends or not fFlagAddInviteFriendsIntegration or not fFlagEnableSideSheet then
+		if not fFlagHidePeoplePageInviteFriends or not fFlagAddInviteFriendsIntegration or not isSideSheetEnabledModule then
 			table.insert(t, {
 				id = "inviteFriends",
 				layoutOrder = 1,
@@ -140,7 +140,7 @@ return function(p1, p2)
 			end
 		})
 		
-		if fFlagShowSwitchServerButton and not fFlagEnableSideSheet then
+		if fFlagShowSwitchServerButton and not isSideSheetEnabledModule then
 			table.insert(t, {
 				id = "switchServer",
 				isNewIcon = true,
