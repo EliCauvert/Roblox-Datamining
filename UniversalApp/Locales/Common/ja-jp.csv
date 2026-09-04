@@ -686,6 +686,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimationには�
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,CurveAnimation内のボディパーツは、HumanoidRootPartから{minHeight}マスより下、または{maxDistance}マスより遠くには配置できません。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimationの子であるMarkerCurvesとAnimationRigDataには、子を含めることはできません
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,CurveAnimationの階層にScripts、LocalScripts、またはModuleScriptsが含まれています。これらは削除してください。
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,CurveAnimation内の「{bodyPartName}」に、重複するボディパーツフォルダ「{instancePath}」が含まれています。各ボディパーツは、アニメーション階層内に1回だけ含めることができます。
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,CurveAnimationデータを読み込めませんでした。アニメーションアセットが無効またはアクセスできない可能性があります。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimationに、無効な階層を持つボディパーツフォルダ「{folderName}」が含まれています（許可されていない子フォルダが含まれるか、子フォルダの設定が正しくありません）
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,CurveAnimationのフォルダ「{boneName}」は、認識されているHRD/DRDの骨格名ではありません。アニメーションのサブフォルダは、有効なR15ボディパーツまたは認識されている骨格名（HeadBase、Spine、Chest、LeftClavicle、RightClavicle、LeftToeBase、RightToeBase、またはLeftHandIndex1などの指の骨格）である必要があります。
@@ -713,6 +714,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimationに�
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,CurveAnimationでは、{time}秒目の時点で、ボディパーツ「{bodyPart}」が{speed}度/秒の速度で回転しています。最大速度は{maxSpeed}度/秒です。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,CurveAnimationでは、{time}秒目の時点で、ボディパーツ「{bodyPart}」が{speed}マス/秒の速度で移動しています。最大速度は{maxSpeed}マス/秒です。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,CurveAnimation内のボディパーツ「{bodyPart}」は、フレーム間で{maxMovement}マスより多く移動します。アニメーションを修正してください。
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,CurveAnimation構造が無効です：{detail}。アニメーションが想定されるスキーマに従っていることを確認してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimationには子孫が{count}件あります。最大許容数は{maxAllowed}件です。子孫の数を減らしてください。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimationに、キーの数が多すぎるCurveが含まれています。Curveあたりのキーの最大数は{maxAllowed}件です。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimationに、{maxAllowed}件を超えるMarkerCurveが含まれています。MarkerCurveの子孫は{maxAllowed}件以下にしてください。
@@ -778,6 +780,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,{partName}メッシュ�
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,{partName}メッシュ{axis}軸サイズの{currentSize}スタッドが、個々のパーツの最小許容サイズ{minSize}スタッドより小さくなっています。メッシュを拡大してください。
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,アタッチメント{attName}は、{partName}の子孫要素内に正確に1回だけ存在する必要があります。
 Common.UGCValidation.ErrorLabel.NoAttributes,「{RootInstanceName}」（またはその子孫）に属性が含まれています。「{InstanceNameList}」から属性を削除する必要があります。
+Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName}「{InstancePath}}」に無効なプロパティがあります：{ProblematicProperties}。表示されているバイト数の上限を超えています（上限が0の場合、そのプロパティは空である必要があります）。それ以外のプロパティにはNaN/Inf値が含まれているか、デフォルトのサイズ上限を超えています。
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,「{PartName}」のリグアタッチメント「{AttachmentName}」は、このボディパーツの隣接パーツに接続するジョイント境界の近くに配置する必要があります。現在の位置[{CurrentPosition}]は接続面から離れすぎています。[{ClosestValidPosition}]に近づけてください。
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Robloxにアセットをアップロードするには、必ず1件のインスタンスと関連したアップロードタイプを選択する必要があります。
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,このアセットは大きすぎるためアップロードできません（{sizeBytes}バイト。上限は{maxSizeBytes}バイトです）。サイズを小さくしてから、もう一度お試しください。
@@ -1017,6 +1020,10 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,以下のすべての�
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,以下の「同意する」ボタンをクリックするとあなたの国設定がベトナムに変更され、Roblox – VNGアプリに移動して元に戻れなくなります。あなたによるRoblox - VNGアプリの使用は以下の規約に従うことが条件となり、Roblox Corporationの一切の過去の規約に取って代わります。以下を確認して同意してください。
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,更新済み規約
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,申し訳ありませんが利用規約への同意で問題が発生しました。もう一度お試しください。
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,
+CommonUI.UserAgreements.Popup.KISAConsent.Message,以下の規約を確認し、同意してください。個別の規約に対して同意するかしないかを選択することができます。任意の規約に同意しない場合でもRobloxは引き続きご利用いただけます。
+CommonUI.UserAgreements.Popup.KISAConsent.Title,
 CommonUI.UserAgreements.Popup.KISAMessage,以下の規約を確認し、同意してください。個別の規約に対して同意する場合としない場合があるかもしれません。任意の規約に同意しない場合でもRobloxを使用することができます。
 CommonUI.UserAgreements.Popup.Message,Robloxを使用し続けるには、以下の更新済みの規約に「同意する」を選択してください。未成年者の場合は、親または保護者の方にこれを見せてください。以下の文書で変更がありました。
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,オプション: Robloxから最新リリース情報、期間限定プロモーションなどのメール購読にサインアップします。
@@ -1113,7 +1120,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Robloxが、プレイヤー
 CoreScripts.TextChat.ChatWindow.Transcribing,文字起こし中...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,認識できませんでした。もう一度お試しください。
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,その言語にはまだ対応していません。
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,マイクを使用するには、デバイスの設定を開き、Robloxにマイクへのアクセスを許可してください。
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,マイクを使用するには、こちらをタップしてデバイス設定を更新してください。
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,マイクを使用するには、デバイスの設定を開き、Robloxにマイクの使用を許可してください。
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,マイクにアクセスできません
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,音声でメッセージを送信する場合、その音声は当社のプライバシーポリシーに従って処理され、すぐに削除されます。
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,音声文字起こしによるテキストチャットを有効化しました
@@ -1692,6 +1700,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,使用量の上限�
 Feature.Avatar.BackgroundGeneration.Error.Moderation,そのプロンプトは当社のガイドラインに沿っていません。別の内容を入力してみてください。
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,この背景はRobloxコミュニティ基準に準拠していないため、持ち物に追加されませんでした。新しい背景を生成してみてください。
 Feature.Avatar.BackgroundGeneration.Error.System,背景の生成中に問題が発生しました。もう一度お試しください。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,全期間の公開回数の上限に達しました。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,1日あたりの公開回数の上限に達しました。明日もう一度お試しください。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,1時間あたりの公開回数の上限に達しました。1時間後にもう一度お試しください。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,1か月あたりの公開回数の上限に達しました。来月もう一度お試しください。
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,詳細
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus限定
@@ -4073,6 +4085,7 @@ Feature.MusicPlayer.Action.GoToSongDetails,曲の詳細へ
 Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
+Feature.NotApproved.Action.Pending,
 Feature.NotApproved.Action.ReactivateAccount,アカウントを再開する
 Feature.NotApproved.Action.ReportMistake,審査ミスを報告
 Feature.NotApproved.Action.RuleConfirmation,ルールを知り、それに従うことに同意します。
@@ -4544,7 +4557,7 @@ Feature.Parents.Title.SomethingWentWrong,
 Feature.PlatformRestriction.Action.Continue,
 Feature.PlatformRestriction.Action.Pending,
 Feature.PlatformRestriction.Action.Signout,
-Feature.PlatformRestriction.Content.NeedPermission,Robloxを使用するには、保護者の許可が必要です。
+Feature.PlatformRestriction.Content.NeedPermission,Robloxを使用するには、保護者の許可が必要です。保護者の方が承認したら、ログアウトしてから再度ログインしてRobloxにアクセスしてください。
 Feature.PlatformRestriction.Title.AskParent,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,サーチから

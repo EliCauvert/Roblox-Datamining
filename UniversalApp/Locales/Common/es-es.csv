@@ -1019,6 +1019,10 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,Acepto todos los térmi
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"Al hacer clic en el botón de Aceptar de abajo, estás cambiando tu país a Vietnam, translandándote a la aplicación Roblox–VNG y este cambio no se puede revertir. Tu uso de la aplicación Roblox-VNG está sujeto a los siguientes términos que reemplazan cualquier término anterior con Roblox Corporation. Revisa y da tu consentimiento a lo siguiente:"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Acuerdo actualizado
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,"Lo sentimos, hubo un problema al intentar aceptar los Términos de uso. Vuelve a intentarlo."
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,
+CommonUI.UserAgreements.Popup.KISAConsent.Message,Revisa y acepta los siguientes términos. Puedes elegir si estás de acuerdo o en desacuerdo con cada uno de los términos. Podrás seguir usando Roblox aunque no aceptes los términos opcionales.
+CommonUI.UserAgreements.Popup.KISAConsent.Title,
 CommonUI.UserAgreements.Popup.KISAMessage,Please review and consent to the following terms. You may choose to agree or disagree to individual terms. You may still use Roblox if you do not agree to the optional terms.
 CommonUI.UserAgreements.Popup.Message,"Para continuar usando Roblox, selecciona Acepto para aceptar nuestros Términos de uso actualizados abajo. Si eres menor de edad, muestra este mensaje a tu padre, madre o tutor. Se han realizado cambios en los siguientes documentos:"
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,"Opcional: También me gustaría suscribirme para recibir correos electrónicos de Roblox sobre lanzamientos más recientes, promociones de tiempo limitado y más."
@@ -1115,7 +1119,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox genera automáticame
 CoreScripts.TextChat.ChatWindow.Transcribing,Transcribiendo...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,¡No entendimos! Inténtalo de nuevo.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Todavía no hay soporte en ese idioma.
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Para usar tu micrófono, ve a la configuración de tu dispositivo y otorga permiso a Roblox para usar el micrófono."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Para usar tu micrófono, toca aquí y actualiza la configuración de tu dispositivo."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"Para usar tu micrófono, ve a la configuración de tu dispositivo y otorga permiso a Roblox para usar el micrófono."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,No se puede acceder al micrófono
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Para enviar mensajes con tu voz, procesaremos tu audio y lo eliminaremos de inmediato, de acuerdo con nuestra política de privacidad."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Activaste el chat de voz a texto

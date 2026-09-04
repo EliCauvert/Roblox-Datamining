@@ -76,13 +76,31 @@ local function variantsFactory(p1)
 				bar = if flagsModule.FoundationSliderBeta then { height = p1.Size.Size_250 } else nil,
 				hitbox = if flagsModule.FoundationSliderBeta then nil else { height = p1.Size.Size_700 }
 			}
+		},
+		orientation = {
+			[true] = {
+				selectionGroup = {
+					SelectionBehaviorLeft = Enum.SelectionBehavior.Escape,
+					SelectionBehaviorRight = Enum.SelectionBehavior.Escape,
+					SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
+					SelectionBehaviorDown = Enum.SelectionBehavior.Stop
+				}
+			},
+			[false] = {
+				selectionGroup = {
+					SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
+					SelectionBehaviorRight = Enum.SelectionBehavior.Stop,
+					SelectionBehaviorUp = Enum.SelectionBehavior.Escape,
+					SelectionBehaviorDown = Enum.SelectionBehavior.Escape
+				}
+			}
 		}
 	}
 end
 
-return function(p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local slider = variantsContextModule.useVariants("Slider", variantsFactory, p1)
 	
-	return composeStyleVariantModule(slider.common, slider.variants[p3], slider.sizes[p2])
+	return composeStyleVariantModule(slider.common, slider.variants[p3], slider.sizes[p2], slider.orientation[p4])
 end

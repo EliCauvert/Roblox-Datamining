@@ -686,6 +686,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation chứa 
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,Các bộ phận cơ thể trong CurveAnimation không được thấp hơn {minHeight} stud hoặc cách HumanoidRootPart quá {maxDistance} stud. Vui lòng sửa lại hiệu ứng động này.
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,Các mục con MarkerCurves và AnimationRigData của CurveAnimation không được có mức con
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"Hệ thống phân cấp của CurveAnimation chứa Scripts, LocalScripts hoặc ModuleScripts. Vui lòng xóa các phân cấp này."
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,"CurveAnimation chứa thư mục bộ phận cơ thể ""{bodyPartName}"" bị trùng tên tại ""{instancePath}"". Mỗi bộ phận cơ thể chỉ được xuất hiện tối đa một lần trong hệ thống phân cấp của hiệu ứng động."
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,Không tải được dữ liệu CurveAnimation. Tài sản hiệu ứng động có thể không hợp lệ hoặc không truy cập được.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation chứa Thư mục {folderName} được đặt tên theo bộ phận cơ thể có hệ thống phân cấp không hợp lệ (thư mục này có các thư mục con không hợp lệ hoặc chưa được thiết lập chính xác)
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"Thư mục ""{boneName}"" trong CurveAnimation không phải là tên xương HRD/DRD hợp lệ. Các thư mục con của hiệu ứng động phải là bộ phận cơ thể R15 hợp lệ hoặc tên xương được công nhận (ví dụ: HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase, hoặc các xương ngón tay như LeftHandIndex1)."
@@ -713,6 +714,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation có 
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"Trong CurveAnimation, tại thời điểm {time} giây, bộ phận cơ thể {bodyPart} đang di chuyển với tốc độ xoay {speed} độ/giây. Tốc độ tối đa được phép là {maxSpeed} độ/giây. Vui lòng sửa lại hiệu ứng động này."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"Trong CurveAnimation, tại thời điểm {time} giây, bộ phận cơ thể {bodyPart} đang di chuyển với tốc độ {speed} stud/giây. Tốc độ tối đa được phép là {maxSpeed} stud/giây. Vui lòng sửa lại hiệu ứng động này."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,Bộ phận cơ thể {bodyPart} trong CurveAnimation di chuyển hơn {maxMovement} stud giữa các khung hình. Vui lòng sửa lại hiệu ứng động này.
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,Cấu trúc CurveAnimation không hợp lệ: {detail}. Vui lòng đảm bảo hiệu ứng động tuân thủ lược đồ dự kiến.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation có {count} mục con. Số lượng tối đa cho phép là {maxAllowed}. Vui lòng giảm số lượng mục con.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation chứa các Đường cong có quá nhiều khóa. Mỗi Đường cong chỉ được phép có tối đa {maxAllowed} khóa. Vui lòng sửa lại hiệu ứng động này.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation chứa nhiều hơn {maxAllowed} MarkerCurve. Đảm bảo không có quá {maxAllowed} mục con MarkerCurve.
@@ -1018,6 +1020,10 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,Tôi đồng ý với t
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"Bằng cách nhấn vào Đồng ý, bạn sẽ thay đổi quốc gia của bạn thành Việt Nam, chuyển sang ứng dụng Roblox - VNG và không thể quay lại. Việc bạn sử dụng ứng dụng Roblox - VNG được điều chỉnh bởi các điều khoản dưới đây mà sẽ thay thế hoàn toàn tất cả các điều khoản trước đây giữa bạn và Roblox Corporation. Vui lòng xem xét và xác nhận đồng ý với nội dung sau:"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Thỏa Thuận Được Cập Nhật
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,"Rất tiếc, đã xảy ra sự cố khi cố gắng chấp nhận điều khoản sử dụng. Vui lòng thử lại."
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,Cung cấp thông tin cá nhân cho bên thứ ba
+CommonUI.UserAgreements.Popup.KISAConsent.Message,Vui lòng xem và đồng thuận với các điều khoản sau. Bạn có thể chọn đồng ý hoặc không đồng ý với từng điều khoản riêng lẻ. Bạn vẫn có thể sử dụng Roblox ngay cả khi không đồng ý với các điều khoản không bắt buộc.
+CommonUI.UserAgreements.Popup.KISAConsent.Title,Cần có sự đồng thuận
 CommonUI.UserAgreements.Popup.KISAMessage,Vui lòng xem lại và đồng ý với các điều khoản dưới đây. Bạn có thể chọn đồng ý hoặc không đồng ý với từng điều khoản riêng lẻ. Bạn vẫn dùng được Roblox cho dù bạn không đồng ý với các điều khoản không bắt buộc.
 CommonUI.UserAgreements.Popup.Message,"Để tiếp tục sử dụng Roblox, vui lòng chọn ""Tôi đồng ý"" để đồng ý với điều khoản được cập nhật bên dưới của chúng tôi. Nếu bạn là trẻ vị thành niên, vui lòng đưa thông báo này cho phụ huynh hoặc người giám hộ của bạn. Các thay đổi đã được thực hiện đối với các tài liệu sau:"
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,"Không bắt buộc: Tôi cũng muốn đăng ký để nhận email từ Roblox về các bản phát hành mới nhất, khuyến mãi trong thời gian giới hạn và hơn thế nữa."
@@ -1114,7 +1120,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox tự động tạo t
 CoreScripts.TextChat.ChatWindow.Transcribing,Đang chuyển thành văn bản...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Chúng tôi chưa nghe rõ! Hãy thử lại.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Chúng tôi chưa hỗ trợ ngôn ngữ đó!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Để sử dụng micrô, hãy mở phần cài đặt của thiết bị rồi cấp quyền truy cập micrô cho Roblox."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Để sử dụng micrô, hãy nhấn vào đây để cập nhật tùy chọn cài đặt thiết bị của bạn."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"Để sử dụng micrô, hãy mở phần cài đặt của thiết bị rồi cấp quyền truy cập micrô cho Roblox."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Không thể truy cập micrô
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Để gửi tin nhắn bằng giọng nói, chúng tôi sẽ xử lý âm thanh của bạn và xóa ngay sau đó, theo đúng chính sách quyền riêng tư."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Bạn đã bật tính năng chuyển giọng nói thành văn bản
@@ -1693,6 +1700,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Bạn đã đạt h
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Câu lệnh đó không tuân thủ hướng dẫn của chúng tôi. Hãy thử mô tả nội dung khác.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Hình nền này không tuân thủ Tiêu chuẩn cộng đồng Roblox nên đã không được thêm vào kho của bạn. Hãy thử tạo hình nền mới.
 Feature.Avatar.BackgroundGeneration.Error.System,Đã xảy ra lỗi khi tạo nền của bạn. Vui lòng thử lại.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,Bạn đã đạt giới hạn đăng trọn đời.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,Bạn đã đạt giới hạn đăng mỗi ngày. Vui lòng thử lại vào ngày mai.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,Bạn đã đạt giới hạn đăng mỗi giờ. Vui lòng thử lại vào giờ tiếp theo.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,Bạn đã đạt giới hạn đăng mỗi tháng. Vui lòng thử lại vào tháng sau.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Mô tả
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Dành riêng cho Plus
@@ -4074,6 +4085,7 @@ Feature.MusicPlayer.Action.GoToSongDetails,Xem chi tiết bài hát
 Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
+Feature.NotApproved.Action.Pending,Chờ xử lý
 Feature.NotApproved.Action.ReactivateAccount,Kích Hoạt Lại Tài Khoản Của Tôi
 Feature.NotApproved.Action.ReportMistake,Báo cáo sai sót
 Feature.NotApproved.Action.RuleConfirmation,Tôi đồng ý tìm hiểu và tuân thủ các quy tắc.
@@ -4545,9 +4557,9 @@ Feature.Parents.Title.EnterParentEmail,Nhập Email Của Phụ Huynh
 Feature.Parents.Title.EnterParentEmailV2,Nhập email của phụ huynh
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlatformRestriction.Action.Continue,
-Feature.PlatformRestriction.Action.Pending,Chờ xử lý
+Feature.PlatformRestriction.Action.Pending,
 Feature.PlatformRestriction.Action.Signout,
-Feature.PlatformRestriction.Content.NeedPermission,"Để sử dụng Roblox, bạn cần được cha mẹ cho phép."
+Feature.PlatformRestriction.Content.NeedPermission,"Để sử dụng Roblox, bạn cần được cha mẹ cho phép. Sau khi cha mẹ phê duyệt, hãy đăng xuất rồi đăng nhập lại để truy cập Roblox."
 Feature.PlatformRestriction.Title.AskParent,Xin phép cha mẹ
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,Từ phần Tìm kiếm

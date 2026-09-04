@@ -5,16 +5,18 @@ local statusIndicatorVariantModule = require(foundation.Enums.StatusIndicatorVar
 local statusIndicatorShapeModule = require(foundation.Enums.StatusIndicatorShape)
 local _ = require(foundation.Components.Types)
 local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
+local indexBindableModule = require(foundation.Utility.indexBindable)
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local var1 = _G.__DEV__ == true
 local font = Font.new(require(foundation.Constants).BUILDER_SANS_FONT_ASSET, Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
 
 function variantsFactory(p1)
-	-- upvalues: font (ref), statusIndicatorVariantModule (ref), flagsModule (ref), statusIndicatorShapeModule (ref), statusIndicatorSizeModule (ref)
+	-- upvalues: font (ref), flagsModule (ref), statusIndicatorVariantModule (ref), statusIndicatorShapeModule (ref), statusIndicatorSizeModule (ref)
 	return {
 		common = {
-			content = { tag = "auto-xy text-align-x-left", font = font }
+			content = { tag = "auto-xy text-align-x-left", font = font },
+			stroke = if flagsModule.FoundationAvatarBeta then nil else { Thickness = p1.Size.Size_50 }
 		},
 		variants = {
 			[statusIndicatorVariantModule.Alert] = {
@@ -67,14 +69,21 @@ function variantsFactory(p1)
 			}
 		},
 		shape = {
-			[statusIndicatorShapeModule.Circle] = { container = { tag = "radius-circle" } },
+			[statusIndicatorShapeModule.Circle] = {
+				container = { tag = "radius-circle" },
+				stroke = { LineJoinMode = Enum.LineJoinMode.Round }
+			},
 			[statusIndicatorShapeModule.Ring] = {
 				container = { tag = "align-x-center align-y-center radius-circle" },
 				ring = {
 					tag = if flagsModule.FoundationAvatarBeta then "radius-circle bg-surface-100" else "size-100-100 radius-circle bg-surface-100"
-				}
+				},
+				stroke = { LineJoinMode = Enum.LineJoinMode.Round }
 			},
-			[statusIndicatorShapeModule.Square] = { container = { tag = "radius-none" } }
+			[statusIndicatorShapeModule.Square] = {
+				container = { tag = "radius-none" },
+				stroke = { LineJoinMode = Enum.LineJoinMode.Miter }
+			}
 		},
 		sizes = if flagsModule.FoundationAvatarBeta then {
 			[statusIndicatorSizeModule.XSmall] = {
@@ -83,7 +92,8 @@ function variantsFactory(p1)
 				},
 				ring = {
 					size = UDim2.fromOffset(p1.Size.Size_150 / 2, p1.Size.Size_150 / 2)
-				}
+				},
+				stroke = { Thickness = p1.Stroke.Standard }
 			},
 			[statusIndicatorSizeModule.Small] = {
 				container = {
@@ -91,7 +101,8 @@ function variantsFactory(p1)
 				},
 				ring = {
 					size = UDim2.fromOffset(p1.Size.Size_200 / 2, p1.Size.Size_200 / 2)
-				}
+				},
+				stroke = { Thickness = p1.Size.Size_50 }
 			},
 			[statusIndicatorSizeModule.Medium] = {
 				container = {
@@ -99,7 +110,8 @@ function variantsFactory(p1)
 				},
 				ring = {
 					size = UDim2.fromOffset(p1.Size.Size_250 / 2, p1.Size.Size_250 / 2)
-				}
+				},
+				stroke = { Thickness = p1.Size.Size_50 }
 			},
 			[statusIndicatorSizeModule.Pictogram] = {
 				container = {
@@ -107,14 +119,15 @@ function variantsFactory(p1)
 				},
 				ring = {
 					size = UDim2.fromOffset(p1.Size.Size_500 / 2, p1.Size.Size_500 / 2)
-				}
+				},
+				stroke = { Thickness = p1.Stroke.Thicker }
 			}
 		} else nil
 	}
 end
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: flagsModule (ref), var1 (ref), statusIndicatorVariantModule (ref), variantsContextModule (ref), composeStyleVariantModule (ref)
+return function(p1, p2, p3, p4, p5, p6)
+	-- upvalues: flagsModule (ref), var1 (ref), statusIndicatorVariantModule (ref), indexBindableModule (ref), variantsContextModule (ref), composeStyleVariantModule (ref)
 	if not flagsModule.FoundationStatusIndicatorVariantExperiment and var1 then
 		if p2 == statusIndicatorVariantModule.Contrast_Experiment then
 			error("Contrast is not a supported StatusIndicator variant.")
@@ -125,5 +138,10 @@ return function(p1, p2, p3, p4, p5)
 	end
 	local statusIndicator = variantsContextModule.useVariants("StatusIndicator", variantsFactory, p1)
 	
-	return composeStyleVariantModule(statusIndicator.common, statusIndicator.variants[p2], statusIndicator.hasValue[p3], statusIndicator.shape[p4], if flagsModule.FoundationAvatarBeta then if not p3 then statusIndicator.sizes[p5] else {} else nil)
+	return composeStyleVariantModule(statusIndicator.common, statusIndicator.variants[p2], statusIndicator.hasValue[p3], statusIndicator.shape[p4], if flagsModule.FoundationAvatarBeta then if not p3 then statusIndicator.sizes[p5] else {} else nil, if p6 then {
+		stroke = {
+			Color = indexBindableModule(p6, "Color3"),
+			Transparency = indexBindableModule(p6, "Transparency")
+		}
+	} else nil)
 end

@@ -687,6 +687,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation에는 �
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,CurveAnimation의 신체 부위는 HumanoidRootPart에서 {minHeight}스터드보다 낮거나 {maxDistance}스터드 이상 떨어져 있으면 안 됩니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation의 자식 항목인 MarkerCurves 및 AnimationRigData는 자식 항목을 포함할 수 없습니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"CurveAnimation 계층 구조에 Scripts, LocalScripts 또는 ModuleScripts가 포함되어 있습니다. 해당 항목을 제거하세요."
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,CurveAnimation에 중복 신체 부위 폴더({bodyPartName})가 '{instancePath}'에 포함되어 있습니다. 각 신체 부위는 애니메이션 계층 구조에 최대 한 번만 나타날 수 있습니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,CurveAnimation 데이터를 불러오는 데 실패했습니다. 애니메이션 애셋이 유효하지 않거나 액세스할 수 없는 상태일 수 있습니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation에 유효하지 않은 계층 구조를 가진 신체 부위 폴더({folderName})가 포함되어 있습니다(허용되지 않거나 잘못 설정된 자식 항목이 있음).
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"CurveAnimation의 '{boneName}' 폴더는 인식되는 HRD/DRD 뼈대 이름이 아닙니다. 애니메이션 하위 폴더는 유효한 R15 신체 부위이거나 인식되는 뼈대 이름(예: HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase 또는 LeftHandIndex1과 같은 손가락 뼈대)이어야 합니다."
@@ -714,6 +715,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,"CurveAnimation에 
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,CurveAnimation의 시간이 {time}초일 때 신체 부위({bodyPart})가 초당 {speed}의 회전 속도로 움직이고 있습니다. 초당 최대 회전 속도는 {maxSpeed}입니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,CurveAnimation의 시간이 {time}초일 때 신체 부위({bodyPart})가 초당 {speed}의 스터드 속도로 움직이고 있습니다. 초당 최대 스터드 속도는 {maxSpeed}입니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,CurveAnimation의 신체 부위( {bodyPart})가 프레임 간에 {maxMovement} 이상의 스터드 속도로 움직입니다. 애니메이션을 수정하세요.
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,CurveAnimation 구조가 유효하지 않습니다. {detail}. 애니메이션이 예상 스키마를 따르는지 확인하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation에 {count}개의 하위 항목이 있습니다. 최대 허용 개수는 {maxAllowed}개이니 하위 항목 개수를 줄이세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation의 Curve에 대한 키 개수가 너무 많습니다. Curve당 최대 개수는 {maxAllowed}개입니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation에 {maxAllowed}개 이상의 MarkerCurve가 포함되어 있습니다. MarkerCurve 하위 항목은 {maxAllowed}개 이하여야 합니다.
@@ -1019,6 +1021,10 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,I agree to all terms an
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"By clicking on the Agree button below, you are changing your country to Vietnam, migrating to the Roblox – VNG app and cannot revert back. Your use of the Roblox - VNG app is subject to the following terms that supersede any previous terms with Roblox Corporation. Please review and consent to the following:"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,약관 업데이트
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,죄송합니다. 이용 약관에 동의하는 동안 문제가 발생했습니다. 다시 시도하세요.
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,개인정보의 제3자 제공
+CommonUI.UserAgreements.Popup.KISAConsent.Message,다음 약관을 검토하고 이에 동의해 주세요. 개별 약관에 따라 동의하거나 동의하지 않음을 선택할 수 있습니다. 선택 약관에 동의하지 않더라도 Roblox 이용은 여전히 가능할 수 있습니다.
+CommonUI.UserAgreements.Popup.KISAConsent.Title,
 CommonUI.UserAgreements.Popup.KISAMessage,다음 약관을 검토하고 동의해 주세요. 개별 약관에 동의하거나 동의하지 않을 수 있습니다. 선택 약관에 동의하지 않더라도 Roblox를 계속 사용할 수 있습니다.
 CommonUI.UserAgreements.Popup.Message,Roblox를 계속 사용하려면 '동의'를 눌러 아래 업데이트된 약관에 동의해 주세요. 미성년자인 경우 부모님이나 보호자에게 이 문서를 보여 주세요. 변경된 부분은 다음과 같습니다.
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,"선택 사항: Roblox의 최신 릴리스, 기간 한정 프로모션 정보 등도 이메일로 받아 보고 싶어요."
@@ -1115,7 +1121,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox는 플레이어 메�
 CoreScripts.TextChat.ChatWindow.Transcribing,텍스트로 변환 중...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,인식되지 않았습니다! 다시 시도하세요.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,해당 언어는 아직 지원되지 않습니다!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,마이크를 사용하려면 기기 설정으로 이동하여 Roblox에 마이크 권한을 부여하세요.
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,마이크를 사용하려면 여기를 탭하여 기기 설정을 업데이트하세요.
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,마이크를 사용하려면 기기 설정으로 이동하여 Roblox에 마이크 권한을 부여하세요.
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,마이크에 액세스할 수 없습니다
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"음성으로 메시지를 보내기 위해, 저희는 개인정보 처리방침에 따라 사용자의 오디오를 처리하고 즉시 삭제합니다."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,음성으로 텍스트 채팅을 사용하도록 설정하셨습니다
@@ -1694,6 +1701,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,사용량 한도에
 Feature.Avatar.BackgroundGeneration.Error.Moderation,해당 프롬프트는 가이드라인에 위배됩니다. 표현을 수정해 보세요.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,이 배경은 Roblox 커뮤니티 규정을 준수하지 않으므로 인벤토리에 추가되지 않았습니다. 새로운 배경을 생성해보세요.
 Feature.Avatar.BackgroundGeneration.Error.System,배경을 생성하는 중에 문제가 발생했습니다. 다시 시도하세요.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,평생 게시 한도에 도달했습니다.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,일일 게시 한도에 도달했습니다. 내일 다시 시도하세요.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,시간당 게시 한도에 도달했습니다. 한 시간 후에 다시 시도하세요.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,월간 게시 한도에 도달했습니다. 다음 달에 다시 시도하세요.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{max}개 중 {count}개
 Feature.Avatar.BackgroundGeneration.Label.Description,설명
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus 독점 제공
@@ -4077,6 +4088,7 @@ Feature.MusicPlayer.Action.GoToSongDetails,'노래 세부 정보'로 이동
 Feature.MusicPlayer.Action.Report,리포트
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
+Feature.NotApproved.Action.Pending,응답 대기 중
 Feature.NotApproved.Action.ReactivateAccount,내 계정 재활성화
 Feature.NotApproved.Action.ReportMistake,오류 신고
 Feature.NotApproved.Action.RuleConfirmation,규칙을 숙지하고 따를 것에 동의합니다.
@@ -4550,7 +4562,7 @@ Feature.Parents.Title.SomethingWentWrong,
 Feature.PlatformRestriction.Action.Continue,
 Feature.PlatformRestriction.Action.Pending,
 Feature.PlatformRestriction.Action.Signout,
-Feature.PlatformRestriction.Content.NeedPermission,Roblox를 사용하려면 보호자의 허락이 필요합니다.
+Feature.PlatformRestriction.Content.NeedPermission,Roblox를 사용하려면 보호자의 허락이 필요합니다. 보호자의 승인이 완료되면 로그아웃한 다음 다시 로그인하여 Roblox에 액세스하세요.
 Feature.PlatformRestriction.Title.AskParent,보호자에게 허락 요청
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,검색에서

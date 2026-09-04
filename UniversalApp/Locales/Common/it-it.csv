@@ -670,6 +670,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation contien
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,"In CurveAnimation, le parti del corpo non possono trovarsi a un'altezza inferiore a {minHeight} stud o superiore a {maxDistance} stud dalla HumanoidRootPart. Correggi l'animazione."
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,Gli elementi child MarkerCurves e AnimationRigData in CurveAnimation non possono avere elementi child
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"La gerarchia di CurveAnimation contiene Script, LocalScript o ModuleScript. Rimuovili."
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,"CurveAnimation contiene una cartella duplicata denominata come una parte del corpo, ""{bodyPartName}"", in ""{instancePath}"". Ogni parte del corpo può apparire al massimo una volta nella gerarchia dell'animazione."
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,Impossibile caricare i dati di CurveAnimation. La risorsa di animazione potrebbe non essere valida o accessibile.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,"La gerarchia della cartella {folderName} denominata come una parte del corpo in CurveAnimation non è valida, poiché contiene elementi child non consentiti o configurati in modo errato"
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"La cartella {boneName} in CurveAnimation non ha il nome di un osso HRD/DRD riconosciuto. Il nome delle sottocartelle di animazione deve essere una parte del corpo R15 valida o un osso riconosciuto (ad esempio, HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase oppure un osso delle dita come LeftHandIndex1)."
@@ -697,6 +698,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation cont
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"In CurveAnimation, al tempo di {time} secondi, la parte del corpo {bodyPart} si muove a una velocità di rotazione di {speed} gradi/secondo, mentre il limite massimo consentito è di {maxSpeed} gradi/secondo. Correggi l'animazione."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"In CurveAnimation, al tempo di {time} secondi, la parte del corpo {bodyPart} si muove a una velocità di {speed} stud/secondo, mentre il limite massimo è di {maxSpeed} stud/secondo. Correggi l'animazione."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,"In CurveAnimation, la parte del corpo {bodyPart} si sposta di più di {maxMovement} stud tra un fotogramma e l'altro. Correggi l'animazione."
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,La struttura CurveAnimation non è valida: {detail}. Assicurati che l'animazione segua lo schema previsto.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation ha {count} discendenti. Riducili per rispettare il limite consentito ({maxAllowed}).
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation contiene Curve con troppe chiavi. La quantità massima consentita è di {maxAllowed}. Correggi l'animazione.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation contiene più di {maxAllowed} elemento/i MarkerCurve. La quantità massima di discendenti è {maxAllowed}: elimina tutti i duplicati.
@@ -1002,7 +1004,11 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,Accetto tutti i termini
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"Facendo clic sul pulsante Accetto qui sotto, si sta cambiando il tuo paese in Vietnam, migrando verso l'app Roblox - VNG e non si può tornare indietro. L'utilizzo dell'app Roblox - VNG è soggetto ai seguenti termini che sostituiscono eventuali termini precedenti con Roblox Corporation. Si prega di rivedere e acconsentire a quanto segue:"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Accordi aggiornati
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,"Siamo spiacenti, c'è stato un problema durante il tentativo di accettare i termini d'uso. Per favore riprova."
-CommonUI.UserAgreements.Popup.KISAMessage,Si prega di rivedere e acconsentire ai seguenti termini. È possibile scegliere di accettare o non accettare i termini individuali. Puoi ancora usare Roblox se non accetti i termini opzionali.
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,Condizioni d'uso
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,
+CommonUI.UserAgreements.Popup.KISAConsent.Message,Si prega di rivedere e acconsentire ai seguenti termini. È possibile scegliere di accettare o non accettare i termini individuali. Puoi ancora usare Roblox se non accetti i termini opzionali.
+CommonUI.UserAgreements.Popup.KISAConsent.Title,Consenso necessario
+CommonUI.UserAgreements.Popup.KISAMessage,
 CommonUI.UserAgreements.Popup.Message,"Per continuare a utilizzare Roblox, seleziona ""Sono d'accordo"" per accettare i nostri termini aggiornati qui sotto. Se sei un minore, mostralo al tuo genitore o tutore. Sono state apportate modifiche ai seguenti documenti:"
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,"Facoltativo: vorrei anche iscrivermi per ricevere email da Roblox sulle ultime uscite, promozioni a tempo limitato e altro ancora."
 CommonUI.UserAgreements.Popup.SignupMessage,"Toccando Registrati, accetti i nostri Termini di servizio e prendi atto della nostra Informativa sulla privacy."
@@ -1096,7 +1102,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox genera automaticamen
 CoreScripts.TextChat.ChatWindow.Transcribing,Trascrizione in corso...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Non abbiamo capito! Riprova.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Non supportiamo ancora quella lingua!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Per utilizzare il microfono, vai alle impostazioni del tuo dispositivo e concedi a Roblox l'autorizzazione ad accedervi."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Per utilizzare il microfono, modifica qui le impostazioni del tuo dispositivo."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"Per utilizzare il microfono, vai alle impostazioni del tuo dispositivo e concedi a Roblox l'autorizzazione ad accedervi."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Impossibile accedere al microfono
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Per inviare messaggi con la tua voce, elaboreremo il tuo audio e lo cancelleremo subito, in conformità con la nostra informativa sulla privacy."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Hai abilitato la chat vocale
@@ -1675,6 +1682,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Hai raggiunto il li
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Questo prompt non rispetta le nostre linee guida. Prova a descrivere qualcos'altro.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Questo sfondo non rispetta le norme comunitarie Roblox, quindi non è stato aggiunto al tuo inventario. Prova a generarne uno nuovo."
 Feature.Avatar.BackgroundGeneration.Error.System,Si è verificato un errore durante la generazione del tuo sfondo. Riprova.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,Hai raggiunto il limite di pubblicazioni complessivo.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,Hai raggiunto il limite di pubblicazioni giornaliero. Riprova domani.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,Hai raggiunto il limite di pubblicazioni orario. Attendi la prossima ora e riprova.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,Hai raggiunto il limite di pubblicazioni mensile. Riprova il mese prossimo.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Descrizione
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,In esclusiva con il piano Plus
@@ -4056,6 +4067,7 @@ Feature.MusicPlayer.Action.GoToSongDetails,Vai ai dettagli del brano
 Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
+Feature.NotApproved.Action.Pending,
 Feature.NotApproved.Action.ReactivateAccount,Riattiva il mio account
 Feature.NotApproved.Action.ReportMistake,Segnala un errore
 Feature.NotApproved.Action.RuleConfirmation,Confermo di essere a conoscenza delle regole e di rispettarle.
@@ -4529,7 +4541,7 @@ Feature.Parents.Title.SomethingWentWrong,
 Feature.PlatformRestriction.Action.Continue,
 Feature.PlatformRestriction.Action.Pending,
 Feature.PlatformRestriction.Action.Signout,
-Feature.PlatformRestriction.Content.NeedPermission,"Per utilizzare Roblox, hai bisogno dell'autorizzazione dei genitori."
+Feature.PlatformRestriction.Content.NeedPermission,"Per utilizzare Roblox, hai bisogno dell'autorizzazione dei genitori. Una volta che questi ultimi avranno dato la loro approvazione, esci e poi effettua di nuovo il login per accedere a Roblox."
 Feature.PlatformRestriction.Title.AskParent,
 Feature.PlayerSearchResults.Action.AddFriend,Aggiungi agli amici
 Feature.PlayerSearchResults.Label.FromSearch,Dallo strumento di ricerca
@@ -5151,7 +5163,7 @@ Feature.VerificationUpsell.Action.PrivacyPolicy,
 Feature.VerificationUpsell.Action.ResendCode,Reinvia codice
 Feature.VerificationUpsell.Action.ResendConfirmationEmail,Invia nuovamente email
 Feature.VerificationUpsell.Action.SendConfirmationEmail,Invia e-mail di conferma
-Feature.VerificationUpsell.Action.TermsOfUse,Condizioni d'uso
+Feature.VerificationUpsell.Action.TermsOfUse,
 Feature.VerificationUpsell.Action.TurnOn,
 Feature.VerificationUpsell.Action.UserEmail,
 Feature.VerificationUpsell.Description.AddEmailTextOver13,"Per continuare con l'acquisto, aggiungi il tuo indirizzo e-mail."

@@ -10,7 +10,9 @@ local iconModule = require(components.Icon)
 local imageModule = require(components.Image)
 local _ = require(components.Types)
 local viewModule = require(components.View)
+local flagsModule = require(foundation.Utility.Flags)
 local blendTransparenciesModule = require(foundation.Utility.blendTransparencies)
+local mapBindableModule = require(foundation.Utility.mapBindable)
 local useBindableModule = require(foundation.Utility.useBindable)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
@@ -26,20 +28,23 @@ local t = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useKnobVariantsModule (ref), colorNamespaceModule (ref), reactModule (ref), useBindableModule (ref), reactIsModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), blendTransparenciesModule (ref), constantsModule (ref), dashModule (ref), imageModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useKnobVariantsModule (ref), colorNamespaceModule (ref), flagsModule (ref), mapBindableModule (ref), reactModule (ref), useBindableModule (ref), reactIsModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), blendTransparenciesModule (ref), constantsModule (ref), dashModule (ref), imageModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useTokensModule()
 	local var3 = usePresentationContext()
 	local var4 = useKnobVariantsModule(var2, var1.size, var3 and var3.colorNamespace == colorNamespaceModule.Inverse)
 	local style = var1.style or var4.knob.style
-	local var5 = reactModule.useCallback(function(p2)
+	local var5 = if flagsModule.FoundationKnobRaisedShadow then mapBindableModule(style, function(p2)
+		return p2.Transparency or 0
+	end) else nil
+	local var6 = reactModule.useCallback(function(p2)
 		-- upvalues: var2 (ref)
 		return {
 			Color3 = var2.Color.Extended.White.White_100.Color3,
 			Transparency = p2.Transparency
 		}
 	end, { var2 })
-	local var6 = reactModule.useMemo(function()
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: var4 (ref), var1 (ref), reactIsModule (copy)
 		local size = var4.knob.size
 		
@@ -60,7 +65,7 @@ return reactModule.memo(function(p1)
 		Icon = if var1.icon then reactModule.createElement(viewModule, {
 			ZIndex = 4,
 			tag = var4.knob.tag,
-			Size = var6,
+			Size = var7,
 			backgroundStyle = var4.iconContainer.backgroundStyle
 		}, reactModule.createElement(iconModule, {
 			name = var1.icon.name,
@@ -84,7 +89,7 @@ return reactModule.memo(function(p1)
 					Transparency = blendTransparenciesModule(p2.Transparency, constantsModule.DISABLED_TRANSPARENCY)
 				}
 			end) else style,
-			Size = var6,
+			Size = var7,
 			stroke = useBindableModule(if var1.stroke then var1.stroke.Transparency else nil):map(function(p2)
 				-- upvalues: var1 (ref), dashModule (copy), blendTransparenciesModule (copy), constantsModule (copy)
 				local stroke = var1.stroke
@@ -98,11 +103,20 @@ return reactModule.memo(function(p1)
 			end):getValue(),
 			testId = `{var1.testId}--circle`
 		}),
-		Shadow = if var1.hasShadow and not var1.isDisabled then reactModule.createElement(imageModule, {
+		Shadow = if var1.hasShadow and not var1.isDisabled then if flagsModule.FoundationKnobRaisedShadow then reactModule.createElement(viewModule, {
+			tag = "position-center-center anchor-center-center radius-circle shadow-raised-100",
+			ZIndex = 3,
+			GroupTransparency = var5,
+			Size = var7,
+			Visible = mapBindableModule(var5, function(p2)
+				return p2 < 1
+			end),
+			testId = `{var1.testId}--shadow`
+		}) else reactModule.createElement(imageModule, {
 			Image = "component_assets/dropshadow_28",
 			ZIndex = 3,
 			tag = var4.knobShadow.tag,
-			imageStyle = if reactIsModule.isBinding(style) then style:map(var5) else var5(style),
+			imageStyle = if reactIsModule.isBinding(style) then style:map(var6) else var6(style),
 			Size = var4.knobShadow.size,
 			testId = `{var1.testId}--shadow`
 		}) else nil

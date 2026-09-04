@@ -686,6 +686,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation henüz 
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,"CurveAnimation'daki vücut parçaları, HumanoidRootPart'tan en fazla {minHeight} birim kare aşağıda veya en fazla {maxDistance} birim kare uzakta olmalıdır. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation alt öğeleri MarkerCurves ve AnimationRigData'nın alt öğeleri olamaz
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"CurveAnimation hiyerarşisi; Scripts, LocalScripts veya ModuleScripts içeriyor. Lütfen bunları kaldır."
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,"CurveAnimation, ""{instancePath}"" konumunda yinelenen ""{bodyPartName}"" vücut parçası klasörünü içeriyor. Her vücut parçası animasyon hiyerarşisinde en fazla bir kez görünebilir."
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,CurveAnimation verileri yüklenemedi. Animasyon varlığı geçersiz veya erişilemez olabilir.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,"CurveAnimation, geçersiz bir hiyerarşiye sahip olan {folderName} vücut parçası klasörünü içeriyor (izin verilmeyen veya yanlış ayarlanmış alt öğeleri var)"
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"CurveAnimation'daki ""{boneName}"" klasörü tanınan bir HRD/DRD kemik adı değil. Animasyon alt klasörleri ya geçerli R15 vücut parçaları ya da tanınan kemik adları olmalıdır (ör. HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase ya da LeftHandIndex1 gibi parmak kemikleri)."
@@ -713,6 +714,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,"CurveAnimation, v�
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"CurveAnimation'da {time}. saniyede, {bodyPart} vücut parçası saniyede {speed} derece dönüş hızıyla hareket ediyor. Saniyede en fazla {maxSpeed} derece dönüş hızıyla hareket edilebilir. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"CurveAnimation'da zaman olarak {time}. saniyede, {bodyPart} vücut parçası saniyede {speed} birim kare hızla hareket ediyor. Saniyede maksimum hız {maxSpeed} birim karedir. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,"CurveAnimation'daki {bodyPart} vücut parçası, kareler arasında {maxMovement} birim kareden fazla hareket ediyor. Lütfen animasyonu düzelt."
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,CurveAnimation yapısı geçersiz: {detail}. Lütfen animasyonun beklenen şemayı takip edip etmediğini kontrol et.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation'ın {count} alt öğesi var. En fazla {maxAllowed} alt öğeye izin verilir. Lütfen alt öğe sayısını azalt.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,"CurveAnimation, çok fazla anahtarı bulunan Eğriler içeriyor. Eğri başına maksimum {maxAllowed} anahtar olabilir. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,"CurveAnimation, {maxAllowed} taneden fazla MarkerCurve içeriyor. Lütfen en fazla {maxAllowed} MarkerCurve alt öğesi bulunmasına dikkat et."
@@ -1018,6 +1020,10 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,Aşağıdaki tüm hük�
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"Aşağıdaki ""Kabul Et"" düğmesine tıklayarak ülkeni Vietnam olarak değiştiriyor ve Roblox - VNG uygulamasına geçiş yapıyorsun; bu işlem geri alınamaz. Roblox - VNG uygulaması kullanımın, Roblox Şirketi'nin önceki koşullarının yerine geçen ve aşağıda belirtilen yeni koşullara tabidir. Lütfen aşağıdakileri incele ve bunlara onay ver:"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Güncellenmiş Anlaşma
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,"Üzgünüz, kullanım koşullarını kabul etmeye çalışırken bir sorun oluştu. Lütfen tekrar dene."
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,
+CommonUI.UserAgreements.Popup.KISAConsent.Message,Lütfen aşağıdaki şartları incele ve onayla. Her bir şartı ayrı olarak kabul etmeyi veya reddetmeyi seçebilirsin. İsteğe bağlı şartları kabul etmemen durumunda yine de Roblox'u kullanabilirsin.
+CommonUI.UserAgreements.Popup.KISAConsent.Title,Onay gerekli
 CommonUI.UserAgreements.Popup.KISAMessage,Lütfen aşağıdaki koşulları incele ve kabul et. Her bir koşulu ayrı olarak kabul etmeyi veya reddetmeyi seçebilirsin. İsteğe bağlı koşulları kabul etmemen durumunda yine de Roblox'u kullanabilirsin.
 CommonUI.UserAgreements.Popup.Message,"Roblox'u kullanmaya devam edebilmek adına aşağıdaki güncellenmiş koşullarımızı kabul etmek için lütfen ""Kabul ediyorum""u seç. Reşit değilsen lütfen bu mesajı ebeveynine veya vasine göster. Aşağıdaki belgelerde değişiklikler yapıldı:"
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,"İsteğe bağlı: Ayrıca en yeni sürümler, sınırlı süreli promosyonlar ve daha fazlası hakkında Roblox'tan e-postalar almak için kaydolmak istiyorum."
@@ -1114,7 +1120,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,"Roblox, otomatik olarak oy
 CoreScripts.TextChat.ChatWindow.Transcribing,Metne dönüştürülüyor...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Anlayamadık! Tekrar dene.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Bu dili henüz desteklemiyoruz!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,Mikrofonunu kullanmak için cihaz ayarlarına git ve Roblox'a mikrofon izni ver.
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,Mikrofonunu kullanmak için buraya dokunarak cihaz ayarlarını güncelle.
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,Mikrofonunu kullanmak için cihaz ayarlarına git ve Roblox'a mikrofon izni ver.
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Mikrofona erişilemiyor
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,Sesinle mesaj göndermen için ses kaydını işleyecek ve gizlilik politikamız uyarınca sonra hemen sileceğiz.
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Sesle yazılı sohbet özelliğini etkinleştirdin
@@ -1693,6 +1700,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Kullanım sınırı
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Bu istem yönergelerimize uygun değil. Başka bir şey tarif etmeyi dene.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Bu arka plan Roblox Topluluk Standartları'na uygun olmadığı için envanterine eklenmedi. Yeni bir tane oluşturmayı dene.
 Feature.Avatar.BackgroundGeneration.Error.System,Arka planın oluşturulurken bir şeyler yanlış gitti. Lütfen tekrar dene.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,Toplam yayınlama sınırına ulaştın.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,Günlük yayınlama sınırına ulaştın. Yarın tekrar dene.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,Saatlik yayınlama sınırına ulaştın. Bir saat sonra tekrar dene.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,Aylık yayınlama sınırına ulaştın. Gelecek ay tekrar dene.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Açıklama
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus'a özel
@@ -4074,6 +4085,7 @@ Feature.MusicPlayer.Action.GoToSongDetails,Şarkı Detaylarına Git
 Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
+Feature.NotApproved.Action.Pending,
 Feature.NotApproved.Action.ReactivateAccount,Hesabımı Yeniden Etkinleştir
 Feature.NotApproved.Action.ReportMistake,Bir hata raporla
 Feature.NotApproved.Action.RuleConfirmation,Kuralları bildiğimi ve bunlara uyacağımı kabul ediyorum.
@@ -4547,7 +4559,7 @@ Feature.Parents.Title.SomethingWentWrong,
 Feature.PlatformRestriction.Action.Continue,
 Feature.PlatformRestriction.Action.Pending,
 Feature.PlatformRestriction.Action.Signout,
-Feature.PlatformRestriction.Content.NeedPermission,Roblox'u kullanabilmek için ebeveyn iznine ihtiyacın var.
+Feature.PlatformRestriction.Content.NeedPermission,Roblox'u kullanabilmek için ebeveyn iznine ihtiyacın var. Ebeveynin onay verdikten sonra Roblox'a erişmek için çıkış yap ve ardından tekrar giriş yap.
 Feature.PlatformRestriction.Title.AskParent,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,Aramadan
