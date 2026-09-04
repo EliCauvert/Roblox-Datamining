@@ -32,6 +32,12 @@ Roblox.LangDynamic["Feature.UniversalFeatureRestrictions"] = {
     "AbuseVector.RightsManagement": "Rights Management",
     "Action.OK": "OK",
     "AbuseVector.AgeVerification.DialogTitle.Suspended": "Age checks suspended",
-    "AbuseVector.AgeVerification.DialogBody.Suspended": "You can't check your age right now because you've repeatedly broken our Community Standards. You can try again after the restriction ends."
+    "AbuseVector.AgeVerification.DialogBody.Suspended": "You can't check your age right now because you've repeatedly broken our Community Standards. You can try again after the restriction ends.",
+    "Generic.DialogTitleV2.Suspended.Hours": "{abuseVector} suspended for {number} hours",
+    "Generic.DialogTitleV2.Suspended.Day": "{abuseVector} suspended for 1 day",
+    "Generic.DialogTitleV2.Suspended.Days": "{abuseVector} suspended for {number} days",
+    "Generic.DialogTitleV2.Suspended.Hour": "{abuseVector} suspended for 1 hour",
+    "Generic.DialogTitleV2.Suspended.Minute": "{abuseVector} suspended for 1 minute",
+    "Generic.DialogTitleV2.Suspended.Minutes": "{abuseVector} suspended for {number} minutes"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.UniversalFeatureRestrictions");

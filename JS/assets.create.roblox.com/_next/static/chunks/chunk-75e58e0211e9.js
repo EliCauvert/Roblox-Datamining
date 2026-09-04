@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "1f0f4d19-e886-a61a-d557-070285f6381f")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "1dbbb7fb-41c9-1450-37fa-56212e04bca1")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 913893, 285929, e => {
@@ -3127,8 +3127,8 @@
                 }
             })
         }
-        publishCollectible(e, t, i, r, n, s, o, l, a, u, c, d, p, v, h, R, m, f, b, g, E) {
-            let I = {
+        publishCollectible(e, t, i, r, n, s, o, l, a, u, c, d, p, v, h, R, m, f, b, g, E, I) {
+            let y = {
                 idempotencyToken: e,
                 targetId: t,
                 targetType: i ? P.NUMBER_1 : P.NUMBER_0,
@@ -3149,10 +3149,11 @@
                 onSaleTime: null != f ? f : void 0,
                 offSaleTime: null != b ? b : void 0,
                 optOutFromRegionalPricing: null != g && g,
-                isRentalOptIn: null != E && E
+                isRentalOptIn: null != E && E,
+                agreementId: I
             };
             return this.collectiblesApi.v1CollectiblesPost({
-                request: I
+                request: y
             })
         }
         updateCollectibleInformation(e, t, i, r, n, s, o, l, a, u, c, d) {
@@ -3412,5 +3413,5 @@
     e.s(["default", 0, et], 913893)
 }]);
 
-//# debugId=1f0f4d19-e886-a61a-d557-070285f6381f
-//# sourceMappingURL=2gsjnw9l4lilc.js.map
+//# debugId=1dbbb7fb-41c9-1450-37fa-56212e04bca1
+//# sourceMappingURL=0cxqqf8u-y743.js.map

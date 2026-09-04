@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "6604f898-4666-561b-ca66-38e6687c75ef")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "d9a0bb17-c681-0ca2-b539-42ed584b7e9d")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 656350, t => {
@@ -75,7 +75,7 @@
         writable: !0,
         configurable: !0
     });
-    var S, T, E, q, k, A, C, I, j, L, O, N, D, _, M, U, B, V, F, G, W, H, K, J, z, Q, X, $, Z, Y, ee, et, en, er, ei, ea, eo, es, eu, ec, el, ed, ef, eh, ep, ev, em, ey, eg, eb, ew, ex, eP, eR, eS, eT, eE, eq, ek, eA, eC, eI, ej, eL, eO, eN, eD, e_, eM, eU, eB, eV, eF, eG, eW, eH, eK, eJ, ez, eQ, eX, e$, eZ, eY, e0, e1, e2, e4, e3, e6, e8, e5, e7, e9, te, tt, tn, tr, ti, ta, to, ts, tu, tc, tl, td, tf, th, tp, tv, tm, ty, tg, tb, tw, tx, tP, tR, tS, tT, tE, tq, tk, tA, tC, tI, tj, tL, tO, tN, tD, t_, tM, tU, tB, tV, tF, tG, tW, tH, tK, tJ, tz, tQ, tX, t$, tZ, tY, t0, t1, t2, t4, t3, t6, t8, t5, t7, t9, ne, nt, nn, nr, ni, na, no, ns, nu, nc, nl, nd, nf, nh, np, nv, nm, ny, ng, nb, nw, nx, nP, nR, nS, nT, nE, nq, nk, nA, nC, nI, nj, nL, nO, nN, nD, n_, nM, nU, nB, nV, nF, nG, nW, nH, nK, nJ, nz, nQ, nX, n$, nZ, nY, n0, n1, n2, n4, n3, n6, n8, n5, n7, n9, re, rt, rn, rr, ri, ra, ro, rs, ru, rc, rl, rd, rf, rh, rp, rv, rm, ry, rg, rb, rw, rx, rP, rR, rS, rT, rE, rq, rk, rA, rC, rI, rj, rL, rO, rN, rD, r_, rM, rU, rB, rV, rF, rG, rW, rH, rK, rJ, rz, rQ, rX, r$, rZ, rY, r0, r1, r2, r4, r3, r6, r8, r5, r7, r9, ie, it, ir, ii, ia, io, is, iu, ic, il, id, ih, ip, iv, im = t.i(929036),
+    var S, T, E, q, k, A, C, I, j, L, O, N, D, _, M, U, B, V, F, G, W, H, K, J, z, Q, X, $, Z, Y, ee, et, en, er, ei, ea, eo, es, eu, ec, el, ed, ef, eh, ep, ev, em, ey, eg, eb, ew, ex, eP, eR, eS, eT, eE, eq, ek, eA, eC, eI, ej, eL, eO, eN, eD, e_, eM, eU, eB, eV, eF, eG, eW, eH, eK, eJ, ez, eQ, eX, e$, eZ, eY, e0, e1, e2, e4, e3, e6, e8, e5, e9, e7, te, tt, tn, tr, ti, ta, to, ts, tu, tc, tl, td, tf, th, tp, tv, tm, ty, tg, tb, tw, tx, tP, tR, tS, tT, tE, tq, tk, tA, tC, tI, tj, tL, tO, tN, tD, t_, tM, tU, tB, tV, tF, tG, tW, tH, tK, tJ, tz, tQ, tX, t$, tZ, tY, t0, t1, t2, t4, t3, t6, t8, t5, t9, t7, ne, nt, nn, nr, ni, na, no, ns, nu, nc, nl, nd, nf, nh, np, nv, nm, ny, ng, nb, nw, nx, nP, nR, nS, nT, nE, nq, nk, nA, nC, nI, nj, nL, nO, nN, nD, n_, nM, nU, nB, nV, nF, nG, nW, nH, nK, nJ, nz, nQ, nX, n$, nZ, nY, n0, n1, n2, n4, n3, n6, n8, n5, n9, n7, re, rt, rn, rr, ri, ra, ro, rs, ru, rc, rl, rd, rf, rh, rp, rv, rm, ry, rg, rb, rw, rx, rP, rR, rS, rT, rE, rq, rk, rA, rC, rI, rj, rL, rO, rN, rD, r_, rM, rU, rB, rV, rF, rG, rW, rH, rK, rJ, rz, rQ, rX, r$, rZ, rY, r0, r1, r2, r4, r3, r6, r8, r5, r9, r7, ie, it, ir, ii, ia, io, is, iu, ic, il, id, ih, ip, iv, im = t.i(929036),
         iy = {};
 
     function ig() {
@@ -603,11 +603,11 @@
             return t[n] = r, t
         }
     }
-    var i7 = {
+    var i9 = {
         exports: {}
     };
 
-    function i9() {
+    function i7() {
         if (eY) return eZ;
         eY = 1;
         var t = ix(),
@@ -651,8 +651,8 @@
     }
 
     function ar() {
-        if (e9) return e7;
-        e9 = 1;
+        if (e7) return e9;
+        e7 = 1;
         var t, n, r, i = function() {
                 if (e4) return e2;
                 e4 = 1;
@@ -692,7 +692,7 @@
                 return u(t, m)
             }
         }
-        return e7 = {
+        return e9 = {
             set: t,
             get: n,
             has: r,
@@ -710,14 +710,14 @@
     }
 
     function ai() {
-        if (te) return i7.exports;
+        if (te) return i9.exports;
         te = 1;
         var t = iE(),
             n = iw(),
             r = ij(),
             i = iX(),
             a = ix(),
-            o = i9().CONFIGURABLE,
+            o = i7().CONFIGURABLE,
             s = ae(),
             u = ar(),
             c = u.enforce,
@@ -733,7 +733,7 @@
                 }).length
             }),
             y = String(String).split("String"),
-            g = i7.exports = function(t, n, r) {
+            g = i9.exports = function(t, n, r) {
                 "Symbol(" === h(d(n), 0, 7) && (n = "[" + p(d(n), /^Symbol\(([^)]*)\).*$/, "$1") + "]"), r && r.getter && (n = "get " + n), r && r.setter && (n = "set " + n), (!i(t, "name") || o && t.name !== n) && (a ? f(t, "name", {
                     value: n,
                     configurable: !0
@@ -750,7 +750,7 @@
             };
         return Function.prototype.toString = g(function() {
             return r(this) && l(this).source || s(this)
-        }, "toString"), i7.exports
+        }, "toString"), i9.exports
     }
 
     function aa() {
@@ -1182,8 +1182,8 @@
     }
 
     function aT() {
-        if (t7) return t5;
-        t7 = 1;
+        if (t9) return t5;
+        t9 = 1;
         var t = iE(),
             n = iQ(),
             r = Math.floor,
@@ -1233,12 +1233,12 @@
             n = iX(),
             r = iN(),
             i = function() {
-                if (ne) return t9;
+                if (ne) return t7;
                 ne = 1;
                 var t = ig(),
                     n = iw(),
                     r = t.RegExp;
-                return t9 = {
+                return t7 = {
                     correct: !n(function() {
                         var t = !0;
                         try {
@@ -1588,11 +1588,11 @@
         if (ra) return ri;
         ra = 1;
         var t = function() {
-                if (n9) return n7;
-                n9 = 1;
+                if (n7) return n9;
+                n7 = 1;
                 var t = iE(),
                     n = iF();
-                return n7 = function(r, i, a) {
+                return n9 = function(r, i, a) {
                     try {
                         return t(n(Object.getOwnPropertyDescriptor(r, i)[a]))
                     } catch (t) {}
@@ -1636,7 +1636,7 @@
         var t = av(),
             n = iR(),
             r = iH(),
-            i = i9(),
+            i = i7(),
             a = ij(),
             o = function() {
                 if (n5) return n8;
@@ -3072,11 +3072,11 @@
                 }(),
                 x = aE(),
                 P = function() {
-                    if (r9) return r7;
-                    r9 = 1;
+                    if (r7) return r9;
+                    r7 = 1;
                     var t = iE(),
                         n = Map.prototype;
-                    return r7 = {
+                    return r9 = {
                         Map: Map,
                         set: t(n.set),
                         get: t(n.get),
@@ -3506,9 +3506,9 @@
             })
         }
     }(), aN().structuredClone), a8.prototype = Error.prototype;
-    var a7 = setTimeout;
+    var a9 = setTimeout;
 
-    function a9(t) {
+    function a7(t) {
         return !!(t && void 0 !== t.length)
     }
 
@@ -3590,7 +3590,7 @@
         return on(this, new oo(t, n, r)), r
     }, ot.prototype.finally = a3, ot.all = function(t) {
         return new ot(function(n, r) {
-            if (!a9(t)) return r(TypeError("Promise.all accepts an array"));
+            if (!a7(t)) return r(TypeError("Promise.all accepts an array"));
             var i = Array.prototype.slice.call(t);
             if (0 === i.length) return n([]);
             for (var a = i.length, o = 0; o < i.length; o++) ! function t(o, s) {
@@ -3617,13 +3617,13 @@
         })
     }, ot.race = function(t) {
         return new ot(function(n, r) {
-            if (!a9(t)) return r(TypeError("Promise.race accepts an array"));
+            if (!a7(t)) return r(TypeError("Promise.race accepts an array"));
             for (var i = 0, a = t.length; i < a; i++) ot.resolve(t[i]).then(n, r)
         })
     }, ot._immediateFn = "function" == typeof setImmediate && function(t) {
         setImmediate(t)
     } || function(t) {
-        a7(t, 0)
+        a9(t, 0)
     }, ot._unhandledRejectionFn = function(t) {
         "u" > typeof console && console && console.warn("Possible Unhandled Promise Rejection:", t)
     };
@@ -3963,11 +3963,11 @@
             }
         }), o8.exports = o3
     }
-    var o7, o9 = {};
+    var o9, o7 = {};
 
     function se() {
-        if (o7) return o9;
-        o7 = 1;
+        if (o9) return o7;
+        o9 = 1;
         var t = oU.default.Buffer,
             n = t.isEncoding || function(t) {
                 switch (t && t.toLowerCase()) {
@@ -3987,7 +3987,7 @@
                         return !1
                 }
             },
-            r = o9.StringDecoder = function(r) {
+            r = o7.StringDecoder = function(r) {
                 switch (this.encoding = (r || "utf8").toLowerCase().replace(/[-_]/, ""), function(t) {
                         if (t && !n(t)) throw Error("Unknown encoding: " + t)
                     }(r), this.encoding) {
@@ -4061,7 +4061,7 @@
                 n += i.slice(0, r).toString(a)
             }
             return n
-        }, o9
+        }, o7
     }
     var st = oU.default.Buffer;
     so.ReadableState = sa;
@@ -4686,13 +4686,13 @@
             }
         }(s$, sX)), sX
     }
-    var sY, s0, s1, s2, s4, s3, s6, s8, s5, s7 = {},
-        s9 = {
+    var sY, s0, s1, s2, s4, s3, s6, s8, s5, s9 = {},
+        s7 = {
             get exports() {
-                return s7
+                return s9
             },
             set exports(e) {
-                s7 = e
+                s9 = e
             }
         };
 
@@ -5119,7 +5119,7 @@
         var c = oF.default,
             l = void 0;
         l = c && c.debuglog ? c.debuglog("stream") : function() {};
-        var d, f, h, v = (sY || (sY = 1, d = sZ().Buffer, f = oF.default, s9.exports = function() {
+        var d, f, h, v = (sY || (sY = 1, d = sZ().Buffer, f = oF.default, s7.exports = function() {
                 function t() {
                     ! function(t, n) {
                         if (!(t instanceof n)) throw TypeError("Cannot call a class as a function")
@@ -5154,12 +5154,12 @@
                     for (var n, r, i = d.allocUnsafe(t >>> 0), a = this.head, o = 0; a;) n = a.data, r = o, n.copy(i, r), o += a.data.length, a = a.next;
                     return i
                 }, t
-            }(), f && f.inspect && f.inspect.custom && (s9.exports.prototype[f.inspect.custom] = function() {
+            }(), f && f.inspect && f.inspect.custom && (s7.exports.prototype[f.inspect.custom] = function() {
                 var t = f.inspect({
                     length: this.length
                 });
                 return this.constructor.name + " " + t
-            })), s7),
+            })), s9),
             m = ue();
         u.inherits(b, a);
         var y = ["error", "close", "destroy", "pause", "resume"];
@@ -5913,14 +5913,14 @@
         }
     }
 
-    function u7(t, n) {
+    function u9(t, n) {
         return null == t ? t : {
             didGenerateNewUsername: (0, uG.exists)(t, "didGenerateNewUsername") ? t.didGenerateNewUsername : void 0,
             suggestedUsernames: (0, uG.exists)(t, "suggestedUsernames") ? t.suggestedUsernames : void 0
         }
     }
 
-    function u9(t) {
+    function u7(t) {
         var n;
         return null == (n = t) ? n : {
             nickname: (0, uG.exists)(n, "nickname") ? n.nickname : void 0
@@ -7553,7 +7553,7 @@
                         case 1:
                             return a = o.sent(), [2, new uG.JSONApiResponse(a, function(t) {
                                 return null == t ? t : {
-                                    credentials: (0, uG.exists)(t, "credentials") ? t.credentials.map(u9) : void 0
+                                    credentials: (0, uG.exists)(t, "credentials") ? t.credentials.map(u7) : void 0
                                 }
                             })]
                     }
@@ -9042,7 +9042,7 @@
                             }, n)];
                         case 1:
                             return a = o.sent(), [2, new uG.JSONApiResponse(a, function(t) {
-                                return u7(t)
+                                return u9(t)
                             })]
                     }
                 })
@@ -9082,7 +9082,7 @@
                             }, n)];
                         case 1:
                             return a = o.sent(), [2, new uG.JSONApiResponse(a, function(t) {
-                                return u7(t)
+                                return u9(t)
                             })]
                     }
                 })
@@ -9117,7 +9117,7 @@
                             }, n)];
                         case 1:
                             return a = o.sent(), [2, new uG.JSONApiResponse(a, function(t) {
-                                return u7(t)
+                                return u9(t)
                             })]
                     }
                 })
@@ -9157,7 +9157,7 @@
                             }, n)];
                         case 1:
                             return a = o.sent(), [2, new uG.JSONApiResponse(a, function(t) {
-                                return u7(t)
+                                return u9(t)
                             })]
                     }
                 })
@@ -10816,8 +10816,8 @@
         })
     };
     var c5 = t.i(893949),
-        c7 = t.i(413019),
-        c9 = t.i(758835),
+        c9 = t.i(413019),
+        c7 = t.i(758835),
         le = t.i(823062);
     let lt = t => {
         let {
@@ -10883,7 +10883,7 @@
     var lu = t.i(37819),
         lc = t.i(431346),
         ll = t.i(881670);
-    let ld = "".concat("".concat("https://assets.create.roblox.com/21d2de6ec5daf6e72cfbc72bcb749b555b548185/assets", "/opengraph"), "/global_og_image.png"),
+    let ld = "".concat("".concat("https://assets.create.roblox.com/45060ef210e7c81806370d564f9803e3f4295ceb/assets", "/opengraph"), "/global_og_image.png"),
         lf = (0, oO.withTranslation)(t => {
             let {
                 openGraphMetadata: {
@@ -11142,7 +11142,7 @@
         return "Warn" === t || "Delete" !== t && i
     }
     var l5 = (0, oc.createContext)(void 0),
-        l7 = t => {
+        l9 = t => {
             var n, r;
             let {
                 pages: i,
@@ -11185,7 +11185,7 @@
                 children: u
             })
         },
-        l9 = () => {
+        l7 = () => {
             let t = (0, oc.useContext)(l5);
             if (!t) throw Error("usePageNavigation must be used within PageNavigationProvider");
             return t
@@ -11198,7 +11198,7 @@
                 isFirstPage: i,
                 currentPageConfigs: a,
                 currentPageName: o
-            } = l9(), s = a.map(t => {
+            } = l7(), s = a.map(t => {
                 if (!t.getIsVisible(n, o, r)) return null;
                 let i = t.renderComponent;
                 return (0, v.jsx)("div", {
@@ -11270,7 +11270,7 @@
             let t = l$().translate,
                 {
                     getProgress: n
-                } = l9(),
+                } = l7(),
                 r = n();
             return (0, v.jsx)(lP.ProgressBar, {
                 value: r,
@@ -11284,7 +11284,7 @@
             let t = l$().translate,
                 {
                     goToPreviousPage: n
-                } = l9();
+                } = l7();
             return (0, v.jsx)(lx.IconButton, {
                 size: "Medium",
                 variant: "Utility",
@@ -11302,7 +11302,7 @@
             } = t, {
                 isFirstPage: i,
                 totalPages: a
-            } = l9(), {
+            } = l7(), {
                 readOnly: o
             } = l$(), s = l$().translate, {
                 punishmentTypeDescription: u,
@@ -11339,7 +11339,7 @@
             } = t, {
                 CurrentCtaComponent: i,
                 currentPageName: a
-            } = l9();
+            } = l7();
             return i ? (0, v.jsx)("div", {
                 className: "flex flex-col gap-large justify-between medium:items-end",
                 children: (0, v.jsx)(i, {
@@ -11591,7 +11591,7 @@
                 currentPage: r,
                 currentPageName: i,
                 unmappedViolationKeys: a
-            } = l9(), o = l0(), s = (0, oc.useRef)(Date.now()), u = (0, oc.useRef)(r), c = (0, oc.useRef)(i), l = (0, oc.useRef)(!0), d = () => Date.now() - s.current;
+            } = l7(), o = l0(), s = (0, oc.useRef)(Date.now()), u = (0, oc.useRef)(r), c = (0, oc.useRef)(i), l = (0, oc.useRef)(!0), d = () => Date.now() - s.current;
             (0, oc.useEffect)(() => {
                 a.forEach(t => {
                     o("unmappedViolationKey", {
@@ -11787,7 +11787,7 @@
                     punishmentData: n
                 } = t, r = l$().translate, i = l0(), {
                     hasEducationalPages: a
-                } = l9(), {
+                } = l7(), {
                     showUGCAvatarGuidelinesLink: o,
                     context: s
                 } = n, u = null == s ? void 0 : s.IS_ALT_INFORMED;
@@ -12272,7 +12272,7 @@
                 isDisabled: n = !1
             } = t, r = l$().translate, {
                 goToNextPage: i
-            } = l9();
+            } = l7();
             return (0, v.jsx)(lK.Button, {
                 variant: "Emphasis",
                 size: "Medium",
@@ -12527,9 +12527,9 @@
                 children: t("Action.ReportMistake")
             })
         },
-        d7 = async (t, n) => n("".concat(t, "/moderation-appeal-service/v2/consequence-commutation"), {
+        d9 = async (t, n) => n("".concat(t, "/moderation-appeal-service/v2/consequence-commutation"), {
             type: "EDUCATIONAL_PASS"
-        }), d9 = () => {
+        }), d7 = () => {
             let t = l$().translate,
                 {
                     sendPageEvent: n
@@ -12544,7 +12544,7 @@
                 } = dD(),
                 [s, u] = (0, oc.useState)(!1),
                 c = (0, ly.useMutation)({
-                    mutationFn: () => d7(i, r),
+                    mutationFn: () => d9(i, r),
                     onMutate: () => {
                         u(!0), n("secondChanceReactivateClicked")
                     },
@@ -12675,7 +12675,7 @@
                 }), d && !i && c.push({
                     pageName: "second-chance-conclusion",
                     pageItems: [dz],
-                    CtaComponent: d9
+                    CtaComponent: d7
                 }), {
                     pages: c,
                     unmappedViolationKeys: h
@@ -12695,7 +12695,7 @@
                 body: (0, v.jsx)(dd, {
                     error: u
                 })
-            }) : (0, v.jsx)(l7, {
+            }) : (0, v.jsx)(l9, {
                 pages: f,
                 unmappedViolationKeys: h,
                 hasEducationalPages: d,
@@ -13256,10 +13256,10 @@
             let {
                 trackerClient: t
             } = (0, cT.useEventTrackerProvider)(), n = (0, oc.useCallback)(() => {
-                let n = (0, c7.loadPageEventModel)();
+                let n = (0, c9.loadPageEventModel)();
                 t.sendEvent(n)
             }, [t]);
-            (0, c9.default)(void 0, n), (0, oc.useEffect)(() => n(), [n]), (0, oc.useEffect)(() => {
+            (0, c7.default)(void 0, n), (0, oc.useEffect)(() => n(), [n]), (0, oc.useEffect)(() => {
                 cq.default.trackPageLoad()
             }, [])
         })(), (0, od.useReportWebVitals)(fB), null),
@@ -13754,5 +13754,5 @@
     n.exports = t.r(959610)
 }]);
 
-//# debugId=6604f898-4666-561b-ca66-38e6687c75ef
-//# sourceMappingURL=3d114s0c-ut-v.js.map
+//# debugId=d9a0bb17-c681-0ca2-b539-42ed584b7e9d
+//# sourceMappingURL=2u1q5v--i0ta_.js.map
