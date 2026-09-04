@@ -177,6 +177,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,"CurveAnimation zawier
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,Części ciała w CurveAnimation nie mogą znajdować się na wysokości poniżej {minHeight} studów ani powyżej {maxDistance} studów od HumanoidRootPart. Popraw animację.
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,"Elementy podrzędne CurveAnimation, MarkerCurves i AnimationRigData nie mogą mieć elementów podrzędnych"
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"Hierarchia CurveAnimation zawiera elementy Scripts, LocalScripts lub ModuleScripts. Usuń je."
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,Obiekt CurveAnimation zawiera zduplikowany folder części ciała „{bodyPartName}” w „{instancePath}”. Każda część ciała może pojawić się co najwyżej raz w hierarchii animacji.
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,Nie udało się wczytać danych CurveAnimation. Zasób animacji może być nieprawidłowy lub niedostępny.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,"CurveAnimation zawiera folder części ciała {folderName}, który ma nieprawidłową hierarchię (ma elementy podrzędne, które są niedozwolone lub skonfigurowane nieprawidłowo)."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"Folder „{boneName}” w CurveAnimation nie jest rozpoznaną nazwą kości HRD/DRD. Podfoldery animacji muszą być albo prawidłowymi częściami ciała R15, albo rozpoznanymi nazwami kości (np. HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase lub kości palców, takie jak LeftHandIndex1)."
@@ -204,6 +205,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation zawi
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,W CurveAnimation w czasie {time} s część ciała {bodyPart} obraca się z prędkością {speed} stopni na sekundę. Maksymalna prędkość w stopniach na sekundę to {maxSpeed}. Popraw animację.
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,W CurveAnimation w czasie {time} s część ciała {bodyPart} porusza się z prędkością {speed} studów na sekundę. Maksymalna prędkość w studach na sekundę to {maxSpeed}. Popraw animację.
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,Część ciała {bodyPart} w CurveAnimation przemieszcza się o liczbę studów między klatkami przekraczającą {maxMovement}. Popraw animację.
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,"Struktura obiektu CurveAnimation jest nieprawidłowa: {detail}. Upewnij się, że animacja jest zgodna z oczekiwanym schematem."
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,Animacja CurveAnimation ma tyle elementów podrzędnych: {count}. Maksymalna dozwolona liczba to {maxAllowed}. Zmniejsz liczbę elementów podrzędnych.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation zawiera krzywe (Curves) ze zbyt dużą liczbą kluczy. Maksymalna liczba kluczy na krzywą (Curve) to {maxAllowed}. Popraw animację.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,"Liczba elementów MarkerCurve zawartych w CurveAnimation przekracza {maxAllowed}. Upewnij się, że liczba elementów podrzędnych MarkerCurve nie przekracza {maxAllowed}."
@@ -1340,6 +1342,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,"Osiągnięto limit
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Ten prompt nie jest zgodny z naszymi wytycznymi. Spróbuj opisać coś innego.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"To tło nie jest zgodne ze Standardami społeczności Robloxa, dlatego nie dodano go do Twojego wyposażenia. Spróbuj wygenerować nowe."
 Feature.Avatar.BackgroundGeneration.Error.System,Podczas generowania Twojego tła coś poszło nie tak. Spróbuj ponownie.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,Osiągnięto całkowity limit publikacji.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,Osiągnięto dzienny limit publikacji. Spróbuj ponownie jutro.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,Osiągnięto godzinowy limit publikacji. Spróbuj ponownie za godzinę.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,Osiągnięto miesięczny limit publikacji. Spróbuj ponownie w przyszłym miesiącu.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Wyłącznie w ramach subskrypcji Plus
@@ -4029,7 +4035,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,"Uważasz, że popełniliśmy błąd
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Dołączasz do czatu głosowego
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Masz połączenie z czatem głosowym
-Feature.SettingsHub.Prompt.LeaveVoiceChat,Czat głosowy został rozłączony
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Rozłączono z czatem głosowym
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Zawieszono możliwość korzystania z mikrofonu i kamery
 Feature.SettingsHub.Prompt.MicUseSuspended,Zawieszono możliwość korzystanie z mikrofonu
@@ -4068,7 +4073,6 @@ Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedConnectionsUpdate,Teraz m
 Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedFriendsUpdate,
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections,
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends,
-Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupV2,Tylko osoby z podobnych grup wiekowych mogą rozmawiać z Tobą na czacie.
 Feature.SettingsHub.Prompt.Subtitle.TemporarySuspension2,Z powodu naruszenia naszych Standardów Społeczności tymczasowo odebrano ci dostęp do czatu głosowego do
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1,"Tymczasowo wyłączyliśmy czat głosowy ze względu na podejrzenie, że korzystano z języka, który jest niezgodny ze Standardami Społeczności platformy Roblox."
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1V2,"Nadal używasz języka, który narusza reguły, lub w tle jest zbyt dużo hałasu."

@@ -25,6 +25,10 @@ local t = {
 		end
 	end
 }
+local t_1 = {
+	confirm = "R15_UPGRADE_CONFIRM",
+	cancel = "R15_UPGRADE_CANCEL"
+}
 
 local function buildSaveElementMetadata(p1)
 	-- upvalues: httpService (ref)
@@ -143,6 +147,26 @@ function t.logRetry(p1)
 		
 		return
 	end
+end
+
+function t.logR15UpgradePromptShown()
+	-- upvalues: sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), sendAXCounterV2 (ref)
+	sendUnifiedEventLog({
+		elementName = "R15_UPGRADE_PROMPT",
+		action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_IMPRESSION,
+		surface = unifiedLoggingSurface.EDIT_PROFILE_IMAGE
+	})
+	sendAXCounterV2("EditProfileImageR15UpgradePromptShown")
+end
+
+function t.logR15UpgradePromptInteraction(p1)
+	-- upvalues: sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), t_1 (ref), sendAXCounterV2 (ref)
+	sendUnifiedEventLog({
+		action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
+		surface = unifiedLoggingSurface.EDIT_PROFILE_IMAGE,
+		elementName = t_1[p1]
+	})
+	sendAXCounterV2("EditProfileImageR15UpgradePromptInteraction", { action = tostring(p1) })
 end
 
 return t

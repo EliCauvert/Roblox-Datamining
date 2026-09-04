@@ -4029,7 +4029,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Nous nous sommes trompés ?<br /><u
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Vous avez rejoint le Chat vocal
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Connecté(e) au chat vocal
-Feature.SettingsHub.Prompt.LeaveVoiceChat,Chat vocal déconnecté
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Déconnecté(e) du chat vocal
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Utilisation du microphone et de la caméra suspendue
 Feature.SettingsHub.Prompt.MicUseSuspended,Utilisation du microphone suspendue
@@ -4068,7 +4067,6 @@ Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedConnectionsUpdate,Tu peux
 Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedFriendsUpdate,Tu peux maintenant discuter avec des personnes de groupes d'âge similaires et avec tes amis de confiance.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections,Seules les personnes de groupes d'âge similaires et tes Connexions de confiance peuvent te parler.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends,Seules les personnes de groupes d'âge similaires et tes amis de confiance peuvent te parler.
-Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupV2,Seules les personnes de groupes d'âge similaires peuvent utiliser le chat avec toi.
 Feature.SettingsHub.Prompt.Subtitle.TemporarySuspension2,"En raison de la violation de nos normes communautaires, nous avons temporairement révoqué ton accès au chat vocal jusqu'au"
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1,Nous avons temporairement désactivé le chat vocal parce que tu as peut-être utilisé un langage qui va à l'encontre des normes de la communauté Roblox.
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1V2,Tu as continué à utiliser un langage qui enfreint les règles ou à faire trop de bruit de fond.

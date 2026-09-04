@@ -177,6 +177,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation에는 �
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,CurveAnimation의 신체 부위는 HumanoidRootPart에서 {minHeight}스터드보다 낮거나 {maxDistance}스터드 이상 떨어져 있으면 안 됩니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation의 자식 항목인 MarkerCurves 및 AnimationRigData는 자식 항목을 포함할 수 없습니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"CurveAnimation 계층 구조에 Scripts, LocalScripts 또는 ModuleScripts가 포함되어 있습니다. 해당 항목을 제거하세요."
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,CurveAnimation에 중복 신체 부위 폴더({bodyPartName})가 '{instancePath}'에 포함되어 있습니다. 각 신체 부위는 애니메이션 계층 구조에 최대 한 번만 나타날 수 있습니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,CurveAnimation 데이터를 불러오는 데 실패했습니다. 애니메이션 애셋이 유효하지 않거나 액세스할 수 없는 상태일 수 있습니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation에 유효하지 않은 계층 구조를 가진 신체 부위 폴더({folderName})가 포함되어 있습니다(허용되지 않거나 잘못 설정된 자식 항목이 있음).
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"CurveAnimation의 '{boneName}' 폴더는 인식되는 HRD/DRD 뼈대 이름이 아닙니다. 애니메이션 하위 폴더는 유효한 R15 신체 부위이거나 인식되는 뼈대 이름(예: HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase 또는 LeftHandIndex1과 같은 손가락 뼈대)이어야 합니다."
@@ -204,6 +205,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,"CurveAnimation에 
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,CurveAnimation의 시간이 {time}초일 때 신체 부위({bodyPart})가 초당 {speed}의 회전 속도로 움직이고 있습니다. 초당 최대 회전 속도는 {maxSpeed}입니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,CurveAnimation의 시간이 {time}초일 때 신체 부위({bodyPart})가 초당 {speed}의 스터드 속도로 움직이고 있습니다. 초당 최대 스터드 속도는 {maxSpeed}입니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,CurveAnimation의 신체 부위( {bodyPart})가 프레임 간에 {maxMovement} 이상의 스터드 속도로 움직입니다. 애니메이션을 수정하세요.
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,CurveAnimation 구조가 유효하지 않습니다. {detail}. 애니메이션이 예상 스키마를 따르는지 확인하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation에 {count}개의 하위 항목이 있습니다. 최대 허용 개수는 {maxAllowed}개이니 하위 항목 개수를 줄이세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation의 Curve에 대한 키 개수가 너무 많습니다. Curve당 최대 개수는 {maxAllowed}개입니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation에 {maxAllowed}개 이상의 MarkerCurve가 포함되어 있습니다. MarkerCurve 하위 항목은 {maxAllowed}개 이하여야 합니다.
@@ -1339,6 +1341,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,사용량 한도에
 Feature.Avatar.BackgroundGeneration.Error.Moderation,해당 프롬프트는 가이드라인에 위배됩니다. 표현을 수정해 보세요.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,이 배경은 Roblox 커뮤니티 규정을 준수하지 않으므로 인벤토리에 추가되지 않았습니다. 새로운 배경을 생성해보세요.
 Feature.Avatar.BackgroundGeneration.Error.System,배경을 생성하는 중에 문제가 발생했습니다. 다시 시도하세요.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,평생 게시 한도에 도달했습니다.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,일일 게시 한도에 도달했습니다. 내일 다시 시도하세요.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,시간당 게시 한도에 도달했습니다. 한 시간 후에 다시 시도하세요.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,월간 게시 한도에 도달했습니다. 다음 달에 다시 시도하세요.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{max}개 중 {count}개
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus 독점 제공
@@ -4030,7 +4036,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,오류가 발생했나요?<br /><u>�
 Feature.SettingsHub.Prompt.JoinedVoiceChat,음성 채팅에 참가했어요
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,음성 채팅에 참가했습니다
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,음성 채팅에 연결되었습니다
-Feature.SettingsHub.Prompt.LeaveVoiceChat,음성 채팅 연결 해제됨
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,음성 채팅 연결이 해제되었습니다
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,마이크 및 카메라 사용이 일시 정지됨
 Feature.SettingsHub.Prompt.MicUseSuspended,마이크 사용 일시 정지
@@ -4069,7 +4074,6 @@ Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedConnectionsUpdate,이제 
 Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedFriendsUpdate,이제 비슷한 연령대의 사람들 및 신뢰할 수 있는 친구들과 대화할 수 있습니다.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections,비슷한 연령대의 사람들과 신뢰할 수 있는 인맥과만 대화할 수 있습니다.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends,비슷한 연령대의 사람들 및 신뢰할 수 있는 친구들과만 대화할 수 있습니다.
-Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupV2,비슷한 연령대의 사용자만 당신과 채팅할 수 있습니다.
 Feature.SettingsHub.Prompt.Subtitle.TemporarySuspension2,커뮤니티 규정 위반으로 인해 음성으로 채팅하기 권한이 일시 정지되었습니다. 다음 날짜까지:
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1,Roblox 커뮤니티 규정을 위반하는 표현이 사용되었기 때문에 음성 채팅이 일시 정지되었습니다.
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1V2,규칙을 위반하는 언어를 계속 사용하셨거나 주변 소음이 너무 컸습니다.

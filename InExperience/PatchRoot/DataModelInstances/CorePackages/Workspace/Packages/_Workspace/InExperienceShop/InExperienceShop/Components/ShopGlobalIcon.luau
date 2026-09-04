@@ -52,19 +52,22 @@ return function(p1)
 		local var18 = reactModule.useRef(nil)
 		local var19 = reactModule.useRef(nil)
 		local var20 = reactModule.useRef(nil)
+		local var21 = reactModule.useRef(nil)
+		local var22 = reactModule.useRef(p1.hidden)
+		var22.current = p1.hidden
 		reactModule.useEffect(function()
-			-- upvalues: var17 (ref), var18 (ref), var6 (ref), var8 (ref), var13 (ref), var14 (ref), var11 (ref), var12 (ref), var15 (ref), var16 (ref), buttonSize (ref), var10 (ref), shopGlobalIconAnimGracePeriodMs (copy), currentTime (copy), tweenService (copy), tweenInfo (copy), tweenInfo_2 (copy), tweenInfo_3 (copy), tweenInfo_1 (copy), var19 (ref), var20 (ref)
+			-- upvalues: var17 (ref), var18 (ref), var6 (ref), var8 (ref), var13 (ref), var14 (ref), var11 (ref), var12 (ref), var15 (ref), var16 (ref), buttonSize (ref), var10 (ref), shopGlobalIconAnimGracePeriodMs (copy), currentTime (copy), tweenService (copy), tweenInfo (copy), tweenInfo_2 (copy), tweenInfo_3 (copy), tweenInfo_1 (copy), var19 (ref), var20 (ref), var21 (ref), var22 (ref)
 			local numberValue = Instance.new("NumberValue")
 			numberValue.Value = 0
 			var17.current = numberValue
 			local numberValue_1 = Instance.new("NumberValue")
 			numberValue_1.Value = 0
 			var18.current = numberValue_1
-			local var21 = numberValue:GetPropertyChangedSignal("Value"):Connect(function()
+			local var23 = numberValue:GetPropertyChangedSignal("Value"):Connect(function()
 				-- upvalues: var6 (copy), numberValue (ref)
 				var6(numberValue.Value)
 			end)
-			local var22 = numberValue_1:GetPropertyChangedSignal("Value"):Connect(function()
+			local var24 = numberValue_1:GetPropertyChangedSignal("Value"):Connect(function()
 				-- upvalues: var8 (copy), numberValue_1 (ref)
 				var8(numberValue_1.Value)
 			end)
@@ -108,13 +111,13 @@ return function(p1)
 			
 			local function showAnimated()
 				-- upvalues: stopAllAnimations (ref), shopGlobalIconAnimGracePeriodMs (copy), currentTime (copy), numberValue (ref), buttonSize (copy), numberValue_1 (ref), var6 (copy), var8 (copy), var10 (copy), tweenService (copy), tweenInfo (copy), var11 (copy), var15 (copy), tweenInfo_2 (copy), var12 (copy)
-				local var23
+				local var25
 				stopAllAnimations()
 				
 				if shopGlobalIconAnimGracePeriodMs > 0 then
-					var23 = currentTime and tick() - currentTime
+					var25 = currentTime and tick() - currentTime
 					
-					if var23 == nil or var23 < shopGlobalIconAnimGracePeriodMs / 1000 then
+					if var25 == nil or var25 < shopGlobalIconAnimGracePeriodMs / 1000 then
 						numberValue.Value = buttonSize
 						numberValue_1.Value = 1
 						var6(buttonSize)
@@ -127,25 +130,25 @@ return function(p1)
 				numberValue.Value = 0
 				numberValue_1.Value = 0
 				var10(false)
-				var23 = tweenService:Create(numberValue, tweenInfo, { Value = buttonSize })
-				var11.current = var23
-				var23:Play()
+				var25 = tweenService:Create(numberValue, tweenInfo, { Value = buttonSize })
+				var11.current = var25
+				var25:Play()
 				var15.current = task.delay(0.2, function()
 					-- upvalues: var15 (copy), var10 (copy), tweenService (copy), numberValue_1 (copy), tweenInfo_2 (copy), var12 (copy)
 					var15.current = nil
 					var10(true)
-					local var24 = tweenService:Create(numberValue_1, tweenInfo_2, { Value = 1 })
-					var12.current = var24
-					var24:Play()
+					local var26 = tweenService:Create(numberValue_1, tweenInfo_2, { Value = 1 })
+					var12.current = var26
+					var26:Play()
 				end)
 			end
 			
 			local function hideAnimated()
 				-- upvalues: stopAllAnimations (ref), tweenService (copy), numberValue_1 (ref), tweenInfo_3 (copy), var12 (copy), var13 (copy), var10 (copy), var15 (copy), numberValue (ref), tweenInfo_1 (copy), var11 (copy), var14 (copy), var16 (copy), var19 (copy)
 				stopAllAnimations()
-				local var23 = tweenService:Create(numberValue_1, tweenInfo_3, { Value = 0 })
-				var12.current = var23
-				var13.current = var23.Completed:Connect(function(p2)
+				local var25 = tweenService:Create(numberValue_1, tweenInfo_3, { Value = 0 })
+				var12.current = var25
+				var13.current = var25.Completed:Connect(function(p2)
 					-- upvalues: var13 (copy), var10 (copy)
 					if p2 == Enum.PlaybackState.Completed then
 						var13.current = nil
@@ -154,13 +157,13 @@ return function(p1)
 						return
 					end
 				end)
-				var23:Play()
+				var25:Play()
 				var15.current = task.delay(0.2, function()
 					-- upvalues: var15 (copy), tweenService (copy), numberValue (copy), tweenInfo_1 (copy), var11 (copy), var14 (copy), var16 (copy), var19 (copy)
 					var15.current = nil
-					local var24 = tweenService:Create(numberValue, tweenInfo_1, { Value = 0 })
-					var11.current = var24
-					var14.current = var24.Completed:Connect(function(p2)
+					local var26 = tweenService:Create(numberValue, tweenInfo_1, { Value = 0 })
+					var11.current = var26
+					var14.current = var26.Completed:Connect(function(p2)
 						-- upvalues: var14 (copy), var16 (copy), var19 (copy)
 						if p2 == Enum.PlaybackState.Completed then
 							var14.current = nil
@@ -176,25 +179,55 @@ return function(p1)
 							return
 						end
 					end)
-					var24:Play()
+					var26:Play()
 				end)
 			end
 			
 			var19.current = showAnimated
 			var20.current = hideAnimated
-			showAnimated()
+			var21.current = stopAllAnimations
 			
+			if not var22.current then
+				showAnimated()
+			end
 			return function()
-				-- upvalues: stopAllAnimations (ref), var21 (ref), var22 (ref), numberValue (ref), numberValue_1 (ref), var17 (copy), var18 (copy)
+				-- upvalues: stopAllAnimations (ref), var23 (ref), var24 (ref), numberValue (ref), numberValue_1 (ref), var17 (copy), var18 (copy)
 				stopAllAnimations()
-				var21:Disconnect()
-				var22:Disconnect()
+				var23:Disconnect()
+				var24:Disconnect()
 				numberValue:Destroy()
 				numberValue_1:Destroy()
 				var17.current = nil
 				var18.current = nil
 			end
 		end, { buttonSize })
+		local var23 = reactModule.useRef(false)
+		reactModule.useEffect(function()
+			-- upvalues: p1 (ref), var23 (ref), var17 (ref), var18 (ref), var21 (ref), var10 (ref), buttonSize (ref)
+			if p1.hidden == nil then return end
+			if not var23.current then
+				var23.current = true
+				
+				return
+			end
+			local current = var17.current
+			local current_1 = var18.current
+			
+			if not current or not current_1 then return end
+			if var21.current then
+				var21.current()
+			end
+			if p1.hidden then
+				current.Value = 0
+				current_1.Value = 0
+				var10(false)
+				
+				return
+			end
+			current.Value = buttonSize
+			current_1.Value = 1
+			var10(true)
+		end, { p1.hidden, buttonSize })
 		reactModule.useEffect(function()
 			-- upvalues: p1 (ref)
 			return function()
@@ -207,9 +240,13 @@ return function(p1)
 		
 		local function reportArea(p2)
 			-- upvalues: p1 (ref)
-			if p1.onAreaChanged then
-				p1.onAreaChanged("experience-shop-icon", p2.AbsolutePosition, p2.AbsoluteSize)
+			if not p1.onAreaChanged then return end
+			if p1.hidden then
+				p1.onAreaChanged("experience-shop-icon", Vector2.zero, Vector2.zero)
+				
+				return
 			end
+			p1.onAreaChanged("experience-shop-icon", p2.AbsolutePosition, p2.AbsoluteSize)
 		end
 		
 		return reactModule.createElement("Frame", {

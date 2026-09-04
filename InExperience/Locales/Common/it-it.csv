@@ -160,6 +160,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation contien
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,"In CurveAnimation, le parti del corpo non possono trovarsi a un'altezza inferiore a {minHeight} stud o superiore a {maxDistance} stud dalla HumanoidRootPart. Correggi l'animazione."
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,Gli elementi child MarkerCurves e AnimationRigData in CurveAnimation non possono avere elementi child
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"La gerarchia di CurveAnimation contiene Script, LocalScript o ModuleScript. Rimuovili."
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,"CurveAnimation contiene una cartella duplicata denominata come una parte del corpo, ""{bodyPartName}"", in ""{instancePath}"". Ogni parte del corpo può apparire al massimo una volta nella gerarchia dell'animazione."
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,Impossibile caricare i dati di CurveAnimation. La risorsa di animazione potrebbe non essere valida o accessibile.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,"La gerarchia della cartella {folderName} denominata come una parte del corpo in CurveAnimation non è valida, poiché contiene elementi child non consentiti o configurati in modo errato"
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"La cartella {boneName} in CurveAnimation non ha il nome di un osso HRD/DRD riconosciuto. Il nome delle sottocartelle di animazione deve essere una parte del corpo R15 valida o un osso riconosciuto (ad esempio, HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase oppure un osso delle dita come LeftHandIndex1)."
@@ -187,6 +188,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation cont
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"In CurveAnimation, al tempo di {time} secondi, la parte del corpo {bodyPart} si muove a una velocità di rotazione di {speed} gradi/secondo, mentre il limite massimo consentito è di {maxSpeed} gradi/secondo. Correggi l'animazione."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"In CurveAnimation, al tempo di {time} secondi, la parte del corpo {bodyPart} si muove a una velocità di {speed} stud/secondo, mentre il limite massimo è di {maxSpeed} stud/secondo. Correggi l'animazione."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,"In CurveAnimation, la parte del corpo {bodyPart} si sposta di più di {maxMovement} stud tra un fotogramma e l'altro. Correggi l'animazione."
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,La struttura CurveAnimation non è valida: {detail}. Assicurati che l'animazione segua lo schema previsto.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation ha {count} discendenti. Riducili per rispettare il limite consentito ({maxAllowed}).
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation contiene Curve con troppe chiavi. La quantità massima consentita è di {maxAllowed}. Correggi l'animazione.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation contiene più di {maxAllowed} elemento/i MarkerCurve. La quantità massima di discendenti è {maxAllowed}: elimina tutti i duplicati.
@@ -1321,6 +1323,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Hai raggiunto il li
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Questo prompt non rispetta le nostre linee guida. Prova a descrivere qualcos'altro.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Questo sfondo non rispetta le norme comunitarie Roblox, quindi non è stato aggiunto al tuo inventario. Prova a generarne uno nuovo."
 Feature.Avatar.BackgroundGeneration.Error.System,Si è verificato un errore durante la generazione del tuo sfondo. Riprova.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,Hai raggiunto il limite di pubblicazioni complessivo.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,Hai raggiunto il limite di pubblicazioni giornaliero. Riprova domani.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,Hai raggiunto il limite di pubblicazioni orario. Attendi la prossima ora e riprova.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,Hai raggiunto il limite di pubblicazioni mensile. Riprova il mese prossimo.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,In esclusiva con il piano Plus
@@ -4010,7 +4016,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Pensi che ci sia stato un errore?<br
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Hai Partecipato alla Chat Vocale
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,Ti sei iscritto alla chat vocale
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Hai effettuato la connessione alla chat vocale
-Feature.SettingsHub.Prompt.LeaveVoiceChat,Chat vocale disconnessa
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Hai effettuato la disconnessione dalla chat vocale
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Uso del microfono e videocamera sospeso
 Feature.SettingsHub.Prompt.MicUseSuspended,Utilizzo microfono sospeso
@@ -4049,7 +4054,6 @@ Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedConnectionsUpdate,Ora puo
 Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedFriendsUpdate,Ora puoi parlare con persone d'età simile alla tua e con i tuoi amici affidabili.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections,Solo le persone di una fascia d'età simile e i tuoi collegamenti affidabili possono parlare con te.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends,Solo le persone di una fascia d'età simile e i tuoi amici affidabili possono parlare con te.
-Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupV2,Solo le persone di una fascia d'età simile possono chattare con te.
 Feature.SettingsHub.Prompt.Subtitle.TemporarySuspension2,"Sulla base delle segnalazioni degli utenti, abbiamo stabilito che il tuo comportamento durante l'utilizzo della chat vocale violava le regole della nostra community. Il tuo accesso alla chat vocale è stato sospeso fino al"
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1,Abbiamo temporaneamente disattivata la chat vocale perché potresti aver usato un linguaggio che va contro gli standard della comunità Roblox.
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1V2,Hai continuato a usare un linguaggio che viola le regole o a comunicare in un ambiente troppo rumoroso.

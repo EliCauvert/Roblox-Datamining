@@ -1,29 +1,11 @@
 ﻿local playersService = game:GetService("Players")
 local _ = require(script.Parent.Parent.Types)
-
-local function finishModelSetup(value)
-	value:PivotTo(CFrame.new())
-	local humanoidRootPart = value:FindFirstChild("HumanoidRootPart")
-	
-	if humanoidRootPart and humanoidRootPart:IsA("BasePart") then
-		value.PrimaryPart = humanoidRootPart
-		humanoidRootPart.Anchored = true
-	end
-	local humanoid = value:FindFirstChildOfClass("Humanoid")
-	local var1 = if humanoid then humanoid:FindFirstChildOfClass("Animator") else nil
-	
-	if humanoid and not var1 then
-		local animator = Instance.new("Animator")
-		animator.Parent = humanoid
-		var1 = animator
-	end
-	return { model = value, humanoid = humanoid, animator = var1 }
-end
+local finishModelSetupModule = require(script.Parent.finishModelSetup)
 
 return function(p1)
-	-- upvalues: playersService (ref), finishModelSetup (ref)
+	-- upvalues: playersService (ref), finishModelSetupModule (ref)
 	return function(p2)
-		-- upvalues: p1 (ref), playersService (copy), finishModelSetup (copy)
+		-- upvalues: p1 (ref), playersService (copy), finishModelSetupModule (copy)
 		local var1 = tonumber(p1)
 		
 		if not var1 then
@@ -40,7 +22,7 @@ return function(p1)
 			end
 			return nil
 		else
-			return if ok and status then finishModelSetup(status) else nil
+			return if ok and status then finishModelSetupModule(status) else nil
 		end
 	end
 end

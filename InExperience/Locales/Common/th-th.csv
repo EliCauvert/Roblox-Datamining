@@ -4012,7 +4012,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,เราเข้าใจผิด
 Feature.SettingsHub.Prompt.JoinedVoiceChat,คุณได้เปิดใช้งานการแชทด้วยเสียงแล้ว
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,คุณเชื่อมต่อกับการแชทด้วยเสียงแล้ว
-Feature.SettingsHub.Prompt.LeaveVoiceChat,ยกเลิกการเชื่อมต่อแชทด้วยเสียงแล้ว
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,คุณได้ยกเลิกการเชื่อมต่อกับการแชทด้วยเสียงแล้ว
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,การใช้งานไมโครโฟนและกล้องถูกระงับ
 Feature.SettingsHub.Prompt.MicUseSuspended,การใช้ไมโครโฟนถูกระงับ
@@ -4051,7 +4050,6 @@ Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedConnectionsUpdate,ตอ�
 Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedFriendsUpdate,ตอนนี้คุณสามารถพูดคุยกับผู้ใช้ที่อยู่ในกลุ่มอายุใกล้เคียงและเพื่อนที่เชื่อได้ของคุณได้แล้ว
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections,เฉพาะผู้ใช้ที่อยู่ในกลุ่มอายุใกล้เคียงและคนรู้จักที่เชื่อได้เท่านั้นที่จะพูดคุยกับคุณได้
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends,เฉพาะผู้ใช้ในกลุ่มอายุใกล้เคียงและเพื่อนที่เชื่อได้เท่านั้นที่จะพูดคุยกับคุณได้
-Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupV2,เฉพาะผู้ที่อยู่ในกลุ่มอายุใกล้เคียงเท่านั้นที่จะแชทกับคุณได้
 Feature.SettingsHub.Prompt.Subtitle.TemporarySuspension2,เนื่องจากคุณได้ละเมิดมาตรฐานชุมชนของเรา เราจึงได้ยกเลิกการเข้าถึงการแชทด้วยเสียงของคุณชั่วคราวจนถึงวันที่
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1,เราได้ปิดการแชทด้วยเสียงชั่วคราวเนื่องจากคุณอาจใช้ภาษาที่ขัดต่อมาตรฐานชุมชนของ Roblox
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1V2,คุณยังคงใช้ภาษาที่ละเมิดกฎหรือมีเสียงรบกวนมากเกินไป

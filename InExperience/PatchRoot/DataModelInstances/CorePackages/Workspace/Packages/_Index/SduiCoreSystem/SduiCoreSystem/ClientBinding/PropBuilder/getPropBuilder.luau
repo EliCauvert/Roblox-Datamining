@@ -27,6 +27,7 @@ local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAp
 local fFlagSduiGenericContainerDispatch = require(parent.SharedFlags).FFlagSduiGenericContainerDispatch
 local fFlagSduiFocusNavActionsStructured = require(parent.SharedFlags).FFlagSduiFocusNavActionsStructured
 local fFlagSduiParseProtoGradientFields = require(parent.SharedFlags).FFlagSduiParseProtoGradientFields
+local fFlagLuaAppSduiSponsoredTwoByOneTile = require(parent.SharedFlags).FFlagLuaAppSduiSponsoredTwoByOneTile
 
 local function _(p1, p2)
 	return function(p3, p4, p5, p6, p7, p8)
@@ -423,7 +424,7 @@ end
 
 t.FillBehaviorProp = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then buildDefaultPropModule else nil
 t.InputSizeProp = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then buildDefaultPropModule else nil
-t.LaunchExperienceAction_ExperienceJoinData = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then buildTablePropModule else nil
+t.LaunchExperienceAction_ExperienceJoinData = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport or fFlagLuaAppSduiSponsoredTwoByOneTile then buildTablePropModule else nil
 t.AvatarConfigProp = if fFlagSduiExperienceDetailsSupport then buildTablePropModule else nil
 t.ArrayOfAvatarProp = if fFlagSduiExperienceDetailsSupport then buildRepeatedPropModule else nil
 

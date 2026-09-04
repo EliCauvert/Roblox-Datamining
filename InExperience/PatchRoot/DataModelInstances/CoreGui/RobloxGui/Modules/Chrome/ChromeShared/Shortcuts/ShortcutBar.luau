@@ -18,13 +18,13 @@ local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedF
 local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
 local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
 local fFlagGamepadIconSupportCheck = sharedFlagsModule.FFlagGamepadIconSupportCheck
-local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
+local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
 local fFlagEnableDrawerAnimatingHook = sharedFlagsModule.FFlagEnableDrawerAnimatingHook
 local getSideSheetVisibility = require(corePackagesService.Workspace.Packages.InExperienceSideSheet).getSideSheetVisibility
 
 function ChromeShortcutBar(_)
-	-- upvalues: reactModule (ref), useTokens (ref), useObservableValueModule (ref), viewportUtilModule (ref), fFlagGamepadIconSupportCheck (ref), gamepadConnectorModule (ref), serviceModule (ref), userInputService (ref), isSpatial (ref), fFlagEnableConsoleExpControls (ref), fFlagEnableSideSheet (ref), fFlagSideSheetFocusNav (ref), fFlagEnableDrawerAnimatingHook (ref), getSideSheetVisibility (ref), useDrawerAnimating (ref), reactRobloxModule (ref), constantsModule (ref), shortcutBar (ref), coreGuiService (ref)
+	-- upvalues: reactModule (ref), useTokens (ref), useObservableValueModule (ref), viewportUtilModule (ref), fFlagGamepadIconSupportCheck (ref), gamepadConnectorModule (ref), serviceModule (ref), userInputService (ref), isSpatial (ref), fFlagEnableConsoleExpControls (ref), isSideSheetEnabledModule (ref), fFlagSideSheetFocusNav (ref), fFlagEnableDrawerAnimatingHook (ref), getSideSheetVisibility (ref), useDrawerAnimating (ref), reactRobloxModule (ref), constantsModule (ref), shortcutBar (ref), coreGuiService (ref)
 	local var1, var2 = reactModule.useState({})
 	local var3, var4 = reactModule.useState({})
 	local var5, var6 = reactModule.useBinding(false)
@@ -95,7 +95,7 @@ function ChromeShortcutBar(_)
 		end
 	end, {})
 	
-	if fFlagEnableSideSheet and fFlagSideSheetFocusNav and fFlagEnableDrawerAnimatingHook then
+	if isSideSheetEnabledModule and fFlagSideSheetFocusNav and fFlagEnableDrawerAnimatingHook then
 		local var11 = getSideSheetVisibility(false)
 		local var12 = useDrawerAnimating()
 		reactModule.useEffect(function()

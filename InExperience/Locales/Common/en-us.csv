@@ -2042,7 +2042,7 @@ Feature.Build.Label.InProgress,In progress
 Feature.Build.Label.InputNeeded,Input needed
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limited
-Feature.Build.Label.Live,Live
+Feature.Build.Label.Live,Published
 Feature.Build.Label.Loading,
 Feature.Build.Label.MaximizeForGamePlays,Maximize for game plays
 Feature.Build.Label.Models3D,3D Models
@@ -2061,7 +2061,7 @@ Feature.Build.Label.Pricing,Pricing
 Feature.Build.Label.Private,Private
 Feature.Build.Label.Public,Public
 Feature.Build.Label.PubliclyUnavailable,Publicly unavailable
-Feature.Build.Label.Published,Published
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Ready
 Feature.Build.Label.RegionalPricing,Regional pricing
@@ -4040,7 +4040,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Did we get it wrong?<br /><u>Report 
 Feature.SettingsHub.Prompt.JoinedVoiceChat,You've Joined Voice Chat
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,You Have Joined Voice Chat
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,You're connected to Voice Chat
-Feature.SettingsHub.Prompt.LeaveVoiceChat,Voice chat disconnected
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,You've disconnected from Voice Chat
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Microphone and Camera Use Suspended
 Feature.SettingsHub.Prompt.MicUseSuspended,Microphone use Suspended
@@ -4079,7 +4078,6 @@ Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedConnectionsUpdate,You can
 Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedFriendsUpdate,You can now talk with people in similar age groups and your trusted friends.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections,Only people in similar age groups and your Trusted Connections can talk with you.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends,Only people in similar age groups and your trusted friends can talk with you.
-Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupV2,Only people in similar age groups can chat with you.
 Feature.SettingsHub.Prompt.Subtitle.TemporarySuspension2,"Due to the violation of our Community Standards, we have temporarily revoked your access to chat with voice until"
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1,We’ve temporarily turned off voice chat because you may have used language that goes against Roblox Community Standards.
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1V2,You continued using language that breaks the rules or making too much background noise.

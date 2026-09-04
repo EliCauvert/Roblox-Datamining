@@ -114,7 +114,6 @@ local t = {
 	FFlagHelpPageIXPExposure = helpPageModule.Flags.FFlagHelpPageIXPExposure,
 	FStringHelpPageIXPLayer = helpPageModule.Flags.FStringHelpPageIXPLayer,
 	FFlagFixDisabledScrollOnIos = game:DefineFastFlag("FixDisabledScrollOnIos", false),
-	FFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet,
 	FFlagSideSheetAndroidBack = game:DefineFastFlag("SideSheetAndroidBack", false),
 	FFlagAddInviteFriendsIntegration = sharedFlagsModule.FFlagAddInviteFriendsIntegration,
 	FFlagIntegrateTraversalHistoryInSideSheet = sharedFlagsModule.FFlagIntegrateTraversalHistoryInSideSheet,
@@ -199,6 +198,7 @@ local t_1 = { frequency = 4, dampingRatio = 1 }
 local inExperienceSideSheetModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheet)
 local toggleSideSheet = inExperienceSideSheetModule.toggleSideSheet
 local getSideSheetVisibility = inExperienceSideSheetModule.getSideSheetVisibility
+local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local _ = require(robloxGui.Modules.Settings.ReactPageFactory)
 local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
 local fFlagLocalizeVersionLabels = t.FFlagLocalizeVersionLabels or var14
@@ -292,7 +292,7 @@ local function createReactPage(p2)
 end
 
 local function CreateSettingsHub()
-	-- upvalues: t (ref), robloxGui (ref), var15 (ref), utilityModule (ref), var16 (ref), createSignal (ref), constantsModule_1 (ref), stores (ref), rbxAnalyticsService (ref), reactPageAnalyticsModule (ref), createReactPage (ref), themeModule (ref), contextActionService (ref), localizationService (ref), localization (ref), var2 (ref), create (ref), var8 (ref), userInputService (ref), platform (ref), default (ref), getCamMicPermissionsModule (ref), otterModule (ref), robloxTranslatorModule (ref), settingsHubRaceConditionFix (ref), starterGuiService (ref), inExperienceSideSheetModule (ref), telemetryService (ref), menuLeaveGameTelemetryConfigModule (ref), menuResetCharacterTelemetryConfigModule (ref), constantsModule (ref), menuResumeTelemetryConfigModule (ref), reactRobloxModule (ref), reactModule (ref), menuButtonsContainerModule (ref), flagsModule (ref), guiService (ref), uDim2_1 (ref), uDim2 (ref), SHIELD_INACTIVE_POSITION (ref), SETTINGS_SHIELD_TRANSPARENCY (ref), SETTINGS_SHIELD (ref), var3 (ref), fFlagLocalizeVersionLabels (ref), GetServerChannelBlocking (ref), var12 (write), var6 (write), runService (ref), httpRbxApiService (ref), httpService (ref), cachedPolicyServiceModule (ref), baseUrl (ref), var9 (ref), starterPlayerService (ref), playersService (ref), roactModule (ref), roactAppExperimentModule (ref), IXPService (ref), appStyleProvider (ref), dark (ref), menuBackButtonModule (ref), menuFrontButtonModule (ref), appFonts (ref), t_1 (ref), corePackagesService (ref), inExperienceAppChatModalModule (ref), inExperienceCapabilities (ref), foundationProvider (ref), foundationModule (ref), utilsModule (ref), switchTabHint (ref), isSubjectToDesktopPolicies (ref), settingsFullScreenTitleBarModule (ref), VRService (ref), gameSettings (ref), devConsoleMasterModule (ref), fixReportButtonCutOff (ref), cryoModule (ref), IXPServiceWrapper (ref), experienceMenuSessionManagerInstance (ref), reactPageSignalModule (ref), mouseIconOverrideService (ref), settingsHubCursorOverride (ref), checkLeaveGameUpsellCooldown (ref), tweenService (ref), perfUtilsModule (ref), var10 (write), chatSelectorModule (ref), fFlagEnableNewBackpack (ref), var1 (ref), var11 (write), gameInviteInviteExperimentVariant (write), var5 (write), var4 (write), gameInviteModalManager (write), gameInviteConstants (write), GetCorePackagesLoaded (ref), gameInviteAnalytics (ref), capturesPolicy (ref), isSpatial (ref), capturesAppModule (ref), getSideSheetVisibility (ref), toggleSideSheet (ref), leaveGameModule (ref), signalsModule (ref), portalWithFoundationStylelinkModule (ref), traversalHistoryMenu (ref), inExperienceMenuReactModule (ref), inExperienceMenuReactPageModule (ref)
+	-- upvalues: t (ref), robloxGui (ref), var15 (ref), utilityModule (ref), var16 (ref), createSignal (ref), constantsModule_1 (ref), stores (ref), rbxAnalyticsService (ref), reactPageAnalyticsModule (ref), createReactPage (ref), isSideSheetEnabledModule (ref), themeModule (ref), contextActionService (ref), localizationService (ref), localization (ref), var2 (ref), create (ref), var8 (ref), userInputService (ref), platform (ref), default (ref), getCamMicPermissionsModule (ref), otterModule (ref), robloxTranslatorModule (ref), settingsHubRaceConditionFix (ref), starterGuiService (ref), inExperienceSideSheetModule (ref), telemetryService (ref), menuLeaveGameTelemetryConfigModule (ref), menuResetCharacterTelemetryConfigModule (ref), constantsModule (ref), menuResumeTelemetryConfigModule (ref), reactRobloxModule (ref), reactModule (ref), menuButtonsContainerModule (ref), flagsModule (ref), guiService (ref), uDim2_1 (ref), uDim2 (ref), SHIELD_INACTIVE_POSITION (ref), SETTINGS_SHIELD_TRANSPARENCY (ref), SETTINGS_SHIELD (ref), var3 (ref), fFlagLocalizeVersionLabels (ref), GetServerChannelBlocking (ref), var12 (write), var6 (write), runService (ref), httpRbxApiService (ref), httpService (ref), cachedPolicyServiceModule (ref), baseUrl (ref), var9 (ref), starterPlayerService (ref), playersService (ref), roactModule (ref), roactAppExperimentModule (ref), IXPService (ref), appStyleProvider (ref), dark (ref), menuBackButtonModule (ref), menuFrontButtonModule (ref), appFonts (ref), t_1 (ref), corePackagesService (ref), inExperienceAppChatModalModule (ref), inExperienceCapabilities (ref), foundationProvider (ref), foundationModule (ref), utilsModule (ref), switchTabHint (ref), isSubjectToDesktopPolicies (ref), settingsFullScreenTitleBarModule (ref), VRService (ref), gameSettings (ref), devConsoleMasterModule (ref), fixReportButtonCutOff (ref), cryoModule (ref), IXPServiceWrapper (ref), experienceMenuSessionManagerInstance (ref), reactPageSignalModule (ref), mouseIconOverrideService (ref), settingsHubCursorOverride (ref), checkLeaveGameUpsellCooldown (ref), tweenService (ref), perfUtilsModule (ref), var10 (write), chatSelectorModule (ref), fFlagEnableNewBackpack (ref), var1 (ref), var11 (write), gameInviteInviteExperimentVariant (write), var5 (write), var4 (write), gameInviteModalManager (write), gameInviteConstants (write), GetCorePackagesLoaded (ref), gameInviteAnalytics (ref), capturesPolicy (ref), isSpatial (ref), capturesAppModule (ref), getSideSheetVisibility (ref), toggleSideSheet (ref), leaveGameModule (ref), signalsModule (ref), portalWithFoundationStylelinkModule (ref), traversalHistoryMenu (ref), inExperienceMenuReactModule (ref), inExperienceMenuReactPageModule (ref)
 	local t_2 = {
 		Visible = false,
 		Active = true,
@@ -361,18 +361,18 @@ local function CreateSettingsHub()
 	t_2.ReactPage = createReactPage()
 	
 	local function _(p2)
-		-- upvalues: t_2 (ref), t (copy)
+		-- upvalues: t_2 (ref), isSideSheetEnabledModule (copy)
 		p2 = p2 or t_2.Pages.CurrentPage
 		
-		return if t.FFlagEnableSideSheet then p2.ShouldShowHubBar == true else p2.ShouldShowBottomBar == true
+		return if isSideSheetEnabledModule then p2.ShouldShowHubBar == true else p2.ShouldShowBottomBar == true
 	end
 	
 	local _ = function(p2)
-		-- upvalues: t_2 (ref), t (copy)
+		-- upvalues: t_2 (ref), isSideSheetEnabledModule (copy)
 		local var21
 		p2 = p2 or t_2.Pages.CurrentPage
 		
-		if t.FFlagEnableSideSheet then
+		if isSideSheetEnabledModule then
 			var21 = p2.ShouldShowHubBar == true
 			var21 = nil
 		else
@@ -690,9 +690,9 @@ local function CreateSettingsHub()
 		text_1 = userInputService:GetImageForKeyCode(Enum.KeyCode.ButtonX)
 		text_2 = userInputService:GetImageForKeyCode(Enum.KeyCode.ButtonY)
 	else
-		text = "rbxasset://textures/ui/Controls/DesignSystem/ButtonB" .. var111 .. ".png"
-		text_1 = "rbxasset://textures/ui/Controls/DesignSystem/ButtonX" .. var111 .. ".png"
-		text_2 = "rbxasset://textures/ui/Controls/DesignSystem/ButtonY" .. var111 .. ".png"
+		text = "rbxasset://textures/ui/Controls/DesignSystem/ButtonB" .. var112 .. ".png"
+		text_1 = "rbxasset://textures/ui/Controls/DesignSystem/ButtonX" .. var112 .. ".png"
+		text_2 = "rbxasset://textures/ui/Controls/DesignSystem/ButtonY" .. var112 .. ".png"
 	end
 	local buttonStartImageForKeyCode = userInputService:GetImageForKeyCode(Enum.KeyCode.ButtonStart)
 	local var26 = false
@@ -807,7 +807,7 @@ local function CreateSettingsHub()
 	
 	t_2.RespawnBehaviourChangedEvent = Instance.new("BindableEvent")
 	starterGuiService:RegisterSetCore("ResetButtonCallback", function(p3)
-		-- upvalues: t_2 (ref), t (copy), var28 (write), setResetEnabled (ref), inExperienceSideSheetModule (copy), var29 (write)
+		-- upvalues: t_2 (ref), t (copy), var28 (write), setResetEnabled (ref), isSideSheetEnabledModule (copy), inExperienceSideSheetModule (copy), var29 (write)
 		local var30 = typeof(p3) == "Instance" and p3:IsA("BindableEvent")
 		
 		if var30 or type(p3) == "boolean" then
@@ -823,7 +823,7 @@ local function CreateSettingsHub()
 			else
 				setResetEnabled(false)
 			end
-			if t.FFlagEnableSideSheet then
+			if isSideSheetEnabledModule then
 				inExperienceSideSheetModule.setIsRespawnEnabled(false)
 			end
 		elseif not var31 and (var30 or p3 == true) then
@@ -832,7 +832,7 @@ local function CreateSettingsHub()
 			else
 				setResetEnabled(true)
 			end
-			if t.FFlagEnableSideSheet then
+			if isSideSheetEnabledModule then
 				inExperienceSideSheetModule.setIsRespawnEnabled(true)
 			end
 		end
@@ -974,7 +974,7 @@ local function CreateSettingsHub()
 	end else nil
 	
 	local function createGui()
-		-- upvalues: utilityModule (copy), t_2 (ref), create (copy), uDim2_1 (copy), uDim2 (copy), robloxGui (copy), SHIELD_INACTIVE_POSITION (copy), SETTINGS_SHIELD_TRANSPARENCY (copy), SETTINGS_SHIELD (copy), var3 (copy), t (copy), themeModule (copy), var2 (copy), fFlagLocalizeVersionLabels (copy), robloxTranslatorModule (copy), GetServerChannelBlocking (copy), var12 (copy), var6 (copy), runService (copy), httpRbxApiService (copy), httpService (copy), cachedPolicyServiceModule (copy), baseUrl (copy), var9 (copy), starterPlayerService (copy), playersService (copy), rbxAnalyticsService (copy), constantsModule (copy), guiService (copy), getCamMicPermissionsModule (copy), default (copy), roactModule (copy), roactAppExperimentModule (copy), IXPService (copy), appStyleProvider (copy), dark (copy), menuBackButtonModule (copy), menuFrontButtonModule (copy), appFonts (copy), otterModule (copy), t_1 (copy), userInputService (copy), setVisibilityInternal (write), var34 (ref), corePackagesService (copy), inExperienceAppChatModalModule (copy), removeBottomBarBindings (ref), constantsModule_1 (copy), inExperienceCapabilities (copy), addBottomBarButtonOld (ref), text_1 (write), var28 (write), var24 (ref), text_2 (write), buttonStartImageForKeyCode (ref), text (write), reactRobloxModule (copy), reactModule (copy), foundationProvider (copy), foundationModule (copy), utilsModule (copy), switchTabHint (copy), isSubjectToDesktopPolicies (copy), settingsFullScreenTitleBarModule (copy)
+		-- upvalues: utilityModule (copy), t_2 (ref), create (copy), uDim2_1 (copy), uDim2 (copy), robloxGui (copy), SHIELD_INACTIVE_POSITION (copy), SETTINGS_SHIELD_TRANSPARENCY (copy), SETTINGS_SHIELD (copy), var3 (copy), t (copy), themeModule (copy), var2 (copy), fFlagLocalizeVersionLabels (copy), robloxTranslatorModule (copy), GetServerChannelBlocking (copy), var12 (copy), var6 (copy), runService (copy), httpRbxApiService (copy), httpService (copy), cachedPolicyServiceModule (copy), baseUrl (copy), var9 (copy), starterPlayerService (copy), playersService (copy), rbxAnalyticsService (copy), constantsModule (copy), guiService (copy), getCamMicPermissionsModule (copy), default (copy), isSideSheetEnabledModule (copy), roactModule (copy), roactAppExperimentModule (copy), IXPService (copy), appStyleProvider (copy), dark (copy), menuBackButtonModule (copy), menuFrontButtonModule (copy), appFonts (copy), otterModule (copy), t_1 (copy), userInputService (copy), setVisibilityInternal (write), var34 (ref), corePackagesService (copy), inExperienceAppChatModalModule (copy), removeBottomBarBindings (ref), constantsModule_1 (copy), inExperienceCapabilities (copy), addBottomBarButtonOld (ref), text_1 (write), var28 (write), var24 (ref), text_2 (write), buttonStartImageForKeyCode (ref), text (write), reactRobloxModule (copy), reactModule (copy), foundationProvider (copy), foundationModule (copy), utilsModule (copy), switchTabHint (copy), isSubjectToDesktopPolicies (copy), settingsFullScreenTitleBarModule (copy)
 		local var36 = if utilityModule:IsSmallTouchScreen() then 5 else 0
 		t_2.ClippingShield = create("Frame")({
 			Name = "SettingsClippingShield",
@@ -1135,7 +1135,7 @@ local function CreateSettingsHub()
 			end
 			var12 = var6:InvokeServer()
 			var39 = var12
-			serverVersionLabel.Text = var38 .. var222
+			serverVersionLabel.Text = var38 .. var223
 			local serverVersionLabel_1 = t_2.ServerVersionLabel
 			serverVersionLabel_1.Size = coreScriptVersionEnabledEngineFeature and UDim2.new(0, serverVersionLabel_1.TextBounds.X + 6, 0, var3) or UDim2.new(0.2, -6, 1, 0)
 			t_2.ServerVersionLabel.TextScaled = not (coreScriptVersionEnabledEngineFeature or t_2.ServerVersionLabel.TextFits)
@@ -1374,7 +1374,7 @@ local function CreateSettingsHub()
 				rawValue = if t.GetFFlagNewEventIngestPlayerScriptsDimensions() then var41 else nil,
 				context = if t.GetFFlagNewEventIngestPlayerScriptsDimensions() then "IGMv1" else nil
 			})
-			t_2.OverridesPlayerScriptsLabel.Text = var39 .. var229
+			t_2.OverridesPlayerScriptsLabel.Text = var39 .. var230
 			t_2.OverridesPlayerScriptsLabel.Visible = var9 or playerPermissionsModule.IsPlayerAdminAsync(playersService.LocalPlayer)
 			local overridesPlayerScriptsLabel = t_2.OverridesPlayerScriptsLabel
 			overridesPlayerScriptsLabel.Size = coreScriptVersionEnabledEngineFeature and UDim2.new(0, overridesPlayerScriptsLabel.TextBounds.X + 6, 0, var3) or UDim2.new(0.2, -6, 1, 0)
@@ -1530,7 +1530,7 @@ local function CreateSettingsHub()
 			Parent = page
 		})
 		
-		if not t.FFlagEnableSideSheet then
+		if not isSideSheetEnabledModule then
 			create("Frame")({
 				BorderSizePixel = 0,
 				BackgroundColor3 = themeModule.color("Divider"),
@@ -1541,7 +1541,7 @@ local function CreateSettingsHub()
 				Parent = t_2.HubBar
 			})
 		end
-		if t.FFlagEnableSideSheet then
+		if isSideSheetEnabledModule then
 			t_2.PageTitleHeader = create("Frame")({
 				Name = "PageTitleHeader",
 				BackgroundTransparency = 1,
@@ -1813,7 +1813,7 @@ local function CreateSettingsHub()
 			guiService.SelectedCoreObject = nil
 		end
 		
-		if t.FFlagEnableSideSheet then
+		if isSideSheetEnabledModule then
 			t_2.PageTitleCloseButton = utilityModule:MakeStyledImageButton("PageTitleClose", "rbxasset://textures/ui/InspectMenu/x.png", UDim2.new(0, 40, 0, 40), UDim2.new(0, 16, 0, 16), function()
 				-- upvalues: var42 (ref), constantsModule (copy)
 				var42(constantsModule.AnalyticsResumeXButtonSource)
@@ -1953,7 +1953,7 @@ local function CreateSettingsHub()
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(1, 1),
 				Parent = t_2.HubBar,
-				Visible = not t.FFlagEnableSideSheet
+				Visible = not isSideSheetEnabledModule
 			})
 			t_2.TabHeaderContainerListLayout = create("UIListLayout")({
 				FillDirection = Enum.FillDirection.Horizontal,
@@ -2045,7 +2045,7 @@ local function CreateSettingsHub()
 	end
 	
 	local function onScreenSizeChanged()
-		-- upvalues: t_2 (ref), t (copy), utilityModule (copy), themeModule (copy), var34 (ref), var35 (ref), robloxGui (copy), var2 (copy), VRService (copy), runService (copy), shouldShowBottomBar (ref), setBottomBarBindings (ref), setBottomBarSelection (ref), removeBottomBarBindings (ref)
+		-- upvalues: t_2 (ref), t (copy), utilityModule (copy), themeModule (copy), var34 (ref), var35 (ref), robloxGui (copy), var2 (copy), VRService (copy), isSideSheetEnabledModule (copy), runService (copy), shouldShowBottomBar (ref), setBottomBarBindings (ref), setBottomBarSelection (ref), removeBottomBarBindings (ref)
 		local function _()
 			-- upvalues: t_2 (copy)
 			return if t_2.BackBarRef:getValue() then t_2.BackBarRef:getValue().Visible else false
@@ -2111,7 +2111,7 @@ local function CreateSettingsHub()
 		else
 			t_2.HubBar.Size = UDim2.new(0, 800, 0, 60)
 		end
-		local var45 = if t.FFlagEnableSideSheet or not themeModule.AlwaysShowBottomBar() then t_2.HubBar.Size.Y.Offset else t_2.HubBar.Size.Y.Offset + t_2.BottomButtonFrame.Size.Y.Offset
+		local var45 = if isSideSheetEnabledModule or not themeModule.AlwaysShowBottomBar() then t_2.HubBar.Size.Y.Offset else t_2.HubBar.Size.Y.Offset + t_2.BottomButtonFrame.Size.Y.Offset
 		local var46 = var42 * 2 + (if t.FFlagFixDisableTopPaddingError and t_2.Pages.CurrentPage == nil or not t_2.Pages.CurrentPage.DisableTopPadding then var45 else 0)
 		
 		if not t.FFlagAddTraversalBackButton then
@@ -2509,7 +2509,7 @@ local function CreateSettingsHub()
 	end
 	
 	function t_2.InitInPage(_, p13)
-		-- upvalues: t_2 (ref), t (copy), utilityModule (copy), shouldShowBottomBar (ref), setBottomBarBindings (ref), setBottomBarSelection (ref), var19 (write)
+		-- upvalues: t_2 (ref), t (copy), utilityModule (copy), shouldShowBottomBar (ref), setBottomBarBindings (ref), setBottomBarSelection (ref), isSideSheetEnabledModule (copy), var19 (write)
 		local tabPosition = p13.TabPosition
 		
 		for i, v in pairs(t_2.Pages.PageTable) do
@@ -2528,7 +2528,7 @@ local function CreateSettingsHub()
 			local hubBar = t_2.HubBar
 			p13 = p13 or t_2.Pages.CurrentPage
 			
-			if t.FFlagEnableSideSheet then
+			if isSideSheetEnabledModule then
 				var52 = p13.ShouldShowHubBar == true
 				var52 = nil
 			else
@@ -2544,12 +2544,12 @@ local function CreateSettingsHub()
 		t_2.Pages.CurrentPage.Active = true
 		t_2.CurrentPageSignal:fire(if t_2.Pages.CurrentPage then t_2.Pages.CurrentPage.Page.Name else nil)
 		
-		if t.FFlagEnableSideSheet then
+		if isSideSheetEnabledModule then
 			local var54
 			local currentPage = t_2.Pages.CurrentPage
 			local currentPage_1 = currentPage or t_2.Pages.CurrentPage
 			
-			if t.FFlagEnableSideSheet then
+			if isSideSheetEnabledModule then
 				var54 = currentPage_1.ShouldShowHubBar == true
 				var54 = nil
 			else
@@ -2571,7 +2571,7 @@ local function CreateSettingsHub()
 	end
 	
 	function t_2.SwitchToPage(_, p14, p15, p16, p17, _, p18)
-		-- upvalues: t_2 (ref), t (copy), fixReportButtonCutOff (copy), utilityModule (copy), themeModule (copy), shouldShowBottomBar (ref), var19 (write), var20 (write), setBottomBarBindings (ref), setBottomBarSelection (ref), onScreenSizeChanged (ref), cryoModule (copy), IXPServiceWrapper (copy), rbxAnalyticsService (copy), constantsModule (copy), flagsModule (copy), experienceMenuSessionManagerInstance (copy), reactPageSignalModule (copy)
+		-- upvalues: t_2 (ref), t (copy), fixReportButtonCutOff (copy), utilityModule (copy), themeModule (copy), isSideSheetEnabledModule (copy), shouldShowBottomBar (ref), var19 (write), var20 (write), setBottomBarBindings (ref), setBottomBarSelection (ref), onScreenSizeChanged (ref), cryoModule (copy), IXPServiceWrapper (copy), rbxAnalyticsService (copy), constantsModule (copy), flagsModule (copy), experienceMenuSessionManagerInstance (copy), reactPageSignalModule (copy)
 		if t_2.Pages.PageTable[p14] == nil then return end
 		if t.FFlagPreventHiddenSwitchPage and t_2:GetVisibility() == false then return end
 		if fixReportButtonCutOff then
@@ -2592,7 +2592,7 @@ local function CreateSettingsHub()
 			local var56
 			p14 = p14 or t_2.Pages.CurrentPage
 			
-			if t.FFlagEnableSideSheet then
+			if isSideSheetEnabledModule then
 				var56 = p14.ShouldShowHubBar == true
 				var56 = nil
 			else
@@ -2602,7 +2602,7 @@ local function CreateSettingsHub()
 				uDim = UDim.new(0, t_2.HubBar.AbsoluteSize.Y)
 			end
 		end
-		if not t.FFlagEnableSideSheet and t_2.BottomButtonFrame and (var55 and not shouldShowBottomBar(p14)) then
+		if not isSideSheetEnabledModule and t_2.BottomButtonFrame and (var55 and not shouldShowBottomBar(p14)) then
 			uDim_1 = UDim.new(0, t_2.BottomButtonFrame.AbsoluteSize.Y)
 		end
 		local var57 = themeModule.HubPadding()
@@ -2647,7 +2647,7 @@ local function CreateSettingsHub()
 			local hubBar = t_2.HubBar
 			p14 = p14 or t_2.Pages.CurrentPage
 			
-			if t.FFlagEnableSideSheet then
+			if isSideSheetEnabledModule then
 				var59 = p14.ShouldShowHubBar == true
 				var59 = nil
 			else
@@ -2674,12 +2674,12 @@ local function CreateSettingsHub()
 		t_2.Pages.CurrentPage.Active = true
 		t_2.CurrentPageSignal:fire(if t_2.Pages.CurrentPage then t_2.Pages.CurrentPage.Page.Name else nil)
 		
-		if t.FFlagEnableSideSheet then
+		if isSideSheetEnabledModule then
 			local var61
 			local currentPage = t_2.Pages.CurrentPage
 			local currentPage_1 = currentPage or t_2.Pages.CurrentPage
 			
-			if t.FFlagEnableSideSheet then
+			if isSideSheetEnabledModule then
 				var61 = currentPage_1.ShouldShowHubBar == true
 				var61 = nil
 			else
@@ -2694,7 +2694,7 @@ local function CreateSettingsHub()
 		local _ = nil
 		local _ = t_2.Pages.CurrentPage
 		
-		if u9626 ~= nil and u9626.ShouldDisableDefaultScroll == true then
+		if u9629 ~= nil and u9629.ShouldDisableDefaultScroll == true then
 			t_2.PageView.ScrollBarThickness = 0
 			t_2.PageView.ScrollingEnabled = false
 			t_2.PageView.CanvasPosition = Vector2.new(0, 0)
@@ -2718,7 +2718,7 @@ local function CreateSettingsHub()
 			if p19 == "AbsoluteSize" then
 				local _ = nil
 				local _ = t_2.Pages.CurrentPage
-				local var62 = u10136
+				local var62 = u10134
 				
 				if not (var62 ~= nil and var62.ShouldDisableDefaultScroll == true) then
 					t_2.PageView.CanvasSize = UDim2.new(0, 0, 0, t_2.Pages.CurrentPage:GetSize().Y)
@@ -2854,7 +2854,7 @@ local function CreateSettingsHub()
 	end else nil
 	
 	setVisibilityInternal = function(value, p19, p20, _, p21)
-		-- upvalues: t (copy), t_2 (ref), perfUtilsModule (copy), robloxGui (copy), var62 (write), onScreenSizeChanged (ref), utilityModule (copy), var34 (ref), guiService (copy), themeModule (copy), experienceMenuSessionManagerInstance (copy), constantsModule (copy), gameSettings (copy), tweenService (copy), contextActionService (copy), var44 (ref), var46 (ref), shouldShowBottomBar (ref), setBottomBarBindings (ref), setBottomBarSelection (ref), userInputService (copy), var45 (ref), var10 (copy), VRService (copy), mouseIconOverrideService (copy), settingsHubCursorOverride (copy), removeBottomBarBindings (ref), chatSelectorModule (copy), fFlagEnableNewBackpack (copy), var1 (copy), inExperienceAppChatModalModule (copy), var11 (copy), var35 (ref), SHIELD_INACTIVE_POSITION (copy), rbxAnalyticsService (copy)
+		-- upvalues: t (copy), t_2 (ref), perfUtilsModule (copy), robloxGui (copy), var62 (write), onScreenSizeChanged (ref), utilityModule (copy), var34 (ref), guiService (copy), themeModule (copy), experienceMenuSessionManagerInstance (copy), constantsModule (copy), gameSettings (copy), tweenService (copy), contextActionService (copy), isSideSheetEnabledModule (copy), var44 (ref), var46 (ref), shouldShowBottomBar (ref), setBottomBarBindings (ref), setBottomBarSelection (ref), userInputService (copy), var45 (ref), var10 (copy), VRService (copy), mouseIconOverrideService (copy), settingsHubCursorOverride (copy), removeBottomBarBindings (ref), chatSelectorModule (copy), fFlagEnableNewBackpack (copy), var1 (copy), inExperienceAppChatModalModule (copy), var11 (copy), var35 (ref), SHIELD_INACTIVE_POSITION (copy), rbxAnalyticsService (copy)
 		local _ = nil
 		local var63 = if t.isInExperienceUIVREnabled then p19 or not t_2.SettingsUIDelegate:isOpenCloseAnimationAllowed() else p19
 		t_2.OpenStateChangedCount += 1
@@ -2998,7 +2998,7 @@ local function CreateSettingsHub()
 				return if t_2.SettingsUIDelegate:isInputEventNeededBySettings(p22, p23, p24) then Enum.ContextActionResult.Pass else nil
 			end else function() end, false, Enum.PlayerActions.CharacterForward, Enum.PlayerActions.CharacterBackward, Enum.PlayerActions.CharacterLeft, Enum.PlayerActions.CharacterRight, Enum.PlayerActions.CharacterJump, Enum.KeyCode.LeftShift, Enum.KeyCode.RightShift, Enum.KeyCode.Tab, Enum.UserInputType.Gamepad1, Enum.UserInputType.Gamepad2, Enum.UserInputType.Gamepad3, Enum.UserInputType.Gamepad4)
 			
-			if not t.FFlagEnableSideSheet then
+			if not isSideSheetEnabledModule then
 				contextActionService:BindCoreAction("RbxSettingsHubSwitchTab", var44, false, Enum.KeyCode.ButtonR1, Enum.KeyCode.ButtonL1)
 			end
 			contextActionService:BindCoreAction("RbxSettingsScrollHotkey", var46, false, Enum.KeyCode.PageUp, Enum.KeyCode.PageDown)
@@ -3010,7 +3010,7 @@ local function CreateSettingsHub()
 			if t.ChromeEnabled and t.FFlagEnableConsoleExpControls then
 				require(robloxGui.Modules.Chrome.Service):setShortcutBar(require(robloxGui.Modules.Chrome.ChromeShared.Unibar.Constants).TILTMENU_SHORTCUTBAR_ID)
 			end
-			if not t.FFlagEnableSideSheet then
+			if not isSideSheetEnabledModule then
 				t_2.TabConnection = userInputService.InputBegan:connect(var45)
 			end
 			setOverrideMouseIconBehavior()
@@ -3185,7 +3185,7 @@ local function CreateSettingsHub()
 			t_2:CloseReactPage()
 			clearMenuStack()
 			
-			if not t.FFlagEnableSideSheet then
+			if not isSideSheetEnabledModule then
 				contextActionService:UnbindCoreAction("RbxSettingsHubSwitchTab")
 			end
 			contextActionService:UnbindCoreAction("RbxSettingsHubStopCharacter")
@@ -3608,9 +3608,9 @@ local function CreateSettingsHub()
 	
 	if not t.isNewInGameMenuEnabled() and (not t.FFlagAddUILessMode or t.FIntAddUILessModeVariant == 0) then
 		contextActionService:BindCoreAction("RBXEscapeMainMenu", function(_, p19, _)
-			-- upvalues: t (copy), getSideSheetVisibility (copy), toggleSideSheet (copy), t_2 (ref), constantsModule (copy)
+			-- upvalues: isSideSheetEnabledModule (copy), getSideSheetVisibility (copy), toggleSideSheet (copy), t_2 (ref), t (copy), constantsModule (copy)
 			if p19 ~= Enum.UserInputState.Begin then return end
-			if t.FFlagEnableSideSheet then
+			if isSideSheetEnabledModule then
 				if getSideSheetVisibility() then
 					toggleSideSheet(false)
 					
@@ -3638,8 +3638,8 @@ local function CreateSettingsHub()
 		end, false, Enum.KeyCode.Escape)
 	end
 	guiService.ShowLeaveConfirmation:connect(function()
-		-- upvalues: t (copy), getSideSheetVisibility (copy), toggleSideSheet (copy), t_2 (ref), constantsModule (copy)
-		if t.FFlagEnableSideSheet and t.FFlagSideSheetAndroidBack then
+		-- upvalues: isSideSheetEnabledModule (copy), t (copy), getSideSheetVisibility (copy), toggleSideSheet (copy), t_2 (ref), constantsModule (copy)
+		if isSideSheetEnabledModule and t.FFlagSideSheetAndroidBack then
 			if getSideSheetVisibility() then
 				toggleSideSheet(false)
 				

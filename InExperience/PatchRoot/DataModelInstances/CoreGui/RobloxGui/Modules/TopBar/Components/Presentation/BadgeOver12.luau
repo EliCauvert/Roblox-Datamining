@@ -6,14 +6,13 @@ local useStyle = require(corePackagesService.Packages.UIBlox).Core.Style.useStyl
 local dataHydrationModule = require(corePackagesService.Workspace.Packages.DataHydration)
 local getAgeRecommendationStore = dataHydrationModule.Game.getAgeRecommendationStore
 local dataStatus = dataHydrationModule.DataHydrationTypes.DataStatus
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local fFlagShowGameAgeRating = sharedFlagsModule.FFlagShowGameAgeRating
-local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
+local fFlagShowGameAgeRating = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagShowGameAgeRating
+local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 
 return function(p1)
-	-- upvalues: useStyle (ref), fFlagShowGameAgeRating (ref), fFlagEnableSideSheet (ref), reactModule (ref), getAgeRecommendationStore (ref), dataStatus (ref), signalsReactModule (ref), appFonts (ref)
+	-- upvalues: useStyle (ref), fFlagShowGameAgeRating (ref), isSideSheetEnabledModule (ref), reactModule (ref), getAgeRecommendationStore (ref), dataStatus (ref), signalsReactModule (ref), appFonts (ref)
 	local var1 = useStyle()
-	local var2 = if fFlagShowGameAgeRating then if fFlagEnableSideSheet then UDim2.fromOffset(-6, -2) else UDim2.fromOffset(0, 2) else p1.position
+	local var2 = if fFlagShowGameAgeRating then if isSideSheetEnabledModule then UDim2.fromOffset(-6, -2) else UDim2.fromOffset(0, 2) else p1.position
 	local var3 = nil
 	
 	if fFlagShowGameAgeRating then

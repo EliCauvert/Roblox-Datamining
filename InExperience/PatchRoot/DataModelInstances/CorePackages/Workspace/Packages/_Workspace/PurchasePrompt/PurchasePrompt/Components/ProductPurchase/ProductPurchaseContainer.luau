@@ -63,6 +63,7 @@ local selectProductPriceModule = require(purchasePrompt.Selectors.selectProductP
 local fFlagEnableOffersOnInExperienceSurface = sharedFlagsModule.FFlagEnableOffersOnInExperienceSurface
 local selectPriceModule = require(purchasePrompt.Selectors.selectPrice)
 local setPromptStateModule = require(purchasePrompt.Actions.SetPromptState)
+local fFlagAddSurfaceAndProductTypeToPromptCounterModule = require(purchasePrompt.Flags.FFlagAddSurfaceAndProductTypeToPromptCounter)
 local httpService = game:GetService("HttpService")
 local setPurchaseFlowUUIDModule = require(purchasePrompt.Actions.SetPurchaseFlowUUID)
 local setPostPurchaseActionsModule = require(purchasePrompt.Actions.SetPostPurchaseActions)
@@ -469,7 +470,7 @@ function name.getMessageKeysFromPromptState(p1)
 end
 
 function name.determinePrompt(a)
-	-- upvalues: fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (ref), windowStateModule (ref), promptStateModule (ref), isRelevantRequestType (ref), fFlagUnifiedPurchaseAddSkeleton (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), requestTypeModule (ref), purchaseClientSessionIdType (ref), robloxSubscriptionPurchaseAppModule (ref), robloxSubscriptionFlowCompleteReason (ref), fFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal (ref), surfaceName (ref), appContextModule (ref), surfaceContext (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), deriveCartPricingView (ref), getUnifiedPurchaseModalTypeModule (ref), unifiedPurchaseModalTypeEnum (ref), shouldShowBlackbirdUpsellModule (ref), fFlagBlackbirdUpsellGateResaleAndTimedOptionModule (ref), getBlackbirdUpsellBannerProductInfoModule (ref), fFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry (ref), unifiedPurchaseEventNameEnumModule (ref), fFlagEnableBlackbirdUpsellImpressionGating (ref), blackbirdUpsellImpressionTrackerModule (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (ref), roact (ref), unifiedProductPurchaseModalV2 (ref), fFlagPurchasePromptSubtitleForTimedOptions (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), unifiedProductPurchaseModal (ref), fFlagPurchasePromptPriceShouldUseProductInfoPriceModule (ref), getPlayerPriceModule (ref), fFlagEnableOffersOnInExperienceSurface (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), productPurchaseSurface (ref), desktopUpsellExperiment (ref), productPurchaseModal (ref), productPurchase (ref), robuxUpsellModal (ref), productPurchaseRobuxUpsell (ref), getFFlagOpenVngTosForVngRobuxUpsell (ref), getAppFeaturePolicies (ref), leaveRobloxAlert (ref), interactiveAlert (ref), robloxTranslatorModule (ref), buttonType (ref), purchaseErrorModule (ref), isGenericChallengeResponseModule (ref), reactModule (ref), productPurchasePromptModule (ref), images (ref), animator (ref), verifiedParentalConsentDialog (ref), robuxUpsellModalTooExpensiveFallback (ref), fFlagEnableLaunchAfterPurchase (ref), fFlagPurchaseModalTimedOptionExtension (ref)
+	-- upvalues: fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (ref), windowStateModule (ref), promptStateModule (ref), isRelevantRequestType (ref), fFlagUnifiedPurchaseAddSkeleton (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), requestTypeModule (ref), purchaseClientSessionIdType (ref), robloxSubscriptionPurchaseAppModule (ref), robloxSubscriptionFlowCompleteReason (ref), fFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal (ref), surfaceName (ref), appContextModule (ref), surfaceContext (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), deriveCartPricingView (ref), getUnifiedPurchaseModalTypeModule (ref), unifiedPurchaseModalTypeEnum (ref), shouldShowBlackbirdUpsellModule (ref), fFlagBlackbirdUpsellGateResaleAndTimedOptionModule (ref), getBlackbirdUpsellBannerProductInfoModule (ref), fFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry (ref), unifiedPurchaseEventNameEnumModule (ref), fFlagEnableBlackbirdUpsellImpressionGating (ref), blackbirdUpsellImpressionTrackerModule (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (ref), roact (ref), unifiedProductPurchaseModalV2 (ref), fFlagPurchasePromptSubtitleForTimedOptions (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), unifiedProductPurchaseModal (ref), fFlagPurchasePromptPriceShouldUseProductInfoPriceModule (ref), getPlayerPriceModule (ref), fFlagEnableOffersOnInExperienceSurface (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), productPurchaseSurface (ref), desktopUpsellExperiment (ref), productPurchaseModal (ref), productPurchase (ref), robuxUpsellModal (ref), productPurchaseRobuxUpsell (ref), getFFlagOpenVngTosForVngRobuxUpsell (ref), getAppFeaturePolicies (ref), leaveRobloxAlert (ref), interactiveAlert (ref), robloxTranslatorModule (ref), buttonType (ref), purchaseErrorModule (ref), isGenericChallengeResponseModule (ref), reactModule (ref), productPurchasePromptModule (ref), images (ref), fFlagAddSurfaceAndProductTypeToPromptCounterModule (ref), animator (ref), verifiedParentalConsentDialog (ref), robuxUpsellModalTooExpensiveFallback (ref), fFlagEnableLaunchAfterPurchase (ref), fFlagPurchaseModalTimedOptionExtension (ref)
 	local var2
 	local purchaseFlow = a.props.purchaseFlow
 	local promptState = a.props.promptState
@@ -840,7 +841,9 @@ function name.determinePrompt(a)
 			cancelButtonPressed = a.cancelButtonPressed,
 			confirmButtonPressed = a.confirmButtonPressed,
 			isGenericChallengeResponse = isGenericChallengeResponseModule,
-			useUnifiedPurchaseCompletionModal = a.props.isUserEligibleForUnifiedPurchaseFlow
+			useUnifiedPurchaseCompletionModal = a.props.isUserEligibleForUnifiedPurchaseFlow,
+			surface = if fFlagAddSurfaceAndProductTypeToPromptCounterModule then a.props.purchaseAnalyticsMetadata and a.props.purchaseAnalyticsMetadata.surface else nil,
+			productType = if fFlagAddSurfaceAndProductTypeToPromptCounterModule then a.props.purchaseAnalyticsMetadata and a.props.purchaseAnalyticsMetadata.productType else nil
 		})
 	elseif promptState == promptStateModule.EnablePurchaseVPCModal then
 		return roact.createElement(animator, {
@@ -893,7 +896,9 @@ function name.determinePrompt(a)
 		timedOptionDays = if fFlagPurchasePromptSubtitleForTimedOptions then a.props.timedOptionDays else nil,
 		completionMessage = if fFlagPurchaseModalTimedOptionExtension then a.props.completionMessage else nil,
 		launchAfterPurchaseButtonPressed = if var20 then a.launchAfterPurchaseButtonPressed else nil,
-		launchAfterPurchaseButtonShown = if var20 then a.launchAfterPurchaseButtonShown else nil
+		launchAfterPurchaseButtonShown = if var20 then a.launchAfterPurchaseButtonShown else nil,
+		surface = if fFlagAddSurfaceAndProductTypeToPromptCounterModule then a.props.purchaseAnalyticsMetadata and a.props.purchaseAnalyticsMetadata.surface else nil,
+		productType = if fFlagAddSurfaceAndProductTypeToPromptCounterModule then a.props.purchaseAnalyticsMetadata and a.props.purchaseAnalyticsMetadata.productType else nil
 	})
 end
 

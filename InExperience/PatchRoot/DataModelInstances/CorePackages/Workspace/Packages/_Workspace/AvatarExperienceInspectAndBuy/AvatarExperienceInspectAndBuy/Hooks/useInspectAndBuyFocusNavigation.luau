@@ -6,7 +6,6 @@ local parent = avatarExperienceInspectAndBuy.Parent
 local reactModule = require(parent.React)
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local fFlagAXFixIaBTimedOptionsPopoverFocus = require(parent.AvatarExperienceFlags).FFlagAXFixIaBTimedOptionsPopoverFocus
 local _ = require(avatarExperienceInspectAndBuy.Types)
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local focusNavigableSurfaceRegistry = focusNavigationUtilsModule.FocusNavigableSurfaceRegistry
@@ -22,7 +21,7 @@ local function selectItemBeingPurchased(p1)
 end
 
 return function()
-	-- upvalues: reactModule (ref), useSelector (ref), selectItemBeingPurchased (ref), useRegisterFocusNavigableSurface (ref), useDeRegisterFocusNavigableSurface (ref), useAutoFocus (ref), useDescendantHasFocus (ref), useLastInputMode (ref), fFlagAXFixIaBTimedOptionsPopoverFocus (ref), useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnum (ref), marketplaceService (ref), playersService (ref), guiService (ref)
+	-- upvalues: reactModule (ref), useSelector (ref), selectItemBeingPurchased (ref), useRegisterFocusNavigableSurface (ref), useDeRegisterFocusNavigableSurface (ref), useAutoFocus (ref), useDescendantHasFocus (ref), useLastInputMode (ref), useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnum (ref), marketplaceService (ref), playersService (ref), guiService (ref)
 	local var1, var2 = reactModule.useState(nil)
 	local var3, var4 = reactModule.useState(false)
 	local var5 = useSelector(selectItemBeingPurchased)
@@ -33,13 +32,7 @@ return function()
 	local var10 = useDescendantHasFocus(var1)
 	local isFocus = useLastInputMode() == "Focus"
 	local var11 = var6 or var3
-	local var12 = nil
-	
-	if fFlagAXFixIaBTimedOptionsPopoverFocus then
-		local var13 = useRegistryEntry(focusNavigableSurfaceIdentifierEnum.PopUp) ~= nil
-		local var14 = useRegistryEntry(focusNavigableSurfaceIdentifierEnum.ContextualMenu) ~= nil
-		var12 = var13 or (var14 or useRegistryEntry(focusNavigableSurfaceIdentifierEnum.ModerationOverlay) ~= nil)
-	end
+	local var12 = useRegistryEntry(focusNavigableSurfaceIdentifierEnum.PopUp) ~= nil or (useRegistryEntry(focusNavigableSurfaceIdentifierEnum.ContextualMenu) ~= nil or useRegistryEntry(focusNavigableSurfaceIdentifierEnum.ModerationOverlay) ~= nil)
 	reactModule.useEffect(function()
 		-- upvalues: marketplaceService (copy), playersService (copy), var4 (ref)
 		local promptBulkPurchaseRequestedConnection = marketplaceService.PromptBulkPurchaseRequested:Connect(function(p1)
@@ -83,18 +76,18 @@ return function()
 			guiService.SelectedCoreObject = nil
 		end
 	end, { var1, var11, var8, var7 })
-	local var15 = isFocus and (var1 and (not var10 and (not var11 and not var12)))
+	local var13 = isFocus and (var1 and (not var10 and (not var11 and not var12)))
 	reactModule.useEffect(function()
-		-- upvalues: var15 (ref), var9 (ref)
-		local var16 = if var15 then var9() else nil
+		-- upvalues: var13 (ref), var9 (ref)
+		local var14 = if var13 then var9() else nil
 		
 		return function()
-			-- upvalues: var16 (write)
-			if var16 then
-				var16.cancel()
+			-- upvalues: var14 (write)
+			if var14 then
+				var14.cancel()
 			end
 		end
-	end, { var15, var9 })
+	end, { var13, var9 })
 	
 	return {
 		setFocusRef = var2,

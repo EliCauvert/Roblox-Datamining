@@ -20,12 +20,14 @@ local formatTextWithParamsModule = require(purchasePrompt.Utils.formatTextWithPa
 local economicRestrictionsCounter = IAPExperienceModule.Counters.EconomicRestrictionsCounter
 local universalEconomicRestrictionsCounter = economicRestrictionsCounter.UniversalEconomicRestrictionsCounter
 local economicRestrictionsSurface = economicRestrictionsCounter.EconomicRestrictionsSurface
-local productPurchasePromptCounter = IAPExperienceModule.Counters.ProductPurchasePromptCounter.ProductPurchasePromptCounter
+local _ = IAPExperienceModule.Counters.ProductPurchasePromptCounter.ProductPurchasePromptCounter
 local default = require(parent.LoggingProtocol).default
 local fFlagPurchaseModalTimedOptionExtension = require(parent.SharedFlags).FFlagPurchaseModalTimedOptionExtension
 local unifiedPurchaseCompletionModal = IAPExperienceModule.UnifiedPurchaseCompletionModal
 local unifiedPurchaseCompletionModalV2 = IAPExperienceModule.UnifiedPurchaseCompletionModalV2
-local fFlagFixPurchasingErrorCounterModule = require(purchasePrompt.Flags.FFlagFixPurchasingErrorCounter)
+local _ = require(purchasePrompt.Flags.FFlagFixPurchasingErrorCounter)
+local _ = require(purchasePrompt.Flags.FFlagAddSurfaceAndProductTypeToPromptCounter)
+local logProductPurchasePromptCounterModule = require(purchasePrompt.Utils.logProductPurchasePromptCounter)
 local _ = require(parent.SharedFlags).FFlagAddCenterDialogForUnifiedPurchaseModal
 local appContextModule = require(purchasePrompt.Utils.AppContext)
 local fFlagAddCenterDialogForUnifiedPurchaseModal = require(parent.SharedFlags).FFlagAddCenterDialogForUnifiedPurchaseModal
@@ -120,7 +122,7 @@ local function getButtonStackInfo(p1, p2)
 end
 
 local function ProductPurchasePrompt(p1)
-	-- upvalues: fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (ref), addEconomicRestrictionKeysToLocalization (ref), useLocalization (ref), useMemo (ref), getModalContent (ref), useEffect (ref), fFlagFixPurchasingErrorCounterModule (ref), default (ref), productPurchasePromptCounter (ref), purchaseErrorModule (ref), promptStateModule (ref), universalEconomicRestrictionsCounter (ref), economicRestrictionsSurface (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (ref), appContextModule (ref), reactModule (ref), unifiedPurchaseCompletionModalV2 (ref), unifiedPurchaseCompletionModal (ref), interactiveAlert (ref), getButtonStackInfo (ref)
+	-- upvalues: fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (ref), addEconomicRestrictionKeysToLocalization (ref), useLocalization (ref), useMemo (ref), getModalContent (ref), useEffect (ref), logProductPurchasePromptCounterModule (ref), purchaseErrorModule (ref), default (ref), universalEconomicRestrictionsCounter (ref), economicRestrictionsSurface (ref), promptStateModule (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (ref), appContextModule (ref), reactModule (ref), unifiedPurchaseCompletionModalV2 (ref), unifiedPurchaseCompletionModal (ref), interactiveAlert (ref), getButtonStackInfo (ref)
 	local t = {
 		PurchaseCompleteTitle = "IAPExperience.PurchasePrompt.Title.PurchaseCompleted",
 		PurchaseCompleteBody = "IAPExperience.PurchasePrompt.Body.PurchaseCompleted",
@@ -165,18 +167,9 @@ local function ProductPurchasePrompt(p1)
 		return getModalContent(var1, p1)
 	end, { p1 })
 	useEffect(function()
-		-- upvalues: fFlagFixPurchasingErrorCounterModule (copy), default (copy), productPurchasePromptCounter (copy), p1 (ref), purchaseErrorModule (copy), promptStateModule (copy), universalEconomicRestrictionsCounter (copy), economicRestrictionsSurface (copy)
-		if fFlagFixPurchasingErrorCounterModule then
-			default:logRobloxTelemetryCounter(productPurchasePromptCounter, 1, {
-				promptState = tostring(p1.promptState),
-				purchaseError = if purchaseErrorModule.isMember(p1.purchaseError) then tostring(p1.purchaseError) else tostring(purchaseErrorModule.UnknownFailure)
-			})
-		else
-			default:logRobloxTelemetryCounter(productPurchasePromptCounter, 1, {
-				promptState = tostring(p1.promptState),
-				purchaseError = if p1.promptState == promptStateModule.Error then tostring(p1.purchaseError) else ""
-			})
-		end
+		-- upvalues: logProductPurchasePromptCounterModule (copy), p1 (ref), purchaseErrorModule (copy), default (copy), universalEconomicRestrictionsCounter (copy), economicRestrictionsSurface (copy)
+		logProductPurchasePromptCounterModule(p1.promptState, p1.purchaseError, p1.surface, p1.productType)
+		
 		if p1.purchaseError == purchaseErrorModule.EconomicRestriction then
 			default:logRobloxTelemetryCounter(universalEconomicRestrictionsCounter, 1, {
 				surface = economicRestrictionsSurface.InExperience,

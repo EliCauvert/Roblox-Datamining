@@ -16,7 +16,6 @@ local checkoutErrorBannerModule = require(avatarExperienceCatalog.Components.Che
 local useTimedOptionsFtuxModule = require(avatarExperienceCatalog.Hooks.useTimedOptionsFtux)
 local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
 local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Option
-local fFlagAXDurables2OptionFixes = avatarExperienceFlagsModule.FFlagAXDurables2OptionFixes
 
 local function filterCartItems(p1, p2)
 	-- upvalues: getTryOnItemReducerKey (ref), reactModule (ref), checkoutRowItemCardModule (ref), cryoModule (ref)
@@ -33,7 +32,7 @@ local function filterCartItems(p1, p2)
 end
 
 return reactModule.memo(function(p3)
-	-- upvalues: fFlagAXDurables2Option (ref), useTokens (ref), useLocalization (ref), useTimedOptionsFtuxModule (ref), reactModule (ref), filterCartItems (ref), constants (ref), tutilsModule (ref), fFlagAXDurables2OptionFixes (ref), foundationModule (ref), fFlagAXMISWithBlackbird (ref), checkoutErrorBannerModule (ref)
+	-- upvalues: fFlagAXDurables2Option (ref), useTokens (ref), useLocalization (ref), useTimedOptionsFtuxModule (ref), reactModule (ref), filterCartItems (ref), constants (ref), tutilsModule (ref), foundationModule (ref), fFlagAXMISWithBlackbird (ref), checkoutErrorBannerModule (ref)
 	local var2 = if fFlagAXDurables2Option then useTokens() else nil
 	local var3 = useLocalization({
 		makeupTitle = "Feature.Catalog.Label.Makeup",
@@ -82,7 +81,7 @@ return reactModule.memo(function(p3)
 		}, {
 			CheckoutErrorBanner = reactModule.createElement(checkoutErrorBannerModule, { erroredItemCount = p3.erroredItemCount })
 		}) else nil,
-		Tooltip2OptionBanner = if fFlagAXDurables2Option and var4 and (not fFlagAXDurables2OptionFixes or (if fFlagAXDurables2OptionFixes then reactModule.useMemo(function()
+		Tooltip2OptionBanner = if fFlagAXDurables2Option and var4 and reactModule.useMemo(function()
 			-- upvalues: p3 (ref)
 			for i, v in p3.cartItems do
 				if v.timedOptions and (not v.isOwned or v.expirationTime ~= nil) then
@@ -90,7 +89,7 @@ return reactModule.memo(function(p3)
 				end
 			end
 			return false
-		end, { p3.cartItems }) else nil)) then reactModule.createElement(foundationModule.View, {
+		end, { p3.cartItems }) then reactModule.createElement(foundationModule.View, {
 			tag = "size-full-0 auto-y padding-x-xxlarge",
 			AnchorPoint = Vector2.new(0, 1),
 			Position = UDim2.new(0, 0, 1, -var2.Size.Size_1800)

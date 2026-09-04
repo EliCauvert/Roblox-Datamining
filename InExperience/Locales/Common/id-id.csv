@@ -4027,7 +4027,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Apakah kami salah?<br /><u>Laporkan 
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Kamu Telah Menyalakan Chat Suara
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,Kamu Telah Bergabung ke Chat Suara
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Kamu terhubung ke Chat Suara
-Feature.SettingsHub.Prompt.LeaveVoiceChat,Chat suara dinonaktifkan
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Koneksimu ke Chat Suara terputus
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Penggunaan Mikrofon dan Kamera Ditangguhkan
 Feature.SettingsHub.Prompt.MicUseSuspended,Penggunaan mikrofon ditangguhkan
@@ -4066,7 +4065,6 @@ Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedConnectionsUpdate,Sekaran
 Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedFriendsUpdate,Sekarang kamu dapat berbicara dengan pengguna dalam kelompok usia yang mirip dan Teman Tepercayamu.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections,Hanya pengguna dalam kelompok usia yang mirip dan Koneksi Tepercayamu yang dapat berbicara denganmu.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends,Hanya pengguna dalam kelompok usia yang mirip dan Teman Tepercayamu yang dapat berbicara denganmu.
-Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupV2,Hanya pengguna dalam kelompok usia yang mirip yang dapat chat denganmu.
 Feature.SettingsHub.Prompt.Subtitle.TemporarySuspension2,"Karena pelanggaran terhadap Standar Komunitas, untuk sementara akses ke chat dengan suara dihapus hingga"
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1,Kami menonaktifkan chat suara untuk sementara karena kamu mungkin menggunakan bahasa yang melanggar Standar Komunitas Roblox.
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1V2,Kamu terus mengucapkan kata-kata yang melanggar peraturan atau latar belakangmu terlalu bising.

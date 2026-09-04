@@ -160,6 +160,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,"CurveAnimation मे
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,"CurveAnimation में बॉडी पार्ट्स, HumanoidRootPart से {minHeight} स्टड्स से नीचे या {maxDistance} स्टड्स से ऊपर नहीं हो सकते. कृपया ऐनिमेशन को ठीक करें."
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation के सब-फ़ोल्डर MarkerCurves और AnimationRigData के अंदर और फ़ोल्डर नहीं हो सकते
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"CurveAnimation हायरार्की में Scripts, LocalScripts या ModuleScripts मौजूद हैं. कृपया उन्हें हटा दें."
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,CurveAnimation में '{instancePath}' पर डुप्लिकेट बॉडी पार्ट फ़ोल्डर '{bodyPartName}' मौजूद है. ऐनिमेशन हायरार्की में हर बॉडी पार्ट ज़्यादा-से-ज़्यादा एक बार दिखाई दे सकता है.
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,CurveAnimation डेटा लोड नहीं हो सका. हो सकता है कि ऐनिमेशन ऐसेट अमान्य हो या उसे ऐक्सेस न किया जा सकता हो.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,"CurveAnimation में {folderName} बॉडी पार्ट फ़ोल्डर मौजूद है, जिसकी हायरार्की अमान्य है (इसमें ऐसे सब-फ़ोल्डर मौजूद हैं, जिनकी अनुमति नहीं है या जिन्हें गलत तरीके से सेट अप किया गया है)"
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"CurveAnimation में मौजूद फ़ोल्डर '{boneName}' एक मान्य HRD/DRD बोन नाम नहीं है. ऐनिमेशन सब-फ़ोल्डर या तो मान्य R15 बॉडी पार्ट्स होने चाहिए या फिर मान्य बोन नेम (जैसे कि HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase, या उँगली की हड्डियाँ, जैसे कि LeftHandIndex1)."
@@ -187,6 +188,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation म�
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"CurveAnimation में {time} सेकंड पर, बॉडी पार्ट {bodyPart}, {speed} डिग्री/सेकंड की रोटेशन स्पीड से आगे बढ़ रहा है. ज़्यादा से ज़्यादा स्पीड {maxSpeed} डिग्री/सेकंड हो सकती है. कृपया ऐनिमेशन को ठीक करें."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"CurveAnimation में {time} सेकंड पर, बॉडी पार्ट {bodyPart}, {speed} स्टड/सेकंड की स्पीड से आगे बढ़ रहा है. ज़्यादा से ज़्यादा स्पीड {maxSpeed} स्टड/सेकंड हो सकती है. कृपया ऐनिमेशन को ठीक करें."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,"CurveAnimation  में बॉडी पार्ट {bodyPart}, फ़्रेम्स के बीच {maxMovement} स्टड्स से ज़्यादा दूरी तय करता है. कृपया ऐनिमेशन को ठीक करें."
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,CurveAnimation स्ट्रक्चर अमान्य है : {detail}. कृपया पक्का करें कि ऐनिमेशन सही स्कीमा के मुताबिक हो.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation में {count} डिसेंडेंट्स हैं. ज़्यादा से ज़्यादा {maxAllowed} डिसेंडेंट्स ही हो सकते हैं. कृपया डिसेंडेंट्स की संख्या कम करें.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation में बहुत ज़्यादा की (key) वाले Curves हैं. हर Curve में ज़्यादा से ज़्यादा {maxAllowed} की (key) हो सकती हैं. कृपया ऐनिमेशन को ठीक करें.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation में {maxAllowed} से ज़्यादा  MarkerCurve हैं. कृपया पक्का करें कि {maxAllowed} से ज़्यादा MarkerCurve डिसेंडेंट्स न हों.
@@ -1321,6 +1323,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,"आपने इ�
 Feature.Avatar.BackgroundGeneration.Error.Moderation,वह प्रॉम्प्ट हमारी गाइडलाइन के मुताबिक नहीं है. कोई और प्रॉम्प्ट आज़माएँ.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"यह बैकग्राउंड Roblox कम्यूनिटी स्टैंडर्ड्स के मुताबिक नहीं है, इसलिए इसे आपकी इन्वेंट्री में नहीं जोड़ा गया. नया बैकग्राउंड जेनरेट करने की कोशिश करें."
 Feature.Avatar.BackgroundGeneration.Error.System,आपका बैकग्राउंड जेनरेट नहीं हो सका. फिर से कोशिश करें.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,आपने पब्लिश करने की लाइफ़टाइम लिमिट पूरी कर ली है.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,आपने रोज़ाना पब्लिश करने की लिमिट पूरी कर ली है. कल फिर से कोशिश करें.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,आपने हर घंटे पब्लिश करने की लिमिट पूरी कर ली है. अगले एक घंटे में फिर से कोशिश करें.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,आपने हर महीने पब्लिश करने की लिमिट पूरी कर ली है. अगले महीने फिर से कोशिश करें.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus के साथ एक्सक्लूसिव
@@ -4010,7 +4016,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,क्या हमसे गलत�
 Feature.SettingsHub.Prompt.JoinedVoiceChat,आप वॉइस चैट में शामिल हैं
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,आपने वॉइस चैट से कनेक्ट कर लिया है
-Feature.SettingsHub.Prompt.LeaveVoiceChat,वॉइस चैट डिसकनेक्ट की गई
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,आपने वॉइस चैट से डिस्कनेक्ट कर लिया है
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,माइक्रोफ़ोन और कैमरे के इस्तेमाल को सस्पेंड कर दिया गया है
 Feature.SettingsHub.Prompt.MicUseSuspended,माइक्रोफ़ोन का इस्तेमाल सस्पेंड कर दिया गया है
@@ -4050,7 +4055,6 @@ Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedConnectionsUpdate,
 Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedFriendsUpdate,अब आपके पास अपने एज ग्रुप के लोगों और अपने भरोसेमंद फ़्रेंड्स से बात करने की सुविधा है.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections,
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends,सिर्फ़ आपके एज ग्रुप के लोग और आपके भरोसेमंद फ़्रेंड्स ही आपसे बात कर सकते हैं.
-Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupV2,सिर्फ़ आपके उम्र के लोग ही आपसे चैट कर सकते हैं.
 Feature.SettingsHub.Prompt.Subtitle.TemporarySuspension2,"हमारे कम्यूनिटी स्टैंडर्ड का उल्लंघन होने की वजह से, हमने इस तारीख तक वॉइस चैट का आपका ऐक्सेस वापस ले लिया है"
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1,"हमने कुछ समय के लिए वॉइस चैट बंद कर दी है. हो सकता है कि आपने ऐसी भाषा का इस्तेमाल किया हो, जो Roblox कम्यूनिटी स्टैंडर्ड के लिहाज़ से सही न हो."
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1V2,आपने नियमों का उल्लंघन करने वाली भाषा का इस्तेमाल जारी रखा या बैकग्राउंड में बहुत ज़्यादा शोर होता रहा.

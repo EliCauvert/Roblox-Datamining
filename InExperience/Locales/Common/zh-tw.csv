@@ -4028,7 +4028,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,我們搞錯了嗎？<br /><u>回報
 Feature.SettingsHub.Prompt.JoinedVoiceChat,您已加入語音聊天
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,你已連接至語音聊天
-Feature.SettingsHub.Prompt.LeaveVoiceChat,語音聊天已斷線
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,你已中斷語音聊天
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,麥克風和相機暫時停用
 Feature.SettingsHub.Prompt.MicUseSuspended,已禁止麥克風功能
@@ -4067,7 +4066,6 @@ Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedConnectionsUpdate,現在�
 Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedFriendsUpdate,
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections,只有年齡相近的人員和信任的聯絡對象才能與你交談。
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends,只有年齡相近的人員及信任的聯絡對象才能與你交談。
-Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupV2,只有年齡相近的人員才能與你聊天。
 Feature.SettingsHub.Prompt.Subtitle.TemporarySuspension2,我們根據使用者舉報判定了您使用語音聊天時的行為違反了我們的社群規則。我們暫時終止了您使用語音聊天的權利，結束時間為
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1,由於您的用語可能違反了 Roblox 社群標準，我們已暫時關閉您的語音聊天功能。
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1V2,你持續使用違反規定的語言，或背景噪音太大。

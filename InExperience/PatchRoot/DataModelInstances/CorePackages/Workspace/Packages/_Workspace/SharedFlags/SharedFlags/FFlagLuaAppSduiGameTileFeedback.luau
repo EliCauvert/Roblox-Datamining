@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppSduiGameTileFeedbackDev", false) and require(script.Parent.FFlagLuaAppExtractNotInterestedHelper)
+﻿return game:DefineFastFlag("LuaAppSduiGameTileFeedback2", false) and require(script.Parent.FFlagLuaAppExtractNotInterestedHelper)

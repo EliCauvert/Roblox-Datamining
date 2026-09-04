@@ -25,7 +25,7 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useAvatarVariantsModule (ref), getAvatarSizeModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), flagsModule (ref), mapBindableModule (ref), getRbxThumbModule (ref), thumbnailTypeModule (ref), thumbnailSizeModule (ref), dashModule (ref), statusIndicatorModule (ref), indicatorModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useAvatarVariantsModule (ref), getAvatarSizeModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), flagsModule (ref), mapBindableModule (ref), getRbxThumbModule (ref), thumbnailTypeModule (ref), thumbnailSizeModule (ref), statusIndicatorModule (ref), dashModule (ref), indicatorModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useTokensModule()
 	local var3 = usePresentationContext()
@@ -48,7 +48,16 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			backgroundStyle = var1.backgroundStyle,
 			testId = if flagsModule.FoundationAvatarBindableUserId then `{var1.testId}--image` else nil
 		}),
-		Indicator = if flagsModule.FoundationAvatarBeta then if var4.statusIndicator.isVisible then reactModule.createElement(viewModule, dashModule.join(var4.statusIndicatorBackplate, { testId = `{var1.testId}--indicator-backplate` }), reactModule.createElement(statusIndicatorModule, {
+		Indicator = if flagsModule.FoundationAvatarBeta then if var4.statusIndicator.isVisible then if flagsModule.FoundationStatusIndicatorMask then reactModule.createElement(statusIndicatorModule, {
+			testId = `{var1.testId}--status-indicator`,
+			variant = var4.statusIndicator.variant,
+			shape = var4.statusIndicator.shape,
+			size = var4.statusIndicator.size,
+			mask = var4.statusIndicatorMask.mask,
+			ZIndex = var4.statusIndicatorMask.ZIndex,
+			AnchorPoint = var4.statusIndicatorMask.AnchorPoint,
+			Position = var4.statusIndicatorMask.Position
+		}) else reactModule.createElement(viewModule, dashModule.join(var4.statusIndicatorBackplate, { testId = `{var1.testId}--indicator-backplate` }), reactModule.createElement(statusIndicatorModule, {
 			testId = `{var1.testId}--status-indicator`,
 			variant = var4.statusIndicator.variant,
 			shape = var4.statusIndicator.shape,

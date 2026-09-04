@@ -30,6 +30,7 @@ local fFlagEditProfileImageV2Enabled = require(parent.SharedFlags).FFlagEditProf
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 local fFlagAXHideBottomNavForEditProfileImage = require(parent.SharedFlags).FFlagAXHideBottomNavForEditProfileImage
 local fFlagEnableBottomNavOnMarketplace = require(parent.SharedFlags).FFlagEnableBottomNavOnMarketplace
+local fFlagAXSaveManagerOutsideAX = require(parent.SharedFlags).FFlagAXSaveManagerOutsideAX
 local t = {
 	overlayEnabled = true,
 	overlayTransparency = 0.5,
@@ -159,7 +160,10 @@ if fFlagEditProfileImageV2Enabled then
 	}
 	local t_10 = {}
 	local editProfileImageProfilePlatform = enumsModule_1.Screens.EditProfileImageProfilePlatform
-	local t_11 = { screen = LazyEditProfileImageContainer }
+	local t_11 = {
+		screen = LazyEditProfileImageContainer,
+		params = if fFlagAXSaveManagerOutsideAX then { runAvatarSaveManager = true } else nil
+	}
 	
 	if fFlagAXEnableProfileTab then
 		local t_9_1 = t_9 or t_1

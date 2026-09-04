@@ -59,9 +59,9 @@ return function()
 				return require(script.Parent.SduiGameDetailsSubpageTelemetryHandler)
 			end
 		} else nil,
-		GameTileOverflowMenuNotInterested = if fFlagLuaAppSduiGameTileFeedback then {
+		GameTileOverflowMenu = if fFlagLuaAppSduiGameTileFeedback then {
 			lazyHandler = function()
-				return require(script.Parent.SduiGameTileOverflowMenuNotInterestedTelemetryHandler)
+				return require(script.Parent.SduiGameTileOverflowMenuTelemetryHandler)
 			end
 		} else nil,
 		OpenSearchResultsWithQueryEdp = if fFlagLuaAppSduiOpenSearchResultsWithQueryAction then {

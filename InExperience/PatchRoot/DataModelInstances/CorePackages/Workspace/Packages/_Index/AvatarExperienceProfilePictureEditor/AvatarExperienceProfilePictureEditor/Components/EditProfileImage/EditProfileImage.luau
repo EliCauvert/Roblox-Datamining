@@ -27,7 +27,9 @@ local rotatableAvatarPreviewModule = require(script.Parent.RotatableAvatarPrevie
 local enumsModule = require(avatarExperienceProfilePictureEditor.Common.Enums)
 local constantsModule = require(avatarExperienceProfilePictureEditor.Constants)
 local textKeysModule = require(avatarExperienceProfilePictureEditor.Common.TextKeys)
-local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagAXEnableProfileTab = sharedFlagsModule.FFlagAXEnableProfileTab
+local fFlagEditProfileImageR15UpgradePrompt = sharedFlagsModule.FFlagEditProfileImageR15UpgradePrompt
 local editProfileImageAnalyticsModule = require(avatarExperienceProfilePictureEditor.Analytics.EditProfileImageAnalytics)
 
 local function createSplitLayout(p1, p2)
@@ -98,7 +100,7 @@ local function createStackedLayout(p1, p2, p3)
 end
 
 local function EditProfileImageBody(p1)
-	-- upvalues: useTokens (ref), useGuiInset (ref), useLocalization (ref), textKeysModule (ref), useEditProfileImageLayout (ref), useEditProfileImageViewModelModule (ref), reactModule (ref), editProfileImageAnalyticsModule (ref), enumsModule (ref), framesPlusUpsellBarModule (ref), constantsModule (ref), assetGridScrollSectionModule (ref), iconName (ref), view (ref), expandedEmotesGridContentModule (ref), combinedCarouselsContentModule (ref), editProfileImageFooterModule (ref), rotatableAvatarPreviewModule (ref), iconButton (ref), iconSize (ref), buttonVariant (ref), foundationModule (ref), text (ref), createSplitLayout (ref), createStackedLayout (ref), focusNavigatorWrapperModule (ref), roactNavigationModule (ref), fFlagAXEnableProfileTab (ref)
+	-- upvalues: useTokens (ref), useGuiInset (ref), useLocalization (ref), textKeysModule (ref), useEditProfileImageLayout (ref), useEditProfileImageViewModelModule (ref), fFlagEditProfileImageR15UpgradePrompt (ref), reactModule (ref), editProfileImageAnalyticsModule (ref), enumsModule (ref), framesPlusUpsellBarModule (ref), constantsModule (ref), assetGridScrollSectionModule (ref), iconName (ref), view (ref), expandedEmotesGridContentModule (ref), combinedCarouselsContentModule (ref), editProfileImageFooterModule (ref), rotatableAvatarPreviewModule (ref), iconButton (ref), iconSize (ref), buttonVariant (ref), foundationModule (ref), text (ref), createSplitLayout (ref), createStackedLayout (ref), focusNavigatorWrapperModule (ref), roactNavigationModule (ref), fFlagAXEnableProfileTab (ref)
 	local var1 = useTokens()
 	local var2 = useGuiInset()
 	local var3 = useLocalization({ editProfilePicture = textKeysModule.EditProfilePicture })
@@ -119,6 +121,30 @@ local function EditProfileImageBody(p1)
 	local preview = var6.preview
 	local footer = var6.footer
 	local activeView = navigation.activeView
+	local onSelect = emotes.onSelect
+	
+	if fFlagEditProfileImageR15UpgradePrompt then
+		local accountRigType = p1.accountRigType
+		onSelect = reactModule.useCallback(function(p2)
+			-- upvalues: p1 (ref), accountRigType (ref), emotes (ref)
+			local onPromptR15Upgrade = p1.onPromptR15Upgrade
+			
+			if accountRigType == Enum.HumanoidRigType.R6 and p2 ~= emotes.selectedEmoteId and onPromptR15Upgrade then
+				onPromptR15Upgrade(function()
+					-- upvalues: emotes (copy), p2 (ref)
+					emotes.onSelect(p2)
+				end)
+				
+				return
+			end
+			emotes.onSelect(p2)
+		end, {
+			accountRigType,
+			emotes.selectedEmoteId,
+			emotes.onSelect,
+			p1.onPromptR15Upgrade
+		})
+	end
 	reactModule.useEffect(function()
 		-- upvalues: editProfileImageAnalyticsModule (copy), p1 (ref)
 		editProfileImageAnalyticsModule.logPageView({ mode = p1.mode })
@@ -177,7 +203,7 @@ local function EditProfileImageBody(p1)
 		onMoreEmotes = emotes.onMore,
 		onRetryEmotes = emotes.onRetry,
 		selectedEmoteId = emotes.selectedEmoteId,
-		onSelectEmote = emotes.onSelect
+		onSelectEmote = onSelect
 	}) else reactModule.createElement(combinedCarouselsContentModule, {
 		layoutOrder = 3,
 		tileSize = 96,
@@ -188,7 +214,7 @@ local function EditProfileImageBody(p1)
 		emotesError = emotes.hasError,
 		onRetryEmotes = emotes.onRetry,
 		selectedEmoteId = emotes.selectedEmoteId,
-		onSelectEmote = emotes.onSelect,
+		onSelectEmote = onSelect,
 		onExpandEmotes = navigation.onExpandEmotes,
 		frameItems = frames.items,
 		framesLoading = frames.isLoading,
@@ -223,6 +249,7 @@ local function EditProfileImageBody(p1)
 		distanceScale = preview.distanceScale,
 		committedYRotDeg = preview.yRotDeg,
 		emoteAssetId = emotes.selectedEmoteId,
+		rigTypeOverride = if fFlagEditProfileImageR15UpgradePrompt then p1.accountRigType else nil,
 		frameImage = frames.selectedImage,
 		onYRotDegChanged = preview.onYRotDegChanged,
 		onDistanceScaleChanged = preview.onDistanceScaleChanged
@@ -304,6 +331,8 @@ return function(p1)
 		showCloseButton = p1.showCloseButton,
 		onClose = p1.onClose,
 		onSaveSuccess = p1.onSaveSuccess,
+		onPromptR15Upgrade = p1.onPromptR15Upgrade,
+		accountRigType = p1.accountRigType,
 		renderRecommendedEmotePurchaseFooter = p1.renderRecommendedEmotePurchaseFooter
 	}))
 end

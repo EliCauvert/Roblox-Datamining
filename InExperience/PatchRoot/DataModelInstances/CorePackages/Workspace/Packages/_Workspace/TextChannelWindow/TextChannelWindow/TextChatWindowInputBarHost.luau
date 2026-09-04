@@ -15,7 +15,7 @@ local fFlagExpChatTextChannelWindowThemeByBackgroundModule = require(script.Pare
 local fFlagExpChatComposerFigmaParity = require(parent.SharedFlags).FFlagExpChatComposerFigmaParity
 local chatInputBarView = chatUIPrimitivesModule.ChatInputBarView
 
-return function(p1)
+return reactModule.memo(function(p1)
 	-- upvalues: foundationModule (ref), useCanSendToChannel (ref), useInExperienceLocalization (ref), reactModule (ref), messageWriterContextModule (ref), getFFlagExpChatUseChatMuteStoreModule (ref), runVirtualChatCommandsModule (ref), messageModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), textChannelWindowAnalyticsModule (ref), loggerModule (ref), chatInputBarView (ref), fFlagExpChatTextChannelWindowThemeByBackgroundModule (ref), fFlagExpChatComposerFigmaParity (ref)
 	local targetChannel = p1.targetChannel
 	local var1 = foundationModule.Hooks.useTokens()
@@ -93,4 +93,4 @@ return function(p1)
 		themedColors = fFlagExpChatTextChannelWindowThemeByBackgroundModule,
 		composerLayout = fFlagExpChatComposerFigmaParity
 	})
-end
+end)

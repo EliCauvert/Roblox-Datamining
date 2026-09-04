@@ -9,6 +9,7 @@ local previewCutoutOverlayModule = require(script.Parent.PreviewCutoutOverlay)
 local profilePictureCameraControlBarModule = require(script.Parent.ProfilePictureCameraControlBar)
 local useRotatableAvatarPreviewViewModelModule = require(script.Parent.useRotatableAvatarPreviewViewModel)
 local fFlagEditProfileImageCameraControlBarModule = require(avatarExperienceProfilePictureEditor.Flags.FFlagEditProfileImageCameraControlBar)
+local fFlagEditProfileImageRigTypeOverride = require(parent.SharedFlags).FFlagEditProfileImageRigTypeOverride
 local view = foundationModule.View
 local loading = foundationModule.Loading
 local iconSize = foundationModule.Enums.IconSize
@@ -26,7 +27,7 @@ local function _(p1)
 end
 
 return function(p2)
-	-- upvalues: useTokens (ref), cameraMath (ref), fFlagEditProfileImageCameraControlBarModule (ref), useRotatableAvatarPreviewViewModelModule (ref), reactModule (ref), frameCloseupPreviewCameraModule (ref), avatarViewportModule (ref), useRotatableOrbitViewport (ref), applyCloseupPreviewPoseModule (ref), view (ref), avatarViewportScene (ref), previewCutoutOverlayModule (ref), loading (ref), iconSize (ref), profilePictureCameraControlBarModule (ref), viewportInteractionOverlay (ref)
+	-- upvalues: useTokens (ref), cameraMath (ref), fFlagEditProfileImageCameraControlBarModule (ref), useRotatableAvatarPreviewViewModelModule (ref), reactModule (ref), frameCloseupPreviewCameraModule (ref), fFlagEditProfileImageRigTypeOverride (ref), avatarViewportModule (ref), useRotatableOrbitViewport (ref), applyCloseupPreviewPoseModule (ref), view (ref), avatarViewportScene (ref), previewCutoutOverlayModule (ref), loading (ref), iconSize (ref), profilePictureCameraControlBarModule (ref), viewportInteractionOverlay (ref)
 	local var1 = useTokens()
 	local cutoutSize = p2.cutoutSize
 	local width = p2.width
@@ -52,9 +53,12 @@ return function(p2)
 	local var6 = useRotatableOrbitViewport({
 		gamepadActionName = "EditProfileRotatableAvatarPreviewOrbit",
 		modelSource = reactModule.useMemo(function()
-			-- upvalues: avatarViewportModule (copy), p2 (ref)
-			return avatarViewportModule.ModelSources.fromUserId(p2.userId)
-		end, { p2.userId }),
+			-- upvalues: fFlagEditProfileImageRigTypeOverride (copy), p2 (ref), avatarViewportModule (copy)
+			return if fFlagEditProfileImageRigTypeOverride and p2.rigTypeOverride then avatarViewportModule.ModelSources.fromUserIdWithRigType(p2.userId, p2.rigTypeOverride) else avatarViewportModule.ModelSources.fromUserId(p2.userId)
+		end, {
+			p2.userId,
+			if fFlagEditProfileImageRigTypeOverride then p2.rigTypeOverride or false else nil
+		}),
 		distanceScale = var2,
 		fieldOfViewDeg = p2.fieldOfViewDeg,
 		fieldOfViewForDistanceScaleDeg = p2.fieldOfViewForDistanceScaleDeg,

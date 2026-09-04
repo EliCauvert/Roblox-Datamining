@@ -43,7 +43,7 @@ local flagsModule = require(chrome.ChromeShared.Flags)
 local fFlagTokenizeUnibarConstantsWithStyleProvider = flagsModule.FFlagTokenizeUnibarConstantsWithStyleProvider
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local fFlagShowGameAgeRating = sharedFlagsModule.FFlagShowGameAgeRating
-local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
+local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
 local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
 local appChatEnabledChromeDropdownFtuxTooltip = game:DefineFastFlag("AppChatEnabledChromeDropdownFtuxTooltip", false)
@@ -173,7 +173,7 @@ if fFlagEnableNewBackpack then
 else
 	var1 = var13
 end
-if fFlagEnableSideSheet and fFlagSideSheetFocusNav and fFlagEnableConsoleExpControls then
+if isSideSheetEnabledModule and fFlagSideSheetFocusNav and fFlagEnableConsoleExpControls then
 	var1:connect(function(p1)
 		-- upvalues: serviceModule (ref)
 		serviceModule:setHideShortcutBar("Backpack", p1)
@@ -269,7 +269,7 @@ if serviceModule:orderAlignment():get() == Enum.HorizontalAlignment.Right then
 	end)
 end
 function HamburgerButton(p1)
-	-- upvalues: useStyle (ref), fFlagMenuOfferTooltip (ref), reactModule (ref), fFlagChromeNineDotActivityIndicator (ref), var7 (write), useInExperienceOfferExposureModule (ref), var4 (write), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), var17 (ref), useMappedSignal (ref), var8 (ref), commonFtuxTooltipModule (ref), unibarConnectTooltipPriority (ref), getFFlagIsSquadEnabled (ref), getFStringConnectTooltipLocalStorageKeyModule (ref), getFIntRobloxConnectFtuxShowDelayMsModule (ref), getFIntRobloxConnectFtuxDismissDelayMsModule (ref), fFlagShowGameAgeRating (ref), useAppPolicy (ref), fFlagEnableSideSheet (ref), selectionCursorProvider (ref), menuIconModule (ref), imageSetLabel (ref), images (ref), selfieViewModule (ref), serviceModule (ref), SELFIE_VIEW_ID (ref), avatarSwitcherFtuxTooltip (ref), avatarSwitcherFtuxTooltipModule (ref), fFlagEnableInExperienceShop (ref), var5 (write), var6 (write)
+	-- upvalues: useStyle (ref), fFlagMenuOfferTooltip (ref), reactModule (ref), fFlagChromeNineDotActivityIndicator (ref), var7 (write), useInExperienceOfferExposureModule (ref), var4 (write), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), var17 (ref), useMappedSignal (ref), var8 (ref), commonFtuxTooltipModule (ref), unibarConnectTooltipPriority (ref), getFFlagIsSquadEnabled (ref), getFStringConnectTooltipLocalStorageKeyModule (ref), getFIntRobloxConnectFtuxShowDelayMsModule (ref), getFIntRobloxConnectFtuxDismissDelayMsModule (ref), fFlagShowGameAgeRating (ref), useAppPolicy (ref), isSideSheetEnabledModule (ref), selectionCursorProvider (ref), menuIconModule (ref), imageSetLabel (ref), images (ref), selfieViewModule (ref), serviceModule (ref), SELFIE_VIEW_ID (ref), avatarSwitcherFtuxTooltip (ref), avatarSwitcherFtuxTooltipModule (ref), fFlagEnableInExperienceShop (ref), var5 (write), var6 (write)
 	local toggleTransition = p1.toggleTransition
 	local var18 = useStyle()
 	local var19 = if fFlagMenuOfferTooltip then reactModule.useRef(nil) else nil
@@ -305,7 +305,7 @@ function HamburgerButton(p1)
 		end)
 	}, {
 		reactModule.createElement("UICorner", { Name = "Corner", CornerRadius = UDim.new(1, 0) }),
-		if fFlagEnableSideSheet then reactModule.createElement(selectionCursorProvider, {}, {
+		if isSideSheetEnabledModule then reactModule.createElement(selectionCursorProvider, {}, {
 			Icon = reactModule.createElement(menuIconModule, {
 				showBadgeOver12 = if fFlagShowGameAgeRating then useAppPolicy(function(p2)
 					return p2.getShowGameAgeRating()
@@ -314,7 +314,7 @@ function HamburgerButton(p1)
 				end)
 			})
 		}) else nil,
-		if not fFlagEnableSideSheet then reactModule.createElement(imageSetLabel, {
+		if not isSideSheetEnabledModule then reactModule.createElement(imageSetLabel, {
 			Name = "Overflow",
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
@@ -332,7 +332,7 @@ function HamburgerButton(p1)
 				return p2 * var18.Theme.IconEmphasis.Transparency
 			end)
 		}) else nil,
-		if not fFlagEnableSideSheet then reactModule.createElement(imageSetLabel, {
+		if not isSideSheetEnabledModule then reactModule.createElement(imageSetLabel, {
 			Name = "Close",
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
@@ -372,9 +372,9 @@ end
 return serviceModule:register({
 	id = "nine_dot",
 	initialAvailability = serviceModule.AvailabilitySignal.Pinned,
-	label = if fFlagEnableSideSheet then "CoreScripts.TopBar.RobloxMenu" else "CoreScripts.TopBar.MoreMenu",
+	label = if isSideSheetEnabledModule then "CoreScripts.TopBar.RobloxMenu" else "CoreScripts.TopBar.MoreMenu",
 	sideSheetPlacement = sideSheetPlacement.None,
-	hotkeyCodes = if fFlagEnableSideSheet then { Enum.KeyCode.Escape } else nil,
+	hotkeyCodes = if isSideSheetEnabledModule then { Enum.KeyCode.Escape } else nil,
 	isActivated = var17,
 	components = {
 		Icon = function(p1)

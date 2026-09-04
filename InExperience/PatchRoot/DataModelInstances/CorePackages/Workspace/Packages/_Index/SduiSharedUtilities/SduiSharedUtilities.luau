@@ -48,6 +48,7 @@ return {
 	SduiLoadTimer = sduiLoadTimerModule,
 	SduiSurfaceLoadTimeTracker = sduiSurfaceLoadTimeTrackerModule,
 	SduiPageEntryPoint = require(script.SduiPageEntryPoint),
+	SduiPageWrapperEntryPoint = require(script.SduiPageWrapperEntryPoint),
 	SduiPageNavigationHeader = require(script.SduiPageNavigationHeader),
 	useScrollAwayHeaderPosition = require(script.useScrollAwayHeaderPosition),
 	SduiFeatureEntryPoint = require(script.SduiFeatureEntryPoint),

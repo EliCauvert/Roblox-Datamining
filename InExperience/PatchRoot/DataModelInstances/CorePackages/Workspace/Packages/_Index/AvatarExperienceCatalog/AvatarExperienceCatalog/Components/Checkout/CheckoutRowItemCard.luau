@@ -13,7 +13,6 @@ local useCheckoutRowItemCardViewModelModule = require(script.Parent.useCheckoutR
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
 local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Option
-local fFlagAXDurables2OptionFixes = avatarExperienceFlagsModule.FFlagAXDurables2OptionFixes
 local fFlagAXMISSmallUIChanges = avatarExperienceFlagsModule.FFlagAXMISSmallUIChanges
 local fFlagAXMISWithOffers = avatarExperienceFlagsModule.FFlagAXMISWithOffers
 local avatarExperienceTimedOptionsModule = require(parent.AvatarExperienceTimedOptions)
@@ -50,7 +49,7 @@ local _ = function(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), fFlagAXDurablesForMIS (ref), useCheckoutRowItemCardViewModelModule (ref), fFlagAXDurables2Option (ref), useLocalization (ref), ASSET_TYPE_LOCALIZED (ref), BUNDLE_TYPE_LOCALIZED (ref), t (ref), OFFERS_LOCALIZED (ref), reactModule (ref), fFlagAXMISWithOffers (ref), purchaseItemsErrorStatusMapModule (ref), wearTimeOptionButton (ref), catalogRowItemCard (ref), itemCardThumbnail (ref), fFlagAXMISSmallUIChanges (ref), wearTimeSelectedOptionInList (ref), fFlagAXDurables2OptionFixes (ref)
+	-- upvalues: foundationModule (ref), fFlagAXDurablesForMIS (ref), useCheckoutRowItemCardViewModelModule (ref), fFlagAXDurables2Option (ref), useLocalization (ref), ASSET_TYPE_LOCALIZED (ref), BUNDLE_TYPE_LOCALIZED (ref), t (ref), OFFERS_LOCALIZED (ref), reactModule (ref), fFlagAXMISWithOffers (ref), purchaseItemsErrorStatusMapModule (ref), wearTimeOptionButton (ref), catalogRowItemCard (ref), itemCardThumbnail (ref), fFlagAXMISSmallUIChanges (ref), wearTimeSelectedOptionInList (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local thumbnailSize = p1.thumbnailSize or var1.Size.Size_2100
 	local selectedTimedOptionPrice = nil
@@ -237,7 +236,7 @@ return reactModule.memo(function(p1)
 				})
 			})
 		}) else nil,
-		OptionsButtonsView = if not fFlagAXDurables2Option then if fFlagAXDurables2OptionFixes and p1.isOwned and p1.expirationTime == nil then nil elseif fFlagAXDurables2Option then reactModule.createElement(foundationModule.View, {
+		OptionsButtonsView = if fFlagAXDurables2Option and (not p1.isOwned or p1.expirationTime ~= nil) then if fFlagAXDurables2Option then reactModule.createElement(foundationModule.View, {
 			tag = "row gap-medium align-y-center size-full-0 auto-y",
 			LayoutOrder = 2
 		}, reactModule.useMemo(function()

@@ -8,10 +8,10 @@ local view = foundationModule.View
 local iconName = foundationModule.Enums.IconName
 local radius = foundationModule.Enums.Radius
 local fFlagSharePplPickerModule = require(shareSheet.Flags.FFlagSharePplPicker)
+local shareSheetConstantsModule = require(shareSheet.ShareSheetConstants)
 local shareSheetRowModule = require(script.Parent.ShareSheetRow)
 local shareSheetItemContainerModule = require(script.Parent.ShareSheetItemContainer)
 local playersService = game:GetService("Players")
-local shareSheetNumAvatarSkeletons = game:DefineFastInt("ShareSheetNumAvatarSkeletons", 6)
 local _ = require(parent.AppChat.GetConversationListStore)
 
 local function _(p1, p2)
@@ -26,10 +26,10 @@ local function _(p1, p2)
 end
 
 local function createSkeletonItems()
-	-- upvalues: shareSheetNumAvatarSkeletons (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref)
+	-- upvalues: shareSheetConstantsModule (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref)
 	local t = {}
 	
-	for i = 1, shareSheetNumAvatarSkeletons do
+	for i = 1, shareSheetConstantsModule.FIntShareSheetNumAvatarSkeletons do
 		t[`Skeleton{i}`] = reactModule.createElement(view, {
 			tag = "col align-x-center gap-small size-1700-0 auto-y",
 			LayoutOrder = i

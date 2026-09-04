@@ -38,7 +38,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local var4
 	local var5 = useTokensModule()
 	local var6 = var2.value ~= nil
-	local var7 = useStatusIndicatorVariantsModule(var5, var2.variant, var6, var3, if flagsModule.FoundationAvatarBeta then var2.size else nil)
+	local var7 = useStatusIndicatorVariantsModule(var5, var2.variant, var6, var3, if flagsModule.FoundationAvatarBeta then var2.size else nil, var2.mask)
 	local var8 = reactModule.useCallback(function(p3)
 		-- upvalues: var2 (ref)
 		return if var2.max and var2.max < p3 then `{var2.max}+` else tostring(p3)
@@ -47,6 +47,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local var9 = withCommonPropsModule(var2, {
 		tag = var7.container.tag,
 		backgroundStyle = if var7.container.backgroundStyle then var7.container.backgroundStyle else nil,
+		stroke = if var2.mask then var7.stroke else nil,
 		ref = p2,
 		Size = if flagsModule.FoundationAvatarBeta then var7.container.size else nil
 	})

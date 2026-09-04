@@ -12,8 +12,10 @@ local closeProfilePictureEditor = avatarExperienceProfilePictureEditorModule.clo
 local showEditProfileImageToast = avatarExperienceProfilePictureEditorModule.showEditProfileImageToast
 local enumsModule = require(profilePlatform.Common.Enums)
 local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
+local robloxAppHooksModule = require(parent.RobloxAppHooks)
+local fFlagEditProfileImageR15UpgradePrompt = require(parent.SharedFlags).FFlagEditProfileImageR15UpgradePrompt
 local view = foundationModule.View
-local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
+local useScreenSize = robloxAppHooksModule.useScreenSize
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local selectors = navigationRoduxModule.Selectors
@@ -26,7 +28,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: useProfileWrapperContextModule (ref), useScreenSize (ref), useSelector (ref), selectors (ref), appPage (ref), useDispatch (ref), reactModule (ref), closeProfilePictureEditor (ref), showEditProfileImageToast (ref), enumsModule (ref), enums (ref), view (ref), AXEditProfileImageFillCardHeight (ref), editProfileImage (ref)
+	-- upvalues: useProfileWrapperContextModule (ref), useScreenSize (ref), useSelector (ref), selectors (ref), appPage (ref), useDispatch (ref), reactModule (ref), closeProfilePictureEditor (ref), showEditProfileImageToast (ref), enumsModule (ref), fFlagEditProfileImageR15UpgradePrompt (ref), enums (ref), view (ref), AXEditProfileImageFillCardHeight (ref), editProfileImage (ref)
 	local var1 = useProfileWrapperContextModule()
 	local renderRecommendedEmotePurchaseFooter = var1.renderRecommendedEmotePurchaseFooter
 	assert(renderRecommendedEmotePurchaseFooter, "Edit Profile Image requires a host purchase-footer renderer")
@@ -84,6 +86,15 @@ return function(p1)
 						shopForMoreEmotes()
 					end
 				end, { var1.navigateTo }),
+				onPromptR15Upgrade = if fFlagEditProfileImageR15UpgradePrompt then reactModule.useCallback(function(p2)
+					-- upvalues: var1 (ref)
+					local promptR15Upgrade = var1.navigateTo.promptR15Upgrade
+					
+					if promptR15Upgrade then
+						promptR15Upgrade(p2)
+					end
+				end, { var1.navigateTo }) else nil,
+				accountRigType = if fFlagEditProfileImageR15UpgradePrompt then var1.accountRigType else nil,
 				renderRecommendedEmotePurchaseFooter = renderRecommendedEmotePurchaseFooter
 			})
 		}),

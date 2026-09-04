@@ -4009,7 +4009,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,هل أخطأنا في قرارنا�
 Feature.SettingsHub.Prompt.JoinedVoiceChat,لقد انضممت إلى المحادثة الصوتية
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,أنت متصل بالمحادثة الصوتية
-Feature.SettingsHub.Prompt.LeaveVoiceChat,انقطع الاتصال بالمحادثة الصوتية
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,لقد قطعت الاتصال بالمحادثة الصوتية
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,استخدام الكاميرا والميكروفون غير مسموح
 Feature.SettingsHub.Prompt.MicUseSuspended,استخدام الميكروفون غير مسموح
@@ -4048,7 +4047,6 @@ Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedConnectionsUpdate,يمك�
 Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedFriendsUpdate,يمكنك الآن التحدث مع أشخاص في فئات عمرية مماثلة ومع الأصدقاء الموثوق بهم.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections,يمكن فقط للأشخاص في فئات عمرية مماثلة ولجهات التواصل الموثوقة لديك التحدث معك.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends,يمكن فقط للأشخاص في فئات عمرية مماثلة ولأصدقائك الموثوق بهم التحدث معك.
-Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupV2,يمكن فقط للأشخاص في فئات عمرية مماثلة الدردشة معك.
 Feature.SettingsHub.Prompt.Subtitle.TemporarySuspension2,بسبب انتهاك معايير مجتمعنا، ألغينا بشكل مؤقت وصولك إلى المحادثة مع الصوت حتى
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1,لقد عطّلنا المحادثة الصوتية مؤقتًا لأنك قلت شيئًا قد يتعارض مع معايير مجتمع Roblox.
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1V2,لقد واصلت استخدام لغة تنتهك القواعد أو إحداث الكثير من الضوضاء في الخلفية.

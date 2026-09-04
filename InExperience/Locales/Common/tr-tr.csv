@@ -177,6 +177,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation henüz 
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,"CurveAnimation'daki vücut parçaları, HumanoidRootPart'tan en fazla {minHeight} birim kare aşağıda veya en fazla {maxDistance} birim kare uzakta olmalıdır. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation alt öğeleri MarkerCurves ve AnimationRigData'nın alt öğeleri olamaz
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"CurveAnimation hiyerarşisi; Scripts, LocalScripts veya ModuleScripts içeriyor. Lütfen bunları kaldır."
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,"CurveAnimation, ""{instancePath}"" konumunda yinelenen ""{bodyPartName}"" vücut parçası klasörünü içeriyor. Her vücut parçası animasyon hiyerarşisinde en fazla bir kez görünebilir."
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,CurveAnimation verileri yüklenemedi. Animasyon varlığı geçersiz veya erişilemez olabilir.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,"CurveAnimation, geçersiz bir hiyerarşiye sahip olan {folderName} vücut parçası klasörünü içeriyor (izin verilmeyen veya yanlış ayarlanmış alt öğeleri var)"
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"CurveAnimation'daki ""{boneName}"" klasörü tanınan bir HRD/DRD kemik adı değil. Animasyon alt klasörleri ya geçerli R15 vücut parçaları ya da tanınan kemik adları olmalıdır (ör. HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase ya da LeftHandIndex1 gibi parmak kemikleri)."
@@ -204,6 +205,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,"CurveAnimation, v�
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"CurveAnimation'da {time}. saniyede, {bodyPart} vücut parçası saniyede {speed} derece dönüş hızıyla hareket ediyor. Saniyede en fazla {maxSpeed} derece dönüş hızıyla hareket edilebilir. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"CurveAnimation'da zaman olarak {time}. saniyede, {bodyPart} vücut parçası saniyede {speed} birim kare hızla hareket ediyor. Saniyede maksimum hız {maxSpeed} birim karedir. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,"CurveAnimation'daki {bodyPart} vücut parçası, kareler arasında {maxMovement} birim kareden fazla hareket ediyor. Lütfen animasyonu düzelt."
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,CurveAnimation yapısı geçersiz: {detail}. Lütfen animasyonun beklenen şemayı takip edip etmediğini kontrol et.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation'ın {count} alt öğesi var. En fazla {maxAllowed} alt öğeye izin verilir. Lütfen alt öğe sayısını azalt.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,"CurveAnimation, çok fazla anahtarı bulunan Eğriler içeriyor. Eğri başına maksimum {maxAllowed} anahtar olabilir. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,"CurveAnimation, {maxAllowed} taneden fazla MarkerCurve içeriyor. Lütfen en fazla {maxAllowed} MarkerCurve alt öğesi bulunmasına dikkat et."
@@ -1340,6 +1342,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Kullanım sınırı
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Bu istem yönergelerimize uygun değil. Başka bir şey tarif etmeyi dene.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Bu arka plan Roblox Topluluk Standartları'na uygun olmadığı için envanterine eklenmedi. Yeni bir tane oluşturmayı dene.
 Feature.Avatar.BackgroundGeneration.Error.System,Arka planın oluşturulurken bir şeyler yanlış gitti. Lütfen tekrar dene.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,Toplam yayınlama sınırına ulaştın.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,Günlük yayınlama sınırına ulaştın. Yarın tekrar dene.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,Saatlik yayınlama sınırına ulaştın. Bir saat sonra tekrar dene.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,Aylık yayınlama sınırına ulaştın. Gelecek ay tekrar dene.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus'a özel
@@ -4029,7 +4035,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Yanlış mı anladık?<br /><u>Bir h
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Sesli Sohbete Katıldın
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Sesli Sohbete bağlandın
-Feature.SettingsHub.Prompt.LeaveVoiceChat,Sesli sohbet bağlantısı kesildi
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Sesli Sohbet bağlantın kesildi
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Mikrofon ve Kamera Kullanımı Askıya Alındı
 Feature.SettingsHub.Prompt.MicUseSuspended,Mikrofon kullanımı askıya alındı
@@ -4068,7 +4073,6 @@ Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedConnectionsUpdate,Artık 
 Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedFriendsUpdate,Artık benzer yaş gruplarındaki insanlarla ve güvenilir arkadaşlarınla konuşabilirsin.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections,Yalnızca benzer yaş gruplarındaki insanlar ve Güvenilir Etkileşim Ağındaki kişiler seninle konuşabilir.
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends,Yalnızca benzer yaş gruplarındaki insanlar ve güvenilir arkadaşların seninle konuşabilir.
-Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupV2,Yalnızca benzer yaş gruplarındaki kişiler seninle sohbet edebilir.
 Feature.SettingsHub.Prompt.Subtitle.TemporarySuspension2,Topluluk Standartlarımızın ihlali nedeniyle sesli sohbet etme erişimini aşağıdaki tarihe kadar geçici olarak iptal ettik:
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1,Roblox Topluluk Standartları'na aykırı bir dil kullanmış olabileceğinden sesli sohbeti geçici olarak kapattık.
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1V2,Kuralları ihlal eden bir dil kullanmaya veya arka planda çok fazla gürültü yapmaya devam ettin.

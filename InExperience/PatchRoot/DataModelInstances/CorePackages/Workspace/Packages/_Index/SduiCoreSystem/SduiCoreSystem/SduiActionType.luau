@@ -33,6 +33,7 @@
 	OpenSocialProofUserListSheet = "OpenSocialProofUserListSheet",
 	OpenSongDetail = "OpenSongDetail",
 	OpenSponsoredTooltip = "OpenSponsoredTooltip",
+	OpenWhyThisAd = "OpenWhyThisAd",
 	SetGameTileNotInterested = "SetGameTileNotInterested",
 	UndoGameTileNotInterested = "UndoGameTileNotInterested",
 	PlayButtonClick = "PlayButtonClick",

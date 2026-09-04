@@ -4,6 +4,7 @@ local localizationModule = require(parent.Localization)
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local _ = require(script.Parent.ChatCaptureGalleryView)
+local fFlagBuildExperienceChatCaptureGalleryNewestFirstModule = require(buildExperience.Flags.FFlagBuildExperienceChatCaptureGalleryNewestFirst)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local useLocalization = localizationModule.Hooks.useLocalization
 
@@ -34,11 +35,11 @@ local function sortCapturesOldestFirst(p1)
 end
 
 return function(p2)
-	-- upvalues: signalsReactModule (ref), reactModule (ref), sortCapturesOldestFirst (ref), cloneCaptures (ref), useLocalization (ref), localizationStringsModule (ref)
+	-- upvalues: signalsReactModule (ref), reactModule (ref), fFlagBuildExperienceChatCaptureGalleryNewestFirstModule (ref), sortCapturesOldestFirst (ref), cloneCaptures (ref), useLocalization (ref), localizationStringsModule (ref)
 	local var1 = signalsReactModule.useSignalState(p2.captureSource.getCaptures)
 	local var2 = signalsReactModule.useSignalState(p2.captureSource.getIsFinished)
 	local var3 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), sortCapturesOldestFirst (copy)
+		-- upvalues: var1 (ref), fFlagBuildExperienceChatCaptureGalleryNewestFirstModule (copy), sortCapturesOldestFirst (copy)
 		local t = {}
 		
 		for i, v in var1 do
@@ -46,7 +47,7 @@ return function(p2)
 				table.insert(t, v)
 			end
 		end
-		return sortCapturesOldestFirst(t)
+		return if fFlagBuildExperienceChatCaptureGalleryNewestFirstModule then t else sortCapturesOldestFirst(t)
 	end, { var1 })
 	local var4, var5 = reactModule.useState(function()
 		-- upvalues: cloneCaptures (copy), p2 (ref)

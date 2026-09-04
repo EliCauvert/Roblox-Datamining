@@ -30,6 +30,8 @@ return roactNavigationModule.withNavigationFocus(function(p1)
 		onOpenEmoteDetails = p1.onOpenEmoteDetails,
 		onPrepareRecommendedEmotePurchase = p1.onPrepareRecommendedEmotePurchase,
 		onShopForMoreEmotes = p1.onShopForMoreEmotes,
+		onPromptR15Upgrade = p1.onPromptR15Upgrade,
+		accountRigType = p1.accountRigType,
 		renderRecommendedEmotePurchaseFooter = p1.renderRecommendedEmotePurchaseFooter
 	})
 end)

@@ -4006,7 +4006,6 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,我们弄错了吗？<br /><u>报告
 Feature.SettingsHub.Prompt.JoinedVoiceChat,你已加入语音聊天
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,你已连接语音聊天
-Feature.SettingsHub.Prompt.LeaveVoiceChat,语音聊天已断开连接
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,你已断开语音聊天连接
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,麦克风和摄像头暂停使用
 Feature.SettingsHub.Prompt.MicUseSuspended,麦克风使用已禁用
@@ -4045,7 +4044,6 @@ Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedConnectionsUpdate,你现�
 Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedFriendsUpdate,你现在可以与年龄相近的人以及你信赖的好友交谈。
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections,只有与你年龄相近的人以及你可信赖的联系人才能与你交谈。
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends,只有与你年龄相近的人以及你信赖的好友才能与你交谈。
-Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupV2,只有年龄相近的用户才能与你聊天。
 Feature.SettingsHub.Prompt.Subtitle.TemporarySuspension2,根据用户举报，我们认为你在使用语音聊天时的行为违反了我们的社区规则。我们暂时终止你使用语音聊天的权利，结束时间为
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1,由于你可能使用违反 Roblox 社区准则的语言，我们暂时关闭了语音聊天。
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1V2,你继续使用违反规定的语言，或背景噪音过大。

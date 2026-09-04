@@ -11,13 +11,12 @@ local useOpenLinkModule = require(genericAbuseReporting.BeduiV2.Hooks.useOpenLin
 local _ = require(genericAbuseReporting.BeduiV2.Utils.Translate.translate)
 local useArTranslation = require(genericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
 local addFontStyleToTextWithTranslation = game:DefineFastFlag("AddFontStyleToTextWithTranslation", false)
-local addUnderlineToLinksInTextWithTranslation = game:DefineFastFlag("AddUnderlineToLinksInTextWithTranslation", false)
 local fFlagAbuseReportLinkOpenedAnalytics = sharedFlagsModule.FFlagAbuseReportLinkOpenedAnalytics
 local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local useOptionalAbuseReportAnalytics = abuseReportAnalyticsContextModule.useOptionalAbuseReportAnalytics
 
 return reactModule.memo(function(p1)
-	-- upvalues: useArTranslation (ref), useOpenLinkModule (ref), reactModule (ref), fFlagAbuseReportLinkOpenedAnalytics (ref), useOptionalAbuseReportAnalytics (ref), telemetryEventType (ref), addUnderlineToLinksInTextWithTranslation (ref), controlState (ref), text (ref), addFontStyleToTextWithTranslation (ref)
+	-- upvalues: useArTranslation (ref), useOpenLinkModule (ref), reactModule (ref), fFlagAbuseReportLinkOpenedAnalytics (ref), useOptionalAbuseReportAnalytics (ref), telemetryEventType (ref), controlState (ref), text (ref), addFontStyleToTextWithTranslation (ref)
 	local translateIntoString = useArTranslation().translateIntoString
 	local translateIntoRichTextString = useArTranslation().translateIntoRichTextString
 	local var1 = useOpenLinkModule()
@@ -62,7 +61,7 @@ return reactModule.memo(function(p1)
 			if fFlagAbuseReportLinkOpenedAnalytics then p1.linkId else nil,
 			if fFlagAbuseReportLinkOpenedAnalytics then p1.linkSource else nil
 		}),
-		onStateChanged = if addUnderlineToLinksInTextWithTranslation and var7 ~= nil then if addUnderlineToLinksInTextWithTranslation then reactModule.useCallback(function(p2)
+		onStateChanged = if var7 ~= nil then nil else reactModule.useCallback(function(p2)
 			-- upvalues: controlState (copy), var3 (ref)
 			if p2 == controlState.Hover then
 				var3(true)
@@ -70,6 +69,6 @@ return reactModule.memo(function(p1)
 				return
 			end
 			var3(false)
-		end, {}) else nil else nil
+		end, {})
 	})
 end)

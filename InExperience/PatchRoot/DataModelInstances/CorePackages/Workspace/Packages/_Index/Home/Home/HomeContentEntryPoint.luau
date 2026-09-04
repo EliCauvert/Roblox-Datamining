@@ -3,10 +3,9 @@ local parent = home.Parent
 local reactModule = require(parent.React)
 local _ = require(parent.Navigation)
 local appPage = require(parent.RobloxAppEnums).AppPage
-local compositionTags = require(parent.AppComposition).CompositionTags
 local responsiveModule = require(parent.Responsive)
 local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local sduiPageEntryPoint = sduiSharedUtilitiesModule.SduiPageEntryPoint
+local sduiPageWrapperEntryPoint = sduiSharedUtilitiesModule.SduiPageWrapperEntryPoint
 local videoUtilsModule = require(parent.VideoUtils)
 local refreshHomePageModule = require(home.refreshHomePage)
 local fetchHomePageModule = require(home.fetchHomePage)
@@ -20,7 +19,7 @@ local function _(p1, p2)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: homeConstantsModule (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fetchHomePageModule (ref), useHomeCollectionLayoutSyncModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), responsiveModule (ref), videoUtilsModule (ref), sduiPageEntryPoint (ref), refreshHomePageModule (ref), compositionTags (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref)
+	-- upvalues: homeConstantsModule (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fetchHomePageModule (ref), useHomeCollectionLayoutSyncModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), responsiveModule (ref), videoUtilsModule (ref), sduiPageWrapperEntryPoint (ref), refreshHomePageModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref)
 	local configKey = homeConstantsModule.ConfigKey
 	local pageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
 	local var1 = reactModule.useMemo(function()
@@ -41,15 +40,14 @@ return reactModule.memo(function(p1)
 			return videoUtilsModule.FeedVideoPlaybackContext.new(var3)
 		end, { var3 })
 	end
-	return reactModule.createElement(sduiPageEntryPoint, {
-		includeNavigationHeaderBar = false,
+	return reactModule.createElement(sduiPageWrapperEntryPoint, {
 		appPage = appPage.Home,
 		configKey = configKey,
 		pageTimer = var1,
 		refresh = refreshHomePageModule,
-		contentTag = compositionTags.ContentRegion.Body,
 		pageTopPadding = p1.pageTopPadding,
 		feedTopMargin = if fFlagLuaAppSduiStickyHeaderScrollAway then p1.feedTopMargin else nil,
+		stickyTopPadding = if fFlagLuaAppSduiStickyHeaderScrollAway then p1.feedTopMargin else nil,
 		scrollAway = if fFlagLuaAppSduiStickyHeaderScrollAway then p1.scrollAway else nil,
 		videoPlaybackContext = if fFlagLuaAppSduiVideoThumbnail then var2 else nil
 	})

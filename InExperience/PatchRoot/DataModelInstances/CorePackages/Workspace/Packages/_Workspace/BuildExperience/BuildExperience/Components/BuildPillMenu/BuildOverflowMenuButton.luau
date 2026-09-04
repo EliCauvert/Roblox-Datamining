@@ -32,7 +32,7 @@ local inputSize = foundationModule.Enums.InputSize
 local popoverAlign = foundationModule.Enums.PopoverAlign
 local popoverSide = foundationModule.Enums.PopoverSide
 local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
-local releaseAnyFocusModule = require(buildExperience.utils.releaseAnyFocus)
+local releaseAnyFocusModule = require(parent.BuildExperiencePlaytestLaunch.releaseAnyFocus)
 local buildOverflowMenuWidth = game:DefineFastInt("BuildOverflowMenuWidth", 172)
 
 local function _(p1, p2)

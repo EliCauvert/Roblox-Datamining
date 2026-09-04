@@ -22,6 +22,7 @@ return {
 		FFlagMomentsUploadOutcomeTelemetry = require(script.Flags.FFlagMomentsUploadOutcomeTelemetry),
 		FFlagMomentsContentStatsTelemetry = require(script.Flags.FFlagMomentsContentStatsTelemetry),
 		FFlagMomentTextGenerationFilteredSignal = require(script.Flags.FFlagMomentTextGenerationFilteredSignal),
+		FFlagMomentsTextOverlayPreviewTransform = require(script.Flags.FFlagMomentsTextOverlayPreviewTransform),
 		GetFFlagMomentsUseUploadPostAsync = require(script.Flags.GetFFlagMomentsUseUploadPostAsync)
 	},
 	Components = {
@@ -46,11 +47,13 @@ return {
 		useDeviceInsets = require(script.Hooks.useDeviceInsets),
 		useFormFactor = require(script.Hooks.useFormFactor),
 		useImageLoadingState = require(script.Hooks.useImageLoadingState),
+		useIsMultiTouchActive = require(script.Hooks.useIsMultiTouchActive),
 		useMomentsGating = function(...)
 			return require(script.Hooks.useMomentsGating)(...)
 		end,
 		useScreenSize = require(script.Hooks.useScreenSize),
 		useStatusBarHeight = require(script.Hooks.useStatusBarHeight),
+		useTextOverlayPreviewGestures = require(script.Hooks.useTextOverlayPreviewGestures),
 		useToggleState = require(script.Hooks.useToggleState)
 	},
 	ScrollingGridView = require(script.Components.ScrollingGridView),
