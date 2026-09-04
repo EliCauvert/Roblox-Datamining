@@ -1018,10 +1018,6 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,Aşağıdaki tüm hük�
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"Aşağıdaki ""Kabul Et"" düğmesine tıklayarak ülkeni Vietnam olarak değiştiriyor ve Roblox - VNG uygulamasına geçiş yapıyorsun; bu işlem geri alınamaz. Roblox - VNG uygulaması kullanımın, Roblox Şirketi'nin önceki koşullarının yerine geçen ve aşağıda belirtilen yeni koşullara tabidir. Lütfen aşağıdakileri incele ve bunlara onay ver:"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Güncellenmiş Anlaşma
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,"Üzgünüz, kullanım koşullarını kabul etmeye çalışırken bir sorun oluştu. Lütfen tekrar dene."
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,
-CommonUI.UserAgreements.Popup.KISAConsent.Message,Lütfen aşağıdaki şartları incele ve onayla. Her bir şartı ayrı olarak kabul etmeyi veya reddetmeyi seçebilirsin. İsteğe bağlı şartları kabul etmemen durumunda yine de Roblox'u kullanabilirsin.
-CommonUI.UserAgreements.Popup.KISAConsent.Title,Onay gerekli
 CommonUI.UserAgreements.Popup.KISAMessage,Lütfen aşağıdaki koşulları incele ve kabul et. Her bir koşulu ayrı olarak kabul etmeyi veya reddetmeyi seçebilirsin. İsteğe bağlı koşulları kabul etmemen durumunda yine de Roblox'u kullanabilirsin.
 CommonUI.UserAgreements.Popup.Message,"Roblox'u kullanmaya devam edebilmek adına aşağıdaki güncellenmiş koşullarımızı kabul etmek için lütfen ""Kabul ediyorum""u seç. Reşit değilsen lütfen bu mesajı ebeveynine veya vasine göster. Aşağıdaki belgelerde değişiklikler yapıldı:"
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,"İsteğe bağlı: Ayrıca en yeni sürümler, sınırlı süreli promosyonlar ve daha fazlası hakkında Roblox'tan e-postalar almak için kaydolmak istiyorum."
@@ -1118,8 +1114,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,"Roblox, otomatik olarak oy
 CoreScripts.TextChat.ChatWindow.Transcribing,Metne dönüştürülüyor...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Anlayamadık! Tekrar dene.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Bu dili henüz desteklemiyoruz!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,Mikrofonunu kullanmak için buraya dokunarak cihaz ayarlarını güncelle.
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,Mikrofonunu kullanmak için cihaz ayarlarına git ve Roblox'a mikrofon izni ver.
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,Mikrofonunu kullanmak için cihaz ayarlarına git ve Roblox'a mikrofon izni ver.
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Mikrofona erişilemiyor
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,Sesinle mesaj göndermen için ses kaydını işleyecek ve gizlilik politikamız uyarınca sonra hemen sileceğiz.
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Sesle yazılı sohbet özelliğini etkinleştirdin

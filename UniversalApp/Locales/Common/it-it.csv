@@ -1002,11 +1002,7 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,Accetto tutti i termini
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"Facendo clic sul pulsante Accetto qui sotto, si sta cambiando il tuo paese in Vietnam, migrando verso l'app Roblox - VNG e non si può tornare indietro. L'utilizzo dell'app Roblox - VNG è soggetto ai seguenti termini che sostituiscono eventuali termini precedenti con Roblox Corporation. Si prega di rivedere e acconsentire a quanto segue:"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Accordi aggiornati
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,"Siamo spiacenti, c'è stato un problema durante il tentativo di accettare i termini d'uso. Per favore riprova."
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,Condizioni d'uso
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,
-CommonUI.UserAgreements.Popup.KISAConsent.Message,Si prega di rivedere e acconsentire ai seguenti termini. È possibile scegliere di accettare o non accettare i termini individuali. Puoi ancora usare Roblox se non accetti i termini opzionali.
-CommonUI.UserAgreements.Popup.KISAConsent.Title,Consenso necessario
-CommonUI.UserAgreements.Popup.KISAMessage,
+CommonUI.UserAgreements.Popup.KISAMessage,Si prega di rivedere e acconsentire ai seguenti termini. È possibile scegliere di accettare o non accettare i termini individuali. Puoi ancora usare Roblox se non accetti i termini opzionali.
 CommonUI.UserAgreements.Popup.Message,"Per continuare a utilizzare Roblox, seleziona ""Sono d'accordo"" per accettare i nostri termini aggiornati qui sotto. Se sei un minore, mostralo al tuo genitore o tutore. Sono state apportate modifiche ai seguenti documenti:"
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,"Facoltativo: vorrei anche iscrivermi per ricevere email da Roblox sulle ultime uscite, promozioni a tempo limitato e altro ancora."
 CommonUI.UserAgreements.Popup.SignupMessage,"Toccando Registrati, accetti i nostri Termini di servizio e prendi atto della nostra Informativa sulla privacy."
@@ -1100,8 +1096,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox genera automaticamen
 CoreScripts.TextChat.ChatWindow.Transcribing,Trascrizione in corso...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Non abbiamo capito! Riprova.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Non supportiamo ancora quella lingua!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Per utilizzare il microfono, modifica qui le impostazioni del tuo dispositivo."
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"Per utilizzare il microfono, vai alle impostazioni del tuo dispositivo e concedi a Roblox l'autorizzazione ad accedervi."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Per utilizzare il microfono, vai alle impostazioni del tuo dispositivo e concedi a Roblox l'autorizzazione ad accedervi."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Impossibile accedere al microfono
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Per inviare messaggi con la tua voce, elaboreremo il tuo audio e lo cancelleremo subito, in conformità con la nostra informativa sulla privacy."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Hai abilitato la chat vocale
@@ -5156,7 +5151,7 @@ Feature.VerificationUpsell.Action.PrivacyPolicy,
 Feature.VerificationUpsell.Action.ResendCode,Reinvia codice
 Feature.VerificationUpsell.Action.ResendConfirmationEmail,Invia nuovamente email
 Feature.VerificationUpsell.Action.SendConfirmationEmail,Invia e-mail di conferma
-Feature.VerificationUpsell.Action.TermsOfUse,
+Feature.VerificationUpsell.Action.TermsOfUse,Condizioni d'uso
 Feature.VerificationUpsell.Action.TurnOn,
 Feature.VerificationUpsell.Action.UserEmail,
 Feature.VerificationUpsell.Description.AddEmailTextOver13,"Per continuare con l'acquisto, aggiungi il tuo indirizzo e-mail."

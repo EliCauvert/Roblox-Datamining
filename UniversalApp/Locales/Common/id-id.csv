@@ -1018,10 +1018,6 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,Saya menyetujui semua s
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"Dengan mengklik tombol Setuju di bawah ini, kamu mengubah negaramu menjadi Vietnam, bermigrasi ke aplikasi Roblox – VNG dan tidak dapat kembali lagi. Penggunaan kamu atas aplikasi Roblox - VNG tunduk pada ketentuan berikut yang menggantikan ketentuan sebelumnya dengan Roblox Corporation. Baca dan setujui hal berikut:"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Persetujuan Terbaru
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,"Maaf, ada masalah saat mencoba menyetujui Ketentuan Penggunaan. Coba lagi."
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,
-CommonUI.UserAgreements.Popup.KISAConsent.Message,Review dan setujui persyaratan berikut. Anda dapat memilih untuk menyetujui atau tidak menyetujui ketentuan individual. Anda tetap dapat menggunakan Roblox jika Anda tidak menyetujui ketentuan opsional.
-CommonUI.UserAgreements.Popup.KISAConsent.Title,Persetujuan diperlukan
 CommonUI.UserAgreements.Popup.KISAMessage,Harap review dan setujui persyaratan berikut. Kamu dapat memilih untuk menyetujui atau tidak menyetujui persyaratan individual. Kamu tetap dapat menggunakan Roblox jika kamu tidak menyetujui persyaratan opsional.
 CommonUI.UserAgreements.Popup.Message,"Untuk terus menggunakan Roblox, pilih ""Saya Setuju"" untuk menyetujui ketentuan terbaru kami di bawah ini. Jika kamu masih di bawah umur, tunjukkan pesan ini kepada orang tua atau wali sah kamu. Perubahan telah dilakukan di dokumen berikut:"
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,"Opsional: Saya juga ingin mendaftar untuk menerima email dari Roblox tentang rilis terbaru, promosi waktu terbatas, dan banyak lagi."
@@ -1118,8 +1114,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox secara otomatis memb
 CoreScripts.TextChat.ChatWindow.Transcribing,Membuat transkripsi...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Kami tidak memahaminya. Coba lagi.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Kami belum mendukung bahasa tersebut.
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Untuk menggunakan mikrofonmu, ketuk di sini untuk meng-update pengaturan perangkatmu."
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"Untuk menggunakan mikrofonmu, buka pengaturan perangkatmu dan berikan izin mikrofon ke Roblox."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Untuk menggunakan mikrofonmu, buka pengaturan perangkatmu dan berikan izin mikrofon ke Roblox."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Tidak dapat mengakses mikrofon
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Untuk mengirim pesan dengan suaramu, kami akan memproses audiomu dan langsung menghapusnya, sesuai kebijakan privasi kami."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Kamu telah mengaktifkan chat suara ke teks

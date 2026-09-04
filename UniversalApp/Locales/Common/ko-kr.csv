@@ -1019,10 +1019,6 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,I agree to all terms an
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"By clicking on the Agree button below, you are changing your country to Vietnam, migrating to the Roblox – VNG app and cannot revert back. Your use of the Roblox - VNG app is subject to the following terms that supersede any previous terms with Roblox Corporation. Please review and consent to the following:"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,약관 업데이트
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,죄송합니다. 이용 약관에 동의하는 동안 문제가 발생했습니다. 다시 시도하세요.
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,개인정보의 제3자 제공
-CommonUI.UserAgreements.Popup.KISAConsent.Message,다음 약관을 검토하고 이에 동의해 주세요. 개별 약관에 따라 동의하거나 동의하지 않음을 선택할 수 있습니다. 선택 약관에 동의하지 않더라도 Roblox 이용은 여전히 가능할 수 있습니다.
-CommonUI.UserAgreements.Popup.KISAConsent.Title,
 CommonUI.UserAgreements.Popup.KISAMessage,다음 약관을 검토하고 동의해 주세요. 개별 약관에 동의하거나 동의하지 않을 수 있습니다. 선택 약관에 동의하지 않더라도 Roblox를 계속 사용할 수 있습니다.
 CommonUI.UserAgreements.Popup.Message,Roblox를 계속 사용하려면 '동의'를 눌러 아래 업데이트된 약관에 동의해 주세요. 미성년자인 경우 부모님이나 보호자에게 이 문서를 보여 주세요. 변경된 부분은 다음과 같습니다.
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,"선택 사항: Roblox의 최신 릴리스, 기간 한정 프로모션 정보 등도 이메일로 받아 보고 싶어요."
@@ -1119,8 +1115,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox는 플레이어 메�
 CoreScripts.TextChat.ChatWindow.Transcribing,텍스트로 변환 중...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,인식되지 않았습니다! 다시 시도하세요.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,해당 언어는 아직 지원되지 않습니다!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,마이크를 사용하려면 여기를 탭하여 기기 설정을 업데이트하세요.
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,마이크를 사용하려면 기기 설정으로 이동하여 Roblox에 마이크 권한을 부여하세요.
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,마이크를 사용하려면 기기 설정으로 이동하여 Roblox에 마이크 권한을 부여하세요.
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,마이크에 액세스할 수 없습니다
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"음성으로 메시지를 보내기 위해, 저희는 개인정보 처리방침에 따라 사용자의 오디오를 처리하고 즉시 삭제합니다."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,음성으로 텍스트 채팅을 사용하도록 설정하셨습니다

@@ -1001,10 +1001,6 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,ฉันยอมร�
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"การคลิกที่ปุ่ม ""ยอมรับ"" ด้านล่าง คุณจะเปลี่ยนประเทศของคุณเป็นประเทศเวียดนาม และย้ายไปยังแอป Roblox – VNG และจะไม่สามารถเปลี่ยนกลับคืนได้ การใช้แอป Roblox - VNG ของคุณอยู่ภายใต้ข้อกำหนดต่อไปนี้ ซึ่งแทนที่ข้อกำหนดก่อนหน้านี้กับ Roblox Corporation โปรดตรวจสอบและยินยอมข้อกำหนดต่อไปนี้:"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,การอัปเดตข้อตกลง
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,ขออภัย มีปัญหาเกิดขึ้นในขณะที่พยายามยอมรับข้อกำหนดการใช้งาน โปรดลองอีกครั้ง
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,
-CommonUI.UserAgreements.Popup.KISAConsent.Message,โปรดตรวจสอบและยินยอมตามข้อกำหนดต่อไปนี้ คุณสามารถเลือกที่จะยอมรับหรือไม่ยอมรับข้อกำหนดแต่ละข้อได้ คุณยังคงสามารถใช้ Roblox ได้ หากไม่ยอมรับข้อกำหนดที่ไม่จำเป็น
-CommonUI.UserAgreements.Popup.KISAConsent.Title,
 CommonUI.UserAgreements.Popup.KISAMessage,โปรดตรวจสอบและยินยอมตามข้อกำหนดต่อไปนี้ คุณสามารถเลือกที่จะยอมรับหรือไม่ยอมรับข้อกำหนดแต่ละข้อได้ คุณอาจจะยังคงสามารถใช้ Roblox ได้ หากคุณไม่ยอมรับข้อกำหนดที่ไม่จำเป็น
 CommonUI.UserAgreements.Popup.Message,"หากต้องการเล่นบน Roblox ต่อ โปรดเลือก ""ฉันยอมรับ"" เพื่อยอมรับข้อกำหนดที่ได้รับการอัปเดตของเราด้านล่าง หากคุณเป็นผู้เยาว์ โปรดแสดงข้อความนี้ให้พ่อแม่หรือผู้ปกครองของคุณดู โดยมีการเปลี่ยนแปลงเกิดขึ้นกับเอกสารต่อไปนี้:"
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,ไม่บังคับ: ฉันต้องการลงทะเบียนเพื่อรับอีเมลเกี่ยวกับการเผยแพร่ล่าสุด โปรโมชันแบบจำกัดเวลา และอื่นๆ อีกมากมายจาก Roblox ด้วย
@@ -1101,8 +1097,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox สรุปข้�
 CoreScripts.TextChat.ChatWindow.Transcribing,กำลังถอดเสียง...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,เราฟังไม่ออก โปรดลองอีกครั้ง
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,เรายังไม่รองรับภาษานั้น!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,หากต้องการใช้ไมโครโฟนของคุณ ให้แตะที่นี่เพื่ออัปเดตการตั้งค่าอุปกรณ์
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,หากต้องการใช้ไมโครโฟนของคุณ ให้ไปที่การตั้งค่าอุปกรณ์แล้วให้สิทธิ์ Roblox ในการใช้ไมโครโฟน
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,หากต้องการใช้ไมโครโฟนของคุณ ให้ไปที่การตั้งค่าอุปกรณ์แล้วให้สิทธิ์ Roblox ในการใช้ไมโครโฟน
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,ไม่สามารถเข้าถึงไมโครโฟนได้
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,เมื่อส่งข้อความด้วยเสียง เราจะประมวลผลเสียงของคุณและลบออกทันทีตามนโยบายความเป็นส่วนตัวของเรา
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,คุณเปิดใช้งานการแชทด้วยข้อความแล้ว

@@ -874,7 +874,7 @@ CommonUI.Features.Action.Go,Go
 CommonUI.Features.Action.LessLowercase,less
 CommonUI.Features.Action.MoreLowercase,more
 CommonUI.Features.Action.Send,Send
-CommonUI.Features.Heading.ClassicUnlock,Celebrate 20 years of Roblox
+CommonUI.Features.Heading.ClassicUnlock,Celebrate 20 years of Roblox!
 CommonUI.Features.Heading.GameDetails,Experience Details
 CommonUI.Features.Label.About,About
 CommonUI.Features.Label.AboutUs,About Us
@@ -1024,10 +1024,6 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,I agree to all terms an
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"By clicking on the Agree button below, you are changing your country to Vietnam, migrating to the Roblox – VNG app and cannot revert back. Your use of the Roblox - VNG app is subject to the following terms that supersede any previous terms with Roblox Corporation. Please review and consent to the following:"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Updated Agreement
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,"Sorry, there was a problem when trying to accept terms of use. Please try again."
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,Third-Party Provision of Personal Information
-CommonUI.UserAgreements.Popup.KISAConsent.Message,Please review and consent to the following terms. You may choose to agree or disagree to individual terms. You can still use Roblox if you don’t agree to the optional terms.
-CommonUI.UserAgreements.Popup.KISAConsent.Title,Consent needed
 CommonUI.UserAgreements.Popup.KISAMessage,Please review and consent to the following terms. You may choose to agree or disagree to individual terms. You may still use Roblox if you do not agree to the optional terms.
 CommonUI.UserAgreements.Popup.Message,"To continue using Roblox, please select ""I agree"" to agree to our updated terms below. If you are a minor, please show this to your parent or guardian. Changes have been made to the following documents:"
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,"Optional: I'd also like to sign up to receive emails from Roblox about newest releases, limited-time promotions, and more."

@@ -1018,11 +1018,7 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,Akceptuję wszystkie po
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"Klikając przycisk „Zgadzam się” poniżej, zmieniasz swój kraj na Wietnam, przenosząc się do aplikacji Roblox – VNG bez możliwości powrotu. Korzystanie z aplikacji Roblox - VNG podlega następującym warunkom, które zastępują wszelkie wcześniejsze warunki nałożone przez firmę Roblox Corporation. Zapoznaj się z następującymi warunkami i zaakceptuj je:"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Zaktualizowana umowa
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,"Niestety, wystąpił problem podczas próby zaakceptowania warunków użytkowania. Spróbuj ponownie."
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,Warunki korzystania z usługi
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,Udostępnianie danych osobowych osobom trzecim
-CommonUI.UserAgreements.Popup.KISAConsent.Message,"Zapoznaj się z poniższymi warunkami i zaakceptuj je. Możesz wyrazić zgodę na poszczególne warunki lub je odrzucić. Będziesz mieć możliwość korzystania z platformy Roblox, nawet jeśli nie zaakceptujesz warunków opcjonalnych."
-CommonUI.UserAgreements.Popup.KISAConsent.Title,
-CommonUI.UserAgreements.Popup.KISAMessage,
+CommonUI.UserAgreements.Popup.KISAMessage,"Zapoznaj się z poniższymi warunkami i zaakceptuj je. Możesz wyrazić zgodę na poszczególne warunki lub je odrzucić. Będziesz mieć możliwość korzystania z platformy Roblox, nawet jeśli nie zaakceptujesz warunków opcjonalnych."
 CommonUI.UserAgreements.Popup.Message,"Jeśli chcesz kontynuować korzystanie z platformy Roblox, wybierz „Zgadzam się”, aby wyrazić zgodę na poniższe zaktualizowane warunki. Jeśli jesteś osobą niepełnoletnią, pokaż tę wiadomość rodzicowi lub opiekunowi. Wprowadzono zmiany w następujących dokumentach:"
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,"Opcjonalnie: chcę również dokonać rejestracji, aby otrzymywać od platformy Roblox wiadomości e-mail na temat najnowszych premier, limitowanych promocji i nie tylko."
 CommonUI.UserAgreements.Popup.SignupMessage,"Klikając „Zgadzam się”, akceptujesz Warunki użytkowania oraz Politykę prywatności."
@@ -1118,8 +1114,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox automatycznie generu
 CoreScripts.TextChat.ChatWindow.Transcribing,Trwa transkrypcja...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Nie zrozumieliśmy. Spróbuj ponownie.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Nie obsługujemy jeszcze tego języka
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Aby korzystać z mikrofonu, dotknij tutaj i zaktualizuj ustawienia urządzenia."
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"Aby korzystać z mikrofonu, przejdź do ustawień urządzenia i zezwól Robloxowi na dostęp do mikrofonu."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Aby korzystać z mikrofonu, przejdź do ustawień urządzenia i zezwól Robloxowi na dostęp do mikrofonu."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Nie można uzyskać dostępu do mikrofonu
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Aby umożliwić Ci wysyłanie wiadomości za pomocą głosu, przetworzymy plik dźwiękowy zawierający nagranie Twojego głosu i od razu go usuniemy, zgodnie z naszą polityką prywatności."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Włączono czat wykorzystujący zamianę mowy na tekst

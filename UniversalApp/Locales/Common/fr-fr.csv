@@ -1018,10 +1018,6 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,J'accepte tous les term
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"En cliquant sur le bouton Accepter ci-dessous, vous changez votre pays en Vietnam, migrant vers l'application Roblox – VNG et ne pouvez pas revenir en arrière. Votre utilisation de l'application Roblox - VNG est soumise aux conditions suivantes qui remplacent tous les termes précédents avec Roblox Corporation. Veuillez vérifier et accepter ce qui suit :"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Accord mis à jour
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,"Désolé, il y a eu un problème en essayant d'accepter les conditions d'utilisation. Veuillez réessayer."
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,Communication d'informations personnelles par des tiers
-CommonUI.UserAgreements.Popup.KISAConsent.Message,Prends connaissance des conditions suivantes et indique si tu les acceptes. Tu peux choisir d'accepter ou de refuser certaines conditions. Tu pourras continuer à utiliser Roblox même si tu n'acceptes pas les conditions facultatives.
-CommonUI.UserAgreements.Popup.KISAConsent.Title,
 CommonUI.UserAgreements.Popup.KISAMessage,Veuillez prendre connaissance des conditions suivantes et les accepter. Vous pouvez choisir d'accepter ou de refuser certaines conditions. Votre enfant peut continuer à utiliser Roblox si vous n'acceptez pas les conditions facultatives.
 CommonUI.UserAgreements.Popup.Message,"Pour continuer à utiliser Roblox, sélectionner « J'accepte » pour accepter nos conditions mises à jour ci-dessous. Si tu es mineur, montre-le à tes parents ou à ton tuteur. Des modifications ont été apportées aux documents suivants :"
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,"Facultatif: Je voudrais également m'inscrire pour recevoir des e-mails de Roblox sur les dernières versions, les promotions limitées dans le temps, et plus encore."
@@ -1118,8 +1114,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox génère automatique
 CoreScripts.TextChat.ChatWindow.Transcribing,Transcription…
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Nous n'avons pas bien entendu ! Réessaie.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Cette langue n'est pas encore prise en charge !
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Pour utiliser ton microphone, appuie ici afin de mettre à jour les paramètres de ton appareil."
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"Pour utiliser ton microphone, rends-toi dans les paramètres de ton appareil, puis autorise l'accès pour Roblox."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Pour utiliser ton microphone, rends-toi dans les paramètres de ton appareil, puis autorise l'accès pour Roblox."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Impossible d'accéder au microphone
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Pour transcrire tes messages vocaux en texte, nous traitons ton audio et le supprimons immédiatement, conformément à notre politique de confidentialité."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Chat vocal vers texte activé

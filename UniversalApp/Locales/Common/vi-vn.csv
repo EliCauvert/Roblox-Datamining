@@ -1018,10 +1018,6 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,Tôi đồng ý với t
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"Bằng cách nhấn vào Đồng ý, bạn sẽ thay đổi quốc gia của bạn thành Việt Nam, chuyển sang ứng dụng Roblox - VNG và không thể quay lại. Việc bạn sử dụng ứng dụng Roblox - VNG được điều chỉnh bởi các điều khoản dưới đây mà sẽ thay thế hoàn toàn tất cả các điều khoản trước đây giữa bạn và Roblox Corporation. Vui lòng xem xét và xác nhận đồng ý với nội dung sau:"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Thỏa Thuận Được Cập Nhật
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,"Rất tiếc, đã xảy ra sự cố khi cố gắng chấp nhận điều khoản sử dụng. Vui lòng thử lại."
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,Cung cấp thông tin cá nhân cho bên thứ ba
-CommonUI.UserAgreements.Popup.KISAConsent.Message,Vui lòng xem và đồng thuận với các điều khoản sau. Bạn có thể chọn đồng ý hoặc không đồng ý với từng điều khoản riêng lẻ. Bạn vẫn có thể sử dụng Roblox ngay cả khi không đồng ý với các điều khoản không bắt buộc.
-CommonUI.UserAgreements.Popup.KISAConsent.Title,Cần có sự đồng thuận
 CommonUI.UserAgreements.Popup.KISAMessage,Vui lòng xem lại và đồng ý với các điều khoản dưới đây. Bạn có thể chọn đồng ý hoặc không đồng ý với từng điều khoản riêng lẻ. Bạn vẫn dùng được Roblox cho dù bạn không đồng ý với các điều khoản không bắt buộc.
 CommonUI.UserAgreements.Popup.Message,"Để tiếp tục sử dụng Roblox, vui lòng chọn ""Tôi đồng ý"" để đồng ý với điều khoản được cập nhật bên dưới của chúng tôi. Nếu bạn là trẻ vị thành niên, vui lòng đưa thông báo này cho phụ huynh hoặc người giám hộ của bạn. Các thay đổi đã được thực hiện đối với các tài liệu sau:"
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,"Không bắt buộc: Tôi cũng muốn đăng ký để nhận email từ Roblox về các bản phát hành mới nhất, khuyến mãi trong thời gian giới hạn và hơn thế nữa."
@@ -1118,8 +1114,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox tự động tạo t
 CoreScripts.TextChat.ChatWindow.Transcribing,Đang chuyển thành văn bản...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Chúng tôi chưa nghe rõ! Hãy thử lại.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Chúng tôi chưa hỗ trợ ngôn ngữ đó!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Để sử dụng micrô, hãy nhấn vào đây để cập nhật tùy chọn cài đặt thiết bị của bạn."
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"Để sử dụng micrô, hãy mở phần cài đặt của thiết bị rồi cấp quyền truy cập micrô cho Roblox."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Để sử dụng micrô, hãy mở phần cài đặt của thiết bị rồi cấp quyền truy cập micrô cho Roblox."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Không thể truy cập micrô
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Để gửi tin nhắn bằng giọng nói, chúng tôi sẽ xử lý âm thanh của bạn và xóa ngay sau đó, theo đúng chính sách quyền riêng tư."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Bạn đã bật tính năng chuyển giọng nói thành văn bản

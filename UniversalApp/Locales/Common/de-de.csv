@@ -1018,10 +1018,6 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,Ich stimme allen unten 
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,"Indem du unten auf die Schaltfläche ""Zustimmen"" klickst, änderst du dein Land auf Vietnam, wechselst zur Roblox – VNG-App und kannst dies nicht rückgängig machen. Deine Nutzung der Roblox – VNG-App unterliegt den folgenden Bedingungen, die alle vorherigen Bedingungen mit der Roblox Corporation ersetzen. Bitte lies und stimme Folgendem zu:"
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Aktualisierte Vereinbarung
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,"Sorry, beim Annehmen der Nutzungsbedingungen ist ein Problem aufgetreten. Bitte versuche es erneut."
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,
-CommonUI.UserAgreements.Popup.KISAConsent.Message,"Bitte lies und akzeptiere die folgenden Bedingungen. Du hast die Wahl, den einzelnen Bedingungen zuzustimmen oder nicht zuzustimmen. Du darfst Roblox weiterhin verwenden, wenn du den optionalen Bedingungen nicht zustimmst."
-CommonUI.UserAgreements.Popup.KISAConsent.Title,Einwilligung erforderlich
 CommonUI.UserAgreements.Popup.KISAMessage,"Bitte lies und akzeptiere die folgenden Bedingungen. Du hast die Wahl, den einzelnen Bedingungen zuzustimmen oder nicht zuzustimmen. Du darfst weiterhin Roblox verwenden, wenn du den optionalen Bedingungen nicht zustimmst."
 CommonUI.UserAgreements.Popup.Message,"Um Roblox weiterhin zu nutzen, wähle bitte ""Ich stimme zu"", um unseren unten aktualisierten Bedingungen zuzustimmen. Wenn du minderjährig bist, zeige dies bitte deinen Eltern oder deinem Vormund. Änderungen wurden an den folgenden Dokumenten vorgenommen:"
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,"Optional: Ich möchte zudem E-Mails von Roblox über neueste Veröffentlichungen, zeitlich begrenzte Aktionen und mehr erhalten."
@@ -1112,8 +1108,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox erstellt automatisch
 CoreScripts.TextChat.ChatWindow.Transcribing,Wird transkribiert …
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Das haben wir nicht verstanden! Bitte versuche es erneut.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Diese Sprache wird noch nicht unterstützt!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Tippe hier, um deine Geräteeinstellungen zu aktualisieren, sodass du das Mikrofon verwenden kannst."
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"Gehe zu deinen Geräteeinstellungen und erteile Roblox die Berechtigung, auf dein Mikrofon zuzugreifen, damit du es verwenden kannst."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Um dein Mikrofon zu verwenden, gehe zu deinen Geräteeinstellungen und erteile Roblox die Berechtigung, auf dein Mikrofon zuzugreifen."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Zugriff auf Mikrofon nicht möglich
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Damit du Nachrichten mit deiner Stimme senden kannst, verarbeiten wir dein Audio und löschen es gemäß unserer Datenschutzrichtlinie sofort wieder."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Du hast den Sprach-zu-Text-Chat aktiviert

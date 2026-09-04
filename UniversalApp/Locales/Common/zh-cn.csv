@@ -1001,10 +1001,6 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,我同意以下所有�
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,通过点按下面的“同意”按钮，你将把国家更改为越南，并转移至 Roblox – VNG 应用，并且此操作无法恢复。你对 Roblox – VNG 应用的使用将受以下条款约束，这些条款将取代与 Roblox Corporation 之前的任何条款。请审阅并同意以下内容：
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,更新协议
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,抱歉，尝试接受使用条款时发生问题，请重试。
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
-CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,
-CommonUI.UserAgreements.Popup.KISAConsent.Message,请审阅并同意以下条款。你可以选择同意或不同意个别条款。如果你不同意选择性条款，你仍然可以使用 Roblox。
-CommonUI.UserAgreements.Popup.KISAConsent.Title,
 CommonUI.UserAgreements.Popup.KISAMessage,请阅读并同意以下条款。你可以选择同意或不同意个别条款。如果你不同意可选条款，你仍然可以使用 Roblox。
 CommonUI.UserAgreements.Popup.Message,若要继续使用 Roblox，请选择“我同意”，以同意下方的我们更新后的使用条款。如果你是未成年人，请向你的家长或监护人展示此信息。以下文件已做出更改：
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,可选：我还想注册接收来自 Roblox 的有关最新版本、限时推广等内容的电子邮件。
@@ -1099,8 +1095,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox 会自动生成玩�
 CoreScripts.TextChat.ChatWindow.Transcribing,正在转录…
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,我们没有听清！请重试。
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,我们暂不支持该语言！
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,要使用麦克风，请轻点此处更新设备设置。
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,要使用麦克风，请前往设备设置，授予 Roblox 麦克风权限。
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,要使用麦克风，请前往设备设置，并授予 Roblox 麦克风权限。
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,无法访问麦克风
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,为了让你使用语音发送消息，我们将处理你的音频，并根据我们的隐私政策立即将语音删除。
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,你已开启语音转文字聊天功能
