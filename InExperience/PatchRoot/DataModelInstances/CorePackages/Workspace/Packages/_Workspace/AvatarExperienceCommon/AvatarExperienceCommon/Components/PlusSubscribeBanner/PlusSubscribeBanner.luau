@@ -1,7 +1,6 @@
 ﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
-local fFlagAXPlusSubscribeBannerRestyleModule = require(script.Parent.FFlagAXPlusSubscribeBannerRestyle)
 local view = foundationModule.View
 local text = foundationModule.Text
 local icon = foundationModule.Icon
@@ -10,14 +9,11 @@ local iconSize = foundationModule.Enums.IconSize
 local useTokens = foundationModule.Hooks.useTokens
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), fFlagAXPlusSubscribeBannerRestyleModule (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
 	local testId = p1.testId or "PlusSubscribeBanner"
 	
 	return reactModule.createElement(view, {
-		tag = {
-			["size-full-0 auto-y padding-medium radius-medium bg-action-standard"] = fFlagAXPlusSubscribeBannerRestyleModule,
-			["size-full-0 auto-y padding-medium stroke-standard stroke-position-inner stroke-default radius-medium"] = not fFlagAXPlusSubscribeBannerRestyleModule
-		},
+		tag = "size-full-0 auto-y padding-medium stroke-standard stroke-position-inner stroke-default radius-medium",
 		LayoutOrder = p1.LayoutOrder,
 		testId = testId
 	}, {

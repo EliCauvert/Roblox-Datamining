@@ -56,6 +56,7 @@ if fFlagUserProfileConsoleUseNewReportFlowModule then
 end
 local playerContextualMenuVendorImagePath = game:DefineFastString("PlayerContextualMenuVendorImagePath", "rbxasset://textures/ui/Shell/Icons/PlatformLogo.png")
 local fFlagUserBlockingApiPlayerContextMenuEnabledModule = require(playerContextualMenu.Flags.FFlagUserBlockingApiPlayerContextMenuEnabled)
+local fFlagPCMAcceptWidthAsProp = game:DefineFastFlag("FFlagPCMAcceptWidthAsProp", false)
 local fFlagSkipBlockModal = require(parent.SharedFlags).FFlagSkipBlockModal
 local fFlagMigrateFriendshipStatusesRemainingActions = require(parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
 local var2 = if game:GetEngineFeature("PlatformFriendsService") and game:GetEngineFeature("PlatformFriendsProfile") then game:GetService("PlatformFriendsService") else nil
@@ -100,7 +101,7 @@ local t_1 = {
 }
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), roactRodux (ref), robloxAppHooksModule (ref), navigationModule (ref), appSessionService (ref), useLocalization (ref), t_1 (ref), toastRoduxModule (ref), reactModule (ref), setupFireEvent (ref), analyticsService (ref), useHttpRequestModule (ref), url (ref), getFFlagAppChatPCMFixBlocking (ref), fFlagUserBlockingApiPlayerContextMenuEnabledModule (ref), blockingModule (ref), name (ref), useDesignTokens (ref), fFlagRenameDeprecatedUIBloxTokens (ref), userProfilesModule (ref), var2 (ref), recommendationContextType (ref), getPresenceIconModule (ref), getPresenceTextModule (ref), useRecommendationContextualInfoDisplay (ref), eventNames (ref), setGamePlaySession (ref), sessionType (ref), discoveryAnalyticsModule (ref), getCurrentRouteState (ref), appPage (ref), button (ref), buttonType (ref), launchGameWithAnalytics (ref), fFlagUserProfileConsoleUseNewReportFlowModule (ref), openDynamicAbuseReportModule (write), abuseVectorModule (write), closeCentralOverlay (write), fFlagSkipBlockModal (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), friendsModule (ref), images (ref), playerContextualMenuVendorImagePath (ref), NO_OPT_CALLBACK (ref), dashModule (ref), playerContextualMenuComponentModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), roactRodux (ref), robloxAppHooksModule (ref), navigationModule (ref), appSessionService (ref), useLocalization (ref), t_1 (ref), toastRoduxModule (ref), reactModule (ref), setupFireEvent (ref), analyticsService (ref), useHttpRequestModule (ref), url (ref), getFFlagAppChatPCMFixBlocking (ref), fFlagUserBlockingApiPlayerContextMenuEnabledModule (ref), blockingModule (ref), name (ref), useDesignTokens (ref), fFlagRenameDeprecatedUIBloxTokens (ref), userProfilesModule (ref), var2 (ref), recommendationContextType (ref), getPresenceIconModule (ref), getPresenceTextModule (ref), useRecommendationContextualInfoDisplay (ref), eventNames (ref), setGamePlaySession (ref), sessionType (ref), discoveryAnalyticsModule (ref), getCurrentRouteState (ref), appPage (ref), button (ref), buttonType (ref), launchGameWithAnalytics (ref), fFlagUserProfileConsoleUseNewReportFlowModule (ref), openDynamicAbuseReportModule (write), abuseVectorModule (write), closeCentralOverlay (write), fFlagSkipBlockModal (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), friendsModule (ref), images (ref), playerContextualMenuVendorImagePath (ref), NO_OPT_CALLBACK (ref), dashModule (ref), playerContextualMenuComponentModule (ref), fFlagPCMAcceptWidthAsProp (ref)
 	local var3 = cryoModule.Dictionary.union(t, p1)
 	local var4 = roactRodux.useDispatch()
 	local var5 = robloxAppHooksModule.useLocalUserId()
@@ -125,7 +126,7 @@ return function(p1)
 		-- upvalues: var3 (ref), var12 (ref), var10 (ref), url (copy)
 		if var3.subjectPresence and var3.subjectPresence.locationUniverseId then
 			var12({ status = "Fetching", isPlayable = false })
-			var10(url.GAME_URL .. "v1/games/multiget-playability-status?universeIds=" .. var33.subjectPresence.locationUniverseId, "GET"):andThen(function(p2)
+			var10(url.GAME_URL .. "v1/games/multiget-playability-status?universeIds=" .. var34.subjectPresence.locationUniverseId, "GET"):andThen(function(p2)
 				-- upvalues: var12 (copy)
 				if p2.responseBody and p2.responseBody[1] then
 					var12({
@@ -490,7 +491,7 @@ return function(p1)
 				displayNameItem = { icon = nil, labelText = u392, isLoading = var15.loading },
 				userNameItem = if var3.recommendationContext == recommendationContextType.Contacts then nil else {
 					icon = nil,
-					labelText = "@" .. var47,
+					labelText = "@" .. var48,
 					isLoading = var15.loading
 				},
 				vendorNameItem = if var17 == "" then nil else {
@@ -511,7 +512,7 @@ return function(p1)
 				renderJoinEventButton = var25
 			}
 		end, {
-			var15, u864, var16, var17, var19, var20, var22, var21, var25, var26, var27,
+			var15, u870, var16, var17, var19, var20, var22, var21, var25, var26, var27,
 			var3.recommendationContext
 		}),
 		buttonProps = reactModule.useMemo(function()
@@ -591,6 +592,6 @@ return function(p1)
 			var3.contactId,
 			var3.additionalButtons
 		}, if getFFlagAppChatPCMFixBlocking() then { var13 } else {})),
-		width = var3.width
+		width = if fFlagPCMAcceptWidthAsProp then var3.width else UDim.new(0, 400)
 	})
 end

@@ -4010,6 +4010,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,क्या हमसे गलत�
 Feature.SettingsHub.Prompt.JoinedVoiceChat,आप वॉइस चैट में शामिल हैं
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,आपने वॉइस चैट से कनेक्ट कर लिया है
+Feature.SettingsHub.Prompt.LeaveVoiceChat,वॉइस चैट डिसकनेक्ट की गई
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,आपने वॉइस चैट से डिस्कनेक्ट कर लिया है
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,माइक्रोफ़ोन और कैमरे के इस्तेमाल को सस्पेंड कर दिया गया है
 Feature.SettingsHub.Prompt.MicUseSuspended,माइक्रोफ़ोन का इस्तेमाल सस्पेंड कर दिया गया है

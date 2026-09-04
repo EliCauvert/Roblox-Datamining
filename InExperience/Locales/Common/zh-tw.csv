@@ -4028,6 +4028,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,我們搞錯了嗎？<br /><u>回報
 Feature.SettingsHub.Prompt.JoinedVoiceChat,您已加入語音聊天
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,你已連接至語音聊天
+Feature.SettingsHub.Prompt.LeaveVoiceChat,語音聊天已斷線
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,你已中斷語音聊天
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,麥克風和相機暫時停用
 Feature.SettingsHub.Prompt.MicUseSuspended,已禁止麥克風功能

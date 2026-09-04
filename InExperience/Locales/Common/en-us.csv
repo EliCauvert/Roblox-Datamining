@@ -4040,6 +4040,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Did we get it wrong?<br /><u>Report 
 Feature.SettingsHub.Prompt.JoinedVoiceChat,You've Joined Voice Chat
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,You Have Joined Voice Chat
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,You're connected to Voice Chat
+Feature.SettingsHub.Prompt.LeaveVoiceChat,Voice chat disconnected
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,You've disconnected from Voice Chat
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Microphone and Camera Use Suspended
 Feature.SettingsHub.Prompt.MicUseSuspended,Microphone use Suspended

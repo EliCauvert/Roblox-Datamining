@@ -4029,6 +4029,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,"Uważasz, że popełniliśmy błąd
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Dołączasz do czatu głosowego
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Masz połączenie z czatem głosowym
+Feature.SettingsHub.Prompt.LeaveVoiceChat,Czat głosowy został rozłączony
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Rozłączono z czatem głosowym
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Zawieszono możliwość korzystania z mikrofonu i kamery
 Feature.SettingsHub.Prompt.MicUseSuspended,Zawieszono możliwość korzystanie z mikrofonu

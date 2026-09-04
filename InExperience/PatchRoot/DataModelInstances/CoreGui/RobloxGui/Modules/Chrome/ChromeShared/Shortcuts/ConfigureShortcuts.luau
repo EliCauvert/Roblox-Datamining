@@ -19,7 +19,7 @@ local fFlagChromeShortcutRemoveRespawnOnLeavePage = sharedFlagsModule.FFlagChrom
 local fFlagConsoleChatUseChromeFocusUtils = sharedFlagsModule.FFlagConsoleChatUseChromeFocusUtils
 local fFlagChromeShortcutChatOpenKeyboard = sharedFlagsModule.FFlagChromeShortcutChatOpenKeyboard
 local fFlagAddSwitchTabHintsToIEM = sharedFlagsModule.FFlagAddSwitchTabHintsToIEM
-local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
 local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
 local flags = chrome.Flags
 local fFlagRespawnChromeShortcutTelemetryModule = require(flags.FFlagRespawnChromeShortcutTelemetry)
@@ -145,7 +145,7 @@ local function activateBack()
 end
 
 function registerShortcuts()
-	-- upvalues: serviceModule (ref), t (ref), t_1 (ref), fFlagChromeShortcutAddRespawnLeaveToIEM (ref), fFlagChromeShortcutChatOpenKeyboard (ref), fFlagEnableConsoleExpControls (ref), var1 (ref), fFlagConsoleChatUseChromeFocusUtils (ref), focusNavigationStore (ref), focusUtils (ref), gameSettings (ref), focusSelectExpChatModule (ref), robloxGui (ref), isSideSheetEnabledModule (ref), fFlagSideSheetFocusNav (ref), getSideSheetVisibility (ref), toggleSideSheet (ref), activateBack (ref), fFlagRemoveLeaveShortcutFromLeaveConfirm (ref), fFlagRemoveRespawnShortcutFromRespawnConfirmation (ref), guiService (ref), gamepadService (ref)
+	-- upvalues: serviceModule (ref), t (ref), t_1 (ref), fFlagChromeShortcutAddRespawnLeaveToIEM (ref), fFlagChromeShortcutChatOpenKeyboard (ref), fFlagEnableConsoleExpControls (ref), var1 (ref), fFlagConsoleChatUseChromeFocusUtils (ref), focusNavigationStore (ref), focusUtils (ref), gameSettings (ref), focusSelectExpChatModule (ref), robloxGui (ref), fFlagEnableSideSheet (ref), fFlagSideSheetFocusNav (ref), getSideSheetVisibility (ref), toggleSideSheet (ref), activateBack (ref), fFlagRemoveLeaveShortcutFromLeaveConfirm (ref), fFlagRemoveRespawnShortcutFromRespawnConfirmation (ref), guiService (ref), gamepadService (ref)
 	serviceModule:registerShortcut({
 		id = "leave",
 		label = "CoreScripts.TopBar.Leave",
@@ -231,7 +231,7 @@ function registerShortcuts()
 		actionName = "UnibarGamepadMenu",
 		keyCode = Enum.KeyCode.ButtonR2,
 		activated = function()
-			-- upvalues: robloxGui (copy), fFlagConsoleChatUseChromeFocusUtils (copy), focusNavigationStore (copy), isSideSheetEnabledModule (copy), fFlagSideSheetFocusNav (copy), getSideSheetVisibility (copy), toggleSideSheet (copy)
+			-- upvalues: robloxGui (copy), fFlagConsoleChatUseChromeFocusUtils (copy), focusNavigationStore (copy), fFlagEnableSideSheet (copy), fFlagSideSheetFocusNav (copy), getSideSheetVisibility (copy), toggleSideSheet (copy)
 			local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
 			
 			if settingsHubModule:GetVisibility() then
@@ -241,7 +241,7 @@ function registerShortcuts()
 			elseif fFlagConsoleChatUseChromeFocusUtils and focusNavigationStore.getChatInputBarFocused(false) then
 				focusNavigationStore.unfocusChatInputBar()
 			end
-			if isSideSheetEnabledModule and fFlagSideSheetFocusNav then
+			if fFlagEnableSideSheet and fFlagSideSheetFocusNav then
 				if getSideSheetVisibility() then
 					return
 				else

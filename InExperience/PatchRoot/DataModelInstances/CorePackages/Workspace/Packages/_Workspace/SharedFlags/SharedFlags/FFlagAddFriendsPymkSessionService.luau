@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AddFriendsPymkSessionService_v1", false)
+﻿return game:DefineFastFlag("AddFriendsPymkSessionService", false)

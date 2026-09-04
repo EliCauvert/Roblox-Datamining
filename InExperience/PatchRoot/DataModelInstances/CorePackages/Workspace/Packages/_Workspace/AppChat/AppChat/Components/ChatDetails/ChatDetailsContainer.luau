@@ -39,6 +39,7 @@ local chatDetailsTelemetryEventsModule = require(appChat.Components.ChatDetails.
 local chatConversationTelemetryStateModule = require(appChat.Contexts.TelemetryState.ChatConversationTelemetryState)
 local chatDetailsTelemetryStateModule = require(appChat.Contexts.TelemetryState.ChatDetailsTelemetryState)
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
+local fFlagAppChatAlwaysDisplayUserCardsInChatDetailsModule = require(appChat.Flags.FFlagAppChatAlwaysDisplayUserCardsInChatDetails)
 local getFFlagAppChatParticipantDialogFoundationMenuModule = require(appChat.Flags.getFFlagAppChatParticipantDialogFoundationMenu)
 local getFFlagAppChatEnableRootedNavigationModule = require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
@@ -60,7 +61,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), getFFlagAppChatParticipantDialogFoundationMenuModule (ref), useStyle (ref), useLocalization (ref), getFFlagIsSquadEnabled (ref), fFlagConnectionsToFriendsRename (ref), reactModule (ref), luaAppNavigationContextModule (ref), useDispatch (ref), useState (ref), useNavigation (ref), useIsGroupChatEnabledModule (ref), useIsChatEnabledModule (ref), useEffect (ref), useSelector (ref), getDeepValueModule (ref), conversationModule (ref), appChatNetworkingModule (ref), useUserProfilesFetch (ref), userProfilesCombinedNameAndUsernameByUserIds (ref), useTelemetryModule (ref), chatDetailsTelemetryLayerModule (ref), selectChatUserEntryModelListModule (ref), getConversationTitleModule (ref), useIsUserPendingModule (ref), conversationChannelsModule (ref), promiseModule (ref), genericDialogTypeModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), chatDetailsTelemetryEventsModule (ref), useCallback (ref), fFlagHideConversationTypeInfoIfNoWebViewModule (ref), useAppPolicy (ref), useChatPlacementContext (ref), isPlacementInExperience (ref), chatConversationTelemetryStateModule (ref), chatDetailsTelemetryStateModule (ref), useEffectOnMount (ref), chatDetailsPageModule (ref), participantDialogContainerModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), getFFlagAppChatParticipantDialogFoundationMenuModule (ref), useStyle (ref), useLocalization (ref), getFFlagIsSquadEnabled (ref), fFlagConnectionsToFriendsRename (ref), reactModule (ref), luaAppNavigationContextModule (ref), useDispatch (ref), useState (ref), useNavigation (ref), useIsGroupChatEnabledModule (ref), useIsChatEnabledModule (ref), useEffect (ref), useSelector (ref), getDeepValueModule (ref), conversationModule (ref), appChatNetworkingModule (ref), useUserProfilesFetch (ref), userProfilesCombinedNameAndUsernameByUserIds (ref), useTelemetryModule (ref), chatDetailsTelemetryLayerModule (ref), fFlagAppChatAlwaysDisplayUserCardsInChatDetailsModule (ref), selectChatUserEntryModelListModule (ref), getConversationTitleModule (ref), useIsUserPendingModule (ref), conversationChannelsModule (ref), promiseModule (ref), genericDialogTypeModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), chatDetailsTelemetryEventsModule (ref), useCallback (ref), fFlagHideConversationTypeInfoIfNoWebViewModule (ref), useAppPolicy (ref), useChatPlacementContext (ref), isPlacementInExperience (ref), chatConversationTelemetryStateModule (ref), chatDetailsTelemetryStateModule (ref), useEffectOnMount (ref), chatDetailsPageModule (ref), participantDialogContainerModule (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1 or {})
 	local var2 = getFFlagAppChatParticipantDialogFoundationMenuModule()
 	local var3 = useStyle()
@@ -145,8 +146,8 @@ return function(p1)
 	
 	if var20 then
 		var24 = useSelector(function(p2)
-			-- upvalues: selectChatUserEntryModelListModule (copy), var20 (ref), var22 (ref)
-			return selectChatUserEntryModelListModule(p2, var20.participants, if var22 and var22.data then var22.data.userProfiles else nil)
+			-- upvalues: fFlagAppChatAlwaysDisplayUserCardsInChatDetailsModule (copy), selectChatUserEntryModelListModule (copy), var20 (ref), var22 (ref)
+			return if fFlagAppChatAlwaysDisplayUserCardsInChatDetailsModule then selectChatUserEntryModelListModule(p2, var20.participants, if var22 and var22.data then var22.data.userProfiles else nil) elseif var22.data then selectChatUserEntryModelListModule(p2, var20.participants, var22.data.userProfiles) else {}
 		end)
 		var26 = var20.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION
 		var25 = useSelector(function(p2)

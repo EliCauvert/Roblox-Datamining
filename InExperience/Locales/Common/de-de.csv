@@ -3962,6 +3962,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Haben wir uns geirrt? <br /><u>Fehle
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Du hast Sprachchat aktiviert
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Du bist mit dem Sprachchat verbunden
+Feature.SettingsHub.Prompt.LeaveVoiceChat,Sprachchat getrennt
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Du hast die Verbindung zum Sprachchat getrennt
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Mikrofon- und Kameranutzung gesperrt
 Feature.SettingsHub.Prompt.MicUseSuspended,Mikrofonnutzung gesperrt

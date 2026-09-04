@@ -4030,6 +4030,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,¿Nos equivocamos?<br /><u>Reportar 
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Te has unido al Chat de voz
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,Te uniste al chat de voz
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Te conectaste al chat de voz
+Feature.SettingsHub.Prompt.LeaveVoiceChat,Chat de voz desconectado
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Te desconectaste del chat de voz
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Uso de micrófono y cámara suspendidos
 Feature.SettingsHub.Prompt.MicUseSuspended,Uso del micrófono suspendido

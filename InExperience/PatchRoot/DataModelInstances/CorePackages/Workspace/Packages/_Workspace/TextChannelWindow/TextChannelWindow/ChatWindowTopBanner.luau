@@ -34,7 +34,7 @@ local function mapMessagesForReport(p1, p2)
 	return list
 end
 
-return reactModule.memo(function(p3)
+return function(p3)
 	-- upvalues: useInExperienceLocalization (ref), reactModule (ref), useEventConnection (ref), guiService (ref), chatLineReportRoot (ref), mapMessagesForReport (ref), iconName (ref), constants (ref), menu (ref), inputSize (ref), popoverSide (ref), popoverAlign (ref), view (ref), icon (ref), iconSize (ref)
 	local var1 = useInExperienceLocalization()
 	local var2, var3 = reactModule.useState(false)
@@ -93,4 +93,4 @@ return reactModule.memo(function(p3)
 			})
 		})
 	})
-end)
+end

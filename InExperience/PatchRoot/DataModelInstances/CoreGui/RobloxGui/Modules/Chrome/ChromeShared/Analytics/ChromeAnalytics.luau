@@ -9,7 +9,7 @@ local cryoModule = require(corePackagesService.Packages.Cryo)
 local serviceModule = require(chromeShared.Service)
 local constantsModule = require(chromeShared.Unibar.Constants)
 local _ = require(corePackagesService.Workspace.Packages.Chrome)
-local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local fFlagEnableSideSheet = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableSideSheet
 local fFlagIntegrationsChromeShortcutTelemetryModule = require(chromeShared.Parent.Flags.FFlagIntegrationsChromeShortcutTelemetry)
 local trackerModule = require(chromeShared.Analytics.Tracker)
 local _ = { INACTIVE = 0, ACTIVE = 1 }
@@ -40,8 +40,8 @@ local _ = function(p1)
 end
 
 local _ = function(p1)
-	-- upvalues: isSideSheetEnabledModule (ref), serviceModule (ref)
-	return if isSideSheetEnabledModule and serviceModule:withinOpenSideSheet(p1) then "sidesheet" elseif serviceModule:withinCurrentSubmenu(p1) then serviceModule:currentSubMenu():get() elseif serviceModule:withinCurrentTopLevelMenu(p1) then "unibar" else "unknown"
+	-- upvalues: fFlagEnableSideSheet (ref), serviceModule (ref)
+	return if fFlagEnableSideSheet and serviceModule:withinOpenSideSheet(p1) then "sidesheet" elseif serviceModule:withinCurrentSubmenu(p1) then serviceModule:currentSubMenu():get() elseif serviceModule:withinCurrentTopLevelMenu(p1) then "unibar" else "unknown"
 end
 
 function t.new()
@@ -162,7 +162,7 @@ function t:setScreenSize(p1)
 end
 
 function t:onIconActivated(_, _)
-	-- upvalues: serviceModule (ref), constantsModule (ref), isSideSheetEnabledModule (ref), fFlagIntegrationsChromeShortcutTelemetryModule (ref)
+	-- upvalues: serviceModule (ref), constantsModule (ref), fFlagEnableSideSheet (ref), fFlagIntegrationsChromeShortcutTelemetryModule (ref)
 -- FATAL: Failed to generate AST for `onIconActivated` function:
 runtime : [KeyError] :11990: 134
 Traceback:
@@ -178,21 +178,21 @@ function t:onIconTouchBegan(p1)
 end
 
 function t:onIconDrag(p1)
-	-- upvalues: constantsModule (ref), isSideSheetEnabledModule (ref), serviceModule (ref)
+	-- upvalues: constantsModule (ref), fFlagEnableSideSheet (ref), serviceModule (ref)
 	local text = "icon_drag_" .. p21
 	
 	if self._tracker:get(text) == 1 then
 		self._tracker:set(text, 2)
 		self._sendEvent(constantsModule.ANALYTICS.ICON_DRAG_START, {
 			integration_id = p1,
-			source = if isSideSheetEnabledModule and serviceModule:withinOpenSideSheet(p1) then "sidesheet" elseif serviceModule:withinCurrentSubmenu(p1) then serviceModule:currentSubMenu():get() elseif serviceModule:withinCurrentTopLevelMenu(p1) then "unibar" else "unknown"
+			source = if fFlagEnableSideSheet and serviceModule:withinOpenSideSheet(p1) then "sidesheet" elseif serviceModule:withinCurrentSubmenu(p1) then serviceModule:currentSubMenu():get() elseif serviceModule:withinCurrentTopLevelMenu(p1) then "unibar" else "unknown"
 		})
 	end
 	return nil
 end
 
 function t:onIconTouchEnded(p1, p2, p3)
-	-- upvalues: serviceModule (ref), constantsModule (ref), isSideSheetEnabledModule (ref)
+	-- upvalues: serviceModule (ref), constantsModule (ref), fFlagEnableSideSheet (ref)
 	local text = "icon_drag_" .. p22
 	local var1 = serviceModule:integrations()[p1]
 	
@@ -202,7 +202,7 @@ function t:onIconTouchEnded(p1, p2, p3)
 		local var2 = var1.windowSize:get()
 		self._sendEvent(constantsModule.ANALYTICS.ICON_DRAG_END, {
 			integration_id = p1,
-			source = if isSideSheetEnabledModule and serviceModule:withinOpenSideSheet(p1) then "sidesheet" elseif serviceModule:withinCurrentSubmenu(p1) then serviceModule:currentSubMenu():get() elseif serviceModule:withinCurrentTopLevelMenu(p1) then "unibar" else "unknown",
+			source = if fFlagEnableSideSheet and serviceModule:withinOpenSideSheet(p1) then "sidesheet" elseif serviceModule:withinCurrentSubmenu(p1) then serviceModule:currentSubMenu():get() elseif serviceModule:withinCurrentTopLevelMenu(p1) then "unibar" else "unknown",
 			window_position_x = p2.X,
 			window_position_y = p2.Y,
 			window_width = var2.Width.Offset,

@@ -4010,6 +4010,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Pensi che ci sia stato un errore?<br
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Hai Partecipato alla Chat Vocale
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,Ti sei iscritto alla chat vocale
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Hai effettuato la connessione alla chat vocale
+Feature.SettingsHub.Prompt.LeaveVoiceChat,Chat vocale disconnessa
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Hai effettuato la disconnessione dalla chat vocale
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Uso del microfono e videocamera sospeso
 Feature.SettingsHub.Prompt.MicUseSuspended,Utilizzo microfono sospeso

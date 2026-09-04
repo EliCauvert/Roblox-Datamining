@@ -39,6 +39,7 @@ local getFFlagShowDevicePermissionsModal = sharedFlagsModule.GetFFlagShowDeviceP
 local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 local getFIntVoiceJoinM3ToastDurationSecondsModule = require(robloxGui.Modules.Flags.GetFIntVoiceJoinM3ToastDurationSeconds)
 local getFFlagEnableSeamlessVoiceDataConsentToastModule = require(robloxGui.Modules.Flags.GetFFlagEnableSeamlessVoiceDataConsentToast)
+local getFFlagUpdateVoiceConnectionToastsModule = require(script.Parent.Parent.Parent.VoiceChat.Flags.GetFFlagUpdateVoiceConnectionToasts)
 local getFFlagEnableVoiceTrustedConnectionsToastsModule = require(script.Parent.Parent.Parent.VoiceChat.Flags.GetFFlagEnableVoiceTrustedConnectionsToasts)
 local getFFlagVoiceConnectToastCapturesTrustedFriendsSubtitleModule = require(script.Parent.Parent.Parent.VoiceChat.Flags.GetFFlagVoiceConnectToastCapturesTrustedFriendsSubtitle)
 local getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module = require(script.Parent.Parent.Parent.VoiceChat.Flags.GetFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2)
@@ -75,11 +76,11 @@ local t = {
 	[promptTypeModule.VoiceConsentModalV3] = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.GetVoiceChat"),
 	[promptTypeModule.JoinedVoiceToast] = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.JoinedVoiceChat"),
 	[promptTypeModule.JoinVoiceSTUX] = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.JoinedVoiceChat"),
-	[promptTypeModule.LeaveVoice] = var1:Format("Feature.SettingsHub.Prompt.LeaveVoiceChatV2"),
+	[promptTypeModule.LeaveVoice] = if getFFlagUpdateVoiceConnectionToastsModule() then var1:Format("Feature.SettingsHub.Prompt.LeaveVoiceChatV2") else robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.LeaveVoiceChat"),
 	[promptTypeModule.JoinVoice] = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.JoinedVoiceChatV2"),
 	[promptTypeModule.DevicePermissionsModal] = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.NeedMicrophoneAccess"),
 	[promptTypeModule.VoiceDataConsentOptOutToast] = if getFFlagEnableSeamlessVoiceDataConsentToastModule() then var1:Format("Feature.SettingsHub.Prompt.Title.ImproveVoiceChat") else nil,
-	[promptTypeModule.UnifiedJoinVoiceToast] = var1:Format("Feature.SettingsHub.Prompt.JoinedVoiceChatV3"),
+	[promptTypeModule.UnifiedJoinVoiceToast] = if getFFlagUpdateVoiceConnectionToastsModule() then var1:Format("Feature.SettingsHub.Prompt.JoinedVoiceChatV3") else nil,
 	[promptTypeModule.AgeCheckForVoiceToast] = var1:Format("Feature.SettingsHub.Prompt.Title.AgeCheckForVoiceToast"),
 	[promptTypeModule.UpdateOnAutoJoinToast] = if getFFlagEnableVoiceTrustedConnectionsToastsModule() then var1:Format("Feature.SettingsHub.Prompt.UpdateToVoiceChat") else nil,
 	[promptTypeModule.VoiceChatSuspendedTemporaryBV2] = if getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() then robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.VoiceChatSuspendedV2") else nil,
@@ -115,7 +116,7 @@ local t_1 = {
 	[promptTypeModule.JoinVoiceSTUX] = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.Subtitle.DisconnectOrMuteHere"),
 	[promptTypeModule.DevicePermissionsModal] = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.Subtitle.AllowMicrophoneAccess"),
 	[promptTypeModule.VoiceDataConsentOptOutToast] = if getFFlagEnableSeamlessVoiceDataConsentToastModule() then var1:Format("Feature.SettingsHub.Prompt.Subtitle.ThanksForVoiceData") else nil,
-	[promptTypeModule.UnifiedJoinVoiceToast] = if getFFlagVoiceConnectToastCapturesTrustedFriendsSubtitleModule then robloxTranslatorModule:FormatByKey("Feature.Captures.Prompt.Subtitle.VoiceChatRecordingTrustedFriendsAgeGroup") elseif getFFlagEnableVoiceTrustedConnectionsToastsModule() then var1:Format(if fFlagConnectionsToFriendsRename then "Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends" else "Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections") else var1:Format("Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupV2"),
+	[promptTypeModule.UnifiedJoinVoiceToast] = if getFFlagVoiceConnectToastCapturesTrustedFriendsSubtitleModule then robloxTranslatorModule:FormatByKey("Feature.Captures.Prompt.Subtitle.VoiceChatRecordingTrustedFriendsAgeGroup") elseif getFFlagEnableVoiceTrustedConnectionsToastsModule() then var1:Format(if fFlagConnectionsToFriendsRename then "Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends" else "Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections") elseif getFFlagUpdateVoiceConnectionToastsModule() then var1:Format("Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupV2") else nil,
 	[promptTypeModule.AgeCheckForVoiceToast] = var1:Format("Feature.SettingsHub.Prompt.Subtitle.GoToAccountInfo"),
 	[promptTypeModule.UpdateOnAutoJoinToast] = if getFFlagEnableVoiceTrustedConnectionsToastsModule() then var1:Format(if fFlagConnectionsToFriendsRename then "Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedFriendsUpdate" else "Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedConnectionsUpdate") else nil,
 	[promptTypeModule.VoiceChatSuspendedTemporaryBV2] = if getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() then robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1V2") else nil,
@@ -186,8 +187,8 @@ local _ = function(p1)
 end
 
 local _ = function(p1)
-	-- upvalues: promptTypeModule (ref)
-	return if p1 ~= promptTypeModule.JoinVoice then if p1 ~= promptTypeModule.LeaveVoice then p1 == promptTypeModule.UnifiedJoinVoiceToast else true else true
+	-- upvalues: promptTypeModule (ref), getFFlagUpdateVoiceConnectionToastsModule (ref)
+	return if p1 ~= promptTypeModule.JoinVoice then if p1 ~= promptTypeModule.LeaveVoice then getFFlagUpdateVoiceConnectionToastsModule() and p1 == promptTypeModule.UnifiedJoinVoiceToast else true else true
 end
 
 local _ = function(p1)
@@ -233,7 +234,7 @@ voiceChatPromptFrame.validateProps = tModule.strictInterface({
 })
 
 function voiceChatPromptFrame.init(p1)
-	-- upvalues: promptTypeModule (ref), getFFlagSupportGamepadNavInVoiceModals (ref), roactModule (ref), robloxTranslatorModule (ref), t (ref), t_1 (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), getFFlagEnableVoiceTrustedConnectionsToastsModule (ref), images (ref), getFFlagEnableSeamlessVoiceDataConsentToastModule (ref), contextActionService (ref), voiceNudgeUseNewDACopyModule (ref), voiceChatOnlyReportVoiceBans (ref)
+	-- upvalues: promptTypeModule (ref), getFFlagSupportGamepadNavInVoiceModals (ref), roactModule (ref), robloxTranslatorModule (ref), t (ref), t_1 (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), getFFlagUpdateVoiceConnectionToastsModule (ref), getFFlagEnableVoiceTrustedConnectionsToastsModule (ref), images (ref), getFFlagEnableSeamlessVoiceDataConsentToastModule (ref), contextActionService (ref), voiceNudgeUseNewDACopyModule (ref), voiceChatOnlyReportVoiceBans (ref)
 	p1.promptStyle = {
 		Theme = p1.props.appStyle.Theme,
 		Font = p1.props.appStyle.Font
@@ -262,7 +263,7 @@ function voiceChatPromptFrame.init(p1)
 	end
 	
 	function p11.promptSignalCallback(p2)
-		-- upvalues: promptTypeModule (copy), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (copy), p1 (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), rbxAnalyticsService (copy), t (copy), t_1 (copy), getFFlagEnableVoiceTrustedConnectionsToastsModule (copy), images (copy), getFFlagEnableSeamlessVoiceDataConsentToastModule (copy), robloxTranslatorModule (copy), roactModule (copy)
+		-- upvalues: promptTypeModule (copy), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (copy), p1 (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), rbxAnalyticsService (copy), t (copy), t_1 (copy), getFFlagUpdateVoiceConnectionToastsModule (copy), getFFlagEnableVoiceTrustedConnectionsToastsModule (copy), images (copy), getFFlagEnableSeamlessVoiceDataConsentToastModule (copy), robloxTranslatorModule (copy), roactModule (copy)
 		if if p2 ~= promptTypeModule.VoiceChatSuspendedPermanent then if p2 ~= promptTypeModule.VoiceChatSuspendedTemporary then if p2 ~= promptTypeModule.VoiceChatSuspendedTemporaryAvatarChat then if p2 ~= promptTypeModule.VoiceChatSuspendedTemporaryB then getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and p2 == promptTypeModule.VoiceChatSuspendedTemporaryBV2 else true else true else true else true then
 			if p1.props.Analytics then
 				p1.props.Analytics:reportBanMessageEvent("Shown")
@@ -281,7 +282,7 @@ function voiceChatPromptFrame.init(p1)
 			local var13 = t[p2]
 			local var14 = t_1[p2]
 			
-			if (if p2 ~= promptTypeModule.JoinVoice then if p2 ~= promptTypeModule.LeaveVoice then p2 == promptTypeModule.UnifiedJoinVoiceToast else true else true) and p1.props.VoiceChatServiceManager and p1.props.VoiceChatServiceManager:HasSeamlessVoiceFeature("HideJoinToastSubtitle") then
+			if (if p2 ~= promptTypeModule.JoinVoice then if p2 ~= promptTypeModule.LeaveVoice then getFFlagUpdateVoiceConnectionToastsModule() and p2 == promptTypeModule.UnifiedJoinVoiceToast else true else true) and p1.props.VoiceChatServiceManager and p1.props.VoiceChatServiceManager:HasSeamlessVoiceFeature("HideJoinToastSubtitle") then
 				var14 = nil
 			end
 			if typeof(var13) == "function" then
@@ -298,10 +299,10 @@ function voiceChatPromptFrame.init(p1)
 			else
 				var15 = if p2 ~= promptTypeModule.VoiceConsentDeclinedToast then p2 == promptTypeModule.VoiceConsentAcceptedToast else true
 				
-				if var15 or p2 == promptTypeModule.JoinedVoiceToast or p2 == promptTypeModule.UnifiedJoinVoiceToast then
+				if var15 or p2 == promptTypeModule.JoinedVoiceToast or getFFlagUpdateVoiceConnectionToastsModule() and p2 == promptTypeModule.UnifiedJoinVoiceToast then
 					var16 = images["icons/controls/publicAudioJoin"]
 				else
-					var15 = if p2 ~= promptTypeModule.JoinVoice then if p2 ~= promptTypeModule.LeaveVoice then p2 == promptTypeModule.UnifiedJoinVoiceToast else true else true
+					var15 = if p2 ~= promptTypeModule.JoinVoice then if p2 ~= promptTypeModule.LeaveVoice then getFFlagUpdateVoiceConnectionToastsModule() and p2 == promptTypeModule.UnifiedJoinVoiceToast else true else true
 					var16 = if var15 then images["icons/actions/info"] elseif p2 == promptTypeModule.VoiceDataConsentOptOutToast and getFFlagEnableSeamlessVoiceDataConsentToastModule() then nil else images["icons/status/alert"]
 				end
 			end

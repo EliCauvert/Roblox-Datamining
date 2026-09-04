@@ -4027,6 +4027,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,この措置が間違いによるも
 Feature.SettingsHub.Prompt.JoinedVoiceChat,ボイスチャットに参加しました
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,ボイスチャットに接続しています
+Feature.SettingsHub.Prompt.LeaveVoiceChat,ボイスチャットが切断されました
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,ボイスチャットから切断されました
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,マイクとカメラの使用が停止されました
 Feature.SettingsHub.Prompt.MicUseSuspended,マイクの使用停止中

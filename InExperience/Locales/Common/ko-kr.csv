@@ -4030,6 +4030,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,오류가 발생했나요?<br /><u>�
 Feature.SettingsHub.Prompt.JoinedVoiceChat,음성 채팅에 참가했어요
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,음성 채팅에 참가했습니다
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,음성 채팅에 연결되었습니다
+Feature.SettingsHub.Prompt.LeaveVoiceChat,음성 채팅 연결 해제됨
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,음성 채팅 연결이 해제되었습니다
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,마이크 및 카메라 사용이 일시 정지됨
 Feature.SettingsHub.Prompt.MicUseSuspended,마이크 사용 일시 정지

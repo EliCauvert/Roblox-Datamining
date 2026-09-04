@@ -28,7 +28,9 @@ function SquadTopBanner(p1)
 	local var2
 	react.useEffect(function()
 		-- upvalues: squadCoordinationUIChangesExperimentation (copy)
-		squadCoordinationUIChangesExperimentation.logExposure()
+		if squadCoordinationUIChangesExperimentation.isLogExposureEnabled then
+			squadCoordinationUIChangesExperimentation.logExposure()
+		end
 	end, {})
 	local var3 = if fFlagIntroduceTopBannerPartyStatesModule and getFFlagEnableCrossExpVoice() then var1() else nil
 	local var4 = if var3 then var3.userId else nil

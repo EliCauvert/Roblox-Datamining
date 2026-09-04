@@ -4029,6 +4029,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Nous nous sommes trompés ?<br /><u
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Vous avez rejoint le Chat vocal
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Connecté(e) au chat vocal
+Feature.SettingsHub.Prompt.LeaveVoiceChat,Chat vocal déconnecté
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Déconnecté(e) du chat vocal
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Utilisation du microphone et de la caméra suspendue
 Feature.SettingsHub.Prompt.MicUseSuspended,Utilisation du microphone suspendue

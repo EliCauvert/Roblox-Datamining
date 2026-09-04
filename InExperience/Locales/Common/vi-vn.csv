@@ -4029,6 +4029,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Chúng tôi đã nhầm lẫn?<br />
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Bạn đã tham gia Cuộc nói chuyện
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,Bạn Đã Tham Gia Cuộc Nói Chuyện
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Bạn đã kết nối với tính năng Nói chuyện
+Feature.SettingsHub.Prompt.LeaveVoiceChat,Đã ngắt kết nối khỏi cuộc nói chuyện
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Bạn đã ngắt kết nối với tính năng Nói chuyện
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Việc Sử Dụng Micrô và Camera Bị Tạm Ngưng
 Feature.SettingsHub.Prompt.MicUseSuspended,Việc sử dụng micrô đã bị tạm ngưng

@@ -14,18 +14,19 @@ local var1 = require(robloxGui.Modules.TenFootInterface):IsEnabled()
 local getFFlagFixIGMTabTransitionsModule = require(script.Parent.Flags.GetFFlagFixIGMTabTransitions)
 local fFlagIEMSettingsGroupsModule = require(script.Parent.Flags.FFlagIEMSettingsGroups)
 local fFlagIEMFocusNavSupportNewButtonsModule = require(script.Parent.Flags.FFlagIEMFocusNavSupportNewButtons)
-local fFlagIEMTabFocusNav = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagIEMTabFocusNav
-local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
+local fFlagIEMTabFocusNav = sharedFlagsModule.FFlagIEMTabFocusNav
+local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
 
 local function Initialize()
-	-- upvalues: isSideSheetEnabledModule (ref), signal (ref), fFlagIEMTabFocusNav (ref), create (ref), utilityModule (ref), var1 (ref), themeModule (ref), guiService (ref), fFlagIEMSettingsGroupsModule (ref), fFlagIEMFocusNavSupportNewButtonsModule (ref), coreGuiService (ref), userGameSettingsService (ref), getFFlagFixIGMTabTransitionsModule (ref), tweenService (ref)
+	-- upvalues: fFlagEnableSideSheet (ref), signal (ref), fFlagIEMTabFocusNav (ref), create (ref), utilityModule (ref), var1 (ref), themeModule (ref), guiService (ref), fFlagIEMSettingsGroupsModule (ref), fFlagIEMFocusNavSupportNewButtonsModule (ref), coreGuiService (ref), userGameSettingsService (ref), getFFlagFixIGMTabTransitionsModule (ref), tweenService (ref)
 	local hidden = {
 		HubRef = nil,
 		LastSelectedObject = nil,
 		TabPosition = 0,
 		Active = false,
 		OpenStateChangedCount = 0,
-		ShouldShowBottomBar = not isSideSheetEnabledModule,
+		ShouldShowBottomBar = not fFlagEnableSideSheet,
 		ShouldShowHubBar = true,
 		ShouldDisableDefaultScroll = false,
 		IsPageClipped = true,

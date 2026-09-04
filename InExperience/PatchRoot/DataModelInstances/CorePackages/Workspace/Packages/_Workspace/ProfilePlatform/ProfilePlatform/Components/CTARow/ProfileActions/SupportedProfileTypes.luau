@@ -30,9 +30,6 @@ local list = {
 	enumsModule.ProfileActions.RemoveTrustedConnection
 }
 
-if sharedFlagsModule.FFlagFriendsCallingClientGate_DEV then
-	table.insert(list, enumsModule.ProfileActions.Call)
-end
 if fFlagProfilePlatformEnableUnlockChatModule then
 	table.insert(list, enumsModule.ProfileActions.UnlockChat)
 end

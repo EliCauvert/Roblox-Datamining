@@ -4012,6 +4012,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,เราเข้าใจผิด
 Feature.SettingsHub.Prompt.JoinedVoiceChat,คุณได้เปิดใช้งานการแชทด้วยเสียงแล้ว
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,คุณเชื่อมต่อกับการแชทด้วยเสียงแล้ว
+Feature.SettingsHub.Prompt.LeaveVoiceChat,ยกเลิกการเชื่อมต่อแชทด้วยเสียงแล้ว
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,คุณได้ยกเลิกการเชื่อมต่อกับการแชทด้วยเสียงแล้ว
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,การใช้งานไมโครโฟนและกล้องถูกระงับ
 Feature.SettingsHub.Prompt.MicUseSuspended,การใช้ไมโครโฟนถูกระงับ

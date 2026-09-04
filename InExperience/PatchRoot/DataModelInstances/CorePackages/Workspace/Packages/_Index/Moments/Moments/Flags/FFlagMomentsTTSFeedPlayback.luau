@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("MomentsTTSFeedPlayback2", false)
+﻿return game:DefineFastFlag("MomentsTTSFeedPlayback", false)

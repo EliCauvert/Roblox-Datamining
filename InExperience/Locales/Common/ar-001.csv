@@ -4009,6 +4009,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,هل أخطأنا في قرارنا�
 Feature.SettingsHub.Prompt.JoinedVoiceChat,لقد انضممت إلى المحادثة الصوتية
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,أنت متصل بالمحادثة الصوتية
+Feature.SettingsHub.Prompt.LeaveVoiceChat,انقطع الاتصال بالمحادثة الصوتية
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,لقد قطعت الاتصال بالمحادثة الصوتية
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,استخدام الكاميرا والميكروفون غير مسموح
 Feature.SettingsHub.Prompt.MicUseSuspended,استخدام الميكروفون غير مسموح

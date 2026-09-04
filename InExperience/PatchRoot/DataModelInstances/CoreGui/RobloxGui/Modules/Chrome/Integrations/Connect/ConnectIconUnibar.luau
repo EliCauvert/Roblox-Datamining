@@ -6,7 +6,7 @@ local isConnectUnibarEnabledModule = require(script.Parent.isConnectUnibarEnable
 local isConnectDropdownEnabledModule = require(script.Parent.isConnectDropdownEnabled)
 local getFFlagIsSquadEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagIsSquadEnabled
 local fIntSideSheetVariant = require(corePackagesService.Workspace.Packages.SharedFlags).FIntSideSheetVariant
-local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local fFlagEnableSideSheet = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableSideSheet
 local connectIconDropdownModule = require(script.Parent.ConnectIconDropdown)
 local universalAppPolicyModule = require(corePackagesService.Workspace.Packages.UniversalAppPolicy)
 local var1 = require(corePackagesService.Packages.PolicyProvider).GetPolicyImplementations.MemStorageService("app-policy")
@@ -23,7 +23,7 @@ end
 
 local var2 = nil
 local var3 = nil
-local var4 = isSideSheetEnabledModule and (fIntSideSheetVariant == 0 and connectIconDropdownModule ~= nil)
+local var4 = fFlagEnableSideSheet and (fIntSideSheetVariant == 0 and connectIconDropdownModule ~= nil)
 
 local function updateConnectIntegration(p1)
 	-- upvalues: var2 (write), registerConnectIntegrationModule (ref), serviceModule (ref), var3 (write), inExperienceAppChatModalModule (ref), var4 (ref), connectIconDropdownModule (ref)

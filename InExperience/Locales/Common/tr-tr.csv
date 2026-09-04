@@ -4029,6 +4029,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Yanlış mı anladık?<br /><u>Bir h
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Sesli Sohbete Katıldın
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Sesli Sohbete bağlandın
+Feature.SettingsHub.Prompt.LeaveVoiceChat,Sesli sohbet bağlantısı kesildi
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Sesli Sohbet bağlantın kesildi
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Mikrofon ve Kamera Kullanımı Askıya Alındı
 Feature.SettingsHub.Prompt.MicUseSuspended,Mikrofon kullanımı askıya alındı

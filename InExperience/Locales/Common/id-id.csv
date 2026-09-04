@@ -4027,6 +4027,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Apakah kami salah?<br /><u>Laporkan 
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Kamu Telah Menyalakan Chat Suara
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,Kamu Telah Bergabung ke Chat Suara
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Kamu terhubung ke Chat Suara
+Feature.SettingsHub.Prompt.LeaveVoiceChat,Chat suara dinonaktifkan
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Koneksimu ke Chat Suara terputus
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Penggunaan Mikrofon dan Kamera Ditangguhkan
 Feature.SettingsHub.Prompt.MicUseSuspended,Penggunaan mikrofon ditangguhkan

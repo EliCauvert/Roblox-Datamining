@@ -23,10 +23,12 @@ local removeKeepOutAreaModule = require(parent.Actions.RemoveKeepOutArea)
 local coreGuiCommonModule = require(corePackagesService.Workspace.Packages.CoreGuiCommon)
 local fFlagTopBarSignalizeKeepOutAreas = coreGuiCommonModule.Flags.FFlagTopBarSignalizeKeepOutAreas
 local constantsModule = require(parent.Constants)
+local getFFlagEnableAppChatInExperience = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagEnableAppChatInExperience
 local _ = require(script.Parent.ChatIconFtuxTooltip)
 local getExperienceChatVisualConfig = require(corePackagesService.Workspace.Packages.ExpChat).getExperienceChatVisualConfig
 local _ = game:DefineFastInt("InExperienceChatTooltipShowDelayMs", 1000)
 local _ = game:DefineFastInt("InExperienceChatTooltipDismissDelayMs", 7000)
+local unibarHoldoutChatIconUseNewIconSize = game:DefineFastFlag("UnibarHoldoutChatIconUseNewIconSize", false)
 local gameSettings = UserSettings().GameSettings
 
 local function _()
@@ -64,9 +66,9 @@ function chatIcon.init(p1)
 end
 
 function chatIcon.render(p1)
-	-- upvalues: withStyle (ref), tenFootInterfaceModule (ref), VRService (ref), getExperienceChatVisualConfig (ref), images (ref), fFlagTopBarSignalizeKeepOutAreas (ref), constantsModule (ref), roactModule (ref), iconButtonModule (ref), badge (ref), badgeStates (ref)
+	-- upvalues: withStyle (ref), tenFootInterfaceModule (ref), VRService (ref), getExperienceChatVisualConfig (ref), images (ref), fFlagTopBarSignalizeKeepOutAreas (ref), constantsModule (ref), roactModule (ref), iconButtonModule (ref), getFFlagEnableAppChatInExperience (ref), unibarHoldoutChatIconUseNewIconSize (ref), badge (ref), badgeStates (ref)
 	return withStyle(function(_)
-		-- upvalues: p1 (ref), tenFootInterfaceModule (copy), VRService (copy), getExperienceChatVisualConfig (copy), images (copy), fFlagTopBarSignalizeKeepOutAreas (copy), constantsModule (copy), roactModule (copy), iconButtonModule (copy), badge (copy), badgeStates (copy)
+		-- upvalues: p1 (ref), tenFootInterfaceModule (copy), VRService (copy), getExperienceChatVisualConfig (copy), images (copy), fFlagTopBarSignalizeKeepOutAreas (copy), constantsModule (copy), roactModule (copy), iconButtonModule (copy), getFFlagEnableAppChatInExperience (copy), unibarHoldoutChatIconUseNewIconSize (copy), badge (copy), badgeStates (copy)
 		local var2 = p1.props.topBarEnabled and (p1.props.chatEnabled and (not tenFootInterfaceModule:IsEnabled() and not VRService.VREnabled))
 		local _ = nil
 		local _ = nil
@@ -114,7 +116,7 @@ function chatIcon.render(p1)
 		}, {
 			Background = roactModule.createElement(iconButtonModule, {
 				icon = var4,
-				iconSize = iconSize,
+				iconSize = if getFFlagEnableAppChatInExperience() or unibarHoldoutChatIconUseNewIconSize then iconSize else 20,
 				onActivated = p1.chatIconActivated,
 				[roactModule.Change.AbsoluteSize] = var5,
 				[roactModule.Change.AbsolutePosition] = var5,

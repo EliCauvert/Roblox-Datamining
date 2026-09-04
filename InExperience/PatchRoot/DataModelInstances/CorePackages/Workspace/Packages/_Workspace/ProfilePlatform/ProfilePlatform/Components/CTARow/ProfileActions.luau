@@ -1,7 +1,6 @@
 ﻿local acceptFriendRequestActionsModule = require(script.AcceptFriendRequestActions)
 local addFriendActionsModule = require(script.AddFriendActions)
 local blockActionsModule = require(script.BlockActions)
-local callActionModule = require(script.CallAction)
 local chatActionModule = require(script.ChatAction)
 local communityActionsModule = require(script.CommunityActions)
 local currencyTransferActionModule = require(script.CurrencyTransferAction)
@@ -22,26 +21,11 @@ local unlockChatActionModule = require(script.UnlockChatAction)
 local viewAboutActionModule = require(script.ViewAboutAction)
 local viewPlatformProfileActionModule = require(script.ViewPlatformProfileAction)
 local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
 local _ = require(profilePlatform.Common.Enums)
 local _ = require(profilePlatform.Components.CTARow.Types)
 local supportedProfileTypesModule = require(script.SupportedProfileTypes)
-local fFlagFriendsCallingClientGateDEV = require(parent.SharedFlags).FFlagFriendsCallingClientGate_DEV
 local t = {}
-local list = {
-	acceptFriendRequestActionsModule, addFriendActionsModule, blockActionsModule,
-	chatActionModule, communityActionsModule, currencyTransferActionModule,
-	editAliasActionModule, editAppearanceActionsModule, editProfileActionModule,
-	followActionsModule, ignoreFriendRequestActionModule,
-	joinExperienceActionModule, pendingFriendRequestActionModule,
-	qrCodeActionModule, reportActionModule, shareProfileActionModule,
-	tradeItemsActionModule, trustedConnectionActionsModule, unfriendActionModule,
-	unlockChatActionModule, viewAboutActionModule, viewPlatformProfileActionModule
-}
 
-if fFlagFriendsCallingClientGateDEV then
-	table.insert(list, callActionModule)
-end
 local function _(p1, p2)
 	-- upvalues: supportedProfileTypesModule (ref)
 	return function(p3)
@@ -60,7 +44,16 @@ local function _(p1, p2)
 	end
 end
 
-for i, v in list do
+for i, v in {
+	acceptFriendRequestActionsModule, addFriendActionsModule, blockActionsModule,
+	chatActionModule, communityActionsModule, currencyTransferActionModule,
+	editAliasActionModule, editAppearanceActionsModule, editProfileActionModule,
+	followActionsModule, ignoreFriendRequestActionModule,
+	joinExperienceActionModule, pendingFriendRequestActionModule,
+	qrCodeActionModule, reportActionModule, shareProfileActionModule,
+	tradeItemsActionModule, trustedConnectionActionsModule, unfriendActionModule,
+	unlockChatActionModule, viewAboutActionModule, viewPlatformProfileActionModule
+} do
 	for i_1, v_1 in v do
 		assert(t[i_1] == nil, "Duplicate ProfileAction key: " .. tostring(i_1))
 		

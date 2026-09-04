@@ -4028,6 +4028,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,Não concorda?<br /><u>Relatar um er
 Feature.SettingsHub.Prompt.JoinedVoiceChat,Você se juntou ao bate Chat de Voz
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,Você entrou no Chat de voz
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,Você se conectou ao chat de voz
+Feature.SettingsHub.Prompt.LeaveVoiceChat,Chat de voz desconectado
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,Você se desconectou do chat de voz
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,Uso do Microfone e da câmera suspensos
 Feature.SettingsHub.Prompt.MicUseSuspended,Uso de microfone suspenso

@@ -15,6 +15,7 @@ local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local useSelectionCursor = UIBloxModule.App.SelectionImage.useSelectionCursor
 local useInterpolatedClientSettingsModule = require(expChat.ClientSettings.useInterpolatedClientSettings)
 local fFlagExpChatFocusChannelBarSupportModule = require(expChat.Flags.FFlagExpChatFocusChannelBarSupport)
+local fFlagExpChatChannelBarDropdownZIndexFixModule = require(expChat.Flags.FFlagExpChatChannelBarDropdownZIndexFix)
 local fFlagExpChatEnableTabsImpressionAnalyticsModule = require(expChat.Flags.FFlagExpChatEnableTabsImpressionAnalytics)
 local var1 = require(expChat.Stores.GetFocusNavigationStore)(false)
 local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
@@ -46,7 +47,7 @@ local function setTransparency(value, p1)
 end
 
 return function(p1)
-	-- upvalues: configModule (ref), reactModule (ref), signalsReactModule (ref), getChatLayoutStoreModule (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), var1 (ref), reactFocusNavigationModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatEnableFriendsTab (ref), channelTabModule (ref), expChatPerfTracker (ref), fFlagExpChatPerfTrackerTabName (ref), fFlagExpChatLogTabClickedModule (ref), analytics (ref), var2 (ref), setTransparency (ref), textChatService (ref), useInterpolatedClientSettingsModule (ref), color_1 (ref), imageSetLabel (ref), cycleDown (ref), color (ref)
+	-- upvalues: configModule (ref), reactModule (ref), signalsReactModule (ref), getChatLayoutStoreModule (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), var1 (ref), reactFocusNavigationModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatEnableFriendsTab (ref), channelTabModule (ref), expChatPerfTracker (ref), fFlagExpChatPerfTrackerTabName (ref), fFlagExpChatLogTabClickedModule (ref), analytics (ref), var2 (ref), setTransparency (ref), textChatService (ref), useInterpolatedClientSettingsModule (ref), fFlagExpChatChannelBarDropdownZIndexFixModule (ref), color_1 (ref), imageSetLabel (ref), cycleDown (ref), color (ref)
 	local var4 = 0
 	
 	for i in pairs(p1.allChannelTabs) do
@@ -176,7 +177,7 @@ return function(p1)
 		BackgroundTransparency = 1,
 		Visible = p1.visible,
 		BorderSizePixel = 0,
-		ZIndex = 3,
+		ZIndex = if fFlagExpChatChannelBarDropdownZIndexFixModule then 3 else nil,
 		[reactModule.Event.MouseEnter] = p1.onHovered,
 		[reactModule.Event.MouseLeave] = p1.onUnhovered,
 		[reactModule.Change.AbsoluteSize] = function(p2)
