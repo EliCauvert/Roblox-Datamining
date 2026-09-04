@@ -1000,6 +1000,10 @@ CommonUI.UserAgreements.Popup.ConvertToVNCheckboxMessage,أوافق على جم�
 CommonUI.UserAgreements.Popup.ConvertToVNMessage,من خلال النقر على زر الموافقة أدناه، فإنك تغير بلدك إلى فيتنام وبذلك تنتقل إلى تطبيق Roblox – VNG ولا يمكنك الرجوع إلى التطبيق الحالي. يخضع استخدامك لتطبيق Roblox - VNG للشروط التالية التي تنسخ أي شروط سابقة من شركة Roblox. يرجى مراجعة الشروط التالية والموافقة عليه:
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,الاتفاقية المحدثة
 CommonUI.UserAgreements.Popup.FailAndRetryMessage,عذرًا، حدثت مشكلة خلال محاولة قبول شروط الاستخدام. الرجاء المحاولة مرة أخرى.
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.TermsOfService,
+CommonUI.UserAgreements.Popup.KISAConsent.Agreement.ThirdPartyInfo,تقديم المعلومات الشخصية إلى أطراف ثالثة
+CommonUI.UserAgreements.Popup.KISAConsent.Message,يرجى مراجعة الشروط التالية للموافقة عليها. يمكنك اختيار الموافقة على الشروط الفردية أو عدم الموافقة عليها. سيظل بإمكانك استخدام منصّة Roblox إذا لم توافق على الشروط الاختيارية.
+CommonUI.UserAgreements.Popup.KISAConsent.Title,
 CommonUI.UserAgreements.Popup.KISAMessage,يرجى مراجعة الشروط التالية للموافقة عليها. يمكنك اختيار الموافقة أو عدم الموافقة على الشروط الفردية. لكنك ستتمكن من استخدام Roblox حتى ولو لم توافق على الشروط الاختيارية.
 CommonUI.UserAgreements.Popup.Message,"للاستمرار في استخدام Roblox، الرجاء تحديد ""موافق"" للموافقة على شروط الاستخدام المحدثة الخاصة بنا والاعتراف بسياسة الخصوصية لدينا. إذا كنت قاصرًا، يرجى مشاركة هذه الرسالة مع أحد والديك أو مع ولي أمرك. التغييرات التي طرأت على المستندات هي التالية:"
 CommonUI.UserAgreements.Popup.PromotionalEmailsCheckbox,اختياري: أود أيضًا الاشتراك في تلقي رسائل البريد الإلكتروني من Roblox حول أحدث الإصدارات والعروض الترويجية محدودة الوقت والمزيد.
@@ -1094,7 +1098,8 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,تقوم منصّة Roblox 
 CoreScripts.TextChat.ChatWindow.Transcribing,جارٍ تحويل الكلام إلى نص...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,لم نتمكّن من سماعك! حاول مرة أخرى.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,لا ندعم هذه اللغة بعد!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,لاستخدام الميكروفون، انتقل إلى إعدادات جهازك وامنح إذن الميكروفون لمنصّة Roblox.
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,لاستخدام الميكروفون، اضغط هنا لتحديث إعدادات جهازك.
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,لاستخدام الميكروفون، انتقل إلى إعدادات جهازك وامنح Roblox إذن استخدام الميكروفون.
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,تعذَّر الوصول إلى الميكروفون
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,لإرسال الرسائل بصوتك، سنعالج ملفك الصوتي ونحذفه فورًا وفقًا لسياسة الخصوصية.
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,لقد قمت بتمكين تحويل الكلام إلى نص في الدردشة
