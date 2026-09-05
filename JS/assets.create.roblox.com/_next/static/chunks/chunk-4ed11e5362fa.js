@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "08d6e1b3-3abc-dd6f-d256-865c59b2e317")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "f4a8a9e1-717b-b31d-9d8b-15024fad5cdf")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 279149, t => {
@@ -27366,10 +27366,10 @@
         }
         static async getDataset(t) {
             let r;
-            if ("titles" === n.default.env.recommendedSearchType) r = nf("https://assets.create.roblox.com/45060ef210e7c81806370d564f9803e3f4295ceb", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
+            if ("titles" === n.default.env.recommendedSearchType) r = nf("https://assets.create.roblox.com/7011f5934c9b5a5eeec726e9689a31f73751a329", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
             else {
                 if (!ny()) return [];
-                r = nf("https://assets.create.roblox.com/45060ef210e7c81806370d564f9803e3f4295ceb", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
+                r = nf("https://assets.create.roblox.com/7011f5934c9b5a5eeec726e9689a31f73751a329", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
             }
             let o = await fetch(r),
                 a = await o.json();
@@ -33214,5 +33214,5 @@
     }])
 }]);
 
-//# debugId=08d6e1b3-3abc-dd6f-d256-865c59b2e317
-//# sourceMappingURL=2erioldafyto-.js.map
+//# debugId=f4a8a9e1-717b-b31d-9d8b-15024fad5cdf
+//# sourceMappingURL=1y6o18t7ecevy.js.map
