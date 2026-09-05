@@ -85,9 +85,9 @@ return function(p1, p2, p3, p4)
 		end
 		t = var7.loadedBySequenceId
 		t_1 = var7.overlayBySequenceId
-		var7.setHasLoadedHistory(var7.hasLoadedHistory)
-		var7.setNextHistoryPageToken(var7.nextHistoryPageToken)
-		var7.setLatestObservedHistorySequenceId(var7.latestObservedHistorySequenceId)
+		var1.setHasLoadedHistory(var7.hasLoadedHistory)
+		var1.setNextHistoryPageToken(var7.nextHistoryPageToken)
+		var1.setLatestObservedHistorySequenceId(var7.latestObservedHistorySequenceId)
 		var6(buildMergedHistory())
 		
 		return true
@@ -119,18 +119,18 @@ return function(p1, p2, p3, p4)
 			end
 		end
 		local var8
-		var7.setCasSessionId(value)
-		var7.setHistoryLoadInFlight(false)
-		local var9 = var9.restore(value)
+		var1.setCasSessionId(value)
+		var1.setHistoryLoadInFlight(false)
+		local var9 = var3.restore(value)
 		
 		if var9 == nil then
 			var8 = false
 		else
 			t = var9.loadedBySequenceId
 			t_1 = var9.overlayBySequenceId
-			var7.setHasLoadedHistory(var9.hasLoadedHistory)
-			var7.setNextHistoryPageToken(var9.nextHistoryPageToken)
-			var7.setLatestObservedHistorySequenceId(var9.latestObservedHistorySequenceId)
+			var1.setHasLoadedHistory(var9.hasLoadedHistory)
+			var1.setNextHistoryPageToken(var9.nextHistoryPageToken)
+			var1.setLatestObservedHistorySequenceId(var9.latestObservedHistorySequenceId)
 			var6(buildMergedHistory())
 			var8 = true
 		end
@@ -159,7 +159,7 @@ return function(p1, p2, p3, p4)
 		end
 	end
 	
-	local var1 = historyLoaderModule.createHistoryLoader({
+	local var7 = historyLoaderModule.createHistoryLoader({
 		deps = p1,
 		rpcTimeoutSeconds = rpcTimeoutSeconds,
 		getCasSessionId = function()
@@ -202,7 +202,7 @@ return function(p1, p2, p3, p4)
 			return var4
 		end
 	})
-	local var2 = historyPollingModule.createHistoryPolling({
+	local var8 = historyPollingModule.createHistoryPolling({
 		deps = p1,
 		rpcTimeoutSeconds = rpcTimeoutSeconds,
 		getCasSessionId = function()
@@ -221,14 +221,14 @@ return function(p1, p2, p3, p4)
 		if var1.getInitialized(false) then
 			return true, nil
 		end
-		local var7 = historyPageUtilsModule.awaitRequestState(p1.initialize({ protocolVersion = acpProtocolModule.ProtocolVersion }).state, os.clock() + rpcTimeoutSeconds)
+		local var9 = historyPageUtilsModule.awaitRequestState(p1.initialize({ protocolVersion = acpProtocolModule.ProtocolVersion }).state, os.clock() + rpcTimeoutSeconds)
 		
-		if var7.status == "succeeded" then
-			var7.setInitialized(true)
+		if var9.status == "succeeded" then
+			var1.setInitialized(true)
 			
 			return true, nil
 		end
-		return false, var7.errorCode
+		return false, var9.errorCode
 	end
 	
 	return {
@@ -251,8 +251,9 @@ return function(p1, p2, p3, p4)
 		getMergedHistory = var5,
 		ingestRealtimeUpdate = ingestRealtimeUpdate,
 		mergeHistoryPage = mergeHistoryPage,
-		refreshSession = var1.refreshSession,
-		loadOlderHistory = var1.loadOlderHistory,
+		refreshSession = var7.refreshSession,
+		loadOlderHistory = var7.loadOlderHistory,
+		requestOlderHistoryWhile = var7.requestOlderHistoryWhile,
 		sendPrompt = sendPromptModule.createSendPrompt({
 			ensureInitialized = ensureInitialized,
 			ensureCasSession = function()
@@ -264,27 +265,27 @@ return function(p1, p2, p3, p4)
 				elseif p2 == nil or p3 == nil then
 					return nil, { stage = "missing_project" }
 				end
-				local var7, var8 = ensureInitialized()
+				local var9, var10 = ensureInitialized()
 				
-				if not var7 then
-					return nil, { stage = "initialize", errorCode = var8 }
+				if not var9 then
+					return nil, { stage = "initialize", errorCode = var10 }
 				end
-				local var9 = historyPageUtilsModule.awaitRequestState(p1.sessionNew({
+				local var11 = historyPageUtilsModule.awaitRequestState(p1.sessionNew({
 					project = { universeId = p2, placeId = p3 },
 					experiment = experimentOverrideModule.getExperiment(),
 					application = if fFlagBuildExperiencePinForBuild then "build" else nil
 				}).state, os.clock() + rpcTimeoutSeconds)
 				
-				if var9.status ~= "succeeded" then
-					return nil, { stage = "session_new", errorCode = var9.errorCode }
+				if var11.status ~= "succeeded" then
+					return nil, { stage = "session_new", errorCode = var11.errorCode }
 				end
-				local result = var9.result
-				local var10 = if typeof(result) == "table" then result.sessionId else nil
+				local result = var11.result
+				local var12 = if typeof(result) == "table" then result.sessionId else nil
 				
-				if typeof(var10) == "string" and var10 ~= "" then
-					setCasSessionIdInternal(var10)
+				if typeof(var12) == "string" and var12 ~= "" then
+					setCasSessionIdInternal(var12)
 					
-					return var10, nil
+					return var12, nil
 				end
 				return nil, { stage = "session_new" }
 			end,
@@ -293,7 +294,7 @@ return function(p1, p2, p3, p4)
 				return var1.getLatestObservedHistorySequenceId(false)
 			end,
 			noteTurnSequenceIds = noteTurnSequenceIds,
-			startPollingTurnFromHistory = var2.startPollingTurnFromHistory,
+			startPollingTurnFromHistory = var8.startPollingTurnFromHistory,
 			getAssistantTurnSequence = function()
 				-- upvalues: var1 (ref)
 				return var1.getAssistantTurnSequence(false)
@@ -312,10 +313,10 @@ return function(p1, p2, p3, p4)
 			end
 		end,
 		submitActiveToolResult = function(p5, p6, p7, p8)
-			-- upvalues: var1 (ref), p5 (ref)
+			-- upvalues: var1 (ref), p1 (ref)
 			local casSessionId = var1.getCasSessionId(false)
 			
-			return if casSessionId == nil then nil else p5.submitToolResult({
+			return if casSessionId == nil then nil else p1.submitToolResult({
 				sessionId = casSessionId,
 				turnId = p7,
 				referenceId = p8,
@@ -330,10 +331,10 @@ return function(p1, p2, p3, p4)
 			return if casSessionId == nil then nil else p1.getActiveTurnHandle(casSessionId)
 		end,
 		startPollingActiveTurn = function(p5)
-			-- upvalues: var1 (ref), var2 (ref)
+			-- upvalues: var1 (ref), var8 (ref)
 			local casSessionId = var1.getCasSessionId(false)
 			
-			return if casSessionId == nil then function() end else var2.startPollingActiveTurn(casSessionId, p5)
+			return if casSessionId == nil then function() end else var8.startPollingActiveTurn(casSessionId, p5)
 		end
 	}
 end

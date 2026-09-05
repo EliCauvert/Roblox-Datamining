@@ -1823,6 +1823,7 @@ Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,添加测试玩家
 Feature.Build.Action.AddPlaytesters,
 Feature.Build.Action.AddToPlaytest,添加至游戏测试
+Feature.Build.Action.AgreeAndEnable,同意并开启
 Feature.Build.Action.Approve,批准
 Feature.Build.Action.Archive,存档
 Feature.Build.Action.ArchiveGame,存档游戏
@@ -1846,6 +1847,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,通知我
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,打开设置
+Feature.Build.Action.Options,选项
 Feature.Build.Action.Play,游玩
 Feature.Build.Action.Playtest,游戏测试
 Feature.Build.Action.Preview,
@@ -1945,11 +1947,16 @@ Feature.Build.Description.InviteFriendLimit,选择最多 {MAX_INVITES} 位好友
 Feature.Build.Description.MakeAudienceAvail,面向此受众群体发布你的体验。
 Feature.Build.Description.ManageAppearance,管理你的游戏向他人显示的方式。
 Feature.Build.Description.ManageDeveloperProduct,管理开发者产品。
+Feature.Build.Description.ManagedPricingAcknowledgement,托管定价会根据地区自动调整价格。
+Feature.Build.Description.ManagedPricingCurrentProducts,对当前所有商品使用托管定价
+Feature.Build.Description.ManagedPricingUnavailable,此体验无法使用托管定价。
+Feature.Build.Description.NoEligibleManagedPricingProducts,没有符合条件的商品
 Feature.Build.Description.NoMonetizationProducts,描述你想创作的道具，以便开始在你的游戏中赚取 Robux
 Feature.Build.Description.PlayAfterPublish,选择谁可以在此体验发布后游玩。
 Feature.Build.Description.PlaytestLatest,你正在对最新版本进行游戏测试。准备好分享后即可发布。
 Feature.Build.Description.PlaytestLocked,创建你的第一款游戏后，你就可以开始游戏测试。
 Feature.Build.Description.PlaytesterAccess,将好友添加为测试玩家，或更改游戏的受众设置，允许更多人游玩。
+Feature.Build.Description.PricingRules,设置定价规则
 Feature.Build.Description.PrivateShare,更改游戏的受众设置以分享该游戏。
 Feature.Build.Description.PromoteGameWithAdCampaign,通过为期 {durationDays} 天的广告活动扩大受众群体，让你的游戏被他人发现。
 Feature.Build.Description.RaiseLimitOrWait,提高你的每日 Robux 限额以继续创建，或等待限额在明天重置。
@@ -1957,6 +1964,7 @@ Feature.Build.Description.RatingAgreement,发布即表示你同意此内容评�
 Feature.Build.Description.RestoreLatest,此版本将成为你的最新发布版本。
 Feature.Build.Description.RevertToVersion,确认以还原上次更改并返回到 {VERSION}。
 Feature.Build.Description.ShareLatest,分享最新版本的变化。
+Feature.Build.Description.ShopButton,添加购物入口
 Feature.Build.Description.UpdateDeveloperProduct,更新开发者产品 {PRODUCT_ID}。
 Feature.Build.Description.VersionChanges,告诉玩家此版本的更新内容
 Feature.Build.Error.DeveloperProductDescriptionTooLong,描述不能超过 1000 个字符。
@@ -1964,6 +1972,10 @@ Feature.Build.Error.DeveloperProductNameRequired,输入产品名称。
 Feature.Build.Error.DeveloperProductNameTooLong,名称不能超过 50 个字符。
 Feature.Build.Error.DeveloperProductPriceInvalid,"价格必须为 1 到 1,000,000,000 Robux 的整数。"
 Feature.Build.Error.DeveloperProductTextModerated,Roblox 审核团队更改了此产品的文本。请尝试使用其他措辞。
+Feature.Build.Error.ManagedPricingPartialUpdate,无法更新某些商品。
+Feature.Build.Error.MonetizationOptionUpdate,无法更新选项。请重试。
+Feature.Build.Error.MonetizationOptionsLoad,无法加载选项。请重试。
+Feature.Build.Error.MonetizationPermissionDenied,你没有更改收益化选项的权限。
 Feature.Build.Header.AccessSharing,访问权限和共享
 Feature.Build.Header.AllVersions,所有版本
 Feature.Build.Header.ContentMaturity,内容成熟度
@@ -2019,6 +2031,8 @@ Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,受限
 Feature.Build.Label.Live,已发布
 Feature.Build.Label.Loading,正在加载…
+Feature.Build.Label.ManagedPricing,托管定价
+Feature.Build.Label.ManagedPricingMixed,对当前商品使用混合定价
 Feature.Build.Label.MaximizeForGamePlays,最大化游戏游玩次数
 Feature.Build.Label.Models3D,3D 模型
 Feature.Build.Label.Name,
@@ -2033,6 +2047,7 @@ Feature.Build.Label.PreviouslyPublished,此前已发布版本
 Feature.Build.Label.Price,价格
 Feature.Build.Label.PriceUnavailable,--
 Feature.Build.Label.Pricing,定价
+Feature.Build.Label.PricingOptions,定价选项
 Feature.Build.Label.Private,私人
 Feature.Build.Label.Public,公开
 Feature.Build.Label.PubliclyUnavailable,不公开
@@ -2050,6 +2065,8 @@ Feature.Build.Label.SearchTasks,搜索任务
 Feature.Build.Label.SelectOption,选择一个选项
 Feature.Build.Label.ShareAddedFriends,分享给已添加的好友
 Feature.Build.Label.Shared,已共享
+Feature.Build.Label.ShopButton,商店按钮
+Feature.Build.Label.ShopUi,商店用户界面
 Feature.Build.Label.Sounds,声音
 Feature.Build.Label.TargetAllRobloxPlayers,定位所有 Roblox 玩家
 Feature.Build.Label.Thinking,正在思考
@@ -2244,6 +2261,7 @@ Feature.Build.Title.GameCreationDone,游戏创建已完成
 Feature.Build.Title.GamePrivate,此游戏为私密游戏
 Feature.Build.Title.GenericError,出错了
 Feature.Build.Title.GetUsers,获取用户
+Feature.Build.Title.ManagedPricingAcknowledgement,是否开启托管定价？
 Feature.Build.Title.NoMonetizationProducts,开始在你的游戏中赚取收入
 Feature.Build.Title.NoRobuxForUsage,没有剩余的 Robux 可用于购买 Build 使用额度
 Feature.Build.Title.Playtesters,测试玩家
@@ -2920,7 +2938,7 @@ Feature.Durables.InfoModal.Title,引入限时选项
 Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite,永久
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
-Feature.Durables.ItemDetails.WearTimeOptions.Title,选项
+Feature.Durables.ItemDetails.WearTimeOptions.Title,
 Feature.Durables.Label.ItemExpires,道具到期
 Feature.Durables.PartiallyExpiredItems.BodyText,此已保存虚拟形象中的部分道具已过期且已被移除。
 Feature.Durables.PartiallyExpiredItems.TitleText,道具已过期

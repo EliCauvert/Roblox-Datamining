@@ -5,7 +5,7 @@ local t = {
 	description = "Client events for Build tab interactions, playtesting, private invites, monetization, the asset library, and ad-upsell impressions and clicks.",
 	backends = { "Points", "EventIngest" },
 	throttlingPercentage = game:DefineFastInt("BuildExperienceEventThrottleHundredthsPercent", 0),
-	lastUpdated = { 2026, 8, 27 }
+	lastUpdated = { 2026, 9, 3 }
 }
 
 return function(p1, p2, p3)

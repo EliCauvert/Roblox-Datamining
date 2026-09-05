@@ -1,4 +1,6 @@
-﻿return {
+﻿local fFlagAXSearchAndCancelLogging = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceFlags).FFlagAXSearchAndCancelLogging
+
+return {
 	ITEM_DETAILS_FAVORITE_BUTTON = "ITEM_DETAILS_FAVORITE_BUTTON",
 	CATALOG_OFFERS_BANNER = "CATALOG_OFFERS_BANNER",
 	BACKGROUNDS = {
@@ -13,5 +15,7 @@
 			DISCARD_BUTTON = "BACKGROUND_GENERATION_DISCARD_BUTTON",
 			BACK_BUTTON = "BACKGROUND_GENERATION_BACK_BUTTON"
 		}
-	}
+	},
+	CATALOG_SEARCH_BUTTON = if fFlagAXSearchAndCancelLogging then "CATALOG_SEARCH_BUTTON" else nil,
+	SEARCH_LANDING_CANCEL_BUTTON = if fFlagAXSearchAndCancelLogging then "SEARCH_LANDING_CANCEL_BUTTON" else nil
 }

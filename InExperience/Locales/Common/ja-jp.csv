@@ -1848,6 +1848,7 @@ Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,プレイテスターを追加
 Feature.Build.Action.AddPlaytesters,
 Feature.Build.Action.AddToPlaytest,プレイテストに追加
+Feature.Build.Action.AgreeAndEnable,同意してオンにする
 Feature.Build.Action.Approve,承認
 Feature.Build.Action.Archive,アーカイブ
 Feature.Build.Action.ArchiveGame,ゲームをアーカイブする
@@ -1871,6 +1872,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,通知する
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,設定を開く
+Feature.Build.Action.Options,オプション
 Feature.Build.Action.Play,
 Feature.Build.Action.Playtest,プレイテスト
 Feature.Build.Action.Preview,
@@ -1970,11 +1972,16 @@ Feature.Build.Description.InviteFriendLimit,友達を{MAX_INVITES}人まで選�
 Feature.Build.Description.MakeAudienceAvail,このオーディエンスが利用できるようにするには、バーチャル空間を公開してください。
 Feature.Build.Description.ManageAppearance,他のユーザーへのゲームの表示のされ方を管理しましょう。
 Feature.Build.Description.ManageDeveloperProduct,開発者製品を管理します。
+Feature.Build.Description.ManagedPricingAcknowledgement,管理価格設定では、地域ごとに価格が自動的に調整されます。
+Feature.Build.Description.ManagedPricingCurrentProducts,現在のすべての製品に管理価格設定を使用する
+Feature.Build.Description.ManagedPricingUnavailable,このバーチャル空間では管理価格設定を利用できません。
+Feature.Build.Description.NoEligibleManagedPricingProducts,対象の製品はありません
 Feature.Build.Description.NoMonetizationProducts,ゲーム内でRobuxを獲得するために、作成したいアイテムについて説明してください
 Feature.Build.Description.PlayAfterPublish,このバーチャル空間を公開した後、誰がプレイできるかを選択します。
 Feature.Build.Description.PlaytestLatest,最新バージョンのプレイテスト中です。シェアする準備ができたら公開してください。
 Feature.Build.Description.PlaytestLocked,プレイテストは、最初のゲームを制作した後に開始可能です。
 Feature.Build.Description.PlaytesterAccess,友達をプレイテスターとして追加するか、ゲームのオーディエンス設定を変更して、より多くの人にプレイしてもらいましょう。
+Feature.Build.Description.PricingRules,価格設定ルールを設定
 Feature.Build.Description.PrivateShare,ゲームのオーディエンス設定を変更してシェアしてください。
 Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}日間の広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう。
 Feature.Build.Description.RaiseLimitOrWait,作成を続けるには、1日あたりのRobux限度額を増やすか、明日になってリセットされるのをお待ちください。
@@ -1982,6 +1989,7 @@ Feature.Build.Description.RatingAgreement,公開することで、このコン�
 Feature.Build.Description.RestoreLatest,このバージョンが、公開済みの最新バージョンになります。
 Feature.Build.Description.RevertToVersion,確認して最後の変更を元に戻し、{VERSION}に戻ります。
 Feature.Build.Description.ShareLatest,最新バージョンの変更内容を共有しましょう。
+Feature.Build.Description.ShopButton,ショップボタンを追加
 Feature.Build.Description.UpdateDeveloperProduct,開発者製品{PRODUCT_ID}を更新してください。
 Feature.Build.Description.VersionChanges,このバージョンで変更された点をプレイヤーに伝えましょう。
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"詳細は1,000文字以下で入力してください。"
@@ -1989,6 +1997,10 @@ Feature.Build.Error.DeveloperProductNameRequired,製品名を入力してくだ�
 Feature.Build.Error.DeveloperProductNameTooLong,名前は50文字以下にしてください。
 Feature.Build.Error.DeveloperProductPriceInvalid,"価格は1から1,000,000,000 Robuxまでの整数にしてください。"
 Feature.Build.Error.DeveloperProductTextModerated,Robloxの内容審査により、この製品のテキストが変更されました。別の表現を試してください。
+Feature.Build.Error.ManagedPricingPartialUpdate,一部の製品を更新できませんでした。
+Feature.Build.Error.MonetizationOptionUpdate,オプションを更新できませんでした。もう一度お試しください。
+Feature.Build.Error.MonetizationOptionsLoad,オプションを読み込めませんでした。もう一度お試しください。
+Feature.Build.Error.MonetizationPermissionDenied,収益化オプションを変更する権限がありません。
 Feature.Build.Header.AccessSharing,アクセスとシェア
 Feature.Build.Header.AllVersions,すべてのバージョン
 Feature.Build.Header.ContentMaturity,コンテンツ成熟度
@@ -2044,6 +2056,8 @@ Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,限定
 Feature.Build.Label.Live,公開中
 Feature.Build.Label.Loading,読み込み中...
+Feature.Build.Label.ManagedPricing,管理価格設定
+Feature.Build.Label.ManagedPricingMixed,既存の製品で設定が混在
 Feature.Build.Label.MaximizeForGamePlays,プレイ数を最大化
 Feature.Build.Label.Models3D,3Dモデル
 Feature.Build.Label.Name,
@@ -2058,6 +2072,7 @@ Feature.Build.Label.PreviouslyPublished,以前に公開済み
 Feature.Build.Label.Price,価格
 Feature.Build.Label.PriceUnavailable,--
 Feature.Build.Label.Pricing,価格設定
+Feature.Build.Label.PricingOptions,価格設定オプション
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,
 Feature.Build.Label.PubliclyUnavailable,公開不可
@@ -2075,6 +2090,8 @@ Feature.Build.Label.SearchTasks,タスクをサーチ
 Feature.Build.Label.SelectOption,オプションを選択
 Feature.Build.Label.ShareAddedFriends,追加した友達とシェア
 Feature.Build.Label.Shared,シェア済み
+Feature.Build.Label.ShopButton,ショップボタン
+Feature.Build.Label.ShopUi,ショップUI
 Feature.Build.Label.Sounds,サウンド
 Feature.Build.Label.TargetAllRobloxPlayers,すべてのRobloxプレイヤーを対象にする
 Feature.Build.Label.Thinking,考え中
@@ -2269,6 +2286,7 @@ Feature.Build.Title.GameCreationDone,ゲームの作成が完了しました
 Feature.Build.Title.GamePrivate,このゲームは非公開です
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,ユーザーを獲得
+Feature.Build.Title.ManagedPricingAcknowledgement,管理価格設定をオンにしますか？
 Feature.Build.Title.NoMonetizationProducts,ゲーム内で収益を獲得
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
 Feature.Build.Title.Playtesters,プレイテスター
@@ -2947,7 +2965,7 @@ Feature.Durables.InfoModal.Title,期間限定オプションの紹介
 Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite,永久
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num}日
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
-Feature.Durables.ItemDetails.WearTimeOptions.Title,オプション
+Feature.Durables.ItemDetails.WearTimeOptions.Title,
 Feature.Durables.Label.ItemExpires,アイテムの有効期限
 Feature.Durables.PartiallyExpiredItems.BodyText,この保存されたアバターの一部のアイテムは有効期限が切れたため削除されました。
 Feature.Durables.PartiallyExpiredItems.TitleText,アイテムの有効期限が切れました

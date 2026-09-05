@@ -8,7 +8,7 @@ local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedF
 local fFlagEnableGameLeftMessage = sharedFlagsModule.FFlagEnableGameLeftMessage
 local fFlagSurvBloxEventTypeEnabled = sharedFlagsModule.FFlagSurvBloxEventTypeEnabled
 local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
-local fFlagRemoveExitModalModule = require(robloxGui.Modules.Settings.Flags.FFlagRemoveExitModal)
+local isExitModalRemovedModule = require(robloxGui.Modules.Settings.Flags.isExitModalRemoved)
 local fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry = require(corePackagesService.Workspace.Packages.VoiceChatCore).Flags.GetFFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry()
 local perfUtilsModule = require(robloxGui.Modules.Common.PerfUtils)
 local cryoModule = require(corePackagesService.Packages.Cryo)
@@ -25,7 +25,7 @@ local reactSchedulingTrackerModule = require(robloxGui.Modules.Common.ReactSched
 local var2 = if fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry then require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default else nil
 
 return function(p1, p2)
-	-- upvalues: fFlagEnableGameLeftMessage (ref), messageBus (ref), constantsModule (ref), getFFlagEnableInGameMenuDurationLoggerModule (ref), perfUtilsModule (ref), reactSchedulingTrackerModule (ref), corePackagesService (ref), guiService (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), fFlagLeaveActionChromeShortcutTelemetryModule (ref), cryoModule (ref), fFlagSurvBloxEventTypeEnabled (ref), surveyEventPublisherModule (ref), webViewEventTypeModule (ref), playersService (ref), var1 (ref), fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (ref), var2 (ref), runService (ref), fFlagRemoveExitModalModule (ref), getDefaultQualityLevel (ref)
+	-- upvalues: fFlagEnableGameLeftMessage (ref), messageBus (ref), constantsModule (ref), getFFlagEnableInGameMenuDurationLoggerModule (ref), perfUtilsModule (ref), reactSchedulingTrackerModule (ref), corePackagesService (ref), guiService (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), fFlagLeaveActionChromeShortcutTelemetryModule (ref), cryoModule (ref), fFlagSurvBloxEventTypeEnabled (ref), surveyEventPublisherModule (ref), webViewEventTypeModule (ref), playersService (ref), var1 (ref), fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (ref), var2 (ref), runService (ref), isExitModalRemovedModule (ref), getDefaultQualityLevel (ref)
 	if fFlagEnableGameLeftMessage and (not p2 or not p2.inhibitAppRating) then
 		messageBus.publish(constantsModule.OnAppRatingPromptEventDescriptor, { gameTime = game:getGameTime() })
 	end
@@ -70,12 +70,12 @@ return function(p1, p2)
 	runService.RenderStepped:wait()
 	runService.RenderStepped:wait()
 	
-	if not fFlagRemoveExitModalModule or not p2 or not p2.shouldNativeExit then
+	if not isExitModalRemovedModule or not p2 or not p2.shouldNativeExit then
 		game:Shutdown()
 	end
 	settings().Rendering.QualityLevel = getDefaultQualityLevel()
 	
-	if fFlagRemoveExitModalModule and p2 and p2.shouldNativeExit then
+	if isExitModalRemovedModule and p2 and p2.shouldNativeExit then
 		guiService:BroadcastNotification("", guiService:GetNotificationTypeList().NATIVE_EXIT)
 	end
 end

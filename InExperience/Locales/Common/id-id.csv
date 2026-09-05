@@ -1842,6 +1842,7 @@ Feature.Build.Action.AddFriends,Tambah teman
 Feature.Build.Action.AddPlaytester,Tambahkan playtester
 Feature.Build.Action.AddPlaytesters,
 Feature.Build.Action.AddToPlaytest,Tambahkan ke playtest
+Feature.Build.Action.AgreeAndEnable,Setujui dan nyalakan
 Feature.Build.Action.Approve,Setujui
 Feature.Build.Action.Archive,Arsipkan
 Feature.Build.Action.ArchiveGame,Arsipkan game
@@ -1865,6 +1866,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,Beri saya notifikasi
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Buka pengaturan
+Feature.Build.Action.Options,Opsi
 Feature.Build.Action.Play,Mainkan
 Feature.Build.Action.Playtest,Playtest
 Feature.Build.Action.Preview,
@@ -1964,11 +1966,16 @@ Feature.Build.Description.InviteFriendLimit,"Pilih maksimal {MAX_INVITES} teman,
 Feature.Build.Description.MakeAudienceAvail,Publikasikan pengalaman virtualmu agar tersedia bagi audiens ini.
 Feature.Build.Description.ManageAppearance,Kelola tampilan game-mu bagi pengguna lain.
 Feature.Build.Description.ManageDeveloperProduct,Kelola produk developer.
+Feature.Build.Description.ManagedPricingAcknowledgement,Harga Terkelola otomatis menyesuaikan harga menurut wilayah.
+Feature.Build.Description.ManagedPricingCurrentProducts,Gunakan Harga Terkelola untuk semua produk saat ini
+Feature.Build.Description.ManagedPricingUnavailable,Harga Terkelola tidak tersedia untuk pengalaman virtual ini.
+Feature.Build.Description.NoEligibleManagedPricingProducts,Tidak ada produk yang memenuhi syarat
 Feature.Build.Description.NoMonetizationProducts,Deskripsikan item yang ingin kamu buat untuk mulai memperoleh Robux di game-mu
 Feature.Build.Description.PlayAfterPublish,Pilih siapa yang bisa bermain setelah kamu memublikasikan pengalaman virtual ini.
 Feature.Build.Description.PlaytestLatest,Kamu sedang melakukan playtest pada versi terbarumu. Publikasikan saat kamu siap untuk membagikannya.
 Feature.Build.Description.PlaytestLocked,Kamu dapat memulai playtest setelah membuat game pertamamu.
 Feature.Build.Description.PlaytesterAccess,Tambahkan teman sebagai playtester atau ubah pengaturan Audiens game-mu agar lebih banyak pengguna dapat memainkannya.
+Feature.Build.Description.PricingRules,Tetapkan aturan harga
 Feature.Build.Description.PrivateShare,Ubah pengaturan Audiens game-mu untuk membagikannya.
 Feature.Build.Description.PromoteGameWithAdCampaign,Jangkau lebih banyak audiens dengan kampanye iklan {durationDays} hari agar game-mu lebih mudah ditemukan.
 Feature.Build.Description.RaiseLimitOrWait,"Tingkatkan batas harian Robux-mu untuk terus berkreasi, atau tunggu hingga direset besok."
@@ -1976,6 +1983,7 @@ Feature.Build.Description.RatingAgreement,"Dengan memublikasikan, kamu menyetuju
 Feature.Build.Description.RestoreLatest,Versi ini akan menjadi versi publikasi terbarumu.
 Feature.Build.Description.RevertToVersion,Konfirmasi untuk membatalkan perubahan terakhir dan kembali ke {VERSION}.
 Feature.Build.Description.ShareLatest,Bagikan apa yang berubah di versi terbarumu.
+Feature.Build.Description.ShopButton,Tambahkan entry point belanja
 Feature.Build.Description.UpdateDeveloperProduct,Perbarui produk developer {PRODUCT_ID}.
 Feature.Build.Description.VersionChanges,Beri tahu pemain perubahan pada versi ini.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Deskripsi maksimal 1.000 karakter.
@@ -1983,6 +1991,10 @@ Feature.Build.Error.DeveloperProductNameRequired,Masukkan nama produk.
 Feature.Build.Error.DeveloperProductNameTooLong,Nama harus terdiri dari maksimal 50 karakter.
 Feature.Build.Error.DeveloperProductPriceInvalid,Harga harus berupa bilangan bulat dari 1 hingga 1.000.000.000 Robux.
 Feature.Build.Error.DeveloperProductTextModerated,Moderasi Roblox mengubah teks produk ini. Coba kata-kata lain.
+Feature.Build.Error.ManagedPricingPartialUpdate,Beberapa produk tidak dapat di-update.
+Feature.Build.Error.MonetizationOptionUpdate,Opsi tidak dapat di-update. Coba lagi.
+Feature.Build.Error.MonetizationOptionsLoad,Opsi tidak dapat di-load. Coba lagi.
+Feature.Build.Error.MonetizationPermissionDenied,Kamu tidak memiliki izin untuk mengubah opsi monetisasi.
 Feature.Build.Header.AccessSharing,Akses & berbagi
 Feature.Build.Header.AllVersions,Semua versi
 Feature.Build.Header.ContentMaturity,Kedewasaan konten
@@ -2038,6 +2050,8 @@ Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Terbatas
 Feature.Build.Label.Live,Live
 Feature.Build.Label.Loading,
+Feature.Build.Label.ManagedPricing,Harga terkelola
+Feature.Build.Label.ManagedPricingMixed,Harga terkelola campuran di seluruh produk saat ini
 Feature.Build.Label.MaximizeForGamePlays,Maksimalkan agar game lebih banyak dimainkan
 Feature.Build.Label.Models3D,Model 3D
 Feature.Build.Label.Name,
@@ -2052,6 +2066,7 @@ Feature.Build.Label.PreviouslyPublished,Dipublikasikan sebelumnya
 Feature.Build.Label.Price,Harga
 Feature.Build.Label.PriceUnavailable,--
 Feature.Build.Label.Pricing,
+Feature.Build.Label.PricingOptions,Opsi harga
 Feature.Build.Label.Private,Privat
 Feature.Build.Label.Public,Publik
 Feature.Build.Label.PubliclyUnavailable,Tidak tersedia untuk umum
@@ -2069,6 +2084,8 @@ Feature.Build.Label.SearchTasks,Cari tugas
 Feature.Build.Label.SelectOption,Pilih opsi
 Feature.Build.Label.ShareAddedFriends,Bagikan kepada teman yang kamu tambahkan
 Feature.Build.Label.Shared,Dibagikan
+Feature.Build.Label.ShopButton,Tombol Belanja
+Feature.Build.Label.ShopUi,UI Belanja
 Feature.Build.Label.Sounds,Suara
 Feature.Build.Label.TargetAllRobloxPlayers,Targetkan semua pemain Roblox
 Feature.Build.Label.Thinking,Sedang memproses
@@ -2263,6 +2280,7 @@ Feature.Build.Title.GameCreationDone,Pembuatan game selesai
 Feature.Build.Title.GamePrivate,Game ini privat
 Feature.Build.Title.GenericError,Terjadi kesalahan
 Feature.Build.Title.GetUsers,Dapatkan pengguna
+Feature.Build.Title.ManagedPricingAcknowledgement,Aktifkan Harga Terkelola?
 Feature.Build.Title.NoMonetizationProducts,Mulai hasilkan pendapatan di game-mu
 Feature.Build.Title.NoRobuxForUsage,Tidak ada Robux yang tersisa untuk penggunaan Build
 Feature.Build.Title.Playtesters,Playtester
@@ -2939,7 +2957,7 @@ Feature.Durables.InfoModal.Title,Memperkenalkan opsi dengan batas waktu
 Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite,Permanen
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} hari
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
-Feature.Durables.ItemDetails.WearTimeOptions.Title,Opsi
+Feature.Durables.ItemDetails.WearTimeOptions.Title,
 Feature.Durables.Label.ItemExpires,Item kedaluwarsa
 Feature.Durables.PartiallyExpiredItems.BodyText,Beberapa item dalam avatar yang tersimpan ini kedaluwarsa dan telah dihapus.
 Feature.Durables.PartiallyExpiredItems.TitleText,

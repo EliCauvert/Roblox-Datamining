@@ -134,7 +134,7 @@ local _ = function(p4)
 end
 
 return function()
-	-- upvalues: createDataCacheModule (ref), friendsRequestsCacheTtlSec (ref), createDataResolverModule (ref), requestsModule (ref), friendsRequestsPageSize (ref), normalizeGetFriendRequestsResponse (ref), updateFriendshipStatusesForPage (ref), mergeFriendsRequestsPage (ref), localUserIdStore (ref), getLocalPlayerUserId (ref), dataStatus (ref)
+	-- upvalues: createDataCacheModule (ref), friendsRequestsCacheTtlSec (ref), createDataResolverModule (ref), requestsModule (ref), friendsRequestsPageSize (ref), normalizeGetFriendRequestsResponse (ref), updateFriendshipStatusesForPage (ref), mergeFriendsRequestsPage (ref), localUserIdStore (ref), getLocalPlayerUserId (ref), dataStatus (ref), friendsStoreModule (ref)
 	local var7 = createDataCacheModule(if friendsRequestsCacheTtlSec > 0 then friendsRequestsCacheTtlSec else 1e999)
 	local var8 = createDataCacheModule()
 	local var9 = createDataCacheModule()
@@ -313,7 +313,7 @@ return function()
 			})
 		end,
 		appendNewUserId = function(p5)
-			-- upvalues: localUserIdStore (copy), getLocalPlayerUserId (copy), var12 (ref), var7 (ref)
+			-- upvalues: localUserIdStore (copy), getLocalPlayerUserId (copy), var12 (ref), var7 (ref), friendsStoreModule (copy)
 			local var18 = if p5 == nil then nil else tostring(p5)
 			
 			if not var18 then return end
@@ -331,21 +331,21 @@ return function()
 			
 			if var21 == nil then
 				var7.replaceItem(var19, { nextPageCursor = nil, hasMore = false, requests = { t } })
+			else
+				local list = { t }
 				
-				return
-			end
-			local list = { t }
-			
-			for i, v in var21.requests do
-				if v.id ~= var18 then
-					table.insert(list, v)
+				for i, v in var21.requests do
+					if v.id ~= var18 then
+						table.insert(list, v)
+					end
 				end
+				var7.replaceItem(var19, {
+					requests = list,
+					nextPageCursor = var21.nextPageCursor,
+					hasMore = var21.hasMore
+				})
 			end
-			var7.replaceItem(var19, {
-				requests = list,
-				nextPageCursor = var21.nextPageCursor,
-				hasMore = var21.hasMore
-			})
+			friendsStoreModule.get().UpdateFriendshipStatus(var18, Enum.FriendStatus.FriendRequestReceived)
 		end,
 		getFriendsRequestCount = function(p6)
 			-- upvalues: localUserIdStore (copy), getLocalPlayerUserId (copy), var13 (ref)

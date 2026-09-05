@@ -9,6 +9,7 @@ return {
 		-- upvalues: historyPageUtilsModule (ref), sessionHistoryMergeModule (ref), constantsModule (ref)
 		local var1 = 0
 		local var2 = nil
+		local var3 = nil
 		
 		local function _(p2)
 			-- upvalues: p1 (ref)
@@ -40,12 +41,12 @@ return {
 		
 		local function loadHistoryPage(p2, p3, p4)
 			-- upvalues: p1 (ref), historyPageUtilsModule (copy)
-			local var3 = historyPageUtilsModule.awaitRequestStateCancelled(p1.deps.sessionLoad(p2, { historyPageToken = p3 }).state, p4)
+			local var4 = historyPageUtilsModule.awaitRequestStateCancelled(p1.deps.sessionLoad(p2, { historyPageToken = p3 }).state, p4)
 			
-			if p4() or var3.status ~= "succeeded" then
+			if p4() or var4.status ~= "succeeded" then
 				return false, {}, nil
 			end
-			return true, historyPageUtilsModule.getSessionLoadHistory(var3.result), historyPageUtilsModule.getNextHistoryPageToken(var3.result)
+			return true, historyPageUtilsModule.getSessionLoadHistory(var4.result), historyPageUtilsModule.getNextHistoryPageToken(var4.result)
 		end
 		
 		local _ = function(p2, p3, p4)
@@ -86,15 +87,15 @@ return {
 			-- upvalues: constantsModule (copy), p1 (ref), var1 (write), loadHistoryPage (ref)
 			task.spawn(function()
 				-- upvalues: p7 (ref), constantsModule (copy), value (ref), p9 (ref), p10 (ref), p8 (ref), p1 (copy), var1 (copy), loadHistoryPage (copy)
-				local var3 = p7
+				local var4 = p7
 				local prefetchHistoryPagesOnRefresh = constantsModule.getPrefetchHistoryPagesOnRefresh()
-				while prefetchHistoryPagesOnRefresh > 0 and var3 ~= nil do
+				while prefetchHistoryPagesOnRefresh > 0 and var4 ~= nil do
 					if not p8() and not (if p1.getCasSessionId() == value then p10 ~= p1.getRefreshGeneration() else true) and p9 == var1 then
-						local var4, var5, var6 = loadHistoryPage(value, var3, p8)
+						local var5, var6, var7 = loadHistoryPage(value, var4, p8)
 						
-						if var4 and (not p8() and not (if p1.getCasSessionId() == value then p10 ~= p1.getRefreshGeneration() else true) and p9 == var1) then
-							p1.mergeHistoryPage(var5, var6)
-							var3 = var6
+						if var5 and (not p8() and not (if p1.getCasSessionId() == value then p10 ~= p1.getRefreshGeneration() else true) and p9 == var1) then
+							p1.mergeHistoryPage(var6, var7)
+							var4 = var7
 							prefetchHistoryPagesOnRefresh -= 1
 							continue
 						end
@@ -112,81 +113,85 @@ return {
 			return var1
 		end
 		
-		return {
-			refreshSession = function(p11)
-				-- upvalues: p1 (ref), var2 (write), historyPageUtilsModule (copy), loadHistoryPage (ref), constantsModule (copy), commitRefreshedHistory (ref), var1 (write)
-				local casSessionId = p1.getCasSessionId()
-				
-				if casSessionId == nil or casSessionId == "" then
+		local var4 = nil
+		
+		local function refreshSession(p11, p12)
+			-- upvalues: p1 (ref), var2 (write), historyPageUtilsModule (copy), loadHistoryPage (ref), constantsModule (copy), commitRefreshedHistory (ref), var4 (write), var1 (write)
+			local casSessionId = p1.getCasSessionId()
+			
+			if casSessionId == nil or casSessionId == "" then
+				return false
+			end
+			local var5
+			local refreshGeneration = p1.getRefreshGeneration()
+			
+			if p1.getHistoryLoadInFlight() then
+				if var2 == casSessionId then
+					var5 = false
+				else
+					p1.setHistoryLoadInFlight(false)
+					var2 = nil
+				end
+				if not var5 then
 					return false
 				end
-				local var3
-				local refreshGeneration = p1.getRefreshGeneration()
-				
-				if p1.getHistoryLoadInFlight() then
+				local var6
+				local var7 = p1.buildMergedHistory()
+				local var8 = historyPageUtilsModule.collectSequenceIds(var7)
+				local var9 = #var7 > 0
+				local var10 = not var9
+				local t = {}
+				local t_1 = {}
+				local nextHistoryPageToken = nil
+				local var11 = 0
+				repeat
+					var11 += 1
+					var6, var31, var32 = loadHistoryPage(casSessionId, nextHistoryPageToken, p11)
+					if var6 and (not p11() and not (if p1.getCasSessionId() == casSessionId then refreshGeneration ~= p1.getRefreshGeneration() else true)) then
+						if var9 and historyPageUtilsModule.historyOverlapsSequenceIds(var31, var8) then
+							var10 = true
+						end
+						historyPageUtilsModule.appendUniqueHistoryBySequenceId(t, var31, t_1)
+						nextHistoryPageToken = var32
+					end
 					if var2 == casSessionId then
-						var3 = false
-					else
 						p1.setHistoryLoadInFlight(false)
 						var2 = nil
 					end
-					if not var3 then
-						return false
+					return false
+				until not (var9 and not var10 and (nextHistoryPageToken ~= nil and constantsModule.getMaxReconciliationHistoryPages() > var11))
+				if var9 and var10 then
+					if historyPageUtilsModule.appendUniqueHistoryBySequenceId(t, var7, t_1) > 0 then
+						nextHistoryPageToken = p1.getNextHistoryPageToken()
 					end
-					local var4
-					local var5 = p1.buildMergedHistory()
-					local var6 = historyPageUtilsModule.collectSequenceIds(var5)
-					local var7 = #var5 > 0
-					local var8 = not var7
-					local t = {}
-					local t_1 = {}
-					local nextHistoryPageToken = nil
-					local var9 = 0
-					repeat
-						var9 += 1
-						var4, var27, var28 = loadHistoryPage(casSessionId, nextHistoryPageToken, p11)
-						if var4 and (not p11() and not (if p1.getCasSessionId() == casSessionId then refreshGeneration ~= p1.getRefreshGeneration() else true)) then
-							if var7 and historyPageUtilsModule.historyOverlapsSequenceIds(var27, var6) then
-								var8 = true
-							end
-							historyPageUtilsModule.appendUniqueHistoryBySequenceId(t, var27, t_1)
-							nextHistoryPageToken = var28
-						end
-						if var2 == casSessionId then
-							p1.setHistoryLoadInFlight(false)
-							var2 = nil
-						end
-						return false
-					until not (var7 and not var8 and (nextHistoryPageToken ~= nil and constantsModule.getMaxReconciliationHistoryPages() > var9))
-					if var7 and var8 then
-						if historyPageUtilsModule.appendUniqueHistoryBySequenceId(t, var5, t_1) > 0 then
-							nextHistoryPageToken = p1.getNextHistoryPageToken()
-						end
-					elseif var7 then
-						historyPageUtilsModule.appendUniqueHistoryBySequenceId(t, var5, t_1)
+				elseif var9 then
+					historyPageUtilsModule.appendUniqueHistoryBySequenceId(t, var7, t_1)
+				end
+				if commitRefreshedHistory(casSessionId, refreshGeneration, t, nextHistoryPageToken, p11) then
+					if var2 == casSessionId then
+						p1.setHistoryLoadInFlight(false)
+						var2 = nil
 					end
-					if commitRefreshedHistory(casSessionId, refreshGeneration, t, nextHistoryPageToken, p11) then
-						if var2 == casSessionId then
-							p1.setHistoryLoadInFlight(false)
-							var2 = nil
-						end
-						if not var7 and nextHistoryPageToken ~= nil then
+					if not var9 and nextHistoryPageToken ~= nil then
+						if p12 then
+							var4(constantsModule.getPrefetchHistoryPagesOnRefresh(), p11, nil)
+						else
 							var1 += 1
-							var4 = var1
+							var6 = var1
 							task.defer(function()
-								-- upvalues: casSessionId (ref), nextHistoryPageToken (write), p11 (ref), var4 (ref), refreshGeneration (ref), constantsModule (copy), p1 (copy), var1 (copy), loadHistoryPage (copy)
+								-- upvalues: casSessionId (ref), nextHistoryPageToken (write), p11 (ref), var6 (ref), refreshGeneration (ref), constantsModule (copy), p1 (copy), var1 (copy), loadHistoryPage (copy)
 								task.spawn(function()
-									-- upvalues: nextHistoryPageToken (ref), constantsModule (copy), casSessionId (ref), var4 (ref), refreshGeneration (ref), p11 (ref), p1 (copy), var1 (copy), loadHistoryPage (copy)
-									local var10 = nextHistoryPageToken
+									-- upvalues: nextHistoryPageToken (ref), constantsModule (copy), casSessionId (ref), var6 (ref), refreshGeneration (ref), p11 (ref), p1 (copy), var1 (copy), loadHistoryPage (copy)
+									local var12 = nextHistoryPageToken
 									local prefetchHistoryPagesOnRefresh = constantsModule.getPrefetchHistoryPagesOnRefresh()
 									while true do
-										while prefetchHistoryPagesOnRefresh > 0 and var10 ~= nil do
-											if not p11() and not (if p1.getCasSessionId() == casSessionId then refreshGeneration ~= p1.getRefreshGeneration() else true) and var4 == var1 then
-												local var11, var12, var13 = loadHistoryPage(casSessionId, var10, p11)
+										while prefetchHistoryPagesOnRefresh > 0 and var12 ~= nil do
+											if not p11() and not (if p1.getCasSessionId() == casSessionId then refreshGeneration ~= p1.getRefreshGeneration() else true) and var6 == var1 then
+												local var13, var14, var15 = loadHistoryPage(casSessionId, var12, p11)
 												
-												if var11 and (not p11() and not (if p1.getCasSessionId() == casSessionId then refreshGeneration ~= p1.getRefreshGeneration() else true) and var4 == var1) then
-													p1.mergeHistoryPage(var12, var13)
-													var10 = var13
+												if var13 and (not p11() and not (if p1.getCasSessionId() == casSessionId then refreshGeneration ~= p1.getRefreshGeneration() else true) and var6 == var1) then
+													p1.mergeHistoryPage(var14, var15)
+													var12 = var15
 													prefetchHistoryPagesOnRefresh -= 1
 													continue
 													continue
@@ -199,89 +204,155 @@ return {
 								end)
 							end)
 						end
-						return true
-					elseif var2 == casSessionId then
-						p1.setHistoryLoadInFlight(false)
-						var2 = nil
 					end
-					return false
+					return true
+				elseif var2 == casSessionId then
+					p1.setHistoryLoadInFlight(false)
+					var2 = nil
 				end
-				var2 = casSessionId
-				p1.setHistoryLoadInFlight(true)
-				var3 = true
-			end,
-			loadOlderHistory = function(p12)
-				-- upvalues: p1 (ref), var2 (write), loadHistoryPage (ref), var1 (write), constantsModule (copy)
-				local casSessionId = p1.getCasSessionId()
-				local nextHistoryPageToken = p1.getNextHistoryPageToken()
-				
-				if casSessionId == nil or nextHistoryPageToken == nil then
-					return false
+				return false
+			end
+			var2 = casSessionId
+			p1.setHistoryLoadInFlight(true)
+			var5 = true
+		end
+		
+		local function loadOlderHistoryPage(p13)
+			-- upvalues: p1 (ref), var2 (write), loadHistoryPage (ref)
+			local casSessionId = p1.getCasSessionId()
+			local nextHistoryPageToken = p1.getNextHistoryPageToken()
+			
+			if casSessionId == nil or nextHistoryPageToken == nil then
+				return false, nil, nil, nil
+			end
+			local var12
+			local refreshGeneration = p1.getRefreshGeneration()
+			
+			if p1.getHistoryLoadInFlight() then
+				if var2 == casSessionId then
+					var12 = false
+				else
+					p1.setHistoryLoadInFlight(false)
+					var2 = nil
 				end
-				local var10
-				local refreshGeneration = p1.getRefreshGeneration()
+				if not var12 then
+					return false, nil, nil, nil
+				end
+				local var13, var14, var15 = loadHistoryPage(casSessionId, nextHistoryPageToken, p13)
 				
-				if p1.getHistoryLoadInFlight() then
-					if var2 == casSessionId then
-						var10 = false
-					else
-						p1.setHistoryLoadInFlight(false)
-						var2 = nil
-					end
-					if not var10 then
-						return false
-					end
-					local var11, var12, var13 = loadHistoryPage(casSessionId, nextHistoryPageToken, p12)
+				if var13 and (not p13() and not (if p1.getCasSessionId() == casSessionId then refreshGeneration ~= p1.getRefreshGeneration() else true)) then
+					p1.mergeHistoryPage(var14, var15)
 					
-					if var11 and (not p12() and not (if p1.getCasSessionId() == casSessionId then refreshGeneration ~= p1.getRefreshGeneration() else true)) then
-						p1.mergeHistoryPage(var12, var13)
-						
-						if var2 == casSessionId then
-							p1.setHistoryLoadInFlight(false)
-							var2 = nil
-						end
-						if p12() or (if p1.getCasSessionId() == casSessionId then refreshGeneration ~= p1.getRefreshGeneration() else true) then
-							return false
-						elseif var13 ~= nil then
-							var1 += 1
-							local var14 = var1
-							task.defer(function()
-								-- upvalues: casSessionId (ref), var13 (ref), p12 (ref), var14 (ref), refreshGeneration (ref), constantsModule (copy), p1 (copy), var1 (copy), loadHistoryPage (copy)
-								task.spawn(function()
-									-- upvalues: var13 (ref), constantsModule (copy), casSessionId (ref), var14 (ref), refreshGeneration (ref), p12 (ref), p1 (copy), var1 (copy), loadHistoryPage (copy)
-									local var15 = var13
-									local prefetchHistoryPagesOnRefresh = constantsModule.getPrefetchHistoryPagesOnRefresh()
-									while true do
-										while prefetchHistoryPagesOnRefresh > 0 and var15 ~= nil do
-											if not p12() and not (if p1.getCasSessionId() == casSessionId then refreshGeneration ~= p1.getRefreshGeneration() else true) and var14 == var1 then
-												local var16, var17, var18 = loadHistoryPage(casSessionId, var15, p12)
-												
-												if var16 and (not p12() and not (if p1.getCasSessionId() == casSessionId then refreshGeneration ~= p1.getRefreshGeneration() else true) and var14 == var1) then
-													p1.mergeHistoryPage(var17, var18)
-													var15 = var18
-													prefetchHistoryPagesOnRefresh -= 1
-													continue
-													continue
-													continue
-												end
-												return
-											end
-											return
-										end
-									end
-								end)
-							end)
-						end
-						return true
-					elseif var2 == casSessionId then
+					if var2 == casSessionId then
 						p1.setHistoryLoadInFlight(false)
 						var2 = nil
 					end
-					return false
+					if p13() or (if p1.getCasSessionId() == casSessionId then refreshGeneration ~= p1.getRefreshGeneration() else true) then
+						return false, nil, nil, nil
+					end
+					return true, casSessionId, refreshGeneration, var15
+				elseif var2 == casSessionId then
+					p1.setHistoryLoadInFlight(false)
+					var2 = nil
 				end
-				var2 = casSessionId
-				p1.setHistoryLoadInFlight(true)
-				var10 = true
+				return false, nil, nil, nil
+			end
+			var2 = casSessionId
+			p1.setHistoryLoadInFlight(true)
+			var12 = true
+		end
+		
+		var4 = function(p13, p14, p15)
+			-- upvalues: p1 (ref), var3 (write), loadOlderHistoryPage (ref)
+			local casSessionId = p1.getCasSessionId()
+			
+			if casSessionId == nil or p1.getNextHistoryPageToken() == nil then return end
+			local refreshGeneration = p1.getRefreshGeneration()
+			
+			if var3 == nil or var3.sessionId ~= casSessionId or var3.refreshGeneration ~= refreshGeneration then
+				local t = {
+					sessionId = casSessionId,
+					refreshGeneration = refreshGeneration,
+					minimumPagesRemaining = p13,
+					isCancelled = p14,
+					shouldContinue = p15
+				}
+				var3 = t
+				task.defer(function()
+					-- upvalues: t (ref), p1 (copy), loadOlderHistoryPage (copy), var3 (copy)
+					local ok, status = xpcall(function()
+						-- upvalues: t (copy), p1 (copy), loadOlderHistoryPage (copy), var3 (copy)
+						while not t.isCancelled() and not (if p1.getCasSessionId() == t.sessionId then t.refreshGeneration ~= p1.getRefreshGeneration() else true) and p1.getNextHistoryPageToken() ~= nil do
+							if not (if t.minimumPagesRemaining <= 0 then t.shouldContinue ~= nil and t.shouldContinue() else true) or not loadOlderHistoryPage(function()
+								-- upvalues: t (copy), var3 (copy)
+								return t.isCancelled() or var3 ~= t
+							end) then break end
+							if t.minimumPagesRemaining > 0 then
+								t.minimumPagesRemaining -= 1
+							end
+							task.wait()
+						end
+					end, debug.traceback)
+					
+					if var3 == t then
+						var3 = nil
+					end
+					if not ok then
+						error(status)
+					end
+				end)
+				
+				return
+			end
+			var3.minimumPagesRemaining = math.max(var3.minimumPagesRemaining, p13)
+			var3.isCancelled = p14
+			
+			if p15 ~= nil then
+				var3.shouldContinue = p15
+			end
+		end
+		
+		return {
+			refreshSession = refreshSession,
+			loadOlderHistory = function(p16)
+				-- upvalues: loadOlderHistoryPage (ref), var1 (write), constantsModule (copy), p1 (ref), loadHistoryPage (ref)
+				local var12, var13, var14, var15 = loadOlderHistoryPage(p16)
+				
+				if var12 and var13 ~= nil and (var14 ~= nil and var15 ~= nil) then
+					var1 += 1
+					local var16 = var1
+					task.defer(function()
+						-- upvalues: var13 (ref), var15 (ref), p16 (ref), var16 (ref), var14 (ref), constantsModule (copy), p1 (copy), var1 (copy), loadHistoryPage (copy)
+						task.spawn(function()
+							-- upvalues: var15 (ref), constantsModule (copy), var13 (ref), var16 (ref), var14 (ref), p16 (ref), p1 (copy), var1 (copy), loadHistoryPage (copy)
+							local var17 = var15
+							local prefetchHistoryPagesOnRefresh = constantsModule.getPrefetchHistoryPagesOnRefresh()
+							while true do
+								while prefetchHistoryPagesOnRefresh > 0 and var17 ~= nil do
+									if not p16() and not (if p1.getCasSessionId() == var13 then var14 ~= p1.getRefreshGeneration() else true) and var16 == var1 then
+										local var18, var19, var20 = loadHistoryPage(var13, var17, p16)
+										
+										if var18 and (not p16() and not (if p1.getCasSessionId() == var13 then var14 ~= p1.getRefreshGeneration() else true) and var16 == var1) then
+											p1.mergeHistoryPage(var19, var20)
+											var17 = var20
+											prefetchHistoryPagesOnRefresh -= 1
+											continue
+											continue
+											continue
+										end
+										return
+									end
+									return
+								end
+							end
+						end)
+					end)
+				end
+				return var12
+			end,
+			requestOlderHistoryWhile = function(p17, p18)
+				-- upvalues: var4 (write)
+				var4(0, p17, p18)
 			end
 		}
 	end

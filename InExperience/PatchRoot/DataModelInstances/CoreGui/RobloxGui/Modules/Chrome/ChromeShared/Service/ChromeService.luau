@@ -28,7 +28,6 @@ local fFlagIntegrationsChromeShortcutTelemetryModule = require(chromeShared.Pare
 local chromeDeprecateMRUs = game:DefineFastFlag("ChromeDeprecateMRUs", false)
 local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local fFlagEnableSideSheetWidgets = sharedFlagsModule.FFlagEnableSideSheetWidgets
-local fIntSideSheetVariant = sharedFlagsModule.FIntSideSheetVariant
 local fFlagEnableChromeWindowsNotInMenu = require(chromeShared.Flags).FFlagEnableChromeWindowsNotInMenu
 local fFlagChromeNineDotActivityIndicator = require(chromeShared.Flags).FFlagChromeNineDotActivityIndicator
 local _ = nil
@@ -531,7 +530,7 @@ end
 
 if isSideSheetEnabledModule then
 	function t:updateSideSheet()
-		-- upvalues: sideSheetPlacement (ref), fFlagEnableSideSheetWidgets (ref), isPioneerLaunch (ref), fIntSideSheetVariant (ref), registerSideSheetIntegrations (write)
+		-- upvalues: sideSheetPlacement (ref), fFlagEnableSideSheetWidgets (ref), isPioneerLaunch (ref), registerSideSheetIntegrations (write)
 		local var6 = 0
 		local t = {}
 		local t_1 = {}
@@ -541,7 +540,7 @@ if isSideSheetEnabledModule then
 		local t_5 = {}
 		
 		local function addIntegration(p5)
-			-- upvalues: self (ref), sideSheetPlacement (copy), t_1 (write), var6 (write), t_2 (ref), t_3 (ref), fFlagEnableSideSheetWidgets (copy), isPioneerLaunch (copy), t_4 (ref), t_5 (ref), fIntSideSheetVariant (copy), t (write)
+			-- upvalues: self (ref), sideSheetPlacement (copy), t_1 (ref), var6 (write), t_2 (ref), t_3 (ref), fFlagEnableSideSheetWidgets (copy), isPioneerLaunch (copy), t_4 (ref), t_5 (ref), t (ref)
 			local var7 = self._integrations[p5]
 			
 			if not var7 or var7.sideSheetPlacement == sideSheetPlacement.None or not self:isIntegrationValid(p5) then return end
@@ -568,7 +567,7 @@ if isSideSheetEnabledModule then
 					end
 				end
 			elseif var7.sideSheetPlacement ~= sideSheetPlacement.FixedFooterTop then
-				if var7.sideSheetPlacement == sideSheetPlacement.Vertical and fIntSideSheetVariant ~= 0 then
+				if var7.sideSheetPlacement == sideSheetPlacement.Vertical then
 					table.insert(t_2, self:createIconProps(p5, var6))
 					
 					return
@@ -586,23 +585,16 @@ if isSideSheetEnabledModule then
 		end
 		
 		for i, v in self._menuConfig do
-			for i_3, v_1 in v do
+			for i_2, v_1 in v do
 				var6 += 1
 				addIntegration(v_1)
 			end
 		end
 		for i, v_1 in self._subMenuConfig do
-			for i_3, v_2 in v_1 do
+			for i_2, v_2 in v_1 do
 				var6 += 1
 				addIntegration(v_2)
 			end
-		end
-		if fIntSideSheetVariant == 0 then
-			for i, v_2 in t do
-				table.insert(t_1, v_2)
-			end
-			t = t_1
-			t_1 = {}
 		end
 		registerSideSheetIntegrations({
 			unibarIntegrations = t_1,

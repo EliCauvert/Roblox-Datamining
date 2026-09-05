@@ -1822,6 +1822,7 @@ Feature.Build.Action.AddFriends,إضافة أصدقاء
 Feature.Build.Action.AddPlaytester,إضافة مختبر لعب
 Feature.Build.Action.AddPlaytesters,إضافة مختبري لعب
 Feature.Build.Action.AddToPlaytest,إضافة إلى اختبار اللعب
+Feature.Build.Action.AgreeAndEnable,الموافقة والتشغيل
 Feature.Build.Action.Approve,موافقة
 Feature.Build.Action.Archive,أرشفة
 Feature.Build.Action.ArchiveGame,أرشفة اللعبة
@@ -1845,6 +1846,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,قم بإشعاري
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,فتح الإعدادات
+Feature.Build.Action.Options,الخيارات
 Feature.Build.Action.Play,تشغيل
 Feature.Build.Action.Playtest,اختبار اللعب
 Feature.Build.Action.Preview,
@@ -1944,11 +1946,16 @@ Feature.Build.Description.InviteFriendLimit,اختر ما يصل إلى {MAX_INV
 Feature.Build.Description.MakeAudienceAvail,انشر تجربتك لتكون متاحة لهذا الجمهور.
 Feature.Build.Description.ManageAppearance,يمكنك إدارة كيفية ظهور لعبتك للآخرين.
 Feature.Build.Description.ManageDeveloperProduct,إدارة منتج المطوّر.
+Feature.Build.Description.ManagedPricingAcknowledgement,يضبط التسعير المُدار الأسعار تلقائيًا حسب المنطقة.
+Feature.Build.Description.ManagedPricingCurrentProducts,استخدام التسعير المُدار لجميع المنتجات الحالية
+Feature.Build.Description.ManagedPricingUnavailable,التسعير المُدار غير متاح لهذه التجربة.
+Feature.Build.Description.NoEligibleManagedPricingProducts,لا توجد أي منتجات مؤهلة
 Feature.Build.Description.NoMonetizationProducts,صِف عنصرًا ترغب في إنشائه لبدء كسب عملات Robux في لعبتك
 Feature.Build.Description.PlayAfterPublish,اختر من يمكنه اللعب بعد نشر هذه التجربة.
 Feature.Build.Description.PlaytestLatest,أنت تختبر اللعب لأحدث إصدار لديك. انشره عندما تكون مستعدًا لمشاركته.
 Feature.Build.Description.PlaytestLocked,يمكنك بدء اختبار اللعب بعد إنشاء لعبتك الأولى.
 Feature.Build.Description.PlaytesterAccess,أضف الأصدقاء كمختبري لعب أو غيّر إعدادات الجمهور للعبتك للسماح للمزيد من الأشخاص باللعب.
+Feature.Build.Description.PricingRules,إعداد قواعد التسعير
 Feature.Build.Description.PrivateShare,غيّر إعدادات الجمهور للعبتك لمشاركتها.
 Feature.Build.Description.PromoteGameWithAdCampaign,زوِّد أعداد جمهورك من خلال حملة إعلانية لمدة {durationDays} من الأيام واجعل لعبتك متاحة للاكتشاف.
 Feature.Build.Description.RaiseLimitOrWait,قم بزيادة الحد اليومي لديك من عملات Robux لمواصلة الإنشاء، أو انتظر حتى تتم إعادة تعيينه غدًا.
@@ -1956,6 +1963,7 @@ Feature.Build.Description.RatingAgreement,من خلال النشر، فإنك ت
 Feature.Build.Description.RestoreLatest,سيصبح هذا الإصدار أحدث إصدار منشور لك.
 Feature.Build.Description.RevertToVersion,تأكيد التراجع عن التغيير الأخير والرجوع إلى {VERSION}.
 Feature.Build.Description.ShareLatest,شارك التغييرات التي أُجريت على أحدث إصدار لديك.
+Feature.Build.Description.ShopButton,إضافة نقطة إدخال للتسوق
 Feature.Build.Description.UpdateDeveloperProduct,تحديث منتج المطوّر {PRODUCT_ID}.
 Feature.Build.Description.VersionChanges,أخبر اللاعبين بما تغير في هذا الإصدار.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,يجب أن يتكون الوصف من 1000 حرفٍ أو أقل.
@@ -1963,6 +1971,10 @@ Feature.Build.Error.DeveloperProductNameRequired,أدخل اسم المنتج.
 Feature.Build.Error.DeveloperProductNameTooLong,يجب أن يتكون الاسم من 50 حرفًا أو أقل.
 Feature.Build.Error.DeveloperProductPriceInvalid,"ينبغي أن يكون السعر عددًا صحيحًا من 1 إلى 1,000,000,000 من عملات Robux."
 Feature.Build.Error.DeveloperProductTextModerated,تم تغيير نص هذا المنتج من قِبل فريق الإشراف لدى منصّة Roblox. جرّب صياغة مختلفة.
+Feature.Build.Error.ManagedPricingPartialUpdate,تعذَّر تحديث بعض المنتجات.
+Feature.Build.Error.MonetizationOptionUpdate,تعذَّر تحديث الخيار. حاول مرة أخرى.
+Feature.Build.Error.MonetizationOptionsLoad,تعذَّر تحميل الخيارات. حاول مرة أخرى.
+Feature.Build.Error.MonetizationPermissionDenied,ليس لديك الإذن لتغيير خيارات الحصول على عائد.
 Feature.Build.Header.AccessSharing,إمكانية الوصول والمشاركة
 Feature.Build.Header.AllVersions,جميع الإصدارات
 Feature.Build.Header.ContentMaturity,حساسية المحتوى
@@ -2018,6 +2030,8 @@ Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,محدودة
 Feature.Build.Label.Live,مباشر
 Feature.Build.Label.Loading,
+Feature.Build.Label.ManagedPricing,التسعير المُدار
+Feature.Build.Label.ManagedPricingMixed,مختلط عبر المنتجات الحالية
 Feature.Build.Label.MaximizeForGamePlays,زوِّد عدد مرات تشغيل اللعبة إلى أقصى حد
 Feature.Build.Label.Models3D,النماذج ثلاثية الأبعاد
 Feature.Build.Label.Name,
@@ -2032,6 +2046,7 @@ Feature.Build.Label.PreviouslyPublished,تم النشر سابقًا
 Feature.Build.Label.Price,السعر
 Feature.Build.Label.PriceUnavailable,--
 Feature.Build.Label.Pricing,التسعير
+Feature.Build.Label.PricingOptions,خيارات التسعير
 Feature.Build.Label.Private,خاص
 Feature.Build.Label.Public,عامّ
 Feature.Build.Label.PubliclyUnavailable,غير متاحة علنًا
@@ -2049,6 +2064,8 @@ Feature.Build.Label.SearchTasks,البحث في المهام
 Feature.Build.Label.SelectOption,حدّد خيارًا
 Feature.Build.Label.ShareAddedFriends,مشاركة مع الأصدقاء الذين أضفتهم
 Feature.Build.Label.Shared,تمت المشاركة
+Feature.Build.Label.ShopButton,زر المتجر
+Feature.Build.Label.ShopUi,واجهة المستخدم للمتجر
 Feature.Build.Label.Sounds,الأصوات
 Feature.Build.Label.TargetAllRobloxPlayers,استهدف جميع اللاعبين على منصّة Roblox
 Feature.Build.Label.Thinking,جارٍ التفكير
@@ -2243,6 +2260,7 @@ Feature.Build.Title.GameCreationDone,اكتمل إنشاء اللعبة
 Feature.Build.Title.GamePrivate,هذه اللعبة خاصة
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,الحصول على المستخدمين
+Feature.Build.Title.ManagedPricingAcknowledgement,هل تريد تشغيل التسعير المُدار؟
 Feature.Build.Title.NoMonetizationProducts,ابدأ الكسب في لعبتك
 Feature.Build.Title.NoRobuxForUsage,لم يتبقَ أي عملات Robux لاستخدام ميزة Build
 Feature.Build.Title.Playtesters,مختبرو اللعب
@@ -2921,7 +2939,7 @@ Feature.Durables.InfoModal.Title,نقدِّم لك خيارات محددة با�
 Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite,دائم
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} يوم
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} من الأيام
-Feature.Durables.ItemDetails.WearTimeOptions.Title,الخيارات
+Feature.Durables.ItemDetails.WearTimeOptions.Title,
 Feature.Durables.Label.ItemExpires,انتهاء صلاحية العنصر
 Feature.Durables.PartiallyExpiredItems.BodyText,انتهت صلاحية بعض العناصر في هذا الأفاتار المحفوظ وتمت إزالتها.
 Feature.Durables.PartiallyExpiredItems.TitleText,انتهت صلاحية العناصر

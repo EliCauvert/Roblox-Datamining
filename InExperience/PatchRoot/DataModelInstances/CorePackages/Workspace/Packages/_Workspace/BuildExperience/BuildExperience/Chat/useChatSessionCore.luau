@@ -16,6 +16,7 @@ local signalsReactModule = require(parent.SignalsReact)
 local localizationRoactContext = require(parent.Localization).LocalizationRoactContext
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildExperienceClientDataModelTools = sharedFlagsModule.FFlagBuildExperienceClientDataModelTools
+local fFlagBuildExperienceChatHistoryPrefetchModule = require(buildExperience.Flags.FFlagBuildExperienceChatHistoryPrefetch)
 local fFlagBuildExperienceFixChatBottomLockModule = require(buildExperience.Flags.FFlagBuildExperienceFixChatBottomLock)
 local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
@@ -166,7 +167,7 @@ local _ = function(p4, p5, p6, p7, p8)
 end
 
 return function(p4)
-	-- upvalues: reactModule (ref), localizationRoactContext (ref), localizationStringsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperiencePersistPlaytestLogsModule (ref), fFlagBuildExperienceClientDataModelTools (ref), fFlagBuildAdUpsellModule (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule (ref), creatorAgentChatModule (ref), getAgentRollbackRequestStoreModule (ref), var7 (ref), signalsModule (ref), signalsReactModule (ref), var4 (ref), var5 (ref), var6 (ref), fFlagBuildExperienceShowThinkingBeforeUniverseCreationModule (ref), parseSessionStreamModule (ref), fFlagBuildAgentRollbackModule (ref), sessionPromptMessageFilterModule (ref), var3 (ref), hasPendingLocalToolResponse (ref), noteLiveAdUpsellTurns (ref), placeVersionHistoryModule (ref), reactUtilsModule (ref), useChatScrollModule (ref), getPlaytestLoadingStoreModule (ref), fFlagBuildExperiencePinForBuild (ref), messageBusService (ref), gameMessageId (ref), appLifecycleObserverService (ref), fFlagBuildExperienceFixChatBottomLockModule (ref), fFlagBuildExperiencePersistChatDraftModule (ref), var1 (ref), var2 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), creatorAgentChatModule_1 (ref), buildAgentRollbackPromptModule (ref), useAgentRollbackRequestModule (ref), universeCreateModule (ref), getDefaultTemplatePlaceIdModule (ref), debug (ref), universeConfigurationModule (ref), launchPlaytestWithLoadingStateModule (ref)
+	-- upvalues: reactModule (ref), localizationRoactContext (ref), localizationStringsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperiencePersistPlaytestLogsModule (ref), fFlagBuildExperienceClientDataModelTools (ref), fFlagBuildAdUpsellModule (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule (ref), creatorAgentChatModule (ref), getAgentRollbackRequestStoreModule (ref), var7 (ref), signalsModule (ref), signalsReactModule (ref), var4 (ref), var5 (ref), var6 (ref), fFlagBuildExperienceShowThinkingBeforeUniverseCreationModule (ref), parseSessionStreamModule (ref), fFlagBuildAgentRollbackModule (ref), sessionPromptMessageFilterModule (ref), var3 (ref), hasPendingLocalToolResponse (ref), noteLiveAdUpsellTurns (ref), placeVersionHistoryModule (ref), reactUtilsModule (ref), useChatScrollModule (ref), getPlaytestLoadingStoreModule (ref), fFlagBuildExperienceChatHistoryPrefetchModule (ref), fFlagBuildExperiencePinForBuild (ref), messageBusService (ref), gameMessageId (ref), appLifecycleObserverService (ref), fFlagBuildExperienceFixChatBottomLockModule (ref), fFlagBuildExperiencePersistChatDraftModule (ref), var1 (ref), var2 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), creatorAgentChatModule_1 (ref), buildAgentRollbackPromptModule (ref), useAgentRollbackRequestModule (ref), universeCreateModule (ref), getDefaultTemplatePlaceIdModule (ref), debug (ref), universeConfigurationModule (ref), launchPlaytestWithLoadingStateModule (ref)
 	local var9 = reactModule.useContext(localizationRoactContext)
 	local chat_create_universe_error = var9:Format(localizationStringsModule.CHAT_CREATE_UNIVERSE_ERROR)
 	local var10 = if fFlagBuildExperienceChatImageAttachmentsModule then var9:Format(localizationStringsModule.CHAT_CAPTURE_UPLOAD_ERROR) else nil
@@ -270,7 +271,7 @@ return function(p4)
 	end, { var21, sessionId })
 	local var38 = sessionId
 	local var39 = if if var36 == nil or var36.session ~= var21 then false else var38 == nil or var38 == "" or (if var36.sessionId ~= var38 then var36.sessionId == nil and var36.session.getCasSessionId() == var38 else true) then var36 else nil
-	var81, var79 = reactModule.useState(nil)
+	var82, var80 = reactModule.useState(nil)
 	local var40 = reactModule.useRef(nil)
 	local var41 = reactModule.useRef(nil)
 	local var42 = reactModule.useRef(0)
@@ -284,7 +285,7 @@ return function(p4)
 	end, { var38 })
 	local current = var41.current
 	local var45 = sessionId
-	local var46 = if if current == nil or current.session ~= var21 then false else var45 == nil or var45 == "" or (if current.sessionId ~= var45 then current.sessionId == nil and current.session.getCasSessionId() == var45 else true) then var81 else nil
+	local var46 = if if current == nil or current.session ~= var21 then false else var45 == nil or var45 == "" or (if current.sessionId ~= var45 then current.sessionId == nil and current.session.getCasSessionId() == var45 else true) then var82 else nil
 	local var47 = if var46 ~= nil then var4 else var46.getOptimisticLocalTools
 	current = if var46 ~= nil then var5 else var46.getLocalToolActions
 	var45 = if var46 ~= nil then var6 else var46.getSetupErrorText
@@ -468,16 +469,25 @@ return function(p4)
 		getPlaytestLoadingStoreModule().setAgentStatusForPlaceId(p5, p6)
 	end, {})
 	local var87 = reactModule.useCallback(function(p5)
-		-- upvalues: var85 (ref), var21 (ref)
+		-- upvalues: var85 (ref), var21 (ref), fFlagBuildExperienceChatHistoryPrefetchModule (copy)
 		local var88 = function()
 			-- upvalues: p5 (ref)
 			return if p5 == nil then false else p5()
 		end
 		
 		var85.captureDistanceFromBottom()
+		
+		if var21 == nil then return end
+		if fFlagBuildExperienceChatHistoryPrefetchModule then
+			var21.requestOlderHistoryWhile(var88, function()
+				-- upvalues: var85 (copy)
+				return var85.isNearTopRef.current
+			end)
+			
+			return
+		end
 		task.spawn(function()
 			-- upvalues: var21 (copy), var88 (ref), var85 (copy), p5 (ref)
-			if var21 == nil then return end
 			if var21.loadOlderHistory(var88) and var21.getNextHistoryPageToken() ~= nil and var85.isAtTopRef.current then
 				task.delay(0.1, function()
 					-- upvalues: p5 (copy), var85 (copy), var21 (copy), var88 (copy)
@@ -490,16 +500,22 @@ return function(p4)
 		end)
 	end, { var21, var85 })
 	local var88 = reactModule.useCallback(function(p5)
-		-- upvalues: var21 (ref), var85 (ref), var87 (ref)
+		-- upvalues: var21 (ref), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var85 (ref), var87 (ref)
 		task.delay(0.1, function()
-			-- upvalues: p5 (ref), var21 (copy), var85 (copy), var87 (copy)
+			-- upvalues: p5 (ref), var21 (copy), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var85 (copy), var87 (copy)
 			if p5() then return end
 			if var21 == nil then return end
 			if var21.getNextHistoryPageToken() == nil then return end
-			if var85.isViewportUnderfilled() then
-				var87(p5)
-				
-				return
+			if fFlagBuildExperienceChatHistoryPrefetchModule then
+				if var85.isNearTopRef.current then
+					var87(p5)
+					
+					return
+				else
+					return
+				end
+			elseif var85.isViewportUnderfilled() then
+			else
 			end
 		end)
 	end, { var87, var85, var21 })
@@ -526,7 +542,7 @@ return function(p4)
 		end
 	end, { var85.setOnScrolledToTop, var87 })
 	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), var21 (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 (ref), var29 (write), sessionId (write), universeId (write), var90 (ref), creatorAgentChatStore (ref), fFlagBuildExperiencePinForBuild (copy), var14 (ref), placeId (write)
+		-- upvalues: var18 (ref), var21 (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 (ref), var29 (write), sessionId (write), universeId (write), var90 (ref), fFlagBuildExperienceChatHistoryPrefetchModule (copy), creatorAgentChatStore (ref), fFlagBuildExperiencePinForBuild (copy), var14 (ref), placeId (write)
 		if var18 and var21 ~= nil then
 			local var91 = false
 			
@@ -579,7 +595,7 @@ return function(p4)
 			end
 			
 			local function hydrateKnownSession(p5)
-				-- upvalues: var21 (copy), var91 (write), sessionId (ref), var90 (copy), isHydrateCancelled (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 (copy), var29 (copy), sessionId (copy), universeId (copy), var18 (copy)
+				-- upvalues: var21 (copy), var91 (write), sessionId (ref), var90 (copy), isHydrateCancelled (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 (copy), var29 (copy), sessionId (copy), universeId (copy), var18 (copy), fFlagBuildExperienceChatHistoryPrefetchModule (copy)
 				var21.setCasSessionId(p5)
 				
 				if var21.hasLoadedHistory() and #var21.getMergedHistory(false) > 0 then
@@ -606,7 +622,7 @@ return function(p4)
 						})
 					end
 					return
-				elseif var21.refreshSession(isHydrateCancelled) then
+				elseif if fFlagBuildExperienceChatHistoryPrefetchModule then var21.refreshSession(isHydrateCancelled, true) else var21.refreshSession(isHydrateCancelled) then
 					local var94
 					if var91 then
 						var94 = true
@@ -750,14 +766,14 @@ return function(p4)
 		fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var21 (ref), sessionId (write), var90 (ref), messageBusService (copy), gameMessageId (copy), fFlagBuildExperiencePersistPlaytestLogsModule (copy), fFlagBuildExperienceClientDataModelTools (copy), var15 (write), appLifecycleObserverService (copy)
+		-- upvalues: var21 (ref), sessionId (write), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var90 (ref), messageBusService (copy), gameMessageId (copy), fFlagBuildExperiencePersistPlaytestLogsModule (copy), fFlagBuildExperienceClientDataModelTools (copy), var15 (write), appLifecycleObserverService (copy)
 		if var21 == nil then
 			return
 		end
 		local var93 = false
 		
 		local function refreshKnownSession()
-			-- upvalues: var21 (copy), sessionId (copy), var93 (write), var90 (copy)
+			-- upvalues: var21 (copy), sessionId (copy), var93 (write), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var90 (copy)
 			local casSessionId = var21.getCasSessionId()
 			
 			if (casSessionId == nil or casSessionId == "") and (sessionId ~= nil and sessionId ~= "") then
@@ -767,11 +783,13 @@ return function(p4)
 				return
 			end
 			task.spawn(function()
-				-- upvalues: var21 (copy), var93 (copy), var90 (copy)
-				if var21.refreshSession(function()
+				-- upvalues: var93 (copy), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var21 (copy), var90 (copy)
+				local function isRefreshCancelled()
 					-- upvalues: var93 (copy)
 					return var93
-				end) and not var93 then
+				end
+				
+				if (if fFlagBuildExperienceChatHistoryPrefetchModule then var21.refreshSession(isRefreshCancelled, true) else var21.refreshSession(isRefreshCancelled)) and not var93 then
 					var90.current(function()
 						-- upvalues: var93 (copy)
 						return var93
@@ -1325,8 +1343,8 @@ return function(p4)
 		})
 	end
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var81 (ref), var41 (ref), var21 (ref), sessionId (write), var42 (ref), var43 (ref), fFlagBuildAgentRollbackModule (copy), v (write), var86 (ref), var44 (ref), var35 (ref), var37 (ref)
-		if var81 ~= nil then
+		-- upvalues: var82 (ref), var41 (ref), var21 (ref), sessionId (write), var42 (ref), var43 (ref), fFlagBuildAgentRollbackModule (copy), v (write), var86 (ref), var44 (ref), var35 (ref), var37 (ref)
+		if var82 ~= nil then
 			local current = var41.current
 			local var111 = sessionId
 			
@@ -1335,8 +1353,8 @@ return function(p4)
 			var42.current += 1
 			var43.current = nil
 			
-			if not fFlagBuildAgentRollbackModule or not v.stopRequestBeforeReceipt(var81) then
-				var81.detach()
+			if not fFlagBuildAgentRollbackModule or not v.stopRequestBeforeReceipt(var82) then
+				var82.detach()
 			elseif current ~= nil and current.session.placeId ~= nil then
 				var86(current.session.placeId, "Idle")
 			end
@@ -1347,7 +1365,7 @@ return function(p4)
 			return
 		end
 	end, {
-		var21, sessionId, var81, var44,
+		var21, sessionId, var82, var44,
 		if fFlagBuildAgentRollbackModule then v else nil,
 		if fFlagBuildAgentRollbackModule then var86 else nil
 	})
@@ -1599,7 +1617,7 @@ return function(p4)
 		retryComposerImage = retryComposerImage,
 		isComposerSendBlocked = fFlagBuildExperienceChatImageAttachmentsModule and var105,
 		isAssistantResponding = var62,
-		canStopAssistantResponse = u1790,
+		canStopAssistantResponse = u1810,
 		canSendWhileResponding = var63,
 		sendMessage = var112,
 		stopAssistantResponse = var116,

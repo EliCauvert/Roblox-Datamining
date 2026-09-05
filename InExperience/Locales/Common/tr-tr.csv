@@ -1848,6 +1848,7 @@ Feature.Build.Action.AddFriends,Arkadaş ekle
 Feature.Build.Action.AddPlaytester,Oynanış testçisi ekle
 Feature.Build.Action.AddPlaytesters,Oynanış testçileri ekle
 Feature.Build.Action.AddToPlaytest,Oynanış testine ekle
+Feature.Build.Action.AgreeAndEnable,Kabul et ve aç
 Feature.Build.Action.Approve,
 Feature.Build.Action.Archive,Arşivle
 Feature.Build.Action.ArchiveGame,Oyunu arşivle
@@ -1871,6 +1872,7 @@ Feature.Build.Action.NotNow,Şimdi değil
 Feature.Build.Action.NotifyMe,Bana haber ver
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Ayarları aç
+Feature.Build.Action.Options,Seçenekler
 Feature.Build.Action.Play,Oyna
 Feature.Build.Action.Playtest,Oynanış testi
 Feature.Build.Action.Preview,
@@ -1970,11 +1972,16 @@ Feature.Build.Description.InviteFriendLimit,"En fazla {MAX_INVITES} arkadaş se�
 Feature.Build.Description.MakeAudienceAvail,Bu kitleye sunmak için deneyimini yayınla.
 Feature.Build.Description.ManageAppearance,Oyununun başkalarına nasıl görüneceğini yönet.
 Feature.Build.Description.ManageDeveloperProduct,Geliştirici ürününü yönet.
+Feature.Build.Description.ManagedPricingAcknowledgement,"Yönetilen Fiyatlandırma, fiyatları bölgeye göre otomatik olarak ayarlar."
+Feature.Build.Description.ManagedPricingCurrentProducts,Mevcut tüm ürünler için Yönetilen Fiyatlandırmayı kullan
+Feature.Build.Description.ManagedPricingUnavailable,Bu deneyim için Yönetilen Fiyatlandırma kullanılamıyor.
+Feature.Build.Description.NoEligibleManagedPricingProducts,Gerekli şartları karşılayan ürün yok
 Feature.Build.Description.NoMonetizationProducts,Oyununda Robux kazanmaya başlamak için oluşturmak istediğin bir öğeyi tarif et
 Feature.Build.Description.PlayAfterPublish,Bu deneyimi yayınladıktan sonra kimlerin oynayabileceğini seç.
 Feature.Build.Description.PlaytestLatest,En son versiyonunda oynanış testi yapıyorsun. Paylaşmaya hazır olduğunda yayınla.
 Feature.Build.Description.PlaytestLocked,İlk oyununu oluşturduktan sonra oynanış testine başlayabilirsin.
 Feature.Build.Description.PlaytesterAccess,Arkadaşlarını oynanış testçisi olarak ekle veya daha fazla insanın oynamasına izin vermek için oyununun Kitle ayarını değiştir.
+Feature.Build.Description.PricingRules,Fiyatlandırma kurallarını belirle
 Feature.Build.Description.PrivateShare,Oyununu paylaşmak için Kitle ayarını değiştir.
 Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays} günlük bir reklam kampanyasıyla kitleni genişlet ve oyununun keşfedilmesini sağla.
 Feature.Build.Description.RaiseLimitOrWait,Bir şeyler oluşturmaya devam etmek için günlük Robux sınırını artır veya yarın sıfırlanmasını bekle.
@@ -1982,6 +1989,7 @@ Feature.Build.Description.RatingAgreement,Yayınlayarak bu içerik derecelendirm
 Feature.Build.Description.RestoreLatest,"Bu versiyon, en son yayınlanan versiyonun olacak."
 Feature.Build.Description.RevertToVersion,En son değişikliği geri döndürmek ve {VERSION} versiyonuna geri dönmek için onayla.
 Feature.Build.Description.ShareLatest,En son versiyonunda nelerin değiştiğini paylaş.
+Feature.Build.Description.ShopButton,Bir alışveriş giriş noktası ekle
 Feature.Build.Description.UpdateDeveloperProduct,Geliştirici ürününü ({PRODUCT_ID}) güncelle.
 Feature.Build.Description.VersionChanges,Oyunculara bu versiyonda nelerin değiştiğini söyle.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Açıklama 1.000 karakter veya daha kısa olmalıdır.
@@ -1989,6 +1997,10 @@ Feature.Build.Error.DeveloperProductNameRequired,Bir ürün adı gir.
 Feature.Build.Error.DeveloperProductNameTooLong,Ad 50 karakter veya daha kısa olmalıdır.
 Feature.Build.Error.DeveloperProductPriceInvalid,Fiyat 1 ile 1.000.000.000 Robux arasında bir tam sayı olmalıdır.
 Feature.Build.Error.DeveloperProductTextModerated,Roblox denetimi bu ürünün metnini değiştirdi. Farklı bir ifade dene.
+Feature.Build.Error.ManagedPricingPartialUpdate,Bazı ürünler güncellenemedi.
+Feature.Build.Error.MonetizationOptionUpdate,Seçenek güncellenemedi. Tekrar dene.
+Feature.Build.Error.MonetizationOptionsLoad,Seçenekler yüklenemedi. Tekrar dene.
+Feature.Build.Error.MonetizationPermissionDenied,Gelir elde etme seçeneklerini değiştirme iznin yok.
 Feature.Build.Header.AccessSharing,Erişim ve paylaşım
 Feature.Build.Header.AllVersions,Tüm versiyonlar
 Feature.Build.Header.ContentMaturity,İçerik Olgunluk Düzeyi
@@ -2044,6 +2056,8 @@ Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Sınırlı
 Feature.Build.Label.Live,Canlı
 Feature.Build.Label.Loading,
+Feature.Build.Label.ManagedPricing,Yönetilen fiyatlandırma
+Feature.Build.Label.ManagedPricingMixed,Mevcut ürünler arasında karışık
 Feature.Build.Label.MaximizeForGamePlays,Oyun oynama sayısını en üst düzeye çıkar
 Feature.Build.Label.Models3D,3 Boyutlu Modeller
 Feature.Build.Label.Name,
@@ -2058,6 +2072,7 @@ Feature.Build.Label.PreviouslyPublished,Daha önce yayınlanan
 Feature.Build.Label.Price,Fiyat
 Feature.Build.Label.PriceUnavailable,--
 Feature.Build.Label.Pricing,Fiyatlandırma
+Feature.Build.Label.PricingOptions,Fiyatlandırma seçenekleri
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,Herkese Açık
 Feature.Build.Label.PubliclyUnavailable,Herkese açık değil
@@ -2075,6 +2090,8 @@ Feature.Build.Label.SearchTasks,Görev ara
 Feature.Build.Label.SelectOption,Bir seçenek belirle
 Feature.Build.Label.ShareAddedFriends,Eklediğin arkadaşlarla paylaş
 Feature.Build.Label.Shared,Paylaşıldı
+Feature.Build.Label.ShopButton,Alışveriş yap düğmesi
+Feature.Build.Label.ShopUi,Alışveriş yap kullanıcı arayüzü
 Feature.Build.Label.Sounds,Sesler
 Feature.Build.Label.TargetAllRobloxPlayers,Tüm Roblox oyuncularını hedefle
 Feature.Build.Label.Thinking,Düşünüyor
@@ -2269,6 +2286,7 @@ Feature.Build.Title.GameCreationDone,Oyun oluşturma tamamlandı
 Feature.Build.Title.GamePrivate,Bu oyun özeldir
 Feature.Build.Title.GenericError,Bir şeyler ters gitti
 Feature.Build.Title.GetUsers,Kullanıcıları al
+Feature.Build.Title.ManagedPricingAcknowledgement,Yönetilen Fiyatlandırma açılsın mı?
 Feature.Build.Title.NoMonetizationProducts,Oyununda kazanmaya başla
 Feature.Build.Title.NoRobuxForUsage,İnşa Et kullanım hakkı için Robux kalmadı
 Feature.Build.Title.Playtesters,Oynanış Testçileri
@@ -2947,7 +2965,7 @@ Feature.Durables.InfoModal.Title,Zamanlanmış seçeneklerle tanış
 Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite,Kalıcı
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} gün
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
-Feature.Durables.ItemDetails.WearTimeOptions.Title,Seçenekler
+Feature.Durables.ItemDetails.WearTimeOptions.Title,
 Feature.Durables.Label.ItemExpires,Öğe sona erme tarihi:
 Feature.Durables.PartiallyExpiredItems.BodyText,Bu kayıtlı avatardaki bazı öğelerin süresi doldu ve bu öğeler kaldırıldı.
 Feature.Durables.PartiallyExpiredItems.TitleText,Öğelerin süresi doldu

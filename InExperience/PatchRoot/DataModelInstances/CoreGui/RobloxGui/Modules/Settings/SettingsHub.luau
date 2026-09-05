@@ -118,7 +118,7 @@ local t = {
 	FFlagAddInviteFriendsIntegration = sharedFlagsModule.FFlagAddInviteFriendsIntegration,
 	FFlagIntegrateTraversalHistoryInSideSheet = sharedFlagsModule.FFlagIntegrateTraversalHistoryInSideSheet,
 	FFlagIGMSelectionGroup = game:DefineFastFlag("IGMSelectionGroup", false),
-	FFlagRemoveExitModal = require(robloxGui.Modules.Settings.Flags.FFlagRemoveExitModal),
+	isExitModalRemoved = require(robloxGui.Modules.Settings.Flags.isExitModalRemoved),
 	FFlagEnableExitModalExposure = game:DefineFastFlag("EnableExitModalExposure", false)
 }
 local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
@@ -3531,7 +3531,7 @@ local function CreateSettingsHub()
 	if t.FFlagAddIEMProfilePage then
 		t_2.PlayerProfilePage = require(robloxGui.Modules.Settings.Pages.PlayerProfile)
 	end
-	if not t.FFlagRemoveExitModal and isSubjectToDesktopPolicies() then
+	if not t.isExitModalRemoved and isSubjectToDesktopPolicies() then
 		t_2.ExitModalPage = require(robloxGui.Modules.Settings.Pages.ExitModal)
 		t_2.ExitModalPage:SetHub(t_2)
 	end
@@ -3595,7 +3595,7 @@ local function CreateSettingsHub()
 	if not t.FFlagRemoveRecordPage and t_2.RecordPage and not t_2.CapturesPage then
 		t_2:AddPage(t_2.RecordPage)
 	end
-	if not t.FFlagRemoveExitModal and t_2.ExitModalPage then
+	if not t.isExitModalRemoved and t_2.ExitModalPage then
 		t_2:AddPage(t_2.ExitModalPage)
 	end
 	if t_2.LeaveGameToHomePage then
@@ -3679,7 +3679,7 @@ local function CreateSettingsHub()
 		IXPServiceWrapper:LogFlagLinkedUserLayerExposure(t.GetFStringExitModalIXPLayer())
 	end
 	
-	if t.FFlagRemoveExitModal and isSubjectToDesktopPolicies() then
+	if t.isExitModalRemoved and isSubjectToDesktopPolicies() then
 		game:GetService("GuiService").NativeClose:Connect(function()
 			-- upvalues: t (copy), var66 (write), IXPServiceWrapper (copy), leaveGameModule (copy)
 			if t.FFlagEnableExitModalExposure and not var66 then

@@ -1848,6 +1848,7 @@ Feature.Build.Action.AddFriends,Adicionar amizades
 Feature.Build.Action.AddPlaytester,Adicionar testador de jogo
 Feature.Build.Action.AddPlaytesters,Adicionar testadores de jogo
 Feature.Build.Action.AddToPlaytest,Adicionar ao teste de jogo
+Feature.Build.Action.AgreeAndEnable,Concordar e ativar
 Feature.Build.Action.Approve,Aprovar
 Feature.Build.Action.Archive,Arquivar
 Feature.Build.Action.ArchiveGame,Arquivar jogo
@@ -1871,6 +1872,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,Me enviar notificação
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Abrir configurações
+Feature.Build.Action.Options,Opções
 Feature.Build.Action.Play,Jogar
 Feature.Build.Action.Playtest,Teste de jogo
 Feature.Build.Action.Preview,Pré-visualização
@@ -1970,11 +1972,16 @@ Feature.Build.Description.InviteFriendLimit,"Escolha até {MAX_INVITES} amizades
 Feature.Build.Description.MakeAudienceAvail,Publique sua experiência para disponibilizá-la para este público.
 Feature.Build.Description.ManageAppearance,Gerencie como seu jogo aparece para outras pessoas.
 Feature.Build.Description.ManageDeveloperProduct,Gerencie o produto de desenvolvedor.
+Feature.Build.Description.ManagedPricingAcknowledgement,Os preços gerenciados ajustam automaticamente os preços por região.
+Feature.Build.Description.ManagedPricingCurrentProducts,Usar os preços gerenciados para todos os produtos atuais
+Feature.Build.Description.ManagedPricingUnavailable,Os preços gerenciados não estão disponíveis para esta experiência.
+Feature.Build.Description.NoEligibleManagedPricingProducts,Nenhum produto elegível
 Feature.Build.Description.NoMonetizationProducts,Descreva um item que você quer criar para começar a ganhar Robux no seu jogo
 Feature.Build.Description.PlayAfterPublish,Escolha quem poderá jogar depois que você publicar esta experiência.
 Feature.Build.Description.PlaytestLatest,Você está testando sua versão mais recente. Publique-a quando estiver tudo pronto para compartilhar.
 Feature.Build.Description.PlaytestLocked,Você pode começar o teste de jogo depois de criar seu primeiro jogo.
 Feature.Build.Description.PlaytesterAccess,Adicione amizades para testarem o jogo ou altere a configuração de público do seu jogo para permitir que mais pessoas joguem.
+Feature.Build.Description.PricingRules,Definir regras de preços
 Feature.Build.Description.PrivateShare,Altere a configuração de público do seu jogo para compartilhá-lo.
 Feature.Build.Description.PromoteGameWithAdCampaign,Aumente seu público com uma campanha de anúncios de {durationDays} dias e deixe seu jogo ser descoberto.
 Feature.Build.Description.RaiseLimitOrWait,Aumente seu limite diário de Robux para continuar criando ou aguarde até amanhã para que seja restabelecido.
@@ -1982,6 +1989,7 @@ Feature.Build.Description.RatingAgreement,"Ao publicar, você concorda que esta 
 Feature.Build.Description.RestoreLatest,Esta versão se tornará sua versão mais recente publicada.
 Feature.Build.Description.RevertToVersion,Confirme para reverter a última alteração e voltar para {VERSION}.
 Feature.Build.Description.ShareLatest,Compartilhe o que mudou na sua versão mais recente.
+Feature.Build.Description.ShopButton,Adicionar um ponto de entrada de compras
 Feature.Build.Description.UpdateDeveloperProduct,Atualize o produto de desenvolvedor {PRODUCT_ID}.
 Feature.Build.Description.VersionChanges,Diga aos jogadores o que mudou nesta versão.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,A descrição deve ter 1.000 caracteres ou menos.
@@ -1989,6 +1997,10 @@ Feature.Build.Error.DeveloperProductNameRequired,Insira um nome de produto.
 Feature.Build.Error.DeveloperProductNameTooLong,O nome deve ter 50 caracteres ou menos.
 Feature.Build.Error.DeveloperProductPriceInvalid,O preço deve ser um número inteiro de 1 a 1.000.000.000 Robux.
 Feature.Build.Error.DeveloperProductTextModerated,A moderação da Roblox alterou o texto deste produto. Tente usar palavras diferentes.
+Feature.Build.Error.ManagedPricingPartialUpdate,Não foi possível atualizar alguns produtos.
+Feature.Build.Error.MonetizationOptionUpdate,Não foi possível atualizar a opção. Tente novamente.
+Feature.Build.Error.MonetizationOptionsLoad,Não foi possível carregar as opções. Tente novamente.
+Feature.Build.Error.MonetizationPermissionDenied,Você não tem permissão para alterar as opções de monetização.
 Feature.Build.Header.AccessSharing,Acesso e compartilhamento
 Feature.Build.Header.AllVersions,Todas as versões
 Feature.Build.Header.ContentMaturity,Maturidade do conteúdo
@@ -2044,6 +2056,8 @@ Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitado
 Feature.Build.Label.Live,Publicado
 Feature.Build.Label.Loading,Carregando…
+Feature.Build.Label.ManagedPricing,Preços gerenciados
+Feature.Build.Label.ManagedPricingMixed,Combinado entre os produtos atuais
 Feature.Build.Label.MaximizeForGamePlays,Aumente as jogadas ao máximo
 Feature.Build.Label.Models3D,Modelos 3D
 Feature.Build.Label.Name,
@@ -2058,6 +2072,7 @@ Feature.Build.Label.PreviouslyPublished,Publicado anteriormente
 Feature.Build.Label.Price,Preço
 Feature.Build.Label.PriceUnavailable,--
 Feature.Build.Label.Pricing,Preços
+Feature.Build.Label.PricingOptions,Opções de preços
 Feature.Build.Label.Private,Privada
 Feature.Build.Label.Public,Pública
 Feature.Build.Label.PubliclyUnavailable,Indisponível para o público
@@ -2075,6 +2090,8 @@ Feature.Build.Label.SearchTasks,Pesquisar tarefas
 Feature.Build.Label.SelectOption,Selecione uma opção
 Feature.Build.Label.ShareAddedFriends,Compartilhe com as amizades que você adicionou
 Feature.Build.Label.Shared,Compartilhado
+Feature.Build.Label.ShopButton,Botão da loja
+Feature.Build.Label.ShopUi,Interface do usuário da loja
 Feature.Build.Label.Sounds,Sons
 Feature.Build.Label.TargetAllRobloxPlayers,Segmente todos os jogadores da Roblox
 Feature.Build.Label.Thinking,Pensando
@@ -2269,6 +2286,7 @@ Feature.Build.Title.GameCreationDone,Criação de jogo concluída
 Feature.Build.Title.GamePrivate,Este jogo é privado
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Obter usuários
+Feature.Build.Title.ManagedPricingAcknowledgement,Ativar preços gerenciados?
 Feature.Build.Title.NoMonetizationProducts,Comece a ganhar com seu jogo
 Feature.Build.Title.NoRobuxForUsage,Não há mais Robux para usar a função Criar
 Feature.Build.Title.Playtesters,Testadores de jogos
@@ -2947,7 +2965,7 @@ Feature.Durables.InfoModal.Title,Apresentamos as opções com tempo
 Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite,Permanente
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} dia
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} dias
-Feature.Durables.ItemDetails.WearTimeOptions.Title,Opções
+Feature.Durables.ItemDetails.WearTimeOptions.Title,
 Feature.Durables.Label.ItemExpires,O item expira
 Feature.Durables.PartiallyExpiredItems.BodyText,Alguns itens deste avatar salvo expiraram e foram removidos.
 Feature.Durables.PartiallyExpiredItems.TitleText,Itens expirados

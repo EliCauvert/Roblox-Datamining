@@ -203,6 +203,7 @@
 	FFlagAXLogFacialAnimationOnHeadChange = require(script.FFlagAXLogFacialAnimationOnHeadChange),
 	FFlagAXLogFavoritePillToggle = require(script.FFlagAXLogFavoritePillToggle),
 	FFlagAXUseUnifiedLoggingEnums = require(script.FFlagAXUseUnifiedLoggingEnums),
+	FFlagAXSearchAndCancelLogging = require(script.FFlagAXSearchAndCancelLogging),
 	FFlagAXLogNilCategoryAndSubcategorySelection = require(script.FFlagAXLogNilCategoryAndSubcategorySelection),
 	FFlagAXRemoveTimedOptionsSalesTypeEnumCheck = require(script.FFlagAXRemoveTimedOptionsSalesTypeEnumCheck),
 	FFlagAXRootRFYMigration = require(script.FFlagAXRootRFYMigration),

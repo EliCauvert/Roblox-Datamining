@@ -32,10 +32,12 @@ local prefetchProfileNamesOnStartupV2 = game:DefineFastFlag("PrefetchProfileName
 local fIntFriendsCarouselInitialFetchSize = require(parent_1.SharedFlags).FIntFriendsCarouselInitialFetchSize
 local fFlagRegisterQRCodeKeyInEngine = require(parent_1.SharedFlags).FFlagRegisterQRCodeKeyInEngine
 local fFlagFriendsCountDataHydrationMigrationEnabled = require(parent_1.SharedFlags).FFlagFriendsCountDataHydrationMigrationEnabled
+local fFlagAddFriendsPageUseSections = require(parent_1.SharedFlags).FFlagAddFriendsPageUseSections
 local fFlagSocialCarouselMigrateRecommendations = require(parent_1.SharedFlags).FFlagSocialCarouselMigrateRecommendations
 local fFlagFriendSortedByPresenceSignalsImplementation = require(parent_1.SharedFlags).FFlagFriendSortedByPresenceSignalsImplementation
 local useSignalState = require(parent_1.SignalsReact).useSignalState
 local var1 = require(parent_1.DataHydration).Friends.FriendsStore.get()
+local friendsRequestsStore = require(parent_1.DataHydration.FriendsRequests).FriendsRequestsStore
 local friendsRecommendationsModule = require(parent_1.DataHydration.FriendsRecommendations)
 local friendsRecommendationsStore = friendsRecommendationsModule.FriendsRecommendationsStore
 local dataSource = friendsRecommendationsModule.Enums.DataSource
@@ -55,7 +57,7 @@ return universalAppPolicy.connect(function(p1)
 		isContactImporterPolicyEnabled = p1.getContactImporterEnabled()
 	}
 end)(function(p1)
-	-- upvalues: useDispatch (ref), useLocalUserId (ref), getAppFeaturePolicies (ref), useFetchContactImporterInfoOnce (ref), earlierFetchTimeForFriendsCarouselV1 (ref), paginatedFriendsCarouselIXPModule (ref), apolloFriendsModule (ref), fFlagFriendSortedByPresenceSignalsImplementation (ref), reactModule (ref), var1 (ref), useSignalState (ref), useQuery (ref), queries (ref), userIdExists (ref), cryoModule (ref), fIntFriendsCarouselInitialFetchSize (ref), prefetchProfileNamesOnStartupV2 (ref), var3 (ref), fFlagSocialCarouselMigrateRecommendations (ref), friendsRecommendationsStore (ref), dataSource (ref), useAutoSyncContacts (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), networkingFriends (ref), messageBusService (ref), realtimeMessageId (ref), analyticsFactory (ref), t (ref), defaultAnalyticsService (ref), appStorageService (ref), var2 (ref), permissionsProtocol (ref)
+	-- upvalues: useDispatch (ref), useLocalUserId (ref), getAppFeaturePolicies (ref), useFetchContactImporterInfoOnce (ref), earlierFetchTimeForFriendsCarouselV1 (ref), paginatedFriendsCarouselIXPModule (ref), apolloFriendsModule (ref), fFlagFriendSortedByPresenceSignalsImplementation (ref), reactModule (ref), var1 (ref), useSignalState (ref), useQuery (ref), queries (ref), userIdExists (ref), cryoModule (ref), fIntFriendsCarouselInitialFetchSize (ref), prefetchProfileNamesOnStartupV2 (ref), var3 (ref), fFlagSocialCarouselMigrateRecommendations (ref), friendsRecommendationsStore (ref), dataSource (ref), useAutoSyncContacts (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), networkingFriends (ref), fFlagAddFriendsPageUseSections (ref), friendsRequestsStore (ref), messageBusService (ref), realtimeMessageId (ref), analyticsFactory (ref), t (ref), defaultAnalyticsService (ref), appStorageService (ref), var2 (ref), permissionsProtocol (ref)
 	local var4
 	local var5 = useDispatch()
 	local var6 = useLocalUserId()
@@ -138,20 +140,28 @@ end)(function(p1)
 		end
 	end, { var6 })
 	reactModule.useEffect(function()
-		-- upvalues: userIdExists (copy), var6 (ref), var5 (ref), networkingFriends (copy), messageBusService (copy), realtimeMessageId (copy)
-		if userIdExists(var6) then
+		-- upvalues: userIdExists (copy), var6 (ref), fFlagAddFriendsPageUseSections (copy), friendsRequestsStore (copy), var5 (ref), networkingFriends (copy), messageBusService (copy), realtimeMessageId (copy)
+		if not userIdExists(var6) then
+			return function() end
+		elseif fFlagAddFriendsPageUseSections then
+			friendsRequestsStore.get().getNewFriendsRequestCount()
+		else
 			var5(networkingFriends.GetNewFriendRequestsCount.API({ currentUserId = var6 }))
-			local var10 = messageBusService:Subscribe(realtimeMessageId, function()
-				-- upvalues: var5 (copy), networkingFriends (copy), var6 (copy)
-				var5(networkingFriends.GetNewFriendRequestsCount.API({ currentUserId = var6 }))
-			end, false, true)
-			
-			return function()
-				-- upvalues: var10 (ref)
-				var10:Disconnect()
-			end
 		end
-		return function() end
+		local var10 = messageBusService:Subscribe(realtimeMessageId, function()
+			-- upvalues: fFlagAddFriendsPageUseSections (copy), friendsRequestsStore (copy), var5 (copy), networkingFriends (copy), var6 (copy)
+			if fFlagAddFriendsPageUseSections then
+				friendsRequestsStore.get().refetchNewFriendRequestCount()
+				
+				return
+			end
+			var5(networkingFriends.GetNewFriendRequestsCount.API({ currentUserId = var6 }))
+		end, false, true)
+		
+		return function()
+			-- upvalues: var10 (ref)
+			var10:Disconnect()
+		end
 	end, { var6 })
 	var4 = reactModule.useMemo(function()
 		-- upvalues: analyticsFactory (copy), t (copy), defaultAnalyticsService (copy)

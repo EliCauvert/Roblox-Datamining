@@ -5,9 +5,6 @@ local registerConnectIntegrationModule = require(script.Parent.registerConnectIn
 local isConnectUnibarEnabledModule = require(script.Parent.isConnectUnibarEnabled)
 local isConnectDropdownEnabledModule = require(script.Parent.isConnectDropdownEnabled)
 local getFFlagIsSquadEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagIsSquadEnabled
-local fIntSideSheetVariant = require(corePackagesService.Workspace.Packages.SharedFlags).FIntSideSheetVariant
-local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
-local connectIconDropdownModule = require(script.Parent.ConnectIconDropdown)
 local universalAppPolicyModule = require(corePackagesService.Workspace.Packages.UniversalAppPolicy)
 local var1 = require(corePackagesService.Packages.PolicyProvider).GetPolicyImplementations.MemStorageService("app-policy")
 
@@ -23,39 +20,25 @@ end
 
 local var2 = nil
 local var3 = nil
-local var4 = isSideSheetEnabledModule and (fIntSideSheetVariant == 0 and connectIconDropdownModule ~= nil)
 
 local function updateConnectIntegration(p1)
-	-- upvalues: var2 (write), registerConnectIntegrationModule (ref), serviceModule (ref), var3 (write), inExperienceAppChatModalModule (ref), var4 (ref), connectIconDropdownModule (ref)
+	-- upvalues: var2 (write), registerConnectIntegrationModule (ref), serviceModule (ref), var3 (write), inExperienceAppChatModalModule (ref)
 	if not var2 then
 		var2 = registerConnectIntegrationModule("connect_unibar", if p1 then serviceModule.AvailabilitySignal.Pinned else serviceModule.AvailabilitySignal.Unavailable)
 	end
 	if p1 then
 		if inExperienceAppChatModalModule.default.currentSquadId ~= "" then
 			var2.availability:pinned()
-			
-			if var4 then
-				connectIconDropdownModule.availability:unavailable()
-			end
 		end
 		if not var3 then
 			local eventConnection = inExperienceAppChatModalModule.default.currentSquadIdSignal.Event:Connect(function(p2)
-				-- upvalues: var2 (copy), var4 (copy), connectIconDropdownModule (copy)
+				-- upvalues: var2 (copy)
 				if p2 == "" then
 					var2.availability:unavailable()
 					
-					if var4 then
-						connectIconDropdownModule.availability:available()
-						
-						return
-					end
-				else
-					var2.availability:pinned()
-					
-					if var4 then
-						connectIconDropdownModule.availability:unavailable()
-					end
+					return
 				end
+				var2.availability:pinned()
 			end)
 			
 			var3 = function()

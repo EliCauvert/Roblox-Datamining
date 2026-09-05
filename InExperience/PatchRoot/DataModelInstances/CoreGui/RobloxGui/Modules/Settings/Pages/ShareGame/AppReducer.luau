@@ -5,6 +5,7 @@ local placeInfosReducer = require(corePackagesService.Workspace.Packages.PlaceIn
 local userReducer = require(corePackagesService.Workspace.Packages.UserLib).Reducers.UserReducer
 local friends = require(corePackagesService.Workspace.Packages.LegacyFriendsRodux).Reducers.Friends
 local friendCount = require(corePackagesService.Workspace.Packages.LegacyFriendsRodux).Reducers.FriendCount
+local fFlagRemoveUnusedFriendCountRoduxSlice = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagRemoveUnusedFriendCountRoduxSlice
 local conversationsSearchModule = require(shareGame.Reducers.ConversationsSearch)
 local deviceInfoModule = require(shareGame.Reducers.DeviceInfo)
 local invitesModule = require(shareGame.Reducers.Invites)
@@ -15,7 +16,7 @@ local var1 = reducerDependencies.RoduxNetworking.installReducer()
 local var2 = reducerDependencies.ShareLinksRodux.installReducer()
 
 return function(p1, p2)
-	-- upvalues: conversationsSearchModule (ref), deviceInfoModule (ref), invitesModule (ref), pageModule (ref), placeInfosReducer (ref), toastsModule (ref), userReducer (ref), friends (ref), friendCount (ref), var2 (ref), gameInfoModule (ref), var1 (ref)
+	-- upvalues: conversationsSearchModule (ref), deviceInfoModule (ref), invitesModule (ref), pageModule (ref), placeInfosReducer (ref), toastsModule (ref), userReducer (ref), friends (ref), fFlagRemoveUnusedFriendCountRoduxSlice (ref), friendCount (ref), var2 (ref), gameInfoModule (ref), var1 (ref)
 	p1 = p1 or {}
 	
 	return {
@@ -27,7 +28,7 @@ return function(p1, p2)
 		Toasts = toastsModule(p1.Toasts, p2),
 		Users = userReducer(p1.Users, p2),
 		Friends = friends(p1.Friends, p2),
-		FriendCount = friendCount(p1.FriendCount, p2),
+		FriendCount = if fFlagRemoveUnusedFriendCountRoduxSlice then nil else friendCount(p1.FriendCount, p2),
 		ShareLinks = var2(p1.ShareLinks, p2),
 		GameInfo = gameInfoModule(p1.GameInfo, p2),
 		NetworkStatus = var1(p1.NetworkStatus, p2)

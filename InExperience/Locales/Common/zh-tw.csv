@@ -1841,6 +1841,7 @@ Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,新增遊戲測試員
 Feature.Build.Action.AddPlaytesters,
 Feature.Build.Action.AddToPlaytest,新增至試玩
+Feature.Build.Action.AgreeAndEnable,同意並開啟
 Feature.Build.Action.Approve,核准
 Feature.Build.Action.Archive,封存
 Feature.Build.Action.ArchiveGame,封存遊戲
@@ -1864,6 +1865,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,通知我
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,開啟設定
+Feature.Build.Action.Options,選項
 Feature.Build.Action.Play,遊玩
 Feature.Build.Action.Playtest,試玩
 Feature.Build.Action.Preview,
@@ -1963,11 +1965,16 @@ Feature.Build.Description.InviteFriendLimit,選擇最多 {MAX_INVITES} 位好友
 Feature.Build.Description.MakeAudienceAvail,發佈體驗，讓此受眾可以存取。
 Feature.Build.Description.ManageAppearance,管理遊戲向其他人顯示的方式。
 Feature.Build.Description.ManageDeveloperProduct,管理開發者產品。
+Feature.Build.Description.ManagedPricingAcknowledgement,管理定價功能會自動按地區調整價格。
+Feature.Build.Description.ManagedPricingCurrentProducts,為所有現有產品啟用管理定價功能
+Feature.Build.Description.ManagedPricingUnavailable,此體驗無法使用管理定價功能。
+Feature.Build.Description.NoEligibleManagedPricingProducts,沒有符合條件的產品
 Feature.Build.Description.NoMonetizationProducts,描述你想要建立的物品，以便在遊戲中開始賺取 Robux
 Feature.Build.Description.PlayAfterPublish,選擇發佈此體驗後可遊玩的對象。
 Feature.Build.Description.PlaytestLatest,你正在試玩最新版本。準備好分享後即可發佈。
 Feature.Build.Description.PlaytestLocked,建立第一個遊戲後，即可開始進行遊戲測試。
 Feature.Build.Description.PlaytesterAccess,新增好友為遊戲測試員，或變更遊戲的受眾設定，讓更多人玩。
+Feature.Build.Description.PricingRules,設定定價規則
 Feature.Build.Description.PrivateShare,變更遊戲的受眾設定以分享。
 Feature.Build.Description.PromoteGameWithAdCampaign,透過為期 {durationDays} 天的廣告活動增加受眾，讓遊戲能被他人發現。
 Feature.Build.Description.RaiseLimitOrWait,提高每日 Robux 上限以繼續創作，或等待使用量於明天重置。
@@ -1975,6 +1982,7 @@ Feature.Build.Description.RatingAgreement,發佈即表示您同意此內容分�
 Feature.Build.Description.RestoreLatest,此版本將成為你的最新發佈版本。
 Feature.Build.Description.RevertToVersion,確認以還原最新變更並回到 {VERSION}。
 Feature.Build.Description.ShareLatest,分享最新版本的變更內容。
+Feature.Build.Description.ShopButton,新增購物入口
 Feature.Build.Description.UpdateDeveloperProduct,更新開發者產品 {PRODUCT_ID}。
 Feature.Build.Description.VersionChanges,告訴玩家此版本有哪些變更。
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"說明長度不得超過 1,000 個字元。"
@@ -1982,6 +1990,10 @@ Feature.Build.Error.DeveloperProductNameRequired,輸入產品名稱。
 Feature.Build.Error.DeveloperProductNameTooLong,名稱長度不得超過 50 個字元。
 Feature.Build.Error.DeveloperProductPriceInvalid,"價格須為 1 到 1,000,000,000 Robux 之間的整數。"
 Feature.Build.Error.DeveloperProductTextModerated,Roblox 審核人員已變更此產品的文字。請嘗試使用其他文字。
+Feature.Build.Error.ManagedPricingPartialUpdate,無法更新部分產品。
+Feature.Build.Error.MonetizationOptionUpdate,無法更新選項，請再試一次。
+Feature.Build.Error.MonetizationOptionsLoad,無法載入選項，請再試一次。
+Feature.Build.Error.MonetizationPermissionDenied,你沒有變更變現方法選項的權限。
 Feature.Build.Header.AccessSharing,存取權與分享
 Feature.Build.Header.AllVersions,所有版本
 Feature.Build.Header.ContentMaturity,成年適宜內容
@@ -2037,6 +2049,8 @@ Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,受限
 Feature.Build.Label.Live,已發布
 Feature.Build.Label.Loading,
+Feature.Build.Label.ManagedPricing,管理定價
+Feature.Build.Label.ManagedPricingMixed,混合套用於現有產品
 Feature.Build.Label.MaximizeForGamePlays,最大化遊戲遊玩次數
 Feature.Build.Label.Models3D,3D 模型
 Feature.Build.Label.Name,
@@ -2051,6 +2065,7 @@ Feature.Build.Label.PreviouslyPublished,先前已發佈
 Feature.Build.Label.Price,價格
 Feature.Build.Label.PriceUnavailable,--
 Feature.Build.Label.Pricing,
+Feature.Build.Label.PricingOptions,定價選項
 Feature.Build.Label.Private,私人
 Feature.Build.Label.Public,公開
 Feature.Build.Label.PubliclyUnavailable,尚未開放大眾遊玩
@@ -2068,6 +2083,8 @@ Feature.Build.Label.SearchTasks,搜尋任務
 Feature.Build.Label.SelectOption,選擇一個選項
 Feature.Build.Label.ShareAddedFriends,與你新增的好友分享
 Feature.Build.Label.Shared,已分享
+Feature.Build.Label.ShopButton,商店按鈕
+Feature.Build.Label.ShopUi,商店使用者介面
 Feature.Build.Label.Sounds,音效
 Feature.Build.Label.TargetAllRobloxPlayers,鎖定所有 Roblox 玩家
 Feature.Build.Label.Thinking,思考中
@@ -2262,6 +2279,7 @@ Feature.Build.Title.GameCreationDone,已完成遊戲創作
 Feature.Build.Title.GamePrivate,此遊戲僅限私人存取
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,取得使用者
+Feature.Build.Title.ManagedPricingAcknowledgement,是否開啟管理定價功能？
 Feature.Build.Title.NoMonetizationProducts,開始在遊戲中賺取收入
 Feature.Build.Title.NoRobuxForUsage,沒有剩餘的 Robux 可用於購買組建使用量
 Feature.Build.Title.Playtesters,遊戲測試員
@@ -2940,7 +2958,7 @@ Feature.Durables.InfoModal.Title,隆重推出計時選項
 Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite,永久
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
-Feature.Durables.ItemDetails.WearTimeOptions.Title,選項
+Feature.Durables.ItemDetails.WearTimeOptions.Title,
 Feature.Durables.Label.ItemExpires,物品有效期限
 Feature.Durables.PartiallyExpiredItems.BodyText,此已儲存虛擬人偶的部分道具已過期並已移除。
 Feature.Durables.PartiallyExpiredItems.TitleText,道具已過期
