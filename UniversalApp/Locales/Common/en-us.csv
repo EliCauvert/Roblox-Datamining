@@ -2204,6 +2204,7 @@ Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,Add playtester
 Feature.Build.Action.AddPlaytesters,Add playtesters
 Feature.Build.Action.AddToPlaytest,Add to playtest
+Feature.Build.Action.AgreeAndEnable,Agree and turn on
 Feature.Build.Action.Approve,
 Feature.Build.Action.Archive,Archive
 Feature.Build.Action.ArchiveGame,Archive game
@@ -2227,6 +2228,7 @@ Feature.Build.Action.NotNow,Not now
 Feature.Build.Action.NotifyMe,Notify me
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Open settings
+Feature.Build.Action.Options,Options
 Feature.Build.Action.Play,Play
 Feature.Build.Action.Playtest,Playtest
 Feature.Build.Action.Preview,
@@ -2326,11 +2328,16 @@ Feature.Build.Description.InviteFriendLimit,"Choose up to {MAX_INVITES} friends,
 Feature.Build.Description.MakeAudienceAvail,Publish your experience to make it available to this audience.
 Feature.Build.Description.ManageAppearance,Manage how your game appears to others.
 Feature.Build.Description.ManageDeveloperProduct,Manage developer product.
+Feature.Build.Description.ManagedPricingAcknowledgement,Managed Pricing automatically adjusts prices by region.
+Feature.Build.Description.ManagedPricingCurrentProducts,Use Managed Pricing for all current products
+Feature.Build.Description.ManagedPricingUnavailable,Managed Pricing isn't available for this experience.
+Feature.Build.Description.NoEligibleManagedPricingProducts,No eligible products
 Feature.Build.Description.NoMonetizationProducts,Describe an item you want to create to start earning Robux in your game
 Feature.Build.Description.PlayAfterPublish,Choose who can play after you publish this experience.
 Feature.Build.Description.PlaytestLatest,You're playtesting your latest version. Publish it when you're ready to share.
 Feature.Build.Description.PlaytestLocked,You can start playtesting after you create your first game.
 Feature.Build.Description.PlaytesterAccess,Add friends as playtesters or change your game's Audience setting to let more people play.
+Feature.Build.Description.PricingRules,Set pricing rules
 Feature.Build.Description.PrivateShare,Change your game's Audience setting to share it.
 Feature.Build.Description.PromoteGameWithAdCampaign,Boost your audience with a {durationDays}-day ad campaign and get your game discovered.
 Feature.Build.Description.RaiseLimitOrWait,"Increase your daily Robux limit to keep creating, or wait for it to reset tomorrow."
@@ -2338,13 +2345,19 @@ Feature.Build.Description.RatingAgreement,"By publishing, you agree that this co
 Feature.Build.Description.RestoreLatest,This version will become your latest published version.
 Feature.Build.Description.RevertToVersion,Confirm to revert the latest change and go back to {VERSION}.
 Feature.Build.Description.ShareLatest,Share what’s changed in your latest version.
+Feature.Build.Description.ShopButton,Add a shopping entry point
 Feature.Build.Description.UpdateDeveloperProduct,Update developer product {PRODUCT_ID}.
 Feature.Build.Description.VersionChanges,Tell players what's changed in this version.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"Description must be 1,000 characters or fewer."
 Feature.Build.Error.DeveloperProductNameRequired,Enter a product name.
 Feature.Build.Error.DeveloperProductNameTooLong,Name must be 50 characters or fewer.
 Feature.Build.Error.DeveloperProductPriceInvalid,"Price must be a whole number from 1 to 1,000,000,000 Robux."
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,Select Edit and add a price before listing a product for sale.
 Feature.Build.Error.DeveloperProductTextModerated,Roblox moderation changed this product's text. Try different wording.
+Feature.Build.Error.ManagedPricingPartialUpdate,Some products couldn't be updated.
+Feature.Build.Error.MonetizationOptionUpdate,The option couldn't be updated. Try again.
+Feature.Build.Error.MonetizationOptionsLoad,Options couldn't load. Try again.
+Feature.Build.Error.MonetizationPermissionDenied,You don't have permission to change monetization options.
 Feature.Build.Header.AccessSharing,Access & sharing
 Feature.Build.Header.AllVersions,All versions
 Feature.Build.Header.ContentMaturity,Content maturity
@@ -2400,6 +2413,8 @@ Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limited
 Feature.Build.Label.Live,Published
 Feature.Build.Label.Loading,
+Feature.Build.Label.ManagedPricing,Managed pricing
+Feature.Build.Label.ManagedPricingMixed,Mixed across current products
 Feature.Build.Label.MaximizeForGamePlays,Maximize for game plays
 Feature.Build.Label.Models3D,3D Models
 Feature.Build.Label.Name,
@@ -2414,6 +2429,7 @@ Feature.Build.Label.PreviouslyPublished,Previously published
 Feature.Build.Label.Price,Price
 Feature.Build.Label.PriceUnavailable,--
 Feature.Build.Label.Pricing,Pricing
+Feature.Build.Label.PricingOptions,Pricing options
 Feature.Build.Label.Private,Private
 Feature.Build.Label.Public,Public
 Feature.Build.Label.PubliclyUnavailable,Publicly unavailable
@@ -2431,6 +2447,8 @@ Feature.Build.Label.SearchTasks,Search tasks
 Feature.Build.Label.SelectOption,Select an option
 Feature.Build.Label.ShareAddedFriends,Share with friends you added
 Feature.Build.Label.Shared,Shared
+Feature.Build.Label.ShopButton,Shop button
+Feature.Build.Label.ShopUi,Shop UI
 Feature.Build.Label.Sounds,Sounds
 Feature.Build.Label.TargetAllRobloxPlayers,Target all Roblox players
 Feature.Build.Label.Thinking,Thinking
@@ -2625,6 +2643,7 @@ Feature.Build.Title.GameCreationDone,Completed game creation
 Feature.Build.Title.GamePrivate,This game is private
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Get users
+Feature.Build.Title.ManagedPricingAcknowledgement,Turn on Managed Pricing?
 Feature.Build.Title.NoMonetizationProducts,Start earning in your game
 Feature.Build.Title.NoRobuxForUsage,No Robux left for Build usage
 Feature.Build.Title.Playtesters,Playtesters
@@ -3310,7 +3329,7 @@ Feature.Durables.ItemDetails.BottomBar.BuyButton.Permanent,Buy permanent
 Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite,Permanent
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} day
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} days
-Feature.Durables.ItemDetails.WearTimeOptions.Title,Options
+Feature.Durables.ItemDetails.WearTimeOptions.Title,
 Feature.Durables.Label.ItemExpires,Item expires
 Feature.Durables.PartiallyExpiredItems.BodyText,Some items in this saved avatar expired and were removed.
 Feature.Durables.PartiallyExpiredItems.TitleText,Items expired

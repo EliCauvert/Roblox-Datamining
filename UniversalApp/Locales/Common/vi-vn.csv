@@ -2197,6 +2197,7 @@ Feature.Build.Action.AddFriends,Thêm bạn
 Feature.Build.Action.AddPlaytester,Thêm người chơi thử
 Feature.Build.Action.AddPlaytesters,
 Feature.Build.Action.AddToPlaytest,Thêm vào danh sách chơi thử
+Feature.Build.Action.AgreeAndEnable,Đồng ý và mở
 Feature.Build.Action.Approve,Phê duyệt
 Feature.Build.Action.Archive,Lưu trữ
 Feature.Build.Action.ArchiveGame,Lưu trữ trò chơi
@@ -2220,6 +2221,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,Thông báo cho tôi
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Mở phần cài đặt
+Feature.Build.Action.Options,Tùy chọn
 Feature.Build.Action.Play,Chơi
 Feature.Build.Action.Playtest,Chơi thử
 Feature.Build.Action.Preview,Xem trước
@@ -2319,11 +2321,16 @@ Feature.Build.Description.InviteFriendLimit,"Chọn tối đa {MAX_INVITES} ngư
 Feature.Build.Description.MakeAudienceAvail,Đăng trải nghiệm của bạn để cho phép đối tượng này tham gia.
 Feature.Build.Description.ManageAppearance,Quản lý giao diện hiển thị của trò chơi với người khác.
 Feature.Build.Description.ManageDeveloperProduct,Quản lý sản phẩm của nhà phát triển.
+Feature.Build.Description.ManagedPricingAcknowledgement,Chế độ Giá được quản lý tự động điều chỉnh giá theo vùng.
+Feature.Build.Description.ManagedPricingCurrentProducts,Sử dụng chế độ Giá được quản lý cho tất cả các sản phẩm hiện tại
+Feature.Build.Description.ManagedPricingUnavailable,Hệ thống Giá được quản lý không khả dụng cho trải nghiệm này.
+Feature.Build.Description.NoEligibleManagedPricingProducts,Không có sản phẩm đủ điều kiện
 Feature.Build.Description.NoMonetizationProducts,Mô tả vật phẩm bạn muốn tạo để bắt đầu kiếm Robux trong trò chơi của mình
 Feature.Build.Description.PlayAfterPublish,Chọn đối tượng người chơi có thể tham gia sau khi bạn đăng trải nghiệm này.
 Feature.Build.Description.PlaytestLatest,Bạn đang chơi thử phiên bản mới nhất của mình. Hãy đăng phiên bản này khi bạn đã sẵn sàng chia sẻ.
 Feature.Build.Description.PlaytestLocked,Bạn có thể bắt đầu chơi thử sau khi tạo trò chơi đầu tiên.
 Feature.Build.Description.PlaytesterAccess,Hãy thêm bạn bè làm người chơi thử hoặc thay đổi cài đặt Đối tượng của trò chơi để cho phép có thêm người chơi.
+Feature.Build.Description.PricingRules,Thiết lập quy tắc định giá
 Feature.Build.Description.PrivateShare,Hãy thay đổi cài đặt Đối tượng của trò chơi để chia sẻ.
 Feature.Build.Description.PromoteGameWithAdCampaign,Thu hút thêm người chơi bằng chiến dịch quảng cáo dài {durationDays} ngày và giúp trò chơi của bạn tiếp cận được nhiều người hơn.
 Feature.Build.Description.RaiseLimitOrWait,"Tăng hạn mức Robux hằng ngày của bạn để tiếp tục sáng tạo, hoặc đợi hạn mức làm mới vào ngày mai."
@@ -2331,6 +2338,7 @@ Feature.Build.Description.RatingAgreement,"Bằng việc đăng, bạn đồng �
 Feature.Build.Description.RestoreLatest,Phiên bản này sẽ trở thành phiên bản mới nhất được đăng của bạn.
 Feature.Build.Description.RevertToVersion,Xác nhận trả về bản thay đổi gần nhất và quay lại {VERSION}.
 Feature.Build.Description.ShareLatest,Chia sẻ về những thay đổi trong phiên bản mới nhất của bạn.
+Feature.Build.Description.ShopButton,Thêm điểm truy cập cửa hàng
 Feature.Build.Description.UpdateDeveloperProduct,Cập nhật sản phẩm của nhà phát triển {PRODUCT_ID}.
 Feature.Build.Description.VersionChanges,Cho người chơi biết điều gì đã thay đổi trong phiên bản này.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Nội dung mô tả không được quá 1.000 ký tự.
@@ -2338,6 +2346,10 @@ Feature.Build.Error.DeveloperProductNameRequired,Nhập tên sản phẩm.
 Feature.Build.Error.DeveloperProductNameTooLong,Tên chỉ được chứa tối đa 50 ký tự.
 Feature.Build.Error.DeveloperProductPriceInvalid,Giá phải là một số nguyên từ 1 đến 1.000.000.000 Robux.
 Feature.Build.Error.DeveloperProductTextModerated,Bộ phận kiểm duyệt của Roblox đã thay đổi văn bản của sản phẩm này. Hãy thử dùng cách diễn đạt khác.
+Feature.Build.Error.ManagedPricingPartialUpdate,Không thể cập nhật một số sản phẩm.
+Feature.Build.Error.MonetizationOptionUpdate,Không thể cập nhật tùy chọn. Vui lòng thử lại.
+Feature.Build.Error.MonetizationOptionsLoad,Không tải được tùy chọn. Vui lòng thử lại.
+Feature.Build.Error.MonetizationPermissionDenied,Bạn không có quyền thay đổi tùy chọn kiếm tiền.
 Feature.Build.Header.AccessSharing,Quyền truy cập và chia sẻ
 Feature.Build.Header.AllVersions,Tất cả các phiên bản
 Feature.Build.Header.ContentMaturity,Mức độ nội dung người lớn
@@ -2393,6 +2405,8 @@ Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Giới hạn
 Feature.Build.Label.Live,Đã ra mắt
 Feature.Build.Label.Loading,
+Feature.Build.Label.ManagedPricing,Giá được quản lý
+Feature.Build.Label.ManagedPricingMixed,Kết hợp trên các sản phẩm hiện tại
 Feature.Build.Label.MaximizeForGamePlays,Tăng tối đa lượt chơi
 Feature.Build.Label.Models3D,Mô hình 3D
 Feature.Build.Label.Name,
@@ -2407,6 +2421,7 @@ Feature.Build.Label.PreviouslyPublished,Đã đăng trước đây
 Feature.Build.Label.Price,Giá
 Feature.Build.Label.PriceUnavailable,--
 Feature.Build.Label.Pricing,Định giá
+Feature.Build.Label.PricingOptions,Tùy chọn định giá
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,Công khai
 Feature.Build.Label.PubliclyUnavailable,Chưa phát hành công khai
@@ -2424,6 +2439,8 @@ Feature.Build.Label.SearchTasks,Tìm kiếm nhiệm vụ
 Feature.Build.Label.SelectOption,Chọn một tùy chọn
 Feature.Build.Label.ShareAddedFriends,Chia sẻ với bạn bè mà bạn đã thêm
 Feature.Build.Label.Shared,Đã chia sẻ
+Feature.Build.Label.ShopButton,Nút Cửa hàng
+Feature.Build.Label.ShopUi,UI cửa hàng
 Feature.Build.Label.Sounds,Âm thanh
 Feature.Build.Label.TargetAllRobloxPlayers,Nhắm đến tất cả người chơi Roblox
 Feature.Build.Label.Thinking,Đang tư duy
@@ -2618,6 +2635,7 @@ Feature.Build.Title.GameCreationDone,Đã tạo xong trò chơi
 Feature.Build.Title.GamePrivate,Trò chơi này ở chế độ riêng tư
 Feature.Build.Title.GenericError,Đã xảy ra lỗi
 Feature.Build.Title.GetUsers,Thu hút người dùng
+Feature.Build.Title.ManagedPricingAcknowledgement,Mở chế độ Giá được quản lý?
 Feature.Build.Title.NoMonetizationProducts,Bắt đầu kiếm tiền trong trò chơi của bạn
 Feature.Build.Title.NoRobuxForUsage,Không còn Robux để sử dụng Build
 Feature.Build.Title.Playtesters,Người chơi thử
@@ -3303,7 +3321,7 @@ Feature.Durables.ItemDetails.BottomBar.BuyButton.Permanent,Mua vĩnh viễn
 Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite,Vĩnh viễn
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} ngày
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
-Feature.Durables.ItemDetails.WearTimeOptions.Title,Tùy chọn
+Feature.Durables.ItemDetails.WearTimeOptions.Title,
 Feature.Durables.Label.ItemExpires,Vật phẩm hết hạn
 Feature.Durables.PartiallyExpiredItems.BodyText,Một số vật phẩm trong avatar đã lưu này đã hết hạn và bị xóa.
 Feature.Durables.PartiallyExpiredItems.TitleText,Vật phẩm đã hết hạn

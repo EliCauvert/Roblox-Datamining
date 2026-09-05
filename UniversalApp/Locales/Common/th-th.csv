@@ -2174,6 +2174,7 @@ Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,เพิ่มผู้ทดลองเล่น
 Feature.Build.Action.AddPlaytesters,
 Feature.Build.Action.AddToPlaytest,เพิ่มไปยังการทดลองเล่น
+Feature.Build.Action.AgreeAndEnable,ยอมรับและเปิด
 Feature.Build.Action.Approve,
 Feature.Build.Action.Archive,เก็บถาวร
 Feature.Build.Action.ArchiveGame,เก็บถาวรเกม
@@ -2197,6 +2198,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,แจ้งเตือนฉัน
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,เปิดการตั้งค่า
+Feature.Build.Action.Options,ตัวเลือก
 Feature.Build.Action.Play,เล่น
 Feature.Build.Action.Playtest,ทดลองเล่น
 Feature.Build.Action.Preview,
@@ -2296,11 +2298,16 @@ Feature.Build.Description.InviteFriendLimit,เลือกเพื่อนไ
 Feature.Build.Description.MakeAudienceAvail,เผยแพร่ประสบการณ์ของคุณเพื่อให้กลุ่มเป้าหมายนี้สามารถใช้งานได้
 Feature.Build.Description.ManageAppearance,จัดการวิธีแสดงเกมของคุณให้ผู้อื่นเห็น
 Feature.Build.Description.ManageDeveloperProduct,จัดการผลิตภัณฑ์นักพัฒนา
+Feature.Build.Description.ManagedPricingAcknowledgement,การตั้งราคาแบบมีการจัดการจะปรับราคาตามภูมิภาคโดยอัตโนมัติ
+Feature.Build.Description.ManagedPricingCurrentProducts,ใช้การตั้งราคาแบบมีการจัดการสำหรับผลิตภัณฑ์ปัจจุบันทั้งหมด
+Feature.Build.Description.ManagedPricingUnavailable,ประสบการณ์นี้ไม่สามารถใช้การตั้งราคาแบบมีการจัดการได้
+Feature.Build.Description.NoEligibleManagedPricingProducts,ไม่มีผลิตภัณฑ์ที่มีสิทธิ์
 Feature.Build.Description.NoMonetizationProducts,อธิบายไอเท็มที่คุณต้องการสร้างเพื่อเริ่มรับ Robux ในเกมของคุณ
 Feature.Build.Description.PlayAfterPublish,เลือกผู้ที่สามารถเล่นได้หลังจากที่คุณเผยแพร่ประสบการณ์นี้
 Feature.Build.Description.PlaytestLatest,คุณกำลังทดลองเล่นเวอร์ชันล่าสุดของคุณ พร้อมแชร์เมื่อไร ก็เผยแพร่ได้เลย
 Feature.Build.Description.PlaytestLocked,คุณสามารถเริ่มทดลองเล่นได้หลังจากที่สร้างเกมแรกของคุณ
 Feature.Build.Description.PlaytesterAccess,เพิ่มเพื่อนเป็นผู้ทดลองเล่น หรือเปลี่ยนการตั้งค่ากลุ่มเป้าหมายของเกมเพื่อให้มีคนเล่นมากขึ้น
+Feature.Build.Description.PricingRules,ตั้งกฎการตั้งราคา
 Feature.Build.Description.PrivateShare,เปลี่ยนการตั้งค่ากลุ่มเป้าหมายของเกมเพื่อแชร์
 Feature.Build.Description.PromoteGameWithAdCampaign,เพิ่มกลุ่มเป้าหมายของคุณด้วยแคมเปญโฆษณา {durationDays} วันและทำให้เกมของคุณเป็นที่รู้จัก
 Feature.Build.Description.RaiseLimitOrWait,เพิ่มวงเงิน Robux รายวันของคุณเพื่อสร้างต่อ หรือรอให้รีเซ็ตในวันพรุ่งนี้
@@ -2308,6 +2315,7 @@ Feature.Build.Description.RatingAgreement,การเผยแพร่จะ�
 Feature.Build.Description.RestoreLatest,เวอร์ชันนี้จะกลายเป็นเวอร์ชันที่เผยแพร่ล่าสุดของคุณ
 Feature.Build.Description.RevertToVersion,ยืนยันเพื่อย้อนการเปลี่ยนแปลงล่าสุดและกลับไปใช้เวอร์ชัน {VERSION}
 Feature.Build.Description.ShareLatest,แชร์ว่าเวอร์ชันล่าสุดของคุณมีอะไรเปลี่ยนแปลงไปบ้าง
+Feature.Build.Description.ShopButton,เพิ่มจุดเริ่มต้นการช็อปปิ้ง
 Feature.Build.Description.UpdateDeveloperProduct,อัปเดตผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
 Feature.Build.Description.VersionChanges,บอกผู้เล่นว่าเวอร์ชันนี้มีอะไรเปลี่ยนแปลงไปบ้าง
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"คำอธิบายต้องมีความยาวไม่เกิน 1,000 อักขระ"
@@ -2315,6 +2323,10 @@ Feature.Build.Error.DeveloperProductNameRequired,กรอกชื่อผล�
 Feature.Build.Error.DeveloperProductNameTooLong,ชื่อต้องมีความยาวไม่เกิน 50 อักขระ
 Feature.Build.Error.DeveloperProductPriceInvalid,"ราคาต้องเป็นจำนวนเต็มตั้งแต่ 1 ถึง 1,000,000,000 Robux"
 Feature.Build.Error.DeveloperProductTextModerated,ทีมกลั่นกรองของ Roblox เปลี่ยนข้อความของผลิตภัณฑ์นี้ ลองใช้ถ้อยคำอื่น
+Feature.Build.Error.ManagedPricingPartialUpdate,ไม่สามารถอัปเดตผลิตภัณฑ์บางรายการได้
+Feature.Build.Error.MonetizationOptionUpdate,ไม่สามารถอัปเดตตัวเลือกได้ โปรดลองอีกครั้ง
+Feature.Build.Error.MonetizationOptionsLoad,ไม่สามารถโหลดตัวเลือกได้ โปรดลองอีกครั้ง
+Feature.Build.Error.MonetizationPermissionDenied,คุณไม่มีสิทธิ์เปลี่ยนตัวเลือกการสร้างรายได้
 Feature.Build.Header.AccessSharing,การเข้าถึงและการแชร์
 Feature.Build.Header.AllVersions,ทุกเวอร์ชัน
 Feature.Build.Header.ContentMaturity,ระดับความเหมาะสมของเนื้อหา
@@ -2370,6 +2382,8 @@ Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,จำกัด
 Feature.Build.Label.Live,เผยแพร่แล้ว
 Feature.Build.Label.Loading,
+Feature.Build.Label.ManagedPricing,การตั้งราคาแบบมีการจัดการ
+Feature.Build.Label.ManagedPricingMixed,ราคาคละกันในผลิตภัณฑ์ปัจจุบันทั้งหมด
 Feature.Build.Label.MaximizeForGamePlays,เพิ่มจำนวนการเล่นเกมให้สูงสุด
 Feature.Build.Label.Models3D,โมเดล 3D
 Feature.Build.Label.Name,
@@ -2384,6 +2398,7 @@ Feature.Build.Label.PreviouslyPublished,เผยแพร่ไปก่อน�
 Feature.Build.Label.Price,ราคา
 Feature.Build.Label.PriceUnavailable,--
 Feature.Build.Label.Pricing,การตั้งราคา
+Feature.Build.Label.PricingOptions,ตัวเลือกการตั้งราคา
 Feature.Build.Label.Private,ส่วนตัว
 Feature.Build.Label.Public,สาธารณะ
 Feature.Build.Label.PubliclyUnavailable,ไม่สามารถเข้าถึงได้แบบสาธารณะ
@@ -2401,6 +2416,8 @@ Feature.Build.Label.SearchTasks,ค้นหางาน
 Feature.Build.Label.SelectOption,
 Feature.Build.Label.ShareAddedFriends,แชร์กับเพื่อนที่คุณเพิ่ม
 Feature.Build.Label.Shared,แชร์แล้ว
+Feature.Build.Label.ShopButton,ปุ่มร้านค้า
+Feature.Build.Label.ShopUi,UI ของร้านค้า
 Feature.Build.Label.Sounds,
 Feature.Build.Label.TargetAllRobloxPlayers,กำหนดเป้าหมายเป็นผู้เล่น Roblox ทั้งหมด
 Feature.Build.Label.Thinking,กำลังคิด
@@ -2595,6 +2612,7 @@ Feature.Build.Title.GameCreationDone,สร้างเกมเรียบร�
 Feature.Build.Title.GamePrivate,เกมนี้เป็นแบบส่วนตัว
 Feature.Build.Title.GenericError,มีบางอย่างผิดปกติ
 Feature.Build.Title.GetUsers,ดึงดูดผู้ใช้
+Feature.Build.Title.ManagedPricingAcknowledgement,เปิดการตั้งราคาแบบมีการจัดการใช่ไหม?
 Feature.Build.Title.NoMonetizationProducts,เริ่มสร้างรายได้ในเกมของคุณ
 Feature.Build.Title.NoRobuxForUsage,ไม่มี Robux เหลือสำหรับโควต้าการใช้งาน Build
 Feature.Build.Title.Playtesters,ผู้ทดลองเล่น
@@ -3280,7 +3298,7 @@ Feature.Durables.ItemDetails.BottomBar.BuyButton.Permanent,ซื้อแบบ
 Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite,ถาวร
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} วัน
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
-Feature.Durables.ItemDetails.WearTimeOptions.Title,ตัวเลือก
+Feature.Durables.ItemDetails.WearTimeOptions.Title,
 Feature.Durables.Label.ItemExpires,ไอเท็มหมดอายุ
 Feature.Durables.PartiallyExpiredItems.BodyText,บางไอเท็มในอวาตาร์ที่บันทึกไว้หมดอายุและถูกลบออกแล้ว
 Feature.Durables.PartiallyExpiredItems.TitleText,ไอเท็มหมดอายุแล้ว

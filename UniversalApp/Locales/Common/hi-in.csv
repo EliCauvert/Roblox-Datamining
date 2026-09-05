@@ -2177,6 +2177,7 @@ Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,प्लेटेस्टर जोड़ें
 Feature.Build.Action.AddPlaytesters,प्लेटेस्टर्स जोड़ें
 Feature.Build.Action.AddToPlaytest,प्ले-टेस्ट में जोड़ें
+Feature.Build.Action.AgreeAndEnable,सहमति दें और चालू करें
 Feature.Build.Action.Approve,
 Feature.Build.Action.Archive,आर्काइव करें
 Feature.Build.Action.ArchiveGame,गेम को आर्काइव में भेजें
@@ -2200,6 +2201,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,मुझे नोटिफ़ाई करें
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,सेटिंग्स खोलें
+Feature.Build.Action.Options,विकल्प
 Feature.Build.Action.Play,खेलें
 Feature.Build.Action.Playtest,प्लेटेस्ट
 Feature.Build.Action.Preview,
@@ -2299,11 +2301,16 @@ Feature.Build.Description.InviteFriendLimit,"{MAX_INVITES} फ़्रेंड
 Feature.Build.Description.MakeAudienceAvail,"अपने एक्सपीरिएंस को इस ऑडियंस के लिए उपलब्ध कराने के लिए, उसे पब्लिश करें."
 Feature.Build.Description.ManageAppearance,यह मैनेज करें कि आपका गेम दूसरों को कैसा दिखता है.
 Feature.Build.Description.ManageDeveloperProduct,डेवलपर प्रॉडक्ट मैनेज करें.
+Feature.Build.Description.ManagedPricingAcknowledgement,'मैनेज की जा रही कीमतें' फ़ीचर के तहत क्षेत्र के हिसाब से कीमतें अपने-आप एडजस्ट हो जाती हैं.
+Feature.Build.Description.ManagedPricingCurrentProducts,"सभी मौजूदा प्रॉडक्ट्स के लिए, 'मैनेज की जा रही कीमतें' फ़ीचर का इस्तेमाल करें"
+Feature.Build.Description.ManagedPricingUnavailable,इस एक्सपीरिएंस के लिए 'मैनेज की जा रही कीमतें' फ़ीचर उपलब्ध नहीं है.
+Feature.Build.Description.NoEligibleManagedPricingProducts,कोई योग्य प्रॉडक्ट नहीं
 Feature.Build.Description.NoMonetizationProducts,"उस आइटम के बारे में बताएँ, जिसे आपको अपने गेम में Robux कमाना शुरू करने के लिए क्रिएट करना है"
 Feature.Build.Description.PlayAfterPublish,यह चुनें कि इस एक्सपीरिएंस के पब्लिश होने के बाद इसे कौन-कौन खेल सकता है.
 Feature.Build.Description.PlaytestLatest,"आपने अपने सबसे नए वर्ज़न को प्लेटेस्ट किया है. जब आप शेयर करने के लिए तैयार हों, तो उसे पब्लिश करें."
 Feature.Build.Description.PlaytestLocked,"अपना पहला गेम क्रिएट करने के बाद, प्लेटेस्टिंग शुरू की जा सकती है."
 Feature.Build.Description.PlaytesterAccess,"दोस्तों को प्लेटेस्टर के रूप में जोड़ें या ज़्यादा लोगों को खेलने देने के लिए, अपने गेम की ऑडियंस सेटिंग बदलें."
+Feature.Build.Description.PricingRules,कीमत तय करने के नियम सेट करें
 Feature.Build.Description.PrivateShare,"इसे शेयर करने के लिए, अपने गेम की ऑडियंस सेटिंग बदलें."
 Feature.Build.Description.PromoteGameWithAdCampaign,"{durationDays}-दिन के ऐड कैंपेन की मदद से, अपनी ऑडियंस बढ़ाएँ और अपने गेम को लोगों की नज़रों में लाएँ."
 Feature.Build.Description.RaiseLimitOrWait,"क्रिएट करना जारी रखने के लिए, अपनी रोज़ाना की Robux लिमिट बढ़ाएँ या कल उसके रीसेट होने का इंतज़ार करें."
@@ -2311,6 +2318,7 @@ Feature.Build.Description.RatingAgreement,पब्लिश करने का
 Feature.Build.Description.RestoreLatest,यह वर्ज़न आपका सबसे हाल में पब्लिश किया गया वर्ज़न बन जाएगा.
 Feature.Build.Description.RevertToVersion,सबसे नए बदलाव को रिवर्ट करने के लिए कन्फ़र्म करें और {VERSION} पर वापस जाएँ.
 Feature.Build.Description.ShareLatest,शेयर करें कि आपके सबसे नए वर्ज़न में क्या बदला है.
+Feature.Build.Description.ShopButton,शॉपिंग एंट्री पॉइंट जोड़ें
 Feature.Build.Description.UpdateDeveloperProduct,डेवलपर प्रॉडक्ट {PRODUCT_ID} को अपडेट करें.
 Feature.Build.Description.VersionChanges,खिलाड़ियों को इस वर्ज़न में हुए बदलावों के बारे में बताएँ.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"विवरण में 1,000 या इससे कम कैरेक्टर होने चाहिए."
@@ -2318,6 +2326,10 @@ Feature.Build.Error.DeveloperProductNameRequired,प्रॉडक्ट का
 Feature.Build.Error.DeveloperProductNameTooLong,नाम में 50 या इससे कम कैरेक्टर होने चाहिए.
 Feature.Build.Error.DeveloperProductPriceInvalid,"कीमत, 1 से 1,00,00,00,000 Robux तक के बीच का होल नंबर (पूर्णांक) होना चाहिए."
 Feature.Build.Error.DeveloperProductTextModerated,Roblox मॉडरेशन से इस प्रॉडक्ट का टेक्स्ट बदल गया है. अलग शब्दों का इस्तेमाल करके देखें.
+Feature.Build.Error.ManagedPricingPartialUpdate,कुछ प्रॉडक्ट अपडेट नहीं किए जा सके.
+Feature.Build.Error.MonetizationOptionUpdate,विकल्प अपडेट नहीं किया जा सका. फिर से कोशिश करें.
+Feature.Build.Error.MonetizationOptionsLoad,विकल्प लोड नहीं हो सके. फिर से कोशिश करें.
+Feature.Build.Error.MonetizationPermissionDenied,आपके पास मॉनेटाइज़ेशन के विकल्प बदलने की परमिशन नहीं है.
 Feature.Build.Header.AccessSharing,ऐक्सेस और शेयरिंग
 Feature.Build.Header.AllVersions,सभी वर्ज़न
 Feature.Build.Header.ContentMaturity,कॉन्टेंट मैच्योरिटी
@@ -2373,6 +2385,8 @@ Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,सीमित
 Feature.Build.Label.Live,लाइव
 Feature.Build.Label.Loading,लोड किया जा रहा है...
+Feature.Build.Label.ManagedPricing,मैनेज की जा रही कीमतें
+Feature.Build.Label.ManagedPricingMixed,मौजूदा प्रॉडक्ट्स में मिला-जुला
 Feature.Build.Label.MaximizeForGamePlays,गेम प्ले की संख्या ज़्यादा से ज़्यादा बढ़ाएँ
 Feature.Build.Label.Models3D,3D मॉडल
 Feature.Build.Label.Name,
@@ -2387,6 +2401,7 @@ Feature.Build.Label.PreviouslyPublished,पहले पब्लिश कि�
 Feature.Build.Label.Price,कीमत
 Feature.Build.Label.PriceUnavailable,--
 Feature.Build.Label.Pricing,
+Feature.Build.Label.PricingOptions,कीमत के विकल्प
 Feature.Build.Label.Private,प्राइवेट
 Feature.Build.Label.Public,पब्लिक
 Feature.Build.Label.PubliclyUnavailable,सभी के लिए उपलब्ध नहीं है
@@ -2404,6 +2419,8 @@ Feature.Build.Label.SearchTasks,टास्क सर्च करें
 Feature.Build.Label.SelectOption,कोई विकल्प चुनें
 Feature.Build.Label.ShareAddedFriends,"उन फ़्रेंड्स के साथ शेयर करें, जिन्हें आपने जोड़ा है"
 Feature.Build.Label.Shared,शेयर किया गया
+Feature.Build.Label.ShopButton,'शॉप' बटन
+Feature.Build.Label.ShopUi,'शॉप' UI
 Feature.Build.Label.Sounds,साउंड
 Feature.Build.Label.TargetAllRobloxPlayers,सभी Roblox प्लेयर्स को टार्गेट करें
 Feature.Build.Label.Thinking,प्रोसेस कर रहा है
@@ -2598,6 +2615,7 @@ Feature.Build.Title.GameCreationDone,गेम क्रिएशन पूर�
 Feature.Build.Title.GamePrivate,यह गेम प्राइवेट है
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,यूज़र्स पाएँ
+Feature.Build.Title.ManagedPricingAcknowledgement,'मैनेज की जा रही कीमतें' फ़ीचर चालू करना है?
 Feature.Build.Title.NoMonetizationProducts,अपने गेम में कमाना शुरू करें
 Feature.Build.Title.NoRobuxForUsage,बिल्ड के इस्तेमाल के लिए कोई Robux नहीं बचा
 Feature.Build.Title.Playtesters,प्लेटेस्टर्स
@@ -3283,7 +3301,7 @@ Feature.Durables.ItemDetails.BottomBar.BuyButton.Permanent,हमेशा क�
 Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite,हमेशा के लिए
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} दिन
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
-Feature.Durables.ItemDetails.WearTimeOptions.Title,विकल्प
+Feature.Durables.ItemDetails.WearTimeOptions.Title,
 Feature.Durables.Label.ItemExpires,आइटम की समयसीमा खत्म हो रही है
 Feature.Durables.PartiallyExpiredItems.BodyText,सेव किए गए इस अवतार में कुछ आइटम की समय-सीमा खत्म हो गई है और उन्हें हटा दिया गया है.
 Feature.Durables.PartiallyExpiredItems.TitleText,आइटम की समय-सीमा खत्म हो गई है

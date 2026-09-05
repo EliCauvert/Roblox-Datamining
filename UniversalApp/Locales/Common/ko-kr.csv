@@ -2198,6 +2198,7 @@ Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,플레이테스터 추가
 Feature.Build.Action.AddPlaytesters,
 Feature.Build.Action.AddToPlaytest,플레이테스트에 추가
+Feature.Build.Action.AgreeAndEnable,동의하고 켜기
 Feature.Build.Action.Approve,
 Feature.Build.Action.Archive,보관
 Feature.Build.Action.ArchiveGame,게임 보관
@@ -2221,6 +2222,7 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,알림 받기
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,설정 열기
+Feature.Build.Action.Options,옵션
 Feature.Build.Action.Play,
 Feature.Build.Action.Playtest,플레이테스트
 Feature.Build.Action.Preview,
@@ -2320,11 +2322,16 @@ Feature.Build.Description.InviteFriendLimit,친구를 최대 {MAX_INVITES}명 �
 Feature.Build.Description.MakeAudienceAvail,이 대상에게 체험을 제공하려면 게시하세요.
 Feature.Build.Description.ManageAppearance,게임이 다른 사람에게 표시되는 방식을 관리하세요.
 Feature.Build.Description.ManageDeveloperProduct,개발자 상품을 관리합니다.
+Feature.Build.Description.ManagedPricingAcknowledgement,관리형 가격은 지역에 따라 가격을 자동으로 조정합니다.
+Feature.Build.Description.ManagedPricingCurrentProducts,현재 모든 상품에 관리형 가격 책정 사용
+Feature.Build.Description.ManagedPricingUnavailable,이 체험에는 관리형 가격 책정을 이용할 수 없습니다.
+Feature.Build.Description.NoEligibleManagedPricingProducts,적격 상품 없음
 Feature.Build.Description.NoMonetizationProducts,게임 내에서 Robux를 획득하기 위해 만들고자 하는 아이템에 대해 설명해 주세요
 Feature.Build.Description.PlayAfterPublish,이 체험을 게시한 후 플레이할 수 있는 사람을 선택하세요.
 Feature.Build.Description.PlaytestLatest,최신 버전을 플레이테스트하고 있습니다. 공유할 준비가 되면 게시하세요.
 Feature.Build.Description.PlaytestLocked,첫 게임을 만든 후 플레이테스트를 시작할 수 있습니다.
 Feature.Build.Description.PlaytesterAccess,친구를 플레이테스터로 추가하거나 게임의 대상 설정을 변경하여 더 많은 사람이 플레이할 수 있도록 하세요.
+Feature.Build.Description.PricingRules,가격 규칙 설정
 Feature.Build.Description.PrivateShare,게임을 공유하려면 게임의 대상 설정을 변경하세요.
 Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}일 광고 캠페인으로 오디언스를 확대하고 게임을 홍보하세요.
 Feature.Build.Description.RaiseLimitOrWait,"계속 제작하려면 일일 Robux 한도를 늘리거나, 내일 초기화될 때까지 기다리세요."
@@ -2332,6 +2339,7 @@ Feature.Build.Description.RatingAgreement,게시하면 이 콘텐츠 등급이 �
 Feature.Build.Description.RestoreLatest,이 버전이 최신 게시 버전이 됩니다.
 Feature.Build.Description.RevertToVersion,확인을 눌러 최신 변경 사항을 복구하고 {VERSION} 버전으로 돌아가세요.
 Feature.Build.Description.ShareLatest,최신 버전에서 변경된 사항을 공유하세요.
+Feature.Build.Description.ShopButton,쇼핑 진입점 추가
 Feature.Build.Description.UpdateDeveloperProduct,개발자 상품 {PRODUCT_ID}을(를) 업데이트하세요.
 Feature.Build.Description.VersionChanges,이 버전에서 변경된 사항을 플레이어에게 알려주세요.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"설명은 1,000자 이하여야 합니다."
@@ -2339,6 +2347,10 @@ Feature.Build.Error.DeveloperProductNameRequired,상품 이름을 입력하세�
 Feature.Build.Error.DeveloperProductNameTooLong,이름은 50자 이하여야 합니다.
 Feature.Build.Error.DeveloperProductPriceInvalid,"가격은 1~1,000,000,000 Robux 사이의 정수여야 합니다."
 Feature.Build.Error.DeveloperProductTextModerated,Roblox 규정 준수 팀이 이 제품의 텍스트를 변경했습니다. 다른 표현을 사용해 보세요.
+Feature.Build.Error.ManagedPricingPartialUpdate,일부 상품을 업데이트하지 못했습니다.
+Feature.Build.Error.MonetizationOptionUpdate,옵션을 업데이트하지 못했습니다. 다시 시도하세요.
+Feature.Build.Error.MonetizationOptionsLoad,옵션을 불러오지 못했습니다. 다시 시도하세요.
+Feature.Build.Error.MonetizationPermissionDenied,수익 창출 옵션을 변경할 권한이 없습니다.
 Feature.Build.Header.AccessSharing,액세스 및 공유
 Feature.Build.Header.AllVersions,모든 버전
 Feature.Build.Header.ContentMaturity,콘텐츠 수위
@@ -2394,6 +2406,8 @@ Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,제한됨
 Feature.Build.Label.Live,라이브
 Feature.Build.Label.Loading,
+Feature.Build.Label.ManagedPricing,관리형 가격 책정
+Feature.Build.Label.ManagedPricingMixed,현재 상품 전체에 혼합
 Feature.Build.Label.MaximizeForGamePlays,게임 플레이 횟수 극대화
 Feature.Build.Label.Models3D,3D 모델
 Feature.Build.Label.Name,
@@ -2408,6 +2422,7 @@ Feature.Build.Label.PreviouslyPublished,이전에 게시됨
 Feature.Build.Label.Price,가격
 Feature.Build.Label.PriceUnavailable,--
 Feature.Build.Label.Pricing,가격 책정
+Feature.Build.Label.PricingOptions,가격 책정 옵션
 Feature.Build.Label.Private,비공개
 Feature.Build.Label.Public,공개
 Feature.Build.Label.PubliclyUnavailable,공개적으로 이용 불가
@@ -2425,6 +2440,8 @@ Feature.Build.Label.SearchTasks,작업 검색
 Feature.Build.Label.SelectOption,옵션 선택
 Feature.Build.Label.ShareAddedFriends,추가한 친구와 공유
 Feature.Build.Label.Shared,공유 완료
+Feature.Build.Label.ShopButton,상점 버튼
+Feature.Build.Label.ShopUi,상점 UI
 Feature.Build.Label.Sounds,사운드
 Feature.Build.Label.TargetAllRobloxPlayers,모든 Roblox 플레이어를 대상으로 하세요
 Feature.Build.Label.Thinking,생각 중
@@ -2619,6 +2636,7 @@ Feature.Build.Title.GameCreationDone,게임 제작 완료
 Feature.Build.Title.GamePrivate,비공개 게임입니다
 Feature.Build.Title.GenericError,오류 발생
 Feature.Build.Title.GetUsers,사용자 가져오기
+Feature.Build.Title.ManagedPricingAcknowledgement,관리형 가격 책정을 켜시겠습니까?
 Feature.Build.Title.NoMonetizationProducts,게임 내에서 수익을 올리세요
 Feature.Build.Title.NoRobuxForUsage,Build 사용량을 위한 Robux가 남아 있지 않음
 Feature.Build.Title.Playtesters,플레이테스터
@@ -3305,7 +3323,7 @@ Feature.Durables.ItemDetails.BottomBar.BuyButton.Permanent,영구 구매하기
 Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite,영구적
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num}일
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
-Feature.Durables.ItemDetails.WearTimeOptions.Title,옵션
+Feature.Durables.ItemDetails.WearTimeOptions.Title,
 Feature.Durables.Label.ItemExpires,아이템 만료 일자
 Feature.Durables.PartiallyExpiredItems.BodyText,저장된 아바타의 일부 아이템이 만료되어 삭제되었습니다.
 Feature.Durables.PartiallyExpiredItems.TitleText,만료된 아이템
