@@ -30,16 +30,12 @@ local t = {
 	testId = "--foundation-system-banner",
 	variant = alertVariantModule.Standard
 }
-local t_1 = {
-	[alertVariantModule.System] = alertVariantModule.Standard,
-	[alertVariantModule.Feedback] = alertVariantModule.Standard
-}
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), t_1 (ref), useSystemBannerVariantsModule (ref), reactModule (ref), reactUtilsModule (ref), useBreakpointModule (ref), breakpointModule (ref), alertActionsModule (ref), flagsModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), iconModule (ref), SEVERITY_TO_ICON (ref), iconSizeModule (ref), iconVariant (ref), textModule (ref), closeAffordanceModule (ref), inputSizeModule (ref), closeAffordanceVariantModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useSystemBannerVariantsModule (ref), reactModule (ref), reactUtilsModule (ref), useBreakpointModule (ref), breakpointModule (ref), alertActionsModule (ref), flagsModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), iconModule (ref), SEVERITY_TO_ICON (ref), iconSizeModule (ref), iconVariant (ref), textModule (ref), closeAffordanceModule (ref), inputSizeModule (ref), closeAffordanceVariantModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useTokensModule()
-	local var3 = useSystemBannerVariantsModule(var2, t_1[var1.variant] or var1.variant, var1.severity)
+	local var3 = useSystemBannerVariantsModule(var2, var1.variant, var1.severity)
 	local var4, var5 = reactModule.useState(nil)
 	local var6 = reactUtilsModule.useComposedRef(p2, var5)
 	local var7 = useBreakpointModule(var4) == breakpointModule.XSmall

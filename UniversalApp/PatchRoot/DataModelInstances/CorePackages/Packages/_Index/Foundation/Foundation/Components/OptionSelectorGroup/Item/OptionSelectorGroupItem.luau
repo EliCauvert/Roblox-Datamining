@@ -1,7 +1,6 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local parent = foundation.Parent
 local reactModule = require(parent.React)
-local icon = require(parent.BuilderIcons).Icon
 local useMotion = require(parent.Motion).useMotion
 local components = foundation.Components
 local iconModule = require(components.Icon)
@@ -85,7 +84,7 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useOptionSelectorGroupModule (ref), flagsModule (ref), inputSizeModule (ref), optionSelectorGroupSizeModule (ref), orientationModule (ref), fillBehaviorModule (ref), useTokensModule (ref), useOptionSelectorGroupItemVariantsModule (ref), useOptionSelectorGroupItemMotionStatesModule (ref), constantsModule (ref), useMotion (ref), reactModule (ref), renderIcon (ref), viewModule (ref), textModule (ref), escapeRichTextModule (ref), getTextStyle (ref), withCommonPropsModule (ref), iconModule (ref), icon (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useOptionSelectorGroupModule (ref), flagsModule (ref), inputSizeModule (ref), optionSelectorGroupSizeModule (ref), orientationModule (ref), fillBehaviorModule (ref), useTokensModule (ref), useOptionSelectorGroupItemVariantsModule (ref), useOptionSelectorGroupItemMotionStatesModule (ref), constantsModule (ref), useMotion (ref), reactModule (ref), renderIcon (ref), viewModule (ref), textModule (ref), escapeRichTextModule (ref), getTextStyle (ref), withCommonPropsModule (ref), iconModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useOptionSelectorGroupModule()
 	local var3 = var2.value == var1.value
@@ -262,8 +261,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				Label = if var5 == orientationModule.Horizontal then var21 elseif flagsModule.FoundationOptionSelectorGroupFixes and var8 then nil else reactModule.createElement(viewModule, { tag = "grow" }),
 				LeadingSpacer = if flagsModule.FoundationOptionSelectorGroupFixes and var8 and not var1.icon then reactModule.createElement(viewModule, { LayoutOrder = 0, Size = UDim2.fromOffset(0, 0) }) else nil,
 				Checkmark = reactModule.createElement(iconModule, {
+					name = "check-large",
 					LayoutOrder = 3,
-					name = icon.CheckLarge,
 					size = var11.icon.size,
 					style = var15.transparency:map(function(p3)
 						-- upvalues: color3 (ref), var3 (ref)

@@ -1,7 +1,6 @@
 ﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
 local _ = require(viewRecycler.Core.Layout)
 local scrollAlignmentModule = require(viewRecycler.Core.Enums.ScrollAlignment)
-local scrollDirectionModule = require(viewRecycler.Core.Enums.ScrollDirection)
 local signalsModule = require(viewRecycler.Parent.Signals)
 local _ = require(viewRecycler.Core.Types)
 
@@ -19,7 +18,7 @@ local _ = function(p1)
 end
 
 return function(p1)
-	-- upvalues: scrollAlignmentModule (ref), scrollDirectionModule (ref), signalsModule (ref)
+	-- upvalues: scrollAlignmentModule (ref), signalsModule (ref)
 	local contentAlignment = p1.contentAlignment or scrollAlignmentModule.Start
 	local contentInsetStart = p1.contentInsetStart or 0
 	local contentInsetEnd = p1.contentInsetEnd or 0
@@ -35,9 +34,9 @@ return function(p1)
 	local var5 = 0
 	local var6 = 0
 	local var7 = 0
-	local none = scrollDirectionModule.None
-	local var8, var9 = signalsModule.createSignal(0)
-	local var10, var11 = signalsModule.createSignal(0)
+	local var8 = "none"
+	local var9, var10 = signalsModule.createSignal(0)
+	local var11, var12 = signalsModule.createSignal(0)
 	
 	local function _()
 		-- upvalues: p1 (ref), contentInsetStart (write), contentInsetEnd (write), var6 (write), contentAlignment (write), scrollAlignmentModule (copy)
@@ -48,21 +47,21 @@ return function(p1)
 	end
 	
 	local function refreshContentMetrics()
-		-- upvalues: p1 (ref), contentInsetStart (write), contentInsetEnd (write), var6 (write), contentAlignment (write), scrollAlignmentModule (copy), var9 (ref), var11 (ref)
+		-- upvalues: p1 (ref), contentInsetStart (write), contentInsetEnd (write), var6 (write), contentAlignment (write), scrollAlignmentModule (copy), var10 (ref), var12 (ref)
 		local contentLength = p1.getLayout().getContentLength()
-		local var12 = contentInsetStart + contentLength + contentInsetEnd
+		local var13 = contentInsetStart + contentLength + contentInsetEnd
 		local maxValue = math.max(0, var6 - contentInsetStart - contentInsetEnd - contentLength)
-		local var13 = contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
-		var9(var12)
-		var11(var13)
+		local var14 = contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
+		var10(var13)
+		var12(var14)
 	end
 	
 	local function setScrollOffset(value)
-		-- upvalues: var5 (write), none (write), scrollDirectionModule (copy)
+		-- upvalues: var5 (write), var8 (write)
 		if var5 == value then
 			return false
 		end
-		none = if var5 < value then scrollDirectionModule.Forward else scrollDirectionModule.Backward
+		var8 = if var5 < value then "forward" else "backward"
 		var5 = value
 		
 		return true
@@ -71,50 +70,50 @@ return function(p1)
 	local function clampScrollOffset(value)
 		-- upvalues: p1 (ref), contentInsetStart (write), contentInsetEnd (write), var6 (write), contentAlignment (write), scrollAlignmentModule (copy)
 		local contentLength = p1.getLayout().getContentLength()
-		local var12 = contentInsetStart + contentLength + contentInsetEnd
+		local var13 = contentInsetStart + contentLength + contentInsetEnd
 		local maxValue = math.max(0, var6 - contentInsetStart - contentInsetEnd - contentLength)
 		local _ = contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
 		
-		return math.clamp(value, 0, math.max(0, var12 - var6))
+		return math.clamp(value, 0, math.max(0, var13 - var6))
 	end
 	
 	local function scrollToOffset(value)
-		-- upvalues: p1 (ref), contentInsetStart (write), contentInsetEnd (write), var6 (write), contentAlignment (write), scrollAlignmentModule (copy), var5 (write), none (write), scrollDirectionModule (copy)
+		-- upvalues: p1 (ref), contentInsetStart (write), contentInsetEnd (write), var6 (write), contentAlignment (write), scrollAlignmentModule (copy), var5 (write), var8 (write)
 		assert(math.abs(value) < 1e999, "ViewportModel: scroll offset must be finite")
 		local contentLength = p1.getLayout().getContentLength()
-		local var12 = contentInsetStart + contentLength + contentInsetEnd
+		local var13 = contentInsetStart + contentLength + contentInsetEnd
 		local maxValue = math.max(0, var6 - contentInsetStart - contentInsetEnd - contentLength)
 		local _ = contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
-		local clampedValue = math.clamp(value, 0, math.max(0, var12 - var6))
+		local clampedValue = math.clamp(value, 0, math.max(0, var13 - var6))
 		
 		if var5 == clampedValue then
 			return clampedValue
 		end
-		none = if var5 < clampedValue then scrollDirectionModule.Forward else scrollDirectionModule.Backward
+		var8 = if var5 < clampedValue then "forward" else "backward"
 		var5 = clampedValue
 		
 		return clampedValue
 	end
 	
 	local function setViewportSize(value, p2)
-		-- upvalues: var6 (write), var7 (write), p1 (ref), contentInsetStart (write), contentInsetEnd (write), contentAlignment (write), scrollAlignmentModule (copy), var9 (ref), var11 (ref)
+		-- upvalues: var6 (write), var7 (write), p1 (ref), contentInsetStart (write), contentInsetEnd (write), contentAlignment (write), scrollAlignmentModule (copy), var10 (ref), var12 (ref)
 		if var6 == value and var7 == p2 then
 			return false
 		end
 		var6 = value
 		var7 = p2
 		local contentLength = p1.getLayout().getContentLength()
-		local var12 = contentInsetStart + contentLength + contentInsetEnd
+		local var13 = contentInsetStart + contentLength + contentInsetEnd
 		local maxValue = math.max(0, var6 - contentInsetStart - contentInsetEnd - contentLength)
-		local var13 = contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
-		var9(var12)
-		var11(var13)
+		local var14 = contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
+		var10(var13)
+		var12(var14)
 		
 		return true
 	end
 	
 	local function setContentAlignment(value)
-		-- upvalues: scrollAlignmentModule (copy), contentAlignment (write), p1 (ref), contentInsetStart (write), contentInsetEnd (write), var6 (write), var9 (ref), var11 (ref)
+		-- upvalues: scrollAlignmentModule (copy), contentAlignment (write), p1 (ref), contentInsetStart (write), contentInsetEnd (write), var6 (write), var10 (ref), var12 (ref)
 		local value_1 = value or scrollAlignmentModule.Start
 		assert(if value_1 ~= scrollAlignmentModule.Start then if value_1 ~= scrollAlignmentModule.Center then value_1 == scrollAlignmentModule.End else true else true, "ViewportModel: invalid content alignment")
 		
@@ -123,17 +122,17 @@ return function(p1)
 		end
 		contentAlignment = value_1
 		local contentLength = p1.getLayout().getContentLength()
-		local var12 = contentInsetStart + contentLength + contentInsetEnd
+		local var13 = contentInsetStart + contentLength + contentInsetEnd
 		local maxValue = math.max(0, var6 - contentInsetStart - contentInsetEnd - contentLength)
-		local var13 = contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
-		var9(var12)
-		var11(var13)
+		local var14 = contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
+		var10(var13)
+		var12(var14)
 		
 		return true
 	end
 	
 	local function setContentInsets(value, p2)
-		-- upvalues: contentInsetStart (write), contentInsetEnd (write), p1 (ref), var6 (write), contentAlignment (write), scrollAlignmentModule (copy), var9 (ref), var11 (ref)
+		-- upvalues: contentInsetStart (write), contentInsetEnd (write), p1 (ref), var6 (write), contentAlignment (write), scrollAlignmentModule (copy), var10 (ref), var12 (ref)
 		assert(value >= 0 and value < 1e999, "ViewportModel: content insets must be finite non-negative numbers")
 		assert(p2 >= 0 and p2 < 1e999, "ViewportModel: content insets must be finite non-negative numbers")
 		
@@ -143,41 +142,41 @@ return function(p1)
 		contentInsetStart = value
 		contentInsetEnd = p2
 		local contentLength = p1.getLayout().getContentLength()
-		local var12 = contentInsetStart + contentLength + contentInsetEnd
+		local var13 = contentInsetStart + contentLength + contentInsetEnd
 		local maxValue = math.max(0, var6 - contentInsetStart - contentInsetEnd - contentLength)
-		local var13 = contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
-		var9(var12)
-		var11(var13)
+		local var14 = contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
+		var10(var13)
+		var12(var14)
 		
 		return true
 	end
 	
 	local function getLayoutViewport(p2, p3)
-		-- upvalues: var5 (write), var6 (write), var10 (ref), contentInsetStart (write), contentInsetEnd (write)
+		-- upvalues: var5 (write), var6 (write), var11 (ref), contentInsetStart (write), contentInsetEnd (write)
 		p2 = p2 or var5
 		p3 = p3 or p2 + var6
-		local var12 = var10(false)
-		local var13 = p2 + contentInsetStart - var12
+		local var13 = var11(false)
+		local var14 = p2 + contentInsetStart - var13
 		
-		return var13, math.max(var13, p3 - contentInsetEnd - var12)
+		return var14, math.max(var14, p3 - contentInsetEnd - var13)
 	end
 	
 	local function getVisibleRange(p2, p3)
-		-- upvalues: var5 (write), var6 (write), var10 (ref), contentInsetStart (write), contentInsetEnd (write), p1 (ref)
+		-- upvalues: var5 (write), var6 (write), var11 (ref), contentInsetStart (write), contentInsetEnd (write), p1 (ref)
 		p2 = p2 or var5
 		p3 = p3 or p2 + var6
-		local var12 = var10(false)
-		local var13 = p2 + contentInsetStart - var12
+		local var13 = var11(false)
+		local var14 = p2 + contentInsetStart - var13
 		
-		return p1.getLayout().getIntersectingIndexRange(var13, math.max(var13, p3 - contentInsetEnd - var12))
+		return p1.getLayout().getIntersectingIndexRange(var14, math.max(var14, p3 - contentInsetEnd - var13))
 	end
 	
 	local function getPlacedItemLayout(p2)
-		-- upvalues: p1 (ref), var10 (ref)
+		-- upvalues: p1 (ref), var11 (ref)
 		local itemLayout = p1.getLayout().getItemLayout(p2)
 		
 		return {
-			startOffset = itemLayout.startOffset + var10(false),
+			startOffset = itemLayout.startOffset + var11(false),
 			length = itemLayout.length,
 			crossAxisIndex = itemLayout.crossAxisIndex,
 			crossAxisCount = itemLayout.crossAxisCount
@@ -185,14 +184,14 @@ return function(p1)
 	end
 	
 	local function getScrollState()
-		-- upvalues: var8 (ref), var6 (write), var5 (write), endThreshold (write)
-		local var12 = var8(false)
-		local maxValue = math.max(0, var12 - var6 - var5)
+		-- upvalues: var9 (ref), var6 (write), var5 (write), endThreshold (write)
+		local var13 = var9(false)
+		local maxValue = math.max(0, var13 - var6 - var5)
 		
 		return {
 			scrollOffset = var5,
 			viewportLength = var6,
-			contentLength = var12,
+			contentLength = var13,
 			distanceFromEnd = maxValue,
 			atStart = var5 <= 0,
 			atEnd = maxValue <= endThreshold
@@ -209,37 +208,37 @@ return function(p1)
 		end
 		local itemLayout = layout.getItemLayout(math.clamp(value, 1, itemCount))
 		local contentLength = p1.getLayout().getContentLength()
-		local var12 = contentInsetStart + contentLength + contentInsetEnd
+		local var13 = contentInsetStart + contentLength + contentInsetEnd
 		local maxValue = math.max(0, var6 - contentInsetStart - contentInsetEnd - contentLength)
-		local var13 = contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
+		local var14 = contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
 		
-		return math.clamp(if p2 == scrollAlignmentModule.Center then var13 + itemLayout.startOffset + itemLayout.length / 2 - contentInsetStart - math.max(0, var6 - contentInsetStart - contentInsetEnd) / 2 elseif p2 == scrollAlignmentModule.End then var13 + itemLayout.startOffset + itemLayout.length - var6 + contentInsetEnd else var13 + itemLayout.startOffset - contentInsetStart, 0, math.max(0, var12 - var6))
+		return math.clamp(if p2 == scrollAlignmentModule.Center then var14 + itemLayout.startOffset + itemLayout.length / 2 - contentInsetStart - math.max(0, var6 - contentInsetStart - contentInsetEnd) / 2 elseif p2 == scrollAlignmentModule.End then var14 + itemLayout.startOffset + itemLayout.length - var6 + contentInsetEnd else var14 + itemLayout.startOffset - contentInsetStart, 0, math.max(0, var13 - var6))
 	end
 	
 	local contentLength = p1.getLayout().getContentLength()
-	local var12 = contentInsetStart + contentLength + contentInsetEnd
+	local var13 = contentInsetStart + contentLength + contentInsetEnd
 	local maxValue = math.max(0, var6 - contentInsetStart - contentInsetEnd - contentLength)
-	local var13 = contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
-	var9(var12)
-	var11(var13)
+	local var14 = contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
+	var10(var13)
+	var12(var14)
 	
 	return {
 		setScrollOffset = setScrollOffset,
 		clampScrollOffset = clampScrollOffset,
 		scrollToOffset = scrollToOffset,
 		scrollBy = function(p2)
-			-- upvalues: var5 (write), p1 (ref), contentInsetStart (write), contentInsetEnd (write), var6 (write), contentAlignment (write), scrollAlignmentModule (copy), none (write), scrollDirectionModule (copy)
+			-- upvalues: var5 (write), p1 (ref), contentInsetStart (write), contentInsetEnd (write), var6 (write), contentAlignment (write), scrollAlignmentModule (copy), var8 (write)
 			assert(math.abs(p2) < 1e999, "ViewportModel: scroll delta must be finite")
-			local var14 = var5 + p2
-			assert(math.abs(var14) < 1e999, "ViewportModel: scroll offset must be finite")
+			local var15 = var5 + p2
+			assert(math.abs(var15) < 1e999, "ViewportModel: scroll offset must be finite")
 			local contentLength = p1.getLayout().getContentLength()
-			local var15 = contentInsetStart + contentLength + contentInsetEnd
+			local var16 = contentInsetStart + contentLength + contentInsetEnd
 			local maxValue = math.max(0, var6 - contentInsetStart - contentInsetEnd - contentLength)
 			local _ = contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
-			local clampedValue = math.clamp(var14, 0, math.max(0, var15 - var6))
+			local clampedValue = math.clamp(var15, 0, math.max(0, var16 - var6))
 			
 			if var5 ~= clampedValue then
-				none = if var5 < clampedValue then scrollDirectionModule.Forward else scrollDirectionModule.Backward
+				var8 = if var5 < clampedValue then "forward" else "backward"
 				var5 = clampedValue
 			end
 			return clampedValue
@@ -259,8 +258,8 @@ return function(p1)
 			return var5
 		end,
 		getScrollDirection = function()
-			-- upvalues: none (write)
-			return none
+			-- upvalues: var8 (write)
+			return var8
 		end,
 		getScrollAxisLength = function()
 			-- upvalues: var6 (write)
@@ -279,7 +278,7 @@ return function(p1)
 		getPlacedItemLayout = getPlacedItemLayout,
 		getScrollState = getScrollState,
 		getScrollOffsetForItem = getScrollOffsetForItem,
-		contentLength = var8,
-		contentStartOffset = var10
+		contentLength = var9,
+		contentStartOffset = var11
 	}
 end

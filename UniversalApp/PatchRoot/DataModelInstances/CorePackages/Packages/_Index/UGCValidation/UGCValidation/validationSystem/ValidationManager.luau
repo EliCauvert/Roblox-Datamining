@@ -12,7 +12,6 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getFFlagDebugAllowHRDUploadOnBundleBackendModule = require(parent.flags.getFFlagDebugAllowHRDUploadOnBundleBackend)
 local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.getFFlagUGCValidationAnimationPackSupport)
-local getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule = require(parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
 local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 local getFFlagDebugUGCDisableAssetQualityChecksModule = require(parent.flags.getFFlagDebugUGCDisableAssetQualityChecks)
 local getEngineFeatureEngineUGCValidateEmoteAnimationExportModule = require(parent.flags.getEngineFeatureEngineUGCValidateEmoteAnimationExport)
@@ -401,157 +400,102 @@ local _ = function(p16)
 	return p16[1]
 end
 
-local _ = function(p17, p18, p19)
-	for i, v in p17 do
-		if v.Name == p18 then
-			return v
-		end
-	end
-	return if p19 then p17[1] else nil
-end
-
-local function synthesizeRootFromFolders(p20, p21, p22)
-	local folder = Instance.new("Folder")
-	
-	for i, v in p20 do
-		local var18
-		local allSelectedInstances = v.allSelectedInstances
-		
-		for i_1, v_1 in allSelectedInstances do
-			if v_1.Name == p21 then
-				var18 = v_1
-				if var18 ~= nil then
-					if var18:IsA("Folder") or var18:IsA("Model") then
-						for i_2, i_1 in var18:GetChildren() do
-							i_1:Clone().Parent = folder
-						end
-					else
-						var18:Clone().Parent = folder
-					end
-				end
-			end
-		end
-		var18 = if p22 then allSelectedInstances[1] else nil
-	end
-	return folder
-end
-
-function t_1.ValidateAsset(value, p23, p24)
-	-- upvalues: httpService (ref), constantsModule (ref), getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (ref), createConsumerConfigWithDefaults (ref), runValidationOnRootInstance (ref)
-	local var19
+function t_1.ValidateAsset(value, p17, p18)
+	-- upvalues: httpService (ref), constantsModule (ref), createConsumerConfigWithDefaults (ref), runValidationOnRootInstance (ref)
+	local var18
 	local t = {
 		jobId = httpService:GenerateGUID(),
 		entrypointInput = value
 	}
 	
 	if #value == 0 then
-		var19 = nil
+		var18 = nil
 	else
 		for i, v in value do
 			if v.Name == constantsModule.FOLDER_NAMES.R15ArtistIntent then
-				var19 = v
+				var18 = v
 			end
 		end
-		var19 = value[1]
+		var18 = value[1]
 	end
-	local var20
-	t.rootInstance = var19
-	
-	if getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() then
-		local r15Fixed = constantsModule.FOLDER_NAMES.R15Fixed
-		
-		for v, v in value do
-			if v.Name == r15Fixed then
-				var20 = v
-			end
-		end
-		var20 = nil
-	else
-		var20 = nil
-	end
-	t.r15LegacyDuplicateRoot = var20
-	t.uploadEnum = { assetType = p23 }
-	t.consumerConfig = createConsumerConfigWithDefaults(p24)
+	t.rootInstance = var18
+	t.uploadEnum = { assetType = p17 }
+	t.consumerConfig = createConsumerConfigWithDefaults(p18)
 	t.hsrAssets = {}
 	
 	return runValidationOnRootInstance(t)
 end
 
-function t_1.ValidateFinalizedBundle(p25, p26, p27)
-	-- upvalues: getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), r15plusUtilsModule (ref), getFFlagUGCValidationAnimationPackSupportModule (ref), constantsModule (ref), getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (ref), synthesizeRootFromFolders (ref), httpService (ref), createConsumerConfigWithDefaults (ref), runValidationOnRootInstance (ref)
+function t_1.ValidateFinalizedBundle(p19, p20, p21)
+	-- upvalues: getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), r15plusUtilsModule (ref), getFFlagUGCValidationAnimationPackSupportModule (ref), constantsModule (ref), httpService (ref), createConsumerConfigWithDefaults (ref), runValidationOnRootInstance (ref)
 	if getFFlagDebugAllowHRDUploadOnBundleBackendModule() then
-		r15plusUtilsModule.setIsBackendBundleUpload(if p27.source ~= "Publish" then p27.source == "Backend" else true)
+		r15plusUtilsModule.setIsBackendBundleUpload(if p21.source ~= "Publish" then p21.source == "Backend" else true)
 	end
-	local var21
+	local var19
 	local _ = nil
-	local var22 = nil
 	
-	if getFFlagUGCValidationAnimationPackSupportModule() and p26 == Enum.BundleType.Animations then
+	if getFFlagUGCValidationAnimationPackSupportModule() and p20 == Enum.BundleType.Animations then
 		local model = Instance.new("Model")
 		
-		for i, v in p25 do
-			local var23
+		for i, v in p19 do
+			local var20
 			local allSelectedInstances = v.allSelectedInstances
 			
 			if #allSelectedInstances == 0 then
-				var23 = nil
-				if var23 ~= nil then
-					var23:Clone().Parent = model
+				var20 = nil
+				if var20 ~= nil then
+					var20:Clone().Parent = model
 				end
 			end
 			for i_2, v_2 in allSelectedInstances do
 				if v_2.Name == constantsModule.FOLDER_NAMES.R15ArtistIntent then
-					var23 = v_2
+					var20 = v_2
 				end
 			end
-			var23 = allSelectedInstances[1]
+			var20 = allSelectedInstances[1]
 		end
-		var21 = model
-	elseif getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() then
-		var21 = synthesizeRootFromFolders(p25, constantsModule.FOLDER_NAMES.R15ArtistIntent, true)
-		var22 = synthesizeRootFromFolders(p25, constantsModule.FOLDER_NAMES.R15Fixed, true)
+		var19 = model
 	else
 		local folder = Instance.new("Folder")
 		
-		for i, v in p25 do
-			local var24
+		for i, v in p19 do
+			local var21
 			local allSelectedInstances = v.allSelectedInstances
 			
 			if #allSelectedInstances == 0 then
-				var24 = nil
-				if var24 ~= nil then
-					if var24:IsA("Folder") or var24:IsA("Model") then
-						for i_2, i_1 in var24:GetChildren() do
+				var21 = nil
+				if var21 ~= nil then
+					if var21:IsA("Folder") or var21:IsA("Model") then
+						for i_2, i_1 in var21:GetChildren() do
 							i_1:Clone().Parent = folder
 						end
 					else
-						var24:Clone().Parent = folder
+						var21:Clone().Parent = folder
 					end
 				end
 			end
 			for i_1, v_1 in allSelectedInstances do
 				if v_1.Name == constantsModule.FOLDER_NAMES.R15ArtistIntent then
-					var24 = v_1
+					var21 = v_1
 				end
 			end
-			var24 = allSelectedInstances[1]
+			var21 = allSelectedInstances[1]
 		end
-		var21 = folder
+		var19 = folder
 	end
-	local var25 = runValidationOnRootInstance({
+	local var22 = runValidationOnRootInstance({
 		jobId = httpService:GenerateGUID(),
-		entrypointInput = p25,
-		rootInstance = var21,
-		r15LegacyDuplicateRoot = var22,
-		uploadEnum = { bundleType = p26 },
-		consumerConfig = createConsumerConfigWithDefaults(p27),
+		entrypointInput = p19,
+		rootInstance = var19,
+		uploadEnum = { bundleType = p20 },
+		consumerConfig = createConsumerConfigWithDefaults(p21),
 		hsrAssets = {}
 	})
 	
 	if getFFlagDebugAllowHRDUploadOnBundleBackendModule() then
 		r15plusUtilsModule.setIsBackendBundleUpload(false)
 	end
-	return var25
+	return var22
 end
 
 return t_1

@@ -1,20 +1,20 @@
 ﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
 local averagePropagationModule = require(viewRecycler.Core.Layout.Policies.AveragePropagation)
-local collapsedEstimatedTreeModule = require(viewRecycler.Core.Layout.SizeTree.CollapsedEstimatedTree)
 local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceChangeType)
 local detachedMeasurementCacheModule = require(viewRecycler.Core.Layout.Policies.DetachedMeasurementCache)
 local _ = require(viewRecycler.Core.Layout.LayoutRuntime)
+local orderStatisticTreeModule = require(viewRecycler.Core.Layout.SizeTree.OrderStatisticTree)
 local typesModule = require(viewRecycler.Core.Types)
 local staticPartsModule = require(viewRecycler.Core.Layout.staticParts)
 local var1 = require(viewRecycler.Internal.createDebugLogger)("Layout.measured")
 
 return function(p1)
-	-- upvalues: averagePropagationModule (ref), detachedMeasurementCacheModule (ref), collapsedEstimatedTreeModule (ref), typesModule (ref), var1 (ref), dataSourceChangeTypeModule (ref), staticPartsModule (ref)
+	-- upvalues: averagePropagationModule (ref), detachedMeasurementCacheModule (ref), orderStatisticTreeModule (ref), typesModule (ref), var1 (ref), dataSourceChangeTypeModule (ref), staticPartsModule (ref)
 	p1 = p1 or {}
 	local estimatedItemLength = p1.estimatedItemLength or 50
 	local estimationPolicy = p1.estimationPolicy or averagePropagationModule.new({ initialAverage = estimatedItemLength })
 	local var2 = detachedMeasurementCacheModule.new(p1.detachedMeasurementCapacity)
-	local var3 = collapsedEstimatedTreeModule.new(estimatedItemLength)
+	local var3 = orderStatisticTreeModule.new(estimatedItemLength)
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}

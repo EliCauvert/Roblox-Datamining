@@ -14,8 +14,7 @@ return function(p1)
 		anchorUri = p1.anchorUri,
 		position = p1.position,
 		depth = p1.depth,
-		parentPopoverId = p1.parentPopoverId,
-		isFocusable = if flagsModule.FoundationPopoverPluginFocusable then p1.isFocusable else nil
+		parentPopoverId = p1.parentPopoverId
 	})
 	local var4 = reactModule.useRef(p1.onClose)
 	var4.current = p1.onClose
@@ -31,9 +30,9 @@ return function(p1)
 			var4.current()
 		end, {})
 		local var9 = reactUtilsModule.useAsync(function()
-			-- upvalues: p1 (ref), var6 (ref), var5 (ref), var3 (ref), var8 (ref), flagsModule (copy), var2 (ref)
+			-- upvalues: p1 (ref), var6 (ref), var5 (ref), var3 (ref), var8 (ref), var2 (ref)
 			if p1.isOpen and not var6 then
-				local var10, var11 = var5.current(var3.current.anchorUri, var3.current.position, var8, var3.current.depth, var3.current.parentPopoverId, if flagsModule.FoundationPopoverPluginFocusable then var3.current.isFocusable else nil)
+				local var10, var11 = var5.current(var3.current.anchorUri, var3.current.position, var8, var3.current.depth, var3.current.parentPopoverId)
 				var2.current = var11
 				
 				return var10
@@ -52,9 +51,9 @@ return function(p1)
 		end, { p1.isOpen })
 	else
 		local var10 = reactUtilsModule.useAsync(function()
-			-- upvalues: p1 (ref), var5 (ref), var3 (ref), var4 (ref), flagsModule (copy), var2 (ref)
+			-- upvalues: p1 (ref), var5 (ref), var3 (ref), var4 (ref), var2 (ref)
 			if p1.isOpen then
-				local var11, var12 = var5.current(var3.current.anchorUri, var3.current.position, var4.current, var3.current.depth, var3.current.parentPopoverId, if flagsModule.FoundationPopoverPluginFocusable then var3.current.isFocusable else nil)
+				local var11, var12 = var5.current(var3.current.anchorUri, var3.current.position, var4.current, var3.current.depth, var3.current.parentPopoverId)
 				var2.current = var12
 				
 				return var11

@@ -1,7 +1,6 @@
 ﻿local parent = script.Parent.Parent
 local eventPropagationModule = require(parent.EventPropagation)
 local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigationRefocusSuppression = require(parent.SafeFlags).createGetFFlag("FocusNavigationRefocusSuppression")
 local createSignal = focusNavigationUtilsModule.createSignal
 local shallowEqual = focusNavigationUtilsModule.shallowEqual
 local getAncestors = focusNavigationUtilsModule.getAncestors
@@ -11,7 +10,7 @@ local _ = require(script.Parent.types)
 local t = {}
 t.__index = t
 
-function t.new(p1, p2)
+function t.new(p1)
 	-- upvalues: createSignal (ref), eventPropagationModule (ref), t (ref)
 	local var1, var2 = createSignal({})
 	local var3, var4 = createSignal(p1.getSelection())
@@ -23,7 +22,6 @@ function t.new(p1, p2)
 		_eventMapByInstance = setmetatable({}, { __mode = "k" }),
 		_focusBehaviorByInstance = setmetatable({}, { __mode = "k" }),
 		_engineEventConnections = {},
-		_shouldSuppressContainerRefocus = if p2 then p2.shouldSuppressContainerRefocus else nil,
 		_fireActiveEventMapSignal = var2,
 		_fireFocusedGuiObjectSignal = var4,
 		activeEventMap = var1,
@@ -90,7 +88,7 @@ end
 function t:_cancelHandler(p1, p2)
 	if p2 ~= "blur" and p2 ~= "focus" then
 		self._eventPropagationService:propagateEvent(p1, p2, {
-			KeyCode = Enum.KeyCode.None,
+			KeyCode = Enum.KeyCode.Unknown,
 			UserInputType = Enum.UserInputType.None,
 			UserInputState = Enum.UserInputState.Cancel
 		}, { synthetic = false, silent = false })
@@ -195,7 +193,7 @@ function t:deregisterEventHandlers(p6, p7)
 end
 
 function t:registerFocusBehavior(p8, p9)
-	-- upvalues: mockableWarn (ref), focusNavigationRefocusSuppression (ref), isValidFocusTargetModule (ref)
+	-- upvalues: mockableWarn (ref), isValidFocusTargetModule (ref)
 	if _G.__DEV__ then
 		local var7 = self._focusBehaviorByInstance[p8]
 		
@@ -206,18 +204,16 @@ function t:registerFocusBehavior(p8, p9)
 	self._focusBehaviorByInstance[p8] = {
 		behavior = p9,
 		connection = p8.SelectionChanged:Connect(function(p10, p11, p12)
-			-- upvalues: p8 (ref), focusNavigationRefocusSuppression (copy), self (ref), p9 (ref), isValidFocusTargetModule (copy)
+			-- upvalues: p8 (ref), p9 (ref), isValidFocusTargetModule (copy), self (ref)
 			if p12 and (p10 or p12:IsDescendantOf(p8)) then
 				if not p11 or not p11:IsDescendantOf(p8) then
 					local var8 = false
 					
-					if not (if focusNavigationRefocusSuppression() then self._shouldSuppressContainerRefocus and self._shouldSuppressContainerRefocus() else false) then
-						for i, v in p9.getTargets() do
-							if isValidFocusTargetModule(v) then
-								self:focusGuiObject(v, false)
-								var8 = true
-								break
-							end
+					for i, v in p9.getTargets() do
+						if isValidFocusTargetModule(v) then
+							self:focusGuiObject(v, false)
+							var8 = true
+							break
 						end
 					end
 					if var8 or not p9.onDescendantFocusChanged then
@@ -304,7 +300,7 @@ function t:dispatchSyntheticEvent(p12, p13, p14)
 			
 			return true
 		elseif _G.__DEV__ then
-			mockableWarn("dispatchSyntheticEvent: Cannot dispatch event \"" .. p37 .. "\" on target")
+			mockableWarn("dispatchSyntheticEvent: Cannot dispatch event \"" .. p36 .. "\" on target")
 		end
 		return false
 	elseif _G.__DEV__ then

@@ -171,10 +171,10 @@ return reactModule.forwardRef(function(p1, p2)
 		var34,
 		var25
 	})
-	local var41 = reactModule.useCallback(function(p3, p4, p5, p6, p7, p8)
-		-- upvalues: var2 (ref), flagsModule (copy)
-		return var2.registerPopoverAsync(p3, p4, p5, p6, p7, if flagsModule.FoundationPopoverPluginFocusable then p8 else nil)
-	end, { var2.registerPopoverAsync })
+	local var41 = reactModule.useCallback(function(p3, p4, p5, p6)
+		-- upvalues: var4 (ref), var2 (ref)
+		return var2.registerPopoverAsync(p3, p4, p5, p6, var4)
+	end, { var2.registerPopoverAsync, var4 })
 	local var42 = reactModule.useRef(false)
 	reactModule.useEffect(function()
 		-- upvalues: var1 (ref), var42 (ref), loggerModule (copy)
@@ -196,8 +196,7 @@ return reactModule.forwardRef(function(p1, p2)
 		registerPanelAsync = var41,
 		position = var40,
 		depth = if relativeIndex ~= nil then 0 else relativeIndex,
-		parentPopoverId = var4,
-		isFocusable = if flagsModule.FoundationPopoverPluginFocusable then var1.isFocusable else nil
+		parentPopoverId = var4
 	})
 	local _ = nil
 	local _ = nil

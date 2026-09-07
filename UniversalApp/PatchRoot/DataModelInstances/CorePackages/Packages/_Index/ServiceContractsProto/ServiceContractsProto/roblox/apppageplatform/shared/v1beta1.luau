@@ -13,11 +13,11 @@ return {
 	community_data = require(script.community_data),
 	community_user_membership_data = require(script.community_user_membership_data),
 	component_shared = require(script.component_shared),
+	contact_data = require(script.contact_data),
 	creator_data = require(script.creator_data),
 	custom_options = require(script.custom_options),
 	display_location = require(script.display_location),
 	event_data = require(script.event_data),
-	friend_recommendation_data = require(script.friend_recommendation_data),
 	game_developer_product_data = require(script.game_developer_product_data),
 	game_pass_data = require(script.game_pass_data),
 	game_subscription_data = require(script.game_subscription_data),
@@ -45,11 +45,11 @@ return {
 	ui_component_schema = require(script.ui_component_schema),
 	ui_component_type = require(script.ui_component_type),
 	universe_data = require(script.universe_data),
-	universe_private_server_data = require(script.universe_private_server_data),
 	universe_user_favorite_data = require(script.universe_user_favorite_data),
 	universe_user_follow_data = require(script.universe_user_follow_data),
 	universe_user_follow_limit_data = require(script.universe_user_follow_limit_data),
 	universe_user_vote_data = require(script.universe_user_vote_data),
 	universe_user_vote_feedback_metadata_data = require(script.universe_user_vote_feedback_metadata_data),
-	user_profile_data = require(script.user_profile_data)
+	user_profile_data = require(script.user_profile_data),
+	user_recommendation_data = require(script.user_recommendation_data)
 }

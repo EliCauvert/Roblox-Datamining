@@ -1,11 +1,11 @@
 ﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
 local viewRecyclerModule = require(viewRecyclerReact.Parent.ViewRecycler)
-local compositionPlacementModule = require(viewRecyclerReact.ReactAdapter.Private.CompositionPlacement)
-local recyclingRootModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclingRoot)
+local compositionPlacementManagerModule = require(viewRecyclerReact.ReactAdapter.Private.CompositionPlacementManager)
+local recyclingRuntimeModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclingRuntime)
 local signalsModule = require(viewRecyclerReact.Parent.Signals)
 local signalsExperimentalModule = require(viewRecyclerReact.Parent.SignalsExperimental)
 local createRecyclableViewModule = require(viewRecyclerReact.ReactAdapter.createRecyclableView)
-local recyclableViewModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclableView)
+local recyclableViewRecordModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclableViewRecord)
 
 local function _()
 	-- upvalues: createRecyclableViewModule (ref)
@@ -16,14 +16,14 @@ end
 
 return {
 	recyclingScopeHighWater = function(p1, p2)
-		-- upvalues: recyclingRootModule (ref), createRecyclableViewModule (ref)
+		-- upvalues: recyclingRuntimeModule (ref), createRecyclableViewModule (ref)
 		local var1 = 0
-		local var2 = recyclingRootModule.new(function()
+		local var2 = recyclingRuntimeModule.new(function()
 			-- upvalues: var1 (write)
 			var1 += 1
 		end)
-		local scope = var2.getScope({})
-		local var3 = scope == var2.getScope({})
+		local recyclingScope = var2.getRecyclingScope({})
+		local var3 = recyclingScope == var2.getRecyclingScope({})
 		local var4 = createRecyclableViewModule(function()
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
@@ -48,10 +48,10 @@ return {
 				generation = i
 			}
 		end
-		local acquired = scope.exchange(t, {}, list).acquired
+		local acquired = recyclingScope.exchange(t, {}, list).acquired
 		
 		for i_1, v in acquired do
-			v.view.set(list_1[i_1])
+			v.record.set(list_1[i_1])
 		end
 		local list_2 = table.create(p1)
 		local list_3 = table.create(p1)
@@ -65,25 +65,25 @@ return {
 				generation = p1 + i_2
 			}
 		end
-		local acquired_1 = scope.exchange(t, acquired, list_2).acquired
+		local acquired_1 = recyclingScope.exchange(t, acquired, list_2).acquired
 		
 		for i_3, v_1 in acquired_1 do
-			v_1.view.set(list_3[i_3])
+			v_1.record.set(list_3[i_3])
 		end
 		for i_4, v_2 in list_1 do
 			v_2.value.placeholder:Destroy()
 		end
 		local var7 = (p2() - var6) * 1000
-		local count = #scope.getScopeInventory()
-		local count_1 = #scope.getScopeInventory()
+		local count = #recyclingScope.getScopeInventory()
+		local count_1 = #recyclingScope.getScopeInventory()
 		local var8 = 0
 		
-		for i_5 in var2.getPortalChildren(function()
+		for i_5 in var2.getHostChildren(function()
 			return nil
 		end) do
 			var8 += 1
 		end
-		scope.exchange(t, acquired_1, {})
+		recyclingScope.exchange(t, acquired_1, {})
 		var2.destroy()
 		
 		return var7, {
@@ -97,14 +97,14 @@ return {
 		}
 	end,
 	compositionChurn = function(p3)
-		-- upvalues: viewRecyclerModule (ref), recyclableViewModule (ref), signalsExperimentalModule (ref), compositionPlacementModule (ref), createRecyclableViewModule (ref), signalsModule (ref)
+		-- upvalues: viewRecyclerModule (ref), recyclableViewRecordModule (ref), signalsExperimentalModule (ref), compositionPlacementManagerModule (ref), createRecyclableViewModule (ref), signalsModule (ref)
 		local var9 = 1
 		local var10 = 0
 		local var11 = viewRecyclerModule.Adapter.createRecyclingScope({
 			adapter = {
 				create = function(p4)
-					-- upvalues: recyclableViewModule (copy), var9 (write), var10 (write)
-					local var12 = recyclableViewModule(var9, p4, nil)
+					-- upvalues: recyclableViewRecordModule (copy), var9 (write), var10 (write)
+					local var12 = recyclableViewRecordModule(var9, p4, nil)
 					var9 += 1
 					local set = var12.set
 					
@@ -120,7 +120,7 @@ return {
 				batch = signalsExperimentalModule.batch
 			}
 		})
-		local var12 = compositionPlacementModule.new(var11, function() end)
+		local var12 = compositionPlacementManagerModule.new(var11, function() end)
 		local var13 = createRecyclableViewModule(function()
 			return nil
 		end, { readiness = "ReadyOnAssignment" })

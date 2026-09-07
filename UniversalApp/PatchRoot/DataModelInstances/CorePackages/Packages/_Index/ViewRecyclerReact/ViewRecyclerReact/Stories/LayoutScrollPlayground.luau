@@ -26,7 +26,7 @@ local frozen_1 = table.freeze({
 	shortLength = 48,
 	longLength = 96,
 	measuredEstimate = 72,
-	presentationMode = "immediate",
+	presentationMode = "untilCommit",
 	scenario = frozen.Fixed
 })
 local t = {
@@ -325,7 +325,7 @@ local function LayoutScrollPlayground(value)
 				axis = var1.axis,
 				data = { items = var5, getItemKey = rowFixturesModule.getItemKey },
 				diagnostics = if var1.diagnostics then var17 else nil,
-				itemType = if var1.scenario == frozen.Measured then if var1.presentationMode == unknownModule.RecyclableViewReadiness.ReadyOnAssignment then rowFixturesModule.ImmediateMeasuredRow else rowFixturesModule.MeasuredRow elseif var1.presentationMode == unknownModule.RecyclableViewReadiness.ReadyOnAssignment then rowFixturesModule.ImmediateSimpleRow else rowFixturesModule.SimpleRow,
+				itemType = if var1.scenario == frozen.Measured then if var1.presentationMode == "ReadyOnAssignment" then rowFixturesModule.ImmediateMeasuredRow else rowFixturesModule.MeasuredRow elseif var1.presentationMode == "ReadyOnAssignment" then rowFixturesModule.ImmediateSimpleRow else rowFixturesModule.SimpleRow,
 				layout = var4,
 				listRef = var8,
 				onScrollOffsetChanged = var16,

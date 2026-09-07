@@ -10,7 +10,6 @@ local getAssetCreationDetailsRCCModule = require(parent.util.getAssetCreationDet
 local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 local getFFlagUGCValidateForwardIECRestrictedUserIdsModule = require(parent.flags.getFFlagUGCValidateForwardIECRestrictedUserIds)
 local getFFlagUGCValidateBackendInExperienceViaCanPublishModule = require(parent.flags.getFFlagUGCValidateBackendInExperienceViaCanPublish)
-local getFFlagUGCValidateMakeupCategoryParityModule = require(parent.flags.getFFlagUGCValidateMakeupCategoryParity)
 local t = { MODERATION_STATE_REVIEWING = true, Reviewing = true }
 local t_1 = { MODERATION_STATE_APPROVED = true, Approved = true }
 
@@ -31,14 +30,14 @@ local function runStudio(p2, p3, p4)
 		table.insert(t, i)
 	end
 	if #t == 0 then return end
-	t, var18 = getAssetCreationDetailsModule(t)
+	t, var17 = getAssetCreationDetailsModule(t)
 	
-	if not t or #var18 ~= #t then
+	if not t or #var17 ~= #t then
 		p2:fail(errorSourceStringsModule.Keys.DescendantIdFetchFailed, { InstanceFullName = p3:GetFullName() })
 		
 		return
 	end
-	for v, v_1 in var18 do
+	for v, v_1 in var17 do
 		if if v_1.status ~= constantsModule.ASSET_STATUS.UNKNOWN then if v_1.status ~= constantsModule.ASSET_STATUS.REVIEW_PENDING then v_1.status == constantsModule.ASSET_STATUS.MODERATED else true else true then
 			local var1 = tostring(v_1.assetId)
 			local var2 = p4[var1]
@@ -87,7 +86,7 @@ local function runBackend(p6, p7, p8)
 		local moderationState = var5.moderationResult.moderationState
 		
 		if t[moderationState] then
-			p6:forceError("Failed to load asset " .. var23.instance:GetFullName() .. "." .. var23.fieldName .. " ( " .. i_1 .. " ) that is still going through the review process. Please, wait for a notification of completion from the review process and try again.")
+			p6:forceError("Failed to load asset " .. var22.instance:GetFullName() .. "." .. var22.fieldName .. " ( " .. i_1 .. " ) that is still going through the review process. Please, wait for a notification of completion from the review process and try again.")
 		end
 		if not t_1[moderationState] then
 			p6:fail(errorSourceStringsModule.Keys.DescendantIdNotApproved, {
@@ -128,7 +127,7 @@ local function runCanPublishOwnershipCheck(p9, p10, p11, p12)
 end
 
 return {
-	categories = if getFFlagUGCValidateMakeupCategoryParityModule() then constantsModule.AllAssetUploadCategories else constantsModule.AllAssetUploadCategoriesIncludingMakeup,
+	categories = constantsModule.AllAssetUploadCategoriesIncludingMakeup,
 	requiredData = {
 		validationEnumsModule.SharedDataMember.rootInstance,
 		validationEnumsModule.SharedDataMember.consumerConfig,

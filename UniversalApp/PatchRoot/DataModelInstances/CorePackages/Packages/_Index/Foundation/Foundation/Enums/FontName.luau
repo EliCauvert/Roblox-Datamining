@@ -1,1 +1,0 @@
-﻿return { BuilderSans = "BuilderSans", Cartoon = "Cartoon" }

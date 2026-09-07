@@ -1,4 +1,5 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
+local flagsModule = require(foundation.Utility.Flags)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local _ = require(foundation.Enums.ButtonVariant)
 local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
@@ -9,7 +10,7 @@ local getSharedVariantsModule = require(script.Parent.getSharedVariants)
 local _ = require(foundation.Providers.Style.Tokens)
 
 local var1 = function(p1)
-	-- upvalues: getSharedVariantsModule (ref), inputSizeModule (ref)
+	-- upvalues: getSharedVariantsModule (ref), inputSizeModule (ref), flagsModule (ref)
 	local var2 = getSharedVariantsModule(p1)
 	
 	return {
@@ -27,7 +28,12 @@ local var1 = function(p1)
 				icon = {
 					size = UDim2.fromOffset(p1.Size.Size_300, p1.Size.Size_300)
 				},
-				text = { tag = "text-label-small" }
+				text = {
+					tag = {
+						["text-label-small"] = flagsModule.FoundationButtonLabelTypography,
+						["text-title-small"] = not flagsModule.FoundationButtonLabelTypography
+					}
+				}
 			},
 			[inputSizeModule.Small] = {
 				container = {
@@ -38,7 +44,12 @@ local var1 = function(p1)
 				icon = {
 					size = UDim2.fromOffset(p1.Size.Size_400, p1.Size.Size_400)
 				},
-				text = { tag = "text-label-small" }
+				text = {
+					tag = {
+						["text-label-small"] = flagsModule.FoundationButtonLabelTypography,
+						["text-title-small"] = not flagsModule.FoundationButtonLabelTypography
+					}
+				}
 			},
 			[inputSizeModule.Medium] = {
 				container = {
@@ -49,7 +60,12 @@ local var1 = function(p1)
 				icon = {
 					size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
 				},
-				text = { tag = "text-label-medium" }
+				text = {
+					tag = {
+						["text-label-medium"] = flagsModule.FoundationButtonLabelTypography,
+						["text-title-medium"] = not flagsModule.FoundationButtonLabelTypography
+					}
+				}
 			},
 			[inputSizeModule.Large] = {
 				container = {
@@ -60,7 +76,12 @@ local var1 = function(p1)
 				icon = {
 					size = UDim2.fromOffset(p1.Size.Size_600, p1.Size.Size_600)
 				},
-				text = { tag = "text-label-large" }
+				text = {
+					tag = {
+						["text-label-large"] = flagsModule.FoundationButtonLabelTypography,
+						["text-title-large"] = not flagsModule.FoundationButtonLabelTypography
+					}
+				}
 			}
 		},
 		types = var2.types

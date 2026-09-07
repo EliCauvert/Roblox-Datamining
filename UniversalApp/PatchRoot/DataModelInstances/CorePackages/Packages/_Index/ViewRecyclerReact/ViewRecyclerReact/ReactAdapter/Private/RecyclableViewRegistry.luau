@@ -1,6 +1,5 @@
 ﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
 local _ = require(viewRecyclerReact.Parent.React)
-local _ = require(viewRecyclerReact.ReactAdapter.RecyclableViewReadiness)
 local _ = require(viewRecyclerReact.Parent.Signals)
 local tbl = setmetatable({}, { __mode = "k" })
 
