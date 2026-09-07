@@ -7,7 +7,6 @@ local leaderboardType = require(script.Parent.PlatformLeaderboardTypes).Leaderbo
 local platformLeaderboardFetcherHttpRetryCount = game:DefineFastInt("PlatformLeaderboardFetcherHttpRetryCount", 0)
 local platformLeaderboardFetcherDefaultCount = game:DefineFastInt("PlatformLeaderboardFetcherDefaultCount", 100)
 local platformLeaderboardDisplayNameEnabled = game:DefineFastFlag("PlatformLeaderboardDisplayNameEnabled", false)
-local platformLeaderboardBadgeMetadataEnabled = game:DefineFastFlag("PlatformLeaderboardBadgeMetadataEnabled", false)
 local fFlagPlatformLeaderboardDebugLogging = sharedFlagsModule.FFlagPlatformLeaderboardDebugLogging
 local var2 = httpRequestModule.config({
 	requestFunction = httpRequestModule.requestFunctions.HttpRbxApi,
@@ -47,7 +46,7 @@ local function get(p1)
 end
 
 local function formatEntry(p1)
-	-- upvalues: platformLeaderboardDisplayNameEnabled (ref), platformLeaderboardBadgeMetadataEnabled (ref)
+	-- upvalues: platformLeaderboardDisplayNameEnabled (ref)
 	if typeof(p1) ~= "table" then
 		return nil
 	end
@@ -64,22 +63,12 @@ local function formatEntry(p1)
 		return nil
 	end
 	local rank = p1.rank
-	local var5 = if rank == nil then nil else tonumber(rank)
-	local var6 = if platformLeaderboardDisplayNameEnabled then if typeof(p1.displayName) == "string" then p1.displayName else nil else nil
-	local var7 = nil
-	local var8 = nil
 	
-	if platformLeaderboardBadgeMetadataEnabled then
-		var7 = if typeof(p1.isVerified) == "boolean" then p1.isVerified else nil
-		var8 = if typeof(p1.hasRobloxSubscription) == "boolean" then p1.hasRobloxSubscription else nil
-	end
 	return {
 		userId = var3,
 		score = var4,
-		rank = var5,
-		displayName = var6,
-		isVerified = var7,
-		hasRobloxSubscription = var8
+		rank = if rank == nil then nil else tonumber(rank),
+		displayName = if platformLeaderboardDisplayNameEnabled then if typeof(p1.displayName) == "string" then p1.displayName else nil else nil
 	}
 end
 

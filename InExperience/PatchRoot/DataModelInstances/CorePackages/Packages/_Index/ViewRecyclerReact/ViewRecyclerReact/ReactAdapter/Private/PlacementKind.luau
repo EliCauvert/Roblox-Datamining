@@ -1,1 +1,0 @@
-﻿return table.freeze({ List = "list", Composition = "composition" })

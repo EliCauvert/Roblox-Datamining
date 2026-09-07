@@ -1,5 +1,8 @@
-﻿return function(p1)
-	if p1 == nil or p1 == "" then
+﻿local fFlagLuaAppMediaGalleryNilImageIdFix = require(script:FindFirstAncestor("MediaGallery").Parent.SharedFlags).FFlagLuaAppMediaGalleryNilImageIdFix
+
+return function(p1)
+	-- upvalues: fFlagLuaAppMediaGalleryNilImageIdFix (ref)
+	if fFlagLuaAppMediaGalleryNilImageIdFix and (p1 == nil or p1 == "") then
 		return ""
 	end
 	local matchIndex = string.find(p1, "http://www.roblox.com/asset/?id=", 1, true)

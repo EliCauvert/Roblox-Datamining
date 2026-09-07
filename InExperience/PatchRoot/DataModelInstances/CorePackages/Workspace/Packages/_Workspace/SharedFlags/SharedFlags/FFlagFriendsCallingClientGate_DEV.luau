@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("FriendsCallingClientGate_DEV", false) and game:GetEngineFeature("CallingServiceEnabled")
+﻿return game:DefineFastFlag("FriendsCallingClientGate_DEV", false)

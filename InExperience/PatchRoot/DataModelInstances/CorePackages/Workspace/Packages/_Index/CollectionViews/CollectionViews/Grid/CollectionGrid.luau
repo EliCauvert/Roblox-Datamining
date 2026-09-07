@@ -14,13 +14,11 @@ local useCollectionLayoutModule = require(collectionViews.CollectionLayoutStore.
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppRfyRevealRows = sharedFlagsModule.FFlagLuaAppRfyRevealRows
 local fFlagLuaAppSortHeaderAnchorTag = sharedFlagsModule.FFlagLuaAppSortHeaderAnchorTag
-local fFlagSduiCollectionGridRevealRows = sharedFlagsModule.FFlagSduiCollectionGridRevealRows
-local strictInterface = tModule.strictInterface
-strictInterface = strictInterface({
+local var1 = tModule.strictInterface({
 	testId = tModule.optional(tModule.string),
 	Position = tModule.optional(tModule.UDim2),
 	LayoutOrder = tModule.optional(tModule.number),
-	ZIndex = if fFlagLuaAppRfyRevealRows or fFlagSduiCollectionGridRevealRows then tModule.optional(tModule.number) else nil,
+	ZIndex = if fFlagLuaAppRfyRevealRows then tModule.optional(tModule.number) else nil,
 	containerRef = tModule.optional(tModule.union(tModule.table, tModule.callback)),
 	verticalPadding = tModule.optional(tModule.number),
 	maxNumRows = tModule.optional(tModule.number),
@@ -59,45 +57,45 @@ local t = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: validateProps (ref), strictInterface (ref), cryoModule (ref), t (ref), useCollectionLayoutModule (ref), argCheckModule (ref), useDesignTokens (ref), useCollectionSizeBindingsModule (ref), reactModule (ref), fFlagLuaAppRfyRevealRows (ref), fFlagSduiCollectionGridRevealRows (ref), collectionHeaderModule (ref), fFlagLuaAppSortHeaderAnchorTag (ref), gridOfCollectionItemsModule (ref)
+	-- upvalues: validateProps (ref), var1 (ref), cryoModule (ref), t (ref), useCollectionLayoutModule (ref), argCheckModule (ref), useDesignTokens (ref), useCollectionSizeBindingsModule (ref), reactModule (ref), fFlagLuaAppRfyRevealRows (ref), collectionHeaderModule (ref), fFlagLuaAppSortHeaderAnchorTag (ref), gridOfCollectionItemsModule (ref)
 	local createElement_2
-	validateProps(strictInterface, p1)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local sideMargin = var1.sideMargin
-	local var2 = useCollectionLayoutModule(var1.collectionItemSize)
-	local numColumns = p1.numColumns or var2.itemsPerRow
-	local columnGap = p1.columnGap or var2.gutter
-	local verticalPadding = p1.verticalPadding or var2.verticalGap
+	validateProps(var1, p1)
+	local var2 = cryoModule.Dictionary.join(t, p1)
+	local sideMargin = var2.sideMargin
+	local var3 = useCollectionLayoutModule(var2.collectionItemSize)
+	local numColumns = p1.numColumns or var3.itemsPerRow
+	local columnGap = p1.columnGap or var3.gutter
+	local verticalPadding = p1.verticalPadding or var3.verticalGap
 	argCheckModule.assert(numColumns >= 1)
 	argCheckModule.assert(sideMargin >= 0)
 	argCheckModule.assert(verticalPadding >= 0)
 	argCheckModule.assert(columnGap >= 0)
 	local size400 = useDesignTokens().Size.Size_400
-	local var3, _, var4, var5 = useCollectionSizeBindingsModule(numColumns, columnGap, sideMargin, 0, var1.getItemHeight, var1.onContainerSizeChanged)
-	local var6 = var1.title and var1.title ~= ""
+	local var4, _, var5, var6 = useCollectionSizeBindingsModule(numColumns, columnGap, sideMargin, 0, var2.getItemHeight, var2.onContainerSizeChanged)
+	local var7 = var2.title and var2.title ~= ""
 	local createElement = reactModule.createElement
-	local var7 = "Frame"
+	local var8 = "Frame"
 	local t_1 = {
-		ref = var1.containerRef,
+		ref = var2.containerRef,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		Position = var1.Position,
+		Position = var2.Position,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		LayoutOrder = var1.LayoutOrder,
-		ZIndex = if fFlagLuaAppRfyRevealRows or fFlagSduiCollectionGridRevealRows then var1.ZIndex else nil,
-		[reactModule.Tag] = if var1.testId then `data-testid={var1.testId}` else nil
+		LayoutOrder = var2.LayoutOrder,
+		ZIndex = if fFlagLuaAppRfyRevealRows then var2.ZIndex else nil,
+		[reactModule.Tag] = if var2.testId then `data-testid={var2.testId}` else nil
 	}
 	local t_2 = {}
 	local createElement_1 = reactModule.createElement
-	local var8 = "Frame"
+	local var9 = "Frame"
 	local t_3 = {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0),
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		[reactModule.Change.AbsoluteSize] = var4,
-		ref = var5
+		[reactModule.Change.AbsoluteSize] = var5,
+		ref = var6
 	}
 	local t_4 = {
 		UIPadding = if sideMargin > 0 then reactModule.createElement("UIPadding", {
@@ -108,48 +106,48 @@ return reactModule.memo(function(p1)
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, if var6 or var1.headerComponent then size400 else nil)
+			Padding = UDim.new(0, if var7 or var2.headerComponent then size400 else nil)
 		})
 	}
 	
-	if var1.headerComponent then
-		createElement_2 = var1.headerComponent
+	if var2.headerComponent then
+		createElement_2 = var2.headerComponent
 	else
 		createElement_2 = reactModule.createElement
 		createElement_2 = createElement_2(collectionHeaderModule, {
 			LayoutOrder = 1,
-			title = var1.title,
-			subtitle = var1.subtitle,
-			tooltipInfoText = var1.tooltipInfoText,
-			onActivateInfoIcon = var1.onActivateInfoIcon,
-			tooltipSupportsVR = var1.tooltipSupportsVR,
-			tooltipSupportsTenFootUi = var1.tooltipSupportsTenFootUi,
-			hideButton = if #var1.items >= 1 then var1.hideHeaderButton or not var6 else true,
-			onActivate = var1.onActivateHeader,
-			buttonText = var1.headerButtonText,
-			headerTag = if fFlagLuaAppSortHeaderAnchorTag then var1.headerTag else nil
+			title = var2.title,
+			subtitle = var2.subtitle,
+			tooltipInfoText = var2.tooltipInfoText,
+			onActivateInfoIcon = var2.onActivateInfoIcon,
+			tooltipSupportsVR = var2.tooltipSupportsVR,
+			tooltipSupportsTenFootUi = var2.tooltipSupportsTenFootUi,
+			hideButton = if #var2.items >= 1 then var2.hideHeaderButton or not var7 else true,
+			onActivate = var2.onActivateHeader,
+			buttonText = var2.headerButtonText,
+			headerTag = if fFlagLuaAppSortHeaderAnchorTag then var2.headerTag else nil
 		})
 	end
 	t_4.Header = createElement_2
 	t_4.GridOfItems = reactModule.createElement(gridOfCollectionItemsModule, {
 		LayoutOrder = 2,
-		verticalScrollingFrameRef = var1.verticalScrollingFrameRef,
-		onViewableItemsChanged = var1.onViewableItemsChanged,
-		itemSizeBinding = var3,
-		maxNumRows = var1.maxNumRows,
+		verticalScrollingFrameRef = var2.verticalScrollingFrameRef,
+		onViewableItemsChanged = var2.onViewableItemsChanged,
+		itemSizeBinding = var4,
+		maxNumRows = var2.maxNumRows,
 		numColumns = numColumns,
-		items = var1.items,
-		renderItem = var1.renderItem,
+		items = var2.items,
+		renderItem = var2.renderItem,
 		columnGap = columnGap,
 		sideMargin = sideMargin,
 		verticalPadding = verticalPadding,
-		bufferRowsBelowScreen = var1.bufferRowsBelowScreen,
-		bufferRowsAboveScreen = var1.bufferRowsAboveScreen,
-		disableRelativeGap = var1.disableRelativeGap,
-		thresholdRowsFromBottom = var1.thresholdRowsFromBottom,
-		onReachedThresholdFromEnd = var1.onReachedThresholdFromEnd
+		bufferRowsBelowScreen = var2.bufferRowsBelowScreen,
+		bufferRowsAboveScreen = var2.bufferRowsAboveScreen,
+		disableRelativeGap = var2.disableRelativeGap,
+		thresholdRowsFromBottom = var2.thresholdRowsFromBottom,
+		onReachedThresholdFromEnd = var2.onReachedThresholdFromEnd
 	})
-	t_2.CollectionContent = createElement_1(var8, t_3, t_4)
+	t_2.CollectionContent = createElement_1(var9, t_3, t_4)
 	
-	return createElement(var7, t_1, t_2)
+	return createElement(var8, t_1, t_2)
 end)

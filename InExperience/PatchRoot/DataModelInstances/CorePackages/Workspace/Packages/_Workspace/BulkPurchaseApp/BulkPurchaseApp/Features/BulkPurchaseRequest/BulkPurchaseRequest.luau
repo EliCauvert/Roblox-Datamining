@@ -14,10 +14,12 @@ local dividerModule = require(bulkPurchaseApp.Components.Divider)
 local fullPagePromptScrollListModule = require(bulkPurchaseApp.Components.FullPagePromptScrollList)
 local fFlagFixVP8143Module = require(bulkPurchaseApp.Flags.FFlagFixVP8143)
 local fFlagBulkPurchaseEnablePurchaseOptionsModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseEnablePurchaseOptions)
+local fFlagBulkPurchaseRobloxPlusUpsellModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseRobloxPlusUpsell)
 local itemListModule = require(bulkPurchaseApp.Components.ItemList)
 local _ = require(parent.AvatarExperienceCommon)
 local itemStatusKeyToLocalizationKeyModule = require(bulkPurchaseApp.Enums.ItemStatusKeyToLocalizationKey)
 local _ = require(bulkPurchaseApp.Store.Types)
+local _ = require(parent.RobloxSubscriptionPurchaseApp)
 local _ = require(script.Parent.BulkPurchaseRequestItem)
 local _ = require(script.Parent.BulkPurchaseRequestOwnedItem)
 local _ = require(script.Parent.BulkPurchaseRequestUnpurchasableItem)
@@ -33,7 +35,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), localizationRoactContext (ref), reactFocusNavigationModule (ref), fFlagFixVP8143Module (ref), useDesignTokens (ref), itemStatusKeyToLocalizationKeyModule (ref), mapItemsToRowPresentation (ref), fFlagBulkPurchaseEnablePurchaseOptionsModule (ref), mapOwnedItemsToRowPresentation (ref), mapUnpurchasableItemsToRowPresentation (ref), fullPagePromptModule (ref), fullPagePromptTwoPanelLayoutModule (ref), lineItemLayoutModule (ref), styledTextLabel (ref), fullPagePromptScrollListModule (ref), itemListModule (ref), dividerModule (ref), priceBoxModule (ref)
+	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), localizationRoactContext (ref), reactFocusNavigationModule (ref), fFlagFixVP8143Module (ref), useDesignTokens (ref), itemStatusKeyToLocalizationKeyModule (ref), mapItemsToRowPresentation (ref), fFlagBulkPurchaseEnablePurchaseOptionsModule (ref), mapOwnedItemsToRowPresentation (ref), mapUnpurchasableItemsToRowPresentation (ref), fullPagePromptModule (ref), fullPagePromptTwoPanelLayoutModule (ref), lineItemLayoutModule (ref), styledTextLabel (ref), fullPagePromptScrollListModule (ref), itemListModule (ref), dividerModule (ref), priceBoxModule (ref), fFlagBulkPurchaseRobloxPlusUpsellModule (ref)
 	local var1 = useLocalization(t)
 	local var2 = reactModule.useContext(localizationRoactContext)
 	local var3, var4 = reactFocusNavigationModule.useDefaultFocusBehavior()
@@ -117,7 +119,9 @@ return function(p1)
 			missingRobux = p1.currentBalance - p1.totalCost < 0,
 			onAccept = p1.onAccept,
 			buttonRef = if fFlagFixVP8143Module then var5 else var3,
-			isDisabled = p1.isDisabled
+			isDisabled = p1.isDisabled,
+			robloxPlusUpsellBannerProductInfo = if fFlagBulkPurchaseRobloxPlusUpsellModule then p1.robloxPlusUpsellBannerProductInfo else nil,
+			onRobloxPlusUpsellActivated = if fFlagBulkPurchaseRobloxPlusUpsellModule then p1.onRobloxPlusUpsellActivated else nil
 		})
 	}))
 end

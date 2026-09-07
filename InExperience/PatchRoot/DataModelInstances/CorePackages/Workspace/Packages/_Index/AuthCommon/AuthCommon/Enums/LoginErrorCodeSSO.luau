@@ -8,7 +8,6 @@
 	RelinkingCooldown = 13,
 	FloodedXbox = 22,
 	NoAccountConnectedXbox = 28,
-	NoLinkedAccount = 31,
 	RobloxAccountAlreadyConnectedXbox = 32,
 	ExternalIdentityAlreadyConnectedXbox = 33
 }

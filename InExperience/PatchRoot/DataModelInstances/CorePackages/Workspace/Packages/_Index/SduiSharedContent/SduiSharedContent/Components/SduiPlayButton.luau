@@ -13,9 +13,11 @@ local getSduiFocusActivationStore = require(parent.SduiSharedUtilities).getSduiF
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppResetHoverOnSduiPlayButtonActivation = require(parent.SharedFlags).FFlagLuaAppResetHoverOnSduiPlayButtonActivation
 local fFlagLuaAppLaunchWhenLoadingEdp = require(parent.SharedFlags).FFlagLuaAppLaunchWhenLoadingEdp
+local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp = require(parent.SharedFlags).FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp
+local fFlagLuaAppDemoModePlayButton = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButton
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), getSduiActionHandlerRegistry (ref), sduiActionType (ref), findAnalyticsField (ref), fFlagSduiExperienceDetailsSupport (ref), useSduiReportExperienceLaunchedModule (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), executeAction (ref), getSduiFocusActivationStore (ref), playButton (ref), cryoModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref)
+	-- upvalues: reactModule (ref), getSduiActionHandlerRegistry (ref), sduiActionType (ref), findAnalyticsField (ref), fFlagSduiExperienceDetailsSupport (ref), useSduiReportExperienceLaunchedModule (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), executeAction (ref), getSduiFocusActivationStore (ref), playButton (ref), cryoModule (ref), fFlagLuaAppDemoModePlayButton (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref)
 	local analyticsContext = p1.analyticsContext
 	local placeId = p1.placeId or p1.rootPlaceId
 	
@@ -24,8 +26,8 @@ return reactModule.memo(function(p1)
 		LayoutOrder = p1.layoutOrder,
 		Position = p1.position,
 		tag = if fFlagSduiExperienceDetailsSupport then p1.tag else nil,
-		expandWidthForSecondaryPlayButton = p1.expandWidthForSecondaryPlayButton,
-		preferSecondaryPlayButton = p1.preferSecondaryPlayButton,
+		expandWidthForSecondaryPlayButton = if fFlagLuaAppDemoModePlayButton then p1.expandWidthForSecondaryPlayButton else nil,
+		preferSecondaryPlayButton = if fFlagLuaAppDemoModePlayButton then p1.preferSecondaryPlayButton else nil,
 		onRegisterActivation = if fFlagSduiExperienceDetailsSupport then if fFlagSduiExperienceDetailsSupport then reactModule.useCallback(function(p2)
 			-- upvalues: p1 (ref), getSduiFocusActivationStore (copy)
 			local tag = p1.tag
@@ -60,6 +62,6 @@ return reactModule.memo(function(p1)
 		eventContext = findAnalyticsField("eventContext", analyticsContext.analyticsData, "ExperienceTile"),
 		launchSource = if fFlagSduiExperienceDetailsSupport then if fFlagSduiExperienceDetailsSupport then findAnalyticsField("launchSource", analyticsContext.analyticsData) else nil else nil,
 		launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then p1.launchWhenLoading else nil,
-		launchOnReleaseAfterUnmount = p1.launchOnReleaseAfterUnmount
+		launchOnReleaseAfterUnmount = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp then p1.launchOnReleaseAfterUnmount else nil
 	}))
 end)

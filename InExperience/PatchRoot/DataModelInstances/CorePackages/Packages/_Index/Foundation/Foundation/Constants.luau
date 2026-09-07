@@ -11,7 +11,6 @@ return {
 	DEFAULT_DELAY_TIME = 0.15,
 	DEFAULT_INPUT_FIELD_WIDTH_PIXELS = 400,
 	DEFAULT_NUMBER_INPUT_WIDTH = 300,
-	TOOLTIP_MAX_WIDTH = 280,
 	SHADOW_IMAGE = "component_assets/dropshadow_17_8",
 	SHADOW_SIZE = 16,
 	BUILDER_SANS_FONT_ASSET = "rbxasset://fonts/families/BuilderSans.json",

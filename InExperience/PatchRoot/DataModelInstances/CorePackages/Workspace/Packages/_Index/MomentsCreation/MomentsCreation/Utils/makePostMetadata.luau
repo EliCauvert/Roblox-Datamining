@@ -1,6 +1,4 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local _ = require(momentsCreation.Parent.MomentsTypes)
-local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
+﻿local _ = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsTypes)
 local momentsPostCtaUseCaptureUniverse = game:DefineFastFlag("MomentsPostCtaUseCaptureUniverse", false)
 
 local function convertTextOverlayStyle(p1)
@@ -25,7 +23,7 @@ local function convertTextOverlay(p1)
 end
 
 return function(p1)
-	-- upvalues: convertTextOverlay (ref), getFFlagMomentsTTSAudioOverlayModule (ref), momentsPostCtaUseCaptureUniverse (ref)
+	-- upvalues: convertTextOverlay (ref), momentsPostCtaUseCaptureUniverse (ref)
 	local t = { caption = p1.description }
 	
 	if p1.edits then
@@ -48,18 +46,6 @@ return function(p1)
 				table.insert(t_1, convertTextOverlay(v))
 			end
 			t.textOverlays = t_1
-		end
-		if getFFlagMomentsTTSAudioOverlayModule and p1.edits.tts and (p1.edits.tts.text ~= nil and p1.edits.tts.text ~= "") then
-			local tts = p1.edits.tts
-			t.textToSpeech = {
-				{
-					pitch = 0,
-					speed = 1,
-					text = tts.text,
-					voiceId = tts.voiceId,
-					startTime = tts.startTime
-				}
-			}
 		end
 	end
 	local var1 = p1.universeIdOverride or p1.universeId

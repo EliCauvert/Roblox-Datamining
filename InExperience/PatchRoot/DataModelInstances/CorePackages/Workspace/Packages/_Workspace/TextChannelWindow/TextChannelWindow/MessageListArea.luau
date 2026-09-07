@@ -7,7 +7,7 @@ local textChannelWindowAnalyticsModule = require(script.Parent.TextChannelWindow
 local useInExperienceLocalization = require(parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
 local messageLayoutContainer = chatUIPrimitivesModule.MessageLayoutContainer
 
-return reactModule.memo(function(p1)
+return function(p1)
 	-- upvalues: foundationModule (ref), useInExperienceLocalization (ref), reactModule (ref), textChannelWindowAnalyticsModule (ref), messageLayoutContainer (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local var2 = useInExperienceLocalization()
@@ -23,19 +23,12 @@ return reactModule.memo(function(p1)
 		messagesSignal = p1.messagesSignal,
 		fontFace = p1.fontFace,
 		Size = UDim2.fromScale(1, 1),
-		contentPadding = reactModule.useMemo(function()
-			-- upvalues: var1 (ref)
-			return {
-				top = UDim.new(0, var1.Size.Size_100),
-				bottom = UDim.new(0, var1.Size.Size_100),
-				left = UDim.new(0, var1.Size.Size_200),
-				right = UDim.new(0, var1.Size.Size_1400)
-			}
-		end, {
-			var1.Size.Size_100,
-			var1.Size.Size_200,
-			var1.Size.Size_1400
-		}),
+		contentPadding = {
+			top = UDim.new(0, var1.Size.Size_100),
+			bottom = UDim.new(0, var1.Size.Size_100),
+			left = UDim.new(0, var1.Size.Size_200),
+			right = UDim.new(0, var1.Size.Size_1400)
+		},
 		onScroll = reactModule.useMemo(function()
 			-- upvalues: textChannelWindowAnalyticsModule (copy), p1 (ref)
 			return textChannelWindowAnalyticsModule.createOnScrollCallback(p1.windowName)
@@ -44,4 +37,4 @@ return reactModule.memo(function(p1)
 		icon = { name = "icons/status/oof_xlarge" },
 		text = var2("CoreScripts.TextChat.InputBar.Hint.ChatUnavailable")
 	})
-end)
+end

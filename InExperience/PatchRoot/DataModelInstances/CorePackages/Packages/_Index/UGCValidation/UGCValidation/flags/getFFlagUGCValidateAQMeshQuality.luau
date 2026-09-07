@@ -1,5 +1,5 @@
-﻿game:DefineFastFlag("UGCValidateAQMeshQuality2", false)
+﻿game:DefineFastFlag("UGCValidateAQMeshQuality", false)
 
 return function()
-	return game:GetFastFlag("UGCValidateAQMeshQuality2")
+	return game:GetFastFlag("UGCValidateAQMeshQuality")
 end

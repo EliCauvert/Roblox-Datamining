@@ -1,6 +1,4 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local fFlagBuildExperiencePinForBuild = require(parent.SharedFlags).FFlagBuildExperiencePinForBuild
+﻿local creatorAgentChatModule = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.CreatorAgentChat)
 local getCurrentExperienceProjectModule = require(script.Parent.getCurrentExperienceProject)
 local getDefaultTemplatePlaceIdModule = require(script.Parent.getDefaultTemplatePlaceId)
 local debug = creatorAgentChatModule.debug
@@ -135,7 +133,7 @@ local function runSessionPromptSmoke(p6, p7, p8)
 end
 
 return function(p9, p10, p11)
-	-- upvalues: creatorAgentChatModule (ref), getCurrentExperienceProjectModule (ref), getDefaultTemplatePlaceIdModule (ref), debug (ref), runSyncRpc (ref), fFlagBuildExperiencePinForBuild (ref), runSessionPromptSmoke (ref), buildSummary (ref)
+	-- upvalues: creatorAgentChatModule (ref), getCurrentExperienceProjectModule (ref), getDefaultTemplatePlaceIdModule (ref), debug (ref), runSyncRpc (ref), runSessionPromptSmoke (ref), buildSummary (ref)
 	local var7 = creatorAgentChatModule.resolveCreatorAgentAcp()
 	local t = {}
 	local var8 = getCurrentExperienceProjectModule()
@@ -149,17 +147,14 @@ return function(p9, p10, p11)
 	end, function(p12)
 		return if typeof(p12) == "table" and typeof(p12.agentInfo) == "table" then `agent={p12.agentInfo.name or "?"} v{p12.agentInfo.version or "?"}` else "succeeded"
 	end))
-	local var7 = if p10 == nil then {
+	local var10 = if p10 == nil then {
 		method = "session/new",
 		status = "skip",
 		detail = "requires universeId (game.GameId is 0 or not in an experience)",
 		elapsedMs = nil
 	} else runSyncRpc("session/new", function()
-		-- upvalues: p9 (ref), p10 (ref), p11 (ref), fFlagBuildExperiencePinForBuild (copy)
-		return p9.sessionNew({
-			project = { universeId = p10, placeId = p11 },
-			application = if fFlagBuildExperiencePinForBuild then "build" else nil
-		})
+		-- upvalues: p9 (ref), p10 (ref), p11 (ref)
+		return p9.sessionNew({ project = { universeId = p10, placeId = p11 } })
 	end, function(p12)
 		-- upvalues: var9 (write)
 		if typeof(p12) == "table" and typeof(p12.sessionId) == "string" and p12.sessionId ~= "" then
@@ -170,17 +165,17 @@ return function(p9, p10, p11)
 		return "succeeded but missing sessionId"
 	end)
 	
-	if var7.status == "ok" and var9 == nil then
-		var7 = {
+	if var10.status == "ok" and var9 == nil then
+		var10 = {
 			method = "session/new",
 			status = "fail",
 			detail = "succeeded but missing sessionId in result",
-			elapsedMs = var7.elapsedMs
+			elapsedMs = var10.elapsedMs
 		}
-	elseif var7.status == "fail" then
-		var7.detail = debug.rpcFailureMessage("session/new", { status = "failed", error = var7.detail })
+	elseif var10.status == "fail" then
+		var10.detail = debug.rpcFailureMessage("session/new", { status = "failed", error = var10.detail })
 	end
-	table.insert(t, var7)
+	table.insert(t, var10)
 	table.insert(t, runSyncRpc("session/list", function()
 		-- upvalues: p9 (ref)
 		return p9.sessionList()
@@ -238,8 +233,8 @@ return function(p9, p10, p11)
 			return p9.sessionDelete(var9)
 		end))
 	end
-	local var7 = buildSummary(var7.url, t)
-	debug.log("info", "CAS smoke test complete", { results = t, summary = var7 })
+	local var11 = buildSummary(var7.url, t)
+	debug.log("info", "CAS smoke test complete", { results = t, summary = var11 })
 	
-	return { acpUrl = var7.url, results = t, summary = var7 }
+	return { acpUrl = var7.url, results = t, summary = var11 }
 end

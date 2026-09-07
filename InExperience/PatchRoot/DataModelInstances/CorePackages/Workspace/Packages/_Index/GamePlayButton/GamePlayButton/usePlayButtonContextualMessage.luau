@@ -7,8 +7,6 @@ local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePo
 local launchErrorLocalizationKeys = require(parent.GameLaunch).LaunchErrorLocalizationKeys
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local useGameInfosSelector = require(parent.GameInfosRodux).useGameInfosSelector
-local gameHydrationReactModule = require(parent.GameHydrationReact)
-local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
 local useGameProductInfoSelector = require(parent.GameProductInfoRodux).useGameProductInfoSelector
 local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
 local useLocalization = require(parent.Localization).Hooks.useLocalization
@@ -47,60 +45,45 @@ local _ = function(p1, p2, p3)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: useAppPolicy (ref), useSelector (ref), fFlagMigrateGameInfoToStore (ref), gameHydrationReactModule (ref), useGameInfosSelector (ref), useGameProductInfoSelector (ref), useLocalization (ref), playButtonStatesModule (ref), var1 (ref), experienceDetailsNoticeType (ref)
-	local var2 = useAppPolicy(function(p4)
+	-- upvalues: useAppPolicy (ref), useSelector (ref), useGameInfosSelector (ref), useGameProductInfoSelector (ref), useLocalization (ref), playButtonStatesModule (ref), var1 (ref), experienceDetailsNoticeType (ref)
+	local var2
+	local var3 = useAppPolicy(function(p4)
 		return {
 			experienceDetailsNoticeType = p4.getExperienceDetailsNoticeType()
 		}
 	end)
-	local var3 = useSelector(function(p4)
+	local var4 = useSelector(function(p4)
 		-- upvalues: p1 (ref)
 		return p4.PlayabilityStatus and (p4.PlayabilityStatus[p1] and (p4.PlayabilityStatus[p1].unplayableDisplayText or nil))
 	end)
-	local var4 = useSelector(function(p4)
+	local var5 = useSelector(function(p4)
 		-- upvalues: p1 (ref)
 		return p4.GameDetails[p1]
 	end)
-	local var5 = nil
-	local var6 = nil
+	local var6 = useGameInfosSelector(p1)
+	local var7 = if var5 then var5.rootPlaceId elseif var6 then var6.placeId else nil
+	local var8 = useGameProductInfoSelector(p1)
+	local t = {
+		agreeToNotice = "Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice"
+	}
 	
-	if fFlagMigrateGameInfoToStore then
-		var6 = gameHydrationReactModule.useGameInfo(p1)
-	else
-		var5 = useGameInfosSelector(p1)
-	end
-	local rootPlaceId
-	if var4 then
-		rootPlaceId = var4.rootPlaceId
+	if p2 == playButtonStatesModule.UnplayableOther then
+		local var9, var10 = var1(var7, p3, var8)
 		
-		if not rootPlaceId then
-			rootPlaceId = if fFlagMigrateGameInfoToStore then var6 and var6.rootPlaceId else var5 and var5.placeId
-			rootPlaceId = rootPlaceId or nil
-		end
-		local var7
-		local var8 = useGameProductInfoSelector(p1)
-		local t = {
-			agreeToNotice = "Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice"
-		}
-		
-		if p2 == playButtonStatesModule.UnplayableOther then
-			local var9, var10 = var1(rootPlaceId, p3, var8)
-			
-			if var9 == nil then
-				var7 = nil
-			elseif var10 then
-				local cloned = table.clone(var10)
-				cloned[1] = var9
-				var7 = cloned
-			else
-				var7 = var9
-			end
+		if var9 == nil then
+			var2 = nil
+		elseif var10 then
+			local cloned = table.clone(var10)
+			cloned[1] = var9
+			var2 = cloned
 		else
-			var7 = nil
+			var2 = var9
 		end
-		t.unplayableOtherFallback = var7
-		local var11 = useLocalization(t)
-		
-		return if (p2 == playButtonStatesModule.Playable or p2 == playButtonStatesModule.PlayableWithParty or p2 == playButtonStatesModule.WaitingForParty) and var2.experienceDetailsNoticeType == experienceDetailsNoticeType.InExperiencePurchase then var11.agreeToNotice elseif var3 and var3 ~= "" then var3 elseif p2 == playButtonStatesModule.UnplayableOther then var11.unplayableOtherFallback else nil
+	else
+		var2 = nil
 	end
+	t.unplayableOtherFallback = var2
+	local var11 = useLocalization(t)
+	
+	return if (p2 == playButtonStatesModule.Playable or p2 == playButtonStatesModule.PlayableWithParty or p2 == playButtonStatesModule.WaitingForParty) and var3.experienceDetailsNoticeType == experienceDetailsNoticeType.InExperiencePurchase then var11.agreeToNotice elseif var4 and var4 ~= "" then var4 elseif p2 == playButtonStatesModule.UnplayableOther then var11.unplayableOtherFallback else nil
 end

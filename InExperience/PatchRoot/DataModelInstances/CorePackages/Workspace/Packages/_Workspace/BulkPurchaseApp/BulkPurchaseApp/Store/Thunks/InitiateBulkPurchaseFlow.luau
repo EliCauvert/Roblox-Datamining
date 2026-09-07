@@ -6,17 +6,12 @@ local bulkPurchaseStartedModule = require(bulkPurchaseApp.Store.Actions.BulkPurc
 local errorCodeEnumModule = require(bulkPurchaseApp.Enums.ErrorCodeEnum)
 local getAccountModule = require(bulkPurchaseApp.NetworkRequests.getAccount)
 local _ = require(bulkPurchaseApp.Store.Types)
-local fFlagBulkPurchaseRemoveStartedActionModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseRemoveStartedAction)
 
 return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: bulkPurchaseRequestedModule (ref), fFlagBulkPurchaseRemoveStartedActionModule (ref), getAccountModule (ref), promiseModule (ref), bulkPurchaseStartedModule (ref), bulkPurchaseFailedModule (ref), errorCodeEnumModule (ref)
+	-- upvalues: bulkPurchaseRequestedModule (ref), getAccountModule (ref), promiseModule (ref), bulkPurchaseStartedModule (ref), bulkPurchaseFailedModule (ref), errorCodeEnumModule (ref)
 	return function(p8)
-		-- upvalues: bulkPurchaseRequestedModule (copy), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref), fFlagBulkPurchaseRemoveStartedActionModule (copy), getAccountModule (copy), p1 (ref), promiseModule (copy), bulkPurchaseStartedModule (copy), bulkPurchaseFailedModule (copy), errorCodeEnumModule (copy)
+		-- upvalues: bulkPurchaseRequestedModule (copy), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref), getAccountModule (copy), p1 (ref), promiseModule (copy), bulkPurchaseStartedModule (copy), bulkPurchaseFailedModule (copy), errorCodeEnumModule (copy)
 		p8:dispatch(bulkPurchaseRequestedModule(p2, p3, p4, p5, p6, p7))
-		
-		if fFlagBulkPurchaseRemoveStartedActionModule then
-			return
-		end
 		local var1, _ = getAccountModule(p1)
 		
 		return promiseModule.all({ var1 }):andThen(function(_)

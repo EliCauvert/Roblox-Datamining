@@ -4,8 +4,11 @@ return {
 	displayName = "InExperienceShop",
 	testMatch = { "**/*.test" },
 	testPathIgnorePatterns = {
-		"/Mocks/", "/Api/", "/Stores/", "whenJoinSettles", "initShopGlobalIcon",
-		"useCloseOnCoreMenu"
+		"/Mocks/",
+		"/Api/",
+		"/Stores/",
+		"whenJoinSettles",
+		"initShopGlobalIcon"
 	},
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.ErrorLogHandler,

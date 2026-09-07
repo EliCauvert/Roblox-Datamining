@@ -1,7 +1,6 @@
 ﻿return {
 	ExpChatLocalChatEnabledMessageExperimentation = require(script.ExpChatLocalChatEnabledMessageExperimentation),
 	ExpChatPresetChatBadgeFTUXExperimentation = require(script.ExpChatPresetChatBadgeFTUXExperimentation),
-	ExpChatPresetChatAutocompleteExperimentation = require(script.ExpChatPresetChatAutocompleteExperimentation),
 	ArgoPartyExperimentation = require(script.ArgoPartyExperimentation),
 	ExpChatNewSystemMessagesExperimentation = require(script.ExpChatNewSystemMessagesExperimentation),
 	QueueExperimentation = require(script.QueueExperimentation),

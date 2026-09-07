@@ -2,9 +2,11 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
 local signalsReactModule = require(parent.SignalsReact)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local getAssistantBuildStoreModule = require(buildExperience.Stores.GetAssistantBuildStore)
 local getPlayButtonStoreModule = require(buildExperience.Stores.GetPlayButtonStore)
 local fFlagBuildExperienceTooltipsLightDismissModule = require(buildExperience.Flags.FFlagBuildExperienceTooltipsLightDismiss)
@@ -17,11 +19,11 @@ local popoverSide = foundationModule.Enums.PopoverSide
 local view = foundationModule.View
 
 return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), getAssistantBuildStoreModule (ref), getPlayButtonStoreModule (ref), signalsReactModule (ref), reactModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), iconButton (ref), iconName (ref), inputSize (ref), view (ref), educationalTooltip (ref), popoverAlign (ref), popoverSide (ref)
-	local var1 = useLocalization({
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), getAssistantBuildStoreModule (ref), getPlayButtonStoreModule (ref), signalsReactModule (ref), reactModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), iconButton (ref), iconName (ref), inputSize (ref), view (ref), educationalTooltip (ref), popoverAlign (ref), popoverSide (ref)
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		disabledTitle = localizationStringsModule.CHAT_ASSISTANT_DISABLED,
 		portraitRequired = localizationStringsModule.CHAT_PORTRAIT_REQUIRED
-	})
+	}) else nil
 	local var2 = getAssistantBuildStoreModule()
 	local var3 = getPlayButtonStoreModule()
 	local var4 = signalsReactModule.useSignalState(var2.getIsDisabled)
@@ -70,8 +72,8 @@ return reactModule.memo(function(p1)
 			isOpen = var5,
 			onPressedOutside = var7,
 			side = popoverSide.Bottom,
-			text = var1.portraitRequired,
-			title = var1.disabledTitle
+			text = if fFlagBuildLocalization then var1.portraitRequired else localizationStringsModule.CHAT_PORTRAIT_REQUIRED,
+			title = if fFlagBuildLocalization then var1.disabledTitle else localizationStringsModule.CHAT_ASSISTANT_DISABLED
 		}, {
 			Button = reactModule.createElement(view, {
 				tag = "auto-xy",

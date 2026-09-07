@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BuildExperienceChatHistoryPrefetch2", false)
+﻿return game:DefineFastFlag("BuildExperienceChatHistoryPrefetch", false)

@@ -24,7 +24,7 @@ local t_1 = {
 	[playabilityStatusEnum.ContextualPlayabilityAgeGated] = "Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityAgeGated",
 	[playabilityStatusEnum.ContextualPlayabilityUnrated] = "Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityUnrated",
 	[playabilityStatusEnum.ContextualPlayabilityAgeGatedByDescriptor] = "Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityAgeGatedByDescriptor",
-	[playabilityStatusEnum.FiatPurchaseDeviceRestricted] = "Feature.ExperienceDetails.UnplayableError.FiatPurchaseDeviceRestricted",
+	[playabilityStatusEnum.FiatPurchaseDeviceRestricted] = if require(parent.SharedFlags).FFlagLuaAppDemoModePlayButton then "Feature.ExperienceDetails.UnplayableError.FiatPurchaseDeviceRestricted" else "Feature.ExperienceDetails.UnplayableError.DeviceRestrictedDefault",
 	[playabilityStatusEnum.ContextualPlayabilityExperienceBlockedParentalControls] = if require(parent.SharedFlags).FFlagLuaAppBlockedUnplayableError then "Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityExperienceBlockedParentalControls" else nil,
 	Default = "Feature.ExperienceDetails.UnplayableError.UnplayableOther"
 }

@@ -9,8 +9,11 @@ local useNetwork = require(parent.EconomyCommonCoreScriptHooks).useNetwork
 local _ = require(bulkPurchaseApp.Store.Types)
 local purchasableStateEnumModule = require(bulkPurchaseApp.Enums.PurchasableStateEnum)
 local fFlagBulkPurchaseEnablePurchaseOptionsModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseEnablePurchaseOptions)
+local fFlagBulkPurchaseRobloxPlusUpsellModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseRobloxPlusUpsell)
+local applyBulkPurchaseRefreshModule = require(bulkPurchaseApp.Store.Thunks.ApplyBulkPurchaseRefresh)
 local convertToDiscountInformationOrNilModule = require(bulkPurchaseApp.Utils.convertToDiscountInformationOrNil)
 local _ = require(bulkPurchaseApp.Store.Types)
+local _ = require(bulkPurchaseApp.MarketplaceServiceTypes)
 
 local function transformItemDataToBulkPurchaseItemData(p1)
 	-- upvalues: purchasableStateEnumModule (ref), fFlagBulkPurchaseEnablePurchaseOptionsModule (ref)
@@ -35,7 +38,7 @@ local function transformItemDataToBulkPurchaseItemData(p1)
 end
 
 return function()
-	-- upvalues: useDispatch (ref), useNetwork (ref), reactModule (ref), marketplaceService (ref), playersService (ref), fFlagBulkPurchaseEnablePurchaseOptionsModule (ref), bulkPurchaseApp (ref), initiateBulkPurchaseFlowModule (ref), transformItemDataToBulkPurchaseItemData (ref), convertToDiscountInformationOrNilModule (ref)
+	-- upvalues: useDispatch (ref), useNetwork (ref), reactModule (ref), marketplaceService (ref), playersService (ref), fFlagBulkPurchaseEnablePurchaseOptionsModule (ref), bulkPurchaseApp (ref), initiateBulkPurchaseFlowModule (ref), transformItemDataToBulkPurchaseItemData (ref), convertToDiscountInformationOrNilModule (ref), fFlagBulkPurchaseRobloxPlusUpsellModule (ref), applyBulkPurchaseRefreshModule (ref)
 	local var1 = useDispatch()
 	local var2 = useNetwork()
 	reactModule.useEffect(function()
@@ -54,8 +57,37 @@ return function()
 			-- upvalues: var3 (write)
 			if var3 then
 				var3:Disconnect()
-				var3 = nil
 			end
 		end
 	end, { var1, var2 })
+	
+	if fFlagBulkPurchaseRobloxPlusUpsellModule then
+		reactModule.useEffect(function()
+			-- upvalues: var1 (ref), marketplaceService (copy), playersService (copy), applyBulkPurchaseRefreshModule (copy), transformItemDataToBulkPurchaseItemData (copy), convertToDiscountInformationOrNilModule (copy)
+			if not var1 then return end
+			local var3 = nil
+			local ok, status = pcall(function()
+				-- upvalues: marketplaceService (copy), playersService (copy), var1 (copy), applyBulkPurchaseRefreshModule (copy), transformItemDataToBulkPurchaseItemData (copy), convertToDiscountInformationOrNilModule (copy)
+				return marketplaceService.PromptBulkPurchaseRefreshed:Connect(function(p2, p3, p4, p5, p6, p7, p8, p9)
+					-- upvalues: playersService (copy), var1 (copy), applyBulkPurchaseRefreshModule (copy), transformItemDataToBulkPurchaseItemData (copy), convertToDiscountInformationOrNilModule (copy)
+					if p2 == playersService.LocalPlayer then
+						local var4 = p3 == Enum.MarketplaceBulkPurchasePromptStatus.Completed
+						var1(applyBulkPurchaseRefreshModule(var4, if var4 then transformItemDataToBulkPurchaseItemData(p4) else {}, p5, p6, p7, p8, convertToDiscountInformationOrNilModule(p9)))
+						
+						return
+					end
+				end)
+			end)
+			
+			if ok then
+				var3 = status
+			end
+			return function()
+				-- upvalues: var3 (write)
+				if var3 then
+					var3:Disconnect()
+				end
+			end
+		end, { var1 })
+	end
 end

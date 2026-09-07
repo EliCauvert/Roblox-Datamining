@@ -54,6 +54,7 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiPageEntryUseSharedHooks = sharedFlagsModule.FFlagSduiPageEntryUseSharedHooks
 local fFlagEnableExperienceDetailsBottomSheetTopBar = sharedFlagsModule.FFlagEnableExperienceDetailsBottomSheetTopBar
 local fFlagEnableMotionJitterMetric = sharedFlagsModule.FFlagEnableMotionJitterMetric
+local fFlagLuaAppSduiEdpRouteAwareSessionRemoval = sharedFlagsModule.FFlagLuaAppSduiEdpRouteAwareSessionRemoval
 local fFlagSduiEdpPersistentActionBarPlayButton = sharedFlagsModule.FFlagSduiEdpPersistentActionBarPlayButton
 local fFlagLuaAppEdpBottomSheetPeekViewEvents = sharedFlagsModule.FFlagLuaAppEdpBottomSheetPeekViewEvents
 
@@ -62,7 +63,7 @@ local function _(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), usePageScopeRef (ref), reactModule (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useTokens (ref), useNavigation (ref), useRoactService (ref), appSessionService (ref), useDispatch (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), appEventIngestService (ref), useGetCurrentLegacyRoute (ref), setTabBarVisible (ref), fFlagEnableExperienceDetailsBottomSheetTopBar (ref), useTopBarHeight (ref), useScreenSize (ref), useDeviceInsets (ref), getSafeAreaSize (ref), discoveryTypesModule (ref), useEntrySurfacing (ref), experienceDetailsPageConstantsModule (ref), useStore (ref), peekViewState (ref), gameDetailsPeekViewEvents (ref), setGameDetailsPeekViewStateModule (ref), hasPageInCurrentRoute (ref), appPage (ref), fFlagEnableMotionJitterMetric (ref), useMotionJitterMetricModule (ref), removeGameDetailSessionIfDepartedModule (ref), sessionType (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), overlayProvider (ref), experienceDetailsBottomSheetTopBarModule (ref), sheet (ref), foundationModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), experienceDetailsPersistentActionBarModule (ref), sduiFeatureEntryPoint (ref), experienceDetailsFallbackActionBarModule (ref)
+	-- upvalues: experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), usePageScopeRef (ref), reactModule (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useTokens (ref), useNavigation (ref), useRoactService (ref), appSessionService (ref), useDispatch (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), appEventIngestService (ref), fFlagLuaAppSduiEdpRouteAwareSessionRemoval (ref), useGetCurrentLegacyRoute (ref), setTabBarVisible (ref), fFlagEnableExperienceDetailsBottomSheetTopBar (ref), useTopBarHeight (ref), useScreenSize (ref), useDeviceInsets (ref), getSafeAreaSize (ref), discoveryTypesModule (ref), useEntrySurfacing (ref), experienceDetailsPageConstantsModule (ref), useStore (ref), peekViewState (ref), gameDetailsPeekViewEvents (ref), setGameDetailsPeekViewStateModule (ref), hasPageInCurrentRoute (ref), appPage (ref), fFlagEnableMotionJitterMetric (ref), useMotionJitterMetricModule (ref), removeGameDetailSessionIfDepartedModule (ref), sessionType (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), overlayProvider (ref), experienceDetailsBottomSheetTopBarModule (ref), sheet (ref), foundationModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), experienceDetailsPersistentActionBarModule (ref), sduiFeatureEntryPoint (ref), experienceDetailsFallbackActionBarModule (ref)
 	local universeId = experienceDetailsPageUtilsModule.getUniverseId(p1)
 	local onPeekViewClosed = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "onPeekViewClosed")
 	local var1 = getExperienceDetailsPageKeyModule(universeId)
@@ -87,7 +88,7 @@ return reactModule.memo(function(p1)
 	local var5 = useRoactService(appSessionService)
 	local var6 = useDispatch()
 	local var7 = if fFlagLuaAppEdpBottomSheetPeekViewEvents then useRoactService(appEventIngestService) else nil
-	local var8 = useGetCurrentLegacyRoute()
+	local var8 = if fFlagLuaAppSduiEdpRouteAwareSessionRemoval or fFlagLuaAppEdpBottomSheetPeekViewEvents then useGetCurrentLegacyRoute() else nil
 	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), setTabBarVisible (copy)
 		var6(setTabBarVisible(false))
@@ -155,7 +156,7 @@ return reactModule.memo(function(p1)
 			local _ = mountAsFullView == true
 		end
 		reactModule.useEffect(function()
-			-- upvalues: universeId (ref), var23 (write), var26 (ref), peekViewState (copy), gameDetailsPeekViewEvents (copy), var7 (write), analyticsSource (ref), tilePositionIndex (ref), experienceDetailsPageConstantsModule (copy), var6 (ref), setGameDetailsPeekViewStateModule (copy), hasPageInCurrentRoute (copy), var8 (ref), appPage (copy)
+			-- upvalues: universeId (ref), var23 (write), var26 (ref), peekViewState (copy), gameDetailsPeekViewEvents (copy), var7 (write), analyticsSource (ref), tilePositionIndex (ref), experienceDetailsPageConstantsModule (copy), var6 (ref), setGameDetailsPeekViewStateModule (copy), hasPageInCurrentRoute (copy), var8 (write), appPage (copy)
 			if universeId and not var23 then
 				local var27 = if var26 == peekViewState.Brief then "SwitchGame" elseif var26 == peekViewState.Closed then "OpenPeekView" else nil
 				
@@ -194,17 +195,29 @@ return reactModule.memo(function(p1)
 		useMotionJitterMetricModule(var14, experienceDetailsPageConstantsModule.EDP_BOTTOM_SHEET_SURFACE, false, "AbsolutePosition")
 	end
 	local var29 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), var8 (ref), onPeekViewClosed (ref), removeGameDetailSessionIfDepartedModule (copy), var5 (ref)
+		-- upvalues: var4 (ref), fFlagLuaAppSduiEdpRouteAwareSessionRemoval (copy), var8 (write), onPeekViewClosed (ref), removeGameDetailSessionIfDepartedModule (copy), var5 (ref), sessionType (copy)
 		if var4.isFocused() then
-			local var30 = var8()
+			local var30 = if fFlagLuaAppSduiEdpRouteAwareSessionRemoval then var8() else nil
 			
 			if onPeekViewClosed and typeof(onPeekViewClosed) == "function" then
 				onPeekViewClosed()
 			end
 			var4.goBack()
-			removeGameDetailSessionIfDepartedModule(var5, var30)
+			
+			if fFlagLuaAppSduiEdpRouteAwareSessionRemoval then
+				removeGameDetailSessionIfDepartedModule(var5, var30)
+				
+				return
+			elseif var5 then
+				var5:RemoveSession(sessionType.StructuralIdentifier.GameDetailSource)
+			end
 		end
-	end, { var4, var5, onPeekViewClosed, var8 })
+	end, {
+		var4,
+		var5,
+		onPeekViewClosed,
+		if fFlagLuaAppSduiEdpRouteAwareSessionRemoval then var8 else nil
+	})
 	local var30 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref), onPeekViewClosed (ref), appPage (copy), var5 (ref), sessionType (copy)
 		if var4.isFocused() then

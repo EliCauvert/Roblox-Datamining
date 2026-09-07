@@ -10,7 +10,6 @@ local signalsReactModule = require(parent.SignalsReact)
 local expChatSharedModule = require(parent.ExpChatShared)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local chatUIPrimitivesModule = require(parent.ChatUIPrimitives)
-local expChatPerfTracker = chatUIPrimitivesModule.Telemetry.ExpChatPerfTracker
 local inputTypeConstants = require(parent.InputType).InputTypeConstants
 local appChatNetworkingModule = require(parent.AppChatNetworking)
 local chatInputBoxDisabledModule = require(parent.AppChat.ChatInputBoxDisabled)
@@ -30,9 +29,6 @@ local chatInputBoxDisabledPressedSignal = interventionSharedModule.Signals.chatI
 local interventionTreatmentShownSignal = interventionSharedModule.Signals.interventionTreatmentShownSignal
 local constants = interventionSharedModule.Utils.Constants
 local fFlagFriendsChatEnforceInputCharacterLimitModule = require(friendsChat.Flags.FFlagFriendsChatEnforceInputCharacterLimit)
-local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
-local fFlagExpChatComposerFigmaParity = require(parent.SharedFlags).FFlagExpChatComposerFigmaParity
-local fFlagAppChatUniversalFeatureRestriction = require(parent.SharedFlags).FFlagAppChatUniversalFeatureRestriction
 local expChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
 local getFriendsChatNavigationStoreModule = require(friendsChat.Stores.GetFriendsChatNavigationStore)
 local useConsumeFocusInputBarRequestModule = require(script.Parent.useConsumeFocusInputBarRequest)
@@ -41,8 +37,6 @@ local resolveFadeModule = require(script.Parent.Parent.Utils.resolveFade)
 local useInExperienceLocalization = chatUIPrimitivesModule.Hooks.useInExperienceLocalization
 local layoutConstantsModule = require(friendsChat.LayoutConstants)
 local getConversationMessageSentInfoModule = require(script.Parent.Parent.Telemetry.ChatConversation.getConversationMessageSentInfo)
-local fFlagFriendsChatMessageSendPerfTrackingModule = require(friendsChat.Flags.FFlagFriendsChatMessageSendPerfTracking)
-local friendsChatTabNameModule = require(friendsChat.FriendsChatTabName)
 local serializeParticipantIdsForTelemetryModule = require(script.Parent.Parent.Telemetry.App.serializeParticipantIdsForTelemetry)
 local chatInputBarView = chatUIPrimitivesModule.ChatInputBarView
 local useChatInputBarSettingsModule = require(parent.ExpChatIntegration.useChatInputBarSettings)
@@ -71,7 +65,7 @@ local function isSendResponseAccepted(p1)
 end
 
 return function(p1)
-	-- upvalues: foundationModule (ref), expChatConversationListAdapterModule (ref), useChatTimeoutDetailsFromHydrationModule (ref), signalsReactModule (ref), useChatWindowSettingsModule (ref), reactModule (ref), useChatInputBarSettingsModule (ref), useInExperienceLocalization (ref), chatUIPrimitivesModule (ref), inputTypeConstants (ref), getConversationInputPlaceholderModule (ref), userInputService (ref), useLocalization (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useInterpolatedClientSettingsModule (ref), useChatInputBarOnFocusModule (ref), getFriendsChatNavigationStoreModule (ref), useConsumeFocusInputBarRequestModule (ref), interventionTreatmentShownSignal (ref), constants (ref), httpService (ref), fFlagFriendsChatMessageSendPerfTrackingModule (ref), expChatPerfTracker (ref), friendsChatTabNameModule (ref), playersService (ref), name (ref), createConversationFromFriendPlaceholderModule (ref), getConversationMessageStoreModule (ref), getConversationMessageListStoreModule (ref), serializeParticipantIdsForTelemetryModule (ref), appChatNetworkingModule (ref), chatConversationTelemetryEventsModule (ref), getConversationMessageSentInfoModule (ref), isSendResponseAccepted (ref), signalsExperimentalModule (ref), ingestNewerMessagesModule (ref), sendMessageErrorModule (ref), fFlagAppChatUniversalFeatureRestriction (ref), parent (ref), fFlagAppChatReactiveFeatureRestrictions (ref), interventionSharedModule (ref), chatInputBoxDisabledPressedSignal (ref), chatInputBoxDisabledModule (ref), resolveFadeModule (ref), layoutConstantsModule (ref), chatInputBarView (ref), fFlagExpChatComposerFigmaParity (ref), t (ref), fFlagFriendsChatEnforceInputCharacterLimitModule (ref), messageCharacterLimitModule (ref)
+	-- upvalues: foundationModule (ref), expChatConversationListAdapterModule (ref), useChatTimeoutDetailsFromHydrationModule (ref), signalsReactModule (ref), useChatWindowSettingsModule (ref), reactModule (ref), useChatInputBarSettingsModule (ref), useInExperienceLocalization (ref), chatUIPrimitivesModule (ref), inputTypeConstants (ref), getConversationInputPlaceholderModule (ref), userInputService (ref), useLocalization (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useInterpolatedClientSettingsModule (ref), useChatInputBarOnFocusModule (ref), getFriendsChatNavigationStoreModule (ref), useConsumeFocusInputBarRequestModule (ref), interventionTreatmentShownSignal (ref), constants (ref), playersService (ref), name (ref), createConversationFromFriendPlaceholderModule (ref), getConversationMessageStoreModule (ref), getConversationMessageListStoreModule (ref), httpService (ref), serializeParticipantIdsForTelemetryModule (ref), appChatNetworkingModule (ref), chatConversationTelemetryEventsModule (ref), getConversationMessageSentInfoModule (ref), isSendResponseAccepted (ref), signalsExperimentalModule (ref), ingestNewerMessagesModule (ref), sendMessageErrorModule (ref), chatInputBoxDisabledPressedSignal (ref), chatInputBoxDisabledModule (ref), resolveFadeModule (ref), layoutConstantsModule (ref), chatInputBarView (ref), t (ref), fFlagFriendsChatEnforceInputCharacterLimitModule (ref), messageCharacterLimitModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local conversationId = p1.conversationId
 	local var2 = expChatConversationListAdapterModule.isFriendPlaceholder(conversationId)
@@ -125,14 +119,6 @@ return function(p1)
 	local var25 = chatUIPrimitivesModule.Hooks.useFocusInputBar()
 	local ref = var25.ref
 	useConsumeFocusInputBarRequestModule(var25.focus)
-	local var26 = reactModule.useCallback(function()
-		-- upvalues: ref (ref)
-		local current = ref.current
-		
-		if current then
-			current:ReleaseFocus()
-		end
-	end, {})
 	reactModule.useEffect(function()
 		-- upvalues: var24 (ref)
 		return function()
@@ -142,7 +128,7 @@ return function(p1)
 	end, { var24 })
 	reactModule.useEffect(function()
 		-- upvalues: interventionTreatmentShownSignal (copy), constants (copy), ref (ref)
-		local var27 = interventionTreatmentShownSignal:connect(function(p2)
+		local var26 = interventionTreatmentShownSignal:connect(function(p2)
 			-- upvalues: constants (copy), ref (copy)
 			if p2 == constants.TreatmentType.PartyChatNudgeDialog or p2 == constants.TreatmentType.PartyChatTimeoutDialog then
 				local current = ref.current
@@ -154,11 +140,11 @@ return function(p1)
 		end)
 		
 		return function()
-			-- upvalues: var27 (ref)
-			var27:disconnect()
+			-- upvalues: var26 (ref)
+			var26:disconnect()
 		end
 	end, {})
-	local var27 = var9 or var1.Typography.CaptionMedium.FontSize
+	local var26 = var9 or var1.Typography.CaptionMedium.FontSize
 	
 	return reactModule.createElement("Frame", {
 		Name = "friendsChatInput",
@@ -188,25 +174,19 @@ return function(p1)
 		inputBar = reactModule.createElement(chatInputBarView, {
 			showSideChip = false,
 			onSend = reactModule.useCallback(function(p2)
-				-- upvalues: isTimedOut (ref), httpService (copy), fFlagFriendsChatMessageSendPerfTrackingModule (copy), expChatPerfTracker (copy), friendsChatTabNameModule (copy), conversationId (ref), playersService (copy), var2 (ref), expChatConversationListAdapterModule (copy), name (copy), createConversationFromFriendPlaceholderModule (copy), p1 (ref), var3 (ref), getConversationMessageStoreModule (copy), getConversationMessageListStoreModule (copy), serializeParticipantIdsForTelemetryModule (copy), appChatNetworkingModule (copy), var19 (ref), chatConversationTelemetryEventsModule (copy), getConversationMessageSentInfoModule (copy), isSendResponseAccepted (copy), signalsExperimentalModule (copy), ingestNewerMessagesModule (copy), sendMessageErrorModule (copy)
-				if isTimedOut then return end
-				local var28 = if typeof(p2) == "string" then p2 else ""
-				
-				if var28 == "" then
+				-- upvalues: isTimedOut (ref), conversationId (ref), playersService (copy), var2 (ref), expChatConversationListAdapterModule (copy), name (copy), createConversationFromFriendPlaceholderModule (copy), p1 (ref), var3 (ref), getConversationMessageStoreModule (copy), getConversationMessageListStoreModule (copy), httpService (copy), serializeParticipantIdsForTelemetryModule (copy), appChatNetworkingModule (copy), var19 (ref), chatConversationTelemetryEventsModule (copy), getConversationMessageSentInfoModule (copy), isSendResponseAccepted (copy), signalsExperimentalModule (copy), ingestNewerMessagesModule (copy), sendMessageErrorModule (copy)
+				if isTimedOut then
 					return
 				end
-				local text = "sending-friends-message-" .. httpService:GenerateGUID(false)
-				local var29 = if fFlagFriendsChatMessageSendPerfTrackingModule then expChatPerfTracker.start(expChatPerfTracker.Events.MessageSendToWindowRenderInterval, { messageId = text }, { tabName = friendsChatTabNameModule }) else false
 				task.spawn(function()
-					-- upvalues: conversationId (copy), playersService (copy), var2 (copy), var29 (write), expChatPerfTracker (copy), text (ref), expChatConversationListAdapterModule (copy), name (copy), createConversationFromFriendPlaceholderModule (copy), p1 (copy), var3 (copy), getConversationMessageStoreModule (copy), getConversationMessageListStoreModule (copy), var28 (ref), serializeParticipantIdsForTelemetryModule (copy), appChatNetworkingModule (copy), var19 (copy), chatConversationTelemetryEventsModule (copy), getConversationMessageSentInfoModule (copy), isSendResponseAccepted (copy), signalsExperimentalModule (copy), ingestNewerMessagesModule (copy), sendMessageErrorModule (copy)
-					local var30
+					-- upvalues: p2 (ref), conversationId (copy), playersService (copy), var2 (copy), expChatConversationListAdapterModule (copy), name (copy), createConversationFromFriendPlaceholderModule (copy), p1 (copy), var3 (copy), getConversationMessageStoreModule (copy), getConversationMessageListStoreModule (copy), httpService (copy), serializeParticipantIdsForTelemetryModule (copy), appChatNetworkingModule (copy), var19 (copy), chatConversationTelemetryEventsModule (copy), getConversationMessageSentInfoModule (copy), isSendResponseAccepted (copy), signalsExperimentalModule (copy), ingestNewerMessagesModule (copy), sendMessageErrorModule (copy)
+					local var27 = if typeof(p2) == "string" then p2 else ""
+					
+					if var27 == "" then return end
 					local conversationId_1 = conversationId or ""
 					local localPlayer = playersService.LocalPlayer
 					
 					if var2 and conversationId ~= nil then
-						if var29 then
-							expChatPerfTracker.cancel(expChatPerfTracker.Events.MessageSendToWindowRenderInterval, { messageId = text })
-						end
 						local conversation = expChatConversationListAdapterModule.getConversationStore().getConversation(conversationId, false)
 						
 						if conversation == nil then
@@ -214,53 +194,54 @@ return function(p1)
 							
 							return
 						end
-						local var31 = createConversationFromFriendPlaceholderModule(conversation, if localPlayer then localPlayer.UserId else 0)
+						local var28 = createConversationFromFriendPlaceholderModule(conversation, if localPlayer then localPlayer.UserId else 0)
 						
-						if var31 == nil then
+						if var28 == nil then
 							name:warning(`Unable to create conversation for friend placeholder {conversationId}`)
 							
 							return
 						end
-						var30, var76 = var31:await()
+						local var29, var30 = var28:await()
 						
-						if not var30 or var76 == nil then
+						if not var29 or var30 == nil then
 							name:warning(`Failed to create conversation for friend placeholder {conversationId}`)
 							
 							return
 						end
-						conversationId_1 = var76.id
+						conversationId_1 = var30.id
 						
 						if p1.onFriendPlaceholderConversationCreated ~= nil then
 							p1.onFriendPlaceholderConversationCreated(conversationId_1)
 						end
 					elseif var3 then
-						local var32 = getConversationMessageStoreModule(false)
-						local var33 = getConversationMessageListStoreModule(false)
-						var32.upsertMessages({
+						local var31 = getConversationMessageStoreModule(false)
+						local var32 = getConversationMessageListStoreModule(false)
+						local text = "sending-friends-message-" .. httpService:GenerateGUID(false)
+						var31.upsertMessages({
 							[text] = {
 								type = "user",
 								status = "Pending",
 								id = text,
-								content = var28,
+								content = var27,
 								created_at = tostring(os.time()),
 								sender_user_id = if localPlayer then localPlayer.UserId else nil,
 								conversationId = conversationId_1
 							}
 						})
-						var33.prependMessages(conversationId_1, { text })
-						var30 = string.rep("#", utf8.len(var28) or #var28)
+						var32.prependMessages(conversationId_1, { text })
+						local repeated = string.rep("#", utf8.len(var27) or #var27)
 						local conversation = expChatConversationListAdapterModule.getConversationStore().getConversation(conversationId_1, false)
-						local var34 = serializeParticipantIdsForTelemetryModule(if conversation then conversation.participants else nil, if localPlayer then localPlayer.UserId else 0)
-						appChatNetworkingModule.http.SendChatTextMessage(nil, conversationId_1, var28):andThen(function(p3)
-							-- upvalues: var19 (copy), chatConversationTelemetryEventsModule (copy), getConversationMessageSentInfoModule (copy), var34 (ref), isSendResponseAccepted (copy), var32 (ref), text (copy), var30 (ref), signalsExperimentalModule (copy), ingestNewerMessagesModule (copy), conversationId_1 (write), expChatConversationListAdapterModule (copy), localPlayer (ref), var33 (ref)
-							var19.current(chatConversationTelemetryEventsModule.ConversationMessageSent, getConversationMessageSentInfoModule(p3, var34))
+						local var33 = serializeParticipantIdsForTelemetryModule(if conversation then conversation.participants else nil, if localPlayer then localPlayer.UserId else 0)
+						appChatNetworkingModule.http.SendChatTextMessage(nil, conversationId_1, var27):andThen(function(p3)
+							-- upvalues: var19 (copy), chatConversationTelemetryEventsModule (copy), getConversationMessageSentInfoModule (copy), var33 (ref), isSendResponseAccepted (copy), var31 (ref), text (ref), repeated (ref), signalsExperimentalModule (copy), ingestNewerMessagesModule (copy), conversationId_1 (write), expChatConversationListAdapterModule (copy), localPlayer (ref), var32 (ref)
+							var19.current(chatConversationTelemetryEventsModule.ConversationMessageSent, getConversationMessageSentInfoModule(p3, var33))
 							
 							if isSendResponseAccepted(p3) then
 								local messages = p3.responseBody.messages or {}
 								signalsExperimentalModule.batch(function()
-									-- upvalues: ingestNewerMessagesModule (copy), conversationId_1 (copy), messages (ref), var32 (copy), text (copy), var30 (copy), expChatConversationListAdapterModule (copy), localPlayer (copy), var33 (copy)
+									-- upvalues: ingestNewerMessagesModule (copy), conversationId_1 (copy), messages (ref), var31 (copy), text (copy), repeated (copy), expChatConversationListAdapterModule (copy), localPlayer (copy), var32 (copy)
 									if #ingestNewerMessagesModule(conversationId_1, messages) == 0 then
-										var32.updateMessage(text, { status = "Failed", content = var30 })
+										var31.updateMessage(text, { status = "Failed", content = repeated })
 										
 										return
 									end
@@ -268,26 +249,25 @@ return function(p1)
 										hasUnreadMessages = false,
 										localUserId = if localPlayer then localPlayer.UserId else 0
 									})
-									var33.removeMessage(conversationId_1, text)
-									var32.removeMessage(text)
+									var32.removeMessage(conversationId_1, text)
+									var31.removeMessage(text)
 								end)
 								
 								return
 							end
-							var32.updateMessage(text, { status = "Failed", content = var30 })
+							var31.updateMessage(text, { status = "Failed", content = repeated })
 						end):catch(function(p3)
-							-- upvalues: name (copy), conversationId_1 (write), var19 (copy), chatConversationTelemetryEventsModule (copy), sendMessageErrorModule (copy), var34 (ref), var32 (ref), text (copy), var30 (ref)
+							-- upvalues: name (copy), conversationId_1 (write), var19 (copy), chatConversationTelemetryEventsModule (copy), sendMessageErrorModule (copy), var33 (ref), var31 (ref), text (ref), repeated (ref)
 							name:warning(`Failed to send message to {conversationId_1}: {tostring(p3)}`)
 							var19.current(chatConversationTelemetryEventsModule.ConversationMessageSent, {
 								messageSentResult = sendMessageErrorModule.OtherFailure,
-								recipientIds = var34
+								recipientIds = var33
 							})
-							var32.updateMessage(text, { status = "Failed", content = var30 })
+							var31.updateMessage(text, { status = "Failed", content = repeated })
 						end)
 						
 						return
-					elseif var29 then
-						expChatPerfTracker.cancel(expChatPerfTracker.Events.MessageSendToWindowRenderInterval, { messageId = text })
+					else
 					end
 				end)
 			end, {
@@ -298,13 +278,12 @@ return function(p1)
 				p1.onFriendPlaceholderConversationCreated
 			}),
 			canLocalUserChat = var7 or false,
-			composerLayout = fFlagExpChatComposerFigmaParity,
 			disabledOverlay = if isTimedOut then reactModule.createElement(foundationModule.View, {
 				tag = "auto-y",
 				Size = UDim2.fromScale(1, 0),
 				padding = {
-					top = UDim.new(0, var27 / 2),
-					bottom = UDim.new(0, var27 / 2),
+					top = UDim.new(0, var26 / 2),
+					bottom = UDim.new(0, var26 / 2),
 					left = UDim.new(0, var1.Padding.Large),
 					right = UDim.new(0, var1.Padding.XSmall)
 				}
@@ -313,42 +292,21 @@ return function(p1)
 					BackgroundTransparency = 1,
 					ZIndex = 5,
 					GroupTransparency = p1.transparencyValue or 0,
-					Size = UDim2.new(1, 0, 0, math.max(var1.Typography.CaptionMedium.LineHeight, var27))
+					Size = UDim2.new(1, 0, 0, math.max(var1.Typography.CaptionMedium.LineHeight, var26))
 				}, {
 					DisabledInput = reactModule.createElement(chatInputBoxDisabledModule, {
 						bodyText = var17.timeoutDisabled,
-						contentSize = var27,
+						contentSize = var26,
 						endTimestamp = var4.timeoutEndTimestamp,
 						font = Enum.Font.BuilderSans,
 						onActivated = reactModule.useCallback(function()
-							-- upvalues: fFlagAppChatUniversalFeatureRestriction (copy), parent (copy), var26 (ref), fFlagAppChatReactiveFeatureRestrictions (copy), interventionSharedModule (copy), chatInputBoxDisabledPressedSignal (copy), var4 (ref)
-							if not fFlagAppChatUniversalFeatureRestriction then
-								chatInputBoxDisabledPressedSignal:fire({
-									endTimestamp = var4.timeoutEndTimestamp,
-									decisionEventId = var4.decisionEventId,
-									duration = var4.duration
-								})
-								
-								return
-							end
-							local abuseVectorModule = require(parent.UniversalFeatureRestrictions.AbuseVector)
-							local showFeatureRestrictionModule = require(parent.UniversalFeatureRestrictions.showFeatureRestriction)
-							local t = {
-								onShown = var26,
-								onAppeal = function() end
-							}
-							
-							if fFlagAppChatReactiveFeatureRestrictions then
-								local partyChatTimeoutReceivedSignal = interventionSharedModule.Signals.partyChatTimeoutReceivedSignal
-								
-								function t.onAcknowledgementSuccess()
-									-- upvalues: partyChatTimeoutReceivedSignal (ref)
-									partyChatTimeoutReceivedSignal:fire(nil)
-								end
-							end
-							showFeatureRestrictionModule(abuseVectorModule.PartyChat, t)
+							-- upvalues: chatInputBoxDisabledPressedSignal (copy), var4 (ref)
+							chatInputBoxDisabledPressedSignal:fire({
+								endTimestamp = var4.timeoutEndTimestamp,
+								decisionEventId = var4.decisionEventId,
+								duration = var4.duration
+							})
 						end, {
-							var26,
 							var4.timeoutEndTimestamp,
 							var4.decisionEventId,
 							var4.duration

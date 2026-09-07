@@ -1,26 +1,12 @@
-﻿local parent = script.Parent.Parent
-local signalsExperimentalModule = require(parent.SignalsExperimental)
-local actionHandlersModule = require(script.Parent.ActionHandlers)
-local fFlagSignalsRegistryOwnedFanout = require(parent.SharedFlags).FFlagSignalsRegistryOwnedFanout
+﻿local signalsExperimentalModule = require(script.Parent.Parent.SignalsExperimental)
 
 return function(value)
-	-- upvalues: fFlagSignalsRegistryOwnedFanout (ref), signalsExperimentalModule (ref), actionHandlersModule (ref)
+	-- upvalues: signalsExperimentalModule (ref)
 	return function(p1, _)
-		-- upvalues: fFlagSignalsRegistryOwnedFanout (copy), signalsExperimentalModule (copy), actionHandlersModule (copy), value (ref)
+		-- upvalues: value (ref), signalsExperimentalModule (copy)
 		return function(p2)
-			-- upvalues: fFlagSignalsRegistryOwnedFanout (copy), signalsExperimentalModule (copy), actionHandlersModule (copy), value (copy), p1 (ref)
-			local type
-			if fFlagSignalsRegistryOwnedFanout then
-				type = nil
-				signalsExperimentalModule.batch(function()
-					-- upvalues: actionHandlersModule (copy), value (copy), p2 (ref), type (write), p1 (copy)
-					actionHandlersModule.handleAction(value, p2)
-					type = p1(p2)
-				end)
-				
-				return type
-			end
-			type = value[p2.type]
+			-- upvalues: value (copy), signalsExperimentalModule (copy), p1 (ref)
+			local type = value[p2.type]
 			
 			if type and #type > 0 then
 				signalsExperimentalModule.batch(function()

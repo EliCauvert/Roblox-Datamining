@@ -5,6 +5,7 @@ local collectionViewsModule = require(parent.CollectionViews)
 local foundationModule = require(parent.Foundation)
 local navigationModule = require(parent.Navigation)
 local _ = require(parent.DataHydration.MomentsStoreTypes)
+local fFlagMomentsCarouselVideoHandoff = require(parent.SharedFlags).FFlagMomentsCarouselVideoHandoff
 local momentTileModule = require(script.Parent.MomentTile)
 local momentsCarouselMediaProviderModule = require(script.Parent.MomentsCarouselMediaProvider)
 local getVisibleTileRangeModule = require(script.Parent.getVisibleTileRange)
@@ -16,7 +17,7 @@ local useNavigationFocus = navigationModule.useNavigationFocus
 local useTokens = foundationModule.Hooks.useTokens
 
 return function(p1)
-	-- upvalues: useTokens (ref), useProfileFormFactorModule (ref), enumsModule (ref), useNavigationFocus (ref), useDynamicSizeMarginModule (ref), reactModule (ref), getVisibleTileRangeModule (ref), momentTileModule (ref), collectionCarousel (ref), momentsCarouselMediaProviderModule (ref)
+	-- upvalues: useTokens (ref), useProfileFormFactorModule (ref), enumsModule (ref), useNavigationFocus (ref), useDynamicSizeMarginModule (ref), reactModule (ref), fFlagMomentsCarouselVideoHandoff (ref), getVisibleTileRangeModule (ref), momentTileModule (ref), collectionCarousel (ref), momentsCarouselMediaProviderModule (ref)
 	local moments = p1.moments
 	local var1 = useTokens()
 	local var2 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
@@ -26,7 +27,7 @@ return function(p1)
 	local var8, var9 = reactModule.useState(1)
 	local var10 = reactModule.useRef(nil)
 	local var11 = reactModule.useRef(nil)
-	local var12 = reactModule.useRef(nil)
+	local var12 = if fFlagMomentsCarouselVideoHandoff then reactModule.useRef(nil) else nil
 	local var13 = if var2 then 4 else 3
 	local var14 = if var2 then nil else 0.2
 	local onTileImpression = p1.onTileImpression
@@ -117,18 +118,20 @@ return function(p1)
 			columnGap = 12,
 			items = moments,
 			renderItem = reactModule.useCallback(function(p2, p3, p4)
-				-- upvalues: reactModule (copy), momentTileModule (copy), var3 (ref), var8 (ref), var12 (ref), p1 (ref)
+				-- upvalues: reactModule (copy), momentTileModule (copy), var3 (ref), var8 (ref), fFlagMomentsCarouselVideoHandoff (copy), var12 (ref), p1 (ref)
 				return reactModule.createElement(momentTileModule, {
 					moment = p2,
 					layoutOrder = p3,
 					itemSize = p4,
 					isActive = var3 and p3 == var8,
 					onActivated = function()
-						-- upvalues: var12 (copy), p1 (copy), p3 (ref)
-						local current = var12.current
-						
-						if current ~= nil then
-							current.release()
+						-- upvalues: fFlagMomentsCarouselVideoHandoff (copy), var12 (copy), p1 (copy), p3 (ref)
+						if fFlagMomentsCarouselVideoHandoff then
+							local current = var12.current
+							
+							if current ~= nil then
+								current.release()
+							end
 						end
 						p1.onSelectMoment(p3)
 					end
@@ -149,6 +152,6 @@ return function(p1)
 		activeIndex = var8,
 		playbackActive = var19,
 		mediaCornerRadius = var1.Radius.Large,
-		handoffRef = var12
+		handoffRef = if fFlagMomentsCarouselVideoHandoff then var12 else nil
 	}, { Carousel = frame }) else frame
 end

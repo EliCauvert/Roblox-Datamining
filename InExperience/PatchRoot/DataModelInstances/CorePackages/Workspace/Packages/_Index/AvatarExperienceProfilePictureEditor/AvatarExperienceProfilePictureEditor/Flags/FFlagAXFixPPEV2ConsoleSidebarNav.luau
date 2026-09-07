@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXFixPPEV2ConsoleSidebarNav", false)

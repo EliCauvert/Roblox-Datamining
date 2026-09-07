@@ -1,19 +1,17 @@
 ﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local signalsModule = require(parent.Signals)
+local signalsModule = require(momentsCreation.Parent.Signals)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local classifyTTSErrorModule = require(momentsCreation.Audio.classifyTTSError)
 local normalizeWaveformModule = require(momentsCreation.Audio.normalizeWaveform)
 local getFIntMomentsTTSWaveformSamplesPerSecondModule = require(momentsCreation.Flags.GetFIntMomentsTTSWaveformSamplesPerSecond)
 local getFIntMomentsTTSWaveformMinSamplesModule = require(momentsCreation.Flags.GetFIntMomentsTTSWaveformMinSamples)
 local getFIntMomentsTTSWaveformMaxSamplesModule = require(momentsCreation.Flags.GetFIntMomentsTTSWaveformMaxSamples)
-local audioDuckingFastInts = require(parent.MomentsCommon).Media.audioDuckingFastInts
 local playersService = game:GetService("Players")
 local runService = game:GetService("RunService")
 local createSignal = signalsModule.createSignal
 
 local function defaultCreateTtsInstance()
-	-- upvalues: playersService (ref), audioDuckingFastInts (ref)
+	-- upvalues: playersService (ref)
 	if not game:GetEngineFeature("TextToSpeechPlatformPreview") then
 		return nil
 	end
@@ -30,7 +28,7 @@ local function defaultCreateTtsInstance()
 	local TTSSharedGraph = Instance.new("Folder")
 	TTSSharedGraph.Name = "TTSSharedGraph"
 	local audioTextToSpeech = Instance.new("AudioTextToSpeech")
-	audioTextToSpeech.Volume = audioDuckingFastInts.getTtsVolume()
+	audioTextToSpeech.Volume = 1
 	audioTextToSpeech.Parent = TTSSharedGraph
 	local audioDeviceOutput = Instance.new("AudioDeviceOutput")
 	audioDeviceOutput.Parent = TTSSharedGraph

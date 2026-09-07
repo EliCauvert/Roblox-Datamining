@@ -15,6 +15,7 @@ local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Crea
 local rapidGameplayPauseIntervalMs = game:DefineFastInt("RapidGameplayPauseIntervalMs", 1000)
 local rapidGameplayPauseMinNotificationDurationMs = game:DefineFastInt("RapidGameplayPauseMinNotificationDurationMs", 500)
 local gameplayPauseShowDelayMs = game:DefineFastInt("GameplayPauseShowDelayMs", 300)
+local streamingPauseUIAnalyticsEnabled = game:DefineFastFlag("StreamingPauseUIAnalyticsEnabled", false)
 local t = {
 	eventName = "StreamingPauseUISessionStats",
 	description = "Session stats for streaming pause UI visibility",
@@ -66,7 +67,7 @@ local function reportPauseSessionAnalytics()
 end
 
 local function _(value)
-	-- upvalues: var9 (ref), runService (ref), var3 (write), var1 (write), var2 (write)
+	-- upvalues: var9 (ref), runService (ref), streamingPauseUIAnalyticsEnabled (ref), var3 (write), var1 (write), var2 (write)
 	if value then
 		var9:Show()
 	else
@@ -74,16 +75,18 @@ local function _(value)
 	end
 	runService:SetRobloxGuiFocused(value)
 	
-	if value then
-		if var3 == nil then
-			var3 = os.clock()
-			var1 += 1
-			
-			return
+	if streamingPauseUIAnalyticsEnabled then
+		if value then
+			if var3 == nil then
+				var3 = os.clock()
+				var1 += 1
+				
+				return
+			end
+		elseif var3 ~= nil then
+			var2 += (os.clock() - var3) * 1000
+			var3 = nil
 		end
-	elseif var3 ~= nil then
-		var2 += (os.clock() - var3) * 1000
-		var3 = nil
 	end
 end
 
@@ -105,7 +108,7 @@ local _ = function()
 end
 
 local function enterStage(p1)
-	-- upvalues: UNPAUSED (write), var7 (write), var8 (write), frozen (ref), var6 (write), var9 (ref), runService (ref), var3 (write), var2 (write), gameplayPauseShowDelayMs (ref), localPlayer (write), var10 (ref), enterStage (ref), var5 (write), rapidGameplayPauseIntervalMs (ref), var1 (write), rapidGameplayPauseMinNotificationDurationMs (ref)
+	-- upvalues: UNPAUSED (write), var7 (write), var8 (write), frozen (ref), var6 (write), var9 (ref), runService (ref), streamingPauseUIAnalyticsEnabled (ref), var3 (write), var2 (write), gameplayPauseShowDelayMs (ref), localPlayer (write), var10 (ref), enterStage (ref), var5 (write), rapidGameplayPauseIntervalMs (ref), var1 (write), rapidGameplayPauseMinNotificationDurationMs (ref)
 	UNPAUSED = p1
 	
 	if var7 ~= nil then
@@ -121,9 +124,7 @@ local function enterStage(p1)
 		var9:Hide()
 		runService:SetRobloxGuiFocused(false)
 		
-		if var3 == nil then
-			return
-		else
+		if streamingPauseUIAnalyticsEnabled and var3 ~= nil then
 			var2 += (os.clock() - var3) * 1000
 			var3 = nil
 			
@@ -145,7 +146,7 @@ local function enterStage(p1)
 		var9:Show()
 		runService:SetRobloxGuiFocused(true)
 		
-		if var3 == nil then
+		if streamingPauseUIAnalyticsEnabled and var3 == nil then
 			var3 = os.clock()
 			var1 += 1
 			
@@ -211,4 +212,7 @@ end
 
 var9:SetParent(var10)
 guiService.NetworkPausedEnabledChanged:Connect(enableNotification)
-game.Close:Connect(reportPauseSessionAnalytics)
+
+if streamingPauseUIAnalyticsEnabled then
+	game.Close:Connect(reportPauseSessionAnalytics)
+end

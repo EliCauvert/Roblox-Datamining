@@ -25,17 +25,11 @@ return reactModule.memo(function(p1)
 			Position = UDim2.fromScale(0, 1)
 		})
 	end
-	local selection = p1.selection
-	
-	if selection == nil then
-		selection = if p1.onActivated then constantsModule.SELECTABLE else constantsModule.NOT_SELECTABLE
-	end
 	return reactModule.createElement(view, {
-		testId = "leaderboard-row-shell",
 		Size = UDim2.new(1, 0, 0, p1.rowHeight),
 		LayoutOrder = p1.layoutOrder,
 		onActivated = p1.onActivated,
 		ref = p1.rowRef,
-		selection = selection
+		selection = p1.selection
 	}, t)
 end)

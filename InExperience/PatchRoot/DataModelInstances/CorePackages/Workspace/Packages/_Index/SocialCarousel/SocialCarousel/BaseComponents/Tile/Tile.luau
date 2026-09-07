@@ -16,11 +16,10 @@ local statusIndicator = foundationModule.StatusIndicator
 local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
 local radius = foundationModule.Enums.Radius
 local fFlagSocialCarouselShowLoadingSkeletonModule = require(socialCarousel.Flags.FFlagSocialCarouselShowLoadingSkeleton)
-local fFlagSocialCarouselRemoveStrokeForAddFriendsModule = require(socialCarousel.Flags.FFlagSocialCarouselRemoveStrokeForAddFriends)
 local fIntSocalCarouselMaxNewRequestsCountModule = require(socialCarousel.Flags.FIntSocalCarouselMaxNewRequestsCount)
 
 return function(p1)
-	-- upvalues: reactModule (ref), useTokens (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref), textService (ref), view (ref), image (ref), enums (ref), text (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), fIntSocalCarouselMaxNewRequestsCountModule (ref), skeleton (ref), radius (ref), fFlagSocialCarouselRemoveStrokeForAddFriendsModule (ref), icon (ref), iconSize (ref)
+	-- upvalues: reactModule (ref), useTokens (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref), textService (ref), view (ref), image (ref), enums (ref), text (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), fIntSocalCarouselMaxNewRequestsCountModule (ref), skeleton (ref), radius (ref), icon (ref), iconSize (ref)
 	local tileRef = p1.tileRef or reactModule.useRef(nil)
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useState(false)
@@ -76,7 +75,7 @@ return function(p1)
 					["align-y-center"] = true,
 					row = true
 				},
-				stroke = if fFlagSocialCarouselRemoveStrokeForAddFriendsModule then nil else {
+				stroke = {
 					Color = var1.Color.Stroke.Emphasis.Color3,
 					Transparency = var1.Color.Stroke.Emphasis.Transparency,
 					Thickness = var1.Stroke.Thick,

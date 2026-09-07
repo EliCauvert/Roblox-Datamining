@@ -5,7 +5,6 @@ local robloxAppEnumsModule = require(parent_1.RobloxAppEnums)
 local robloxAppHooksModule = require(parent_1.RobloxAppHooks)
 local foundationModule = require(parent_1.Foundation)
 local peopleServiceModule = require(parent_1.PeopleService)
-local switchServerModule = require(parent_1.SwitchServer)
 local useDeviceOrientation = robloxAppHooksModule.useDeviceOrientation
 local useGetPeopleServiceModule = require(parent.Hooks.useGetPeopleService)
 local useScrollingFrameStoreModule = require(parent.Hooks.useScrollingFrameStore)
@@ -15,12 +14,11 @@ local peopleCardsModule = require(parent.Components.PeopleCards)
 local coreButtonRowModule = require(parent.Components.CoreButtonRow)
 local menuButtonsWrapperModule = require(parent.Components.MenuButtonsWrapper)
 local titleBarModule = require(parent.Components.TitleBar)
+local switchServerConfirmationModule = require(parent.Components.SwitchServerConfirmation)
+local switchServerTelemetryModule = require(parent.Telemetry.SwitchServerTelemetry)
 local constantsModule = require(parent.Constants)
 local gameSettings = UserSettings().GameSettings
-local switchServerConfirmation = switchServerModule.SwitchServerConfirmation
-local switchServerTelemetry = switchServerModule.SwitchServerTelemetry
-local isSideSheetEnabledModule = require(parent_1.InExperienceSideSheetUtils.isSideSheetEnabled)
-local fFlagShowSwitchServerButton = require(parent_1.SharedFlags).FFlagShowSwitchServerButton
+local fFlagEnableSideSheet = require(parent_1.SharedFlags).FFlagEnableSideSheet
 local flags = peopleServiceModule.getService("Flags")
 local getFFlagAddPeoplePageCardLayout = flags.GetFFlagAddPeoplePageCardLayout
 local getFFlagPeoplePageLazyRenderCards = flags.GetFFlagPeoplePageLazyRenderCards
@@ -32,9 +30,10 @@ local fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView = flags.FFlagPeoplePa
 local fFlagPeoplePageFlipVolumePopoverToFitViewport = flags.FFlagPeoplePageFlipVolumePopoverToFitViewport
 local fFlagPeoplePageDismissCardMenuOnScrollOutOfView = flags.FFlagPeoplePageDismissCardMenuOnScrollOutOfView
 local fFlagFixVirtualizedGridNumItems = flags.FFlagFixVirtualizedGridNumItems
+local fFlagShowSwitchServerButton = flags.FFlagShowSwitchServerButton
 
 return function(p1)
-	-- upvalues: getFFlagAddPeoplePageCardLayout (ref), useGetPeopleServiceModule (ref), reactModule (ref), peopleServiceModule (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), gameSettings (ref), getFFlagPeoplePagePostponeInitialRender (ref), getFFlagPeoplePageLazyRenderCards (ref), fFlagEnablePeopleListLazyRender (ref), fFlagPeopleCardsEnableVirtualizedGrid (ref), fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (ref), fFlagPeoplePageFlipVolumePopoverToFitViewport (ref), fFlagPeoplePageDismissCardMenuOnScrollOutOfView (ref), useScrollingFrameStoreModule (ref), fFlagFixVirtualizedGridNumItems (ref), fFlagPeoplePageRemoveUseMemoElements (ref), peopleCardsModule (ref), peopleListModule (ref), fFlagShowSwitchServerButton (ref), isSideSheetEnabledModule (ref), menuButtonsWrapperModule (ref), coreButtonRowModule (ref), constantsModule (ref), switchServerTelemetry (ref), titleBarModule (ref), view (ref), switchServerConfirmation (ref)
+	-- upvalues: getFFlagAddPeoplePageCardLayout (ref), useGetPeopleServiceModule (ref), reactModule (ref), peopleServiceModule (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), gameSettings (ref), getFFlagPeoplePagePostponeInitialRender (ref), getFFlagPeoplePageLazyRenderCards (ref), fFlagEnablePeopleListLazyRender (ref), fFlagPeopleCardsEnableVirtualizedGrid (ref), fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (ref), fFlagPeoplePageFlipVolumePopoverToFitViewport (ref), fFlagPeoplePageDismissCardMenuOnScrollOutOfView (ref), useScrollingFrameStoreModule (ref), fFlagFixVirtualizedGridNumItems (ref), fFlagPeoplePageRemoveUseMemoElements (ref), peopleCardsModule (ref), peopleListModule (ref), fFlagShowSwitchServerButton (ref), fFlagEnableSideSheet (ref), menuButtonsWrapperModule (ref), coreButtonRowModule (ref), constantsModule (ref), switchServerTelemetryModule (ref), titleBarModule (ref), view (ref), switchServerConfirmationModule (ref)
 	local var1 = if getFFlagAddPeoplePageCardLayout() then useGetPeopleServiceModule("PeopleAnalyticsManager") else nil
 	local var2 = if getFFlagAddPeoplePageCardLayout() then useGetPeopleServiceModule("PeopleBlockingModalManager") else reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
@@ -116,14 +115,14 @@ return function(p1)
 		var18 = var20
 	end
 	local var21 = reactModule.createElement(reactModule.Fragment, {}, {
-		MenuButtonsWrapper = if isSideSheetEnabledModule then nil else reactModule.createElement(menuButtonsWrapperModule),
+		MenuButtonsWrapper = if fFlagEnableSideSheet then nil else reactModule.createElement(menuButtonsWrapperModule),
 		CoreButtonRow = reactModule.createElement(coreButtonRowModule, {
 			chromeEnabled = p1.chromeEnabled,
 			LayoutOrder = if getFFlagAddPeoplePageCardLayout() then 1 else nil,
 			buttonActivatedTable = if fFlagShowSwitchServerButton then {
 				[constantsModule.PEOPLEPAGE.BUTTON_ACTIVATED_TABLE_KEYS.SWITCH_SERVER] = function()
-					-- upvalues: switchServerTelemetry (copy), var18 (write)
-					switchServerTelemetry.sendSwitchServerButtonActions({ event_type = "click" })
+					-- upvalues: switchServerTelemetryModule (copy), var18 (write)
+					switchServerTelemetryModule.sendSwitchServerButtonActions({ event_type = "click" })
 					var18(true)
 				end
 			} else nil
@@ -162,7 +161,7 @@ return function(p1)
 	end
 	t_1.People = var22
 	t_1.BlockingModalManager = reactModule.createElement(var3)
-	t_1.SwitchServerConfirmation = if fFlagShowSwitchServerButton and var17 then reactModule.createElement(switchServerConfirmation, { setSwitchServerConfirmationOpen = var18 }) else nil
+	t_1.SwitchServerConfirmation = if fFlagShowSwitchServerButton and var17 then reactModule.createElement(switchServerConfirmationModule, { setSwitchServerConfirmationOpen = var18 }) else nil
 	
 	return createElement(view, t, t_1)
 end

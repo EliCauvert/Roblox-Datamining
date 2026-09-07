@@ -109,9 +109,6 @@
 		},
 		SquadLobbyPage = { ExperiencePickerUuid = "experiencePickerUuid" },
 		ProfilePlatformPage = { ProfileSessionId = "profileSessionId" },
-		AddFriendsPage = {
-			AddFriendsSessionId = "addFriendsSessionId",
-			PymkSessionId = "pymkSessionId"
-		}
+		AddFriendsPage = { AddFriendsSessionId = "addFriendsSessionId" }
 	}
 }

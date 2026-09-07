@@ -10,14 +10,13 @@ local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useFoundationPresenceModule = require(appChat.Hooks.useFoundationPresence)
 local fFlagAppChatContextCardNameLoadingShimmerModule = require(appChat.Flags.FFlagAppChatContextCardNameLoadingShimmer)
-local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
 local fFlagAppChatDisclosureUpdateEnabled = sharedFlagsModule.FFlagAppChatDisclosureUpdateEnabled
 local fFlagAppChatDiscloseUpdateSecondVersion = sharedFlagsModule.FFlagAppChatDiscloseUpdateSecondVersion
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), useFoundationPresenceModule (ref), useLocalization (ref), fFlagAppChatDisclosureUpdateEnabled (ref), fFlagAppChatDiscloseUpdateSecondVersion (ref), universalAppPolicyModule (ref), fFlagAppChatContextCardNameLoadingShimmerModule (ref), reactModule (ref), foundationModule (ref), skeleton (ref), userTile (ref), layoutMode (ref), fFlagEnableBlackbirdCheck (ref), fFlagAppChatConsoleFocusFixesModule (ref)
+	-- upvalues: useTokens (ref), useFoundationPresenceModule (ref), useLocalization (ref), fFlagAppChatDisclosureUpdateEnabled (ref), fFlagAppChatDiscloseUpdateSecondVersion (ref), universalAppPolicyModule (ref), fFlagAppChatContextCardNameLoadingShimmerModule (ref), reactModule (ref), foundationModule (ref), skeleton (ref), userTile (ref), layoutMode (ref), fFlagEnableBlackbirdCheck (ref)
 	local var1 = useTokens()
 	local size = var1.Size
 	local var2 = useFoundationPresenceModule(p1.userId)
@@ -67,8 +66,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 						layoutMode = layoutMode.compact,
 						userPresenceType = var2.presence,
 						onActivated = p1.onAvatarActivated,
-						isRobloxSubscriber = if fFlagEnableBlackbirdCheck then p1.isRobloxSubscriber else nil,
-						selectable = if fFlagAppChatConsoleFocusFixesModule then false else nil
+						isRobloxSubscriber = if fFlagEnableBlackbirdCheck then p1.isRobloxSubscriber else nil
 					})
 				}),
 				AvatarTextContainer = reactModule.createElement(foundationModule.View, {
@@ -177,8 +175,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					layoutMode = layoutMode.compact,
 					userPresenceType = var2.presence,
 					onActivated = p1.onAvatarActivated,
-					isRobloxSubscriber = if fFlagEnableBlackbirdCheck then p1.isRobloxSubscriber else nil,
-					selectable = if fFlagAppChatConsoleFocusFixesModule then false else nil
+					isRobloxSubscriber = if fFlagEnableBlackbirdCheck then p1.isRobloxSubscriber else nil
 				})
 			}),
 			AvatarTextContainer = reactModule.createElement(foundationModule.View, { tag = "col auto-xy align-x-center", LayoutOrder = 2 }, {

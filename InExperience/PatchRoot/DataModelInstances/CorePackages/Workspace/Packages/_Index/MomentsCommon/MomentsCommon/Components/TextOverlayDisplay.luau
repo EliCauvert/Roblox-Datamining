@@ -133,19 +133,15 @@ return function(p1)
 					onDragBegin = p1.onTextOverlayDragBegin,
 					onDragContinue = p1.onTextOverlayDragContinue,
 					onDragEnd = var13,
-					onRotationChanged = p1.onTextOverlayRotationChanged,
-					onScaleChanged = p1.onTextOverlayScaleChanged,
 					referenceUI = if var15 then var1.current else nil,
-					selected = p1.selected,
 					textOverlayEdit = p2
 				})
 			end
 			return nil
 		end, {
 			p1.clampToBoundsEnabled, p1.draggable, p1.editable, p1.onTextOverlayActivated,
-			p1.onTextOverlayDragBegin, p1.onTextOverlayDragContinue,
-			p1.onTextOverlayRotationChanged, p1.onTextOverlayScaleChanged, p1.selected,
-			p1.visualScale, var8, var14, var13
+			p1.onTextOverlayDragBegin, p1.onTextOverlayDragContinue, p1.visualScale, var8,
+			var14, var13
 		})(var6)
 	}) else nil
 end

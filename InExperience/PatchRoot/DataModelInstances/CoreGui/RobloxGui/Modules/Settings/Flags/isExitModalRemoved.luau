@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("RemoveExitModal", false) or require(game:GetService("CorePackages").Workspace.Packages.PioneerUtils).isPioneerLaunch()

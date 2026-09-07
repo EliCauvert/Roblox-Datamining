@@ -7,6 +7,7 @@ local view = foundationModule.View
 local UIBloxModule = require(parent.UIBlox)
 local useSelectionCursor = UIBloxModule.App.SelectionImage.useSelectionCursor
 local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
+local fFlagAXMigrateAXToGlobalAutofocus = require(parent.SharedFlags).FFlagAXMigrateAXToGlobalAutofocus
 local _ = require(avatarExperienceUIKit.BackgroundLayers.BackgroundLayers)
 local itemCardBackgroundsWrapperModule = require(script.Parent.ItemCardBackgroundsWrapper)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
@@ -14,10 +15,10 @@ local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnab
 local fFlagAXSelectedBorderWrapsBackground = avatarExperienceFlagsModule.FFlagAXSelectedBorderWrapsBackground
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useSelectionCursor (ref), cursorKind (ref), useTokens (ref), reactModule (ref), fFlagAXMISEnableMultiShopping (ref), itemCardBackgroundsWrapperModule (ref), fFlagAXSelectedBorderWrapsBackground (ref), view (ref)
+	-- upvalues: fFlagAXMigrateAXToGlobalAutofocus (ref), useSelectionCursor (ref), cursorKind (ref), useTokens (ref), reactModule (ref), fFlagAXMISEnableMultiShopping (ref), itemCardBackgroundsWrapperModule (ref), fFlagAXSelectedBorderWrapsBackground (ref), view (ref)
 	return reactModule.createElement("TextButton", {
 		Selectable = if fFlagAXMISEnableMultiShopping then p1.Selectable else nil,
-		SelectionImageObject = useSelectionCursor(cursorKind.RoundedRect),
+		SelectionImageObject = if fFlagAXMigrateAXToGlobalAutofocus then useSelectionCursor(cursorKind.RoundedRect) else nil,
 		Text = "",
 		AutoButtonColor = false,
 		BackgroundTransparency = 1,

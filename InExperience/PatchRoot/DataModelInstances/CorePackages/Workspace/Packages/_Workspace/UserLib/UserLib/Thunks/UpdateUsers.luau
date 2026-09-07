@@ -3,12 +3,11 @@ local parent = userLib.Parent
 local userModule = require(userLib.Models.User)
 local addUsersModule = require(userLib.Actions.AddUsers)
 local setFriendCount = require(parent.LegacyFriendsRodux).Actions.SetFriendCount
-local fFlagRemoveUnusedFriendCountRoduxSlice = require(parent.SharedFlags).FFlagRemoveUnusedFriendCountRoduxSlice
 
 return function(p1)
-	-- upvalues: userModule (ref), addUsersModule (ref), fFlagRemoveUnusedFriendCountRoduxSlice (ref), setFriendCount (ref)
+	-- upvalues: userModule (ref), addUsersModule (ref), setFriendCount (ref)
 	return function(p2)
-		-- upvalues: p1 (ref), userModule (copy), addUsersModule (copy), fFlagRemoveUnusedFriendCountRoduxSlice (copy), setFriendCount (copy)
+		-- upvalues: p1 (ref), userModule (copy), addUsersModule (copy), setFriendCount (copy)
 		local var1 = 0
 		local t = {}
 		
@@ -38,7 +37,7 @@ return function(p1)
 		if next(t) then
 			p2:dispatch(addUsersModule(t))
 		end
-		if not fFlagRemoveUnusedFriendCountRoduxSlice and var1 ~= 0 then
+		if var1 ~= 0 then
 			p2:dispatch(setFriendCount(p2:getState().FriendCount + var1))
 		end
 	end

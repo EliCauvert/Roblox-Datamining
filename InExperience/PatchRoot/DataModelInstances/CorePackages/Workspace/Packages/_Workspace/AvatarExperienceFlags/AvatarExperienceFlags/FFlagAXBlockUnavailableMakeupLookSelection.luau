@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXBlockUnavailableMakeupLookSelection", false) and require(script.Parent.FFlagAXPendingLookModerationStatus)

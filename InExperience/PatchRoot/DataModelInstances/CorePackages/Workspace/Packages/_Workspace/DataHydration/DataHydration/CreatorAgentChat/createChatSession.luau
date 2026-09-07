@@ -1,6 +1,4 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local signalsModule = require(parent.Signals)
-local sharedFlagsModule = require(parent.SharedFlags)
+﻿local signalsModule = require(script:FindFirstAncestor("DataHydration").Parent.Signals)
 local acpProtocolModule = require(script.Parent.Acp.AcpProtocol)
 local experimentOverrideModule = require(script.Parent.experimentOverride)
 local sessionHistoryMergeModule = require(script.Parent.sessionHistoryMerge)
@@ -13,10 +11,9 @@ local sendPromptModule = require(script.Parent.ChatSession.sendPrompt)
 local sessionHistoryCacheModule = require(script.Parent.ChatSession.sessionHistoryCache)
 local sessionScalarStateModule = require(script.Parent.ChatSession.sessionScalarState)
 local _ = require(script.Parent.ChatSession.sessionDeps)
-local fFlagBuildExperiencePinForBuild = sharedFlagsModule.FFlagBuildExperiencePinForBuild
 
 return function(p1, p2, p3, p4)
-	-- upvalues: sessionScalarStateModule (ref), constantsModule (ref), sessionHistoryCacheModule (ref), sessionHistoryMergeModule (ref), signalsModule (ref), historyPageUtilsModule (ref), historyLoaderModule (ref), historyPollingModule (ref), acpProtocolModule (ref), experimentOverrideModule (ref), fFlagBuildExperiencePinForBuild (ref), sendPromptModule (ref)
+	-- upvalues: sessionScalarStateModule (ref), constantsModule (ref), sessionHistoryCacheModule (ref), sessionHistoryMergeModule (ref), signalsModule (ref), historyPageUtilsModule (ref), historyLoaderModule (ref), historyPollingModule (ref), acpProtocolModule (ref), experimentOverrideModule (ref), sendPromptModule (ref)
 	local t = {}
 	local t_1 = {}
 	local var1 = sessionScalarStateModule.createSessionScalarState(p4)
@@ -253,11 +250,10 @@ return function(p1, p2, p3, p4)
 		mergeHistoryPage = mergeHistoryPage,
 		refreshSession = var7.refreshSession,
 		loadOlderHistory = var7.loadOlderHistory,
-		requestOlderHistoryWhile = var7.requestOlderHistoryWhile,
 		sendPrompt = sendPromptModule.createSendPrompt({
 			ensureInitialized = ensureInitialized,
 			ensureCasSession = function()
-				-- upvalues: var1 (ref), p2 (ref), p3 (ref), ensureInitialized (ref), p1 (ref), experimentOverrideModule (copy), fFlagBuildExperiencePinForBuild (copy), historyPageUtilsModule (copy), rpcTimeoutSeconds (ref), setCasSessionIdInternal (ref)
+				-- upvalues: var1 (ref), p2 (ref), p3 (ref), ensureInitialized (ref), p1 (ref), experimentOverrideModule (copy), historyPageUtilsModule (copy), rpcTimeoutSeconds (ref), setCasSessionIdInternal (ref)
 				local casSessionId = var1.getCasSessionId(false)
 				
 				if casSessionId ~= nil then
@@ -272,8 +268,7 @@ return function(p1, p2, p3, p4)
 				end
 				local var11 = historyPageUtilsModule.awaitRequestState(p1.sessionNew({
 					project = { universeId = p2, placeId = p3 },
-					experiment = experimentOverrideModule.getExperiment(),
-					application = if fFlagBuildExperiencePinForBuild then "build" else nil
+					experiment = experimentOverrideModule.getExperiment()
 				}).state, os.clock() + rpcTimeoutSeconds)
 				
 				if var11.status ~= "succeeded" then

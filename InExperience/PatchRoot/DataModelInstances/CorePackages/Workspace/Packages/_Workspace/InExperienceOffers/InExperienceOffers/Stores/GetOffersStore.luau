@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("InExperienceOffers").Parent.Signals).createComputed(require(script.createOffersStore))

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ExpChatWindowStatusEventFixes", false) and require(script.Parent.getFFlagExpChatTriggerWindowStatusEvent)()

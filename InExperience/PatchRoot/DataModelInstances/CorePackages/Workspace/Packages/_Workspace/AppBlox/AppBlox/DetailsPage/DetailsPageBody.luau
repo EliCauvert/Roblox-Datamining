@@ -5,6 +5,7 @@ local getPlatformConfigModule = require(script.Parent.getPlatformConfig)
 local detailsPageTitleContentModule = require(script.Parent.DetailsPageTitleContent)
 local roactModule = require(parent.Roact)
 local tModule = require(parent.t)
+local fFlagLuaAppFixEdpRecommendedCarouselHoverZIndex = require(parent.SharedFlags).FFlagLuaAppFixEdpRecommendedCarouselHoverZIndex
 local detailsPageBody = roactModule.PureComponent:extend("DetailsPageBody")
 detailsPageBody.validateProps = tModule.strictInterface({
 	titleText = tModule.optional(tModule.string),
@@ -41,7 +42,7 @@ function detailsPageBody.init(p1)
 end
 
 function detailsPageBody.renderSinglePanel(p1)
-	-- upvalues: roactModule (ref)
+	-- upvalues: roactModule (ref), fFlagLuaAppFixEdpRecommendedCarouselHoverZIndex (ref)
 	local t = {
 		Layout = roactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -59,7 +60,7 @@ function detailsPageBody.renderSinglePanel(p1)
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			LayoutOrder = v.portraitLayoutOrder,
-			ZIndex = v.portraitZIndex
+			ZIndex = if fFlagLuaAppFixEdpRecommendedCarouselHoverZIndex then v.portraitZIndex else nil
 		}, { [i] = v.renderComponent() })
 	end
 	return {

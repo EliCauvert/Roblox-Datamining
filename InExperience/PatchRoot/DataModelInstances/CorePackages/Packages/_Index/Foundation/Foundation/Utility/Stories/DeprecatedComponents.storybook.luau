@@ -5,7 +5,7 @@ return {
 	name = "Components [Deprecated]",
 	group = "Foundation",
 	roact = require(parent_1.Roact),
-	storyRoots = require(parent.GetStories).getStorybookRoots("deprecated"),
+	storyRoots = require(parent.GetStories)("deprecated"),
 	mapStory = require(parent.StoryMiddleware),
 	packages = {
 		React = require(parent_1.React),

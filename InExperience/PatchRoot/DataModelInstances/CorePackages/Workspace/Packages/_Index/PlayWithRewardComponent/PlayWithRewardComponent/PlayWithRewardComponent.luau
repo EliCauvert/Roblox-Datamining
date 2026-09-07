@@ -30,6 +30,7 @@ local roactAnalytics = roactServiceTagsModule.RoactAnalytics
 local appUpdateService = roactServiceTagsModule.AppUpdateService
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local useRoactService = robloxAppHooksModule.useRoactService
+local checkForUpdate = robloxAppUpdateModule.Thunks.CheckForUpdate
 local handleUpdate = robloxAppUpdateModule.HandleUpdate
 local autoUpgradeEngineFeatureOnlyEngineFeature = game:GetEngineFeature("AutoUpgradeEngineFeatureOnly")
 local canPerformBinaryUpdateEnabledEngineFeature = game:GetEngineFeature("CanPerformBinaryUpdateEnabled")
@@ -38,9 +39,10 @@ local luaAppPlayWithRewardMobileEdpLayoutOrder = game:DefineFastInt("LuaAppPlayW
 local fFlagEnablePlayWithRewardNonPeekviewEdp = sharedFlagsModule.FFlagEnablePlayWithRewardNonPeekviewEdp
 local fFlagSduiPlayWithReward = sharedFlagsModule.FFlagSduiPlayWithReward
 local fFlagLuaAppEnableContainedRewardUi = playWithRewardStateModule.FFlagLuaAppEnableContainedRewardUi
+local fFlagCheckForUpdatePromise = sharedFlagsModule.FFlagCheckForUpdatePromise
 
 function PlayWithRewardComponent(p1)
-	-- upvalues: useTokens (ref), useRoactService (ref), roactAnalytics (ref), appUpdateService (ref), useDispatch (ref), playersService (ref), reactModule (ref), fFlagEnablePlayWithRewardNonPeekviewEdp (ref), shouldRenderPlayWithRewardBannerModule (ref), usePlayButtonLaunchGame (ref), playButtonReferralSource (ref), playWithRewardTelemetryModule (ref), playWithRewardBlackoutCurtainModule (ref), setPlayWithRewardState (ref), adService (ref), playWithRewardFallbackBannerProductImageAssetId (ref), autoUpgradeEngineFeatureOnlyEngineFeature (ref), handleUpdate (ref), canPerformBinaryUpdateEnabledEngineFeature (ref), fFlagLuaAppEnableContainedRewardUi (ref), fFlagSduiPlayWithReward (ref), luaAppPlayWithRewardMobileEdpLayoutOrder (ref), skeleton (ref), icon (ref), enums (ref), image (ref), view (ref), text (ref), button (ref), playWithRewardCoachmarkModule (ref)
+	-- upvalues: useTokens (ref), useRoactService (ref), roactAnalytics (ref), appUpdateService (ref), useDispatch (ref), playersService (ref), reactModule (ref), fFlagEnablePlayWithRewardNonPeekviewEdp (ref), shouldRenderPlayWithRewardBannerModule (ref), usePlayButtonLaunchGame (ref), playButtonReferralSource (ref), playWithRewardTelemetryModule (ref), playWithRewardBlackoutCurtainModule (ref), setPlayWithRewardState (ref), adService (ref), playWithRewardFallbackBannerProductImageAssetId (ref), autoUpgradeEngineFeatureOnlyEngineFeature (ref), fFlagCheckForUpdatePromise (ref), handleUpdate (ref), canPerformBinaryUpdateEnabledEngineFeature (ref), checkForUpdate (ref), fFlagLuaAppEnableContainedRewardUi (ref), fFlagSduiPlayWithReward (ref), luaAppPlayWithRewardMobileEdpLayoutOrder (ref), skeleton (ref), icon (ref), enums (ref), image (ref), view (ref), text (ref), button (ref), playWithRewardCoachmarkModule (ref)
 	local variantId
 	local var1 = useTokens()
 	local var2 = useRoactService(roactAnalytics)
@@ -83,7 +85,7 @@ function PlayWithRewardComponent(p1)
 	local var12 = if playWithRewardAdData then playWithRewardAdData.productImageAssetId else ""
 	local var13 = var12 == ""
 	local var14 = reactModule.useCallback(function()
-		-- upvalues: playWithRewardTelemetryModule (copy), p1 (ref), var7 (ref), playWithRewardBlackoutCurtainModule (copy), var4 (ref), setPlayWithRewardState (copy), adService (copy), var11 (ref), var13 (ref), playWithRewardFallbackBannerProductImageAssetId (copy), var12 (ref), var10 (ref), autoUpgradeEngineFeatureOnlyEngineFeature (copy), handleUpdate (copy), var3 (ref), canPerformBinaryUpdateEnabledEngineFeature (copy), var2 (ref)
+		-- upvalues: playWithRewardTelemetryModule (copy), p1 (ref), var7 (ref), playWithRewardBlackoutCurtainModule (copy), var4 (ref), setPlayWithRewardState (copy), adService (copy), var11 (ref), var13 (ref), playWithRewardFallbackBannerProductImageAssetId (copy), var12 (ref), var10 (ref), autoUpgradeEngineFeatureOnlyEngineFeature (copy), fFlagCheckForUpdatePromise (copy), handleUpdate (copy), var3 (ref), canPerformBinaryUpdateEnabledEngineFeature (copy), var2 (ref), checkForUpdate (copy)
 		local function showAdThenLaunch()
 			-- upvalues: playWithRewardTelemetryModule (copy), p1 (copy), var7 (copy), playWithRewardBlackoutCurtainModule (copy), var4 (copy), setPlayWithRewardState (copy), adService (copy), var11 (copy), var13 (copy), playWithRewardFallbackBannerProductImageAssetId (copy), var12 (copy), var10 (copy)
 			playWithRewardTelemetryModule.logPlayWithRewardBlackoutCurtainAction(p1.flowId, p1.universeId, "shown", var7)
@@ -110,12 +112,16 @@ function PlayWithRewardComponent(p1)
 			end
 		end
 		
-		if autoUpgradeEngineFeatureOnlyEngineFeature then
+		if not autoUpgradeEngineFeatureOnlyEngineFeature then
+			showAdThenLaunch()
+			
+			return
+		elseif fFlagCheckForUpdatePromise then
 			handleUpdate(var4, var3, canPerformBinaryUpdateEnabledEngineFeature, var2, "PlayWithRewardGameDetails", showAdThenLaunch)
 			
 			return
 		end
-		showAdThenLaunch()
+		var4(checkForUpdate(var3, canPerformBinaryUpdateEnabledEngineFeature, var2, showAdThenLaunch, { ctx = "PlayWithRewardGameDetails" }))
 	end, {
 		p1.flowId, p1.universeId, var4, var3, var2, var10, var12, var11, var13,
 		var7

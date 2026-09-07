@@ -9,7 +9,7 @@ local enabled = require(corePackagesService.Workspace.Packages.Chrome).Enabled
 local chromeShared = parent.Chrome.ChromeShared
 local isNewTiltIconEnabledModule = require(parent.isNewTiltIconEnabled)
 local fFlagTopBarRefactor = require(corePackagesService.Workspace.Packages.InExperienceTopBar).Flags.FFlagTopBarRefactor
-local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local fFlagEnableSideSheet = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableSideSheet
 local var1 = if enabled() then require(chromeShared.Utility.GetStyleTokens)() else nil
 
 local function _(p1)
@@ -64,7 +64,7 @@ return {
 	UnibarFrame = {
 		PaddingTop = if enabled() then var1.Padding.XXSmall else 2,
 		PaddingBottom = if enabled() then var1.Padding.XXSmall else 2,
-		PaddingLeft = var9 + var10 + (if isSideSheetEnabledModule then 0 else var6) + (if enabled() then var1.Padding.XXSmall else 2),
+		PaddingLeft = var9 + var10 + (if fFlagEnableSideSheet then 0 else var6) + (if enabled() then var1.Padding.XXSmall else 2),
 		ExtendedSize = var6 - (if enabled() then var1.Size.Size_100 else 4)
 	},
 	ScreenSideOffset = var9,

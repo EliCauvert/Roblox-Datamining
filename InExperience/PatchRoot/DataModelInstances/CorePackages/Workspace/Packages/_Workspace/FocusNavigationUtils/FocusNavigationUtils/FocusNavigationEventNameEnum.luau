@@ -2,8 +2,6 @@
 	Search = "Search",
 	TabForward = "TabForward",
 	TabBackward = "TabBackward",
-	PageForward = "PageForward",
-	PageBackward = "PageBackward",
 	HoldToPlay = "HoldToPlay",
 	HoldToJoinFriend = "HoldToJoinFriend",
 	NavigateBack = "NavigateBack",
@@ -75,8 +73,6 @@
 	ExitFullscreen = "ExitFullscreen",
 	Mute = "Mute",
 	Unmute = "Unmute",
-	PlayVideo = "PlayVideo",
-	PauseVideo = "PauseVideo",
 	SquadJoin = "SquadJoin",
 	ViewProfile = "ViewProfile"
 }

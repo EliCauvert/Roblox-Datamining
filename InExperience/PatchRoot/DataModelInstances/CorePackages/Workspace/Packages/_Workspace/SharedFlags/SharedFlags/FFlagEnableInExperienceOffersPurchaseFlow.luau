@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnableInExperienceOffersPurchaseFlow2", false) and require(script.Parent.FFlagPassOfferIdInPurchasePayload)
+﻿return game:DefineFastFlag("EnableInExperienceOffersPurchaseFlow", false)

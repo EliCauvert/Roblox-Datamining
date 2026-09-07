@@ -18,7 +18,7 @@ return {
 	StyleProviderWithDefaultTheme = require(script.StyleProviderWithDefaultTheme),
 	AppFonts = require(script.AppFonts),
 	AppearanceContext = require(script.AppearanceContext),
-	UiModeBrandThemeContext = if require(parent.SharedFlags).FFlagAppNavBarPerItemThemeOverride then require(script.UiModeBrandThemeContext) else nil,
+	UiModeTokenOverridesContext = if require(parent.SharedFlags).FFlagAppNavBarPerItemThemeOverride then require(script.UiModeTokenOverridesContext) else nil,
 	getSceneOverridesStore = require(script.getSceneOverridesStore),
 	["jest.config"] = script["jest.config"]
 }

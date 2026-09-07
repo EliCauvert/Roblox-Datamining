@@ -20,14 +20,13 @@ local formatTextWithParamsModule = require(purchasePrompt.Utils.formatTextWithPa
 local economicRestrictionsCounter = IAPExperienceModule.Counters.EconomicRestrictionsCounter
 local universalEconomicRestrictionsCounter = economicRestrictionsCounter.UniversalEconomicRestrictionsCounter
 local economicRestrictionsSurface = economicRestrictionsCounter.EconomicRestrictionsSurface
-local _ = IAPExperienceModule.Counters.ProductPurchasePromptCounter.ProductPurchasePromptCounter
+local productPurchasePromptCounter = IAPExperienceModule.Counters.ProductPurchasePromptCounter.ProductPurchasePromptCounter
 local default = require(parent.LoggingProtocol).default
+local fFlagEnableUnifiedProductPurchaseFlow = require(parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 local fFlagPurchaseModalTimedOptionExtension = require(parent.SharedFlags).FFlagPurchaseModalTimedOptionExtension
 local unifiedPurchaseCompletionModal = IAPExperienceModule.UnifiedPurchaseCompletionModal
 local unifiedPurchaseCompletionModalV2 = IAPExperienceModule.UnifiedPurchaseCompletionModalV2
-local _ = require(purchasePrompt.Flags.FFlagFixPurchasingErrorCounter)
-local _ = require(purchasePrompt.Flags.FFlagAddSurfaceAndProductTypeToPromptCounter)
-local logProductPurchasePromptCounterModule = require(purchasePrompt.Utils.logProductPurchasePromptCounter)
+local fFlagFixPurchasingErrorCounterModule = require(purchasePrompt.Flags.FFlagFixPurchasingErrorCounter)
 local _ = require(parent.SharedFlags).FFlagAddCenterDialogForUnifiedPurchaseModal
 local appContextModule = require(purchasePrompt.Utils.AppContext)
 local fFlagAddCenterDialogForUnifiedPurchaseModal = require(parent.SharedFlags).FFlagAddCenterDialogForUnifiedPurchaseModal
@@ -39,11 +38,11 @@ local function getPurchaseErrorText(p1, p2)
 end
 
 local function getModalContent(p1, p2)
-	-- upvalues: promptStateModule (ref), fFlagPurchaseModalTimedOptionExtension (ref), formatTextWithParamsModule (ref), purchaseErrorModule (ref), formatEconomicRestrictionText (ref), fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (ref), getPurchaseErrorText (ref)
+	-- upvalues: promptStateModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagPurchaseModalTimedOptionExtension (ref), formatTextWithParamsModule (ref), purchaseErrorModule (ref), formatEconomicRestrictionText (ref), fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (ref), getPurchaseErrorText (ref)
 	local promptState = p2.promptState
 	local purchaseError = p2.purchaseError
 	
-	return if promptState == promptStateModule.PurchaseComplete then if p2.useUnifiedPurchaseCompletionModal then if p2.isMultiItem then {
+	return if promptState == promptStateModule.PurchaseComplete then if fFlagEnableUnifiedProductPurchaseFlow and p2.useUnifiedPurchaseCompletionModal then if p2.isMultiItem then {
 		messageText = p1.MultiItemPurchaseCompleteBody,
 		titleText = p1.PurchaseCompleteTitle
 	} elseif fFlagPurchaseModalTimedOptionExtension and p2.completionMessage then {
@@ -122,7 +121,7 @@ local function getButtonStackInfo(p1, p2)
 end
 
 local function ProductPurchasePrompt(p1)
-	-- upvalues: fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (ref), addEconomicRestrictionKeysToLocalization (ref), useLocalization (ref), useMemo (ref), getModalContent (ref), useEffect (ref), logProductPurchasePromptCounterModule (ref), purchaseErrorModule (ref), default (ref), universalEconomicRestrictionsCounter (ref), economicRestrictionsSurface (ref), promptStateModule (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (ref), appContextModule (ref), reactModule (ref), unifiedPurchaseCompletionModalV2 (ref), unifiedPurchaseCompletionModal (ref), interactiveAlert (ref), getButtonStackInfo (ref)
+	-- upvalues: fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (ref), addEconomicRestrictionKeysToLocalization (ref), useLocalization (ref), useMemo (ref), getModalContent (ref), useEffect (ref), fFlagFixPurchasingErrorCounterModule (ref), default (ref), productPurchasePromptCounter (ref), purchaseErrorModule (ref), promptStateModule (ref), universalEconomicRestrictionsCounter (ref), economicRestrictionsSurface (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (ref), appContextModule (ref), reactModule (ref), unifiedPurchaseCompletionModalV2 (ref), unifiedPurchaseCompletionModal (ref), interactiveAlert (ref), getButtonStackInfo (ref)
 	local t = {
 		PurchaseCompleteTitle = "IAPExperience.PurchasePrompt.Title.PurchaseCompleted",
 		PurchaseCompleteBody = "IAPExperience.PurchasePrompt.Body.PurchaseCompleted",
@@ -167,9 +166,18 @@ local function ProductPurchasePrompt(p1)
 		return getModalContent(var1, p1)
 	end, { p1 })
 	useEffect(function()
-		-- upvalues: logProductPurchasePromptCounterModule (copy), p1 (ref), purchaseErrorModule (copy), default (copy), universalEconomicRestrictionsCounter (copy), economicRestrictionsSurface (copy)
-		logProductPurchasePromptCounterModule(p1.promptState, p1.purchaseError, p1.surface, p1.productType)
-		
+		-- upvalues: fFlagFixPurchasingErrorCounterModule (copy), default (copy), productPurchasePromptCounter (copy), p1 (ref), purchaseErrorModule (copy), promptStateModule (copy), universalEconomicRestrictionsCounter (copy), economicRestrictionsSurface (copy)
+		if fFlagFixPurchasingErrorCounterModule then
+			default:logRobloxTelemetryCounter(productPurchasePromptCounter, 1, {
+				promptState = tostring(p1.promptState),
+				purchaseError = if purchaseErrorModule.isMember(p1.purchaseError) then tostring(p1.purchaseError) else tostring(purchaseErrorModule.UnknownFailure)
+			})
+		else
+			default:logRobloxTelemetryCounter(productPurchasePromptCounter, 1, {
+				promptState = tostring(p1.promptState),
+				purchaseError = if p1.promptState == promptStateModule.Error then tostring(p1.purchaseError) else ""
+			})
+		end
 		if p1.purchaseError == purchaseErrorModule.EconomicRestriction then
 			default:logRobloxTelemetryCounter(universalEconomicRestrictionsCounter, 1, {
 				surface = economicRestrictionsSurface.InExperience,
@@ -178,7 +186,7 @@ local function ProductPurchasePrompt(p1)
 		end
 	end, { p1.purchaseError })
 	
-	if not p1.useUnifiedPurchaseCompletionModal then
+	if not fFlagEnableUnifiedProductPurchaseFlow or not p1.useUnifiedPurchaseCompletionModal then
 		return reactModule.createElement(interactiveAlert, {
 			screenSize = p1.screenSize,
 			title = var2.titleText,

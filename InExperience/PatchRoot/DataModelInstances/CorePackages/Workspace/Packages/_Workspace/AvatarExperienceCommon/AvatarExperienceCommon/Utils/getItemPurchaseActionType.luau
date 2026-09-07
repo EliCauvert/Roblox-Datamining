@@ -3,7 +3,9 @@ local parent = avatarExperienceCommon.Parent
 local itemPurchaseActionTypeEnumModule = require(avatarExperienceCommon.Enums.ItemPurchaseActionTypeEnum)
 local salesLocationTypeModule = require(avatarExperienceCommon.Enums.SalesLocationType)
 local itemRestrictionsModule = require(avatarExperienceCommon.Enums.ItemRestrictions)
-local fFlagAXDurablesForMIS = require(parent.AvatarExperienceFlags).FFlagAXDurablesForMIS
+local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
+local fFlagAXAddLimitedLabelForCheckout = avatarExperienceFlagsModule.FFlagAXAddLimitedLabelForCheckout
 
 local function _(p1)
 	return #(if p1 then p1.experiences or {} else {})
@@ -125,11 +127,13 @@ local _ = function(_, p1, p2)
 end
 
 return function(p1, p2, p3, p4)
-	-- upvalues: itemPurchaseActionTypeEnumModule (ref), fFlagAXDurablesForMIS (ref), itemRestrictionsModule (ref), salesLocationTypeModule (ref)
+	-- upvalues: itemPurchaseActionTypeEnumModule (ref), fFlagAXAddLimitedLabelForCheckout (ref), fFlagAXDurablesForMIS (ref), itemRestrictionsModule (ref), salesLocationTypeModule (ref)
 	if not p1 then
 		return itemPurchaseActionTypeEnumModule.Disabled
-	elseif if p2 == nil or p2.quantityLimitPerUser == nil then false else p2.quantityLimitPerUser > 0 and p2.quantityLimitPerUser <= p3 then
-		return itemPurchaseActionTypeEnumModule.QuantityLimitExceeded
+	elseif fFlagAXAddLimitedLabelForCheckout then
+		if if p2 == nil or p2.quantityLimitPerUser == nil then false else p2.quantityLimitPerUser > 0 and p2.quantityLimitPerUser <= p3 then
+			return itemPurchaseActionTypeEnumModule.QuantityLimitExceeded
+		end
 	end
 	local var1
 	local var2 = if fFlagAXDurablesForMIS then p1.isOwned and not p1.expirationTime else p1.isOwned

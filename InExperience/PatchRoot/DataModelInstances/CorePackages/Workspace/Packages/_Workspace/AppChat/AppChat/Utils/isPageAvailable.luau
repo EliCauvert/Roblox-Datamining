@@ -10,10 +10,7 @@ local t = {
 	[enumScreensModule.ViewUserProfile] = true,
 	[enumScreensModule.Groups] = true
 }
-local t_1 = {
-	[enumScreensModule.Groups] = true,
-	[enumScreensModule.PrivacySettings] = require(appChat.Flags.FFlagAppChatHidePrivacySettingsWithoutWebView)
-}
+local t_1 = { [enumScreensModule.Groups] = true }
 
 return function(p1, p2, p3)
 	-- upvalues: isPlacementInExperience (ref), t (ref), fFlagAppChatOnConsoles (ref), t_1 (ref)

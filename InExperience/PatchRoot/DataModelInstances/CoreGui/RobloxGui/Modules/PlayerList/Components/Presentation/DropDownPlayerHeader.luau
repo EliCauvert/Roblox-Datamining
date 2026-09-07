@@ -7,9 +7,7 @@ local cryoModule = require(corePackagesService.Packages.Cryo)
 local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local withLayoutValues = require(script.Parent.Parent.Connection.LayoutValues).WithLayoutValues
 local useVerifiedBadge = require(corePackagesService.Workspace.Packages.UserProfiles).Hooks.useVerifiedBadge
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local fFlagEnableVerifiedBadgeStore = sharedFlagsModule.FFlagEnableVerifiedBadgeStore
-local fFlagCoreUiMigrateUIBloxToFoundation = sharedFlagsModule.FFlagCoreUiMigrateUIBloxToFoundation
+local fFlagEnableVerifiedBadgeStore = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableVerifiedBadgeStore
 local emojiTextLabel = UIBloxModule.Core.Text.EmojiTextLabel
 local emoji = UIBloxModule.App.Emoji.Enum.Emoji
 local dropDownPlayerHeader = roactModule.PureComponent:extend("DropDownPlayerHeader")
@@ -19,9 +17,9 @@ dropDownPlayerHeader.validateProps = tModule.strictInterface({
 })
 
 function dropDownPlayerHeader.render(p1)
-	-- upvalues: withLayoutValues (ref), withFoundationOrUIBloxStyle (ref), fFlagEnableVerifiedBadgeStore (ref), userLibModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roactModule (ref), emojiTextLabel (ref), emoji (ref)
+	-- upvalues: withLayoutValues (ref), withFoundationOrUIBloxStyle (ref), fFlagEnableVerifiedBadgeStore (ref), userLibModule (ref), roactModule (ref), emojiTextLabel (ref), emoji (ref)
 	return withLayoutValues(function(p2)
-		-- upvalues: withFoundationOrUIBloxStyle (copy), p1 (ref), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), emojiTextLabel (copy), emoji (copy)
+		-- upvalues: withFoundationOrUIBloxStyle (copy), p1 (ref), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), roactModule (copy), emojiTextLabel (copy), emoji (copy)
 		return withFoundationOrUIBloxStyle(function(p3)
 			return {
 				Theme = {
@@ -50,15 +48,12 @@ function dropDownPlayerHeader.render(p1)
 					},
 					Header2 = {
 						Font = p3.Typography.TitleLarge.Font,
-						RelativeSize = p3.Typography.TitleLarge.FontSize,
-						FontSize = p3.Typography.TitleLarge.FontSize,
-						LineHeight = p3.Typography.TitleLarge.LineHeight,
-						LetterSpacing = p3.Typography.TitleLarge.LetterSpacing
+						RelativeSize = p3.Typography.TitleLarge.FontSize
 					}
 				}
 			}
 		end, function(p3)
-			-- upvalues: p1 (copy), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), p2 (ref), emojiTextLabel (copy), emoji (copy)
+			-- upvalues: p1 (copy), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), roactModule (copy), p2 (ref), emojiTextLabel (copy), emoji (copy)
 			local player = p1.props.player
 			
 			return roactModule.createElement("TextButton", {
@@ -92,12 +87,7 @@ function dropDownPlayerHeader.render(p1)
 							LayoutOrder = 1,
 							BackgroundTransparency = 1,
 							TextScaled = true,
-							fontStyle = if fFlagCoreUiMigrateUIBloxToFoundation and p3.Font.Header2.FontSize then {
-								Font = p3.Font.Header2.Font,
-								FontSize = p3.Font.Header2.FontSize,
-								LineHeight = p3.Font.Header2.LineHeight,
-								LetterSpacing = p3.Font.Header2.LetterSpacing
-							} else p3.Font.Header2,
+							fontStyle = p3.Font.Header2,
 							colorStyle = p3.Theme.TextEmphasis,
 							emoji = emoji.Verified,
 							maxSize = Vector2.new(p2.PlayerDropDownSizeX - 124, 22),

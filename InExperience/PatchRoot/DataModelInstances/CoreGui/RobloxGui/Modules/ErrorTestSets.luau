@@ -34,13 +34,7 @@
 		Enum.ConnectionError.DisconnectSendPacketError,
 		Enum.ConnectionError.DisconnectTimeout,
 		Enum.ConnectionError.DisconnectWrongVersion,
-		Enum.ConnectionError.DisconnectionNotification,
-		Enum.ConnectionError.DisconnectTransportIoError,
-		Enum.ConnectionError.DisconnectTransportIoInternetError,
-		Enum.ConnectionError.DisconnectTransportProtocolError,
-		Enum.ConnectionError.DisconnectTransportNgtcp2Error,
-		Enum.ConnectionError.DisconnectTransportQuicError,
-		Enum.ConnectionError.DisconnectTransportRnaError
+		Enum.ConnectionError.DisconnectionNotification
 	},
 	[Enum.ConnectionError.PlacelaunchErrors] = {
 		Enum.ConnectionError.PlacelaunchCustomMessage,

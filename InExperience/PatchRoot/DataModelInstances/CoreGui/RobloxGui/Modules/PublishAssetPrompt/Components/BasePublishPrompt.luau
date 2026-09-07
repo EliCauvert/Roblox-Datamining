@@ -48,7 +48,6 @@ basePublishPrompt.validateProps = tModule.strictInterface({
 	titleText = tModule.string,
 	showingPreviewView = tModule.boolean,
 	closePreviewView = tModule.callback,
-	isMakeupPreview = tModule.optional(tModule.boolean),
 	asset = tModule.optional(tModule.union(tModule.instanceOf("Model"), tModule.instanceIsA("AnimationClip"))),
 	onNameUpdated = tModule.callback,
 	canSubmit = tModule.callback,
@@ -352,8 +351,7 @@ function basePublishPrompt.renderAlertLocalized(p1, p2)
 			}, {
 				PreviewViewport = roactModule.createElement(previewViewportModule, {
 					asset = p1.props.asset,
-					closePreviewView = p1.props.closePreviewView,
-					isMakeupPreview = p1.props.isMakeupPreview
+					closePreviewView = p1.props.closePreviewView
 				})
 			}) or nil,
 			TopScrim = roactModule.createElement("Frame", {

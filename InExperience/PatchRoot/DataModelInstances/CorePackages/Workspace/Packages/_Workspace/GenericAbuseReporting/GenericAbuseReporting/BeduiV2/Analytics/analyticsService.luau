@@ -6,6 +6,7 @@ local runService = game:GetService("RunService")
 local telemetryService = game:GetService("TelemetryService")
 local dashModule = require(parent.Dash)
 local fFlagAbuseReportClientVersionModule = require(genericAbuseReporting.Flags.FFlagAbuseReportClientVersion)
+local fFlagFixAnalyticsForDynamicReportV2 = require(parent.SharedFlags).FFlagFixAnalyticsForDynamicReportV2
 local t = {
 	ReportStarted = "OpenDialog",
 	ReportAbandoned = "EarlyClose",
@@ -130,7 +131,7 @@ else
 end
 return {
 	sendAnalyticsEvent = function(p3, p4)
-		-- upvalues: localPlayer (ref), fFlagAbuseReportClientVersionModule (ref), var1 (ref), dashModule (ref), telemetryService (ref), t_3 (ref), flattenForTelemetry (ref)
+		-- upvalues: localPlayer (ref), fFlagAbuseReportClientVersionModule (ref), var1 (ref), fFlagFixAnalyticsForDynamicReportV2 (ref), dashModule (ref), telemetryService (ref), t_3 (ref), flattenForTelemetry (ref)
 		local t = {
 			user_id = if localPlayer then localPlayer.UserId else nil
 		}
@@ -138,10 +139,15 @@ return {
 		if fFlagAbuseReportClientVersionModule then
 			t.client_version = var1
 		end
-		telemetryService:LogEvent(t_3, {
-			customFields = flattenForTelemetry(dashModule.join(p3, p4, t)),
-			eventContext = p3.abuse_vector
-		})
+		if fFlagFixAnalyticsForDynamicReportV2 then
+			telemetryService:LogEvent(t_3, {
+				customFields = flattenForTelemetry(dashModule.join(p3, p4, t)),
+				eventContext = p3.abuse_vector
+			})
+			
+			return
+		end
+		telemetryService:LogEvent(dashModule.join(t_3, { eventContext = p3.abuse_vector }), { customFields = dashModule.join(p3, p4, t) })
 	end,
 	TelemetryEventType = t,
 	LinkOpenedSource = t_1,

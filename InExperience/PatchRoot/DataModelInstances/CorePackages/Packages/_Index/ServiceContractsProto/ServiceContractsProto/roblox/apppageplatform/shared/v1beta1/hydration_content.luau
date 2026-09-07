@@ -27,8 +27,8 @@ local userProfileDataModule = require(script.Parent.user_profile_data)
 local momentDataModule = require(script.Parent.moment_data)
 local communityDataModule = require(script.Parent.community_data)
 local communityUserMembershipDataModule = require(script.Parent.community_user_membership_data)
-local friendRecommendationDataModule = require(script.Parent.friend_recommendation_data)
-local universePrivateServerDataModule = require(script.Parent.universe_private_server_data)
+local userRecommendationDataModule = require(script.Parent.user_recommendation_data)
+local contactDataModule = require(script.Parent.contact_data)
 local t_1 = {}
 t_1.__index = t_1
 
@@ -61,8 +61,8 @@ function t_1.new(p1)
 		moment = if p1 == nil or p1.moment == nil then {} else p1.moment,
 		community = if p1 == nil or p1.community == nil then {} else p1.community,
 		community_user_membership = if p1 == nil or p1.community_user_membership == nil then {} else p1.community_user_membership,
-		friend_recommendation = if p1 == nil or p1.friend_recommendation == nil then {} else p1.friend_recommendation,
-		universe_private_server = if p1 == nil or p1.universe_private_server == nil then {} else p1.universe_private_server
+		user_recommendation = if p1 == nil or p1.user_recommendation == nil then {} else p1.user_recommendation,
+		contact = if p1 == nil or p1.contact == nil then {} else p1.contact
 	}, t_1)
 end
 
@@ -461,8 +461,8 @@ function t_1:encode()
 			var1 = var183
 		end
 	end
-	if self.friend_recommendation ~= nil and next(self.friend_recommendation) ~= nil then
-		for i, v in self.friend_recommendation do
+	if self.user_recommendation ~= nil and next(self.user_recommendation) ~= nil then
+		for i, v in self.user_recommendation do
 			local var184, var185 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
 			var184, var271 = protoModule.writeString(var184, var185, i)
 			local var186 = v:encode()
@@ -476,8 +476,8 @@ function t_1:encode()
 			var1 = var190
 		end
 	end
-	if self.universe_private_server ~= nil and next(self.universe_private_server) ~= nil then
-		for i, v in self.universe_private_server do
+	if self.contact ~= nil and next(self.contact) ~= nil then
+		for i, v in self.contact do
 			local var191, var192 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
 			var191, var279 = protoModule.writeString(var191, var192, i)
 			local var193 = v:encode()
@@ -498,7 +498,7 @@ function t_1:encode()
 end
 
 function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref), t (ref), badgeDataModule (ref), universeDataModule (ref), creatorDataModule (ref), eventDataModule (ref), songDataModule (ref), gamePassDataModule (ref), mediaAssetDataModule (ref), socialLinkDataModule (ref), gameDeveloperProductDataModule (ref), gameSubscriptionDataModule (ref), marketplaceCatalogCategoryDataModule (ref), marketplaceAssetDataModule (ref), marketplaceBundleDataModule (ref), marketplaceLookDataModule (ref), catalogSortDataModule (ref), ageRecommendationDataModule (ref), universeUserFollowDataModule (ref), universeUserVoteDataModule (ref), userProfileDataModule (ref), universeUserFavoriteDataModule (ref), playabilityDataModule (ref), universeUserFollowLimitDataModule (ref), universeUserVoteFeedbackMetadataDataModule (ref), momentDataModule (ref), communityDataModule (ref), communityUserMembershipDataModule (ref), friendRecommendationDataModule (ref), universePrivateServerDataModule (ref)
+	-- upvalues: t_1 (ref), protoModule (ref), t (ref), badgeDataModule (ref), universeDataModule (ref), creatorDataModule (ref), eventDataModule (ref), songDataModule (ref), gamePassDataModule (ref), mediaAssetDataModule (ref), socialLinkDataModule (ref), gameDeveloperProductDataModule (ref), gameSubscriptionDataModule (ref), marketplaceCatalogCategoryDataModule (ref), marketplaceAssetDataModule (ref), marketplaceBundleDataModule (ref), marketplaceLookDataModule (ref), catalogSortDataModule (ref), ageRecommendationDataModule (ref), universeUserFollowDataModule (ref), universeUserVoteDataModule (ref), userProfileDataModule (ref), universeUserFavoriteDataModule (ref), playabilityDataModule (ref), universeUserFollowLimitDataModule (ref), universeUserVoteFeedbackMetadataDataModule (ref), momentDataModule (ref), communityDataModule (ref), communityUserMembershipDataModule (ref), userRecommendationDataModule (ref), contactDataModule (ref)
 	local var198 = t_1.new()
 	local var199 = 0
 	while var199 < buffer.len(p1) do
@@ -677,14 +677,14 @@ function t_1.decode(p1)
 				local _ = nil
 				local var259, var260 = protoModule.readBuffer(p1, var199)
 				var199 = var260
-				var259 = t.HydrationContent_FriendRecommendationEntry.decode(var259)
-				var198.friend_recommendation[var259.key or ""] = var259.value or friendRecommendationDataModule.FriendRecommendationData.new()
+				var259 = t.HydrationContent_UserRecommendationEntry.decode(var259)
+				var198.user_recommendation[var259.key or ""] = var259.value or userRecommendationDataModule.UserRecommendationData.new()
 			elseif var204 == 28 then
 				local _ = nil
 				local var261, var262 = protoModule.readBuffer(p1, var199)
 				var199 = var262
-				var261 = t.HydrationContent_UniversePrivateServerEntry.decode(var261)
-				var198.universe_private_server[var261.key or ""] = var261.value or universePrivateServerDataModule.UniversePrivateServerData.new()
+				var261 = t.HydrationContent_ContactEntry.decode(var261)
+				var198.contact[var261.key or ""] = var261.value or contactDataModule.ContactData.new()
 			else
 				local _ = nil
 				local var263, var264 = protoModule.readVarInt(p1, var199)
@@ -918,27 +918,27 @@ function t_1:jsonEncode()
 		end
 		t.communityUserMembership = t_1
 	end
-	if self.friend_recommendation ~= nil and next(self.friend_recommendation) ~= nil then
+	if self.user_recommendation ~= nil and next(self.user_recommendation) ~= nil then
 		local t_1 = {}
 		
-		for i, v in self.friend_recommendation do
+		for i, v in self.user_recommendation do
 			t_1[i] = v:jsonEncode()
 		end
-		t.friendRecommendation = t_1
+		t.userRecommendation = t_1
 	end
-	if self.universe_private_server ~= nil and next(self.universe_private_server) ~= nil then
+	if self.contact ~= nil and next(self.contact) ~= nil then
 		local t_1 = {}
 		
-		for i, v in self.universe_private_server do
+		for i, v in self.contact do
 			t_1[i] = v:jsonEncode()
 		end
-		t.universePrivateServer = t_1
+		t.contact = t_1
 	end
 	return t
 end
 
 function t_1:jsonDecode()
-	-- upvalues: t_1 (ref), badgeDataModule (ref), universeDataModule (ref), creatorDataModule (ref), eventDataModule (ref), songDataModule (ref), gamePassDataModule (ref), mediaAssetDataModule (ref), socialLinkDataModule (ref), gameDeveloperProductDataModule (ref), gameSubscriptionDataModule (ref), marketplaceCatalogCategoryDataModule (ref), marketplaceAssetDataModule (ref), marketplaceBundleDataModule (ref), marketplaceLookDataModule (ref), catalogSortDataModule (ref), ageRecommendationDataModule (ref), universeUserFollowDataModule (ref), universeUserVoteDataModule (ref), userProfileDataModule (ref), universeUserFavoriteDataModule (ref), playabilityDataModule (ref), universeUserFollowLimitDataModule (ref), universeUserVoteFeedbackMetadataDataModule (ref), momentDataModule (ref), communityDataModule (ref), communityUserMembershipDataModule (ref), friendRecommendationDataModule (ref), universePrivateServerDataModule (ref)
+	-- upvalues: t_1 (ref), badgeDataModule (ref), universeDataModule (ref), creatorDataModule (ref), eventDataModule (ref), songDataModule (ref), gamePassDataModule (ref), mediaAssetDataModule (ref), socialLinkDataModule (ref), gameDeveloperProductDataModule (ref), gameSubscriptionDataModule (ref), marketplaceCatalogCategoryDataModule (ref), marketplaceAssetDataModule (ref), marketplaceBundleDataModule (ref), marketplaceLookDataModule (ref), catalogSortDataModule (ref), ageRecommendationDataModule (ref), universeUserFollowDataModule (ref), universeUserVoteDataModule (ref), userProfileDataModule (ref), universeUserFavoriteDataModule (ref), playabilityDataModule (ref), universeUserFollowLimitDataModule (ref), universeUserVoteFeedbackMetadataDataModule (ref), momentDataModule (ref), communityDataModule (ref), communityUserMembershipDataModule (ref), userRecommendationDataModule (ref), contactDataModule (ref)
 	local var269 = t_1.new()
 	
 	if self.badge ~= nil then
@@ -1293,37 +1293,29 @@ function t_1:jsonDecode()
 		end
 		var269.community_user_membership = t
 	end
-	if self.friend_recommendation ~= nil then
+	if self.user_recommendation ~= nil then
 		local t = {}
 		
-		for i, v in self.friend_recommendation do
-			t[i] = friendRecommendationDataModule.FriendRecommendationData.jsonDecode(v)
+		for i, v in self.user_recommendation do
+			t[i] = userRecommendationDataModule.UserRecommendationData.jsonDecode(v)
 		end
-		var269.friend_recommendation = t
+		var269.user_recommendation = t
 	end
-	if self.friendRecommendation ~= nil then
+	if self.userRecommendation ~= nil then
 		local t = {}
 		
-		for i, v in self.friendRecommendation do
-			t[i] = friendRecommendationDataModule.FriendRecommendationData.jsonDecode(v)
+		for i, v in self.userRecommendation do
+			t[i] = userRecommendationDataModule.UserRecommendationData.jsonDecode(v)
 		end
-		var269.friend_recommendation = t
+		var269.user_recommendation = t
 	end
-	if self.universe_private_server ~= nil then
+	if self.contact ~= nil then
 		local t = {}
 		
-		for i, v in self.universe_private_server do
-			t[i] = universePrivateServerDataModule.UniversePrivateServerData.jsonDecode(v)
+		for i, v in self.contact do
+			t[i] = contactDataModule.ContactData.jsonDecode(v)
 		end
-		var269.universe_private_server = t
-	end
-	if self.universePrivateServer ~= nil then
-		local t = {}
-		
-		for i, v in self.universePrivateServer do
-			t[i] = universePrivateServerDataModule.UniversePrivateServerData.jsonDecode(v)
-		end
-		var269.universe_private_server = t
+		var269.contact = t
 	end
 	return var269
 end
@@ -1352,14 +1344,14 @@ function t_2:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var271, var272 = protoModule.writeTag(buff, var270, 1, protoModule.wireTypes.lengthDelimited)
-		var271, var439 = protoModule.writeString(var271, var272, self.key)
+		var271, var438 = protoModule.writeString(var271, var272, self.key)
 		buff = var271
 		var270 = var272
 	end
 	if self.value ~= nil then
 		local var273 = self.value:encode()
 		local var274, var275 = protoModule.writeTag(buff, var270, 2, protoModule.wireTypes.lengthDelimited)
-		var274, var442 = protoModule.writeBuffer(var274, var275, var273, buffer.len(var273))
+		var274, var441 = protoModule.writeBuffer(var274, var275, var273, buffer.len(var273))
 		buff = var274
 		var270 = var275
 	end
@@ -1415,7 +1407,7 @@ function t_2.decode(p2)
 			local _ = var287
 			var271 = var288
 		else
-			error("Unsupported wire type: " .. var446)
+			error("Unsupported wire type: " .. var445)
 		end
 	end
 	return var270
@@ -1470,14 +1462,14 @@ function t_3:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var290, var291 = protoModule.writeTag(buff, var289, 1, protoModule.wireTypes.lengthDelimited)
-		var290, var468 = protoModule.writeString(var290, var291, self.key)
+		var290, var467 = protoModule.writeString(var290, var291, self.key)
 		buff = var290
 		var289 = var291
 	end
 	if self.value ~= nil then
 		local var292 = self.value:encode()
 		local var293, var294 = protoModule.writeTag(buff, var289, 2, protoModule.wireTypes.lengthDelimited)
-		var293, var471 = protoModule.writeBuffer(var293, var294, var292, buffer.len(var292))
+		var293, var470 = protoModule.writeBuffer(var293, var294, var292, buffer.len(var292))
 		buff = var293
 		var289 = var294
 	end
@@ -1533,7 +1525,7 @@ function t_3.decode(p3)
 			local _ = var306
 			var290 = var307
 		else
-			error("Unsupported wire type: " .. var475)
+			error("Unsupported wire type: " .. var474)
 		end
 	end
 	return var289
@@ -1588,14 +1580,14 @@ function t_4:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var309, var310 = protoModule.writeTag(buff, var308, 1, protoModule.wireTypes.lengthDelimited)
-		var309, var497 = protoModule.writeString(var309, var310, self.key)
+		var309, var496 = protoModule.writeString(var309, var310, self.key)
 		buff = var309
 		var308 = var310
 	end
 	if self.value ~= nil then
 		local var311 = self.value:encode()
 		local var312, var313 = protoModule.writeTag(buff, var308, 2, protoModule.wireTypes.lengthDelimited)
-		var312, var500 = protoModule.writeBuffer(var312, var313, var311, buffer.len(var311))
+		var312, var499 = protoModule.writeBuffer(var312, var313, var311, buffer.len(var311))
 		buff = var312
 		var308 = var313
 	end
@@ -1651,7 +1643,7 @@ function t_4.decode(p4)
 			local _ = var325
 			var309 = var326
 		else
-			error("Unsupported wire type: " .. var504)
+			error("Unsupported wire type: " .. var503)
 		end
 	end
 	return var308
@@ -1706,14 +1698,14 @@ function t_5:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var328, var329 = protoModule.writeTag(buff, var327, 1, protoModule.wireTypes.lengthDelimited)
-		var328, var526 = protoModule.writeString(var328, var329, self.key)
+		var328, var525 = protoModule.writeString(var328, var329, self.key)
 		buff = var328
 		var327 = var329
 	end
 	if self.value ~= nil then
 		local var330 = self.value:encode()
 		local var331, var332 = protoModule.writeTag(buff, var327, 2, protoModule.wireTypes.lengthDelimited)
-		var331, var529 = protoModule.writeBuffer(var331, var332, var330, buffer.len(var330))
+		var331, var528 = protoModule.writeBuffer(var331, var332, var330, buffer.len(var330))
 		buff = var331
 		var327 = var332
 	end
@@ -1769,7 +1761,7 @@ function t_5.decode(p5)
 			local _ = var344
 			var328 = var345
 		else
-			error("Unsupported wire type: " .. var533)
+			error("Unsupported wire type: " .. var532)
 		end
 	end
 	return var327
@@ -1824,14 +1816,14 @@ function t_6:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var347, var348 = protoModule.writeTag(buff, var346, 1, protoModule.wireTypes.lengthDelimited)
-		var347, var555 = protoModule.writeString(var347, var348, self.key)
+		var347, var554 = protoModule.writeString(var347, var348, self.key)
 		buff = var347
 		var346 = var348
 	end
 	if self.value ~= nil then
 		local var349 = self.value:encode()
 		local var350, var351 = protoModule.writeTag(buff, var346, 2, protoModule.wireTypes.lengthDelimited)
-		var350, var558 = protoModule.writeBuffer(var350, var351, var349, buffer.len(var349))
+		var350, var557 = protoModule.writeBuffer(var350, var351, var349, buffer.len(var349))
 		buff = var350
 		var346 = var351
 	end
@@ -1887,7 +1879,7 @@ function t_6.decode(p6)
 			local _ = var363
 			var347 = var364
 		else
-			error("Unsupported wire type: " .. var562)
+			error("Unsupported wire type: " .. var561)
 		end
 	end
 	return var346
@@ -1942,14 +1934,14 @@ function t_7:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var366, var367 = protoModule.writeTag(buff, var365, 1, protoModule.wireTypes.lengthDelimited)
-		var366, var584 = protoModule.writeString(var366, var367, self.key)
+		var366, var583 = protoModule.writeString(var366, var367, self.key)
 		buff = var366
 		var365 = var367
 	end
 	if self.value ~= nil then
 		local var368 = self.value:encode()
 		local var369, var370 = protoModule.writeTag(buff, var365, 2, protoModule.wireTypes.lengthDelimited)
-		var369, var587 = protoModule.writeBuffer(var369, var370, var368, buffer.len(var368))
+		var369, var586 = protoModule.writeBuffer(var369, var370, var368, buffer.len(var368))
 		buff = var369
 		var365 = var370
 	end
@@ -2005,7 +1997,7 @@ function t_7.decode(p7)
 			local _ = var382
 			var366 = var383
 		else
-			error("Unsupported wire type: " .. var591)
+			error("Unsupported wire type: " .. var590)
 		end
 	end
 	return var365
@@ -2060,14 +2052,14 @@ function t_8:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var385, var386 = protoModule.writeTag(buff, var384, 1, protoModule.wireTypes.lengthDelimited)
-		var385, var613 = protoModule.writeString(var385, var386, self.key)
+		var385, var612 = protoModule.writeString(var385, var386, self.key)
 		buff = var385
 		var384 = var386
 	end
 	if self.value ~= nil then
 		local var387 = self.value:encode()
 		local var388, var389 = protoModule.writeTag(buff, var384, 2, protoModule.wireTypes.lengthDelimited)
-		var388, var616 = protoModule.writeBuffer(var388, var389, var387, buffer.len(var387))
+		var388, var615 = protoModule.writeBuffer(var388, var389, var387, buffer.len(var387))
 		buff = var388
 		var384 = var389
 	end
@@ -2123,7 +2115,7 @@ function t_8.decode(p8)
 			local _ = var401
 			var385 = var402
 		else
-			error("Unsupported wire type: " .. var620)
+			error("Unsupported wire type: " .. var619)
 		end
 	end
 	return var384
@@ -2178,14 +2170,14 @@ function t_9:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var404, var405 = protoModule.writeTag(buff, var403, 1, protoModule.wireTypes.lengthDelimited)
-		var404, var642 = protoModule.writeString(var404, var405, self.key)
+		var404, var641 = protoModule.writeString(var404, var405, self.key)
 		buff = var404
 		var403 = var405
 	end
 	if self.value ~= nil then
 		local var406 = self.value:encode()
 		local var407, var408 = protoModule.writeTag(buff, var403, 2, protoModule.wireTypes.lengthDelimited)
-		var407, var645 = protoModule.writeBuffer(var407, var408, var406, buffer.len(var406))
+		var407, var644 = protoModule.writeBuffer(var407, var408, var406, buffer.len(var406))
 		buff = var407
 		var403 = var408
 	end
@@ -2241,7 +2233,7 @@ function t_9.decode(p9)
 			local _ = var420
 			var404 = var421
 		else
-			error("Unsupported wire type: " .. var649)
+			error("Unsupported wire type: " .. var648)
 		end
 	end
 	return var403
@@ -2296,14 +2288,14 @@ function t_10:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var423, var424 = protoModule.writeTag(buff, var422, 1, protoModule.wireTypes.lengthDelimited)
-		var423, var671 = protoModule.writeString(var423, var424, self.key)
+		var423, var670 = protoModule.writeString(var423, var424, self.key)
 		buff = var423
 		var422 = var424
 	end
 	if self.value ~= nil then
 		local var425 = self.value:encode()
 		local var426, var427 = protoModule.writeTag(buff, var422, 2, protoModule.wireTypes.lengthDelimited)
-		var426, var674 = protoModule.writeBuffer(var426, var427, var425, buffer.len(var425))
+		var426, var673 = protoModule.writeBuffer(var426, var427, var425, buffer.len(var425))
 		buff = var426
 		var422 = var427
 	end
@@ -2359,7 +2351,7 @@ function t_10.decode(p10)
 			local _ = var439
 			var423 = var440
 		else
-			error("Unsupported wire type: " .. var678)
+			error("Unsupported wire type: " .. var677)
 		end
 	end
 	return var422
@@ -2414,14 +2406,14 @@ function t_11:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var442, var443 = protoModule.writeTag(buff, var441, 1, protoModule.wireTypes.lengthDelimited)
-		var442, var700 = protoModule.writeString(var442, var443, self.key)
+		var442, var699 = protoModule.writeString(var442, var443, self.key)
 		buff = var442
 		var441 = var443
 	end
 	if self.value ~= nil then
 		local var444 = self.value:encode()
 		local var445, var446 = protoModule.writeTag(buff, var441, 2, protoModule.wireTypes.lengthDelimited)
-		var445, var703 = protoModule.writeBuffer(var445, var446, var444, buffer.len(var444))
+		var445, var702 = protoModule.writeBuffer(var445, var446, var444, buffer.len(var444))
 		buff = var445
 		var441 = var446
 	end
@@ -2477,7 +2469,7 @@ function t_11.decode(p11)
 			local _ = var458
 			var442 = var459
 		else
-			error("Unsupported wire type: " .. var707)
+			error("Unsupported wire type: " .. var706)
 		end
 	end
 	return var441
@@ -2532,14 +2524,14 @@ function t_12:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var461, var462 = protoModule.writeTag(buff, var460, 1, protoModule.wireTypes.lengthDelimited)
-		var461, var729 = protoModule.writeString(var461, var462, self.key)
+		var461, var728 = protoModule.writeString(var461, var462, self.key)
 		buff = var461
 		var460 = var462
 	end
 	if self.value ~= nil then
 		local var463 = self.value:encode()
 		local var464, var465 = protoModule.writeTag(buff, var460, 2, protoModule.wireTypes.lengthDelimited)
-		var464, var732 = protoModule.writeBuffer(var464, var465, var463, buffer.len(var463))
+		var464, var731 = protoModule.writeBuffer(var464, var465, var463, buffer.len(var463))
 		buff = var464
 		var460 = var465
 	end
@@ -2595,7 +2587,7 @@ function t_12.decode(p12)
 			local _ = var477
 			var461 = var478
 		else
-			error("Unsupported wire type: " .. var736)
+			error("Unsupported wire type: " .. var735)
 		end
 	end
 	return var460
@@ -2650,14 +2642,14 @@ function t_13:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var480, var481 = protoModule.writeTag(buff, var479, 1, protoModule.wireTypes.lengthDelimited)
-		var480, var758 = protoModule.writeString(var480, var481, self.key)
+		var480, var757 = protoModule.writeString(var480, var481, self.key)
 		buff = var480
 		var479 = var481
 	end
 	if self.value ~= nil then
 		local var482 = self.value:encode()
 		local var483, var484 = protoModule.writeTag(buff, var479, 2, protoModule.wireTypes.lengthDelimited)
-		var483, var761 = protoModule.writeBuffer(var483, var484, var482, buffer.len(var482))
+		var483, var760 = protoModule.writeBuffer(var483, var484, var482, buffer.len(var482))
 		buff = var483
 		var479 = var484
 	end
@@ -2713,7 +2705,7 @@ function t_13.decode(p13)
 			local _ = var496
 			var480 = var497
 		else
-			error("Unsupported wire type: " .. var765)
+			error("Unsupported wire type: " .. var764)
 		end
 	end
 	return var479
@@ -2768,14 +2760,14 @@ function t_14:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var499, var500 = protoModule.writeTag(buff, var498, 1, protoModule.wireTypes.lengthDelimited)
-		var499, var787 = protoModule.writeString(var499, var500, self.key)
+		var499, var786 = protoModule.writeString(var499, var500, self.key)
 		buff = var499
 		var498 = var500
 	end
 	if self.value ~= nil then
 		local var501 = self.value:encode()
 		local var502, var503 = protoModule.writeTag(buff, var498, 2, protoModule.wireTypes.lengthDelimited)
-		var502, var790 = protoModule.writeBuffer(var502, var503, var501, buffer.len(var501))
+		var502, var789 = protoModule.writeBuffer(var502, var503, var501, buffer.len(var501))
 		buff = var502
 		var498 = var503
 	end
@@ -2831,7 +2823,7 @@ function t_14.decode(p14)
 			local _ = var515
 			var499 = var516
 		else
-			error("Unsupported wire type: " .. var794)
+			error("Unsupported wire type: " .. var793)
 		end
 	end
 	return var498
@@ -2886,14 +2878,14 @@ function t_15:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var518, var519 = protoModule.writeTag(buff, var517, 1, protoModule.wireTypes.lengthDelimited)
-		var518, var816 = protoModule.writeString(var518, var519, self.key)
+		var518, var815 = protoModule.writeString(var518, var519, self.key)
 		buff = var518
 		var517 = var519
 	end
 	if self.value ~= nil then
 		local var520 = self.value:encode()
 		local var521, var522 = protoModule.writeTag(buff, var517, 2, protoModule.wireTypes.lengthDelimited)
-		var521, var819 = protoModule.writeBuffer(var521, var522, var520, buffer.len(var520))
+		var521, var818 = protoModule.writeBuffer(var521, var522, var520, buffer.len(var520))
 		buff = var521
 		var517 = var522
 	end
@@ -2949,7 +2941,7 @@ function t_15.decode(p15)
 			local _ = var534
 			var518 = var535
 		else
-			error("Unsupported wire type: " .. var823)
+			error("Unsupported wire type: " .. var822)
 		end
 	end
 	return var517
@@ -3004,14 +2996,14 @@ function t_16:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var537, var538 = protoModule.writeTag(buff, var536, 1, protoModule.wireTypes.lengthDelimited)
-		var537, var845 = protoModule.writeString(var537, var538, self.key)
+		var537, var844 = protoModule.writeString(var537, var538, self.key)
 		buff = var537
 		var536 = var538
 	end
 	if self.value ~= nil then
 		local var539 = self.value:encode()
 		local var540, var541 = protoModule.writeTag(buff, var536, 2, protoModule.wireTypes.lengthDelimited)
-		var540, var848 = protoModule.writeBuffer(var540, var541, var539, buffer.len(var539))
+		var540, var847 = protoModule.writeBuffer(var540, var541, var539, buffer.len(var539))
 		buff = var540
 		var536 = var541
 	end
@@ -3067,7 +3059,7 @@ function t_16.decode(p16)
 			local _ = var553
 			var537 = var554
 		else
-			error("Unsupported wire type: " .. var852)
+			error("Unsupported wire type: " .. var851)
 		end
 	end
 	return var536
@@ -3122,14 +3114,14 @@ function t_17:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var556, var557 = protoModule.writeTag(buff, var555, 1, protoModule.wireTypes.lengthDelimited)
-		var556, var874 = protoModule.writeString(var556, var557, self.key)
+		var556, var873 = protoModule.writeString(var556, var557, self.key)
 		buff = var556
 		var555 = var557
 	end
 	if self.value ~= nil then
 		local var558 = self.value:encode()
 		local var559, var560 = protoModule.writeTag(buff, var555, 2, protoModule.wireTypes.lengthDelimited)
-		var559, var877 = protoModule.writeBuffer(var559, var560, var558, buffer.len(var558))
+		var559, var876 = protoModule.writeBuffer(var559, var560, var558, buffer.len(var558))
 		buff = var559
 		var555 = var560
 	end
@@ -3185,7 +3177,7 @@ function t_17.decode(p17)
 			local _ = var572
 			var556 = var573
 		else
-			error("Unsupported wire type: " .. var881)
+			error("Unsupported wire type: " .. var880)
 		end
 	end
 	return var555
@@ -3240,14 +3232,14 @@ function t_18:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var575, var576 = protoModule.writeTag(buff, var574, 1, protoModule.wireTypes.lengthDelimited)
-		var575, var903 = protoModule.writeString(var575, var576, self.key)
+		var575, var902 = protoModule.writeString(var575, var576, self.key)
 		buff = var575
 		var574 = var576
 	end
 	if self.value ~= nil then
 		local var577 = self.value:encode()
 		local var578, var579 = protoModule.writeTag(buff, var574, 2, protoModule.wireTypes.lengthDelimited)
-		var578, var906 = protoModule.writeBuffer(var578, var579, var577, buffer.len(var577))
+		var578, var905 = protoModule.writeBuffer(var578, var579, var577, buffer.len(var577))
 		buff = var578
 		var574 = var579
 	end
@@ -3303,7 +3295,7 @@ function t_18.decode(p18)
 			local _ = var591
 			var575 = var592
 		else
-			error("Unsupported wire type: " .. var910)
+			error("Unsupported wire type: " .. var909)
 		end
 	end
 	return var574
@@ -3358,14 +3350,14 @@ function t_19:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var594, var595 = protoModule.writeTag(buff, var593, 1, protoModule.wireTypes.lengthDelimited)
-		var594, var932 = protoModule.writeString(var594, var595, self.key)
+		var594, var931 = protoModule.writeString(var594, var595, self.key)
 		buff = var594
 		var593 = var595
 	end
 	if self.value ~= nil then
 		local var596 = self.value:encode()
 		local var597, var598 = protoModule.writeTag(buff, var593, 2, protoModule.wireTypes.lengthDelimited)
-		var597, var935 = protoModule.writeBuffer(var597, var598, var596, buffer.len(var596))
+		var597, var934 = protoModule.writeBuffer(var597, var598, var596, buffer.len(var596))
 		buff = var597
 		var593 = var598
 	end
@@ -3421,7 +3413,7 @@ function t_19.decode(p19)
 			local _ = var610
 			var594 = var611
 		else
-			error("Unsupported wire type: " .. var939)
+			error("Unsupported wire type: " .. var938)
 		end
 	end
 	return var593
@@ -3476,14 +3468,14 @@ function t_20:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var613, var614 = protoModule.writeTag(buff, var612, 1, protoModule.wireTypes.lengthDelimited)
-		var613, var961 = protoModule.writeString(var613, var614, self.key)
+		var613, var960 = protoModule.writeString(var613, var614, self.key)
 		buff = var613
 		var612 = var614
 	end
 	if self.value ~= nil then
 		local var615 = self.value:encode()
 		local var616, var617 = protoModule.writeTag(buff, var612, 2, protoModule.wireTypes.lengthDelimited)
-		var616, var964 = protoModule.writeBuffer(var616, var617, var615, buffer.len(var615))
+		var616, var963 = protoModule.writeBuffer(var616, var617, var615, buffer.len(var615))
 		buff = var616
 		var612 = var617
 	end
@@ -3539,7 +3531,7 @@ function t_20.decode(p20)
 			local _ = var629
 			var613 = var630
 		else
-			error("Unsupported wire type: " .. var968)
+			error("Unsupported wire type: " .. var967)
 		end
 	end
 	return var612
@@ -3594,14 +3586,14 @@ function t_21:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var632, var633 = protoModule.writeTag(buff, var631, 1, protoModule.wireTypes.lengthDelimited)
-		var632, var990 = protoModule.writeString(var632, var633, self.key)
+		var632, var989 = protoModule.writeString(var632, var633, self.key)
 		buff = var632
 		var631 = var633
 	end
 	if self.value ~= nil then
 		local var634 = self.value:encode()
 		local var635, var636 = protoModule.writeTag(buff, var631, 2, protoModule.wireTypes.lengthDelimited)
-		var635, var993 = protoModule.writeBuffer(var635, var636, var634, buffer.len(var634))
+		var635, var992 = protoModule.writeBuffer(var635, var636, var634, buffer.len(var634))
 		buff = var635
 		var631 = var636
 	end
@@ -3657,7 +3649,7 @@ function t_21.decode(p21)
 			local _ = var648
 			var632 = var649
 		else
-			error("Unsupported wire type: " .. var997)
+			error("Unsupported wire type: " .. var996)
 		end
 	end
 	return var631
@@ -3712,14 +3704,14 @@ function t_22:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var651, var652 = protoModule.writeTag(buff, var650, 1, protoModule.wireTypes.lengthDelimited)
-		var651, var1019 = protoModule.writeString(var651, var652, self.key)
+		var651, var1018 = protoModule.writeString(var651, var652, self.key)
 		buff = var651
 		var650 = var652
 	end
 	if self.value ~= nil then
 		local var653 = self.value:encode()
 		local var654, var655 = protoModule.writeTag(buff, var650, 2, protoModule.wireTypes.lengthDelimited)
-		var654, var1022 = protoModule.writeBuffer(var654, var655, var653, buffer.len(var653))
+		var654, var1021 = protoModule.writeBuffer(var654, var655, var653, buffer.len(var653))
 		buff = var654
 		var650 = var655
 	end
@@ -3775,7 +3767,7 @@ function t_22.decode(p22)
 			local _ = var667
 			var651 = var668
 		else
-			error("Unsupported wire type: " .. var1026)
+			error("Unsupported wire type: " .. var1025)
 		end
 	end
 	return var650
@@ -3830,14 +3822,14 @@ function t_23:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var670, var671 = protoModule.writeTag(buff, var669, 1, protoModule.wireTypes.lengthDelimited)
-		var670, var1048 = protoModule.writeString(var670, var671, self.key)
+		var670, var1047 = protoModule.writeString(var670, var671, self.key)
 		buff = var670
 		var669 = var671
 	end
 	if self.value ~= nil then
 		local var672 = self.value:encode()
 		local var673, var674 = protoModule.writeTag(buff, var669, 2, protoModule.wireTypes.lengthDelimited)
-		var673, var1051 = protoModule.writeBuffer(var673, var674, var672, buffer.len(var672))
+		var673, var1050 = protoModule.writeBuffer(var673, var674, var672, buffer.len(var672))
 		buff = var673
 		var669 = var674
 	end
@@ -3893,7 +3885,7 @@ function t_23.decode(p23)
 			local _ = var686
 			var670 = var687
 		else
-			error("Unsupported wire type: " .. var1055)
+			error("Unsupported wire type: " .. var1054)
 		end
 	end
 	return var669
@@ -3948,14 +3940,14 @@ function t_24:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var689, var690 = protoModule.writeTag(buff, var688, 1, protoModule.wireTypes.lengthDelimited)
-		var689, var1077 = protoModule.writeString(var689, var690, self.key)
+		var689, var1076 = protoModule.writeString(var689, var690, self.key)
 		buff = var689
 		var688 = var690
 	end
 	if self.value ~= nil then
 		local var691 = self.value:encode()
 		local var692, var693 = protoModule.writeTag(buff, var688, 2, protoModule.wireTypes.lengthDelimited)
-		var692, var1080 = protoModule.writeBuffer(var692, var693, var691, buffer.len(var691))
+		var692, var1079 = protoModule.writeBuffer(var692, var693, var691, buffer.len(var691))
 		buff = var692
 		var688 = var693
 	end
@@ -4011,7 +4003,7 @@ function t_24.decode(p24)
 			local _ = var705
 			var689 = var706
 		else
-			error("Unsupported wire type: " .. var1084)
+			error("Unsupported wire type: " .. var1083)
 		end
 	end
 	return var688
@@ -4066,14 +4058,14 @@ function t_25:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var708, var709 = protoModule.writeTag(buff, var707, 1, protoModule.wireTypes.lengthDelimited)
-		var708, var1106 = protoModule.writeString(var708, var709, self.key)
+		var708, var1105 = protoModule.writeString(var708, var709, self.key)
 		buff = var708
 		var707 = var709
 	end
 	if self.value ~= nil then
 		local var710 = self.value:encode()
 		local var711, var712 = protoModule.writeTag(buff, var707, 2, protoModule.wireTypes.lengthDelimited)
-		var711, var1109 = protoModule.writeBuffer(var711, var712, var710, buffer.len(var710))
+		var711, var1108 = protoModule.writeBuffer(var711, var712, var710, buffer.len(var710))
 		buff = var711
 		var707 = var712
 	end
@@ -4129,7 +4121,7 @@ function t_25.decode(p25)
 			local _ = var724
 			var708 = var725
 		else
-			error("Unsupported wire type: " .. var1113)
+			error("Unsupported wire type: " .. var1112)
 		end
 	end
 	return var707
@@ -4184,14 +4176,14 @@ function t_26:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var727, var728 = protoModule.writeTag(buff, var726, 1, protoModule.wireTypes.lengthDelimited)
-		var727, var1135 = protoModule.writeString(var727, var728, self.key)
+		var727, var1134 = protoModule.writeString(var727, var728, self.key)
 		buff = var727
 		var726 = var728
 	end
 	if self.value ~= nil then
 		local var729 = self.value:encode()
 		local var730, var731 = protoModule.writeTag(buff, var726, 2, protoModule.wireTypes.lengthDelimited)
-		var730, var1138 = protoModule.writeBuffer(var730, var731, var729, buffer.len(var729))
+		var730, var1137 = protoModule.writeBuffer(var730, var731, var729, buffer.len(var729))
 		buff = var730
 		var726 = var731
 	end
@@ -4247,7 +4239,7 @@ function t_26.decode(p26)
 			local _ = var743
 			var727 = var744
 		else
-			error("Unsupported wire type: " .. var1142)
+			error("Unsupported wire type: " .. var1141)
 		end
 	end
 	return var726
@@ -4302,14 +4294,14 @@ function t_27:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var746, var747 = protoModule.writeTag(buff, var745, 1, protoModule.wireTypes.lengthDelimited)
-		var746, var1164 = protoModule.writeString(var746, var747, self.key)
+		var746, var1163 = protoModule.writeString(var746, var747, self.key)
 		buff = var746
 		var745 = var747
 	end
 	if self.value ~= nil then
 		local var748 = self.value:encode()
 		local var749, var750 = protoModule.writeTag(buff, var745, 2, protoModule.wireTypes.lengthDelimited)
-		var749, var1167 = protoModule.writeBuffer(var749, var750, var748, buffer.len(var748))
+		var749, var1166 = protoModule.writeBuffer(var749, var750, var748, buffer.len(var748))
 		buff = var749
 		var745 = var750
 	end
@@ -4365,7 +4357,7 @@ function t_27.decode(p27)
 			local _ = var762
 			var746 = var763
 		else
-			error("Unsupported wire type: " .. var1171)
+			error("Unsupported wire type: " .. var1170)
 		end
 	end
 	return var745
@@ -4420,14 +4412,14 @@ function t_28:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var765, var766 = protoModule.writeTag(buff, var764, 1, protoModule.wireTypes.lengthDelimited)
-		var765, var1193 = protoModule.writeString(var765, var766, self.key)
+		var765, var1192 = protoModule.writeString(var765, var766, self.key)
 		buff = var765
 		var764 = var766
 	end
 	if self.value ~= nil then
 		local var767 = self.value:encode()
 		local var768, var769 = protoModule.writeTag(buff, var764, 2, protoModule.wireTypes.lengthDelimited)
-		var768, var1196 = protoModule.writeBuffer(var768, var769, var767, buffer.len(var767))
+		var768, var1195 = protoModule.writeBuffer(var768, var769, var767, buffer.len(var767))
 		buff = var768
 		var764 = var769
 	end
@@ -4438,7 +4430,7 @@ function t_28:encode()
 end
 
 function t_28.decode(p28)
-	-- upvalues: t_28 (ref), protoModule (ref), friendRecommendationDataModule (ref)
+	-- upvalues: t_28 (ref), protoModule (ref), userRecommendationDataModule (ref)
 	local var764 = t_28.new()
 	local var765 = 0
 	while var765 < buffer.len(p28) do
@@ -4466,7 +4458,7 @@ function t_28.decode(p28)
 				local _ = nil
 				local var775, var776 = protoModule.readBuffer(p28, var765)
 				var765 = var776
-				var764.value = friendRecommendationDataModule.FriendRecommendationData.decode(var775)
+				var764.value = userRecommendationDataModule.UserRecommendationData.decode(var775)
 			else
 				local _ = nil
 				local var777, var778 = protoModule.readVarInt(p28, var765)
@@ -4483,7 +4475,7 @@ function t_28.decode(p28)
 			local _ = var781
 			var765 = var782
 		else
-			error("Unsupported wire type: " .. var1200)
+			error("Unsupported wire type: " .. var1199)
 		end
 	end
 	return var764
@@ -4502,24 +4494,24 @@ function t_28:jsonEncode()
 end
 
 function t_28:jsonDecode()
-	-- upvalues: t_28 (ref), friendRecommendationDataModule (ref)
+	-- upvalues: t_28 (ref), userRecommendationDataModule (ref)
 	local var783 = t_28.new()
 	
 	if self.key ~= nil then
 		var783.key = self.key
 	end
 	if self.value ~= nil then
-		var783.value = friendRecommendationDataModule.FriendRecommendationData.jsonDecode(self.value)
+		var783.value = userRecommendationDataModule.UserRecommendationData.jsonDecode(self.value)
 	end
 	return var783
 end
 
 t_28.descriptor = {
-	name = "HydrationContent_FriendRecommendationEntry",
-	fullName = "roblox.apppageplatform.shared.v1beta1.FriendRecommendationEntry"
+	name = "HydrationContent_UserRecommendationEntry",
+	fullName = "roblox.apppageplatform.shared.v1beta1.UserRecommendationEntry"
 }
-t.HydrationContent_FriendRecommendationEntry = t_28
-typeRegistryModule.default:register(t.HydrationContent_FriendRecommendationEntry)
+t.HydrationContent_UserRecommendationEntry = t_28
+typeRegistryModule.default:register(t.HydrationContent_UserRecommendationEntry)
 local t_29 = {}
 t_29.__index = t_29
 
@@ -4538,14 +4530,14 @@ function t_29:encode()
 	
 	if self.key ~= nil and self.key ~= "" then
 		local var784, var785 = protoModule.writeTag(buff, var783, 1, protoModule.wireTypes.lengthDelimited)
-		var784, var1222 = protoModule.writeString(var784, var785, self.key)
+		var784, var1221 = protoModule.writeString(var784, var785, self.key)
 		buff = var784
 		var783 = var785
 	end
 	if self.value ~= nil then
 		local var786 = self.value:encode()
 		local var787, var788 = protoModule.writeTag(buff, var783, 2, protoModule.wireTypes.lengthDelimited)
-		var787, var1225 = protoModule.writeBuffer(var787, var788, var786, buffer.len(var786))
+		var787, var1224 = protoModule.writeBuffer(var787, var788, var786, buffer.len(var786))
 		buff = var787
 		var783 = var788
 	end
@@ -4556,7 +4548,7 @@ function t_29:encode()
 end
 
 function t_29.decode(p29)
-	-- upvalues: t_29 (ref), protoModule (ref), universePrivateServerDataModule (ref)
+	-- upvalues: t_29 (ref), protoModule (ref), contactDataModule (ref)
 	local var783 = t_29.new()
 	local var784 = 0
 	while var784 < buffer.len(p29) do
@@ -4584,7 +4576,7 @@ function t_29.decode(p29)
 				local _ = nil
 				local var794, var795 = protoModule.readBuffer(p29, var784)
 				var784 = var795
-				var783.value = universePrivateServerDataModule.UniversePrivateServerData.decode(var794)
+				var783.value = contactDataModule.ContactData.decode(var794)
 			else
 				local _ = nil
 				local var796, var797 = protoModule.readVarInt(p29, var784)
@@ -4601,7 +4593,7 @@ function t_29.decode(p29)
 			local _ = var800
 			var784 = var801
 		else
-			error("Unsupported wire type: " .. var1229)
+			error("Unsupported wire type: " .. var1228)
 		end
 	end
 	return var783
@@ -4620,23 +4612,23 @@ function t_29:jsonEncode()
 end
 
 function t_29:jsonDecode()
-	-- upvalues: t_29 (ref), universePrivateServerDataModule (ref)
+	-- upvalues: t_29 (ref), contactDataModule (ref)
 	local var802 = t_29.new()
 	
 	if self.key ~= nil then
 		var802.key = self.key
 	end
 	if self.value ~= nil then
-		var802.value = universePrivateServerDataModule.UniversePrivateServerData.jsonDecode(self.value)
+		var802.value = contactDataModule.ContactData.jsonDecode(self.value)
 	end
 	return var802
 end
 
 t_29.descriptor = {
-	name = "HydrationContent_UniversePrivateServerEntry",
-	fullName = "roblox.apppageplatform.shared.v1beta1.UniversePrivateServerEntry"
+	name = "HydrationContent_ContactEntry",
+	fullName = "roblox.apppageplatform.shared.v1beta1.ContactEntry"
 }
-t.HydrationContent_UniversePrivateServerEntry = t_29
-typeRegistryModule.default:register(t.HydrationContent_UniversePrivateServerEntry)
+t.HydrationContent_ContactEntry = t_29
+typeRegistryModule.default:register(t.HydrationContent_ContactEntry)
 
 return { HydrationContent = t.HydrationContent }

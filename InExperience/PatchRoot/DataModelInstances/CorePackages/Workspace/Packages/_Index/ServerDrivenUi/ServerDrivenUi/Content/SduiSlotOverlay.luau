@@ -1,5 +1,4 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ServerDrivenUi").Parent.React)
-local luaAppSduiSlotOverlayZIndex = game:DefineFastFlag("LuaAppSduiSlotOverlayZIndex", false)
 local t = {
 	topLeftSlot = {
 		AnchorPoint = Vector2.zero,
@@ -40,7 +39,7 @@ local t = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), t (ref), luaAppSduiSlotOverlayZIndex (ref)
+	-- upvalues: reactModule (ref), t (ref)
 	local padding = p1.padding or 0
 	
 	return reactModule.createElement("Frame", {
@@ -50,7 +49,6 @@ return reactModule.memo(function(p1)
 		Size = p1.size or UDim2.new(1, 0, 1, 0),
 		Position = p1.position,
 		BackgroundTransparency = 1,
-		ZIndex = if luaAppSduiSlotOverlayZIndex then p1.zIndex else nil,
 		[reactModule.Tag] = "data-testid=--sdui-slot-overlay"
 	}, reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), padding (ref), t (copy), p1 (ref)

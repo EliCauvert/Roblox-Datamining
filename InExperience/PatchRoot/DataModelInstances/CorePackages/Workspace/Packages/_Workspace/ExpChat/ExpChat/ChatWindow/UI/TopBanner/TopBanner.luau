@@ -12,6 +12,9 @@ local getFFlagMemoizeChatReportingMenu = require(parent.SharedFlags).GetFFlagMem
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
+local UIBloxModule = require(parent.UIBlox)
+local iconButton = UIBloxModule.App.Button.IconButton
+local images = UIBloxModule.App.ImageSet.Images
 local foundationModule = require(parent.Foundation)
 local icon = foundationModule.Icon
 local iconName = foundationModule.Enums.IconName
@@ -19,11 +22,12 @@ local iconSize = foundationModule.Enums.IconSize
 local view = foundationModule.View
 local fFlagExpChatFocusViaLastModeFixModule = require(expChat.Flags.FFlagExpChatFocusViaLastModeFix)
 local getFFlagChatWindowUseCallbackOptimizationsModule = require(expChat.Flags.getFFlagChatWindowUseCallbackOptimizations)
+local replaceChatLineReportingIcon = game:DefineFastFlag("ReplaceChatLineReportingIcon", false)
 local expChatTopBannerZIndexFix = game:DefineFastFlag("ExpChatTopBannerZIndexFix", false)
 local var1 = require(expChat.Stores.GetFocusNavigationStore)(false)
 
 local var2 = function(p1)
-	-- upvalues: reactModule (ref), localization (ref), localizationService (ref), reactFocusNavigationModule (ref), fFlagExpChatFocusViaLastModeFixModule (ref), focusNavigationUtilsModule (ref), signalsReactModule (ref), var1 (ref), guiService (ref), signalsModule (ref), constants (ref), expChatTopBannerZIndexFix (ref), view (ref), getFFlagChatWindowUseCallbackOptimizationsModule (ref), icon (ref), iconName (ref), iconSize (ref), localizationProvider (ref), chatBoxContextMenu (ref), getFFlagMemoizeChatReportingMenu (ref)
+	-- upvalues: reactModule (ref), localization (ref), localizationService (ref), reactFocusNavigationModule (ref), fFlagExpChatFocusViaLastModeFixModule (ref), focusNavigationUtilsModule (ref), signalsReactModule (ref), var1 (ref), guiService (ref), signalsModule (ref), constants (ref), expChatTopBannerZIndexFix (ref), replaceChatLineReportingIcon (ref), view (ref), getFFlagChatWindowUseCallbackOptimizationsModule (ref), icon (ref), iconName (ref), iconSize (ref), iconButton (ref), images (ref), localizationProvider (ref), chatBoxContextMenu (ref), getFFlagMemoizeChatReportingMenu (ref)
 	local var3 = reactModule.useRef(nil)
 	local var4, var5 = reactModule.useState(false)
 	local var6 = localization.new(localizationService.RobloxLocaleId)
@@ -80,7 +84,7 @@ local var2 = function(p1)
 		Size = UDim2.new(1, 0, 0, constants.TopBannerSize),
 		ZIndex = if expChatTopBannerZIndexFix then 2 else nil
 	}, {
-		DotMenu = reactModule.createElement(view, {
+		DotMenu = if replaceChatLineReportingIcon then reactModule.createElement(view, {
 			tag = "auto-xy padding-small radius-medium align-x-center align-y-center",
 			Size = UDim2.new(0, constants.IconButtonSize, 0, constants.IconButtonSize),
 			Position = UDim2.new(1, constants.IconButtonPositionXOffset, 0, constants.IconButtonPositionYOffset),
@@ -98,7 +102,24 @@ local var2 = function(p1)
 			name = iconName.ThreeDotsHorizontal,
 			size = iconSize.Large,
 			style = { Transparency = p1.iconTransparency }
-		})),
+		})) else reactModule.createElement(iconButton, {
+			showBackground = true,
+			backgroundTransparency = 1,
+			size = UDim2.new(0, constants.IconButtonSize, 0, constants.IconButtonSize),
+			position = UDim2.new(1, constants.IconButtonPositionXOffset, 0, constants.IconButtonPositionYOffset),
+			icon = images["icons/menu/more_off"],
+			iconTransparency = p1.iconTransparency,
+			buttonRef = var3,
+			onActivated = if getFFlagChatWindowUseCallbackOptimizationsModule() then reactModule.useCallback(function()
+				-- upvalues: var5 (ref), p1 (ref)
+				var5(true)
+				p1.onFocus()
+			end, { var5, p1.onFocus }) else function()
+				-- upvalues: var5 (ref), p1 (ref)
+				var5(true)
+				p1.onFocus()
+			end
+		}),
 		LocalizationProvider = reactModule.createElement(localizationProvider, { localization = var6 }, {
 			ContextMenu = if var4 then reactModule.createElement(chatBoxContextMenu, {
 				setContextMenuOpen = var5,

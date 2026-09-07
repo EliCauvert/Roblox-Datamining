@@ -1,5 +1,4 @@
-﻿local fFlagDevConsoleKeyCollisionFixModule = require(script.Parent.Flags.FFlagDevConsoleKeyCollisionFix)
-local signalModule = require(script.Parent.Parent.Parent.Signal)
+﻿local signalModule = require(script.Parent.Parent.Parent.Signal)
 local soundService = game:GetService("SoundService")
 local textService = game:GetService("TextService")
 local meshContentProviderService = game:GetService("MeshContentProvider")
@@ -81,13 +80,12 @@ local function fetchGraphicsTextureMemoryData()
 end
 
 local function fetchGraphicsTextureCharacterMemoryData()
-	-- upvalues: statsService (ref), fFlagDevConsoleKeyCollisionFixModule (ref)
+	-- upvalues: statsService (ref)
 	local humanoidPaginatedMemoryByTexture = statsService:GetPaginatedMemoryByTexture(Enum.TextureQueryType.Humanoid, 0, 100)
 	local humanoidOrphanedPaginatedMemoryByTexture = statsService:GetPaginatedMemoryByTexture(Enum.TextureQueryType.HumanoidOrphaned, 0, 100)
 	local t = {}
 	
 	local function aggregateData(p1, p2)
-		-- upvalues: fFlagDevConsoleKeyCollisionFixModule (copy)
 		for i, v in ipairs(p2.Results) do
 			local var2 = v.MemoryInBytes / 1048576
 			local t = {}
@@ -116,17 +114,7 @@ local function fetchGraphicsTextureCharacterMemoryData()
 			table.sort(t, function(p3, p4)
 				return p3.name < p4.name
 			end)
-			
-			if fFlagDevConsoleKeyCollisionFixModule then
-				table.insert(p1, {
-					name = "Composite Texture",
-					id = v.TextureId,
-					value = var2,
-					moreInfo = t
-				})
-			else
-				table.insert(p1, { name = "Composite Texture", value = var2, moreInfo = t })
-			end
+			table.insert(p1, { name = "Composite Texture", value = var2, moreInfo = t })
 		end
 	end
 	

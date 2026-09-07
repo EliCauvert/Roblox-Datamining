@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppSearchResultsPageGameTileVideo2", false) and require(script.Parent.FFlagLuaAppVideoAutoplayFeedElection)
+﻿return game:DefineFastFlag("LuaAppSearchResultsPageGameTileVideo", false)

@@ -1,6 +1,5 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local creatorAgentChatModule = require(buildExperience.Parent.DataHydration.CreatorAgentChat)
-local fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule = require(buildExperience.Flags.FFlagBuildExperienceShowThinkingAfterAskUserSubmit)
 local fFlagBuildExperienceToolResultFailureRecoveryModule = require(buildExperience.Flags.FFlagBuildExperienceToolResultFailureRecovery)
 local _ = require(script.Parent.chatTypes)
 local chatConstantsModule = require(script.Parent.chatConstants)
@@ -133,7 +132,7 @@ local _ = function(p5, p6, p7)
 end
 
 return function(p5, p6, p7, p8)
-	-- upvalues: buildOptimisticAskUserTool (ref), fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (ref), studioAskUserTool (ref), debug (ref), getToolCallOrder (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), awaitRequestState (ref), chatConstantsModule (ref), toggleOptionInSelection (ref)
+	-- upvalues: buildOptimisticAskUserTool (ref), studioAskUserTool (ref), debug (ref), getToolCallOrder (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), awaitRequestState (ref), chatConstantsModule (ref), toggleOptionInSelection (ref)
 	local var3 = nil
 	local onAnswerSelectedImpl = nil
 	local onAnswerConfirmedImpl = nil
@@ -162,22 +161,10 @@ return function(p5, p6, p7, p8)
 		return p6
 	end
 	
-	local function _(value)
-		-- upvalues: fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (copy), p7 (ref)
-		value.submitted = false
-		
-		if fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
-			p7.clearSubmitted(value.toolCallId)
-		end
-	end
-	
-	local function recoverFailedSubmission(p9, p10)
-		-- upvalues: fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (copy), p7 (ref), p8 (ref), buildOptimisticAskUserTool (copy)
+	local function _(p9, p10)
+		-- upvalues: p8 (ref), p7 (ref), buildOptimisticAskUserTool (copy)
 		p9.submitted = false
 		
-		if fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
-			p7.clearSubmitted(p9.toolCallId)
-		end
 		if p8 == nil then
 			return
 		end
@@ -200,8 +187,8 @@ return function(p5, p6, p7, p8)
 			if submitAskUserCancellation then
 				debug.log("info", "ask_user answer stack cleared", { turn = debug.formatTurnState(p9) })
 				submitAskUserCancellation = false
+				var13 = nil
 				var14 = nil
-				var15 = nil
 				setCurrentAnswerStackPrompt(nil)
 				setAnswerFlow(nil)
 			end
@@ -209,9 +196,9 @@ return function(p5, p6, p7, p8)
 		else
 			submitAskUserCancellation = true
 			
-			if p9.sessionId ~= var14 or var7 ~= var15 then
-				var14 = p9.sessionId
-				var15 = var7
+			if p9.sessionId ~= var13 or var7 ~= var14 then
+				var13 = p9.sessionId
+				var14 = var7
 				local t = {
 					currentIndex = 1,
 					submitted = false,
@@ -247,24 +234,24 @@ return function(p5, p6, p7, p8)
 	var4 = false
 	
 	submitAskUserResponses = function(p9)
-		-- upvalues: studioAskUserTool (copy), debug (copy), p5 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), recoverFailedSubmission (ref), fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (copy), p7 (ref), awaitRequestState (copy), chatConstantsModule (copy), p6 (ref), var3 (write)
+		-- upvalues: studioAskUserTool (copy), debug (copy), p5 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), p8 (ref), p7 (ref), buildOptimisticAskUserTool (copy), awaitRequestState (copy), chatConstantsModule (copy), p6 (ref), var3 (write)
 		local t = {}
 		
 		for i, v in p9.questions do
-			local var6 = p9.selections[i]
+			errorCode = p9.selections[i]
 			
-			if var6 ~= nil then
+			if errorCode ~= nil then
 				table.insert(t, {
 					question = v,
-					option = var6.option,
-					options = var6.options,
-					customResponseText = var6.customResponseText
+					option = errorCode.option,
+					options = errorCode.options,
+					customResponseText = errorCode.customResponseText
 				})
 				continue
 			end
 			return
 		end
-		local var7 = studioAskUserTool.formatToolResultContent(t)
+		local var6 = studioAskUserTool.formatToolResultContent(t)
 		debug.log("info", "ask_user tool_result submitting", {
 			sessionId = p9.sessionId,
 			toolCallId = p9.toolCallId,
@@ -273,24 +260,31 @@ return function(p5, p6, p7, p8)
 			questionCount = #p9.questions
 		})
 		local processTime = os.clock()
-		local var8 = p5.submitActiveToolResult(var7, false, p9.turnId, p9.referenceId)
+		local var7 = p5.submitActiveToolResult(var6, false, p9.turnId, p9.referenceId)
 		
-		if var8 == nil then
+		if var7 == nil then
 			debug.log("warn", "ask_user tool_result submit aborted (no active session)", { toolCallId = p9.toolCallId })
 			
 			if fFlagBuildExperienceToolResultFailureRecoveryModule then
-				recoverFailedSubmission(p9, nil)
+				p9.submitted = false
+				
+				if p8 == nil then
+					return
+				end
+				local currentIndex = p9.selections[p9.currentIndex]
+				local var8 = if currentIndex ~= nil then nil else currentIndex.customResponseText
+				p9.selections[p9.currentIndex] = nil
+				p7.setAskUserTool(buildOptimisticAskUserTool(p9))
+				p8(var8, nil)
+				
+				return
+			else
+				p9.submitted = false
 				
 				return
 			end
-			p9.submitted = false
-			
-			if fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
-				p7.clearSubmitted(p9.toolCallId)
-			end
-			return
 		else
-			local var9 = awaitRequestState(var8.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
+			local var9 = awaitRequestState(var7.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
 			local floored = math.floor((os.clock() - processTime) * 1000 + 0.5)
 			
 			if var9.status == "succeeded" then
@@ -309,13 +303,18 @@ return function(p5, p6, p7, p8)
 				
 				return
 			elseif fFlagBuildExperienceToolResultFailureRecoveryModule then
-				recoverFailedSubmission(p9, var9.errorCode)
-			else
+				errorCode = var9.errorCode
 				p9.submitted = false
 				
-				if fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
-					p7.clearSubmitted(p9.toolCallId)
+				if p8 ~= nil then
+					local currentIndex = p9.selections[p9.currentIndex]
+					local var10 = if currentIndex ~= nil then nil else currentIndex.customResponseText
+					p9.selections[p9.currentIndex] = nil
+					p7.setAskUserTool(buildOptimisticAskUserTool(p9))
+					p8(var10, errorCode)
 				end
+			else
+				p9.submitted = false
 			end
 			debug.log("warn", "ask_user tool_result submit failed", {
 				sessionId = p9.sessionId,
@@ -326,11 +325,12 @@ return function(p5, p6, p7, p8)
 				state = debug.formatRequestState(var9)
 			})
 		end
+		local errorCode
 	end
 	
 	submitAskUserCancellation = function(p10)
 		-- upvalues: studioAskUserTool (copy), p6 (ref), p7 (ref), var3 (write), p5 (ref), debug (copy), awaitRequestState (copy), chatConstantsModule (copy)
-		local var10 = studioAskUserTool.formatCancellationContent()
+		local var11 = studioAskUserTool.formatCancellationContent()
 		p6[p10.toolCallId] = true
 		p7.markSubmitted(p10.toolCallId)
 		p7.removeAnswerAction(p10.toolCallId)
@@ -340,14 +340,14 @@ return function(p5, p6, p7, p8)
 			p7.removeAnswerAction(var3.toolCallId)
 		end
 		var3 = nil
-		local var11 = p5.submitActiveToolResult(var10, false, p10.turnId, p10.referenceId)
+		local var12 = p5.submitActiveToolResult(var11, false, p10.turnId, p10.referenceId)
 		
-		if var11 == nil then
+		if var12 == nil then
 			debug.log("warn", "ask_user cancel aborted (no active session)", { toolCallId = p10.toolCallId })
 			
 			return
 		end
-		awaitRequestState(var11.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
+		awaitRequestState(var12.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
 	end
 	
 	local _ = function(p10)
@@ -362,21 +362,19 @@ return function(p5, p6, p7, p8)
 	end
 	
 	local _ = function(p10)
-		-- upvalues: p7 (ref), buildOptimisticAskUserTool (copy), fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (copy), submitAskUserResponses (ref)
-		local var10
+		-- upvalues: p7 (ref), buildOptimisticAskUserTool (copy), submitAskUserResponses (ref)
+		local var11
 		if #p10.questions <= p10.currentIndex then
-			var10 = false
+			var11 = false
 		else
 			p10.currentIndex += 1
 			p7.setAskUserTool(buildOptimisticAskUserTool(p10))
-			var10 = true
+			var11 = true
 		end
-		if var10 then return end
+		if var11 then
+			return
+		end
 		p10.submitted = true
-		
-		if fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
-			p7.markSubmitted(p10.toolCallId)
-		end
 		task.spawn(function()
 			-- upvalues: submitAskUserResponses (copy), p10 (ref)
 			submitAskUserResponses(p10)
@@ -384,7 +382,7 @@ return function(p5, p6, p7, p8)
 	end
 	
 	onAnswerSelectedImpl = function(p10, p11)
-		-- upvalues: var3 (write), toggleOptionInSelection (copy), p7 (ref), buildOptimisticAskUserTool (copy), debug (copy), fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (copy), submitAskUserResponses (ref)
+		-- upvalues: var3 (write), toggleOptionInSelection (copy), p7 (ref), buildOptimisticAskUserTool (copy), debug (copy), submitAskUserResponses (ref)
 		if var3 == nil or var3.submitted then return end
 		local currentIndex = var3.questions[var3.currentIndex]
 		
@@ -402,7 +400,7 @@ return function(p5, p6, p7, p8)
 			
 			return
 		end
-		local var10
+		local var11
 		debug.log("info", "ask_user answer selected", {
 			toolCallId = var3.toolCallId,
 			questionId = p10.id,
@@ -414,18 +412,16 @@ return function(p5, p6, p7, p8)
 		p7.setAskUserTool(buildOptimisticAskUserTool(var3))
 		
 		if #var3.questions <= var3.currentIndex then
-			var10 = false
+			var11 = false
 		else
 			var3.currentIndex += 1
 			p7.setAskUserTool(buildOptimisticAskUserTool(var3))
-			var10 = true
+			var11 = true
 		end
-		if var10 then return end
+		if var11 then
+			return
+		end
 		var3.submitted = true
-		
-		if fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
-			p7.markSubmitted(var3.toolCallId)
-		end
 		task.spawn(function()
 			-- upvalues: submitAskUserResponses (copy), var3 (ref)
 			submitAskUserResponses(var3)
@@ -433,36 +429,34 @@ return function(p5, p6, p7, p8)
 	end
 	
 	onAnswerConfirmedImpl = function()
-		-- upvalues: var3 (write), debug (copy), p7 (ref), buildOptimisticAskUserTool (copy), fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (copy), submitAskUserResponses (ref)
+		-- upvalues: var3 (write), debug (copy), p7 (ref), buildOptimisticAskUserTool (copy), submitAskUserResponses (ref)
 		if var3 == nil or var3.submitted then return end
 		local currentIndex = var3.questions[var3.currentIndex]
 		
 		if currentIndex == nil or currentIndex.responseType ~= "multi_select" then return end
 		local currentIndex_1 = var3.selections[var3.currentIndex]
-		local var10 = if currentIndex_1 ~= nil then nil else currentIndex_1.options
+		local var11 = if currentIndex_1 ~= nil then nil else currentIndex_1.options
 		
-		if var10 == nil or #var10 == 0 then return end
-		local var11
+		if var11 == nil or #var11 == 0 then return end
+		local var12
 		debug.log("info", "ask_user multi-select confirmed", {
 			toolCallId = var3.toolCallId,
 			questionId = currentIndex.id,
 			questionIndex = var3.currentIndex,
-			selectedCount = #var10
+			selectedCount = #var11
 		})
 		
 		if #var3.questions <= var3.currentIndex then
-			var11 = false
+			var12 = false
 		else
 			var3.currentIndex += 1
 			p7.setAskUserTool(buildOptimisticAskUserTool(var3))
-			var11 = true
+			var12 = true
 		end
-		if var11 then return end
+		if var12 then
+			return
+		end
 		var3.submitted = true
-		
-		if fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
-			p7.markSubmitted(var3.toolCallId)
-		end
 		task.spawn(function()
 			-- upvalues: submitAskUserResponses (copy), var3 (ref)
 			submitAskUserResponses(var3)
@@ -498,7 +492,7 @@ return function(p5, p6, p7, p8)
 			return true
 		end,
 		trySubmitComposerText = function(p10)
-			-- upvalues: var3 (write), debug (copy), p7 (ref), buildOptimisticAskUserTool (copy), fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (copy), submitAskUserResponses (ref)
+			-- upvalues: var3 (write), debug (copy), p7 (ref), buildOptimisticAskUserTool (copy), submitAskUserResponses (ref)
 			if var3 == nil or var3.submitted then
 				return false
 			end
@@ -509,7 +503,7 @@ return function(p5, p6, p7, p8)
 			elseif currentIndex.responseType == "multi_select" then
 				return false
 			end
-			local var10
+			local var11
 			debug.log("info", "ask_user custom answer submitted", {
 				toolCallId = var3.toolCallId,
 				questionId = currentIndex.id,
@@ -519,20 +513,16 @@ return function(p5, p6, p7, p8)
 			p7.setAskUserTool(buildOptimisticAskUserTool(var3))
 			
 			if #var3.questions <= var3.currentIndex then
-				var10 = false
+				var11 = false
 			else
 				var3.currentIndex += 1
 				p7.setAskUserTool(buildOptimisticAskUserTool(var3))
-				var10 = true
+				var11 = true
 			end
-			if var10 then
+			if var11 then
 				return true
 			end
 			var3.submitted = true
-			
-			if fFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
-				p7.markSubmitted(var3.toolCallId)
-			end
 			task.spawn(function()
 				-- upvalues: submitAskUserResponses (copy), var3 (ref)
 				submitAskUserResponses(var3)

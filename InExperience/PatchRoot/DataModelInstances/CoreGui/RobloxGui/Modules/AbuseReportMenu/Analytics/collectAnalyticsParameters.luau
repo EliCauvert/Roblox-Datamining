@@ -1,12 +1,14 @@
 ﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
 local _ = require(abuseReportMenu.Components.Types)
-local cryoModule = require(game:GetService("CorePackages").Packages.Cryo)
+local corePackagesService = game:GetService("CorePackages")
+local cryoModule = require(corePackagesService.Packages.Cryo)
 local constantsModule = require(abuseReportMenu.Components.Constants)
 local _ = require(abuseReportMenu.ReportAnything.Utility.ReportAnythingAnalytics)
 local abuseReportBuilderModule = require(abuseReportMenu.ReportAnything.Utility.AbuseReportBuilder)
+local fFlagAddPreselectedAbuseTypeAnalytics = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAddPreselectedAbuseTypeAnalytics
 
 local var1 = function(p1, p2, p3)
-	-- upvalues: abuseReportBuilderModule (ref), cryoModule (ref)
+	-- upvalues: abuseReportBuilderModule (ref), fFlagAddPreselectedAbuseTypeAnalytics (ref), cryoModule (ref)
 	local var2 = if p1.menuOpenedUnixTimestampMilliseconds > 0 then math.floor(math.floor(workspace:GetServerTimeNow() * 1000) - p1.menuOpenedUnixTimestampMilliseconds) else 0
 	local var3, _ = abuseReportBuilderModule.interpretAnnotations(p2)
 	
@@ -29,7 +31,7 @@ local var1 = function(p1, p2, p3)
 		interactionType = if p1.isSubmissionCompleted then 1 else 2,
 		typeofabuseSelection = p1.typeofabuseSelection,
 		memoryRequirementMet = p1.memoryRequirementMet,
-		preselectedAbuseSelection = p1.preselectedAbuseSelection
+		preselectedAbuseSelection = if fFlagAddPreselectedAbuseTypeAnalytics then p1.preselectedAbuseSelection else nil
 	}, p3)
 end
 

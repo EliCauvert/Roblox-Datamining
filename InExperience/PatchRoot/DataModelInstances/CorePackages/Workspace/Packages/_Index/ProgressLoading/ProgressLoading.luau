@@ -3,9 +3,6 @@ local _ = require(script.TiltLoadingScreen.Types)
 
 return {
 	Components = {
-		Footer = createLazyComponent(function()
-			return require(script.Components.Footer)
-		end),
 		TiltKeyart = createLazyComponent(function()
 			return require(script.TiltLoadingScreen.Components.TiltKeyart)
 		end),

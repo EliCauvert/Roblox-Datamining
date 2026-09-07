@@ -1,10 +1,9 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local parent = foundation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
+local _ = require(parent.BuilderIcons)
 local _ = require(parent.Otter)
 local reactModule = require(parent.React)
 local reactOtterModule = require(parent.ReactOtter)
-local icon = builderIconsModule.Icon
 local dividerModule = require(foundation.Components.Divider)
 local iconModule = require(foundation.Components.Icon)
 local textModule = require(foundation.Components.Text)
@@ -28,7 +27,7 @@ local function _(p1)
 end
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePreferencesModule (ref), reactModule (ref), reactOtterModule (ref), useAccordionModule (ref), useAccordionItemVariantsModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), textModule (ref), icon (ref), dividerModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePreferencesModule (ref), reactModule (ref), reactOtterModule (ref), useAccordionModule (ref), useAccordionItemVariantsModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), textModule (ref), dividerModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useTokensModule()
 	local reducedMotion = usePreferencesModule().reducedMotion
@@ -107,7 +106,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		end
 		var5(true)
 	end, { var4 })
-	var1.testId = `{var14.testId}--item-{var15.id}`
+	var1.testId = `{var14.testId}--item-{var14.id}`
 	
 	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
 		tag = var15.container.tag,
@@ -137,7 +136,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			}),
 			CollapseIcon = reactModule.createElement(viewModule, { tag = "auto-xy", LayoutOrder = 3 }, {
 				Icon = reactModule.createElement(iconModule, {
-					name = icon.ChevronLargeDown,
+					name = "chevron-large-down",
 					Rotation = var7,
 					style = var15.icon.style,
 					size = var15.icon.size,

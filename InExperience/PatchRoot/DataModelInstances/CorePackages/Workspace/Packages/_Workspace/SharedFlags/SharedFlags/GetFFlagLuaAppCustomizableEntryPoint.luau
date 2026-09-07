@@ -1,5 +1,5 @@
-﻿game:DefineFastFlag("LuaAppCustomizableEntryPoint2", false)
+﻿game:DefineFastFlag("LuaAppCustomizableEntryPoint", false)
 
 return function()
-	return game:GetEngineFeature("CustomAppEntryPointAutoJoin") and game:GetFastFlag("LuaAppCustomizableEntryPoint2")
+	return game:GetFastFlag("LuaAppCustomizableEntryPoint")
 end

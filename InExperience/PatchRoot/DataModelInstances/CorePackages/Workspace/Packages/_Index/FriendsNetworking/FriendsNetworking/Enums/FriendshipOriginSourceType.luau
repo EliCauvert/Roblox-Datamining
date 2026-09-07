@@ -9,6 +9,5 @@
 	ProfileShare = "ProfileShare",
 	PhoneContactImporter = "PhoneContactImporter",
 	FriendRecommendations = "FriendRecommendations",
-	SchoolMemberList = "SchoolMemberList",
-	SocialTabsPage = "SocialTabsPage"
+	SchoolMemberList = "SchoolMemberList"
 })

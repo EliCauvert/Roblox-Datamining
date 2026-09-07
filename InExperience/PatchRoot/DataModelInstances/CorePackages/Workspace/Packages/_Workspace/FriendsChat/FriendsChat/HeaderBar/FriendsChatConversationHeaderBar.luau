@@ -4,11 +4,9 @@ local foundationModule = require(parent.Foundation)
 local expChatSharedModule = require(parent.ExpChatShared)
 local useInterpolatedClientSettingsModule = require(parent.ExpChatIntegration.useInterpolatedClientSettings)
 local useChatWindowSettingsModule = require(parent.ExpChatIntegration.useChatWindowSettings)
-local fFlagFriendsChatAddTopBarDividerModule = require(script.Parent.Parent.Flags.FFlagFriendsChatAddTopBarDivider)
 local friendsChatFacePileModule = require(script.Parent.FriendsChatFacePile)
 local resolveFadeModule = require(script.Parent.Parent.Utils.resolveFade)
 local view = foundationModule.View
-local divider = foundationModule.Divider
 local iconButton = foundationModule.IconButton
 local iconName = foundationModule.Enums.IconName
 local buttonVariant = foundationModule.Enums.ButtonVariant
@@ -17,7 +15,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local name = expChatSharedModule.Logger:new(script.Name)
 
 return function(p1)
-	-- upvalues: useTokens (ref), useChatWindowSettingsModule (ref), reactModule (ref), useInterpolatedClientSettingsModule (ref), name (ref), resolveFadeModule (ref), view (ref), iconButton (ref), iconName (ref), buttonVariant (ref), buttonSize (ref), friendsChatFacePileModule (ref), fFlagFriendsChatAddTopBarDividerModule (ref), divider (ref)
+	-- upvalues: useTokens (ref), useChatWindowSettingsModule (ref), reactModule (ref), useInterpolatedClientSettingsModule (ref), name (ref), resolveFadeModule (ref), view (ref), iconButton (ref), iconName (ref), buttonVariant (ref), buttonSize (ref), friendsChatFacePileModule (ref)
 	local var1 = useTokens()
 	local var2 = useChatWindowSettingsModule()
 	local chatWindowSettings = p1.chatWindowSettings
@@ -104,12 +102,7 @@ return function(p1)
 						selectable = if p1.onActivated ~= nil then nil else true
 					})
 				})
-			}),
-			BottomDivider = if fFlagFriendsChatAddTopBarDividerModule then reactModule.createElement(divider, {
-				Position = UDim2.new(0, 0, 1, -1),
-				Size = UDim2.new(1, 0, 0, 1),
-				ZIndex = p1.zIndex
-			}) else nil
+			})
 		})
 	})
 end

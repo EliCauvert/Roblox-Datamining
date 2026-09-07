@@ -1,8 +1,7 @@
 ﻿local parent = script:FindFirstAncestor("DataHydration").Parent
 local playersService = game:GetService("Players")
 local fFlagAddFriendsPageTrustedFriendRequestSection = require(parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
-local fFlagFriendsRequestsMergeListsWithoutDuplicates = require(parent.SharedFlags).FFlagFriendsRequestsMergeListsWithoutDuplicates
-local var1 = if fFlagAddFriendsPageTrustedFriendRequestSection or fFlagFriendsRequestsMergeListsWithoutDuplicates then require(parent.Cryo) else nil
+local var1 = if fFlagAddFriendsPageTrustedFriendRequestSection then require(parent.Cryo) else nil
 
 return {
 	areAllKeysPresent = function(p1, p2)
@@ -22,7 +21,7 @@ return {
 		
 		return if var2 == nil or var2 <= 0 then nil else var2
 	end,
-	mergeListsWithoutDuplicates = if fFlagAddFriendsPageTrustedFriendRequestSection or fFlagFriendsRequestsMergeListsWithoutDuplicates then function(p3, p4, p5)
+	mergeListsWithoutDuplicates = if fFlagAddFriendsPageTrustedFriendRequestSection then function(p3, p4, p5)
 		-- upvalues: var1 (ref)
 		if p4 and #p4 ~= 0 then
 			if p3 and #p3 ~= 0 then

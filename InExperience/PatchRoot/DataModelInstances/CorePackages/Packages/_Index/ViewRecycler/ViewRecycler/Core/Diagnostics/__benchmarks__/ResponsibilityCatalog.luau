@@ -5,7 +5,7 @@
 	ViewportRange = "core.viewportRange",
 	OverscanHysteresis = "core.overscanHysteresis",
 	Prefetch = "core.prefetch",
-	ListPresentation = "core.itemViewPresentation",
+	ItemViewPresentation = "core.itemViewPresentation",
 	RecyclingScope = "core.recyclingScope",
 	Measurement = "core.measurement",
 	DataAnchoring = "core.dataAnchoring",

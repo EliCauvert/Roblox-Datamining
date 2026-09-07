@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXBackgroundGenerationCreateTileTooltip", false) and require(script.Parent.FFlagAXBackgroundGeneration)

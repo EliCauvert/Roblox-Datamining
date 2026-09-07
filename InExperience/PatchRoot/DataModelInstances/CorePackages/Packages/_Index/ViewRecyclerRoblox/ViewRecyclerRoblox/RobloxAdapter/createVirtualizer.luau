@@ -3,11 +3,11 @@ local viewRecyclerModule = require(viewRecyclerRoblox.Parent.ViewRecycler)
 local _ = viewRecyclerModule.Adapter.ScrollPolicy.AutoScroll
 local axis = viewRecyclerModule.Axis
 local _ = viewRecyclerModule.Layout
-local scrollingFrameVirtualizerModule = require(viewRecyclerRoblox.RobloxAdapter.ScrollingFrameVirtualizer)
+local scrollListHostRuntimeModule = require(viewRecyclerRoblox.RobloxAdapter.ScrollListHostRuntime)
 local _ = require(viewRecyclerRoblox.RobloxAdapter.createRecyclingScope)
 
 return function(p1)
-	-- upvalues: axis (ref), viewRecyclerModule (ref), scrollingFrameVirtualizerModule (ref)
+	-- upvalues: axis (ref), viewRecyclerModule (ref), scrollListHostRuntimeModule (ref)
 	assert(if p1.axis ~= axis.X then p1.axis == axis.Y else true, "createVirtualizer: invalid axis")
 	local scrollingFrame = p1.scrollingFrame
 	local axis_1 = p1.axis
@@ -43,10 +43,10 @@ return function(p1)
 		}).result
 	end
 	
-	local function restoreScrollAnchorSnapshot(p2)
+	local function restoreScrollSnapshot(p2)
 		-- upvalues: var2 (write), viewRecyclerModule (copy)
 		return var2.dispatch({
-			type = viewRecyclerModule.VirtualizerCommandType.RestoreScrollAnchorSnapshot,
+			type = viewRecyclerModule.VirtualizerCommandType.RestoreScrollSnapshot,
 			snapshot = p2
 		}).result
 	end
@@ -106,8 +106,8 @@ return function(p1)
 		commitConfiguration()
 	end
 	
-	var3 = scrollingFrameVirtualizerModule.newForGuiObjects({
-		prepareAssignment = nil,
+	var3 = scrollListHostRuntimeModule.newForGuiObjects({
+		prepareItemViewAssignment = nil,
 		onItemViewPresentationChanged = nil,
 		initialHostConfiguration = getListHostConfiguration(),
 		initialHostTarget = {
@@ -259,13 +259,13 @@ return function(p1)
 				type = viewRecyclerModule.VirtualizerQueryType.GetScrollState
 			})
 		end,
-		captureScrollAnchorSnapshot = function()
+		captureScrollSnapshot = function()
 			-- upvalues: var2 (write), viewRecyclerModule (copy)
 			return var2.query({
-				type = viewRecyclerModule.VirtualizerQueryType.CaptureScrollAnchorSnapshot
+				type = viewRecyclerModule.VirtualizerQueryType.CaptureScrollSnapshot
 			})
 		end,
-		restoreScrollAnchorSnapshot = restoreScrollAnchorSnapshot,
+		restoreScrollSnapshot = restoreScrollSnapshot,
 		destroy = function()
 			-- upvalues: var1 (write), var3 (write)
 			if var1 then

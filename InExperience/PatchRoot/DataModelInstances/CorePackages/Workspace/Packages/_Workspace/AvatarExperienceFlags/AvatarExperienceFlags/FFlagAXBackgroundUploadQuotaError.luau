@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXBackgroundUploadQuotaError", false) and require(script.Parent.FFlagAXBackgroundGeneration)

@@ -13,7 +13,10 @@ local reportSentDialogModule = require(parent.Components.ReportSentDialog)
 local toastModule = require(parent.Components.Toast)
 local voiceStateContextModule = require(robloxGui.Modules.VoiceChat.VoiceStateContext)
 local trustAndSafetyApp = roactModule.PureComponent:extend("TrustAndSafetyApp")
-trustAndSafetyApp.validateProps = tModule.strictInterface({ setScreenSize = tModule.callback })
+trustAndSafetyApp.validateProps = tModule.strictInterface({
+	setScreenSize = tModule.callback,
+	visible = tModule.boolean
+})
 
 function trustAndSafetyApp.init(_) end
 
@@ -29,7 +32,11 @@ function trustAndSafetyApp.render(p1)
 				ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 				[roactModule.Change.AbsoluteSize] = p1.props.setScreenSize
 			}, {
-				Content = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+				Content = roactModule.createElement("Frame", {
+					BackgroundTransparency = 1,
+					Size = UDim2.new(1, 0, 1, 0),
+					Visible = p1.props.visible
+				}, {
 					ReportCategoryDialog = roactModule.createElement(reportCategoryDialogModule),
 					ReportMenu = roactModule.createElement(reportMenuModule),
 					ReportDialog = roactModule.createElement(reportDialogModule),
@@ -41,7 +48,9 @@ function trustAndSafetyApp.render(p1)
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(nil, function(p1)
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+	return { visible = p1.displayOptions.visible }
+end, function(p1)
 	-- upvalues: setScreenSizeModule (ref)
 	return {
 		setScreenSize = function(value)

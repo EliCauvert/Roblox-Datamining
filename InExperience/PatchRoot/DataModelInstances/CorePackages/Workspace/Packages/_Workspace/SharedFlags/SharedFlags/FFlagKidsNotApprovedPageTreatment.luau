@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("KidsNotApprovedPageTreatment2", false)

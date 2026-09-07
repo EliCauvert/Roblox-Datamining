@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EditProfileImageR15UpgradePrompt", false) and (require(script.Parent.FFlagEditProfileImageRigTypeOverride) and require(script.Parent.FFlagAXSaveManagerOutsideAX))

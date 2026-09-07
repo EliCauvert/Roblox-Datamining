@@ -1,5 +1,6 @@
 ﻿return {
 	AssistantBuild = require(script.Components.ChatSheet.AssistantBuild),
+	BuildModeLaunch = require(script.utils.BuildModeLaunch),
 	BuildPage = require(script.BuildPage),
 	BuildPillMenu = require(script.Components.BuildPillMenu.BuildPillMenu),
 	BuildPillMenuPortalHost = require(script.Components.BuildPillMenu.BuildPillMenuPortalHost),

@@ -16,14 +16,13 @@ local SHOP_ITEM_MEDIA_HEIGHT_SCALE = require(inExperienceShop.Components.compute
 local fFlagEnableInExperienceShopUnifiedLoggingModule = require(inExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
 local fFlagFixThumbnailBackgroundInExperienceShopModule = require(inExperienceShop.Flags.FFlagFixThumbnailBackgroundInExperienceShop)
 local fFlagEnableDiscountOnInShopTileModule = require(inExperienceShop.Flags.FFlagEnableDiscountOnInShopTile)
-local fFlagLuaAppEnableGamePassFreeTrialsModule = require(inExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
 local getIconRichText = foundationModule.Utility.getIconRichText
 local var1 = if fFlagEnableDiscountOnInShopTileModule then require(inExperienceShop.Utils.formatPrice) else nil
 local _ = require(inExperienceShop.Types)
 local constantsModule = require(inExperienceShop.Constants)
 
 return reactModule.memo(function(p1)
-	-- upvalues: signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), fFlagLuaAppEnableGamePassFreeTrialsModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), parent (ref), inExperienceShop (ref), sessionService (ref), fFlagEnableDiscountOnInShopTileModule (ref), var1 (ref), view (ref), image (ref), fFlagFixThumbnailBackgroundInExperienceShopModule (ref), SHOP_ITEM_MEDIA_HEIGHT_SCALE (ref), text (ref), icon (ref), constantsModule (ref), iconSize (ref), getIconRichText (ref), enums (ref), shopItemFooterModule (ref)
+	-- upvalues: signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), parent (ref), inExperienceShop (ref), sessionService (ref), fFlagEnableDiscountOnInShopTileModule (ref), var1 (ref), view (ref), image (ref), fFlagFixThumbnailBackgroundInExperienceShopModule (ref), SHOP_ITEM_MEDIA_HEIGHT_SCALE (ref), text (ref), icon (ref), constantsModule (ref), iconSize (ref), getIconRichText (ref), enums (ref), shopItemFooterModule (ref)
 	local var2
 	local var3 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
 	local var4 = reactModule.useRef(nil)
@@ -37,25 +36,21 @@ return reactModule.memo(function(p1)
 			var3.fetchGamePassOwnership(p1.itemId)
 		end
 	end, { p1.itemId, p1.itemType, var3.fetchGamePassOwnership })
-	local var6 = signalsReactModule.useSignalState(function(p2)
-		-- upvalues: var3 (ref), fFlagLuaAppEnableGamePassFreeTrialsModule (copy), p1 (ref)
-		return if fFlagLuaAppEnableGamePassFreeTrialsModule and p1.itemType == "GamePass" then var3.getTrialAvailabilities(p2).available[p1.itemId] == true else false
-	end)
 	reactModule.useEffect(function()
 		-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), parent (copy), inExperienceShop (copy), p1 (ref), var4 (ref), sessionService (copy)
 		if fFlagEnableInExperienceShopUnifiedLoggingModule then
 			task.defer(function()
 				-- upvalues: parent (copy), inExperienceShop (copy), p1 (copy), var4 (copy), sessionService (copy)
 				local addUnifiedEventLogging = require(parent.AvatarExperienceAnalytics).addUnifiedEventLogging
-				local var7 = require(inExperienceShop.Utils.mapShopItemTypeToUnifiedItemType)(p1.itemType)
+				local var6 = require(inExperienceShop.Utils.mapShopItemTypeToUnifiedItemType)(p1.itemType)
 				
-				if var7 == nil then
+				if var6 == nil then
 					return
 				end
 				addUnifiedEventLogging(var4, {
 					universeId = if p1.universeId ~= nil then game.GameId else tonumber(p1.universeId),
 					itemId = p1.itemId,
-					itemType = var7,
+					itemType = var6,
 					categoryId = p1.categoryId,
 					gridPositionRow = p1.gridPositionRow,
 					gridPositionColumn = p1.gridPositionColumn
@@ -70,20 +65,20 @@ return reactModule.memo(function(p1)
 	})
 	local onItemActivated = p1.onItemActivated
 	local itemType = p1.itemType
-	local var7 = reactModule.useCallback(function()
+	local var6 = reactModule.useCallback(function()
 		-- upvalues: onItemActivated (ref), p1 (ref), itemType (ref)
 		if onItemActivated then
 			onItemActivated(p1.itemId, itemType)
 		end
 	end, { p1.itemId, itemType, onItemActivated })
-	local var8 = fFlagEnableDiscountOnInShopTileModule and (p1.userBasePriceInRobux ~= nil and (p1.price ~= nil and p1.price < p1.userBasePriceInRobux))
-	local var9 = if var8 and var1 then var1(p1.userBasePriceInRobux) else nil
-	local var10 = if var8 and var1 then var1(p1.price) else nil
+	local var7 = fFlagEnableDiscountOnInShopTileModule and (p1.userBasePriceInRobux ~= nil and (p1.price ~= nil and p1.price < p1.userBasePriceInRobux))
+	local var8 = if var7 and var1 then var1(p1.userBasePriceInRobux) else nil
+	local var9 = if var7 and var1 then var1(p1.price) else nil
 	local createElement = reactModule.createElement
 	local t = {
 		tag = "col fill size-full-0 auto-y radius-medium clip bg-shift-200",
 		LayoutOrder = p1.LayoutOrder,
-		onActivated = if onItemActivated then var7 else nil,
+		onActivated = if onItemActivated then var6 else nil,
 		ref = if fFlagEnableInExperienceShopUnifiedLoggingModule then var4 else nil
 	}
 	local t_1 = {
@@ -135,14 +130,14 @@ return reactModule.memo(function(p1)
 				SalePriceLabel = reactModule.createElement(text, {
 					tag = "auto-xy text-body-medium text-truncate-end content-emphasis",
 					LayoutOrder = 2,
-					Text = var10 or tostring(p1.price)
+					Text = var9 or tostring(p1.price)
 				})
 			}),
-			OriginalPrice = if var8 and var9 then reactModule.createElement(text, {
+			OriginalPrice = if var7 and var8 then reactModule.createElement(text, {
 				tag = "auto-xy text-body-small text-truncate-end content-default",
 				RichText = true,
 				LayoutOrder = 2,
-				Text = "<s>" .. getIconRichText(enums.IconName.Robux) .. " " .. var19 .. "</s>"
+				Text = "<s>" .. getIconRichText(enums.IconName.Robux) .. " " .. var17 .. "</s>"
 			}) else nil
 		})
 	else
@@ -169,7 +164,6 @@ return reactModule.memo(function(p1)
 		itemId = p1.itemId,
 		itemType = p1.itemType,
 		isOwned = var5,
-		showTry = var6,
 		price = p1.price,
 		shopPageType = p1.shopPageType
 	})

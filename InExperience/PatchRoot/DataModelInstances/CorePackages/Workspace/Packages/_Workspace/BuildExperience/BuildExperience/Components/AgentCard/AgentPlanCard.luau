@@ -3,8 +3,10 @@ local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local markdownModule = require(parent.Markdown)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local agentCardModule = require(script.Parent.AgentCard)
 local agentCardActionsModule = require(script.Parent.AgentCardActions)
 local getMarkdownRendererPropsModule = require(buildExperience.utils.getMarkdownRendererProps)
@@ -18,8 +20,8 @@ local inputSize = foundationModule.Enums.InputSize
 local markdownViewer = markdownModule.Components.MarkdownViewer
 
 local function AgentPlanSheet(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), foundationModule (ref), reactModule (ref), getMarkdownRendererPropsModule (ref), sheet (ref), text (ref), view (ref), markdownViewer (ref)
-	local var1 = useLocalization({ overview = localizationStringsModule.AGENT_PLAN_OVERVIEW })
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), foundationModule (ref), reactModule (ref), getMarkdownRendererPropsModule (ref), sheet (ref), text (ref), view (ref), markdownViewer (ref)
+	local var1 = if fFlagBuildLocalization then useLocalization({ overview = localizationStringsModule.AGENT_PLAN_OVERVIEW }) else nil
 	local var2 = foundationModule.Hooks.useTokens()
 	local default = var2.Color.Content.Default
 	
@@ -44,7 +46,7 @@ local function AgentPlanSheet(p1)
 				Overview = reactModule.createElement(text, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-default",
-					Text = var1.overview
+					Text = if fFlagBuildLocalization then var1.overview else localizationStringsModule.AGENT_PLAN_OVERVIEW
 				}),
 				Body = reactModule.createElement(markdownViewer, {
 					Markdown = p1.textContent,
@@ -64,11 +66,11 @@ local function AgentPlanSheet(p1)
 end
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), agentCardModule (ref), agentCardActionsModule (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), AgentPlanSheet (ref)
-	local var1 = useLocalization({
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), agentCardModule (ref), agentCardActionsModule (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), AgentPlanSheet (ref)
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		build = localizationStringsModule.AGENT_PLAN_BUILD,
 		view = localizationStringsModule.AGENT_PLAN_VIEW
-	})
+	}) else nil
 	local testId = p1.testId or "agent-plan-card"
 	local var2, var3 = reactModule.useState(false)
 	
@@ -82,7 +84,7 @@ return function(p1)
 			Actions = reactModule.createElement(agentCardActionsModule, nil, {
 				Build = reactModule.createElement(button, {
 					LayoutOrder = 1,
-					text = var1.build,
+					text = if fFlagBuildLocalization then var1.build else localizationStringsModule.AGENT_PLAN_BUILD,
 					size = inputSize.Small,
 					variant = buttonVariant.Emphasis,
 					fillBehavior = fillBehavior.Fill,
@@ -98,7 +100,7 @@ return function(p1)
 				}),
 				View = reactModule.createElement(button, {
 					LayoutOrder = 2,
-					text = var1.view,
+					text = if fFlagBuildLocalization then var1.view else localizationStringsModule.AGENT_PLAN_VIEW,
 					size = inputSize.Small,
 					variant = buttonVariant.Standard,
 					fillBehavior = fillBehavior.Fill,

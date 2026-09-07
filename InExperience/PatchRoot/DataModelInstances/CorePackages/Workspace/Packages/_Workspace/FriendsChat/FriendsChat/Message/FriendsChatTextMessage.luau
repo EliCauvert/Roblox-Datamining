@@ -1,6 +1,5 @@
 ﻿local textService = game:GetService("TextService")
-local friendsChat = script:FindFirstAncestor("FriendsChat")
-local parent = friendsChat.Parent
+local parent = script:FindFirstAncestor("FriendsChat").Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local signalsModule = require(parent.Signals)
@@ -8,7 +7,6 @@ local signalsReactModule = require(parent.SignalsReact)
 local getMessageTextSize = require(parent.ChatUIPrimitives).Utils.getMessageTextSize
 local useFinishChatWindowMessageRenderIntervals = require(parent.ChatUIPrimitives).Hooks.useFinishChatWindowMessageRenderIntervals
 local _ = require(script.Parent.MessageDisplayStore.useMessageDisplayStore)
-local fFlagFriendsChatMessageSendPerfTrackingModule = require(friendsChat.Flags.FFlagFriendsChatMessageSendPerfTracking)
 
 local function _(p1, p2)
 	return p1 + p2 * (1 - p1)
@@ -19,7 +17,7 @@ local _ = function(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), getMessageTextSize (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref), fFlagFriendsChatMessageSendPerfTrackingModule (ref), useFinishChatWindowMessageRenderIntervals (ref), textService (ref)
+	-- upvalues: foundationModule (ref), getMessageTextSize (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref), useFinishChatWindowMessageRenderIntervals (ref), textService (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local chatWindowSettings = p1.chatWindowSettings
 	local var2 = (if chatWindowSettings then chatWindowSettings.FontFace else nil) or var1.Typography.BodySmall.Font
@@ -47,41 +45,30 @@ return reactModule.memo(function(p1)
 		end)
 	end, { getDisplayId, getDisplayFromId, var8 }))
 	local var10 = signalsReactModule.useSignalBinding(p1.getLayoutOrder)
-	local getMessageIdFromDisplayId = p1.getMessageIdFromDisplayId
 	local var11 = useFinishChatWindowMessageRenderIntervals(reactModule.useCallback(function()
-		-- upvalues: fFlagFriendsChatMessageSendPerfTrackingModule (copy), getMessageIdFromDisplayId (ref), getDisplayId (ref)
-		return if fFlagFriendsChatMessageSendPerfTrackingModule and getMessageIdFromDisplayId then getMessageIdFromDisplayId(getDisplayId(false)) else getDisplayId(false)
-	end, { getDisplayId, getMessageIdFromDisplayId }))
-	local var12 = reactModule.useRef(nil)
-	local var13 = reactModule.useCallback(function(p2)
+		-- upvalues: getDisplayId (ref)
+		return getDisplayId(false)
+	end, { getDisplayId }))
+	local var12 = reactModule.useCallback(function(p2)
 		-- upvalues: var11 (ref)
 		if p2 and p2.Text and p2.Text ~= "" then
 			var11()
 		end
 	end, { var11 })
-	reactModule.useEffect(function()
-		-- upvalues: fFlagFriendsChatMessageSendPerfTrackingModule (copy), var12 (ref), var11 (ref)
-		if not fFlagFriendsChatMessageSendPerfTrackingModule then return end
-		local current = var12.current
-		
-		if current ~= nil and current.Text ~= "" then
-			var11()
-		end
-	end, { var11 })
-	local var14 = reactModule.useMemo(function()
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: var4 (ref)
 		return UDim2.fromOffset(math.floor(var4 * 3 / 2), var4)
 	end, { var4 })
-	local var15, var16 = reactModule.useBinding(var14)
+	local var14, var15 = reactModule.useBinding(var13)
 	reactModule.useEffect(function()
-		-- upvalues: var16 (ref), var14 (ref)
-		var16(var14)
-	end, { var14 })
+		-- upvalues: var15 (ref), var13 (ref)
+		var15(var13)
+	end, { var13 })
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var4 (ref), textService (copy), var16 (ref)
-		local var17 = false
+		-- upvalues: var3 (ref), var4 (ref), textService (copy), var15 (ref)
+		local var16 = false
 		task.spawn(function()
-			-- upvalues: var3 (copy), var4 (copy), textService (copy), var17 (write), var16 (copy)
+			-- upvalues: var3 (copy), var4 (copy), textService (copy), var16 (write), var15 (copy)
 			local getTextBoundsParams = Instance.new("GetTextBoundsParams")
 			getTextBoundsParams.Text = "          "
 			getTextBoundsParams.Font = var3
@@ -92,27 +79,27 @@ return reactModule.memo(function(p1)
 				return textService:GetTextBoundsAsync(getTextBoundsParams)
 			end)
 			
-			if var17 or not ok or status == nil then
+			if var16 or not ok or status == nil then
 				return
 			end
-			var16(UDim2.fromOffset(status.X, status.Y))
+			var15(UDim2.fromOffset(status.X, status.Y))
 		end)
 		
 		return function()
-			-- upvalues: var17 (write)
-			var17 = true
+			-- upvalues: var16 (write)
+			var16 = true
 		end
 	end, { var3, var4 })
-	local var17 = var9:map(function(p2)
+	local var16 = var9:map(function(p2)
 		return if p2 == nil then "" elseif p2.skeletonWidth == "prefix" then `          {p2.content}` else p2.content
 	end)
 	local t = { font = var3, textSize = var4, textColor = var5 }
 	local t_1 = { font = font, textSize = maxValue, textColor = color3 }
-	local var18 = var9:map(function(p2)
+	local var17 = var9:map(function(p2)
 		-- upvalues: t_1 (ref), t (ref)
 		return if p2 ~= nil and p2.displayStyle == "system" then t_1 else t
 	end)
-	local var19 = textTransparency:map(function(p2)
+	local var18 = textTransparency:map(function(p2)
 		-- upvalues: var7 (ref)
 		return var7 + p2 * (1 - var7)
 	end)
@@ -131,34 +118,33 @@ return reactModule.memo(function(p1)
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0),
-			FontFace = var18:map(function(p2)
+			FontFace = var17:map(function(p2)
 				return p2.font
 			end),
-			TextSize = var18:map(function(p2)
+			TextSize = var17:map(function(p2)
 				return p2.textSize
 			end),
-			TextColor3 = var18:map(function(p2)
+			TextColor3 = var17:map(function(p2)
 				return p2.textColor
 			end),
 			TextStrokeColor3 = var6,
-			TextStrokeTransparency = var19,
+			TextStrokeTransparency = var18,
 			TextTransparency = textTransparency,
 			TextWrapped = true,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
 			RichText = true,
-			Text = var17,
-			ref = var12,
-			[reactModule.Change.Text] = var13
+			Text = var16,
+			[reactModule.Change.Text] = var12
 		}, {
 			stroke = reactModule.createElement("UIStroke", {
 				Color = var6 or Color3.fromRGB(0, 0, 0),
 				Thickness = var1.Stroke.Thin,
-				Transparency = var19
+				Transparency = var18
 			})
 		}),
 		skeleton = reactModule.createElement(foundationModule.Skeleton, {
-			Size = reactModule.joinBindings({ display = var9, placeholder = var15 }):map(function(p2)
+			Size = reactModule.joinBindings({ display = var9, placeholder = var14 }):map(function(p2)
 				local display = p2.display
 				
 				return if display == nil or display.skeletonWidth ~= "full" then p2.placeholder else UDim2.new(1, 0, 0, p2.placeholder.Y.Offset)

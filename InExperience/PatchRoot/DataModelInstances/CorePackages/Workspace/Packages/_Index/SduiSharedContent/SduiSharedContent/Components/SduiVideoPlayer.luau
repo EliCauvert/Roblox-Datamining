@@ -1,7 +1,6 @@
 ﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
 local reactModule = require(parent.React)
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local findAnalyticsFieldInAncestors = sduiCoreSystemModule.findAnalyticsFieldInAncestors
 local videoUtilsModule = require(parent.VideoUtils)
 local t = { PlayWhenReady = "PlayWhenReady" }
 
@@ -14,16 +13,12 @@ local function _(p1, p2)
 	return false, false
 end
 
-local _ = function(p1)
-	return if p1 == nil then "" else tostring(p1)
-end
-
 local _ = function(value)
 	return if value == nil or value == "" then nil elseif string.find(value, "://", 1, true) then value else `rbxassetid://{value}`
 end
 
 return function(p1)
-	-- upvalues: t (ref), findAnalyticsFieldInAncestors (ref), reactModule (ref), sduiCoreSystemModule (ref), videoUtilsModule (ref)
+	-- upvalues: t (ref), reactModule (ref), sduiCoreSystemModule (ref), videoUtilsModule (ref)
 	local var1, var2
 	local videoAssetId = p1.videoAssetId
 	local var3 = if videoAssetId == nil or videoAssetId == "" then nil elseif string.find(videoAssetId, "://", 1, true) then videoAssetId else `rbxassetid://{videoAssetId}`
@@ -44,24 +39,9 @@ return function(p1)
 		var1 = false
 		var2 = false
 	end
-	local var6 = findAnalyticsFieldInAncestors("source", p1.analyticsContext)
-	local var7 = if var6 == nil then "" else tostring(var6)
-	local var8 = findAnalyticsFieldInAncestors("sourceId", p1.analyticsContext)
-	local var9 = if var8 == nil then "" else tostring(var8)
-	local videoPlaybackContext = p1.sduiContext.videoPlaybackContext
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: var7 (ref), var9 (ref), videoPlaybackContext (ref)
-		return {
-			videoAnalyticsData = { source = var7, sourceId = var9 },
-			getPlaybackSessionId = function()
-				-- upvalues: videoPlaybackContext (copy)
-				return if videoPlaybackContext then videoPlaybackContext.videoPlaybackCoordinator.currentPlaybackSessionId else nil
-			end
-		}
-	end, { var7, var9, videoPlaybackContext })
-	local var11 = if p1.loadingImage == nil or p1.loadingImage == "" then p1.defaultLoadingImageComponent else nil
+	local var6 = if p1.loadingImage == nil or p1.loadingImage == "" then p1.defaultLoadingImageComponent else nil
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), p1 (ref), sduiCoreSystemModule (copy), var2 (ref), var7 (ref), var9 (ref)
+		-- upvalues: var3 (ref), p1 (ref), sduiCoreSystemModule (copy), var2 (ref)
 		if not var3 then
 			p1.sduiContext.dependencies.logger.reportError(sduiCoreSystemModule.SduiErrors.SduiErrorType.InvalidProps, {
 				propName = "videoAssetId",
@@ -78,22 +58,18 @@ return function(p1)
 				value = p1.playbackBehavior
 			}, p1.sduiContext.appPage)
 		end
-		if var7 == "" or var9 == "" then
-			p1.sduiContext.dependencies.logger.reportError(sduiCoreSystemModule.SduiErrors.SduiErrorType.InvalidProps, {
-				propName = "analyticsData",
-				value = "",
-				message = "Missing source or sourceId for video player analytics",
-				componentType = sduiCoreSystemModule.SduiComponentType.VideoPlayer
-			}, p1.sduiContext.appPage)
-		end
 	end, {
-		var2, p1.playbackBehavior, p1.sduiContext, p1.videoAssetId, var7, var9, var3
+		var2,
+		p1.playbackBehavior,
+		p1.sduiContext,
+		p1.videoAssetId,
+		var3
 	})
 	
 	return if var3 then reactModule.createElement(videoUtilsModule.VideoPlayer, {
 		video = var3,
 		thumbnail = p1.loadingImage,
-		thumbnailComponentOverride = var11,
+		thumbnailComponentOverride = var6,
 		shouldStartPlayback = var1,
 		muted = var4,
 		looped = videoAssetId,
@@ -102,8 +78,6 @@ return function(p1)
 		Size = UDim2.fromScale(1, 1),
 		ScaleType = scaleType,
 		cornerRadius = p1.cornerRadius,
-		onVideoLoaded = p1.onVideoLoaded,
-		onVideoLooped = p1.onVideoLooped,
-		videoAnalyticsContext = var10
+		onVideoLoaded = p1.onVideoLoaded
 	}) else nil
 end

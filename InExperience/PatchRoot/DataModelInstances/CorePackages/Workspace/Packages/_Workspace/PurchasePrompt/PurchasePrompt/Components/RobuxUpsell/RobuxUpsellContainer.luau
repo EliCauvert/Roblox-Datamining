@@ -3,6 +3,8 @@ local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
 local parent = purchasePrompt.Parent
 local roact = require(parent.PurchasePromptDeps).Roact
 local reactModule = require(parent.React)
+local _ = require(parent.IAPExperience)
+local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local coreScriptsRootProvider = require(parent.CoreScriptsRoactCommon).CoreScriptsRootProvider
 local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local focusRoot = focusNavigationUtilsModule.FocusRoot
@@ -20,10 +22,9 @@ local launchRobuxUpsellModule = require(purchasePrompt.Thunks.launchRobuxUpsell)
 local openRobuxStoreModule = require(purchasePrompt.Thunks.openRobuxStore)
 local openSecuritySettingsModule = require(purchasePrompt.Thunks.openSecuritySettings)
 local openTermsOfUseModule = require(purchasePrompt.Thunks.openTermsOfUse)
+local _ = require(purchasePrompt.Thunks.initiatePurchasePrecheck)
 local initiateUserPurchaseSettingsPrecheckModule = require(purchasePrompt.Thunks.initiateUserPurchaseSettingsPrecheck)
 local fetchCartPricingModule = require(purchasePrompt.Thunks.fetchCartPricing)
-local fetchInGameItemCartPricingModule = require(purchasePrompt.Thunks.fetchInGameItemCartPricing)
-local requestTypeModule = require(purchasePrompt.Enums.RequestType)
 local selectCartPricingResponseModule = require(purchasePrompt.Selectors.selectCartPricingResponse)
 local selectIsCartPricingFetchingModule = require(purchasePrompt.Selectors.selectIsCartPricingFetching)
 local sendEventModule = require(purchasePrompt.Thunks.sendEvent)
@@ -31,6 +32,7 @@ local isMockingPurchasesModule = require(purchasePrompt.Utils.isMockingPurchases
 local getPlayerPriceModule = require(purchasePrompt.Utils.getPlayerPrice)
 local isLinksAllowedModule = require(purchasePrompt.Utils.isLinksAllowed)
 local selectedRobuxPackageModule = require(purchasePrompt.Utils.SelectedRobuxPackage)
+local fFlagEnableUnifiedProductPurchaseFlow = require(parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 local connectToStoreModule = require(purchasePrompt.connectToStore)
 local externalEventConnectionModule = require(purchasePrompt.Components.Connection.ExternalEventConnection)
 local getFFLagUseCoreScriptsRootProviderForUpsellModalModule = require(purchasePrompt.Flags.GetFFLagUseCoreScriptsRootProviderForUpsellModal)
@@ -38,13 +40,13 @@ local fFlagSetMenuOnPurchasePromptModule = require(purchasePrompt.Flags.FFlagSet
 local upsellSuggestionsAPIMaxPackages = require(parent.SharedFlags).UpsellSuggestionsAPIMaxPackages
 local robuxUpsellOverlayModule = require(script.Parent.RobuxUpsellOverlay)
 local appPage = require(parent.RobloxAppEnums).AppPage
-local fFlagEnableInExperienceOffersPurchaseFlow = require(parent.SharedFlags).FFlagEnableInExperienceOffersPurchaseFlow
+local fFlagEnableDiscountInfoInUnifiedPurchaseModal = require(parent.SharedFlags).FFlagEnableDiscountInfoInUnifiedPurchaseModal
 local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local fFlagSkipBuyDelayForExperienceShopModule = require(purchasePrompt.Flags.FFlagSkipBuyDelayForExperienceShop)
 local name = roact.Component:extend(script.Name)
 
 function name.init(p1)
-	-- upvalues: fFlagPurchasePromptCartPricingEnabledModule (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), requestTypeModule (ref), appPage (ref)
+	-- upvalues: fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), appPage (ref)
 	p1.state = { screenSize = Vector2.new(0, 0) }
 	
 	function p0.changeScreenSize(p2)
@@ -54,107 +56,104 @@ function name.init(p1)
 		end
 	end
 	
-	if fFlagPurchasePromptCartPricingEnabledModule then
-		function p0.fetchCartPricingForPurchasePrompt(_, p2)
-			-- upvalues: p1 (ref), fFlagEnableInExperienceOffersPurchaseFlow (copy), requestTypeModule (copy)
-			if p2 == nil then
-				return nil
+	if fFlagEnableUnifiedProductPurchaseFlow then
+		if fFlagPurchasePromptCartPricingEnabledModule then
+			function p0.fetchCartPricingForPurchasePrompt(_, p2)
+				-- upvalues: p1 (ref)
+				return if p2 == nil then nil else p1.props.fetchCartPricing(p2)
 			end
-			local requestType = p1.props.requestType
-			
-			return if fFlagEnableInExperienceOffersPurchaseFlow and (requestType == requestTypeModule.GamePass or requestType == requestTypeModule.Product) then p1.props.fetchInGameItemCartPricing(p2) else p1.props.fetchCartPricing(p2)
 		end
-	end
-	function p0.navigateToBuyRobux()
-		-- upvalues: p1 (ref), appPage (copy)
-		p1.props.navigation.navigate(appPage.PurchaseRobux)
-	end
-	
-	function p0.navigateToTermsOfUse()
-		-- upvalues: p1 (ref)
-		p1.props.openTermsOfUse(p1.props.navigation)
+		function p0.navigateToBuyRobux()
+			-- upvalues: p1 (ref), appPage (copy)
+			p1.props.navigation.navigate(appPage.PurchaseRobux)
+		end
+		
+		function p0.navigateToTermsOfUse()
+			-- upvalues: p1 (ref)
+			p1.props.openTermsOfUse(p1.props.navigation)
+		end
 	end
 end
 
 function name.createElement(p1)
-	-- upvalues: purchaseFlowModule (ref), isLinksAllowedModule (ref), roact (ref), robuxUpsellOverlayModule (ref), upsellSuggestionsAPIMaxPackages (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), getPlayerPriceModule (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), externalEventConnectionModule (ref), guiService (ref), fFlagSetMenuOnPurchasePromptModule (ref)
+	-- upvalues: purchaseFlowModule (ref), isLinksAllowedModule (ref), roact (ref), robuxUpsellOverlayModule (ref), fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), upsellSuggestionsAPIMaxPackages (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), getPlayerPriceModule (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), externalEventConnectionModule (ref), guiService (ref), fFlagSetMenuOnPurchasePromptModule (ref)
 	local props = p1.props
 	local state = p1.state
 	
-	if props.purchaseFlow == purchaseFlowModule.RobuxUpsellV2 or props.purchaseFlow == purchaseFlowModule.LargeRobuxUpsell then
-		local var1 = isLinksAllowedModule()
-		
-		return roact.createElement("Frame", {
-			Size = UDim2.new(1, 0, 1, 0),
-			[roact.Change.AbsoluteSize] = p1.changeScreenSize,
-			BackgroundTransparency = 1
-		}, {
-			Prompt = roact.createElement(robuxUpsellOverlayModule, {
-				screenSize = state.screenSize,
-				virtualItemPrice = props.virtualItemPrice,
-				requestType = props.requestType,
-				promptState = props.promptState,
-				purchaseFlow = props.purchaseFlow,
-				purchaseError = props.purchaseError,
-				economicRestrictionError = props.economicRestrictionError,
-				useUpsellSuggestions = upsellSuggestionsAPIMaxPackages > 1,
-				upsellSuggestions = props.robuxSuggestions,
-				selectedUpsellIndex = props.robuxPackageSelection,
-				virtualItemBadgeType = props.virtualItemBadgeType,
-				onUpsellSuggestionsSelected = function(p2)
-					-- upvalues: props (ref)
-					props.onUpsellSuggestionsSelected(props.robuxSuggestions, p2, props.virtualItemBadgeType)
-				end,
-				useUnifiedProductPurchaseModal = p1.props.isUserEligibleForUnifiedPurchaseFlow,
-				purchaseAnalyticsMetadata = p1.props.purchaseAnalyticsMetadata,
-				cartPricingResponse = if fFlagPurchasePromptCartPricingEnabledModule then props.cartPricingResponse else nil,
-				collectibleItemId = if fFlagPurchasePromptCartPricingEnabledModule then props.collectibleItemId else nil,
-				isCartPricingLoading = if fFlagPurchasePromptCartPricingEnabledModule then props.isCartPricingLoading else nil,
-				onCartOfferAppliedChanged = if fFlagPurchasePromptCartPricingEnabledModule then p1.fetchCartPricingForPurchasePrompt else nil,
-				postPurchaseActions = if fFlagPurchasePromptCartPricingEnabledModule then props.postPurchaseActions else nil,
-				setPostPurchaseActions = if fFlagPurchasePromptCartPricingEnabledModule then props.setPostPurchaseActions else nil,
-				robuxProviderId = props.robuxProductId,
-				robuxProductId = props.productId,
-				itemIcon = if string.find(props.productInfo.imageUrl, "assetid=0") then nil else props.productInfo.imageUrl,
-				itemProductId = props.productInfo.productId,
-				itemName = props.productInfo.name,
-				itemRobuxCost = getPlayerPriceModule(props.productInfo, props.accountInfo.membershipType == 4, props.expectedPrice),
-				iapRobuxAmount = props.robuxPurchaseAmount or 0,
-				iapCostStr = props.price,
-				beforeRobuxBalance = props.accountInfo.balance,
-				isTestPurchase = props.isTestPurchase,
-				isGamepadEnabled = props.isGamepadEnabled,
-				isFromInExperienceShop = if fFlagSkipBuyDelayForExperienceShopModule then props.isFromInExperienceShop else nil,
-				purchaseItem = props.purchaseItem,
-				promptRobuxPurchase = props.promptRobuxPurchase,
-				openRobuxStore = if p1.props.isUserEligibleForUnifiedPurchaseFlow then p1.navigateToBuyRobux else props.openRobuxStore,
-				openTermsOfUse = if var1 then p1.navigateToTermsOfUse else nil,
-				openSecuritySettings = if var1 then props.openSecuritySettings else nil,
-				dispatchFetchPurchaseWarning = props.dispatchFetchPurchaseWarning,
-				endPurchase = props.completeRequest,
-				onAnalyticEvent = props.onAnalyticEvent,
-				humanoidModel = props.humanoidModel
-			}),
-			ModalFix = roact.createElement("ImageButton", {
-				BackgroundTransparency = 0,
-				Modal = true,
-				Size = UDim2.new(0, 0, 0, 0)
-			}),
-			OnCoreGuiMenuOpened = roact.createElement(externalEventConnectionModule, {
-				event = guiService.MenuOpened,
-				callback = function()
-					-- upvalues: fFlagSetMenuOnPurchasePromptModule (copy), p1 (ref), props (ref)
-					if fFlagSetMenuOnPurchasePromptModule and p1.menuOpenedBySelf then
-						p1.menuOpenedBySelf = false
-						
-						return
-					end
-					props.completeRequest()
-				end
-			})
-		})
+	if props.purchaseFlow ~= purchaseFlowModule.RobuxUpsellV2 and props.purchaseFlow ~= purchaseFlowModule.LargeRobuxUpsell then
+		return nil
 	end
-	return nil
+	local var1 = isLinksAllowedModule()
+	
+	return roact.createElement("Frame", {
+		Size = UDim2.new(1, 0, 1, 0),
+		[roact.Change.AbsoluteSize] = p1.changeScreenSize,
+		BackgroundTransparency = 1
+	}, {
+		Prompt = roact.createElement(robuxUpsellOverlayModule, {
+			screenSize = state.screenSize,
+			virtualItemPrice = if fFlagEnableDiscountInfoInUnifiedPurchaseModal then props.virtualItemPrice else nil,
+			requestType = props.requestType,
+			promptState = props.promptState,
+			purchaseFlow = props.purchaseFlow,
+			purchaseError = props.purchaseError,
+			economicRestrictionError = props.economicRestrictionError,
+			useUpsellSuggestions = upsellSuggestionsAPIMaxPackages > 1,
+			upsellSuggestions = props.robuxSuggestions,
+			selectedUpsellIndex = props.robuxPackageSelection,
+			virtualItemBadgeType = props.virtualItemBadgeType,
+			onUpsellSuggestionsSelected = function(p2)
+				-- upvalues: props (ref)
+				props.onUpsellSuggestionsSelected(props.robuxSuggestions, p2, props.virtualItemBadgeType)
+			end,
+			useUnifiedProductPurchaseModal = if fFlagEnableUnifiedProductPurchaseFlow then p1.props.isUserEligibleForUnifiedPurchaseFlow else nil,
+			purchaseAnalyticsMetadata = if fFlagEnableUnifiedProductPurchaseFlow then p1.props.purchaseAnalyticsMetadata else nil,
+			cartPricingResponse = if fFlagPurchasePromptCartPricingEnabledModule then props.cartPricingResponse else nil,
+			collectibleItemId = if fFlagPurchasePromptCartPricingEnabledModule then props.collectibleItemId else nil,
+			isCartPricingLoading = if fFlagPurchasePromptCartPricingEnabledModule then props.isCartPricingLoading else nil,
+			onCartOfferAppliedChanged = if fFlagPurchasePromptCartPricingEnabledModule then p1.fetchCartPricingForPurchasePrompt else nil,
+			postPurchaseActions = if fFlagPurchasePromptCartPricingEnabledModule then props.postPurchaseActions else nil,
+			setPostPurchaseActions = if fFlagPurchasePromptCartPricingEnabledModule then props.setPostPurchaseActions else nil,
+			robuxProviderId = props.robuxProductId,
+			robuxProductId = props.productId,
+			itemIcon = if string.find(props.productInfo.imageUrl, "assetid=0") then nil else props.productInfo.imageUrl,
+			itemProductId = props.productInfo.productId,
+			itemName = props.productInfo.name,
+			itemRobuxCost = getPlayerPriceModule(props.productInfo, props.accountInfo.membershipType == 4, props.expectedPrice),
+			iapRobuxAmount = props.robuxPurchaseAmount or 0,
+			iapCostStr = props.price,
+			beforeRobuxBalance = props.accountInfo.balance,
+			isTestPurchase = props.isTestPurchase,
+			isGamepadEnabled = props.isGamepadEnabled,
+			isFromInExperienceShop = if fFlagSkipBuyDelayForExperienceShopModule then props.isFromInExperienceShop else nil,
+			purchaseItem = props.purchaseItem,
+			promptRobuxPurchase = props.promptRobuxPurchase,
+			openRobuxStore = if fFlagEnableUnifiedProductPurchaseFlow and p1.props.isUserEligibleForUnifiedPurchaseFlow then p1.navigateToBuyRobux else props.openRobuxStore,
+			openTermsOfUse = if var1 then if fFlagEnableUnifiedProductPurchaseFlow then p1.navigateToTermsOfUse else props.openTermsOfUse else nil,
+			openSecuritySettings = if var1 then props.openSecuritySettings else nil,
+			dispatchFetchPurchaseWarning = props.dispatchFetchPurchaseWarning,
+			endPurchase = props.completeRequest,
+			onAnalyticEvent = props.onAnalyticEvent,
+			humanoidModel = props.humanoidModel
+		}),
+		ModalFix = roact.createElement("ImageButton", {
+			BackgroundTransparency = 0,
+			Modal = true,
+			Size = UDim2.new(0, 0, 0, 0)
+		}),
+		OnCoreGuiMenuOpened = roact.createElement(externalEventConnectionModule, {
+			event = guiService.MenuOpened,
+			callback = function()
+				-- upvalues: fFlagSetMenuOnPurchasePromptModule (copy), p1 (ref), props (ref)
+				if fFlagSetMenuOnPurchasePromptModule and p1.menuOpenedBySelf then
+					p1.menuOpenedBySelf = false
+					
+					return
+				end
+				props.completeRequest()
+			end
+		})
+	})
 end
 
 function name.render(p1)
@@ -176,17 +175,25 @@ function name.render(p1)
 	}) else var1
 end
 
+if fFlagEnableUnifiedProductPurchaseFlow then
+	local var1 = name
+	
+	name = function(p1)
+		-- upvalues: navigationModule (ref), roact (ref), var1 (ref), cryoModule (ref)
+		return roact.createElement(var1, cryoModule.Dictionary.join(p1, { navigation = navigationModule.useNavigation() }))
+	end
+end
 return connectToStoreModule(function(p1)
-	-- upvalues: isMockingPurchasesModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), selectedRobuxPackageModule (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), selectPriceModule (ref), selectCartPricingResponseModule (ref), selectIsCartPricingFetchingModule (ref)
-	local var1 = isMockingPurchasesModule(p1.promptRequest.requestType)
-	local var2 = nil
+	-- upvalues: isMockingPurchasesModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), selectedRobuxPackageModule (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), selectPriceModule (ref), selectCartPricingResponseModule (ref), selectIsCartPricingFetchingModule (ref)
+	local var2 = isMockingPurchasesModule(p1.promptRequest.requestType)
+	local var3 = nil
 	
 	if fFlagPurchasePromptCartPricingEnabledModule then
-		var2 = p1.productInfo.collectibleItemId
+		var3 = p1.productInfo.collectibleItemId
 		
-		if type(var2) ~= "string" or var2 == "" then
+		if type(var3) ~= "string" or var3 == "" then
 			local collectibleItemId = p1.promptRequest.collectibleItemId
-			var2 = if type(collectibleItemId) == "string" and collectibleItemId ~= "" then collectibleItemId else nil
+			var3 = if type(collectibleItemId) == "string" and collectibleItemId ~= "" then collectibleItemId else nil
 		end
 	end
 	return {
@@ -206,20 +213,20 @@ return connectToStoreModule(function(p1)
 		robuxPurchaseAmount = selectedRobuxPackageModule.getRobuxPurchaseAmount(p1),
 		robuxAmountBeforeBonus = selectedRobuxPackageModule.getRobuxAmountBeforeBonus(p1),
 		price = selectedRobuxPackageModule.getPrice(p1),
-		isTestPurchase = var1,
+		isTestPurchase = var2,
 		isGamepadEnabled = p1.gamepadEnabled,
 		isFromInExperienceShop = if fFlagSkipBuyDelayForExperienceShopModule then p1.productPayload and p1.productPayload.isFromInExperienceShop else nil,
 		humanoidModel = p1.promptRequest.humanoidModel,
-		isUserEligibleForUnifiedPurchaseFlow = p1.isUserEligibleForUnifiedPurchaseFlow,
-		purchaseAnalyticsMetadata = p1.purchaseAnalyticsMetadata,
-		virtualItemPrice = selectPriceModule(p1),
-		collectibleItemId = if fFlagPurchasePromptCartPricingEnabledModule then var2 else nil,
+		isUserEligibleForUnifiedPurchaseFlow = if fFlagEnableUnifiedProductPurchaseFlow then p1.isUserEligibleForUnifiedPurchaseFlow else nil,
+		purchaseAnalyticsMetadata = if fFlagEnableUnifiedProductPurchaseFlow then p1.purchaseAnalyticsMetadata else nil,
+		virtualItemPrice = if fFlagEnableDiscountInfoInUnifiedPurchaseModal then selectPriceModule(p1) else nil,
+		collectibleItemId = if fFlagPurchasePromptCartPricingEnabledModule then var3 else nil,
 		cartPricingResponse = if fFlagPurchasePromptCartPricingEnabledModule then selectCartPricingResponseModule(p1) else nil,
 		isCartPricingLoading = if fFlagPurchasePromptCartPricingEnabledModule then selectIsCartPricingFetchingModule(p1) else nil,
 		postPurchaseActions = if fFlagPurchasePromptCartPricingEnabledModule then p1.postPurchaseActions else nil
 	}
 end, function(p1)
-	-- upvalues: purchaseItemModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), fetchCartPricingModule (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), fetchInGameItemCartPricingModule (ref), launchRobuxUpsellModule (ref), openRobuxStoreModule (ref), openSecuritySettingsModule (ref), openTermsOfUseModule (ref), initiateUserPurchaseSettingsPrecheckModule (ref), guiService (ref), completeRequestModule (ref), promptNativeUpsellSuggestionsModule (ref), sendEventModule (ref), setPostPurchaseActionsModule (ref)
+	-- upvalues: purchaseItemModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), fetchCartPricingModule (ref), launchRobuxUpsellModule (ref), openRobuxStoreModule (ref), openSecuritySettingsModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), openTermsOfUseModule (ref), initiateUserPurchaseSettingsPrecheckModule (ref), guiService (ref), completeRequestModule (ref), promptNativeUpsellSuggestionsModule (ref), sendEventModule (ref), setPostPurchaseActionsModule (ref)
 	return {
 		purchaseItem = function()
 			-- upvalues: p1 (ref), purchaseItemModule (copy)
@@ -228,10 +235,6 @@ end, function(p1)
 		fetchCartPricing = if fFlagPurchasePromptCartPricingEnabledModule then function(p2)
 			-- upvalues: p1 (ref), fetchCartPricingModule (copy)
 			return p1(fetchCartPricingModule(p2))
-		end else nil,
-		fetchInGameItemCartPricing = if fFlagEnableInExperienceOffersPurchaseFlow then function(p2)
-			-- upvalues: p1 (ref), fetchInGameItemCartPricingModule (copy)
-			return p1(fetchInGameItemCartPricingModule(p2))
 		end else nil,
 		promptRobuxPurchase = function()
 			-- upvalues: p1 (ref), launchRobuxUpsellModule (copy)
@@ -246,8 +249,8 @@ end, function(p1)
 			return p1(openSecuritySettingsModule())
 		end,
 		openTermsOfUse = function(p2)
-			-- upvalues: p1 (ref), openTermsOfUseModule (copy)
-			return p1(openTermsOfUseModule(p2))
+			-- upvalues: fFlagEnableUnifiedProductPurchaseFlow (copy), p1 (ref), openTermsOfUseModule (copy)
+			return if fFlagEnableUnifiedProductPurchaseFlow then p1(openTermsOfUseModule(p2)) else p1(openTermsOfUseModule())
 		end,
 		dispatchFetchPurchaseWarning = function()
 			-- upvalues: p1 (ref), initiateUserPurchaseSettingsPrecheckModule (copy)
@@ -272,7 +275,4 @@ end, function(p1)
 			p1(setPostPurchaseActionsModule(p2))
 		end else nil
 	}
-end)(function(p1)
-	-- upvalues: navigationModule (ref), roact (ref), name (ref), cryoModule (ref)
-	return roact.createElement(name, cryoModule.Dictionary.join(p1, { navigation = navigationModule.useNavigation() }))
-end)
+end)(name)

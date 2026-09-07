@@ -28,19 +28,18 @@ return function(p1)
 	local getIsScrolling = p1.getIsScrolling
 	local inputAllowed = p1.inputAllowed
 	local reducedMotion = p1.reducedMotion
-	local var1 = p1.coveringOverlay == true
-	local var2 = reactModule.useMemo(function()
+	local var1 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), getImmersiveChromeStoreModule (copy)
 		return p1.store or getImmersiveChromeStoreModule(false)
 	end, {})
-	local var3 = if p1.featureEnabledOverride ~= nil then fFlagMomentsImmersiveChromeModule else p1.featureEnabledOverride
-	local var4 = reactModule.useRef(1)
-	local var5 = reactModule.useRef(var3)
-	var5.current = var3
-	local var6 = reactModule.useRef(p1.fireEvent or defaultFireEvent)
-	var6.current = p1.fireEvent or defaultFireEvent
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), getFIntMomentsImmersiveHideAfterAdvancesModule (copy), getFIntMomentsImmersiveShownDwellMsModule (copy), getFIntMomentsImmersiveHiddenCooldownMsModule (copy), immersiveChromeMachineModule (copy), var2 (ref), var5 (ref), var6 (ref), var4 (ref)
+	local var2 = if p1.featureEnabledOverride ~= nil then fFlagMomentsImmersiveChromeModule else p1.featureEnabledOverride
+	local var3 = reactModule.useRef(1)
+	local var4 = reactModule.useRef(var2)
+	var4.current = var2
+	local var5 = reactModule.useRef(p1.fireEvent or defaultFireEvent)
+	var5.current = p1.fireEvent or defaultFireEvent
+	local var6 = reactModule.useMemo(function()
+		-- upvalues: p1 (ref), getFIntMomentsImmersiveHideAfterAdvancesModule (copy), getFIntMomentsImmersiveShownDwellMsModule (copy), getFIntMomentsImmersiveHiddenCooldownMsModule (copy), immersiveChromeMachineModule (copy), var1 (ref), var4 (ref), var5 (ref), var3 (ref)
 		return immersiveChromeMachineModule(p1.config or {
 			hideAfterAdvances = getFIntMomentsImmersiveHideAfterAdvancesModule(),
 			shownDwellMs = getFIntMomentsImmersiveShownDwellMsModule(),
@@ -50,50 +49,50 @@ return function(p1)
 				return os.clock() * 1000
 			end,
 			setChromeVisible = function(value, p2)
-				-- upvalues: var2 (copy), var5 (copy), var6 (copy), var4 (copy)
-				var2.setChromeVisible(value)
+				-- upvalues: var1 (copy), var4 (copy), var5 (copy), var3 (copy)
+				var1.setChromeVisible(value)
 				
-				if var5.current then
-					var6.current(value, p2, var4.current)
+				if var4.current then
+					var5.current(value, p2, var3.current)
 				end
 			end
 		})
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), pager (ref), getActiveIsPlaying (ref), getIsScrolling (ref), var4 (ref), var7 (ref)
+		-- upvalues: signalsModule (copy), pager (ref), getActiveIsPlaying (ref), getIsScrolling (ref), var3 (ref), var6 (ref)
 		return signalsModule.createEffect(function(p2)
-			-- upvalues: pager (copy), getActiveIsPlaying (copy), getIsScrolling (copy), var4 (copy), var7 (copy)
+			-- upvalues: pager (copy), getActiveIsPlaying (copy), getIsScrolling (copy), var3 (copy), var6 (copy)
 			local count = pager.getCount(p2)
 			local currentIndex = pager.getCurrentIndex(p2)
-			local var8 = getActiveIsPlaying(p2)
-			local var9 = getIsScrolling(p2)
-			var4.current = currentIndex
-			var7.setCount(count)
-			var7.onActiveUpdate(currentIndex, var8, var9)
+			local var7 = getActiveIsPlaying(p2)
+			local var8 = getIsScrolling(p2)
+			var3.current = currentIndex
+			var6.setCount(count)
+			var6.onActiveUpdate(currentIndex, var7, var8)
 		end)
-	end, { pager, getActiveIsPlaying, getIsScrolling, var7 })
-	local getOverlayCovering = useSignalState(var2.getOverlayCovering) or var1
+	end, { pager, getActiveIsPlaying, getIsScrolling, var6 })
+	local var7 = useSignalState(var1.getOverlayCovering)
 	reactModule.useEffect(function()
-		-- upvalues: active (ref), inputAllowed (ref), reducedMotion (ref), var3 (ref), var7 (ref), getOverlayCovering (ref)
-		var7.setForceShow((not active or (not inputAllowed or (reducedMotion or not var3))) and not getOverlayCovering)
-		var7.setForceHide(getOverlayCovering)
+		-- upvalues: active (ref), inputAllowed (ref), reducedMotion (ref), var2 (ref), var6 (ref), var7 (ref)
+		var6.setForceShow((not active or (not inputAllowed or (reducedMotion or not var2))) and not var7)
+		var6.setForceHide(var7)
 	end, {
-		active, inputAllowed, reducedMotion, var3, getOverlayCovering, var7
+		active, inputAllowed, reducedMotion, var2, var7, var6
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var7 (ref)
-		var2.setRevealHandler(var7.reveal)
+		-- upvalues: var1 (ref), var6 (ref)
+		var1.setRevealHandler(var6.reveal)
 		
 		return function()
-			-- upvalues: var2 (copy)
-			var2.setRevealHandler(nil)
+			-- upvalues: var1 (copy)
+			var1.setRevealHandler(nil)
 		end
-	end, { var2, var7 })
+	end, { var1, var6 })
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref)
+		-- upvalues: var1 (ref)
 		return function()
-			-- upvalues: var2 (copy)
-			var2.setChromeVisible(true)
+			-- upvalues: var1 (copy)
+			var1.setChromeVisible(true)
 		end
-	end, { var2 })
+	end, { var1 })
 end

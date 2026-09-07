@@ -20,9 +20,7 @@ return {
 		SessionDelete = "_roblox/session/delete",
 		SessionUpdateInfo = "_roblox/session/update_info",
 		SessionReadTasks = "_roblox/session/read_tasks",
-		SessionSaveAndPublish = "_roblox/session/save_and_publish",
-		AdCampaignEligibility = "_roblox/ad_campaign/eligibility",
-		AdCampaignCreate = "_roblox/ad_campaign/create"
+		SessionSaveAndPublish = "_roblox/session/save_and_publish"
 	},
 	Notifications = { SessionUpdate = "session/update" },
 	ErrorCodes = {
@@ -56,9 +54,6 @@ return {
 		
 		if p1.experiment ~= nil then
 			t.experiment = p1.experiment
-		end
-		if p1.application ~= nil then
-			t.application = p1.application
 		end
 		return {
 			cwd = p1.cwd,

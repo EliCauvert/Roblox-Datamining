@@ -2,7 +2,6 @@
 local reactModule = require(foundation.Parent.React)
 local userInputService = require(foundation.Utility.Wrappers).Services.UserInputService
 local flagsModule = require(foundation.Utility.Flags)
-local constantsModule = require(foundation.Constants)
 local loggerModule = require(foundation.Utility.Logger)
 local popoverAlignModule = require(foundation.Enums.PopoverAlign)
 local popoverContextModule = require(foundation.Components.Popover.PopoverContext)
@@ -19,8 +18,7 @@ local popoverModule = require(foundation.Components.Popover)
 local t = {
 	testId = "--foundation-tooltip",
 	align = popoverAlignModule.Start,
-	side = popoverSideModule.Right,
-	hasArrow = if flagsModule.FoundationTooltipBeta then true else nil
+	side = popoverSideModule.Right
 }
 
 local function AnchorWrapper(p1)
@@ -52,7 +50,7 @@ local function AnchorWrapper(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), useTokensModule (ref), useScaledValueModule (ref), flagsModule (ref), constantsModule (ref), userInputService (ref), popoverModule (ref), AnchorWrapper (ref), withCommonPropsModule (ref), radiusModule (ref), viewModule (ref), textModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), useTokensModule (ref), useScaledValueModule (ref), flagsModule (ref), userInputService (ref), popoverModule (ref), AnchorWrapper (ref), withCommonPropsModule (ref), radiusModule (ref), viewModule (ref), textModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2, var3 = reactModule.useState(false)
 	local var4 = useTokensModule()
@@ -62,7 +60,7 @@ return reactModule.memo(function(p1)
 		Anchor = reactModule.createElement(AnchorWrapper, withCommonPropsModule(var1, { onHover = var3 }), var1.children),
 		Content = reactModule.createElement(popoverModule.Content, {
 			selectionGroup = false,
-			hasArrow = if flagsModule.FoundationTooltipBeta then var1.hasArrow else false,
+			hasArrow = if flagsModule.FoundationTooltipBeta then true else false,
 			align = var1.align,
 			side = { position = var1.side, offset = var4.Size.Size_200 },
 			radius = radiusModule.Small,
@@ -89,7 +87,7 @@ return reactModule.memo(function(p1)
 				right = UDim.new(0, var4.Size.Size_150)
 			} else nil,
 			sizeConstraint = {
-				MaxSize = Vector2.new(useScaledValueModule(if flagsModule.FoundationTooltipBeta then constantsModule.TOOLTIP_MAX_WIDTH else 320), 1e999)
+				MaxSize = Vector2.new(useScaledValueModule(if flagsModule.FoundationTooltipBeta then 280 else 320), 1e999)
 			}
 		}, {
 			Header = if var1.title == "" and not var1.shortcut then nil else reactModule.createElement(viewModule, {

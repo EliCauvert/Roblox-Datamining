@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("BuildAdUpsell1", false) and (require(script.Parent.FFlagEnableBuildAdPromotion) and game:GetEngineFeature("BuildAppStorageKey"))

@@ -6,15 +6,12 @@ return function()
 	local var1, var2 = signalsModule.createSignal({
 		submittedToolCallIds = {},
 		askUserByToolCallId = {},
-		planByToolCallId = {},
-		devProductByToolCallId = {}
+		planByToolCallId = {}
 	})
 	local var3, var4 = signalsModule.createSignal({
 		onAnswerSelectedByToolCallId = {},
 		onAnswerConfirmedByToolCallId = {},
-		onPlanAcceptedByToolCallId = {},
-		onDevProductApprovedByToolCallId = {},
-		onDevProductRejectedByToolCallId = {}
+		onPlanAcceptedByToolCallId = {}
 	})
 	
 	local function updateOptimistic(p1)
@@ -23,8 +20,7 @@ return function()
 		local t = {
 			submittedToolCallIds = table.clone(var5.submittedToolCallIds),
 			askUserByToolCallId = table.clone(var5.askUserByToolCallId),
-			planByToolCallId = table.clone(var5.planByToolCallId),
-			devProductByToolCallId = table.clone(var5.devProductByToolCallId)
+			planByToolCallId = table.clone(var5.planByToolCallId)
 		}
 		p1(t)
 		var2(t)
@@ -36,9 +32,7 @@ return function()
 		local t = {
 			onAnswerSelectedByToolCallId = table.clone(var5.onAnswerSelectedByToolCallId),
 			onAnswerConfirmedByToolCallId = table.clone(var5.onAnswerConfirmedByToolCallId),
-			onPlanAcceptedByToolCallId = table.clone(var5.onPlanAcceptedByToolCallId),
-			onDevProductApprovedByToolCallId = table.clone(var5.onDevProductApprovedByToolCallId),
-			onDevProductRejectedByToolCallId = table.clone(var5.onDevProductRejectedByToolCallId)
+			onPlanAcceptedByToolCallId = table.clone(var5.onPlanAcceptedByToolCallId)
 		}
 		p1(t)
 		var4(t)
@@ -52,13 +46,6 @@ return function()
 			updateOptimistic(function(p2)
 				-- upvalues: p1 (ref)
 				p2.submittedToolCallIds[p1] = true
-			end)
-		end,
-		clearSubmitted = function(p1)
-			-- upvalues: updateOptimistic (ref)
-			updateOptimistic(function(p2)
-				-- upvalues: p1 (ref)
-				p2.submittedToolCallIds[p1] = nil
 			end)
 		end,
 		setAskUserTool = function(value)
@@ -123,36 +110,6 @@ return function()
 			updateActions(function(p2)
 				-- upvalues: p1 (ref)
 				p2.onPlanAcceptedByToolCallId[p1] = nil
-			end)
-		end,
-		setDevProductTool = function(value)
-			-- upvalues: updateOptimistic (ref)
-			updateOptimistic(function(p1)
-				-- upvalues: value (ref)
-				p1.devProductByToolCallId[value.toolCallId] = value
-			end)
-		end,
-		removeDevProductTool = function(p1)
-			-- upvalues: updateOptimistic (ref)
-			updateOptimistic(function(p2)
-				-- upvalues: p1 (ref)
-				p2.devProductByToolCallId[p1] = nil
-			end)
-		end,
-		setDevProductAction = function(value, p1, p2)
-			-- upvalues: updateActions (ref)
-			updateActions(function(p3)
-				-- upvalues: value (ref), p1 (ref), p2 (ref)
-				p3.onDevProductApprovedByToolCallId[value] = p1
-				p3.onDevProductRejectedByToolCallId[value] = p2
-			end)
-		end,
-		removeDevProductAction = function(p1)
-			-- upvalues: updateActions (ref)
-			updateActions(function(p2)
-				-- upvalues: p1 (ref)
-				p2.onDevProductApprovedByToolCallId[p1] = nil
-				p2.onDevProductRejectedByToolCallId[p1] = nil
 			end)
 		end
 	}

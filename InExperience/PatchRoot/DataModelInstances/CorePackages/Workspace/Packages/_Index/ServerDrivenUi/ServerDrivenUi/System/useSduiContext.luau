@@ -13,6 +13,7 @@ local recordV1RegisteredTemplates = sduiCoreSystemModule.recordV1RegisteredTempl
 local useSduiDataStoreModule = require(serverDrivenUi.DataStore.useSduiDataStore)
 local sduiErrors = sduiCoreSystemModule.SduiErrors
 local fFlagLuaAppLayoutParamsInContext = require(parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
+local fFlagSduiUsageTelemetry = require(parent.SharedFlags).FFlagSduiUsageTelemetry
 local t = {
 	numColumns = 3,
 	fractionalItemAmount = 0,
@@ -23,7 +24,7 @@ local t = {
 local useSduiDependenciesModule = require(serverDrivenUi.System.useSduiDependencies)
 
 return function(p1)
-	-- upvalues: reactModule (ref), sduiInstrumentation (ref), useSduiDependenciesModule (ref), sduiComponentDefinitionsModule (ref), sduiTemplateRegistry (ref), recordV1RegisteredTemplates (ref), sduiUsageRecorder (ref), useSduiDataStoreModule (ref), fFlagLuaAppLayoutParamsInContext (ref), signalsModule (ref), t (ref), collectionItemSize (ref), sduiLogger (ref), sduiErrors (ref)
+	-- upvalues: reactModule (ref), sduiInstrumentation (ref), useSduiDependenciesModule (ref), sduiComponentDefinitionsModule (ref), sduiTemplateRegistry (ref), fFlagSduiUsageTelemetry (ref), recordV1RegisteredTemplates (ref), sduiUsageRecorder (ref), useSduiDataStoreModule (ref), fFlagLuaAppLayoutParamsInContext (ref), signalsModule (ref), t (ref), collectionItemSize (ref), sduiLogger (ref), sduiErrors (ref)
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: sduiInstrumentation (copy)
 		return sduiInstrumentation.new()
@@ -38,11 +39,14 @@ return function(p1)
 		-- upvalues: sduiTemplateRegistry (copy), p1 (ref)
 		return sduiTemplateRegistry.new(p1.templates)
 	end, { p1.templates })
-	reactModule.useEffect(function()
-		-- upvalues: recordV1RegisteredTemplates (copy), p1 (ref), sduiUsageRecorder (copy)
-		recordV1RegisteredTemplates(p1.appPage, p1.templates)
-		sduiUsageRecorder.scheduleFlush()
-	end, { p1.appPage, p1.templates })
+	
+	if fFlagSduiUsageTelemetry then
+		reactModule.useEffect(function()
+			-- upvalues: recordV1RegisteredTemplates (copy), p1 (ref), sduiUsageRecorder (copy)
+			recordV1RegisteredTemplates(p1.appPage, p1.templates)
+			sduiUsageRecorder.scheduleFlush()
+		end, { p1.appPage, p1.templates })
+	end
 	local var5 = useSduiDataStoreModule()
 	local var6 = nil
 	

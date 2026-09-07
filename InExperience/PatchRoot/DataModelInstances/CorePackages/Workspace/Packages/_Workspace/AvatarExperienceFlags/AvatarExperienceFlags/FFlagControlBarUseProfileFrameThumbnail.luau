@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ControlBarUseProfileFrameThumbnail", false) and require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled()

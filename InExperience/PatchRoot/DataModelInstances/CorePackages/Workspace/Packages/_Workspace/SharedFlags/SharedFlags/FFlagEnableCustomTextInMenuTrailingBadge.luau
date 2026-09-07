@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableCustomTextInMenuTrailingBadge", false) and require(script.Parent.FFlagEnableMenuTrailingBadge)

@@ -1,5 +1,5 @@
 ﻿local parent = script.Parent.Parent
-local _ = require(parent.ChatUIPrimitives)
+local fFlagExpChatPresetBoltInMessageLayout = require(parent.ChatUIPrimitives).Flags.FFlagExpChatPresetBoltInMessageLayout
 local _ = { Pending = "pending", Failed = "failed" }
 local httpService = game:GetService("HttpService")
 local getFFlagExpChatProtectedChatInternalAPIs = require(parent.SharedFlags).getFFlagExpChatProtectedChatInternalAPIs
@@ -44,7 +44,7 @@ return {
 	end,
 	createUserMessage = createUserMessage,
 	createUserMessageFromTextChatMessage = function(p1, p2)
-		-- upvalues: createUserMessage (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), getTextAndTranslationModule (ref)
+		-- upvalues: createUserMessage (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), getTextAndTranslationModule (ref), fFlagExpChatPresetBoltInMessageLayout (ref)
 		local textSource = p1.TextSource
 		
 		return createUserMessage({
@@ -58,7 +58,7 @@ return {
 			timestamp = p1.Timestamp,
 			isOutgoing = tostring(textSource.UserId) == p2,
 			textChatMessageInstance = p1,
-			presetId = if game:GetEngineFeature("TextChatPresetsEnabled") then p1.PresetId else nil
+			presetId = if fFlagExpChatPresetBoltInMessageLayout and game:GetEngineFeature("TextChatPresetsEnabled") then p1.PresetId else nil
 		})
 	end
 }

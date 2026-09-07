@@ -10,8 +10,6 @@ return function()
 	local _ = nil
 	local var5, var6 = signalsModule.createSignal({})
 	local var7, var8 = signalsModule.createSignal({})
-	local var9, var10 = signalsModule.createSignal({})
-	local var11, var12 = signalsModule.createSignal({})
 	
 	return {
 		getUnibarIntegrations = var1,
@@ -21,10 +19,6 @@ return function()
 		getPageIntegrations = var5,
 		setPageIntegrations = var6,
 		getSessionActionIntegrations = var7,
-		setSessionActionIntegrations = var8,
-		getScrollableWidgetIntegrations = var9,
-		setScrollableWidgetIntegrations = var10,
-		getFixedFooterWidgetIntegrations = var11,
-		setFixedFooterWidgetIntegrations = var12
+		setSessionActionIntegrations = var8
 	}
 end

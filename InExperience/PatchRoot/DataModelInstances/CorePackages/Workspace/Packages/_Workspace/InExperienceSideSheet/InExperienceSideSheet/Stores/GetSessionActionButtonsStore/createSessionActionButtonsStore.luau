@@ -8,7 +8,7 @@ local input = responsiveModule.Input
 local iconName = require(parent.Foundation).Enums.IconName
 local enumsModule = require(inExperienceSideSheet.Common.Enums)
 local constantsModule = require(inExperienceSideSheet.Common.Constants)
-local isPioneerLaunch = require(parent.PioneerUtils).isPioneerLaunch
+local fFlagDebugEnablePioneerUX = require(parent.SharedFlags).FFlagDebugEnablePioneerUX
 local getActionBindingsStoreModule = require(inExperienceSideSheet.Stores.GetActionBindingsStore)
 local t = {
 	["rbxasset://textures/ui/Controls/DefaultController/ButtonX@2x.png"] = iconName.XboxX,
@@ -20,7 +20,7 @@ local t = {
 }
 
 return function()
-	-- upvalues: getActionBindingsStoreModule (ref), signalsModule (ref), isPioneerLaunch (ref), constantsModule (ref), enumsModule (ref), getInputModeStore (ref), input (ref), userInputService (ref), t (ref)
+	-- upvalues: getActionBindingsStoreModule (ref), signalsModule (ref), fFlagDebugEnablePioneerUX (ref), constantsModule (ref), enumsModule (ref), getInputModeStore (ref), input (ref), userInputService (ref), t (ref)
 	local sessionActionBindings = getActionBindingsStoreModule().sessionActionBindings
 	local var1, var2 = signalsModule.createSignal(nil)
 	local var3, var4 = signalsModule.createSignal(nil)
@@ -29,7 +29,7 @@ return function()
 			name = "LeaveButton",
 			keyboardIcon = "icons/controls/keys/key_l",
 			isEmphasis = true,
-			label = if isPioneerLaunch() then constantsModule.LocalizationKeys.LogoutButton else "CoreScripts.InGameMenu.LeaveGame",
+			label = if fFlagDebugEnablePioneerUX then constantsModule.LocalizationKeys.LogoutButton else "CoreScripts.InGameMenu.LeaveGame",
 			gamepadKeyCode = Enum.KeyCode.ButtonX,
 			getShortcutIcon = var1,
 			setShortcutIcon = var2,

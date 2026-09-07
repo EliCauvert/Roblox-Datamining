@@ -22,6 +22,7 @@ local fFlagExtendScrollingFramesBySafeInsets = require(parent.SharedFlags).FFlag
 local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
 local fixConsoleEDPDirectionalNavigation = game:DefineFastFlag("FixConsoleEDPDirectionalNavigation", false)
 local fFlagLuaAppEdpConsoleMediaGalleryVideo = require(parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
+local fFlagLuaAppDemoModePlayButton = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButton
 local fixDeviceSafePaddingAccess = game:DefineFastFlag("FixDeviceSafePaddingAccess", false)
 local t = {
 	itemPadding = 36,
@@ -31,7 +32,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: t (ref), cryoModule (ref), reactModule (ref), getPlatformConfigModule (ref), signal (ref), useAnimateFullscreenModule (ref), detailsPageHeaderModule (ref), useDetailsPageRenderItemsModule (ref), detailsPageRenderItemModule (ref), fixDeviceSafePaddingAccess (ref), fFlagEnableLeftNavOnConsole (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), fullscreenFrameModule (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), loadableImage (ref), overlay (ref), animatedFlatList (ref), fixConsoleEDPDirectionalNavigation (ref)
+	-- upvalues: t (ref), cryoModule (ref), reactModule (ref), getPlatformConfigModule (ref), signal (ref), useAnimateFullscreenModule (ref), detailsPageHeaderModule (ref), fFlagLuaAppDemoModePlayButton (ref), useDetailsPageRenderItemsModule (ref), detailsPageRenderItemModule (ref), fixDeviceSafePaddingAccess (ref), fFlagEnableLeftNavOnConsole (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), fullscreenFrameModule (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), loadableImage (ref), overlay (ref), animatedFlatList (ref), fixConsoleEDPDirectionalNavigation (ref)
 	local var1 = t
 	
 	if p1.tokens then
@@ -64,7 +65,7 @@ return function(p1)
 	local renderFullscreenContent = p1.renderFullscreenContent
 	local var13, var14 = useAnimateFullscreenModule(if p1.isFullscreen == nil then false else p1.isFullscreen, renderFullscreenContent, var1.animationConfig)
 	local var15 = useDetailsPageRenderItemsModule(p1.componentList, reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), detailsPageHeaderModule (copy), p1 (ref), var9 (ref), var12 (ref), var11 (ref), var10 (ref), var1 (write)
+		-- upvalues: reactModule (copy), detailsPageHeaderModule (copy), p1 (ref), var9 (ref), var12 (ref), var11 (ref), var10 (ref), var1 (write), fFlagLuaAppDemoModePlayButton (copy)
 		return reactModule.createElement(detailsPageHeaderModule, {
 			thumbnailImageUrl = p1.thumbnailImageUrl,
 			thumbnailAspectRatio = p1.thumbnailAspectRatio,
@@ -82,7 +83,7 @@ return function(p1)
 			thumbnailShadowHeight = var1.thumbnailShadowHeight,
 			gradientHeight = var1.headerGradientHeight,
 			actionBarHeight = var1.actionBarHeight,
-			actionBarWidth = p1.actionBarWidth or var1.actionBarWidth,
+			actionBarWidth = if fFlagLuaAppDemoModePlayButton then p1.actionBarWidth or var1.actionBarWidth else var1.actionBarWidth,
 			itemPadding = var1.thumbnailMargin,
 			bottomMargin = var1.headerBottomMargin
 		})
@@ -91,7 +92,8 @@ return function(p1)
 		p1.subTitleText, p1.actionBarLabelText, p1.renderInfoContent,
 		p1.actionBarProps, var11, var10, p1.deviceType, var1.thumbnailShadowHeight,
 		var1.headerGradientHeight, var1.thumbnailMargin, var1.headerBottomMargin,
-		var1.actionBarHeight, var1.actionBarWidth, p1.actionBarWidth,
+		var1.actionBarHeight, var1.actionBarWidth,
+		if fFlagLuaAppDemoModePlayButton then p1.actionBarWidth else nil,
 		p1.renderActionBarLabelImpressionsDetector, var12
 	}), var6, var1.safeAreaSize)
 	local var16 = if not fixDeviceSafePaddingAccess then if fFlagEnableLeftNavOnConsole or fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil elseif fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil

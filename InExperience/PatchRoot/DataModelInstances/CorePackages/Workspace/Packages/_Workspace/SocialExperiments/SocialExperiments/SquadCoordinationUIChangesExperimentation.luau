@@ -2,6 +2,7 @@
 local squadCoordinationUiExperimentLayer = game:DefineFastString("SquadCoordinationUiExperimentLayer", "Party.Coordination.UI")
 local squadEnablePartyCoordinationUiVariant = game:DefineFastString("SquadEnablePartyCoordinationUiVariant", "enablePartyCoordinationUi")
 local forceEnablePartyCoordinationUiChanges3 = game:DefineFastFlag("ForceEnablePartyCoordinationUiChanges3", false)
+local partyCoordinationUIExposureEnabled = game:DefineFastFlag("PartyCoordinationUIExposureEnabled", false)
 
 local function _(p1)
 	-- upvalues: experimentCacheManager (ref), squadCoordinationUiExperimentLayer (ref)
@@ -27,9 +28,10 @@ return {
 		return var1
 	end,
 	logExposure = function()
-		-- upvalues: experimentCacheManager (ref), squadCoordinationUiExperimentLayer (ref)
-		if experimentCacheManager.default:getLayerVariables(squadCoordinationUiExperimentLayer) ~= nil then
+		-- upvalues: partyCoordinationUIExposureEnabled (ref), experimentCacheManager (ref), squadCoordinationUiExperimentLayer (ref)
+		if partyCoordinationUIExposureEnabled and experimentCacheManager.default:getLayerVariables(squadCoordinationUiExperimentLayer) ~= nil then
 			experimentCacheManager.default:logLayerExposure(squadCoordinationUiExperimentLayer)
 		end
-	end
+	end,
+	isLogExposureEnabled = partyCoordinationUIExposureEnabled
 }

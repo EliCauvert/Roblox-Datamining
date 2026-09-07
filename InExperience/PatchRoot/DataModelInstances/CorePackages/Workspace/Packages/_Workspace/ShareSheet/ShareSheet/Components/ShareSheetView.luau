@@ -6,7 +6,7 @@ local divider = foundationModule.Divider
 local sheet = foundationModule.Sheet
 local text = foundationModule.Text
 local view = foundationModule.View
-local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemetry)
+local fFlagShareSheetTelemetryRefactorModule = require(shareSheet.Flags.FFlagShareSheetTelemetryRefactor)
 local shareSheetSocialRowModule = require(script.Parent.ShareSheetSocialRow)
 local shareSheetActionRowModule = require(script.Parent.ShareSheetActionRow)
 local shareSendRowModule = require(script.Parent.ShareSendRow)
@@ -19,14 +19,11 @@ local function setContentScrollingFrameRef(value)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), shareSheetTelemetryModule (ref), sheet (ref), text (ref), setContentScrollingFrameRef (ref), view (ref), shareSheetSocialRowModule (ref), divider (ref), shareSendRowModule (ref), shareSheetActionRowModule (ref)
+	-- upvalues: reactModule (ref), sheet (ref), text (ref), setContentScrollingFrameRef (ref), view (ref), shareSheetSocialRowModule (ref), divider (ref), shareSendRowModule (ref), fFlagShareSheetTelemetryRefactorModule (ref), shareSheetActionRowModule (ref)
 	return reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
 		isOpen = p1.isOpen,
-		onClose = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), shareSheetTelemetryModule (copy)
-			p1.onCloseWithReason(shareSheetTelemetryModule.CloseReason.UserDismissed)
-		end, { p1.onCloseWithReason })
+		onClose = p1.onClose
 	}, {
 		Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
 			Title = reactModule.createElement(text, {
@@ -54,7 +51,7 @@ return function(p1)
 					label = p1.sendLabel,
 					messagePlaceholder = p1.messagePlaceholder,
 					onActivated = p1.onSendActivated,
-					onFocusGained = p1.onComposerFocused
+					onFocusGained = if fFlagShareSheetTelemetryRefactorModule then p1.onComposerFocused else nil
 				}) else reactModule.createElement(shareSheetActionRowModule, {
 					LayoutOrder = 3,
 					canShare = p1.canShareLink,

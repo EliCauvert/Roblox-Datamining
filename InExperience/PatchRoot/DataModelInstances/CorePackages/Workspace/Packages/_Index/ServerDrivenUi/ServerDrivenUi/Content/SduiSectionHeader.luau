@@ -1,7 +1,6 @@
 ﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
 local parent = serverDrivenUi.Parent
 local reactModule = require(parent.React)
-local combineReactTags = require(parent.RoactUtils).combineReactTags
 local UIBloxModule = require(parent.UIBlox)
 local foundationModule = require(parent.Foundation)
 local useTokens = foundationModule.Hooks.useTokens
@@ -12,12 +11,11 @@ local iconWithTooltip = require(parent.AppBlox).IconWithTooltip
 local sduiTextIconRowModule = require(serverDrivenUi.Content.SduiTextIconRow)
 local images = require(parent.FoundationImages).Images
 local getImageData = require(parent.RobloxAppAssets).GetImageData
-local fFlagLuaAppEnableSduiHomePage = require(parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local addLayoutOrderToSduiSectionHeaderIconComponent = game:DefineFastFlag("AddLayoutOrderToSduiSectionHeaderIconComponent", false)
 local luaAppSduiSeeAllArrowIconMigration2 = game:DefineFastFlag("LuaAppSduiSeeAllArrowIconMigration2", false)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), responsiveModule (ref), luaAppSduiSeeAllArrowIconMigration2 (ref), getImageData (ref), images (ref), addLayoutOrderToSduiSectionHeaderIconComponent (ref), reactModule (ref), view (ref), fFlagLuaAppEnableSduiHomePage (ref), combineReactTags (ref), sduiTextIconRowModule (ref), iconWithTooltip (ref), tooltipOrientation (ref)
+	-- upvalues: useTokens (ref), responsiveModule (ref), luaAppSduiSeeAllArrowIconMigration2 (ref), getImageData (ref), images (ref), addLayoutOrderToSduiSectionHeaderIconComponent (ref), reactModule (ref), view (ref), sduiTextIconRowModule (ref), iconWithTooltip (ref), tooltipOrientation (ref)
 	local var1
 	local layoutOrder = p1.layoutOrder
 	local anchorPoint = p1.anchorPoint
@@ -66,7 +64,7 @@ return reactModule.memo(function(p1)
 		BorderSizePixel = 0,
 		LayoutOrder = layoutOrder,
 		ZIndex = zIndex,
-		[reactModule.Tag] = if fFlagLuaAppEnableSduiHomePage then if fFlagLuaAppEnableSduiHomePage then combineReactTags(p1.tag, if p1.testId then `data-testid={p1.testId}` else nil) else nil elseif p1.testId then `data-testid={p1.testId}` else nil
+		[reactModule.Tag] = if p1.testId then `data-testid={p1.testId}` else nil
 	}, {
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,

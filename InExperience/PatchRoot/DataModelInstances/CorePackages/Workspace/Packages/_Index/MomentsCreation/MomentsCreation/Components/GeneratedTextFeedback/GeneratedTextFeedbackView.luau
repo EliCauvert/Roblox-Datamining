@@ -10,10 +10,9 @@ local iconName = foundationModule.Enums.IconName
 local iconVariant = foundationModule.Enums.IconVariant
 local inputSize = foundationModule.Enums.InputSize
 local textFeedbackReasonDialogModule = require(momentsCreation.Components.Dialogs.TextFeedbackReasonDialog)
-local getFFlagMomentsGeneratedTextDisclosureWrapModule = require(momentsCreation.Flags.GetFFlagMomentsGeneratedTextDisclosureWrap)
 
 return function(p1)
-	-- upvalues: getFFlagMomentsGeneratedTextDisclosureWrapModule (ref), reactModule (ref), view (ref), text (ref), iconButton (ref), iconName (ref), iconVariant (ref), inputSize (ref), buttonVariant (ref), textFeedbackReasonDialogModule (ref)
+	-- upvalues: reactModule (ref), view (ref), text (ref), iconButton (ref), iconName (ref), iconVariant (ref), inputSize (ref), buttonVariant (ref), textFeedbackReasonDialogModule (ref)
 	return if p1.visible then reactModule.createElement(reactModule.Fragment, nil, {
 		Feedback = reactModule.createElement(view, {
 			tag = "col align-x-center gap-small size-full-0 auto-y",
@@ -21,7 +20,7 @@ return function(p1)
 		}, {
 			Disclosure = reactModule.createElement(text, {
 				LayoutOrder = 1,
-				tag = if getFFlagMomentsGeneratedTextDisclosureWrapModule then "size-full-0 auto-y text-body-small text-wrap text-align-x-center text-align-y-top content-neutral" else "size-full-0 auto-y text-body-small text-align-x-center text-align-y-top content-neutral",
+				tag = "size-full-0 auto-y text-body-small text-align-x-center text-align-y-top content-neutral",
 				Text = p1.disclosureText
 			}),
 			Icons = reactModule.createElement(view, {

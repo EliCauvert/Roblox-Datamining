@@ -9,6 +9,7 @@ local _ = require(sduiCoreSystem.SduiErrors)
 local discoverySduiErrorHundredthsPercent = game:DefineFastInt("DiscoverySduiErrorHundredthsPercent", 0)
 local discoverySduiTimerEventsHundredthsPercent = game:DefineFastInt("DiscoverySduiTimerEventsHundredthsPercent", 0)
 local discoveryFeedStatsHundredthsPercent = game:DefineFastInt("DiscoveryFeedStatsHundredthsPercent", 0)
+local luaAppSduiErrorPage = game:DefineFastFlag("LuaAppSduiErrorPage", false)
 local t = {
 	eventName = "DiscoverySdui_ErrorDetails",
 	description = "Error details related to discovery server-driven ui",
@@ -62,7 +63,7 @@ return {
 		t_4 = {}
 	end,
 	reportError = function(p1, p2, p3, p4)
-		-- upvalues: loggingProtocolModule (ref), t_4 (write), t_1 (ref), t (ref), cryoModule (ref), tutilsModule (ref)
+		-- upvalues: loggingProtocolModule (ref), t_4 (write), t_1 (ref), t (ref), cryoModule (ref), luaAppSduiErrorPage (ref), tutilsModule (ref)
 		p4 = p4 or loggingProtocolModule.default
 		assert(p4, "loggingProtocol must exist")
 		local var1 = `{p1}_{p2.name}_{p2.componentType}_{p2.parserName}_{p2.propName}`
@@ -80,7 +81,10 @@ return {
 		p4:logRobloxTelemetryEvent(t, {
 			"addSessionInfo",
 			loggingProtocolModule.StandardizedFields.addOsInfo
-		}, cryoModule.Dictionary.union({ errorType = p1, page = p3 }, p2 or {}), p3)
+		}, cryoModule.Dictionary.union({
+			errorType = p1,
+			page = if luaAppSduiErrorPage then p3 else nil
+		}, p2 or {}), p3)
 		
 		if not _G.__TESTEZ_RUNNING_TEST__ then
 			warn(`Discovery server-driven ui error \n{p1} \n{tutilsModule.toString(p2)}`)

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("BulkPurchaseRobloxPlusUpsell", false) and game:GetEngineFeature("RefreshBulkPurchaseEnabled")

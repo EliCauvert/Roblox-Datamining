@@ -2,7 +2,7 @@
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local UGCValidationVertexSimilarityMaxPercent = game:DefineFastInt("UGCValidationVertexSimilarityMaxPercent", 30)
+local getFFlagUGCValidateAQMeshQualityBlockUploadModule = require(parent.flags.getFFlagUGCValidateAQMeshQualityBlockUpload)
 
 return {
 	categories = {
@@ -13,32 +13,40 @@ return {
 	},
 	fflag = require(parent.flags.getFFlagUGCValidateAQMeshQuality),
 	run = function(p1, p2)
-		-- upvalues: errorSourceStringsModule (ref), UGCValidationVertexSimilarityMaxPercent (ref)
+		-- upvalues: getFFlagUGCValidateAQMeshQualityBlockUploadModule (ref), errorSourceStringsModule (ref)
 		local measureVertexSimilarity = p2.aqsSummaryData.Measure_Vertex_Similarity
 		
 		if measureVertexSimilarity == nil then
+			if getFFlagUGCValidateAQMeshQualityBlockUploadModule() then
+				error("Measure_Vertex_Similarity: AQS summary data is nil")
+				
+				return
+			end
 			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Vertex_Similarity" })
 			
 			return
-		end
-		local var1 = UGCValidationVertexSimilarityMaxPercent / 100
-		
-		for i, v in measureVertexSimilarity do
-			if i ~= "measurement_score" then
-				if v ~= nil and v.similar_vertex_percent ~= nil then
-					local similarVertexPercent = tonumber(v.similar_vertex_percent) or 0
-					
-					if var1 < similarVertexPercent then
-						p1:warn(errorSourceStringsModule.Keys.AQSWarn_VertexSimilarity, {
-							partName = i,
-							similar_vertex_percent = string.format("%.2f", similarVertexPercent * 100),
-							threshold = tostring(UGCValidationVertexSimilarityMaxPercent)
-						})
+		else
+			for i, v in measureVertexSimilarity do
+				if i ~= "measurement_score" then
+					if v ~= nil and v.score ~= nil then
+						if tonumber(v.score) ~= 100 then
+							local t = {
+								partName = i,
+								similar_vertex_percent = string.format("%.2f", (tonumber(v.similar_vertex_percent) or 0) * 100),
+								score = tostring(math.floor(tonumber(v.score) or 0))
+							}
+							
+							if getFFlagUGCValidateAQMeshQualityBlockUploadModule() then
+								p1:fail(errorSourceStringsModule.Keys.AQSWarn_VertexSimilarity, t)
+							else
+								p1:warn(errorSourceStringsModule.Keys.AQSWarn_VertexSimilarity, t)
+							end
+						end
 					end
+					p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Vertex_Similarity" })
+					
+					return
 				end
-				p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Vertex_Similarity" })
-				
-				return
 			end
 		end
 	end

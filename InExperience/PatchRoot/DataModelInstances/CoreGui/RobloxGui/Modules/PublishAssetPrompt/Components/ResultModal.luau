@@ -12,11 +12,10 @@ local inputTypeModule = require(corePackagesService.Workspace.Packages.InputType
 local getInputGroup = require(corePackagesService.Workspace.Packages.InputType).getInputGroup
 local closeResultModalModule = require(script.Parent.Parent.Thunks.CloseResultModal)
 local getFFlagValidateDescriptionModule = require(script.Parent.Parent.GetFFlagValidateDescription)
-local var1 = if game:GetEngineFeature("EnableImagePublish") then Enum.PromptCreatePlatformContentResult else Enum.PromptPublishAssetResult
 local resultModal = roactModule.PureComponent:extend("ResultModal")
 resultModal.validateProps = tModule.strictInterface({
 	screenSize = tModule.Vector2,
-	resultModalType = tModule.enum(var1),
+	resultModalType = tModule.enum(Enum.PromptPublishAssetResult),
 	closeResultModal = tModule.callback
 })
 
@@ -33,13 +32,13 @@ function resultModal.init(p1)
 end
 
 function resultModal.getLocalizedStringForResultPrompt(_, p1)
-	-- upvalues: var1 (ref), robloxTranslatorModule (ref)
-	return if p1 == var1.Success then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessMessage") elseif p1 == var1.UploadFailed then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailed") elseif p1 == var1.NoUserInput then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.NoUserInput") else robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.UndefinedError", { RESULT_TYPE = tostring(p1) })
+	-- upvalues: robloxTranslatorModule (ref)
+	return if p1 == Enum.PromptPublishAssetResult.Success then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessMessage") elseif p1 == Enum.PromptPublishAssetResult.UploadFailed then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailed") elseif p1 == Enum.PromptPublishAssetResult.NoUserInput then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.NoUserInput") else robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.UndefinedError", { RESULT_TYPE = tostring(p1) })
 end
 
 function resultModal.getLocalizedTitleForResultPrompt(_, p1)
-	-- upvalues: var1 (ref), robloxTranslatorModule (ref)
-	return if p1 == var1.Success then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessTitle") else robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailedTitle")
+	-- upvalues: robloxTranslatorModule (ref)
+	return if p1 == Enum.PromptPublishAssetResult.Success then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessTitle") else robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailedTitle")
 end
 
 function resultModal.render(p1)

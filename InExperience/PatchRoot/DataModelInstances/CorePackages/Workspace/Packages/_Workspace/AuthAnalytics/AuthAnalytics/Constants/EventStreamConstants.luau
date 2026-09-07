@@ -67,7 +67,6 @@
 		TryAgain = "tryAgain",
 		GoHome = "goHome",
 		RegisterPasskey = "registerPasskey",
-		PlayNow = "playNow",
 		AccountPickerSignInAnotherAccount = "accountPickerSignInAnotherAccount",
 		AccountPickerCreateAccount = "accountPickerCreateAccount",
 		AccountPickerMoreOptions = "accountPickerMoreOptions",

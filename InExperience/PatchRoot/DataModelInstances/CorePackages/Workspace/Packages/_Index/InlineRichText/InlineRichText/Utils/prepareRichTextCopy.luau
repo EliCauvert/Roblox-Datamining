@@ -1,5 +1,4 @@
-﻿local fFlagInlineRichTextSkipPlaintextEscape = require(script:FindFirstAncestor("InlineRichText").Parent.SharedFlags).FFlagInlineRichTextSkipPlaintextEscape
-local char = utf8.char(8220)
+﻿local char = utf8.char(8220)
 local char_1 = utf8.char(8221)
 local char_2 = utf8.char(8217)
 
@@ -40,8 +39,6 @@ local function toTypographicQuotesOutsideTags(p1)
 end
 
 return function(p2)
-	-- upvalues: decodeQuoteEntities (ref), fFlagInlineRichTextSkipPlaintextEscape (ref), toTypographicQuotesOutsideTags (ref)
-	local var4 = decodeQuoteEntities(p2)
-	
-	return if fFlagInlineRichTextSkipPlaintextEscape then var4 else toTypographicQuotesOutsideTags(var4)
+	-- upvalues: toTypographicQuotesOutsideTags (ref), decodeQuoteEntities (ref)
+	return toTypographicQuotesOutsideTags(decodeQuoteEntities(p2))
 end

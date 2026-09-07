@@ -1,4 +1,5 @@
 ﻿local guiService = game:GetService("GuiService")
+local httpService = game:GetService("HttpService")
 local userGameSettingsService = UserSettings():GetService("UserGameSettings")
 local corePackagesService = game:GetService("CorePackages")
 local coreGuiService = game:GetService("CoreGui")
@@ -14,18 +15,21 @@ local var1 = require(robloxGui.Modules.TenFootInterface):IsEnabled()
 local getFFlagFixIGMTabTransitionsModule = require(script.Parent.Flags.GetFFlagFixIGMTabTransitions)
 local fFlagIEMSettingsGroupsModule = require(script.Parent.Flags.FFlagIEMSettingsGroups)
 local fFlagIEMFocusNavSupportNewButtonsModule = require(script.Parent.Flags.FFlagIEMFocusNavSupportNewButtons)
-local fFlagIEMTabFocusNav = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagIEMTabFocusNav
-local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
+local fFlagIEMTabFocusNav = sharedFlagsModule.FFlagIEMTabFocusNav
+local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
+local fFlagIEMFocusNavPeoplePageToButtons = sharedFlagsModule.FFlagIEMFocusNavPeoplePageToButtons
+local fFlagIEMSettingsPageDisplaying = sharedFlagsModule.FFlagIEMSettingsPageDisplaying
 
 local function Initialize()
-	-- upvalues: isSideSheetEnabledModule (ref), signal (ref), fFlagIEMTabFocusNav (ref), create (ref), utilityModule (ref), var1 (ref), themeModule (ref), guiService (ref), fFlagIEMSettingsGroupsModule (ref), fFlagIEMFocusNavSupportNewButtonsModule (ref), coreGuiService (ref), userGameSettingsService (ref), getFFlagFixIGMTabTransitionsModule (ref), tweenService (ref)
+	-- upvalues: fFlagEnableSideSheet (ref), signal (ref), fFlagIEMTabFocusNav (ref), create (ref), utilityModule (ref), var1 (ref), themeModule (ref), fFlagIEMFocusNavPeoplePageToButtons (ref), guiService (ref), httpService (ref), fFlagIEMSettingsGroupsModule (ref), fFlagIEMFocusNavSupportNewButtonsModule (ref), coreGuiService (ref), fFlagIEMSettingsPageDisplaying (ref), userGameSettingsService (ref), getFFlagFixIGMTabTransitionsModule (ref), tweenService (ref)
 	local hidden = {
 		HubRef = nil,
 		LastSelectedObject = nil,
 		TabPosition = 0,
 		Active = false,
 		OpenStateChangedCount = 0,
-		ShouldShowBottomBar = not isSideSheetEnabledModule,
+		ShouldShowBottomBar = not fFlagEnableSideSheet,
 		ShouldShowHubBar = true,
 		ShouldDisableDefaultScroll = false,
 		IsPageClipped = true,
@@ -192,7 +196,12 @@ local function Initialize()
 		SortOrder = Enum.SortOrder.LayoutOrder,
 		Parent = hidden.Page
 	})
-	hidden.Page.SelectionGroup = true
+	
+	if fFlagIEMFocusNavPeoplePageToButtons then
+		hidden.Page.SelectionGroup = true
+	else
+		guiService:AddSelectionParent(httpService:GenerateGUID(false), hidden.Page)
+	end
 	hidden.Displaying = Instance.new("BindableEvent")
 	hidden.Displaying.Name = "Displaying"
 	hidden.Displayed = Instance.new("BindableEvent")
@@ -256,7 +265,7 @@ local function Initialize()
 	end
 	
 	function hidden.Display(_, p2, p3)
-		-- upvalues: hidden (ref), var3 (ref), var4 (ref), userGameSettingsService (copy), getFFlagFixIGMTabTransitionsModule (copy), var2 (write), tweenService (copy)
+		-- upvalues: hidden (ref), var3 (ref), var4 (ref), fFlagIEMSettingsPageDisplaying (copy), userGameSettingsService (copy), getFFlagFixIGMTabTransitionsModule (copy), var2 (write), tweenService (copy)
 		hidden.OpenStateChangedCount += 1
 		
 		if hidden.TabHeader then
@@ -266,7 +275,10 @@ local function Initialize()
 		end
 		hidden.Page.Parent = p2
 		hidden.Page.Visible = true
-		hidden.Displaying:Fire()
+		
+		if fFlagIEMSettingsPageDisplaying then
+			hidden.Displaying:Fire()
+		end
 		local uDim2 = UDim2.new(0, 0, 0, 0)
 		
 		local var7 = function()

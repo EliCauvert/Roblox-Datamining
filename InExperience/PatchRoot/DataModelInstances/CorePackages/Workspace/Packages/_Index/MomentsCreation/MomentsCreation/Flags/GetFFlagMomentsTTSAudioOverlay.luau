@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("MomentsTTSAudioOverlayLua4", false)
+﻿return game:DefineFastFlag("MomentsTTSAudioOverlayLua2", false)

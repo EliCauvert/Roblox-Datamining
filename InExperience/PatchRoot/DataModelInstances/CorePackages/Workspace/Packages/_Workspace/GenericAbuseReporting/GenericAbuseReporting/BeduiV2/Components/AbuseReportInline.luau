@@ -8,6 +8,8 @@ local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavi
 local useInExpFocusNavigationRefsModule = require(genericAbuseReporting.BeduiV2.Hooks.FocusNavigation.useInExpFocusNavigationRefs)
 local useScrollNavigationBindingsModule = require(genericAbuseReporting.BeduiV2.Hooks.FocusNavigation.useScrollNavigationBindings)
 local fFlagAbuseReportSlideOutgoingInputSinkModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSlideOutgoingInputSink)
+local fFlagAbuseReportV2ScrollNavigationModule = require(genericAbuseReporting.Flags.FFlagAbuseReportV2ScrollNavigation)
+local fFlagAbuseReportInlineTitleDisclosureFocus = require(parent.SharedFlags).FFlagAbuseReportInlineTitleDisclosureFocus
 local animatePresence = motionModule.AnimatePresence
 local icon = foundationModule.Icon
 local iconName = foundationModule.Enums.IconName
@@ -24,13 +26,13 @@ local useArTranslation = require(genericAbuseReporting.BeduiV2.Utils.Translate.a
 local INLINE_LANDSCAPE_WIDTH = layoutSlotsModule.INLINE_LANDSCAPE_WIDTH
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useArTranslation (ref), reactModule (ref), animatePresence (ref), feedbackModule (ref), INLINE_LANDSCAPE_WIDTH (ref), fFlagAbuseReportSlideOutgoingInputSinkModule (ref), var1 (write), slideTransitionLegacyModule (ref), view (ref), useScrollNavigationBindingsModule (ref), useInExpFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), icon (ref), iconName (ref), inputSize (ref), abuseReportTooltipModule (ref)
+	-- upvalues: useTokens (ref), useArTranslation (ref), reactModule (ref), animatePresence (ref), feedbackModule (ref), INLINE_LANDSCAPE_WIDTH (ref), fFlagAbuseReportSlideOutgoingInputSinkModule (ref), var1 (write), slideTransitionLegacyModule (ref), view (ref), fFlagAbuseReportV2ScrollNavigationModule (ref), useScrollNavigationBindingsModule (ref), fFlagAbuseReportInlineTitleDisclosureFocus (ref), useInExpFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), icon (ref), iconName (ref), inputSize (ref), abuseReportTooltipModule (ref)
 	local var2 = useTokens()
 	local translateIntoString = useArTranslation().translateIntoString
 	local abuseReportFlow = p1.abuseReportFlow
 	local config = abuseReportFlow.config
 	local pendingInlineAlert = abuseReportFlow.pendingInlineAlert
-	local var3 = reactModule.createElement(if fFlagAbuseReportSlideOutgoingInputSinkModule then var2 else slideTransitionLegacyModule, {
+	local var3 = reactModule.createElement(if fFlagAbuseReportSlideOutgoingInputSinkModule then var1 else slideTransitionLegacyModule, {
 		nodeContent = reactModule.createElement(view, { tag = "col align-x-center size-full" }, {
 			FeedbackAlertElement = reactModule.createElement(animatePresence, nil, if pendingInlineAlert then {
 				Alert = reactModule.createElement(feedbackModule, {
@@ -56,17 +58,17 @@ return reactModule.memo(function(p1)
 			return not p2
 		end)
 	end, {})
-	local var7 = useInExpFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, reactModule.useCallback(function()
+	local var7 = if fFlagAbuseReportInlineTitleDisclosureFocus then useInExpFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, reactModule.useCallback(function()
 		-- upvalues: var5 (ref)
 		var5(false)
-	end, {}), var4, var4)
+	end, {}), var4, var4) else nil
 	
 	return reactModule.createElement(view, {
 		tag = {
 			["size-full"] = p1.shouldUseOverlaidControls,
 			["col size-full"] = not p1.shouldUseOverlaidControls
 		},
-		ref = useScrollNavigationBindingsModule()
+		ref = if fFlagAbuseReportV2ScrollNavigationModule then if fFlagAbuseReportV2ScrollNavigationModule then useScrollNavigationBindingsModule() else nil else nil
 	}, {
 		TopControlsContainer = reactModule.createElement(view, {
 			LayoutOrder = 1,
@@ -101,7 +103,7 @@ return reactModule.memo(function(p1)
 				p1.shouldUseOverlaidControls
 			}),
 			AbuseReportTooltipContainer = reactModule.useMemo(function()
-				-- upvalues: config (ref), reactModule (copy), view (copy), p1 (ref), var6 (ref), abuseReportTooltipModule (copy), var4 (ref), var7 (ref), icon (copy), iconName (copy), inputSize (copy)
+				-- upvalues: config (ref), reactModule (copy), view (copy), p1 (ref), var6 (ref), abuseReportTooltipModule (copy), var4 (ref), fFlagAbuseReportInlineTitleDisclosureFocus (copy), var7 (write), icon (copy), iconName (copy), inputSize (copy)
 				return if config.display.titleDisclosure then reactModule.createElement(view, {
 					LayoutOrder = 3,
 					ZIndex = 2,
@@ -118,11 +120,11 @@ return reactModule.memo(function(p1)
 					buttonLabel = config.display.titleDisclosure.buttonLabel,
 					isOpen = var4,
 					onClose = var6,
-					ref = var7
+					ref = if fFlagAbuseReportInlineTitleDisclosureFocus then var7 else nil
 				}, reactModule.createElement(icon, { name = iconName.CircleI, size = inputSize.Medium })))) else nil
 			end, {
 				config.display.titleDisclosure,
-				var7,
+				if fFlagAbuseReportInlineTitleDisclosureFocus then var7 else nil,
 				var6,
 				var4,
 				p1.shouldUseOverlaidControls

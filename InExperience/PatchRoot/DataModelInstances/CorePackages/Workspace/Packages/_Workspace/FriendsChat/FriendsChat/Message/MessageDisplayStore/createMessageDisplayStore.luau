@@ -243,15 +243,6 @@ return function(p3, p4)
 			local rowIndex = var14(p7)[var13.rowIndex]
 			
 			return if rowIndex == nil then nil else buildRowDisplayModule(rowIndex, resolveForRowSpec(rowIndex, p7), p8 or {})
-		end,
-		getMessageIdFromDisplayId = function(p6)
-			-- upvalues: var4 (ref)
-			if p6 == nil then
-				return nil
-			end
-			local var13 = var4(false).idToHandle[p6]
-			
-			return if var13 then var13.messageId else nil
 		end
 	}
 end

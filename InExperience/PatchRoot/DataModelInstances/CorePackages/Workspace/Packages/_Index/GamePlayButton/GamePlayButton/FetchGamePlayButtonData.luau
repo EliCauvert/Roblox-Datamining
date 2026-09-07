@@ -7,8 +7,6 @@ local fetchGamePlayabilityAndProductInfo = gameDetailRoduxModule.FetchGamePlayab
 local apiFetchAgeRecommendations = gameDetailRoduxModule.AgeRecommendations.ApiFetchAgeRecommendations
 local fetchUserGameVotes = require(parent.GameVotesRodux).UserGameVotes.FetchUserGameVotes
 local gameInfosReducer = require(parent.GameInfosRodux).GameInfosReducer
-local dataHydrationModule = require(parent.DataHydration)
-local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
 local nextDataExpirationTimeRoduxModule = require(parent.NextDataExpirationTimeRodux)
 local setNextDataExpirationTime = nextDataExpirationTimeRoduxModule.SetNextDataExpirationTime
 local nextDataExpirationTimeReducer = nextDataExpirationTimeRoduxModule.NextDataExpirationTimeReducer
@@ -17,32 +15,96 @@ local playabilityStatusEnum = require(parent.DiscoveryTypes).PlayabilityStatusEn
 local apiFetchShowAgeVerificationOverlay = require(parent.VoiceChat).AgeVerificationOverlay.ApiFetchShowAgeVerificationOverlay
 local promiseModule = require(parent.Promise)
 local getFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds = require(parent.SharedFlags).GetFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds
+local luaAppFetchContentMaturityWithPlayability = game:DefineFastFlag("LuaAppFetchContentMaturityWithPlayability", false)
 local runService = game:GetService("RunService")
-local t = {}
+local t = {
+	IsLoading = function(p1, p2)
+		-- upvalues: apiFetchGameDetails (ref), retrievalStatus (ref), fetchGamePlayabilityAndProductInfo (ref), luaAppFetchContentMaturityWithPlayability (ref), playabilityStatusEnum (ref), gameInfosReducer (ref), apiFetchAgeRecommendations (ref), apiFetchShowAgeVerificationOverlay (ref)
+		local fetchingStatus = apiFetchGameDetails.GetFetchingStatus(p1, p2)
+		
+		if fetchingStatus == retrievalStatus.NotStarted or fetchingStatus == retrievalStatus.Fetching then
+			return true
+		end
+		local fetchingStatus_1 = fetchGamePlayabilityAndProductInfo.GetFetchingStatus(p1, p2)
+		
+		if fetchingStatus_1 == retrievalStatus.NotStarted or fetchingStatus_1 == retrievalStatus.Fetching then
+			return true
+		elseif luaAppFetchContentMaturityWithPlayability then
+			local var1 = p1.PlayabilityStatus and p1.PlayabilityStatus[p2]
+			
+			if var1 then
+				local playabilityStatus = var1.playabilityStatus
+				local var2 = luaAppFetchContentMaturityWithPlayability
+				
+				if var2 then
+					var2 = false
+					
+					if playabilityStatus == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls then
+						local var3
+						local var4 = p1.AgeRecommendations and p1.AgeRecommendations[p2]
+						
+						if var4 and var4.summary and (var4.summary.ageRecommendation and var4.summary.ageRecommendation.contentMaturity) then
+							var3 = true
+						else
+							local var5 = p1.Personalization and (p1.Personalization[gameInfosReducer.key] and p1.Personalization[gameInfosReducer.key][p2])
+							var3 = var5 and var5.contentMaturity ~= nil
+						end
+						var2 = not var3
+					end
+				end
+				if var2 then
+					var2 = apiFetchAgeRecommendations.GetFetchingStatus(p1, p2)
+					
+					if var2 == retrievalStatus.NotStarted or var2 == retrievalStatus.Fetching then
+						return true
+					elseif game:GetEngineFeature("VoiceChatSupported") then
+						local fetchingStatus_2 = apiFetchShowAgeVerificationOverlay.GetFetchingStatus(p1, p2)
+						
+						return fetchingStatus_2 == retrievalStatus.NotStarted or fetchingStatus_2 == retrievalStatus.Fetching
+					end
+				end
+			end
+		end
+	end
+}
 
-local function hasContentMaturity(p1, p2)
-	-- upvalues: fFlagMigrateGameInfoToStore (ref), dataHydrationModule (ref), gameInfosReducer (ref)
+local function _(p1, p2)
+	-- upvalues: gameInfosReducer (ref)
 	local var1 = p1.AgeRecommendations and p1.AgeRecommendations[p2]
 	
 	if var1 and var1.summary and (var1.summary.ageRecommendation and var1.summary.ageRecommendation.contentMaturity) then
 		return true
-	elseif not fFlagMigrateGameInfoToStore then
-		local var2 = p1.Personalization and (p1.Personalization[gameInfosReducer.key] and p1.Personalization[gameInfosReducer.key][p2])
-		
-		return var2 and var2.contentMaturity ~= nil
 	end
-	local var3 = dataHydrationModule.Game.getGameInfoStore(false).getGameInfo(p2).data(false)
+	local var2 = p1.Personalization and (p1.Personalization[gameInfosReducer.key] and p1.Personalization[gameInfosReducer.key][p2])
 	
-	return var3 ~= nil and var3.contentMaturity ~= nil
+	return var2 and var2.contentMaturity ~= nil
 end
 
-local function _(p1, p2, p3)
-	-- upvalues: playabilityStatusEnum (ref), hasContentMaturity (ref)
-	return p3 == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and not hasContentMaturity(p1, p2)
+local _ = function(p1, p2, p3)
+	-- upvalues: luaAppFetchContentMaturityWithPlayability (ref), playabilityStatusEnum (ref), gameInfosReducer (ref)
+	local var1 = luaAppFetchContentMaturityWithPlayability
+	
+	if var1 then
+		var1 = false
+		
+		if p3 == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls then
+			local var2
+			local var3 = p1.AgeRecommendations and p1.AgeRecommendations[p2]
+			
+			if var3 and var3.summary and (var3.summary.ageRecommendation and var3.summary.ageRecommendation.contentMaturity) then
+				var2 = true
+			else
+				local var4 = p1.Personalization and (p1.Personalization[gameInfosReducer.key] and p1.Personalization[gameInfosReducer.key][p2])
+				var2 = var4 and var4.contentMaturity ~= nil
+			end
+			var1 = not var2
+		end
+	end
+	return var1
 end
 
 local function playButtonDataFetchPromises(p1, p2, p3, p4, p5)
-	-- upvalues: apiFetchGameDetails (ref), retrievalStatus (ref), fetchGamePlayabilityAndProductInfo (ref), playabilityStatusEnum (ref), hasContentMaturity (ref), apiFetchAgeRecommendations (ref), promiseModule (ref), apiFetchShowAgeVerificationOverlay (ref), fetchUserGameVotes (ref)
+	-- upvalues: apiFetchGameDetails (ref), retrievalStatus (ref), fetchGamePlayabilityAndProductInfo (ref), luaAppFetchContentMaturityWithPlayability (ref), playabilityStatusEnum (ref), gameInfosReducer (ref), apiFetchAgeRecommendations (ref), promiseModule (ref), apiFetchShowAgeVerificationOverlay (ref), fetchUserGameVotes (ref)
 	local t = {}
 	
 	if apiFetchGameDetails.GetFetchingStatus(p2:getState(), p3) ~= retrievalStatus.Fetching and (p4 or p2:getState().GameDetails[p3] == nil) then
@@ -51,10 +113,35 @@ local function playButtonDataFetchPromises(p1, p2, p3, p4, p5)
 	local fetchingStatus = fetchGamePlayabilityAndProductInfo.GetFetchingStatus(p2:getState(), p3)
 	
 	if p4 or p5 or (fetchingStatus == retrievalStatus.NotStarted or fetchingStatus == retrievalStatus.Failed) then
-		table.insert(t, p2:dispatch(fetchGamePlayabilityAndProductInfo.Fetch(p1, p3)):andThen(function(p6)
-			-- upvalues: p2 (ref), p3 (ref), playabilityStatusEnum (copy), hasContentMaturity (copy), apiFetchAgeRecommendations (copy), p1 (ref), promiseModule (copy)
-			return if p6 == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and not hasContentMaturity(p2:getState(), p3) then p2:dispatch(apiFetchAgeRecommendations.Fetch(p1, p3)) else promiseModule.resolve(p6)
-		end))
+		local var1 = p2:dispatch(fetchGamePlayabilityAndProductInfo.Fetch(p1, p3))
+		
+		if luaAppFetchContentMaturityWithPlayability then
+			var1 = var1:andThen(function(p6)
+				-- upvalues: p2 (ref), p3 (ref), luaAppFetchContentMaturityWithPlayability (copy), playabilityStatusEnum (copy), gameInfosReducer (copy), apiFetchAgeRecommendations (copy), p1 (ref), promiseModule (copy)
+				local state = p2:getState()
+				local var2 = p3
+				local var3 = luaAppFetchContentMaturityWithPlayability
+				
+				if var3 then
+					var3 = false
+					
+					if p6 == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls then
+						local var4
+						local var5 = state.AgeRecommendations and state.AgeRecommendations[var2]
+						
+						if var5 and var5.summary and (var5.summary.ageRecommendation and var5.summary.ageRecommendation.contentMaturity) then
+							var4 = true
+						else
+							local var6 = state.Personalization and (state.Personalization[gameInfosReducer.key] and state.Personalization[gameInfosReducer.key][var2])
+							var4 = var6 and var6.contentMaturity ~= nil
+						end
+						var3 = not var4
+					end
+				end
+				return if var3 then p2:dispatch(apiFetchAgeRecommendations.Fetch(p1, p3)) else promiseModule.resolve(p6)
+			end)
+		end
+		table.insert(t, var1)
 	end
 	if game:GetEngineFeature("VoiceChatSupported") and apiFetchShowAgeVerificationOverlay.GetFetchingStatus(p2:getState(), p3) ~= retrievalStatus.Fetching and (p4 or p2:getState().ShowAgeVerificationOverlay[p3] == nil) then
 		table.insert(t, p2:dispatch(apiFetchShowAgeVerificationOverlay.Fetch(p1, p3)))
@@ -63,34 +150,6 @@ local function playButtonDataFetchPromises(p1, p2, p3, p4, p5)
 		p2:dispatch(fetchUserGameVotes.Fetch(p1, p3))
 	end
 	return t
-end
-
-function t.IsLoading(p1, p2)
-	-- upvalues: apiFetchGameDetails (ref), retrievalStatus (ref), fetchGamePlayabilityAndProductInfo (ref), playabilityStatusEnum (ref), hasContentMaturity (ref), apiFetchAgeRecommendations (ref), apiFetchShowAgeVerificationOverlay (ref)
-	local fetchingStatus = apiFetchGameDetails.GetFetchingStatus(p1, p2)
-	
-	if fetchingStatus == retrievalStatus.NotStarted or fetchingStatus == retrievalStatus.Fetching then
-		return true
-	end
-	local fetchingStatus_1 = fetchGamePlayabilityAndProductInfo.GetFetchingStatus(p1, p2)
-	
-	if fetchingStatus_1 == retrievalStatus.NotStarted or fetchingStatus_1 == retrievalStatus.Fetching then
-		return true
-	end
-	local fetchingStatus_2
-	local var1 = p1.PlayabilityStatus and p1.PlayabilityStatus[p2]
-	
-	if var1 and (var1.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and not hasContentMaturity(p1, p2)) then
-		fetchingStatus_2 = apiFetchAgeRecommendations.GetFetchingStatus(p1, p2)
-		
-		if fetchingStatus_2 == retrievalStatus.NotStarted or fetchingStatus_2 == retrievalStatus.Fetching then
-			return true
-		elseif game:GetEngineFeature("VoiceChatSupported") then
-			fetchingStatus_2 = apiFetchShowAgeVerificationOverlay.GetFetchingStatus(p1, p2)
-			
-			return fetchingStatus_2 == retrievalStatus.NotStarted or fetchingStatus_2 == retrievalStatus.Fetching
-		end
-	end
 end
 
 function t.Fetch(p1, p2, p3)

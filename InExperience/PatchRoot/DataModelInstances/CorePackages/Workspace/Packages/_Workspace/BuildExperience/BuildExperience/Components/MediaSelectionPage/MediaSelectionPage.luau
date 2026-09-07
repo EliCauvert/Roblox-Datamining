@@ -2,6 +2,7 @@
 local parent = buildExperience.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
+local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local iconButton = foundationModule.IconButton
@@ -10,12 +11,13 @@ local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
 local mediaSelectorModule = require(script.Parent.MediaSelector)
 local _ = require(script.Parent.types)
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), mediaSelectorModule (ref)
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), mediaSelectorModule (ref)
 	local var1 = reactModule.useRef(nil)
 	
 	return reactModule.createElement(view, { tag = "col size-full bg-surface-0" }, {
@@ -45,7 +47,7 @@ return function(p1)
 			Title = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "fill auto-y text-heading-medium text-align-x-left text-truncate-end content-emphasis",
-				Text = useLocalization({ title = localizationStringsModule.MEDIA_SELECTION_TITLE }).title
+				Text = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({ title = localizationStringsModule.MEDIA_SELECTION_TITLE }) else nil).title else localizationStringsModule.MEDIA_SELECTION_TITLE
 			})
 		}),
 		Content = reactModule.createElement(view, {

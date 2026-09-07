@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("BuildExperiencePersistChatDraft", false) and game:GetEngineFeature("BuildAppStorageKey")

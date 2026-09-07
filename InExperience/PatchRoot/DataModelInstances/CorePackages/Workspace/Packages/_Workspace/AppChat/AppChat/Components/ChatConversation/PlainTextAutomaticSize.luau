@@ -81,8 +81,7 @@ function PlainText(p1)
 			isRepliedTo = var1.isRepliedTo,
 			isPressed = var1.isPressed,
 			[reactModule.Change.AbsoluteSize] = var1[reactModule.Change.AbsoluteSize],
-			isLastMessageInMessageGroup = var1.isLastMessageInMessageGroup,
-			bubbleRef = var1.bubbleRef
+			isLastMessageInMessageGroup = var1.isLastMessageInMessageGroup
 		}, {
 			Wrapper = reactModule.createElement(view, { tag = "auto-xy col gap-xsmall", sizeConstraint = var7 }, {
 				textContent = reactModule.createElement(text, cryoModule.Dictionary.union(t_1, {
@@ -122,8 +121,7 @@ function PlainText(p1)
 		isRepliedTo = var1.isRepliedTo,
 		isPressed = var1.isPressed,
 		[reactModule.Change.AbsoluteSize] = var1[reactModule.Change.AbsoluteSize],
-		isLastMessageInMessageGroup = var1.isLastMessageInMessageGroup,
-		bubbleRef = var1.bubbleRef
+		isLastMessageInMessageGroup = var1.isLastMessageInMessageGroup
 	}, {
 		textContent = reactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,

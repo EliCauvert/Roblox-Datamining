@@ -143,7 +143,6 @@ Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,素材质量：纹理�
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,素材质量：“{partName}”有 {intersecting_tri_face_percent}% 的相交三角形（得分：{score}）。
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,素材质量：“{partName}”有 {uv_outside_bound_vert_percent}% 的 UV 顶点超出边界（得分：{score}）。
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,素材质量：“{partName}”有 {similar_vertex_percent}% 的相似顶点（得分：{score}）。
-Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,“{PartName}”中的配件附件“{AttachmentName}”必须放置在网格表面附近。当前位置 [{CurrentPosition}] 在有效区域之外。请将其移动到更靠近 [{ClosestValidPosition}] 的位置。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,手柄已通过蒙皮绑定到{jointName}关节，该关节不属于允许的架构。目前只允许使用标准 R15 关节和蒙皮转移关节。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,{assetType}必须使用蒙皮转移功能，但你缺少必需的{requiredJointName}关节。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,手柄已通过蒙皮绑定到接头“{jointName}”，但此资源必须进行自动蒙皮。你只能通过蒙皮绑定到“{validJointNameList}”。
@@ -151,14 +150,12 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_RequiredSkinningTransfer,{asse
 Common.UGCValidation.ErrorLabel.AccessorySkinning_RigidIsSkinned,刚性配饰包含不受支持的蒙皮数据。请确保不要同时导入骨骼与网格
 Common.UGCValidation.ErrorLabel.AccessorySkinning_TransferJointWithoutAutoSkin,手柄包含接头“{jointName}”，仅当 WrapLayer.AutoSkin 设置为 EnabledOverride 时才允许这样做。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,通过蒙皮绑定到转移关节的顶点必须完全加权。
-Common.UGCValidation.ErrorLabel.AnimationPack_DuplicateAnimationId,动画包套装包含重复的动画 ID“{animationId}”，该 ID 被多个剪辑使用：{instancePaths}。每个动画剪辑必须引用唯一的动画素材。
 Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,动画包套装缺少预期的动画类型：{missingAnimationTypes}。每个动画类型必须有一个 R15Anim 文件夹，其中包含与其预期完全一致的 StringValue 子项。
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,动画“{animationName}”的权重值为 {weight}，但权重必须大于 0。请修改该动画。
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,在{ParentPath}中找不到名为{ExpectedName}的所需{ExpectedClass}
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,以下实例不属于已批准的架构，应予以移除：{UnexpectedDescendantPaths}。
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,上传的素材应为{ExpectedClass}，但实际为{RootClass}。
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,上传的素材应命名为{ExpectedClass}，但实际命名为{RootClass}。
-Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName} 仍包含未保存的可编辑内容。请在发布前将其保存为素材，然后重试。
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,CurveAnimation 中的身体部位“{bodyPartName}”有一个位置（平移）轨道。动画身体部位只能旋转；不允许使用位置轨道。请从此身体部位中移除位置轨道。
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,CurveAnimation 中的身体部位“{bodyPartName}”从起始位置移动了 {distance} 格。允许的最大平移距离为 {maxDistance} 格。请减少身体部位的位置移动。
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,CurveAnimation 包含 HRD/DRD 骨骼，且身体部位“{bodyPartName}”有一个位置（平移）轨道。当动画中存在骨骼时，不可平移任何身体部位，以防止接头分离。请从身体部位移除所有位置轨道。
@@ -168,7 +165,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation 包含�
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,CurveAnimation 中的身体部位距离 HumanoidRootPart 不能低于 {minHeight} 格或高于 {maxDistance} 格。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation 的子级 MarkerCurves 和 AnimationRigData 不能有子级
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,CurveAnimation 层级结构包含 Scripts、LocalScripts 或 ModuleScripts。请将它们移除。
-Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,加载 CurveAnimation 数据失败。动画素材可能无效或无法访问。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation 包含具有无效层级结构的身体部位文件夹“{folderName}”（包含不允许的子文件夹或设置不正确）
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchyDetail,
@@ -197,7 +193,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation 中�
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,在 CurveAnimation 的第 {time} 秒，身体部位“{bodyPart}”以 {speed} 度/秒的旋转速度移动。最大旋转速度为 {maxSpeed} 度/秒。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,在 CurveAnimation 的第 {time} 秒，身体部位“{bodyPart}”以 {speed} 格/秒的速度移动。最大速度为 {maxSpeed} 格/秒。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,CurveAnimation 中的身体部位“{bodyPart}”在帧之间移动的距离超过 {maxMovement} 格。请修改该动画。
-Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation 拥有 {count} 个子对象。允许的最大数量为 {maxAllowed} 个。请减少子对象数量。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation 包含关键帧过多的 Curve。每个 Curve 最多只能有 {maxAllowed} 个关键帧。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation 包含超过 {maxAllowed} 个 MarkerCurve。请确保 MarkerCurve 的子对象数量不超过 {maxAllowed} 个。
@@ -212,10 +207,6 @@ Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,商城中的动态头部必须
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,无法检测到动态头部的右眼闭合表情。请调整右眼的笼架标记，使其与头部右眼的位置相匹配，并确保其可以闭合。
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,无法检测到动态头部的皱眉表情。请调整嘴部的笼架标记，使其与头部的嘴巴位置相匹配，并确保它可以显示皱眉表情。
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,此素材使用了发光贴图，这些贴图仅限“受信任创作者计划”创作者使用。请移除所有发光贴图内容或加入该计划后再上传。
-Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,已发布的动画缺少有效的部件最大位移值。请重新发布该动画。
-Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,已发布的动画缺少有效的用户生成内容动作标记。请重新发布该动画。
-Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,无法根据已发布的动画数据计算部件的最大位移。请重新发布该动画。
-Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,已发布的动画指定了部件的最大位移为 {taggedTranslation} 格，但根据动画数据计算出的位移为 {calculatedTranslation} 格。请重新发布该动画。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,上传时，FaceControls 上的 InternalOverrideFACSData 属性必须为空。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,检测到 FACS 将你的头部扩大到 {modPercent}%，但修改头部大小违反了脸部动画的商城政策。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,检测到 FACS 将你的头部缩小到 {modPercent}%，但修改头部大小违反了脸部动画的商城政策。
@@ -264,9 +255,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,“{partName}“网格�
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,附件“{attName}”必须存在于“{partName}”的后代中，且只能存在一次。
 Common.UGCValidation.ErrorLabel.NoAttributes,“{RootInstanceName}”（或其后代）包含属性。你需要从以下实例中移除属性：{InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' 有无效属性： {ProblematicProperties}。超出了显示的字节限制（限制为 0 表示属性必须为空）；任何其他属性包含 NaN/Inf 值或超出其默认大小限制。
-Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,“{PartName}”中的骨架附件“{AttachmentName}”必须放置在该身体部位与相邻部位连接的关节边界附近。当前位置 [{CurrentPosition}] 离连接平面过远。请将其移动到更靠近 [{ClosestValidPosition}] 的位置。
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,要将素材上传到 Roblox，你必须选择恰好 1 个实例及其关联的上传类型。
-Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,此素材过大，无法上传（{sizeBytes} 字节，超出 {maxSizeBytes} 字节的上限）。请缩小其大小，然后重试。
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,实例 {ProblematicDescendantPath} 不应有标签。
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,第二个测试错误字符串，用于验证端到端 Hub-first 翻译同步工作流程。
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,头部网格部件包含{jointName}的脸部动画，但这些动画无法在 FACS 中使用。请重命名此关节，然后重新导入头部。
@@ -398,7 +387,6 @@ CommonUI.Features.Label.Unchecked,未验证
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.Labels.ConnectTo,连接至
-CommonUI.Features.Labels.Retry,
 CommonUI.Features.NavBar.Build,构建
 CommonUI.Features.StudioCTA.Tooltip.Body,免费下载 Studio！
 CommonUI.Features.StudioCTA.Tooltip.Title,开始在 Roblox 上创作
@@ -836,12 +824,6 @@ CoreScripts.InGameMenu.GameSettings.SwitchToAdvancedSettings,
 CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings,自定义设置
 CoreScripts.InGameMenu.GameSettings.UINavToggle,界面导航切换
 CoreScripts.InGameMenu.GameSettings.UINavToggleDescription,使用“\”键进入和退出界面导航模式
-CoreScripts.InGameMenu.GameSettings.UIScale,用户界面缩放
-CoreScripts.InGameMenu.GameSettings.UIScaleLargest,最大
-CoreScripts.InGameMenu.GameSettings.UIScaleMode,用户界面缩放模式
-CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,自动
-CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,手动
-CoreScripts.InGameMenu.GameSettings.UIScaleSmallest,最小
 CoreScripts.InGameMenu.GameSettings.VREnabled,VR 模式
 CoreScripts.InGameMenu.GameSettings.VRSmoothRotationEnabled,已启用 VR 平顺旋转
 CoreScripts.InGameMenu.GameSettings.VRSteppedRotationEnabled,已启用 VR 跨步旋转
@@ -951,7 +933,6 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,我同意，此体验将提交我的虚拟形象道具至审核团队，并上传至我的作品。
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,我同意，此体验将提交我的表情动作至审核团队，并上传至我的作品。
-CoreScripts.PublishAssetPrompt.DisclaimerImage,我同意此体验将我的图片提交审核，并上传至“我的作品”。
 CoreScripts.PublishAssetPrompt.DisclaimerModel,创作的道具需通过审阅，如果道具因不符合社区准则而被拒，你可能无法获得退款。
 CoreScripts.PublishAssetPrompt.InvalidDescription,无效描述
 CoreScripts.PublishAssetPrompt.InvalidName,无效名称
@@ -966,7 +947,6 @@ CoreScripts.PublishAssetPrompt.ResultModalOk,
 CoreScripts.PublishAssetPrompt.Submit,
 CoreScripts.PublishAssetPrompt.TitleTextClothing,提交服饰
 CoreScripts.PublishAssetPrompt.TitleTextEmote,提交表情动作
-CoreScripts.PublishAssetPrompt.TitleTextImage,提交图片
 CoreScripts.PublishAssetPrompt.TitleTextModel,提交包
 CoreScripts.PublishAssetPrompt.TitleTextPackage,
 CoreScripts.PublishAssetPrompt.UndefinedError,出错了，请重试。错误代码： {RESULT_TYPE}
@@ -1051,8 +1031,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,
 CoreScripts.TextChat.ChatWindow.Transcribing,正在转录…
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,我们没有听清！请重试。
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,我们暂不支持该语言！
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,要使用麦克风，请轻点此处更新设备设置。
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,要使用麦克风，请前往设备设置，授予 Roblox 麦克风权限。
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,要使用麦克风，请前往设备设置，并授予 Roblox 麦克风权限。
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,无法访问麦克风
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,为了让你使用语音发送消息，我们将处理你的音频，并根据我们的隐私政策立即将语音删除。
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,你已开启语音转文字聊天功能
@@ -1189,7 +1168,7 @@ Feature.Accessibility.Heading.PreferredTransparency,背景透明度
 Feature.Accessibility.Heading.ReducedMotion,
 Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.PreferredTextSize.Default,
-Feature.Accessibility.PreferredTextSize.Largest,
+Feature.Accessibility.PreferredTextSize.Largest,最大
 Feature.Accessibility.PreferredTransparency.Opaque,不透明
 Feature.Accessibility.PreferredTransparency.Transparent,透明
 Feature.AccountSecurityPrompt.Message.Error.Pin.IncorrectPin,PIN 码不正确。
@@ -1310,32 +1289,20 @@ Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,探索风格
 Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
-Feature.Avatar.BackgroundGeneration.Action.DiscardDialogCancel,
-Feature.Avatar.BackgroundGeneration.Action.DiscardDialogConfirm,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,
 Feature.Avatar.BackgroundGeneration.Action.Upload,上传
 Feature.Avatar.BackgroundGeneration.Action.View,查看
-Feature.Avatar.BackgroundGeneration.Action.ViewExclusiveBackgrounds,
 Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,订阅 Plus，创建背景。
-Feature.Avatar.BackgroundGeneration.Description.DiscardDialog,你的背景尚未发布。如果现在离开，该内容将会丢失。
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,你的作品已可供使用。
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,此背景由 AI 生成。发布即表示你确认其符合 Roblox 社区准则，且未使用你无权使用的内容。在出现在你的道具栏中之前，需要先经过审核，且已发布的道具无法编辑。
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,此背景由 AI 生成。上传即表示你确认其符合 Roblox 社区准则，且未使用你无权使用的内容。此背景需要先经过审核，然后才会出现在你的道具库中。已发布的道具无法编辑。
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,订阅 Plus，解锁免费专属背景。
-Feature.Avatar.BackgroundGeneration.Description.ViewExclusiveBackgrounds,查看你的免费 Plus 专属背景。
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,道具不符合社区准则
-Feature.Avatar.BackgroundGeneration.Error.LimitReached,你已达到使用额度上限。请稍后重试，以继续自定义。
-Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,你已达到使用额度上限。请于明天重试，以继续自定义。
-Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,你已达到使用额度上限。请在 1 小时后重试，以继续自定义。
-Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,你已达到使用额度上限。请在 1 分钟后重试，以继续自定义。
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,
 Feature.Avatar.BackgroundGeneration.Error.Moderation,该指令不符合我们的指南。请尝试描述其他内容。
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,此背景不符合 Roblox 社区准则，因此未添加至你的道具栏。请尝试生成新背景。
 Feature.Avatar.BackgroundGeneration.Error.System,为你生成背景时出错。请重试。
-Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,
-Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,
-Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,
-Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus 专属
@@ -1344,13 +1311,10 @@ Feature.Avatar.BackgroundGeneration.PromptPlaceholder,描述背景需求…
 Feature.Avatar.BackgroundGeneration.Status.Generating,正在为你生成背景…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,正在为你准备背景…
 Feature.Avatar.BackgroundGeneration.Title,创建背景
-Feature.Avatar.BackgroundGeneration.Title.DiscardDialog,确定不发布而是直接离开吗？
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,发布到道具栏
 Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
 Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,上传到道具库
-Feature.Avatar.BackgroundGeneration.Tooltip.CreateBackground,订阅 Plus，免费创建背景！
-Feature.Avatar.BackgroundGeneration.Tooltip.PublishBackground,
 Feature.Avatar.Backgrounds.Title,背景
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,此身体样式无法进行调整。
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,默认使用原始身体肤色
@@ -1835,13 +1799,10 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,屏蔽“{DisplayName}”？
 Feature.BlockingModal.Message.BlockConfirmation,屏蔽此用户将会把他们从你的好友或关注者中移除。他们将无法向你发送消息、请求或邀请。<br /><br />他们不会收到你已屏蔽他们的通知。
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,屏蔽此用户会将其从你的好友或粉丝列表中移除。此用户将无法向你发送消息、请求或邀请。<br /><br />对方不会收到你已屏蔽他们的通知。
-Feature.Build.Action.Add,
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,添加测试玩家
 Feature.Build.Action.AddPlaytesters,
 Feature.Build.Action.AddToPlaytest,添加至游戏测试
-Feature.Build.Action.AgreeAndEnable,同意并开启
-Feature.Build.Action.Approve,批准
 Feature.Build.Action.Archive,存档
 Feature.Build.Action.ArchiveGame,存档游戏
 Feature.Build.Action.Build,
@@ -1850,13 +1811,8 @@ Feature.Build.Action.BuyRobux,
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,复制文本
 Feature.Build.Action.Create,
-Feature.Build.Action.CreateDeveloperProduct,
 Feature.Build.Action.Delete,
-Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,不再询问
-Feature.Build.Action.DontShowAgain,不再显示
-Feature.Build.Action.EarnRobux,赚取 Robux
-Feature.Build.Action.Edit,编辑
 Feature.Build.Action.HideAutosaved,隐藏自动保存版本
 Feature.Build.Action.ManageLimit,管理限额
 Feature.Build.Action.Next,下一个
@@ -1864,97 +1820,33 @@ Feature.Build.Action.NotNow,
 Feature.Build.Action.NotifyMe,通知我
 Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,打开设置
-Feature.Build.Action.Options,选项
-Feature.Build.Action.Play,游玩
 Feature.Build.Action.Playtest,游戏测试
 Feature.Build.Action.Preview,
 Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,发布最新版本
-Feature.Build.Action.Reject,拒绝
 Feature.Build.Action.Restore,恢复
-Feature.Build.Action.Resume,
-Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,
-Feature.Build.Action.Save,
 Feature.Build.Action.SetDailyLimit,设置每日限额
 Feature.Build.Action.SetLimit,设置限额
 Feature.Build.Action.Settings,
 Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,分享链接
-Feature.Build.Action.ShowMore,
-Feature.Build.Action.Stats,统计数据
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,更新评级
 Feature.Build.Action.UpdateWithChanges,应用更改
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,查看使用额度
-Feature.Build.Analytics.AnalyzeChatPrompt,过去 {days} 天我的{analyzeName}是多少？
-Feature.Build.Analytics.AnalyzeName.Arppu,每位付费用户平均收入
-Feature.Build.Analytics.AnalyzeName.D1Retention,1 天后留存率
-Feature.Build.Analytics.AnalyzeName.DailyActiveUsers,日活跃用户
-Feature.Build.Analytics.AnalyzeName.PayerConversion,付费用户转化率
-Feature.Build.Analytics.AnalyzeName.PlaythroughRate,通关率
-Feature.Build.Analytics.AnalyzeName.TotalPlaytime,总游戏时间
-Feature.Build.Analytics.Description.Arppu,每位付费用户平均收入是将 Robux 总收入除以付费玩家人数得出。该指标反映每位购买者的平均消费金额。
-Feature.Build.Analytics.Description.D1Retention,第 1 天留存率衡量有多少首次玩游戏的玩家在一天后再次回来游玩。这是衡量游戏体验粘性的一项早期指标。
-Feature.Build.Analytics.Description.DailyActiveUsers,日活跃用户统计每天启动游戏体验的去重玩家数量。跟踪此指标可以了解回访玩家规模，并发现增长或流失趋势。
-Feature.Build.Analytics.Description.PayerConversion,付费用户转化率是指在你的游戏体验中花费 Robux 的玩家占比。使用此指标可衡量你的变现策略在将玩家转化为付费用户方面的效果。
-Feature.Build.Analytics.Description.PlaythroughRate,通关率是完成完整游戏会话的访问次数占比。通关率越高，表明玩家越容易上手游戏体验，并且更愿意游玩至结束。
-Feature.Build.Analytics.Description.TotalPlaytime,总游戏时间是该时间段内所有玩家在你的游戏体验中花费的时间总和。游戏时间增加通常表明游戏过程更具吸引力。
-Feature.Build.Analytics.DurationHours,{number} 小时
-Feature.Build.Analytics.KeyStats,关键统计数据
-Feature.Build.Analytics.LastMonth,上个月
-Feature.Build.Analytics.LastWeek,
-Feature.Build.Analytics.Likes,点赞数
-Feature.Build.Analytics.Month.Apr,4 月
-Feature.Build.Analytics.Month.Aug,8 月
-Feature.Build.Analytics.Month.Dec,12 月
-Feature.Build.Analytics.Month.Feb,2 月
-Feature.Build.Analytics.Month.Jan,1 月
-Feature.Build.Analytics.Month.Jul,7 月
-Feature.Build.Analytics.Month.Jun,6 月
-Feature.Build.Analytics.Month.Mar,3 月
-Feature.Build.Analytics.Month.May,5 月
-Feature.Build.Analytics.Month.Nov,11 月
-Feature.Build.Analytics.Month.Oct,10 月
-Feature.Build.Analytics.Month.Sep,9 月
-Feature.Build.Analytics.NoData,无可用数据
-Feature.Build.Analytics.Overview,概览
-Feature.Build.Analytics.Percent,{number}%
-Feature.Build.Analytics.Players,玩家数
-Feature.Build.Analytics.Sheet.Analyze,分析
-Feature.Build.Analytics.Sheet.ViewInOverview,在概览中查看
-Feature.Build.Analytics.Summary.Arppu,每位付费玩家平均获得的 Robux。
-Feature.Build.Analytics.Summary.D1Retention,第二天回来游玩的新玩家占比。
-Feature.Build.Analytics.Summary.DailyActiveUsers,在所选时间段内加入的去重玩家数量。
-Feature.Build.Analytics.Summary.PayerConversion,有过购买行为的玩家占比。
-Feature.Build.Analytics.Summary.PlaythroughRate,完成完整通关的会话占比。
-Feature.Build.Analytics.Summary.TotalPlaytime,玩家在你的体验中花费的总时长。
-Feature.Build.Analytics.Title.Arppu,ARPPU
-Feature.Build.Analytics.Title.ConcurrentUsers,玩家总数
-Feature.Build.Analytics.Title.D1Retention,首日留存率
-Feature.Build.Analytics.Title.DailyActiveUsers,
-Feature.Build.Analytics.Title.PayerConversion,
-Feature.Build.Analytics.Title.PlaythroughRate,
-Feature.Build.Analytics.Title.TotalPlaytime,
-Feature.Build.Analytics.Visits,访问次数
 Feature.Build.Content.NewGame,新游戏
-Feature.Build.Description.ActivateDeveloperProduct,将开发者产品 {PRODUCT_ID} 上架销售。
-Feature.Build.Description.AdCampaignModerationReview,所有广告活动均由 Roblox 审核团队进行审核。此过程最多可能需要 24 小时。
-Feature.Build.Description.AdCampaignSheetRunDates,投放时间 {startDate} – {endDate}
-Feature.Build.Description.AdvertisingAgreement,继续操作，即表示你同意 {advertisingTermsStart}Roblox 广告条款{advertisingTermsEnd}和{advertisingStandardsStart}广告准则{advertisingStandardsEnd}。
 Feature.Build.Description.ArchiveRemoval,如果你将此游戏存档，它将从 Build 中移除。你仍可在创作者中心或 Roblox Studio 中访问和恢复此游戏。
 Feature.Build.Description.AutoBuyUsage,在创建过程中使用你的 Robux 自动购买额外的 Build 使用额度。你可以随时设置每日消费限额。
 Feature.Build.Description.BoostAudienceForPlays,扩大受众群体，吸引更多玩家。
+Feature.Build.Description.BoostGameAudience,增加游戏的受众
 Feature.Build.Description.BuildIdeaGame,将你的创意转化为游戏
 Feature.Build.Description.BuildReplyNotif,在 Build 回复你后获得通知。
 Feature.Build.Description.BuyRobuxToCreate,购买更多 Robux 以继续创建，或等待你的免费 Build 使用额度在明天重置。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 购买更多 Build 使用额度，或等待你的每日限额重置。
 Feature.Build.Description.CampaignRunDates,你的广告活动将在 {startDate} – {endDate}期间投放
 Feature.Build.Description.ChoosePlaytesters,选择好友来帮助你进行游戏测试。
-Feature.Build.Description.CreateDeveloperProduct,创建“{NAME}”，售价 {PRICE} Robux，已下架。
-Feature.Build.Description.DeactivateDeveloperProduct,将开发者产品 {PRODUCT_ID} 下架。
-Feature.Build.Description.EarnedRobuxAppliedFirst,如果你已赚取 Robux，这些 Robux 将首先用于支付广告活动费用。
 Feature.Build.Description.EnableBuildNotifs,在设备设置中启用通知，获取来自 Build 的最新动态。
 Feature.Build.Description.FriendsLinkOnly,只有你的好友才能访问此链接。如果你希望更多人游玩，请更改游戏的受众设置。
 Feature.Build.Description.GameCreationDone,我已完成游戏的创建和发布。你可以打开它进行游戏测试。
@@ -1963,130 +1855,68 @@ Feature.Build.Description.HubSettings,在创作者中心管理所有设置
 Feature.Build.Description.InviteFriendLimit,选择最多 {MAX_INVITES} 位好友，然后分享游戏链接。
 Feature.Build.Description.MakeAudienceAvail,面向此受众群体发布你的体验。
 Feature.Build.Description.ManageAppearance,管理你的游戏向他人显示的方式。
-Feature.Build.Description.ManageDeveloperProduct,管理开发者产品。
-Feature.Build.Description.ManagedPricingAcknowledgement,托管定价会根据地区自动调整价格。
-Feature.Build.Description.ManagedPricingCurrentProducts,对当前所有商品使用托管定价
-Feature.Build.Description.ManagedPricingUnavailable,此体验无法使用托管定价。
-Feature.Build.Description.NoEligibleManagedPricingProducts,没有符合条件的商品
-Feature.Build.Description.NoMonetizationProducts,描述你想创作的道具，以便开始在你的游戏中赚取 Robux
 Feature.Build.Description.PlayAfterPublish,选择谁可以在此体验发布后游玩。
 Feature.Build.Description.PlaytestLatest,你正在对最新版本进行游戏测试。准备好分享后即可发布。
 Feature.Build.Description.PlaytestLocked,创建你的第一款游戏后，你就可以开始游戏测试。
 Feature.Build.Description.PlaytesterAccess,将好友添加为测试玩家，或更改游戏的受众设置，允许更多人游玩。
-Feature.Build.Description.PricingRules,设置定价规则
 Feature.Build.Description.PrivateShare,更改游戏的受众设置以分享该游戏。
-Feature.Build.Description.PromoteGameWithAdCampaign,通过为期 {durationDays} 天的广告活动扩大受众群体，让你的游戏被他人发现。
 Feature.Build.Description.RaiseLimitOrWait,提高你的每日 Robux 限额以继续创建，或等待限额在明天重置。
 Feature.Build.Description.RatingAgreement,发布即表示你同意此内容评级准确无误。
 Feature.Build.Description.RestoreLatest,此版本将成为你的最新发布版本。
 Feature.Build.Description.RevertToVersion,确认以还原上次更改并返回到 {VERSION}。
-Feature.Build.Description.ShareLatest,分享最新版本的变化。
-Feature.Build.Description.ShopButton,添加购物入口
-Feature.Build.Description.UpdateDeveloperProduct,更新开发者产品 {PRODUCT_ID}。
 Feature.Build.Description.VersionChanges,告诉玩家此版本的更新内容
-Feature.Build.Error.DeveloperProductDescriptionTooLong,描述不能超过 1000 个字符。
-Feature.Build.Error.DeveloperProductNameRequired,输入产品名称。
-Feature.Build.Error.DeveloperProductNameTooLong,名称不能超过 50 个字符。
-Feature.Build.Error.DeveloperProductPriceInvalid,"价格必须为 1 到 1,000,000,000 Robux 的整数。"
-Feature.Build.Error.DeveloperProductPriceRequiredForSale,
-Feature.Build.Error.DeveloperProductTextModerated,Roblox 审核团队更改了此产品的文本。请尝试使用其他措辞。
-Feature.Build.Error.ManagedPricingPartialUpdate,无法更新某些商品。
-Feature.Build.Error.MonetizationOptionUpdate,无法更新选项。请重试。
-Feature.Build.Error.MonetizationOptionsLoad,无法加载选项。请重试。
-Feature.Build.Error.MonetizationPermissionDenied,你没有更改收益化选项的权限。
 Feature.Build.Header.AccessSharing,访问权限和共享
-Feature.Build.Header.AllVersions,所有版本
 Feature.Build.Header.ContentMaturity,内容成熟度
 Feature.Build.Header.CustomAnswer,自定义回答
 Feature.Build.Header.GameDetails,游戏详情
-Feature.Build.Header.Overview,
-Feature.Build.Header.PastCampaigns,过去的广告活动
-Feature.Build.Header.UpdateDetails,更新详情
+Feature.Build.Header.Overview,概览
 Feature.Build.Label.Access,访问权限
-Feature.Build.Label.AdClicks,广告点击次数
-Feature.Build.Label.AdViews,广告观看次数
 Feature.Build.Label.AdditionalUsage,额外的 Build 使用额度
 Feature.Build.Label.AdditionalUsed,已使用 {USED}，共 {LIMIT}
-Feature.Build.Label.AdsManager,广告管理器
 Feature.Build.Label.All,
 Feature.Build.Label.AmountAvailable,{AMOUNT} 可用
 Feature.Build.Label.Autosaved,自动保存版本
 Feature.Build.Label.Available,可用
-Feature.Build.Label.AvailableForPurchase,可供购买
 Feature.Build.Label.BackToBuild,返回构建
 Feature.Build.Label.Building,正在构建…
 Feature.Build.Label.CaptureLibrary,截图库
-Feature.Build.Label.CaptureSelectionCount,已选择 {SELECTED_COUNT} 张，共 {MAX_SELECTIONS} 张
 Feature.Build.Label.ContentRating,内容评级
-Feature.Build.Label.Created,创建时间
 Feature.Build.Label.CreatedDate,{YEAR} 年 {MONTH} {DAY} 日
 Feature.Build.Label.CreatorHub,创作者中心
-Feature.Build.Label.DateRange,{startDate} – {endDate}
-Feature.Build.Label.DefaultDeveloperProduct,产品 {PRODUCT_ID}
-Feature.Build.Label.DefaultDeveloperProductName,开发者产品
 Feature.Build.Label.Deleted,已删除
 Feature.Build.Label.DescribeIdea,描述一个创意
 Feature.Build.Label.Description,
-Feature.Build.Label.DeveloperProductDescription,描述：{DESCRIPTION}
-Feature.Build.Label.DeveloperProductName,名称：“{NAME}”
-Feature.Build.Label.DeveloperProductPrice,价格：{PRICE} Robux
-Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
-Feature.Build.Label.EasyPerformanceReport,轻松获得效果报告
 Feature.Build.Label.Error,
-Feature.Build.Label.Free,免费
 Feature.Build.Label.FreeBuildUsage,免费 Build 使用额度
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,仅限好友
-Feature.Build.Label.GamePlays,游戏游玩次数
 Feature.Build.Label.GetMoreBuildUsage,获得更多 Build 使用额度
 Feature.Build.Label.Hi,你好
 Feature.Build.Label.IconThumbnails,标志和缩略图
-Feature.Build.Label.Images2D,2D 图像
 Feature.Build.Label.InProgress,进行中
 Feature.Build.Label.InputNeeded,需要输入内容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,受限
-Feature.Build.Label.Live,已发布
 Feature.Build.Label.Loading,正在加载…
-Feature.Build.Label.ManagedPricing,托管定价
-Feature.Build.Label.ManagedPricingMixed,对当前商品使用混合定价
-Feature.Build.Label.MaximizeForGamePlays,最大化游戏游玩次数
-Feature.Build.Label.Models3D,3D 模型
-Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,无限额
 Feature.Build.Label.NotStarted,未开始
-Feature.Build.Label.OffSale,未上架
-Feature.Build.Label.OnSale,在售
 Feature.Build.Label.Pending,待定
 Feature.Build.Label.PercentUsed,已使用 {PERCENT}%
-Feature.Build.Label.PlayTime,游玩时间
 Feature.Build.Label.PreviouslyPublished,此前已发布版本
-Feature.Build.Label.Price,价格
-Feature.Build.Label.PriceUnavailable,--
-Feature.Build.Label.Pricing,定价
-Feature.Build.Label.PricingOptions,定价选项
 Feature.Build.Label.Private,私人
 Feature.Build.Label.Public,公开
 Feature.Build.Label.PubliclyUnavailable,不公开
-Feature.Build.Label.Published,
-Feature.Build.Label.Purchased,
+Feature.Build.Label.Published,已发布
 Feature.Build.Label.Ready,准备就绪
-Feature.Build.Label.RegionalPricing,区域定价
 Feature.Build.Label.ResetsDaily,每日重置
 Feature.Build.Label.RestoredVersion,已恢复 {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,搜索素材
 Feature.Build.Label.SearchGames,搜索游戏
 Feature.Build.Label.SearchTasks,搜索任务
 Feature.Build.Label.SelectOption,选择一个选项
 Feature.Build.Label.ShareAddedFriends,分享给已添加的好友
-Feature.Build.Label.Shared,已共享
-Feature.Build.Label.ShopButton,商店按钮
-Feature.Build.Label.ShopUi,商店用户界面
-Feature.Build.Label.Sounds,声音
-Feature.Build.Label.TargetAllRobloxPlayers,定位所有 Roblox 玩家
 Feature.Build.Label.Thinking,正在思考
 Feature.Build.Label.Title,标题
 Feature.Build.Label.TitleDescription,标题和描述
@@ -2154,8 +1984,6 @@ Feature.Build.Label.ToolThumbnailRunning,正在设置游戏缩略图
 Feature.Build.Label.UniverseNumber,宇宙 {UNIVERSE_ID}
 Feature.Build.Label.Unknown,未知
 Feature.Build.Label.UnlimitedUsed,已使用 {USED} • 无限额
-Feature.Build.Label.UpdateTitleDesc,更新标题和描述
-Feature.Build.Label.Updated,更新时间
 Feature.Build.Label.Usage,使用额度
 Feature.Build.Label.UsageUsed,已使用 {USED}
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2167,18 +1995,8 @@ Feature.Build.Label.VersionTitleDesc,版本标题和描述
 Feature.Build.Label.Video,视频
 Feature.Build.Message.AccountRequirements,你的帐户不符合使用 Build 的要求。
 Feature.Build.Message.AccountTooNew,你的帐户刚刚创建，暂时无法发布。请在帐户创建 2 天后重试。
-Feature.Build.Message.AdCampaignCreateFailed,无法创建广告活动。请重试。
-Feature.Build.Message.AdCampaignCreated,广告活动已创建
-Feature.Build.Message.AdPerformanceLoadFailed,无法加载广告效果
-Feature.Build.Message.AdsPromotionBannerSubtitle,免费扩大受众群体
-Feature.Build.Message.AdsPromotionBannerTitle,你还有 {promotionCount} 次免费推广机会
-Feature.Build.Message.AdsPromotionBannerTitleSingular,你还有 1 次免费推广机会
-Feature.Build.Message.AdsStatsEmpty,通过广告活动扩大受众群体，让更多玩家发现你的游戏
-Feature.Build.Message.AdsStatsEmptyFree,通过免费广告活动扩大受众群体，让更多玩家发现你的游戏
 Feature.Build.Message.AllFriendsAdded,你已将所有好友添加为测试玩家。
 Feature.Build.Message.AnswerBuildQuestion,在下方回答 Build 的问题。
-Feature.Build.Message.AssetDetailsUnavailable,无法显示素材详情。
-Feature.Build.Message.AssetsLoadFailed,无法加载素材。
 Feature.Build.Message.AudienceIneligible,不具备面向此受众发布的资格
 Feature.Build.Message.BuildAccountBlocked,你的帐户目前无法使用 Build。
 Feature.Build.Message.BuildBusy,Build 忙碌中。请稍后重试。
@@ -2204,14 +2022,11 @@ Feature.Build.Message.GamePublishFailed,你的游戏无法发布。请重试。
 Feature.Build.Message.GameShared,游戏已分享
 Feature.Build.Message.GameSharedWith,游戏已分享给{DISPLAY_NAME}
 Feature.Build.Message.HiDisplayName,{DISPLAY_NAME}，你好！
-Feature.Build.Message.ImageUploadFailed,无法上传你的图片。请重试。
 Feature.Build.Message.InvalidMessage,信息出错了。请编辑并重试。
 Feature.Build.Message.InvitesLoadFailed,无法加载邀请
 Feature.Build.Message.LimitBelowSpend,限额不能低于今日已支出的 {ALREADY_SPENT} Robux。
 Feature.Build.Message.LinkCopied,链接已复制到剪贴板。
 Feature.Build.Message.LoadingVersions,正在加载版本历史记录…
-Feature.Build.Message.NoAssetsFound,未找到素材。
-Feature.Build.Message.NoCapturesAvailable,无可用截图
 Feature.Build.Message.NoDescriptionProvided,没有提供描述。
 Feature.Build.Message.NoFriendsToAdd,你还没有任何可添加的好友。请先在 Roblox 上找到要建立联系的人。
 Feature.Build.Message.NoResults,
@@ -2222,8 +2037,6 @@ Feature.Build.Message.PlaytestersAdded,已添加 {INVITED_COUNT} 位测试玩家
 Feature.Build.Message.PublicPublishFailed,你的游戏已发布，但无法公开。请重试。
 Feature.Build.Message.PublishExpandAudience,发布并扩大受众范围
 Feature.Build.Message.PublishNotReverted,你的发布未还原。请重试。
-Feature.Build.Message.PublishPromotionUpsell,恭喜你成功发布游戏！你有 {promotionCount} 次免费推广机会，可在 Roblox 上吸引更多玩家。
-Feature.Build.Message.PublishPromotionUpsellSingular,恭喜你成功发布游戏！你有 1 次免费推广机会，可在 Roblox 上吸引更多玩家。
 Feature.Build.Message.PublishReverted,已还原发布操作。
 Feature.Build.Message.QuestionnaireNeeded,此游戏是在 Build 之外编辑的。请填写内容问卷，以便发布游戏。
 Feature.Build.Message.ReadyToPlay,你的游戏已可在 Roblox 上游玩！
@@ -2246,21 +2059,9 @@ Feature.Build.Message.WhatToCreate,你今天想创作什么？
 Feature.Build.Message.WorkedMinutesSeconds,已完成（{MINUTES} 分 {REM_SECONDS} 秒）
 Feature.Build.Message.WorkedSeconds,已完成（{SECONDS} 秒）
 Feature.Build.Message.WorkingOnTasks,正在处理你的任务
-Feature.Build.Notification.Message.Continue,恢复构建聊天以继续。
-Feature.Build.Notification.Message.Review,恢复构建聊天以查看结果。
-Feature.Build.Notification.Title.Finished,构建已完成
-Feature.Build.Notification.Title.NeedInput,构建需要你的输入
-Feature.Build.Placeholder.DescribeProduct,描述你想出售的内容
-Feature.Build.Placeholder.DescribeProductUpdate,描述一项更新
-Feature.Build.Prompt.CreateDeveloperProduct,帮助我创建开发者产品，将其接入游戏，验证并发布更改，供玩家购买。
 Feature.Build.Title.AdCampaignActive,广告活动已启动
-Feature.Build.Title.AdCampaignDuration,{durationDays} 天广告活动
 Feature.Build.Title.AddFriendsToPlaytest,添加好友来帮助你进行游戏测试
-Feature.Build.Title.AddImages,添加图片
-Feature.Build.Title.AdsStatsEmpty,开始广告活动
-Feature.Build.Title.AdsStatsEmptyFree,开始你的第一个广告活动
 Feature.Build.Title.ArchiveThisGame,要将此游戏存档吗？
-Feature.Build.Title.AssetLibrary,库
 Feature.Build.Title.Audience,受众
 Feature.Build.Title.BuildQuestion,Build 提出了一个问题
 Feature.Build.Title.BuildQuestions,Build 提出了一些问题
@@ -2270,32 +2071,23 @@ Feature.Build.Title.ChangesNotLive,你的更改尚未上线
 Feature.Build.Title.ChatBuildUnavailable,Build 不可用。
 Feature.Build.Title.Content,内容
 Feature.Build.Title.DailyRobuxReached,已达到每日 Robux 限额
-Feature.Build.Title.DeveloperProduct,
-Feature.Build.Title.EditDeveloperProduct,编辑产品
 Feature.Build.Title.ExperienceAudience,体验受众
 Feature.Build.Title.FreeUsageReached,已达到免费 Build 使用额度上限
 Feature.Build.Title.FriendsOnlyPlay,只有好友可以游玩
 Feature.Build.Title.GameCreationDone,游戏创建已完成
 Feature.Build.Title.GamePrivate,此游戏为私密游戏
 Feature.Build.Title.GenericError,出错了
-Feature.Build.Title.GetUsers,获取用户
-Feature.Build.Title.ManagedPricingAcknowledgement,是否开启托管定价？
-Feature.Build.Title.NoMonetizationProducts,开始在你的游戏中赚取收入
 Feature.Build.Title.NoRobuxForUsage,没有剩余的 Robux 可用于购买 Build 使用额度
 Feature.Build.Title.Playtesters,测试玩家
 Feature.Build.Title.PlaytestersOnlyPlay,只有测试玩家可以游玩
-Feature.Build.Title.PromoteGame,推广你的游戏
 Feature.Build.Title.PromoteGameFree,免费推广你的游戏
 Feature.Build.Title.PushNotifications,推送通知
 Feature.Build.Title.RevertLastChange,是否还原上次更改？
 Feature.Build.Title.Tasks,任务
 Feature.Build.Title.TurnActivity,轮次活动
 Feature.Build.Title.VersionHistory,版本历史记录
-Feature.Build.Title.VersionInfo,版本信息
-Feature.Build.Title.VersionInformation,
+Feature.Build.Title.VersionInformation,版本信息
 Feature.Build.Title.VersionNumber,版本 {VERSION}
-Feature.Build.Title.Versions,
-Feature.Build.Title.WhatsIncluded,包含哪些内容？
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,允许
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -2517,7 +2309,7 @@ Feature.Catalog.Label.Filter.Sorts,排序方式
 Feature.Catalog.Label.Filter.TotalValue,总值
 Feature.Catalog.Label.Filter.UnavailableItems,不可用物品
 Feature.Catalog.Label.FreeItemConfirmation,确认从“{creatorName}”免费获取“{itemName}”？
-Feature.Catalog.Label.FreeUpperCase,
+Feature.Catalog.Label.FreeUpperCase,免费
 Feature.Catalog.Label.FromPrice,From {itemPrice}
 Feature.Catalog.Label.FrontAccessories,正面配饰
 Feature.Catalog.Label.FullBodies,
@@ -2584,7 +2376,7 @@ Feature.Catalog.Label.PrePremiumPrice,（物品价格：
 Feature.Catalog.Label.Premium,
 Feature.Catalog.Label.PremiumDiscount,您的 Premium 优惠为 {percent}%
 Feature.Catalog.Label.PremiumOnly,仅限 Premium 会员尊享
-Feature.Catalog.Label.Price,
+Feature.Catalog.Label.Price,价格
 Feature.Catalog.Label.PriceColon,价格：
 Feature.Catalog.Label.PriceFromResale,转卖价 {itemPrice}
 Feature.Catalog.Label.PriceHighToLow,价格从高到低
@@ -2635,7 +2427,6 @@ Feature.Catalog.Label.Torso,
 Feature.Catalog.Label.TotalItemsParenthesis,
 Feature.Catalog.Label.TotalUnformatted,合计
 Feature.Catalog.Label.Tradable,可交易
-Feature.Catalog.Label.Trending,热门
 Feature.Catalog.Label.TryOns,
 Feature.Catalog.Label.TryOnsMultiple,试穿 {numItems} 件
 Feature.Catalog.Label.Unlimited,无限
@@ -2733,7 +2524,7 @@ Feature.Chat.Action.Continue,
 Feature.Chat.Action.Copy,复制
 Feature.Chat.Action.Create,
 Feature.Chat.Action.Delete,
-Feature.Chat.Action.Edit,
+Feature.Chat.Action.Edit,编辑
 Feature.Chat.Action.GroupOSADoNotJoin,不加入
 Feature.Chat.Action.GroupOSAJoin,
 Feature.Chat.Action.LearnMore,
@@ -2899,7 +2690,7 @@ Feature.Chat.ShareGameToChat.NoFavoriteGames,无最近喜爱
 Feature.Chat.ShareGameToChat.NoFriendActivity,你没有好友动态
 Feature.Chat.ShareGameToChat.NoPopularGames,无热门挑战
 Feature.Chat.ShareGameToChat.NoRecentGames,无最近浏览
-Feature.Chat.ShareGameToChat.Popular,
+Feature.Chat.ShareGameToChat.Popular,热门
 Feature.Chat.ShareGameToChat.Recent,最近
 Feature.Chat.Text.NoConnections,你尚未添加任何联系人。若要开始，请在 Roblox 上查找并添加你的联系人。
 Feature.Chat.Text.NoFriends,你尚未添加任何好友。若要开始，请在 Roblox 上寻找并添加你的好友。
@@ -2948,7 +2739,6 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,昵称不可用
 Feature.DisplayName.ErrorMessage.NameTooLong,昵称应不超过20个字符
 Feature.DisplayName.ErrorMessage.NameTooShort,昵称应至少包含 3 个字符
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,昵称包含不受支持的字符
-Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,{num} 天
 Feature.Durables.BottomBar.RentalDurationPlural, {num} 天
 Feature.Durables.FTUX.Tooltip,选择你想拥有该道具的天数。购买后开始计时。
@@ -2957,10 +2747,8 @@ Feature.Durables.InfoModal.Title,引入限时选项
 Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite,永久
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
-Feature.Durables.ItemDetails.WearTimeOptions.Title,
+Feature.Durables.ItemDetails.WearTimeOptions.Title,选项
 Feature.Durables.Label.ItemExpires,道具到期
-Feature.Durables.PartiallyExpiredItems.BodyText,此已保存虚拟形象中的部分道具已过期且已被移除。
-Feature.Durables.PartiallyExpiredItems.TitleText,道具已过期
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} 天（购买后开始计时）
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,若要举报《欧盟数字服务法》定义的非法内容，请访问 https://www.roblox.com/illegal-content-reporting
 Feature.EmptyStatePage.Message.NoInternet,无网络连接
@@ -3129,7 +2917,6 @@ Feature.Friends.Label.ConnectionsRecentlyPlayed,<b>{numberOfConnections} 个联�
 Feature.Friends.Label.ContactsCaption,为了帮助你和好友在 Roblox 上找到对方。Roblox 将定期同步你的联系人信息并存储相应的 Roblox 用户。你可以随时在设置页面修改此设置。
 Feature.Friends.Label.FewestInteractions,最少互动
 Feature.Friends.Label.FindFriendsHintBody,与你已经认识的朋友联系，或者发现更多新朋友。
-Feature.Friends.Label.Followed,已关注
 Feature.Friends.Label.Follower,粉丝
 Feature.Friends.Label.Followers,
 Feature.Friends.Label.Following,关注中
@@ -3160,7 +2947,7 @@ Feature.Friends.Label.MutualFriendsTitle,{numConnections} 位共同好友
 Feature.Friends.Label.NewConnection,新联系人
 Feature.Friends.Label.NewFriend,新好友
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
-Feature.Friends.Label.NoFriendsYet,{name}还没有任何好友。
+Feature.Friends.Label.NoConnectionYet,“{name}”还没有任何联系人。
 Feature.Friends.Label.NowTrusted,{username} 现已成为你信赖的好友
 Feature.Friends.Label.PYMK,你可能认识的人
 Feature.Friends.Label.Pending,待处理
@@ -3175,7 +2962,6 @@ Feature.Friends.Label.SearchFriends,
 Feature.Friends.Label.SentFromWithContext,发送自 {gameName}
 Feature.Friends.Label.SingularMutualFriend,
 Feature.Friends.Label.Suggested,建议体验
-Feature.Friends.Label.Unfollowed,已取消关注
 Feature.Friends.Label.YourLinkedParent,你关联的家长
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,你想被推荐至其他经过验证并拥有你手机号码的用户吗？
@@ -3236,8 +3022,6 @@ Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,已选择 {selectedCount} 
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,不感兴趣
-Feature.GameDetails.Action.PauseVideo,暂停视频
-Feature.GameDetails.Action.PlayVideo,播放视频
 Feature.GameDetails.Action.Report,
 Feature.GameDetails.Action.ReportAd,
 Feature.GameDetails.Action.Undo,撤消
@@ -3258,7 +3042,7 @@ Feature.GameDetails.Label.SomethingElse,
 Feature.GameDetails.Label.Store,
 Feature.GameDetails.Label.TellUsMorePlaceholder,请告诉我们详情
 Feature.GameDetails.Label.TooRepetitive,过于重复
-Feature.GameDetails.Label.Updated,
+Feature.GameDetails.Label.Updated,更新时间
 Feature.GameDetails.Label.VoiceChat,
 Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
@@ -3433,19 +3217,8 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,剩余 {time}
 Feature.InExperienceShop.Label.BonusItem,奖励道具
-Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
-Feature.InExperienceShop.Label.EndTime,{timeRemaining}后结束
 Feature.InExperienceShop.Label.NoDescription,无描述
-Feature.InExperienceShop.Label.OfferEndTime,{offer}将于 {timeRemaining}后结束
 Feature.InExperienceShop.Label.PreviewBanner,这是 Roblox Studio 中你的商店的预览效果。玩家不会看到此预览。
-Feature.InExperienceShop.Label.Timer.Day.Plural,{number} 天
-Feature.InExperienceShop.Label.Timer.Day.Singular,
-Feature.InExperienceShop.Label.Timer.Hour.Plural,
-Feature.InExperienceShop.Label.Timer.Hour.Singular,
-Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} 分钟
-Feature.InExperienceShop.Label.Timer.Minute.Singular,
-Feature.InExperienceShop.Label.Timer.Second.Plural,{number} 秒
-Feature.InExperienceShop.Label.Timer.Second.Singular,1 秒
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,确定要从你的道具栏中永久删除此道具吗？如果你改变主意，需要通过体验再次获得该道具。
 Feature.Item.Label.DeleteItemUndercase,删除道具
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
@@ -3464,7 +3237,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,
 Feature.Moments.Action.GenerateText,生成文本
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,没有帮助
-Feature.Moments.Action.GenerateTextFeedbackPolicy,不适当或违规
+Feature.Moments.Action.GenerateTextFeedbackPolicy,不妥或违反准则
 Feature.Moments.Action.Hide,隐藏详情
 Feature.Moments.Action.HowToCapture,如何截取
 Feature.Moments.Action.Join,
@@ -3482,7 +3255,7 @@ Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,裁剪视频
 Feature.Moments.Description.CommunityStandards,请查看《社区准则》，进一步了解关于言论的规范。
 Feature.Moments.Description.EmptyCapturesLibrary,你的截图将显示在此处。
-Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI 生成的内容。发布前请自行审核，你需要对发布的内容承担责任。
+Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI 生成的文本。发布前请自行审核——你需要对发布的内容承担责任。
 Feature.Moments.Description.HowToCaptureStep1,加入已启用“截图”功能的体验，然后选择汉堡菜单
 Feature.Moments.Description.HowToCaptureStep2,启用“截图”控件
 Feature.Moments.Description.HowToCaptureStep3,截取游戏的照片和视频
@@ -3659,6 +3432,7 @@ Feature.Profile.Action.AboutThisProfile,关于此个人资料
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
 Feature.Profile.Action.Add,
+Feature.Profile.Action.AddNickname,添加名称
 Feature.Profile.Action.Chat,
 Feature.Profile.Action.CopyProfileLink,复制个人资料链接
 Feature.Profile.Action.EditAppearance,编辑外观
@@ -3671,13 +3445,17 @@ Feature.Profile.Action.Pending,
 Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,分享个人资料
 Feature.Profile.Action.ShareProfileLink,分享个人资料链接
+Feature.Profile.Action.SkipAddNickname,
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
 Feature.Profile.Action.UserBlocked,用户已屏蔽
 Feature.Profile.Action.ViewFullProfile,查看完整个人资料
 Feature.Profile.Action.ViewProfile,
 Feature.Profile.Description.AboutModalCaption,让其他玩家更好地了解你。请保护自身安全，不要泄露个人详细信息。
+Feature.Profile.Description.EnterNicknameTextbox,输入你的昵称
 Feature.Profile.Description.InspectAndBuy,点按以查看并购买其造型。
+Feature.Profile.Description.NicknamePrivacy,只有 {displayName} 能看到此内容。
+Feature.Profile.Description.NicknamePrivacyNoDisplayName,只有此用户才能看到此内容。
 Feature.Profile.Description.QrCodeDescription,让其他人扫描你的二维码，在 Roblox 上与你建立联系。已完成年龄验证的 13 岁及以上用户可通过扫描实时二维码建立联系，成为可信好友。
 Feature.Profile.Description.QrCodeDescription.FriendsRename,让其他人扫描你的二维码，在 Roblox 上与你建立联系。已完成年龄验证的 13 岁及以上用户通过扫描实时二维码建立联系，即可成为信赖的好友。
 Feature.Profile.Description.QrCodeScanning,让其他人使用二维码扫描器或设备摄像头以扫描你的 Roblox 二维码，快速添加你为好友！
@@ -3685,8 +3463,11 @@ Feature.Profile.Description.RecognizeConnectionsByCustomName,设置自定义名�
 Feature.Profile.Description.RecognizeFriendsByCustomName,
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,让你认识的人使用二维码来添加你。
+Feature.Profile.Description.SelectNicknameDropdown,选择名称
 Feature.Profile.Description.SetCustomName,"设置<font weight=""medium"">“{displayName}”</font>的自定义名称。"
 Feature.Profile.Description.SetCustomNameNoDisplayName,设置自定义名称。
+Feature.Profile.Description.SetNicknamePrompt,请添加名称，方便 {displayName} 识别。
+Feature.Profile.Description.SetNicknamePromptNoDisplayName,请添加名称，方便此用户识别。
 Feature.Profile.Description.SocialNetworksCaptionEveryone,当前对所有人可见。
 Feature.Profile.Description.SocialNetworksCaptionFollowers,当前仅对好友、你关注的用户及你的粉丝可见。
 Feature.Profile.Description.SocialNetworksCaptionFollowing,当前对你的好友和你关注的好友可见。
@@ -3707,8 +3488,7 @@ Feature.Profile.Heading.DisplayNameUpdated,昵称已更新
 Feature.Profile.Heading.EditAgedUpDisplayName,编辑名称
 Feature.Profile.Heading.EditDisplayName,编辑昵称
 Feature.Profile.Heading.InsufficientFunds,资金不足
-Feature.Profile.Heading.ProfileFrame,个人资料边框
-Feature.Profile.Heading.ProfilePictureSaved,个人资料图片已成功保存
+Feature.Profile.Heading.NicknameRequestSent,
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,统计资料
 Feature.Profile.Heading.Username,
@@ -3726,6 +3506,7 @@ Feature.Profile.Label.AgedUpDisplayNameModalCaption,"您的名称每 7 天只能
 Feature.Profile.Label.AgedUpDisplayNameTooShort,名称应至少包含 3 个字符。
 Feature.Profile.Label.Cancel,
 Feature.Profile.Label.CustomName,自定义名称
+Feature.Profile.Label.CustomNicknameDropdown,设置自定义名称
 Feature.Profile.Label.CustomizeName,
 Feature.Profile.Label.CustomizeNamePlaceholder,
 Feature.Profile.Label.DisplayNameCaption,这是你在 Roblox 上向其他用户显示的主要公开名称。
@@ -3733,6 +3514,12 @@ Feature.Profile.Label.DisplayNameFailed,无法保存昵称，请重试。
 Feature.Profile.Label.DisplayNameModalCaption,你的昵称每 7 天只能更改一次。
 Feature.Profile.Label.DisplayNameTooShort,昵称应至少包含 3 个字符。
 Feature.Profile.Label.EditBackground,
+Feature.Profile.Label.NicknameErrorMessageInvalid,名称无效。
+Feature.Profile.Label.NicknameErrorMessageInvalidCharacters,名称包含不受支持的字符。
+Feature.Profile.Label.NicknameErrorMessageModerated,名称含有不当内容，无法在 Roblox 使用。
+Feature.Profile.Label.NicknameErrorMessageThrottled,你今天已更改过名称。
+Feature.Profile.Label.NicknameErrorMessageTooLong,名称应至少包含 20 个字符。
+Feature.Profile.Label.NicknameErrorMessageTooShort,名称应至少包含 2 个字符。
 Feature.Profile.Label.NoBioYet,暂无个人简介
 Feature.Profile.Label.NoPreviousName,暂无曾用名
 Feature.Profile.Label.NoSocialLink,暂无社交链接
@@ -3742,6 +3529,7 @@ Feature.Profile.Label.QRCodeFriendRequest,从你的二维码发送
 Feature.Profile.Label.RecentAgedUpDisplayName,"近期已更改过名称。您的名称每 7 天只能更改一次。
 "
 Feature.Profile.Label.RecentDisplayName,近期已更改过昵称，你的昵称每 7 天只能更改一次。
+Feature.Profile.Label.TimeToChangeNickname,你可以在 {hours} 小时候更改名称。
 Feature.Profile.Label.UnableToJoin,无法加入
 Feature.Profile.Label.UserIsPlayingExperience,<b>{userName}</b>正在玩“<b>{experienceName}</b>”
 Feature.Profile.Label.UsernameDescription,这是你在 Roblox 上的独一无二的名称。更改你的用户名将花费 {icon}{price}。
@@ -3922,7 +3710,7 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,好消息
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,获取 Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus 在这里不可用
-Feature.SafetyDashboard.Heading.AccountStatus.V2,帐户状态、违规和申诉
+Feature.SafetyDashboard.Heading.AccountStatus,帐户状态
 Feature.Schools.Label.Classmates,同学
 Feature.Screentime.Content.ScreentimeLimitDialog,你已达到每日屏幕时间限制。明天再回来访问 Roblox。
 Feature.SecurityFeedback.Header.NewLogin,新活动提醒
@@ -4048,6 +3836,7 @@ Feature.SettingsHub.Prompt.IncorrectNudgeV2,我们弄错了吗？<br /><u>报告
 Feature.SettingsHub.Prompt.JoinedVoiceChat,你已加入语音聊天
 Feature.SettingsHub.Prompt.JoinedVoiceChatV2,
 Feature.SettingsHub.Prompt.JoinedVoiceChatV3,你已连接语音聊天
+Feature.SettingsHub.Prompt.LeaveVoiceChat,语音聊天已断开连接
 Feature.SettingsHub.Prompt.LeaveVoiceChatV2,你已断开语音聊天连接
 Feature.SettingsHub.Prompt.MicAndCameraUseSuspended,麦克风和摄像头暂停使用
 Feature.SettingsHub.Prompt.MicUseSuspended,麦克风使用已禁用
@@ -4086,6 +3875,7 @@ Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedConnectionsUpdate,你现�
 Feature.SettingsHub.Prompt.Subtitle.TalkAgeGroupTrustedFriendsUpdate,你现在可以与年龄相近的人以及你信赖的好友交谈。
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedConnections,只有与你年龄相近的人以及你可信赖的联系人才能与你交谈。
 Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupTrustedFriends,只有与你年龄相近的人以及你信赖的好友才能与你交谈。
+Feature.SettingsHub.Prompt.Subtitle.TalkInAgeGroupV2,只有年龄相近的用户才能与你聊天。
 Feature.SettingsHub.Prompt.Subtitle.TemporarySuspension2,根据用户举报，我们认为你在使用语音聊天时的行为违反了我们的社区规则。我们暂时终止你使用语音聊天的权利，结束时间为
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1,由于你可能使用违反 Roblox 社区准则的语言，我们暂时关闭了语音聊天。
 Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan1V2,你继续使用违反规定的语言，或背景噪音过大。
@@ -4231,6 +4021,7 @@ Feature.Squads.Label.FindExperiencesPlayTogether,寻找能够一起游玩的体�
 Feature.Squads.Label.FriendJoinedYourParty,{combinedName}已加入你的队伍
 Feature.Squads.Label.InviteConnectionsConfirmation,邀请这些联系人加入群组？
 Feature.Squads.Label.InviteFriendsConfirmation,邀请这些朋友加入群组？
+Feature.Squads.Label.InviteToSquad,邀请加入小队
 Feature.Squads.Label.InvitedToExperience,已受邀至体验
 Feature.Squads.Label.JoinAnotherParty,切换队伍
 Feature.Squads.Label.JoinExperiencesTogether,一起加入体验
@@ -4284,7 +4075,6 @@ Feature.Subscription.Text.PerMonth,/月
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,你的虚拟形象已针对{rule}重置。你仍然可以使用商城，但对虚拟形象的更改将不会保存，直到 {time}。
 Feature.Timeout.Prompt.SaveTitleText,保存功能目前已停用
-Feature.Timeout.Prompt.TitleText,我们重置了你的虚拟形象
 Feature.Timeout.WarningBanner.DisabledMessage,虚拟形象保存已停用
 Feature.Timeout.WarningBanner.DisabledUntilMessage,虚拟形象保存已停用，直到 {time}
 Feature.Toast.Heading.PurchaseMessage.Success,已解锁
@@ -4537,7 +4327,6 @@ IAPExperience.PurchasePrompt.BuyRobuxAndSubscription,购买 Robux 和订阅
 IAPExperience.PurchasePrompt.Header.BuyAvatar,
 IAPExperience.PurchasePrompt.Header.BuyRobuxAndAvatar,购买 Robux 和虚拟形象
 IAPExperience.PurchasePrompt.Label.BlackbirdDiscount,Plus 会员权益（{discountPercentage}% 优惠）
-IAPExperience.PurchasePrompt.Label.BlackbirdDiscountEligibleItems,Plus 会员权益（符合条件的道具可享 {discountPercentage}% 优惠）
 IAPExperience.PurchasePrompt.Label.BlackbirdDiscountNoPercent,Plus 权益
 IAPExperience.PurchasePrompt.Label.BlackbirdSummary,使用 Plus 订阅可节省 {robuxIcon} {savingsAmount}
 IAPExperience.PurchasePrompt.Label.GenericDiscount,折扣（减免 {discountPercentage}%）
@@ -4832,7 +4621,7 @@ InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,
 InGame.PlayerDropDown.ConfirmUnfriend,轻点以确认取消好友关系
-InGame.PlayerDropDown.Decline,
+InGame.PlayerDropDown.Decline,拒绝
 InGame.PlayerDropDown.Examine,查看虚拟形象
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} 的好友人数已达上限。
 InGame.PlayerDropDown.Report,
@@ -4885,7 +4674,6 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,帮助改善这个体验
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,帮助创作者改善此体验
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,购买更多产品前，请先加入体验以兑换你先前的购买项目。
-Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,加入以兑换购买项目
 Roblox.ReferralRewards.AdditionalCreatorTerms,附加创作者条款
 Roblox.ReferralRewards.Expires,过期时间：
 Roblox.ReferralRewards.ReferralProgramTerms,推荐计划条款

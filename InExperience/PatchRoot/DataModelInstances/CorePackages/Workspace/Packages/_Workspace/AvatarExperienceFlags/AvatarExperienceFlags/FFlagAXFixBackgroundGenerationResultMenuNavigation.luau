@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXFixBackgroundGenerationResultMenuNavigation", false) and require(script.Parent.FFlagAXBackgroundGeneration)

@@ -16,6 +16,7 @@
 	SduiPlayWithReward = require(script.Components.SduiPlayWithReward),
 	SduiPlayButtonContextualMessage = require(script.Components.SduiPlayButtonContextualMessage),
 	SduiVerticalFeed = require(script.Components.SduiVerticalFeed),
+	PullToRefreshSpinner = require(script.Components.PullToRefreshSpinner),
 	useSduiReportExperienceLaunched = require(script.Components.useSduiReportExperienceLaunched),
 	sduiReportGamePlayIntent = require(script.Components.sduiReportGamePlayIntent),
 	SduiImage = require(script.Components.SduiImage),

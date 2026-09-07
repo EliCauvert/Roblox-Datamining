@@ -65,7 +65,6 @@
 	MultiPageSignup = "MultiPageSignup",
 	LuobuSignUpPage = "LuobuSignUpPage",
 	Landing = "Landing",
-	PioneerPostAuth = "PioneerPostAuth",
 	Birthday = "Birthday",
 	LoginNative = "LoginNative",
 	CaptchaNative = "CaptchaNative",

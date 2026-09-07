@@ -2,21 +2,39 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local dialog = foundationModule.Dialog
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local dialogSize = foundationModule.Enums.DialogSize
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), buttonVariant (ref), reactModule (ref), dialog (ref), dialogSize (ref)
-	local var1 = useLocalization({
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), buttonVariant (ref), reactModule (ref), dialog (ref), dialogSize (ref)
+	local SHARE_AUDIENCE_CANCEL, SHARE_AUDIENCE_FRIENDS_ONLY_DESCRIPTION, SHARE_AUDIENCE_SHARE, SHARE_AUDIENCE_FRIENDS_ONLY_TITLE
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		cancel = localizationStringsModule.SHARE_AUDIENCE_CANCEL,
 		description = localizationStringsModule.SHARE_AUDIENCE_FRIENDS_ONLY_DESCRIPTION,
 		share = localizationStringsModule.SHARE_AUDIENCE_SHARE,
 		title = localizationStringsModule.SHARE_AUDIENCE_FRIENDS_ONLY_TITLE
-	})
+	}) else nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
 	
+	if fFlagBuildLocalization then
+		SHARE_AUDIENCE_CANCEL = var1.cancel
+		SHARE_AUDIENCE_FRIENDS_ONLY_DESCRIPTION = var1.description
+		SHARE_AUDIENCE_SHARE = var1.share
+		SHARE_AUDIENCE_FRIENDS_ONLY_TITLE = var1.title
+	else
+		SHARE_AUDIENCE_CANCEL = localizationStringsModule.SHARE_AUDIENCE_CANCEL
+		SHARE_AUDIENCE_FRIENDS_ONLY_DESCRIPTION = localizationStringsModule.SHARE_AUDIENCE_FRIENDS_ONLY_DESCRIPTION
+		SHARE_AUDIENCE_SHARE = localizationStringsModule.SHARE_AUDIENCE_SHARE
+		SHARE_AUDIENCE_FRIENDS_ONLY_TITLE = localizationStringsModule.SHARE_AUDIENCE_FRIENDS_ONLY_TITLE
+	end
 	return reactModule.createElement(dialog.Root, {
 		testId = "build-friends-only-share-dialog",
 		disablePortal = p1.disablePortal == true,
@@ -24,20 +42,23 @@ return function(p1)
 		onClose = p1.onCancel,
 		size = dialogSize.Small
 	}, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.title }),
+		Title = reactModule.createElement(dialog.Title, {
+			LayoutOrder = 1,
+			text = SHARE_AUDIENCE_FRIENDS_ONLY_TITLE
+		}),
 		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			Description = reactModule.createElement(dialog.Text, { Text = var1.description })
+			Description = reactModule.createElement(dialog.Text, { Text = SHARE_AUDIENCE_FRIENDS_ONLY_DESCRIPTION })
 		}),
 		Actions = reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var1.share,
+					text = SHARE_AUDIENCE_SHARE,
 					variant = buttonVariant.Emphasis,
 					onActivated = p1.onShare
 				},
 				{
-					text = var1.cancel,
+					text = SHARE_AUDIENCE_CANCEL,
 					variant = buttonVariant.Standard,
 					onActivated = p1.onCancel
 				}

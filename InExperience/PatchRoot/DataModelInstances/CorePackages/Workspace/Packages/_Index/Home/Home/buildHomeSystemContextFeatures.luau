@@ -9,7 +9,9 @@ local t = {
 	cpuMake = "cpu_make",
 	cpuSpeed = "cpu_speed",
 	GPU = "gpu_adapter",
-	availRAM = "avail_ram"
+	availRAM = "avail_ram",
+	batteryLevel = "battery_level",
+	thermalStatus = "thermal_status"
 }
 
 return function()

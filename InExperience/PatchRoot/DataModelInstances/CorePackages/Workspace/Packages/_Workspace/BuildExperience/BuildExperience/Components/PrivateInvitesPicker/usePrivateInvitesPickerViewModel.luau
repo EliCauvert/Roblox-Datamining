@@ -1,6 +1,7 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
 local signalsReactModule = require(parent.SignalsReact)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local getPrivatePlaytestersStore = require(parent.DataHydration.PrivatePlaytesters).getPrivatePlaytestersStore
@@ -11,23 +12,41 @@ local _ = require(buildExperience.Components.UserPicker.UserPickerTypes)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
 local _ = require(script.Parent.PrivateInvitesPickerView)
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), sendBuildExperienceEventModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), friendsStore (ref), searchFriendsAsyncModule (ref), useUserPickerModule (ref)
-	local var1 = useLocalization({
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), sendBuildExperienceEventModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), friendsStore (ref), searchFriendsAsyncModule (ref), useUserPickerModule (ref)
+	local PRIVATE_INVITES_ADD_PLAYTESTER, PRIVATE_INVITES_ADD_PLAYTESTERS, PRIVATE_INVITES_ALL_FRIENDS_ADDED, PRIVATE_INVITES_FRIENDS_LOAD_ERROR, PRIVATE_INVITES_NO_FRIENDS, PRIVATE_INVITES_SEARCH_PLACEHOLDER
+	local var1 = if fFlagBuildLocalization then useLocalization({
 		addPlaytester = localizationStringsModule.PRIVATE_INVITES_ADD_PLAYTESTER,
 		addPlaytesters = localizationStringsModule.PRIVATE_INVITES_ADD_PLAYTESTERS,
 		allFriendsAdded = localizationStringsModule.PRIVATE_INVITES_ALL_FRIENDS_ADDED,
 		friendsLoadError = localizationStringsModule.PRIVATE_INVITES_FRIENDS_LOAD_ERROR,
 		noFriends = localizationStringsModule.PRIVATE_INVITES_NO_FRIENDS,
 		searchPlaceholder = localizationStringsModule.PRIVATE_INVITES_SEARCH_PLACEHOLDER
-	})
-	local addPlaytester = var1.addPlaytester
-	local addPlaytesters = var1.addPlaytesters
-	local allFriendsAdded = var1.allFriendsAdded
-	local friendsLoadError = var1.friendsLoadError
-	local noFriends = var1.noFriends
-	local searchPlaceholder = var1.searchPlaceholder
+	}) else nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	
+	if fFlagBuildLocalization then
+		PRIVATE_INVITES_ADD_PLAYTESTER = var1.addPlaytester
+		PRIVATE_INVITES_ADD_PLAYTESTERS = var1.addPlaytesters
+		PRIVATE_INVITES_ALL_FRIENDS_ADDED = var1.allFriendsAdded
+		PRIVATE_INVITES_FRIENDS_LOAD_ERROR = var1.friendsLoadError
+		PRIVATE_INVITES_NO_FRIENDS = var1.noFriends
+		PRIVATE_INVITES_SEARCH_PLACEHOLDER = var1.searchPlaceholder
+	else
+		PRIVATE_INVITES_ADD_PLAYTESTER = localizationStringsModule.PRIVATE_INVITES_ADD_PLAYTESTER
+		PRIVATE_INVITES_ADD_PLAYTESTERS = localizationStringsModule.PRIVATE_INVITES_ADD_PLAYTESTERS
+		PRIVATE_INVITES_ALL_FRIENDS_ADDED = localizationStringsModule.PRIVATE_INVITES_ALL_FRIENDS_ADDED
+		PRIVATE_INVITES_FRIENDS_LOAD_ERROR = localizationStringsModule.PRIVATE_INVITES_FRIENDS_LOAD_ERROR
+		PRIVATE_INVITES_NO_FRIENDS = localizationStringsModule.PRIVATE_INVITES_NO_FRIENDS
+		PRIVATE_INVITES_SEARCH_PLACEHOLDER = localizationStringsModule.PRIVATE_INVITES_SEARCH_PLACEHOLDER
+	end
 	local universeId = p1.universeId
 	local onInvitesSent = p1.onInvitesSent
 	local var2 = reactModule.useRef(false)
@@ -160,17 +179,17 @@ return function(p1)
 		scrollingFrameRef = var22,
 		searchText = var16.searchText,
 		setSearchText = var16.setSearchText,
-		searchPlaceholder = searchPlaceholder,
+		searchPlaceholder = PRIVATE_INVITES_SEARCH_PLACEHOLDER,
 		userIds = var16.userIds,
 		isLoading = var16.isLoading,
-		emptyText = if var10 == "Failed" then friendsLoadError elseif #var11 > 0 then allFriendsAdded else noFriends,
+		emptyText = if var10 == "Failed" then PRIVATE_INVITES_FRIENDS_LOAD_ERROR elseif #var11 > 0 then PRIVATE_INVITES_ALL_FRIENDS_ADDED else PRIVATE_INVITES_NO_FRIENDS,
 		isSelected = var16.isSelected,
 		canSelect = var16.canSelect,
 		toggleSelected = var16.toggleSelected,
 		hasSelection = var16.hasSelection,
 		submit = var16.submit,
 		isSubmitting = var16.isSubmitting,
-		sendButtonText = if var16.selectedCount > 1 then addPlaytesters else addPlaytester,
+		sendButtonText = if var16.selectedCount > 1 then PRIVATE_INVITES_ADD_PLAYTESTERS else PRIVATE_INVITES_ADD_PLAYTESTER,
 		testId = p1.testId
 	}
 end

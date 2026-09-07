@@ -5,10 +5,11 @@ local var1 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
 local builderIconsModule = require(corePackagesService.Packages.BuilderIcons)
 local uiblox = builderIconsModule.Migration.uiblox
 local foundationModule = require(corePackagesService.Packages.Foundation)
+local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local getFFlagFixIGMTabTransitionsModule = require(script.Parent.Parent.Flags.GetFFlagFixIGMTabTransitions)
 local fFlagIGMChangeCapturesToGalleryModule = require(script.Parent.Parent.Flags.FFlagIGMChangeCapturesToGallery)
 local fFlagIGMChangeGalleryHeaderIconModule = require(script.Parent.Parent.Flags.FFlagIGMChangeGalleryHeaderIcon)
-local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
 local captures = settingsPageFactoryModule:CreateNewPage()
 captures.TabHeader.Name = "CapturesTab"
 local var2 = if fFlagIGMChangeGalleryHeaderIconModule then {
@@ -25,7 +26,7 @@ else
 	captures.TabHeader.TabLabel.Title.Text = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.Captures")
 end
 captures.PageListLayout.Parent = nil
-captures.ShouldShowBottomBar = not isSideSheetEnabledModule
+captures.ShouldShowBottomBar = not fFlagEnableSideSheet
 captures.ShouldShowHubBar = true
 captures.Page.Name = "Captures"
 captures.Page.Size = UDim2.fromScale(1, 0)

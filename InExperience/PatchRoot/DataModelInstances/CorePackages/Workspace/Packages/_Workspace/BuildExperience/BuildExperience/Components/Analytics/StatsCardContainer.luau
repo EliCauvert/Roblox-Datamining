@@ -9,19 +9,19 @@ local getStatsCardColumnsModule = require(script.Parent.getStatsCardColumns)
 return function(p1)
 	-- upvalues: reactModule (ref), useBreakpoint (ref), getStatsCardColumnsModule (ref), view (ref), statsCardModule (ref)
 	local var1, var2 = reactModule.useState(nil)
-	local _, var3 = useBreakpoint(var1)
-	local var4 = if var3.X > 0 then getStatsCardColumnsModule(var3.X) else 2
+	local var3, var4 = useBreakpoint(var1)
+	local var5 = if var4.X > 0 then getStatsCardColumnsModule(var3) else 2
 	local cards = p1.cards
 	local t = {}
 	
-	for i_1 = 1, math.ceil(#cards / var4) do
+	for i_1 = 1, math.ceil(#cards / var5) do
 		local t_1 = {}
 		
-		for i = 1, var4 do
-			local var5 = cards[(i_1 - 1) * var4 + i]
+		for i = 1, var5 do
+			local var6 = cards[(i_1 - 1) * var5 + i]
 			
-			if var5 ~= nil then
-				t_1[`Cell{i}`] = reactModule.createElement(view, { tag = "fill auto-y", LayoutOrder = i }, { Card = reactModule.createElement(statsCardModule, var5) })
+			if var6 ~= nil then
+				t_1[`Cell{i}`] = reactModule.createElement(view, { tag = "fill auto-y", LayoutOrder = i }, { Card = reactModule.createElement(statsCardModule, var6) })
 			end
 		end
 		t[`Row{i_1}`] = reactModule.createElement(view, {

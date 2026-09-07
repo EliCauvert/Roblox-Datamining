@@ -2,7 +2,6 @@
 local avatarCreationService = game:GetService("AvatarCreationService")
 local experienceAuthService = game:GetService("ExperienceAuthService")
 local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local corePackagesService = game:GetService("CorePackages")
 local parent = script.Parent
 local openPublishAssetPromptModule = require(parent.Thunks.OpenPublishAssetPrompt)
 local openPublishAvatarPromptModule = require(parent.Thunks.OpenPublishAvatarPrompt)
@@ -13,9 +12,7 @@ local setHumanoidModelModule = require(parent.Actions.SetHumanoidModel)
 local setAccessoryInstanceModule = require(parent.Actions.SetAccessoryInstance)
 local setPriceInRobuxModule = require(parent.Actions.SetPriceInRobux)
 local openValidationErrorModalModule = require(parent.Actions.OpenValidationErrorModal)
-local publishAssetAnalytics = require(corePackagesService.Workspace.Packages.PurchasePrompt).PublishAssetAnalytics
 local getFFlagUploadMakeupSupportModule = require(parent.Flags.GetFFlagUploadMakeupSupport)
-local fFlagPublishAssetPromptItemDetailsTelemetryModule = require(parent.Flags.FFlagPublishAssetPromptItemDetailsTelemetry)
 local promptImportAnimationClipFromVideoAsyncEnabledEngineFeature = game:GetEngineFeature("PromptImportAnimationClipFromVideoAsyncEnabled")
 
 local function updateModelAttachmentsWithWrapDeformers(p1)
@@ -37,34 +34,12 @@ local function updateModelAttachmentsWithWrapDeformers(p1)
 	end
 end
 
-local function setAnalyticsItemDetails(value)
-	-- upvalues: publishAssetAnalytics (ref)
-	if value.instanceToPublish or value.serializedInstance then
-		publishAssetAnalytics.setItemDetails(publishAssetAnalytics.ItemType.Asset, value.assetType.Name)
-		
-		return
-	elseif value.outfitToPublish then
-		publishAssetAnalytics.setItemDetails(publishAssetAnalytics.ItemType.Outfit, Enum.OutfitType.Avatar.Name)
-		
-		return
-	elseif value.makeupLookToPublish then
-		publishAssetAnalytics.setItemDetails(publishAssetAnalytics.ItemType.Outfit, Enum.OutfitType.Makeup.Name)
-		
-		return
-	elseif value.accessoryToPublish then
-		publishAssetAnalytics.setItemDetails(publishAssetAnalytics.ItemType.Asset, value.accessoryType.Name)
-	end
-end
-
 return function(value)
-	-- upvalues: experienceAuthService (ref), promptImportAnimationClipFromVideoAsyncEnabledEngineFeature (ref), fFlagPublishAssetPromptItemDetailsTelemetryModule (ref), setAnalyticsItemDetails (ref), openPublishAssetPromptModule (ref), assetService (ref), openPublishAvatarPromptModule (ref), getFFlagUploadMakeupSupportModule (ref), openPublishMakeupLookPromptModule (ref), openPublishAvatarAssetPromptModule (ref), openResultModalModule (ref), avatarCreationService (ref), setAccessoryInstanceModule (ref), setPriceInRobuxModule (ref), updateModelAttachmentsWithWrapDeformers (ref), setHumanoidModelModule (ref), openValidationErrorModalModule (ref)
+	-- upvalues: experienceAuthService (ref), promptImportAnimationClipFromVideoAsyncEnabledEngineFeature (ref), openPublishAssetPromptModule (ref), assetService (ref), openPublishAvatarPromptModule (ref), getFFlagUploadMakeupSupportModule (ref), openPublishMakeupLookPromptModule (ref), openPublishAvatarAssetPromptModule (ref), openResultModalModule (ref), avatarCreationService (ref), setAccessoryInstanceModule (ref), setPriceInRobuxModule (ref), updateModelAttachmentsWithWrapDeformers (ref), setHumanoidModelModule (ref), openValidationErrorModalModule (ref)
 	local t = {}
 	table.insert(t, experienceAuthService.OpenAuthPrompt:Connect(function(p2, p3, p4)
-		-- upvalues: promptImportAnimationClipFromVideoAsyncEnabledEngineFeature (copy), fFlagPublishAssetPromptItemDetailsTelemetryModule (copy), setAnalyticsItemDetails (copy), value (ref), openPublishAssetPromptModule (copy), assetService (copy), openPublishAvatarPromptModule (copy), getFFlagUploadMakeupSupportModule (copy), openPublishMakeupLookPromptModule (copy), openPublishAvatarAssetPromptModule (copy)
+		-- upvalues: promptImportAnimationClipFromVideoAsyncEnabledEngineFeature (copy), value (ref), openPublishAssetPromptModule (copy), assetService (copy), openPublishAvatarPromptModule (copy), getFFlagUploadMakeupSupportModule (copy), openPublishMakeupLookPromptModule (copy), openPublishAvatarAssetPromptModule (copy)
 		if #p3 == 1 and p3[1] == Enum.ExperienceAuthScope.CreatorAssetsCreate and not (promptImportAnimationClipFromVideoAsyncEnabledEngineFeature and p4.isVideoToAnimationFlow) then
-			if fFlagPublishAssetPromptItemDetailsTelemetryModule then
-				setAnalyticsItemDetails(p4)
-			end
 			if p4.instanceToPublish then
 				value:dispatch(openPublishAssetPromptModule(p4.instanceToPublish, p4.assetType, p2, p3))
 				

@@ -44,7 +44,6 @@ local function normalizeConversation(p1)
 		moderationType = p1.moderationType,
 		userPendingStatus = p1.userPendingStatus,
 		participantPendingStatus = p1.participantPendingStatus,
-		callButtonEligibility = p1.callButtonEligibility,
 		osaAcknowledgementStatus = p1.osaAcknowledgementStatus,
 		userOptedIntoChatMessages = p1.userOptedIntoChatMessages,
 		initialLoadingStatus = p1.initialLoadingStatus

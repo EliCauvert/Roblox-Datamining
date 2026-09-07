@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXEnableUnifiedProductPurchaseForMarketplace2", false)
+﻿return require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow and game:DefineFastFlag("AXEnableUnifiedProductPurchaseForMarketplace2", false)

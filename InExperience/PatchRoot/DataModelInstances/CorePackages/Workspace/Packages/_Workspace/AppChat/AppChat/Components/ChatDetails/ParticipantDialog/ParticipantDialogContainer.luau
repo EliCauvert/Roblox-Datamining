@@ -31,7 +31,6 @@ local fFlagFriendsChatPlaceholderRenameFix = sharedFlagsModule.FFlagFriendsChatP
 local fFlagAppChatParticipantDialogGamepadFocusModule = require(appChat.Flags.FFlagAppChatParticipantDialogGamepadFocus)
 local fFlagEnableChatDetailsOpenChatModule = require(appChat.Flags.FFlagEnableChatDetailsOpenChat)
 local fFlagAppChatEnableTrustedFriendEntryPointModule = require(appChat.Flags.FFlagAppChatEnableTrustedFriendEntryPoint)
-local fFlagAppChatConsolidateTrustedFriendsModalModule = require(appChat.Flags.FFlagAppChatConsolidateTrustedFriendsModal)
 local fFlagAppChatTrustedFriendEntryPointAnalyticsModule = require(appChat.Flags.FFlagAppChatTrustedFriendEntryPointAnalytics)
 local fFlagAppChatMigrateFriendshipStatusesModule = require(appChat.Flags.FFlagAppChatMigrateFriendshipStatuses)
 local memo = reactModule.memo
@@ -67,7 +66,7 @@ local t_1 = {
 }
 
 function ParticipantDialogContainer(p1)
-	-- upvalues: cryoModule (ref), t_1 (ref), reactModule (ref), backHandlerContextModule (ref), fFlagAppChatParticipantDialogGamepadFocusModule (ref), fFlagAppChatTrustedFriendEntryPointAnalyticsModule (ref), useTelemetryModule (ref), chatDialogTelemetryLayerModule (ref), useNavigation (ref), useDispatch (ref), useAppPolicyModule (ref), fFlagEnableChatDetailsOpenChatModule (ref), useSelector (ref), conversationModule (ref), fFlagAppChatMigrateFriendshipStatusesModule (ref), useGetFriendshipStatus (ref), t (ref), networkingFriendsModule (ref), useLocalization (ref), fFlagFriendsChatPlaceholderRenameFix (ref), useIsExternalNavigationAvailableModule (ref), enumScreensModule (ref), fFlagAppChatEnableTrustedFriendEntryPointModule (ref), useTrustedFriendActionModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), loggerModule (ref), genericDialogTypeModule (ref), roactChatAnalyticsModule (ref), chatDetailsTelemetryEventsModule (ref), notificationModalsManagerModule (ref), sources (ref), fFlagAppChatConsolidateTrustedFriendsModalModule (ref), enteredChatFromEntryPoint (ref), chatEntryPointNames (ref), createConversationModule (ref), parseCreateConversationErrorsModule (ref), fFlagDisableBlockAndReport (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), playerContextualMenuWrapperModule (ref), focusNavigableSurfaceWrapper (ref), participantDialogModule (ref)
+	-- upvalues: cryoModule (ref), t_1 (ref), reactModule (ref), backHandlerContextModule (ref), fFlagAppChatParticipantDialogGamepadFocusModule (ref), fFlagAppChatTrustedFriendEntryPointAnalyticsModule (ref), useTelemetryModule (ref), chatDialogTelemetryLayerModule (ref), useNavigation (ref), useDispatch (ref), useAppPolicyModule (ref), fFlagEnableChatDetailsOpenChatModule (ref), useSelector (ref), conversationModule (ref), fFlagAppChatMigrateFriendshipStatusesModule (ref), useGetFriendshipStatus (ref), t (ref), networkingFriendsModule (ref), useLocalization (ref), fFlagFriendsChatPlaceholderRenameFix (ref), useIsExternalNavigationAvailableModule (ref), enumScreensModule (ref), fFlagAppChatEnableTrustedFriendEntryPointModule (ref), useTrustedFriendActionModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), loggerModule (ref), genericDialogTypeModule (ref), roactChatAnalyticsModule (ref), chatDetailsTelemetryEventsModule (ref), notificationModalsManagerModule (ref), sources (ref), enteredChatFromEntryPoint (ref), chatEntryPointNames (ref), createConversationModule (ref), parseCreateConversationErrorsModule (ref), fFlagDisableBlockAndReport (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), playerContextualMenuWrapperModule (ref), focusNavigableSurfaceWrapper (ref), participantDialogModule (ref)
 	local var1 = cryoModule.Dictionary.join(t_1, p1)
 	local var2 = reactModule.useContext(backHandlerContextModule)
 	local var3 = reactModule.useRef(var1.onDismiss)
@@ -126,8 +125,8 @@ function ParticipantDialogContainer(p1)
 		chatText = if fFlagEnableChatDetailsOpenChatModule then var1.chatText else nil,
 		reportUserText = var1.reportUserText,
 		removeFromGroupText = var1.removeFromGroupText,
-		chatUnavailableWithUser = if fFlagFriendsChatPlaceholderRenameFix then "Feature.Chat.Message.ChatUnavailableWithUser" else nil,
-		networkErrorText = if fFlagFriendsChatPlaceholderRenameFix then "Feature.Toast.NetworkingError.SomethingIsWrong" else nil
+		chatUnavailableWithUser = if fFlagFriendsChatPlaceholderRenameFix then "Feature.Chat.Message.ChatUnavailableWithUser" else "",
+		networkErrorText = if fFlagFriendsChatPlaceholderRenameFix then "Feature.Toast.NetworkingError.SomethingIsWrong" else ""
 	})
 	local viewUserProfile = useIsExternalNavigationAvailableModule({ enumScreensModule.ViewUserProfile })[enumScreensModule.ViewUserProfile]
 	local var12 = if fFlagAppChatEnableTrustedFriendEntryPointModule then useTrustedFriendActionModule(var1.participantId) else nil
@@ -191,7 +190,7 @@ function ParticipantDialogContainer(p1)
 				viewUserProfile(p2, {})
 			end, { var5, var1.analytics, var1.onDismiss }),
 			openTrustedFriend = reactModule.useCallback(function()
-				-- upvalues: var13 (ref), fFlagAppChatTrustedFriendEntryPointAnalyticsModule (copy), var4 (write), chatDetailsTelemetryEventsModule (copy), var1 (ref), var6 (ref), networkingFriendsModule (copy), var14 (ref), notificationModalsManagerModule (copy), var12 (write), loggerModule (copy), sources (copy), fFlagAppChatConsolidateTrustedFriendsModalModule (copy), var5 (ref), enumScreensModule (copy)
+				-- upvalues: var13 (ref), fFlagAppChatTrustedFriendEntryPointAnalyticsModule (copy), var4 (write), chatDetailsTelemetryEventsModule (copy), var1 (ref), var6 (ref), networkingFriendsModule (copy), var14 (ref), notificationModalsManagerModule (copy), var12 (write), loggerModule (copy), sources (copy), var5 (ref), enumScreensModule (copy)
 				if var13 == nil then return end
 				if var13.actionType == "RemoveTrustedConnection" then
 					if fFlagAppChatTrustedFriendEntryPointAnalyticsModule and var4 then
@@ -224,35 +223,24 @@ function ParticipantDialogContainer(p1)
 					var1.onDismiss()
 					
 					if var13.actionType == "AddIncomingTrustedConnection" then
-						local t = {
-							userId = var1.participantId,
-							source = if fFlagAppChatTrustedFriendEntryPointAnalyticsModule then sources.ChatDetails else nil,
-							onRequestAccepted = var14
-						}
-						
-						if fFlagAppChatConsolidateTrustedFriendsModalModule then
-							var5.navigate(enumScreensModule.TrustedConnectionsUpsell, t)
-							
-							return
-						end
-						var5.navigate(enumScreensModule.AppChatTrustedContactsModal, { props = t })
+						var5.navigate(enumScreensModule.AppChatTrustedContactsModal, {
+							props = {
+								userId = var1.participantId,
+								source = if fFlagAppChatTrustedFriendEntryPointAnalyticsModule then sources.ChatDetails else nil,
+								onRequestAccepted = var14
+							}
+						})
 						
 						return
-					else
-						local t = {
+					end
+					var5.navigate(enumScreensModule.AppChatTrustedContactsModal, {
+						props = {
 							userId = var1.participantId,
 							source = sources.ChatDetails,
 							modalVariantOverride = modalVariantOverride,
 							onRequestSent = var14
 						}
-						
-						if fFlagAppChatConsolidateTrustedFriendsModalModule then
-							var5.navigate(enumScreensModule.TrustedConnectionsUpsell, t)
-							
-							return
-						end
-						var5.navigate(enumScreensModule.AppChatTrustedContactsModal, { props = t })
-					end
+					})
 				end
 			end, {
 				var13, var12, var1.participantId, var1.onDismiss, var6, var14, var5,

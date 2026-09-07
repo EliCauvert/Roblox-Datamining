@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXBackgroundGenerationV2", false) and (require(script.Parent.FFlagAXBackgroundsRoot) and require(script.Parent.FFlagAXBackgroundsCustomizeHydration))
+﻿return require(script.Parent.FFlagAXBackgroundsRoot) and game:DefineFastFlag("AXBackgroundGenerationDev", false)

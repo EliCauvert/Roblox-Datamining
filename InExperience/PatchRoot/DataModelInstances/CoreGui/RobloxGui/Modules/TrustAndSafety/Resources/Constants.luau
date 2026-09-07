@@ -18,7 +18,8 @@
 		Category = "Category",
 		Listing = "Listing",
 		ReportForm = "ReportForm",
-		ReportSent = "ReportSent"
+		ReportSent = "ReportSent",
+		ScreenshotDialog = "ScreenshotDialog"
 	},
 	Analytics = {
 		ReportSubmittedName = "ingame_menu_report_submitted",

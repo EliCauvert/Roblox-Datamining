@@ -13,7 +13,6 @@ return {
 	fireAnalyticsEvent = require(script.fireAnalyticsEvent),
 	fireFunnelAnalyticsEvent = require(script.fireFunnelAnalyticsEvent),
 	reportMomentSkip = require(script.reportMomentSkip),
-	reportMusicSearchCounts = require(script.reportMusicSearchCounts),
 	reportMomentsFeedLoadAttempt = reportMomentsRealtimeEventModule.reportMomentsFeedLoadAttempt,
 	reportMomentsFeedLoadMore = reportMomentsRealtimeEventModule.reportMomentsFeedLoadMore,
 	reportMomentsFeedMediaLoad = reportMomentsRealtimeEventModule.reportMomentsFeedMediaLoad,

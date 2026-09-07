@@ -27,8 +27,7 @@ local PANEL_RECESS_TRANSPARENCY = useSlideOpenCloseAnimationModule.PANEL_RECESS_
 local computeStatColumnsModule = require(parent.Common.computeStatColumns)
 local playerListVisibilityStoreModule = require(parent.Common.PlayerListVisibilityStore)
 local playerContextualMenuStoreModule = require(parent.Common.PlayerContextualMenuStore)
-local toggleContextMenu = playerContextualMenuStoreModule.toggleContextMenu
-local constantsModule = require(parent.Common.Constants)
+local openContextMenu = playerContextualMenuStoreModule.openContextMenu
 local panelHeaderModule = require(parent.Components.Presentation.PanelHeader)
 local columnHeaderRowModule = require(parent.Components.Presentation.ColumnHeaderRow)
 local teamListViewModule = require(parent.Components.Presentation.TeamListView)
@@ -73,7 +72,7 @@ local function renderWithSlideAndZoomDecorations(p1, p2, p3, p4, p5, p6, p7)
 end
 
 local function PlayerListPanelContent(p1)
-	-- upvalues: useLeaderboardStoreModule (ref), var1 (ref), var2 (ref), signalsReactModule (ref), fFlagPlayerListTwoTabsModule (ref), usePlatformLeaderboardModule (ref), fallbackSignalsModule (ref), usePanelLayoutModule (ref), useTokens (ref), usePreferredBackgroundStyleModule (ref), playerListVisibilityStoreModule (ref), reactModule (ref), playerContextualMenuStoreModule (ref), toggleContextMenu (ref), reactOtterModule (ref), MOBILE_ZOOM_SPRING (ref), MENU_ZOOM_CLOSED_SCALE (ref), PANEL_RECESS_SCALE (ref), PANEL_RECESS_TRANSPARENCY (ref), createZoomDecorations (ref), useReportPanelContentHeightModule (ref), panelContentHeightStoreModule (ref), computeStatColumnsModule (ref), constantsModule (ref), consoleFocusScrollViewModule (ref), teamListViewModule (ref), scrollView (ref), entryViewModule (ref), columnHeaderRowModule (ref), panelHeaderModule (ref), foundationModule (ref), view (ref), renderWithSlideAndZoomDecorations (ref), tabbedLeaderboardBodyModule (ref)
+	-- upvalues: useLeaderboardStoreModule (ref), var1 (ref), var2 (ref), signalsReactModule (ref), fFlagPlayerListTwoTabsModule (ref), usePlatformLeaderboardModule (ref), fallbackSignalsModule (ref), usePanelLayoutModule (ref), useTokens (ref), usePreferredBackgroundStyleModule (ref), playerListVisibilityStoreModule (ref), reactModule (ref), playerContextualMenuStoreModule (ref), openContextMenu (ref), reactOtterModule (ref), MOBILE_ZOOM_SPRING (ref), MENU_ZOOM_CLOSED_SCALE (ref), PANEL_RECESS_SCALE (ref), PANEL_RECESS_TRANSPARENCY (ref), createZoomDecorations (ref), useReportPanelContentHeightModule (ref), panelContentHeightStoreModule (ref), computeStatColumnsModule (ref), consoleFocusScrollViewModule (ref), teamListViewModule (ref), scrollView (ref), entryViewModule (ref), columnHeaderRowModule (ref), panelHeaderModule (ref), foundationModule (ref), view (ref), renderWithSlideAndZoomDecorations (ref), tabbedLeaderboardBodyModule (ref)
 	local var3 = p1.isSmallTouchDevice == true
 	local title = p1.title
 	local platformLeaderboardOverride = p1.platformLeaderboardOverride
@@ -98,7 +97,7 @@ local function PlayerListPanelContent(p1)
 			return
 		end
 	end, {})
-	local var15 = if var13 then toggleContextMenu else nil
+	local var15 = if var13 then openContextMenu else nil
 	local var16 = signalsReactModule.useSignalState(playerContextualMenuStoreModule.getMenuData) ~= nil
 	local var17, var18 = reactOtterModule.useAnimatedBinding(0)
 	reactModule.useEffect(function()
@@ -180,8 +179,12 @@ local function PlayerListPanelContent(p1)
 			ScrollingDirection = Enum.ScrollingDirection.Y
 		},
 		scrollingFrameRef = var24,
-		selectionGroup = constantsModule.CONSOLE_FOCUS_SCROLL_ESCAPE_UP,
-		selection = constantsModule.NOT_SELECTABLE
+		selectionGroup = {
+			SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
+			SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
+			SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
+			SelectionBehaviorRight = Enum.SelectionBehavior.Stop
+		}
 	}
 	local _ = nil
 	
@@ -242,7 +245,7 @@ local function PlayerListPanelContent(p1)
 	}
 	local var29 = var22 == nil
 	v = reactModule.useMemo(function()
-		-- upvalues: var10 (ref), var29 (ref), var12 (ref), var21 (ref), constantsModule (copy)
+		-- upvalues: var10 (ref), var29 (ref), var12 (ref), var21 (ref)
 		return {
 			Visible = true,
 			Size = UDim2.fromOffset(var10.panelWidth, var10.panelHeight),
@@ -251,9 +254,7 @@ local function PlayerListPanelContent(p1)
 				["stroke-standard stroke-default"] = var29
 			},
 			backgroundStyle = var12,
-			GroupTransparency = var21,
-			selectionGroup = constantsModule.CONSOLE_FOCUS_ISOLATE,
-			selection = constantsModule.NOT_SELECTABLE
+			GroupTransparency = var21
 		}
 	end, {
 		var10.panelWidth,

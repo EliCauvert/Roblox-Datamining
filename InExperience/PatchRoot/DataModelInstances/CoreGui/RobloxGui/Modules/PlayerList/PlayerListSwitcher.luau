@@ -15,17 +15,11 @@ local setPlayerListVisibilityModule = require(parent.Actions.SetPlayerListVisibi
 local playerListInitialVisibleStateModule = require(parent.PlayerListInitialVisibleState)
 local fFlagEnableMobilePlayerListOnConsole = playerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
 local fFlagPlayerListTwoTabsOnLegacy = playerListModule.Flags.FFlagPlayerListTwoTabsOnLegacy
-local fFlagPlayerListKeepModalHiddenOnRemountModule = require(parent.Flags.FFlagPlayerListKeepModalHiddenOnRemount)
 local platformLeaderboardContainer = playerListModule.Container.PlatformLeaderboardContainer
 local playerListSwitcher = roactModule.PureComponent:extend("PlayerListSwitcher")
 
 function playerListSwitcher.didMount(p1)
-	-- upvalues: fFlagPlayerListKeepModalHiddenOnRemountModule (ref), playerListInitialVisibleStateModule (ref)
-	if fFlagPlayerListKeepModalHiddenOnRemountModule and p1.props.isSmallTouchDevice then
-		p1.props.setPlayerListVisible(false)
-		
-		return
-	end
+	-- upvalues: playerListInitialVisibleStateModule (ref)
 	p1.props.setPlayerListVisible(playerListInitialVisibleStateModule())
 end
 

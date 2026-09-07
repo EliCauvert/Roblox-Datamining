@@ -21,6 +21,7 @@ local voiceChatCoreModule = require(corePackagesService.Workspace.Packages.Voice
 local default_1 = require(corePackagesService.Workspace.Packages.VoiceChat).GlobalVoiceManager.default
 local getFFlagDisableConsentModalForExistingUsersModule = require(script.Parent.Flags.GetFFlagDisableConsentModalForExistingUsers)
 local getFFlagOnlyEnableJoinVoiceInVoiceEnabledUniversesModule = require(script.Parent.Flags.GetFFlagOnlyEnableJoinVoiceInVoiceEnabledUniverses)
+local getFFlagUpdateVoiceConnectionToastsModule = require(script.Parent.Flags.GetFFlagUpdateVoiceConnectionToasts)
 local getFFlagEnableUniveralVoiceToastsModule = require(robloxGui.Modules.Flags.GetFFlagEnableUniveralVoiceToasts)
 local getFFlagEnableVoicePromptReasonTextModule = require(robloxGui.Modules.Flags.GetFFlagEnableVoicePromptReasonText)
 local getFFlagAvatarChatServiceEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagAvatarChatServiceEnabled
@@ -36,6 +37,7 @@ local getFFlagEnableVoiceChatMuteForVideoCaptures = require(corePackagesService.
 local getFFlagEnableCrossExperienceVoiceCaptureMute = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagEnableCrossExperienceVoiceCaptureMute
 local getFFlagExpChatUseVoiceParticipantsStore = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagExpChatUseVoiceParticipantsStore
 local getFFlagEnableVoiceUxUpdates = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagEnableVoiceUxUpdates
+local getFFlagEnableVoiceTrustedConnectionsToastsModule = require(script.Parent.Flags.GetFFlagEnableVoiceTrustedConnectionsToasts)
 local fFlagDebugShowAudioDeviceInputDebugger = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagDebugShowAudioDeviceInputDebugger()
 local getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module = require(script.Parent.Flags.GetFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2)
 local voiceNudgeUseNewDACopyModule = require(script.Parent.Helpers.VoiceNudgeUseNewDACopy)
@@ -66,14 +68,10 @@ local fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule = require(roblox
 local fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule = require(script.Parent.Flags.FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToast)
 local fFlagVoiceRewarmTelemetry = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagVoiceRewarmTelemetry
 local guardVoiceInExpUpsellVariant = game:DefineFastFlag("GuardVoiceInExpUpsellVariant", false)
-local alwaysSetJoinVoiceButtonContext = game:DefineFastFlag("AlwaysSetJoinVoiceButtonContext", false)
 local _ = {
 	FAE_UPSELL = "FaeUpsell",
 	VOICE_FTUX = "VoiceFtux",
-	REWARM = "Rewarm",
-	AGE_CHECK_TOAST = "AgeCheckToast",
-	PHONE_UPSELL = "PhoneUpsell",
-	IN_EXP_UPSELL = "InExpUpsell"
+	REWARM = "Rewarm"
 }
 local _ = {
 	REJOIN_PREVIOUS_CHANNEL = "RejoinPreviousChannel",
@@ -249,7 +247,7 @@ function t:__newindex(p1, p2)
 end
 
 function t.new(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: analytics (ref), getCamMicPermissionsModule (ref), t (ref), WATCHED_MESSAGE_TYPES (ref), getFIntThrottleParticipantsUpdateMs (ref), IXPServiceWrapper (ref), voiceUIImprovementsIXPLayerName (ref), throttleParticipantsUpdateIXPLayerValue (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), expChatModule (ref), getFFlagEnableUniveralVoiceToastsModule (ref), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), debugSkipVoicePermissionCheck (ref), fFlagDebugShowAudioDeviceInputDebugger (ref), fFlagEnablePartyVoiceChangersInLua (ref), microphoneDevicePermissionsLoggingModule (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure (ref), voiceVolumeControlsEligibility (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpLayer (ref), VOICE_JOIN_PROGRESS (ref), constantsModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), disableLeaveToastInStudio (ref), promptTypeModule (ref), debugSimulateConnectDisconnect (ref), name (ref), appStorageService (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), voiceNudgeUseNewDACopyModule (ref), getFFlagShowDevicePermissionsModal (ref), getFFlagEnableSeamlessVoiceDataConsentToastModule (ref), getFFlagNonVoiceFTUX (ref), getFFlagEnableVoiceChatMuteForVideoCaptures (ref), getFFlagEnableCrossExperienceVoiceCaptureMute (ref), default_1 (ref)
+	-- upvalues: analytics (ref), getCamMicPermissionsModule (ref), t (ref), WATCHED_MESSAGE_TYPES (ref), getFIntThrottleParticipantsUpdateMs (ref), IXPServiceWrapper (ref), voiceUIImprovementsIXPLayerName (ref), throttleParticipantsUpdateIXPLayerValue (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), expChatModule (ref), getFFlagEnableUniveralVoiceToastsModule (ref), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), debugSkipVoicePermissionCheck (ref), fFlagDebugShowAudioDeviceInputDebugger (ref), fFlagEnablePartyVoiceChangersInLua (ref), microphoneDevicePermissionsLoggingModule (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure (ref), voiceVolumeControlsEligibility (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpLayer (ref), VOICE_JOIN_PROGRESS (ref), constantsModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), disableLeaveToastInStudio (ref), promptTypeModule (ref), debugSimulateConnectDisconnect (ref), name (ref), getFFlagEnableVoiceTrustedConnectionsToastsModule (ref), appStorageService (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), voiceNudgeUseNewDACopyModule (ref), getFFlagShowDevicePermissionsModal (ref), getFFlagEnableSeamlessVoiceDataConsentToastModule (ref), getFFlagNonVoiceFTUX (ref), getFFlagUpdateVoiceConnectionToastsModule (ref), seamlessVoiceV2JoinVoiceToast (ref), getFFlagEnableVoiceChatMuteForVideoCaptures (ref), getFFlagEnableCrossExperienceVoiceCaptureMute (ref), default_1 (ref)
 	local tbl = setmetatable({
 		_mutedAnyone = false,
 		voiceConnectEventReportedForActiveSession = false,
@@ -432,14 +430,14 @@ function t.new(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 		end
 	end)
 	tbl.coreVoiceManager:subscribe("OnVoiceChatServiceInitialized", function()
-		-- upvalues: tbl (ref), debugSimulateConnectDisconnect (copy), name (copy), appStorageService (copy), constantsModule (copy), promptTypeModule (copy)
+		-- upvalues: tbl (ref), debugSimulateConnectDisconnect (copy), name (copy), getFFlagEnableVoiceTrustedConnectionsToastsModule (copy), appStorageService (copy), constantsModule (copy), promptTypeModule (copy)
 		tbl:ShowVoiceUI()
 		
 		if debugSimulateConnectDisconnect then
 			name:debug("Simulating join voice")
 			tbl:simulateVoiceConnectDisconnect()
 		end
-		if not tbl.coreVoiceManager.initializedPostSuspension then
+		if getFFlagEnableVoiceTrustedConnectionsToastsModule() and not tbl.coreVoiceManager.initializedPostSuspension then
 			local ok, status = pcall(function()
 				-- upvalues: appStorageService (copy), constantsModule (copy)
 				return appStorageService:GetItem(constantsModule.VOICE_WITH_TC_TOAST_KEY) == "true"
@@ -523,13 +521,28 @@ function t.new(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 		tbl:HideVoiceUI()
 	end)
 	tbl.coreVoiceManager:subscribe("OnVoiceJoin", function()
-		-- upvalues: getFFlagNonVoiceFTUX (copy), tbl (ref), promptTypeModule (copy), getFFlagEnableVoiceChatMuteForVideoCaptures (copy), getFFlagEnableCrossExperienceVoiceCaptureMute (copy), default_1 (copy), var6 (write), eventConnection (ref)
+		-- upvalues: getFFlagNonVoiceFTUX (copy), tbl (ref), getFFlagEnableVoiceTrustedConnectionsToastsModule (copy), getFFlagUpdateVoiceConnectionToastsModule (copy), promptTypeModule (copy), seamlessVoiceV2JoinVoiceToast (copy), getFFlagEnableVoiceChatMuteForVideoCaptures (copy), getFFlagEnableCrossExperienceVoiceCaptureMute (copy), default_1 (copy), var6 (write), eventConnection (ref)
 		if getFFlagNonVoiceFTUX() and tbl.hasLeftFTUX then
 			tbl.hasLeftFTUX = false
-			tbl:showJoinVoicePrompt()
+			
+			if getFFlagEnableVoiceTrustedConnectionsToastsModule() then
+				tbl:showJoinVoicePrompt()
+			elseif getFFlagUpdateVoiceConnectionToastsModule() then
+				tbl:showPrompt(promptTypeModule.UnifiedJoinVoiceToast)
+			else
+				tbl:showPrompt(promptTypeModule.JoinedVoiceToast)
+			end
 			tbl.Analytics:reportConnectDisconnectEvents("voiceConnectFtuxLeaveEvent", tbl:GetConnectDisconnectAnalyticsData())
 		elseif tbl:IsSeamlessVoice() then
-			tbl:showJoinVoicePrompt()
+			if getFFlagEnableVoiceTrustedConnectionsToastsModule() then
+				tbl:showJoinVoicePrompt()
+			elseif getFFlagUpdateVoiceConnectionToastsModule() then
+				tbl:showPrompt(promptTypeModule.UnifiedJoinVoiceToast)
+			elseif seamlessVoiceV2JoinVoiceToast and tbl.isInitialJoin then
+				tbl:showPrompt(promptTypeModule.JoinedVoiceToast)
+			else
+				tbl:showPrompt(promptTypeModule.JoinVoice)
+			end
 			tbl:SetVoiceConnectCookieValue(true)
 		else
 			tbl:showPrompt(promptTypeModule.VoiceConsentAcceptedToast)
@@ -1486,7 +1499,7 @@ function t.GetIcon(_, p16, p17)
 end
 
 function t:JoinVoice(p16)
-	-- upvalues: fFlagVoiceRewarmTelemetry (ref), showJoinVoiceWhenDisconnectedV3 (ref), name (ref), guardVoiceInExpUpsellVariant (ref), constantsModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), getFFlagNonVoiceFTUX (ref), appStorageService (ref), getFFlagEnableVrVoiceParity (ref), promiseModule (ref), seamlessVoiceV2JoinVoiceToast (ref), enableVerifiedCheckViaOverlay (ref), getFFlagDisableConsentModalForExistingUsersModule (ref), promptTypeModule (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), getFFlagEnableInExpPhoneVoiceUpsellEntrypoints (ref), getOverlayStore (ref), overlayTypes (ref), socialUpsellType (ref), enum (ref), sendUserConnectionStatus (ref)
+	-- upvalues: fFlagVoiceRewarmTelemetry (ref), showJoinVoiceWhenDisconnectedV3 (ref), name (ref), guardVoiceInExpUpsellVariant (ref), constantsModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), getFFlagEnableVoiceTrustedConnectionsToastsModule (ref), getFFlagUpdateVoiceConnectionToastsModule (ref), promptTypeModule (ref), getFFlagNonVoiceFTUX (ref), appStorageService (ref), getFFlagEnableVrVoiceParity (ref), promiseModule (ref), seamlessVoiceV2JoinVoiceToast (ref), enableVerifiedCheckViaOverlay (ref), getFFlagDisableConsentModalForExistingUsersModule (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), getFFlagEnableInExpPhoneVoiceUpsellEntrypoints (ref), getOverlayStore (ref), overlayTypes (ref), socialUpsellType (ref), enum (ref), sendUserConnectionStatus (ref)
 	local joinVoiceButtonContext = nil
 	local var18 = nil
 	
@@ -1509,7 +1522,14 @@ function t:JoinVoice(p16)
 			var18 = "RejoinPreviousChannel"
 		end
 		self:RejoinPreviousChannel()
-		self:showJoinVoicePrompt()
+		
+		if getFFlagEnableVoiceTrustedConnectionsToastsModule() then
+			self:showJoinVoicePrompt()
+		elseif getFFlagUpdateVoiceConnectionToastsModule() then
+			self:showPrompt(promptTypeModule.UnifiedJoinVoiceToast)
+		else
+			self:showPrompt(promptTypeModule.JoinVoice)
+		end
 		self:ShowVoiceUI()
 		self:SetVoiceConnectCookieValue(true)
 	elseif getFFlagNonVoiceFTUX() and self.isShowingFTUX then
@@ -1626,7 +1646,7 @@ function t:EligibleForAgeCheckToast()
 end
 
 function t:ShouldShowJoinVoice()
-	-- upvalues: getFFlagEnableVoiceUxUpdates (ref), fFlagVoiceRewarmTelemetry (ref), voiceChatCoreModule (ref), showJoinVoiceWhenDisconnectedV3 (ref), getFFlagOnlyEnableJoinVoiceInVoiceEnabledUniversesModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), alwaysSetJoinVoiceButtonContext (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), getFFlagEnableInExpPhoneVoiceUpsellEntrypoints (ref), constantsModule (ref)
+	-- upvalues: getFFlagEnableVoiceUxUpdates (ref), fFlagVoiceRewarmTelemetry (ref), voiceChatCoreModule (ref), showJoinVoiceWhenDisconnectedV3 (ref), getFFlagOnlyEnableJoinVoiceInVoiceEnabledUniversesModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), getFFlagEnableInExpPhoneVoiceUpsellEntrypoints (ref), constantsModule (ref)
 	if getFFlagEnableVoiceUxUpdates() then
 		if fFlagVoiceRewarmTelemetry then
 			if self:EligibleForFaeUpsell() then
@@ -1642,24 +1662,11 @@ function t:ShouldShowJoinVoice()
 				
 				return true
 			elseif self:EligibleForAgeCheckToast() then
-				if alwaysSetJoinVoiceButtonContext then
-					self.joinVoiceButtonContext = "AgeCheckToast"
-				end
 				return true
-			else
-				local var18 = self:UserInInExperienceUpsellTreatment()
-				local var19 = self:UserOnlyEligibleForVoice() or self:UserVoiceEnabled()
-				
-				if getFFlagIntegratePhoneUpsellJoinVoice() and getFFlagEnableInExpPhoneVoiceUpsellEntrypoints() and (not var19 and not self:UserVoiceEnabled()) and self:FetchPhoneVerificationUpsell(constantsModule.IN_EXP_PHONE_UPSELL_IXP_LAYER) == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then
-					if alwaysSetJoinVoiceButtonContext then
-						self.joinVoiceButtonContext = "PhoneUpsell"
-					end
-					return true
-				elseif alwaysSetJoinVoiceButtonContext and var18 and var19 then
-					self.joinVoiceButtonContext = "InExpUpsell"
-				end
-				return var18 and var19
 			end
+			local var18 = self:UserOnlyEligibleForVoice() or self:UserVoiceEnabled()
+			
+			return if getFFlagIntegratePhoneUpsellJoinVoice() and getFFlagEnableInExpPhoneVoiceUpsellEntrypoints() and (not var18 and not self:UserVoiceEnabled()) and self:FetchPhoneVerificationUpsell(constantsModule.IN_EXP_PHONE_UPSELL_IXP_LAYER) == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then true else self:UserInInExperienceUpsellTreatment() and var18
 		elseif self:EligibleForFaeUpsell() or self:HasSeamlessVoiceFeature(voiceChatCoreModule.Constants.SeamlessVoiceFeatures.InitialJoinVoice) and self:GetVoiceConnectCookie() == "" or showJoinVoiceWhenDisconnectedV3 and self:GetVoiceRewarmCookie() == "" and self:VoiceChatEnded() then
 			return true
 		end

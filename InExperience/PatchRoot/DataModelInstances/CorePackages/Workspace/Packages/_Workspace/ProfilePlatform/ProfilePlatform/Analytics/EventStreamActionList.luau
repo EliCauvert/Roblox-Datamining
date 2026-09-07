@@ -8,10 +8,8 @@ local eventNamesModule = require(script.Parent.EventNames)
 local fFlagProfilePlatformUseProfileTypeContextModule = require(profilePlatform.Flags.FFlagProfilePlatformUseProfileTypeContext)
 local fFlagEnablePlatformProfileContextualMenuOption = require(parent.SharedFlags).FFlagEnablePlatformProfileContextualMenuOption
 local fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule = require(profilePlatform.Flags.FFlagProfilePlatformUseCatalogItemOpenedNewFields)
-local fFlagFriendsCallingClientGateDEV = require(parent.SharedFlags).FFlagFriendsCallingClientGate_DEV
 local fFlagProfilePlatformEnableCurrencyTransfer = require(parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
 local fFlagProfilePlatformEnableTradeItemsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
-local fFlagProfileTradeItemsImpressionLoggingModule = require(profilePlatform.Flags.FFlagProfileTradeItemsImpressionLogging)
 local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
 local fFlagProfilePlatformEditBackgroundMenuItemModule = require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
 local fFlagSocialEnableProfileInspectAndBuyAnalytics = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuyAnalytics
@@ -44,15 +42,6 @@ return {
 		eventType = eventTypes.PresenceLoaded,
 		formatRulesForAdditionalInfo = { presenceType = var1, universeId = var1 }
 	},
-	[eventNamesModule.ContextualMenuButtonCall] = if fFlagFriendsCallingClientGateDEV then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.Call
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	} else nil,
 	[eventNamesModule.ContextualMenuButtonChat] = {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
@@ -197,15 +186,6 @@ return {
 		},
 		formatRulesForAdditionalInfo = { buttonSurface = var1 }
 	} else nil,
-	[eventNamesModule.ContextualMenuTradeItemsImpression] = if fFlagProfilePlatformEnableTradeItemsModule and fFlagProfileTradeItemsImpressionLoggingModule then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.UserSeen,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.TradeItems
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	} else nil,
 	[eventNamesModule.CTAButtonOpenEditProfilePage] = {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
@@ -214,12 +194,6 @@ return {
 		},
 		formatRulesForAdditionalInfo = { buttonSurface = var1 }
 	},
-	[eventNamesModule.CTAButtonCall] = if fFlagFriendsCallingClientGateDEV then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.Call },
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	} else nil,
 	[eventNamesModule.CTAButtonChat] = {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,

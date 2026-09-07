@@ -13,6 +13,8 @@
 	CountryCode = "CountryCode",
 	ExperienceMenuVersion = "ExperienceMenuVersion",
 	AndroidRecentlyPlayedWidgetVariant = "AndroidRecentlyPlayedWidgetVariant",
+	EnableWidgetExtension = "EnableWidgetExtension",
+	EnableLockScreenWidgetExperiment = "EnableLockScreenWidgetExperiment",
 	HasAgreedRequiredPermissions = "HasAgreedRequiredPermissions",
 	AppInstallationId = "AppInstallationId",
 	ShareInviteLinkExperimentEnabled = "ShareInviteLinkExperimentEnabled",

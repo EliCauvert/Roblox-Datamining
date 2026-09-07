@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ExpChatFixLocalUserVerifiedBadge2", false)
+﻿return game:DefineFastFlag("ExpChatFixLocalUserVerifiedBadge", false)

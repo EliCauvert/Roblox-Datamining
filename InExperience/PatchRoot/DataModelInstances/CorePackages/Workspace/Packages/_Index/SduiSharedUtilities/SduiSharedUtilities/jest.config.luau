@@ -2,8 +2,6 @@
 
 return {
 	displayName = "SduiSharedUtilities",
-	testMatch = { "**/*.test" },
-	testPathIgnorePatterns = { "SduiPageAnalytics.test" },
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.LogHandler,
 		jestConfigsModule.setupFiles.UIBloxInitializer,

@@ -8,15 +8,13 @@ local getSduiComponentWrapper = sduiCoreSystemModule.getSduiComponentWrapper
 local sduiBuilder = sduiCoreSystemModule.SduiBuilder
 local sduiErrors = sduiCoreSystemModule.SduiErrors
 local sduiFeedItemModule = require(sduiSharedContent.Components.SduiFeedItem)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiPoolBackedFeed = sharedFlagsModule.FFlagSduiPoolBackedFeed
-local fFlagSduiCollectionGridRevealRows = sharedFlagsModule.FFlagSduiCollectionGridRevealRows
+local fFlagSduiPoolBackedFeed = require(parent.SharedFlags).FFlagSduiPoolBackedFeed
 local sduiFeedIndexInExtraLocalProps = game:DefineFastFlag("SduiFeedIndexInExtraLocalProps", false)
 local sduiFeedDebugNameWithImpressionsTag = game:DefineFastFlag("SduiFeedDebugNameWithImpressionsTag", false)
 local t = {}
 
 return function(p1)
-	-- upvalues: findAnalyticsField (ref), t (ref), sduiBuilder (ref), sduiErrors (ref), getSduiComponentWrapper (ref), fFlagSduiPoolBackedFeed (ref), cryoModule (ref), fFlagSduiCollectionGridRevealRows (ref), sduiFeedIndexInExtraLocalProps (ref), reactModule (ref), sduiFeedDebugNameWithImpressionsTag (ref), sduiFeedItemModule (ref)
+	-- upvalues: findAnalyticsField (ref), t (ref), sduiBuilder (ref), sduiErrors (ref), getSduiComponentWrapper (ref), fFlagSduiPoolBackedFeed (ref), cryoModule (ref), sduiFeedIndexInExtraLocalProps (ref), reactModule (ref), sduiFeedDebugNameWithImpressionsTag (ref), sduiFeedItemModule (ref)
 	local t_1 = {}
 	local sduiContext = p1.sduiContext
 	local startRow = p1.extraLocalProps and p1.extraLocalProps.startRow
@@ -50,8 +48,7 @@ return function(p1)
 			local startRowGetter = v.startRowGetter
 			var3 = if startRowGetter ~= nil then nil else { startRow = startRowGetter }
 			extraLocalProps = cryoModule.Dictionary.join(p1.extraLocalProps or t, {
-				startRow = if startRowGetter ~= nil then var1 + i - 1 else cryoModule.None,
-				setDisplayedRowCount = if fFlagSduiCollectionGridRevealRows then v.setDisplayedRowCount else nil
+				startRow = if startRowGetter ~= nil then var1 + i - 1 else cryoModule.None
 			})
 		else
 			extraLocalProps = cryoModule.Dictionary.join(extraLocalProps, { startRow = var1 + i - 1 })

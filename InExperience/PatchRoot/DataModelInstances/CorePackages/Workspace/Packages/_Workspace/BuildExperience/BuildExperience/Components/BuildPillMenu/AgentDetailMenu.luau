@@ -12,7 +12,7 @@ return function(p1)
 		isCircular = true,
 		testId = "build-header-agent-detail-menu",
 		LayoutOrder = p1.layoutOrder,
-		icon = p1.icon or iconName.RectangleList,
+		icon = iconName.RectangleList,
 		isDisabled = p1.isDisabled,
 		onActivated = p1.onActivated,
 		size = inputSize.Medium,

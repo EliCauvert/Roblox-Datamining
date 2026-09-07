@@ -52,14 +52,10 @@ local _ = function(p1)
 end
 
 local t_3 = {
-	Moderated = "moderated",
-	CaptureModerated = "moderated",
-	UploadQuotaReached = "quota",
-	Timeout = "timeout",
-	StartUploadFailed = "startFailed",
-	RegistrationFailed = "registrationFailed",
-	PollError = "pollError",
-	GenericFailure = "generic"
+	malformed = "malformed",
+	duplicate = "duplicate",
+	moderated = "moderated",
+	deleted = "deleted"
 }
 
 local _ = function(p1)
@@ -68,10 +64,11 @@ local _ = function(p1)
 end
 
 local t_4 = {
-	malformed = "malformed",
-	duplicate = "duplicate",
-	moderated = "moderated",
-	deleted = "deleted"
+	music = "music",
+	trim = "trim",
+	text_overlay = "text_overlay",
+	sticker = "sticker",
+	description = "description"
 }
 
 local _ = function(p1)
@@ -82,27 +79,14 @@ end
 local t_5 = {
 	music = "music",
 	trim = "trim",
-	text_overlay = "text_overlay",
-	sticker = "sticker",
-	description = "description"
-}
-
-local _ = function(p1)
-	-- upvalues: t_5 (ref)
-	return t_5[p1] or "unknown"
-end
-
-local t_6 = {
-	music = "music",
-	trim = "trim",
 	text = "text",
 	sticker = "sticker",
 	generateText = "generateText"
 }
 
 local _ = function(p1)
-	-- upvalues: t_6 (ref)
-	return t_6[p1] or "unknown"
+	-- upvalues: t_5 (ref)
+	return t_5[p1] or "unknown"
 end
 
 local _ = function(p1)
@@ -307,15 +291,12 @@ return {
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				format = function(p1)
-					-- upvalues: t_2 (ref), t_3 (ref)
+					-- upvalues: t_2 (ref)
 					local t = { step = t_2[p1.step] or "unknown" }
 					
 					if p1.status ~= nil then
 						local status = p1.status
 						t.status = if status == "success" or status == "failed" then status else "unknown"
-					end
-					if p1.reason ~= nil then
-						t.reason = t_3[p1.reason] or "unknown"
 					end
 					return t
 				end
@@ -347,9 +328,9 @@ return {
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				format = function(p1)
-					-- upvalues: t_4 (ref)
+					-- upvalues: t_3 (ref)
 					return {
-						reason = t_4[p1.reason] or "unknown",
+						reason = t_3[p1.reason] or "unknown",
 						feedType = p1.feedType
 					}
 				end
@@ -366,8 +347,8 @@ return {
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				format = function(p1)
-					-- upvalues: t_5 (ref)
-					return { editType = t_5[p1.editType] or "unknown" }
+					-- upvalues: t_4 (ref)
+					return { editType = t_4[p1.editType] or "unknown" }
 				end
 			}
 		}
@@ -416,8 +397,8 @@ return {
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				format = function(p1)
-					-- upvalues: t_6 (ref)
-					return { tool = t_6[p1.tool] or "unknown" }
+					-- upvalues: t_5 (ref)
+					return { tool = t_5[p1.tool] or "unknown" }
 				end
 			}
 		}
@@ -432,8 +413,8 @@ return {
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				format = function(p1)
-					-- upvalues: t_6 (ref)
-					return { tool = t_6[p1.tool] or "unknown" }
+					-- upvalues: t_5 (ref)
+					return { tool = t_5[p1.tool] or "unknown" }
 				end
 			}
 		}

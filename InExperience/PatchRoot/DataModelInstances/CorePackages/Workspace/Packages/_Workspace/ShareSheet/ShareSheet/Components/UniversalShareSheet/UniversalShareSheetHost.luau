@@ -1,7 +1,9 @@
-﻿local parent = script:FindFirstAncestor("ShareSheet").Parent
+﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
+local parent = shareSheet.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
+local fFlagShareSheetTelemetryRefactorModule = require(shareSheet.Flags.FFlagShareSheetTelemetryRefactor)
 local shareSheetViewModule = require(script.Parent.Parent.ShareSheetView)
 local useShareSheetViewModelModule = require(script.Parent.Parent.useShareSheetViewModel)
 local useUniversalShareSheetViewModelModule = require(script.Parent.useUniversalShareSheetViewModel)
@@ -15,7 +17,7 @@ local function UniversalShareSheetContent(p1)
 end
 
 return reactModule.memo(function()
-	-- upvalues: reactModule (ref), useOverlay (ref), useTokens (ref), useUniversalShareSheetViewModelModule (ref), shareSheetSnackbarAutoDismissSeconds (ref), UniversalShareSheetContent (ref), reactRobloxModule (ref), foundationModule (ref)
+	-- upvalues: reactModule (ref), useOverlay (ref), useTokens (ref), useUniversalShareSheetViewModelModule (ref), shareSheetSnackbarAutoDismissSeconds (ref), UniversalShareSheetContent (ref), fFlagShareSheetTelemetryRefactorModule (ref), reactRobloxModule (ref), foundationModule (ref)
 	local var1, var2 = reactModule.useState(nil)
 	local var3 = useOverlay()
 	local var4 = useTokens()
@@ -44,9 +46,10 @@ return reactModule.memo(function()
 			formatSuccessSnackbarText = var5.formatSuccessSnackbarText,
 			isOpen = var5.isOpen,
 			messagePlaceholder = var5.messagePlaceholder,
-			onCloseWithReason = var5.onCloseWithReason,
+			onClose = var5.onClose,
+			onCloseWithReason = if fFlagShareSheetTelemetryRefactorModule then var5.onCloseWithReason else nil,
 			onShareSendResultSnackbar = var2,
-			telemetryId = var5.telemetryId,
+			telemetryId = if fFlagShareSheetTelemetryRefactorModule then var5.telemetryId else nil,
 			url = var5.url
 		}) else nil,
 		ShareSendResultSnackbar = if var1 and var3 then reactRobloxModule.createPortal(reactModule.createElement(foundationModule.Snackbar, {

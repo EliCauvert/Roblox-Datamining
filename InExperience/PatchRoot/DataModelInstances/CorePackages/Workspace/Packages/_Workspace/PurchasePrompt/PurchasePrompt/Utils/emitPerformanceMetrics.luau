@@ -14,9 +14,6 @@ local t = {
 	[enums.ProductPurchaseSurface.EDP] = true
 }
 
-if require(purchasePrompt.Flags.FFlagEnableInExperiencePurchaseModalMetrics) then
-	t[enums.ProductPurchaseSurface.InExperience] = true
-end
 function emitPerformanceMetrics(p1, p2)
 	-- upvalues: t (ref)
 	if p2 ~= nil and t[p2] then

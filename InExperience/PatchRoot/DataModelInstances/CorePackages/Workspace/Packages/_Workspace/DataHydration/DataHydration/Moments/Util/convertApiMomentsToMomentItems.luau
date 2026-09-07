@@ -1,12 +1,8 @@
 ﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local momentsTypesModule = require(parent.MomentsTypes)
-local sharedFlagsModule = require(parent.SharedFlags)
+local momentsTypesModule = require(dataHydration.Parent.MomentsTypes)
 local _ = require(dataHydration.Moments.MomentsStoreTypes)
-local convertApiMomentCommentsModule = require(dataHydration.Moments.Util.convertApiMomentComments)
 local fFlagMomentsStickerOverlayNormalizationModule = require(dataHydration.Moments.FFlagMomentsStickerOverlayNormalization)
 local fFlagMomentsRequireApiFeedItemIdModule = require(dataHydration.Moments.FFlagMomentsRequireApiFeedItemId)
-local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
 local momentStatus = momentsTypesModule.Enums.MomentStatus
 local builderSansMedium = Enum.Font.BuilderSansMedium
 local color3 = Color3.new(0, 0, 0)
@@ -100,22 +96,8 @@ local function normalizeStickerOverlayEdit(p1)
 	} else nil else nil
 end
 
-local function normalizeTtsEdit(p1)
-	if type(p1) ~= "table" then
-		return nil
-	end
-	local var1 = tonumber(p1.assetId)
-	
-	return if var1 == nil or var1 <= 0 then nil else {
-		text = if type(p1.text) == "string" then p1.text else "",
-		voiceId = if type(p1.voiceId) == "number" then p1.voiceId else 0,
-		startTime = if type(p1.startTime) == "number" then p1.startTime else 0,
-		assetId = var1
-	}
-end
-
 local function normalizeCaptureEdits(p1)
-	-- upvalues: normalizeTextOverlayEdit (ref), fFlagMomentsStickerOverlayNormalizationModule (ref), normalizeStickerOverlayEdit (ref), normalizeTtsEdit (ref)
+	-- upvalues: normalizeTextOverlayEdit (ref), fFlagMomentsStickerOverlayNormalizationModule (ref), normalizeStickerOverlayEdit (ref)
 	if p1 == nil then
 		return nil
 	end
@@ -151,26 +133,9 @@ local function normalizeCaptureEdits(p1)
 			var3 = t
 		end
 	end
-	local var5 = nil
-	
-	if type(p1.ttsAudios) == "table" then
-		local t = {}
-		
-		for i, v in p1.ttsAudios do
-			local var6 = normalizeTtsEdit(v)
-			
-			if var6 ~= nil then
-				table.insert(t, var6)
-			end
-		end
-		if #t > 0 then
-			var5 = t
-		end
-	end
 	return {
 		trim = p1.trim,
 		music = p1.music,
-		ttsAudios = var5,
 		textOverlays = var1,
 		stickerOverlays = var3
 	}
@@ -180,16 +145,16 @@ local _ = function(p2)
 	if p2 == nil or p2.counts == nil then
 		return nil
 	end
-	local var7 = 0
+	local var5 = 0
 	
 	for i, v in p2.counts do
-		var7 += v
+		var5 += v
 	end
-	return var7
+	return var5
 end
 
 local function convertApiMomentToMomentItem(p3)
-	-- upvalues: fFlagMomentsRequireApiFeedItemIdModule (ref), normalizeCaptureEdits (ref), momentStatus (ref), fFlagMomentsComments (ref), convertApiMomentCommentsModule (ref)
+	-- upvalues: fFlagMomentsRequireApiFeedItemIdModule (ref), normalizeCaptureEdits (ref), momentStatus (ref)
 	local captionedAssetMoment = p3.captionedAssetMoment
 	local owner = p3.owner
 	local entityId = p3.entityId or p3.id
@@ -198,10 +163,10 @@ local function convertApiMomentToMomentItem(p3)
 	if captionedAssetMoment == nil or captionedAssetMoment.assetId == nil or (owner == nil or owner.id == nil) or entityId == nil or fFlagMomentsRequireApiFeedItemIdModule and (feedItemId == nil or feedItemId == "") then
 		return nil
 	end
-	local var8
-	local var9 = if p3.primaryCta ~= nil then nil else p3.primaryCta.experienceCta
-	local var10 = normalizeCaptureEdits(if captionedAssetMoment.captureType == "Screenshot" then captionedAssetMoment.screenshotCaptureEdits else captionedAssetMoment.videoCaptureEdits)
-	local var11 = if (captionedAssetMoment.status or p3.status) == momentStatus.Deleted then momentStatus.Deleted else momentStatus.Public
+	local var6
+	local var7 = if p3.primaryCta ~= nil then nil else p3.primaryCta.experienceCta
+	local var8 = normalizeCaptureEdits(if captionedAssetMoment.captureType == "Screenshot" then captionedAssetMoment.screenshotCaptureEdits else captionedAssetMoment.videoCaptureEdits)
+	local var9 = if (captionedAssetMoment.status or p3.status) == momentStatus.Deleted then momentStatus.Deleted else momentStatus.Public
 	local t = {
 		assetId = captionedAssetMoment.assetId,
 		creatorId = owner.id,
@@ -213,37 +178,30 @@ local function convertApiMomentToMomentItem(p3)
 		assetAccessContext = captionedAssetMoment.assetAccessContext,
 		captureType = if captionedAssetMoment.captureType == "Screenshot" then Enum.CaptureType.Screenshot else Enum.CaptureType.Video,
 		description = captionedAssetMoment.caption,
-		edits = var10,
-		experienceName = if var9 ~= nil then nil else var9.experienceName
+		edits = var8,
+		experienceName = if var7 ~= nil then nil else var7.experienceName
 	}
 	local reactions = p3.reactions
 	
 	if reactions == nil or reactions.counts == nil then
-		var8 = nil
+		var6 = nil
 	else
-		local var12 = 0
+		local var10 = 0
 		
 		for i, v in reactions.counts do
-			var12 += v
+			var10 += v
 		end
-		var8 = var12
+		var6 = var10
 	end
-	t_1.likeCount = var8
+	t_1.likeCount = var6
 	t_1.partnerUploadType = captionedAssetMoment.partnerUploadType
-	t_1.placeId = if var9 ~= nil then nil else var9.placeId
-	t_1.universeId = if var9 ~= nil then nil else var9.experienceId
+	t_1.placeId = if var7 ~= nil then nil else var7.placeId
+	t_1.universeId = if var7 ~= nil then nil else var7.experienceId
 	t.metadata = t_1
 	t.momentId = entityId
 	t.recommendationMetadata = { feedItemId = feedItemId, tracingId = p3.feedSessionId }
-	t.status = var11
+	t.status = var9
 	
-	if fFlagMomentsComments then
-		local var13 = convertApiMomentCommentsModule(p3.comments)
-		
-		if var13 ~= nil then
-			t.comments = var13
-		end
-	end
 	return t
 end
 
@@ -255,10 +213,10 @@ return function(p4)
 		return t
 	end
 	for i, v in ipairs(p4) do
-		local var14 = convertApiMomentToMomentItem(v)
+		local var11 = convertApiMomentToMomentItem(v)
 		
-		if var14 ~= nil then
-			table.insert(t, var14)
+		if var11 ~= nil then
+			table.insert(t, var11)
 		end
 	end
 	return t

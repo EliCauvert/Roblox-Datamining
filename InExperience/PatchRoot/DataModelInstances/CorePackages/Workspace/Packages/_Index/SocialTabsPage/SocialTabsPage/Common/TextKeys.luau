@@ -1,5 +1,5 @@
 ﻿return {
-	NoFriendsYet = "Feature.Friends.Label.NoFriendsYet",
+	NoConnectionYet = "Feature.Friends.Label.NoConnectionYet",
 	FriendRequestSent = "Feature.Friends.Action.FriendRequestSent",
 	FriendAdded = "Feature.Friends.Action.FriendAdded",
 	AlreadyFriendError = "Feature.Friends.Error.AlreadyFriendError",

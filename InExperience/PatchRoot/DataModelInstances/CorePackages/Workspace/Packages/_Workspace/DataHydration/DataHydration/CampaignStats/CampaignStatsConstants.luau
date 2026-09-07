@@ -1,1 +1,0 @@
-﻿return { WINDOW_DAYS = 180 }

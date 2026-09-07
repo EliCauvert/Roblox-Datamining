@@ -12,6 +12,5 @@
 	ImpressionsTrackerWithoutNavigation = require(script.ImpressionsTrackerWithoutNavigation),
 	FrameBoundsImpressionsTracker = require(script.FrameBoundsImpressionsTracker),
 	ScreenSizeImpressionsTracker = require(script.ScreenSizeImpressionsTracker),
-	ContentThresholdImpressionsDetector = require(script.ContentThresholdImpressionsDetector),
-	ViewportVisibilityImpressionsDetector = require(script.ViewportVisibilityImpressionsDetector)
+	ContentThresholdImpressionsDetector = require(script.ContentThresholdImpressionsDetector)
 }

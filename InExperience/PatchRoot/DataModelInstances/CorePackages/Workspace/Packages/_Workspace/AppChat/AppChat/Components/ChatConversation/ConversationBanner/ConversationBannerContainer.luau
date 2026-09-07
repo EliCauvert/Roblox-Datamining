@@ -13,9 +13,7 @@ local chatConversationTelemetryLayerModule = require(appChat.Telemetry.Layers.Ch
 local conversationTopModalTelemetryModule = require(script.Parent.Parent.ConversationTopModalTelemetry)
 local modalTelemetryModule = require(appChat.Components.ModalTelemetry)
 local useGetConversationFromIdModule = require(appChat.Hooks.useGetConversationFromId)
-local useGetOneToOneFriendIdFromConversationIdModule = require(appChat.Hooks.useGetOneToOneFriendIdFromConversationId)
 local _ = require(appChat.Models.ConversationChannels)
-local fFlagAppChatConsolidateTrustedFriendsModalModule = require(appChat.Flags.FFlagAppChatConsolidateTrustedFriendsModal)
 local conversationBannerModule = require(script.Parent.ConversationBanner)
 local t = {
 	[conversationTopModal.AddTrustedConnection] = {
@@ -32,7 +30,7 @@ local t_1 = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t_1 (ref), useNavigation (ref), t (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useGetConversationFromIdModule (ref), fFlagAppChatConsolidateTrustedFriendsModalModule (ref), useGetOneToOneFriendIdFromConversationIdModule (ref), reactModule (ref), conversationTopModalTelemetryModule (ref), modalTelemetryModule (ref), enumScreensModule (ref), conversationBannerModule (ref)
+	-- upvalues: cryoModule (ref), t_1 (ref), useNavigation (ref), t (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useGetConversationFromIdModule (ref), reactModule (ref), conversationTopModalTelemetryModule (ref), modalTelemetryModule (ref), enumScreensModule (ref), conversationBannerModule (ref)
 	local var1 = cryoModule.Dictionary.union(t_1, p1)
 	local var2 = useNavigation()
 	local modalVariant = t[var1.modalVariant]
@@ -43,7 +41,6 @@ return reactModule.memo(function(p1)
 	if var4 and var4.participants then
 		joined = table.concat(var4.participants, ",")
 	end
-	local var5 = if fFlagAppChatConsolidateTrustedFriendsModalModule then useGetOneToOneFriendIdFromConversationIdModule(var1.conversationId) else nil
 	reactModule.useEffect(function()
 		-- upvalues: var3 (ref), conversationTopModalTelemetryModule (copy), var1 (ref), joined (write)
 		var3.emit(conversationTopModalTelemetryModule.Events.ModalRendered, { modalVariant = var1.modalVariant, modalContext = joined })
@@ -62,11 +59,10 @@ return reactModule.memo(function(p1)
 			})
 		end, { var1.onDismissed }),
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: modalVariant (ref), var2 (ref), enumScreensModule (copy), fFlagAppChatConsolidateTrustedFriendsModalModule (copy), var5 (ref), var1 (ref), var3 (ref), conversationTopModalTelemetryModule (copy), modalTelemetryModule (copy), joined (write)
+			-- upvalues: modalVariant (ref), var2 (ref), enumScreensModule (copy), var1 (ref), var3 (ref), conversationTopModalTelemetryModule (copy), modalTelemetryModule (copy), joined (write)
 			if modalVariant then
 				var2.navigate(enumScreensModule.TrustedConnectionsUpsell, {
 					isOverlay = true,
-					userId = if fFlagAppChatConsolidateTrustedFriendsModalModule then var5 else nil,
 					modalVariant = modalVariant.onActivatedOverlayVariant,
 					conversationId = var1.conversationId
 				})
@@ -76,7 +72,7 @@ return reactModule.memo(function(p1)
 				action = modalTelemetryModule.Enums.ModalActions.PrimaryCta,
 				modalContext = joined
 			})
-		end, { var2, modalVariant, var5 }),
+		end, { var2, modalVariant }),
 		layoutOrder = var1.layoutOrder
 	}) else nil
 end)

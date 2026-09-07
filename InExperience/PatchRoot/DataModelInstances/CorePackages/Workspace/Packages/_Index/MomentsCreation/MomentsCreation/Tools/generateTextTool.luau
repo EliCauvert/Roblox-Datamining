@@ -5,7 +5,6 @@ local momentsCommonModule = require(parent.MomentsCommon)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local dialogTypeModule = require(momentsCreation.Enums.DialogType)
 local getFFlagMomentsTextGenTonePickerModule = require(momentsCreation.Flags.GetFFlagMomentsTextGenTonePicker)
-local getFFlagMomentsGenerateTextInTextOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsGenerateTextInTextOverlay)
 
 return {
 	kind = "generateText",
@@ -18,8 +17,7 @@ return {
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video },
 	isAvailable = function(p1)
-		-- upvalues: getFFlagMomentsGenerateTextInTextOverlayModule (ref)
-		return if getFFlagMomentsGenerateTextInTextOverlayModule() then false else p1.canGenerateText == true
+		return p1.canGenerateText == true
 	end,
 	apply = function(p1)
 		-- upvalues: getFFlagMomentsTextGenTonePickerModule (ref), dialogTypeModule (ref)

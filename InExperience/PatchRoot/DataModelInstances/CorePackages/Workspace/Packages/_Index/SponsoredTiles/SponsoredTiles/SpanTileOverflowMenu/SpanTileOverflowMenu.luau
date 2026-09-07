@@ -7,11 +7,12 @@ local gameTileContextualActions = gameTileModule.GameTileContextualActions
 local gameTileOverflowMenu = gameTileModule.GameTileOverflowMenu
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppGameTileNotInterestedDirectAction = sharedFlagsModule.FFlagLuaAppGameTileNotInterestedDirectAction
+local fFlagLuaAppFixExplicitFeedbackTelemetry = sharedFlagsModule.FFlagLuaAppFixExplicitFeedbackTelemetry
 local fFlagLuaAppEnableHomepageOneByTwoTile = sharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
 local fFlagLuaAppNotInterestedReportPlaceId = sharedFlagsModule.FFlagLuaAppNotInterestedReportPlaceId
 
 return function(p1)
-	-- upvalues: useOverflowMenuOpen (ref), reactModule (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppGameTileNotInterestedDirectAction (ref), gameTileContextualActions (ref), gameTileOverflowMenu (ref), fFlagLuaAppNotInterestedReportPlaceId (ref)
+	-- upvalues: useOverflowMenuOpen (ref), reactModule (ref), fFlagLuaAppFixExplicitFeedbackTelemetry (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppGameTileNotInterestedDirectAction (ref), gameTileContextualActions (ref), gameTileOverflowMenu (ref), fFlagLuaAppNotInterestedReportPlaceId (ref)
 	local var1
 	local hoverKey = p1.hoverKey
 	local var2 = useOverflowMenuOpen(hoverKey)
@@ -25,14 +26,15 @@ return function(p1)
 		return table.concat(t, ",")
 	end, { p1.availableMenuItems })
 	local var4 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: fFlagLuaAppEnableHomepageOneByTwoTile (copy), p1 (ref), gameTileOverflowMenuAction (copy)
+		-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (copy), p1 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), gameTileOverflowMenuAction (copy)
 		gameTileOverflowMenuAction({
+			ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p1.appPage,
 			universeId = if fFlagLuaAppEnableHomepageOneByTwoTile then tostring(p1.universeId or "") else p1.universeId,
 			sortId = p1.topicId,
 			actionType = if p2 then "GameTileOverflowMenuClosed" else "GameTileOverflowMenuOpened",
 			availableMenuItems = p3,
 			contentType = if fFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
-		}, p1.appPage or "Unknown")
+		}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p1.appPage or "Unknown" else nil)
 	end, {
 		p1.universeId,
 		p1.appPage,

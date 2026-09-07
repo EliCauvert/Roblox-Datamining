@@ -23,13 +23,11 @@ local constantsModule = require(chromeShared.Unibar.Constants)
 local shortcutServiceModule = require(chromeShared.Service.ShortcutService)
 local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
-local isPioneerLaunch = require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch
 local fFlagIntegrationsChromeShortcutTelemetryModule = require(chromeShared.Parent.Flags.FFlagIntegrationsChromeShortcutTelemetry)
 local chromeDeprecateMRUs = game:DefineFastFlag("ChromeDeprecateMRUs", false)
-local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
-local fFlagEnableSideSheetWidgets = sharedFlagsModule.FFlagEnableSideSheetWidgets
+local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
+local fIntSideSheetVariant = sharedFlagsModule.FIntSideSheetVariant
 local fFlagEnableChromeWindowsNotInMenu = require(chromeShared.Flags).FFlagEnableChromeWindowsNotInMenu
-local fFlagChromeNineDotActivityIndicator = require(chromeShared.Flags).FFlagChromeNineDotActivityIndicator
 local _ = nil
 local _ = nil
 local _ = nil
@@ -52,7 +50,7 @@ local t_1 = {
 	availability = availabilitySignal.new(t.AvailabilitySignal.Unavailable),
 	notification = notifySignal.new(),
 	components = {},
-	sideSheetPlacement = if isSideSheetEnabledModule then sideSheetPlacement.None else nil
+	sideSheetPlacement = if fFlagEnableSideSheet then sideSheetPlacement.None else nil
 }
 
 function createUnibarLayoutInfo(p1, p2)
@@ -60,7 +58,7 @@ function createUnibarLayoutInfo(p1, p2)
 end
 
 function t.new()
-	-- upvalues: localizationService (ref), fFlagEnableConsoleExpControls (ref), shortcutServiceModule (ref), chromeUtilsModule (ref), observableValue (ref), notifySignal (ref), localization (ref), fFlagChromeNineDotActivityIndicator (ref), signal (ref), isInExperienceUIVREnabled (ref), t (ref), viewportUtilModule (ref), chromeDeprecateMRUs (ref), focusOnChromeSignal (ref), focusOffChromeSignal (ref)
+	-- upvalues: localizationService (ref), fFlagEnableConsoleExpControls (ref), shortcutServiceModule (ref), chromeUtilsModule (ref), observableValue (ref), notifySignal (ref), localization (ref), signal (ref), isInExperienceUIVREnabled (ref), t (ref), viewportUtilModule (ref), chromeDeprecateMRUs (ref), focusOnChromeSignal (ref), focusOffChromeSignal (ref)
 	local t_1 = {
 		_shortcutService = if fFlagEnableConsoleExpControls then shortcutServiceModule.new() else nil,
 		_layout = chromeUtilsModule.ObservableValue.new(createUnibarLayoutInfo(Vector2.zero, Vector2.zero)),
@@ -85,8 +83,6 @@ function t.new()
 		_localizedLabelKeys = {},
 		_currentShortcutBar = observableValue.new(nil),
 		_notificationIndicator = observableValue.new(nil),
-		_nineDotActivityIndicatorVisible = if fFlagChromeNineDotActivityIndicator then observableValue.new(false) else nil,
-		_nineDotActivityIndicatorKeys = if fFlagChromeNineDotActivityIndicator then {} else nil,
 		_orderAlignment = observableValue.new(Enum.HorizontalAlignment.Left),
 		_onIntegrationRegistered = signal.new(),
 		_onIntegrationActivated = signal.new(),
@@ -112,12 +108,6 @@ function t.new()
 		t_1._shortcutService.onShortcutBarChanged:connect(function(p1)
 			-- upvalues: tbl (ref)
 			tbl._currentShortcutBar:set(p1)
-		end)
-	end
-	if fFlagChromeNineDotActivityIndicator then
-		t_1._currentSubMenu:connect(function()
-			-- upvalues: tbl (ref)
-			tbl:updateNineDotActivityIndicatorVisible()
 		end)
 	end
 	focusOnChromeSignal:connect(function(p1)
@@ -170,27 +160,14 @@ function t:notificationIndicator()
 	return self._notificationIndicator
 end
 
-function t:nineDotActivityIndicatorVisible()
-	return self._nineDotActivityIndicatorVisible
-end
-
-function t:setNineDotActivityIndicatorVisible(vectorB, p1)
-	self._nineDotActivityIndicatorKeys[vectorB] = if p1 then true else nil
-	self:updateNineDotActivityIndicatorVisible()
-end
-
-function t:updateNineDotActivityIndicatorVisible()
-	self._nineDotActivityIndicatorVisible:set(if self._currentSubMenu:get() == "nine_dot" then false else next(self._nineDotActivityIndicatorKeys) ~= nil)
-end
-
 function t:toggleSubMenu(p1)
-	-- upvalues: isSideSheetEnabledModule (ref), toggleSideSheet (write)
-	if isSideSheetEnabledModule and toggleSideSheet then
+	-- upvalues: fFlagEnableSideSheet (ref), toggleSideSheet (write)
+	if fFlagEnableSideSheet and toggleSideSheet then
 		toggleSideSheet(true)
 		
 		return
 	elseif not self._subMenuConfig[p1] then
-		warn("Not a valid subMenuId:" .. p9)
+		warn("Not a valid subMenuId:" .. p8)
 		
 		return
 	elseif self._currentSubMenu:get() == p1 then
@@ -300,7 +277,7 @@ function t:updateLocalization(p1)
 end
 
 function t:register(p1)
-	-- upvalues: isSideSheetEnabledModule (ref), sideSheetPlacement (ref), t (ref), availabilitySignal (ref), notifySignal (ref), windowSizeSignalModule (ref), constantsModule (ref), fFlagEnableConsoleExpControls (ref), gamepadService (ref)
+	-- upvalues: fFlagEnableSideSheet (ref), sideSheetPlacement (ref), t (ref), availabilitySignal (ref), notifySignal (ref), windowSizeSignalModule (ref), constantsModule (ref), fFlagEnableConsoleExpControls (ref), gamepadService (ref)
 	if self._integrations[p1.id] then
 		warn(string.format(p1.id .. "already registered", debug.traceback()))
 		
@@ -311,7 +288,7 @@ function t:register(p1)
 	self._integrationsConnections[p1.id] = {}
 	local id = self._integrationsConnections[p1.id]
 	
-	if isSideSheetEnabledModule and p1.sideSheetPlacement == nil then
+	if fFlagEnableSideSheet and p1.sideSheetPlacement == nil then
 		p1.sideSheetPlacement = sideSheetPlacement.Vertical
 	end
 	if p1.initialAvailability == nil then
@@ -391,19 +368,6 @@ function t:createIconProps(p2, p3)
 	}
 end
 
-function t:createWidgetProps(p2, p3)
-	local var2 = self._integrations[p2]
-	
-	return if var2 and var2.components.Widget then {
-		id = p2,
-		children = {},
-		order = p3 or 0,
-		component = var2.components.Widget,
-		integration = var2,
-		activated = noop
-	} else nil
-end
-
 function t:isIntegrationValid(p2)
 	-- upvalues: t (ref)
 	local var2 = self._integrations[p2]
@@ -417,7 +381,7 @@ function t:isIntegrationValid(p2)
 end
 
 function t:updateMenuList()
-	-- upvalues: t_1 (ref), isSideSheetEnabledModule (ref), fFlagEnableChromeWindowsNotInMenu (ref)
+	-- upvalues: t_1 (ref), fFlagEnableSideSheet (ref), fFlagEnableChromeWindowsNotInMenu (ref)
 	local var2 = 0
 	local var3 = 0
 	
@@ -455,7 +419,7 @@ function t:updateMenuList()
 		
 		return {
 			isDivider = true,
-			id = "DIV" .. var29,
+			id = "DIV" .. var27,
 			order = var3,
 			children = {},
 			activated = noop,
@@ -464,7 +428,7 @@ function t:updateMenuList()
 	end
 	
 	local function collectMenu(p2, p3, p4)
-		-- upvalues: divider (ref), var2 (write), collectMenu (ref), isSideSheetEnabledModule (copy), self (ref), var3 (write), windowProps (ref), iconProps (ref)
+		-- upvalues: divider (ref), var2 (write), collectMenu (ref), fFlagEnableSideSheet (copy), self (ref), var3 (write), windowProps (ref), iconProps (ref)
 		local var4 = 0
 		
 		for i, v in pairs(p2) do
@@ -479,7 +443,7 @@ function t:updateMenuList()
 			if typeof(v) ~= "string" then
 				error(`Only tables or strings should be passed into the items list, received {v} (at key {i})`)
 			end
-			if isSideSheetEnabledModule or not self._subMenuConfig[v] then
+			if fFlagEnableSideSheet or not self._subMenuConfig[v] then
 				if self:isIntegrationValid(v) then
 					if self:isWindowOpen(v) then
 						table.insert(p4, windowProps(v))
@@ -528,19 +492,17 @@ function t:updateMenuList()
 	self:repairSelected()
 end
 
-if isSideSheetEnabledModule then
+if fFlagEnableSideSheet then
 	function t:updateSideSheet()
-		-- upvalues: sideSheetPlacement (ref), fFlagEnableSideSheetWidgets (ref), isPioneerLaunch (ref), registerSideSheetIntegrations (write)
+		-- upvalues: sideSheetPlacement (ref), fIntSideSheetVariant (ref), registerSideSheetIntegrations (write)
 		local var6 = 0
 		local t = {}
 		local t_1 = {}
 		local t_2 = {}
 		local t_3 = {}
-		local t_4 = {}
-		local t_5 = {}
 		
 		local function addIntegration(p5)
-			-- upvalues: self (ref), sideSheetPlacement (copy), t_1 (ref), var6 (write), t_2 (ref), t_3 (ref), fFlagEnableSideSheetWidgets (copy), isPioneerLaunch (copy), t_4 (ref), t_5 (ref), t (ref)
+			-- upvalues: self (ref), sideSheetPlacement (copy), t_1 (write), var6 (write), t_2 (ref), t_3 (ref), fIntSideSheetVariant (copy), t (write)
 			local var7 = self._integrations[p5]
 			
 			if not var7 or var7.sideSheetPlacement == sideSheetPlacement.None or not self:isIntegrationValid(p5) then return end
@@ -556,62 +518,47 @@ if isSideSheetEnabledModule then
 				table.insert(t_3, self:createIconProps(p5, var6))
 				
 				return
-			elseif var7.sideSheetPlacement == sideSheetPlacement.ScrollableContentTop then
-				if fFlagEnableSideSheetWidgets or isPioneerLaunch() then
-					local var8 = self:createWidgetProps(p5, var6)
-					
-					if var8 then
-						table.insert(t_4, var8)
-						
-						return
-					end
-				end
-			elseif var7.sideSheetPlacement ~= sideSheetPlacement.FixedFooterTop then
-				if var7.sideSheetPlacement == sideSheetPlacement.Vertical then
-					table.insert(t_2, self:createIconProps(p5, var6))
-					
-					return
-				end
-				table.insert(t, self:createIconProps(p5, var6))
-			elseif fFlagEnableSideSheetWidgets or isPioneerLaunch() then
-				local var9 = self:createWidgetProps(p5, var6)
+			elseif var7.sideSheetPlacement == sideSheetPlacement.Vertical and fIntSideSheetVariant ~= 0 then
+				table.insert(t_2, self:createIconProps(p5, var6))
 				
-				if var9 then
-					table.insert(t_5, var9)
-					
-					return
-				end
+				return
 			end
+			table.insert(t, self:createIconProps(p5, var6))
 		end
 		
 		for i, v in self._menuConfig do
-			for i_2, v_1 in v do
+			for i_3, v_1 in v do
 				var6 += 1
 				addIntegration(v_1)
 			end
 		end
 		for i, v_1 in self._subMenuConfig do
-			for i_2, v_2 in v_1 do
+			for i_3, v_2 in v_1 do
 				var6 += 1
 				addIntegration(v_2)
 			end
+		end
+		if fIntSideSheetVariant == 0 then
+			for i, v_2 in t do
+				table.insert(t_1, v_2)
+			end
+			t = t_1
+			t_1 = {}
 		end
 		registerSideSheetIntegrations({
 			unibarIntegrations = t_1,
 			toggleIntegrations = t,
 			pageIntegrations = t_2,
-			sessionActionIntegrations = t_3,
-			scrollableWidgetIntegrations = t_4,
-			fixedFooterWidgetIntegrations = t_5
+			sessionActionIntegrations = t_3
 		})
 	end
 end
 function t:availabilityChanged(_)
-	-- upvalues: isSideSheetEnabledModule (ref)
+	-- upvalues: fFlagEnableSideSheet (ref)
 	self:updateNotificationTotals()
 	self:updateMenuList()
 	
-	if isSideSheetEnabledModule then
+	if fFlagEnableSideSheet then
 		self:updateSideSheet()
 	end
 end
@@ -691,7 +638,7 @@ function t:configureMenu(p5)
 end
 
 function t:configureSubMenu(p5, p6)
-	-- upvalues: notifySignal (ref), isSideSheetEnabledModule (ref)
+	-- upvalues: notifySignal (ref), fFlagEnableSideSheet (ref)
 	self._subMenuConfig[p5] = p6
 	
 	if not self._subMenuNotifications[p5] then
@@ -700,7 +647,7 @@ function t:configureSubMenu(p5, p6)
 	self:updateNotificationTotals()
 	self:updateMenuList()
 	
-	if isSideSheetEnabledModule then
+	if fFlagEnableSideSheet then
 		self:updateSideSheet()
 	end
 end
@@ -854,7 +801,7 @@ function t:withinCurrentSubmenu(p6)
 	return false
 end
 
-if isSideSheetEnabledModule then
+if fFlagEnableSideSheet then
 	function t:withinOpenSideSheet(p7)
 		-- upvalues: getSideSheetVisibility (write), sideSheetPlacement (ref)
 		if not getSideSheetVisibility() then
@@ -922,7 +869,7 @@ function t:activate(p7, p8)
 			end)
 			
 			if not ok then
-				warn("ChromeService: activate error thrown for " .. p51)
+				warn("ChromeService: activate error thrown for " .. p48)
 				var13 = status
 			end
 		elseif self._subMenuConfig[p7] then

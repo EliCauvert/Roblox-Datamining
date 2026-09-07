@@ -8,11 +8,10 @@ local useTokens = foundationModule.Hooks.useTokens
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local playerListVisibilityStoreModule = require(parent.Common.PlayerListVisibilityStore)
 local playerContextualMenuStoreModule = require(parent.Common.PlayerContextualMenuStore)
-local constantsModule = require(parent.Common.Constants)
 local t = { affordance = stateLayerAffordance.None }
 
 local function LeaderboardScrimMobile()
-	-- upvalues: useTokens (ref), signalsReactModule (ref), playerListVisibilityStoreModule (ref), reactModule (ref), playerContextualMenuStoreModule (ref), view (ref), t (ref), constantsModule (ref)
+	-- upvalues: useTokens (ref), signalsReactModule (ref), playerListVisibilityStoreModule (ref), reactModule (ref), playerContextualMenuStoreModule (ref), view (ref), t (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full",
 		ZIndex = 0,
@@ -23,8 +22,7 @@ local function LeaderboardScrimMobile()
 			playerContextualMenuStoreModule.closeContextMenu()
 			playerListVisibilityStoreModule.setVisible(false)
 		end, {}),
-		stateLayer = t,
-		selection = constantsModule.NOT_SELECTABLE
+		stateLayer = t
 	})
 end
 

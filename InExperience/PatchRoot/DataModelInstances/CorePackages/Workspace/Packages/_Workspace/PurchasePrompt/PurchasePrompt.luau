@@ -27,6 +27,7 @@ local fFlagEnablePurchasePayloadInExperienceShop = sharedFlagsModule.FFlagEnable
 local fFlagPassShopPurchaseSurfaceToBuyModal = sharedFlagsModule.FFlagPassShopPurchaseSurfaceToBuyModal
 local fFlagSkipBuyDelayForExperienceShopModule = require(_script.Flags.FFlagSkipBuyDelayForExperienceShop)
 local _ = require(_script.types)
+local fFlagEnableUnifiedProductPurchaseFlow = require(_script.Parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 local fFlagPurchasePromptSubtitleForTimedOptions = require(_script.Parent.SharedFlags).FFlagPurchasePromptSubtitleForTimedOptions
 local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
 local fFlagEnableRobuxInExperienceShop = sharedFlagsModule.FFlagEnableRobuxInExperienceShop
@@ -129,7 +130,7 @@ return {
 		getBlackbirdUpsellBannerProductInfo = require(_script.Utils.getBlackbirdUpsellBannerProductInfo)
 	} else {},
 	PublishAssetAnalytics = publishAssetAnalyticsModule,
-	UnifiedPurchasePromptContainer = function(p1)
+	UnifiedPurchasePromptContainer = if fFlagEnableUnifiedProductPurchaseFlow then function(p1)
 		-- upvalues: createStore (ref), roact (ref), unifiedPurchasePromptModule (ref), var2 (write), fFlagPurchasePromptCartPricingEnabledModule (ref), var3 (write), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (ref), fFlagPurchasePromptSubtitleForTimedOptions (ref)
 		createStore()
 		
@@ -143,7 +144,7 @@ return {
 			purchaseOptions = if fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then p1.purchaseOptions else nil,
 			subtitleView = if fFlagPurchasePromptSubtitleForTimedOptions then p1.subtitleView else nil
 		})
-	end,
+	end else nil,
 	launchRobuxPackagePurchase = if fFlagEnableRobuxInExperienceShop then require(_script.launchRobuxPackagePurchase) else nil,
 	["jest.config"] = script["jest.config"],
 	["jest.main.config"] = script["jest.main.config"],

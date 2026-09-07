@@ -23,8 +23,5 @@ return {
 	getDeviceType = require(script.getDeviceType),
 	Create = require(script.Create),
 	Logging = require(script.Logging),
-	GenerateStringId = require(script.GenerateStringId),
-	isPlatformSingleSignOnSupported = function(value)
-		return not not (value and (value.IsSingleSignOnSupported and value:IsSingleSignOnSupported()))
-	end
+	GenerateStringId = require(script.GenerateStringId)
 }

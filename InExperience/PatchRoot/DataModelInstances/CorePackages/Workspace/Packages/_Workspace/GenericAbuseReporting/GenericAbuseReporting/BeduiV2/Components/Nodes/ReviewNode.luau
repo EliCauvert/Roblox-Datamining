@@ -3,6 +3,7 @@ local parent = genericAbuseReporting.Parent
 local dashModule = require(parent.Dash)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
 local button = foundationModule.Button
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local view = foundationModule.View
@@ -15,9 +16,10 @@ local textWithTranslationModule = require(genericAbuseReporting.BeduiV2.Utils.Tr
 local _ = require(genericAbuseReporting.BeduiV2.Utils.Translate.translate)
 local useArTranslation = require(genericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
 local useLayoutSlots = layoutSlotsModule.useLayoutSlots
+local fFlagAbuseReportMenuV2 = sharedFlagsModule.FFlagAbuseReportMenuV2
 
 return reactModule.memo(function(p1)
-	-- upvalues: useArTranslation (ref), useLayoutSlots (ref), reactModule (ref), view (ref), eyebrowModule (ref), previewBoxModule (ref), dashModule (ref), textWithTranslationModule (ref), footerModule (ref), button (ref), buttonVariant (ref), foundationModule (ref)
+	-- upvalues: useArTranslation (ref), useLayoutSlots (ref), reactModule (ref), view (ref), eyebrowModule (ref), previewBoxModule (ref), dashModule (ref), textWithTranslationModule (ref), fFlagAbuseReportMenuV2 (ref), footerModule (ref), button (ref), buttonVariant (ref), foundationModule (ref)
 	local var1 = useLayoutSlots()
 	
 	return reactModule.createElement(var1.Layout, {
@@ -53,7 +55,7 @@ return reactModule.memo(function(p1)
 					})
 				})
 			end)),
-			Footer = if p1.footerItems then reactModule.createElement(footerModule, {
+			Footer = if fFlagAbuseReportMenuV2 and p1.footerItems then reactModule.createElement(footerModule, {
 				additionalTag = "padding-top-medium",
 				layoutOrder = 4,
 				footerItems = p1.footerItems
