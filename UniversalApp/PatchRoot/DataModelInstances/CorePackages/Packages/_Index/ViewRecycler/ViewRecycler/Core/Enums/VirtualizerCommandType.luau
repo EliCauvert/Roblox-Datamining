@@ -7,7 +7,7 @@
 		ScrollToIndex = "ScrollToIndex",
 		ScrollToOffset = "ScrollToOffset",
 		ScrollBy = "ScrollBy",
-		RestoreScrollSnapshot = "RestoreScrollSnapshot",
+		RestoreScrollAnchorSnapshot = "RestoreScrollAnchorSnapshot",
 		SetViewportSize = "SetViewportSize",
 		SetPolicy = "SetPolicy",
 		SetDataSource = "SetDataSource",

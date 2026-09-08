@@ -5,7 +5,7 @@ return {
 	name = "Utilities",
 	group = "Foundation",
 	roact = require(parent_1.Roact),
-	storyRoots = require(parent.GetStories)("utilities"),
+	storyRoots = require(parent.GetStories).getStorybookRoots("utilities"),
 	mapStory = require(parent.StoryMiddleware),
 	packages = {
 		React = require(parent_1.React),

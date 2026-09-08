@@ -1,9 +1,11 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local parent = foundation.Parent
+local builderIconsModule = require(parent.BuilderIcons)
 local dashModule = require(parent.Dash)
 local otterModule = require(parent.Otter)
 local reactModule = require(parent.React)
 local reactOtterModule = require(parent.ReactOtter)
+local icon = builderIconsModule.Icon
 local iconButtonModule = require(foundation.Components.IconButton)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local scrollViewModule = require(foundation.Components.ScrollView)
@@ -37,7 +39,7 @@ local function OverflowButton(p1)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), reactOtterModule (ref), dashModule (ref), otterModule (ref), viewModule (ref), withCommonPropsModule (ref), scrollViewModule (ref), visibilityModule (ref), OverflowButton (ref), numberSequence (ref), numberSequence_1 (ref)
+	-- upvalues: reactModule (ref), reactOtterModule (ref), dashModule (ref), otterModule (ref), viewModule (ref), withCommonPropsModule (ref), scrollViewModule (ref), visibilityModule (ref), OverflowButton (ref), numberSequence (ref), icon (ref), numberSequence_1 (ref)
 	local var1, var2 = reactModule.useBinding(false)
 	local var3, var4 = reactModule.useBinding(false)
 	local var5 = reactModule.useRef(nil)
@@ -96,7 +98,6 @@ return function(p1)
 			isStart = true,
 			ZIndex = 2,
 			tag = "padding-right-small",
-			icon = "chevron-large-left",
 			Position = UDim2.fromScale(0, 0),
 			size = p1.size,
 			Visible = var3,
@@ -105,13 +106,13 @@ return function(p1)
 				var8(-90)
 			end, { var8 }),
 			gradient = numberSequence,
+			icon = icon.ChevronLargeLeft,
 			testId = `{p1.testId}--overflow-start`
 		}),
 		OverflowEnd = reactModule.createElement(OverflowButton, {
 			LayoutOrder = 4,
 			ZIndex = 2,
 			tag = "anchor-top-right padding-left-small",
-			icon = "chevron-large-right",
 			Position = UDim2.fromScale(1, 0),
 			size = p1.size,
 			Visible = var1,
@@ -120,6 +121,7 @@ return function(p1)
 				var8(90)
 			end, { var8 }),
 			gradient = numberSequence_1,
+			icon = icon.ChevronLargeRight,
 			testId = `{p1.testId}--overflow-end`
 		})
 	})

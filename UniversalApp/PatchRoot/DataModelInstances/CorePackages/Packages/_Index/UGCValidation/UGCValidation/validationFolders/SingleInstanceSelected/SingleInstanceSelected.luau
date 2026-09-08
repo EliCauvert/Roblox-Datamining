@@ -4,14 +4,17 @@ local _ = require(parent.util.Types)
 local t = { categories = constantsModule.AllAssetUploadCategories }
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+local getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule = require(parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
+local UGCValidationService = game:GetService("UGCValidationService")
 t.requiredData = {
 	validationEnumsModule.SharedDataMember.entrypointInput,
 	validationEnumsModule.SharedDataMember.consumerConfig,
 	validationEnumsModule.SharedDataMember.uploadEnum
 }
 
-local function _(_, _)
-	return true
+local function _(p1, p2, p3)
+	-- upvalues: getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (ref), validationEnumsModule (ref), UGCValidationService (ref)
+	return if getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() and p3 == validationEnumsModule.ConsumerEnv.Backend then UGCValidationService:AreInstanceTreesEquivalent(p1, p2) else true
 end
 
 local function getFoldersMapping(p1)
@@ -27,10 +30,11 @@ local function getFoldersMapping(p1)
 end
 
 function t.run(p2, p3)
-	-- upvalues: constantsModule (ref), errorSourceStringsModule (ref), getFoldersMapping (ref)
+	-- upvalues: constantsModule (ref), errorSourceStringsModule (ref), getFoldersMapping (ref), getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (ref), validationEnumsModule (ref), UGCValidationService (ref)
 	local entrypointInput = p3.entrypointInput
+	local consumerConfig = p3.consumerConfig
 	
-	if constantsModule.AssetUploadsWithFolderStructure[p3.uploadEnum.assetType] and p3.consumerConfig.enforceR15FolderStructure then
+	if constantsModule.AssetUploadsWithFolderStructure[p3.uploadEnum.assetType] and consumerConfig.enforceR15FolderStructure then
 		if #entrypointInput ~= 3 then
 			p2:fail(errorSourceStringsModule.Keys.FolderStructureMismatch)
 			
@@ -39,13 +43,13 @@ function t.run(p2, p3)
 		local var1 = getFoldersMapping(entrypointInput)
 		
 		if var1.R15ArtistIntent and var1.R15Fixed and (var1.R6 and #var1.R6:GetChildren() == 0) then
-			local _ = var1.R15ArtistIntent
-			local _ = var1.R15Fixed
-			local _ = true
-		else
-			p2:fail(errorSourceStringsModule.Keys.FolderStructureMismatch)
-			
-			return
+			if if getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() and consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend then UGCValidationService:AreInstanceTreesEquivalent(var1.R15ArtistIntent, var1.R15Fixed) else true then
+				return
+			else
+				p2:fail(errorSourceStringsModule.Keys.FolderStructureMismatch)
+				
+				return
+			end
 		end
 	elseif #entrypointInput ~= 1 then
 		p2:fail(errorSourceStringsModule.Keys.SelectionCountNotOne)

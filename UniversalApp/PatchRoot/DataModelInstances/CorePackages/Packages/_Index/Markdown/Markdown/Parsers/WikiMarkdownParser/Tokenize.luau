@@ -17,8 +17,13 @@ return function(p1)
 			{ "QUOTE", "^%s*>" },
 			{
 				"ORDERED_LIST_ITEM",
-				"^%s*[0-9A-Za-z]+%.",
-				"^(%s*)([0-9A-Za-z]+)%."
+				"^%s*[0-9]+%.[ \t]+",
+				"^(%s*)([0-9]+)%.[ \t]+"
+			},
+			{
+				"ORDERED_LIST_ITEM",
+				"^%s*[A-Za-z]%.[ \t]+",
+				"^(%s*)([A-Za-z])%.[ \t]+"
 			},
 			{ "TABLE_ROW", "^|" }
 		},

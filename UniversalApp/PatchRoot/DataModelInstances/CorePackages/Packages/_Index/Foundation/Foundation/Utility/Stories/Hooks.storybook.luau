@@ -5,7 +5,7 @@ return {
 	name = "Hooks",
 	group = "Foundation",
 	roact = require(parent_1.Roact),
-	storyRoots = require(parent.GetStories)("hooks"),
+	storyRoots = require(parent.GetStories).getStorybookRoots("hooks"),
 	mapStory = require(parent.StoryMiddleware),
 	packages = {
 		React = require(parent_1.React),

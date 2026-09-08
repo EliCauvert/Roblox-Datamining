@@ -6,7 +6,7 @@ local diagnosticsModule = require(viewRecycler.Core.Diagnostics)
 local _ = require(viewRecycler.Core.Layout)
 local overscanPolicyModule = require(viewRecycler.Core.OverscanPolicy)
 local _ = require(viewRecycler.Core.PinnedItems)
-local cloneFrozen = require(viewRecycler.Internal.Record).cloneFrozen
+local cloneFrozen = require(viewRecycler.Internal.ShallowTable).cloneFrozen
 local _ = require(viewRecycler.Core.Enums.ScrollAlignment)
 local scrollObservationKindModule = require(viewRecycler.Core.Enums.ScrollObservationKind)
 local typesModule = require(viewRecycler.Core.Types)
@@ -21,7 +21,7 @@ local itemRevisionTrackerModule = require(viewRecycler.Core.Virtualizer.ItemRevi
 local createPinnedItemPlannerModule = require(viewRecycler.Core.PinnedItems.createPinnedItemPlanner)
 local scrollPositionControllerModule = require(viewRecycler.Core.Virtualizer.ScrollPositionController)
 local viewportModelModule = require(viewRecycler.Core.Virtualizer.ViewportModel)
-local virtualizerSnapshotProjectionModule = require(viewRecycler.Core.Virtualizer.VirtualizerSnapshotProjection)
+local virtualizerSnapshotStoreModule = require(viewRecycler.Core.Virtualizer.VirtualizerSnapshotStore)
 local frozen = table.freeze({ firstIndex = 1, lastIndex = 0 })
 
 local function _(p1, p2)
@@ -33,7 +33,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: overscanPolicyModule (ref), itemRevisionTrackerModule (ref), createPinnedItemPlannerModule (ref), viewportModelModule (ref), virtualizerSnapshotProjectionModule (ref), dataPrefetchControllerModule (ref), scrollPositionControllerModule (ref), frozen (ref), virtualizerEffectTypeModule (ref), diagnosticsModule (ref), typesModule (ref), cloneFrozen (ref), dataSourceChangeTypeModule (ref), dataPrefetchModule (ref), external (ref), scrollObservationKindModule (ref), internal (ref), virtualizerQueryTypeModule (ref)
+	-- upvalues: overscanPolicyModule (ref), itemRevisionTrackerModule (ref), createPinnedItemPlannerModule (ref), viewportModelModule (ref), virtualizerSnapshotStoreModule (ref), dataPrefetchControllerModule (ref), scrollPositionControllerModule (ref), frozen (ref), virtualizerEffectTypeModule (ref), diagnosticsModule (ref), typesModule (ref), cloneFrozen (ref), dataSourceChangeTypeModule (ref), dataPrefetchModule (ref), external (ref), scrollObservationKindModule (ref), internal (ref), virtualizerQueryTypeModule (ref)
 	assert(if p1.overscan ~= nil then p1.overscanPolicy == nil else true, "VirtualizerEngine: overscan and overscanPolicy are mutually exclusive")
 	local dataSource = p1.dataSource
 	local layout = p1.layout
@@ -65,7 +65,7 @@ return function(p1)
 		contentInsetEnd = p1.contentInsetEnd,
 		endThreshold = p1.endThreshold
 	})
-	local var5 = virtualizerSnapshotProjectionModule({
+	local var5 = virtualizerSnapshotStoreModule({
 		planner = var2,
 		itemRevisions = var1,
 		getRecyclableViewType = p1.getRecyclableViewType,
@@ -277,7 +277,7 @@ return function(p1)
 		end
 	end
 	
-	local function commitProjection()
+	local function commitSnapshot()
 		-- upvalues: var4 (ref), var5 (ref), var13 (write), t_1 (ref), t_3 (ref), t_4 (ref), dataSource (write), layout (write), var11 (write), var12 (write), var3 (write)
 		local scrollState = var4.getScrollState()
 		local scrollState_1 = var5.getSnapshot().scrollState
@@ -472,7 +472,7 @@ return function(p1)
 				
 				return var15
 			end
-		elseif p3.type == external.ScrollToIndex or p3.type == external.ScrollToOffset or (p3.type == external.ScrollBy or p3.type == external.RestoreScrollSnapshot) then
+		elseif p3.type == external.ScrollToIndex or p3.type == external.ScrollToOffset or (p3.type == external.ScrollBy or p3.type == external.RestoreScrollAnchorSnapshot) then
 			if p3.type == external.ScrollToIndex then
 				var7.setItemAnchor(p3.index, p3.alignment)
 				var15 = var4.scrollToOffset(var4.getScrollOffsetForItem(p3.index, p3.alignment))
@@ -585,10 +585,14 @@ return function(p1)
 						}
 					})
 				end
-				applyCorrection(p4, var7.applyGeometryChange({
+				local t = {
+					preserveStartAnchor = true,
+					startInsetDelta = 0,
 					source = diagnosticsModule.ScrollCorrectionSource.Measurement
-				}, function()
-					-- upvalues: p3 (ref), dataSource (copy), var1 (copy), layout (copy), var21 (write), boundaryDropped (write), var27 (write), var20 (write), var2 (copy), var4 (copy)
+				}
+				local start = var2.getContentInsets().start
+				applyCorrection(p4, var7.applyGeometryChange(t, function()
+					-- upvalues: p3 (ref), dataSource (copy), var1 (copy), layout (copy), var21 (write), boundaryDropped (write), var27 (write), var20 (write), var2 (copy), t (ref), start (ref), var4 (copy)
 					for i, v in p3.measurements do
 						if v.itemIndex ~= nil and v.pinnedPosition == nil then
 							local itemIndex = v.itemIndex
@@ -618,6 +622,7 @@ return function(p1)
 						end
 					end
 					if var20 ~= nil then
+						t.startInsetDelta = var20.start - start
 						var4.setContentInsets(var20.start, var20.finish)
 						var27 = true
 					end
@@ -695,7 +700,7 @@ return function(p1)
 	
 	return {
 		dispatch = function(p5)
-			-- upvalues: var10 (write), var9 (write), external (copy), var13 (write), execute (ref), refreshRanges (ref), updatePrefetch (ref), commitProjection (ref)
+			-- upvalues: var10 (write), var9 (write), external (copy), var13 (write), execute (ref), refreshRanges (ref), updatePrefetch (ref), commitSnapshot (ref)
 			assert(not var10, "VirtualizerEngine: cannot dispatch during a Geometry transaction")
 			assert(not var9 or p5.type == external.Destroy, "VirtualizerEngine: cannot dispatch after destruction")
 			var10 = true
@@ -715,7 +720,7 @@ return function(p1)
 			if not var9 then
 				updatePrefetch(t)
 			end
-			local var26 = commitProjection()
+			local var26 = commitSnapshot()
 			var13 = nil
 			var10 = false
 			
@@ -747,7 +752,7 @@ return function(p1)
 				return layout.getItemLayout(p5.index)
 			elseif p5.type == virtualizerQueryTypeModule.GetScrollOffsetForItem then
 				return var4.getScrollOffsetForItem(p5.index, p5.alignment)
-			elseif p5.type ~= virtualizerQueryTypeModule.CaptureScrollSnapshot then
+			elseif p5.type ~= virtualizerQueryTypeModule.CaptureScrollAnchorSnapshot then
 				error("VirtualizerEngine: unknown query", 0)
 				
 				return

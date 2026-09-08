@@ -10,6 +10,8 @@ local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.get
 local UGCValidateMakeupDecalUVProperties = game:DefineFastFlag("UGCValidateMakeupDecalUVProperties", false)
 local getFFlagUGCValidationAllowEngineDefaultPartSurfacesModule = require(parent.flags.getFFlagUGCValidationAllowEngineDefaultPartSurfaces)
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
+local getFFlagUGCValidateMakeupCategoryParityModule = require(parent.flags.getFFlagUGCValidateMakeupCategoryParity)
+local getFFlagUGCValidateDisallowAeroMeshDataModule = require(parent.flags.getFFlagUGCValidateDisallowAeroMeshData)
 
 local function _(p1)
 	local t = {}
@@ -277,6 +279,9 @@ t.PROPERTIES = {
 		}
 	},
 	Part = { Shape = Enum.PartType.Block },
+	MeshPart = {
+		FluidFidelity = if getFFlagUGCValidateDisallowAeroMeshDataModule() then Enum.FluidFidelity.Automatic else nil
+	},
 	SurfaceAppearance = {
 		AlphaMode = if getFFlagUGCValidationEyebrowEyelashSupportModule() then {
 			{
@@ -366,6 +371,25 @@ t.CONTENT_ID_EDITABLE_PROPERTY = {
 		RoughnessMap = "RoughnessMapContent"
 	}
 }
+t.CONTENT_TYPED_PROPERTIES_BY_CLASS = {
+	MeshPart = { "MeshContent", "TextureContent" },
+	WrapTarget = { "CageMeshContent" },
+	WrapLayer = { "CageMeshContent", "ReferenceMeshContent" },
+	SurfaceAppearance = {
+		"ColorMapContent",
+		"MetalnessMapContent",
+		"NormalMapContent",
+		"RoughnessMapContent",
+		"EmissiveMaskContent"
+	},
+	Decal = {
+		"ColorMapContent",
+		"MetalnessMapContent",
+		"NormalMapContent",
+		"RoughnessMapContent"
+	},
+	WrapTextureTransfer = { "ReferenceCageMeshContent" }
+}
 t.MESH_CONTENT_ID_FIELDS = {
 	SpecialMesh = { "MeshId" },
 	MeshPart = { "MeshId" },
@@ -429,6 +453,8 @@ t.ContentType = "Content-Type"
 t.ApplicationJson = "application/json"
 t.GUIDAttributeName = "RBXGUID"
 t.GUIDAttributeMaxLength = 100
+t.EmoteIsUGCAttributeName = "RBXisUGCEmote"
+t.EmoteMaxPartTranslationAttributeName = "RBXmaxPartTranslation"
 t.AlternateMeshIdAttributeName = "RBX_ALT_MESH_ID"
 t.MESH_CONTENT_TYPE = {
 	RENDER_MESH = "RenderMesh",
@@ -487,6 +513,10 @@ for i_5, v_5 in t.AllAssetUploadCategories do
 	table.insert(t.AllAssetUploadCategoriesIncludingMakeup, v_5)
 end
 table.insert(t.AllAssetUploadCategoriesIncludingMakeup, validationEnumsModule.UploadCategory.MAKEUP)
+
+if getFFlagUGCValidateMakeupCategoryParityModule() then
+	table.insert(t.AllAssetUploadCategories, validationEnumsModule.UploadCategory.MAKEUP)
+end
 t.AllBundleUploadCategories = {
 	validationEnumsModule.UploadCategory.FULL_BODY,
 	validationEnumsModule.UploadCategory.BOTH_SHOES

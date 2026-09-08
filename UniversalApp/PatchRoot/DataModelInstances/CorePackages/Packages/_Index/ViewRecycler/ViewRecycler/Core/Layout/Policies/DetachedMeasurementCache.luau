@@ -1,10 +1,10 @@
 ﻿local function _(p1)
 	if p1 == nil then
 		return 256
-	elseif p1 == "unlimited" then
+	elseif p1 == 1e999 then
 		return nil
 	end
-	assert(type(p1) == "number" and (p1 >= 0 and (p1 < 1e999 and p1 % 1 == 0)), "Layout.measured: detachedMeasurementCapacity must be zero, a positive integer, or \"unlimited\"")
+	assert(type(p1) == "number" and (p1 >= 0 and (p1 < 1e999 and p1 % 1 == 0)), "Layout.measured: detachedMeasurementCapacity must be zero, a positive integer, or math.huge")
 	
 	return p1
 end
@@ -14,10 +14,10 @@ return {
 		local var1
 		if p1 == nil then
 			var1 = 256
-		elseif p1 == "unlimited" then
+		elseif p1 == 1e999 then
 			var1 = nil
 		else
-			assert(type(p1) == "number" and (p1 >= 0 and (p1 < 1e999 and p1 % 1 == 0)), "Layout.measured: detachedMeasurementCapacity must be zero, a positive integer, or \"unlimited\"")
+			assert(type(p1) == "number" and (p1 >= 0 and (p1 < 1e999 and p1 % 1 == 0)), "Layout.measured: detachedMeasurementCapacity must be zero, a positive integer, or math.huge")
 			var1 = p1
 		end
 		local t = {}

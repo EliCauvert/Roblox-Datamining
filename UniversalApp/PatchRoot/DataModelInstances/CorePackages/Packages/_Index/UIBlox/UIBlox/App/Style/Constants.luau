@@ -1,7 +1,7 @@
 ﻿local var1 = require(script.Parent.Parent.Parent.Parent.UIBlox.Core.Utility.GetEngineFeatureSafe)("EnablePreferredTextSizeSetting")
 local t = {
 	ThemeName = { Dark = "Dark", Light = "Light" },
-	FontName = { Gotham = "Gotham" },
+	FontName = { Gotham = "Gotham", Classic = "Classic" },
 	DeviceType = {
 		Desktop = "Desktop",
 		Tablet = "Tablet",

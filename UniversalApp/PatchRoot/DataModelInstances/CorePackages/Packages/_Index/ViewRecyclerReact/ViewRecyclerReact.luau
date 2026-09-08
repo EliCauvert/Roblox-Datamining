@@ -1,6 +1,7 @@
 ﻿local _ = require(script.Parent.ViewRecycler)
 local _ = require(script.ReactAdapter.ItemHooks)
 local reactRobloxModule = require(script.Parent.ReactRoblox)
+local _ = require(script.ReactAdapter.RecyclableViewReadiness)
 local _ = require(script.ReactAdapter.RecyclingScope)
 local _ = require(script.ReactAdapter.RecyclingViewport)
 local _ = require(script.ReactAdapter.VirtualList)

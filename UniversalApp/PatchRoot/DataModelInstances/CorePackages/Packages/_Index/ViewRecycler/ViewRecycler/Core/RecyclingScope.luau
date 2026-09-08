@@ -123,10 +123,10 @@ return function(p1)
 			local var8 = if #p4 == 0 then nil else {}
 			
 			for i, v in p3 do
-				local record = t_1[v.record]
-				assert(record ~= nil and (record.owner == p2 and record.leaseToken == v.leaseToken), "RecyclingScope: cannot use a stale Lease")
-				assert(record.validationToken ~= var2, "RecyclingScope: cannot release one Lease more than once")
-				record.validationToken = var2
+				local view = t_1[v.view]
+				assert(view ~= nil and (view.owner == p2 and view.leaseToken == v.leaseToken), "RecyclingScope: cannot use a stale Lease")
+				assert(view.validationToken ~= var2, "RecyclingScope: cannot release one Lease more than once")
+				view.validationToken = var2
 			end
 			if #p4 == 0 and p1.onPoolChanged == nil then
 				local t_3 = { acquired = frozen, releasedCount = #p3 }
@@ -134,11 +134,11 @@ return function(p1)
 				var4 = true
 				
 				for i_1, v_1 in p3 do
-					local record = t_1[v_1.record]
-					record.owner = nil
-					record.leaseToken = nil
-					record.pool.last += 1
-					record.pool.items[record.pool.last] = v_1.record
+					local view = t_1[v_1.view]
+					view.owner = nil
+					view.leaseToken = nil
+					view.pool.last += 1
+					view.pool.items[view.pool.last] = v_1.view
 				end
 				for i_2, v_2 in t do
 					while maxPoolSize_1 ~= nil and maxPoolSize_1 < v_2.last - v_2.first + 1 do
@@ -178,14 +178,14 @@ return function(p1)
 				
 				if var11 ~= nil then
 					for i_2, v_2 in p3 do
-						local record = t_1[v_2.record]
-						local viewType = var11[record.viewType]
+						local view = t_1[v_2.view]
+						local viewType = var11[view.viewType]
 						
 						if viewType == nil then
 							viewType = {}
-							var11[record.viewType] = viewType
+							var11[view.viewType] = viewType
 						end
-						table.insert(viewType, v_2.record)
+						table.insert(viewType, v_2.view)
 					end
 				end
 				local t_4 = {}
@@ -204,7 +204,7 @@ return function(p1)
 								t_3[v.viewType] = viewType - 1
 							else
 								local var16 = adapter.create(v.viewType)
-								assert(t_1[var16] == nil and not var8[var16], "RecyclingScope: create must return a new record")
+								assert(t_1[var16] == nil and not var8[var16], "RecyclingScope: create must return a new view")
 								var8[var16] = true
 								t_4[i] = var16
 							end
@@ -228,19 +228,19 @@ return function(p1)
 				local var17 = if p1.onPoolChanged == nil then nil else {}
 				
 				for i_2, v_2 in p3 do
-					if not var13[v_2.record] then
-						local record = t_1[v_2.record]
-						record.owner = nil
-						record.leaseToken = nil
-						local pool = record.pool
+					if not var13[v_2.view] then
+						local view = t_1[v_2.view]
+						view.owner = nil
+						view.leaseToken = nil
+						local pool = view.pool
 						pool.last += 1
-						pool.items[pool.last] = v_2.record
+						pool.items[pool.last] = v_2.view
 						t_5.releasedCount += 1
 						
 						if var17 ~= nil then
 							table.insert(var17, {
 								diagnosticsModule.PoolAction.Release,
-								record.viewType,
+								view.viewType,
 								-1,
 								1,
 								0
@@ -297,7 +297,7 @@ return function(p1)
 					var1 += 1
 					var22.owner = p2
 					var22.leaseToken = var23
-					table.insert(t_5.acquired, { record = var21, leaseToken = var23 })
+					table.insert(t_5.acquired, { view = var21, leaseToken = var23 })
 				end
 				for i_4, v_4 in t do
 					while maxPoolSize_1 ~= nil and maxPoolSize_1 < v_4.last - v_4.first + 1 do
@@ -375,7 +375,7 @@ return function(p1)
 			-- upvalues: t_2 (ref)
 			return table.clone(t_2)
 		end,
-		getVacantRecords = function()
+		getVacantViews = function()
 			-- upvalues: t (ref)
 			local t_1 = {}
 			

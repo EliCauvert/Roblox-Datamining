@@ -7,13 +7,12 @@ local iconSizeModule = require(foundation.Enums.IconSize)
 local _ = require(foundation.Enums.InputLabelSize)
 local inputVariantModule = require(foundation.Enums.InputVariant)
 local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local getInputVariantsFactoryModule = require(foundation.Components.InputField.getInputVariantsFactory)
 
 local function variantsFactory()
-	-- upvalues: inputSizeModule (ref), flagsModule (ref), iconSizeModule (ref), controlStateModule (ref), dashModule (ref)
+	-- upvalues: inputSizeModule (ref), iconSizeModule (ref), controlStateModule (ref), dashModule (ref)
 	local t = {
 		[controlStateModule.Disabled] = { container = nil, text = { tag = "content-muted" } },
 		[controlStateModule.Initialize] = { container = nil, text = { tag = "content-default" } },
@@ -32,40 +31,28 @@ local function variantsFactory()
 		sizes = {
 			[inputSizeModule.XSmall] = {
 				container = {
-					tag = {
-						["gap-small size-full-600 padding-small radius-small"] = flagsModule.FoundationDropdownSizeGap,
-						["gap-xxsmall size-full-600 padding-small radius-small"] = not flagsModule.FoundationDropdownSizeGap
-					}
+					tag = "gap-small size-full-600 padding-small radius-small"
 				},
 				text = { tag = "text-body-small" },
 				arrow = { size = iconSizeModule.XSmall }
 			},
 			[inputSizeModule.Small] = {
 				container = {
-					tag = {
-						["gap-small size-full-800 padding-medium radius-medium"] = flagsModule.FoundationDropdownSizeGap,
-						["gap-xxsmall size-full-800 padding-medium radius-medium"] = not flagsModule.FoundationDropdownSizeGap
-					}
+					tag = "gap-small size-full-800 padding-medium radius-medium"
 				},
 				text = { tag = "text-body-small" },
 				arrow = { size = iconSizeModule.Small }
 			},
 			[inputSizeModule.Medium] = {
 				container = {
-					tag = {
-						["gap-small size-full-1000 padding-medium radius-medium"] = flagsModule.FoundationDropdownSizeGap,
-						["size-full-1000 padding-medium radius-medium"] = not flagsModule.FoundationDropdownSizeGap
-					}
+					tag = "gap-small size-full-1000 padding-medium radius-medium"
 				},
 				text = { tag = "text-body-medium" },
 				arrow = { size = iconSizeModule.Medium }
 			},
 			[inputSizeModule.Large] = {
 				container = {
-					tag = {
-						["gap-small size-full-1200 padding-medium radius-medium"] = flagsModule.FoundationDropdownSizeGap,
-						["size-full-1200 padding-medium radius-medium"] = not flagsModule.FoundationDropdownSizeGap
-					}
+					tag = "gap-small size-full-1200 padding-medium radius-medium"
 				},
 				text = { tag = "text-body-large" },
 				arrow = { size = iconSizeModule.Large }
