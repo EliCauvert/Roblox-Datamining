@@ -17,6 +17,7 @@ local chatPlacementContextModule = require(parent.AppChat.ChatPlacementContext)
 local chatSessionRefCountModule = require(parent.AppChat.ChatSessionRefCount)
 local useAppChatUpdateSessionModule = require(parent.AppChat.useAppChatUpdateSession)
 local useGetAndSetRefModule = require(parent.AppChat.useGetAndSetRef)
+local usePartyChatReactiveFeatureRestrictionModule = require(parent.AppChat.usePartyChatReactiveFeatureRestriction)
 local socialCommonModule = require(parent.SocialCommon)
 local friendsChatTabNameModule = require(script.Parent.FriendsChatTabName)
 local conversationListModule = require(script.Parent.ConversationList)
@@ -27,10 +28,12 @@ local useFriendsChatVisibilityTelemetryModule = require(script.Parent.Telemetry.
 local friendsChatLandingTelemetryProvidersModule = require(script.Parent.Telemetry.ChatLanding.FriendsChatLandingTelemetryProviders)
 local friendsChatConversationTelemetryProvidersModule = require(script.Parent.Telemetry.ChatConversation.FriendsChatConversationTelemetryProviders)
 local expChatPerfTracker = require(parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
-local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagAppChatReactiveFeatureRestrictions = sharedFlagsModule.FFlagAppChatReactiveFeatureRestrictions
+local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
 
 local function FriendsChatMainContent(p1)
-	-- upvalues: useFriendsChatVisibilityTelemetryModule (ref), useChatWindowSettingsModule (ref), reactModule (ref), getChatModerationStatusDataHydrationModule (ref), getFriendsChatNavigationStoreModule (ref), getFriendsChatRealtimeStoreModule (ref), fFlagExpChatEnableFriendsTab (ref), expChatPerfTracker (ref), friendsChatTabNameModule (ref), signalsReactModule (ref), playersService (ref), localization (ref), localizationService (ref), chatSessionRefCountModule (ref), inExperienceAppChatModalModule (ref), enumScreensModule (ref), socialCommonModule (ref), friendsChatLandingTelemetryProvidersModule (ref), conversationListModule (ref), friendsChatConversationTelemetryProvidersModule (ref), friendsChatConversationWindowModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), localizationProvider (ref), foundationModule (ref)
+	-- upvalues: useFriendsChatVisibilityTelemetryModule (ref), useChatWindowSettingsModule (ref), reactModule (ref), getChatModerationStatusDataHydrationModule (ref), getFriendsChatNavigationStoreModule (ref), getFriendsChatRealtimeStoreModule (ref), fFlagAppChatReactiveFeatureRestrictions (ref), usePartyChatReactiveFeatureRestrictionModule (ref), fFlagExpChatEnableFriendsTab (ref), expChatPerfTracker (ref), friendsChatTabNameModule (ref), signalsReactModule (ref), playersService (ref), localization (ref), localizationService (ref), chatSessionRefCountModule (ref), inExperienceAppChatModalModule (ref), enumScreensModule (ref), socialCommonModule (ref), friendsChatLandingTelemetryProvidersModule (ref), conversationListModule (ref), friendsChatConversationTelemetryProvidersModule (ref), friendsChatConversationWindowModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), localizationProvider (ref), foundationModule (ref)
 	useFriendsChatVisibilityTelemetryModule()
 	local var1 = useChatWindowSettingsModule()
 	local var2 = reactModule.useMemo(function()
@@ -43,13 +46,17 @@ local function FriendsChatMainContent(p1)
 	local var3 = getChatModerationStatusDataHydrationModule(false)
 	local var4 = getFriendsChatNavigationStoreModule(false)
 	local var5 = getFriendsChatRealtimeStoreModule(false)
+	
+	if fFlagAppChatReactiveFeatureRestrictions then
+		usePartyChatReactiveFeatureRestrictionModule(true)
+	end
 	reactModule.useEffect(function()
 		-- upvalues: var5 (ref)
 		var5.markFriendsTabEntered()
 	end, { var5 })
 	reactModule.useEffect(function()
-		-- upvalues: fFlagExpChatEnableFriendsTab (copy), var3 (ref)
-		if fFlagExpChatEnableFriendsTab then
+		-- upvalues: fFlagExpChatEnableFriendsTab (copy), fFlagAppChatReactiveFeatureRestrictions (copy), var3 (ref)
+		if fFlagExpChatEnableFriendsTab and not fFlagAppChatReactiveFeatureRestrictions then
 			var3.getUserStatus()
 		end
 	end, { var3 })

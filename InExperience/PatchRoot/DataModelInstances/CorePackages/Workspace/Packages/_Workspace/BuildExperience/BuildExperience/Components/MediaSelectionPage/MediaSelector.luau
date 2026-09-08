@@ -5,7 +5,6 @@ local var1 = if fFlagBuildDesktopReadinessModule then require(parent.AppComposit
 local promiseModule = require(parent.Promise)
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
-local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local var2 = if fFlagBuildDesktopReadinessModule then var1.useCompositionLayout else nil
@@ -25,30 +24,20 @@ local captureSelectionViewModule = require(script.Parent.CaptureSelectionView)
 local filmstripSlotModule = require(script.Parent.FilmstripSlot)
 local mediaPreviewModule = require(script.Parent.MediaPreview)
 local _ = require(script.Parent.types)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagMediaSelectorErrorLoggingModule = require(buildExperience.Flags.FFlagMediaSelectorErrorLogging)
 local formatErrorModule = require(buildExperience.utils.formatError)
 local snackbar = foundationModule.Snackbar
 
 return function(p1)
-	-- upvalues: fFlagBuildDesktopReadinessModule (ref), var2 (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), fFlagMediaSelectorErrorLoggingModule (ref), getGameMediaForUniverseModule (ref), reactModule (ref), universeConfigurationModule (ref), signalsReactModule (ref), useTokens (ref), createGalleryCaptureSourceModule (ref), useMediaUpdaterModule (ref), getGameMediaStore (ref), formatErrorModule (ref), uploadCaptureAsyncModule (ref), getThumbnailUrlAsyncModule (ref), promiseModule (ref), createImageAssetAsyncModule (ref), captureSelectionViewModule (ref), filmstripSlotModule (ref), view (ref), snackbar (ref), mediaPreviewModule (ref), scrollView (ref), foundationModule (ref)
-	local MEDIA_SELECTION_CAPTURE_LIBRARY, MEDIA_SELECTION_DELETE
+	-- upvalues: fFlagBuildDesktopReadinessModule (ref), var2 (ref), useLocalization (ref), localizationStringsModule (ref), fFlagMediaSelectorErrorLoggingModule (ref), getGameMediaForUniverseModule (ref), reactModule (ref), universeConfigurationModule (ref), signalsReactModule (ref), useTokens (ref), createGalleryCaptureSourceModule (ref), useMediaUpdaterModule (ref), getGameMediaStore (ref), formatErrorModule (ref), uploadCaptureAsyncModule (ref), getThumbnailUrlAsyncModule (ref), promiseModule (ref), createImageAssetAsyncModule (ref), captureSelectionViewModule (ref), filmstripSlotModule (ref), view (ref), snackbar (ref), mediaPreviewModule (ref), scrollView (ref), foundationModule (ref)
 	local var3 = if fFlagBuildDesktopReadinessModule then var2() else nil
-	local var4 = if fFlagBuildLocalization then useLocalization({
+	local var4 = useLocalization({
 		captureLibrary = localizationStringsModule.MEDIA_SELECTION_CAPTURE_LIBRARY,
 		delete = localizationStringsModule.MEDIA_SELECTION_DELETE
-	}) else nil
+	})
 	local var5 = if fFlagMediaSelectorErrorLoggingModule then useLocalization({ mediaError = "Feature.Moments.Label.Error" }) else nil
-	local _ = nil
-	local _ = nil
-	
-	if fFlagBuildLocalization then
-		MEDIA_SELECTION_CAPTURE_LIBRARY = var4.captureLibrary
-		MEDIA_SELECTION_DELETE = var4.delete
-	else
-		MEDIA_SELECTION_CAPTURE_LIBRARY = localizationStringsModule.MEDIA_SELECTION_CAPTURE_LIBRARY
-		MEDIA_SELECTION_DELETE = localizationStringsModule.MEDIA_SELECTION_DELETE
-	end
+	local captureLibrary = var4.captureLibrary
+	local delete = var4.delete
 	local var6 = getGameMediaForUniverseModule(p1.universeId)
 	local var7 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: universeConfigurationModule (copy), p1 (ref)
@@ -126,30 +115,25 @@ return function(p1)
 		var25("")
 	end, {})
 	local var40 = reactModule.useCallback(function(p2)
-		-- upvalues: var33 (ref), MEDIA_SELECTION_CAPTURE_LIBRARY (write), var35 (ref), MEDIA_SELECTION_DELETE (write)
+		-- upvalues: var33 (ref), captureLibrary (ref), var35 (ref), delete (ref)
 		local t = {}
 		
 		if var33 then
 			table.insert(t, {
 				id = "capture_library",
 				icon = "icons/common/image",
-				text = MEDIA_SELECTION_CAPTURE_LIBRARY
+				text = captureLibrary
 			})
 		end
 		if p2 ~= "icon" and p2 ~= var35 and p2 ~= "empty" then
 			table.insert(t, {
 				id = "delete",
 				icon = "icons/common/trash",
-				text = MEDIA_SELECTION_DELETE
+				text = delete
 			})
 		end
 		return { { items = t } }
-	end, {
-		var33,
-		MEDIA_SELECTION_CAPTURE_LIBRARY,
-		MEDIA_SELECTION_DELETE,
-		var35
-	})
+	end, { var33, captureLibrary, delete, var35 })
 	local var41 = reactModule.useCallback(function(p2)
 		-- upvalues: var22 (ref), var27 (ref), var19 (ref), var17 (ref)
 		if var22[p2] or var27.current and p2 ~= "icon" and p2 ~= "empty" then

@@ -51,6 +51,7 @@ return function(value)
 		LayoutOrder = var1.LayoutOrder,
 		padding = 0,
 		isLastMessageInMessageGroup = var1.isLastMessageInMessageGroup or t.isLastMessageInMessageGroup,
+		bubbleRef = var1.bubbleRef,
 		[roactModule.Change.AbsoluteSize] = var1[roactModule.Change.AbsoluteSize]
 	}, {
 		AssetCard = roactModule.createElement("Frame", {

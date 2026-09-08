@@ -2,7 +2,6 @@
 local parent = momentsCommon.Parent
 local signalsModule = require(parent.Signals)
 local fFlagMomentsAutoplayAmpPolicy = require(parent.SharedFlags).FFlagMomentsAutoplayAmpPolicy
-local fFlagMomentsCarouselVideoHandoff = require(parent.SharedFlags).FFlagMomentsCarouselVideoHandoff
 local _ = require(momentsCommon.Media.MediaTypes)
 local _ = require(momentsCommon.Media.Preload.selectPreloadPolicy)
 local _ = require(momentsCommon.Media.Telemetry.mediaTelemetry)
@@ -17,7 +16,7 @@ local function _(p1, p2, p3)
 end
 
 return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: defaultMediaNodeRegistryModule (ref), createMomentMediaControllerModule (ref), createSignal (ref), fFlagMomentsAutoplayAmpPolicy (ref), fFlagMomentsCarouselVideoHandoff (ref), createEffect (ref)
+	-- upvalues: defaultMediaNodeRegistryModule (ref), createMomentMediaControllerModule (ref), createSignal (ref), fFlagMomentsAutoplayAmpPolicy (ref), createEffect (ref)
 	p6 = p6 or {}
 	local now = p5.now or os.clock
 	local registry = p6.registry or defaultMediaNodeRegistryModule()
@@ -72,17 +71,14 @@ return function(p1, p2, p3, p4, p5, p6)
 	end
 	
 	local function reconcile(p7)
-		-- upvalues: p1 (ref), fFlagMomentsAutoplayAmpPolicy (copy), fFlagMomentsCarouselVideoHandoff (copy), var2 (write), p2 (ref), t (ref), var1 (write), createController (ref), var3 (write), scheduleDecodeRetry (ref), var5 (ref), now (ref), p3 (ref)
+		-- upvalues: p1 (ref), fFlagMomentsAutoplayAmpPolicy (copy), var2 (write), p2 (ref), t (ref), var1 (write), createController (ref), var3 (write), scheduleDecodeRetry (ref), var5 (ref), now (ref), p3 (ref)
 		local items = p1.getItems(p7)
 		local activeIndex = p1.getActiveIndex(p7)
 		local playbackActive = p1.getPlaybackActive(p7)
 		local var6 = if fFlagMomentsAutoplayAmpPolicy then p1.getCanAutoPlay(p7) else nil
 		local var7 = items[activeIndex]
 		local var8 = if var7 ~= nil then nil else var7.momentId
-		
-		if fFlagMomentsCarouselVideoHandoff then
-			var2 = var8
-		end
+		var2 = var8
 		local t_1 = {}
 		local t_2 = {}
 		local t_3 = {}
@@ -127,11 +123,11 @@ return function(p1, p2, p3, p4, p5, p6)
 				t[i_2] = t_4
 				var9 = true
 				task.spawn(function()
-					-- upvalues: var3 (copy), t (copy), i_2 (ref), t_4 (ref), var10 (ref), fFlagMomentsCarouselVideoHandoff (copy), p2 (copy), var2 (copy), p1 (copy), scheduleDecodeRetry (copy)
+					-- upvalues: var3 (copy), t (copy), i_2 (ref), t_4 (ref), var10 (ref), p2 (copy), var2 (copy), p1 (copy), scheduleDecodeRetry (copy)
 					if var3 or t[i_2] ~= t_4 then return end
 					var10.download()
 					
-					if fFlagMomentsCarouselVideoHandoff and not var3 and t[i_2] == t_4 then
+					if not var3 and t[i_2] == t_4 then
 						local var11 = i_2
 						local var12 = t_4
 						

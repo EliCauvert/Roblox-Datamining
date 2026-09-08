@@ -19,13 +19,15 @@ local constantsModule = require(momentsCreation.Constants)
 local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFlowStrings)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local _ = require(parent.MomentsTypes)
+local getFFlagMomentsTextVerticalSizeSliderModule = require(momentsCreation.Flags.GetFFlagMomentsTextVerticalSizeSlider)
 
 return function(p1)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), useMemo (ref), signalsModule (ref), constantsModule (ref), useSignalState (ref), useCallback (ref), dashModule (ref), reactModule (ref), view (ref), slider (ref), knob (ref), foundationModule (ref), button (ref)
+	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), getFFlagMomentsTextVerticalSizeSliderModule (ref), useMemo (ref), signalsModule (ref), constantsModule (ref), useSignalState (ref), useCallback (ref), dashModule (ref), reactModule (ref), view (ref), slider (ref), knob (ref), foundationModule (ref), button (ref)
 	local controller = p1.controller
 	local var1 = useDeviceInsets()
 	local var2 = useTokens()
 	local var3 = useCreationFlowStringsModule()
+	local var4 = getFFlagMomentsTextVerticalSizeSliderModule()
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center align-y-bottom gap-large position-bottom-center anchor-bottom-center size-full-0 auto-y",
@@ -37,7 +39,7 @@ return function(p1)
 			right = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
 		}
 	}, {
-		FontSizeSlider = reactModule.createElement(slider, {
+		FontSizeSlider = if var4 then nil else reactModule.createElement(slider, {
 			LayoutOrder = 1,
 			knob = reactModule.createElement(knob, { size = foundationModule.Enums.InputSize.Large }),
 			knobVisibility = foundationModule.Enums.Visibility.Always,
@@ -47,28 +49,31 @@ return function(p1)
 				
 				if activeSession == nil then return end
 				local draft = activeSession.getDraft(false)
-				local var4 = draft and draft[1]
+				local var5 = draft and draft[1]
 				
-				if var4 == nil then
+				if var5 == nil then
 					return
 				end
 				activeSession.update({
-					dashModule.joinDeep(var4, { textOverlayStyle = { fontSize = p2 } })
+					dashModule.joinDeep(var5, { textOverlayStyle = { fontSize = p2 } })
 				})
 			end, { controller }),
 			size = foundationModule.Enums.InputSize.XSmall,
 			range = NumberRange.new(constantsModule.TextOverlay.MinFontSize, constantsModule.TextOverlay.MaxFontSize),
 			value = math.clamp(useSignalState(useMemo(function()
-				-- upvalues: signalsModule (copy), controller (ref), constantsModule (copy)
+				-- upvalues: signalsModule (copy), var4 (ref), constantsModule (copy), controller (ref)
 				return signalsModule.createComputed(function(p2)
-					-- upvalues: controller (copy), constantsModule (copy)
+					-- upvalues: var4 (copy), constantsModule (copy), controller (copy)
+					if var4 then
+						return constantsModule.TextOverlay.DefaultFontSize
+					end
 					local activeSession = controller.getActiveSession(p2)
-					local var4 = if activeSession ~= nil then nil else activeSession.getDraft(p2)
-					local var5 = var4 and var4[1]
+					local var5 = if activeSession ~= nil then nil else activeSession.getDraft(p2)
+					local var6 = var5 and var5[1]
 					
-					return if var5 == nil then constantsModule.TextOverlay.DefaultFontSize else var5.textOverlayStyle.fontSize
+					return if var6 == nil then constantsModule.TextOverlay.DefaultFontSize else var6.textOverlayStyle.fontSize
 				end)
-			end, { controller })), constantsModule.TextOverlay.MinFontSize, constantsModule.TextOverlay.MaxFontSize),
+			end, { controller, var4 })), constantsModule.TextOverlay.MinFontSize, constantsModule.TextOverlay.MaxFontSize),
 			variant = foundationModule.Enums.SliderVariant.Standard
 		}),
 		Nav = reactModule.createElement(view, {

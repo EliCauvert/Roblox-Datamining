@@ -24,6 +24,8 @@ local fFlagEnableLastLoginMethodTracking = require(parent.SharedFlags).FFlagEnab
 local enablePasskeyOnlyUserErrorMessage = game:DefineFastFlag("EnablePasskeyOnlyUserErrorMessage", false)
 local fFlagEnableRecordLogin = require(parent.SharedFlags).FFlagEnableRecordLogin
 local enableIllegalChildAccountLinkingErrorMessageOnLoginByUsername = game:DefineFastFlag("EnableIllegalChildAccountLinkingErrorMessageOnLoginByUsername", false)
+local enableLoginNetworkingErrorToast = game:DefineFastFlag("EnableLoginNetworkingErrorToast", false)
+local setNetworkingErrorToast = require(parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
 
 local function _(p1, p2, p3, p4, p5)
 	-- upvalues: getAppFeaturePolicies (ref), loginRequestsModule (ref)
@@ -31,9 +33,9 @@ local function _(p1, p2, p3, p4, p5)
 end
 
 return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: getAppFeaturePolicies (ref), loginRequestsModule (ref), loginResultModule (ref), promiseModule (ref), loginErrorCodesModule (ref), getFFlagEnableGenericTwoFAMessage (ref), fFlagEnableLastLoginMethodTracking (ref), appStorageUtilitiesModule (ref), loginMethodsModule (ref), fFlagEnableRecordLogin (ref), recordLoginModule (ref), httpService (ref), getDxBlobModule (ref), getCaptchaDataJsonModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (ref), enableIllegalChildAccountLinkingErrorMessageOnLoginByUsername (ref), enablePasskeyOnlyUserErrorMessage (ref), getLoginByUsernameErrorMessageModule (ref), loggingProtocolModule (ref), loginByUsernameSSOErrorsTelemetryModule (ref)
+	-- upvalues: getAppFeaturePolicies (ref), loginRequestsModule (ref), loginResultModule (ref), promiseModule (ref), loginErrorCodesModule (ref), getFFlagEnableGenericTwoFAMessage (ref), fFlagEnableLastLoginMethodTracking (ref), appStorageUtilitiesModule (ref), loginMethodsModule (ref), fFlagEnableRecordLogin (ref), recordLoginModule (ref), enableLoginNetworkingErrorToast (ref), setNetworkingErrorToast (ref), httpService (ref), getDxBlobModule (ref), getCaptchaDataJsonModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (ref), enableIllegalChildAccountLinkingErrorMessageOnLoginByUsername (ref), enablePasskeyOnlyUserErrorMessage (ref), getLoginByUsernameErrorMessageModule (ref), loggingProtocolModule (ref), loginByUsernameSSOErrorsTelemetryModule (ref)
 	return function(p8)
-		-- upvalues: getAppFeaturePolicies (copy), p1 (ref), p2 (ref), p3 (ref), p5 (ref), p7 (ref), loginRequestsModule (copy), loginResultModule (copy), promiseModule (copy), loginErrorCodesModule (copy), getFFlagEnableGenericTwoFAMessage (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), fFlagEnableRecordLogin (copy), recordLoginModule (copy), httpService (copy), getDxBlobModule (copy), getCaptchaDataJsonModule (copy), appPage (copy), p4 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByUsername (copy), enablePasskeyOnlyUserErrorMessage (copy), getLoginByUsernameErrorMessageModule (copy), loggingProtocolModule (copy), loginByUsernameSSOErrorsTelemetryModule (copy), p6 (ref)
+		-- upvalues: getAppFeaturePolicies (copy), p1 (ref), p2 (ref), p3 (ref), p5 (ref), p7 (ref), loginRequestsModule (copy), loginResultModule (copy), promiseModule (copy), loginErrorCodesModule (copy), getFFlagEnableGenericTwoFAMessage (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), fFlagEnableRecordLogin (copy), recordLoginModule (copy), enableLoginNetworkingErrorToast (copy), setNetworkingErrorToast (copy), httpService (copy), getDxBlobModule (copy), getCaptchaDataJsonModule (copy), appPage (copy), p4 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByUsername (copy), enablePasskeyOnlyUserErrorMessage (copy), getLoginByUsernameErrorMessageModule (copy), loggingProtocolModule (copy), loginByUsernameSSOErrorsTelemetryModule (copy), p6 (ref)
 		local useSingleSignOn = getAppFeaturePolicies().getUseSingleSignOn()
 		
 		return (if getAppFeaturePolicies().getUseSingleSignOn() then loginRequestsModule.singleSignOnConnectWithCredential(p1, p2, p3, "Username") else loginRequestsModule.logByUsername(p1, p2, p3, p5, p7)):andThen(function(p9)
@@ -60,7 +62,12 @@ return function(p1, p2, p3, p4, p5, p6, p7)
 			end
 			return var2
 		end, function(p9)
-			-- upvalues: httpService (copy), loginErrorCodesModule (copy), getDxBlobModule (copy), getCaptchaDataJsonModule (copy), appPage (copy), p4 (copy), p2 (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), p8 (ref), navigateDown (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByUsername (copy), enablePasskeyOnlyUserErrorMessage (copy), useSingleSignOn (ref), getLoginByUsernameErrorMessageModule (copy), loggingProtocolModule (copy), loginByUsernameSSOErrorsTelemetryModule (copy), promiseModule (copy), p6 (copy)
+			-- upvalues: enableLoginNetworkingErrorToast (copy), p8 (ref), setNetworkingErrorToast (copy), promiseModule (copy), httpService (copy), loginErrorCodesModule (copy), getDxBlobModule (copy), getCaptchaDataJsonModule (copy), appPage (copy), p4 (copy), p2 (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByUsername (copy), enablePasskeyOnlyUserErrorMessage (copy), useSingleSignOn (ref), getLoginByUsernameErrorMessageModule (copy), loggingProtocolModule (copy), loginByUsernameSSOErrorsTelemetryModule (copy), p6 (copy)
+			if enableLoginNetworkingErrorToast and p9.Body == nil and (p9.HttpError ~= nil and p9.HttpError ~= Enum.HttpError.OK) then
+				p8:dispatch(setNetworkingErrorToast(p9))
+				
+				return promiseModule.reject({ errorKey = nil, errorCode = nil })
+			end
 			local body = httpService:JSONDecode(p9.Body)
 			local var2 = nil
 			local code = body.errors[1].code

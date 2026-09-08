@@ -29,6 +29,16 @@ local reactionExplosionLayerModule = require(script.Parent.Reactions.ReactionExp
 local fFlagMomentsImmersiveChromeModule = require(moments.Flags.FFlagMomentsImmersiveChrome)
 local fFlagMomentsUseCompositionLibraryModule = require(moments.Flags.FFlagMomentsUseCompositionLibrary)
 local getFFlagMomentsPushedFeedSafeAreaModule = require(moments.Flags.GetFFlagMomentsPushedFeedSafeArea)
+local getFFlagMomentsDisplayWakeLockModule = require(moments.Flags.GetFFlagMomentsDisplayWakeLock)
+local useDisplayWakeLockModule = require(moments.Hooks.useDisplayWakeLock)
+local useIsPlayingModule = require(moments.Hooks.useIsPlaying)
+
+local function DisplayWakeLockEffect()
+	-- upvalues: useIsPlayingModule (ref), useDisplayWakeLockModule (ref)
+	useDisplayWakeLockModule(useIsPlayingModule())
+	
+	return nil
+end
 
 local function OverlayInfoFrame(p1)
 	-- upvalues: useTokens (ref), momentOverlayInsetContextModule (ref), fFlagMomentsUseCompositionLibraryModule (ref), reactModule (ref), view (ref)
@@ -54,7 +64,7 @@ local function OverlayInfoFrame(p1)
 end
 
 return function(p1)
-	-- upvalues: useTokens (ref), fFlagMomentsUseCompositionLibraryModule (ref), useCompositionLayout (ref), useDeviceInsets (ref), useFormFactor (ref), reactUtilsModule (ref), momentPushedFeedSafeAreaContextModule (ref), getFFlagMomentsPushedFeedSafeAreaModule (ref), fFlagMomentsImmersiveChromeModule (ref), reactModule (ref), topContentModule (ref), scrubberModule (ref), callToActionModule (ref), momentLayoutModule (ref), formFactor (ref), OverlayInfoFrame (ref), view (ref), momentContextModule (ref), text (ref), videoScrimModule (ref), momentGestureLayerModule (ref), gradientBackdrop (ref), playbackToggleIndicatorModule (ref), reactionExplosionLayerModule (ref), reactionEffectsContextModule (ref)
+	-- upvalues: useTokens (ref), fFlagMomentsUseCompositionLibraryModule (ref), useCompositionLayout (ref), useDeviceInsets (ref), useFormFactor (ref), reactUtilsModule (ref), momentPushedFeedSafeAreaContextModule (ref), getFFlagMomentsPushedFeedSafeAreaModule (ref), fFlagMomentsImmersiveChromeModule (ref), reactModule (ref), topContentModule (ref), scrubberModule (ref), callToActionModule (ref), momentLayoutModule (ref), formFactor (ref), OverlayInfoFrame (ref), view (ref), momentContextModule (ref), text (ref), videoScrimModule (ref), momentGestureLayerModule (ref), gradientBackdrop (ref), playbackToggleIndicatorModule (ref), reactionExplosionLayerModule (ref), getFFlagMomentsDisplayWakeLockModule (ref), DisplayWakeLockEffect (ref), reactionEffectsContextModule (ref)
 	local var1 = useTokens()
 	local var2 = nil
 	local var3 = nil
@@ -145,6 +155,7 @@ return function(p1)
 			}),
 			PlaybackIndicator = reactModule.createElement(playbackToggleIndicatorModule),
 			ReactionExplosionLayer = reactModule.createElement(reactionExplosionLayerModule)
-		})
+		}),
+		DisplayWakeLock = if getFFlagMomentsDisplayWakeLockModule() then reactModule.createElement(DisplayWakeLockEffect) else nil
 	}))
 end

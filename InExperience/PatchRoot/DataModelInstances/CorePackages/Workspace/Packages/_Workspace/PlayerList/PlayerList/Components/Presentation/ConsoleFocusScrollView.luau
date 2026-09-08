@@ -10,6 +10,7 @@ local scrollView = require(parent_1.Foundation).ScrollView
 local playerListVisibilityStoreModule = require(parent.Common.PlayerListVisibilityStore)
 local playerContextualMenuStoreModule = require(parent.Common.PlayerContextualMenuStore)
 local teamListViewModule = require(parent.Components.Presentation.TeamListView)
+local useGamepadStickScrollModule = require(parent.Hooks.useGamepadStickScroll)
 
 local function _()
 	-- upvalues: userInputService (ref)
@@ -17,7 +18,7 @@ local function _()
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), signalsReactModule (ref), playerListVisibilityStoreModule (ref), playerContextualMenuStoreModule (ref), userInputService (ref), guiService (ref), contextActionService (ref), teamListViewModule (ref), scrollView (ref)
+	-- upvalues: reactModule (ref), signalsReactModule (ref), playerListVisibilityStoreModule (ref), playerContextualMenuStoreModule (ref), userInputService (ref), useGamepadStickScrollModule (ref), guiService (ref), contextActionService (ref), teamListViewModule (ref), scrollView (ref)
 	local var1 = reactModule.useRef(nil)
 	local var2 = reactModule.useRef(nil)
 	local var3 = signalsReactModule.useSignalState(playerListVisibilityStoreModule.getEffectiveVisible)
@@ -25,6 +26,7 @@ return function(p1)
 	local var5 = var3 and not var4
 	local allTeams = p1.allTeams
 	local var6 = if p1.isGamepadOverride ~= nil then userInputService:GetLastInputType().Name:find("Gamepad") ~= nil else p1.isGamepadOverride
+	useGamepadStickScrollModule({ scrollingFrameRef = var2, enabled = var5 })
 	local var7 = reactModule.useRef(Enum.OverrideMouseIconBehavior.None)
 	local var8 = reactModule.useRef(nil)
 	local var9 = reactModule.useRef(false)

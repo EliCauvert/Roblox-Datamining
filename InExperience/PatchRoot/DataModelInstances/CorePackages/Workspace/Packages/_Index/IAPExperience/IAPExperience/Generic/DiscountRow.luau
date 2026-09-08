@@ -10,6 +10,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local priceLineItemModule = require(IAPExperience.Generic.PriceLineItem)
 local discountType = require(IAPExperience.ProductPurchase.PricingTypes).DiscountType
 local fFlagPurchasePromptFetchCartPricing = require(IAPExperience.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
+local fixBlackbirdDiscountStringWithEligibleItems = game:DefineFastFlag("FixBlackbirdDiscountStringWithEligibleItems", false)
 local var1 = getIconRichText(iconName.Robux)
 
 local function _(p1, p2)
@@ -17,7 +18,7 @@ local function _(p1, p2)
 end
 
 local function RobloxSubscriptionDiscountRow(p1)
-	-- upvalues: localizationService (ref), reactModule (ref), var1 (ref), formatNumberModule (ref), useLocalization (ref), priceLineItemModule (ref), fFlagPurchasePromptFetchCartPricing (ref)
+	-- upvalues: localizationService (ref), reactModule (ref), var1 (ref), formatNumberModule (ref), useLocalization (ref), fixBlackbirdDiscountStringWithEligibleItems (ref), priceLineItemModule (ref), fFlagPurchasePromptFetchCartPricing (ref)
 	local discountLabel
 	local discount = p1.discount
 	local robloxLocaleId = localizationService.RobloxLocaleId
@@ -27,7 +28,7 @@ local function RobloxSubscriptionDiscountRow(p1)
 	end, { robloxLocaleId, discount.amountInRobux })
 	local var3 = useLocalization({
 		discountLabel = if discount.percent > 0 then {
-			"IAPExperience.PurchasePrompt.Label.BlackbirdDiscount",
+			if fixBlackbirdDiscountStringWithEligibleItems then "IAPExperience.PurchasePrompt.Label.BlackbirdDiscountEligibleItems" else "IAPExperience.PurchasePrompt.Label.BlackbirdDiscount",
 			discountPercentage = discount.percent
 		} else "IAPExperience.PurchasePrompt.Label.BlackbirdDiscountNoPercent"
 	})
@@ -47,16 +48,16 @@ local function RobloxSubscriptionDiscountRow(p1)
 	return createElement(priceLineItemModule, t)
 end
 
-local function GenericDiscountRow(p1)
+local function GenericDiscountRow(p2)
 	-- upvalues: localizationService (ref), reactModule (ref), var1 (ref), formatNumberModule (ref), useLocalization (ref), priceLineItemModule (ref), fFlagPurchasePromptFetchCartPricing (ref)
 	local discountLabel
-	local discount = p1.discount
+	local discount = p2.discount
 	local robloxLocaleId = localizationService.RobloxLocaleId
-	local var2 = reactModule.useMemo(function()
+	local var4 = reactModule.useMemo(function()
 		-- upvalues: var1 (copy), formatNumberModule (copy), robloxLocaleId (ref), discount (ref)
 		return string.format("- %s %s", var1, formatNumberModule(robloxLocaleId, discount.amountInRobux))
 	end, { robloxLocaleId, discount.amountInRobux })
-	local var3 = useLocalization({
+	local var5 = useLocalization({
 		discountLabel = if discount.percent > 0 then {
 			"IAPExperience.PurchasePrompt.Label.GenericDiscount",
 			discountPercentage = discount.percent
@@ -66,14 +67,14 @@ local function GenericDiscountRow(p1)
 	local t = {}
 	
 	if fFlagPurchasePromptFetchCartPricing then
-		local label = p1.label
-		discountLabel = if label == nil or label == "" then var3.discountLabel else label
+		local label = p2.label
+		discountLabel = if label == nil or label == "" then var5.discountLabel else label
 	else
-		discountLabel = var3.discountLabel
+		discountLabel = var5.discountLabel
 	end
 	t.label = discountLabel
-	t.amount = var2
-	t.LayoutOrder = p1.LayoutOrder
+	t.amount = var4
+	t.LayoutOrder = p2.LayoutOrder
 	
 	return createElement(priceLineItemModule, t)
 end
@@ -83,7 +84,7 @@ local t = {
 	[discountType.RobloxPlusSubscription] = RobloxSubscriptionDiscountRow
 }
 
-return function(p1)
+return function(p2)
 	-- upvalues: t (ref), GenericDiscountRow (ref), reactModule (ref)
-	return reactModule.createElement(t[p1.discount.type] or GenericDiscountRow, p1)
+	return reactModule.createElement(t[p2.discount.type] or GenericDiscountRow, p2)
 end

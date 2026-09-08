@@ -42,6 +42,14 @@ local t_4 = {
 	throttlingPercentage = game:DefineFastInt("FlyoutContentItemClickEventThrottleHunderedthsPercent", 10000),
 	lastUpdated = { 2025, 10, 30 }
 }
+local t_5 = {
+	eventName = "coreui_flyout_content_item_impression",
+	description = "FlyoutSidePanel content item impression event",
+	links = "https://roblox.atlassian.net/browse/MKTUJ-5174",
+	backends = { "EventIngest" },
+	throttlingPercentage = game:DefineFastInt("FlyoutContentItemImpressionEventThrottleHunderedthsPercent", 10000),
+	lastUpdated = { 2026, 9, 3 }
+}
 
 local function _(p1)
 	-- upvalues: flyoutContentSettingsModule (ref)
@@ -89,6 +97,10 @@ return {
 		-- upvalues: logEventHelper (ref), t_4 (ref), t_1 (ref)
 		logEventHelper(t_4, "flyout_item_click", p1)
 		logEventHelper(t_1, "flyout_close", p1)
+	end,
+	onFlyoutContentItemImpressed = function(p1)
+		-- upvalues: logEventHelper (ref), t_5 (ref)
+		logEventHelper(t_5, "flyout_item_impression", p1)
 	end,
 	sendMoreLegacyAndFlyoutItemClickEvent = function(p1, p2, p3, p4)
 		-- upvalues: flyoutContentSettingsModule (ref), logEventHelper (ref), t_4 (ref), t_1 (ref)

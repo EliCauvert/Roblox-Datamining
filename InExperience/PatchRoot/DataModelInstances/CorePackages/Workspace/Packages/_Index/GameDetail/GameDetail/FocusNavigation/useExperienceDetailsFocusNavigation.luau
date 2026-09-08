@@ -11,10 +11,11 @@ local usePageButtonBindings = sduiSharedUtilitiesModule.usePageButtonBindings
 local useOnNavigateBack = sduiSharedUtilitiesModule.useOnNavigateBack
 local getSduiFocusActivationStore = sduiSharedUtilitiesModule.getSduiFocusActivationStore
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
+local fFlagLuaAppMediaGalleryGamepadSupport = require(parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 local collectionService = game:GetService("CollectionService")
 local t = {
 	[Enum.KeyCode.ButtonX] = focusNavigationEventNameEnum.Play,
-	[Enum.KeyCode.ButtonY] = focusNavigationEventNameEnum.DisplayStatsAndInfo,
+	[Enum.KeyCode.ButtonY] = if fFlagLuaAppMediaGalleryGamepadSupport then nil else focusNavigationEventNameEnum.DisplayStatsAndInfo,
 	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
@@ -35,7 +36,7 @@ local function findTaggedDescendant(p1, p2)
 end
 
 return function(p3)
-	-- upvalues: reactModule (ref), useInitialFocusOnTag (ref), sduiFocusTags (ref), useSelectionOrderTracking (ref), reactFocusNavigationModule (ref), getSduiFocusActivationStore (ref), findTaggedDescendant (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), usePageButtonBindings (ref), t (ref), useOnNavigateBack (ref)
+	-- upvalues: reactModule (ref), useInitialFocusOnTag (ref), sduiFocusTags (ref), useSelectionOrderTracking (ref), reactFocusNavigationModule (ref), getSduiFocusActivationStore (ref), findTaggedDescendant (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), usePageButtonBindings (ref), t (ref), useOnNavigateBack (ref)
 	local var1 = reactModule.useRef(nil)
 	useInitialFocusOnTag(sduiFocusTags.PrimaryAction, var1)
 	useSelectionOrderTracking(var1)
@@ -53,10 +54,10 @@ return function(p3)
 		end
 	end, { var2, var1 })
 	local var5 = useOnNavigateBack(p3, usePageButtonBindings(var1, t, reactModule.useMemo(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var3 (ref), var4 (ref)
+		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var3 (ref), fFlagLuaAppMediaGalleryGamepadSupport (copy), var4 (ref)
 		return {
 			[focusNavigationEventNameEnum.Play] = { handler = inputHandlersModule.onRelease(var3) },
-			[focusNavigationEventNameEnum.DisplayStatsAndInfo] = { handler = inputHandlersModule.onRelease(var4) }
+			[focusNavigationEventNameEnum.DisplayStatsAndInfo] = if fFlagLuaAppMediaGalleryGamepadSupport then nil else { handler = inputHandlersModule.onRelease(var4) }
 		}
 	end, { var3, var4 })))
 	

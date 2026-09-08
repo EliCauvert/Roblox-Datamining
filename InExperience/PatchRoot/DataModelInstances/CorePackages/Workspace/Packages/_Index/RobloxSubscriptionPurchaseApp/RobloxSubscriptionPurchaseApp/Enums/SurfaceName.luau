@@ -6,7 +6,6 @@
 	PrivateServerUpsell = "PrivateServerUpsell",
 	UnifiedProductPurchaseModal = "UnifiedProductPurchaseModal",
 	CatalogMultiItemCheckoutPage = "CatalogMultiItemCheckoutPage",
-	BulkPurchasePrompt = "BulkPurchasePrompt",
 	DeepLinkUpsell = "DeepLinkUpsell",
 	HomepageFaeTrialBanner = "HomepageFaeTrialBanner",
 	InGameRobuxUpsell = "InGameRobuxUpsell",

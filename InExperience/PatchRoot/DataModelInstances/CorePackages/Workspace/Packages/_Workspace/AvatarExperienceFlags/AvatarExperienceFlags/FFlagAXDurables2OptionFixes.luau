@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXDurables2OptionFixes", false) and require(script.Parent.FFlagAXDurables2Option)

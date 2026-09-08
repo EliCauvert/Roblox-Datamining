@@ -2,11 +2,9 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildExperienceDontAskAgainPushUpsellModule = require(buildExperience.Flags.FFlagBuildExperienceDontAskAgainPushUpsell)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local button = foundationModule.Button
 local text = foundationModule.Text
 local view = foundationModule.View
@@ -15,8 +13,8 @@ local fillBehavior = foundationModule.Enums.FillBehavior
 local inputSize = foundationModule.Enums.InputSize
 
 return function(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), fFlagBuildExperienceDontAskAgainPushUpsellModule (ref)
-	local var1 = if fFlagBuildLocalization then useLocalization({
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), fFlagBuildExperienceDontAskAgainPushUpsellModule (ref)
+	local var1 = useLocalization({
 		disabledDescription = localizationStringsModule.CHAT_NOTIFICATION_DISABLED_DESCRIPTION,
 		dontAskAgain = localizationStringsModule.CHAT_DONT_ASK_AGAIN,
 		notNow = localizationStringsModule.CHAT_NOT_NOW,
@@ -24,7 +22,7 @@ return function(p1)
 		openSettings = localizationStringsModule.CHAT_OPEN_SETTINGS,
 		promptDescription = localizationStringsModule.CHAT_NOTIFICATION_PROMPT_DESCRIPTION,
 		promptTitle = localizationStringsModule.CHAT_NOTIFICATION_PROMPT_TITLE
-	}) else nil
+	})
 	local var2 = p1.shouldOpenSettings == true
 	
 	return reactModule.createElement(view, {
@@ -35,12 +33,12 @@ return function(p1)
 		Title = reactModule.createElement(text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
-			Text = if fFlagBuildLocalization then var1.promptTitle else localizationStringsModule.CHAT_NOTIFICATION_PROMPT_TITLE
+			Text = var1.promptTitle
 		}),
 		Description = reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
-			Text = if var2 then if fFlagBuildLocalization then var1.disabledDescription else localizationStringsModule.CHAT_NOTIFICATION_DISABLED_DESCRIPTION elseif fFlagBuildLocalization then var1.promptDescription else localizationStringsModule.CHAT_NOTIFICATION_PROMPT_DESCRIPTION
+			Text = if var2 then var1.disabledDescription else var1.promptDescription
 		}),
 		Actions = reactModule.createElement(view, {
 			LayoutOrder = 3,
@@ -48,7 +46,7 @@ return function(p1)
 		}, {
 			PrimaryAction = reactModule.createElement(button, {
 				LayoutOrder = 1,
-				text = if var2 then if fFlagBuildLocalization then var1.openSettings else localizationStringsModule.CHAT_OPEN_SETTINGS elseif fFlagBuildLocalization then var1.notifyMe else localizationStringsModule.CHAT_NOTIFY_ME,
+				text = if var2 then var1.openSettings else var1.notifyMe,
 				size = inputSize.Small,
 				variant = buttonVariant.Emphasis,
 				fillBehavior = fillBehavior.Fill,
@@ -59,7 +57,7 @@ return function(p1)
 			NotNow = reactModule.createElement(button, {
 				LayoutOrder = 2,
 				testId = "PushNotificationsUpsellCard.NotNow",
-				text = if fFlagBuildExperienceDontAskAgainPushUpsellModule then if fFlagBuildLocalization then var1.dontAskAgain else localizationStringsModule.CHAT_DONT_ASK_AGAIN elseif fFlagBuildLocalization then var1.notNow else localizationStringsModule.CHAT_NOT_NOW,
+				text = if fFlagBuildExperienceDontAskAgainPushUpsellModule then var1.dontAskAgain else var1.notNow,
 				size = inputSize.Small,
 				variant = buttonVariant.Standard,
 				fillBehavior = fillBehavior.Fill,

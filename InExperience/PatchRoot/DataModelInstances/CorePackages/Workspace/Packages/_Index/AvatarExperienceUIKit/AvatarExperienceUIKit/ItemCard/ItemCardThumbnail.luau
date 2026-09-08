@@ -7,24 +7,21 @@ local skeleton = foundationModule.Skeleton
 local radius = foundationModule.Enums.Radius
 local itemCardThumbnailSkeletonModule = require(script.Parent.ItemCardThumbnailSkeleton)
 local useDesignTokens = require(parent.Style).useDesignTokens
-local fFlagAXMigrateAXToGlobalAutofocus = require(parent.SharedFlags).FFlagAXMigrateAXToGlobalAutofocus
 local fFlagLuaAppHomePageFirstImageLoadObserver = require(parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
 local fFlagAXTestSkeletonInCatalog = require(parent.AvatarExperienceFlags).FFlagAXTestSkeletonInCatalog
 local fFlagAXTestSkeletonInCatalog_1 = game:DefineFastFlag("AXTestDontUseSkeletonOnloadInCatalog", false) and fFlagAXTestSkeletonInCatalog
 
-local function ItemCardThumbnail(p1, p2)
-	-- upvalues: reactModule (ref), useDesignTokens (ref), fFlagAXMigrateAXToGlobalAutofocus (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), runService (ref), fFlagAXTestSkeletonInCatalog (ref), fFlagAXTestSkeletonInCatalog_1 (ref), itemCardThumbnailSkeletonModule (ref), radius (ref), image (ref), skeleton (ref)
+return reactModule.forwardRef(function(p1, p2)
+	-- upvalues: reactModule (ref), useDesignTokens (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), runService (ref), fFlagAXTestSkeletonInCatalog (ref), fFlagAXTestSkeletonInCatalog_1 (ref), itemCardThumbnailSkeletonModule (ref), radius (ref), image (ref), skeleton (ref)
 	local var1, var2 = reactModule.useState(false)
 	local var3 = useDesignTokens()
-	local var4 = if fFlagAXMigrateAXToGlobalAutofocus then p1.tag else nil
-	local var5 = reactModule.useCallback(function(p3)
-		-- upvalues: fFlagAXMigrateAXToGlobalAutofocus (copy), p2 (ref), var2 (ref), p1 (ref), runService (copy)
-		if fFlagAXMigrateAXToGlobalAutofocus then
-			if typeof(p2) == "function" then
-				p2(p3)
-			elseif typeof(p2) == "table" then
-				p2.current = p3
-			end
+	local tag = p1.tag
+	local var4 = reactModule.useCallback(function(p3)
+		-- upvalues: p2 (ref), var2 (ref), p1 (ref), runService (copy)
+		if typeof(p2) == "function" then
+			p2(p3)
+		elseif typeof(p2) == "table" then
+			p2.current = p3
 		end
 		var2(false)
 		
@@ -63,9 +60,9 @@ local function ItemCardThumbnail(p1, p2)
 			Image = p1.url,
 			Size = UDim2.fromScale(1, 1),
 			ScaleType = Enum.ScaleType.Crop,
-			ref = var5,
+			ref = var4,
 			testId = `item-card-thumbnail-image-{p1.url}`,
-			tag = if fFlagAXMigrateAXToGlobalAutofocus then p1.tag else nil
+			tag = p1.tag
 		}, {
 			CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var3.Radius.Medium) })
 		})
@@ -81,13 +78,11 @@ local function ItemCardThumbnail(p1, p2)
 			Image = p1.url,
 			Size = UDim2.fromScale(1, 1),
 			ScaleType = Enum.ScaleType.Crop,
-			ref = var5,
+			ref = var4,
 			testId = `item-card-thumbnail-image-{p1.url}`,
-			tag = if fFlagLuaAppHomePageFirstImageLoadObserver then if var4 then `{var4} observed-image` else "observed-image" else var4
+			tag = if fFlagLuaAppHomePageFirstImageLoadObserver then if tag then `{tag} observed-image` else "observed-image" else tag
 		}, {
 			CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var3.Radius.Medium) })
 		})
 	})
-end
-
-return if fFlagAXMigrateAXToGlobalAutofocus then reactModule.forwardRef(ItemCardThumbnail) else ItemCardThumbnail
+end)

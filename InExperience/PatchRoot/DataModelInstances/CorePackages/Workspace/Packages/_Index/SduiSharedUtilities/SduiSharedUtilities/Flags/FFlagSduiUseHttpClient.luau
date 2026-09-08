@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("SduiUseHttpClient", false) and require(script:FindFirstAncestor("SduiSharedUtilities").Parent.HttpClient).FFlagHttpClientRetryExtensions

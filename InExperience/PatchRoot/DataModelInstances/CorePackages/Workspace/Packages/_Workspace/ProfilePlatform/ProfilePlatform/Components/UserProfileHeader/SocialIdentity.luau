@@ -26,7 +26,6 @@ local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.usePro
 local default = require(parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
 local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
 local textKeysModule = require(profilePlatform.Common.TextKeys)
-local fFlagFriendRequestNicknames = require(parent.SharedFlags).FFlagFriendRequestNicknames
 local fFlagProfilePlatformEnableClickToCopyUsernameModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableClickToCopyUsername)
 local fFlagEnableFontStylisticAlternativesOnSocialScreens = require(parent.SharedFlags).FFlagEnableFontStylisticAlternativesOnSocialScreens
 local getFFlagLuaAppEnableOpenTypeSupport = require(parent.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
@@ -41,7 +40,7 @@ local fFlagProfilePlatformTruncateLongCustomFriendNamesModule = require(profileP
 local var1 = if fFlagProfilePlatformEnableClickToCopyUsernameModule then images["icons/actions/edit/copy"] else nil
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), fFlagAddPlatformNameToProfileHeader (ref), getBuilderIconForCurrentPlatform (ref), images (ref), fFlagProfilePlatformEnableClickToCopyUsernameModule (ref), useDispatch (ref), useProfileAnalyticsContextModule (ref), fFlagDisableCopyUsernameOnConsole (ref), responsiveModule (ref), fFlagHidePremiumIconography (ref), fFlagEnableBlackbirdCheck (ref), verifiedBadgesModule (ref), useLocalization (ref), textKeysModule (ref), default (ref), contexts (ref), eventNamesModule (ref), setCurrentToastMessage (ref), var1 (ref), horizontalPageMargin (ref), fFlagProfilePlatformTruncateLongCustomFriendNamesModule (ref), view (ref), iconButton (ref), iconSize (ref), tooltip (ref), tooltipOrientation (ref), text (ref), fFlagFriendRequestNicknames (ref), fFlagProfilePlatformEnableRobloxAdminBadgeModule (ref), foundationModule (ref), fFlagEnableFontStylisticAlternativesOnSocialScreens (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), stateLayerAffordance (ref), icon (ref), iconSize_1 (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), fFlagAddPlatformNameToProfileHeader (ref), getBuilderIconForCurrentPlatform (ref), images (ref), fFlagProfilePlatformEnableClickToCopyUsernameModule (ref), useDispatch (ref), useProfileAnalyticsContextModule (ref), fFlagDisableCopyUsernameOnConsole (ref), responsiveModule (ref), fFlagHidePremiumIconography (ref), fFlagEnableBlackbirdCheck (ref), verifiedBadgesModule (ref), useLocalization (ref), textKeysModule (ref), default (ref), contexts (ref), eventNamesModule (ref), setCurrentToastMessage (ref), var1 (ref), horizontalPageMargin (ref), fFlagProfilePlatformTruncateLongCustomFriendNamesModule (ref), view (ref), iconButton (ref), iconSize (ref), tooltip (ref), tooltipOrientation (ref), text (ref), fFlagProfilePlatformEnableRobloxAdminBadgeModule (ref), foundationModule (ref), fFlagEnableFontStylisticAlternativesOnSocialScreens (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), stateLayerAffordance (ref), icon (ref), iconSize_1 (ref)
 	local var2
 	local var3 = useTokens()
 	local var4 = reactModule.useMemo(function()
@@ -134,11 +133,7 @@ return function(p1)
 					tag = "auto-xy text-align-x-left text-align-y-bottom content-emphasis text-truncate-end shrink",
 					LayoutOrder = 2,
 					Text = primaryName,
-					fontStyle = var3.Typography.HeadingSmall,
-					Size = if fFlagFriendRequestNicknames then UDim2.new(1, 0, 1, 0) else nil,
-					TextWrapped = if fFlagFriendRequestNicknames then true else nil,
-					FluidSizing = if fFlagFriendRequestNicknames then false else nil,
-					LineHeight = if fFlagFriendRequestNicknames then 1 else nil
+					fontStyle = var3.Typography.HeadingSmall
 				}),
 				AdminTiltIcon = if fFlagProfilePlatformEnableRobloxAdminBadgeModule and p1.isRobloxAdmin then reactModule.createElement(foundationModule.Icon, {
 					LayoutOrder = 3,
@@ -196,11 +191,7 @@ return function(p1)
 					tag = "auto-xy text-align-x-left text-align-y-bottom content-emphasis",
 					LayoutOrder = 2,
 					Text = primaryName,
-					fontStyle = var3.Typography.HeadingSmall,
-					Size = if fFlagFriendRequestNicknames then UDim2.new(1, 0, 1, 0) else nil,
-					TextWrapped = if fFlagFriendRequestNicknames then true else nil,
-					FluidSizing = if fFlagFriendRequestNicknames then false else nil,
-					LineHeight = if fFlagFriendRequestNicknames then 1 else nil
+					fontStyle = var3.Typography.HeadingSmall
 				}),
 				AdminTiltIcon = if fFlagProfilePlatformEnableRobloxAdminBadgeModule and p1.isRobloxAdmin then reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -240,7 +231,6 @@ return function(p1)
 		RichText = if fFlagEnableFontStylisticAlternativesOnSocialScreens then true else nil,
 		Text = if fFlagEnableFontStylisticAlternativesOnSocialScreens then `<font features="zero, ss03">{username}</font>` .. var22 else username .. var22,
 		fontStyle = var3.Typography.CaptionMedium,
-		Size = if fFlagFriendRequestNicknames then UDim2.new(1, 0, 1, 0) else nil,
 		OpenTypeFeatures = if fFlagEnableFontStylisticAlternativesOnSocialScreens then nil elseif getFFlagLuaAppEnableOpenTypeSupport() then openTypeSupport:getUserNameStylisticAlternative() else nil,
 		onActivated = if var2 then nil else var9,
 		stateLayer = if var2 then nil elseif fFlagProfilePlatformEnableClickToCopyUsernameModule then { affordance = stateLayerAffordance.None } else nil

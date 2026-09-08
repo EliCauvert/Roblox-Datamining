@@ -1,5 +1,7 @@
 ﻿local interventionShared = script:FindFirstAncestor("InterventionShared")
 local parent = interventionShared.Parent
+local IXPService = game:GetService("IXPService")
+local appUserLayers = require(parent.ExperimentLayers).AppUserLayers
 local constantsModule = require(interventionShared.Utils.Constants)
 local interventionAnalyticsModule = require(interventionShared.InterventionAnalytics)
 local reactModule = require(parent.React)
@@ -9,13 +11,17 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useTokens = foundationModule.Hooks.useTokens
 local interventionTreatmentShownSignalModule = require(interventionShared.Signals.interventionTreatmentShownSignal)
 local interventionDialogModule = require(interventionShared.Components.InterventionDialog)
+local fFlagUFRFriendsChatIXPExposureModule = require(interventionShared.Flags.FFlagUFRFriendsChatIXPExposure)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), constantsModule (ref), reactModule (ref), interventionTreatmentShownSignalModule (ref), interventionDialogModule (ref), iconSize (ref), interventionAnalyticsModule (ref)
+	-- upvalues: useTokens (ref), useLocalization (ref), constantsModule (ref), reactModule (ref), fFlagUFRFriendsChatIXPExposureModule (ref), IXPService (ref), appUserLayers (ref), interventionTreatmentShownSignalModule (ref), interventionDialogModule (ref), iconSize (ref), interventionAnalyticsModule (ref)
 	local var1 = useTokens()
 	local var2 = useLocalization(constantsModule.localizationKeys)
 	reactModule.useEffect(function()
-		-- upvalues: interventionTreatmentShownSignalModule (copy), constantsModule (copy)
+		-- upvalues: fFlagUFRFriendsChatIXPExposureModule (copy), IXPService (copy), appUserLayers (copy), interventionTreatmentShownSignalModule (copy), constantsModule (copy)
+		if fFlagUFRFriendsChatIXPExposureModule and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
+			IXPService:LogFlagLinkedUserLayerExposure(appUserLayers.FriendsChatRestrictionUserIDLayer)
+		end
 		interventionTreatmentShownSignalModule:fire(constantsModule.TreatmentType.PartyChatNudgeDialog)
 	end, {})
 	

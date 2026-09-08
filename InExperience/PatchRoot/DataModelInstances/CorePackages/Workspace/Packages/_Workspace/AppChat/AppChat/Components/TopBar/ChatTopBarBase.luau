@@ -1,7 +1,5 @@
 ﻿local appChat = script:FindFirstAncestor("AppChat")
 local parent = appChat.Parent
-local fFlagAppChatTopBarConfigDrivenModule = require(appChat.Flags.FFlagAppChatTopBarConfigDriven)
-local fFlagAppChatAddTopBarDividerModule = require(appChat.Flags.FFlagAppChatAddTopBarDivider)
 local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
 local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
 local createBackFuncModule = require(script.Parent.createBackFunc)
@@ -24,10 +22,7 @@ local function noOp()
 end
 
 return function(p1)
-	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), reactModule (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), getTopBarStoreModule (ref), useSignalState (ref), fFlagAppIaScrollAway (ref), appHeaderBarModule (ref), useLocalization (ref), useStyle (ref), useTokens (ref), noOp (ref), createBackFuncModule (ref), appNavBarModule (ref), visibilityControl (ref), foundationModule (ref), headerBar (ref), fFlagAppChatAddTopBarDividerModule (ref)
-	if not fFlagAppChatTopBarConfigDrivenModule() then
-		return nil
-	end
+	-- upvalues: reactModule (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), getTopBarStoreModule (ref), useSignalState (ref), fFlagAppIaScrollAway (ref), appHeaderBarModule (ref), useLocalization (ref), useStyle (ref), useTokens (ref), noOp (ref), createBackFuncModule (ref), appNavBarModule (ref), visibilityControl (ref), foundationModule (ref), headerBar (ref)
 	reactModule.useEffect(function()
 		-- upvalues: fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy)
 		if fFlagAppChatPerfTrackingModule then
@@ -106,7 +101,6 @@ return function(p1)
 			paddingRight = UDim.new(0, if rightPaddingOverride ~= nil then medium else rightPaddingOverride),
 			isTitleCentered = not isTitleLeftAligned,
 			contentPaddingRight = UDim.new(0, 0),
-			hasDivider = fFlagAppChatAddTopBarDividerModule,
 			backgroundTransparency = if fFlagAppIaScrollAway and not var2 then nil else var4.Tokens.Color.None.Transparency
 		})
 	})

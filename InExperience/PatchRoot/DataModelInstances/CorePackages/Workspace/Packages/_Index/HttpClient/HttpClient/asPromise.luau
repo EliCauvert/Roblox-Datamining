@@ -2,19 +2,20 @@
 local promiseModule = require(parent.Promise)
 local signalsModule = require(parent.Signals)
 local _ = require(script.Parent.types)
+local fFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
 local t = {}
 
 return function(p1)
-	-- upvalues: promiseModule (ref), t (ref), signalsModule (ref)
+	-- upvalues: promiseModule (ref), t (ref), fFlagHttpClientRetryExtensionsModule (ref), signalsModule (ref)
 	local t_1 = {}
 	
 	return promiseModule.new(function(p2, p3, p4)
-		-- upvalues: t (copy), t_1 (ref), p1 (ref), signalsModule (copy)
+		-- upvalues: t (copy), t_1 (ref), fFlagHttpClientRetryExtensionsModule (copy), p1 (ref), signalsModule (copy)
 		local var1 = false
 		local var2 = false
 		
 		local function _()
-			-- upvalues: var2 (write), t (copy), t_1 (copy)
+			-- upvalues: var2 (write), t (copy), t_1 (copy), fFlagHttpClientRetryExtensionsModule (copy), p1 (copy)
 			if var2 then return end
 			var2 = true
 			local var3 = t[t_1]
@@ -23,10 +24,13 @@ return function(p1)
 			if var3 ~= nil then
 				var3()
 			end
+			if fFlagHttpClientRetryExtensionsModule then
+				p1.dispose()
+			end
 		end
 		
 		local function settle(value)
-			-- upvalues: var1 (write), var2 (write), t (copy), t_1 (copy), p2 (ref), p3 (ref)
+			-- upvalues: var1 (write), var2 (write), t (copy), t_1 (copy), fFlagHttpClientRetryExtensionsModule (copy), p1 (copy), p2 (ref), p3 (ref)
 			if var1 then return end
 			var1 = true
 			
@@ -38,9 +42,20 @@ return function(p1)
 				if var3 ~= nil then
 					var3()
 				end
+				if fFlagHttpClientRetryExtensionsModule then
+					p1.dispose()
+				end
 			end
 			if value.status == "succeeded" then
 				p2(value.result)
+				
+				return
+			elseif fFlagHttpClientRetryExtensionsModule then
+				p3({
+					responseCode = value.errorCode,
+					errorMessage = value.error,
+					response = value.response
+				})
 				
 				return
 			end
@@ -69,7 +84,7 @@ return function(p1)
 		end)
 		t[t_1] = var4
 		p4(function()
-			-- upvalues: var1 (write), var2 (write), t (copy), t_1 (copy)
+			-- upvalues: var1 (write), var2 (write), t (copy), t_1 (copy), fFlagHttpClientRetryExtensionsModule (copy), p1 (copy)
 			if var1 then return end
 			var1 = true
 			
@@ -80,6 +95,9 @@ return function(p1)
 			
 			if var5 ~= nil then
 				var5()
+			end
+			if fFlagHttpClientRetryExtensionsModule then
+				p1.dispose()
 			end
 		end)
 	end)

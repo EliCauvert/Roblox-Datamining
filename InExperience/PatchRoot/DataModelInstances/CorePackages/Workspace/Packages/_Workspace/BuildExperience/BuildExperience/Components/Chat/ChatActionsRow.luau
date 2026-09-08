@@ -23,14 +23,18 @@ return function(p1)
 		return p1.isComposerEmpty == true
 	end, { p1.getIsComposerEmpty, p1.isComposerEmpty }))
 	local var2 = p1.isAssistantResponding and (p1.canStopAssistantResponse ~= false and p1.canSendWhileResponding ~= true)
+	local var3 = not var2
 	
+	if var3 and var1 then
+		var3 = if p1.hasAttachments == true then p1.isSendDisabled == true else true
+	end
 	return reactModule.createElement(iconButton, {
 		isCircular = true,
 		LayoutOrder = p1.LayoutOrder,
 		icon = if var2 then iconName.StopSmall else iconName.ArrowWideShortUp,
 		size = inputSize.Small,
-		variant = if var2 then buttonVariant.Standard elseif not var1 then buttonVariant.Emphasis else buttonVariant.Standard,
-		isDisabled = not var2 and (var1 or p1.isSendDisabled == true),
+		variant = if var2 then buttonVariant.Standard elseif var1 and p1.hasAttachments ~= true then buttonVariant.Standard else buttonVariant.Emphasis,
+		isDisabled = var3,
 		onActivated = function()
 			-- upvalues: var2 (ref), p1 (ref)
 			if var2 then

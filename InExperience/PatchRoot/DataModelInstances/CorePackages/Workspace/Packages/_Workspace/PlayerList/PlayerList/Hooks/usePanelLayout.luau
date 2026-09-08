@@ -13,9 +13,10 @@ local layoutValuesContextModule = require(parent.Common.LayoutValuesContext)
 local getDeviceBottomInsetModule = require(parent.Common.getDeviceBottomInset)
 local useViewportSizeModule = require(parent.Hooks.useViewportSize)
 local fFlagPlayerListTwoTabsModule = require(parent.Flags.FFlagPlayerListTwoTabs)
+local fFlagPlayerListFixPlatformLeaderboardSizingModule = require(parent.Flags.FFlagPlayerListFixPlatformLeaderboardSizing)
 
 return function(p1, p2, p3)
-	-- upvalues: useViewportSizeModule (ref), useTokens (ref), reactModule (ref), layoutValuesContextModule (ref), signalsReactModule (ref), panelContentHeightStoreModule (ref), constantsModule (ref), useScaledValue (ref), getDeviceBottomInsetModule (ref), computeMobilePanelSizeModule (ref), fFlagPlayerListTwoTabsModule (ref), computeDesktopPanelHeightModule (ref)
+	-- upvalues: useViewportSizeModule (ref), useTokens (ref), reactModule (ref), layoutValuesContextModule (ref), signalsReactModule (ref), panelContentHeightStoreModule (ref), constantsModule (ref), useScaledValue (ref), getDeviceBottomInsetModule (ref), computeMobilePanelSizeModule (ref), fFlagPlayerListTwoTabsModule (ref), fFlagPlayerListFixPlatformLeaderboardSizingModule (ref), computeDesktopPanelHeightModule (ref)
 	local var1, var2
 	local var3 = useViewportSizeModule()
 	local var4 = useTokens()
@@ -42,13 +43,19 @@ return function(p1, p2, p3)
 		var1 = var16.X
 		var2 = var16.Y
 	else
-		var1 = if p3 then 320 * scale else 2 * size200 + var15
+		var1 = if p3 then constantsModule.PLATFORM_PANEL_WIDTH * scale else 2 * size200 + var15
 		local var17 = var6 + constantsModule.PANEL_HEADER_DIVIDER_HEIGHT * scale
 		
 		if fFlagPlayerListTwoTabsModule and p3 then
 			var17 += constantsModule.PANEL_TABS_HEIGHT * scale
 		end
-		var2 = computeDesktopPanelHeightModule(var3.Y, var17 + var5, var17 + var7 + constantsModule.DESKTOP_MIN_VISIBLE_ROWS * var9)
+		local var18 = var17 + var5
+		local var19 = var7 + constantsModule.DESKTOP_MIN_VISIBLE_ROWS * var9
+		
+		if fFlagPlayerListFixPlatformLeaderboardSizingModule and p3 then
+			var19 = math.max(var19, constantsModule.PLATFORM_BODY_MIN_HEIGHT * scale)
+		end
+		var2 = computeDesktopPanelHeightModule(var3.Y, var18, var17 + var19)
 	end
 	return {
 		panelWidth = var1,

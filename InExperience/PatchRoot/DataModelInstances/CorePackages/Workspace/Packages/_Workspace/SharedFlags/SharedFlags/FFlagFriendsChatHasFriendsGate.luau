@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("FriendsChatHasFriendsGateRC1", false)

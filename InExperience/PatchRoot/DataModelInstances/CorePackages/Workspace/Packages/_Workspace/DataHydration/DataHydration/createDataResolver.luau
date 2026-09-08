@@ -8,14 +8,13 @@ local createMutationLayerModule = require(dataHydration.createMutationLayer)
 local promiseModule = require(parent.Promise)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppDataHydrationDataResolverOnClear = sharedFlagsModule.FFlagLuaAppDataHydrationDataResolverOnClear
-local fFlagSduiChartsSupport = sharedFlagsModule.FFlagSduiChartsSupport
 local fFlagLuaAppDataHydrationOptimisticMutationLayer = sharedFlagsModule.FFlagLuaAppDataHydrationOptimisticMutationLayer
 local luaAppDataHydrationDefaultBatchSize = game:DefineFastInt("LuaAppDataHydrationDefaultBatchSize", 50)
 local luaAppDataHydrationQueueProcessDelaySec = game:DefineFastInt("LuaAppDataHydrationQueueProcessDelaySec", 1)
 local luaAppDataHydrationDefaultRequestTimeoutSec = game:DefineFastInt("LuaAppDataHydrationDefaultRequestTimeoutSec", 30)
 
 return function(p1)
-	-- upvalues: luaAppDataHydrationDefaultBatchSize (ref), luaAppDataHydrationQueueProcessDelaySec (ref), luaAppDataHydrationDefaultRequestTimeoutSec (ref), createRequestQueueModule (ref), getLocalPlayerUserId (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), createMutationLayerModule (ref), promiseModule (ref), fFlagSduiChartsSupport (ref), fFlagLuaAppDataHydrationDataResolverOnClear (ref), playersService (ref)
+	-- upvalues: luaAppDataHydrationDefaultBatchSize (ref), luaAppDataHydrationQueueProcessDelaySec (ref), luaAppDataHydrationDefaultRequestTimeoutSec (ref), createRequestQueueModule (ref), getLocalPlayerUserId (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), createMutationLayerModule (ref), promiseModule (ref), fFlagLuaAppDataHydrationDataResolverOnClear (ref), playersService (ref)
 	local var1 = p1.supportsMultiGet ~= nil or p1.supportsMultiGet
 	local var2 = p1.requestBatchSize or luaAppDataHydrationDefaultBatchSize
 	
@@ -362,14 +361,17 @@ return function(p1)
 	end
 	
 	local function getAndFetchItem(p10, p11)
-		-- upvalues: cache (ref), var4 (ref), t (write), var5 (write), var3 (write), var6 (write), var2 (write), requestTimeoutSec (ref), p1 (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (write), var1 (ref), promiseModule (copy), handleSuccess (ref), scheduleFetch (ref), fFlagSduiChartsSupport (copy)
+		-- upvalues: cache (ref), var4 (ref), t (write), var5 (write), var3 (write), var6 (write), var2 (write), requestTimeoutSec (ref), p1 (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (write), var1 (ref), promiseModule (copy), handleSuccess (ref), scheduleFetch (ref)
 		local item, item_1 = cache.getItem(p10, p11)
 		
 		if item_1 and not (if var4.hasItem(p10) then true else t[p10] == nil) then
 			cache.resetFailedItem(p10)
 			var4.push(p10)
 		end
-		if not var4.isEmpty() and var5 == nil and not var4.isEmpty() then
+		if not var4.isEmpty() and var5 == nil then
+			if var4.isEmpty() then
+				return item, item_1
+			end
 			var5 = task.delay(var3, function()
 				-- upvalues: var6 (copy), var5 (copy), var4 (copy), var2 (copy), t (copy), cache (copy), requestTimeoutSec (copy), p1 (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var7 (copy), var1 (copy), promiseModule (copy), handleSuccess (copy), scheduleFetch (copy)
 				var5 = nil
@@ -477,10 +479,7 @@ return function(p1)
 				scheduleFetch()
 			end)
 		end
-		if fFlagSduiChartsSupport then
-			return item, item_1
-		end
-		return item, nil
+		return item, item_1
 	end
 	
 	local function getCachedItem(p12)
@@ -569,13 +568,10 @@ return function(p1)
 		end
 		
 		function t_1.getOptimisticAndFetchItem(p13, p14)
-			-- upvalues: getAndFetchItem (ref), fFlagSduiChartsSupport (copy), var7 (write)
+			-- upvalues: getAndFetchItem (ref), var7 (write)
 			local var15, var16 = getAndFetchItem(p13, p14)
 			
-			if fFlagSduiChartsSupport then
-				return var7.getMergedResult(p13, var15), var16
-			end
-			return var7.getMergedResult(p13, var15), nil
+			return var7.getMergedResult(p13, var15), var16
 		end
 		
 		function t_1.getOptimisticAndFetchItems(p13, p14)

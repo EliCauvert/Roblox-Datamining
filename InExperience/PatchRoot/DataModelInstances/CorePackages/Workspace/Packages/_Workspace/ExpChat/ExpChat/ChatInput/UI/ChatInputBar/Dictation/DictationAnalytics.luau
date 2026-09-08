@@ -10,7 +10,10 @@ local t = {
 	TextEdit = "text_edit",
 	MessageSent = "dictation_message_sent",
 	FtuxShown = "dictation_ftux_shown",
-	FtuxDismiss = "dictation_ftux_dismiss"
+	FtuxDismiss = "dictation_ftux_dismiss",
+	MicToastShown = "dictation_mic_toast_shown",
+	MicToastActivated = "dictation_mic_toast_activated",
+	MicToastDismiss = "dictation_mic_toast_dismiss"
 }
 local t_1 = {
 	SttMode = "stt_mode",
@@ -33,7 +36,8 @@ local t_1 = {
 	TextSent = "text_sent",
 	TextSttTruncated = "text_stt_truncated",
 	TextSentTruncated = "text_sent_truncated",
-	DismissReason = "dismiss_reason"
+	DismissReason = "dismiss_reason",
+	CanDeepLink = "can_deep_link"
 }
 
 local function _()

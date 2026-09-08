@@ -6,7 +6,7 @@ local formatTokensModule = require(script.Parent.formatTokens)
 
 return function(p1, p2)
 	-- upvalues: formatTokensModule (ref), dashModule (ref)
-	local var1, var2, var3 = p2(p1, formatTokensModule(p1))
+	local var1, var2, var3, var4 = p2(p1, formatTokensModule(p1))
 	
-	return dashModule.joinArrays(var1, var2, var3), var1, var2, var3
+	return dashModule.joinArrays(var1, var2, var3), var1, var2, var3, var4
 end

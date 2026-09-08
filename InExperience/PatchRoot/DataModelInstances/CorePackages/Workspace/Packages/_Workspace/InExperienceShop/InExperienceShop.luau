@@ -9,6 +9,7 @@ return {
 	initiateShopItemPurchase = require(script.initiateShopItemPurchase),
 	initShopGlobalIcon = if fFlagEnableExperienceShopGlobalIconModule then require(script.initShopGlobalIcon) else nil,
 	GetShopGlobalIconStore = if fFlagEnableExperienceShopGlobalIconModule then require(script.Stores.GetShopGlobalIconStore) else nil,
+	requestOpenToRobuxTab = require(script.Utils.requestOpenToRobuxTab),
 	FFlagEnableExperienceShopGlobalIcon = fFlagEnableExperienceShopGlobalIconModule,
 	FFlagEnableShopPrefetch = require(script.Flags.FFlagEnableShopPrefetch),
 	FFlagHideShopMenuOnFailure = require(script.Flags.FFlagHideShopMenuOnFailure),

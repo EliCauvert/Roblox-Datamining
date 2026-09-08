@@ -7,18 +7,15 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
 local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
 local controlState = foundationModule.Enums.ControlState
 local getIconRichText = foundationModule.Utility.getIconRichText
 local iconName = foundationModule.Enums.IconName
 local text = foundationModule.Text
 local view = foundationModule.View
 local notificationType = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes).NotificationType
-local fixWebViewLinkCutOff = game:DefineFastFlag("FixWebViewLinkCutOff", false)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useRoactService (ref), appLinking (ref), useAppPolicy (ref), reactModule (ref), httpService (ref), guiService (ref), notificationType (ref), fixWebViewLinkCutOff (ref), getIconRichText (ref), iconName (ref), controlState (ref), view (ref), text (ref), button (ref), buttonVariant (ref)
+	-- upvalues: useRoactService (ref), appLinking (ref), useAppPolicy (ref), reactModule (ref), httpService (ref), guiService (ref), notificationType (ref), getIconRichText (ref), iconName (ref), controlState (ref), view (ref), text (ref)
 	local var1 = useRoactService(appLinking)
 	local var2 = useAppPolicy(function(p2)
 		return p2.getWebViewSupport()
@@ -48,12 +45,12 @@ return reactModule.memo(function(p1)
 		warn("Failed to encode notification data for bedui webview link")
 	end, { p1.component.link.label, p1.component.link.url })
 	local var4, var5 = reactModule.useBinding(false)
-	local var6 = if fixWebViewLinkCutOff then reactModule.useMemo(function()
+	local var6 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), getIconRichText (copy), iconName (copy)
 		return p1.component.link.linkButtonLabel .. ` {getIconRichText(iconName.ArrowUpRightFromSquare)}`
-	end, { p1.component.link.linkButtonLabel }) else nil
+	end, { p1.component.link.linkButtonLabel })
 	
-	return reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = p1.layoutOrder }, if fixWebViewLinkCutOff then reactModule.createElement(text, {
+	return reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = p1.layoutOrder }, reactModule.createElement(text, {
 		RichText = true,
 		tag = "auto-xy padding-xsmall text-body-small text-wrap text-align-x-left radius-medium",
 		Text = var4:map(function(p2)
@@ -61,7 +58,7 @@ return reactModule.memo(function(p1)
 			return if p2 then `<u>{var6}</u>` else var6
 		end),
 		onActivated = var3,
-		onStateChanged = if fixWebViewLinkCutOff then reactModule.useCallback(function(p2)
+		onStateChanged = reactModule.useCallback(function(p2)
 			-- upvalues: controlState (copy), var5 (ref)
 			if p2 == controlState.Hover then
 				var5(true)
@@ -69,10 +66,6 @@ return reactModule.memo(function(p1)
 				return
 			end
 			var5(false)
-		end, {}) else nil
-	}) else reactModule.createElement(button, {
-		text = p1.component.link.linkButtonLabel,
-		variant = buttonVariant.Text,
-		onActivated = var3
+		end, {})
 	}))
 end)

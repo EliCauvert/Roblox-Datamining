@@ -8,6 +8,7 @@ local platformLeaderboardPushWaitTimeoutSeconds = game:DefineFastInt("PlatformLe
 local platformLeaderboardsExposure2EnabledV2 = game:DefineFastFlag("PlatformLeaderboardsExposure2Enabled_V2", false)
 local platformLeaderboardsExposure2Layer = game:DefineFastString("PlatformLeaderboardsExposure2Layer", "Social.PlatformLeaderboardsExposure2")
 local platformLeaderboardLocalizedUnitEnabled = game:DefineFastFlag("PlatformLeaderboardLocalizedUnitEnabled", false)
+local platformLeaderboardBadgeMetadataEnabled = game:DefineFastFlag("PlatformLeaderboardBadgeMetadataEnabled", false)
 local platformLeaderboardsIXPNoLeaderboardsShownV3 = game:DefineFastFlag("PlatformLeaderboardsIXPNoLeaderboardsShown_V3", false)
 local parent = script.Parent.Parent
 local signalsModule = require(parent.Signals)
@@ -52,7 +53,7 @@ local t = {}
 t.__index = t
 
 function t.new()
-	-- upvalues: signalsModule (ref), createSignalMap (ref), t (ref), robloxReplicatedStorageService (ref), platformLeaderboardPushWaitTimeoutSeconds (ref)
+	-- upvalues: signalsModule (ref), platformLeaderboardBadgeMetadataEnabled (ref), createSignalMap (ref), t (ref), robloxReplicatedStorageService (ref), platformLeaderboardPushWaitTimeoutSeconds (ref)
 	local var1, var2 = signalsModule.createSignal(false)
 	local var3, var4 = signalsModule.createSignal(nil)
 	local var5, var6 = signalsModule.createSignal(nil)
@@ -61,6 +62,19 @@ function t.new()
 	local var11, var12 = signalsModule.createSignal(nil)
 	local var13, var14 = signalsModule.createSignal(nil)
 	local var15, var16 = signalsModule.createSignal(nil)
+	local var17 = nil
+	local var18 = nil
+	local var19 = nil
+	local var20 = nil
+	
+	if platformLeaderboardBadgeMetadataEnabled then
+		local var21, var22 = signalsModule.createSignal(nil)
+		var17 = var21
+		var18 = var22
+		local var23, var24 = signalsModule.createSignal(nil)
+		var19 = var23
+		var20 = var24
+	end
 	local tbl = setmetatable({
 		_conn = nil,
 		getHasActiveLeaderboard = var1,
@@ -73,6 +87,8 @@ function t.new()
 		getUnit = var11,
 		getUserFriendRank = var13,
 		getUserFriendScore = var15,
+		getUserIsVerified = var17,
+		getUserHasRobloxSubscription = var19,
 		_setHasActiveLeaderboard = var2,
 		_setGlobalLastRefreshedAt = var4,
 		_setFriendsLastRefreshedAt = var6,
@@ -81,6 +97,8 @@ function t.new()
 		_setUnit = var12,
 		_setUserFriendRank = var14,
 		_setUserFriendScore = var16,
+		_setUserIsVerified = var18,
+		_setUserHasRobloxSubscription = var20,
 		_globalEntrySetters = {},
 		_friendsEntrySetters = {}
 	}, t)
@@ -102,10 +120,11 @@ function t.new()
 end
 
 function t._updateEntries(_, p1, p2, p3)
-	-- upvalues: signalsModule (ref)
+	-- upvalues: platformLeaderboardBadgeMetadataEnabled (ref), signalsModule (ref)
 	local t = {}
 	
 	for i, v in ipairs(p3) do
+		local data
 		local userId = v.userId
 		t[userId] = true
 		local var1 = p2[userId]
@@ -113,41 +132,45 @@ function t._updateEntries(_, p1, p2, p3)
 		if var1 then
 			var1.setScore(v.score)
 			var1.setRank(v.rank)
-			local data = p1.getData(userId, false)
+			data = p1.getData(userId, false)
 			
-			if data and data.displayName ~= v.displayName then
+			if data and (data.displayName ~= v.displayName or platformLeaderboardBadgeMetadataEnabled and (data.isVerified ~= v.isVerified or data.hasRobloxSubscription ~= v.hasRobloxSubscription)) then
 				p1.setData(userId, {
 					getScore = data.getScore,
 					getRank = data.getRank,
-					displayName = v.displayName
+					displayName = v.displayName,
+					isVerified = if platformLeaderboardBadgeMetadataEnabled then v.isVerified else nil,
+					hasRobloxSubscription = if platformLeaderboardBadgeMetadataEnabled then v.hasRobloxSubscription else nil
 				}, false)
 			end
 		else
-			local var2, var3 = signalsModule.createSignal(v.score)
-			local var4, var5 = signalsModule.createSignal(v.rank)
-			p2[userId] = { setScore = var3, setRank = var5 }
+			data, var44 = signalsModule.createSignal(v.score)
+			local var2, var3 = signalsModule.createSignal(v.rank)
+			p2[userId] = { setScore = var44, setRank = var3 }
 			p1.setData(userId, {
-				getScore = var2,
-				getRank = var4,
-				displayName = v.displayName
+				getScore = data,
+				getRank = var2,
+				displayName = v.displayName,
+				isVerified = if platformLeaderboardBadgeMetadataEnabled then v.isVerified else nil,
+				hasRobloxSubscription = if platformLeaderboardBadgeMetadataEnabled then v.hasRobloxSubscription else nil
 			}, false)
 		end
 	end
-	for i_1, v_1 in pairs(p1.getAllData(false)) do
-		if not t[i_1] then
-			p1.removeData(i_1, false)
-			p2[i_1] = nil
+	for v, v_1 in pairs(p1.getAllData(false)) do
+		if not t[v] then
+			p1.removeData(v, false)
+			p2[v] = nil
 		end
 	end
 end
 
 function t:_handleEvent(p4)
-	-- upvalues: platformLeaderboardsExposure2EnabledV2 (ref), IXPService (ref), platformLeaderboardsExposure2Layer (ref), platformLeaderboardsIXPNoLeaderboardsShownV3 (ref), playersService (ref), coreGuiService (ref), platformLeaderboardLocalizedUnitEnabled (ref)
+	-- upvalues: platformLeaderboardsExposure2EnabledV2 (ref), IXPService (ref), platformLeaderboardsExposure2Layer (ref), platformLeaderboardsIXPNoLeaderboardsShownV3 (ref), playersService (ref), coreGuiService (ref), platformLeaderboardLocalizedUnitEnabled (ref), platformLeaderboardBadgeMetadataEnabled (ref)
 	if platformLeaderboardsExposure2EnabledV2 and p4.config ~= nil then
 		IXPService:LogFlagLinkedUserLayerExposure(platformLeaderboardsExposure2Layer)
 	end
 	if platformLeaderboardsIXPNoLeaderboardsShownV3 then
-		local var6
+		local var4
 		local localPlayer = playersService.LocalPlayer
 		
 		if localPlayer then
@@ -155,21 +178,21 @@ function t:_handleEvent(p4)
 				-- upvalues: coreGuiService (copy)
 				return require(coreGuiService:WaitForChild("RobloxGui").Modules.PlayerPermissionsModule)
 			end)
-			local var7 = if ok then status else nil
+			local var5 = if ok then status else nil
 			
-			if var7 then
+			if var5 then
 				local ok_1, status_1 = pcall(function()
-					-- upvalues: var7 (ref), localPlayer (ref)
-					return var7.CanPlayerManagePlaceAsync(localPlayer)
+					-- upvalues: var5 (ref), localPlayer (ref)
+					return var5.CanPlayerManagePlaceAsync(localPlayer)
 				end)
-				var6 = ok_1 and status_1 == true
+				var4 = ok_1 and status_1 == true
 			else
-				var6 = false
+				var4 = false
 			end
 		else
-			var6 = false
+			var4 = false
 		end
-		if not var6 then return end
+		if not var4 then return end
 	end
 	if p4.type == "CONFIG_UPDATE" then
 		self._setHasActiveLeaderboard(p4.config ~= nil)
@@ -203,10 +226,21 @@ function t:_handleEvent(p4)
 			self._setUserScore(p4.entry.score)
 			self._setUserRank(p4.entry.rank)
 			
-			return
+			if platformLeaderboardBadgeMetadataEnabled then
+				self._setUserIsVerified(p4.entry.isVerified)
+				self._setUserHasRobloxSubscription(p4.entry.hasRobloxSubscription)
+				
+				return
+			end
+		else
+			self._setUserScore(nil)
+			self._setUserRank(nil)
+			
+			if platformLeaderboardBadgeMetadataEnabled then
+				self._setUserIsVerified(nil)
+				self._setUserHasRobloxSubscription(nil)
+			end
 		end
-		self._setUserScore(nil)
-		self._setUserRank(nil)
 	end
 end
 
@@ -233,10 +267,10 @@ function t._fetchLocalizedUnit(p5)
 	-- upvalues: url (ref), httpRbxApiService (ref), httpService (ref)
 	task.spawn(function()
 		-- upvalues: url (copy), httpRbxApiService (copy), httpService (copy), p5 (ref)
-		local ok = `{url.APIS_URL}platform-leaderboards-api/v1/universes/{game.GameId}/leaderboard/localized`
-		ok, status = pcall(function()
-			-- upvalues: httpRbxApiService (copy), ok (ref)
-			return httpRbxApiService:GetAsyncFullUrl(ok)
+		local apis_url = `{url.APIS_URL}platform-leaderboards-api/v1/universes/{game.GameId}/leaderboard/localized`
+		local ok, status = pcall(function()
+			-- upvalues: httpRbxApiService (copy), apis_url (ref)
+			return httpRbxApiService:GetAsyncFullUrl(apis_url)
 		end)
 		
 		if not ok then

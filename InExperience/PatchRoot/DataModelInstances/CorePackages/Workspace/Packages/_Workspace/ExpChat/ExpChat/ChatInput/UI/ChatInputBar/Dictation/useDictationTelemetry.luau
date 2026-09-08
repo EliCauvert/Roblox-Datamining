@@ -72,6 +72,27 @@ return function()
 				[dictationAnalyticsModule.Properties.SttMode] = p1,
 				[dictationAnalyticsModule.Properties.Success] = false
 			})
+		end, {}),
+		logMicToastShown = reactModule.useCallback(function(p1, p2)
+			-- upvalues: dictationAnalyticsModule (copy)
+			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.MicToastShown, {
+				[dictationAnalyticsModule.Properties.SttMode] = p1,
+				[dictationAnalyticsModule.Properties.CanDeepLink] = p2
+			})
+		end, {}),
+		logMicToastActivated = reactModule.useCallback(function(p1, p2)
+			-- upvalues: dictationAnalyticsModule (copy)
+			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.MicToastActivated, {
+				[dictationAnalyticsModule.Properties.SttMode] = p1,
+				[dictationAnalyticsModule.Properties.CanDeepLink] = p2
+			})
+		end, {}),
+		logMicToastDismissed = reactModule.useCallback(function(p1, p2)
+			-- upvalues: dictationAnalyticsModule (copy)
+			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.MicToastDismiss, {
+				[dictationAnalyticsModule.Properties.SttMode] = p1,
+				[dictationAnalyticsModule.Properties.DismissReason] = p2
+			})
 		end, {})
 	}
 end

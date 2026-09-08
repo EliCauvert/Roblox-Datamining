@@ -23,5 +23,6 @@
 	PlatformNotSupported = 30,
 	NoLinkedAccount = 31,
 	AccountLinkingFailed = 32,
-	IllegalChildAccountLinking = 34
+	IllegalChildAccountLinking = 34,
+	PioneerAccountIneligible = 43
 }

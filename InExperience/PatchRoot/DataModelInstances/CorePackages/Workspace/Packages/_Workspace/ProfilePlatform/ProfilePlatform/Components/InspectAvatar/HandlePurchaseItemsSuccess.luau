@@ -5,7 +5,11 @@ local catalogNetworkingModule = require(parent.CatalogNetworking)
 local purchaseDetailsStore = catalogNetworkingModule.PurchaseDetailsStore
 local bundleOwnershipStore = catalogNetworkingModule.BundleOwnershipStore
 local _ = require(profilePlatform.Contexts.ProfileWrapperContext)
+local marketplaceUnifiedAction = require(parent.AvatarExperienceAnalytics).UnifiedEventLogEnums.MarketplaceUnifiedAction
+local enumsModule = require(profilePlatform.Common.Enums)
+local sendProfilePurchaseEventsModule = require(profilePlatform.Analytics.sendProfilePurchaseEvents)
 local fFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule = require(profilePlatform.Flags.FFlagProfileInspectAndBuyRefreshBalanceAfterPurchase)
+local fFlagProfileUnifiedPurchaseLoggingModule = require(profilePlatform.Flags.FFlagProfileUnifiedPurchaseLogging)
 
 local function buildEquippableAssets(value, p1, p2)
 	local t = {}
@@ -49,45 +53,79 @@ local function parseLineItems(p3)
 	return t, t_1, var1
 end
 
-return function(p4)
-	-- upvalues: parseLineItems (ref), purchaseDetailsStore (ref), bundleOwnershipStore (ref), buildEquippableAssets (ref), fFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule (ref), setCurrentToastMessage (ref)
+local function buildPurchasedItems(p4, p5)
+	-- upvalues: enumsModule (ref)
+	local t = {}
+	
+	if p5 then
+		for i, v in p5 do
+			if v.itemSubType then
+				t[v.itemId] = v.itemSubType
+			end
+		end
+	end
+	local t_1 = {}
+	
+	for i, v in p4 do
+		if v.status == "SUCCEEDED" then
+			local var2 = if v.bundleId then tostring(v.bundleId) elseif v.assetId then tostring(v.assetId) else nil
+			
+			if var2 then
+				table.insert(t_1, {
+					itemId = var2,
+					itemType = if v.bundleId then enumsModule.ItemTypes.Bundle else enumsModule.ItemTypes.Asset,
+					itemSubType = t[var2],
+					priceInRobux = v.agreedPriceRobux
+				})
+			end
+		end
+	end
+	return t_1
+end
+
+return function(p6)
+	-- upvalues: parseLineItems (ref), fFlagProfileUnifiedPurchaseLoggingModule (ref), sendProfilePurchaseEventsModule (ref), marketplaceUnifiedAction (ref), buildPurchasedItems (ref), purchaseDetailsStore (ref), bundleOwnershipStore (ref), buildEquippableAssets (ref), fFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule (ref), setCurrentToastMessage (ref)
 	local lineItems
-	local responseBody = p4.result and p4.result.responseBody
+	local responseBody = p6.result and p6.result.responseBody
 	local fulfillmentGroups = responseBody and responseBody.fulfillmentGroups
 	
 	if fulfillmentGroups then
 		lineItems = fulfillmentGroups[1] and (fulfillmentGroups[1].lineItems or {})
 	end
-	local var2, var3, var4 = parseLineItems(lineItems)
-	purchaseDetailsStore.markItemsOwned(var2)
+	local var3, var4, var5 = parseLineItems(lineItems)
 	
-	if #var3 > 0 then
-		bundleOwnershipStore.markOwned(var3)
+	if fFlagProfileUnifiedPurchaseLoggingModule then
+		sendProfilePurchaseEventsModule(marketplaceUnifiedAction.PURCHASE_SUCCESS, buildPurchasedItems(lineItems, p6.purchasedItems), p6.profileWrapperContext.profileType)
 	end
-	if p4.isWearAfterPurchaseChecked and p4.profileWrapperContext.postPurchase then
-		local var5 = buildEquippableAssets(p4.purchasedWearIds or {}, p4.ownedAssetIds or {}, p4.wearTypeMap or {})
+	purchaseDetailsStore.markItemsOwned(var3)
+	
+	if #var4 > 0 then
+		bundleOwnershipStore.markOwned(var4)
+	end
+	if p6.isWearAfterPurchaseChecked and p6.profileWrapperContext.postPurchase then
+		local var6 = buildEquippableAssets(p6.purchasedWearIds or {}, p6.ownedAssetIds or {}, p6.wearTypeMap or {})
 		
-		if #var5 > 0 then
-			if p4.avatarSaveContext and p4.avatarSaveContext.autoSaveNextNewSaveData then
-				p4.avatarSaveContext.autoSaveNextNewSaveData()
+		if #var6 > 0 then
+			if p6.avatarSaveContext and p6.avatarSaveContext.autoSaveNextNewSaveData then
+				p6.avatarSaveContext.autoSaveNextNewSaveData()
 			end
-			p4.profileWrapperContext.postPurchase.wearAfterPurchase(var5)
+			p6.profileWrapperContext.postPurchase.wearAfterPurchase(var6)
 		end
 	end
-	if fFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule and #var2 > 0 then
-		local postPurchase = p4.profileWrapperContext.postPurchase
+	if fFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule and #var3 > 0 then
+		local postPurchase = p6.profileWrapperContext.postPurchase
 		
 		if postPurchase and postPurchase.refreshRobuxBalance then
 			postPurchase.refreshRobuxBalance()
 		end
 	end
-	p4.dispatch(setCurrentToastMessage(if var4 == 0 then {
+	p6.dispatch(setCurrentToastMessage(if var5 == 0 then {
 		isLocalized = true,
 		toastType = "PurchaseMessage",
-		toastMessage = if #var2 == 1 then p4.localized.purchaseSuccessSingular else p4.localized.purchaseSuccessPlural
+		toastMessage = if #var3 == 1 then p6.localized.purchaseSuccessSingular else p6.localized.purchaseSuccessPlural
 	} else {
 		isLocalized = true,
 		toastType = "PurchaseMessage",
-		toastMessage = p4.localized.purchasePartialFailure
+		toastMessage = p6.localized.purchasePartialFailure
 	}))
 end

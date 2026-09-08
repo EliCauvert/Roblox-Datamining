@@ -4,5 +4,6 @@ return {
 	AgentCard = agentCardModule,
 	Root = agentCardModule,
 	Actions = require(script.AgentCardActions),
-	AgentPlanCard = require(script.AgentPlanCard)
+	AgentPlanCard = require(script.AgentPlanCard),
+	AgentDevProductCard = require(script.AgentDevProductCard)
 }

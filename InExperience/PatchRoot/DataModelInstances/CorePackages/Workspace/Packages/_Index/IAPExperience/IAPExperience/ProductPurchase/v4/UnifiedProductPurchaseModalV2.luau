@@ -27,10 +27,11 @@ local fFlagUnifiedPurchaseAddSkeleton = require(parent.Parent.SharedFlags).FFlag
 local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local fFlagPurchasePromptFetchCartPricing = require(parent.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
 local fFlagPurchasePromptFixOfferMarginUpsell = require(parent.Parent.SharedFlags).FFlagPurchasePromptFixOfferMarginUpsell
+local fFlagOffersOnlyAffordableLock = require(parent.Parent.SharedFlags).FFlagOffersOnlyAffordableLock
 local _ = require(script.Parent.cartPricingResponseLineItem)
 
 local function UnifiedProductPurchaseModalV2(p1)
-	-- upvalues: useLocalization (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), urlBuilder (ref), unifiedPurchaseModalTypeEnumModule (ref), fFlagPurchasePromptFetchCartPricing (ref), useCartPricingModule (ref), reactModule (ref), useFocusNavigationRefsModule (ref), fFlagUnifiedPurchaseAddSkeleton (ref), fFlagPurchasePromptFixOfferMarginUpsell (ref), checkbox (ref), subtitleComponentMapModule (ref), productDetailsContainerModule (ref), cartPricingProductDetailsModule (ref), buildCartPricingOfferCheckboxesModule (ref), view (ref), buttonVariant (ref), foundationModule (ref), dialog (ref), dialogSize (ref), blackbirdUpsellBanner (ref)
+	-- upvalues: useLocalization (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), urlBuilder (ref), unifiedPurchaseModalTypeEnumModule (ref), fFlagPurchasePromptFetchCartPricing (ref), useCartPricingModule (ref), reactModule (ref), useFocusNavigationRefsModule (ref), fFlagUnifiedPurchaseAddSkeleton (ref), fFlagPurchasePromptFixOfferMarginUpsell (ref), fFlagOffersOnlyAffordableLock (ref), checkbox (ref), subtitleComponentMapModule (ref), productDetailsContainerModule (ref), cartPricingProductDetailsModule (ref), buildCartPricingOfferCheckboxesModule (ref), view (ref), buttonVariant (ref), foundationModule (ref), dialog (ref), dialogSize (ref), blackbirdUpsellBanner (ref)
 	local var1 = useLocalization({
 		Buy = "IAPExperience.PurchasePrompt.Action.Buy",
 		Subscribe = "Feature.Subscription.Action.Subscribe",
@@ -83,13 +84,15 @@ local function UnifiedProductPurchaseModalV2(p1)
 		
 		if fFlagPurchasePromptFixOfferMarginUpsell then
 			local priceWithoutOffersDiscounts = var3.priceWithoutOffersDiscounts
-			var11 = isDisabled or (priceWithoutOffersDiscounts ~= nil and p1.robuxBalanceAmount < priceWithoutOffersDiscounts)
+			local priceAfterOffersDiscounts = var3.priceAfterOffersDiscounts
+			local var13 = priceWithoutOffersDiscounts ~= nil and p1.robuxBalanceAmount < priceWithoutOffersDiscounts
+			var11 = isDisabled or (var13 and (not fFlagOffersOnlyAffordableLock or (priceAfterOffersDiscounts ~= nil and priceAfterOffersDiscounts <= p1.robuxBalanceAmount)))
 		else
 			var11 = isDisabled
 		end
 		var12 = if var3.showCartOfferUi then #var3.cartPricingOffers else 0
 	end
-	local var13 = if not fFlagPurchasePromptFetchCartPricing then reactModule.useMemo(function()
+	local var14 = if not fFlagPurchasePromptFetchCartPricing then reactModule.useMemo(function()
 		-- upvalues: var4 (ref), reactModule (copy), checkbox (copy), p1 (ref), fFlagUnifiedPurchaseAddSkeleton (copy), var5 (ref)
 		local t = {}
 		
@@ -149,37 +152,37 @@ local function UnifiedProductPurchaseModalV2(p1)
 		end
 		return t
 	end, { var4, var12, isDisabled })
-	local var14 = nil
+	local var15 = nil
 	
 	if p1.subtitleView then
 		local componentName = subtitleComponentMapModule[p1.subtitleView.componentName]
 		
 		if componentName then
-			var14 = reactModule.createElement(componentName, p1.subtitleView.props)
+			var15 = reactModule.createElement(componentName, p1.subtitleView.props)
 		end
 	end
-	local var15 = if fFlagPurchasePromptFetchCartPricing then reactModule.createElement(cartPricingProductDetailsModule, {
+	local var16 = if fFlagPurchasePromptFetchCartPricing then reactModule.createElement(cartPricingProductDetailsModule, {
 		cartPricing = var3,
 		purchaseModalType = p1.purchaseModalType,
-		subtitleView = var14,
+		subtitleView = var15,
 		priceSuffix = var2,
 		isLoading = p1.isLoading,
 		isCartPricingLoading = p1.isCartPricingLoading
 	}) else reactModule.createElement(productDetailsContainerModule, {
 		purchaseModalType = p1.purchaseModalType,
 		product = p1.product,
-		subtitleView = var14,
+		subtitleView = var15,
 		priceSuffix = var2,
 		isLoading = if fFlagUnifiedPurchaseAddSkeleton then p1.isLoading else nil
 	})
-	local var16 = nil
+	local var17 = nil
 	local cloned = nil
 	
 	if fFlagPurchasePromptFetchCartPricing then
-		var16 = buildCartPricingOfferCheckboxesModule({ cartPricing = var3, isDisabled = var11 })
-		cloned = table.clone(var16)
+		var17 = buildCartPricingOfferCheckboxesModule({ cartPricing = var3, isDisabled = var11 })
+		cloned = table.clone(var17)
 		
-		for i, v in pairs(var13) do
+		for i, v in pairs(var14) do
 			cloned[i] = v
 		end
 	end
@@ -193,15 +196,15 @@ local function UnifiedProductPurchaseModalV2(p1)
 		DialogContent = reactModule.createElement(view, {
 			tag = "col gap-medium auto-y size-full-0 align-x-center align-y-center",
 			LayoutOrder = 1
-		}, { ProductDetailsContainer = var15 }),
+		}, { ProductDetailsContainer = var16 }),
 		ActionsSection = reactModule.createElement(view, {
 			tag = "col size-full-0 auto-y gap-xlarge",
 			LayoutOrder = 3
 		}, {
-			PostPurchaseActions = if fFlagPurchasePromptFetchCartPricing and (next(var16) or next(var13)) or not fFlagPurchasePromptFetchCartPricing and next(var13) then reactModule.createElement(view, {
+			PostPurchaseActions = if fFlagPurchasePromptFetchCartPricing and (next(var17) or next(var14)) or not fFlagPurchasePromptFetchCartPricing and next(var14) then reactModule.createElement(view, {
 				tag = "col gap-medium auto-y size-full-0 align-x-start align-y-start",
 				LayoutOrder = 1
-			}, if fFlagPurchasePromptFetchCartPricing then cloned else { var13 }) else nil,
+			}, if fFlagPurchasePromptFetchCartPricing then cloned else { var14 }) else nil,
 			BuyAndUpsell = reactModule.createElement(view, {
 				tag = "col size-full-0 auto-y gap-medium",
 				LayoutOrder = 2

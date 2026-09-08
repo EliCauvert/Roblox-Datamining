@@ -1,11 +1,14 @@
 ﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local _ = require(purchasePrompt.Parent.IAPExperience)
+local parent = purchasePrompt.Parent
+local sharedFlagsModule = require(parent.SharedFlags)
+local _ = require(parent.IAPExperience)
 local fFlagFixResaleDisplayPriceModule = require(purchasePrompt.Flags.FFlagFixResaleDisplayPrice)
 local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
+local fFlagAXFixMISUpsellDiscountSummary = sharedFlagsModule.FFlagAXFixMISUpsellDiscountSummary
 local selectCartPricingOverrideModule = require(script.Parent.selectCartPricingOverride)
 
 return function(p1)
-	-- upvalues: fFlagFixResaleDisplayPriceModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), selectCartPricingOverrideModule (ref)
+	-- upvalues: fFlagFixResaleDisplayPriceModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), selectCartPricingOverrideModule (ref), fFlagAXFixMISUpsellDiscountSummary (ref)
 	local productInfo = p1.productInfo
 	local price = productInfo.price or 0
 	local basePrice = productInfo.basePrice or price
@@ -37,6 +40,7 @@ return function(p1)
 	return {
 		priceInRobux = price,
 		basePriceInRobux = basePrice,
-		discounts = priceDiscountDetails
+		discounts = priceDiscountDetails,
+		savingsSummaryOverride = if fFlagAXFixMISUpsellDiscountSummary then productInfo.savingsSummaryOverride else nil
 	}
 end

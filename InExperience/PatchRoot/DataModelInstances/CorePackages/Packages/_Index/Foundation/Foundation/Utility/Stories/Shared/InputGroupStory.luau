@@ -33,7 +33,7 @@ local function Section(p1)
 		}),
 		Content = reactModule.createElement(viewModule, {
 			LayoutOrder = 2,
-			tag = p1.contentTag or "row gap-large align-y-start auto-xy wrap"
+			tag = p1.contentTag or "row gap-large auto-xy wrap"
 		}, p1.children)
 	})
 end
@@ -119,7 +119,7 @@ return {
 							Size = reactModule.createElement(Section, {
 								LayoutOrder = 1,
 								name = "Size",
-								contentTag = "row gap-xxlarge align-y-start auto-xy wrap"
+								contentTag = "row gap-xxlarge auto-xy wrap"
 							}, dashModule.map(list, function(p4, p5)
 								-- upvalues: reactModule (copy), p3 (copy), createItems (copy), staticItems (copy)
 								return reactModule.createElement(p3.Group, { legend = p4, size = p4, LayoutOrder = p5 }, createItems(p3.Item, staticItems()))
@@ -151,7 +151,7 @@ return {
 							Placement = reactModule.createElement(Section, {
 								LayoutOrder = 1,
 								name = "Placement",
-								contentTag = "row gap-xxlarge align-y-start auto-xy wrap"
+								contentTag = "row gap-xxlarge auto-xy wrap"
 							}, dashModule.map(list_1, function(p4, p5)
 								-- upvalues: reactModule (copy), p3 (copy), createItems (copy), staticItems (copy)
 								return reactModule.createElement(p3.Group, { legend = p4, placement = p4, LayoutOrder = p5 }, createItems(p3.Item, staticItems()))

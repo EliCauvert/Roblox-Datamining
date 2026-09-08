@@ -15,6 +15,8 @@ local parent = script.Parent
 local presentationCommon = parent.Parent.PresentationCommon
 local parent_1 = parent.Parent.Parent
 local useLeaderboardStore = playerListModule.Hooks.useLeaderboardStore
+local usePlatformLeaderboard = playerListModule.Hooks.usePlatformLeaderboard
+local constants = playerListModule.Common.Constants
 local playerEntryContainerModule = require(parent_1.Components.Container.PlayerEntryContainer)
 local playerListDisplayContainerModule = require(parent_1.Components.Container.PlayerListDisplayContainer)
 local tenFootSideBarModule = require(presentationCommon.TenFootSideBar)
@@ -24,8 +26,11 @@ local contextActionsBinderModule = require(connection.ContextActionsBinder)
 local topStatConnectorModule = require(connection.TopStatConnector)
 local withLayoutValues = require(connection.LayoutValues).WithLayoutValues
 local fFlagAddNewPlayerListFocusNav = playerListModule.Flags.FFlagAddNewPlayerListFocusNav
+local fFlagPlayerListFixPlatformLeaderboardSizing = playerListModule.Flags.FFlagPlayerListFixPlatformLeaderboardSizing
+local fFlagPlayerListTwoTabsOnLegacy = playerListModule.Flags.FFlagPlayerListTwoTabsOnLegacy
 local fFlagPlayerListRemoveTopStatModule = require(parent_1.Flags.FFlagPlayerListRemoveTopStat)
 local t = { dampingRatio = 1, frequency = 7 }
+local var1 = if fFlagPlayerListFixPlatformLeaderboardSizing and fFlagPlayerListTwoTabsOnLegacy then signalsModule.createSignal(false) else nil
 local playerListApp = roactModule.PureComponent:extend("PlayerListApp")
 
 local function _(p1)
@@ -39,35 +44,35 @@ end
 
 local function getTeamCount(p2, p3)
 	local t = {}
-	local var1 = 0
+	local var2 = 0
 	
 	for i, v in pairs(p2) do
 		if not t[v.TeamColor.Number] then
 			t[v.TeamColor.Number] = true
-			var1 += 1
+			var2 += 1
 		end
 	end
-	if var1 > 0 then
-		local var2
+	if var2 > 0 then
+		local var3
 		for i_1, v_1 in ipairs(p3) do
 			if v_1.Team == nil then
-				var2 = true
-				if var2 then
-					var1 += 1
+				var3 = true
+				if var3 then
+					var2 += 1
 				end
 			end
 		end
-		var2 = false
+		var3 = false
 	end
-	return var1
+	return var2
 end
 
 function playerListApp.init(p4)
 	-- upvalues: roactModule (ref), otterModule (ref), signalsModule (ref), displayModule (ref)
 	p4.state = { visible = true }
-	local var3, var4 = roactModule.createBinding(UDim2.new(0, 0, 0, 0))
-	p4.positionOffset = var3
-	p4.updatePositionOffset = var4
+	local var4, var5 = roactModule.createBinding(UDim2.new(0, 0, 0, 0))
+	p4.positionOffset = var4
+	p4.updatePositionOffset = var5
 	p4.positionMotor = otterModule.createSingleMotor(0)
 	p4.positionMotor:onStep(function(p5)
 		-- upvalues: p4 (ref)
@@ -88,9 +93,9 @@ function playerListApp.init(p4)
 end
 
 function playerListApp.render(p4)
-	-- upvalues: roactModule (ref), contextActionsBinderModule (ref), fFlagAddNewPlayerListFocusNav (ref), eventConnectionsModule (ref), withLayoutValues (ref), statsUtilsModule (ref), playersService (ref), getTeamCount (ref), playerEntryContainerModule (ref), playerListDisplayContainerModule (ref), fFlagPlayerListRemoveTopStatModule (ref), topStatConnectorModule (ref), tenFootSideBarModule (ref)
+	-- upvalues: roactModule (ref), contextActionsBinderModule (ref), fFlagAddNewPlayerListFocusNav (ref), eventConnectionsModule (ref), withLayoutValues (ref), statsUtilsModule (ref), fFlagPlayerListFixPlatformLeaderboardSizing (ref), constants (ref), playersService (ref), getTeamCount (ref), playerEntryContainerModule (ref), playerListDisplayContainerModule (ref), fFlagPlayerListRemoveTopStatModule (ref), topStatConnectorModule (ref), tenFootSideBarModule (ref)
 	return if p4.state.visible then withLayoutValues(function(p5)
-		-- upvalues: p4 (ref), statsUtilsModule (copy), playersService (copy), getTeamCount (copy), roactModule (copy), playerEntryContainerModule (copy), playerListDisplayContainerModule (copy), fFlagAddNewPlayerListFocusNav (copy), eventConnectionsModule (copy), contextActionsBinderModule (copy), fFlagPlayerListRemoveTopStatModule (copy), topStatConnectorModule (copy), tenFootSideBarModule (copy)
+		-- upvalues: p4 (ref), statsUtilsModule (copy), fFlagPlayerListFixPlatformLeaderboardSizing (copy), constants (copy), playersService (copy), getTeamCount (copy), roactModule (copy), playerEntryContainerModule (copy), playerListDisplayContainerModule (copy), fFlagAddNewPlayerListFocusNav (copy), eventConnectionsModule (copy), contextActionsBinderModule (copy), fFlagPlayerListRemoveTopStatModule (copy), topStatConnectorModule (copy), tenFootSideBarModule (copy)
 		local containerPosition = p5.ContainerPosition
 		local containerSize = p5.ContainerSize
 		local anchorPoint = p5.AnchorPoint
@@ -112,14 +117,24 @@ function playerListApp.render(p4)
 		else
 			entrySizeX = p5.EntryBaseSizeX + math.min(4, minValue) * p5.EntrySizeIncreasePerStat
 			containerSize += UDim2.new(0, p5.ExtraContainerPadding, 0, 0)
-			local var3 = containerSize.X.Offset + p5.ContainerPadding * 2 + (p5.PlayerDropDownSizeX + p5.PlayerDropDownOffset)
 			
-			if p4.props.screenSizeX - var3 < entrySizeX then
-				entrySizeX = p4.props.screenSizeX - var3
+			if fFlagPlayerListFixPlatformLeaderboardSizing and p4.props.hasPlatformLeaderboard then
+				entrySizeX = math.max(entrySizeX, constants.PLATFORM_PANEL_WIDTH - containerSize.X.Offset)
+			end
+			local var4 = containerSize.X.Offset + p5.ContainerPadding * 2 + (p5.PlayerDropDownSizeX + p5.PlayerDropDownOffset)
+			
+			if p4.props.screenSizeX - var4 < entrySizeX then
+				entrySizeX = p4.props.screenSizeX - var4
 			end
 			containerSize += UDim2.new(0, entrySizeX, 0, 0)
 		end
-		local var4 = if playersService.MaxPlayers >= 6 and playersService.MaxPlayers <= 12 then playersService.MaxPlayers * 26 + getTeamCount(p4.props.teams, p4.props.players) * 20 else 1e999
+		local var5 = if playersService.MaxPlayers >= 6 and playersService.MaxPlayers <= 12 then playersService.MaxPlayers * 26 + getTeamCount(p4.props.teams, p4.props.players) * 20 else 1e999
+		local zero = Vector2.zero
+		
+		if fFlagPlayerListFixPlatformLeaderboardSizing and p4.props.hasPlatformLeaderboard then
+			zero = Vector2.new(math.min(constants.PLATFORM_PANEL_WIDTH, containerSize.X.Offset), constants.LEGACY_PLATFORM_PANEL_MIN_HEIGHT)
+			var5 = math.max(var5, zero.Y)
+		end
 		local t = {}
 		
 		if p5.IsTenFoot then
@@ -171,10 +186,7 @@ function playerListApp.render(p4)
 				Size = UDim2.new(1, 0, 1, 0),
 				Position = p4.positionOffset
 			}, t),
-			UISizeConstraint = roactModule.createElement("UISizeConstraint", {
-				MinSize = Vector2.new(0, 0),
-				MaxSize = Vector2.new(1e999, var4)
-			}) or nil
+			UISizeConstraint = roactModule.createElement("UISizeConstraint", { MinSize = zero, MaxSize = Vector2.new(1e999, var5) }) or nil
 		})
 	end) else roactModule.createFragment({
 		roactModule.createElement(contextActionsBinderModule),
@@ -227,13 +239,17 @@ return roactRoduxModule.connect(function(p5)
 		teams = p5.teams
 	}
 end, nil)(function(p5)
-	-- upvalues: useLeaderboardStore (ref), signalsModule (ref), signalsReactModule (ref), roactModule (ref), playerListApp (ref), cryoModule (ref)
-	local var3 = useLeaderboardStore()
+	-- upvalues: useLeaderboardStore (ref), signalsModule (ref), signalsReactModule (ref), fFlagPlayerListFixPlatformLeaderboardSizing (ref), fFlagPlayerListTwoTabsOnLegacy (ref), usePlatformLeaderboard (ref), var1 (ref), roactModule (ref), playerListApp (ref), cryoModule (ref)
+	local var4 = useLeaderboardStore()
+	local var5 = signalsReactModule.useSignalState(signalsModule.createComputed(function(p6)
+		-- upvalues: var4 (ref), p5 (ref)
+		return if var4 then var4.getGameStatsList().getCount(p6) else #p5.gameStats
+	end))
+	local var6 = false
 	
-	return roactModule.createElement(playerListApp, cryoModule.Dictionary.join(p5, {
-		gameStatsCount = signalsReactModule.useSignalState(signalsModule.createComputed(function(p6)
-			-- upvalues: var3 (ref), p5 (ref)
-			return if var3 then var3.getGameStatsList().getCount(p6) else #p5.gameStats
-		end))
-	}))
+	if fFlagPlayerListFixPlatformLeaderboardSizing and fFlagPlayerListTwoTabsOnLegacy then
+		local var7 = usePlatformLeaderboard()
+		var6 = signalsReactModule.useSignalState(if var7 then var7.getHasActiveLeaderboard else var1)
+	end
+	return roactModule.createElement(playerListApp, cryoModule.Dictionary.join(p5, { gameStatsCount = var5, hasPlatformLeaderboard = var6 }))
 end)

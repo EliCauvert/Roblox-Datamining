@@ -1,9 +1,8 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
+﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
-local getPlaytestLoadingStoreModule = require(buildExperience.Stores.GetPlaytestLoadingStore)
-local _ = require(buildExperience.Stores.GetPlaytestLoadingStore.createPlaytestLoadingStore)
+local getPlaytestLoadingStoreModule = require(parent.BuildExperiencePlaytestLaunch.GetPlaytestLoadingStore)
+local _ = require(parent.BuildExperiencePlaytestLaunch.createPlaytestLoadingStore)
 local playtestStatusIndicatorModule = require(script.Parent.PlaytestStatusIndicator)
 
 local function getStatusForPlaceId(p1, p2, p3)

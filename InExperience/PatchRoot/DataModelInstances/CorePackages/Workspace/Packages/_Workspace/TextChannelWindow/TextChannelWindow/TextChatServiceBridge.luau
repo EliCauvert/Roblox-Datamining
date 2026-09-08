@@ -9,7 +9,6 @@ local getFFlagExpChatProtectedChatInternalAPIs = sharedFlagsModule.getFFlagExpCh
 local getFFlagExpChatUseChatMuteStoreModule = require(script.Parent.getFFlagExpChatUseChatMuteStore)
 local fFlagExpChatRemoveOrphanedChannelsModule = require(script.Parent.Flags.FFlagExpChatRemoveOrphanedChannels)
 local fFlagExpChatDedupChannelConnectionsModule = require(script.Parent.Flags.FFlagExpChatDedupChannelConnections)
-local fFlagExpChatClearMessagesOnLeaveModule = require(script.Parent.Flags.FFlagExpChatClearMessagesOnLeave)
 
 local function getMessageStatus(p1)
 	local status = p1.Status
@@ -18,11 +17,11 @@ local function getMessageStatus(p1)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: fFlagExpChatDedupChannelConnectionsModule (ref), getFFlagExpChatUseChatMuteStoreModule (ref), isTextSourceMutedModule (ref), textChatServiceIntegrationModule (ref), textChannelWindowPerfTracker (ref), textChannelWindowAnalyticsModule (ref), getMessageStatus (ref), fFlagExpChatClearMessagesOnLeaveModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), fFlagExpChatRemoveOrphanedChannelsModule (ref)
+	-- upvalues: fFlagExpChatDedupChannelConnectionsModule (ref), getFFlagExpChatUseChatMuteStoreModule (ref), isTextSourceMutedModule (ref), textChatServiceIntegrationModule (ref), textChannelWindowPerfTracker (ref), textChannelWindowAnalyticsModule (ref), getMessageStatus (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), fFlagExpChatRemoveOrphanedChannelsModule (ref)
 	local t = {}
 	
 	local function connectChannel(p4)
-		-- upvalues: fFlagExpChatDedupChannelConnectionsModule (copy), t (ref), getFFlagExpChatUseChatMuteStoreModule (copy), isTextSourceMutedModule (copy), textChatServiceIntegrationModule (copy), p2 (ref), p3 (ref), textChannelWindowPerfTracker (copy), textChannelWindowAnalyticsModule (copy), getMessageStatus (copy), fFlagExpChatClearMessagesOnLeaveModule (copy)
+		-- upvalues: fFlagExpChatDedupChannelConnectionsModule (copy), t (ref), getFFlagExpChatUseChatMuteStoreModule (copy), isTextSourceMutedModule (copy), textChatServiceIntegrationModule (copy), p2 (ref), p3 (ref), textChannelWindowPerfTracker (copy), textChannelWindowAnalyticsModule (copy), getMessageStatus (copy)
 		if fFlagExpChatDedupChannelConnectionsModule and t[p4] then return end
 		local isRBXSystem = p4.Name == "RBXSystem"
 		local messageReceivedConnection = p4.MessageReceived:Connect(function(p5)
@@ -56,14 +55,12 @@ return function(p1, p2, p3)
 				t[p4] = nil
 			end))
 		end
-		if fFlagExpChatClearMessagesOnLeaveModule then
-			p4.ChildRemoved:Connect(function(p5)
-				-- upvalues: p2 (copy), p3 (copy), p4 (ref)
-				if p5:IsA("TextSource") and tostring(p5.UserId) == p2 then
-					p3.clearChannel(p4)
-				end
-			end)
-		end
+		p4.ChildRemoved:Connect(function(p5)
+			-- upvalues: p2 (copy), p3 (copy), p4 (ref)
+			if p5:IsA("TextSource") and tostring(p5.UserId) == p2 then
+				p3.clearChannel(p4)
+			end
+		end)
 	end
 	
 	p1.SendingMessage:Connect(function(p5)

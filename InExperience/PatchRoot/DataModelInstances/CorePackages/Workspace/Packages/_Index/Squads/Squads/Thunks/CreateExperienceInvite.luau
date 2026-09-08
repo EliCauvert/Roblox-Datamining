@@ -26,7 +26,7 @@ local fFlagSquadExperienceInviteRetryAfter = require(parent.SquadsCore.Flags).FF
 local getExperienceInviteRetryAfterStore = require(parent.SquadsCore.Stores).GetExperienceInviteRetryAfterStore
 
 local function _(p1)
-	local var1 = tonumber(if type(p1) == "table" then p1.retryAfter else nil)
+	local var1 = tonumber(if type(p1) == "table" then p1.retryAfterSeconds else nil)
 	
 	return if var1 and var1 > 0 then var1 else nil
 end
@@ -138,7 +138,7 @@ return function(p1, p2, p3, p4)
 						
 						return
 					elseif fFlagSquadExperienceInviteRetryAfter and ok then
-						local var7 = tonumber(if type(status) == "table" then status.retryAfter else nil)
+						local var7 = tonumber(if type(status) == "table" then status.retryAfterSeconds else nil)
 						var6 = if var7 and var7 > 0 then var7 else nil
 					else
 						var6 = nil

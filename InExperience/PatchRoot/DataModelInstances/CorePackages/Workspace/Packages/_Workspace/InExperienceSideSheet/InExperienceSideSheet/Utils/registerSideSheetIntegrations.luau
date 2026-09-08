@@ -9,4 +9,6 @@ return function(p1)
 	var1.setToggleIntegrations(p1.toggleIntegrations)
 	var1.setPageIntegrations(p1.pageIntegrations)
 	var1.setSessionActionIntegrations(p1.sessionActionIntegrations)
+	var1.setScrollableWidgetIntegrations(p1.scrollableWidgetIntegrations)
+	var1.setFixedFooterWidgetIntegrations(p1.fixedFooterWidgetIntegrations)
 end

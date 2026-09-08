@@ -16,7 +16,6 @@ local fFlagEnablePartyVoiceChangersInLua = sharedFlagsModule.FFlagEnablePartyVoi
 local fFlagAppChatIxpScreenExposureModule = require(appChat.Flags.FFlagAppChatIxpScreenExposure)
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
 local IXPNavigationUtilsModule = require(appChat.Utils.IXPNavigationUtils)
-local fFlagAppChatTopBarConfigDrivenModule = require(appChat.Flags.FFlagAppChatTopBarConfigDriven)
 local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
 local list = {
 	enumScreensModule.SquadLobby,
@@ -40,13 +39,10 @@ local var1 = function(p1)
 end
 
 function squadLobbyScreen.init(p1)
-	-- upvalues: fFlagAppChatIxpScreenExposureModule (ref), IXPNavigationUtilsModule (ref), fFlagAppChatTopBarConfigDrivenModule (ref), getTopBarStoreModule (ref), enumScreensModule (ref), roactNavigationModule (ref), fFlagEnablePartyVoiceChangersInLua (ref), list (ref)
+	-- upvalues: fFlagAppChatIxpScreenExposureModule (ref), IXPNavigationUtilsModule (ref), getTopBarStoreModule (ref), enumScreensModule (ref), roactNavigationModule (ref), fFlagEnablePartyVoiceChangersInLua (ref), list (ref)
 	p1.ixpSubscription = if fFlagAppChatIxpScreenExposureModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, "Party.PartyLobbyPage") else nil
 	local navigation = p1.props.navigation
-	
-	if fFlagAppChatTopBarConfigDrivenModule() then
-		getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.SquadLobby, { backButtonEnabled = true })
-	end
+	getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.SquadLobby, { backButtonEnabled = true })
 	p1.state = { isFocused = navigation.isFocused() }
 	p1.willFocusSubscription = navigation.addListener(roactNavigationModule.Events.WillFocus, function()
 		-- upvalues: p1 (ref)

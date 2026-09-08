@@ -15,20 +15,25 @@ local screenSizeImpressionsTracker = impressionsModule.ScreenSizeImpressionsTrac
 local frameBoundsImpressionsTracker = impressionsModule.FrameBoundsImpressionsTracker
 local impressionsTagUtility = impressionsModule.ImpressionsTagUtility
 local sendItemImpressions = unifiedLoggingModule.SendItemImpressions
+local fFlagLuaAppHomeFriendsRemoveItemImpressions = sharedFlagsModule.FFlagLuaAppHomeFriendsRemoveItemImpressions
 local fFlagLuaAppUseFrameBoundsImpressions = sharedFlagsModule.FFlagLuaAppUseFrameBoundsImpressions
 
 return function(p1, p2, p3, p4, p5)
-	-- upvalues: useCollectionImpressionsSignal (ref), reactModule (ref), cryoModule (ref), tile (ref), sendItemImpressions (ref), useSelector (ref), topicContentsReducer (ref), impressionsTagUtility (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref)
+	-- upvalues: useCollectionImpressionsSignal (ref), reactModule (ref), fFlagLuaAppHomeFriendsRemoveItemImpressions (ref), cryoModule (ref), tile (ref), sendItemImpressions (ref), useSelector (ref), topicContentsReducer (ref), impressionsTagUtility (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref)
 	if p4 and p4.tiles and p3 then
 		local var1, var2 = useCollectionImpressionsSignal(p3.scrollViewPositionChangedSignal)
 		local var3 = reactModule.useCallback(function(p6)
-			-- upvalues: cryoModule (copy), p4 (ref), tile (copy), sendItemImpressions (copy), p2 (ref), p1 (ref), p3 (ref)
+			-- upvalues: fFlagLuaAppHomeFriendsRemoveItemImpressions (copy), p3 (ref), cryoModule (copy), p4 (ref), tile (copy), sendItemImpressions (copy), p2 (ref), p1 (ref)
+			if fFlagLuaAppHomeFriendsRemoveItemImpressions and p3.skipItemImpressionsLog then
+				return
+			end
 			sendItemImpressions.sendFromFriendsCarousel(p2, p1, p6, cryoModule.Dictionary.map(p4.tiles, function(p7)
 				-- upvalues: cryoModule (copy), tile (copy)
 				return cryoModule.Dictionary.join(p7, { isFriend = p7.tileType == tile.Friend })
 			end), p3.appPage, p3.sortIndex, p3.sortId, p3.impressionTag)
 		end, {
-			p2, p1, p4.tiles, p3.appPage, p3.sortIndex, p3.sortId, p3.impressionTag
+			p2, p1, p4.tiles, p3.appPage, p3.sortIndex, p3.sortId, p3.impressionTag,
+			if fFlagLuaAppHomeFriendsRemoveItemImpressions then p3.skipItemImpressionsLog else nil
 		})
 		local var4 = useSelector(function(p6)
 			-- upvalues: p3 (ref), topicContentsReducer (copy)

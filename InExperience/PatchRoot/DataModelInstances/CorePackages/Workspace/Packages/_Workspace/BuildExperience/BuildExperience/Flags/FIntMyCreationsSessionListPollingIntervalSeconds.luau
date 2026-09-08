@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("MyCreationsSessionListPollingIntervalSeconds", 60)

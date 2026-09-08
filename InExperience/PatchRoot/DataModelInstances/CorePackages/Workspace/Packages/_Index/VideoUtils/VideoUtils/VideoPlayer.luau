@@ -16,12 +16,13 @@ local fFlagLuaAppEdpMediaGalleryFullScreen = require(parent.SharedFlags).FFlagLu
 local fFlagLuaAppVideoTileDisableActivation = require(parent.SharedFlags).FFlagLuaAppVideoTileDisableActivation
 local fFlagLuaAppVideoTileHideCenterPlayButton = require(parent.SharedFlags).FFlagLuaAppVideoTileHideCenterPlayButton
 local fFlagLuaAppEdpConsoleMediaGalleryVideo = require(parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
+local fFlagLuaAppMediaGalleryGamepadSupport = require(parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local var1 = game:DefineFastInt("VideoPlayerPlaybackEndThresholdInMs", 100) / 1000
 
 return function(p1)
-	-- upvalues: fFlagLuaAppEdpMediaGalleryFullScreen (ref), reactModule (ref), fFlagLuaAppEdpMediaGalleryAutoAdvance (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), runService (ref), reportWarning (ref), loggingProtocolModule (ref), videoLoggerModule (ref), var1 (ref), responsiveModule (ref), videoActions (ref), fFlagLuaAppVideoTileDisableActivation (ref), loadableVideoFrameModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppVideoTileHideCenterPlayButton (ref), roundIconButtonModule (ref), videoPlayerBottomOverlayModule (ref)
+	-- upvalues: fFlagLuaAppEdpMediaGalleryFullScreen (ref), reactModule (ref), fFlagLuaAppEdpMediaGalleryAutoAdvance (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), runService (ref), reportWarning (ref), loggingProtocolModule (ref), videoLoggerModule (ref), var1 (ref), responsiveModule (ref), videoActions (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), fFlagLuaAppVideoTileDisableActivation (ref), loadableVideoFrameModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppVideoTileHideCenterPlayButton (ref), roundIconButtonModule (ref), videoPlayerBottomOverlayModule (ref)
 	local showMuteButton = p1.showMuteButton or fFlagLuaAppEdpMediaGalleryFullScreen and (p1.showPlayButton or p1.showProgressBar)
 	local var2, var3 = reactModule.useState(false)
 	local var4, var5 = reactModule.useState(p1.muted)
@@ -272,6 +273,21 @@ return function(p1)
 			end
 			return nil
 		end, { p1.shouldStartPlayback })
+		
+		if fFlagLuaAppMediaGalleryGamepadSupport then
+			reactModule.useEffect(function()
+				-- upvalues: p1 (ref), var14 (write)
+				if p1.onPlayingChanged then
+					p1.onPlayingChanged(var14)
+				end
+			end, { p1.onPlayingChanged, var14 })
+			reactModule.useEffect(function()
+				-- upvalues: p1 (ref), var2 (ref)
+				if p1.onVideoLoadedChanged then
+					p1.onVideoLoadedChanged(var2)
+				end
+			end, { p1.onVideoLoadedChanged, var2 })
+		end
 	end
 	return reactModule.createElement(if fFlagLuaAppVideoTileDisableActivation and p1.disableActivation then "Frame" elseif fFlagLuaAppEdpMediaGalleryFullScreen then "TextButton" else "Frame", {
 		Size = p1.Size,
@@ -298,7 +314,7 @@ return function(p1)
 			onVideoEnded = if fFlagLuaAppEdpMediaGalleryAutoAdvance then p1.onVideoEnded else nil,
 			ref = if fFlagLuaAppEdpMediaGalleryAutoAdvance or fFlagLuaAppEdpMediaGalleryFullScreen or (fFlagLuaAppEdpConsoleMediaGalleryVideo or fFlagLuaAppEnableHomepageOneByTwoTile) then var9 else nil
 		}),
-		PlayButton = if (fFlagLuaAppVideoTileHideCenterPlayButton or fFlagLuaAppEnableHomepageOneByTwoTile) and p1.hideCenterPlayButton then nil elseif fFlagLuaAppEdpMediaGalleryFullScreen and var2 and not var14 then reactModule.createElement(roundIconButtonModule, {
+		PlayButton = if (fFlagLuaAppVideoTileHideCenterPlayButton or fFlagLuaAppEnableHomepageOneByTwoTile) and p1.hideCenterPlayButton then nil elseif (fFlagLuaAppEdpMediaGalleryFullScreen or fFlagLuaAppMediaGalleryGamepadSupport) and (var2 and not var14) and (not fFlagLuaAppMediaGalleryGamepadSupport or var15 ~= nil) then reactModule.createElement(roundIconButtonModule, {
 			icon = "play-large",
 			ZIndex = 2,
 			AnchorPoint = Vector2.new(0.5, 0.5),

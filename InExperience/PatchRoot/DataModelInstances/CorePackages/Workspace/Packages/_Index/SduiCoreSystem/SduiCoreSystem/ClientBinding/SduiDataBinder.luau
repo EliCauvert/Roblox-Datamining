@@ -19,7 +19,6 @@ local sduiCapabilitiesModule = require(sduiCoreSystem.ClientBinding.SduiCapabili
 local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiAppPolicyBindings = sharedFlagsModule.FFlagSduiAppPolicyBindings
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagSduiCommunitySectionSupport = sharedFlagsModule.FFlagSduiCommunitySectionSupport
 local fFlagLuaAppEdpKeepFullPageOnPortraitRotation = sharedFlagsModule.FFlagLuaAppEdpKeepFullPageOnPortraitRotation
@@ -290,7 +289,7 @@ end
 
 local t = {
 	responsive = true,
-	policy = if fFlagSduiAppPolicyBindings then true else nil,
+	policy = true,
 	clientPageScope = if fFlagSduiClientPageScope then true else nil,
 	capability = if fFlagSduiCapabilityBindings then true else nil
 }
@@ -301,7 +300,7 @@ local function isClientContentType(p4)
 end
 
 local function getFieldValueForClientContentType(p4, p5, p6, p7)
-	-- upvalues: fFlagSduiClientPageScope (ref), sduiDataBindingContentTypeModule (ref), getSduiClientPageScopeModule (ref), sduiDataBindingResponsiveFieldName (ref), displayModule (ref), responsiveModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppEdpKeepFullPageOnPortraitRotation (ref), fFlagSduiCapabilityBindings (ref), sduiCapabilitiesModule (ref), fFlagSduiAppPolicyBindings (ref), getSduiPolicyStoreModule (ref), resolveSduiPolicyFieldModule (ref), tryGetPathFromDataModule (ref)
+	-- upvalues: fFlagSduiClientPageScope (ref), sduiDataBindingContentTypeModule (ref), getSduiClientPageScopeModule (ref), sduiDataBindingResponsiveFieldName (ref), displayModule (ref), responsiveModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppEdpKeepFullPageOnPortraitRotation (ref), fFlagSduiCapabilityBindings (ref), sduiCapabilitiesModule (ref), getSduiPolicyStoreModule (ref), resolveSduiPolicyFieldModule (ref), tryGetPathFromDataModule (ref)
 	local var4
 	if fFlagSduiClientPageScope and p4 == sduiDataBindingContentTypeModule.clientPageScope then
 		var4 = if p7 then p7.configKey else nil
@@ -339,7 +338,7 @@ local function getFieldValueForClientContentType(p4, p5, p6, p7)
 			return viewportSize.X <= responsiveModule.BreakpointConfig.sizes[responsiveModule.Keys.Small].maxWidth and (viewportSize.X < viewportSize.Y and responsiveModule.GetInputModeStore(p6).getPreferredInputType(p6) == responsiveModule.Input.Touch)
 		elseif fFlagSduiCapabilityBindings and p4 == sduiDataBindingContentTypeModule.capability then
 			return if #p5 < 2 then nil else sduiCapabilitiesModule.isEnabled(p5[2])
-		elseif fFlagSduiAppPolicyBindings and p4 == sduiDataBindingContentTypeModule.policy then
+		elseif p4 == sduiDataBindingContentTypeModule.policy then
 			if #p5 < 2 then
 				return nil
 			end
@@ -389,6 +388,21 @@ local function getUniverseIcon(p8, p9, p10)
 		return var9.url, var10
 	end
 	return nil, var10
+end
+
+local function getUniverseVoteRatingText(p8, p9, p10)
+	-- upvalues: dataHydrationModule (ref)
+	local vote = dataHydrationModule.Game.getVotesStore(false).getVote(p8)
+	local var9 = vote.data(p9)
+	local var10 = vote.status(p9)
+	local var11 = if var9 then var9.upVotes else 0
+	local var12 = if var9 then var9.downVotes else 0
+	
+	return dataHydrationModule.Game.VotesUtils.getRatingDisplayText({
+		upVotes = var11,
+		downVotes = var12,
+		rating = dataHydrationModule.Game.VotesUtils.calculateRating(var11, var12)
+	}, p10), var10
 end
 
 local _ = function(p8, p9, p10, p11)
@@ -444,47 +458,53 @@ local t_1 = {
 	badge = getDataHydrationField,
 	creator = getDataHydrationField,
 	universe = if fFlagMigrateGameInfoToStore then function(p13, p14, p15, p16, p17)
-		-- upvalues: fFlagSduiGameIconSupport (ref), getUniverseIcon (ref), dataHydrationModule (ref), fFlagSduiHydrationFetchIfMissing (ref), getDataHydrationField (ref), tryGetPathFromDataModule (ref), calculateDerivedFieldValue (ref), dataStatus (ref)
-		if fFlagSduiGameIconSupport and #p14 == 2 then
-			if p14[2] == "icon" then
-				return getUniverseIcon(p15, p16)
-			elseif p14[2] == "largeIcon" then
-				return getUniverseIcon(p15, p16, dataHydrationModule.Game.GameIconSize.Large)
-			elseif not fFlagSduiHydrationFetchIfMissing or not p17 then
-				return getDataHydrationField(p13, p14, p15, p16, p17)
-			end
-			local var14, var15
-			local gameInfoStore = dataHydrationModule.Game.getGameInfoStore(false)
-			local gameInfo, gameInfo_1 = gameInfoStore.getGameInfo(p15)
-			local var16 = gameInfo.data(p16)
-			local var17 = gameInfo.status(p16)
-			
-			if var16 == nil then
-				var14 = false
-				var15 = nil
-			else
-				local var18, var19 = tryGetPathFromDataModule(var16, p14, 2)
+		-- upvalues: fFlagSduiGameIconSupport (ref), getUniverseIcon (ref), dataHydrationModule (ref), getUniverseVoteRatingText (ref), fFlagSduiSupportRatingNoPercent (ref), fFlagSduiHydrationFetchIfMissing (ref), getDataHydrationField (ref), tryGetPathFromDataModule (ref), calculateDerivedFieldValue (ref), dataStatus (ref)
+		if #p14 == 2 then
+			if fFlagSduiGameIconSupport then
+				if p14[2] == "icon" then
+					return getUniverseIcon(p15, p16)
+				elseif p14[2] == "largeIcon" then
+					return getUniverseIcon(p15, p16, dataHydrationModule.Game.GameIconSize.Large)
+				elseif p14[2] == "rating_text_formatted_brief" then
+					return getUniverseVoteRatingText(p15, p16)
+				elseif fFlagSduiSupportRatingNoPercent and p14[2] == "rating_text_no_percent" then
+					return getUniverseVoteRatingText(p15, p16, true)
+				elseif not fFlagSduiHydrationFetchIfMissing or not p17 then
+					return getDataHydrationField(p13, p14, p15, p16, p17)
+				end
+				local var14, var15
+				local gameInfoStore = dataHydrationModule.Game.getGameInfoStore(false)
+				local gameInfo, gameInfo_1 = gameInfoStore.getGameInfo(p15)
+				local var16 = gameInfo.data(p16)
+				local var17 = gameInfo.status(p16)
 				
-				if var18 then
-					var14 = true
-					var15 = var19
-				elseif #p14 == 2 then
-					local var20 = calculateDerivedFieldValue(p13, p14[2], var16, p16)
-					var14 = var20 ~= nil
-					var15 = var20
-				else
+				if var16 == nil then
 					var14 = false
 					var15 = nil
+				else
+					local var18, var19 = tryGetPathFromDataModule(var16, p14, 2)
+					
+					if var18 then
+						var14 = true
+						var15 = var19
+					elseif #p14 == 2 then
+						local var20 = calculateDerivedFieldValue(p13, p14[2], var16, p16)
+						var14 = var20 ~= nil
+						var15 = var20
+					else
+						var14 = false
+						var15 = nil
+					end
 				end
+				if var14 then
+					return var15, var17
+				elseif gameInfo_1 then
+					gameInfoStore.getAndFetchGameInfo(p15)
+					
+					return nil, dataStatus.NotReady
+				end
+				return nil, var17
 			end
-			if var14 then
-				return var15, var17
-			elseif gameInfo_1 then
-				gameInfoStore.getAndFetchGameInfo(p15)
-				
-				return nil, dataStatus.NotReady
-			end
-			return nil, var17
 		end
 	end else getDataHydrationField,
 	ageRecommendation = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,

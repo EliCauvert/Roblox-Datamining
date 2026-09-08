@@ -3,7 +3,7 @@ local parent = momentsCreation.Parent
 local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 local getMusicStoreModule = require(momentsCreation.Stores.GetMusicStore)
-local _ = require(momentsCreation.Stores.createMusicStore)
+local _ = require(momentsCreation.Types.Music)
 
 return function(p1)
 	-- upvalues: getMusicStoreModule (ref), reactModule (ref), signalsModule (ref)

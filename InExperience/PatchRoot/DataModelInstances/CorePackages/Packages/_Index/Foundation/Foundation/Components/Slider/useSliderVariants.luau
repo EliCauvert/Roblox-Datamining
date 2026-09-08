@@ -5,19 +5,24 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local _ = require(foundation.Components.Types)
+local flagsModule = require(foundation.Utility.Flags)
 
 local function variantsFactory(p1)
-	-- upvalues: sliderVariantModule (ref), inputSizeModule (ref)
+	-- upvalues: flagsModule (ref), sliderVariantModule (ref), inputSizeModule (ref)
 	return {
 		common = {
 			bar = {
-				tag = "position-center-center anchor-center-center size-full-100 radius-small"
+				tag = if flagsModule.FoundationSliderBeta then "position-center-center anchor-center-center radius-circle" else "position-center-center anchor-center-center size-full-100 radius-small"
 			},
-			fill = { tag = "radius-small" }
+			fill = {
+				tag = if flagsModule.FoundationSliderBeta then "radius-circle" else "radius-small"
+			}
 		},
 		variants = {
 			[sliderVariantModule.Emphasis] = {
-				bar = { tag = "bg-shift-400" },
+				bar = {
+					tag = if flagsModule.FoundationSliderBeta then "bg-shift-200" else "bg-shift-400"
+				},
 				fill = { tag = "bg-emphasis" },
 				knob = {
 					hasShadow = true,
@@ -26,12 +31,19 @@ local function variantsFactory(p1)
 				}
 			},
 			[sliderVariantModule.Standard] = {
-				bar = { tag = "bg-shift-400" },
+				bar = {
+					tag = if flagsModule.FoundationSliderBeta then "bg-shift-200" else "bg-shift-400"
+				},
 				fill = { tag = "bg-system-contrast" },
 				knob = {
-					hasShadow = false,
 					style = p1.Color.System.Contrast,
-					dragStyle = p1.Color.System.Contrast
+					dragStyle = p1.Color.System.Contrast,
+					stroke = if flagsModule.FoundationSliderBeta then {
+						Color = p1.Color.Stroke.Default.Color3,
+						Transparency = p1.Color.Stroke.Default.Transparency,
+						Thickness = p1.Stroke.Standard
+					} else nil,
+					hasShadow = if flagsModule.FoundationSliderBeta then true else false
 				}
 			},
 			[sliderVariantModule.Utility] = {
@@ -48,17 +60,47 @@ local function variantsFactory(p1)
 			}
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = { hitbox = { height = p1.Size.Size_300 } },
-			[inputSizeModule.Small] = { hitbox = { height = p1.Size.Size_400 } },
-			[inputSizeModule.Medium] = { hitbox = { height = p1.Size.Size_500 } },
-			[inputSizeModule.Large] = { hitbox = { height = p1.Size.Size_700 } }
+			[inputSizeModule.XSmall] = {
+				bar = if flagsModule.FoundationSliderBeta then { height = p1.Size.Size_100 } else nil,
+				hitbox = if flagsModule.FoundationSliderBeta then nil else { height = p1.Size.Size_300 }
+			},
+			[inputSizeModule.Small] = {
+				bar = if flagsModule.FoundationSliderBeta then { height = p1.Size.Size_150 } else nil,
+				hitbox = if flagsModule.FoundationSliderBeta then nil else { height = p1.Size.Size_400 }
+			},
+			[inputSizeModule.Medium] = {
+				bar = if flagsModule.FoundationSliderBeta then { height = p1.Size.Size_200 } else nil,
+				hitbox = if flagsModule.FoundationSliderBeta then nil else { height = p1.Size.Size_500 }
+			},
+			[inputSizeModule.Large] = {
+				bar = if flagsModule.FoundationSliderBeta then { height = p1.Size.Size_250 } else nil,
+				hitbox = if flagsModule.FoundationSliderBeta then nil else { height = p1.Size.Size_700 }
+			}
+		},
+		orientation = {
+			[true] = {
+				selectionGroup = {
+					SelectionBehaviorLeft = Enum.SelectionBehavior.Escape,
+					SelectionBehaviorRight = Enum.SelectionBehavior.Escape,
+					SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
+					SelectionBehaviorDown = Enum.SelectionBehavior.Stop
+				}
+			},
+			[false] = {
+				selectionGroup = {
+					SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
+					SelectionBehaviorRight = Enum.SelectionBehavior.Stop,
+					SelectionBehaviorUp = Enum.SelectionBehavior.Escape,
+					SelectionBehaviorDown = Enum.SelectionBehavior.Escape
+				}
+			}
 		}
 	}
 end
 
-return function(p1, p2, p3)
+return function(p1, p2, p3, p4)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local slider = variantsContextModule.useVariants("Slider", variantsFactory, p1)
 	
-	return composeStyleVariantModule(slider.common, slider.variants[p3], slider.sizes[p2])
+	return composeStyleVariantModule(slider.common, slider.variants[p3], slider.sizes[p2], slider.orientation[p4])
 end

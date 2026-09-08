@@ -1,9 +1,8 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local tModule = require(parent.t)
+﻿local tModule = require(script:FindFirstAncestor("AppBlox").Parent.t)
 
 return tModule.map(tModule.string, tModule.strictInterface({
 	portraitLayoutOrder = tModule.integer,
-	portraitZIndex = if require(parent.SharedFlags).FFlagLuaAppFixEdpRecommendedCarouselHoverZIndex then tModule.optional(tModule.integer) else nil,
+	portraitZIndex = tModule.optional(tModule.integer),
 	landscapeLayoutOrder = tModule.integer,
 	landscapePosition = require(script.Parent.ContentPosition).isEnumValue,
 	renderComponent = tModule.callback,

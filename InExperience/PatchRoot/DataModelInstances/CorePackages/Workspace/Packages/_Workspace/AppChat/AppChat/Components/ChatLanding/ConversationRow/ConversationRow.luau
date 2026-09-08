@@ -5,6 +5,7 @@ local foundationModule = require(parent.Foundation)
 local domLocatorsModule = require(appChat.Utils.DomLocators)
 local squadsModule = require(parent.Squads)
 local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local fFlagAppChatExtendConversationListRowDividersModule = require(appChat.Flags.FFlagAppChatExtendConversationListRowDividers)
 local fFlagAppChatRemoveConversationListDividerModule = require(appChat.Flags.FFlagAppChatRemoveConversationListDivider)
 local conversationFacePileModule = require(appChat.Components.Cells.ConversationFacePile)
 local useConversationRowPresentationModule = require(script.Parent.useConversationRowPresentation)
@@ -14,12 +15,13 @@ local squadJoinButton = squadsModule.SquadJoinButton
 local var1 = reactModule.memo(conversationFacePileModule)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useConversationRowPresentationModule (ref), foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), var1 (ref), squadComponentAccessWrapper (ref), squadJoinButton (ref), squadButtonSourceEnum (ref), domLocatorsModule (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
+	-- upvalues: useConversationRowPresentationModule (ref), foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), fFlagAppChatExtendConversationListRowDividersModule (ref), var1 (ref), squadComponentAccessWrapper (ref), squadJoinButton (ref), squadButtonSourceEnum (ref), domLocatorsModule (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
 	local var2 = useConversationRowPresentationModule({
 		conversationId = p1.conversationId,
 		entryHeight = p1.entryHeight,
 		isSquadEnabled = p1.isSquadEnabled,
 		isWideMode = p1.isWideMode,
+		showBackground = p1.showBackground,
 		onActivated = p1.onActivated,
 		onSquadJoinButtonActivated = p1.onSquadJoinButtonActivated,
 		fireImpressionEvent = p1.fireImpressionEvent,
@@ -33,7 +35,7 @@ return reactModule.memo(function(p1)
 	local var4
 	local uDim = UDim.new(0, var2.pagePaddingLeft)
 	local uDim_1 = UDim.new(0, var2.pagePaddingRight)
-	local var5 = p1.showBackground ~= false
+	local showBackground = var2.showBackground
 	local createElement = reactModule.createElement
 	local view = foundationModule.View
 	local t = {
@@ -47,12 +49,12 @@ return reactModule.memo(function(p1)
 	local view_1 = foundationModule.View
 	local t_2 = {
 		Name = "cell",
-		tag = { ["size-full"] = true, ["bg-surface-0"] = var5 },
-		backgroundStyle = if var5 then nil else var3.Color.None,
-		Size = UDim2.fromScale(1, 1),
+		Size = if fFlagAppChatExtendConversationListRowDividersModule then nil else UDim2.fromScale(1, 1),
+		tag = { ["size-full"] = true, ["bg-surface-0"] = showBackground },
+		backgroundStyle = if showBackground then nil else var3.Color.None,
 		selection = { Selectable = true },
 		onActivated = var2.onRowActivated,
-		stateLayer = if var5 then {
+		stateLayer = if showBackground then {
 			affordance = foundationModule.Enums.StateLayerAffordance.Background
 		} else nil,
 		ref = var2.rowRef
@@ -66,8 +68,11 @@ return reactModule.memo(function(p1)
 	local view_2 = foundationModule.View
 	local t_4 = {
 		tag = "row align-y-center gap-small size-full",
-		Size = UDim2.fromScale(1, 1),
-		padding = { left = uDim, right = uDim_1 }
+		Size = if fFlagAppChatExtendConversationListRowDividersModule then nil else UDim2.fromScale(1, 1),
+		padding = {
+			left = uDim,
+			right = if fFlagAppChatExtendConversationListRowDividersModule then nil else uDim_1
+		}
 	}
 	local t_5 = {
 		avatar = reactModule.createElement(foundationModule.View, { tag = "size-1000-1000", LayoutOrder = 0 }, {
@@ -93,7 +98,8 @@ return reactModule.memo(function(p1)
 	local t_8 = {
 		tag = "row align-y-center fill gap-small size-full-0 clip",
 		Name = "mainContent",
-		LayoutOrder = 1
+		LayoutOrder = 1,
+		padding = if fFlagAppChatExtendConversationListRowDividersModule then { right = uDim_1 } else nil
 	}
 	local t_9 = {
 		info = reactModule.createElement(foundationModule.View, {

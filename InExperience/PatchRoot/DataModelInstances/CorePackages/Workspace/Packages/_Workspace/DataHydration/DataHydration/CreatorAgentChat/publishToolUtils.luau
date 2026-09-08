@@ -1,8 +1,6 @@
 ﻿local httpService = game:GetService("HttpService")
-local sharedFlagsModule = require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags)
 local debugModule = require(script.Parent.debug)
 local _ = require(script.Parent.types)
-local fFlagCreatorAgentChatParseDirectPublishVersion = sharedFlagsModule.FFlagCreatorAgentChatParseDirectPublishVersion
 local list = {
 	"studio_save_and_publish",
 	"cas_save_and_publish",
@@ -168,8 +166,8 @@ local _ = function(value)
 	return if not (not ok or typeof(status) ~= "table") then if status.type == "text" and typeof(status.text) == "string" then status else nil else nil
 end
 
-local function getToolCallPublishedVersionNumber(p4)
-	-- upvalues: httpService (ref), fFlagCreatorAgentChatParseDirectPublishVersion (ref)
+local function getToolCallPublishedVersionNumber(p4, p5)
+	-- upvalues: httpService (ref)
 	local content = p4.content
 	
 	if typeof(content) ~= "table" then
@@ -181,7 +179,7 @@ local function getToolCallPublishedVersionNumber(p4)
 		if typeof(var4) == "string" then
 			local ok, status = pcall(httpService.JSONDecode, httpService, var4)
 			local var5 = if not ok or typeof(status) ~= "table" then if status.type == "text" and typeof(status.text) == "string" then status else nil else nil
-			ok = if var5 ~= nil then if fFlagCreatorAgentChatParseDirectPublishVersion then var4 else nil else var5.text
+			ok = if var5 ~= nil then if p5 then var4 else nil else var5.text
 			
 			if ok ~= nil then
 				local match = string.match(ok, "^%s*Saved as version%s+(%d+)%s*%.?%s*$")
@@ -200,24 +198,18 @@ return {
 	PUBLISH_PLACE_TOOL_IDENTIFIERS = list,
 	includesPublishPlaceTool = includesPublishPlaceTool,
 	toolCallMatchesPublishPlace = toolCallMatchesPublishPlace,
-	getLatestSuccessfulResult = function(p5)
-		-- upvalues: isSaveAndPublishToolCall (ref), getToolCallPublishedVersionNumber (ref), fFlagCreatorAgentChatParseDirectPublishVersion (ref), debugModule (ref)
-		if p5 == nil then
+	getLatestSuccessfulResult = function(p6, _)
+		-- upvalues: isSaveAndPublishToolCall (ref), getToolCallPublishedVersionNumber (ref), debugModule (ref)
+		if p6 == nil then
 			return nil
 		end
 		local t = nil
 		
-		for i, v in p5.toolCalls do
+		for i, v in p6.toolCalls do
 			if v.status == "completed" and isSaveAndPublishToolCall(v) then
-				local var6 = getToolCallPublishedVersionNumber(v)
+				local var6 = getToolCallPublishedVersionNumber(v, true)
 				
-				if var6 ~= nil then
-					t = {
-						toolCallId = i,
-						publishedVersionNumber = var6,
-						rollbackTargetVersionNumber = if var6 > 1 then var6 - 1 else nil
-					}
-				elseif fFlagCreatorAgentChatParseDirectPublishVersion then
+				if var6 == nil then
 					debugModule.log("warn", "completed save_and_publish result is not parseable", {
 						toolCallId = v.toolCallId,
 						title = v.title,
@@ -225,6 +217,12 @@ return {
 						contentBlockCount = if typeof(v.content) == "table" then #v.content else 0,
 						hasRawOutput = v.rawOutput ~= nil
 					})
+				else
+					t = {
+						toolCallId = i,
+						publishedVersionNumber = var6,
+						rollbackTargetVersionNumber = if var6 > 1 then var6 - 1 else nil
+					}
 				end
 			end
 		end

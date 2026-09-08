@@ -55,6 +55,7 @@
 	SponsoredTooltip = "SponsoredTooltip",
 	VngContactInfoFormWebviewPopup = "VngContactInfoFormWebviewPopup",
 	NewAppAvailableModal = "NewAppAvailableModal",
+	AccountIneligibleLoginModal = "AccountIneligibleLoginModal",
 	AccountSwitchingErrorOverlay = "AccountSwitchingErrorOverlay",
 	CloseOnlyInteractiveAlert = "CloseOnlyInteractiveAlert",
 	ConfirmationDialog = "ConfirmationDialog",

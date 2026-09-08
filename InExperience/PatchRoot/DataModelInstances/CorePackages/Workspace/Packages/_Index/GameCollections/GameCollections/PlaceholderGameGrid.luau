@@ -12,7 +12,6 @@ local useGetGameTileHeightModule = require(gameCollections.useGetGameTileHeight)
 local useGameCollectionLayoutParamsModule = require(gameCollections.useGameCollectionLayoutParams)
 local getGameTileCollectionItemSize = require(parent.GameTile).getGameTileCollectionItemSize
 local fFlagLuaAppCompositionAlways = require(parent.SharedFlags).FFlagLuaAppCompositionAlways
-local fFlagLuaAppSearchPlaceholderGrid = require(parent.SharedFlags).FFlagLuaAppSearchPlaceholderGrid
 local t = {}
 
 local function renderItem(_, _, _, _)
@@ -20,7 +19,7 @@ local function renderItem(_, _, _, _)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useAppPolicy (ref), usePreferredInput (ref), responsiveModule (ref), fFlagLuaAppCompositionAlways (ref), getGameTileCollectionItemSize (ref), reactModule (ref), useGameCollectionLayoutParamsModule (ref), useCollectionLayout (ref), gameTileConstants (ref), useGetGameTileHeightModule (ref), t (ref), collectionGrid (ref), fFlagLuaAppSearchPlaceholderGrid (ref), renderItem (ref)
+	-- upvalues: useAppPolicy (ref), usePreferredInput (ref), responsiveModule (ref), fFlagLuaAppCompositionAlways (ref), getGameTileCollectionItemSize (ref), reactModule (ref), useGameCollectionLayoutParamsModule (ref), useCollectionLayout (ref), gameTileConstants (ref), useGetGameTileHeightModule (ref), t (ref), collectionGrid (ref), renderItem (ref)
 	local var1 = useAppPolicy(function(p2)
 		return p2.useGridPageLayout()
 	end)
@@ -59,7 +58,7 @@ return reactModule.memo(function(p1)
 			hideHeaderButton = true,
 			collectionItemSize = if fFlagLuaAppCompositionAlways_1 then var3 else nil,
 			title = if clampedValue > 0 then p1.title else nil,
-			headerComponent = if fFlagLuaAppSearchPlaceholderGrid then p1.headerComponent else nil,
+			headerComponent = p1.headerComponent,
 			containerRef = var5,
 			verticalScrollingFrameRef = p1.verticalScrollingFrameRef,
 			items = reactModule.useMemo(function()

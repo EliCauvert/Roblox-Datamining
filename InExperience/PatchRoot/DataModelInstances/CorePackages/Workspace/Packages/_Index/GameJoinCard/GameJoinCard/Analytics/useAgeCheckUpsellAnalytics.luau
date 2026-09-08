@@ -1,6 +1,7 @@
 ﻿local parent = script:FindFirstAncestor("GameJoinCard").Parent
 local reactModule = require(parent.React)
 local dependencyArray = require(parent.RoactUtils).Hooks.dependencyArray
+local fFlagGameJoinCardAnalyticsCardId = require(parent.SharedFlags).FFlagGameJoinCardAnalyticsCardId
 local gameJoinCardButtonAction = require(script.Parent.AnalyticsConstants).GameJoinCardButtonAction
 local useGameJoinCardAnalyticsModule = require(script.Parent.useGameJoinCardAnalytics)
 
@@ -15,20 +16,22 @@ return {
 		end, { var1 })
 	end,
 	useAgeCheckPressLogger = function(p1)
-		-- upvalues: reactModule (ref), useGameJoinCardAnalyticsModule (ref), gameJoinCardButtonAction (ref), dependencyArray (ref)
+		-- upvalues: reactModule (ref), useGameJoinCardAnalyticsModule (ref), gameJoinCardButtonAction (ref), fFlagGameJoinCardAnalyticsCardId (ref), dependencyArray (ref)
 		local userId = p1.userId
 		local absolutePosition = p1.absolutePosition
+		local joinGameCardId = p1.joinGameCardId
 		local joinAgeCheckUpsellFlow = p1.joinAgeCheckUpsellFlow
 		local var1 = if p1.universeId ~= "" then nil else p1.universeId
 		
 		return reactModule.useCallback(function()
-			-- upvalues: useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), userId (ref), var1 (ref), absolutePosition (ref), joinAgeCheckUpsellFlow (ref)
+			-- upvalues: useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), userId (ref), var1 (ref), absolutePosition (ref), fFlagGameJoinCardAnalyticsCardId (copy), joinGameCardId (ref), joinAgeCheckUpsellFlow (ref)
 			useGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(gameJoinCardButtonAction.AgeCheckUnlock, {
 				friendId = userId,
 				universeId = var1,
-				absolutePosition = absolutePosition
+				absolutePosition = absolutePosition,
+				joinGameCardId = if fFlagGameJoinCardAnalyticsCardId then joinGameCardId else nil
 			})
 			joinAgeCheckUpsellFlow()
-		end, dependencyArray(userId, var1, absolutePosition, joinAgeCheckUpsellFlow))
+		end, if fFlagGameJoinCardAnalyticsCardId then dependencyArray(userId, var1, absolutePosition, joinGameCardId, joinAgeCheckUpsellFlow) else dependencyArray(userId, var1, absolutePosition, joinAgeCheckUpsellFlow))
 	end
 }

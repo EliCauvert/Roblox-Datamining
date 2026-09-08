@@ -178,7 +178,8 @@ return function(value)
 					openPreviewView = var25,
 					model = var20,
 					isLoading = var20 == nil,
-					useFullBodyCameraSettings = if getFFlagSingleUploadMakeupSupportModule() then not var17 else true
+					useFullBodyCameraSettings = if getFFlagSingleUploadMakeupSupportModule() then not var17 else true,
+					isMakeupPreview = var17
 				}),
 				DescriptionInput = reactModule.createElement(labeledTextBoxModule, {
 					LayoutOrder = 2,
@@ -207,6 +208,7 @@ return function(value)
 		screenSize = value.screenSize,
 		showingPreviewView = var3,
 		closePreviewView = var26,
+		isMakeupPreview = var17,
 		asset = var20,
 		nameLabel = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Name"),
 		defaultName = var5,

@@ -8,6 +8,7 @@ local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local tModule = require(corePackagesService.Packages.t)
 local images = UIBloxModule.App.ImageSet.Images
 local constantsModule = require(script.Parent.Parent.Parent.Constants)
+local makeupPreviewUtilsModule = require(script.Parent.Parent.Parent.MakeupPreviewUtils)
 local characterUtility = require(corePackagesService.Packages.Thumbnailing).CharacterUtility
 local cameraUtility = require(corePackagesService.Packages.Thumbnailing).CameraUtility
 local cFrameUtility = require(corePackagesService.Packages.Thumbnailing).CFrameUtility
@@ -26,7 +27,8 @@ objectViewport.validateProps = tModule.strictInterface({
 	useFullBodyCameraSettings = tModule.optional(tModule.boolean),
 	openPreviewView = tModule.optional(tModule.callback),
 	LayoutOrder = tModule.optional(tModule.number),
-	isHumanoidModel = tModule.optional(tModule.boolean)
+	isHumanoidModel = tModule.optional(tModule.boolean),
+	isMakeupPreview = tModule.optional(tModule.boolean)
 })
 
 function objectViewport.createCamera(p1)
@@ -55,33 +57,42 @@ local function _(p1, p2)
 end
 
 function objectViewport.setupViewportForAsset(value)
+	-- upvalues: makeupPreviewUtilsModule (ref)
 	if not value.props.model then return end
-	local modelCFrame, extentsSize
-	local var1 = value.props.model:Clone()
-	var1.Parent = value.worldModelRef:getValue()
+	local var1, var2
+	local var3 = value.props.model:Clone()
+	var3.Parent = value.worldModelRef:getValue()
 	local _ = nil
 	local _ = nil
 	
-	if var1:IsA("Model") then
-		var1:MoveTo(Vector3.new(0, 0, 0))
-		modelCFrame = var1:GetModelCFrame()
-		extentsSize = var1:GetExtentsSize()
+	if var3:IsA("Model") then
+		var3:MoveTo(Vector3.new(0, 0, 0))
+		local var4 = nil
+		local var5 = nil
+		
+		if value.props.isMakeupPreview then
+			local headPreviewCameraData, headPreviewCameraData_1 = makeupPreviewUtilsModule.getHeadPreviewCameraData(var3)
+			var4 = headPreviewCameraData
+			var5 = headPreviewCameraData_1
+		end
+		var1 = var4 or var3:GetModelCFrame()
+		var2 = var5 or var3:GetExtentsSize()
 	else
-		local meshPart = var1:FindFirstChildWhichIsA("MeshPart", true)
+		local meshPart = var3:FindFirstChildWhichIsA("MeshPart", true)
 		
 		if not meshPart then return end
 		meshPart.CFrame = CFrame.new(0, 0, 0)
-		modelCFrame = meshPart.CFrame
-		extentsSize = meshPart.Size
+		var1 = meshPart.CFrame
+		var2 = meshPart.Size
 	end
-	local lookVector = modelCFrame.lookVector
-	local var2 = value:createCamera()
-	local var3 = if value.props.fieldOfView then value.props.fieldOfView else 30
-	local z = extentsSize.Z
+	local lookVector = var1.lookVector
+	local var6 = value:createCamera()
+	local var7 = if value.props.fieldOfView then value.props.fieldOfView else 30
+	local z = var2.Z
 	local vector2 = Vector2.new(5, 20)
-	var2.CFrame = CFrame.new(modelCFrame.Position + CFrame.fromAxisAngle(Vector3.new(0, 1, 0), math.rad(vector2.Y)):VectorToWorldSpace(CFrame.fromAxisAngle(Vector3.new(1, 0, 0), math.rad(vector2.X)):VectorToWorldSpace(lookVector)) * (math.max(extentsSize.X, extentsSize.Y, z) / 2 * (1 / math.tan(math.rad(var3) / 2)) + z / 2), modelCFrame.Position)
-	var2.FieldOfView = var3
-	value.updateCamera(var2)
+	var6.CFrame = CFrame.new(var1.Position + CFrame.fromAxisAngle(Vector3.new(0, 1, 0), math.rad(vector2.Y)):VectorToWorldSpace(CFrame.fromAxisAngle(Vector3.new(1, 0, 0), math.rad(vector2.X)):VectorToWorldSpace(lookVector)) * (math.max(var2.X, var2.Y, z) / 2 * (1 / math.tan(math.rad(var7) / 2)) + z / 2), var1.Position)
+	var6.FieldOfView = var7
+	value.updateCamera(var6)
 end
 
 function objectViewport.setupViewport(value)

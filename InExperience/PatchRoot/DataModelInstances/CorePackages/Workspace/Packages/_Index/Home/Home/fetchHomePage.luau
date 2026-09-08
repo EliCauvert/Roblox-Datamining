@@ -13,7 +13,12 @@ local homeConstantsModule = require(home.HomeConstants)
 local homePageSessionModule = require(home.HomePageSession)
 local getHomePageUrlModule = require(home.getHomePageUrl)
 local buildHomePageRequestModule = require(home.buildHomePageRequest)
-local fFlagSduiClientTemplateCache = require(parent.SharedFlags).FFlagSduiClientTemplateCache
+local measureHomeCollectionLayoutModule = require(home.measureHomeCollectionLayout)
+local writeHomePageSduiPrefetchDescriptorModule = require(home.writeHomePageSduiPrefetchDescriptor)
+local prefetchProtocol = require(parent.PrefetchProtocol).PrefetchProtocol
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagSduiClientTemplateCache = sharedFlagsModule.FFlagSduiClientTemplateCache
+local fFlagEnableHomePageSduiPrefetch = sharedFlagsModule.FFlagEnableHomePageSduiPrefetch
 
 local function _(p1, p2)
 	-- upvalues: homeConstantsModule (ref)
@@ -40,7 +45,7 @@ local function commitHomeSession(_, p1)
 end
 
 local function fetchHomePage(p1, p2)
-	-- upvalues: homeConstantsModule (ref), getSduiApiStore (ref), homePageSessionModule (ref), parent (ref), sduiCapabilities (ref), sduiResponseType (ref), getHomePageUrlModule (ref), appPage (ref), sduiApiStorePostConfigContentType (ref), buildHomePageRequestModule (ref), fFlagSduiClientTemplateCache (ref), getSduiTemplateStore (ref), sduiSharedUtilitiesModule (ref), commitHomeSession (ref), fetchHomePage (ref)
+	-- upvalues: homeConstantsModule (ref), getSduiApiStore (ref), fFlagEnableHomePageSduiPrefetch (ref), homePageSessionModule (ref), prefetchProtocol (ref), parent (ref), sduiCapabilities (ref), measureHomeCollectionLayoutModule (ref), sduiResponseType (ref), getHomePageUrlModule (ref), appPage (ref), sduiApiStorePostConfigContentType (ref), buildHomePageRequestModule (ref), fFlagSduiClientTemplateCache (ref), getSduiTemplateStore (ref), sduiSharedUtilitiesModule (ref), commitHomeSession (ref), writeHomePageSduiPrefetchDescriptorModule (ref), fetchHomePage (ref)
 	local configKey = homeConstantsModule.ConfigKey
 	local var1 = getSduiApiStore()
 	local var2 = if p2 then p2.forceRefresh else nil
@@ -50,10 +55,22 @@ local function fetchHomePage(p1, p2)
 	var4, data = var1.getData(configKey)
 	
 	if (var2 or data) and not var1.isInFlight(configKey) then
-		homePageSessionModule:Refresh()
+		local var6 = false
+		
+		if fFlagEnableHomePageSduiPrefetch and homePageSessionModule:GetCommitted() == nil then
+			local var7 = prefetchProtocol.default:popPendingPrefetchGuid()
+			
+			if var7 ~= nil then
+				var6 = homePageSessionModule:Adopt(var7)
+			end
+		end
+		if not var6 then
+			homePageSessionModule:Refresh()
+		end
 	end
 	local serviceContractsProtoModule = require(parent.ServiceContractsProto)
 	local homePage = serviceContractsProtoModule.apppageplatform.home.home_page
+	local enabledCapabilityNumbers = sduiCapabilities.getEnabledCapabilityNumbers({ "CAPABILITY_SUPPORTS_HYDRATION_CLIENT_HINTS" })
 	
 	return var1.fetchIfNeeded({
 		enableStreaming = false,
@@ -72,14 +89,20 @@ local function fetchHomePage(p1, p2)
 				requestIntent = var5,
 				contextualFeatures = var3,
 				cachedRobloxComponentToTemplateId = if fFlagSduiClientTemplateCache then getSduiTemplateStore().getCachedRobloxComponentToTemplateId(appPage.Home) else nil,
-				clientCapabilities = serviceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities.new({
-					enabled_capabilities = sduiCapabilities.getEnabledCapabilityNumbers({ "CAPABILITY_SUPPORTS_HYDRATION_CLIENT_HINTS" })
-				})
+				clientCapabilities = serviceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities.new({ enabled_capabilities = enabledCapabilityNumbers }),
+				collectionLayout = if fFlagEnableHomePageSduiPrefetch then measureHomeCollectionLayoutModule() else nil
 			})
 		},
 		enableTemplateCache = if fFlagSduiClientTemplateCache then true else nil,
 		mergeStrategy = sduiSharedUtilitiesModule.streamingFeedMergeStrategy,
-		onSuccess = commitHomeSession,
+		onSuccess = function(p3, p4)
+			-- upvalues: commitHomeSession (copy), fFlagEnableHomePageSduiPrefetch (copy), writeHomePageSduiPrefetchDescriptorModule (copy), enabledCapabilityNumbers (ref)
+			commitHomeSession(p3, p4)
+			
+			if fFlagEnableHomePageSduiPrefetch then
+				writeHomePageSduiPrefetchDescriptorModule(enabledCapabilityNumbers)
+			end
+		end,
 		refresh = function(p3)
 			-- upvalues: fetchHomePage (copy), var3 (ref)
 			return fetchHomePage(p3, { forceRefresh = true, contextualFeatures = var3 })

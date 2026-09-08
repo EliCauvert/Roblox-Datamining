@@ -64,16 +64,15 @@ function avatarPartViewport.addAccessoryToViewport(p1)
 end
 
 function avatarPartViewport.addMakeupDecalToViewport(p1)
-	-- upvalues: makeupPreviewUtilsModule (ref), cameraUtility (ref)
+	-- upvalues: makeupPreviewUtilsModule (ref)
 	local var1 = makeupPreviewUtilsModule.createMakeupThumbnailPreview(p1.props.asset, p1.props.assetType)
 	
-	if var1 then
-		var1.Parent = p1.modelRef:getValue()
-		local var2 = p1:createViewportCamera()
-		cameraUtility.SetupHeadCamera(var1, var2)
+	if not var1 then return end
+	var1.Parent = p1.modelRef:getValue()
+	local var2 = p1:createViewportCamera()
+	
+	if makeupPreviewUtilsModule.setupMakeupThumbnailCamera(var1, var2, p1.props.assetType) then
 		p1.updateCamera(var2)
-		
-		return
 	end
 end
 

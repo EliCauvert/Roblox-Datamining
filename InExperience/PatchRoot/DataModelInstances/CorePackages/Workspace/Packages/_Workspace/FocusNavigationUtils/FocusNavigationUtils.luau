@@ -21,6 +21,7 @@
 	FocusRoot = require(script.FocusRoot),
 	getFirstFocusableDescendant = require(script.getFirstFocusableDescendant),
 	useLastInputMode = require(script.useLastInputMode),
+	useGamepadCursorEnabled = require(script.useGamepadCursorEnabled),
 	useLastInputMethod = require(script.useLastInputMethod),
 	useButtonHold = require(script.useButtonHold),
 	ButtonHoldStateEnum = require(script.ButtonHoldStateEnum)

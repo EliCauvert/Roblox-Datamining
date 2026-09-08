@@ -1,4 +1,5 @@
 ﻿return {
 	FilterPlayWithReward = "filterPlayWithReward",
-	IsTenFoot = "isTenFoot"
+	IsTenFoot = "isTenFoot",
+	ContainerWidth = "containerWidth"
 }

@@ -17,9 +17,13 @@ local getCaptureVideoContentModule = require(momentsCreation.Capture.getCaptureV
 local useCreationMusicSyncModule = require(momentsCreation.Hooks.useCreationMusicSync)
 local getFFlagMomentsScreenshotMusicScrubberModule = require(momentsCreation.Flags.GetFFlagMomentsScreenshotMusicScrubber)
 local getFFlagMomentsCreationGalleryPreviewSwapFixModule = require(momentsCreation.Flags.GetFFlagMomentsCreationGalleryPreviewSwapFix)
+local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
+local getTtsDuckScalarModule = require(momentsCreation.Audio.getTtsDuckScalar)
+local fadeVolumeModule = require(momentsCreation.Audio.fadeVolume)
+local _ = require(momentsCreation.Types.CreationFlowTypes)
 
 local function VideoPreviewSurface(p1)
-	-- upvalues: reactModule (ref), signalsModule (ref), useCreationMusicSyncModule (ref), getCaptureVideoContentModule (ref), runService (ref), view (ref), getFitSize (ref), getCropSize (ref)
+	-- upvalues: reactModule (ref), signalsModule (ref), useCreationMusicSyncModule (ref), getFFlagMomentsTTSAudioOverlayModule (ref), fadeVolumeModule (ref), getTtsDuckScalarModule (ref), getCaptureVideoContentModule (ref), runService (ref), view (ref), getFitSize (ref), getCropSize (ref)
 	local preview = p1.preview
 	local capture = p1.capture
 	local timeLength = p1.timeLength
@@ -34,14 +38,15 @@ local function VideoPreviewSurface(p1)
 			var7(preview.playback.getRegion(p2))
 		end)
 	end, { preview })
-	local var8 = useCreationMusicSyncModule(preview, if var6 ~= nil then timeLength else math.max(0, var6.endTime - var6.startTime))
+	local var8 = useCreationMusicSyncModule(preview, if var6 ~= nil then timeLength else math.max(0, var6.endTime - var6.startTime), p1.ttsAudio)
 	local audio = var8.audio
 	local music = var8.music
 	local userMuted = var8.userMuted
+	local isDucking = var8.isDucking
 	local var9 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), music (ref), audio (ref)
-		function var23.current()
+		function var26.current()
 			-- upvalues: music (copy), audio (copy)
 			if music ~= nil then
 				audio.timeline.seek(0)
@@ -49,13 +54,23 @@ local function VideoPreviewSurface(p1)
 		end
 	end, { audio.timeline.seek, music })
 	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), music (ref), userMuted (ref)
+		-- upvalues: var1 (ref), getFFlagMomentsTTSAudioOverlayModule (copy), music (ref), userMuted (ref), fadeVolumeModule (copy), isDucking (ref), getTtsDuckScalarModule (copy)
 		local current = var1.current
 		
-		if current ~= nil then
+		if current == nil then return end
+		if getFFlagMomentsTTSAudioOverlayModule then
+			if music == nil and not userMuted then
+				fadeVolumeModule(current, if isDucking then 1 * getTtsDuckScalarModule() else 1)
+				
+				return
+			end
+			fadeVolumeModule(current, 0, true)
+			
+			return
+		else
 			current.Volume = if music == nil and not userMuted then 1 else 0
 		end
-	end, { music, userMuted })
+	end, { music, userMuted, isDucking })
 	reactModule.useEffect(function()
 		-- upvalues: var1 (ref), capture (ref), getCaptureVideoContentModule (copy), preview (ref), timeLength (ref), runService (copy), var9 (ref)
 		local current = var1.current
@@ -177,7 +192,7 @@ local function ScreenshotPreviewSurface(p2)
 	-- upvalues: useCreationMusicSyncModule (ref), constantsModule (ref), reactModule (ref), getFFlagMomentsScreenshotMusicScrubberModule (ref), view (ref), getCaptureContentModule (ref)
 	local preview = p2.preview
 	local capture = p2.capture
-	local var10 = useCreationMusicSyncModule(preview, constantsModule.ScreenshotMusicDuration)
+	local var10 = useCreationMusicSyncModule(preview, constantsModule.ScreenshotMusicDuration, p2.ttsAudio)
 	local music = var10.music
 	local elapsed = var10.audio.timeline.elapsed
 	reactModule.useEffect(function()
@@ -287,12 +302,14 @@ return function(p2)
 			capture = var11,
 			scaleType = p2.scaleType,
 			timeLength = var11.TimeLength or 0,
-			onResolutionChanged = p2.onResolutionChanged
+			onResolutionChanged = p2.onResolutionChanged,
+			ttsAudio = p2.ttsAudio
 		}, p2.children)
 	}) else reactModule.createElement(ScreenshotPreviewSurface, {
 		preview = p2.preview,
 		capture = var11,
 		scaleType = p2.scaleType,
-		onAbsoluteSizeChanged = p2.onAbsoluteSizeChanged
+		onAbsoluteSizeChanged = p2.onAbsoluteSizeChanged,
+		ttsAudio = p2.ttsAudio
 	}, p2.children)
 end

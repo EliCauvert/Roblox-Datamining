@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("SignUpPasswordCopyV2", false)

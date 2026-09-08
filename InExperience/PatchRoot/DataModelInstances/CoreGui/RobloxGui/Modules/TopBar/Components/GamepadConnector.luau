@@ -40,7 +40,7 @@ local coreGuiCommonModule = require(corePackagesService.Workspace.Packages.CoreG
 local fFlagEnableUISelector = coreGuiCommonModule.Flags.FFlagEnableUISelector
 local var5 = if fFlagEnableUISelector then coreGuiCommonModule.Stores.GetUiSelectorSignalStore else nil
 local focusNavigationStore = require(corePackagesService.Workspace.Packages.ExpChat).Stores.GetFocusNavigationStore(false)
-local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
+local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
 local getSideSheetVisibility = require(corePackagesService.Workspace.Packages.InExperienceSideSheet).getSideSheetVisibility
 local var6 = nil
@@ -184,8 +184,8 @@ function t.new()
 	end
 	
 	if fFlagAddTopBarScrimModule then
-		var35, lastInputType = signalsModule.createSignal(t_1._isTopBarFocused())
-		t_1._topBarFocused = var35
+		var36, lastInputType = signalsModule.createSignal(t_1._isTopBarFocused())
+		t_1._topBarFocused = var36
 		t_1._setTopBarFocused = lastInputType
 	end
 	return setmetatable(t_1, t)
@@ -279,7 +279,7 @@ function t:_removeDismissFocusConnections()
 end
 
 function t:_toggleTopbar(p2, p3, p4)
-	-- upvalues: var1 (ref), fFlagEnableConsoleExpControls (ref), PTFBackButtonAlwaysAsButtonBEngineFeature (ref), fFlagEnableUISelector (ref), userInputService (ref), var2 (ref), fFlagEnableSideSheet (ref), fFlagSideSheetFocusNav (ref), getSideSheetVisibility (ref), focusNavigationStore (ref), logGamepadOpenExperienceControlsMenu (ref), fFlagAddNewPlayerListMobileFocusNav (ref), playerListManagerModule (ref)
+	-- upvalues: var1 (ref), fFlagEnableConsoleExpControls (ref), PTFBackButtonAlwaysAsButtonBEngineFeature (ref), fFlagEnableUISelector (ref), userInputService (ref), var2 (ref), isSideSheetEnabledModule (ref), fFlagSideSheetFocusNav (ref), getSideSheetVisibility (ref), focusNavigationStore (ref), logGamepadOpenExperienceControlsMenu (ref), fFlagAddNewPlayerListMobileFocusNav (ref), playerListManagerModule (ref)
 	if not var1 or self:_focusToastNotification(p3) or (fFlagEnableConsoleExpControls or p3 ~= Enum.UserInputState.End) and (not fFlagEnableConsoleExpControls or p3 ~= Enum.UserInputState.Begin) then
 		return Enum.ContextActionResult.Pass
 	elseif not PTFBackButtonAlwaysAsButtonBEngineFeature and fFlagEnableUISelector and not userInputService:GamepadSupports(userInputService:GetLastInputType(), Enum.KeyCode.ButtonSelect) then
@@ -287,7 +287,7 @@ function t:_toggleTopbar(p2, p3, p4)
 	elseif fFlagEnableConsoleExpControls then
 		if var2:integrations().nine_dot == nil then
 			return Enum.ContextActionResult.Pass
-		elseif fFlagEnableSideSheet and fFlagSideSheetFocusNav and getSideSheetVisibility() then
+		elseif isSideSheetEnabledModule and fFlagSideSheetFocusNav and getSideSheetVisibility() then
 			return Enum.ContextActionResult.Pass
 		end
 		local var12 = not (self:_isTopBarFocused() or focusNavigationStore.getChatInputBarFocused(false))

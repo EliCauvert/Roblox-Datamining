@@ -6,134 +6,138 @@ local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local findFriendsFromUserId = require(socialTabsPage.Networking.NetworkingFriends).FindFriendsFromUserId
 local usePageSizeModule = require(socialTabsPage.Hooks.usePageSize)
 
-local function _(p1)
+local function mapPageItemsToFriends(p1)
 	-- upvalues: dashModule (ref)
-	return dashModule.map(p1, function(p2)
+	local t = {}
+	
+	for i, v in dashModule.map(p1, function(p2)
 		return {
 			id = tostring(p2.id),
 			hasVerifiedBadge = p2.hasVerifiedBadge or false
 		}
-	end)
+	end) do
+		local var1 = tonumber(v.id)
+		
+		if var1 ~= nil and var1 > 0 then
+			table.insert(t, v)
+		end
+	end
+	return t
 end
 
-return function(p1)
-	-- upvalues: useDispatch (ref), usePageSizeModule (ref), reactModule (ref), findFriendsFromUserId (ref), dashModule (ref)
-	local var1 = useDispatch()
-	local var2 = usePageSizeModule()
-	local var3 = if p1.skip ~= true then not p1.targetUserId or p1.targetUserId == "" else true
-	local var4, var5 = reactModule.useState({})
-	local var6, var7 = reactModule.useState(not var3)
-	local var8, var9 = reactModule.useState(nil)
-	local var10, var11 = reactModule.useState(nil)
-	local var12 = reactModule.useRef(0)
-	local var13 = reactModule.useRef(false)
-	local var14 = reactModule.useRef(true)
+return function(p2)
+	-- upvalues: useDispatch (ref), usePageSizeModule (ref), reactModule (ref), findFriendsFromUserId (ref), mapPageItemsToFriends (ref)
+	local var2 = useDispatch()
+	local var3 = usePageSizeModule()
+	local var4 = if p2.skip ~= true then not p2.targetUserId or p2.targetUserId == "" else true
+	local var5, var6 = reactModule.useState({})
+	local var7, var8 = reactModule.useState(not var4)
+	local var9, var10 = reactModule.useState(nil)
+	local var11, var12 = reactModule.useState(nil)
+	local var13 = reactModule.useRef(0)
+	local var14 = reactModule.useRef(false)
+	local var15 = reactModule.useRef(true)
 	reactModule.useEffect(function()
-		-- upvalues: var14 (ref)
+		-- upvalues: var15 (ref)
 		return function()
-			-- upvalues: var14 (copy)
-			var14.current = false
+			-- upvalues: var15 (copy)
+			var15.current = false
 		end
 	end, {})
-	local var15 = reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: var7 (ref), var13 (ref), var9 (ref), var1 (ref), findFriendsFromUserId (copy), var2 (ref), var12 (ref), var14 (ref), var11 (ref), dashModule (copy), var5 (ref)
-		local var16 = not p3 or p3 == ""
+	local var16 = reactModule.useCallback(function(p3, p4, p5)
+		-- upvalues: var8 (ref), var14 (ref), var10 (ref), var2 (ref), findFriendsFromUserId (copy), var3 (ref), var13 (ref), var15 (ref), var12 (ref), mapPageItemsToFriends (copy), var6 (ref)
+		local var17 = not p4 or p4 == ""
 		
-		if var16 then
-			var7(true)
+		if var17 then
+			var8(true)
 		end
-		var13.current = true
-		var9(nil)
-		var1(findFriendsFromUserId.API(p2, {
-			limit = var2,
-			cursor = if p3 and p3 ~= "" then p3 else nil
-		})):andThen(function(p5)
-			-- upvalues: var12 (copy), p4 (ref), var14 (copy), var13 (copy), var11 (copy), dashModule (copy), var16 (ref), var5 (copy), var7 (copy)
-			if var12.current ~= p4 or not var14.current then
-				var13.current = false
+		var14.current = true
+		var10(nil)
+		var2(findFriendsFromUserId.API(p3, {
+			limit = var3,
+			cursor = if p4 and p4 ~= "" then p4 else nil
+		})):andThen(function(p6)
+			-- upvalues: var13 (copy), p5 (ref), var15 (copy), var14 (copy), var12 (copy), mapPageItemsToFriends (copy), var17 (ref), var6 (copy), var8 (copy)
+			if var13.current ~= p5 or not var15.current then
+				var14.current = false
 				
 				return
 			end
-			local var17 = if p5 then p5.responseBody else nil
-			local var18 = if var17 then var17.PageItems else nil
-			var11(if var17 and var17.NextCursor and var17.NextCursor ~= "" then var17.NextCursor else nil)
+			local var18 = if p6 then p6.responseBody else nil
+			local var19 = if var18 then var18.PageItems else nil
+			var12(if var18 and var18.NextCursor and var18.NextCursor ~= "" then var18.NextCursor else nil)
 			
-			if var18 then
-				local var19 = dashModule.map(var18, function(p6)
-					return {
-						id = tostring(p6.id),
-						hasVerifiedBadge = p6.hasVerifiedBadge or false
-					}
-				end)
+			if var19 then
+				local var20 = mapPageItemsToFriends(var19)
 				
-				if var16 then
-					var5(var19)
+				if var17 then
+					var6(var20)
 				else
-					var5(function(p6)
-						-- upvalues: var19 (ref)
-						local cloned = table.clone(p6)
+					var6(function(p7)
+						-- upvalues: var20 (ref)
+						local cloned = table.clone(p7)
 						
-						for i, v in var19 do
+						for i, v in var20 do
 							table.insert(cloned, v)
 						end
 						return cloned
 					end)
 				end
-			elseif var16 then
-				var5({})
+			elseif var17 then
+				var6({})
 			end
-			if var16 then
-				var7(false)
+			if var17 then
+				var8(false)
 			end
-			var13.current = false
-		end):catch(function(p6)
-			-- upvalues: var12 (copy), p4 (ref), var14 (copy), var13 (copy), var9 (copy), var16 (ref), var7 (copy)
-			if var12.current ~= p4 or not var14.current then
-				var13.current = false
+			var14.current = false
+		end):catch(function(p7)
+			-- upvalues: var13 (copy), p5 (ref), var15 (copy), var14 (copy), var10 (copy), var17 (ref), var8 (copy)
+			if var13.current ~= p5 or not var15.current then
+				var14.current = false
 				
 				return
 			end
-			var9(p6)
+			var10(p7)
 			
-			if var16 then
-				var7(false)
+			if var17 then
+				var8(false)
 			end
-			var13.current = false
+			var14.current = false
 		end)
-	end, { var1, var2 })
+	end, { var2, var3 })
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var12 (ref), var11 (ref), var5 (ref), var15 (ref), p1 (ref)
-		if var3 then
+		-- upvalues: var4 (ref), var13 (ref), var12 (ref), var6 (ref), var16 (ref), p2 (ref)
+		if var4 then
 			return nil
 		end
-		var12.current += 1
-		local current = var12.current
-		var11(nil)
-		var5({})
-		var15(p1.targetUserId, nil, current)
+		var13.current += 1
+		local current = var13.current
+		var12(nil)
+		var6({})
+		var16(p2.targetUserId, nil, current)
 		
 		return nil
-	end, { var3, p1.targetUserId, var15 })
+	end, { var4, p2.targetUserId, var16 })
 	
 	return {
-		friends = var4,
-		loading = var6,
-		hasMore = var10 ~= nil,
+		friends = var5,
+		loading = var7,
+		hasMore = var11 ~= nil,
 		fetchMore = reactModule.useCallback(function()
-			-- upvalues: var13 (ref), var10 (ref), var15 (ref), p1 (ref), var12 (ref)
-			if var13.current or not var10 then
+			-- upvalues: var14 (ref), var11 (ref), var16 (ref), p2 (ref), var13 (ref)
+			if var14.current or not var11 then
 				return
 			end
-			var15(p1.targetUserId, var10, var12.current)
-		end, { var10, var15, p1.targetUserId }),
+			var16(p2.targetUserId, var11, var13.current)
+		end, { var11, var16, p2.targetUserId }),
 		refresh = reactModule.useCallback(function()
-			-- upvalues: var12 (ref), var11 (ref), var5 (ref), var15 (ref), p1 (ref)
-			var12.current += 1
-			local current = var12.current
-			var11(nil)
-			var5({})
-			var15(p1.targetUserId, nil, current)
-		end, { var15, p1.targetUserId }),
-		error = var8
+			-- upvalues: var13 (ref), var12 (ref), var6 (ref), var16 (ref), p2 (ref)
+			var13.current += 1
+			local current = var13.current
+			var12(nil)
+			var6({})
+			var16(p2.targetUserId, nil, current)
+		end, { var16, p2.targetUserId }),
+		error = var9
 	}
 end

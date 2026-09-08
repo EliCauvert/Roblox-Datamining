@@ -15,9 +15,9 @@ local playersService = game:GetService("Players")
 local sharedFlags = corePackagesService.Workspace.Packages.SharedFlags
 local getFFlagGateEducationalPopupVisibilityViaGUAC = require(sharedFlags).GetFFlagGateEducationalPopupVisibilityViaGUAC
 local inExperienceCapabilities = require(corePackagesService.Workspace.Packages.InExperienceCapabilities).InExperienceCapabilities
-local fFlagEnableSideSheet = require(sharedFlags).FFlagEnableSideSheet
+local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local fFlagSurvBloxEventTypeEnabled = require(sharedFlags).FFlagSurvBloxEventTypeEnabled
-local var1 = if fFlagEnableSideSheet then require(corePackagesService.Workspace.Packages.InExperienceSideSheet).toggleSideSheet else nil
+local var1 = if isSideSheetEnabledModule then require(corePackagesService.Workspace.Packages.InExperienceSideSheet).toggleSideSheet else nil
 local notificationTypeList = guiService:GetNotificationTypeList()
 local roactModule = require(corePackagesService.Packages.Roact)
 local linkingProtocol = require(corePackagesService.Workspace.Packages.LinkingProtocol).LinkingProtocol
@@ -198,7 +198,7 @@ var2 = (function()
 	return exitModalPage
 end)()
 var2.Displayed.Event:connect(function()
-	-- upvalues: var2 (write), getFFlagGateEducationalPopupVisibilityViaGUAC (ref), inExperienceCapabilities (ref), contextActionService (ref), fFlagEnableSideSheet (ref), var1 (write)
+	-- upvalues: var2 (write), getFFlagGateEducationalPopupVisibilityViaGUAC (ref), inExperienceCapabilities (ref), contextActionService (ref), isSideSheetEnabledModule (ref), var1 (write)
 	if not var2.ShouldShow() or getFFlagGateEducationalPopupVisibilityViaGUAC() and not inExperienceCapabilities.canViewEducationalPopup then
 		var2.LeaveAppFunc(true)
 	end
@@ -206,7 +206,7 @@ var2.Displayed.Event:connect(function()
 	contextActionService:BindCoreAction("LeaveGameAction", var2.LeaveGameFromHotkey, false, Enum.KeyCode.ButtonA)
 	contextActionService:BindCoreAction("DontLeaveAction", var2.DontLeaveFromHotkey, false, Enum.KeyCode.ButtonB)
 	
-	if fFlagEnableSideSheet then
+	if isSideSheetEnabledModule then
 		var1(false)
 	end
 end)

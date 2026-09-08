@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ShareSheetTelemetryRefactor_Dev2", false)

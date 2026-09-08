@@ -1,7 +1,6 @@
 ﻿local appChat = script:FindFirstAncestor("AppChat")
 local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local parent = appChat.Parent
-local argCheckModule = require(parent.ArgCheck)
 local cryoModule = require(parent.Cryo)
 local _ = require(appChat.types)
 local sharedFlagsModule = require(parent.SharedFlags)
@@ -19,10 +18,7 @@ if not var1 then
 	rootNavigatorModule_1 = require(appChat.Navigators.Wide.rootNavigator)
 end
 local analyticsProviderModule = require(appChat.LegacyAnalytics.AnalyticsProvider)
-local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
-local topBarContextModule = require(appChat.TopBarContext)
 local chatPlacementContextModule = require(appChat.Contexts.ChatPlacementContext)
-local fFlagAppChatTopBarSignalsStoreModule = require(appChat.Flags.FFlagAppChatTopBarSignalsStore)
 local luaAppNavigationContextProviderModule = require(appChat.LuaAppNavigationContextProvider)
 local setTabBarVisible = require(parent.AppTabBarRodux).Actions.SetTabBarVisible
 local roactChatAnalyticsProviderModule = require(appChat.Analytics.RoactChatAnalyticsProvider)
@@ -33,22 +29,20 @@ local reactModule = require(parent.React)
 local roactNavigationModule = require(parent.RoactNavigation)
 local userInputService = game:GetService("UserInputService")
 local memo = reactModule.memo
-local useAppPolicyModule = require(appChat.Hooks.useAppPolicy)
 local useCallback = reactModule.useCallback
 local useChatIsVisibleModule = require(appChat.Hooks.useChatIsVisible)
 local useCurrentSquadParentChannelId = require(parent.SquadsCore.Hooks).useCurrentSquadParentChannelId
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local useEffect = reactModule.useEffect
 local useIsVoiceConnected = require(parent.CrossExperienceVoice).Hooks.useIsVoiceConnected
+local usePartyChatReactiveFeatureRestrictionModule = require(appChat.Hooks.usePartyChatReactiveFeatureRestriction)
 local useRef = reactModule.useRef
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useState = reactModule.useState
 local useStyle = require(parent.UIBlox).Core.Style.useStyle
 local useRobloxLocaleModule = require(appChat.Hooks.useRobloxLocale)
 local replyingToMessageProviderModule = require(appChat.Components.ChatConversation.MessageInteraction.ReplyingContext.ReplyingToMessageProvider)
 local fFlagAppChatSignalsReplyStoreModule = require(appChat.Flags.FFlagAppChatSignalsReplyStore)
 local layerCollectorProvider = require(parent.UIBlox).Core.Layout.LayerCollector.LayerCollectorProvider
-local useIsChatEnabledModule = require(appChat.Hooks.useIsChatEnabled)
 local appChatNetworkingModule = require(parent.AppChatNetworking)
 local interactionFeedbackModule = require(parent.InteractionFeedback)
 local hapticFeedbackConfig = require(appChat.Utils.HapticFeedback).HapticFeedbackConfig
@@ -58,13 +52,10 @@ local rootedChatDetailsNavigationModule = require(appChat.Navigators.rootedChatD
 local enumScreensModule = require(script.Parent.EnumScreens)
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local getFFlagEnableCrossExpVoice = require(parent.SharedFlags).GetFFlagEnableCrossExpVoice
-local fFlagAppChatRemoveNotifications = require(parent.SharedFlags).FFlagAppChatRemoveNotifications
+local fFlagAppChatReactiveFeatureRestrictions = sharedFlagsModule.FFlagAppChatReactiveFeatureRestrictions
 local enteredChatFromEntryPointModule = require(appChat.Actions.EnteredChatFromEntryPoint)
 local navigateIntoChatModule = require(appChat.Actions.NavigateIntoChat)
-local getFFlagHideNotificationIconForVRModule = require(appChat.Flags.getFFlagHideNotificationIconForVR)
 local getFFlagFixChatsBottomInsetBackgroundColorModule = require(appChat.Flags.getFFlagFixChatsBottomInsetBackgroundColor)
-local getFFlagEnableAppChatInExperience = sharedFlagsModule.GetFFlagEnableAppChatInExperience
-local fFlagAppChatTopBarConfigDrivenModule = require(appChat.Flags.FFlagAppChatTopBarConfigDriven)
 local getFFlagAppChatRequestedRouteModule = require(appChat.Flags.getFFlagAppChatRequestedRoute)
 local fFlagSupportViewingUserProfileOnOSAModule = require(appChat.Flags.FFlagSupportViewingUserProfileOnOSA)
 local getOverlayStoreModule = require(appChat.Stores.GetOverlayStore)
@@ -92,9 +83,13 @@ local t = {
 }
 
 function AppChatEntryPoint(p1)
-	-- upvalues: cryoModule (ref), t (ref), chatPlacementContextModule (ref), useTokens (ref), var1 (ref), rootNavigatorModule (write), appChat (ref), rootNavigatorModule_1 (write), useSelector (ref), useCallback (ref), useDispatch (ref), useEffect (ref), appChatNetworkingModule (ref), loggerModule (ref), useChatIsVisibleModule (ref), useState (ref), reactModule (ref), roactNavigationModule (ref), getRoactChatStackNavigatorModule (ref), useRef (ref), fFlagSupportViewingUserProfileOnOSAModule (ref), getOverlayStoreModule (ref), enumScreensModule (ref), createConversationModule (ref), fetchLatestConversationDetailsModule (ref), getFFlagIsSquadEnabled (ref), fFlagAppChatShowOSAOnPageEntry (ref), navigateWithOsaGateModule (ref), getFFlagAppChatRequestedRouteModule (ref), rootedChatDetailsNavigationModule (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), getTopBarStoreModule (ref), argCheckModule (ref), fFlagAppChatTopBarSignalsStoreModule (ref), enteredChatFromEntryPointModule (ref), navigateIntoChatModule (ref), useCurrentSquadParentChannelId (ref), getFFlagEnableCrossExpVoice (ref), useIsVoiceConnected (ref), useAppPolicyModule (ref), getFFlagHideNotificationIconForVRModule (ref), usePageSideMargin (ref), fFlagLuaAppCompositionAppChat (ref), useIsChatEnabledModule (ref), fFlagAppChatTopBarConfigDrivenModule (ref), fFlagAppChatRemoveNotifications (ref), getFFlagEnableAppChatInExperience (ref), useStyle (ref), setTabBarVisible (ref), userInputService (ref), NAV_BAR_WITH_FACEPILE_SIZE (ref), fFlagEnableHeaderBarButtonsUpdate (ref), luaAppNavigationContextProviderModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), replyingToMessageProviderModule (ref), interactionFeedbackModule (ref), hapticFeedbackConfig (ref), layerCollectorProvider (ref), useRobloxLocaleModule (ref), rbxAnalyticsService (ref), analyticsProviderModule (ref), appTelemetryLayerModule (ref), topBarContextModule (ref), getFFlagFixChatsBottomInsetBackgroundColorModule (ref), roactChatAnalyticsProviderModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), chatPlacementContextModule (ref), fFlagAppChatReactiveFeatureRestrictions (ref), usePartyChatReactiveFeatureRestrictionModule (ref), useTokens (ref), var1 (ref), rootNavigatorModule (write), appChat (ref), rootNavigatorModule_1 (write), useSelector (ref), useCallback (ref), useDispatch (ref), useEffect (ref), appChatNetworkingModule (ref), loggerModule (ref), useChatIsVisibleModule (ref), reactModule (ref), roactNavigationModule (ref), getRoactChatStackNavigatorModule (ref), useRef (ref), fFlagSupportViewingUserProfileOnOSAModule (ref), getOverlayStoreModule (ref), enumScreensModule (ref), createConversationModule (ref), fetchLatestConversationDetailsModule (ref), getFFlagIsSquadEnabled (ref), fFlagAppChatShowOSAOnPageEntry (ref), navigateWithOsaGateModule (ref), getFFlagAppChatRequestedRouteModule (ref), rootedChatDetailsNavigationModule (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), enteredChatFromEntryPointModule (ref), navigateIntoChatModule (ref), useCurrentSquadParentChannelId (ref), getFFlagEnableCrossExpVoice (ref), useIsVoiceConnected (ref), usePageSideMargin (ref), fFlagLuaAppCompositionAppChat (ref), useStyle (ref), setTabBarVisible (ref), userInputService (ref), NAV_BAR_WITH_FACEPILE_SIZE (ref), fFlagEnableHeaderBarButtonsUpdate (ref), luaAppNavigationContextProviderModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), replyingToMessageProviderModule (ref), interactionFeedbackModule (ref), hapticFeedbackConfig (ref), layerCollectorProvider (ref), useRobloxLocaleModule (ref), rbxAnalyticsService (ref), analyticsProviderModule (ref), appTelemetryLayerModule (ref), getFFlagFixChatsBottomInsetBackgroundColorModule (ref), roactChatAnalyticsProviderModule (ref)
 	local var2 = cryoModule.Dictionary.join(t, p1)
 	local var3 = chatPlacementContextModule.isPlacementInExperience(var2.chatPlacement)
+	
+	if fFlagAppChatReactiveFeatureRestrictions then
+		usePartyChatReactiveFeatureRestrictionModule(var2.isVisible and not var3)
+	end
 	local var4 = useTokens()
 	
 	if var1 then
@@ -119,8 +114,7 @@ function AppChatEntryPoint(p1)
 		end)
 	end, { var8, var5, var3 })
 	local var9 = useChatIsVisibleModule()
-	local var10, var11 = useState({})
-	local var12 = reactModule.useMemo(function()
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: roactNavigationModule (copy), getRoactChatStackNavigatorModule (copy), var2 (ref), rootNavigatorModule_1 (copy), rootNavigatorModule (copy)
 		return roactNavigationModule.createAppContainer(getRoactChatStackNavigatorModule(if var2.wideMode then rootNavigatorModule_1 else rootNavigatorModule, var2.navigateToRootStack, var2.androidBackButtonSignal, var2.androidBackButtonConnection))
 	end, {
@@ -128,28 +122,28 @@ function AppChatEntryPoint(p1)
 		var2.navigateToRootStack, var2.androidBackButtonSignal,
 		var2.androidBackButtonConnection
 	})
-	local var13 = useRef(nil)
+	local var11 = useRef(nil)
 	
-	if not var3 and var13.current == nil then
-		var13.current = roactNavigationModule.createAppContainer(getRoactChatStackNavigatorModule(if var2.wideMode then rootNavigatorModule_1 else rootNavigatorModule, var2.navigateToRootStack, var2.androidBackButtonSignal, var2.androidBackButtonConnection))
+	if not var3 and var11.current == nil then
+		var11.current = roactNavigationModule.createAppContainer(getRoactChatStackNavigatorModule(if var2.wideMode then rootNavigatorModule_1 else rootNavigatorModule, var2.navigateToRootStack, var2.androidBackButtonSignal, var2.androidBackButtonConnection))
 	end
-	local var14 = if var3 then var12 else var13.current
-	local var15 = useRef(false)
-	local var16 = useRef(nil)
-	local var17 = useRef(function(...) end)
+	local var12 = if var3 then var10 else var11.current
+	local var13 = useRef(false)
+	local var14 = useRef(nil)
+	local var15 = useRef(function(...) end)
 	useEffect(function()
 		-- upvalues: var2 (ref), loggerModule (copy)
 		if var2.logger then
 			loggerModule:setParent(var2.logger)
 		end
 	end, { var2.logger })
-	local var18 = useCallback(function(p2)
-		-- upvalues: var15 (ref), var17 (ref)
-		if not var15.current then return end
-		if var17.current then
-			var17.current(p2)
+	local var16 = useCallback(function(p2)
+		-- upvalues: var13 (ref), var15 (ref)
+		if not var13.current then return end
+		if var15.current then
+			var15.current(p2)
 		end
-	end, { var15, var17 })
+	end, { var13, var15 })
 	
 	if fFlagSupportViewingUserProfileOnOSAModule then
 		local navigateToLuaAppPages = var2.navigateToLuaAppPages
@@ -160,14 +154,14 @@ function AppChatEntryPoint(p1)
 			})
 		end, { navigateToLuaAppPages })
 	end
-	local var19 = useCallback(function(p2)
+	local var17 = useCallback(function(p2)
 		-- upvalues: roactNavigationModule (copy), enumScreensModule (copy)
 		return roactNavigationModule.Actions.navigate({
 			routeName = enumScreensModule.ChatConversation,
 			params = { conversationId = p2 }
 		})
 	end, {})
-	local var20 = useCallback(function(p2, p3)
+	local var18 = useCallback(function(p2, p3)
 		-- upvalues: roactNavigationModule (copy), enumScreensModule (copy), var2 (ref)
 		local list = {
 			roactNavigationModule.Actions.navigate({
@@ -195,29 +189,29 @@ function AppChatEntryPoint(p1)
 			action = roactNavigationModule.StackActions.reset({ index = 3, actions = list })
 		})
 	end, { var2.wideMode })
-	local var21 = useCallback(function(p2)
+	local var19 = useCallback(function(p2)
 		-- upvalues: var8 (ref), createConversationModule (copy)
 		return var8(createConversationModule("one_to_one", { p2 }))
 	end, { var8 })
-	local var22 = useCallback(function(p2)
+	local var20 = useCallback(function(p2)
 		-- upvalues: var8 (ref), fetchLatestConversationDetailsModule (copy)
 		return var8(fetchLatestConversationDetailsModule(p2))
 	end, { var8 })
-	local var23 = useCallback(function(p2)
-		-- upvalues: var17 (ref), var2 (ref), getFFlagIsSquadEnabled (copy), cryoModule (copy), fFlagAppChatShowOSAOnPageEntry (copy), navigateWithOsaGateModule (copy), var8 (ref), var20 (ref), enumScreensModule (copy), getFFlagAppChatRequestedRouteModule (copy), rootedChatDetailsNavigationModule (copy), var22 (ref), roactNavigationModule (copy), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), loggerModule (copy), var19 (ref), var21 (ref)
-		var17.current = p2
+	local var21 = useCallback(function(p2)
+		-- upvalues: var15 (ref), var2 (ref), getFFlagIsSquadEnabled (copy), cryoModule (copy), fFlagAppChatShowOSAOnPageEntry (copy), navigateWithOsaGateModule (copy), var8 (ref), var18 (ref), enumScreensModule (copy), getFFlagAppChatRequestedRouteModule (copy), rootedChatDetailsNavigationModule (copy), var20 (ref), roactNavigationModule (copy), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), loggerModule (copy), var17 (ref), var19 (ref)
+		var15.current = p2
 		
 		if not var2.updateExternalNavigationForScreen then
 			return function()
-				-- upvalues: var17 (copy)
-				var17.current = nil
+				-- upvalues: var15 (copy)
+				var15.current = nil
 			end
 		end
 		local updateExternalNavigationForScreen = var2.updateExternalNavigationForScreen
 		
 		if getFFlagIsSquadEnabled() then
 			updateExternalNavigationForScreen(function(p3)
-				-- upvalues: cryoModule (copy), fFlagAppChatShowOSAOnPageEntry (copy), navigateWithOsaGateModule (copy), var8 (copy), p2 (ref), var20 (copy)
+				-- upvalues: cryoModule (copy), fFlagAppChatShowOSAOnPageEntry (copy), navigateWithOsaGateModule (copy), var8 (copy), p2 (ref), var18 (copy)
 				local conversationId = p3.conversationId
 				local conversationId_1 = cryoModule.Dictionary.omit(p3, "conversationId")
 				
@@ -227,24 +221,24 @@ function AppChatEntryPoint(p1)
 						conversationId = conversationId,
 						dispatch = var8,
 						onAccepted = function()
-							-- upvalues: p2 (copy), var20 (copy), conversationId (ref), conversationId_1 (ref)
-							p2(var20(conversationId, conversationId_1))
+							-- upvalues: p2 (copy), var18 (copy), conversationId (ref), conversationId_1 (ref)
+							p2(var18(conversationId, conversationId_1))
 						end
 					})
 					
 					return
 				end
-				p2(var20(conversationId, conversationId_1))
+				p2(var18(conversationId, conversationId_1))
 			end, enumScreensModule.SquadLobby)
 		end
 		if getFFlagAppChatRequestedRouteModule() then
 			updateExternalNavigationForScreen(function(p3)
-				-- upvalues: rootedChatDetailsNavigationModule (copy), p2 (ref), var8 (copy), var22 (copy), roactNavigationModule (copy), enumScreensModule (copy)
+				-- upvalues: rootedChatDetailsNavigationModule (copy), p2 (ref), var8 (copy), var20 (copy), roactNavigationModule (copy), enumScreensModule (copy)
 				if not p3 or not p3.conversationId then return end
 				if rootedChatDetailsNavigationModule.tryNavigateToRootedChatDetails({
 					callback = p2,
 					dispatch = var8,
-					fetchLatestConversationDetails = var22
+					fetchLatestConversationDetails = var20
 				}, p3) then
 					return
 				end
@@ -252,7 +246,7 @@ function AppChatEntryPoint(p1)
 			end, enumScreensModule.ChatDetails)
 		end
 		updateExternalNavigationForScreen(function(p3)
-			-- upvalues: fFlagAppChatShowOSAOnPageEntry (copy), navigateWithOsaGateModule (copy), var8 (copy), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), var22 (copy), loggerModule (copy), p2 (ref), var19 (copy), var21 (copy)
+			-- upvalues: fFlagAppChatShowOSAOnPageEntry (copy), navigateWithOsaGateModule (copy), var8 (copy), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), var20 (copy), loggerModule (copy), p2 (ref), var17 (copy), var19 (copy)
 			local conversationId = p3 and p3.conversationId
 			
 			if conversationId then
@@ -261,14 +255,14 @@ function AppChatEntryPoint(p1)
 						conversationId = conversationId,
 						dispatch = var8,
 						onAccepted = function()
-							-- upvalues: fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), conversationId (ref), var22 (copy), loggerModule (copy), p2 (copy), var19 (copy)
+							-- upvalues: fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), conversationId (ref), var20 (copy), loggerModule (copy), p2 (copy), var17 (copy)
 							if fFlagAppChatPerfTrackingModule then
 								appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = conversationId })
 							end
-							var22(conversationId):andThen(function()
-								-- upvalues: loggerModule (copy), conversationId (copy), p2 (copy), var19 (copy)
+							var20(conversationId):andThen(function()
+								-- upvalues: loggerModule (copy), conversationId (copy), p2 (copy), var17 (copy)
 								loggerModule:info("Successfully fetched conversation details for conversationId {} for external navigation", conversationId)
-								p2(var19(conversationId))
+								p2(var17(conversationId))
 							end):catch(function(p4)
 								-- upvalues: loggerModule (copy), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), conversationId (copy)
 								loggerModule:warning("Error in fetchLatestConversationDetails request before navigate to conversation. error: {}", tostring(p4))
@@ -282,10 +276,10 @@ function AppChatEntryPoint(p1)
 				elseif fFlagAppChatPerfTrackingModule then
 					appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = conversationId })
 				end
-				var22(conversationId):andThen(function()
-					-- upvalues: loggerModule (copy), conversationId (ref), p2 (copy), var19 (copy)
+				var20(conversationId):andThen(function()
+					-- upvalues: loggerModule (copy), conversationId (ref), p2 (copy), var17 (copy)
 					loggerModule:info("Successfully fetched conversation details for conversationId {} for external navigation", conversationId)
-					p2(var19(conversationId))
+					p2(var17(conversationId))
 				end):catch(function(p4)
 					-- upvalues: loggerModule (copy), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), conversationId (ref)
 					loggerModule:warning("Error in fetchLatestConversationDetails request before navigate to conversation. error: {}", tostring(p4))
@@ -301,9 +295,9 @@ function AppChatEntryPoint(p1)
 			
 			if userId then
 				spawn(function()
-					-- upvalues: var21 (copy), userId (ref), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), loggerModule (copy), fFlagAppChatShowOSAOnPageEntry (copy), navigateWithOsaGateModule (copy), var8 (copy), p2 (copy), var19 (copy)
-					var21(userId):andThen(function(p4)
-						-- upvalues: fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), loggerModule (copy), userId (copy), fFlagAppChatShowOSAOnPageEntry (copy), navigateWithOsaGateModule (copy), var8 (copy), p2 (copy), var19 (copy)
+					-- upvalues: var19 (copy), userId (ref), fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), loggerModule (copy), fFlagAppChatShowOSAOnPageEntry (copy), navigateWithOsaGateModule (copy), var8 (copy), p2 (copy), var17 (copy)
+					var19(userId):andThen(function(p4)
+						-- upvalues: fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), loggerModule (copy), userId (copy), fFlagAppChatShowOSAOnPageEntry (copy), navigateWithOsaGateModule (copy), var8 (copy), p2 (copy), var17 (copy)
 						if fFlagAppChatPerfTrackingModule then
 							appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = p4.id })
 						end
@@ -314,14 +308,14 @@ function AppChatEntryPoint(p1)
 								conversationId = p4.id,
 								dispatch = var8,
 								onAccepted = function()
-									-- upvalues: p2 (copy), var19 (copy), p4 (ref)
-									p2(var19(p4.id))
+									-- upvalues: p2 (copy), var17 (copy), p4 (ref)
+									p2(var17(p4.id))
 								end
 							})
 							
 							return
 						end
-						p2(var19(p4.id))
+						p2(var17(p4.id))
 					end):catch(function(p4)
 						-- upvalues: loggerModule (copy)
 						loggerModule:warning("Error in CreateConversation request before navigate to conversation. error: {}", tostring(p4))
@@ -341,7 +335,7 @@ function AppChatEntryPoint(p1)
 		end, enumScreensModule.ChatLanding)
 		
 		return function()
-			-- upvalues: updateExternalNavigationForScreen (ref), enumScreensModule (copy), getFFlagAppChatRequestedRouteModule (copy), getFFlagIsSquadEnabled (copy), var17 (copy)
+			-- upvalues: updateExternalNavigationForScreen (ref), enumScreensModule (copy), getFFlagAppChatRequestedRouteModule (copy), getFFlagIsSquadEnabled (copy), var15 (copy)
 			updateExternalNavigationForScreen(nil, enumScreensModule.ChatLanding)
 			
 			if getFFlagAppChatRequestedRouteModule() then
@@ -352,52 +346,31 @@ function AppChatEntryPoint(p1)
 			if getFFlagIsSquadEnabled() then
 				updateExternalNavigationForScreen(nil, enumScreensModule.SquadLobby)
 			end
-			var17.current = nil
+			var15.current = nil
 		end
 	end, {
-		var17, var21, var8, var22, var19, var20,
+		var15, var19, var8, var20, var17, var18,
 		var2.updateExternalNavigationForScreen, var2.wideMode
 	})
-	local var24 = if fFlagAppChatTopBarSignalsStoreModule then useCallback(function(p2)
-		-- upvalues: getTopBarStoreModule (copy)
-		return getTopBarStoreModule(false).getScreenTopBar(p2)(false)
-	end, {}) else useCallback(function(p2)
-		-- upvalues: argCheckModule (copy), var10 (ref)
-		argCheckModule.isType(p2, "string", "screen")
-		
-		return var10[p2] or {}
-	end, { var10 })
-	local var25 = if fFlagAppChatTopBarSignalsStoreModule then useCallback(function(p2, p3)
-		-- upvalues: getTopBarStoreModule (copy)
-		getTopBarStoreModule(false).setScreenTopBar(p2, p3)
-	end, {}) else useCallback(function(p2, p3)
-		-- upvalues: argCheckModule (copy), var11 (ref), cryoModule (copy)
-		argCheckModule.isType(p2, "string", "screen")
-		argCheckModule.isType(p3, "table", "state")
-		var11(function(p4)
-			-- upvalues: cryoModule (copy), p2 (ref), p3 (ref)
-			return cryoModule.Dictionary.join(p4, { [p2] = cryoModule.Dictionary.join(p4[p2] or {}, p3) })
-		end)
-	end, {})
-	local var26 = useCallback(function(p2)
-		-- upvalues: var16 (ref), var18 (ref)
-		if var16.current then
-			var16.current:disconnect()
-			var16.current = nil
+	local var22 = useCallback(function(p2)
+		-- upvalues: var14 (ref), var16 (ref)
+		if var14.current then
+			var14.current:disconnect()
+			var14.current = nil
 		end
 		if p2 then
-			var16.current = p2:connect(var18)
+			var14.current = p2:connect(var16)
 		end
-	end, { var16, var18 })
+	end, { var14, var16 })
 	useEffect(function()
-		-- upvalues: var15 (ref), var26 (ref), var2 (ref), var8 (ref), enteredChatFromEntryPointModule (copy)
-		var15.current = true
-		var26(var2.rnBypassActionSignal)
+		-- upvalues: var13 (ref), var22 (ref), var2 (ref), var8 (ref), enteredChatFromEntryPointModule (copy)
+		var13.current = true
+		var22(var2.rnBypassActionSignal)
 		
 		return function()
-			-- upvalues: var15 (copy), var26 (copy), var8 (copy), enteredChatFromEntryPointModule (copy)
-			var15.current = false
-			var26(nil)
+			-- upvalues: var13 (copy), var22 (copy), var8 (copy), enteredChatFromEntryPointModule (copy)
+			var13.current = false
+			var22(nil)
 			var8(enteredChatFromEntryPointModule())
 		end
 	end, {})
@@ -439,75 +412,59 @@ function AppChatEntryPoint(p1)
 			var2.clearRequestedRoute
 		})
 	end
-	local var27 = nil
-	local var28 = nil
+	local var23 = nil
+	local var24 = nil
 	
 	if getFFlagIsSquadEnabled() then
-		var27 = useCurrentSquadParentChannelId()
+		var23 = useCurrentSquadParentChannelId()
 		
 		if getFFlagEnableCrossExpVoice() then
-			var28 = useIsVoiceConnected()
+			var24 = useIsVoiceConnected()
 		end
 	end
 	useEffect(function()
-		-- upvalues: getFFlagIsSquadEnabled (copy), var3 (ref), var2 (ref), var27 (write), getFFlagEnableCrossExpVoice (copy), var28 (write), var8 (ref), navigateIntoChatModule (copy), enumScreensModule (copy), var5 (ref)
-		if getFFlagIsSquadEnabled() and var3 and (var2.initialConversationId == "" and var2.requestedRoute == nil) and var27 then
-			if getFFlagEnableCrossExpVoice() and var28 then
+		-- upvalues: getFFlagIsSquadEnabled (copy), var3 (ref), var2 (ref), var23 (write), getFFlagEnableCrossExpVoice (copy), var24 (write), var8 (ref), navigateIntoChatModule (copy), enumScreensModule (copy), var5 (ref)
+		if getFFlagIsSquadEnabled() and var3 and (var2.initialConversationId == "" and var2.requestedRoute == nil) and var23 then
+			if getFFlagEnableCrossExpVoice() and var24 then
 				var8(navigateIntoChatModule({
 					screen = enumScreensModule.SquadLobby,
-					params = { userId = var5, conversationId = var27 }
+					params = { userId = var5, conversationId = var23 }
 				}))
 				
 				return
 			end
 			var8(navigateIntoChatModule({
 				screen = enumScreensModule.ChatConversation,
-				params = { userId = var5, conversationId = var27 }
+				params = { userId = var5, conversationId = var23 }
 			}))
 		end
 	end, {})
 	useEffect(function()
-		-- upvalues: var26 (ref), var2 (ref)
-		var26(var2.rnBypassActionSignal)
-	end, { var2.rnBypassActionSignal, var26 })
-	useEffect(function()
-		-- upvalues: fFlagAppChatTopBarSignalsStoreModule (copy), cryoModule (copy), var10 (ref), var11 (ref)
-		if not fFlagAppChatTopBarSignalsStoreModule and not cryoModule.isEmpty(var10) then
-			var11({})
-		end
-	end, {
-		var2.wideMode,
-		fFlagAppChatTopBarSignalsStoreModule,
-		var10
-	})
-	local var29 = useAppPolicyModule(function(p2)
-		return p2.getChatHeaderSearch()
-	end)
-	local var30 = useAppPolicyModule(function(p2)
-		return p2.getChatHeaderCreateChatGroup()
-	end)
-	local var31 = useAppPolicyModule(function(p2)
-		-- upvalues: getFFlagHideNotificationIconForVRModule (copy)
-		return p2.getChatHeaderNotifications() and (not getFFlagHideNotificationIconForVRModule() or p2.getWebViewSupport())
-	end)
-	local var32 = usePageSideMargin(var14.current, fFlagLuaAppCompositionAppChat)
-	local var33 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), var32 (ref)
+		-- upvalues: var22 (ref), var2 (ref)
+		var22(var2.rnBypassActionSignal)
+	end, { var2.rnBypassActionSignal, var22 })
+	local var25 = usePageSideMargin(var12.current, fFlagLuaAppCompositionAppChat)
+	local var26 = reactModule.useMemo(function()
+		-- upvalues: var3 (ref), var25 (ref)
 		return {
 			default = 12,
-			outer = if var3 then 12 else var32,
-			inner = if var3 then 12 else var32
+			outer = if var3 then 12 else var25,
+			inner = if var3 then 12 else var25
 		}
-	end, { var32, var3 })
-	local var34 = useIsChatEnabledModule()
-	local var35 = useStyle()
-	local var36 = reactModule.createElement(chatPlacementContextModule.Provider, { value = { chatPlacement = var2.chatPlacement } }, {
+	end, { var25, var3 })
+	local var27 = useStyle()
+	local var28 = reactModule.createElement(chatPlacementContextModule.Provider, {
+		value = reactModule.useMemo(function()
+			-- upvalues: var2 (ref)
+			return { chatPlacement = var2.chatPlacement }
+		end, { var2.chatPlacement })
+	}, {
 		navigation = reactModule.createElement(luaAppNavigationContextProviderModule, {
 			navigateToLuaAppPages = var2.navigateToLuaAppPages,
 			dispatch = var8
 		}, {
-			navigation = reactModule.createElement(var14, {
-				externalDispatchConnector = var23,
+			navigation = reactModule.createElement(var12, {
+				externalDispatchConnector = var21,
 				parameters = var2.parameters,
 				setActiveConversationId = var2.setActiveConversationId,
 				setBackButtonEnabled = var2.setBackButtonEnabled,
@@ -523,76 +480,73 @@ function AppChatEntryPoint(p1)
 					isInExperience = var3,
 					isVisible = var2.isVisible,
 					notificationCount = var2.notificationCount,
-					appChatOuterPadding = var33.outer,
-					appChatInnerPadding = var33.inner,
-					appChatDefaultPadding = var33.default,
-					topBarShowSearch = if fFlagAppChatTopBarConfigDrivenModule() then nil else var29 and (not var3 and var34),
-					topBarShowCreateChatGroup = if fFlagAppChatTopBarConfigDrivenModule() then nil else var30 and var34,
-					topBarShowNotifications = if fFlagAppChatTopBarConfigDrivenModule() then nil else not var3 and (var31 and not fFlagAppChatRemoveNotifications),
-					topBarShowSnoozeNotifications = if fFlagAppChatTopBarConfigDrivenModule() then nil else var3 and getFFlagEnableAppChatInExperience(),
+					appChatOuterPadding = var26.outer,
+					appChatInnerPadding = var26.inner,
+					appChatDefaultPadding = var26.default,
 					topBarUtilityIconSideMargin = if fFlagEnableHeaderBarButtonsUpdate then var4.Size.Size_100 else nil,
 					showSearchRow = var3,
 					navigateToRootStack = var2.navigateToRootStack,
-					navigateToAddFriends = var2.navigateToAddFriends,
-					getScreenTopBar = if fFlagAppChatTopBarSignalsStoreModule then nil else var24,
-					setScreenTopBar = if fFlagAppChatTopBarSignalsStoreModule then nil else var25
+					navigateToAddFriends = var2.navigateToAddFriends
 				}
 			})
 		})
 	})
 	
 	if not fFlagAppChatSignalsReplyStoreModule then
-		var36 = reactModule.createElement(replyingToMessageProviderModule, {}, { navigation = var36 })
+		var28 = reactModule.createElement(replyingToMessageProviderModule, {}, { navigation = var28 })
 	end
-	var36 = reactModule.createElement(interactionFeedbackModule.InteractionFeedbackContext.Provider, { value = hapticFeedbackConfig }, { navigation = var36 })
+	var28 = reactModule.createElement(interactionFeedbackModule.InteractionFeedbackContext.Provider, { value = hapticFeedbackConfig }, { navigation = var28 })
 	
 	if not var3 then
-		var36 = reactModule.createElement(layerCollectorProvider, {}, { navigation = var36 })
+		var28 = reactModule.createElement(layerCollectorProvider, {}, { navigation = var28 })
 	end
-	local var37 = if getFFlagIsSquadEnabled() then useSelector(function(p2)
+	local var29 = useRobloxLocaleModule()
+	local playSessionId = rbxAnalyticsService:GetPlaySessionId()
+	local var30 = if getFFlagIsSquadEnabled() then useSelector(function(p2)
 		local currentSquad = p2.Squad and (p2.Squad.Squad and p2.Squad.Squad.currentSquad)
 		
 		return if currentSquad and currentSquad.squadId then currentSquad.squadId else nil
 	end) else nil
-	local var38 = reactModule.createElement(analyticsProviderModule, { localUserId = var5, entryPoint = var7 }, {
+	local var31 = reactModule.createElement(analyticsProviderModule, { localUserId = var5, entryPoint = var7 }, {
 		telemetry = reactModule.createElement(appTelemetryLayerModule.Provider, {
-			value = {
-				context = "platformChat",
-				locale = useRobloxLocaleModule(),
-				entryPoint = var7 or "unknown",
-				userId = var5,
-				playSessionId = rbxAnalyticsService:GetPlaySessionId(),
-				currentSquadId = var37,
-				placement = var2.chatPlacement
-			}
-		}, {
-			reactModule.createElement(if fFlagAppChatTopBarSignalsStoreModule then reactModule.Fragment else topBarContextModule.Provider, if fFlagAppChatTopBarSignalsStoreModule then nil else {
-				value = cryoModule.Dictionary.join(var10, { getScreenTopBar = var24, setScreenTopBar = var25 })
-			}, {
-				navigation = var36,
-				BottomInsetBackground = if var6.bottom > 0 then reactModule.createElement("Frame", {
-					BorderSizePixel = 0,
-					ZIndex = 3,
-					BackgroundColor3 = if getFFlagFixChatsBottomInsetBackgroundColorModule() then var35.Theme.BackgroundDefault.Color else var35.Theme.NavigationBar.Color,
-					BackgroundTransparency = if getFFlagFixChatsBottomInsetBackgroundColorModule() then var35.Theme.BackgroundDefault.Transparency else var35.Theme.NavigationBar.Transparency,
-					Position = UDim2.new(0, 0, 1, 0),
-					Size = UDim2.new(1, 0, 0, var6.bottom)
-				}) else nil
+			value = reactModule.useMemo(function()
+				-- upvalues: var29 (ref), var7 (ref), var5 (ref), playSessionId (ref), var30 (ref), var2 (ref)
+				return {
+					context = "platformChat",
+					locale = var29,
+					entryPoint = var7 or "unknown",
+					userId = var5,
+					playSessionId = playSessionId,
+					currentSquadId = var30,
+					placement = var2.chatPlacement
+				}
+			end, {
+				var29, var7, var5, playSessionId, var30, var2.chatPlacement
 			})
+		}, {
+			navigation = var28,
+			BottomInsetBackground = if var6.bottom > 0 then reactModule.createElement("Frame", {
+				BorderSizePixel = 0,
+				ZIndex = 3,
+				BackgroundColor3 = if getFFlagFixChatsBottomInsetBackgroundColorModule() then var27.Theme.BackgroundDefault.Color else var27.Theme.NavigationBar.Color,
+				BackgroundTransparency = if getFFlagFixChatsBottomInsetBackgroundColorModule() then var27.Theme.BackgroundDefault.Transparency else var27.Theme.NavigationBar.Transparency,
+				Position = UDim2.new(0, 0, 1, 0),
+				Size = UDim2.new(1, 0, 0, var6.bottom)
+			}) else nil
 		})
 	})
 	
 	if fFlagAppChatPerfTrackingModule then
 		useEffect(function()
-			-- upvalues: appChatPerfTrackerModule (copy), var2 (ref), var7 (ref), var37 (ref)
+			-- upvalues: appChatPerfTrackerModule (copy), var2 (ref), var7 (ref), var30 (ref)
 			appChatPerfTrackerModule.setSharedContext({
 				placement = var2.chatPlacement,
 				entryPoint = var7,
-				hasActiveParty = var37 ~= nil
+				hasActiveParty = var30 ~= nil
 			})
-		end, { var2.chatPlacement, var7, var37 })
+		end, { var2.chatPlacement, var7, var30 })
 	end
-	return reactModule.createElement(roactChatAnalyticsProviderModule, { entryPoint = var7 }, { var38 })
+	return reactModule.createElement(roactChatAnalyticsProviderModule, { entryPoint = var7 }, { var31 })
 end
 
 return memo(AppChatEntryPoint)

@@ -21,9 +21,10 @@ local getOverflowMenuSignalStoreModule = require(appBlox.OverflowMenu.getOverflo
 local useOverflowMenuOpenModule = require(appBlox.OverflowMenu.useOverflowMenuOpen)
 local overflowMenuRemoveCloseMenuChecks = game:DefineFastFlag("OverflowMenuRemoveCloseMenuChecks", false)
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
+local fFlagLuaAppSduiGameTileFeedback = sharedFlagsModule.FFlagLuaAppSduiGameTileFeedback
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), overflowMenuRemoveCloseMenuChecks (ref), getOverflowMenuSignalStoreModule (ref), useOverflowMenuOpenModule (ref), cryoModule (ref), useFocusNavigableSurfaceRegistryConnection (ref), focusNavigableSurfaceIdentifierEnum (ref), view (ref), fFlagSduiExperienceDetailsSupport (ref), iconButton (ref), threeDotsHorizontal (ref), iconSize (ref), buttonVariant (ref), menu (ref), popoverAlign (ref), popoverSide (ref), inputSize (ref)
+	-- upvalues: reactModule (ref), overflowMenuRemoveCloseMenuChecks (ref), getOverflowMenuSignalStoreModule (ref), useOverflowMenuOpenModule (ref), cryoModule (ref), useFocusNavigableSurfaceRegistryConnection (ref), focusNavigableSurfaceIdentifierEnum (ref), view (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagSduiExperienceDetailsSupport (ref), iconButton (ref), threeDotsHorizontal (ref), iconSize (ref), buttonVariant (ref), menu (ref), popoverAlign (ref), popoverSide (ref), inputSize (ref)
 	local menuKey = p1.menuKey
 	local var1 = reactModule.useRef(nil)
 	local var2 = if overflowMenuRemoveCloseMenuChecks then nil else reactModule.useRef(nil)
@@ -115,6 +116,7 @@ return reactModule.memo(function(p1)
 		frame = frame(view, {
 			AnchorPoint = p1.anchorPoint,
 			Position = p1.anchorPosition,
+			ZIndex = if fFlagLuaAppSduiGameTileFeedback then p1.zIndex else nil,
 			onStateChanged = if overflowMenuRemoveCloseMenuChecks then nil else var9,
 			tag = if fFlagSduiExperienceDetailsSupport and p1.buttonTag ~= nil then p1.buttonTag else "auto-xy radius-circle",
 			backgroundStyle = p1.buttonIconBackgroundStyle,
@@ -134,6 +136,7 @@ return reactModule.memo(function(p1)
 			AnchorPoint = p1.anchorPoint,
 			Position = p1.anchorPosition,
 			Size = UDim2.fromScale(0, 0),
+			ZIndex = if fFlagLuaAppSduiGameTileFeedback then p1.zIndex else nil,
 			ref = var1
 		})
 	end

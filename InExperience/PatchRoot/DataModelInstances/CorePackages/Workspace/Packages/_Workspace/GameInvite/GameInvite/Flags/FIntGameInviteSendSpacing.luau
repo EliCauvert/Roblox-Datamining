@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("GameInviteSendSpacing", 1000)

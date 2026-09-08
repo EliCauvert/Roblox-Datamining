@@ -1,4 +1,7 @@
-﻿local _ = require(script.Parent.LinkingProtocolTypes)
+﻿local parent = script.Parent
+local _ = require(parent.LinkingProtocolTypes)
+local attributionTelemetryModule = require(parent.AttributionTelemetry)
+local getFFlagEnableStartAttributionTelemetryModule = require(parent.Flags.getFFlagEnableStartAttributionTelemetry)
 local t = {}
 local t_1 = {
 	AT = true,
@@ -67,12 +70,15 @@ local _ = function(p1)
 	return p1 == nil
 end
 
-function t.resolveAndPublish(p1, _, p2, p3)
-	-- upvalues: t (ref)
-	if p2 == nil then
-		return
+function t.resolveAndPublish(p1, p2, p3, p4)
+	-- upvalues: t (ref), getFFlagEnableStartAttributionTelemetryModule (ref), attributionTelemetryModule (ref)
+	if p3 == nil then return end
+	local var1 = t.computeDecision(p3, p4)
+	p1:adConsentResolved(var1)
+	
+	if getFFlagEnableStartAttributionTelemetryModule() then
+		attributionTelemetryModule.logDecisionPublished(p2, var1.applySharingFilter)
 	end
-	p1:adConsentResolved(t.computeDecision(p2, p3))
 end
 
 return t

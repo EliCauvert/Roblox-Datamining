@@ -11,5 +11,6 @@
 	MaxLoggedInAccountsLimitReached = 11,
 	AccountLinkingRequired = 12,
 	AccountLinkingFailed = 13,
-	IllegalChildAccountLinking = 34
+	IllegalChildAccountLinking = 34,
+	PioneerAccountIneligible = 43
 }

@@ -1,4 +1,5 @@
-﻿local parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
+﻿local flyoutSidePanel = script:FindFirstAncestor("FlyoutSidePanel")
+local parent = flyoutSidePanel.Parent
 local reactModule = require(parent.React)
 local builderIconsModule = require(parent.BuilderIcons)
 local foundationModule = require(parent.Foundation)
@@ -6,9 +7,10 @@ local useTokens = foundationModule.Hooks.useTokens
 local loadableImage = require(parent.UIBlox).App.Loading.LoadableImage
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local getStandardSizeAvatarHeadShotRbxthumb = require(parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
+local fFlagFlyoutAlternateEntryPointUseProfileFrameThumbnailModule = require(flyoutSidePanel.Flags.FFlagFlyoutAlternateEntryPointUseProfileFrameThumbnail)
 
 return function()
-	-- upvalues: useTokens (ref), useSelector (ref), reactModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), foundationModule (ref), builderIconsModule (ref), loadableImage (ref)
+	-- upvalues: useTokens (ref), useSelector (ref), reactModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), fFlagFlyoutAlternateEntryPointUseProfileFrameThumbnailModule (ref), foundationModule (ref), builderIconsModule (ref), loadableImage (ref)
 	local var1 = useTokens()
 	local var2 = useSelector(function(p1)
 		return p1.Users[p1.LocalUserId]
@@ -28,8 +30,8 @@ return function()
 			BackgroundColor3 = var1.Color.Common.Shimmer.Color3,
 			BackgroundTransparency = var1.Color.Common.Shimmer.Transparency,
 			Image = reactModule.useMemo(function()
-				-- upvalues: var2 (ref), getStandardSizeAvatarHeadShotRbxthumb (copy)
-				return if var2 and var2.id then getStandardSizeAvatarHeadShotRbxthumb(var2.id) else nil
+				-- upvalues: var2 (ref), getStandardSizeAvatarHeadShotRbxthumb (copy), fFlagFlyoutAlternateEntryPointUseProfileFrameThumbnailModule (copy)
+				return if var2 and var2.id then getStandardSizeAvatarHeadShotRbxthumb(var2.id, fFlagFlyoutAlternateEntryPointUseProfileFrameThumbnailModule) else nil
 			end, { var2 }),
 			cornerRadius = UDim.new(0.5, 0)
 		})

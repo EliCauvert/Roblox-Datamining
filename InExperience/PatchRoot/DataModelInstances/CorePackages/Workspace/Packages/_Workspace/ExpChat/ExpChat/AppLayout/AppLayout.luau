@@ -45,7 +45,6 @@ local appChat = parent.AppChat
 local getConversationMessageStoreModule = require(appChat.GetConversationMessageStore)
 local getConversationMessageListStoreModule = require(appChat.GetConversationMessageListStore)
 local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
-local fFlagExpChatFixChannelBarInitialWidthModule = require(expChat.Flags.FFlagExpChatFixChannelBarInitialWidth)
 local fFlagExpChatFocusChannelBarSupportModule = require(expChat.Flags.FFlagExpChatFocusChannelBarSupport)
 local fFlagExpChatTransparentFocusSupportModule = require(expChat.Flags.FFlagExpChatTransparentFocusSupport)
 local fFlagExpChatDictationFadeOverrideModule = require(expChat.Flags.FFlagExpChatDictationFadeOverride)
@@ -73,6 +72,7 @@ local fStringDebugFriendsChatConversationIdModule = require(parent.FriendsChat.F
 local manuallyInvokeAmpUpsell = socialUpsellModule.Utils.manuallyInvokeAmpUpsell
 local isInExperienceUIVREnabled = require(parent.SharedExperimentDefinition).isInExperienceUIVREnabled
 local getFFlagExpChatTriggerWindowStatusEventModule = require(expChat.Flags.getFFlagExpChatTriggerWindowStatusEvent)
+local fFlagExpChatWindowStatusEventFixesModule = require(expChat.Flags.FFlagExpChatWindowStatusEventFixes)
 local var1 = if isInExperienceUIVREnabled then {
 	DEFAULT = UDim2.fromScale(0.95, 0.94),
 	WITH_CHANNEL_BAR = UDim2.fromScale(0.95, 0.78),
@@ -172,6 +172,8 @@ appLayout.defaultProps = {
 	isChatInputBarVisible = true,
 	isChatWindowVisible = true,
 	isChannelBarVisible = false,
+	renderingFriends = false,
+	isExperienceChatRendered = true,
 	LayoutOrder = 1,
 	mutedUserIds = nil,
 	onSendChat = nil,
@@ -184,7 +186,7 @@ appLayout.defaultProps = {
 local t = { frequency = 1.25, dampingRatio = 1 }
 
 function appLayout.init(p1)
-	-- upvalues: fFlagDebugFriendsChatModule (ref), fFlagDebugExpChatPerfModule (ref), userInputService (ref), roactModule (ref), otterModule (ref), getTransparencyStoreModule (ref), getFFlagExpChatTriggerWindowStatusEventModule (ref), getChatWindowStatusStoreModule (ref), playersService (ref), textChatService (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), fFlagExpChatTransparentFocusSupportModule (ref), fFlagExpChatDictationFadeOverrideModule (ref), t (ref), createEffect (ref), fFlagAEGIS2EnableGatesForExpChatModule (ref), getChatStatusStoreModule (ref), fFlagExpChatPresetChatEnabled (ref), getPresetChatStoreModule (ref), constantsModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), fFlagExpChatPresetChatSendEnabled (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), fFlagExpChatFixChannelBarInitialWidthModule (ref), getChatLayoutStoreModule (ref), reactFocusNavigationModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), getFocusNavigationStoreModule (ref), focusUtils (ref)
+	-- upvalues: fFlagDebugFriendsChatModule (ref), fFlagDebugExpChatPerfModule (ref), userInputService (ref), roactModule (ref), otterModule (ref), getTransparencyStoreModule (ref), getFFlagExpChatTriggerWindowStatusEventModule (ref), getChatWindowStatusStoreModule (ref), fFlagExpChatWindowStatusEventFixesModule (ref), playersService (ref), textChatService (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), fFlagExpChatTransparentFocusSupportModule (ref), fFlagExpChatDictationFadeOverrideModule (ref), t (ref), createEffect (ref), fFlagAEGIS2EnableGatesForExpChatModule (ref), getChatStatusStoreModule (ref), fFlagExpChatPresetChatEnabled (ref), getPresetChatStoreModule (ref), constantsModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), fFlagExpChatPresetChatSendEnabled (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), getChatLayoutStoreModule (ref), reactFocusNavigationModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), getFocusNavigationStoreModule (ref), focusUtils (ref)
 	p1.state = {}
 	
 	if fFlagDebugFriendsChatModule or fFlagDebugExpChatPerfModule then
@@ -210,7 +212,10 @@ function appLayout.init(p1)
 	local var6 = getTransparencyStoreModule(false)
 	p1.ChatWindowStatusStore = if getFFlagExpChatTriggerWindowStatusEventModule() then getChatWindowStatusStoreModule(false) else nil
 	
-	if getFFlagExpChatTriggerWindowStatusEventModule() then
+	if fFlagExpChatWindowStatusEventFixesModule then
+		local currentChatWindowState = p1.ChatWindowStatusStore.getCurrentChatWindowState(false)
+		p1.lastTrackedChatVisible = if currentChatWindowState == "unknown" then nil else currentChatWindowState ~= "closed"
+	elseif getFFlagExpChatTriggerWindowStatusEventModule() then
 		p1.localPlayerLeavingConnection = playersService.PlayerRemoving:Connect(function(p2)
 			-- upvalues: playersService (copy), p1 (ref), textChatService (copy)
 			if p2 == playersService.LocalPlayer then
@@ -223,16 +228,41 @@ function appLayout.init(p1)
 	if fFlagExpChatUseChatConfigStore then
 		p1.ChatConfigurationStore = getChatConfigurationStoreModule(false)
 	end
+	function p1.isChatSurfaceVisibleForStatusTracking()
+		-- upvalues: p1 (ref)
+		return p1.props.isChatWindowVisible or p1.props.isChatInputBarVisible
+	end
+	
+	function p1.stampOpenForStatusTrackingIfNeeded()
+		-- upvalues: fFlagExpChatWindowStatusEventFixesModule (copy), p1 (ref)
+		if fFlagExpChatWindowStatusEventFixesModule and p1:isChatSurfaceVisibleForStatusTracking() and p1.ChatWindowStatusStore.getCurrentChatWindowState(false) ~= "open" then
+			p1.ChatWindowStatusStore.setOpenTimerStarted(os.clock())
+		end
+	end
+	
+	function p1.stampBackgroundIdleForStatusTrackingIfNeeded()
+		-- upvalues: fFlagExpChatWindowStatusEventFixesModule (copy), p1 (ref)
+		if fFlagExpChatWindowStatusEventFixesModule and p1:isChatSurfaceVisibleForStatusTracking() and p1.ChatWindowStatusStore.getCurrentChatWindowState(false) == "textIdle" then
+			p1.ChatWindowStatusStore.setBackgroundTimerStarted(os.clock())
+		end
+	end
+	
 	function p1.resetBackgroundTransparency()
-		-- upvalues: fFlagExpChatTransparentFocusSupportModule (copy), fFlagExpChatDictationFadeOverrideModule (copy), var6 (ref), p1 (ref), otterModule (copy), getFFlagExpChatTriggerWindowStatusEventModule (copy), t (copy)
+		-- upvalues: fFlagExpChatTransparentFocusSupportModule (copy), fFlagExpChatDictationFadeOverrideModule (copy), var6 (ref), p1 (ref), otterModule (copy), fFlagExpChatWindowStatusEventFixesModule (copy), getFFlagExpChatTriggerWindowStatusEventModule (copy), t (copy)
 		local var7 = if fFlagExpChatTransparentFocusSupportModule or fFlagExpChatDictationFadeOverrideModule then var6.getIsFocused(false) else var6.getIsTextBoxFocused(false)
 		p1.backgroundTransparencyMotor:setGoal(otterModule.instant(0))
 		p1.props.timer:stop()
+		p1:stampOpenForStatusTrackingIfNeeded()
 		
 		if var7 == false and p1.props.isSpatialUIEnabled == false then
+			if fFlagExpChatWindowStatusEventFixesModule and not p1:isChatSurfaceVisibleForStatusTracking() then return end
 			p1.props.timer:start():andThen(function()
-				-- upvalues: getFFlagExpChatTriggerWindowStatusEventModule (copy), p1 (copy), otterModule (copy), t (copy)
-				if getFFlagExpChatTriggerWindowStatusEventModule() then
+				-- upvalues: fFlagExpChatWindowStatusEventFixesModule (copy), p1 (copy), getFFlagExpChatTriggerWindowStatusEventModule (copy), otterModule (copy), t (copy)
+				if fFlagExpChatWindowStatusEventFixesModule then
+					if p1:isChatSurfaceVisibleForStatusTracking() then
+						p1.ChatWindowStatusStore.setBackgroundTimerStarted(os.clock())
+					end
+				elseif getFFlagExpChatTriggerWindowStatusEventModule() then
 					p1.ChatWindowStatusStore.setBackgroundTimerStarted(os.clock())
 				end
 				p1.backgroundTransparencyMotor:setGoal(otterModule.spring(1, t))
@@ -241,15 +271,21 @@ function appLayout.init(p1)
 	end
 	
 	function p1.resetTextTransparency()
-		-- upvalues: fFlagExpChatTransparentFocusSupportModule (copy), fFlagExpChatDictationFadeOverrideModule (copy), var6 (ref), p1 (ref), otterModule (copy), getFFlagExpChatTriggerWindowStatusEventModule (copy), t (copy)
+		-- upvalues: fFlagExpChatTransparentFocusSupportModule (copy), fFlagExpChatDictationFadeOverrideModule (copy), var6 (ref), p1 (ref), otterModule (copy), fFlagExpChatWindowStatusEventFixesModule (copy), getFFlagExpChatTriggerWindowStatusEventModule (copy), t (copy)
 		local var7 = if fFlagExpChatTransparentFocusSupportModule or fFlagExpChatDictationFadeOverrideModule then var6.getIsFocused(false) else var6.getIsTextBoxFocused(false)
 		p1.textTransparencyMotor:setGoal(otterModule.instant(0))
 		p1.props.textTimer:stop()
+		p1:stampBackgroundIdleForStatusTrackingIfNeeded()
 		
 		if var7 == false then
+			if fFlagExpChatWindowStatusEventFixesModule and not p1:isChatSurfaceVisibleForStatusTracking() then return end
 			p1.props.textTimer:start():andThen(function()
-				-- upvalues: getFFlagExpChatTriggerWindowStatusEventModule (copy), p1 (copy), otterModule (copy), t (copy)
-				if getFFlagExpChatTriggerWindowStatusEventModule() then
+				-- upvalues: fFlagExpChatWindowStatusEventFixesModule (copy), p1 (copy), getFFlagExpChatTriggerWindowStatusEventModule (copy), otterModule (copy), t (copy)
+				if fFlagExpChatWindowStatusEventFixesModule then
+					if p1:isChatSurfaceVisibleForStatusTracking() then
+						p1.ChatWindowStatusStore.setTextTimerStarted(os.clock())
+					end
+				elseif getFFlagExpChatTriggerWindowStatusEventModule() then
 					p1.ChatWindowStatusStore.setTextTimerStarted(os.clock())
 				end
 				p1.textTransparencyMotor:setGoal(otterModule.spring(1, t))
@@ -299,15 +335,14 @@ function appLayout.init(p1)
 		p3.AbsoluteSizeWrite = p2.AbsoluteSize
 	end
 	
-	p1.onChatFrameLayoutChanged = if fFlagExpChatPresetChatEnabled or fFlagExpChatFixChannelBarInitialWidthModule then function(p2)
-		-- upvalues: fFlagExpChatPresetChatEnabled (copy), getPresetChatStoreModule (copy), fFlagExpChatFixChannelBarInitialWidthModule (copy), getChatLayoutStoreModule (copy)
+	function p1.onChatFrameLayoutChanged(p2)
+		-- upvalues: fFlagExpChatPresetChatEnabled (copy), getPresetChatStoreModule (copy), getChatLayoutStoreModule (copy)
 		if fFlagExpChatPresetChatEnabled then
 			getPresetChatStoreModule(false).setChatWindowBottomY(p2.AbsolutePosition.Y + p2.AbsoluteSize.Y)
 		end
-		if fFlagExpChatFixChannelBarInitialWidthModule then
-			getChatLayoutStoreModule(false).setChatWindowWidth(p2.AbsoluteSize.X)
-		end
-	end else nil
+		getChatLayoutStoreModule(false).setChatWindowWidth(p2.AbsoluteSize.X)
+	end
+	
 	p1.focusNavigationService = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 	p1.topBorderRef = if fFlagExpChatFocusChannelBarSupportModule then roactModule.createRef() else nil
 	
@@ -345,27 +380,82 @@ function appLayout.init(p1)
 	end
 end
 
+function appLayout.syncChatWindowVisibilityForStatusTracking(p1)
+	-- upvalues: fFlagExpChatWindowStatusEventFixesModule (ref)
+	if not fFlagExpChatWindowStatusEventFixesModule then return end
+	local var2 = p1:isChatSurfaceVisibleForStatusTracking()
+	
+	if p1.lastTrackedChatVisible == var2 then return end
+	p1.lastTrackedChatVisible = var2
+	
+	if var2 then
+		p1.ChatWindowStatusStore.setOpenTimerStarted(os.clock())
+		
+		return
+	end
+	p1.ChatWindowStatusStore.setClosedTimerStarted(os.clock())
+	p1.props.timer:stop()
+	p1.props.textTimer:stop()
+end
+
 function appLayout.didMount(p1)
-	-- upvalues: getFFlagExpChatTriggerWindowStatusEventModule (ref), otterModule (ref), t (ref)
-	p1.props.timer:start():andThen(function()
-		-- upvalues: getFFlagExpChatTriggerWindowStatusEventModule (copy), p1 (ref), otterModule (copy), t (copy)
-		if getFFlagExpChatTriggerWindowStatusEventModule() then
-			p1.ChatWindowStatusStore.setBackgroundTimerStarted(os.clock())
+	-- upvalues: fFlagExpChatWindowStatusEventFixesModule (ref), otterModule (ref), t (ref), getFFlagExpChatTriggerWindowStatusEventModule (ref)
+	if fFlagExpChatWindowStatusEventFixesModule then
+		p1:syncChatWindowVisibilityForStatusTracking()
+		
+		if p1:isChatSurfaceVisibleForStatusTracking() then
+			p1.props.timer:start():andThen(function()
+				-- upvalues: p1 (ref), otterModule (copy), t (copy)
+				if p1:isChatSurfaceVisibleForStatusTracking() then
+					p1.ChatWindowStatusStore.setBackgroundTimerStarted(os.clock())
+				end
+				p1.backgroundTransparencyMotor:setGoal(otterModule.spring(1, t))
+			end)
+			p1.props.textTimer:start():andThen(function()
+				-- upvalues: p1 (ref), otterModule (copy), t (copy)
+				if p1:isChatSurfaceVisibleForStatusTracking() then
+					p1.ChatWindowStatusStore.setTextTimerStarted(os.clock())
+				end
+				p1.textTransparencyMotor:setGoal(otterModule.spring(1, t))
+			end)
+			
+			return
 		end
-		p1.backgroundTransparencyMotor:setGoal(otterModule.spring(1, t))
-	end)
-	p1.props.textTimer:start():andThen(function()
-		-- upvalues: getFFlagExpChatTriggerWindowStatusEventModule (copy), p1 (ref), otterModule (copy), t (copy)
-		if getFFlagExpChatTriggerWindowStatusEventModule() then
-			p1.ChatWindowStatusStore.setTextTimerStarted(os.clock())
-		end
-		p1.textTransparencyMotor:setGoal(otterModule.spring(1, t))
-	end)
+	else
+		p1.props.timer:start():andThen(function()
+			-- upvalues: getFFlagExpChatTriggerWindowStatusEventModule (copy), p1 (ref), otterModule (copy), t (copy)
+			if getFFlagExpChatTriggerWindowStatusEventModule() then
+				p1.ChatWindowStatusStore.setBackgroundTimerStarted(os.clock())
+			end
+			p1.backgroundTransparencyMotor:setGoal(otterModule.spring(1, t))
+		end)
+		p1.props.textTimer:start():andThen(function()
+			-- upvalues: getFFlagExpChatTriggerWindowStatusEventModule (copy), p1 (ref), otterModule (copy), t (copy)
+			if getFFlagExpChatTriggerWindowStatusEventModule() then
+				p1.ChatWindowStatusStore.setTextTimerStarted(os.clock())
+			end
+			p1.textTransparencyMotor:setGoal(otterModule.spring(1, t))
+		end)
+	end
+end
+
+function appLayout.didUpdate(p1, p2)
+	-- upvalues: fFlagExpChatWindowStatusEventFixesModule (ref)
+	if not fFlagExpChatWindowStatusEventFixesModule then return end
+	local var2 = p1:isChatSurfaceVisibleForStatusTracking()
+	
+	if (p2.isChatWindowVisible or p2.isChatInputBarVisible) == var2 then return end
+	p1:syncChatWindowVisibilityForStatusTracking()
+	
+	if var2 then
+		p1.resetBackgroundTransparency()
+		p1.resetTextTransparency()
+	end
 end
 
 function appLayout.render(p1)
-	-- upvalues: getFFlagExpChatTriggerWindowStatusEventModule (ref), fFlagExpChatUseChatConfigStore (ref), clientSettingsUtilityModule (ref), fFlagExpChatEnableFriendsTab (ref), fFlagAEGIS2EnableGatesForExpChatModule (ref), showChatEnabledUIModule (ref), isInExperienceUIVREnabled (ref), getFFlagExpChatConditionallyMountAppLayoutModule (ref), getFFlagExpChatEnableChannelTabsUIModule (ref), var1 (ref), configModule (ref), fFlagDebugForceEnableChatButtonOnModule (ref), isChatRegionLockedModule (ref), expChatPresetButtonOldInputBarV2 (ref), fFlagExpChatPresetChatEnabled (ref), roactModule (ref), fFlagExpChatFixChannelBarInitialWidthModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), expChatFixTopPaddingColor (ref), fFlagExpChatEnableV2ChatWindowModule (ref), fFlagExpChatKeepV2PoolMountedModule (ref), chatWindowModule (ref), fFlagExpChatUseMessagesStore (ref), fFlagExpChatPresetChatSendEnabled (ref), presetChatGateModule (ref), constantsModule (ref), presetChatTrayModule (ref), fFlagExpChatNewInputBarModule (ref), PresetChatInputRow (ref), manuallyInvokeAmpUpsell (ref), chatInputModule (ref), friendsChatDependencyBridgeModule (ref), friendsChatMainModule (ref), enableChatButtonModule (ref), expChatPresetChatFixesEnabled (ref), presetChatButtonModule (ref), presetChatFlyOutModule (ref), expChatPresetFixChatHotkey (ref), channelBarModule (ref), spatialUIModule (ref), chatPlatformProviderModule (ref), reactFocusNavigationModule (ref), selectionCursorProvider (ref), cursorProvider (ref), withSelectionCursorProvider (ref), cursorKind (ref)
-	if getFFlagExpChatTriggerWindowStatusEventModule() then
+	-- upvalues: getFFlagExpChatTriggerWindowStatusEventModule (ref), fFlagExpChatWindowStatusEventFixesModule (ref), fFlagExpChatUseChatConfigStore (ref), clientSettingsUtilityModule (ref), fFlagAEGIS2EnableGatesForExpChatModule (ref), showChatEnabledUIModule (ref), isInExperienceUIVREnabled (ref), getFFlagExpChatConditionallyMountAppLayoutModule (ref), getFFlagExpChatEnableChannelTabsUIModule (ref), var1 (ref), configModule (ref), fFlagDebugForceEnableChatButtonOnModule (ref), isChatRegionLockedModule (ref), expChatPresetButtonOldInputBarV2 (ref), fFlagExpChatPresetChatEnabled (ref), roactModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), expChatFixTopPaddingColor (ref), fFlagExpChatEnableV2ChatWindowModule (ref), fFlagExpChatKeepV2PoolMountedModule (ref), chatWindowModule (ref), fFlagExpChatUseMessagesStore (ref), fFlagExpChatPresetChatSendEnabled (ref), presetChatGateModule (ref), constantsModule (ref), presetChatTrayModule (ref), fFlagExpChatNewInputBarModule (ref), PresetChatInputRow (ref), manuallyInvokeAmpUpsell (ref), chatInputModule (ref), friendsChatDependencyBridgeModule (ref), friendsChatMainModule (ref), enableChatButtonModule (ref), expChatPresetChatFixesEnabled (ref), presetChatButtonModule (ref), presetChatFlyOutModule (ref), expChatPresetFixChatHotkey (ref), channelBarModule (ref), spatialUIModule (ref), fFlagExpChatEnableFriendsTab (ref), chatPlatformProviderModule (ref), reactFocusNavigationModule (ref), selectionCursorProvider (ref), cursorProvider (ref), withSelectionCursorProvider (ref), cursorKind (ref)
+	if getFFlagExpChatTriggerWindowStatusEventModule() and not fFlagExpChatWindowStatusEventFixesModule then
 		if p1.props.isChatWindowVisible or p1.props.isChatInputBarVisible then
 			p1.ChatWindowStatusStore.setOpenTimerStarted(os.clock())
 		else
@@ -377,8 +467,8 @@ function appLayout.render(p1)
 	local backgroundTransparency = clientSettingsUtilityModule.getBackgroundTransparency(var2, p1.props.clientSettings)
 	local backgroundColor = clientSettingsUtilityModule.getBackgroundColor(var2, p1.props.clientSettings)
 	local uDim2 = nil
-	local var3 = fFlagExpChatEnableFriendsTab and p1.props.selectedTabType == "FriendsChat"
-	local var4 = not var3
+	local renderingFriends = p1.props.renderingFriends
+	local isExperienceChatRendered = p1.props.isExperienceChatRendered
 	local chatStatus = nil
 	local isChatInputBarVisible = p1.props.isChatInputBarVisible
 	
@@ -396,13 +486,13 @@ function appLayout.render(p1)
 	end
 	isChannelBarVisible = fFlagDebugForceEnableChatButtonOnModule or fFlagAEGIS2EnableGatesForExpChatModule and (not isChatRegionLockedModule() and (p1.props.canPlatformEnableChat() and chatStatus == "AgeVerificationRequired"))
 	local isPresetFlyOutAvailable = expChatPresetButtonOldInputBarV2 and (fFlagExpChatPresetChatEnabled and p1.state.isPresetFlyOutAvailable)
-	local var5 = fFlagExpChatPresetChatEnabled and (p1.state.isPresetFlyOutAvailable and (not isChannelBarVisible and not isChatInputBarVisible))
+	local var3 = fFlagExpChatPresetChatEnabled and (p1.state.isPresetFlyOutAvailable and (not isChannelBarVisible and not isChatInputBarVisible))
 	
-	local var6 = function(p2)
-		-- upvalues: roactModule (copy), p1 (ref), isInExperienceUIVREnabled (copy), uDim2 (write), configModule (copy), var2 (ref), fFlagExpChatPresetChatEnabled (copy), fFlagExpChatFixChannelBarInitialWidthModule (copy), backgroundColor (ref), backgroundTransparency (ref), getFFlagExpChatEnableChannelTabsUIModule (copy), fFlagExpChatFocusChannelBarSupportModule (copy), var3 (ref), expChatFixTopPaddingColor (copy), var4 (ref), getFFlagExpChatConditionallyMountAppLayoutModule (copy), fFlagExpChatEnableV2ChatWindowModule (copy), fFlagExpChatKeepV2PoolMountedModule (copy), chatWindowModule (copy), fFlagExpChatUseMessagesStore (copy), fFlagExpChatPresetChatSendEnabled (copy), presetChatGateModule (copy), constantsModule (copy), presetChatTrayModule (copy), fFlagExpChatNewInputBarModule (copy), isPresetFlyOutAvailable (ref), PresetChatInputRow (copy), isChatInputBarVisible (write), isChannelBarVisible (ref), manuallyInvokeAmpUpsell (copy), chatInputModule (copy), friendsChatDependencyBridgeModule (copy), friendsChatMainModule (copy), enableChatButtonModule (copy), var5 (ref), expChatPresetChatFixesEnabled (copy), presetChatButtonModule (copy), presetChatFlyOutModule (copy), expChatPresetFixChatHotkey (copy), channelBarModule (copy), spatialUIModule (copy), fFlagExpChatEnableFriendsTab (copy), chatPlatformProviderModule (copy)
+	local var4 = function(p2)
+		-- upvalues: roactModule (copy), p1 (ref), isInExperienceUIVREnabled (copy), uDim2 (write), configModule (copy), var2 (ref), fFlagExpChatPresetChatEnabled (copy), backgroundColor (ref), backgroundTransparency (ref), getFFlagExpChatEnableChannelTabsUIModule (copy), fFlagExpChatFocusChannelBarSupportModule (copy), renderingFriends (ref), expChatFixTopPaddingColor (copy), isExperienceChatRendered (ref), getFFlagExpChatConditionallyMountAppLayoutModule (copy), fFlagExpChatEnableV2ChatWindowModule (copy), fFlagExpChatKeepV2PoolMountedModule (copy), chatWindowModule (copy), fFlagExpChatUseMessagesStore (copy), fFlagExpChatPresetChatSendEnabled (copy), presetChatGateModule (copy), constantsModule (copy), presetChatTrayModule (copy), fFlagExpChatNewInputBarModule (copy), isPresetFlyOutAvailable (ref), PresetChatInputRow (copy), isChatInputBarVisible (write), isChannelBarVisible (ref), manuallyInvokeAmpUpsell (copy), chatInputModule (copy), friendsChatDependencyBridgeModule (copy), friendsChatMainModule (copy), enableChatButtonModule (copy), var3 (ref), expChatPresetChatFixesEnabled (copy), presetChatButtonModule (copy), presetChatFlyOutModule (copy), expChatPresetFixChatHotkey (copy), channelBarModule (copy), spatialUIModule (copy), fFlagExpChatEnableFriendsTab (copy), chatPlatformProviderModule (copy)
 		local isChatWindowVisible
 		local createElement = roactModule.createElement
-		local var7 = "Frame"
+		local var5 = "Frame"
 		local t = {
 			AnchorPoint = p1.props.chatLayoutAlignment.AnchorPoint,
 			BackgroundColor3 = Color3.new(0, 0, 0),
@@ -414,7 +504,7 @@ function appLayout.render(p1)
 			SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 			SelectionGroup = true,
 			Size = if isInExperienceUIVREnabled then uDim2 elseif p1.props.isSpatialUIEnabled then UDim2.fromScale(0.95, 0.68) else UDim2.fromScale(configModule.ChatWindowSize.X.Scale * var2.WidthScale, configModule.ChatWindowSize.Y.Scale * var2.HeightScale),
-			[roactModule.Change.AbsoluteSize] = if fFlagExpChatPresetChatEnabled or fFlagExpChatFixChannelBarInitialWidthModule then p1.onChatFrameLayoutChanged else nil,
+			[roactModule.Change.AbsoluteSize] = p1.onChatFrameLayoutChanged,
 			[roactModule.Change.AbsolutePosition] = if fFlagExpChatPresetChatEnabled then p1.onChatFrameLayoutChanged else nil,
 			[roactModule.Event.SelectionChanged] = p1.onContainerSelectionChanged
 		}
@@ -428,7 +518,7 @@ function appLayout.render(p1)
 			})
 		}
 		local createElement_1 = roactModule.createElement
-		local var8 = "ImageLabel"
+		local var6 = "ImageLabel"
 		local t_2 = {
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/TopRoundedRect8px.png",
@@ -450,20 +540,20 @@ function appLayout.render(p1)
 		elseif not p1.props.isChatWindowVisible then
 			isChatWindowVisible = p1.props.isChatInputBarVisible and not p1.props.isChannelBarVisible
 		end
-		local var9
+		local var7
 		t_2.Visible = isChatWindowVisible
 		t_2[roactModule.Event.MouseEnter] = p1.props.onHovered
 		t_2[roactModule.Event.MouseLeave] = p1.props.onUnhovered
 		t_2[roactModule.Event.SelectionChanged] = if fFlagExpChatFocusChannelBarSupportModule then nil else p1.onBorderSelectionChanged
 		t_2[roactModule.Ref] = if fFlagExpChatFocusChannelBarSupportModule then p1.topBorderRef else nil
-		t_1.topBorder = createElement_1(var8, t_2, {
+		t_1.topBorder = createElement_1(var6, t_2, {
 			uiSizeConstraint = roactModule.createElement("UISizeConstraint", {
 				MaxSize = Vector2.new(configModule.ChatWindowMaxWidth, 1e999)
 			})
 		})
 		t_1.topPadding = roactModule.createElement("Frame", {
 			LayoutOrder = 1,
-			Size = if var3 then UDim2.fromScale(1, 0) else UDim2.new(1, 0, 0, 8),
+			Size = if renderingFriends then UDim2.fromScale(1, 0) else UDim2.new(1, 0, 0, 8),
 			Visible = if getFFlagExpChatEnableChannelTabsUIModule() then p1.props.isChannelBarVisible else false,
 			BackgroundTransparency = p1.transparencyValue:map(function(p3)
 				-- upvalues: backgroundTransparency (copy)
@@ -476,9 +566,9 @@ function appLayout.render(p1)
 			ZIndex = 0
 		})
 		
-		if var4 then
-			var9 = if getFFlagExpChatConditionallyMountAppLayoutModule() and (not fFlagExpChatEnableV2ChatWindowModule or not fFlagExpChatKeepV2PoolMountedModule) then p1.props.isChatWindowVisible else true
-			var9 = var9 and roactModule.createElement(chatWindowModule, {
+		if isExperienceChatRendered then
+			var7 = if getFFlagExpChatConditionallyMountAppLayoutModule() and (not fFlagExpChatEnableV2ChatWindowModule or not fFlagExpChatKeepV2PoolMountedModule) then p1.props.isChatWindowVisible else true
+			var7 = var7 and roactModule.createElement(chatWindowModule, {
 				LayoutOrder = 2,
 				size = UDim2.fromScale(1, 1),
 				transparencyValue = p1.transparencyValue,
@@ -498,17 +588,17 @@ function appLayout.render(p1)
 				isSpatialUIEnabled = p1.props.isSpatialUIEnabled
 			})
 		else
-			var9 = nil
+			var7 = nil
 		end
-		local var10
-		t_1.chatWindow = var9
-		t_1.presetChatTray = if var4 and fFlagExpChatPresetChatEnabled and fFlagExpChatPresetChatSendEnabled then roactModule.createElement(presetChatGateModule, {
+		local var8
+		t_1.chatWindow = var7
+		t_1.presetChatTray = if isExperienceChatRendered and fFlagExpChatPresetChatEnabled and fFlagExpChatPresetChatSendEnabled then roactModule.createElement(presetChatGateModule, {
 			layoutMode = constantsModule.LayoutMode.Tray,
 			targetTextChannel = p1.props.targetTextChannel
 		}, {
 			Tray = roactModule.createElement(presetChatTrayModule, { textChannel = p1.props.targetTextChannel })
 		}) else nil
-		t_1.chatInputBar = if var4 and not fFlagExpChatNewInputBarModule then if isPresetFlyOutAvailable then roactModule.createElement(PresetChatInputRow, {
+		t_1.chatInputBar = if isExperienceChatRendered and not fFlagExpChatNewInputBarModule then if isPresetFlyOutAvailable then roactModule.createElement(PresetChatInputRow, {
 			transparencyValue = p1.transparencyValue,
 			backgroundColor3 = backgroundColor,
 			backgroundTransparency = backgroundTransparency,
@@ -547,7 +637,7 @@ function appLayout.render(p1)
 			isChannelBarVisible = if getFFlagExpChatEnableChannelTabsUIModule() then p1.props.isChannelBarVisible else false,
 			isSpatialUIEnabled = p1.props.isSpatialUIEnabled
 		}) else nil
-		t_1.friendsChat = if var3 and p1.props.isChatWindowVisible then roactModule.createElement(friendsChatDependencyBridgeModule, {}, {
+		t_1.friendsChat = if renderingFriends and p1.props.isChatWindowVisible then roactModule.createElement(friendsChatDependencyBridgeModule, {}, {
 			friendsChatMain = roactModule.createElement(friendsChatMainModule, {
 				parentLayoutOrder = 2,
 				chatWindowSettings = var2,
@@ -561,7 +651,7 @@ function appLayout.render(p1)
 				onAbsolutePositionChanged = p1.onAbsolutePositionChanged
 			})
 		}) else nil
-		t_1.enableChatButton = if var4 and not fFlagExpChatNewInputBarModule and (not isPresetFlyOutAvailable and isChannelBarVisible) then roactModule.createElement(enableChatButtonModule, {
+		t_1.enableChatButton = if isExperienceChatRendered and not fFlagExpChatNewInputBarModule and (not isPresetFlyOutAvailable and isChannelBarVisible) then roactModule.createElement(enableChatButtonModule, {
 			LayoutOrder = 3,
 			chatWindowSettings = var2,
 			transparencyValue = p1.transparencyValue,
@@ -576,10 +666,10 @@ function appLayout.render(p1)
 			end
 		}) else nil
 		
-		if var4 and fFlagExpChatNewInputBarModule then
-			local var11
-			var10 = roactModule.createElement
-			local var12 = "Frame"
+		if isExperienceChatRendered and fFlagExpChatNewInputBarModule then
+			local var9
+			var8 = roactModule.createElement
+			local var10 = "Frame"
 			local t_3 = {
 				AutomaticSize = Enum.AutomaticSize.Y,
 				BackgroundColor3 = backgroundColor,
@@ -611,7 +701,7 @@ function appLayout.render(p1)
 					LayoutOrder = 1,
 					AutomaticSize = Enum.AutomaticSize.Y,
 					GroupTransparency = p1.transparencyValue,
-					Size = if var5 then UDim2.fromScale(1, 0) else UDim2.fromOffset(configModule.PresetChat.ButtonWidth, 0),
+					Size = if var3 then UDim2.fromScale(1, 0) else UDim2.fromOffset(configModule.PresetChat.ButtonWidth, 0),
 					Visible = if expChatPresetChatFixesEnabled then p1.props.isChatWindowVisible or p1.props.isChatInputBarVisible else nil
 				}, {
 					PresetEntry = if p1.state.presetLayoutMode == constantsModule.LayoutMode.Tray then roactModule.createElement(presetChatButtonModule, {
@@ -619,20 +709,20 @@ function appLayout.render(p1)
 						targetTextChannel = p1.props.targetTextChannel
 					}) else roactModule.createElement(presetChatFlyOutModule, {
 						addTopPadding = p1.props.isChatWindowVisible,
-						fullWidthButton = var5,
+						fullWidthButton = var3,
 						textChannel = p1.props.targetTextChannel
 					})
 				}) else nil
 			}
 			
-			if expChatPresetFixChatHotkey or not var5 then
-				var11 = roactModule.createElement
-				var11 = var11("Frame", {
+			if expChatPresetFixChatHotkey or not var3 then
+				var9 = roactModule.createElement
+				var9 = var9("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					AutomaticSize = if expChatPresetFixChatHotkey and var5 then Enum.AutomaticSize.None else Enum.AutomaticSize.Y,
-					Size = if expChatPresetFixChatHotkey and var5 then UDim2.new(0, 0, 0, 0) else UDim2.new(1, if p1.state.isPresetFlyOutAvailable then -(configModule.PresetChat.ButtonWidth + 8) else 0, 0, 0),
-					Visible = if expChatPresetFixChatHotkey then not var5 else nil
+					AutomaticSize = if expChatPresetFixChatHotkey and var3 then Enum.AutomaticSize.None else Enum.AutomaticSize.Y,
+					Size = if expChatPresetFixChatHotkey and var3 then UDim2.new(0, 0, 0, 0) else UDim2.new(1, if p1.state.isPresetFlyOutAvailable then -(configModule.PresetChat.ButtonWidth + 8) else 0, 0, 0),
+					Visible = if expChatPresetFixChatHotkey then not var3 else nil
 				}, {
 					enableChatButton = if isChannelBarVisible then roactModule.createElement(enableChatButtonModule, {
 						chatWindowSettings = var2,
@@ -666,16 +756,16 @@ function appLayout.render(p1)
 					}) else nil
 				})
 			else
-				var11 = nil
+				var9 = nil
 			end
-			t_4.fillArea = var11
-			var10 = var10(var12, t_3, t_4)
+			t_4.fillArea = var9
+			var8 = var8(var10, t_3, t_4)
 		else
-			var10 = nil
+			var8 = nil
 		end
-		t_1.chatInputRow = var10
+		t_1.chatInputRow = var8
 		t_1.channelBar = (if getFFlagExpChatConditionallyMountAppLayoutModule() then p1.props.isChannelBarVisible else true) and roactModule.createElement(channelBarModule, {
-			LayoutOrder = if var3 then 100 else 4,
+			LayoutOrder = if renderingFriends then 100 else 4,
 			size = UDim2.fromScale(1, 1),
 			transparencyValue = p1.transparencyValue,
 			onHovered = p1.props.onHovered,
@@ -684,7 +774,7 @@ function appLayout.render(p1)
 			visible = if getFFlagExpChatEnableChannelTabsUIModule() then p1.props.isChannelBarVisible else false,
 			topBorderRef = if fFlagExpChatFocusChannelBarSupportModule then p1.topBorderRef else nil
 		})
-		t_1.bottomBorder = if var3 then nil else roactModule.createElement("ImageLabel", {
+		t_1.bottomBorder = if renderingFriends then nil else roactModule.createElement("ImageLabel", {
 			Name = "bottomBorder",
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/BottomRoundedRect8px.png",
@@ -705,7 +795,7 @@ function appLayout.render(p1)
 				MaxSize = Vector2.new(configModule.ChatWindowMaxWidth, 1e999)
 			})
 		})
-		createElement = createElement(var7, t, t_1)
+		createElement = createElement(var5, t, t_1)
 		
 		return roactModule.createElement(spatialUIModule.Provider, {
 			value = { isSpatialUIEnabled = p1.props.isSpatialUIEnabled }
@@ -718,8 +808,8 @@ function appLayout.render(p1)
 		CursorProvider = roactModule.createElement(selectionCursorProvider, {}, {
 			NewCursorProvider = roactModule.createElement(cursorProvider, {}, {
 				withSelectionCursorProvider(function(p2)
-					-- upvalues: var6 (ref), cursorKind (copy)
-					return var6(p2(cursorKind.Invisible))
+					-- upvalues: var4 (ref), cursorKind (copy)
+					return var4(p2(cursorKind.Invisible))
 				end)
 			})
 		})
@@ -727,38 +817,38 @@ function appLayout.render(p1)
 end
 
 function appLayout.debugInjectFakeMessages(p1)
-	-- upvalues: fFlagExpChatEnableFriendsTab (ref), getFriendsChatRealtimeStoreModule (ref), fStringDebugFriendsChatConversationIdModule (ref), getConversationMessageStoreModule (ref), getConversationMessageListStoreModule (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref)
+	-- upvalues: getFriendsChatRealtimeStoreModule (ref), fStringDebugFriendsChatConversationIdModule (ref), getConversationMessageStoreModule (ref), getConversationMessageListStoreModule (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref)
 	if p1.debugInjectionThread ~= nil then
 		task.cancel(p1.debugInjectionThread)
 		p1.debugInjectionThread = nil
 	end
-	local var2 = fFlagExpChatEnableFriendsTab and p1.props.selectedTabType == "FriendsChat"
-	local var3 = getFriendsChatRealtimeStoreModule(false).getActiveConversationId(false) or fStringDebugFriendsChatConversationIdModule
+	local renderingFriends = p1.props.renderingFriends
+	local var2 = getFriendsChatRealtimeStoreModule(false).getActiveConversationId(false) or fStringDebugFriendsChatConversationIdModule
 	
-	if var2 and (var3 == nil or var3 == "") then
+	if renderingFriends and (var2 == nil or var2 == "") then
 		return
 	end
 	p1.debugInjectionThread = task.spawn(function()
-		-- upvalues: var2 (ref), getConversationMessageStoreModule (copy), getConversationMessageListStoreModule (copy), fFlagExpChatUseMessagesStore (copy), getMessagesStoreModule (copy), var3 (ref), p1 (ref)
-		local var4 = if var2 then getConversationMessageStoreModule(false) else nil
-		local var5 = if var2 then getConversationMessageListStoreModule(false) else nil
-		local var6 = if var2 or not fFlagExpChatUseMessagesStore then nil else getMessagesStoreModule(false)
+		-- upvalues: renderingFriends (ref), getConversationMessageStoreModule (copy), getConversationMessageListStoreModule (copy), fFlagExpChatUseMessagesStore (copy), getMessagesStoreModule (copy), var2 (ref), p1 (ref)
+		local var3 = if renderingFriends then getConversationMessageStoreModule(false) else nil
+		local var4 = if renderingFriends then getConversationMessageListStoreModule(false) else nil
+		local var5 = if renderingFriends or not fFlagExpChatUseMessagesStore then nil else getMessagesStoreModule(false)
 		
 		for i = 1, 50 do
-			if var2 then
-				local var7 = `debug-fake-{tostring(os.clock())}-{i}`
-				var4.upsertMessages({
-					[var7] = {
+			if renderingFriends then
+				local var6 = `debug-fake-{tostring(os.clock())}-{i}`
+				var3.upsertMessages({
+					[var6] = {
 						type = "user",
-						id = var7,
+						id = var6,
 						content = `Fake friends-chat debug message #{i}`,
 						created_at = DateTime.now():ToIsoDate(),
 						sender_user_id = (i - 1) % 5 + 1
 					}
 				})
-				var5.prependMessages(var3, { var7 })
-			elseif var6 ~= nil then
-				var6.addSystemMessage(`Fake exp-chat debug message #{i}`, "RBXGeneral", nil, nil, false)
+				var4.prependMessages(var2, { var6 })
+			elseif var5 ~= nil then
+				var5.addSystemMessage(`Fake exp-chat debug message #{i}`, "RBXGeneral", nil, nil, false)
 			end
 			if i < 50 then
 				task.wait(0.1)
@@ -769,7 +859,15 @@ function appLayout.debugInjectFakeMessages(p1)
 end
 
 function appLayout.willUnmount(p2)
-	-- upvalues: getFFlagExpChatTriggerWindowStatusEventModule (ref), fFlagExpChatUseChatConfigStore (ref), fFlagAEGIS2EnableGatesForExpChatModule (ref), fFlagExpChatPresetChatEnabled (ref)
+	-- upvalues: fFlagExpChatWindowStatusEventFixesModule (ref), getFFlagExpChatTriggerWindowStatusEventModule (ref), fFlagExpChatUseChatConfigStore (ref), fFlagAEGIS2EnableGatesForExpChatModule (ref), fFlagExpChatPresetChatEnabled (ref)
+	if fFlagExpChatWindowStatusEventFixesModule then
+		p2.props.timer:stop()
+		p2.props.textTimer:stop()
+		
+		if p2.ChatWindowStatusStore.getCurrentChatWindowState(false) ~= "closed" then
+			p2.ChatWindowStatusStore.setClosedTimerStarted(os.clock())
+		end
+	end
 	if p2.debugKeybindConnection then
 		p2.debugKeybindConnection:Disconnect()
 		p2.debugKeybindConnection = nil

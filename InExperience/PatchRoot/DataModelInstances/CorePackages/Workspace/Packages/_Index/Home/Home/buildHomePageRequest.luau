@@ -33,6 +33,12 @@ return function(p2, p3)
 		if p3.clientCapabilities then
 			t.client_capabilities = p3.clientCapabilities
 		end
+		if p3.collectionLayout then
+			t.collection_layout = p2.HomeCollectionLayoutInfo.new({
+				items_per_row = p3.collectionLayout.items_per_row,
+				rows_above_fold = p3.collectionLayout.rows_above_fold
+			})
+		end
 	end
 	return p2.HomePageRequest.new(t)
 end

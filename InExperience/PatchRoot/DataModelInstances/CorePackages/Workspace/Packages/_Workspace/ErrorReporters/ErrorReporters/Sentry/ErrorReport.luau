@@ -1,6 +1,7 @@
 ﻿local parent = script:FindFirstAncestor("ErrorReporters").Parent
 local cryoModule = require(parent.Cryo)
 local tModule = require(parent.t)
+local _ = require(parent.SentrySdk)
 local processErrorStackModule = require(script.Parent.Parent.ProcessErrorStack)
 local constantsModule = require(script.Parent.Constants)
 local var1 = tModule.optional(tModule.map(tModule.string, tModule.some(tModule.string, tModule.number, tModule.boolean)))
@@ -26,7 +27,16 @@ local var2 = tModule.optional(tModule.map(tModule.string, function(p1)
 	return var5, var6
 end))
 local var3 = tModule.optional(tModule.map(tModule.string, tModule.map(tModule.string, tModule.some(tModule.string, tModule.number, tModule.boolean))))
-local var4 = tModule.intersection(tModule.strictInterface({
+local var4 = tModule.optional(tModule.array(tModule.interface({
+	type = tModule.optional(tModule.string),
+	category = tModule.optional(tModule.string),
+	message = tModule.optional(tModule.string),
+	data = tModule.optional(tModule.table),
+	level = tModule.optional(tModule.string),
+	timestamp = tModule.optional(tModule.number),
+	origin = tModule.optional(tModule.string)
+})))
+local var5 = tModule.intersection(tModule.strictInterface({
 	threads = tModule.map(tModule.string, tModule.strictInterface({
 		name = tModule.optional(tModule.string),
 		fault = tModule.optional(tModule.boolean),
@@ -47,18 +57,21 @@ local var4 = tModule.intersection(tModule.strictInterface({
 	level = tModule.optional(tModule.string),
 	attributes = var1,
 	annotations = var2,
-	customMetadata = var3
+	customMetadata = var3,
+	breadcrumbs = var4,
+	timestamp = tModule.optional(tModule.number)
 }))
 local t = {
 	IAttributes = var1,
 	IAnnotations = var2,
-	ICustomMetadata = var3
+	ICustomMetadata = var3,
+	IBreadcrumbs = var4
 }
 t.__index = t
 
 function t.validate(p2)
-	-- upvalues: var4 (ref)
-	return var4(p2)
+	-- upvalues: var5 (ref)
+	return var5(p2)
 end
 
 function t.new()
@@ -67,7 +80,8 @@ function t.new()
 		threads = {},
 		attributes = {},
 		annotations = {},
-		customMetadata = {}
+		customMetadata = {},
+		breadcrumbs = {}
 	}
 	setmetatable(t_1, t)
 	
@@ -101,9 +115,9 @@ local function sanitizeCustomMetadataGroup(p2)
 	local t = {}
 	
 	for i, v in pairs(p2) do
-		local var5 = type(v)
+		local var6 = type(v)
 		
-		if var5 == "string" or var5 == "number" or var5 == "boolean" then
+		if var6 == "string" or var6 == "number" or var6 == "boolean" then
 			t[i] = v
 		end
 	end
@@ -120,54 +134,82 @@ function t:addCustomMetadata(p3)
 	local customMetadata = self.customMetadata
 	
 	for i, v in pairs(p3) do
-		local var6 = sanitizeCustomMetadataGroup(v)
+		local var7 = sanitizeCustomMetadataGroup(v)
 		
-		if var6 ~= nil then
-			local var7 = customMetadata[i]
+		if var7 ~= nil then
+			local var8 = customMetadata[i]
 			
-			if var7 == nil then
-				customMetadata[i] = var6
+			if var8 == nil then
+				customMetadata[i] = var7
 			else
-				customMetadata[i] = cryoModule.Dictionary.join(var7, var6)
+				customMetadata[i] = cryoModule.Dictionary.join(var8, var7)
 			end
 		end
 	end
 	self.customMetadata = customMetadata
 end
 
-function t.fromMessageAndStack(p4, p5, p6)
+function t:addBreadcrumb(p4)
+	if type(p4) == "table" then
+		table.insert(self.breadcrumbs, {
+			type = p4.type or "default",
+			category = p4.category,
+			message = p4.message,
+			data = p4.data,
+			level = p4.level or "info",
+			origin = p4.origin,
+			timestamp = p4.timestamp or os.time()
+		})
+		
+		return
+	end
+	warn("Cannot add breadcrumb of type: ", type(p4))
+end
+
+function t:addBreadcrumbs(p4)
+	if type(p4) ~= "table" then
+		warn("Cannot add breadcrumbs of type: ", type(p4))
+		
+		return
+	end
+	for i, v in ipairs(p4) do
+		self:addBreadcrumb(v)
+	end
+end
+
+function t.fromMessageAndStack(p5, p6, p7)
 	-- upvalues: t (ref), constantsModule (ref), processErrorStackModule (ref)
-	local var8 = t.new()
-	var8.message = p4
-	var8.level = p6 or constantsModule.DEFAULT_ERROR_LEVEL
-	local var9, var10 = processErrorStackModule(p5)
+	local var9 = t.new()
+	var9.message = p5
+	var9.level = p7 or constantsModule.DEFAULT_ERROR_LEVEL
+	local var10, var11 = processErrorStackModule(p6)
 	
-	for i, v in var9 do
-		if v.sourceCode and var10[v.sourceCode] then
-			v.sourceCode = var10[v.sourceCode].path
+	for i, v in var10 do
+		if v.sourceCode and var11[v.sourceCode] then
+			v.sourceCode = var11[v.sourceCode].path
 		end
 	end
-	var8.threads = { main = { name = "main", stack = var9 } }
+	var9.threads = { main = { name = "main", stack = var10 } }
 	
-	return var8
+	return var9
 end
 
 function t:fromDetails()
 	-- upvalues: t (ref), constantsModule (ref)
-	local var11
+	local var12
 	local _ = nil
 	
 	if self.stack then
-		var11 = t.fromMessageAndStack(self.message, self.stack, self.level)
+		var12 = t.fromMessageAndStack(self.message, self.stack, self.level)
 	else
-		var11 = t.new()
-		var11.message = self.message
-		var11.level = self.level or constantsModule.DEFAULT_ERROR_LEVEL
+		var12 = t.new()
+		var12.message = self.message
+		var12.level = self.level or constantsModule.DEFAULT_ERROR_LEVEL
 	end
 	if self.annotations then
-		var11:addAnnotations(self.annotations)
+		var12:addAnnotations(self.annotations)
 	end
-	return var11
+	return var12
 end
 
 return t

@@ -1,4 +1,6 @@
-﻿return {
+﻿local _ = require(script.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
+
+return {
 	Components = {
 		ReportCompleteDialog = require(script.Dialogs.ReportCompleteDialog),
 		ReportFailedDialog = require(script.Dialogs.ReportFailedDialog)

@@ -3,22 +3,21 @@ local parent = serverDrivenUi.Parent
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiImpressionEventType = sduiCoreSystemModule.SduiImpressionEventType
 local getSduiImpressionHandlerRegistry = sduiCoreSystemModule.getSduiImpressionHandlerRegistry
-local fFlagSduiChartsSupport = require(parent.SharedFlags).FFlagSduiChartsSupport
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagSduiEdpStoreImpressionsLogging = require(parent.SharedFlags).FFlagSduiEdpStoreImpressionsLogging
 local fFlagSduiDevStoreSeeAllImpressionsLogging = require(parent.SharedFlags).FFlagSduiDevStoreSeeAllImpressionsLogging
 local fFlagSduiQueryImpressionsLogging = require(parent.SharedFlags).FFlagSduiQueryImpressionsLogging
 
 return function()
-	-- upvalues: sduiImpressionEventType (ref), fFlagSduiChartsSupport (ref), serverDrivenUi (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEdpStoreImpressionsLogging (ref), fFlagSduiDevStoreSeeAllImpressionsLogging (ref), fFlagSduiQueryImpressionsLogging (ref), getSduiImpressionHandlerRegistry (ref)
+	-- upvalues: sduiImpressionEventType (ref), serverDrivenUi (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEdpStoreImpressionsLogging (ref), fFlagSduiDevStoreSeeAllImpressionsLogging (ref), fFlagSduiQueryImpressionsLogging (ref), getSduiImpressionHandlerRegistry (ref)
 	getSduiImpressionHandlerRegistry().registerImpressionHandlerConfigs({
-		[sduiImpressionEventType.filterImpressions] = if fFlagSduiChartsSupport then {
+		[sduiImpressionEventType.filterImpressions] = {
 			skipItemImpressionsLog = true,
 			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Impressions.SduiFilterImpressionsHandler)
 			end
-		} else nil,
+		},
 		[sduiImpressionEventType.gameImpressions] = {
 			skipItemImpressionsLog = false,
 			lazyHandler = function()

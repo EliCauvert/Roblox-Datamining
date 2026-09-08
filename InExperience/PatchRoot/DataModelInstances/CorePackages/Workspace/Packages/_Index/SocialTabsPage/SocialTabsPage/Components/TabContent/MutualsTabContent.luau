@@ -16,10 +16,12 @@ local useFetchPresencesModule = require(socialTabsPage.Hooks.useFetchPresences)
 local useSortedEntitiesByPresenceModule = require(socialTabsPage.Hooks.useSortedEntitiesByPresence)
 local useUserListCTAsModule = require(socialTabsPage.Hooks.useUserListCTAs)
 local useCTAActionHandlersModule = require(socialTabsPage.Hooks.useCTAActionHandlers)
+local socialTabsCtaConfigModule = require(socialTabsPage.Common.SocialTabsCtaConfig)
 local fFlagSocialTabsPagePresenceSignalsMigrationModule = require(socialTabsPage.Flags.FFlagSocialTabsPagePresenceSignalsMigration)
+local fFlagUserListCtaIntegrationEnabled = require(parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 
 return function()
-	-- upvalues: useSocialTabsContextModule (ref), useMutualsListModule (ref), reactModule (ref), dashModule (ref), entityType (ref), fFlagSocialTabsPagePresenceSignalsMigrationModule (ref), useFetchPresencesModule (ref), useSortedEntitiesByPresenceModule (ref), useUserListCTAsModule (ref), useCTAActionHandlersModule (ref), rowDataProviderModule (ref), view (ref), loading (ref), userListLayoutAdaptor (ref), layoutMode (ref)
+	-- upvalues: useSocialTabsContextModule (ref), useMutualsListModule (ref), reactModule (ref), dashModule (ref), entityType (ref), fFlagSocialTabsPagePresenceSignalsMigrationModule (ref), useFetchPresencesModule (ref), useSortedEntitiesByPresenceModule (ref), fFlagUserListCtaIntegrationEnabled (ref), useUserListCTAsModule (ref), useCTAActionHandlersModule (ref), rowDataProviderModule (ref), view (ref), loading (ref), userListLayoutAdaptor (ref), layoutMode (ref), socialTabsCtaConfigModule (ref)
 	local var1 = useMutualsListModule(useSocialTabsContextModule().profileId)
 	local var2 = reactModule.useMemo(function()
 		-- upvalues: dashModule (copy), var1 (ref), entityType (copy)
@@ -39,9 +41,21 @@ return function()
 		useFetchPresencesModule(var3)
 	end
 	local var4 = useSortedEntitiesByPresenceModule(var2)
-	local var5 = useUserListCTAsModule(var3)
-	local var6 = useCTAActionHandlersModule()
+	local var5 = nil
 	
+	if not fFlagUserListCtaIntegrationEnabled then
+		local var6 = useUserListCTAsModule(var3)
+		local var7 = useCTAActionHandlersModule()
+		var5 = reactModule.useCallback(function(p1, p2, _)
+			-- upvalues: reactModule (copy), rowDataProviderModule (copy), var6 (ref), var7 (ref)
+			return reactModule.createElement(rowDataProviderModule, {
+				createRow = p1,
+				entity = p2,
+				ctaResult = var6[p2.id],
+				actionHandlers = var7
+			})
+		end, { var6, var7 })
+	end
 	return if var1.isLoading and #var2 == 0 then reactModule.createElement(view, { tag = "col align-x-center align-y-center size-full" }, { LoadingIndicator = reactModule.createElement(loading) }) else reactModule.createElement(view, { tag = "col size-full padding-x-xlarge" }, {
 		MutualsList = reactModule.createElement(userListLayoutAdaptor, {
 			isScrollEnabled = true,
@@ -49,15 +63,8 @@ return function()
 			layoutMode = layoutMode.Vertical,
 			hasMore = var1.hasMore,
 			onLoadMore = if var1.hasMore then var1.loadMore else nil,
-			renderRow = reactModule.useCallback(function(p1, p2, _)
-				-- upvalues: reactModule (copy), rowDataProviderModule (copy), var5 (ref), var6 (ref)
-				return reactModule.createElement(rowDataProviderModule, {
-					createRow = p1,
-					entity = p2,
-					ctaResult = var5[p2.id],
-					actionHandlers = var6
-				})
-			end, { var5, var6 })
+			renderRow = var5,
+			ctaConfig = if fFlagUserListCtaIntegrationEnabled then socialTabsCtaConfigModule else nil
 		})
 	})
 end

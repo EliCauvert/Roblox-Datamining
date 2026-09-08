@@ -1,18 +1,18 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
+﻿local moments = script:FindFirstAncestor("Moments")
+local parent = moments.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local reactOtterModule = require(parent.ReactOtter)
 local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
 local momentContextModule = require(script.Parent.MomentContext)
 local playbackToggleIndicatorMachineModule = require(script.Parent.playbackToggleIndicatorMachine)
+local useIsPlayingModule = require(moments.Hooks.useIsPlaying)
 local icon = foundationModule.Icon
 local view = foundationModule.View
 local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local useTokens = foundationModule.Hooks.useTokens
 local usePreferences = foundationModule.Hooks.usePreferences
-local useSignalState = signalsReactModule.useSignalState
 local t = { frequency = 4, dampingRatio = 1 }
 local t_1 = { duration = 0.15, easingStyle = Enum.EasingStyle.Quad }
 
@@ -26,22 +26,16 @@ local function defaultSchedule(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: momentContextModule (ref), useTokens (ref), usePreferences (ref), reactModule (ref), reactOtterModule (ref), signalsModule (ref), useSignalState (ref), t (ref), t_1 (ref), defaultSchedule (ref), playbackToggleIndicatorMachineModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref)
+	-- upvalues: momentContextModule (ref), useTokens (ref), usePreferences (ref), reactModule (ref), reactOtterModule (ref), useIsPlayingModule (ref), t (ref), t_1 (ref), defaultSchedule (ref), playbackToggleIndicatorMachineModule (ref), signalsModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref)
 	local controller = momentContextModule.useMoment().controller
 	local var1 = useTokens()
 	local reducedMotion = usePreferences().reducedMotion
 	local var2, var3 = reactModule.useState(false)
 	local var4, var5 = reactOtterModule.useAnimatedBinding(0)
-	local var6 = useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), controller (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: controller (copy)
-			return if controller == nil then false else controller.getState(p2).isPlaying
-		end)
-	end, { controller }))
+	local var6 = useIsPlayingModule()
 	local var7 = reactModule.useRef(nil)
 	
-	function var17.current(p2)
+	function var18.current(p2)
 		-- upvalues: reducedMotion (ref), reactOtterModule (copy), t (copy), t_1 (copy), var5 (ref)
 		var5(if reducedMotion then reactOtterModule.instant(if p2 == "enter" then 1 else 0) elseif p2 == "enter" then reactOtterModule.spring(1, t) else reactOtterModule.ease(0, t_1))
 	end

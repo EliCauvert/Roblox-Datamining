@@ -5,10 +5,10 @@ local characterUtility = require(parent.Thumbnailing).CharacterUtility
 local cameraUtility = require(parent.Thumbnailing).CameraUtility
 local cFrameUtility = require(parent.Thumbnailing).CFrameUtility
 local emoteUtility = require(parent.Thumbnailing).EmoteUtility
-local purchasePromptPreviewMakeupHead = game:DefineFastFlag("PurchasePromptPreviewMakeupHead", false)
+local purchasePromptPreviewMakeupHead2 = game:DefineFastFlag("PurchasePromptPreviewMakeupHead2", false)
 
 return function(p1)
-	-- upvalues: reactModule (ref), emoteUtility (ref), runService (ref), cFrameUtility (ref), characterUtility (ref), cameraUtility (ref), purchasePromptPreviewMakeupHead (ref)
+	-- upvalues: reactModule (ref), emoteUtility (ref), runService (ref), cFrameUtility (ref), characterUtility (ref), cameraUtility (ref), purchasePromptPreviewMakeupHead2 (ref)
 	local var1 = reactModule.useRef(nil)
 	local var2, var3 = reactModule.useBinding(nil)
 	local var4 = reactModule.useRef(false)
@@ -22,9 +22,9 @@ return function(p1)
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref), emoteUtility (copy), runService (copy), var4 (ref), cFrameUtility (copy), characterUtility (copy), cameraUtility (copy), var3 (ref), purchasePromptPreviewMakeupHead (copy)
+		-- upvalues: p1 (ref), var1 (ref), emoteUtility (copy), runService (copy), var4 (ref), cFrameUtility (copy), characterUtility (copy), cameraUtility (copy), var3 (ref), purchasePromptPreviewMakeupHead2 (copy)
 		task.spawn(function()
-			-- upvalues: p1 (copy), var1 (copy), emoteUtility (copy), runService (copy), var4 (copy), cFrameUtility (copy), characterUtility (copy), cameraUtility (copy), var3 (copy), purchasePromptPreviewMakeupHead (copy)
+			-- upvalues: p1 (copy), var1 (copy), emoteUtility (copy), runService (copy), var4 (copy), cFrameUtility (copy), characterUtility (copy), cameraUtility (copy), var3 (copy), purchasePromptPreviewMakeupHead2 (copy)
 			local var5 = p1.model:Clone()
 			local camera = Instance.new("Camera")
 			camera.CameraType = Enum.CameraType.Scriptable
@@ -66,7 +66,7 @@ return function(p1)
 				var5.Parent = var10
 				var10.Parent = var1.current
 			end
-			if not purchasePromptPreviewMakeupHead then
+			if not purchasePromptPreviewMakeupHead2 then
 				cameraUtility.SetupAccessoryCamera(var10, camera)
 				var3(camera)
 				
@@ -74,10 +74,9 @@ return function(p1)
 			end
 			local head = var10:FindFirstChild("Head")
 			
-			if head and head:IsA("MeshPart") then
-				head.CFrame = CFrame.new()
+			if head and head:IsA("MeshPart") and not var10:FindFirstChild("HumanoidRootPart") then
 				local cFrame = head.CFrame
-				local var11, var12 = characterUtility.CalculateModelExtents(var10, cFrame)
+				local var11, var12 = characterUtility.CalculateBodyPartsExtents(cFrame, { head })
 				cameraUtility.SetupCamera(camera, {
 					optFieldOfView = 30,
 					extentScale = 1.2,

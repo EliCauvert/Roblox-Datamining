@@ -27,6 +27,18 @@ local t_3 = {
 	lastUpdated = { 25, 11, 19 }
 }
 local t_4 = {
+	eventName = "Sdui_RequestOutcome",
+	description = "Terminal outcome of sdui page requests, bucketed by endpoint",
+	backends = { "RobloxTelemetryCounter" },
+	lastUpdated = { 26, 8, 31 }
+}
+local t_5 = {
+	eventName = "Sdui_RequestRetry",
+	description = "Retry attempts for sdui page requests, bucketed by endpoint",
+	backends = { "RobloxTelemetryCounter" },
+	lastUpdated = { 26, 8, 31 }
+}
+local t_6 = {
 	[Enum.HttpError.OK] = "OK",
 	[Enum.HttpError.InvalidUrl] = "InvalidUrl",
 	[Enum.HttpError.DnsResolve] = "DnsResolve",
@@ -48,12 +60,12 @@ return {
 		telemetryService:LogEvent(t, { customFields = p1, standardizedFields = { "addOSInfo" } })
 	end,
 	sendPageStatusEvent = function(p1, p2, p3)
-		-- upvalues: telemetryService (ref), t_2 (ref), t_4 (ref)
+		-- upvalues: telemetryService (ref), t_2 (ref), t_6 (ref)
 		telemetryService:LogCounter(t_2, {
 			customFields = {
 				pageKey = p1,
 				statusCode = p2 or "unknown",
-				httpError = if p3 then t_4[p3] else nil
+				httpError = if p3 then t_6[p3] else nil
 			}
 		})
 	end,
@@ -75,6 +87,24 @@ return {
 		telemetryService:LogEvent(t_1, {
 			customFields = { surfaceKey = p1 },
 			standardizedFields = { "addOSInfo" }
+		})
+	end,
+	sendRequestOutcomeCounter = function(p1, p2, p3, p4, p5)
+		-- upvalues: telemetryService (ref), t_4 (ref), t_6 (ref)
+		telemetryService:LogCounter(t_4, {
+			customFields = {
+				pageKey = p1,
+				endpoint = p2,
+				outcome = p3,
+				statusCode = p4 or "unknown",
+				httpError = if p5 == nil or p5 == Enum.HttpError.OK then nil else t_6[p5]
+			}
+		})
+	end,
+	sendRequestRetryCounter = function(p1, p2, p3)
+		-- upvalues: telemetryService (ref), t_5 (ref)
+		telemetryService:LogCounter(t_5, {
+			customFields = { pageKey = p1, endpoint = p2, attempt = p3 }
 		})
 	end
 }

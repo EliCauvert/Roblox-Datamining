@@ -43,7 +43,6 @@ local AXViewportCameraFieldOfView = game:DefineFastInt("AXViewportCameraFieldOfV
 local fFlagAXEnableBatchItemDetailsFetchV2 = avatarExperienceFlagsModule.FFlagAXEnableBatchItemDetailsFetchV2
 local fFlagAXEnableInspectAndBuyFocusNavigation = avatarExperienceFlagsModule.FFlagAXEnableInspectAndBuyFocusNavigation
 local fFlagAXEnableIaBTimedOptionsBulkPurchase = avatarExperienceFlagsModule.FFlagAXEnableIaBTimedOptionsBulkPurchase
-local fFlagAXFixIaBTimedOptionsPopoverFocus = avatarExperienceFlagsModule.FFlagAXFixIaBTimedOptionsPopoverFocus
 local var1 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then avatarExperienceInspectAndBuyModule.Contexts.ItemSelectionStoreContext else nil
 local var2 = if var1 then var1.Provider else nil
 local var3 = if var1 then var1.useItemSelectionStore else nil
@@ -61,7 +60,7 @@ local var6 = function(p1)
 end
 
 local function InspectAndBuyBaseContainer(p1)
-	-- upvalues: useViewBreakpoints (ref), constantsModule (ref), useTokens (ref), useDispatch (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref), var3 (ref), useSignalState (ref), useSelector (ref), var4 (ref), tutilsModule (ref), var5 (ref), var6 (ref), reactModule (ref), guiService (ref), updateBulkPuchaseResultsModule (ref), itemTypeEnum (ref), buildBulkPurchaseAnalyticsPayload (ref), getItemDetailsModule (ref), getFavoriteForAssetModule (ref), getProductInfoModule (ref), fFlagAXEnableBatchItemDetailsFetchV2 (ref), getFavoriteForBundleModule (ref), deleteFavoriteForAssetModule (ref), createFavoriteForAssetModule (ref), deleteFavoriteForBundleModule (ref), createFavoriteForBundleModule (ref), openOverlayModule (ref), overlayModule (ref), promptPurchaseModule (ref), applyTryOnItemToHumanoidDescription (ref), avatarViewportModule (ref), enableAvatarViewportAutoRotation (ref), AXViewportCameraFieldOfView (ref), useResponsivePanelLayoutProps (ref), useUnifiedEventListenerInExperience (ref), fFlagAXEnableInspectAndBuyFocusNavigation (ref), useInspectAndBuyFocusNavigation (ref), foundationModule (ref), themeModule (ref), responsivePanelLayout (ref), overlayModule_1 (ref), fFlagAXFixIaBTimedOptionsPopoverFocus (ref), popoverFocusRestorationContext (ref)
+	-- upvalues: useViewBreakpoints (ref), constantsModule (ref), useTokens (ref), useDispatch (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref), var3 (ref), useSignalState (ref), useSelector (ref), var4 (ref), tutilsModule (ref), var5 (ref), var6 (ref), reactModule (ref), guiService (ref), updateBulkPuchaseResultsModule (ref), itemTypeEnum (ref), buildBulkPurchaseAnalyticsPayload (ref), getItemDetailsModule (ref), getFavoriteForAssetModule (ref), getProductInfoModule (ref), fFlagAXEnableBatchItemDetailsFetchV2 (ref), getFavoriteForBundleModule (ref), deleteFavoriteForAssetModule (ref), createFavoriteForAssetModule (ref), deleteFavoriteForBundleModule (ref), createFavoriteForBundleModule (ref), openOverlayModule (ref), overlayModule (ref), promptPurchaseModule (ref), applyTryOnItemToHumanoidDescription (ref), avatarViewportModule (ref), enableAvatarViewportAutoRotation (ref), AXViewportCameraFieldOfView (ref), useResponsivePanelLayoutProps (ref), useUnifiedEventListenerInExperience (ref), fFlagAXEnableInspectAndBuyFocusNavigation (ref), useInspectAndBuyFocusNavigation (ref), foundationModule (ref), themeModule (ref), responsivePanelLayout (ref), overlayModule_1 (ref), popoverFocusRestorationContext (ref)
 	local var7 = useViewBreakpoints(constantsModule.TopBarHeight)
 	local var8 = useTokens()
 	local var9 = useDispatch()
@@ -187,85 +186,86 @@ local function InspectAndBuyBaseContainer(p1)
 	})
 	useUnifiedEventListenerInExperience()
 	
-	if not fFlagAXEnableInspectAndBuyFocusNavigation then
-		return reactModule.createElement(foundationModule.View, {
-			Size = var7.OverlaySize,
-			Position = var7.OverlayPosition,
-			backgroundStyle = var8.Color.Common.Shadow,
-			stateLayer = {
-				affordance = foundationModule.Enums.StateLayerAffordance.None
-			},
-			onActivated = function()
-				-- upvalues: guiService (copy)
-				guiService:CloseInspectMenu()
-			end
-		}, {
-			ContainerView = reactModule.createElement(foundationModule.View, {
-				ClipsDescendants = true,
-				AnchorPoint = var7.ContainerAnchorPoint,
-				Size = var7.ContainerSize,
-				Position = var7.ContainerPosition,
-				backgroundStyle = {
-					Color3 = themeModule.color("MenuContainer"),
-					Transparency = themeModule.transparency("MenuContainer", 1) * guiService.PreferredTransparency
-				},
-				stateLayer = {
-					affordance = foundationModule.Enums.StateLayerAffordance.None
-				},
-				onActivated = function() end
+	if fFlagAXEnableInspectAndBuyFocusNavigation then
+		local var19 = useInspectAndBuyFocusNavigation()
+		
+		return reactModule.createElement(popoverFocusRestorationContext.Provider, { value = true }, {
+			InspectAndBuyContent = reactModule.createElement("Frame", {
+				BackgroundTransparency = 1,
+				BorderSizePixel = 0,
+				ref = var19.setFocusRef,
+				Size = UDim2.fromScale(1, 1),
+				SelectionGroup = var19.focusNavigationProps.SelectionGroup,
+				SelectionBehaviorDown = var19.focusNavigationProps.SelectionBehaviorDown,
+				SelectionBehaviorLeft = var19.focusNavigationProps.SelectionBehaviorLeft,
+				SelectionBehaviorRight = var19.focusNavigationProps.SelectionBehaviorRight,
+				SelectionBehaviorUp = var19.focusNavigationProps.SelectionBehaviorUp
 			}, {
-				UICorner = reactModule.createElement("UICorner", { CornerRadius = themeModule.DefaultCornerRadius }),
-				ResponsivePanelLayout = reactModule.createElement(responsivePanelLayout, var14)
-			}),
-			Overlay = reactModule.createElement(overlayModule_1)
+				Content = reactModule.createElement(foundationModule.View, {
+					Size = var7.OverlaySize,
+					Position = var7.OverlayPosition,
+					backgroundStyle = var8.Color.Common.Shadow,
+					stateLayer = {
+						affordance = foundationModule.Enums.StateLayerAffordance.None
+					},
+					onActivated = function()
+						-- upvalues: guiService (copy)
+						guiService:CloseInspectMenu()
+					end
+				}, {
+					ContainerView = reactModule.createElement(foundationModule.View, {
+						ClipsDescendants = true,
+						AnchorPoint = var7.ContainerAnchorPoint,
+						Size = var7.ContainerSize,
+						Position = var7.ContainerPosition,
+						backgroundStyle = {
+							Color3 = themeModule.color("MenuContainer"),
+							Transparency = themeModule.transparency("MenuContainer", 1) * guiService.PreferredTransparency
+						},
+						stateLayer = {
+							affordance = foundationModule.Enums.StateLayerAffordance.None
+						},
+						onActivated = function() end
+					}, {
+						UICorner = reactModule.createElement("UICorner", { CornerRadius = themeModule.DefaultCornerRadius }),
+						ResponsivePanelLayout = reactModule.createElement(responsivePanelLayout, var14)
+					}),
+					Overlay = reactModule.createElement(overlayModule_1)
+				})
+			})
 		})
 	end
-	local var19 = useInspectAndBuyFocusNavigation()
-	local frame = reactModule.createElement("Frame", {
-		BackgroundTransparency = 1,
-		BorderSizePixel = 0,
-		ref = var19.setFocusRef,
-		Size = UDim2.fromScale(1, 1),
-		SelectionGroup = var19.focusNavigationProps.SelectionGroup,
-		SelectionBehaviorDown = var19.focusNavigationProps.SelectionBehaviorDown,
-		SelectionBehaviorLeft = var19.focusNavigationProps.SelectionBehaviorLeft,
-		SelectionBehaviorRight = var19.focusNavigationProps.SelectionBehaviorRight,
-		SelectionBehaviorUp = var19.focusNavigationProps.SelectionBehaviorUp
+	return reactModule.createElement(foundationModule.View, {
+		Size = var7.OverlaySize,
+		Position = var7.OverlayPosition,
+		backgroundStyle = var8.Color.Common.Shadow,
+		stateLayer = {
+			affordance = foundationModule.Enums.StateLayerAffordance.None
+		},
+		onActivated = function()
+			-- upvalues: guiService (copy)
+			guiService:CloseInspectMenu()
+		end
 	}, {
-		Content = reactModule.createElement(foundationModule.View, {
-			Size = var7.OverlaySize,
-			Position = var7.OverlayPosition,
-			backgroundStyle = var8.Color.Common.Shadow,
+		ContainerView = reactModule.createElement(foundationModule.View, {
+			ClipsDescendants = true,
+			AnchorPoint = var7.ContainerAnchorPoint,
+			Size = var7.ContainerSize,
+			Position = var7.ContainerPosition,
+			backgroundStyle = {
+				Color3 = themeModule.color("MenuContainer"),
+				Transparency = themeModule.transparency("MenuContainer", 1) * guiService.PreferredTransparency
+			},
 			stateLayer = {
 				affordance = foundationModule.Enums.StateLayerAffordance.None
 			},
-			onActivated = function()
-				-- upvalues: guiService (copy)
-				guiService:CloseInspectMenu()
-			end
+			onActivated = function() end
 		}, {
-			ContainerView = reactModule.createElement(foundationModule.View, {
-				ClipsDescendants = true,
-				AnchorPoint = var7.ContainerAnchorPoint,
-				Size = var7.ContainerSize,
-				Position = var7.ContainerPosition,
-				backgroundStyle = {
-					Color3 = themeModule.color("MenuContainer"),
-					Transparency = themeModule.transparency("MenuContainer", 1) * guiService.PreferredTransparency
-				},
-				stateLayer = {
-					affordance = foundationModule.Enums.StateLayerAffordance.None
-				},
-				onActivated = function() end
-			}, {
-				UICorner = reactModule.createElement("UICorner", { CornerRadius = themeModule.DefaultCornerRadius }),
-				ResponsivePanelLayout = reactModule.createElement(responsivePanelLayout, var14)
-			}),
-			Overlay = reactModule.createElement(overlayModule_1)
-		})
+			UICorner = reactModule.createElement("UICorner", { CornerRadius = themeModule.DefaultCornerRadius }),
+			ResponsivePanelLayout = reactModule.createElement(responsivePanelLayout, var14)
+		}),
+		Overlay = reactModule.createElement(overlayModule_1)
 	})
-	
-	return if fFlagAXFixIaBTimedOptionsPopoverFocus then reactModule.createElement(popoverFocusRestorationContext.Provider, { value = true }, { InspectAndBuyContent = frame }) else frame
 end
 
 return if fFlagAXEnableIaBTimedOptionsBulkPurchase then function(value)

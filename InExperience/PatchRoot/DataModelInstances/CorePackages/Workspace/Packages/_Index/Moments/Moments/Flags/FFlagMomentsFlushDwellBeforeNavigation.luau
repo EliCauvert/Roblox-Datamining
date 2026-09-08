@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("MomentsFlushDwellBeforeNavigation", false) and (require(script.Parent.FFlagMomentsFixRecommendationImpressionLifecycle) and require(script:FindFirstAncestor("Moments").Parent.SharedFlags).FFlagMomentsWatchSessionalization)

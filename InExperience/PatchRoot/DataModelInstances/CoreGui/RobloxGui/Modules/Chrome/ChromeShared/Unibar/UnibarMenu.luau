@@ -10,9 +10,6 @@ local getFFlagChromeCentralizedConfiguration = sharedFlagsModule.GetFFlagChromeC
 local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
 local fFlagAddUILessMode = sharedFlagsModule.FFlagAddUILessMode
 local fIntAddUILessModeVariant = sharedFlagsModule.FIntAddUILessModeVariant
-local fFlagEnableInExperienceAvatarSwitcher = sharedFlagsModule.FFlagEnableInExperienceAvatarSwitcher
-local fFlagAddMapToNineDot = sharedFlagsModule.FFlagAddMapToNineDot
-local fFlagEnableInExperienceShop = sharedFlagsModule.FFlagEnableInExperienceShop
 local fFlagAppNavMyStatsTab = sharedFlagsModule.FFlagAppNavMyStatsTab
 local fFlagUnibarMenuOpenSubmenu = require(script.Parent.Parent.Parent.Flags).FFlagUnibarMenuOpenSubmenu
 local fFlagTokenizeUnibarConstantsWithStyleProvider = require(chromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
@@ -38,7 +35,6 @@ local stores = require(corePackagesService.Workspace.Packages.CoreGuiCommon).Sto
 local createEffect = require(corePackagesService.Packages.Signals).createEffect
 local constantsModule_1 = require(chromeShared.Parent.Integrations.Party.Constants)
 local isConnectUnibarEnabledModule = require(chromeShared.Parent.Integrations.Connect.isConnectUnibarEnabled)
-local isConnectDropdownEnabledModule = require(chromeShared.Parent.Integrations.Connect.isConnectDropdownEnabled)
 local var1 = if fFlagEnableConsoleExpControls then require(chromeShared.Parent.Parent.TopBar.Components.GamepadConnector) else nil
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local panel3DInSpatialUI = nil
@@ -52,26 +48,11 @@ if isInExperienceUIVREnabled then
 	var2 = require(corePackagesService.Workspace.Packages.Observable).ObservableValue.new(true)
 end
 local argoPartyExperimentation = require(corePackagesService.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
-local fFlagRemoveFriendsChatUnibarEntrypoints = sharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints
-local fFlagExpChatCanShowFriendsTab = sharedFlagsModule.FFlagExpChatCanShowFriendsTab
 
 if not getFFlagChromeCentralizedConfiguration() then
 	function configureUnibar()
-		-- upvalues: fFlagAddMapToNineDot (ref), buildMenuOrderModule (ref), isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), argoPartyExperimentation (ref), fFlagExpChatCanShowFriendsTab (ref), getFFlagDebugEnableUnibarDummyIntegrations (ref), isConnectUnibarEnabledModule (ref), constantsModule_1 (ref), fFlagAppNavMyStatsTab (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), serviceModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), constantsModule (ref), guiService (ref), fFlagEnableInExperienceShop (ref)
-		local var3
-		local _ = nil
-		
-		if fFlagAddMapToNineDot then
-			var3 = buildMenuOrderModule()
-		else
-			var3 = { "leaderboard", "emotes", "backpack" }
-			table.insert(var3, "respawn")
-			table.insert(var3, 1, "trust_and_safety")
-			
-			if isConnectDropdownEnabledModule() and (not fFlagRemoveFriendsChatUnibarEntrypoints or not argoPartyExperimentation.getIsRenameEnabled() or not fFlagExpChatCanShowFriendsTab) then
-				table.insert(var3, 1, "connect_dropdown")
-			end
-		end
+		-- upvalues: buildMenuOrderModule (ref), getFFlagDebugEnableUnibarDummyIntegrations (ref), isConnectUnibarEnabledModule (ref), argoPartyExperimentation (ref), constantsModule_1 (ref), fFlagAppNavMyStatsTab (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), serviceModule (ref)
+		local var3 = buildMenuOrderModule()
 		local list = { "nine_dot", "chat", "toggle_mic_mute" }
 		table.insert(list, 3, "join_voice")
 		
@@ -94,24 +75,6 @@ if not getFFlagChromeCentralizedConfiguration() then
 			serviceModule:configureMenu({ { "vr_toggle_button", "vr_safety_bubble" }, list })
 		else
 			serviceModule:configureMenu({ list })
-		end
-		if not fFlagAddMapToNineDot then
-			if not isInExperienceUIVREnabled then
-				table.insert(var3, 2, "camera_entrypoint")
-				table.insert(var3, 2, "selfie_view")
-			elseif not isSpatial() then
-				table.insert(var3, 2, "camera_entrypoint")
-				table.insert(var3, 2, "selfie_view")
-			end
-			if fFlagEnableInExperienceAvatarSwitcher then
-				table.insert(var3, 3, constantsModule.AVATAR_SWITCHER_ID)
-			end
-			if not isSpatial() and not guiService:IsTenFootInterface() then
-				table.insert(var3, 4, "music_entrypoint")
-			end
-			if fFlagEnableInExperienceShop then
-				table.insert(var3, 2, constantsModule.IN_EXPERIENCE_SHOP_ID)
-			end
 		end
 		serviceModule:configureSubMenu("nine_dot", var3)
 	end
@@ -233,7 +196,7 @@ function AnimationStateHelper(p1)
 				task.wait()
 				
 				if not p1.menuFrameRef.current or not var4 then continue end
-				local var7 = if fFlagEnableConsoleExpControls then p1.menuFrameRef.current:FindFirstChild(constantsModule.ICON_NAME_PREFIX .. tostring(var4), true) else p1.menuFrameRef.current:FindFirstChild("IconHitArea_" .. var32, true)
+				local var7 = if fFlagEnableConsoleExpControls then p1.menuFrameRef.current:FindFirstChild(constantsModule.ICON_NAME_PREFIX .. tostring(var4), true) else p1.menuFrameRef.current:FindFirstChild("IconHitArea_" .. var31, true)
 				
 				if not var7 then continue end
 				guiService.SelectedCoreObject = var7

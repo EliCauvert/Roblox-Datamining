@@ -7,25 +7,23 @@ local analyticsServiceModule = require(genericAbuseReporting.BeduiV2.Analytics.a
 local _ = require(script.Parent.AbuseSheetFlowTypes)
 local commentNodeModule = require(genericAbuseReporting.BeduiV2.Components.Nodes.CommentNode)
 local confirmationNodeModule = require(genericAbuseReporting.BeduiV2.Components.Nodes.ConfirmationNode)
-local listNodeModule = require(genericAbuseReporting.BeduiV2.Components.Nodes.ListNode)
 local listNodeV2Module = require(genericAbuseReporting.BeduiV2.Components.Nodes.ListNodeV2)
 local paragraphNodeModule = require(genericAbuseReporting.BeduiV2.Components.Nodes.ParagraphNode)
 local reviewNodeModule = require(genericAbuseReporting.BeduiV2.Components.Nodes.ReviewNode)
 local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReportAnalytics
 local fFlagSupportSubmissionOnAllReportNodes = require(parent.SharedFlags).FFlagSupportSubmissionOnAllReportNodes
-local fFlagAbuseReportMenuV2 = require(parent.SharedFlags).FFlagAbuseReportMenuV2
 local fFlagAbuseReportInExpPlayerListV3 = require(parent.SharedFlags).FFlagAbuseReportInExpPlayerListV3
 local fFlagAbuseReportSceneSelectionSubmitTrackingModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionSubmitTracking)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useAbuseReportAnalytics (ref), reactModule (ref), fFlagAbuseReportMenuV2 (ref), listNodeV2Module (ref), listNodeModule (ref), dashModule (ref), commentNodeModule (ref), confirmationNodeModule (ref), fFlagSupportSubmissionOnAllReportNodes (ref), paragraphNodeModule (ref), reviewNodeModule (ref), genericAbuseReporting (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), fFlagAbuseReportInExpPlayerListV3 (ref), telemetryEventType (ref)
+	-- upvalues: useAbuseReportAnalytics (ref), reactModule (ref), listNodeV2Module (ref), dashModule (ref), commentNodeModule (ref), confirmationNodeModule (ref), fFlagSupportSubmissionOnAllReportNodes (ref), paragraphNodeModule (ref), reviewNodeModule (ref), genericAbuseReporting (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), fFlagAbuseReportInExpPlayerListV3 (ref), telemetryEventType (ref)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
 	
 	if p1.node.type == "list" then
 		local var1 = if p1.store then p1.store[p1.node.storeAs] else nil
 		
-		return reactModule.createElement(if fFlagAbuseReportMenuV2 then listNodeV2Module else listNodeModule, dashModule.join(p1.node, {
+		return reactModule.createElement(listNodeV2Module, dashModule.join(p1.node, {
 			initialValue = if type(var1) == "table" then var1.id else nil,
 			isSubmitting = p1.isSubmitting,
 			onNext = function(_, p2)
@@ -66,7 +64,7 @@ return reactModule.memo(function(p1)
 				p1.onNext({})
 			end else nil
 		}))
-	elseif fFlagAbuseReportMenuV2 and p1.node.type == "review" then
+	elseif p1.node.type == "review" then
 		return reactModule.createElement(reviewNodeModule, dashModule.join(p1.node, {
 			isSubmitting = if fFlagSupportSubmissionOnAllReportNodes then p1.isSubmitting else nil,
 			onNext = if p1.onNext then function()
@@ -74,7 +72,7 @@ return reactModule.memo(function(p1)
 				p1.onNext({})
 			end else nil
 		}))
-	elseif fFlagAbuseReportMenuV2 and p1.node.type == "inExpChatSelection" then
+	elseif p1.node.type == "inExpChatSelection" then
 		local var2 = if p1.store then p1.store[p1.node.storeAs] else nil
 		
 		return reactModule.createElement(require(genericAbuseReporting.BeduiV2.Components.Nodes.InExpChatSelectionNode), dashModule.join(p1.node, {
@@ -90,7 +88,7 @@ return reactModule.memo(function(p1)
 				end
 			end
 		}))
-	elseif fFlagAbuseReportMenuV2 and p1.node.type == "inExpConfirmation" then
+	elseif p1.node.type == "inExpConfirmation" then
 		return reactModule.createElement(require(genericAbuseReporting.BeduiV2.Components.Nodes.InExpConfirmationNode), dashModule.join(p1.node, {
 			isSubmitting = p1.isSubmitting,
 			onNext = if p1.onNext then function(p2)
@@ -103,7 +101,7 @@ return reactModule.memo(function(p1)
 				})
 			end else nil
 		}))
-	elseif fFlagAbuseReportMenuV2 and p1.node.type == "inExpSceneSelection" then
+	elseif p1.node.type == "inExpSceneSelection" then
 		return reactModule.createElement(require(genericAbuseReporting.BeduiV2.Components.Nodes.InExpSceneSelectionNode), dashModule.join(p1.node, {
 			onNext = if p1.onNext then function()
 				-- upvalues: p1 (ref)

@@ -1,14 +1,11 @@
-﻿local chromeShared = script:FindFirstAncestor("ChromeShared")
-local corePackagesService = game:GetService("CorePackages")
+﻿local corePackagesService = game:GetService("CorePackages")
 local textChatService = game:GetService("TextChatService")
 local reactModule = require(corePackagesService.Packages.React)
 local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local serviceModule = require(chromeShared.Service)
 local expChatModule = require(corePackagesService.Workspace.Packages.ExpChat)
 local getGlobalChatTooltipStore = expChatModule.Stores.GetGlobalChatTooltipStore
 local getChatTooltipStore = expChatModule.Stores.GetChatTooltipStore
 local getChatStatusStore = expChatModule.Stores.GetChatStatusStore
-local getTransparencyStore = expChatModule.Stores.GetTransparencyStore
 local isUserChatEnabled = expChatModule.isUserChatEnabled
 local expChatSharedModule = require(corePackagesService.Workspace.Packages.ExpChatShared)
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
@@ -16,11 +13,10 @@ local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPres
 local fFlagExpChatUseUnifiedTooltipStore = expChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
 local expChatPresetChatBadgeFTUXExperimentation = require(corePackagesService.Workspace.Packages.SocialExperiments).ExpChatPresetChatBadgeFTUXExperimentation
 local expChatShowPresetTooltipToNonAgeChecked2 = game:DefineFastFlag("ExpChatShowPresetTooltipToNonAgeChecked2", false)
-local expChatFixTooltipBadgeTransientOpen = game:DefineFastFlag("ExpChatFixTooltipBadgeTransientOpen", false)
 local _ = require(corePackagesService.Workspace.Packages.Chrome)
 
 return function(p1)
-	-- upvalues: textChatService (ref), fFlagExpChatUseUnifiedTooltipStore (ref), getChatTooltipStore (ref), signalsReactModule (ref), fFlagExpChatPresetChatEnabled (ref), reactModule (ref), expChatShowPresetTooltipToNonAgeChecked2 (ref), getGlobalChatTooltipStore (ref), getChatStatusStore (ref), isUserChatEnabled (ref), getFFlagTextChatEnableUniverseChatTabs (ref), expChatFixTooltipBadgeTransientOpen (ref), getTransparencyStore (ref), serviceModule (ref), expChatPresetChatBadgeFTUXExperimentation (ref)
+	-- upvalues: textChatService (ref), fFlagExpChatUseUnifiedTooltipStore (ref), getChatTooltipStore (ref), signalsReactModule (ref), fFlagExpChatPresetChatEnabled (ref), reactModule (ref), expChatShowPresetTooltipToNonAgeChecked2 (ref), getGlobalChatTooltipStore (ref), getChatStatusStore (ref), isUserChatEnabled (ref), getFFlagTextChatEnableUniverseChatTabs (ref), expChatPresetChatBadgeFTUXExperimentation (ref)
 	local var1, var2, var3
 	local iconHostProps = p1.iconHostProps
 	local isChat = iconHostProps.integration.id == "chat"
@@ -89,49 +85,15 @@ return function(p1)
 		end, { isChat, var3, var2, setShouldShowGlobalChatTooltip })
 	end
 	local var16, var17 = reactModule.useState(false)
-	
-	if expChatFixTooltipBadgeTransientOpen then
-		local var18 = signalsReactModule.useSignalState(getTransparencyStore(false).getIsTextBoxFocused)
-		reactModule.useEffect(function()
-			-- upvalues: var3 (write), var18 (ref), var17 (ref), serviceModule (copy), var2 (write)
-			if var3 and var18 then
-				var17(true)
-			end
-			if var3 then
-				local var19 = serviceModule:onIntegrationActivated():connect(function(p2)
-					-- upvalues: var2 (copy), var17 (copy)
-					if p2 == "chat" and not var2 then
-						var17(true)
-					end
-				end)
-				
-				return function()
-					-- upvalues: var19 (ref)
-					var19:disconnect()
-				end
-			end
-		end, { var3, var18, var2 })
-	else
-		reactModule.useEffect(function()
-			-- upvalues: var3 (write), var2 (write), var17 (ref)
-			if var3 and var2 then
-				var17(true)
-			end
-		end, { var3, var2 })
-	end
-	local var19 = var3 and not var16
-	
-	if expChatFixTooltipBadgeTransientOpen then
-		reactModule.useEffect(function()
-			-- upvalues: var19 (ref), var5 (write), expChatPresetChatBadgeFTUXExperimentation (copy)
-			if var19 and var5 and expChatPresetChatBadgeFTUXExperimentation.isExperimentEnabled then
-				expChatPresetChatBadgeFTUXExperimentation.logExposure()
-			end
-		end, { var19, var5 })
-	end
+	reactModule.useEffect(function()
+		-- upvalues: var3 (write), var2 (write), var17 (ref)
+		if var3 and var2 then
+			var17(true)
+		end
+	end, { var3, var2 })
 	local cloned = table.clone(iconHostProps)
 	
-	if var19 and (not var5 or expChatPresetChatBadgeFTUXExperimentation.getShouldShowPresetChatIconBadge()) then
+	if var3 and not var16 and (not var5 or expChatPresetChatBadgeFTUXExperimentation.getShouldShowPresetChatIconBadge()) then
 		cloned.minBadgeCount = 1
 	end
 	return reactModule.createElement(p1.NotificationBadge, cloned)

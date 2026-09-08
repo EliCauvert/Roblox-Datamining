@@ -26,7 +26,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		label = var1.label,
 		hint = var1.hint,
 		hasError = var1.hasError,
-		isDisabled = var1.trailingElement ~= nil and var1.isDisabled,
+		isDisabled = var1.leadingElement == nil and var1.trailingElement == nil and var1.isDisabled,
 		isRequired = var1.isRequired,
 		input = function(p3)
 			-- upvalues: reactModule (copy), composerTextInputModule (copy), var1 (ref), var2 (ref), var3 (ref)
@@ -52,9 +52,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				hasClearButton = var1.hasClearButton,
 				placeholder = var1.placeholder,
 				horizontalPadding = {
-					left = UDim.new(0, var2.Padding.Large),
+					left = if var1.leadingElement then UDim.new(0, var2.Padding.XSmall) else UDim.new(0, var2.Padding.Large),
 					right = if var1.trailingElement then UDim.new(0, var2.Padding.XSmall) else var3.container.horizontalPadding
 				},
+				leadingElement = var1.leadingElement,
 				trailingElement = var1.trailingElement,
 				ref = p3,
 				testId = `{var1.testId}--input`

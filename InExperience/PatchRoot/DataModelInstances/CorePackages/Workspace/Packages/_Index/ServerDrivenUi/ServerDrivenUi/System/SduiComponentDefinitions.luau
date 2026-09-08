@@ -43,19 +43,19 @@ local fFlagSduiAttributionRowV2 = require(parent.SharedFlags).FFlagSduiAttributi
 local fFlagSduiExperienceDetailsSocialProof = require(parent.SharedFlags).FFlagSduiExperienceDetailsSocialProof
 local fFlagSduiChipAccessoryProps = require(parent.SharedFlags).FFlagSduiChipAccessoryProps
 local fFlagSduiCollectionCarouselOverrides = require(parent.SharedFlags).FFlagSduiCollectionCarouselOverrides
-local fFlagSduiChartsSupport = require(parent.SharedFlags).FFlagSduiChartsSupport
 local fFlagLuaAppDismissUnlockUpsell = require(parent.SharedFlags).FFlagLuaAppDismissUnlockUpsell
 local fFlagSduiTileBottomButton = require(parent.SharedFlags).FFlagSduiTileBottomButton
 local fFlagSduiTileHoldAction = require(parent.SharedFlags).FFlagSduiTileHoldAction
-local fFlagLuaAppSduiPlaceholderSupport = require(parent.SharedFlags).FFlagLuaAppSduiPlaceholderSupport
+local fFlagLuaAppSduiGameTileFeedback = require(parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 local fFlagSduiOptionSelectorCollection = require(parent.SharedFlags).FFlagSduiOptionSelectorCollection
 local fFlagSduiCollectionCarouselPlaceholderItem = require(parent.SharedFlags).FFlagSduiCollectionCarouselPlaceholderItem
+local fFlagSduiCollectionGridRevealRows = require(parent.SharedFlags).FFlagSduiCollectionGridRevealRows
 local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
 function t_1.new()
-	-- upvalues: parseVector2Prop (ref), getEngineEnumParser (ref), parseColor3Prop (ref), parseNumberProp (ref), parseIntegerProp (ref), parseUDim2Prop (ref), cryoModule (ref), parseBooleanProp (ref), parseStringProp (ref), sduiComponentType (ref), parent (ref), fFlagSduiAttributionRowV2 (ref), parseCallbackProp (ref), parseUiComponentProp (ref), parseTypographyTokenProp (ref), parseColorTokenProp (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseImageStringProp (ref), tModule (ref), parseIconProp (ref), parseUDimProp (ref), serverDrivenUi (ref), collectionItemSize (ref), itemHeightModeModule (ref), fFlagSduiCollectionCarouselOverrides (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), getArrayMetatableParser (ref), parseLazyUiComponentProp (ref), fFlagLuaAppSduiPlaceholderSupport (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), fFlagSduiOptionSelectorCollection (ref), parseFocusNavActionsProp (ref), reactModule (ref), parseGradientProp (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), parseImageSetOrImageProp (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagSduiTileBottomButton (ref), fFlagSduiTileHoldAction (ref), fFlagSduiEnableHeroUnitBottomRow (ref), fFlagSduiChipAccessoryProps (ref), fFlagSduiEnableAssociatedItemsRow (ref), fFlagSduiExperienceDetailsSocialProof (ref), fFlagSduiChartsSupport (ref), sduiBadgeComponent (ref), fFlagLuaAppDismissUnlockUpsell (ref), t_1 (ref)
+	-- upvalues: parseVector2Prop (ref), getEngineEnumParser (ref), parseColor3Prop (ref), parseNumberProp (ref), parseIntegerProp (ref), parseUDim2Prop (ref), cryoModule (ref), parseBooleanProp (ref), parseStringProp (ref), sduiComponentType (ref), parent (ref), fFlagSduiAttributionRowV2 (ref), parseCallbackProp (ref), parseUiComponentProp (ref), parseTypographyTokenProp (ref), parseColorTokenProp (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseImageStringProp (ref), tModule (ref), parseIconProp (ref), parseUDimProp (ref), serverDrivenUi (ref), collectionItemSize (ref), itemHeightModeModule (ref), fFlagSduiCollectionCarouselOverrides (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), getArrayMetatableParser (ref), parseLazyUiComponentProp (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), fFlagSduiOptionSelectorCollection (ref), fFlagSduiCollectionGridRevealRows (ref), parseFocusNavActionsProp (ref), reactModule (ref), parseGradientProp (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), parseImageSetOrImageProp (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagSduiTileBottomButton (ref), fFlagSduiTileHoldAction (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagSduiEnableHeroUnitBottomRow (ref), fFlagSduiChipAccessoryProps (ref), fFlagSduiEnableAssociatedItemsRow (ref), fFlagSduiExperienceDetailsSocialProof (ref), sduiBadgeComponent (ref), fFlagLuaAppDismissUnlockUpsell (ref), t_1 (ref)
 	local t = {
 		anchorPoint = parseVector2Prop,
 		automaticSize = getEngineEnumParser(Enum.AutomaticSize),
@@ -162,9 +162,9 @@ function t_1.new()
 			[sduiComponentType.VariableItemWidthCarousel] = {
 				component = require(serverDrivenUi.Content.Collections.SduiVariableItemWidthCarousel)
 			},
-			[sduiComponentType.CollectionCarouselPlaceholder] = if fFlagLuaAppSduiPlaceholderSupport then {
+			[sduiComponentType.CollectionCarouselPlaceholder] = {
 				component = require(serverDrivenUi.Content.Collections.SduiCollectionCarouselPlaceholder)
-			} else nil,
+			},
 			[sduiComponentType.PlaceholderTile] = if fFlagSduiCollectionCarouselPlaceholderItem then {
 				component = require(parent.SduiSharedContent).SduiPlaceholderTile
 			} else nil,
@@ -197,6 +197,9 @@ function t_1.new()
 				},
 				propInterface = { itemHeightFromWidth = tModule.UDim }
 			},
+			[sduiComponentType.RevealRowsButtonWithDivider] = if fFlagSduiCollectionGridRevealRows then {
+				component = require(serverDrivenUi.Content.Collections.SduiRevealRowsButtonWithDivider)
+			} else nil,
 			[sduiComponentType.Dialog] = {
 				component = require(serverDrivenUi.Content.SduiDialog),
 				propParsers = {
@@ -584,6 +587,9 @@ function t_1.new()
 		propParsers = cryoModule.Dictionary.join(t_3._registeredComponents[sduiComponentType.Tile].propParsers, {
 			universeId = parseStringProp,
 			placeId = parseStringProp,
+			collectionId = if fFlagLuaAppSduiGameTileFeedback then parseStringProp else nil,
+			hiddenStateComponent = if fFlagLuaAppSduiGameTileFeedback then parseLazyUiComponentProp else nil,
+			overflowMenuComponent = if fFlagLuaAppSduiGameTileFeedback then parseLazyUiComponentProp else nil,
 			disableHoldToPlay = parseBooleanProp,
 			ratingText = parseStringProp,
 			playerCount = parseNumberProp
@@ -594,6 +600,11 @@ function t_1.new()
 		}
 	}
 	
+	if fFlagLuaAppSduiGameTileFeedback then
+		t_3._registeredComponents[sduiComponentType.GameTileHiddenState] = {
+			component = require(serverDrivenUi.Content.SduiGameTileHiddenState)
+		}
+	end
 	if fFlagSduiEnableHeroUnitBottomRow then
 		t_3._registeredComponents[sduiComponentType.HeroUnitBottomRow] = {
 			component = require(serverDrivenUi.Content.SduiHeroUnitBottomRow),
@@ -745,14 +756,14 @@ function t_1.new()
 			gapBetweenFeedItems = parseNumberProp,
 			thresholdFromEnd = parseNumberProp,
 			onScrollToEnd = parseCallbackProp,
-			onRefresh = if fFlagSduiChartsSupport then parseCallbackProp else nil,
-			stickyItems = if fFlagSduiChartsSupport then getArrayMetatableParser(parseUiComponentProp) else nil,
-			gapAfterStickyItems = if fFlagSduiChartsSupport then parseIntegerProp else nil,
-			gapBetweenStickyItems = if fFlagSduiChartsSupport then parseIntegerProp else nil,
-			stickyPaddingTop = if fFlagSduiChartsSupport then parseIntegerProp else nil,
-			stickyPaddingBottom = if fFlagSduiChartsSupport then parseIntegerProp else nil,
-			stickyBackgroundStyle = if fFlagSduiChartsSupport then parseColorTokenProp else nil,
-			stickyContentTag = if fFlagSduiChartsSupport then parseStringProp else nil,
+			onRefresh = parseCallbackProp,
+			stickyItems = getArrayMetatableParser(parseUiComponentProp),
+			gapAfterStickyItems = parseIntegerProp,
+			gapBetweenStickyItems = parseIntegerProp,
+			stickyPaddingTop = parseIntegerProp,
+			stickyPaddingBottom = parseIntegerProp,
+			stickyBackgroundStyle = parseColorTokenProp,
+			stickyContentTag = parseStringProp,
 			backgroundStyle = parseColorTokenProp
 		}
 	}

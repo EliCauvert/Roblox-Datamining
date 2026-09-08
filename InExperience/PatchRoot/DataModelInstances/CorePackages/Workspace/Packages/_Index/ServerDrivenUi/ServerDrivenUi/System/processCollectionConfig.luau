@@ -11,10 +11,10 @@ return function(p1, p2, p3)
 	if not p2 or not t[tostring(p2)] then
 		return p1
 	end
-	local ok = `{p3.appPage}-{p2}`
-	ok, status = pcall(function()
-		-- upvalues: sduiBuilder (copy), p1 (ref), p3 (ref), ok (ref)
-		local var1, var2 = sduiBuilder.tryCreateEagerProcessedComponentConfig(p1, p3, ok, {}, true)
+	local appPage = `{p3.appPage}-{p2}`
+	local ok, status = pcall(function()
+		-- upvalues: sduiBuilder (copy), p1 (ref), p3 (ref), appPage (ref)
+		local var1, var2 = sduiBuilder.tryCreateEagerProcessedComponentConfig(p1, p3, appPage, {}, true)
 		
 		if var1 then
 			return var2
@@ -26,7 +26,7 @@ return function(p1, p2, p3)
 		return status
 	end
 	p3.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToEagerlyProcess, {
-		name = ok,
+		name = appPage,
 		message = `Failed to process collection config {if typeof(status) == "string" then status else ""}`
 	}, p3.appPage)
 	

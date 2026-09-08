@@ -4,6 +4,7 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local appPage = require(parent.RobloxAppEnums).AppPage
 local robloxAppEventsModule = require(parent.RobloxAppEvents)
+local roactNavigationModule = require(parent.RoactNavigation)
 local view = foundationModule.View
 local topBarModule = require(moments.Components.TopBar)
 local momentsFeedSurfaceModule = require(moments.Components.MomentsFeedSurface)
@@ -15,6 +16,7 @@ local constantsModule = require(moments.Constants)
 local useScreenBottomInsetModule = require(moments.Hooks.useScreenBottomInset)
 local useFeedPlaybackActiveModule = require(moments.Hooks.useFeedPlaybackActive)
 local fFlagMomentsFixRecommendationImpressionLifecycleModule = require(moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
+local fFlagMomentsFlushDwellBeforeNavigationModule = require(moments.Flags.FFlagMomentsFlushDwellBeforeNavigation)
 local useCreationEntryModule = require(moments.Hooks.useCreationEntry)
 local useUploadHostModule = require(moments.Hooks.useUploadHost)
 local logCreateIntentModule = require(moments.Analytics.logCreateIntent)
@@ -53,8 +55,8 @@ local fireAnalyticsEvent = analytics.fireAnalyticsEvent
 local fireFunnelAnalyticsEvent = analytics.fireFunnelAnalyticsEvent
 local useMomentsGating = momentsCommonModule.Hooks.useMomentsGating
 
-return function(_)
-	-- upvalues: reactModule (ref), momentsLocalStorageModule (ref), momentsLocalStorageKeysModule (ref), useScreenBottomInsetModule (ref), useFeedPlaybackActiveModule (ref), useMomentsSession (ref), useMomentsHost (ref), fFlagMomentsUseFoundationHeaderBarModule (ref), useMomentsGating (ref), useCreationEntryModule (ref), useUploadHostModule (ref), sessionManager (ref), funnelEventNames (ref), fireFunnelAnalyticsEvent (ref), var2 (ref), isStudioModule (ref), getFFlagArgusStudioMockFeedModule (ref), createMockFeedSource (ref), createMomentsFeedSourceModule (ref), var1 (ref), fFlagEnableArgus (ref), createRecommendationTelemetry (ref), fFlagMomentsImmersiveChromeModule (ref), signalsReactModule (ref), getImmersiveChromeStoreModule (ref), getFFlagMomentsFixBackgroundFeedInputModule (ref), reportModalCovering (ref), fFlagEnableReportingFlowForMomentsFeed (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), robloxAppEventsModule (ref), appPage (ref), getUploadStoreModule (ref), getFFlagMomentsRefreshFromTopAfterUploadModule (ref), logCreateIntentModule (ref), fireAnalyticsEvent (ref), eventNames (ref), topBarModule (ref), momentOverlayInsetContextModule (ref), view (ref), constantsModule (ref), fFlagMomentsUseCompositionLibraryModule (ref), momentsFeedSurfaceModule (ref), var3 (ref), creationFlowScreen (ref), FTUXEducationScreenModule (ref)
+return function(p1)
+	-- upvalues: reactModule (ref), momentsLocalStorageModule (ref), momentsLocalStorageKeysModule (ref), useScreenBottomInsetModule (ref), useFeedPlaybackActiveModule (ref), useMomentsSession (ref), useMomentsHost (ref), fFlagMomentsUseFoundationHeaderBarModule (ref), useMomentsGating (ref), useCreationEntryModule (ref), useUploadHostModule (ref), sessionManager (ref), funnelEventNames (ref), fireFunnelAnalyticsEvent (ref), var2 (ref), isStudioModule (ref), getFFlagArgusStudioMockFeedModule (ref), createMockFeedSource (ref), createMomentsFeedSourceModule (ref), var1 (ref), fFlagEnableArgus (ref), createRecommendationTelemetry (ref), fFlagMomentsImmersiveChromeModule (ref), signalsReactModule (ref), getImmersiveChromeStoreModule (ref), getFFlagMomentsFixBackgroundFeedInputModule (ref), reportModalCovering (ref), fFlagEnableReportingFlowForMomentsFeed (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), fFlagMomentsFlushDwellBeforeNavigationModule (ref), roactNavigationModule (ref), robloxAppEventsModule (ref), appPage (ref), getUploadStoreModule (ref), getFFlagMomentsRefreshFromTopAfterUploadModule (ref), logCreateIntentModule (ref), fireAnalyticsEvent (ref), eventNames (ref), topBarModule (ref), momentOverlayInsetContextModule (ref), view (ref), constantsModule (ref), fFlagMomentsUseCompositionLibraryModule (ref), momentsFeedSurfaceModule (ref), var3 (ref), creationFlowScreen (ref), FTUXEducationScreenModule (ref)
 	local var4, var5 = reactModule.useState(function()
 		-- upvalues: momentsLocalStorageModule (copy), momentsLocalStorageKeysModule (copy)
 		return not momentsLocalStorageModule.getField(momentsLocalStorageKeysModule.CreateTooltipSeen)
@@ -114,11 +116,34 @@ return function(_)
 			current.refresh()
 		end
 	end, {})
+	local var24 = reactModule.useCallback(function()
+		-- upvalues: var8 (ref)
+		local current = var8.current
+		
+		if current ~= nil then
+			current.flushView()
+		end
+	end, {})
+	reactModule.useEffect(function()
+		-- upvalues: fFlagMomentsFlushDwellBeforeNavigationModule (copy), p1 (ref), roactNavigationModule (copy), var24 (ref)
+		if fFlagMomentsFlushDwellBeforeNavigationModule and p1.navigation.addListener ~= nil then
+			local var25 = p1.navigation.addListener(roactNavigationModule.Events.WillBlur, function()
+				-- upvalues: var24 (copy)
+				var24()
+			end)
+			
+			return function()
+				-- upvalues: var25 (ref)
+				var25.remove()
+			end
+		end
+		return nil
+	end, { p1.navigation, var24 })
 	reactModule.useEffect(function()
 		-- upvalues: robloxAppEventsModule (copy), appPage (copy), var23 (ref)
-		local reloadPageConnection = robloxAppEventsModule.ReloadPage:connect(function(p1)
+		local reloadPageConnection = robloxAppEventsModule.ReloadPage:connect(function(p2)
 			-- upvalues: appPage (copy), var23 (copy)
-			if p1 == appPage.Moments then
+			if p2 == appPage.Moments then
 				var23()
 			end
 		end)
@@ -128,55 +153,58 @@ return function(_)
 			reloadPageConnection:disconnect()
 		end
 	end, { var23 })
-	local var24 = getUploadStoreModule(false)
-	local var25 = signalsReactModule.useSignalState(var24.getState)
-	local var26 = signalsReactModule.useSignalState(var24.getUploadedMoment)
+	local var25 = getUploadStoreModule(false)
+	local var26 = signalsReactModule.useSignalState(var25.getState)
+	local var27 = signalsReactModule.useSignalState(var25.getUploadedMoment)
 	reactModule.useEffect(function()
-		-- upvalues: getFFlagMomentsRefreshFromTopAfterUploadModule (copy), var25 (ref), var9 (ref), var8 (ref), var26 (ref), var23 (ref)
+		-- upvalues: getFFlagMomentsRefreshFromTopAfterUploadModule (copy), var26 (ref), var9 (ref), var8 (ref), var27 (ref), var23 (ref)
 		if getFFlagMomentsRefreshFromTopAfterUploadModule() then
-			if var25 ~= "Success" then
-				var9.current = var25
+			if var26 ~= "Success" then
+				var9.current = var26
 				
 				return
 			elseif var9.current ~= "Success" then
-				var9.current = var25
+				var9.current = var26
 				local current = var8.current
 				
-				if type(var26) == "table" and var26.momentId ~= nil and current ~= nil then
-					current.prependMoment(var26)
+				if type(var27) == "table" and var27.momentId ~= nil and current ~= nil then
+					current.prependMoment(var27)
 					
 					return
 				end
 				var23()
 			end
 			return
-		elseif var25 == "Success" then
+		elseif var26 == "Success" then
 			var23()
 		end
-	end, { var25, var26, var23 })
-	local var27 = reactModule.useCallback(function()
+	end, { var26, var27, var23 })
+	local var28 = reactModule.useCallback(function()
 		-- upvalues: var5 (ref), momentsLocalStorageModule (copy), momentsLocalStorageKeysModule (copy)
 		var5(false)
 		momentsLocalStorageModule.setField(momentsLocalStorageKeysModule.CreateTooltipSeen, true)
 	end, {})
-	local var28 = reactModule.useCallback(function()
+	local var29 = reactModule.useCallback(function()
 		-- upvalues: logCreateIntentModule (copy), funnelEventNames (copy), var15 (ref)
 		logCreateIntentModule(funnelEventNames.CreationIntentSource.TopBar)
 		var15.onCreatePressed()
 	end, { var15.onCreatePressed })
-	local var29 = reactModule.useCallback(function()
+	local var30 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var23 (ref)
 		fireAnalyticsEvent(eventNames.FeedHomeButtonPressed)
 		var23()
 	end, { var23 })
-	local var30 = reactModule.useCallback(function()
-		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), openOwnMoments (ref)
+	local var31 = reactModule.useCallback(function()
+		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), openOwnMoments (ref), fFlagMomentsFlushDwellBeforeNavigationModule (copy), var24 (ref)
 		fireAnalyticsEvent(eventNames.MyCreationButtonPressed)
 		
 		if openOwnMoments ~= nil then
+			if fFlagMomentsFlushDwellBeforeNavigationModule then
+				var24()
+			end
 			openOwnMoments()
 		end
-	end, { openOwnMoments })
+	end, { openOwnMoments, var24 })
 	
 	return reactModule.createElement(view, { tag = "size-full bg-surface-0" }, {
 		Surface = reactModule.createElement(momentsFeedSurfaceModule, {
@@ -187,21 +215,21 @@ return function(_)
 			telemetry = var19,
 			controllerRef = var8,
 			header = reactModule.useMemo(function()
-				-- upvalues: reactModule (copy), topBarModule (copy), var4 (ref), var11 (ref), var14 (ref), var27 (ref), var28 (ref), var29 (ref), var30 (ref)
+				-- upvalues: reactModule (copy), topBarModule (copy), var4 (ref), var11 (ref), var14 (ref), var28 (ref), var29 (ref), var30 (ref), var31 (ref)
 				return reactModule.createElement(topBarModule, {
 					isBaseScreen = true,
 					showTopScrim = true,
 					showFtuxTooltip = var4 and var11,
 					showHamburger = var14,
-					onFtuxTooltipDismissed = var27,
-					onCreatePressed = var28,
-					onNavigateToTrending = var29,
-					onNavigateToMyMoments = var30
+					onFtuxTooltipDismissed = var28,
+					onCreatePressed = var29,
+					onNavigateToTrending = var30,
+					onNavigateToMyMoments = var31
 				})
 			end, {
-				var4, var11, var14, var27, var28, var29, var30
+				var4, var11, var14, var28, var29, var30, var31
 			}),
-			renderFeedContainer = reactModule.useCallback(function(p1)
+			renderFeedContainer = reactModule.useCallback(function(p2)
 				-- upvalues: fFlagMomentsImmersiveChromeModule (ref), reactModule (copy), momentOverlayInsetContextModule (copy), var10 (ref), view (copy), constantsModule (copy)
 				return reactModule.createElement(view, {
 					tag = "size-full",
@@ -209,7 +237,7 @@ return function(_)
 					padding = if fFlagMomentsImmersiveChromeModule then nil else { bottom = UDim.new(0, var10) },
 					ZIndex = constantsModule.DisplayOrder.Feed
 				}, {
-					Feed = if fFlagMomentsImmersiveChromeModule then reactModule.createElement(momentOverlayInsetContextModule.Context.Provider, { value = var10 }, { Feed = p1 }) else p1
+					Feed = if fFlagMomentsImmersiveChromeModule then reactModule.createElement(momentOverlayInsetContextModule.Context.Provider, { value = var10 }, { Feed = p2 }) else p2
 				})
 			end, { var10, fFlagMomentsImmersiveChromeModule })
 		}),

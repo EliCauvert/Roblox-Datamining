@@ -10,7 +10,6 @@ local useCursor = UIBloxModule.App.SelectionCursor.useCursor
 local rightAlignedButtonWrapperModule = require(gameTile.Footer.RightAlignedButtonWrapper)
 local zoomAnimatedFrameModule = require(gameTile.ZoomAnimatedFrame)
 local gameTileViewConfigModule = require(gameTile.GameTileViewConfig)
-local fFlagLuaAppGameTileInteractionFeedback = require(parent.SharedFlags).FFlagLuaAppGameTileInteractionFeedback
 local fFlagLuaAppMigrateGameTileHoverFixes = require(parent.SharedFlags).FFlagLuaAppMigrateGameTileHoverFixes
 local fFlagLuaAppGameViewTileBackgroundColorOverride = require(parent.SharedFlags).FFlagLuaAppGameViewTileBackgroundColorOverride
 local fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone = require(parent.SharedFlags).FFlagLuaAppHomeFirstTileThumbnailLoadedMilestone
@@ -18,7 +17,7 @@ local fFlagLuaAppHomePageFirstImageLoadObserver = require(parent.SharedFlags).FF
 local useTokens = require(parent.Foundation).Hooks.useTokens
 
 return function(p1)
-	-- upvalues: useDesignTokens (ref), useTokens (ref), gameTileViewConfigModule (ref), useCursor (ref), fFlagLuaAppMigrateGameTileHoverFixes (ref), fFlagLuaAppGameViewTileBackgroundColorOverride (ref), reactModule (ref), fFlagLuaAppGameTileInteractionFeedback (ref), zoomAnimatedFrameModule (ref), imageSetLabel (ref), images (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), loadableImage (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), rightAlignedButtonWrapperModule (ref)
+	-- upvalues: useDesignTokens (ref), useTokens (ref), gameTileViewConfigModule (ref), useCursor (ref), fFlagLuaAppMigrateGameTileHoverFixes (ref), fFlagLuaAppGameViewTileBackgroundColorOverride (ref), reactModule (ref), zoomAnimatedFrameModule (ref), imageSetLabel (ref), images (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), loadableImage (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), rightAlignedButtonWrapperModule (ref)
 	local var1 = useDesignTokens()
 	local var2 = if p1.isUnifiedGameTile then p1.numLinesForTitle or 1 else nil
 	local numLinesForMetadata = p1.numLinesForMetadata or 1
@@ -62,10 +61,10 @@ return function(p1)
 	local _ = nil
 	local var18 = reactModule.useRef(false)
 	local var19 = reactModule.useCallback(function(...)
-		-- upvalues: var18 (write), fFlagLuaAppGameTileInteractionFeedback (copy), p1 (ref)
+		-- upvalues: var18 (write), p1 (ref)
 		var18.current = false
 		
-		if fFlagLuaAppGameTileInteractionFeedback and p1.onGuiStateChanged then
+		if p1.onGuiStateChanged then
 			p1.onGuiStateChanged(...)
 		end
 	end, { p1.onGuiStateChanged })

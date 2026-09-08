@@ -11,6 +11,7 @@ local fFlagAXEnableExpiredUserLookCheckout = avatarExperienceFlagsModule.FFlagAX
 local fFlagAXFixGamepadNavigationOnOutfitManagement = avatarExperienceFlagsModule.FFlagAXFixGamepadNavigationOnOutfitManagement
 local fFlagAXOutfitPageRevamp = avatarExperienceFlagsModule.FFlagAXOutfitPageRevamp
 local fFlagAXAvatarFoldersEnabled = avatarExperienceFlagsModule.FFlagAXAvatarFoldersEnabled
+local fFlagAXBackgroundGenerationAnalytics = avatarExperienceFlagsModule.FFlagAXBackgroundGenerationAnalytics
 local AXEnableMultiTryOnUI = game:DefineFastFlag("AXEnableMultiTryOnUI", false)
 local AXKeepTryOnsInAvatarEditor = game:DefineFastFlag("AXKeepTryOnsInAvatarEditor", false)
 local fFlagAXFixAvatarScreenVR = avatarExperienceFlagsModule.FFlagAXFixAvatarScreenVR
@@ -39,6 +40,11 @@ local t_1 = {
 	[avatarScreenModule.AvatarExperienceLandingPage] = { isTryOnOutfitResetPage = true },
 	[avatarScreenModule.AvatarExperienceRoot] = {},
 	[avatarScreenModule.AvatarBackground] = { isTransparent = false },
+	[avatarScreenModule.BackgroundGeneration] = {
+		analyticsData = if fFlagAXBackgroundGenerationAnalytics then {
+			unifiedLoggingSurface = unifiedLoggingSurfaceModule.BACKGROUND_GENERATION
+		} else nil
+	},
 	[avatarScreenModule.Catalog] = {
 		refinementButtonVisible = true,
 		VRPanelPlacement = "None",

@@ -12,14 +12,13 @@ local sendCounterModule = require(parent.Thunks.sendCounter)
 local analyticsModule = require(parent.Services.Analytics)
 local publicBindablesModule = require(parent.Services.PublicBindables)
 local thunkModule = require(parent.Thunk)
-local fFlagEnableUnifiedProductPurchaseFlow = require(parent.Parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local list = { analyticsModule, publicBindablesModule }
 
 return function()
-	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), selectedRobuxPackageModule (ref), promptStateModule (ref), sendCounterModule (ref), counterModule (ref), requestTypeModule (ref), playersService (ref), marketplaceService (ref), purchaseErrorModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), publicBindablesModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), completeRequestModule (ref)
+	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), selectedRobuxPackageModule (ref), promptStateModule (ref), sendCounterModule (ref), counterModule (ref), requestTypeModule (ref), playersService (ref), marketplaceService (ref), purchaseErrorModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), publicBindablesModule (ref), completeRequestModule (ref)
 	return thunkModule.new(script.Name, list, function(p1, p2)
-		-- upvalues: analyticsModule (copy), selectedRobuxPackageModule (copy), promptStateModule (copy), sendCounterModule (copy), counterModule (copy), requestTypeModule (copy), playersService (copy), marketplaceService (copy), purchaseErrorModule (copy), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), publicBindablesModule (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), completeRequestModule (copy)
+		-- upvalues: analyticsModule (copy), selectedRobuxPackageModule (copy), promptStateModule (copy), sendCounterModule (copy), counterModule (copy), requestTypeModule (copy), playersService (copy), marketplaceService (copy), purchaseErrorModule (copy), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), publicBindablesModule (copy), completeRequestModule (copy)
 		local var1 = p2[analyticsModule]
 		local state = p1:getState()
 		local requestType = state.promptRequest.requestType
@@ -76,7 +75,7 @@ return function()
 				hasCompletedPurchase = hasCompletedPurchase
 			})
 		end
-		if fFlagEnableUnifiedProductPurchaseFlow and state.purchaseCallbacks.onFlowComplete then
+		if state.purchaseCallbacks.onFlowComplete then
 			state.purchaseCallbacks.onFlowComplete()
 		end
 		return p1:dispatch(completeRequestModule())

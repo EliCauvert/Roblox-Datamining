@@ -1,0 +1,1 @@
+﻿return { None = "none", Details = "details", Terms = "terms" }

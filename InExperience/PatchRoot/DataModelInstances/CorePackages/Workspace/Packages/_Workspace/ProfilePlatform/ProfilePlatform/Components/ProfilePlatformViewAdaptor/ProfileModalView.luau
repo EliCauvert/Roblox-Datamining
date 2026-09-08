@@ -1,6 +1,9 @@
-﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
+﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local parent = profilePlatform.Parent
 local reactModule = require(parent.React)
 local useStyle = require(parent.UIBlox).Core.Style.useStyle
+local useStatusBarHeight = require(parent.RobloxAppHooks).useStatusBarHeight
+local fFlagProfileModalViewStatusBarOffsetModule = require(profilePlatform.Flags.FFlagProfileModalViewStatusBarOffset)
 local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSurfaceWrapper
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
@@ -12,9 +15,10 @@ local useSignalState = require(parent.SignalsReact).useSignalState
 local view = require(parent.Foundation).View
 
 return function(p1)
-	-- upvalues: useStyle (ref), fFlagEnableLeftNavOnConsole (ref), useSignalState (ref), displayModule (ref), reactModule (ref), inputHandlersModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), view (ref)
+	-- upvalues: useStyle (ref), fFlagEnableLeftNavOnConsole (ref), useSignalState (ref), displayModule (ref), fFlagProfileModalViewStatusBarOffsetModule (ref), useStatusBarHeight (ref), reactModule (ref), inputHandlersModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), view (ref)
 	local var1 = useStyle()
 	local var2 = if fFlagEnableLeftNavOnConsole then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil
+	local var3 = if fFlagProfileModalViewStatusBarOffsetModule then useStatusBarHeight() else nil
 	
 	return reactModule.createElement("ImageButton", {
 		Position = if fFlagEnableLeftNavOnConsole then UDim2.fromOffset(0, -var2.top) else nil,
@@ -60,8 +64,12 @@ return function(p1)
 				}, { p2 })
 			end)({
 				ProfileTopBarContainer = reactModule.createElement(view, {
-					tag = "position-top-left",
 					ZIndex = 100,
+					tag = {
+						["anchor-top-left"] = fFlagProfileModalViewStatusBarOffsetModule,
+						["position-top-left"] = not fFlagProfileModalViewStatusBarOffsetModule
+					},
+					Position = if fFlagProfileModalViewStatusBarOffsetModule then UDim2.new(0, 0, 0, var3) else nil,
 					Size = UDim2.new(1, 0, 0, 56)
 				}, { ProfileTopBar = p1.renderTopBar() }),
 				PeekViewContainer = reactModule.createElement("ScrollingFrame", {
@@ -69,8 +77,8 @@ return function(p1)
 					ScrollBarThickness = 0,
 					Selectable = false,
 					ScrollingDirection = Enum.ScrollingDirection.Y,
-					Size = UDim2.new(1, 1, 1, 0),
-					Position = UDim2.new(0, 0, 0, 0),
+					Size = UDim2.new(1, 1, 1, if fFlagProfileModalViewStatusBarOffsetModule then -var3 else 0),
+					Position = UDim2.new(0, 0, 0, if fFlagProfileModalViewStatusBarOffsetModule then var3 else 0),
 					CanvasSize = UDim2.new(1, 0, 0, 0),
 					AutomaticCanvasSize = Enum.AutomaticSize.Y
 				}, { Content = p1.renderContent() })

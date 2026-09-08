@@ -1,7 +1,6 @@
 ﻿local parent = script:FindFirstAncestor("StartupStore").Parent
 local signalsModule = require(parent.Signals)
 local signalsExperimentalModule = require(parent.SignalsExperimental)
-local createSessionScopedSignal = require(parent.SignalsUtils).createSessionScopedSignal
 local retrievalStatus = require(parent.Http).Enum.RetrievalStatus
 local fFlagLuaAppChartsResetFetchingStatusOnFilterChange = require(parent.SharedFlags).FFlagLuaAppChartsResetFetchingStatusOnFilterChange
 
@@ -30,14 +29,14 @@ local _ = function()
 end
 
 return signalsModule.createComputed(function()
-	-- upvalues: createSessionScopedSignal (ref), retrievalStatus (ref), fFlagLuaAppChartsResetFetchingStatusOnFilterChange (ref), signalsModule (ref), joinRetrievalStatus (ref), signalsExperimentalModule (ref)
-	local var1, var2 = createSessionScopedSignal(true)
-	local var3, var4 = createSessionScopedSignal(retrievalStatus.NotStarted)
-	local var5, var6 = createSessionScopedSignal(if fFlagLuaAppChartsResetFetchingStatusOnFilterChange then {
+	-- upvalues: signalsModule (ref), retrievalStatus (ref), fFlagLuaAppChartsResetFetchingStatusOnFilterChange (ref), joinRetrievalStatus (ref), signalsExperimentalModule (ref)
+	local var1, var2 = signalsModule.createSignal(true)
+	local var3, var4 = signalsModule.createSignal(retrievalStatus.NotStarted)
+	local var5, var6 = signalsModule.createSignal(if fFlagLuaAppChartsResetFetchingStatusOnFilterChange then {
 		isRefreshFetch = false,
 		status = retrievalStatus.NotStarted
 	} else retrievalStatus.NotStarted)
-	local var7, var8 = createSessionScopedSignal(retrievalStatus.NotStarted)
+	local var7, var8 = signalsModule.createSignal(retrievalStatus.NotStarted)
 	
 	return {
 		getPreloading = var1,

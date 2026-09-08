@@ -7,15 +7,14 @@ local externalSettingsModule = require(parent.Services.ExternalSettings)
 local getBalanceInfoModule = require(parent.Network.getBalanceInfo)
 local getAccountInfoModule = require(parent.Network.getAccountInfo)
 local errorOccurredModule = require(parent.Actions.ErrorOccurred)
-local fFlagEnableUnifiedProductPurchaseFlow = require(parent.Parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 local getUnifiedPurchaseFlowEligibilityModule = require(parent.Network.getUnifiedPurchaseFlowEligibility)
 local resolvePromptStateModule = require(script.Parent.resolvePromptState)
 local list = { networkModule, externalSettingsModule }
 
 return function(p1, p2, p3, p4)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), externalSettingsModule (ref), requestAvatarCreationFeePurchaseModule (ref), promiseModule (ref), getAccountInfoModule (ref), getBalanceInfoModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), getUnifiedPurchaseFlowEligibilityModule (ref), resolvePromptStateModule (ref), errorOccurredModule (ref)
+	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), externalSettingsModule (ref), requestAvatarCreationFeePurchaseModule (ref), promiseModule (ref), getAccountInfoModule (ref), getBalanceInfoModule (ref), getUnifiedPurchaseFlowEligibilityModule (ref), resolvePromptStateModule (ref), errorOccurredModule (ref)
 	return thunkModule.new(script.Name, list, function(p5, p6)
-		-- upvalues: networkModule (copy), externalSettingsModule (copy), requestAvatarCreationFeePurchaseModule (copy), p3 (ref), p2 (ref), promiseModule (copy), getAccountInfoModule (copy), getBalanceInfoModule (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), getUnifiedPurchaseFlowEligibilityModule (copy), p4 (ref), p1 (ref), resolvePromptStateModule (copy), errorOccurredModule (copy)
+		-- upvalues: networkModule (copy), externalSettingsModule (copy), requestAvatarCreationFeePurchaseModule (copy), p3 (ref), p2 (ref), promiseModule (copy), getAccountInfoModule (copy), getBalanceInfoModule (copy), getUnifiedPurchaseFlowEligibilityModule (copy), p4 (ref), p1 (ref), resolvePromptStateModule (copy), errorOccurredModule (copy)
 		local var1 = p6[networkModule]
 		local var2 = p6[externalSettingsModule]
 		p5:dispatch(requestAvatarCreationFeePurchaseModule(p3, p2))
@@ -23,7 +22,7 @@ return function(p1, p2, p3, p4)
 		return promiseModule.all({
 			accountInfo = getAccountInfoModule(var1, var2),
 			balanceInfo = getBalanceInfoModule(var1, var2, true),
-			isUserEligibleForUnifiedPurchaseFlow = if fFlagEnableUnifiedProductPurchaseFlow then getUnifiedPurchaseFlowEligibilityModule(var1) else nil
+			isUserEligibleForUnifiedPurchaseFlow = getUnifiedPurchaseFlowEligibilityModule(var1)
 		}):andThen(function(p7)
 			-- upvalues: p4 (copy), p1 (copy), p5 (ref), resolvePromptStateModule (copy)
 			p5:dispatch(resolvePromptStateModule({

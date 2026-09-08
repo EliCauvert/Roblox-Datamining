@@ -177,7 +177,7 @@ return function()
 	end, { var11 })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var19 (ref), var20 (ref), var17 (ref), var18 (ref), var21 (ref), var22 (ref), var23 (ref), var14 (ref), var3 (ref), var4 (ref), var24 (ref)
+		-- upvalues: var19 (ref), var20 (ref), var17 (ref), var18 (ref), var21 (ref), var22 (ref), var23 (ref), var14 (ref), var3 (ref), var4 (ref), var5 (ref), var24 (ref)
 		return {
 			setScrollingFrame = var19,
 			lockToBottom = var20,
@@ -189,6 +189,7 @@ return function()
 			isViewportUnderfilled = var14,
 			isAtBottomRef = var3,
 			isAtTopRef = var4,
+			isNearTopRef = var5,
 			setOnScrolledToTop = var24
 		}
 	end, {

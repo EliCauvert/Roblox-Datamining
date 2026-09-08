@@ -2,22 +2,61 @@
 local playersService = game:GetService("Players")
 local constantsModule = require(script.Parent.Constants)
 local brickColor = BrickColor.new(194)
+
+local function _(p1, p2)
+	return CFrame.lookAt(p1, p1 + p2)
+end
+
+local lookAtCFrame = CFrame.lookAt(Vector3.new(0, 0.093621298671, -15.755899429321), Vector3.new(0, 0.093621298671, -14.755899429321))
 local t = {
+	[Enum.AvatarAssetType.FaceMakeup] = lookAtCFrame,
+	[Enum.AvatarAssetType.LipMakeup] = CFrame.lookAt(Vector3.new(0, -0.299141585827, -6.41348028183), Vector3.new(0, -0.299141585827, -5.41348028183)),
+	[Enum.AvatarAssetType.EyeMakeup] = CFrame.lookAt(Vector3.new(0, 0.108529612422, -9.357427597046), Vector3.new(0, 0.108529612422, -8.357427597046)),
+	[Enum.AvatarAssetType.EyebrowAccessory] = CFrame.lookAt(Vector3.new(4.59289264679, 0.379174172878, -7.374272823334), Vector3.new(4.046112537384, 0.359522521496, -6.537227153778)),
+	[Enum.AvatarAssetType.EyelashAccessory] = CFrame.lookAt(Vector3.new(4.593966007233, 0.279193401337, -7.37591791153), Vector3.new(4.047185897827, 0.259541749954, -6.538872241974))
+}
+local t_1 = {
+	getHeadPreviewCameraData = function(p1)
+		local head = p1:FindFirstChild("Head")
+		
+		if head and head:IsA("MeshPart") and not p1:FindFirstChild("HumanoidRootPart") then
+			return head.CFrame, head.Size
+		end
+		return nil, nil
+	end,
+	setupMakeupThumbnailCamera = function(value, p1, p2)
+		-- upvalues: lookAtCFrame (ref), t (ref)
+		local head = value:FindFirstChild("Head")
+		
+		if not head or not head:IsA("MeshPart") then
+			return false
+		end
+		local var1 = lookAtCFrame
+		
+		if p2 then
+			var1 = t[p2] or var1
+		end
+		p1.CFrame = head.CFrame * var1
+		p1.Focus = head.CFrame
+		p1.FieldOfView = 5
+		
+		return true
+	end,
 	isMakeupAssetType = function(value)
 		-- upvalues: constantsModule (ref)
 		return constantsModule.MakeupAssetTypes[value] == true
 	end
 }
-local t_1 = {
+local t_2 = {
 	[Enum.AvatarAssetType.FaceMakeup] = Enum.MakeupType.Face,
 	[Enum.AvatarAssetType.LipMakeup] = Enum.MakeupType.Lip,
 	[Enum.AvatarAssetType.EyeMakeup] = Enum.MakeupType.Eye
 }
-local t_2 = {
+local t_3 = {
 	[Enum.AvatarAssetType.EyebrowAccessory] = Enum.AccessoryType.Eyebrow,
 	[Enum.AvatarAssetType.EyelashAccessory] = Enum.AccessoryType.Eyelash
 }
-local t_3 = {
+local t_4 = {
 	[Enum.AccessoryType.Hat] = true,
 	[Enum.AccessoryType.Hair] = true,
 	[Enum.AccessoryType.Face] = true,
@@ -34,9 +73,9 @@ local function removeMatchingChildren(p1, p2)
 end
 
 local function addAssetToDescription(value, p3, p4)
-	-- upvalues: t_1 (ref), t_2 (ref), removeMatchingChildren (ref)
-	local var1 = p4 and t_1[p4]
-	local var2 = p4 and t_2[p4]
+	-- upvalues: t_2 (ref), t_3 (ref), removeMatchingChildren (ref)
+	local var1 = p4 and t_2[p4]
+	local var2 = p4 and t_3[p4]
 	
 	if var1 then
 		removeMatchingChildren(value, function(p5)
@@ -61,8 +100,8 @@ local function addAssetToDescription(value, p3, p4)
 	end
 end
 
-function t.stripToHead(p3)
-	-- upvalues: t_3 (ref)
+function t_1.stripToHead(p3)
+	-- upvalues: t_4 (ref)
 	local head = p3:FindFirstChild("Head")
 	
 	if not head then return end
@@ -71,13 +110,13 @@ function t.stripToHead(p3)
 			if v ~= head then
 				v:Destroy()
 			end
-		elseif v:IsA("Accessory") and not t_3[v.AccessoryType] then
+		elseif v:IsA("Accessory") and not t_4[v.AccessoryType] then
 			v:Destroy()
 		end
 	end
 end
 
-function t.anchorRigidPreviewParts(p4)
+function t_1.anchorRigidPreviewParts(p4)
 	for i, v in ipairs(p4:GetDescendants()) do
 		if v:IsA("BasePart") then
 			local accessory = v:FindFirstAncestorWhichIsA("Accessory")
@@ -89,7 +128,7 @@ function t.anchorRigidPreviewParts(p4)
 	end
 end
 
-function t.getFolderAccessories(p5, p6)
+function t_1.getFolderAccessories(p5, p6)
 	local t = {}
 	
 	for i, v in ipairs(p5:GetChildren()) do
@@ -104,7 +143,7 @@ function t.getFolderAccessories(p5, p6)
 end
 
 local function createHeadWithAsset(value, p7, p8, p9)
-	-- upvalues: addAssetToDescription (ref), playersService (ref), t (ref)
+	-- upvalues: addAssetToDescription (ref), playersService (ref), t_1 (ref)
 	if p7 then
 		addAssetToDescription(value, p7, p8)
 	end
@@ -118,7 +157,7 @@ local function createHeadWithAsset(value, p7, p8, p9)
 	return nil
 end
 
-function t.createMakeupHeadPreview(p10, p11, p12)
+function t_1.createMakeupHeadPreview(p10, p11, p12)
 	-- upvalues: playersService (ref), createHeadWithAsset (ref)
 	local var2 = nil
 	local localPlayer = playersService.LocalPlayer
@@ -136,8 +175,8 @@ function t.createMakeupHeadPreview(p10, p11, p12)
 	return createHeadWithAsset(var2 or Instance.new("HumanoidDescription"), p10, p11, p12)
 end
 
-function t.createMakeupThumbnailPreview(p10, p11)
-	-- upvalues: addAssetToDescription (ref), playersService (ref), t (ref), brickColor (ref)
+function t_1.createMakeupThumbnailPreview(p10, p11)
+	-- upvalues: addAssetToDescription (ref), playersService (ref), t_1 (ref), brickColor (ref)
 	local humanoidDescription = Instance.new("HumanoidDescription")
 	humanoidDescription.Head = 103273511207307
 	
@@ -162,7 +201,7 @@ function t.createMakeupThumbnailPreview(p10, p11)
 	return var2
 end
 
-function t.compositeMakeupFolder(p10, p11)
+function t_1.compositeMakeupFolder(p10, p11)
 	-- upvalues: assetService (ref)
 	local t = {}
 	
@@ -242,4 +281,4 @@ function t.compositeMakeupFolder(p10, p11)
 	return decal
 end
 
-return t
+return t_1

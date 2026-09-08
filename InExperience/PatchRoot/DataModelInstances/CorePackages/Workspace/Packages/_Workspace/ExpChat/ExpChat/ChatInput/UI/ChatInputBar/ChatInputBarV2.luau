@@ -11,6 +11,7 @@ local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpCon
 local expChatFocusablePlaceholderText = game:DefineFastFlag("ExpChatFocusablePlaceholderText", false)
 local fFlagExpChatInputBarV2CustomSendButtonModule = require(expChat.Flags.FFlagExpChatInputBarV2CustomSendButton)
 local fFlagExpChatInputBarV2CornerAndTruncationFixModule = require(expChat.Flags.FFlagExpChatInputBarV2CornerAndTruncationFix)
+local fFlagExpChatComposerInputBarFigmaParityModule = require(expChat.Flags.FFlagExpChatComposerInputBarFigmaParity)
 local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 local fFlagExpChatFixBackspaceNilTargetChannel = expChatSharedModule.Flags.FFlagExpChatFixBackspaceNilTargetChannel
 local fFlagExpChatPresetChatGamepadEnabledModule = require(expChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
@@ -56,7 +57,7 @@ local function renderCustomSendButton(p1, p2, p3, p4)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), fFlagExpChatUseMessagesStore (ref), configModule (ref), expChatFocusablePlaceholderText (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatInputBarV2CustomSendButtonModule (ref), renderCustomSendButton (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref)
+	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), fFlagExpChatUseMessagesStore (ref), configModule (ref), expChatFocusablePlaceholderText (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatComposerInputBarFigmaParityModule (ref), fFlagExpChatInputBarV2CustomSendButtonModule (ref), renderCustomSendButton (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local setTransparency = p1.setTransparency
 	local chatInputBarSettings = p1.chatInputBarSettings
@@ -191,10 +192,10 @@ return reactModule.memo(function(p1)
 				SelectionImageObject = cursor,
 				Size = UDim2.fromScale(1, 0),
 				Text = "",
-				PlaceholderColor3 = chatInputBarSettings.PlaceholderColor3,
+				PlaceholderColor3 = if fFlagExpChatComposerInputBarFigmaParityModule and chatInputBarSettings.PlaceholderColor3 == configModule.ChatInputBarPlaceholderColor then var1.DarkMode.Content.Default.Color3 else chatInputBarSettings.PlaceholderColor3,
 				TextColor3 = chatInputBarSettings.TextColor3,
 				TextSize = if isSpatialUIEnabled then chatInputBarSettings.SpatialPanelTextSize else chatInputBarSettings.TextSize,
-				TextTransparency = setTransparency(if showPlaceholderText then 0.5 else 0, p1.transparencyValue),
+				TextTransparency = setTransparency(if showPlaceholderText and not fFlagExpChatComposerInputBarFigmaParityModule then 0.5 else 0, p1.transparencyValue),
 				TextStrokeTransparency = setTransparency(chatInputBarSettings.TextStrokeTransparency, p1.transparencyValue),
 				TextStrokeColor3 = chatInputBarSettings.TextStrokeColor3,
 				TextWrapped = if fFlagExpChatInputBarV2CornerAndTruncationFixModule then not showPlaceholderText else not (fFlagExpChatPresetChatEnabled and (showPlaceholderText and p1.shouldTruncatePlaceholder)),

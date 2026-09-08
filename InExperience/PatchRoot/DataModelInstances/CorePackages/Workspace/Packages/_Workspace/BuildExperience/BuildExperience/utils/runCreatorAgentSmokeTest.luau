@@ -1,4 +1,6 @@
-﻿local creatorAgentChatModule = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.CreatorAgentChat)
+﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
+local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
+local fFlagBuildExperiencePinForBuild = require(parent.SharedFlags).FFlagBuildExperiencePinForBuild
 local getCurrentExperienceProjectModule = require(script.Parent.getCurrentExperienceProject)
 local getDefaultTemplatePlaceIdModule = require(script.Parent.getDefaultTemplatePlaceId)
 local debug = creatorAgentChatModule.debug
@@ -133,7 +135,7 @@ local function runSessionPromptSmoke(p6, p7, p8)
 end
 
 return function(p9, p10, p11)
-	-- upvalues: creatorAgentChatModule (ref), getCurrentExperienceProjectModule (ref), getDefaultTemplatePlaceIdModule (ref), debug (ref), runSyncRpc (ref), runSessionPromptSmoke (ref), buildSummary (ref)
+	-- upvalues: creatorAgentChatModule (ref), getCurrentExperienceProjectModule (ref), getDefaultTemplatePlaceIdModule (ref), debug (ref), runSyncRpc (ref), fFlagBuildExperiencePinForBuild (ref), runSessionPromptSmoke (ref), buildSummary (ref)
 	local var7 = creatorAgentChatModule.resolveCreatorAgentAcp()
 	local t = {}
 	local var8 = getCurrentExperienceProjectModule()
@@ -153,8 +155,11 @@ return function(p9, p10, p11)
 		detail = "requires universeId (game.GameId is 0 or not in an experience)",
 		elapsedMs = nil
 	} else runSyncRpc("session/new", function()
-		-- upvalues: p9 (ref), p10 (ref), p11 (ref)
-		return p9.sessionNew({ project = { universeId = p10, placeId = p11 } })
+		-- upvalues: p9 (ref), p10 (ref), p11 (ref), fFlagBuildExperiencePinForBuild (copy)
+		return p9.sessionNew({
+			project = { universeId = p10, placeId = p11 },
+			application = if fFlagBuildExperiencePinForBuild then "build" else nil
+		})
 	end, function(p12)
 		-- upvalues: var9 (write)
 		if typeof(p12) == "table" and typeof(p12.sessionId) == "string" and p12.sessionId ~= "" then

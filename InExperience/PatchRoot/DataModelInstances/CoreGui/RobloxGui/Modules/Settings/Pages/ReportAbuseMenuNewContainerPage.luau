@@ -14,16 +14,14 @@ local var1 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
 local var2 = if var1 then require(robloxGui.Modules.Chrome.Service) else nil
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local fFlagInExperienceReportClosingBugfix = sharedFlagsModule.FFlagInExperienceReportClosingBugfix
-local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
+local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local fFlagHideShortcutsOnReportDropdownModule = require(robloxGui.Modules.AbuseReportMenu.Flags.FFlagHideShortcutsOnReportDropdown)
-local fFlagAbuseReportMenuV2 = sharedFlagsModule.FFlagAbuseReportMenuV2
-local fFlagIEMSettingsPageDisplaying = sharedFlagsModule.FFlagIEMSettingsPageDisplaying
 local fFlagReportFocusNavIEMButtonsModule = require(robloxGui.Modules.AbuseReportMenu.Flags.FFlagReportFocusNavIEMButtons)
 local fFlagStandardizeSafetyIcon = sharedFlagsModule.FFlagStandardizeSafetyIcon
-local fFlagAbuseReportMenuV2_1 = game:DefineFastFlag("SwitchOverToAbuseReportMenuV2", false) and fFlagAbuseReportMenuV2
+local switchOverToAbuseReportMenuV2 = game:DefineFastFlag("SwitchOverToAbuseReportMenuV2", false)
 local _ = nil
 local var3 = (function()
-	-- upvalues: robloxGui (ref), utilityModule (ref), uiblox (ref), fFlagStandardizeSafetyIcon (ref), iconName (ref), iconVariant (ref), builderIconsModule (ref), fFlagEnableSideSheet (ref), fFlagAbuseReportMenuV2 (ref), fFlagAbuseReportMenuV2_1 (ref), roactModule (ref), abuseReportMenuV2 (ref), abuseReportMenu (ref), fFlagInExperienceReportClosingBugfix (ref), var1 (ref), var2 (ref), fFlagHideShortcutsOnReportDropdownModule (ref), fFlagReportFocusNavIEMButtonsModule (ref)
+	-- upvalues: robloxGui (ref), utilityModule (ref), uiblox (ref), fFlagStandardizeSafetyIcon (ref), iconName (ref), iconVariant (ref), builderIconsModule (ref), isSideSheetEnabledModule (ref), switchOverToAbuseReportMenuV2 (ref), roactModule (ref), abuseReportMenuV2 (ref), abuseReportMenu (ref), fFlagInExperienceReportClosingBugfix (ref), var1 (ref), var2 (ref), fFlagHideShortcutsOnReportDropdownModule (ref), fFlagReportFocusNavIEMButtonsModule (ref)
 	local reportAbuseMenuNewContainerPage = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	
 	function reportAbuseMenuNewContainerPage._onHiddenCallback() end
@@ -102,10 +100,10 @@ local var3 = (function()
 	reportAbuseMenuNewContainerPage.TabHeader.TabLabel.Icon.FontFace = builderIconsModule.Font[var4.variant]
 	reportAbuseMenuNewContainerPage.TabHeader.TabLabel.Title.Text = "Report"
 	reportAbuseMenuNewContainerPage.Page.Name = "ReportAbuseMenuNewContainerPage"
-	reportAbuseMenuNewContainerPage.ShouldShowBottomBar = not fFlagEnableSideSheet
+	reportAbuseMenuNewContainerPage.ShouldShowBottomBar = not isSideSheetEnabledModule
 	reportAbuseMenuNewContainerPage.ShouldShowHubBar = true
-	reportAbuseMenuNewContainerPage.ShouldDisableDefaultScroll = fFlagAbuseReportMenuV2 and fFlagAbuseReportMenuV2_1
-	roactModule.mount(roactModule.createElement(if fFlagAbuseReportMenuV2_1 then abuseReportMenuV2 else abuseReportMenu, {
+	reportAbuseMenuNewContainerPage.ShouldDisableDefaultScroll = switchOverToAbuseReportMenuV2
+	roactModule.mount(roactModule.createElement(if switchOverToAbuseReportMenuV2 then abuseReportMenuV2 else abuseReportMenu, {
 		hideReportTab = function()
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
 			reportAbuseMenuNewContainerPage:HideMenu()
@@ -174,19 +172,16 @@ var3.Displayed.Event:connect(function()
 	-- upvalues: var3 (write)
 	var3:onDisplayed()
 end)
-
-if fFlagIEMSettingsPageDisplaying then
-	var3.Displaying.Event:connect(function()
-		-- upvalues: var3 (write)
-		var3:onDisplaying()
-	end)
-end
+var3.Displaying.Event:connect(function()
+	-- upvalues: var3 (write)
+	var3:onDisplaying()
+end)
 var3.Hidden.Event:connect(function()
 	-- upvalues: var3 (write)
 	var3:onHidden()
 end)
 
-function var12.ReportPlayer(_, p1, p2)
+function var13.ReportPlayer(_, p1, p2)
 	-- upvalues: reportAbuseAnalytics (ref), var3 (write)
 	if p1 then
 		reportAbuseAnalytics:startAbuseReportSession(p2)

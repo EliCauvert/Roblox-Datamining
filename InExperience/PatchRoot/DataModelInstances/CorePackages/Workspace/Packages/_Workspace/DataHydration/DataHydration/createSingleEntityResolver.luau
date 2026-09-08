@@ -19,6 +19,7 @@ return function(p1, p2)
 		end,
 		queueProcessDelaySec = var2.queueProcessDelaySec,
 		requestTimeoutSec = var2.requestTimeoutSec,
+		replaceItems = var2.replaceItems,
 		logError = var2.logError,
 		onClear = var2.onClear
 	})

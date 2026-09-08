@@ -17,6 +17,7 @@
 	OpenAccountSelector = require(script.OpenAccountSelector),
 	OpenExternalBrowser = require(script.OpenExternalBrowser),
 	OpenCentralOverlayForLoginPasswordResetPrompt = require(script.OpenCentralOverlayForLoginPasswordResetPrompt),
+	OpenAccountIneligibleLoginModal = require(script.OpenAccountIneligibleLoginModal),
 	LogoutAllLoggedInUsers = require(script.LogoutAllLoggedInUsers),
 	LogoutFromAllSessionsAndReauthenticate = require(script.LogoutFromAllSessionsAndReauthenticate),
 	RegisterPasskey = require(script.RegisterPasskey),

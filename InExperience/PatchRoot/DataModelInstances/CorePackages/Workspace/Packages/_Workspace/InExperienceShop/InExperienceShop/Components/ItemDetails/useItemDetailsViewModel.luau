@@ -8,6 +8,7 @@ local abuseVectorModule = require(parent.GenericAbuseReporting.AbuseVector)
 local initiateShopItemPurchaseModule = require(inExperienceShop.initiateShopItemPurchase)
 local formatUpdatedDateModule = require(inExperienceShop.Utils.formatUpdatedDate)
 local getInExperienceShopStoreModule = require(inExperienceShop.Stores.getInExperienceShopStore)
+local constantsModule = require(inExperienceShop.Constants)
 local var1 = if sharedFlagsModule.FFlagPassShopPurchaseSurfaceToBuyModal then require(inExperienceShop.Analytics.Constants).ShopPageType else nil
 local useShopReportOverflowModule = require(inExperienceShop.Hooks.useShopReportOverflow)
 local _ = require(inExperienceShop.Types)
@@ -19,7 +20,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), initiateShopItemPurchaseModule (ref), var1 (ref), sharedFlagsModule (ref), abuseVectorModule (ref), useShopReportOverflowModule (ref), formatUpdatedDateModule (ref)
+	-- upvalues: useLocalization (ref), t (ref), signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), initiateShopItemPurchaseModule (ref), var1 (ref), sharedFlagsModule (ref), abuseVectorModule (ref), useShopReportOverflowModule (ref), formatUpdatedDateModule (ref), constantsModule (ref)
 	local item = p1.item
 	local var2 = useLocalization(t)
 	local var3 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
@@ -80,13 +81,13 @@ return function(p1)
 		onMenuItemActivated = var7.onMenuItemActivated,
 		onReportClose = var7.onReportClose,
 		onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
-			-- upvalues: var11 (ref)
+			-- upvalues: constantsModule (copy), var11 (ref)
 			local x = p2.AbsoluteSize.X
 			
 			if x <= 0 then
 				return
 			end
-			local var12 = x < 480
+			local var12 = x < constantsModule.COMPACT_BREAKPOINT_WIDTH
 			var11(function(p3)
 				-- upvalues: var12 (ref)
 				return if p3 == var12 then p3 else var12

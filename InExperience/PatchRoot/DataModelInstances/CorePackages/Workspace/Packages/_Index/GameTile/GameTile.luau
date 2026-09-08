@@ -33,6 +33,8 @@ return {
 	resolveWideAssetId = if require(parent.SharedFlags).FFlagMigrateGameInfoToStore then require(script.resolveWideAssetId) else nil,
 	useNavigateToGameDetails = require(script.useNavigateToGameDetails),
 	NotInterestedUserSignalTelemetryEventConfigs = require(script.NotInterestedUserSignalTelemetryEventConfigs),
+	activateGameNotInterested = require(script.activateGameNotInterested),
+	undoGameNotInterested = require(script.undoGameNotInterested),
 	getGameTileHiddenStore = require(script.HiddenGameTile.getGameTileHiddenStore),
 	HiddenTileContent = require(script.HiddenGameTile.HiddenTileContent),
 	EmphasisGameTile = require(script.EmphasisGameTile),
@@ -43,6 +45,7 @@ return {
 	GameTileContextualActions = require(script.GameTileContextualActions),
 	GameTileOverflowMenu = require(script.GameTileOverflowMenu),
 	getAvailableGameTileOverflowMenuItems = require(script.getAvailableGameTileOverflowMenuItems),
+	useGameTileOverflowMenuFocusNavigation = require(script.useGameTileOverflowMenuFocusNavigation),
 	ZoomAnimatedFrame = require(script.ZoomAnimatedFrame),
 	["jest.config"] = script["jest.config"]
 }

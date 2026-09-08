@@ -6,10 +6,14 @@ local badge = foundationModule.Badge
 local view = foundationModule.View
 local badgeVariant = foundationModule.Enums.BadgeVariant
 local badgeShape = foundationModule.Enums.BadgeShape
+local signalsModule = require(corePackagesService.Packages.Signals)
+local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
 local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
+local fFlagEnableCustomTextInMenuTrailingBadge = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableCustomTextInMenuTrailingBadge
 local serviceModule = require(chromeShared.Service)
 local localStoreModule = require(chromeShared.Service.LocalStore)
 local _ = require(corePackagesService.Workspace.Packages.Chrome)
+local var1 = signalsModule.createSignal(nil)
 local t = {}
 
 local function _(p1, p2)
@@ -36,72 +40,85 @@ local _ = function(p1)
 	localStoreModule.storeForLocalPlayer(p1.localStorageKey, (if type(value) == "number" then value else 0) + 1)
 end
 
+local function renderBadge(p1, p2)
+	-- upvalues: reactModule (ref), view (ref), badge (ref), badgeVariant (ref), badgeShape (ref)
+	return reactModule.createElement(view, { tag = "auto-xy", LayoutOrder = p2 }, {
+		Badge = reactModule.createElement(badge, {
+			text = p1,
+			variant = badgeVariant.Emphasis,
+			shape = badgeShape.Box
+		})
+	})
+end
+
 return function(p1)
-	-- upvalues: reactModule (ref), t (ref), localStoreModule (ref), useLocalization (ref), serviceModule (ref), view (ref), badge (ref), badgeVariant (ref), badgeShape (ref)
+	-- upvalues: fFlagEnableCustomTextInMenuTrailingBadge (ref), signalsReactModule (ref), var1 (ref), reactModule (ref), t (ref), localStoreModule (ref), useLocalization (ref), serviceModule (ref), renderBadge (ref)
+	local useSignalState
 	local integrationId = p1.integrationId
 	local config = p1.config
-	local var1, var2 = reactModule.useState(function()
-		-- upvalues: integrationId (ref), config (ref), t (copy), localStoreModule (copy)
-		local var3
-		local var4 = config
+	
+	if fFlagEnableCustomTextInMenuTrailingBadge then
+		useSignalState = signalsReactModule.useSignalState
+		useSignalState = useSignalState(config.customText or var1)
+	else
+		useSignalState = nil
+	end
+	local var2, var3 = reactModule.useState(function()
+		-- upvalues: integrationId (ref), config (ref), t (copy), localStoreModule (copy), useSignalState (ref)
+		local var4
+		local var5 = config
 		
 		if t[integrationId] then
-			var3 = true
+			var4 = true
 		else
-			local maxViewCount = var4.maxViewCount
+			local maxViewCount = var5.maxViewCount
 			
 			if maxViewCount <= 0 then
-				var3 = true
+				var4 = true
 			else
-				local value = localStoreModule.getValue(var4.localStorageKey)
-				var3 = maxViewCount <= (if type(value) == "number" then value else 0)
+				local value = localStoreModule.getValue(var5.localStorageKey)
+				var4 = maxViewCount <= (if type(value) == "number" then value else 0)
 			end
 		end
-		local var5 = not var3
+		local var6 = not var4
 		
-		if var5 then
-			local var6 = config
+		if var6 and useSignalState == nil then
+			local var7 = config
 			
-			if var6.maxViewCount <= 0 then
-				return var5
+			if var7.maxViewCount <= 0 then
+				return var6
 			end
-			local value = localStoreModule.getValue(var6.localStorageKey)
-			localStoreModule.storeForLocalPlayer(var6.localStorageKey, (if type(value) == "number" then value else 0) + 1)
+			local value = localStoreModule.getValue(var7.localStorageKey)
+			localStoreModule.storeForLocalPlayer(var7.localStorageKey, (if type(value) == "number" then value else 0) + 1)
 		end
-		return var5
+		return var6
 	end)
-	local var3 = useLocalization({ text = "Feature.Catalog.Label.New" })
+	local var4 = useLocalization({ text = "Feature.Catalog.Label.New" })
 	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), serviceModule (copy), integrationId (ref), t (copy), localStoreModule (copy), config (ref), var2 (ref)
-		if var1 then
-			local var4 = serviceModule:onIntegrationActivated():connect(function(p2)
-				-- upvalues: integrationId (copy), t (copy), localStoreModule (copy), config (copy), var2 (copy)
+		-- upvalues: var2 (ref), serviceModule (copy), integrationId (ref), t (copy), localStoreModule (copy), config (ref), var3 (ref)
+		if var2 then
+			local var5 = serviceModule:onIntegrationActivated():connect(function(p2)
+				-- upvalues: integrationId (copy), t (copy), localStoreModule (copy), config (copy), var3 (copy)
 				if p2 == integrationId then
 					t[integrationId] = true
 					localStoreModule.storeForLocalPlayer(config.localStorageKey, config.maxViewCount)
-					var2(false)
+					var3(false)
 					
 					return
 				end
 			end)
 			
 			return function()
-				-- upvalues: var4 (ref)
-				var4:disconnect()
+				-- upvalues: var5 (ref)
+				var5:disconnect()
 			end
 		end
 	end, {
 		integrationId,
 		config.localStorageKey,
 		config.maxViewCount,
-		var1
+		var2
 	})
 	
-	return if var1 then reactModule.createElement(view, { tag = "auto-xy", LayoutOrder = p1.layoutOrder }, {
-		Badge = reactModule.createElement(badge, {
-			text = var3.text,
-			variant = badgeVariant.Emphasis,
-			shape = badgeShape.Box
-		})
-	}) else nil
+	return if useSignalState == nil then if var2 then renderBadge(var4.text, p1.layoutOrder) else nil else renderBadge(useSignalState, p1.layoutOrder)
 end

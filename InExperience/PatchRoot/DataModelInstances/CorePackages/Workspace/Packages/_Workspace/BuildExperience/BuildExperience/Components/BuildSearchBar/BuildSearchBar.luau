@@ -2,17 +2,15 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local searchInput = foundationModule.SearchInput
 local view = foundationModule.View
 local getSearchQueryStoreModule = require(buildExperience.Stores.GetSearchQueryStore)
 local _ = require(buildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
 
 return function(p1)
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), getSearchQueryStoreModule (ref), reactModule (ref), view (ref), searchInput (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), getSearchQueryStoreModule (ref), reactModule (ref), view (ref), searchInput (ref)
 	local store = p1.store or getSearchQueryStoreModule()
 	
 	return reactModule.createElement(view, {
@@ -23,9 +21,9 @@ return function(p1)
 		Input = reactModule.createElement(searchInput, {
 			testId = "build-search-bar-input",
 			text = store.useDraftQuery(),
-			placeholder = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
+			placeholder = useLocalization({
 				placeholder = localizationStringsModule.BUILD_SEARCH_PLACEHOLDER
-			}) else nil).placeholder else localizationStringsModule.BUILD_SEARCH_PLACEHOLDER,
+			}).placeholder,
 			onChanged = reactModule.useCallback(function(p2)
 				-- upvalues: store (ref)
 				if p2 == "" then

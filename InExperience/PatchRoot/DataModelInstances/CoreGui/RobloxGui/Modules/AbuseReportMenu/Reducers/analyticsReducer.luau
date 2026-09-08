@@ -4,14 +4,13 @@ local _ = require(abuseReportMenu.Components.Types)
 local constantsModule = require(abuseReportMenu.Components.Constants)
 local cryoModule = require(corePackagesService.Packages.Cryo)
 local analyticsActions = constantsModule.AnalyticsActions
-local fFlagAddPreselectedAbuseTypeAnalytics = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAddPreselectedAbuseTypeAnalytics
 local t = {
 	typeofabuseSelection = cryoModule.None,
 	reasonSelection = cryoModule.None
 }
 
 return function(p1, p2)
-	-- upvalues: analyticsActions (ref), constantsModule (ref), fFlagAddPreselectedAbuseTypeAnalytics (ref), cryoModule (ref), t (ref)
+	-- upvalues: analyticsActions (ref), constantsModule (ref), cryoModule (ref), t (ref)
 	local cloned = table.clone(p1)
 	local type = p2.type
 	
@@ -64,7 +63,7 @@ return function(p1, p2)
 		cloned.typeofabuseSelection = p2.selection
 		
 		return cloned
-	elseif fFlagAddPreselectedAbuseTypeAnalytics and type == analyticsActions.SetPreselectedAbuseSelection then
+	elseif type == analyticsActions.SetPreselectedAbuseSelection then
 		cloned.preselectedAbuseSelection = p2.selection
 		
 		return cloned

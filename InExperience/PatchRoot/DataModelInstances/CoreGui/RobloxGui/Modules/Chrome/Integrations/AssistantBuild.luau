@@ -4,18 +4,19 @@ local VRService = game:GetService("VRService")
 local reactModule = require(corePackagesService.Packages.React)
 local foundationModule = require(corePackagesService.Packages.Foundation)
 local buildExperienceModule = require(corePackagesService.Workspace.Packages.BuildExperience)
+local buildModeLaunchModule = require(corePackagesService.Workspace.Packages.BuildExperiencePlaytestLaunch.BuildModeLaunch)
 local serviceModule = require(chrome.Service)
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
 local function _()
-	-- upvalues: buildExperienceModule (ref), VRService (ref)
-	return buildExperienceModule.BuildModeLaunch:hasBuildMode() and not VRService.VREnabled
+	-- upvalues: buildModeLaunchModule (ref), VRService (ref)
+	return buildModeLaunchModule:hasBuildMode() and not VRService.VREnabled
 end
 
 return serviceModule:register({
 	id = "assistant_build",
 	label = "CommonUI.Features.NavBar.Build",
-	initialAvailability = if buildExperienceModule.BuildModeLaunch:hasBuildMode() and not VRService.VREnabled then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
+	initialAvailability = if buildModeLaunchModule:hasBuildMode() and not VRService.VREnabled then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
 	activated = function(_)
 		-- upvalues: buildExperienceModule (ref)
 		local assistantBuildStore = buildExperienceModule.GetAssistantBuildStore()

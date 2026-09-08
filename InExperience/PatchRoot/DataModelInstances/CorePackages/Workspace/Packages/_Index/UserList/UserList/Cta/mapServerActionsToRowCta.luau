@@ -2,6 +2,7 @@
 local foundationModule = require(userList.Parent.Foundation)
 local enumsModule = require(userList.Common.Enums)
 local _ = require(userList.Common.Types)
+local fFlagUserListChatCtaStandardVariantModule = require(userList.Flags.FFlagUserListChatCtaStandardVariant)
 local iconName = foundationModule.Enums.IconName
 local buttonTypes = enumsModule.ButtonTypes
 local t = {
@@ -18,7 +19,8 @@ local t = {
 	CannotAddFriend = { isDisabled = true, buttonType = buttonTypes.Add },
 	Chat = {
 		buttonType = buttonTypes.Chat,
-		handlerKey = buttonTypes.Chat
+		handlerKey = buttonTypes.Chat,
+		variant = if fFlagUserListChatCtaStandardVariantModule then foundationModule.Enums.ButtonVariant.Standard else nil
 	},
 	JoinExperience = { buttonType = buttonTypes.Join }
 }
@@ -38,7 +40,7 @@ local function _(p1, p2)
 end
 
 return function(p3, p4, p5, p6)
-	-- upvalues: t (ref), var1 (ref), buttonTypes (ref), iconName (ref)
+	-- upvalues: t (ref), var1 (ref), fFlagUserListChatCtaStandardVariantModule (ref), buttonTypes (ref), iconName (ref)
 	if not p3 or not p3.buttons then
 		return { primaryCta = nil, secondaryCta = nil }
 	end
@@ -71,6 +73,7 @@ return function(p3, p4, p5, p6)
 					end else var1,
 					isDisabled = type.isDisabled,
 					disabledReason = v.disabledReason,
+					variant = if fFlagUserListChatCtaStandardVariantModule then type.variant else nil,
 					minWidth = if p6 then p6.primaryCtaMinWidth else nil,
 					maxWidth = if p6 then p6.primaryCtaMaxWidth else nil
 				}

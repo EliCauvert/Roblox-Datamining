@@ -21,7 +21,6 @@ local checkDebugAccessModule = require(moments.Utils.checkDebugAccess)
 local getPostFeedItemIdModule = require(moments.Utils.getPostFeedItemId)
 local fireAnalyticsEvent = momentsCommonModule.Analytics.fireAnalyticsEvent
 local eventNames = momentsCommonModule.Analytics.EventNames
-local getFFlagMomentsAnalyticsSchemaIdentity = momentsCommonModule.Flags.GetFFlagMomentsAnalyticsSchemaIdentity
 local reportModalCovering = momentsCommonModule.Media.reportModalCovering
 local makeFeedActionFieldsModule = require(moments.Analytics.makeFeedActionFields)
 local makeRecommendationAttributionModule = require(moments.Analytics.makeRecommendationAttribution)
@@ -52,7 +51,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), useFeed (ref), useMomentsHost (ref), useToggleState (ref), fFlagMomentsIPReporting (ref), reactModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), getModeratedItemsStoreModule (ref), getToastStoreModule (ref), signalsReactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), checkDebugAccessModule (ref), reportMomentModule (ref), fFlagMomentsReportWithFeedId (ref), makeRecommendationAttributionModule (ref), signalActionTypeModule (ref), makeFeedActionFieldsModule (ref), momentsCommonModule (ref), getPostFeedItemIdModule (ref), reportModalCovering (ref), getFFlagMomentsAnalyticsSchemaIdentity (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), localPlayer (ref), foundationModule (ref), menu (ref), iconButton (ref), threeDotsVertical (ref), reportMomentDialogModule (ref), ipReportConfirmationDialogModule (ref), view (ref), speakerSlash (ref), speaker (ref)
+	-- upvalues: useLocalization (ref), t (ref), useFeed (ref), useMomentsHost (ref), useToggleState (ref), fFlagMomentsIPReporting (ref), reactModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), getModeratedItemsStoreModule (ref), getToastStoreModule (ref), signalsReactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), checkDebugAccessModule (ref), reportMomentModule (ref), fFlagMomentsReportWithFeedId (ref), makeRecommendationAttributionModule (ref), signalActionTypeModule (ref), makeFeedActionFieldsModule (ref), getPostFeedItemIdModule (ref), reportModalCovering (ref), localPlayer (ref), foundationModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), menu (ref), iconButton (ref), threeDotsVertical (ref), reportMomentDialogModule (ref), ipReportConfirmationDialogModule (ref), view (ref), speakerSlash (ref), speaker (ref)
 	local var1 = useLocalization(t)
 	local var2 = useFeed()
 	local openMomentsFeedReport = useMomentsHost().openMomentsFeedReport
@@ -117,7 +116,7 @@ return function(p1)
 		var3.disable()
 	end, { var3.disable, var18.toggleFeedDebugMode })
 	local var26 = reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: p1 (ref), fFlagMomentsIPReporting (copy), reportMomentModule (copy), fFlagMomentsReportWithFeedId (copy), makeRecommendationAttributionModule (copy), var2 (ref), signalActionTypeModule (copy), makeFeedActionFieldsModule (copy), momentsCommonModule (copy), fireAnalyticsEvent (copy), eventNames (copy), var19 (ref), var20 (ref), var1 (ref)
+		-- upvalues: p1 (ref), fFlagMomentsIPReporting (copy), reportMomentModule (copy), fFlagMomentsReportWithFeedId (copy), makeRecommendationAttributionModule (copy), var2 (ref), signalActionTypeModule (copy), makeFeedActionFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), var19 (ref), var20 (ref), var1 (ref)
 		if not p1.moment then
 			return nil
 		end
@@ -147,7 +146,7 @@ return function(p1)
 				warn("Failed to log action event", status)
 			end
 		end
-		local var32 = makeFeedActionFieldsModule(p1.moment.momentId, recommendationMetadata and recommendationMetadata.feedItemId, recommendationMetadata and recommendationMetadata.tracingId, if momentsCommonModule.Flags.GetFFlagMomentsAnalyticsSchemaIdentity() then "report" else nil)
+		local var32 = makeFeedActionFieldsModule(p1.moment.momentId, recommendationMetadata and recommendationMetadata.feedItemId, recommendationMetadata and recommendationMetadata.tracingId, "report")
 		
 		if var32 then
 			fireAnalyticsEvent(eventNames.FeedAbuseReported, var32)
@@ -213,16 +212,9 @@ return function(p1)
 		end
 	end, {})
 	local var30 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), getFFlagMomentsAnalyticsSchemaIdentity (copy), fFlagMomentsPassFeedItemIdToBackendApis (copy), var17 (ref), p1 (ref)
+		-- upvalues: var3 (ref), var17 (ref), p1 (ref)
 		var3.disable()
-		local var31 = getFFlagMomentsAnalyticsSchemaIdentity()
-		
-		if not fFlagMomentsPassFeedItemIdToBackendApis and not var31 then
-			var17.requestDeletion(p1.moment.momentId)
-			
-			return
-		end
-		var17.requestDeletion(p1.moment.momentId, p1.moment.recommendationMetadata and p1.moment.recommendationMetadata.feedItemId, if var31 and p1.moment.recommendationMetadata then p1.moment.recommendationMetadata.tracingId else nil)
+		var17.requestDeletion(p1.moment.momentId, p1.moment.recommendationMetadata and p1.moment.recommendationMetadata.feedItemId, if p1.moment.recommendationMetadata then p1.moment.recommendationMetadata.tracingId else nil)
 	end, { p1.moment, var3.disable, var17.requestDeletion })
 	local var31 = if p1.isFeedMuteButtonAnalyticsEnabled then reactModule.useCallback(function()
 		-- upvalues: p1 (ref), fireAnalyticsEvent (copy), eventNames (copy)

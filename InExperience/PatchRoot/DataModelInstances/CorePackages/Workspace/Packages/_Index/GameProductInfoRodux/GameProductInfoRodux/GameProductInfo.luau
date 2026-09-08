@@ -1,5 +1,4 @@
 ﻿local resultModule = require(script:FindFirstAncestor("GameProductInfoRodux").Parent.Result)
-local fixFiatPaidAccessPlayButton = game:DefineFastFlag("FixFiatPaidAccessPlayButton", false)
 local t = {
 	new = function()
 		return {}
@@ -19,38 +18,22 @@ function t.mock(p1)
 end
 
 function t.fromJsonData(p1)
-	-- upvalues: fixFiatPaidAccessPlayButton (ref), resultModule (ref), t (ref)
-	local var1
-	local var2 = type(p1.universeId) == "number" and (type(p1.isForSale) == "boolean" and (type(p1.productId) == "number" and (type(p1.price) == "number" and type(p1.sellerId) == "number")))
-	
-	if fixFiatPaidAccessPlayButton then
-		var1 = false
-		
-		if p1.fiatPurchaseData ~= nil then
-			var1 = false
-			
-			if type(p1.universeId) == "number" then
-				local _ = type(p1.isForSale) == "boolean"
-			end
-		end
-	else
-		var1 = nil
-	end
-	if not var2 and not var1 then
+	-- upvalues: resultModule (ref), t (ref)
+	if not (type(p1.universeId) == "number" and (type(p1.isForSale) == "boolean" and (type(p1.productId) == "number" and (type(p1.price) == "number" and type(p1.sellerId) == "number")))) and not (p1.fiatPurchaseData ~= nil and (type(p1.universeId) == "number" and type(p1.isForSale) == "boolean")) then
 		return resultModule.error("invalid data type")
 	end
-	local var3 = t.new()
-	var3.universeId = tostring(p1.universeId)
-	var3.isForSale = p1.isForSale
-	var3.productId = p1.productId
-	var3.price = p1.price
-	var3.sellerId = p1.sellerId
+	local var1 = t.new()
+	var1.universeId = tostring(p1.universeId)
+	var1.isForSale = p1.isForSale
+	var1.productId = p1.productId
+	var1.price = p1.price
+	var1.sellerId = p1.sellerId
 	
 	if p1.fiatPurchaseData then
-		var3.localizedFiatPrice = p1.fiatPurchaseData.localizedFiatPrice
-		var3.fiatBasePriceId = p1.fiatPurchaseData.basePriceId
+		var1.localizedFiatPrice = p1.fiatPurchaseData.localizedFiatPrice
+		var1.fiatBasePriceId = p1.fiatPurchaseData.basePriceId
 	end
-	return resultModule.success(var3)
+	return resultModule.success(var1)
 end
 
 return t

@@ -32,6 +32,7 @@ local _ = require(parent.ProductPurchase.v4.cartPricingResponseLineItem)
 local formatNumberModule = require(parent.Utility.formatNumber)
 local getUpsellBadgeInfoModule = require(parent.Utility.getUpsellBadgeInfo)
 local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
+local fFlagAXFixMISUpsellDiscountSummary = sharedFlagsModule.FFlagAXFixMISUpsellDiscountSummary
 local fFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 local compactUpsellModalBreakpoint = game:DefineFastInt("CompactUpsellModalBreakpoint", 400)
 local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
@@ -161,7 +162,7 @@ local function UpsellProductDetails(p1)
 end
 
 local function UnifiedRobuxUpsellModalV2(_)
-	-- upvalues: fFlagPurchasePromptFetchCartPricing (ref), useCartPricingModule (ref), reactModule (ref), useLocalization (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), fFlagAXMISWithBlackbird (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), unifiedPurchaseModalTypeEnumModule (ref), compactUpsellModalBreakpoint (ref), fFlagShouldFixDevSubsFlashingTitleModule (ref), useFocusNavigationRefsModule (ref), buildCartPricingOfferCheckboxesModule (ref), checkbox (ref), view (ref), fFlagShouldApplyDevSubsUpsellFixModule (ref), image (ref), text (ref), productDetailsContainerModule (ref), dialog (ref), dialogSize (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), cartPricingLoadingModule (ref), getFFlagIAPExperienceEnableMultiDisplayUpsellModule (ref), UpsellProductDetails (ref), orientation (ref), buttonVariant (ref)
+	-- upvalues: fFlagPurchasePromptFetchCartPricing (ref), useCartPricingModule (ref), reactModule (ref), useLocalization (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), fFlagAXMISWithBlackbird (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), unifiedPurchaseModalTypeEnumModule (ref), compactUpsellModalBreakpoint (ref), fFlagShouldFixDevSubsFlashingTitleModule (ref), useFocusNavigationRefsModule (ref), buildCartPricingOfferCheckboxesModule (ref), checkbox (ref), view (ref), fFlagShouldApplyDevSubsUpsellFixModule (ref), image (ref), text (ref), fFlagAXFixMISUpsellDiscountSummary (ref), productDetailsContainerModule (ref), dialog (ref), dialogSize (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), cartPricingLoadingModule (ref), getFFlagIAPExperienceEnableMultiDisplayUpsellModule (ref), UpsellProductDetails (ref), orientation (ref), buttonVariant (ref)
 -- FATAL: Failed to generate AST for `UnifiedRobuxUpsellModalV2` function:
 runtime : [KeyError] :11990: 162
 Traceback:

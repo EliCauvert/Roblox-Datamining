@@ -34,5 +34,6 @@ return {
 		return if ok then status == true else false
 	end)(),
 	CAPABILITY_SUPPORTS_EVENT_RSVP_FACE_PILE = sharedFlagsModule.FFlagSduiEventRsvpFacePile,
-	CAPABILITY_SUPPORTS_SCALED_PLAY_BUTTON_AND_IMAGE_SIZES = sharedFlagsModule.FFlagSduiScalePlayButtonAndImageSizes
+	CAPABILITY_SUPPORTS_SCALED_PLAY_BUTTON_AND_IMAGE_SIZES = sharedFlagsModule.FFlagSduiScalePlayButtonAndImageSizes,
+	CAPABILITY_SUPPORTS_CONTAINER_QUERIES = sharedFlagsModule.FFlagSduiContainerQueries
 }

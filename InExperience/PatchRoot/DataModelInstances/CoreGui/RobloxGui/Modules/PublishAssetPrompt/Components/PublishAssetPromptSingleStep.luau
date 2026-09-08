@@ -14,6 +14,7 @@ local roactGamepadModule = require(corePackagesService.Packages.RoactGamepad)
 local localPlayer = playersService.LocalPlayer
 local nameTextBoxModule = require(script.Parent.Common.NameTextBox)
 local assetDescriptionTextBoxModule = require(script.Parent.AssetDescriptionTextBox)
+local imagePreviewModule = require(script.Parent.ImagePreview)
 local objectViewportModule = require(script.Parent.ObjectViewport)
 local previewViewportModule = require(script.Parent.Common.PreviewViewport)
 local emoteThumbnailViewModule = require(script.Parent.EmoteThumbnailView)
@@ -38,6 +39,7 @@ local t = {
 local getFFlagValidateDescriptionModule = require(script.Parent.Parent.GetFFlagValidateDescription)
 local sendConsentDeniedOnCancel = game:DefineFastFlag("SendConsentDeniedOnCancel", false)
 local enableEmotePublishEngineFeature = game:GetEngineFeature("EnableEmotePublish")
+local enableImagePublishEngineFeature = game:GetEngineFeature("EnableImagePublish")
 local publishAssetPromptSingleStep = roactModule.PureComponent:extend("PublishAssetPromptSingleStep")
 publishAssetPromptSingleStep.validateProps = tModule.strictInterface({
 	screenSize = tModule.Vector2,
@@ -139,112 +141,134 @@ function publishAssetPromptSingleStep.init(p1)
 end
 
 function publishAssetPromptSingleStep.renderMiddle(p1, p2)
-	-- upvalues: withStyle (ref), enableEmotePublishEngineFeature (ref), roactModule (ref), roactGamepadModule (ref), objectViewportModule (ref), emoteThumbnailViewModule (ref), iconButton (ref), previewExpand (ref), edit (ref), nameTextBoxModule (ref), assetDescriptionTextBoxModule (ref)
+	-- upvalues: withStyle (ref), enableEmotePublishEngineFeature (ref), enableImagePublishEngineFeature (ref), roactModule (ref), roactGamepadModule (ref), imagePreviewModule (ref), objectViewportModule (ref), emoteThumbnailViewModule (ref), iconButton (ref), previewExpand (ref), edit (ref), nameTextBoxModule (ref), assetDescriptionTextBoxModule (ref)
 	return withStyle(function(p3)
-		-- upvalues: enableEmotePublishEngineFeature (copy), p1 (ref), roactModule (copy), roactGamepadModule (copy), objectViewportModule (copy), emoteThumbnailViewModule (copy), iconButton (copy), previewExpand (copy), edit (copy), p2 (ref), nameTextBoxModule (copy), assetDescriptionTextBoxModule (copy)
+		-- upvalues: enableEmotePublishEngineFeature (copy), p1 (ref), enableImagePublishEngineFeature (copy), roactModule (copy), roactGamepadModule (copy), imagePreviewModule (copy), objectViewportModule (copy), emoteThumbnailViewModule (copy), iconButton (copy), previewExpand (copy), edit (copy), p2 (ref), nameTextBoxModule (copy), assetDescriptionTextBoxModule (copy)
+		local var1
 		local font = p3.Font
 		local theme = p3.Theme
-		local var1 = enableEmotePublishEngineFeature and (p1.props.assetType == Enum.AssetType.EmoteAnimation and p1.props.assetInstance:IsA("AnimationClip"))
-		
-		return roactModule.createElement(roactGamepadModule.Focusable.Frame, {
+		local var2 = enableEmotePublishEngineFeature and (p1.props.assetType == Enum.AssetType.EmoteAnimation and p1.props.assetInstance:IsA("AnimationClip"))
+		local var3 = enableImagePublishEngineFeature and (p1.props.assetType == Enum.AssetType.Image and p1.props.assetInstance:IsA("Decal"))
+		local createElement = roactModule.createElement
+		local frame = roactGamepadModule.Focusable.Frame
+		local t = {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 150),
 			defaultChild = p1.nameTextBoxRef,
 			[roactModule.Ref] = p1.middleContentRef
-		}, {
-			UISizeConstraint = roactModule.createElement("UISizeConstraint", { MinSize = Vector2.new(200, 200) }),
-			TopSection = roactModule.createElement("Frame", {
-				BackgroundTransparency = 1,
-				Size = UDim2.new(1, 0, 1, -50)
-			}, {
-				ViewportParent = roactModule.createElement("Frame", {
-					BackgroundTransparency = 1,
-					Size = UDim2.new(0.4, 0, 1, 0)
-				}, {
-					ObjectViewport = not var1 and roactModule.createElement(objectViewportModule, { model = p1.props.assetInstance }) or nil,
-					EmoteThumbnailParent = var1 and roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
-						AspectRatioConstraint = roactModule.createElement("UIAspectRatioConstraint", {
-							AspectRatio = 1,
-							AspectType = Enum.AspectType.FitWithinMaxSize,
-							DominantAxis = Enum.DominantAxis.Width
-						}),
-						EmoteThumbnailView = roactModule.createElement(emoteThumbnailViewModule, {
-							animationClip = p1.props.assetInstance,
-							thumbnailParameters = p1.state.thumbnailParameters
-						}),
-						PreviewButton = roactModule.createElement(iconButton, {
-							showBackground = true,
-							position = UDim2.new(1, -2, 1, -2),
-							anchorPoint = Vector2.new(1, 1),
-							icon = previewExpand,
-							size = UDim2.new(0, 30, 0, 30),
-							onActivated = p1.openAssetPreview
-						}),
-						EditButton = roactModule.createElement(iconButton, {
-							showBackground = true,
-							position = UDim2.new(0, 2, 1, -2),
-							anchorPoint = Vector2.new(0, 1),
-							icon = edit,
-							size = UDim2.new(0, 30, 0, 30),
-							onActivated = p1.openThumbnailEditor
-						})
-					}) or nil
-				}),
-				NameDescriptionFields = roactModule.createElement("Frame", {
-					BackgroundTransparency = 1,
-					Size = UDim2.new(0.6, -10, 1, 0),
-					AnchorPoint = Vector2.new(1, 0),
-					Position = UDim2.fromScale(1, 0)
-				}, {
-					NameLabel = roactModule.createElement("TextLabel", {
-						TextSize = 12,
-						BackgroundTransparency = 1,
-						Size = UDim2.new(1, 0, 0, 15),
-						Font = font.Body.Font,
-						Text = p2.name,
-						TextColor3 = theme.TextDefault.Color,
-						TextXAlignment = Enum.TextXAlignment.Left
-					}),
-					NameInput = roactModule.createElement(nameTextBoxModule, {
-						Size = UDim2.new(1, 0, 0, 30),
-						Position = UDim2.new(0, 0, 0, 15),
-						onNameUpdated = p1.onAssetNameUpdated,
-						nameTextBoxRef = p1.nameTextBoxRef,
-						NextSelectionDown = p1.descriptionTextBoxRef,
-						defaultName = p1.assetName
-					}),
-					DescriptionLabel = roactModule.createElement("TextLabel", {
-						TextSize = 12,
-						BackgroundTransparency = 1,
-						Size = UDim2.new(1, 0, 0, 15),
-						Position = UDim2.new(0, 0, 0, 60),
-						Font = font.Body.Font,
-						Text = p2.description,
-						TextColor3 = theme.TextDefault.Color,
-						TextXAlignment = Enum.TextXAlignment.Left
-					}),
-					DescriptionInput = roactModule.createElement(assetDescriptionTextBoxModule, {
-						Size = UDim2.new(1, 0, 0, 80),
-						Position = UDim2.new(0, 0, 0, 75),
-						onAssetDescriptionUpdated = p1.onAssetDescriptionUpdated,
-						descriptionTextBoxRef = p1.descriptionTextBoxRef,
-						NextSelectionUp = p1.nameTextBoxRef,
-						defaultDescription = p1.assetDescription
-					})
-				})
+		}
+		local t_1 = {
+			UISizeConstraint = roactModule.createElement("UISizeConstraint", { MinSize = Vector2.new(200, 200) })
+		}
+		local createElement_1 = roactModule.createElement
+		local var4 = "Frame"
+		local t_2 = {
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1, 0, 1, -50)
+		}
+		local t_3 = {}
+		local createElement_2 = roactModule.createElement
+		local var5 = "Frame"
+		local t_4 = {
+			BackgroundTransparency = 1,
+			Size = UDim2.new(0.4, 0, 1, 0)
+		}
+		local t_5 = {
+			ImagePreview = if var3 then roactModule.createElement(imagePreviewModule, {
+				autoRotateSeconds = 6,
+				imageContent = p1.props.assetInstance.TextureContent
+			}) else nil
+		}
+		
+		if not var2 and not var3 then
+			var1 = roactModule.createElement(objectViewportModule, { model = p1.props.assetInstance }) or nil
+		end
+		t_5.ObjectViewport = var1
+		t_5.EmoteThumbnailParent = var2 and roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
+			AspectRatioConstraint = roactModule.createElement("UIAspectRatioConstraint", {
+				AspectRatio = 1,
+				AspectType = Enum.AspectType.FitWithinMaxSize,
+				DominantAxis = Enum.DominantAxis.Width
 			}),
-			Disclaimer = roactModule.createElement("TextLabel", {
+			EmoteThumbnailView = roactModule.createElement(emoteThumbnailViewModule, {
+				animationClip = p1.props.assetInstance,
+				thumbnailParameters = p1.state.thumbnailParameters
+			}),
+			PreviewButton = roactModule.createElement(iconButton, {
+				showBackground = true,
+				position = UDim2.new(1, -2, 1, -2),
+				anchorPoint = Vector2.new(1, 1),
+				icon = previewExpand,
+				size = UDim2.new(0, 30, 0, 30),
+				onActivated = p1.openAssetPreview
+			}),
+			EditButton = roactModule.createElement(iconButton, {
+				showBackground = true,
+				position = UDim2.new(0, 2, 1, -2),
+				anchorPoint = Vector2.new(0, 1),
+				icon = edit,
+				size = UDim2.new(0, 30, 0, 30),
+				onActivated = p1.openThumbnailEditor
+			})
+		}) or nil
+		t_3.ViewportParent = createElement_2(var5, t_4, t_5)
+		t_3.NameDescriptionFields = roactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			Size = UDim2.new(0.6, -10, 1, 0),
+			AnchorPoint = Vector2.new(1, 0),
+			Position = UDim2.fromScale(1, 0)
+		}, {
+			NameLabel = roactModule.createElement("TextLabel", {
 				TextSize = 12,
 				BackgroundTransparency = 1,
-				TextWrapped = true,
-				Size = UDim2.new(1, 0, 0, 50),
-				Text = p2.disclaimer,
+				Size = UDim2.new(1, 0, 0, 15),
 				Font = font.Body.Font,
-				TextColor3 = theme.TextEmphasis.Color,
-				AnchorPoint = Vector2.new(0, 1),
-				Position = UDim2.fromScale(0, 1)
+				Text = p2.name,
+				TextColor3 = theme.TextDefault.Color,
+				TextXAlignment = Enum.TextXAlignment.Left
+			}),
+			NameInput = roactModule.createElement(nameTextBoxModule, {
+				Size = UDim2.new(1, 0, 0, 30),
+				Position = UDim2.new(0, 0, 0, 15),
+				onNameUpdated = p1.onAssetNameUpdated,
+				nameTextBoxRef = p1.nameTextBoxRef,
+				NextSelectionDown = p1.descriptionTextBoxRef,
+				defaultName = p1.assetName
+			}),
+			DescriptionLabel = roactModule.createElement("TextLabel", {
+				TextSize = 12,
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1, 0, 0, 15),
+				Position = UDim2.new(0, 0, 0, 60),
+				Font = font.Body.Font,
+				Text = p2.description,
+				TextColor3 = theme.TextDefault.Color,
+				TextXAlignment = Enum.TextXAlignment.Left
+			}),
+			DescriptionInput = roactModule.createElement(assetDescriptionTextBoxModule, {
+				Size = UDim2.new(1, 0, 0, 80),
+				Position = UDim2.new(0, 0, 0, 75),
+				onAssetDescriptionUpdated = p1.onAssetDescriptionUpdated,
+				descriptionTextBoxRef = p1.descriptionTextBoxRef,
+				NextSelectionUp = p1.nameTextBoxRef,
+				defaultDescription = p1.assetDescription
 			})
 		})
+		t_1.TopSection = createElement_1(var4, t_2, t_3)
+		t_1.Disclaimer = roactModule.createElement("TextLabel", {
+			TextSize = 12,
+			BackgroundTransparency = 1,
+			TextWrapped = true,
+			Size = UDim2.new(1, 0, 0, 50),
+			TextYAlignment = Enum.TextYAlignment.Center,
+			Text = p2.disclaimer,
+			Font = font.Body.Font,
+			TextColor3 = theme.TextEmphasis.Color,
+			AnchorPoint = Vector2.new(0, 1),
+			Position = UDim2.fromScale(0, 1)
+		})
+		
+		return createElement(frame, t, t_1)
 	end)
 end
 
@@ -268,7 +292,7 @@ function publishAssetPromptSingleStep.renderAlertLocalized(p1, p2)
 					props = {
 						isDelayedInput = true,
 						enableInputDelayed = true,
-						delayInputSeconds = 3,
+						delayInputSeconds = 6,
 						onActivated = p1.confirmAndUpload,
 						text = p2.submit
 					}
@@ -341,6 +365,11 @@ local function GetLocalizedStringsForAssetType(value)
 	elseif value == Enum.AssetType.Package then
 		t_1.title = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.TitleTextPackage")
 		t_1.disclaimer = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.DisclaimerModel")
+		
+		return t_1
+	elseif value == Enum.AssetType.Image then
+		t_1.title = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.TitleTextImage")
+		t_1.disclaimer = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.DisclaimerImage")
 	end
 	return t_1
 end

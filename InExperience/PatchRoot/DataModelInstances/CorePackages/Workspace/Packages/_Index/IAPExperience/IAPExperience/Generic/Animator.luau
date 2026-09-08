@@ -4,14 +4,13 @@ local parent_1 = parent.Parent
 local localization = require(parent_1.RobloxAppLocales).Localization
 local localeProviderModule = require(parent.Locale.LocaleProvider)
 local localizationProvider = require(parent_1.Localization).LocalizationProvider
-local fFlagEnableUnifiedProductPurchaseFlow = require(parent_1.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 local roactModule = require(parent_1.Roact)
 local otterModule = require(parent_1.Otter)
 local name = roactModule.Component:extend(script.Name)
 local t = { dampingRatio = 1, frequency = 1.6 }
 
 function name.init(p1)
-	-- upvalues: roactModule (ref), otterModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), t (ref)
+	-- upvalues: roactModule (ref), otterModule (ref), t (ref)
 	p1.state = { shouldRenderChildren = p1.props.shouldShow }
 	local var1, var2 = roactModule.createBinding(1)
 	p1.motor = otterModule.createSingleMotor(1)
@@ -40,7 +39,7 @@ function name.init(p1)
 	end)
 	local var3 = if p1.props.shouldShow then 0 else 1
 	
-	if fFlagEnableUnifiedProductPurchaseFlow and p1.props.skipAnimation then
+	if p1.props.skipAnimation then
 		p1.motor:setGoal(otterModule.instant(var3))
 		
 		return
@@ -49,7 +48,7 @@ function name.init(p1)
 end
 
 function name.didUpdate(p1, p2, _)
-	-- upvalues: fFlagEnableUnifiedProductPurchaseFlow (ref), otterModule (ref), t (ref)
+	-- upvalues: otterModule (ref), t (ref)
 	local props = p1.props
 	
 	if p2.shouldShow ~= props.shouldShow then
@@ -58,7 +57,7 @@ function name.didUpdate(p1, p2, _)
 		end
 		local var1 = if p1.props.shouldShow then 0 else 1
 		
-		if fFlagEnableUnifiedProductPurchaseFlow and p1.props.skipAnimation then
+		if p1.props.skipAnimation then
 			p1.motor:setGoal(otterModule.instant(var1))
 			
 			return

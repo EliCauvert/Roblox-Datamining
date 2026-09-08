@@ -360,7 +360,8 @@ local function CreationFlowContent(p1)
 			preview = var3.preview,
 			scaleType = var40,
 			onAbsoluteSizeChanged = var37,
-			onResolutionChanged = if getFFlagMomentsCreationTextOverlayResolutionScaleModule() then var38 else nil
+			onResolutionChanged = if getFFlagMomentsCreationTextOverlayResolutionScaleModule() then var38 else nil,
+			ttsAudio = var3.ttsAudio
 		}, var39)
 	}
 	local createElement_5 = reactModule.createElement

@@ -3,5 +3,6 @@
 	fromScreen = "fromScreen",
 	params = "params",
 	category = "category",
-	subcategory = "subcategory"
+	subcategory = "subcategory",
+	customizeTab = "customizeTab"
 }

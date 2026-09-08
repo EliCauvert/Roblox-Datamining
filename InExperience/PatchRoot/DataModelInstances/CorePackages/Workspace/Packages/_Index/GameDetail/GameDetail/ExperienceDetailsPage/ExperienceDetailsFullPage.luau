@@ -8,6 +8,7 @@ local fetchExperienceDetailsPageModule = require(script.Parent.fetchExperienceDe
 local getExperienceDetailsPageKeyModule = require(script.Parent.getExperienceDetailsPageKey)
 local removeGameDetailSessionIfDepartedModule = require(script.Parent.removeGameDetailSessionIfDeparted)
 local useEdpFunctionallyReadyLoggerModule = require(script.Parent.useEdpFunctionallyReadyLogger)
+local usePublishContainerWidthModule = require(script.Parent.usePublishContainerWidth)
 local experienceDetailsFallbackBannerImageModule = require(script.Parent.Fallback.ExperienceDetailsFallbackBannerImage)
 local experienceDetailsFallbackFeedModule = require(script.Parent.Fallback.ExperienceDetailsFallbackFeed)
 local _ = require(parent.Navigation)
@@ -17,7 +18,6 @@ local useTokens = foundationModule.Hooks.useTokens
 local appSessionService = require(parent.RoactServiceTags).AppSessionService
 local useNavigation = require(parent.Navigation).useNavigation
 local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local sessionType = require(parent.RobloxAppSessionization).SessionType
 local detailsPageLayout = require(parent.AppBlox).DetailsPageLayout
 local appPage = require(parent.RobloxAppEnums).AppPage
 local dataHydrationModule = require(parent.DataHydration)
@@ -38,8 +38,8 @@ local compositionTags = require(parent.AppComposition).CompositionTags
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagSduiPageEntryUseSharedHooks = sharedFlagsModule.FFlagSduiPageEntryUseSharedHooks
+local fFlagSduiContainerQueries = sharedFlagsModule.FFlagSduiContainerQueries
 local fFlagSduiPlayWithRewardGapFix = sharedFlagsModule.FFlagSduiPlayWithRewardGapFix
-local fFlagLuaAppSduiEdpRouteAwareSessionRemoval = sharedFlagsModule.FFlagLuaAppSduiEdpRouteAwareSessionRemoval
 local sduiEdpPageScopeIsTenFoot = game:DefineFastFlag("SduiEdpPageScopeIsTenFoot", false)
 local edpFullBleedOverlapOffset = game:DefineFastInt("EdpFullBleedOverlapOffset", 180)
 local edpBannerBottomVisiblePercent = game:DefineFastInt("EdpBannerBottomVisiblePercent", 20)
@@ -50,7 +50,7 @@ local t = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: gameDetail (ref), experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), reactModule (ref), usePageScopeRef (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useNavigation (ref), useRoactService (ref), appSessionService (ref), useTokens (ref), fFlagLuaAppSduiEdpRouteAwareSessionRemoval (ref), useGetCurrentLegacyRoute (ref), fFlagSduiPlayWithRewardGapFix (ref), filterPlayWithReward (ref), sduiEdpPageScopeIsTenFoot (ref), isTenFoot (ref), guiService (ref), removeGameDetailSessionIfDepartedModule (ref), sessionType (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), responsiveModule (ref), detailsPageLayout (ref), t (ref), edpFullBleedOverlapOffset (ref), edpBannerBottomVisiblePercent (ref), sduiFeatureEntryPoint (ref), appPage (ref), experienceDetailsPageConstantsModule (ref), experienceDetailsFallbackBannerImageModule (ref), foundationModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), fFlagSduiExperienceDetailsSupport (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref)
+	-- upvalues: gameDetail (ref), experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), reactModule (ref), usePageScopeRef (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useNavigation (ref), useRoactService (ref), appSessionService (ref), useTokens (ref), useGetCurrentLegacyRoute (ref), fFlagSduiPlayWithRewardGapFix (ref), filterPlayWithReward (ref), sduiEdpPageScopeIsTenFoot (ref), isTenFoot (ref), guiService (ref), removeGameDetailSessionIfDepartedModule (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), fFlagSduiContainerQueries (ref), usePublishContainerWidthModule (ref), responsiveModule (ref), detailsPageLayout (ref), t (ref), edpFullBleedOverlapOffset (ref), edpBannerBottomVisiblePercent (ref), sduiFeatureEntryPoint (ref), appPage (ref), experienceDetailsPageConstantsModule (ref), experienceDetailsFallbackBannerImageModule (ref), foundationModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), fFlagSduiExperienceDetailsSupport (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref)
 	local useExperienceDetailsFocusNavigationModule = require(gameDetail.FocusNavigation.useExperienceDetailsFocusNavigation)
 	local universeId = experienceDetailsPageUtilsModule.getUniverseId(p1)
 	local var1 = getExperienceDetailsPageKeyModule(universeId)
@@ -74,7 +74,7 @@ return reactModule.memo(function(p1)
 	local var4 = useNavigation()
 	local var5 = useRoactService(appSessionService)
 	local var6 = useTokens()
-	local var7 = if fFlagLuaAppSduiEdpRouteAwareSessionRemoval then useGetCurrentLegacyRoute() else nil
+	local var7 = useGetCurrentLegacyRoute()
 	local referralSource = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "referralSource")
 	local experienceJoinData = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "experienceJoinData")
 	local placeIdOverride = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "placeIdOverride")
@@ -99,22 +99,11 @@ return reactModule.memo(function(p1)
 		placeIdOverride
 	})
 	local var8 = reactModule.useCallback(function()
-		-- upvalues: fFlagLuaAppSduiEdpRouteAwareSessionRemoval (copy), var7 (write), var4 (ref), removeGameDetailSessionIfDepartedModule (copy), var5 (ref), sessionType (copy)
-		local var9 = if fFlagLuaAppSduiEdpRouteAwareSessionRemoval then var7() else nil
+		-- upvalues: var7 (ref), var4 (ref), removeGameDetailSessionIfDepartedModule (copy), var5 (ref)
+		local var9 = var7()
 		var4.goBack()
-		
-		if fFlagLuaAppSduiEdpRouteAwareSessionRemoval then
-			removeGameDetailSessionIfDepartedModule(var5, var9)
-			
-			return
-		elseif var5 then
-			var5:RemoveSession(sessionType.StructuralIdentifier.GameDetailSource)
-		end
-	end, {
-		var4,
-		var5,
-		if fFlagLuaAppSduiEdpRouteAwareSessionRemoval then var7 else nil
-	})
+		removeGameDetailSessionIfDepartedModule(var5, var9)
+	end, { var4, var5, var7 })
 	reactModule.useEffect(function()
 		-- upvalues: universeId (ref), var3 (ref), fetchExperienceDetailsPageModule (copy)
 		if universeId and var3 then
@@ -131,11 +120,18 @@ return reactModule.memo(function(p1)
 			dataHydrationModule.Game.getAgeRecommendationStore(false).getAndFetchAgeRecommendation(universeId)
 		end
 	end, { var9, universeId })
-	local var10 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: universeId (ref), var3 (ref), fetchExperienceDetailsPageModule (copy)
+		if universeId and var3 then
+			fetchExperienceDetailsPageModule(universeId, var3, true)
+		end
+	end, { universeId, var3 })
+	local var11 = useExperienceDetailsFocusNavigationModule(var8)
+	local var12 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
 	
 	return if universeId == nil then nil else reactModule.createElement(detailsPageLayout.Root, {
-		ref = useExperienceDetailsFocusNavigationModule(var8),
-		onClose = if var10 then nil else var8,
+		ref = if fFlagSduiContainerQueries then usePublishContainerWidthModule(var1, var11) else var11,
+		onClose = if var12 then nil else var8,
 		selectionGroup = t,
 		fullBleedOverlapOffset = edpFullBleedOverlapOffset,
 		bannerBottomVisiblePercent = edpBannerBottomVisiblePercent / 100,
@@ -149,7 +145,7 @@ return reactModule.memo(function(p1)
 			errorSlot = reactModule.createElement(experienceDetailsFallbackBannerImageModule.Error, { universeId = universeId })
 		})
 	}, {
-		Header = if var10 then nil else reactModule.createElement(detailsPageLayout.Header, {
+		Header = if var12 then nil else reactModule.createElement(detailsPageLayout.Header, {
 			fullWidthContent = true,
 			closeIconName = foundationModule.Enums.IconName.X,
 			backgroundColor = var6.Color.Surface.Surface_300
@@ -190,12 +186,7 @@ return reactModule.memo(function(p1)
 					launchSource = "ExperienceDetailsPage",
 					isSmallScreen = false,
 					universeId = universeId,
-					refresh = reactModule.useCallback(function()
-						-- upvalues: universeId (ref), var3 (ref), fetchExperienceDetailsPageModule (copy)
-						if universeId and var3 then
-							fetchExperienceDetailsPageModule(universeId, var3, true)
-						end
-					end, { universeId, var3 }),
+					refresh = var10,
 					referralSource = referralSource,
 					experienceJoinData = experienceJoinData,
 					placeIdOverride = placeIdOverride

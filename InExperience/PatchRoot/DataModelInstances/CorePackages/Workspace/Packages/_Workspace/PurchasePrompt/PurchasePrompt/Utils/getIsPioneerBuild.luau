@@ -1,6 +1,10 @@
-﻿return function()
+﻿local pioneerInfo = require(script:FindFirstAncestor("PurchasePrompt").Parent.PioneerUtils).PioneerInfo
+
+return function()
+	-- upvalues: pioneerInfo (ref)
 	local ok, status = pcall(function()
-		return game.PioneerSource == Enum.PioneerSource.DaveyBazooka
+		-- upvalues: pioneerInfo (copy)
+		return pioneerInfo.getPioneerSource() == Enum.PioneerSource.DaveyBazooka
 	end)
 	
 	return ok and status

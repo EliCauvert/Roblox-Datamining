@@ -35,6 +35,7 @@ return function(p1)
 		isRepliedTo = var1.isRepliedTo,
 		isPressed = var1.isPressed,
 		isLastMessageInMessageGroup = var1.isLastMessageInMessageGroup,
+		bubbleRef = var1.bubbleRef,
 		[reactModule.Change.AbsoluteSize] = var1[reactModule.Change.AbsoluteSize]
 	}, {
 		IconContainer = reactModule.createElement(foundationModule.View, {

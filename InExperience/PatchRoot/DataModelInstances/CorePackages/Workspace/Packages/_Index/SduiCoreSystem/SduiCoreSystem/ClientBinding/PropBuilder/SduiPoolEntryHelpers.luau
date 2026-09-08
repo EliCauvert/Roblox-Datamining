@@ -1,11 +1,14 @@
 ﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local _ = require(sduiCoreSystem.Parent.Signals)
+local parent = sduiCoreSystem.Parent
+local _ = require(parent.Signals)
 local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local sduiPoolStoreModule = require(sduiCoreSystem.ClientBinding.SduiPoolStore)
 local _ = require(sduiCoreSystem.ClientBinding.SduiPoolStoreTypes)
 local _ = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryNormalizer)
 local sduiListEntryRendererModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryRenderer)
 local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
+local fFlagSduiCollectionGridRevealRows = require(parent.SharedFlags).FFlagSduiCollectionGridRevealRows
+local fFlagSduiVerticalFeedProgressiveFillOnScroll = require(parent.SharedFlags).FFlagSduiVerticalFeedProgressiveFillOnScroll
 
 local function resolvePoolDataGetter(p1, p2, p3, p4)
 	-- upvalues: sduiPropUtilsModule (ref)
@@ -206,7 +209,7 @@ return {
 	sectionsHaveMultiRow = sectionsHaveMultiRow,
 	ingestPoolSections = ingestPoolSections,
 	createPoolEntryFns = function(p7, p8, p9, p10, p11, p12, p13)
-		-- upvalues: ingestPoolSections (ref), sduiListEntryRendererModule (ref)
+		-- upvalues: ingestPoolSections (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (ref), fFlagSduiCollectionGridRevealRows (ref), sduiListEntryRendererModule (ref)
 		local var9 = ingestPoolSections(p7, p12, p10, p13)
 		local var10 = nil
 		local var11 = nil
@@ -227,12 +230,17 @@ return {
 			end
 			
 			var11 = function(p14, _)
-				-- upvalues: var9 (ref)
+				-- upvalues: var9 (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (copy), fFlagSduiCollectionGridRevealRows (copy)
 				local identifier = p14.identifier
 				
 				return if typeof(identifier) == "string" then {
 					_requiresDataBinding = true,
-					startRowGetter = var9.getSectionStartRow(identifier)
+					startRowGetter = var9.getSectionStartRow(identifier),
+					numberOfRowsGetter = if fFlagSduiVerticalFeedProgressiveFillOnScroll then var9.getSectionRowCount(identifier) else nil,
+					setDisplayedRowCount = if fFlagSduiCollectionGridRevealRows then function(p15)
+						-- upvalues: var9 (copy), identifier (ref)
+						var9.setSectionDisplayedRowCount(identifier, p15)
+					end else nil
 				} else nil
 			end
 		end

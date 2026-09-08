@@ -6,9 +6,8 @@ local bulkPurchaseSucceededModule = require(bulkPurchaseApp.Store.Actions.BulkPu
 local bulkPurchaseFailedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseFailed)
 local bulkPurchaseStartedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseStarted)
 local bulkPurchaseRequestedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseRequested)
-local bulkPurchaseRefreshRequestedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseRefreshRequested)
-local bulkPurchaseRefreshedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseRefreshed)
 local _ = require(bulkPurchaseApp.Store.Types)
+local fFlagBulkPurchaseRemoveStartedActionModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseRemoveStartedAction)
 
 local function _()
 	-- upvalues: bulkPurchasePromptStateEnumModule (ref)
@@ -33,12 +32,11 @@ return roduxModule.createReducer({ promptState = bulkPurchasePromptStateEnumModu
 		cloned.errorCode = p2.errorCode
 		cloned.promptState = bulkPurchasePromptStateEnumModule.Error
 		cloned.errorMetadata = p2.errorMetadata
-		cloned.isRefreshing = nil
-		cloned.refreshingAuthToken = nil
 		
 		return cloned
 	end,
 	[bulkPurchaseRequestedModule.name] = function(p1, p2)
+		-- upvalues: fFlagBulkPurchaseRemoveStartedActionModule (ref), bulkPurchasePromptStateEnumModule (ref)
 		local cloned = table.clone(p1)
 		cloned.itemData = p2.itemData
 		cloned.options = p2.options
@@ -46,9 +44,10 @@ return roduxModule.createReducer({ promptState = bulkPurchasePromptStateEnumModu
 		cloned.balance = p2.balance
 		cloned.totalCost = p2.totalCost
 		cloned.discountInformation = p2.discountInformation
-		cloned.isRefreshing = nil
-		cloned.refreshingAuthToken = nil
 		
+		if fFlagBulkPurchaseRemoveStartedActionModule then
+			cloned.promptState = bulkPurchasePromptStateEnumModule.Request
+		end
 		return cloned
 	end,
 	[bulkPurchaseStartedModule.name] = function(p1, p2)
@@ -56,26 +55,6 @@ return roduxModule.createReducer({ promptState = bulkPurchasePromptStateEnumModu
 		local cloned = table.clone(p1)
 		cloned.promptState = bulkPurchasePromptStateEnumModule.Request
 		cloned.balance = p2.balance
-		
-		return cloned
-	end,
-	[bulkPurchaseRefreshRequestedModule.name] = function(p1, p2)
-		local cloned = table.clone(p1)
-		cloned.isRefreshing = true
-		cloned.refreshingAuthToken = p2.batchPurchaseAuthToken
-		
-		return cloned
-	end,
-	[bulkPurchaseRefreshedModule.name] = function(p1, p2)
-		local cloned = table.clone(p1)
-		cloned.itemData = p2.itemData
-		cloned.options = p2.options
-		cloned.orderRequest = p2.orderRequest
-		cloned.balance = p2.balance
-		cloned.totalCost = p2.totalCost
-		cloned.discountInformation = p2.discountInformation
-		cloned.isRefreshing = false
-		cloned.refreshingAuthToken = nil
 		
 		return cloned
 	end

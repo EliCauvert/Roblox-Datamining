@@ -10,7 +10,6 @@ local inputFieldModule = require(components.InputField)
 local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
 local textModule = require(components.Text)
 local _ = require(foundation.Components.Types)
-local flagsModule = require(foundation.Utility.Flags)
 local blendTransparenciesModule = require(foundation.Utility.blendTransparencies)
 local getInputTextSizeModule = require(foundation.Utility.getInputTextSize)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
@@ -27,12 +26,12 @@ local chevronLargeDown = builderIconsModule.Icon.ChevronLargeDown
 local t = {
 	isMenuOpen = false,
 	placeholder = "",
-	variant = inputVariantModule.Standard,
-	Selectable = if flagsModule.FoundationDropdownSelectionProps then true else nil
+	Selectable = true,
+	variant = inputVariantModule.Standard
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), controlStateModule (ref), useDropdownVariantsModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), getInputTextSizeModule (ref), viewModule (ref), flagsModule (ref), stateLayerAffordanceModule (ref), blendTransparenciesModule (ref), constantsModule (ref), textModule (ref), iconModule (ref), chevronLargeUp (ref), chevronLargeDown (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), controlStateModule (ref), useDropdownVariantsModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), getInputTextSizeModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), blendTransparenciesModule (ref), constantsModule (ref), textModule (ref), iconModule (ref), chevronLargeUp (ref), chevronLargeDown (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useTokensModule()
 	local var3, var4 = reactModule.useState(controlStateModule.Initialize)
@@ -55,17 +54,17 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		ref = p2,
 		width = var1.width,
 		input = function(_)
-			-- upvalues: reactModule (copy), viewModule (copy), var4 (ref), var1 (ref), flagsModule (copy), var6 (ref), stateLayerAffordanceModule (copy), var5 (ref), blendTransparenciesModule (copy), constantsModule (copy), textModule (copy), iconModule (copy), chevronLargeUp (copy), chevronLargeDown (copy), var2 (ref)
+			-- upvalues: reactModule (copy), viewModule (copy), var4 (ref), var1 (ref), var6 (ref), stateLayerAffordanceModule (copy), var5 (ref), blendTransparenciesModule (copy), constantsModule (copy), textModule (copy), iconModule (copy), chevronLargeUp (copy), chevronLargeDown (copy), var2 (ref)
 			return reactModule.createElement(viewModule, {
 				onStateChanged = var4,
 				isDisabled = var1.isDisabled,
 				onActivated = var1.onActivated,
 				selection = {
-					Selectable = if flagsModule.FoundationDropdownSelectionProps then if var1.isDisabled then false else var1.Selectable else not var1.isDisabled,
-					NextSelectionUp = if flagsModule.FoundationDropdownSelectionProps then var1.NextSelectionUp else nil,
-					NextSelectionDown = if flagsModule.FoundationDropdownSelectionProps then var1.NextSelectionDown else nil,
-					NextSelectionLeft = if flagsModule.FoundationDropdownSelectionProps then var1.NextSelectionLeft else nil,
-					NextSelectionRight = if flagsModule.FoundationDropdownSelectionProps then var1.NextSelectionRight else nil
+					Selectable = if var1.isDisabled then false else var1.Selectable,
+					NextSelectionUp = var1.NextSelectionUp,
+					NextSelectionDown = var1.NextSelectionDown,
+					NextSelectionLeft = var1.NextSelectionLeft,
+					NextSelectionRight = var1.NextSelectionRight
 				},
 				cursor = var6,
 				stateLayer = { affordance = stateLayerAffordanceModule.None },

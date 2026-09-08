@@ -9,16 +9,7 @@ local _ = require(parent.Actions.OpenCategoryMenu)
 local selectReportCategoryModule = require(parent.Actions.SelectReportCategory)
 local openReportSentDialogModule = require(parent.Actions.OpenReportSentDialog)
 local _ = require(parent.Actions.CloseReportSentDialog)
-local selectReportListingModule = require(parent.Actions.SelectReportListing)
-local setVoiceReportingFlowModule = require(parent.Actions.SetVoiceReportingFlow)
-local setIdentifiedAvatarsModule = require(parent.Actions.SetIdentifiedAvatars)
-local setSelectedAvatarsModule = require(parent.Actions.SetSelectedAvatars)
-local beginReportFlowModule = require(parent.Actions.BeginReportFlow)
-local endReportFlowModule = require(parent.Actions.EndReportFlow)
-local screenshotAnnotatedModule = require(parent.Actions.ScreenshotAnnotated)
-local navigateBackModule = require(parent.Actions.NavigateBack)
 local constantsModule = require(parent.Resources.Constants)
-local getFFlagReportAnythingScreenshotModule = require(parent.Flags.GetFFlagReportAnythingScreenshot)
 
 return roduxModule.createReducer({
 	voiceReportingFlowEnabled = true,
@@ -29,24 +20,18 @@ return roduxModule.createReducer({
 	reportType = constantsModule.ReportType.Any,
 	beginningReportType = constantsModule.ReportType.Any,
 	reportCategory = constantsModule.Category.None,
-	sortedUserIds = {},
-	screenshotAnnotationPoints = {},
-	identifiedAvatars = {},
-	selectedAvatars = {}
+	sortedUserIds = {}
 }, {
-	[endReportFlowModule.name] = function(p1, _)
+	[require(parent.Actions.EndReportFlow).name] = function(p1, _)
 		-- upvalues: cryoModule (ref), constantsModule (ref)
 		return cryoModule.Dictionary.join(p1, {
 			history = {},
 			currentPage = constantsModule.Page.None,
 			targetPlayer = cryoModule.None,
-			reportType = constantsModule.ReportType.Any,
-			identifiedAvatars = {},
-			selectedAvatars = {},
-			screenshotAnnotationPoints = {}
+			reportType = constantsModule.ReportType.Any
 		})
 	end,
-	[beginReportFlowModule.name] = function(p1, p2)
+	[require(parent.Actions.BeginReportFlow).name] = function(p1, p2)
 		-- upvalues: constantsModule (ref), cryoModule (ref)
 		local t = {
 			reportCategory = constantsModule.Category.None,
@@ -72,7 +57,7 @@ return roduxModule.createReducer({
 			currentPage = if p1.voiceReportingFlowEnabled then constantsModule.Page.Category else constantsModule.Page.Listing
 		})
 	end,
-	[navigateBackModule.name] = function(p1, _)
+	[require(parent.Actions.NavigateBack).name] = function(p1, _)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p1, {
 			history = cryoModule.List.removeIndex(p1.history, #p1.history),
@@ -80,20 +65,13 @@ return roduxModule.createReducer({
 		})
 	end,
 	[selectReportCategoryModule.name] = function(p1, p2)
-		-- upvalues: constantsModule (ref), getFFlagReportAnythingScreenshotModule (ref), cryoModule (ref)
+		-- upvalues: constantsModule (ref), cryoModule (ref)
 		local var1 = p2.reportCategory == constantsModule.Category.Experience
 		local var2 = p1.beginningReportType == constantsModule.ReportType.Player
 		local listing = constantsModule.Page.Listing
 		local reportType = p1.reportType
 		
-		if getFFlagReportAnythingScreenshotModule() then
-			if var1 then
-				listing = constantsModule.Page.ScreenshotDialog
-				reportType = constantsModule.ReportType.Place
-			elseif var2 then
-				listing = constantsModule.Page.ReportForm
-			end
-		elseif var1 or var2 then
+		if var1 or var2 then
 			listing = constantsModule.Page.ReportForm
 			
 			if var1 then
@@ -107,7 +85,7 @@ return roduxModule.createReducer({
 			reportCategory = p2.reportCategory
 		})
 	end,
-	[selectReportListingModule.name] = function(p1, p2)
+	[require(parent.Actions.SelectReportListing).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref), constantsModule (ref)
 		return cryoModule.Dictionary.join(p1, {
 			sortedUserIds = cryoModule.List.join(p2.sortedUserIds or {}, {}),
@@ -115,14 +93,6 @@ return roduxModule.createReducer({
 			currentPage = constantsModule.Page.ReportForm,
 			reportType = p2.reportType,
 			targetPlayer = p2.targetPlayer or cryoModule.None
-		})
-	end,
-	[screenshotAnnotatedModule.name] = function(p1, p2)
-		-- upvalues: cryoModule (ref), constantsModule (ref)
-		return cryoModule.Dictionary.join(p1, {
-			history = cryoModule.List.join(p1.history, { p1.currentPage }),
-			currentPage = constantsModule.Page.ReportForm,
-			screenshotAnnotationPoints = p2.annotationPoints
 		})
 	end,
 	[openReportMenuModule.name] = function(p1, _)
@@ -141,19 +111,8 @@ return roduxModule.createReducer({
 			targetPlayer = p2.targetPlayer or cryoModule.None
 		})
 	end,
-	[setVoiceReportingFlowModule.name] = function(p1, p2)
+	[require(parent.Actions.SetVoiceReportingFlow).name] = function(p1, p2)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p1, { voiceReportingFlowEnabled = p2.enable })
-	end,
-	[setIdentifiedAvatarsModule.name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
-			identifiedAvatars = p2.identifiedAvatars,
-			screenshotAnnotationPoints = {}
-		})
-	end,
-	[setSelectedAvatarsModule.name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { selectedAvatars = p2.selectedAvatars })
 	end
 })

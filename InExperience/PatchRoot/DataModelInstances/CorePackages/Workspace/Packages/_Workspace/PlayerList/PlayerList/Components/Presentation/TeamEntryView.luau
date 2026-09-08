@@ -17,7 +17,7 @@ local ROW_FLEX_TAG = constantsModule.ROW_FLEX_TAG
 local TEAM_LAYOUT_MULTIPLIER = constantsModule.TEAM_LAYOUT_MULTIPLIER
 
 return reactModule.memo(function(p1)
-	-- upvalues: fFlagPlayerListLocalizeGameTextModule (ref), reactModule (ref), gameTextTranslatorContextModule (ref), signalsReactModule (ref), usePreferredTransparencyBindingModule (ref), signalsModule (ref), TEAM_LAYOUT_MULTIPLIER (ref), view (ref), text (ref), statCellModule (ref), ROW_FLEX_TAG (ref)
+	-- upvalues: fFlagPlayerListLocalizeGameTextModule (ref), reactModule (ref), gameTextTranslatorContextModule (ref), signalsReactModule (ref), usePreferredTransparencyBindingModule (ref), signalsModule (ref), TEAM_LAYOUT_MULTIPLIER (ref), view (ref), text (ref), statCellModule (ref), constantsModule (ref), ROW_FLEX_TAG (ref)
 	local var1 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useContext(gameTextTranslatorContextModule) else nil
 	local var2 = signalsReactModule.useSignalBinding(p1.name)
 	local var3 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useMemo(function()
@@ -56,6 +56,7 @@ return reactModule.memo(function(p1)
 		end
 	end
 	return reactModule.createElement(view, {
+		testId = "team-entry-view",
 		Size = UDim2.new(1, 0, 0, rowHeight),
 		backgroundStyle = reactModule.useMemo(function()
 			-- upvalues: reactModule (copy), var4 (ref), var5 (ref)
@@ -63,7 +64,8 @@ return reactModule.memo(function(p1)
 				return { Color3 = p2.color, Transparency = 0.5 * p2.pt }
 			end)
 		end, { var4, var5 }),
-		LayoutOrder = var6
+		LayoutOrder = var6,
+		selection = constantsModule.NOT_SELECTABLE
 	}, {
 		RowContent = reactModule.createElement(view, { tag = `size-full {ROW_FLEX_TAG}` }, t)
 	})

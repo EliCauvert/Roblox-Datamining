@@ -1,0 +1,30 @@
+﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+local fFlagAXCatalogCategoriesSDUI = avatarExperienceFlagsModule.FFlagAXCatalogCategoriesSDUI
+local fFlagAXMigrateAllTabToSduiDev = avatarExperienceFlagsModule.FFlagAXMigrateAllTabToSduiDev
+local fFlagAXSortsBodyTabRecExposureLogging = avatarExperienceFlagsModule.FFlagAXSortsBodyTabRecExposureLogging
+local fFlagAXEnableTaxonomyM20ExposureLoggingClothing = avatarExperienceFlagsModule.FFlagAXEnableTaxonomyM20ExposureLoggingClothing
+local fFlagAXEnableTaxonomyM21ExposureLoggingClothing = avatarExperienceFlagsModule.FFlagAXEnableTaxonomyM21ExposureLoggingClothing
+local fStringAXSortsBodyTabRecLayerName = avatarExperienceFlagsModule.FStringAXSortsBodyTabRecLayerName
+local fStringAXTaxonomyM20ExperimentLayerName = avatarExperienceFlagsModule.FStringAXTaxonomyM20ExperimentLayerName
+local fStringAXTaxonomyM21ExperimentLayerName = avatarExperienceFlagsModule.FStringAXTaxonomyM21ExperimentLayerName
+local IXPServiceWrapper = require(parent.IxpServiceWrapper).IXPServiceWrapper
+local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
+local catalogCategories = avatarExperienceCommonModule.Enums.CatalogCategories
+local catalogSDUICategoryIds = avatarExperienceCommonModule.Enums.CatalogSDUICategoryIds
+local catalogCategoryKeys = avatarExperienceCommonModule.Enums.CatalogCategoryKeys
+
+return function(p1)
+	-- upvalues: fFlagAXEnableTaxonomyM20ExposureLoggingClothing (ref), fFlagAXEnableTaxonomyM21ExposureLoggingClothing (ref), fFlagAXMigrateAllTabToSduiDev (ref), catalogCategoryKeys (ref), fFlagAXCatalogCategoriesSDUI (ref), catalogSDUICategoryIds (ref), catalogCategories (ref), IXPServiceWrapper (ref), fStringAXTaxonomyM20ExperimentLayerName (ref), fStringAXTaxonomyM21ExperimentLayerName (ref), fFlagAXSortsBodyTabRecExposureLogging (ref), fStringAXSortsBodyTabRecLayerName (ref)
+	if (fFlagAXEnableTaxonomyM20ExposureLoggingClothing or fFlagAXEnableTaxonomyM21ExposureLoggingClothing) and p1 == (if fFlagAXMigrateAllTabToSduiDev then catalogCategoryKeys.Clothing elseif fFlagAXCatalogCategoriesSDUI then catalogSDUICategoryIds.Clothing:rawValue() else catalogCategories.Clothing:rawValue()) then
+		if fFlagAXEnableTaxonomyM20ExposureLoggingClothing then
+			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(fStringAXTaxonomyM20ExperimentLayerName)
+		end
+		if fFlagAXEnableTaxonomyM21ExposureLoggingClothing then
+			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(fStringAXTaxonomyM21ExperimentLayerName)
+		end
+	end
+	if fFlagAXSortsBodyTabRecExposureLogging and p1 == (if fFlagAXMigrateAllTabToSduiDev then catalogCategoryKeys.Body elseif fFlagAXCatalogCategoriesSDUI then catalogSDUICategoryIds.Body:rawValue() else catalogCategories.Body:rawValue()) then
+		IXPServiceWrapper:LogFlagLinkedUserLayerExposure(fStringAXSortsBodyTabRecLayerName)
+	end
+end

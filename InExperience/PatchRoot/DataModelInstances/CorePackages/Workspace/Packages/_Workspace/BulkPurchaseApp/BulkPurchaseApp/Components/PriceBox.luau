@@ -5,13 +5,11 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local foundationModule = require(parent.Foundation)
 local view = foundationModule.View
 local discountSummary = require(parent.IAPExperience).DiscountSummary
-local blackbirdUpsellBanner = require(parent.RobloxSubscriptionPurchaseApp).Components.BlackbirdUpsellBanner
 local useDiscountSummaryPropsModule = require(bulkPurchaseApp.Hooks.useDiscountSummaryProps)
 local priceBoxLineModule = require(script.Parent.PriceBoxLine)
 local priceBoxLineVariantEnumModule = require(bulkPurchaseApp.Enums.PriceBoxLineVariantEnum)
 local fFlagAddTimerToBulkPurchaseBuyButtonModule = require(bulkPurchaseApp.Flags.FFlagAddTimerToBulkPurchaseBuyButton)
 local fIntBulkPurchaseEnabledCountdownMSModule = require(bulkPurchaseApp.Flags.FIntBulkPurchaseEnabledCountdownMS)
-local fFlagBulkPurchaseRobloxPlusUpsellModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseRobloxPlusUpsell)
 local t = {
 	heading = "CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.TotalCost",
 	currentBalanceLine = "CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.CurrentBalance",
@@ -23,7 +21,7 @@ local t = {
 local _ = require(bulkPurchaseApp.Store.Types)
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), useDiscountSummaryPropsModule (ref), reactModule (ref), view (ref), priceBoxLineModule (ref), priceBoxLineVariantEnumModule (ref), discountSummary (ref), foundationModule (ref), fFlagAddTimerToBulkPurchaseBuyButtonModule (ref), fIntBulkPurchaseEnabledCountdownMSModule (ref), fFlagBulkPurchaseRobloxPlusUpsellModule (ref), blackbirdUpsellBanner (ref)
+	-- upvalues: useLocalization (ref), t (ref), useDiscountSummaryPropsModule (ref), reactModule (ref), view (ref), priceBoxLineModule (ref), priceBoxLineVariantEnumModule (ref), discountSummary (ref), foundationModule (ref), fFlagAddTimerToBulkPurchaseBuyButtonModule (ref), fIntBulkPurchaseEnabledCountdownMSModule (ref)
 	local var1 = useLocalization(t)
 	local var2 = useDiscountSummaryPropsModule(p1.discountInformation, p1.totalCost)
 	
@@ -71,11 +69,6 @@ return function(p1)
 			ref = p1.buttonRef,
 			isDisabled = p1.isDisabled,
 			inputDelay = if fFlagAddTimerToBulkPurchaseBuyButtonModule then math.max(0, fIntBulkPurchaseEnabledCountdownMSModule) / 1000 else nil
-		}),
-		RobloxPlusUpsellBanner = if fFlagBulkPurchaseRobloxPlusUpsellModule and p1.robloxPlusUpsellBannerProductInfo and p1.onRobloxPlusUpsellActivated then reactModule.createElement(blackbirdUpsellBanner, {
-			LayoutOrder = 3,
-			productInfo = p1.robloxPlusUpsellBannerProductInfo,
-			onActivated = p1.onRobloxPlusUpsellActivated
-		}) else nil
+		})
 	})
 end

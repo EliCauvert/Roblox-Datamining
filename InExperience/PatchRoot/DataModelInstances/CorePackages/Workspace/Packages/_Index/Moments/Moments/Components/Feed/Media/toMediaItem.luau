@@ -4,6 +4,7 @@ local httpService = game:GetService("HttpService")
 local foundationModule = require(parent.Foundation)
 local _ = require(parent.MomentsCommon)
 local _ = require(moments.Components.Feed.FeedTypes)
+local fFlagMomentsTTSFeedPlaybackModule = require(moments.Flags.FFlagMomentsTTSFeedPlayback)
 local getRbxThumb = foundationModule.Utility.getRbxThumb
 local thumbnailType = foundationModule.Enums.ThumbnailType
 
@@ -14,7 +15,7 @@ local function _(p1, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: httpService (ref), getRbxThumb (ref), thumbnailType (ref)
+	-- upvalues: httpService (ref), getRbxThumb (ref), thumbnailType (ref), fFlagMomentsTTSFeedPlaybackModule (ref)
 	if p1.kind ~= "moment" then
 		return nil
 	end
@@ -27,12 +28,19 @@ return function(p1)
 	local assetAccessContext = moment.metadata.assetAccessContext
 	local var1 = if assetAccessContext == nil or assetAccessContext == "" then nil else httpService:UrlEncode(assetAccessContext)
 	local var2 = if assetId > 0 then Content.fromUri(if var1 ~= nil then getRbxThumb(thumbnailType.Asset, assetId) else `{getRbxThumb(thumbnailType.Asset, assetId)}&accessContext={var1}`) else nil
+	local edits = moment.metadata.edits
+	
+	if not fFlagMomentsTTSFeedPlaybackModule and edits ~= nil and edits.ttsAudios ~= nil then
+		local cloned = table.clone(edits)
+		cloned.ttsAudios = nil
+		edits = cloned
+	end
 	local t = { momentId = moment.momentId }
 	local var3 = `rbxassetid://{assetId}`
 	t.content = Content.fromUri(if moment.metadata.captureType == Enum.CaptureType.Video and var1 ~= nil then `{var3}&accessContext={var1}&permissionContext=ignoreUniverse` else var3)
 	t.posterContent = var2
 	t.captureType = moment.metadata.captureType
-	t.edits = moment.metadata.edits
+	t.edits = edits
 	
 	return t
 end

@@ -70,6 +70,7 @@ return function(p2)
 			return reactModule.createElement(friendsChatTextMessageModule, {
 				getDisplayId = p3.getMessageId,
 				getDisplayFromId = var5.getDisplayFromId,
+				getMessageIdFromDisplayId = var5.getMessageIdFromDisplayId,
 				getLayoutOrder = p3.getLayoutOrder,
 				chatWindowSettings = p2.chatWindowSettings,
 				textTransparency = p2.textTransparency,

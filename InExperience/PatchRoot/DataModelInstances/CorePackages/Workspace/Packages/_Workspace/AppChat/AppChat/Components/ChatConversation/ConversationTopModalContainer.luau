@@ -17,6 +17,11 @@ local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local dismissedChatModalModule = require(appChat.Conversations.Actions.DismissedChatModal)
 local useIsGuiInChatVisibleModule = require(appChat.Hooks.useIsGuiInChatVisible)
 local conversationBannerContainerModule = require(script.Parent.ConversationBanner.ConversationBannerContainer)
+local fFlagAppChatConversationTrustedFriendUpsellBanner = require(parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
+local sduiConstantsModule = require(appChat.Sdui.SduiConstants)
+local var1 = if fFlagAppChatConversationTrustedFriendUpsellBanner then require(parent.SduiSharedUtilities) else nil
+local var2 = if fFlagAppChatConversationTrustedFriendUpsellBanner then var1.SduiFeatureEntryPoint else nil
+local var3 = if fFlagAppChatConversationTrustedFriendUpsellBanner then var1.useComponentConfig else nil
 local fIntAppChatModalSeenImpressionDelayMsModule = require(appChat.Flags.FIntAppChatModalSeenImpressionDelayMs)
 local t = { setModalHeight = function(_) end }
 local t_1 = {
@@ -25,60 +30,71 @@ local t_1 = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useSelector (ref), getDeepValue2Module (ref), modalConfigurationModule (ref), t_1 (ref), useDispatch (ref), useRecordModalSequenceResponseForConversationModule (ref), reactModule (ref), useIsGuiInChatVisibleModule (ref), useRecordModalSeenWithDelayModule (ref), modalSequence (ref), fIntAppChatModalSeenImpressionDelayMsModule (ref), name (ref), dismissedChatModalModule (ref), appChatNetworkingModule (ref), conversationTopModal (ref), foundationModule (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
-	local var2 = useSelector(function(p2)
-		-- upvalues: getDeepValue2Module (copy), var1 (ref), modalConfigurationModule (copy)
-		return getDeepValue2Module(p2, `ChatAppReducer.Modals.conversationTopModals.{var1.conversationId}`) or modalConfigurationModule.default
+	-- upvalues: cryoModule (ref), t (ref), useSelector (ref), getDeepValue2Module (ref), modalConfigurationModule (ref), t_1 (ref), useDispatch (ref), useRecordModalSequenceResponseForConversationModule (ref), reactModule (ref), useIsGuiInChatVisibleModule (ref), fFlagAppChatConversationTrustedFriendUpsellBanner (ref), sduiConstantsModule (ref), var3 (ref), useRecordModalSeenWithDelayModule (ref), modalSequence (ref), fIntAppChatModalSeenImpressionDelayMsModule (ref), name (ref), dismissedChatModalModule (ref), appChatNetworkingModule (ref), var2 (ref), conversationTopModal (ref), foundationModule (ref)
+	local var4 = cryoModule.Dictionary.union(t, p1)
+	local var5 = useSelector(function(p2)
+		-- upvalues: getDeepValue2Module (copy), var4 (ref), modalConfigurationModule (copy)
+		return getDeepValue2Module(p2, `ChatAppReducer.Modals.conversationTopModals.{var4.conversationId}`) or modalConfigurationModule.default
 	end)
-	local modalLayout = var2.modal_layout
-	local modalVariant = t_1[var2.modal_variant]
-	local var3 = useDispatch()
-	local var4 = useRecordModalSequenceResponseForConversationModule(var1.conversationId)
-	local var5 = reactModule.useRef(nil)
+	local modalLayout = var5.modal_layout
+	local modalVariant = t_1[var5.modal_variant]
+	local var6 = useDispatch()
+	local var7 = useRecordModalSequenceResponseForConversationModule(var4.conversationId)
+	local var8 = reactModule.useRef(nil)
+	local var9 = useIsGuiInChatVisibleModule(var8, { var8.current, modalVariant })
+	local var10 = if fFlagAppChatConversationTrustedFriendUpsellBanner then sduiConstantsModule.getConversationTopModalConfigKey(var4.conversationId) else nil
+	local var11 = fFlagAppChatConversationTrustedFriendUpsellBanner and (modalVariant == nil and (if fFlagAppChatConversationTrustedFriendUpsellBanner then var3(var10, sduiConstantsModule.ConversationTopModalIdentifier) else nil) ~= nil)
 	useRecordModalSeenWithDelayModule({
 		modalSequence = modalSequence.ConversationTopModal,
-		modalVariant = var2.modal_variant,
+		modalVariant = var5.modal_variant,
 		actionToRecord = modalLayout.seen_record_action,
 		delayMs = fIntAppChatModalSeenImpressionDelayMsModule,
-		canRecordAction = useIsGuiInChatVisibleModule(var5, { var5.current, modalVariant }) and modalVariant ~= nil,
-		conversationId = var1.conversationId
+		canRecordAction = var9 and modalVariant ~= nil,
+		conversationId = var4.conversationId
 	})
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), var2 (ref), modalSequence (copy), name (copy), var3 (ref), dismissedChatModalModule (copy), appChatNetworkingModule (copy), var1 (ref)
-		var4(var2.modal_layout.dismissed_record_action, modalSequence.ConversationTopModal, nil, var2.modal_variant):catch(function(p2)
-			-- upvalues: name (copy), var2 (copy)
-			name:warning(`Error in ConversationOverlayContainer {var2.modal_layout.id} -> RecordModalSequenceResponse: {tostring(p2)}`)
+	local var12 = reactModule.useCallback(function()
+		-- upvalues: var7 (ref), var5 (ref), modalSequence (copy), name (copy), var6 (ref), dismissedChatModalModule (copy), appChatNetworkingModule (copy), var4 (ref)
+		var7(var5.modal_layout.dismissed_record_action, modalSequence.ConversationTopModal, nil, var5.modal_variant):catch(function(p2)
+			-- upvalues: name (copy), var5 (copy)
+			name:warning(`Error in ConversationOverlayContainer {var5.modal_layout.id} -> RecordModalSequenceResponse: {tostring(p2)}`)
 		end)
-		var3(dismissedChatModalModule(appChatNetworkingModule.Constants.ModalSequence.ConversationTopModal, var1.conversationId))
+		var6(dismissedChatModalModule(appChatNetworkingModule.Constants.ModalSequence.ConversationTopModal, var4.conversationId))
 	end, {
-		var1.conversationId,
-		var2.modal_layout.dismissed_record_action,
-		var2.modal_variant,
-		var4,
-		var3
+		var4.conversationId,
+		var5.modal_layout.dismissed_record_action,
+		var5.modal_variant,
+		var7,
+		var6
 	})
-	local var7 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref)
-		var1.setModalHeight(p2.AbsoluteSize.Y)
-	end, { var1.setModalHeight })
-	local var8 = nil
+	local var13 = reactModule.useCallback(function(p2)
+		-- upvalues: var4 (ref)
+		var4.setModalHeight(p2.AbsoluteSize.Y)
+	end, { var4.setModalHeight })
+	local var14 = nil
 	
 	if modalVariant then
-		var8 = reactModule.createElement(modalVariant, {
-			conversationId = var1.conversationId,
-			modalVariant = var2.modal_variant,
-			onDismissed = var6,
+		var14 = reactModule.createElement(modalVariant, {
+			conversationId = var4.conversationId,
+			modalVariant = var5.modal_variant,
+			onDismissed = var12,
 			bodyText = modalLayout.body and modalLayout.body.text,
 			actionText = modalLayout.buttons and (modalLayout.buttons[1] and modalLayout.buttons[1].text)
 		})
-	elseif var2.modal_variant ~= nil and var2.modal_variant ~= conversationTopModal.None then
-		name:warning(`Unsupported ConversationTopModal variant: {var2.modal_variant}`)
+	elseif var11 then
+		var14 = reactModule.createElement(var2, {
+			shouldDisplayLoading = false,
+			shouldDisplayError = false,
+			configKey = var10,
+			identifier = sduiConstantsModule.ConversationTopModalIdentifier,
+			appPage = sduiConstantsModule.SurfaceKey
+		})
+	elseif var5.modal_variant ~= nil and var5.modal_variant ~= conversationTopModal.None then
+		name:warning(`Unsupported ConversationTopModal variant: {var5.modal_variant}`)
 	end
 	return reactModule.createElement(foundationModule.View, {
 		tag = "gui-objects-default auto-y size-full-0",
-		LayoutOrder = var1.layoutOrder,
-		onAbsoluteSizeChanged = var7,
-		ref = var5
-	}, { conversationTopModal = var8 })
+		LayoutOrder = var4.layoutOrder,
+		onAbsoluteSizeChanged = var13,
+		ref = if var11 then nil else var8
+	}, { conversationTopModal = var14 })
 end)

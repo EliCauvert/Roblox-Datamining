@@ -11,12 +11,12 @@ local function _(p1)
 	return if ok then status else nil
 end
 
-return function()
+return function(p1)
 	-- upvalues: httpService (ref)
-	return function(p1)
-		-- upvalues: httpService (copy)
+	return function(p2)
+		-- upvalues: httpService (copy), p1 (ref)
 		local var1
-		local responseBody = p1.responseBody
+		local responseBody = p2.responseBody
 		
 		if responseBody == nil or responseBody == "" then
 			var1 = nil
@@ -28,9 +28,16 @@ return function()
 			responseBody = var1.error
 			
 			return nil, tostring(responseBody.message or "JSON-RPC error"), responseBody.code
-		elseif p1.statusCode >= 200 and p1.statusCode < 300 then
-			return if typeof(var1) == "table" then var1.result else nil, nil, nil
+		elseif p2.statusCode < 200 or p2.statusCode >= 300 then
+			return nil, ("CAS HTTP %d: %s"):format(p2.statusCode, if typeof(p2.responseBody) == "buffer" then buffer.tostring(p2.responseBody) else p2.responseBody or ""), nil
 		end
-		return nil, ("CAS HTTP %d: %s"):format(p1.statusCode, if typeof(p1.responseBody) == "buffer" then buffer.tostring(p1.responseBody) else p1.responseBody or ""), nil
+		responseBody = if typeof(var1) == "table" then var1.result else nil
+		
+		if p1 == nil then
+			return responseBody, nil, nil
+		end
+		local var2, var3 = p1(responseBody)
+		
+		return var2, var3, nil
 	end
 end

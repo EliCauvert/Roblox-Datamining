@@ -23,6 +23,9 @@ local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
 local biometricChallengeEventModule = require(script.Parent.Parent.Common.BiometricChallengeEvent)
 local challengeEventConstantsModule = require(genericChallenges.Utils.ChallengeEventConstants)
 local getFFlagEnhancedPersonaLivenessEvents = require(parent.SharedFlags).GetFFlagEnhancedPersonaLivenessEvents
+local fFlagUseSignalsForUserAccess = require(parent.SharedFlags).FFlagUseSignalsForUserAccess
+local useSignalState = require(parent.SignalsReact).useSignalState
+local var1 = if fFlagUseSignalsForUserAccess then require(parent.UserAccessStore).GetUserAccessStore else nil
 local personaLivenessV2QrPollDelaySec = game:DefineFastInt("PersonaLivenessV2QrPollDelaySec", 6)
 local personaLivenessV2QrPollMaxRetries = game:DefineFastInt("PersonaLivenessV2QrPollMaxRetries", 60)
 
@@ -38,16 +41,16 @@ local function _(p1)
 end
 
 local function PersonaLivenessQRFlow(p1)
-	-- upvalues: useDispatch (ref), useRoactService (ref), appLogging (ref), roactNetworking (ref), useSelector (ref), defaultGetLocalUserId (ref), useLocalization (ref), reactModule (ref), getFFlagEnhancedPersonaLivenessEvents (ref), biometricChallengeEventModule (ref), challengeEventConstantsModule (ref), biometricTypeEnum (ref), telemetryReasonsModule (ref), personaLivenessV2QrPollMaxRetries (ref), personaLivenessV2QrPollDelaySec (ref), loading (ref), iconSize (ref), fullscreenPageWithSafeArea (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), QRDeepLinkDialog (ref)
-	local var1 = useDispatch()
-	local var2 = useRoactService(appLogging)
-	local var3 = useRoactService(roactNetworking)
-	local var4 = useSelector(function(p2)
+	-- upvalues: useDispatch (ref), useRoactService (ref), appLogging (ref), roactNetworking (ref), fFlagUseSignalsForUserAccess (ref), useSignalState (ref), var1 (ref), useSelector (ref), defaultGetLocalUserId (ref), useLocalization (ref), reactModule (ref), getFFlagEnhancedPersonaLivenessEvents (ref), biometricChallengeEventModule (ref), challengeEventConstantsModule (ref), biometricTypeEnum (ref), telemetryReasonsModule (ref), personaLivenessV2QrPollMaxRetries (ref), personaLivenessV2QrPollDelaySec (ref), loading (ref), iconSize (ref), fullscreenPageWithSafeArea (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), QRDeepLinkDialog (ref)
+	local var2 = useDispatch()
+	local var3 = useRoactService(appLogging)
+	local var4 = useRoactService(roactNetworking)
+	local var5 = if fFlagUseSignalsForUserAccess then useSignalState(var1(false).getUserAccessRestrictionDetail) else useSelector(function(p2)
 		return p2.UserAccess and p2.UserAccess.restrictionDetail
 	end)
-	local var5 = (p1.getLocalUserId or defaultGetLocalUserId)()
-	local var6 = if var5 and var5 > 0 then "https://ro.blox.com/Ebh5" .. "?pid=QR_code&c=liveness_onelink" .. "&is_retargeting=false" .. "&af_dp=" .. "roblox%3A%2F%2Fnavigation%2Faccount_unlock%3Fuser_id=" .. tostring(var5) .. "&deep_link_value=" .. "roblox%3A%2F%2Fnavigation%2Faccount_unlock%3Fuser_id=" .. tostring(var5) else nil
-	local var7 = useLocalization({
+	local var6 = (p1.getLocalUserId or defaultGetLocalUserId)()
+	local var7 = if var6 and var6 > 0 then "https://ro.blox.com/Ebh5" .. "?pid=QR_code&c=liveness_onelink" .. "&is_retargeting=false" .. "&af_dp=" .. "roblox%3A%2F%2Fnavigation%2Faccount_unlock%3Fuser_id=" .. tostring(var6) .. "&deep_link_value=" .. "roblox%3A%2F%2Fnavigation%2Faccount_unlock%3Fuser_id=" .. tostring(var6) else nil
+	local var8 = useLocalization({
 		title = "Feature.BiometricChallenge.Title.QRHandoff",
 		description = "Feature.BiometricChallenge.Content.ScanQR",
 		footer = {
@@ -57,15 +60,15 @@ local function PersonaLivenessQRFlow(p1)
 			}).prompt .. "</b>"
 		}
 	})
-	local var8 = reactModule.useRef(false)
-	local var9 = reactModule.useCallback(function(p2)
-		-- upvalues: var8 (ref), p1 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var2 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), biometricTypeEnum (copy)
-		if var8.current then return end
-		var8.current = true
+	local var9 = reactModule.useRef(false)
+	local var10 = reactModule.useCallback(function(p2)
+		-- upvalues: var9 (ref), p1 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var3 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), biometricTypeEnum (copy)
+		if var9.current then return end
+		var9.current = true
 		p1.onChallengeAbandoned("")
 		
 		if getFFlagEnhancedPersonaLivenessEvents() then
-			var2:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
+			var3:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
 				context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeAbandoned,
 				challengeId = p1.challengeId,
 				biometricType = biometricTypeEnum.PersonaLiveness,
@@ -74,20 +77,20 @@ local function PersonaLivenessQRFlow(p1)
 			
 			return
 		end
-		var2:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
+		var3:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
 			context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeAbandoned,
 			challengeId = p1.challengeId,
 			biometricType = biometricTypeEnum.PersonaLiveness
 		})
-	end, { var2, p1.challengeId, p1.onChallengeAbandoned })
-	local var10 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var8 (ref), p1 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var2 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), biometricTypeEnum (copy)
-		if var8.current then return end
-		var8.current = true
+	end, { var3, p1.challengeId, p1.onChallengeAbandoned })
+	local var11 = reactModule.useCallback(function(p2, p3)
+		-- upvalues: var9 (ref), p1 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var3 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), biometricTypeEnum (copy)
+		if var9.current then return end
+		var9.current = true
 		p1.onChallengeFailed(p2)
 		
 		if getFFlagEnhancedPersonaLivenessEvents() then
-			var2:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
+			var3:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
 				context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeInvalidated,
 				challengeId = p1.challengeId,
 				biometricType = biometricTypeEnum.PersonaLiveness,
@@ -96,35 +99,35 @@ local function PersonaLivenessQRFlow(p1)
 			
 			return
 		end
-		var2:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
+		var3:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
 			context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeInvalidated,
 			challengeId = p1.challengeId,
 			biometricType = biometricTypeEnum.PersonaLiveness
 		})
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var10 (ref), telemetryReasonsModule (copy)
-		if not var6 then
+		-- upvalues: var7 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var11 (ref), telemetryReasonsModule (copy)
+		if not var7 then
 			if getFFlagEnhancedPersonaLivenessEvents() then
-				var10("MissingLocalUserId", telemetryReasonsModule.NullUserId)
+				var11("MissingLocalUserId", telemetryReasonsModule.NullUserId)
 				
 				return
 			end
-			var10("MissingLocalUserId")
+			var11("MissingLocalUserId")
 		end
-	end, { var6, var10 })
+	end, { var7, var11 })
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var4 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var8 (ref), var2 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), p1 (ref), biometricTypeEnum (copy), telemetryReasonsModule (copy), var9 (ref)
-		if not var6 or var4 ~= nil then return end
+		-- upvalues: var7 (ref), var5 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var9 (ref), var3 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), p1 (ref), biometricTypeEnum (copy), telemetryReasonsModule (copy), var10 (ref)
+		if not var7 or var5 ~= nil then return end
 		if not getFFlagEnhancedPersonaLivenessEvents() then
-			var9()
+			var10()
 			
 			return
-		elseif var8.current then
+		elseif var9.current then
 			return
 		end
-		var8.current = true
-		var2:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
+		var9.current = true
+		var3:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
 			context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeCompleted,
 			challengeId = p1.challengeId,
 			biometricType = biometricTypeEnum.PersonaLiveness,
@@ -132,49 +135,49 @@ local function PersonaLivenessQRFlow(p1)
 		})
 		p1.onChallengeAbandoned("")
 	end, {
-		var4, var6, var9, var2, p1.challengeId, p1.onChallengeAbandoned
+		var5, var7, var10, var3, p1.challengeId, p1.onChallengeAbandoned
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var2 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), p1 (ref), biometricTypeEnum (copy), telemetryReasonsModule (copy), personaLivenessV2QrPollMaxRetries (copy), personaLivenessV2QrPollDelaySec (copy), var1 (ref), var3 (ref), var10 (ref)
-		if not var6 then return end
+		-- upvalues: var7 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var3 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), p1 (ref), biometricTypeEnum (copy), telemetryReasonsModule (copy), personaLivenessV2QrPollMaxRetries (copy), personaLivenessV2QrPollDelaySec (copy), var2 (ref), var4 (ref), var11 (ref)
+		if not var7 then return end
 		if getFFlagEnhancedPersonaLivenessEvents() then
-			var2:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
+			var3:logRobloxTelemetryEvent(biometricChallengeEventModule, {}, {
 				context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeDisplayed,
 				challengeId = p1.challengeId,
 				biometricType = biometricTypeEnum.PersonaLiveness,
 				reason = telemetryReasonsModule.QRDisplayed
 			})
 		end
-		local var11 = false
+		local var12 = false
 		task.spawn(function()
-			-- upvalues: personaLivenessV2QrPollMaxRetries (copy), personaLivenessV2QrPollDelaySec (copy), var11 (write), p1 (copy), var1 (copy), var3 (copy), getFFlagEnhancedPersonaLivenessEvents (copy), var10 (copy), telemetryReasonsModule (copy)
+			-- upvalues: personaLivenessV2QrPollMaxRetries (copy), personaLivenessV2QrPollDelaySec (copy), var12 (write), p1 (copy), var2 (copy), var4 (copy), getFFlagEnhancedPersonaLivenessEvents (copy), var11 (copy), telemetryReasonsModule (copy)
 			for _ = 1, personaLivenessV2QrPollMaxRetries do
 				task.wait(personaLivenessV2QrPollDelaySec)
 				
-				if not var11 then
+				if not var12 then
 					if p1.ApiFetchAccessStatus then
-						var1(p1.ApiFetchAccessStatus(var3))
+						var2(p1.ApiFetchAccessStatus(var4))
 					end
 				end
 				return
 			end
-			if not var11 then
+			if not var12 then
 				if getFFlagEnhancedPersonaLivenessEvents() then
-					var10("Timeout", telemetryReasonsModule.QRPollingTimeout)
+					var11("Timeout", telemetryReasonsModule.QRPollingTimeout)
 					
 					return
 				end
-				var10("Timeout")
+				var11("Timeout")
 			end
 		end)
 		
 		return function()
-			-- upvalues: var11 (write)
-			var11 = true
+			-- upvalues: var12 (write)
+			var12 = true
 		end
 	end, {})
 	
-	return if var6 then reactModule.createElement("ScreenGui", {
+	return if var7 then reactModule.createElement("ScreenGui", {
 		DisplayOrder = 200,
 		IgnoreGuiInset = true,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -185,14 +188,14 @@ local function PersonaLivenessQRFlow(p1)
 				surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ModerationOverlay
 			}, {
 				Dialog = reactModule.createElement(QRDeepLinkDialog, {
-					deeplink = var6,
-					title = var7.title,
-					description = var7.description,
-					footer = var7.footer,
+					deeplink = var7,
+					title = var8.title,
+					description = var8.description,
+					footer = var8.footer,
 					onClose = if getFFlagEnhancedPersonaLivenessEvents() then function()
-						-- upvalues: var9 (ref), telemetryReasonsModule (copy)
-						var9(telemetryReasonsModule.QRUserAbandon)
-					end else var9
+						-- upvalues: var10 (ref), telemetryReasonsModule (copy)
+						var10(telemetryReasonsModule.QRUserAbandon)
+					end else var10
 				})
 			})
 		})

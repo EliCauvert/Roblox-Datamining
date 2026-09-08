@@ -4,6 +4,7 @@ local signalsModule = require(parent.Signals)
 local _ = require(script.Parent.types)
 local encodersModule = require(script.Parent.encoders)
 local analyticsModule = require(script.Parent.analytics)
+local fFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
 local createSignal = signalsModule.createSignal
 local createResource = resourcesModule.createResource
 
@@ -17,7 +18,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: analyticsModule (ref), encodersModule (ref), createSignal (ref), createResource (ref)
+	-- upvalues: analyticsModule (ref), encodersModule (ref), createSignal (ref), createResource (ref), fFlagHttpClientRetryExtensionsModule (ref)
 	local analytics = p1.analytics or analyticsModule.defaultAnalytics
 	local encode = p1.encode or encodersModule.encodeJson
 	local var1, var2 = createSignal({ status = "pending" })
@@ -38,7 +39,7 @@ return function(p1)
 	return {
 		state = var1,
 		dispose = createResource(function(p2)
-			-- upvalues: var2 (ref), analytics (ref), p1 (ref), t (ref), var3 (write)
+			-- upvalues: var2 (ref), analytics (ref), p1 (ref), fFlagHttpClientRetryExtensionsModule (copy), t (ref), var3 (write)
 			local var6 = false
 			local processTime = os.clock()
 			
@@ -54,7 +55,7 @@ return function(p1)
 			end
 			
 			local function settleResponse(value)
-				-- upvalues: var6 (write), processTime (ref), p1 (copy), var2 (copy), analytics (copy)
+				-- upvalues: var6 (write), processTime (ref), p1 (copy), fFlagHttpClientRetryExtensionsModule (copy), var2 (copy), analytics (copy)
 				if var6 then return end
 				var6 = true
 				local var7 = (os.clock() - processTime) * 1000
@@ -85,22 +86,30 @@ return function(p1)
 					var10 = nil
 				end
 				local var13 = if var9 ~= nil then "succeeded" else "failed"
+				local var14 = if fFlagHttpClientRetryExtensionsModule then value else nil
 				
 				if var9 == nil then
-					var2({ status = "succeeded", result = var8 })
+					var2({ status = "succeeded", result = var8, response = var14 })
 				else
-					var2({ status = "failed", error = var9, errorCode = var10 })
+					var2({
+						status = "failed",
+						error = var9,
+						errorCode = var10,
+						response = var14
+					})
 				end
 				analytics(p1.analyticsKey, p1.method, p1.url, value, var7, var13)
 			end
 			
 			local ok, status = pcall(function()
-				-- upvalues: p1 (copy), t (copy), var3 (copy), settleResponse (ref), settleFailed (ref), p2 (ref), var6 (write)
-				local var14 = p1.networkImpl.request({
+				-- upvalues: p1 (copy), t (copy), var3 (copy), fFlagHttpClientRetryExtensionsModule (copy), settleResponse (ref), settleFailed (ref), p2 (ref), var6 (write)
+				local var15 = p1.networkImpl.request({
 					url = p1.url,
 					method = p1.method,
 					headers = t,
-					body = var3
+					body = var3,
+					onMessage = if fFlagHttpClientRetryExtensionsModule then p1.onMessage else nil,
+					priority = if fFlagHttpClientRetryExtensionsModule then p1.priority else nil
 				}, function(p3, p4)
 					-- upvalues: settleResponse (copy), settleFailed (copy)
 					if p3 then
@@ -111,12 +120,12 @@ return function(p1)
 					settleFailed(tostring(p4))
 				end)
 				p2(function()
-					-- upvalues: var6 (copy), var14 (ref)
+					-- upvalues: var6 (copy), var15 (ref)
 					if var6 then
 						return
 					end
 					var6 = true
-					var14()
+					var15()
 				end)
 			end)
 			

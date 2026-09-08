@@ -9,8 +9,6 @@ game:DefineFastString("ConsumerPlatformsIOSUIRefactor", "ConsumerPlatforms.IOSUI
 
 return {
 	LoginLayer = "PlayerApp.Login",
-	WidgetLayer = "ConsumerPlatforms.Widgets",
-	LockScreenWidgetLayer = "ConsumerPlatforms.Widgets.LockScreen",
 	DefaultThemeLayer = "ConsumerPlatforms.Themes",
 	AndroidWidgetLayer = "ConsumerPlatforms.AndroidWidgets",
 	DeferredDeeplinkResolutionLayer = "Ads.OffPlatform.DeferredDeeplinkResolution",

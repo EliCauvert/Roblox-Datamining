@@ -5,8 +5,6 @@
 	QUEUED_STATE = "Queued",
 	AUTO_JOIN_TREATMENT = "AutoJoinNewServer",
 	JOIN_NEW_SERVER_TREATMENT = "JoinNewServer",
-	ROBLOX_WORDMARK_IMAGE = "icons/logo/letterform",
-	ROBLOX_WORDMARK_ASPECT_RATIO = 5.222222222222,
 	ANIMATION = {
 		artDur = 1,
 		textDur = 0.8,

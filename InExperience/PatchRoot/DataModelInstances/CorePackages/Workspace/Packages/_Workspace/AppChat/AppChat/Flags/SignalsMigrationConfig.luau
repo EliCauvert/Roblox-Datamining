@@ -1,0 +1,8 @@
+﻿local fFlagAppChatSignalsMessageStoreModule = require(script.Parent.FFlagAppChatSignalsMessageStore)
+local fFlagAppChatSignalsMessageStoreModule_1 = require(script.Parent.FFlagAppChatUseFoundationConversationRow) and (require(script.Parent.FFlagAppChatConversationStore) and fFlagAppChatSignalsMessageStoreModule)
+
+return {
+	shouldUseFoundationConversationRow = fFlagAppChatSignalsMessageStoreModule_1,
+	shouldReadConversationListFromSignalsStore = require(script.Parent.FFlagAppChatReadConversationListFromSignalsStore) and fFlagAppChatSignalsMessageStoreModule_1,
+	shouldReadMessageListFromSignalsStore = require(script.Parent.FFlagAppChatReadMessageListFromSignalsStore) and fFlagAppChatSignalsMessageStoreModule
+}

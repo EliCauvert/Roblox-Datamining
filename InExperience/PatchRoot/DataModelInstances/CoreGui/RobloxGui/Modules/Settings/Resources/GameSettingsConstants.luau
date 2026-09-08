@@ -5,6 +5,7 @@ local getFFlagEnablePlayerNamesEnabledSettingModule = require(modules.Settings.F
 local fFlagBadgeVisibilitySettingEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagBadgeVisibilitySettingEnabled
 local fFlagEnableModerateChatRemoteEvent = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableModerateChatRemoteEvent
 local fFlagIEMSettingsGroupsModule = require(modules.Settings.Flags.FFlagIEMSettingsGroups)
+local RUUserScalePreferenceAPIEngineFeature = game:GetEngineFeature("RUUserScalePreferenceAPI")
 local fFlagAIRephraseSettingEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAIRephraseSettingEnabled
 local updateRephraseSettingUI = game:DefineFastFlag("UpdateRephraseSettingUI", false)
 local fFlagChatSummariesSettingEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagChatSummariesSettingEnabled
@@ -75,7 +76,14 @@ t.GraphicsQualityFrame = 72
 t.ReducedMotionFrame = 73
 t.PreferredTransparencyFrame = 74
 t.PreferredTextSizeFrame = 75
-t.UiNavigationKeyBindEnabledFrame = 76
+
+if RUUserScalePreferenceAPIEngineFeature then
+	t.UIScaleModeFrame = 76
+	t.UIScaleFrame = 77
+	t.UiNavigationKeyBindEnabledFrame = 78
+else
+	t.UiNavigationKeyBindEnabledFrame = 76
+end
 t.PerformanceStatsFrame = 80
 t.MicroProfilerFrame = 81
 t.VREnabledFrame = 100
@@ -131,6 +139,8 @@ if fFlagIEMSettingsGroupsModule then
 		FullScreenFrame = var1(),
 		PreferredTransparencyFrame = var1(),
 		PreferredTextSizeFrame = var1(),
+		UIScaleModeFrame = if RUUserScalePreferenceAPIEngineFeature then var1() else nil,
+		UIScaleFrame = if RUUserScalePreferenceAPIEngineFeature then var1() else nil,
 		VRComfortSettingFrame = if isInExperienceUIVREnabled then var1() else nil,
 		VRVignetteEnabledFrame = if isInExperienceUIVREnabled then var1() else nil,
 		VRSteppedRotationEnabledFrame = if isInExperienceUIVREnabled then var1() else nil,

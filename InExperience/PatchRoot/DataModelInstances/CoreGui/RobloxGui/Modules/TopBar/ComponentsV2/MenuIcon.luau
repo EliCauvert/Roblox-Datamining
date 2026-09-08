@@ -24,7 +24,7 @@ local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
 local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
 local fFlagShowUnibarOnVirtualCursor = sharedFlagsModule.FFlagShowUnibarOnVirtualCursor
-local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
+local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
 local fFlagEnablePlaytestModeUnibar = sharedFlagsModule.FFlagEnablePlaytestModeUnibar
 local view = foundationModule.View
@@ -54,10 +54,10 @@ local var1 = if fFlagEnablePlaytestModeUnibar then foundationModule.Utility.getT
 local list = { Enum.KeyCode.Escape }
 
 return function(p1)
-	-- upvalues: useTokens (ref), fFlagEnablePlaytestModeUnibar (ref), useIsPlaytestModeModule (ref), var1 (ref), fFlagEnableSideSheet (ref), signalsReactModule (ref), displayModule (ref), constantsModule (ref), reactModule (ref), motionModule (ref), guiService (ref), serviceModule (ref), constantsModule_1 (ref), useCursor (ref), foundationModule (ref), list (ref), coreGuiService (ref), tooltipOrientation (ref), robloxTranslatorModule (ref), settingsShowSignal (ref), signalsModule (ref), getSideSheetVisibility (ref), focusUtils (ref), controlState (ref), isSpatial (ref), UIManager (ref), menuIconHoveredSignalModule (ref), fFlagShowUnibarOnVirtualCursor (ref), gamepadService (ref), parent_1 (ref), inGameMenuConstantsModule (ref), tooltipCallout (ref), SPATIAL_TOOLTIP_SPACING (ref), panel3DInSpatialUI (ref), panelType (ref), withTooltip (ref), view (ref), fFlagSideSheetFocusNav (ref), badgeOver12Module (ref), icon (ref)
+	-- upvalues: useTokens (ref), fFlagEnablePlaytestModeUnibar (ref), useIsPlaytestModeModule (ref), var1 (ref), isSideSheetEnabledModule (ref), signalsReactModule (ref), displayModule (ref), constantsModule (ref), reactModule (ref), motionModule (ref), guiService (ref), serviceModule (ref), constantsModule_1 (ref), useCursor (ref), foundationModule (ref), list (ref), coreGuiService (ref), tooltipOrientation (ref), robloxTranslatorModule (ref), settingsShowSignal (ref), signalsModule (ref), getSideSheetVisibility (ref), focusUtils (ref), controlState (ref), isSpatial (ref), UIManager (ref), menuIconHoveredSignalModule (ref), fFlagShowUnibarOnVirtualCursor (ref), gamepadService (ref), parent_1 (ref), inGameMenuConstantsModule (ref), tooltipCallout (ref), SPATIAL_TOOLTIP_SPACING (ref), panel3DInSpatialUI (ref), panelType (ref), withTooltip (ref), view (ref), fFlagSideSheetFocusNav (ref), badgeOver12Module (ref), icon (ref)
 	local var2 = useTokens()
 	local var3 = if fFlagEnablePlaytestModeUnibar then useIsPlaytestModeModule() else nil
-	local var4 = if fFlagEnablePlaytestModeUnibar and var3 then var1.Color.Content.Emphasis elseif fFlagEnableSideSheet then var2.Color.ActionEmphasis.Foreground else nil
+	local var4 = if fFlagEnablePlaytestModeUnibar and var3 then var1.Color.Content.Emphasis elseif isSideSheetEnabledModule then var2.Color.ActionEmphasis.Foreground else nil
 	local var5 = if fFlagEnablePlaytestModeUnibar and var3 then var1.Color.OverMedia.OverMedia_0 else var2.Color.OverMedia.OverMedia_0
 	local var6 = signalsReactModule.useSignalState(function(p2)
 		-- upvalues: displayModule (copy)
@@ -83,7 +83,7 @@ return function(p1)
 	
 	if p1.unibarMenuRef and p1.unibarMenuRef.current then
 		local var17 = serviceModule:menuList():get()[1]
-		local var18 = if var17 then constantsModule_1.ICON_NAME_PREFIX .. var38.id else nil
+		local var18 = if var17 then constantsModule_1.ICON_NAME_PREFIX .. var39.id else nil
 		var16 = if p1.unibarMenuRef.current and var18 then p1.unibarMenuRef.current:FindFirstChild(var18, true) else nil
 	end
 	local var19, var20 = reactModule.useState(false)
@@ -103,7 +103,7 @@ return function(p1)
 		preferredOrientation = tooltipOrientation.Bottom
 	}
 	reactModule.useEffect(function()
-		-- upvalues: var26 (ref), robloxTranslatorModule (copy), guiService (copy), var13 (ref), settingsShowSignal (copy), var11 (ref), var9 (ref), fFlagEnableSideSheet (copy), signalsModule (copy), getSideSheetVisibility (copy), p1 (ref), serviceModule (copy), focusUtils (copy)
+		-- upvalues: var26 (ref), robloxTranslatorModule (copy), guiService (copy), var13 (ref), settingsShowSignal (copy), var11 (ref), var9 (ref), isSideSheetEnabledModule (copy), signalsModule (copy), getSideSheetVisibility (copy), p1 (ref), serviceModule (copy), focusUtils (copy)
 		pcall(function()
 			-- upvalues: var26 (copy), robloxTranslatorModule (copy)
 			var26.current = robloxTranslatorModule:FormatByKey("CoreScripts.TopBar.RobloxMenu")
@@ -116,7 +116,7 @@ return function(p1)
 			-- upvalues: var11 (copy), var9 (copy)
 			var11(if p2 then var9.menuOpen else var9.menuClosed)
 		end)
-		local var29 = if fFlagEnableSideSheet then signalsModule.createEffect(function(p2)
+		local var29 = if isSideSheetEnabledModule then signalsModule.createEffect(function(p2)
 			-- upvalues: getSideSheetVisibility (copy), var11 (copy), var9 (copy)
 			var11(if getSideSheetVisibility(p2) then var9.menuOpen else var9.menuClosed)
 		end) else nil
@@ -127,8 +127,8 @@ return function(p1)
 		end) else nil
 		
 		return function()
-			-- upvalues: fFlagEnableSideSheet (copy), var29 (write), var27 (ref), var28 (ref), var30 (write)
-			if fFlagEnableSideSheet and var29 then
+			-- upvalues: isSideSheetEnabledModule (copy), var29 (write), var27 (ref), var28 (ref), var30 (write)
+			if isSideSheetEnabledModule and var29 then
 				var29()
 			end
 			var27:Disconnect()
@@ -205,10 +205,10 @@ return function(p1)
 			end)
 		}) else withTooltip(p2, p3, p4)
 	end)(t, t_1, reactModule.useCallback(function(p2)
-		-- upvalues: reactModule (copy), view (copy), fFlagEnableSideSheet (copy), var12 (ref), var5 (ref), var16 (write), fFlagSideSheetFocusNav (copy), var25 (ref), p1 (ref), var29 (ref), var28 (ref), badgeOver12Module (copy), var7 (ref), icon (copy), foundationModule (copy), var10 (ref), var4 (ref)
+		-- upvalues: reactModule (copy), view (copy), isSideSheetEnabledModule (copy), var12 (ref), var5 (ref), var16 (write), fFlagSideSheetFocusNav (copy), var25 (ref), p1 (ref), var29 (ref), var28 (ref), badgeOver12Module (copy), var7 (ref), icon (copy), foundationModule (copy), var10 (ref), var4 (ref)
 		return reactModule.createElement(view, {
 			tag = "radius-circle aspect-1-1",
-			backgroundStyle = if not fFlagEnableSideSheet then var12:map(function(p3)
+			backgroundStyle = if not isSideSheetEnabledModule then var12:map(function(p3)
 				-- upvalues: var5 (copy)
 				var5.Transparency *= p3
 				
@@ -216,7 +216,7 @@ return function(p1)
 			end) else nil,
 			Size = UDim2.fromScale(1, 1),
 			NextSelectionRight = var16,
-			selection = if fFlagEnableSideSheet and fFlagSideSheetFocusNav then { Selectable = false } else { Selectable = true, SelectionImageObject = var25 },
+			selection = if isSideSheetEnabledModule and fFlagSideSheetFocusNav then { Selectable = false } else { Selectable = true, SelectionImageObject = var25 },
 			selectionGroup = {
 				SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
 				SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
@@ -225,8 +225,8 @@ return function(p1)
 			ref = p1.menuIconRef,
 			onAbsoluteSizeChanged = p2,
 			onAbsolutePositionChanged = p2,
-			onActivated = if not fFlagEnableSideSheet then var29 else nil,
-			onStateChanged = if not fFlagEnableSideSheet then var28 else nil
+			onActivated = if not isSideSheetEnabledModule then var29 else nil,
+			onStateChanged = if not isSideSheetEnabledModule then var28 else nil
 		}, {
 			BadgeOver12 = if p1.showBadgeOver12 then reactModule.createElement(badgeOver12Module, { position = UDim2.new(0, 1, 1, -(var7 + 1)) }) else nil,
 			Icon = reactModule.createElement(icon, {

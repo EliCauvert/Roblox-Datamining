@@ -2,15 +2,13 @@
 local parent = dataHydration.Parent
 local cryoModule = require(parent.Cryo)
 local _ = require(parent.HttpClient)
-local sharedFlagsModule = require(parent.SharedFlags)
 local createSingleEntityResolverModule = require(dataHydration.createSingleEntityResolver)
 local fetchUniverseConfigurationModule = require(script.Parent.fetchUniverseConfiguration)
 local getPrivacyTypeForAudiencesModule = require(script.Parent.getPrivacyTypeForAudiences)
 local _ = require(script.Parent.UniverseConfigurationStoreTypes)
-local fFlagBuildExperienceShareUseUniverseSummary = sharedFlagsModule.FFlagBuildExperienceShareUseUniverseSummary
 
 return function(p1)
-	-- upvalues: createSingleEntityResolverModule (ref), fetchUniverseConfigurationModule (ref), cryoModule (ref), fFlagBuildExperienceShareUseUniverseSummary (ref), getPrivacyTypeForAudiencesModule (ref)
+	-- upvalues: createSingleEntityResolverModule (ref), fetchUniverseConfigurationModule (ref), cryoModule (ref), getPrivacyTypeForAudiencesModule (ref)
 	p1 = p1 or {}
 	local t = { network = p1.network, baseUrl = p1.baseUrl }
 	local var1 = 0
@@ -44,7 +42,7 @@ return function(p1)
 	end)
 	
 	local function getSummaryPatch(p2)
-		-- upvalues: fFlagBuildExperienceShareUseUniverseSummary (copy), getPrivacyTypeForAudiencesModule (copy)
+		-- upvalues: getPrivacyTypeForAudiencesModule (copy)
 		local t = {}
 		
 		if p2.name ~= nil then
@@ -56,7 +54,7 @@ return function(p1)
 		if p2.isArchived ~= nil then
 			t.isArchived = p2.isArchived
 		end
-		if fFlagBuildExperienceShareUseUniverseSummary and p2.audiences ~= nil then
+		if p2.audiences ~= nil then
 			t.audiences = p2.audiences
 			t.privacyType = getPrivacyTypeForAudiencesModule(p2.audiences)
 		end

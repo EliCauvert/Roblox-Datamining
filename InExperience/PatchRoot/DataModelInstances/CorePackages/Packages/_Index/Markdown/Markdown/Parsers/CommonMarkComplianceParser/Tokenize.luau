@@ -46,7 +46,8 @@ local t_1 = {
 		{ "CODE_BLOCK", "^~~~[ \t]*([^\n]*)[ \t]*\n(.-)~~~" },
 		{ "CODE_BLOCK", "^~~~[ \t]*([^\n]*)[ \t]*\n(.+)$" },
 		{ "QUOTE", "^%s*>" },
-		{ "ORDERED_LIST_ITEM", "^(%s*)([0-9A-Za-z]+)%." },
+		{ "ORDERED_LIST_ITEM", "^(%s*)([0-9]+)%.[ \t]+" },
+		{ "ORDERED_LIST_ITEM", "^(%s*)([A-Za-z])%.[ \t]+" },
 		{ "TABLE_ROW", "^|" }
 	},
 	["\\"] = list,

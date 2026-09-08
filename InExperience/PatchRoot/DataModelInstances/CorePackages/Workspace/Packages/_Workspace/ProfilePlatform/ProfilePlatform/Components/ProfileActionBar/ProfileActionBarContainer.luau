@@ -22,25 +22,35 @@ local useFocusGuiObject = reactFocusNavigationModule.useFocusGuiObject
 local useLastInputMode = focusNavigationUtilsModule.useLastInputMode
 local fFlagProfilePlatformEnableTransferTooltipModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableTransferTooltip)
 local fFlagProfileTradeItemsExposureLoggingModule = require(profilePlatform.Flags.FFlagProfileTradeItemsExposureLogging)
+local fFlagProfileTradeItemsImpressionLoggingModule = require(profilePlatform.Flags.FFlagProfileTradeItemsImpressionLogging)
 local useTradeItemsExposureLoggerModule = require(profilePlatform.Hooks.useTradeItemsExposureLogger)
+local useProfileActionsModule = require(profilePlatform.Hooks.useProfileActions)
 
 return function(p1)
-	-- upvalues: useProfileWrapperContextModule (ref), useNavigation (ref), useFocusGuiObject (ref), useLastInputMode (ref), useProfileAnalyticsContextModule (ref), fFlagProfileTradeItemsExposureLoggingModule (ref), useTradeItemsExposureLoggerModule (ref), reactModule (ref), eventNamesModule (ref), constantsModule (ref), enumsModule (ref), useMapJsonToProfileActionsModule (ref), fFlagProfilePlatformEnableTransferTooltipModule (ref), useProfileJsonComponentModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), useEffectOnMount (ref), socialStopwatchModule (ref), loadingStagesExtensionModule (ref), profileActionBarWithTransferTooltipModule (ref), profileActionBarModule (ref)
+	-- upvalues: useProfileWrapperContextModule (ref), useNavigation (ref), useFocusGuiObject (ref), useLastInputMode (ref), useProfileAnalyticsContextModule (ref), fFlagProfileTradeItemsExposureLoggingModule (ref), useTradeItemsExposureLoggerModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagProfileTradeItemsImpressionLoggingModule (ref), useProfileActionsModule (ref), reactModule (ref), eventNamesModule (ref), constantsModule (ref), useMapJsonToProfileActionsModule (ref), fFlagProfilePlatformEnableTransferTooltipModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), useEffectOnMount (ref), socialStopwatchModule (ref), loadingStagesExtensionModule (ref), profileActionBarWithTransferTooltipModule (ref), profileActionBarModule (ref)
 	local profileId = useProfileWrapperContextModule().profileId
 	local var1 = useNavigation()
 	local var2 = useFocusGuiObject()
 	local var3 = useLastInputMode()
 	local var4 = useProfileAnalyticsContextModule()
 	local var5 = if fFlagProfileTradeItemsExposureLoggingModule then useTradeItemsExposureLoggerModule() else nil
-	local var6, var7 = reactModule.useState(false)
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useRef(nil)
+	local actions = useProfileJsonComponentModule(enumsModule.Components.Actions) or {}
+	local var6 = if fFlagProfileTradeItemsImpressionLoggingModule then useProfileActionsModule(enumsModule.ButtonSurface.ContextualMenu) else nil
+	local var7 = false
+	
+	if fFlagProfileTradeItemsImpressionLoggingModule then
+		local contextual = actions.contextual
+		var7 = contextual ~= nil and (table.find(contextual, enumsModule.ProfileActions.TradeItems) ~= nil and var6[enumsModule.ProfileActions.TradeItems] ~= nil)
+	end
+	local var8, var9 = reactModule.useState(false)
 	local var10 = reactModule.useRef(nil)
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), var10 (ref), var4 (ref), eventNamesModule (copy), fFlagProfileTradeItemsExposureLoggingModule (copy), var5 (write), constantsModule (copy), var7 (ref), var8 (ref), var1 (ref), enumsModule (copy)
-		if var6 then
-			if var10 and var10.current then
-				var10.current()
+	local var11 = reactModule.useRef(nil)
+	local var12 = reactModule.useRef(nil)
+	local var13 = reactModule.useCallback(function()
+		-- upvalues: var8 (ref), var12 (ref), var4 (ref), eventNamesModule (copy), fFlagProfileTradeItemsExposureLoggingModule (copy), var5 (write), fFlagProfileTradeItemsImpressionLoggingModule (copy), var7 (write), enumsModule (copy), constantsModule (copy), var9 (ref), var10 (ref), var1 (ref)
+		if var8 then
+			if var12 and var12.current then
+				var12.current()
 			end
 			return
 		else
@@ -49,61 +59,64 @@ return function(p1)
 			if fFlagProfileTradeItemsExposureLoggingModule then
 				var5()
 			end
+			if fFlagProfileTradeItemsImpressionLoggingModule and var7 then
+				var4.fireAnalyticsEvent(eventNamesModule.ContextualMenuTradeItemsImpression, { buttonSurface = enumsModule.ButtonSurface.ContextualMenu })
+			end
 			var1.navigate(enumsModule.Screens.ContextualMenu, {
 				[constantsModule.Navigation.ON_CLOSE] = function()
-					-- upvalues: var7 (copy)
-					var7(false)
+					-- upvalues: var9 (copy)
+					var9(false)
 				end,
 				[constantsModule.Navigation.GET_ROOT_ELEMENT_REF] = function()
-					-- upvalues: var8 (copy)
-					return var8.current
+					-- upvalues: var10 (copy)
+					return var10.current
 				end,
-				[constantsModule.Navigation.ON_DISMISS_REF] = var10
+				[constantsModule.Navigation.ON_DISMISS_REF] = var12
 			})
-			var7(true)
+			var9(true)
 		end
 	end, {
 		var1,
-		var6,
+		var8,
 		var4,
-		if fFlagProfileTradeItemsExposureLoggingModule then var5 else nil
+		if fFlagProfileTradeItemsExposureLoggingModule then var5 else nil,
+		if fFlagProfileTradeItemsImpressionLoggingModule then var7 else nil
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var3 (ref), var2 (ref)
-		if var9.current and var3 == "Focus" then
-			var2(var9.current)
+		-- upvalues: var11 (ref), var3 (ref), var2 (ref)
+		if var11.current and var3 == "Focus" then
+			var2(var11.current)
 		end
-	end, { var9.current, var3 })
-	local var12, var13 = useMapJsonToProfileActionsModule(profileId)
-	local var14 = nil
+	end, { var11.current, var3 })
+	local var14, var15 = useMapJsonToProfileActionsModule(profileId)
+	local var16 = nil
 	
 	if fFlagProfilePlatformEnableTransferTooltipModule then
-		local actions = useProfileJsonComponentModule(enumsModule.Components.Actions) or {}
-		var14 = fFlagProfilePlatformEnableCurrencyTransfer and (actions.contextual ~= nil and table.find(actions.contextual, enumsModule.ProfileActions.CurrencyTransfer) ~= nil)
+		var16 = fFlagProfilePlatformEnableCurrencyTransfer and (actions.contextual ~= nil and table.find(actions.contextual, enumsModule.ProfileActions.CurrencyTransfer) ~= nil)
 	end
 	useEffectOnMount(function()
 		-- upvalues: socialStopwatchModule (copy), var4 (ref), eventNamesModule (copy), loadingStagesExtensionModule (copy)
-		local var15 = socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.ProfileOpened)
+		local var17 = socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.ProfileOpened)
 		var4.fireAnalyticsEvent(eventNamesModule.ProfileLoadingStage, {
 			isProfilePlatform = true,
-			statValue = if var15 then var15.timeElapsed else nil,
+			statValue = if var17 then var17.timeElapsed else nil,
 			status = loadingStagesExtensionModule.CTALoaded
 		})
 	end)
 	
-	return if fFlagProfilePlatformEnableTransferTooltipModule and var14 then reactModule.createElement(profileActionBarWithTransferTooltipModule, {
-		isContextualMenuOpen = var6,
+	return if fFlagProfilePlatformEnableTransferTooltipModule and var16 then reactModule.createElement(profileActionBarWithTransferTooltipModule, {
+		isContextualMenuOpen = var8,
 		layoutOrder = p1.layoutOrder,
-		openContextualMenu = if var13 then var11 else nil,
-		profileActions = var12,
-		primaryButtonRef = var9,
-		moreButtonRef = var8
+		openContextualMenu = if var15 then var13 else nil,
+		profileActions = var14,
+		primaryButtonRef = var11,
+		moreButtonRef = var10
 	}) else reactModule.createElement(profileActionBarModule, {
-		isContextualMenuOpen = var6,
+		isContextualMenuOpen = var8,
 		layoutOrder = p1.layoutOrder,
-		openContextualMenu = if var13 then var11 else nil,
-		profileActions = var12,
-		primaryButtonRef = var9,
-		moreButtonRef = var8
+		openContextualMenu = if var15 then var13 else nil,
+		profileActions = var14,
+		primaryButtonRef = var11,
+		moreButtonRef = var10
 	})
 end

@@ -4,9 +4,10 @@ local foundationModule = require(parent.Foundation)
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local dialog = foundationModule.Dialog
 local orientation = foundationModule.Enums.Orientation
+local sduiDialogHeroMediaProps = game:DefineFastFlag("SduiDialogHeroMediaProps", false)
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), buttonVariant (ref), dialog (ref), orientation (ref)
+	-- upvalues: reactModule (ref), buttonVariant (ref), dialog (ref), sduiDialogHeroMediaProps (ref), orientation (ref)
 	local bodyText = p1.bodyText or p1.bodyComponent
 	local var1 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref)
@@ -64,7 +65,8 @@ return reactModule.memo(function(p1)
 		DialogTitle = p1.titleText and reactModule.createElement(dialog.Title, { text = p1.titleText }) or nil,
 		DialogMedia = p1.image and reactModule.createElement(dialog.HeroMedia, {
 			media = p1.image,
-			aspectRatio = p1.imageAspectRatio or 1.777777777778
+			aspectRatio = p1.imageAspectRatio or 1.777777777778,
+			mediaStyle = if sduiDialogHeroMediaProps then p1.imageStyle else nil
 		}) or nil,
 		DialogContent = bodyText and (reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
 			BodyContent = if p1.bodyComponent then p1.bodyComponent elseif p1.bodyText then reactModule.createElement(dialog.Text, { Text = p1.bodyText }) else nil

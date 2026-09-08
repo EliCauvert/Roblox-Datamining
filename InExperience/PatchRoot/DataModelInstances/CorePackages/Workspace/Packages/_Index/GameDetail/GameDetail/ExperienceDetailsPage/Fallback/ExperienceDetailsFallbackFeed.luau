@@ -17,14 +17,23 @@ local experienceDetailsFallbackAttributionRowModule = require(script.Parent.Expe
 local useGameInfoModule = require(script.Parent.Parent.useGameInfo)
 local useGameInfosSelector = require(parent.GameInfosRodux).useGameInfosSelector
 local fFlagLuaAppSduiEdpFallbackAttributionFromCache = require(parent.SharedFlags).FFlagLuaAppSduiEdpFallbackAttributionFromCache
+local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
 
 local function ExperienceDetailsFeedSkeleton(p1)
-	-- upvalues: useTokens (ref), fFlagLuaAppSduiEdpFallbackAttributionFromCache (ref), useGameInfosSelector (ref), reactModule (ref), view (ref), compositionTags (ref), experienceDetailsFallbackAttributionRowModule (ref), skeleton (ref), radius (ref)
+	-- upvalues: useTokens (ref), fFlagLuaAppSduiEdpFallbackAttributionFromCache (ref), fFlagMigrateGameInfoToStore (ref), useGameInfoModule (ref), useGameInfosSelector (ref), reactModule (ref), view (ref), compositionTags (ref), experienceDetailsFallbackAttributionRowModule (ref), skeleton (ref), radius (ref)
 	local universeId = p1.universeId
 	local var1 = useTokens()
 	local isSmallScreen = p1.isSmallScreen
-	local var2 = if fFlagLuaAppSduiEdpFallbackAttributionFromCache then useGameInfosSelector(universeId) else nil
+	local var2 = nil
+	local var3 = nil
 	
+	if fFlagLuaAppSduiEdpFallbackAttributionFromCache then
+		if fFlagMigrateGameInfoToStore then
+			var3 = useGameInfoModule(universeId)
+		else
+			var2 = useGameInfosSelector(universeId)
+		end
+	end
 	return reactModule.createElement(view, {
 		testId = "--edp-fallback-feed-skeleton",
 		tag = {
@@ -39,7 +48,7 @@ local function ExperienceDetailsFeedSkeleton(p1)
 		AttributionRow = reactModule.createElement(experienceDetailsFallbackAttributionRowModule, {
 			isLoading = true,
 			universeId = universeId,
-			gameName = var2 and var2.name,
+			gameName = if fFlagMigrateGameInfoToStore then var3 and var3.name else var2 and var2.name,
 			isSmallScreen = isSmallScreen,
 			launchSource = p1.launchSource,
 			referralSource = p1.referralSource,

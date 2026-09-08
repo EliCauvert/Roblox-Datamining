@@ -1,22 +1,19 @@
 ﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
 local _ = require(sduiCoreSystem.SduiActionType)
 local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local fFlagSduiActionTelemetryHandler = require(parent.SharedFlags).FFlagSduiActionTelemetryHandler
 
 local function createSduiActionHandlerRegistry()
-	-- upvalues: fFlagSduiActionTelemetryHandler (ref)
 	local t = {}
 	
 	return {
 		getActionHandlerConfig = function(p1)
-			-- upvalues: t (ref), fFlagSduiActionTelemetryHandler (copy)
+			-- upvalues: t (ref)
 			local var1 = t[p1]
 			
 			if var1 and not var1.handler and var1.lazyHandler then
 				var1.handler = var1.lazyHandler()
 			end
-			if fFlagSduiActionTelemetryHandler and var1 and not var1.telemetryHandler then
+			if var1 and not var1.telemetryHandler then
 				local lazyTelemetryHandler = var1.lazyTelemetryHandler
 				
 				if lazyTelemetryHandler then

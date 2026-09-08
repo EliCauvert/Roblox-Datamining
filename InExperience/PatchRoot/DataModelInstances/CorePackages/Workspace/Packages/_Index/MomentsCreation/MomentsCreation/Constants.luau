@@ -8,7 +8,7 @@
 		WaveformMinHeight = 4,
 		SegmentSelectorWidth = 150
 	},
-	SearchMusicCreatorFilter = { 7462718749 },
+	SearchMusicCreatorDenylist = if require(script:FindFirstAncestor("MomentsCreation").Flags.FFlagMomentsCreationAllowAPMMusic) then {} else { 7462718749 },
 	BottomBarSizeConstraint = Vector2.new(400, 1e999),
 	TextOverlay = {
 		MinFontSize = 10,

@@ -14,14 +14,12 @@ local useSocialCarouselAnalyticsModule = require(socialCarousel.Analytics.useSoc
 local useSocialCarouselLoadTimerModule = require(socialCarousel.Analytics.useSocialCarouselLoadTimer)
 local _ = require(socialCarousel.Analytics.AnalyticsTypes)
 local friendCarouselRefreshThrottleInterval = game:DefineFastInt("FriendCarouselRefreshThrottleInterval", 3)
-local fFlagLuaAppAddSortDataToSocialCarouselClicks = require(parent.SharedFlags).FFlagLuaAppAddSortDataToSocialCarouselClicks
-local fFlagLuaAppUserSeenCollectionUnifiedFields = require(parent.SharedFlags).FFlagLuaAppUserSeenCollectionUnifiedFields
 local fFlagSocialCarouselShareQREnabled = require(parent.SharedFlags).FFlagSocialCarouselShareQREnabled
 local fFlagEnableDesktopGameJoinCard = require(parent.SharedFlags).FFlagEnableDesktopGameJoinCard
 local carouselModule = require(socialCarousel.Components.Carousel)
 
 return function(p1)
-	-- upvalues: useRoactService (ref), roactAnalytics (ref), appEventIngestService (ref), useSocialCarouselAnalyticsModule (ref), useSocialCarouselLoadTimerModule (ref), reactModule (ref), useSocialCarouselListModule (ref), fFlagEnableDesktopGameJoinCard (ref), useSocialCarouselUnifiedLoggingModule (ref), useThrottledCallback (ref), friendCarouselRefreshThrottleInterval (ref), socialCarouselContextModule (ref), fFlagLuaAppAddSortDataToSocialCarouselClicks (ref), fFlagLuaAppUserSeenCollectionUnifiedFields (ref), fFlagSocialCarouselShareQREnabled (ref), carouselModule (ref)
+	-- upvalues: useRoactService (ref), roactAnalytics (ref), appEventIngestService (ref), useSocialCarouselAnalyticsModule (ref), useSocialCarouselLoadTimerModule (ref), reactModule (ref), useSocialCarouselListModule (ref), fFlagEnableDesktopGameJoinCard (ref), useSocialCarouselUnifiedLoggingModule (ref), useThrottledCallback (ref), friendCarouselRefreshThrottleInterval (ref), socialCarouselContextModule (ref), fFlagSocialCarouselShareQREnabled (ref), carouselModule (ref)
 	local var1 = useRoactService(roactAnalytics)
 	local var2 = useRoactService(appEventIngestService)
 	local var3 = useSocialCarouselLoadTimerModule(useSocialCarouselAnalyticsModule().reportLoadingEvent)
@@ -57,7 +55,7 @@ return function(p1)
 			openGameJoinCardUserId = if fFlagEnableDesktopGameJoinCard then var6 else nil,
 			setOpenGameJoinCardUserId = if fFlagEnableDesktopGameJoinCard then var7 else nil,
 			unifiedLogging = var10,
-			sortAnalyticsData = if fFlagLuaAppAddSortDataToSocialCarouselClicks or fFlagLuaAppUserSeenCollectionUnifiedFields then p1.sortAnalyticsData else nil,
+			sortAnalyticsData = p1.sortAnalyticsData,
 			friendRequestCount = var5.friendRequestCount,
 			recommendationCount = var5.recommendationCount,
 			friendCount = var5.friendCount,

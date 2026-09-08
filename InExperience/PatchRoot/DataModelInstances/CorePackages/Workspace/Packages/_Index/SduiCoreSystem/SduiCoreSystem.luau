@@ -62,9 +62,9 @@ return {
 	getSduiImpressionHandlerRegistry = function()
 		return require(script.getSduiImpressionHandlerRegistry)()
 	end,
-	getSduiTelemetryHandlerNameRegistry = if require(script.Parent.SharedFlags).FFlagSduiActionTelemetryHandler then function()
+	getSduiTelemetryHandlerNameRegistry = function()
 		return require(script.getSduiTelemetryHandlerNameRegistry)()
-	end else nil,
+	end,
 	getSduiServiceDependenciesStore = function()
 		return require(script.ClientBinding.getSduiServiceDependenciesStore)()
 	end,

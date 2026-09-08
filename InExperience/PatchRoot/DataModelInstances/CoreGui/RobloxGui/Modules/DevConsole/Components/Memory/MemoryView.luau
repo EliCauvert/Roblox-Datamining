@@ -1,4 +1,5 @@
-﻿local tweenService = game:GetService("TweenService")
+﻿local fFlagDevConsoleKeyCollisionFixModule = require(script.Parent.Flags.FFlagDevConsoleKeyCollisionFix)
+local tweenService = game:GetService("TweenService")
 local roactModule = require(game:GetService("CorePackages").Packages.Roact)
 local headerButtonModule = require(script.Parent.Parent.Parent.Components.HeaderButton)
 local memoryViewEntryModule = require(script.Parent.MemoryViewEntry)
@@ -111,18 +112,21 @@ function memoryView.willUnmount(p1)
 end
 
 function memoryView.appendAdditionTabInformation(p1, p2, p3, p4, p5, p6)
-	-- upvalues: entryFrameHeight (ref), roactModule (ref), memoryViewEntryModule (ref), formatValueStr (ref)
+	-- upvalues: fFlagDevConsoleKeyCollisionFixModule (ref), entryFrameHeight (ref), roactModule (ref), memoryViewEntryModule (ref), formatValueStr (ref)
 	local canvasPosition = p1.scrollingRef.current.CanvasPosition
 	local absoluteSize = p1.scrollingRef.current.AbsoluteSize
 	
 	for i, v in ipairs(p3) do
 		local name = v.name
 		local value = v.value
-		local text = p4 .. name
+		local var1 = if fFlagDevConsoleKeyCollisionFixModule then if v.id then `{p4}_{v.id}` else `{p4}_{name}_{i}` else p4 .. name
 		p6.layoutOrder += 1
 		
 		if canvasPosition.Y <= p6.scrollingFrameHeight + entryFrameHeight and p6.usedFrameSpace < absoluteSize.Y then
-			p2[p4 .. name] = roactModule.createElement(memoryViewEntryModule, {
+			if not fFlagDevConsoleKeyCollisionFixModule then
+				var1 = p4 .. name
+			end
+			p2[var1] = roactModule.createElement(memoryViewEntryModule, {
 				showGraph = false,
 				size = UDim2.new(1, 0, 0, entryFrameHeight),
 				depth = p5,
@@ -141,13 +145,13 @@ function memoryView.appendAdditionTabInformation(p1, p2, p3, p4, p5, p6)
 		p6.scrollingFrameHeight += entryFrameHeight
 		
 		if v.moreInfo and type(v.moreInfo) == "table" then
-			p1:appendAdditionTabInformation(p2, v.moreInfo, text, p5 + 1, p6)
+			p1:appendAdditionTabInformation(p2, v.moreInfo, var1, p5 + 1, p6)
 		end
 	end
 end
 
-function memoryView.recursiveConstructEntries(p7, p8, p9, p10, p11)
-	-- upvalues: entryFrameHeight (ref), lineGraphHeight (ref), roactModule (ref), memoryViewEntryModule (ref), formatValueStr (ref), getX (ref), getY (ref)
+function memoryView.recursiveConstructEntries(p7, p8, p9, p10, p11, p12)
+	-- upvalues: fFlagDevConsoleKeyCollisionFixModule (ref), entryFrameHeight (ref), lineGraphHeight (ref), roactModule (ref), memoryViewEntryModule (ref), formatValueStr (ref), getX (ref), getY (ref)
 	assert(p7.scrollingRef.current, "ScrollingFrame not initialized yet")
 	local expandIndex = p7.state.expandIndex
 	local searchTerm = p7.props.searchTerm or ""
@@ -155,20 +159,22 @@ function memoryView.recursiveConstructEntries(p7, p8, p9, p10, p11)
 	local canvasPosition = p7.scrollingRef.current.CanvasPosition
 	local absoluteSize = p7.scrollingRef.current.AbsoluteSize
 	local name = p9.name
+	local var2 = if p12 then `{p12}/{name}` else name
 	
 	if string.find(name:lower(), searchTerm:lower()) then
-		local var1 = expandIndex == name
-		local var2 = if var1 then entryFrameHeight + lineGraphHeight else entryFrameHeight
+		local var3 = if fFlagDevConsoleKeyCollisionFixModule then var2 else name
+		local var4 = expandIndex == var3
+		local var5 = if var4 then entryFrameHeight + lineGraphHeight else entryFrameHeight
 		p11.layoutOrder += 1
 		
-		if canvasPosition.Y <= p11.scrollingFrameHeight + var2 and p11.usedFrameSpace < absoluteSize.Y then
-			p8[name] = roactModule.createElement(memoryViewEntryModule, {
-				size = UDim2.new(1, 0, 0, var2),
+		if canvasPosition.Y <= p11.scrollingFrameHeight + var5 and p11.usedFrameSpace < absoluteSize.Y then
+			p8[var3] = roactModule.createElement(memoryViewEntryModule, {
+				size = UDim2.new(1, 0, 0, var5),
 				depth = p10,
 				name = p9.name,
-				showGraph = var1,
+				showGraph = var4,
 				dataStats = p9.dataStats,
-				onButtonPress = p7.getOnButtonPress(name, p11.layoutOrder),
+				onButtonPress = p7.getOnButtonPress(var3, p11.layoutOrder),
 				formatValueStr = formatValueStr,
 				getX = getX,
 				getY = getY,
@@ -178,13 +184,13 @@ function memoryView.recursiveConstructEntries(p7, p8, p9, p10, p11)
 			if p11.paddingHeight < 0 then
 				p11.paddingHeight = p11.scrollingFrameHeight
 			else
-				p11.usedFrameSpace += var2
+				p11.usedFrameSpace += var5
 			end
 		end
-		p11.scrollingFrameHeight += var2
+		p11.scrollingFrameHeight += var5
 		
-		if var1 and p9.dataStats.additionalInfoFunc then
-			p7:appendAdditionTabInformation(p8, p9.dataStats.additionalInfoFunc(), p9.name, p10 + 1, p11)
+		if var4 and p9.dataStats.additionalInfoFunc then
+			p7:appendAdditionTabInformation(p8, p9.dataStats.additionalInfoFunc(), var3, p10 + 1, p11)
 		end
 	end
 	local sortedChildren = p9.dataStats.sortedChildren
@@ -194,23 +200,23 @@ function memoryView.recursiveConstructEntries(p7, p8, p9, p10, p11)
 			local sortedChildrenCount = #sortedChildren
 			
 			for i = 1, sortedChildrenCount do
-				p7:recursiveConstructEntries(p8, sortedChildren[sortedChildrenCount - i + 1], p10 + 1, p11)
+				p7:recursiveConstructEntries(p8, sortedChildren[sortedChildrenCount - i + 1], p10 + 1, p11, var2)
 			end
 			return
 		else
 			for i_1, v in ipairs(sortedChildren) do
-				p7:recursiveConstructEntries(p8, v, p10 + 1, p11)
+				p7:recursiveConstructEntries(p8, v, p10 + 1, p11, var2)
 			end
 		end
 	end
 end
 
-function memoryView.render(p12)
+function memoryView.render(p13)
 	-- upvalues: roactModule (ref), constantsModule (ref), noResultSearchStr (ref), headerFrameHeight (ref), headerButtonModule (ref), chartHeaderNames (ref), valueCellWidth (ref), valuePadding (ref), cellPadding (ref), lineColor (ref), lineWidth (ref)
 	local t = {}
-	local layoutOrder = p12.props.layoutOrder
-	local size = p12.props.size
-	local searchTerm = p12.props.searchTerm or ""
+	local layoutOrder = p13.props.layoutOrder
+	local size = p13.props.size
+	local searchTerm = p13.props.searchTerm or ""
 	local t_1 = {
 		scrollingFrameHeight = 0,
 		paddingHeight = -1,
@@ -218,9 +224,9 @@ function memoryView.render(p12)
 		layoutOrder = 1
 	}
 	
-	if p12.scrollingRef.current then
-		for i, v in ipairs(p12.state.memoryData) do
-			p12:recursiveConstructEntries(t, v, 0, t_1)
+	if p13.scrollingRef.current then
+		for i, v in ipairs(p13.state.memoryData) do
+			p13:recursiveConstructEntries(t, v, 0, t_1)
 		end
 		t.UIListLayout = roactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
@@ -268,13 +274,13 @@ function memoryView.render(p12)
 				text = chartHeaderNames[1],
 				size = UDim2.new(1 - valueCellWidth, (-valuePadding) - cellPadding, 0, headerFrameHeight),
 				pos = UDim2.new(0, cellPadding, 0, 0),
-				sortfunction = p12.onSortChanged
+				sortfunction = p13.onSortChanged
 			}),
 			ValueMB = roactModule.createElement(headerButtonModule, {
 				text = chartHeaderNames[2],
 				size = UDim2.new(valueCellWidth, -cellPadding, 0, headerFrameHeight),
 				pos = UDim2.new(1 - valueCellWidth, valuePadding, 0, 0),
-				sortfunction = p12.onSortChanged
+				sortfunction = p13.onSortChanged
 			}),
 			TopHorizontal = roactModule.createElement("Frame", {
 				BorderSizePixel = 0,
@@ -301,7 +307,7 @@ function memoryView.render(p12)
 			VerticalScrollBarInset = 1,
 			ScrollBarThickness = 5,
 			CanvasSize = UDim2.new(1, 0, 0, t_1.scrollingFrameHeight),
-			[roactModule.Ref] = p12.scrollingRef
+			[roactModule.Ref] = p13.scrollingRef
 		}, t)
 	})
 end

@@ -1,5 +1,4 @@
-﻿local flyoutSidePanel = script:FindFirstAncestor("FlyoutSidePanel")
-local parent = flyoutSidePanel.Parent
+﻿local parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
 local foundationModule = require(parent.Foundation)
@@ -24,10 +23,10 @@ local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
 local fFlagHidePremiumIconography = sharedFlagsModule.FFlagHidePremiumIconography
 local fFlagEnableFlyoutUncheckedBadge = sharedFlagsModule.FFlagEnableFlyoutUncheckedBadge
 local fFlagEnableDrawerFocusNav = sharedFlagsModule.FFlagEnableDrawerFocusNav
-local fFlagFlyoutSidePanelUseProfileFrameThumbnailModule = require(flyoutSidePanel.Flags.FFlagFlyoutSidePanelUseProfileFrameThumbnail)
+local fFlagFlyoutSidePanelUseProfileFrameThumbnail = sharedFlagsModule.FFlagFlyoutSidePanelUseProfileFrameThumbnail
 
 return function(p1)
-	-- upvalues: useTokens (ref), fFlagEnableFlyoutUncheckedBadge (ref), useLocalization (ref), useAppPolicy (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutAnalyticsModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), fFlagFlyoutSidePanelUseProfileFrameThumbnailModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), foundationModule (ref), fFlagEnableDrawerFocusNav (ref), loadableImage (ref), text (ref), icon (ref), builderIconsModule (ref), iconSize (ref), iconName (ref), badge (ref), badgeVariant (ref), chevronSmallDownButtonModule (ref)
+	-- upvalues: useTokens (ref), fFlagEnableFlyoutUncheckedBadge (ref), useLocalization (ref), useAppPolicy (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutAnalyticsModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), fFlagFlyoutSidePanelUseProfileFrameThumbnail (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), foundationModule (ref), fFlagEnableDrawerFocusNav (ref), loadableImage (ref), text (ref), icon (ref), builderIconsModule (ref), iconSize (ref), iconName (ref), badge (ref), badgeVariant (ref), chevronSmallDownButtonModule (ref)
 	local var1
 	local var2 = useTokens()
 	local var3 = if fFlagEnableFlyoutUncheckedBadge then useLocalization({ Unchecked = "CommonUI.Features.Label.Unchecked" }) else nil
@@ -59,8 +58,8 @@ return function(p1)
 		end
 	end, { p1.onSwitchAccountActivated, p1.closeDrawer })
 	local var8 = reactModule.useMemo(function()
-		-- upvalues: localUserModel (ref), getStandardSizeAvatarHeadShotRbxthumb (copy), fFlagFlyoutSidePanelUseProfileFrameThumbnailModule (copy)
-		return if localUserModel and localUserModel.id then getStandardSizeAvatarHeadShotRbxthumb(localUserModel.id, fFlagFlyoutSidePanelUseProfileFrameThumbnailModule) else nil
+		-- upvalues: localUserModel (ref), getStandardSizeAvatarHeadShotRbxthumb (copy), fFlagFlyoutSidePanelUseProfileFrameThumbnail (copy)
+		return if localUserModel and localUserModel.id then getStandardSizeAvatarHeadShotRbxthumb(localUserModel.id, fFlagFlyoutSidePanelUseProfileFrameThumbnail) else nil
 	end, { localUserModel })
 	local var9 = reactModule.useMemo(function()
 		-- upvalues: localUserModel (ref)
@@ -154,7 +153,7 @@ return function(p1)
 						["size-full-0 auto-y text-truncate-split"] = fFlagEnableFlyoutUncheckedBadge,
 						["auto-xy"] = not fFlagEnableFlyoutUncheckedBadge
 					},
-					Text = "@" .. var17
+					Text = "@" .. var15
 				})
 			})
 		}),

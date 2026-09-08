@@ -100,7 +100,7 @@ return function(p3)
 		end
 	end
 	
-	local function rpcCall(p5, p6, p7)
+	local function rpcCall(p5, p6, p7, p8)
 		-- upvalues: logger (ref), httpClientModule (copy), network (ref), baseUrl (ref), p3 (ref), rpcDecoderModule (copy)
 		logger:debug(`[CAS] -> {p6} id={tostring(p5)}`)
 		
@@ -111,11 +111,11 @@ return function(p3)
 			headers = if p3.getAuthHeaders then p3.getAuthHeaders() else {},
 			body = { jsonrpc = "2.0", id = p5, method = p6, params = p7 or {} },
 			analyticsKey = "cas." .. p8:gsub("/", "-"):lower(),
-			decode = rpcDecoderModule()
+			decode = rpcDecoderModule(p8)
 		})
 	end
 	
-	local function rpcCallSync(p5, p6)
+	local function rpcCallSync(p5, p6, p7)
 		-- upvalues: rpcCall (ref), p3 (ref), var1 (write)
 		local var3
 		if p3.generateRequestId then
@@ -124,7 +124,7 @@ return function(p3)
 			var1 += 1
 			var3 = var1
 		end
-		return rpcCall(var3, p5, p6)
+		return rpcCall(var3, p5, p6, p7)
 	end
 	
 	local function submitToolResult(p5)
@@ -185,7 +185,8 @@ return function(p3)
 			cwd = p5.cwd or "/",
 			mcpServers = p5.mcpServers,
 			project = p5.project,
-			experiment = p5.experiment
+			experiment = p5.experiment,
+			application = p5.application
 		}))
 	end
 	
@@ -229,7 +230,7 @@ return function(p3)
 				var1 += 1
 				var12 = var1
 			end
-			local var14 = rpcCall(var12, sessionList, t)
+			local var14 = rpcCall(var12, sessionList, t, nil)
 			var9 = var14
 			onTerminalModule(var14.state, function(p5)
 				-- upvalues: var13 (ref), var11 (copy), var9 (copy), var4 (copy), var6 (copy), pending_1 (copy)
@@ -277,7 +278,7 @@ return function(p3)
 				var1 += 1
 				var13 = var1
 			end
-			local var15 = rpcCall(var13, sessionList, var14)
+			local var15 = rpcCall(var13, sessionList, var14, nil)
 			var10 = var15
 			onTerminalModule(var15.state, function(p5)
 				-- upvalues: var11 (ref), var11 (copy), var10 (copy), appendSessionListEntries (copy), var3 (copy), var4 (copy), var6 (copy), var8 (copy)
@@ -348,7 +349,7 @@ return function(p3)
 			var1 += 1
 			var12 = var1
 		end
-		local var13 = rpcCall(var12, sessionCancel, t)
+		local var13 = rpcCall(var12, sessionCancel, t, nil)
 		onTerminalModule(var13.state, function()
 			-- upvalues: t_1 (copy), p5 (ref), t_3 (copy), t_2 (copy)
 			local var14 = t_1[p5]
@@ -388,7 +389,7 @@ return function(p3)
 			var1 += 1
 			var14 = var1
 		end
-		local var15 = rpcCall(var14, sessionDelete, t)
+		local var15 = rpcCall(var14, sessionDelete, t, nil)
 		onTerminalModule(var15.state, function()
 			-- upvalues: t_1 (copy), p6 (ref), acpProtocolModule (copy), t_3 (copy), t_2 (copy)
 			local var16 = t_1[p6]
@@ -432,6 +433,23 @@ return function(p3)
 		return rpcCallSync(acpProtocolModule.Methods.SessionSaveAndPublish, p7)
 	end
 	
+	local function adCampaignEligibility(p7)
+		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
+		assert(typeof(p7) == "table", "adCampaignEligibility requires params")
+		assert(typeof(p7.universeId) == "number" and p7.universeId > 0, "universeId must be a positive number")
+		
+		return rpcCallSync(acpProtocolModule.Methods.AdCampaignEligibility, p7, require(script.Parent.decodeAdCampaignEligibilityResult))
+	end
+	
+	local function adCampaignCreate(p7)
+		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
+		assert(typeof(p7) == "table", "adCampaignCreate requires params")
+		assert(typeof(p7.universeId) == "number" and p7.universeId > 0, "universeId must be a positive number")
+		assert(typeof(p7.idempotencyKey) == "string" and p7.idempotencyKey ~= "", "idempotencyKey is required")
+		
+		return rpcCallSync(acpProtocolModule.Methods.AdCampaignCreate, p7, require(script.Parent.decodeAdCampaignCreateResult))
+	end
+	
 	local _ = function(p7, p8, p9, p10)
 		-- upvalues: createTurnHandleModule (copy), acpProtocolModule (copy), rpcCall (ref), p3 (ref), var1 (write), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref)
 		local var16, var17 = createTurnHandleModule(p7, p8, function()
@@ -447,7 +465,7 @@ return function(p3)
 				var1 += 1
 				var18 = var1
 			end
-			onTerminalModule(rpcCall(var18, sessionCancel, t).state, function()
+			onTerminalModule(rpcCall(var18, sessionCancel, t, nil).state, function()
 				-- upvalues: t_1 (copy), p7 (ref), t_3 (copy), t_2 (copy)
 				local var19 = t_1[p7]
 				
@@ -505,7 +523,7 @@ return function(p3)
 				var1 += 1
 				var21 = var1
 			end
-			onTerminalModule(rpcCall(var21, sessionCancel, t).state, function()
+			onTerminalModule(rpcCall(var21, sessionCancel, t, nil).state, function()
 				-- upvalues: t_1 (copy), sessionId (ref), t_3 (copy), t_2 (copy)
 				local var22 = t_1[sessionId]
 				
@@ -591,7 +609,7 @@ return function(p3)
 					var1 += 1
 					var26 = var1
 				end
-				onTerminalModule(rpcCall(var26, sessionCancel, t).state, function()
+				onTerminalModule(rpcCall(var26, sessionCancel, t, nil).state, function()
 					-- upvalues: t_1 (copy), p12 (ref), t_3 (copy), t_2 (copy)
 					local var27 = t_1[p12]
 					
@@ -667,6 +685,8 @@ return function(p3)
 		sessionDelete = sessionDelete,
 		sessionUpdateInfo = sessionUpdateInfo,
 		sessionSaveAndPublish = sessionSaveAndPublish,
+		adCampaignEligibility = adCampaignEligibility,
+		adCampaignCreate = adCampaignCreate,
 		ingestSessionHistory = ingestSessionHistory,
 		ingestFrame = function(p15, p16)
 			-- upvalues: ingestFrameHandlerModule (copy), logger (ref), var26 (ref), t_1 (ref), t_2 (ref), unregisterHandle (ref)

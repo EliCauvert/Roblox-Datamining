@@ -7,14 +7,16 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local placeVersionHistoryModule = require(parent.DataHydration.PlaceVersionHistory)
 local _ = require(buildExperience.Chat.chatTypes)
+local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
 local fFlagisPublishOnBuildRevertModule = require(buildExperience.Flags.FFlagisPublishOnBuildRevert)
 local feedbackActionModule = require(script.Parent.FeedbackAction)
 local _ = require(script.Parent.UserFeedback)
+local getAgentRollbackRequestStoreModule = require(buildExperience.Stores.GetAgentRollbackRequestStore)
 local rollbackPlaceWithRetryModule = require(buildExperience.utils.rollbackPlaceWithRetry)
 local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
-local fFlagBuildNoPublishOnRevertModule = require(buildExperience.Flags.FFlagBuildNoPublishOnRevert)
 local iconName = foundationModule.Enums.IconName
 local debug = creatorAgentChatModule.debug
+local buildAgentRollbackNoteTimeoutSeconds = game:DefineFastInt("BuildAgentRollbackNoteTimeoutSeconds", 5)
 
 local function getRollbackTargetVersionNumber(p1)
 	if p1.rollbackTargetVersionNumber ~= nil then
@@ -100,29 +102,127 @@ local function findVersionNote(p1, p2)
 	return nil
 end
 
-local function fetchVersionNote(p3, p4, p5, p6)
-	-- upvalues: findVersionNote (ref), fetchVersionNote (ref)
-	return p3.fetchPageHistory(p4, { cursor = p6 }):andThen(function(p7)
-		-- upvalues: findVersionNote (copy), p5 (ref), fetchVersionNote (copy), p3 (ref), p4 (ref)
-		local var1 = findVersionNote(p7, p5)
+local function fetchVersionNote(p3, p4, p5, p6, p7)
+	-- upvalues: promiseModule (ref), findVersionNote (ref), fetchVersionNote (ref)
+	return if p7 == nil or p7 > 0 then p3.fetchPageHistory(p4, { cursor = p6 }):andThen(function(p8)
+		-- upvalues: findVersionNote (copy), p5 (ref), fetchVersionNote (copy), p3 (ref), p4 (ref), p7 (ref)
+		local var1 = findVersionNote(p8, p5)
 		
-		return if var1 == nil then if p7.nextCursor == nil or p7.nextCursor == "" then nil else fetchVersionNote(p3, p4, p5, p7.nextCursor) else var1
-	end)
+		return if var1 == nil then if p8.nextCursor == nil or p8.nextCursor == "" then nil else fetchVersionNote(p3, p4, p5, p8.nextCursor, if p7 == nil then nil else p7 - 1) else var1
+	end) else promiseModule.resolve(nil)
 end
 
-local function getVersionNote(p3, p4, p5)
+local function getVersionNote(p3, p4, p5, p6)
 	-- upvalues: findVersionNote (ref), promiseModule (ref), fetchVersionNote (ref)
 	local var1 = findVersionNote(p3.getHistory(p4).data(false), p5)
 	
-	return if var1 == nil then fetchVersionNote(p3, p4, p5, nil) else promiseModule.resolve(var1)
+	return if var1 == nil then fetchVersionNote(p3, p4, p5, nil, p6) else promiseModule.resolve(var1)
 end
 
 return {
 	canRevert = canRevert,
 	getRollbackTargetVersionNumber = getRollbackTargetVersionNumber,
 	getFeedbackIcons = getFeedbackIcons,
+	requestAgentRollback = if fFlagBuildAgentRollbackModule then function(p3)
+		-- upvalues: debug (ref), promiseModule (ref), getAgentRollbackRequestStoreModule (ref), placeVersionHistoryModule (ref), getVersionNote (ref), buildAgentRollbackNoteTimeoutSeconds (ref), httpService (ref)
+		local rollbackTargetVersionNumber, publishedVersionNumber
+		local placeId = p3.placeId
+		
+		if p3.rollbackTargetVersionNumber == nil then
+			publishedVersionNumber = p3.publishedVersionNumber
+			rollbackTargetVersionNumber = if publishedVersionNumber == nil or publishedVersionNumber <= 1 then nil else publishedVersionNumber - 1
+		else
+			rollbackTargetVersionNumber = p3.rollbackTargetVersionNumber
+		end
+		if placeId == nil or rollbackTargetVersionNumber == nil then
+			debug.log("warn", "agent feedback revert missing rollback ids", { feedbackIds = p3 })
+			
+			return promiseModule.reject("agent_rollback_missing_ids")
+		end
+		publishedVersionNumber = getAgentRollbackRequestStoreModule(false)
+		local var1, var2 = publishedVersionNumber.beginRequest({ universeId = p3.universeId, placeId = placeId })
+		
+		if var1 ~= nil then
+			getVersionNote(placeVersionHistoryModule.getPlaceVersionHistoryStore(), placeId, rollbackTargetVersionNumber, 3):timeout(buildAgentRollbackNoteTimeoutSeconds):catch(function(p4)
+				-- upvalues: debug (copy), placeId (ref), rollbackTargetVersionNumber (ref), httpService (copy)
+				local var3
+				local log = debug.log
+				local var4 = "warn"
+				local var5 = "agent feedback revert source note load failed"
+				local t = {
+					placeId = placeId,
+					restoredVersion = rollbackTargetVersionNumber
+				}
+				
+				if typeof(p4) == "table" then
+					local ok, status = pcall(function()
+						-- upvalues: httpService (copy), p4 (ref)
+						return httpService:JSONEncode(p4)
+					end)
+					var3 = if ok then status else tostring(p4)
+				end
+				t.error = var3
+				t.rawError = p4
+				log(var4, var5, t)
+				
+				return nil
+			end):andThen(function(p4)
+				-- upvalues: publishedVersionNumber (ref), var1 (ref), rollbackTargetVersionNumber (ref)
+				publishedVersionNumber.setRequestData(var1, {
+					versionNumber = rollbackTargetVersionNumber,
+					noteTitle = if p4 == nil then nil else p4.title,
+					noteDescription = if p4 == nil then nil else p4.description
+				})
+			end):catch(function(p4)
+				-- upvalues: debug (copy), placeId (ref), rollbackTargetVersionNumber (ref), httpService (copy), publishedVersionNumber (ref), var1 (ref)
+				local var3
+				local log = debug.log
+				local var4 = "warn"
+				local var5 = "agent feedback revert request preparation failed"
+				local t = {
+					placeId = placeId,
+					restoredVersion = rollbackTargetVersionNumber
+				}
+				
+				if typeof(p4) == "table" then
+					local ok, status = pcall(function()
+						-- upvalues: httpService (copy), p4 (ref)
+						return httpService:JSONEncode(p4)
+					end)
+					var3 = if ok then status else tostring(p4)
+				end
+				t.error = var3
+				t.rawError = p4
+				log(var4, var5, t)
+				publishedVersionNumber.failRequest(var1)
+			end)
+		end
+		return var2:catch(function(p4)
+			-- upvalues: debug (copy), placeId (ref), rollbackTargetVersionNumber (ref), httpService (copy)
+			local var3
+			local log = debug.log
+			local var4 = "warn"
+			local var5 = "agent feedback revert request failed"
+			local t = {
+				placeId = placeId,
+				versionToRollback = rollbackTargetVersionNumber
+			}
+			
+			if typeof(p4) == "table" then
+				local ok, status = pcall(function()
+					-- upvalues: httpService (copy), p4 (ref)
+					return httpService:JSONEncode(p4)
+				end)
+				var3 = if ok then status else tostring(p4)
+			end
+			t.error = var3
+			t.rawError = p4
+			log(var4, var5, t)
+			error(p4)
+		end)
+	end else nil,
 	rollbackPublishedVersion = function(p3, p4)
-		-- upvalues: debug (ref), placeVersionHistoryModule (ref), getVersionNote (ref), httpService (ref), rollbackPlaceWithRetryModule (ref), fFlagEnableTeamTestLua (ref), fFlagBuildNoPublishOnRevertModule (ref), fFlagisPublishOnBuildRevertModule (ref)
+		-- upvalues: debug (ref), placeVersionHistoryModule (ref), getVersionNote (ref), httpService (ref), rollbackPlaceWithRetryModule (ref), fFlagEnableTeamTestLua (ref), fFlagisPublishOnBuildRevertModule (ref)
 		local rollbackTargetVersionNumber
 		local universeId = p3.universeId
 		local placeId = p3.placeId
@@ -167,7 +267,7 @@ return {
 			
 			return nil
 		end):andThen(function(p5)
-			-- upvalues: debug (copy), placeId (ref), rollbackTargetVersionNumber (ref), rollbackPlaceWithRetryModule (copy), fFlagEnableTeamTestLua (copy), fFlagBuildNoPublishOnRevertModule (copy), fFlagisPublishOnBuildRevertModule (copy)
+			-- upvalues: debug (copy), placeId (ref), rollbackTargetVersionNumber (ref), rollbackPlaceWithRetryModule (copy), fFlagEnableTeamTestLua (copy), fFlagisPublishOnBuildRevertModule (copy)
 			if p5 == nil then
 				debug.log("info", "agent feedback revert note copy skipped", {
 					reason = "source_notes_not_found",
@@ -178,7 +278,7 @@ return {
 			return rollbackPlaceWithRetryModule(placeId, rollbackTargetVersionNumber, {
 				debugSource = "agent feedback revert",
 				note = p5,
-				published = if fFlagEnableTeamTestLua then if fFlagBuildNoPublishOnRevertModule then false else true else fFlagisPublishOnBuildRevertModule
+				published = if fFlagEnableTeamTestLua then false else fFlagisPublishOnBuildRevertModule
 			})
 		end):andThen(function()
 			-- upvalues: p4 (ref)

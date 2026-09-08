@@ -9,13 +9,14 @@ local videoPlaybackCoordinator = videoUtilsModule.VideoPlaybackCoordinator
 local videoPlaybackDetector = videoUtilsModule.VideoPlaybackDetector
 local videoPlayer = videoUtilsModule.VideoPlayer
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
+local fFlagLuaAppMediaGalleryGamepadSupport = require(parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 local fFlagLuaAppGameTileSelectionVideoPlayback = require(parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
 local fFlagMediaGalleryVideoVisiblePercent = require(parent.SharedFlags).FFlagMediaGalleryVideoVisiblePercent
 local getImageUriModule = require(mediaGallery.getImageUri)
 local mediaGalleryConstantsModule = require(mediaGallery.MediaGalleryConstants)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), getImageUriModule (ref), videoPlaybackCoordinator (ref), mediaGalleryConstantsModule (ref), fFlagMediaGalleryVideoVisiblePercent (ref), reactModule (ref), fFlagSduiExperienceDetailsSupport (ref), videoPlayer (ref), videoPlaybackDetector (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), videoPlaybackDetectionMethod (ref)
+	-- upvalues: useTokens (ref), getImageUriModule (ref), videoPlaybackCoordinator (ref), mediaGalleryConstantsModule (ref), fFlagMediaGalleryVideoVisiblePercent (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), reactModule (ref), fFlagSduiExperienceDetailsSupport (ref), videoPlayer (ref), videoPlaybackDetector (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), videoPlaybackDetectionMethod (ref)
 	local var1 = useTokens()
 	local videoId = `rbxassetid://{p1.videoId}`
 	local var2 = getImageUriModule(p1.thumbnail or "")
@@ -27,17 +28,16 @@ return reactModule.memo(function(p1)
 	local isFullscreen = p1.isFullscreen
 	local var4 = (p1.videoDwellTimeHundredthsSec or mediaGalleryConstantsModule.VIDEO_DWELL_TIME_HUNDREDTHS_SEC) / 100
 	local videoVisiblePercent = p1.videoVisiblePercent or (if fFlagMediaGalleryVideoVisiblePercent then mediaGalleryConstantsModule.VIDEO_PLAYBACK_VISIBLE_PERCENT else mediaGalleryConstantsModule.VIDEO_VISIBLE_PERCENT)
-	local _ = "media_gallery_item_%*_video_%*%*"
-	local _ = p1.itemIndex or "0"
-	local _ = p1.videoId or "0"
-	local _ = if isFullscreen then "_fullscreen" else ""
-	local var5 = if var3 then p1.toggleVideoPlaybackSignal else nil
-	local var6 = if var3 then p1.toggleMuteSignal else nil
-	local var7 = if var3 then p1.onVideoEnded else nil
-	local var8 = if var3 then p1.onVideoProgressChanged else nil
-	local var9 = if var3 then p1.onMutedChanged else nil
-	local var10, var11 = reactModule.useState(false)
-	local var12 = reactModule.useRef(nil)
+	local var5 = `media_gallery_item_{p1.itemIndex or "0"}_video_{p1.videoId or "0"}{if isFullscreen then "_fullscreen" else ""}`
+	local var6 = if var3 then p1.toggleVideoPlaybackSignal else nil
+	local var7 = if var3 then p1.toggleMuteSignal else nil
+	local var8 = if var3 then p1.onVideoEnded else nil
+	local var9 = if var3 then p1.onVideoProgressChanged else nil
+	local var10 = if var3 then p1.onMutedChanged else nil
+	local var11 = if fFlagLuaAppMediaGalleryGamepadSupport and var3 then p1.onPlayingChanged else nil
+	local var12 = if fFlagLuaAppMediaGalleryGamepadSupport and var3 then p1.onVideoReadyChanged else nil
+	local var13, var14 = reactModule.useState(false)
+	local var15 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
 		-- upvalues: var3 (ref), setIsVideoActive (ref)
 		if var3 and setIsVideoActive then
@@ -56,13 +56,13 @@ return reactModule.memo(function(p1)
 		BorderSizePixel = 0,
 		Size = p1.Size,
 		ZIndex = p1.ZIndex,
-		ref = var12
+		ref = var15
 	}, {
 		VideoPlayer = reactModule.createElement(videoPlayer, {
 			showMuteButton = true,
 			video = videoId,
 			thumbnail = var2,
-			shouldStartPlayback = var10,
+			shouldStartPlayback = var13,
 			muted = p1.muted ~= nil or p1.muted,
 			looped = if p1.looped ~= nil then false else p1.looped,
 			Size = UDim2.fromScale(1, 1),
@@ -94,22 +94,24 @@ return reactModule.memo(function(p1)
 				videoAnalytics,
 				videoPlaybackCoordinator_1.currentPlaybackSessionId
 			}),
-			onVideoProgressChanged = var8,
-			onVideoEnded = var7,
-			toggleVideoPlaybackSignal = var5,
-			toggleMuteSignal = var6,
-			onMutedChanged = var9
+			onVideoProgressChanged = var9,
+			onVideoEnded = var8,
+			toggleVideoPlaybackSignal = var6,
+			toggleMuteSignal = var7,
+			onMutedChanged = var10,
+			onPlayingChanged = var11,
+			onVideoLoadedChanged = var12
 		}),
 		VideoPlaybackDetector = reactModule.createElement(videoPlaybackDetector, {
 			isVideoEligible = true,
-			videoKey = u207,
+			videoKey = var5,
 			itemIndex = p1.itemIndex,
-			itemFrameRef = var12,
+			itemFrameRef = var15,
 			isItemOccluded = p1.isMediaGalleryOccluded,
 			playbackDetectionMethod = if fFlagLuaAppGameTileSelectionVideoPlayback and (p1.autoplay ~= nil or p1.autoplay) then videoPlaybackDetectionMethod.Viewport else nil,
 			autoplay = if fFlagLuaAppGameTileSelectionVideoPlayback then nil else p1.autoplay ~= nil or p1.autoplay,
 			videoPlaybackCoordinator = videoPlaybackCoordinator_1,
-			onPlaybackChange = var11,
+			onPlaybackChange = var14,
 			videoDwellTimeInSec = var4,
 			videoVisiblePercent = videoVisiblePercent,
 			videoAnalytics = videoAnalytics

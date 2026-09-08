@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagAXBackgroundsCustomizeHydration) and (require(script.Parent.FFlagAXCatalogBackgroundsSupport) and (require(script.Parent.FFlagAXBackgroundsEndTryOnOnSelect) and (require(script.Parent.FFlagAXSlotsScrollAwayOnlyWithSlots) and game:DefineFastFlag("AXBackgroundsYouMayAlsoLike", false))))

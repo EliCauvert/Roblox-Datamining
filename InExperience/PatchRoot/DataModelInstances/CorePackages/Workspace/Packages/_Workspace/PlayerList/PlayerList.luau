@@ -17,6 +17,7 @@ return {
 		FFlagPlayerListUseFocusNavHook = fFlagPlayerListUseFocusNavHookModule,
 		FFlagPlayerListDropDownShowPlatformName = require(script.Flags.FFlagPlayerListDropDownShowPlatformName),
 		FFlagPlayerListFoundationSubscriptionIcon = require(script.Flags.FFlagPlayerListFoundationSubscriptionIcon),
+		FFlagPlayerListFixPlatformLeaderboardSizing = require(script.Flags.FFlagPlayerListFixPlatformLeaderboardSizing),
 		FFlagPlayerListReskin = require(script.Flags.FFlagPlayerListReskin),
 		FFlagPlayerListTwoTabs = require(script.Flags.FFlagPlayerListTwoTabs),
 		FFlagPlayerListTwoTabsOnLegacy = require(script.Flags.FFlagPlayerListTwoTabsOnLegacy),

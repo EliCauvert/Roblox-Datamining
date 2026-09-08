@@ -2,7 +2,6 @@
 local sharedFlagsModule = require(profilePlatform.Parent.SharedFlags)
 local enumsModule = require(profilePlatform.Common.Enums)
 local profileTypes = enumsModule.ProfileTypes
-local fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule = require(profilePlatform.Flags.FFlagProfilePlatformUpdateUXForNonSocialCommunities)
 local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
 local fFlagProfilePlatformEditBackgroundMenuItemModule = require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
 local fFlagProfilePlatformEnableEditLookModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditLook)
@@ -11,7 +10,10 @@ local fFlagEnablePlatformProfileContextualMenuOption = sharedFlagsModule.FFlagEn
 local fFlagProfilePlatformEnableCurrencyTransfer = sharedFlagsModule.FFlagProfilePlatformEnableCurrencyTransfer
 local fFlagProfilePlatformEnableTradeItemsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
 local fFlagProfilePlatformAddTC = sharedFlagsModule.FFlagProfilePlatformAddTC
+local fFlagFixTFLinksVRGatingModule = require(profilePlatform.Flags.FFlagFixTFLinksVRGating)
 local fFlagPendingIncomingTrustedConnectionModule = require(profilePlatform.Flags.FFlagPendingIncomingTrustedConnection)
+local fFlagProfilePlatformEnableUnlockChatModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableUnlockChat)
+local fFlagProfilePlatformEnableUserFollowModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableUserFollow)
 local list = {
 	enumsModule.ProfileActions.AddFriend,
 	enumsModule.ProfileActions.CannotAddFriend,
@@ -28,7 +30,10 @@ local list = {
 	enumsModule.ProfileActions.RemoveTrustedConnection
 }
 
-if require(profilePlatform.Flags.FFlagProfilePlatformEnableUnlockChat) then
+if sharedFlagsModule.FFlagFriendsCallingClientGate_DEV then
+	table.insert(list, enumsModule.ProfileActions.Call)
+end
+if fFlagProfilePlatformEnableUnlockChatModule then
 	table.insert(list, enumsModule.ProfileActions.UnlockChat)
 end
 if fFlagProfilePlatformEnableEditAppearanceMenuModule then
@@ -54,8 +59,11 @@ if fFlagProfilePlatformAddTC then
 	table.insert(list, enumsModule.ProfileActions.AddIncomingTrustedConnection)
 	table.insert(list, enumsModule.ProfileActions.PendingTrustedConnection)
 end
-table.insert(list, enumsModule.ProfileActions.AddTrustedConnectionViaLink)
-
+if not fFlagFixTFLinksVRGatingModule then
+	table.insert(list, enumsModule.ProfileActions.AddTrustedConnectionViaLink)
+elseif fFlagProfilePlatformAddTC then
+	table.insert(list, enumsModule.ProfileActions.AddTrustedConnectionViaLink)
+end
 if fFlagPendingIncomingTrustedConnectionModule then
 	table.insert(list, enumsModule.ProfileActions.PendingIncomingTrustedConnection)
 end
@@ -64,6 +72,10 @@ if fFlagProfilePlatformNewProfileHeader then
 end
 if fFlagEnablePlatformProfileContextualMenuOption then
 	table.insert(list, enumsModule.ProfileActions.ViewPlatformProfile)
+end
+if fFlagProfilePlatformEnableUserFollowModule then
+	table.insert(list, enumsModule.ProfileActions.Follow)
+	table.insert(list, enumsModule.ProfileActions.Unfollow)
 end
 local t = {}
 table.insert(t, enumsModule.ProfileActions.CopyLink)
@@ -74,12 +86,10 @@ table.insert(t, enumsModule.ProfileActions.LeaveCommunity)
 table.insert(t, enumsModule.ProfileActions.MakePrimaryCommunity)
 table.insert(t, enumsModule.ProfileActions.RemovePrimaryCommunity)
 table.insert(t, enumsModule.ProfileActions.Report)
+table.insert(t, enumsModule.ProfileActions.ViewFullProfile)
+table.insert(t, enumsModule.ProfileActions.Follow)
+table.insert(t, enumsModule.ProfileActions.Unfollow)
 
-if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule then
-	table.insert(t, enumsModule.ProfileActions.ViewFullProfile)
-	table.insert(t, enumsModule.ProfileActions.Follow)
-	table.insert(t, enumsModule.ProfileActions.Unfollow)
-end
 return {
 	[profileTypes.User] = list,
 	[profileTypes.Community] = t,

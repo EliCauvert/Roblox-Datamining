@@ -26,14 +26,30 @@ local _ = nil
 local var6, var7 = signalsModule.createSignal(nil)
 local var8 = var6
 local var9 = var7
+local t = {}
+local var10 = 0
+
+local _ = function(p1)
+	-- upvalues: var10 (write), t (ref)
+	var10 += 1
+	local var11 = var10
+	t[p1] = var11
+	task.delay(5, function()
+		-- upvalues: t (copy), p1 (ref), var11 (ref)
+		if t[p1] == var11 then
+			t[p1] = nil
+		end
+	end)
+end
 
 local function setMenuData(value)
-	-- upvalues: var4 (write), var9 (write), var5 (write), var1 (write)
-	local var10 = value ~= nil and var4(false) == nil
+	-- upvalues: var4 (write), var9 (write), t (ref), var5 (write), var1 (write)
+	local var11 = value ~= nil and var4(false) == nil
 	var9(nil)
+	table.clear(t)
 	var5(value)
 	
-	if var10 then
+	if var11 then
 		if var1 == nil then
 			var1 = require(script.Parent.PlayerListContextMenuTelemetry)
 		end
@@ -41,63 +57,56 @@ local function setMenuData(value)
 	end
 end
 
-local var10 = nil
 local var11 = nil
-local var12 = false
-local var13 = 0
+local var12 = nil
+local var13 = false
+local var14 = 0
 
 local function closeContextMenu()
-	-- upvalues: var4 (write), var13 (write), var9 (write), var1 (write), var5 (write), var11 (write)
-	local var14 = var4(false)
-	var13 += 1
+	-- upvalues: var4 (write), var14 (write), var9 (write), var1 (write), t (ref), var5 (write), var12 (write)
+	local var15 = var4(false)
+	var14 += 1
 	var9(nil)
 	
-	if var14 == nil then return end
+	if var15 == nil then return end
 	if var1 == nil then
 		var1 = require(script.Parent.PlayerListContextMenuTelemetry)
 	end
-	var1.logAction("menu_close", var14.telemetry)
+	var1.logAction("menu_close", var15.telemetry)
 	var9(nil)
+	table.clear(t)
 	var5(nil)
 	
-	if var11 then
-		var11()
+	if var12 then
+		var12()
 	end
 end
 
 local function setOnDismiss(value)
-	-- upvalues: var11 (write)
-	var11 = value
-end
-
-local function setSuppressNextDismissRestore(value)
 	-- upvalues: var12 (write)
 	var12 = value
 end
 
+local function setSuppressNextDismissRestore(value)
+	-- upvalues: var13 (write)
+	var13 = value
+end
+
 local function takeSuppressNextDismissRestore()
-	-- upvalues: var12 (write)
-	var12 = false
+	-- upvalues: var13 (write)
+	var13 = false
 	
-	return var12
+	return var13
 end
 
 local function setMenuDataIfCurrent(value, p1)
-	-- upvalues: var13 (write), var4 (write), var9 (write), var5 (write), var1 (write)
-	if p1 ~= var13 then
-		return false
+	-- upvalues: var14 (write), setMenuData (ref)
+	if p1 == var14 then
+		setMenuData(value)
+		
+		return true
 	end
-	local var14 = value ~= nil and var4(false) == nil
-	var9(nil)
-	var5(value)
-	
-	if var14 then
-		if var1 == nil then
-			var1 = require(script.Parent.PlayerListContextMenuTelemetry)
-		end
-		var1.logAction("menu_open", value.telemetry)
-	end
-	return true
+	return false
 end
 
 local function buildMenuHeader(p1)
@@ -140,15 +149,31 @@ local function fallbackMenuData(p1, p2)
 	}
 end
 
+local function openContextMenu(p1, p2, p3)
+	-- upvalues: var14 (write), var9 (write), var11 (write), setMenuData (ref), fallbackMenuData (ref)
+	var14 += 1
+	var9(nil)
+	
+	if var11 then
+		var11(p1, p2, var14, p3)
+		
+		return
+	end
+	setMenuData(fallbackMenuData(p1, p2))
+end
+
+local var15 = nil
+local var16 = nil
+
 local _ = function(p1)
 	-- upvalues: var4 (write), var1 (write)
 	if p1.telemetryAction ~= nil then
-		local var14 = var4(false)
+		local var17 = var4(false)
 		
 		if var1 == nil then
 			var1 = require(script.Parent.PlayerListContextMenuTelemetry)
 		end
-		var1.logAction(p1.telemetryAction, var14 and var14.telemetry)
+		var1.logAction(p1.telemetryAction, var17 and var17.telemetry)
 	end
 end
 
@@ -156,61 +181,83 @@ return {
 	getMenuData = var4,
 	setMenuData = setMenuData,
 	setMenuDataIfCurrent = setMenuDataIfCurrent,
-	openContextMenu = function(p1, p2)
-		-- upvalues: var13 (write), var9 (write), var10 (write), fallbackMenuData (ref), var4 (write), var5 (write), var1 (write)
-		var13 += 1
-		var9(nil)
+	openContextMenu = openContextMenu,
+	toggleContextMenu = function(p1, p2, p3)
+		-- upvalues: var4 (write), closeContextMenu (ref), var16 (write), var15 (write), var14 (write), var9 (write), var11 (write), setMenuData (ref), fallbackMenuData (ref)
+		local var17 = var4(false)
 		
-		if var10 then
-			var10(p1, p2, var13)
+		if var17 ~= nil and var17.player == p1 then
+			closeContextMenu()
 			
 			return
 		end
-		local var14 = fallbackMenuData(p1, p2)
-		local var15 = var14 ~= nil and var4(false) == nil
+		var16 = p1
+		var15 = p3
+		var14 += 1
 		var9(nil)
-		var5(var14)
 		
-		if var15 then
-			if var1 == nil then
-				var1 = require(script.Parent.PlayerListContextMenuTelemetry)
-			end
-			var1.logAction("menu_open", var14.telemetry)
+		if var11 then
+			var11(p1, p2, var14, nil)
+			
+			return
 		end
+		setMenuData(fallbackMenuData(p1, p2))
+	end,
+	getAnchorRow = function()
+		-- upvalues: var4 (write), var16 (write), var15 (write)
+		local var17 = var4(false)
+		
+		return if var17 == nil or var17.player ~= var16 then nil else var15
 	end,
 	closeContextMenu = closeContextMenu,
 	setContextMenuOpener = function(value)
-		-- upvalues: var10 (write)
-		var10 = value
+		-- upvalues: var11 (write)
+		var11 = value
 	end,
 	setOnDismiss = setOnDismiss,
 	setSuppressNextDismissRestore = setSuppressNextDismissRestore,
 	takeSuppressNextDismissRestore = takeSuppressNextDismissRestore,
 	buildMenuHeader = buildMenuHeader,
 	reset = function()
-		-- upvalues: var13 (write), var9 (write), var5 (write), var10 (write), var11 (write), var12 (write)
-		var13 += 1
+		-- upvalues: var14 (write), var9 (write), t (ref), var5 (write), var11 (write), var12 (write), var13 (write), var15 (write), var16 (write)
+		var14 += 1
 		var9(nil)
+		table.clear(t)
 		var5(nil)
 		var9(nil)
-		var10 = nil
 		var11 = nil
-		var12 = false
+		var12 = nil
+		var13 = false
+		var15 = nil
+		var16 = nil
 	end,
 	getPendingConfirmKey = var8,
 	activateMenuItem = function(p1)
-		-- upvalues: var8 (write), var9 (write), var4 (write), var1 (write)
+		-- upvalues: t (ref), var8 (write), var10 (write), var9 (write), var4 (write), var1 (write)
+		if p1.onceGroup ~= nil and t[p1.onceGroup] ~= nil then return end
 		if p1.requiresConfirm then
 			if var8() == p1.key then
+				if p1.onceGroup ~= nil then
+					local onceGroup = p1.onceGroup
+					var10 += 1
+					local var17 = var10
+					t[onceGroup] = var17
+					task.delay(5, function()
+						-- upvalues: t (copy), onceGroup (ref), var17 (ref)
+						if t[onceGroup] == var17 then
+							t[onceGroup] = nil
+						end
+					end)
+				end
 				var9(nil)
 				
 				if p1.telemetryAction ~= nil then
-					local var14 = var4(false)
+					local var18 = var4(false)
 					
 					if var1 == nil then
 						var1 = require(script.Parent.PlayerListContextMenuTelemetry)
 					end
-					var1.logAction(p1.telemetryAction, var14 and var14.telemetry)
+					var1.logAction(p1.telemetryAction, var18 and var18.telemetry)
 				end
 				if p1.onActivated then
 					p1.onActivated()
@@ -224,13 +271,25 @@ return {
 		elseif var8() ~= nil then
 			var9(nil)
 		end
+		if p1.onceGroup ~= nil then
+			local onceGroup = p1.onceGroup
+			var10 += 1
+			local var19 = var10
+			t[onceGroup] = var19
+			task.delay(5, function()
+				-- upvalues: t (copy), onceGroup (ref), var19 (ref)
+				if t[onceGroup] == var19 then
+					t[onceGroup] = nil
+				end
+			end)
+		end
 		if p1.telemetryAction ~= nil then
-			local var15 = var4(false)
+			local var20 = var4(false)
 			
 			if var1 == nil then
 				var1 = require(script.Parent.PlayerListContextMenuTelemetry)
 			end
-			var1.logAction(p1.telemetryAction, var15 and var15.telemetry)
+			var1.logAction(p1.telemetryAction, var20 and var20.telemetry)
 		end
 		if p1.onActivated then
 			p1.onActivated()

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXPlusExclusiveBackgroundTryOn", false) and require(script.Parent.FFlagAXBackgroundGeneration)

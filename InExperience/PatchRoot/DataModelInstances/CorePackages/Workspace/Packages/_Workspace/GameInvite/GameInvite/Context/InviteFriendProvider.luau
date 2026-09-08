@@ -9,6 +9,8 @@ local inviteFriendContext = friendsMenuModule.InviteFriendContext
 local inviteStatus = friendsMenuModule.InviteStatus
 local gameInviteDependenciesModule = require(parent.GameInviteDependencies)
 local gameInviteAnalyticsManagerModule = require(parent.analytics.GameInviteAnalyticsManager)
+local fFlagGameInviteSpaceSendsModule = require(parent.Flags.FFlagGameInviteSpaceSends)
+local spacedSenderModule = require(parent.utils.spacedSender)
 local throttle = require(parent_1.NotificationsCommon).Throttle
 local receivedUserInviteStatusModule = require(actions.ReceivedUserInviteStatus)
 local networkImpl = gameInviteDependenciesModule.networkImpl
@@ -22,7 +24,7 @@ local fFlagUseSignalsForGameInvitesStatus = sharedFlagsModule.FFlagUseSignalsFor
 local var1 = if fFlagUseSignalsForGameInvitesStatus then require(parent_1.NotificationsCommon).GetGameInvitesStatusStore else nil
 
 return function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), fFlagUseSignalsForGameInvitesStatus (ref), useSignalState (ref), var1 (ref), useSelector (ref), getFFlagFriendsMenuDummyLoadingFriendsFix (ref), inviteStatus (ref), receivedUserInviteStatusModule (ref), gameInviteAnalyticsManagerModule (ref), postSendExperienceInviteModule (ref), networkImpl (ref), playersService (ref), throttle (ref), inviteFriendContext (ref)
+	-- upvalues: useDispatch (ref), reactModule (ref), fFlagUseSignalsForGameInvitesStatus (ref), useSignalState (ref), var1 (ref), useSelector (ref), getFFlagFriendsMenuDummyLoadingFriendsFix (ref), inviteStatus (ref), receivedUserInviteStatusModule (ref), gameInviteAnalyticsManagerModule (ref), postSendExperienceInviteModule (ref), networkImpl (ref), fFlagGameInviteSpaceSendsModule (ref), spacedSenderModule (ref), playersService (ref), throttle (ref), inviteFriendContext (ref)
 	local var2 = useDispatch()
 	local var3 = reactModule.useRef(0)
 	local var4 = if fFlagUseSignalsForGameInvitesStatus then useSignalState(var1(false).getGameInvitesStatus) else useSelector(function(p2)
@@ -32,7 +34,7 @@ return function(p1)
 	return reactModule.createElement(inviteFriendContext.Provider, {
 		value = {
 			inviteSingleFriend = throttle(function(p2, p3)
-				-- upvalues: var3 (ref), getFFlagFriendsMenuDummyLoadingFriendsFix (copy), var4 (ref), inviteStatus (copy), p1 (ref), fFlagUseSignalsForGameInvitesStatus (copy), var1 (copy), var2 (ref), receivedUserInviteStatusModule (copy), gameInviteAnalyticsManagerModule (copy), postSendExperienceInviteModule (copy), networkImpl (copy), playersService (copy)
+				-- upvalues: var3 (ref), getFFlagFriendsMenuDummyLoadingFriendsFix (copy), var4 (ref), inviteStatus (copy), p1 (ref), fFlagUseSignalsForGameInvitesStatus (copy), var1 (copy), var2 (ref), receivedUserInviteStatusModule (copy), gameInviteAnalyticsManagerModule (copy), postSendExperienceInviteModule (copy), networkImpl (copy), fFlagGameInviteSpaceSendsModule (copy), spacedSenderModule (copy), playersService (copy)
 				var3.current = math.max(p3, var3.current)
 				
 				if getFFlagFriendsMenuDummyLoadingFriendsFix() and (not p2 or p2 == "" or (not tonumber(p2) or tonumber(p2) == 0)) then return end
@@ -45,11 +47,9 @@ return function(p1)
 					
 					if fFlagUseSignalsForGameInvitesStatus then
 						var1(false).receivedUserInviteStatus(p2, inviteStatus.Failed)
-						
-						return
+					else
+						var2(receivedUserInviteStatusModule(p2, inviteStatus.Failed))
 					end
-					var2(receivedUserInviteStatusModule(p2, inviteStatus.Failed))
-					
 					return
 				else
 					local var6 = p1.launchData ~= nil and p1.launchData ~= ""
@@ -68,8 +68,11 @@ return function(p1)
 						var1(false).receivedUserInviteStatus(p2, inviteStatus.Pending)
 					else
 						var2(receivedUserInviteStatusModule(p2, inviteStatus.Pending))
-					end
-					postSendExperienceInviteModule(networkImpl, p2, var5, p1.trigger, p1.inviteMessageId, p1.launchData):andThen(function(p4)
+					end;
+					(if fFlagGameInviteSpaceSendsModule then spacedSenderModule.send(function()
+						-- upvalues: postSendExperienceInviteModule (copy), networkImpl (copy), p2 (ref), var5 (write), p1 (copy)
+						return postSendExperienceInviteModule(networkImpl, p2, var5, p1.trigger, p1.inviteMessageId, p1.launchData)
+					end) else postSendExperienceInviteModule(networkImpl, p2, var5, p1.trigger, p1.inviteMessageId, p1.launchData)):andThen(function(p4)
 						-- upvalues: playersService (copy), p2 (ref), gameInviteAnalyticsManagerModule (copy), p1 (copy), fFlagUseSignalsForGameInvitesStatus (copy), var1 (copy), inviteStatus (copy), var2 (copy), receivedUserInviteStatusModule (copy)
 						gameInviteAnalyticsManagerModule:onActivatedInviteSent(playersService.LocalPlayer.UserId, p4.conversationId, { p2 }, p1.rootPlaceId, p1.universeId)
 						

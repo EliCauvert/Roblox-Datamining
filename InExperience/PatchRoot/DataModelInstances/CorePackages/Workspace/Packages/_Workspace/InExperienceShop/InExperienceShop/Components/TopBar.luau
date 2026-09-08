@@ -3,16 +3,21 @@ local parent = inExperienceShop.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
+local fFlagEnableUserOffers = require(parent.SharedFlags).FFlagEnableUserOffers
 local shopOverflowConstantsModule = require(inExperienceShop.Components.Shared.shopOverflowConstants)
 local view = foundationModule.View
 local text = foundationModule.Text
 local iconButton = foundationModule.IconButton
 local menu = foundationModule.Menu
 local iconName = foundationModule.Enums.IconName
+local iconVariant = foundationModule.Enums.IconVariant
 local inputSize = foundationModule.Enums.InputSize
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local popoverSide = foundationModule.Enums.PopoverSide
 local popoverAlign = foundationModule.Enums.PopoverAlign
+local chip = foundationModule.Chip
+local chipSize = foundationModule.Enums.ChipSize
+local chipVariant = foundationModule.Enums.ChipVariant
 local OVERFLOW_ICON = shopOverflowConstantsModule.OVERFLOW_ICON
 local REPORT_ICON = shopOverflowConstantsModule.REPORT_ICON
 local REPORT_MENU_ITEM_ID = shopOverflowConstantsModule.REPORT_MENU_ITEM_ID
@@ -22,7 +27,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), REPORT_MENU_ITEM_ID (ref), REPORT_ICON (ref), reactModule (ref), menu (ref), inputSize (ref), popoverSide (ref), popoverAlign (ref), iconButton (ref), OVERFLOW_ICON (ref), buttonVariant (ref), view (ref), iconName (ref), text (ref)
+	-- upvalues: useLocalization (ref), t (ref), REPORT_MENU_ITEM_ID (ref), REPORT_ICON (ref), reactModule (ref), menu (ref), inputSize (ref), popoverSide (ref), popoverAlign (ref), fFlagEnableUserOffers (ref), iconButton (ref), OVERFLOW_ICON (ref), buttonVariant (ref), view (ref), iconName (ref), text (ref), chip (ref), iconName (ref), iconVariant (ref), chipSize (ref), chipVariant (ref)
 	local var1 = useLocalization(t)
 	local t_1 = {}
 	
@@ -57,10 +62,21 @@ return function(p1)
 		}),
 		Trailing = reactModule.createElement(view, {
 			tag = "row align-y-center gap-small auto-xy",
-			LayoutOrder = 2
+			LayoutOrder = if fFlagEnableUserOffers then 3 else 2
 		}, {
-			Overflow = if p1.isReportingEnabled then reactModule.createElement(menu, {
+			OfferChip = if fFlagEnableUserOffers and p1.showOfferChip then reactModule.createElement(chip, {
 				LayoutOrder = 1,
+				testId = "OfferChip",
+				text = p1.offerChipText,
+				leading = {
+					iconName = if p1.offerChipIcon then iconName[p1.offerChipIcon] else iconName.Tag,
+					iconVariant = iconVariant.Filled
+				},
+				size = chipSize.Small,
+				variant = chipVariant.Standard,
+				onActivated = p1.onOfferChipActivated
+			}) else nil,
+			Overflow = if p1.isReportingEnabled then reactModule.createElement(menu, {
 				testId = "TopBar_OverflowMenu",
 				isOpen = p1.isOverflowMenuOpen,
 				items = t_1,
@@ -68,7 +84,8 @@ return function(p1)
 				side = popoverSide.Top,
 				align = popoverAlign.End,
 				onPressedOutside = p1.onOverflowMenuClosed,
-				onActivated = p1.onMenuItemActivated
+				onActivated = p1.onMenuItemActivated,
+				LayoutOrder = if fFlagEnableUserOffers then 2 else 1
 			}, {
 				Trigger = reactModule.createElement(iconButton, {
 					isCircular = false,
@@ -81,12 +98,12 @@ return function(p1)
 			}) else nil,
 			SearchButton = reactModule.createElement(iconButton, {
 				isCircular = false,
-				LayoutOrder = 2,
 				testId = "SearchButton",
 				icon = iconName.MagnifyingGlass,
 				size = inputSize.Medium,
 				variant = buttonVariant.Utility,
-				onActivated = p1.onSearchOpen
+				onActivated = p1.onSearchOpen,
+				LayoutOrder = if fFlagEnableUserOffers then 3 else 2
 			})
 		})
 	})

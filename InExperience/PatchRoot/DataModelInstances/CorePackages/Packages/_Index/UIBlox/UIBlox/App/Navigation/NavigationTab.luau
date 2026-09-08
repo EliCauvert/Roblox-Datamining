@@ -15,6 +15,7 @@ local isBuilderIcon = foundationModule.Utility.isBuilderIcon
 local inputSize = foundationModule.Enums.InputSize
 local icon = foundationModule.Icon
 local statusIndicator = foundationModule.StatusIndicator
+local view = foundationModule.View
 local migrateBadgeVariantModule = require(parent.Utility.migrateBadgeVariant)
 local vector2 = Vector2.new(1e999, 1e999)
 local t = {
@@ -25,7 +26,7 @@ local t = {
 }
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), reactModule (ref), textService (ref), vector2 (ref), UIBloxConfigModule (ref), isBuilderIcon (ref), icon (ref), inputSize (ref), label (ref), navigationTabLayoutModule (ref), statusIndicator (ref), migrateBadgeVariantModule (ref), stateLayerModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), reactModule (ref), textService (ref), vector2 (ref), UIBloxConfigModule (ref), isBuilderIcon (ref), view (ref), icon (ref), inputSize (ref), label (ref), navigationTabLayoutModule (ref), statusIndicator (ref), migrateBadgeVariantModule (ref), stateLayerModule (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local tokens = useStyleModule().Tokens
 	local var2, var3 = reactModule.useBinding(UDim2.new())
@@ -79,11 +80,13 @@ return reactModule.forwardRef(function(p1, p2)
 				variant = var7.variant
 			end
 		end
-		var5 = if UIBloxConfigModule.addFoundationNavigationTabIcon and name ~= nil then reactModule.createElement(icon, {
-			name = name,
-			size = inputSize.Large,
-			variant = variant,
-			style = var8
+		var5 = if UIBloxConfigModule.addFoundationNavigationTabIcon and name ~= nil then reactModule.createElement(view, { tag = "size-0-0 auto-xy padding-xxsmall" }, {
+			Icon = reactModule.createElement(icon, {
+				name = name,
+				size = inputSize.Large,
+				variant = variant,
+				style = var8
+			})
 		}) else reactModule.createElement(label, {
 			BackgroundTransparency = 1,
 			Size = uDim2,

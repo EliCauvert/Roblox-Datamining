@@ -4,6 +4,7 @@
 		EditAvatar = "editAvatar",
 		EditLook = "editLook",
 		EditProfile = "editProfile",
+		Call = "callAttempt",
 		Chat = "chatAttempt",
 		OpenEditProfilePage = "OpenEditProfilePage",
 		Unfriend = "unfriend",
@@ -27,6 +28,7 @@
 		UnlockChat = "unlockChat"
 	},
 	ContextualMenuButtons = {
+		Call = "contextualMenu_call",
 		Chat = "contextualMenu_chat",
 		CopyLink = "contextualMenu_copyLink",
 		IgnoreFriendRequest = "contextualMenu_ignoreFriendRequest",

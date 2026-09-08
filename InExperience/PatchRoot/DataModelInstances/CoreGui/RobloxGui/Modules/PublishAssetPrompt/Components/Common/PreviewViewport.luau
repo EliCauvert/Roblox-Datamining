@@ -21,6 +21,7 @@ local gamepadUtils = require(corePackagesService.Workspace.Packages.InputUi).Gam
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local interactionFrameModule = require(script.Parent.InteractionFrame)
 local constantsModule = require(script.Parent.Parent.Parent.Constants)
+local makeupPreviewUtilsModule = require(script.Parent.Parent.Parent.MakeupPreviewUtils)
 local images = UIBloxModule.App.ImageSet.Images
 local previewShrink = images["icons/actions/previewShrink"]
 local reset = images["icons/actions/reset"]
@@ -32,7 +33,8 @@ local _ = {
 local previewViewport = roactModule.PureComponent:extend("PreviewViewport")
 previewViewport.validateProps = tModule.strictInterface({
 	asset = tModule.union(tModule.instanceOf("Model"), tModule.instanceIsA("AnimationClip")),
-	closePreviewView = tModule.callback
+	closePreviewView = tModule.callback,
+	isMakeupPreview = tModule.optional(tModule.boolean)
 })
 
 local function _(p1)
@@ -224,15 +226,24 @@ local _ = function(value, p1, p2)
 end
 
 function previewViewport.resetCameraPosition(value)
+	-- upvalues: makeupPreviewUtilsModule (ref)
 	if not value.model then return end
-	value.modelCFrame = value.model:GetModelCFrame()
+	local var1 = nil
+	local var2 = nil
+	
+	if value.props.isMakeupPreview then
+		local headPreviewCameraData, headPreviewCameraData_1 = makeupPreviewUtilsModule.getHeadPreviewCameraData(value.model)
+		var1 = headPreviewCameraData
+		var2 = headPreviewCameraData_1
+	end
+	value.modelCFrame = var1 or value.model:GetModelCFrame()
 	value.initialLookVector = value.modelCFrame.lookVector
 	local humanoidRootPart = value.model:FindFirstChild("HumanoidRootPart")
 	
 	if humanoidRootPart then
 		value.initialLookVector = humanoidRootPart.CFrame.lookVector
 	end
-	value.modelExtentsSize = value.model:GetExtentsSize()
+	value.modelExtentsSize = var2 or value.model:GetExtentsSize()
 	local modelExtentsSize = value.modelExtentsSize
 	value.cameraDistance = math.max(modelExtentsSize.X, modelExtentsSize.Y) / 2 * 3.732050807569 + modelExtentsSize.Z / 2
 	

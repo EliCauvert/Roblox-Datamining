@@ -19,7 +19,7 @@ local fFlagEnableTiltLoadingScreen = require(parent.SharedFlags).FFlagEnableTilt
 local fFlagIncreaseLoadingScreenOrder = require(parent.SharedFlags).FFlagIncreaseLoadingScreenOrder
 local fFlagTiltLoadingScreenConsoleHints = require(parent.SharedFlags).FFlagTiltLoadingScreenConsoleHints
 local fFlagTiltLoadingScreenEnterExitHold = require(parent.SharedFlags).FFlagTiltLoadingScreenEnterExitHold
-local fFlagDebugEnablePioneerUX = require(parent.SharedFlags).FFlagDebugEnablePioneerUX
+local isPioneerLaunch = require(parent.PioneerUtils).isPioneerLaunch
 local contextActionService = game:GetService("ContextActionService")
 local localizationService = game:GetService("LocalizationService")
 local playersService = game:GetService("Players")
@@ -35,7 +35,7 @@ local var2 = motionModule.createState({ reveal = 0 }, {
 local _ = require(script.Parent.Types)
 
 return function(p1)
-	-- upvalues: fFlagEnableTiltLoadingScreen (ref), reactModule (ref), replicatedFirstService (ref), userGameSettingsService (ref), motionModule (ref), var1 (ref), fFlagTiltLoadingScreenConsoleHints (ref), usePreferredInput (ref), responsiveModule (ref), getBuilderIconForKeycode (ref), useTiltLoadingScreenViewModelModule (ref), useScreenSizeModule (ref), useDeviceInsets (ref), useViewportSettledModule (ref), useLoadingScreenAnimationModule (ref), fFlagTiltLoadingScreenEnterExitHold (ref), inExperienceLocalesModule (ref), localizationService (ref), var2 (ref), ANIMATION (ref), shouldHoldForExitModule (ref), playersService (ref), fFlagDebugEnablePioneerUX (ref), contextActionService (ref), fFlagIncreaseLoadingScreenOrder (ref), constantsModule (ref), foundationModule (ref), localizationModule (ref), tiltLoadingScreenViewModule (ref)
+	-- upvalues: fFlagEnableTiltLoadingScreen (ref), reactModule (ref), replicatedFirstService (ref), userGameSettingsService (ref), motionModule (ref), var1 (ref), fFlagTiltLoadingScreenConsoleHints (ref), usePreferredInput (ref), responsiveModule (ref), getBuilderIconForKeycode (ref), useTiltLoadingScreenViewModelModule (ref), useScreenSizeModule (ref), useDeviceInsets (ref), useViewportSettledModule (ref), useLoadingScreenAnimationModule (ref), fFlagTiltLoadingScreenEnterExitHold (ref), inExperienceLocalesModule (ref), localizationService (ref), var2 (ref), ANIMATION (ref), shouldHoldForExitModule (ref), playersService (ref), isPioneerLaunch (ref), contextActionService (ref), fFlagIncreaseLoadingScreenOrder (ref), constantsModule (ref), foundationModule (ref), localizationModule (ref), tiltLoadingScreenViewModule (ref)
 	if not fFlagEnableTiltLoadingScreen then
 		return nil
 	end
@@ -327,8 +327,8 @@ return function(p1)
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: fFlagDebugEnablePioneerUX (copy), p1 (ref), contextActionService (copy), var11 (ref)
-		if fFlagDebugEnablePioneerUX then
+		-- upvalues: isPioneerLaunch (copy), p1 (ref), contextActionService (copy), var11 (ref)
+		if isPioneerLaunch() then
 			return
 		end
 		local contextActionService_1 = p1.contextActionService or contextActionService

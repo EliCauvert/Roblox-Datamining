@@ -9,6 +9,7 @@ local localUserIdStore = require(parent.LocalUserIdStore).LocalUserIdStore
 local requestsModule = require(script.Parent.Requests)
 local _ = require(script.Parent.FriendsRecommendationsStoreTypes)
 local contextTypeModule = require(script.Parent.Enums.ContextType)
+local fFlagAddFriendsPageUseSections = require(parent.SharedFlags).FFlagAddFriendsPageUseSections
 local t = {
 	[contextTypeModule.None] = true,
 	[contextTypeModule.MutualFriends] = true,
@@ -50,33 +51,34 @@ local function normalizeRecommendation(p1)
 end
 
 return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), requestsModule (ref), localUserIdStore (ref), getLocalPlayerUserId (ref), cryoModule (ref), normalizeRecommendation (ref)
-	local var1 = createDataResolverModule({
+	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), requestsModule (ref), localUserIdStore (ref), getLocalPlayerUserId (ref), cryoModule (ref), normalizeRecommendation (ref), fFlagAddFriendsPageUseSections (ref)
+	local var1 = createDataCacheModule()
+	local var2 = createDataResolverModule({
 		supportsMultiGet = false,
-		cache = createDataCacheModule(),
+		cache = var1,
 		fetchFn = function(p1, _)
 			-- upvalues: requestsModule (copy), localUserIdStore (copy), getLocalPlayerUserId (copy), cryoModule (copy), normalizeRecommendation (copy)
-			local var2
+			local var3
 			local getFriendsRecommendations = requestsModule.GetFriendsRecommendations
 			local currentUserId = localUserIdStore.getCurrentUserId(false)
 			
 			if currentUserId == "" then
-				local var3 = getLocalPlayerUserId()
-				var2 = if var3 then tostring(var3) else ""
+				local var4 = getLocalPlayerUserId()
+				var3 = if var4 then tostring(var4) else ""
 			else
-				var2 = currentUserId
+				var3 = currentUserId
 			end
-			return getFriendsRecommendations(var2, p1):andThen(function(p2)
+			return getFriendsRecommendations(var3, p1):andThen(function(p2)
 				-- upvalues: cryoModule (copy), normalizeRecommendation (copy)
-				local var4 = if p2.data then cryoModule.List.map(p2.data, normalizeRecommendation) else nil
+				local var5 = if p2.data then cryoModule.List.map(p2.data, normalizeRecommendation) else nil
 				
-				if var4 then
-					table.sort(var4, function(p3, p4)
+				if var5 then
+					table.sort(var5, function(p3, p4)
 						return (p3.rank or 0) < (p4.rank or 0)
 					end)
 				end
 				return {
-					data = var4,
+					data = var5,
 					recommendationRequestId = p2.recommendationRequestId
 				}
 			end)
@@ -85,20 +87,42 @@ return function()
 	
 	return {
 		getFriendsRecommendations = function(p1, p2)
-			-- upvalues: var1 (ref)
-			return if p2 and p2.skipFetch then var1.getCachedItem(p1) else var1.getAndFetchItem(p1)
+			-- upvalues: var2 (ref), fFlagAddFriendsPageUseSections (copy)
+			if p2 and p2.skipFetch then
+				return var2.getCachedItem(p1)
+			elseif fFlagAddFriendsPageUseSections and p2 and (p2.forceFetch and not var2.isRequestInQueueOrInFlight(p1)) then
+				var2.fetchItem(p1)
+			end
+			return var2.getAndFetchItem(p1)
 		end,
 		refreshFriendsRecommendations = function(p1)
-			-- upvalues: var1 (ref)
-			return var1.fetchItem(p1)
+			-- upvalues: var2 (ref)
+			return var2.fetchItem(p1)
+		end,
+		removeFriendsRecommendationByUserId = function(p1, p2)
+			-- upvalues: var2 (ref), var1 (ref)
+			local var3 = var2.getCachedItem(p1).data(false)
+			
+			if var3 == nil or var3.data == nil then return end
+			local t = {}
+			
+			for i, v in var3.data do
+				if v.id ~= p2 then
+					table.insert(t, v)
+				end
+			end
+			var1.replaceItem(p1, {
+				data = t,
+				recommendationRequestId = var3.recommendationRequestId
+			})
 		end,
 		clear = function()
-			-- upvalues: var1 (ref)
-			var1.clear()
+			-- upvalues: var2 (ref)
+			var2.clear()
 		end,
 		dispose = function()
-			-- upvalues: var1 (ref)
-			var1.dispose()
+			-- upvalues: var2 (ref)
+			var2.dispose()
 		end
 	}
 end

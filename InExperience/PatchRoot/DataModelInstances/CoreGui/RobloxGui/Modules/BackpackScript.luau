@@ -14,6 +14,7 @@ local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.Ro
 local responsiveModule = require(corePackagesService.Workspace.Packages.Responsive)
 local fFlagBackpackResponsiveUnits = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagBackpackResponsiveUnits
 local enableHotbarHide = game:DefineFastFlag("EnableHotbarHide", false)
+local fFlagStudioDeviceSimVRSwitchFixes = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagStudioDeviceSimVRSwitchFixes
 local SAToolEquipLuauFlag = game:DefineFastFlag("SAToolEquipLuauFlag", false)
 
 local function _()
@@ -1346,9 +1347,13 @@ function gamepadDisconnected()
 end
 
 function gamepadConnected()
-	-- upvalues: VRService (ref), var27 (write), guiService (ref), var10 (write), var21 (write), var24 (write), var8 (write), contextActionService (ref), var13 (write)
+	-- upvalues: VRService (ref), var27 (write), fFlagStudioDeviceSimVRSwitchFixes (ref), guiService (ref), var10 (write), var21 (write), var24 (write), var8 (write), contextActionService (ref), var13 (write)
 	if not VRService.VREnabled then
 		var27 = true
+		
+		if fFlagStudioDeviceSimVRSwitchFixes then
+			guiService:RemoveSelectionGroup("RBXBackpackSelection")
+		end
 		guiService:AddSelectionParent("RBXBackpackSelection", var10)
 		
 		if var21 >= 1 and var24 and not var8 then

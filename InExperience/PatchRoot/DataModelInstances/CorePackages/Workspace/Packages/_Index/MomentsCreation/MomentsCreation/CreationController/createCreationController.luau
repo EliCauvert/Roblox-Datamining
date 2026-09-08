@@ -15,6 +15,7 @@ local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalytics
 local makeDefaultTextOverlayEditModule = require(momentsCreation.Utils.makeDefaultTextOverlayEdit)
 local getFFlagMomentsCreationPersistEditSessionModule = require(momentsCreation.Flags.GetFFlagMomentsCreationPersistEditSession)
 local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
+local getFFlagMomentsGenerateTextInTextOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsGenerateTextInTextOverlay)
 local momentsDraftStorageModule = require(momentsCreation.Storage.MomentsDraftStorage)
 local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
 local momentsCommonModule = require(parent.MomentsCommon)
@@ -31,7 +32,7 @@ local createComputed = signalsModule.createComputed
 local createSignal = signalsModule.createSignal
 
 return function(p1)
-	-- upvalues: creationToolRegistryModule (ref), defaultCreationToolsModule (ref), getFFlagMomentsAnalyticsProducerPrereqs (ref), sessionManager (ref), funnelEventNames (ref), getFFlagMomentsCreationPersistEditSessionModule (ref), createSignal (ref), createComputed (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSAudioOverlayModule (ref), createCapturePreviewControllerModule (ref), createTTSAudioManagerModule (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), creationFlowStateModule (ref), getFFlagMomentsCreationSaveDraft (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), fFlagMomentsContentStatsTelemetry (ref), createEditSessionModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), dialogTypeModule (ref), makeDefaultTextOverlayEditModule (ref)
+	-- upvalues: creationToolRegistryModule (ref), defaultCreationToolsModule (ref), getFFlagMomentsAnalyticsProducerPrereqs (ref), sessionManager (ref), funnelEventNames (ref), getFFlagMomentsCreationPersistEditSessionModule (ref), createSignal (ref), createComputed (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSAudioOverlayModule (ref), createCapturePreviewControllerModule (ref), createTTSAudioManagerModule (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), creationFlowStateModule (ref), getFFlagMomentsCreationSaveDraft (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), fFlagMomentsContentStatsTelemetry (ref), createEditSessionModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), dialogTypeModule (ref), makeDefaultTextOverlayEditModule (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref)
 	local store = p1.store
 	local host = p1.host or {}
 	local registry = p1.registry or creationToolRegistryModule(defaultCreationToolsModule)
@@ -59,7 +60,7 @@ return function(p1)
 		end
 	end
 	local getIsGenerating, setIsGenerating
-	var1, var23 = createSignal(nil)
+	var1, var24 = createSignal(nil)
 	local var5 = createComputed(function(p2)
 		-- upvalues: store (ref), registry (ref)
 		local t = {}
@@ -197,13 +198,13 @@ return function(p1)
 		end
 	end
 	local function showModal(p5)
-		-- upvalues: var23 (ref)
-		var23(p5)
+		-- upvalues: var24 (ref)
+		var24(p5)
 	end
 	
 	local function dismissModal()
-		-- upvalues: var23 (ref)
-		var23(nil)
+		-- upvalues: var24 (ref)
+		var24(nil)
 	end
 	
 	local function dismissVoiceCoachmark()
@@ -383,7 +384,7 @@ return function(p1)
 	end
 	
 	local function dismiss()
-		-- upvalues: getFFlagEnableMomentTextGeneration (copy), getActiveGeneration (write), setActiveGeneration (write), setIsGenerating (write), host (ref), var23 (ref), p1 (ref), creationFlowStateModule (copy), store (ref), var17 (write), getFFlagMomentsCreationSaveDraft (copy), momentsDraftStorageModule (copy)
+		-- upvalues: getFFlagEnableMomentTextGeneration (copy), getActiveGeneration (write), setActiveGeneration (write), setIsGenerating (write), host (ref), var24 (ref), p1 (ref), creationFlowStateModule (copy), store (ref), var17 (write), getFFlagMomentsCreationSaveDraft (copy), momentsDraftStorageModule (copy)
 		if getFFlagEnableMomentTextGeneration() then
 			local var18 = getActiveGeneration(false)
 			
@@ -396,7 +397,7 @@ return function(p1)
 				host.dismissGenerationToasts()
 			end
 		end
-		var23(nil)
+		var24(nil)
 		store.clearEdits(if p1.excludeGallery then creationFlowStateModule.Preview else creationFlowStateModule.Gallery)
 		
 		if var17 ~= nil then
@@ -453,11 +454,11 @@ return function(p1)
 		getVoiceCoachmarkDismissed = var11,
 		dismissVoiceCoachmark = dismissVoiceCoachmark,
 		publish = function()
-			-- upvalues: store (ref), host (ref), var23 (ref), dialogTypeModule (copy), dismissModal (ref), fFlagMomentTextGenerationFilteredSignal (copy), emitGeneratedTextFeedback (ref), getFFlagMomentsAnalyticsProducerPrereqs (copy), sessionManager (copy), funnelEventNames (copy), preview (ref), var5 (ref), cryoModule (copy), makeCreationEventFieldsModule (copy), eventNames (copy), getFFlagEnableMomentTextGeneration (copy), fireAnalyticsEventModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), dismiss (ref)
+			-- upvalues: store (ref), host (ref), var24 (ref), dialogTypeModule (copy), dismissModal (ref), fFlagMomentTextGenerationFilteredSignal (copy), emitGeneratedTextFeedback (ref), getFFlagMomentsAnalyticsProducerPrereqs (copy), sessionManager (copy), funnelEventNames (copy), preview (ref), var5 (ref), cryoModule (copy), makeCreationEventFieldsModule (copy), eventNames (copy), getFFlagEnableMomentTextGeneration (copy), fireAnalyticsEventModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), dismiss (ref)
 			local description = store.getDescription(false)
 			
 			if host.isTextFiltered ~= nil and host.isTextFiltered(description) then
-				var23({
+				var24({
 					modalType = dialogTypeModule.TextFiltered,
 					modalProps = { onConfirm = dismissModal }
 				})
@@ -527,7 +528,7 @@ return function(p1)
 			dismiss()
 		end,
 		generateText = function(p5)
-			-- upvalues: getIsGenerating (write), host (ref), store (ref), getFFlagEnableMomentTextGeneration (copy), setIsGenerating (write), setActiveGeneration (write), fFlagMomentTextGenerationFilteredSignal (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), makeDefaultTextOverlayEditModule (copy)
+			-- upvalues: getIsGenerating (write), host (ref), store (ref), getFFlagEnableMomentTextGeneration (copy), setIsGenerating (write), setActiveGeneration (write), fFlagMomentTextGenerationFilteredSignal (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), makeDefaultTextOverlayEditModule (copy), getFFlagMomentsGenerateTextInTextOverlayModule (copy), getActiveSession (write), var15 (ref)
 			if getIsGenerating(false) then return end
 			if host.generateMomentText == nil then return end
 			local selectedCapture = store.getSelectedCapture(false)
@@ -551,7 +552,7 @@ return function(p1)
 				setActiveGeneration({ promise = var18, capture = selectedCapture })
 			end
 			var18:andThen(function(p6)
-				-- upvalues: getFFlagEnableMomentTextGeneration (copy), setActiveGeneration (copy), fFlagMomentTextGenerationFilteredSignal (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (copy), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), host (copy), setIsGenerating (copy), store (copy), makeDefaultTextOverlayEditModule (copy)
+				-- upvalues: getFFlagEnableMomentTextGeneration (copy), setActiveGeneration (copy), fFlagMomentTextGenerationFilteredSignal (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (copy), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), host (copy), setIsGenerating (copy), store (copy), makeDefaultTextOverlayEditModule (copy), getFFlagMomentsGenerateTextInTextOverlayModule (copy), getActiveSession (copy), var15 (copy)
 				if getFFlagEnableMomentTextGeneration() then
 					setActiveGeneration(nil)
 				end
@@ -592,12 +593,33 @@ return function(p1)
 						var19 = makeDefaultTextOverlayEditModule()
 						var19.text = p6.summary
 					end
+					local cloned
+					local _ = nil
+					
 					if textOverlayEdits == nil or #textOverlayEdits == 0 then
-						store.updateTextOverlayEdits({ var19 })
+						cloned = { var19 }
 					else
-						local cloned = table.clone(textOverlayEdits)
+						cloned = table.clone(textOverlayEdits)
 						cloned[1] = var19
-						store.updateTextOverlayEdits(cloned)
+					end
+					store.updateTextOverlayEdits(cloned)
+					
+					if getFFlagMomentsGenerateTextInTextOverlayModule() then
+						local var21 = getActiveSession(false)
+						local var22 = var15(false)
+						
+						if var21 ~= nil and var22 ~= nil and var22.kind == "text" then
+							local draft = var21.getDraft(false)
+							local var23 = draft and draft[1]
+							
+							if var23 == nil then
+								var21.update(cloned)
+							else
+								local cloned_1 = table.clone(var23)
+								cloned_1.text = p6.summary
+								var21.update({ cloned_1 })
+							end
+						end
 					end
 					if getFFlagEnableMomentTextGeneration() then
 						store.setGeneratedSummary(p6.summary)
@@ -638,6 +660,10 @@ return function(p1)
 			end)
 		end,
 		getIsGenerating = getIsGenerating,
+		getCanGenerateText = function(_)
+			-- upvalues: host (ref)
+			return host.generateMomentText ~= nil
+		end,
 		submitGeneratedTextFeedback = function(p5)
 			-- upvalues: fFlagMomentTextGenerationFilteredSignal (copy), store (ref), emitGeneratedTextFeedback (ref)
 			if not fFlagMomentTextGenerationFilteredSignal then return end

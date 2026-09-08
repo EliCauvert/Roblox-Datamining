@@ -8,11 +8,10 @@ local unifiedSelectionListStoreModule = require(script.Parent.Store.UnifiedSelec
 local reportAvatarEventCounterV1Module = require(script.Parent.reportAvatarEventCounterV1)
 local constantsModule = require(script.Parent.Constants)
 local unifiedEventLogEnumsModule = require(avatarExperienceAnalytics.UnifiedEventLogEnums)
-local AXAddV1CountersForMISPurchaseSuccess = game:DefineFastFlag("AXAddV1CountersForMISPurchaseSuccess", false)
 local fFlagAXFixSearchPurchaseSurface = require(parent.AvatarExperienceFlags).FFlagAXFixSearchPurchaseSurface
 
 return function(p1, p2)
-	-- upvalues: unifiedSelectionListStoreModule (ref), unifiedEventLogConstantsModule (ref), unifiedEventLoggingUtilsModule (ref), cryoModule (ref), fFlagAXFixSearchPurchaseSurface (ref), AXAddV1CountersForMISPurchaseSuccess (ref), unifiedEventLogEnumsModule (ref), reportAvatarEventCounterV1Module (ref), constantsModule (ref), sendUnifiedEventLogModule (ref)
+	-- upvalues: unifiedSelectionListStoreModule (ref), unifiedEventLogConstantsModule (ref), unifiedEventLoggingUtilsModule (ref), cryoModule (ref), fFlagAXFixSearchPurchaseSurface (ref), unifiedEventLogEnumsModule (ref), reportAvatarEventCounterV1Module (ref), constantsModule (ref), sendUnifiedEventLogModule (ref)
 	local var1
 	local selectionList = unifiedSelectionListStoreModule.getSelectionList()
 	local text = unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemId"
@@ -32,7 +31,7 @@ return function(p1, p2)
 			surface = if fFlagAXFixSearchPurchaseSurface and var2.surface ~= nil then var2.surface else p2
 		})
 		
-		if AXAddV1CountersForMISPurchaseSuccess and var2.action == unifiedEventLogEnumsModule.MarketplaceUnifiedAction.PURCHASE_SUCCESS then
+		if var2.action == unifiedEventLogEnumsModule.MarketplaceUnifiedAction.PURCHASE_SUCCESS then
 			if var2.itemType == unifiedEventLogEnumsModule.MarketplaceUnifiedItemType.ASSET then
 				reportAvatarEventCounterV1Module(constantsModule.AVATAR_EVENT_COUNTER_NAME.AXPurchaseAsset)
 			elseif var2.itemType == unifiedEventLogEnumsModule.MarketplaceUnifiedItemType.BUNDLE then

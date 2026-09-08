@@ -10,6 +10,7 @@ local fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module = require(profilePl
 local fFlagProfilePlatformEnableStore = require(parent.SharedFlags).FFlagProfilePlatformEnableStore
 local fFlagEnablePlatformProfileContextualMenuOption = require(parent.SharedFlags).FFlagEnablePlatformProfileContextualMenuOption
 local fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule = require(profilePlatform.Flags.FFlagProfilePlatformUseCatalogItemOpenedNewFields)
+local fFlagFriendsCallingClientGateDEV = require(parent.SharedFlags).FFlagFriendsCallingClientGate_DEV
 local fFlagProfilePlatformEnableCurrencyTransfer = require(parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
 local fFlagProfilePlatformEnableTradeItemsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
 local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
@@ -107,6 +108,13 @@ return {
 			}
 		}
 	},
+	[eventNamesModule.ContextualMenuButtonCall] = if fFlagFriendsCallingClientGateDEV then {
+		description = "Call button clicked from contextual menu",
+		lastUpdated = { 26, 9, 3 },
+		backendsList = {
+			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+		}
+	} else nil,
 	[eventNamesModule.ContextualMenuButtonChat] = {
 		description = "Chat button clicked",
 		lastUpdated = { 24, 7, 31 },
@@ -212,6 +220,13 @@ return {
 			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
+	[eventNamesModule.CTAButtonCall] = if fFlagFriendsCallingClientGateDEV then {
+		description = "Call CTA button clicked",
+		lastUpdated = { 26, 9, 3 },
+		backendsList = {
+			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+		}
+	} else nil,
 	[eventNamesModule.CTAButtonChat] = {
 		description = "Chat button clicked",
 		lastUpdated = { 24, 7, 31 },
@@ -450,6 +465,13 @@ return {
 	[eventNamesModule.ContextualMenuButtonTradeItems] = if fFlagProfilePlatformEnableTradeItemsModule then {
 		description = "Trade Items button clicked from contextual menu",
 		lastUpdated = { 26, 8, 13 },
+		backendsList = {
+			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+		}
+	} else nil,
+	[eventNamesModule.ContextualMenuTradeItemsImpression] = if fFlagProfilePlatformEnableTradeItemsModule and require(profilePlatform.Flags.FFlagProfileTradeItemsImpressionLogging) then {
+		description = "Trade Items row shown in the profile overflow menu",
+		lastUpdated = { 26, 9, 3 },
 		backendsList = {
 			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
 		}

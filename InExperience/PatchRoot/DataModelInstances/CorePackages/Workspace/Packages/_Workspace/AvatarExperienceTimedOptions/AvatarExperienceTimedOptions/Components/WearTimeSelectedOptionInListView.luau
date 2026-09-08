@@ -7,13 +7,12 @@ local text = foundationModule.Text
 local enums = foundationModule.Enums
 local popoverSide = foundationModule.Enums.PopoverSide
 local popoverAlign = foundationModule.Enums.PopoverAlign
-local fFlagAXFixIaBTimedOptionsPopoverFocus = require(parent.AvatarExperienceFlags).FFlagAXFixIaBTimedOptionsPopoverFocus
 local wearTimeListModule = require(script.Parent.WearTimeList)
 local _ = require(script.Parent.useWearTimeSelectedOptionViewModel)
 local useWearTimePopoverFocusNavigationBindingsModule = require(script.Parent.useWearTimePopoverFocusNavigationBindings)
 
 return function(p1)
-	-- upvalues: reactModule (ref), useWearTimePopoverFocusNavigationBindingsModule (ref), fFlagAXFixIaBTimedOptionsPopoverFocus (ref), view (ref), text (ref), foundationModule (ref), enums (ref), popover (ref), popoverAlign (ref), popoverSide (ref), wearTimeListModule (ref)
+	-- upvalues: reactModule (ref), useWearTimePopoverFocusNavigationBindingsModule (ref), view (ref), text (ref), foundationModule (ref), enums (ref), popover (ref), popoverAlign (ref), popoverSide (ref), wearTimeListModule (ref)
 	local tokens = p1.tokens
 	
 	return reactModule.createElement(view, { tag = "auto-xy" }, {
@@ -81,7 +80,7 @@ return function(p1)
 					ref = useWearTimePopoverFocusNavigationBindingsModule(reactModule.useCallback(function()
 						-- upvalues: p1 (ref)
 						p1.setIsOpen(false)
-					end, { p1.setIsOpen }), p1.isOpen, if fFlagAXFixIaBTimedOptionsPopoverFocus then p1.anchorRef else nil)
+					end, { p1.setIsOpen }), p1.isOpen, p1.anchorRef)
 				}, {
 					WearTimeList = reactModule.createElement(wearTimeListModule, {
 						options = p1.updatedOptions,

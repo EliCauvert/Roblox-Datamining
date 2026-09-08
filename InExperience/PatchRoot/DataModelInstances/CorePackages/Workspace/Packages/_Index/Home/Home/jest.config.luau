@@ -2,6 +2,7 @@
 
 return {
 	displayName = "Home",
+	mockDataModel = true,
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.LogHandler,
 		jestConfigsModule.setupFiles.UIBloxInitializer,

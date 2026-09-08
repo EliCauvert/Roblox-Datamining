@@ -3,6 +3,7 @@ local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
 local signalsReactModule = require(parent.SignalsReact)
 local fFlagConnectionManagementChips = require(parent.SharedFlags).FFlagConnectionManagementChips
+local _ = require(parent.GraphQLServer)
 local var1 = if fFlagConnectionManagementChips then require(parent.DataHydration).TrustedConnections.TrustedConnectionsStore.get() else nil
 
 return function(p1)
