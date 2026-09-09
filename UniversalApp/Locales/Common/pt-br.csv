@@ -870,7 +870,7 @@ CommonUI.Features.Action.Go,Ir
 CommonUI.Features.Action.LessLowercase,menos
 CommonUI.Features.Action.MoreLowercase,mais
 CommonUI.Features.Action.Send,
-CommonUI.Features.Heading.ClassicUnlock,Comemore os 20 anos da Roblox!
+CommonUI.Features.Heading.ClassicUnlock,Comemore os 20 anos da Roblox
 CommonUI.Features.Heading.GameDetails,Detalhes da experiência
 CommonUI.Features.Label.About,Sobre
 CommonUI.Features.Label.AboutUs,Sobre nós
@@ -2345,6 +2345,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,A descrição deve ter 1.
 Feature.Build.Error.DeveloperProductNameRequired,Insira um nome de produto.
 Feature.Build.Error.DeveloperProductNameTooLong,O nome deve ter 50 caracteres ou menos.
 Feature.Build.Error.DeveloperProductPriceInvalid,O preço deve ser um número inteiro de 1 a 1.000.000.000 Robux.
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,Selecione Editar e adicione um preço antes de colocar um produto à venda.
 Feature.Build.Error.DeveloperProductTextModerated,A moderação da Roblox alterou o texto deste produto. Tente usar palavras diferentes.
 Feature.Build.Error.ManagedPricingPartialUpdate,Não foi possível atualizar alguns produtos.
 Feature.Build.Error.MonetizationOptionUpdate,Não foi possível atualizar a opção. Tente novamente.

@@ -780,7 +780,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,{partName}メッシュ�
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,{partName}メッシュ{axis}軸サイズの{currentSize}スタッドが、個々のパーツの最小許容サイズ{minSize}スタッドより小さくなっています。メッシュを拡大してください。
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,アタッチメント{attName}は、{partName}の子孫要素内に正確に1回だけ存在する必要があります。
 Common.UGCValidation.ErrorLabel.NoAttributes,「{RootInstanceName}」（またはその子孫）に属性が含まれています。「{InstanceNameList}」から属性を削除する必要があります。
-Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName}「{InstancePath}}」に無効なプロパティがあります：{ProblematicProperties}。表示されているバイト数の上限を超えています（上限が0の場合、そのプロパティは空である必要があります）。それ以外のプロパティにはNaN/Inf値が含まれているか、デフォルトのサイズ上限を超えています。
+Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName}「{InstancePath}」に無効なプロパティがあります：{ProblematicProperties}。表示されているバイト数の上限を超えています（上限が0の場合、そのプロパティは空である必要があります）。それ以外のプロパティにはNaN/Inf値が含まれているか、デフォルトのサイズ上限を超えています。
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,「{PartName}」のリグアタッチメント「{AttachmentName}」は、このボディパーツの隣接パーツに接続するジョイント境界の近くに配置する必要があります。現在の位置[{CurrentPosition}]は接続面から離れすぎています。[{ClosestValidPosition}]に近づけてください。
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Robloxにアセットをアップロードするには、必ず1件のインスタンスと関連したアップロードタイプを選択する必要があります。
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,このアセットは大きすぎるためアップロードできません（{sizeBytes}バイト。上限は{maxSizeBytes}バイトです）。サイズを小さくしてから、もう一度お試しください。
@@ -870,7 +870,7 @@ CommonUI.Features.Action.Go,実行
 CommonUI.Features.Action.LessLowercase,表示を減らす
 CommonUI.Features.Action.MoreLowercase,その他
 CommonUI.Features.Action.Send,送信
-CommonUI.Features.Heading.ClassicUnlock,Robloxの20周年を祝おう！
+CommonUI.Features.Heading.ClassicUnlock,Robloxの20周年を祝おう
 CommonUI.Features.Heading.GameDetails,バーチャル空間の詳細
 CommonUI.Features.Label.About,情報
 CommonUI.Features.Label.AboutUs,当社について
@@ -2345,6 +2345,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,"詳細は1,000文字以�
 Feature.Build.Error.DeveloperProductNameRequired,製品名を入力してください。
 Feature.Build.Error.DeveloperProductNameTooLong,名前は50文字以下にしてください。
 Feature.Build.Error.DeveloperProductPriceInvalid,"価格は1から1,000,000,000 Robuxまでの整数にしてください。"
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,製品を販売する前に、[編集]を選択して価格を追加してください。
 Feature.Build.Error.DeveloperProductTextModerated,Robloxの内容審査により、この製品のテキストが変更されました。別の表現を試してください。
 Feature.Build.Error.ManagedPricingPartialUpdate,一部の製品を更新できませんでした。
 Feature.Build.Error.MonetizationOptionUpdate,オプションを更新できませんでした。もう一度お試しください。
@@ -2403,7 +2404,7 @@ Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,入力が必要です
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,限定
-Feature.Build.Label.Live,公開中
+Feature.Build.Label.Live,公開済み
 Feature.Build.Label.Loading,読み込み中...
 Feature.Build.Label.ManagedPricing,管理価格設定
 Feature.Build.Label.ManagedPricingMixed,既存の製品で設定が混在
@@ -2425,7 +2426,7 @@ Feature.Build.Label.PricingOptions,価格設定オプション
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,
 Feature.Build.Label.PubliclyUnavailable,公開不可
-Feature.Build.Label.Published,公開済み
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,準備完了
 Feature.Build.Label.RegionalPricing,地域別価格設定

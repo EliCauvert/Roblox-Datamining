@@ -668,6 +668,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,يحتوي CurveAnimat
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,لا يمكن أن تكون أجزاء الجسد في CurveAnimation أسفل {minHeight} من الأزرار أو على بعد أكثر من {maxDistance} من الأزرار عن HumanoidRootPart. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,لا يمكن أن يحتوي العنصران الفرعيان MarkerCurves وAnimationRigData في CurveAnimation على عناصر فرعية
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,يحتوي تسلسل CurveAnimation الهرمي على Scripts أو LocalScripts أو ModuleScripts. يُرجى إزالتها.
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,"تحتوي CurveAnimation على مجلد مكرر لجزء الجسد ""{bodyPartName}"" عند ""{instancePath}"". قد يظهر كل جزء من الجسد مرة واحدة على الأكثر في التسلسل الهرمي للحركة."
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,تعذَّر تحميل بيانات CurveAnimation. قد يكون أصل الحركة غير صالح أو يتعذَّر الوصول إليه.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,تحتوي CurveAnimation على مجلد جزء الجسد {folderName} والذي يتضمن تسلسلًا هرميًا غير صالح (يحتوي على عناصر تابعة غير مسموح بها أو تم إعدادها بشكل غير صحيح)
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"المجلد ""{boneName}"" في CurveAnimation ليس اسم عظم HRD/DRD معترفًا به. يجب أن تكون المجلدات الفرعية للحركة إما أجزاء جسد R15 صالحة أو أسماء عظام معترف بها (مثل HeadBase وSpine وChest وLeftClavicle وRightClavicle وLeftToeBase وRightToeBase أو عظام الأصابع مثل LeftHandIndex1)."
@@ -695,6 +696,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,تحتوي CurveAni
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,في CurveAnimation عند الزمن {time} ثانية، يتحرك جزء الجسد {bodyPart} بسرعة دوران {speed} من الدرجات في الثانية. الحد الأقصى للسرعة هو {maxSpeed} درجة في الثانية. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,في CurveAnimation عند الزمن {time} ثانية، يتحرك جزء الجسد {bodyPart} بسرعة {speed} من الأزرار في الثانية. الحد الأقصى للسرعة هو {maxSpeed} من الأزرار في الثانية. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,يتحرك جزء الجسد {bodyPart} في CurveAnimation مسافة تزيد عن {maxMovement} من الأزرار بين الإطارات. يُرجى إصلاح الحركة.
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,بنية CurveAnimation غير صالحة: {detail}. يُرجى التأكد من أن الحركة تتبع المخطط المتوقع.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,يحتوي CurveAnimation على {count} من العناصر التابعة. الحد الأقصى المسموح به هو {maxAllowed}. يُرجى تقليل عدد العناصر التابعة.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,تحتوي CurveAnimation على Curves بها عدد كبير جدًا من المفاتيح. الحد الأقصى لكل Curve هو {maxAllowed}. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,تحتوي CurveAnimation على أكثر من {maxAllowed} من عناصر MarkerCurve. يُرجى التأكد من عدم وجود أكثر من {maxAllowed} من عناصر MarkerCurve التابعة.
@@ -850,7 +852,7 @@ CommonUI.Features.Action.Go,الذهاب
 CommonUI.Features.Action.LessLowercase,أقل
 CommonUI.Features.Action.MoreLowercase,المزيد
 CommonUI.Features.Action.Send,
-CommonUI.Features.Heading.ClassicUnlock,احتفِل بمرور 20 عامًا على انطلاق منصّة Roblox!
+CommonUI.Features.Heading.ClassicUnlock,احتفِل بمرور 20 عامًا على انطلاق منصّة Roblox
 CommonUI.Features.Heading.GameDetails,تفاصيل التجربة
 CommonUI.Features.Label.About,حول
 CommonUI.Features.Label.AboutUs,نبذة عنا
@@ -1678,6 +1680,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,لقد وصلت إ�
 Feature.Avatar.BackgroundGeneration.Error.Moderation,هذه المطالبة لا تتبع قواعدنا الإرشادية. حاوِل وصف شيء آخر.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,هذه الخلفية لا تتوافق مع معايير مجتمع Roblox، لذا لم تتم إضافتها إلى مقتنياتك. حاول إنشاء خلفية جديدة.
 Feature.Avatar.BackgroundGeneration.Error.System,حدث خطأ ما أثناء إنشاء الخلفية. يُرجى المحاولة مرة أخرى.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,لقد وصلت إلى الحد الأقصى للنشر المُخصص لحسابك.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,لقد وصلت إلى الحد الأقصى للنشر اليومي. حاول مرة أخرى غدًا.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,لقد وصلت إلى الحد الأقصى للنشر في الساعة. حاول مرة أخرى في الساعة التالية.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,لقد وصلت إلى الحد الأقصى للنشر الشهري. حاول مرة أخرى في الشهر المقبل.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,الوصف
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,حصريًا مع اشتراك Plus
@@ -2319,6 +2325,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,يجب أن يتكون ا
 Feature.Build.Error.DeveloperProductNameRequired,أدخل اسم المنتج.
 Feature.Build.Error.DeveloperProductNameTooLong,يجب أن يتكون الاسم من 50 حرفًا أو أقل.
 Feature.Build.Error.DeveloperProductPriceInvalid,"ينبغي أن يكون السعر عددًا صحيحًا من 1 إلى 1,000,000,000 من عملات Robux."
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,"اضغط على ""تحرير"" وأضف سعرًا قبل طرح المنتج للبيع."
 Feature.Build.Error.DeveloperProductTextModerated,تم تغيير نص هذا المنتج من قِبل فريق الإشراف لدى منصّة Roblox. جرّب صياغة مختلفة.
 Feature.Build.Error.ManagedPricingPartialUpdate,تعذَّر تحديث بعض المنتجات.
 Feature.Build.Error.MonetizationOptionUpdate,تعذَّر تحديث الخيار. حاول مرة أخرى.
@@ -2377,7 +2384,7 @@ Feature.Build.Label.InProgress,قيد التقدم
 Feature.Build.Label.InputNeeded,الإدخال مطلوب
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,محدودة
-Feature.Build.Label.Live,مباشر
+Feature.Build.Label.Live,منشورة
 Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,التسعير المُدار
 Feature.Build.Label.ManagedPricingMixed,مختلط عبر المنتجات الحالية
@@ -4077,6 +4084,7 @@ Feature.MusicPlayer.Action.GoToSongDetails,الانتقال إلى تفاصيل 
 Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
+Feature.NotApproved.Action.Pending,
 Feature.NotApproved.Action.ReactivateAccount,إعادة تنشيط حسابي
 Feature.NotApproved.Action.ReportMistake,الإبلاغ عن خطأ
 Feature.NotApproved.Action.RuleConfirmation,أوافق على معرفة القواعد واتباعها.
@@ -4550,7 +4558,7 @@ Feature.Parents.Title.SomethingWentWrong,
 Feature.PlatformRestriction.Action.Continue,
 Feature.PlatformRestriction.Action.Pending,
 Feature.PlatformRestriction.Action.Signout,
-Feature.PlatformRestriction.Content.NeedPermission,لاستخدام منصّة Roblox، تحتاج إلى إذن ولي أمر.
+Feature.PlatformRestriction.Content.NeedPermission,لاستخدام منصّة Roblox، ستحتاج إلى إذن أحد والديك. بمجرد موافقة أحد والديك، سجِّل الخروج ثم سجِّل الدخول مرة أخرى للوصول إلى منصّة Roblox.
 Feature.PlatformRestriction.Title.AskParent,اطلب الإذن من ولي أمرك
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,من البحث

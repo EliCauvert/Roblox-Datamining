@@ -854,7 +854,7 @@ CommonUI.Features.Action.Go,Vai
 CommonUI.Features.Action.LessLowercase,meno
 CommonUI.Features.Action.MoreLowercase,più
 CommonUI.Features.Action.Send,
-CommonUI.Features.Heading.ClassicUnlock,Festeggia i 20 anni di Roblox!
+CommonUI.Features.Heading.ClassicUnlock,Festeggia i 20 anni di Roblox
 CommonUI.Features.Heading.GameDetails,Dettagli dell'esperienza
 CommonUI.Features.Label.About,Info
 CommonUI.Features.Label.AboutUs,Su di noi
@@ -2327,6 +2327,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,La descrizione deve conte
 Feature.Build.Error.DeveloperProductNameRequired,Inserisci un nome per il prodotto.
 Feature.Build.Error.DeveloperProductNameTooLong,Il nome deve contenere 50 caratteri o meno.
 Feature.Build.Error.DeveloperProductPriceInvalid,Il prezzo deve essere un numero intero compreso tra 1 e 1.000.000.000 di Robux.
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,Seleziona Modifica e aggiungi un prezzo prima di pubblicare un annuncio di vendita per un prodotto.
 Feature.Build.Error.DeveloperProductTextModerated,La moderazione di Roblox ha modificato il testo di questo prodotto. Prova una formulazione diversa.
 Feature.Build.Error.ManagedPricingPartialUpdate,Non è stato possibile aggiornare alcuni prodotti.
 Feature.Build.Error.MonetizationOptionUpdate,Non è stato possibile aggiornare l'opzione. Riprova.
@@ -2385,7 +2386,7 @@ Feature.Build.Label.InProgress,In corso
 Feature.Build.Label.InputNeeded,Input necessario
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitata
-Feature.Build.Label.Live,
+Feature.Build.Label.Live,Pubblicato
 Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Prezzi gestiti
 Feature.Build.Label.ManagedPricingMixed,Misti tra i prodotti attuali

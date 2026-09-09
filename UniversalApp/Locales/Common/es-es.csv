@@ -686,6 +686,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation contien
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,"En CurveAnimation, las partes del cuerpo no pueden estar a menos de {minHeight} studs ni a más de {maxDistance} studs de la HumanoidRootPart. Corrige la animación."
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,Los elementos secundarios MarkerCurves y AnimationRigData de CurveAnimation no pueden tener elementos secundarios.
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"La jerarquía de CurveAnimation contiene Scripts, LocalScripts o ModuleScripts. Elimínalos."
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,CurveAnimation contiene una carpeta duplicada de parte del cuerpo “{bodyPartName}” en “{instancePath}”. Cada parte del cuerpo puede aparecer como máximo una vez en la jerarquía de la animación.
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,Error al cargar los datos de CurveAnimation. Es posible que el recurso de animación no sea válido o no se pueda acceder a él.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation contiene la carpeta de parte del cuerpo {folderName} que tiene una jerarquía no válida (tiene elementos secundarios que no están permitidos o que están configurados incorrectamente).
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"La carpeta “{boneName}” en CurveAnimation no es un nombre de hueso HRD/DRD reconocido. Las subcarpetas de animación deben ser partes del cuerpo R15 válidas o nombres de huesos reconocidos (por ejemplo, HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase o huesos de los dedos, como LeftHandIndex1)."
@@ -713,6 +714,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation cont
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"En CurveAnimation, en el segundo {time}, la parte del cuerpo {bodyPart} se mueve a una velocidad de rotación de {speed} grados por segundo. {maxSpeed} es la velocidad máxima en grados por segundo. Corrige la animación."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"En CurveAnimation, en el segundo{time}, la parte del cuerpo {bodyPart} se mueve a una velocidad de {speed} studs por segundo. {maxSpeed} es la velocidad máxima en studs por segundo. Corrige la animación."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,"En CurveAnimation, la parte del cuerpo {bodyPart} se mueve más de {maxMovement} studs entre fotogramas. Corrige la animación."
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,La estructura de CurveAnimation no es válida: {detail}. Asegúrate de que la animación siga el esquema esperado.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation tiene {count} descendientes. El máximo permitido es {maxAllowed}. Reduce el número de descendientes.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation contiene Curves con demasiadas claves. {maxAllowed} es el máximo por Curve. Corrige la animación.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation contiene más de {maxAllowed} MarkerCurve(s). Asegúrate de que no haya más de {maxAllowed} MarkerCurve(s) secundario(s).
@@ -869,7 +871,7 @@ CommonUI.Features.Action.Go,Ir
 CommonUI.Features.Action.LessLowercase,menos
 CommonUI.Features.Action.MoreLowercase,más
 CommonUI.Features.Action.Send,
-CommonUI.Features.Heading.ClassicUnlock,¡Celebra los 20 años de Roblox!
+CommonUI.Features.Heading.ClassicUnlock,Celebra los 20 años de Roblox
 CommonUI.Features.Heading.GameDetails,Detalles de la experiencia
 CommonUI.Features.Label.About,Acerca de Roblox
 CommonUI.Features.Label.AboutUs,Quiénes somos
@@ -1699,6 +1701,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Alcanzaste tu lími
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Esa indicación no cumple con nuestras pautas. Intenta describir otra cosa.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Este fondo no cumple con las Normas de la comunidad de Roblox, por lo que no se añadió a tu inventario. Intenta generar uno nuevo."
 Feature.Avatar.BackgroundGeneration.Error.System,Algo salió mal al generar tu fondo. Inténtalo de nuevo.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,Alcanzaste tu límite de publicaciones de por vida.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,Alcanzaste tu límite diario de publicaciones. Inténtalo de nuevo mañana.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,Alcanzaste tu límite de publicación por hora. Inténtalo de nuevo la próxima hora.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,Alcanzaste tu límite mensual de publicaciones. Inténtalo de nuevo el próximo mes.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Descripción
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exclusivo con Plus
@@ -2398,7 +2404,7 @@ Feature.Build.Label.InProgress,En curso
 Feature.Build.Label.InputNeeded,Se necesita una entrada
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitado
-Feature.Build.Label.Live,En vivo
+Feature.Build.Label.Live,Publicada
 Feature.Build.Label.Loading,Cargando…
 Feature.Build.Label.ManagedPricing,Precios administrados
 Feature.Build.Label.ManagedPricingMixed,Combinado entre los productos actuales
@@ -2420,7 +2426,7 @@ Feature.Build.Label.PricingOptions,Opciones de precios
 Feature.Build.Label.Private,Privada
 Feature.Build.Label.Public,Público
 Feature.Build.Label.PubliclyUnavailable,No disponible públicamente
-Feature.Build.Label.Published,Publicada
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,Comprado
 Feature.Build.Label.Ready,
 Feature.Build.Label.RegionalPricing,Precio regional
@@ -4098,6 +4104,7 @@ Feature.MusicPlayer.Action.GoToSongDetails,Ir a detalles de la canción
 Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,Cerrar cesión
+Feature.NotApproved.Action.Pending,
 Feature.NotApproved.Action.ReactivateAccount,Reactivar mi cuenta
 Feature.NotApproved.Action.ReportMistake,Reportar un error
 Feature.NotApproved.Action.RuleConfirmation,Estoy de acuerdo de que conozco y sigo las normas.
@@ -4571,7 +4578,7 @@ Feature.Parents.Title.SomethingWentWrong,
 Feature.PlatformRestriction.Action.Continue,
 Feature.PlatformRestriction.Action.Pending,
 Feature.PlatformRestriction.Action.Signout,
-Feature.PlatformRestriction.Content.NeedPermission,"Para usar Roblox, necesitas permiso parental."
+Feature.PlatformRestriction.Content.NeedPermission,"Para usar Roblox, necesitas permiso parental. Una vez que tus padres lo aprueben, cierra sesión y luego inicia sesión de nuevo para acceder a Roblox."
 Feature.PlatformRestriction.Title.AskParent,"Pide permiso a tu padre, madre o tutor"
 Feature.PlayerSearchResults.Action.AddFriend,Añadir amistad
 Feature.PlayerSearchResults.Label.FromSearch,Desde Búsqueda

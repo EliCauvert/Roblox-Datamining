@@ -871,7 +871,7 @@ CommonUI.Features.Action.Go,이동
 CommonUI.Features.Action.LessLowercase,간략히 보기
 CommonUI.Features.Action.MoreLowercase,
 CommonUI.Features.Action.Send,보내기
-CommonUI.Features.Heading.ClassicUnlock,Roblox 20주년을 기념하세요!
+CommonUI.Features.Heading.ClassicUnlock,Roblox 20주년을 기념하세요
 CommonUI.Features.Heading.GameDetails,체험 설명
 CommonUI.Features.Label.About,소개
 CommonUI.Features.Label.AboutUs,회사 소개
@@ -2346,6 +2346,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,"설명은 1,000자 이�
 Feature.Build.Error.DeveloperProductNameRequired,상품 이름을 입력하세요.
 Feature.Build.Error.DeveloperProductNameTooLong,이름은 50자 이하여야 합니다.
 Feature.Build.Error.DeveloperProductPriceInvalid,"가격은 1~1,000,000,000 Robux 사이의 정수여야 합니다."
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,상품을 판매 목록에 올리기 전에 '편집'을 선택하고 가격을 추가하세요.
 Feature.Build.Error.DeveloperProductTextModerated,Roblox 규정 준수 팀이 이 제품의 텍스트를 변경했습니다. 다른 표현을 사용해 보세요.
 Feature.Build.Error.ManagedPricingPartialUpdate,일부 상품을 업데이트하지 못했습니다.
 Feature.Build.Error.MonetizationOptionUpdate,옵션을 업데이트하지 못했습니다. 다시 시도하세요.
@@ -2404,7 +2405,7 @@ Feature.Build.Label.InProgress,진행 중
 Feature.Build.Label.InputNeeded,입력 필요
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,제한됨
-Feature.Build.Label.Live,라이브
+Feature.Build.Label.Live,게시됨
 Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,관리형 가격 책정
 Feature.Build.Label.ManagedPricingMixed,현재 상품 전체에 혼합
@@ -2426,7 +2427,7 @@ Feature.Build.Label.PricingOptions,가격 책정 옵션
 Feature.Build.Label.Private,비공개
 Feature.Build.Label.Public,공개
 Feature.Build.Label.PubliclyUnavailable,공개적으로 이용 불가
-Feature.Build.Label.Published,게시됨
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,준비
 Feature.Build.Label.RegionalPricing,지역별 가격

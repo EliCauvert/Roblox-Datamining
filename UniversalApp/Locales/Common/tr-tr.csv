@@ -870,7 +870,7 @@ CommonUI.Features.Action.Go,Git
 CommonUI.Features.Action.LessLowercase,daha az
 CommonUI.Features.Action.MoreLowercase,daha fazla
 CommonUI.Features.Action.Send,
-CommonUI.Features.Heading.ClassicUnlock,Roblox'un 20. yılını kutla!
+CommonUI.Features.Heading.ClassicUnlock,Roblox'un 20. yılını kutla
 CommonUI.Features.Heading.GameDetails,Deneyim Ayrıntıları
 CommonUI.Features.Label.About,Hakkında
 CommonUI.Features.Label.AboutUs,Hakkımızda
@@ -2345,6 +2345,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,Açıklama 1.000 karakter
 Feature.Build.Error.DeveloperProductNameRequired,Bir ürün adı gir.
 Feature.Build.Error.DeveloperProductNameTooLong,Ad 50 karakter veya daha kısa olmalıdır.
 Feature.Build.Error.DeveloperProductPriceInvalid,Fiyat 1 ile 1.000.000.000 Robux arasında bir tam sayı olmalıdır.
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,Bir ürünü satışa sunmadan önce Düzenle'yi seç ve bir fiyat ekle.
 Feature.Build.Error.DeveloperProductTextModerated,Roblox denetimi bu ürünün metnini değiştirdi. Farklı bir ifade dene.
 Feature.Build.Error.ManagedPricingPartialUpdate,Bazı ürünler güncellenemedi.
 Feature.Build.Error.MonetizationOptionUpdate,Seçenek güncellenemedi. Tekrar dene.
@@ -2403,7 +2404,7 @@ Feature.Build.Label.InProgress,Devam ediyor
 Feature.Build.Label.InputNeeded,Giriş gerekli
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Sınırlı
-Feature.Build.Label.Live,Canlı
+Feature.Build.Label.Live,Yayınlandı
 Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Yönetilen fiyatlandırma
 Feature.Build.Label.ManagedPricingMixed,Mevcut ürünler arasında karışık
@@ -2425,7 +2426,7 @@ Feature.Build.Label.PricingOptions,Fiyatlandırma seçenekleri
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,Herkese Açık
 Feature.Build.Label.PubliclyUnavailable,Herkese açık değil
-Feature.Build.Label.Published,Yayınlandı
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,Satın alındı
 Feature.Build.Label.Ready,Hazır
 Feature.Build.Label.RegionalPricing,Bölgesel fiyatlandırma

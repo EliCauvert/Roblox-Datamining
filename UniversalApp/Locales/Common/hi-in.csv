@@ -852,7 +852,7 @@ CommonUI.Features.Action.Go,जाएँ
 CommonUI.Features.Action.LessLowercase,कम
 CommonUI.Features.Action.MoreLowercase,ज़्यादा
 CommonUI.Features.Action.Send,भेजें
-CommonUI.Features.Heading.ClassicUnlock,Roblox के 20 साल पूरे होने का जश्न मनाएँ!
+CommonUI.Features.Heading.ClassicUnlock,Roblox के 20 साल पूरे होने का जश्न मनाएँ
 CommonUI.Features.Heading.GameDetails,एक्सपीरिएंस की जानकारी
 CommonUI.Features.Label.About,परिचय
 CommonUI.Features.Label.AboutUs,हमारे बारे में जानकारी
@@ -2325,6 +2325,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,"विवरण मे�
 Feature.Build.Error.DeveloperProductNameRequired,प्रॉडक्ट का नाम डालें.
 Feature.Build.Error.DeveloperProductNameTooLong,नाम में 50 या इससे कम कैरेक्टर होने चाहिए.
 Feature.Build.Error.DeveloperProductPriceInvalid,"कीमत, 1 से 1,00,00,00,000 Robux तक के बीच का होल नंबर (पूर्णांक) होना चाहिए."
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,"किसी प्रॉडक्ट को बिक्री के लिए लिस्ट करने से पहले, 'एडिट करें' चुनें और कीमत जोड़ें."
 Feature.Build.Error.DeveloperProductTextModerated,Roblox मॉडरेशन से इस प्रॉडक्ट का टेक्स्ट बदल गया है. अलग शब्दों का इस्तेमाल करके देखें.
 Feature.Build.Error.ManagedPricingPartialUpdate,कुछ प्रॉडक्ट अपडेट नहीं किए जा सके.
 Feature.Build.Error.MonetizationOptionUpdate,विकल्प अपडेट नहीं किया जा सका. फिर से कोशिश करें.
@@ -2383,7 +2384,7 @@ Feature.Build.Label.InProgress,जारी है
 Feature.Build.Label.InputNeeded,इनपुट चाहिए
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,सीमित
-Feature.Build.Label.Live,लाइव
+Feature.Build.Label.Live,पब्लिश किया गया
 Feature.Build.Label.Loading,लोड किया जा रहा है...
 Feature.Build.Label.ManagedPricing,मैनेज की जा रही कीमतें
 Feature.Build.Label.ManagedPricingMixed,मौजूदा प्रॉडक्ट्स में मिला-जुला
@@ -2405,7 +2406,7 @@ Feature.Build.Label.PricingOptions,कीमत के विकल्प
 Feature.Build.Label.Private,प्राइवेट
 Feature.Build.Label.Public,पब्लिक
 Feature.Build.Label.PubliclyUnavailable,सभी के लिए उपलब्ध नहीं है
-Feature.Build.Label.Published,पब्लिश किया गया
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,तैयार
 Feature.Build.Label.RegionalPricing,इलाके के हिसाब से कीमत

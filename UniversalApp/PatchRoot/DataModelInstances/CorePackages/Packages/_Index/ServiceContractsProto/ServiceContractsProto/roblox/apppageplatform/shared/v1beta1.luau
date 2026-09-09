@@ -31,6 +31,7 @@ return {
 	marketplace_look_data = require(script.marketplace_look_data),
 	media_asset_data = require(script.media_asset_data),
 	moment_data = require(script.moment_data),
+	notification_badge_data = require(script.notification_badge_data),
 	page_entry = require(script.page_entry),
 	page_entry_content = require(script.page_entry_content),
 	playability_data = require(script.playability_data),

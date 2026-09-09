@@ -685,6 +685,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation 包含�
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,CurveAnimation 中的身體部位不能低於距 HumanoidRootPart 高度 {minHeight} 個磚塊的位置，也不能高於距 HumanoidRootPart 高度 {maxDistance} 個磚塊的位置。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation 的子資料夾類型 MarkerCurves 和 AnimationRigData 不得有子資料夾
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,CurveAnimation 層級包含 Scripts、LocalScripts 或 ModuleScripts。請將之移除。
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,在「{instancePath}」，CurveAnimation 含有重複的身體部位資料夾「{bodyPartName}」。每個身體部位在動畫階層中最多只能出現一次。
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,無法載入 CurveAnimation 資料。動畫素材可能無效或無法存取。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation 包含具有無效層級的身體部位資料夾 {folderName}（其子資料夾不被允許或設定不正確）
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,CurveAnimation 中的資料夾「{boneName}」並非可辨識的 HRD/DRD 骨骼名稱。動畫子資料夾必須為有效的 R15 身體部位，或可辨識的骨骼名稱（例如：HeadBase、Spine、Chest、LeftClavicle、RightClavicle、LeftToeBase、RightToeBase，或 LeftHandIndex1 等手指骨骼）。
@@ -712,6 +713,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation 包�
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,在 CurveAnimation 中的第 {time} 秒，身體部位 {bodyPart} 以每秒 {speed} 度的旋轉速度移動。每秒最多可旋轉 {maxSpeed} 度。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,在 CurveAnimation 中的第 {time} 秒，身體部位 {bodyPart} 以每秒 {speed} 個磚塊的速度移動。每秒最多可移動 {maxSpeed} 個磚塊。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,CurveAnimation 中的身體部位 {bodyPart}，在不同影格之間移動的距離超過 {maxMovement} 個磚塊。請修正此動畫。
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,CurveAnimation 結構無效：{detail}。請確認動畫符合預期的架構。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation 具有 {count} 個後代（上限為 {maxAllowed} 個）。請減少後代數量。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation 包含的 Curve 含有過多索引鍵（每個 Curve 的上限為 {maxAllowed} 個）。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation 包含 {maxAllowed} 個以上的 MarkerCurve。請確保 MarkerCurve 後代的數量不超過 {maxAllowed} 個。
@@ -867,7 +869,7 @@ CommonUI.Features.Action.Go,開始
 CommonUI.Features.Action.LessLowercase,更少
 CommonUI.Features.Action.MoreLowercase,更多
 CommonUI.Features.Action.Send,傳送
-CommonUI.Features.Heading.ClassicUnlock,慶祝 Roblox 20 週年！
+CommonUI.Features.Heading.ClassicUnlock,慶祝 Roblox 20 週年
 CommonUI.Features.Heading.GameDetails,體驗詳細資料
 CommonUI.Features.Label.About,關於
 CommonUI.Features.Label.AboutUs,關於我們
@@ -1697,6 +1699,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,你已達到使用�
 Feature.Avatar.BackgroundGeneration.Error.Moderation,該提示不符合我們的準則。請嘗試描述其他內容。
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,此背景不符合 Roblox 社群標準，因此未新增到你的道具欄。請嘗試生成新背景。
 Feature.Avatar.BackgroundGeneration.Error.System,生成背景時發生錯誤，請再試一次。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,你已達到總發佈上限。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,你已達到每日發佈上限。請明天再試。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,你已達到每小時發佈上限。請下一個小時再試。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,你已達到每月發佈上限。請下個月再試。
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}／{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,說明
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus 專屬
@@ -2338,6 +2344,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,"說明長度不得超過
 Feature.Build.Error.DeveloperProductNameRequired,輸入產品名稱。
 Feature.Build.Error.DeveloperProductNameTooLong,名稱長度不得超過 50 個字元。
 Feature.Build.Error.DeveloperProductPriceInvalid,"價格須為 1 到 1,000,000,000 Robux 之間的整數。"
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,將產品上架販售前，請先選擇「編輯」並新增價格。
 Feature.Build.Error.DeveloperProductTextModerated,Roblox 審核人員已變更此產品的文字。請嘗試使用其他文字。
 Feature.Build.Error.ManagedPricingPartialUpdate,無法更新部分產品。
 Feature.Build.Error.MonetizationOptionUpdate,無法更新選項，請再試一次。
@@ -2396,7 +2403,7 @@ Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,必須輸入內容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,受限
-Feature.Build.Label.Live,已發布
+Feature.Build.Label.Live,已發佈
 Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,管理定價
 Feature.Build.Label.ManagedPricingMixed,混合套用於現有產品
@@ -2418,7 +2425,7 @@ Feature.Build.Label.PricingOptions,定價選項
 Feature.Build.Label.Private,私人
 Feature.Build.Label.Public,公開
 Feature.Build.Label.PubliclyUnavailable,尚未開放大眾遊玩
-Feature.Build.Label.Published,已發佈
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,就緒
 Feature.Build.Label.RegionalPricing,區域定價
@@ -4096,6 +4103,7 @@ Feature.MusicPlayer.Action.GoToSongDetails,前往歌曲詳細資訊
 Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
+Feature.NotApproved.Action.Pending,
 Feature.NotApproved.Action.ReactivateAccount,重新啟用我的帳號
 Feature.NotApproved.Action.ReportMistake,回報錯誤
 Feature.NotApproved.Action.RuleConfirmation,我同意了解並遵守規定。
@@ -4569,7 +4577,7 @@ Feature.Parents.Title.SomethingWentWrong,
 Feature.PlatformRestriction.Action.Continue,
 Feature.PlatformRestriction.Action.Pending,
 Feature.PlatformRestriction.Action.Signout,
-Feature.PlatformRestriction.Content.NeedPermission,如要使用 Roblox，你必須取得家長許可。
+Feature.PlatformRestriction.Content.NeedPermission,若要使用 Roblox，你必須取得家長許可。家長核准後，請先登出後再登入，即可存取 Roblox。
 Feature.PlatformRestriction.Title.AskParent,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,透過搜尋

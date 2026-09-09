@@ -669,6 +669,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation มี�
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,ชิ้นส่วนร่างกายใน CurveAnimation ต้องไม่อยู่ต่ำกว่า HumanoidRootPart {minHeight} Stud หรืออยู่ห่างจาก HumanoidRootPart เกิน {maxDistance} Stud โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,MarkerCurves และ AnimationRigData ที่เป็นส่วนรองของ CurveAnimation ไม่สามารถมีส่วนรองได้
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"ลำดับชั้นของ CurveAnimation มี Script, LocalScript หรือ ModuleScript โปรดลบออก"
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,CurveAnimation มีโฟลเดอร์ชิ้นส่วนร่างกาย '{bodyPartName}' ซ้ำกันที่ '{instancePath}' ชิ้นส่วนร่างกายแต่ละชิ้นสามารถปรากฏได้สูงสุดเพียงครั้งเดียวในลำดับชั้นแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,โหลดข้อมูล CurveAnimation ไม่สำเร็จ แอสเซทแอนิเมชันอาจไม่ถูกต้องหรือเข้าถึงไม่ได้
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation มีโฟลเดอร์ชิ้นส่วนร่างกาย {folderName} ซึ่งมีลำดับชั้นที่ไม่ถูกต้อง (มีโฟลเดอร์รองที่ไม่ได้รับอนุญาตหรือตั้งค่าไม่ถูกต้อง)
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"โฟลเดอร์ '{boneName}' ใน CurveAnimation ไม่ใช่ชื่อกระดูก HRD/DRD ที่รู้จัก โฟลเดอร์ย่อยของแอนิเมชันต้องเป็นชิ้นส่วนร่างกาย R15 ที่ถูกต้อง หรือชื่อกระดูกที่รู้จัก (เช่น HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase หรือกระดูกนิ้วมือ เช่น LeftHandIndex1)"
@@ -696,6 +697,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation ม�
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,ใน CurveAnimation เวลา {time} วินาที ชิ้นส่วนร่างกาย {bodyPart} หมุนด้วยความเร็ว {speed} องศา/วินาที ทว่าความเร็วสูงสุดที่อนุญาตคือ {maxSpeed} องศา/วินาที โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,ใน CurveAnimation  เวลา {time} วินาที ชิ้นส่วนร่างกาย {bodyPart} เคลื่อนที่ด้วยความเร็ว {speed} Stud/วินาที ทว่าความเร็วสูงสุดที่อนุญาตคือ {maxSpeed} Stud/วินาที โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,ชิ้นส่วนร่างกาย {bodyPart} ใน CurveAnimation เคลื่อนที่ระหว่างเฟรมมากกว่า {maxMovement} Stud โปรดแก้ไขแอนิเมชัน
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,โครงสร้าง CurveAnimation ไม่ถูกต้อง: {detail} โปรดตรวจสอบให้แน่ใจว่าแอนิเมชันเป็นไปตาม Schema ที่คาดไว้
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation มี descendant {count} รายการ ทว่าจำนวนสูงสุดที่อนุญาตคือ {maxAllowed} รายการ โปรดลดจำนวนลง
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation มี Curve ที่มีคีย์มากเกินไป จำนวนสูงสุดที่อนุญาตคือ {maxAllowed} คีย์ โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation มี MarkerCurve มากกว่า {maxAllowed} รายการ โปรดเช็คให้แน่ใจว่ามี descendant MarkerCurve ไม่เกิน {maxAllowed} รายการ
@@ -851,7 +853,7 @@ CommonUI.Features.Action.Go,ไป
 CommonUI.Features.Action.LessLowercase,แสดงน้อยลง
 CommonUI.Features.Action.MoreLowercase,แสดงเพิ่ม
 CommonUI.Features.Action.Send,
-CommonUI.Features.Heading.ClassicUnlock,Roblox ฉลองครบรอบ 20 ปี!
+CommonUI.Features.Heading.ClassicUnlock,Roblox ฉลองครบรอบ 20 ปี
 CommonUI.Features.Heading.GameDetails,รายละเอียดประสบการณ์
 CommonUI.Features.Label.About,เกี่ยวกับ
 CommonUI.Features.Label.AboutUs,เกี่ยวกับเรา
@@ -1681,6 +1683,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,คุณใช้�
 Feature.Avatar.BackgroundGeneration.Error.Moderation,พรอมต์นั้นไม่เป็นไปตามแนวทางของเรา ลองอธิบายอย่างอื่น
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,พื้นหลังนี้ไม่เป็นไปตามมาตรฐานชุมชนของ Roblox จึงไม่ได้เพิ่มไปยังคลังไอเท็มของคุณ ลองสร้างใหม่
 Feature.Avatar.BackgroundGeneration.Error.System,มีบางอย่างผิดปกติขณะสร้างพื้นหลัง โปรดลองอีกครั้ง
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,คุณเผยแพร่ครบตามจำนวนสูงสุดตลอดอายุการใช้งานแล้ว
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,คุณเผยแพร่ครบตามจำนวนสูงสุดต่อวันแล้ว โปรดลองอีกครั้งในวันพรุ่งนี้
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,คุณเผยแพร่ครบตามจำนวนสูงสุดต่อชั่วโมงแล้ว โปรดลองอีกครั้งในชั่วโมงถัดไป
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,คุณเผยแพร่ครบตามจำนวนสูงสุดต่อเดือนแล้ว โปรดลองอีกครั้งในเดือนหน้า
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,คำอธิบาย
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,พื้นหลังสุดพิเศษเมื่อสมัคร Plus
@@ -2322,6 +2328,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,"คำอธิบาย
 Feature.Build.Error.DeveloperProductNameRequired,กรอกชื่อผลิตภัณฑ์
 Feature.Build.Error.DeveloperProductNameTooLong,ชื่อต้องมีความยาวไม่เกิน 50 อักขระ
 Feature.Build.Error.DeveloperProductPriceInvalid,"ราคาต้องเป็นจำนวนเต็มตั้งแต่ 1 ถึง 1,000,000,000 Robux"
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,เลือกแก้ไขและเพิ่มราคาก่อนลงขายผลิตภัณฑ์
 Feature.Build.Error.DeveloperProductTextModerated,ทีมกลั่นกรองของ Roblox เปลี่ยนข้อความของผลิตภัณฑ์นี้ ลองใช้ถ้อยคำอื่น
 Feature.Build.Error.ManagedPricingPartialUpdate,ไม่สามารถอัปเดตผลิตภัณฑ์บางรายการได้
 Feature.Build.Error.MonetizationOptionUpdate,ไม่สามารถอัปเดตตัวเลือกได้ โปรดลองอีกครั้ง
@@ -4080,6 +4087,7 @@ Feature.MusicPlayer.Action.GoToSongDetails,ไปที่รายละเอ�
 Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,ต่อไป
 Feature.NotApproved.Action.LogOut,
+Feature.NotApproved.Action.Pending,
 Feature.NotApproved.Action.ReactivateAccount,เปิดใช้งานบัญชีของฉันอีกครั้ง
 Feature.NotApproved.Action.ReportMistake,รายงานข้อผิดพลาด
 Feature.NotApproved.Action.RuleConfirmation,ฉันยอมรับว่าเข้าใจและจะปฏิบัติตามกฎ
@@ -4553,7 +4561,7 @@ Feature.Parents.Title.SomethingWentWrong,
 Feature.PlatformRestriction.Action.Continue,
 Feature.PlatformRestriction.Action.Pending,
 Feature.PlatformRestriction.Action.Signout,
-Feature.PlatformRestriction.Content.NeedPermission,หากต้องการใช้ Roblox คุณต้องได้รับอนุญาตจากผู้ปกครองก่อน
+Feature.PlatformRestriction.Content.NeedPermission,หากต้องการใช้ Roblox คุณต้องได้รับอนุญาตจากผู้ปกครองก่อน เมื่อผู้ปกครองอนุมัติแล้ว ให้ลงชื่อออกแล้วลงชื่อเข้าใช้อีกครั้งเพื่อเข้าถึง Roblox
 Feature.PlatformRestriction.Title.AskParent,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,จากการค้นหา

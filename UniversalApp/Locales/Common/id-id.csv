@@ -686,6 +686,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation berisi 
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,Bagian tubuh dalam CurveAnimation tidak boleh lebih rendah dari {minHeight} kotak atau berjarak lebih dari {maxDistance} kotak dari HumanoidRootPart. Perbaiki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,"Child CurveAnimation, MarkerCurves dan AnimationRigData, tidak dapat memiliki child"
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"Hierarki CurveAnimation berisi Scripts, LocalScripts, atau ModuleScripts. Hapus semuanya."
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,CurveAnimation berisi folder bagian tubuh duplikat '{bodyPartName}' di '{instancePath}'. Setiap bagian tubuh hanya boleh muncul sekali dalam hierarki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,Gagal me-load data CurveAnimation. Aset animasi mungkin tidak valid atau tidak dapat diakses.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation berisi Folder bagian tubuh {folderName} yang memiliki hierarki yang tidak valid (Folder ini memiliki child yang tidak diizinkan atau diatur secara tidak benar)
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"Folder '{boneName}' di CurveAnimation bukan nama tulang HRD/DRD yang dikenali. Subfolder animasi harus berupa bagian tubuh R15 yang valid atau nama tulang yang dikenali (misalnya HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase, atau tulang jari seperti LeftHandIndex1)."
@@ -713,6 +714,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation beri
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"Dalam CurveAnimation pada waktu {time} detik, bagian tubuh {bodyPart} bergerak dengan kecepatan rotasi {speed} derajat/detik. Kecepatan maksimumnya adalah {maxSpeed} derajat/detik. Perbaiki animasi."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"Dalam CurveAnimation pada waktu {time} detik, bagian tubuh {bodyPart} bergerak dengan kecepatan {speed} kotak/detik. Kecepatan maksimumnya adalah {maxSpeed} kotak/detik. Perbaiki animasi."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,Bagian tubuh {bodyPart} dalam CurveAnimation bergerak lebih dari {maxMovement} kotak antarframe. Perbaiki animasi.
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,Struktur CurveAnimation tidak valid: {detail}. Pastikan animasi mengikuti skema yang diharapkan.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation memiliki {count} descendant. Jumlah maksimum yang diizinkan adalah {maxAllowed}. Kurangi jumlah descendant.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation berisi Curve dengan terlalu banyak key. Jumlah maksimum yang diizinkan per Curve adalah {maxAllowed}. Perbaiki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation berisi lebih dari {maxAllowed} MarkerCurve. Pastikan descendant MarkerCurve tidak lebih dari {maxAllowed}.
@@ -868,7 +870,7 @@ CommonUI.Features.Action.Go,Pergi
 CommonUI.Features.Action.LessLowercase,lebih sedikit
 CommonUI.Features.Action.MoreLowercase,lebih banyak
 CommonUI.Features.Action.Send,
-CommonUI.Features.Heading.ClassicUnlock,Rayakan 20 tahun Roblox!
+CommonUI.Features.Heading.ClassicUnlock,Rayakan 20 tahun Roblox
 CommonUI.Features.Heading.GameDetails,Detail Pengalaman Virtual
 CommonUI.Features.Label.About,Tentang
 CommonUI.Features.Label.AboutUs,Tentang Kami
@@ -1698,6 +1700,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Kamu telah mencapai
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Prompt itu tidak mengikuti pedoman kami. Coba deskripsikan sesuatu yang lain.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Latar belakang ini tidak mengikuti Standar Komunitas Roblox, jadi tidak ditambahkan ke inventarismu. Coba buat yang baru."
 Feature.Avatar.BackgroundGeneration.Error.System,Terjadi kesalahan saat membuat latar belakangmu. Coba lagi.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,Kamu telah mencapai batas publikasi seumur hidup.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,Kamu telah mencapai batas publikasi harian. Coba lagi besok.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,Kamu telah mencapai batas publikasi per jam. Coba lagi dalam 1 jam.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,Kamu telah mencapai batas publikasi bulanan. Coba lagi bulan depan.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Deskripsi
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Eksklusif dengan Plus
@@ -2339,6 +2345,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,Deskripsi maksimal 1.000 
 Feature.Build.Error.DeveloperProductNameRequired,Masukkan nama produk.
 Feature.Build.Error.DeveloperProductNameTooLong,Nama harus terdiri dari maksimal 50 karakter.
 Feature.Build.Error.DeveloperProductPriceInvalid,Harga harus berupa bilangan bulat dari 1 hingga 1.000.000.000 Robux.
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,Pilih Edit dan tambahkan harga sebelum mencantumkan produk untuk dijual.
 Feature.Build.Error.DeveloperProductTextModerated,Moderasi Roblox mengubah teks produk ini. Coba kata-kata lain.
 Feature.Build.Error.ManagedPricingPartialUpdate,Beberapa produk tidak dapat di-update.
 Feature.Build.Error.MonetizationOptionUpdate,Opsi tidak dapat di-update. Coba lagi.
@@ -2397,7 +2404,7 @@ Feature.Build.Label.InProgress,Sedang berlangsung
 Feature.Build.Label.InputNeeded,Input diperlukan
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Terbatas
-Feature.Build.Label.Live,Live
+Feature.Build.Label.Live,Dipublikasikan
 Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Harga terkelola
 Feature.Build.Label.ManagedPricingMixed,Harga terkelola campuran di seluruh produk saat ini
@@ -2419,7 +2426,7 @@ Feature.Build.Label.PricingOptions,Opsi harga
 Feature.Build.Label.Private,Privat
 Feature.Build.Label.Public,Publik
 Feature.Build.Label.PubliclyUnavailable,Tidak tersedia untuk umum
-Feature.Build.Label.Published,Dipublikasikan
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Siap
 Feature.Build.Label.RegionalPricing,Harga regional
@@ -4095,6 +4102,7 @@ Feature.MusicPlayer.Action.GoToSongDetails,Buka Detail Lagu
 Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
+Feature.NotApproved.Action.Pending,
 Feature.NotApproved.Action.ReactivateAccount,Aktifkan Kembali Akun Saya
 Feature.NotApproved.Action.ReportMistake,Laporkan kekeliruan
 Feature.NotApproved.Action.RuleConfirmation,Saya setuju untuk memahami dan mematuhi peraturan.
@@ -4568,7 +4576,7 @@ Feature.Parents.Title.SomethingWentWrong,
 Feature.PlatformRestriction.Action.Continue,
 Feature.PlatformRestriction.Action.Pending,
 Feature.PlatformRestriction.Action.Signout,
-Feature.PlatformRestriction.Content.NeedPermission,"Untuk menggunakan Roblox, kamu memerlukan izin orang tua."
+Feature.PlatformRestriction.Content.NeedPermission,"Untuk menggunakan Roblox, kamu memerlukan izin orang tua. Setelah orang tuamu menyetujui, log out lalu log in lagi untuk mengakses Roblox."
 Feature.PlatformRestriction.Title.AskParent,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,Dari Pencarian

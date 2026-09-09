@@ -870,7 +870,7 @@ CommonUI.Features.Action.Go,Đi
 CommonUI.Features.Action.LessLowercase,ẩn bớt
 CommonUI.Features.Action.MoreLowercase,xem thêm
 CommonUI.Features.Action.Send,
-CommonUI.Features.Heading.ClassicUnlock,Kỷ niệm 20 năm Roblox!
+CommonUI.Features.Heading.ClassicUnlock,Kỷ niệm 20 năm Roblox
 CommonUI.Features.Heading.GameDetails,Chi tiết trải nghiệm
 CommonUI.Features.Label.About,Về sản phẩm
 CommonUI.Features.Label.AboutUs,Về chúng tôi
@@ -2345,6 +2345,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,Nội dung mô tả khôn
 Feature.Build.Error.DeveloperProductNameRequired,Nhập tên sản phẩm.
 Feature.Build.Error.DeveloperProductNameTooLong,Tên chỉ được chứa tối đa 50 ký tự.
 Feature.Build.Error.DeveloperProductPriceInvalid,Giá phải là một số nguyên từ 1 đến 1.000.000.000 Robux.
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,Hãy chọn Chỉnh sửa và thêm giá trước khi đăng bán sản phẩm.
 Feature.Build.Error.DeveloperProductTextModerated,Bộ phận kiểm duyệt của Roblox đã thay đổi văn bản của sản phẩm này. Hãy thử dùng cách diễn đạt khác.
 Feature.Build.Error.ManagedPricingPartialUpdate,Không thể cập nhật một số sản phẩm.
 Feature.Build.Error.MonetizationOptionUpdate,Không thể cập nhật tùy chọn. Vui lòng thử lại.
@@ -2403,7 +2404,7 @@ Feature.Build.Label.InProgress,Đang thực hiện
 Feature.Build.Label.InputNeeded,Cần thông tin đầu vào
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Giới hạn
-Feature.Build.Label.Live,Đã ra mắt
+Feature.Build.Label.Live,Đã đăng
 Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Giá được quản lý
 Feature.Build.Label.ManagedPricingMixed,Kết hợp trên các sản phẩm hiện tại
@@ -2425,7 +2426,7 @@ Feature.Build.Label.PricingOptions,Tùy chọn định giá
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,Công khai
 Feature.Build.Label.PubliclyUnavailable,Chưa phát hành công khai
-Feature.Build.Label.Published,Đã đăng
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,Đã mua
 Feature.Build.Label.Ready,Sẵn sàng
 Feature.Build.Label.RegionalPricing,Giá theo vùng

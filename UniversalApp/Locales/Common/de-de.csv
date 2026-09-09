@@ -870,7 +870,7 @@ CommonUI.Features.Action.Go,Los
 CommonUI.Features.Action.LessLowercase,weniger
 CommonUI.Features.Action.MoreLowercase,mehr
 CommonUI.Features.Action.Send,Senden
-CommonUI.Features.Heading.ClassicUnlock,Feiere 20 Jahre Roblox!
+CommonUI.Features.Heading.ClassicUnlock,Feiere 20 Jahre Roblox
 CommonUI.Features.Heading.GameDetails,Experience-Infos
 CommonUI.Features.Label.About,Info
 CommonUI.Features.Label.AboutUs,Über uns
@@ -2339,6 +2339,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,Die Beschreibung darf max
 Feature.Build.Error.DeveloperProductNameRequired,Gib einen Produktnamen ein.
 Feature.Build.Error.DeveloperProductNameTooLong,Der Name darf maximal 50 Zeichen lang sein.
 Feature.Build.Error.DeveloperProductPriceInvalid,Der Preis muss eine ganze Zahl zwischen 1 und 1.000.000.000 Robux sein.
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,"Wähle ""Bearbeiten"" aus und füge einen Preis hinzu, bevor du ein Produkt zum Verkauf anbietest."
 Feature.Build.Error.DeveloperProductTextModerated,Das Roblox-Moderationsteam hat den Text dieses Produkts geändert. Versuche es mit einer anderen Formulierung.
 Feature.Build.Error.ManagedPricingPartialUpdate,Einige Produkte konnten nicht aktualisiert werden.
 Feature.Build.Error.MonetizationOptionUpdate,Die Option konnte nicht aktualisiert werden. Bitte versuche es erneut.
@@ -2397,7 +2398,7 @@ Feature.Build.Label.InProgress,In Arbeit
 Feature.Build.Label.InputNeeded,Eingabe erforderlich
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitiert
-Feature.Build.Label.Live,Live
+Feature.Build.Label.Live,Veröffentlicht
 Feature.Build.Label.Loading,Wird geladen …
 Feature.Build.Label.ManagedPricing,Verwaltete Preisgestaltung
 Feature.Build.Label.ManagedPricingMixed,Gemischt über aktuelle Produkte
@@ -2419,7 +2420,7 @@ Feature.Build.Label.PricingOptions,Preisgestaltungsoptionen
 Feature.Build.Label.Private,Privat
 Feature.Build.Label.Public,Öffentlich
 Feature.Build.Label.PubliclyUnavailable,Öffentlich nicht verfügbar
-Feature.Build.Label.Published,Veröffentlicht
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Bereit
 Feature.Build.Label.RegionalPricing,Regionale Preisgestaltung
