@@ -1,356 +1,104 @@
-Version version-9fe94fb0e9d84c25 (2026-09-05 12:16:37 UTC)
+Version version-93202a13414c4131 (2026-09-09 20:09:04 UTC)
 ============================================================
 
-Renamed Class
-"PlayerControlState" to "ControlState"
-
-Added Class CallingService : Instance {🔒RobloxScript} [NotCreatable] [Service] [NotReplicated]
-	Added Function CallingService:AnswerIncomingCall(callId: string) -> () {🔒RobloxScript}
-	Added Function CallingService:CreateCall(participantIds: { any }? = {}, chatChannelId: string? = "") -> string {🔒RobloxScript}
-	Added Function CallingService:EndCall(callId: string, reason: string) -> () {🔒RobloxScript}
-	Added Function CallingService:GetCallingState(callId: string) -> { [string]: any } {🔒RobloxScript}
-	Added Event CallingService.OnCallingRemoved(callId: string) {🔒RobloxScript}
-	Added Event CallingService.OnCallingStateChange(callingState: { [string]: any }) {🔒RobloxScript}
-
-Added Class WrapContentProvider : CacheableContentProvider [NotCreatable] [Service] [NotReplicated]
-
-Added Property TextChannelWindow.FontFace: Font {🚧Chat + UI}
-Added Property TextChannelWindow.UseDefaultFont: boolean {🚧Chat + UI}
-Added Property Workspace.UseInputSink: Enum.RolloutState [NotScriptable]
-Added Property GuiObject.Sink: Enum.InputSink [Hidden] [NotScriptable] {🚧UI} {🔍RobloxEngine}
-Added Property WorldRoot.Wind: number [Hidden] {🔒RobloxEngine} {🚀SimAccess}
-Added Property WorldRoot.WindDirection: Vector3 [Hidden] {🔒RobloxEngine} {🚀SimAccess}
-Added Property WorldRoot.AutoSimulate: boolean [Hidden] {🔒RobloxEngine}
-Added Property WorldRoot.GravityDirection: Vector3 [Hidden] {🔒RobloxEngine} {🚀SimAccess}
-Added Property WorldRoot.SimulationRate: number [Hidden] {🔒RobloxEngine}
-
-Added Function AssetService:PromptCreatePlatformContentAsync(player: Player, object: Object, assetType: Enum.AssetType) -> ...any [Yields] {🚧AssetCreateUpdate}
-Added Function DataModel:GetPioneerRootPlaceId() -> number {🔒RobloxScript}
-Added Function DataModel:GetPioneerSource() -> Enum.PioneerSource {🔒RobloxScript}
-Added Function DataModel:IsPioneerApp() -> boolean {🔒RobloxScript}
-Added Function GenerationService:ExportInstanceToGlbAsync(rootInstance: Instance, userId: number) -> string [Yields] {🚧DynamicGeneration} {🔒RobloxScript}
-Added Function GeometryService:CreateBasicMeshPart(shape: Enum.BasicMeshPartShape, options: { [string]: any }? = nil) -> MeshPart {🚧CSG + InternalTest}
-Added Function GuiService:GetAutoUIScaleHundredths() -> number {🚧UI} {🔒RobloxScript}
-Added Function GuiService:GetEffectiveUIScaleHundredths() -> number {🚧UI} {🔒RobloxScript}
-Added Function Terrain:SmoothRegionMaterialSlots(region: Region3, resolution: number, strength: number) -> ...any [CustomLuaState] {🚧Environment} {🔒RobloxScript} {🧬Safe}
-Added Function WorldRoot:Simulate(dt: number) -> () {🔒RobloxEngine}
-Added Function WrapTarget:CreateTextureInCageSpaceAsync(texture: EditableImage, options: { [string]: any }?) -> EditableImage [Yields] {🚧AvatarAppearance + DynamicGeneration}
-Added Function WrapTarget:CreateTextureInTargetSpaceAsync(texture: EditableImage, wrapTextureTransfer: WrapTextureTransfer) -> EditableImage [Yields] {🚧AvatarAppearance + DynamicGeneration}
-Added Function BranchService:ArchiveBranchAsync(branchPlaceId: number) -> () [Yields] {🔒RobloxScript}
-Added Function BranchService:CompleteMerge() -> () {🔒RobloxScript}
-Added Function BranchService:CreateBranchAsync(sourcePlaceId: number, sourceVersionNumber: number, name: string) -> { [string]: any } [Yields] {🔒RobloxScript}
-Added Function BranchService:GetBranchesAsync(placeId: number, archived: boolean) -> { [string]: any } [Yields] {🔒RobloxScript}
-Added Function BranchService:GetDiffAsync(placeId: number, baseVersion: number, targetVersion: number) -> DataModelDiff [Yields] {🔒RobloxScript}
-Added Function BranchService:GetInstanceConflicts() -> { any } {🔒RobloxScript}
-Added Function BranchService:GetMergeChanges() -> DataModelDiff {🔒RobloxScript}
-Added Function BranchService:GetMergeResolution(identity: ScopedInstanceIdentity, propName: string?) -> Enum.MergeResolution {🔒RobloxScript}
-Added Function BranchService:GetMergeStatus() -> Enum.MergeStatus {🔒RobloxScript}
-Added Function BranchService:RestoreBranchAsync(branchPlaceId: number) -> () [Yields] {🔒RobloxScript}
-Added Function BranchService:SetMergeResolution(identity: ScopedInstanceIdentity, propName: string?, resolution: Enum.MergeResolution) -> () {🔒RobloxScript}
-Added Function BranchService:StartMergeAsync(sourcePlaceId: number, ancestorVersion: number) -> () [Yields] {🔒RobloxScript}
-Added Function BranchService:UpdateBranchAsync(branchPlaceId: number, status: Enum.BranchStatus, name: string) -> { [string]: any } [Yields] {🔒RobloxScript}
-Added Function SystemThemeService:setClassicThemeActive(active: boolean) -> () {🔒RobloxScript}
-Added Function UGCValidationService:GetSerializedSizeExcludingCollisionAsync(inputInstances: { Instance }) -> number [Yields] {🔒RobloxScript}
-
-Added Event GuiService.ScrollStateChanged(scrollingFrame: Instance, newState: Enum.ScrollState) {🚧UI} {🔒RobloxScript}
-Added Event Terrain.GridBackendReloadRequired(wouldUseNewGrid: boolean) {🚧Environment} {🔒RobloxScript}
-Added Event BranchService.MergeStateChanged(identity: ScopedInstanceIdentity) {🔒RobloxScript}
-Added Event BranchService.MergeStateCleared(identity: ScopedInstanceIdentity) {🔒RobloxScript}
-Added Event BranchService.MergeStatusChanged(status: Enum.MergeStatus) {🔒RobloxScript}
-Added Event RemoteCursorService.BroadcastRemoteCursorPositionsWithConnectionId(connectionId: number, remoteCursorPosition: string) [Hidden] {🔒RobloxEngine}
-
-Added Enum AudioSampleFormat
-	Added EnumItem AudioSampleFormat.Int16 : 0
-	Added EnumItem AudioSampleFormat.Float32 : 1
-
-Added Enum BasicMeshPartShape
-	Added EnumItem BasicMeshPartShape.Capsule : 5
-	Added EnumItem BasicMeshPartShape.Cone : 6
-	Added EnumItem BasicMeshPartShape.RoundedBox : 7
-
-Added Enum BranchStatus
-	Added EnumItem BranchStatus.Draft : 0
-	Added EnumItem BranchStatus.ReadyToMerge : 1
-	Added EnumItem BranchStatus.Merged : 2
-	Added EnumItem BranchStatus.Archived : 3
-
-Added Enum MergeResolution
-	Added EnumItem MergeResolution.None : 0
-	Added EnumItem MergeResolution.UseSource : 1
-	Added EnumItem MergeResolution.UseTarget : 2
-	Added EnumItem MergeResolution.Manual : 3
-
-Added Enum MergeStatus
-	Added EnumItem MergeStatus.None : 0
-	Added EnumItem MergeStatus.Loading : 1
-	Added EnumItem MergeStatus.Merging : 2
-
-Added Enum PromptCreatePlatformContentResult
-	Added EnumItem PromptCreatePlatformContentResult.Success : 1
-	Added EnumItem PromptCreatePlatformContentResult.PermissionDenied : 2
-	Added EnumItem PromptCreatePlatformContentResult.Timeout : 3
-	Added EnumItem PromptCreatePlatformContentResult.UploadFailed : 4
-	Added EnumItem PromptCreatePlatformContentResult.NoUserInput : 5
-	Added EnumItem PromptCreatePlatformContentResult.UnknownFailure : 6
-	Added EnumItem PromptCreatePlatformContentResult.UGCValidationFailed : 7
-	Added EnumItem PromptCreatePlatformContentResult.ModeratedName : 8
-	Added EnumItem PromptCreatePlatformContentResult.PurchaseFailure : 9
-	Added EnumItem PromptCreatePlatformContentResult.TokenInvalid : 10
-
-Added Enum ScrollState
-	Added EnumItem ScrollState.Idle : 0
-	Added EnumItem ScrollState.Scrolling : 1
-
-Added EnumItem SlimTintMode.LevelOfDetail : 1
-Added EnumItem SlimTintMode.DataModelState : 5
-Added EnumItem SlimTranscoderStatus.Transcoding : 1
-Added EnumItem TeleportMethod.Teleport : 7
-
-Added Tag [Deprecated] to Property DataModel.IsPioneerBuild
-Added Tag [Deprecated] to Property DataModel.PioneerSource
-Added Tag [NotReplicated] to Property GuiObject.InputSink
-
-Changed the security of Property FaceControls.Corrugator 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LeftBrowLowerer 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LeftInnerBrowRaiser 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LeftNoseWrinkler 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LeftOuterBrowRaiser 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.RightBrowLowerer 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.RightInnerBrowRaiser 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.RightNoseWrinkler 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.RightOuterBrowRaiser 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.EyesLookDown 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.EyesLookLeft 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.EyesLookRight 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.EyesLookUp 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LeftCheekRaiser 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LeftEyeClosed 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LeftEyeUpperLidRaiser 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.RightCheekRaiser 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.RightEyeClosed 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.RightEyeUpperLidRaiser 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.JawDrop 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.JawLeft 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.JawRight 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.ChinRaiser 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.ChinRaiserUpperLip 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.FlatPucker 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.Funneler 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LeftCheekPuff 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LeftDimpler 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LeftLipCornerDown 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LeftLipCornerPuller 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LeftLipStretcher 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LeftLowerLipDepressor 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LeftUpperLipRaiser 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LipPresser 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LipsTogether 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.LowerLipSuck 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.MouthLeft 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.MouthRight 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.Pucker 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.RightCheekPuff 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.RightDimpler 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.RightLipCornerDown 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.RightLipCornerPuller 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.RightLipStretcher 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.RightLowerLipDepressor 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.RightUpperLipRaiser 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.UpperLipSuck 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.TongueDown 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.TongueOut 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the security of Property FaceControls.TongueUp 
-	from: {🔒Plugin}
-	  to: 
-
-Changed the serialization of Property GuiObject.InputSink 
-	from: [💾|📁Serialized]
-	  to: [🚫None]
-
-Changed the parameters of Function CaptureService:GenerateMomentTextAsync 
-	from: (capture: Capture)
-	  to: (capture: Capture, tone: string? = "")
-
-Changed the parameters of Function PublishService:CreateAssetAndWaitForAssetId 
-	from: (instances: { Instance }, operationId: string, creatorType: Enum.AssetCreatorType, creatorId: number, assetType: string, name: string, description: string, expectedPrice: number? = 0)
-	  to: (instances: { Instance }, operationId: string, creatorType: Enum.AssetCreatorType, creatorId: number, assetType: string, name: string, description: string, expectedPrice: number? = 0, additionalParameters: { [string]: any }? = nil)
-
-Changed the thread safety of Function TweenService:GetValue 
-	from: {🧬Unsafe}
-	  to: {🧬Safe}
-
-Changed the parameters of Event AssetService.OpenPublishResultModal 
-	from: (resultType: Enum.PromptPublishAssetResult)
-	  to: (resultType: Enum.PromptCreatePlatformContentResult)
-
-Changed the value of EnumItem SlimTranscoderStatus.Succeeded from 5 to 2
-Changed the value of EnumItem SlimTranscoderStatus.Failed from 6 to 3
-
-Removed Function AssetService:PromptCreateAssetAsync
-Removed Function GeometryService:CreateSolidPrimitive
-Removed Function GuiService:GetUIScaleMultiplier
-Removed Function StudioDeviceSimulatorService:GetRegisteredSimulators
-Removed Function StudioDeviceSimulatorService:RegisterSimulator
-Removed Function StudioDeviceSimulatorService:UnregisterSimulator
-
-Removed Event AssetService.OpenCreateResultModal
-Removed Event StudioDeviceSimulatorService.SimulatorRegistryChanged
-
-Removed Enum SolidPrimitiveType
-	Removed EnumItem SolidPrimitiveType.Capsule
-	Removed EnumItem SolidPrimitiveType.Cone
-	Removed EnumItem SolidPrimitiveType.RoundedBox
-
-Removed EnumItem SlimTintMode.LOD
-Removed EnumItem SlimTintMode.Zone
-Removed EnumItem SlimTranscoderStatus.NoHash
-Removed EnumItem SlimTranscoderStatus.NotUploaded
-Removed EnumItem SlimTranscoderStatus.Uploaded
-Removed EnumItem SlimTranscoderStatus.InProgress
+Added Class AnimatedImageTrack : Object {🔒RobloxScript} [NotCreatable] [NotReplicated]
+	Added Property AnimatedImageTrack.Duration: number [Hidden] [ReadOnly] {🔒RobloxScript}
+	Added Property AnimatedImageTrack.FrameCount: number [Hidden] [ReadOnly] {🔒RobloxScript}
+	Added Property AnimatedImageTrack.TrackName: string [Hidden] [ReadOnly] {🔒RobloxScript}
+	Added Function AnimatedImageTrack:GetContent() -> Content {🔒RobloxScript}
+	Added Function AnimatedImageTrack:GetFrameNames() -> { any } {🔒RobloxScript}
+
+Added Class AnimationValueNodeDefinition : Instance
+	Added Property AnimationValueNodeDefinition.NodeType: Enum.AnimationValueNodeType {🚧Animation}
+	Added Property AnimationValueNodeDefinition.NodeId: string {🚧Animation} {🔒RobloxScript}
+
+Added Class AnimationValueOutputDefinition : Instance
+
+Added Class AnimatedImageService : Instance {🔒RobloxScript} [NotCreatable] [Service]
+	Added Function AnimatedImageService:GetFrameNames(content: Content) -> { any } {🔒RobloxScript}
+	Added Function AnimatedImageService:GetTrack(content: Content, trackName: string) -> AnimatedImageTrack {🔒RobloxScript}
+	Added Function AnimatedImageService:GetTracksChanged(content: Content) -> RBXScriptSignal {🔒RobloxScript}
+	Added Function AnimatedImageService:Prewarm(content: Content) -> () {🔒RobloxScript}
+	Added Function AnimatedImageService:UnloadTracks(content: Content) -> () {🔒RobloxScript}
+
+Added Class MomentsService : Instance {🔒RobloxScript} [NotCreatable] [Service]
+	Added Function MomentsService:CheckMomentTextStatusAsync(token: string) -> ...any [Yields] {🚧Capture} {🔒RobloxScript}
+	Added Function MomentsService:CreatePostAsync(postRequest: { [string]: any }) -> { [string]: any } [Yields] {🚧Capture} {🔒RobloxScript}
+	Added Function MomentsService:GenerateMomentTextAsync(capture: Capture, tone: string? = "") -> ...any [Yields] {🚧Capture} {🔒RobloxScript}
+
+Added Class AnimatedImage : GuiBase {🔒RobloxScript} [NotCreatable]
+	Added Property AnimatedImage.Content: Content [Hidden] [NotReplicated] {🚧UI} {🔒RobloxScript}
+	Added Property AnimatedImage.PlaybackSpeed: number [Hidden] [NotReplicated] {🚧UI} {🔒RobloxScript}
+	Added Function AnimatedImage:GetBoundTracks() -> { any } {🚧UI} {🔒RobloxScript}
+	Added Function AnimatedImage:Pause() -> () {🚧UI} {🔒RobloxScript}
+	Added Function AnimatedImage:Resume() -> () {🚧UI} {🔒RobloxScript}
+
+Added Property AnimationImportData.ForceNewVersion: boolean
+Added Property AnimationImportData.VersionedAssetId: number
+Added Property Folder.IconTint: Color3 {🚧Basic}
+Added Property TextChannel.AddPlayersOnJoin: boolean {🚧Chat}
+Added Property Workspace.StreamingAdaptiveRadius: boolean {🚧PluginOrOpenCloud}
+Added Property AudioDeviceInput.DictationEnabled: boolean [Hidden] {🚧Audio + Input} {🔒RobloxScript}
+Added Property Decal.LocalizedTextureContent: Content [ReadOnly] {🚧Basic} {🔒RobloxScript}
+Added Property LocalizationService.ShouldUseImageLocalizationTable: boolean [Hidden] [NotScriptable] {🚧Basic} {🔒RobloxScript}
+Added Property Studio.ReviewableChangeAddedTextColor: Color3 [Hidden] [NotReplicated] {🔒RobloxScript}
+Added Property Studio.ReviewableChangeRemovedTextColor: Color3 [Hidden] [NotReplicated] {🔒RobloxScript}
+
+Added Function RunService:BindToAnimation(function: (...any) -> ...any, frequency: Enum.StepFrequency? = "Hz30", priority: number? = 2000) -> RBXScriptConnection {🚧Basic}
+Added Function ScriptService:ResolveModulePath(relativeTo: Instance, path: string) -> Instance? [CustomLuaState]
+Added Function PinShortcutService:IsRevealPinnedExperienceAvailable() -> boolean {🔒RobloxScript}
+Added Function PinShortcutService:RevealPinnedExperience(placeId: number) -> () {🔒RobloxScript}
+Added Function PinShortcutService:ShouldShowLuaNotificationOnPinExperienceCompleted() -> boolean {🔒RobloxScript}
+
+Added Event PinShortcutService.OnPinExperienceCompleted(status: Enum.PinExperienceStatus, placeId: number, universeId: number, experienceName: string) {🔒RobloxScript}
+Added Event RemoteCursorService.RequestAllRemoteCursorPositionForScriptWithUri(uri: string) [Hidden] {🔒RobloxEngine}
+Added Event RemoteCursorService.UpdateClientRemoteCursorPositionWithUri(uri: string, remoteCursorPosition: string) [Hidden] {🔒RobloxEngine}
+
+Added Enum AnimatedImagePlaybackState
+	Added EnumItem AnimatedImagePlaybackState.Begin : 0
+	Added EnumItem AnimatedImagePlaybackState.Playing : 1
+	Added EnumItem AnimatedImagePlaybackState.Paused : 2
+	Added EnumItem AnimatedImagePlaybackState.Completed : 3
+	Added EnumItem AnimatedImagePlaybackState.Canceled : 4
+
+Added Enum AnimatedImageScaleType
+	Added EnumItem AnimatedImageScaleType.Stretch : 0
+	Added EnumItem AnimatedImageScaleType.Tile : 1
+	Added EnumItem AnimatedImageScaleType.Fit : 2
+	Added EnumItem AnimatedImageScaleType.Crop : 3
+
+Added Enum AnimationValueNodeType
+	Added EnumItem AnimationValueNodeType.Invalid : 0
+	Added EnumItem AnimationValueNodeType.Expression : 1
+
+Added Enum PinExperienceStatus
+	Added EnumItem PinExperienceStatus.Success : 0
+	Added EnumItem PinExperienceStatus.Failure : 1
+	Added EnumItem PinExperienceStatus.AlreadyExists : 2
+
+Added EnumItem ConnectionError.TransportErrors : 1024
+Added EnumItem ConnectionError.DisconnectTransportIoError : 1025
+Added EnumItem ConnectionError.DisconnectTransportIoInternetError : 1026
+Added EnumItem ConnectionError.DisconnectTransportProtocolError : 1027
+Added EnumItem ConnectionError.DisconnectTransportNgtcp2Error : 1028
+Added EnumItem ConnectionError.DisconnectTransportQuicError : 1029
+Added EnumItem ConnectionError.DisconnectTransportRnaError : 1030
+Added EnumItem StudioScriptEditorColorCategories.ReviewableChangeAddedText : 47
+Added EnumItem StudioScriptEditorColorCategories.ReviewableChangeRemovedText : 48
+
+Added Tag [Deprecated] to Property GuiObject.Transparency
+Added Tag [Deprecated] to Function GuiObject:TweenPosition
+Added Tag [Deprecated] to Function GuiObject:TweenSize
+Added Tag [Deprecated] to Function GuiObject:TweenSizeAndPosition
+
+Changed the read permissions of Property Terrain.ExpandedTerrainResolved 
+	from: {🔒RobloxEngine}
+	  to: {🔍RobloxScript}
+
+Removed Class DataModelPatchService
+	Removed Function DataModelPatchService:GetLuaVersion
+	Removed Function DataModelPatchService:GetPatch
+	Removed Function DataModelPatchService:RegisterPatch
+	Removed Function DataModelPatchService:UpdatePatch
+
+Removed Tag [NotScriptable] from Property Terrain.ExpandedTerrainResolved
