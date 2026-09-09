@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "ee636220-9cf2-0964-30c5-87e8005d197b")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "ed06f3cf-5125-e685-1c0e-9e23933fc929")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 134731, e => {
@@ -530,7 +530,7 @@
         g = e.i(917852),
         y = e.i(576069),
         v = e.i(351111);
-    let b = "".concat("https://assets.create.roblox.com/616b16189e4877a581f10847d3bbf4a74caf129a/assets", "/home/publish_eligibility_banner.webp"),
+    let b = "".concat("https://assets.create.roblox.com/b58ee12768a9c2f22edf7a23ad5ddaa67b6f3f23/assets", "/home/publish_eligibility_banner.webp"),
         A = (0, i.withTranslation)(e => {
             var A;
             let {
@@ -3365,5 +3365,5 @@
     u.displayName = "TextArea", e.s(["TextArea", 0, u])
 }]);
 
-//# debugId=ee636220-9cf2-0964-30c5-87e8005d197b
-//# sourceMappingURL=16jsnm3s6ux16.js.map
+//# debugId=ed06f3cf-5125-e685-1c0e-9e23933fc929
+//# sourceMappingURL=3tj_p4nqjthzq.js.map
