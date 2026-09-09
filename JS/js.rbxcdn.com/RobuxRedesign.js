@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "a09c3a1e724293a98012b1a669ba44d1a03409c2"
+            id: "85c79731f56474c8f8c6fa450e91f3f387ce2706"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "d3ce2596-fac5-45ed-b748-a64f2ef36940", e._sentryDebugIdIdentifier = "sentry-dbid-d3ce2596-fac5-45ed-b748-a64f2ef36940")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "a879d5df-0759-451a-83aa-799b30ac275f", e._sentryDebugIdIdentifier = "sentry-dbid-a879d5df-0759-451a-83aa-799b30ac275f")
     } catch (e) {}
 }(),
 function() {
@@ -20507,7 +20507,7 @@ function() {
                     return e
                 }({}, ou(u)), r = r = {
                     children: [(0, i.jsxs)("div", {
-                        className: "flex flex-col self-stretch",
+                        className: "flex flex-col gap-xsmall self-stretch",
                         children: [(0, i.jsxs)("div", {
                             className: "flex flex-row justify-between items-center self-stretch",
                             children: [(0, i.jsx)(fZ, {
@@ -31990,14 +31990,17 @@ function() {
                     return e
                 }({}, ou(a)), r = r = {
                     children: [(0, i.jsxs)("div", {
-                        className: "flex flex-row justify-between items-center self-stretch",
-                        children: [(0, i.jsx)(fZ, {
-                            children: u(p ? a.sectionHeaderTranslationKey : l.titleTranslationKey)
-                        }), b.success && (0, i.jsx)(dl, {
-                            daysLeft: b.value
+                        className: "flex flex-col gap-xsmall self-stretch",
+                        children: [(0, i.jsxs)("div", {
+                            className: "flex flex-row justify-between items-center self-stretch",
+                            children: [(0, i.jsx)(fZ, {
+                                children: u(p ? a.sectionHeaderTranslationKey : l.titleTranslationKey)
+                            }), b.success && (0, i.jsx)(dl, {
+                                daysLeft: b.value
+                            })]
+                        }), l.bodyTranslationKey && (0, i.jsx)(fU, {
+                            children: u(l.bodyTranslationKey)
                         })]
-                    }), l.bodyTranslationKey && (0, i.jsx)(fU, {
-                        children: u(l.bodyTranslationKey)
                     }), (0, i.jsx)(fD, {
                         isPrimary: o,
                         children: (0, i.jsx)(f6, {
@@ -33775,4 +33778,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("RobuxRedesign");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/robuxRedesign-3661509d971aef05.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/robuxRedesign-3df0ce8133cbd1ba.js.map

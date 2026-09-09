@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "1f2fdec3-b4c5-3b20-59bb-55f73372950c")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "6b3fb580-2913-1841-09e3-7528c514c7af")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 118413, e => {
@@ -153,8 +153,13 @@
             namespace: "creator-analytics",
             name: "isMetricVariantChartStateEnabled",
             defaultValue: !1
+        }),
+        w = (0, t.defineFlag)({
+            namespace: "creator-analytics",
+            name: "isExperimentSegmentationEnabled",
+            defaultValue: !1
         });
-    e.s(["acquisitionMigrationMetricsEnabled", 0, s, "analyticsChartLoadEventstreamEnabled", 0, r, "isAnalyticsAssistantChatEnabled", 0, p, "isAnalyticsAssistantIssueBannerEnabled", 0, m, "isAnalyticsMetricAwareYAxisFormatterEnabled", 0, I, "isAssistantChartOverflowMenuEnabled", 0, b, "isClientSessionsEnabled", 0, _, "isCustomDashboardsApiBackendEnabled", 0, R, "isCustomDashboardsEnabled", 0, M, "isCustomDashboardsLocalStorageEnabled", 0, T, "isEhdResultsAlwaysFetched", 0, C, "isEhdResultsEnabled", 0, N, "isExperimentNullControlValueEnabled", 0, l, "isExperimentRolloutEnabled", 0, f, "isExperimentTargetingEnabled", 0, o, "isExperimentationTemplatesEnabled", 0, a, "isGeneralBreakGlassBannerEnabled", 0, c, "isJourneyEventsEnabled", 0, x, "isLimitedAnalyticsAdminMonitoringNavigationEnabled", 0, n, "isMetricVariantChartStateEnabled", 0, P, "isMonetizationBreakGlassBannerEnabled", 0, d, "isPlayerFeedbackExampleCommentsEnabled", 0, h, "isRotraceMetricEnabled", 0, y, "isTargetingConfigsEnabled", 0, u, "isTelemetryMigrationEnabled", 0, E, "isTreemapColorBySiblingProportionEnabled", 0, A, "showCreatorRewardsReportingDisclaimer", 0, g, "showVideoServiceDashboard", 0, v, "visibleAssetIdInPersonalizationEnabled", 0, i])
+    e.s(["acquisitionMigrationMetricsEnabled", 0, s, "analyticsChartLoadEventstreamEnabled", 0, r, "isAnalyticsAssistantChatEnabled", 0, p, "isAnalyticsAssistantIssueBannerEnabled", 0, m, "isAnalyticsMetricAwareYAxisFormatterEnabled", 0, I, "isAssistantChartOverflowMenuEnabled", 0, b, "isClientSessionsEnabled", 0, _, "isCustomDashboardsApiBackendEnabled", 0, R, "isCustomDashboardsEnabled", 0, M, "isCustomDashboardsLocalStorageEnabled", 0, T, "isEhdResultsAlwaysFetched", 0, C, "isEhdResultsEnabled", 0, N, "isExperimentNullControlValueEnabled", 0, l, "isExperimentRolloutEnabled", 0, f, "isExperimentSegmentationEnabled", 0, w, "isExperimentTargetingEnabled", 0, o, "isExperimentationTemplatesEnabled", 0, a, "isGeneralBreakGlassBannerEnabled", 0, c, "isJourneyEventsEnabled", 0, x, "isLimitedAnalyticsAdminMonitoringNavigationEnabled", 0, n, "isMetricVariantChartStateEnabled", 0, P, "isMonetizationBreakGlassBannerEnabled", 0, d, "isPlayerFeedbackExampleCommentsEnabled", 0, h, "isRotraceMetricEnabled", 0, y, "isTargetingConfigsEnabled", 0, u, "isTelemetryMigrationEnabled", 0, E, "isTreemapColorBySiblingProportionEnabled", 0, A, "showCreatorRewardsReportingDisclaimer", 0, g, "showVideoServiceDashboard", 0, v, "visibleAssetIdInPersonalizationEnabled", 0, i])
 }, 36826, 61925, e => {
     "use strict";
     var t, r, n, i, a, o, s = e.i(677753),
@@ -1359,5 +1364,5 @@
     a.ab = "/ROOT/node_modules/.pnpm/next@16.3.0_@babel+core@7.29.0_@opentelemetry+api@1.9.1_@playwright+test@1.61.1_@types+_379fb98fecc9fc5f7bce6eca48d1b2a5/node_modules/next/dist/compiled/buffer/", t.exports = a(230)
 }]);
 
-//# debugId=1f2fdec3-b4c5-3b20-59bb-55f73372950c
-//# sourceMappingURL=2vgocd_r6mb3c.js.map
+//# debugId=6b3fb580-2913-1841-09e3-7528c514c7af
+//# sourceMappingURL=0iu_r0del99q6.js.map

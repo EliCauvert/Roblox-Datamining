@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "7100dd7c7d8925cf6b939e97723cec5ab17c4117"
+            id: "66376381ebe3f0de3f9f5f05a19075e896ba5829"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "c400577a-a931-422b-8b99-05bd1c1a273a", e._sentryDebugIdIdentifier = "sentry-dbid-c400577a-a931-422b-8b99-05bd1c1a273a")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "8e719031-bb45-47b7-9a03-0eae6931eb5c", e._sentryDebugIdIdentifier = "sentry-dbid-8e719031-bb45-47b7-9a03-0eae6931eb5c")
     } catch (e) {}
 }(),
 function() {
@@ -32771,7 +32771,11 @@ function() {
                     }, [d, l, u, c]);
                     var p = (0, N.useRef)(!1);
                     (0, N.useEffect)(function() {
-                        !(d > 0) || l || f || p.current || (p.current = !0, s().catch(function() {}))
+                        !(d > 0) || l || f || p.current || (p.current = !0, s({
+                            refetchPage: function(e, t) {
+                                return t < 3
+                            }
+                        }).catch(function() {}))
                     }, [d, l, f, s]);
                     var m = (null != (n = null == (i = a.data) ? void 0 : i.pages) ? n : []).flat(),
                         h = m.filter(function(e) {
@@ -49348,7 +49352,8 @@ function() {
                                 type: R.ThumbnailTypes.avatarHeadshot,
                                 size: R.ThumbnailAvatarHeadshotSize.size48,
                                 targetId: o,
-                                format: R.ThumbnailFormat.webp
+                                format: R.ThumbnailFormat.webp,
+                                includeProfileFrame: !0
                             }), (0, p.jsx)("div", {
                                 className: "trusted-friend-social-avatar-loading-overlay",
                                 "aria-hidden": !0
@@ -62720,4 +62725,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("Navigation");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/navigation-b4ea67f99516051a.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/navigation-4f1a0f798771011d.js.map

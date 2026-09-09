@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "9aebeec4-1fd7-ad34-3877-19550b82e6db")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "b043f4c8-81ea-c84e-84ed-ff36ba96eeca")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 522829, e => {
@@ -149,10 +149,10 @@
         M = function(e, t, r) {
             return (null == t || t < 0) && (t = 0), (null == r || r > e.length) && (r = e.length), new a(e.subarray(t, r))
         },
-        V = ["unexpected EOF", "invalid block type", "invalid length/literal", "invalid distance", "stream finished", "no stream handler", , "no callback", "invalid UTF-8 data", "extra field too long", "date not in range 1980-2099", "filename too long", "stream finishing", "invalid zip data"],
-        O = function(e, t, r) {
-            var n = Error(t || V[e]);
-            if (n.code = e, Error.captureStackTrace && Error.captureStackTrace(n, O), !r) throw n;
+        O = ["unexpected EOF", "invalid block type", "invalid length/literal", "invalid distance", "stream finished", "no stream handler", , "no callback", "invalid UTF-8 data", "extra field too long", "date not in range 1980-2099", "filename too long", "stream finishing", "invalid zip data"],
+        V = function(e, t, r) {
+            var n = Error(t || O[e]);
+            if (n.code = e, Error.captureStackTrace && Error.captureStackTrace(n, V), !r) throw n;
             return n
         },
         U = function(e, t, r, n) {
@@ -181,10 +181,10 @@
             do {
                 if (!b) {
                     y = I(e, g, 1);
-                    var V = I(e, g + 1, 3);
-                    if (g += 3, V)
-                        if (1 == V) b = T, D = E, C = 9, w = 5;
-                        else if (2 == V) {
+                    var O = I(e, g + 1, 3);
+                    if (g += 3, O)
+                        if (1 == O) b = T, D = E, C = 9, w = 5;
+                        else if (2 == O) {
                         var U = I(e, g, 31) + 257,
                             P = I(e, g + 10, 15) + 4,
                             k = U + I(e, g + 5, 31) + 1;
@@ -205,20 +205,20 @@
                         var Y = B.subarray(0, U),
                             q = B.subarray(U);
                         C = R(Y), w = R(q), b = A(Y, C, 1), D = A(q, w, 1)
-                    } else O(1);
+                    } else V(1);
                     else {
                         var K = N(g) + 4,
                             X = e[K - 4] | e[K - 3] << 8,
                             W = K + X;
                         if (W > i) {
-                            m && O(0);
+                            m && V(0);
                             break
                         }
                         d && p(v + X), r.set(e.subarray(K, W), v), t.b = v += X, t.p = g = 8 * W, t.f = y;
                         continue
                     }
                     if (g > S) {
-                        m && O(0);
+                        m && V(0);
                         break
                     }
                 }
@@ -227,10 +227,10 @@
                     var j = b[_(e, g) & $],
                         ee = j >> 4;
                     if ((g += 15 & j) > S) {
-                        m && O(0);
+                        m && V(0);
                         break
                     }
-                    if (j || O(2), ee < 256) r[v++] = ee;
+                    if (j || V(2), ee < 256) r[v++] = ee;
                     else if (256 == ee) {
                         Z = g, b = null;
                         break
@@ -243,14 +243,14 @@
                         }
                         var en = D[_(e, g) & J],
                             ea = en >> 4;
-                        en || O(3), g += 15 & en;
+                        en || V(3), g += 15 & en;
                         var q = f[ea];
                         if (ea > 3) {
                             var er = u[ea];
                             q += _(e, g) & (1 << er) - 1, g += er
                         }
                         if (g > S) {
-                            m && O(0);
+                            m && V(0);
                             break
                         }
                         d && p(v + 131072);
@@ -258,7 +258,7 @@
                         if (v < q) {
                             var eo = o - q,
                                 es = Math.min(q, ei);
-                            for (eo + v < 0 && O(3); v < es; ++v) r[v] = n[eo + v]
+                            for (eo + v < 0 && V(3); v < es; ++v) r[v] = n[eo + v]
                         }
                         for (; v < ei; ++v) r[v] = r[v - q]
                     }
@@ -383,7 +383,7 @@
         },
         Q = function(e, t, r, n, a, o, l, d, h, m, p) {
             P(t, p++, r), ++a[256];
-            for (var f, y, g, v, b = B(a, 15), T = b.t, E = b.l, R = B(o, 15), I = R.t, _ = R.l, N = H(T), M = N.c, V = N.n, O = H(I), U = O.c, x = O.n, Q = new i(19), F = 0; F < M.length; ++F) ++Q[31 & M[F]];
+            for (var f, y, g, v, b = B(a, 15), T = b.t, E = b.l, R = B(o, 15), I = R.t, _ = R.l, N = H(T), M = N.c, O = N.n, V = H(I), U = V.c, x = V.n, Q = new i(19), F = 0; F < M.length; ++F) ++Q[31 & M[F]];
             for (var F = 0; F < U.length; ++F) ++Q[31 & U[F]];
             for (var K = B(Q, 7), j = K.t, z = K.l, Y = 19; Y > 4 && !j[c[Y - 1]]; --Y);
             var q = m + 5 << 3,
@@ -393,7 +393,7 @@
             if (P(t, p, 1 + (W < X)), p += 2, W < X) {
                 f = A(T, E, 0), y = T, g = A(I, _, 0), v = I;
                 var $ = A(j, z, 0);
-                P(t, p, V - 257), P(t, p + 5, x - 1), P(t, p + 10, Y - 4), p += 14;
+                P(t, p, O - 257), P(t, p + 5, x - 1), P(t, p + 10, Y - 4), p += 14;
                 for (var F = 0; F < Y; ++F) P(t, p + 3 * F, j[c[F]]);
                 p += 3 * Y;
                 for (var J = [M, U], Z = 0; Z < 2; ++Z)
@@ -425,14 +425,14 @@
                 g && (p[0] = l.r >> 3);
                 for (var v = F[t - 1], b = v >> 13, A = 8191 & v, D = (1 << r) - 1, C = l.p || new i(32768), w = l.h || new i(D + 1), T = Math.ceil(r / 3), S = 2 * T, E = function(t) {
                         return (e[t] ^ e[t + 1] << T ^ e[t + 2] << S) & D
-                    }, R = new o(25e3), I = new i(288), _ = new i(32), V = 0, O = 0, U = l.i || 0, P = 0, k = l.w || 0, B = 0; U + 2 < d; ++U) {
+                    }, R = new o(25e3), I = new i(288), _ = new i(32), O = 0, V = 0, U = l.i || 0, P = 0, k = l.w || 0, B = 0; U + 2 < d; ++U) {
                     var x = E(U),
                         H = 32767 & U,
                         G = w[x];
                     if (C[H] = G, w[x] = H, k <= U) {
                         var K = d - U;
-                        if ((V > 7e3 || P > 24576) && (K > 423 || !f)) {
-                            g = Q(e, p, 0, R, I, _, O, P, B, U - B, g), P = V = O = 0, B = U;
+                        if ((O > 7e3 || P > 24576) && (K > 423 || !f)) {
+                            g = Q(e, p, 0, R, I, _, V, P, B, U - B, g), P = O = V = 0, B = U;
                             for (var j = 0; j < 286; ++j) I[j] = 0;
                             for (var j = 0; j < 30; ++j) _[j] = 0
                         }
@@ -460,12 +460,12 @@
                             R[P++] = 0x10000000 | m[z] << 18 | y[Y];
                             var ei = 31 & m[z],
                                 eo = 31 & y[Y];
-                            O += s[ei] + u[eo], ++I[257 + ei], ++_[eo], k = U + z, ++V
+                            V += s[ei] + u[eo], ++I[257 + ei], ++_[eo], k = U + z, ++O
                         } else R[P++] = e[U], ++I[e[U]]
                     }
                 }
                 for (U = Math.max(U, k); U < d; ++U) R[P++] = e[U], ++I[e[U]];
-                g = Q(e, p, f, R, I, _, O, P, B, U - B, g), f || (l.r = 7 & g | p[g / 8 | 0] << 3, g -= 7, l.h = w, l.p = C, l.i = U, l.w = k)
+                g = Q(e, p, f, R, I, _, V, P, B, U - B, g), f || (l.r = 7 & g | p[g / 8 | 0] << 3, g -= 7, l.h = w, l.p = C, l.i = U, l.w = k)
             } else {
                 for (var U = l.w || 0; U < d + f; U += 65535) {
                     var es = U + 65535;
@@ -562,7 +562,7 @@
             return n(J[r].c + ";onmessage=function(e){for(var k in e.data)self[k]=e.data[k];onmessage=" + t.toString() + "}", r, c, Z(c), a)
         },
         et = function() {
-            return [a, i, o, s, u, c, h, f, T, E, g, V, A, R, I, _, N, M, O, U, eS, ei, eo]
+            return [a, i, o, s, u, c, h, f, T, E, g, O, A, R, I, _, N, M, V, U, eS, ei, eo]
         },
         er = function() {
             return [a, i, o, s, u, c, m, y, w, D, S, C, g, F, K, A, P, k, B, x, H, G, L, Q, N, M, j, X, eC, ei]
@@ -595,7 +595,7 @@
                 e ? (u.terminate(), t.ondata.call(t, e)) : Array.isArray(r) ? 1 == r.length ? (t.queuedSize -= r[0], t.ondrain && t.ondrain(r[0])) : (r[1] && u.terminate(), t.ondata.call(t, e, r[0], r[1])) : o(r)
             });
             u.postMessage(r), t.queuedSize = 0, t.push = function(e, r) {
-                t.ondata || O(5), s && t.ondata(O(4, 0, 1), null, !!r), t.queuedSize += e.length, u.postMessage([e, s = r], e.buffer instanceof ArrayBuffer ? [e.buffer] : [])
+                t.ondata || V(5), s && t.ondata(V(4, 0, 1), null, !!r), t.queuedSize += e.length, u.postMessage([e, s = r], e.buffer instanceof ArrayBuffer ? [e.buffer] : [])
             }, t.terminate = function() {
                 u.terminate()
             }, i && (t.flush = function(e) {
@@ -622,7 +622,7 @@
             }
         },
         ep = function(e) {
-            (31 != e[0] || 139 != e[1] || 8 != e[2]) && O(6, "invalid gzip data");
+            (31 != e[0] || 139 != e[1] || 8 != e[2]) && V(6, "invalid gzip data");
             var t = e[3],
                 r = 10;
             4 & t && (r += (e[10] | e[11] << 8) + 2);
@@ -644,7 +644,7 @@
             }
         },
         ev = function(e, t) {
-            return ((15 & e[0]) != 8 || e[0] >> 4 > 7 || (e[0] << 8 | e[1]) % 31) && O(6, "invalid zlib data"), (e[1] >> 5 & 1) == +!t && O(6, "invalid zlib data: " + (32 & e[1] ? "need" : "unexpected") + " dictionary"), (e[1] >> 3 & 4) + 2
+            return ((15 & e[0]) != 8 || e[0] >> 4 > 7 || (e[0] << 8 | e[1]) % 31) && V(6, "invalid zlib data"), (e[1] >> 5 & 1) == +!t && V(6, "invalid zlib data: " + (32 & e[1] ? "need" : "unexpected") + " dictionary"), (e[1] >> 3 & 4) + 2
         };
 
     function eb(e, t) {
@@ -665,7 +665,7 @@
             return e.prototype.p = function(e, t) {
                 this.ondata(X(e, this.o, 0, 0, this.s), t)
             }, e.prototype.push = function(e, t) {
-                this.ondata || O(5), this.s.l && O(4);
+                this.ondata || V(5), this.s.l && V(4);
                 var r = e.length + this.s.z;
                 if (r > this.b.length) {
                     if (r > 2 * this.b.length - 32768) {
@@ -677,7 +677,7 @@
                 } else this.b.set(e, this.s.z), this.s.z += e.length;
                 this.s.l = 1 & t, (this.s.z > this.s.w + 8191 || t) && (this.p(this.b, t || !1), this.s.w = this.s.i, this.s.i -= 2), t && (this.s = this.o = {}, this.b = K)
             }, e.prototype.flush = function(e) {
-                if (this.ondata || O(5), this.s.l && O(4), this.p(this.b, !1), this.s.w = this.s.i, this.s.i -= 2, e) {
+                if (this.ondata || V(5), this.s.l && V(4), this.p(this.b, !1), this.s.w = this.s.i, this.s.i -= 2, e) {
                     var t = new a(6);
                     t[0] = this.s.r >> 3;
                     var r = L(t, this.s.r, K);
@@ -706,7 +706,7 @@
                 }, this.o = new a(32768), this.p = new a(0), r && this.o.set(r)
             }
             return e.prototype.e = function(e) {
-                if (this.ondata || O(5), this.d && O(4), this.p.length) {
+                if (this.ondata || V(5), this.d && V(4), this.p.length) {
                     if (e.length) {
                         var t = new a(this.p.length + e.length);
                         t.set(this.p), t.set(e, this.p.length), this.p = t
@@ -798,7 +798,7 @@
                     if (this.p.length < 6 && !t) return;
                     this.p = this.p.subarray(ev(this.p, this.v - 1)), this.v = 0
                 }
-                t && (this.p.length < 4 && O(6, "invalid zlib data"), this.p = this.p.subarray(0, -4)), ew.prototype.c.call(this, t)
+                t && (this.p.length < 4 && V(6, "invalid zlib data"), this.p = this.p.subarray(0, -4)), ew.prototype.c.call(this, t)
             }, e
         }()),
         e_ = function(e, t) {
@@ -818,7 +818,7 @@
                     e.ondata(t, r)
                 }
             }, e.prototype.push = function(e, t) {
-                if (this.ondata || O(5), this.s) this.s.push(e, t);
+                if (this.ondata || V(5), this.s) this.s.push(e, t);
                 else {
                     if (this.p && this.p.length) {
                         var r = new a(this.p.length + e.length);
@@ -842,11 +842,11 @@
     }, eM.prototype.push = function(e, t) {
         this.queuedSize += e.length, eN.prototype.push.call(this, e, t)
     };
-    var eV = "u" > typeof TextEncoder && new TextEncoder,
-        eO = "u" > typeof TextDecoder && new TextDecoder,
+    var eO = "u" > typeof TextEncoder && new TextEncoder,
+        eV = "u" > typeof TextDecoder && new TextDecoder,
         eU = 0;
     try {
-        eO.decode(K, {
+        eV.decode(K, {
             stream: !0
         }), eU = 1
     } catch (e) {}
@@ -867,7 +867,7 @@
             for (var r = new a(e.length), n = 0; n < e.length; ++n) r[n] = e.charCodeAt(n);
             return r
         }
-        if (eV) return eV.encode(e);
+        if (eO) return eO.encode(e);
         for (var i = e.length, o = new a(e.length + (e.length >> 1)), s = 0, u = function(e) {
                 o[s++] = e
             }, n = 0; n < i; ++n) {
@@ -886,31 +886,31 @@
             for (var r = "", n = 0; n < e.length; n += 16384) r += String.fromCharCode.apply(null, e.subarray(n, n + 16384));
             return r
         }
-        if (eO) return eO.decode(e);
+        if (eV) return eV.decode(e);
         var a = eP(e),
             i = a.s,
             r = a.r;
-        return r.length && O(8), i
+        return r.length && V(8), i
     }(function(e) {
         this.ondata = e, eU ? this.t = new TextDecoder : this.p = K
     }).prototype.push = function(e, t) {
-        if (this.ondata || O(5), t = !!t, this.t) {
+        if (this.ondata || V(5), t = !!t, this.t) {
             this.ondata(this.t.decode(e, {
                 stream: !0
-            }), t), t && (this.t.decode().length && O(8), this.t = null);
+            }), t), t && (this.t.decode().length && V(8), this.t = null);
             return
         }
-        this.p || O(4);
+        this.p || V(4);
         var r = new a(this.p.length + e.length);
         r.set(this.p), r.set(e, this.p.length);
         var n = eP(r),
             i = n.s,
             o = n.r;
-        t ? (o.length && O(8), this.p = null) : this.p = o, this.ondata(i, t)
+        t ? (o.length && V(8), this.p = null) : this.p = o, this.ondata(i, t)
     }, (function(e) {
         this.ondata = e
     }).prototype.push = function(e, t) {
-        this.ondata || O(5), this.d && O(4), this.ondata(ek(e), this.d = t || !1)
+        this.ondata || V(5), this.d && V(4), this.ondata(ek(e), this.d = t || !1)
     };
     var ex = function(e) {
             return 1 == e ? 3 : e < 6 ? 2 : +(9 == e)
@@ -923,7 +923,7 @@
             if (n && s + u + c) {
                 for (; t + 4 < l; t += 4 + ec(e, t + 2))
                     if (1 == ec(e, t)) return [s ? ed(e, t + 4 + 8 * u) : a, u ? ed(e, t + 4) : i, c ? ed(e, t + 4 + 8 * (u + s)) : o, 1];
-                n < 2 && O(13)
+                n < 2 && V(13)
             }
             return [a, i, o, 0]
         },
@@ -932,7 +932,7 @@
             if (e)
                 for (var r in e) {
                     var n = e[r].length;
-                    n > 65535 && O(9), t += n + 4
+                    n > 65535 && V(9), t += n + 4
                 }
             return t
         },
@@ -944,7 +944,7 @@
             eh(e, t, null != o ? 0x2014b50 : 0x4034b50), t += 4, null != o && (e[t++] = 20, e[t++] = r.os), e[t] = 20, t += 2, e[t++] = r.flag << 1 | (i < 0 && 8), e[t++] = a && 8, e[t++] = 255 & r.compression, e[t++] = r.compression >> 8;
             var h = new Date(null == r.mtime ? Date.now() : r.mtime),
                 m = h.getFullYear() - 1980;
-            if ((m < 0 || m > 119) && O(10), eh(e, t, m << 25 | h.getMonth() + 1 << 21 | h.getDate() << 16 | h.getHours() << 11 | h.getMinutes() << 5 | h.getSeconds() >> 1), t += 4, -1 != i && (eh(e, t, r.crc), eh(e, t + 4, i < 0 ? -i - 2 : i), eh(e, t + 8, r.size)), eh(e, t + 12, u), eh(e, t + 14, d), t += 16, null != o && (eh(e, t, l), eh(e, t + 6, r.attrs), eh(e, t + 10, o), t += 14), e.set(n, t), t += u, d)
+            if ((m < 0 || m > 119) && V(10), eh(e, t, m << 25 | h.getMonth() + 1 << 21 | h.getDate() << 16 | h.getHours() << 11 | h.getMinutes() << 5 | h.getSeconds() >> 1), t += 4, -1 != i && (eh(e, t, r.crc), eh(e, t + 4, i < 0 ? -i - 2 : i), eh(e, t + 8, r.size)), eh(e, t + 12, u), eh(e, t + 14, d), t += 16, null != o && (eh(e, t, l), eh(e, t + 6, r.attrs), eh(e, t + 10, o), t += 14), e.set(n, t), t += u, d)
                 for (var p in c) {
                     var f = c[p],
                         y = f.length;
@@ -962,7 +962,7 @@
             return e.prototype.process = function(e, t) {
                 this.ondata(null, e, t)
             }, e.prototype.push = function(e, t) {
-                this.ondata || O(5), this.c.p(e), this.size += e.length, t && (this.crc = this.c.d()), this.process(e, t || !1)
+                this.ondata || V(5), this.c.p(e), this.size += e.length, t && (this.crc = this.c.d()), this.process(e, t || !1)
             }, e
         }();
 
@@ -997,7 +997,7 @@
         eF.prototype.push.call(this, e, t)
     }, ez.prototype.add = function(e) {
         var t = this;
-        if (this.ondata || O(5), 2 & this.d) this.ondata(O(4 + (1 & this.d) * 8, 0, 1), null, !1);
+        if (this.ondata || V(5), 2 & this.d) this.ondata(V(4 + (1 & this.d) * 8, 0, 1), null, !1);
         else {
             var r = ek(e.filename),
                 n = r.length,
@@ -1005,7 +1005,7 @@
                 o = i && ek(i),
                 s = n != e.filename.length || o && i.length != o.length,
                 u = n + eG(e.extra) + 30;
-            n > 65535 && this.ondata(O(11, 0, 1), null, !1);
+            n > 65535 && this.ondata(V(11, 0, 1), null, !1);
             var c = new a(u);
             eL(c, 0, e, r, s, -1);
             var l = [c],
@@ -1045,7 +1045,7 @@
         }
     }, ez.prototype.end = function() {
         var e = this;
-        2 & this.d ? this.ondata(O(4 + (1 & this.d) * 8, 0, 1), null, !0) : (this.d ? this.e() : this.u.push({
+        2 & this.d ? this.ondata(V(4 + (1 & this.d) * 8, 0, 1), null, !0) : (this.d ? this.e() : this.u.push({
             r: function() {
                 1 & e.d && (e.u.splice(-1, 1), e.e())
             },
@@ -1103,7 +1103,7 @@
         this.i.terminate && (e = M(e, 0)), this.i.push(e, t)
     }, eX.compression = 8, eW.prototype.push = function(e, t) {
         var r = this;
-        if (this.onfile || O(5), this.p || O(4), this.c > 0) {
+        if (this.onfile || V(5), this.p || V(4), this.c > 0) {
             var n = Math.min(this.c, e.length),
                 i = e.subarray(0, n);
             if (this.c -= n, this.d ? this.d.push(i, !this.c) : this.k[0].push(i), (e = e.subarray(n)).length) return this.push(e, t)
@@ -1136,9 +1136,9 @@
                                 name: g,
                                 compression: n,
                                 start: function() {
-                                    if (C.ondata || O(5), b) {
+                                    if (C.ondata || V(5), b) {
                                         var e = r.o[n];
-                                        e || C.ondata(O(14, "unknown compression type " + n, 1), null, !1), (h = b < 0 ? new e(g) : new e(g, b, A)).ondata = function(e, t, r) {
+                                        e || C.ondata(V(14, "unknown compression type " + n, 1), null, !1), (h = b < 0 ? new e(g) : new e(g, b, A)).ondata = function(e, t, r) {
                                             C.ondata(e, t, r)
                                         };
                                         for (var t = 0; t < p.length; t++) {
@@ -1168,7 +1168,7 @@
             if (2 & o) return this.push(c.subarray(s), t);
             this.p = c.subarray(s)
         }
-        t && (this.c && O(13), this.p = null)
+        t && (this.c && V(13), this.p = null)
     }, eW.prototype.register = function(e) {
         this.o[e.compression] = e
     }, "function" == typeof queueMicrotask && queueMicrotask;
@@ -1478,6 +1478,7 @@
             let a = ["custom-dashboards", "universe", e, "list"];
             return t ? [...a, null != (r = t.pageSize) ? r : null, null != (n = t.pageToken) ? n : null] : a
         },
+        listInfinite: (e, t) => ["custom-dashboards", "universe", e, "list", "infinite", null != t ? t : null],
         pinned: e => ["custom-dashboards", "universe", e, "pinned"],
         detail: (e, t) => ["custom-dashboards", "universe", e, "detail", t],
         suggestedName: e => ["custom-dashboards", "universe", e, "suggested-name"]
@@ -1799,7 +1800,7 @@
             [d.CustomDashboardSummaryCardAggregation.Cumulative]: 24,
             [d.CustomDashboardSummaryCardAggregation.AveragePerUniqueUser]: 25
         },
-        V = {
+        O = {
             DASHBOARD_AGGREGATION_SUM: b.RAQIV2AggregationType.Sum,
             DASHBOARD_AGGREGATION_COUNT: b.RAQIV2AggregationType.Count,
             DASHBOARD_AGGREGATION_AVERAGE: b.RAQIV2AggregationType.Average,
@@ -1835,7 +1836,7 @@
             24: d.CustomDashboardSummaryCardAggregation.Cumulative,
             25: b.RAQIV2AggregationType.AveragePerUser
         },
-        O = {
+        V = {
             [d.SummaryCardTitleSource.Auto]: 1,
             [d.SummaryCardTitleSource.Custom]: 2
         },
@@ -2046,7 +2047,7 @@
                             metric: b.RAQIV2UIMetric.CustomEventsV2,
                             customEventName: n,
                             ...void 0 !== h.aggregation ? {
-                                aggregationType: (e = L(h.aggregation, V, "aggregation"), (0, T.isRAQIV2AggregationType)(e) ? e : H("Unsupported custom-event aggregation ".concat(e, ".")))
+                                aggregationType: (e = L(h.aggregation, O, "aggregation"), (0, T.isRAQIV2AggregationType)(e) ? e : H("Unsupported custom-event aggregation ".concat(e, ".")))
                             } : {}
                         }
                     } else {
@@ -2184,7 +2185,7 @@
                             title: o.title
                         } : {},
                         metric: $(o.metric, "".concat(n, ".metric")),
-                        aggregation: L(o.aggregation, V, "aggregation"),
+                        aggregation: L(o.aggregation, O, "aggregation"),
                         filters: j(o.filters, "".concat(n, ".filters")),
                         ...void 0 !== r ? {
                             titleSource: L(r, U, "titleSource")
@@ -2211,7 +2212,7 @@
                         p = l.granularity,
                         f = h.smoothing;
                     if (void 0 !== l.aggregation) {
-                        let e = L(l.aggregation, V, "aggregation");
+                        let e = L(l.aggregation, O, "aggregation");
                         (0, T.isChartAggregation)(e) || H("Unsupported chart aggregation ".concat(e, ".")), s = e
                     }
                     let y = null != (o = l.breakdownDimensionKeys) ? o : l.breakdown_dimension_keys;
@@ -2231,7 +2232,7 @@
                                     metric: $(e.metric, "".concat(n, ".metric")),
                                     seriesKey: i,
                                     ...void 0 !== e.aggregation ? {
-                                        aggregation: (o = L(e.aggregation, V, "aggregation"), (0, T.isChartAggregation)(o) ? o : H("Unsupported chart aggregation ".concat(o, ".")))
+                                        aggregation: (o = L(e.aggregation, O, "aggregation"), (0, T.isChartAggregation)(o) ? o : H("Unsupported chart aggregation ".concat(o, ".")))
                                     } : {}
                                 }
                             }),
@@ -2293,7 +2294,7 @@
                             metric: W(r.metric),
                             aggregation: G(r.aggregation, M, "aggregation"),
                             filters: K(r.filters),
-                            titleSource: G(null != (n = r.titleSource) ? n : d.SummaryCardTitleSource.Auto, O, "titleSource")
+                            titleSource: G(null != (n = r.titleSource) ? n : d.SummaryCardTitleSource.Auto, V, "titleSource")
                         }
                     } : {
                         chart: (s = function(e) {
@@ -2957,17 +2958,8 @@
                     migrationFailedCount: r.migrationFailedCount + n.migrationFailedCount
                 }
             }
-            async listPinned(e) {
-                return this.apiService.listPinned ? this.apiService.listPinned(e) : (await this.apiService.list(e)).items.filter(e => e.isPinned).map(e => {
-                    let {
-                        id: t,
-                        name: r
-                    } = e;
-                    return {
-                        id: t,
-                        name: r
-                    }
-                })
+            listPinned(e) {
+                return this.apiService.listPinned(e)
             }
             async get(e, t) {
                 try {
@@ -3186,6 +3178,19 @@
                     capabilities: d.LOCAL_DASHBOARD_LIST_CAPABILITIES,
                     migrationFailedCount: 0
                 }
+            }
+            async listPinned(e) {
+                let t = this.peekUniverseMap(e);
+                return t ? (0, f.sortDashboardsForList)([...t.values()].map(e => e.document)).filter(e => e.isPinned).map(e => {
+                    let {
+                        id: t,
+                        name: r
+                    } = e;
+                    return {
+                        id: t,
+                        name: r
+                    }
+                }) : []
             }
             async get(e, t) {
                 return this.loadOrThrow(e, t).record.document
@@ -3669,6 +3674,21 @@
                     migrationFailedCount: o
                 }
             }
+            async listPinned(e) {
+                let {
+                    records: t
+                } = this.readMaterialised(e);
+                return (0, f.sortDashboardsForList)(Object.values(t).map(e => e.document)).filter(e => e.isPinned).map(e => {
+                    let {
+                        id: t,
+                        name: r
+                    } = e;
+                    return {
+                        id: t,
+                        name: r
+                    }
+                })
+            }
             async get(e, t) {
                 let {
                     records: r
@@ -3971,17 +3991,8 @@
             list(e, t) {
                 return this.inner.list(e, t)
             }
-            async listPinned(e) {
-                return this.inner.listPinned ? this.inner.listPinned(e) : (await this.inner.list(e)).items.filter(e => e.isPinned).map(e => {
-                    let {
-                        id: t,
-                        name: r
-                    } = e;
-                    return {
-                        id: t,
-                        name: r
-                    }
-                })
+            listPinned(e) {
+                return this.inner.listPinned(e)
             }
             get(e, t) {
                 return this.inner.get(e, t)
@@ -4033,11 +4044,12 @@
                 (0, c._)(this, "inner", void 0), this.inner = e
             }
         },
-        eV = {
+        eO = {
             list: async () => ({
                 items: [],
                 migrationFailedCount: 0
             }),
+            listPinned: async () => [],
             async get() {
                 throw new u.CustomDashboardNotAvailableError
             },
@@ -4078,7 +4090,7 @@
             subscribe: () => () => void 0
         };
 
-    function eO() {
+    function eV() {
         try {
             if (window.localStorage) return new eN
         } catch (e) {}
@@ -4098,18 +4110,18 @@
                 a = s.current.get(r);
             if (a) return a;
             let i = function(e) {
-                if (!e.isEnabled) return eV;
+                if (!e.isEnabled) return eO;
                 if (e.isApiBackendEnabled) {
                     let t = new el((0, g.createDefaultCustomDashboardsApiClient)());
                     return e.canSaveCustomDashboards ? t : e.isLocalStorageEnabled ? new ef({
                         apiService: t,
-                        localService: eO()
+                        localService: eV()
                     }) : new eM(t)
                 }
-                return e.isLocalStorageEnabled ? eO() : new eD
+                return e.isLocalStorageEnabled ? eV() : new eD
             }(e);
             return s.current.set(r, i), i
-        }, [n]), c = null != n ? n : eV;
+        }, [n]), c = null != n ? n : eO;
         (0, r.useEffect)(() => {
             let e = s.current;
             return () => {
@@ -4332,11 +4344,11 @@
         N = I(w),
         M = I(E);
 
-    function V(e) {
+    function O(e) {
         return e.trim()
     }
-    e.s(["asBoolean", 0, E, "asIsoTimestamp", 0, R, "asNonEmptyString", 0, w, "asNumber", 0, T, "asOptionalIsoTimestamp", 0, _, "asOptionalNonEmptyString", 0, N, "asRecord", 0, D, "asString", 0, C, "isRecord", 0, A, "optional", 0, I, "trimmed", 0, V, "validateOptionalBoolean", 0, M, "validatePreviousPeriodOverlay", 0, S], 115232);
-    let O = new Set([l.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod, l.CustomDashboardSummaryCardAggregation.MostRecentDataPoint, l.CustomDashboardSummaryCardAggregation.Total, n.RAQIV2AggregationType.Average, n.RAQIV2AggregationType.AveragePerUser, n.RAQIV2AggregationType.Count, n.RAQIV2AggregationType.CountUser, n.RAQIV2AggregationType.Max, n.RAQIV2AggregationType.Min, n.RAQIV2AggregationType.Sum, l.CustomDashboardSummaryCardAggregation.Median, l.CustomDashboardSummaryCardAggregation.Cumulative, n.RAQIV2PercentileType.AVG, n.RAQIV2PercentileType.P10, n.RAQIV2PercentileType.P50, n.RAQIV2PercentileType.P90]),
+    e.s(["asBoolean", 0, E, "asIsoTimestamp", 0, R, "asNonEmptyString", 0, w, "asNumber", 0, T, "asOptionalIsoTimestamp", 0, _, "asOptionalNonEmptyString", 0, N, "asRecord", 0, D, "asString", 0, C, "isRecord", 0, A, "optional", 0, I, "trimmed", 0, O, "validateOptionalBoolean", 0, M, "validatePreviousPeriodOverlay", 0, S], 115232);
+    let V = new Set([l.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod, l.CustomDashboardSummaryCardAggregation.MostRecentDataPoint, l.CustomDashboardSummaryCardAggregation.Total, n.RAQIV2AggregationType.Average, n.RAQIV2AggregationType.AveragePerUser, n.RAQIV2AggregationType.Count, n.RAQIV2AggregationType.CountUser, n.RAQIV2AggregationType.Max, n.RAQIV2AggregationType.Min, n.RAQIV2AggregationType.Sum, l.CustomDashboardSummaryCardAggregation.Median, l.CustomDashboardSummaryCardAggregation.Cumulative, n.RAQIV2PercentileType.AVG, n.RAQIV2PercentileType.P10, n.RAQIV2PercentileType.P50, n.RAQIV2PercentileType.P90]),
         U = new Set([n.RAQIV2AggregationType.Average, n.RAQIV2AggregationType.AveragePerUser, n.RAQIV2AggregationType.Count, n.RAQIV2AggregationType.CountUser, n.RAQIV2AggregationType.Max, n.RAQIV2AggregationType.Min, n.RAQIV2AggregationType.Sum, n.RAQIV2PercentileType.AVG, n.RAQIV2PercentileType.P10, n.RAQIV2PercentileType.P50, n.RAQIV2PercentileType.P90]),
         P = new Set(["Cumulative", "Day", "Week", "Hour", "HalfHour", "Minute"]),
         k = new Set(l.CUSTOM_DASHBOARD_CHART_TYPES),
@@ -4441,7 +4453,7 @@
     }
 
     function ed(e) {
-        let t = el(V(e), "name");
+        let t = el(O(e), "name");
         if (0 === t.length) throw new c.CustomDashboardValidationError("name", "Dashboard name is required.");
         if (t.length > l.MAX_DASHBOARD_NAME_LENGTH) throw new c.CustomDashboardValidationError("name", "Dashboard name cannot exceed ".concat(l.MAX_DASHBOARD_NAME_LENGTH, " characters."));
         return t
@@ -4449,7 +4461,7 @@
 
     function eh(e) {
         if (void 0 === e) return;
-        let t = el(V(e), "description");
+        let t = el(O(e), "description");
         if (t.length > l.MAX_DASHBOARD_DESCRIPTION_LENGTH) throw new c.CustomDashboardValidationError("description", "Description cannot exceed ".concat(l.MAX_DASHBOARD_DESCRIPTION_LENGTH, " characters."));
         return 0 === t.length ? void 0 : t
     }
@@ -4478,7 +4490,7 @@
 
     function ef(e, t) {
         if (null == e) return;
-        let r = el(V(C(e, t)), t);
+        let r = el(O(C(e, t)), t);
         if (r.length > l.MAX_TILE_TITLE_LENGTH) throw new c.CustomDashboardValidationError(t, "Tile title cannot exceed ".concat(l.MAX_TILE_TITLE_LENGTH, " characters."));
         return 0 === r.length ? void 0 : r
     }
@@ -4542,7 +4554,7 @@
         return {
             metric: ev(r.metric, "".concat(t, ".metric")),
             seriesKey: el(w(r.seriesKey, "".concat(t, ".seriesKey")), "".concat(t, ".seriesKey")),
-            displayName: void 0 !== r.displayName && null !== r.displayName ? el(V(C(r.displayName, "".concat(t, ".displayName"))), "".concat(t, ".displayName")) : void 0,
+            displayName: void 0 !== r.displayName && null !== r.displayName ? el(O(C(r.displayName, "".concat(t, ".displayName"))), "".concat(t, ".displayName")) : void 0,
             aggregation: eo(r.aggregation, "".concat(t, ".aggregation"))
         }
     }
@@ -4624,7 +4636,7 @@
                             a = ev(r.metric, "".concat(t, ".metric")),
                             i = function(e, t) {
                                 let r = C(e, t);
-                                if (!(X(O, r) || x.test(r))) throw new c.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known summary-card aggregation.'));
+                                if (!(X(V, r) || x.test(r))) throw new c.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known summary-card aggregation.'));
                                 return r
                             }(r.aggregation, "".concat(t, ".aggregation")),
                             o = a.metricKey ? g(a.metricKey, i) : i;
@@ -5208,5 +5220,5 @@
     }])
 }]);
 
-//# debugId=9aebeec4-1fd7-ad34-3877-19550b82e6db
-//# sourceMappingURL=0ok4aarn2365s.js.map
+//# debugId=b043f4c8-81ea-c84e-84ed-ff36ba96eeca
+//# sourceMappingURL=0vbzds3y482cq.js.map

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "0337f01f-484b-611a-a1f9-910302f9b975")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "fce2b126-36e2-da59-6a0c-1dd743bd585f")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 962059, e => {
@@ -150,7 +150,7 @@
         O = e.i(109182),
         U = e.i(959222),
         B = e.i(37819),
-        z = e.i(329781),
+        z = e.i(176148),
         V = e.i(169722),
         F = e.i(714039),
         q = e.i(686197),
@@ -194,9 +194,9 @@
     var Q = e.i(339544),
         J = e.i(475642),
         X = e.i(211461),
-        Z = e.i(888379),
-        $ = e.i(287184),
-        ee = e.i(562146),
+        Z = e.i(52746),
+        $ = e.i(459891),
+        ee = e.i(46938),
         et = e.i(211388);
     let en = "CreatorHub.MomentsCreations.local",
         ei = e => "".concat(en, ".").concat(e),
@@ -725,7 +725,7 @@
         }
     }
 
-    function e3(e, t) {
+    function e5(e, t) {
         var n, i, a;
         return null == e ? e : {
             assetId: (0, ez.exists)(e, "assetId") ? e.assetId : void 0,
@@ -752,7 +752,7 @@
         }
     }
 
-    function e5(e, t) {
+    function e3(e, t) {
         var n;
         return null == e ? e : {
             status: (0, ez.exists)(e, "status") ? e.status : void 0,
@@ -820,7 +820,7 @@
             id: (0, ez.exists)(t, "id") ? t.id : void 0,
             feedItemId: (0, ez.exists)(t, "feedItemId") ? t.feedItemId : void 0,
             type: (0, ez.exists)(t, "type") ? t.type : void 0,
-            captionedAssetMoment: (0, ez.exists)(t, "captionedAssetMoment") ? e3(t.captionedAssetMoment) : void 0,
+            captionedAssetMoment: (0, ez.exists)(t, "captionedAssetMoment") ? e5(t.captionedAssetMoment) : void 0,
             primaryCta: (0, ez.exists)(t, "primaryCta") ? tt(t.primaryCta) : void 0,
             owner: (0, ez.exists)(t, "owner") ? e9(t.owner) : void 0,
             visibilityStatus: (0, ez.exists)(t, "visibilityStatus") ? t.visibilityStatus : void 0,
@@ -844,7 +844,7 @@
             id: (0, ez.exists)(t, "id") ? t.id : void 0,
             feedItemId: (0, ez.exists)(t, "feedItemId") ? t.feedItemId : void 0,
             type: (0, ez.exists)(t, "type") ? t.type : void 0,
-            captionedAssetMoment: (0, ez.exists)(t, "captionedAssetMoment") ? e3(t.captionedAssetMoment) : void 0,
+            captionedAssetMoment: (0, ez.exists)(t, "captionedAssetMoment") ? e5(t.captionedAssetMoment) : void 0,
             primaryCta: (0, ez.exists)(t, "primaryCta") ? tt(t.primaryCta) : void 0,
             owner: (0, ez.exists)(t, "owner") ? e9(t.owner) : void 0,
             visibilityStatus: (0, ez.exists)(t, "visibilityStatus") ? t.visibilityStatus : void 0,
@@ -983,7 +983,7 @@
                                 }, t)];
                             case 1:
                                 return a = s.sent(), [2, new ez.JSONApiResponse(a, function(e) {
-                                    return e5(e)
+                                    return e3(e)
                                 })]
                         }
                     })
@@ -1016,7 +1016,7 @@
                                 }, t)];
                             case 1:
                                 return a = s.sent(), [2, new ez.JSONApiResponse(a, function(e) {
-                                    return e5(e)
+                                    return e3(e)
                                 })]
                         }
                     })
@@ -2582,13 +2582,13 @@
             })]
         })
     }, [_.TranslationNamespace.Creations]);
-    var t$ = e.i(233693),
+    var t$ = e.i(924747),
         t0 = e.i(392782);
     let t1 = "UniverseId",
         t2 = "PlaceId",
         t4 = /(?:https?:\/\/)?create\.roblox\.com\/dashboard\/creations\/experiences\/(\d+)/,
-        t3 = /(?:https?:\/\/)?(?:www\.)?roblox\.com(?:\/[A-Za-z]{2}(?:-[A-Za-z0-9]{2,3})?)?\/games\/(\d+)/,
-        t5 = /^\d+$/,
+        t5 = /(?:https?:\/\/)?(?:www\.)?roblox\.com(?:\/[A-Za-z]{2}(?:-[A-Za-z0-9]{2,3})?)?\/games\/(\d+)/,
+        t3 = /^\d+$/,
         t7 = [{
             regex: /(?:https?:\/\/)?create\.sitetest\d\.robloxlabs\.com\/dashboard\/creations\/experiences\/(\d+)/,
             idType: t1
@@ -2609,10 +2609,10 @@
                 regex: t4,
                 idType: t1
             }, {
-                regex: t3,
+                regex: t5,
                 idType: t2
             }, ...r && null != l && l ? t7 : [], {
-                regex: t5,
+                regex: t3,
                 idType: t1
             }], [l, r]), x = (0, a.useMemo)(() => d.trim().length > 0 && f.some(e => {
                 let {
@@ -2629,7 +2629,7 @@
                         return t.test(l)
                     });
                 if (!u) return;
-                let m = u.idType === t1 && t5.test(l) ? Number(l) : Number(null == (e = u.regex.exec(l)) ? void 0 : e[1]);
+                let m = u.idType === t1 && t3.test(l) ? Number(l) : Number(null == (e = u.regex.exec(l)) ? void 0 : e[1]);
                 if (!m || !Number.isFinite(m)) return;
                 let h = {
                     inputValue: l,
@@ -2712,9 +2712,9 @@
                 })]
             })
         }, [_.TranslationNamespace.Creations, _.TranslationNamespace.Controls]);
-    var t9 = e.i(382368),
-        t6 = e.i(725074),
-        ne = e.i(678547);
+    var t9 = e.i(616892),
+        t6 = e.i(688702),
+        ne = e.i(934145);
     let nt = (0, s.withTranslation)(e => {
         let {
             value: t,
@@ -3182,7 +3182,7 @@
                 })
             })
         };
-    var nv = e.i(691468);
+    var nv = e.i(270092);
     let nf = e => {
             let {
                 selected: t,
@@ -3473,7 +3473,7 @@
         n1 = e.i(704443),
         n2 = e.i(696564),
         n4 = e.i(418162);
-    let n3 = (0, nw.makeStyles)()(e => ({
+    let n5 = (0, nw.makeStyles)()(e => ({
         toolbarContainer: {
             [e.breakpoints.down("Large")]: {
                 flexGrow: 1,
@@ -3500,7 +3500,7 @@
             marginRight: 12
         }
     }));
-    var n5 = e.i(291037),
+    var n3 = e.i(291037),
         n7 = e.i(777004),
         n8 = e.i(899819),
         n9 = e.i(447055),
@@ -3663,7 +3663,7 @@
                 }
             }, []),
             G = h || x || O || !M && !P || "" === I || "" === C || 0 >= Number(C) || ip(ih(M, P, L)) && 0 === N.split(",").filter(Boolean).length;
-        return (0, i.jsxs)(n5.Dialog, {
+        return (0, i.jsxs)(n3.Dialog, {
             open: n,
             onClose: o,
             maxWidth: "Medium",
@@ -3914,7 +3914,7 @@
                 return "Message.GrantedItemCannotBePublished"
         }
     };
-    var iy = e.i(919448),
+    var iy = e.i(71597),
         iI = e.i(431498);
     let iT = (0, nw.makeStyles)()(e => ({
             dialogPaper: {
@@ -4273,7 +4273,7 @@
                     children: d("Action.Cancel")
                 })]
             })]
-        })), (0, i.jsxs)(n5.Dialog, {
+        })), (0, i.jsxs)(n3.Dialog, {
             open: n,
             onClose: k,
             maxWidth: "Small",
@@ -4417,7 +4417,7 @@
                 onClose: M,
                 categoryFlags: T,
                 assetTypesByCategory: E
-            }) : (0, i.jsxs)(n5.Dialog, {
+            }) : (0, i.jsxs)(n3.Dialog, {
                 open: l,
                 onClose: M,
                 maxWidth: "Small",
@@ -4529,7 +4529,7 @@
                     timedOptionsButton: v,
                     timedOptionsButtonDivider: x
                 }
-            } = n3(), [b, T] = (0, a.useState)(!1), [C, w] = (0, a.useState)(!1), [S, A] = (0, a.useState)(0), [M, E] = (0, a.useState)(!1), [k, L] = (0, a.useState)(!1), [R, N] = (0, a.useState)(null);
+            } = n5(), [b, T] = (0, a.useState)(!1), [C, w] = (0, a.useState)(!1), [S, A] = (0, a.useState)(0), [M, E] = (0, a.useState)(!1), [k, L] = (0, a.useState)(!1), [R, N] = (0, a.useState)(null);
             (0, a.useEffect)(() => {
                 (0, n2.getValidTimedOptionsTypes)().then(() => {
                     L(!0)
@@ -4841,8 +4841,8 @@
     function iq(e) {
         return null != e.universeId ? e.universeId : "experienceId" in e && "number" == typeof e.experienceId ? e.experienceId : void 0
     }
-    var iG = e.i(312985),
-        i_ = e.i(183321);
+    var iG = e.i(678365),
+        i_ = e.i(67252);
     let iH = (e, t) => {
             let {
                 user: n
@@ -5082,7 +5082,7 @@
                 })
             })
         }, [_.TranslationNamespace.Creations, _.TranslationNamespace.Controls]);
-    var iJ = e.i(388506),
+    var iJ = e.i(808048),
         iX = e.i(493924);
     let iZ = e => {
         let {
@@ -5116,12 +5116,12 @@
         })
     };
     var i$ = e.i(197649),
-        i0 = e.i(339724),
-        i1 = e.i(174519),
-        i2 = e.i(23696),
+        i0 = e.i(631719),
+        i1 = e.i(951336),
+        i2 = e.i(737420),
         i4 = e.i(125677),
-        i3 = e.i(20227),
-        i5 = e.i(494601);
+        i5 = e.i(20227),
+        i3 = e.i(494601);
     let i7 = {
             [es]: "bg-system-success",
             [eo]: "bg-system-warning",
@@ -5144,7 +5144,7 @@
                 })]
             })
         };
-    var i9 = e.i(838775),
+    var i9 = e.i(339338),
         i6 = e.i(540513),
         ae = e.i(914040);
     let at = (0, s.withTranslation)(e => {
@@ -5371,7 +5371,7 @@
                     gridContainer: h,
                     createButtonContainer: v
                 }
-            } = (0, i5.default)(), {
+            } = (0, i3.default)(), {
                 statusTab: f
             } = tQ(), x = tH(), g = (0, a.useCallback)(e => {
                 switch (e) {
@@ -5391,7 +5391,7 @@
                 rowsPerPage: T,
                 onPageChange: C,
                 onRowsPerPageChange: w
-            } = (0, i3.useTablePagination)({
+            } = (0, i5.useTablePagination)({
                 count: y.length,
                 initialRowsPerPage: 10,
                 resetKey: f
@@ -6205,5 +6205,5 @@
     })
 }]);
 
-//# debugId=0337f01f-484b-611a-a1f9-910302f9b975
-//# sourceMappingURL=093b74ttu8ql5.js.map
+//# debugId=fce2b126-36e2-da59-6a0c-1dd743bd585f
+//# sourceMappingURL=1b9xwv_wtyzux.js.map

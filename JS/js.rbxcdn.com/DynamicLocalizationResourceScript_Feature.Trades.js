@@ -163,6 +163,8 @@ Roblox.LangDynamic["Feature.Trades"] = {
     "Action.Subscribe": "Subscribe",
     "Message.FreeTradesLeftThisMonth": "{number}/{maxNumber} free trades left this month",
     "Label.EndsDate": "Ends {date}",
-    "Message.YouCanOnlyRequestRobuxFromPlusUsers": "You can only request Robux from Plus users."
+    "Message.YouCanOnlyRequestRobuxFromPlusUsers": "You can only request Robux from Plus users.",
+    "Title.LetsCheckYourAge": "Let’s check your age so you can send and receive trade requests",
+    "Message.ThisMakesSendingAndReceiving": "This makes sending and receiving trades safe for you and everyone."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Trades");

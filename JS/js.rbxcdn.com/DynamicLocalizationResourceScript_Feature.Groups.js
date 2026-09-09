@@ -1031,7 +1031,7 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Action.Move": "Move",
     "Message.CategoriesOrderSuccess": "Categories successfully ordered.",
     "Message.UpdateSecuritySettings": "{actor} updated the security settings",
-    "Label.AllRoles": "All Roles",
+    "Label.AllRoles": "All members",
     "Action.AddRoles": "Add roles",
     "Label.CurrentRoles": "Current roles",
     "Heading.MembersListEducationalTooltip": "Members list moved",
