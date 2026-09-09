@@ -1,12 +1,14 @@
-﻿local userInputService = game:GetService("UserInputService")
-local reactModule = require(script:FindFirstAncestor("RoactUtils").Parent.React)
+﻿local parent = script:FindFirstAncestor("RoactUtils").Parent
+local userInputService = game:GetService("UserInputService")
+local reactModule = require(parent.React)
+local fFlagLuaSupportMicroGamepadPreferredInput = require(parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 local var1 = if game:GetEngineFeature("EnableMicroGamepadKeycodes") then Enum.KeyCode.ButtonCenter else Enum.KeyCode.Return
 
 return function()
-	-- upvalues: reactModule (ref), userInputService (ref), var1 (ref)
+	-- upvalues: reactModule (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), userInputService (ref), var1 (ref)
 	local var2 = reactModule.useCallback(function()
-		-- upvalues: userInputService (copy), var1 (copy)
-		if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad then
+		-- upvalues: fFlagLuaSupportMicroGamepadPreferredInput (copy), userInputService (copy), var1 (copy)
+		if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad and not (fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad) then
 			return false
 		end
 		for i, v in ipairs(userInputService:GetConnectedGamepads()) do

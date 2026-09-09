@@ -15,7 +15,6 @@ local iconName = foundationModule.Enums.IconName
 local fFlagAXExtendUndoRedoTracking = avatarExperienceFlagsModule.FFlagAXExtendUndoRedoTracking
 local fFlagAXMigrateBuilderIcons = avatarExperienceFlagsModule.FFlagAXMigrateBuilderIcons
 local fFlagAXResetAvatarButton = avatarExperienceFlagsModule.FFlagAXResetAvatarButton
-local fFlagDynamicHeadsMigration = avatarExperienceFlagsModule.FFlagDynamicHeadsMigration
 local slotBasedEditorAnalytics = avatarExperienceAnalyticsModule.Surfaces.SlotBasedEditorAnalytics
 local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
 local toastType = toastRoduxModule.Enums.ToastType
@@ -41,7 +40,7 @@ local var2 = if fFlagAXResetAvatarButton then {
 } else nil
 
 return function()
-	-- upvalues: useNavigation (ref), useDispatch (ref), fFlagAXMigrateBuilderIcons (ref), useTokens (ref), useAvatarSaveContext (ref), fFlagAXResetAvatarButton (ref), useSelectorSignal (ref), var1 (ref), tutilsModule (ref), fFlagAXExtendUndoRedoTracking (ref), useAvatarRoute (ref), signalsReactModule (ref), reactModule (ref), fFlagDynamicHeadsMigration (ref), constantsModule (ref), slotBasedEditorAnalytics (ref), characterHistoryStateChangeButtonActivated (ref), fFlagAXMISEnableMultiShopping (ref), avatarScreen (ref), clearScreens (ref), clearTryOns (ref), setCurrentToastMessage (ref), var2 (ref), menuItemEnumModule (ref), iconName (ref)
+	-- upvalues: useNavigation (ref), useDispatch (ref), fFlagAXMigrateBuilderIcons (ref), useTokens (ref), useAvatarSaveContext (ref), fFlagAXResetAvatarButton (ref), useSelectorSignal (ref), var1 (ref), tutilsModule (ref), fFlagAXExtendUndoRedoTracking (ref), useAvatarRoute (ref), signalsReactModule (ref), reactModule (ref), constantsModule (ref), slotBasedEditorAnalytics (ref), characterHistoryStateChangeButtonActivated (ref), fFlagAXMISEnableMultiShopping (ref), avatarScreen (ref), clearScreens (ref), clearTryOns (ref), setCurrentToastMessage (ref), var2 (ref), menuItemEnumModule (ref), iconName (ref)
 	local var3 = useNavigation()
 	local var4 = useDispatch()
 	local var5 = if fFlagAXMigrateBuilderIcons then useTokens() else nil
@@ -62,21 +61,11 @@ return function()
 		return if var10 and var9 then var10 == #var9 else true
 	end, { var10, var9 })
 	local var14 = if fFlagAXResetAvatarButton then reactModule.useMemo(function()
-		-- upvalues: fFlagDynamicHeadsMigration (copy), var11 (ref), constantsModule (copy)
-		if fFlagDynamicHeadsMigration then
-			if var11 and var11.tryOn and (var11.tryOn.OutfitTryOn and next(var11.tryOn.OutfitTryOn.TryOnItems) ~= nil) then
-				return false
-			elseif not var11 or not var11.equipped or not var11.equipped.EquippedAssets then
-				return true
-			end
-			for i in var11.equipped.EquippedAssets do
-				if table.find(constantsModule.AssetTypeStringsToKeep, i) == nil then
-					return false
-				end
-			end
-			return true
-		elseif next(var11.tryOn.OutfitTryOn.TryOnItems) ~= nil then
+		-- upvalues: var11 (ref), constantsModule (copy)
+		if var11 and var11.tryOn and (var11.tryOn.OutfitTryOn and next(var11.tryOn.OutfitTryOn.TryOnItems) ~= nil) then
 			return false
+		elseif not var11 or not var11.equipped or not var11.equipped.EquippedAssets then
+			return true
 		end
 		for i in var11.equipped.EquippedAssets do
 			if table.find(constantsModule.AssetTypeStringsToKeep, i) == nil then

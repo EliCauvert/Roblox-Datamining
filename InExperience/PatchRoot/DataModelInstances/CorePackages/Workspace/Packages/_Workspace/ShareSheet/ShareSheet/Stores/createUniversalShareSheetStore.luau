@@ -1,35 +1,42 @@
 ﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
 local signalsModule = require(shareSheet.Parent.Signals)
+local fFlagSharePplPickerModule = require(shareSheet.Flags.FFlagSharePplPicker)
 local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemetry)
 
 return function()
-	-- upvalues: signalsModule (ref), shareSheetTelemetryModule (ref)
-	local var1, var2 = signalsModule.createSignal(nil)
+	-- upvalues: signalsModule (ref), fFlagSharePplPickerModule (ref), shareSheetTelemetryModule (ref)
+	local var1, var2 = signalsModule.createSignal(false)
+	local var3, var4 = signalsModule.createSignal(nil)
 	
 	local function hide(p1)
-		-- upvalues: var1 (ref), var2 (ref), shareSheetTelemetryModule (copy)
-		local var3 = var1(false)
+		-- upvalues: fFlagSharePplPickerModule (copy), var2 (ref), var3 (ref), var4 (ref), shareSheetTelemetryModule (copy)
+		if fFlagSharePplPickerModule then
+			var2(false)
+		end
+		local var5 = var3(false)
 		
-		if var3 == nil then return end
-		var2(nil)
+		if var5 == nil then return end
+		var4(nil)
 		shareSheetTelemetryModule.logLifecycle({
-			context = var3.context,
-			telemetryId = var3.telemetryId or "",
+			context = var5.context,
+			telemetryId = var5.telemetryId or "",
 			lifecycleType = shareSheetTelemetryModule.LifecycleType.Close,
 			closeReason = p1 or shareSheetTelemetryModule.CloseReason.Programmatic
 		})
 		
-		if var3.onHidden then
-			var3.onHidden()
+		if var5.onHidden then
+			var5.onHidden()
 		end
 	end
 	
 	return {
-		getRequest = var1,
+		getIsPeoplePickerDisplayed = var1,
+		getRequest = var3,
+		setIsPeoplePickerDisplayed = var2,
 		show = function(p1)
-			-- upvalues: hide (ref), shareSheetTelemetryModule (copy), var2 (ref)
+			-- upvalues: hide (ref), shareSheetTelemetryModule (copy), var4 (ref)
 			hide(shareSheetTelemetryModule.CloseReason.Replaced)
-			var2(table.clone(p1))
+			var4(table.clone(p1))
 			shareSheetTelemetryModule.logLifecycle({
 				context = p1.context,
 				telemetryId = p1.telemetryId or "",

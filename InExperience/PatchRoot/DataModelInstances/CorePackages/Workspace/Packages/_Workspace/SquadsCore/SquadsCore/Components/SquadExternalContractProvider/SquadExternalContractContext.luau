@@ -4,11 +4,9 @@ local squadLocationEnumModule = require(squadsCore.Enums.SquadLocationEnum)
 local squadRootViewTypeModule = require(squadsCore.Enums.SquadRootViewType)
 local _ = require(parent.LuauPolyfill)
 local promiseModule = require(parent.Promise)
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local _ = require(squadsCore.Enums.SquadExperienceInviteSource)
 
-return reactModule.createContext({
+return require(parent.React).createContext({
 	showGroupOSADialog = nil,
 	closeSquadPrompt = function() end,
 	createConversation = function(_, _, _, _)
@@ -19,7 +17,7 @@ return reactModule.createContext({
 		end
 	end,
 	createFriendConversation = function(_, _) end,
-	createExperienceInvite = if sharedFlagsModule.FFlagEnableSquadRegroupExperimentation then function(_, _)
+	createExperienceInvite = if require(parent.SharedFlags).FFlagEnableSquadRegroupExperimentation then function(_, _)
 		-- upvalues: promiseModule (ref)
 		return function(_)
 			-- upvalues: promiseModule (copy)
@@ -42,7 +40,7 @@ return reactModule.createContext({
 	end,
 	setSquadPrompt = function(_, _) end,
 	showSearchOverlay = function(_, _) end,
-	squadLocation = if sharedFlagsModule.FFlagEnableSquadCoplayAnalytic then squadLocationEnumModule.Unknown else nil,
+	squadLocation = squadLocationEnumModule.Unknown,
 	updateSquadViewFlags = function(_, _) end,
 	useGetConversationFromId = function(_)
 		return nil

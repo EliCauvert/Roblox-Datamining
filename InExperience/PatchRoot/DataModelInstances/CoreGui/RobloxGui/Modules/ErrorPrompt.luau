@@ -14,6 +14,7 @@ local mouseIconOverrideService = require(corePackagesService.Workspace.Packages.
 local constants = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).Constants
 local shimmerModule = require(robloxGui.Modules.Shimmer)
 local getFFlagDisplayChannelNameOnErrorPromptModule = require(robloxGui.Modules.Flags.GetFFlagDisplayChannelNameOnErrorPrompt)
+local fFlagLuaSupportMicroGamepadPreferredInput = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
 local localizeErrorCodeStringFFlag = settings():GetFFlag("LocalizeErrorCodeString")
 local tweenInfo = TweenInfo.new(0.15, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut, 0, false, 0)
@@ -214,7 +215,7 @@ local function sinkInput(_, _, _)
 end
 
 function t_2:_open(p1, p2, p3)
-	-- upvalues: robloxGui (ref), mouseIconOverrideService (ref), guiService (ref), VRService (ref), userInputService (ref), contextActionService (ref), sinkInput (ref)
+	-- upvalues: robloxGui (ref), mouseIconOverrideService (ref), guiService (ref), VRService (ref), userInputService (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), contextActionService (ref), sinkInput (ref)
 	self:setErrorText(p1, p2, p3)
 	self:_resizeHeight(robloxGui.AbsoluteSize.Y)
 	
@@ -232,7 +233,7 @@ function t_2:_open(p1, p2, p3)
 			self._frame.PromptScale.Scale = 1
 		end
 	end
-	if self._isOpen and (VRService.VREnabled or userInputService.PreferredInput == Enum.PreferredInput.Gamepad) then
+	if self._isOpen and (VRService.VREnabled or userInputService.PreferredInput == Enum.PreferredInput.Gamepad or fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad) then
 		guiService:Select(self._frame.MessageArea.ErrorFrame.ButtonArea)
 	end
 	contextActionService:BindCoreAction("ErrorPromptAction", sinkInput, false, Enum.KeyCode.ButtonSelect, Enum.KeyCode.ButtonStart)

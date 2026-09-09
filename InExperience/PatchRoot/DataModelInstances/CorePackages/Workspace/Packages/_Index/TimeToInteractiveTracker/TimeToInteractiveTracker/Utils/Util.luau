@@ -3,6 +3,24 @@ local timeToInteractiveTracker = script:FindFirstAncestor("TimeToInteractiveTrac
 local _ = require(timeToInteractiveTracker.Stores.types)
 local _ = require(timeToInteractiveTracker.Milestones.types)
 local fFlagTTITrackerMemoryTrackingModule = require(script.Parent.FFlagTTITrackerMemoryTracking)
+local constantsModule = require(timeToInteractiveTracker.Milestones.constants)
+local t = {}
+local t_1 = {}
+
+for i, v in constantsModule do
+	if type(v) == "string" then
+		t[v] = true
+	else
+		t[v.Name] = true
+		
+		for i_1, v_1 in v.Subphase do
+			t_1[v_1] = true
+		end
+	end
+end
+local function _(p1)
+	return p1:gsub("[^%w_%-]", "_"):sub(1, 40)
+end
 
 return {
 	findLastMilestoneIndex = function(p1, p2)
@@ -124,5 +142,33 @@ return {
 			end
 		end
 		return t
+	end,
+	milestonesToPointsFields = function(p7)
+		-- upvalues: t (ref), fFlagTTITrackerMemoryTrackingModule (ref), t_1 (ref)
+		local t_2 = {}
+		
+		for i, v in p7 do
+			if t[v.name] then
+				local text = "ms_" .. v.name .. (if v.id == nil or v.id == "" then "" else "__" .. v.id:gsub("[^%w_%-]", "_"):sub(1, 40))
+				t_2[text] = v.deltaMs
+				
+				if fFlagTTITrackerMemoryTrackingModule then
+					if v.totalMemoryMB then
+						t_2[text .. "_total_memory_mb"] = v.totalMemoryMB
+					end
+					if v.luaHeapMB then
+						t_2[text .. "_lua_heap_mb"] = v.luaHeapMB
+					end
+				end
+				if v.subphases then
+					for i_1, v_1 in v.subphases do
+						if t_1[v_1.name] then
+							t_2[text .. "_sp_" .. v_1.name] = v_1.deltaMs or 0
+						end
+					end
+				end
+			end
+		end
+		return t_2
 	end
 }

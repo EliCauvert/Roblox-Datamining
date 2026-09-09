@@ -1,4 +1,4 @@
-﻿return if require(script:FindFirstAncestor("AvatarExperienceModel").Parent.AvatarExperienceFlags).FFlagDynamicHeadsMigration then {
+﻿return {
 	Default = "Default",
 	Blockhead = "Blockhead",
 	Octoblox = "Octoblox",
@@ -32,16 +32,4 @@
 	GoldenMrRobot = "GoldenMrRobot",
 	GoldenKorbloxGeneral = "GoldenKorbloxGeneral",
 	TheEngineer = "TheEngineer"
-} else {
-	Default = "Default",
-	ManHead = "ManHead",
-	WomanHead = "WomanHead",
-	Cheeks = "Cheeks",
-	Narrow = "Narrow",
-	StrongJaw = "StrongJaw",
-	Paragon = "Paragon",
-	Chiseled = "Chiseled",
-	Roundy = "Roundy",
-	Blockhead = "Blockhead",
-	Trim = "Trim"
 }

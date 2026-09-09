@@ -11,11 +11,10 @@ local cryoModule = require(parent.Cryo)
 local reactModule = require(parent.React)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableSquadTopBannerWideMode = sharedFlagsModule.FFlagEnableSquadTopBannerWideMode
-local fFlagEnableSquadCoplayAnalytic = sharedFlagsModule.FFlagEnableSquadCoplayAnalytic
 local fFlagEnableSquadRegroupExperimentation = sharedFlagsModule.FFlagEnableSquadRegroupExperimentation
 
 return function(p1)
-	-- upvalues: reactModule (ref), squadViewFlagsModule (ref), fFlagEnableSquadTopBannerWideMode (ref), analyticsModule (ref), useCurrentSquadId (ref), cryoModule (ref), fFlagEnableSquadCoplayAnalytic (ref), fFlagEnableSquadRegroupExperimentation (ref), squadExternalContractContextModule (ref)
+	-- upvalues: reactModule (ref), squadViewFlagsModule (ref), fFlagEnableSquadTopBannerWideMode (ref), analyticsModule (ref), useCurrentSquadId (ref), cryoModule (ref), fFlagEnableSquadRegroupExperimentation (ref), squadExternalContractContextModule (ref)
 	local var1, var2 = reactModule.useState(squadViewFlagsModule.None)
 	local var3 = if fFlagEnableSquadTopBannerWideMode then p1.contract.useSquadTopBannerManager() else reactModule.useMemo(function()
 		return {
@@ -42,7 +41,7 @@ return function(p1)
 		removeUserFromParentChannel = p1.contract.removeUserFromParentChannel,
 		setSquadPrompt = p1.contract.setSquadPrompt,
 		showSearchOverlay = p1.contract.showSearchOverlay,
-		squadLocation = if fFlagEnableSquadCoplayAnalytic then p1.squadLocation else nil,
+		squadLocation = p1.squadLocation,
 		updateSquadViewFlags = reactModule.useCallback(function(p2, p3)
 			-- upvalues: var2 (ref)
 			if p3 then

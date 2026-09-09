@@ -10,6 +10,7 @@
 	flushDeferredWidgetLoaded = require(script.flushDeferredWidgetLoaded),
 	sendUnifiedEventForDeferredAction = require(script.sendUnifiedEventForDeferredAction),
 	normalizeDiscoveryPurchaseEntity = require(script.normalizeDiscoveryPurchaseEntity),
+	buildDiscoveryPurchaseAttempt = require(script.buildDiscoveryPurchaseAttempt),
 	sendUnifiedClickItemDetailsEvent = require(script.sendUnifiedClickItemDetailsEvent),
 	sendUnifiedEventsForMultiItemShopping = require(script.sendUnifiedEventsForMultiItemShopping),
 	UnifiedEventLogConstants = require(script.UnifiedEventLogConstants),

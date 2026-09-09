@@ -160,6 +160,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation มี�
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,ชิ้นส่วนร่างกายใน CurveAnimation ต้องไม่อยู่ต่ำกว่า HumanoidRootPart {minHeight} Stud หรืออยู่ห่างจาก HumanoidRootPart เกิน {maxDistance} Stud โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,MarkerCurves และ AnimationRigData ที่เป็นส่วนรองของ CurveAnimation ไม่สามารถมีส่วนรองได้
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"ลำดับชั้นของ CurveAnimation มี Script, LocalScript หรือ ModuleScript โปรดลบออก"
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,CurveAnimation มีโฟลเดอร์ชิ้นส่วนร่างกาย '{bodyPartName}' ซ้ำกันที่ '{instancePath}' ชิ้นส่วนร่างกายแต่ละชิ้นสามารถปรากฏได้สูงสุดเพียงครั้งเดียวในลำดับชั้นแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,โหลดข้อมูล CurveAnimation ไม่สำเร็จ แอสเซทแอนิเมชันอาจไม่ถูกต้องหรือเข้าถึงไม่ได้
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation มีโฟลเดอร์ชิ้นส่วนร่างกาย {folderName} ซึ่งมีลำดับชั้นที่ไม่ถูกต้อง (มีโฟลเดอร์รองที่ไม่ได้รับอนุญาตหรือตั้งค่าไม่ถูกต้อง)
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"โฟลเดอร์ '{boneName}' ใน CurveAnimation ไม่ใช่ชื่อกระดูก HRD/DRD ที่รู้จัก โฟลเดอร์ย่อยของแอนิเมชันต้องเป็นชิ้นส่วนร่างกาย R15 ที่ถูกต้อง หรือชื่อกระดูกที่รู้จัก (เช่น HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase หรือกระดูกนิ้วมือ เช่น LeftHandIndex1)"
@@ -187,6 +188,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation ม�
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,ใน CurveAnimation เวลา {time} วินาที ชิ้นส่วนร่างกาย {bodyPart} หมุนด้วยความเร็ว {speed} องศา/วินาที ทว่าความเร็วสูงสุดที่อนุญาตคือ {maxSpeed} องศา/วินาที โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,ใน CurveAnimation  เวลา {time} วินาที ชิ้นส่วนร่างกาย {bodyPart} เคลื่อนที่ด้วยความเร็ว {speed} Stud/วินาที ทว่าความเร็วสูงสุดที่อนุญาตคือ {maxSpeed} Stud/วินาที โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,ชิ้นส่วนร่างกาย {bodyPart} ใน CurveAnimation เคลื่อนที่ระหว่างเฟรมมากกว่า {maxMovement} Stud โปรดแก้ไขแอนิเมชัน
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,โครงสร้าง CurveAnimation ไม่ถูกต้อง: {detail} โปรดตรวจสอบให้แน่ใจว่าแอนิเมชันเป็นไปตาม Schema ที่คาดไว้
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation มี descendant {count} รายการ ทว่าจำนวนสูงสุดที่อนุญาตคือ {maxAllowed} รายการ โปรดลดจำนวนลง
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation มี Curve ที่มีคีย์มากเกินไป จำนวนสูงสุดที่อนุญาตคือ {maxAllowed} คีย์ โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation มี MarkerCurve มากกว่า {maxAllowed} รายการ โปรดเช็คให้แน่ใจว่ามี descendant MarkerCurve ไม่เกิน {maxAllowed} รายการ
@@ -1214,16 +1216,19 @@ Feature.AccountSettings.Message.Error.InvalidGuildedUrl,url ของโปร�
 Feature.AccountSettings.Message.Error.InvalidTwitchUrl,url ของโปรไฟล์ Twitch ไม่ถูกต้อง
 Feature.AccountSettings.Message.Error.InvalidXUrl,ชื่อผู้ใช้ X ไม่ถูกต้อง
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,url ของ YouTube ไม่ถูกต้อง
+Feature.AddFriends.Action.FriendAdded,เพิ่มเป็นเพื่อนแล้ว
 Feature.AddFriends.Action.IgnoreConnectionRequest,ปฏิเสธคำขอเข้าร่วมเครือข่าย
 Feature.AddFriends.Action.IgnoreFriendRequest,ปฏิเสธคำขอเป็นเพื่อน
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,ปฏิเสธคำขอเป็นเพื่อนที่เชื่อได้
 Feature.AddFriends.Action.RequestIgnored,คำขอถูกปฏิเสธ
+Feature.AddFriends.Label.AddFriendsTooltip,เริ่มต้นด้วยการค้นหาเพื่อนๆ ของคุณเพื่อจะได้ไปสำรวจ Roblox ด้วยกัน
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,ค้นหาผู้ใช้บน Roblox โดยใช้ชื่อผู้ใช้หรือชื่อในการค้นหา
 Feature.AddFriends.Label.ConnectWithContacts,เชิญเพื่อนจากรายชื่อผู้ติดต่อหรือเชื่อมต่อกับเพื่อนๆ ที่อยู่บน Roblox อยู่แล้วก็ได้!
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,ค้นหาผู้ใช้
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.SearchForFriendsPrompt,ค้นหาผู้ใช้บน Roblox โดยใช้ชื่อผู้ใช้หรือชื่อที่แสดงในการค้นหา
 Feature.AddFriends.Label.SyncWithContacts,ซิงค์รายชื่อติดต่อเพื่อค้นหาและเชิญเพื่อน!
+Feature.AddFriends.Title.AddFriendsTooltipTitle,Roblox จะสนุกยิ่งขึ้นถ้าเล่นกับเพื่อน!
 Feature.AddFriends.Title.ConnectWithContacts,เพิ่มจากรายชื่อผู้ติดต่อ
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,ปลดล็อคเนื้อหาและคุณสมบัติเพิ่มเติม
 Feature.AgeVerificationUpsell.Button.Cancel,
@@ -1323,6 +1328,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,คุณใช้�
 Feature.Avatar.BackgroundGeneration.Error.Moderation,พรอมต์นั้นไม่เป็นไปตามแนวทางของเรา ลองอธิบายอย่างอื่น
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,พื้นหลังนี้ไม่เป็นไปตามมาตรฐานชุมชนของ Roblox จึงไม่ได้เพิ่มไปยังคลังไอเท็มของคุณ ลองสร้างใหม่
 Feature.Avatar.BackgroundGeneration.Error.System,มีบางอย่างผิดปกติขณะสร้างพื้นหลัง โปรดลองอีกครั้ง
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,คุณเผยแพร่ครบตามจำนวนสูงสุดตลอดอายุการใช้งานแล้ว
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,คุณเผยแพร่ครบตามจำนวนสูงสุดต่อวันแล้ว โปรดลองอีกครั้งในวันพรุ่งนี้
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,คุณเผยแพร่ครบตามจำนวนสูงสุดต่อชั่วโมงแล้ว โปรดลองอีกครั้งในชั่วโมงถัดไป
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,คุณเผยแพร่ครบตามจำนวนสูงสุดต่อเดือนแล้ว โปรดลองอีกครั้งในเดือนหน้า
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,พื้นหลังสุดพิเศษเมื่อสมัคร Plus
@@ -1973,6 +1982,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,"คำอธิบาย
 Feature.Build.Error.DeveloperProductNameRequired,กรอกชื่อผลิตภัณฑ์
 Feature.Build.Error.DeveloperProductNameTooLong,ชื่อต้องมีความยาวไม่เกิน 50 อักขระ
 Feature.Build.Error.DeveloperProductPriceInvalid,"ราคาต้องเป็นจำนวนเต็มตั้งแต่ 1 ถึง 1,000,000,000 Robux"
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,เลือกแก้ไขและเพิ่มราคาก่อนลงขายผลิตภัณฑ์
 Feature.Build.Error.DeveloperProductTextModerated,ทีมกลั่นกรองของ Roblox เปลี่ยนข้อความของผลิตภัณฑ์นี้ ลองใช้ถ้อยคำอื่น
 Feature.Build.Error.ManagedPricingPartialUpdate,ไม่สามารถอัปเดตผลิตภัณฑ์บางรายการได้
 Feature.Build.Error.MonetizationOptionUpdate,ไม่สามารถอัปเดตตัวเลือกได้ โปรดลองอีกครั้ง
@@ -3044,7 +3054,8 @@ Feature.Friends.Action.Close,
 Feature.Friends.Action.ConnectionAdded,เพิ่มการเข้าร่วมเครือข่ายแล้ว
 Feature.Friends.Action.ConnectionRequestSent,ส่งคำขอเข้าร่วมเครือข่ายแล้ว
 Feature.Friends.Action.EditProfile,แก้ไขโปรไฟล์
-Feature.Friends.Action.FriendAdded,เพิ่มเป็นเพื่อนแล้ว
+Feature.Friends.Action.FindFriends,หาเพื่อน
+Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,ลบเพื่อนแล้ว
 Feature.Friends.Action.FriendRequestSent,ส่งคำขอเป็นเพื่อนแล้ว
 Feature.Friends.Action.GetStarted,เริ่มใช้งาน
@@ -3135,10 +3146,11 @@ Feature.Friends.Label.IntroducingConnections,"ขอแนะนำ ""คนร�
 Feature.Friends.Label.JoinedInYear,เข้าร่วมเมื่อ {year}
 Feature.Friends.Label.ManageFriendsList,จัดการรายชื่อเพื่อนของคุณ
 Feature.Friends.Label.ManageFriendsListCaption,ตรวจดูเพื่อนๆ ที่คุณโต้ตอบด้วยน้อยที่สุดเพื่อปรับปรุงให้รายชื่อเพื่อนของคุณเป็นปัจจุบันอยู่เสมอ
+Feature.Friends.Label.MultipleMutuals,มีคนรู้จักร่วมกัน {numConnections} คน
 Feature.Friends.Label.MutualConnection,มีเครือข่ายร่วมกัน 1 คน
 Feature.Friends.Label.MutualConnectionTitle,มีคนรู้จักร่วมกัน 1 คน
 Feature.Friends.Label.MutualConnections,มีเครือข่ายร่วมกัน {numConnections} คน
-Feature.Friends.Label.MutualConnectionsTitle,มีคนรู้จักร่วมกัน {numConnections} คน
+Feature.Friends.Label.MutualConnectionsTitle,
 Feature.Friends.Label.MutualFriendTitle,มีเพื่อนร่วมกัน 1 คน
 Feature.Friends.Label.MutualFriends,เพื่อนที่มีร่วมกัน
 Feature.Friends.Label.MutualFriendsTitle,มีเพื่อนร่วมกัน {numConnections} คน
@@ -3147,6 +3159,7 @@ Feature.Friends.Label.NewFriend,เพื่อนใหม่
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
 Feature.Friends.Label.NoFriendsYet,{name} ยังไม่มีเพื่อน
 Feature.Friends.Label.NowTrusted,{username} เป็นเพื่อนที่เชื่อได้แล้ว
+Feature.Friends.Label.OneMutual,
 Feature.Friends.Label.PYMK,คนที่คุณอาจรู้จัก
 Feature.Friends.Label.Pending,
 Feature.Friends.Label.PlayedByUser,<b>{name}</b> เคยเล่น

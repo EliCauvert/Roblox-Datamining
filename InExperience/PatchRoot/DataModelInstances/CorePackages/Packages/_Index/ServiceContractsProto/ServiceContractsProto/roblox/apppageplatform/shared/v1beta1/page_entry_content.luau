@@ -23,14 +23,14 @@ function t_1:encode()
 	if self.page_entry ~= nil then
 		local var2 = self.page_entry:encode()
 		local var3, var4 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
-		var3, var141 = protoModule.writeBuffer(var3, var4, var2, buffer.len(var2))
+		var3, var142 = protoModule.writeBuffer(var3, var4, var2, buffer.len(var2))
 		buff = var3
 		var1 = var4
 	end
 	if self.input_data ~= nil then
 		local var5 = self.input_data:encode()
 		local var6, var7 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
-		var6, var144 = protoModule.writeBuffer(var6, var7, var5, buffer.len(var5))
+		var6, var145 = protoModule.writeBuffer(var6, var7, var5, buffer.len(var5))
 		buff = var6
 		var1 = var7
 	end
@@ -86,7 +86,7 @@ function t_1.decode(p1)
 			local _ = var18
 			var2 = var19
 		else
-			error("Unsupported wire type: " .. var148)
+			error("Unsupported wire type: " .. var149)
 		end
 	end
 	return var1
@@ -148,13 +148,13 @@ function t_2:encode()
 	if self.input_data ~= nil then
 		local var21 = self.input_data:encode()
 		local var22, var23 = protoModule.writeTag(buff, var20, 1, protoModule.wireTypes.lengthDelimited)
-		var22, var171 = protoModule.writeBuffer(var22, var23, var21, buffer.len(var21))
+		var22, var172 = protoModule.writeBuffer(var22, var23, var21, buffer.len(var21))
 		buff = var22
 		var20 = var23
 	end
 	if self.roblox_component ~= nil and self.roblox_component ~= "" then
 		local var24, var25 = protoModule.writeTag(buff, var20, 2, protoModule.wireTypes.lengthDelimited)
-		var24, var173 = protoModule.writeString(var24, var25, self.roblox_component)
+		var24, var174 = protoModule.writeString(var24, var25, self.roblox_component)
 		buff = var24
 		var20 = var25
 	end
@@ -210,7 +210,7 @@ function t_2.decode(p2)
 			local _ = var37
 			var21 = var38
 		else
-			error("Unsupported wire type: " .. var177)
+			error("Unsupported wire type: " .. var178)
 		end
 	end
 	return var20
@@ -272,21 +272,21 @@ function t_3:encode()
 	
 	if self.roblox_component ~= nil and self.roblox_component ~= "" then
 		local var40, var41 = protoModule.writeTag(buff, var39, 1, protoModule.wireTypes.lengthDelimited)
-		var40, var199 = protoModule.writeString(var40, var41, self.roblox_component)
+		var40, var200 = protoModule.writeString(var40, var41, self.roblox_component)
 		buff = var40
 		var39 = var41
 	end
 	if self.input_data ~= nil and self.input_data.type == "attribution_row" then
 		local var42 = self.input_data.value:encode()
 		local var43, var44 = protoModule.writeTag(buff, var39, 2, protoModule.wireTypes.lengthDelimited)
-		var43, var202 = protoModule.writeBuffer(var43, var44, var42, buffer.len(var42))
+		var43, var203 = protoModule.writeBuffer(var43, var44, var42, buffer.len(var42))
 		buff = var43
 		var39 = var44
 	end
 	if self.cta_buttons ~= nil then
 		local var45 = self.cta_buttons:encode()
 		local var46, var47 = protoModule.writeTag(buff, var39, 3, protoModule.wireTypes.lengthDelimited)
-		var46, var205 = protoModule.writeBuffer(var46, var47, var45, buffer.len(var45))
+		var46, var206 = protoModule.writeBuffer(var46, var47, var45, buffer.len(var45))
 		buff = var46
 		var39 = var47
 	end
@@ -350,7 +350,7 @@ function t_3.decode(p3)
 			local _ = var58
 			var40 = var59
 		else
-			error("Unsupported wire type: " .. var209)
+			error("Unsupported wire type: " .. var210)
 		end
 	end
 	return var39
@@ -426,7 +426,7 @@ function t_4:encode()
 	
 	if self.roblox_component ~= nil and self.roblox_component ~= "" then
 		local var61, var62 = protoModule.writeTag(buff, var60, 1, protoModule.wireTypes.lengthDelimited)
-		var61, var233 = protoModule.writeString(var61, var62, self.roblox_component)
+		var61, var234 = protoModule.writeString(var61, var62, self.roblox_component)
 		buff = var61
 		var60 = var62
 	end
@@ -434,13 +434,13 @@ function t_4:encode()
 		if self.input_data.type == "image" then
 			local var63 = self.input_data.value:encode()
 			local var64, var65 = protoModule.writeTag(buff, var60, 2, protoModule.wireTypes.lengthDelimited)
-			var64, var236 = protoModule.writeBuffer(var64, var65, var63, buffer.len(var63))
+			var64, var237 = protoModule.writeBuffer(var64, var65, var63, buffer.len(var63))
 			buff = var64
 			var60 = var65
 		elseif self.input_data.type == "video" then
 			local var66 = self.input_data.value:encode()
 			local var67, var68 = protoModule.writeTag(buff, var60, 3, protoModule.wireTypes.lengthDelimited)
-			var67, var239 = protoModule.writeBuffer(var67, var68, var66, buffer.len(var66))
+			var67, var240 = protoModule.writeBuffer(var67, var68, var66, buffer.len(var66))
 			buff = var67
 			var60 = var68
 		end
@@ -502,7 +502,7 @@ function t_4.decode(p4)
 			local _ = var79
 			var61 = var80
 		else
-			error("Unsupported wire type: " .. var243)
+			error("Unsupported wire type: " .. var244)
 		end
 	end
 	return var60
@@ -576,423 +576,429 @@ function t_5:encode()
 		if self.kind.type == "badges_grid" then
 			local var82 = self.kind.value:encode()
 			local var83, var84 = protoModule.writeTag(buff, var81, 1, protoModule.wireTypes.lengthDelimited)
-			var83, var268 = protoModule.writeBuffer(var83, var84, var82, buffer.len(var82))
+			var83, var269 = protoModule.writeBuffer(var83, var84, var82, buffer.len(var82))
 			buff = var83
 			var81 = var84
 		elseif self.kind.type == "badge_details" then
 			local var85 = self.kind.value:encode()
 			local var86, var87 = protoModule.writeTag(buff, var81, 2, protoModule.wireTypes.lengthDelimited)
-			var86, var271 = protoModule.writeBuffer(var86, var87, var85, buffer.len(var85))
+			var86, var272 = protoModule.writeBuffer(var86, var87, var85, buffer.len(var85))
 			buff = var86
 			var81 = var87
 		elseif self.kind.type == "static_content" then
 			local var88 = self.kind.value:encode()
 			local var89, var90 = protoModule.writeTag(buff, var81, 3, protoModule.wireTypes.lengthDelimited)
-			var89, var274 = protoModule.writeBuffer(var89, var90, var88, buffer.len(var88))
+			var89, var275 = protoModule.writeBuffer(var89, var90, var88, buffer.len(var88))
 			buff = var89
 			var81 = var90
 		elseif self.kind.type == "experience_attribution_row" then
 			local var91 = self.kind.value:encode()
 			local var92, var93 = protoModule.writeTag(buff, var81, 4, protoModule.wireTypes.lengthDelimited)
-			var92, var277 = protoModule.writeBuffer(var92, var93, var91, buffer.len(var91))
+			var92, var278 = protoModule.writeBuffer(var92, var93, var91, buffer.len(var91))
 			buff = var92
 			var81 = var93
 		elseif self.kind.type == "experience_action_module" then
 			local var94 = self.kind.value:encode()
 			local var95, var96 = protoModule.writeTag(buff, var81, 5, protoModule.wireTypes.lengthDelimited)
-			var95, var280 = protoModule.writeBuffer(var95, var96, var94, buffer.len(var94))
+			var95, var281 = protoModule.writeBuffer(var95, var96, var94, buffer.len(var94))
 			buff = var95
 			var81 = var96
 		elseif self.kind.type == "experience_media_gallery" then
 			local var97 = self.kind.value:encode()
 			local var98, var99 = protoModule.writeTag(buff, var81, 6, protoModule.wireTypes.lengthDelimited)
-			var98, var283 = protoModule.writeBuffer(var98, var99, var97, buffer.len(var97))
+			var98, var284 = protoModule.writeBuffer(var98, var99, var97, buffer.len(var97))
 			buff = var98
 			var81 = var99
 		elseif self.kind.type == "experience_description" then
 			local var100 = self.kind.value:encode()
 			local var101, var102 = protoModule.writeTag(buff, var81, 7, protoModule.wireTypes.lengthDelimited)
-			var101, var286 = protoModule.writeBuffer(var101, var102, var100, buffer.len(var100))
+			var101, var287 = protoModule.writeBuffer(var101, var102, var100, buffer.len(var100))
 			buff = var101
 			var81 = var102
 		elseif self.kind.type == "experience_stat_row" then
 			local var103 = self.kind.value:encode()
 			local var104, var105 = protoModule.writeTag(buff, var81, 8, protoModule.wireTypes.lengthDelimited)
-			var104, var289 = protoModule.writeBuffer(var104, var105, var103, buffer.len(var103))
+			var104, var290 = protoModule.writeBuffer(var104, var105, var103, buffer.len(var103))
 			buff = var104
 			var81 = var105
 		elseif self.kind.type == "experience_info_table" then
 			local var106 = self.kind.value:encode()
 			local var107, var108 = protoModule.writeTag(buff, var81, 9, protoModule.wireTypes.lengthDelimited)
-			var107, var292 = protoModule.writeBuffer(var107, var108, var106, buffer.len(var106))
+			var107, var293 = protoModule.writeBuffer(var107, var108, var106, buffer.len(var106))
 			buff = var107
 			var81 = var108
 		elseif self.kind.type == "social_link_row" then
 			local var109 = self.kind.value:encode()
 			local var110, var111 = protoModule.writeTag(buff, var81, 10, protoModule.wireTypes.lengthDelimited)
-			var110, var295 = protoModule.writeBuffer(var110, var111, var109, buffer.len(var109))
+			var110, var296 = protoModule.writeBuffer(var110, var111, var109, buffer.len(var109))
 			buff = var110
 			var81 = var111
 		elseif self.kind.type == "experience_carousel" then
 			local var112 = self.kind.value:encode()
 			local var113, var114 = protoModule.writeTag(buff, var81, 11, protoModule.wireTypes.lengthDelimited)
-			var113, var298 = protoModule.writeBuffer(var113, var114, var112, buffer.len(var112))
+			var113, var299 = protoModule.writeBuffer(var113, var114, var112, buffer.len(var112))
 			buff = var113
 			var81 = var114
 		elseif self.kind.type == "song_carousel" then
 			local var115 = self.kind.value:encode()
 			local var116, var117 = protoModule.writeTag(buff, var81, 12, protoModule.wireTypes.lengthDelimited)
-			var116, var301 = protoModule.writeBuffer(var116, var117, var115, buffer.len(var115))
+			var116, var302 = protoModule.writeBuffer(var116, var117, var115, buffer.len(var115))
 			buff = var116
 			var81 = var117
 		elseif self.kind.type == "events_carousel" then
 			local var118 = self.kind.value:encode()
 			local var119, var120 = protoModule.writeTag(buff, var81, 13, protoModule.wireTypes.lengthDelimited)
-			var119, var304 = protoModule.writeBuffer(var119, var120, var118, buffer.len(var118))
+			var119, var305 = protoModule.writeBuffer(var119, var120, var118, buffer.len(var118))
 			buff = var119
 			var81 = var120
 		elseif self.kind.type == "game_pass_collection" then
 			local var121 = self.kind.value:encode()
 			local var122, var123 = protoModule.writeTag(buff, var81, 14, protoModule.wireTypes.lengthDelimited)
-			var122, var307 = protoModule.writeBuffer(var122, var123, var121, buffer.len(var121))
+			var122, var308 = protoModule.writeBuffer(var122, var123, var121, buffer.len(var121))
 			buff = var122
 			var81 = var123
 		elseif self.kind.type == "developer_product_collection" then
 			local var124 = self.kind.value:encode()
 			local var125, var126 = protoModule.writeTag(buff, var81, 15, protoModule.wireTypes.lengthDelimited)
-			var125, var310 = protoModule.writeBuffer(var125, var126, var124, buffer.len(var124))
+			var125, var311 = protoModule.writeBuffer(var125, var126, var124, buffer.len(var124))
 			buff = var125
 			var81 = var126
 		elseif self.kind.type == "subscription_collection" then
 			local var127 = self.kind.value:encode()
 			local var128, var129 = protoModule.writeTag(buff, var81, 16, protoModule.wireTypes.lengthDelimited)
-			var128, var313 = protoModule.writeBuffer(var128, var129, var127, buffer.len(var127))
+			var128, var314 = protoModule.writeBuffer(var128, var129, var127, buffer.len(var127))
 			buff = var128
 			var81 = var129
 		elseif self.kind.type == "dynamic_store_category" then
 			local var130 = self.kind.value:encode()
 			local var131, var132 = protoModule.writeTag(buff, var81, 17, protoModule.wireTypes.lengthDelimited)
-			var131, var316 = protoModule.writeBuffer(var131, var132, var130, buffer.len(var130))
+			var131, var317 = protoModule.writeBuffer(var131, var132, var130, buffer.len(var130))
 			buff = var131
 			var81 = var132
 		elseif self.kind.type == "card_container" then
 			local var133 = self.kind.value:encode()
 			local var134, var135 = protoModule.writeTag(buff, var81, 20, protoModule.wireTypes.lengthDelimited)
-			var134, var319 = protoModule.writeBuffer(var134, var135, var133, buffer.len(var133))
+			var134, var320 = protoModule.writeBuffer(var134, var135, var133, buffer.len(var133))
 			buff = var134
 			var81 = var135
 		elseif self.kind.type == "card" then
 			local var136 = self.kind.value:encode()
 			local var137, var138 = protoModule.writeTag(buff, var81, 21, protoModule.wireTypes.lengthDelimited)
-			var137, var322 = protoModule.writeBuffer(var137, var138, var136, buffer.len(var136))
+			var137, var323 = protoModule.writeBuffer(var137, var138, var136, buffer.len(var136))
 			buff = var137
 			var81 = var138
 		elseif self.kind.type == "dialog" then
 			local var139 = self.kind.value:encode()
 			local var140, var141 = protoModule.writeTag(buff, var81, 22, protoModule.wireTypes.lengthDelimited)
-			var140, var325 = protoModule.writeBuffer(var140, var141, var139, buffer.len(var139))
+			var140, var326 = protoModule.writeBuffer(var140, var141, var139, buffer.len(var139))
 			buff = var140
 			var81 = var141
 		elseif self.kind.type == "banner" then
 			local var142 = self.kind.value:encode()
 			local var143, var144 = protoModule.writeTag(buff, var81, 23, protoModule.wireTypes.lengthDelimited)
-			var143, var328 = protoModule.writeBuffer(var143, var144, var142, buffer.len(var142))
+			var143, var329 = protoModule.writeBuffer(var143, var144, var142, buffer.len(var142))
 			buff = var143
 			var81 = var144
 		elseif self.kind.type == "tooltip" then
 			local var145 = self.kind.value:encode()
 			local var146, var147 = protoModule.writeTag(buff, var81, 24, protoModule.wireTypes.lengthDelimited)
-			var146, var331 = protoModule.writeBuffer(var146, var147, var145, buffer.len(var145))
+			var146, var332 = protoModule.writeBuffer(var146, var147, var145, buffer.len(var145))
 			buff = var146
 			var81 = var147
 		elseif self.kind.type == "coachmark" then
 			local var148 = self.kind.value:encode()
 			local var149, var150 = protoModule.writeTag(buff, var81, 25, protoModule.wireTypes.lengthDelimited)
-			var149, var334 = protoModule.writeBuffer(var149, var150, var148, buffer.len(var148))
+			var149, var335 = protoModule.writeBuffer(var149, var150, var148, buffer.len(var148))
 			buff = var149
 			var81 = var150
 		elseif self.kind.type == "system_banner_prompt" then
 			local var151 = self.kind.value:encode()
 			local var152, var153 = protoModule.writeTag(buff, var81, 28, protoModule.wireTypes.lengthDelimited)
-			var152, var337 = protoModule.writeBuffer(var152, var153, var151, buffer.len(var151))
+			var152, var338 = protoModule.writeBuffer(var152, var153, var151, buffer.len(var151))
 			buff = var152
 			var81 = var153
 		elseif self.kind.type == "age_check_upsell" then
 			local var154 = self.kind.value:encode()
 			local var155, var156 = protoModule.writeTag(buff, var81, 29, protoModule.wireTypes.lengthDelimited)
-			var155, var340 = protoModule.writeBuffer(var155, var156, var154, buffer.len(var154))
+			var155, var341 = protoModule.writeBuffer(var155, var156, var154, buffer.len(var154))
 			buff = var155
 			var81 = var156
 		elseif self.kind.type == "catalog_item_list" then
 			local var157 = self.kind.value:encode()
 			local var158, var159 = protoModule.writeTag(buff, var81, 26, protoModule.wireTypes.lengthDelimited)
-			var158, var343 = protoModule.writeBuffer(var158, var159, var157, buffer.len(var157))
+			var158, var344 = protoModule.writeBuffer(var158, var159, var157, buffer.len(var157))
 			buff = var158
 			var81 = var159
 		elseif self.kind.type == "user_list" then
 			local var160 = self.kind.value:encode()
 			local var161, var162 = protoModule.writeTag(buff, var81, 27, protoModule.wireTypes.lengthDelimited)
-			var161, var346 = protoModule.writeBuffer(var161, var162, var160, buffer.len(var160))
+			var161, var347 = protoModule.writeBuffer(var161, var162, var160, buffer.len(var160))
 			buff = var161
 			var81 = var162
 		elseif self.kind.type == "experience_content_rating_label" then
 			local var163 = self.kind.value:encode()
 			local var164, var165 = protoModule.writeTag(buff, var81, 30, protoModule.wireTypes.lengthDelimited)
-			var164, var349 = protoModule.writeBuffer(var164, var165, var163, buffer.len(var163))
+			var164, var350 = protoModule.writeBuffer(var164, var165, var163, buffer.len(var163))
 			buff = var164
 			var81 = var165
 		elseif self.kind.type == "experience_refund_policy" then
 			local var166 = self.kind.value:encode()
 			local var167, var168 = protoModule.writeTag(buff, var81, 31, protoModule.wireTypes.lengthDelimited)
-			var167, var352 = protoModule.writeBuffer(var167, var168, var166, buffer.len(var166))
+			var167, var353 = protoModule.writeBuffer(var167, var168, var166, buffer.len(var166))
 			buff = var167
 			var81 = var168
 		elseif self.kind.type == "experience_play_with_reward" then
 			local var169 = self.kind.value:encode()
 			local var170, var171 = protoModule.writeTag(buff, var81, 32, protoModule.wireTypes.lengthDelimited)
-			var170, var355 = protoModule.writeBuffer(var170, var171, var169, buffer.len(var169))
+			var170, var356 = protoModule.writeBuffer(var170, var171, var169, buffer.len(var169))
 			buff = var170
 			var81 = var171
 		elseif self.kind.type == "experience_guidelines_dialog" then
 			local var172 = self.kind.value:encode()
 			local var173, var174 = protoModule.writeTag(buff, var81, 33, protoModule.wireTypes.lengthDelimited)
-			var173, var358 = protoModule.writeBuffer(var173, var174, var172, buffer.len(var172))
+			var173, var359 = protoModule.writeBuffer(var173, var174, var172, buffer.len(var172))
 			buff = var173
 			var81 = var174
 		elseif self.kind.type == "community_section" then
 			local var175 = self.kind.value:encode()
 			local var176, var177 = protoModule.writeTag(buff, var81, 35, protoModule.wireTypes.lengthDelimited)
-			var176, var361 = protoModule.writeBuffer(var176, var177, var175, buffer.len(var175))
+			var176, var362 = protoModule.writeBuffer(var176, var177, var175, buffer.len(var175))
 			buff = var176
 			var81 = var177
 		elseif self.kind.type == "moments_carousel" then
 			local var178 = self.kind.value:encode()
 			local var179, var180 = protoModule.writeTag(buff, var81, 34, protoModule.wireTypes.lengthDelimited)
-			var179, var364 = protoModule.writeBuffer(var179, var180, var178, buffer.len(var178))
+			var179, var365 = protoModule.writeBuffer(var179, var180, var178, buffer.len(var178))
 			buff = var179
 			var81 = var180
 		elseif self.kind.type == "text" then
 			local var181 = self.kind.value:encode()
 			local var182, var183 = protoModule.writeTag(buff, var81, 40, protoModule.wireTypes.lengthDelimited)
-			var182, var367 = protoModule.writeBuffer(var182, var183, var181, buffer.len(var181))
+			var182, var368 = protoModule.writeBuffer(var182, var183, var181, buffer.len(var181))
 			buff = var182
 			var81 = var183
 		elseif self.kind.type == "vertical_feed" then
 			local var184 = self.kind.value:encode()
 			local var185, var186 = protoModule.writeTag(buff, var81, 41, protoModule.wireTypes.lengthDelimited)
-			var185, var370 = protoModule.writeBuffer(var185, var186, var184, buffer.len(var184))
+			var185, var371 = protoModule.writeBuffer(var185, var186, var184, buffer.len(var184))
 			buff = var185
 			var81 = var186
 		elseif self.kind.type == "page_header" then
 			local var187 = self.kind.value:encode()
 			local var188, var189 = protoModule.writeTag(buff, var81, 42, protoModule.wireTypes.lengthDelimited)
-			var188, var373 = protoModule.writeBuffer(var188, var189, var187, buffer.len(var187))
+			var188, var374 = protoModule.writeBuffer(var188, var189, var187, buffer.len(var187))
 			buff = var188
 			var81 = var189
 		elseif self.kind.type == "image_cta_section" then
 			local var190 = self.kind.value:encode()
 			local var191, var192 = protoModule.writeTag(buff, var81, 43, protoModule.wireTypes.lengthDelimited)
-			var191, var376 = protoModule.writeBuffer(var191, var192, var190, buffer.len(var190))
+			var191, var377 = protoModule.writeBuffer(var191, var192, var190, buffer.len(var190))
 			buff = var191
 			var81 = var192
 		elseif self.kind.type == "experience_details_feed" then
 			local var193 = self.kind.value:encode()
 			local var194, var195 = protoModule.writeTag(buff, var81, 500, protoModule.wireTypes.lengthDelimited)
-			var194, var379 = protoModule.writeBuffer(var194, var195, var193, buffer.len(var193))
+			var194, var380 = protoModule.writeBuffer(var194, var195, var193, buffer.len(var193))
 			buff = var194
 			var81 = var195
 		elseif self.kind.type == "experience_details_action_bar" then
 			local var196 = self.kind.value:encode()
 			local var197, var198 = protoModule.writeTag(buff, var81, 501, protoModule.wireTypes.lengthDelimited)
-			var197, var382 = protoModule.writeBuffer(var197, var198, var196, buffer.len(var196))
+			var197, var383 = protoModule.writeBuffer(var197, var198, var196, buffer.len(var196))
 			buff = var197
 			var81 = var198
 		elseif self.kind.type == "experience_details_banner_image" then
 			local var199 = self.kind.value:encode()
 			local var200, var201 = protoModule.writeTag(buff, var81, 502, protoModule.wireTypes.lengthDelimited)
-			var200, var385 = protoModule.writeBuffer(var200, var201, var199, buffer.len(var199))
+			var200, var386 = protoModule.writeBuffer(var200, var201, var199, buffer.len(var199))
 			buff = var200
 			var81 = var201
 		elseif self.kind.type == "experience_details_sticky_header" then
 			local var202 = self.kind.value:encode()
 			local var203, var204 = protoModule.writeTag(buff, var81, 503, protoModule.wireTypes.lengthDelimited)
-			var203, var388 = protoModule.writeBuffer(var203, var204, var202, buffer.len(var202))
+			var203, var389 = protoModule.writeBuffer(var203, var204, var202, buffer.len(var202))
 			buff = var203
 			var81 = var204
 		elseif self.kind.type == "event_details_feed" then
 			local var205 = self.kind.value:encode()
 			local var206, var207 = protoModule.writeTag(buff, var81, 600, protoModule.wireTypes.lengthDelimited)
-			var206, var391 = protoModule.writeBuffer(var206, var207, var205, buffer.len(var205))
+			var206, var392 = protoModule.writeBuffer(var206, var207, var205, buffer.len(var205))
 			buff = var206
 			var81 = var207
 		elseif self.kind.type == "event_details_action_bar" then
 			local var208 = self.kind.value:encode()
 			local var209, var210 = protoModule.writeTag(buff, var81, 601, protoModule.wireTypes.lengthDelimited)
-			var209, var394 = protoModule.writeBuffer(var209, var210, var208, buffer.len(var208))
+			var209, var395 = protoModule.writeBuffer(var209, var210, var208, buffer.len(var208))
 			buff = var209
 			var81 = var210
 		elseif self.kind.type == "event_attribution_row" then
 			local var211 = self.kind.value:encode()
 			local var212, var213 = protoModule.writeTag(buff, var81, 602, protoModule.wireTypes.lengthDelimited)
-			var212, var397 = protoModule.writeBuffer(var212, var213, var211, buffer.len(var211))
+			var212, var398 = protoModule.writeBuffer(var212, var213, var211, buffer.len(var211))
 			buff = var212
 			var81 = var213
 		elseif self.kind.type == "event_description" then
 			local var214 = self.kind.value:encode()
 			local var215, var216 = protoModule.writeTag(buff, var81, 603, protoModule.wireTypes.lengthDelimited)
-			var215, var400 = protoModule.writeBuffer(var215, var216, var214, buffer.len(var214))
+			var215, var401 = protoModule.writeBuffer(var215, var216, var214, buffer.len(var214))
 			buff = var215
 			var81 = var216
 		elseif self.kind.type == "event_info_table" then
 			local var217 = self.kind.value:encode()
 			local var218, var219 = protoModule.writeTag(buff, var81, 604, protoModule.wireTypes.lengthDelimited)
-			var218, var403 = protoModule.writeBuffer(var218, var219, var217, buffer.len(var217))
+			var218, var404 = protoModule.writeBuffer(var218, var219, var217, buffer.len(var217))
 			buff = var218
 			var81 = var219
 		elseif self.kind.type == "event_details_sheet_full_bleed" then
 			local var220 = self.kind.value:encode()
 			local var221, var222 = protoModule.writeTag(buff, var81, 605, protoModule.wireTypes.lengthDelimited)
-			var221, var406 = protoModule.writeBuffer(var221, var222, var220, buffer.len(var220))
+			var221, var407 = protoModule.writeBuffer(var221, var222, var220, buffer.len(var220))
 			buff = var221
 			var81 = var222
 		elseif self.kind.type == "event_notifications_modal" then
 			local var223 = self.kind.value:encode()
 			local var224, var225 = protoModule.writeTag(buff, var81, 606, protoModule.wireTypes.lengthDelimited)
-			var224, var409 = protoModule.writeBuffer(var224, var225, var223, buffer.len(var223))
+			var224, var410 = protoModule.writeBuffer(var224, var225, var223, buffer.len(var223))
 			buff = var224
 			var81 = var225
 		elseif self.kind.type == "dev_store_feed" then
 			local var226 = self.kind.value:encode()
 			local var227, var228 = protoModule.writeTag(buff, var81, 700, protoModule.wireTypes.lengthDelimited)
-			var227, var412 = protoModule.writeBuffer(var227, var228, var226, buffer.len(var226))
+			var227, var413 = protoModule.writeBuffer(var227, var228, var226, buffer.len(var226))
 			buff = var227
 			var81 = var228
 		elseif self.kind.type == "charts_feed" then
 			local var229 = self.kind.value:encode()
 			local var230, var231 = protoModule.writeTag(buff, var81, 800, protoModule.wireTypes.lengthDelimited)
-			var230, var415 = protoModule.writeBuffer(var230, var231, var229, buffer.len(var229))
+			var230, var416 = protoModule.writeBuffer(var230, var231, var229, buffer.len(var229))
 			buff = var230
 			var81 = var231
 		elseif self.kind.type == "filter_pills" then
 			local var232 = self.kind.value:encode()
 			local var233, var234 = protoModule.writeTag(buff, var81, 801, protoModule.wireTypes.lengthDelimited)
-			var233, var418 = protoModule.writeBuffer(var233, var234, var232, buffer.len(var232))
+			var233, var419 = protoModule.writeBuffer(var233, var234, var232, buffer.len(var232))
 			buff = var233
 			var81 = var234
 		elseif self.kind.type == "sort_selector" then
 			local var235 = self.kind.value:encode()
 			local var236, var237 = protoModule.writeTag(buff, var81, 802, protoModule.wireTypes.lengthDelimited)
-			var236, var421 = protoModule.writeBuffer(var236, var237, var235, buffer.len(var235))
+			var236, var422 = protoModule.writeBuffer(var236, var237, var235, buffer.len(var235))
 			buff = var236
 			var81 = var237
 		elseif self.kind.type == "genre_selector" then
 			local var238 = self.kind.value:encode()
 			local var239, var240 = protoModule.writeTag(buff, var81, 803, protoModule.wireTypes.lengthDelimited)
-			var239, var424 = protoModule.writeBuffer(var239, var240, var238, buffer.len(var238))
+			var239, var425 = protoModule.writeBuffer(var239, var240, var238, buffer.len(var238))
 			buff = var239
 			var81 = var240
 		elseif self.kind.type == "marketplace_catalog_feed" then
 			local var241 = self.kind.value:encode()
 			local var242, var243 = protoModule.writeTag(buff, var81, 900, protoModule.wireTypes.lengthDelimited)
-			var242, var427 = protoModule.writeBuffer(var242, var243, var241, buffer.len(var241))
+			var242, var428 = protoModule.writeBuffer(var242, var243, var241, buffer.len(var241))
 			buff = var242
 			var81 = var243
 		elseif self.kind.type == "marketplace_catalog_category_menu" then
 			local var244 = self.kind.value:encode()
 			local var245, var246 = protoModule.writeTag(buff, var81, 901, protoModule.wireTypes.lengthDelimited)
-			var245, var430 = protoModule.writeBuffer(var245, var246, var244, buffer.len(var244))
+			var245, var431 = protoModule.writeBuffer(var245, var246, var244, buffer.len(var244))
 			buff = var245
 			var81 = var246
 		elseif self.kind.type == "marketplace_catalog_item_group" then
 			local var247 = self.kind.value:encode()
 			local var248, var249 = protoModule.writeTag(buff, var81, 902, protoModule.wireTypes.lengthDelimited)
-			var248, var433 = protoModule.writeBuffer(var248, var249, var247, buffer.len(var247))
+			var248, var434 = protoModule.writeBuffer(var248, var249, var247, buffer.len(var247))
 			buff = var248
 			var81 = var249
 		elseif self.kind.type == "marketplace_catalog_item_carousel" then
 			local var250 = self.kind.value:encode()
 			local var251, var252 = protoModule.writeTag(buff, var81, 903, protoModule.wireTypes.lengthDelimited)
-			var251, var436 = protoModule.writeBuffer(var251, var252, var250, buffer.len(var250))
+			var251, var437 = protoModule.writeBuffer(var251, var252, var250, buffer.len(var250))
 			buff = var251
 			var81 = var252
 		elseif self.kind.type == "marketplace_catalog_hero_unit" then
 			local var253 = self.kind.value:encode()
 			local var254, var255 = protoModule.writeTag(buff, var81, 904, protoModule.wireTypes.lengthDelimited)
-			var254, var439 = protoModule.writeBuffer(var254, var255, var253, buffer.len(var253))
+			var254, var440 = protoModule.writeBuffer(var254, var255, var253, buffer.len(var253))
 			buff = var254
 			var81 = var255
 		elseif self.kind.type == "catalog_item_grid" then
 			local var256 = self.kind.value:encode()
 			local var257, var258 = protoModule.writeTag(buff, var81, 905, protoModule.wireTypes.lengthDelimited)
-			var257, var442 = protoModule.writeBuffer(var257, var258, var256, buffer.len(var256))
+			var257, var443 = protoModule.writeBuffer(var257, var258, var256, buffer.len(var256))
 			buff = var257
 			var81 = var258
 		elseif self.kind.type == "marketplace_offer_modal" then
 			local var259 = self.kind.value:encode()
 			local var260, var261 = protoModule.writeTag(buff, var81, 906, protoModule.wireTypes.lengthDelimited)
-			var260, var445 = protoModule.writeBuffer(var260, var261, var259, buffer.len(var259))
+			var260, var446 = protoModule.writeBuffer(var260, var261, var259, buffer.len(var259))
 			buff = var260
 			var81 = var261
 		elseif self.kind.type == "search_results_feed" then
 			local var262 = self.kind.value:encode()
 			local var263, var264 = protoModule.writeTag(buff, var81, 1000, protoModule.wireTypes.lengthDelimited)
-			var263, var448 = protoModule.writeBuffer(var263, var264, var262, buffer.len(var262))
+			var263, var449 = protoModule.writeBuffer(var263, var264, var262, buffer.len(var262))
 			buff = var263
 			var81 = var264
 		elseif self.kind.type == "power_search_ai_overview" then
 			local var265 = self.kind.value:encode()
 			local var266, var267 = protoModule.writeTag(buff, var81, 1001, protoModule.wireTypes.lengthDelimited)
-			var266, var451 = protoModule.writeBuffer(var266, var267, var265, buffer.len(var265))
+			var266, var452 = protoModule.writeBuffer(var266, var267, var265, buffer.len(var265))
 			buff = var266
 			var81 = var267
 		elseif self.kind.type == "experience_emphasis_tile" then
 			local var268 = self.kind.value:encode()
 			local var269, var270 = protoModule.writeTag(buff, var81, 1002, protoModule.wireTypes.lengthDelimited)
-			var269, var454 = protoModule.writeBuffer(var269, var270, var268, buffer.len(var268))
+			var269, var455 = protoModule.writeBuffer(var269, var270, var268, buffer.len(var268))
 			buff = var269
 			var81 = var270
 		elseif self.kind.type == "option_selector_carousel" then
 			local var271 = self.kind.value:encode()
 			local var272, var273 = protoModule.writeTag(buff, var81, 1100, protoModule.wireTypes.lengthDelimited)
-			var272, var457 = protoModule.writeBuffer(var272, var273, var271, buffer.len(var271))
+			var272, var458 = protoModule.writeBuffer(var272, var273, var271, buffer.len(var271))
 			buff = var272
 			var81 = var273
 		elseif self.kind.type == "game_items_carousel" then
 			local var274 = self.kind.value:encode()
 			local var275, var276 = protoModule.writeTag(buff, var81, 1101, protoModule.wireTypes.lengthDelimited)
-			var275, var460 = protoModule.writeBuffer(var275, var276, var274, buffer.len(var274))
+			var275, var461 = protoModule.writeBuffer(var275, var276, var274, buffer.len(var274))
 			buff = var275
 			var81 = var276
 		elseif self.kind.type == "hero_unit" then
 			local var277 = self.kind.value:encode()
 			local var278, var279 = protoModule.writeTag(buff, var81, 1102, protoModule.wireTypes.lengthDelimited)
-			var278, var463 = protoModule.writeBuffer(var278, var279, var277, buffer.len(var277))
+			var278, var464 = protoModule.writeBuffer(var278, var279, var277, buffer.len(var277))
 			buff = var278
 			var81 = var279
 		elseif self.kind.type == "friend_recommendation_carousel" then
 			local var280 = self.kind.value:encode()
 			local var281, var282 = protoModule.writeTag(buff, var81, 1103, protoModule.wireTypes.lengthDelimited)
-			var281, var466 = protoModule.writeBuffer(var281, var282, var280, buffer.len(var280))
+			var281, var467 = protoModule.writeBuffer(var281, var282, var280, buffer.len(var280))
 			buff = var281
 			var81 = var282
 		elseif self.kind.type == "party_chat_conversation_upsell" then
 			local var283 = self.kind.value:encode()
 			local var284, var285 = protoModule.writeTag(buff, var81, 1200, protoModule.wireTypes.lengthDelimited)
-			var284, var469 = protoModule.writeBuffer(var284, var285, var283, buffer.len(var283))
+			var284, var470 = protoModule.writeBuffer(var284, var285, var283, buffer.len(var283))
 			buff = var284
 			var81 = var285
 		elseif self.kind.type == "pre_auth_landing_sticky_header" then
 			local var286 = self.kind.value:encode()
 			local var287, var288 = protoModule.writeTag(buff, var81, 1300, protoModule.wireTypes.lengthDelimited)
-			var287, var472 = protoModule.writeBuffer(var287, var288, var286, buffer.len(var286))
+			var287, var473 = protoModule.writeBuffer(var287, var288, var286, buffer.len(var286))
 			buff = var287
 			var81 = var288
 		elseif self.kind.type == "community_announcement" then
 			local var289 = self.kind.value:encode()
 			local var290, var291 = protoModule.writeTag(buff, var81, 1400, protoModule.wireTypes.lengthDelimited)
-			var290, var475 = protoModule.writeBuffer(var290, var291, var289, buffer.len(var289))
+			var290, var476 = protoModule.writeBuffer(var290, var291, var289, buffer.len(var289))
 			buff = var290
 			var81 = var291
+		elseif self.kind.type == "settings_row" then
+			local var292 = self.kind.value:encode()
+			local var293, var294 = protoModule.writeTag(buff, var81, 1500, protoModule.wireTypes.lengthDelimited)
+			var293, var479 = protoModule.writeBuffer(var293, var294, var292, buffer.len(var292))
+			buff = var293
+			var81 = var294
 		end
 	end
 	local buff_1 = buffer.create(var81)
@@ -1575,23 +1581,31 @@ function t_5.decode(p5)
 					type = "community_announcement",
 					value = t.CommunityAnnouncementInputData.decode(var228)
 				}
+			elseif var87 == 1500 then
+				local _ = nil
+				local var230, var231 = protoModule.readBuffer(p5, var82)
+				var82 = var231
+				var81.kind = {
+					type = "settings_row",
+					value = t.SettingsRowInputData.decode(var230)
+				}
 			else
 				local _ = nil
-				local var230, var231 = protoModule.readVarInt(p5, var82)
-				var82 = var231 + var230
+				local var232, var233 = protoModule.readVarInt(p5, var82)
+				var82 = var233 + var232
 			end
 		elseif var83 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var232, var233 = protoModule.readFixed32(p5, var82)
-			local _ = var232
-			var82 = var233
-		elseif var83 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var234, var235 = protoModule.readFixed64(p5, var82)
+			local var234, var235 = protoModule.readFixed32(p5, var82)
 			local _ = var234
 			var82 = var235
+		elseif var83 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var236, var237 = protoModule.readFixed64(p5, var82)
+			local _ = var236
+			var82 = var237
 		else
-			error("Unsupported wire type: " .. var479)
+			error("Unsupported wire type: " .. var483)
 		end
 	end
 	return var81
@@ -1879,6 +1893,10 @@ function t_5:jsonEncode()
 			return t
 		elseif self.kind.type == "community_announcement" then
 			t.communityAnnouncement = self.kind.value:jsonEncode()
+			
+			return t
+		elseif self.kind.type == "settings_row" then
+			t.settingsRow = self.kind.value:jsonEncode()
 		end
 	end
 	return t
@@ -1886,813 +1904,825 @@ end
 
 function t_5:jsonDecode()
 	-- upvalues: t_5 (ref), t (ref)
-	local var236 = t_5.new()
+	local var238 = t_5.new()
 	
 	if self.badges_grid ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "badges_grid",
 			value = t.BadgesGridInputData.jsonDecode(self.badges_grid)
 		}
 	end
 	if self.badgesGrid ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "badges_grid",
 			value = t.BadgesGridInputData.jsonDecode(self.badgesGrid)
 		}
 	end
 	if self.badge_details ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "badge_details",
 			value = t.BadgeDetailsInputData.jsonDecode(self.badge_details)
 		}
 	end
 	if self.badgeDetails ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "badge_details",
 			value = t.BadgeDetailsInputData.jsonDecode(self.badgeDetails)
 		}
 	end
 	if self.static_content ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "static_content",
 			value = t.StaticInputData.jsonDecode(self.static_content)
 		}
 	end
 	if self.staticContent ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "static_content",
 			value = t.StaticInputData.jsonDecode(self.staticContent)
 		}
 	end
 	if self.experience_attribution_row ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_attribution_row",
 			value = t.ExperienceAttributionRowInputData.jsonDecode(self.experience_attribution_row)
 		}
 	end
 	if self.experienceAttributionRow ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_attribution_row",
 			value = t.ExperienceAttributionRowInputData.jsonDecode(self.experienceAttributionRow)
 		}
 	end
 	if self.experience_action_module ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_action_module",
 			value = t.ExperienceActionModuleInputData.jsonDecode(self.experience_action_module)
 		}
 	end
 	if self.experienceActionModule ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_action_module",
 			value = t.ExperienceActionModuleInputData.jsonDecode(self.experienceActionModule)
 		}
 	end
 	if self.experience_media_gallery ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_media_gallery",
 			value = t.ExperienceMediaGalleryInputData.jsonDecode(self.experience_media_gallery)
 		}
 	end
 	if self.experienceMediaGallery ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_media_gallery",
 			value = t.ExperienceMediaGalleryInputData.jsonDecode(self.experienceMediaGallery)
 		}
 	end
 	if self.experience_description ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_description",
 			value = t.ExperienceDescriptionInputData.jsonDecode(self.experience_description)
 		}
 	end
 	if self.experienceDescription ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_description",
 			value = t.ExperienceDescriptionInputData.jsonDecode(self.experienceDescription)
 		}
 	end
 	if self.experience_stat_row ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_stat_row",
 			value = t.ExperienceStatRowInputData.jsonDecode(self.experience_stat_row)
 		}
 	end
 	if self.experienceStatRow ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_stat_row",
 			value = t.ExperienceStatRowInputData.jsonDecode(self.experienceStatRow)
 		}
 	end
 	if self.experience_info_table ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_info_table",
 			value = t.ExperienceInfoTableInputData.jsonDecode(self.experience_info_table)
 		}
 	end
 	if self.experienceInfoTable ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_info_table",
 			value = t.ExperienceInfoTableInputData.jsonDecode(self.experienceInfoTable)
 		}
 	end
 	if self.social_link_row ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "social_link_row",
 			value = t.SocialLinkRowInputData.jsonDecode(self.social_link_row)
 		}
 	end
 	if self.socialLinkRow ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "social_link_row",
 			value = t.SocialLinkRowInputData.jsonDecode(self.socialLinkRow)
 		}
 	end
 	if self.experience_carousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_carousel",
 			value = t.ExperienceCarouselInputData.jsonDecode(self.experience_carousel)
 		}
 	end
 	if self.experienceCarousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_carousel",
 			value = t.ExperienceCarouselInputData.jsonDecode(self.experienceCarousel)
 		}
 	end
 	if self.song_carousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "song_carousel",
 			value = t.SongCarouselInputData.jsonDecode(self.song_carousel)
 		}
 	end
 	if self.songCarousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "song_carousel",
 			value = t.SongCarouselInputData.jsonDecode(self.songCarousel)
 		}
 	end
 	if self.events_carousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "events_carousel",
 			value = t.EventsCarouselInputData.jsonDecode(self.events_carousel)
 		}
 	end
 	if self.eventsCarousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "events_carousel",
 			value = t.EventsCarouselInputData.jsonDecode(self.eventsCarousel)
 		}
 	end
 	if self.game_pass_collection ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "game_pass_collection",
 			value = t.GamePassCollectionInputData.jsonDecode(self.game_pass_collection)
 		}
 	end
 	if self.gamePassCollection ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "game_pass_collection",
 			value = t.GamePassCollectionInputData.jsonDecode(self.gamePassCollection)
 		}
 	end
 	if self.developer_product_collection ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "developer_product_collection",
 			value = t.DeveloperProductCollectionInputData.jsonDecode(self.developer_product_collection)
 		}
 	end
 	if self.developerProductCollection ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "developer_product_collection",
 			value = t.DeveloperProductCollectionInputData.jsonDecode(self.developerProductCollection)
 		}
 	end
 	if self.subscription_collection ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "subscription_collection",
 			value = t.SubscriptionCollectionInputData.jsonDecode(self.subscription_collection)
 		}
 	end
 	if self.subscriptionCollection ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "subscription_collection",
 			value = t.SubscriptionCollectionInputData.jsonDecode(self.subscriptionCollection)
 		}
 	end
 	if self.dynamic_store_category ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "dynamic_store_category",
 			value = t.DynamicStoreCategoryInputData.jsonDecode(self.dynamic_store_category)
 		}
 	end
 	if self.dynamicStoreCategory ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "dynamic_store_category",
 			value = t.DynamicStoreCategoryInputData.jsonDecode(self.dynamicStoreCategory)
 		}
 	end
 	if self.card_container ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "card_container",
 			value = t.CardContainerInputData.jsonDecode(self.card_container)
 		}
 	end
 	if self.cardContainer ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "card_container",
 			value = t.CardContainerInputData.jsonDecode(self.cardContainer)
 		}
 	end
 	if self.card ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "card",
 			value = t.CardInputData.jsonDecode(self.card)
 		}
 	end
 	if self.dialog ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "dialog",
 			value = t.DialogInputData.jsonDecode(self.dialog)
 		}
 	end
 	if self.banner ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "banner",
 			value = t.BannerInputData.jsonDecode(self.banner)
 		}
 	end
 	if self.tooltip ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "tooltip",
 			value = t.TooltipInputData.jsonDecode(self.tooltip)
 		}
 	end
 	if self.coachmark ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "coachmark",
 			value = t.CoachmarkInputData.jsonDecode(self.coachmark)
 		}
 	end
 	if self.system_banner_prompt ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "system_banner_prompt",
 			value = t.SystemBannerInputData.jsonDecode(self.system_banner_prompt)
 		}
 	end
 	if self.systemBannerPrompt ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "system_banner_prompt",
 			value = t.SystemBannerInputData.jsonDecode(self.systemBannerPrompt)
 		}
 	end
 	if self.age_check_upsell ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "age_check_upsell",
 			value = t.AgeCheckUpsellInputData.jsonDecode(self.age_check_upsell)
 		}
 	end
 	if self.ageCheckUpsell ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "age_check_upsell",
 			value = t.AgeCheckUpsellInputData.jsonDecode(self.ageCheckUpsell)
 		}
 	end
 	if self.catalog_item_list ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "catalog_item_list",
 			value = t.CatalogItemListInputData.jsonDecode(self.catalog_item_list)
 		}
 	end
 	if self.catalogItemList ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "catalog_item_list",
 			value = t.CatalogItemListInputData.jsonDecode(self.catalogItemList)
 		}
 	end
 	if self.user_list ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "user_list",
 			value = t.UserListInputData.jsonDecode(self.user_list)
 		}
 	end
 	if self.userList ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "user_list",
 			value = t.UserListInputData.jsonDecode(self.userList)
 		}
 	end
 	if self.experience_content_rating_label ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_content_rating_label",
 			value = t.ExperienceContentRatingLabelInputData.jsonDecode(self.experience_content_rating_label)
 		}
 	end
 	if self.experienceContentRatingLabel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_content_rating_label",
 			value = t.ExperienceContentRatingLabelInputData.jsonDecode(self.experienceContentRatingLabel)
 		}
 	end
 	if self.experience_refund_policy ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_refund_policy",
 			value = t.ExperienceRefundPolicyInputData.jsonDecode(self.experience_refund_policy)
 		}
 	end
 	if self.experienceRefundPolicy ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_refund_policy",
 			value = t.ExperienceRefundPolicyInputData.jsonDecode(self.experienceRefundPolicy)
 		}
 	end
 	if self.experience_play_with_reward ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_play_with_reward",
 			value = t.ExperiencePlayWithRewardInputData.jsonDecode(self.experience_play_with_reward)
 		}
 	end
 	if self.experiencePlayWithReward ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_play_with_reward",
 			value = t.ExperiencePlayWithRewardInputData.jsonDecode(self.experiencePlayWithReward)
 		}
 	end
 	if self.experience_guidelines_dialog ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_guidelines_dialog",
 			value = t.ExperienceGuidelinesDialogInputData.jsonDecode(self.experience_guidelines_dialog)
 		}
 	end
 	if self.experienceGuidelinesDialog ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_guidelines_dialog",
 			value = t.ExperienceGuidelinesDialogInputData.jsonDecode(self.experienceGuidelinesDialog)
 		}
 	end
 	if self.community_section ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "community_section",
 			value = t.CommunitySectionInputData.jsonDecode(self.community_section)
 		}
 	end
 	if self.communitySection ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "community_section",
 			value = t.CommunitySectionInputData.jsonDecode(self.communitySection)
 		}
 	end
 	if self.moments_carousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "moments_carousel",
 			value = t.MomentsCarouselInputData.jsonDecode(self.moments_carousel)
 		}
 	end
 	if self.momentsCarousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "moments_carousel",
 			value = t.MomentsCarouselInputData.jsonDecode(self.momentsCarousel)
 		}
 	end
 	if self.text ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "text",
 			value = t.TextInputData.jsonDecode(self.text)
 		}
 	end
 	if self.vertical_feed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "vertical_feed",
 			value = t.VerticalFeedInputData.jsonDecode(self.vertical_feed)
 		}
 	end
 	if self.verticalFeed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "vertical_feed",
 			value = t.VerticalFeedInputData.jsonDecode(self.verticalFeed)
 		}
 	end
 	if self.page_header ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "page_header",
 			value = t.PageHeaderInputData.jsonDecode(self.page_header)
 		}
 	end
 	if self.pageHeader ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "page_header",
 			value = t.PageHeaderInputData.jsonDecode(self.pageHeader)
 		}
 	end
 	if self.image_cta_section ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "image_cta_section",
 			value = t.ImageCtaSectionInputData.jsonDecode(self.image_cta_section)
 		}
 	end
 	if self.imageCtaSection ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "image_cta_section",
 			value = t.ImageCtaSectionInputData.jsonDecode(self.imageCtaSection)
 		}
 	end
 	if self.experience_details_feed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_details_feed",
 			value = t.ExperienceDetailsFeedInputData.jsonDecode(self.experience_details_feed)
 		}
 	end
 	if self.experienceDetailsFeed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_details_feed",
 			value = t.ExperienceDetailsFeedInputData.jsonDecode(self.experienceDetailsFeed)
 		}
 	end
 	if self.experience_details_action_bar ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_details_action_bar",
 			value = t.ExperienceDetailsActionBarInputData.jsonDecode(self.experience_details_action_bar)
 		}
 	end
 	if self.experienceDetailsActionBar ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_details_action_bar",
 			value = t.ExperienceDetailsActionBarInputData.jsonDecode(self.experienceDetailsActionBar)
 		}
 	end
 	if self.experience_details_banner_image ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_details_banner_image",
 			value = t.ExperienceDetailsBannerImageInputData.jsonDecode(self.experience_details_banner_image)
 		}
 	end
 	if self.experienceDetailsBannerImage ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_details_banner_image",
 			value = t.ExperienceDetailsBannerImageInputData.jsonDecode(self.experienceDetailsBannerImage)
 		}
 	end
 	if self.experience_details_sticky_header ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_details_sticky_header",
 			value = t.ExperienceDetailsStickyHeaderInputData.jsonDecode(self.experience_details_sticky_header)
 		}
 	end
 	if self.experienceDetailsStickyHeader ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_details_sticky_header",
 			value = t.ExperienceDetailsStickyHeaderInputData.jsonDecode(self.experienceDetailsStickyHeader)
 		}
 	end
 	if self.event_details_feed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "event_details_feed",
 			value = t.EventDetailsFeedInputData.jsonDecode(self.event_details_feed)
 		}
 	end
 	if self.eventDetailsFeed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "event_details_feed",
 			value = t.EventDetailsFeedInputData.jsonDecode(self.eventDetailsFeed)
 		}
 	end
 	if self.event_details_action_bar ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "event_details_action_bar",
 			value = t.EventDetailsActionBarInputData.jsonDecode(self.event_details_action_bar)
 		}
 	end
 	if self.eventDetailsActionBar ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "event_details_action_bar",
 			value = t.EventDetailsActionBarInputData.jsonDecode(self.eventDetailsActionBar)
 		}
 	end
 	if self.event_attribution_row ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "event_attribution_row",
 			value = t.EventAttributionRowInputData.jsonDecode(self.event_attribution_row)
 		}
 	end
 	if self.eventAttributionRow ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "event_attribution_row",
 			value = t.EventAttributionRowInputData.jsonDecode(self.eventAttributionRow)
 		}
 	end
 	if self.event_description ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "event_description",
 			value = t.EventDescriptionInputData.jsonDecode(self.event_description)
 		}
 	end
 	if self.eventDescription ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "event_description",
 			value = t.EventDescriptionInputData.jsonDecode(self.eventDescription)
 		}
 	end
 	if self.event_info_table ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "event_info_table",
 			value = t.EventInfoTableInputData.jsonDecode(self.event_info_table)
 		}
 	end
 	if self.eventInfoTable ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "event_info_table",
 			value = t.EventInfoTableInputData.jsonDecode(self.eventInfoTable)
 		}
 	end
 	if self.event_details_sheet_full_bleed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "event_details_sheet_full_bleed",
 			value = t.EventDetailsSheetFullBleedInputData.jsonDecode(self.event_details_sheet_full_bleed)
 		}
 	end
 	if self.eventDetailsSheetFullBleed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "event_details_sheet_full_bleed",
 			value = t.EventDetailsSheetFullBleedInputData.jsonDecode(self.eventDetailsSheetFullBleed)
 		}
 	end
 	if self.event_notifications_modal ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "event_notifications_modal",
 			value = t.EventNotificationsModalInputData.jsonDecode(self.event_notifications_modal)
 		}
 	end
 	if self.eventNotificationsModal ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "event_notifications_modal",
 			value = t.EventNotificationsModalInputData.jsonDecode(self.eventNotificationsModal)
 		}
 	end
 	if self.dev_store_feed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "dev_store_feed",
 			value = t.DevStoreFeedInputData.jsonDecode(self.dev_store_feed)
 		}
 	end
 	if self.devStoreFeed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "dev_store_feed",
 			value = t.DevStoreFeedInputData.jsonDecode(self.devStoreFeed)
 		}
 	end
 	if self.charts_feed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "charts_feed",
 			value = t.ChartsFeedInputData.jsonDecode(self.charts_feed)
 		}
 	end
 	if self.chartsFeed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "charts_feed",
 			value = t.ChartsFeedInputData.jsonDecode(self.chartsFeed)
 		}
 	end
 	if self.filter_pills ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "filter_pills",
 			value = t.FilterPillsInputData.jsonDecode(self.filter_pills)
 		}
 	end
 	if self.filterPills ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "filter_pills",
 			value = t.FilterPillsInputData.jsonDecode(self.filterPills)
 		}
 	end
 	if self.sort_selector ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "sort_selector",
 			value = t.SortSelectorInputData.jsonDecode(self.sort_selector)
 		}
 	end
 	if self.sortSelector ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "sort_selector",
 			value = t.SortSelectorInputData.jsonDecode(self.sortSelector)
 		}
 	end
 	if self.genre_selector ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "genre_selector",
 			value = t.ChartsGenreSelectorInputData.jsonDecode(self.genre_selector)
 		}
 	end
 	if self.genreSelector ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "genre_selector",
 			value = t.ChartsGenreSelectorInputData.jsonDecode(self.genreSelector)
 		}
 	end
 	if self.marketplace_catalog_feed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "marketplace_catalog_feed",
 			value = t.UAMarketplaceCatalogFeedInputData.jsonDecode(self.marketplace_catalog_feed)
 		}
 	end
 	if self.marketplaceCatalogFeed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "marketplace_catalog_feed",
 			value = t.UAMarketplaceCatalogFeedInputData.jsonDecode(self.marketplaceCatalogFeed)
 		}
 	end
 	if self.marketplace_catalog_category_menu ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "marketplace_catalog_category_menu",
 			value = t.UAMarketplaceCatalogCategoryMenuInputData.jsonDecode(self.marketplace_catalog_category_menu)
 		}
 	end
 	if self.marketplaceCatalogCategoryMenu ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "marketplace_catalog_category_menu",
 			value = t.UAMarketplaceCatalogCategoryMenuInputData.jsonDecode(self.marketplaceCatalogCategoryMenu)
 		}
 	end
 	if self.marketplace_catalog_item_group ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "marketplace_catalog_item_group",
 			value = t.UAMarketplaceCatalogItemGroupInputData.jsonDecode(self.marketplace_catalog_item_group)
 		}
 	end
 	if self.marketplaceCatalogItemGroup ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "marketplace_catalog_item_group",
 			value = t.UAMarketplaceCatalogItemGroupInputData.jsonDecode(self.marketplaceCatalogItemGroup)
 		}
 	end
 	if self.marketplace_catalog_item_carousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "marketplace_catalog_item_carousel",
 			value = t.UAMarketplaceCatalogItemCarouselInputData.jsonDecode(self.marketplace_catalog_item_carousel)
 		}
 	end
 	if self.marketplaceCatalogItemCarousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "marketplace_catalog_item_carousel",
 			value = t.UAMarketplaceCatalogItemCarouselInputData.jsonDecode(self.marketplaceCatalogItemCarousel)
 		}
 	end
 	if self.marketplace_catalog_hero_unit ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "marketplace_catalog_hero_unit",
 			value = t.UAMarketplaceCatalogHeroUnitInputData.jsonDecode(self.marketplace_catalog_hero_unit)
 		}
 	end
 	if self.marketplaceCatalogHeroUnit ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "marketplace_catalog_hero_unit",
 			value = t.UAMarketplaceCatalogHeroUnitInputData.jsonDecode(self.marketplaceCatalogHeroUnit)
 		}
 	end
 	if self.catalog_item_grid ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "catalog_item_grid",
 			value = t.CatalogItemGridInputData.jsonDecode(self.catalog_item_grid)
 		}
 	end
 	if self.catalogItemGrid ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "catalog_item_grid",
 			value = t.CatalogItemGridInputData.jsonDecode(self.catalogItemGrid)
 		}
 	end
 	if self.marketplace_offer_modal ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "marketplace_offer_modal",
 			value = t.MarketplaceOfferModalInputData.jsonDecode(self.marketplace_offer_modal)
 		}
 	end
 	if self.marketplaceOfferModal ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "marketplace_offer_modal",
 			value = t.MarketplaceOfferModalInputData.jsonDecode(self.marketplaceOfferModal)
 		}
 	end
 	if self.search_results_feed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "search_results_feed",
 			value = t.SearchResultsFeedInputData.jsonDecode(self.search_results_feed)
 		}
 	end
 	if self.searchResultsFeed ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "search_results_feed",
 			value = t.SearchResultsFeedInputData.jsonDecode(self.searchResultsFeed)
 		}
 	end
 	if self.power_search_ai_overview ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "power_search_ai_overview",
 			value = t.PowerSearchAIOverviewInputData.jsonDecode(self.power_search_ai_overview)
 		}
 	end
 	if self.powerSearchAiOverview ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "power_search_ai_overview",
 			value = t.PowerSearchAIOverviewInputData.jsonDecode(self.powerSearchAiOverview)
 		}
 	end
 	if self.experience_emphasis_tile ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_emphasis_tile",
 			value = t.ExperienceEmphasisTileInputData.jsonDecode(self.experience_emphasis_tile)
 		}
 	end
 	if self.experienceEmphasisTile ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "experience_emphasis_tile",
 			value = t.ExperienceEmphasisTileInputData.jsonDecode(self.experienceEmphasisTile)
 		}
 	end
 	if self.option_selector_carousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "option_selector_carousel",
 			value = t.OptionSelectorCarouselInputData.jsonDecode(self.option_selector_carousel)
 		}
 	end
 	if self.optionSelectorCarousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "option_selector_carousel",
 			value = t.OptionSelectorCarouselInputData.jsonDecode(self.optionSelectorCarousel)
 		}
 	end
 	if self.game_items_carousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "game_items_carousel",
 			value = t.GameItemsCarouselInputData.jsonDecode(self.game_items_carousel)
 		}
 	end
 	if self.gameItemsCarousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "game_items_carousel",
 			value = t.GameItemsCarouselInputData.jsonDecode(self.gameItemsCarousel)
 		}
 	end
 	if self.hero_unit ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "hero_unit",
 			value = t.HeroUnitInputData.jsonDecode(self.hero_unit)
 		}
 	end
 	if self.heroUnit ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "hero_unit",
 			value = t.HeroUnitInputData.jsonDecode(self.heroUnit)
 		}
 	end
 	if self.friend_recommendation_carousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "friend_recommendation_carousel",
 			value = t.FriendRecommendationCarouselInputData.jsonDecode(self.friend_recommendation_carousel)
 		}
 	end
 	if self.friendRecommendationCarousel ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "friend_recommendation_carousel",
 			value = t.FriendRecommendationCarouselInputData.jsonDecode(self.friendRecommendationCarousel)
 		}
 	end
 	if self.party_chat_conversation_upsell ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "party_chat_conversation_upsell",
 			value = t.PartyChatConversationUpsellInputData.jsonDecode(self.party_chat_conversation_upsell)
 		}
 	end
 	if self.partyChatConversationUpsell ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "party_chat_conversation_upsell",
 			value = t.PartyChatConversationUpsellInputData.jsonDecode(self.partyChatConversationUpsell)
 		}
 	end
 	if self.pre_auth_landing_sticky_header ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "pre_auth_landing_sticky_header",
 			value = t.PreAuthLandingStickyHeaderInputData.jsonDecode(self.pre_auth_landing_sticky_header)
 		}
 	end
 	if self.preAuthLandingStickyHeader ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "pre_auth_landing_sticky_header",
 			value = t.PreAuthLandingStickyHeaderInputData.jsonDecode(self.preAuthLandingStickyHeader)
 		}
 	end
 	if self.community_announcement ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "community_announcement",
 			value = t.CommunityAnnouncementInputData.jsonDecode(self.community_announcement)
 		}
 	end
 	if self.communityAnnouncement ~= nil then
-		var236.kind = {
+		var238.kind = {
 			type = "community_announcement",
 			value = t.CommunityAnnouncementInputData.jsonDecode(self.communityAnnouncement)
 		}
 	end
-	return var236
+	if self.settings_row ~= nil then
+		var238.kind = {
+			type = "settings_row",
+			value = t.SettingsRowInputData.jsonDecode(self.settings_row)
+		}
+	end
+	if self.settingsRow ~= nil then
+		var238.kind = {
+			type = "settings_row",
+			value = t.SettingsRowInputData.jsonDecode(self.settingsRow)
+		}
+	end
+	return var238
 end
 
 t_5.descriptor = {
@@ -2718,112 +2748,112 @@ end
 function t_6:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var236 = 0
+	local var238 = 0
 	
 	if self.section_title ~= nil and self.section_title ~= "" then
-		local var237, var238 = protoModule.writeTag(buff, var236, 1, protoModule.wireTypes.lengthDelimited)
-		var237, var637 = protoModule.writeString(var237, var238, self.section_title)
-		buff = var237
-		var236 = var238
+		local var239, var240 = protoModule.writeTag(buff, var238, 1, protoModule.wireTypes.lengthDelimited)
+		var239, var643 = protoModule.writeString(var239, var240, self.section_title)
+		buff = var239
+		var238 = var240
 	end
 	if self.badges ~= nil and #self.badges > 0 then
 		for i, v in self.badges do
-			local var239 = v:encode()
-			local var240, var241 = protoModule.writeTag(buff, var236, 2, protoModule.wireTypes.lengthDelimited)
-			var240, var640 = protoModule.writeBuffer(var240, var241, var239, buffer.len(var239))
-			buff = var240
-			var236 = var241
+			local var241 = v:encode()
+			local var242, var243 = protoModule.writeTag(buff, var238, 2, protoModule.wireTypes.lengthDelimited)
+			var242, var646 = protoModule.writeBuffer(var242, var243, var241, buffer.len(var241))
+			buff = var242
+			var238 = var243
 		end
 	end
 	if self.collection_id ~= nil and self.collection_id ~= "" then
-		local var242, var243 = protoModule.writeTag(buff, var236, 3, protoModule.wireTypes.lengthDelimited)
-		var242, var642 = protoModule.writeString(var242, var243, self.collection_id)
-		buff = var242
-		var236 = var243
+		local var244, var245 = protoModule.writeTag(buff, var238, 3, protoModule.wireTypes.lengthDelimited)
+		var244, var648 = protoModule.writeString(var244, var245, self.collection_id)
+		buff = var244
+		var238 = var245
 	end
 	if self.collection_position ~= nil and self.collection_position ~= "" then
-		local var244, var245 = protoModule.writeTag(buff, var236, 4, protoModule.wireTypes.lengthDelimited)
-		var244, var644 = protoModule.writeString(var244, var245, self.collection_position)
-		buff = var244
-		var236 = var245
+		local var246, var247 = protoModule.writeTag(buff, var238, 4, protoModule.wireTypes.lengthDelimited)
+		var246, var650 = protoModule.writeString(var246, var247, self.collection_position)
+		buff = var246
+		var238 = var247
 	end
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var246, var247 = protoModule.writeTag(buff, var236, 5, protoModule.wireTypes.lengthDelimited)
-		var246, var646 = protoModule.writeString(var246, var247, self.universe_id)
-		buff = var246
-		var236 = var247
+		local var248, var249 = protoModule.writeTag(buff, var238, 5, protoModule.wireTypes.lengthDelimited)
+		var248, var652 = protoModule.writeString(var248, var249, self.universe_id)
+		buff = var248
+		var238 = var249
 	end
-	local buff_1 = buffer.create(var236)
-	buffer.copy(buff_1, 0, buff, 0, var236)
+	local buff_1 = buffer.create(var238)
+	buffer.copy(buff_1, 0, buff, 0, var238)
 	
 	return buff_1
 end
 
 function t_6.decode(p6)
 	-- upvalues: t_6 (ref), protoModule (ref), t (ref)
-	local var248 = t_6.new()
-	local var249 = 0
-	while var249 < buffer.len(p6) do
+	local var250 = t_6.new()
+	local var251 = 0
+	while var251 < buffer.len(p6) do
 		local _ = nil
-		local var250 = nil
-		local var251, var252, var253 = protoModule.readTag(p6, var249)
-		local var254 = var251
-		var250 = var252
-		var249 = var253
+		local var252 = nil
+		local var253, var254, var255 = protoModule.readTag(p6, var251)
+		local var256 = var253
+		var252 = var254
+		var251 = var255
 		
-		if var250 == protoModule.wireTypes.varint then
+		if var252 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var255, var256 = protoModule.readVarInt(p6, var249)
-			local _ = var255
-			var249 = var256
+			local var257, var258 = protoModule.readVarInt(p6, var251)
+			local _ = var257
+			var251 = var258
 			continue
 		end
-		if var250 == protoModule.wireTypes.lengthDelimited then
-			if var254 == 1 then
+		if var252 == protoModule.wireTypes.lengthDelimited then
+			if var256 == 1 then
 				local _ = nil
-				local var257, var258 = protoModule.readBuffer(p6, var249)
-				var249 = var258
-				var248.section_title = buffer.tostring(var257)
-			elseif var254 == 2 then
+				local var259, var260 = protoModule.readBuffer(p6, var251)
+				var251 = var260
+				var250.section_title = buffer.tostring(var259)
+			elseif var256 == 2 then
 				local _ = nil
-				local var259, var260 = protoModule.readBuffer(p6, var249)
-				var249 = var260
-				table.insert(var248.badges, t.BadgesGridInputData_BadgeInputData.decode(var259))
-			elseif var254 == 3 then
+				local var261, var262 = protoModule.readBuffer(p6, var251)
+				var251 = var262
+				table.insert(var250.badges, t.BadgesGridInputData_BadgeInputData.decode(var261))
+			elseif var256 == 3 then
 				local _ = nil
-				local var261, var262 = protoModule.readBuffer(p6, var249)
-				var249 = var262
-				var248.collection_id = buffer.tostring(var261)
-			elseif var254 == 4 then
+				local var263, var264 = protoModule.readBuffer(p6, var251)
+				var251 = var264
+				var250.collection_id = buffer.tostring(var263)
+			elseif var256 == 4 then
 				local _ = nil
-				local var263, var264 = protoModule.readBuffer(p6, var249)
-				var249 = var264
-				var248.collection_position = buffer.tostring(var263)
-			elseif var254 == 5 then
+				local var265, var266 = protoModule.readBuffer(p6, var251)
+				var251 = var266
+				var250.collection_position = buffer.tostring(var265)
+			elseif var256 == 5 then
 				local _ = nil
-				local var265, var266 = protoModule.readBuffer(p6, var249)
-				var249 = var266
-				var248.universe_id = buffer.tostring(var265)
+				local var267, var268 = protoModule.readBuffer(p6, var251)
+				var251 = var268
+				var250.universe_id = buffer.tostring(var267)
 			else
 				local _ = nil
-				local var267, var268 = protoModule.readVarInt(p6, var249)
-				var249 = var268 + var267
+				local var269, var270 = protoModule.readVarInt(p6, var251)
+				var251 = var270 + var269
 			end
-		elseif var250 == protoModule.wireTypes.i32 then
+		elseif var252 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var269, var270 = protoModule.readFixed32(p6, var249)
-			local _ = var269
-			var249 = var270
-		elseif var250 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var271, var272 = protoModule.readFixed64(p6, var249)
+			local var271, var272 = protoModule.readFixed32(p6, var251)
 			local _ = var271
-			var249 = var272
+			var251 = var272
+		elseif var252 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var273, var274 = protoModule.readFixed64(p6, var251)
+			local _ = var273
+			var251 = var274
 		else
-			error("Unsupported wire type: " .. var650)
+			error("Unsupported wire type: " .. var656)
 		end
 	end
-	return var248
+	return var250
 end
 
 function t_6:jsonEncode()
@@ -2854,13 +2884,13 @@ end
 
 function t_6:jsonDecode()
 	-- upvalues: t_6 (ref), t (ref)
-	local var273 = t_6.new()
+	local var275 = t_6.new()
 	
 	if self.section_title ~= nil then
-		var273.section_title = self.section_title
+		var275.section_title = self.section_title
 	end
 	if self.sectionTitle ~= nil then
-		var273.section_title = self.sectionTitle
+		var275.section_title = self.sectionTitle
 	end
 	if self.badges ~= nil then
 		local t_1 = {}
@@ -2868,27 +2898,27 @@ function t_6:jsonDecode()
 		for i, v in self.badges do
 			table.insert(t_1, t.BadgesGridInputData_BadgeInputData.jsonDecode(v))
 		end
-		var273.badges = t_1
+		var275.badges = t_1
 	end
 	if self.collection_id ~= nil then
-		var273.collection_id = self.collection_id
+		var275.collection_id = self.collection_id
 	end
 	if self.collectionId ~= nil then
-		var273.collection_id = self.collectionId
+		var275.collection_id = self.collectionId
 	end
 	if self.collection_position ~= nil then
-		var273.collection_position = self.collection_position
+		var275.collection_position = self.collection_position
 	end
 	if self.collectionPosition ~= nil then
-		var273.collection_position = self.collectionPosition
+		var275.collection_position = self.collectionPosition
 	end
 	if self.universe_id ~= nil then
-		var273.universe_id = self.universe_id
+		var275.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var273.universe_id = self.universeId
+		var275.universe_id = self.universeId
 	end
-	return var273
+	return var275
 end
 
 t_6.descriptor = {
@@ -2910,65 +2940,65 @@ end
 function t_7:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var274 = 0
+	local var276 = 0
 	
 	if self.badge_id ~= nil and self.badge_id ~= "" then
-		local var275, var276 = protoModule.writeTag(buff, var274, 1, protoModule.wireTypes.lengthDelimited)
-		var275, var680 = protoModule.writeString(var275, var276, self.badge_id)
-		buff = var275
-		var274 = var276
+		local var277, var278 = protoModule.writeTag(buff, var276, 1, protoModule.wireTypes.lengthDelimited)
+		var277, var686 = protoModule.writeString(var277, var278, self.badge_id)
+		buff = var277
+		var276 = var278
 	end
-	local buff_1 = buffer.create(var274)
-	buffer.copy(buff_1, 0, buff, 0, var274)
+	local buff_1 = buffer.create(var276)
+	buffer.copy(buff_1, 0, buff, 0, var276)
 	
 	return buff_1
 end
 
 function t_7.decode(p7)
 	-- upvalues: t_7 (ref), protoModule (ref)
-	local var274 = t_7.new()
-	local var275 = 0
-	while var275 < buffer.len(p7) do
+	local var276 = t_7.new()
+	local var277 = 0
+	while var277 < buffer.len(p7) do
 		local _ = nil
-		local var276 = nil
-		local var277, var278, var279 = protoModule.readTag(p7, var275)
-		local var280 = var277
-		var276 = var278
-		var275 = var279
+		local var278 = nil
+		local var279, var280, var281 = protoModule.readTag(p7, var277)
+		local var282 = var279
+		var278 = var280
+		var277 = var281
 		
-		if var276 == protoModule.wireTypes.varint then
+		if var278 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var281, var282 = protoModule.readVarInt(p7, var275)
-			local _ = var281
-			var275 = var282
+			local var283, var284 = protoModule.readVarInt(p7, var277)
+			local _ = var283
+			var277 = var284
 			continue
 		end
-		if var276 == protoModule.wireTypes.lengthDelimited then
-			if var280 == 1 then
+		if var278 == protoModule.wireTypes.lengthDelimited then
+			if var282 == 1 then
 				local _ = nil
-				local var283, var284 = protoModule.readBuffer(p7, var275)
-				var275 = var284
-				var274.badge_id = buffer.tostring(var283)
+				local var285, var286 = protoModule.readBuffer(p7, var277)
+				var277 = var286
+				var276.badge_id = buffer.tostring(var285)
 			else
 				local _ = nil
-				local var285, var286 = protoModule.readVarInt(p7, var275)
-				var275 = var286 + var285
+				local var287, var288 = protoModule.readVarInt(p7, var277)
+				var277 = var288 + var287
 			end
-		elseif var276 == protoModule.wireTypes.i32 then
+		elseif var278 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var287, var288 = protoModule.readFixed32(p7, var275)
-			local _ = var287
-			var275 = var288
-		elseif var276 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var289, var290 = protoModule.readFixed64(p7, var275)
+			local var289, var290 = protoModule.readFixed32(p7, var277)
 			local _ = var289
-			var275 = var290
+			var277 = var290
+		elseif var278 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var291, var292 = protoModule.readFixed64(p7, var277)
+			local _ = var291
+			var277 = var292
 		else
-			error("Unsupported wire type: " .. var684)
+			error("Unsupported wire type: " .. var690)
 		end
 	end
-	return var274
+	return var276
 end
 
 function t_7:jsonEncode()
@@ -2982,15 +3012,15 @@ end
 
 function t_7:jsonDecode()
 	-- upvalues: t_7 (ref)
-	local var291 = t_7.new()
+	local var293 = t_7.new()
 	
 	if self.badge_id ~= nil then
-		var291.badge_id = self.badge_id
+		var293.badge_id = self.badge_id
 	end
 	if self.badgeId ~= nil then
-		var291.badge_id = self.badgeId
+		var293.badge_id = self.badgeId
 	end
-	return var291
+	return var293
 end
 
 t_7.descriptor = {
@@ -3015,99 +3045,99 @@ end
 function t_8:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var291 = 0
+	local var293 = 0
 	
 	if self.badge_id ~= nil and self.badge_id ~= "" then
-		local var292, var293 = protoModule.writeTag(buff, var291, 1, protoModule.wireTypes.lengthDelimited)
-		var292, var704 = protoModule.writeString(var292, var293, self.badge_id)
-		buff = var292
-		var291 = var293
+		local var294, var295 = protoModule.writeTag(buff, var293, 1, protoModule.wireTypes.lengthDelimited)
+		var294, var710 = protoModule.writeString(var294, var295, self.badge_id)
+		buff = var294
+		var293 = var295
 	end
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var294, var295 = protoModule.writeTag(buff, var291, 2, protoModule.wireTypes.lengthDelimited)
-		var294, var706 = protoModule.writeString(var294, var295, self.universe_id)
-		buff = var294
-		var291 = var295
+		local var296, var297 = protoModule.writeTag(buff, var293, 2, protoModule.wireTypes.lengthDelimited)
+		var296, var712 = protoModule.writeString(var296, var297, self.universe_id)
+		buff = var296
+		var293 = var297
 	end
 	if self.localized_literals ~= nil then
-		local var296 = self.localized_literals:encode()
-		local var297, var298 = protoModule.writeTag(buff, var291, 3, protoModule.wireTypes.lengthDelimited)
-		var297, var709 = protoModule.writeBuffer(var297, var298, var296, buffer.len(var296))
-		buff = var297
-		var291 = var298
+		local var298 = self.localized_literals:encode()
+		local var299, var300 = protoModule.writeTag(buff, var293, 3, protoModule.wireTypes.lengthDelimited)
+		var299, var715 = protoModule.writeBuffer(var299, var300, var298, buffer.len(var298))
+		buff = var299
+		var293 = var300
 	end
 	if self.creator_key ~= nil and self.creator_key ~= "" then
-		local var299, var300 = protoModule.writeTag(buff, var291, 4, protoModule.wireTypes.lengthDelimited)
-		var299, var711 = protoModule.writeString(var299, var300, self.creator_key)
-		buff = var299
-		var291 = var300
+		local var301, var302 = protoModule.writeTag(buff, var293, 4, protoModule.wireTypes.lengthDelimited)
+		var301, var717 = protoModule.writeString(var301, var302, self.creator_key)
+		buff = var301
+		var293 = var302
 	end
-	local buff_1 = buffer.create(var291)
-	buffer.copy(buff_1, 0, buff, 0, var291)
+	local buff_1 = buffer.create(var293)
+	buffer.copy(buff_1, 0, buff, 0, var293)
 	
 	return buff_1
 end
 
 function t_8.decode(p8)
 	-- upvalues: t_8 (ref), protoModule (ref), t (ref)
-	local var291 = t_8.new()
-	local var292 = 0
-	while var292 < buffer.len(p8) do
+	local var293 = t_8.new()
+	local var294 = 0
+	while var294 < buffer.len(p8) do
 		local _ = nil
-		local var293 = nil
-		local var294, var295, var296 = protoModule.readTag(p8, var292)
-		local var297 = var294
-		var293 = var295
-		var292 = var296
+		local var295 = nil
+		local var296, var297, var298 = protoModule.readTag(p8, var294)
+		local var299 = var296
+		var295 = var297
+		var294 = var298
 		
-		if var293 == protoModule.wireTypes.varint then
+		if var295 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var298, var299 = protoModule.readVarInt(p8, var292)
-			local _ = var298
-			var292 = var299
+			local var300, var301 = protoModule.readVarInt(p8, var294)
+			local _ = var300
+			var294 = var301
 			continue
 		end
-		if var293 == protoModule.wireTypes.lengthDelimited then
-			if var297 == 1 then
+		if var295 == protoModule.wireTypes.lengthDelimited then
+			if var299 == 1 then
 				local _ = nil
-				local var300, var301 = protoModule.readBuffer(p8, var292)
-				var292 = var301
-				var291.badge_id = buffer.tostring(var300)
-			elseif var297 == 2 then
+				local var302, var303 = protoModule.readBuffer(p8, var294)
+				var294 = var303
+				var293.badge_id = buffer.tostring(var302)
+			elseif var299 == 2 then
 				local _ = nil
-				local var302, var303 = protoModule.readBuffer(p8, var292)
-				var292 = var303
-				var291.universe_id = buffer.tostring(var302)
-			elseif var297 == 3 then
+				local var304, var305 = protoModule.readBuffer(p8, var294)
+				var294 = var305
+				var293.universe_id = buffer.tostring(var304)
+			elseif var299 == 3 then
 				local _ = nil
-				local var304, var305 = protoModule.readBuffer(p8, var292)
-				var292 = var305
-				var291.localized_literals = t.BadgeDetailsInputData_LocalizedLiterals.decode(var304)
-			elseif var297 == 4 then
+				local var306, var307 = protoModule.readBuffer(p8, var294)
+				var294 = var307
+				var293.localized_literals = t.BadgeDetailsInputData_LocalizedLiterals.decode(var306)
+			elseif var299 == 4 then
 				local _ = nil
-				local var306, var307 = protoModule.readBuffer(p8, var292)
-				var292 = var307
-				var291.creator_key = buffer.tostring(var306)
+				local var308, var309 = protoModule.readBuffer(p8, var294)
+				var294 = var309
+				var293.creator_key = buffer.tostring(var308)
 			else
 				local _ = nil
-				local var308, var309 = protoModule.readVarInt(p8, var292)
-				var292 = var309 + var308
+				local var310, var311 = protoModule.readVarInt(p8, var294)
+				var294 = var311 + var310
 			end
-		elseif var293 == protoModule.wireTypes.i32 then
+		elseif var295 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var310, var311 = protoModule.readFixed32(p8, var292)
-			local _ = var310
-			var292 = var311
-		elseif var293 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var312, var313 = protoModule.readFixed64(p8, var292)
+			local var312, var313 = protoModule.readFixed32(p8, var294)
 			local _ = var312
-			var292 = var313
+			var294 = var313
+		elseif var295 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var314, var315 = protoModule.readFixed64(p8, var294)
+			local _ = var314
+			var294 = var315
 		else
-			error("Unsupported wire type: " .. var715)
+			error("Unsupported wire type: " .. var721)
 		end
 	end
-	return var291
+	return var293
 end
 
 function t_8:jsonEncode()
@@ -3130,33 +3160,33 @@ end
 
 function t_8:jsonDecode()
 	-- upvalues: t_8 (ref), t (ref)
-	local var314 = t_8.new()
+	local var316 = t_8.new()
 	
 	if self.badge_id ~= nil then
-		var314.badge_id = self.badge_id
+		var316.badge_id = self.badge_id
 	end
 	if self.badgeId ~= nil then
-		var314.badge_id = self.badgeId
+		var316.badge_id = self.badgeId
 	end
 	if self.universe_id ~= nil then
-		var314.universe_id = self.universe_id
+		var316.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var314.universe_id = self.universeId
+		var316.universe_id = self.universeId
 	end
 	if self.localized_literals ~= nil then
-		var314.localized_literals = t.BadgeDetailsInputData_LocalizedLiterals.jsonDecode(self.localized_literals)
+		var316.localized_literals = t.BadgeDetailsInputData_LocalizedLiterals.jsonDecode(self.localized_literals)
 	end
 	if self.localizedLiterals ~= nil then
-		var314.localized_literals = t.BadgeDetailsInputData_LocalizedLiterals.jsonDecode(self.localizedLiterals)
+		var316.localized_literals = t.BadgeDetailsInputData_LocalizedLiterals.jsonDecode(self.localizedLiterals)
 	end
 	if self.creator_key ~= nil then
-		var314.creator_key = self.creator_key
+		var316.creator_key = self.creator_key
 	end
 	if self.creatorKey ~= nil then
-		var314.creator_key = self.creatorKey
+		var316.creator_key = self.creatorKey
 	end
-	return var314
+	return var316
 end
 
 t_8.descriptor = {
@@ -3180,90 +3210,90 @@ end
 function t_9:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var314 = 0
+	local var316 = 0
 	
 	if self.info_table ~= nil then
-		local var315 = self.info_table:encode()
-		local var316, var317 = protoModule.writeTag(buff, var314, 1, protoModule.wireTypes.lengthDelimited)
-		var316, var742 = protoModule.writeBuffer(var316, var317, var315, buffer.len(var315))
-		buff = var316
-		var314 = var317
+		local var317 = self.info_table:encode()
+		local var318, var319 = protoModule.writeTag(buff, var316, 1, protoModule.wireTypes.lengthDelimited)
+		var318, var748 = protoModule.writeBuffer(var318, var319, var317, buffer.len(var317))
+		buff = var318
+		var316 = var319
 	end
 	if self.action_module ~= nil then
-		local var318 = self.action_module:encode()
-		local var319, var320 = protoModule.writeTag(buff, var314, 2, protoModule.wireTypes.lengthDelimited)
-		var319, var745 = protoModule.writeBuffer(var319, var320, var318, buffer.len(var318))
-		buff = var319
-		var314 = var320
+		local var320 = self.action_module:encode()
+		local var321, var322 = protoModule.writeTag(buff, var316, 2, protoModule.wireTypes.lengthDelimited)
+		var321, var751 = protoModule.writeBuffer(var321, var322, var320, buffer.len(var320))
+		buff = var321
+		var316 = var322
 	end
 	if self.overflow_menu ~= nil then
-		local var321 = self.overflow_menu:encode()
-		local var322, var323 = protoModule.writeTag(buff, var314, 3, protoModule.wireTypes.lengthDelimited)
-		var322, var748 = protoModule.writeBuffer(var322, var323, var321, buffer.len(var321))
-		buff = var322
-		var314 = var323
+		local var323 = self.overflow_menu:encode()
+		local var324, var325 = protoModule.writeTag(buff, var316, 3, protoModule.wireTypes.lengthDelimited)
+		var324, var754 = protoModule.writeBuffer(var324, var325, var323, buffer.len(var323))
+		buff = var324
+		var316 = var325
 	end
-	local buff_1 = buffer.create(var314)
-	buffer.copy(buff_1, 0, buff, 0, var314)
+	local buff_1 = buffer.create(var316)
+	buffer.copy(buff_1, 0, buff, 0, var316)
 	
 	return buff_1
 end
 
 function t_9.decode(p9)
 	-- upvalues: t_9 (ref), protoModule (ref), t (ref)
-	local var314 = t_9.new()
-	local var315 = 0
-	while var315 < buffer.len(p9) do
+	local var316 = t_9.new()
+	local var317 = 0
+	while var317 < buffer.len(p9) do
 		local _ = nil
-		local var316 = nil
-		local var317, var318, var319 = protoModule.readTag(p9, var315)
-		local var320 = var317
-		var316 = var318
-		var315 = var319
+		local var318 = nil
+		local var319, var320, var321 = protoModule.readTag(p9, var317)
+		local var322 = var319
+		var318 = var320
+		var317 = var321
 		
-		if var316 == protoModule.wireTypes.varint then
+		if var318 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var321, var322 = protoModule.readVarInt(p9, var315)
-			local _ = var321
-			var315 = var322
+			local var323, var324 = protoModule.readVarInt(p9, var317)
+			local _ = var323
+			var317 = var324
 			continue
 		end
-		if var316 == protoModule.wireTypes.lengthDelimited then
-			if var320 == 1 then
+		if var318 == protoModule.wireTypes.lengthDelimited then
+			if var322 == 1 then
 				local _ = nil
-				local var323, var324 = protoModule.readBuffer(p9, var315)
-				var315 = var324
-				var314.info_table = t.BadgeDetailsInputData_LocalizedLiterals_InfoTable.decode(var323)
-			elseif var320 == 2 then
+				local var325, var326 = protoModule.readBuffer(p9, var317)
+				var317 = var326
+				var316.info_table = t.BadgeDetailsInputData_LocalizedLiterals_InfoTable.decode(var325)
+			elseif var322 == 2 then
 				local _ = nil
-				local var325, var326 = protoModule.readBuffer(p9, var315)
-				var315 = var326
-				var314.action_module = t.BadgeDetailsInputData_LocalizedLiterals_ActionModule.decode(var325)
-			elseif var320 == 3 then
+				local var327, var328 = protoModule.readBuffer(p9, var317)
+				var317 = var328
+				var316.action_module = t.BadgeDetailsInputData_LocalizedLiterals_ActionModule.decode(var327)
+			elseif var322 == 3 then
 				local _ = nil
-				local var327, var328 = protoModule.readBuffer(p9, var315)
-				var315 = var328
-				var314.overflow_menu = t.BadgeDetailsInputData_LocalizedLiterals_OverflowMenu.decode(var327)
+				local var329, var330 = protoModule.readBuffer(p9, var317)
+				var317 = var330
+				var316.overflow_menu = t.BadgeDetailsInputData_LocalizedLiterals_OverflowMenu.decode(var329)
 			else
 				local _ = nil
-				local var329, var330 = protoModule.readVarInt(p9, var315)
-				var315 = var330 + var329
+				local var331, var332 = protoModule.readVarInt(p9, var317)
+				var317 = var332 + var331
 			end
-		elseif var316 == protoModule.wireTypes.i32 then
+		elseif var318 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var331, var332 = protoModule.readFixed32(p9, var315)
-			local _ = var331
-			var315 = var332
-		elseif var316 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var333, var334 = protoModule.readFixed64(p9, var315)
+			local var333, var334 = protoModule.readFixed32(p9, var317)
 			local _ = var333
-			var315 = var334
+			var317 = var334
+		elseif var318 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var335, var336 = protoModule.readFixed64(p9, var317)
+			local _ = var335
+			var317 = var336
 		else
-			error("Unsupported wire type: " .. var752)
+			error("Unsupported wire type: " .. var758)
 		end
 	end
-	return var314
+	return var316
 end
 
 function t_9:jsonEncode()
@@ -3283,27 +3313,27 @@ end
 
 function t_9:jsonDecode()
 	-- upvalues: t_9 (ref), t (ref)
-	local var335 = t_9.new()
+	local var337 = t_9.new()
 	
 	if self.info_table ~= nil then
-		var335.info_table = t.BadgeDetailsInputData_LocalizedLiterals_InfoTable.jsonDecode(self.info_table)
+		var337.info_table = t.BadgeDetailsInputData_LocalizedLiterals_InfoTable.jsonDecode(self.info_table)
 	end
 	if self.infoTable ~= nil then
-		var335.info_table = t.BadgeDetailsInputData_LocalizedLiterals_InfoTable.jsonDecode(self.infoTable)
+		var337.info_table = t.BadgeDetailsInputData_LocalizedLiterals_InfoTable.jsonDecode(self.infoTable)
 	end
 	if self.action_module ~= nil then
-		var335.action_module = t.BadgeDetailsInputData_LocalizedLiterals_ActionModule.jsonDecode(self.action_module)
+		var337.action_module = t.BadgeDetailsInputData_LocalizedLiterals_ActionModule.jsonDecode(self.action_module)
 	end
 	if self.actionModule ~= nil then
-		var335.action_module = t.BadgeDetailsInputData_LocalizedLiterals_ActionModule.jsonDecode(self.actionModule)
+		var337.action_module = t.BadgeDetailsInputData_LocalizedLiterals_ActionModule.jsonDecode(self.actionModule)
 	end
 	if self.overflow_menu ~= nil then
-		var335.overflow_menu = t.BadgeDetailsInputData_LocalizedLiterals_OverflowMenu.jsonDecode(self.overflow_menu)
+		var337.overflow_menu = t.BadgeDetailsInputData_LocalizedLiterals_OverflowMenu.jsonDecode(self.overflow_menu)
 	end
 	if self.overflowMenu ~= nil then
-		var335.overflow_menu = t.BadgeDetailsInputData_LocalizedLiterals_OverflowMenu.jsonDecode(self.overflowMenu)
+		var337.overflow_menu = t.BadgeDetailsInputData_LocalizedLiterals_OverflowMenu.jsonDecode(self.overflowMenu)
 	end
-	return var335
+	return var337
 end
 
 t_9.descriptor = {
@@ -3331,131 +3361,131 @@ end
 function t_10:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var335 = 0
+	local var337 = 0
 	
 	if self.type_label ~= nil and self.type_label ~= "" then
-		local var336, var337 = protoModule.writeTag(buff, var335, 1, protoModule.wireTypes.lengthDelimited)
-		var336, var776 = protoModule.writeString(var336, var337, self.type_label)
-		buff = var336
-		var335 = var337
+		local var338, var339 = protoModule.writeTag(buff, var337, 1, protoModule.wireTypes.lengthDelimited)
+		var338, var782 = protoModule.writeString(var338, var339, self.type_label)
+		buff = var338
+		var337 = var339
 	end
 	if self.earned_label ~= nil and self.earned_label ~= "" then
-		local var338, var339 = protoModule.writeTag(buff, var335, 2, protoModule.wireTypes.lengthDelimited)
-		var338, var778 = protoModule.writeString(var338, var339, self.earned_label)
-		buff = var338
-		var335 = var339
+		local var340, var341 = protoModule.writeTag(buff, var337, 2, protoModule.wireTypes.lengthDelimited)
+		var340, var784 = protoModule.writeString(var340, var341, self.earned_label)
+		buff = var340
+		var337 = var341
 	end
 	if self.updated_label ~= nil and self.updated_label ~= "" then
-		local var340, var341 = protoModule.writeTag(buff, var335, 3, protoModule.wireTypes.lengthDelimited)
-		var340, var780 = protoModule.writeString(var340, var341, self.updated_label)
-		buff = var340
-		var335 = var341
+		local var342, var343 = protoModule.writeTag(buff, var337, 3, protoModule.wireTypes.lengthDelimited)
+		var342, var786 = protoModule.writeString(var342, var343, self.updated_label)
+		buff = var342
+		var337 = var343
 	end
 	if self.experience_label ~= nil and self.experience_label ~= "" then
-		local var342, var343 = protoModule.writeTag(buff, var335, 4, protoModule.wireTypes.lengthDelimited)
-		var342, var782 = protoModule.writeString(var342, var343, self.experience_label)
-		buff = var342
-		var335 = var343
+		local var344, var345 = protoModule.writeTag(buff, var337, 4, protoModule.wireTypes.lengthDelimited)
+		var344, var788 = protoModule.writeString(var344, var345, self.experience_label)
+		buff = var344
+		var337 = var345
 	end
 	if self.rarity_label ~= nil and self.rarity_label ~= "" then
-		local var344, var345 = protoModule.writeTag(buff, var335, 5, protoModule.wireTypes.lengthDelimited)
-		var344, var784 = protoModule.writeString(var344, var345, self.rarity_label)
-		buff = var344
-		var335 = var345
+		local var346, var347 = protoModule.writeTag(buff, var337, 5, protoModule.wireTypes.lengthDelimited)
+		var346, var790 = protoModule.writeString(var346, var347, self.rarity_label)
+		buff = var346
+		var337 = var347
 	end
 	if self.won_yesterday_label ~= nil and self.won_yesterday_label ~= "" then
-		local var346, var347 = protoModule.writeTag(buff, var335, 6, protoModule.wireTypes.lengthDelimited)
-		var346, var786 = protoModule.writeString(var346, var347, self.won_yesterday_label)
-		buff = var346
-		var335 = var347
+		local var348, var349 = protoModule.writeTag(buff, var337, 6, protoModule.wireTypes.lengthDelimited)
+		var348, var792 = protoModule.writeString(var348, var349, self.won_yesterday_label)
+		buff = var348
+		var337 = var349
 	end
 	if self.won_ever_label ~= nil and self.won_ever_label ~= "" then
-		local var348, var349 = protoModule.writeTag(buff, var335, 7, protoModule.wireTypes.lengthDelimited)
-		var348, var788 = protoModule.writeString(var348, var349, self.won_ever_label)
-		buff = var348
-		var335 = var349
+		local var350, var351 = protoModule.writeTag(buff, var337, 7, protoModule.wireTypes.lengthDelimited)
+		var350, var794 = protoModule.writeString(var350, var351, self.won_ever_label)
+		buff = var350
+		var337 = var351
 	end
-	local buff_1 = buffer.create(var335)
-	buffer.copy(buff_1, 0, buff, 0, var335)
+	local buff_1 = buffer.create(var337)
+	buffer.copy(buff_1, 0, buff, 0, var337)
 	
 	return buff_1
 end
 
 function t_10.decode(p10)
 	-- upvalues: t_10 (ref), protoModule (ref)
-	local var335 = t_10.new()
-	local var336 = 0
-	while var336 < buffer.len(p10) do
+	local var337 = t_10.new()
+	local var338 = 0
+	while var338 < buffer.len(p10) do
 		local _ = nil
-		local var337 = nil
-		local var338, var339, var340 = protoModule.readTag(p10, var336)
-		local var341 = var338
-		var337 = var339
-		var336 = var340
+		local var339 = nil
+		local var340, var341, var342 = protoModule.readTag(p10, var338)
+		local var343 = var340
+		var339 = var341
+		var338 = var342
 		
-		if var337 == protoModule.wireTypes.varint then
+		if var339 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var342, var343 = protoModule.readVarInt(p10, var336)
-			local _ = var342
-			var336 = var343
+			local var344, var345 = protoModule.readVarInt(p10, var338)
+			local _ = var344
+			var338 = var345
 			continue
 		end
-		if var337 == protoModule.wireTypes.lengthDelimited then
-			if var341 == 1 then
+		if var339 == protoModule.wireTypes.lengthDelimited then
+			if var343 == 1 then
 				local _ = nil
-				local var344, var345 = protoModule.readBuffer(p10, var336)
-				var336 = var345
-				var335.type_label = buffer.tostring(var344)
-			elseif var341 == 2 then
+				local var346, var347 = protoModule.readBuffer(p10, var338)
+				var338 = var347
+				var337.type_label = buffer.tostring(var346)
+			elseif var343 == 2 then
 				local _ = nil
-				local var346, var347 = protoModule.readBuffer(p10, var336)
-				var336 = var347
-				var335.earned_label = buffer.tostring(var346)
-			elseif var341 == 3 then
+				local var348, var349 = protoModule.readBuffer(p10, var338)
+				var338 = var349
+				var337.earned_label = buffer.tostring(var348)
+			elseif var343 == 3 then
 				local _ = nil
-				local var348, var349 = protoModule.readBuffer(p10, var336)
-				var336 = var349
-				var335.updated_label = buffer.tostring(var348)
-			elseif var341 == 4 then
+				local var350, var351 = protoModule.readBuffer(p10, var338)
+				var338 = var351
+				var337.updated_label = buffer.tostring(var350)
+			elseif var343 == 4 then
 				local _ = nil
-				local var350, var351 = protoModule.readBuffer(p10, var336)
-				var336 = var351
-				var335.experience_label = buffer.tostring(var350)
-			elseif var341 == 5 then
+				local var352, var353 = protoModule.readBuffer(p10, var338)
+				var338 = var353
+				var337.experience_label = buffer.tostring(var352)
+			elseif var343 == 5 then
 				local _ = nil
-				local var352, var353 = protoModule.readBuffer(p10, var336)
-				var336 = var353
-				var335.rarity_label = buffer.tostring(var352)
-			elseif var341 == 6 then
+				local var354, var355 = protoModule.readBuffer(p10, var338)
+				var338 = var355
+				var337.rarity_label = buffer.tostring(var354)
+			elseif var343 == 6 then
 				local _ = nil
-				local var354, var355 = protoModule.readBuffer(p10, var336)
-				var336 = var355
-				var335.won_yesterday_label = buffer.tostring(var354)
-			elseif var341 == 7 then
+				local var356, var357 = protoModule.readBuffer(p10, var338)
+				var338 = var357
+				var337.won_yesterday_label = buffer.tostring(var356)
+			elseif var343 == 7 then
 				local _ = nil
-				local var356, var357 = protoModule.readBuffer(p10, var336)
-				var336 = var357
-				var335.won_ever_label = buffer.tostring(var356)
+				local var358, var359 = protoModule.readBuffer(p10, var338)
+				var338 = var359
+				var337.won_ever_label = buffer.tostring(var358)
 			else
 				local _ = nil
-				local var358, var359 = protoModule.readVarInt(p10, var336)
-				var336 = var359 + var358
+				local var360, var361 = protoModule.readVarInt(p10, var338)
+				var338 = var361 + var360
 			end
-		elseif var337 == protoModule.wireTypes.i32 then
+		elseif var339 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var360, var361 = protoModule.readFixed32(p10, var336)
-			local _ = var360
-			var336 = var361
-		elseif var337 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var362, var363 = protoModule.readFixed64(p10, var336)
+			local var362, var363 = protoModule.readFixed32(p10, var338)
 			local _ = var362
-			var336 = var363
+			var338 = var363
+		elseif var339 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var364, var365 = protoModule.readFixed64(p10, var338)
+			local _ = var364
+			var338 = var365
 		else
-			error("Unsupported wire type: " .. var792)
+			error("Unsupported wire type: " .. var798)
 		end
 	end
-	return var335
+	return var337
 end
 
 function t_10:jsonEncode()
@@ -3487,51 +3517,51 @@ end
 
 function t_10:jsonDecode()
 	-- upvalues: t_10 (ref)
-	local var364 = t_10.new()
+	local var366 = t_10.new()
 	
 	if self.type_label ~= nil then
-		var364.type_label = self.type_label
+		var366.type_label = self.type_label
 	end
 	if self.typeLabel ~= nil then
-		var364.type_label = self.typeLabel
+		var366.type_label = self.typeLabel
 	end
 	if self.earned_label ~= nil then
-		var364.earned_label = self.earned_label
+		var366.earned_label = self.earned_label
 	end
 	if self.earnedLabel ~= nil then
-		var364.earned_label = self.earnedLabel
+		var366.earned_label = self.earnedLabel
 	end
 	if self.updated_label ~= nil then
-		var364.updated_label = self.updated_label
+		var366.updated_label = self.updated_label
 	end
 	if self.updatedLabel ~= nil then
-		var364.updated_label = self.updatedLabel
+		var366.updated_label = self.updatedLabel
 	end
 	if self.experience_label ~= nil then
-		var364.experience_label = self.experience_label
+		var366.experience_label = self.experience_label
 	end
 	if self.experienceLabel ~= nil then
-		var364.experience_label = self.experienceLabel
+		var366.experience_label = self.experienceLabel
 	end
 	if self.rarity_label ~= nil then
-		var364.rarity_label = self.rarity_label
+		var366.rarity_label = self.rarity_label
 	end
 	if self.rarityLabel ~= nil then
-		var364.rarity_label = self.rarityLabel
+		var366.rarity_label = self.rarityLabel
 	end
 	if self.won_yesterday_label ~= nil then
-		var364.won_yesterday_label = self.won_yesterday_label
+		var366.won_yesterday_label = self.won_yesterday_label
 	end
 	if self.wonYesterdayLabel ~= nil then
-		var364.won_yesterday_label = self.wonYesterdayLabel
+		var366.won_yesterday_label = self.wonYesterdayLabel
 	end
 	if self.won_ever_label ~= nil then
-		var364.won_ever_label = self.won_ever_label
+		var366.won_ever_label = self.won_ever_label
 	end
 	if self.wonEverLabel ~= nil then
-		var364.won_ever_label = self.wonEverLabel
+		var366.won_ever_label = self.wonEverLabel
 	end
-	return var364
+	return var366
 end
 
 t_10.descriptor = {
@@ -3554,76 +3584,76 @@ end
 function t_11:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var364 = 0
+	local var366 = 0
 	
 	if self.share ~= nil and self.share ~= "" then
-		local var365, var366 = protoModule.writeTag(buff, var364, 1, protoModule.wireTypes.lengthDelimited)
-		var365, var824 = protoModule.writeString(var365, var366, self.share)
-		buff = var365
-		var364 = var366
+		local var367, var368 = protoModule.writeTag(buff, var366, 1, protoModule.wireTypes.lengthDelimited)
+		var367, var830 = protoModule.writeString(var367, var368, self.share)
+		buff = var367
+		var366 = var368
 	end
 	if self.report ~= nil and self.report ~= "" then
-		local var367, var368 = protoModule.writeTag(buff, var364, 2, protoModule.wireTypes.lengthDelimited)
-		var367, var826 = protoModule.writeString(var367, var368, self.report)
-		buff = var367
-		var364 = var368
+		local var369, var370 = protoModule.writeTag(buff, var366, 2, protoModule.wireTypes.lengthDelimited)
+		var369, var832 = protoModule.writeString(var369, var370, self.report)
+		buff = var369
+		var366 = var370
 	end
-	local buff_1 = buffer.create(var364)
-	buffer.copy(buff_1, 0, buff, 0, var364)
+	local buff_1 = buffer.create(var366)
+	buffer.copy(buff_1, 0, buff, 0, var366)
 	
 	return buff_1
 end
 
 function t_11.decode(p11)
 	-- upvalues: t_11 (ref), protoModule (ref)
-	local var364 = t_11.new()
-	local var365 = 0
-	while var365 < buffer.len(p11) do
+	local var366 = t_11.new()
+	local var367 = 0
+	while var367 < buffer.len(p11) do
 		local _ = nil
-		local var366 = nil
-		local var367, var368, var369 = protoModule.readTag(p11, var365)
-		local var370 = var367
-		var366 = var368
-		var365 = var369
+		local var368 = nil
+		local var369, var370, var371 = protoModule.readTag(p11, var367)
+		local var372 = var369
+		var368 = var370
+		var367 = var371
 		
-		if var366 == protoModule.wireTypes.varint then
+		if var368 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var371, var372 = protoModule.readVarInt(p11, var365)
-			local _ = var371
-			var365 = var372
+			local var373, var374 = protoModule.readVarInt(p11, var367)
+			local _ = var373
+			var367 = var374
 			continue
 		end
-		if var366 == protoModule.wireTypes.lengthDelimited then
-			if var370 == 1 then
+		if var368 == protoModule.wireTypes.lengthDelimited then
+			if var372 == 1 then
 				local _ = nil
-				local var373, var374 = protoModule.readBuffer(p11, var365)
-				var365 = var374
-				var364.share = buffer.tostring(var373)
-			elseif var370 == 2 then
+				local var375, var376 = protoModule.readBuffer(p11, var367)
+				var367 = var376
+				var366.share = buffer.tostring(var375)
+			elseif var372 == 2 then
 				local _ = nil
-				local var375, var376 = protoModule.readBuffer(p11, var365)
-				var365 = var376
-				var364.report = buffer.tostring(var375)
+				local var377, var378 = protoModule.readBuffer(p11, var367)
+				var367 = var378
+				var366.report = buffer.tostring(var377)
 			else
 				local _ = nil
-				local var377, var378 = protoModule.readVarInt(p11, var365)
-				var365 = var378 + var377
+				local var379, var380 = protoModule.readVarInt(p11, var367)
+				var367 = var380 + var379
 			end
-		elseif var366 == protoModule.wireTypes.i32 then
+		elseif var368 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var379, var380 = protoModule.readFixed32(p11, var365)
-			local _ = var379
-			var365 = var380
-		elseif var366 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var381, var382 = protoModule.readFixed64(p11, var365)
+			local var381, var382 = protoModule.readFixed32(p11, var367)
 			local _ = var381
-			var365 = var382
+			var367 = var382
+		elseif var368 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var383, var384 = protoModule.readFixed64(p11, var367)
+			local _ = var383
+			var367 = var384
 		else
-			error("Unsupported wire type: " .. var830)
+			error("Unsupported wire type: " .. var836)
 		end
 	end
-	return var364
+	return var366
 end
 
 function t_11:jsonEncode()
@@ -3640,15 +3670,15 @@ end
 
 function t_11:jsonDecode()
 	-- upvalues: t_11 (ref)
-	local var383 = t_11.new()
+	local var385 = t_11.new()
 	
 	if self.share ~= nil then
-		var383.share = self.share
+		var385.share = self.share
 	end
 	if self.report ~= nil then
-		var383.report = self.report
+		var385.report = self.report
 	end
-	return var383
+	return var385
 end
 
 t_11.descriptor = {
@@ -3671,76 +3701,76 @@ end
 function t_12:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var383 = 0
+	local var385 = 0
 	
 	if self.report ~= nil and self.report ~= "" then
-		local var384, var385 = protoModule.writeTag(buff, var383, 1, protoModule.wireTypes.lengthDelimited)
-		var384, var852 = protoModule.writeString(var384, var385, self.report)
-		buff = var384
-		var383 = var385
+		local var386, var387 = protoModule.writeTag(buff, var385, 1, protoModule.wireTypes.lengthDelimited)
+		var386, var858 = protoModule.writeString(var386, var387, self.report)
+		buff = var386
+		var385 = var387
 	end
 	if self.remove ~= nil and self.remove ~= "" then
-		local var386, var387 = protoModule.writeTag(buff, var383, 2, protoModule.wireTypes.lengthDelimited)
-		var386, var854 = protoModule.writeString(var386, var387, self.remove)
-		buff = var386
-		var383 = var387
+		local var388, var389 = protoModule.writeTag(buff, var385, 2, protoModule.wireTypes.lengthDelimited)
+		var388, var860 = protoModule.writeString(var388, var389, self.remove)
+		buff = var388
+		var385 = var389
 	end
-	local buff_1 = buffer.create(var383)
-	buffer.copy(buff_1, 0, buff, 0, var383)
+	local buff_1 = buffer.create(var385)
+	buffer.copy(buff_1, 0, buff, 0, var385)
 	
 	return buff_1
 end
 
 function t_12.decode(p12)
 	-- upvalues: t_12 (ref), protoModule (ref)
-	local var383 = t_12.new()
-	local var384 = 0
-	while var384 < buffer.len(p12) do
+	local var385 = t_12.new()
+	local var386 = 0
+	while var386 < buffer.len(p12) do
 		local _ = nil
-		local var385 = nil
-		local var386, var387, var388 = protoModule.readTag(p12, var384)
-		local var389 = var386
-		var385 = var387
-		var384 = var388
+		local var387 = nil
+		local var388, var389, var390 = protoModule.readTag(p12, var386)
+		local var391 = var388
+		var387 = var389
+		var386 = var390
 		
-		if var385 == protoModule.wireTypes.varint then
+		if var387 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var390, var391 = protoModule.readVarInt(p12, var384)
-			local _ = var390
-			var384 = var391
+			local var392, var393 = protoModule.readVarInt(p12, var386)
+			local _ = var392
+			var386 = var393
 			continue
 		end
-		if var385 == protoModule.wireTypes.lengthDelimited then
-			if var389 == 1 then
+		if var387 == protoModule.wireTypes.lengthDelimited then
+			if var391 == 1 then
 				local _ = nil
-				local var392, var393 = protoModule.readBuffer(p12, var384)
-				var384 = var393
-				var383.report = buffer.tostring(var392)
-			elseif var389 == 2 then
+				local var394, var395 = protoModule.readBuffer(p12, var386)
+				var386 = var395
+				var385.report = buffer.tostring(var394)
+			elseif var391 == 2 then
 				local _ = nil
-				local var394, var395 = protoModule.readBuffer(p12, var384)
-				var384 = var395
-				var383.remove = buffer.tostring(var394)
+				local var396, var397 = protoModule.readBuffer(p12, var386)
+				var386 = var397
+				var385.remove = buffer.tostring(var396)
 			else
 				local _ = nil
-				local var396, var397 = protoModule.readVarInt(p12, var384)
-				var384 = var397 + var396
+				local var398, var399 = protoModule.readVarInt(p12, var386)
+				var386 = var399 + var398
 			end
-		elseif var385 == protoModule.wireTypes.i32 then
+		elseif var387 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var398, var399 = protoModule.readFixed32(p12, var384)
-			local _ = var398
-			var384 = var399
-		elseif var385 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var400, var401 = protoModule.readFixed64(p12, var384)
+			local var400, var401 = protoModule.readFixed32(p12, var386)
 			local _ = var400
-			var384 = var401
+			var386 = var401
+		elseif var387 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var402, var403 = protoModule.readFixed64(p12, var386)
+			local _ = var402
+			var386 = var403
 		else
-			error("Unsupported wire type: " .. var858)
+			error("Unsupported wire type: " .. var864)
 		end
 	end
-	return var383
+	return var385
 end
 
 function t_12:jsonEncode()
@@ -3757,15 +3787,15 @@ end
 
 function t_12:jsonDecode()
 	-- upvalues: t_12 (ref)
-	local var402 = t_12.new()
+	local var404 = t_12.new()
 	
 	if self.report ~= nil then
-		var402.report = self.report
+		var404.report = self.report
 	end
 	if self.remove ~= nil then
-		var402.remove = self.remove
+		var404.remove = self.remove
 	end
-	return var402
+	return var404
 end
 
 t_12.descriptor = {
@@ -3791,40 +3821,40 @@ end
 
 function t_13.decode(p13)
 	-- upvalues: t_13 (ref), protoModule (ref)
-	local var402 = t_13.new()
-	local var403 = 0
-	while var403 < buffer.len(p13) do
-		local var404 = nil
+	local var404 = t_13.new()
+	local var405 = 0
+	while var405 < buffer.len(p13) do
+		local var406 = nil
 		local _ = nil
-		local var405, var406, var407 = protoModule.readTag(p13, var403)
-		var404 = var405
-		local var408 = var406
-		var403 = var407
+		local var407, var408, var409 = protoModule.readTag(p13, var405)
+		var406 = var407
+		local var410 = var408
+		var405 = var409
 		
-		if var408 == protoModule.wireTypes.varint then
+		if var410 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var409, var410 = protoModule.readVarInt(p13, var403)
-			local _ = var409
-			var403 = var410
-		elseif var408 == protoModule.wireTypes.lengthDelimited then
+			local var411, var412 = protoModule.readVarInt(p13, var405)
+			local _ = var411
+			var405 = var412
+		elseif var410 == protoModule.wireTypes.lengthDelimited then
 			local _ = nil
-			local var411, var412 = protoModule.readVarInt(p13, var403)
-			var403 = var412 + var411
-		elseif var408 == protoModule.wireTypes.i32 then
+			local var413, var414 = protoModule.readVarInt(p13, var405)
+			var405 = var414 + var413
+		elseif var410 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var413, var414 = protoModule.readFixed32(p13, var403)
-			local _ = var413
-			var403 = var414
-		elseif var408 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var415, var416 = protoModule.readFixed64(p13, var403)
+			local var415, var416 = protoModule.readFixed32(p13, var405)
 			local _ = var415
-			var403 = var416
+			var405 = var416
+		elseif var410 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var417, var418 = protoModule.readFixed64(p13, var405)
+			local _ = var417
+			var405 = var418
 		else
-			error("Unsupported wire type: " .. var884)
+			error("Unsupported wire type: " .. var890)
 		end
 	end
-	return var402
+	return var404
 end
 
 function t_13.jsonEncode(_)
@@ -3859,131 +3889,131 @@ end
 function t_14:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var417 = 0
+	local var419 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var418, var419 = protoModule.writeTag(buff, var417, 1, protoModule.wireTypes.lengthDelimited)
-		var418, var896 = protoModule.writeString(var418, var419, self.universe_id)
-		buff = var418
-		var417 = var419
+		local var420, var421 = protoModule.writeTag(buff, var419, 1, protoModule.wireTypes.lengthDelimited)
+		var420, var902 = protoModule.writeString(var420, var421, self.universe_id)
+		buff = var420
+		var419 = var421
 	end
 	if self.creator_key ~= nil and self.creator_key ~= "" then
-		local var420, var421 = protoModule.writeTag(buff, var417, 2, protoModule.wireTypes.lengthDelimited)
-		var420, var898 = protoModule.writeString(var420, var421, self.creator_key)
-		buff = var420
-		var417 = var421
+		local var422, var423 = protoModule.writeTag(buff, var419, 2, protoModule.wireTypes.lengthDelimited)
+		var422, var904 = protoModule.writeString(var422, var423, self.creator_key)
+		buff = var422
+		var419 = var423
 	end
 	if self.entry_map ~= nil and next(self.entry_map) ~= nil then
 		for i, v in self.entry_map do
-			local var422, var423 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var422, var900 = protoModule.writeString(var422, var423, i)
-			local var424 = v:encode()
-			var423, var902 = protoModule.writeTag(var422, var423, 2, protoModule.wireTypes.lengthDelimited)
-			var423, var902 = protoModule.writeBuffer(var423, var902, var424, buffer.len(var424))
-			local var425 = var423
-			local var426 = var902
-			local var427, var428 = protoModule.writeTag(buff, var417, 3, protoModule.wireTypes.lengthDelimited)
-			var427, var906 = protoModule.writeBuffer(var427, var428, var425, var426)
-			buff = var427
-			var417 = var428
+			local var424, var425 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
+			var424, var906 = protoModule.writeString(var424, var425, i)
+			local var426 = v:encode()
+			var425, var908 = protoModule.writeTag(var424, var425, 2, protoModule.wireTypes.lengthDelimited)
+			var425, var908 = protoModule.writeBuffer(var425, var908, var426, buffer.len(var426))
+			local var427 = var425
+			local var428 = var908
+			local var429, var430 = protoModule.writeTag(buff, var419, 3, protoModule.wireTypes.lengthDelimited)
+			var429, var912 = protoModule.writeBuffer(var429, var430, var427, var428)
+			buff = var429
+			var419 = var430
 		end
 	end
 	if self.entry_order ~= nil and #self.entry_order > 0 then
 		for i, v in self.entry_order do
-			local var429, var430 = protoModule.writeTag(buff, var417, 4, protoModule.wireTypes.lengthDelimited)
-			var429, var908 = protoModule.writeString(var429, var430, v)
-			buff = var429
-			var417 = var430
+			local var431, var432 = protoModule.writeTag(buff, var419, 4, protoModule.wireTypes.lengthDelimited)
+			var431, var914 = protoModule.writeString(var431, var432, v)
+			buff = var431
+			var419 = var432
 		end
 	end
 	if self.entry_order_map ~= nil and next(self.entry_order_map) ~= nil then
 		for i, v in self.entry_order_map do
-			local var431, var432 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var431, var910 = protoModule.writeString(var431, var432, i)
-			local var433 = v:encode()
-			var432, var912 = protoModule.writeTag(var431, var432, 2, protoModule.wireTypes.lengthDelimited)
-			var432, var912 = protoModule.writeBuffer(var432, var912, var433, buffer.len(var433))
-			local var434 = var432
-			local var435 = var912
-			local var436, var437 = protoModule.writeTag(buff, var417, 5, protoModule.wireTypes.lengthDelimited)
-			var436, var916 = protoModule.writeBuffer(var436, var437, var434, var435)
-			buff = var436
-			var417 = var437
+			local var433, var434 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
+			var433, var916 = protoModule.writeString(var433, var434, i)
+			local var435 = v:encode()
+			var434, var918 = protoModule.writeTag(var433, var434, 2, protoModule.wireTypes.lengthDelimited)
+			var434, var918 = protoModule.writeBuffer(var434, var918, var435, buffer.len(var435))
+			local var436 = var434
+			local var437 = var918
+			local var438, var439 = protoModule.writeTag(buff, var419, 5, protoModule.wireTypes.lengthDelimited)
+			var438, var922 = protoModule.writeBuffer(var438, var439, var436, var437)
+			buff = var438
+			var419 = var439
 		end
 	end
-	local buff_1 = buffer.create(var417)
-	buffer.copy(buff_1, 0, buff, 0, var417)
+	local buff_1 = buffer.create(var419)
+	buffer.copy(buff_1, 0, buff, 0, var419)
 	
 	return buff_1
 end
 
 function t_14.decode(p14)
 	-- upvalues: t_14 (ref), protoModule (ref), t (ref)
-	local var438 = t_14.new()
-	local var439 = 0
-	while var439 < buffer.len(p14) do
+	local var440 = t_14.new()
+	local var441 = 0
+	while var441 < buffer.len(p14) do
 		local _ = nil
-		local var440 = nil
-		local var441, var442, var443 = protoModule.readTag(p14, var439)
-		local var444 = var441
-		var440 = var442
-		var439 = var443
+		local var442 = nil
+		local var443, var444, var445 = protoModule.readTag(p14, var441)
+		local var446 = var443
+		var442 = var444
+		var441 = var445
 		
-		if var440 == protoModule.wireTypes.varint then
+		if var442 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var445, var446 = protoModule.readVarInt(p14, var439)
-			local _ = var445
-			var439 = var446
+			local var447, var448 = protoModule.readVarInt(p14, var441)
+			local _ = var447
+			var441 = var448
 			continue
 		end
-		if var440 == protoModule.wireTypes.lengthDelimited then
-			if var444 == 1 then
+		if var442 == protoModule.wireTypes.lengthDelimited then
+			if var446 == 1 then
 				local _ = nil
-				local var447, var448 = protoModule.readBuffer(p14, var439)
-				var439 = var448
-				var438.universe_id = buffer.tostring(var447)
-			elseif var444 == 2 then
+				local var449, var450 = protoModule.readBuffer(p14, var441)
+				var441 = var450
+				var440.universe_id = buffer.tostring(var449)
+			elseif var446 == 2 then
 				local _ = nil
-				local var449, var450 = protoModule.readBuffer(p14, var439)
-				var439 = var450
-				var438.creator_key = buffer.tostring(var449)
-			elseif var444 == 3 then
+				local var451, var452 = protoModule.readBuffer(p14, var441)
+				var441 = var452
+				var440.creator_key = buffer.tostring(var451)
+			elseif var446 == 3 then
 				local _ = nil
-				local var451, var452 = protoModule.readBuffer(p14, var439)
-				var439 = var452
-				var451 = t.ExperienceDetailsFeedInputData_EntryMapEntry.decode(var451)
-				var438.entry_map[var451.key or ""] = var451.value or t.FeedEntry.new()
-			elseif var444 == 4 then
+				local var453, var454 = protoModule.readBuffer(p14, var441)
+				var441 = var454
+				var453 = t.ExperienceDetailsFeedInputData_EntryMapEntry.decode(var453)
+				var440.entry_map[var453.key or ""] = var453.value or t.FeedEntry.new()
+			elseif var446 == 4 then
 				local _ = nil
-				local var453, var454 = protoModule.readBuffer(p14, var439)
-				var439 = var454
-				table.insert(var438.entry_order, buffer.tostring(var453))
-			elseif var444 == 5 then
+				local var455, var456 = protoModule.readBuffer(p14, var441)
+				var441 = var456
+				table.insert(var440.entry_order, buffer.tostring(var455))
+			elseif var446 == 5 then
 				local _ = nil
-				local var455, var456 = protoModule.readBuffer(p14, var439)
-				var439 = var456
-				var455 = t.ExperienceDetailsFeedInputData_EntryOrderMapEntry.decode(var455)
-				var438.entry_order_map[var455.key or ""] = var455.value or t.EntryOrder.new()
+				local var457, var458 = protoModule.readBuffer(p14, var441)
+				var441 = var458
+				var457 = t.ExperienceDetailsFeedInputData_EntryOrderMapEntry.decode(var457)
+				var440.entry_order_map[var457.key or ""] = var457.value or t.EntryOrder.new()
 			else
 				local _ = nil
-				local var457, var458 = protoModule.readVarInt(p14, var439)
-				var439 = var458 + var457
+				local var459, var460 = protoModule.readVarInt(p14, var441)
+				var441 = var460 + var459
 			end
-		elseif var440 == protoModule.wireTypes.i32 then
+		elseif var442 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var459, var460 = protoModule.readFixed32(p14, var439)
-			local _ = var459
-			var439 = var460
-		elseif var440 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var461, var462 = protoModule.readFixed64(p14, var439)
+			local var461, var462 = protoModule.readFixed32(p14, var441)
 			local _ = var461
-			var439 = var462
+			var441 = var462
+		elseif var442 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var463, var464 = protoModule.readFixed64(p14, var441)
+			local _ = var463
+			var441 = var464
 		else
-			error("Unsupported wire type: " .. var920)
+			error("Unsupported wire type: " .. var926)
 		end
 	end
-	return var438
+	return var440
 end
 
 function t_14:jsonEncode()
@@ -4024,19 +4054,19 @@ end
 
 function t_14:jsonDecode()
 	-- upvalues: t_14 (ref), t (ref)
-	local var463 = t_14.new()
+	local var465 = t_14.new()
 	
 	if self.universe_id ~= nil then
-		var463.universe_id = self.universe_id
+		var465.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var463.universe_id = self.universeId
+		var465.universe_id = self.universeId
 	end
 	if self.creator_key ~= nil then
-		var463.creator_key = self.creator_key
+		var465.creator_key = self.creator_key
 	end
 	if self.creatorKey ~= nil then
-		var463.creator_key = self.creatorKey
+		var465.creator_key = self.creatorKey
 	end
 	if self.entry_map ~= nil then
 		local t_1 = {}
@@ -4044,7 +4074,7 @@ function t_14:jsonDecode()
 		for i, v in self.entry_map do
 			t_1[i] = t.FeedEntry.jsonDecode(v)
 		end
-		var463.entry_map = t_1
+		var465.entry_map = t_1
 	end
 	if self.entryMap ~= nil then
 		local t_1 = {}
@@ -4052,7 +4082,7 @@ function t_14:jsonDecode()
 		for i, v in self.entryMap do
 			t_1[i] = t.FeedEntry.jsonDecode(v)
 		end
-		var463.entry_map = t_1
+		var465.entry_map = t_1
 	end
 	if self.entry_order ~= nil then
 		local t_1 = {}
@@ -4060,7 +4090,7 @@ function t_14:jsonDecode()
 		for i, v in self.entry_order do
 			table.insert(t_1, v)
 		end
-		var463.entry_order = t_1
+		var465.entry_order = t_1
 	end
 	if self.entryOrder ~= nil then
 		local t_1 = {}
@@ -4068,7 +4098,7 @@ function t_14:jsonDecode()
 		for i, v in self.entryOrder do
 			table.insert(t_1, v)
 		end
-		var463.entry_order = t_1
+		var465.entry_order = t_1
 	end
 	if self.entry_order_map ~= nil then
 		local t_1 = {}
@@ -4076,7 +4106,7 @@ function t_14:jsonDecode()
 		for i, v in self.entry_order_map do
 			t_1[i] = t.EntryOrder.jsonDecode(v)
 		end
-		var463.entry_order_map = t_1
+		var465.entry_order_map = t_1
 	end
 	if self.entryOrderMap ~= nil then
 		local t_1 = {}
@@ -4084,9 +4114,9 @@ function t_14:jsonDecode()
 		for i, v in self.entryOrderMap do
 			t_1[i] = t.EntryOrder.jsonDecode(v)
 		end
-		var463.entry_order_map = t_1
+		var465.entry_order_map = t_1
 	end
-	return var463
+	return var465
 end
 
 t_14.descriptor = {
@@ -4109,77 +4139,77 @@ end
 function t_15:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var464 = 0
+	local var466 = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var465, var466 = protoModule.writeTag(buff, var464, 1, protoModule.wireTypes.lengthDelimited)
-		var465, var957 = protoModule.writeString(var465, var466, self.key)
-		buff = var465
-		var464 = var466
+		local var467, var468 = protoModule.writeTag(buff, var466, 1, protoModule.wireTypes.lengthDelimited)
+		var467, var963 = protoModule.writeString(var467, var468, self.key)
+		buff = var467
+		var466 = var468
 	end
 	if self.value ~= nil then
-		local var467 = self.value:encode()
-		local var468, var469 = protoModule.writeTag(buff, var464, 2, protoModule.wireTypes.lengthDelimited)
-		var468, var960 = protoModule.writeBuffer(var468, var469, var467, buffer.len(var467))
-		buff = var468
-		var464 = var469
+		local var469 = self.value:encode()
+		local var470, var471 = protoModule.writeTag(buff, var466, 2, protoModule.wireTypes.lengthDelimited)
+		var470, var966 = protoModule.writeBuffer(var470, var471, var469, buffer.len(var469))
+		buff = var470
+		var466 = var471
 	end
-	local buff_1 = buffer.create(var464)
-	buffer.copy(buff_1, 0, buff, 0, var464)
+	local buff_1 = buffer.create(var466)
+	buffer.copy(buff_1, 0, buff, 0, var466)
 	
 	return buff_1
 end
 
 function t_15.decode(p15)
 	-- upvalues: t_15 (ref), protoModule (ref), t (ref)
-	local var464 = t_15.new()
-	local var465 = 0
-	while var465 < buffer.len(p15) do
+	local var466 = t_15.new()
+	local var467 = 0
+	while var467 < buffer.len(p15) do
 		local _ = nil
-		local var466 = nil
-		local var467, var468, var469 = protoModule.readTag(p15, var465)
-		local var470 = var467
-		var466 = var468
-		var465 = var469
+		local var468 = nil
+		local var469, var470, var471 = protoModule.readTag(p15, var467)
+		local var472 = var469
+		var468 = var470
+		var467 = var471
 		
-		if var466 == protoModule.wireTypes.varint then
+		if var468 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var471, var472 = protoModule.readVarInt(p15, var465)
-			local _ = var471
-			var465 = var472
+			local var473, var474 = protoModule.readVarInt(p15, var467)
+			local _ = var473
+			var467 = var474
 			continue
 		end
-		if var466 == protoModule.wireTypes.lengthDelimited then
-			if var470 == 1 then
+		if var468 == protoModule.wireTypes.lengthDelimited then
+			if var472 == 1 then
 				local _ = nil
-				local var473, var474 = protoModule.readBuffer(p15, var465)
-				var465 = var474
-				var464.key = buffer.tostring(var473)
-			elseif var470 == 2 then
+				local var475, var476 = protoModule.readBuffer(p15, var467)
+				var467 = var476
+				var466.key = buffer.tostring(var475)
+			elseif var472 == 2 then
 				local _ = nil
-				local var475, var476 = protoModule.readBuffer(p15, var465)
-				var465 = var476
-				var464.value = t.FeedEntry.decode(var475)
+				local var477, var478 = protoModule.readBuffer(p15, var467)
+				var467 = var478
+				var466.value = t.FeedEntry.decode(var477)
 			else
 				local _ = nil
-				local var477, var478 = protoModule.readVarInt(p15, var465)
-				var465 = var478 + var477
+				local var479, var480 = protoModule.readVarInt(p15, var467)
+				var467 = var480 + var479
 			end
-		elseif var466 == protoModule.wireTypes.i32 then
+		elseif var468 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var479, var480 = protoModule.readFixed32(p15, var465)
-			local _ = var479
-			var465 = var480
-		elseif var466 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var481, var482 = protoModule.readFixed64(p15, var465)
+			local var481, var482 = protoModule.readFixed32(p15, var467)
 			local _ = var481
-			var465 = var482
+			var467 = var482
+		elseif var468 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var483, var484 = protoModule.readFixed64(p15, var467)
+			local _ = var483
+			var467 = var484
 		else
-			error("Unsupported wire type: " .. var964)
+			error("Unsupported wire type: " .. var970)
 		end
 	end
-	return var464
+	return var466
 end
 
 function t_15:jsonEncode()
@@ -4196,15 +4226,15 @@ end
 
 function t_15:jsonDecode()
 	-- upvalues: t_15 (ref), t (ref)
-	local var483 = t_15.new()
+	local var485 = t_15.new()
 	
 	if self.key ~= nil then
-		var483.key = self.key
+		var485.key = self.key
 	end
 	if self.value ~= nil then
-		var483.value = t.FeedEntry.jsonDecode(self.value)
+		var485.value = t.FeedEntry.jsonDecode(self.value)
 	end
-	return var483
+	return var485
 end
 
 t_15.descriptor = {
@@ -4227,77 +4257,77 @@ end
 function t_16:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var483 = 0
+	local var485 = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var484, var485 = protoModule.writeTag(buff, var483, 1, protoModule.wireTypes.lengthDelimited)
-		var484, var986 = protoModule.writeString(var484, var485, self.key)
-		buff = var484
-		var483 = var485
+		local var486, var487 = protoModule.writeTag(buff, var485, 1, protoModule.wireTypes.lengthDelimited)
+		var486, var992 = protoModule.writeString(var486, var487, self.key)
+		buff = var486
+		var485 = var487
 	end
 	if self.value ~= nil then
-		local var486 = self.value:encode()
-		local var487, var488 = protoModule.writeTag(buff, var483, 2, protoModule.wireTypes.lengthDelimited)
-		var487, var989 = protoModule.writeBuffer(var487, var488, var486, buffer.len(var486))
-		buff = var487
-		var483 = var488
+		local var488 = self.value:encode()
+		local var489, var490 = protoModule.writeTag(buff, var485, 2, protoModule.wireTypes.lengthDelimited)
+		var489, var995 = protoModule.writeBuffer(var489, var490, var488, buffer.len(var488))
+		buff = var489
+		var485 = var490
 	end
-	local buff_1 = buffer.create(var483)
-	buffer.copy(buff_1, 0, buff, 0, var483)
+	local buff_1 = buffer.create(var485)
+	buffer.copy(buff_1, 0, buff, 0, var485)
 	
 	return buff_1
 end
 
 function t_16.decode(p16)
 	-- upvalues: t_16 (ref), protoModule (ref), t (ref)
-	local var483 = t_16.new()
-	local var484 = 0
-	while var484 < buffer.len(p16) do
+	local var485 = t_16.new()
+	local var486 = 0
+	while var486 < buffer.len(p16) do
 		local _ = nil
-		local var485 = nil
-		local var486, var487, var488 = protoModule.readTag(p16, var484)
-		local var489 = var486
-		var485 = var487
-		var484 = var488
+		local var487 = nil
+		local var488, var489, var490 = protoModule.readTag(p16, var486)
+		local var491 = var488
+		var487 = var489
+		var486 = var490
 		
-		if var485 == protoModule.wireTypes.varint then
+		if var487 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var490, var491 = protoModule.readVarInt(p16, var484)
-			local _ = var490
-			var484 = var491
+			local var492, var493 = protoModule.readVarInt(p16, var486)
+			local _ = var492
+			var486 = var493
 			continue
 		end
-		if var485 == protoModule.wireTypes.lengthDelimited then
-			if var489 == 1 then
+		if var487 == protoModule.wireTypes.lengthDelimited then
+			if var491 == 1 then
 				local _ = nil
-				local var492, var493 = protoModule.readBuffer(p16, var484)
-				var484 = var493
-				var483.key = buffer.tostring(var492)
-			elseif var489 == 2 then
+				local var494, var495 = protoModule.readBuffer(p16, var486)
+				var486 = var495
+				var485.key = buffer.tostring(var494)
+			elseif var491 == 2 then
 				local _ = nil
-				local var494, var495 = protoModule.readBuffer(p16, var484)
-				var484 = var495
-				var483.value = t.EntryOrder.decode(var494)
+				local var496, var497 = protoModule.readBuffer(p16, var486)
+				var486 = var497
+				var485.value = t.EntryOrder.decode(var496)
 			else
 				local _ = nil
-				local var496, var497 = protoModule.readVarInt(p16, var484)
-				var484 = var497 + var496
+				local var498, var499 = protoModule.readVarInt(p16, var486)
+				var486 = var499 + var498
 			end
-		elseif var485 == protoModule.wireTypes.i32 then
+		elseif var487 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var498, var499 = protoModule.readFixed32(p16, var484)
-			local _ = var498
-			var484 = var499
-		elseif var485 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var500, var501 = protoModule.readFixed64(p16, var484)
+			local var500, var501 = protoModule.readFixed32(p16, var486)
 			local _ = var500
-			var484 = var501
+			var486 = var501
+		elseif var487 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var502, var503 = protoModule.readFixed64(p16, var486)
+			local _ = var502
+			var486 = var503
 		else
-			error("Unsupported wire type: " .. var993)
+			error("Unsupported wire type: " .. var999)
 		end
 	end
-	return var483
+	return var485
 end
 
 function t_16:jsonEncode()
@@ -4314,15 +4344,15 @@ end
 
 function t_16:jsonDecode()
 	-- upvalues: t_16 (ref), t (ref)
-	local var502 = t_16.new()
+	local var504 = t_16.new()
 	
 	if self.key ~= nil then
-		var502.key = self.key
+		var504.key = self.key
 	end
 	if self.value ~= nil then
-		var502.value = t.EntryOrder.jsonDecode(self.value)
+		var504.value = t.EntryOrder.jsonDecode(self.value)
 	end
-	return var502
+	return var504
 end
 
 t_16.descriptor = {
@@ -4344,67 +4374,67 @@ end
 function t_17:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var502 = 0
+	local var504 = 0
 	
 	if self.items ~= nil and #self.items > 0 then
 		for i, v in self.items do
-			local var503, var504 = protoModule.writeTag(buff, var502, 1, protoModule.wireTypes.lengthDelimited)
-			var503, var1015 = protoModule.writeString(var503, var504, v)
-			buff = var503
-			var502 = var504
+			local var505, var506 = protoModule.writeTag(buff, var504, 1, protoModule.wireTypes.lengthDelimited)
+			var505, var1021 = protoModule.writeString(var505, var506, v)
+			buff = var505
+			var504 = var506
 		end
 	end
-	local buff_1 = buffer.create(var502)
-	buffer.copy(buff_1, 0, buff, 0, var502)
+	local buff_1 = buffer.create(var504)
+	buffer.copy(buff_1, 0, buff, 0, var504)
 	
 	return buff_1
 end
 
 function t_17.decode(p17)
 	-- upvalues: t_17 (ref), protoModule (ref)
-	local var505 = t_17.new()
-	local var506 = 0
-	while var506 < buffer.len(p17) do
+	local var507 = t_17.new()
+	local var508 = 0
+	while var508 < buffer.len(p17) do
 		local _ = nil
-		local var507 = nil
-		local var508, var509, var510 = protoModule.readTag(p17, var506)
-		local var511 = var508
-		var507 = var509
-		var506 = var510
+		local var509 = nil
+		local var510, var511, var512 = protoModule.readTag(p17, var508)
+		local var513 = var510
+		var509 = var511
+		var508 = var512
 		
-		if var507 == protoModule.wireTypes.varint then
+		if var509 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var512, var513 = protoModule.readVarInt(p17, var506)
-			local _ = var512
-			var506 = var513
+			local var514, var515 = protoModule.readVarInt(p17, var508)
+			local _ = var514
+			var508 = var515
 			continue
 		end
-		if var507 == protoModule.wireTypes.lengthDelimited then
-			if var511 == 1 then
+		if var509 == protoModule.wireTypes.lengthDelimited then
+			if var513 == 1 then
 				local _ = nil
-				local var514, var515 = protoModule.readBuffer(p17, var506)
-				var506 = var515
-				table.insert(var505.items, buffer.tostring(var514))
+				local var516, var517 = protoModule.readBuffer(p17, var508)
+				var508 = var517
+				table.insert(var507.items, buffer.tostring(var516))
 			else
 				local _ = nil
-				local var516, var517 = protoModule.readVarInt(p17, var506)
-				var506 = var517 + var516
+				local var518, var519 = protoModule.readVarInt(p17, var508)
+				var508 = var519 + var518
 			end
-		elseif var507 == protoModule.wireTypes.i32 then
+		elseif var509 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var518, var519 = protoModule.readFixed32(p17, var506)
-			local _ = var518
-			var506 = var519
-		elseif var507 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var520, var521 = protoModule.readFixed64(p17, var506)
+			local var520, var521 = protoModule.readFixed32(p17, var508)
 			local _ = var520
-			var506 = var521
+			var508 = var521
+		elseif var509 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var522, var523 = protoModule.readFixed64(p17, var508)
+			local _ = var522
+			var508 = var523
 		else
-			error("Unsupported wire type: " .. var1019)
+			error("Unsupported wire type: " .. var1025)
 		end
 	end
-	return var505
+	return var507
 end
 
 function t_17:jsonEncode()
@@ -4423,7 +4453,7 @@ end
 
 function t_17:jsonDecode()
 	-- upvalues: t_17 (ref)
-	local var522 = t_17.new()
+	local var524 = t_17.new()
 	
 	if self.items ~= nil then
 		local t = {}
@@ -4431,9 +4461,9 @@ function t_17:jsonDecode()
 		for i, v in self.items do
 			table.insert(t, v)
 		end
-		var522.items = t
+		var524.items = t
 	end
-	return var522
+	return var524
 end
 
 t_17.descriptor = {
@@ -4456,77 +4486,77 @@ end
 function t_18:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var523 = 0
+	local var525 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var524, var525 = protoModule.writeTag(buff, var523, 1, protoModule.wireTypes.lengthDelimited)
-		var524, var1041 = protoModule.writeString(var524, var525, self.universe_id)
-		buff = var524
-		var523 = var525
+		local var526, var527 = protoModule.writeTag(buff, var525, 1, protoModule.wireTypes.lengthDelimited)
+		var526, var1047 = protoModule.writeString(var526, var527, self.universe_id)
+		buff = var526
+		var525 = var527
 	end
 	if self.user_owns_experience then
-		local var526, var527 = protoModule.writeTag(buff, var523, 2, protoModule.wireTypes.varint)
-		var526, var1043 = protoModule.writeVarInt(var526, var527, if self.user_owns_experience then 1 else 0)
-		buff = var526
-		var523 = var527
+		local var528, var529 = protoModule.writeTag(buff, var525, 2, protoModule.wireTypes.varint)
+		var528, var1049 = protoModule.writeVarInt(var528, var529, if self.user_owns_experience then 1 else 0)
+		buff = var528
+		var525 = var529
 	end
-	local buff_1 = buffer.create(var523)
-	buffer.copy(buff_1, 0, buff, 0, var523)
+	local buff_1 = buffer.create(var525)
+	buffer.copy(buff_1, 0, buff, 0, var525)
 	
 	return buff_1
 end
 
 function t_18.decode(p18)
 	-- upvalues: t_18 (ref), protoModule (ref)
-	local var523 = t_18.new()
-	local var524 = 0
-	while var524 < buffer.len(p18) do
+	local var525 = t_18.new()
+	local var526 = 0
+	while var526 < buffer.len(p18) do
 		local _ = nil
-		local var525 = nil
-		local var526, var527, var528 = protoModule.readTag(p18, var524)
-		local var529 = var526
-		var525 = var527
-		var524 = var528
+		local var527 = nil
+		local var528, var529, var530 = protoModule.readTag(p18, var526)
+		local var531 = var528
+		var527 = var529
+		var526 = var530
 		
-		if var525 == protoModule.wireTypes.varint then
-			if var529 == 2 then
+		if var527 == protoModule.wireTypes.varint then
+			if var531 == 2 then
 				local _ = nil
-				local var530, var531 = protoModule.readVarInt(p18, var524)
-				var524 = var531
-				var523.user_owns_experience = var530 ~= 0
+				local var532, var533 = protoModule.readVarInt(p18, var526)
+				var526 = var533
+				var525.user_owns_experience = var532 ~= 0
 			else
 				local _ = nil
-				local var532, var533 = protoModule.readVarInt(p18, var524)
-				local _ = var532
-				var524 = var533
+				local var534, var535 = protoModule.readVarInt(p18, var526)
+				local _ = var534
+				var526 = var535
 			end
 		end
-		if var525 == protoModule.wireTypes.lengthDelimited then
-			if var529 == 1 then
+		if var527 == protoModule.wireTypes.lengthDelimited then
+			if var531 == 1 then
 				local _ = nil
-				local var534, var535 = protoModule.readBuffer(p18, var524)
-				var524 = var535
-				var523.universe_id = buffer.tostring(var534)
+				local var536, var537 = protoModule.readBuffer(p18, var526)
+				var526 = var537
+				var525.universe_id = buffer.tostring(var536)
 			else
 				local _ = nil
-				local var536, var537 = protoModule.readVarInt(p18, var524)
-				var524 = var537 + var536
+				local var538, var539 = protoModule.readVarInt(p18, var526)
+				var526 = var539 + var538
 			end
-		elseif var525 == protoModule.wireTypes.i32 then
+		elseif var527 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var538, var539 = protoModule.readFixed32(p18, var524)
-			local _ = var538
-			var524 = var539
-		elseif var525 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var540, var541 = protoModule.readFixed64(p18, var524)
+			local var540, var541 = protoModule.readFixed32(p18, var526)
 			local _ = var540
-			var524 = var541
+			var526 = var541
+		elseif var527 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var542, var543 = protoModule.readFixed64(p18, var526)
+			local _ = var542
+			var526 = var543
 		else
-			error("Unsupported wire type: " .. var1047)
+			error("Unsupported wire type: " .. var1053)
 		end
 	end
-	return var523
+	return var525
 end
 
 function t_18:jsonEncode()
@@ -4543,21 +4573,21 @@ end
 
 function t_18:jsonDecode()
 	-- upvalues: t_18 (ref)
-	local var542 = t_18.new()
+	local var544 = t_18.new()
 	
 	if self.universe_id ~= nil then
-		var542.universe_id = self.universe_id
+		var544.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var542.universe_id = self.universeId
+		var544.universe_id = self.universeId
 	end
 	if self.user_owns_experience ~= nil then
-		var542.user_owns_experience = self.user_owns_experience
+		var544.user_owns_experience = self.user_owns_experience
 	end
 	if self.userOwnsExperience ~= nil then
-		var542.user_owns_experience = self.userOwnsExperience
+		var544.user_owns_experience = self.userOwnsExperience
 	end
-	return var542
+	return var544
 end
 
 t_18.descriptor = {
@@ -4579,65 +4609,65 @@ end
 function t_19:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var542 = 0
+	local var544 = 0
 	
 	if self.media_asset_id ~= nil and self.media_asset_id ~= "" then
-		local var543, var544 = protoModule.writeTag(buff, var542, 1, protoModule.wireTypes.lengthDelimited)
-		var543, var1069 = protoModule.writeString(var543, var544, self.media_asset_id)
-		buff = var543
-		var542 = var544
+		local var545, var546 = protoModule.writeTag(buff, var544, 1, protoModule.wireTypes.lengthDelimited)
+		var545, var1075 = protoModule.writeString(var545, var546, self.media_asset_id)
+		buff = var545
+		var544 = var546
 	end
-	local buff_1 = buffer.create(var542)
-	buffer.copy(buff_1, 0, buff, 0, var542)
+	local buff_1 = buffer.create(var544)
+	buffer.copy(buff_1, 0, buff, 0, var544)
 	
 	return buff_1
 end
 
 function t_19.decode(p19)
 	-- upvalues: t_19 (ref), protoModule (ref)
-	local var542 = t_19.new()
-	local var543 = 0
-	while var543 < buffer.len(p19) do
+	local var544 = t_19.new()
+	local var545 = 0
+	while var545 < buffer.len(p19) do
 		local _ = nil
-		local var544 = nil
-		local var545, var546, var547 = protoModule.readTag(p19, var543)
-		local var548 = var545
-		var544 = var546
-		var543 = var547
+		local var546 = nil
+		local var547, var548, var549 = protoModule.readTag(p19, var545)
+		local var550 = var547
+		var546 = var548
+		var545 = var549
 		
-		if var544 == protoModule.wireTypes.varint then
+		if var546 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var549, var550 = protoModule.readVarInt(p19, var543)
-			local _ = var549
-			var543 = var550
+			local var551, var552 = protoModule.readVarInt(p19, var545)
+			local _ = var551
+			var545 = var552
 			continue
 		end
-		if var544 == protoModule.wireTypes.lengthDelimited then
-			if var548 == 1 then
+		if var546 == protoModule.wireTypes.lengthDelimited then
+			if var550 == 1 then
 				local _ = nil
-				local var551, var552 = protoModule.readBuffer(p19, var543)
-				var543 = var552
-				var542.media_asset_id = buffer.tostring(var551)
+				local var553, var554 = protoModule.readBuffer(p19, var545)
+				var545 = var554
+				var544.media_asset_id = buffer.tostring(var553)
 			else
 				local _ = nil
-				local var553, var554 = protoModule.readVarInt(p19, var543)
-				var543 = var554 + var553
+				local var555, var556 = protoModule.readVarInt(p19, var545)
+				var545 = var556 + var555
 			end
-		elseif var544 == protoModule.wireTypes.i32 then
+		elseif var546 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var555, var556 = protoModule.readFixed32(p19, var543)
-			local _ = var555
-			var543 = var556
-		elseif var544 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var557, var558 = protoModule.readFixed64(p19, var543)
+			local var557, var558 = protoModule.readFixed32(p19, var545)
 			local _ = var557
-			var543 = var558
+			var545 = var558
+		elseif var546 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var559, var560 = protoModule.readFixed64(p19, var545)
+			local _ = var559
+			var545 = var560
 		else
-			error("Unsupported wire type: " .. var1073)
+			error("Unsupported wire type: " .. var1079)
 		end
 	end
-	return var542
+	return var544
 end
 
 function t_19:jsonEncode()
@@ -4651,15 +4681,15 @@ end
 
 function t_19:jsonDecode()
 	-- upvalues: t_19 (ref)
-	local var559 = t_19.new()
+	local var561 = t_19.new()
 	
 	if self.media_asset_id ~= nil then
-		var559.media_asset_id = self.media_asset_id
+		var561.media_asset_id = self.media_asset_id
 	end
 	if self.mediaAssetId ~= nil then
-		var559.media_asset_id = self.mediaAssetId
+		var561.media_asset_id = self.mediaAssetId
 	end
-	return var559
+	return var561
 end
 
 t_19.descriptor = {
@@ -4681,65 +4711,65 @@ end
 function t_20:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var559 = 0
+	local var561 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var560, var561 = protoModule.writeTag(buff, var559, 1, protoModule.wireTypes.lengthDelimited)
-		var560, var1093 = protoModule.writeString(var560, var561, self.universe_id)
-		buff = var560
-		var559 = var561
+		local var562, var563 = protoModule.writeTag(buff, var561, 1, protoModule.wireTypes.lengthDelimited)
+		var562, var1099 = protoModule.writeString(var562, var563, self.universe_id)
+		buff = var562
+		var561 = var563
 	end
-	local buff_1 = buffer.create(var559)
-	buffer.copy(buff_1, 0, buff, 0, var559)
+	local buff_1 = buffer.create(var561)
+	buffer.copy(buff_1, 0, buff, 0, var561)
 	
 	return buff_1
 end
 
 function t_20.decode(p20)
 	-- upvalues: t_20 (ref), protoModule (ref)
-	local var559 = t_20.new()
-	local var560 = 0
-	while var560 < buffer.len(p20) do
+	local var561 = t_20.new()
+	local var562 = 0
+	while var562 < buffer.len(p20) do
 		local _ = nil
-		local var561 = nil
-		local var562, var563, var564 = protoModule.readTag(p20, var560)
-		local var565 = var562
-		var561 = var563
-		var560 = var564
+		local var563 = nil
+		local var564, var565, var566 = protoModule.readTag(p20, var562)
+		local var567 = var564
+		var563 = var565
+		var562 = var566
 		
-		if var561 == protoModule.wireTypes.varint then
+		if var563 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var566, var567 = protoModule.readVarInt(p20, var560)
-			local _ = var566
-			var560 = var567
+			local var568, var569 = protoModule.readVarInt(p20, var562)
+			local _ = var568
+			var562 = var569
 			continue
 		end
-		if var561 == protoModule.wireTypes.lengthDelimited then
-			if var565 == 1 then
+		if var563 == protoModule.wireTypes.lengthDelimited then
+			if var567 == 1 then
 				local _ = nil
-				local var568, var569 = protoModule.readBuffer(p20, var560)
-				var560 = var569
-				var559.universe_id = buffer.tostring(var568)
+				local var570, var571 = protoModule.readBuffer(p20, var562)
+				var562 = var571
+				var561.universe_id = buffer.tostring(var570)
 			else
 				local _ = nil
-				local var570, var571 = protoModule.readVarInt(p20, var560)
-				var560 = var571 + var570
+				local var572, var573 = protoModule.readVarInt(p20, var562)
+				var562 = var573 + var572
 			end
-		elseif var561 == protoModule.wireTypes.i32 then
+		elseif var563 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var572, var573 = protoModule.readFixed32(p20, var560)
-			local _ = var572
-			var560 = var573
-		elseif var561 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var574, var575 = protoModule.readFixed64(p20, var560)
+			local var574, var575 = protoModule.readFixed32(p20, var562)
 			local _ = var574
-			var560 = var575
+			var562 = var575
+		elseif var563 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var576, var577 = protoModule.readFixed64(p20, var562)
+			local _ = var576
+			var562 = var577
 		else
-			error("Unsupported wire type: " .. var1097)
+			error("Unsupported wire type: " .. var1103)
 		end
 	end
-	return var559
+	return var561
 end
 
 function t_20:jsonEncode()
@@ -4753,15 +4783,15 @@ end
 
 function t_20:jsonDecode()
 	-- upvalues: t_20 (ref)
-	local var576 = t_20.new()
+	local var578 = t_20.new()
 	
 	if self.universe_id ~= nil then
-		var576.universe_id = self.universe_id
+		var578.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var576.universe_id = self.universeId
+		var578.universe_id = self.universeId
 	end
-	return var576
+	return var578
 end
 
 t_20.descriptor = {
@@ -4784,76 +4814,76 @@ end
 function t_21:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var576 = 0
+	local var578 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var577, var578 = protoModule.writeTag(buff, var576, 1, protoModule.wireTypes.lengthDelimited)
-		var577, var1117 = protoModule.writeString(var577, var578, self.universe_id)
-		buff = var577
-		var576 = var578
+		local var579, var580 = protoModule.writeTag(buff, var578, 1, protoModule.wireTypes.lengthDelimited)
+		var579, var1123 = protoModule.writeString(var579, var580, self.universe_id)
+		buff = var579
+		var578 = var580
 	end
 	if self.creator_key ~= nil and self.creator_key ~= "" then
-		local var579, var580 = protoModule.writeTag(buff, var576, 2, protoModule.wireTypes.lengthDelimited)
-		var579, var1119 = protoModule.writeString(var579, var580, self.creator_key)
-		buff = var579
-		var576 = var580
+		local var581, var582 = protoModule.writeTag(buff, var578, 2, protoModule.wireTypes.lengthDelimited)
+		var581, var1125 = protoModule.writeString(var581, var582, self.creator_key)
+		buff = var581
+		var578 = var582
 	end
-	local buff_1 = buffer.create(var576)
-	buffer.copy(buff_1, 0, buff, 0, var576)
+	local buff_1 = buffer.create(var578)
+	buffer.copy(buff_1, 0, buff, 0, var578)
 	
 	return buff_1
 end
 
 function t_21.decode(p21)
 	-- upvalues: t_21 (ref), protoModule (ref)
-	local var576 = t_21.new()
-	local var577 = 0
-	while var577 < buffer.len(p21) do
+	local var578 = t_21.new()
+	local var579 = 0
+	while var579 < buffer.len(p21) do
 		local _ = nil
-		local var578 = nil
-		local var579, var580, var581 = protoModule.readTag(p21, var577)
-		local var582 = var579
-		var578 = var580
-		var577 = var581
+		local var580 = nil
+		local var581, var582, var583 = protoModule.readTag(p21, var579)
+		local var584 = var581
+		var580 = var582
+		var579 = var583
 		
-		if var578 == protoModule.wireTypes.varint then
+		if var580 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var583, var584 = protoModule.readVarInt(p21, var577)
-			local _ = var583
-			var577 = var584
+			local var585, var586 = protoModule.readVarInt(p21, var579)
+			local _ = var585
+			var579 = var586
 			continue
 		end
-		if var578 == protoModule.wireTypes.lengthDelimited then
-			if var582 == 1 then
+		if var580 == protoModule.wireTypes.lengthDelimited then
+			if var584 == 1 then
 				local _ = nil
-				local var585, var586 = protoModule.readBuffer(p21, var577)
-				var577 = var586
-				var576.universe_id = buffer.tostring(var585)
-			elseif var582 == 2 then
+				local var587, var588 = protoModule.readBuffer(p21, var579)
+				var579 = var588
+				var578.universe_id = buffer.tostring(var587)
+			elseif var584 == 2 then
 				local _ = nil
-				local var587, var588 = protoModule.readBuffer(p21, var577)
-				var577 = var588
-				var576.creator_key = buffer.tostring(var587)
+				local var589, var590 = protoModule.readBuffer(p21, var579)
+				var579 = var590
+				var578.creator_key = buffer.tostring(var589)
 			else
 				local _ = nil
-				local var589, var590 = protoModule.readVarInt(p21, var577)
-				var577 = var590 + var589
+				local var591, var592 = protoModule.readVarInt(p21, var579)
+				var579 = var592 + var591
 			end
-		elseif var578 == protoModule.wireTypes.i32 then
+		elseif var580 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var591, var592 = protoModule.readFixed32(p21, var577)
-			local _ = var591
-			var577 = var592
-		elseif var578 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var593, var594 = protoModule.readFixed64(p21, var577)
+			local var593, var594 = protoModule.readFixed32(p21, var579)
 			local _ = var593
-			var577 = var594
+			var579 = var594
+		elseif var580 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var595, var596 = protoModule.readFixed64(p21, var579)
+			local _ = var595
+			var579 = var596
 		else
-			error("Unsupported wire type: " .. var1123)
+			error("Unsupported wire type: " .. var1129)
 		end
 	end
-	return var576
+	return var578
 end
 
 function t_21:jsonEncode()
@@ -4870,21 +4900,21 @@ end
 
 function t_21:jsonDecode()
 	-- upvalues: t_21 (ref)
-	local var595 = t_21.new()
+	local var597 = t_21.new()
 	
 	if self.universe_id ~= nil then
-		var595.universe_id = self.universe_id
+		var597.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var595.universe_id = self.universeId
+		var597.universe_id = self.universeId
 	end
 	if self.creator_key ~= nil then
-		var595.creator_key = self.creator_key
+		var597.creator_key = self.creator_key
 	end
 	if self.creatorKey ~= nil then
-		var595.creator_key = self.creatorKey
+		var597.creator_key = self.creatorKey
 	end
-	return var595
+	return var597
 end
 
 t_21.descriptor = {
@@ -4912,135 +4942,135 @@ end
 function t_22:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var595 = 0
+	local var597 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var596, var597 = protoModule.writeTag(buff, var595, 1, protoModule.wireTypes.lengthDelimited)
-		var596, var1145 = protoModule.writeString(var596, var597, self.universe_id)
-		buff = var596
-		var595 = var597
+		local var598, var599 = protoModule.writeTag(buff, var597, 1, protoModule.wireTypes.lengthDelimited)
+		var598, var1151 = protoModule.writeString(var598, var599, self.universe_id)
+		buff = var598
+		var597 = var599
 	end
 	if self.root_place_id ~= nil and self.root_place_id ~= "" then
-		local var598, var599 = protoModule.writeTag(buff, var595, 2, protoModule.wireTypes.lengthDelimited)
-		var598, var1147 = protoModule.writeString(var598, var599, self.root_place_id)
-		buff = var598
-		var595 = var599
+		local var600, var601 = protoModule.writeTag(buff, var597, 2, protoModule.wireTypes.lengthDelimited)
+		var600, var1153 = protoModule.writeString(var600, var601, self.root_place_id)
+		buff = var600
+		var597 = var601
 	end
 	if self.connection_played_display_name ~= nil and self.connection_played_display_name ~= "" then
-		local var600, var601 = protoModule.writeTag(buff, var595, 3, protoModule.wireTypes.lengthDelimited)
-		var600, var1149 = protoModule.writeString(var600, var601, self.connection_played_display_name)
-		buff = var600
-		var595 = var601
+		local var602, var603 = protoModule.writeTag(buff, var597, 3, protoModule.wireTypes.lengthDelimited)
+		var602, var1155 = protoModule.writeString(var602, var603, self.connection_played_display_name)
+		buff = var602
+		var597 = var603
 	end
 	if self.upsell_prompt ~= nil and self.upsell_prompt ~= "" then
-		local var602, var603 = protoModule.writeTag(buff, var595, 4, protoModule.wireTypes.lengthDelimited)
-		var602, var1151 = protoModule.writeString(var602, var603, self.upsell_prompt)
-		buff = var602
-		var595 = var603
+		local var604, var605 = protoModule.writeTag(buff, var597, 4, protoModule.wireTypes.lengthDelimited)
+		var604, var1157 = protoModule.writeString(var604, var605, self.upsell_prompt)
+		buff = var604
+		var597 = var605
 	end
 	if self.connection_played_users ~= nil and #self.connection_played_users > 0 then
 		for i, v in self.connection_played_users do
-			local var604 = v:encode()
-			local var605, var606 = protoModule.writeTag(buff, var595, 5, protoModule.wireTypes.lengthDelimited)
-			var605, var1154 = protoModule.writeBuffer(var605, var606, var604, buffer.len(var604))
-			buff = var605
-			var595 = var606
+			local var606 = v:encode()
+			local var607, var608 = protoModule.writeTag(buff, var597, 5, protoModule.wireTypes.lengthDelimited)
+			var607, var1160 = protoModule.writeBuffer(var607, var608, var606, buffer.len(var606))
+			buff = var607
+			var597 = var608
 		end
 	end
 	if self.connection_played_num_others ~= nil and self.connection_played_num_others ~= 0 then
-		local var607, var608 = protoModule.writeTag(buff, var595, 6, protoModule.wireTypes.varint)
-		var607, var1156 = protoModule.writeVarInt(var607, var608, self.connection_played_num_others)
-		buff = var607
-		var595 = var608
+		local var609, var610 = protoModule.writeTag(buff, var597, 6, protoModule.wireTypes.varint)
+		var609, var1162 = protoModule.writeVarInt(var609, var610, self.connection_played_num_others)
+		buff = var609
+		var597 = var610
 	end
 	if self.connection_played_total_count ~= nil and self.connection_played_total_count ~= 0 then
-		local var609, var610 = protoModule.writeTag(buff, var595, 7, protoModule.wireTypes.varint)
-		var609, var1158 = protoModule.writeVarInt(var609, var610, self.connection_played_total_count)
-		buff = var609
-		var595 = var610
+		local var611, var612 = protoModule.writeTag(buff, var597, 7, protoModule.wireTypes.varint)
+		var611, var1164 = protoModule.writeVarInt(var611, var612, self.connection_played_total_count)
+		buff = var611
+		var597 = var612
 	end
-	local buff_1 = buffer.create(var595)
-	buffer.copy(buff_1, 0, buff, 0, var595)
+	local buff_1 = buffer.create(var597)
+	buffer.copy(buff_1, 0, buff, 0, var597)
 	
 	return buff_1
 end
 
 function t_22.decode(p22)
 	-- upvalues: t_22 (ref), protoModule (ref), t (ref)
-	local var611 = t_22.new()
-	local var612 = 0
-	while var612 < buffer.len(p22) do
+	local var613 = t_22.new()
+	local var614 = 0
+	while var614 < buffer.len(p22) do
 		local _ = nil
-		local var613 = nil
-		local var614, var615, var616 = protoModule.readTag(p22, var612)
-		local var617 = var614
-		var613 = var615
-		var612 = var616
+		local var615 = nil
+		local var616, var617, var618 = protoModule.readTag(p22, var614)
+		local var619 = var616
+		var615 = var617
+		var614 = var618
 		
-		if var613 == protoModule.wireTypes.varint then
-			if var617 == 6 then
+		if var615 == protoModule.wireTypes.varint then
+			if var619 == 6 then
 				local _ = nil
-				local var618, var619 = protoModule.readVarIntI32(p22, var612)
-				var612 = var619
-				var611.connection_played_num_others = var618
-			elseif var617 == 7 then
+				local var620, var621 = protoModule.readVarIntI32(p22, var614)
+				var614 = var621
+				var613.connection_played_num_others = var620
+			elseif var619 == 7 then
 				local _ = nil
-				local var620, var621 = protoModule.readVarIntI32(p22, var612)
-				var612 = var621
-				var611.connection_played_total_count = var620
+				local var622, var623 = protoModule.readVarIntI32(p22, var614)
+				var614 = var623
+				var613.connection_played_total_count = var622
 			else
 				local _ = nil
-				local var622, var623 = protoModule.readVarInt(p22, var612)
-				local _ = var622
-				var612 = var623
+				local var624, var625 = protoModule.readVarInt(p22, var614)
+				local _ = var624
+				var614 = var625
 			end
 		end
-		if var613 == protoModule.wireTypes.lengthDelimited then
-			if var617 == 1 then
+		if var615 == protoModule.wireTypes.lengthDelimited then
+			if var619 == 1 then
 				local _ = nil
-				local var624, var625 = protoModule.readBuffer(p22, var612)
-				var612 = var625
-				var611.universe_id = buffer.tostring(var624)
-			elseif var617 == 2 then
+				local var626, var627 = protoModule.readBuffer(p22, var614)
+				var614 = var627
+				var613.universe_id = buffer.tostring(var626)
+			elseif var619 == 2 then
 				local _ = nil
-				local var626, var627 = protoModule.readBuffer(p22, var612)
-				var612 = var627
-				var611.root_place_id = buffer.tostring(var626)
-			elseif var617 == 3 then
+				local var628, var629 = protoModule.readBuffer(p22, var614)
+				var614 = var629
+				var613.root_place_id = buffer.tostring(var628)
+			elseif var619 == 3 then
 				local _ = nil
-				local var628, var629 = protoModule.readBuffer(p22, var612)
-				var612 = var629
-				var611.connection_played_display_name = buffer.tostring(var628)
-			elseif var617 == 4 then
+				local var630, var631 = protoModule.readBuffer(p22, var614)
+				var614 = var631
+				var613.connection_played_display_name = buffer.tostring(var630)
+			elseif var619 == 4 then
 				local _ = nil
-				local var630, var631 = protoModule.readBuffer(p22, var612)
-				var612 = var631
-				var611.upsell_prompt = buffer.tostring(var630)
-			elseif var617 == 5 then
+				local var632, var633 = protoModule.readBuffer(p22, var614)
+				var614 = var633
+				var613.upsell_prompt = buffer.tostring(var632)
+			elseif var619 == 5 then
 				local _ = nil
-				local var632, var633 = protoModule.readBuffer(p22, var612)
-				var612 = var633
-				table.insert(var611.connection_played_users, t.ExperienceActionModuleInputData_ConnectionPlayedUser.decode(var632))
+				local var634, var635 = protoModule.readBuffer(p22, var614)
+				var614 = var635
+				table.insert(var613.connection_played_users, t.ExperienceActionModuleInputData_ConnectionPlayedUser.decode(var634))
 			else
 				local _ = nil
-				local var634, var635 = protoModule.readVarInt(p22, var612)
-				var612 = var635 + var634
+				local var636, var637 = protoModule.readVarInt(p22, var614)
+				var614 = var637 + var636
 			end
-		elseif var613 == protoModule.wireTypes.i32 then
+		elseif var615 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var636, var637 = protoModule.readFixed32(p22, var612)
-			local _ = var636
-			var612 = var637
-		elseif var613 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var638, var639 = protoModule.readFixed64(p22, var612)
+			local var638, var639 = protoModule.readFixed32(p22, var614)
 			local _ = var638
-			var612 = var639
+			var614 = var639
+		elseif var615 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var640, var641 = protoModule.readFixed64(p22, var614)
+			local _ = var640
+			var614 = var641
 		else
-			error("Unsupported wire type: " .. var1162)
+			error("Unsupported wire type: " .. var1168)
 		end
 	end
-	return var611
+	return var613
 end
 
 function t_22:jsonEncode()
@@ -5077,31 +5107,31 @@ end
 
 function t_22:jsonDecode()
 	-- upvalues: t_22 (ref), t (ref)
-	local var640 = t_22.new()
+	local var642 = t_22.new()
 	
 	if self.universe_id ~= nil then
-		var640.universe_id = self.universe_id
+		var642.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var640.universe_id = self.universeId
+		var642.universe_id = self.universeId
 	end
 	if self.root_place_id ~= nil then
-		var640.root_place_id = self.root_place_id
+		var642.root_place_id = self.root_place_id
 	end
 	if self.rootPlaceId ~= nil then
-		var640.root_place_id = self.rootPlaceId
+		var642.root_place_id = self.rootPlaceId
 	end
 	if self.connection_played_display_name ~= nil then
-		var640.connection_played_display_name = self.connection_played_display_name
+		var642.connection_played_display_name = self.connection_played_display_name
 	end
 	if self.connectionPlayedDisplayName ~= nil then
-		var640.connection_played_display_name = self.connectionPlayedDisplayName
+		var642.connection_played_display_name = self.connectionPlayedDisplayName
 	end
 	if self.upsell_prompt ~= nil then
-		var640.upsell_prompt = self.upsell_prompt
+		var642.upsell_prompt = self.upsell_prompt
 	end
 	if self.upsellPrompt ~= nil then
-		var640.upsell_prompt = self.upsellPrompt
+		var642.upsell_prompt = self.upsellPrompt
 	end
 	if self.connection_played_users ~= nil then
 		local t_1 = {}
@@ -5109,7 +5139,7 @@ function t_22:jsonDecode()
 		for i, v in self.connection_played_users do
 			table.insert(t_1, t.ExperienceActionModuleInputData_ConnectionPlayedUser.jsonDecode(v))
 		end
-		var640.connection_played_users = t_1
+		var642.connection_played_users = t_1
 	end
 	if self.connectionPlayedUsers ~= nil then
 		local t_1 = {}
@@ -5117,21 +5147,21 @@ function t_22:jsonDecode()
 		for i, v in self.connectionPlayedUsers do
 			table.insert(t_1, t.ExperienceActionModuleInputData_ConnectionPlayedUser.jsonDecode(v))
 		end
-		var640.connection_played_users = t_1
+		var642.connection_played_users = t_1
 	end
 	if self.connection_played_num_others ~= nil then
-		var640.connection_played_num_others = self.connection_played_num_others
+		var642.connection_played_num_others = self.connection_played_num_others
 	end
 	if self.connectionPlayedNumOthers ~= nil then
-		var640.connection_played_num_others = self.connectionPlayedNumOthers
+		var642.connection_played_num_others = self.connectionPlayedNumOthers
 	end
 	if self.connection_played_total_count ~= nil then
-		var640.connection_played_total_count = self.connection_played_total_count
+		var642.connection_played_total_count = self.connection_played_total_count
 	end
 	if self.connectionPlayedTotalCount ~= nil then
-		var640.connection_played_total_count = self.connectionPlayedTotalCount
+		var642.connection_played_total_count = self.connectionPlayedTotalCount
 	end
-	return var640
+	return var642
 end
 
 t_22.descriptor = {
@@ -5153,65 +5183,65 @@ end
 function t_23:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var641 = 0
+	local var643 = 0
 	
 	if self.user_id ~= nil and self.user_id ~= "" then
-		local var642, var643 = protoModule.writeTag(buff, var641, 1, protoModule.wireTypes.lengthDelimited)
-		var642, var1197 = protoModule.writeString(var642, var643, self.user_id)
-		buff = var642
-		var641 = var643
+		local var644, var645 = protoModule.writeTag(buff, var643, 1, protoModule.wireTypes.lengthDelimited)
+		var644, var1203 = protoModule.writeString(var644, var645, self.user_id)
+		buff = var644
+		var643 = var645
 	end
-	local buff_1 = buffer.create(var641)
-	buffer.copy(buff_1, 0, buff, 0, var641)
+	local buff_1 = buffer.create(var643)
+	buffer.copy(buff_1, 0, buff, 0, var643)
 	
 	return buff_1
 end
 
 function t_23.decode(p23)
 	-- upvalues: t_23 (ref), protoModule (ref)
-	local var641 = t_23.new()
-	local var642 = 0
-	while var642 < buffer.len(p23) do
+	local var643 = t_23.new()
+	local var644 = 0
+	while var644 < buffer.len(p23) do
 		local _ = nil
-		local var643 = nil
-		local var644, var645, var646 = protoModule.readTag(p23, var642)
-		local var647 = var644
-		var643 = var645
-		var642 = var646
+		local var645 = nil
+		local var646, var647, var648 = protoModule.readTag(p23, var644)
+		local var649 = var646
+		var645 = var647
+		var644 = var648
 		
-		if var643 == protoModule.wireTypes.varint then
+		if var645 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var648, var649 = protoModule.readVarInt(p23, var642)
-			local _ = var648
-			var642 = var649
+			local var650, var651 = protoModule.readVarInt(p23, var644)
+			local _ = var650
+			var644 = var651
 			continue
 		end
-		if var643 == protoModule.wireTypes.lengthDelimited then
-			if var647 == 1 then
+		if var645 == protoModule.wireTypes.lengthDelimited then
+			if var649 == 1 then
 				local _ = nil
-				local var650, var651 = protoModule.readBuffer(p23, var642)
-				var642 = var651
-				var641.user_id = buffer.tostring(var650)
+				local var652, var653 = protoModule.readBuffer(p23, var644)
+				var644 = var653
+				var643.user_id = buffer.tostring(var652)
 			else
 				local _ = nil
-				local var652, var653 = protoModule.readVarInt(p23, var642)
-				var642 = var653 + var652
+				local var654, var655 = protoModule.readVarInt(p23, var644)
+				var644 = var655 + var654
 			end
-		elseif var643 == protoModule.wireTypes.i32 then
+		elseif var645 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var654, var655 = protoModule.readFixed32(p23, var642)
-			local _ = var654
-			var642 = var655
-		elseif var643 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var656, var657 = protoModule.readFixed64(p23, var642)
+			local var656, var657 = protoModule.readFixed32(p23, var644)
 			local _ = var656
-			var642 = var657
+			var644 = var657
+		elseif var645 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var658, var659 = protoModule.readFixed64(p23, var644)
+			local _ = var658
+			var644 = var659
 		else
-			error("Unsupported wire type: " .. var1201)
+			error("Unsupported wire type: " .. var1207)
 		end
 	end
-	return var641
+	return var643
 end
 
 function t_23:jsonEncode()
@@ -5225,15 +5255,15 @@ end
 
 function t_23:jsonDecode()
 	-- upvalues: t_23 (ref)
-	local var658 = t_23.new()
+	local var660 = t_23.new()
 	
 	if self.user_id ~= nil then
-		var658.user_id = self.user_id
+		var660.user_id = self.user_id
 	end
 	if self.userId ~= nil then
-		var658.user_id = self.userId
+		var660.user_id = self.userId
 	end
-	return var658
+	return var660
 end
 
 t_23.descriptor = {
@@ -5257,90 +5287,90 @@ end
 function t_24:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var658 = 0
+	local var660 = 0
 	
 	if self.media_items ~= nil and #self.media_items > 0 then
 		for i, v in self.media_items do
-			local var659 = v:encode()
-			local var660, var661 = protoModule.writeTag(buff, var658, 1, protoModule.wireTypes.lengthDelimited)
-			var660, var1222 = protoModule.writeBuffer(var660, var661, var659, buffer.len(var659))
-			buff = var660
-			var658 = var661
+			local var661 = v:encode()
+			local var662, var663 = protoModule.writeTag(buff, var660, 1, protoModule.wireTypes.lengthDelimited)
+			var662, var1228 = protoModule.writeBuffer(var662, var663, var661, buffer.len(var661))
+			buff = var662
+			var660 = var663
 		end
 	end
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var662, var663 = protoModule.writeTag(buff, var658, 2, protoModule.wireTypes.lengthDelimited)
-		var662, var1224 = protoModule.writeString(var662, var663, self.universe_id)
-		buff = var662
-		var658 = var663
+		local var664, var665 = protoModule.writeTag(buff, var660, 2, protoModule.wireTypes.lengthDelimited)
+		var664, var1230 = protoModule.writeString(var664, var665, self.universe_id)
+		buff = var664
+		var660 = var665
 	end
 	if self.place_id ~= nil and self.place_id ~= "" then
-		local var664, var665 = protoModule.writeTag(buff, var658, 3, protoModule.wireTypes.lengthDelimited)
-		var664, var1226 = protoModule.writeString(var664, var665, self.place_id)
-		buff = var664
-		var658 = var665
+		local var666, var667 = protoModule.writeTag(buff, var660, 3, protoModule.wireTypes.lengthDelimited)
+		var666, var1232 = protoModule.writeString(var666, var667, self.place_id)
+		buff = var666
+		var660 = var667
 	end
-	local buff_1 = buffer.create(var658)
-	buffer.copy(buff_1, 0, buff, 0, var658)
+	local buff_1 = buffer.create(var660)
+	buffer.copy(buff_1, 0, buff, 0, var660)
 	
 	return buff_1
 end
 
 function t_24.decode(p24)
 	-- upvalues: t_24 (ref), protoModule (ref), t (ref)
-	local var666 = t_24.new()
-	local var667 = 0
-	while var667 < buffer.len(p24) do
+	local var668 = t_24.new()
+	local var669 = 0
+	while var669 < buffer.len(p24) do
 		local _ = nil
-		local var668 = nil
-		local var669, var670, var671 = protoModule.readTag(p24, var667)
-		local var672 = var669
-		var668 = var670
-		var667 = var671
+		local var670 = nil
+		local var671, var672, var673 = protoModule.readTag(p24, var669)
+		local var674 = var671
+		var670 = var672
+		var669 = var673
 		
-		if var668 == protoModule.wireTypes.varint then
+		if var670 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var673, var674 = protoModule.readVarInt(p24, var667)
-			local _ = var673
-			var667 = var674
+			local var675, var676 = protoModule.readVarInt(p24, var669)
+			local _ = var675
+			var669 = var676
 			continue
 		end
-		if var668 == protoModule.wireTypes.lengthDelimited then
-			if var672 == 1 then
+		if var670 == protoModule.wireTypes.lengthDelimited then
+			if var674 == 1 then
 				local _ = nil
-				local var675, var676 = protoModule.readBuffer(p24, var667)
-				var667 = var676
-				table.insert(var666.media_items, t.ExperienceMediaGalleryInputData_MediaItem.decode(var675))
-			elseif var672 == 2 then
+				local var677, var678 = protoModule.readBuffer(p24, var669)
+				var669 = var678
+				table.insert(var668.media_items, t.ExperienceMediaGalleryInputData_MediaItem.decode(var677))
+			elseif var674 == 2 then
 				local _ = nil
-				local var677, var678 = protoModule.readBuffer(p24, var667)
-				var667 = var678
-				var666.universe_id = buffer.tostring(var677)
-			elseif var672 == 3 then
+				local var679, var680 = protoModule.readBuffer(p24, var669)
+				var669 = var680
+				var668.universe_id = buffer.tostring(var679)
+			elseif var674 == 3 then
 				local _ = nil
-				local var679, var680 = protoModule.readBuffer(p24, var667)
-				var667 = var680
-				var666.place_id = buffer.tostring(var679)
+				local var681, var682 = protoModule.readBuffer(p24, var669)
+				var669 = var682
+				var668.place_id = buffer.tostring(var681)
 			else
 				local _ = nil
-				local var681, var682 = protoModule.readVarInt(p24, var667)
-				var667 = var682 + var681
+				local var683, var684 = protoModule.readVarInt(p24, var669)
+				var669 = var684 + var683
 			end
-		elseif var668 == protoModule.wireTypes.i32 then
+		elseif var670 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var683, var684 = protoModule.readFixed32(p24, var667)
-			local _ = var683
-			var667 = var684
-		elseif var668 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var685, var686 = protoModule.readFixed64(p24, var667)
+			local var685, var686 = protoModule.readFixed32(p24, var669)
 			local _ = var685
-			var667 = var686
+			var669 = var686
+		elseif var670 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var687, var688 = protoModule.readFixed64(p24, var669)
+			local _ = var687
+			var669 = var688
 		else
-			error("Unsupported wire type: " .. var1230)
+			error("Unsupported wire type: " .. var1236)
 		end
 	end
-	return var666
+	return var668
 end
 
 function t_24:jsonEncode()
@@ -5365,7 +5395,7 @@ end
 
 function t_24:jsonDecode()
 	-- upvalues: t_24 (ref), t (ref)
-	local var687 = t_24.new()
+	local var689 = t_24.new()
 	
 	if self.media_items ~= nil then
 		local t_1 = {}
@@ -5373,7 +5403,7 @@ function t_24:jsonDecode()
 		for i, v in self.media_items do
 			table.insert(t_1, t.ExperienceMediaGalleryInputData_MediaItem.jsonDecode(v))
 		end
-		var687.media_items = t_1
+		var689.media_items = t_1
 	end
 	if self.mediaItems ~= nil then
 		local t_1 = {}
@@ -5381,21 +5411,21 @@ function t_24:jsonDecode()
 		for i, v in self.mediaItems do
 			table.insert(t_1, t.ExperienceMediaGalleryInputData_MediaItem.jsonDecode(v))
 		end
-		var687.media_items = t_1
+		var689.media_items = t_1
 	end
 	if self.universe_id ~= nil then
-		var687.universe_id = self.universe_id
+		var689.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var687.universe_id = self.universeId
+		var689.universe_id = self.universeId
 	end
 	if self.place_id ~= nil then
-		var687.place_id = self.place_id
+		var689.place_id = self.place_id
 	end
 	if self.placeId ~= nil then
-		var687.place_id = self.placeId
+		var689.place_id = self.placeId
 	end
-	return var687
+	return var689
 end
 
 t_24.descriptor = {
@@ -5417,65 +5447,65 @@ end
 function t_25:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var688 = 0
+	local var690 = 0
 	
 	if self.media_asset_id ~= nil and self.media_asset_id ~= "" then
-		local var689, var690 = protoModule.writeTag(buff, var688, 1, protoModule.wireTypes.lengthDelimited)
-		var689, var1257 = protoModule.writeString(var689, var690, self.media_asset_id)
-		buff = var689
-		var688 = var690
+		local var691, var692 = protoModule.writeTag(buff, var690, 1, protoModule.wireTypes.lengthDelimited)
+		var691, var1263 = protoModule.writeString(var691, var692, self.media_asset_id)
+		buff = var691
+		var690 = var692
 	end
-	local buff_1 = buffer.create(var688)
-	buffer.copy(buff_1, 0, buff, 0, var688)
+	local buff_1 = buffer.create(var690)
+	buffer.copy(buff_1, 0, buff, 0, var690)
 	
 	return buff_1
 end
 
 function t_25.decode(p25)
 	-- upvalues: t_25 (ref), protoModule (ref)
-	local var688 = t_25.new()
-	local var689 = 0
-	while var689 < buffer.len(p25) do
+	local var690 = t_25.new()
+	local var691 = 0
+	while var691 < buffer.len(p25) do
 		local _ = nil
-		local var690 = nil
-		local var691, var692, var693 = protoModule.readTag(p25, var689)
-		local var694 = var691
-		var690 = var692
-		var689 = var693
+		local var692 = nil
+		local var693, var694, var695 = protoModule.readTag(p25, var691)
+		local var696 = var693
+		var692 = var694
+		var691 = var695
 		
-		if var690 == protoModule.wireTypes.varint then
+		if var692 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var695, var696 = protoModule.readVarInt(p25, var689)
-			local _ = var695
-			var689 = var696
+			local var697, var698 = protoModule.readVarInt(p25, var691)
+			local _ = var697
+			var691 = var698
 			continue
 		end
-		if var690 == protoModule.wireTypes.lengthDelimited then
-			if var694 == 1 then
+		if var692 == protoModule.wireTypes.lengthDelimited then
+			if var696 == 1 then
 				local _ = nil
-				local var697, var698 = protoModule.readBuffer(p25, var689)
-				var689 = var698
-				var688.media_asset_id = buffer.tostring(var697)
+				local var699, var700 = protoModule.readBuffer(p25, var691)
+				var691 = var700
+				var690.media_asset_id = buffer.tostring(var699)
 			else
 				local _ = nil
-				local var699, var700 = protoModule.readVarInt(p25, var689)
-				var689 = var700 + var699
+				local var701, var702 = protoModule.readVarInt(p25, var691)
+				var691 = var702 + var701
 			end
-		elseif var690 == protoModule.wireTypes.i32 then
+		elseif var692 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var701, var702 = protoModule.readFixed32(p25, var689)
-			local _ = var701
-			var689 = var702
-		elseif var690 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var703, var704 = protoModule.readFixed64(p25, var689)
+			local var703, var704 = protoModule.readFixed32(p25, var691)
 			local _ = var703
-			var689 = var704
+			var691 = var704
+		elseif var692 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var705, var706 = protoModule.readFixed64(p25, var691)
+			local _ = var705
+			var691 = var706
 		else
-			error("Unsupported wire type: " .. var1261)
+			error("Unsupported wire type: " .. var1267)
 		end
 	end
-	return var688
+	return var690
 end
 
 function t_25:jsonEncode()
@@ -5489,15 +5519,15 @@ end
 
 function t_25:jsonDecode()
 	-- upvalues: t_25 (ref)
-	local var705 = t_25.new()
+	local var707 = t_25.new()
 	
 	if self.media_asset_id ~= nil then
-		var705.media_asset_id = self.media_asset_id
+		var707.media_asset_id = self.media_asset_id
 	end
 	if self.mediaAssetId ~= nil then
-		var705.media_asset_id = self.mediaAssetId
+		var707.media_asset_id = self.mediaAssetId
 	end
-	return var705
+	return var707
 end
 
 t_25.descriptor = {
@@ -5519,65 +5549,65 @@ end
 function t_26:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var705 = 0
+	local var707 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var706, var707 = protoModule.writeTag(buff, var705, 1, protoModule.wireTypes.lengthDelimited)
-		var706, var1281 = protoModule.writeString(var706, var707, self.universe_id)
-		buff = var706
-		var705 = var707
+		local var708, var709 = protoModule.writeTag(buff, var707, 1, protoModule.wireTypes.lengthDelimited)
+		var708, var1287 = protoModule.writeString(var708, var709, self.universe_id)
+		buff = var708
+		var707 = var709
 	end
-	local buff_1 = buffer.create(var705)
-	buffer.copy(buff_1, 0, buff, 0, var705)
+	local buff_1 = buffer.create(var707)
+	buffer.copy(buff_1, 0, buff, 0, var707)
 	
 	return buff_1
 end
 
 function t_26.decode(p26)
 	-- upvalues: t_26 (ref), protoModule (ref)
-	local var705 = t_26.new()
-	local var706 = 0
-	while var706 < buffer.len(p26) do
+	local var707 = t_26.new()
+	local var708 = 0
+	while var708 < buffer.len(p26) do
 		local _ = nil
-		local var707 = nil
-		local var708, var709, var710 = protoModule.readTag(p26, var706)
-		local var711 = var708
-		var707 = var709
-		var706 = var710
+		local var709 = nil
+		local var710, var711, var712 = protoModule.readTag(p26, var708)
+		local var713 = var710
+		var709 = var711
+		var708 = var712
 		
-		if var707 == protoModule.wireTypes.varint then
+		if var709 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var712, var713 = protoModule.readVarInt(p26, var706)
-			local _ = var712
-			var706 = var713
+			local var714, var715 = protoModule.readVarInt(p26, var708)
+			local _ = var714
+			var708 = var715
 			continue
 		end
-		if var707 == protoModule.wireTypes.lengthDelimited then
-			if var711 == 1 then
+		if var709 == protoModule.wireTypes.lengthDelimited then
+			if var713 == 1 then
 				local _ = nil
-				local var714, var715 = protoModule.readBuffer(p26, var706)
-				var706 = var715
-				var705.universe_id = buffer.tostring(var714)
+				local var716, var717 = protoModule.readBuffer(p26, var708)
+				var708 = var717
+				var707.universe_id = buffer.tostring(var716)
 			else
 				local _ = nil
-				local var716, var717 = protoModule.readVarInt(p26, var706)
-				var706 = var717 + var716
+				local var718, var719 = protoModule.readVarInt(p26, var708)
+				var708 = var719 + var718
 			end
-		elseif var707 == protoModule.wireTypes.i32 then
+		elseif var709 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var718, var719 = protoModule.readFixed32(p26, var706)
-			local _ = var718
-			var706 = var719
-		elseif var707 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var720, var721 = protoModule.readFixed64(p26, var706)
+			local var720, var721 = protoModule.readFixed32(p26, var708)
 			local _ = var720
-			var706 = var721
+			var708 = var721
+		elseif var709 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var722, var723 = protoModule.readFixed64(p26, var708)
+			local _ = var722
+			var708 = var723
 		else
-			error("Unsupported wire type: " .. var1285)
+			error("Unsupported wire type: " .. var1291)
 		end
 	end
-	return var705
+	return var707
 end
 
 function t_26:jsonEncode()
@@ -5591,15 +5621,15 @@ end
 
 function t_26:jsonDecode()
 	-- upvalues: t_26 (ref)
-	local var722 = t_26.new()
+	local var724 = t_26.new()
 	
 	if self.universe_id ~= nil then
-		var722.universe_id = self.universe_id
+		var724.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var722.universe_id = self.universeId
+		var724.universe_id = self.universeId
 	end
-	return var722
+	return var724
 end
 
 t_26.descriptor = {
@@ -5621,65 +5651,65 @@ end
 function t_27:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var722 = 0
+	local var724 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var723, var724 = protoModule.writeTag(buff, var722, 1, protoModule.wireTypes.lengthDelimited)
-		var723, var1305 = protoModule.writeString(var723, var724, self.universe_id)
-		buff = var723
-		var722 = var724
+		local var725, var726 = protoModule.writeTag(buff, var724, 1, protoModule.wireTypes.lengthDelimited)
+		var725, var1311 = protoModule.writeString(var725, var726, self.universe_id)
+		buff = var725
+		var724 = var726
 	end
-	local buff_1 = buffer.create(var722)
-	buffer.copy(buff_1, 0, buff, 0, var722)
+	local buff_1 = buffer.create(var724)
+	buffer.copy(buff_1, 0, buff, 0, var724)
 	
 	return buff_1
 end
 
 function t_27.decode(p27)
 	-- upvalues: t_27 (ref), protoModule (ref)
-	local var722 = t_27.new()
-	local var723 = 0
-	while var723 < buffer.len(p27) do
+	local var724 = t_27.new()
+	local var725 = 0
+	while var725 < buffer.len(p27) do
 		local _ = nil
-		local var724 = nil
-		local var725, var726, var727 = protoModule.readTag(p27, var723)
-		local var728 = var725
-		var724 = var726
-		var723 = var727
+		local var726 = nil
+		local var727, var728, var729 = protoModule.readTag(p27, var725)
+		local var730 = var727
+		var726 = var728
+		var725 = var729
 		
-		if var724 == protoModule.wireTypes.varint then
+		if var726 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var729, var730 = protoModule.readVarInt(p27, var723)
-			local _ = var729
-			var723 = var730
+			local var731, var732 = protoModule.readVarInt(p27, var725)
+			local _ = var731
+			var725 = var732
 			continue
 		end
-		if var724 == protoModule.wireTypes.lengthDelimited then
-			if var728 == 1 then
+		if var726 == protoModule.wireTypes.lengthDelimited then
+			if var730 == 1 then
 				local _ = nil
-				local var731, var732 = protoModule.readBuffer(p27, var723)
-				var723 = var732
-				var722.universe_id = buffer.tostring(var731)
+				local var733, var734 = protoModule.readBuffer(p27, var725)
+				var725 = var734
+				var724.universe_id = buffer.tostring(var733)
 			else
 				local _ = nil
-				local var733, var734 = protoModule.readVarInt(p27, var723)
-				var723 = var734 + var733
+				local var735, var736 = protoModule.readVarInt(p27, var725)
+				var725 = var736 + var735
 			end
-		elseif var724 == protoModule.wireTypes.i32 then
+		elseif var726 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var735, var736 = protoModule.readFixed32(p27, var723)
-			local _ = var735
-			var723 = var736
-		elseif var724 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var737, var738 = protoModule.readFixed64(p27, var723)
+			local var737, var738 = protoModule.readFixed32(p27, var725)
 			local _ = var737
-			var723 = var738
+			var725 = var738
+		elseif var726 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var739, var740 = protoModule.readFixed64(p27, var725)
+			local _ = var739
+			var725 = var740
 		else
-			error("Unsupported wire type: " .. var1309)
+			error("Unsupported wire type: " .. var1315)
 		end
 	end
-	return var722
+	return var724
 end
 
 function t_27:jsonEncode()
@@ -5693,15 +5723,15 @@ end
 
 function t_27:jsonDecode()
 	-- upvalues: t_27 (ref)
-	local var739 = t_27.new()
+	local var741 = t_27.new()
 	
 	if self.universe_id ~= nil then
-		var739.universe_id = self.universe_id
+		var741.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var739.universe_id = self.universeId
+		var741.universe_id = self.universeId
 	end
-	return var739
+	return var741
 end
 
 t_27.descriptor = {
@@ -5727,110 +5757,110 @@ end
 function t_28:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var739 = 0
+	local var741 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var740, var741 = protoModule.writeTag(buff, var739, 1, protoModule.wireTypes.lengthDelimited)
-		var740, var1329 = protoModule.writeString(var740, var741, self.universe_id)
-		buff = var740
-		var739 = var741
+		local var742, var743 = protoModule.writeTag(buff, var741, 1, protoModule.wireTypes.lengthDelimited)
+		var742, var1335 = protoModule.writeString(var742, var743, self.universe_id)
+		buff = var742
+		var741 = var743
 	end
 	if self.has_store_items then
-		local var742, var743 = protoModule.writeTag(buff, var739, 2, protoModule.wireTypes.varint)
-		var742, var1331 = protoModule.writeVarInt(var742, var743, if self.has_store_items then 1 else 0)
-		buff = var742
-		var739 = var743
+		local var744, var745 = protoModule.writeTag(buff, var741, 2, protoModule.wireTypes.varint)
+		var744, var1337 = protoModule.writeVarInt(var744, var745, if self.has_store_items then 1 else 0)
+		buff = var744
+		var741 = var745
 	end
 	if self.has_badges then
-		local var744, var745 = protoModule.writeTag(buff, var739, 3, protoModule.wireTypes.varint)
-		var744, var1333 = protoModule.writeVarInt(var744, var745, if self.has_badges then 1 else 0)
-		buff = var744
-		var739 = var745
+		local var746, var747 = protoModule.writeTag(buff, var741, 3, protoModule.wireTypes.varint)
+		var746, var1339 = protoModule.writeVarInt(var746, var747, if self.has_badges then 1 else 0)
+		buff = var746
+		var741 = var747
 	end
 	if self.has_game_passes then
-		local var746, var747 = protoModule.writeTag(buff, var739, 4, protoModule.wireTypes.varint)
-		var746, var1335 = protoModule.writeVarInt(var746, var747, if self.has_game_passes then 1 else 0)
-		buff = var746
-		var739 = var747
+		local var748, var749 = protoModule.writeTag(buff, var741, 4, protoModule.wireTypes.varint)
+		var748, var1341 = protoModule.writeVarInt(var748, var749, if self.has_game_passes then 1 else 0)
+		buff = var748
+		var741 = var749
 	end
 	if self.community_id ~= nil and self.community_id ~= "" then
-		local var748, var749 = protoModule.writeTag(buff, var739, 5, protoModule.wireTypes.lengthDelimited)
-		var748, var1337 = protoModule.writeString(var748, var749, self.community_id)
-		buff = var748
-		var739 = var749
+		local var750, var751 = protoModule.writeTag(buff, var741, 5, protoModule.wireTypes.lengthDelimited)
+		var750, var1343 = protoModule.writeString(var750, var751, self.community_id)
+		buff = var750
+		var741 = var751
 	end
-	local buff_1 = buffer.create(var739)
-	buffer.copy(buff_1, 0, buff, 0, var739)
+	local buff_1 = buffer.create(var741)
+	buffer.copy(buff_1, 0, buff, 0, var741)
 	
 	return buff_1
 end
 
 function t_28.decode(p28)
 	-- upvalues: t_28 (ref), protoModule (ref)
-	local var739 = t_28.new()
-	local var740 = 0
-	while var740 < buffer.len(p28) do
+	local var741 = t_28.new()
+	local var742 = 0
+	while var742 < buffer.len(p28) do
 		local _ = nil
-		local var741 = nil
-		local var742, var743, var744 = protoModule.readTag(p28, var740)
-		local var745 = var742
-		var741 = var743
-		var740 = var744
+		local var743 = nil
+		local var744, var745, var746 = protoModule.readTag(p28, var742)
+		local var747 = var744
+		var743 = var745
+		var742 = var746
 		
-		if var741 == protoModule.wireTypes.varint then
-			if var745 == 2 then
+		if var743 == protoModule.wireTypes.varint then
+			if var747 == 2 then
 				local _ = nil
-				local var746, var747 = protoModule.readVarInt(p28, var740)
-				var740 = var747
-				var739.has_store_items = var746 ~= 0
-			elseif var745 == 3 then
+				local var748, var749 = protoModule.readVarInt(p28, var742)
+				var742 = var749
+				var741.has_store_items = var748 ~= 0
+			elseif var747 == 3 then
 				local _ = nil
-				local var748, var749 = protoModule.readVarInt(p28, var740)
-				var740 = var749
-				var739.has_badges = var748 ~= 0
-			elseif var745 == 4 then
+				local var750, var751 = protoModule.readVarInt(p28, var742)
+				var742 = var751
+				var741.has_badges = var750 ~= 0
+			elseif var747 == 4 then
 				local _ = nil
-				local var750, var751 = protoModule.readVarInt(p28, var740)
-				var740 = var751
-				var739.has_game_passes = var750 ~= 0
+				local var752, var753 = protoModule.readVarInt(p28, var742)
+				var742 = var753
+				var741.has_game_passes = var752 ~= 0
 			else
 				local _ = nil
-				local var752, var753 = protoModule.readVarInt(p28, var740)
-				local _ = var752
-				var740 = var753
+				local var754, var755 = protoModule.readVarInt(p28, var742)
+				local _ = var754
+				var742 = var755
 			end
 		end
-		if var741 == protoModule.wireTypes.lengthDelimited then
-			if var745 == 1 then
+		if var743 == protoModule.wireTypes.lengthDelimited then
+			if var747 == 1 then
 				local _ = nil
-				local var754, var755 = protoModule.readBuffer(p28, var740)
-				var740 = var755
-				var739.universe_id = buffer.tostring(var754)
-			elseif var745 == 5 then
+				local var756, var757 = protoModule.readBuffer(p28, var742)
+				var742 = var757
+				var741.universe_id = buffer.tostring(var756)
+			elseif var747 == 5 then
 				local _ = nil
-				local var756, var757 = protoModule.readBuffer(p28, var740)
-				var740 = var757
-				var739.community_id = buffer.tostring(var756)
+				local var758, var759 = protoModule.readBuffer(p28, var742)
+				var742 = var759
+				var741.community_id = buffer.tostring(var758)
 			else
 				local _ = nil
-				local var758, var759 = protoModule.readVarInt(p28, var740)
-				var740 = var759 + var758
+				local var760, var761 = protoModule.readVarInt(p28, var742)
+				var742 = var761 + var760
 			end
-		elseif var741 == protoModule.wireTypes.i32 then
+		elseif var743 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var760, var761 = protoModule.readFixed32(p28, var740)
-			local _ = var760
-			var740 = var761
-		elseif var741 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var762, var763 = protoModule.readFixed64(p28, var740)
+			local var762, var763 = protoModule.readFixed32(p28, var742)
 			local _ = var762
-			var740 = var763
+			var742 = var763
+		elseif var743 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var764, var765 = protoModule.readFixed64(p28, var742)
+			local _ = var764
+			var742 = var765
 		else
-			error("Unsupported wire type: " .. var1341)
+			error("Unsupported wire type: " .. var1347)
 		end
 	end
-	return var739
+	return var741
 end
 
 function t_28:jsonEncode()
@@ -5856,39 +5886,39 @@ end
 
 function t_28:jsonDecode()
 	-- upvalues: t_28 (ref)
-	local var764 = t_28.new()
+	local var766 = t_28.new()
 	
 	if self.universe_id ~= nil then
-		var764.universe_id = self.universe_id
+		var766.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var764.universe_id = self.universeId
+		var766.universe_id = self.universeId
 	end
 	if self.has_store_items ~= nil then
-		var764.has_store_items = self.has_store_items
+		var766.has_store_items = self.has_store_items
 	end
 	if self.hasStoreItems ~= nil then
-		var764.has_store_items = self.hasStoreItems
+		var766.has_store_items = self.hasStoreItems
 	end
 	if self.has_badges ~= nil then
-		var764.has_badges = self.has_badges
+		var766.has_badges = self.has_badges
 	end
 	if self.hasBadges ~= nil then
-		var764.has_badges = self.hasBadges
+		var766.has_badges = self.hasBadges
 	end
 	if self.has_game_passes ~= nil then
-		var764.has_game_passes = self.has_game_passes
+		var766.has_game_passes = self.has_game_passes
 	end
 	if self.hasGamePasses ~= nil then
-		var764.has_game_passes = self.hasGamePasses
+		var766.has_game_passes = self.hasGamePasses
 	end
 	if self.community_id ~= nil then
-		var764.community_id = self.community_id
+		var766.community_id = self.community_id
 	end
 	if self.communityId ~= nil then
-		var764.community_id = self.communityId
+		var766.community_id = self.communityId
 	end
-	return var764
+	return var766
 end
 
 t_28.descriptor = {
@@ -5910,65 +5940,65 @@ end
 function t_29:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var764 = 0
+	local var766 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var765, var766 = protoModule.writeTag(buff, var764, 1, protoModule.wireTypes.lengthDelimited)
-		var765, var1369 = protoModule.writeString(var765, var766, self.universe_id)
-		buff = var765
-		var764 = var766
+		local var767, var768 = protoModule.writeTag(buff, var766, 1, protoModule.wireTypes.lengthDelimited)
+		var767, var1375 = protoModule.writeString(var767, var768, self.universe_id)
+		buff = var767
+		var766 = var768
 	end
-	local buff_1 = buffer.create(var764)
-	buffer.copy(buff_1, 0, buff, 0, var764)
+	local buff_1 = buffer.create(var766)
+	buffer.copy(buff_1, 0, buff, 0, var766)
 	
 	return buff_1
 end
 
 function t_29.decode(p29)
 	-- upvalues: t_29 (ref), protoModule (ref)
-	local var764 = t_29.new()
-	local var765 = 0
-	while var765 < buffer.len(p29) do
+	local var766 = t_29.new()
+	local var767 = 0
+	while var767 < buffer.len(p29) do
 		local _ = nil
-		local var766 = nil
-		local var767, var768, var769 = protoModule.readTag(p29, var765)
-		local var770 = var767
-		var766 = var768
-		var765 = var769
+		local var768 = nil
+		local var769, var770, var771 = protoModule.readTag(p29, var767)
+		local var772 = var769
+		var768 = var770
+		var767 = var771
 		
-		if var766 == protoModule.wireTypes.varint then
+		if var768 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var771, var772 = protoModule.readVarInt(p29, var765)
-			local _ = var771
-			var765 = var772
+			local var773, var774 = protoModule.readVarInt(p29, var767)
+			local _ = var773
+			var767 = var774
 			continue
 		end
-		if var766 == protoModule.wireTypes.lengthDelimited then
-			if var770 == 1 then
+		if var768 == protoModule.wireTypes.lengthDelimited then
+			if var772 == 1 then
 				local _ = nil
-				local var773, var774 = protoModule.readBuffer(p29, var765)
-				var765 = var774
-				var764.universe_id = buffer.tostring(var773)
+				local var775, var776 = protoModule.readBuffer(p29, var767)
+				var767 = var776
+				var766.universe_id = buffer.tostring(var775)
 			else
 				local _ = nil
-				local var775, var776 = protoModule.readVarInt(p29, var765)
-				var765 = var776 + var775
+				local var777, var778 = protoModule.readVarInt(p29, var767)
+				var767 = var778 + var777
 			end
-		elseif var766 == protoModule.wireTypes.i32 then
+		elseif var768 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var777, var778 = protoModule.readFixed32(p29, var765)
-			local _ = var777
-			var765 = var778
-		elseif var766 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var779, var780 = protoModule.readFixed64(p29, var765)
+			local var779, var780 = protoModule.readFixed32(p29, var767)
 			local _ = var779
-			var765 = var780
+			var767 = var780
+		elseif var768 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var781, var782 = protoModule.readFixed64(p29, var767)
+			local _ = var781
+			var767 = var782
 		else
-			error("Unsupported wire type: " .. var1373)
+			error("Unsupported wire type: " .. var1379)
 		end
 	end
-	return var764
+	return var766
 end
 
 function t_29:jsonEncode()
@@ -5982,15 +6012,15 @@ end
 
 function t_29:jsonDecode()
 	-- upvalues: t_29 (ref)
-	local var781 = t_29.new()
+	local var783 = t_29.new()
 	
 	if self.universe_id ~= nil then
-		var781.universe_id = self.universe_id
+		var783.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var781.universe_id = self.universeId
+		var783.universe_id = self.universeId
 	end
-	return var781
+	return var783
 end
 
 t_29.descriptor = {
@@ -6013,77 +6043,77 @@ end
 function t_30:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var781 = 0
+	local var783 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var782, var783 = protoModule.writeTag(buff, var781, 1, protoModule.wireTypes.lengthDelimited)
-		var782, var1393 = protoModule.writeString(var782, var783, self.universe_id)
-		buff = var782
-		var781 = var783
+		local var784, var785 = protoModule.writeTag(buff, var783, 1, protoModule.wireTypes.lengthDelimited)
+		var784, var1399 = protoModule.writeString(var784, var785, self.universe_id)
+		buff = var784
+		var783 = var785
 	end
 	if self.user_owns_experience then
-		local var784, var785 = protoModule.writeTag(buff, var781, 2, protoModule.wireTypes.varint)
-		var784, var1395 = protoModule.writeVarInt(var784, var785, if self.user_owns_experience then 1 else 0)
-		buff = var784
-		var781 = var785
+		local var786, var787 = protoModule.writeTag(buff, var783, 2, protoModule.wireTypes.varint)
+		var786, var1401 = protoModule.writeVarInt(var786, var787, if self.user_owns_experience then 1 else 0)
+		buff = var786
+		var783 = var787
 	end
-	local buff_1 = buffer.create(var781)
-	buffer.copy(buff_1, 0, buff, 0, var781)
+	local buff_1 = buffer.create(var783)
+	buffer.copy(buff_1, 0, buff, 0, var783)
 	
 	return buff_1
 end
 
 function t_30.decode(p30)
 	-- upvalues: t_30 (ref), protoModule (ref)
-	local var781 = t_30.new()
-	local var782 = 0
-	while var782 < buffer.len(p30) do
+	local var783 = t_30.new()
+	local var784 = 0
+	while var784 < buffer.len(p30) do
 		local _ = nil
-		local var783 = nil
-		local var784, var785, var786 = protoModule.readTag(p30, var782)
-		local var787 = var784
-		var783 = var785
-		var782 = var786
+		local var785 = nil
+		local var786, var787, var788 = protoModule.readTag(p30, var784)
+		local var789 = var786
+		var785 = var787
+		var784 = var788
 		
-		if var783 == protoModule.wireTypes.varint then
-			if var787 == 2 then
+		if var785 == protoModule.wireTypes.varint then
+			if var789 == 2 then
 				local _ = nil
-				local var788, var789 = protoModule.readVarInt(p30, var782)
-				var782 = var789
-				var781.user_owns_experience = var788 ~= 0
+				local var790, var791 = protoModule.readVarInt(p30, var784)
+				var784 = var791
+				var783.user_owns_experience = var790 ~= 0
 			else
 				local _ = nil
-				local var790, var791 = protoModule.readVarInt(p30, var782)
-				local _ = var790
-				var782 = var791
+				local var792, var793 = protoModule.readVarInt(p30, var784)
+				local _ = var792
+				var784 = var793
 			end
 		end
-		if var783 == protoModule.wireTypes.lengthDelimited then
-			if var787 == 1 then
+		if var785 == protoModule.wireTypes.lengthDelimited then
+			if var789 == 1 then
 				local _ = nil
-				local var792, var793 = protoModule.readBuffer(p30, var782)
-				var782 = var793
-				var781.universe_id = buffer.tostring(var792)
+				local var794, var795 = protoModule.readBuffer(p30, var784)
+				var784 = var795
+				var783.universe_id = buffer.tostring(var794)
 			else
 				local _ = nil
-				local var794, var795 = protoModule.readVarInt(p30, var782)
-				var782 = var795 + var794
+				local var796, var797 = protoModule.readVarInt(p30, var784)
+				var784 = var797 + var796
 			end
-		elseif var783 == protoModule.wireTypes.i32 then
+		elseif var785 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var796, var797 = protoModule.readFixed32(p30, var782)
-			local _ = var796
-			var782 = var797
-		elseif var783 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var798, var799 = protoModule.readFixed64(p30, var782)
+			local var798, var799 = protoModule.readFixed32(p30, var784)
 			local _ = var798
-			var782 = var799
+			var784 = var799
+		elseif var785 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var800, var801 = protoModule.readFixed64(p30, var784)
+			local _ = var800
+			var784 = var801
 		else
-			error("Unsupported wire type: " .. var1399)
+			error("Unsupported wire type: " .. var1405)
 		end
 	end
-	return var781
+	return var783
 end
 
 function t_30:jsonEncode()
@@ -6100,21 +6130,21 @@ end
 
 function t_30:jsonDecode()
 	-- upvalues: t_30 (ref)
-	local var800 = t_30.new()
+	local var802 = t_30.new()
 	
 	if self.universe_id ~= nil then
-		var800.universe_id = self.universe_id
+		var802.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var800.universe_id = self.universeId
+		var802.universe_id = self.universeId
 	end
 	if self.user_owns_experience ~= nil then
-		var800.user_owns_experience = self.user_owns_experience
+		var802.user_owns_experience = self.user_owns_experience
 	end
 	if self.userOwnsExperience ~= nil then
-		var800.user_owns_experience = self.userOwnsExperience
+		var802.user_owns_experience = self.userOwnsExperience
 	end
-	return var800
+	return var802
 end
 
 t_30.descriptor = {
@@ -6137,76 +6167,76 @@ end
 function t_31:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var800 = 0
+	local var802 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var801, var802 = protoModule.writeTag(buff, var800, 1, protoModule.wireTypes.lengthDelimited)
-		var801, var1421 = protoModule.writeString(var801, var802, self.universe_id)
-		buff = var801
-		var800 = var802
+		local var803, var804 = protoModule.writeTag(buff, var802, 1, protoModule.wireTypes.lengthDelimited)
+		var803, var1427 = protoModule.writeString(var803, var804, self.universe_id)
+		buff = var803
+		var802 = var804
 	end
 	if self.place_id ~= nil and self.place_id ~= "" then
-		local var803, var804 = protoModule.writeTag(buff, var800, 2, protoModule.wireTypes.lengthDelimited)
-		var803, var1423 = protoModule.writeString(var803, var804, self.place_id)
-		buff = var803
-		var800 = var804
+		local var805, var806 = protoModule.writeTag(buff, var802, 2, protoModule.wireTypes.lengthDelimited)
+		var805, var1429 = protoModule.writeString(var805, var806, self.place_id)
+		buff = var805
+		var802 = var806
 	end
-	local buff_1 = buffer.create(var800)
-	buffer.copy(buff_1, 0, buff, 0, var800)
+	local buff_1 = buffer.create(var802)
+	buffer.copy(buff_1, 0, buff, 0, var802)
 	
 	return buff_1
 end
 
 function t_31.decode(p31)
 	-- upvalues: t_31 (ref), protoModule (ref)
-	local var800 = t_31.new()
-	local var801 = 0
-	while var801 < buffer.len(p31) do
+	local var802 = t_31.new()
+	local var803 = 0
+	while var803 < buffer.len(p31) do
 		local _ = nil
-		local var802 = nil
-		local var803, var804, var805 = protoModule.readTag(p31, var801)
-		local var806 = var803
-		var802 = var804
-		var801 = var805
+		local var804 = nil
+		local var805, var806, var807 = protoModule.readTag(p31, var803)
+		local var808 = var805
+		var804 = var806
+		var803 = var807
 		
-		if var802 == protoModule.wireTypes.varint then
+		if var804 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var807, var808 = protoModule.readVarInt(p31, var801)
-			local _ = var807
-			var801 = var808
+			local var809, var810 = protoModule.readVarInt(p31, var803)
+			local _ = var809
+			var803 = var810
 			continue
 		end
-		if var802 == protoModule.wireTypes.lengthDelimited then
-			if var806 == 1 then
+		if var804 == protoModule.wireTypes.lengthDelimited then
+			if var808 == 1 then
 				local _ = nil
-				local var809, var810 = protoModule.readBuffer(p31, var801)
-				var801 = var810
-				var800.universe_id = buffer.tostring(var809)
-			elseif var806 == 2 then
+				local var811, var812 = protoModule.readBuffer(p31, var803)
+				var803 = var812
+				var802.universe_id = buffer.tostring(var811)
+			elseif var808 == 2 then
 				local _ = nil
-				local var811, var812 = protoModule.readBuffer(p31, var801)
-				var801 = var812
-				var800.place_id = buffer.tostring(var811)
+				local var813, var814 = protoModule.readBuffer(p31, var803)
+				var803 = var814
+				var802.place_id = buffer.tostring(var813)
 			else
 				local _ = nil
-				local var813, var814 = protoModule.readVarInt(p31, var801)
-				var801 = var814 + var813
+				local var815, var816 = protoModule.readVarInt(p31, var803)
+				var803 = var816 + var815
 			end
-		elseif var802 == protoModule.wireTypes.i32 then
+		elseif var804 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var815, var816 = protoModule.readFixed32(p31, var801)
-			local _ = var815
-			var801 = var816
-		elseif var802 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var817, var818 = protoModule.readFixed64(p31, var801)
+			local var817, var818 = protoModule.readFixed32(p31, var803)
 			local _ = var817
-			var801 = var818
+			var803 = var818
+		elseif var804 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var819, var820 = protoModule.readFixed64(p31, var803)
+			local _ = var819
+			var803 = var820
 		else
-			error("Unsupported wire type: " .. var1427)
+			error("Unsupported wire type: " .. var1433)
 		end
 	end
-	return var800
+	return var802
 end
 
 function t_31:jsonEncode()
@@ -6223,21 +6253,21 @@ end
 
 function t_31:jsonDecode()
 	-- upvalues: t_31 (ref)
-	local var819 = t_31.new()
+	local var821 = t_31.new()
 	
 	if self.universe_id ~= nil then
-		var819.universe_id = self.universe_id
+		var821.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var819.universe_id = self.universeId
+		var821.universe_id = self.universeId
 	end
 	if self.place_id ~= nil then
-		var819.place_id = self.place_id
+		var821.place_id = self.place_id
 	end
 	if self.placeId ~= nil then
-		var819.place_id = self.placeId
+		var821.place_id = self.placeId
 	end
-	return var819
+	return var821
 end
 
 t_31.descriptor = {
@@ -6259,65 +6289,65 @@ end
 function t_32:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var819 = 0
+	local var821 = 0
 	
 	if self.community_id ~= nil and self.community_id ~= "" then
-		local var820, var821 = protoModule.writeTag(buff, var819, 1, protoModule.wireTypes.lengthDelimited)
-		var820, var1449 = protoModule.writeString(var820, var821, self.community_id)
-		buff = var820
-		var819 = var821
+		local var822, var823 = protoModule.writeTag(buff, var821, 1, protoModule.wireTypes.lengthDelimited)
+		var822, var1455 = protoModule.writeString(var822, var823, self.community_id)
+		buff = var822
+		var821 = var823
 	end
-	local buff_1 = buffer.create(var819)
-	buffer.copy(buff_1, 0, buff, 0, var819)
+	local buff_1 = buffer.create(var821)
+	buffer.copy(buff_1, 0, buff, 0, var821)
 	
 	return buff_1
 end
 
 function t_32.decode(p32)
 	-- upvalues: t_32 (ref), protoModule (ref)
-	local var819 = t_32.new()
-	local var820 = 0
-	while var820 < buffer.len(p32) do
+	local var821 = t_32.new()
+	local var822 = 0
+	while var822 < buffer.len(p32) do
 		local _ = nil
-		local var821 = nil
-		local var822, var823, var824 = protoModule.readTag(p32, var820)
-		local var825 = var822
-		var821 = var823
-		var820 = var824
+		local var823 = nil
+		local var824, var825, var826 = protoModule.readTag(p32, var822)
+		local var827 = var824
+		var823 = var825
+		var822 = var826
 		
-		if var821 == protoModule.wireTypes.varint then
+		if var823 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var826, var827 = protoModule.readVarInt(p32, var820)
-			local _ = var826
-			var820 = var827
+			local var828, var829 = protoModule.readVarInt(p32, var822)
+			local _ = var828
+			var822 = var829
 			continue
 		end
-		if var821 == protoModule.wireTypes.lengthDelimited then
-			if var825 == 1 then
+		if var823 == protoModule.wireTypes.lengthDelimited then
+			if var827 == 1 then
 				local _ = nil
-				local var828, var829 = protoModule.readBuffer(p32, var820)
-				var820 = var829
-				var819.community_id = buffer.tostring(var828)
+				local var830, var831 = protoModule.readBuffer(p32, var822)
+				var822 = var831
+				var821.community_id = buffer.tostring(var830)
 			else
 				local _ = nil
-				local var830, var831 = protoModule.readVarInt(p32, var820)
-				var820 = var831 + var830
+				local var832, var833 = protoModule.readVarInt(p32, var822)
+				var822 = var833 + var832
 			end
-		elseif var821 == protoModule.wireTypes.i32 then
+		elseif var823 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var832, var833 = protoModule.readFixed32(p32, var820)
-			local _ = var832
-			var820 = var833
-		elseif var821 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var834, var835 = protoModule.readFixed64(p32, var820)
+			local var834, var835 = protoModule.readFixed32(p32, var822)
 			local _ = var834
-			var820 = var835
+			var822 = var835
+		elseif var823 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var836, var837 = protoModule.readFixed64(p32, var822)
+			local _ = var836
+			var822 = var837
 		else
-			error("Unsupported wire type: " .. var1453)
+			error("Unsupported wire type: " .. var1459)
 		end
 	end
-	return var819
+	return var821
 end
 
 function t_32:jsonEncode()
@@ -6331,15 +6361,15 @@ end
 
 function t_32:jsonDecode()
 	-- upvalues: t_32 (ref)
-	local var836 = t_32.new()
+	local var838 = t_32.new()
 	
 	if self.community_id ~= nil then
-		var836.community_id = self.community_id
+		var838.community_id = self.community_id
 	end
 	if self.communityId ~= nil then
-		var836.community_id = self.communityId
+		var838.community_id = self.communityId
 	end
-	return var836
+	return var838
 end
 
 t_32.descriptor = {
@@ -6361,68 +6391,68 @@ end
 function t_33:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var836 = 0
+	local var838 = 0
 	
 	if self.social_link_items ~= nil and #self.social_link_items > 0 then
 		for i, v in self.social_link_items do
-			local var837 = v:encode()
-			local var838, var839 = protoModule.writeTag(buff, var836, 1, protoModule.wireTypes.lengthDelimited)
-			var838, var1474 = protoModule.writeBuffer(var838, var839, var837, buffer.len(var837))
-			buff = var838
-			var836 = var839
+			local var839 = v:encode()
+			local var840, var841 = protoModule.writeTag(buff, var838, 1, protoModule.wireTypes.lengthDelimited)
+			var840, var1480 = protoModule.writeBuffer(var840, var841, var839, buffer.len(var839))
+			buff = var840
+			var838 = var841
 		end
 	end
-	local buff_1 = buffer.create(var836)
-	buffer.copy(buff_1, 0, buff, 0, var836)
+	local buff_1 = buffer.create(var838)
+	buffer.copy(buff_1, 0, buff, 0, var838)
 	
 	return buff_1
 end
 
 function t_33.decode(p33)
 	-- upvalues: t_33 (ref), protoModule (ref), t (ref)
-	local var840 = t_33.new()
-	local var841 = 0
-	while var841 < buffer.len(p33) do
+	local var842 = t_33.new()
+	local var843 = 0
+	while var843 < buffer.len(p33) do
 		local _ = nil
-		local var842 = nil
-		local var843, var844, var845 = protoModule.readTag(p33, var841)
-		local var846 = var843
-		var842 = var844
-		var841 = var845
+		local var844 = nil
+		local var845, var846, var847 = protoModule.readTag(p33, var843)
+		local var848 = var845
+		var844 = var846
+		var843 = var847
 		
-		if var842 == protoModule.wireTypes.varint then
+		if var844 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var847, var848 = protoModule.readVarInt(p33, var841)
-			local _ = var847
-			var841 = var848
+			local var849, var850 = protoModule.readVarInt(p33, var843)
+			local _ = var849
+			var843 = var850
 			continue
 		end
-		if var842 == protoModule.wireTypes.lengthDelimited then
-			if var846 == 1 then
+		if var844 == protoModule.wireTypes.lengthDelimited then
+			if var848 == 1 then
 				local _ = nil
-				local var849, var850 = protoModule.readBuffer(p33, var841)
-				var841 = var850
-				table.insert(var840.social_link_items, t.SocialLinkRowInputData_SocialLinkItem.decode(var849))
+				local var851, var852 = protoModule.readBuffer(p33, var843)
+				var843 = var852
+				table.insert(var842.social_link_items, t.SocialLinkRowInputData_SocialLinkItem.decode(var851))
 			else
 				local _ = nil
-				local var851, var852 = protoModule.readVarInt(p33, var841)
-				var841 = var852 + var851
+				local var853, var854 = protoModule.readVarInt(p33, var843)
+				var843 = var854 + var853
 			end
-		elseif var842 == protoModule.wireTypes.i32 then
+		elseif var844 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var853, var854 = protoModule.readFixed32(p33, var841)
-			local _ = var853
-			var841 = var854
-		elseif var842 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var855, var856 = protoModule.readFixed64(p33, var841)
+			local var855, var856 = protoModule.readFixed32(p33, var843)
 			local _ = var855
-			var841 = var856
+			var843 = var856
+		elseif var844 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var857, var858 = protoModule.readFixed64(p33, var843)
+			local _ = var857
+			var843 = var858
 		else
-			error("Unsupported wire type: " .. var1478)
+			error("Unsupported wire type: " .. var1484)
 		end
 	end
-	return var840
+	return var842
 end
 
 function t_33:jsonEncode()
@@ -6441,7 +6471,7 @@ end
 
 function t_33:jsonDecode()
 	-- upvalues: t_33 (ref), t (ref)
-	local var857 = t_33.new()
+	local var859 = t_33.new()
 	
 	if self.social_link_items ~= nil then
 		local t_1 = {}
@@ -6449,7 +6479,7 @@ function t_33:jsonDecode()
 		for i, v in self.social_link_items do
 			table.insert(t_1, t.SocialLinkRowInputData_SocialLinkItem.jsonDecode(v))
 		end
-		var857.social_link_items = t_1
+		var859.social_link_items = t_1
 	end
 	if self.socialLinkItems ~= nil then
 		local t_1 = {}
@@ -6457,9 +6487,9 @@ function t_33:jsonDecode()
 		for i, v in self.socialLinkItems do
 			table.insert(t_1, t.SocialLinkRowInputData_SocialLinkItem.jsonDecode(v))
 		end
-		var857.social_link_items = t_1
+		var859.social_link_items = t_1
 	end
-	return var857
+	return var859
 end
 
 t_33.descriptor = {
@@ -6481,65 +6511,65 @@ end
 function t_34:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var858 = 0
+	local var860 = 0
 	
 	if self.social_link_id ~= nil and self.social_link_id ~= "" then
-		local var859, var860 = protoModule.writeTag(buff, var858, 1, protoModule.wireTypes.lengthDelimited)
-		var859, var1501 = protoModule.writeString(var859, var860, self.social_link_id)
-		buff = var859
-		var858 = var860
+		local var861, var862 = protoModule.writeTag(buff, var860, 1, protoModule.wireTypes.lengthDelimited)
+		var861, var1507 = protoModule.writeString(var861, var862, self.social_link_id)
+		buff = var861
+		var860 = var862
 	end
-	local buff_1 = buffer.create(var858)
-	buffer.copy(buff_1, 0, buff, 0, var858)
+	local buff_1 = buffer.create(var860)
+	buffer.copy(buff_1, 0, buff, 0, var860)
 	
 	return buff_1
 end
 
 function t_34.decode(p34)
 	-- upvalues: t_34 (ref), protoModule (ref)
-	local var858 = t_34.new()
-	local var859 = 0
-	while var859 < buffer.len(p34) do
+	local var860 = t_34.new()
+	local var861 = 0
+	while var861 < buffer.len(p34) do
 		local _ = nil
-		local var860 = nil
-		local var861, var862, var863 = protoModule.readTag(p34, var859)
-		local var864 = var861
-		var860 = var862
-		var859 = var863
+		local var862 = nil
+		local var863, var864, var865 = protoModule.readTag(p34, var861)
+		local var866 = var863
+		var862 = var864
+		var861 = var865
 		
-		if var860 == protoModule.wireTypes.varint then
+		if var862 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var865, var866 = protoModule.readVarInt(p34, var859)
-			local _ = var865
-			var859 = var866
+			local var867, var868 = protoModule.readVarInt(p34, var861)
+			local _ = var867
+			var861 = var868
 			continue
 		end
-		if var860 == protoModule.wireTypes.lengthDelimited then
-			if var864 == 1 then
+		if var862 == protoModule.wireTypes.lengthDelimited then
+			if var866 == 1 then
 				local _ = nil
-				local var867, var868 = protoModule.readBuffer(p34, var859)
-				var859 = var868
-				var858.social_link_id = buffer.tostring(var867)
+				local var869, var870 = protoModule.readBuffer(p34, var861)
+				var861 = var870
+				var860.social_link_id = buffer.tostring(var869)
 			else
 				local _ = nil
-				local var869, var870 = protoModule.readVarInt(p34, var859)
-				var859 = var870 + var869
+				local var871, var872 = protoModule.readVarInt(p34, var861)
+				var861 = var872 + var871
 			end
-		elseif var860 == protoModule.wireTypes.i32 then
+		elseif var862 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var871, var872 = protoModule.readFixed32(p34, var859)
-			local _ = var871
-			var859 = var872
-		elseif var860 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var873, var874 = protoModule.readFixed64(p34, var859)
+			local var873, var874 = protoModule.readFixed32(p34, var861)
 			local _ = var873
-			var859 = var874
+			var861 = var874
+		elseif var862 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var875, var876 = protoModule.readFixed64(p34, var861)
+			local _ = var875
+			var861 = var876
 		else
-			error("Unsupported wire type: " .. var1505)
+			error("Unsupported wire type: " .. var1511)
 		end
 	end
-	return var858
+	return var860
 end
 
 function t_34:jsonEncode()
@@ -6553,15 +6583,15 @@ end
 
 function t_34:jsonDecode()
 	-- upvalues: t_34 (ref)
-	local var875 = t_34.new()
+	local var877 = t_34.new()
 	
 	if self.social_link_id ~= nil then
-		var875.social_link_id = self.social_link_id
+		var877.social_link_id = self.social_link_id
 	end
 	if self.socialLinkId ~= nil then
-		var875.social_link_id = self.socialLinkId
+		var877.social_link_id = self.socialLinkId
 	end
-	return var875
+	return var877
 end
 
 t_34.descriptor = {
@@ -6601,267 +6631,267 @@ end
 function t_35:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var875 = 0
+	local var877 = 0
 	
 	if self.title ~= nil and self.title ~= "" then
-		local var876, var877 = protoModule.writeTag(buff, var875, 1, protoModule.wireTypes.lengthDelimited)
-		var876, var1525 = protoModule.writeString(var876, var877, self.title)
-		buff = var876
-		var875 = var877
+		local var878, var879 = protoModule.writeTag(buff, var877, 1, protoModule.wireTypes.lengthDelimited)
+		var878, var1531 = protoModule.writeString(var878, var879, self.title)
+		buff = var878
+		var877 = var879
 	end
 	if self.universe_items ~= nil and #self.universe_items > 0 then
 		for i, v in self.universe_items do
-			local var878 = v:encode()
-			local var879, var880 = protoModule.writeTag(buff, var875, 2, protoModule.wireTypes.lengthDelimited)
-			var879, var1528 = protoModule.writeBuffer(var879, var880, var878, buffer.len(var878))
-			buff = var879
-			var875 = var880
+			local var880 = v:encode()
+			local var881, var882 = protoModule.writeTag(buff, var877, 2, protoModule.wireTypes.lengthDelimited)
+			var881, var1534 = protoModule.writeBuffer(var881, var882, var880, buffer.len(var880))
+			buff = var881
+			var877 = var882
 		end
 	end
 	if self.next_page_token ~= nil and self.next_page_token ~= "" then
-		local var881, var882 = protoModule.writeTag(buff, var875, 3, protoModule.wireTypes.lengthDelimited)
-		var881, var1530 = protoModule.writeString(var881, var882, self.next_page_token)
-		buff = var881
-		var875 = var882
+		local var883, var884 = protoModule.writeTag(buff, var877, 3, protoModule.wireTypes.lengthDelimited)
+		var883, var1536 = protoModule.writeString(var883, var884, self.next_page_token)
+		buff = var883
+		var877 = var884
 	end
 	if self.sort_id ~= nil and self.sort_id ~= "" then
-		local var883, var884 = protoModule.writeTag(buff, var875, 4, protoModule.wireTypes.lengthDelimited)
-		var883, var1532 = protoModule.writeString(var883, var884, self.sort_id)
-		buff = var883
-		var875 = var884
+		local var885, var886 = protoModule.writeTag(buff, var877, 4, protoModule.wireTypes.lengthDelimited)
+		var885, var1538 = protoModule.writeString(var885, var886, self.sort_id)
+		buff = var885
+		var877 = var886
 	end
 	if self.secondary_sort_id ~= nil and self.secondary_sort_id ~= 0 then
-		local var885, var886 = protoModule.writeTag(buff, var875, 5, protoModule.wireTypes.varint)
-		var885, var1534 = protoModule.writeVarInt(var885, var886, self.secondary_sort_id)
-		buff = var885
-		var875 = var886
+		local var887, var888 = protoModule.writeTag(buff, var877, 5, protoModule.wireTypes.varint)
+		var887, var1540 = protoModule.writeVarInt(var887, var888, self.secondary_sort_id)
+		buff = var887
+		var877 = var888
 	end
 	if self.max_visible_rows ~= nil and self.max_visible_rows ~= 0 then
-		local var887, var888 = protoModule.writeTag(buff, var875, 6, protoModule.wireTypes.varint)
-		var887, var1536 = protoModule.writeVarInt(var887, var888, self.max_visible_rows)
-		buff = var887
-		var875 = var888
+		local var889, var890 = protoModule.writeTag(buff, var877, 6, protoModule.wireTypes.varint)
+		var889, var1542 = protoModule.writeVarInt(var889, var890, self.max_visible_rows)
+		buff = var889
+		var877 = var890
 	end
 	if self.subtitle ~= nil and self.subtitle ~= "" then
-		local var889, var890 = protoModule.writeTag(buff, var875, 7, protoModule.wireTypes.lengthDelimited)
-		var889, var1538 = protoModule.writeString(var889, var890, self.subtitle)
-		buff = var889
-		var875 = var890
+		local var891, var892 = protoModule.writeTag(buff, var877, 7, protoModule.wireTypes.lengthDelimited)
+		var891, var1544 = protoModule.writeString(var891, var892, self.subtitle)
+		buff = var891
+		var877 = var892
 	end
 	if self.info_text ~= nil and self.info_text ~= "" then
-		local var891, var892 = protoModule.writeTag(buff, var875, 8, protoModule.wireTypes.lengthDelimited)
-		var891, var1540 = protoModule.writeString(var891, var892, self.info_text)
-		buff = var891
-		var875 = var892
+		local var893, var894 = protoModule.writeTag(buff, var877, 8, protoModule.wireTypes.lengthDelimited)
+		var893, var1546 = protoModule.writeString(var893, var894, self.info_text)
+		buff = var893
+		var877 = var894
 	end
 	if self.subtitle_link_path ~= nil and self.subtitle_link_path ~= "" then
-		local var893, var894 = protoModule.writeTag(buff, var875, 9, protoModule.wireTypes.lengthDelimited)
-		var893, var1542 = protoModule.writeString(var893, var894, self.subtitle_link_path)
-		buff = var893
-		var875 = var894
+		local var895, var896 = protoModule.writeTag(buff, var877, 9, protoModule.wireTypes.lengthDelimited)
+		var895, var1548 = protoModule.writeString(var895, var896, self.subtitle_link_path)
+		buff = var895
+		var877 = var896
 	end
 	if self.is_placeholder ~= nil then
-		local var895, var896 = protoModule.writeTag(buff, var875, 10, protoModule.wireTypes.varint)
-		var895, var1544 = protoModule.writeVarInt(var895, var896, if self.is_placeholder then 1 else 0)
-		buff = var895
-		var875 = var896
+		local var897, var898 = protoModule.writeTag(buff, var877, 10, protoModule.wireTypes.varint)
+		var897, var1550 = protoModule.writeVarInt(var897, var898, if self.is_placeholder then 1 else 0)
+		buff = var897
+		var877 = var898
 	end
 	if self.primary_sort_id ~= nil then
-		local var897, var898 = protoModule.writeTag(buff, var875, 11, protoModule.wireTypes.varint)
-		var897, var1546 = protoModule.writeVarInt(var897, var898, self.primary_sort_id)
-		buff = var897
-		var875 = var898
+		local var899, var900 = protoModule.writeTag(buff, var877, 11, protoModule.wireTypes.varint)
+		var899, var1552 = protoModule.writeVarInt(var899, var900, self.primary_sort_id)
+		buff = var899
+		var877 = var900
 	end
 	if self.applied_filters ~= nil then
-		local var899, var900 = protoModule.writeTag(buff, var875, 12, protoModule.wireTypes.lengthDelimited)
-		var899, var1548 = protoModule.writeString(var899, var900, self.applied_filters)
-		buff = var899
-		var875 = var900
+		local var901, var902 = protoModule.writeTag(buff, var877, 12, protoModule.wireTypes.lengthDelimited)
+		var901, var1554 = protoModule.writeString(var901, var902, self.applied_filters)
+		buff = var901
+		var877 = var902
 	end
 	if self.pool_id ~= nil then
-		local var901, var902 = protoModule.writeTag(buff, var875, 13, protoModule.wireTypes.lengthDelimited)
-		var901, var1550 = protoModule.writeString(var901, var902, self.pool_id)
-		buff = var901
-		var875 = var902
+		local var903, var904 = protoModule.writeTag(buff, var877, 13, protoModule.wireTypes.lengthDelimited)
+		var903, var1556 = protoModule.writeString(var903, var904, self.pool_id)
+		buff = var903
+		var877 = var904
 	end
 	if self.has_emphasized_tile then
-		local var903, var904 = protoModule.writeTag(buff, var875, 14, protoModule.wireTypes.varint)
-		var903, var1552 = protoModule.writeVarInt(var903, var904, if self.has_emphasized_tile then 1 else 0)
-		buff = var903
-		var875 = var904
+		local var905, var906 = protoModule.writeTag(buff, var877, 14, protoModule.wireTypes.varint)
+		var905, var1558 = protoModule.writeVarInt(var905, var906, if self.has_emphasized_tile then 1 else 0)
+		buff = var905
+		var877 = var906
 	end
 	if self.tile_activation_mode ~= nil and self.tile_activation_mode ~= "" then
-		local var905, var906 = protoModule.writeTag(buff, var875, 15, protoModule.wireTypes.lengthDelimited)
-		var905, var1554 = protoModule.writeString(var905, var906, self.tile_activation_mode)
-		buff = var905
-		var875 = var906
+		local var907, var908 = protoModule.writeTag(buff, var877, 15, protoModule.wireTypes.lengthDelimited)
+		var907, var1560 = protoModule.writeString(var907, var908, self.tile_activation_mode)
+		buff = var907
+		var877 = var908
 	end
 	if self.initial_feed_visible_rows ~= nil then
-		local var907, var908 = protoModule.writeTag(buff, var875, 16, protoModule.wireTypes.varint)
-		var907, var1556 = protoModule.writeVarInt(var907, var908, self.initial_feed_visible_rows)
-		buff = var907
-		var875 = var908
+		local var909, var910 = protoModule.writeTag(buff, var877, 16, protoModule.wireTypes.varint)
+		var909, var1562 = protoModule.writeVarInt(var909, var910, self.initial_feed_visible_rows)
+		buff = var909
+		var877 = var910
 	end
 	if self.visible_rows_per_reveal ~= nil then
-		local var909, var910 = protoModule.writeTag(buff, var875, 17, protoModule.wireTypes.varint)
-		var909, var1558 = protoModule.writeVarInt(var909, var910, self.visible_rows_per_reveal)
-		buff = var909
-		var875 = var910
+		local var911, var912 = protoModule.writeTag(buff, var877, 17, protoModule.wireTypes.varint)
+		var911, var1564 = protoModule.writeVarInt(var911, var912, self.visible_rows_per_reveal)
+		buff = var911
+		var877 = var912
 	end
 	if self.sponsored_user_cohort ~= nil then
-		local var911, var912 = protoModule.writeTag(buff, var875, 18, protoModule.wireTypes.lengthDelimited)
-		var911, var1560 = protoModule.writeString(var911, var912, self.sponsored_user_cohort)
-		buff = var911
-		var875 = var912
+		local var913, var914 = protoModule.writeTag(buff, var877, 18, protoModule.wireTypes.lengthDelimited)
+		var913, var1566 = protoModule.writeString(var913, var914, self.sponsored_user_cohort)
+		buff = var913
+		var877 = var914
 	end
 	if self.anchor_tag ~= nil then
-		local var913, var914 = protoModule.writeTag(buff, var875, 19, protoModule.wireTypes.lengthDelimited)
-		var913, var1562 = protoModule.writeString(var913, var914, self.anchor_tag)
-		buff = var913
-		var875 = var914
+		local var915, var916 = protoModule.writeTag(buff, var877, 19, protoModule.wireTypes.lengthDelimited)
+		var915, var1568 = protoModule.writeString(var915, var916, self.anchor_tag)
+		buff = var915
+		var877 = var916
 	end
-	local buff_1 = buffer.create(var875)
-	buffer.copy(buff_1, 0, buff, 0, var875)
+	local buff_1 = buffer.create(var877)
+	buffer.copy(buff_1, 0, buff, 0, var877)
 	
 	return buff_1
 end
 
 function t_35.decode(p35)
 	-- upvalues: t_35 (ref), protoModule (ref), t (ref)
-	local var915 = t_35.new()
-	local var916 = 0
-	while var916 < buffer.len(p35) do
+	local var917 = t_35.new()
+	local var918 = 0
+	while var918 < buffer.len(p35) do
 		local _ = nil
-		local var917 = nil
-		local var918, var919, var920 = protoModule.readTag(p35, var916)
-		local var921 = var918
-		var917 = var919
-		var916 = var920
+		local var919 = nil
+		local var920, var921, var922 = protoModule.readTag(p35, var918)
+		local var923 = var920
+		var919 = var921
+		var918 = var922
 		
-		if var917 == protoModule.wireTypes.varint then
-			if var921 == 5 then
+		if var919 == protoModule.wireTypes.varint then
+			if var923 == 5 then
 				local _ = nil
-				local var922, var923 = protoModule.readVarIntI32(p35, var916)
-				var916 = var923
-				var915.secondary_sort_id = var922
-			elseif var921 == 6 then
+				local var924, var925 = protoModule.readVarIntI32(p35, var918)
+				var918 = var925
+				var917.secondary_sort_id = var924
+			elseif var923 == 6 then
 				local _ = nil
-				local var924, var925 = protoModule.readVarIntI32(p35, var916)
-				var916 = var925
-				var915.max_visible_rows = var924
-			elseif var921 == 10 then
+				local var926, var927 = protoModule.readVarIntI32(p35, var918)
+				var918 = var927
+				var917.max_visible_rows = var926
+			elseif var923 == 10 then
 				local _ = nil
-				local var926, var927 = protoModule.readVarInt(p35, var916)
-				var916 = var927
-				var915.is_placeholder = var926 ~= 0
-			elseif var921 == 11 then
+				local var928, var929 = protoModule.readVarInt(p35, var918)
+				var918 = var929
+				var917.is_placeholder = var928 ~= 0
+			elseif var923 == 11 then
 				local _ = nil
-				local var928, var929 = protoModule.readVarIntI32(p35, var916)
-				var916 = var929
-				var915.primary_sort_id = var928
-			elseif var921 == 14 then
+				local var930, var931 = protoModule.readVarIntI32(p35, var918)
+				var918 = var931
+				var917.primary_sort_id = var930
+			elseif var923 == 14 then
 				local _ = nil
-				local var930, var931 = protoModule.readVarInt(p35, var916)
-				var916 = var931
-				var915.has_emphasized_tile = var930 ~= 0
-			elseif var921 == 16 then
+				local var932, var933 = protoModule.readVarInt(p35, var918)
+				var918 = var933
+				var917.has_emphasized_tile = var932 ~= 0
+			elseif var923 == 16 then
 				local _ = nil
-				local var932, var933 = protoModule.readVarIntI32(p35, var916)
-				var916 = var933
-				var915.initial_feed_visible_rows = var932
-			elseif var921 == 17 then
+				local var934, var935 = protoModule.readVarIntI32(p35, var918)
+				var918 = var935
+				var917.initial_feed_visible_rows = var934
+			elseif var923 == 17 then
 				local _ = nil
-				local var934, var935 = protoModule.readVarIntI32(p35, var916)
-				var916 = var935
-				var915.visible_rows_per_reveal = var934
+				local var936, var937 = protoModule.readVarIntI32(p35, var918)
+				var918 = var937
+				var917.visible_rows_per_reveal = var936
 			else
 				local _ = nil
-				local var936, var937 = protoModule.readVarInt(p35, var916)
-				local _ = var936
-				var916 = var937
+				local var938, var939 = protoModule.readVarInt(p35, var918)
+				local _ = var938
+				var918 = var939
 			end
 		end
-		if var917 == protoModule.wireTypes.lengthDelimited then
-			if var921 == 1 then
+		if var919 == protoModule.wireTypes.lengthDelimited then
+			if var923 == 1 then
 				local _ = nil
-				local var938, var939 = protoModule.readBuffer(p35, var916)
-				var916 = var939
-				var915.title = buffer.tostring(var938)
-			elseif var921 == 2 then
+				local var940, var941 = protoModule.readBuffer(p35, var918)
+				var918 = var941
+				var917.title = buffer.tostring(var940)
+			elseif var923 == 2 then
 				local _ = nil
-				local var940, var941 = protoModule.readBuffer(p35, var916)
-				var916 = var941
-				table.insert(var915.universe_items, t.ExperienceCarouselInputData_UniverseItem.decode(var940))
-			elseif var921 == 3 then
+				local var942, var943 = protoModule.readBuffer(p35, var918)
+				var918 = var943
+				table.insert(var917.universe_items, t.ExperienceCarouselInputData_UniverseItem.decode(var942))
+			elseif var923 == 3 then
 				local _ = nil
-				local var942, var943 = protoModule.readBuffer(p35, var916)
-				var916 = var943
-				var915.next_page_token = buffer.tostring(var942)
-			elseif var921 == 4 then
+				local var944, var945 = protoModule.readBuffer(p35, var918)
+				var918 = var945
+				var917.next_page_token = buffer.tostring(var944)
+			elseif var923 == 4 then
 				local _ = nil
-				local var944, var945 = protoModule.readBuffer(p35, var916)
-				var916 = var945
-				var915.sort_id = buffer.tostring(var944)
-			elseif var921 == 7 then
+				local var946, var947 = protoModule.readBuffer(p35, var918)
+				var918 = var947
+				var917.sort_id = buffer.tostring(var946)
+			elseif var923 == 7 then
 				local _ = nil
-				local var946, var947 = protoModule.readBuffer(p35, var916)
-				var916 = var947
-				var915.subtitle = buffer.tostring(var946)
-			elseif var921 == 8 then
+				local var948, var949 = protoModule.readBuffer(p35, var918)
+				var918 = var949
+				var917.subtitle = buffer.tostring(var948)
+			elseif var923 == 8 then
 				local _ = nil
-				local var948, var949 = protoModule.readBuffer(p35, var916)
-				var916 = var949
-				var915.info_text = buffer.tostring(var948)
-			elseif var921 == 9 then
+				local var950, var951 = protoModule.readBuffer(p35, var918)
+				var918 = var951
+				var917.info_text = buffer.tostring(var950)
+			elseif var923 == 9 then
 				local _ = nil
-				local var950, var951 = protoModule.readBuffer(p35, var916)
-				var916 = var951
-				var915.subtitle_link_path = buffer.tostring(var950)
-			elseif var921 == 12 then
+				local var952, var953 = protoModule.readBuffer(p35, var918)
+				var918 = var953
+				var917.subtitle_link_path = buffer.tostring(var952)
+			elseif var923 == 12 then
 				local _ = nil
-				local var952, var953 = protoModule.readBuffer(p35, var916)
-				var916 = var953
-				var915.applied_filters = buffer.tostring(var952)
-			elseif var921 == 13 then
+				local var954, var955 = protoModule.readBuffer(p35, var918)
+				var918 = var955
+				var917.applied_filters = buffer.tostring(var954)
+			elseif var923 == 13 then
 				local _ = nil
-				local var954, var955 = protoModule.readBuffer(p35, var916)
-				var916 = var955
-				var915.pool_id = buffer.tostring(var954)
-			elseif var921 == 15 then
+				local var956, var957 = protoModule.readBuffer(p35, var918)
+				var918 = var957
+				var917.pool_id = buffer.tostring(var956)
+			elseif var923 == 15 then
 				local _ = nil
-				local var956, var957 = protoModule.readBuffer(p35, var916)
-				var916 = var957
-				var915.tile_activation_mode = buffer.tostring(var956)
-			elseif var921 == 18 then
+				local var958, var959 = protoModule.readBuffer(p35, var918)
+				var918 = var959
+				var917.tile_activation_mode = buffer.tostring(var958)
+			elseif var923 == 18 then
 				local _ = nil
-				local var958, var959 = protoModule.readBuffer(p35, var916)
-				var916 = var959
-				var915.sponsored_user_cohort = buffer.tostring(var958)
-			elseif var921 == 19 then
+				local var960, var961 = protoModule.readBuffer(p35, var918)
+				var918 = var961
+				var917.sponsored_user_cohort = buffer.tostring(var960)
+			elseif var923 == 19 then
 				local _ = nil
-				local var960, var961 = protoModule.readBuffer(p35, var916)
-				var916 = var961
-				var915.anchor_tag = buffer.tostring(var960)
+				local var962, var963 = protoModule.readBuffer(p35, var918)
+				var918 = var963
+				var917.anchor_tag = buffer.tostring(var962)
 			else
 				local _ = nil
-				local var962, var963 = protoModule.readVarInt(p35, var916)
-				var916 = var963 + var962
+				local var964, var965 = protoModule.readVarInt(p35, var918)
+				var918 = var965 + var964
 			end
-		elseif var917 == protoModule.wireTypes.i32 then
+		elseif var919 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var964, var965 = protoModule.readFixed32(p35, var916)
-			local _ = var964
-			var916 = var965
-		elseif var917 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var966, var967 = protoModule.readFixed64(p35, var916)
+			local var966, var967 = protoModule.readFixed32(p35, var918)
 			local _ = var966
-			var916 = var967
+			var918 = var967
+		elseif var919 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var968, var969 = protoModule.readFixed64(p35, var918)
+			local _ = var968
+			var918 = var969
 		else
-			error("Unsupported wire type: " .. var1566)
+			error("Unsupported wire type: " .. var1572)
 		end
 	end
-	return var915
+	return var917
 end
 
 function t_35:jsonEncode()
@@ -6934,10 +6964,10 @@ end
 
 function t_35:jsonDecode()
 	-- upvalues: t_35 (ref), t (ref)
-	local var968 = t_35.new()
+	local var970 = t_35.new()
 	
 	if self.title ~= nil then
-		var968.title = self.title
+		var970.title = self.title
 	end
 	if self.universe_items ~= nil then
 		local t_1 = {}
@@ -6945,7 +6975,7 @@ function t_35:jsonDecode()
 		for i, v in self.universe_items do
 			table.insert(t_1, t.ExperienceCarouselInputData_UniverseItem.jsonDecode(v))
 		end
-		var968.universe_items = t_1
+		var970.universe_items = t_1
 	end
 	if self.universeItems ~= nil then
 		local t_1 = {}
@@ -6953,108 +6983,108 @@ function t_35:jsonDecode()
 		for i, v in self.universeItems do
 			table.insert(t_1, t.ExperienceCarouselInputData_UniverseItem.jsonDecode(v))
 		end
-		var968.universe_items = t_1
+		var970.universe_items = t_1
 	end
 	if self.next_page_token ~= nil then
-		var968.next_page_token = self.next_page_token
+		var970.next_page_token = self.next_page_token
 	end
 	if self.nextPageToken ~= nil then
-		var968.next_page_token = self.nextPageToken
+		var970.next_page_token = self.nextPageToken
 	end
 	if self.sort_id ~= nil then
-		var968.sort_id = self.sort_id
+		var970.sort_id = self.sort_id
 	end
 	if self.sortId ~= nil then
-		var968.sort_id = self.sortId
+		var970.sort_id = self.sortId
 	end
 	if self.secondary_sort_id ~= nil then
-		var968.secondary_sort_id = self.secondary_sort_id
+		var970.secondary_sort_id = self.secondary_sort_id
 	end
 	if self.secondarySortId ~= nil then
-		var968.secondary_sort_id = self.secondarySortId
+		var970.secondary_sort_id = self.secondarySortId
 	end
 	if self.max_visible_rows ~= nil then
-		var968.max_visible_rows = self.max_visible_rows
+		var970.max_visible_rows = self.max_visible_rows
 	end
 	if self.maxVisibleRows ~= nil then
-		var968.max_visible_rows = self.maxVisibleRows
+		var970.max_visible_rows = self.maxVisibleRows
 	end
 	if self.subtitle ~= nil then
-		var968.subtitle = self.subtitle
+		var970.subtitle = self.subtitle
 	end
 	if self.info_text ~= nil then
-		var968.info_text = self.info_text
+		var970.info_text = self.info_text
 	end
 	if self.infoText ~= nil then
-		var968.info_text = self.infoText
+		var970.info_text = self.infoText
 	end
 	if self.subtitle_link_path ~= nil then
-		var968.subtitle_link_path = self.subtitle_link_path
+		var970.subtitle_link_path = self.subtitle_link_path
 	end
 	if self.subtitleLinkPath ~= nil then
-		var968.subtitle_link_path = self.subtitleLinkPath
+		var970.subtitle_link_path = self.subtitleLinkPath
 	end
 	if self.is_placeholder ~= nil then
-		var968.is_placeholder = self.is_placeholder
+		var970.is_placeholder = self.is_placeholder
 	end
 	if self.isPlaceholder ~= nil then
-		var968.is_placeholder = self.isPlaceholder
+		var970.is_placeholder = self.isPlaceholder
 	end
 	if self.primary_sort_id ~= nil then
-		var968.primary_sort_id = self.primary_sort_id
+		var970.primary_sort_id = self.primary_sort_id
 	end
 	if self.primarySortId ~= nil then
-		var968.primary_sort_id = self.primarySortId
+		var970.primary_sort_id = self.primarySortId
 	end
 	if self.applied_filters ~= nil then
-		var968.applied_filters = self.applied_filters
+		var970.applied_filters = self.applied_filters
 	end
 	if self.appliedFilters ~= nil then
-		var968.applied_filters = self.appliedFilters
+		var970.applied_filters = self.appliedFilters
 	end
 	if self.pool_id ~= nil then
-		var968.pool_id = self.pool_id
+		var970.pool_id = self.pool_id
 	end
 	if self.poolId ~= nil then
-		var968.pool_id = self.poolId
+		var970.pool_id = self.poolId
 	end
 	if self.has_emphasized_tile ~= nil then
-		var968.has_emphasized_tile = self.has_emphasized_tile
+		var970.has_emphasized_tile = self.has_emphasized_tile
 	end
 	if self.hasEmphasizedTile ~= nil then
-		var968.has_emphasized_tile = self.hasEmphasizedTile
+		var970.has_emphasized_tile = self.hasEmphasizedTile
 	end
 	if self.tile_activation_mode ~= nil then
-		var968.tile_activation_mode = self.tile_activation_mode
+		var970.tile_activation_mode = self.tile_activation_mode
 	end
 	if self.tileActivationMode ~= nil then
-		var968.tile_activation_mode = self.tileActivationMode
+		var970.tile_activation_mode = self.tileActivationMode
 	end
 	if self.initial_feed_visible_rows ~= nil then
-		var968.initial_feed_visible_rows = self.initial_feed_visible_rows
+		var970.initial_feed_visible_rows = self.initial_feed_visible_rows
 	end
 	if self.initialFeedVisibleRows ~= nil then
-		var968.initial_feed_visible_rows = self.initialFeedVisibleRows
+		var970.initial_feed_visible_rows = self.initialFeedVisibleRows
 	end
 	if self.visible_rows_per_reveal ~= nil then
-		var968.visible_rows_per_reveal = self.visible_rows_per_reveal
+		var970.visible_rows_per_reveal = self.visible_rows_per_reveal
 	end
 	if self.visibleRowsPerReveal ~= nil then
-		var968.visible_rows_per_reveal = self.visibleRowsPerReveal
+		var970.visible_rows_per_reveal = self.visibleRowsPerReveal
 	end
 	if self.sponsored_user_cohort ~= nil then
-		var968.sponsored_user_cohort = self.sponsored_user_cohort
+		var970.sponsored_user_cohort = self.sponsored_user_cohort
 	end
 	if self.sponsoredUserCohort ~= nil then
-		var968.sponsored_user_cohort = self.sponsoredUserCohort
+		var970.sponsored_user_cohort = self.sponsoredUserCohort
 	end
 	if self.anchor_tag ~= nil then
-		var968.anchor_tag = self.anchor_tag
+		var970.anchor_tag = self.anchor_tag
 	end
 	if self.anchorTag ~= nil then
-		var968.anchor_tag = self.anchorTag
+		var970.anchor_tag = self.anchorTag
 	end
-	return var968
+	return var970
 end
 
 t_35.descriptor = {
@@ -7097,300 +7127,300 @@ end
 function t_36:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var969 = 0
+	local var971 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var970, var971 = protoModule.writeTag(buff, var969, 1, protoModule.wireTypes.lengthDelimited)
-		var970, var1625 = protoModule.writeString(var970, var971, self.universe_id)
-		buff = var970
-		var969 = var971
+		local var972, var973 = protoModule.writeTag(buff, var971, 1, protoModule.wireTypes.lengthDelimited)
+		var972, var1631 = protoModule.writeString(var972, var973, self.universe_id)
+		buff = var972
+		var971 = var973
 	end
 	if self.is_sponsored then
-		local var972, var973 = protoModule.writeTag(buff, var969, 2, protoModule.wireTypes.varint)
-		var972, var1627 = protoModule.writeVarInt(var972, var973, if self.is_sponsored then 1 else 0)
-		buff = var972
-		var969 = var973
+		local var974, var975 = protoModule.writeTag(buff, var971, 2, protoModule.wireTypes.varint)
+		var974, var1633 = protoModule.writeVarInt(var974, var975, if self.is_sponsored then 1 else 0)
+		buff = var974
+		var971 = var975
 	end
 	if self.roblox_component ~= nil and self.roblox_component ~= "" then
-		local var974, var975 = protoModule.writeTag(buff, var969, 3, protoModule.wireTypes.lengthDelimited)
-		var974, var1629 = protoModule.writeString(var974, var975, self.roblox_component)
-		buff = var974
-		var969 = var975
+		local var976, var977 = protoModule.writeTag(buff, var971, 3, protoModule.wireTypes.lengthDelimited)
+		var976, var1635 = protoModule.writeString(var976, var977, self.roblox_component)
+		buff = var976
+		var971 = var977
 	end
 	if self.native_ad_data ~= nil and self.native_ad_data ~= "" then
-		local var976, var977 = protoModule.writeTag(buff, var969, 4, protoModule.wireTypes.lengthDelimited)
-		var976, var1631 = protoModule.writeString(var976, var977, self.native_ad_data)
-		buff = var976
-		var969 = var977
+		local var978, var979 = protoModule.writeTag(buff, var971, 4, protoModule.wireTypes.lengthDelimited)
+		var978, var1637 = protoModule.writeString(var978, var979, self.native_ad_data)
+		buff = var978
+		var971 = var979
 	end
 	if self.is_content_locked then
-		local var978, var979 = protoModule.writeTag(buff, var969, 5, protoModule.wireTypes.varint)
-		var978, var1633 = protoModule.writeVarInt(var978, var979, if self.is_content_locked then 1 else 0)
-		buff = var978
-		var969 = var979
+		local var980, var981 = protoModule.writeTag(buff, var971, 5, protoModule.wireTypes.varint)
+		var980, var1639 = protoModule.writeVarInt(var980, var981, if self.is_content_locked then 1 else 0)
+		buff = var980
+		var971 = var981
 	end
 	if self.title ~= nil and self.title ~= "" then
-		local var980, var981 = protoModule.writeTag(buff, var969, 6, protoModule.wireTypes.lengthDelimited)
-		var980, var1635 = protoModule.writeString(var980, var981, self.title)
-		buff = var980
-		var969 = var981
+		local var982, var983 = protoModule.writeTag(buff, var971, 6, protoModule.wireTypes.lengthDelimited)
+		var982, var1641 = protoModule.writeString(var982, var983, self.title)
+		buff = var982
+		var971 = var983
 	end
 	if self.subtitle ~= nil and self.subtitle ~= "" then
-		local var982, var983 = protoModule.writeTag(buff, var969, 7, protoModule.wireTypes.lengthDelimited)
-		var982, var1637 = protoModule.writeString(var982, var983, self.subtitle)
-		buff = var982
-		var969 = var983
+		local var984, var985 = protoModule.writeTag(buff, var971, 7, protoModule.wireTypes.lengthDelimited)
+		var984, var1643 = protoModule.writeString(var984, var985, self.subtitle)
+		buff = var984
+		var971 = var985
 	end
 	if self.image_asset_id ~= nil and self.image_asset_id ~= "" then
-		local var984, var985 = protoModule.writeTag(buff, var969, 8, protoModule.wireTypes.lengthDelimited)
-		var984, var1639 = protoModule.writeString(var984, var985, self.image_asset_id)
-		buff = var984
-		var969 = var985
+		local var986, var987 = protoModule.writeTag(buff, var971, 8, protoModule.wireTypes.lengthDelimited)
+		var986, var1645 = protoModule.writeString(var986, var987, self.image_asset_id)
+		buff = var986
+		var971 = var987
 	end
 	if self.video_asset_id ~= nil and self.video_asset_id ~= "" then
-		local var986, var987 = protoModule.writeTag(buff, var969, 9, protoModule.wireTypes.lengthDelimited)
-		var986, var1641 = protoModule.writeString(var986, var987, self.video_asset_id)
-		buff = var986
-		var969 = var987
+		local var988, var989 = protoModule.writeTag(buff, var971, 9, protoModule.wireTypes.lengthDelimited)
+		var988, var1647 = protoModule.writeString(var988, var989, self.video_asset_id)
+		buff = var988
+		var971 = var989
 	end
 	if self.badge_text ~= nil and self.badge_text ~= "" then
-		local var988, var989 = protoModule.writeTag(buff, var969, 10, protoModule.wireTypes.lengthDelimited)
-		var988, var1643 = protoModule.writeString(var988, var989, self.badge_text)
-		buff = var988
-		var969 = var989
+		local var990, var991 = protoModule.writeTag(buff, var971, 10, protoModule.wireTypes.lengthDelimited)
+		var990, var1649 = protoModule.writeString(var990, var991, self.badge_text)
+		buff = var990
+		var971 = var991
 	end
 	if self.player_count ~= nil then
-		local var990, var991 = protoModule.writeTag(buff, var969, 11, protoModule.wireTypes.varint)
-		var990, var1645 = protoModule.writeVarInt(var990, var991, self.player_count)
-		buff = var990
-		var969 = var991
+		local var992, var993 = protoModule.writeTag(buff, var971, 11, protoModule.wireTypes.varint)
+		var992, var1651 = protoModule.writeVarInt(var992, var993, self.player_count)
+		buff = var992
+		var971 = var993
 	end
 	if self.creator_key ~= nil and self.creator_key ~= "" then
-		local var992, var993 = protoModule.writeTag(buff, var969, 12, protoModule.wireTypes.lengthDelimited)
-		var992, var1647 = protoModule.writeString(var992, var993, self.creator_key)
-		buff = var992
-		var969 = var993
+		local var994, var995 = protoModule.writeTag(buff, var971, 12, protoModule.wireTypes.lengthDelimited)
+		var994, var1653 = protoModule.writeString(var994, var995, self.creator_key)
+		buff = var994
+		var971 = var995
 	end
 	if self.rank ~= nil then
-		local var994, var995 = protoModule.writeTag(buff, var969, 13, protoModule.wireTypes.varint)
-		var994, var1649 = protoModule.writeVarInt(var994, var995, self.rank)
-		buff = var994
-		var969 = var995
+		local var996, var997 = protoModule.writeTag(buff, var971, 13, protoModule.wireTypes.varint)
+		var996, var1655 = protoModule.writeVarInt(var996, var997, self.rank)
+		buff = var996
+		var971 = var997
 	end
 	if self.payer_name ~= nil then
-		local var996, var997 = protoModule.writeTag(buff, var969, 14, protoModule.wireTypes.lengthDelimited)
-		var996, var1651 = protoModule.writeString(var996, var997, self.payer_name)
-		buff = var996
-		var969 = var997
+		local var998, var999 = protoModule.writeTag(buff, var971, 14, protoModule.wireTypes.lengthDelimited)
+		var998, var1657 = protoModule.writeString(var998, var999, self.payer_name)
+		buff = var998
+		var971 = var999
 	end
 	if self.logo_asset_id ~= nil then
-		local var998, var999 = protoModule.writeTag(buff, var969, 15, protoModule.wireTypes.lengthDelimited)
-		var998, var1653 = protoModule.writeString(var998, var999, self.logo_asset_id)
-		buff = var998
-		var969 = var999
+		local var1000, var1001 = protoModule.writeTag(buff, var971, 15, protoModule.wireTypes.lengthDelimited)
+		var1000, var1659 = protoModule.writeString(var1000, var1001, self.logo_asset_id)
+		buff = var1000
+		var971 = var1001
 	end
 	if self.logo_aspect_ratio ~= nil then
-		local var1000, var1001 = protoModule.writeTag(buff, var969, 16, protoModule.wireTypes.i64)
-		var1000, var1655 = protoModule.writeDouble(var1000, var1001, self.logo_aspect_ratio)
-		buff = var1000
-		var969 = var1001
+		local var1002, var1003 = protoModule.writeTag(buff, var971, 16, protoModule.wireTypes.i64)
+		var1002, var1661 = protoModule.writeDouble(var1002, var1003, self.logo_aspect_ratio)
+		buff = var1002
+		var971 = var1003
 	end
 	if self.place_id ~= nil then
-		local var1002, var1003 = protoModule.writeTag(buff, var969, 17, protoModule.wireTypes.lengthDelimited)
-		var1002, var1657 = protoModule.writeString(var1002, var1003, self.place_id)
-		buff = var1002
-		var969 = var1003
+		local var1004, var1005 = protoModule.writeTag(buff, var971, 17, protoModule.wireTypes.lengthDelimited)
+		var1004, var1663 = protoModule.writeString(var1004, var1005, self.place_id)
+		buff = var1004
+		var971 = var1005
 	end
 	if self.launch_data ~= nil then
-		local var1004, var1005 = protoModule.writeTag(buff, var969, 18, protoModule.wireTypes.lengthDelimited)
-		var1004, var1659 = protoModule.writeString(var1004, var1005, self.launch_data)
-		buff = var1004
-		var969 = var1005
+		local var1006, var1007 = protoModule.writeTag(buff, var971, 18, protoModule.wireTypes.lengthDelimited)
+		var1006, var1665 = protoModule.writeString(var1006, var1007, self.launch_data)
+		buff = var1006
+		var971 = var1007
 	end
 	if self.tile_variant ~= nil then
-		local var1006, var1007 = protoModule.writeTag(buff, var969, 19, protoModule.wireTypes.lengthDelimited)
-		var1006, var1661 = protoModule.writeString(var1006, var1007, self.tile_variant)
-		buff = var1006
-		var969 = var1007
+		local var1008, var1009 = protoModule.writeTag(buff, var971, 19, protoModule.wireTypes.lengthDelimited)
+		var1008, var1667 = protoModule.writeString(var1008, var1009, self.tile_variant)
+		buff = var1008
+		var971 = var1009
 	end
 	if self.cta_text ~= nil then
-		local var1008, var1009 = protoModule.writeTag(buff, var969, 20, protoModule.wireTypes.lengthDelimited)
-		var1008, var1663 = protoModule.writeString(var1008, var1009, self.cta_text)
-		buff = var1008
-		var969 = var1009
+		local var1010, var1011 = protoModule.writeTag(buff, var971, 20, protoModule.wireTypes.lengthDelimited)
+		var1010, var1669 = protoModule.writeString(var1010, var1011, self.cta_text)
+		buff = var1010
+		var971 = var1011
 	end
 	if self.badge_analytics_id ~= nil then
-		local var1010, var1011 = protoModule.writeTag(buff, var969, 21, protoModule.wireTypes.lengthDelimited)
-		var1010, var1665 = protoModule.writeString(var1010, var1011, self.badge_analytics_id)
-		buff = var1010
-		var969 = var1011
+		local var1012, var1013 = protoModule.writeTag(buff, var971, 21, protoModule.wireTypes.lengthDelimited)
+		var1012, var1671 = protoModule.writeString(var1012, var1013, self.badge_analytics_id)
+		buff = var1012
+		var971 = var1013
 	end
 	if self.game_items ~= nil and #self.game_items > 0 then
 		for i, v in self.game_items do
-			local var1012 = v:encode()
-			local var1013, var1014 = protoModule.writeTag(buff, var969, 22, protoModule.wireTypes.lengthDelimited)
-			var1013, var1668 = protoModule.writeBuffer(var1013, var1014, var1012, buffer.len(var1012))
-			buff = var1013
-			var969 = var1014
+			local var1014 = v:encode()
+			local var1015, var1016 = protoModule.writeTag(buff, var971, 22, protoModule.wireTypes.lengthDelimited)
+			var1015, var1674 = protoModule.writeBuffer(var1015, var1016, var1014, buffer.len(var1014))
+			buff = var1015
+			var971 = var1016
 		end
 	end
-	local buff_1 = buffer.create(var969)
-	buffer.copy(buff_1, 0, buff, 0, var969)
+	local buff_1 = buffer.create(var971)
+	buffer.copy(buff_1, 0, buff, 0, var971)
 	
 	return buff_1
 end
 
 function t_36.decode(p36)
 	-- upvalues: t_36 (ref), protoModule (ref), t (ref)
-	local var1015 = t_36.new()
-	local var1016 = 0
-	while var1016 < buffer.len(p36) do
+	local var1017 = t_36.new()
+	local var1018 = 0
+	while var1018 < buffer.len(p36) do
 		local _ = nil
-		local var1017 = nil
-		local var1018, var1019, var1020 = protoModule.readTag(p36, var1016)
-		local var1021 = var1018
-		var1017 = var1019
-		var1016 = var1020
+		local var1019 = nil
+		local var1020, var1021, var1022 = protoModule.readTag(p36, var1018)
+		local var1023 = var1020
+		var1019 = var1021
+		var1018 = var1022
 		
-		if var1017 == protoModule.wireTypes.varint then
-			if var1021 == 2 then
+		if var1019 == protoModule.wireTypes.varint then
+			if var1023 == 2 then
 				local _ = nil
-				local var1022, var1023 = protoModule.readVarInt(p36, var1016)
-				var1016 = var1023
-				var1015.is_sponsored = var1022 ~= 0
-			elseif var1021 == 5 then
+				local var1024, var1025 = protoModule.readVarInt(p36, var1018)
+				var1018 = var1025
+				var1017.is_sponsored = var1024 ~= 0
+			elseif var1023 == 5 then
 				local _ = nil
-				local var1024, var1025 = protoModule.readVarInt(p36, var1016)
-				var1016 = var1025
-				var1015.is_content_locked = var1024 ~= 0
-			elseif var1021 == 11 then
+				local var1026, var1027 = protoModule.readVarInt(p36, var1018)
+				var1018 = var1027
+				var1017.is_content_locked = var1026 ~= 0
+			elseif var1023 == 11 then
 				local _ = nil
-				local var1026, var1027 = protoModule.readVarIntI64(p36, var1016)
-				var1016 = var1027
-				var1015.player_count = var1026
-			elseif var1021 == 13 then
+				local var1028, var1029 = protoModule.readVarIntI64(p36, var1018)
+				var1018 = var1029
+				var1017.player_count = var1028
+			elseif var1023 == 13 then
 				local _ = nil
-				local var1028, var1029 = protoModule.readVarIntI32(p36, var1016)
-				var1016 = var1029
-				var1015.rank = var1028
+				local var1030, var1031 = protoModule.readVarIntI32(p36, var1018)
+				var1018 = var1031
+				var1017.rank = var1030
 			else
 				local _ = nil
-				local var1030, var1031 = protoModule.readVarInt(p36, var1016)
-				local _ = var1030
-				var1016 = var1031
+				local var1032, var1033 = protoModule.readVarInt(p36, var1018)
+				local _ = var1032
+				var1018 = var1033
 			end
 		end
-		if var1017 == protoModule.wireTypes.lengthDelimited then
-			if var1021 == 1 then
+		if var1019 == protoModule.wireTypes.lengthDelimited then
+			if var1023 == 1 then
 				local _ = nil
-				local var1032, var1033 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1033
-				var1015.universe_id = buffer.tostring(var1032)
-			elseif var1021 == 3 then
+				local var1034, var1035 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1035
+				var1017.universe_id = buffer.tostring(var1034)
+			elseif var1023 == 3 then
 				local _ = nil
-				local var1034, var1035 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1035
-				var1015.roblox_component = buffer.tostring(var1034)
-			elseif var1021 == 4 then
+				local var1036, var1037 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1037
+				var1017.roblox_component = buffer.tostring(var1036)
+			elseif var1023 == 4 then
 				local _ = nil
-				local var1036, var1037 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1037
-				var1015.native_ad_data = buffer.tostring(var1036)
-			elseif var1021 == 6 then
+				local var1038, var1039 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1039
+				var1017.native_ad_data = buffer.tostring(var1038)
+			elseif var1023 == 6 then
 				local _ = nil
-				local var1038, var1039 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1039
-				var1015.title = buffer.tostring(var1038)
-			elseif var1021 == 7 then
+				local var1040, var1041 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1041
+				var1017.title = buffer.tostring(var1040)
+			elseif var1023 == 7 then
 				local _ = nil
-				local var1040, var1041 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1041
-				var1015.subtitle = buffer.tostring(var1040)
-			elseif var1021 == 8 then
+				local var1042, var1043 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1043
+				var1017.subtitle = buffer.tostring(var1042)
+			elseif var1023 == 8 then
 				local _ = nil
-				local var1042, var1043 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1043
-				var1015.image_asset_id = buffer.tostring(var1042)
-			elseif var1021 == 9 then
+				local var1044, var1045 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1045
+				var1017.image_asset_id = buffer.tostring(var1044)
+			elseif var1023 == 9 then
 				local _ = nil
-				local var1044, var1045 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1045
-				var1015.video_asset_id = buffer.tostring(var1044)
-			elseif var1021 == 10 then
+				local var1046, var1047 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1047
+				var1017.video_asset_id = buffer.tostring(var1046)
+			elseif var1023 == 10 then
 				local _ = nil
-				local var1046, var1047 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1047
-				var1015.badge_text = buffer.tostring(var1046)
-			elseif var1021 == 12 then
+				local var1048, var1049 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1049
+				var1017.badge_text = buffer.tostring(var1048)
+			elseif var1023 == 12 then
 				local _ = nil
-				local var1048, var1049 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1049
-				var1015.creator_key = buffer.tostring(var1048)
-			elseif var1021 == 14 then
+				local var1050, var1051 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1051
+				var1017.creator_key = buffer.tostring(var1050)
+			elseif var1023 == 14 then
 				local _ = nil
-				local var1050, var1051 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1051
-				var1015.payer_name = buffer.tostring(var1050)
-			elseif var1021 == 15 then
+				local var1052, var1053 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1053
+				var1017.payer_name = buffer.tostring(var1052)
+			elseif var1023 == 15 then
 				local _ = nil
-				local var1052, var1053 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1053
-				var1015.logo_asset_id = buffer.tostring(var1052)
-			elseif var1021 == 17 then
+				local var1054, var1055 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1055
+				var1017.logo_asset_id = buffer.tostring(var1054)
+			elseif var1023 == 17 then
 				local _ = nil
-				local var1054, var1055 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1055
-				var1015.place_id = buffer.tostring(var1054)
-			elseif var1021 == 18 then
+				local var1056, var1057 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1057
+				var1017.place_id = buffer.tostring(var1056)
+			elseif var1023 == 18 then
 				local _ = nil
-				local var1056, var1057 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1057
-				var1015.launch_data = buffer.tostring(var1056)
-			elseif var1021 == 19 then
+				local var1058, var1059 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1059
+				var1017.launch_data = buffer.tostring(var1058)
+			elseif var1023 == 19 then
 				local _ = nil
-				local var1058, var1059 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1059
-				var1015.tile_variant = buffer.tostring(var1058)
-			elseif var1021 == 20 then
+				local var1060, var1061 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1061
+				var1017.tile_variant = buffer.tostring(var1060)
+			elseif var1023 == 20 then
 				local _ = nil
-				local var1060, var1061 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1061
-				var1015.cta_text = buffer.tostring(var1060)
-			elseif var1021 == 21 then
+				local var1062, var1063 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1063
+				var1017.cta_text = buffer.tostring(var1062)
+			elseif var1023 == 21 then
 				local _ = nil
-				local var1062, var1063 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1063
-				var1015.badge_analytics_id = buffer.tostring(var1062)
-			elseif var1021 == 22 then
+				local var1064, var1065 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1065
+				var1017.badge_analytics_id = buffer.tostring(var1064)
+			elseif var1023 == 22 then
 				local _ = nil
-				local var1064, var1065 = protoModule.readBuffer(p36, var1016)
-				var1016 = var1065
-				table.insert(var1015.game_items, t.GameItemInputData.decode(var1064))
+				local var1066, var1067 = protoModule.readBuffer(p36, var1018)
+				var1018 = var1067
+				table.insert(var1017.game_items, t.GameItemInputData.decode(var1066))
 			else
 				local _ = nil
-				local var1066, var1067 = protoModule.readVarInt(p36, var1016)
-				var1016 = var1067 + var1066
+				local var1068, var1069 = protoModule.readVarInt(p36, var1018)
+				var1018 = var1069 + var1068
 			end
-		elseif var1017 == protoModule.wireTypes.i32 then
+		elseif var1019 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1068, var1069 = protoModule.readFixed32(p36, var1016)
-			local _ = var1068
-			var1016 = var1069
-		elseif var1017 ~= protoModule.wireTypes.i64 then
-			error("Unsupported wire type: " .. var1672)
-		elseif var1021 == 16 then
+			local var1070, var1071 = protoModule.readFixed32(p36, var1018)
+			local _ = var1070
+			var1018 = var1071
+		elseif var1019 ~= protoModule.wireTypes.i64 then
+			error("Unsupported wire type: " .. var1678)
+		elseif var1023 == 16 then
 			local _ = nil
-			local var1070, var1071 = protoModule.readDouble(p36, var1016)
-			var1016 = var1071
-			var1015.logo_aspect_ratio = var1070
+			local var1072, var1073 = protoModule.readDouble(p36, var1018)
+			var1018 = var1073
+			var1017.logo_aspect_ratio = var1072
 		else
 			local _ = nil
-			local var1072, var1073 = protoModule.readFixed64(p36, var1016)
-			local _ = var1072
-			var1016 = var1073
+			local var1074, var1075 = protoModule.readFixed64(p36, var1018)
+			local _ = var1074
+			var1018 = var1075
 		end
 	end
-	return var1015
+	return var1017
 end
 
 function t_36:jsonEncode()
@@ -7473,124 +7503,124 @@ end
 
 function t_36:jsonDecode()
 	-- upvalues: t_36 (ref), protoModule (ref), t (ref)
-	local var1074 = t_36.new()
+	local var1076 = t_36.new()
 	
 	if self.universe_id ~= nil then
-		var1074.universe_id = self.universe_id
+		var1076.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var1074.universe_id = self.universeId
+		var1076.universe_id = self.universeId
 	end
 	if self.is_sponsored ~= nil then
-		var1074.is_sponsored = self.is_sponsored
+		var1076.is_sponsored = self.is_sponsored
 	end
 	if self.isSponsored ~= nil then
-		var1074.is_sponsored = self.isSponsored
+		var1076.is_sponsored = self.isSponsored
 	end
 	if self.roblox_component ~= nil then
-		var1074.roblox_component = self.roblox_component
+		var1076.roblox_component = self.roblox_component
 	end
 	if self.robloxComponent ~= nil then
-		var1074.roblox_component = self.robloxComponent
+		var1076.roblox_component = self.robloxComponent
 	end
 	if self.native_ad_data ~= nil then
-		var1074.native_ad_data = self.native_ad_data
+		var1076.native_ad_data = self.native_ad_data
 	end
 	if self.nativeAdData ~= nil then
-		var1074.native_ad_data = self.nativeAdData
+		var1076.native_ad_data = self.nativeAdData
 	end
 	if self.is_content_locked ~= nil then
-		var1074.is_content_locked = self.is_content_locked
+		var1076.is_content_locked = self.is_content_locked
 	end
 	if self.isContentLocked ~= nil then
-		var1074.is_content_locked = self.isContentLocked
+		var1076.is_content_locked = self.isContentLocked
 	end
 	if self.title ~= nil then
-		var1074.title = self.title
+		var1076.title = self.title
 	end
 	if self.subtitle ~= nil then
-		var1074.subtitle = self.subtitle
+		var1076.subtitle = self.subtitle
 	end
 	if self.image_asset_id ~= nil then
-		var1074.image_asset_id = self.image_asset_id
+		var1076.image_asset_id = self.image_asset_id
 	end
 	if self.imageAssetId ~= nil then
-		var1074.image_asset_id = self.imageAssetId
+		var1076.image_asset_id = self.imageAssetId
 	end
 	if self.video_asset_id ~= nil then
-		var1074.video_asset_id = self.video_asset_id
+		var1076.video_asset_id = self.video_asset_id
 	end
 	if self.videoAssetId ~= nil then
-		var1074.video_asset_id = self.videoAssetId
+		var1076.video_asset_id = self.videoAssetId
 	end
 	if self.badge_text ~= nil then
-		var1074.badge_text = self.badge_text
+		var1076.badge_text = self.badge_text
 	end
 	if self.badgeText ~= nil then
-		var1074.badge_text = self.badgeText
+		var1076.badge_text = self.badgeText
 	end
 	if self.player_count ~= nil then
-		var1074.player_count = self.player_count
+		var1076.player_count = self.player_count
 	end
 	if self.playerCount ~= nil then
-		var1074.player_count = self.playerCount
+		var1076.player_count = self.playerCount
 	end
 	if self.creator_key ~= nil then
-		var1074.creator_key = self.creator_key
+		var1076.creator_key = self.creator_key
 	end
 	if self.creatorKey ~= nil then
-		var1074.creator_key = self.creatorKey
+		var1076.creator_key = self.creatorKey
 	end
 	if self.rank ~= nil then
-		var1074.rank = self.rank
+		var1076.rank = self.rank
 	end
 	if self.payer_name ~= nil then
-		var1074.payer_name = self.payer_name
+		var1076.payer_name = self.payer_name
 	end
 	if self.payerName ~= nil then
-		var1074.payer_name = self.payerName
+		var1076.payer_name = self.payerName
 	end
 	if self.logo_asset_id ~= nil then
-		var1074.logo_asset_id = self.logo_asset_id
+		var1076.logo_asset_id = self.logo_asset_id
 	end
 	if self.logoAssetId ~= nil then
-		var1074.logo_asset_id = self.logoAssetId
+		var1076.logo_asset_id = self.logoAssetId
 	end
 	if self.logo_aspect_ratio ~= nil then
-		var1074.logo_aspect_ratio = protoModule.json.deserializeNumber(self.logo_aspect_ratio)
+		var1076.logo_aspect_ratio = protoModule.json.deserializeNumber(self.logo_aspect_ratio)
 	end
 	if self.logoAspectRatio ~= nil then
-		var1074.logo_aspect_ratio = protoModule.json.deserializeNumber(self.logoAspectRatio)
+		var1076.logo_aspect_ratio = protoModule.json.deserializeNumber(self.logoAspectRatio)
 	end
 	if self.place_id ~= nil then
-		var1074.place_id = self.place_id
+		var1076.place_id = self.place_id
 	end
 	if self.placeId ~= nil then
-		var1074.place_id = self.placeId
+		var1076.place_id = self.placeId
 	end
 	if self.launch_data ~= nil then
-		var1074.launch_data = self.launch_data
+		var1076.launch_data = self.launch_data
 	end
 	if self.launchData ~= nil then
-		var1074.launch_data = self.launchData
+		var1076.launch_data = self.launchData
 	end
 	if self.tile_variant ~= nil then
-		var1074.tile_variant = self.tile_variant
+		var1076.tile_variant = self.tile_variant
 	end
 	if self.tileVariant ~= nil then
-		var1074.tile_variant = self.tileVariant
+		var1076.tile_variant = self.tileVariant
 	end
 	if self.cta_text ~= nil then
-		var1074.cta_text = self.cta_text
+		var1076.cta_text = self.cta_text
 	end
 	if self.ctaText ~= nil then
-		var1074.cta_text = self.ctaText
+		var1076.cta_text = self.ctaText
 	end
 	if self.badge_analytics_id ~= nil then
-		var1074.badge_analytics_id = self.badge_analytics_id
+		var1076.badge_analytics_id = self.badge_analytics_id
 	end
 	if self.badgeAnalyticsId ~= nil then
-		var1074.badge_analytics_id = self.badgeAnalyticsId
+		var1076.badge_analytics_id = self.badgeAnalyticsId
 	end
 	if self.game_items ~= nil then
 		local t_1 = {}
@@ -7598,7 +7628,7 @@ function t_36:jsonDecode()
 		for i, v in self.game_items do
 			table.insert(t_1, t.GameItemInputData.jsonDecode(v))
 		end
-		var1074.game_items = t_1
+		var1076.game_items = t_1
 	end
 	if self.gameItems ~= nil then
 		local t_1 = {}
@@ -7606,9 +7636,9 @@ function t_36:jsonDecode()
 		for i, v in self.gameItems do
 			table.insert(t_1, t.GameItemInputData.jsonDecode(v))
 		end
-		var1074.game_items = t_1
+		var1076.game_items = t_1
 	end
-	return var1074
+	return var1076
 end
 
 t_36.descriptor = {
@@ -7640,179 +7670,179 @@ end
 function t_37:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1075 = 0
+	local var1077 = 0
 	
 	if self.title ~= nil and self.title ~= "" then
-		local var1076, var1077 = protoModule.writeTag(buff, var1075, 1, protoModule.wireTypes.lengthDelimited)
-		var1076, var1737 = protoModule.writeString(var1076, var1077, self.title)
-		buff = var1076
-		var1075 = var1077
+		local var1078, var1079 = protoModule.writeTag(buff, var1077, 1, protoModule.wireTypes.lengthDelimited)
+		var1078, var1743 = protoModule.writeString(var1078, var1079, self.title)
+		buff = var1078
+		var1077 = var1079
 	end
 	if self.song_items ~= nil and #self.song_items > 0 then
 		for i, v in self.song_items do
-			local var1078 = v:encode()
-			local var1079, var1080 = protoModule.writeTag(buff, var1075, 2, protoModule.wireTypes.lengthDelimited)
-			var1079, var1740 = protoModule.writeBuffer(var1079, var1080, var1078, buffer.len(var1078))
-			buff = var1079
-			var1075 = var1080
+			local var1080 = v:encode()
+			local var1081, var1082 = protoModule.writeTag(buff, var1077, 2, protoModule.wireTypes.lengthDelimited)
+			var1081, var1746 = protoModule.writeBuffer(var1081, var1082, var1080, buffer.len(var1080))
+			buff = var1081
+			var1077 = var1082
 		end
 	end
 	if self.next_page_token ~= nil and self.next_page_token ~= "" then
-		local var1081, var1082 = protoModule.writeTag(buff, var1075, 3, protoModule.wireTypes.lengthDelimited)
-		var1081, var1742 = protoModule.writeString(var1081, var1082, self.next_page_token)
-		buff = var1081
-		var1075 = var1082
+		local var1083, var1084 = protoModule.writeTag(buff, var1077, 3, protoModule.wireTypes.lengthDelimited)
+		var1083, var1748 = protoModule.writeString(var1083, var1084, self.next_page_token)
+		buff = var1083
+		var1077 = var1084
 	end
 	if self.sort_id ~= nil and self.sort_id ~= "" then
-		local var1083, var1084 = protoModule.writeTag(buff, var1075, 4, protoModule.wireTypes.lengthDelimited)
-		var1083, var1744 = protoModule.writeString(var1083, var1084, self.sort_id)
-		buff = var1083
-		var1075 = var1084
+		local var1085, var1086 = protoModule.writeTag(buff, var1077, 4, protoModule.wireTypes.lengthDelimited)
+		var1085, var1750 = protoModule.writeString(var1085, var1086, self.sort_id)
+		buff = var1085
+		var1077 = var1086
 	end
 	if self.secondary_sort_id ~= nil and self.secondary_sort_id ~= 0 then
-		local var1085, var1086 = protoModule.writeTag(buff, var1075, 5, protoModule.wireTypes.varint)
-		var1085, var1746 = protoModule.writeVarInt(var1085, var1086, self.secondary_sort_id)
-		buff = var1085
-		var1075 = var1086
+		local var1087, var1088 = protoModule.writeTag(buff, var1077, 5, protoModule.wireTypes.varint)
+		var1087, var1752 = protoModule.writeVarInt(var1087, var1088, self.secondary_sort_id)
+		buff = var1087
+		var1077 = var1088
 	end
 	if self.subtitle ~= nil and self.subtitle ~= "" then
-		local var1087, var1088 = protoModule.writeTag(buff, var1075, 6, protoModule.wireTypes.lengthDelimited)
-		var1087, var1748 = protoModule.writeString(var1087, var1088, self.subtitle)
-		buff = var1087
-		var1075 = var1088
+		local var1089, var1090 = protoModule.writeTag(buff, var1077, 6, protoModule.wireTypes.lengthDelimited)
+		var1089, var1754 = protoModule.writeString(var1089, var1090, self.subtitle)
+		buff = var1089
+		var1077 = var1090
 	end
 	if self.info_text ~= nil and self.info_text ~= "" then
-		local var1089, var1090 = protoModule.writeTag(buff, var1075, 7, protoModule.wireTypes.lengthDelimited)
-		var1089, var1750 = protoModule.writeString(var1089, var1090, self.info_text)
-		buff = var1089
-		var1075 = var1090
+		local var1091, var1092 = protoModule.writeTag(buff, var1077, 7, protoModule.wireTypes.lengthDelimited)
+		var1091, var1756 = protoModule.writeString(var1091, var1092, self.info_text)
+		buff = var1091
+		var1077 = var1092
 	end
 	if self.subtitle_link_path ~= nil and self.subtitle_link_path ~= "" then
-		local var1091, var1092 = protoModule.writeTag(buff, var1075, 8, protoModule.wireTypes.lengthDelimited)
-		var1091, var1752 = protoModule.writeString(var1091, var1092, self.subtitle_link_path)
-		buff = var1091
-		var1075 = var1092
+		local var1093, var1094 = protoModule.writeTag(buff, var1077, 8, protoModule.wireTypes.lengthDelimited)
+		var1093, var1758 = protoModule.writeString(var1093, var1094, self.subtitle_link_path)
+		buff = var1093
+		var1077 = var1094
 	end
 	if self.is_placeholder ~= nil then
-		local var1093, var1094 = protoModule.writeTag(buff, var1075, 9, protoModule.wireTypes.varint)
-		var1093, var1754 = protoModule.writeVarInt(var1093, var1094, if self.is_placeholder then 1 else 0)
-		buff = var1093
-		var1075 = var1094
+		local var1095, var1096 = protoModule.writeTag(buff, var1077, 9, protoModule.wireTypes.varint)
+		var1095, var1760 = protoModule.writeVarInt(var1095, var1096, if self.is_placeholder then 1 else 0)
+		buff = var1095
+		var1077 = var1096
 	end
 	if self.primary_sort_id ~= nil then
-		local var1095, var1096 = protoModule.writeTag(buff, var1075, 10, protoModule.wireTypes.varint)
-		var1095, var1756 = protoModule.writeVarInt(var1095, var1096, self.primary_sort_id)
-		buff = var1095
-		var1075 = var1096
+		local var1097, var1098 = protoModule.writeTag(buff, var1077, 10, protoModule.wireTypes.varint)
+		var1097, var1762 = protoModule.writeVarInt(var1097, var1098, self.primary_sort_id)
+		buff = var1097
+		var1077 = var1098
 	end
 	if self.applied_filters ~= nil then
-		local var1097, var1098 = protoModule.writeTag(buff, var1075, 11, protoModule.wireTypes.lengthDelimited)
-		var1097, var1758 = protoModule.writeString(var1097, var1098, self.applied_filters)
-		buff = var1097
-		var1075 = var1098
+		local var1099, var1100 = protoModule.writeTag(buff, var1077, 11, protoModule.wireTypes.lengthDelimited)
+		var1099, var1764 = protoModule.writeString(var1099, var1100, self.applied_filters)
+		buff = var1099
+		var1077 = var1100
 	end
-	local buff_1 = buffer.create(var1075)
-	buffer.copy(buff_1, 0, buff, 0, var1075)
+	local buff_1 = buffer.create(var1077)
+	buffer.copy(buff_1, 0, buff, 0, var1077)
 	
 	return buff_1
 end
 
 function t_37.decode(p37)
 	-- upvalues: t_37 (ref), protoModule (ref), t (ref)
-	local var1099 = t_37.new()
-	local var1100 = 0
-	while var1100 < buffer.len(p37) do
+	local var1101 = t_37.new()
+	local var1102 = 0
+	while var1102 < buffer.len(p37) do
 		local _ = nil
-		local var1101 = nil
-		local var1102, var1103, var1104 = protoModule.readTag(p37, var1100)
-		local var1105 = var1102
-		var1101 = var1103
-		var1100 = var1104
+		local var1103 = nil
+		local var1104, var1105, var1106 = protoModule.readTag(p37, var1102)
+		local var1107 = var1104
+		var1103 = var1105
+		var1102 = var1106
 		
-		if var1101 == protoModule.wireTypes.varint then
-			if var1105 == 5 then
+		if var1103 == protoModule.wireTypes.varint then
+			if var1107 == 5 then
 				local _ = nil
-				local var1106, var1107 = protoModule.readVarIntI32(p37, var1100)
-				var1100 = var1107
-				var1099.secondary_sort_id = var1106
-			elseif var1105 == 9 then
+				local var1108, var1109 = protoModule.readVarIntI32(p37, var1102)
+				var1102 = var1109
+				var1101.secondary_sort_id = var1108
+			elseif var1107 == 9 then
 				local _ = nil
-				local var1108, var1109 = protoModule.readVarInt(p37, var1100)
-				var1100 = var1109
-				var1099.is_placeholder = var1108 ~= 0
-			elseif var1105 == 10 then
+				local var1110, var1111 = protoModule.readVarInt(p37, var1102)
+				var1102 = var1111
+				var1101.is_placeholder = var1110 ~= 0
+			elseif var1107 == 10 then
 				local _ = nil
-				local var1110, var1111 = protoModule.readVarIntI32(p37, var1100)
-				var1100 = var1111
-				var1099.primary_sort_id = var1110
+				local var1112, var1113 = protoModule.readVarIntI32(p37, var1102)
+				var1102 = var1113
+				var1101.primary_sort_id = var1112
 			else
 				local _ = nil
-				local var1112, var1113 = protoModule.readVarInt(p37, var1100)
-				local _ = var1112
-				var1100 = var1113
+				local var1114, var1115 = protoModule.readVarInt(p37, var1102)
+				local _ = var1114
+				var1102 = var1115
 			end
 		end
-		if var1101 == protoModule.wireTypes.lengthDelimited then
-			if var1105 == 1 then
+		if var1103 == protoModule.wireTypes.lengthDelimited then
+			if var1107 == 1 then
 				local _ = nil
-				local var1114, var1115 = protoModule.readBuffer(p37, var1100)
-				var1100 = var1115
-				var1099.title = buffer.tostring(var1114)
-			elseif var1105 == 2 then
+				local var1116, var1117 = protoModule.readBuffer(p37, var1102)
+				var1102 = var1117
+				var1101.title = buffer.tostring(var1116)
+			elseif var1107 == 2 then
 				local _ = nil
-				local var1116, var1117 = protoModule.readBuffer(p37, var1100)
-				var1100 = var1117
-				table.insert(var1099.song_items, t.SongCarouselInputData_SongItem.decode(var1116))
-			elseif var1105 == 3 then
+				local var1118, var1119 = protoModule.readBuffer(p37, var1102)
+				var1102 = var1119
+				table.insert(var1101.song_items, t.SongCarouselInputData_SongItem.decode(var1118))
+			elseif var1107 == 3 then
 				local _ = nil
-				local var1118, var1119 = protoModule.readBuffer(p37, var1100)
-				var1100 = var1119
-				var1099.next_page_token = buffer.tostring(var1118)
-			elseif var1105 == 4 then
+				local var1120, var1121 = protoModule.readBuffer(p37, var1102)
+				var1102 = var1121
+				var1101.next_page_token = buffer.tostring(var1120)
+			elseif var1107 == 4 then
 				local _ = nil
-				local var1120, var1121 = protoModule.readBuffer(p37, var1100)
-				var1100 = var1121
-				var1099.sort_id = buffer.tostring(var1120)
-			elseif var1105 == 6 then
+				local var1122, var1123 = protoModule.readBuffer(p37, var1102)
+				var1102 = var1123
+				var1101.sort_id = buffer.tostring(var1122)
+			elseif var1107 == 6 then
 				local _ = nil
-				local var1122, var1123 = protoModule.readBuffer(p37, var1100)
-				var1100 = var1123
-				var1099.subtitle = buffer.tostring(var1122)
-			elseif var1105 == 7 then
+				local var1124, var1125 = protoModule.readBuffer(p37, var1102)
+				var1102 = var1125
+				var1101.subtitle = buffer.tostring(var1124)
+			elseif var1107 == 7 then
 				local _ = nil
-				local var1124, var1125 = protoModule.readBuffer(p37, var1100)
-				var1100 = var1125
-				var1099.info_text = buffer.tostring(var1124)
-			elseif var1105 == 8 then
+				local var1126, var1127 = protoModule.readBuffer(p37, var1102)
+				var1102 = var1127
+				var1101.info_text = buffer.tostring(var1126)
+			elseif var1107 == 8 then
 				local _ = nil
-				local var1126, var1127 = protoModule.readBuffer(p37, var1100)
-				var1100 = var1127
-				var1099.subtitle_link_path = buffer.tostring(var1126)
-			elseif var1105 == 11 then
+				local var1128, var1129 = protoModule.readBuffer(p37, var1102)
+				var1102 = var1129
+				var1101.subtitle_link_path = buffer.tostring(var1128)
+			elseif var1107 == 11 then
 				local _ = nil
-				local var1128, var1129 = protoModule.readBuffer(p37, var1100)
-				var1100 = var1129
-				var1099.applied_filters = buffer.tostring(var1128)
+				local var1130, var1131 = protoModule.readBuffer(p37, var1102)
+				var1102 = var1131
+				var1101.applied_filters = buffer.tostring(var1130)
 			else
 				local _ = nil
-				local var1130, var1131 = protoModule.readVarInt(p37, var1100)
-				var1100 = var1131 + var1130
+				local var1132, var1133 = protoModule.readVarInt(p37, var1102)
+				var1102 = var1133 + var1132
 			end
-		elseif var1101 == protoModule.wireTypes.i32 then
+		elseif var1103 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1132, var1133 = protoModule.readFixed32(p37, var1100)
-			local _ = var1132
-			var1100 = var1133
-		elseif var1101 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1134, var1135 = protoModule.readFixed64(p37, var1100)
+			local var1134, var1135 = protoModule.readFixed32(p37, var1102)
 			local _ = var1134
-			var1100 = var1135
+			var1102 = var1135
+		elseif var1103 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1136, var1137 = protoModule.readFixed64(p37, var1102)
+			local _ = var1136
+			var1102 = var1137
 		else
-			error("Unsupported wire type: " .. var1762)
+			error("Unsupported wire type: " .. var1768)
 		end
 	end
-	return var1099
+	return var1101
 end
 
 function t_37:jsonEncode()
@@ -7861,10 +7891,10 @@ end
 
 function t_37:jsonDecode()
 	-- upvalues: t_37 (ref), t (ref)
-	local var1136 = t_37.new()
+	local var1138 = t_37.new()
 	
 	if self.title ~= nil then
-		var1136.title = self.title
+		var1138.title = self.title
 	end
 	if self.song_items ~= nil then
 		local t_1 = {}
@@ -7872,7 +7902,7 @@ function t_37:jsonDecode()
 		for i, v in self.song_items do
 			table.insert(t_1, t.SongCarouselInputData_SongItem.jsonDecode(v))
 		end
-		var1136.song_items = t_1
+		var1138.song_items = t_1
 	end
 	if self.songItems ~= nil then
 		local t_1 = {}
@@ -7880,60 +7910,60 @@ function t_37:jsonDecode()
 		for i, v in self.songItems do
 			table.insert(t_1, t.SongCarouselInputData_SongItem.jsonDecode(v))
 		end
-		var1136.song_items = t_1
+		var1138.song_items = t_1
 	end
 	if self.next_page_token ~= nil then
-		var1136.next_page_token = self.next_page_token
+		var1138.next_page_token = self.next_page_token
 	end
 	if self.nextPageToken ~= nil then
-		var1136.next_page_token = self.nextPageToken
+		var1138.next_page_token = self.nextPageToken
 	end
 	if self.sort_id ~= nil then
-		var1136.sort_id = self.sort_id
+		var1138.sort_id = self.sort_id
 	end
 	if self.sortId ~= nil then
-		var1136.sort_id = self.sortId
+		var1138.sort_id = self.sortId
 	end
 	if self.secondary_sort_id ~= nil then
-		var1136.secondary_sort_id = self.secondary_sort_id
+		var1138.secondary_sort_id = self.secondary_sort_id
 	end
 	if self.secondarySortId ~= nil then
-		var1136.secondary_sort_id = self.secondarySortId
+		var1138.secondary_sort_id = self.secondarySortId
 	end
 	if self.subtitle ~= nil then
-		var1136.subtitle = self.subtitle
+		var1138.subtitle = self.subtitle
 	end
 	if self.info_text ~= nil then
-		var1136.info_text = self.info_text
+		var1138.info_text = self.info_text
 	end
 	if self.infoText ~= nil then
-		var1136.info_text = self.infoText
+		var1138.info_text = self.infoText
 	end
 	if self.subtitle_link_path ~= nil then
-		var1136.subtitle_link_path = self.subtitle_link_path
+		var1138.subtitle_link_path = self.subtitle_link_path
 	end
 	if self.subtitleLinkPath ~= nil then
-		var1136.subtitle_link_path = self.subtitleLinkPath
+		var1138.subtitle_link_path = self.subtitleLinkPath
 	end
 	if self.is_placeholder ~= nil then
-		var1136.is_placeholder = self.is_placeholder
+		var1138.is_placeholder = self.is_placeholder
 	end
 	if self.isPlaceholder ~= nil then
-		var1136.is_placeholder = self.isPlaceholder
+		var1138.is_placeholder = self.isPlaceholder
 	end
 	if self.primary_sort_id ~= nil then
-		var1136.primary_sort_id = self.primary_sort_id
+		var1138.primary_sort_id = self.primary_sort_id
 	end
 	if self.primarySortId ~= nil then
-		var1136.primary_sort_id = self.primarySortId
+		var1138.primary_sort_id = self.primarySortId
 	end
 	if self.applied_filters ~= nil then
-		var1136.applied_filters = self.applied_filters
+		var1138.applied_filters = self.applied_filters
 	end
 	if self.appliedFilters ~= nil then
-		var1136.applied_filters = self.appliedFilters
+		var1138.applied_filters = self.appliedFilters
 	end
-	return var1136
+	return var1138
 end
 
 t_37.descriptor = {
@@ -7955,65 +7985,65 @@ end
 function t_38:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1137 = 0
+	local var1139 = 0
 	
 	if self.song_id ~= nil and self.song_id ~= "" then
-		local var1138, var1139 = protoModule.writeTag(buff, var1137, 1, protoModule.wireTypes.lengthDelimited)
-		var1138, var1805 = protoModule.writeString(var1138, var1139, self.song_id)
-		buff = var1138
-		var1137 = var1139
+		local var1140, var1141 = protoModule.writeTag(buff, var1139, 1, protoModule.wireTypes.lengthDelimited)
+		var1140, var1811 = protoModule.writeString(var1140, var1141, self.song_id)
+		buff = var1140
+		var1139 = var1141
 	end
-	local buff_1 = buffer.create(var1137)
-	buffer.copy(buff_1, 0, buff, 0, var1137)
+	local buff_1 = buffer.create(var1139)
+	buffer.copy(buff_1, 0, buff, 0, var1139)
 	
 	return buff_1
 end
 
 function t_38.decode(p38)
 	-- upvalues: t_38 (ref), protoModule (ref)
-	local var1137 = t_38.new()
-	local var1138 = 0
-	while var1138 < buffer.len(p38) do
+	local var1139 = t_38.new()
+	local var1140 = 0
+	while var1140 < buffer.len(p38) do
 		local _ = nil
-		local var1139 = nil
-		local var1140, var1141, var1142 = protoModule.readTag(p38, var1138)
-		local var1143 = var1140
-		var1139 = var1141
-		var1138 = var1142
+		local var1141 = nil
+		local var1142, var1143, var1144 = protoModule.readTag(p38, var1140)
+		local var1145 = var1142
+		var1141 = var1143
+		var1140 = var1144
 		
-		if var1139 == protoModule.wireTypes.varint then
+		if var1141 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1144, var1145 = protoModule.readVarInt(p38, var1138)
-			local _ = var1144
-			var1138 = var1145
+			local var1146, var1147 = protoModule.readVarInt(p38, var1140)
+			local _ = var1146
+			var1140 = var1147
 			continue
 		end
-		if var1139 == protoModule.wireTypes.lengthDelimited then
-			if var1143 == 1 then
+		if var1141 == protoModule.wireTypes.lengthDelimited then
+			if var1145 == 1 then
 				local _ = nil
-				local var1146, var1147 = protoModule.readBuffer(p38, var1138)
-				var1138 = var1147
-				var1137.song_id = buffer.tostring(var1146)
+				local var1148, var1149 = protoModule.readBuffer(p38, var1140)
+				var1140 = var1149
+				var1139.song_id = buffer.tostring(var1148)
 			else
 				local _ = nil
-				local var1148, var1149 = protoModule.readVarInt(p38, var1138)
-				var1138 = var1149 + var1148
+				local var1150, var1151 = protoModule.readVarInt(p38, var1140)
+				var1140 = var1151 + var1150
 			end
-		elseif var1139 == protoModule.wireTypes.i32 then
+		elseif var1141 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1150, var1151 = protoModule.readFixed32(p38, var1138)
-			local _ = var1150
-			var1138 = var1151
-		elseif var1139 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1152, var1153 = protoModule.readFixed64(p38, var1138)
+			local var1152, var1153 = protoModule.readFixed32(p38, var1140)
 			local _ = var1152
-			var1138 = var1153
+			var1140 = var1153
+		elseif var1141 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1154, var1155 = protoModule.readFixed64(p38, var1140)
+			local _ = var1154
+			var1140 = var1155
 		else
-			error("Unsupported wire type: " .. var1809)
+			error("Unsupported wire type: " .. var1815)
 		end
 	end
-	return var1137
+	return var1139
 end
 
 function t_38:jsonEncode()
@@ -8027,15 +8057,15 @@ end
 
 function t_38:jsonDecode()
 	-- upvalues: t_38 (ref)
-	local var1154 = t_38.new()
+	local var1156 = t_38.new()
 	
 	if self.song_id ~= nil then
-		var1154.song_id = self.song_id
+		var1156.song_id = self.song_id
 	end
 	if self.songId ~= nil then
-		var1154.song_id = self.songId
+		var1156.song_id = self.songId
 	end
-	return var1154
+	return var1156
 end
 
 t_38.descriptor = {
@@ -8062,123 +8092,123 @@ end
 function t_39:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1154 = 0
+	local var1156 = 0
 	
 	if self.title ~= nil and self.title ~= "" then
-		local var1155, var1156 = protoModule.writeTag(buff, var1154, 1, protoModule.wireTypes.lengthDelimited)
-		var1155, var1829 = protoModule.writeString(var1155, var1156, self.title)
-		buff = var1155
-		var1154 = var1156
+		local var1157, var1158 = protoModule.writeTag(buff, var1156, 1, protoModule.wireTypes.lengthDelimited)
+		var1157, var1835 = protoModule.writeString(var1157, var1158, self.title)
+		buff = var1157
+		var1156 = var1158
 	end
 	if self.event_items ~= nil and #self.event_items > 0 then
 		for i, v in self.event_items do
-			local var1157 = v:encode()
-			local var1158, var1159 = protoModule.writeTag(buff, var1154, 2, protoModule.wireTypes.lengthDelimited)
-			var1158, var1832 = protoModule.writeBuffer(var1158, var1159, var1157, buffer.len(var1157))
-			buff = var1158
-			var1154 = var1159
+			local var1159 = v:encode()
+			local var1160, var1161 = protoModule.writeTag(buff, var1156, 2, protoModule.wireTypes.lengthDelimited)
+			var1160, var1838 = protoModule.writeBuffer(var1160, var1161, var1159, buffer.len(var1159))
+			buff = var1160
+			var1156 = var1161
 		end
 	end
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var1160, var1161 = protoModule.writeTag(buff, var1154, 3, protoModule.wireTypes.lengthDelimited)
-		var1160, var1834 = protoModule.writeString(var1160, var1161, self.universe_id)
-		buff = var1160
-		var1154 = var1161
+		local var1162, var1163 = protoModule.writeTag(buff, var1156, 3, protoModule.wireTypes.lengthDelimited)
+		var1162, var1840 = protoModule.writeString(var1162, var1163, self.universe_id)
+		buff = var1162
+		var1156 = var1163
 	end
 	if self.sort_id ~= nil and self.sort_id ~= "" then
-		local var1162, var1163 = protoModule.writeTag(buff, var1154, 4, protoModule.wireTypes.lengthDelimited)
-		var1162, var1836 = protoModule.writeString(var1162, var1163, self.sort_id)
-		buff = var1162
-		var1154 = var1163
+		local var1164, var1165 = protoModule.writeTag(buff, var1156, 4, protoModule.wireTypes.lengthDelimited)
+		var1164, var1842 = protoModule.writeString(var1164, var1165, self.sort_id)
+		buff = var1164
+		var1156 = var1165
 	end
 	if self.subtitle ~= nil and self.subtitle ~= "" then
-		local var1164, var1165 = protoModule.writeTag(buff, var1154, 5, protoModule.wireTypes.lengthDelimited)
-		var1164, var1838 = protoModule.writeString(var1164, var1165, self.subtitle)
-		buff = var1164
-		var1154 = var1165
+		local var1166, var1167 = protoModule.writeTag(buff, var1156, 5, protoModule.wireTypes.lengthDelimited)
+		var1166, var1844 = protoModule.writeString(var1166, var1167, self.subtitle)
+		buff = var1166
+		var1156 = var1167
 	end
 	if self.info_text ~= nil and self.info_text ~= "" then
-		local var1166, var1167 = protoModule.writeTag(buff, var1154, 6, protoModule.wireTypes.lengthDelimited)
-		var1166, var1840 = protoModule.writeString(var1166, var1167, self.info_text)
-		buff = var1166
-		var1154 = var1167
+		local var1168, var1169 = protoModule.writeTag(buff, var1156, 6, protoModule.wireTypes.lengthDelimited)
+		var1168, var1846 = protoModule.writeString(var1168, var1169, self.info_text)
+		buff = var1168
+		var1156 = var1169
 	end
-	local buff_1 = buffer.create(var1154)
-	buffer.copy(buff_1, 0, buff, 0, var1154)
+	local buff_1 = buffer.create(var1156)
+	buffer.copy(buff_1, 0, buff, 0, var1156)
 	
 	return buff_1
 end
 
 function t_39.decode(p39)
 	-- upvalues: t_39 (ref), protoModule (ref), t (ref)
-	local var1168 = t_39.new()
-	local var1169 = 0
-	while var1169 < buffer.len(p39) do
+	local var1170 = t_39.new()
+	local var1171 = 0
+	while var1171 < buffer.len(p39) do
 		local _ = nil
-		local var1170 = nil
-		local var1171, var1172, var1173 = protoModule.readTag(p39, var1169)
-		local var1174 = var1171
-		var1170 = var1172
-		var1169 = var1173
+		local var1172 = nil
+		local var1173, var1174, var1175 = protoModule.readTag(p39, var1171)
+		local var1176 = var1173
+		var1172 = var1174
+		var1171 = var1175
 		
-		if var1170 == protoModule.wireTypes.varint then
+		if var1172 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1175, var1176 = protoModule.readVarInt(p39, var1169)
-			local _ = var1175
-			var1169 = var1176
+			local var1177, var1178 = protoModule.readVarInt(p39, var1171)
+			local _ = var1177
+			var1171 = var1178
 			continue
 		end
-		if var1170 == protoModule.wireTypes.lengthDelimited then
-			if var1174 == 1 then
+		if var1172 == protoModule.wireTypes.lengthDelimited then
+			if var1176 == 1 then
 				local _ = nil
-				local var1177, var1178 = protoModule.readBuffer(p39, var1169)
-				var1169 = var1178
-				var1168.title = buffer.tostring(var1177)
-			elseif var1174 == 2 then
+				local var1179, var1180 = protoModule.readBuffer(p39, var1171)
+				var1171 = var1180
+				var1170.title = buffer.tostring(var1179)
+			elseif var1176 == 2 then
 				local _ = nil
-				local var1179, var1180 = protoModule.readBuffer(p39, var1169)
-				var1169 = var1180
-				table.insert(var1168.event_items, t.EventsCarouselInputData_EventItem.decode(var1179))
-			elseif var1174 == 3 then
+				local var1181, var1182 = protoModule.readBuffer(p39, var1171)
+				var1171 = var1182
+				table.insert(var1170.event_items, t.EventsCarouselInputData_EventItem.decode(var1181))
+			elseif var1176 == 3 then
 				local _ = nil
-				local var1181, var1182 = protoModule.readBuffer(p39, var1169)
-				var1169 = var1182
-				var1168.universe_id = buffer.tostring(var1181)
-			elseif var1174 == 4 then
+				local var1183, var1184 = protoModule.readBuffer(p39, var1171)
+				var1171 = var1184
+				var1170.universe_id = buffer.tostring(var1183)
+			elseif var1176 == 4 then
 				local _ = nil
-				local var1183, var1184 = protoModule.readBuffer(p39, var1169)
-				var1169 = var1184
-				var1168.sort_id = buffer.tostring(var1183)
-			elseif var1174 == 5 then
+				local var1185, var1186 = protoModule.readBuffer(p39, var1171)
+				var1171 = var1186
+				var1170.sort_id = buffer.tostring(var1185)
+			elseif var1176 == 5 then
 				local _ = nil
-				local var1185, var1186 = protoModule.readBuffer(p39, var1169)
-				var1169 = var1186
-				var1168.subtitle = buffer.tostring(var1185)
-			elseif var1174 == 6 then
+				local var1187, var1188 = protoModule.readBuffer(p39, var1171)
+				var1171 = var1188
+				var1170.subtitle = buffer.tostring(var1187)
+			elseif var1176 == 6 then
 				local _ = nil
-				local var1187, var1188 = protoModule.readBuffer(p39, var1169)
-				var1169 = var1188
-				var1168.info_text = buffer.tostring(var1187)
+				local var1189, var1190 = protoModule.readBuffer(p39, var1171)
+				var1171 = var1190
+				var1170.info_text = buffer.tostring(var1189)
 			else
 				local _ = nil
-				local var1189, var1190 = protoModule.readVarInt(p39, var1169)
-				var1169 = var1190 + var1189
+				local var1191, var1192 = protoModule.readVarInt(p39, var1171)
+				var1171 = var1192 + var1191
 			end
-		elseif var1170 == protoModule.wireTypes.i32 then
+		elseif var1172 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1191, var1192 = protoModule.readFixed32(p39, var1169)
-			local _ = var1191
-			var1169 = var1192
-		elseif var1170 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1193, var1194 = protoModule.readFixed64(p39, var1169)
+			local var1193, var1194 = protoModule.readFixed32(p39, var1171)
 			local _ = var1193
-			var1169 = var1194
+			var1171 = var1194
+		elseif var1172 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1195, var1196 = protoModule.readFixed64(p39, var1171)
+			local _ = var1195
+			var1171 = var1196
 		else
-			error("Unsupported wire type: " .. var1844)
+			error("Unsupported wire type: " .. var1850)
 		end
 	end
-	return var1168
+	return var1170
 end
 
 function t_39:jsonEncode()
@@ -8212,10 +8242,10 @@ end
 
 function t_39:jsonDecode()
 	-- upvalues: t_39 (ref), t (ref)
-	local var1195 = t_39.new()
+	local var1197 = t_39.new()
 	
 	if self.title ~= nil then
-		var1195.title = self.title
+		var1197.title = self.title
 	end
 	if self.event_items ~= nil then
 		local t_1 = {}
@@ -8223,7 +8253,7 @@ function t_39:jsonDecode()
 		for i, v in self.event_items do
 			table.insert(t_1, t.EventsCarouselInputData_EventItem.jsonDecode(v))
 		end
-		var1195.event_items = t_1
+		var1197.event_items = t_1
 	end
 	if self.eventItems ~= nil then
 		local t_1 = {}
@@ -8231,30 +8261,30 @@ function t_39:jsonDecode()
 		for i, v in self.eventItems do
 			table.insert(t_1, t.EventsCarouselInputData_EventItem.jsonDecode(v))
 		end
-		var1195.event_items = t_1
+		var1197.event_items = t_1
 	end
 	if self.universe_id ~= nil then
-		var1195.universe_id = self.universe_id
+		var1197.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var1195.universe_id = self.universeId
+		var1197.universe_id = self.universeId
 	end
 	if self.sort_id ~= nil then
-		var1195.sort_id = self.sort_id
+		var1197.sort_id = self.sort_id
 	end
 	if self.sortId ~= nil then
-		var1195.sort_id = self.sortId
+		var1197.sort_id = self.sortId
 	end
 	if self.subtitle ~= nil then
-		var1195.subtitle = self.subtitle
+		var1197.subtitle = self.subtitle
 	end
 	if self.info_text ~= nil then
-		var1195.info_text = self.info_text
+		var1197.info_text = self.info_text
 	end
 	if self.infoText ~= nil then
-		var1195.info_text = self.infoText
+		var1197.info_text = self.infoText
 	end
-	return var1195
+	return var1197
 end
 
 t_39.descriptor = {
@@ -8276,65 +8306,65 @@ end
 function t_40:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1196 = 0
+	local var1198 = 0
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
-		local var1197, var1198 = protoModule.writeTag(buff, var1196, 1, protoModule.wireTypes.lengthDelimited)
-		var1197, var1877 = protoModule.writeString(var1197, var1198, self.event_id)
-		buff = var1197
-		var1196 = var1198
+		local var1199, var1200 = protoModule.writeTag(buff, var1198, 1, protoModule.wireTypes.lengthDelimited)
+		var1199, var1883 = protoModule.writeString(var1199, var1200, self.event_id)
+		buff = var1199
+		var1198 = var1200
 	end
-	local buff_1 = buffer.create(var1196)
-	buffer.copy(buff_1, 0, buff, 0, var1196)
+	local buff_1 = buffer.create(var1198)
+	buffer.copy(buff_1, 0, buff, 0, var1198)
 	
 	return buff_1
 end
 
 function t_40.decode(p40)
 	-- upvalues: t_40 (ref), protoModule (ref)
-	local var1196 = t_40.new()
-	local var1197 = 0
-	while var1197 < buffer.len(p40) do
+	local var1198 = t_40.new()
+	local var1199 = 0
+	while var1199 < buffer.len(p40) do
 		local _ = nil
-		local var1198 = nil
-		local var1199, var1200, var1201 = protoModule.readTag(p40, var1197)
-		local var1202 = var1199
-		var1198 = var1200
-		var1197 = var1201
+		local var1200 = nil
+		local var1201, var1202, var1203 = protoModule.readTag(p40, var1199)
+		local var1204 = var1201
+		var1200 = var1202
+		var1199 = var1203
 		
-		if var1198 == protoModule.wireTypes.varint then
+		if var1200 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1203, var1204 = protoModule.readVarInt(p40, var1197)
-			local _ = var1203
-			var1197 = var1204
+			local var1205, var1206 = protoModule.readVarInt(p40, var1199)
+			local _ = var1205
+			var1199 = var1206
 			continue
 		end
-		if var1198 == protoModule.wireTypes.lengthDelimited then
-			if var1202 == 1 then
+		if var1200 == protoModule.wireTypes.lengthDelimited then
+			if var1204 == 1 then
 				local _ = nil
-				local var1205, var1206 = protoModule.readBuffer(p40, var1197)
-				var1197 = var1206
-				var1196.event_id = buffer.tostring(var1205)
+				local var1207, var1208 = protoModule.readBuffer(p40, var1199)
+				var1199 = var1208
+				var1198.event_id = buffer.tostring(var1207)
 			else
 				local _ = nil
-				local var1207, var1208 = protoModule.readVarInt(p40, var1197)
-				var1197 = var1208 + var1207
+				local var1209, var1210 = protoModule.readVarInt(p40, var1199)
+				var1199 = var1210 + var1209
 			end
-		elseif var1198 == protoModule.wireTypes.i32 then
+		elseif var1200 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1209, var1210 = protoModule.readFixed32(p40, var1197)
-			local _ = var1209
-			var1197 = var1210
-		elseif var1198 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1211, var1212 = protoModule.readFixed64(p40, var1197)
+			local var1211, var1212 = protoModule.readFixed32(p40, var1199)
 			local _ = var1211
-			var1197 = var1212
+			var1199 = var1212
+		elseif var1200 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1213, var1214 = protoModule.readFixed64(p40, var1199)
+			local _ = var1213
+			var1199 = var1214
 		else
-			error("Unsupported wire type: " .. var1881)
+			error("Unsupported wire type: " .. var1887)
 		end
 	end
-	return var1196
+	return var1198
 end
 
 function t_40:jsonEncode()
@@ -8348,15 +8378,15 @@ end
 
 function t_40:jsonDecode()
 	-- upvalues: t_40 (ref)
-	local var1213 = t_40.new()
+	local var1215 = t_40.new()
 	
 	if self.event_id ~= nil then
-		var1213.event_id = self.event_id
+		var1215.event_id = self.event_id
 	end
 	if self.eventId ~= nil then
-		var1213.event_id = self.eventId
+		var1215.event_id = self.eventId
 	end
-	return var1213
+	return var1215
 end
 
 t_40.descriptor = {
@@ -8382,122 +8412,122 @@ end
 function t_41:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1213 = 0
+	local var1215 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var1214, var1215 = protoModule.writeTag(buff, var1213, 1, protoModule.wireTypes.lengthDelimited)
-		var1214, var1901 = protoModule.writeString(var1214, var1215, self.universe_id)
-		buff = var1214
-		var1213 = var1215
+		local var1216, var1217 = protoModule.writeTag(buff, var1215, 1, protoModule.wireTypes.lengthDelimited)
+		var1216, var1907 = protoModule.writeString(var1216, var1217, self.universe_id)
+		buff = var1216
+		var1215 = var1217
 	end
 	if self.entry_map ~= nil and next(self.entry_map) ~= nil then
 		for i, v in self.entry_map do
-			local var1216, var1217 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var1216, var1903 = protoModule.writeString(var1216, var1217, i)
-			local var1218 = v:encode()
-			var1217, var1905 = protoModule.writeTag(var1216, var1217, 2, protoModule.wireTypes.lengthDelimited)
-			var1217, var1905 = protoModule.writeBuffer(var1217, var1905, var1218, buffer.len(var1218))
-			local var1219 = var1217
-			local var1220 = var1905
-			local var1221, var1222 = protoModule.writeTag(buff, var1213, 2, protoModule.wireTypes.lengthDelimited)
-			var1221, var1909 = protoModule.writeBuffer(var1221, var1222, var1219, var1220)
-			buff = var1221
-			var1213 = var1222
+			local var1218, var1219 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
+			var1218, var1909 = protoModule.writeString(var1218, var1219, i)
+			local var1220 = v:encode()
+			var1219, var1911 = protoModule.writeTag(var1218, var1219, 2, protoModule.wireTypes.lengthDelimited)
+			var1219, var1911 = protoModule.writeBuffer(var1219, var1911, var1220, buffer.len(var1220))
+			local var1221 = var1219
+			local var1222 = var1911
+			local var1223, var1224 = protoModule.writeTag(buff, var1215, 2, protoModule.wireTypes.lengthDelimited)
+			var1223, var1915 = protoModule.writeBuffer(var1223, var1224, var1221, var1222)
+			buff = var1223
+			var1215 = var1224
 		end
 	end
 	if self.entry_order ~= nil and #self.entry_order > 0 then
 		for i, v in self.entry_order do
-			local var1223, var1224 = protoModule.writeTag(buff, var1213, 3, protoModule.wireTypes.lengthDelimited)
-			var1223, var1911 = protoModule.writeString(var1223, var1224, v)
-			buff = var1223
-			var1213 = var1224
+			local var1225, var1226 = protoModule.writeTag(buff, var1215, 3, protoModule.wireTypes.lengthDelimited)
+			var1225, var1917 = protoModule.writeString(var1225, var1226, v)
+			buff = var1225
+			var1215 = var1226
 		end
 	end
 	if self.creator_key ~= nil and self.creator_key ~= "" then
-		local var1225, var1226 = protoModule.writeTag(buff, var1213, 4, protoModule.wireTypes.lengthDelimited)
-		var1225, var1913 = protoModule.writeString(var1225, var1226, self.creator_key)
-		buff = var1225
-		var1213 = var1226
+		local var1227, var1228 = protoModule.writeTag(buff, var1215, 4, protoModule.wireTypes.lengthDelimited)
+		var1227, var1919 = protoModule.writeString(var1227, var1228, self.creator_key)
+		buff = var1227
+		var1215 = var1228
 	end
 	if self.pill_tabs ~= nil then
-		local var1227 = self.pill_tabs:encode()
-		local var1228, var1229 = protoModule.writeTag(buff, var1213, 5, protoModule.wireTypes.lengthDelimited)
-		var1228, var1916 = protoModule.writeBuffer(var1228, var1229, var1227, buffer.len(var1227))
-		buff = var1228
-		var1213 = var1229
+		local var1229 = self.pill_tabs:encode()
+		local var1230, var1231 = protoModule.writeTag(buff, var1215, 5, protoModule.wireTypes.lengthDelimited)
+		var1230, var1922 = protoModule.writeBuffer(var1230, var1231, var1229, buffer.len(var1229))
+		buff = var1230
+		var1215 = var1231
 	end
-	local buff_1 = buffer.create(var1213)
-	buffer.copy(buff_1, 0, buff, 0, var1213)
+	local buff_1 = buffer.create(var1215)
+	buffer.copy(buff_1, 0, buff, 0, var1215)
 	
 	return buff_1
 end
 
 function t_41.decode(p41)
 	-- upvalues: t_41 (ref), protoModule (ref), t (ref)
-	local var1230 = t_41.new()
-	local var1231 = 0
-	while var1231 < buffer.len(p41) do
+	local var1232 = t_41.new()
+	local var1233 = 0
+	while var1233 < buffer.len(p41) do
 		local _ = nil
-		local var1232 = nil
-		local var1233, var1234, var1235 = protoModule.readTag(p41, var1231)
-		local var1236 = var1233
-		var1232 = var1234
-		var1231 = var1235
+		local var1234 = nil
+		local var1235, var1236, var1237 = protoModule.readTag(p41, var1233)
+		local var1238 = var1235
+		var1234 = var1236
+		var1233 = var1237
 		
-		if var1232 == protoModule.wireTypes.varint then
+		if var1234 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1237, var1238 = protoModule.readVarInt(p41, var1231)
-			local _ = var1237
-			var1231 = var1238
+			local var1239, var1240 = protoModule.readVarInt(p41, var1233)
+			local _ = var1239
+			var1233 = var1240
 			continue
 		end
-		if var1232 == protoModule.wireTypes.lengthDelimited then
-			if var1236 == 1 then
+		if var1234 == protoModule.wireTypes.lengthDelimited then
+			if var1238 == 1 then
 				local _ = nil
-				local var1239, var1240 = protoModule.readBuffer(p41, var1231)
-				var1231 = var1240
-				var1230.universe_id = buffer.tostring(var1239)
-			elseif var1236 == 2 then
+				local var1241, var1242 = protoModule.readBuffer(p41, var1233)
+				var1233 = var1242
+				var1232.universe_id = buffer.tostring(var1241)
+			elseif var1238 == 2 then
 				local _ = nil
-				local var1241, var1242 = protoModule.readBuffer(p41, var1231)
-				var1231 = var1242
-				var1241 = t.DevStoreFeedInputData_EntryMapEntry.decode(var1241)
-				var1230.entry_map[var1241.key or ""] = var1241.value or t.FeedEntry.new()
-			elseif var1236 == 3 then
+				local var1243, var1244 = protoModule.readBuffer(p41, var1233)
+				var1233 = var1244
+				var1243 = t.DevStoreFeedInputData_EntryMapEntry.decode(var1243)
+				var1232.entry_map[var1243.key or ""] = var1243.value or t.FeedEntry.new()
+			elseif var1238 == 3 then
 				local _ = nil
-				local var1243, var1244 = protoModule.readBuffer(p41, var1231)
-				var1231 = var1244
-				table.insert(var1230.entry_order, buffer.tostring(var1243))
-			elseif var1236 == 4 then
+				local var1245, var1246 = protoModule.readBuffer(p41, var1233)
+				var1233 = var1246
+				table.insert(var1232.entry_order, buffer.tostring(var1245))
+			elseif var1238 == 4 then
 				local _ = nil
-				local var1245, var1246 = protoModule.readBuffer(p41, var1231)
-				var1231 = var1246
-				var1230.creator_key = buffer.tostring(var1245)
-			elseif var1236 == 5 then
+				local var1247, var1248 = protoModule.readBuffer(p41, var1233)
+				var1233 = var1248
+				var1232.creator_key = buffer.tostring(var1247)
+			elseif var1238 == 5 then
 				local _ = nil
-				local var1247, var1248 = protoModule.readBuffer(p41, var1231)
-				var1231 = var1248
-				var1230.pill_tabs = t.PillTabsInputData.decode(var1247)
+				local var1249, var1250 = protoModule.readBuffer(p41, var1233)
+				var1233 = var1250
+				var1232.pill_tabs = t.PillTabsInputData.decode(var1249)
 			else
 				local _ = nil
-				local var1249, var1250 = protoModule.readVarInt(p41, var1231)
-				var1231 = var1250 + var1249
+				local var1251, var1252 = protoModule.readVarInt(p41, var1233)
+				var1233 = var1252 + var1251
 			end
-		elseif var1232 == protoModule.wireTypes.i32 then
+		elseif var1234 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1251, var1252 = protoModule.readFixed32(p41, var1231)
-			local _ = var1251
-			var1231 = var1252
-		elseif var1232 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1253, var1254 = protoModule.readFixed64(p41, var1231)
+			local var1253, var1254 = protoModule.readFixed32(p41, var1233)
 			local _ = var1253
-			var1231 = var1254
+			var1233 = var1254
+		elseif var1234 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1255, var1256 = protoModule.readFixed64(p41, var1233)
+			local _ = var1255
+			var1233 = var1256
 		else
-			error("Unsupported wire type: " .. var1920)
+			error("Unsupported wire type: " .. var1926)
 		end
 	end
-	return var1230
+	return var1232
 end
 
 function t_41:jsonEncode()
@@ -8533,13 +8563,13 @@ end
 
 function t_41:jsonDecode()
 	-- upvalues: t_41 (ref), t (ref)
-	local var1255 = t_41.new()
+	local var1257 = t_41.new()
 	
 	if self.universe_id ~= nil then
-		var1255.universe_id = self.universe_id
+		var1257.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var1255.universe_id = self.universeId
+		var1257.universe_id = self.universeId
 	end
 	if self.entry_map ~= nil then
 		local t_1 = {}
@@ -8547,7 +8577,7 @@ function t_41:jsonDecode()
 		for i, v in self.entry_map do
 			t_1[i] = t.FeedEntry.jsonDecode(v)
 		end
-		var1255.entry_map = t_1
+		var1257.entry_map = t_1
 	end
 	if self.entryMap ~= nil then
 		local t_1 = {}
@@ -8555,7 +8585,7 @@ function t_41:jsonDecode()
 		for i, v in self.entryMap do
 			t_1[i] = t.FeedEntry.jsonDecode(v)
 		end
-		var1255.entry_map = t_1
+		var1257.entry_map = t_1
 	end
 	if self.entry_order ~= nil then
 		local t_1 = {}
@@ -8563,7 +8593,7 @@ function t_41:jsonDecode()
 		for i, v in self.entry_order do
 			table.insert(t_1, v)
 		end
-		var1255.entry_order = t_1
+		var1257.entry_order = t_1
 	end
 	if self.entryOrder ~= nil then
 		local t_1 = {}
@@ -8571,21 +8601,21 @@ function t_41:jsonDecode()
 		for i, v in self.entryOrder do
 			table.insert(t_1, v)
 		end
-		var1255.entry_order = t_1
+		var1257.entry_order = t_1
 	end
 	if self.creator_key ~= nil then
-		var1255.creator_key = self.creator_key
+		var1257.creator_key = self.creator_key
 	end
 	if self.creatorKey ~= nil then
-		var1255.creator_key = self.creatorKey
+		var1257.creator_key = self.creatorKey
 	end
 	if self.pill_tabs ~= nil then
-		var1255.pill_tabs = t.PillTabsInputData.jsonDecode(self.pill_tabs)
+		var1257.pill_tabs = t.PillTabsInputData.jsonDecode(self.pill_tabs)
 	end
 	if self.pillTabs ~= nil then
-		var1255.pill_tabs = t.PillTabsInputData.jsonDecode(self.pillTabs)
+		var1257.pill_tabs = t.PillTabsInputData.jsonDecode(self.pillTabs)
 	end
-	return var1255
+	return var1257
 end
 
 t_41.descriptor = {
@@ -8608,77 +8638,77 @@ end
 function t_42:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1256 = 0
+	local var1258 = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var1257, var1258 = protoModule.writeTag(buff, var1256, 1, protoModule.wireTypes.lengthDelimited)
-		var1257, var1954 = protoModule.writeString(var1257, var1258, self.key)
-		buff = var1257
-		var1256 = var1258
+		local var1259, var1260 = protoModule.writeTag(buff, var1258, 1, protoModule.wireTypes.lengthDelimited)
+		var1259, var1960 = protoModule.writeString(var1259, var1260, self.key)
+		buff = var1259
+		var1258 = var1260
 	end
 	if self.value ~= nil then
-		local var1259 = self.value:encode()
-		local var1260, var1261 = protoModule.writeTag(buff, var1256, 2, protoModule.wireTypes.lengthDelimited)
-		var1260, var1957 = protoModule.writeBuffer(var1260, var1261, var1259, buffer.len(var1259))
-		buff = var1260
-		var1256 = var1261
+		local var1261 = self.value:encode()
+		local var1262, var1263 = protoModule.writeTag(buff, var1258, 2, protoModule.wireTypes.lengthDelimited)
+		var1262, var1963 = protoModule.writeBuffer(var1262, var1263, var1261, buffer.len(var1261))
+		buff = var1262
+		var1258 = var1263
 	end
-	local buff_1 = buffer.create(var1256)
-	buffer.copy(buff_1, 0, buff, 0, var1256)
+	local buff_1 = buffer.create(var1258)
+	buffer.copy(buff_1, 0, buff, 0, var1258)
 	
 	return buff_1
 end
 
 function t_42.decode(p42)
 	-- upvalues: t_42 (ref), protoModule (ref), t (ref)
-	local var1256 = t_42.new()
-	local var1257 = 0
-	while var1257 < buffer.len(p42) do
+	local var1258 = t_42.new()
+	local var1259 = 0
+	while var1259 < buffer.len(p42) do
 		local _ = nil
-		local var1258 = nil
-		local var1259, var1260, var1261 = protoModule.readTag(p42, var1257)
-		local var1262 = var1259
-		var1258 = var1260
-		var1257 = var1261
+		local var1260 = nil
+		local var1261, var1262, var1263 = protoModule.readTag(p42, var1259)
+		local var1264 = var1261
+		var1260 = var1262
+		var1259 = var1263
 		
-		if var1258 == protoModule.wireTypes.varint then
+		if var1260 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1263, var1264 = protoModule.readVarInt(p42, var1257)
-			local _ = var1263
-			var1257 = var1264
+			local var1265, var1266 = protoModule.readVarInt(p42, var1259)
+			local _ = var1265
+			var1259 = var1266
 			continue
 		end
-		if var1258 == protoModule.wireTypes.lengthDelimited then
-			if var1262 == 1 then
+		if var1260 == protoModule.wireTypes.lengthDelimited then
+			if var1264 == 1 then
 				local _ = nil
-				local var1265, var1266 = protoModule.readBuffer(p42, var1257)
-				var1257 = var1266
-				var1256.key = buffer.tostring(var1265)
-			elseif var1262 == 2 then
+				local var1267, var1268 = protoModule.readBuffer(p42, var1259)
+				var1259 = var1268
+				var1258.key = buffer.tostring(var1267)
+			elseif var1264 == 2 then
 				local _ = nil
-				local var1267, var1268 = protoModule.readBuffer(p42, var1257)
-				var1257 = var1268
-				var1256.value = t.FeedEntry.decode(var1267)
+				local var1269, var1270 = protoModule.readBuffer(p42, var1259)
+				var1259 = var1270
+				var1258.value = t.FeedEntry.decode(var1269)
 			else
 				local _ = nil
-				local var1269, var1270 = protoModule.readVarInt(p42, var1257)
-				var1257 = var1270 + var1269
+				local var1271, var1272 = protoModule.readVarInt(p42, var1259)
+				var1259 = var1272 + var1271
 			end
-		elseif var1258 == protoModule.wireTypes.i32 then
+		elseif var1260 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1271, var1272 = protoModule.readFixed32(p42, var1257)
-			local _ = var1271
-			var1257 = var1272
-		elseif var1258 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1273, var1274 = protoModule.readFixed64(p42, var1257)
+			local var1273, var1274 = protoModule.readFixed32(p42, var1259)
 			local _ = var1273
-			var1257 = var1274
+			var1259 = var1274
+		elseif var1260 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1275, var1276 = protoModule.readFixed64(p42, var1259)
+			local _ = var1275
+			var1259 = var1276
 		else
-			error("Unsupported wire type: " .. var1961)
+			error("Unsupported wire type: " .. var1967)
 		end
 	end
-	return var1256
+	return var1258
 end
 
 function t_42:jsonEncode()
@@ -8695,15 +8725,15 @@ end
 
 function t_42:jsonDecode()
 	-- upvalues: t_42 (ref), t (ref)
-	local var1275 = t_42.new()
+	local var1277 = t_42.new()
 	
 	if self.key ~= nil then
-		var1275.key = self.key
+		var1277.key = self.key
 	end
 	if self.value ~= nil then
-		var1275.value = t.FeedEntry.jsonDecode(self.value)
+		var1277.value = t.FeedEntry.jsonDecode(self.value)
 	end
-	return var1275
+	return var1277
 end
 
 t_42.descriptor = {
@@ -8726,79 +8756,79 @@ end
 function t_43:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1275 = 0
+	local var1277 = 0
 	
 	if self.options ~= nil and #self.options > 0 then
 		for i, v in self.options do
-			local var1276 = v:encode()
-			local var1277, var1278 = protoModule.writeTag(buff, var1275, 1, protoModule.wireTypes.lengthDelimited)
-			var1277, var1984 = protoModule.writeBuffer(var1277, var1278, var1276, buffer.len(var1276))
-			buff = var1277
-			var1275 = var1278
+			local var1278 = v:encode()
+			local var1279, var1280 = protoModule.writeTag(buff, var1277, 1, protoModule.wireTypes.lengthDelimited)
+			var1279, var1990 = protoModule.writeBuffer(var1279, var1280, var1278, buffer.len(var1278))
+			buff = var1279
+			var1277 = var1280
 		end
 	end
 	if self.default_option_id ~= nil and self.default_option_id ~= "" then
-		local var1279, var1280 = protoModule.writeTag(buff, var1275, 2, protoModule.wireTypes.lengthDelimited)
-		var1279, var1986 = protoModule.writeString(var1279, var1280, self.default_option_id)
-		buff = var1279
-		var1275 = var1280
+		local var1281, var1282 = protoModule.writeTag(buff, var1277, 2, protoModule.wireTypes.lengthDelimited)
+		var1281, var1992 = protoModule.writeString(var1281, var1282, self.default_option_id)
+		buff = var1281
+		var1277 = var1282
 	end
-	local buff_1 = buffer.create(var1275)
-	buffer.copy(buff_1, 0, buff, 0, var1275)
+	local buff_1 = buffer.create(var1277)
+	buffer.copy(buff_1, 0, buff, 0, var1277)
 	
 	return buff_1
 end
 
 function t_43.decode(p43)
 	-- upvalues: t_43 (ref), protoModule (ref), t (ref)
-	local var1281 = t_43.new()
-	local var1282 = 0
-	while var1282 < buffer.len(p43) do
+	local var1283 = t_43.new()
+	local var1284 = 0
+	while var1284 < buffer.len(p43) do
 		local _ = nil
-		local var1283 = nil
-		local var1284, var1285, var1286 = protoModule.readTag(p43, var1282)
-		local var1287 = var1284
-		var1283 = var1285
-		var1282 = var1286
+		local var1285 = nil
+		local var1286, var1287, var1288 = protoModule.readTag(p43, var1284)
+		local var1289 = var1286
+		var1285 = var1287
+		var1284 = var1288
 		
-		if var1283 == protoModule.wireTypes.varint then
+		if var1285 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1288, var1289 = protoModule.readVarInt(p43, var1282)
-			local _ = var1288
-			var1282 = var1289
+			local var1290, var1291 = protoModule.readVarInt(p43, var1284)
+			local _ = var1290
+			var1284 = var1291
 			continue
 		end
-		if var1283 == protoModule.wireTypes.lengthDelimited then
-			if var1287 == 1 then
+		if var1285 == protoModule.wireTypes.lengthDelimited then
+			if var1289 == 1 then
 				local _ = nil
-				local var1290, var1291 = protoModule.readBuffer(p43, var1282)
-				var1282 = var1291
-				table.insert(var1281.options, t.PillTabsInputData_PillTabOption.decode(var1290))
-			elseif var1287 == 2 then
+				local var1292, var1293 = protoModule.readBuffer(p43, var1284)
+				var1284 = var1293
+				table.insert(var1283.options, t.PillTabsInputData_PillTabOption.decode(var1292))
+			elseif var1289 == 2 then
 				local _ = nil
-				local var1292, var1293 = protoModule.readBuffer(p43, var1282)
-				var1282 = var1293
-				var1281.default_option_id = buffer.tostring(var1292)
+				local var1294, var1295 = protoModule.readBuffer(p43, var1284)
+				var1284 = var1295
+				var1283.default_option_id = buffer.tostring(var1294)
 			else
 				local _ = nil
-				local var1294, var1295 = protoModule.readVarInt(p43, var1282)
-				var1282 = var1295 + var1294
+				local var1296, var1297 = protoModule.readVarInt(p43, var1284)
+				var1284 = var1297 + var1296
 			end
-		elseif var1283 == protoModule.wireTypes.i32 then
+		elseif var1285 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1296, var1297 = protoModule.readFixed32(p43, var1282)
-			local _ = var1296
-			var1282 = var1297
-		elseif var1283 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1298, var1299 = protoModule.readFixed64(p43, var1282)
+			local var1298, var1299 = protoModule.readFixed32(p43, var1284)
 			local _ = var1298
-			var1282 = var1299
+			var1284 = var1299
+		elseif var1285 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1300, var1301 = protoModule.readFixed64(p43, var1284)
+			local _ = var1300
+			var1284 = var1301
 		else
-			error("Unsupported wire type: " .. var1990)
+			error("Unsupported wire type: " .. var1996)
 		end
 	end
-	return var1281
+	return var1283
 end
 
 function t_43:jsonEncode()
@@ -8820,7 +8850,7 @@ end
 
 function t_43:jsonDecode()
 	-- upvalues: t_43 (ref), t (ref)
-	local var1300 = t_43.new()
+	local var1302 = t_43.new()
 	
 	if self.options ~= nil then
 		local t_1 = {}
@@ -8828,15 +8858,15 @@ function t_43:jsonDecode()
 		for i, v in self.options do
 			table.insert(t_1, t.PillTabsInputData_PillTabOption.jsonDecode(v))
 		end
-		var1300.options = t_1
+		var1302.options = t_1
 	end
 	if self.default_option_id ~= nil then
-		var1300.default_option_id = self.default_option_id
+		var1302.default_option_id = self.default_option_id
 	end
 	if self.defaultOptionId ~= nil then
-		var1300.default_option_id = self.defaultOptionId
+		var1302.default_option_id = self.defaultOptionId
 	end
-	return var1300
+	return var1302
 end
 
 t_43.descriptor = {
@@ -8859,76 +8889,76 @@ end
 function t_44:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1301 = 0
+	local var1303 = 0
 	
 	if self.option_id ~= nil and self.option_id ~= "" then
-		local var1302, var1303 = protoModule.writeTag(buff, var1301, 1, protoModule.wireTypes.lengthDelimited)
-		var1302, var2014 = protoModule.writeString(var1302, var1303, self.option_id)
-		buff = var1302
-		var1301 = var1303
+		local var1304, var1305 = protoModule.writeTag(buff, var1303, 1, protoModule.wireTypes.lengthDelimited)
+		var1304, var2020 = protoModule.writeString(var1304, var1305, self.option_id)
+		buff = var1304
+		var1303 = var1305
 	end
 	if self.display_name ~= nil and self.display_name ~= "" then
-		local var1304, var1305 = protoModule.writeTag(buff, var1301, 2, protoModule.wireTypes.lengthDelimited)
-		var1304, var2016 = protoModule.writeString(var1304, var1305, self.display_name)
-		buff = var1304
-		var1301 = var1305
+		local var1306, var1307 = protoModule.writeTag(buff, var1303, 2, protoModule.wireTypes.lengthDelimited)
+		var1306, var2022 = protoModule.writeString(var1306, var1307, self.display_name)
+		buff = var1306
+		var1303 = var1307
 	end
-	local buff_1 = buffer.create(var1301)
-	buffer.copy(buff_1, 0, buff, 0, var1301)
+	local buff_1 = buffer.create(var1303)
+	buffer.copy(buff_1, 0, buff, 0, var1303)
 	
 	return buff_1
 end
 
 function t_44.decode(p44)
 	-- upvalues: t_44 (ref), protoModule (ref)
-	local var1301 = t_44.new()
-	local var1302 = 0
-	while var1302 < buffer.len(p44) do
+	local var1303 = t_44.new()
+	local var1304 = 0
+	while var1304 < buffer.len(p44) do
 		local _ = nil
-		local var1303 = nil
-		local var1304, var1305, var1306 = protoModule.readTag(p44, var1302)
-		local var1307 = var1304
-		var1303 = var1305
-		var1302 = var1306
+		local var1305 = nil
+		local var1306, var1307, var1308 = protoModule.readTag(p44, var1304)
+		local var1309 = var1306
+		var1305 = var1307
+		var1304 = var1308
 		
-		if var1303 == protoModule.wireTypes.varint then
+		if var1305 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1308, var1309 = protoModule.readVarInt(p44, var1302)
-			local _ = var1308
-			var1302 = var1309
+			local var1310, var1311 = protoModule.readVarInt(p44, var1304)
+			local _ = var1310
+			var1304 = var1311
 			continue
 		end
-		if var1303 == protoModule.wireTypes.lengthDelimited then
-			if var1307 == 1 then
+		if var1305 == protoModule.wireTypes.lengthDelimited then
+			if var1309 == 1 then
 				local _ = nil
-				local var1310, var1311 = protoModule.readBuffer(p44, var1302)
-				var1302 = var1311
-				var1301.option_id = buffer.tostring(var1310)
-			elseif var1307 == 2 then
+				local var1312, var1313 = protoModule.readBuffer(p44, var1304)
+				var1304 = var1313
+				var1303.option_id = buffer.tostring(var1312)
+			elseif var1309 == 2 then
 				local _ = nil
-				local var1312, var1313 = protoModule.readBuffer(p44, var1302)
-				var1302 = var1313
-				var1301.display_name = buffer.tostring(var1312)
+				local var1314, var1315 = protoModule.readBuffer(p44, var1304)
+				var1304 = var1315
+				var1303.display_name = buffer.tostring(var1314)
 			else
 				local _ = nil
-				local var1314, var1315 = protoModule.readVarInt(p44, var1302)
-				var1302 = var1315 + var1314
+				local var1316, var1317 = protoModule.readVarInt(p44, var1304)
+				var1304 = var1317 + var1316
 			end
-		elseif var1303 == protoModule.wireTypes.i32 then
+		elseif var1305 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1316, var1317 = protoModule.readFixed32(p44, var1302)
-			local _ = var1316
-			var1302 = var1317
-		elseif var1303 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1318, var1319 = protoModule.readFixed64(p44, var1302)
+			local var1318, var1319 = protoModule.readFixed32(p44, var1304)
 			local _ = var1318
-			var1302 = var1319
+			var1304 = var1319
+		elseif var1305 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1320, var1321 = protoModule.readFixed64(p44, var1304)
+			local _ = var1320
+			var1304 = var1321
 		else
-			error("Unsupported wire type: " .. var2020)
+			error("Unsupported wire type: " .. var2026)
 		end
 	end
-	return var1301
+	return var1303
 end
 
 function t_44:jsonEncode()
@@ -8945,21 +8975,21 @@ end
 
 function t_44:jsonDecode()
 	-- upvalues: t_44 (ref)
-	local var1320 = t_44.new()
+	local var1322 = t_44.new()
 	
 	if self.option_id ~= nil then
-		var1320.option_id = self.option_id
+		var1322.option_id = self.option_id
 	end
 	if self.optionId ~= nil then
-		var1320.option_id = self.optionId
+		var1322.option_id = self.optionId
 	end
 	if self.display_name ~= nil then
-		var1320.display_name = self.display_name
+		var1322.display_name = self.display_name
 	end
 	if self.displayName ~= nil then
-		var1320.display_name = self.displayName
+		var1322.display_name = self.displayName
 	end
-	return var1320
+	return var1322
 end
 
 t_44.descriptor = {
@@ -8981,68 +9011,68 @@ end
 function t_45:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1320 = 0
+	local var1322 = 0
 	
 	if self.game_passes ~= nil and #self.game_passes > 0 then
 		for i, v in self.game_passes do
-			local var1321 = v:encode()
-			local var1322, var1323 = protoModule.writeTag(buff, var1320, 1, protoModule.wireTypes.lengthDelimited)
-			var1322, var2043 = protoModule.writeBuffer(var1322, var1323, var1321, buffer.len(var1321))
-			buff = var1322
-			var1320 = var1323
+			local var1323 = v:encode()
+			local var1324, var1325 = protoModule.writeTag(buff, var1322, 1, protoModule.wireTypes.lengthDelimited)
+			var1324, var2049 = protoModule.writeBuffer(var1324, var1325, var1323, buffer.len(var1323))
+			buff = var1324
+			var1322 = var1325
 		end
 	end
-	local buff_1 = buffer.create(var1320)
-	buffer.copy(buff_1, 0, buff, 0, var1320)
+	local buff_1 = buffer.create(var1322)
+	buffer.copy(buff_1, 0, buff, 0, var1322)
 	
 	return buff_1
 end
 
 function t_45.decode(p45)
 	-- upvalues: t_45 (ref), protoModule (ref), t (ref)
-	local var1324 = t_45.new()
-	local var1325 = 0
-	while var1325 < buffer.len(p45) do
+	local var1326 = t_45.new()
+	local var1327 = 0
+	while var1327 < buffer.len(p45) do
 		local _ = nil
-		local var1326 = nil
-		local var1327, var1328, var1329 = protoModule.readTag(p45, var1325)
-		local var1330 = var1327
-		var1326 = var1328
-		var1325 = var1329
+		local var1328 = nil
+		local var1329, var1330, var1331 = protoModule.readTag(p45, var1327)
+		local var1332 = var1329
+		var1328 = var1330
+		var1327 = var1331
 		
-		if var1326 == protoModule.wireTypes.varint then
+		if var1328 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1331, var1332 = protoModule.readVarInt(p45, var1325)
-			local _ = var1331
-			var1325 = var1332
+			local var1333, var1334 = protoModule.readVarInt(p45, var1327)
+			local _ = var1333
+			var1327 = var1334
 			continue
 		end
-		if var1326 == protoModule.wireTypes.lengthDelimited then
-			if var1330 == 1 then
+		if var1328 == protoModule.wireTypes.lengthDelimited then
+			if var1332 == 1 then
 				local _ = nil
-				local var1333, var1334 = protoModule.readBuffer(p45, var1325)
-				var1325 = var1334
-				table.insert(var1324.game_passes, t.GamePassCollectionInputData_GamePassItem.decode(var1333))
+				local var1335, var1336 = protoModule.readBuffer(p45, var1327)
+				var1327 = var1336
+				table.insert(var1326.game_passes, t.GamePassCollectionInputData_GamePassItem.decode(var1335))
 			else
 				local _ = nil
-				local var1335, var1336 = protoModule.readVarInt(p45, var1325)
-				var1325 = var1336 + var1335
+				local var1337, var1338 = protoModule.readVarInt(p45, var1327)
+				var1327 = var1338 + var1337
 			end
-		elseif var1326 == protoModule.wireTypes.i32 then
+		elseif var1328 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1337, var1338 = protoModule.readFixed32(p45, var1325)
-			local _ = var1337
-			var1325 = var1338
-		elseif var1326 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1339, var1340 = protoModule.readFixed64(p45, var1325)
+			local var1339, var1340 = protoModule.readFixed32(p45, var1327)
 			local _ = var1339
-			var1325 = var1340
+			var1327 = var1340
+		elseif var1328 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1341, var1342 = protoModule.readFixed64(p45, var1327)
+			local _ = var1341
+			var1327 = var1342
 		else
-			error("Unsupported wire type: " .. var2047)
+			error("Unsupported wire type: " .. var2053)
 		end
 	end
-	return var1324
+	return var1326
 end
 
 function t_45:jsonEncode()
@@ -9061,7 +9091,7 @@ end
 
 function t_45:jsonDecode()
 	-- upvalues: t_45 (ref), t (ref)
-	local var1341 = t_45.new()
+	local var1343 = t_45.new()
 	
 	if self.game_passes ~= nil then
 		local t_1 = {}
@@ -9069,7 +9099,7 @@ function t_45:jsonDecode()
 		for i, v in self.game_passes do
 			table.insert(t_1, t.GamePassCollectionInputData_GamePassItem.jsonDecode(v))
 		end
-		var1341.game_passes = t_1
+		var1343.game_passes = t_1
 	end
 	if self.gamePasses ~= nil then
 		local t_1 = {}
@@ -9077,9 +9107,9 @@ function t_45:jsonDecode()
 		for i, v in self.gamePasses do
 			table.insert(t_1, t.GamePassCollectionInputData_GamePassItem.jsonDecode(v))
 		end
-		var1341.game_passes = t_1
+		var1343.game_passes = t_1
 	end
-	return var1341
+	return var1343
 end
 
 t_45.descriptor = {
@@ -9101,65 +9131,65 @@ end
 function t_46:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1342 = 0
+	local var1344 = 0
 	
 	if self.game_pass_id ~= nil and self.game_pass_id ~= "" then
-		local var1343, var1344 = protoModule.writeTag(buff, var1342, 1, protoModule.wireTypes.lengthDelimited)
-		var1343, var2070 = protoModule.writeString(var1343, var1344, self.game_pass_id)
-		buff = var1343
-		var1342 = var1344
+		local var1345, var1346 = protoModule.writeTag(buff, var1344, 1, protoModule.wireTypes.lengthDelimited)
+		var1345, var2076 = protoModule.writeString(var1345, var1346, self.game_pass_id)
+		buff = var1345
+		var1344 = var1346
 	end
-	local buff_1 = buffer.create(var1342)
-	buffer.copy(buff_1, 0, buff, 0, var1342)
+	local buff_1 = buffer.create(var1344)
+	buffer.copy(buff_1, 0, buff, 0, var1344)
 	
 	return buff_1
 end
 
 function t_46.decode(p46)
 	-- upvalues: t_46 (ref), protoModule (ref)
-	local var1342 = t_46.new()
-	local var1343 = 0
-	while var1343 < buffer.len(p46) do
+	local var1344 = t_46.new()
+	local var1345 = 0
+	while var1345 < buffer.len(p46) do
 		local _ = nil
-		local var1344 = nil
-		local var1345, var1346, var1347 = protoModule.readTag(p46, var1343)
-		local var1348 = var1345
-		var1344 = var1346
-		var1343 = var1347
+		local var1346 = nil
+		local var1347, var1348, var1349 = protoModule.readTag(p46, var1345)
+		local var1350 = var1347
+		var1346 = var1348
+		var1345 = var1349
 		
-		if var1344 == protoModule.wireTypes.varint then
+		if var1346 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1349, var1350 = protoModule.readVarInt(p46, var1343)
-			local _ = var1349
-			var1343 = var1350
+			local var1351, var1352 = protoModule.readVarInt(p46, var1345)
+			local _ = var1351
+			var1345 = var1352
 			continue
 		end
-		if var1344 == protoModule.wireTypes.lengthDelimited then
-			if var1348 == 1 then
+		if var1346 == protoModule.wireTypes.lengthDelimited then
+			if var1350 == 1 then
 				local _ = nil
-				local var1351, var1352 = protoModule.readBuffer(p46, var1343)
-				var1343 = var1352
-				var1342.game_pass_id = buffer.tostring(var1351)
+				local var1353, var1354 = protoModule.readBuffer(p46, var1345)
+				var1345 = var1354
+				var1344.game_pass_id = buffer.tostring(var1353)
 			else
 				local _ = nil
-				local var1353, var1354 = protoModule.readVarInt(p46, var1343)
-				var1343 = var1354 + var1353
+				local var1355, var1356 = protoModule.readVarInt(p46, var1345)
+				var1345 = var1356 + var1355
 			end
-		elseif var1344 == protoModule.wireTypes.i32 then
+		elseif var1346 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1355, var1356 = protoModule.readFixed32(p46, var1343)
-			local _ = var1355
-			var1343 = var1356
-		elseif var1344 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1357, var1358 = protoModule.readFixed64(p46, var1343)
+			local var1357, var1358 = protoModule.readFixed32(p46, var1345)
 			local _ = var1357
-			var1343 = var1358
+			var1345 = var1358
+		elseif var1346 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1359, var1360 = protoModule.readFixed64(p46, var1345)
+			local _ = var1359
+			var1345 = var1360
 		else
-			error("Unsupported wire type: " .. var2074)
+			error("Unsupported wire type: " .. var2080)
 		end
 	end
-	return var1342
+	return var1344
 end
 
 function t_46:jsonEncode()
@@ -9173,15 +9203,15 @@ end
 
 function t_46:jsonDecode()
 	-- upvalues: t_46 (ref)
-	local var1359 = t_46.new()
+	local var1361 = t_46.new()
 	
 	if self.game_pass_id ~= nil then
-		var1359.game_pass_id = self.game_pass_id
+		var1361.game_pass_id = self.game_pass_id
 	end
 	if self.gamePassId ~= nil then
-		var1359.game_pass_id = self.gamePassId
+		var1361.game_pass_id = self.gamePassId
 	end
-	return var1359
+	return var1361
 end
 
 t_46.descriptor = {
@@ -9203,68 +9233,68 @@ end
 function t_47:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1359 = 0
+	local var1361 = 0
 	
 	if self.developer_products ~= nil and #self.developer_products > 0 then
 		for i, v in self.developer_products do
-			local var1360 = v:encode()
-			local var1361, var1362 = protoModule.writeTag(buff, var1359, 1, protoModule.wireTypes.lengthDelimited)
-			var1361, var2095 = protoModule.writeBuffer(var1361, var1362, var1360, buffer.len(var1360))
-			buff = var1361
-			var1359 = var1362
+			local var1362 = v:encode()
+			local var1363, var1364 = protoModule.writeTag(buff, var1361, 1, protoModule.wireTypes.lengthDelimited)
+			var1363, var2101 = protoModule.writeBuffer(var1363, var1364, var1362, buffer.len(var1362))
+			buff = var1363
+			var1361 = var1364
 		end
 	end
-	local buff_1 = buffer.create(var1359)
-	buffer.copy(buff_1, 0, buff, 0, var1359)
+	local buff_1 = buffer.create(var1361)
+	buffer.copy(buff_1, 0, buff, 0, var1361)
 	
 	return buff_1
 end
 
 function t_47.decode(p47)
 	-- upvalues: t_47 (ref), protoModule (ref), t (ref)
-	local var1363 = t_47.new()
-	local var1364 = 0
-	while var1364 < buffer.len(p47) do
+	local var1365 = t_47.new()
+	local var1366 = 0
+	while var1366 < buffer.len(p47) do
 		local _ = nil
-		local var1365 = nil
-		local var1366, var1367, var1368 = protoModule.readTag(p47, var1364)
-		local var1369 = var1366
-		var1365 = var1367
-		var1364 = var1368
+		local var1367 = nil
+		local var1368, var1369, var1370 = protoModule.readTag(p47, var1366)
+		local var1371 = var1368
+		var1367 = var1369
+		var1366 = var1370
 		
-		if var1365 == protoModule.wireTypes.varint then
+		if var1367 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1370, var1371 = protoModule.readVarInt(p47, var1364)
-			local _ = var1370
-			var1364 = var1371
+			local var1372, var1373 = protoModule.readVarInt(p47, var1366)
+			local _ = var1372
+			var1366 = var1373
 			continue
 		end
-		if var1365 == protoModule.wireTypes.lengthDelimited then
-			if var1369 == 1 then
+		if var1367 == protoModule.wireTypes.lengthDelimited then
+			if var1371 == 1 then
 				local _ = nil
-				local var1372, var1373 = protoModule.readBuffer(p47, var1364)
-				var1364 = var1373
-				table.insert(var1363.developer_products, t.DeveloperProductCollectionInputData_DeveloperProductItem.decode(var1372))
+				local var1374, var1375 = protoModule.readBuffer(p47, var1366)
+				var1366 = var1375
+				table.insert(var1365.developer_products, t.DeveloperProductCollectionInputData_DeveloperProductItem.decode(var1374))
 			else
 				local _ = nil
-				local var1374, var1375 = protoModule.readVarInt(p47, var1364)
-				var1364 = var1375 + var1374
+				local var1376, var1377 = protoModule.readVarInt(p47, var1366)
+				var1366 = var1377 + var1376
 			end
-		elseif var1365 == protoModule.wireTypes.i32 then
+		elseif var1367 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1376, var1377 = protoModule.readFixed32(p47, var1364)
-			local _ = var1376
-			var1364 = var1377
-		elseif var1365 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1378, var1379 = protoModule.readFixed64(p47, var1364)
+			local var1378, var1379 = protoModule.readFixed32(p47, var1366)
 			local _ = var1378
-			var1364 = var1379
+			var1366 = var1379
+		elseif var1367 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1380, var1381 = protoModule.readFixed64(p47, var1366)
+			local _ = var1380
+			var1366 = var1381
 		else
-			error("Unsupported wire type: " .. var2099)
+			error("Unsupported wire type: " .. var2105)
 		end
 	end
-	return var1363
+	return var1365
 end
 
 function t_47:jsonEncode()
@@ -9283,7 +9313,7 @@ end
 
 function t_47:jsonDecode()
 	-- upvalues: t_47 (ref), t (ref)
-	local var1380 = t_47.new()
+	local var1382 = t_47.new()
 	
 	if self.developer_products ~= nil then
 		local t_1 = {}
@@ -9291,7 +9321,7 @@ function t_47:jsonDecode()
 		for i, v in self.developer_products do
 			table.insert(t_1, t.DeveloperProductCollectionInputData_DeveloperProductItem.jsonDecode(v))
 		end
-		var1380.developer_products = t_1
+		var1382.developer_products = t_1
 	end
 	if self.developerProducts ~= nil then
 		local t_1 = {}
@@ -9299,9 +9329,9 @@ function t_47:jsonDecode()
 		for i, v in self.developerProducts do
 			table.insert(t_1, t.DeveloperProductCollectionInputData_DeveloperProductItem.jsonDecode(v))
 		end
-		var1380.developer_products = t_1
+		var1382.developer_products = t_1
 	end
-	return var1380
+	return var1382
 end
 
 t_47.descriptor = {
@@ -9323,65 +9353,65 @@ end
 function t_48:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1381 = 0
+	local var1383 = 0
 	
 	if self.developer_product_id ~= nil and self.developer_product_id ~= "" then
-		local var1382, var1383 = protoModule.writeTag(buff, var1381, 1, protoModule.wireTypes.lengthDelimited)
-		var1382, var2122 = protoModule.writeString(var1382, var1383, self.developer_product_id)
-		buff = var1382
-		var1381 = var1383
+		local var1384, var1385 = protoModule.writeTag(buff, var1383, 1, protoModule.wireTypes.lengthDelimited)
+		var1384, var2128 = protoModule.writeString(var1384, var1385, self.developer_product_id)
+		buff = var1384
+		var1383 = var1385
 	end
-	local buff_1 = buffer.create(var1381)
-	buffer.copy(buff_1, 0, buff, 0, var1381)
+	local buff_1 = buffer.create(var1383)
+	buffer.copy(buff_1, 0, buff, 0, var1383)
 	
 	return buff_1
 end
 
 function t_48.decode(p48)
 	-- upvalues: t_48 (ref), protoModule (ref)
-	local var1381 = t_48.new()
-	local var1382 = 0
-	while var1382 < buffer.len(p48) do
+	local var1383 = t_48.new()
+	local var1384 = 0
+	while var1384 < buffer.len(p48) do
 		local _ = nil
-		local var1383 = nil
-		local var1384, var1385, var1386 = protoModule.readTag(p48, var1382)
-		local var1387 = var1384
-		var1383 = var1385
-		var1382 = var1386
+		local var1385 = nil
+		local var1386, var1387, var1388 = protoModule.readTag(p48, var1384)
+		local var1389 = var1386
+		var1385 = var1387
+		var1384 = var1388
 		
-		if var1383 == protoModule.wireTypes.varint then
+		if var1385 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1388, var1389 = protoModule.readVarInt(p48, var1382)
-			local _ = var1388
-			var1382 = var1389
+			local var1390, var1391 = protoModule.readVarInt(p48, var1384)
+			local _ = var1390
+			var1384 = var1391
 			continue
 		end
-		if var1383 == protoModule.wireTypes.lengthDelimited then
-			if var1387 == 1 then
+		if var1385 == protoModule.wireTypes.lengthDelimited then
+			if var1389 == 1 then
 				local _ = nil
-				local var1390, var1391 = protoModule.readBuffer(p48, var1382)
-				var1382 = var1391
-				var1381.developer_product_id = buffer.tostring(var1390)
+				local var1392, var1393 = protoModule.readBuffer(p48, var1384)
+				var1384 = var1393
+				var1383.developer_product_id = buffer.tostring(var1392)
 			else
 				local _ = nil
-				local var1392, var1393 = protoModule.readVarInt(p48, var1382)
-				var1382 = var1393 + var1392
+				local var1394, var1395 = protoModule.readVarInt(p48, var1384)
+				var1384 = var1395 + var1394
 			end
-		elseif var1383 == protoModule.wireTypes.i32 then
+		elseif var1385 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1394, var1395 = protoModule.readFixed32(p48, var1382)
-			local _ = var1394
-			var1382 = var1395
-		elseif var1383 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1396, var1397 = protoModule.readFixed64(p48, var1382)
+			local var1396, var1397 = protoModule.readFixed32(p48, var1384)
 			local _ = var1396
-			var1382 = var1397
+			var1384 = var1397
+		elseif var1385 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1398, var1399 = protoModule.readFixed64(p48, var1384)
+			local _ = var1398
+			var1384 = var1399
 		else
-			error("Unsupported wire type: " .. var2126)
+			error("Unsupported wire type: " .. var2132)
 		end
 	end
-	return var1381
+	return var1383
 end
 
 function t_48:jsonEncode()
@@ -9395,15 +9425,15 @@ end
 
 function t_48:jsonDecode()
 	-- upvalues: t_48 (ref)
-	local var1398 = t_48.new()
+	local var1400 = t_48.new()
 	
 	if self.developer_product_id ~= nil then
-		var1398.developer_product_id = self.developer_product_id
+		var1400.developer_product_id = self.developer_product_id
 	end
 	if self.developerProductId ~= nil then
-		var1398.developer_product_id = self.developerProductId
+		var1400.developer_product_id = self.developerProductId
 	end
-	return var1398
+	return var1400
 end
 
 t_48.descriptor = {
@@ -9425,68 +9455,68 @@ end
 function t_49:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1398 = 0
+	local var1400 = 0
 	
 	if self.subscriptions ~= nil and #self.subscriptions > 0 then
 		for i, v in self.subscriptions do
-			local var1399 = v:encode()
-			local var1400, var1401 = protoModule.writeTag(buff, var1398, 1, protoModule.wireTypes.lengthDelimited)
-			var1400, var2147 = protoModule.writeBuffer(var1400, var1401, var1399, buffer.len(var1399))
-			buff = var1400
-			var1398 = var1401
+			local var1401 = v:encode()
+			local var1402, var1403 = protoModule.writeTag(buff, var1400, 1, protoModule.wireTypes.lengthDelimited)
+			var1402, var2153 = protoModule.writeBuffer(var1402, var1403, var1401, buffer.len(var1401))
+			buff = var1402
+			var1400 = var1403
 		end
 	end
-	local buff_1 = buffer.create(var1398)
-	buffer.copy(buff_1, 0, buff, 0, var1398)
+	local buff_1 = buffer.create(var1400)
+	buffer.copy(buff_1, 0, buff, 0, var1400)
 	
 	return buff_1
 end
 
 function t_49.decode(p49)
 	-- upvalues: t_49 (ref), protoModule (ref), t (ref)
-	local var1402 = t_49.new()
-	local var1403 = 0
-	while var1403 < buffer.len(p49) do
+	local var1404 = t_49.new()
+	local var1405 = 0
+	while var1405 < buffer.len(p49) do
 		local _ = nil
-		local var1404 = nil
-		local var1405, var1406, var1407 = protoModule.readTag(p49, var1403)
-		local var1408 = var1405
-		var1404 = var1406
-		var1403 = var1407
+		local var1406 = nil
+		local var1407, var1408, var1409 = protoModule.readTag(p49, var1405)
+		local var1410 = var1407
+		var1406 = var1408
+		var1405 = var1409
 		
-		if var1404 == protoModule.wireTypes.varint then
+		if var1406 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1409, var1410 = protoModule.readVarInt(p49, var1403)
-			local _ = var1409
-			var1403 = var1410
+			local var1411, var1412 = protoModule.readVarInt(p49, var1405)
+			local _ = var1411
+			var1405 = var1412
 			continue
 		end
-		if var1404 == protoModule.wireTypes.lengthDelimited then
-			if var1408 == 1 then
+		if var1406 == protoModule.wireTypes.lengthDelimited then
+			if var1410 == 1 then
 				local _ = nil
-				local var1411, var1412 = protoModule.readBuffer(p49, var1403)
-				var1403 = var1412
-				table.insert(var1402.subscriptions, t.SubscriptionCollectionInputData_SubscriptionItem.decode(var1411))
+				local var1413, var1414 = protoModule.readBuffer(p49, var1405)
+				var1405 = var1414
+				table.insert(var1404.subscriptions, t.SubscriptionCollectionInputData_SubscriptionItem.decode(var1413))
 			else
 				local _ = nil
-				local var1413, var1414 = protoModule.readVarInt(p49, var1403)
-				var1403 = var1414 + var1413
+				local var1415, var1416 = protoModule.readVarInt(p49, var1405)
+				var1405 = var1416 + var1415
 			end
-		elseif var1404 == protoModule.wireTypes.i32 then
+		elseif var1406 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1415, var1416 = protoModule.readFixed32(p49, var1403)
-			local _ = var1415
-			var1403 = var1416
-		elseif var1404 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1417, var1418 = protoModule.readFixed64(p49, var1403)
+			local var1417, var1418 = protoModule.readFixed32(p49, var1405)
 			local _ = var1417
-			var1403 = var1418
+			var1405 = var1418
+		elseif var1406 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1419, var1420 = protoModule.readFixed64(p49, var1405)
+			local _ = var1419
+			var1405 = var1420
 		else
-			error("Unsupported wire type: " .. var2151)
+			error("Unsupported wire type: " .. var2157)
 		end
 	end
-	return var1402
+	return var1404
 end
 
 function t_49:jsonEncode()
@@ -9505,7 +9535,7 @@ end
 
 function t_49:jsonDecode()
 	-- upvalues: t_49 (ref), t (ref)
-	local var1419 = t_49.new()
+	local var1421 = t_49.new()
 	
 	if self.subscriptions ~= nil then
 		local t_1 = {}
@@ -9513,9 +9543,9 @@ function t_49:jsonDecode()
 		for i, v in self.subscriptions do
 			table.insert(t_1, t.SubscriptionCollectionInputData_SubscriptionItem.jsonDecode(v))
 		end
-		var1419.subscriptions = t_1
+		var1421.subscriptions = t_1
 	end
-	return var1419
+	return var1421
 end
 
 t_49.descriptor = {
@@ -9537,65 +9567,65 @@ end
 function t_50:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1420 = 0
+	local var1422 = 0
 	
 	if self.subscription_id ~= nil and self.subscription_id ~= "" then
-		local var1421, var1422 = protoModule.writeTag(buff, var1420, 1, protoModule.wireTypes.lengthDelimited)
-		var1421, var2173 = protoModule.writeString(var1421, var1422, self.subscription_id)
-		buff = var1421
-		var1420 = var1422
+		local var1423, var1424 = protoModule.writeTag(buff, var1422, 1, protoModule.wireTypes.lengthDelimited)
+		var1423, var2179 = protoModule.writeString(var1423, var1424, self.subscription_id)
+		buff = var1423
+		var1422 = var1424
 	end
-	local buff_1 = buffer.create(var1420)
-	buffer.copy(buff_1, 0, buff, 0, var1420)
+	local buff_1 = buffer.create(var1422)
+	buffer.copy(buff_1, 0, buff, 0, var1422)
 	
 	return buff_1
 end
 
 function t_50.decode(p50)
 	-- upvalues: t_50 (ref), protoModule (ref)
-	local var1420 = t_50.new()
-	local var1421 = 0
-	while var1421 < buffer.len(p50) do
+	local var1422 = t_50.new()
+	local var1423 = 0
+	while var1423 < buffer.len(p50) do
 		local _ = nil
-		local var1422 = nil
-		local var1423, var1424, var1425 = protoModule.readTag(p50, var1421)
-		local var1426 = var1423
-		var1422 = var1424
-		var1421 = var1425
+		local var1424 = nil
+		local var1425, var1426, var1427 = protoModule.readTag(p50, var1423)
+		local var1428 = var1425
+		var1424 = var1426
+		var1423 = var1427
 		
-		if var1422 == protoModule.wireTypes.varint then
+		if var1424 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1427, var1428 = protoModule.readVarInt(p50, var1421)
-			local _ = var1427
-			var1421 = var1428
+			local var1429, var1430 = protoModule.readVarInt(p50, var1423)
+			local _ = var1429
+			var1423 = var1430
 			continue
 		end
-		if var1422 == protoModule.wireTypes.lengthDelimited then
-			if var1426 == 1 then
+		if var1424 == protoModule.wireTypes.lengthDelimited then
+			if var1428 == 1 then
 				local _ = nil
-				local var1429, var1430 = protoModule.readBuffer(p50, var1421)
-				var1421 = var1430
-				var1420.subscription_id = buffer.tostring(var1429)
+				local var1431, var1432 = protoModule.readBuffer(p50, var1423)
+				var1423 = var1432
+				var1422.subscription_id = buffer.tostring(var1431)
 			else
 				local _ = nil
-				local var1431, var1432 = protoModule.readVarInt(p50, var1421)
-				var1421 = var1432 + var1431
+				local var1433, var1434 = protoModule.readVarInt(p50, var1423)
+				var1423 = var1434 + var1433
 			end
-		elseif var1422 == protoModule.wireTypes.i32 then
+		elseif var1424 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1433, var1434 = protoModule.readFixed32(p50, var1421)
-			local _ = var1433
-			var1421 = var1434
-		elseif var1422 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1435, var1436 = protoModule.readFixed64(p50, var1421)
+			local var1435, var1436 = protoModule.readFixed32(p50, var1423)
 			local _ = var1435
-			var1421 = var1436
+			var1423 = var1436
+		elseif var1424 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1437, var1438 = protoModule.readFixed64(p50, var1423)
+			local _ = var1437
+			var1423 = var1438
 		else
-			error("Unsupported wire type: " .. var2177)
+			error("Unsupported wire type: " .. var2183)
 		end
 	end
-	return var1420
+	return var1422
 end
 
 function t_50:jsonEncode()
@@ -9609,15 +9639,15 @@ end
 
 function t_50:jsonDecode()
 	-- upvalues: t_50 (ref)
-	local var1437 = t_50.new()
+	local var1439 = t_50.new()
 	
 	if self.subscription_id ~= nil then
-		var1437.subscription_id = self.subscription_id
+		var1439.subscription_id = self.subscription_id
 	end
 	if self.subscriptionId ~= nil then
-		var1437.subscription_id = self.subscriptionId
+		var1439.subscription_id = self.subscriptionId
 	end
-	return var1437
+	return var1439
 end
 
 t_50.descriptor = {
@@ -9648,167 +9678,167 @@ end
 function t_51:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1437 = 0
+	local var1439 = 0
 	
 	if self.items ~= nil and #self.items > 0 then
 		for i, v in self.items do
-			local var1438 = v:encode()
-			local var1439, var1440 = protoModule.writeTag(buff, var1437, 1, protoModule.wireTypes.lengthDelimited)
-			var1439, var2198 = protoModule.writeBuffer(var1439, var1440, var1438, buffer.len(var1438))
-			buff = var1439
-			var1437 = var1440
+			local var1440 = v:encode()
+			local var1441, var1442 = protoModule.writeTag(buff, var1439, 1, protoModule.wireTypes.lengthDelimited)
+			var1441, var2204 = protoModule.writeBuffer(var1441, var1442, var1440, buffer.len(var1440))
+			buff = var1441
+			var1439 = var1442
 		end
 	end
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var1441, var1442 = protoModule.writeTag(buff, var1437, 2, protoModule.wireTypes.lengthDelimited)
-		var1441, var2200 = protoModule.writeString(var1441, var1442, self.universe_id)
-		buff = var1441
-		var1437 = var1442
+		local var1443, var1444 = protoModule.writeTag(buff, var1439, 2, protoModule.wireTypes.lengthDelimited)
+		var1443, var2206 = protoModule.writeString(var1443, var1444, self.universe_id)
+		buff = var1443
+		var1439 = var1444
 	end
 	if self.section_title ~= nil and self.section_title ~= "" then
-		local var1443, var1444 = protoModule.writeTag(buff, var1437, 3, protoModule.wireTypes.lengthDelimited)
-		var1443, var2202 = protoModule.writeString(var1443, var1444, self.section_title)
-		buff = var1443
-		var1437 = var1444
+		local var1445, var1446 = protoModule.writeTag(buff, var1439, 3, protoModule.wireTypes.lengthDelimited)
+		var1445, var2208 = protoModule.writeString(var1445, var1446, self.section_title)
+		buff = var1445
+		var1439 = var1446
 	end
 	if self.creator_key ~= nil and self.creator_key ~= "" then
-		local var1445, var1446 = protoModule.writeTag(buff, var1437, 4, protoModule.wireTypes.lengthDelimited)
-		var1445, var2204 = protoModule.writeString(var1445, var1446, self.creator_key)
-		buff = var1445
-		var1437 = var1446
+		local var1447, var1448 = protoModule.writeTag(buff, var1439, 4, protoModule.wireTypes.lengthDelimited)
+		var1447, var2210 = protoModule.writeString(var1447, var1448, self.creator_key)
+		buff = var1447
+		var1439 = var1448
 	end
 	if self.collection_item_size ~= nil and self.collection_item_size ~= "" then
-		local var1447, var1448 = protoModule.writeTag(buff, var1437, 5, protoModule.wireTypes.lengthDelimited)
-		var1447, var2206 = protoModule.writeString(var1447, var1448, self.collection_item_size)
-		buff = var1447
-		var1437 = var1448
+		local var1449, var1450 = protoModule.writeTag(buff, var1439, 5, protoModule.wireTypes.lengthDelimited)
+		var1449, var2212 = protoModule.writeString(var1449, var1450, self.collection_item_size)
+		buff = var1449
+		var1439 = var1450
 	end
 	if self.item_height_mode ~= nil and self.item_height_mode ~= "" then
-		local var1449, var1450 = protoModule.writeTag(buff, var1437, 6, protoModule.wireTypes.lengthDelimited)
-		var1449, var2208 = protoModule.writeString(var1449, var1450, self.item_height_mode)
-		buff = var1449
-		var1437 = var1450
+		local var1451, var1452 = protoModule.writeTag(buff, var1439, 6, protoModule.wireTypes.lengthDelimited)
+		var1451, var2214 = protoModule.writeString(var1451, var1452, self.item_height_mode)
+		buff = var1451
+		var1439 = var1452
 	end
 	if self.experience_store_product_type ~= nil and self.experience_store_product_type ~= "" then
-		local var1451, var1452 = protoModule.writeTag(buff, var1437, 7, protoModule.wireTypes.lengthDelimited)
-		var1451, var2210 = protoModule.writeString(var1451, var1452, self.experience_store_product_type)
-		buff = var1451
-		var1437 = var1452
+		local var1453, var1454 = protoModule.writeTag(buff, var1439, 7, protoModule.wireTypes.lengthDelimited)
+		var1453, var2216 = protoModule.writeString(var1453, var1454, self.experience_store_product_type)
+		buff = var1453
+		var1439 = var1454
 	end
 	if self.content_type ~= nil and self.content_type ~= "" then
-		local var1453, var1454 = protoModule.writeTag(buff, var1437, 8, protoModule.wireTypes.lengthDelimited)
-		var1453, var2212 = protoModule.writeString(var1453, var1454, self.content_type)
-		buff = var1453
-		var1437 = var1454
+		local var1455, var1456 = protoModule.writeTag(buff, var1439, 8, protoModule.wireTypes.lengthDelimited)
+		var1455, var2218 = protoModule.writeString(var1455, var1456, self.content_type)
+		buff = var1455
+		var1439 = var1456
 	end
 	if self.item_type ~= nil and self.item_type ~= "" then
-		local var1455, var1456 = protoModule.writeTag(buff, var1437, 9, protoModule.wireTypes.lengthDelimited)
-		var1455, var2214 = protoModule.writeString(var1455, var1456, self.item_type)
-		buff = var1455
-		var1437 = var1456
+		local var1457, var1458 = protoModule.writeTag(buff, var1439, 9, protoModule.wireTypes.lengthDelimited)
+		var1457, var2220 = protoModule.writeString(var1457, var1458, self.item_type)
+		buff = var1457
+		var1439 = var1458
 	end
 	if self.filter_category_id ~= nil and self.filter_category_id ~= "" then
-		local var1457, var1458 = protoModule.writeTag(buff, var1437, 10, protoModule.wireTypes.lengthDelimited)
-		var1457, var2216 = protoModule.writeString(var1457, var1458, self.filter_category_id)
-		buff = var1457
-		var1437 = var1458
+		local var1459, var1460 = protoModule.writeTag(buff, var1439, 10, protoModule.wireTypes.lengthDelimited)
+		var1459, var2222 = protoModule.writeString(var1459, var1460, self.filter_category_id)
+		buff = var1459
+		var1439 = var1460
 	end
-	local buff_1 = buffer.create(var1437)
-	buffer.copy(buff_1, 0, buff, 0, var1437)
+	local buff_1 = buffer.create(var1439)
+	buffer.copy(buff_1, 0, buff, 0, var1439)
 	
 	return buff_1
 end
 
 function t_51.decode(p51)
 	-- upvalues: t_51 (ref), protoModule (ref), t (ref)
-	local var1459 = t_51.new()
-	local var1460 = 0
-	while var1460 < buffer.len(p51) do
+	local var1461 = t_51.new()
+	local var1462 = 0
+	while var1462 < buffer.len(p51) do
 		local _ = nil
-		local var1461 = nil
-		local var1462, var1463, var1464 = protoModule.readTag(p51, var1460)
-		local var1465 = var1462
-		var1461 = var1463
-		var1460 = var1464
+		local var1463 = nil
+		local var1464, var1465, var1466 = protoModule.readTag(p51, var1462)
+		local var1467 = var1464
+		var1463 = var1465
+		var1462 = var1466
 		
-		if var1461 == protoModule.wireTypes.varint then
+		if var1463 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1466, var1467 = protoModule.readVarInt(p51, var1460)
-			local _ = var1466
-			var1460 = var1467
+			local var1468, var1469 = protoModule.readVarInt(p51, var1462)
+			local _ = var1468
+			var1462 = var1469
 			continue
 		end
-		if var1461 == protoModule.wireTypes.lengthDelimited then
-			if var1465 == 1 then
+		if var1463 == protoModule.wireTypes.lengthDelimited then
+			if var1467 == 1 then
 				local _ = nil
-				local var1468, var1469 = protoModule.readBuffer(p51, var1460)
-				var1460 = var1469
-				table.insert(var1459.items, t.DynamicStoreCategoryInputData_DynamicStoreCategoryItem.decode(var1468))
-			elseif var1465 == 2 then
+				local var1470, var1471 = protoModule.readBuffer(p51, var1462)
+				var1462 = var1471
+				table.insert(var1461.items, t.DynamicStoreCategoryInputData_DynamicStoreCategoryItem.decode(var1470))
+			elseif var1467 == 2 then
 				local _ = nil
-				local var1470, var1471 = protoModule.readBuffer(p51, var1460)
-				var1460 = var1471
-				var1459.universe_id = buffer.tostring(var1470)
-			elseif var1465 == 3 then
+				local var1472, var1473 = protoModule.readBuffer(p51, var1462)
+				var1462 = var1473
+				var1461.universe_id = buffer.tostring(var1472)
+			elseif var1467 == 3 then
 				local _ = nil
-				local var1472, var1473 = protoModule.readBuffer(p51, var1460)
-				var1460 = var1473
-				var1459.section_title = buffer.tostring(var1472)
-			elseif var1465 == 4 then
+				local var1474, var1475 = protoModule.readBuffer(p51, var1462)
+				var1462 = var1475
+				var1461.section_title = buffer.tostring(var1474)
+			elseif var1467 == 4 then
 				local _ = nil
-				local var1474, var1475 = protoModule.readBuffer(p51, var1460)
-				var1460 = var1475
-				var1459.creator_key = buffer.tostring(var1474)
-			elseif var1465 == 5 then
+				local var1476, var1477 = protoModule.readBuffer(p51, var1462)
+				var1462 = var1477
+				var1461.creator_key = buffer.tostring(var1476)
+			elseif var1467 == 5 then
 				local _ = nil
-				local var1476, var1477 = protoModule.readBuffer(p51, var1460)
-				var1460 = var1477
-				var1459.collection_item_size = buffer.tostring(var1476)
-			elseif var1465 == 6 then
+				local var1478, var1479 = protoModule.readBuffer(p51, var1462)
+				var1462 = var1479
+				var1461.collection_item_size = buffer.tostring(var1478)
+			elseif var1467 == 6 then
 				local _ = nil
-				local var1478, var1479 = protoModule.readBuffer(p51, var1460)
-				var1460 = var1479
-				var1459.item_height_mode = buffer.tostring(var1478)
-			elseif var1465 == 7 then
+				local var1480, var1481 = protoModule.readBuffer(p51, var1462)
+				var1462 = var1481
+				var1461.item_height_mode = buffer.tostring(var1480)
+			elseif var1467 == 7 then
 				local _ = nil
-				local var1480, var1481 = protoModule.readBuffer(p51, var1460)
-				var1460 = var1481
-				var1459.experience_store_product_type = buffer.tostring(var1480)
-			elseif var1465 == 8 then
+				local var1482, var1483 = protoModule.readBuffer(p51, var1462)
+				var1462 = var1483
+				var1461.experience_store_product_type = buffer.tostring(var1482)
+			elseif var1467 == 8 then
 				local _ = nil
-				local var1482, var1483 = protoModule.readBuffer(p51, var1460)
-				var1460 = var1483
-				var1459.content_type = buffer.tostring(var1482)
-			elseif var1465 == 9 then
+				local var1484, var1485 = protoModule.readBuffer(p51, var1462)
+				var1462 = var1485
+				var1461.content_type = buffer.tostring(var1484)
+			elseif var1467 == 9 then
 				local _ = nil
-				local var1484, var1485 = protoModule.readBuffer(p51, var1460)
-				var1460 = var1485
-				var1459.item_type = buffer.tostring(var1484)
-			elseif var1465 == 10 then
+				local var1486, var1487 = protoModule.readBuffer(p51, var1462)
+				var1462 = var1487
+				var1461.item_type = buffer.tostring(var1486)
+			elseif var1467 == 10 then
 				local _ = nil
-				local var1486, var1487 = protoModule.readBuffer(p51, var1460)
-				var1460 = var1487
-				var1459.filter_category_id = buffer.tostring(var1486)
+				local var1488, var1489 = protoModule.readBuffer(p51, var1462)
+				var1462 = var1489
+				var1461.filter_category_id = buffer.tostring(var1488)
 			else
 				local _ = nil
-				local var1488, var1489 = protoModule.readVarInt(p51, var1460)
-				var1460 = var1489 + var1488
+				local var1490, var1491 = protoModule.readVarInt(p51, var1462)
+				var1462 = var1491 + var1490
 			end
-		elseif var1461 == protoModule.wireTypes.i32 then
+		elseif var1463 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1490, var1491 = protoModule.readFixed32(p51, var1460)
-			local _ = var1490
-			var1460 = var1491
-		elseif var1461 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1492, var1493 = protoModule.readFixed64(p51, var1460)
+			local var1492, var1493 = protoModule.readFixed32(p51, var1462)
 			local _ = var1492
-			var1460 = var1493
+			var1462 = var1493
+		elseif var1463 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1494, var1495 = protoModule.readFixed64(p51, var1462)
+			local _ = var1494
+			var1462 = var1495
 		else
-			error("Unsupported wire type: " .. var2220)
+			error("Unsupported wire type: " .. var2226)
 		end
 	end
-	return var1459
+	return var1461
 end
 
 function t_51:jsonEncode()
@@ -9854,7 +9884,7 @@ end
 
 function t_51:jsonDecode()
 	-- upvalues: t_51 (ref), t (ref)
-	local var1494 = t_51.new()
+	local var1496 = t_51.new()
 	
 	if self.items ~= nil then
 		local t_1 = {}
@@ -9862,63 +9892,63 @@ function t_51:jsonDecode()
 		for i, v in self.items do
 			table.insert(t_1, t.DynamicStoreCategoryInputData_DynamicStoreCategoryItem.jsonDecode(v))
 		end
-		var1494.items = t_1
+		var1496.items = t_1
 	end
 	if self.universe_id ~= nil then
-		var1494.universe_id = self.universe_id
+		var1496.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var1494.universe_id = self.universeId
+		var1496.universe_id = self.universeId
 	end
 	if self.section_title ~= nil then
-		var1494.section_title = self.section_title
+		var1496.section_title = self.section_title
 	end
 	if self.sectionTitle ~= nil then
-		var1494.section_title = self.sectionTitle
+		var1496.section_title = self.sectionTitle
 	end
 	if self.creator_key ~= nil then
-		var1494.creator_key = self.creator_key
+		var1496.creator_key = self.creator_key
 	end
 	if self.creatorKey ~= nil then
-		var1494.creator_key = self.creatorKey
+		var1496.creator_key = self.creatorKey
 	end
 	if self.collection_item_size ~= nil then
-		var1494.collection_item_size = self.collection_item_size
+		var1496.collection_item_size = self.collection_item_size
 	end
 	if self.collectionItemSize ~= nil then
-		var1494.collection_item_size = self.collectionItemSize
+		var1496.collection_item_size = self.collectionItemSize
 	end
 	if self.item_height_mode ~= nil then
-		var1494.item_height_mode = self.item_height_mode
+		var1496.item_height_mode = self.item_height_mode
 	end
 	if self.itemHeightMode ~= nil then
-		var1494.item_height_mode = self.itemHeightMode
+		var1496.item_height_mode = self.itemHeightMode
 	end
 	if self.experience_store_product_type ~= nil then
-		var1494.experience_store_product_type = self.experience_store_product_type
+		var1496.experience_store_product_type = self.experience_store_product_type
 	end
 	if self.experienceStoreProductType ~= nil then
-		var1494.experience_store_product_type = self.experienceStoreProductType
+		var1496.experience_store_product_type = self.experienceStoreProductType
 	end
 	if self.content_type ~= nil then
-		var1494.content_type = self.content_type
+		var1496.content_type = self.content_type
 	end
 	if self.contentType ~= nil then
-		var1494.content_type = self.contentType
+		var1496.content_type = self.contentType
 	end
 	if self.item_type ~= nil then
-		var1494.item_type = self.item_type
+		var1496.item_type = self.item_type
 	end
 	if self.itemType ~= nil then
-		var1494.item_type = self.itemType
+		var1496.item_type = self.itemType
 	end
 	if self.filter_category_id ~= nil then
-		var1494.filter_category_id = self.filter_category_id
+		var1496.filter_category_id = self.filter_category_id
 	end
 	if self.filterCategoryId ~= nil then
-		var1494.filter_category_id = self.filterCategoryId
+		var1496.filter_category_id = self.filterCategoryId
 	end
-	return var1494
+	return var1496
 end
 
 t_51.descriptor = {
@@ -9941,78 +9971,78 @@ end
 function t_52:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
-	local var1495 = 0
+	local var1497 = 0
 	
 	if self.item_id ~= nil and self.item_id ~= "" then
-		local var1496, var1497 = protoModule.writeTag(buff, var1495, 1, protoModule.wireTypes.lengthDelimited)
-		var1496, var2260 = protoModule.writeString(var1496, var1497, self.item_id)
-		buff = var1496
-		var1495 = var1497
+		local var1498, var1499 = protoModule.writeTag(buff, var1497, 1, protoModule.wireTypes.lengthDelimited)
+		var1498, var2266 = protoModule.writeString(var1498, var1499, self.item_id)
+		buff = var1498
+		var1497 = var1499
 	end
 	if self.identifier ~= nil and (self.identifier ~= nil and self.identifier ~= 0 or self.identifier ~= t.DynamicStoreCategoryInputData_DynamicStoreCategoryItemType.fromNumber(0)) then
-		local var1498, var1499 = protoModule.writeTag(buff, var1495, 2, protoModule.wireTypes.varint)
-		var1498, var2262 = protoModule.writeVarInt(var1498, var1499, t.DynamicStoreCategoryInputData_DynamicStoreCategoryItemType.toNumber(self.identifier))
-		buff = var1498
-		var1495 = var1499
+		local var1500, var1501 = protoModule.writeTag(buff, var1497, 2, protoModule.wireTypes.varint)
+		var1500, var2268 = protoModule.writeVarInt(var1500, var1501, t.DynamicStoreCategoryInputData_DynamicStoreCategoryItemType.toNumber(self.identifier))
+		buff = var1500
+		var1497 = var1501
 	end
-	local buff_1 = buffer.create(var1495)
-	buffer.copy(buff_1, 0, buff, 0, var1495)
+	local buff_1 = buffer.create(var1497)
+	buffer.copy(buff_1, 0, buff, 0, var1497)
 	
 	return buff_1
 end
 
 function t_52.decode(p52)
 	-- upvalues: t_52 (ref), protoModule (ref), t (ref)
-	local var1495 = t_52.new()
-	local var1496 = 0
-	while var1496 < buffer.len(p52) do
+	local var1497 = t_52.new()
+	local var1498 = 0
+	while var1498 < buffer.len(p52) do
 		local _ = nil
-		local var1497 = nil
-		local var1498, var1499, var1500 = protoModule.readTag(p52, var1496)
-		local var1501 = var1498
-		var1497 = var1499
-		var1496 = var1500
+		local var1499 = nil
+		local var1500, var1501, var1502 = protoModule.readTag(p52, var1498)
+		local var1503 = var1500
+		var1499 = var1501
+		var1498 = var1502
 		
-		if var1497 == protoModule.wireTypes.varint then
-			if var1501 == 2 then
+		if var1499 == protoModule.wireTypes.varint then
+			if var1503 == 2 then
 				local _ = nil
-				local var1502, var1503 = protoModule.readVarIntI32(p52, var1496)
-				local var1504 = var1502
-				var1496 = var1503
-				var1495.identifier = t.DynamicStoreCategoryInputData_DynamicStoreCategoryItemType.fromNumber(var1504) or var1504
+				local var1504, var1505 = protoModule.readVarIntI32(p52, var1498)
+				local var1506 = var1504
+				var1498 = var1505
+				var1497.identifier = t.DynamicStoreCategoryInputData_DynamicStoreCategoryItemType.fromNumber(var1506) or var1506
 			else
 				local _ = nil
-				local var1505, var1506 = protoModule.readVarInt(p52, var1496)
-				local _ = var1505
-				var1496 = var1506
+				local var1507, var1508 = protoModule.readVarInt(p52, var1498)
+				local _ = var1507
+				var1498 = var1508
 			end
 		end
-		if var1497 == protoModule.wireTypes.lengthDelimited then
-			if var1501 == 1 then
+		if var1499 == protoModule.wireTypes.lengthDelimited then
+			if var1503 == 1 then
 				local _ = nil
-				local var1507, var1508 = protoModule.readBuffer(p52, var1496)
-				var1496 = var1508
-				var1495.item_id = buffer.tostring(var1507)
+				local var1509, var1510 = protoModule.readBuffer(p52, var1498)
+				var1498 = var1510
+				var1497.item_id = buffer.tostring(var1509)
 			else
 				local _ = nil
-				local var1509, var1510 = protoModule.readVarInt(p52, var1496)
-				var1496 = var1510 + var1509
+				local var1511, var1512 = protoModule.readVarInt(p52, var1498)
+				var1498 = var1512 + var1511
 			end
-		elseif var1497 == protoModule.wireTypes.i32 then
+		elseif var1499 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1511, var1512 = protoModule.readFixed32(p52, var1496)
-			local _ = var1511
-			var1496 = var1512
-		elseif var1497 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1513, var1514 = protoModule.readFixed64(p52, var1496)
+			local var1513, var1514 = protoModule.readFixed32(p52, var1498)
 			local _ = var1513
-			var1496 = var1514
+			var1498 = var1514
+		elseif var1499 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1515, var1516 = protoModule.readFixed64(p52, var1498)
+			local _ = var1515
+			var1498 = var1516
 		else
-			error("Unsupported wire type: " .. var2266)
+			error("Unsupported wire type: " .. var2272)
 		end
 	end
-	return var1495
+	return var1497
 end
 
 function t_52:jsonEncode()
@@ -10030,18 +10060,18 @@ end
 
 function t_52:jsonDecode()
 	-- upvalues: t_52 (ref), t (ref)
-	local var1515 = t_52.new()
+	local var1517 = t_52.new()
 	
 	if self.item_id ~= nil then
-		var1515.item_id = self.item_id
+		var1517.item_id = self.item_id
 	end
 	if self.itemId ~= nil then
-		var1515.item_id = self.itemId
+		var1517.item_id = self.itemId
 	end
 	if self.identifier ~= nil then
-		var1515.identifier = if typeof(self.identifier) == "number" then t.DynamicStoreCategoryInputData_DynamicStoreCategoryItemType.fromNumber(self.identifier) or self.identifier else t.DynamicStoreCategoryInputData_DynamicStoreCategoryItemType.fromName(self.identifier) or self.identifier
+		var1517.identifier = if typeof(self.identifier) == "number" then t.DynamicStoreCategoryInputData_DynamicStoreCategoryItemType.fromNumber(self.identifier) or self.identifier else t.DynamicStoreCategoryInputData_DynamicStoreCategoryItemType.fromName(self.identifier) or self.identifier
 	end
-	return var1515
+	return var1517
 end
 
 t_52.descriptor = {
@@ -10082,153 +10112,153 @@ end
 function t_53:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1515 = 0
+	local var1517 = 0
 	
 	if self.roblox_component ~= nil and self.roblox_component ~= "" then
-		local var1516, var1517 = protoModule.writeTag(buff, var1515, 1, protoModule.wireTypes.lengthDelimited)
-		var1516, var2289 = protoModule.writeString(var1516, var1517, self.roblox_component)
-		buff = var1516
-		var1515 = var1517
+		local var1518, var1519 = protoModule.writeTag(buff, var1517, 1, protoModule.wireTypes.lengthDelimited)
+		var1518, var2295 = protoModule.writeString(var1518, var1519, self.roblox_component)
+		buff = var1518
+		var1517 = var1519
 	end
 	if self.identifier ~= nil and self.identifier ~= "" then
-		local var1518, var1519 = protoModule.writeTag(buff, var1515, 2, protoModule.wireTypes.lengthDelimited)
-		var1518, var2291 = protoModule.writeString(var1518, var1519, self.identifier)
-		buff = var1518
-		var1515 = var1519
+		local var1520, var1521 = protoModule.writeTag(buff, var1517, 2, protoModule.wireTypes.lengthDelimited)
+		var1520, var2297 = protoModule.writeString(var1520, var1521, self.identifier)
+		buff = var1520
+		var1517 = var1521
 	end
 	if self.title ~= nil and self.title ~= "" then
-		local var1520, var1521 = protoModule.writeTag(buff, var1515, 3, protoModule.wireTypes.lengthDelimited)
-		var1520, var2293 = protoModule.writeString(var1520, var1521, self.title)
-		buff = var1520
-		var1515 = var1521
+		local var1522, var1523 = protoModule.writeTag(buff, var1517, 3, protoModule.wireTypes.lengthDelimited)
+		var1522, var2299 = protoModule.writeString(var1522, var1523, self.title)
+		buff = var1522
+		var1517 = var1523
 	end
 	if self.user_id ~= nil and self.user_id ~= "" then
-		local var1522, var1523 = protoModule.writeTag(buff, var1515, 4, protoModule.wireTypes.lengthDelimited)
-		var1522, var2295 = protoModule.writeString(var1522, var1523, self.user_id)
-		buff = var1522
-		var1515 = var1523
+		local var1524, var1525 = protoModule.writeTag(buff, var1517, 4, protoModule.wireTypes.lengthDelimited)
+		var1524, var2301 = protoModule.writeString(var1524, var1525, self.user_id)
+		buff = var1524
+		var1517 = var1525
 	end
 	if self.description ~= nil and self.description ~= "" then
-		local var1524, var1525 = protoModule.writeTag(buff, var1515, 5, protoModule.wireTypes.lengthDelimited)
-		var1524, var2297 = protoModule.writeString(var1524, var1525, self.description)
-		buff = var1524
-		var1515 = var1525
+		local var1526, var1527 = protoModule.writeTag(buff, var1517, 5, protoModule.wireTypes.lengthDelimited)
+		var1526, var2303 = protoModule.writeString(var1526, var1527, self.description)
+		buff = var1526
+		var1517 = var1527
 	end
 	if self.cta_text ~= nil and self.cta_text ~= "" then
-		local var1526, var1527 = protoModule.writeTag(buff, var1515, 6, protoModule.wireTypes.lengthDelimited)
-		var1526, var2299 = protoModule.writeString(var1526, var1527, self.cta_text)
-		buff = var1526
-		var1515 = var1527
+		local var1528, var1529 = protoModule.writeTag(buff, var1517, 6, protoModule.wireTypes.lengthDelimited)
+		var1528, var2305 = protoModule.writeString(var1528, var1529, self.cta_text)
+		buff = var1528
+		var1517 = var1529
 	end
 	if self.prompt_id ~= nil and self.prompt_id ~= "" then
-		local var1528, var1529 = protoModule.writeTag(buff, var1515, 7, protoModule.wireTypes.lengthDelimited)
-		var1528, var2301 = protoModule.writeString(var1528, var1529, self.prompt_id)
-		buff = var1528
-		var1515 = var1529
+		local var1530, var1531 = protoModule.writeTag(buff, var1517, 7, protoModule.wireTypes.lengthDelimited)
+		var1530, var2307 = protoModule.writeString(var1530, var1531, self.prompt_id)
+		buff = var1530
+		var1517 = var1531
 	end
 	if self.prompt_type ~= nil and self.prompt_type ~= "" then
-		local var1530, var1531 = protoModule.writeTag(buff, var1515, 8, protoModule.wireTypes.lengthDelimited)
-		var1530, var2303 = protoModule.writeString(var1530, var1531, self.prompt_type)
-		buff = var1530
-		var1515 = var1531
+		local var1532, var1533 = protoModule.writeTag(buff, var1517, 8, protoModule.wireTypes.lengthDelimited)
+		var1532, var2309 = protoModule.writeString(var1532, var1533, self.prompt_type)
+		buff = var1532
+		var1517 = var1533
 	end
 	if self.entity_id ~= nil and self.entity_id ~= "" then
-		local var1532, var1533 = protoModule.writeTag(buff, var1515, 9, protoModule.wireTypes.lengthDelimited)
-		var1532, var2305 = protoModule.writeString(var1532, var1533, self.entity_id)
-		buff = var1532
-		var1515 = var1533
+		local var1534, var1535 = protoModule.writeTag(buff, var1517, 9, protoModule.wireTypes.lengthDelimited)
+		var1534, var2311 = protoModule.writeString(var1534, var1535, self.entity_id)
+		buff = var1534
+		var1517 = var1535
 	end
-	local buff_1 = buffer.create(var1515)
-	buffer.copy(buff_1, 0, buff, 0, var1515)
+	local buff_1 = buffer.create(var1517)
+	buffer.copy(buff_1, 0, buff, 0, var1517)
 	
 	return buff_1
 end
 
 function t_53.decode(p53)
 	-- upvalues: t_53 (ref), protoModule (ref)
-	local var1515 = t_53.new()
-	local var1516 = 0
-	while var1516 < buffer.len(p53) do
+	local var1517 = t_53.new()
+	local var1518 = 0
+	while var1518 < buffer.len(p53) do
 		local _ = nil
-		local var1517 = nil
-		local var1518, var1519, var1520 = protoModule.readTag(p53, var1516)
-		local var1521 = var1518
-		var1517 = var1519
-		var1516 = var1520
+		local var1519 = nil
+		local var1520, var1521, var1522 = protoModule.readTag(p53, var1518)
+		local var1523 = var1520
+		var1519 = var1521
+		var1518 = var1522
 		
-		if var1517 == protoModule.wireTypes.varint then
+		if var1519 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1522, var1523 = protoModule.readVarInt(p53, var1516)
-			local _ = var1522
-			var1516 = var1523
+			local var1524, var1525 = protoModule.readVarInt(p53, var1518)
+			local _ = var1524
+			var1518 = var1525
 			continue
 		end
-		if var1517 == protoModule.wireTypes.lengthDelimited then
-			if var1521 == 1 then
+		if var1519 == protoModule.wireTypes.lengthDelimited then
+			if var1523 == 1 then
 				local _ = nil
-				local var1524, var1525 = protoModule.readBuffer(p53, var1516)
-				var1516 = var1525
-				var1515.roblox_component = buffer.tostring(var1524)
-			elseif var1521 == 2 then
+				local var1526, var1527 = protoModule.readBuffer(p53, var1518)
+				var1518 = var1527
+				var1517.roblox_component = buffer.tostring(var1526)
+			elseif var1523 == 2 then
 				local _ = nil
-				local var1526, var1527 = protoModule.readBuffer(p53, var1516)
-				var1516 = var1527
-				var1515.identifier = buffer.tostring(var1526)
-			elseif var1521 == 3 then
+				local var1528, var1529 = protoModule.readBuffer(p53, var1518)
+				var1518 = var1529
+				var1517.identifier = buffer.tostring(var1528)
+			elseif var1523 == 3 then
 				local _ = nil
-				local var1528, var1529 = protoModule.readBuffer(p53, var1516)
-				var1516 = var1529
-				var1515.title = buffer.tostring(var1528)
-			elseif var1521 == 4 then
+				local var1530, var1531 = protoModule.readBuffer(p53, var1518)
+				var1518 = var1531
+				var1517.title = buffer.tostring(var1530)
+			elseif var1523 == 4 then
 				local _ = nil
-				local var1530, var1531 = protoModule.readBuffer(p53, var1516)
-				var1516 = var1531
-				var1515.user_id = buffer.tostring(var1530)
-			elseif var1521 == 5 then
+				local var1532, var1533 = protoModule.readBuffer(p53, var1518)
+				var1518 = var1533
+				var1517.user_id = buffer.tostring(var1532)
+			elseif var1523 == 5 then
 				local _ = nil
-				local var1532, var1533 = protoModule.readBuffer(p53, var1516)
-				var1516 = var1533
-				var1515.description = buffer.tostring(var1532)
-			elseif var1521 == 6 then
+				local var1534, var1535 = protoModule.readBuffer(p53, var1518)
+				var1518 = var1535
+				var1517.description = buffer.tostring(var1534)
+			elseif var1523 == 6 then
 				local _ = nil
-				local var1534, var1535 = protoModule.readBuffer(p53, var1516)
-				var1516 = var1535
-				var1515.cta_text = buffer.tostring(var1534)
-			elseif var1521 == 7 then
+				local var1536, var1537 = protoModule.readBuffer(p53, var1518)
+				var1518 = var1537
+				var1517.cta_text = buffer.tostring(var1536)
+			elseif var1523 == 7 then
 				local _ = nil
-				local var1536, var1537 = protoModule.readBuffer(p53, var1516)
-				var1516 = var1537
-				var1515.prompt_id = buffer.tostring(var1536)
-			elseif var1521 == 8 then
+				local var1538, var1539 = protoModule.readBuffer(p53, var1518)
+				var1518 = var1539
+				var1517.prompt_id = buffer.tostring(var1538)
+			elseif var1523 == 8 then
 				local _ = nil
-				local var1538, var1539 = protoModule.readBuffer(p53, var1516)
-				var1516 = var1539
-				var1515.prompt_type = buffer.tostring(var1538)
-			elseif var1521 == 9 then
+				local var1540, var1541 = protoModule.readBuffer(p53, var1518)
+				var1518 = var1541
+				var1517.prompt_type = buffer.tostring(var1540)
+			elseif var1523 == 9 then
 				local _ = nil
-				local var1540, var1541 = protoModule.readBuffer(p53, var1516)
-				var1516 = var1541
-				var1515.entity_id = buffer.tostring(var1540)
+				local var1542, var1543 = protoModule.readBuffer(p53, var1518)
+				var1518 = var1543
+				var1517.entity_id = buffer.tostring(var1542)
 			else
 				local _ = nil
-				local var1542, var1543 = protoModule.readVarInt(p53, var1516)
-				var1516 = var1543 + var1542
+				local var1544, var1545 = protoModule.readVarInt(p53, var1518)
+				var1518 = var1545 + var1544
 			end
-		elseif var1517 == protoModule.wireTypes.i32 then
+		elseif var1519 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1544, var1545 = protoModule.readFixed32(p53, var1516)
-			local _ = var1544
-			var1516 = var1545
-		elseif var1517 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1546, var1547 = protoModule.readFixed64(p53, var1516)
+			local var1546, var1547 = protoModule.readFixed32(p53, var1518)
 			local _ = var1546
-			var1516 = var1547
+			var1518 = var1547
+		elseif var1519 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1548, var1549 = protoModule.readFixed64(p53, var1518)
+			local _ = var1548
+			var1518 = var1549
 		else
-			error("Unsupported wire type: " .. var2309)
+			error("Unsupported wire type: " .. var2315)
 		end
 	end
-	return var1515
+	return var1517
 end
 
 function t_53:jsonEncode()
@@ -10266,54 +10296,54 @@ end
 
 function t_53:jsonDecode()
 	-- upvalues: t_53 (ref)
-	local var1548 = t_53.new()
+	local var1550 = t_53.new()
 	
 	if self.roblox_component ~= nil then
-		var1548.roblox_component = self.roblox_component
+		var1550.roblox_component = self.roblox_component
 	end
 	if self.robloxComponent ~= nil then
-		var1548.roblox_component = self.robloxComponent
+		var1550.roblox_component = self.robloxComponent
 	end
 	if self.identifier ~= nil then
-		var1548.identifier = self.identifier
+		var1550.identifier = self.identifier
 	end
 	if self.title ~= nil then
-		var1548.title = self.title
+		var1550.title = self.title
 	end
 	if self.user_id ~= nil then
-		var1548.user_id = self.user_id
+		var1550.user_id = self.user_id
 	end
 	if self.userId ~= nil then
-		var1548.user_id = self.userId
+		var1550.user_id = self.userId
 	end
 	if self.description ~= nil then
-		var1548.description = self.description
+		var1550.description = self.description
 	end
 	if self.cta_text ~= nil then
-		var1548.cta_text = self.cta_text
+		var1550.cta_text = self.cta_text
 	end
 	if self.ctaText ~= nil then
-		var1548.cta_text = self.ctaText
+		var1550.cta_text = self.ctaText
 	end
 	if self.prompt_id ~= nil then
-		var1548.prompt_id = self.prompt_id
+		var1550.prompt_id = self.prompt_id
 	end
 	if self.promptId ~= nil then
-		var1548.prompt_id = self.promptId
+		var1550.prompt_id = self.promptId
 	end
 	if self.prompt_type ~= nil then
-		var1548.prompt_type = self.prompt_type
+		var1550.prompt_type = self.prompt_type
 	end
 	if self.promptType ~= nil then
-		var1548.prompt_type = self.promptType
+		var1550.prompt_type = self.promptType
 	end
 	if self.entity_id ~= nil then
-		var1548.entity_id = self.entity_id
+		var1550.entity_id = self.entity_id
 	end
 	if self.entityId ~= nil then
-		var1548.entity_id = self.entityId
+		var1550.entity_id = self.entityId
 	end
-	return var1548
+	return var1550
 end
 
 t_53.descriptor = {
@@ -10336,76 +10366,76 @@ end
 function t_54:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1548 = 0
+	local var1550 = 0
 	
 	if self.group_id ~= nil and self.group_id ~= "" then
-		local var1549, var1550 = protoModule.writeTag(buff, var1548, 1, protoModule.wireTypes.lengthDelimited)
-		var1549, var2345 = protoModule.writeString(var1549, var1550, self.group_id)
-		buff = var1549
-		var1548 = var1550
+		local var1551, var1552 = protoModule.writeTag(buff, var1550, 1, protoModule.wireTypes.lengthDelimited)
+		var1551, var2351 = protoModule.writeString(var1551, var1552, self.group_id)
+		buff = var1551
+		var1550 = var1552
 	end
 	if self.experience_id ~= nil and self.experience_id ~= "" then
-		local var1551, var1552 = protoModule.writeTag(buff, var1548, 2, protoModule.wireTypes.lengthDelimited)
-		var1551, var2347 = protoModule.writeString(var1551, var1552, self.experience_id)
-		buff = var1551
-		var1548 = var1552
+		local var1553, var1554 = protoModule.writeTag(buff, var1550, 2, protoModule.wireTypes.lengthDelimited)
+		var1553, var2353 = protoModule.writeString(var1553, var1554, self.experience_id)
+		buff = var1553
+		var1550 = var1554
 	end
-	local buff_1 = buffer.create(var1548)
-	buffer.copy(buff_1, 0, buff, 0, var1548)
+	local buff_1 = buffer.create(var1550)
+	buffer.copy(buff_1, 0, buff, 0, var1550)
 	
 	return buff_1
 end
 
 function t_54.decode(p54)
 	-- upvalues: t_54 (ref), protoModule (ref)
-	local var1548 = t_54.new()
-	local var1549 = 0
-	while var1549 < buffer.len(p54) do
+	local var1550 = t_54.new()
+	local var1551 = 0
+	while var1551 < buffer.len(p54) do
 		local _ = nil
-		local var1550 = nil
-		local var1551, var1552, var1553 = protoModule.readTag(p54, var1549)
-		local var1554 = var1551
-		var1550 = var1552
-		var1549 = var1553
+		local var1552 = nil
+		local var1553, var1554, var1555 = protoModule.readTag(p54, var1551)
+		local var1556 = var1553
+		var1552 = var1554
+		var1551 = var1555
 		
-		if var1550 == protoModule.wireTypes.varint then
+		if var1552 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1555, var1556 = protoModule.readVarInt(p54, var1549)
-			local _ = var1555
-			var1549 = var1556
+			local var1557, var1558 = protoModule.readVarInt(p54, var1551)
+			local _ = var1557
+			var1551 = var1558
 			continue
 		end
-		if var1550 == protoModule.wireTypes.lengthDelimited then
-			if var1554 == 1 then
+		if var1552 == protoModule.wireTypes.lengthDelimited then
+			if var1556 == 1 then
 				local _ = nil
-				local var1557, var1558 = protoModule.readBuffer(p54, var1549)
-				var1549 = var1558
-				var1548.group_id = buffer.tostring(var1557)
-			elseif var1554 == 2 then
+				local var1559, var1560 = protoModule.readBuffer(p54, var1551)
+				var1551 = var1560
+				var1550.group_id = buffer.tostring(var1559)
+			elseif var1556 == 2 then
 				local _ = nil
-				local var1559, var1560 = protoModule.readBuffer(p54, var1549)
-				var1549 = var1560
-				var1548.experience_id = buffer.tostring(var1559)
+				local var1561, var1562 = protoModule.readBuffer(p54, var1551)
+				var1551 = var1562
+				var1550.experience_id = buffer.tostring(var1561)
 			else
 				local _ = nil
-				local var1561, var1562 = protoModule.readVarInt(p54, var1549)
-				var1549 = var1562 + var1561
+				local var1563, var1564 = protoModule.readVarInt(p54, var1551)
+				var1551 = var1564 + var1563
 			end
-		elseif var1550 == protoModule.wireTypes.i32 then
+		elseif var1552 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1563, var1564 = protoModule.readFixed32(p54, var1549)
-			local _ = var1563
-			var1549 = var1564
-		elseif var1550 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1565, var1566 = protoModule.readFixed64(p54, var1549)
+			local var1565, var1566 = protoModule.readFixed32(p54, var1551)
 			local _ = var1565
-			var1549 = var1566
+			var1551 = var1566
+		elseif var1552 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1567, var1568 = protoModule.readFixed64(p54, var1551)
+			local _ = var1567
+			var1551 = var1568
 		else
-			error("Unsupported wire type: " .. var2351)
+			error("Unsupported wire type: " .. var2357)
 		end
 	end
-	return var1548
+	return var1550
 end
 
 function t_54:jsonEncode()
@@ -10422,21 +10452,21 @@ end
 
 function t_54:jsonDecode()
 	-- upvalues: t_54 (ref)
-	local var1567 = t_54.new()
+	local var1569 = t_54.new()
 	
 	if self.group_id ~= nil then
-		var1567.group_id = self.group_id
+		var1569.group_id = self.group_id
 	end
 	if self.groupId ~= nil then
-		var1567.group_id = self.groupId
+		var1569.group_id = self.groupId
 	end
 	if self.experience_id ~= nil then
-		var1567.experience_id = self.experience_id
+		var1569.experience_id = self.experience_id
 	end
 	if self.experienceId ~= nil then
-		var1567.experience_id = self.experienceId
+		var1569.experience_id = self.experienceId
 	end
-	return var1567
+	return var1569
 end
 
 t_54.descriptor = {
@@ -10466,160 +10496,160 @@ end
 function t_55:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1567 = 0
+	local var1569 = 0
 	
 	if self.title ~= nil and self.title ~= "" then
-		local var1568, var1569 = protoModule.writeTag(buff, var1567, 1, protoModule.wireTypes.lengthDelimited)
-		var1568, var2373 = protoModule.writeString(var1568, var1569, self.title)
-		buff = var1568
-		var1567 = var1569
+		local var1570, var1571 = protoModule.writeTag(buff, var1569, 1, protoModule.wireTypes.lengthDelimited)
+		var1570, var2379 = protoModule.writeString(var1570, var1571, self.title)
+		buff = var1570
+		var1569 = var1571
 	end
 	if self.dismiss_text ~= nil and self.dismiss_text ~= "" then
-		local var1570, var1571 = protoModule.writeTag(buff, var1567, 2, protoModule.wireTypes.lengthDelimited)
-		var1570, var2375 = protoModule.writeString(var1570, var1571, self.dismiss_text)
-		buff = var1570
-		var1567 = var1571
+		local var1572, var1573 = protoModule.writeTag(buff, var1569, 2, protoModule.wireTypes.lengthDelimited)
+		var1572, var2381 = protoModule.writeString(var1572, var1573, self.dismiss_text)
+		buff = var1572
+		var1569 = var1573
 	end
 	if self.user_id ~= nil and self.user_id ~= "" then
-		local var1572, var1573 = protoModule.writeTag(buff, var1567, 3, protoModule.wireTypes.lengthDelimited)
-		var1572, var2377 = protoModule.writeString(var1572, var1573, self.user_id)
-		buff = var1572
-		var1567 = var1573
+		local var1574, var1575 = protoModule.writeTag(buff, var1569, 3, protoModule.wireTypes.lengthDelimited)
+		var1574, var2383 = protoModule.writeString(var1574, var1575, self.user_id)
+		buff = var1574
+		var1569 = var1575
 	end
 	if self.cards ~= nil and #self.cards > 0 then
 		for i, v in self.cards do
-			local var1574 = v:encode()
-			local var1575, var1576 = protoModule.writeTag(buff, var1567, 4, protoModule.wireTypes.lengthDelimited)
-			var1575, var2380 = protoModule.writeBuffer(var1575, var1576, var1574, buffer.len(var1574))
-			buff = var1575
-			var1567 = var1576
+			local var1576 = v:encode()
+			local var1577, var1578 = protoModule.writeTag(buff, var1569, 4, protoModule.wireTypes.lengthDelimited)
+			var1577, var2386 = protoModule.writeBuffer(var1577, var1578, var1576, buffer.len(var1576))
+			buff = var1577
+			var1569 = var1578
 		end
 	end
 	if self.prompt_id ~= nil and self.prompt_id ~= "" then
-		local var1577, var1578 = protoModule.writeTag(buff, var1567, 5, protoModule.wireTypes.lengthDelimited)
-		var1577, var2382 = protoModule.writeString(var1577, var1578, self.prompt_id)
-		buff = var1577
-		var1567 = var1578
+		local var1579, var1580 = protoModule.writeTag(buff, var1569, 5, protoModule.wireTypes.lengthDelimited)
+		var1579, var2388 = protoModule.writeString(var1579, var1580, self.prompt_id)
+		buff = var1579
+		var1569 = var1580
 	end
 	if self.prompt_type ~= nil and self.prompt_type ~= "" then
-		local var1579, var1580 = protoModule.writeTag(buff, var1567, 6, protoModule.wireTypes.lengthDelimited)
-		var1579, var2384 = protoModule.writeString(var1579, var1580, self.prompt_type)
-		buff = var1579
-		var1567 = var1580
+		local var1581, var1582 = protoModule.writeTag(buff, var1569, 6, protoModule.wireTypes.lengthDelimited)
+		var1581, var2390 = protoModule.writeString(var1581, var1582, self.prompt_type)
+		buff = var1581
+		var1569 = var1582
 	end
 	if self.sort_id ~= nil and self.sort_id ~= "" then
-		local var1581, var1582 = protoModule.writeTag(buff, var1567, 7, protoModule.wireTypes.lengthDelimited)
-		var1581, var2386 = protoModule.writeString(var1581, var1582, self.sort_id)
-		buff = var1581
-		var1567 = var1582
+		local var1583, var1584 = protoModule.writeTag(buff, var1569, 7, protoModule.wireTypes.lengthDelimited)
+		var1583, var2392 = protoModule.writeString(var1583, var1584, self.sort_id)
+		buff = var1583
+		var1569 = var1584
 	end
 	if self.feed_item_key ~= nil and self.feed_item_key ~= "" then
-		local var1583, var1584 = protoModule.writeTag(buff, var1567, 8, protoModule.wireTypes.lengthDelimited)
-		var1583, var2388 = protoModule.writeString(var1583, var1584, self.feed_item_key)
-		buff = var1583
-		var1567 = var1584
+		local var1585, var1586 = protoModule.writeTag(buff, var1569, 8, protoModule.wireTypes.lengthDelimited)
+		var1585, var2394 = protoModule.writeString(var1585, var1586, self.feed_item_key)
+		buff = var1585
+		var1569 = var1586
 	end
 	if self.client_attributes ~= nil and self.client_attributes.type == "communities_client_attributes" then
-		local var1585 = self.client_attributes.value:encode()
-		local var1586, var1587 = protoModule.writeTag(buff, var1567, 9, protoModule.wireTypes.lengthDelimited)
-		var1586, var2391 = protoModule.writeBuffer(var1586, var1587, var1585, buffer.len(var1585))
-		buff = var1586
-		var1567 = var1587
+		local var1587 = self.client_attributes.value:encode()
+		local var1588, var1589 = protoModule.writeTag(buff, var1569, 9, protoModule.wireTypes.lengthDelimited)
+		var1588, var2397 = protoModule.writeBuffer(var1588, var1589, var1587, buffer.len(var1587))
+		buff = var1588
+		var1569 = var1589
 	end
-	local buff_1 = buffer.create(var1567)
-	buffer.copy(buff_1, 0, buff, 0, var1567)
+	local buff_1 = buffer.create(var1569)
+	buffer.copy(buff_1, 0, buff, 0, var1569)
 	
 	return buff_1
 end
 
 function t_55.decode(p55)
 	-- upvalues: t_55 (ref), protoModule (ref), t (ref)
-	local var1588 = t_55.new()
-	local var1589 = 0
-	while var1589 < buffer.len(p55) do
+	local var1590 = t_55.new()
+	local var1591 = 0
+	while var1591 < buffer.len(p55) do
 		local _ = nil
-		local var1590 = nil
-		local var1591, var1592, var1593 = protoModule.readTag(p55, var1589)
-		local var1594 = var1591
-		var1590 = var1592
-		var1589 = var1593
+		local var1592 = nil
+		local var1593, var1594, var1595 = protoModule.readTag(p55, var1591)
+		local var1596 = var1593
+		var1592 = var1594
+		var1591 = var1595
 		
-		if var1590 == protoModule.wireTypes.varint then
+		if var1592 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1595, var1596 = protoModule.readVarInt(p55, var1589)
-			local _ = var1595
-			var1589 = var1596
+			local var1597, var1598 = protoModule.readVarInt(p55, var1591)
+			local _ = var1597
+			var1591 = var1598
 			continue
 		end
-		if var1590 == protoModule.wireTypes.lengthDelimited then
-			if var1594 == 1 then
+		if var1592 == protoModule.wireTypes.lengthDelimited then
+			if var1596 == 1 then
 				local _ = nil
-				local var1597, var1598 = protoModule.readBuffer(p55, var1589)
-				var1589 = var1598
-				var1588.title = buffer.tostring(var1597)
-			elseif var1594 == 2 then
+				local var1599, var1600 = protoModule.readBuffer(p55, var1591)
+				var1591 = var1600
+				var1590.title = buffer.tostring(var1599)
+			elseif var1596 == 2 then
 				local _ = nil
-				local var1599, var1600 = protoModule.readBuffer(p55, var1589)
-				var1589 = var1600
-				var1588.dismiss_text = buffer.tostring(var1599)
-			elseif var1594 == 3 then
+				local var1601, var1602 = protoModule.readBuffer(p55, var1591)
+				var1591 = var1602
+				var1590.dismiss_text = buffer.tostring(var1601)
+			elseif var1596 == 3 then
 				local _ = nil
-				local var1601, var1602 = protoModule.readBuffer(p55, var1589)
-				var1589 = var1602
-				var1588.user_id = buffer.tostring(var1601)
-			elseif var1594 == 4 then
+				local var1603, var1604 = protoModule.readBuffer(p55, var1591)
+				var1591 = var1604
+				var1590.user_id = buffer.tostring(var1603)
+			elseif var1596 == 4 then
 				local _ = nil
-				local var1603, var1604 = protoModule.readBuffer(p55, var1589)
-				var1589 = var1604
-				table.insert(var1588.cards, t.CardContainerCardInputData.decode(var1603))
-			elseif var1594 == 5 then
+				local var1605, var1606 = protoModule.readBuffer(p55, var1591)
+				var1591 = var1606
+				table.insert(var1590.cards, t.CardContainerCardInputData.decode(var1605))
+			elseif var1596 == 5 then
 				local _ = nil
-				local var1605, var1606 = protoModule.readBuffer(p55, var1589)
-				var1589 = var1606
-				var1588.prompt_id = buffer.tostring(var1605)
-			elseif var1594 == 6 then
+				local var1607, var1608 = protoModule.readBuffer(p55, var1591)
+				var1591 = var1608
+				var1590.prompt_id = buffer.tostring(var1607)
+			elseif var1596 == 6 then
 				local _ = nil
-				local var1607, var1608 = protoModule.readBuffer(p55, var1589)
-				var1589 = var1608
-				var1588.prompt_type = buffer.tostring(var1607)
-			elseif var1594 == 7 then
+				local var1609, var1610 = protoModule.readBuffer(p55, var1591)
+				var1591 = var1610
+				var1590.prompt_type = buffer.tostring(var1609)
+			elseif var1596 == 7 then
 				local _ = nil
-				local var1609, var1610 = protoModule.readBuffer(p55, var1589)
-				var1589 = var1610
-				var1588.sort_id = buffer.tostring(var1609)
-			elseif var1594 == 8 then
+				local var1611, var1612 = protoModule.readBuffer(p55, var1591)
+				var1591 = var1612
+				var1590.sort_id = buffer.tostring(var1611)
+			elseif var1596 == 8 then
 				local _ = nil
-				local var1611, var1612 = protoModule.readBuffer(p55, var1589)
-				var1589 = var1612
-				var1588.feed_item_key = buffer.tostring(var1611)
-			elseif var1594 == 9 then
+				local var1613, var1614 = protoModule.readBuffer(p55, var1591)
+				var1591 = var1614
+				var1590.feed_item_key = buffer.tostring(var1613)
+			elseif var1596 == 9 then
 				local _ = nil
-				local var1613, var1614 = protoModule.readBuffer(p55, var1589)
-				var1589 = var1614
-				var1588.client_attributes = {
+				local var1615, var1616 = protoModule.readBuffer(p55, var1591)
+				var1591 = var1616
+				var1590.client_attributes = {
 					type = "communities_client_attributes",
-					value = t.CommunitiesCardClientAttributes.decode(var1613)
+					value = t.CommunitiesCardClientAttributes.decode(var1615)
 				}
 			else
 				local _ = nil
-				local var1615, var1616 = protoModule.readVarInt(p55, var1589)
-				var1589 = var1616 + var1615
+				local var1617, var1618 = protoModule.readVarInt(p55, var1591)
+				var1591 = var1618 + var1617
 			end
-		elseif var1590 == protoModule.wireTypes.i32 then
+		elseif var1592 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1617, var1618 = protoModule.readFixed32(p55, var1589)
-			local _ = var1617
-			var1589 = var1618
-		elseif var1590 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1619, var1620 = protoModule.readFixed64(p55, var1589)
+			local var1619, var1620 = protoModule.readFixed32(p55, var1591)
 			local _ = var1619
-			var1589 = var1620
+			var1591 = var1620
+		elseif var1592 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1621, var1622 = protoModule.readFixed64(p55, var1591)
+			local _ = var1621
+			var1591 = var1622
 		else
-			error("Unsupported wire type: " .. var2395)
+			error("Unsupported wire type: " .. var2401)
 		end
 	end
-	return var1588
+	return var1590
 end
 
 function t_55:jsonEncode()
@@ -10662,22 +10692,22 @@ end
 
 function t_55:jsonDecode()
 	-- upvalues: t_55 (ref), t (ref)
-	local var1621 = t_55.new()
+	local var1623 = t_55.new()
 	
 	if self.title ~= nil then
-		var1621.title = self.title
+		var1623.title = self.title
 	end
 	if self.dismiss_text ~= nil then
-		var1621.dismiss_text = self.dismiss_text
+		var1623.dismiss_text = self.dismiss_text
 	end
 	if self.dismissText ~= nil then
-		var1621.dismiss_text = self.dismissText
+		var1623.dismiss_text = self.dismissText
 	end
 	if self.user_id ~= nil then
-		var1621.user_id = self.user_id
+		var1623.user_id = self.user_id
 	end
 	if self.userId ~= nil then
-		var1621.user_id = self.userId
+		var1623.user_id = self.userId
 	end
 	if self.cards ~= nil then
 		local t_1 = {}
@@ -10685,45 +10715,45 @@ function t_55:jsonDecode()
 		for i, v in self.cards do
 			table.insert(t_1, t.CardContainerCardInputData.jsonDecode(v))
 		end
-		var1621.cards = t_1
+		var1623.cards = t_1
 	end
 	if self.prompt_id ~= nil then
-		var1621.prompt_id = self.prompt_id
+		var1623.prompt_id = self.prompt_id
 	end
 	if self.promptId ~= nil then
-		var1621.prompt_id = self.promptId
+		var1623.prompt_id = self.promptId
 	end
 	if self.prompt_type ~= nil then
-		var1621.prompt_type = self.prompt_type
+		var1623.prompt_type = self.prompt_type
 	end
 	if self.promptType ~= nil then
-		var1621.prompt_type = self.promptType
+		var1623.prompt_type = self.promptType
 	end
 	if self.sort_id ~= nil then
-		var1621.sort_id = self.sort_id
+		var1623.sort_id = self.sort_id
 	end
 	if self.sortId ~= nil then
-		var1621.sort_id = self.sortId
+		var1623.sort_id = self.sortId
 	end
 	if self.feed_item_key ~= nil then
-		var1621.feed_item_key = self.feed_item_key
+		var1623.feed_item_key = self.feed_item_key
 	end
 	if self.feedItemKey ~= nil then
-		var1621.feed_item_key = self.feedItemKey
+		var1623.feed_item_key = self.feedItemKey
 	end
 	if self.communities_client_attributes ~= nil then
-		var1621.client_attributes = {
+		var1623.client_attributes = {
 			type = "communities_client_attributes",
 			value = t.CommunitiesCardClientAttributes.jsonDecode(self.communities_client_attributes)
 		}
 	end
 	if self.communitiesClientAttributes ~= nil then
-		var1621.client_attributes = {
+		var1623.client_attributes = {
 			type = "communities_client_attributes",
 			value = t.CommunitiesCardClientAttributes.jsonDecode(self.communitiesClientAttributes)
 		}
 	end
-	return var1621
+	return var1623
 end
 
 t_55.descriptor = {
@@ -10751,131 +10781,131 @@ end
 function t_56:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1622 = 0
+	local var1624 = 0
 	
 	if self.title ~= nil and self.title ~= "" then
-		local var1623, var1624 = protoModule.writeTag(buff, var1622, 1, protoModule.wireTypes.lengthDelimited)
-		var1623, var2433 = protoModule.writeString(var1623, var1624, self.title)
-		buff = var1623
-		var1622 = var1624
+		local var1625, var1626 = protoModule.writeTag(buff, var1624, 1, protoModule.wireTypes.lengthDelimited)
+		var1625, var2439 = protoModule.writeString(var1625, var1626, self.title)
+		buff = var1625
+		var1624 = var1626
 	end
 	if self.user_id ~= nil and self.user_id ~= "" then
-		local var1625, var1626 = protoModule.writeTag(buff, var1622, 2, protoModule.wireTypes.lengthDelimited)
-		var1625, var2435 = protoModule.writeString(var1625, var1626, self.user_id)
-		buff = var1625
-		var1622 = var1626
+		local var1627, var1628 = protoModule.writeTag(buff, var1624, 2, protoModule.wireTypes.lengthDelimited)
+		var1627, var2441 = protoModule.writeString(var1627, var1628, self.user_id)
+		buff = var1627
+		var1624 = var1628
 	end
 	if self.description ~= nil and self.description ~= "" then
-		local var1627, var1628 = protoModule.writeTag(buff, var1622, 3, protoModule.wireTypes.lengthDelimited)
-		var1627, var2437 = protoModule.writeString(var1627, var1628, self.description)
-		buff = var1627
-		var1622 = var1628
+		local var1629, var1630 = protoModule.writeTag(buff, var1624, 3, protoModule.wireTypes.lengthDelimited)
+		var1629, var2443 = protoModule.writeString(var1629, var1630, self.description)
+		buff = var1629
+		var1624 = var1630
 	end
 	if self.cta_text ~= nil and self.cta_text ~= "" then
-		local var1629, var1630 = protoModule.writeTag(buff, var1622, 4, protoModule.wireTypes.lengthDelimited)
-		var1629, var2439 = protoModule.writeString(var1629, var1630, self.cta_text)
-		buff = var1629
-		var1622 = var1630
+		local var1631, var1632 = protoModule.writeTag(buff, var1624, 4, protoModule.wireTypes.lengthDelimited)
+		var1631, var2445 = protoModule.writeString(var1631, var1632, self.cta_text)
+		buff = var1631
+		var1624 = var1632
 	end
 	if self.prompt_id ~= nil and self.prompt_id ~= "" then
-		local var1631, var1632 = protoModule.writeTag(buff, var1622, 5, protoModule.wireTypes.lengthDelimited)
-		var1631, var2441 = protoModule.writeString(var1631, var1632, self.prompt_id)
-		buff = var1631
-		var1622 = var1632
+		local var1633, var1634 = protoModule.writeTag(buff, var1624, 5, protoModule.wireTypes.lengthDelimited)
+		var1633, var2447 = protoModule.writeString(var1633, var1634, self.prompt_id)
+		buff = var1633
+		var1624 = var1634
 	end
 	if self.prompt_type ~= nil and self.prompt_type ~= "" then
-		local var1633, var1634 = protoModule.writeTag(buff, var1622, 6, protoModule.wireTypes.lengthDelimited)
-		var1633, var2443 = protoModule.writeString(var1633, var1634, self.prompt_type)
-		buff = var1633
-		var1622 = var1634
+		local var1635, var1636 = protoModule.writeTag(buff, var1624, 6, protoModule.wireTypes.lengthDelimited)
+		var1635, var2449 = protoModule.writeString(var1635, var1636, self.prompt_type)
+		buff = var1635
+		var1624 = var1636
 	end
 	if self.entity_id ~= nil and self.entity_id ~= "" then
-		local var1635, var1636 = protoModule.writeTag(buff, var1622, 7, protoModule.wireTypes.lengthDelimited)
-		var1635, var2445 = protoModule.writeString(var1635, var1636, self.entity_id)
-		buff = var1635
-		var1622 = var1636
+		local var1637, var1638 = protoModule.writeTag(buff, var1624, 7, protoModule.wireTypes.lengthDelimited)
+		var1637, var2451 = protoModule.writeString(var1637, var1638, self.entity_id)
+		buff = var1637
+		var1624 = var1638
 	end
-	local buff_1 = buffer.create(var1622)
-	buffer.copy(buff_1, 0, buff, 0, var1622)
+	local buff_1 = buffer.create(var1624)
+	buffer.copy(buff_1, 0, buff, 0, var1624)
 	
 	return buff_1
 end
 
 function t_56.decode(p56)
 	-- upvalues: t_56 (ref), protoModule (ref)
-	local var1622 = t_56.new()
-	local var1623 = 0
-	while var1623 < buffer.len(p56) do
+	local var1624 = t_56.new()
+	local var1625 = 0
+	while var1625 < buffer.len(p56) do
 		local _ = nil
-		local var1624 = nil
-		local var1625, var1626, var1627 = protoModule.readTag(p56, var1623)
-		local var1628 = var1625
-		var1624 = var1626
-		var1623 = var1627
+		local var1626 = nil
+		local var1627, var1628, var1629 = protoModule.readTag(p56, var1625)
+		local var1630 = var1627
+		var1626 = var1628
+		var1625 = var1629
 		
-		if var1624 == protoModule.wireTypes.varint then
+		if var1626 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1629, var1630 = protoModule.readVarInt(p56, var1623)
-			local _ = var1629
-			var1623 = var1630
+			local var1631, var1632 = protoModule.readVarInt(p56, var1625)
+			local _ = var1631
+			var1625 = var1632
 			continue
 		end
-		if var1624 == protoModule.wireTypes.lengthDelimited then
-			if var1628 == 1 then
+		if var1626 == protoModule.wireTypes.lengthDelimited then
+			if var1630 == 1 then
 				local _ = nil
-				local var1631, var1632 = protoModule.readBuffer(p56, var1623)
-				var1623 = var1632
-				var1622.title = buffer.tostring(var1631)
-			elseif var1628 == 2 then
+				local var1633, var1634 = protoModule.readBuffer(p56, var1625)
+				var1625 = var1634
+				var1624.title = buffer.tostring(var1633)
+			elseif var1630 == 2 then
 				local _ = nil
-				local var1633, var1634 = protoModule.readBuffer(p56, var1623)
-				var1623 = var1634
-				var1622.user_id = buffer.tostring(var1633)
-			elseif var1628 == 3 then
+				local var1635, var1636 = protoModule.readBuffer(p56, var1625)
+				var1625 = var1636
+				var1624.user_id = buffer.tostring(var1635)
+			elseif var1630 == 3 then
 				local _ = nil
-				local var1635, var1636 = protoModule.readBuffer(p56, var1623)
-				var1623 = var1636
-				var1622.description = buffer.tostring(var1635)
-			elseif var1628 == 4 then
+				local var1637, var1638 = protoModule.readBuffer(p56, var1625)
+				var1625 = var1638
+				var1624.description = buffer.tostring(var1637)
+			elseif var1630 == 4 then
 				local _ = nil
-				local var1637, var1638 = protoModule.readBuffer(p56, var1623)
-				var1623 = var1638
-				var1622.cta_text = buffer.tostring(var1637)
-			elseif var1628 == 5 then
+				local var1639, var1640 = protoModule.readBuffer(p56, var1625)
+				var1625 = var1640
+				var1624.cta_text = buffer.tostring(var1639)
+			elseif var1630 == 5 then
 				local _ = nil
-				local var1639, var1640 = protoModule.readBuffer(p56, var1623)
-				var1623 = var1640
-				var1622.prompt_id = buffer.tostring(var1639)
-			elseif var1628 == 6 then
+				local var1641, var1642 = protoModule.readBuffer(p56, var1625)
+				var1625 = var1642
+				var1624.prompt_id = buffer.tostring(var1641)
+			elseif var1630 == 6 then
 				local _ = nil
-				local var1641, var1642 = protoModule.readBuffer(p56, var1623)
-				var1623 = var1642
-				var1622.prompt_type = buffer.tostring(var1641)
-			elseif var1628 == 7 then
+				local var1643, var1644 = protoModule.readBuffer(p56, var1625)
+				var1625 = var1644
+				var1624.prompt_type = buffer.tostring(var1643)
+			elseif var1630 == 7 then
 				local _ = nil
-				local var1643, var1644 = protoModule.readBuffer(p56, var1623)
-				var1623 = var1644
-				var1622.entity_id = buffer.tostring(var1643)
+				local var1645, var1646 = protoModule.readBuffer(p56, var1625)
+				var1625 = var1646
+				var1624.entity_id = buffer.tostring(var1645)
 			else
 				local _ = nil
-				local var1645, var1646 = protoModule.readVarInt(p56, var1623)
-				var1623 = var1646 + var1645
+				local var1647, var1648 = protoModule.readVarInt(p56, var1625)
+				var1625 = var1648 + var1647
 			end
-		elseif var1624 == protoModule.wireTypes.i32 then
+		elseif var1626 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1647, var1648 = protoModule.readFixed32(p56, var1623)
-			local _ = var1647
-			var1623 = var1648
-		elseif var1624 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1649, var1650 = protoModule.readFixed64(p56, var1623)
+			local var1649, var1650 = protoModule.readFixed32(p56, var1625)
 			local _ = var1649
-			var1623 = var1650
+			var1625 = var1650
+		elseif var1626 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1651, var1652 = protoModule.readFixed64(p56, var1625)
+			local _ = var1651
+			var1625 = var1652
 		else
-			error("Unsupported wire type: " .. var2449)
+			error("Unsupported wire type: " .. var2455)
 		end
 	end
-	return var1622
+	return var1624
 end
 
 function t_56:jsonEncode()
@@ -10907,45 +10937,45 @@ end
 
 function t_56:jsonDecode()
 	-- upvalues: t_56 (ref)
-	local var1651 = t_56.new()
+	local var1653 = t_56.new()
 	
 	if self.title ~= nil then
-		var1651.title = self.title
+		var1653.title = self.title
 	end
 	if self.user_id ~= nil then
-		var1651.user_id = self.user_id
+		var1653.user_id = self.user_id
 	end
 	if self.userId ~= nil then
-		var1651.user_id = self.userId
+		var1653.user_id = self.userId
 	end
 	if self.description ~= nil then
-		var1651.description = self.description
+		var1653.description = self.description
 	end
 	if self.cta_text ~= nil then
-		var1651.cta_text = self.cta_text
+		var1653.cta_text = self.cta_text
 	end
 	if self.ctaText ~= nil then
-		var1651.cta_text = self.ctaText
+		var1653.cta_text = self.ctaText
 	end
 	if self.prompt_id ~= nil then
-		var1651.prompt_id = self.prompt_id
+		var1653.prompt_id = self.prompt_id
 	end
 	if self.promptId ~= nil then
-		var1651.prompt_id = self.promptId
+		var1653.prompt_id = self.promptId
 	end
 	if self.prompt_type ~= nil then
-		var1651.prompt_type = self.prompt_type
+		var1653.prompt_type = self.prompt_type
 	end
 	if self.promptType ~= nil then
-		var1651.prompt_type = self.promptType
+		var1653.prompt_type = self.promptType
 	end
 	if self.entity_id ~= nil then
-		var1651.entity_id = self.entity_id
+		var1653.entity_id = self.entity_id
 	end
 	if self.entityId ~= nil then
-		var1651.entity_id = self.entityId
+		var1653.entity_id = self.entityId
 	end
-	return var1651
+	return var1653
 end
 
 t_56.descriptor = {
@@ -10970,98 +11000,98 @@ end
 function t_57:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1651 = 0
+	local var1653 = 0
 	
 	if self.prompt_id ~= nil and self.prompt_id ~= "" then
-		local var1652, var1653 = protoModule.writeTag(buff, var1651, 1, protoModule.wireTypes.lengthDelimited)
-		var1652, var2481 = protoModule.writeString(var1652, var1653, self.prompt_id)
-		buff = var1652
-		var1651 = var1653
+		local var1654, var1655 = protoModule.writeTag(buff, var1653, 1, protoModule.wireTypes.lengthDelimited)
+		var1654, var2487 = protoModule.writeString(var1654, var1655, self.prompt_id)
+		buff = var1654
+		var1653 = var1655
 	end
 	if self.prompt_type ~= nil and self.prompt_type ~= "" then
-		local var1654, var1655 = protoModule.writeTag(buff, var1651, 2, protoModule.wireTypes.lengthDelimited)
-		var1654, var2483 = protoModule.writeString(var1654, var1655, self.prompt_type)
-		buff = var1654
-		var1651 = var1655
+		local var1656, var1657 = protoModule.writeTag(buff, var1653, 2, protoModule.wireTypes.lengthDelimited)
+		var1656, var2489 = protoModule.writeString(var1656, var1657, self.prompt_type)
+		buff = var1656
+		var1653 = var1657
 	end
 	if self.user_id ~= nil and self.user_id ~= "" then
-		local var1656, var1657 = protoModule.writeTag(buff, var1651, 3, protoModule.wireTypes.lengthDelimited)
-		var1656, var2485 = protoModule.writeString(var1656, var1657, self.user_id)
-		buff = var1656
-		var1651 = var1657
+		local var1658, var1659 = protoModule.writeTag(buff, var1653, 3, protoModule.wireTypes.lengthDelimited)
+		var1658, var2491 = protoModule.writeString(var1658, var1659, self.user_id)
+		buff = var1658
+		var1653 = var1659
 	end
 	if self.audit_data ~= nil and self.audit_data ~= "" then
-		local var1658, var1659 = protoModule.writeTag(buff, var1651, 4, protoModule.wireTypes.lengthDelimited)
-		var1658, var2487 = protoModule.writeString(var1658, var1659, self.audit_data)
-		buff = var1658
-		var1651 = var1659
+		local var1660, var1661 = protoModule.writeTag(buff, var1653, 4, protoModule.wireTypes.lengthDelimited)
+		var1660, var2493 = protoModule.writeString(var1660, var1661, self.audit_data)
+		buff = var1660
+		var1653 = var1661
 	end
-	local buff_1 = buffer.create(var1651)
-	buffer.copy(buff_1, 0, buff, 0, var1651)
+	local buff_1 = buffer.create(var1653)
+	buffer.copy(buff_1, 0, buff, 0, var1653)
 	
 	return buff_1
 end
 
 function t_57.decode(p57)
 	-- upvalues: t_57 (ref), protoModule (ref)
-	local var1651 = t_57.new()
-	local var1652 = 0
-	while var1652 < buffer.len(p57) do
+	local var1653 = t_57.new()
+	local var1654 = 0
+	while var1654 < buffer.len(p57) do
 		local _ = nil
-		local var1653 = nil
-		local var1654, var1655, var1656 = protoModule.readTag(p57, var1652)
-		local var1657 = var1654
-		var1653 = var1655
-		var1652 = var1656
+		local var1655 = nil
+		local var1656, var1657, var1658 = protoModule.readTag(p57, var1654)
+		local var1659 = var1656
+		var1655 = var1657
+		var1654 = var1658
 		
-		if var1653 == protoModule.wireTypes.varint then
+		if var1655 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1658, var1659 = protoModule.readVarInt(p57, var1652)
-			local _ = var1658
-			var1652 = var1659
+			local var1660, var1661 = protoModule.readVarInt(p57, var1654)
+			local _ = var1660
+			var1654 = var1661
 			continue
 		end
-		if var1653 == protoModule.wireTypes.lengthDelimited then
-			if var1657 == 1 then
+		if var1655 == protoModule.wireTypes.lengthDelimited then
+			if var1659 == 1 then
 				local _ = nil
-				local var1660, var1661 = protoModule.readBuffer(p57, var1652)
-				var1652 = var1661
-				var1651.prompt_id = buffer.tostring(var1660)
-			elseif var1657 == 2 then
+				local var1662, var1663 = protoModule.readBuffer(p57, var1654)
+				var1654 = var1663
+				var1653.prompt_id = buffer.tostring(var1662)
+			elseif var1659 == 2 then
 				local _ = nil
-				local var1662, var1663 = protoModule.readBuffer(p57, var1652)
-				var1652 = var1663
-				var1651.prompt_type = buffer.tostring(var1662)
-			elseif var1657 == 3 then
+				local var1664, var1665 = protoModule.readBuffer(p57, var1654)
+				var1654 = var1665
+				var1653.prompt_type = buffer.tostring(var1664)
+			elseif var1659 == 3 then
 				local _ = nil
-				local var1664, var1665 = protoModule.readBuffer(p57, var1652)
-				var1652 = var1665
-				var1651.user_id = buffer.tostring(var1664)
-			elseif var1657 == 4 then
+				local var1666, var1667 = protoModule.readBuffer(p57, var1654)
+				var1654 = var1667
+				var1653.user_id = buffer.tostring(var1666)
+			elseif var1659 == 4 then
 				local _ = nil
-				local var1666, var1667 = protoModule.readBuffer(p57, var1652)
-				var1652 = var1667
-				var1651.audit_data = buffer.tostring(var1666)
+				local var1668, var1669 = protoModule.readBuffer(p57, var1654)
+				var1654 = var1669
+				var1653.audit_data = buffer.tostring(var1668)
 			else
 				local _ = nil
-				local var1668, var1669 = protoModule.readVarInt(p57, var1652)
-				var1652 = var1669 + var1668
+				local var1670, var1671 = protoModule.readVarInt(p57, var1654)
+				var1654 = var1671 + var1670
 			end
-		elseif var1653 == protoModule.wireTypes.i32 then
+		elseif var1655 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1670, var1671 = protoModule.readFixed32(p57, var1652)
-			local _ = var1670
-			var1652 = var1671
-		elseif var1653 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1672, var1673 = protoModule.readFixed64(p57, var1652)
+			local var1672, var1673 = protoModule.readFixed32(p57, var1654)
 			local _ = var1672
-			var1652 = var1673
+			var1654 = var1673
+		elseif var1655 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1674, var1675 = protoModule.readFixed64(p57, var1654)
+			local _ = var1674
+			var1654 = var1675
 		else
-			error("Unsupported wire type: " .. var2491)
+			error("Unsupported wire type: " .. var2497)
 		end
 	end
-	return var1651
+	return var1653
 end
 
 function t_57:jsonEncode()
@@ -11084,33 +11114,33 @@ end
 
 function t_57:jsonDecode()
 	-- upvalues: t_57 (ref)
-	local var1674 = t_57.new()
+	local var1676 = t_57.new()
 	
 	if self.prompt_id ~= nil then
-		var1674.prompt_id = self.prompt_id
+		var1676.prompt_id = self.prompt_id
 	end
 	if self.promptId ~= nil then
-		var1674.prompt_id = self.promptId
+		var1676.prompt_id = self.promptId
 	end
 	if self.prompt_type ~= nil then
-		var1674.prompt_type = self.prompt_type
+		var1676.prompt_type = self.prompt_type
 	end
 	if self.promptType ~= nil then
-		var1674.prompt_type = self.promptType
+		var1676.prompt_type = self.promptType
 	end
 	if self.user_id ~= nil then
-		var1674.user_id = self.user_id
+		var1676.user_id = self.user_id
 	end
 	if self.userId ~= nil then
-		var1674.user_id = self.userId
+		var1676.user_id = self.userId
 	end
 	if self.audit_data ~= nil then
-		var1674.audit_data = self.audit_data
+		var1676.audit_data = self.audit_data
 	end
 	if self.auditData ~= nil then
-		var1674.audit_data = self.auditData
+		var1676.audit_data = self.auditData
 	end
-	return var1674
+	return var1676
 end
 
 t_57.descriptor = {
@@ -11133,74 +11163,74 @@ end
 function t_58:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1674 = 0
+	local var1676 = 0
 	
 	if self.sender_count ~= nil and self.sender_count ~= 0 then
-		local var1675, var1676 = protoModule.writeTag(buff, var1674, 1, protoModule.wireTypes.varint)
-		var1675, var2517 = protoModule.writeVarInt(var1675, var1676, self.sender_count)
-		buff = var1675
-		var1674 = var1676
+		local var1677, var1678 = protoModule.writeTag(buff, var1676, 1, protoModule.wireTypes.varint)
+		var1677, var2523 = protoModule.writeVarInt(var1677, var1678, self.sender_count)
+		buff = var1677
+		var1676 = var1678
 	end
 	if self.total_robux_amount ~= nil and self.total_robux_amount ~= 0 then
-		local var1677, var1678 = protoModule.writeTag(buff, var1674, 2, protoModule.wireTypes.varint)
-		var1677, var2519 = protoModule.writeVarInt(var1677, var1678, self.total_robux_amount)
-		buff = var1677
-		var1674 = var1678
+		local var1679, var1680 = protoModule.writeTag(buff, var1676, 2, protoModule.wireTypes.varint)
+		var1679, var2525 = protoModule.writeVarInt(var1679, var1680, self.total_robux_amount)
+		buff = var1679
+		var1676 = var1680
 	end
-	local buff_1 = buffer.create(var1674)
-	buffer.copy(buff_1, 0, buff, 0, var1674)
+	local buff_1 = buffer.create(var1676)
+	buffer.copy(buff_1, 0, buff, 0, var1676)
 	
 	return buff_1
 end
 
 function t_58.decode(p58)
 	-- upvalues: t_58 (ref), protoModule (ref)
-	local var1674 = t_58.new()
-	local var1675 = 0
-	while var1675 < buffer.len(p58) do
+	local var1676 = t_58.new()
+	local var1677 = 0
+	while var1677 < buffer.len(p58) do
 		local _ = nil
 		local _ = nil
-		local var1676, var1677, var1678 = protoModule.readTag(p58, var1675)
-		local var1679 = var1676
-		local var1680 = var1677
-		var1675 = var1678
+		local var1678, var1679, var1680 = protoModule.readTag(p58, var1677)
+		local var1681 = var1678
+		local var1682 = var1679
+		var1677 = var1680
 		
-		if var1680 == protoModule.wireTypes.varint then
-			if var1679 == 1 then
+		if var1682 == protoModule.wireTypes.varint then
+			if var1681 == 1 then
 				local _ = nil
-				local var1681, var1682 = protoModule.readVarIntI32(p58, var1675)
-				var1675 = var1682
-				var1674.sender_count = var1681
-			elseif var1679 == 2 then
+				local var1683, var1684 = protoModule.readVarIntI32(p58, var1677)
+				var1677 = var1684
+				var1676.sender_count = var1683
+			elseif var1681 == 2 then
 				local _ = nil
-				local var1683, var1684 = protoModule.readVarIntI64(p58, var1675)
-				var1675 = var1684
-				var1674.total_robux_amount = var1683
+				local var1685, var1686 = protoModule.readVarIntI64(p58, var1677)
+				var1677 = var1686
+				var1676.total_robux_amount = var1685
 			else
 				local _ = nil
-				local var1685, var1686 = protoModule.readVarInt(p58, var1675)
-				local _ = var1685
-				var1675 = var1686
+				local var1687, var1688 = protoModule.readVarInt(p58, var1677)
+				local _ = var1687
+				var1677 = var1688
 			end
-		elseif var1680 == protoModule.wireTypes.lengthDelimited then
+		elseif var1682 == protoModule.wireTypes.lengthDelimited then
 			local _ = nil
-			local var1687, var1688 = protoModule.readVarInt(p58, var1675)
-			var1675 = var1688 + var1687
-		elseif var1680 == protoModule.wireTypes.i32 then
+			local var1689, var1690 = protoModule.readVarInt(p58, var1677)
+			var1677 = var1690 + var1689
+		elseif var1682 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1689, var1690 = protoModule.readFixed32(p58, var1675)
-			local _ = var1689
-			var1675 = var1690
-		elseif var1680 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1691, var1692 = protoModule.readFixed64(p58, var1675)
+			local var1691, var1692 = protoModule.readFixed32(p58, var1677)
 			local _ = var1691
-			var1675 = var1692
+			var1677 = var1692
+		elseif var1682 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1693, var1694 = protoModule.readFixed64(p58, var1677)
+			local _ = var1693
+			var1677 = var1694
 		else
-			error("Unsupported wire type: " .. var2527)
+			error("Unsupported wire type: " .. var2533)
 		end
 	end
-	return var1674
+	return var1676
 end
 
 function t_58:jsonEncode()
@@ -11217,21 +11247,21 @@ end
 
 function t_58:jsonDecode()
 	-- upvalues: t_58 (ref)
-	local var1693 = t_58.new()
+	local var1695 = t_58.new()
 	
 	if self.sender_count ~= nil then
-		var1693.sender_count = self.sender_count
+		var1695.sender_count = self.sender_count
 	end
 	if self.senderCount ~= nil then
-		var1693.sender_count = self.senderCount
+		var1695.sender_count = self.senderCount
 	end
 	if self.total_robux_amount ~= nil then
-		var1693.total_robux_amount = self.total_robux_amount
+		var1695.total_robux_amount = self.total_robux_amount
 	end
 	if self.totalRobuxAmount ~= nil then
-		var1693.total_robux_amount = self.totalRobuxAmount
+		var1695.total_robux_amount = self.totalRobuxAmount
 	end
-	return var1693
+	return var1695
 end
 
 t_58.descriptor = {
@@ -11261,158 +11291,158 @@ end
 function t_59:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1693 = 0
+	local var1695 = 0
 	
 	if self.title ~= nil and self.title ~= "" then
-		local var1694, var1695 = protoModule.writeTag(buff, var1693, 1, protoModule.wireTypes.lengthDelimited)
-		var1694, var2545 = protoModule.writeString(var1694, var1695, self.title)
-		buff = var1694
-		var1693 = var1695
+		local var1696, var1697 = protoModule.writeTag(buff, var1695, 1, protoModule.wireTypes.lengthDelimited)
+		var1696, var2551 = protoModule.writeString(var1696, var1697, self.title)
+		buff = var1696
+		var1695 = var1697
 	end
 	if self.description ~= nil and self.description ~= "" then
-		local var1696, var1697 = protoModule.writeTag(buff, var1693, 2, protoModule.wireTypes.lengthDelimited)
-		var1696, var2547 = protoModule.writeString(var1696, var1697, self.description)
-		buff = var1696
-		var1693 = var1697
+		local var1698, var1699 = protoModule.writeTag(buff, var1695, 2, protoModule.wireTypes.lengthDelimited)
+		var1698, var2553 = protoModule.writeString(var1698, var1699, self.description)
+		buff = var1698
+		var1695 = var1699
 	end
 	if self.primary_text ~= nil and self.primary_text ~= "" then
-		local var1698, var1699 = protoModule.writeTag(buff, var1693, 3, protoModule.wireTypes.lengthDelimited)
-		var1698, var2549 = protoModule.writeString(var1698, var1699, self.primary_text)
-		buff = var1698
-		var1693 = var1699
+		local var1700, var1701 = protoModule.writeTag(buff, var1695, 3, protoModule.wireTypes.lengthDelimited)
+		var1700, var2555 = protoModule.writeString(var1700, var1701, self.primary_text)
+		buff = var1700
+		var1695 = var1701
 	end
 	if self.secondary_text ~= nil and self.secondary_text ~= "" then
-		local var1700, var1701 = protoModule.writeTag(buff, var1693, 4, protoModule.wireTypes.lengthDelimited)
-		var1700, var2551 = protoModule.writeString(var1700, var1701, self.secondary_text)
-		buff = var1700
-		var1693 = var1701
+		local var1702, var1703 = protoModule.writeTag(buff, var1695, 4, protoModule.wireTypes.lengthDelimited)
+		var1702, var2557 = protoModule.writeString(var1702, var1703, self.secondary_text)
+		buff = var1702
+		var1695 = var1703
 	end
 	if self.prompt_id ~= nil and self.prompt_id ~= "" then
-		local var1702, var1703 = protoModule.writeTag(buff, var1693, 5, protoModule.wireTypes.lengthDelimited)
-		var1702, var2553 = protoModule.writeString(var1702, var1703, self.prompt_id)
-		buff = var1702
-		var1693 = var1703
+		local var1704, var1705 = protoModule.writeTag(buff, var1695, 5, protoModule.wireTypes.lengthDelimited)
+		var1704, var2559 = protoModule.writeString(var1704, var1705, self.prompt_id)
+		buff = var1704
+		var1695 = var1705
 	end
 	if self.prompt_type ~= nil and self.prompt_type ~= "" then
-		local var1704, var1705 = protoModule.writeTag(buff, var1693, 6, protoModule.wireTypes.lengthDelimited)
-		var1704, var2555 = protoModule.writeString(var1704, var1705, self.prompt_type)
-		buff = var1704
-		var1693 = var1705
+		local var1706, var1707 = protoModule.writeTag(buff, var1695, 6, protoModule.wireTypes.lengthDelimited)
+		var1706, var2561 = protoModule.writeString(var1706, var1707, self.prompt_type)
+		buff = var1706
+		var1695 = var1707
 	end
 	if self.times_seen ~= nil and self.times_seen ~= 0 then
-		local var1706, var1707 = protoModule.writeTag(buff, var1693, 7, protoModule.wireTypes.varint)
-		var1706, var2557 = protoModule.writeVarInt(var1706, var1707, self.times_seen)
-		buff = var1706
-		var1693 = var1707
+		local var1708, var1709 = protoModule.writeTag(buff, var1695, 7, protoModule.wireTypes.varint)
+		var1708, var2563 = protoModule.writeVarInt(var1708, var1709, self.times_seen)
+		buff = var1708
+		var1695 = var1709
 	end
 	if self.content ~= nil and self.content.type == "incoming_transfer_content" then
-		local var1708 = self.content.value:encode()
-		local var1709, var1710 = protoModule.writeTag(buff, var1693, 8, protoModule.wireTypes.lengthDelimited)
-		var1709, var2560 = protoModule.writeBuffer(var1709, var1710, var1708, buffer.len(var1708))
-		buff = var1709
-		var1693 = var1710
+		local var1710 = self.content.value:encode()
+		local var1711, var1712 = protoModule.writeTag(buff, var1695, 8, protoModule.wireTypes.lengthDelimited)
+		var1711, var2566 = protoModule.writeBuffer(var1711, var1712, var1710, buffer.len(var1710))
+		buff = var1711
+		var1695 = var1712
 	end
 	if self.sort_id ~= nil then
-		local var1711, var1712 = protoModule.writeTag(buff, var1693, 9, protoModule.wireTypes.lengthDelimited)
-		var1711, var2562 = protoModule.writeString(var1711, var1712, self.sort_id)
-		buff = var1711
-		var1693 = var1712
+		local var1713, var1714 = protoModule.writeTag(buff, var1695, 9, protoModule.wireTypes.lengthDelimited)
+		var1713, var2568 = protoModule.writeString(var1713, var1714, self.sort_id)
+		buff = var1713
+		var1695 = var1714
 	end
-	local buff_1 = buffer.create(var1693)
-	buffer.copy(buff_1, 0, buff, 0, var1693)
+	local buff_1 = buffer.create(var1695)
+	buffer.copy(buff_1, 0, buff, 0, var1695)
 	
 	return buff_1
 end
 
 function t_59.decode(p59)
 	-- upvalues: t_59 (ref), protoModule (ref), t (ref)
-	local var1693 = t_59.new()
-	local var1694 = 0
-	while var1694 < buffer.len(p59) do
+	local var1695 = t_59.new()
+	local var1696 = 0
+	while var1696 < buffer.len(p59) do
 		local _ = nil
-		local var1695 = nil
-		local var1696, var1697, var1698 = protoModule.readTag(p59, var1694)
-		local var1699 = var1696
-		var1695 = var1697
-		var1694 = var1698
+		local var1697 = nil
+		local var1698, var1699, var1700 = protoModule.readTag(p59, var1696)
+		local var1701 = var1698
+		var1697 = var1699
+		var1696 = var1700
 		
-		if var1695 == protoModule.wireTypes.varint then
-			if var1699 == 7 then
+		if var1697 == protoModule.wireTypes.varint then
+			if var1701 == 7 then
 				local _ = nil
-				local var1700, var1701 = protoModule.readVarIntI32(p59, var1694)
-				var1694 = var1701
-				var1693.times_seen = var1700
+				local var1702, var1703 = protoModule.readVarIntI32(p59, var1696)
+				var1696 = var1703
+				var1695.times_seen = var1702
 			else
 				local _ = nil
-				local var1702, var1703 = protoModule.readVarInt(p59, var1694)
-				local _ = var1702
-				var1694 = var1703
+				local var1704, var1705 = protoModule.readVarInt(p59, var1696)
+				local _ = var1704
+				var1696 = var1705
 			end
 		end
-		if var1695 == protoModule.wireTypes.lengthDelimited then
-			if var1699 == 1 then
+		if var1697 == protoModule.wireTypes.lengthDelimited then
+			if var1701 == 1 then
 				local _ = nil
-				local var1704, var1705 = protoModule.readBuffer(p59, var1694)
-				var1694 = var1705
-				var1693.title = buffer.tostring(var1704)
-			elseif var1699 == 2 then
+				local var1706, var1707 = protoModule.readBuffer(p59, var1696)
+				var1696 = var1707
+				var1695.title = buffer.tostring(var1706)
+			elseif var1701 == 2 then
 				local _ = nil
-				local var1706, var1707 = protoModule.readBuffer(p59, var1694)
-				var1694 = var1707
-				var1693.description = buffer.tostring(var1706)
-			elseif var1699 == 3 then
+				local var1708, var1709 = protoModule.readBuffer(p59, var1696)
+				var1696 = var1709
+				var1695.description = buffer.tostring(var1708)
+			elseif var1701 == 3 then
 				local _ = nil
-				local var1708, var1709 = protoModule.readBuffer(p59, var1694)
-				var1694 = var1709
-				var1693.primary_text = buffer.tostring(var1708)
-			elseif var1699 == 4 then
+				local var1710, var1711 = protoModule.readBuffer(p59, var1696)
+				var1696 = var1711
+				var1695.primary_text = buffer.tostring(var1710)
+			elseif var1701 == 4 then
 				local _ = nil
-				local var1710, var1711 = protoModule.readBuffer(p59, var1694)
-				var1694 = var1711
-				var1693.secondary_text = buffer.tostring(var1710)
-			elseif var1699 == 5 then
+				local var1712, var1713 = protoModule.readBuffer(p59, var1696)
+				var1696 = var1713
+				var1695.secondary_text = buffer.tostring(var1712)
+			elseif var1701 == 5 then
 				local _ = nil
-				local var1712, var1713 = protoModule.readBuffer(p59, var1694)
-				var1694 = var1713
-				var1693.prompt_id = buffer.tostring(var1712)
-			elseif var1699 == 6 then
+				local var1714, var1715 = protoModule.readBuffer(p59, var1696)
+				var1696 = var1715
+				var1695.prompt_id = buffer.tostring(var1714)
+			elseif var1701 == 6 then
 				local _ = nil
-				local var1714, var1715 = protoModule.readBuffer(p59, var1694)
-				var1694 = var1715
-				var1693.prompt_type = buffer.tostring(var1714)
-			elseif var1699 == 8 then
+				local var1716, var1717 = protoModule.readBuffer(p59, var1696)
+				var1696 = var1717
+				var1695.prompt_type = buffer.tostring(var1716)
+			elseif var1701 == 8 then
 				local _ = nil
-				local var1716, var1717 = protoModule.readBuffer(p59, var1694)
-				var1694 = var1717
-				var1693.content = {
+				local var1718, var1719 = protoModule.readBuffer(p59, var1696)
+				var1696 = var1719
+				var1695.content = {
 					type = "incoming_transfer_content",
-					value = t.IncomingTransferContent.decode(var1716)
+					value = t.IncomingTransferContent.decode(var1718)
 				}
-			elseif var1699 == 9 then
+			elseif var1701 == 9 then
 				local _ = nil
-				local var1718, var1719 = protoModule.readBuffer(p59, var1694)
-				var1694 = var1719
-				var1693.sort_id = buffer.tostring(var1718)
+				local var1720, var1721 = protoModule.readBuffer(p59, var1696)
+				var1696 = var1721
+				var1695.sort_id = buffer.tostring(var1720)
 			else
 				local _ = nil
-				local var1720, var1721 = protoModule.readVarInt(p59, var1694)
-				var1694 = var1721 + var1720
+				local var1722, var1723 = protoModule.readVarInt(p59, var1696)
+				var1696 = var1723 + var1722
 			end
-		elseif var1695 == protoModule.wireTypes.i32 then
+		elseif var1697 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1722, var1723 = protoModule.readFixed32(p59, var1694)
-			local _ = var1722
-			var1694 = var1723
-		elseif var1695 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1724, var1725 = protoModule.readFixed64(p59, var1694)
+			local var1724, var1725 = protoModule.readFixed32(p59, var1696)
 			local _ = var1724
-			var1694 = var1725
+			var1696 = var1725
+		elseif var1697 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1726, var1727 = protoModule.readFixed64(p59, var1696)
+			local _ = var1726
+			var1696 = var1727
 		else
-			error("Unsupported wire type: " .. var2566)
+			error("Unsupported wire type: " .. var2572)
 		end
 	end
-	return var1693
+	return var1695
 end
 
 function t_59:jsonEncode()
@@ -11450,63 +11480,63 @@ end
 
 function t_59:jsonDecode()
 	-- upvalues: t_59 (ref), t (ref)
-	local var1726 = t_59.new()
+	local var1728 = t_59.new()
 	
 	if self.title ~= nil then
-		var1726.title = self.title
+		var1728.title = self.title
 	end
 	if self.description ~= nil then
-		var1726.description = self.description
+		var1728.description = self.description
 	end
 	if self.primary_text ~= nil then
-		var1726.primary_text = self.primary_text
+		var1728.primary_text = self.primary_text
 	end
 	if self.primaryText ~= nil then
-		var1726.primary_text = self.primaryText
+		var1728.primary_text = self.primaryText
 	end
 	if self.secondary_text ~= nil then
-		var1726.secondary_text = self.secondary_text
+		var1728.secondary_text = self.secondary_text
 	end
 	if self.secondaryText ~= nil then
-		var1726.secondary_text = self.secondaryText
+		var1728.secondary_text = self.secondaryText
 	end
 	if self.prompt_id ~= nil then
-		var1726.prompt_id = self.prompt_id
+		var1728.prompt_id = self.prompt_id
 	end
 	if self.promptId ~= nil then
-		var1726.prompt_id = self.promptId
+		var1728.prompt_id = self.promptId
 	end
 	if self.prompt_type ~= nil then
-		var1726.prompt_type = self.prompt_type
+		var1728.prompt_type = self.prompt_type
 	end
 	if self.promptType ~= nil then
-		var1726.prompt_type = self.promptType
+		var1728.prompt_type = self.promptType
 	end
 	if self.times_seen ~= nil then
-		var1726.times_seen = self.times_seen
+		var1728.times_seen = self.times_seen
 	end
 	if self.timesSeen ~= nil then
-		var1726.times_seen = self.timesSeen
+		var1728.times_seen = self.timesSeen
 	end
 	if self.incoming_transfer_content ~= nil then
-		var1726.content = {
+		var1728.content = {
 			type = "incoming_transfer_content",
 			value = t.IncomingTransferContent.jsonDecode(self.incoming_transfer_content)
 		}
 	end
 	if self.incomingTransferContent ~= nil then
-		var1726.content = {
+		var1728.content = {
 			type = "incoming_transfer_content",
 			value = t.IncomingTransferContent.jsonDecode(self.incomingTransferContent)
 		}
 	end
 	if self.sort_id ~= nil then
-		var1726.sort_id = self.sort_id
+		var1728.sort_id = self.sort_id
 	end
 	if self.sortId ~= nil then
-		var1726.sort_id = self.sortId
+		var1728.sort_id = self.sortId
 	end
-	return var1726
+	return var1728
 end
 
 t_59.descriptor = {
@@ -11530,87 +11560,87 @@ end
 function t_60:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1726 = 0
+	local var1728 = 0
 	
 	if self.tooltip_text ~= nil and self.tooltip_text ~= "" then
-		local var1727, var1728 = protoModule.writeTag(buff, var1726, 1, protoModule.wireTypes.lengthDelimited)
-		var1727, var2602 = protoModule.writeString(var1727, var1728, self.tooltip_text)
-		buff = var1727
-		var1726 = var1728
+		local var1729, var1730 = protoModule.writeTag(buff, var1728, 1, protoModule.wireTypes.lengthDelimited)
+		var1729, var2608 = protoModule.writeString(var1729, var1730, self.tooltip_text)
+		buff = var1729
+		var1728 = var1730
 	end
 	if self.prompt_id ~= nil and self.prompt_id ~= "" then
-		local var1729, var1730 = protoModule.writeTag(buff, var1726, 2, protoModule.wireTypes.lengthDelimited)
-		var1729, var2604 = protoModule.writeString(var1729, var1730, self.prompt_id)
-		buff = var1729
-		var1726 = var1730
+		local var1731, var1732 = protoModule.writeTag(buff, var1728, 2, protoModule.wireTypes.lengthDelimited)
+		var1731, var2610 = protoModule.writeString(var1731, var1732, self.prompt_id)
+		buff = var1731
+		var1728 = var1732
 	end
 	if self.prompt_type ~= nil and self.prompt_type ~= "" then
-		local var1731, var1732 = protoModule.writeTag(buff, var1726, 3, protoModule.wireTypes.lengthDelimited)
-		var1731, var2606 = protoModule.writeString(var1731, var1732, self.prompt_type)
-		buff = var1731
-		var1726 = var1732
+		local var1733, var1734 = protoModule.writeTag(buff, var1728, 3, protoModule.wireTypes.lengthDelimited)
+		var1733, var2612 = protoModule.writeString(var1733, var1734, self.prompt_type)
+		buff = var1733
+		var1728 = var1734
 	end
-	local buff_1 = buffer.create(var1726)
-	buffer.copy(buff_1, 0, buff, 0, var1726)
+	local buff_1 = buffer.create(var1728)
+	buffer.copy(buff_1, 0, buff, 0, var1728)
 	
 	return buff_1
 end
 
 function t_60.decode(p60)
 	-- upvalues: t_60 (ref), protoModule (ref)
-	local var1726 = t_60.new()
-	local var1727 = 0
-	while var1727 < buffer.len(p60) do
+	local var1728 = t_60.new()
+	local var1729 = 0
+	while var1729 < buffer.len(p60) do
 		local _ = nil
-		local var1728 = nil
-		local var1729, var1730, var1731 = protoModule.readTag(p60, var1727)
-		local var1732 = var1729
-		var1728 = var1730
-		var1727 = var1731
+		local var1730 = nil
+		local var1731, var1732, var1733 = protoModule.readTag(p60, var1729)
+		local var1734 = var1731
+		var1730 = var1732
+		var1729 = var1733
 		
-		if var1728 == protoModule.wireTypes.varint then
+		if var1730 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1733, var1734 = protoModule.readVarInt(p60, var1727)
-			local _ = var1733
-			var1727 = var1734
+			local var1735, var1736 = protoModule.readVarInt(p60, var1729)
+			local _ = var1735
+			var1729 = var1736
 			continue
 		end
-		if var1728 == protoModule.wireTypes.lengthDelimited then
-			if var1732 == 1 then
+		if var1730 == protoModule.wireTypes.lengthDelimited then
+			if var1734 == 1 then
 				local _ = nil
-				local var1735, var1736 = protoModule.readBuffer(p60, var1727)
-				var1727 = var1736
-				var1726.tooltip_text = buffer.tostring(var1735)
-			elseif var1732 == 2 then
+				local var1737, var1738 = protoModule.readBuffer(p60, var1729)
+				var1729 = var1738
+				var1728.tooltip_text = buffer.tostring(var1737)
+			elseif var1734 == 2 then
 				local _ = nil
-				local var1737, var1738 = protoModule.readBuffer(p60, var1727)
-				var1727 = var1738
-				var1726.prompt_id = buffer.tostring(var1737)
-			elseif var1732 == 3 then
+				local var1739, var1740 = protoModule.readBuffer(p60, var1729)
+				var1729 = var1740
+				var1728.prompt_id = buffer.tostring(var1739)
+			elseif var1734 == 3 then
 				local _ = nil
-				local var1739, var1740 = protoModule.readBuffer(p60, var1727)
-				var1727 = var1740
-				var1726.prompt_type = buffer.tostring(var1739)
+				local var1741, var1742 = protoModule.readBuffer(p60, var1729)
+				var1729 = var1742
+				var1728.prompt_type = buffer.tostring(var1741)
 			else
 				local _ = nil
-				local var1741, var1742 = protoModule.readVarInt(p60, var1727)
-				var1727 = var1742 + var1741
+				local var1743, var1744 = protoModule.readVarInt(p60, var1729)
+				var1729 = var1744 + var1743
 			end
-		elseif var1728 == protoModule.wireTypes.i32 then
+		elseif var1730 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1743, var1744 = protoModule.readFixed32(p60, var1727)
-			local _ = var1743
-			var1727 = var1744
-		elseif var1728 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1745, var1746 = protoModule.readFixed64(p60, var1727)
+			local var1745, var1746 = protoModule.readFixed32(p60, var1729)
 			local _ = var1745
-			var1727 = var1746
+			var1729 = var1746
+		elseif var1730 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1747, var1748 = protoModule.readFixed64(p60, var1729)
+			local _ = var1747
+			var1729 = var1748
 		else
-			error("Unsupported wire type: " .. var2610)
+			error("Unsupported wire type: " .. var2616)
 		end
 	end
-	return var1726
+	return var1728
 end
 
 function t_60:jsonEncode()
@@ -11630,27 +11660,27 @@ end
 
 function t_60:jsonDecode()
 	-- upvalues: t_60 (ref)
-	local var1747 = t_60.new()
+	local var1749 = t_60.new()
 	
 	if self.tooltip_text ~= nil then
-		var1747.tooltip_text = self.tooltip_text
+		var1749.tooltip_text = self.tooltip_text
 	end
 	if self.tooltipText ~= nil then
-		var1747.tooltip_text = self.tooltipText
+		var1749.tooltip_text = self.tooltipText
 	end
 	if self.prompt_id ~= nil then
-		var1747.prompt_id = self.prompt_id
+		var1749.prompt_id = self.prompt_id
 	end
 	if self.promptId ~= nil then
-		var1747.prompt_id = self.promptId
+		var1749.prompt_id = self.promptId
 	end
 	if self.prompt_type ~= nil then
-		var1747.prompt_type = self.prompt_type
+		var1749.prompt_type = self.prompt_type
 	end
 	if self.promptType ~= nil then
-		var1747.prompt_type = self.promptType
+		var1749.prompt_type = self.promptType
 	end
-	return var1747
+	return var1749
 end
 
 t_60.descriptor = {
@@ -11677,120 +11707,120 @@ end
 function t_61:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1747 = 0
+	local var1749 = 0
 	
 	if self.media_id ~= nil and self.media_id ~= "" then
-		local var1748, var1749 = protoModule.writeTag(buff, var1747, 1, protoModule.wireTypes.lengthDelimited)
-		var1748, var2634 = protoModule.writeString(var1748, var1749, self.media_id)
-		buff = var1748
-		var1747 = var1749
+		local var1750, var1751 = protoModule.writeTag(buff, var1749, 1, protoModule.wireTypes.lengthDelimited)
+		var1750, var2640 = protoModule.writeString(var1750, var1751, self.media_id)
+		buff = var1750
+		var1749 = var1751
 	end
 	if self.title ~= nil and self.title ~= "" then
-		local var1750, var1751 = protoModule.writeTag(buff, var1747, 2, protoModule.wireTypes.lengthDelimited)
-		var1750, var2636 = protoModule.writeString(var1750, var1751, self.title)
-		buff = var1750
-		var1747 = var1751
+		local var1752, var1753 = protoModule.writeTag(buff, var1749, 2, protoModule.wireTypes.lengthDelimited)
+		var1752, var2642 = protoModule.writeString(var1752, var1753, self.title)
+		buff = var1752
+		var1749 = var1753
 	end
 	if self.description ~= nil and self.description ~= "" then
-		local var1752, var1753 = protoModule.writeTag(buff, var1747, 3, protoModule.wireTypes.lengthDelimited)
-		var1752, var2638 = protoModule.writeString(var1752, var1753, self.description)
-		buff = var1752
-		var1747 = var1753
+		local var1754, var1755 = protoModule.writeTag(buff, var1749, 3, protoModule.wireTypes.lengthDelimited)
+		var1754, var2644 = protoModule.writeString(var1754, var1755, self.description)
+		buff = var1754
+		var1749 = var1755
 	end
 	if self.prompt_id ~= nil and self.prompt_id ~= "" then
-		local var1754, var1755 = protoModule.writeTag(buff, var1747, 4, protoModule.wireTypes.lengthDelimited)
-		var1754, var2640 = protoModule.writeString(var1754, var1755, self.prompt_id)
-		buff = var1754
-		var1747 = var1755
+		local var1756, var1757 = protoModule.writeTag(buff, var1749, 4, protoModule.wireTypes.lengthDelimited)
+		var1756, var2646 = protoModule.writeString(var1756, var1757, self.prompt_id)
+		buff = var1756
+		var1749 = var1757
 	end
 	if self.prompt_type ~= nil and self.prompt_type ~= "" then
-		local var1756, var1757 = protoModule.writeTag(buff, var1747, 5, protoModule.wireTypes.lengthDelimited)
-		var1756, var2642 = protoModule.writeString(var1756, var1757, self.prompt_type)
-		buff = var1756
-		var1747 = var1757
+		local var1758, var1759 = protoModule.writeTag(buff, var1749, 5, protoModule.wireTypes.lengthDelimited)
+		var1758, var2648 = protoModule.writeString(var1758, var1759, self.prompt_type)
+		buff = var1758
+		var1749 = var1759
 	end
 	if self.anchor_tag ~= nil and self.anchor_tag ~= "" then
-		local var1758, var1759 = protoModule.writeTag(buff, var1747, 6, protoModule.wireTypes.lengthDelimited)
-		var1758, var2644 = protoModule.writeString(var1758, var1759, self.anchor_tag)
-		buff = var1758
-		var1747 = var1759
+		local var1760, var1761 = protoModule.writeTag(buff, var1749, 6, protoModule.wireTypes.lengthDelimited)
+		var1760, var2650 = protoModule.writeString(var1760, var1761, self.anchor_tag)
+		buff = var1760
+		var1749 = var1761
 	end
-	local buff_1 = buffer.create(var1747)
-	buffer.copy(buff_1, 0, buff, 0, var1747)
+	local buff_1 = buffer.create(var1749)
+	buffer.copy(buff_1, 0, buff, 0, var1749)
 	
 	return buff_1
 end
 
 function t_61.decode(p61)
 	-- upvalues: t_61 (ref), protoModule (ref)
-	local var1747 = t_61.new()
-	local var1748 = 0
-	while var1748 < buffer.len(p61) do
+	local var1749 = t_61.new()
+	local var1750 = 0
+	while var1750 < buffer.len(p61) do
 		local _ = nil
-		local var1749 = nil
-		local var1750, var1751, var1752 = protoModule.readTag(p61, var1748)
-		local var1753 = var1750
-		var1749 = var1751
-		var1748 = var1752
+		local var1751 = nil
+		local var1752, var1753, var1754 = protoModule.readTag(p61, var1750)
+		local var1755 = var1752
+		var1751 = var1753
+		var1750 = var1754
 		
-		if var1749 == protoModule.wireTypes.varint then
+		if var1751 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1754, var1755 = protoModule.readVarInt(p61, var1748)
-			local _ = var1754
-			var1748 = var1755
+			local var1756, var1757 = protoModule.readVarInt(p61, var1750)
+			local _ = var1756
+			var1750 = var1757
 			continue
 		end
-		if var1749 == protoModule.wireTypes.lengthDelimited then
-			if var1753 == 1 then
+		if var1751 == protoModule.wireTypes.lengthDelimited then
+			if var1755 == 1 then
 				local _ = nil
-				local var1756, var1757 = protoModule.readBuffer(p61, var1748)
-				var1748 = var1757
-				var1747.media_id = buffer.tostring(var1756)
-			elseif var1753 == 2 then
+				local var1758, var1759 = protoModule.readBuffer(p61, var1750)
+				var1750 = var1759
+				var1749.media_id = buffer.tostring(var1758)
+			elseif var1755 == 2 then
 				local _ = nil
-				local var1758, var1759 = protoModule.readBuffer(p61, var1748)
-				var1748 = var1759
-				var1747.title = buffer.tostring(var1758)
-			elseif var1753 == 3 then
+				local var1760, var1761 = protoModule.readBuffer(p61, var1750)
+				var1750 = var1761
+				var1749.title = buffer.tostring(var1760)
+			elseif var1755 == 3 then
 				local _ = nil
-				local var1760, var1761 = protoModule.readBuffer(p61, var1748)
-				var1748 = var1761
-				var1747.description = buffer.tostring(var1760)
-			elseif var1753 == 4 then
+				local var1762, var1763 = protoModule.readBuffer(p61, var1750)
+				var1750 = var1763
+				var1749.description = buffer.tostring(var1762)
+			elseif var1755 == 4 then
 				local _ = nil
-				local var1762, var1763 = protoModule.readBuffer(p61, var1748)
-				var1748 = var1763
-				var1747.prompt_id = buffer.tostring(var1762)
-			elseif var1753 == 5 then
+				local var1764, var1765 = protoModule.readBuffer(p61, var1750)
+				var1750 = var1765
+				var1749.prompt_id = buffer.tostring(var1764)
+			elseif var1755 == 5 then
 				local _ = nil
-				local var1764, var1765 = protoModule.readBuffer(p61, var1748)
-				var1748 = var1765
-				var1747.prompt_type = buffer.tostring(var1764)
-			elseif var1753 == 6 then
+				local var1766, var1767 = protoModule.readBuffer(p61, var1750)
+				var1750 = var1767
+				var1749.prompt_type = buffer.tostring(var1766)
+			elseif var1755 == 6 then
 				local _ = nil
-				local var1766, var1767 = protoModule.readBuffer(p61, var1748)
-				var1748 = var1767
-				var1747.anchor_tag = buffer.tostring(var1766)
+				local var1768, var1769 = protoModule.readBuffer(p61, var1750)
+				var1750 = var1769
+				var1749.anchor_tag = buffer.tostring(var1768)
 			else
 				local _ = nil
-				local var1768, var1769 = protoModule.readVarInt(p61, var1748)
-				var1748 = var1769 + var1768
+				local var1770, var1771 = protoModule.readVarInt(p61, var1750)
+				var1750 = var1771 + var1770
 			end
-		elseif var1749 == protoModule.wireTypes.i32 then
+		elseif var1751 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1770, var1771 = protoModule.readFixed32(p61, var1748)
-			local _ = var1770
-			var1748 = var1771
-		elseif var1749 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1772, var1773 = protoModule.readFixed64(p61, var1748)
+			local var1772, var1773 = protoModule.readFixed32(p61, var1750)
 			local _ = var1772
-			var1748 = var1773
+			var1750 = var1773
+		elseif var1751 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1774, var1775 = protoModule.readFixed64(p61, var1750)
+			local _ = var1774
+			var1750 = var1775
 		else
-			error("Unsupported wire type: " .. var2648)
+			error("Unsupported wire type: " .. var2654)
 		end
 	end
-	return var1747
+	return var1749
 end
 
 function t_61:jsonEncode()
@@ -11819,39 +11849,39 @@ end
 
 function t_61:jsonDecode()
 	-- upvalues: t_61 (ref)
-	local var1774 = t_61.new()
+	local var1776 = t_61.new()
 	
 	if self.media_id ~= nil then
-		var1774.media_id = self.media_id
+		var1776.media_id = self.media_id
 	end
 	if self.mediaId ~= nil then
-		var1774.media_id = self.mediaId
+		var1776.media_id = self.mediaId
 	end
 	if self.title ~= nil then
-		var1774.title = self.title
+		var1776.title = self.title
 	end
 	if self.description ~= nil then
-		var1774.description = self.description
+		var1776.description = self.description
 	end
 	if self.prompt_id ~= nil then
-		var1774.prompt_id = self.prompt_id
+		var1776.prompt_id = self.prompt_id
 	end
 	if self.promptId ~= nil then
-		var1774.prompt_id = self.promptId
+		var1776.prompt_id = self.promptId
 	end
 	if self.prompt_type ~= nil then
-		var1774.prompt_type = self.prompt_type
+		var1776.prompt_type = self.prompt_type
 	end
 	if self.promptType ~= nil then
-		var1774.prompt_type = self.promptType
+		var1776.prompt_type = self.promptType
 	end
 	if self.anchor_tag ~= nil then
-		var1774.anchor_tag = self.anchor_tag
+		var1776.anchor_tag = self.anchor_tag
 	end
 	if self.anchorTag ~= nil then
-		var1774.anchor_tag = self.anchorTag
+		var1776.anchor_tag = self.anchorTag
 	end
-	return var1774
+	return var1776
 end
 
 t_61.descriptor = {
@@ -11874,76 +11904,76 @@ end
 function t_62:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1774 = 0
+	local var1776 = 0
 	
 	if self.prompt_id ~= nil and self.prompt_id ~= "" then
-		local var1775, var1776 = protoModule.writeTag(buff, var1774, 1, protoModule.wireTypes.lengthDelimited)
-		var1775, var2678 = protoModule.writeString(var1775, var1776, self.prompt_id)
-		buff = var1775
-		var1774 = var1776
+		local var1777, var1778 = protoModule.writeTag(buff, var1776, 1, protoModule.wireTypes.lengthDelimited)
+		var1777, var2684 = protoModule.writeString(var1777, var1778, self.prompt_id)
+		buff = var1777
+		var1776 = var1778
 	end
 	if self.prompt_type ~= nil and self.prompt_type ~= "" then
-		local var1777, var1778 = protoModule.writeTag(buff, var1774, 2, protoModule.wireTypes.lengthDelimited)
-		var1777, var2680 = protoModule.writeString(var1777, var1778, self.prompt_type)
-		buff = var1777
-		var1774 = var1778
+		local var1779, var1780 = protoModule.writeTag(buff, var1776, 2, protoModule.wireTypes.lengthDelimited)
+		var1779, var2686 = protoModule.writeString(var1779, var1780, self.prompt_type)
+		buff = var1779
+		var1776 = var1780
 	end
-	local buff_1 = buffer.create(var1774)
-	buffer.copy(buff_1, 0, buff, 0, var1774)
+	local buff_1 = buffer.create(var1776)
+	buffer.copy(buff_1, 0, buff, 0, var1776)
 	
 	return buff_1
 end
 
 function t_62.decode(p62)
 	-- upvalues: t_62 (ref), protoModule (ref)
-	local var1774 = t_62.new()
-	local var1775 = 0
-	while var1775 < buffer.len(p62) do
+	local var1776 = t_62.new()
+	local var1777 = 0
+	while var1777 < buffer.len(p62) do
 		local _ = nil
-		local var1776 = nil
-		local var1777, var1778, var1779 = protoModule.readTag(p62, var1775)
-		local var1780 = var1777
-		var1776 = var1778
-		var1775 = var1779
+		local var1778 = nil
+		local var1779, var1780, var1781 = protoModule.readTag(p62, var1777)
+		local var1782 = var1779
+		var1778 = var1780
+		var1777 = var1781
 		
-		if var1776 == protoModule.wireTypes.varint then
+		if var1778 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1781, var1782 = protoModule.readVarInt(p62, var1775)
-			local _ = var1781
-			var1775 = var1782
+			local var1783, var1784 = protoModule.readVarInt(p62, var1777)
+			local _ = var1783
+			var1777 = var1784
 			continue
 		end
-		if var1776 == protoModule.wireTypes.lengthDelimited then
-			if var1780 == 1 then
+		if var1778 == protoModule.wireTypes.lengthDelimited then
+			if var1782 == 1 then
 				local _ = nil
-				local var1783, var1784 = protoModule.readBuffer(p62, var1775)
-				var1775 = var1784
-				var1774.prompt_id = buffer.tostring(var1783)
-			elseif var1780 == 2 then
+				local var1785, var1786 = protoModule.readBuffer(p62, var1777)
+				var1777 = var1786
+				var1776.prompt_id = buffer.tostring(var1785)
+			elseif var1782 == 2 then
 				local _ = nil
-				local var1785, var1786 = protoModule.readBuffer(p62, var1775)
-				var1775 = var1786
-				var1774.prompt_type = buffer.tostring(var1785)
+				local var1787, var1788 = protoModule.readBuffer(p62, var1777)
+				var1777 = var1788
+				var1776.prompt_type = buffer.tostring(var1787)
 			else
 				local _ = nil
-				local var1787, var1788 = protoModule.readVarInt(p62, var1775)
-				var1775 = var1788 + var1787
+				local var1789, var1790 = protoModule.readVarInt(p62, var1777)
+				var1777 = var1790 + var1789
 			end
-		elseif var1776 == protoModule.wireTypes.i32 then
+		elseif var1778 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1789, var1790 = protoModule.readFixed32(p62, var1775)
-			local _ = var1789
-			var1775 = var1790
-		elseif var1776 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1791, var1792 = protoModule.readFixed64(p62, var1775)
+			local var1791, var1792 = protoModule.readFixed32(p62, var1777)
 			local _ = var1791
-			var1775 = var1792
+			var1777 = var1792
+		elseif var1778 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1793, var1794 = protoModule.readFixed64(p62, var1777)
+			local _ = var1793
+			var1777 = var1794
 		else
-			error("Unsupported wire type: " .. var2684)
+			error("Unsupported wire type: " .. var2690)
 		end
 	end
-	return var1774
+	return var1776
 end
 
 function t_62:jsonEncode()
@@ -11960,21 +11990,21 @@ end
 
 function t_62:jsonDecode()
 	-- upvalues: t_62 (ref)
-	local var1793 = t_62.new()
+	local var1795 = t_62.new()
 	
 	if self.prompt_id ~= nil then
-		var1793.prompt_id = self.prompt_id
+		var1795.prompt_id = self.prompt_id
 	end
 	if self.promptId ~= nil then
-		var1793.prompt_id = self.promptId
+		var1795.prompt_id = self.promptId
 	end
 	if self.prompt_type ~= nil then
-		var1793.prompt_type = self.prompt_type
+		var1795.prompt_type = self.prompt_type
 	end
 	if self.promptType ~= nil then
-		var1793.prompt_type = self.promptType
+		var1795.prompt_type = self.promptType
 	end
-	return var1793
+	return var1795
 end
 
 t_62.descriptor = {
@@ -11996,65 +12026,65 @@ end
 function t_63:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1793 = 0
+	local var1795 = 0
 	
 	if self.upsell_prompt ~= nil and self.upsell_prompt ~= "" then
-		local var1794, var1795 = protoModule.writeTag(buff, var1793, 1, protoModule.wireTypes.lengthDelimited)
-		var1794, var2706 = protoModule.writeString(var1794, var1795, self.upsell_prompt)
-		buff = var1794
-		var1793 = var1795
+		local var1796, var1797 = protoModule.writeTag(buff, var1795, 1, protoModule.wireTypes.lengthDelimited)
+		var1796, var2712 = protoModule.writeString(var1796, var1797, self.upsell_prompt)
+		buff = var1796
+		var1795 = var1797
 	end
-	local buff_1 = buffer.create(var1793)
-	buffer.copy(buff_1, 0, buff, 0, var1793)
+	local buff_1 = buffer.create(var1795)
+	buffer.copy(buff_1, 0, buff, 0, var1795)
 	
 	return buff_1
 end
 
 function t_63.decode(p63)
 	-- upvalues: t_63 (ref), protoModule (ref)
-	local var1793 = t_63.new()
-	local var1794 = 0
-	while var1794 < buffer.len(p63) do
+	local var1795 = t_63.new()
+	local var1796 = 0
+	while var1796 < buffer.len(p63) do
 		local _ = nil
-		local var1795 = nil
-		local var1796, var1797, var1798 = protoModule.readTag(p63, var1794)
-		local var1799 = var1796
-		var1795 = var1797
-		var1794 = var1798
+		local var1797 = nil
+		local var1798, var1799, var1800 = protoModule.readTag(p63, var1796)
+		local var1801 = var1798
+		var1797 = var1799
+		var1796 = var1800
 		
-		if var1795 == protoModule.wireTypes.varint then
+		if var1797 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1800, var1801 = protoModule.readVarInt(p63, var1794)
-			local _ = var1800
-			var1794 = var1801
+			local var1802, var1803 = protoModule.readVarInt(p63, var1796)
+			local _ = var1802
+			var1796 = var1803
 			continue
 		end
-		if var1795 == protoModule.wireTypes.lengthDelimited then
-			if var1799 == 1 then
+		if var1797 == protoModule.wireTypes.lengthDelimited then
+			if var1801 == 1 then
 				local _ = nil
-				local var1802, var1803 = protoModule.readBuffer(p63, var1794)
-				var1794 = var1803
-				var1793.upsell_prompt = buffer.tostring(var1802)
+				local var1804, var1805 = protoModule.readBuffer(p63, var1796)
+				var1796 = var1805
+				var1795.upsell_prompt = buffer.tostring(var1804)
 			else
 				local _ = nil
-				local var1804, var1805 = protoModule.readVarInt(p63, var1794)
-				var1794 = var1805 + var1804
+				local var1806, var1807 = protoModule.readVarInt(p63, var1796)
+				var1796 = var1807 + var1806
 			end
-		elseif var1795 == protoModule.wireTypes.i32 then
+		elseif var1797 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1806, var1807 = protoModule.readFixed32(p63, var1794)
-			local _ = var1806
-			var1794 = var1807
-		elseif var1795 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1808, var1809 = protoModule.readFixed64(p63, var1794)
+			local var1808, var1809 = protoModule.readFixed32(p63, var1796)
 			local _ = var1808
-			var1794 = var1809
+			var1796 = var1809
+		elseif var1797 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1810, var1811 = protoModule.readFixed64(p63, var1796)
+			local _ = var1810
+			var1796 = var1811
 		else
-			error("Unsupported wire type: " .. var2710)
+			error("Unsupported wire type: " .. var2716)
 		end
 	end
-	return var1793
+	return var1795
 end
 
 function t_63:jsonEncode()
@@ -12068,15 +12098,15 @@ end
 
 function t_63:jsonDecode()
 	-- upvalues: t_63 (ref)
-	local var1810 = t_63.new()
+	local var1812 = t_63.new()
 	
 	if self.upsell_prompt ~= nil then
-		var1810.upsell_prompt = self.upsell_prompt
+		var1812.upsell_prompt = self.upsell_prompt
 	end
 	if self.upsellPrompt ~= nil then
-		var1810.upsell_prompt = self.upsellPrompt
+		var1812.upsell_prompt = self.upsellPrompt
 	end
-	return var1810
+	return var1812
 end
 
 t_63.descriptor = {
@@ -12101,98 +12131,98 @@ end
 function t_64:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1810 = 0
+	local var1812 = 0
 	
 	if self.modal_variant ~= nil and self.modal_variant ~= "" then
-		local var1811, var1812 = protoModule.writeTag(buff, var1810, 1, protoModule.wireTypes.lengthDelimited)
-		var1811, var2730 = protoModule.writeString(var1811, var1812, self.modal_variant)
-		buff = var1811
-		var1810 = var1812
+		local var1813, var1814 = protoModule.writeTag(buff, var1812, 1, protoModule.wireTypes.lengthDelimited)
+		var1813, var2736 = protoModule.writeString(var1813, var1814, self.modal_variant)
+		buff = var1813
+		var1812 = var1814
 	end
 	if self.modal_sequence ~= nil and self.modal_sequence ~= "" then
-		local var1813, var1814 = protoModule.writeTag(buff, var1810, 2, protoModule.wireTypes.lengthDelimited)
-		var1813, var2732 = protoModule.writeString(var1813, var1814, self.modal_sequence)
-		buff = var1813
-		var1810 = var1814
+		local var1815, var1816 = protoModule.writeTag(buff, var1812, 2, protoModule.wireTypes.lengthDelimited)
+		var1815, var2738 = protoModule.writeString(var1815, var1816, self.modal_sequence)
+		buff = var1815
+		var1812 = var1816
 	end
 	if self.conversation_id ~= nil and self.conversation_id ~= "" then
-		local var1815, var1816 = protoModule.writeTag(buff, var1810, 3, protoModule.wireTypes.lengthDelimited)
-		var1815, var2734 = protoModule.writeString(var1815, var1816, self.conversation_id)
-		buff = var1815
-		var1810 = var1816
+		local var1817, var1818 = protoModule.writeTag(buff, var1812, 3, protoModule.wireTypes.lengthDelimited)
+		var1817, var2740 = protoModule.writeString(var1817, var1818, self.conversation_id)
+		buff = var1817
+		var1812 = var1818
 	end
 	if self.friend_id ~= nil and self.friend_id ~= "" then
-		local var1817, var1818 = protoModule.writeTag(buff, var1810, 4, protoModule.wireTypes.lengthDelimited)
-		var1817, var2736 = protoModule.writeString(var1817, var1818, self.friend_id)
-		buff = var1817
-		var1810 = var1818
+		local var1819, var1820 = protoModule.writeTag(buff, var1812, 4, protoModule.wireTypes.lengthDelimited)
+		var1819, var2742 = protoModule.writeString(var1819, var1820, self.friend_id)
+		buff = var1819
+		var1812 = var1820
 	end
-	local buff_1 = buffer.create(var1810)
-	buffer.copy(buff_1, 0, buff, 0, var1810)
+	local buff_1 = buffer.create(var1812)
+	buffer.copy(buff_1, 0, buff, 0, var1812)
 	
 	return buff_1
 end
 
 function t_64.decode(p64)
 	-- upvalues: t_64 (ref), protoModule (ref)
-	local var1810 = t_64.new()
-	local var1811 = 0
-	while var1811 < buffer.len(p64) do
+	local var1812 = t_64.new()
+	local var1813 = 0
+	while var1813 < buffer.len(p64) do
 		local _ = nil
-		local var1812 = nil
-		local var1813, var1814, var1815 = protoModule.readTag(p64, var1811)
-		local var1816 = var1813
-		var1812 = var1814
-		var1811 = var1815
+		local var1814 = nil
+		local var1815, var1816, var1817 = protoModule.readTag(p64, var1813)
+		local var1818 = var1815
+		var1814 = var1816
+		var1813 = var1817
 		
-		if var1812 == protoModule.wireTypes.varint then
+		if var1814 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1817, var1818 = protoModule.readVarInt(p64, var1811)
-			local _ = var1817
-			var1811 = var1818
+			local var1819, var1820 = protoModule.readVarInt(p64, var1813)
+			local _ = var1819
+			var1813 = var1820
 			continue
 		end
-		if var1812 == protoModule.wireTypes.lengthDelimited then
-			if var1816 == 1 then
+		if var1814 == protoModule.wireTypes.lengthDelimited then
+			if var1818 == 1 then
 				local _ = nil
-				local var1819, var1820 = protoModule.readBuffer(p64, var1811)
-				var1811 = var1820
-				var1810.modal_variant = buffer.tostring(var1819)
-			elseif var1816 == 2 then
+				local var1821, var1822 = protoModule.readBuffer(p64, var1813)
+				var1813 = var1822
+				var1812.modal_variant = buffer.tostring(var1821)
+			elseif var1818 == 2 then
 				local _ = nil
-				local var1821, var1822 = protoModule.readBuffer(p64, var1811)
-				var1811 = var1822
-				var1810.modal_sequence = buffer.tostring(var1821)
-			elseif var1816 == 3 then
+				local var1823, var1824 = protoModule.readBuffer(p64, var1813)
+				var1813 = var1824
+				var1812.modal_sequence = buffer.tostring(var1823)
+			elseif var1818 == 3 then
 				local _ = nil
-				local var1823, var1824 = protoModule.readBuffer(p64, var1811)
-				var1811 = var1824
-				var1810.conversation_id = buffer.tostring(var1823)
-			elseif var1816 == 4 then
+				local var1825, var1826 = protoModule.readBuffer(p64, var1813)
+				var1813 = var1826
+				var1812.conversation_id = buffer.tostring(var1825)
+			elseif var1818 == 4 then
 				local _ = nil
-				local var1825, var1826 = protoModule.readBuffer(p64, var1811)
-				var1811 = var1826
-				var1810.friend_id = buffer.tostring(var1825)
+				local var1827, var1828 = protoModule.readBuffer(p64, var1813)
+				var1813 = var1828
+				var1812.friend_id = buffer.tostring(var1827)
 			else
 				local _ = nil
-				local var1827, var1828 = protoModule.readVarInt(p64, var1811)
-				var1811 = var1828 + var1827
+				local var1829, var1830 = protoModule.readVarInt(p64, var1813)
+				var1813 = var1830 + var1829
 			end
-		elseif var1812 == protoModule.wireTypes.i32 then
+		elseif var1814 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1829, var1830 = protoModule.readFixed32(p64, var1811)
-			local _ = var1829
-			var1811 = var1830
-		elseif var1812 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1831, var1832 = protoModule.readFixed64(p64, var1811)
+			local var1831, var1832 = protoModule.readFixed32(p64, var1813)
 			local _ = var1831
-			var1811 = var1832
+			var1813 = var1832
+		elseif var1814 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1833, var1834 = protoModule.readFixed64(p64, var1813)
+			local _ = var1833
+			var1813 = var1834
 		else
-			error("Unsupported wire type: " .. var2740)
+			error("Unsupported wire type: " .. var2746)
 		end
 	end
-	return var1810
+	return var1812
 end
 
 function t_64:jsonEncode()
@@ -12215,33 +12245,33 @@ end
 
 function t_64:jsonDecode()
 	-- upvalues: t_64 (ref)
-	local var1833 = t_64.new()
+	local var1835 = t_64.new()
 	
 	if self.modal_variant ~= nil then
-		var1833.modal_variant = self.modal_variant
+		var1835.modal_variant = self.modal_variant
 	end
 	if self.modalVariant ~= nil then
-		var1833.modal_variant = self.modalVariant
+		var1835.modal_variant = self.modalVariant
 	end
 	if self.modal_sequence ~= nil then
-		var1833.modal_sequence = self.modal_sequence
+		var1835.modal_sequence = self.modal_sequence
 	end
 	if self.modalSequence ~= nil then
-		var1833.modal_sequence = self.modalSequence
+		var1835.modal_sequence = self.modalSequence
 	end
 	if self.conversation_id ~= nil then
-		var1833.conversation_id = self.conversation_id
+		var1835.conversation_id = self.conversation_id
 	end
 	if self.conversationId ~= nil then
-		var1833.conversation_id = self.conversationId
+		var1835.conversation_id = self.conversationId
 	end
 	if self.friend_id ~= nil then
-		var1833.friend_id = self.friend_id
+		var1835.friend_id = self.friend_id
 	end
 	if self.friendId ~= nil then
-		var1833.friend_id = self.friendId
+		var1835.friend_id = self.friendId
 	end
-	return var1833
+	return var1835
 end
 
 t_64.descriptor = {
@@ -12266,110 +12296,110 @@ end
 function t_65:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1833 = 0
+	local var1835 = 0
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
-		local var1834, var1835 = protoModule.writeTag(buff, var1833, 1, protoModule.wireTypes.lengthDelimited)
-		var1834, var2766 = protoModule.writeString(var1834, var1835, self.event_id)
-		buff = var1834
-		var1833 = var1835
+		local var1836, var1837 = protoModule.writeTag(buff, var1835, 1, protoModule.wireTypes.lengthDelimited)
+		var1836, var2772 = protoModule.writeString(var1836, var1837, self.event_id)
+		buff = var1836
+		var1835 = var1837
 	end
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var1836, var1837 = protoModule.writeTag(buff, var1833, 2, protoModule.wireTypes.lengthDelimited)
-		var1836, var2768 = protoModule.writeString(var1836, var1837, self.universe_id)
-		buff = var1836
-		var1833 = var1837
+		local var1838, var1839 = protoModule.writeTag(buff, var1835, 2, protoModule.wireTypes.lengthDelimited)
+		var1838, var2774 = protoModule.writeString(var1838, var1839, self.universe_id)
+		buff = var1838
+		var1835 = var1839
 	end
 	if self.entry_map ~= nil and next(self.entry_map) ~= nil then
 		for i, v in self.entry_map do
-			local var1838, var1839 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var1838, var2770 = protoModule.writeString(var1838, var1839, i)
-			local var1840 = v:encode()
-			var1839, var2772 = protoModule.writeTag(var1838, var1839, 2, protoModule.wireTypes.lengthDelimited)
-			var1839, var2772 = protoModule.writeBuffer(var1839, var2772, var1840, buffer.len(var1840))
-			local var1841 = var1839
-			local var1842 = var2772
-			local var1843, var1844 = protoModule.writeTag(buff, var1833, 3, protoModule.wireTypes.lengthDelimited)
-			var1843, var2776 = protoModule.writeBuffer(var1843, var1844, var1841, var1842)
-			buff = var1843
-			var1833 = var1844
+			local var1840, var1841 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
+			var1840, var2776 = protoModule.writeString(var1840, var1841, i)
+			local var1842 = v:encode()
+			var1841, var2778 = protoModule.writeTag(var1840, var1841, 2, protoModule.wireTypes.lengthDelimited)
+			var1841, var2778 = protoModule.writeBuffer(var1841, var2778, var1842, buffer.len(var1842))
+			local var1843 = var1841
+			local var1844 = var2778
+			local var1845, var1846 = protoModule.writeTag(buff, var1835, 3, protoModule.wireTypes.lengthDelimited)
+			var1845, var2782 = protoModule.writeBuffer(var1845, var1846, var1843, var1844)
+			buff = var1845
+			var1835 = var1846
 		end
 	end
 	if self.entry_order ~= nil and #self.entry_order > 0 then
 		for i, v in self.entry_order do
-			local var1845, var1846 = protoModule.writeTag(buff, var1833, 4, protoModule.wireTypes.lengthDelimited)
-			var1845, var2778 = protoModule.writeString(var1845, var1846, v)
-			buff = var1845
-			var1833 = var1846
+			local var1847, var1848 = protoModule.writeTag(buff, var1835, 4, protoModule.wireTypes.lengthDelimited)
+			var1847, var2784 = protoModule.writeString(var1847, var1848, v)
+			buff = var1847
+			var1835 = var1848
 		end
 	end
-	local buff_1 = buffer.create(var1833)
-	buffer.copy(buff_1, 0, buff, 0, var1833)
+	local buff_1 = buffer.create(var1835)
+	buffer.copy(buff_1, 0, buff, 0, var1835)
 	
 	return buff_1
 end
 
 function t_65.decode(p65)
 	-- upvalues: t_65 (ref), protoModule (ref), t (ref)
-	local var1847 = t_65.new()
-	local var1848 = 0
-	while var1848 < buffer.len(p65) do
+	local var1849 = t_65.new()
+	local var1850 = 0
+	while var1850 < buffer.len(p65) do
 		local _ = nil
-		local var1849 = nil
-		local var1850, var1851, var1852 = protoModule.readTag(p65, var1848)
-		local var1853 = var1850
-		var1849 = var1851
-		var1848 = var1852
+		local var1851 = nil
+		local var1852, var1853, var1854 = protoModule.readTag(p65, var1850)
+		local var1855 = var1852
+		var1851 = var1853
+		var1850 = var1854
 		
-		if var1849 == protoModule.wireTypes.varint then
+		if var1851 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1854, var1855 = protoModule.readVarInt(p65, var1848)
-			local _ = var1854
-			var1848 = var1855
+			local var1856, var1857 = protoModule.readVarInt(p65, var1850)
+			local _ = var1856
+			var1850 = var1857
 			continue
 		end
-		if var1849 == protoModule.wireTypes.lengthDelimited then
-			if var1853 == 1 then
+		if var1851 == protoModule.wireTypes.lengthDelimited then
+			if var1855 == 1 then
 				local _ = nil
-				local var1856, var1857 = protoModule.readBuffer(p65, var1848)
-				var1848 = var1857
-				var1847.event_id = buffer.tostring(var1856)
-			elseif var1853 == 2 then
+				local var1858, var1859 = protoModule.readBuffer(p65, var1850)
+				var1850 = var1859
+				var1849.event_id = buffer.tostring(var1858)
+			elseif var1855 == 2 then
 				local _ = nil
-				local var1858, var1859 = protoModule.readBuffer(p65, var1848)
-				var1848 = var1859
-				var1847.universe_id = buffer.tostring(var1858)
-			elseif var1853 == 3 then
+				local var1860, var1861 = protoModule.readBuffer(p65, var1850)
+				var1850 = var1861
+				var1849.universe_id = buffer.tostring(var1860)
+			elseif var1855 == 3 then
 				local _ = nil
-				local var1860, var1861 = protoModule.readBuffer(p65, var1848)
-				var1848 = var1861
-				var1860 = t.EventDetailsFeedInputData_EntryMapEntry.decode(var1860)
-				var1847.entry_map[var1860.key or ""] = var1860.value or t.FeedEntry.new()
-			elseif var1853 == 4 then
+				local var1862, var1863 = protoModule.readBuffer(p65, var1850)
+				var1850 = var1863
+				var1862 = t.EventDetailsFeedInputData_EntryMapEntry.decode(var1862)
+				var1849.entry_map[var1862.key or ""] = var1862.value or t.FeedEntry.new()
+			elseif var1855 == 4 then
 				local _ = nil
-				local var1862, var1863 = protoModule.readBuffer(p65, var1848)
-				var1848 = var1863
-				table.insert(var1847.entry_order, buffer.tostring(var1862))
+				local var1864, var1865 = protoModule.readBuffer(p65, var1850)
+				var1850 = var1865
+				table.insert(var1849.entry_order, buffer.tostring(var1864))
 			else
 				local _ = nil
-				local var1864, var1865 = protoModule.readVarInt(p65, var1848)
-				var1848 = var1865 + var1864
+				local var1866, var1867 = protoModule.readVarInt(p65, var1850)
+				var1850 = var1867 + var1866
 			end
-		elseif var1849 == protoModule.wireTypes.i32 then
+		elseif var1851 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1866, var1867 = protoModule.readFixed32(p65, var1848)
-			local _ = var1866
-			var1848 = var1867
-		elseif var1849 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1868, var1869 = protoModule.readFixed64(p65, var1848)
+			local var1868, var1869 = protoModule.readFixed32(p65, var1850)
 			local _ = var1868
-			var1848 = var1869
+			var1850 = var1869
+		elseif var1851 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1870, var1871 = protoModule.readFixed64(p65, var1850)
+			local _ = var1870
+			var1850 = var1871
 		else
-			error("Unsupported wire type: " .. var2782)
+			error("Unsupported wire type: " .. var2788)
 		end
 	end
-	return var1847
+	return var1849
 end
 
 function t_65:jsonEncode()
@@ -12402,19 +12432,19 @@ end
 
 function t_65:jsonDecode()
 	-- upvalues: t_65 (ref), t (ref)
-	local var1870 = t_65.new()
+	local var1872 = t_65.new()
 	
 	if self.event_id ~= nil then
-		var1870.event_id = self.event_id
+		var1872.event_id = self.event_id
 	end
 	if self.eventId ~= nil then
-		var1870.event_id = self.eventId
+		var1872.event_id = self.eventId
 	end
 	if self.universe_id ~= nil then
-		var1870.universe_id = self.universe_id
+		var1872.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var1870.universe_id = self.universeId
+		var1872.universe_id = self.universeId
 	end
 	if self.entry_map ~= nil then
 		local t_1 = {}
@@ -12422,7 +12452,7 @@ function t_65:jsonDecode()
 		for i, v in self.entry_map do
 			t_1[i] = t.FeedEntry.jsonDecode(v)
 		end
-		var1870.entry_map = t_1
+		var1872.entry_map = t_1
 	end
 	if self.entryMap ~= nil then
 		local t_1 = {}
@@ -12430,7 +12460,7 @@ function t_65:jsonDecode()
 		for i, v in self.entryMap do
 			t_1[i] = t.FeedEntry.jsonDecode(v)
 		end
-		var1870.entry_map = t_1
+		var1872.entry_map = t_1
 	end
 	if self.entry_order ~= nil then
 		local t_1 = {}
@@ -12438,7 +12468,7 @@ function t_65:jsonDecode()
 		for i, v in self.entry_order do
 			table.insert(t_1, v)
 		end
-		var1870.entry_order = t_1
+		var1872.entry_order = t_1
 	end
 	if self.entryOrder ~= nil then
 		local t_1 = {}
@@ -12446,9 +12476,9 @@ function t_65:jsonDecode()
 		for i, v in self.entryOrder do
 			table.insert(t_1, v)
 		end
-		var1870.entry_order = t_1
+		var1872.entry_order = t_1
 	end
-	return var1870
+	return var1872
 end
 
 t_65.descriptor = {
@@ -12471,77 +12501,77 @@ end
 function t_66:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1871 = 0
+	local var1873 = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var1872, var1873 = protoModule.writeTag(buff, var1871, 1, protoModule.wireTypes.lengthDelimited)
-		var1872, var2814 = protoModule.writeString(var1872, var1873, self.key)
-		buff = var1872
-		var1871 = var1873
+		local var1874, var1875 = protoModule.writeTag(buff, var1873, 1, protoModule.wireTypes.lengthDelimited)
+		var1874, var2820 = protoModule.writeString(var1874, var1875, self.key)
+		buff = var1874
+		var1873 = var1875
 	end
 	if self.value ~= nil then
-		local var1874 = self.value:encode()
-		local var1875, var1876 = protoModule.writeTag(buff, var1871, 2, protoModule.wireTypes.lengthDelimited)
-		var1875, var2817 = protoModule.writeBuffer(var1875, var1876, var1874, buffer.len(var1874))
-		buff = var1875
-		var1871 = var1876
+		local var1876 = self.value:encode()
+		local var1877, var1878 = protoModule.writeTag(buff, var1873, 2, protoModule.wireTypes.lengthDelimited)
+		var1877, var2823 = protoModule.writeBuffer(var1877, var1878, var1876, buffer.len(var1876))
+		buff = var1877
+		var1873 = var1878
 	end
-	local buff_1 = buffer.create(var1871)
-	buffer.copy(buff_1, 0, buff, 0, var1871)
+	local buff_1 = buffer.create(var1873)
+	buffer.copy(buff_1, 0, buff, 0, var1873)
 	
 	return buff_1
 end
 
 function t_66.decode(p66)
 	-- upvalues: t_66 (ref), protoModule (ref), t (ref)
-	local var1871 = t_66.new()
-	local var1872 = 0
-	while var1872 < buffer.len(p66) do
+	local var1873 = t_66.new()
+	local var1874 = 0
+	while var1874 < buffer.len(p66) do
 		local _ = nil
-		local var1873 = nil
-		local var1874, var1875, var1876 = protoModule.readTag(p66, var1872)
-		local var1877 = var1874
-		var1873 = var1875
-		var1872 = var1876
+		local var1875 = nil
+		local var1876, var1877, var1878 = protoModule.readTag(p66, var1874)
+		local var1879 = var1876
+		var1875 = var1877
+		var1874 = var1878
 		
-		if var1873 == protoModule.wireTypes.varint then
+		if var1875 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1878, var1879 = protoModule.readVarInt(p66, var1872)
-			local _ = var1878
-			var1872 = var1879
+			local var1880, var1881 = protoModule.readVarInt(p66, var1874)
+			local _ = var1880
+			var1874 = var1881
 			continue
 		end
-		if var1873 == protoModule.wireTypes.lengthDelimited then
-			if var1877 == 1 then
+		if var1875 == protoModule.wireTypes.lengthDelimited then
+			if var1879 == 1 then
 				local _ = nil
-				local var1880, var1881 = protoModule.readBuffer(p66, var1872)
-				var1872 = var1881
-				var1871.key = buffer.tostring(var1880)
-			elseif var1877 == 2 then
+				local var1882, var1883 = protoModule.readBuffer(p66, var1874)
+				var1874 = var1883
+				var1873.key = buffer.tostring(var1882)
+			elseif var1879 == 2 then
 				local _ = nil
-				local var1882, var1883 = protoModule.readBuffer(p66, var1872)
-				var1872 = var1883
-				var1871.value = t.FeedEntry.decode(var1882)
+				local var1884, var1885 = protoModule.readBuffer(p66, var1874)
+				var1874 = var1885
+				var1873.value = t.FeedEntry.decode(var1884)
 			else
 				local _ = nil
-				local var1884, var1885 = protoModule.readVarInt(p66, var1872)
-				var1872 = var1885 + var1884
+				local var1886, var1887 = protoModule.readVarInt(p66, var1874)
+				var1874 = var1887 + var1886
 			end
-		elseif var1873 == protoModule.wireTypes.i32 then
+		elseif var1875 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1886, var1887 = protoModule.readFixed32(p66, var1872)
-			local _ = var1886
-			var1872 = var1887
-		elseif var1873 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1888, var1889 = protoModule.readFixed64(p66, var1872)
+			local var1888, var1889 = protoModule.readFixed32(p66, var1874)
 			local _ = var1888
-			var1872 = var1889
+			var1874 = var1889
+		elseif var1875 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1890, var1891 = protoModule.readFixed64(p66, var1874)
+			local _ = var1890
+			var1874 = var1891
 		else
-			error("Unsupported wire type: " .. var2821)
+			error("Unsupported wire type: " .. var2827)
 		end
 	end
-	return var1871
+	return var1873
 end
 
 function t_66:jsonEncode()
@@ -12558,15 +12588,15 @@ end
 
 function t_66:jsonDecode()
 	-- upvalues: t_66 (ref), t (ref)
-	local var1890 = t_66.new()
+	local var1892 = t_66.new()
 	
 	if self.key ~= nil then
-		var1890.key = self.key
+		var1892.key = self.key
 	end
 	if self.value ~= nil then
-		var1890.value = t.FeedEntry.jsonDecode(self.value)
+		var1892.value = t.FeedEntry.jsonDecode(self.value)
 	end
-	return var1890
+	return var1892
 end
 
 t_66.descriptor = {
@@ -12589,76 +12619,76 @@ end
 function t_67:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1890 = 0
+	local var1892 = 0
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
-		local var1891, var1892 = protoModule.writeTag(buff, var1890, 1, protoModule.wireTypes.lengthDelimited)
-		var1891, var2843 = protoModule.writeString(var1891, var1892, self.event_id)
-		buff = var1891
-		var1890 = var1892
+		local var1893, var1894 = protoModule.writeTag(buff, var1892, 1, protoModule.wireTypes.lengthDelimited)
+		var1893, var2849 = protoModule.writeString(var1893, var1894, self.event_id)
+		buff = var1893
+		var1892 = var1894
 	end
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var1893, var1894 = protoModule.writeTag(buff, var1890, 2, protoModule.wireTypes.lengthDelimited)
-		var1893, var2845 = protoModule.writeString(var1893, var1894, self.universe_id)
-		buff = var1893
-		var1890 = var1894
+		local var1895, var1896 = protoModule.writeTag(buff, var1892, 2, protoModule.wireTypes.lengthDelimited)
+		var1895, var2851 = protoModule.writeString(var1895, var1896, self.universe_id)
+		buff = var1895
+		var1892 = var1896
 	end
-	local buff_1 = buffer.create(var1890)
-	buffer.copy(buff_1, 0, buff, 0, var1890)
+	local buff_1 = buffer.create(var1892)
+	buffer.copy(buff_1, 0, buff, 0, var1892)
 	
 	return buff_1
 end
 
 function t_67.decode(p67)
 	-- upvalues: t_67 (ref), protoModule (ref)
-	local var1890 = t_67.new()
-	local var1891 = 0
-	while var1891 < buffer.len(p67) do
+	local var1892 = t_67.new()
+	local var1893 = 0
+	while var1893 < buffer.len(p67) do
 		local _ = nil
-		local var1892 = nil
-		local var1893, var1894, var1895 = protoModule.readTag(p67, var1891)
-		local var1896 = var1893
-		var1892 = var1894
-		var1891 = var1895
+		local var1894 = nil
+		local var1895, var1896, var1897 = protoModule.readTag(p67, var1893)
+		local var1898 = var1895
+		var1894 = var1896
+		var1893 = var1897
 		
-		if var1892 == protoModule.wireTypes.varint then
+		if var1894 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1897, var1898 = protoModule.readVarInt(p67, var1891)
-			local _ = var1897
-			var1891 = var1898
+			local var1899, var1900 = protoModule.readVarInt(p67, var1893)
+			local _ = var1899
+			var1893 = var1900
 			continue
 		end
-		if var1892 == protoModule.wireTypes.lengthDelimited then
-			if var1896 == 1 then
+		if var1894 == protoModule.wireTypes.lengthDelimited then
+			if var1898 == 1 then
 				local _ = nil
-				local var1899, var1900 = protoModule.readBuffer(p67, var1891)
-				var1891 = var1900
-				var1890.event_id = buffer.tostring(var1899)
-			elseif var1896 == 2 then
+				local var1901, var1902 = protoModule.readBuffer(p67, var1893)
+				var1893 = var1902
+				var1892.event_id = buffer.tostring(var1901)
+			elseif var1898 == 2 then
 				local _ = nil
-				local var1901, var1902 = protoModule.readBuffer(p67, var1891)
-				var1891 = var1902
-				var1890.universe_id = buffer.tostring(var1901)
+				local var1903, var1904 = protoModule.readBuffer(p67, var1893)
+				var1893 = var1904
+				var1892.universe_id = buffer.tostring(var1903)
 			else
 				local _ = nil
-				local var1903, var1904 = protoModule.readVarInt(p67, var1891)
-				var1891 = var1904 + var1903
+				local var1905, var1906 = protoModule.readVarInt(p67, var1893)
+				var1893 = var1906 + var1905
 			end
-		elseif var1892 == protoModule.wireTypes.i32 then
+		elseif var1894 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1905, var1906 = protoModule.readFixed32(p67, var1891)
-			local _ = var1905
-			var1891 = var1906
-		elseif var1892 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1907, var1908 = protoModule.readFixed64(p67, var1891)
+			local var1907, var1908 = protoModule.readFixed32(p67, var1893)
 			local _ = var1907
-			var1891 = var1908
+			var1893 = var1908
+		elseif var1894 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1909, var1910 = protoModule.readFixed64(p67, var1893)
+			local _ = var1909
+			var1893 = var1910
 		else
-			error("Unsupported wire type: " .. var2849)
+			error("Unsupported wire type: " .. var2855)
 		end
 	end
-	return var1890
+	return var1892
 end
 
 function t_67:jsonEncode()
@@ -12675,21 +12705,21 @@ end
 
 function t_67:jsonDecode()
 	-- upvalues: t_67 (ref)
-	local var1909 = t_67.new()
+	local var1911 = t_67.new()
 	
 	if self.event_id ~= nil then
-		var1909.event_id = self.event_id
+		var1911.event_id = self.event_id
 	end
 	if self.eventId ~= nil then
-		var1909.event_id = self.eventId
+		var1911.event_id = self.eventId
 	end
 	if self.universe_id ~= nil then
-		var1909.universe_id = self.universe_id
+		var1911.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var1909.universe_id = self.universeId
+		var1911.universe_id = self.universeId
 	end
-	return var1909
+	return var1911
 end
 
 t_67.descriptor = {
@@ -12711,65 +12741,65 @@ end
 function t_68:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1909 = 0
+	local var1911 = 0
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
-		local var1910, var1911 = protoModule.writeTag(buff, var1909, 1, protoModule.wireTypes.lengthDelimited)
-		var1910, var2871 = protoModule.writeString(var1910, var1911, self.event_id)
-		buff = var1910
-		var1909 = var1911
+		local var1912, var1913 = protoModule.writeTag(buff, var1911, 1, protoModule.wireTypes.lengthDelimited)
+		var1912, var2877 = protoModule.writeString(var1912, var1913, self.event_id)
+		buff = var1912
+		var1911 = var1913
 	end
-	local buff_1 = buffer.create(var1909)
-	buffer.copy(buff_1, 0, buff, 0, var1909)
+	local buff_1 = buffer.create(var1911)
+	buffer.copy(buff_1, 0, buff, 0, var1911)
 	
 	return buff_1
 end
 
 function t_68.decode(p68)
 	-- upvalues: t_68 (ref), protoModule (ref)
-	local var1909 = t_68.new()
-	local var1910 = 0
-	while var1910 < buffer.len(p68) do
+	local var1911 = t_68.new()
+	local var1912 = 0
+	while var1912 < buffer.len(p68) do
 		local _ = nil
-		local var1911 = nil
-		local var1912, var1913, var1914 = protoModule.readTag(p68, var1910)
-		local var1915 = var1912
-		var1911 = var1913
-		var1910 = var1914
+		local var1913 = nil
+		local var1914, var1915, var1916 = protoModule.readTag(p68, var1912)
+		local var1917 = var1914
+		var1913 = var1915
+		var1912 = var1916
 		
-		if var1911 == protoModule.wireTypes.varint then
+		if var1913 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1916, var1917 = protoModule.readVarInt(p68, var1910)
-			local _ = var1916
-			var1910 = var1917
+			local var1918, var1919 = protoModule.readVarInt(p68, var1912)
+			local _ = var1918
+			var1912 = var1919
 			continue
 		end
-		if var1911 == protoModule.wireTypes.lengthDelimited then
-			if var1915 == 1 then
+		if var1913 == protoModule.wireTypes.lengthDelimited then
+			if var1917 == 1 then
 				local _ = nil
-				local var1918, var1919 = protoModule.readBuffer(p68, var1910)
-				var1910 = var1919
-				var1909.event_id = buffer.tostring(var1918)
+				local var1920, var1921 = protoModule.readBuffer(p68, var1912)
+				var1912 = var1921
+				var1911.event_id = buffer.tostring(var1920)
 			else
 				local _ = nil
-				local var1920, var1921 = protoModule.readVarInt(p68, var1910)
-				var1910 = var1921 + var1920
+				local var1922, var1923 = protoModule.readVarInt(p68, var1912)
+				var1912 = var1923 + var1922
 			end
-		elseif var1911 == protoModule.wireTypes.i32 then
+		elseif var1913 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1922, var1923 = protoModule.readFixed32(p68, var1910)
-			local _ = var1922
-			var1910 = var1923
-		elseif var1911 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1924, var1925 = protoModule.readFixed64(p68, var1910)
+			local var1924, var1925 = protoModule.readFixed32(p68, var1912)
 			local _ = var1924
-			var1910 = var1925
+			var1912 = var1925
+		elseif var1913 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1926, var1927 = protoModule.readFixed64(p68, var1912)
+			local _ = var1926
+			var1912 = var1927
 		else
-			error("Unsupported wire type: " .. var2875)
+			error("Unsupported wire type: " .. var2881)
 		end
 	end
-	return var1909
+	return var1911
 end
 
 function t_68:jsonEncode()
@@ -12783,15 +12813,15 @@ end
 
 function t_68:jsonDecode()
 	-- upvalues: t_68 (ref)
-	local var1926 = t_68.new()
+	local var1928 = t_68.new()
 	
 	if self.event_id ~= nil then
-		var1926.event_id = self.event_id
+		var1928.event_id = self.event_id
 	end
 	if self.eventId ~= nil then
-		var1926.event_id = self.eventId
+		var1928.event_id = self.eventId
 	end
-	return var1926
+	return var1928
 end
 
 t_68.descriptor = {
@@ -12815,90 +12845,90 @@ end
 function t_69:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1926 = 0
+	local var1928 = 0
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
-		local var1927, var1928 = protoModule.writeTag(buff, var1926, 1, protoModule.wireTypes.lengthDelimited)
-		var1927, var2895 = protoModule.writeString(var1927, var1928, self.event_id)
-		buff = var1927
-		var1926 = var1928
+		local var1929, var1930 = protoModule.writeTag(buff, var1928, 1, protoModule.wireTypes.lengthDelimited)
+		var1929, var2901 = protoModule.writeString(var1929, var1930, self.event_id)
+		buff = var1929
+		var1928 = var1930
 	end
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var1929, var1930 = protoModule.writeTag(buff, var1926, 2, protoModule.wireTypes.lengthDelimited)
-		var1929, var2897 = protoModule.writeString(var1929, var1930, self.universe_id)
-		buff = var1929
-		var1926 = var1930
+		local var1931, var1932 = protoModule.writeTag(buff, var1928, 2, protoModule.wireTypes.lengthDelimited)
+		var1931, var2903 = protoModule.writeString(var1931, var1932, self.universe_id)
+		buff = var1931
+		var1928 = var1932
 	end
 	if self.rsvp_users ~= nil and #self.rsvp_users > 0 then
 		for i, v in self.rsvp_users do
-			local var1931 = v:encode()
-			local var1932, var1933 = protoModule.writeTag(buff, var1926, 3, protoModule.wireTypes.lengthDelimited)
-			var1932, var2900 = protoModule.writeBuffer(var1932, var1933, var1931, buffer.len(var1931))
-			buff = var1932
-			var1926 = var1933
+			local var1933 = v:encode()
+			local var1934, var1935 = protoModule.writeTag(buff, var1928, 3, protoModule.wireTypes.lengthDelimited)
+			var1934, var2906 = protoModule.writeBuffer(var1934, var1935, var1933, buffer.len(var1933))
+			buff = var1934
+			var1928 = var1935
 		end
 	end
-	local buff_1 = buffer.create(var1926)
-	buffer.copy(buff_1, 0, buff, 0, var1926)
+	local buff_1 = buffer.create(var1928)
+	buffer.copy(buff_1, 0, buff, 0, var1928)
 	
 	return buff_1
 end
 
 function t_69.decode(p69)
 	-- upvalues: t_69 (ref), protoModule (ref), t (ref)
-	local var1934 = t_69.new()
-	local var1935 = 0
-	while var1935 < buffer.len(p69) do
+	local var1936 = t_69.new()
+	local var1937 = 0
+	while var1937 < buffer.len(p69) do
 		local _ = nil
-		local var1936 = nil
-		local var1937, var1938, var1939 = protoModule.readTag(p69, var1935)
-		local var1940 = var1937
-		var1936 = var1938
-		var1935 = var1939
+		local var1938 = nil
+		local var1939, var1940, var1941 = protoModule.readTag(p69, var1937)
+		local var1942 = var1939
+		var1938 = var1940
+		var1937 = var1941
 		
-		if var1936 == protoModule.wireTypes.varint then
+		if var1938 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1941, var1942 = protoModule.readVarInt(p69, var1935)
-			local _ = var1941
-			var1935 = var1942
+			local var1943, var1944 = protoModule.readVarInt(p69, var1937)
+			local _ = var1943
+			var1937 = var1944
 			continue
 		end
-		if var1936 == protoModule.wireTypes.lengthDelimited then
-			if var1940 == 1 then
+		if var1938 == protoModule.wireTypes.lengthDelimited then
+			if var1942 == 1 then
 				local _ = nil
-				local var1943, var1944 = protoModule.readBuffer(p69, var1935)
-				var1935 = var1944
-				var1934.event_id = buffer.tostring(var1943)
-			elseif var1940 == 2 then
+				local var1945, var1946 = protoModule.readBuffer(p69, var1937)
+				var1937 = var1946
+				var1936.event_id = buffer.tostring(var1945)
+			elseif var1942 == 2 then
 				local _ = nil
-				local var1945, var1946 = protoModule.readBuffer(p69, var1935)
-				var1935 = var1946
-				var1934.universe_id = buffer.tostring(var1945)
-			elseif var1940 == 3 then
+				local var1947, var1948 = protoModule.readBuffer(p69, var1937)
+				var1937 = var1948
+				var1936.universe_id = buffer.tostring(var1947)
+			elseif var1942 == 3 then
 				local _ = nil
-				local var1947, var1948 = protoModule.readBuffer(p69, var1935)
-				var1935 = var1948
-				table.insert(var1934.rsvp_users, t.EventAttributionRowInputData_RsvpUser.decode(var1947))
+				local var1949, var1950 = protoModule.readBuffer(p69, var1937)
+				var1937 = var1950
+				table.insert(var1936.rsvp_users, t.EventAttributionRowInputData_RsvpUser.decode(var1949))
 			else
 				local _ = nil
-				local var1949, var1950 = protoModule.readVarInt(p69, var1935)
-				var1935 = var1950 + var1949
+				local var1951, var1952 = protoModule.readVarInt(p69, var1937)
+				var1937 = var1952 + var1951
 			end
-		elseif var1936 == protoModule.wireTypes.i32 then
+		elseif var1938 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1951, var1952 = protoModule.readFixed32(p69, var1935)
-			local _ = var1951
-			var1935 = var1952
-		elseif var1936 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1953, var1954 = protoModule.readFixed64(p69, var1935)
+			local var1953, var1954 = protoModule.readFixed32(p69, var1937)
 			local _ = var1953
-			var1935 = var1954
+			var1937 = var1954
+		elseif var1938 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1955, var1956 = protoModule.readFixed64(p69, var1937)
+			local _ = var1955
+			var1937 = var1956
 		else
-			error("Unsupported wire type: " .. var2904)
+			error("Unsupported wire type: " .. var2910)
 		end
 	end
-	return var1934
+	return var1936
 end
 
 function t_69:jsonEncode()
@@ -12923,19 +12953,19 @@ end
 
 function t_69:jsonDecode()
 	-- upvalues: t_69 (ref), t (ref)
-	local var1955 = t_69.new()
+	local var1957 = t_69.new()
 	
 	if self.event_id ~= nil then
-		var1955.event_id = self.event_id
+		var1957.event_id = self.event_id
 	end
 	if self.eventId ~= nil then
-		var1955.event_id = self.eventId
+		var1957.event_id = self.eventId
 	end
 	if self.universe_id ~= nil then
-		var1955.universe_id = self.universe_id
+		var1957.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var1955.universe_id = self.universeId
+		var1957.universe_id = self.universeId
 	end
 	if self.rsvp_users ~= nil then
 		local t_1 = {}
@@ -12943,7 +12973,7 @@ function t_69:jsonDecode()
 		for i, v in self.rsvp_users do
 			table.insert(t_1, t.EventAttributionRowInputData_RsvpUser.jsonDecode(v))
 		end
-		var1955.rsvp_users = t_1
+		var1957.rsvp_users = t_1
 	end
 	if self.rsvpUsers ~= nil then
 		local t_1 = {}
@@ -12951,9 +12981,9 @@ function t_69:jsonDecode()
 		for i, v in self.rsvpUsers do
 			table.insert(t_1, t.EventAttributionRowInputData_RsvpUser.jsonDecode(v))
 		end
-		var1955.rsvp_users = t_1
+		var1957.rsvp_users = t_1
 	end
-	return var1955
+	return var1957
 end
 
 t_69.descriptor = {
@@ -12975,63 +13005,63 @@ end
 function t_70:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1956 = 0
+	local var1958 = 0
 	
 	if self.user_id ~= nil and self.user_id ~= 0 then
-		local var1957, var1958 = protoModule.writeTag(buff, var1956, 1, protoModule.wireTypes.varint)
-		var1957, var2931 = protoModule.writeVarInt(var1957, var1958, self.user_id)
-		buff = var1957
-		var1956 = var1958
+		local var1959, var1960 = protoModule.writeTag(buff, var1958, 1, protoModule.wireTypes.varint)
+		var1959, var2937 = protoModule.writeVarInt(var1959, var1960, self.user_id)
+		buff = var1959
+		var1958 = var1960
 	end
-	local buff_1 = buffer.create(var1956)
-	buffer.copy(buff_1, 0, buff, 0, var1956)
+	local buff_1 = buffer.create(var1958)
+	buffer.copy(buff_1, 0, buff, 0, var1958)
 	
 	return buff_1
 end
 
 function t_70.decode(p70)
 	-- upvalues: t_70 (ref), protoModule (ref)
-	local var1956 = t_70.new()
-	local var1957 = 0
-	while var1957 < buffer.len(p70) do
+	local var1958 = t_70.new()
+	local var1959 = 0
+	while var1959 < buffer.len(p70) do
 		local _ = nil
 		local _ = nil
-		local var1958, var1959, var1960 = protoModule.readTag(p70, var1957)
-		local var1961 = var1958
-		local var1962 = var1959
-		var1957 = var1960
+		local var1960, var1961, var1962 = protoModule.readTag(p70, var1959)
+		local var1963 = var1960
+		local var1964 = var1961
+		var1959 = var1962
 		
-		if var1962 == protoModule.wireTypes.varint then
-			if var1961 == 1 then
+		if var1964 == protoModule.wireTypes.varint then
+			if var1963 == 1 then
 				local _ = nil
-				local var1963, var1964 = protoModule.readVarIntI64(p70, var1957)
-				var1957 = var1964
-				var1956.user_id = var1963
+				local var1965, var1966 = protoModule.readVarIntI64(p70, var1959)
+				var1959 = var1966
+				var1958.user_id = var1965
 			else
 				local _ = nil
-				local var1965, var1966 = protoModule.readVarInt(p70, var1957)
-				local _ = var1965
-				var1957 = var1966
+				local var1967, var1968 = protoModule.readVarInt(p70, var1959)
+				local _ = var1967
+				var1959 = var1968
 			end
-		elseif var1962 == protoModule.wireTypes.lengthDelimited then
+		elseif var1964 == protoModule.wireTypes.lengthDelimited then
 			local _ = nil
-			local var1967, var1968 = protoModule.readVarInt(p70, var1957)
-			var1957 = var1968 + var1967
-		elseif var1962 == protoModule.wireTypes.i32 then
+			local var1969, var1970 = protoModule.readVarInt(p70, var1959)
+			var1959 = var1970 + var1969
+		elseif var1964 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1969, var1970 = protoModule.readFixed32(p70, var1957)
-			local _ = var1969
-			var1957 = var1970
-		elseif var1962 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1971, var1972 = protoModule.readFixed64(p70, var1957)
+			local var1971, var1972 = protoModule.readFixed32(p70, var1959)
 			local _ = var1971
-			var1957 = var1972
+			var1959 = var1972
+		elseif var1964 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1973, var1974 = protoModule.readFixed64(p70, var1959)
+			local _ = var1973
+			var1959 = var1974
 		else
-			error("Unsupported wire type: " .. var2939)
+			error("Unsupported wire type: " .. var2945)
 		end
 	end
-	return var1956
+	return var1958
 end
 
 function t_70:jsonEncode()
@@ -13045,15 +13075,15 @@ end
 
 function t_70:jsonDecode()
 	-- upvalues: t_70 (ref)
-	local var1973 = t_70.new()
+	local var1975 = t_70.new()
 	
 	if self.user_id ~= nil then
-		var1973.user_id = self.user_id
+		var1975.user_id = self.user_id
 	end
 	if self.userId ~= nil then
-		var1973.user_id = self.userId
+		var1975.user_id = self.userId
 	end
-	return var1973
+	return var1975
 end
 
 t_70.descriptor = {
@@ -13075,65 +13105,65 @@ end
 function t_71:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1973 = 0
+	local var1975 = 0
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
-		local var1974, var1975 = protoModule.writeTag(buff, var1973, 1, protoModule.wireTypes.lengthDelimited)
-		var1974, var2955 = protoModule.writeString(var1974, var1975, self.event_id)
-		buff = var1974
-		var1973 = var1975
+		local var1976, var1977 = protoModule.writeTag(buff, var1975, 1, protoModule.wireTypes.lengthDelimited)
+		var1976, var2961 = protoModule.writeString(var1976, var1977, self.event_id)
+		buff = var1976
+		var1975 = var1977
 	end
-	local buff_1 = buffer.create(var1973)
-	buffer.copy(buff_1, 0, buff, 0, var1973)
+	local buff_1 = buffer.create(var1975)
+	buffer.copy(buff_1, 0, buff, 0, var1975)
 	
 	return buff_1
 end
 
 function t_71.decode(p71)
 	-- upvalues: t_71 (ref), protoModule (ref)
-	local var1973 = t_71.new()
-	local var1974 = 0
-	while var1974 < buffer.len(p71) do
+	local var1975 = t_71.new()
+	local var1976 = 0
+	while var1976 < buffer.len(p71) do
 		local _ = nil
-		local var1975 = nil
-		local var1976, var1977, var1978 = protoModule.readTag(p71, var1974)
-		local var1979 = var1976
-		var1975 = var1977
-		var1974 = var1978
+		local var1977 = nil
+		local var1978, var1979, var1980 = protoModule.readTag(p71, var1976)
+		local var1981 = var1978
+		var1977 = var1979
+		var1976 = var1980
 		
-		if var1975 == protoModule.wireTypes.varint then
+		if var1977 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1980, var1981 = protoModule.readVarInt(p71, var1974)
-			local _ = var1980
-			var1974 = var1981
+			local var1982, var1983 = protoModule.readVarInt(p71, var1976)
+			local _ = var1982
+			var1976 = var1983
 			continue
 		end
-		if var1975 == protoModule.wireTypes.lengthDelimited then
-			if var1979 == 1 then
+		if var1977 == protoModule.wireTypes.lengthDelimited then
+			if var1981 == 1 then
 				local _ = nil
-				local var1982, var1983 = protoModule.readBuffer(p71, var1974)
-				var1974 = var1983
-				var1973.event_id = buffer.tostring(var1982)
+				local var1984, var1985 = protoModule.readBuffer(p71, var1976)
+				var1976 = var1985
+				var1975.event_id = buffer.tostring(var1984)
 			else
 				local _ = nil
-				local var1984, var1985 = protoModule.readVarInt(p71, var1974)
-				var1974 = var1985 + var1984
+				local var1986, var1987 = protoModule.readVarInt(p71, var1976)
+				var1976 = var1987 + var1986
 			end
-		elseif var1975 == protoModule.wireTypes.i32 then
+		elseif var1977 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var1986, var1987 = protoModule.readFixed32(p71, var1974)
-			local _ = var1986
-			var1974 = var1987
-		elseif var1975 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var1988, var1989 = protoModule.readFixed64(p71, var1974)
+			local var1988, var1989 = protoModule.readFixed32(p71, var1976)
 			local _ = var1988
-			var1974 = var1989
+			var1976 = var1989
+		elseif var1977 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var1990, var1991 = protoModule.readFixed64(p71, var1976)
+			local _ = var1990
+			var1976 = var1991
 		else
-			error("Unsupported wire type: " .. var2959)
+			error("Unsupported wire type: " .. var2965)
 		end
 	end
-	return var1973
+	return var1975
 end
 
 function t_71:jsonEncode()
@@ -13147,15 +13177,15 @@ end
 
 function t_71:jsonDecode()
 	-- upvalues: t_71 (ref)
-	local var1990 = t_71.new()
+	local var1992 = t_71.new()
 	
 	if self.event_id ~= nil then
-		var1990.event_id = self.event_id
+		var1992.event_id = self.event_id
 	end
 	if self.eventId ~= nil then
-		var1990.event_id = self.eventId
+		var1992.event_id = self.eventId
 	end
-	return var1990
+	return var1992
 end
 
 t_71.descriptor = {
@@ -13177,65 +13207,65 @@ end
 function t_72:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var1990 = 0
+	local var1992 = 0
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
-		local var1991, var1992 = protoModule.writeTag(buff, var1990, 1, protoModule.wireTypes.lengthDelimited)
-		var1991, var2979 = protoModule.writeString(var1991, var1992, self.event_id)
-		buff = var1991
-		var1990 = var1992
+		local var1993, var1994 = protoModule.writeTag(buff, var1992, 1, protoModule.wireTypes.lengthDelimited)
+		var1993, var2985 = protoModule.writeString(var1993, var1994, self.event_id)
+		buff = var1993
+		var1992 = var1994
 	end
-	local buff_1 = buffer.create(var1990)
-	buffer.copy(buff_1, 0, buff, 0, var1990)
+	local buff_1 = buffer.create(var1992)
+	buffer.copy(buff_1, 0, buff, 0, var1992)
 	
 	return buff_1
 end
 
 function t_72.decode(p72)
 	-- upvalues: t_72 (ref), protoModule (ref)
-	local var1990 = t_72.new()
-	local var1991 = 0
-	while var1991 < buffer.len(p72) do
+	local var1992 = t_72.new()
+	local var1993 = 0
+	while var1993 < buffer.len(p72) do
 		local _ = nil
-		local var1992 = nil
-		local var1993, var1994, var1995 = protoModule.readTag(p72, var1991)
-		local var1996 = var1993
-		var1992 = var1994
-		var1991 = var1995
+		local var1994 = nil
+		local var1995, var1996, var1997 = protoModule.readTag(p72, var1993)
+		local var1998 = var1995
+		var1994 = var1996
+		var1993 = var1997
 		
-		if var1992 == protoModule.wireTypes.varint then
+		if var1994 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var1997, var1998 = protoModule.readVarInt(p72, var1991)
-			local _ = var1997
-			var1991 = var1998
+			local var1999, var2000 = protoModule.readVarInt(p72, var1993)
+			local _ = var1999
+			var1993 = var2000
 			continue
 		end
-		if var1992 == protoModule.wireTypes.lengthDelimited then
-			if var1996 == 1 then
+		if var1994 == protoModule.wireTypes.lengthDelimited then
+			if var1998 == 1 then
 				local _ = nil
-				local var1999, var2000 = protoModule.readBuffer(p72, var1991)
-				var1991 = var2000
-				var1990.event_id = buffer.tostring(var1999)
+				local var2001, var2002 = protoModule.readBuffer(p72, var1993)
+				var1993 = var2002
+				var1992.event_id = buffer.tostring(var2001)
 			else
 				local _ = nil
-				local var2001, var2002 = protoModule.readVarInt(p72, var1991)
-				var1991 = var2002 + var2001
+				local var2003, var2004 = protoModule.readVarInt(p72, var1993)
+				var1993 = var2004 + var2003
 			end
-		elseif var1992 == protoModule.wireTypes.i32 then
+		elseif var1994 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2003, var2004 = protoModule.readFixed32(p72, var1991)
-			local _ = var2003
-			var1991 = var2004
-		elseif var1992 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2005, var2006 = protoModule.readFixed64(p72, var1991)
+			local var2005, var2006 = protoModule.readFixed32(p72, var1993)
 			local _ = var2005
-			var1991 = var2006
+			var1993 = var2006
+		elseif var1994 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2007, var2008 = protoModule.readFixed64(p72, var1993)
+			local _ = var2007
+			var1993 = var2008
 		else
-			error("Unsupported wire type: " .. var2983)
+			error("Unsupported wire type: " .. var2989)
 		end
 	end
-	return var1990
+	return var1992
 end
 
 function t_72:jsonEncode()
@@ -13249,15 +13279,15 @@ end
 
 function t_72:jsonDecode()
 	-- upvalues: t_72 (ref)
-	local var2007 = t_72.new()
+	local var2009 = t_72.new()
 	
 	if self.event_id ~= nil then
-		var2007.event_id = self.event_id
+		var2009.event_id = self.event_id
 	end
 	if self.eventId ~= nil then
-		var2007.event_id = self.eventId
+		var2009.event_id = self.eventId
 	end
-	return var2007
+	return var2009
 end
 
 t_72.descriptor = {
@@ -13280,76 +13310,76 @@ end
 function t_73:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2007 = 0
+	local var2009 = 0
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
-		local var2008, var2009 = protoModule.writeTag(buff, var2007, 1, protoModule.wireTypes.lengthDelimited)
-		var2008, var3003 = protoModule.writeString(var2008, var2009, self.event_id)
-		buff = var2008
-		var2007 = var2009
+		local var2010, var2011 = protoModule.writeTag(buff, var2009, 1, protoModule.wireTypes.lengthDelimited)
+		var2010, var3009 = protoModule.writeString(var2010, var2011, self.event_id)
+		buff = var2010
+		var2009 = var2011
 	end
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var2010, var2011 = protoModule.writeTag(buff, var2007, 2, protoModule.wireTypes.lengthDelimited)
-		var2010, var3005 = protoModule.writeString(var2010, var2011, self.universe_id)
-		buff = var2010
-		var2007 = var2011
+		local var2012, var2013 = protoModule.writeTag(buff, var2009, 2, protoModule.wireTypes.lengthDelimited)
+		var2012, var3011 = protoModule.writeString(var2012, var2013, self.universe_id)
+		buff = var2012
+		var2009 = var2013
 	end
-	local buff_1 = buffer.create(var2007)
-	buffer.copy(buff_1, 0, buff, 0, var2007)
+	local buff_1 = buffer.create(var2009)
+	buffer.copy(buff_1, 0, buff, 0, var2009)
 	
 	return buff_1
 end
 
 function t_73.decode(p73)
 	-- upvalues: t_73 (ref), protoModule (ref)
-	local var2007 = t_73.new()
-	local var2008 = 0
-	while var2008 < buffer.len(p73) do
+	local var2009 = t_73.new()
+	local var2010 = 0
+	while var2010 < buffer.len(p73) do
 		local _ = nil
-		local var2009 = nil
-		local var2010, var2011, var2012 = protoModule.readTag(p73, var2008)
-		local var2013 = var2010
-		var2009 = var2011
-		var2008 = var2012
+		local var2011 = nil
+		local var2012, var2013, var2014 = protoModule.readTag(p73, var2010)
+		local var2015 = var2012
+		var2011 = var2013
+		var2010 = var2014
 		
-		if var2009 == protoModule.wireTypes.varint then
+		if var2011 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2014, var2015 = protoModule.readVarInt(p73, var2008)
-			local _ = var2014
-			var2008 = var2015
+			local var2016, var2017 = protoModule.readVarInt(p73, var2010)
+			local _ = var2016
+			var2010 = var2017
 			continue
 		end
-		if var2009 == protoModule.wireTypes.lengthDelimited then
-			if var2013 == 1 then
+		if var2011 == protoModule.wireTypes.lengthDelimited then
+			if var2015 == 1 then
 				local _ = nil
-				local var2016, var2017 = protoModule.readBuffer(p73, var2008)
-				var2008 = var2017
-				var2007.event_id = buffer.tostring(var2016)
-			elseif var2013 == 2 then
+				local var2018, var2019 = protoModule.readBuffer(p73, var2010)
+				var2010 = var2019
+				var2009.event_id = buffer.tostring(var2018)
+			elseif var2015 == 2 then
 				local _ = nil
-				local var2018, var2019 = protoModule.readBuffer(p73, var2008)
-				var2008 = var2019
-				var2007.universe_id = buffer.tostring(var2018)
+				local var2020, var2021 = protoModule.readBuffer(p73, var2010)
+				var2010 = var2021
+				var2009.universe_id = buffer.tostring(var2020)
 			else
 				local _ = nil
-				local var2020, var2021 = protoModule.readVarInt(p73, var2008)
-				var2008 = var2021 + var2020
+				local var2022, var2023 = protoModule.readVarInt(p73, var2010)
+				var2010 = var2023 + var2022
 			end
-		elseif var2009 == protoModule.wireTypes.i32 then
+		elseif var2011 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2022, var2023 = protoModule.readFixed32(p73, var2008)
-			local _ = var2022
-			var2008 = var2023
-		elseif var2009 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2024, var2025 = protoModule.readFixed64(p73, var2008)
+			local var2024, var2025 = protoModule.readFixed32(p73, var2010)
 			local _ = var2024
-			var2008 = var2025
+			var2010 = var2025
+		elseif var2011 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2026, var2027 = protoModule.readFixed64(p73, var2010)
+			local _ = var2026
+			var2010 = var2027
 		else
-			error("Unsupported wire type: " .. var3009)
+			error("Unsupported wire type: " .. var3015)
 		end
 	end
-	return var2007
+	return var2009
 end
 
 function t_73:jsonEncode()
@@ -13366,21 +13396,21 @@ end
 
 function t_73:jsonDecode()
 	-- upvalues: t_73 (ref)
-	local var2026 = t_73.new()
+	local var2028 = t_73.new()
 	
 	if self.event_id ~= nil then
-		var2026.event_id = self.event_id
+		var2028.event_id = self.event_id
 	end
 	if self.eventId ~= nil then
-		var2026.event_id = self.eventId
+		var2028.event_id = self.eventId
 	end
 	if self.universe_id ~= nil then
-		var2026.universe_id = self.universe_id
+		var2028.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var2026.universe_id = self.universeId
+		var2028.universe_id = self.universeId
 	end
-	return var2026
+	return var2028
 end
 
 t_73.descriptor = {
@@ -13406,122 +13436,122 @@ end
 function t_74:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2026 = 0
+	local var2028 = 0
 	
 	if self.entry_map ~= nil and next(self.entry_map) ~= nil then
 		for i, v in self.entry_map do
-			local var2027, var2028 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var2027, var3031 = protoModule.writeString(var2027, var2028, i)
-			local var2029 = v:encode()
-			var2028, var3033 = protoModule.writeTag(var2027, var2028, 2, protoModule.wireTypes.lengthDelimited)
-			var2028, var3033 = protoModule.writeBuffer(var2028, var3033, var2029, buffer.len(var2029))
-			local var2030 = var2028
-			local var2031 = var3033
-			local var2032, var2033 = protoModule.writeTag(buff, var2026, 1, protoModule.wireTypes.lengthDelimited)
-			var2032, var3037 = protoModule.writeBuffer(var2032, var2033, var2030, var2031)
-			buff = var2032
-			var2026 = var2033
+			local var2029, var2030 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
+			var2029, var3037 = protoModule.writeString(var2029, var2030, i)
+			local var2031 = v:encode()
+			var2030, var3039 = protoModule.writeTag(var2029, var2030, 2, protoModule.wireTypes.lengthDelimited)
+			var2030, var3039 = protoModule.writeBuffer(var2030, var3039, var2031, buffer.len(var2031))
+			local var2032 = var2030
+			local var2033 = var3039
+			local var2034, var2035 = protoModule.writeTag(buff, var2028, 1, protoModule.wireTypes.lengthDelimited)
+			var2034, var3043 = protoModule.writeBuffer(var2034, var2035, var2032, var2033)
+			buff = var2034
+			var2028 = var2035
 		end
 	end
 	if self.entry_order ~= nil and #self.entry_order > 0 then
 		for i, v in self.entry_order do
-			local var2034, var2035 = protoModule.writeTag(buff, var2026, 2, protoModule.wireTypes.lengthDelimited)
-			var2034, var3039 = protoModule.writeString(var2034, var2035, v)
-			buff = var2034
-			var2026 = var2035
+			local var2036, var2037 = protoModule.writeTag(buff, var2028, 2, protoModule.wireTypes.lengthDelimited)
+			var2036, var3045 = protoModule.writeString(var2036, var2037, v)
+			buff = var2036
+			var2028 = var2037
 		end
 	end
 	if self.next_page_token ~= nil and self.next_page_token ~= "" then
-		local var2036, var2037 = protoModule.writeTag(buff, var2026, 3, protoModule.wireTypes.lengthDelimited)
-		var2036, var3041 = protoModule.writeString(var2036, var2037, self.next_page_token)
-		buff = var2036
-		var2026 = var2037
+		local var2038, var2039 = protoModule.writeTag(buff, var2028, 3, protoModule.wireTypes.lengthDelimited)
+		var2038, var3047 = protoModule.writeString(var2038, var2039, self.next_page_token)
+		buff = var2038
+		var2028 = var2039
 	end
 	if self.sticky_filter_pills ~= nil then
-		local var2038 = self.sticky_filter_pills:encode()
-		local var2039, var2040 = protoModule.writeTag(buff, var2026, 4, protoModule.wireTypes.lengthDelimited)
-		var2039, var3044 = protoModule.writeBuffer(var2039, var2040, var2038, buffer.len(var2038))
-		buff = var2039
-		var2026 = var2040
+		local var2040 = self.sticky_filter_pills:encode()
+		local var2041, var2042 = protoModule.writeTag(buff, var2028, 4, protoModule.wireTypes.lengthDelimited)
+		var2041, var3050 = protoModule.writeBuffer(var2041, var2042, var2040, buffer.len(var2040))
+		buff = var2041
+		var2028 = var2042
 	end
 	if self.applied_filters ~= nil and self.applied_filters ~= "" then
-		local var2041, var2042 = protoModule.writeTag(buff, var2026, 5, protoModule.wireTypes.lengthDelimited)
-		var2041, var3046 = protoModule.writeString(var2041, var2042, self.applied_filters)
-		buff = var2041
-		var2026 = var2042
+		local var2043, var2044 = protoModule.writeTag(buff, var2028, 5, protoModule.wireTypes.lengthDelimited)
+		var2043, var3052 = protoModule.writeString(var2043, var2044, self.applied_filters)
+		buff = var2043
+		var2028 = var2044
 	end
-	local buff_1 = buffer.create(var2026)
-	buffer.copy(buff_1, 0, buff, 0, var2026)
+	local buff_1 = buffer.create(var2028)
+	buffer.copy(buff_1, 0, buff, 0, var2028)
 	
 	return buff_1
 end
 
 function t_74.decode(p74)
 	-- upvalues: t_74 (ref), protoModule (ref), t (ref)
-	local var2043 = t_74.new()
-	local var2044 = 0
-	while var2044 < buffer.len(p74) do
+	local var2045 = t_74.new()
+	local var2046 = 0
+	while var2046 < buffer.len(p74) do
 		local _ = nil
-		local var2045 = nil
-		local var2046, var2047, var2048 = protoModule.readTag(p74, var2044)
-		local var2049 = var2046
-		var2045 = var2047
-		var2044 = var2048
+		local var2047 = nil
+		local var2048, var2049, var2050 = protoModule.readTag(p74, var2046)
+		local var2051 = var2048
+		var2047 = var2049
+		var2046 = var2050
 		
-		if var2045 == protoModule.wireTypes.varint then
+		if var2047 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2050, var2051 = protoModule.readVarInt(p74, var2044)
-			local _ = var2050
-			var2044 = var2051
+			local var2052, var2053 = protoModule.readVarInt(p74, var2046)
+			local _ = var2052
+			var2046 = var2053
 			continue
 		end
-		if var2045 == protoModule.wireTypes.lengthDelimited then
-			if var2049 == 1 then
+		if var2047 == protoModule.wireTypes.lengthDelimited then
+			if var2051 == 1 then
 				local _ = nil
-				local var2052, var2053 = protoModule.readBuffer(p74, var2044)
-				var2044 = var2053
-				var2052 = t.ChartsFeedInputData_EntryMapEntry.decode(var2052)
-				var2043.entry_map[var2052.key or ""] = var2052.value or t.FeedEntry.new()
-			elseif var2049 == 2 then
+				local var2054, var2055 = protoModule.readBuffer(p74, var2046)
+				var2046 = var2055
+				var2054 = t.ChartsFeedInputData_EntryMapEntry.decode(var2054)
+				var2045.entry_map[var2054.key or ""] = var2054.value or t.FeedEntry.new()
+			elseif var2051 == 2 then
 				local _ = nil
-				local var2054, var2055 = protoModule.readBuffer(p74, var2044)
-				var2044 = var2055
-				table.insert(var2043.entry_order, buffer.tostring(var2054))
-			elseif var2049 == 3 then
+				local var2056, var2057 = protoModule.readBuffer(p74, var2046)
+				var2046 = var2057
+				table.insert(var2045.entry_order, buffer.tostring(var2056))
+			elseif var2051 == 3 then
 				local _ = nil
-				local var2056, var2057 = protoModule.readBuffer(p74, var2044)
-				var2044 = var2057
-				var2043.next_page_token = buffer.tostring(var2056)
-			elseif var2049 == 4 then
+				local var2058, var2059 = protoModule.readBuffer(p74, var2046)
+				var2046 = var2059
+				var2045.next_page_token = buffer.tostring(var2058)
+			elseif var2051 == 4 then
 				local _ = nil
-				local var2058, var2059 = protoModule.readBuffer(p74, var2044)
-				var2044 = var2059
-				var2043.sticky_filter_pills = t.FilterPillsInputData.decode(var2058)
-			elseif var2049 == 5 then
+				local var2060, var2061 = protoModule.readBuffer(p74, var2046)
+				var2046 = var2061
+				var2045.sticky_filter_pills = t.FilterPillsInputData.decode(var2060)
+			elseif var2051 == 5 then
 				local _ = nil
-				local var2060, var2061 = protoModule.readBuffer(p74, var2044)
-				var2044 = var2061
-				var2043.applied_filters = buffer.tostring(var2060)
+				local var2062, var2063 = protoModule.readBuffer(p74, var2046)
+				var2046 = var2063
+				var2045.applied_filters = buffer.tostring(var2062)
 			else
 				local _ = nil
-				local var2062, var2063 = protoModule.readVarInt(p74, var2044)
-				var2044 = var2063 + var2062
+				local var2064, var2065 = protoModule.readVarInt(p74, var2046)
+				var2046 = var2065 + var2064
 			end
-		elseif var2045 == protoModule.wireTypes.i32 then
+		elseif var2047 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2064, var2065 = protoModule.readFixed32(p74, var2044)
-			local _ = var2064
-			var2044 = var2065
-		elseif var2045 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2066, var2067 = protoModule.readFixed64(p74, var2044)
+			local var2066, var2067 = protoModule.readFixed32(p74, var2046)
 			local _ = var2066
-			var2044 = var2067
+			var2046 = var2067
+		elseif var2047 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2068, var2069 = protoModule.readFixed64(p74, var2046)
+			local _ = var2068
+			var2046 = var2069
 		else
-			error("Unsupported wire type: " .. var3050)
+			error("Unsupported wire type: " .. var3056)
 		end
 	end
-	return var2043
+	return var2045
 end
 
 function t_74:jsonEncode()
@@ -13557,7 +13587,7 @@ end
 
 function t_74:jsonDecode()
 	-- upvalues: t_74 (ref), t (ref)
-	local var2068 = t_74.new()
+	local var2070 = t_74.new()
 	
 	if self.entry_map ~= nil then
 		local t_1 = {}
@@ -13565,7 +13595,7 @@ function t_74:jsonDecode()
 		for i, v in self.entry_map do
 			t_1[i] = t.FeedEntry.jsonDecode(v)
 		end
-		var2068.entry_map = t_1
+		var2070.entry_map = t_1
 	end
 	if self.entryMap ~= nil then
 		local t_1 = {}
@@ -13573,7 +13603,7 @@ function t_74:jsonDecode()
 		for i, v in self.entryMap do
 			t_1[i] = t.FeedEntry.jsonDecode(v)
 		end
-		var2068.entry_map = t_1
+		var2070.entry_map = t_1
 	end
 	if self.entry_order ~= nil then
 		local t_1 = {}
@@ -13581,7 +13611,7 @@ function t_74:jsonDecode()
 		for i, v in self.entry_order do
 			table.insert(t_1, v)
 		end
-		var2068.entry_order = t_1
+		var2070.entry_order = t_1
 	end
 	if self.entryOrder ~= nil then
 		local t_1 = {}
@@ -13589,27 +13619,27 @@ function t_74:jsonDecode()
 		for i, v in self.entryOrder do
 			table.insert(t_1, v)
 		end
-		var2068.entry_order = t_1
+		var2070.entry_order = t_1
 	end
 	if self.next_page_token ~= nil then
-		var2068.next_page_token = self.next_page_token
+		var2070.next_page_token = self.next_page_token
 	end
 	if self.nextPageToken ~= nil then
-		var2068.next_page_token = self.nextPageToken
+		var2070.next_page_token = self.nextPageToken
 	end
 	if self.sticky_filter_pills ~= nil then
-		var2068.sticky_filter_pills = t.FilterPillsInputData.jsonDecode(self.sticky_filter_pills)
+		var2070.sticky_filter_pills = t.FilterPillsInputData.jsonDecode(self.sticky_filter_pills)
 	end
 	if self.stickyFilterPills ~= nil then
-		var2068.sticky_filter_pills = t.FilterPillsInputData.jsonDecode(self.stickyFilterPills)
+		var2070.sticky_filter_pills = t.FilterPillsInputData.jsonDecode(self.stickyFilterPills)
 	end
 	if self.applied_filters ~= nil then
-		var2068.applied_filters = self.applied_filters
+		var2070.applied_filters = self.applied_filters
 	end
 	if self.appliedFilters ~= nil then
-		var2068.applied_filters = self.appliedFilters
+		var2070.applied_filters = self.appliedFilters
 	end
-	return var2068
+	return var2070
 end
 
 t_74.descriptor = {
@@ -13632,77 +13662,77 @@ end
 function t_75:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2069 = 0
+	local var2071 = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var2070, var2071 = protoModule.writeTag(buff, var2069, 1, protoModule.wireTypes.lengthDelimited)
-		var2070, var3084 = protoModule.writeString(var2070, var2071, self.key)
-		buff = var2070
-		var2069 = var2071
+		local var2072, var2073 = protoModule.writeTag(buff, var2071, 1, protoModule.wireTypes.lengthDelimited)
+		var2072, var3090 = protoModule.writeString(var2072, var2073, self.key)
+		buff = var2072
+		var2071 = var2073
 	end
 	if self.value ~= nil then
-		local var2072 = self.value:encode()
-		local var2073, var2074 = protoModule.writeTag(buff, var2069, 2, protoModule.wireTypes.lengthDelimited)
-		var2073, var3087 = protoModule.writeBuffer(var2073, var2074, var2072, buffer.len(var2072))
-		buff = var2073
-		var2069 = var2074
+		local var2074 = self.value:encode()
+		local var2075, var2076 = protoModule.writeTag(buff, var2071, 2, protoModule.wireTypes.lengthDelimited)
+		var2075, var3093 = protoModule.writeBuffer(var2075, var2076, var2074, buffer.len(var2074))
+		buff = var2075
+		var2071 = var2076
 	end
-	local buff_1 = buffer.create(var2069)
-	buffer.copy(buff_1, 0, buff, 0, var2069)
+	local buff_1 = buffer.create(var2071)
+	buffer.copy(buff_1, 0, buff, 0, var2071)
 	
 	return buff_1
 end
 
 function t_75.decode(p75)
 	-- upvalues: t_75 (ref), protoModule (ref), t (ref)
-	local var2069 = t_75.new()
-	local var2070 = 0
-	while var2070 < buffer.len(p75) do
+	local var2071 = t_75.new()
+	local var2072 = 0
+	while var2072 < buffer.len(p75) do
 		local _ = nil
-		local var2071 = nil
-		local var2072, var2073, var2074 = protoModule.readTag(p75, var2070)
-		local var2075 = var2072
-		var2071 = var2073
-		var2070 = var2074
+		local var2073 = nil
+		local var2074, var2075, var2076 = protoModule.readTag(p75, var2072)
+		local var2077 = var2074
+		var2073 = var2075
+		var2072 = var2076
 		
-		if var2071 == protoModule.wireTypes.varint then
+		if var2073 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2076, var2077 = protoModule.readVarInt(p75, var2070)
-			local _ = var2076
-			var2070 = var2077
+			local var2078, var2079 = protoModule.readVarInt(p75, var2072)
+			local _ = var2078
+			var2072 = var2079
 			continue
 		end
-		if var2071 == protoModule.wireTypes.lengthDelimited then
-			if var2075 == 1 then
+		if var2073 == protoModule.wireTypes.lengthDelimited then
+			if var2077 == 1 then
 				local _ = nil
-				local var2078, var2079 = protoModule.readBuffer(p75, var2070)
-				var2070 = var2079
-				var2069.key = buffer.tostring(var2078)
-			elseif var2075 == 2 then
+				local var2080, var2081 = protoModule.readBuffer(p75, var2072)
+				var2072 = var2081
+				var2071.key = buffer.tostring(var2080)
+			elseif var2077 == 2 then
 				local _ = nil
-				local var2080, var2081 = protoModule.readBuffer(p75, var2070)
-				var2070 = var2081
-				var2069.value = t.FeedEntry.decode(var2080)
+				local var2082, var2083 = protoModule.readBuffer(p75, var2072)
+				var2072 = var2083
+				var2071.value = t.FeedEntry.decode(var2082)
 			else
 				local _ = nil
-				local var2082, var2083 = protoModule.readVarInt(p75, var2070)
-				var2070 = var2083 + var2082
+				local var2084, var2085 = protoModule.readVarInt(p75, var2072)
+				var2072 = var2085 + var2084
 			end
-		elseif var2071 == protoModule.wireTypes.i32 then
+		elseif var2073 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2084, var2085 = protoModule.readFixed32(p75, var2070)
-			local _ = var2084
-			var2070 = var2085
-		elseif var2071 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2086, var2087 = protoModule.readFixed64(p75, var2070)
+			local var2086, var2087 = protoModule.readFixed32(p75, var2072)
 			local _ = var2086
-			var2070 = var2087
+			var2072 = var2087
+		elseif var2073 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2088, var2089 = protoModule.readFixed64(p75, var2072)
+			local _ = var2088
+			var2072 = var2089
 		else
-			error("Unsupported wire type: " .. var3091)
+			error("Unsupported wire type: " .. var3097)
 		end
 	end
-	return var2069
+	return var2071
 end
 
 function t_75:jsonEncode()
@@ -13719,15 +13749,15 @@ end
 
 function t_75:jsonDecode()
 	-- upvalues: t_75 (ref), t (ref)
-	local var2088 = t_75.new()
+	local var2090 = t_75.new()
 	
 	if self.key ~= nil then
-		var2088.key = self.key
+		var2090.key = self.key
 	end
 	if self.value ~= nil then
-		var2088.value = t.FeedEntry.jsonDecode(self.value)
+		var2090.value = t.FeedEntry.jsonDecode(self.value)
 	end
-	return var2088
+	return var2090
 end
 
 t_75.descriptor = {
@@ -13754,124 +13784,124 @@ end
 function t_76:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2088 = 0
+	local var2090 = 0
 	
 	if self.filter_groups ~= nil and #self.filter_groups > 0 then
 		for i, v in self.filter_groups do
-			local var2089 = v:encode()
-			local var2090, var2091 = protoModule.writeTag(buff, var2088, 1, protoModule.wireTypes.lengthDelimited)
-			var2090, var3114 = protoModule.writeBuffer(var2090, var2091, var2089, buffer.len(var2089))
-			buff = var2090
-			var2088 = var2091
+			local var2091 = v:encode()
+			local var2092, var2093 = protoModule.writeTag(buff, var2090, 1, protoModule.wireTypes.lengthDelimited)
+			var2092, var3120 = protoModule.writeBuffer(var2092, var2093, var2091, buffer.len(var2091))
+			buff = var2092
+			var2090 = var2093
 		end
 	end
 	if self.sort_id ~= nil and self.sort_id ~= "" then
-		local var2092, var2093 = protoModule.writeTag(buff, var2088, 2, protoModule.wireTypes.lengthDelimited)
-		var2092, var3116 = protoModule.writeString(var2092, var2093, self.sort_id)
-		buff = var2092
-		var2088 = var2093
+		local var2094, var2095 = protoModule.writeTag(buff, var2090, 2, protoModule.wireTypes.lengthDelimited)
+		var2094, var3122 = protoModule.writeString(var2094, var2095, self.sort_id)
+		buff = var2094
+		var2090 = var2095
 	end
 	if self.secondary_sort_id ~= nil and self.secondary_sort_id ~= 0 then
-		local var2094, var2095 = protoModule.writeTag(buff, var2088, 3, protoModule.wireTypes.varint)
-		var2094, var3118 = protoModule.writeVarInt(var2094, var2095, self.secondary_sort_id)
-		buff = var2094
-		var2088 = var2095
+		local var2096, var2097 = protoModule.writeTag(buff, var2090, 3, protoModule.wireTypes.varint)
+		var2096, var3124 = protoModule.writeVarInt(var2096, var2097, self.secondary_sort_id)
+		buff = var2096
+		var2090 = var2097
 	end
 	if self.title ~= nil and self.title ~= "" then
-		local var2096, var2097 = protoModule.writeTag(buff, var2088, 4, protoModule.wireTypes.lengthDelimited)
-		var2096, var3120 = protoModule.writeString(var2096, var2097, self.title)
-		buff = var2096
-		var2088 = var2097
+		local var2098, var2099 = protoModule.writeTag(buff, var2090, 4, protoModule.wireTypes.lengthDelimited)
+		var2098, var3126 = protoModule.writeString(var2098, var2099, self.title)
+		buff = var2098
+		var2090 = var2099
 	end
 	if self.primary_sort_id ~= nil then
-		local var2098, var2099 = protoModule.writeTag(buff, var2088, 5, protoModule.wireTypes.varint)
-		var2098, var3122 = protoModule.writeVarInt(var2098, var2099, self.primary_sort_id)
-		buff = var2098
-		var2088 = var2099
+		local var2100, var2101 = protoModule.writeTag(buff, var2090, 5, protoModule.wireTypes.varint)
+		var2100, var3128 = protoModule.writeVarInt(var2100, var2101, self.primary_sort_id)
+		buff = var2100
+		var2090 = var2101
 	end
 	if self.applied_filters ~= nil then
-		local var2100, var2101 = protoModule.writeTag(buff, var2088, 6, protoModule.wireTypes.lengthDelimited)
-		var2100, var3124 = protoModule.writeString(var2100, var2101, self.applied_filters)
-		buff = var2100
-		var2088 = var2101
+		local var2102, var2103 = protoModule.writeTag(buff, var2090, 6, protoModule.wireTypes.lengthDelimited)
+		var2102, var3130 = protoModule.writeString(var2102, var2103, self.applied_filters)
+		buff = var2102
+		var2090 = var2103
 	end
-	local buff_1 = buffer.create(var2088)
-	buffer.copy(buff_1, 0, buff, 0, var2088)
+	local buff_1 = buffer.create(var2090)
+	buffer.copy(buff_1, 0, buff, 0, var2090)
 	
 	return buff_1
 end
 
 function t_76.decode(p76)
 	-- upvalues: t_76 (ref), protoModule (ref), t (ref)
-	local var2102 = t_76.new()
-	local var2103 = 0
-	while var2103 < buffer.len(p76) do
+	local var2104 = t_76.new()
+	local var2105 = 0
+	while var2105 < buffer.len(p76) do
 		local _ = nil
-		local var2104 = nil
-		local var2105, var2106, var2107 = protoModule.readTag(p76, var2103)
-		local var2108 = var2105
-		var2104 = var2106
-		var2103 = var2107
+		local var2106 = nil
+		local var2107, var2108, var2109 = protoModule.readTag(p76, var2105)
+		local var2110 = var2107
+		var2106 = var2108
+		var2105 = var2109
 		
-		if var2104 == protoModule.wireTypes.varint then
-			if var2108 == 3 then
+		if var2106 == protoModule.wireTypes.varint then
+			if var2110 == 3 then
 				local _ = nil
-				local var2109, var2110 = protoModule.readVarIntI32(p76, var2103)
-				var2103 = var2110
-				var2102.secondary_sort_id = var2109
-			elseif var2108 == 5 then
+				local var2111, var2112 = protoModule.readVarIntI32(p76, var2105)
+				var2105 = var2112
+				var2104.secondary_sort_id = var2111
+			elseif var2110 == 5 then
 				local _ = nil
-				local var2111, var2112 = protoModule.readVarIntI32(p76, var2103)
-				var2103 = var2112
-				var2102.primary_sort_id = var2111
+				local var2113, var2114 = protoModule.readVarIntI32(p76, var2105)
+				var2105 = var2114
+				var2104.primary_sort_id = var2113
 			else
 				local _ = nil
-				local var2113, var2114 = protoModule.readVarInt(p76, var2103)
-				local _ = var2113
-				var2103 = var2114
+				local var2115, var2116 = protoModule.readVarInt(p76, var2105)
+				local _ = var2115
+				var2105 = var2116
 			end
 		end
-		if var2104 == protoModule.wireTypes.lengthDelimited then
-			if var2108 == 1 then
+		if var2106 == protoModule.wireTypes.lengthDelimited then
+			if var2110 == 1 then
 				local _ = nil
-				local var2115, var2116 = protoModule.readBuffer(p76, var2103)
-				var2103 = var2116
-				table.insert(var2102.filter_groups, t.FilterPillsInputData_FilterGroup.decode(var2115))
-			elseif var2108 == 2 then
+				local var2117, var2118 = protoModule.readBuffer(p76, var2105)
+				var2105 = var2118
+				table.insert(var2104.filter_groups, t.FilterPillsInputData_FilterGroup.decode(var2117))
+			elseif var2110 == 2 then
 				local _ = nil
-				local var2117, var2118 = protoModule.readBuffer(p76, var2103)
-				var2103 = var2118
-				var2102.sort_id = buffer.tostring(var2117)
-			elseif var2108 == 4 then
+				local var2119, var2120 = protoModule.readBuffer(p76, var2105)
+				var2105 = var2120
+				var2104.sort_id = buffer.tostring(var2119)
+			elseif var2110 == 4 then
 				local _ = nil
-				local var2119, var2120 = protoModule.readBuffer(p76, var2103)
-				var2103 = var2120
-				var2102.title = buffer.tostring(var2119)
-			elseif var2108 == 6 then
+				local var2121, var2122 = protoModule.readBuffer(p76, var2105)
+				var2105 = var2122
+				var2104.title = buffer.tostring(var2121)
+			elseif var2110 == 6 then
 				local _ = nil
-				local var2121, var2122 = protoModule.readBuffer(p76, var2103)
-				var2103 = var2122
-				var2102.applied_filters = buffer.tostring(var2121)
+				local var2123, var2124 = protoModule.readBuffer(p76, var2105)
+				var2105 = var2124
+				var2104.applied_filters = buffer.tostring(var2123)
 			else
 				local _ = nil
-				local var2123, var2124 = protoModule.readVarInt(p76, var2103)
-				var2103 = var2124 + var2123
+				local var2125, var2126 = protoModule.readVarInt(p76, var2105)
+				var2105 = var2126 + var2125
 			end
-		elseif var2104 == protoModule.wireTypes.i32 then
+		elseif var2106 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2125, var2126 = protoModule.readFixed32(p76, var2103)
-			local _ = var2125
-			var2103 = var2126
-		elseif var2104 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2127, var2128 = protoModule.readFixed64(p76, var2103)
+			local var2127, var2128 = protoModule.readFixed32(p76, var2105)
 			local _ = var2127
-			var2103 = var2128
+			var2105 = var2128
+		elseif var2106 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2129, var2130 = protoModule.readFixed64(p76, var2105)
+			local _ = var2129
+			var2105 = var2130
 		else
-			error("Unsupported wire type: " .. var3128)
+			error("Unsupported wire type: " .. var3134)
 		end
 	end
-	return var2102
+	return var2104
 end
 
 function t_76:jsonEncode()
@@ -13905,7 +13935,7 @@ end
 
 function t_76:jsonDecode()
 	-- upvalues: t_76 (ref), t (ref)
-	local var2129 = t_76.new()
+	local var2131 = t_76.new()
 	
 	if self.filter_groups ~= nil then
 		local t_1 = {}
@@ -13913,7 +13943,7 @@ function t_76:jsonDecode()
 		for i, v in self.filter_groups do
 			table.insert(t_1, t.FilterPillsInputData_FilterGroup.jsonDecode(v))
 		end
-		var2129.filter_groups = t_1
+		var2131.filter_groups = t_1
 	end
 	if self.filterGroups ~= nil then
 		local t_1 = {}
@@ -13921,36 +13951,36 @@ function t_76:jsonDecode()
 		for i, v in self.filterGroups do
 			table.insert(t_1, t.FilterPillsInputData_FilterGroup.jsonDecode(v))
 		end
-		var2129.filter_groups = t_1
+		var2131.filter_groups = t_1
 	end
 	if self.sort_id ~= nil then
-		var2129.sort_id = self.sort_id
+		var2131.sort_id = self.sort_id
 	end
 	if self.sortId ~= nil then
-		var2129.sort_id = self.sortId
+		var2131.sort_id = self.sortId
 	end
 	if self.secondary_sort_id ~= nil then
-		var2129.secondary_sort_id = self.secondary_sort_id
+		var2131.secondary_sort_id = self.secondary_sort_id
 	end
 	if self.secondarySortId ~= nil then
-		var2129.secondary_sort_id = self.secondarySortId
+		var2131.secondary_sort_id = self.secondarySortId
 	end
 	if self.title ~= nil then
-		var2129.title = self.title
+		var2131.title = self.title
 	end
 	if self.primary_sort_id ~= nil then
-		var2129.primary_sort_id = self.primary_sort_id
+		var2131.primary_sort_id = self.primary_sort_id
 	end
 	if self.primarySortId ~= nil then
-		var2129.primary_sort_id = self.primarySortId
+		var2131.primary_sort_id = self.primarySortId
 	end
 	if self.applied_filters ~= nil then
-		var2129.applied_filters = self.applied_filters
+		var2131.applied_filters = self.applied_filters
 	end
 	if self.appliedFilters ~= nil then
-		var2129.applied_filters = self.appliedFilters
+		var2131.applied_filters = self.appliedFilters
 	end
-	return var2129
+	return var2131
 end
 
 t_76.descriptor = {
@@ -13979,147 +14009,147 @@ end
 function t_77:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2130 = 0
+	local var2132 = 0
 	
 	if self.filter_id ~= nil and self.filter_id ~= "" then
-		local var2131, var2132 = protoModule.writeTag(buff, var2130, 1, protoModule.wireTypes.lengthDelimited)
-		var2131, var3161 = protoModule.writeString(var2131, var2132, self.filter_id)
-		buff = var2131
-		var2130 = var2132
+		local var2133, var2134 = protoModule.writeTag(buff, var2132, 1, protoModule.wireTypes.lengthDelimited)
+		var2133, var3167 = protoModule.writeString(var2133, var2134, self.filter_id)
+		buff = var2133
+		var2132 = var2134
 	end
 	if self.display_name ~= nil and self.display_name ~= "" then
-		local var2133, var2134 = protoModule.writeTag(buff, var2130, 2, protoModule.wireTypes.lengthDelimited)
-		var2133, var3163 = protoModule.writeString(var2133, var2134, self.display_name)
-		buff = var2133
-		var2130 = var2134
+		local var2135, var2136 = protoModule.writeTag(buff, var2132, 2, protoModule.wireTypes.lengthDelimited)
+		var2135, var3169 = protoModule.writeString(var2135, var2136, self.display_name)
+		buff = var2135
+		var2132 = var2136
 	end
 	if self.options ~= nil and #self.options > 0 then
 		for i, v in self.options do
-			local var2135 = v:encode()
-			local var2136, var2137 = protoModule.writeTag(buff, var2130, 3, protoModule.wireTypes.lengthDelimited)
-			var2136, var3166 = protoModule.writeBuffer(var2136, var2137, var2135, buffer.len(var2135))
-			buff = var2136
-			var2130 = var2137
+			local var2137 = v:encode()
+			local var2138, var2139 = protoModule.writeTag(buff, var2132, 3, protoModule.wireTypes.lengthDelimited)
+			var2138, var3172 = protoModule.writeBuffer(var2138, var2139, var2137, buffer.len(var2137))
+			buff = var2138
+			var2132 = var2139
 		end
 	end
 	if self.default_option_id ~= nil and self.default_option_id ~= "" then
-		local var2138, var2139 = protoModule.writeTag(buff, var2130, 4, protoModule.wireTypes.lengthDelimited)
-		var2138, var3168 = protoModule.writeString(var2138, var2139, self.default_option_id)
-		buff = var2138
-		var2130 = var2139
+		local var2140, var2141 = protoModule.writeTag(buff, var2132, 4, protoModule.wireTypes.lengthDelimited)
+		var2140, var3174 = protoModule.writeString(var2140, var2141, self.default_option_id)
+		buff = var2140
+		var2132 = var2141
 	end
 	if self.selected_option_id ~= nil and self.selected_option_id ~= "" then
-		local var2140, var2141 = protoModule.writeTag(buff, var2130, 5, protoModule.wireTypes.lengthDelimited)
-		var2140, var3170 = protoModule.writeString(var2140, var2141, self.selected_option_id)
-		buff = var2140
-		var2130 = var2141
+		local var2142, var2143 = protoModule.writeTag(buff, var2132, 5, protoModule.wireTypes.lengthDelimited)
+		var2142, var3176 = protoModule.writeString(var2142, var2143, self.selected_option_id)
+		buff = var2142
+		var2132 = var2143
 	end
 	if self.filter_type ~= nil and self.filter_type ~= "" then
-		local var2142, var2143 = protoModule.writeTag(buff, var2130, 6, protoModule.wireTypes.lengthDelimited)
-		var2142, var3172 = protoModule.writeString(var2142, var2143, self.filter_type)
-		buff = var2142
-		var2130 = var2143
+		local var2144, var2145 = protoModule.writeTag(buff, var2132, 6, protoModule.wireTypes.lengthDelimited)
+		var2144, var3178 = protoModule.writeString(var2144, var2145, self.filter_type)
+		buff = var2144
+		var2132 = var2145
 	end
 	if self.inactive_option_ids ~= nil and #self.inactive_option_ids > 0 then
 		for i, v in self.inactive_option_ids do
-			local var2144, var2145 = protoModule.writeTag(buff, var2130, 7, protoModule.wireTypes.lengthDelimited)
-			var2144, var3174 = protoModule.writeString(var2144, var2145, v)
-			buff = var2144
-			var2130 = var2145
+			local var2146, var2147 = protoModule.writeTag(buff, var2132, 7, protoModule.wireTypes.lengthDelimited)
+			var2146, var3180 = protoModule.writeString(var2146, var2147, v)
+			buff = var2146
+			var2132 = var2147
 		end
 	end
 	if self.info_text ~= nil and self.info_text ~= "" then
-		local var2146, var2147 = protoModule.writeTag(buff, var2130, 8, protoModule.wireTypes.lengthDelimited)
-		var2146, var3176 = protoModule.writeString(var2146, var2147, self.info_text)
-		buff = var2146
-		var2130 = var2147
+		local var2148, var2149 = protoModule.writeTag(buff, var2132, 8, protoModule.wireTypes.lengthDelimited)
+		var2148, var3182 = protoModule.writeString(var2148, var2149, self.info_text)
+		buff = var2148
+		var2132 = var2149
 	end
-	local buff_1 = buffer.create(var2130)
-	buffer.copy(buff_1, 0, buff, 0, var2130)
+	local buff_1 = buffer.create(var2132)
+	buffer.copy(buff_1, 0, buff, 0, var2132)
 	
 	return buff_1
 end
 
 function t_77.decode(p77)
 	-- upvalues: t_77 (ref), protoModule (ref), t (ref)
-	local var2148 = t_77.new()
-	local var2149 = 0
-	while var2149 < buffer.len(p77) do
+	local var2150 = t_77.new()
+	local var2151 = 0
+	while var2151 < buffer.len(p77) do
 		local _ = nil
-		local var2150 = nil
-		local var2151, var2152, var2153 = protoModule.readTag(p77, var2149)
-		local var2154 = var2151
-		var2150 = var2152
-		var2149 = var2153
+		local var2152 = nil
+		local var2153, var2154, var2155 = protoModule.readTag(p77, var2151)
+		local var2156 = var2153
+		var2152 = var2154
+		var2151 = var2155
 		
-		if var2150 == protoModule.wireTypes.varint then
+		if var2152 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2155, var2156 = protoModule.readVarInt(p77, var2149)
-			local _ = var2155
-			var2149 = var2156
+			local var2157, var2158 = protoModule.readVarInt(p77, var2151)
+			local _ = var2157
+			var2151 = var2158
 			continue
 		end
-		if var2150 == protoModule.wireTypes.lengthDelimited then
-			if var2154 == 1 then
+		if var2152 == protoModule.wireTypes.lengthDelimited then
+			if var2156 == 1 then
 				local _ = nil
-				local var2157, var2158 = protoModule.readBuffer(p77, var2149)
-				var2149 = var2158
-				var2148.filter_id = buffer.tostring(var2157)
-			elseif var2154 == 2 then
+				local var2159, var2160 = protoModule.readBuffer(p77, var2151)
+				var2151 = var2160
+				var2150.filter_id = buffer.tostring(var2159)
+			elseif var2156 == 2 then
 				local _ = nil
-				local var2159, var2160 = protoModule.readBuffer(p77, var2149)
-				var2149 = var2160
-				var2148.display_name = buffer.tostring(var2159)
-			elseif var2154 == 3 then
+				local var2161, var2162 = protoModule.readBuffer(p77, var2151)
+				var2151 = var2162
+				var2150.display_name = buffer.tostring(var2161)
+			elseif var2156 == 3 then
 				local _ = nil
-				local var2161, var2162 = protoModule.readBuffer(p77, var2149)
-				var2149 = var2162
-				table.insert(var2148.options, t.FilterPillsInputData_FilterOption.decode(var2161))
-			elseif var2154 == 4 then
+				local var2163, var2164 = protoModule.readBuffer(p77, var2151)
+				var2151 = var2164
+				table.insert(var2150.options, t.FilterPillsInputData_FilterOption.decode(var2163))
+			elseif var2156 == 4 then
 				local _ = nil
-				local var2163, var2164 = protoModule.readBuffer(p77, var2149)
-				var2149 = var2164
-				var2148.default_option_id = buffer.tostring(var2163)
-			elseif var2154 == 5 then
+				local var2165, var2166 = protoModule.readBuffer(p77, var2151)
+				var2151 = var2166
+				var2150.default_option_id = buffer.tostring(var2165)
+			elseif var2156 == 5 then
 				local _ = nil
-				local var2165, var2166 = protoModule.readBuffer(p77, var2149)
-				var2149 = var2166
-				var2148.selected_option_id = buffer.tostring(var2165)
-			elseif var2154 == 6 then
+				local var2167, var2168 = protoModule.readBuffer(p77, var2151)
+				var2151 = var2168
+				var2150.selected_option_id = buffer.tostring(var2167)
+			elseif var2156 == 6 then
 				local _ = nil
-				local var2167, var2168 = protoModule.readBuffer(p77, var2149)
-				var2149 = var2168
-				var2148.filter_type = buffer.tostring(var2167)
-			elseif var2154 == 7 then
+				local var2169, var2170 = protoModule.readBuffer(p77, var2151)
+				var2151 = var2170
+				var2150.filter_type = buffer.tostring(var2169)
+			elseif var2156 == 7 then
 				local _ = nil
-				local var2169, var2170 = protoModule.readBuffer(p77, var2149)
-				var2149 = var2170
-				table.insert(var2148.inactive_option_ids, buffer.tostring(var2169))
-			elseif var2154 == 8 then
+				local var2171, var2172 = protoModule.readBuffer(p77, var2151)
+				var2151 = var2172
+				table.insert(var2150.inactive_option_ids, buffer.tostring(var2171))
+			elseif var2156 == 8 then
 				local _ = nil
-				local var2171, var2172 = protoModule.readBuffer(p77, var2149)
-				var2149 = var2172
-				var2148.info_text = buffer.tostring(var2171)
+				local var2173, var2174 = protoModule.readBuffer(p77, var2151)
+				var2151 = var2174
+				var2150.info_text = buffer.tostring(var2173)
 			else
 				local _ = nil
-				local var2173, var2174 = protoModule.readVarInt(p77, var2149)
-				var2149 = var2174 + var2173
+				local var2175, var2176 = protoModule.readVarInt(p77, var2151)
+				var2151 = var2176 + var2175
 			end
-		elseif var2150 == protoModule.wireTypes.i32 then
+		elseif var2152 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2175, var2176 = protoModule.readFixed32(p77, var2149)
-			local _ = var2175
-			var2149 = var2176
-		elseif var2150 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2177, var2178 = protoModule.readFixed64(p77, var2149)
+			local var2177, var2178 = protoModule.readFixed32(p77, var2151)
 			local _ = var2177
-			var2149 = var2178
+			var2151 = var2178
+		elseif var2152 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2179, var2180 = protoModule.readFixed64(p77, var2151)
+			local _ = var2179
+			var2151 = var2180
 		else
-			error("Unsupported wire type: " .. var3180)
+			error("Unsupported wire type: " .. var3186)
 		end
 	end
-	return var2148
+	return var2150
 end
 
 function t_77:jsonEncode()
@@ -14164,19 +14194,19 @@ end
 
 function t_77:jsonDecode()
 	-- upvalues: t_77 (ref), t (ref)
-	local var2179 = t_77.new()
+	local var2181 = t_77.new()
 	
 	if self.filter_id ~= nil then
-		var2179.filter_id = self.filter_id
+		var2181.filter_id = self.filter_id
 	end
 	if self.filterId ~= nil then
-		var2179.filter_id = self.filterId
+		var2181.filter_id = self.filterId
 	end
 	if self.display_name ~= nil then
-		var2179.display_name = self.display_name
+		var2181.display_name = self.display_name
 	end
 	if self.displayName ~= nil then
-		var2179.display_name = self.displayName
+		var2181.display_name = self.displayName
 	end
 	if self.options ~= nil then
 		local t_1 = {}
@@ -14184,25 +14214,25 @@ function t_77:jsonDecode()
 		for i, v in self.options do
 			table.insert(t_1, t.FilterPillsInputData_FilterOption.jsonDecode(v))
 		end
-		var2179.options = t_1
+		var2181.options = t_1
 	end
 	if self.default_option_id ~= nil then
-		var2179.default_option_id = self.default_option_id
+		var2181.default_option_id = self.default_option_id
 	end
 	if self.defaultOptionId ~= nil then
-		var2179.default_option_id = self.defaultOptionId
+		var2181.default_option_id = self.defaultOptionId
 	end
 	if self.selected_option_id ~= nil then
-		var2179.selected_option_id = self.selected_option_id
+		var2181.selected_option_id = self.selected_option_id
 	end
 	if self.selectedOptionId ~= nil then
-		var2179.selected_option_id = self.selectedOptionId
+		var2181.selected_option_id = self.selectedOptionId
 	end
 	if self.filter_type ~= nil then
-		var2179.filter_type = self.filter_type
+		var2181.filter_type = self.filter_type
 	end
 	if self.filterType ~= nil then
-		var2179.filter_type = self.filterType
+		var2181.filter_type = self.filterType
 	end
 	if self.inactive_option_ids ~= nil then
 		local t_1 = {}
@@ -14210,7 +14240,7 @@ function t_77:jsonDecode()
 		for i, v in self.inactive_option_ids do
 			table.insert(t_1, v)
 		end
-		var2179.inactive_option_ids = t_1
+		var2181.inactive_option_ids = t_1
 	end
 	if self.inactiveOptionIds ~= nil then
 		local t_1 = {}
@@ -14218,15 +14248,15 @@ function t_77:jsonDecode()
 		for i, v in self.inactiveOptionIds do
 			table.insert(t_1, v)
 		end
-		var2179.inactive_option_ids = t_1
+		var2181.inactive_option_ids = t_1
 	end
 	if self.info_text ~= nil then
-		var2179.info_text = self.info_text
+		var2181.info_text = self.info_text
 	end
 	if self.infoText ~= nil then
-		var2179.info_text = self.infoText
+		var2181.info_text = self.infoText
 	end
-	return var2179
+	return var2181
 end
 
 t_77.descriptor = {
@@ -14250,87 +14280,87 @@ end
 function t_78:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2180 = 0
+	local var2182 = 0
 	
 	if self.option_id ~= nil and self.option_id ~= "" then
-		local var2181, var2182 = protoModule.writeTag(buff, var2180, 1, protoModule.wireTypes.lengthDelimited)
-		var2181, var3219 = protoModule.writeString(var2181, var2182, self.option_id)
-		buff = var2181
-		var2180 = var2182
+		local var2183, var2184 = protoModule.writeTag(buff, var2182, 1, protoModule.wireTypes.lengthDelimited)
+		var2183, var3225 = protoModule.writeString(var2183, var2184, self.option_id)
+		buff = var2183
+		var2182 = var2184
 	end
 	if self.display_name ~= nil and self.display_name ~= "" then
-		local var2183, var2184 = protoModule.writeTag(buff, var2180, 2, protoModule.wireTypes.lengthDelimited)
-		var2183, var3221 = protoModule.writeString(var2183, var2184, self.display_name)
-		buff = var2183
-		var2180 = var2184
+		local var2185, var2186 = protoModule.writeTag(buff, var2182, 2, protoModule.wireTypes.lengthDelimited)
+		var2185, var3227 = protoModule.writeString(var2185, var2186, self.display_name)
+		buff = var2185
+		var2182 = var2186
 	end
 	if self.option_context_tag ~= nil and self.option_context_tag ~= "" then
-		local var2185, var2186 = protoModule.writeTag(buff, var2180, 3, protoModule.wireTypes.lengthDelimited)
-		var2185, var3223 = protoModule.writeString(var2185, var2186, self.option_context_tag)
-		buff = var2185
-		var2180 = var2186
+		local var2187, var2188 = protoModule.writeTag(buff, var2182, 3, protoModule.wireTypes.lengthDelimited)
+		var2187, var3229 = protoModule.writeString(var2187, var2188, self.option_context_tag)
+		buff = var2187
+		var2182 = var2188
 	end
-	local buff_1 = buffer.create(var2180)
-	buffer.copy(buff_1, 0, buff, 0, var2180)
+	local buff_1 = buffer.create(var2182)
+	buffer.copy(buff_1, 0, buff, 0, var2182)
 	
 	return buff_1
 end
 
 function t_78.decode(p78)
 	-- upvalues: t_78 (ref), protoModule (ref)
-	local var2180 = t_78.new()
-	local var2181 = 0
-	while var2181 < buffer.len(p78) do
+	local var2182 = t_78.new()
+	local var2183 = 0
+	while var2183 < buffer.len(p78) do
 		local _ = nil
-		local var2182 = nil
-		local var2183, var2184, var2185 = protoModule.readTag(p78, var2181)
-		local var2186 = var2183
-		var2182 = var2184
-		var2181 = var2185
+		local var2184 = nil
+		local var2185, var2186, var2187 = protoModule.readTag(p78, var2183)
+		local var2188 = var2185
+		var2184 = var2186
+		var2183 = var2187
 		
-		if var2182 == protoModule.wireTypes.varint then
+		if var2184 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2187, var2188 = protoModule.readVarInt(p78, var2181)
-			local _ = var2187
-			var2181 = var2188
+			local var2189, var2190 = protoModule.readVarInt(p78, var2183)
+			local _ = var2189
+			var2183 = var2190
 			continue
 		end
-		if var2182 == protoModule.wireTypes.lengthDelimited then
-			if var2186 == 1 then
+		if var2184 == protoModule.wireTypes.lengthDelimited then
+			if var2188 == 1 then
 				local _ = nil
-				local var2189, var2190 = protoModule.readBuffer(p78, var2181)
-				var2181 = var2190
-				var2180.option_id = buffer.tostring(var2189)
-			elseif var2186 == 2 then
+				local var2191, var2192 = protoModule.readBuffer(p78, var2183)
+				var2183 = var2192
+				var2182.option_id = buffer.tostring(var2191)
+			elseif var2188 == 2 then
 				local _ = nil
-				local var2191, var2192 = protoModule.readBuffer(p78, var2181)
-				var2181 = var2192
-				var2180.display_name = buffer.tostring(var2191)
-			elseif var2186 == 3 then
+				local var2193, var2194 = protoModule.readBuffer(p78, var2183)
+				var2183 = var2194
+				var2182.display_name = buffer.tostring(var2193)
+			elseif var2188 == 3 then
 				local _ = nil
-				local var2193, var2194 = protoModule.readBuffer(p78, var2181)
-				var2181 = var2194
-				var2180.option_context_tag = buffer.tostring(var2193)
+				local var2195, var2196 = protoModule.readBuffer(p78, var2183)
+				var2183 = var2196
+				var2182.option_context_tag = buffer.tostring(var2195)
 			else
 				local _ = nil
-				local var2195, var2196 = protoModule.readVarInt(p78, var2181)
-				var2181 = var2196 + var2195
+				local var2197, var2198 = protoModule.readVarInt(p78, var2183)
+				var2183 = var2198 + var2197
 			end
-		elseif var2182 == protoModule.wireTypes.i32 then
+		elseif var2184 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2197, var2198 = protoModule.readFixed32(p78, var2181)
-			local _ = var2197
-			var2181 = var2198
-		elseif var2182 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2199, var2200 = protoModule.readFixed64(p78, var2181)
+			local var2199, var2200 = protoModule.readFixed32(p78, var2183)
 			local _ = var2199
-			var2181 = var2200
+			var2183 = var2200
+		elseif var2184 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2201, var2202 = protoModule.readFixed64(p78, var2183)
+			local _ = var2201
+			var2183 = var2202
 		else
-			error("Unsupported wire type: " .. var3227)
+			error("Unsupported wire type: " .. var3233)
 		end
 	end
-	return var2180
+	return var2182
 end
 
 function t_78:jsonEncode()
@@ -14350,27 +14380,27 @@ end
 
 function t_78:jsonDecode()
 	-- upvalues: t_78 (ref)
-	local var2201 = t_78.new()
+	local var2203 = t_78.new()
 	
 	if self.option_id ~= nil then
-		var2201.option_id = self.option_id
+		var2203.option_id = self.option_id
 	end
 	if self.optionId ~= nil then
-		var2201.option_id = self.optionId
+		var2203.option_id = self.optionId
 	end
 	if self.display_name ~= nil then
-		var2201.display_name = self.display_name
+		var2203.display_name = self.display_name
 	end
 	if self.displayName ~= nil then
-		var2201.display_name = self.displayName
+		var2203.display_name = self.displayName
 	end
 	if self.option_context_tag ~= nil then
-		var2201.option_context_tag = self.option_context_tag
+		var2203.option_context_tag = self.option_context_tag
 	end
 	if self.optionContextTag ~= nil then
-		var2201.option_context_tag = self.optionContextTag
+		var2203.option_context_tag = self.optionContextTag
 	end
-	return var2201
+	return var2203
 end
 
 t_78.descriptor = {
@@ -14393,79 +14423,79 @@ end
 function t_79:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2201 = 0
+	local var2203 = 0
 	
 	if self.sort_options ~= nil and #self.sort_options > 0 then
 		for i, v in self.sort_options do
-			local var2202 = v:encode()
-			local var2203, var2204 = protoModule.writeTag(buff, var2201, 1, protoModule.wireTypes.lengthDelimited)
-			var2203, var3252 = protoModule.writeBuffer(var2203, var2204, var2202, buffer.len(var2202))
-			buff = var2203
-			var2201 = var2204
+			local var2204 = v:encode()
+			local var2205, var2206 = protoModule.writeTag(buff, var2203, 1, protoModule.wireTypes.lengthDelimited)
+			var2205, var3258 = protoModule.writeBuffer(var2205, var2206, var2204, buffer.len(var2204))
+			buff = var2205
+			var2203 = var2206
 		end
 	end
 	if self.selected_sort_id ~= nil and self.selected_sort_id ~= "" then
-		local var2205, var2206 = protoModule.writeTag(buff, var2201, 2, protoModule.wireTypes.lengthDelimited)
-		var2205, var3254 = protoModule.writeString(var2205, var2206, self.selected_sort_id)
-		buff = var2205
-		var2201 = var2206
+		local var2207, var2208 = protoModule.writeTag(buff, var2203, 2, protoModule.wireTypes.lengthDelimited)
+		var2207, var3260 = protoModule.writeString(var2207, var2208, self.selected_sort_id)
+		buff = var2207
+		var2203 = var2208
 	end
-	local buff_1 = buffer.create(var2201)
-	buffer.copy(buff_1, 0, buff, 0, var2201)
+	local buff_1 = buffer.create(var2203)
+	buffer.copy(buff_1, 0, buff, 0, var2203)
 	
 	return buff_1
 end
 
 function t_79.decode(p79)
 	-- upvalues: t_79 (ref), protoModule (ref), t (ref)
-	local var2207 = t_79.new()
-	local var2208 = 0
-	while var2208 < buffer.len(p79) do
+	local var2209 = t_79.new()
+	local var2210 = 0
+	while var2210 < buffer.len(p79) do
 		local _ = nil
-		local var2209 = nil
-		local var2210, var2211, var2212 = protoModule.readTag(p79, var2208)
-		local var2213 = var2210
-		var2209 = var2211
-		var2208 = var2212
+		local var2211 = nil
+		local var2212, var2213, var2214 = protoModule.readTag(p79, var2210)
+		local var2215 = var2212
+		var2211 = var2213
+		var2210 = var2214
 		
-		if var2209 == protoModule.wireTypes.varint then
+		if var2211 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2214, var2215 = protoModule.readVarInt(p79, var2208)
-			local _ = var2214
-			var2208 = var2215
+			local var2216, var2217 = protoModule.readVarInt(p79, var2210)
+			local _ = var2216
+			var2210 = var2217
 			continue
 		end
-		if var2209 == protoModule.wireTypes.lengthDelimited then
-			if var2213 == 1 then
+		if var2211 == protoModule.wireTypes.lengthDelimited then
+			if var2215 == 1 then
 				local _ = nil
-				local var2216, var2217 = protoModule.readBuffer(p79, var2208)
-				var2208 = var2217
-				table.insert(var2207.sort_options, t.SortSelectorInputData_SortOption.decode(var2216))
-			elseif var2213 == 2 then
+				local var2218, var2219 = protoModule.readBuffer(p79, var2210)
+				var2210 = var2219
+				table.insert(var2209.sort_options, t.SortSelectorInputData_SortOption.decode(var2218))
+			elseif var2215 == 2 then
 				local _ = nil
-				local var2218, var2219 = protoModule.readBuffer(p79, var2208)
-				var2208 = var2219
-				var2207.selected_sort_id = buffer.tostring(var2218)
+				local var2220, var2221 = protoModule.readBuffer(p79, var2210)
+				var2210 = var2221
+				var2209.selected_sort_id = buffer.tostring(var2220)
 			else
 				local _ = nil
-				local var2220, var2221 = protoModule.readVarInt(p79, var2208)
-				var2208 = var2221 + var2220
+				local var2222, var2223 = protoModule.readVarInt(p79, var2210)
+				var2210 = var2223 + var2222
 			end
-		elseif var2209 == protoModule.wireTypes.i32 then
+		elseif var2211 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2222, var2223 = protoModule.readFixed32(p79, var2208)
-			local _ = var2222
-			var2208 = var2223
-		elseif var2209 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2224, var2225 = protoModule.readFixed64(p79, var2208)
+			local var2224, var2225 = protoModule.readFixed32(p79, var2210)
 			local _ = var2224
-			var2208 = var2225
+			var2210 = var2225
+		elseif var2211 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2226, var2227 = protoModule.readFixed64(p79, var2210)
+			local _ = var2226
+			var2210 = var2227
 		else
-			error("Unsupported wire type: " .. var3258)
+			error("Unsupported wire type: " .. var3264)
 		end
 	end
-	return var2207
+	return var2209
 end
 
 function t_79:jsonEncode()
@@ -14487,7 +14517,7 @@ end
 
 function t_79:jsonDecode()
 	-- upvalues: t_79 (ref), t (ref)
-	local var2226 = t_79.new()
+	local var2228 = t_79.new()
 	
 	if self.sort_options ~= nil then
 		local t_1 = {}
@@ -14495,7 +14525,7 @@ function t_79:jsonDecode()
 		for i, v in self.sort_options do
 			table.insert(t_1, t.SortSelectorInputData_SortOption.jsonDecode(v))
 		end
-		var2226.sort_options = t_1
+		var2228.sort_options = t_1
 	end
 	if self.sortOptions ~= nil then
 		local t_1 = {}
@@ -14503,15 +14533,15 @@ function t_79:jsonDecode()
 		for i, v in self.sortOptions do
 			table.insert(t_1, t.SortSelectorInputData_SortOption.jsonDecode(v))
 		end
-		var2226.sort_options = t_1
+		var2228.sort_options = t_1
 	end
 	if self.selected_sort_id ~= nil then
-		var2226.selected_sort_id = self.selected_sort_id
+		var2228.selected_sort_id = self.selected_sort_id
 	end
 	if self.selectedSortId ~= nil then
-		var2226.selected_sort_id = self.selectedSortId
+		var2228.selected_sort_id = self.selectedSortId
 	end
-	return var2226
+	return var2228
 end
 
 t_79.descriptor = {
@@ -14535,87 +14565,87 @@ end
 function t_80:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2227 = 0
+	local var2229 = 0
 	
 	if self.sort_id ~= nil and self.sort_id ~= "" then
-		local var2228, var2229 = protoModule.writeTag(buff, var2227, 1, protoModule.wireTypes.lengthDelimited)
-		var2228, var3283 = protoModule.writeString(var2228, var2229, self.sort_id)
-		buff = var2228
-		var2227 = var2229
+		local var2230, var2231 = protoModule.writeTag(buff, var2229, 1, protoModule.wireTypes.lengthDelimited)
+		var2230, var3289 = protoModule.writeString(var2230, var2231, self.sort_id)
+		buff = var2230
+		var2229 = var2231
 	end
 	if self.display_name ~= nil and self.display_name ~= "" then
-		local var2230, var2231 = protoModule.writeTag(buff, var2227, 2, protoModule.wireTypes.lengthDelimited)
-		var2230, var3285 = protoModule.writeString(var2230, var2231, self.display_name)
-		buff = var2230
-		var2227 = var2231
+		local var2232, var2233 = protoModule.writeTag(buff, var2229, 2, protoModule.wireTypes.lengthDelimited)
+		var2232, var3291 = protoModule.writeString(var2232, var2233, self.display_name)
+		buff = var2232
+		var2229 = var2233
 	end
 	if self.content_type ~= nil and self.content_type ~= "" then
-		local var2232, var2233 = protoModule.writeTag(buff, var2227, 3, protoModule.wireTypes.lengthDelimited)
-		var2232, var3287 = protoModule.writeString(var2232, var2233, self.content_type)
-		buff = var2232
-		var2227 = var2233
+		local var2234, var2235 = protoModule.writeTag(buff, var2229, 3, protoModule.wireTypes.lengthDelimited)
+		var2234, var3293 = protoModule.writeString(var2234, var2235, self.content_type)
+		buff = var2234
+		var2229 = var2235
 	end
-	local buff_1 = buffer.create(var2227)
-	buffer.copy(buff_1, 0, buff, 0, var2227)
+	local buff_1 = buffer.create(var2229)
+	buffer.copy(buff_1, 0, buff, 0, var2229)
 	
 	return buff_1
 end
 
 function t_80.decode(p80)
 	-- upvalues: t_80 (ref), protoModule (ref)
-	local var2227 = t_80.new()
-	local var2228 = 0
-	while var2228 < buffer.len(p80) do
+	local var2229 = t_80.new()
+	local var2230 = 0
+	while var2230 < buffer.len(p80) do
 		local _ = nil
-		local var2229 = nil
-		local var2230, var2231, var2232 = protoModule.readTag(p80, var2228)
-		local var2233 = var2230
-		var2229 = var2231
-		var2228 = var2232
+		local var2231 = nil
+		local var2232, var2233, var2234 = protoModule.readTag(p80, var2230)
+		local var2235 = var2232
+		var2231 = var2233
+		var2230 = var2234
 		
-		if var2229 == protoModule.wireTypes.varint then
+		if var2231 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2234, var2235 = protoModule.readVarInt(p80, var2228)
-			local _ = var2234
-			var2228 = var2235
+			local var2236, var2237 = protoModule.readVarInt(p80, var2230)
+			local _ = var2236
+			var2230 = var2237
 			continue
 		end
-		if var2229 == protoModule.wireTypes.lengthDelimited then
-			if var2233 == 1 then
+		if var2231 == protoModule.wireTypes.lengthDelimited then
+			if var2235 == 1 then
 				local _ = nil
-				local var2236, var2237 = protoModule.readBuffer(p80, var2228)
-				var2228 = var2237
-				var2227.sort_id = buffer.tostring(var2236)
-			elseif var2233 == 2 then
+				local var2238, var2239 = protoModule.readBuffer(p80, var2230)
+				var2230 = var2239
+				var2229.sort_id = buffer.tostring(var2238)
+			elseif var2235 == 2 then
 				local _ = nil
-				local var2238, var2239 = protoModule.readBuffer(p80, var2228)
-				var2228 = var2239
-				var2227.display_name = buffer.tostring(var2238)
-			elseif var2233 == 3 then
+				local var2240, var2241 = protoModule.readBuffer(p80, var2230)
+				var2230 = var2241
+				var2229.display_name = buffer.tostring(var2240)
+			elseif var2235 == 3 then
 				local _ = nil
-				local var2240, var2241 = protoModule.readBuffer(p80, var2228)
-				var2228 = var2241
-				var2227.content_type = buffer.tostring(var2240)
+				local var2242, var2243 = protoModule.readBuffer(p80, var2230)
+				var2230 = var2243
+				var2229.content_type = buffer.tostring(var2242)
 			else
 				local _ = nil
-				local var2242, var2243 = protoModule.readVarInt(p80, var2228)
-				var2228 = var2243 + var2242
+				local var2244, var2245 = protoModule.readVarInt(p80, var2230)
+				var2230 = var2245 + var2244
 			end
-		elseif var2229 == protoModule.wireTypes.i32 then
+		elseif var2231 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2244, var2245 = protoModule.readFixed32(p80, var2228)
-			local _ = var2244
-			var2228 = var2245
-		elseif var2229 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2246, var2247 = protoModule.readFixed64(p80, var2228)
+			local var2246, var2247 = protoModule.readFixed32(p80, var2230)
 			local _ = var2246
-			var2228 = var2247
+			var2230 = var2247
+		elseif var2231 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2248, var2249 = protoModule.readFixed64(p80, var2230)
+			local _ = var2248
+			var2230 = var2249
 		else
-			error("Unsupported wire type: " .. var3291)
+			error("Unsupported wire type: " .. var3297)
 		end
 	end
-	return var2227
+	return var2229
 end
 
 function t_80:jsonEncode()
@@ -14635,27 +14665,27 @@ end
 
 function t_80:jsonDecode()
 	-- upvalues: t_80 (ref)
-	local var2248 = t_80.new()
+	local var2250 = t_80.new()
 	
 	if self.sort_id ~= nil then
-		var2248.sort_id = self.sort_id
+		var2250.sort_id = self.sort_id
 	end
 	if self.sortId ~= nil then
-		var2248.sort_id = self.sortId
+		var2250.sort_id = self.sortId
 	end
 	if self.display_name ~= nil then
-		var2248.display_name = self.display_name
+		var2250.display_name = self.display_name
 	end
 	if self.displayName ~= nil then
-		var2248.display_name = self.displayName
+		var2250.display_name = self.displayName
 	end
 	if self.content_type ~= nil then
-		var2248.content_type = self.content_type
+		var2250.content_type = self.content_type
 	end
 	if self.contentType ~= nil then
-		var2248.content_type = self.contentType
+		var2250.content_type = self.contentType
 	end
-	return var2248
+	return var2250
 end
 
 t_80.descriptor = {
@@ -14679,91 +14709,91 @@ end
 function t_81:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2248 = 0
+	local var2250 = 0
 	
 	if self.selected_option ~= nil and self.selected_option ~= "" then
-		local var2249, var2250 = protoModule.writeTag(buff, var2248, 1, protoModule.wireTypes.lengthDelimited)
-		var2249, var3315 = protoModule.writeString(var2249, var2250, self.selected_option)
-		buff = var2249
-		var2248 = var2250
+		local var2251, var2252 = protoModule.writeTag(buff, var2250, 1, protoModule.wireTypes.lengthDelimited)
+		var2251, var3321 = protoModule.writeString(var2251, var2252, self.selected_option)
+		buff = var2251
+		var2250 = var2252
 	end
 	if self.options ~= nil and #self.options > 0 then
 		for i, v in self.options do
-			local var2251 = v:encode()
-			local var2252, var2253 = protoModule.writeTag(buff, var2248, 2, protoModule.wireTypes.lengthDelimited)
-			var2252, var3318 = protoModule.writeBuffer(var2252, var2253, var2251, buffer.len(var2251))
-			buff = var2252
-			var2248 = var2253
+			local var2253 = v:encode()
+			local var2254, var2255 = protoModule.writeTag(buff, var2250, 2, protoModule.wireTypes.lengthDelimited)
+			var2254, var3324 = protoModule.writeBuffer(var2254, var2255, var2253, buffer.len(var2253))
+			buff = var2254
+			var2250 = var2255
 		end
 	end
 	if self.experience_carousel ~= nil then
-		local var2254 = self.experience_carousel:encode()
-		local var2255, var2256 = protoModule.writeTag(buff, var2248, 3, protoModule.wireTypes.lengthDelimited)
-		var2255, var3321 = protoModule.writeBuffer(var2255, var2256, var2254, buffer.len(var2254))
-		buff = var2255
-		var2248 = var2256
+		local var2256 = self.experience_carousel:encode()
+		local var2257, var2258 = protoModule.writeTag(buff, var2250, 3, protoModule.wireTypes.lengthDelimited)
+		var2257, var3327 = protoModule.writeBuffer(var2257, var2258, var2256, buffer.len(var2256))
+		buff = var2257
+		var2250 = var2258
 	end
-	local buff_1 = buffer.create(var2248)
-	buffer.copy(buff_1, 0, buff, 0, var2248)
+	local buff_1 = buffer.create(var2250)
+	buffer.copy(buff_1, 0, buff, 0, var2250)
 	
 	return buff_1
 end
 
 function t_81.decode(p81)
 	-- upvalues: t_81 (ref), protoModule (ref), t (ref)
-	local var2257 = t_81.new()
-	local var2258 = 0
-	while var2258 < buffer.len(p81) do
+	local var2259 = t_81.new()
+	local var2260 = 0
+	while var2260 < buffer.len(p81) do
 		local _ = nil
-		local var2259 = nil
-		local var2260, var2261, var2262 = protoModule.readTag(p81, var2258)
-		local var2263 = var2260
-		var2259 = var2261
-		var2258 = var2262
+		local var2261 = nil
+		local var2262, var2263, var2264 = protoModule.readTag(p81, var2260)
+		local var2265 = var2262
+		var2261 = var2263
+		var2260 = var2264
 		
-		if var2259 == protoModule.wireTypes.varint then
+		if var2261 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2264, var2265 = protoModule.readVarInt(p81, var2258)
-			local _ = var2264
-			var2258 = var2265
+			local var2266, var2267 = protoModule.readVarInt(p81, var2260)
+			local _ = var2266
+			var2260 = var2267
 			continue
 		end
-		if var2259 == protoModule.wireTypes.lengthDelimited then
-			if var2263 == 1 then
+		if var2261 == protoModule.wireTypes.lengthDelimited then
+			if var2265 == 1 then
 				local _ = nil
-				local var2266, var2267 = protoModule.readBuffer(p81, var2258)
-				var2258 = var2267
-				var2257.selected_option = buffer.tostring(var2266)
-			elseif var2263 == 2 then
+				local var2268, var2269 = protoModule.readBuffer(p81, var2260)
+				var2260 = var2269
+				var2259.selected_option = buffer.tostring(var2268)
+			elseif var2265 == 2 then
 				local _ = nil
-				local var2268, var2269 = protoModule.readBuffer(p81, var2258)
-				var2258 = var2269
-				table.insert(var2257.options, t.SelectorOption.decode(var2268))
-			elseif var2263 == 3 then
+				local var2270, var2271 = protoModule.readBuffer(p81, var2260)
+				var2260 = var2271
+				table.insert(var2259.options, t.SelectorOption.decode(var2270))
+			elseif var2265 == 3 then
 				local _ = nil
-				local var2270, var2271 = protoModule.readBuffer(p81, var2258)
-				var2258 = var2271
-				var2257.experience_carousel = t.ExperienceCarouselInputData.decode(var2270)
+				local var2272, var2273 = protoModule.readBuffer(p81, var2260)
+				var2260 = var2273
+				var2259.experience_carousel = t.ExperienceCarouselInputData.decode(var2272)
 			else
 				local _ = nil
-				local var2272, var2273 = protoModule.readVarInt(p81, var2258)
-				var2258 = var2273 + var2272
+				local var2274, var2275 = protoModule.readVarInt(p81, var2260)
+				var2260 = var2275 + var2274
 			end
-		elseif var2259 == protoModule.wireTypes.i32 then
+		elseif var2261 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2274, var2275 = protoModule.readFixed32(p81, var2258)
-			local _ = var2274
-			var2258 = var2275
-		elseif var2259 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2276, var2277 = protoModule.readFixed64(p81, var2258)
+			local var2276, var2277 = protoModule.readFixed32(p81, var2260)
 			local _ = var2276
-			var2258 = var2277
+			var2260 = var2277
+		elseif var2261 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2278, var2279 = protoModule.readFixed64(p81, var2260)
+			local _ = var2278
+			var2260 = var2279
 		else
-			error("Unsupported wire type: " .. var3325)
+			error("Unsupported wire type: " .. var3331)
 		end
 	end
-	return var2257
+	return var2259
 end
 
 function t_81:jsonEncode()
@@ -14788,13 +14818,13 @@ end
 
 function t_81:jsonDecode()
 	-- upvalues: t_81 (ref), t (ref)
-	local var2278 = t_81.new()
+	local var2280 = t_81.new()
 	
 	if self.selected_option ~= nil then
-		var2278.selected_option = self.selected_option
+		var2280.selected_option = self.selected_option
 	end
 	if self.selectedOption ~= nil then
-		var2278.selected_option = self.selectedOption
+		var2280.selected_option = self.selectedOption
 	end
 	if self.options ~= nil then
 		local t_1 = {}
@@ -14802,15 +14832,15 @@ function t_81:jsonDecode()
 		for i, v in self.options do
 			table.insert(t_1, t.SelectorOption.jsonDecode(v))
 		end
-		var2278.options = t_1
+		var2280.options = t_1
 	end
 	if self.experience_carousel ~= nil then
-		var2278.experience_carousel = t.ExperienceCarouselInputData.jsonDecode(self.experience_carousel)
+		var2280.experience_carousel = t.ExperienceCarouselInputData.jsonDecode(self.experience_carousel)
 	end
 	if self.experienceCarousel ~= nil then
-		var2278.experience_carousel = t.ExperienceCarouselInputData.jsonDecode(self.experienceCarousel)
+		var2280.experience_carousel = t.ExperienceCarouselInputData.jsonDecode(self.experienceCarousel)
 	end
-	return var2278
+	return var2280
 end
 
 t_81.descriptor = {
@@ -14836,111 +14866,111 @@ end
 function t_82:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2279 = 0
+	local var2281 = 0
 	
 	if self.id ~= nil and self.id ~= "" then
-		local var2280, var2281 = protoModule.writeTag(buff, var2279, 1, protoModule.wireTypes.lengthDelimited)
-		var2280, var3351 = protoModule.writeString(var2280, var2281, self.id)
-		buff = var2280
-		var2279 = var2281
+		local var2282, var2283 = protoModule.writeTag(buff, var2281, 1, protoModule.wireTypes.lengthDelimited)
+		var2282, var3357 = protoModule.writeString(var2282, var2283, self.id)
+		buff = var2282
+		var2281 = var2283
 	end
 	if self.preview_rows ~= nil and self.preview_rows ~= 0 then
-		local var2282, var2283 = protoModule.writeTag(buff, var2279, 4, protoModule.wireTypes.varint)
-		var2282, var3353 = protoModule.writeVarInt(var2282, var2283, self.preview_rows)
-		buff = var2282
-		var2279 = var2283
+		local var2284, var2285 = protoModule.writeTag(buff, var2281, 4, protoModule.wireTypes.varint)
+		var2284, var3359 = protoModule.writeVarInt(var2284, var2285, self.preview_rows)
+		buff = var2284
+		var2281 = var2285
 	end
 	if self.widget_style ~= nil then
-		local var2284 = self.widget_style:encode()
-		local var2285, var2286 = protoModule.writeTag(buff, var2279, 3, protoModule.wireTypes.lengthDelimited)
-		var2285, var3356 = protoModule.writeBuffer(var2285, var2286, var2284, buffer.len(var2284))
-		buff = var2285
-		var2279 = var2286
+		local var2286 = self.widget_style:encode()
+		local var2287, var2288 = protoModule.writeTag(buff, var2281, 3, protoModule.wireTypes.lengthDelimited)
+		var2287, var3362 = protoModule.writeBuffer(var2287, var2288, var2286, buffer.len(var2286))
+		buff = var2287
+		var2281 = var2288
 	end
 	if self.see_all_button then
-		local var2287, var2288 = protoModule.writeTag(buff, var2279, 5, protoModule.wireTypes.varint)
-		var2287, var3358 = protoModule.writeVarInt(var2287, var2288, if self.see_all_button then 1 else 0)
-		buff = var2287
-		var2279 = var2288
+		local var2289, var2290 = protoModule.writeTag(buff, var2281, 5, protoModule.wireTypes.varint)
+		var2289, var3364 = protoModule.writeVarInt(var2289, var2290, if self.see_all_button then 1 else 0)
+		buff = var2289
+		var2281 = var2290
 	end
 	if self.information_popover_text ~= nil and self.information_popover_text ~= "" then
-		local var2289, var2290 = protoModule.writeTag(buff, var2279, 6, protoModule.wireTypes.lengthDelimited)
-		var2289, var3360 = protoModule.writeString(var2289, var2290, self.information_popover_text)
-		buff = var2289
-		var2279 = var2290
+		local var2291, var2292 = protoModule.writeTag(buff, var2281, 6, protoModule.wireTypes.lengthDelimited)
+		var2291, var3366 = protoModule.writeString(var2291, var2292, self.information_popover_text)
+		buff = var2291
+		var2281 = var2292
 	end
-	local buff_1 = buffer.create(var2279)
-	buffer.copy(buff_1, 0, buff, 0, var2279)
+	local buff_1 = buffer.create(var2281)
+	buffer.copy(buff_1, 0, buff, 0, var2281)
 	
 	return buff_1
 end
 
 function t_82.decode(p82)
 	-- upvalues: t_82 (ref), protoModule (ref), t (ref)
-	local var2279 = t_82.new()
-	local var2280 = 0
-	while var2280 < buffer.len(p82) do
+	local var2281 = t_82.new()
+	local var2282 = 0
+	while var2282 < buffer.len(p82) do
 		local _ = nil
-		local var2281 = nil
-		local var2282, var2283, var2284 = protoModule.readTag(p82, var2280)
-		local var2285 = var2282
-		var2281 = var2283
-		var2280 = var2284
+		local var2283 = nil
+		local var2284, var2285, var2286 = protoModule.readTag(p82, var2282)
+		local var2287 = var2284
+		var2283 = var2285
+		var2282 = var2286
 		
-		if var2281 == protoModule.wireTypes.varint then
-			if var2285 == 4 then
+		if var2283 == protoModule.wireTypes.varint then
+			if var2287 == 4 then
 				local _ = nil
-				local var2286, var2287 = protoModule.readVarIntI64(p82, var2280)
-				var2280 = var2287
-				var2279.preview_rows = var2286
-			elseif var2285 == 5 then
+				local var2288, var2289 = protoModule.readVarIntI64(p82, var2282)
+				var2282 = var2289
+				var2281.preview_rows = var2288
+			elseif var2287 == 5 then
 				local _ = nil
-				local var2288, var2289 = protoModule.readVarInt(p82, var2280)
-				var2280 = var2289
-				var2279.see_all_button = var2288 ~= 0
+				local var2290, var2291 = protoModule.readVarInt(p82, var2282)
+				var2282 = var2291
+				var2281.see_all_button = var2290 ~= 0
 			else
 				local _ = nil
-				local var2290, var2291 = protoModule.readVarInt(p82, var2280)
-				local _ = var2290
-				var2280 = var2291
+				local var2292, var2293 = protoModule.readVarInt(p82, var2282)
+				local _ = var2292
+				var2282 = var2293
 			end
 		end
-		if var2281 == protoModule.wireTypes.lengthDelimited then
-			if var2285 == 1 then
+		if var2283 == protoModule.wireTypes.lengthDelimited then
+			if var2287 == 1 then
 				local _ = nil
-				local var2292, var2293 = protoModule.readBuffer(p82, var2280)
-				var2280 = var2293
-				var2279.id = buffer.tostring(var2292)
-			elseif var2285 == 3 then
+				local var2294, var2295 = protoModule.readBuffer(p82, var2282)
+				var2282 = var2295
+				var2281.id = buffer.tostring(var2294)
+			elseif var2287 == 3 then
 				local _ = nil
-				local var2294, var2295 = protoModule.readBuffer(p82, var2280)
-				var2280 = var2295
-				var2279.widget_style = t.WidgetStyleData.decode(var2294)
-			elseif var2285 == 6 then
+				local var2296, var2297 = protoModule.readBuffer(p82, var2282)
+				var2282 = var2297
+				var2281.widget_style = t.WidgetStyleData.decode(var2296)
+			elseif var2287 == 6 then
 				local _ = nil
-				local var2296, var2297 = protoModule.readBuffer(p82, var2280)
-				var2280 = var2297
-				var2279.information_popover_text = buffer.tostring(var2296)
+				local var2298, var2299 = protoModule.readBuffer(p82, var2282)
+				var2282 = var2299
+				var2281.information_popover_text = buffer.tostring(var2298)
 			else
 				local _ = nil
-				local var2298, var2299 = protoModule.readVarInt(p82, var2280)
-				var2280 = var2299 + var2298
+				local var2300, var2301 = protoModule.readVarInt(p82, var2282)
+				var2282 = var2301 + var2300
 			end
-		elseif var2281 == protoModule.wireTypes.i32 then
+		elseif var2283 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2300, var2301 = protoModule.readFixed32(p82, var2280)
-			local _ = var2300
-			var2280 = var2301
-		elseif var2281 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2302, var2303 = protoModule.readFixed64(p82, var2280)
+			local var2302, var2303 = protoModule.readFixed32(p82, var2282)
 			local _ = var2302
-			var2280 = var2303
+			var2282 = var2303
+		elseif var2283 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2304, var2305 = protoModule.readFixed64(p82, var2282)
+			local _ = var2304
+			var2282 = var2305
 		else
-			error("Unsupported wire type: " .. var3364)
+			error("Unsupported wire type: " .. var3370)
 		end
 	end
-	return var2279
+	return var2281
 end
 
 function t_82:jsonEncode()
@@ -14966,36 +14996,36 @@ end
 
 function t_82:jsonDecode()
 	-- upvalues: t_82 (ref), t (ref)
-	local var2304 = t_82.new()
+	local var2306 = t_82.new()
 	
 	if self.id ~= nil then
-		var2304.id = self.id
+		var2306.id = self.id
 	end
 	if self.preview_rows ~= nil then
-		var2304.preview_rows = self.preview_rows
+		var2306.preview_rows = self.preview_rows
 	end
 	if self.previewRows ~= nil then
-		var2304.preview_rows = self.previewRows
+		var2306.preview_rows = self.previewRows
 	end
 	if self.widget_style ~= nil then
-		var2304.widget_style = t.WidgetStyleData.jsonDecode(self.widget_style)
+		var2306.widget_style = t.WidgetStyleData.jsonDecode(self.widget_style)
 	end
 	if self.widgetStyle ~= nil then
-		var2304.widget_style = t.WidgetStyleData.jsonDecode(self.widgetStyle)
+		var2306.widget_style = t.WidgetStyleData.jsonDecode(self.widgetStyle)
 	end
 	if self.see_all_button ~= nil then
-		var2304.see_all_button = self.see_all_button
+		var2306.see_all_button = self.see_all_button
 	end
 	if self.seeAllButton ~= nil then
-		var2304.see_all_button = self.seeAllButton
+		var2306.see_all_button = self.seeAllButton
 	end
 	if self.information_popover_text ~= nil then
-		var2304.information_popover_text = self.information_popover_text
+		var2306.information_popover_text = self.information_popover_text
 	end
 	if self.informationPopoverText ~= nil then
-		var2304.information_popover_text = self.informationPopoverText
+		var2306.information_popover_text = self.informationPopoverText
 	end
-	return var2304
+	return var2306
 end
 
 t_82.descriptor = {
@@ -15021,111 +15051,111 @@ end
 function t_83:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2304 = 0
+	local var2306 = 0
 	
 	if self.id ~= nil and self.id ~= "" then
-		local var2305, var2306 = protoModule.writeTag(buff, var2304, 1, protoModule.wireTypes.lengthDelimited)
-		var2305, var3392 = protoModule.writeString(var2305, var2306, self.id)
-		buff = var2305
-		var2304 = var2306
+		local var2307, var2308 = protoModule.writeTag(buff, var2306, 1, protoModule.wireTypes.lengthDelimited)
+		var2307, var3398 = protoModule.writeString(var2307, var2308, self.id)
+		buff = var2307
+		var2306 = var2308
 	end
 	if self.num_items_to_show ~= nil and self.num_items_to_show ~= 0 then
-		local var2307, var2308 = protoModule.writeTag(buff, var2304, 5, protoModule.wireTypes.varint)
-		var2307, var3394 = protoModule.writeVarInt(var2307, var2308, self.num_items_to_show)
-		buff = var2307
-		var2304 = var2308
+		local var2309, var2310 = protoModule.writeTag(buff, var2306, 5, protoModule.wireTypes.varint)
+		var2309, var3400 = protoModule.writeVarInt(var2309, var2310, self.num_items_to_show)
+		buff = var2309
+		var2306 = var2310
 	end
 	if self.widget_style ~= nil then
-		local var2309 = self.widget_style:encode()
-		local var2310, var2311 = protoModule.writeTag(buff, var2304, 3, protoModule.wireTypes.lengthDelimited)
-		var2310, var3397 = protoModule.writeBuffer(var2310, var2311, var2309, buffer.len(var2309))
-		buff = var2310
-		var2304 = var2311
+		local var2311 = self.widget_style:encode()
+		local var2312, var2313 = protoModule.writeTag(buff, var2306, 3, protoModule.wireTypes.lengthDelimited)
+		var2312, var3403 = protoModule.writeBuffer(var2312, var2313, var2311, buffer.len(var2311))
+		buff = var2312
+		var2306 = var2313
 	end
 	if self.see_all_button then
-		local var2312, var2313 = protoModule.writeTag(buff, var2304, 6, protoModule.wireTypes.varint)
-		var2312, var3399 = protoModule.writeVarInt(var2312, var2313, if self.see_all_button then 1 else 0)
-		buff = var2312
-		var2304 = var2313
+		local var2314, var2315 = protoModule.writeTag(buff, var2306, 6, protoModule.wireTypes.varint)
+		var2314, var3405 = protoModule.writeVarInt(var2314, var2315, if self.see_all_button then 1 else 0)
+		buff = var2314
+		var2306 = var2315
 	end
 	if self.information_popover_text ~= nil and self.information_popover_text ~= "" then
-		local var2314, var2315 = protoModule.writeTag(buff, var2304, 7, protoModule.wireTypes.lengthDelimited)
-		var2314, var3401 = protoModule.writeString(var2314, var2315, self.information_popover_text)
-		buff = var2314
-		var2304 = var2315
+		local var2316, var2317 = protoModule.writeTag(buff, var2306, 7, protoModule.wireTypes.lengthDelimited)
+		var2316, var3407 = protoModule.writeString(var2316, var2317, self.information_popover_text)
+		buff = var2316
+		var2306 = var2317
 	end
-	local buff_1 = buffer.create(var2304)
-	buffer.copy(buff_1, 0, buff, 0, var2304)
+	local buff_1 = buffer.create(var2306)
+	buffer.copy(buff_1, 0, buff, 0, var2306)
 	
 	return buff_1
 end
 
 function t_83.decode(p83)
 	-- upvalues: t_83 (ref), protoModule (ref), t (ref)
-	local var2304 = t_83.new()
-	local var2305 = 0
-	while var2305 < buffer.len(p83) do
+	local var2306 = t_83.new()
+	local var2307 = 0
+	while var2307 < buffer.len(p83) do
 		local _ = nil
-		local var2306 = nil
-		local var2307, var2308, var2309 = protoModule.readTag(p83, var2305)
-		local var2310 = var2307
-		var2306 = var2308
-		var2305 = var2309
+		local var2308 = nil
+		local var2309, var2310, var2311 = protoModule.readTag(p83, var2307)
+		local var2312 = var2309
+		var2308 = var2310
+		var2307 = var2311
 		
-		if var2306 == protoModule.wireTypes.varint then
-			if var2310 == 5 then
+		if var2308 == protoModule.wireTypes.varint then
+			if var2312 == 5 then
 				local _ = nil
-				local var2311, var2312 = protoModule.readVarIntI64(p83, var2305)
-				var2305 = var2312
-				var2304.num_items_to_show = var2311
-			elseif var2310 == 6 then
+				local var2313, var2314 = protoModule.readVarIntI64(p83, var2307)
+				var2307 = var2314
+				var2306.num_items_to_show = var2313
+			elseif var2312 == 6 then
 				local _ = nil
-				local var2313, var2314 = protoModule.readVarInt(p83, var2305)
-				var2305 = var2314
-				var2304.see_all_button = var2313 ~= 0
+				local var2315, var2316 = protoModule.readVarInt(p83, var2307)
+				var2307 = var2316
+				var2306.see_all_button = var2315 ~= 0
 			else
 				local _ = nil
-				local var2315, var2316 = protoModule.readVarInt(p83, var2305)
-				local _ = var2315
-				var2305 = var2316
+				local var2317, var2318 = protoModule.readVarInt(p83, var2307)
+				local _ = var2317
+				var2307 = var2318
 			end
 		end
-		if var2306 == protoModule.wireTypes.lengthDelimited then
-			if var2310 == 1 then
+		if var2308 == protoModule.wireTypes.lengthDelimited then
+			if var2312 == 1 then
 				local _ = nil
-				local var2317, var2318 = protoModule.readBuffer(p83, var2305)
-				var2305 = var2318
-				var2304.id = buffer.tostring(var2317)
-			elseif var2310 == 3 then
+				local var2319, var2320 = protoModule.readBuffer(p83, var2307)
+				var2307 = var2320
+				var2306.id = buffer.tostring(var2319)
+			elseif var2312 == 3 then
 				local _ = nil
-				local var2319, var2320 = protoModule.readBuffer(p83, var2305)
-				var2305 = var2320
-				var2304.widget_style = t.WidgetStyleData.decode(var2319)
-			elseif var2310 == 7 then
+				local var2321, var2322 = protoModule.readBuffer(p83, var2307)
+				var2307 = var2322
+				var2306.widget_style = t.WidgetStyleData.decode(var2321)
+			elseif var2312 == 7 then
 				local _ = nil
-				local var2321, var2322 = protoModule.readBuffer(p83, var2305)
-				var2305 = var2322
-				var2304.information_popover_text = buffer.tostring(var2321)
+				local var2323, var2324 = protoModule.readBuffer(p83, var2307)
+				var2307 = var2324
+				var2306.information_popover_text = buffer.tostring(var2323)
 			else
 				local _ = nil
-				local var2323, var2324 = protoModule.readVarInt(p83, var2305)
-				var2305 = var2324 + var2323
+				local var2325, var2326 = protoModule.readVarInt(p83, var2307)
+				var2307 = var2326 + var2325
 			end
-		elseif var2306 == protoModule.wireTypes.i32 then
+		elseif var2308 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2325, var2326 = protoModule.readFixed32(p83, var2305)
-			local _ = var2325
-			var2305 = var2326
-		elseif var2306 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2327, var2328 = protoModule.readFixed64(p83, var2305)
+			local var2327, var2328 = protoModule.readFixed32(p83, var2307)
 			local _ = var2327
-			var2305 = var2328
+			var2307 = var2328
+		elseif var2308 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2329, var2330 = protoModule.readFixed64(p83, var2307)
+			local _ = var2329
+			var2307 = var2330
 		else
-			error("Unsupported wire type: " .. var3405)
+			error("Unsupported wire type: " .. var3411)
 		end
 	end
-	return var2304
+	return var2306
 end
 
 function t_83:jsonEncode()
@@ -15151,36 +15181,36 @@ end
 
 function t_83:jsonDecode()
 	-- upvalues: t_83 (ref), t (ref)
-	local var2329 = t_83.new()
+	local var2331 = t_83.new()
 	
 	if self.id ~= nil then
-		var2329.id = self.id
+		var2331.id = self.id
 	end
 	if self.num_items_to_show ~= nil then
-		var2329.num_items_to_show = self.num_items_to_show
+		var2331.num_items_to_show = self.num_items_to_show
 	end
 	if self.numItemsToShow ~= nil then
-		var2329.num_items_to_show = self.numItemsToShow
+		var2331.num_items_to_show = self.numItemsToShow
 	end
 	if self.widget_style ~= nil then
-		var2329.widget_style = t.WidgetStyleData.jsonDecode(self.widget_style)
+		var2331.widget_style = t.WidgetStyleData.jsonDecode(self.widget_style)
 	end
 	if self.widgetStyle ~= nil then
-		var2329.widget_style = t.WidgetStyleData.jsonDecode(self.widgetStyle)
+		var2331.widget_style = t.WidgetStyleData.jsonDecode(self.widgetStyle)
 	end
 	if self.see_all_button ~= nil then
-		var2329.see_all_button = self.see_all_button
+		var2331.see_all_button = self.see_all_button
 	end
 	if self.seeAllButton ~= nil then
-		var2329.see_all_button = self.seeAllButton
+		var2331.see_all_button = self.seeAllButton
 	end
 	if self.information_popover_text ~= nil then
-		var2329.information_popover_text = self.information_popover_text
+		var2331.information_popover_text = self.information_popover_text
 	end
 	if self.informationPopoverText ~= nil then
-		var2329.information_popover_text = self.informationPopoverText
+		var2331.information_popover_text = self.informationPopoverText
 	end
-	return var2329
+	return var2331
 end
 
 t_83.descriptor = {
@@ -15202,68 +15232,68 @@ end
 function t_84:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2329 = 0
+	local var2331 = 0
 	
 	if self.background_layers ~= nil and #self.background_layers > 0 then
 		for i, v in self.background_layers do
-			local var2330 = v:encode()
-			local var2331, var2332 = protoModule.writeTag(buff, var2329, 1, protoModule.wireTypes.lengthDelimited)
-			var2331, var3434 = protoModule.writeBuffer(var2331, var2332, var2330, buffer.len(var2330))
-			buff = var2331
-			var2329 = var2332
+			local var2332 = v:encode()
+			local var2333, var2334 = protoModule.writeTag(buff, var2331, 1, protoModule.wireTypes.lengthDelimited)
+			var2333, var3440 = protoModule.writeBuffer(var2333, var2334, var2332, buffer.len(var2332))
+			buff = var2333
+			var2331 = var2334
 		end
 	end
-	local buff_1 = buffer.create(var2329)
-	buffer.copy(buff_1, 0, buff, 0, var2329)
+	local buff_1 = buffer.create(var2331)
+	buffer.copy(buff_1, 0, buff, 0, var2331)
 	
 	return buff_1
 end
 
 function t_84.decode(p84)
 	-- upvalues: t_84 (ref), protoModule (ref), backgroundLayerModule (ref)
-	local var2333 = t_84.new()
-	local var2334 = 0
-	while var2334 < buffer.len(p84) do
+	local var2335 = t_84.new()
+	local var2336 = 0
+	while var2336 < buffer.len(p84) do
 		local _ = nil
-		local var2335 = nil
-		local var2336, var2337, var2338 = protoModule.readTag(p84, var2334)
-		local var2339 = var2336
-		var2335 = var2337
-		var2334 = var2338
+		local var2337 = nil
+		local var2338, var2339, var2340 = protoModule.readTag(p84, var2336)
+		local var2341 = var2338
+		var2337 = var2339
+		var2336 = var2340
 		
-		if var2335 == protoModule.wireTypes.varint then
+		if var2337 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2340, var2341 = protoModule.readVarInt(p84, var2334)
-			local _ = var2340
-			var2334 = var2341
+			local var2342, var2343 = protoModule.readVarInt(p84, var2336)
+			local _ = var2342
+			var2336 = var2343
 			continue
 		end
-		if var2335 == protoModule.wireTypes.lengthDelimited then
-			if var2339 == 1 then
+		if var2337 == protoModule.wireTypes.lengthDelimited then
+			if var2341 == 1 then
 				local _ = nil
-				local var2342, var2343 = protoModule.readBuffer(p84, var2334)
-				var2334 = var2343
-				table.insert(var2333.background_layers, backgroundLayerModule.BackgroundLayer.decode(var2342))
+				local var2344, var2345 = protoModule.readBuffer(p84, var2336)
+				var2336 = var2345
+				table.insert(var2335.background_layers, backgroundLayerModule.BackgroundLayer.decode(var2344))
 			else
 				local _ = nil
-				local var2344, var2345 = protoModule.readVarInt(p84, var2334)
-				var2334 = var2345 + var2344
+				local var2346, var2347 = protoModule.readVarInt(p84, var2336)
+				var2336 = var2347 + var2346
 			end
-		elseif var2335 == protoModule.wireTypes.i32 then
+		elseif var2337 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2346, var2347 = protoModule.readFixed32(p84, var2334)
-			local _ = var2346
-			var2334 = var2347
-		elseif var2335 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2348, var2349 = protoModule.readFixed64(p84, var2334)
+			local var2348, var2349 = protoModule.readFixed32(p84, var2336)
 			local _ = var2348
-			var2334 = var2349
+			var2336 = var2349
+		elseif var2337 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2350, var2351 = protoModule.readFixed64(p84, var2336)
+			local _ = var2350
+			var2336 = var2351
 		else
-			error("Unsupported wire type: " .. var3438)
+			error("Unsupported wire type: " .. var3444)
 		end
 	end
-	return var2333
+	return var2335
 end
 
 function t_84:jsonEncode()
@@ -15282,7 +15312,7 @@ end
 
 function t_84:jsonDecode()
 	-- upvalues: t_84 (ref), backgroundLayerModule (ref)
-	local var2350 = t_84.new()
+	local var2352 = t_84.new()
 	
 	if self.background_layers ~= nil then
 		local t = {}
@@ -15290,7 +15320,7 @@ function t_84:jsonDecode()
 		for i, v in self.background_layers do
 			table.insert(t, backgroundLayerModule.BackgroundLayer.jsonDecode(v))
 		end
-		var2350.background_layers = t
+		var2352.background_layers = t
 	end
 	if self.backgroundLayers ~= nil then
 		local t = {}
@@ -15298,9 +15328,9 @@ function t_84:jsonDecode()
 		for i, v in self.backgroundLayers do
 			table.insert(t, backgroundLayerModule.BackgroundLayer.jsonDecode(v))
 		end
-		var2350.background_layers = t
+		var2352.background_layers = t
 	end
-	return var2350
+	return var2352
 end
 
 t_84.descriptor = {
@@ -15324,88 +15354,88 @@ end
 function t_85:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2351 = 0
+	local var2353 = 0
 	
 	if self.id ~= nil and self.id ~= "" then
-		local var2352, var2353 = protoModule.writeTag(buff, var2351, 1, protoModule.wireTypes.lengthDelimited)
-		var2352, var3461 = protoModule.writeString(var2352, var2353, self.id)
-		buff = var2352
-		var2351 = var2353
+		local var2354, var2355 = protoModule.writeTag(buff, var2353, 1, protoModule.wireTypes.lengthDelimited)
+		var2354, var3467 = protoModule.writeString(var2354, var2355, self.id)
+		buff = var2354
+		var2353 = var2355
 	end
 	if self.available_until ~= nil and self.available_until ~= "" then
-		local var2354, var2355 = protoModule.writeTag(buff, var2351, 2, protoModule.wireTypes.lengthDelimited)
-		var2354, var3463 = protoModule.writeString(var2354, var2355, self.available_until)
-		buff = var2354
-		var2351 = var2355
+		local var2356, var2357 = protoModule.writeTag(buff, var2353, 2, protoModule.wireTypes.lengthDelimited)
+		var2356, var3469 = protoModule.writeString(var2356, var2357, self.available_until)
+		buff = var2356
+		var2353 = var2357
 	end
 	if self.widget_style ~= nil then
-		local var2356 = self.widget_style:encode()
-		local var2357, var2358 = protoModule.writeTag(buff, var2351, 3, protoModule.wireTypes.lengthDelimited)
-		var2357, var3466 = protoModule.writeBuffer(var2357, var2358, var2356, buffer.len(var2356))
-		buff = var2357
-		var2351 = var2358
+		local var2358 = self.widget_style:encode()
+		local var2359, var2360 = protoModule.writeTag(buff, var2353, 3, protoModule.wireTypes.lengthDelimited)
+		var2359, var3472 = protoModule.writeBuffer(var2359, var2360, var2358, buffer.len(var2358))
+		buff = var2359
+		var2353 = var2360
 	end
-	local buff_1 = buffer.create(var2351)
-	buffer.copy(buff_1, 0, buff, 0, var2351)
+	local buff_1 = buffer.create(var2353)
+	buffer.copy(buff_1, 0, buff, 0, var2353)
 	
 	return buff_1
 end
 
 function t_85.decode(p85)
 	-- upvalues: t_85 (ref), protoModule (ref), t (ref)
-	local var2351 = t_85.new()
-	local var2352 = 0
-	while var2352 < buffer.len(p85) do
+	local var2353 = t_85.new()
+	local var2354 = 0
+	while var2354 < buffer.len(p85) do
 		local _ = nil
-		local var2353 = nil
-		local var2354, var2355, var2356 = protoModule.readTag(p85, var2352)
-		local var2357 = var2354
-		var2353 = var2355
-		var2352 = var2356
+		local var2355 = nil
+		local var2356, var2357, var2358 = protoModule.readTag(p85, var2354)
+		local var2359 = var2356
+		var2355 = var2357
+		var2354 = var2358
 		
-		if var2353 == protoModule.wireTypes.varint then
+		if var2355 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2358, var2359 = protoModule.readVarInt(p85, var2352)
-			local _ = var2358
-			var2352 = var2359
+			local var2360, var2361 = protoModule.readVarInt(p85, var2354)
+			local _ = var2360
+			var2354 = var2361
 			continue
 		end
-		if var2353 == protoModule.wireTypes.lengthDelimited then
-			if var2357 == 1 then
+		if var2355 == protoModule.wireTypes.lengthDelimited then
+			if var2359 == 1 then
 				local _ = nil
-				local var2360, var2361 = protoModule.readBuffer(p85, var2352)
-				var2352 = var2361
-				var2351.id = buffer.tostring(var2360)
-			elseif var2357 == 2 then
+				local var2362, var2363 = protoModule.readBuffer(p85, var2354)
+				var2354 = var2363
+				var2353.id = buffer.tostring(var2362)
+			elseif var2359 == 2 then
 				local _ = nil
-				local var2362, var2363 = protoModule.readBuffer(p85, var2352)
-				var2352 = var2363
-				var2351.available_until = buffer.tostring(var2362)
-			elseif var2357 == 3 then
+				local var2364, var2365 = protoModule.readBuffer(p85, var2354)
+				var2354 = var2365
+				var2353.available_until = buffer.tostring(var2364)
+			elseif var2359 == 3 then
 				local _ = nil
-				local var2364, var2365 = protoModule.readBuffer(p85, var2352)
-				var2352 = var2365
-				var2351.widget_style = t.WidgetStyleData.decode(var2364)
+				local var2366, var2367 = protoModule.readBuffer(p85, var2354)
+				var2354 = var2367
+				var2353.widget_style = t.WidgetStyleData.decode(var2366)
 			else
 				local _ = nil
-				local var2366, var2367 = protoModule.readVarInt(p85, var2352)
-				var2352 = var2367 + var2366
+				local var2368, var2369 = protoModule.readVarInt(p85, var2354)
+				var2354 = var2369 + var2368
 			end
-		elseif var2353 == protoModule.wireTypes.i32 then
+		elseif var2355 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2368, var2369 = protoModule.readFixed32(p85, var2352)
-			local _ = var2368
-			var2352 = var2369
-		elseif var2353 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2370, var2371 = protoModule.readFixed64(p85, var2352)
+			local var2370, var2371 = protoModule.readFixed32(p85, var2354)
 			local _ = var2370
-			var2352 = var2371
+			var2354 = var2371
+		elseif var2355 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2372, var2373 = protoModule.readFixed64(p85, var2354)
+			local _ = var2372
+			var2354 = var2373
 		else
-			error("Unsupported wire type: " .. var3470)
+			error("Unsupported wire type: " .. var3476)
 		end
 	end
-	return var2351
+	return var2353
 end
 
 function t_85:jsonEncode()
@@ -15425,24 +15455,24 @@ end
 
 function t_85:jsonDecode()
 	-- upvalues: t_85 (ref), t (ref)
-	local var2372 = t_85.new()
+	local var2374 = t_85.new()
 	
 	if self.id ~= nil then
-		var2372.id = self.id
+		var2374.id = self.id
 	end
 	if self.available_until ~= nil then
-		var2372.available_until = self.available_until
+		var2374.available_until = self.available_until
 	end
 	if self.availableUntil ~= nil then
-		var2372.available_until = self.availableUntil
+		var2374.available_until = self.availableUntil
 	end
 	if self.widget_style ~= nil then
-		var2372.widget_style = t.WidgetStyleData.jsonDecode(self.widget_style)
+		var2374.widget_style = t.WidgetStyleData.jsonDecode(self.widget_style)
 	end
 	if self.widgetStyle ~= nil then
-		var2372.widget_style = t.WidgetStyleData.jsonDecode(self.widgetStyle)
+		var2374.widget_style = t.WidgetStyleData.jsonDecode(self.widgetStyle)
 	end
-	return var2372
+	return var2374
 end
 
 t_85.descriptor = {
@@ -15465,88 +15495,88 @@ end
 function t_86:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2372 = 0
+	local var2374 = 0
 	
 	if self.entry_map ~= nil and next(self.entry_map) ~= nil then
 		for i, v in self.entry_map do
-			local var2373, var2374 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var2373, var3494 = protoModule.writeString(var2373, var2374, i)
-			local var2375 = v:encode()
-			var2374, var3496 = protoModule.writeTag(var2373, var2374, 2, protoModule.wireTypes.lengthDelimited)
-			var2374, var3496 = protoModule.writeBuffer(var2374, var3496, var2375, buffer.len(var2375))
-			local var2376 = var2374
-			local var2377 = var3496
-			local var2378, var2379 = protoModule.writeTag(buff, var2372, 1, protoModule.wireTypes.lengthDelimited)
-			var2378, var3500 = protoModule.writeBuffer(var2378, var2379, var2376, var2377)
-			buff = var2378
-			var2372 = var2379
+			local var2375, var2376 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
+			var2375, var3500 = protoModule.writeString(var2375, var2376, i)
+			local var2377 = v:encode()
+			var2376, var3502 = protoModule.writeTag(var2375, var2376, 2, protoModule.wireTypes.lengthDelimited)
+			var2376, var3502 = protoModule.writeBuffer(var2376, var3502, var2377, buffer.len(var2377))
+			local var2378 = var2376
+			local var2379 = var3502
+			local var2380, var2381 = protoModule.writeTag(buff, var2374, 1, protoModule.wireTypes.lengthDelimited)
+			var2380, var3506 = protoModule.writeBuffer(var2380, var2381, var2378, var2379)
+			buff = var2380
+			var2374 = var2381
 		end
 	end
 	if self.entry_order ~= nil and #self.entry_order > 0 then
 		for i, v in self.entry_order do
-			local var2380, var2381 = protoModule.writeTag(buff, var2372, 2, protoModule.wireTypes.lengthDelimited)
-			var2380, var3502 = protoModule.writeString(var2380, var2381, v)
-			buff = var2380
-			var2372 = var2381
+			local var2382, var2383 = protoModule.writeTag(buff, var2374, 2, protoModule.wireTypes.lengthDelimited)
+			var2382, var3508 = protoModule.writeString(var2382, var2383, v)
+			buff = var2382
+			var2374 = var2383
 		end
 	end
-	local buff_1 = buffer.create(var2372)
-	buffer.copy(buff_1, 0, buff, 0, var2372)
+	local buff_1 = buffer.create(var2374)
+	buffer.copy(buff_1, 0, buff, 0, var2374)
 	
 	return buff_1
 end
 
 function t_86.decode(p86)
 	-- upvalues: t_86 (ref), protoModule (ref), t (ref)
-	local var2382 = t_86.new()
-	local var2383 = 0
-	while var2383 < buffer.len(p86) do
+	local var2384 = t_86.new()
+	local var2385 = 0
+	while var2385 < buffer.len(p86) do
 		local _ = nil
-		local var2384 = nil
-		local var2385, var2386, var2387 = protoModule.readTag(p86, var2383)
-		local var2388 = var2385
-		var2384 = var2386
-		var2383 = var2387
+		local var2386 = nil
+		local var2387, var2388, var2389 = protoModule.readTag(p86, var2385)
+		local var2390 = var2387
+		var2386 = var2388
+		var2385 = var2389
 		
-		if var2384 == protoModule.wireTypes.varint then
+		if var2386 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2389, var2390 = protoModule.readVarInt(p86, var2383)
-			local _ = var2389
-			var2383 = var2390
+			local var2391, var2392 = protoModule.readVarInt(p86, var2385)
+			local _ = var2391
+			var2385 = var2392
 			continue
 		end
-		if var2384 == protoModule.wireTypes.lengthDelimited then
-			if var2388 == 1 then
+		if var2386 == protoModule.wireTypes.lengthDelimited then
+			if var2390 == 1 then
 				local _ = nil
-				local var2391, var2392 = protoModule.readBuffer(p86, var2383)
-				var2383 = var2392
-				var2391 = t.UAMarketplaceCatalogFeedInputData_EntryMapEntry.decode(var2391)
-				var2382.entry_map[var2391.key or ""] = var2391.value or t.FeedEntry.new()
-			elseif var2388 == 2 then
+				local var2393, var2394 = protoModule.readBuffer(p86, var2385)
+				var2385 = var2394
+				var2393 = t.UAMarketplaceCatalogFeedInputData_EntryMapEntry.decode(var2393)
+				var2384.entry_map[var2393.key or ""] = var2393.value or t.FeedEntry.new()
+			elseif var2390 == 2 then
 				local _ = nil
-				local var2393, var2394 = protoModule.readBuffer(p86, var2383)
-				var2383 = var2394
-				table.insert(var2382.entry_order, buffer.tostring(var2393))
+				local var2395, var2396 = protoModule.readBuffer(p86, var2385)
+				var2385 = var2396
+				table.insert(var2384.entry_order, buffer.tostring(var2395))
 			else
 				local _ = nil
-				local var2395, var2396 = protoModule.readVarInt(p86, var2383)
-				var2383 = var2396 + var2395
+				local var2397, var2398 = protoModule.readVarInt(p86, var2385)
+				var2385 = var2398 + var2397
 			end
-		elseif var2384 == protoModule.wireTypes.i32 then
+		elseif var2386 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2397, var2398 = protoModule.readFixed32(p86, var2383)
-			local _ = var2397
-			var2383 = var2398
-		elseif var2384 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2399, var2400 = protoModule.readFixed64(p86, var2383)
+			local var2399, var2400 = protoModule.readFixed32(p86, var2385)
 			local _ = var2399
-			var2383 = var2400
+			var2385 = var2400
+		elseif var2386 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2401, var2402 = protoModule.readFixed64(p86, var2385)
+			local _ = var2401
+			var2385 = var2402
 		else
-			error("Unsupported wire type: " .. var3506)
+			error("Unsupported wire type: " .. var3512)
 		end
 	end
-	return var2382
+	return var2384
 end
 
 function t_86:jsonEncode()
@@ -15573,7 +15603,7 @@ end
 
 function t_86:jsonDecode()
 	-- upvalues: t_86 (ref), t (ref)
-	local var2401 = t_86.new()
+	local var2403 = t_86.new()
 	
 	if self.entry_map ~= nil then
 		local t_1 = {}
@@ -15581,7 +15611,7 @@ function t_86:jsonDecode()
 		for i, v in self.entry_map do
 			t_1[i] = t.FeedEntry.jsonDecode(v)
 		end
-		var2401.entry_map = t_1
+		var2403.entry_map = t_1
 	end
 	if self.entryMap ~= nil then
 		local t_1 = {}
@@ -15589,7 +15619,7 @@ function t_86:jsonDecode()
 		for i, v in self.entryMap do
 			t_1[i] = t.FeedEntry.jsonDecode(v)
 		end
-		var2401.entry_map = t_1
+		var2403.entry_map = t_1
 	end
 	if self.entry_order ~= nil then
 		local t_1 = {}
@@ -15597,7 +15627,7 @@ function t_86:jsonDecode()
 		for i, v in self.entry_order do
 			table.insert(t_1, v)
 		end
-		var2401.entry_order = t_1
+		var2403.entry_order = t_1
 	end
 	if self.entryOrder ~= nil then
 		local t_1 = {}
@@ -15605,9 +15635,9 @@ function t_86:jsonDecode()
 		for i, v in self.entryOrder do
 			table.insert(t_1, v)
 		end
-		var2401.entry_order = t_1
+		var2403.entry_order = t_1
 	end
-	return var2401
+	return var2403
 end
 
 t_86.descriptor = {
@@ -15630,77 +15660,77 @@ end
 function t_87:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2402 = 0
+	local var2404 = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var2403, var2404 = protoModule.writeTag(buff, var2402, 1, protoModule.wireTypes.lengthDelimited)
-		var2403, var3534 = protoModule.writeString(var2403, var2404, self.key)
-		buff = var2403
-		var2402 = var2404
+		local var2405, var2406 = protoModule.writeTag(buff, var2404, 1, protoModule.wireTypes.lengthDelimited)
+		var2405, var3540 = protoModule.writeString(var2405, var2406, self.key)
+		buff = var2405
+		var2404 = var2406
 	end
 	if self.value ~= nil then
-		local var2405 = self.value:encode()
-		local var2406, var2407 = protoModule.writeTag(buff, var2402, 2, protoModule.wireTypes.lengthDelimited)
-		var2406, var3537 = protoModule.writeBuffer(var2406, var2407, var2405, buffer.len(var2405))
-		buff = var2406
-		var2402 = var2407
+		local var2407 = self.value:encode()
+		local var2408, var2409 = protoModule.writeTag(buff, var2404, 2, protoModule.wireTypes.lengthDelimited)
+		var2408, var3543 = protoModule.writeBuffer(var2408, var2409, var2407, buffer.len(var2407))
+		buff = var2408
+		var2404 = var2409
 	end
-	local buff_1 = buffer.create(var2402)
-	buffer.copy(buff_1, 0, buff, 0, var2402)
+	local buff_1 = buffer.create(var2404)
+	buffer.copy(buff_1, 0, buff, 0, var2404)
 	
 	return buff_1
 end
 
 function t_87.decode(p87)
 	-- upvalues: t_87 (ref), protoModule (ref), t (ref)
-	local var2402 = t_87.new()
-	local var2403 = 0
-	while var2403 < buffer.len(p87) do
+	local var2404 = t_87.new()
+	local var2405 = 0
+	while var2405 < buffer.len(p87) do
 		local _ = nil
-		local var2404 = nil
-		local var2405, var2406, var2407 = protoModule.readTag(p87, var2403)
-		local var2408 = var2405
-		var2404 = var2406
-		var2403 = var2407
+		local var2406 = nil
+		local var2407, var2408, var2409 = protoModule.readTag(p87, var2405)
+		local var2410 = var2407
+		var2406 = var2408
+		var2405 = var2409
 		
-		if var2404 == protoModule.wireTypes.varint then
+		if var2406 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2409, var2410 = protoModule.readVarInt(p87, var2403)
-			local _ = var2409
-			var2403 = var2410
+			local var2411, var2412 = protoModule.readVarInt(p87, var2405)
+			local _ = var2411
+			var2405 = var2412
 			continue
 		end
-		if var2404 == protoModule.wireTypes.lengthDelimited then
-			if var2408 == 1 then
+		if var2406 == protoModule.wireTypes.lengthDelimited then
+			if var2410 == 1 then
 				local _ = nil
-				local var2411, var2412 = protoModule.readBuffer(p87, var2403)
-				var2403 = var2412
-				var2402.key = buffer.tostring(var2411)
-			elseif var2408 == 2 then
+				local var2413, var2414 = protoModule.readBuffer(p87, var2405)
+				var2405 = var2414
+				var2404.key = buffer.tostring(var2413)
+			elseif var2410 == 2 then
 				local _ = nil
-				local var2413, var2414 = protoModule.readBuffer(p87, var2403)
-				var2403 = var2414
-				var2402.value = t.FeedEntry.decode(var2413)
+				local var2415, var2416 = protoModule.readBuffer(p87, var2405)
+				var2405 = var2416
+				var2404.value = t.FeedEntry.decode(var2415)
 			else
 				local _ = nil
-				local var2415, var2416 = protoModule.readVarInt(p87, var2403)
-				var2403 = var2416 + var2415
+				local var2417, var2418 = protoModule.readVarInt(p87, var2405)
+				var2405 = var2418 + var2417
 			end
-		elseif var2404 == protoModule.wireTypes.i32 then
+		elseif var2406 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2417, var2418 = protoModule.readFixed32(p87, var2403)
-			local _ = var2417
-			var2403 = var2418
-		elseif var2404 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2419, var2420 = protoModule.readFixed64(p87, var2403)
+			local var2419, var2420 = protoModule.readFixed32(p87, var2405)
 			local _ = var2419
-			var2403 = var2420
+			var2405 = var2420
+		elseif var2406 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2421, var2422 = protoModule.readFixed64(p87, var2405)
+			local _ = var2421
+			var2405 = var2422
 		else
-			error("Unsupported wire type: " .. var3541)
+			error("Unsupported wire type: " .. var3547)
 		end
 	end
-	return var2402
+	return var2404
 end
 
 function t_87:jsonEncode()
@@ -15717,15 +15747,15 @@ end
 
 function t_87:jsonDecode()
 	-- upvalues: t_87 (ref), t (ref)
-	local var2421 = t_87.new()
+	local var2423 = t_87.new()
 	
 	if self.key ~= nil then
-		var2421.key = self.key
+		var2423.key = self.key
 	end
 	if self.value ~= nil then
-		var2421.value = t.FeedEntry.jsonDecode(self.value)
+		var2423.value = t.FeedEntry.jsonDecode(self.value)
 	end
-	return var2421
+	return var2423
 end
 
 t_87.descriptor = {
@@ -15749,91 +15779,91 @@ end
 function t_88:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2421 = 0
+	local var2423 = 0
 	
 	if self.marketplace_catalog_category_items ~= nil and #self.marketplace_catalog_category_items > 0 then
 		for i, v in self.marketplace_catalog_category_items do
-			local var2422 = v:encode()
-			local var2423, var2424 = protoModule.writeTag(buff, var2421, 1, protoModule.wireTypes.lengthDelimited)
-			var2423, var3564 = protoModule.writeBuffer(var2423, var2424, var2422, buffer.len(var2422))
-			buff = var2423
-			var2421 = var2424
+			local var2424 = v:encode()
+			local var2425, var2426 = protoModule.writeTag(buff, var2423, 1, protoModule.wireTypes.lengthDelimited)
+			var2425, var3570 = protoModule.writeBuffer(var2425, var2426, var2424, buffer.len(var2424))
+			buff = var2425
+			var2423 = var2426
 		end
 	end
 	if self.active_category_id ~= nil and self.active_category_id ~= "" then
-		local var2425, var2426 = protoModule.writeTag(buff, var2421, 2, protoModule.wireTypes.lengthDelimited)
-		var2425, var3566 = protoModule.writeString(var2425, var2426, self.active_category_id)
-		buff = var2425
-		var2421 = var2426
+		local var2427, var2428 = protoModule.writeTag(buff, var2423, 2, protoModule.wireTypes.lengthDelimited)
+		var2427, var3572 = protoModule.writeString(var2427, var2428, self.active_category_id)
+		buff = var2427
+		var2423 = var2428
 	end
 	if self.active_tooltip_idx ~= nil and self.active_tooltip_idx ~= 0 then
-		local var2427, var2428 = protoModule.writeTag(buff, var2421, 3, protoModule.wireTypes.varint)
-		var2427, var3568 = protoModule.writeVarInt(var2427, var2428, self.active_tooltip_idx)
-		buff = var2427
-		var2421 = var2428
+		local var2429, var2430 = protoModule.writeTag(buff, var2423, 3, protoModule.wireTypes.varint)
+		var2429, var3574 = protoModule.writeVarInt(var2429, var2430, self.active_tooltip_idx)
+		buff = var2429
+		var2423 = var2430
 	end
-	local buff_1 = buffer.create(var2421)
-	buffer.copy(buff_1, 0, buff, 0, var2421)
+	local buff_1 = buffer.create(var2423)
+	buffer.copy(buff_1, 0, buff, 0, var2423)
 	
 	return buff_1
 end
 
 function t_88.decode(p88)
 	-- upvalues: t_88 (ref), protoModule (ref), t (ref)
-	local var2429 = t_88.new()
-	local var2430 = 0
-	while var2430 < buffer.len(p88) do
+	local var2431 = t_88.new()
+	local var2432 = 0
+	while var2432 < buffer.len(p88) do
 		local _ = nil
-		local var2431 = nil
-		local var2432, var2433, var2434 = protoModule.readTag(p88, var2430)
-		local var2435 = var2432
-		var2431 = var2433
-		var2430 = var2434
+		local var2433 = nil
+		local var2434, var2435, var2436 = protoModule.readTag(p88, var2432)
+		local var2437 = var2434
+		var2433 = var2435
+		var2432 = var2436
 		
-		if var2431 == protoModule.wireTypes.varint then
-			if var2435 == 3 then
+		if var2433 == protoModule.wireTypes.varint then
+			if var2437 == 3 then
 				local _ = nil
-				local var2436, var2437 = protoModule.readVarIntI64(p88, var2430)
-				var2430 = var2437
-				var2429.active_tooltip_idx = var2436
+				local var2438, var2439 = protoModule.readVarIntI64(p88, var2432)
+				var2432 = var2439
+				var2431.active_tooltip_idx = var2438
 			else
 				local _ = nil
-				local var2438, var2439 = protoModule.readVarInt(p88, var2430)
-				local _ = var2438
-				var2430 = var2439
+				local var2440, var2441 = protoModule.readVarInt(p88, var2432)
+				local _ = var2440
+				var2432 = var2441
 			end
 		end
-		if var2431 == protoModule.wireTypes.lengthDelimited then
-			if var2435 == 1 then
+		if var2433 == protoModule.wireTypes.lengthDelimited then
+			if var2437 == 1 then
 				local _ = nil
-				local var2440, var2441 = protoModule.readBuffer(p88, var2430)
-				var2430 = var2441
-				table.insert(var2429.marketplace_catalog_category_items, t.UAMarketplaceCatalogCategoryMenuInputData_MarketplaceCatalogCategoryItem.decode(var2440))
-			elseif var2435 == 2 then
+				local var2442, var2443 = protoModule.readBuffer(p88, var2432)
+				var2432 = var2443
+				table.insert(var2431.marketplace_catalog_category_items, t.UAMarketplaceCatalogCategoryMenuInputData_MarketplaceCatalogCategoryItem.decode(var2442))
+			elseif var2437 == 2 then
 				local _ = nil
-				local var2442, var2443 = protoModule.readBuffer(p88, var2430)
-				var2430 = var2443
-				var2429.active_category_id = buffer.tostring(var2442)
+				local var2444, var2445 = protoModule.readBuffer(p88, var2432)
+				var2432 = var2445
+				var2431.active_category_id = buffer.tostring(var2444)
 			else
 				local _ = nil
-				local var2444, var2445 = protoModule.readVarInt(p88, var2430)
-				var2430 = var2445 + var2444
+				local var2446, var2447 = protoModule.readVarInt(p88, var2432)
+				var2432 = var2447 + var2446
 			end
-		elseif var2431 == protoModule.wireTypes.i32 then
+		elseif var2433 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2446, var2447 = protoModule.readFixed32(p88, var2430)
-			local _ = var2446
-			var2430 = var2447
-		elseif var2431 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2448, var2449 = protoModule.readFixed64(p88, var2430)
+			local var2448, var2449 = protoModule.readFixed32(p88, var2432)
 			local _ = var2448
-			var2430 = var2449
+			var2432 = var2449
+		elseif var2433 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2450, var2451 = protoModule.readFixed64(p88, var2432)
+			local _ = var2450
+			var2432 = var2451
 		else
-			error("Unsupported wire type: " .. var3572)
+			error("Unsupported wire type: " .. var3578)
 		end
 	end
-	return var2429
+	return var2431
 end
 
 function t_88:jsonEncode()
@@ -15858,7 +15888,7 @@ end
 
 function t_88:jsonDecode()
 	-- upvalues: t_88 (ref), t (ref)
-	local var2450 = t_88.new()
+	local var2452 = t_88.new()
 	
 	if self.marketplace_catalog_category_items ~= nil then
 		local t_1 = {}
@@ -15866,7 +15896,7 @@ function t_88:jsonDecode()
 		for i, v in self.marketplace_catalog_category_items do
 			table.insert(t_1, t.UAMarketplaceCatalogCategoryMenuInputData_MarketplaceCatalogCategoryItem.jsonDecode(v))
 		end
-		var2450.marketplace_catalog_category_items = t_1
+		var2452.marketplace_catalog_category_items = t_1
 	end
 	if self.marketplaceCatalogCategoryItems ~= nil then
 		local t_1 = {}
@@ -15874,21 +15904,21 @@ function t_88:jsonDecode()
 		for i, v in self.marketplaceCatalogCategoryItems do
 			table.insert(t_1, t.UAMarketplaceCatalogCategoryMenuInputData_MarketplaceCatalogCategoryItem.jsonDecode(v))
 		end
-		var2450.marketplace_catalog_category_items = t_1
+		var2452.marketplace_catalog_category_items = t_1
 	end
 	if self.active_category_id ~= nil then
-		var2450.active_category_id = self.active_category_id
+		var2452.active_category_id = self.active_category_id
 	end
 	if self.activeCategoryId ~= nil then
-		var2450.active_category_id = self.activeCategoryId
+		var2452.active_category_id = self.activeCategoryId
 	end
 	if self.active_tooltip_idx ~= nil then
-		var2450.active_tooltip_idx = self.active_tooltip_idx
+		var2452.active_tooltip_idx = self.active_tooltip_idx
 	end
 	if self.activeTooltipIdx ~= nil then
-		var2450.active_tooltip_idx = self.activeTooltipIdx
+		var2452.active_tooltip_idx = self.activeTooltipIdx
 	end
-	return var2450
+	return var2452
 end
 
 t_88.descriptor = {
@@ -15910,65 +15940,65 @@ end
 function t_89:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2451 = 0
+	local var2453 = 0
 	
 	if self.marketplace_catalog_category_item_id ~= nil and self.marketplace_catalog_category_item_id ~= "" then
-		local var2452, var2453 = protoModule.writeTag(buff, var2451, 1, protoModule.wireTypes.lengthDelimited)
-		var2452, var3599 = protoModule.writeString(var2452, var2453, self.marketplace_catalog_category_item_id)
-		buff = var2452
-		var2451 = var2453
+		local var2454, var2455 = protoModule.writeTag(buff, var2453, 1, protoModule.wireTypes.lengthDelimited)
+		var2454, var3605 = protoModule.writeString(var2454, var2455, self.marketplace_catalog_category_item_id)
+		buff = var2454
+		var2453 = var2455
 	end
-	local buff_1 = buffer.create(var2451)
-	buffer.copy(buff_1, 0, buff, 0, var2451)
+	local buff_1 = buffer.create(var2453)
+	buffer.copy(buff_1, 0, buff, 0, var2453)
 	
 	return buff_1
 end
 
 function t_89.decode(p89)
 	-- upvalues: t_89 (ref), protoModule (ref)
-	local var2451 = t_89.new()
-	local var2452 = 0
-	while var2452 < buffer.len(p89) do
+	local var2453 = t_89.new()
+	local var2454 = 0
+	while var2454 < buffer.len(p89) do
 		local _ = nil
-		local var2453 = nil
-		local var2454, var2455, var2456 = protoModule.readTag(p89, var2452)
-		local var2457 = var2454
-		var2453 = var2455
-		var2452 = var2456
+		local var2455 = nil
+		local var2456, var2457, var2458 = protoModule.readTag(p89, var2454)
+		local var2459 = var2456
+		var2455 = var2457
+		var2454 = var2458
 		
-		if var2453 == protoModule.wireTypes.varint then
+		if var2455 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2458, var2459 = protoModule.readVarInt(p89, var2452)
-			local _ = var2458
-			var2452 = var2459
+			local var2460, var2461 = protoModule.readVarInt(p89, var2454)
+			local _ = var2460
+			var2454 = var2461
 			continue
 		end
-		if var2453 == protoModule.wireTypes.lengthDelimited then
-			if var2457 == 1 then
+		if var2455 == protoModule.wireTypes.lengthDelimited then
+			if var2459 == 1 then
 				local _ = nil
-				local var2460, var2461 = protoModule.readBuffer(p89, var2452)
-				var2452 = var2461
-				var2451.marketplace_catalog_category_item_id = buffer.tostring(var2460)
+				local var2462, var2463 = protoModule.readBuffer(p89, var2454)
+				var2454 = var2463
+				var2453.marketplace_catalog_category_item_id = buffer.tostring(var2462)
 			else
 				local _ = nil
-				local var2462, var2463 = protoModule.readVarInt(p89, var2452)
-				var2452 = var2463 + var2462
+				local var2464, var2465 = protoModule.readVarInt(p89, var2454)
+				var2454 = var2465 + var2464
 			end
-		elseif var2453 == protoModule.wireTypes.i32 then
+		elseif var2455 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2464, var2465 = protoModule.readFixed32(p89, var2452)
-			local _ = var2464
-			var2452 = var2465
-		elseif var2453 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2466, var2467 = protoModule.readFixed64(p89, var2452)
+			local var2466, var2467 = protoModule.readFixed32(p89, var2454)
 			local _ = var2466
-			var2452 = var2467
+			var2454 = var2467
+		elseif var2455 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2468, var2469 = protoModule.readFixed64(p89, var2454)
+			local _ = var2468
+			var2454 = var2469
 		else
-			error("Unsupported wire type: " .. var3603)
+			error("Unsupported wire type: " .. var3609)
 		end
 	end
-	return var2451
+	return var2453
 end
 
 function t_89:jsonEncode()
@@ -15982,15 +16012,15 @@ end
 
 function t_89:jsonDecode()
 	-- upvalues: t_89 (ref)
-	local var2468 = t_89.new()
+	local var2470 = t_89.new()
 	
 	if self.marketplace_catalog_category_item_id ~= nil then
-		var2468.marketplace_catalog_category_item_id = self.marketplace_catalog_category_item_id
+		var2470.marketplace_catalog_category_item_id = self.marketplace_catalog_category_item_id
 	end
 	if self.marketplaceCatalogCategoryItemId ~= nil then
-		var2468.marketplace_catalog_category_item_id = self.marketplaceCatalogCategoryItemId
+		var2470.marketplace_catalog_category_item_id = self.marketplaceCatalogCategoryItemId
 	end
-	return var2468
+	return var2470
 end
 
 t_89.descriptor = {
@@ -16020,153 +16050,153 @@ end
 function t_90:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2468 = 0
+	local var2470 = 0
 	
 	if self.hero_icon ~= nil then
-		local var2469, var2470 = protoModule.writeTag(buff, var2468, 1, protoModule.wireTypes.lengthDelimited)
-		var2469, var3623 = protoModule.writeString(var2469, var2470, self.hero_icon)
-		buff = var2469
-		var2468 = var2470
+		local var2471, var2472 = protoModule.writeTag(buff, var2470, 1, protoModule.wireTypes.lengthDelimited)
+		var2471, var3629 = protoModule.writeString(var2471, var2472, self.hero_icon)
+		buff = var2471
+		var2470 = var2472
 	end
 	if self.body_dismiss_button_text ~= nil and self.body_dismiss_button_text ~= "" then
-		local var2471, var2472 = protoModule.writeTag(buff, var2468, 2, protoModule.wireTypes.lengthDelimited)
-		var2471, var3625 = protoModule.writeString(var2471, var2472, self.body_dismiss_button_text)
-		buff = var2471
-		var2468 = var2472
+		local var2473, var2474 = protoModule.writeTag(buff, var2470, 2, protoModule.wireTypes.lengthDelimited)
+		var2473, var3631 = protoModule.writeString(var2473, var2474, self.body_dismiss_button_text)
+		buff = var2473
+		var2470 = var2474
 	end
 	if self.body_title ~= nil and self.body_title ~= "" then
-		local var2473, var2474 = protoModule.writeTag(buff, var2468, 3, protoModule.wireTypes.lengthDelimited)
-		var2473, var3627 = protoModule.writeString(var2473, var2474, self.body_title)
-		buff = var2473
-		var2468 = var2474
+		local var2475, var2476 = protoModule.writeTag(buff, var2470, 3, protoModule.wireTypes.lengthDelimited)
+		var2475, var3633 = protoModule.writeString(var2475, var2476, self.body_title)
+		buff = var2475
+		var2470 = var2476
 	end
 	if self.body_rich_text ~= nil and self.body_rich_text ~= "" then
-		local var2475, var2476 = protoModule.writeTag(buff, var2468, 4, protoModule.wireTypes.lengthDelimited)
-		var2475, var3629 = protoModule.writeString(var2475, var2476, self.body_rich_text)
-		buff = var2475
-		var2468 = var2476
+		local var2477, var2478 = protoModule.writeTag(buff, var2470, 4, protoModule.wireTypes.lengthDelimited)
+		var2477, var3635 = protoModule.writeString(var2477, var2478, self.body_rich_text)
+		buff = var2477
+		var2470 = var2478
 	end
 	if self.terms_link_text ~= nil then
-		local var2477, var2478 = protoModule.writeTag(buff, var2468, 5, protoModule.wireTypes.lengthDelimited)
-		var2477, var3631 = protoModule.writeString(var2477, var2478, self.terms_link_text)
-		buff = var2477
-		var2468 = var2478
+		local var2479, var2480 = protoModule.writeTag(buff, var2470, 5, protoModule.wireTypes.lengthDelimited)
+		var2479, var3637 = protoModule.writeString(var2479, var2480, self.terms_link_text)
+		buff = var2479
+		var2470 = var2480
 	end
 	if self.terms_title ~= nil then
-		local var2479, var2480 = protoModule.writeTag(buff, var2468, 6, protoModule.wireTypes.lengthDelimited)
-		var2479, var3633 = protoModule.writeString(var2479, var2480, self.terms_title)
-		buff = var2479
-		var2468 = var2480
+		local var2481, var2482 = protoModule.writeTag(buff, var2470, 6, protoModule.wireTypes.lengthDelimited)
+		var2481, var3639 = protoModule.writeString(var2481, var2482, self.terms_title)
+		buff = var2481
+		var2470 = var2482
 	end
 	if self.terms_body_rich_text ~= nil then
-		local var2481, var2482 = protoModule.writeTag(buff, var2468, 7, protoModule.wireTypes.lengthDelimited)
-		var2481, var3635 = protoModule.writeString(var2481, var2482, self.terms_body_rich_text)
-		buff = var2481
-		var2468 = var2482
+		local var2483, var2484 = protoModule.writeTag(buff, var2470, 7, protoModule.wireTypes.lengthDelimited)
+		var2483, var3641 = protoModule.writeString(var2483, var2484, self.terms_body_rich_text)
+		buff = var2483
+		var2470 = var2484
 	end
 	if self.terms_dismiss_button_text ~= nil then
-		local var2483, var2484 = protoModule.writeTag(buff, var2468, 8, protoModule.wireTypes.lengthDelimited)
-		var2483, var3637 = protoModule.writeString(var2483, var2484, self.terms_dismiss_button_text)
-		buff = var2483
-		var2468 = var2484
+		local var2485, var2486 = protoModule.writeTag(buff, var2470, 8, protoModule.wireTypes.lengthDelimited)
+		var2485, var3643 = protoModule.writeString(var2485, var2486, self.terms_dismiss_button_text)
+		buff = var2485
+		var2470 = var2486
 	end
 	if self.offer_id ~= nil and self.offer_id ~= "" then
-		local var2485, var2486 = protoModule.writeTag(buff, var2468, 9, protoModule.wireTypes.lengthDelimited)
-		var2485, var3639 = protoModule.writeString(var2485, var2486, self.offer_id)
-		buff = var2485
-		var2468 = var2486
+		local var2487, var2488 = protoModule.writeTag(buff, var2470, 9, protoModule.wireTypes.lengthDelimited)
+		var2487, var3645 = protoModule.writeString(var2487, var2488, self.offer_id)
+		buff = var2487
+		var2470 = var2488
 	end
-	local buff_1 = buffer.create(var2468)
-	buffer.copy(buff_1, 0, buff, 0, var2468)
+	local buff_1 = buffer.create(var2470)
+	buffer.copy(buff_1, 0, buff, 0, var2470)
 	
 	return buff_1
 end
 
 function t_90.decode(p90)
 	-- upvalues: t_90 (ref), protoModule (ref)
-	local var2468 = t_90.new()
-	local var2469 = 0
-	while var2469 < buffer.len(p90) do
+	local var2470 = t_90.new()
+	local var2471 = 0
+	while var2471 < buffer.len(p90) do
 		local _ = nil
-		local var2470 = nil
-		local var2471, var2472, var2473 = protoModule.readTag(p90, var2469)
-		local var2474 = var2471
-		var2470 = var2472
-		var2469 = var2473
+		local var2472 = nil
+		local var2473, var2474, var2475 = protoModule.readTag(p90, var2471)
+		local var2476 = var2473
+		var2472 = var2474
+		var2471 = var2475
 		
-		if var2470 == protoModule.wireTypes.varint then
+		if var2472 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2475, var2476 = protoModule.readVarInt(p90, var2469)
-			local _ = var2475
-			var2469 = var2476
+			local var2477, var2478 = protoModule.readVarInt(p90, var2471)
+			local _ = var2477
+			var2471 = var2478
 			continue
 		end
-		if var2470 == protoModule.wireTypes.lengthDelimited then
-			if var2474 == 1 then
+		if var2472 == protoModule.wireTypes.lengthDelimited then
+			if var2476 == 1 then
 				local _ = nil
-				local var2477, var2478 = protoModule.readBuffer(p90, var2469)
-				var2469 = var2478
-				var2468.hero_icon = buffer.tostring(var2477)
-			elseif var2474 == 2 then
+				local var2479, var2480 = protoModule.readBuffer(p90, var2471)
+				var2471 = var2480
+				var2470.hero_icon = buffer.tostring(var2479)
+			elseif var2476 == 2 then
 				local _ = nil
-				local var2479, var2480 = protoModule.readBuffer(p90, var2469)
-				var2469 = var2480
-				var2468.body_dismiss_button_text = buffer.tostring(var2479)
-			elseif var2474 == 3 then
+				local var2481, var2482 = protoModule.readBuffer(p90, var2471)
+				var2471 = var2482
+				var2470.body_dismiss_button_text = buffer.tostring(var2481)
+			elseif var2476 == 3 then
 				local _ = nil
-				local var2481, var2482 = protoModule.readBuffer(p90, var2469)
-				var2469 = var2482
-				var2468.body_title = buffer.tostring(var2481)
-			elseif var2474 == 4 then
+				local var2483, var2484 = protoModule.readBuffer(p90, var2471)
+				var2471 = var2484
+				var2470.body_title = buffer.tostring(var2483)
+			elseif var2476 == 4 then
 				local _ = nil
-				local var2483, var2484 = protoModule.readBuffer(p90, var2469)
-				var2469 = var2484
-				var2468.body_rich_text = buffer.tostring(var2483)
-			elseif var2474 == 5 then
+				local var2485, var2486 = protoModule.readBuffer(p90, var2471)
+				var2471 = var2486
+				var2470.body_rich_text = buffer.tostring(var2485)
+			elseif var2476 == 5 then
 				local _ = nil
-				local var2485, var2486 = protoModule.readBuffer(p90, var2469)
-				var2469 = var2486
-				var2468.terms_link_text = buffer.tostring(var2485)
-			elseif var2474 == 6 then
+				local var2487, var2488 = protoModule.readBuffer(p90, var2471)
+				var2471 = var2488
+				var2470.terms_link_text = buffer.tostring(var2487)
+			elseif var2476 == 6 then
 				local _ = nil
-				local var2487, var2488 = protoModule.readBuffer(p90, var2469)
-				var2469 = var2488
-				var2468.terms_title = buffer.tostring(var2487)
-			elseif var2474 == 7 then
+				local var2489, var2490 = protoModule.readBuffer(p90, var2471)
+				var2471 = var2490
+				var2470.terms_title = buffer.tostring(var2489)
+			elseif var2476 == 7 then
 				local _ = nil
-				local var2489, var2490 = protoModule.readBuffer(p90, var2469)
-				var2469 = var2490
-				var2468.terms_body_rich_text = buffer.tostring(var2489)
-			elseif var2474 == 8 then
+				local var2491, var2492 = protoModule.readBuffer(p90, var2471)
+				var2471 = var2492
+				var2470.terms_body_rich_text = buffer.tostring(var2491)
+			elseif var2476 == 8 then
 				local _ = nil
-				local var2491, var2492 = protoModule.readBuffer(p90, var2469)
-				var2469 = var2492
-				var2468.terms_dismiss_button_text = buffer.tostring(var2491)
-			elseif var2474 == 9 then
+				local var2493, var2494 = protoModule.readBuffer(p90, var2471)
+				var2471 = var2494
+				var2470.terms_dismiss_button_text = buffer.tostring(var2493)
+			elseif var2476 == 9 then
 				local _ = nil
-				local var2493, var2494 = protoModule.readBuffer(p90, var2469)
-				var2469 = var2494
-				var2468.offer_id = buffer.tostring(var2493)
+				local var2495, var2496 = protoModule.readBuffer(p90, var2471)
+				var2471 = var2496
+				var2470.offer_id = buffer.tostring(var2495)
 			else
 				local _ = nil
-				local var2495, var2496 = protoModule.readVarInt(p90, var2469)
-				var2469 = var2496 + var2495
+				local var2497, var2498 = protoModule.readVarInt(p90, var2471)
+				var2471 = var2498 + var2497
 			end
-		elseif var2470 == protoModule.wireTypes.i32 then
+		elseif var2472 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2497, var2498 = protoModule.readFixed32(p90, var2469)
-			local _ = var2497
-			var2469 = var2498
-		elseif var2470 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2499, var2500 = protoModule.readFixed64(p90, var2469)
+			local var2499, var2500 = protoModule.readFixed32(p90, var2471)
 			local _ = var2499
-			var2469 = var2500
+			var2471 = var2500
+		elseif var2472 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2501, var2502 = protoModule.readFixed64(p90, var2471)
+			local _ = var2501
+			var2471 = var2502
 		else
-			error("Unsupported wire type: " .. var3643)
+			error("Unsupported wire type: " .. var3649)
 		end
 	end
-	return var2468
+	return var2470
 end
 
 function t_90:jsonEncode()
@@ -16204,63 +16234,63 @@ end
 
 function t_90:jsonDecode()
 	-- upvalues: t_90 (ref)
-	local var2501 = t_90.new()
+	local var2503 = t_90.new()
 	
 	if self.hero_icon ~= nil then
-		var2501.hero_icon = self.hero_icon
+		var2503.hero_icon = self.hero_icon
 	end
 	if self.heroIcon ~= nil then
-		var2501.hero_icon = self.heroIcon
+		var2503.hero_icon = self.heroIcon
 	end
 	if self.body_dismiss_button_text ~= nil then
-		var2501.body_dismiss_button_text = self.body_dismiss_button_text
+		var2503.body_dismiss_button_text = self.body_dismiss_button_text
 	end
 	if self.bodyDismissButtonText ~= nil then
-		var2501.body_dismiss_button_text = self.bodyDismissButtonText
+		var2503.body_dismiss_button_text = self.bodyDismissButtonText
 	end
 	if self.body_title ~= nil then
-		var2501.body_title = self.body_title
+		var2503.body_title = self.body_title
 	end
 	if self.bodyTitle ~= nil then
-		var2501.body_title = self.bodyTitle
+		var2503.body_title = self.bodyTitle
 	end
 	if self.body_rich_text ~= nil then
-		var2501.body_rich_text = self.body_rich_text
+		var2503.body_rich_text = self.body_rich_text
 	end
 	if self.bodyRichText ~= nil then
-		var2501.body_rich_text = self.bodyRichText
+		var2503.body_rich_text = self.bodyRichText
 	end
 	if self.terms_link_text ~= nil then
-		var2501.terms_link_text = self.terms_link_text
+		var2503.terms_link_text = self.terms_link_text
 	end
 	if self.termsLinkText ~= nil then
-		var2501.terms_link_text = self.termsLinkText
+		var2503.terms_link_text = self.termsLinkText
 	end
 	if self.terms_title ~= nil then
-		var2501.terms_title = self.terms_title
+		var2503.terms_title = self.terms_title
 	end
 	if self.termsTitle ~= nil then
-		var2501.terms_title = self.termsTitle
+		var2503.terms_title = self.termsTitle
 	end
 	if self.terms_body_rich_text ~= nil then
-		var2501.terms_body_rich_text = self.terms_body_rich_text
+		var2503.terms_body_rich_text = self.terms_body_rich_text
 	end
 	if self.termsBodyRichText ~= nil then
-		var2501.terms_body_rich_text = self.termsBodyRichText
+		var2503.terms_body_rich_text = self.termsBodyRichText
 	end
 	if self.terms_dismiss_button_text ~= nil then
-		var2501.terms_dismiss_button_text = self.terms_dismiss_button_text
+		var2503.terms_dismiss_button_text = self.terms_dismiss_button_text
 	end
 	if self.termsDismissButtonText ~= nil then
-		var2501.terms_dismiss_button_text = self.termsDismissButtonText
+		var2503.terms_dismiss_button_text = self.termsDismissButtonText
 	end
 	if self.offer_id ~= nil then
-		var2501.offer_id = self.offer_id
+		var2503.offer_id = self.offer_id
 	end
 	if self.offerId ~= nil then
-		var2501.offer_id = self.offerId
+		var2503.offer_id = self.offerId
 	end
-	return var2501
+	return var2503
 end
 
 t_90.descriptor = {
@@ -16284,91 +16314,91 @@ end
 function t_91:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2501 = 0
+	local var2503 = 0
 	
 	if self.items ~= nil and #self.items > 0 then
 		for i, v in self.items do
-			local var2502 = v:encode()
-			local var2503, var2504 = protoModule.writeTag(buff, var2501, 1, protoModule.wireTypes.lengthDelimited)
-			var2503, var3680 = protoModule.writeBuffer(var2503, var2504, var2502, buffer.len(var2502))
-			buff = var2503
-			var2501 = var2504
+			local var2504 = v:encode()
+			local var2505, var2506 = protoModule.writeTag(buff, var2503, 1, protoModule.wireTypes.lengthDelimited)
+			var2505, var3686 = protoModule.writeBuffer(var2505, var2506, var2504, buffer.len(var2504))
+			buff = var2505
+			var2503 = var2506
 		end
 	end
 	if self.preview_columns ~= nil and self.preview_columns ~= 0 then
-		local var2505, var2506 = protoModule.writeTag(buff, var2501, 2, protoModule.wireTypes.varint)
-		var2505, var3682 = protoModule.writeVarInt(var2505, var2506, self.preview_columns)
-		buff = var2505
-		var2501 = var2506
+		local var2507, var2508 = protoModule.writeTag(buff, var2503, 2, protoModule.wireTypes.varint)
+		var2507, var3688 = protoModule.writeVarInt(var2507, var2508, self.preview_columns)
+		buff = var2507
+		var2503 = var2508
 	end
 	if self.impression_id ~= nil and self.impression_id ~= "" then
-		local var2507, var2508 = protoModule.writeTag(buff, var2501, 3, protoModule.wireTypes.lengthDelimited)
-		var2507, var3684 = protoModule.writeString(var2507, var2508, self.impression_id)
-		buff = var2507
-		var2501 = var2508
+		local var2509, var2510 = protoModule.writeTag(buff, var2503, 3, protoModule.wireTypes.lengthDelimited)
+		var2509, var3690 = protoModule.writeString(var2509, var2510, self.impression_id)
+		buff = var2509
+		var2503 = var2510
 	end
-	local buff_1 = buffer.create(var2501)
-	buffer.copy(buff_1, 0, buff, 0, var2501)
+	local buff_1 = buffer.create(var2503)
+	buffer.copy(buff_1, 0, buff, 0, var2503)
 	
 	return buff_1
 end
 
 function t_91.decode(p91)
 	-- upvalues: t_91 (ref), protoModule (ref), t (ref)
-	local var2509 = t_91.new()
-	local var2510 = 0
-	while var2510 < buffer.len(p91) do
+	local var2511 = t_91.new()
+	local var2512 = 0
+	while var2512 < buffer.len(p91) do
 		local _ = nil
-		local var2511 = nil
-		local var2512, var2513, var2514 = protoModule.readTag(p91, var2510)
-		local var2515 = var2512
-		var2511 = var2513
-		var2510 = var2514
+		local var2513 = nil
+		local var2514, var2515, var2516 = protoModule.readTag(p91, var2512)
+		local var2517 = var2514
+		var2513 = var2515
+		var2512 = var2516
 		
-		if var2511 == protoModule.wireTypes.varint then
-			if var2515 == 2 then
+		if var2513 == protoModule.wireTypes.varint then
+			if var2517 == 2 then
 				local _ = nil
-				local var2516, var2517 = protoModule.readVarIntI32(p91, var2510)
-				var2510 = var2517
-				var2509.preview_columns = var2516
+				local var2518, var2519 = protoModule.readVarIntI32(p91, var2512)
+				var2512 = var2519
+				var2511.preview_columns = var2518
 			else
 				local _ = nil
-				local var2518, var2519 = protoModule.readVarInt(p91, var2510)
-				local _ = var2518
-				var2510 = var2519
+				local var2520, var2521 = protoModule.readVarInt(p91, var2512)
+				local _ = var2520
+				var2512 = var2521
 			end
 		end
-		if var2511 == protoModule.wireTypes.lengthDelimited then
-			if var2515 == 1 then
+		if var2513 == protoModule.wireTypes.lengthDelimited then
+			if var2517 == 1 then
 				local _ = nil
-				local var2520, var2521 = protoModule.readBuffer(p91, var2510)
-				var2510 = var2521
-				table.insert(var2509.items, t.CatalogItemGridInputData_CatalogItem.decode(var2520))
-			elseif var2515 == 3 then
+				local var2522, var2523 = protoModule.readBuffer(p91, var2512)
+				var2512 = var2523
+				table.insert(var2511.items, t.CatalogItemGridInputData_CatalogItem.decode(var2522))
+			elseif var2517 == 3 then
 				local _ = nil
-				local var2522, var2523 = protoModule.readBuffer(p91, var2510)
-				var2510 = var2523
-				var2509.impression_id = buffer.tostring(var2522)
+				local var2524, var2525 = protoModule.readBuffer(p91, var2512)
+				var2512 = var2525
+				var2511.impression_id = buffer.tostring(var2524)
 			else
 				local _ = nil
-				local var2524, var2525 = protoModule.readVarInt(p91, var2510)
-				var2510 = var2525 + var2524
+				local var2526, var2527 = protoModule.readVarInt(p91, var2512)
+				var2512 = var2527 + var2526
 			end
-		elseif var2511 == protoModule.wireTypes.i32 then
+		elseif var2513 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2526, var2527 = protoModule.readFixed32(p91, var2510)
-			local _ = var2526
-			var2510 = var2527
-		elseif var2511 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2528, var2529 = protoModule.readFixed64(p91, var2510)
+			local var2528, var2529 = protoModule.readFixed32(p91, var2512)
 			local _ = var2528
-			var2510 = var2529
+			var2512 = var2529
+		elseif var2513 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2530, var2531 = protoModule.readFixed64(p91, var2512)
+			local _ = var2530
+			var2512 = var2531
 		else
-			error("Unsupported wire type: " .. var3688)
+			error("Unsupported wire type: " .. var3694)
 		end
 	end
-	return var2509
+	return var2511
 end
 
 function t_91:jsonEncode()
@@ -16393,7 +16423,7 @@ end
 
 function t_91:jsonDecode()
 	-- upvalues: t_91 (ref), t (ref)
-	local var2530 = t_91.new()
+	local var2532 = t_91.new()
 	
 	if self.items ~= nil then
 		local t_1 = {}
@@ -16401,21 +16431,21 @@ function t_91:jsonDecode()
 		for i, v in self.items do
 			table.insert(t_1, t.CatalogItemGridInputData_CatalogItem.jsonDecode(v))
 		end
-		var2530.items = t_1
+		var2532.items = t_1
 	end
 	if self.preview_columns ~= nil then
-		var2530.preview_columns = self.preview_columns
+		var2532.preview_columns = self.preview_columns
 	end
 	if self.previewColumns ~= nil then
-		var2530.preview_columns = self.previewColumns
+		var2532.preview_columns = self.previewColumns
 	end
 	if self.impression_id ~= nil then
-		var2530.impression_id = self.impression_id
+		var2532.impression_id = self.impression_id
 	end
 	if self.impressionId ~= nil then
-		var2530.impression_id = self.impressionId
+		var2532.impression_id = self.impressionId
 	end
-	return var2530
+	return var2532
 end
 
 t_91.descriptor = {
@@ -16438,76 +16468,76 @@ end
 function t_92:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2531 = 0
+	local var2533 = 0
 	
 	if self.id ~= nil and self.id ~= "" then
-		local var2532, var2533 = protoModule.writeTag(buff, var2531, 1, protoModule.wireTypes.lengthDelimited)
-		var2532, var3714 = protoModule.writeString(var2532, var2533, self.id)
-		buff = var2532
-		var2531 = var2533
+		local var2534, var2535 = protoModule.writeTag(buff, var2533, 1, protoModule.wireTypes.lengthDelimited)
+		var2534, var3720 = protoModule.writeString(var2534, var2535, self.id)
+		buff = var2534
+		var2533 = var2535
 	end
 	if self.type ~= nil and self.type ~= "" then
-		local var2534, var2535 = protoModule.writeTag(buff, var2531, 2, protoModule.wireTypes.lengthDelimited)
-		var2534, var3716 = protoModule.writeString(var2534, var2535, self.type)
-		buff = var2534
-		var2531 = var2535
+		local var2536, var2537 = protoModule.writeTag(buff, var2533, 2, protoModule.wireTypes.lengthDelimited)
+		var2536, var3722 = protoModule.writeString(var2536, var2537, self.type)
+		buff = var2536
+		var2533 = var2537
 	end
-	local buff_1 = buffer.create(var2531)
-	buffer.copy(buff_1, 0, buff, 0, var2531)
+	local buff_1 = buffer.create(var2533)
+	buffer.copy(buff_1, 0, buff, 0, var2533)
 	
 	return buff_1
 end
 
 function t_92.decode(p92)
 	-- upvalues: t_92 (ref), protoModule (ref)
-	local var2531 = t_92.new()
-	local var2532 = 0
-	while var2532 < buffer.len(p92) do
+	local var2533 = t_92.new()
+	local var2534 = 0
+	while var2534 < buffer.len(p92) do
 		local _ = nil
-		local var2533 = nil
-		local var2534, var2535, var2536 = protoModule.readTag(p92, var2532)
-		local var2537 = var2534
-		var2533 = var2535
-		var2532 = var2536
+		local var2535 = nil
+		local var2536, var2537, var2538 = protoModule.readTag(p92, var2534)
+		local var2539 = var2536
+		var2535 = var2537
+		var2534 = var2538
 		
-		if var2533 == protoModule.wireTypes.varint then
+		if var2535 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2538, var2539 = protoModule.readVarInt(p92, var2532)
-			local _ = var2538
-			var2532 = var2539
+			local var2540, var2541 = protoModule.readVarInt(p92, var2534)
+			local _ = var2540
+			var2534 = var2541
 			continue
 		end
-		if var2533 == protoModule.wireTypes.lengthDelimited then
-			if var2537 == 1 then
+		if var2535 == protoModule.wireTypes.lengthDelimited then
+			if var2539 == 1 then
 				local _ = nil
-				local var2540, var2541 = protoModule.readBuffer(p92, var2532)
-				var2532 = var2541
-				var2531.id = buffer.tostring(var2540)
-			elseif var2537 == 2 then
+				local var2542, var2543 = protoModule.readBuffer(p92, var2534)
+				var2534 = var2543
+				var2533.id = buffer.tostring(var2542)
+			elseif var2539 == 2 then
 				local _ = nil
-				local var2542, var2543 = protoModule.readBuffer(p92, var2532)
-				var2532 = var2543
-				var2531.type = buffer.tostring(var2542)
+				local var2544, var2545 = protoModule.readBuffer(p92, var2534)
+				var2534 = var2545
+				var2533.type = buffer.tostring(var2544)
 			else
 				local _ = nil
-				local var2544, var2545 = protoModule.readVarInt(p92, var2532)
-				var2532 = var2545 + var2544
+				local var2546, var2547 = protoModule.readVarInt(p92, var2534)
+				var2534 = var2547 + var2546
 			end
-		elseif var2533 == protoModule.wireTypes.i32 then
+		elseif var2535 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2546, var2547 = protoModule.readFixed32(p92, var2532)
-			local _ = var2546
-			var2532 = var2547
-		elseif var2533 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2548, var2549 = protoModule.readFixed64(p92, var2532)
+			local var2548, var2549 = protoModule.readFixed32(p92, var2534)
 			local _ = var2548
-			var2532 = var2549
+			var2534 = var2549
+		elseif var2535 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2550, var2551 = protoModule.readFixed64(p92, var2534)
+			local _ = var2550
+			var2534 = var2551
 		else
-			error("Unsupported wire type: " .. var3720)
+			error("Unsupported wire type: " .. var3726)
 		end
 	end
-	return var2531
+	return var2533
 end
 
 function t_92:jsonEncode()
@@ -16524,15 +16554,15 @@ end
 
 function t_92:jsonDecode()
 	-- upvalues: t_92 (ref)
-	local var2550 = t_92.new()
+	local var2552 = t_92.new()
 	
 	if self.id ~= nil then
-		var2550.id = self.id
+		var2552.id = self.id
 	end
 	if self.type ~= nil then
-		var2550.type = self.type
+		var2552.type = self.type
 	end
-	return var2550
+	return var2552
 end
 
 t_92.descriptor = {
@@ -16557,120 +16587,120 @@ end
 function t_93:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2550 = 0
+	local var2552 = 0
 	
 	if self.entry_map ~= nil and next(self.entry_map) ~= nil then
 		for i, v in self.entry_map do
-			local var2551, var2552 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var2551, var3742 = protoModule.writeString(var2551, var2552, i)
-			local var2553 = v:encode()
-			var2552, var3744 = protoModule.writeTag(var2551, var2552, 2, protoModule.wireTypes.lengthDelimited)
-			var2552, var3744 = protoModule.writeBuffer(var2552, var3744, var2553, buffer.len(var2553))
-			local var2554 = var2552
-			local var2555 = var3744
-			local var2556, var2557 = protoModule.writeTag(buff, var2550, 1, protoModule.wireTypes.lengthDelimited)
-			var2556, var3748 = protoModule.writeBuffer(var2556, var2557, var2554, var2555)
-			buff = var2556
-			var2550 = var2557
+			local var2553, var2554 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
+			var2553, var3748 = protoModule.writeString(var2553, var2554, i)
+			local var2555 = v:encode()
+			var2554, var3750 = protoModule.writeTag(var2553, var2554, 2, protoModule.wireTypes.lengthDelimited)
+			var2554, var3750 = protoModule.writeBuffer(var2554, var3750, var2555, buffer.len(var2555))
+			local var2556 = var2554
+			local var2557 = var3750
+			local var2558, var2559 = protoModule.writeTag(buff, var2552, 1, protoModule.wireTypes.lengthDelimited)
+			var2558, var3754 = protoModule.writeBuffer(var2558, var2559, var2556, var2557)
+			buff = var2558
+			var2552 = var2559
 		end
 	end
 	if self.entry_order ~= nil and #self.entry_order > 0 then
 		for i, v in self.entry_order do
-			local var2558, var2559 = protoModule.writeTag(buff, var2550, 2, protoModule.wireTypes.lengthDelimited)
-			var2558, var3750 = protoModule.writeString(var2558, var2559, v)
-			buff = var2558
-			var2550 = var2559
+			local var2560, var2561 = protoModule.writeTag(buff, var2552, 2, protoModule.wireTypes.lengthDelimited)
+			var2560, var3756 = protoModule.writeString(var2560, var2561, v)
+			buff = var2560
+			var2552 = var2561
 		end
 	end
 	if self.content_pools ~= nil and next(self.content_pools) ~= nil then
 		for i, v in self.content_pools do
-			local var2560, var2561 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var2560, var3752 = protoModule.writeString(var2560, var2561, i)
-			local var2562 = v:encode()
-			var2561, var3754 = protoModule.writeTag(var2560, var2561, 2, protoModule.wireTypes.lengthDelimited)
-			var2561, var3754 = protoModule.writeBuffer(var2561, var3754, var2562, buffer.len(var2562))
-			local var2563 = var2561
-			local var2564 = var3754
-			local var2565, var2566 = protoModule.writeTag(buff, var2550, 3, protoModule.wireTypes.lengthDelimited)
-			var2565, var3758 = protoModule.writeBuffer(var2565, var2566, var2563, var2564)
-			buff = var2565
-			var2550 = var2566
+			local var2562, var2563 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
+			var2562, var3758 = protoModule.writeString(var2562, var2563, i)
+			local var2564 = v:encode()
+			var2563, var3760 = protoModule.writeTag(var2562, var2563, 2, protoModule.wireTypes.lengthDelimited)
+			var2563, var3760 = protoModule.writeBuffer(var2563, var3760, var2564, buffer.len(var2564))
+			local var2565 = var2563
+			local var2566 = var3760
+			local var2567, var2568 = protoModule.writeTag(buff, var2552, 3, protoModule.wireTypes.lengthDelimited)
+			var2567, var3764 = protoModule.writeBuffer(var2567, var2568, var2565, var2566)
+			buff = var2567
+			var2552 = var2568
 		end
 	end
 	if self.search_session_id ~= nil and self.search_session_id ~= "" then
-		local var2567, var2568 = protoModule.writeTag(buff, var2550, 4, protoModule.wireTypes.lengthDelimited)
-		var2567, var3760 = protoModule.writeString(var2567, var2568, self.search_session_id)
-		buff = var2567
-		var2550 = var2568
+		local var2569, var2570 = protoModule.writeTag(buff, var2552, 4, protoModule.wireTypes.lengthDelimited)
+		var2569, var3766 = protoModule.writeString(var2569, var2570, self.search_session_id)
+		buff = var2569
+		var2552 = var2570
 	end
-	local buff_1 = buffer.create(var2550)
-	buffer.copy(buff_1, 0, buff, 0, var2550)
+	local buff_1 = buffer.create(var2552)
+	buffer.copy(buff_1, 0, buff, 0, var2552)
 	
 	return buff_1
 end
 
 function t_93.decode(p93)
 	-- upvalues: t_93 (ref), protoModule (ref), t (ref)
-	local var2569 = t_93.new()
-	local var2570 = 0
-	while var2570 < buffer.len(p93) do
+	local var2571 = t_93.new()
+	local var2572 = 0
+	while var2572 < buffer.len(p93) do
 		local _ = nil
-		local var2571 = nil
-		local var2572, var2573, var2574 = protoModule.readTag(p93, var2570)
-		local var2575 = var2572
-		var2571 = var2573
-		var2570 = var2574
+		local var2573 = nil
+		local var2574, var2575, var2576 = protoModule.readTag(p93, var2572)
+		local var2577 = var2574
+		var2573 = var2575
+		var2572 = var2576
 		
-		if var2571 == protoModule.wireTypes.varint then
+		if var2573 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2576, var2577 = protoModule.readVarInt(p93, var2570)
-			local _ = var2576
-			var2570 = var2577
+			local var2578, var2579 = protoModule.readVarInt(p93, var2572)
+			local _ = var2578
+			var2572 = var2579
 			continue
 		end
-		if var2571 == protoModule.wireTypes.lengthDelimited then
-			if var2575 == 1 then
+		if var2573 == protoModule.wireTypes.lengthDelimited then
+			if var2577 == 1 then
 				local _ = nil
-				local var2578, var2579 = protoModule.readBuffer(p93, var2570)
-				var2570 = var2579
-				var2578 = t.SearchResultsFeedInputData_EntryMapEntry.decode(var2578)
-				var2569.entry_map[var2578.key or ""] = var2578.value or t.FeedEntry.new()
-			elseif var2575 == 2 then
+				local var2580, var2581 = protoModule.readBuffer(p93, var2572)
+				var2572 = var2581
+				var2580 = t.SearchResultsFeedInputData_EntryMapEntry.decode(var2580)
+				var2571.entry_map[var2580.key or ""] = var2580.value or t.FeedEntry.new()
+			elseif var2577 == 2 then
 				local _ = nil
-				local var2580, var2581 = protoModule.readBuffer(p93, var2570)
-				var2570 = var2581
-				table.insert(var2569.entry_order, buffer.tostring(var2580))
-			elseif var2575 == 3 then
+				local var2582, var2583 = protoModule.readBuffer(p93, var2572)
+				var2572 = var2583
+				table.insert(var2571.entry_order, buffer.tostring(var2582))
+			elseif var2577 == 3 then
 				local _ = nil
-				local var2582, var2583 = protoModule.readBuffer(p93, var2570)
-				var2570 = var2583
-				var2582 = t.SearchResultsFeedInputData_ContentPoolsEntry.decode(var2582)
-				var2569.content_pools[var2582.key or ""] = var2582.value or t.ContentPool.new()
-			elseif var2575 == 4 then
+				local var2584, var2585 = protoModule.readBuffer(p93, var2572)
+				var2572 = var2585
+				var2584 = t.SearchResultsFeedInputData_ContentPoolsEntry.decode(var2584)
+				var2571.content_pools[var2584.key or ""] = var2584.value or t.ContentPool.new()
+			elseif var2577 == 4 then
 				local _ = nil
-				local var2584, var2585 = protoModule.readBuffer(p93, var2570)
-				var2570 = var2585
-				var2569.search_session_id = buffer.tostring(var2584)
+				local var2586, var2587 = protoModule.readBuffer(p93, var2572)
+				var2572 = var2587
+				var2571.search_session_id = buffer.tostring(var2586)
 			else
 				local _ = nil
-				local var2586, var2587 = protoModule.readVarInt(p93, var2570)
-				var2570 = var2587 + var2586
+				local var2588, var2589 = protoModule.readVarInt(p93, var2572)
+				var2572 = var2589 + var2588
 			end
-		elseif var2571 == protoModule.wireTypes.i32 then
+		elseif var2573 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2588, var2589 = protoModule.readFixed32(p93, var2570)
-			local _ = var2588
-			var2570 = var2589
-		elseif var2571 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2590, var2591 = protoModule.readFixed64(p93, var2570)
+			local var2590, var2591 = protoModule.readFixed32(p93, var2572)
 			local _ = var2590
-			var2570 = var2591
+			var2572 = var2591
+		elseif var2573 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2592, var2593 = protoModule.readFixed64(p93, var2572)
+			local _ = var2592
+			var2572 = var2593
 		else
-			error("Unsupported wire type: " .. var3764)
+			error("Unsupported wire type: " .. var3770)
 		end
 	end
-	return var2569
+	return var2571
 end
 
 function t_93:jsonEncode()
@@ -16708,7 +16738,7 @@ end
 
 function t_93:jsonDecode()
 	-- upvalues: t_93 (ref), t (ref)
-	local var2592 = t_93.new()
+	local var2594 = t_93.new()
 	
 	if self.entry_map ~= nil then
 		local t_1 = {}
@@ -16716,7 +16746,7 @@ function t_93:jsonDecode()
 		for i, v in self.entry_map do
 			t_1[i] = t.FeedEntry.jsonDecode(v)
 		end
-		var2592.entry_map = t_1
+		var2594.entry_map = t_1
 	end
 	if self.entryMap ~= nil then
 		local t_1 = {}
@@ -16724,7 +16754,7 @@ function t_93:jsonDecode()
 		for i, v in self.entryMap do
 			t_1[i] = t.FeedEntry.jsonDecode(v)
 		end
-		var2592.entry_map = t_1
+		var2594.entry_map = t_1
 	end
 	if self.entry_order ~= nil then
 		local t_1 = {}
@@ -16732,7 +16762,7 @@ function t_93:jsonDecode()
 		for i, v in self.entry_order do
 			table.insert(t_1, v)
 		end
-		var2592.entry_order = t_1
+		var2594.entry_order = t_1
 	end
 	if self.entryOrder ~= nil then
 		local t_1 = {}
@@ -16740,7 +16770,7 @@ function t_93:jsonDecode()
 		for i, v in self.entryOrder do
 			table.insert(t_1, v)
 		end
-		var2592.entry_order = t_1
+		var2594.entry_order = t_1
 	end
 	if self.content_pools ~= nil then
 		local t_1 = {}
@@ -16748,7 +16778,7 @@ function t_93:jsonDecode()
 		for i, v in self.content_pools do
 			t_1[i] = t.ContentPool.jsonDecode(v)
 		end
-		var2592.content_pools = t_1
+		var2594.content_pools = t_1
 	end
 	if self.contentPools ~= nil then
 		local t_1 = {}
@@ -16756,15 +16786,15 @@ function t_93:jsonDecode()
 		for i, v in self.contentPools do
 			t_1[i] = t.ContentPool.jsonDecode(v)
 		end
-		var2592.content_pools = t_1
+		var2594.content_pools = t_1
 	end
 	if self.search_session_id ~= nil then
-		var2592.search_session_id = self.search_session_id
+		var2594.search_session_id = self.search_session_id
 	end
 	if self.searchSessionId ~= nil then
-		var2592.search_session_id = self.searchSessionId
+		var2594.search_session_id = self.searchSessionId
 	end
-	return var2592
+	return var2594
 end
 
 t_93.descriptor = {
@@ -16787,77 +16817,77 @@ end
 function t_94:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2593 = 0
+	local var2595 = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var2594, var2595 = protoModule.writeTag(buff, var2593, 1, protoModule.wireTypes.lengthDelimited)
-		var2594, var3799 = protoModule.writeString(var2594, var2595, self.key)
-		buff = var2594
-		var2593 = var2595
+		local var2596, var2597 = protoModule.writeTag(buff, var2595, 1, protoModule.wireTypes.lengthDelimited)
+		var2596, var3805 = protoModule.writeString(var2596, var2597, self.key)
+		buff = var2596
+		var2595 = var2597
 	end
 	if self.value ~= nil then
-		local var2596 = self.value:encode()
-		local var2597, var2598 = protoModule.writeTag(buff, var2593, 2, protoModule.wireTypes.lengthDelimited)
-		var2597, var3802 = protoModule.writeBuffer(var2597, var2598, var2596, buffer.len(var2596))
-		buff = var2597
-		var2593 = var2598
+		local var2598 = self.value:encode()
+		local var2599, var2600 = protoModule.writeTag(buff, var2595, 2, protoModule.wireTypes.lengthDelimited)
+		var2599, var3808 = protoModule.writeBuffer(var2599, var2600, var2598, buffer.len(var2598))
+		buff = var2599
+		var2595 = var2600
 	end
-	local buff_1 = buffer.create(var2593)
-	buffer.copy(buff_1, 0, buff, 0, var2593)
+	local buff_1 = buffer.create(var2595)
+	buffer.copy(buff_1, 0, buff, 0, var2595)
 	
 	return buff_1
 end
 
 function t_94.decode(p94)
 	-- upvalues: t_94 (ref), protoModule (ref), t (ref)
-	local var2593 = t_94.new()
-	local var2594 = 0
-	while var2594 < buffer.len(p94) do
+	local var2595 = t_94.new()
+	local var2596 = 0
+	while var2596 < buffer.len(p94) do
 		local _ = nil
-		local var2595 = nil
-		local var2596, var2597, var2598 = protoModule.readTag(p94, var2594)
-		local var2599 = var2596
-		var2595 = var2597
-		var2594 = var2598
+		local var2597 = nil
+		local var2598, var2599, var2600 = protoModule.readTag(p94, var2596)
+		local var2601 = var2598
+		var2597 = var2599
+		var2596 = var2600
 		
-		if var2595 == protoModule.wireTypes.varint then
+		if var2597 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2600, var2601 = protoModule.readVarInt(p94, var2594)
-			local _ = var2600
-			var2594 = var2601
+			local var2602, var2603 = protoModule.readVarInt(p94, var2596)
+			local _ = var2602
+			var2596 = var2603
 			continue
 		end
-		if var2595 == protoModule.wireTypes.lengthDelimited then
-			if var2599 == 1 then
+		if var2597 == protoModule.wireTypes.lengthDelimited then
+			if var2601 == 1 then
 				local _ = nil
-				local var2602, var2603 = protoModule.readBuffer(p94, var2594)
-				var2594 = var2603
-				var2593.key = buffer.tostring(var2602)
-			elseif var2599 == 2 then
+				local var2604, var2605 = protoModule.readBuffer(p94, var2596)
+				var2596 = var2605
+				var2595.key = buffer.tostring(var2604)
+			elseif var2601 == 2 then
 				local _ = nil
-				local var2604, var2605 = protoModule.readBuffer(p94, var2594)
-				var2594 = var2605
-				var2593.value = t.FeedEntry.decode(var2604)
+				local var2606, var2607 = protoModule.readBuffer(p94, var2596)
+				var2596 = var2607
+				var2595.value = t.FeedEntry.decode(var2606)
 			else
 				local _ = nil
-				local var2606, var2607 = protoModule.readVarInt(p94, var2594)
-				var2594 = var2607 + var2606
+				local var2608, var2609 = protoModule.readVarInt(p94, var2596)
+				var2596 = var2609 + var2608
 			end
-		elseif var2595 == protoModule.wireTypes.i32 then
+		elseif var2597 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2608, var2609 = protoModule.readFixed32(p94, var2594)
-			local _ = var2608
-			var2594 = var2609
-		elseif var2595 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2610, var2611 = protoModule.readFixed64(p94, var2594)
+			local var2610, var2611 = protoModule.readFixed32(p94, var2596)
 			local _ = var2610
-			var2594 = var2611
+			var2596 = var2611
+		elseif var2597 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2612, var2613 = protoModule.readFixed64(p94, var2596)
+			local _ = var2612
+			var2596 = var2613
 		else
-			error("Unsupported wire type: " .. var3806)
+			error("Unsupported wire type: " .. var3812)
 		end
 	end
-	return var2593
+	return var2595
 end
 
 function t_94:jsonEncode()
@@ -16874,15 +16904,15 @@ end
 
 function t_94:jsonDecode()
 	-- upvalues: t_94 (ref), t (ref)
-	local var2612 = t_94.new()
+	local var2614 = t_94.new()
 	
 	if self.key ~= nil then
-		var2612.key = self.key
+		var2614.key = self.key
 	end
 	if self.value ~= nil then
-		var2612.value = t.FeedEntry.jsonDecode(self.value)
+		var2614.value = t.FeedEntry.jsonDecode(self.value)
 	end
-	return var2612
+	return var2614
 end
 
 t_94.descriptor = {
@@ -16905,77 +16935,77 @@ end
 function t_95:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2612 = 0
+	local var2614 = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var2613, var2614 = protoModule.writeTag(buff, var2612, 1, protoModule.wireTypes.lengthDelimited)
-		var2613, var3828 = protoModule.writeString(var2613, var2614, self.key)
-		buff = var2613
-		var2612 = var2614
+		local var2615, var2616 = protoModule.writeTag(buff, var2614, 1, protoModule.wireTypes.lengthDelimited)
+		var2615, var3834 = protoModule.writeString(var2615, var2616, self.key)
+		buff = var2615
+		var2614 = var2616
 	end
 	if self.value ~= nil then
-		local var2615 = self.value:encode()
-		local var2616, var2617 = protoModule.writeTag(buff, var2612, 2, protoModule.wireTypes.lengthDelimited)
-		var2616, var3831 = protoModule.writeBuffer(var2616, var2617, var2615, buffer.len(var2615))
-		buff = var2616
-		var2612 = var2617
+		local var2617 = self.value:encode()
+		local var2618, var2619 = protoModule.writeTag(buff, var2614, 2, protoModule.wireTypes.lengthDelimited)
+		var2618, var3837 = protoModule.writeBuffer(var2618, var2619, var2617, buffer.len(var2617))
+		buff = var2618
+		var2614 = var2619
 	end
-	local buff_1 = buffer.create(var2612)
-	buffer.copy(buff_1, 0, buff, 0, var2612)
+	local buff_1 = buffer.create(var2614)
+	buffer.copy(buff_1, 0, buff, 0, var2614)
 	
 	return buff_1
 end
 
 function t_95.decode(p95)
 	-- upvalues: t_95 (ref), protoModule (ref), t (ref)
-	local var2612 = t_95.new()
-	local var2613 = 0
-	while var2613 < buffer.len(p95) do
+	local var2614 = t_95.new()
+	local var2615 = 0
+	while var2615 < buffer.len(p95) do
 		local _ = nil
-		local var2614 = nil
-		local var2615, var2616, var2617 = protoModule.readTag(p95, var2613)
-		local var2618 = var2615
-		var2614 = var2616
-		var2613 = var2617
+		local var2616 = nil
+		local var2617, var2618, var2619 = protoModule.readTag(p95, var2615)
+		local var2620 = var2617
+		var2616 = var2618
+		var2615 = var2619
 		
-		if var2614 == protoModule.wireTypes.varint then
+		if var2616 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2619, var2620 = protoModule.readVarInt(p95, var2613)
-			local _ = var2619
-			var2613 = var2620
+			local var2621, var2622 = protoModule.readVarInt(p95, var2615)
+			local _ = var2621
+			var2615 = var2622
 			continue
 		end
-		if var2614 == protoModule.wireTypes.lengthDelimited then
-			if var2618 == 1 then
+		if var2616 == protoModule.wireTypes.lengthDelimited then
+			if var2620 == 1 then
 				local _ = nil
-				local var2621, var2622 = protoModule.readBuffer(p95, var2613)
-				var2613 = var2622
-				var2612.key = buffer.tostring(var2621)
-			elseif var2618 == 2 then
+				local var2623, var2624 = protoModule.readBuffer(p95, var2615)
+				var2615 = var2624
+				var2614.key = buffer.tostring(var2623)
+			elseif var2620 == 2 then
 				local _ = nil
-				local var2623, var2624 = protoModule.readBuffer(p95, var2613)
-				var2613 = var2624
-				var2612.value = t.ContentPool.decode(var2623)
+				local var2625, var2626 = protoModule.readBuffer(p95, var2615)
+				var2615 = var2626
+				var2614.value = t.ContentPool.decode(var2625)
 			else
 				local _ = nil
-				local var2625, var2626 = protoModule.readVarInt(p95, var2613)
-				var2613 = var2626 + var2625
+				local var2627, var2628 = protoModule.readVarInt(p95, var2615)
+				var2615 = var2628 + var2627
 			end
-		elseif var2614 == protoModule.wireTypes.i32 then
+		elseif var2616 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2627, var2628 = protoModule.readFixed32(p95, var2613)
-			local _ = var2627
-			var2613 = var2628
-		elseif var2614 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2629, var2630 = protoModule.readFixed64(p95, var2613)
+			local var2629, var2630 = protoModule.readFixed32(p95, var2615)
 			local _ = var2629
-			var2613 = var2630
+			var2615 = var2630
+		elseif var2616 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2631, var2632 = protoModule.readFixed64(p95, var2615)
+			local _ = var2631
+			var2615 = var2632
 		else
-			error("Unsupported wire type: " .. var3835)
+			error("Unsupported wire type: " .. var3841)
 		end
 	end
-	return var2612
+	return var2614
 end
 
 function t_95:jsonEncode()
@@ -16992,15 +17022,15 @@ end
 
 function t_95:jsonDecode()
 	-- upvalues: t_95 (ref), t (ref)
-	local var2631 = t_95.new()
+	local var2633 = t_95.new()
 	
 	if self.key ~= nil then
-		var2631.key = self.key
+		var2633.key = self.key
 	end
 	if self.value ~= nil then
-		var2631.value = t.ContentPool.jsonDecode(self.value)
+		var2633.value = t.ContentPool.jsonDecode(self.value)
 	end
-	return var2631
+	return var2633
 end
 
 t_95.descriptor = {
@@ -17023,77 +17053,77 @@ end
 function t_96:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2631 = 0
+	local var2633 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var2632, var2633 = protoModule.writeTag(buff, var2631, 1, protoModule.wireTypes.lengthDelimited)
-		var2632, var3857 = protoModule.writeString(var2632, var2633, self.universe_id)
-		buff = var2632
-		var2631 = var2633
+		local var2634, var2635 = protoModule.writeTag(buff, var2633, 1, protoModule.wireTypes.lengthDelimited)
+		var2634, var3863 = protoModule.writeString(var2634, var2635, self.universe_id)
+		buff = var2634
+		var2633 = var2635
 	end
 	if self.is_content_locked then
-		local var2634, var2635 = protoModule.writeTag(buff, var2631, 2, protoModule.wireTypes.varint)
-		var2634, var3859 = protoModule.writeVarInt(var2634, var2635, if self.is_content_locked then 1 else 0)
-		buff = var2634
-		var2631 = var2635
+		local var2636, var2637 = protoModule.writeTag(buff, var2633, 2, protoModule.wireTypes.varint)
+		var2636, var3865 = protoModule.writeVarInt(var2636, var2637, if self.is_content_locked then 1 else 0)
+		buff = var2636
+		var2633 = var2637
 	end
-	local buff_1 = buffer.create(var2631)
-	buffer.copy(buff_1, 0, buff, 0, var2631)
+	local buff_1 = buffer.create(var2633)
+	buffer.copy(buff_1, 0, buff, 0, var2633)
 	
 	return buff_1
 end
 
 function t_96.decode(p96)
 	-- upvalues: t_96 (ref), protoModule (ref)
-	local var2631 = t_96.new()
-	local var2632 = 0
-	while var2632 < buffer.len(p96) do
+	local var2633 = t_96.new()
+	local var2634 = 0
+	while var2634 < buffer.len(p96) do
 		local _ = nil
-		local var2633 = nil
-		local var2634, var2635, var2636 = protoModule.readTag(p96, var2632)
-		local var2637 = var2634
-		var2633 = var2635
-		var2632 = var2636
+		local var2635 = nil
+		local var2636, var2637, var2638 = protoModule.readTag(p96, var2634)
+		local var2639 = var2636
+		var2635 = var2637
+		var2634 = var2638
 		
-		if var2633 == protoModule.wireTypes.varint then
-			if var2637 == 2 then
+		if var2635 == protoModule.wireTypes.varint then
+			if var2639 == 2 then
 				local _ = nil
-				local var2638, var2639 = protoModule.readVarInt(p96, var2632)
-				var2632 = var2639
-				var2631.is_content_locked = var2638 ~= 0
+				local var2640, var2641 = protoModule.readVarInt(p96, var2634)
+				var2634 = var2641
+				var2633.is_content_locked = var2640 ~= 0
 			else
 				local _ = nil
-				local var2640, var2641 = protoModule.readVarInt(p96, var2632)
-				local _ = var2640
-				var2632 = var2641
+				local var2642, var2643 = protoModule.readVarInt(p96, var2634)
+				local _ = var2642
+				var2634 = var2643
 			end
 		end
-		if var2633 == protoModule.wireTypes.lengthDelimited then
-			if var2637 == 1 then
+		if var2635 == protoModule.wireTypes.lengthDelimited then
+			if var2639 == 1 then
 				local _ = nil
-				local var2642, var2643 = protoModule.readBuffer(p96, var2632)
-				var2632 = var2643
-				var2631.universe_id = buffer.tostring(var2642)
+				local var2644, var2645 = protoModule.readBuffer(p96, var2634)
+				var2634 = var2645
+				var2633.universe_id = buffer.tostring(var2644)
 			else
 				local _ = nil
-				local var2644, var2645 = protoModule.readVarInt(p96, var2632)
-				var2632 = var2645 + var2644
+				local var2646, var2647 = protoModule.readVarInt(p96, var2634)
+				var2634 = var2647 + var2646
 			end
-		elseif var2633 == protoModule.wireTypes.i32 then
+		elseif var2635 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2646, var2647 = protoModule.readFixed32(p96, var2632)
-			local _ = var2646
-			var2632 = var2647
-		elseif var2633 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2648, var2649 = protoModule.readFixed64(p96, var2632)
+			local var2648, var2649 = protoModule.readFixed32(p96, var2634)
 			local _ = var2648
-			var2632 = var2649
+			var2634 = var2649
+		elseif var2635 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2650, var2651 = protoModule.readFixed64(p96, var2634)
+			local _ = var2650
+			var2634 = var2651
 		else
-			error("Unsupported wire type: " .. var3863)
+			error("Unsupported wire type: " .. var3869)
 		end
 	end
-	return var2631
+	return var2633
 end
 
 function t_96:jsonEncode()
@@ -17110,21 +17140,21 @@ end
 
 function t_96:jsonDecode()
 	-- upvalues: t_96 (ref)
-	local var2650 = t_96.new()
+	local var2652 = t_96.new()
 	
 	if self.universe_id ~= nil then
-		var2650.universe_id = self.universe_id
+		var2652.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var2650.universe_id = self.universeId
+		var2652.universe_id = self.universeId
 	end
 	if self.is_content_locked ~= nil then
-		var2650.is_content_locked = self.is_content_locked
+		var2652.is_content_locked = self.is_content_locked
 	end
 	if self.isContentLocked ~= nil then
-		var2650.is_content_locked = self.isContentLocked
+		var2652.is_content_locked = self.isContentLocked
 	end
-	return var2650
+	return var2652
 end
 
 t_96.descriptor = {
@@ -17152,135 +17182,135 @@ end
 function t_97:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2650 = 0
+	local var2652 = 0
 	
 	if self.overview_rich_text ~= nil and self.overview_rich_text ~= "" then
-		local var2651, var2652 = protoModule.writeTag(buff, var2650, 1, protoModule.wireTypes.lengthDelimited)
-		var2651, var3885 = protoModule.writeString(var2651, var2652, self.overview_rich_text)
-		buff = var2651
-		var2650 = var2652
+		local var2653, var2654 = protoModule.writeTag(buff, var2652, 1, protoModule.wireTypes.lengthDelimited)
+		var2653, var3891 = protoModule.writeString(var2653, var2654, self.overview_rich_text)
+		buff = var2653
+		var2652 = var2654
 	end
 	if self.result_entry ~= nil then
-		local var2653 = self.result_entry:encode()
-		local var2654, var2655 = protoModule.writeTag(buff, var2650, 2, protoModule.wireTypes.lengthDelimited)
-		var2654, var3888 = protoModule.writeBuffer(var2654, var2655, var2653, buffer.len(var2653))
-		buff = var2654
-		var2650 = var2655
+		local var2655 = self.result_entry:encode()
+		local var2656, var2657 = protoModule.writeTag(buff, var2652, 2, protoModule.wireTypes.lengthDelimited)
+		var2656, var3894 = protoModule.writeBuffer(var2656, var2657, var2655, buffer.len(var2655))
+		buff = var2656
+		var2652 = var2657
 	end
 	if self.follow_up_queries ~= nil and #self.follow_up_queries > 0 then
 		for i, v in self.follow_up_queries do
-			local var2656, var2657 = protoModule.writeTag(buff, var2650, 3, protoModule.wireTypes.lengthDelimited)
-			var2656, var3890 = protoModule.writeString(var2656, var2657, v)
-			buff = var2656
-			var2650 = var2657
+			local var2658, var2659 = protoModule.writeTag(buff, var2652, 3, protoModule.wireTypes.lengthDelimited)
+			var2658, var3896 = protoModule.writeString(var2658, var2659, v)
+			buff = var2658
+			var2652 = var2659
 		end
 	end
 	if self.show_loading then
-		local var2658, var2659 = protoModule.writeTag(buff, var2650, 4, protoModule.wireTypes.varint)
-		var2658, var3892 = protoModule.writeVarInt(var2658, var2659, if self.show_loading then 1 else 0)
-		buff = var2658
-		var2650 = var2659
+		local var2660, var2661 = protoModule.writeTag(buff, var2652, 4, protoModule.wireTypes.varint)
+		var2660, var3898 = protoModule.writeVarInt(var2660, var2661, if self.show_loading then 1 else 0)
+		buff = var2660
+		var2652 = var2661
 	end
 	if self.title ~= nil and self.title ~= "" then
-		local var2660, var2661 = protoModule.writeTag(buff, var2650, 5, protoModule.wireTypes.lengthDelimited)
-		var2660, var3894 = protoModule.writeString(var2660, var2661, self.title)
-		buff = var2660
-		var2650 = var2661
+		local var2662, var2663 = protoModule.writeTag(buff, var2652, 5, protoModule.wireTypes.lengthDelimited)
+		var2662, var3900 = protoModule.writeString(var2662, var2663, self.title)
+		buff = var2662
+		var2652 = var2663
 	end
 	if self.search_query ~= nil and self.search_query ~= "" then
-		local var2662, var2663 = protoModule.writeTag(buff, var2650, 6, protoModule.wireTypes.lengthDelimited)
-		var2662, var3896 = protoModule.writeString(var2662, var2663, self.search_query)
-		buff = var2662
-		var2650 = var2663
+		local var2664, var2665 = protoModule.writeTag(buff, var2652, 6, protoModule.wireTypes.lengthDelimited)
+		var2664, var3902 = protoModule.writeString(var2664, var2665, self.search_query)
+		buff = var2664
+		var2652 = var2665
 	end
 	if self.universe_ids ~= nil and self.universe_ids ~= "" then
-		local var2664, var2665 = protoModule.writeTag(buff, var2650, 8, protoModule.wireTypes.lengthDelimited)
-		var2664, var3898 = protoModule.writeString(var2664, var2665, self.universe_ids)
-		buff = var2664
-		var2650 = var2665
+		local var2666, var2667 = protoModule.writeTag(buff, var2652, 8, protoModule.wireTypes.lengthDelimited)
+		var2666, var3904 = protoModule.writeString(var2666, var2667, self.universe_ids)
+		buff = var2666
+		var2652 = var2667
 	end
-	local buff_1 = buffer.create(var2650)
-	buffer.copy(buff_1, 0, buff, 0, var2650)
+	local buff_1 = buffer.create(var2652)
+	buffer.copy(buff_1, 0, buff, 0, var2652)
 	
 	return buff_1
 end
 
 function t_97.decode(p97)
 	-- upvalues: t_97 (ref), protoModule (ref), t (ref)
-	local var2666 = t_97.new()
-	local var2667 = 0
-	while var2667 < buffer.len(p97) do
+	local var2668 = t_97.new()
+	local var2669 = 0
+	while var2669 < buffer.len(p97) do
 		local _ = nil
-		local var2668 = nil
-		local var2669, var2670, var2671 = protoModule.readTag(p97, var2667)
-		local var2672 = var2669
-		var2668 = var2670
-		var2667 = var2671
+		local var2670 = nil
+		local var2671, var2672, var2673 = protoModule.readTag(p97, var2669)
+		local var2674 = var2671
+		var2670 = var2672
+		var2669 = var2673
 		
-		if var2668 == protoModule.wireTypes.varint then
-			if var2672 == 4 then
+		if var2670 == protoModule.wireTypes.varint then
+			if var2674 == 4 then
 				local _ = nil
-				local var2673, var2674 = protoModule.readVarInt(p97, var2667)
-				var2667 = var2674
-				var2666.show_loading = var2673 ~= 0
+				local var2675, var2676 = protoModule.readVarInt(p97, var2669)
+				var2669 = var2676
+				var2668.show_loading = var2675 ~= 0
 			else
 				local _ = nil
-				local var2675, var2676 = protoModule.readVarInt(p97, var2667)
-				local _ = var2675
-				var2667 = var2676
+				local var2677, var2678 = protoModule.readVarInt(p97, var2669)
+				local _ = var2677
+				var2669 = var2678
 			end
 		end
-		if var2668 == protoModule.wireTypes.lengthDelimited then
-			if var2672 == 1 then
+		if var2670 == protoModule.wireTypes.lengthDelimited then
+			if var2674 == 1 then
 				local _ = nil
-				local var2677, var2678 = protoModule.readBuffer(p97, var2667)
-				var2667 = var2678
-				var2666.overview_rich_text = buffer.tostring(var2677)
-			elseif var2672 == 2 then
+				local var2679, var2680 = protoModule.readBuffer(p97, var2669)
+				var2669 = var2680
+				var2668.overview_rich_text = buffer.tostring(var2679)
+			elseif var2674 == 2 then
 				local _ = nil
-				local var2679, var2680 = protoModule.readBuffer(p97, var2667)
-				var2667 = var2680
-				var2666.result_entry = t.FeedEntry.decode(var2679)
-			elseif var2672 == 3 then
+				local var2681, var2682 = protoModule.readBuffer(p97, var2669)
+				var2669 = var2682
+				var2668.result_entry = t.FeedEntry.decode(var2681)
+			elseif var2674 == 3 then
 				local _ = nil
-				local var2681, var2682 = protoModule.readBuffer(p97, var2667)
-				var2667 = var2682
-				table.insert(var2666.follow_up_queries, buffer.tostring(var2681))
-			elseif var2672 == 5 then
+				local var2683, var2684 = protoModule.readBuffer(p97, var2669)
+				var2669 = var2684
+				table.insert(var2668.follow_up_queries, buffer.tostring(var2683))
+			elseif var2674 == 5 then
 				local _ = nil
-				local var2683, var2684 = protoModule.readBuffer(p97, var2667)
-				var2667 = var2684
-				var2666.title = buffer.tostring(var2683)
-			elseif var2672 == 6 then
+				local var2685, var2686 = protoModule.readBuffer(p97, var2669)
+				var2669 = var2686
+				var2668.title = buffer.tostring(var2685)
+			elseif var2674 == 6 then
 				local _ = nil
-				local var2685, var2686 = protoModule.readBuffer(p97, var2667)
-				var2667 = var2686
-				var2666.search_query = buffer.tostring(var2685)
-			elseif var2672 == 8 then
+				local var2687, var2688 = protoModule.readBuffer(p97, var2669)
+				var2669 = var2688
+				var2668.search_query = buffer.tostring(var2687)
+			elseif var2674 == 8 then
 				local _ = nil
-				local var2687, var2688 = protoModule.readBuffer(p97, var2667)
-				var2667 = var2688
-				var2666.universe_ids = buffer.tostring(var2687)
+				local var2689, var2690 = protoModule.readBuffer(p97, var2669)
+				var2669 = var2690
+				var2668.universe_ids = buffer.tostring(var2689)
 			else
 				local _ = nil
-				local var2689, var2690 = protoModule.readVarInt(p97, var2667)
-				var2667 = var2690 + var2689
+				local var2691, var2692 = protoModule.readVarInt(p97, var2669)
+				var2669 = var2692 + var2691
 			end
-		elseif var2668 == protoModule.wireTypes.i32 then
+		elseif var2670 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2691, var2692 = protoModule.readFixed32(p97, var2667)
-			local _ = var2691
-			var2667 = var2692
-		elseif var2668 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2693, var2694 = protoModule.readFixed64(p97, var2667)
+			local var2693, var2694 = protoModule.readFixed32(p97, var2669)
 			local _ = var2693
-			var2667 = var2694
+			var2669 = var2694
+		elseif var2670 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2695, var2696 = protoModule.readFixed64(p97, var2669)
+			local _ = var2695
+			var2669 = var2696
 		else
-			error("Unsupported wire type: " .. var3902)
+			error("Unsupported wire type: " .. var3908)
 		end
 	end
-	return var2666
+	return var2668
 end
 
 function t_97:jsonEncode()
@@ -17317,19 +17347,19 @@ end
 
 function t_97:jsonDecode()
 	-- upvalues: t_97 (ref), t (ref)
-	local var2695 = t_97.new()
+	local var2697 = t_97.new()
 	
 	if self.overview_rich_text ~= nil then
-		var2695.overview_rich_text = self.overview_rich_text
+		var2697.overview_rich_text = self.overview_rich_text
 	end
 	if self.overviewRichText ~= nil then
-		var2695.overview_rich_text = self.overviewRichText
+		var2697.overview_rich_text = self.overviewRichText
 	end
 	if self.result_entry ~= nil then
-		var2695.result_entry = t.FeedEntry.jsonDecode(self.result_entry)
+		var2697.result_entry = t.FeedEntry.jsonDecode(self.result_entry)
 	end
 	if self.resultEntry ~= nil then
-		var2695.result_entry = t.FeedEntry.jsonDecode(self.resultEntry)
+		var2697.result_entry = t.FeedEntry.jsonDecode(self.resultEntry)
 	end
 	if self.follow_up_queries ~= nil then
 		local t_1 = {}
@@ -17337,7 +17367,7 @@ function t_97:jsonDecode()
 		for i, v in self.follow_up_queries do
 			table.insert(t_1, v)
 		end
-		var2695.follow_up_queries = t_1
+		var2697.follow_up_queries = t_1
 	end
 	if self.followUpQueries ~= nil then
 		local t_1 = {}
@@ -17345,30 +17375,30 @@ function t_97:jsonDecode()
 		for i, v in self.followUpQueries do
 			table.insert(t_1, v)
 		end
-		var2695.follow_up_queries = t_1
+		var2697.follow_up_queries = t_1
 	end
 	if self.show_loading ~= nil then
-		var2695.show_loading = self.show_loading
+		var2697.show_loading = self.show_loading
 	end
 	if self.showLoading ~= nil then
-		var2695.show_loading = self.showLoading
+		var2697.show_loading = self.showLoading
 	end
 	if self.title ~= nil then
-		var2695.title = self.title
+		var2697.title = self.title
 	end
 	if self.search_query ~= nil then
-		var2695.search_query = self.search_query
+		var2697.search_query = self.search_query
 	end
 	if self.searchQuery ~= nil then
-		var2695.search_query = self.searchQuery
+		var2697.search_query = self.searchQuery
 	end
 	if self.universe_ids ~= nil then
-		var2695.universe_ids = self.universe_ids
+		var2697.universe_ids = self.universe_ids
 	end
 	if self.universeIds ~= nil then
-		var2695.universe_ids = self.universeIds
+		var2697.universe_ids = self.universeIds
 	end
-	return var2695
+	return var2697
 end
 
 t_97.descriptor = {
@@ -17393,102 +17423,102 @@ end
 function t_98:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2696 = 0
+	local var2698 = 0
 	
 	if self.title ~= nil and self.title ~= "" then
-		local var2697, var2698 = protoModule.writeTag(buff, var2696, 1, protoModule.wireTypes.lengthDelimited)
-		var2697, var3937 = protoModule.writeString(var2697, var2698, self.title)
-		buff = var2697
-		var2696 = var2698
+		local var2699, var2700 = protoModule.writeTag(buff, var2698, 1, protoModule.wireTypes.lengthDelimited)
+		var2699, var3943 = protoModule.writeString(var2699, var2700, self.title)
+		buff = var2699
+		var2698 = var2700
 	end
 	if self.user_items ~= nil and #self.user_items > 0 then
 		for i, v in self.user_items do
-			local var2699 = v:encode()
-			local var2700, var2701 = protoModule.writeTag(buff, var2696, 2, protoModule.wireTypes.lengthDelimited)
-			var2700, var3940 = protoModule.writeBuffer(var2700, var2701, var2699, buffer.len(var2699))
-			buff = var2700
-			var2696 = var2701
+			local var2701 = v:encode()
+			local var2702, var2703 = protoModule.writeTag(buff, var2698, 2, protoModule.wireTypes.lengthDelimited)
+			var2702, var3946 = protoModule.writeBuffer(var2702, var2703, var2701, buffer.len(var2701))
+			buff = var2702
+			var2698 = var2703
 		end
 	end
 	if self.max_visible_rows ~= nil and self.max_visible_rows ~= 0 then
-		local var2702, var2703 = protoModule.writeTag(buff, var2696, 3, protoModule.wireTypes.varint)
-		var2702, var3942 = protoModule.writeVarInt(var2702, var2703, self.max_visible_rows)
-		buff = var2702
-		var2696 = var2703
+		local var2704, var2705 = protoModule.writeTag(buff, var2698, 3, protoModule.wireTypes.varint)
+		var2704, var3948 = protoModule.writeVarInt(var2704, var2705, self.max_visible_rows)
+		buff = var2704
+		var2698 = var2705
 	end
 	if self.sort_id ~= nil then
-		local var2704, var2705 = protoModule.writeTag(buff, var2696, 4, protoModule.wireTypes.lengthDelimited)
-		var2704, var3944 = protoModule.writeString(var2704, var2705, self.sort_id)
-		buff = var2704
-		var2696 = var2705
+		local var2706, var2707 = protoModule.writeTag(buff, var2698, 4, protoModule.wireTypes.lengthDelimited)
+		var2706, var3950 = protoModule.writeString(var2706, var2707, self.sort_id)
+		buff = var2706
+		var2698 = var2707
 	end
-	local buff_1 = buffer.create(var2696)
-	buffer.copy(buff_1, 0, buff, 0, var2696)
+	local buff_1 = buffer.create(var2698)
+	buffer.copy(buff_1, 0, buff, 0, var2698)
 	
 	return buff_1
 end
 
 function t_98.decode(p98)
 	-- upvalues: t_98 (ref), protoModule (ref), t (ref)
-	local var2706 = t_98.new()
-	local var2707 = 0
-	while var2707 < buffer.len(p98) do
+	local var2708 = t_98.new()
+	local var2709 = 0
+	while var2709 < buffer.len(p98) do
 		local _ = nil
-		local var2708 = nil
-		local var2709, var2710, var2711 = protoModule.readTag(p98, var2707)
-		local var2712 = var2709
-		var2708 = var2710
-		var2707 = var2711
+		local var2710 = nil
+		local var2711, var2712, var2713 = protoModule.readTag(p98, var2709)
+		local var2714 = var2711
+		var2710 = var2712
+		var2709 = var2713
 		
-		if var2708 == protoModule.wireTypes.varint then
-			if var2712 == 3 then
+		if var2710 == protoModule.wireTypes.varint then
+			if var2714 == 3 then
 				local _ = nil
-				local var2713, var2714 = protoModule.readVarIntI32(p98, var2707)
-				var2707 = var2714
-				var2706.max_visible_rows = var2713
+				local var2715, var2716 = protoModule.readVarIntI32(p98, var2709)
+				var2709 = var2716
+				var2708.max_visible_rows = var2715
 			else
 				local _ = nil
-				local var2715, var2716 = protoModule.readVarInt(p98, var2707)
-				local _ = var2715
-				var2707 = var2716
+				local var2717, var2718 = protoModule.readVarInt(p98, var2709)
+				local _ = var2717
+				var2709 = var2718
 			end
 		end
-		if var2708 == protoModule.wireTypes.lengthDelimited then
-			if var2712 == 1 then
+		if var2710 == protoModule.wireTypes.lengthDelimited then
+			if var2714 == 1 then
 				local _ = nil
-				local var2717, var2718 = protoModule.readBuffer(p98, var2707)
-				var2707 = var2718
-				var2706.title = buffer.tostring(var2717)
-			elseif var2712 == 2 then
+				local var2719, var2720 = protoModule.readBuffer(p98, var2709)
+				var2709 = var2720
+				var2708.title = buffer.tostring(var2719)
+			elseif var2714 == 2 then
 				local _ = nil
-				local var2719, var2720 = protoModule.readBuffer(p98, var2707)
-				var2707 = var2720
-				table.insert(var2706.user_items, t.UserListInputData_UserItem.decode(var2719))
-			elseif var2712 == 4 then
+				local var2721, var2722 = protoModule.readBuffer(p98, var2709)
+				var2709 = var2722
+				table.insert(var2708.user_items, t.UserListInputData_UserItem.decode(var2721))
+			elseif var2714 == 4 then
 				local _ = nil
-				local var2721, var2722 = protoModule.readBuffer(p98, var2707)
-				var2707 = var2722
-				var2706.sort_id = buffer.tostring(var2721)
+				local var2723, var2724 = protoModule.readBuffer(p98, var2709)
+				var2709 = var2724
+				var2708.sort_id = buffer.tostring(var2723)
 			else
 				local _ = nil
-				local var2723, var2724 = protoModule.readVarInt(p98, var2707)
-				var2707 = var2724 + var2723
+				local var2725, var2726 = protoModule.readVarInt(p98, var2709)
+				var2709 = var2726 + var2725
 			end
-		elseif var2708 == protoModule.wireTypes.i32 then
+		elseif var2710 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2725, var2726 = protoModule.readFixed32(p98, var2707)
-			local _ = var2725
-			var2707 = var2726
-		elseif var2708 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2727, var2728 = protoModule.readFixed64(p98, var2707)
+			local var2727, var2728 = protoModule.readFixed32(p98, var2709)
 			local _ = var2727
-			var2707 = var2728
+			var2709 = var2728
+		elseif var2710 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2729, var2730 = protoModule.readFixed64(p98, var2709)
+			local _ = var2729
+			var2709 = var2730
 		else
-			error("Unsupported wire type: " .. var3948)
+			error("Unsupported wire type: " .. var3954)
 		end
 	end
-	return var2706
+	return var2708
 end
 
 function t_98:jsonEncode()
@@ -17516,10 +17546,10 @@ end
 
 function t_98:jsonDecode()
 	-- upvalues: t_98 (ref), t (ref)
-	local var2729 = t_98.new()
+	local var2731 = t_98.new()
 	
 	if self.title ~= nil then
-		var2729.title = self.title
+		var2731.title = self.title
 	end
 	if self.user_items ~= nil then
 		local t_1 = {}
@@ -17527,7 +17557,7 @@ function t_98:jsonDecode()
 		for i, v in self.user_items do
 			table.insert(t_1, t.UserListInputData_UserItem.jsonDecode(v))
 		end
-		var2729.user_items = t_1
+		var2731.user_items = t_1
 	end
 	if self.userItems ~= nil then
 		local t_1 = {}
@@ -17535,21 +17565,21 @@ function t_98:jsonDecode()
 		for i, v in self.userItems do
 			table.insert(t_1, t.UserListInputData_UserItem.jsonDecode(v))
 		end
-		var2729.user_items = t_1
+		var2731.user_items = t_1
 	end
 	if self.max_visible_rows ~= nil then
-		var2729.max_visible_rows = self.max_visible_rows
+		var2731.max_visible_rows = self.max_visible_rows
 	end
 	if self.maxVisibleRows ~= nil then
-		var2729.max_visible_rows = self.maxVisibleRows
+		var2731.max_visible_rows = self.maxVisibleRows
 	end
 	if self.sort_id ~= nil then
-		var2729.sort_id = self.sort_id
+		var2731.sort_id = self.sort_id
 	end
 	if self.sortId ~= nil then
-		var2729.sort_id = self.sortId
+		var2731.sort_id = self.sortId
 	end
-	return var2729
+	return var2731
 end
 
 t_98.descriptor = {
@@ -17571,65 +17601,65 @@ end
 function t_99:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2730 = 0
+	local var2732 = 0
 	
 	if self.user_id ~= nil and self.user_id ~= "" then
-		local var2731, var2732 = protoModule.writeTag(buff, var2730, 1, protoModule.wireTypes.lengthDelimited)
-		var2731, var3977 = protoModule.writeString(var2731, var2732, self.user_id)
-		buff = var2731
-		var2730 = var2732
+		local var2733, var2734 = protoModule.writeTag(buff, var2732, 1, protoModule.wireTypes.lengthDelimited)
+		var2733, var3983 = protoModule.writeString(var2733, var2734, self.user_id)
+		buff = var2733
+		var2732 = var2734
 	end
-	local buff_1 = buffer.create(var2730)
-	buffer.copy(buff_1, 0, buff, 0, var2730)
+	local buff_1 = buffer.create(var2732)
+	buffer.copy(buff_1, 0, buff, 0, var2732)
 	
 	return buff_1
 end
 
 function t_99.decode(p99)
 	-- upvalues: t_99 (ref), protoModule (ref)
-	local var2730 = t_99.new()
-	local var2731 = 0
-	while var2731 < buffer.len(p99) do
+	local var2732 = t_99.new()
+	local var2733 = 0
+	while var2733 < buffer.len(p99) do
 		local _ = nil
-		local var2732 = nil
-		local var2733, var2734, var2735 = protoModule.readTag(p99, var2731)
-		local var2736 = var2733
-		var2732 = var2734
-		var2731 = var2735
+		local var2734 = nil
+		local var2735, var2736, var2737 = protoModule.readTag(p99, var2733)
+		local var2738 = var2735
+		var2734 = var2736
+		var2733 = var2737
 		
-		if var2732 == protoModule.wireTypes.varint then
+		if var2734 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2737, var2738 = protoModule.readVarInt(p99, var2731)
-			local _ = var2737
-			var2731 = var2738
+			local var2739, var2740 = protoModule.readVarInt(p99, var2733)
+			local _ = var2739
+			var2733 = var2740
 			continue
 		end
-		if var2732 == protoModule.wireTypes.lengthDelimited then
-			if var2736 == 1 then
+		if var2734 == protoModule.wireTypes.lengthDelimited then
+			if var2738 == 1 then
 				local _ = nil
-				local var2739, var2740 = protoModule.readBuffer(p99, var2731)
-				var2731 = var2740
-				var2730.user_id = buffer.tostring(var2739)
+				local var2741, var2742 = protoModule.readBuffer(p99, var2733)
+				var2733 = var2742
+				var2732.user_id = buffer.tostring(var2741)
 			else
 				local _ = nil
-				local var2741, var2742 = protoModule.readVarInt(p99, var2731)
-				var2731 = var2742 + var2741
+				local var2743, var2744 = protoModule.readVarInt(p99, var2733)
+				var2733 = var2744 + var2743
 			end
-		elseif var2732 == protoModule.wireTypes.i32 then
+		elseif var2734 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2743, var2744 = protoModule.readFixed32(p99, var2731)
-			local _ = var2743
-			var2731 = var2744
-		elseif var2732 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2745, var2746 = protoModule.readFixed64(p99, var2731)
+			local var2745, var2746 = protoModule.readFixed32(p99, var2733)
 			local _ = var2745
-			var2731 = var2746
+			var2733 = var2746
+		elseif var2734 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2747, var2748 = protoModule.readFixed64(p99, var2733)
+			local _ = var2747
+			var2733 = var2748
 		else
-			error("Unsupported wire type: " .. var3981)
+			error("Unsupported wire type: " .. var3987)
 		end
 	end
-	return var2730
+	return var2732
 end
 
 function t_99:jsonEncode()
@@ -17643,15 +17673,15 @@ end
 
 function t_99:jsonDecode()
 	-- upvalues: t_99 (ref)
-	local var2747 = t_99.new()
+	local var2749 = t_99.new()
 	
 	if self.user_id ~= nil then
-		var2747.user_id = self.user_id
+		var2749.user_id = self.user_id
 	end
 	if self.userId ~= nil then
-		var2747.user_id = self.userId
+		var2749.user_id = self.userId
 	end
-	return var2747
+	return var2749
 end
 
 t_99.descriptor = {
@@ -17676,102 +17706,102 @@ end
 function t_100:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2747 = 0
+	local var2749 = 0
 	
 	if self.title ~= nil and self.title ~= "" then
-		local var2748, var2749 = protoModule.writeTag(buff, var2747, 1, protoModule.wireTypes.lengthDelimited)
-		var2748, var4001 = protoModule.writeString(var2748, var2749, self.title)
-		buff = var2748
-		var2747 = var2749
+		local var2750, var2751 = protoModule.writeTag(buff, var2749, 1, protoModule.wireTypes.lengthDelimited)
+		var2750, var4007 = protoModule.writeString(var2750, var2751, self.title)
+		buff = var2750
+		var2749 = var2751
 	end
 	if self.items ~= nil and #self.items > 0 then
 		for i, v in self.items do
-			local var2750 = v:encode()
-			local var2751, var2752 = protoModule.writeTag(buff, var2747, 2, protoModule.wireTypes.lengthDelimited)
-			var2751, var4004 = protoModule.writeBuffer(var2751, var2752, var2750, buffer.len(var2750))
-			buff = var2751
-			var2747 = var2752
+			local var2752 = v:encode()
+			local var2753, var2754 = protoModule.writeTag(buff, var2749, 2, protoModule.wireTypes.lengthDelimited)
+			var2753, var4010 = protoModule.writeBuffer(var2753, var2754, var2752, buffer.len(var2752))
+			buff = var2753
+			var2749 = var2754
 		end
 	end
 	if self.max_visible_rows ~= nil and self.max_visible_rows ~= 0 then
-		local var2753, var2754 = protoModule.writeTag(buff, var2747, 3, protoModule.wireTypes.varint)
-		var2753, var4006 = protoModule.writeVarInt(var2753, var2754, self.max_visible_rows)
-		buff = var2753
-		var2747 = var2754
+		local var2755, var2756 = protoModule.writeTag(buff, var2749, 3, protoModule.wireTypes.varint)
+		var2755, var4012 = protoModule.writeVarInt(var2755, var2756, self.max_visible_rows)
+		buff = var2755
+		var2749 = var2756
 	end
 	if self.sort_id ~= nil then
-		local var2755, var2756 = protoModule.writeTag(buff, var2747, 4, protoModule.wireTypes.lengthDelimited)
-		var2755, var4008 = protoModule.writeString(var2755, var2756, self.sort_id)
-		buff = var2755
-		var2747 = var2756
+		local var2757, var2758 = protoModule.writeTag(buff, var2749, 4, protoModule.wireTypes.lengthDelimited)
+		var2757, var4014 = protoModule.writeString(var2757, var2758, self.sort_id)
+		buff = var2757
+		var2749 = var2758
 	end
-	local buff_1 = buffer.create(var2747)
-	buffer.copy(buff_1, 0, buff, 0, var2747)
+	local buff_1 = buffer.create(var2749)
+	buffer.copy(buff_1, 0, buff, 0, var2749)
 	
 	return buff_1
 end
 
 function t_100.decode(p100)
 	-- upvalues: t_100 (ref), protoModule (ref), t (ref)
-	local var2757 = t_100.new()
-	local var2758 = 0
-	while var2758 < buffer.len(p100) do
+	local var2759 = t_100.new()
+	local var2760 = 0
+	while var2760 < buffer.len(p100) do
 		local _ = nil
-		local var2759 = nil
-		local var2760, var2761, var2762 = protoModule.readTag(p100, var2758)
-		local var2763 = var2760
-		var2759 = var2761
-		var2758 = var2762
+		local var2761 = nil
+		local var2762, var2763, var2764 = protoModule.readTag(p100, var2760)
+		local var2765 = var2762
+		var2761 = var2763
+		var2760 = var2764
 		
-		if var2759 == protoModule.wireTypes.varint then
-			if var2763 == 3 then
+		if var2761 == protoModule.wireTypes.varint then
+			if var2765 == 3 then
 				local _ = nil
-				local var2764, var2765 = protoModule.readVarIntI32(p100, var2758)
-				var2758 = var2765
-				var2757.max_visible_rows = var2764
+				local var2766, var2767 = protoModule.readVarIntI32(p100, var2760)
+				var2760 = var2767
+				var2759.max_visible_rows = var2766
 			else
 				local _ = nil
-				local var2766, var2767 = protoModule.readVarInt(p100, var2758)
-				local _ = var2766
-				var2758 = var2767
+				local var2768, var2769 = protoModule.readVarInt(p100, var2760)
+				local _ = var2768
+				var2760 = var2769
 			end
 		end
-		if var2759 == protoModule.wireTypes.lengthDelimited then
-			if var2763 == 1 then
+		if var2761 == protoModule.wireTypes.lengthDelimited then
+			if var2765 == 1 then
 				local _ = nil
-				local var2768, var2769 = protoModule.readBuffer(p100, var2758)
-				var2758 = var2769
-				var2757.title = buffer.tostring(var2768)
-			elseif var2763 == 2 then
+				local var2770, var2771 = protoModule.readBuffer(p100, var2760)
+				var2760 = var2771
+				var2759.title = buffer.tostring(var2770)
+			elseif var2765 == 2 then
 				local _ = nil
-				local var2770, var2771 = protoModule.readBuffer(p100, var2758)
-				var2758 = var2771
-				table.insert(var2757.items, t.CatalogItemListInputData_CatalogItem.decode(var2770))
-			elseif var2763 == 4 then
+				local var2772, var2773 = protoModule.readBuffer(p100, var2760)
+				var2760 = var2773
+				table.insert(var2759.items, t.CatalogItemListInputData_CatalogItem.decode(var2772))
+			elseif var2765 == 4 then
 				local _ = nil
-				local var2772, var2773 = protoModule.readBuffer(p100, var2758)
-				var2758 = var2773
-				var2757.sort_id = buffer.tostring(var2772)
+				local var2774, var2775 = protoModule.readBuffer(p100, var2760)
+				var2760 = var2775
+				var2759.sort_id = buffer.tostring(var2774)
 			else
 				local _ = nil
-				local var2774, var2775 = protoModule.readVarInt(p100, var2758)
-				var2758 = var2775 + var2774
+				local var2776, var2777 = protoModule.readVarInt(p100, var2760)
+				var2760 = var2777 + var2776
 			end
-		elseif var2759 == protoModule.wireTypes.i32 then
+		elseif var2761 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2776, var2777 = protoModule.readFixed32(p100, var2758)
-			local _ = var2776
-			var2758 = var2777
-		elseif var2759 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2778, var2779 = protoModule.readFixed64(p100, var2758)
+			local var2778, var2779 = protoModule.readFixed32(p100, var2760)
 			local _ = var2778
-			var2758 = var2779
+			var2760 = var2779
+		elseif var2761 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2780, var2781 = protoModule.readFixed64(p100, var2760)
+			local _ = var2780
+			var2760 = var2781
 		else
-			error("Unsupported wire type: " .. var4012)
+			error("Unsupported wire type: " .. var4018)
 		end
 	end
-	return var2757
+	return var2759
 end
 
 function t_100:jsonEncode()
@@ -17799,10 +17829,10 @@ end
 
 function t_100:jsonDecode()
 	-- upvalues: t_100 (ref), t (ref)
-	local var2780 = t_100.new()
+	local var2782 = t_100.new()
 	
 	if self.title ~= nil then
-		var2780.title = self.title
+		var2782.title = self.title
 	end
 	if self.items ~= nil then
 		local t_1 = {}
@@ -17810,21 +17840,21 @@ function t_100:jsonDecode()
 		for i, v in self.items do
 			table.insert(t_1, t.CatalogItemListInputData_CatalogItem.jsonDecode(v))
 		end
-		var2780.items = t_1
+		var2782.items = t_1
 	end
 	if self.max_visible_rows ~= nil then
-		var2780.max_visible_rows = self.max_visible_rows
+		var2782.max_visible_rows = self.max_visible_rows
 	end
 	if self.maxVisibleRows ~= nil then
-		var2780.max_visible_rows = self.maxVisibleRows
+		var2782.max_visible_rows = self.maxVisibleRows
 	end
 	if self.sort_id ~= nil then
-		var2780.sort_id = self.sort_id
+		var2782.sort_id = self.sort_id
 	end
 	if self.sortId ~= nil then
-		var2780.sort_id = self.sortId
+		var2782.sort_id = self.sortId
 	end
-	return var2780
+	return var2782
 end
 
 t_100.descriptor = {
@@ -17847,76 +17877,76 @@ end
 function t_101:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2781 = 0
+	local var2783 = 0
 	
 	if self.item_id ~= nil and self.item_id ~= "" then
-		local var2782, var2783 = protoModule.writeTag(buff, var2781, 1, protoModule.wireTypes.lengthDelimited)
-		var2782, var4040 = protoModule.writeString(var2782, var2783, self.item_id)
-		buff = var2782
-		var2781 = var2783
+		local var2784, var2785 = protoModule.writeTag(buff, var2783, 1, protoModule.wireTypes.lengthDelimited)
+		var2784, var4046 = protoModule.writeString(var2784, var2785, self.item_id)
+		buff = var2784
+		var2783 = var2785
 	end
 	if self.item_type ~= nil and self.item_type ~= "" then
-		local var2784, var2785 = protoModule.writeTag(buff, var2781, 2, protoModule.wireTypes.lengthDelimited)
-		var2784, var4042 = protoModule.writeString(var2784, var2785, self.item_type)
-		buff = var2784
-		var2781 = var2785
+		local var2786, var2787 = protoModule.writeTag(buff, var2783, 2, protoModule.wireTypes.lengthDelimited)
+		var2786, var4048 = protoModule.writeString(var2786, var2787, self.item_type)
+		buff = var2786
+		var2783 = var2787
 	end
-	local buff_1 = buffer.create(var2781)
-	buffer.copy(buff_1, 0, buff, 0, var2781)
+	local buff_1 = buffer.create(var2783)
+	buffer.copy(buff_1, 0, buff, 0, var2783)
 	
 	return buff_1
 end
 
 function t_101.decode(p101)
 	-- upvalues: t_101 (ref), protoModule (ref)
-	local var2781 = t_101.new()
-	local var2782 = 0
-	while var2782 < buffer.len(p101) do
+	local var2783 = t_101.new()
+	local var2784 = 0
+	while var2784 < buffer.len(p101) do
 		local _ = nil
-		local var2783 = nil
-		local var2784, var2785, var2786 = protoModule.readTag(p101, var2782)
-		local var2787 = var2784
-		var2783 = var2785
-		var2782 = var2786
+		local var2785 = nil
+		local var2786, var2787, var2788 = protoModule.readTag(p101, var2784)
+		local var2789 = var2786
+		var2785 = var2787
+		var2784 = var2788
 		
-		if var2783 == protoModule.wireTypes.varint then
+		if var2785 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2788, var2789 = protoModule.readVarInt(p101, var2782)
-			local _ = var2788
-			var2782 = var2789
+			local var2790, var2791 = protoModule.readVarInt(p101, var2784)
+			local _ = var2790
+			var2784 = var2791
 			continue
 		end
-		if var2783 == protoModule.wireTypes.lengthDelimited then
-			if var2787 == 1 then
+		if var2785 == protoModule.wireTypes.lengthDelimited then
+			if var2789 == 1 then
 				local _ = nil
-				local var2790, var2791 = protoModule.readBuffer(p101, var2782)
-				var2782 = var2791
-				var2781.item_id = buffer.tostring(var2790)
-			elseif var2787 == 2 then
+				local var2792, var2793 = protoModule.readBuffer(p101, var2784)
+				var2784 = var2793
+				var2783.item_id = buffer.tostring(var2792)
+			elseif var2789 == 2 then
 				local _ = nil
-				local var2792, var2793 = protoModule.readBuffer(p101, var2782)
-				var2782 = var2793
-				var2781.item_type = buffer.tostring(var2792)
+				local var2794, var2795 = protoModule.readBuffer(p101, var2784)
+				var2784 = var2795
+				var2783.item_type = buffer.tostring(var2794)
 			else
 				local _ = nil
-				local var2794, var2795 = protoModule.readVarInt(p101, var2782)
-				var2782 = var2795 + var2794
+				local var2796, var2797 = protoModule.readVarInt(p101, var2784)
+				var2784 = var2797 + var2796
 			end
-		elseif var2783 == protoModule.wireTypes.i32 then
+		elseif var2785 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2796, var2797 = protoModule.readFixed32(p101, var2782)
-			local _ = var2796
-			var2782 = var2797
-		elseif var2783 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2798, var2799 = protoModule.readFixed64(p101, var2782)
+			local var2798, var2799 = protoModule.readFixed32(p101, var2784)
 			local _ = var2798
-			var2782 = var2799
+			var2784 = var2799
+		elseif var2785 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2800, var2801 = protoModule.readFixed64(p101, var2784)
+			local _ = var2800
+			var2784 = var2801
 		else
-			error("Unsupported wire type: " .. var4046)
+			error("Unsupported wire type: " .. var4052)
 		end
 	end
-	return var2781
+	return var2783
 end
 
 function t_101:jsonEncode()
@@ -17933,21 +17963,21 @@ end
 
 function t_101:jsonDecode()
 	-- upvalues: t_101 (ref)
-	local var2800 = t_101.new()
+	local var2802 = t_101.new()
 	
 	if self.item_id ~= nil then
-		var2800.item_id = self.item_id
+		var2802.item_id = self.item_id
 	end
 	if self.itemId ~= nil then
-		var2800.item_id = self.itemId
+		var2802.item_id = self.itemId
 	end
 	if self.item_type ~= nil then
-		var2800.item_type = self.item_type
+		var2802.item_type = self.item_type
 	end
 	if self.itemType ~= nil then
-		var2800.item_type = self.itemType
+		var2802.item_type = self.itemType
 	end
-	return var2800
+	return var2802
 end
 
 t_101.descriptor = {
@@ -17969,65 +17999,65 @@ end
 function t_102:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2800 = 0
+	local var2802 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var2801, var2802 = protoModule.writeTag(buff, var2800, 1, protoModule.wireTypes.lengthDelimited)
-		var2801, var4068 = protoModule.writeString(var2801, var2802, self.universe_id)
-		buff = var2801
-		var2800 = var2802
+		local var2803, var2804 = protoModule.writeTag(buff, var2802, 1, protoModule.wireTypes.lengthDelimited)
+		var2803, var4074 = protoModule.writeString(var2803, var2804, self.universe_id)
+		buff = var2803
+		var2802 = var2804
 	end
-	local buff_1 = buffer.create(var2800)
-	buffer.copy(buff_1, 0, buff, 0, var2800)
+	local buff_1 = buffer.create(var2802)
+	buffer.copy(buff_1, 0, buff, 0, var2802)
 	
 	return buff_1
 end
 
 function t_102.decode(p102)
 	-- upvalues: t_102 (ref), protoModule (ref)
-	local var2800 = t_102.new()
-	local var2801 = 0
-	while var2801 < buffer.len(p102) do
+	local var2802 = t_102.new()
+	local var2803 = 0
+	while var2803 < buffer.len(p102) do
 		local _ = nil
-		local var2802 = nil
-		local var2803, var2804, var2805 = protoModule.readTag(p102, var2801)
-		local var2806 = var2803
-		var2802 = var2804
-		var2801 = var2805
+		local var2804 = nil
+		local var2805, var2806, var2807 = protoModule.readTag(p102, var2803)
+		local var2808 = var2805
+		var2804 = var2806
+		var2803 = var2807
 		
-		if var2802 == protoModule.wireTypes.varint then
+		if var2804 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2807, var2808 = protoModule.readVarInt(p102, var2801)
-			local _ = var2807
-			var2801 = var2808
+			local var2809, var2810 = protoModule.readVarInt(p102, var2803)
+			local _ = var2809
+			var2803 = var2810
 			continue
 		end
-		if var2802 == protoModule.wireTypes.lengthDelimited then
-			if var2806 == 1 then
+		if var2804 == protoModule.wireTypes.lengthDelimited then
+			if var2808 == 1 then
 				local _ = nil
-				local var2809, var2810 = protoModule.readBuffer(p102, var2801)
-				var2801 = var2810
-				var2800.universe_id = buffer.tostring(var2809)
+				local var2811, var2812 = protoModule.readBuffer(p102, var2803)
+				var2803 = var2812
+				var2802.universe_id = buffer.tostring(var2811)
 			else
 				local _ = nil
-				local var2811, var2812 = protoModule.readVarInt(p102, var2801)
-				var2801 = var2812 + var2811
+				local var2813, var2814 = protoModule.readVarInt(p102, var2803)
+				var2803 = var2814 + var2813
 			end
-		elseif var2802 == protoModule.wireTypes.i32 then
+		elseif var2804 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2813, var2814 = protoModule.readFixed32(p102, var2801)
-			local _ = var2813
-			var2801 = var2814
-		elseif var2802 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2815, var2816 = protoModule.readFixed64(p102, var2801)
+			local var2815, var2816 = protoModule.readFixed32(p102, var2803)
 			local _ = var2815
-			var2801 = var2816
+			var2803 = var2816
+		elseif var2804 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2817, var2818 = protoModule.readFixed64(p102, var2803)
+			local _ = var2817
+			var2803 = var2818
 		else
-			error("Unsupported wire type: " .. var4072)
+			error("Unsupported wire type: " .. var4078)
 		end
 	end
-	return var2800
+	return var2802
 end
 
 function t_102:jsonEncode()
@@ -18041,15 +18071,15 @@ end
 
 function t_102:jsonDecode()
 	-- upvalues: t_102 (ref)
-	local var2817 = t_102.new()
+	local var2819 = t_102.new()
 	
 	if self.universe_id ~= nil then
-		var2817.universe_id = self.universe_id
+		var2819.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var2817.universe_id = self.universeId
+		var2819.universe_id = self.universeId
 	end
-	return var2817
+	return var2819
 end
 
 t_102.descriptor = {
@@ -18073,90 +18103,90 @@ end
 function t_103:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2817 = 0
+	local var2819 = 0
 	
 	if self.title ~= nil and self.title ~= "" then
-		local var2818, var2819 = protoModule.writeTag(buff, var2817, 1, protoModule.wireTypes.lengthDelimited)
-		var2818, var4092 = protoModule.writeString(var2818, var2819, self.title)
-		buff = var2818
-		var2817 = var2819
+		local var2820, var2821 = protoModule.writeTag(buff, var2819, 1, protoModule.wireTypes.lengthDelimited)
+		var2820, var4098 = protoModule.writeString(var2820, var2821, self.title)
+		buff = var2820
+		var2819 = var2821
 	end
 	if self.subtitle ~= nil and self.subtitle ~= "" then
-		local var2820, var2821 = protoModule.writeTag(buff, var2817, 2, protoModule.wireTypes.lengthDelimited)
-		var2820, var4094 = protoModule.writeString(var2820, var2821, self.subtitle)
-		buff = var2820
-		var2817 = var2821
+		local var2822, var2823 = protoModule.writeTag(buff, var2819, 2, protoModule.wireTypes.lengthDelimited)
+		var2822, var4100 = protoModule.writeString(var2822, var2823, self.subtitle)
+		buff = var2822
+		var2819 = var2823
 	end
 	if self.moment_items ~= nil and #self.moment_items > 0 then
 		for i, v in self.moment_items do
-			local var2822 = v:encode()
-			local var2823, var2824 = protoModule.writeTag(buff, var2817, 3, protoModule.wireTypes.lengthDelimited)
-			var2823, var4097 = protoModule.writeBuffer(var2823, var2824, var2822, buffer.len(var2822))
-			buff = var2823
-			var2817 = var2824
+			local var2824 = v:encode()
+			local var2825, var2826 = protoModule.writeTag(buff, var2819, 3, protoModule.wireTypes.lengthDelimited)
+			var2825, var4103 = protoModule.writeBuffer(var2825, var2826, var2824, buffer.len(var2824))
+			buff = var2825
+			var2819 = var2826
 		end
 	end
-	local buff_1 = buffer.create(var2817)
-	buffer.copy(buff_1, 0, buff, 0, var2817)
+	local buff_1 = buffer.create(var2819)
+	buffer.copy(buff_1, 0, buff, 0, var2819)
 	
 	return buff_1
 end
 
 function t_103.decode(p103)
 	-- upvalues: t_103 (ref), protoModule (ref), t (ref)
-	local var2825 = t_103.new()
-	local var2826 = 0
-	while var2826 < buffer.len(p103) do
+	local var2827 = t_103.new()
+	local var2828 = 0
+	while var2828 < buffer.len(p103) do
 		local _ = nil
-		local var2827 = nil
-		local var2828, var2829, var2830 = protoModule.readTag(p103, var2826)
-		local var2831 = var2828
-		var2827 = var2829
-		var2826 = var2830
+		local var2829 = nil
+		local var2830, var2831, var2832 = protoModule.readTag(p103, var2828)
+		local var2833 = var2830
+		var2829 = var2831
+		var2828 = var2832
 		
-		if var2827 == protoModule.wireTypes.varint then
+		if var2829 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2832, var2833 = protoModule.readVarInt(p103, var2826)
-			local _ = var2832
-			var2826 = var2833
+			local var2834, var2835 = protoModule.readVarInt(p103, var2828)
+			local _ = var2834
+			var2828 = var2835
 			continue
 		end
-		if var2827 == protoModule.wireTypes.lengthDelimited then
-			if var2831 == 1 then
+		if var2829 == protoModule.wireTypes.lengthDelimited then
+			if var2833 == 1 then
 				local _ = nil
-				local var2834, var2835 = protoModule.readBuffer(p103, var2826)
-				var2826 = var2835
-				var2825.title = buffer.tostring(var2834)
-			elseif var2831 == 2 then
+				local var2836, var2837 = protoModule.readBuffer(p103, var2828)
+				var2828 = var2837
+				var2827.title = buffer.tostring(var2836)
+			elseif var2833 == 2 then
 				local _ = nil
-				local var2836, var2837 = protoModule.readBuffer(p103, var2826)
-				var2826 = var2837
-				var2825.subtitle = buffer.tostring(var2836)
-			elseif var2831 == 3 then
+				local var2838, var2839 = protoModule.readBuffer(p103, var2828)
+				var2828 = var2839
+				var2827.subtitle = buffer.tostring(var2838)
+			elseif var2833 == 3 then
 				local _ = nil
-				local var2838, var2839 = protoModule.readBuffer(p103, var2826)
-				var2826 = var2839
-				table.insert(var2825.moment_items, t.MomentsCarouselInputData_MomentItem.decode(var2838))
+				local var2840, var2841 = protoModule.readBuffer(p103, var2828)
+				var2828 = var2841
+				table.insert(var2827.moment_items, t.MomentsCarouselInputData_MomentItem.decode(var2840))
 			else
 				local _ = nil
-				local var2840, var2841 = protoModule.readVarInt(p103, var2826)
-				var2826 = var2841 + var2840
+				local var2842, var2843 = protoModule.readVarInt(p103, var2828)
+				var2828 = var2843 + var2842
 			end
-		elseif var2827 == protoModule.wireTypes.i32 then
+		elseif var2829 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2842, var2843 = protoModule.readFixed32(p103, var2826)
-			local _ = var2842
-			var2826 = var2843
-		elseif var2827 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2844, var2845 = protoModule.readFixed64(p103, var2826)
+			local var2844, var2845 = protoModule.readFixed32(p103, var2828)
 			local _ = var2844
-			var2826 = var2845
+			var2828 = var2845
+		elseif var2829 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2846, var2847 = protoModule.readFixed64(p103, var2828)
+			local _ = var2846
+			var2828 = var2847
 		else
-			error("Unsupported wire type: " .. var4101)
+			error("Unsupported wire type: " .. var4107)
 		end
 	end
-	return var2825
+	return var2827
 end
 
 function t_103:jsonEncode()
@@ -18181,13 +18211,13 @@ end
 
 function t_103:jsonDecode()
 	-- upvalues: t_103 (ref), t (ref)
-	local var2846 = t_103.new()
+	local var2848 = t_103.new()
 	
 	if self.title ~= nil then
-		var2846.title = self.title
+		var2848.title = self.title
 	end
 	if self.subtitle ~= nil then
-		var2846.subtitle = self.subtitle
+		var2848.subtitle = self.subtitle
 	end
 	if self.moment_items ~= nil then
 		local t_1 = {}
@@ -18195,7 +18225,7 @@ function t_103:jsonDecode()
 		for i, v in self.moment_items do
 			table.insert(t_1, t.MomentsCarouselInputData_MomentItem.jsonDecode(v))
 		end
-		var2846.moment_items = t_1
+		var2848.moment_items = t_1
 	end
 	if self.momentItems ~= nil then
 		local t_1 = {}
@@ -18203,9 +18233,9 @@ function t_103:jsonDecode()
 		for i, v in self.momentItems do
 			table.insert(t_1, t.MomentsCarouselInputData_MomentItem.jsonDecode(v))
 		end
-		var2846.moment_items = t_1
+		var2848.moment_items = t_1
 	end
-	return var2846
+	return var2848
 end
 
 t_103.descriptor = {
@@ -18232,120 +18262,120 @@ end
 function t_104:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2847 = 0
+	local var2849 = 0
 	
 	if self.moment_id ~= nil and self.moment_id ~= "" then
-		local var2848, var2849 = protoModule.writeTag(buff, var2847, 1, protoModule.wireTypes.lengthDelimited)
-		var2848, var4128 = protoModule.writeString(var2848, var2849, self.moment_id)
-		buff = var2848
-		var2847 = var2849
+		local var2850, var2851 = protoModule.writeTag(buff, var2849, 1, protoModule.wireTypes.lengthDelimited)
+		var2850, var4134 = protoModule.writeString(var2850, var2851, self.moment_id)
+		buff = var2850
+		var2849 = var2851
 	end
 	if self.video_asset_id ~= nil and self.video_asset_id ~= "" then
-		local var2850, var2851 = protoModule.writeTag(buff, var2847, 2, protoModule.wireTypes.lengthDelimited)
-		var2850, var4130 = protoModule.writeString(var2850, var2851, self.video_asset_id)
-		buff = var2850
-		var2847 = var2851
+		local var2852, var2853 = protoModule.writeTag(buff, var2849, 2, protoModule.wireTypes.lengthDelimited)
+		var2852, var4136 = protoModule.writeString(var2852, var2853, self.video_asset_id)
+		buff = var2852
+		var2849 = var2853
 	end
 	if self.target_universe_id ~= nil and self.target_universe_id ~= "" then
-		local var2852, var2853 = protoModule.writeTag(buff, var2847, 3, protoModule.wireTypes.lengthDelimited)
-		var2852, var4132 = protoModule.writeString(var2852, var2853, self.target_universe_id)
-		buff = var2852
-		var2847 = var2853
+		local var2854, var2855 = protoModule.writeTag(buff, var2849, 3, protoModule.wireTypes.lengthDelimited)
+		var2854, var4138 = protoModule.writeString(var2854, var2855, self.target_universe_id)
+		buff = var2854
+		var2849 = var2855
 	end
 	if self.target_place_id ~= nil and self.target_place_id ~= "" then
-		local var2854, var2855 = protoModule.writeTag(buff, var2847, 4, protoModule.wireTypes.lengthDelimited)
-		var2854, var4134 = protoModule.writeString(var2854, var2855, self.target_place_id)
-		buff = var2854
-		var2847 = var2855
+		local var2856, var2857 = protoModule.writeTag(buff, var2849, 4, protoModule.wireTypes.lengthDelimited)
+		var2856, var4140 = protoModule.writeString(var2856, var2857, self.target_place_id)
+		buff = var2856
+		var2849 = var2857
 	end
 	if self.feed_item_id ~= nil and self.feed_item_id ~= "" then
-		local var2856, var2857 = protoModule.writeTag(buff, var2847, 5, protoModule.wireTypes.lengthDelimited)
-		var2856, var4136 = protoModule.writeString(var2856, var2857, self.feed_item_id)
-		buff = var2856
-		var2847 = var2857
+		local var2858, var2859 = protoModule.writeTag(buff, var2849, 5, protoModule.wireTypes.lengthDelimited)
+		var2858, var4142 = protoModule.writeString(var2858, var2859, self.feed_item_id)
+		buff = var2858
+		var2849 = var2859
 	end
 	if self.capture_universe_id ~= nil and self.capture_universe_id ~= "" then
-		local var2858, var2859 = protoModule.writeTag(buff, var2847, 6, protoModule.wireTypes.lengthDelimited)
-		var2858, var4138 = protoModule.writeString(var2858, var2859, self.capture_universe_id)
-		buff = var2858
-		var2847 = var2859
+		local var2860, var2861 = protoModule.writeTag(buff, var2849, 6, protoModule.wireTypes.lengthDelimited)
+		var2860, var4144 = protoModule.writeString(var2860, var2861, self.capture_universe_id)
+		buff = var2860
+		var2849 = var2861
 	end
-	local buff_1 = buffer.create(var2847)
-	buffer.copy(buff_1, 0, buff, 0, var2847)
+	local buff_1 = buffer.create(var2849)
+	buffer.copy(buff_1, 0, buff, 0, var2849)
 	
 	return buff_1
 end
 
 function t_104.decode(p104)
 	-- upvalues: t_104 (ref), protoModule (ref)
-	local var2847 = t_104.new()
-	local var2848 = 0
-	while var2848 < buffer.len(p104) do
+	local var2849 = t_104.new()
+	local var2850 = 0
+	while var2850 < buffer.len(p104) do
 		local _ = nil
-		local var2849 = nil
-		local var2850, var2851, var2852 = protoModule.readTag(p104, var2848)
-		local var2853 = var2850
-		var2849 = var2851
-		var2848 = var2852
+		local var2851 = nil
+		local var2852, var2853, var2854 = protoModule.readTag(p104, var2850)
+		local var2855 = var2852
+		var2851 = var2853
+		var2850 = var2854
 		
-		if var2849 == protoModule.wireTypes.varint then
+		if var2851 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2854, var2855 = protoModule.readVarInt(p104, var2848)
-			local _ = var2854
-			var2848 = var2855
+			local var2856, var2857 = protoModule.readVarInt(p104, var2850)
+			local _ = var2856
+			var2850 = var2857
 			continue
 		end
-		if var2849 == protoModule.wireTypes.lengthDelimited then
-			if var2853 == 1 then
+		if var2851 == protoModule.wireTypes.lengthDelimited then
+			if var2855 == 1 then
 				local _ = nil
-				local var2856, var2857 = protoModule.readBuffer(p104, var2848)
-				var2848 = var2857
-				var2847.moment_id = buffer.tostring(var2856)
-			elseif var2853 == 2 then
+				local var2858, var2859 = protoModule.readBuffer(p104, var2850)
+				var2850 = var2859
+				var2849.moment_id = buffer.tostring(var2858)
+			elseif var2855 == 2 then
 				local _ = nil
-				local var2858, var2859 = protoModule.readBuffer(p104, var2848)
-				var2848 = var2859
-				var2847.video_asset_id = buffer.tostring(var2858)
-			elseif var2853 == 3 then
+				local var2860, var2861 = protoModule.readBuffer(p104, var2850)
+				var2850 = var2861
+				var2849.video_asset_id = buffer.tostring(var2860)
+			elseif var2855 == 3 then
 				local _ = nil
-				local var2860, var2861 = protoModule.readBuffer(p104, var2848)
-				var2848 = var2861
-				var2847.target_universe_id = buffer.tostring(var2860)
-			elseif var2853 == 4 then
+				local var2862, var2863 = protoModule.readBuffer(p104, var2850)
+				var2850 = var2863
+				var2849.target_universe_id = buffer.tostring(var2862)
+			elseif var2855 == 4 then
 				local _ = nil
-				local var2862, var2863 = protoModule.readBuffer(p104, var2848)
-				var2848 = var2863
-				var2847.target_place_id = buffer.tostring(var2862)
-			elseif var2853 == 5 then
+				local var2864, var2865 = protoModule.readBuffer(p104, var2850)
+				var2850 = var2865
+				var2849.target_place_id = buffer.tostring(var2864)
+			elseif var2855 == 5 then
 				local _ = nil
-				local var2864, var2865 = protoModule.readBuffer(p104, var2848)
-				var2848 = var2865
-				var2847.feed_item_id = buffer.tostring(var2864)
-			elseif var2853 == 6 then
+				local var2866, var2867 = protoModule.readBuffer(p104, var2850)
+				var2850 = var2867
+				var2849.feed_item_id = buffer.tostring(var2866)
+			elseif var2855 == 6 then
 				local _ = nil
-				local var2866, var2867 = protoModule.readBuffer(p104, var2848)
-				var2848 = var2867
-				var2847.capture_universe_id = buffer.tostring(var2866)
+				local var2868, var2869 = protoModule.readBuffer(p104, var2850)
+				var2850 = var2869
+				var2849.capture_universe_id = buffer.tostring(var2868)
 			else
 				local _ = nil
-				local var2868, var2869 = protoModule.readVarInt(p104, var2848)
-				var2848 = var2869 + var2868
+				local var2870, var2871 = protoModule.readVarInt(p104, var2850)
+				var2850 = var2871 + var2870
 			end
-		elseif var2849 == protoModule.wireTypes.i32 then
+		elseif var2851 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2870, var2871 = protoModule.readFixed32(p104, var2848)
-			local _ = var2870
-			var2848 = var2871
-		elseif var2849 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2872, var2873 = protoModule.readFixed64(p104, var2848)
+			local var2872, var2873 = protoModule.readFixed32(p104, var2850)
 			local _ = var2872
-			var2848 = var2873
+			var2850 = var2873
+		elseif var2851 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2874, var2875 = protoModule.readFixed64(p104, var2850)
+			local _ = var2874
+			var2850 = var2875
 		else
-			error("Unsupported wire type: " .. var4142)
+			error("Unsupported wire type: " .. var4148)
 		end
 	end
-	return var2847
+	return var2849
 end
 
 function t_104:jsonEncode()
@@ -18374,45 +18404,45 @@ end
 
 function t_104:jsonDecode()
 	-- upvalues: t_104 (ref)
-	local var2874 = t_104.new()
+	local var2876 = t_104.new()
 	
 	if self.moment_id ~= nil then
-		var2874.moment_id = self.moment_id
+		var2876.moment_id = self.moment_id
 	end
 	if self.momentId ~= nil then
-		var2874.moment_id = self.momentId
+		var2876.moment_id = self.momentId
 	end
 	if self.video_asset_id ~= nil then
-		var2874.video_asset_id = self.video_asset_id
+		var2876.video_asset_id = self.video_asset_id
 	end
 	if self.videoAssetId ~= nil then
-		var2874.video_asset_id = self.videoAssetId
+		var2876.video_asset_id = self.videoAssetId
 	end
 	if self.target_universe_id ~= nil then
-		var2874.target_universe_id = self.target_universe_id
+		var2876.target_universe_id = self.target_universe_id
 	end
 	if self.targetUniverseId ~= nil then
-		var2874.target_universe_id = self.targetUniverseId
+		var2876.target_universe_id = self.targetUniverseId
 	end
 	if self.target_place_id ~= nil then
-		var2874.target_place_id = self.target_place_id
+		var2876.target_place_id = self.target_place_id
 	end
 	if self.targetPlaceId ~= nil then
-		var2874.target_place_id = self.targetPlaceId
+		var2876.target_place_id = self.targetPlaceId
 	end
 	if self.feed_item_id ~= nil then
-		var2874.feed_item_id = self.feed_item_id
+		var2876.feed_item_id = self.feed_item_id
 	end
 	if self.feedItemId ~= nil then
-		var2874.feed_item_id = self.feedItemId
+		var2876.feed_item_id = self.feedItemId
 	end
 	if self.capture_universe_id ~= nil then
-		var2874.capture_universe_id = self.capture_universe_id
+		var2876.capture_universe_id = self.capture_universe_id
 	end
 	if self.captureUniverseId ~= nil then
-		var2874.capture_universe_id = self.captureUniverseId
+		var2876.capture_universe_id = self.captureUniverseId
 	end
-	return var2874
+	return var2876
 end
 
 t_104.descriptor = {
@@ -18435,76 +18465,76 @@ end
 function t_105:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2874 = 0
+	local var2876 = 0
 	
 	if self.title ~= nil and self.title ~= "" then
-		local var2875, var2876 = protoModule.writeTag(buff, var2874, 1, protoModule.wireTypes.lengthDelimited)
-		var2875, var4172 = protoModule.writeString(var2875, var2876, self.title)
-		buff = var2875
-		var2874 = var2876
+		local var2877, var2878 = protoModule.writeTag(buff, var2876, 1, protoModule.wireTypes.lengthDelimited)
+		var2877, var4178 = protoModule.writeString(var2877, var2878, self.title)
+		buff = var2877
+		var2876 = var2878
 	end
 	if self.subtitle ~= nil and self.subtitle ~= "" then
-		local var2877, var2878 = protoModule.writeTag(buff, var2874, 2, protoModule.wireTypes.lengthDelimited)
-		var2877, var4174 = protoModule.writeString(var2877, var2878, self.subtitle)
-		buff = var2877
-		var2874 = var2878
+		local var2879, var2880 = protoModule.writeTag(buff, var2876, 2, protoModule.wireTypes.lengthDelimited)
+		var2879, var4180 = protoModule.writeString(var2879, var2880, self.subtitle)
+		buff = var2879
+		var2876 = var2880
 	end
-	local buff_1 = buffer.create(var2874)
-	buffer.copy(buff_1, 0, buff, 0, var2874)
+	local buff_1 = buffer.create(var2876)
+	buffer.copy(buff_1, 0, buff, 0, var2876)
 	
 	return buff_1
 end
 
 function t_105.decode(p105)
 	-- upvalues: t_105 (ref), protoModule (ref)
-	local var2874 = t_105.new()
-	local var2875 = 0
-	while var2875 < buffer.len(p105) do
+	local var2876 = t_105.new()
+	local var2877 = 0
+	while var2877 < buffer.len(p105) do
 		local _ = nil
-		local var2876 = nil
-		local var2877, var2878, var2879 = protoModule.readTag(p105, var2875)
-		local var2880 = var2877
-		var2876 = var2878
-		var2875 = var2879
+		local var2878 = nil
+		local var2879, var2880, var2881 = protoModule.readTag(p105, var2877)
+		local var2882 = var2879
+		var2878 = var2880
+		var2877 = var2881
 		
-		if var2876 == protoModule.wireTypes.varint then
+		if var2878 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2881, var2882 = protoModule.readVarInt(p105, var2875)
-			local _ = var2881
-			var2875 = var2882
+			local var2883, var2884 = protoModule.readVarInt(p105, var2877)
+			local _ = var2883
+			var2877 = var2884
 			continue
 		end
-		if var2876 == protoModule.wireTypes.lengthDelimited then
-			if var2880 == 1 then
+		if var2878 == protoModule.wireTypes.lengthDelimited then
+			if var2882 == 1 then
 				local _ = nil
-				local var2883, var2884 = protoModule.readBuffer(p105, var2875)
-				var2875 = var2884
-				var2874.title = buffer.tostring(var2883)
-			elseif var2880 == 2 then
+				local var2885, var2886 = protoModule.readBuffer(p105, var2877)
+				var2877 = var2886
+				var2876.title = buffer.tostring(var2885)
+			elseif var2882 == 2 then
 				local _ = nil
-				local var2885, var2886 = protoModule.readBuffer(p105, var2875)
-				var2875 = var2886
-				var2874.subtitle = buffer.tostring(var2885)
+				local var2887, var2888 = protoModule.readBuffer(p105, var2877)
+				var2877 = var2888
+				var2876.subtitle = buffer.tostring(var2887)
 			else
 				local _ = nil
-				local var2887, var2888 = protoModule.readVarInt(p105, var2875)
-				var2875 = var2888 + var2887
+				local var2889, var2890 = protoModule.readVarInt(p105, var2877)
+				var2877 = var2890 + var2889
 			end
-		elseif var2876 == protoModule.wireTypes.i32 then
+		elseif var2878 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2889, var2890 = protoModule.readFixed32(p105, var2875)
-			local _ = var2889
-			var2875 = var2890
-		elseif var2876 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2891, var2892 = protoModule.readFixed64(p105, var2875)
+			local var2891, var2892 = protoModule.readFixed32(p105, var2877)
 			local _ = var2891
-			var2875 = var2892
+			var2877 = var2892
+		elseif var2878 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2893, var2894 = protoModule.readFixed64(p105, var2877)
+			local _ = var2893
+			var2877 = var2894
 		else
-			error("Unsupported wire type: " .. var4178)
+			error("Unsupported wire type: " .. var4184)
 		end
 	end
-	return var2874
+	return var2876
 end
 
 function t_105:jsonEncode()
@@ -18521,15 +18551,15 @@ end
 
 function t_105:jsonDecode()
 	-- upvalues: t_105 (ref)
-	local var2893 = t_105.new()
+	local var2895 = t_105.new()
 	
 	if self.title ~= nil then
-		var2893.title = self.title
+		var2895.title = self.title
 	end
 	if self.subtitle ~= nil then
-		var2893.subtitle = self.subtitle
+		var2895.subtitle = self.subtitle
 	end
-	return var2893
+	return var2895
 end
 
 t_105.descriptor = {
@@ -18554,98 +18584,98 @@ end
 function t_106:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2893 = 0
+	local var2895 = 0
 	
 	if self.primary_cta_button_text ~= nil and self.primary_cta_button_text ~= "" then
-		local var2894, var2895 = protoModule.writeTag(buff, var2893, 1, protoModule.wireTypes.lengthDelimited)
-		var2894, var4200 = protoModule.writeString(var2894, var2895, self.primary_cta_button_text)
-		buff = var2894
-		var2893 = var2895
+		local var2896, var2897 = protoModule.writeTag(buff, var2895, 1, protoModule.wireTypes.lengthDelimited)
+		var2896, var4206 = protoModule.writeString(var2896, var2897, self.primary_cta_button_text)
+		buff = var2896
+		var2895 = var2897
 	end
 	if self.secondary_cta_button_text ~= nil and self.secondary_cta_button_text ~= "" then
-		local var2896, var2897 = protoModule.writeTag(buff, var2893, 2, protoModule.wireTypes.lengthDelimited)
-		var2896, var4202 = protoModule.writeString(var2896, var2897, self.secondary_cta_button_text)
-		buff = var2896
-		var2893 = var2897
+		local var2898, var2899 = protoModule.writeTag(buff, var2895, 2, protoModule.wireTypes.lengthDelimited)
+		var2898, var4208 = protoModule.writeString(var2898, var2899, self.secondary_cta_button_text)
+		buff = var2898
+		var2895 = var2899
 	end
 	if self.primary_cta_type ~= nil and self.primary_cta_type ~= "" then
-		local var2898, var2899 = protoModule.writeTag(buff, var2893, 3, protoModule.wireTypes.lengthDelimited)
-		var2898, var4204 = protoModule.writeString(var2898, var2899, self.primary_cta_type)
-		buff = var2898
-		var2893 = var2899
+		local var2900, var2901 = protoModule.writeTag(buff, var2895, 3, protoModule.wireTypes.lengthDelimited)
+		var2900, var4210 = protoModule.writeString(var2900, var2901, self.primary_cta_type)
+		buff = var2900
+		var2895 = var2901
 	end
 	if self.secondary_cta_type ~= nil and self.secondary_cta_type ~= "" then
-		local var2900, var2901 = protoModule.writeTag(buff, var2893, 4, protoModule.wireTypes.lengthDelimited)
-		var2900, var4206 = protoModule.writeString(var2900, var2901, self.secondary_cta_type)
-		buff = var2900
-		var2893 = var2901
+		local var2902, var2903 = protoModule.writeTag(buff, var2895, 4, protoModule.wireTypes.lengthDelimited)
+		var2902, var4212 = protoModule.writeString(var2902, var2903, self.secondary_cta_type)
+		buff = var2902
+		var2895 = var2903
 	end
-	local buff_1 = buffer.create(var2893)
-	buffer.copy(buff_1, 0, buff, 0, var2893)
+	local buff_1 = buffer.create(var2895)
+	buffer.copy(buff_1, 0, buff, 0, var2895)
 	
 	return buff_1
 end
 
 function t_106.decode(p106)
 	-- upvalues: t_106 (ref), protoModule (ref)
-	local var2893 = t_106.new()
-	local var2894 = 0
-	while var2894 < buffer.len(p106) do
+	local var2895 = t_106.new()
+	local var2896 = 0
+	while var2896 < buffer.len(p106) do
 		local _ = nil
-		local var2895 = nil
-		local var2896, var2897, var2898 = protoModule.readTag(p106, var2894)
-		local var2899 = var2896
-		var2895 = var2897
-		var2894 = var2898
+		local var2897 = nil
+		local var2898, var2899, var2900 = protoModule.readTag(p106, var2896)
+		local var2901 = var2898
+		var2897 = var2899
+		var2896 = var2900
 		
-		if var2895 == protoModule.wireTypes.varint then
+		if var2897 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2900, var2901 = protoModule.readVarInt(p106, var2894)
-			local _ = var2900
-			var2894 = var2901
+			local var2902, var2903 = protoModule.readVarInt(p106, var2896)
+			local _ = var2902
+			var2896 = var2903
 			continue
 		end
-		if var2895 == protoModule.wireTypes.lengthDelimited then
-			if var2899 == 1 then
+		if var2897 == protoModule.wireTypes.lengthDelimited then
+			if var2901 == 1 then
 				local _ = nil
-				local var2902, var2903 = protoModule.readBuffer(p106, var2894)
-				var2894 = var2903
-				var2893.primary_cta_button_text = buffer.tostring(var2902)
-			elseif var2899 == 2 then
+				local var2904, var2905 = protoModule.readBuffer(p106, var2896)
+				var2896 = var2905
+				var2895.primary_cta_button_text = buffer.tostring(var2904)
+			elseif var2901 == 2 then
 				local _ = nil
-				local var2904, var2905 = protoModule.readBuffer(p106, var2894)
-				var2894 = var2905
-				var2893.secondary_cta_button_text = buffer.tostring(var2904)
-			elseif var2899 == 3 then
+				local var2906, var2907 = protoModule.readBuffer(p106, var2896)
+				var2896 = var2907
+				var2895.secondary_cta_button_text = buffer.tostring(var2906)
+			elseif var2901 == 3 then
 				local _ = nil
-				local var2906, var2907 = protoModule.readBuffer(p106, var2894)
-				var2894 = var2907
-				var2893.primary_cta_type = buffer.tostring(var2906)
-			elseif var2899 == 4 then
+				local var2908, var2909 = protoModule.readBuffer(p106, var2896)
+				var2896 = var2909
+				var2895.primary_cta_type = buffer.tostring(var2908)
+			elseif var2901 == 4 then
 				local _ = nil
-				local var2908, var2909 = protoModule.readBuffer(p106, var2894)
-				var2894 = var2909
-				var2893.secondary_cta_type = buffer.tostring(var2908)
+				local var2910, var2911 = protoModule.readBuffer(p106, var2896)
+				var2896 = var2911
+				var2895.secondary_cta_type = buffer.tostring(var2910)
 			else
 				local _ = nil
-				local var2910, var2911 = protoModule.readVarInt(p106, var2894)
-				var2894 = var2911 + var2910
+				local var2912, var2913 = protoModule.readVarInt(p106, var2896)
+				var2896 = var2913 + var2912
 			end
-		elseif var2895 == protoModule.wireTypes.i32 then
+		elseif var2897 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2912, var2913 = protoModule.readFixed32(p106, var2894)
-			local _ = var2912
-			var2894 = var2913
-		elseif var2895 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2914, var2915 = protoModule.readFixed64(p106, var2894)
+			local var2914, var2915 = protoModule.readFixed32(p106, var2896)
 			local _ = var2914
-			var2894 = var2915
+			var2896 = var2915
+		elseif var2897 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2916, var2917 = protoModule.readFixed64(p106, var2896)
+			local _ = var2916
+			var2896 = var2917
 		else
-			error("Unsupported wire type: " .. var4210)
+			error("Unsupported wire type: " .. var4216)
 		end
 	end
-	return var2893
+	return var2895
 end
 
 function t_106:jsonEncode()
@@ -18668,33 +18698,33 @@ end
 
 function t_106:jsonDecode()
 	-- upvalues: t_106 (ref)
-	local var2916 = t_106.new()
+	local var2918 = t_106.new()
 	
 	if self.primary_cta_button_text ~= nil then
-		var2916.primary_cta_button_text = self.primary_cta_button_text
+		var2918.primary_cta_button_text = self.primary_cta_button_text
 	end
 	if self.primaryCtaButtonText ~= nil then
-		var2916.primary_cta_button_text = self.primaryCtaButtonText
+		var2918.primary_cta_button_text = self.primaryCtaButtonText
 	end
 	if self.secondary_cta_button_text ~= nil then
-		var2916.secondary_cta_button_text = self.secondary_cta_button_text
+		var2918.secondary_cta_button_text = self.secondary_cta_button_text
 	end
 	if self.secondaryCtaButtonText ~= nil then
-		var2916.secondary_cta_button_text = self.secondaryCtaButtonText
+		var2918.secondary_cta_button_text = self.secondaryCtaButtonText
 	end
 	if self.primary_cta_type ~= nil then
-		var2916.primary_cta_type = self.primary_cta_type
+		var2918.primary_cta_type = self.primary_cta_type
 	end
 	if self.primaryCtaType ~= nil then
-		var2916.primary_cta_type = self.primaryCtaType
+		var2918.primary_cta_type = self.primaryCtaType
 	end
 	if self.secondary_cta_type ~= nil then
-		var2916.secondary_cta_type = self.secondary_cta_type
+		var2918.secondary_cta_type = self.secondary_cta_type
 	end
 	if self.secondaryCtaType ~= nil then
-		var2916.secondary_cta_type = self.secondaryCtaType
+		var2918.secondary_cta_type = self.secondaryCtaType
 	end
-	return var2916
+	return var2918
 end
 
 t_106.descriptor = {
@@ -18716,65 +18746,65 @@ end
 function t_107:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2916 = 0
+	local var2918 = 0
 	
 	if self.image_asset_id ~= nil and self.image_asset_id ~= "" then
-		local var2917, var2918 = protoModule.writeTag(buff, var2916, 1, protoModule.wireTypes.lengthDelimited)
-		var2917, var4236 = protoModule.writeString(var2917, var2918, self.image_asset_id)
-		buff = var2917
-		var2916 = var2918
+		local var2919, var2920 = protoModule.writeTag(buff, var2918, 1, protoModule.wireTypes.lengthDelimited)
+		var2919, var4242 = protoModule.writeString(var2919, var2920, self.image_asset_id)
+		buff = var2919
+		var2918 = var2920
 	end
-	local buff_1 = buffer.create(var2916)
-	buffer.copy(buff_1, 0, buff, 0, var2916)
+	local buff_1 = buffer.create(var2918)
+	buffer.copy(buff_1, 0, buff, 0, var2918)
 	
 	return buff_1
 end
 
 function t_107.decode(p107)
 	-- upvalues: t_107 (ref), protoModule (ref)
-	local var2916 = t_107.new()
-	local var2917 = 0
-	while var2917 < buffer.len(p107) do
+	local var2918 = t_107.new()
+	local var2919 = 0
+	while var2919 < buffer.len(p107) do
 		local _ = nil
-		local var2918 = nil
-		local var2919, var2920, var2921 = protoModule.readTag(p107, var2917)
-		local var2922 = var2919
-		var2918 = var2920
-		var2917 = var2921
+		local var2920 = nil
+		local var2921, var2922, var2923 = protoModule.readTag(p107, var2919)
+		local var2924 = var2921
+		var2920 = var2922
+		var2919 = var2923
 		
-		if var2918 == protoModule.wireTypes.varint then
+		if var2920 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2923, var2924 = protoModule.readVarInt(p107, var2917)
-			local _ = var2923
-			var2917 = var2924
+			local var2925, var2926 = protoModule.readVarInt(p107, var2919)
+			local _ = var2925
+			var2919 = var2926
 			continue
 		end
-		if var2918 == protoModule.wireTypes.lengthDelimited then
-			if var2922 == 1 then
+		if var2920 == protoModule.wireTypes.lengthDelimited then
+			if var2924 == 1 then
 				local _ = nil
-				local var2925, var2926 = protoModule.readBuffer(p107, var2917)
-				var2917 = var2926
-				var2916.image_asset_id = buffer.tostring(var2925)
+				local var2927, var2928 = protoModule.readBuffer(p107, var2919)
+				var2919 = var2928
+				var2918.image_asset_id = buffer.tostring(var2927)
 			else
 				local _ = nil
-				local var2927, var2928 = protoModule.readVarInt(p107, var2917)
-				var2917 = var2928 + var2927
+				local var2929, var2930 = protoModule.readVarInt(p107, var2919)
+				var2919 = var2930 + var2929
 			end
-		elseif var2918 == protoModule.wireTypes.i32 then
+		elseif var2920 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2929, var2930 = protoModule.readFixed32(p107, var2917)
-			local _ = var2929
-			var2917 = var2930
-		elseif var2918 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2931, var2932 = protoModule.readFixed64(p107, var2917)
+			local var2931, var2932 = protoModule.readFixed32(p107, var2919)
 			local _ = var2931
-			var2917 = var2932
+			var2919 = var2932
+		elseif var2920 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2933, var2934 = protoModule.readFixed64(p107, var2919)
+			local _ = var2933
+			var2919 = var2934
 		else
-			error("Unsupported wire type: " .. var4240)
+			error("Unsupported wire type: " .. var4246)
 		end
 	end
-	return var2916
+	return var2918
 end
 
 function t_107:jsonEncode()
@@ -18788,15 +18818,15 @@ end
 
 function t_107:jsonDecode()
 	-- upvalues: t_107 (ref)
-	local var2933 = t_107.new()
+	local var2935 = t_107.new()
 	
 	if self.image_asset_id ~= nil then
-		var2933.image_asset_id = self.image_asset_id
+		var2935.image_asset_id = self.image_asset_id
 	end
 	if self.imageAssetId ~= nil then
-		var2933.image_asset_id = self.imageAssetId
+		var2935.image_asset_id = self.imageAssetId
 	end
-	return var2933
+	return var2935
 end
 
 t_107.descriptor = {
@@ -18819,76 +18849,76 @@ end
 function t_108:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2933 = 0
+	local var2935 = 0
 	
 	if self.video_asset_id ~= nil and self.video_asset_id ~= "" then
-		local var2934, var2935 = protoModule.writeTag(buff, var2933, 1, protoModule.wireTypes.lengthDelimited)
-		var2934, var4260 = protoModule.writeString(var2934, var2935, self.video_asset_id)
-		buff = var2934
-		var2933 = var2935
+		local var2936, var2937 = protoModule.writeTag(buff, var2935, 1, protoModule.wireTypes.lengthDelimited)
+		var2936, var4266 = protoModule.writeString(var2936, var2937, self.video_asset_id)
+		buff = var2936
+		var2935 = var2937
 	end
 	if self.loading_image_asset_id ~= nil and self.loading_image_asset_id ~= "" then
-		local var2936, var2937 = protoModule.writeTag(buff, var2933, 2, protoModule.wireTypes.lengthDelimited)
-		var2936, var4262 = protoModule.writeString(var2936, var2937, self.loading_image_asset_id)
-		buff = var2936
-		var2933 = var2937
+		local var2938, var2939 = protoModule.writeTag(buff, var2935, 2, protoModule.wireTypes.lengthDelimited)
+		var2938, var4268 = protoModule.writeString(var2938, var2939, self.loading_image_asset_id)
+		buff = var2938
+		var2935 = var2939
 	end
-	local buff_1 = buffer.create(var2933)
-	buffer.copy(buff_1, 0, buff, 0, var2933)
+	local buff_1 = buffer.create(var2935)
+	buffer.copy(buff_1, 0, buff, 0, var2935)
 	
 	return buff_1
 end
 
 function t_108.decode(p108)
 	-- upvalues: t_108 (ref), protoModule (ref)
-	local var2933 = t_108.new()
-	local var2934 = 0
-	while var2934 < buffer.len(p108) do
+	local var2935 = t_108.new()
+	local var2936 = 0
+	while var2936 < buffer.len(p108) do
 		local _ = nil
-		local var2935 = nil
-		local var2936, var2937, var2938 = protoModule.readTag(p108, var2934)
-		local var2939 = var2936
-		var2935 = var2937
-		var2934 = var2938
+		local var2937 = nil
+		local var2938, var2939, var2940 = protoModule.readTag(p108, var2936)
+		local var2941 = var2938
+		var2937 = var2939
+		var2936 = var2940
 		
-		if var2935 == protoModule.wireTypes.varint then
+		if var2937 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var2940, var2941 = protoModule.readVarInt(p108, var2934)
-			local _ = var2940
-			var2934 = var2941
+			local var2942, var2943 = protoModule.readVarInt(p108, var2936)
+			local _ = var2942
+			var2936 = var2943
 			continue
 		end
-		if var2935 == protoModule.wireTypes.lengthDelimited then
-			if var2939 == 1 then
+		if var2937 == protoModule.wireTypes.lengthDelimited then
+			if var2941 == 1 then
 				local _ = nil
-				local var2942, var2943 = protoModule.readBuffer(p108, var2934)
-				var2934 = var2943
-				var2933.video_asset_id = buffer.tostring(var2942)
-			elseif var2939 == 2 then
+				local var2944, var2945 = protoModule.readBuffer(p108, var2936)
+				var2936 = var2945
+				var2935.video_asset_id = buffer.tostring(var2944)
+			elseif var2941 == 2 then
 				local _ = nil
-				local var2944, var2945 = protoModule.readBuffer(p108, var2934)
-				var2934 = var2945
-				var2933.loading_image_asset_id = buffer.tostring(var2944)
+				local var2946, var2947 = protoModule.readBuffer(p108, var2936)
+				var2936 = var2947
+				var2935.loading_image_asset_id = buffer.tostring(var2946)
 			else
 				local _ = nil
-				local var2946, var2947 = protoModule.readVarInt(p108, var2934)
-				var2934 = var2947 + var2946
+				local var2948, var2949 = protoModule.readVarInt(p108, var2936)
+				var2936 = var2949 + var2948
 			end
-		elseif var2935 == protoModule.wireTypes.i32 then
+		elseif var2937 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2948, var2949 = protoModule.readFixed32(p108, var2934)
-			local _ = var2948
-			var2934 = var2949
-		elseif var2935 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2950, var2951 = protoModule.readFixed64(p108, var2934)
+			local var2950, var2951 = protoModule.readFixed32(p108, var2936)
 			local _ = var2950
-			var2934 = var2951
+			var2936 = var2951
+		elseif var2937 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2952, var2953 = protoModule.readFixed64(p108, var2936)
+			local _ = var2952
+			var2936 = var2953
 		else
-			error("Unsupported wire type: " .. var4266)
+			error("Unsupported wire type: " .. var4272)
 		end
 	end
-	return var2933
+	return var2935
 end
 
 function t_108:jsonEncode()
@@ -18905,21 +18935,21 @@ end
 
 function t_108:jsonDecode()
 	-- upvalues: t_108 (ref)
-	local var2952 = t_108.new()
+	local var2954 = t_108.new()
 	
 	if self.video_asset_id ~= nil then
-		var2952.video_asset_id = self.video_asset_id
+		var2954.video_asset_id = self.video_asset_id
 	end
 	if self.videoAssetId ~= nil then
-		var2952.video_asset_id = self.videoAssetId
+		var2954.video_asset_id = self.videoAssetId
 	end
 	if self.loading_image_asset_id ~= nil then
-		var2952.loading_image_asset_id = self.loading_image_asset_id
+		var2954.loading_image_asset_id = self.loading_image_asset_id
 	end
 	if self.loadingImageAssetId ~= nil then
-		var2952.loading_image_asset_id = self.loadingImageAssetId
+		var2954.loading_image_asset_id = self.loadingImageAssetId
 	end
-	return var2952
+	return var2954
 end
 
 t_108.descriptor = {
@@ -18942,77 +18972,77 @@ end
 function t_109:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2952 = 0
+	local var2954 = 0
 	
 	if self.text ~= nil and self.text ~= "" then
-		local var2953, var2954 = protoModule.writeTag(buff, var2952, 1, protoModule.wireTypes.lengthDelimited)
-		var2953, var4288 = protoModule.writeString(var2953, var2954, self.text)
-		buff = var2953
-		var2952 = var2954
+		local var2955, var2956 = protoModule.writeTag(buff, var2954, 1, protoModule.wireTypes.lengthDelimited)
+		var2955, var4294 = protoModule.writeString(var2955, var2956, self.text)
+		buff = var2955
+		var2954 = var2956
 	end
 	if self.is_rendered_text then
-		local var2955, var2956 = protoModule.writeTag(buff, var2952, 2, protoModule.wireTypes.varint)
-		var2955, var4290 = protoModule.writeVarInt(var2955, var2956, if self.is_rendered_text then 1 else 0)
-		buff = var2955
-		var2952 = var2956
+		local var2957, var2958 = protoModule.writeTag(buff, var2954, 2, protoModule.wireTypes.varint)
+		var2957, var4296 = protoModule.writeVarInt(var2957, var2958, if self.is_rendered_text then 1 else 0)
+		buff = var2957
+		var2954 = var2958
 	end
-	local buff_1 = buffer.create(var2952)
-	buffer.copy(buff_1, 0, buff, 0, var2952)
+	local buff_1 = buffer.create(var2954)
+	buffer.copy(buff_1, 0, buff, 0, var2954)
 	
 	return buff_1
 end
 
 function t_109.decode(p109)
 	-- upvalues: t_109 (ref), protoModule (ref)
-	local var2952 = t_109.new()
-	local var2953 = 0
-	while var2953 < buffer.len(p109) do
+	local var2954 = t_109.new()
+	local var2955 = 0
+	while var2955 < buffer.len(p109) do
 		local _ = nil
-		local var2954 = nil
-		local var2955, var2956, var2957 = protoModule.readTag(p109, var2953)
-		local var2958 = var2955
-		var2954 = var2956
-		var2953 = var2957
+		local var2956 = nil
+		local var2957, var2958, var2959 = protoModule.readTag(p109, var2955)
+		local var2960 = var2957
+		var2956 = var2958
+		var2955 = var2959
 		
-		if var2954 == protoModule.wireTypes.varint then
-			if var2958 == 2 then
+		if var2956 == protoModule.wireTypes.varint then
+			if var2960 == 2 then
 				local _ = nil
-				local var2959, var2960 = protoModule.readVarInt(p109, var2953)
-				var2953 = var2960
-				var2952.is_rendered_text = var2959 ~= 0
+				local var2961, var2962 = protoModule.readVarInt(p109, var2955)
+				var2955 = var2962
+				var2954.is_rendered_text = var2961 ~= 0
 			else
 				local _ = nil
-				local var2961, var2962 = protoModule.readVarInt(p109, var2953)
-				local _ = var2961
-				var2953 = var2962
+				local var2963, var2964 = protoModule.readVarInt(p109, var2955)
+				local _ = var2963
+				var2955 = var2964
 			end
 		end
-		if var2954 == protoModule.wireTypes.lengthDelimited then
-			if var2958 == 1 then
+		if var2956 == protoModule.wireTypes.lengthDelimited then
+			if var2960 == 1 then
 				local _ = nil
-				local var2963, var2964 = protoModule.readBuffer(p109, var2953)
-				var2953 = var2964
-				var2952.text = buffer.tostring(var2963)
+				local var2965, var2966 = protoModule.readBuffer(p109, var2955)
+				var2955 = var2966
+				var2954.text = buffer.tostring(var2965)
 			else
 				local _ = nil
-				local var2965, var2966 = protoModule.readVarInt(p109, var2953)
-				var2953 = var2966 + var2965
+				local var2967, var2968 = protoModule.readVarInt(p109, var2955)
+				var2955 = var2968 + var2967
 			end
-		elseif var2954 == protoModule.wireTypes.i32 then
+		elseif var2956 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var2967, var2968 = protoModule.readFixed32(p109, var2953)
-			local _ = var2967
-			var2953 = var2968
-		elseif var2954 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var2969, var2970 = protoModule.readFixed64(p109, var2953)
+			local var2969, var2970 = protoModule.readFixed32(p109, var2955)
 			local _ = var2969
-			var2953 = var2970
+			var2955 = var2970
+		elseif var2956 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var2971, var2972 = protoModule.readFixed64(p109, var2955)
+			local _ = var2971
+			var2955 = var2972
 		else
-			error("Unsupported wire type: " .. var4294)
+			error("Unsupported wire type: " .. var4300)
 		end
 	end
-	return var2952
+	return var2954
 end
 
 function t_109:jsonEncode()
@@ -19029,18 +19059,18 @@ end
 
 function t_109:jsonDecode()
 	-- upvalues: t_109 (ref)
-	local var2971 = t_109.new()
+	local var2973 = t_109.new()
 	
 	if self.text ~= nil then
-		var2971.text = self.text
+		var2973.text = self.text
 	end
 	if self.is_rendered_text ~= nil then
-		var2971.is_rendered_text = self.is_rendered_text
+		var2973.is_rendered_text = self.is_rendered_text
 	end
 	if self.isRenderedText ~= nil then
-		var2971.is_rendered_text = self.isRenderedText
+		var2973.is_rendered_text = self.isRenderedText
 	end
-	return var2971
+	return var2973
 end
 
 t_109.descriptor = {
@@ -19065,130 +19095,130 @@ end
 function t_110:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var2971 = 0
+	local var2973 = 0
 	
 	if self.entry_map ~= nil and next(self.entry_map) ~= nil then
 		for i, v in self.entry_map do
-			local var2972, var2973 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var2972, var4316 = protoModule.writeString(var2972, var2973, i)
-			local var2974 = v:encode()
-			var2973, var4318 = protoModule.writeTag(var2972, var2973, 2, protoModule.wireTypes.lengthDelimited)
-			var2973, var4318 = protoModule.writeBuffer(var2973, var4318, var2974, buffer.len(var2974))
-			local var2975 = var2973
-			local var2976 = var4318
-			local var2977, var2978 = protoModule.writeTag(buff, var2971, 1, protoModule.wireTypes.lengthDelimited)
-			var2977, var4322 = protoModule.writeBuffer(var2977, var2978, var2975, var2976)
-			buff = var2977
-			var2971 = var2978
+			local var2974, var2975 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
+			var2974, var4322 = protoModule.writeString(var2974, var2975, i)
+			local var2976 = v:encode()
+			var2975, var4324 = protoModule.writeTag(var2974, var2975, 2, protoModule.wireTypes.lengthDelimited)
+			var2975, var4324 = protoModule.writeBuffer(var2975, var4324, var2976, buffer.len(var2976))
+			local var2977 = var2975
+			local var2978 = var4324
+			local var2979, var2980 = protoModule.writeTag(buff, var2973, 1, protoModule.wireTypes.lengthDelimited)
+			var2979, var4328 = protoModule.writeBuffer(var2979, var2980, var2977, var2978)
+			buff = var2979
+			var2973 = var2980
 		end
 	end
 	if self.entry_order ~= nil and #self.entry_order > 0 then
 		for i, v in self.entry_order do
-			local var2979, var2980 = protoModule.writeTag(buff, var2971, 2, protoModule.wireTypes.lengthDelimited)
-			var2979, var4324 = protoModule.writeString(var2979, var2980, v)
-			buff = var2979
-			var2971 = var2980
+			local var2981, var2982 = protoModule.writeTag(buff, var2973, 2, protoModule.wireTypes.lengthDelimited)
+			var2981, var4330 = protoModule.writeString(var2981, var2982, v)
+			buff = var2981
+			var2973 = var2982
 		end
 	end
 	if self.entry_order_map ~= nil and next(self.entry_order_map) ~= nil then
 		for i, v in self.entry_order_map do
-			local var2981, var2982 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var2981, var4326 = protoModule.writeString(var2981, var2982, i)
-			local var2983 = v:encode()
-			var2982, var4328 = protoModule.writeTag(var2981, var2982, 2, protoModule.wireTypes.lengthDelimited)
-			var2982, var4328 = protoModule.writeBuffer(var2982, var4328, var2983, buffer.len(var2983))
-			local var2984 = var2982
-			local var2985 = var4328
-			local var2986, var2987 = protoModule.writeTag(buff, var2971, 3, protoModule.wireTypes.lengthDelimited)
-			var2986, var4332 = protoModule.writeBuffer(var2986, var2987, var2984, var2985)
-			buff = var2986
-			var2971 = var2987
+			local var2983, var2984 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
+			var2983, var4332 = protoModule.writeString(var2983, var2984, i)
+			local var2985 = v:encode()
+			var2984, var4334 = protoModule.writeTag(var2983, var2984, 2, protoModule.wireTypes.lengthDelimited)
+			var2984, var4334 = protoModule.writeBuffer(var2984, var4334, var2985, buffer.len(var2985))
+			local var2986 = var2984
+			local var2987 = var4334
+			local var2988, var2989 = protoModule.writeTag(buff, var2973, 3, protoModule.wireTypes.lengthDelimited)
+			var2988, var4338 = protoModule.writeBuffer(var2988, var2989, var2986, var2987)
+			buff = var2988
+			var2973 = var2989
 		end
 	end
 	if self.content_pools ~= nil and next(self.content_pools) ~= nil then
 		for i, v in self.content_pools do
-			local var2988, var2989 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var2988, var4334 = protoModule.writeString(var2988, var2989, i)
-			local var2990 = v:encode()
-			var2989, var4336 = protoModule.writeTag(var2988, var2989, 2, protoModule.wireTypes.lengthDelimited)
-			var2989, var4336 = protoModule.writeBuffer(var2989, var4336, var2990, buffer.len(var2990))
-			local var2991 = var2989
-			local var2992 = var4336
-			local var2993, var2994 = protoModule.writeTag(buff, var2971, 4, protoModule.wireTypes.lengthDelimited)
-			var2993, var4340 = protoModule.writeBuffer(var2993, var2994, var2991, var2992)
-			buff = var2993
-			var2971 = var2994
+			local var2990, var2991 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
+			var2990, var4340 = protoModule.writeString(var2990, var2991, i)
+			local var2992 = v:encode()
+			var2991, var4342 = protoModule.writeTag(var2990, var2991, 2, protoModule.wireTypes.lengthDelimited)
+			var2991, var4342 = protoModule.writeBuffer(var2991, var4342, var2992, buffer.len(var2992))
+			local var2993 = var2991
+			local var2994 = var4342
+			local var2995, var2996 = protoModule.writeTag(buff, var2973, 4, protoModule.wireTypes.lengthDelimited)
+			var2995, var4346 = protoModule.writeBuffer(var2995, var2996, var2993, var2994)
+			buff = var2995
+			var2973 = var2996
 		end
 	end
-	local buff_1 = buffer.create(var2971)
-	buffer.copy(buff_1, 0, buff, 0, var2971)
+	local buff_1 = buffer.create(var2973)
+	buffer.copy(buff_1, 0, buff, 0, var2973)
 	
 	return buff_1
 end
 
 function t_110.decode(p110)
 	-- upvalues: t_110 (ref), protoModule (ref), t (ref)
-	local var2995 = t_110.new()
-	local var2996 = 0
-	while var2996 < buffer.len(p110) do
+	local var2997 = t_110.new()
+	local var2998 = 0
+	while var2998 < buffer.len(p110) do
 		local _ = nil
-		local var2997 = nil
-		local var2998, var2999, var3000 = protoModule.readTag(p110, var2996)
-		local var3001 = var2998
-		var2997 = var2999
-		var2996 = var3000
+		local var2999 = nil
+		local var3000, var3001, var3002 = protoModule.readTag(p110, var2998)
+		local var3003 = var3000
+		var2999 = var3001
+		var2998 = var3002
 		
-		if var2997 == protoModule.wireTypes.varint then
+		if var2999 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3002, var3003 = protoModule.readVarInt(p110, var2996)
-			local _ = var3002
-			var2996 = var3003
+			local var3004, var3005 = protoModule.readVarInt(p110, var2998)
+			local _ = var3004
+			var2998 = var3005
 			continue
 		end
-		if var2997 == protoModule.wireTypes.lengthDelimited then
-			if var3001 == 1 then
+		if var2999 == protoModule.wireTypes.lengthDelimited then
+			if var3003 == 1 then
 				local _ = nil
-				local var3004, var3005 = protoModule.readBuffer(p110, var2996)
-				var2996 = var3005
-				var3004 = t.VerticalFeedInputData_EntryMapEntry.decode(var3004)
-				var2995.entry_map[var3004.key or ""] = var3004.value or t.FeedEntry.new()
-			elseif var3001 == 2 then
+				local var3006, var3007 = protoModule.readBuffer(p110, var2998)
+				var2998 = var3007
+				var3006 = t.VerticalFeedInputData_EntryMapEntry.decode(var3006)
+				var2997.entry_map[var3006.key or ""] = var3006.value or t.FeedEntry.new()
+			elseif var3003 == 2 then
 				local _ = nil
-				local var3006, var3007 = protoModule.readBuffer(p110, var2996)
-				var2996 = var3007
-				table.insert(var2995.entry_order, buffer.tostring(var3006))
-			elseif var3001 == 3 then
+				local var3008, var3009 = protoModule.readBuffer(p110, var2998)
+				var2998 = var3009
+				table.insert(var2997.entry_order, buffer.tostring(var3008))
+			elseif var3003 == 3 then
 				local _ = nil
-				local var3008, var3009 = protoModule.readBuffer(p110, var2996)
-				var2996 = var3009
-				var3008 = t.VerticalFeedInputData_EntryOrderMapEntry.decode(var3008)
-				var2995.entry_order_map[var3008.key or ""] = var3008.value or t.EntryOrder.new()
-			elseif var3001 == 4 then
+				local var3010, var3011 = protoModule.readBuffer(p110, var2998)
+				var2998 = var3011
+				var3010 = t.VerticalFeedInputData_EntryOrderMapEntry.decode(var3010)
+				var2997.entry_order_map[var3010.key or ""] = var3010.value or t.EntryOrder.new()
+			elseif var3003 == 4 then
 				local _ = nil
-				local var3010, var3011 = protoModule.readBuffer(p110, var2996)
-				var2996 = var3011
-				var3010 = t.VerticalFeedInputData_ContentPoolsEntry.decode(var3010)
-				var2995.content_pools[var3010.key or ""] = var3010.value or t.ContentPool.new()
+				local var3012, var3013 = protoModule.readBuffer(p110, var2998)
+				var2998 = var3013
+				var3012 = t.VerticalFeedInputData_ContentPoolsEntry.decode(var3012)
+				var2997.content_pools[var3012.key or ""] = var3012.value or t.ContentPool.new()
 			else
 				local _ = nil
-				local var3012, var3013 = protoModule.readVarInt(p110, var2996)
-				var2996 = var3013 + var3012
+				local var3014, var3015 = protoModule.readVarInt(p110, var2998)
+				var2998 = var3015 + var3014
 			end
-		elseif var2997 == protoModule.wireTypes.i32 then
+		elseif var2999 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3014, var3015 = protoModule.readFixed32(p110, var2996)
-			local _ = var3014
-			var2996 = var3015
-		elseif var2997 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var3016, var3017 = protoModule.readFixed64(p110, var2996)
+			local var3016, var3017 = protoModule.readFixed32(p110, var2998)
 			local _ = var3016
-			var2996 = var3017
+			var2998 = var3017
+		elseif var2999 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var3018, var3019 = protoModule.readFixed64(p110, var2998)
+			local _ = var3018
+			var2998 = var3019
 		else
-			error("Unsupported wire type: " .. var4344)
+			error("Unsupported wire type: " .. var4350)
 		end
 	end
-	return var2995
+	return var2997
 end
 
 function t_110:jsonEncode()
@@ -19231,7 +19261,7 @@ end
 
 function t_110:jsonDecode()
 	-- upvalues: t_110 (ref), t (ref)
-	local var3018 = t_110.new()
+	local var3020 = t_110.new()
 	
 	if self.entry_map ~= nil then
 		local t_1 = {}
@@ -19239,7 +19269,7 @@ function t_110:jsonDecode()
 		for i, v in self.entry_map do
 			t_1[i] = t.FeedEntry.jsonDecode(v)
 		end
-		var3018.entry_map = t_1
+		var3020.entry_map = t_1
 	end
 	if self.entryMap ~= nil then
 		local t_1 = {}
@@ -19247,7 +19277,7 @@ function t_110:jsonDecode()
 		for i, v in self.entryMap do
 			t_1[i] = t.FeedEntry.jsonDecode(v)
 		end
-		var3018.entry_map = t_1
+		var3020.entry_map = t_1
 	end
 	if self.entry_order ~= nil then
 		local t_1 = {}
@@ -19255,7 +19285,7 @@ function t_110:jsonDecode()
 		for i, v in self.entry_order do
 			table.insert(t_1, v)
 		end
-		var3018.entry_order = t_1
+		var3020.entry_order = t_1
 	end
 	if self.entryOrder ~= nil then
 		local t_1 = {}
@@ -19263,7 +19293,7 @@ function t_110:jsonDecode()
 		for i, v in self.entryOrder do
 			table.insert(t_1, v)
 		end
-		var3018.entry_order = t_1
+		var3020.entry_order = t_1
 	end
 	if self.entry_order_map ~= nil then
 		local t_1 = {}
@@ -19271,7 +19301,7 @@ function t_110:jsonDecode()
 		for i, v in self.entry_order_map do
 			t_1[i] = t.EntryOrder.jsonDecode(v)
 		end
-		var3018.entry_order_map = t_1
+		var3020.entry_order_map = t_1
 	end
 	if self.entryOrderMap ~= nil then
 		local t_1 = {}
@@ -19279,7 +19309,7 @@ function t_110:jsonDecode()
 		for i, v in self.entryOrderMap do
 			t_1[i] = t.EntryOrder.jsonDecode(v)
 		end
-		var3018.entry_order_map = t_1
+		var3020.entry_order_map = t_1
 	end
 	if self.content_pools ~= nil then
 		local t_1 = {}
@@ -19287,7 +19317,7 @@ function t_110:jsonDecode()
 		for i, v in self.content_pools do
 			t_1[i] = t.ContentPool.jsonDecode(v)
 		end
-		var3018.content_pools = t_1
+		var3020.content_pools = t_1
 	end
 	if self.contentPools ~= nil then
 		local t_1 = {}
@@ -19295,9 +19325,9 @@ function t_110:jsonDecode()
 		for i, v in self.contentPools do
 			t_1[i] = t.ContentPool.jsonDecode(v)
 		end
-		var3018.content_pools = t_1
+		var3020.content_pools = t_1
 	end
-	return var3018
+	return var3020
 end
 
 t_110.descriptor = {
@@ -19320,77 +19350,77 @@ end
 function t_111:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3019 = 0
+	local var3021 = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var3020, var3021 = protoModule.writeTag(buff, var3019, 1, protoModule.wireTypes.lengthDelimited)
-		var3020, var4382 = protoModule.writeString(var3020, var3021, self.key)
-		buff = var3020
-		var3019 = var3021
+		local var3022, var3023 = protoModule.writeTag(buff, var3021, 1, protoModule.wireTypes.lengthDelimited)
+		var3022, var4388 = protoModule.writeString(var3022, var3023, self.key)
+		buff = var3022
+		var3021 = var3023
 	end
 	if self.value ~= nil then
-		local var3022 = self.value:encode()
-		local var3023, var3024 = protoModule.writeTag(buff, var3019, 2, protoModule.wireTypes.lengthDelimited)
-		var3023, var4385 = protoModule.writeBuffer(var3023, var3024, var3022, buffer.len(var3022))
-		buff = var3023
-		var3019 = var3024
+		local var3024 = self.value:encode()
+		local var3025, var3026 = protoModule.writeTag(buff, var3021, 2, protoModule.wireTypes.lengthDelimited)
+		var3025, var4391 = protoModule.writeBuffer(var3025, var3026, var3024, buffer.len(var3024))
+		buff = var3025
+		var3021 = var3026
 	end
-	local buff_1 = buffer.create(var3019)
-	buffer.copy(buff_1, 0, buff, 0, var3019)
+	local buff_1 = buffer.create(var3021)
+	buffer.copy(buff_1, 0, buff, 0, var3021)
 	
 	return buff_1
 end
 
 function t_111.decode(p111)
 	-- upvalues: t_111 (ref), protoModule (ref), t (ref)
-	local var3019 = t_111.new()
-	local var3020 = 0
-	while var3020 < buffer.len(p111) do
+	local var3021 = t_111.new()
+	local var3022 = 0
+	while var3022 < buffer.len(p111) do
 		local _ = nil
-		local var3021 = nil
-		local var3022, var3023, var3024 = protoModule.readTag(p111, var3020)
-		local var3025 = var3022
-		var3021 = var3023
-		var3020 = var3024
+		local var3023 = nil
+		local var3024, var3025, var3026 = protoModule.readTag(p111, var3022)
+		local var3027 = var3024
+		var3023 = var3025
+		var3022 = var3026
 		
-		if var3021 == protoModule.wireTypes.varint then
+		if var3023 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3026, var3027 = protoModule.readVarInt(p111, var3020)
-			local _ = var3026
-			var3020 = var3027
+			local var3028, var3029 = protoModule.readVarInt(p111, var3022)
+			local _ = var3028
+			var3022 = var3029
 			continue
 		end
-		if var3021 == protoModule.wireTypes.lengthDelimited then
-			if var3025 == 1 then
+		if var3023 == protoModule.wireTypes.lengthDelimited then
+			if var3027 == 1 then
 				local _ = nil
-				local var3028, var3029 = protoModule.readBuffer(p111, var3020)
-				var3020 = var3029
-				var3019.key = buffer.tostring(var3028)
-			elseif var3025 == 2 then
+				local var3030, var3031 = protoModule.readBuffer(p111, var3022)
+				var3022 = var3031
+				var3021.key = buffer.tostring(var3030)
+			elseif var3027 == 2 then
 				local _ = nil
-				local var3030, var3031 = protoModule.readBuffer(p111, var3020)
-				var3020 = var3031
-				var3019.value = t.FeedEntry.decode(var3030)
+				local var3032, var3033 = protoModule.readBuffer(p111, var3022)
+				var3022 = var3033
+				var3021.value = t.FeedEntry.decode(var3032)
 			else
 				local _ = nil
-				local var3032, var3033 = protoModule.readVarInt(p111, var3020)
-				var3020 = var3033 + var3032
+				local var3034, var3035 = protoModule.readVarInt(p111, var3022)
+				var3022 = var3035 + var3034
 			end
-		elseif var3021 == protoModule.wireTypes.i32 then
+		elseif var3023 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3034, var3035 = protoModule.readFixed32(p111, var3020)
-			local _ = var3034
-			var3020 = var3035
-		elseif var3021 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var3036, var3037 = protoModule.readFixed64(p111, var3020)
+			local var3036, var3037 = protoModule.readFixed32(p111, var3022)
 			local _ = var3036
-			var3020 = var3037
+			var3022 = var3037
+		elseif var3023 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var3038, var3039 = protoModule.readFixed64(p111, var3022)
+			local _ = var3038
+			var3022 = var3039
 		else
-			error("Unsupported wire type: " .. var4389)
+			error("Unsupported wire type: " .. var4395)
 		end
 	end
-	return var3019
+	return var3021
 end
 
 function t_111:jsonEncode()
@@ -19407,15 +19437,15 @@ end
 
 function t_111:jsonDecode()
 	-- upvalues: t_111 (ref), t (ref)
-	local var3038 = t_111.new()
+	local var3040 = t_111.new()
 	
 	if self.key ~= nil then
-		var3038.key = self.key
+		var3040.key = self.key
 	end
 	if self.value ~= nil then
-		var3038.value = t.FeedEntry.jsonDecode(self.value)
+		var3040.value = t.FeedEntry.jsonDecode(self.value)
 	end
-	return var3038
+	return var3040
 end
 
 t_111.descriptor = {
@@ -19438,77 +19468,77 @@ end
 function t_112:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3038 = 0
+	local var3040 = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var3039, var3040 = protoModule.writeTag(buff, var3038, 1, protoModule.wireTypes.lengthDelimited)
-		var3039, var4411 = protoModule.writeString(var3039, var3040, self.key)
-		buff = var3039
-		var3038 = var3040
+		local var3041, var3042 = protoModule.writeTag(buff, var3040, 1, protoModule.wireTypes.lengthDelimited)
+		var3041, var4417 = protoModule.writeString(var3041, var3042, self.key)
+		buff = var3041
+		var3040 = var3042
 	end
 	if self.value ~= nil then
-		local var3041 = self.value:encode()
-		local var3042, var3043 = protoModule.writeTag(buff, var3038, 2, protoModule.wireTypes.lengthDelimited)
-		var3042, var4414 = protoModule.writeBuffer(var3042, var3043, var3041, buffer.len(var3041))
-		buff = var3042
-		var3038 = var3043
+		local var3043 = self.value:encode()
+		local var3044, var3045 = protoModule.writeTag(buff, var3040, 2, protoModule.wireTypes.lengthDelimited)
+		var3044, var4420 = protoModule.writeBuffer(var3044, var3045, var3043, buffer.len(var3043))
+		buff = var3044
+		var3040 = var3045
 	end
-	local buff_1 = buffer.create(var3038)
-	buffer.copy(buff_1, 0, buff, 0, var3038)
+	local buff_1 = buffer.create(var3040)
+	buffer.copy(buff_1, 0, buff, 0, var3040)
 	
 	return buff_1
 end
 
 function t_112.decode(p112)
 	-- upvalues: t_112 (ref), protoModule (ref), t (ref)
-	local var3038 = t_112.new()
-	local var3039 = 0
-	while var3039 < buffer.len(p112) do
+	local var3040 = t_112.new()
+	local var3041 = 0
+	while var3041 < buffer.len(p112) do
 		local _ = nil
-		local var3040 = nil
-		local var3041, var3042, var3043 = protoModule.readTag(p112, var3039)
-		local var3044 = var3041
-		var3040 = var3042
-		var3039 = var3043
+		local var3042 = nil
+		local var3043, var3044, var3045 = protoModule.readTag(p112, var3041)
+		local var3046 = var3043
+		var3042 = var3044
+		var3041 = var3045
 		
-		if var3040 == protoModule.wireTypes.varint then
+		if var3042 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3045, var3046 = protoModule.readVarInt(p112, var3039)
-			local _ = var3045
-			var3039 = var3046
+			local var3047, var3048 = protoModule.readVarInt(p112, var3041)
+			local _ = var3047
+			var3041 = var3048
 			continue
 		end
-		if var3040 == protoModule.wireTypes.lengthDelimited then
-			if var3044 == 1 then
+		if var3042 == protoModule.wireTypes.lengthDelimited then
+			if var3046 == 1 then
 				local _ = nil
-				local var3047, var3048 = protoModule.readBuffer(p112, var3039)
-				var3039 = var3048
-				var3038.key = buffer.tostring(var3047)
-			elseif var3044 == 2 then
+				local var3049, var3050 = protoModule.readBuffer(p112, var3041)
+				var3041 = var3050
+				var3040.key = buffer.tostring(var3049)
+			elseif var3046 == 2 then
 				local _ = nil
-				local var3049, var3050 = protoModule.readBuffer(p112, var3039)
-				var3039 = var3050
-				var3038.value = t.EntryOrder.decode(var3049)
+				local var3051, var3052 = protoModule.readBuffer(p112, var3041)
+				var3041 = var3052
+				var3040.value = t.EntryOrder.decode(var3051)
 			else
 				local _ = nil
-				local var3051, var3052 = protoModule.readVarInt(p112, var3039)
-				var3039 = var3052 + var3051
+				local var3053, var3054 = protoModule.readVarInt(p112, var3041)
+				var3041 = var3054 + var3053
 			end
-		elseif var3040 == protoModule.wireTypes.i32 then
+		elseif var3042 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3053, var3054 = protoModule.readFixed32(p112, var3039)
-			local _ = var3053
-			var3039 = var3054
-		elseif var3040 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var3055, var3056 = protoModule.readFixed64(p112, var3039)
+			local var3055, var3056 = protoModule.readFixed32(p112, var3041)
 			local _ = var3055
-			var3039 = var3056
+			var3041 = var3056
+		elseif var3042 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var3057, var3058 = protoModule.readFixed64(p112, var3041)
+			local _ = var3057
+			var3041 = var3058
 		else
-			error("Unsupported wire type: " .. var4418)
+			error("Unsupported wire type: " .. var4424)
 		end
 	end
-	return var3038
+	return var3040
 end
 
 function t_112:jsonEncode()
@@ -19525,15 +19555,15 @@ end
 
 function t_112:jsonDecode()
 	-- upvalues: t_112 (ref), t (ref)
-	local var3057 = t_112.new()
+	local var3059 = t_112.new()
 	
 	if self.key ~= nil then
-		var3057.key = self.key
+		var3059.key = self.key
 	end
 	if self.value ~= nil then
-		var3057.value = t.EntryOrder.jsonDecode(self.value)
+		var3059.value = t.EntryOrder.jsonDecode(self.value)
 	end
-	return var3057
+	return var3059
 end
 
 t_112.descriptor = {
@@ -19556,77 +19586,77 @@ end
 function t_113:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3057 = 0
+	local var3059 = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var3058, var3059 = protoModule.writeTag(buff, var3057, 1, protoModule.wireTypes.lengthDelimited)
-		var3058, var4440 = protoModule.writeString(var3058, var3059, self.key)
-		buff = var3058
-		var3057 = var3059
+		local var3060, var3061 = protoModule.writeTag(buff, var3059, 1, protoModule.wireTypes.lengthDelimited)
+		var3060, var4446 = protoModule.writeString(var3060, var3061, self.key)
+		buff = var3060
+		var3059 = var3061
 	end
 	if self.value ~= nil then
-		local var3060 = self.value:encode()
-		local var3061, var3062 = protoModule.writeTag(buff, var3057, 2, protoModule.wireTypes.lengthDelimited)
-		var3061, var4443 = protoModule.writeBuffer(var3061, var3062, var3060, buffer.len(var3060))
-		buff = var3061
-		var3057 = var3062
+		local var3062 = self.value:encode()
+		local var3063, var3064 = protoModule.writeTag(buff, var3059, 2, protoModule.wireTypes.lengthDelimited)
+		var3063, var4449 = protoModule.writeBuffer(var3063, var3064, var3062, buffer.len(var3062))
+		buff = var3063
+		var3059 = var3064
 	end
-	local buff_1 = buffer.create(var3057)
-	buffer.copy(buff_1, 0, buff, 0, var3057)
+	local buff_1 = buffer.create(var3059)
+	buffer.copy(buff_1, 0, buff, 0, var3059)
 	
 	return buff_1
 end
 
 function t_113.decode(p113)
 	-- upvalues: t_113 (ref), protoModule (ref), t (ref)
-	local var3057 = t_113.new()
-	local var3058 = 0
-	while var3058 < buffer.len(p113) do
+	local var3059 = t_113.new()
+	local var3060 = 0
+	while var3060 < buffer.len(p113) do
 		local _ = nil
-		local var3059 = nil
-		local var3060, var3061, var3062 = protoModule.readTag(p113, var3058)
-		local var3063 = var3060
-		var3059 = var3061
-		var3058 = var3062
+		local var3061 = nil
+		local var3062, var3063, var3064 = protoModule.readTag(p113, var3060)
+		local var3065 = var3062
+		var3061 = var3063
+		var3060 = var3064
 		
-		if var3059 == protoModule.wireTypes.varint then
+		if var3061 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3064, var3065 = protoModule.readVarInt(p113, var3058)
-			local _ = var3064
-			var3058 = var3065
+			local var3066, var3067 = protoModule.readVarInt(p113, var3060)
+			local _ = var3066
+			var3060 = var3067
 			continue
 		end
-		if var3059 == protoModule.wireTypes.lengthDelimited then
-			if var3063 == 1 then
+		if var3061 == protoModule.wireTypes.lengthDelimited then
+			if var3065 == 1 then
 				local _ = nil
-				local var3066, var3067 = protoModule.readBuffer(p113, var3058)
-				var3058 = var3067
-				var3057.key = buffer.tostring(var3066)
-			elseif var3063 == 2 then
+				local var3068, var3069 = protoModule.readBuffer(p113, var3060)
+				var3060 = var3069
+				var3059.key = buffer.tostring(var3068)
+			elseif var3065 == 2 then
 				local _ = nil
-				local var3068, var3069 = protoModule.readBuffer(p113, var3058)
-				var3058 = var3069
-				var3057.value = t.ContentPool.decode(var3068)
+				local var3070, var3071 = protoModule.readBuffer(p113, var3060)
+				var3060 = var3071
+				var3059.value = t.ContentPool.decode(var3070)
 			else
 				local _ = nil
-				local var3070, var3071 = protoModule.readVarInt(p113, var3058)
-				var3058 = var3071 + var3070
+				local var3072, var3073 = protoModule.readVarInt(p113, var3060)
+				var3060 = var3073 + var3072
 			end
-		elseif var3059 == protoModule.wireTypes.i32 then
+		elseif var3061 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3072, var3073 = protoModule.readFixed32(p113, var3058)
-			local _ = var3072
-			var3058 = var3073
-		elseif var3059 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var3074, var3075 = protoModule.readFixed64(p113, var3058)
+			local var3074, var3075 = protoModule.readFixed32(p113, var3060)
 			local _ = var3074
-			var3058 = var3075
+			var3060 = var3075
+		elseif var3061 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var3076, var3077 = protoModule.readFixed64(p113, var3060)
+			local _ = var3076
+			var3060 = var3077
 		else
-			error("Unsupported wire type: " .. var4447)
+			error("Unsupported wire type: " .. var4453)
 		end
 	end
-	return var3057
+	return var3059
 end
 
 function t_113:jsonEncode()
@@ -19643,15 +19673,15 @@ end
 
 function t_113:jsonDecode()
 	-- upvalues: t_113 (ref), t (ref)
-	local var3076 = t_113.new()
+	local var3078 = t_113.new()
 	
 	if self.key ~= nil then
-		var3076.key = self.key
+		var3078.key = self.key
 	end
 	if self.value ~= nil then
-		var3076.value = t.ContentPool.jsonDecode(self.value)
+		var3078.value = t.ContentPool.jsonDecode(self.value)
 	end
-	return var3076
+	return var3078
 end
 
 t_113.descriptor = {
@@ -19675,89 +19705,89 @@ end
 function t_114:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3076 = 0
+	local var3078 = 0
 	
 	if self.foreground_header_entry ~= nil then
-		local var3077 = self.foreground_header_entry:encode()
-		local var3078, var3079 = protoModule.writeTag(buff, var3076, 1, protoModule.wireTypes.lengthDelimited)
-		var3078, var4470 = protoModule.writeBuffer(var3078, var3079, var3077, buffer.len(var3077))
-		buff = var3078
-		var3076 = var3079
+		local var3079 = self.foreground_header_entry:encode()
+		local var3080, var3081 = protoModule.writeTag(buff, var3078, 1, protoModule.wireTypes.lengthDelimited)
+		var3080, var4476 = protoModule.writeBuffer(var3080, var3081, var3079, buffer.len(var3079))
+		buff = var3080
+		var3078 = var3081
 	end
 	if self.background_header_entry ~= nil then
-		local var3080 = self.background_header_entry:encode()
-		local var3081, var3082 = protoModule.writeTag(buff, var3076, 2, protoModule.wireTypes.lengthDelimited)
-		var3081, var4473 = protoModule.writeBuffer(var3081, var3082, var3080, buffer.len(var3080))
-		buff = var3081
-		var3076 = var3082
+		local var3082 = self.background_header_entry:encode()
+		local var3083, var3084 = protoModule.writeTag(buff, var3078, 2, protoModule.wireTypes.lengthDelimited)
+		var3083, var4479 = protoModule.writeBuffer(var3083, var3084, var3082, buffer.len(var3082))
+		buff = var3083
+		var3078 = var3084
 	end
 	if self.layout_variant ~= nil and self.layout_variant ~= "" then
-		local var3083, var3084 = protoModule.writeTag(buff, var3076, 3, protoModule.wireTypes.lengthDelimited)
-		var3083, var4475 = protoModule.writeString(var3083, var3084, self.layout_variant)
-		buff = var3083
-		var3076 = var3084
+		local var3085, var3086 = protoModule.writeTag(buff, var3078, 3, protoModule.wireTypes.lengthDelimited)
+		var3085, var4481 = protoModule.writeString(var3085, var3086, self.layout_variant)
+		buff = var3085
+		var3078 = var3086
 	end
-	local buff_1 = buffer.create(var3076)
-	buffer.copy(buff_1, 0, buff, 0, var3076)
+	local buff_1 = buffer.create(var3078)
+	buffer.copy(buff_1, 0, buff, 0, var3078)
 	
 	return buff_1
 end
 
 function t_114.decode(p114)
 	-- upvalues: t_114 (ref), protoModule (ref), t (ref)
-	local var3076 = t_114.new()
-	local var3077 = 0
-	while var3077 < buffer.len(p114) do
+	local var3078 = t_114.new()
+	local var3079 = 0
+	while var3079 < buffer.len(p114) do
 		local _ = nil
-		local var3078 = nil
-		local var3079, var3080, var3081 = protoModule.readTag(p114, var3077)
-		local var3082 = var3079
-		var3078 = var3080
-		var3077 = var3081
+		local var3080 = nil
+		local var3081, var3082, var3083 = protoModule.readTag(p114, var3079)
+		local var3084 = var3081
+		var3080 = var3082
+		var3079 = var3083
 		
-		if var3078 == protoModule.wireTypes.varint then
+		if var3080 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3083, var3084 = protoModule.readVarInt(p114, var3077)
-			local _ = var3083
-			var3077 = var3084
+			local var3085, var3086 = protoModule.readVarInt(p114, var3079)
+			local _ = var3085
+			var3079 = var3086
 			continue
 		end
-		if var3078 == protoModule.wireTypes.lengthDelimited then
-			if var3082 == 1 then
+		if var3080 == protoModule.wireTypes.lengthDelimited then
+			if var3084 == 1 then
 				local _ = nil
-				local var3085, var3086 = protoModule.readBuffer(p114, var3077)
-				var3077 = var3086
-				var3076.foreground_header_entry = t.ForegroundHeaderEntry.decode(var3085)
-			elseif var3082 == 2 then
+				local var3087, var3088 = protoModule.readBuffer(p114, var3079)
+				var3079 = var3088
+				var3078.foreground_header_entry = t.ForegroundHeaderEntry.decode(var3087)
+			elseif var3084 == 2 then
 				local _ = nil
-				local var3087, var3088 = protoModule.readBuffer(p114, var3077)
-				var3077 = var3088
-				var3076.background_header_entry = t.BackgroundHeaderEntry.decode(var3087)
-			elseif var3082 == 3 then
+				local var3089, var3090 = protoModule.readBuffer(p114, var3079)
+				var3079 = var3090
+				var3078.background_header_entry = t.BackgroundHeaderEntry.decode(var3089)
+			elseif var3084 == 3 then
 				local _ = nil
-				local var3089, var3090 = protoModule.readBuffer(p114, var3077)
-				var3077 = var3090
-				var3076.layout_variant = buffer.tostring(var3089)
+				local var3091, var3092 = protoModule.readBuffer(p114, var3079)
+				var3079 = var3092
+				var3078.layout_variant = buffer.tostring(var3091)
 			else
 				local _ = nil
-				local var3091, var3092 = protoModule.readVarInt(p114, var3077)
-				var3077 = var3092 + var3091
+				local var3093, var3094 = protoModule.readVarInt(p114, var3079)
+				var3079 = var3094 + var3093
 			end
-		elseif var3078 == protoModule.wireTypes.i32 then
+		elseif var3080 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3093, var3094 = protoModule.readFixed32(p114, var3077)
-			local _ = var3093
-			var3077 = var3094
-		elseif var3078 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var3095, var3096 = protoModule.readFixed64(p114, var3077)
+			local var3095, var3096 = protoModule.readFixed32(p114, var3079)
 			local _ = var3095
-			var3077 = var3096
+			var3079 = var3096
+		elseif var3080 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var3097, var3098 = protoModule.readFixed64(p114, var3079)
+			local _ = var3097
+			var3079 = var3098
 		else
-			error("Unsupported wire type: " .. var4479)
+			error("Unsupported wire type: " .. var4485)
 		end
 	end
-	return var3076
+	return var3078
 end
 
 function t_114:jsonEncode()
@@ -19777,27 +19807,27 @@ end
 
 function t_114:jsonDecode()
 	-- upvalues: t_114 (ref), t (ref)
-	local var3097 = t_114.new()
+	local var3099 = t_114.new()
 	
 	if self.foreground_header_entry ~= nil then
-		var3097.foreground_header_entry = t.ForegroundHeaderEntry.jsonDecode(self.foreground_header_entry)
+		var3099.foreground_header_entry = t.ForegroundHeaderEntry.jsonDecode(self.foreground_header_entry)
 	end
 	if self.foregroundHeaderEntry ~= nil then
-		var3097.foreground_header_entry = t.ForegroundHeaderEntry.jsonDecode(self.foregroundHeaderEntry)
+		var3099.foreground_header_entry = t.ForegroundHeaderEntry.jsonDecode(self.foregroundHeaderEntry)
 	end
 	if self.background_header_entry ~= nil then
-		var3097.background_header_entry = t.BackgroundHeaderEntry.jsonDecode(self.background_header_entry)
+		var3099.background_header_entry = t.BackgroundHeaderEntry.jsonDecode(self.background_header_entry)
 	end
 	if self.backgroundHeaderEntry ~= nil then
-		var3097.background_header_entry = t.BackgroundHeaderEntry.jsonDecode(self.backgroundHeaderEntry)
+		var3099.background_header_entry = t.BackgroundHeaderEntry.jsonDecode(self.backgroundHeaderEntry)
 	end
 	if self.layout_variant ~= nil then
-		var3097.layout_variant = self.layout_variant
+		var3099.layout_variant = self.layout_variant
 	end
 	if self.layoutVariant ~= nil then
-		var3097.layout_variant = self.layoutVariant
+		var3099.layout_variant = self.layoutVariant
 	end
-	return var3097
+	return var3099
 end
 
 t_114.descriptor = {
@@ -19820,76 +19850,76 @@ end
 function t_115:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3097 = 0
+	local var3099 = 0
 	
 	if self.cta_button_text ~= nil and self.cta_button_text ~= "" then
-		local var3098, var3099 = protoModule.writeTag(buff, var3097, 1, protoModule.wireTypes.lengthDelimited)
-		var3098, var4503 = protoModule.writeString(var3098, var3099, self.cta_button_text)
-		buff = var3098
-		var3097 = var3099
+		local var3100, var3101 = protoModule.writeTag(buff, var3099, 1, protoModule.wireTypes.lengthDelimited)
+		var3100, var4509 = protoModule.writeString(var3100, var3101, self.cta_button_text)
+		buff = var3100
+		var3099 = var3101
 	end
 	if self.cta_type ~= nil and self.cta_type ~= "" then
-		local var3100, var3101 = protoModule.writeTag(buff, var3097, 2, protoModule.wireTypes.lengthDelimited)
-		var3100, var4505 = protoModule.writeString(var3100, var3101, self.cta_type)
-		buff = var3100
-		var3097 = var3101
+		local var3102, var3103 = protoModule.writeTag(buff, var3099, 2, protoModule.wireTypes.lengthDelimited)
+		var3102, var4511 = protoModule.writeString(var3102, var3103, self.cta_type)
+		buff = var3102
+		var3099 = var3103
 	end
-	local buff_1 = buffer.create(var3097)
-	buffer.copy(buff_1, 0, buff, 0, var3097)
+	local buff_1 = buffer.create(var3099)
+	buffer.copy(buff_1, 0, buff, 0, var3099)
 	
 	return buff_1
 end
 
 function t_115.decode(p115)
 	-- upvalues: t_115 (ref), protoModule (ref)
-	local var3097 = t_115.new()
-	local var3098 = 0
-	while var3098 < buffer.len(p115) do
+	local var3099 = t_115.new()
+	local var3100 = 0
+	while var3100 < buffer.len(p115) do
 		local _ = nil
-		local var3099 = nil
-		local var3100, var3101, var3102 = protoModule.readTag(p115, var3098)
-		local var3103 = var3100
-		var3099 = var3101
-		var3098 = var3102
+		local var3101 = nil
+		local var3102, var3103, var3104 = protoModule.readTag(p115, var3100)
+		local var3105 = var3102
+		var3101 = var3103
+		var3100 = var3104
 		
-		if var3099 == protoModule.wireTypes.varint then
+		if var3101 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3104, var3105 = protoModule.readVarInt(p115, var3098)
-			local _ = var3104
-			var3098 = var3105
+			local var3106, var3107 = protoModule.readVarInt(p115, var3100)
+			local _ = var3106
+			var3100 = var3107
 			continue
 		end
-		if var3099 == protoModule.wireTypes.lengthDelimited then
-			if var3103 == 1 then
+		if var3101 == protoModule.wireTypes.lengthDelimited then
+			if var3105 == 1 then
 				local _ = nil
-				local var3106, var3107 = protoModule.readBuffer(p115, var3098)
-				var3098 = var3107
-				var3097.cta_button_text = buffer.tostring(var3106)
-			elseif var3103 == 2 then
+				local var3108, var3109 = protoModule.readBuffer(p115, var3100)
+				var3100 = var3109
+				var3099.cta_button_text = buffer.tostring(var3108)
+			elseif var3105 == 2 then
 				local _ = nil
-				local var3108, var3109 = protoModule.readBuffer(p115, var3098)
-				var3098 = var3109
-				var3097.cta_type = buffer.tostring(var3108)
+				local var3110, var3111 = protoModule.readBuffer(p115, var3100)
+				var3100 = var3111
+				var3099.cta_type = buffer.tostring(var3110)
 			else
 				local _ = nil
-				local var3110, var3111 = protoModule.readVarInt(p115, var3098)
-				var3098 = var3111 + var3110
+				local var3112, var3113 = protoModule.readVarInt(p115, var3100)
+				var3100 = var3113 + var3112
 			end
-		elseif var3099 == protoModule.wireTypes.i32 then
+		elseif var3101 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3112, var3113 = protoModule.readFixed32(p115, var3098)
-			local _ = var3112
-			var3098 = var3113
-		elseif var3099 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var3114, var3115 = protoModule.readFixed64(p115, var3098)
+			local var3114, var3115 = protoModule.readFixed32(p115, var3100)
 			local _ = var3114
-			var3098 = var3115
+			var3100 = var3115
+		elseif var3101 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var3116, var3117 = protoModule.readFixed64(p115, var3100)
+			local _ = var3116
+			var3100 = var3117
 		else
-			error("Unsupported wire type: " .. var4509)
+			error("Unsupported wire type: " .. var4515)
 		end
 	end
-	return var3097
+	return var3099
 end
 
 function t_115:jsonEncode()
@@ -19906,21 +19936,21 @@ end
 
 function t_115:jsonDecode()
 	-- upvalues: t_115 (ref)
-	local var3116 = t_115.new()
+	local var3118 = t_115.new()
 	
 	if self.cta_button_text ~= nil then
-		var3116.cta_button_text = self.cta_button_text
+		var3118.cta_button_text = self.cta_button_text
 	end
 	if self.ctaButtonText ~= nil then
-		var3116.cta_button_text = self.ctaButtonText
+		var3118.cta_button_text = self.ctaButtonText
 	end
 	if self.cta_type ~= nil then
-		var3116.cta_type = self.cta_type
+		var3118.cta_type = self.cta_type
 	end
 	if self.ctaType ~= nil then
-		var3116.cta_type = self.ctaType
+		var3118.cta_type = self.ctaType
 	end
-	return var3116
+	return var3118
 end
 
 t_115.descriptor = {
@@ -19945,98 +19975,98 @@ end
 function t_116:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3116 = 0
+	local var3118 = 0
 	
 	if self.title ~= nil and self.title ~= "" then
-		local var3117, var3118 = protoModule.writeTag(buff, var3116, 1, protoModule.wireTypes.lengthDelimited)
-		var3117, var4531 = protoModule.writeString(var3117, var3118, self.title)
-		buff = var3117
-		var3116 = var3118
+		local var3119, var3120 = protoModule.writeTag(buff, var3118, 1, protoModule.wireTypes.lengthDelimited)
+		var3119, var4537 = protoModule.writeString(var3119, var3120, self.title)
+		buff = var3119
+		var3118 = var3120
 	end
 	if self.cta_button_text ~= nil and self.cta_button_text ~= "" then
-		local var3119, var3120 = protoModule.writeTag(buff, var3116, 2, protoModule.wireTypes.lengthDelimited)
-		var3119, var4533 = protoModule.writeString(var3119, var3120, self.cta_button_text)
-		buff = var3119
-		var3116 = var3120
+		local var3121, var3122 = protoModule.writeTag(buff, var3118, 2, protoModule.wireTypes.lengthDelimited)
+		var3121, var4539 = protoModule.writeString(var3121, var3122, self.cta_button_text)
+		buff = var3121
+		var3118 = var3122
 	end
 	if self.image_asset_id ~= nil and self.image_asset_id ~= "" then
-		local var3121, var3122 = protoModule.writeTag(buff, var3116, 3, protoModule.wireTypes.lengthDelimited)
-		var3121, var4535 = protoModule.writeString(var3121, var3122, self.image_asset_id)
-		buff = var3121
-		var3116 = var3122
+		local var3123, var3124 = protoModule.writeTag(buff, var3118, 3, protoModule.wireTypes.lengthDelimited)
+		var3123, var4541 = protoModule.writeString(var3123, var3124, self.image_asset_id)
+		buff = var3123
+		var3118 = var3124
 	end
 	if self.cta_type ~= nil and self.cta_type ~= "" then
-		local var3123, var3124 = protoModule.writeTag(buff, var3116, 4, protoModule.wireTypes.lengthDelimited)
-		var3123, var4537 = protoModule.writeString(var3123, var3124, self.cta_type)
-		buff = var3123
-		var3116 = var3124
+		local var3125, var3126 = protoModule.writeTag(buff, var3118, 4, protoModule.wireTypes.lengthDelimited)
+		var3125, var4543 = protoModule.writeString(var3125, var3126, self.cta_type)
+		buff = var3125
+		var3118 = var3126
 	end
-	local buff_1 = buffer.create(var3116)
-	buffer.copy(buff_1, 0, buff, 0, var3116)
+	local buff_1 = buffer.create(var3118)
+	buffer.copy(buff_1, 0, buff, 0, var3118)
 	
 	return buff_1
 end
 
 function t_116.decode(p116)
 	-- upvalues: t_116 (ref), protoModule (ref)
-	local var3116 = t_116.new()
-	local var3117 = 0
-	while var3117 < buffer.len(p116) do
+	local var3118 = t_116.new()
+	local var3119 = 0
+	while var3119 < buffer.len(p116) do
 		local _ = nil
-		local var3118 = nil
-		local var3119, var3120, var3121 = protoModule.readTag(p116, var3117)
-		local var3122 = var3119
-		var3118 = var3120
-		var3117 = var3121
+		local var3120 = nil
+		local var3121, var3122, var3123 = protoModule.readTag(p116, var3119)
+		local var3124 = var3121
+		var3120 = var3122
+		var3119 = var3123
 		
-		if var3118 == protoModule.wireTypes.varint then
+		if var3120 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3123, var3124 = protoModule.readVarInt(p116, var3117)
-			local _ = var3123
-			var3117 = var3124
+			local var3125, var3126 = protoModule.readVarInt(p116, var3119)
+			local _ = var3125
+			var3119 = var3126
 			continue
 		end
-		if var3118 == protoModule.wireTypes.lengthDelimited then
-			if var3122 == 1 then
+		if var3120 == protoModule.wireTypes.lengthDelimited then
+			if var3124 == 1 then
 				local _ = nil
-				local var3125, var3126 = protoModule.readBuffer(p116, var3117)
-				var3117 = var3126
-				var3116.title = buffer.tostring(var3125)
-			elseif var3122 == 2 then
+				local var3127, var3128 = protoModule.readBuffer(p116, var3119)
+				var3119 = var3128
+				var3118.title = buffer.tostring(var3127)
+			elseif var3124 == 2 then
 				local _ = nil
-				local var3127, var3128 = protoModule.readBuffer(p116, var3117)
-				var3117 = var3128
-				var3116.cta_button_text = buffer.tostring(var3127)
-			elseif var3122 == 3 then
+				local var3129, var3130 = protoModule.readBuffer(p116, var3119)
+				var3119 = var3130
+				var3118.cta_button_text = buffer.tostring(var3129)
+			elseif var3124 == 3 then
 				local _ = nil
-				local var3129, var3130 = protoModule.readBuffer(p116, var3117)
-				var3117 = var3130
-				var3116.image_asset_id = buffer.tostring(var3129)
-			elseif var3122 == 4 then
+				local var3131, var3132 = protoModule.readBuffer(p116, var3119)
+				var3119 = var3132
+				var3118.image_asset_id = buffer.tostring(var3131)
+			elseif var3124 == 4 then
 				local _ = nil
-				local var3131, var3132 = protoModule.readBuffer(p116, var3117)
-				var3117 = var3132
-				var3116.cta_type = buffer.tostring(var3131)
+				local var3133, var3134 = protoModule.readBuffer(p116, var3119)
+				var3119 = var3134
+				var3118.cta_type = buffer.tostring(var3133)
 			else
 				local _ = nil
-				local var3133, var3134 = protoModule.readVarInt(p116, var3117)
-				var3117 = var3134 + var3133
+				local var3135, var3136 = protoModule.readVarInt(p116, var3119)
+				var3119 = var3136 + var3135
 			end
-		elseif var3118 == protoModule.wireTypes.i32 then
+		elseif var3120 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3135, var3136 = protoModule.readFixed32(p116, var3117)
-			local _ = var3135
-			var3117 = var3136
-		elseif var3118 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var3137, var3138 = protoModule.readFixed64(p116, var3117)
+			local var3137, var3138 = protoModule.readFixed32(p116, var3119)
 			local _ = var3137
-			var3117 = var3138
+			var3119 = var3138
+		elseif var3120 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var3139, var3140 = protoModule.readFixed64(p116, var3119)
+			local _ = var3139
+			var3119 = var3140
 		else
-			error("Unsupported wire type: " .. var4541)
+			error("Unsupported wire type: " .. var4547)
 		end
 	end
-	return var3116
+	return var3118
 end
 
 function t_116:jsonEncode()
@@ -20059,30 +20089,30 @@ end
 
 function t_116:jsonDecode()
 	-- upvalues: t_116 (ref)
-	local var3139 = t_116.new()
+	local var3141 = t_116.new()
 	
 	if self.title ~= nil then
-		var3139.title = self.title
+		var3141.title = self.title
 	end
 	if self.cta_button_text ~= nil then
-		var3139.cta_button_text = self.cta_button_text
+		var3141.cta_button_text = self.cta_button_text
 	end
 	if self.ctaButtonText ~= nil then
-		var3139.cta_button_text = self.ctaButtonText
+		var3141.cta_button_text = self.ctaButtonText
 	end
 	if self.image_asset_id ~= nil then
-		var3139.image_asset_id = self.image_asset_id
+		var3141.image_asset_id = self.image_asset_id
 	end
 	if self.imageAssetId ~= nil then
-		var3139.image_asset_id = self.imageAssetId
+		var3141.image_asset_id = self.imageAssetId
 	end
 	if self.cta_type ~= nil then
-		var3139.cta_type = self.cta_type
+		var3141.cta_type = self.cta_type
 	end
 	if self.ctaType ~= nil then
-		var3139.cta_type = self.ctaType
+		var3141.cta_type = self.ctaType
 	end
-	return var3139
+	return var3141
 end
 
 t_116.descriptor = {
@@ -20097,284 +20127,440 @@ t_117.__index = t_117
 function t_117.new(p117)
 	-- upvalues: t_117 (ref)
 	return setmetatable({
-		universe_id = if p117 == nil or p117.universe_id == nil then nil else p117.universe_id,
-		title = if p117 == nil or p117.title == nil then nil else p117.title,
-		subtitle = if p117 == nil or p117.subtitle == nil then nil else p117.subtitle,
-		badge_text = if p117 == nil or p117.badge_text == nil then nil else p117.badge_text,
-		foreground = if p117 == nil or p117.foreground == nil then nil else p117.foreground,
-		background = if p117 == nil or p117.background == nil then nil else p117.background,
-		title_image = if p117 == nil or p117.title_image == nil then nil else p117.title_image,
-		asset_title = if p117 == nil or p117.asset_title == nil then nil else p117.asset_title,
-		asset_subtitle = if p117 == nil or p117.asset_subtitle == nil then nil else p117.asset_subtitle,
-		gradient = if p117 == nil or p117.gradient == nil then nil else p117.gradient,
-		playable_text = if p117 == nil or p117.playable_text == nil then nil else p117.playable_text,
-		collection_id = if p117 == nil or p117.collection_id == nil then nil else p117.collection_id,
-		campaign_id = if p117 == nil or p117.campaign_id == nil then nil else p117.campaign_id,
-		cohort_id = if p117 == nil or p117.cohort_id == nil then nil else p117.cohort_id,
-		sort_id = if p117 == nil or p117.sort_id == nil then nil else p117.sort_id,
-		hero_unit_id = if p117 == nil or p117.hero_unit_id == nil then nil else p117.hero_unit_id,
-		analytics_id = if p117 == nil or p117.analytics_id == nil then nil else p117.analytics_id,
-		is_sponsored = if p117 == nil or p117.is_sponsored == nil then nil else p117.is_sponsored
+		title = if p117 == nil or p117.title == nil then "" else p117.title,
+		url = if p117 == nil or p117.url == nil then nil else p117.url,
+		destination = if p117 == nil or p117.destination == nil then nil else p117.destination,
+		row_id = if p117 == nil or p117.row_id == nil then "" else p117.row_id
 	}, t_117)
 end
 
 function t_117:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3139 = 0
+	local var3141 = 0
 	
-	if self.universe_id ~= nil then
-		local var3140, var3141 = protoModule.writeTag(buff, var3139, 1, protoModule.wireTypes.lengthDelimited)
-		var3140, var4567 = protoModule.writeString(var3140, var3141, self.universe_id)
-		buff = var3140
-		var3139 = var3141
-	end
-	if self.title ~= nil then
-		local var3142, var3143 = protoModule.writeTag(buff, var3139, 2, protoModule.wireTypes.lengthDelimited)
-		var3142, var4569 = protoModule.writeString(var3142, var3143, self.title)
+	if self.title ~= nil and self.title ~= "" then
+		local var3142, var3143 = protoModule.writeTag(buff, var3141, 1, protoModule.wireTypes.lengthDelimited)
+		var3142, var4573 = protoModule.writeString(var3142, var3143, self.title)
 		buff = var3142
-		var3139 = var3143
+		var3141 = var3143
 	end
-	if self.subtitle ~= nil then
-		local var3144, var3145 = protoModule.writeTag(buff, var3139, 3, protoModule.wireTypes.lengthDelimited)
-		var3144, var4571 = protoModule.writeString(var3144, var3145, self.subtitle)
+	if self.url ~= nil then
+		local var3144, var3145 = protoModule.writeTag(buff, var3141, 2, protoModule.wireTypes.lengthDelimited)
+		var3144, var4575 = protoModule.writeString(var3144, var3145, self.url)
 		buff = var3144
-		var3139 = var3145
+		var3141 = var3145
 	end
-	if self.badge_text ~= nil then
-		local var3146, var3147 = protoModule.writeTag(buff, var3139, 4, protoModule.wireTypes.lengthDelimited)
-		var3146, var4573 = protoModule.writeString(var3146, var3147, self.badge_text)
+	if self.destination ~= nil then
+		local var3146, var3147 = protoModule.writeTag(buff, var3141, 3, protoModule.wireTypes.lengthDelimited)
+		var3146, var4577 = protoModule.writeString(var3146, var3147, self.destination)
 		buff = var3146
-		var3139 = var3147
+		var3141 = var3147
 	end
-	if self.foreground ~= nil then
-		local var3148 = self.foreground:encode()
-		local var3149, var3150 = protoModule.writeTag(buff, var3139, 5, protoModule.wireTypes.lengthDelimited)
-		var3149, var4576 = protoModule.writeBuffer(var3149, var3150, var3148, buffer.len(var3148))
-		buff = var3149
-		var3139 = var3150
+	if self.row_id ~= nil and self.row_id ~= "" then
+		local var3148, var3149 = protoModule.writeTag(buff, var3141, 4, protoModule.wireTypes.lengthDelimited)
+		var3148, var4579 = protoModule.writeString(var3148, var3149, self.row_id)
+		buff = var3148
+		var3141 = var3149
 	end
-	if self.background ~= nil then
-		local var3151 = self.background:encode()
-		local var3152, var3153 = protoModule.writeTag(buff, var3139, 6, protoModule.wireTypes.lengthDelimited)
-		var3152, var4579 = protoModule.writeBuffer(var3152, var3153, var3151, buffer.len(var3151))
-		buff = var3152
-		var3139 = var3153
-	end
-	if self.title_image ~= nil then
-		local var3154 = self.title_image:encode()
-		local var3155, var3156 = protoModule.writeTag(buff, var3139, 7, protoModule.wireTypes.lengthDelimited)
-		var3155, var4582 = protoModule.writeBuffer(var3155, var3156, var3154, buffer.len(var3154))
-		buff = var3155
-		var3139 = var3156
-	end
-	if self.asset_title ~= nil then
-		local var3157, var3158 = protoModule.writeTag(buff, var3139, 8, protoModule.wireTypes.lengthDelimited)
-		var3157, var4584 = protoModule.writeString(var3157, var3158, self.asset_title)
-		buff = var3157
-		var3139 = var3158
-	end
-	if self.asset_subtitle ~= nil then
-		local var3159, var3160 = protoModule.writeTag(buff, var3139, 9, protoModule.wireTypes.lengthDelimited)
-		var3159, var4586 = protoModule.writeString(var3159, var3160, self.asset_subtitle)
-		buff = var3159
-		var3139 = var3160
-	end
-	if self.gradient ~= nil then
-		local var3161 = self.gradient:encode()
-		local var3162, var3163 = protoModule.writeTag(buff, var3139, 10, protoModule.wireTypes.lengthDelimited)
-		var3162, var4589 = protoModule.writeBuffer(var3162, var3163, var3161, buffer.len(var3161))
-		buff = var3162
-		var3139 = var3163
-	end
-	if self.playable_text ~= nil then
-		local var3164, var3165 = protoModule.writeTag(buff, var3139, 11, protoModule.wireTypes.lengthDelimited)
-		var3164, var4591 = protoModule.writeString(var3164, var3165, self.playable_text)
-		buff = var3164
-		var3139 = var3165
-	end
-	if self.collection_id ~= nil then
-		local var3166, var3167 = protoModule.writeTag(buff, var3139, 12, protoModule.wireTypes.lengthDelimited)
-		var3166, var4593 = protoModule.writeString(var3166, var3167, self.collection_id)
-		buff = var3166
-		var3139 = var3167
-	end
-	if self.campaign_id ~= nil then
-		local var3168, var3169 = protoModule.writeTag(buff, var3139, 13, protoModule.wireTypes.lengthDelimited)
-		var3168, var4595 = protoModule.writeString(var3168, var3169, self.campaign_id)
-		buff = var3168
-		var3139 = var3169
-	end
-	if self.cohort_id ~= nil then
-		local var3170, var3171 = protoModule.writeTag(buff, var3139, 14, protoModule.wireTypes.lengthDelimited)
-		var3170, var4597 = protoModule.writeString(var3170, var3171, self.cohort_id)
-		buff = var3170
-		var3139 = var3171
-	end
-	if self.sort_id ~= nil then
-		local var3172, var3173 = protoModule.writeTag(buff, var3139, 15, protoModule.wireTypes.lengthDelimited)
-		var3172, var4599 = protoModule.writeString(var3172, var3173, self.sort_id)
-		buff = var3172
-		var3139 = var3173
-	end
-	if self.hero_unit_id ~= nil then
-		local var3174, var3175 = protoModule.writeTag(buff, var3139, 16, protoModule.wireTypes.lengthDelimited)
-		var3174, var4601 = protoModule.writeString(var3174, var3175, self.hero_unit_id)
-		buff = var3174
-		var3139 = var3175
-	end
-	if self.analytics_id ~= nil then
-		local var3176, var3177 = protoModule.writeTag(buff, var3139, 17, protoModule.wireTypes.lengthDelimited)
-		var3176, var4603 = protoModule.writeString(var3176, var3177, self.analytics_id)
-		buff = var3176
-		var3139 = var3177
-	end
-	if self.is_sponsored ~= nil then
-		local var3178, var3179 = protoModule.writeTag(buff, var3139, 18, protoModule.wireTypes.varint)
-		var3178, var4605 = protoModule.writeVarInt(var3178, var3179, if self.is_sponsored then 1 else 0)
-		buff = var3178
-		var3139 = var3179
-	end
-	local buff_1 = buffer.create(var3139)
-	buffer.copy(buff_1, 0, buff, 0, var3139)
+	local buff_1 = buffer.create(var3141)
+	buffer.copy(buff_1, 0, buff, 0, var3141)
 	
 	return buff_1
 end
 
 function t_117.decode(p117)
-	-- upvalues: t_117 (ref), protoModule (ref), t (ref)
-	local var3139 = t_117.new()
-	local var3140 = 0
-	while var3140 < buffer.len(p117) do
+	-- upvalues: t_117 (ref), protoModule (ref)
+	local var3141 = t_117.new()
+	local var3142 = 0
+	while var3142 < buffer.len(p117) do
 		local _ = nil
-		local var3141 = nil
-		local var3142, var3143, var3144 = protoModule.readTag(p117, var3140)
-		local var3145 = var3142
-		var3141 = var3143
-		var3140 = var3144
+		local var3143 = nil
+		local var3144, var3145, var3146 = protoModule.readTag(p117, var3142)
+		local var3147 = var3144
+		var3143 = var3145
+		var3142 = var3146
 		
-		if var3141 == protoModule.wireTypes.varint then
-			if var3145 == 18 then
-				local _ = nil
-				local var3146, var3147 = protoModule.readVarInt(p117, var3140)
-				var3140 = var3147
-				var3139.is_sponsored = var3146 ~= 0
-			else
-				local _ = nil
-				local var3148, var3149 = protoModule.readVarInt(p117, var3140)
-				local _ = var3148
-				var3140 = var3149
-			end
+		if var3143 == protoModule.wireTypes.varint then
+			local _ = nil
+			local var3148, var3149 = protoModule.readVarInt(p117, var3142)
+			local _ = var3148
+			var3142 = var3149
+			continue
 		end
-		if var3141 == protoModule.wireTypes.lengthDelimited then
-			if var3145 == 1 then
+		if var3143 == protoModule.wireTypes.lengthDelimited then
+			if var3147 == 1 then
 				local _ = nil
-				local var3150, var3151 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3151
-				var3139.universe_id = buffer.tostring(var3150)
-			elseif var3145 == 2 then
+				local var3150, var3151 = protoModule.readBuffer(p117, var3142)
+				var3142 = var3151
+				var3141.title = buffer.tostring(var3150)
+			elseif var3147 == 2 then
 				local _ = nil
-				local var3152, var3153 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3153
-				var3139.title = buffer.tostring(var3152)
-			elseif var3145 == 3 then
+				local var3152, var3153 = protoModule.readBuffer(p117, var3142)
+				var3142 = var3153
+				var3141.url = buffer.tostring(var3152)
+			elseif var3147 == 3 then
 				local _ = nil
-				local var3154, var3155 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3155
-				var3139.subtitle = buffer.tostring(var3154)
-			elseif var3145 == 4 then
+				local var3154, var3155 = protoModule.readBuffer(p117, var3142)
+				var3142 = var3155
+				var3141.destination = buffer.tostring(var3154)
+			elseif var3147 == 4 then
 				local _ = nil
-				local var3156, var3157 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3157
-				var3139.badge_text = buffer.tostring(var3156)
-			elseif var3145 == 5 then
-				local _ = nil
-				local var3158, var3159 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3159
-				var3139.foreground = t.HeroUnitInputData_VisualAsset.decode(var3158)
-			elseif var3145 == 6 then
-				local _ = nil
-				local var3160, var3161 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3161
-				var3139.background = t.HeroUnitInputData_VisualAsset.decode(var3160)
-			elseif var3145 == 7 then
-				local _ = nil
-				local var3162, var3163 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3163
-				var3139.title_image = t.HeroUnitInputData_VisualAsset.decode(var3162)
-			elseif var3145 == 8 then
-				local _ = nil
-				local var3164, var3165 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3165
-				var3139.asset_title = buffer.tostring(var3164)
-			elseif var3145 == 9 then
-				local _ = nil
-				local var3166, var3167 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3167
-				var3139.asset_subtitle = buffer.tostring(var3166)
-			elseif var3145 == 10 then
-				local _ = nil
-				local var3168, var3169 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3169
-				var3139.gradient = t.HeroUnitInputData_Gradient.decode(var3168)
-			elseif var3145 == 11 then
-				local _ = nil
-				local var3170, var3171 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3171
-				var3139.playable_text = buffer.tostring(var3170)
-			elseif var3145 == 12 then
-				local _ = nil
-				local var3172, var3173 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3173
-				var3139.collection_id = buffer.tostring(var3172)
-			elseif var3145 == 13 then
-				local _ = nil
-				local var3174, var3175 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3175
-				var3139.campaign_id = buffer.tostring(var3174)
-			elseif var3145 == 14 then
-				local _ = nil
-				local var3176, var3177 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3177
-				var3139.cohort_id = buffer.tostring(var3176)
-			elseif var3145 == 15 then
-				local _ = nil
-				local var3178, var3179 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3179
-				var3139.sort_id = buffer.tostring(var3178)
-			elseif var3145 == 16 then
-				local _ = nil
-				local var3180, var3181 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3181
-				var3139.hero_unit_id = buffer.tostring(var3180)
-			elseif var3145 == 17 then
-				local _ = nil
-				local var3182, var3183 = protoModule.readBuffer(p117, var3140)
-				var3140 = var3183
-				var3139.analytics_id = buffer.tostring(var3182)
+				local var3156, var3157 = protoModule.readBuffer(p117, var3142)
+				var3142 = var3157
+				var3141.row_id = buffer.tostring(var3156)
 			else
 				local _ = nil
-				local var3184, var3185 = protoModule.readVarInt(p117, var3140)
-				var3140 = var3185 + var3184
+				local var3158, var3159 = protoModule.readVarInt(p117, var3142)
+				var3142 = var3159 + var3158
 			end
-		elseif var3141 == protoModule.wireTypes.i32 then
+		elseif var3143 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3186, var3187 = protoModule.readFixed32(p117, var3140)
-			local _ = var3186
-			var3140 = var3187
-		elseif var3141 == protoModule.wireTypes.i64 then
+			local var3160, var3161 = protoModule.readFixed32(p117, var3142)
+			local _ = var3160
+			var3142 = var3161
+		elseif var3143 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var3188, var3189 = protoModule.readFixed64(p117, var3140)
-			local _ = var3188
-			var3140 = var3189
+			local var3162, var3163 = protoModule.readFixed64(p117, var3142)
+			local _ = var3162
+			var3142 = var3163
 		else
-			error("Unsupported wire type: " .. var4609)
+			error("Unsupported wire type: " .. var4583)
 		end
 	end
-	return var3139
+	return var3141
 end
 
 function t_117:jsonEncode()
+	local t = {}
+	
+	if self.title ~= nil and self.title ~= "" then
+		t.title = self.title
+	end
+	if self.url ~= nil then
+		t.url = self.url
+	end
+	if self.destination ~= nil then
+		t.destination = self.destination
+	end
+	if self.row_id ~= nil and self.row_id ~= "" then
+		t.rowId = self.row_id
+	end
+	return t
+end
+
+function t_117:jsonDecode()
+	-- upvalues: t_117 (ref)
+	local var3164 = t_117.new()
+	
+	if self.title ~= nil then
+		var3164.title = self.title
+	end
+	if self.url ~= nil then
+		var3164.url = self.url
+	end
+	if self.destination ~= nil then
+		var3164.destination = self.destination
+	end
+	if self.row_id ~= nil then
+		var3164.row_id = self.row_id
+	end
+	if self.rowId ~= nil then
+		var3164.row_id = self.rowId
+	end
+	return var3164
+end
+
+t_117.descriptor = {
+	name = "SettingsRowInputData",
+	fullName = "roblox.apppageplatform.shared.v1beta1.SettingsRowInputData"
+}
+t.SettingsRowInputData = t_117
+typeRegistryModule.default:register(t.SettingsRowInputData)
+local t_118 = {}
+t_118.__index = t_118
+
+function t_118.new(p118)
+	-- upvalues: t_118 (ref)
+	return setmetatable({
+		universe_id = if p118 == nil or p118.universe_id == nil then nil else p118.universe_id,
+		title = if p118 == nil or p118.title == nil then nil else p118.title,
+		subtitle = if p118 == nil or p118.subtitle == nil then nil else p118.subtitle,
+		badge_text = if p118 == nil or p118.badge_text == nil then nil else p118.badge_text,
+		foreground = if p118 == nil or p118.foreground == nil then nil else p118.foreground,
+		background = if p118 == nil or p118.background == nil then nil else p118.background,
+		title_image = if p118 == nil or p118.title_image == nil then nil else p118.title_image,
+		asset_title = if p118 == nil or p118.asset_title == nil then nil else p118.asset_title,
+		asset_subtitle = if p118 == nil or p118.asset_subtitle == nil then nil else p118.asset_subtitle,
+		gradient = if p118 == nil or p118.gradient == nil then nil else p118.gradient,
+		playable_text = if p118 == nil or p118.playable_text == nil then nil else p118.playable_text,
+		collection_id = if p118 == nil or p118.collection_id == nil then nil else p118.collection_id,
+		campaign_id = if p118 == nil or p118.campaign_id == nil then nil else p118.campaign_id,
+		cohort_id = if p118 == nil or p118.cohort_id == nil then nil else p118.cohort_id,
+		sort_id = if p118 == nil or p118.sort_id == nil then nil else p118.sort_id,
+		hero_unit_id = if p118 == nil or p118.hero_unit_id == nil then nil else p118.hero_unit_id,
+		analytics_id = if p118 == nil or p118.analytics_id == nil then nil else p118.analytics_id,
+		is_sponsored = if p118 == nil or p118.is_sponsored == nil then nil else p118.is_sponsored
+	}, t_118)
+end
+
+function t_118:encode()
+	-- upvalues: protoModule (ref)
+	local buff = buffer.create(0)
+	local var3164 = 0
+	
+	if self.universe_id ~= nil then
+		local var3165, var3166 = protoModule.writeTag(buff, var3164, 1, protoModule.wireTypes.lengthDelimited)
+		var3165, var4609 = protoModule.writeString(var3165, var3166, self.universe_id)
+		buff = var3165
+		var3164 = var3166
+	end
+	if self.title ~= nil then
+		local var3167, var3168 = protoModule.writeTag(buff, var3164, 2, protoModule.wireTypes.lengthDelimited)
+		var3167, var4611 = protoModule.writeString(var3167, var3168, self.title)
+		buff = var3167
+		var3164 = var3168
+	end
+	if self.subtitle ~= nil then
+		local var3169, var3170 = protoModule.writeTag(buff, var3164, 3, protoModule.wireTypes.lengthDelimited)
+		var3169, var4613 = protoModule.writeString(var3169, var3170, self.subtitle)
+		buff = var3169
+		var3164 = var3170
+	end
+	if self.badge_text ~= nil then
+		local var3171, var3172 = protoModule.writeTag(buff, var3164, 4, protoModule.wireTypes.lengthDelimited)
+		var3171, var4615 = protoModule.writeString(var3171, var3172, self.badge_text)
+		buff = var3171
+		var3164 = var3172
+	end
+	if self.foreground ~= nil then
+		local var3173 = self.foreground:encode()
+		local var3174, var3175 = protoModule.writeTag(buff, var3164, 5, protoModule.wireTypes.lengthDelimited)
+		var3174, var4618 = protoModule.writeBuffer(var3174, var3175, var3173, buffer.len(var3173))
+		buff = var3174
+		var3164 = var3175
+	end
+	if self.background ~= nil then
+		local var3176 = self.background:encode()
+		local var3177, var3178 = protoModule.writeTag(buff, var3164, 6, protoModule.wireTypes.lengthDelimited)
+		var3177, var4621 = protoModule.writeBuffer(var3177, var3178, var3176, buffer.len(var3176))
+		buff = var3177
+		var3164 = var3178
+	end
+	if self.title_image ~= nil then
+		local var3179 = self.title_image:encode()
+		local var3180, var3181 = protoModule.writeTag(buff, var3164, 7, protoModule.wireTypes.lengthDelimited)
+		var3180, var4624 = protoModule.writeBuffer(var3180, var3181, var3179, buffer.len(var3179))
+		buff = var3180
+		var3164 = var3181
+	end
+	if self.asset_title ~= nil then
+		local var3182, var3183 = protoModule.writeTag(buff, var3164, 8, protoModule.wireTypes.lengthDelimited)
+		var3182, var4626 = protoModule.writeString(var3182, var3183, self.asset_title)
+		buff = var3182
+		var3164 = var3183
+	end
+	if self.asset_subtitle ~= nil then
+		local var3184, var3185 = protoModule.writeTag(buff, var3164, 9, protoModule.wireTypes.lengthDelimited)
+		var3184, var4628 = protoModule.writeString(var3184, var3185, self.asset_subtitle)
+		buff = var3184
+		var3164 = var3185
+	end
+	if self.gradient ~= nil then
+		local var3186 = self.gradient:encode()
+		local var3187, var3188 = protoModule.writeTag(buff, var3164, 10, protoModule.wireTypes.lengthDelimited)
+		var3187, var4631 = protoModule.writeBuffer(var3187, var3188, var3186, buffer.len(var3186))
+		buff = var3187
+		var3164 = var3188
+	end
+	if self.playable_text ~= nil then
+		local var3189, var3190 = protoModule.writeTag(buff, var3164, 11, protoModule.wireTypes.lengthDelimited)
+		var3189, var4633 = protoModule.writeString(var3189, var3190, self.playable_text)
+		buff = var3189
+		var3164 = var3190
+	end
+	if self.collection_id ~= nil then
+		local var3191, var3192 = protoModule.writeTag(buff, var3164, 12, protoModule.wireTypes.lengthDelimited)
+		var3191, var4635 = protoModule.writeString(var3191, var3192, self.collection_id)
+		buff = var3191
+		var3164 = var3192
+	end
+	if self.campaign_id ~= nil then
+		local var3193, var3194 = protoModule.writeTag(buff, var3164, 13, protoModule.wireTypes.lengthDelimited)
+		var3193, var4637 = protoModule.writeString(var3193, var3194, self.campaign_id)
+		buff = var3193
+		var3164 = var3194
+	end
+	if self.cohort_id ~= nil then
+		local var3195, var3196 = protoModule.writeTag(buff, var3164, 14, protoModule.wireTypes.lengthDelimited)
+		var3195, var4639 = protoModule.writeString(var3195, var3196, self.cohort_id)
+		buff = var3195
+		var3164 = var3196
+	end
+	if self.sort_id ~= nil then
+		local var3197, var3198 = protoModule.writeTag(buff, var3164, 15, protoModule.wireTypes.lengthDelimited)
+		var3197, var4641 = protoModule.writeString(var3197, var3198, self.sort_id)
+		buff = var3197
+		var3164 = var3198
+	end
+	if self.hero_unit_id ~= nil then
+		local var3199, var3200 = protoModule.writeTag(buff, var3164, 16, protoModule.wireTypes.lengthDelimited)
+		var3199, var4643 = protoModule.writeString(var3199, var3200, self.hero_unit_id)
+		buff = var3199
+		var3164 = var3200
+	end
+	if self.analytics_id ~= nil then
+		local var3201, var3202 = protoModule.writeTag(buff, var3164, 17, protoModule.wireTypes.lengthDelimited)
+		var3201, var4645 = protoModule.writeString(var3201, var3202, self.analytics_id)
+		buff = var3201
+		var3164 = var3202
+	end
+	if self.is_sponsored ~= nil then
+		local var3203, var3204 = protoModule.writeTag(buff, var3164, 18, protoModule.wireTypes.varint)
+		var3203, var4647 = protoModule.writeVarInt(var3203, var3204, if self.is_sponsored then 1 else 0)
+		buff = var3203
+		var3164 = var3204
+	end
+	local buff_1 = buffer.create(var3164)
+	buffer.copy(buff_1, 0, buff, 0, var3164)
+	
+	return buff_1
+end
+
+function t_118.decode(p118)
+	-- upvalues: t_118 (ref), protoModule (ref), t (ref)
+	local var3164 = t_118.new()
+	local var3165 = 0
+	while var3165 < buffer.len(p118) do
+		local _ = nil
+		local var3166 = nil
+		local var3167, var3168, var3169 = protoModule.readTag(p118, var3165)
+		local var3170 = var3167
+		var3166 = var3168
+		var3165 = var3169
+		
+		if var3166 == protoModule.wireTypes.varint then
+			if var3170 == 18 then
+				local _ = nil
+				local var3171, var3172 = protoModule.readVarInt(p118, var3165)
+				var3165 = var3172
+				var3164.is_sponsored = var3171 ~= 0
+			else
+				local _ = nil
+				local var3173, var3174 = protoModule.readVarInt(p118, var3165)
+				local _ = var3173
+				var3165 = var3174
+			end
+		end
+		if var3166 == protoModule.wireTypes.lengthDelimited then
+			if var3170 == 1 then
+				local _ = nil
+				local var3175, var3176 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3176
+				var3164.universe_id = buffer.tostring(var3175)
+			elseif var3170 == 2 then
+				local _ = nil
+				local var3177, var3178 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3178
+				var3164.title = buffer.tostring(var3177)
+			elseif var3170 == 3 then
+				local _ = nil
+				local var3179, var3180 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3180
+				var3164.subtitle = buffer.tostring(var3179)
+			elseif var3170 == 4 then
+				local _ = nil
+				local var3181, var3182 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3182
+				var3164.badge_text = buffer.tostring(var3181)
+			elseif var3170 == 5 then
+				local _ = nil
+				local var3183, var3184 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3184
+				var3164.foreground = t.HeroUnitInputData_VisualAsset.decode(var3183)
+			elseif var3170 == 6 then
+				local _ = nil
+				local var3185, var3186 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3186
+				var3164.background = t.HeroUnitInputData_VisualAsset.decode(var3185)
+			elseif var3170 == 7 then
+				local _ = nil
+				local var3187, var3188 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3188
+				var3164.title_image = t.HeroUnitInputData_VisualAsset.decode(var3187)
+			elseif var3170 == 8 then
+				local _ = nil
+				local var3189, var3190 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3190
+				var3164.asset_title = buffer.tostring(var3189)
+			elseif var3170 == 9 then
+				local _ = nil
+				local var3191, var3192 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3192
+				var3164.asset_subtitle = buffer.tostring(var3191)
+			elseif var3170 == 10 then
+				local _ = nil
+				local var3193, var3194 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3194
+				var3164.gradient = t.HeroUnitInputData_Gradient.decode(var3193)
+			elseif var3170 == 11 then
+				local _ = nil
+				local var3195, var3196 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3196
+				var3164.playable_text = buffer.tostring(var3195)
+			elseif var3170 == 12 then
+				local _ = nil
+				local var3197, var3198 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3198
+				var3164.collection_id = buffer.tostring(var3197)
+			elseif var3170 == 13 then
+				local _ = nil
+				local var3199, var3200 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3200
+				var3164.campaign_id = buffer.tostring(var3199)
+			elseif var3170 == 14 then
+				local _ = nil
+				local var3201, var3202 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3202
+				var3164.cohort_id = buffer.tostring(var3201)
+			elseif var3170 == 15 then
+				local _ = nil
+				local var3203, var3204 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3204
+				var3164.sort_id = buffer.tostring(var3203)
+			elseif var3170 == 16 then
+				local _ = nil
+				local var3205, var3206 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3206
+				var3164.hero_unit_id = buffer.tostring(var3205)
+			elseif var3170 == 17 then
+				local _ = nil
+				local var3207, var3208 = protoModule.readBuffer(p118, var3165)
+				var3165 = var3208
+				var3164.analytics_id = buffer.tostring(var3207)
+			else
+				local _ = nil
+				local var3209, var3210 = protoModule.readVarInt(p118, var3165)
+				var3165 = var3210 + var3209
+			end
+		elseif var3166 == protoModule.wireTypes.i32 then
+			local _ = nil
+			local var3211, var3212 = protoModule.readFixed32(p118, var3165)
+			local _ = var3211
+			var3165 = var3212
+		elseif var3166 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var3213, var3214 = protoModule.readFixed64(p118, var3165)
+			local _ = var3213
+			var3165 = var3214
+		else
+			error("Unsupported wire type: " .. var4651)
+		end
+	end
+	return var3164
+end
+
+function t_118:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil then
@@ -20434,212 +20620,212 @@ function t_117:jsonEncode()
 	return t
 end
 
-function t_117:jsonDecode()
-	-- upvalues: t_117 (ref), t (ref)
-	local var3190 = t_117.new()
+function t_118:jsonDecode()
+	-- upvalues: t_118 (ref), t (ref)
+	local var3215 = t_118.new()
 	
 	if self.universe_id ~= nil then
-		var3190.universe_id = self.universe_id
+		var3215.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var3190.universe_id = self.universeId
+		var3215.universe_id = self.universeId
 	end
 	if self.title ~= nil then
-		var3190.title = self.title
+		var3215.title = self.title
 	end
 	if self.subtitle ~= nil then
-		var3190.subtitle = self.subtitle
+		var3215.subtitle = self.subtitle
 	end
 	if self.badge_text ~= nil then
-		var3190.badge_text = self.badge_text
+		var3215.badge_text = self.badge_text
 	end
 	if self.badgeText ~= nil then
-		var3190.badge_text = self.badgeText
+		var3215.badge_text = self.badgeText
 	end
 	if self.foreground ~= nil then
-		var3190.foreground = t.HeroUnitInputData_VisualAsset.jsonDecode(self.foreground)
+		var3215.foreground = t.HeroUnitInputData_VisualAsset.jsonDecode(self.foreground)
 	end
 	if self.background ~= nil then
-		var3190.background = t.HeroUnitInputData_VisualAsset.jsonDecode(self.background)
+		var3215.background = t.HeroUnitInputData_VisualAsset.jsonDecode(self.background)
 	end
 	if self.title_image ~= nil then
-		var3190.title_image = t.HeroUnitInputData_VisualAsset.jsonDecode(self.title_image)
+		var3215.title_image = t.HeroUnitInputData_VisualAsset.jsonDecode(self.title_image)
 	end
 	if self.titleImage ~= nil then
-		var3190.title_image = t.HeroUnitInputData_VisualAsset.jsonDecode(self.titleImage)
+		var3215.title_image = t.HeroUnitInputData_VisualAsset.jsonDecode(self.titleImage)
 	end
 	if self.asset_title ~= nil then
-		var3190.asset_title = self.asset_title
+		var3215.asset_title = self.asset_title
 	end
 	if self.assetTitle ~= nil then
-		var3190.asset_title = self.assetTitle
+		var3215.asset_title = self.assetTitle
 	end
 	if self.asset_subtitle ~= nil then
-		var3190.asset_subtitle = self.asset_subtitle
+		var3215.asset_subtitle = self.asset_subtitle
 	end
 	if self.assetSubtitle ~= nil then
-		var3190.asset_subtitle = self.assetSubtitle
+		var3215.asset_subtitle = self.assetSubtitle
 	end
 	if self.gradient ~= nil then
-		var3190.gradient = t.HeroUnitInputData_Gradient.jsonDecode(self.gradient)
+		var3215.gradient = t.HeroUnitInputData_Gradient.jsonDecode(self.gradient)
 	end
 	if self.playable_text ~= nil then
-		var3190.playable_text = self.playable_text
+		var3215.playable_text = self.playable_text
 	end
 	if self.playableText ~= nil then
-		var3190.playable_text = self.playableText
+		var3215.playable_text = self.playableText
 	end
 	if self.collection_id ~= nil then
-		var3190.collection_id = self.collection_id
+		var3215.collection_id = self.collection_id
 	end
 	if self.collectionId ~= nil then
-		var3190.collection_id = self.collectionId
+		var3215.collection_id = self.collectionId
 	end
 	if self.campaign_id ~= nil then
-		var3190.campaign_id = self.campaign_id
+		var3215.campaign_id = self.campaign_id
 	end
 	if self.campaignId ~= nil then
-		var3190.campaign_id = self.campaignId
+		var3215.campaign_id = self.campaignId
 	end
 	if self.cohort_id ~= nil then
-		var3190.cohort_id = self.cohort_id
+		var3215.cohort_id = self.cohort_id
 	end
 	if self.cohortId ~= nil then
-		var3190.cohort_id = self.cohortId
+		var3215.cohort_id = self.cohortId
 	end
 	if self.sort_id ~= nil then
-		var3190.sort_id = self.sort_id
+		var3215.sort_id = self.sort_id
 	end
 	if self.sortId ~= nil then
-		var3190.sort_id = self.sortId
+		var3215.sort_id = self.sortId
 	end
 	if self.hero_unit_id ~= nil then
-		var3190.hero_unit_id = self.hero_unit_id
+		var3215.hero_unit_id = self.hero_unit_id
 	end
 	if self.heroUnitId ~= nil then
-		var3190.hero_unit_id = self.heroUnitId
+		var3215.hero_unit_id = self.heroUnitId
 	end
 	if self.analytics_id ~= nil then
-		var3190.analytics_id = self.analytics_id
+		var3215.analytics_id = self.analytics_id
 	end
 	if self.analyticsId ~= nil then
-		var3190.analytics_id = self.analyticsId
+		var3215.analytics_id = self.analyticsId
 	end
 	if self.is_sponsored ~= nil then
-		var3190.is_sponsored = self.is_sponsored
+		var3215.is_sponsored = self.is_sponsored
 	end
 	if self.isSponsored ~= nil then
-		var3190.is_sponsored = self.isSponsored
+		var3215.is_sponsored = self.isSponsored
 	end
-	return var3190
+	return var3215
 end
 
-t_117.descriptor = {
+t_118.descriptor = {
 	name = "HeroUnitInputData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.HeroUnitInputData"
 }
-t.HeroUnitInputData = t_117
+t.HeroUnitInputData = t_118
 typeRegistryModule.default:register(t.HeroUnitInputData)
-local t_118 = {}
-t_118.__index = t_118
+local t_119 = {}
+t_119.__index = t_119
 
-function t_118.new(p118)
-	-- upvalues: t_118 (ref)
+function t_119.new(p119)
+	-- upvalues: t_119 (ref)
 	return setmetatable({
-		asset_id = if p118 == nil or p118.asset_id == nil then "" else p118.asset_id,
-		aspect_ratio = if p118 == nil or p118.aspect_ratio == nil then nil else p118.aspect_ratio,
-		enable_animation = if p118 == nil or p118.enable_animation == nil then nil else p118.enable_animation
-	}, t_118)
+		asset_id = if p119 == nil or p119.asset_id == nil then "" else p119.asset_id,
+		aspect_ratio = if p119 == nil or p119.aspect_ratio == nil then nil else p119.aspect_ratio,
+		enable_animation = if p119 == nil or p119.enable_animation == nil then nil else p119.enable_animation
+	}, t_119)
 end
 
-function t_118:encode()
+function t_119:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3190 = 0
+	local var3215 = 0
 	
 	if self.asset_id ~= nil and self.asset_id ~= "" then
-		local var3191, var3192 = protoModule.writeTag(buff, var3190, 1, protoModule.wireTypes.lengthDelimited)
-		var3191, var4663 = protoModule.writeString(var3191, var3192, self.asset_id)
-		buff = var3191
-		var3190 = var3192
+		local var3216, var3217 = protoModule.writeTag(buff, var3215, 1, protoModule.wireTypes.lengthDelimited)
+		var3216, var4705 = protoModule.writeString(var3216, var3217, self.asset_id)
+		buff = var3216
+		var3215 = var3217
 	end
 	if self.aspect_ratio ~= nil then
-		local var3193, var3194 = protoModule.writeTag(buff, var3190, 2, protoModule.wireTypes.i64)
-		var3193, var4665 = protoModule.writeDouble(var3193, var3194, self.aspect_ratio)
-		buff = var3193
-		var3190 = var3194
+		local var3218, var3219 = protoModule.writeTag(buff, var3215, 2, protoModule.wireTypes.i64)
+		var3218, var4707 = protoModule.writeDouble(var3218, var3219, self.aspect_ratio)
+		buff = var3218
+		var3215 = var3219
 	end
 	if self.enable_animation ~= nil then
-		local var3195, var3196 = protoModule.writeTag(buff, var3190, 3, protoModule.wireTypes.varint)
-		var3195, var4667 = protoModule.writeVarInt(var3195, var3196, if self.enable_animation then 1 else 0)
-		buff = var3195
-		var3190 = var3196
+		local var3220, var3221 = protoModule.writeTag(buff, var3215, 3, protoModule.wireTypes.varint)
+		var3220, var4709 = protoModule.writeVarInt(var3220, var3221, if self.enable_animation then 1 else 0)
+		buff = var3220
+		var3215 = var3221
 	end
-	local buff_1 = buffer.create(var3190)
-	buffer.copy(buff_1, 0, buff, 0, var3190)
+	local buff_1 = buffer.create(var3215)
+	buffer.copy(buff_1, 0, buff, 0, var3215)
 	
 	return buff_1
 end
 
-function t_118.decode(p118)
-	-- upvalues: t_118 (ref), protoModule (ref)
-	local var3190 = t_118.new()
-	local var3191 = 0
-	while var3191 < buffer.len(p118) do
+function t_119.decode(p119)
+	-- upvalues: t_119 (ref), protoModule (ref)
+	local var3215 = t_119.new()
+	local var3216 = 0
+	while var3216 < buffer.len(p119) do
 		local _ = nil
-		local var3192 = nil
-		local var3193, var3194, var3195 = protoModule.readTag(p118, var3191)
-		local var3196 = var3193
-		var3192 = var3194
-		var3191 = var3195
+		local var3217 = nil
+		local var3218, var3219, var3220 = protoModule.readTag(p119, var3216)
+		local var3221 = var3218
+		var3217 = var3219
+		var3216 = var3220
 		
-		if var3192 == protoModule.wireTypes.varint then
-			if var3196 == 3 then
+		if var3217 == protoModule.wireTypes.varint then
+			if var3221 == 3 then
 				local _ = nil
-				local var3197, var3198 = protoModule.readVarInt(p118, var3191)
-				var3191 = var3198
-				var3190.enable_animation = var3197 ~= 0
+				local var3222, var3223 = protoModule.readVarInt(p119, var3216)
+				var3216 = var3223
+				var3215.enable_animation = var3222 ~= 0
 			else
 				local _ = nil
-				local var3199, var3200 = protoModule.readVarInt(p118, var3191)
-				local _ = var3199
-				var3191 = var3200
+				local var3224, var3225 = protoModule.readVarInt(p119, var3216)
+				local _ = var3224
+				var3216 = var3225
 			end
 		end
-		if var3192 == protoModule.wireTypes.lengthDelimited then
-			if var3196 == 1 then
+		if var3217 == protoModule.wireTypes.lengthDelimited then
+			if var3221 == 1 then
 				local _ = nil
-				local var3201, var3202 = protoModule.readBuffer(p118, var3191)
-				var3191 = var3202
-				var3190.asset_id = buffer.tostring(var3201)
+				local var3226, var3227 = protoModule.readBuffer(p119, var3216)
+				var3216 = var3227
+				var3215.asset_id = buffer.tostring(var3226)
 			else
 				local _ = nil
-				local var3203, var3204 = protoModule.readVarInt(p118, var3191)
-				var3191 = var3204 + var3203
+				local var3228, var3229 = protoModule.readVarInt(p119, var3216)
+				var3216 = var3229 + var3228
 			end
-		elseif var3192 == protoModule.wireTypes.i32 then
+		elseif var3217 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3205, var3206 = protoModule.readFixed32(p118, var3191)
-			local _ = var3205
-			var3191 = var3206
-		elseif var3192 ~= protoModule.wireTypes.i64 then
-			error("Unsupported wire type: " .. var4671)
-		elseif var3196 == 2 then
+			local var3230, var3231 = protoModule.readFixed32(p119, var3216)
+			local _ = var3230
+			var3216 = var3231
+		elseif var3217 ~= protoModule.wireTypes.i64 then
+			error("Unsupported wire type: " .. var4713)
+		elseif var3221 == 2 then
 			local _ = nil
-			local var3207, var3208 = protoModule.readDouble(p118, var3191)
-			var3191 = var3208
-			var3190.aspect_ratio = var3207
+			local var3232, var3233 = protoModule.readDouble(p119, var3216)
+			var3216 = var3233
+			var3215.aspect_ratio = var3232
 		else
 			local _ = nil
-			local var3209, var3210 = protoModule.readFixed64(p118, var3191)
-			local _ = var3209
-			var3191 = var3210
+			local var3234, var3235 = protoModule.readFixed64(p119, var3216)
+			local _ = var3234
+			var3216 = var3235
 		end
 	end
-	return var3190
+	return var3215
 end
 
-function t_118:jsonEncode()
+function t_119:jsonEncode()
 	-- upvalues: protoModule (ref)
 	local t = {}
 	
@@ -20655,160 +20841,160 @@ function t_118:jsonEncode()
 	return t
 end
 
-function t_118:jsonDecode()
-	-- upvalues: t_118 (ref), protoModule (ref)
-	local var3211 = t_118.new()
+function t_119:jsonDecode()
+	-- upvalues: t_119 (ref), protoModule (ref)
+	local var3236 = t_119.new()
 	
 	if self.asset_id ~= nil then
-		var3211.asset_id = self.asset_id
+		var3236.asset_id = self.asset_id
 	end
 	if self.assetId ~= nil then
-		var3211.asset_id = self.assetId
+		var3236.asset_id = self.assetId
 	end
 	if self.aspect_ratio ~= nil then
-		var3211.aspect_ratio = protoModule.json.deserializeNumber(self.aspect_ratio)
+		var3236.aspect_ratio = protoModule.json.deserializeNumber(self.aspect_ratio)
 	end
 	if self.aspectRatio ~= nil then
-		var3211.aspect_ratio = protoModule.json.deserializeNumber(self.aspectRatio)
+		var3236.aspect_ratio = protoModule.json.deserializeNumber(self.aspectRatio)
 	end
 	if self.enable_animation ~= nil then
-		var3211.enable_animation = self.enable_animation
+		var3236.enable_animation = self.enable_animation
 	end
 	if self.enableAnimation ~= nil then
-		var3211.enable_animation = self.enableAnimation
+		var3236.enable_animation = self.enableAnimation
 	end
-	return var3211
+	return var3236
 end
 
-t_118.descriptor = {
+t_119.descriptor = {
 	name = "HeroUnitInputData_VisualAsset",
 	fullName = "roblox.apppageplatform.shared.v1beta1.VisualAsset"
 }
-t.HeroUnitInputData_VisualAsset = t_118
+t.HeroUnitInputData_VisualAsset = t_119
 typeRegistryModule.default:register(t.HeroUnitInputData_VisualAsset)
-local t_119 = {}
-t_119.__index = t_119
+local t_120 = {}
+t_120.__index = t_120
 
-function t_119.new(p119)
-	-- upvalues: t_119 (ref)
+function t_120.new(p120)
+	-- upvalues: t_120 (ref)
 	return setmetatable({
-		start_color = if p119 == nil or p119.start_color == nil then nil else p119.start_color,
-		end_color = if p119 == nil or p119.end_color == nil then nil else p119.end_color,
-		start_opacity = if p119 == nil or p119.start_opacity == nil then nil else p119.start_opacity,
-		end_opacity = if p119 == nil or p119.end_opacity == nil then nil else p119.end_opacity,
-		degree = if p119 == nil or p119.degree == nil then nil else p119.degree
-	}, t_119)
+		start_color = if p120 == nil or p120.start_color == nil then nil else p120.start_color,
+		end_color = if p120 == nil or p120.end_color == nil then nil else p120.end_color,
+		start_opacity = if p120 == nil or p120.start_opacity == nil then nil else p120.start_opacity,
+		end_opacity = if p120 == nil or p120.end_opacity == nil then nil else p120.end_opacity,
+		degree = if p120 == nil or p120.degree == nil then nil else p120.degree
+	}, t_120)
 end
 
-function t_119:encode()
+function t_120:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3211 = 0
+	local var3236 = 0
 	
 	if self.start_color ~= nil then
-		local var3212, var3213 = protoModule.writeTag(buff, var3211, 1, protoModule.wireTypes.lengthDelimited)
-		var3212, var4695 = protoModule.writeString(var3212, var3213, self.start_color)
-		buff = var3212
-		var3211 = var3213
+		local var3237, var3238 = protoModule.writeTag(buff, var3236, 1, protoModule.wireTypes.lengthDelimited)
+		var3237, var4737 = protoModule.writeString(var3237, var3238, self.start_color)
+		buff = var3237
+		var3236 = var3238
 	end
 	if self.end_color ~= nil then
-		local var3214, var3215 = protoModule.writeTag(buff, var3211, 2, protoModule.wireTypes.lengthDelimited)
-		var3214, var4697 = protoModule.writeString(var3214, var3215, self.end_color)
-		buff = var3214
-		var3211 = var3215
+		local var3239, var3240 = protoModule.writeTag(buff, var3236, 2, protoModule.wireTypes.lengthDelimited)
+		var3239, var4739 = protoModule.writeString(var3239, var3240, self.end_color)
+		buff = var3239
+		var3236 = var3240
 	end
 	if self.start_opacity ~= nil then
-		local var3216, var3217 = protoModule.writeTag(buff, var3211, 3, protoModule.wireTypes.i64)
-		var3216, var4699 = protoModule.writeDouble(var3216, var3217, self.start_opacity)
-		buff = var3216
-		var3211 = var3217
+		local var3241, var3242 = protoModule.writeTag(buff, var3236, 3, protoModule.wireTypes.i64)
+		var3241, var4741 = protoModule.writeDouble(var3241, var3242, self.start_opacity)
+		buff = var3241
+		var3236 = var3242
 	end
 	if self.end_opacity ~= nil then
-		local var3218, var3219 = protoModule.writeTag(buff, var3211, 4, protoModule.wireTypes.i64)
-		var3218, var4701 = protoModule.writeDouble(var3218, var3219, self.end_opacity)
-		buff = var3218
-		var3211 = var3219
+		local var3243, var3244 = protoModule.writeTag(buff, var3236, 4, protoModule.wireTypes.i64)
+		var3243, var4743 = protoModule.writeDouble(var3243, var3244, self.end_opacity)
+		buff = var3243
+		var3236 = var3244
 	end
 	if self.degree ~= nil then
-		local var3220, var3221 = protoModule.writeTag(buff, var3211, 5, protoModule.wireTypes.i64)
-		var3220, var4703 = protoModule.writeDouble(var3220, var3221, self.degree)
-		buff = var3220
-		var3211 = var3221
+		local var3245, var3246 = protoModule.writeTag(buff, var3236, 5, protoModule.wireTypes.i64)
+		var3245, var4745 = protoModule.writeDouble(var3245, var3246, self.degree)
+		buff = var3245
+		var3236 = var3246
 	end
-	local buff_1 = buffer.create(var3211)
-	buffer.copy(buff_1, 0, buff, 0, var3211)
+	local buff_1 = buffer.create(var3236)
+	buffer.copy(buff_1, 0, buff, 0, var3236)
 	
 	return buff_1
 end
 
-function t_119.decode(p119)
-	-- upvalues: t_119 (ref), protoModule (ref)
-	local var3211 = t_119.new()
-	local var3212 = 0
-	while var3212 < buffer.len(p119) do
+function t_120.decode(p120)
+	-- upvalues: t_120 (ref), protoModule (ref)
+	local var3236 = t_120.new()
+	local var3237 = 0
+	while var3237 < buffer.len(p120) do
 		local _ = nil
-		local var3213 = nil
-		local var3214, var3215, var3216 = protoModule.readTag(p119, var3212)
-		local var3217 = var3214
-		var3213 = var3215
-		var3212 = var3216
+		local var3238 = nil
+		local var3239, var3240, var3241 = protoModule.readTag(p120, var3237)
+		local var3242 = var3239
+		var3238 = var3240
+		var3237 = var3241
 		
-		if var3213 == protoModule.wireTypes.varint then
+		if var3238 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3218, var3219 = protoModule.readVarInt(p119, var3212)
-			local _ = var3218
-			var3212 = var3219
+			local var3243, var3244 = protoModule.readVarInt(p120, var3237)
+			local _ = var3243
+			var3237 = var3244
 			continue
 		end
-		if var3213 == protoModule.wireTypes.lengthDelimited then
-			if var3217 == 1 then
+		if var3238 == protoModule.wireTypes.lengthDelimited then
+			if var3242 == 1 then
 				local _ = nil
-				local var3220, var3221 = protoModule.readBuffer(p119, var3212)
-				var3212 = var3221
-				var3211.start_color = buffer.tostring(var3220)
-			elseif var3217 == 2 then
+				local var3245, var3246 = protoModule.readBuffer(p120, var3237)
+				var3237 = var3246
+				var3236.start_color = buffer.tostring(var3245)
+			elseif var3242 == 2 then
 				local _ = nil
-				local var3222, var3223 = protoModule.readBuffer(p119, var3212)
-				var3212 = var3223
-				var3211.end_color = buffer.tostring(var3222)
+				local var3247, var3248 = protoModule.readBuffer(p120, var3237)
+				var3237 = var3248
+				var3236.end_color = buffer.tostring(var3247)
 			else
 				local _ = nil
-				local var3224, var3225 = protoModule.readVarInt(p119, var3212)
-				var3212 = var3225 + var3224
+				local var3249, var3250 = protoModule.readVarInt(p120, var3237)
+				var3237 = var3250 + var3249
 			end
-		elseif var3213 == protoModule.wireTypes.i32 then
+		elseif var3238 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3226, var3227 = protoModule.readFixed32(p119, var3212)
-			local _ = var3226
-			var3212 = var3227
-		elseif var3213 ~= protoModule.wireTypes.i64 then
-			error("Unsupported wire type: " .. var4707)
-		elseif var3217 == 3 then
+			local var3251, var3252 = protoModule.readFixed32(p120, var3237)
+			local _ = var3251
+			var3237 = var3252
+		elseif var3238 ~= protoModule.wireTypes.i64 then
+			error("Unsupported wire type: " .. var4749)
+		elseif var3242 == 3 then
 			local _ = nil
-			local var3228, var3229 = protoModule.readDouble(p119, var3212)
-			var3212 = var3229
-			var3211.start_opacity = var3228
-		elseif var3217 == 4 then
+			local var3253, var3254 = protoModule.readDouble(p120, var3237)
+			var3237 = var3254
+			var3236.start_opacity = var3253
+		elseif var3242 == 4 then
 			local _ = nil
-			local var3230, var3231 = protoModule.readDouble(p119, var3212)
-			var3212 = var3231
-			var3211.end_opacity = var3230
-		elseif var3217 == 5 then
+			local var3255, var3256 = protoModule.readDouble(p120, var3237)
+			var3237 = var3256
+			var3236.end_opacity = var3255
+		elseif var3242 == 5 then
 			local _ = nil
-			local var3232, var3233 = protoModule.readDouble(p119, var3212)
-			var3212 = var3233
-			var3211.degree = var3232
+			local var3257, var3258 = protoModule.readDouble(p120, var3237)
+			var3237 = var3258
+			var3236.degree = var3257
 		else
 			local _ = nil
-			local var3234, var3235 = protoModule.readFixed64(p119, var3212)
-			local _ = var3234
-			var3212 = var3235
+			local var3259, var3260 = protoModule.readFixed64(p120, var3237)
+			local _ = var3259
+			var3237 = var3260
 		end
 	end
-	return var3211
+	return var3236
 end
 
-function t_119:jsonEncode()
+function t_120:jsonEncode()
 	-- upvalues: protoModule (ref)
 	local t = {}
 	
@@ -20830,148 +21016,148 @@ function t_119:jsonEncode()
 	return t
 end
 
-function t_119:jsonDecode()
-	-- upvalues: t_119 (ref), protoModule (ref)
-	local var3236 = t_119.new()
+function t_120:jsonDecode()
+	-- upvalues: t_120 (ref), protoModule (ref)
+	local var3261 = t_120.new()
 	
 	if self.start_color ~= nil then
-		var3236.start_color = self.start_color
+		var3261.start_color = self.start_color
 	end
 	if self.startColor ~= nil then
-		var3236.start_color = self.startColor
+		var3261.start_color = self.startColor
 	end
 	if self.end_color ~= nil then
-		var3236.end_color = self.end_color
+		var3261.end_color = self.end_color
 	end
 	if self.endColor ~= nil then
-		var3236.end_color = self.endColor
+		var3261.end_color = self.endColor
 	end
 	if self.start_opacity ~= nil then
-		var3236.start_opacity = protoModule.json.deserializeNumber(self.start_opacity)
+		var3261.start_opacity = protoModule.json.deserializeNumber(self.start_opacity)
 	end
 	if self.startOpacity ~= nil then
-		var3236.start_opacity = protoModule.json.deserializeNumber(self.startOpacity)
+		var3261.start_opacity = protoModule.json.deserializeNumber(self.startOpacity)
 	end
 	if self.end_opacity ~= nil then
-		var3236.end_opacity = protoModule.json.deserializeNumber(self.end_opacity)
+		var3261.end_opacity = protoModule.json.deserializeNumber(self.end_opacity)
 	end
 	if self.endOpacity ~= nil then
-		var3236.end_opacity = protoModule.json.deserializeNumber(self.endOpacity)
+		var3261.end_opacity = protoModule.json.deserializeNumber(self.endOpacity)
 	end
 	if self.degree ~= nil then
-		var3236.degree = protoModule.json.deserializeNumber(self.degree)
+		var3261.degree = protoModule.json.deserializeNumber(self.degree)
 	end
-	return var3236
+	return var3261
 end
 
-t_119.descriptor = {
+t_120.descriptor = {
 	name = "HeroUnitInputData_Gradient",
 	fullName = "roblox.apppageplatform.shared.v1beta1.Gradient"
 }
-t.HeroUnitInputData_Gradient = t_119
+t.HeroUnitInputData_Gradient = t_120
 typeRegistryModule.default:register(t.HeroUnitInputData_Gradient)
-local t_120 = {}
-t_120.__index = t_120
+local t_121 = {}
+t_121.__index = t_121
 
-function t_120.new(p120)
-	-- upvalues: t_120 (ref)
+function t_121.new(p121)
+	-- upvalues: t_121 (ref)
 	return setmetatable({
-		items = if p120 == nil or p120.items == nil then {} else p120.items,
-		sort_id = if p120 == nil or p120.sort_id == nil then "" else p120.sort_id,
-		recommendation_request_id = if p120 == nil or p120.recommendation_request_id == nil then "" else p120.recommendation_request_id
-	}, t_120)
+		items = if p121 == nil or p121.items == nil then {} else p121.items,
+		sort_id = if p121 == nil or p121.sort_id == nil then "" else p121.sort_id,
+		recommendation_request_id = if p121 == nil or p121.recommendation_request_id == nil then "" else p121.recommendation_request_id
+	}, t_121)
 end
 
-function t_120:encode()
+function t_121:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3236 = 0
+	local var3261 = 0
 	
 	if self.items ~= nil and #self.items > 0 then
 		for i, v in self.items do
-			local var3237 = v:encode()
-			local var3238, var3239 = protoModule.writeTag(buff, var3236, 1, protoModule.wireTypes.lengthDelimited)
-			var3238, var4736 = protoModule.writeBuffer(var3238, var3239, var3237, buffer.len(var3237))
-			buff = var3238
-			var3236 = var3239
+			local var3262 = v:encode()
+			local var3263, var3264 = protoModule.writeTag(buff, var3261, 1, protoModule.wireTypes.lengthDelimited)
+			var3263, var4778 = protoModule.writeBuffer(var3263, var3264, var3262, buffer.len(var3262))
+			buff = var3263
+			var3261 = var3264
 		end
 	end
 	if self.sort_id ~= nil and self.sort_id ~= "" then
-		local var3240, var3241 = protoModule.writeTag(buff, var3236, 2, protoModule.wireTypes.lengthDelimited)
-		var3240, var4738 = protoModule.writeString(var3240, var3241, self.sort_id)
-		buff = var3240
-		var3236 = var3241
+		local var3265, var3266 = protoModule.writeTag(buff, var3261, 2, protoModule.wireTypes.lengthDelimited)
+		var3265, var4780 = protoModule.writeString(var3265, var3266, self.sort_id)
+		buff = var3265
+		var3261 = var3266
 	end
 	if self.recommendation_request_id ~= nil and self.recommendation_request_id ~= "" then
-		local var3242, var3243 = protoModule.writeTag(buff, var3236, 3, protoModule.wireTypes.lengthDelimited)
-		var3242, var4740 = protoModule.writeString(var3242, var3243, self.recommendation_request_id)
-		buff = var3242
-		var3236 = var3243
+		local var3267, var3268 = protoModule.writeTag(buff, var3261, 3, protoModule.wireTypes.lengthDelimited)
+		var3267, var4782 = protoModule.writeString(var3267, var3268, self.recommendation_request_id)
+		buff = var3267
+		var3261 = var3268
 	end
-	local buff_1 = buffer.create(var3236)
-	buffer.copy(buff_1, 0, buff, 0, var3236)
+	local buff_1 = buffer.create(var3261)
+	buffer.copy(buff_1, 0, buff, 0, var3261)
 	
 	return buff_1
 end
 
-function t_120.decode(p120)
-	-- upvalues: t_120 (ref), protoModule (ref), t (ref)
-	local var3244 = t_120.new()
-	local var3245 = 0
-	while var3245 < buffer.len(p120) do
+function t_121.decode(p121)
+	-- upvalues: t_121 (ref), protoModule (ref), t (ref)
+	local var3269 = t_121.new()
+	local var3270 = 0
+	while var3270 < buffer.len(p121) do
 		local _ = nil
-		local var3246 = nil
-		local var3247, var3248, var3249 = protoModule.readTag(p120, var3245)
-		local var3250 = var3247
-		var3246 = var3248
-		var3245 = var3249
+		local var3271 = nil
+		local var3272, var3273, var3274 = protoModule.readTag(p121, var3270)
+		local var3275 = var3272
+		var3271 = var3273
+		var3270 = var3274
 		
-		if var3246 == protoModule.wireTypes.varint then
+		if var3271 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3251, var3252 = protoModule.readVarInt(p120, var3245)
-			local _ = var3251
-			var3245 = var3252
+			local var3276, var3277 = protoModule.readVarInt(p121, var3270)
+			local _ = var3276
+			var3270 = var3277
 			continue
 		end
-		if var3246 == protoModule.wireTypes.lengthDelimited then
-			if var3250 == 1 then
+		if var3271 == protoModule.wireTypes.lengthDelimited then
+			if var3275 == 1 then
 				local _ = nil
-				local var3253, var3254 = protoModule.readBuffer(p120, var3245)
-				var3245 = var3254
-				table.insert(var3244.items, t.FriendRecommendationCarouselInputData_RecommendationItem.decode(var3253))
-			elseif var3250 == 2 then
+				local var3278, var3279 = protoModule.readBuffer(p121, var3270)
+				var3270 = var3279
+				table.insert(var3269.items, t.FriendRecommendationCarouselInputData_RecommendationItem.decode(var3278))
+			elseif var3275 == 2 then
 				local _ = nil
-				local var3255, var3256 = protoModule.readBuffer(p120, var3245)
-				var3245 = var3256
-				var3244.sort_id = buffer.tostring(var3255)
-			elseif var3250 == 3 then
+				local var3280, var3281 = protoModule.readBuffer(p121, var3270)
+				var3270 = var3281
+				var3269.sort_id = buffer.tostring(var3280)
+			elseif var3275 == 3 then
 				local _ = nil
-				local var3257, var3258 = protoModule.readBuffer(p120, var3245)
-				var3245 = var3258
-				var3244.recommendation_request_id = buffer.tostring(var3257)
+				local var3282, var3283 = protoModule.readBuffer(p121, var3270)
+				var3270 = var3283
+				var3269.recommendation_request_id = buffer.tostring(var3282)
 			else
 				local _ = nil
-				local var3259, var3260 = protoModule.readVarInt(p120, var3245)
-				var3245 = var3260 + var3259
+				local var3284, var3285 = protoModule.readVarInt(p121, var3270)
+				var3270 = var3285 + var3284
 			end
-		elseif var3246 == protoModule.wireTypes.i32 then
+		elseif var3271 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3261, var3262 = protoModule.readFixed32(p120, var3245)
-			local _ = var3261
-			var3245 = var3262
-		elseif var3246 == protoModule.wireTypes.i64 then
+			local var3286, var3287 = protoModule.readFixed32(p121, var3270)
+			local _ = var3286
+			var3270 = var3287
+		elseif var3271 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var3263, var3264 = protoModule.readFixed64(p120, var3245)
-			local _ = var3263
-			var3245 = var3264
+			local var3288, var3289 = protoModule.readFixed64(p121, var3270)
+			local _ = var3288
+			var3270 = var3289
 		else
-			error("Unsupported wire type: " .. var4744)
+			error("Unsupported wire type: " .. var4786)
 		end
 	end
-	return var3244
+	return var3269
 end
 
-function t_120:jsonEncode()
+function t_121:jsonEncode()
 	local t = {}
 	
 	if self.items ~= nil and #self.items > 0 then
@@ -20991,9 +21177,9 @@ function t_120:jsonEncode()
 	return t
 end
 
-function t_120:jsonDecode()
-	-- upvalues: t_120 (ref), t (ref)
-	local var3265 = t_120.new()
+function t_121:jsonDecode()
+	-- upvalues: t_121 (ref), t (ref)
+	local var3290 = t_121.new()
 	
 	if self.items ~= nil then
 		local t_1 = {}
@@ -21001,117 +21187,117 @@ function t_120:jsonDecode()
 		for i, v in self.items do
 			table.insert(t_1, t.FriendRecommendationCarouselInputData_RecommendationItem.jsonDecode(v))
 		end
-		var3265.items = t_1
+		var3290.items = t_1
 	end
 	if self.sort_id ~= nil then
-		var3265.sort_id = self.sort_id
+		var3290.sort_id = self.sort_id
 	end
 	if self.sortId ~= nil then
-		var3265.sort_id = self.sortId
+		var3290.sort_id = self.sortId
 	end
 	if self.recommendation_request_id ~= nil then
-		var3265.recommendation_request_id = self.recommendation_request_id
+		var3290.recommendation_request_id = self.recommendation_request_id
 	end
 	if self.recommendationRequestId ~= nil then
-		var3265.recommendation_request_id = self.recommendationRequestId
+		var3290.recommendation_request_id = self.recommendationRequestId
 	end
-	return var3265
+	return var3290
 end
 
-t_120.descriptor = {
+t_121.descriptor = {
 	name = "FriendRecommendationCarouselInputData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.FriendRecommendationCarouselInputData"
 }
-t.FriendRecommendationCarouselInputData = t_120
+t.FriendRecommendationCarouselInputData = t_121
 typeRegistryModule.default:register(t.FriendRecommendationCarouselInputData)
-local t_121 = {}
-t_121.__index = t_121
+local t_122 = {}
+t_122.__index = t_122
 
-function t_121.new(p121)
-	-- upvalues: t_121 (ref)
+function t_122.new(p122)
+	-- upvalues: t_122 (ref)
 	return setmetatable({
-		item_id = if p121 == nil or p121.item_id == nil then "" else p121.item_id,
-		has_pending_friend_request = if p121 == nil or p121.has_pending_friend_request == nil then false else p121.has_pending_friend_request
-	}, t_121)
+		item_id = if p122 == nil or p122.item_id == nil then "" else p122.item_id,
+		has_pending_friend_request = if p122 == nil or p122.has_pending_friend_request == nil then false else p122.has_pending_friend_request
+	}, t_122)
 end
 
-function t_121:encode()
+function t_122:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3266 = 0
+	local var3291 = 0
 	
 	if self.item_id ~= nil and self.item_id ~= "" then
-		local var3267, var3268 = protoModule.writeTag(buff, var3266, 1, protoModule.wireTypes.lengthDelimited)
-		var3267, var4770 = protoModule.writeString(var3267, var3268, self.item_id)
-		buff = var3267
-		var3266 = var3268
+		local var3292, var3293 = protoModule.writeTag(buff, var3291, 1, protoModule.wireTypes.lengthDelimited)
+		var3292, var4812 = protoModule.writeString(var3292, var3293, self.item_id)
+		buff = var3292
+		var3291 = var3293
 	end
 	if self.has_pending_friend_request then
-		local var3269, var3270 = protoModule.writeTag(buff, var3266, 2, protoModule.wireTypes.varint)
-		var3269, var4772 = protoModule.writeVarInt(var3269, var3270, if self.has_pending_friend_request then 1 else 0)
-		buff = var3269
-		var3266 = var3270
+		local var3294, var3295 = protoModule.writeTag(buff, var3291, 2, protoModule.wireTypes.varint)
+		var3294, var4814 = protoModule.writeVarInt(var3294, var3295, if self.has_pending_friend_request then 1 else 0)
+		buff = var3294
+		var3291 = var3295
 	end
-	local buff_1 = buffer.create(var3266)
-	buffer.copy(buff_1, 0, buff, 0, var3266)
+	local buff_1 = buffer.create(var3291)
+	buffer.copy(buff_1, 0, buff, 0, var3291)
 	
 	return buff_1
 end
 
-function t_121.decode(p121)
-	-- upvalues: t_121 (ref), protoModule (ref)
-	local var3266 = t_121.new()
-	local var3267 = 0
-	while var3267 < buffer.len(p121) do
+function t_122.decode(p122)
+	-- upvalues: t_122 (ref), protoModule (ref)
+	local var3291 = t_122.new()
+	local var3292 = 0
+	while var3292 < buffer.len(p122) do
 		local _ = nil
-		local var3268 = nil
-		local var3269, var3270, var3271 = protoModule.readTag(p121, var3267)
-		local var3272 = var3269
-		var3268 = var3270
-		var3267 = var3271
+		local var3293 = nil
+		local var3294, var3295, var3296 = protoModule.readTag(p122, var3292)
+		local var3297 = var3294
+		var3293 = var3295
+		var3292 = var3296
 		
-		if var3268 == protoModule.wireTypes.varint then
-			if var3272 == 2 then
+		if var3293 == protoModule.wireTypes.varint then
+			if var3297 == 2 then
 				local _ = nil
-				local var3273, var3274 = protoModule.readVarInt(p121, var3267)
-				var3267 = var3274
-				var3266.has_pending_friend_request = var3273 ~= 0
+				local var3298, var3299 = protoModule.readVarInt(p122, var3292)
+				var3292 = var3299
+				var3291.has_pending_friend_request = var3298 ~= 0
 			else
 				local _ = nil
-				local var3275, var3276 = protoModule.readVarInt(p121, var3267)
-				local _ = var3275
-				var3267 = var3276
+				local var3300, var3301 = protoModule.readVarInt(p122, var3292)
+				local _ = var3300
+				var3292 = var3301
 			end
 		end
-		if var3268 == protoModule.wireTypes.lengthDelimited then
-			if var3272 == 1 then
+		if var3293 == protoModule.wireTypes.lengthDelimited then
+			if var3297 == 1 then
 				local _ = nil
-				local var3277, var3278 = protoModule.readBuffer(p121, var3267)
-				var3267 = var3278
-				var3266.item_id = buffer.tostring(var3277)
+				local var3302, var3303 = protoModule.readBuffer(p122, var3292)
+				var3292 = var3303
+				var3291.item_id = buffer.tostring(var3302)
 			else
 				local _ = nil
-				local var3279, var3280 = protoModule.readVarInt(p121, var3267)
-				var3267 = var3280 + var3279
+				local var3304, var3305 = protoModule.readVarInt(p122, var3292)
+				var3292 = var3305 + var3304
 			end
-		elseif var3268 == protoModule.wireTypes.i32 then
+		elseif var3293 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3281, var3282 = protoModule.readFixed32(p121, var3267)
-			local _ = var3281
-			var3267 = var3282
-		elseif var3268 == protoModule.wireTypes.i64 then
+			local var3306, var3307 = protoModule.readFixed32(p122, var3292)
+			local _ = var3306
+			var3292 = var3307
+		elseif var3293 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var3283, var3284 = protoModule.readFixed64(p121, var3267)
-			local _ = var3283
-			var3267 = var3284
+			local var3308, var3309 = protoModule.readFixed64(p122, var3292)
+			local _ = var3308
+			var3292 = var3309
 		else
-			error("Unsupported wire type: " .. var4776)
+			error("Unsupported wire type: " .. var4818)
 		end
 	end
-	return var3266
+	return var3291
 end
 
-function t_121:jsonEncode()
+function t_122:jsonEncode()
 	local t = {}
 	
 	if self.item_id ~= nil and self.item_id ~= "" then
@@ -21123,158 +21309,158 @@ function t_121:jsonEncode()
 	return t
 end
 
-function t_121:jsonDecode()
-	-- upvalues: t_121 (ref)
-	local var3285 = t_121.new()
+function t_122:jsonDecode()
+	-- upvalues: t_122 (ref)
+	local var3310 = t_122.new()
 	
 	if self.item_id ~= nil then
-		var3285.item_id = self.item_id
+		var3310.item_id = self.item_id
 	end
 	if self.itemId ~= nil then
-		var3285.item_id = self.itemId
+		var3310.item_id = self.itemId
 	end
 	if self.has_pending_friend_request ~= nil then
-		var3285.has_pending_friend_request = self.has_pending_friend_request
+		var3310.has_pending_friend_request = self.has_pending_friend_request
 	end
 	if self.hasPendingFriendRequest ~= nil then
-		var3285.has_pending_friend_request = self.hasPendingFriendRequest
+		var3310.has_pending_friend_request = self.hasPendingFriendRequest
 	end
-	return var3285
+	return var3310
 end
 
-t_121.descriptor = {
+t_122.descriptor = {
 	name = "FriendRecommendationCarouselInputData_RecommendationItem",
 	fullName = "roblox.apppageplatform.shared.v1beta1.RecommendationItem"
 }
-t.FriendRecommendationCarouselInputData_RecommendationItem = t_121
+t.FriendRecommendationCarouselInputData_RecommendationItem = t_122
 typeRegistryModule.default:register(t.FriendRecommendationCarouselInputData_RecommendationItem)
-local t_122 = {}
-t_122.__index = t_122
+local t_123 = {}
+t_123.__index = t_123
 
-function t_122.new(p122)
-	-- upvalues: t_122 (ref)
+function t_123.new(p123)
+	-- upvalues: t_123 (ref)
 	return setmetatable({
-		selected_option = if p122 == nil or p122.selected_option == nil then "" else p122.selected_option,
-		sort_id = if p122 == nil or p122.sort_id == nil then "" else p122.sort_id,
-		options = if p122 == nil or p122.options == nil then {} else p122.options,
-		experience_carousel = if p122 == nil or p122.experience_carousel == nil then nil else p122.experience_carousel,
-		feed_item_key = if p122 == nil or p122.feed_item_key == nil then "" else p122.feed_item_key
-	}, t_122)
+		selected_option = if p123 == nil or p123.selected_option == nil then "" else p123.selected_option,
+		sort_id = if p123 == nil or p123.sort_id == nil then "" else p123.sort_id,
+		options = if p123 == nil or p123.options == nil then {} else p123.options,
+		experience_carousel = if p123 == nil or p123.experience_carousel == nil then nil else p123.experience_carousel,
+		feed_item_key = if p123 == nil or p123.feed_item_key == nil then "" else p123.feed_item_key
+	}, t_123)
 end
 
-function t_122:encode()
+function t_123:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3285 = 0
+	local var3310 = 0
 	
 	if self.selected_option ~= nil and self.selected_option ~= "" then
-		local var3286, var3287 = protoModule.writeTag(buff, var3285, 1, protoModule.wireTypes.lengthDelimited)
-		var3286, var4798 = protoModule.writeString(var3286, var3287, self.selected_option)
-		buff = var3286
-		var3285 = var3287
+		local var3311, var3312 = protoModule.writeTag(buff, var3310, 1, protoModule.wireTypes.lengthDelimited)
+		var3311, var4840 = protoModule.writeString(var3311, var3312, self.selected_option)
+		buff = var3311
+		var3310 = var3312
 	end
 	if self.sort_id ~= nil and self.sort_id ~= "" then
-		local var3288, var3289 = protoModule.writeTag(buff, var3285, 2, protoModule.wireTypes.lengthDelimited)
-		var3288, var4800 = protoModule.writeString(var3288, var3289, self.sort_id)
-		buff = var3288
-		var3285 = var3289
+		local var3313, var3314 = protoModule.writeTag(buff, var3310, 2, protoModule.wireTypes.lengthDelimited)
+		var3313, var4842 = protoModule.writeString(var3313, var3314, self.sort_id)
+		buff = var3313
+		var3310 = var3314
 	end
 	if self.options ~= nil and #self.options > 0 then
 		for i, v in self.options do
-			local var3290 = v:encode()
-			local var3291, var3292 = protoModule.writeTag(buff, var3285, 3, protoModule.wireTypes.lengthDelimited)
-			var3291, var4803 = protoModule.writeBuffer(var3291, var3292, var3290, buffer.len(var3290))
-			buff = var3291
-			var3285 = var3292
+			local var3315 = v:encode()
+			local var3316, var3317 = protoModule.writeTag(buff, var3310, 3, protoModule.wireTypes.lengthDelimited)
+			var3316, var4845 = protoModule.writeBuffer(var3316, var3317, var3315, buffer.len(var3315))
+			buff = var3316
+			var3310 = var3317
 		end
 	end
 	if self.experience_carousel ~= nil then
-		local var3293 = self.experience_carousel:encode()
-		local var3294, var3295 = protoModule.writeTag(buff, var3285, 4, protoModule.wireTypes.lengthDelimited)
-		var3294, var4806 = protoModule.writeBuffer(var3294, var3295, var3293, buffer.len(var3293))
-		buff = var3294
-		var3285 = var3295
+		local var3318 = self.experience_carousel:encode()
+		local var3319, var3320 = protoModule.writeTag(buff, var3310, 4, protoModule.wireTypes.lengthDelimited)
+		var3319, var4848 = protoModule.writeBuffer(var3319, var3320, var3318, buffer.len(var3318))
+		buff = var3319
+		var3310 = var3320
 	end
 	if self.feed_item_key ~= nil and self.feed_item_key ~= "" then
-		local var3296, var3297 = protoModule.writeTag(buff, var3285, 5, protoModule.wireTypes.lengthDelimited)
-		var3296, var4808 = protoModule.writeString(var3296, var3297, self.feed_item_key)
-		buff = var3296
-		var3285 = var3297
+		local var3321, var3322 = protoModule.writeTag(buff, var3310, 5, protoModule.wireTypes.lengthDelimited)
+		var3321, var4850 = protoModule.writeString(var3321, var3322, self.feed_item_key)
+		buff = var3321
+		var3310 = var3322
 	end
-	local buff_1 = buffer.create(var3285)
-	buffer.copy(buff_1, 0, buff, 0, var3285)
+	local buff_1 = buffer.create(var3310)
+	buffer.copy(buff_1, 0, buff, 0, var3310)
 	
 	return buff_1
 end
 
-function t_122.decode(p122)
-	-- upvalues: t_122 (ref), protoModule (ref), t (ref)
-	local var3298 = t_122.new()
-	local var3299 = 0
-	while var3299 < buffer.len(p122) do
+function t_123.decode(p123)
+	-- upvalues: t_123 (ref), protoModule (ref), t (ref)
+	local var3323 = t_123.new()
+	local var3324 = 0
+	while var3324 < buffer.len(p123) do
 		local _ = nil
-		local var3300 = nil
-		local var3301, var3302, var3303 = protoModule.readTag(p122, var3299)
-		local var3304 = var3301
-		var3300 = var3302
-		var3299 = var3303
+		local var3325 = nil
+		local var3326, var3327, var3328 = protoModule.readTag(p123, var3324)
+		local var3329 = var3326
+		var3325 = var3327
+		var3324 = var3328
 		
-		if var3300 == protoModule.wireTypes.varint then
+		if var3325 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3305, var3306 = protoModule.readVarInt(p122, var3299)
-			local _ = var3305
-			var3299 = var3306
+			local var3330, var3331 = protoModule.readVarInt(p123, var3324)
+			local _ = var3330
+			var3324 = var3331
 			continue
 		end
-		if var3300 == protoModule.wireTypes.lengthDelimited then
-			if var3304 == 1 then
+		if var3325 == protoModule.wireTypes.lengthDelimited then
+			if var3329 == 1 then
 				local _ = nil
-				local var3307, var3308 = protoModule.readBuffer(p122, var3299)
-				var3299 = var3308
-				var3298.selected_option = buffer.tostring(var3307)
-			elseif var3304 == 2 then
+				local var3332, var3333 = protoModule.readBuffer(p123, var3324)
+				var3324 = var3333
+				var3323.selected_option = buffer.tostring(var3332)
+			elseif var3329 == 2 then
 				local _ = nil
-				local var3309, var3310 = protoModule.readBuffer(p122, var3299)
-				var3299 = var3310
-				var3298.sort_id = buffer.tostring(var3309)
-			elseif var3304 == 3 then
+				local var3334, var3335 = protoModule.readBuffer(p123, var3324)
+				var3324 = var3335
+				var3323.sort_id = buffer.tostring(var3334)
+			elseif var3329 == 3 then
 				local _ = nil
-				local var3311, var3312 = protoModule.readBuffer(p122, var3299)
-				var3299 = var3312
-				table.insert(var3298.options, t.SelectorOption.decode(var3311))
-			elseif var3304 == 4 then
+				local var3336, var3337 = protoModule.readBuffer(p123, var3324)
+				var3324 = var3337
+				table.insert(var3323.options, t.SelectorOption.decode(var3336))
+			elseif var3329 == 4 then
 				local _ = nil
-				local var3313, var3314 = protoModule.readBuffer(p122, var3299)
-				var3299 = var3314
-				var3298.experience_carousel = t.ExperienceCarouselInputData.decode(var3313)
-			elseif var3304 == 5 then
+				local var3338, var3339 = protoModule.readBuffer(p123, var3324)
+				var3324 = var3339
+				var3323.experience_carousel = t.ExperienceCarouselInputData.decode(var3338)
+			elseif var3329 == 5 then
 				local _ = nil
-				local var3315, var3316 = protoModule.readBuffer(p122, var3299)
-				var3299 = var3316
-				var3298.feed_item_key = buffer.tostring(var3315)
+				local var3340, var3341 = protoModule.readBuffer(p123, var3324)
+				var3324 = var3341
+				var3323.feed_item_key = buffer.tostring(var3340)
 			else
 				local _ = nil
-				local var3317, var3318 = protoModule.readVarInt(p122, var3299)
-				var3299 = var3318 + var3317
+				local var3342, var3343 = protoModule.readVarInt(p123, var3324)
+				var3324 = var3343 + var3342
 			end
-		elseif var3300 == protoModule.wireTypes.i32 then
+		elseif var3325 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3319, var3320 = protoModule.readFixed32(p122, var3299)
-			local _ = var3319
-			var3299 = var3320
-		elseif var3300 == protoModule.wireTypes.i64 then
+			local var3344, var3345 = protoModule.readFixed32(p123, var3324)
+			local _ = var3344
+			var3324 = var3345
+		elseif var3325 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var3321, var3322 = protoModule.readFixed64(p122, var3299)
-			local _ = var3321
-			var3299 = var3322
+			local var3346, var3347 = protoModule.readFixed64(p123, var3324)
+			local _ = var3346
+			var3324 = var3347
 		else
-			error("Unsupported wire type: " .. var4812)
+			error("Unsupported wire type: " .. var4854)
 		end
 	end
-	return var3298
+	return var3323
 end
 
-function t_122:jsonEncode()
+function t_123:jsonEncode()
 	local t = {}
 	
 	if self.selected_option ~= nil and self.selected_option ~= "" then
@@ -21300,21 +21486,21 @@ function t_122:jsonEncode()
 	return t
 end
 
-function t_122:jsonDecode()
-	-- upvalues: t_122 (ref), t (ref)
-	local var3323 = t_122.new()
+function t_123:jsonDecode()
+	-- upvalues: t_123 (ref), t (ref)
+	local var3348 = t_123.new()
 	
 	if self.selected_option ~= nil then
-		var3323.selected_option = self.selected_option
+		var3348.selected_option = self.selected_option
 	end
 	if self.selectedOption ~= nil then
-		var3323.selected_option = self.selectedOption
+		var3348.selected_option = self.selectedOption
 	end
 	if self.sort_id ~= nil then
-		var3323.sort_id = self.sort_id
+		var3348.sort_id = self.sort_id
 	end
 	if self.sortId ~= nil then
-		var3323.sort_id = self.sortId
+		var3348.sort_id = self.sortId
 	end
 	if self.options ~= nil then
 		local t_1 = {}
@@ -21322,129 +21508,129 @@ function t_122:jsonDecode()
 		for i, v in self.options do
 			table.insert(t_1, t.SelectorOption.jsonDecode(v))
 		end
-		var3323.options = t_1
+		var3348.options = t_1
 	end
 	if self.experience_carousel ~= nil then
-		var3323.experience_carousel = t.ExperienceCarouselInputData.jsonDecode(self.experience_carousel)
+		var3348.experience_carousel = t.ExperienceCarouselInputData.jsonDecode(self.experience_carousel)
 	end
 	if self.experienceCarousel ~= nil then
-		var3323.experience_carousel = t.ExperienceCarouselInputData.jsonDecode(self.experienceCarousel)
+		var3348.experience_carousel = t.ExperienceCarouselInputData.jsonDecode(self.experienceCarousel)
 	end
 	if self.feed_item_key ~= nil then
-		var3323.feed_item_key = self.feed_item_key
+		var3348.feed_item_key = self.feed_item_key
 	end
 	if self.feedItemKey ~= nil then
-		var3323.feed_item_key = self.feedItemKey
+		var3348.feed_item_key = self.feedItemKey
 	end
-	return var3323
+	return var3348
 end
 
-t_122.descriptor = {
+t_123.descriptor = {
 	name = "OptionSelectorCarouselInputData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.OptionSelectorCarouselInputData"
 }
-t.OptionSelectorCarouselInputData = t_122
+t.OptionSelectorCarouselInputData = t_123
 typeRegistryModule.default:register(t.OptionSelectorCarouselInputData)
-local t_123 = {}
-t_123.__index = t_123
+local t_124 = {}
+t_124.__index = t_124
 
-function t_123.new(p123)
-	-- upvalues: t_123 (ref)
+function t_124.new(p124)
+	-- upvalues: t_124 (ref)
 	return setmetatable({
-		id = if p123 == nil or p123.id == nil then "" else p123.id,
-		display_name = if p123 == nil or p123.display_name == nil then "" else p123.display_name,
-		is_selected = if p123 == nil or p123.is_selected == nil then false else p123.is_selected
-	}, t_123)
+		id = if p124 == nil or p124.id == nil then "" else p124.id,
+		display_name = if p124 == nil or p124.display_name == nil then "" else p124.display_name,
+		is_selected = if p124 == nil or p124.is_selected == nil then false else p124.is_selected
+	}, t_124)
 end
 
-function t_123:encode()
+function t_124:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3324 = 0
+	local var3349 = 0
 	
 	if self.id ~= nil and self.id ~= "" then
-		local var3325, var3326 = protoModule.writeTag(buff, var3324, 1, protoModule.wireTypes.lengthDelimited)
-		var3325, var4842 = protoModule.writeString(var3325, var3326, self.id)
-		buff = var3325
-		var3324 = var3326
+		local var3350, var3351 = protoModule.writeTag(buff, var3349, 1, protoModule.wireTypes.lengthDelimited)
+		var3350, var4884 = protoModule.writeString(var3350, var3351, self.id)
+		buff = var3350
+		var3349 = var3351
 	end
 	if self.display_name ~= nil and self.display_name ~= "" then
-		local var3327, var3328 = protoModule.writeTag(buff, var3324, 2, protoModule.wireTypes.lengthDelimited)
-		var3327, var4844 = protoModule.writeString(var3327, var3328, self.display_name)
-		buff = var3327
-		var3324 = var3328
+		local var3352, var3353 = protoModule.writeTag(buff, var3349, 2, protoModule.wireTypes.lengthDelimited)
+		var3352, var4886 = protoModule.writeString(var3352, var3353, self.display_name)
+		buff = var3352
+		var3349 = var3353
 	end
 	if self.is_selected then
-		local var3329, var3330 = protoModule.writeTag(buff, var3324, 3, protoModule.wireTypes.varint)
-		var3329, var4846 = protoModule.writeVarInt(var3329, var3330, if self.is_selected then 1 else 0)
-		buff = var3329
-		var3324 = var3330
+		local var3354, var3355 = protoModule.writeTag(buff, var3349, 3, protoModule.wireTypes.varint)
+		var3354, var4888 = protoModule.writeVarInt(var3354, var3355, if self.is_selected then 1 else 0)
+		buff = var3354
+		var3349 = var3355
 	end
-	local buff_1 = buffer.create(var3324)
-	buffer.copy(buff_1, 0, buff, 0, var3324)
+	local buff_1 = buffer.create(var3349)
+	buffer.copy(buff_1, 0, buff, 0, var3349)
 	
 	return buff_1
 end
 
-function t_123.decode(p123)
-	-- upvalues: t_123 (ref), protoModule (ref)
-	local var3324 = t_123.new()
-	local var3325 = 0
-	while var3325 < buffer.len(p123) do
+function t_124.decode(p124)
+	-- upvalues: t_124 (ref), protoModule (ref)
+	local var3349 = t_124.new()
+	local var3350 = 0
+	while var3350 < buffer.len(p124) do
 		local _ = nil
-		local var3326 = nil
-		local var3327, var3328, var3329 = protoModule.readTag(p123, var3325)
-		local var3330 = var3327
-		var3326 = var3328
-		var3325 = var3329
+		local var3351 = nil
+		local var3352, var3353, var3354 = protoModule.readTag(p124, var3350)
+		local var3355 = var3352
+		var3351 = var3353
+		var3350 = var3354
 		
-		if var3326 == protoModule.wireTypes.varint then
-			if var3330 == 3 then
+		if var3351 == protoModule.wireTypes.varint then
+			if var3355 == 3 then
 				local _ = nil
-				local var3331, var3332 = protoModule.readVarInt(p123, var3325)
-				var3325 = var3332
-				var3324.is_selected = var3331 ~= 0
+				local var3356, var3357 = protoModule.readVarInt(p124, var3350)
+				var3350 = var3357
+				var3349.is_selected = var3356 ~= 0
 			else
 				local _ = nil
-				local var3333, var3334 = protoModule.readVarInt(p123, var3325)
-				local _ = var3333
-				var3325 = var3334
+				local var3358, var3359 = protoModule.readVarInt(p124, var3350)
+				local _ = var3358
+				var3350 = var3359
 			end
 		end
-		if var3326 == protoModule.wireTypes.lengthDelimited then
-			if var3330 == 1 then
+		if var3351 == protoModule.wireTypes.lengthDelimited then
+			if var3355 == 1 then
 				local _ = nil
-				local var3335, var3336 = protoModule.readBuffer(p123, var3325)
-				var3325 = var3336
-				var3324.id = buffer.tostring(var3335)
-			elseif var3330 == 2 then
+				local var3360, var3361 = protoModule.readBuffer(p124, var3350)
+				var3350 = var3361
+				var3349.id = buffer.tostring(var3360)
+			elseif var3355 == 2 then
 				local _ = nil
-				local var3337, var3338 = protoModule.readBuffer(p123, var3325)
-				var3325 = var3338
-				var3324.display_name = buffer.tostring(var3337)
+				local var3362, var3363 = protoModule.readBuffer(p124, var3350)
+				var3350 = var3363
+				var3349.display_name = buffer.tostring(var3362)
 			else
 				local _ = nil
-				local var3339, var3340 = protoModule.readVarInt(p123, var3325)
-				var3325 = var3340 + var3339
+				local var3364, var3365 = protoModule.readVarInt(p124, var3350)
+				var3350 = var3365 + var3364
 			end
-		elseif var3326 == protoModule.wireTypes.i32 then
+		elseif var3351 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3341, var3342 = protoModule.readFixed32(p123, var3325)
-			local _ = var3341
-			var3325 = var3342
-		elseif var3326 == protoModule.wireTypes.i64 then
+			local var3366, var3367 = protoModule.readFixed32(p124, var3350)
+			local _ = var3366
+			var3350 = var3367
+		elseif var3351 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var3343, var3344 = protoModule.readFixed64(p123, var3325)
-			local _ = var3343
-			var3325 = var3344
+			local var3368, var3369 = protoModule.readFixed64(p124, var3350)
+			local _ = var3368
+			var3350 = var3369
 		else
-			error("Unsupported wire type: " .. var4850)
+			error("Unsupported wire type: " .. var4892)
 		end
 	end
-	return var3324
+	return var3349
 end
 
-function t_123:jsonEncode()
+function t_124:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -21459,136 +21645,136 @@ function t_123:jsonEncode()
 	return t
 end
 
-function t_123:jsonDecode()
-	-- upvalues: t_123 (ref)
-	local var3345 = t_123.new()
+function t_124:jsonDecode()
+	-- upvalues: t_124 (ref)
+	local var3370 = t_124.new()
 	
 	if self.id ~= nil then
-		var3345.id = self.id
+		var3370.id = self.id
 	end
 	if self.display_name ~= nil then
-		var3345.display_name = self.display_name
+		var3370.display_name = self.display_name
 	end
 	if self.displayName ~= nil then
-		var3345.display_name = self.displayName
+		var3370.display_name = self.displayName
 	end
 	if self.is_selected ~= nil then
-		var3345.is_selected = self.is_selected
+		var3370.is_selected = self.is_selected
 	end
 	if self.isSelected ~= nil then
-		var3345.is_selected = self.isSelected
+		var3370.is_selected = self.isSelected
 	end
-	return var3345
+	return var3370
 end
 
-t_123.descriptor = {
+t_124.descriptor = {
 	name = "SelectorOption",
 	fullName = "roblox.apppageplatform.shared.v1beta1.SelectorOption"
 }
-t.SelectorOption = t_123
+t.SelectorOption = t_124
 typeRegistryModule.default:register(t.SelectorOption)
-local t_124 = {}
-t_124.__index = t_124
+local t_125 = {}
+t_125.__index = t_125
 
-function t_124.new(p124)
-	-- upvalues: t_124 (ref)
+function t_125.new(p125)
+	-- upvalues: t_125 (ref)
 	return setmetatable({
-		cards = if p124 == nil or p124.cards == nil then {} else p124.cards,
-		title = if p124 == nil or p124.title == nil then "" else p124.title,
-		sort_id = if p124 == nil or p124.sort_id == nil then nil else p124.sort_id
-	}, t_124)
+		cards = if p125 == nil or p125.cards == nil then {} else p125.cards,
+		title = if p125 == nil or p125.title == nil then "" else p125.title,
+		sort_id = if p125 == nil or p125.sort_id == nil then nil else p125.sort_id
+	}, t_125)
 end
 
-function t_124:encode()
+function t_125:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3345 = 0
+	local var3370 = 0
 	
 	if self.cards ~= nil and #self.cards > 0 then
 		for i, v in self.cards do
-			local var3346 = v:encode()
-			local var3347, var3348 = protoModule.writeTag(buff, var3345, 1, protoModule.wireTypes.lengthDelimited)
-			var3347, var4875 = protoModule.writeBuffer(var3347, var3348, var3346, buffer.len(var3346))
-			buff = var3347
-			var3345 = var3348
+			local var3371 = v:encode()
+			local var3372, var3373 = protoModule.writeTag(buff, var3370, 1, protoModule.wireTypes.lengthDelimited)
+			var3372, var4917 = protoModule.writeBuffer(var3372, var3373, var3371, buffer.len(var3371))
+			buff = var3372
+			var3370 = var3373
 		end
 	end
 	if self.title ~= nil and self.title ~= "" then
-		local var3349, var3350 = protoModule.writeTag(buff, var3345, 2, protoModule.wireTypes.lengthDelimited)
-		var3349, var4877 = protoModule.writeString(var3349, var3350, self.title)
-		buff = var3349
-		var3345 = var3350
+		local var3374, var3375 = protoModule.writeTag(buff, var3370, 2, protoModule.wireTypes.lengthDelimited)
+		var3374, var4919 = protoModule.writeString(var3374, var3375, self.title)
+		buff = var3374
+		var3370 = var3375
 	end
 	if self.sort_id ~= nil then
-		local var3351, var3352 = protoModule.writeTag(buff, var3345, 3, protoModule.wireTypes.lengthDelimited)
-		var3351, var4879 = protoModule.writeString(var3351, var3352, self.sort_id)
-		buff = var3351
-		var3345 = var3352
+		local var3376, var3377 = protoModule.writeTag(buff, var3370, 3, protoModule.wireTypes.lengthDelimited)
+		var3376, var4921 = protoModule.writeString(var3376, var3377, self.sort_id)
+		buff = var3376
+		var3370 = var3377
 	end
-	local buff_1 = buffer.create(var3345)
-	buffer.copy(buff_1, 0, buff, 0, var3345)
+	local buff_1 = buffer.create(var3370)
+	buffer.copy(buff_1, 0, buff, 0, var3370)
 	
 	return buff_1
 end
 
-function t_124.decode(p124)
-	-- upvalues: t_124 (ref), protoModule (ref), t (ref)
-	local var3353 = t_124.new()
-	local var3354 = 0
-	while var3354 < buffer.len(p124) do
+function t_125.decode(p125)
+	-- upvalues: t_125 (ref), protoModule (ref), t (ref)
+	local var3378 = t_125.new()
+	local var3379 = 0
+	while var3379 < buffer.len(p125) do
 		local _ = nil
-		local var3355 = nil
-		local var3356, var3357, var3358 = protoModule.readTag(p124, var3354)
-		local var3359 = var3356
-		var3355 = var3357
-		var3354 = var3358
+		local var3380 = nil
+		local var3381, var3382, var3383 = protoModule.readTag(p125, var3379)
+		local var3384 = var3381
+		var3380 = var3382
+		var3379 = var3383
 		
-		if var3355 == protoModule.wireTypes.varint then
+		if var3380 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3360, var3361 = protoModule.readVarInt(p124, var3354)
-			local _ = var3360
-			var3354 = var3361
+			local var3385, var3386 = protoModule.readVarInt(p125, var3379)
+			local _ = var3385
+			var3379 = var3386
 			continue
 		end
-		if var3355 == protoModule.wireTypes.lengthDelimited then
-			if var3359 == 1 then
+		if var3380 == protoModule.wireTypes.lengthDelimited then
+			if var3384 == 1 then
 				local _ = nil
-				local var3362, var3363 = protoModule.readBuffer(p124, var3354)
-				var3354 = var3363
-				table.insert(var3353.cards, t.GameItemsCardInputData.decode(var3362))
-			elseif var3359 == 2 then
+				local var3387, var3388 = protoModule.readBuffer(p125, var3379)
+				var3379 = var3388
+				table.insert(var3378.cards, t.GameItemsCardInputData.decode(var3387))
+			elseif var3384 == 2 then
 				local _ = nil
-				local var3364, var3365 = protoModule.readBuffer(p124, var3354)
-				var3354 = var3365
-				var3353.title = buffer.tostring(var3364)
-			elseif var3359 == 3 then
+				local var3389, var3390 = protoModule.readBuffer(p125, var3379)
+				var3379 = var3390
+				var3378.title = buffer.tostring(var3389)
+			elseif var3384 == 3 then
 				local _ = nil
-				local var3366, var3367 = protoModule.readBuffer(p124, var3354)
-				var3354 = var3367
-				var3353.sort_id = buffer.tostring(var3366)
+				local var3391, var3392 = protoModule.readBuffer(p125, var3379)
+				var3379 = var3392
+				var3378.sort_id = buffer.tostring(var3391)
 			else
 				local _ = nil
-				local var3368, var3369 = protoModule.readVarInt(p124, var3354)
-				var3354 = var3369 + var3368
+				local var3393, var3394 = protoModule.readVarInt(p125, var3379)
+				var3379 = var3394 + var3393
 			end
-		elseif var3355 == protoModule.wireTypes.i32 then
+		elseif var3380 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3370, var3371 = protoModule.readFixed32(p124, var3354)
-			local _ = var3370
-			var3354 = var3371
-		elseif var3355 == protoModule.wireTypes.i64 then
+			local var3395, var3396 = protoModule.readFixed32(p125, var3379)
+			local _ = var3395
+			var3379 = var3396
+		elseif var3380 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var3372, var3373 = protoModule.readFixed64(p124, var3354)
-			local _ = var3372
-			var3354 = var3373
+			local var3397, var3398 = protoModule.readFixed64(p125, var3379)
+			local _ = var3397
+			var3379 = var3398
 		else
-			error("Unsupported wire type: " .. var4883)
+			error("Unsupported wire type: " .. var4925)
 		end
 	end
-	return var3353
+	return var3378
 end
 
-function t_124:jsonEncode()
+function t_125:jsonEncode()
 	local t = {}
 	
 	if self.cards ~= nil and #self.cards > 0 then
@@ -21608,9 +21794,9 @@ function t_124:jsonEncode()
 	return t
 end
 
-function t_124:jsonDecode()
-	-- upvalues: t_124 (ref), t (ref)
-	local var3374 = t_124.new()
+function t_125:jsonDecode()
+	-- upvalues: t_125 (ref), t (ref)
+	local var3399 = t_125.new()
 	
 	if self.cards ~= nil then
 		local t_1 = {}
@@ -21618,116 +21804,116 @@ function t_124:jsonDecode()
 		for i, v in self.cards do
 			table.insert(t_1, t.GameItemsCardInputData.jsonDecode(v))
 		end
-		var3374.cards = t_1
+		var3399.cards = t_1
 	end
 	if self.title ~= nil then
-		var3374.title = self.title
+		var3399.title = self.title
 	end
 	if self.sort_id ~= nil then
-		var3374.sort_id = self.sort_id
+		var3399.sort_id = self.sort_id
 	end
 	if self.sortId ~= nil then
-		var3374.sort_id = self.sortId
+		var3399.sort_id = self.sortId
 	end
-	return var3374
+	return var3399
 end
 
-t_124.descriptor = {
+t_125.descriptor = {
 	name = "GameItemsCarouselInputData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.GameItemsCarouselInputData"
 }
-t.GameItemsCarouselInputData = t_124
+t.GameItemsCarouselInputData = t_125
 typeRegistryModule.default:register(t.GameItemsCarouselInputData)
-local t_125 = {}
-t_125.__index = t_125
+local t_126 = {}
+t_126.__index = t_126
 
-function t_125.new(p125)
-	-- upvalues: t_125 (ref)
+function t_126.new(p126)
+	-- upvalues: t_126 (ref)
 	return setmetatable({
-		universe_id = if p125 == nil or p125.universe_id == nil then "" else p125.universe_id,
-		items = if p125 == nil or p125.items == nil then {} else p125.items
-	}, t_125)
+		universe_id = if p126 == nil or p126.universe_id == nil then "" else p126.universe_id,
+		items = if p126 == nil or p126.items == nil then {} else p126.items
+	}, t_126)
 end
 
-function t_125:encode()
+function t_126:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3375 = 0
+	local var3400 = 0
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var3376, var3377 = protoModule.writeTag(buff, var3375, 1, protoModule.wireTypes.lengthDelimited)
-		var3376, var4909 = protoModule.writeString(var3376, var3377, self.universe_id)
-		buff = var3376
-		var3375 = var3377
+		local var3401, var3402 = protoModule.writeTag(buff, var3400, 1, protoModule.wireTypes.lengthDelimited)
+		var3401, var4951 = protoModule.writeString(var3401, var3402, self.universe_id)
+		buff = var3401
+		var3400 = var3402
 	end
 	if self.items ~= nil and #self.items > 0 then
 		for i, v in self.items do
-			local var3378 = v:encode()
-			local var3379, var3380 = protoModule.writeTag(buff, var3375, 2, protoModule.wireTypes.lengthDelimited)
-			var3379, var4912 = protoModule.writeBuffer(var3379, var3380, var3378, buffer.len(var3378))
-			buff = var3379
-			var3375 = var3380
+			local var3403 = v:encode()
+			local var3404, var3405 = protoModule.writeTag(buff, var3400, 2, protoModule.wireTypes.lengthDelimited)
+			var3404, var4954 = protoModule.writeBuffer(var3404, var3405, var3403, buffer.len(var3403))
+			buff = var3404
+			var3400 = var3405
 		end
 	end
-	local buff_1 = buffer.create(var3375)
-	buffer.copy(buff_1, 0, buff, 0, var3375)
+	local buff_1 = buffer.create(var3400)
+	buffer.copy(buff_1, 0, buff, 0, var3400)
 	
 	return buff_1
 end
 
-function t_125.decode(p125)
-	-- upvalues: t_125 (ref), protoModule (ref), t (ref)
-	local var3381 = t_125.new()
-	local var3382 = 0
-	while var3382 < buffer.len(p125) do
+function t_126.decode(p126)
+	-- upvalues: t_126 (ref), protoModule (ref), t (ref)
+	local var3406 = t_126.new()
+	local var3407 = 0
+	while var3407 < buffer.len(p126) do
 		local _ = nil
-		local var3383 = nil
-		local var3384, var3385, var3386 = protoModule.readTag(p125, var3382)
-		local var3387 = var3384
-		var3383 = var3385
-		var3382 = var3386
+		local var3408 = nil
+		local var3409, var3410, var3411 = protoModule.readTag(p126, var3407)
+		local var3412 = var3409
+		var3408 = var3410
+		var3407 = var3411
 		
-		if var3383 == protoModule.wireTypes.varint then
+		if var3408 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3388, var3389 = protoModule.readVarInt(p125, var3382)
-			local _ = var3388
-			var3382 = var3389
+			local var3413, var3414 = protoModule.readVarInt(p126, var3407)
+			local _ = var3413
+			var3407 = var3414
 			continue
 		end
-		if var3383 == protoModule.wireTypes.lengthDelimited then
-			if var3387 == 1 then
+		if var3408 == protoModule.wireTypes.lengthDelimited then
+			if var3412 == 1 then
 				local _ = nil
-				local var3390, var3391 = protoModule.readBuffer(p125, var3382)
-				var3382 = var3391
-				var3381.universe_id = buffer.tostring(var3390)
-			elseif var3387 == 2 then
+				local var3415, var3416 = protoModule.readBuffer(p126, var3407)
+				var3407 = var3416
+				var3406.universe_id = buffer.tostring(var3415)
+			elseif var3412 == 2 then
 				local _ = nil
-				local var3392, var3393 = protoModule.readBuffer(p125, var3382)
-				var3382 = var3393
-				table.insert(var3381.items, t.GameItemInputData.decode(var3392))
+				local var3417, var3418 = protoModule.readBuffer(p126, var3407)
+				var3407 = var3418
+				table.insert(var3406.items, t.GameItemInputData.decode(var3417))
 			else
 				local _ = nil
-				local var3394, var3395 = protoModule.readVarInt(p125, var3382)
-				var3382 = var3395 + var3394
+				local var3419, var3420 = protoModule.readVarInt(p126, var3407)
+				var3407 = var3420 + var3419
 			end
-		elseif var3383 == protoModule.wireTypes.i32 then
+		elseif var3408 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3396, var3397 = protoModule.readFixed32(p125, var3382)
-			local _ = var3396
-			var3382 = var3397
-		elseif var3383 == protoModule.wireTypes.i64 then
+			local var3421, var3422 = protoModule.readFixed32(p126, var3407)
+			local _ = var3421
+			var3407 = var3422
+		elseif var3408 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var3398, var3399 = protoModule.readFixed64(p125, var3382)
-			local _ = var3398
-			var3382 = var3399
+			local var3423, var3424 = protoModule.readFixed64(p126, var3407)
+			local _ = var3423
+			var3407 = var3424
 		else
-			error("Unsupported wire type: " .. var4916)
+			error("Unsupported wire type: " .. var4958)
 		end
 	end
-	return var3381
+	return var3406
 end
 
-function t_125:jsonEncode()
+function t_126:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -21744,15 +21930,15 @@ function t_125:jsonEncode()
 	return t
 end
 
-function t_125:jsonDecode()
-	-- upvalues: t_125 (ref), t (ref)
-	local var3400 = t_125.new()
+function t_126:jsonDecode()
+	-- upvalues: t_126 (ref), t (ref)
+	local var3425 = t_126.new()
 	
 	if self.universe_id ~= nil then
-		var3400.universe_id = self.universe_id
+		var3425.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var3400.universe_id = self.universeId
+		var3425.universe_id = self.universeId
 	end
 	if self.items ~= nil then
 		local t_1 = {}
@@ -21760,104 +21946,104 @@ function t_125:jsonDecode()
 		for i, v in self.items do
 			table.insert(t_1, t.GameItemInputData.jsonDecode(v))
 		end
-		var3400.items = t_1
+		var3425.items = t_1
 	end
-	return var3400
+	return var3425
 end
 
-t_125.descriptor = {
+t_126.descriptor = {
 	name = "GameItemsCardInputData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.GameItemsCardInputData"
 }
-t.GameItemsCardInputData = t_125
+t.GameItemsCardInputData = t_126
 typeRegistryModule.default:register(t.GameItemsCardInputData)
-local t_126 = {}
-t_126.__index = t_126
+local t_127 = {}
+t_127.__index = t_127
 
-function t_126.new(p126)
-	-- upvalues: t_126 (ref)
+function t_127.new(p127)
+	-- upvalues: t_127 (ref)
 	return setmetatable({
-		item_id = if p126 == nil or p126.item_id == nil then "" else p126.item_id,
-		item_type = if p126 == nil or p126.item_type == nil then "" else p126.item_type
-	}, t_126)
+		item_id = if p127 == nil or p127.item_id == nil then "" else p127.item_id,
+		item_type = if p127 == nil or p127.item_type == nil then "" else p127.item_type
+	}, t_127)
 end
 
-function t_126:encode()
+function t_127:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3401 = 0
+	local var3426 = 0
 	
 	if self.item_id ~= nil and self.item_id ~= "" then
-		local var3402, var3403 = protoModule.writeTag(buff, var3401, 1, protoModule.wireTypes.lengthDelimited)
-		var3402, var4940 = protoModule.writeString(var3402, var3403, self.item_id)
-		buff = var3402
-		var3401 = var3403
+		local var3427, var3428 = protoModule.writeTag(buff, var3426, 1, protoModule.wireTypes.lengthDelimited)
+		var3427, var4982 = protoModule.writeString(var3427, var3428, self.item_id)
+		buff = var3427
+		var3426 = var3428
 	end
 	if self.item_type ~= nil and self.item_type ~= "" then
-		local var3404, var3405 = protoModule.writeTag(buff, var3401, 2, protoModule.wireTypes.lengthDelimited)
-		var3404, var4942 = protoModule.writeString(var3404, var3405, self.item_type)
-		buff = var3404
-		var3401 = var3405
+		local var3429, var3430 = protoModule.writeTag(buff, var3426, 2, protoModule.wireTypes.lengthDelimited)
+		var3429, var4984 = protoModule.writeString(var3429, var3430, self.item_type)
+		buff = var3429
+		var3426 = var3430
 	end
-	local buff_1 = buffer.create(var3401)
-	buffer.copy(buff_1, 0, buff, 0, var3401)
+	local buff_1 = buffer.create(var3426)
+	buffer.copy(buff_1, 0, buff, 0, var3426)
 	
 	return buff_1
 end
 
-function t_126.decode(p126)
-	-- upvalues: t_126 (ref), protoModule (ref)
-	local var3401 = t_126.new()
-	local var3402 = 0
-	while var3402 < buffer.len(p126) do
+function t_127.decode(p127)
+	-- upvalues: t_127 (ref), protoModule (ref)
+	local var3426 = t_127.new()
+	local var3427 = 0
+	while var3427 < buffer.len(p127) do
 		local _ = nil
-		local var3403 = nil
-		local var3404, var3405, var3406 = protoModule.readTag(p126, var3402)
-		local var3407 = var3404
-		var3403 = var3405
-		var3402 = var3406
+		local var3428 = nil
+		local var3429, var3430, var3431 = protoModule.readTag(p127, var3427)
+		local var3432 = var3429
+		var3428 = var3430
+		var3427 = var3431
 		
-		if var3403 == protoModule.wireTypes.varint then
+		if var3428 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3408, var3409 = protoModule.readVarInt(p126, var3402)
-			local _ = var3408
-			var3402 = var3409
+			local var3433, var3434 = protoModule.readVarInt(p127, var3427)
+			local _ = var3433
+			var3427 = var3434
 			continue
 		end
-		if var3403 == protoModule.wireTypes.lengthDelimited then
-			if var3407 == 1 then
+		if var3428 == protoModule.wireTypes.lengthDelimited then
+			if var3432 == 1 then
 				local _ = nil
-				local var3410, var3411 = protoModule.readBuffer(p126, var3402)
-				var3402 = var3411
-				var3401.item_id = buffer.tostring(var3410)
-			elseif var3407 == 2 then
+				local var3435, var3436 = protoModule.readBuffer(p127, var3427)
+				var3427 = var3436
+				var3426.item_id = buffer.tostring(var3435)
+			elseif var3432 == 2 then
 				local _ = nil
-				local var3412, var3413 = protoModule.readBuffer(p126, var3402)
-				var3402 = var3413
-				var3401.item_type = buffer.tostring(var3412)
+				local var3437, var3438 = protoModule.readBuffer(p127, var3427)
+				var3427 = var3438
+				var3426.item_type = buffer.tostring(var3437)
 			else
 				local _ = nil
-				local var3414, var3415 = protoModule.readVarInt(p126, var3402)
-				var3402 = var3415 + var3414
+				local var3439, var3440 = protoModule.readVarInt(p127, var3427)
+				var3427 = var3440 + var3439
 			end
-		elseif var3403 == protoModule.wireTypes.i32 then
+		elseif var3428 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3416, var3417 = protoModule.readFixed32(p126, var3402)
-			local _ = var3416
-			var3402 = var3417
-		elseif var3403 == protoModule.wireTypes.i64 then
+			local var3441, var3442 = protoModule.readFixed32(p127, var3427)
+			local _ = var3441
+			var3427 = var3442
+		elseif var3428 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var3418, var3419 = protoModule.readFixed64(p126, var3402)
-			local _ = var3418
-			var3402 = var3419
+			local var3443, var3444 = protoModule.readFixed64(p127, var3427)
+			local _ = var3443
+			var3427 = var3444
 		else
-			error("Unsupported wire type: " .. var4946)
+			error("Unsupported wire type: " .. var4988)
 		end
 	end
-	return var3401
+	return var3426
 end
 
-function t_126:jsonEncode()
+function t_127:jsonEncode()
 	local t = {}
 	
 	if self.item_id ~= nil and self.item_id ~= "" then
@@ -21869,250 +22055,250 @@ function t_126:jsonEncode()
 	return t
 end
 
-function t_126:jsonDecode()
-	-- upvalues: t_126 (ref)
-	local var3420 = t_126.new()
+function t_127:jsonDecode()
+	-- upvalues: t_127 (ref)
+	local var3445 = t_127.new()
 	
 	if self.item_id ~= nil then
-		var3420.item_id = self.item_id
+		var3445.item_id = self.item_id
 	end
 	if self.itemId ~= nil then
-		var3420.item_id = self.itemId
+		var3445.item_id = self.itemId
 	end
 	if self.item_type ~= nil then
-		var3420.item_type = self.item_type
+		var3445.item_type = self.item_type
 	end
 	if self.itemType ~= nil then
-		var3420.item_type = self.itemType
+		var3445.item_type = self.itemType
 	end
-	return var3420
+	return var3445
 end
 
-t_126.descriptor = {
+t_127.descriptor = {
 	name = "GameItemInputData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.GameItemInputData"
 }
-t.GameItemInputData = t_126
+t.GameItemInputData = t_127
 typeRegistryModule.default:register(t.GameItemInputData)
-local t_127 = {}
-t_127.__index = t_127
+local t_128 = {}
+t_128.__index = t_128
 
-function t_127.new(p127)
-	-- upvalues: t_127 (ref)
+function t_128.new(p128)
+	-- upvalues: t_128 (ref)
 	return setmetatable({
-		clickout_url = if p127 == nil or p127.clickout_url == nil then "" else p127.clickout_url,
-		native_ad_data = if p127 == nil or p127.native_ad_data == nil then "" else p127.native_ad_data,
-		payer_name = if p127 == nil or p127.payer_name == nil then nil else p127.payer_name,
-		logo_asset_id = if p127 == nil or p127.logo_asset_id == nil then nil else p127.logo_asset_id,
-		logo_aspect_ratio = if p127 == nil or p127.logo_aspect_ratio == nil then nil else p127.logo_aspect_ratio,
-		cta_text = if p127 == nil or p127.cta_text == nil then nil else p127.cta_text,
-		title = if p127 == nil or p127.title == nil then nil else p127.title,
-		subtitle = if p127 == nil or p127.subtitle == nil then nil else p127.subtitle,
-		image_asset_id = if p127 == nil or p127.image_asset_id == nil then nil else p127.image_asset_id,
-		video_asset_id = if p127 == nil or p127.video_asset_id == nil then nil else p127.video_asset_id,
-		badge_text = if p127 == nil or p127.badge_text == nil then nil else p127.badge_text,
-		badge_analytics_id = if p127 == nil or p127.badge_analytics_id == nil then nil else p127.badge_analytics_id,
-		roblox_component = if p127 == nil or p127.roblox_component == nil then nil else p127.roblox_component
-	}, t_127)
+		clickout_url = if p128 == nil or p128.clickout_url == nil then "" else p128.clickout_url,
+		native_ad_data = if p128 == nil or p128.native_ad_data == nil then "" else p128.native_ad_data,
+		payer_name = if p128 == nil or p128.payer_name == nil then nil else p128.payer_name,
+		logo_asset_id = if p128 == nil or p128.logo_asset_id == nil then nil else p128.logo_asset_id,
+		logo_aspect_ratio = if p128 == nil or p128.logo_aspect_ratio == nil then nil else p128.logo_aspect_ratio,
+		cta_text = if p128 == nil or p128.cta_text == nil then nil else p128.cta_text,
+		title = if p128 == nil or p128.title == nil then nil else p128.title,
+		subtitle = if p128 == nil or p128.subtitle == nil then nil else p128.subtitle,
+		image_asset_id = if p128 == nil or p128.image_asset_id == nil then nil else p128.image_asset_id,
+		video_asset_id = if p128 == nil or p128.video_asset_id == nil then nil else p128.video_asset_id,
+		badge_text = if p128 == nil or p128.badge_text == nil then nil else p128.badge_text,
+		badge_analytics_id = if p128 == nil or p128.badge_analytics_id == nil then nil else p128.badge_analytics_id,
+		roblox_component = if p128 == nil or p128.roblox_component == nil then nil else p128.roblox_component
+	}, t_128)
 end
 
-function t_127:encode()
+function t_128:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3420 = 0
+	local var3445 = 0
 	
 	if self.clickout_url ~= nil and self.clickout_url ~= "" then
-		local var3421, var3422 = protoModule.writeTag(buff, var3420, 1, protoModule.wireTypes.lengthDelimited)
-		var3421, var4968 = protoModule.writeString(var3421, var3422, self.clickout_url)
-		buff = var3421
-		var3420 = var3422
+		local var3446, var3447 = protoModule.writeTag(buff, var3445, 1, protoModule.wireTypes.lengthDelimited)
+		var3446, var5010 = protoModule.writeString(var3446, var3447, self.clickout_url)
+		buff = var3446
+		var3445 = var3447
 	end
 	if self.native_ad_data ~= nil and self.native_ad_data ~= "" then
-		local var3423, var3424 = protoModule.writeTag(buff, var3420, 2, protoModule.wireTypes.lengthDelimited)
-		var3423, var4970 = protoModule.writeString(var3423, var3424, self.native_ad_data)
-		buff = var3423
-		var3420 = var3424
+		local var3448, var3449 = protoModule.writeTag(buff, var3445, 2, protoModule.wireTypes.lengthDelimited)
+		var3448, var5012 = protoModule.writeString(var3448, var3449, self.native_ad_data)
+		buff = var3448
+		var3445 = var3449
 	end
 	if self.payer_name ~= nil then
-		local var3425, var3426 = protoModule.writeTag(buff, var3420, 3, protoModule.wireTypes.lengthDelimited)
-		var3425, var4972 = protoModule.writeString(var3425, var3426, self.payer_name)
-		buff = var3425
-		var3420 = var3426
+		local var3450, var3451 = protoModule.writeTag(buff, var3445, 3, protoModule.wireTypes.lengthDelimited)
+		var3450, var5014 = protoModule.writeString(var3450, var3451, self.payer_name)
+		buff = var3450
+		var3445 = var3451
 	end
 	if self.logo_asset_id ~= nil then
-		local var3427, var3428 = protoModule.writeTag(buff, var3420, 4, protoModule.wireTypes.lengthDelimited)
-		var3427, var4974 = protoModule.writeString(var3427, var3428, self.logo_asset_id)
-		buff = var3427
-		var3420 = var3428
+		local var3452, var3453 = protoModule.writeTag(buff, var3445, 4, protoModule.wireTypes.lengthDelimited)
+		var3452, var5016 = protoModule.writeString(var3452, var3453, self.logo_asset_id)
+		buff = var3452
+		var3445 = var3453
 	end
 	if self.logo_aspect_ratio ~= nil then
-		local var3429, var3430 = protoModule.writeTag(buff, var3420, 5, protoModule.wireTypes.i64)
-		var3429, var4976 = protoModule.writeDouble(var3429, var3430, self.logo_aspect_ratio)
-		buff = var3429
-		var3420 = var3430
+		local var3454, var3455 = protoModule.writeTag(buff, var3445, 5, protoModule.wireTypes.i64)
+		var3454, var5018 = protoModule.writeDouble(var3454, var3455, self.logo_aspect_ratio)
+		buff = var3454
+		var3445 = var3455
 	end
 	if self.cta_text ~= nil then
-		local var3431, var3432 = protoModule.writeTag(buff, var3420, 6, protoModule.wireTypes.lengthDelimited)
-		var3431, var4978 = protoModule.writeString(var3431, var3432, self.cta_text)
-		buff = var3431
-		var3420 = var3432
+		local var3456, var3457 = protoModule.writeTag(buff, var3445, 6, protoModule.wireTypes.lengthDelimited)
+		var3456, var5020 = protoModule.writeString(var3456, var3457, self.cta_text)
+		buff = var3456
+		var3445 = var3457
 	end
 	if self.title ~= nil then
-		local var3433, var3434 = protoModule.writeTag(buff, var3420, 7, protoModule.wireTypes.lengthDelimited)
-		var3433, var4980 = protoModule.writeString(var3433, var3434, self.title)
-		buff = var3433
-		var3420 = var3434
+		local var3458, var3459 = protoModule.writeTag(buff, var3445, 7, protoModule.wireTypes.lengthDelimited)
+		var3458, var5022 = protoModule.writeString(var3458, var3459, self.title)
+		buff = var3458
+		var3445 = var3459
 	end
 	if self.subtitle ~= nil then
-		local var3435, var3436 = protoModule.writeTag(buff, var3420, 8, protoModule.wireTypes.lengthDelimited)
-		var3435, var4982 = protoModule.writeString(var3435, var3436, self.subtitle)
-		buff = var3435
-		var3420 = var3436
+		local var3460, var3461 = protoModule.writeTag(buff, var3445, 8, protoModule.wireTypes.lengthDelimited)
+		var3460, var5024 = protoModule.writeString(var3460, var3461, self.subtitle)
+		buff = var3460
+		var3445 = var3461
 	end
 	if self.image_asset_id ~= nil then
-		local var3437, var3438 = protoModule.writeTag(buff, var3420, 9, protoModule.wireTypes.lengthDelimited)
-		var3437, var4984 = protoModule.writeString(var3437, var3438, self.image_asset_id)
-		buff = var3437
-		var3420 = var3438
+		local var3462, var3463 = protoModule.writeTag(buff, var3445, 9, protoModule.wireTypes.lengthDelimited)
+		var3462, var5026 = protoModule.writeString(var3462, var3463, self.image_asset_id)
+		buff = var3462
+		var3445 = var3463
 	end
 	if self.video_asset_id ~= nil then
-		local var3439, var3440 = protoModule.writeTag(buff, var3420, 10, protoModule.wireTypes.lengthDelimited)
-		var3439, var4986 = protoModule.writeString(var3439, var3440, self.video_asset_id)
-		buff = var3439
-		var3420 = var3440
+		local var3464, var3465 = protoModule.writeTag(buff, var3445, 10, protoModule.wireTypes.lengthDelimited)
+		var3464, var5028 = protoModule.writeString(var3464, var3465, self.video_asset_id)
+		buff = var3464
+		var3445 = var3465
 	end
 	if self.badge_text ~= nil then
-		local var3441, var3442 = protoModule.writeTag(buff, var3420, 11, protoModule.wireTypes.lengthDelimited)
-		var3441, var4988 = protoModule.writeString(var3441, var3442, self.badge_text)
-		buff = var3441
-		var3420 = var3442
+		local var3466, var3467 = protoModule.writeTag(buff, var3445, 11, protoModule.wireTypes.lengthDelimited)
+		var3466, var5030 = protoModule.writeString(var3466, var3467, self.badge_text)
+		buff = var3466
+		var3445 = var3467
 	end
 	if self.badge_analytics_id ~= nil then
-		local var3443, var3444 = protoModule.writeTag(buff, var3420, 12, protoModule.wireTypes.lengthDelimited)
-		var3443, var4990 = protoModule.writeString(var3443, var3444, self.badge_analytics_id)
-		buff = var3443
-		var3420 = var3444
+		local var3468, var3469 = protoModule.writeTag(buff, var3445, 12, protoModule.wireTypes.lengthDelimited)
+		var3468, var5032 = protoModule.writeString(var3468, var3469, self.badge_analytics_id)
+		buff = var3468
+		var3445 = var3469
 	end
 	if self.roblox_component ~= nil then
-		local var3445, var3446 = protoModule.writeTag(buff, var3420, 13, protoModule.wireTypes.lengthDelimited)
-		var3445, var4992 = protoModule.writeString(var3445, var3446, self.roblox_component)
-		buff = var3445
-		var3420 = var3446
+		local var3470, var3471 = protoModule.writeTag(buff, var3445, 13, protoModule.wireTypes.lengthDelimited)
+		var3470, var5034 = protoModule.writeString(var3470, var3471, self.roblox_component)
+		buff = var3470
+		var3445 = var3471
 	end
-	local buff_1 = buffer.create(var3420)
-	buffer.copy(buff_1, 0, buff, 0, var3420)
+	local buff_1 = buffer.create(var3445)
+	buffer.copy(buff_1, 0, buff, 0, var3445)
 	
 	return buff_1
 end
 
-function t_127.decode(p127)
-	-- upvalues: t_127 (ref), protoModule (ref)
-	local var3420 = t_127.new()
-	local var3421 = 0
-	while var3421 < buffer.len(p127) do
+function t_128.decode(p128)
+	-- upvalues: t_128 (ref), protoModule (ref)
+	local var3445 = t_128.new()
+	local var3446 = 0
+	while var3446 < buffer.len(p128) do
 		local _ = nil
-		local var3422 = nil
-		local var3423, var3424, var3425 = protoModule.readTag(p127, var3421)
-		local var3426 = var3423
-		var3422 = var3424
-		var3421 = var3425
+		local var3447 = nil
+		local var3448, var3449, var3450 = protoModule.readTag(p128, var3446)
+		local var3451 = var3448
+		var3447 = var3449
+		var3446 = var3450
 		
-		if var3422 == protoModule.wireTypes.varint then
+		if var3447 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3427, var3428 = protoModule.readVarInt(p127, var3421)
-			local _ = var3427
-			var3421 = var3428
+			local var3452, var3453 = protoModule.readVarInt(p128, var3446)
+			local _ = var3452
+			var3446 = var3453
 			continue
 		end
-		if var3422 == protoModule.wireTypes.lengthDelimited then
-			if var3426 == 1 then
+		if var3447 == protoModule.wireTypes.lengthDelimited then
+			if var3451 == 1 then
 				local _ = nil
-				local var3429, var3430 = protoModule.readBuffer(p127, var3421)
-				var3421 = var3430
-				var3420.clickout_url = buffer.tostring(var3429)
-			elseif var3426 == 2 then
+				local var3454, var3455 = protoModule.readBuffer(p128, var3446)
+				var3446 = var3455
+				var3445.clickout_url = buffer.tostring(var3454)
+			elseif var3451 == 2 then
 				local _ = nil
-				local var3431, var3432 = protoModule.readBuffer(p127, var3421)
-				var3421 = var3432
-				var3420.native_ad_data = buffer.tostring(var3431)
-			elseif var3426 == 3 then
+				local var3456, var3457 = protoModule.readBuffer(p128, var3446)
+				var3446 = var3457
+				var3445.native_ad_data = buffer.tostring(var3456)
+			elseif var3451 == 3 then
 				local _ = nil
-				local var3433, var3434 = protoModule.readBuffer(p127, var3421)
-				var3421 = var3434
-				var3420.payer_name = buffer.tostring(var3433)
-			elseif var3426 == 4 then
+				local var3458, var3459 = protoModule.readBuffer(p128, var3446)
+				var3446 = var3459
+				var3445.payer_name = buffer.tostring(var3458)
+			elseif var3451 == 4 then
 				local _ = nil
-				local var3435, var3436 = protoModule.readBuffer(p127, var3421)
-				var3421 = var3436
-				var3420.logo_asset_id = buffer.tostring(var3435)
-			elseif var3426 == 6 then
+				local var3460, var3461 = protoModule.readBuffer(p128, var3446)
+				var3446 = var3461
+				var3445.logo_asset_id = buffer.tostring(var3460)
+			elseif var3451 == 6 then
 				local _ = nil
-				local var3437, var3438 = protoModule.readBuffer(p127, var3421)
-				var3421 = var3438
-				var3420.cta_text = buffer.tostring(var3437)
-			elseif var3426 == 7 then
+				local var3462, var3463 = protoModule.readBuffer(p128, var3446)
+				var3446 = var3463
+				var3445.cta_text = buffer.tostring(var3462)
+			elseif var3451 == 7 then
 				local _ = nil
-				local var3439, var3440 = protoModule.readBuffer(p127, var3421)
-				var3421 = var3440
-				var3420.title = buffer.tostring(var3439)
-			elseif var3426 == 8 then
+				local var3464, var3465 = protoModule.readBuffer(p128, var3446)
+				var3446 = var3465
+				var3445.title = buffer.tostring(var3464)
+			elseif var3451 == 8 then
 				local _ = nil
-				local var3441, var3442 = protoModule.readBuffer(p127, var3421)
-				var3421 = var3442
-				var3420.subtitle = buffer.tostring(var3441)
-			elseif var3426 == 9 then
+				local var3466, var3467 = protoModule.readBuffer(p128, var3446)
+				var3446 = var3467
+				var3445.subtitle = buffer.tostring(var3466)
+			elseif var3451 == 9 then
 				local _ = nil
-				local var3443, var3444 = protoModule.readBuffer(p127, var3421)
-				var3421 = var3444
-				var3420.image_asset_id = buffer.tostring(var3443)
-			elseif var3426 == 10 then
+				local var3468, var3469 = protoModule.readBuffer(p128, var3446)
+				var3446 = var3469
+				var3445.image_asset_id = buffer.tostring(var3468)
+			elseif var3451 == 10 then
 				local _ = nil
-				local var3445, var3446 = protoModule.readBuffer(p127, var3421)
-				var3421 = var3446
-				var3420.video_asset_id = buffer.tostring(var3445)
-			elseif var3426 == 11 then
+				local var3470, var3471 = protoModule.readBuffer(p128, var3446)
+				var3446 = var3471
+				var3445.video_asset_id = buffer.tostring(var3470)
+			elseif var3451 == 11 then
 				local _ = nil
-				local var3447, var3448 = protoModule.readBuffer(p127, var3421)
-				var3421 = var3448
-				var3420.badge_text = buffer.tostring(var3447)
-			elseif var3426 == 12 then
+				local var3472, var3473 = protoModule.readBuffer(p128, var3446)
+				var3446 = var3473
+				var3445.badge_text = buffer.tostring(var3472)
+			elseif var3451 == 12 then
 				local _ = nil
-				local var3449, var3450 = protoModule.readBuffer(p127, var3421)
-				var3421 = var3450
-				var3420.badge_analytics_id = buffer.tostring(var3449)
-			elseif var3426 == 13 then
+				local var3474, var3475 = protoModule.readBuffer(p128, var3446)
+				var3446 = var3475
+				var3445.badge_analytics_id = buffer.tostring(var3474)
+			elseif var3451 == 13 then
 				local _ = nil
-				local var3451, var3452 = protoModule.readBuffer(p127, var3421)
-				var3421 = var3452
-				var3420.roblox_component = buffer.tostring(var3451)
+				local var3476, var3477 = protoModule.readBuffer(p128, var3446)
+				var3446 = var3477
+				var3445.roblox_component = buffer.tostring(var3476)
 			else
 				local _ = nil
-				local var3453, var3454 = protoModule.readVarInt(p127, var3421)
-				var3421 = var3454 + var3453
+				local var3478, var3479 = protoModule.readVarInt(p128, var3446)
+				var3446 = var3479 + var3478
 			end
-		elseif var3422 == protoModule.wireTypes.i32 then
+		elseif var3447 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3455, var3456 = protoModule.readFixed32(p127, var3421)
-			local _ = var3455
-			var3421 = var3456
-		elseif var3422 ~= protoModule.wireTypes.i64 then
-			error("Unsupported wire type: " .. var4996)
-		elseif var3426 == 5 then
+			local var3480, var3481 = protoModule.readFixed32(p128, var3446)
+			local _ = var3480
+			var3446 = var3481
+		elseif var3447 ~= protoModule.wireTypes.i64 then
+			error("Unsupported wire type: " .. var5038)
+		elseif var3451 == 5 then
 			local _ = nil
-			local var3457, var3458 = protoModule.readDouble(p127, var3421)
-			var3421 = var3458
-			var3420.logo_aspect_ratio = var3457
+			local var3482, var3483 = protoModule.readDouble(p128, var3446)
+			var3446 = var3483
+			var3445.logo_aspect_ratio = var3482
 		else
 			local _ = nil
-			local var3459, var3460 = protoModule.readFixed64(p127, var3421)
-			local _ = var3459
-			var3421 = var3460
+			local var3484, var3485 = protoModule.readFixed64(p128, var3446)
+			local _ = var3484
+			var3446 = var3485
 		end
 	end
-	return var3420
+	return var3445
 end
 
-function t_127:jsonEncode()
+function t_128:jsonEncode()
 	-- upvalues: protoModule (ref)
 	local t = {}
 	
@@ -22158,196 +22344,196 @@ function t_127:jsonEncode()
 	return t
 end
 
-function t_127:jsonDecode()
-	-- upvalues: t_127 (ref), protoModule (ref)
-	local var3461 = t_127.new()
+function t_128:jsonDecode()
+	-- upvalues: t_128 (ref), protoModule (ref)
+	local var3486 = t_128.new()
 	
 	if self.clickout_url ~= nil then
-		var3461.clickout_url = self.clickout_url
+		var3486.clickout_url = self.clickout_url
 	end
 	if self.clickoutUrl ~= nil then
-		var3461.clickout_url = self.clickoutUrl
+		var3486.clickout_url = self.clickoutUrl
 	end
 	if self.native_ad_data ~= nil then
-		var3461.native_ad_data = self.native_ad_data
+		var3486.native_ad_data = self.native_ad_data
 	end
 	if self.nativeAdData ~= nil then
-		var3461.native_ad_data = self.nativeAdData
+		var3486.native_ad_data = self.nativeAdData
 	end
 	if self.payer_name ~= nil then
-		var3461.payer_name = self.payer_name
+		var3486.payer_name = self.payer_name
 	end
 	if self.payerName ~= nil then
-		var3461.payer_name = self.payerName
+		var3486.payer_name = self.payerName
 	end
 	if self.logo_asset_id ~= nil then
-		var3461.logo_asset_id = self.logo_asset_id
+		var3486.logo_asset_id = self.logo_asset_id
 	end
 	if self.logoAssetId ~= nil then
-		var3461.logo_asset_id = self.logoAssetId
+		var3486.logo_asset_id = self.logoAssetId
 	end
 	if self.logo_aspect_ratio ~= nil then
-		var3461.logo_aspect_ratio = protoModule.json.deserializeNumber(self.logo_aspect_ratio)
+		var3486.logo_aspect_ratio = protoModule.json.deserializeNumber(self.logo_aspect_ratio)
 	end
 	if self.logoAspectRatio ~= nil then
-		var3461.logo_aspect_ratio = protoModule.json.deserializeNumber(self.logoAspectRatio)
+		var3486.logo_aspect_ratio = protoModule.json.deserializeNumber(self.logoAspectRatio)
 	end
 	if self.cta_text ~= nil then
-		var3461.cta_text = self.cta_text
+		var3486.cta_text = self.cta_text
 	end
 	if self.ctaText ~= nil then
-		var3461.cta_text = self.ctaText
+		var3486.cta_text = self.ctaText
 	end
 	if self.title ~= nil then
-		var3461.title = self.title
+		var3486.title = self.title
 	end
 	if self.subtitle ~= nil then
-		var3461.subtitle = self.subtitle
+		var3486.subtitle = self.subtitle
 	end
 	if self.image_asset_id ~= nil then
-		var3461.image_asset_id = self.image_asset_id
+		var3486.image_asset_id = self.image_asset_id
 	end
 	if self.imageAssetId ~= nil then
-		var3461.image_asset_id = self.imageAssetId
+		var3486.image_asset_id = self.imageAssetId
 	end
 	if self.video_asset_id ~= nil then
-		var3461.video_asset_id = self.video_asset_id
+		var3486.video_asset_id = self.video_asset_id
 	end
 	if self.videoAssetId ~= nil then
-		var3461.video_asset_id = self.videoAssetId
+		var3486.video_asset_id = self.videoAssetId
 	end
 	if self.badge_text ~= nil then
-		var3461.badge_text = self.badge_text
+		var3486.badge_text = self.badge_text
 	end
 	if self.badgeText ~= nil then
-		var3461.badge_text = self.badgeText
+		var3486.badge_text = self.badgeText
 	end
 	if self.badge_analytics_id ~= nil then
-		var3461.badge_analytics_id = self.badge_analytics_id
+		var3486.badge_analytics_id = self.badge_analytics_id
 	end
 	if self.badgeAnalyticsId ~= nil then
-		var3461.badge_analytics_id = self.badgeAnalyticsId
+		var3486.badge_analytics_id = self.badgeAnalyticsId
 	end
 	if self.roblox_component ~= nil then
-		var3461.roblox_component = self.roblox_component
+		var3486.roblox_component = self.roblox_component
 	end
 	if self.robloxComponent ~= nil then
-		var3461.roblox_component = self.robloxComponent
+		var3486.roblox_component = self.robloxComponent
 	end
-	return var3461
+	return var3486
 end
 
-t_127.descriptor = {
+t_128.descriptor = {
 	name = "AdLinkItem",
 	fullName = "roblox.apppageplatform.shared.v1beta1.AdLinkItem"
 }
-t.AdLinkItem = t_127
+t.AdLinkItem = t_128
 typeRegistryModule.default:register(t.AdLinkItem)
-local t_128 = {}
-t_128.__index = t_128
+local t_129 = {}
+t_129.__index = t_129
 
-function t_128.new(p128)
-	-- upvalues: t_128 (ref)
+function t_129.new(p129)
+	-- upvalues: t_129 (ref)
 	return setmetatable({
-		layout = if p128 == nil or p128.layout == nil then nil else p128.layout,
-		kind = if p128 == nil or p128.kind == nil then nil else p128.kind
-	}, t_128)
+		layout = if p129 == nil or p129.layout == nil then nil else p129.layout,
+		kind = if p129 == nil or p129.kind == nil then nil else p129.kind
+	}, t_129)
 end
 
-function t_128:encode()
+function t_129:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3461 = 0
+	local var3486 = 0
 	
 	if self.layout ~= nil then
-		local var3462 = self.layout:encode()
-		local var3463, var3464 = protoModule.writeTag(buff, var3461, 1, protoModule.wireTypes.lengthDelimited)
-		var3463, var5041 = protoModule.writeBuffer(var3463, var3464, var3462, buffer.len(var3462))
-		buff = var3463
-		var3461 = var3464
+		local var3487 = self.layout:encode()
+		local var3488, var3489 = protoModule.writeTag(buff, var3486, 1, protoModule.wireTypes.lengthDelimited)
+		var3488, var5083 = protoModule.writeBuffer(var3488, var3489, var3487, buffer.len(var3487))
+		buff = var3488
+		var3486 = var3489
 	end
 	if self.kind ~= nil then
 		if self.kind.type == "universe" then
-			local var3465 = self.kind.value:encode()
-			local var3466, var3467 = protoModule.writeTag(buff, var3461, 2, protoModule.wireTypes.lengthDelimited)
-			var3466, var5044 = protoModule.writeBuffer(var3466, var3467, var3465, buffer.len(var3465))
-			buff = var3466
-			var3461 = var3467
+			local var3490 = self.kind.value:encode()
+			local var3491, var3492 = protoModule.writeTag(buff, var3486, 2, protoModule.wireTypes.lengthDelimited)
+			var3491, var5086 = protoModule.writeBuffer(var3491, var3492, var3490, buffer.len(var3490))
+			buff = var3491
+			var3486 = var3492
 		elseif self.kind.type == "ad_link" then
-			local var3468 = self.kind.value:encode()
-			local var3469, var3470 = protoModule.writeTag(buff, var3461, 3, protoModule.wireTypes.lengthDelimited)
-			var3469, var5047 = protoModule.writeBuffer(var3469, var3470, var3468, buffer.len(var3468))
-			buff = var3469
-			var3461 = var3470
+			local var3493 = self.kind.value:encode()
+			local var3494, var3495 = protoModule.writeTag(buff, var3486, 3, protoModule.wireTypes.lengthDelimited)
+			var3494, var5089 = protoModule.writeBuffer(var3494, var3495, var3493, buffer.len(var3493))
+			buff = var3494
+			var3486 = var3495
 		end
 	end
-	local buff_1 = buffer.create(var3461)
-	buffer.copy(buff_1, 0, buff, 0, var3461)
+	local buff_1 = buffer.create(var3486)
+	buffer.copy(buff_1, 0, buff, 0, var3486)
 	
 	return buff_1
 end
 
-function t_128.decode(p128)
-	-- upvalues: t_128 (ref), protoModule (ref), t (ref)
-	local var3461 = t_128.new()
-	local var3462 = 0
-	while var3462 < buffer.len(p128) do
+function t_129.decode(p129)
+	-- upvalues: t_129 (ref), protoModule (ref), t (ref)
+	local var3486 = t_129.new()
+	local var3487 = 0
+	while var3487 < buffer.len(p129) do
 		local _ = nil
-		local var3463 = nil
-		local var3464, var3465, var3466 = protoModule.readTag(p128, var3462)
-		local var3467 = var3464
-		var3463 = var3465
-		var3462 = var3466
+		local var3488 = nil
+		local var3489, var3490, var3491 = protoModule.readTag(p129, var3487)
+		local var3492 = var3489
+		var3488 = var3490
+		var3487 = var3491
 		
-		if var3463 == protoModule.wireTypes.varint then
+		if var3488 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3468, var3469 = protoModule.readVarInt(p128, var3462)
-			local _ = var3468
-			var3462 = var3469
+			local var3493, var3494 = protoModule.readVarInt(p129, var3487)
+			local _ = var3493
+			var3487 = var3494
 			continue
 		end
-		if var3463 == protoModule.wireTypes.lengthDelimited then
-			if var3467 == 1 then
+		if var3488 == protoModule.wireTypes.lengthDelimited then
+			if var3492 == 1 then
 				local _ = nil
-				local var3470, var3471 = protoModule.readBuffer(p128, var3462)
-				var3462 = var3471
-				var3461.layout = t.ItemLayout.decode(var3470)
-			elseif var3467 == 2 then
+				local var3495, var3496 = protoModule.readBuffer(p129, var3487)
+				var3487 = var3496
+				var3486.layout = t.ItemLayout.decode(var3495)
+			elseif var3492 == 2 then
 				local _ = nil
-				local var3472, var3473 = protoModule.readBuffer(p128, var3462)
-				var3462 = var3473
-				var3461.kind = {
+				local var3497, var3498 = protoModule.readBuffer(p129, var3487)
+				var3487 = var3498
+				var3486.kind = {
 					type = "universe",
-					value = t.ExperienceCarouselInputData_UniverseItem.decode(var3472)
+					value = t.ExperienceCarouselInputData_UniverseItem.decode(var3497)
 				}
-			elseif var3467 == 3 then
+			elseif var3492 == 3 then
 				local _ = nil
-				local var3474, var3475 = protoModule.readBuffer(p128, var3462)
-				var3462 = var3475
-				var3461.kind = { type = "ad_link", value = t.AdLinkItem.decode(var3474) }
+				local var3499, var3500 = protoModule.readBuffer(p129, var3487)
+				var3487 = var3500
+				var3486.kind = { type = "ad_link", value = t.AdLinkItem.decode(var3499) }
 			else
 				local _ = nil
-				local var3476, var3477 = protoModule.readVarInt(p128, var3462)
-				var3462 = var3477 + var3476
+				local var3501, var3502 = protoModule.readVarInt(p129, var3487)
+				var3487 = var3502 + var3501
 			end
-		elseif var3463 == protoModule.wireTypes.i32 then
+		elseif var3488 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3478, var3479 = protoModule.readFixed32(p128, var3462)
-			local _ = var3478
-			var3462 = var3479
-		elseif var3463 == protoModule.wireTypes.i64 then
+			local var3503, var3504 = protoModule.readFixed32(p129, var3487)
+			local _ = var3503
+			var3487 = var3504
+		elseif var3488 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var3480, var3481 = protoModule.readFixed64(p128, var3462)
-			local _ = var3480
-			var3462 = var3481
+			local var3505, var3506 = protoModule.readFixed64(p129, var3487)
+			local _ = var3505
+			var3487 = var3506
 		else
-			error("Unsupported wire type: " .. var5051)
+			error("Unsupported wire type: " .. var5093)
 		end
 	end
-	return var3461
+	return var3486
 end
 
-function t_128:jsonEncode()
+function t_129:jsonEncode()
 	local t = {}
 	
 	if self.layout ~= nil then
@@ -22365,130 +22551,130 @@ function t_128:jsonEncode()
 	return t
 end
 
-function t_128:jsonDecode()
-	-- upvalues: t_128 (ref), t (ref)
-	local var3482 = t_128.new()
+function t_129:jsonDecode()
+	-- upvalues: t_129 (ref), t (ref)
+	local var3507 = t_129.new()
 	
 	if self.layout ~= nil then
-		var3482.layout = t.ItemLayout.jsonDecode(self.layout)
+		var3507.layout = t.ItemLayout.jsonDecode(self.layout)
 	end
 	if self.universe ~= nil then
-		var3482.kind = {
+		var3507.kind = {
 			type = "universe",
 			value = t.ExperienceCarouselInputData_UniverseItem.jsonDecode(self.universe)
 		}
 	end
 	if self.ad_link ~= nil then
-		var3482.kind = {
+		var3507.kind = {
 			type = "ad_link",
 			value = t.AdLinkItem.jsonDecode(self.ad_link)
 		}
 	end
 	if self.adLink ~= nil then
-		var3482.kind = {
+		var3507.kind = {
 			type = "ad_link",
 			value = t.AdLinkItem.jsonDecode(self.adLink)
 		}
 	end
-	return var3482
+	return var3507
 end
 
-t_128.descriptor = {
+t_129.descriptor = {
 	name = "ItemWithLayout",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ItemWithLayout"
 }
-t.ItemWithLayout = t_128
+t.ItemWithLayout = t_129
 typeRegistryModule.default:register(t.ItemWithLayout)
-local t_129 = {}
-t_129.__index = t_129
+local t_130 = {}
+t_130.__index = t_130
 
-function t_129.new(p129)
-	-- upvalues: t_129 (ref)
+function t_130.new(p130)
+	-- upvalues: t_130 (ref)
 	return setmetatable({
-		items = if p129 == nil or p129.items == nil then {} else p129.items,
-		collection_item_size = if p129 == nil or p129.collection_item_size == nil then nil else p129.collection_item_size
-	}, t_129)
+		items = if p130 == nil or p130.items == nil then {} else p130.items,
+		collection_item_size = if p130 == nil or p130.collection_item_size == nil then nil else p130.collection_item_size
+	}, t_130)
 end
 
-function t_129:encode()
+function t_130:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3482 = 0
+	local var3507 = 0
 	
 	if self.items ~= nil and #self.items > 0 then
 		for i, v in self.items do
-			local var3483 = v:encode()
-			local var3484, var3485 = protoModule.writeTag(buff, var3482, 1, protoModule.wireTypes.lengthDelimited)
-			var3484, var5076 = protoModule.writeBuffer(var3484, var3485, var3483, buffer.len(var3483))
-			buff = var3484
-			var3482 = var3485
+			local var3508 = v:encode()
+			local var3509, var3510 = protoModule.writeTag(buff, var3507, 1, protoModule.wireTypes.lengthDelimited)
+			var3509, var5118 = protoModule.writeBuffer(var3509, var3510, var3508, buffer.len(var3508))
+			buff = var3509
+			var3507 = var3510
 		end
 	end
 	if self.collection_item_size ~= nil then
-		local var3486, var3487 = protoModule.writeTag(buff, var3482, 2, protoModule.wireTypes.lengthDelimited)
-		var3486, var5078 = protoModule.writeString(var3486, var3487, self.collection_item_size)
-		buff = var3486
-		var3482 = var3487
+		local var3511, var3512 = protoModule.writeTag(buff, var3507, 2, protoModule.wireTypes.lengthDelimited)
+		var3511, var5120 = protoModule.writeString(var3511, var3512, self.collection_item_size)
+		buff = var3511
+		var3507 = var3512
 	end
-	local buff_1 = buffer.create(var3482)
-	buffer.copy(buff_1, 0, buff, 0, var3482)
+	local buff_1 = buffer.create(var3507)
+	buffer.copy(buff_1, 0, buff, 0, var3507)
 	
 	return buff_1
 end
 
-function t_129.decode(p129)
-	-- upvalues: t_129 (ref), protoModule (ref), t (ref)
-	local var3488 = t_129.new()
-	local var3489 = 0
-	while var3489 < buffer.len(p129) do
+function t_130.decode(p130)
+	-- upvalues: t_130 (ref), protoModule (ref), t (ref)
+	local var3513 = t_130.new()
+	local var3514 = 0
+	while var3514 < buffer.len(p130) do
 		local _ = nil
-		local var3490 = nil
-		local var3491, var3492, var3493 = protoModule.readTag(p129, var3489)
-		local var3494 = var3491
-		var3490 = var3492
-		var3489 = var3493
+		local var3515 = nil
+		local var3516, var3517, var3518 = protoModule.readTag(p130, var3514)
+		local var3519 = var3516
+		var3515 = var3517
+		var3514 = var3518
 		
-		if var3490 == protoModule.wireTypes.varint then
+		if var3515 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3495, var3496 = protoModule.readVarInt(p129, var3489)
-			local _ = var3495
-			var3489 = var3496
+			local var3520, var3521 = protoModule.readVarInt(p130, var3514)
+			local _ = var3520
+			var3514 = var3521
 			continue
 		end
-		if var3490 == protoModule.wireTypes.lengthDelimited then
-			if var3494 == 1 then
+		if var3515 == protoModule.wireTypes.lengthDelimited then
+			if var3519 == 1 then
 				local _ = nil
-				local var3497, var3498 = protoModule.readBuffer(p129, var3489)
-				var3489 = var3498
-				table.insert(var3488.items, t.ItemWithLayout.decode(var3497))
-			elseif var3494 == 2 then
+				local var3522, var3523 = protoModule.readBuffer(p130, var3514)
+				var3514 = var3523
+				table.insert(var3513.items, t.ItemWithLayout.decode(var3522))
+			elseif var3519 == 2 then
 				local _ = nil
-				local var3499, var3500 = protoModule.readBuffer(p129, var3489)
-				var3489 = var3500
-				var3488.collection_item_size = buffer.tostring(var3499)
+				local var3524, var3525 = protoModule.readBuffer(p130, var3514)
+				var3514 = var3525
+				var3513.collection_item_size = buffer.tostring(var3524)
 			else
 				local _ = nil
-				local var3501, var3502 = protoModule.readVarInt(p129, var3489)
-				var3489 = var3502 + var3501
+				local var3526, var3527 = protoModule.readVarInt(p130, var3514)
+				var3514 = var3527 + var3526
 			end
-		elseif var3490 == protoModule.wireTypes.i32 then
+		elseif var3515 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3503, var3504 = protoModule.readFixed32(p129, var3489)
-			local _ = var3503
-			var3489 = var3504
-		elseif var3490 == protoModule.wireTypes.i64 then
+			local var3528, var3529 = protoModule.readFixed32(p130, var3514)
+			local _ = var3528
+			var3514 = var3529
+		elseif var3515 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var3505, var3506 = protoModule.readFixed64(p129, var3489)
-			local _ = var3505
-			var3489 = var3506
+			local var3530, var3531 = protoModule.readFixed64(p130, var3514)
+			local _ = var3530
+			var3514 = var3531
 		else
-			error("Unsupported wire type: " .. var5082)
+			error("Unsupported wire type: " .. var5124)
 		end
 	end
-	return var3488
+	return var3513
 end
 
-function t_129:jsonEncode()
+function t_130:jsonEncode()
 	local t = {}
 	
 	if self.items ~= nil and #self.items > 0 then
@@ -22505,9 +22691,9 @@ function t_129:jsonEncode()
 	return t
 end
 
-function t_129:jsonDecode()
-	-- upvalues: t_129 (ref), t (ref)
-	local var3507 = t_129.new()
+function t_130:jsonDecode()
+	-- upvalues: t_130 (ref), t (ref)
+	local var3532 = t_130.new()
 	
 	if self.items ~= nil then
 		local t_1 = {}
@@ -22515,135 +22701,135 @@ function t_129:jsonDecode()
 		for i, v in self.items do
 			table.insert(t_1, t.ItemWithLayout.jsonDecode(v))
 		end
-		var3507.items = t_1
+		var3532.items = t_1
 	end
 	if self.collection_item_size ~= nil then
-		var3507.collection_item_size = self.collection_item_size
+		var3532.collection_item_size = self.collection_item_size
 	end
 	if self.collectionItemSize ~= nil then
-		var3507.collection_item_size = self.collectionItemSize
+		var3532.collection_item_size = self.collectionItemSize
 	end
-	return var3507
+	return var3532
 end
 
-t_129.descriptor = {
+t_130.descriptor = {
 	name = "ContentPool",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ContentPool"
 }
-t.ContentPool = t_129
+t.ContentPool = t_130
 typeRegistryModule.default:register(t.ContentPool)
-local t_130 = {}
-t_130.__index = t_130
+local t_131 = {}
+t_131.__index = t_131
 
-function t_130.new(p130)
-	-- upvalues: t_130 (ref)
+function t_131.new(p131)
+	-- upvalues: t_131 (ref)
 	return setmetatable({
-		col_span = if p130 == nil or p130.col_span == nil then 0 else p130.col_span,
-		row_span = if p130 == nil or p130.row_span == nil then 0 else p130.row_span,
-		alignment_type = if p130 == nil or p130.alignment_type == nil then "" else p130.alignment_type,
-		min_row_padding = if p130 == nil or p130.min_row_padding == nil then 0 else p130.min_row_padding
-	}, t_130)
+		col_span = if p131 == nil or p131.col_span == nil then 0 else p131.col_span,
+		row_span = if p131 == nil or p131.row_span == nil then 0 else p131.row_span,
+		alignment_type = if p131 == nil or p131.alignment_type == nil then "" else p131.alignment_type,
+		min_row_padding = if p131 == nil or p131.min_row_padding == nil then 0 else p131.min_row_padding
+	}, t_131)
 end
 
-function t_130:encode()
+function t_131:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3508 = 0
+	local var3533 = 0
 	
 	if self.col_span ~= nil and self.col_span ~= 0 then
-		local var3509, var3510 = protoModule.writeTag(buff, var3508, 1, protoModule.wireTypes.varint)
-		var3509, var5106 = protoModule.writeVarInt(var3509, var3510, self.col_span)
-		buff = var3509
-		var3508 = var3510
+		local var3534, var3535 = protoModule.writeTag(buff, var3533, 1, protoModule.wireTypes.varint)
+		var3534, var5148 = protoModule.writeVarInt(var3534, var3535, self.col_span)
+		buff = var3534
+		var3533 = var3535
 	end
 	if self.row_span ~= nil and self.row_span ~= 0 then
-		local var3511, var3512 = protoModule.writeTag(buff, var3508, 2, protoModule.wireTypes.varint)
-		var3511, var5108 = protoModule.writeVarInt(var3511, var3512, self.row_span)
-		buff = var3511
-		var3508 = var3512
+		local var3536, var3537 = protoModule.writeTag(buff, var3533, 2, protoModule.wireTypes.varint)
+		var3536, var5150 = protoModule.writeVarInt(var3536, var3537, self.row_span)
+		buff = var3536
+		var3533 = var3537
 	end
 	if self.alignment_type ~= nil and self.alignment_type ~= "" then
-		local var3513, var3514 = protoModule.writeTag(buff, var3508, 3, protoModule.wireTypes.lengthDelimited)
-		var3513, var5110 = protoModule.writeString(var3513, var3514, self.alignment_type)
-		buff = var3513
-		var3508 = var3514
+		local var3538, var3539 = protoModule.writeTag(buff, var3533, 3, protoModule.wireTypes.lengthDelimited)
+		var3538, var5152 = protoModule.writeString(var3538, var3539, self.alignment_type)
+		buff = var3538
+		var3533 = var3539
 	end
 	if self.min_row_padding ~= nil and self.min_row_padding ~= 0 then
-		local var3515, var3516 = protoModule.writeTag(buff, var3508, 4, protoModule.wireTypes.varint)
-		var3515, var5112 = protoModule.writeVarInt(var3515, var3516, self.min_row_padding)
-		buff = var3515
-		var3508 = var3516
+		local var3540, var3541 = protoModule.writeTag(buff, var3533, 4, protoModule.wireTypes.varint)
+		var3540, var5154 = protoModule.writeVarInt(var3540, var3541, self.min_row_padding)
+		buff = var3540
+		var3533 = var3541
 	end
-	local buff_1 = buffer.create(var3508)
-	buffer.copy(buff_1, 0, buff, 0, var3508)
+	local buff_1 = buffer.create(var3533)
+	buffer.copy(buff_1, 0, buff, 0, var3533)
 	
 	return buff_1
 end
 
-function t_130.decode(p130)
-	-- upvalues: t_130 (ref), protoModule (ref)
-	local var3508 = t_130.new()
-	local var3509 = 0
-	while var3509 < buffer.len(p130) do
+function t_131.decode(p131)
+	-- upvalues: t_131 (ref), protoModule (ref)
+	local var3533 = t_131.new()
+	local var3534 = 0
+	while var3534 < buffer.len(p131) do
 		local _ = nil
-		local var3510 = nil
-		local var3511, var3512, var3513 = protoModule.readTag(p130, var3509)
-		local var3514 = var3511
-		var3510 = var3512
-		var3509 = var3513
+		local var3535 = nil
+		local var3536, var3537, var3538 = protoModule.readTag(p131, var3534)
+		local var3539 = var3536
+		var3535 = var3537
+		var3534 = var3538
 		
-		if var3510 == protoModule.wireTypes.varint then
-			if var3514 == 1 then
+		if var3535 == protoModule.wireTypes.varint then
+			if var3539 == 1 then
 				local _ = nil
-				local var3515, var3516 = protoModule.readVarIntI32(p130, var3509)
-				var3509 = var3516
-				var3508.col_span = var3515
-			elseif var3514 == 2 then
+				local var3540, var3541 = protoModule.readVarIntI32(p131, var3534)
+				var3534 = var3541
+				var3533.col_span = var3540
+			elseif var3539 == 2 then
 				local _ = nil
-				local var3517, var3518 = protoModule.readVarIntI32(p130, var3509)
-				var3509 = var3518
-				var3508.row_span = var3517
-			elseif var3514 == 4 then
+				local var3542, var3543 = protoModule.readVarIntI32(p131, var3534)
+				var3534 = var3543
+				var3533.row_span = var3542
+			elseif var3539 == 4 then
 				local _ = nil
-				local var3519, var3520 = protoModule.readVarIntI32(p130, var3509)
-				var3509 = var3520
-				var3508.min_row_padding = var3519
+				local var3544, var3545 = protoModule.readVarIntI32(p131, var3534)
+				var3534 = var3545
+				var3533.min_row_padding = var3544
 			else
 				local _ = nil
-				local var3521, var3522 = protoModule.readVarInt(p130, var3509)
-				local _ = var3521
-				var3509 = var3522
+				local var3546, var3547 = protoModule.readVarInt(p131, var3534)
+				local _ = var3546
+				var3534 = var3547
 			end
 		end
-		if var3510 == protoModule.wireTypes.lengthDelimited then
-			if var3514 == 3 then
+		if var3535 == protoModule.wireTypes.lengthDelimited then
+			if var3539 == 3 then
 				local _ = nil
-				local var3523, var3524 = protoModule.readBuffer(p130, var3509)
-				var3509 = var3524
-				var3508.alignment_type = buffer.tostring(var3523)
+				local var3548, var3549 = protoModule.readBuffer(p131, var3534)
+				var3534 = var3549
+				var3533.alignment_type = buffer.tostring(var3548)
 			else
 				local _ = nil
-				local var3525, var3526 = protoModule.readVarInt(p130, var3509)
-				var3509 = var3526 + var3525
+				local var3550, var3551 = protoModule.readVarInt(p131, var3534)
+				var3534 = var3551 + var3550
 			end
-		elseif var3510 == protoModule.wireTypes.i32 then
+		elseif var3535 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3527, var3528 = protoModule.readFixed32(p130, var3509)
-			local _ = var3527
-			var3509 = var3528
-		elseif var3510 == protoModule.wireTypes.i64 then
+			local var3552, var3553 = protoModule.readFixed32(p131, var3534)
+			local _ = var3552
+			var3534 = var3553
+		elseif var3535 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var3529, var3530 = protoModule.readFixed64(p130, var3509)
-			local _ = var3529
-			var3509 = var3530
+			local var3554, var3555 = protoModule.readFixed64(p131, var3534)
+			local _ = var3554
+			var3534 = var3555
 		else
-			error("Unsupported wire type: " .. var5116)
+			error("Unsupported wire type: " .. var5158)
 		end
 	end
-	return var3508
+	return var3533
 end
 
-function t_130:jsonEncode()
+function t_131:jsonEncode()
 	local t = {}
 	
 	if self.col_span ~= nil and self.col_span ~= 0 then
@@ -22661,215 +22847,215 @@ function t_130:jsonEncode()
 	return t
 end
 
-function t_130:jsonDecode()
-	-- upvalues: t_130 (ref)
-	local var3531 = t_130.new()
+function t_131:jsonDecode()
+	-- upvalues: t_131 (ref)
+	local var3556 = t_131.new()
 	
 	if self.col_span ~= nil then
-		var3531.col_span = self.col_span
+		var3556.col_span = self.col_span
 	end
 	if self.colSpan ~= nil then
-		var3531.col_span = self.colSpan
+		var3556.col_span = self.colSpan
 	end
 	if self.row_span ~= nil then
-		var3531.row_span = self.row_span
+		var3556.row_span = self.row_span
 	end
 	if self.rowSpan ~= nil then
-		var3531.row_span = self.rowSpan
+		var3556.row_span = self.rowSpan
 	end
 	if self.alignment_type ~= nil then
-		var3531.alignment_type = self.alignment_type
+		var3556.alignment_type = self.alignment_type
 	end
 	if self.alignmentType ~= nil then
-		var3531.alignment_type = self.alignmentType
+		var3556.alignment_type = self.alignmentType
 	end
 	if self.min_row_padding ~= nil then
-		var3531.min_row_padding = self.min_row_padding
+		var3556.min_row_padding = self.min_row_padding
 	end
 	if self.minRowPadding ~= nil then
-		var3531.min_row_padding = self.minRowPadding
+		var3556.min_row_padding = self.minRowPadding
 	end
-	return var3531
+	return var3556
 end
 
-t_130.descriptor = {
+t_131.descriptor = {
 	name = "ItemLayout",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ItemLayout"
 }
-t.ItemLayout = t_130
+t.ItemLayout = t_131
 typeRegistryModule.default:register(t.ItemLayout)
-local t_131 = {}
-t_131.__index = t_131
+local t_132 = {}
+t_132.__index = t_132
 
-function t_131.new(p131)
-	-- upvalues: t_131 (ref)
+function t_132.new(p132)
+	-- upvalues: t_132 (ref)
 	return setmetatable({
-		community_id = if p131 == nil or p131.community_id == nil then "" else p131.community_id,
-		announcement_id = if p131 == nil or p131.announcement_id == nil then "" else p131.announcement_id,
-		message_id = if p131 == nil or p131.message_id == nil then "" else p131.message_id,
-		title = if p131 == nil or p131.title == nil then "" else p131.title,
-		body = if p131 == nil or p131.body == nil then "" else p131.body,
-		creator_key = if p131 == nil or p131.creator_key == nil then "" else p131.creator_key,
-		creator_role_name = if p131 == nil or p131.creator_role_name == nil then nil else p131.creator_role_name,
-		media_asset_id = if p131 == nil or p131.media_asset_id == nil then nil else p131.media_asset_id,
-		created_time = if p131 == nil or p131.created_time == nil then nil else p131.created_time
-	}, t_131)
+		community_id = if p132 == nil or p132.community_id == nil then "" else p132.community_id,
+		announcement_id = if p132 == nil or p132.announcement_id == nil then "" else p132.announcement_id,
+		message_id = if p132 == nil or p132.message_id == nil then "" else p132.message_id,
+		title = if p132 == nil or p132.title == nil then "" else p132.title,
+		body = if p132 == nil or p132.body == nil then "" else p132.body,
+		creator_key = if p132 == nil or p132.creator_key == nil then "" else p132.creator_key,
+		creator_role_name = if p132 == nil or p132.creator_role_name == nil then nil else p132.creator_role_name,
+		media_asset_id = if p132 == nil or p132.media_asset_id == nil then nil else p132.media_asset_id,
+		created_time = if p132 == nil or p132.created_time == nil then nil else p132.created_time
+	}, t_132)
 end
 
-function t_131:encode()
+function t_132:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var3531 = 0
+	local var3556 = 0
 	
 	if self.community_id ~= nil and self.community_id ~= "" then
-		local var3532, var3533 = protoModule.writeTag(buff, var3531, 1, protoModule.wireTypes.lengthDelimited)
-		var3532, var5142 = protoModule.writeString(var3532, var3533, self.community_id)
-		buff = var3532
-		var3531 = var3533
+		local var3557, var3558 = protoModule.writeTag(buff, var3556, 1, protoModule.wireTypes.lengthDelimited)
+		var3557, var5184 = protoModule.writeString(var3557, var3558, self.community_id)
+		buff = var3557
+		var3556 = var3558
 	end
 	if self.announcement_id ~= nil and self.announcement_id ~= "" then
-		local var3534, var3535 = protoModule.writeTag(buff, var3531, 2, protoModule.wireTypes.lengthDelimited)
-		var3534, var5144 = protoModule.writeString(var3534, var3535, self.announcement_id)
-		buff = var3534
-		var3531 = var3535
+		local var3559, var3560 = protoModule.writeTag(buff, var3556, 2, protoModule.wireTypes.lengthDelimited)
+		var3559, var5186 = protoModule.writeString(var3559, var3560, self.announcement_id)
+		buff = var3559
+		var3556 = var3560
 	end
 	if self.message_id ~= nil and self.message_id ~= "" then
-		local var3536, var3537 = protoModule.writeTag(buff, var3531, 3, protoModule.wireTypes.lengthDelimited)
-		var3536, var5146 = protoModule.writeString(var3536, var3537, self.message_id)
-		buff = var3536
-		var3531 = var3537
+		local var3561, var3562 = protoModule.writeTag(buff, var3556, 3, protoModule.wireTypes.lengthDelimited)
+		var3561, var5188 = protoModule.writeString(var3561, var3562, self.message_id)
+		buff = var3561
+		var3556 = var3562
 	end
 	if self.title ~= nil and self.title ~= "" then
-		local var3538, var3539 = protoModule.writeTag(buff, var3531, 4, protoModule.wireTypes.lengthDelimited)
-		var3538, var5148 = protoModule.writeString(var3538, var3539, self.title)
-		buff = var3538
-		var3531 = var3539
+		local var3563, var3564 = protoModule.writeTag(buff, var3556, 4, protoModule.wireTypes.lengthDelimited)
+		var3563, var5190 = protoModule.writeString(var3563, var3564, self.title)
+		buff = var3563
+		var3556 = var3564
 	end
 	if self.body ~= nil and self.body ~= "" then
-		local var3540, var3541 = protoModule.writeTag(buff, var3531, 5, protoModule.wireTypes.lengthDelimited)
-		var3540, var5150 = protoModule.writeString(var3540, var3541, self.body)
-		buff = var3540
-		var3531 = var3541
+		local var3565, var3566 = protoModule.writeTag(buff, var3556, 5, protoModule.wireTypes.lengthDelimited)
+		var3565, var5192 = protoModule.writeString(var3565, var3566, self.body)
+		buff = var3565
+		var3556 = var3566
 	end
 	if self.creator_key ~= nil and self.creator_key ~= "" then
-		local var3542, var3543 = protoModule.writeTag(buff, var3531, 6, protoModule.wireTypes.lengthDelimited)
-		var3542, var5152 = protoModule.writeString(var3542, var3543, self.creator_key)
-		buff = var3542
-		var3531 = var3543
+		local var3567, var3568 = protoModule.writeTag(buff, var3556, 6, protoModule.wireTypes.lengthDelimited)
+		var3567, var5194 = protoModule.writeString(var3567, var3568, self.creator_key)
+		buff = var3567
+		var3556 = var3568
 	end
 	if self.creator_role_name ~= nil then
-		local var3544, var3545 = protoModule.writeTag(buff, var3531, 7, protoModule.wireTypes.lengthDelimited)
-		var3544, var5154 = protoModule.writeString(var3544, var3545, self.creator_role_name)
-		buff = var3544
-		var3531 = var3545
+		local var3569, var3570 = protoModule.writeTag(buff, var3556, 7, protoModule.wireTypes.lengthDelimited)
+		var3569, var5196 = protoModule.writeString(var3569, var3570, self.creator_role_name)
+		buff = var3569
+		var3556 = var3570
 	end
 	if self.media_asset_id ~= nil then
-		local var3546, var3547 = protoModule.writeTag(buff, var3531, 8, protoModule.wireTypes.lengthDelimited)
-		var3546, var5156 = protoModule.writeString(var3546, var3547, self.media_asset_id)
-		buff = var3546
-		var3531 = var3547
+		local var3571, var3572 = protoModule.writeTag(buff, var3556, 8, protoModule.wireTypes.lengthDelimited)
+		var3571, var5198 = protoModule.writeString(var3571, var3572, self.media_asset_id)
+		buff = var3571
+		var3556 = var3572
 	end
 	if self.created_time ~= nil then
-		local var3548 = self.created_time:encode()
-		local var3549, var3550 = protoModule.writeTag(buff, var3531, 9, protoModule.wireTypes.lengthDelimited)
-		var3549, var5159 = protoModule.writeBuffer(var3549, var3550, var3548, buffer.len(var3548))
-		buff = var3549
-		var3531 = var3550
+		local var3573 = self.created_time:encode()
+		local var3574, var3575 = protoModule.writeTag(buff, var3556, 9, protoModule.wireTypes.lengthDelimited)
+		var3574, var5201 = protoModule.writeBuffer(var3574, var3575, var3573, buffer.len(var3573))
+		buff = var3574
+		var3556 = var3575
 	end
-	local buff_1 = buffer.create(var3531)
-	buffer.copy(buff_1, 0, buff, 0, var3531)
+	local buff_1 = buffer.create(var3556)
+	buffer.copy(buff_1, 0, buff, 0, var3556)
 	
 	return buff_1
 end
 
-function t_131.decode(p131)
-	-- upvalues: t_131 (ref), protoModule (ref), timestampModule (ref)
-	local var3531 = t_131.new()
-	local var3532 = 0
-	while var3532 < buffer.len(p131) do
+function t_132.decode(p132)
+	-- upvalues: t_132 (ref), protoModule (ref), timestampModule (ref)
+	local var3556 = t_132.new()
+	local var3557 = 0
+	while var3557 < buffer.len(p132) do
 		local _ = nil
-		local var3533 = nil
-		local var3534, var3535, var3536 = protoModule.readTag(p131, var3532)
-		local var3537 = var3534
-		var3533 = var3535
-		var3532 = var3536
+		local var3558 = nil
+		local var3559, var3560, var3561 = protoModule.readTag(p132, var3557)
+		local var3562 = var3559
+		var3558 = var3560
+		var3557 = var3561
 		
-		if var3533 == protoModule.wireTypes.varint then
+		if var3558 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var3538, var3539 = protoModule.readVarInt(p131, var3532)
-			local _ = var3538
-			var3532 = var3539
+			local var3563, var3564 = protoModule.readVarInt(p132, var3557)
+			local _ = var3563
+			var3557 = var3564
 			continue
 		end
-		if var3533 == protoModule.wireTypes.lengthDelimited then
-			if var3537 == 1 then
+		if var3558 == protoModule.wireTypes.lengthDelimited then
+			if var3562 == 1 then
 				local _ = nil
-				local var3540, var3541 = protoModule.readBuffer(p131, var3532)
-				var3532 = var3541
-				var3531.community_id = buffer.tostring(var3540)
-			elseif var3537 == 2 then
+				local var3565, var3566 = protoModule.readBuffer(p132, var3557)
+				var3557 = var3566
+				var3556.community_id = buffer.tostring(var3565)
+			elseif var3562 == 2 then
 				local _ = nil
-				local var3542, var3543 = protoModule.readBuffer(p131, var3532)
-				var3532 = var3543
-				var3531.announcement_id = buffer.tostring(var3542)
-			elseif var3537 == 3 then
+				local var3567, var3568 = protoModule.readBuffer(p132, var3557)
+				var3557 = var3568
+				var3556.announcement_id = buffer.tostring(var3567)
+			elseif var3562 == 3 then
 				local _ = nil
-				local var3544, var3545 = protoModule.readBuffer(p131, var3532)
-				var3532 = var3545
-				var3531.message_id = buffer.tostring(var3544)
-			elseif var3537 == 4 then
+				local var3569, var3570 = protoModule.readBuffer(p132, var3557)
+				var3557 = var3570
+				var3556.message_id = buffer.tostring(var3569)
+			elseif var3562 == 4 then
 				local _ = nil
-				local var3546, var3547 = protoModule.readBuffer(p131, var3532)
-				var3532 = var3547
-				var3531.title = buffer.tostring(var3546)
-			elseif var3537 == 5 then
+				local var3571, var3572 = protoModule.readBuffer(p132, var3557)
+				var3557 = var3572
+				var3556.title = buffer.tostring(var3571)
+			elseif var3562 == 5 then
 				local _ = nil
-				local var3548, var3549 = protoModule.readBuffer(p131, var3532)
-				var3532 = var3549
-				var3531.body = buffer.tostring(var3548)
-			elseif var3537 == 6 then
+				local var3573, var3574 = protoModule.readBuffer(p132, var3557)
+				var3557 = var3574
+				var3556.body = buffer.tostring(var3573)
+			elseif var3562 == 6 then
 				local _ = nil
-				local var3550, var3551 = protoModule.readBuffer(p131, var3532)
-				var3532 = var3551
-				var3531.creator_key = buffer.tostring(var3550)
-			elseif var3537 == 7 then
+				local var3575, var3576 = protoModule.readBuffer(p132, var3557)
+				var3557 = var3576
+				var3556.creator_key = buffer.tostring(var3575)
+			elseif var3562 == 7 then
 				local _ = nil
-				local var3552, var3553 = protoModule.readBuffer(p131, var3532)
-				var3532 = var3553
-				var3531.creator_role_name = buffer.tostring(var3552)
-			elseif var3537 == 8 then
+				local var3577, var3578 = protoModule.readBuffer(p132, var3557)
+				var3557 = var3578
+				var3556.creator_role_name = buffer.tostring(var3577)
+			elseif var3562 == 8 then
 				local _ = nil
-				local var3554, var3555 = protoModule.readBuffer(p131, var3532)
-				var3532 = var3555
-				var3531.media_asset_id = buffer.tostring(var3554)
-			elseif var3537 == 9 then
+				local var3579, var3580 = protoModule.readBuffer(p132, var3557)
+				var3557 = var3580
+				var3556.media_asset_id = buffer.tostring(var3579)
+			elseif var3562 == 9 then
 				local _ = nil
-				local var3556, var3557 = protoModule.readBuffer(p131, var3532)
-				var3532 = var3557
-				var3531.created_time = timestampModule.Timestamp.decode(var3556)
+				local var3581, var3582 = protoModule.readBuffer(p132, var3557)
+				var3557 = var3582
+				var3556.created_time = timestampModule.Timestamp.decode(var3581)
 			else
 				local _ = nil
-				local var3558, var3559 = protoModule.readVarInt(p131, var3532)
-				var3532 = var3559 + var3558
+				local var3583, var3584 = protoModule.readVarInt(p132, var3557)
+				var3557 = var3584 + var3583
 			end
-		elseif var3533 == protoModule.wireTypes.i32 then
+		elseif var3558 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var3560, var3561 = protoModule.readFixed32(p131, var3532)
-			local _ = var3560
-			var3532 = var3561
-		elseif var3533 == protoModule.wireTypes.i64 then
+			local var3585, var3586 = protoModule.readFixed32(p132, var3557)
+			local _ = var3585
+			var3557 = var3586
+		elseif var3558 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var3562, var3563 = protoModule.readFixed64(p131, var3532)
-			local _ = var3562
-			var3532 = var3563
+			local var3587, var3588 = protoModule.readFixed64(p132, var3557)
+			local _ = var3587
+			var3557 = var3588
 		else
-			error("Unsupported wire type: " .. var5163)
+			error("Unsupported wire type: " .. var5205)
 		end
 	end
-	return var3531
+	return var3556
 end
 
-function t_131:jsonEncode()
+function t_132:jsonEncode()
 	local t = {}
 	
 	if self.community_id ~= nil and self.community_id ~= "" then
@@ -22902,76 +23088,76 @@ function t_131:jsonEncode()
 	return t
 end
 
-function t_131:jsonDecode()
-	-- upvalues: t_131 (ref), timestampModule (ref)
-	local var3564 = t_131.new()
+function t_132:jsonDecode()
+	-- upvalues: t_132 (ref), timestampModule (ref)
+	local var3589 = t_132.new()
 	
 	if self.community_id ~= nil then
-		var3564.community_id = self.community_id
+		var3589.community_id = self.community_id
 	end
 	if self.communityId ~= nil then
-		var3564.community_id = self.communityId
+		var3589.community_id = self.communityId
 	end
 	if self.announcement_id ~= nil then
-		var3564.announcement_id = self.announcement_id
+		var3589.announcement_id = self.announcement_id
 	end
 	if self.announcementId ~= nil then
-		var3564.announcement_id = self.announcementId
+		var3589.announcement_id = self.announcementId
 	end
 	if self.message_id ~= nil then
-		var3564.message_id = self.message_id
+		var3589.message_id = self.message_id
 	end
 	if self.messageId ~= nil then
-		var3564.message_id = self.messageId
+		var3589.message_id = self.messageId
 	end
 	if self.title ~= nil then
-		var3564.title = self.title
+		var3589.title = self.title
 	end
 	if self.body ~= nil then
-		var3564.body = self.body
+		var3589.body = self.body
 	end
 	if self.creator_key ~= nil then
-		var3564.creator_key = self.creator_key
+		var3589.creator_key = self.creator_key
 	end
 	if self.creatorKey ~= nil then
-		var3564.creator_key = self.creatorKey
+		var3589.creator_key = self.creatorKey
 	end
 	if self.creator_role_name ~= nil then
-		var3564.creator_role_name = self.creator_role_name
+		var3589.creator_role_name = self.creator_role_name
 	end
 	if self.creatorRoleName ~= nil then
-		var3564.creator_role_name = self.creatorRoleName
+		var3589.creator_role_name = self.creatorRoleName
 	end
 	if self.media_asset_id ~= nil then
-		var3564.media_asset_id = self.media_asset_id
+		var3589.media_asset_id = self.media_asset_id
 	end
 	if self.mediaAssetId ~= nil then
-		var3564.media_asset_id = self.mediaAssetId
+		var3589.media_asset_id = self.mediaAssetId
 	end
 	if self.created_time ~= nil then
-		var3564.created_time = timestampModule.Timestamp.jsonDecode(self.created_time)
+		var3589.created_time = timestampModule.Timestamp.jsonDecode(self.created_time)
 	end
 	if self.createdTime ~= nil then
-		var3564.created_time = timestampModule.Timestamp.jsonDecode(self.createdTime)
+		var3589.created_time = timestampModule.Timestamp.jsonDecode(self.createdTime)
 	end
-	return var3564
+	return var3589
 end
 
-t_131.descriptor = {
+t_132.descriptor = {
 	name = "CommunityAnnouncementInputData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.CommunityAnnouncementInputData"
 }
-t.CommunityAnnouncementInputData = t_131
+t.CommunityAnnouncementInputData = t_132
 typeRegistryModule.default:register(t.CommunityAnnouncementInputData)
 t.PageEntryFormat = {
-	fromNumber = function(p132)
-		return if p132 == 0 then "PAGE_ENTRY_FORMAT_INVALID" elseif p132 == 1 then "PAGE_ENTRY_FORMAT_UNIVERSAL" else nil
+	fromNumber = function(p133)
+		return if p133 == 0 then "PAGE_ENTRY_FORMAT_INVALID" elseif p133 == 1 then "PAGE_ENTRY_FORMAT_UNIVERSAL" else nil
 	end,
-	toNumber = function(p132)
-		return if p132 == "PAGE_ENTRY_FORMAT_INVALID" then 0 elseif p132 == "PAGE_ENTRY_FORMAT_UNIVERSAL" then 1 else p132
+	toNumber = function(p133)
+		return if p133 == "PAGE_ENTRY_FORMAT_INVALID" then 0 elseif p133 == "PAGE_ENTRY_FORMAT_UNIVERSAL" then 1 else p133
 	end,
-	fromName = function(p132)
-		return if p132 == "PAGE_ENTRY_FORMAT_INVALID" then "PAGE_ENTRY_FORMAT_INVALID" elseif p132 == "PAGE_ENTRY_FORMAT_UNIVERSAL" then "PAGE_ENTRY_FORMAT_UNIVERSAL" else nil
+	fromName = function(p133)
+		return if p133 == "PAGE_ENTRY_FORMAT_INVALID" then "PAGE_ENTRY_FORMAT_INVALID" elseif p133 == "PAGE_ENTRY_FORMAT_UNIVERSAL" then "PAGE_ENTRY_FORMAT_UNIVERSAL" else nil
 	end
 }
 
@@ -23082,6 +23268,7 @@ return {
 	PageHeaderInputData = t.PageHeaderInputData,
 	PreAuthLandingStickyHeaderInputData = t.PreAuthLandingStickyHeaderInputData,
 	ImageCtaSectionInputData = t.ImageCtaSectionInputData,
+	SettingsRowInputData = t.SettingsRowInputData,
 	HeroUnitInputData = t.HeroUnitInputData,
 	HeroUnitInputData_VisualAsset = t.HeroUnitInputData_VisualAsset,
 	HeroUnitInputData_Gradient = t.HeroUnitInputData_Gradient,

@@ -22,7 +22,6 @@ local eventTypes = require(parent.SocialLuaAnalytics).Analytics.Enums.EventTypes
 local fIntMaxDaysToShowCountDownLabelModule = require(socialUpsell.Flag.FIntMaxDaysToShowCountDownLabel)
 local fIntMinDaysToShowCountdownLabelModule = require(socialUpsell.Flag.FIntMinDaysToShowCountdownLabel)
 local useSocialUpsellOverlayControllerModule = require(socialUpsell.Hooks.useSocialUpsellOverlayController)
-local fFlagAddUpsellEntryComponentToAnalyticsModule = require(socialUpsell.Flag.FFlagAddUpsellEntryComponentToAnalytics)
 local minHeightFor = responsiveModule.BreakpointConfig.getMinHeightFor(responsiveModule.Keys.Medium)
 local badgeVariant = foundationModule.Enums.BadgeVariant
 local buttonVariant = foundationModule.Enums.ButtonVariant
@@ -48,7 +47,7 @@ end
 local var2 = if fFlagEnableAEGIS2CommsFAEUpsell then displayModule.GetDisplayStore(false).getViewportSize else nil
 
 return function(p1)
-	-- upvalues: t (ref), useSocialUpsellOverlayControllerModule (ref), reactModule (ref), useScaledValue (ref), reactFocusNavigationModule (ref), reactUtilsModule (ref), httpService (ref), socialUpsellAnalyticsModule (ref), upsellComponentModule (ref), useLocalization (ref), var1 (ref), fFlagEnableAEGIS2CommsFAEUpsell (ref), signalsReactModule (ref), var2 (write), useSelector (ref), minHeightFor (ref), eventTypes (ref), fFlagAddUpsellEntryComponentToAnalyticsModule (ref), constantsModule (ref), buttonVariant (ref), dialog (ref), dialogSize (ref), view (ref), image (ref), bannerBadge (ref), foundationModule (ref), iconName (ref), badgeVariant (ref), text (ref)
+	-- upvalues: t (ref), useSocialUpsellOverlayControllerModule (ref), reactModule (ref), useScaledValue (ref), reactFocusNavigationModule (ref), reactUtilsModule (ref), httpService (ref), socialUpsellAnalyticsModule (ref), upsellComponentModule (ref), useLocalization (ref), var1 (ref), fFlagEnableAEGIS2CommsFAEUpsell (ref), signalsReactModule (ref), var2 (write), useSelector (ref), minHeightFor (ref), eventTypes (ref), constantsModule (ref), buttonVariant (ref), dialog (ref), dialogSize (ref), view (ref), image (ref), bannerBadge (ref), foundationModule (ref), iconName (ref), badgeVariant (ref), text (ref)
 	p1 = p1 or t
 	local var3 = useSocialUpsellOverlayControllerModule(p1.isInExperience)
 	local var4 = reactModule.useRef(nil)
@@ -95,7 +94,7 @@ return function(p1)
 		return p2.ScreenSize
 	end)).Y
 	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var4 (ref), socialUpsellAnalyticsModule (copy), eventTypes (copy), p1 (ref), var10 (ref), upsellComponentModule (copy), fFlagAddUpsellEntryComponentToAnalyticsModule (copy)
+		-- upvalues: var9 (ref), var4 (ref), socialUpsellAnalyticsModule (copy), eventTypes (copy), p1 (ref), var10 (ref), upsellComponentModule (copy)
 		if var9 and var4.current ~= var9 then
 			socialUpsellAnalyticsModule.logUpsellEvent(eventTypes.SocialUpsellShown, {
 				upsellPurpose = p1.upsellPurpose,
@@ -103,7 +102,7 @@ return function(p1)
 				upsellStage = var10,
 				upsellImpressionId = var9,
 				upsellComponent = upsellComponentModule.Modal,
-				upsellEntryComponent = if fFlagAddUpsellEntryComponentToAnalyticsModule then p1.upsellEntryComponent else nil
+				upsellEntryComponent = p1.upsellEntryComponent
 			})
 			var4.current = var9
 		end
@@ -112,10 +111,10 @@ return function(p1)
 		p1.upsellPurpose,
 		var9,
 		var10,
-		if fFlagAddUpsellEntryComponentToAnalyticsModule then p1.upsellEntryComponent else nil
+		p1.upsellEntryComponent
 	})
 	local var15 = reactModule.useCallback(function(p2)
-		-- upvalues: socialUpsellAnalyticsModule (copy), eventTypes (copy), p1 (ref), var10 (ref), var9 (ref), upsellComponentModule (copy), fFlagAddUpsellEntryComponentToAnalyticsModule (copy)
+		-- upvalues: socialUpsellAnalyticsModule (copy), eventTypes (copy), p1 (ref), var10 (ref), var9 (ref), upsellComponentModule (copy)
 		socialUpsellAnalyticsModule.logUpsellEvent(eventTypes.SocialUpsellButtonClick, {
 			upsellPurpose = p1.upsellPurpose,
 			upsellEntrySurface = p1.upsellEntrySurface,
@@ -123,14 +122,14 @@ return function(p1)
 			upsellImpressionId = var9,
 			upsellComponent = upsellComponentModule.Modal,
 			btn = p2,
-			upsellEntryComponent = if fFlagAddUpsellEntryComponentToAnalyticsModule then p1.upsellEntryComponent else nil
+			upsellEntryComponent = p1.upsellEntryComponent
 		})
 	end, {
 		p1.upsellEntrySurface,
 		p1.upsellPurpose,
 		var9,
 		var10,
-		if fFlagAddUpsellEntryComponentToAnalyticsModule then p1.upsellEntryComponent else nil
+		p1.upsellEntryComponent
 	})
 	local var16 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref), constantsModule (copy), p1 (ref)

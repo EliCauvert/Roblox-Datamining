@@ -7,6 +7,7 @@ local inputHandlersModule = require(parent.InputHandlers)
 local getSduiTokensStoreModule = require(sduiCoreSystem.ClientBinding.getSduiTokensStore)
 local protoVariableMapperModule = require(sduiCoreSystem.ClientBinding.ProtoVariableMapper)
 local splitDottedPathModule = require(sduiCoreSystem.ClientBinding.splitDottedPath)
+local parsePymkItemsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.parsePymkItems)
 local fFlagSduiStringPropToString = require(parent.SharedFlags).FFlagSduiStringPropToString
 local fFlagSduiPropParsersShouldHandleTokens = require(parent.SharedFlags).FFlagSduiPropParsersShouldHandleTokens
 local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAppSduiColorPropMigration
@@ -24,10 +25,10 @@ local function resolveTokenValueToNumber(p1, p2)
 	local var2 = if var1 then string.sub(p2, 2) else p2
 	local var3 = p1
 	local var4 = splitDottedPathModule(var2)
-	local var27Count = #var4
+	local var28Count = #var4
 	
 	for i, v in var4 do
-		if i ~= var27Count and typeof(var3[v]) ~= "table" then
+		if i ~= var28Count and typeof(var3[v]) ~= "table" then
 			error(`Token path {var2} invalid`)
 		end
 		var3 = var3[v]
@@ -318,6 +319,7 @@ return {
 	parseUiScaledUDim2 = parseUiScaledUDim2,
 	parseStruct = parseStruct,
 	parseArrayOfStruct = parseArrayOfStruct,
+	parsePymkItems = parsePymkItemsModule,
 	parseStringArray = parseStringArray,
 	parseToString = if fFlagSduiStringPropToString then parseToString else nil,
 	parseColor3 = if fFlagLuaAppSduiColorPropMigration then parseColor3 else nil,

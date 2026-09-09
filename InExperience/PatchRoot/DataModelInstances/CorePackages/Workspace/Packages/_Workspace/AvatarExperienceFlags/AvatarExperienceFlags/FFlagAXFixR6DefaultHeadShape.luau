@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXFixR6DefaultHeadShape", false) and require(script.Parent.FFlagDynamicHeadsMigration)
+﻿return game:DefineFastFlag("AXFixR6DefaultHeadShape", false)

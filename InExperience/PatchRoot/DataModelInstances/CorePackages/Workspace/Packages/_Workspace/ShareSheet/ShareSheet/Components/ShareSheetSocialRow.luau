@@ -11,6 +11,7 @@ local fFlagSharePplPickerModule = require(shareSheet.Flags.FFlagSharePplPicker)
 local shareSheetConstantsModule = require(shareSheet.ShareSheetConstants)
 local shareSheetRowModule = require(script.Parent.ShareSheetRow)
 local shareSheetItemContainerModule = require(script.Parent.ShareSheetItemContainer)
+local var1 = if fFlagSharePplPickerModule then require(shareSheet.Utils.ConversationUtils) else nil
 local playersService = game:GetService("Players")
 local _ = require(parent.AppChat.GetConversationListStore)
 
@@ -59,43 +60,54 @@ local function createSkeletonItems()
 	return t
 end
 
-local function onMoreActivated() end
-
 local function ShareSheetConversationItem(p3)
-	-- upvalues: reactModule (ref), shareSheetItemContainerModule (ref)
+	-- upvalues: reactModule (ref), fFlagSharePplPickerModule (ref), var1 (ref), shareSheetItemContainerModule (ref)
+	local var2, var3, displayName
 	local conversation = p3.conversation
 	local id = conversation.id
-	local var1 = reactModule.useCallback(function()
+	local var4 = reactModule.useCallback(function()
 		-- upvalues: p3 (ref), id (ref)
 		p3.onConversationActivated(id)
 	end, { id, p3.onConversationActivated })
-	local participants = conversation.participants or {}
-	local localUserId = p3.localUserId
-	local t = {}
+	local _ = nil
+	local _ = nil
+	local _ = nil
 	
-	for i, v in participants do
-		if v ~= localUserId then
-			table.insert(t, v)
+	if fFlagSharePplPickerModule then
+		local participantUserIds, participantUserIds_1 = var1.getParticipantUserIds(conversation, p3.localUserId)
+		var2 = participantUserIds
+		var3 = participantUserIds_1
+		displayName = var1.getDisplayName(conversation)
+	else
+		local participants = conversation.participants or {}
+		local localUserId = p3.localUserId
+		local t = {}
+		
+		for i, v in participants do
+			if v ~= localUserId then
+				table.insert(t, v)
+			end
 		end
+		local var5 = t
+		var2 = var5[1] or p3.localUserId
+		var3 = if #var5 >= 2 then var5[2] else nil
+		local titleForViewer = conversation.titleForViewer
+		displayName = if titleForViewer and titleForViewer ~= "" then titleForViewer else conversation.title or ""
 	end
-	local var2 = t[1] or p3.localUserId
-	local var3 = if #t >= 2 then t[2] else nil
-	local titleForViewer = conversation.titleForViewer
-	
 	return reactModule.createElement(shareSheetItemContainerModule, {
 		primaryUserId = var2,
 		secondUserId = var3,
 		isSelected = p3.isSelected,
-		label = if titleForViewer and titleForViewer ~= "" then titleForViewer else conversation.title or "",
-		onActivated = var1,
+		label = displayName,
+		onActivated = var4,
 		LayoutOrder = p3.LayoutOrder
 	})
 end
 
 return function(p4)
-	-- upvalues: playersService (ref), fFlagSharePplPickerModule (ref), useLocalization (ref), createSkeletonItems (ref), reactModule (ref), ShareSheetConversationItem (ref), shareSheetItemContainerModule (ref), iconName (ref), onMoreActivated (ref), shareSheetRowModule (ref)
-	local var4 = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0)
-	local var5 = if fFlagSharePplPickerModule then useLocalization({ more = "CommonUI.Features.Label.More" }) else nil
+	-- upvalues: playersService (ref), fFlagSharePplPickerModule (ref), useLocalization (ref), createSkeletonItems (ref), reactModule (ref), ShareSheetConversationItem (ref), shareSheetItemContainerModule (ref), iconName (ref), shareSheetRowModule (ref)
+	local var6 = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0)
+	local var7 = if fFlagSharePplPickerModule then useLocalization({ more = "CommonUI.Features.Label.More" }) else nil
 	local t = {}
 	
 	if p4.isLoading or p4.conversationEligibility.isLoading then
@@ -108,7 +120,7 @@ return function(p4)
 			t[id] = reactModule.createElement(ShareSheetConversationItem, {
 				conversation = v,
 				isSelected = p4.selectedConversationIds[id] == true,
-				localUserId = var4,
+				localUserId = var6,
 				onConversationActivated = p4.onConversationActivated,
 				LayoutOrder = i
 			})
@@ -116,8 +128,8 @@ return function(p4)
 		if fFlagSharePplPickerModule then
 			t.More = reactModule.createElement(shareSheetItemContainerModule, {
 				icon = iconName.ThreeDotsHorizontal,
-				label = var5.more,
-				onActivated = onMoreActivated,
+				label = var7.more,
+				onActivated = p4.onMoreActivated,
 				LayoutOrder = #eligibleConversations + 1
 			})
 		end

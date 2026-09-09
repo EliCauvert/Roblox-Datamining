@@ -15,7 +15,6 @@ local holdDetector = require(parent.HoldToPlay).HoldDetector
 local sduiDefaultTileImageModule = require(script.Parent.SduiDefaultTileImage)
 local useTileHoldActionModule = require(script.Parent.useTileHoldAction)
 local fFlagSduiTileDisableLegacyHover = require(serverDrivenUi.Flags).FFlagSduiTileDisableLegacyHover
-local fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone = require(parent.SharedFlags).FFlagLuaAppHomeFirstTileThumbnailLoadedMilestone
 local fFlagLuaAppHomePageFirstImageLoadObserver = require(parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
 local fFlagSduiTileBottomButton = require(parent.SharedFlags).FFlagSduiTileBottomButton
 local fFlagSduiTileHoldAction = require(parent.SharedFlags).FFlagSduiTileHoldAction
@@ -69,7 +68,7 @@ local function maybeLayoutForButton(p1, p2, p3, p4, p5)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), fFlagSduiGameIconSupport (ref), contentProviderService (ref), textSizeModule (ref), useTokens (ref), fFlagSduiTileBottomButton (ref), fFlagSduiExperienceDetailsSupport (ref), getInputModeStore (ref), responsiveModule (ref), fFlagSduiTileHoldAction (ref), useTileHoldActionModule (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagSduiTileImagePaddingInset (ref), sduiTileInsetImageModule (ref), fFlagSduiTileThumbnailPadding (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), imageSetLabel (ref), fFlagLuaAppSduiVideoThumbnail (ref), sduiDefaultTileImageModule (ref), loadableImage (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), maybeLayoutForButton (ref), fFlagSduiTileTitleTextAlignment (ref), cryoModule (ref), t (ref), holdDetector (ref)
+	-- upvalues: reactModule (ref), fFlagSduiGameIconSupport (ref), contentProviderService (ref), textSizeModule (ref), useTokens (ref), fFlagSduiTileBottomButton (ref), fFlagSduiExperienceDetailsSupport (ref), getInputModeStore (ref), responsiveModule (ref), fFlagSduiTileHoldAction (ref), useTileHoldActionModule (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagSduiTileImagePaddingInset (ref), sduiTileInsetImageModule (ref), fFlagSduiTileThumbnailPadding (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), imageSetLabel (ref), fFlagLuaAppSduiVideoThumbnail (ref), sduiDefaultTileImageModule (ref), loadableImage (ref), maybeLayoutForButton (ref), fFlagSduiTileTitleTextAlignment (ref), cryoModule (ref), t (ref), holdDetector (ref)
 	local layoutOrder = p1.layoutOrder
 	local anchorPoint = p1.anchorPoint
 	local automaticSize = p1.automaticSize
@@ -295,8 +294,7 @@ return reactModule.memo(function(p1)
 				image = p1.image,
 				thumbnailBackgroundStyle = p1.thumbnailBackgroundStyle,
 				isContained = isContained,
-				cardCornerRadius = cornerRadius,
-				onTileImageLoaded = p1.onTileImageLoaded
+				cardCornerRadius = cornerRadius
 			}) else reactModule.createElement(loadableImage, {
 				showFailedStateWhenLoadingFailed = true,
 				useShimmerAnimationWhileLoading = true,
@@ -307,8 +305,7 @@ return reactModule.memo(function(p1)
 				Size = UDim2.new(1, 0, 1, if isContained then cornerRadius else 0),
 				cornerRadius = UDim.new(0, cornerRadius),
 				ScaleType = if isContained then Enum.ScaleType.Tile else nil,
-				TileSize = if isContained then UDim2.new(1, 0, 1, -cornerRadius) else nil,
-				onLoaded = if fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone then p1.onTileImageLoaded else nil
+				TileSize = if isContained then UDim2.new(1, 0, 1, -cornerRadius) else nil
 			}) else nil),
 			UIAspectRatioConstraint = reactModule.createElement("UIAspectRatioConstraint", { AspectRatio = var2 or 1 }),
 			ThumbnailOverlay = p1.thumbnailOverlayComponent,

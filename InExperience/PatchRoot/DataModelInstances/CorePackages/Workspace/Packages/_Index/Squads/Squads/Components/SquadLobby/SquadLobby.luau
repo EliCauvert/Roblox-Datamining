@@ -58,7 +58,6 @@ local useTokens = foundation.Hooks.useTokens
 local clearInterval = luauPolyfill.clearInterval
 local setInterval = luauPolyfill.setInterval
 local enableSquadLobbyBanners = game:DefineFastFlag("EnableSquadLobbyBanners", false)
-local fFlagEnableSquadCoplayAnalytic = sharedFlags.FFlagEnableSquadCoplayAnalytic
 local fFlagEnableSquadTopBannerWideMode = sharedFlags.FFlagEnableSquadTopBannerWideMode
 local fFlagMakeCreateOrJoinSquadAThunks = sharedFlags.FFlagMakeCreateOrJoinSquadAThunks
 local partyInviteeNoResponseDurationSeconds = game:DefineFastInt("PartyInviteeNoResponseDurationSeconds", 3)
@@ -75,7 +74,7 @@ local fFlagEnableSquadRegroupServerCapacityCheck = sharedFlags.FFlagEnableSquadR
 local fFlagAppChatShowOSAOnPageEntry = sharedFlags.FFlagAppChatShowOSAOnPageEntry
 
 return function(p1)
-	-- upvalues: useTokens (ref), useDispatch (ref), useLocalUserId (ref), useStyle (ref), useSquadState (ref), useNavigation (ref), react (ref), squadExternalContractContext (ref), useVoiceStatus (ref), fFlagEnableSquadTopBannerWideMode (ref), httpService (ref), roactNavigationModule (ref), squadViewFlags (ref), useCurrentSquadSelector (ref), useSelector (ref), useStore (ref), squadQuickStartExperimentation (ref), fFlagEnablePartyQuickStartButton (ref), squadPromptType (ref), fFlagMakeCreateOrJoinSquadAThunks (ref), createOrJoinSquad (ref), networkingSquads (ref), fFlagEnableSquadCoplayAnalytic (ref), logInExpCoplayTelemetryModule (ref), squadCoplayJoin (ref), useEffectOnce (ref), fFlagAppChatShowOSAOnPageEntry (ref), loggerModule (ref), cryo (ref), squadUserPartyStatusModule (ref), partyUserInvitedDurationSeconds (ref), partyInviteeNoResponseDurationSeconds (ref), setInterval (ref), clearInterval (ref), usePrevious (ref), userBlockingNetworking (ref), fFlagSquadsPresenceStoreMigration (ref), networkingPresence (ref), constantsModule (ref), signalsModule (ref), var1 (ref), useSignalState (ref), fFlagEnableSquadRegroupServerCapacityCheck (ref), playersService (ref), squadRegroupExperimentation (ref), var2 (ref), presenceType (ref), luckyRecommendationExperimentation (ref), fFlagEnableSquadRegroupExperimentationSmallScreenFix (ref), enableSquadLobbyBanners (ref), squadLobbyBannersModule (ref), foundation (ref), squadLobbyUserGridModule (ref), eventNamesModule (ref), squadPartySheetActionEnumModule (ref), squadLobbyRegroupRowModule (ref), squadLobbyActionBarModule (ref), squadLobbyLuckyRecommendationRowModule (ref), stateLayerAffordance (ref), squadLobbyVoiceChatMenuModule (ref), fFlagEnablePartyVoiceChangersInLua (ref), squadLobbyUserDropdownMenuModule (ref), squadCoordinationExperienceJoinExperimentation (ref), fFlagEnableSquadRegroupExperimentation (ref), roact (ref), squadLobbySessionProvider (ref)
+	-- upvalues: useTokens (ref), useDispatch (ref), useLocalUserId (ref), useStyle (ref), useSquadState (ref), useNavigation (ref), react (ref), squadExternalContractContext (ref), useVoiceStatus (ref), fFlagEnableSquadTopBannerWideMode (ref), httpService (ref), roactNavigationModule (ref), squadViewFlags (ref), useCurrentSquadSelector (ref), useSelector (ref), useStore (ref), squadQuickStartExperimentation (ref), fFlagEnablePartyQuickStartButton (ref), squadPromptType (ref), fFlagMakeCreateOrJoinSquadAThunks (ref), createOrJoinSquad (ref), networkingSquads (ref), logInExpCoplayTelemetryModule (ref), squadCoplayJoin (ref), useEffectOnce (ref), fFlagAppChatShowOSAOnPageEntry (ref), loggerModule (ref), cryo (ref), squadUserPartyStatusModule (ref), partyUserInvitedDurationSeconds (ref), partyInviteeNoResponseDurationSeconds (ref), setInterval (ref), clearInterval (ref), usePrevious (ref), userBlockingNetworking (ref), fFlagSquadsPresenceStoreMigration (ref), networkingPresence (ref), constantsModule (ref), signalsModule (ref), var1 (ref), useSignalState (ref), fFlagEnableSquadRegroupServerCapacityCheck (ref), playersService (ref), squadRegroupExperimentation (ref), var2 (ref), presenceType (ref), luckyRecommendationExperimentation (ref), fFlagEnableSquadRegroupExperimentationSmallScreenFix (ref), enableSquadLobbyBanners (ref), squadLobbyBannersModule (ref), foundation (ref), squadLobbyUserGridModule (ref), eventNamesModule (ref), squadPartySheetActionEnumModule (ref), squadLobbyRegroupRowModule (ref), squadLobbyActionBarModule (ref), squadLobbyLuckyRecommendationRowModule (ref), stateLayerAffordance (ref), squadLobbyVoiceChatMenuModule (ref), fFlagEnablePartyVoiceChangersInLua (ref), squadLobbyUserDropdownMenuModule (ref), squadCoordinationExperienceJoinExperimentation (ref), fFlagEnableSquadRegroupExperimentation (ref), roact (ref), squadLobbySessionProvider (ref)
 	local var3 = useTokens()
 	local var4 = useDispatch()
 	local var5 = tonumber(useLocalUserId()) or 0
@@ -188,31 +187,26 @@ return function(p1)
 		})
 	end, { p1.navigateAwayFromSquad, var22, var9.setSquadPrompt })
 	local var26 = react.useCallback(function(p2)
-		-- upvalues: fFlagMakeCreateOrJoinSquadAThunks (copy), var4 (ref), createOrJoinSquad (copy), var9 (ref), squadCreateOrJoinAttemptId (write), p1 (ref), extraParams (ref), networkingSquads (copy), fFlagEnableSquadCoplayAnalytic (copy), logInExpCoplayTelemetryModule (copy), squadCoplayJoin (copy), var25 (ref)
+		-- upvalues: fFlagMakeCreateOrJoinSquadAThunks (copy), var4 (ref), createOrJoinSquad (copy), var9 (ref), squadCreateOrJoinAttemptId (write), p1 (ref), extraParams (ref), networkingSquads (copy), logInExpCoplayTelemetryModule (copy), squadCoplayJoin (copy), var25 (ref)
 		if fFlagMakeCreateOrJoinSquadAThunks then
 			var4(createOrJoinSquad(p2, var9.setSquadPrompt, var9.fireSquadAnalytics, var9.squadLocation, squadCreateOrJoinAttemptId, p1.navigateAwayFromSquad, extraParams))
 			
 			return
 		end
-		local var27 = var4(networkingSquads.CreateOrJoinSquad.API({
+		var4(networkingSquads.CreateOrJoinSquad.API({
 			leaveExisting = true,
 			parentChannelId = p2,
-			squadLocation = if fFlagEnableSquadCoplayAnalytic then var9.squadLocation else nil,
+			squadLocation = var9.squadLocation,
 			partyAttemptId = squadCreateOrJoinAttemptId
-		}))
-		
-		if fFlagEnableSquadCoplayAnalytic then
-			var27 = var27:andThen(function(p3)
-				-- upvalues: logInExpCoplayTelemetryModule (copy), var9 (copy), squadCoplayJoin (copy)
-				local groupUpId = p3.responseBody.groupUp.groupUpId
-				local members = p3.responseBody.groupUp.members
-				
-				if groupUpId and members then
-					logInExpCoplayTelemetryModule(groupUpId, members, var9.squadLocation, squadCoplayJoin.PartyJoin, var9.fireSquadAnalytics)
-				end
-			end)
-		end
-		var27:catch(function(_)
+		})):andThen(function(p3)
+			-- upvalues: logInExpCoplayTelemetryModule (copy), var9 (copy), squadCoplayJoin (copy)
+			local groupUpId = p3.responseBody.groupUp.groupUpId
+			local members = p3.responseBody.groupUp.members
+			
+			if groupUpId and members then
+				logInExpCoplayTelemetryModule(groupUpId, members, var9.squadLocation, squadCoplayJoin.PartyJoin, var9.fireSquadAnalytics)
+			end
+		end):catch(function(_)
 			-- upvalues: var25 (copy)
 			var25()
 		end)

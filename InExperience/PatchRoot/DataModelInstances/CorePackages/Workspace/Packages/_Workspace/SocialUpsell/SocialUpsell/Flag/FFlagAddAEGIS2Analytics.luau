@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AddAEGIS2Analytics", false)

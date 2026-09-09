@@ -10,11 +10,10 @@ local useStyle = UIBloxModule.Core.Style.useStyle
 local userLibModule = require(parent.UserLib)
 local constants = userLibModule.Utils.Constants
 local _ = require(profilePlatform.Common.Types)
-local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 
 return function(p1, p2, _)
-	-- upvalues: useDispatch (ref), useNavigation (ref), useStyle (ref), reactModule (ref), openGameDetails (ref), constants (ref), getRbxthumbWithTypeSizeAndOptions (ref), experienceTileV3 (ref), fFlagRenameDeprecatedUIBloxTokens (ref)
+	-- upvalues: useDispatch (ref), useNavigation (ref), useStyle (ref), reactModule (ref), openGameDetails (ref), constants (ref), getRbxthumbWithTypeSizeAndOptions (ref), experienceTileV3 (ref)
 	local var1 = useDispatch()
 	local var2 = useNavigation()
 	local var3 = useStyle()
@@ -54,7 +53,7 @@ return function(p1, p2, _)
 	end, {
 		var1,
 		var2,
-		if fFlagRenameDeprecatedUIBloxTokens then var3.Tokens.Padding.Small else var3.Tokens.Component.VerticalTile.Base.ContentBottom.Spacing,
+		var3.Tokens.Padding.Small,
 		p2,
 		p1
 	})

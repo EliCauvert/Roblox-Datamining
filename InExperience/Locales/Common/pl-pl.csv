@@ -1233,16 +1233,19 @@ Feature.AccountSettings.Message.Error.InvalidGuildedUrl,Adres URL profilu Guilde
 Feature.AccountSettings.Message.Error.InvalidTwitchUrl,Adres URL profilu na Twitchu jest nieprawidłowy.
 Feature.AccountSettings.Message.Error.InvalidXUrl,Nick w serwisie X jest nieprawidłowy.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,Adres URL w serwisie YouTube jest nieprawidłowy.
+Feature.AddFriends.Action.FriendAdded,Dodano znajomego
 Feature.AddFriends.Action.IgnoreConnectionRequest,Zignoruj prośbę o nawiązanie znajomości
 Feature.AddFriends.Action.IgnoreFriendRequest,Zignoruj prośbę o dodanie do znajomych
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Zignoruj prośbę o dodanie do zaufanych znajomych
 Feature.AddFriends.Action.RequestIgnored,Zignorowano prośbę
+Feature.AddFriends.Label.AddFriendsTooltip,"Zacznij od znalezienia znajomych, z którymi możesz wspólnie eksplorować platformę Roblox."
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"Znajdź znajomych na platformie Roblox, wyszukując ich na podstawie nazwy użytkownika lub imienia i nazwiska."
 Feature.AddFriends.Label.ConnectWithContacts,"Zaproś osoby ze swoich kontaktów lub odszukaj znajomych, którzy już korzystają z platformy Roblox!"
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Wyszukaj osoby
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.SearchForFriendsPrompt,"Znajdź znajomych na platformie Roblox, wyszukując ich na podstawie nazwy użytkownika lub nazwy wyświetlanej."
 Feature.AddFriends.Label.SyncWithContacts,"Zsynchronizuj kontakty, aby móc znajdować i zapraszać znajomych!"
+Feature.AddFriends.Title.AddFriendsTooltipTitle,Zabawa na platformie Roblox jest lepsza w towarzystwie znajomych!
 Feature.AddFriends.Title.ConnectWithContacts,Dodaj z kontaktów
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,Odblokuj większą liczbę treści i funkcji.
 Feature.AgeVerificationUpsell.Button.Cancel,
@@ -1996,6 +1999,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,Liczba znaków w opisie n
 Feature.Build.Error.DeveloperProductNameRequired,Wprowadź nazwę produktu.
 Feature.Build.Error.DeveloperProductNameTooLong,Liczba znaków w nazwie nie może przekroczyć 50.
 Feature.Build.Error.DeveloperProductPriceInvalid,Cena musi być liczbą całkowitą od 1 do 1 000 000 000 Robuxów.
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,Wybierz Edytuj i dodaj cenę przed wystawieniem produktu na sprzedaż.
 Feature.Build.Error.DeveloperProductTextModerated,Zespół moderatorów Robloxa zmienił tekst dotyczący tego produktu. Spróbuj użyć innego sformułowania.
 Feature.Build.Error.ManagedPricingPartialUpdate,Nie udało się zaktualizować niektórych produktów.
 Feature.Build.Error.MonetizationOptionUpdate,Nie udało się zaktualizować tej opcji. Spróbuj ponownie.
@@ -2054,7 +2058,7 @@ Feature.Build.Label.InProgress,W toku
 Feature.Build.Label.InputNeeded,Wymagane wprowadzenie
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Z ograniczeniami
-Feature.Build.Label.Live,Opublikowana
+Feature.Build.Label.Live,
 Feature.Build.Label.Loading,Wczytuję...
 Feature.Build.Label.ManagedPricing,Zarządzane ceny
 Feature.Build.Label.ManagedPricingMixed,Mieszane dla aktualnych produktów
@@ -3064,9 +3068,10 @@ Feature.Friends.Action.AccountDeleted,Konto usunięte
 Feature.Friends.Action.Add,
 Feature.Friends.Action.Block,
 Feature.Friends.Action.Close,
-Feature.Friends.Action.ConnectionAdded,Dodano znajomego
+Feature.Friends.Action.ConnectionAdded,
 Feature.Friends.Action.ConnectionRequestSent,Wysłano prośbę o nawiązanie znajomości
 Feature.Friends.Action.EditProfile,Edytuj profil
+Feature.Friends.Action.FindFriends,
 Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,Znajomy usunięty
 Feature.Friends.Action.FriendRequestSent,Wysłano prośbę o dodanie do znajomych
@@ -3158,9 +3163,10 @@ Feature.Friends.Label.IntroducingConnections,Przedstawiamy znajomych
 Feature.Friends.Label.JoinedInYear,Dołączono w {year} roku
 Feature.Friends.Label.ManageFriendsList,Zarządzaj listą znajomych
 Feature.Friends.Label.ManageFriendsListCaption,"Przejrzyj znajomych, z którymi masz najmniej interakcji, aby zadbać o aktualność listy znajomych."
+Feature.Friends.Label.MultipleMutuals,{numConnections} wspólnych znajomych
 Feature.Friends.Label.MutualConnection,1 wspólny znajomy
 Feature.Friends.Label.MutualConnectionTitle,
-Feature.Friends.Label.MutualConnections,{numConnections} wspólnych znajomych
+Feature.Friends.Label.MutualConnections,
 Feature.Friends.Label.MutualConnectionsTitle,
 Feature.Friends.Label.MutualFriendTitle,
 Feature.Friends.Label.MutualFriends,Wspólni znajomi
@@ -3170,6 +3176,7 @@ Feature.Friends.Label.NewFriend,
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
 Feature.Friends.Label.NoFriendsYet,{name} nie ma jeszcze żadnych znajomych.
 Feature.Friends.Label.NowTrusted,{username} jest teraz zaufanym znajomym
+Feature.Friends.Label.OneMutual,
 Feature.Friends.Label.PYMK,"Osoby, które możesz znać"
 Feature.Friends.Label.Pending,
 Feature.Friends.Label.PlayedByUser,Grali: <b>{name}</b>

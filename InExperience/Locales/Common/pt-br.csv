@@ -1233,16 +1233,19 @@ Feature.AccountSettings.Message.Error.InvalidGuildedUrl,A url do perfil Guilded 
 Feature.AccountSettings.Message.Error.InvalidTwitchUrl,Perfil da Twitch inválido.
 Feature.AccountSettings.Message.Error.InvalidXUrl,O identificador X é inválido.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,Canal do YouTube inválido.
+Feature.AddFriends.Action.FriendAdded,Amizade adicionada
 Feature.AddFriends.Action.IgnoreConnectionRequest,Ignorar solicitação de conexão
 Feature.AddFriends.Action.IgnoreFriendRequest,Ignorar pedido de amizade
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignorar pedido de amizade confiável
 Feature.AddFriends.Action.RequestIgnored,Pedido ignorado
+Feature.AddFriends.Label.AddFriendsTooltip,Comece encontrando seus amizades para que vocês possam explorar a Roblox juntos.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Encontre pessoas na Roblox pesquisando pelo nome de usuário ou nome.
 Feature.AddFriends.Label.ConnectWithContacts,Convide seus contatos ou conecte-se com amizades que já estão na Roblox!
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Pesquisar pessoas
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.SearchForFriendsPrompt,Encontre pessoas na Roblox procurando seu nome de usuário ou nome de exibição.
 Feature.AddFriends.Label.SyncWithContacts,Sincronize os contatos para encontrar e convidar amizades!
+Feature.AddFriends.Title.AddFriendsTooltipTitle,A Roblox fica mais divertida com suas amizades!
 Feature.AddFriends.Title.ConnectWithContacts,Adicionar de contatos
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,Desbloqueie mais conteúdos e funcionalidades.
 Feature.AgeVerificationUpsell.Button.Cancel,
@@ -1996,6 +1999,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,A descrição deve ter 1.
 Feature.Build.Error.DeveloperProductNameRequired,Insira um nome de produto.
 Feature.Build.Error.DeveloperProductNameTooLong,O nome deve ter 50 caracteres ou menos.
 Feature.Build.Error.DeveloperProductPriceInvalid,O preço deve ser um número inteiro de 1 a 1.000.000.000 Robux.
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,Selecione Editar e adicione um preço antes de colocar um produto à venda.
 Feature.Build.Error.DeveloperProductTextModerated,A moderação da Roblox alterou o texto deste produto. Tente usar palavras diferentes.
 Feature.Build.Error.ManagedPricingPartialUpdate,Não foi possível atualizar alguns produtos.
 Feature.Build.Error.MonetizationOptionUpdate,Não foi possível atualizar a opção. Tente novamente.
@@ -3067,7 +3071,8 @@ Feature.Friends.Action.Close,
 Feature.Friends.Action.ConnectionAdded,Conexão adicionada
 Feature.Friends.Action.ConnectionRequestSent,Solicitação de conexão enviada
 Feature.Friends.Action.EditProfile,Editar perfil
-Feature.Friends.Action.FriendAdded,Amizade adicionada
+Feature.Friends.Action.FindFriends,
+Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,Amizade removida
 Feature.Friends.Action.FriendRequestSent,Pedido de amizade enviado
 Feature.Friends.Action.GetStarted,Vamos Começar
@@ -3158,6 +3163,7 @@ Feature.Friends.Label.IntroducingConnections,Apresentando as conexões
 Feature.Friends.Label.JoinedInYear,Entrou em {year}
 Feature.Friends.Label.ManageFriendsList,Gerenciar sua lista de amizades
 Feature.Friends.Label.ManageFriendsListCaption,Revise as amizades com quem você menos interagiu para manter sua lista de amizades atualizada.
+Feature.Friends.Label.MultipleMutuals,{numConnections} conexões em comum
 Feature.Friends.Label.MutualConnection,1 conexão mútua
 Feature.Friends.Label.MutualConnectionTitle,1 Conexão mútua
 Feature.Friends.Label.MutualConnections,{numConnections} conexões mútuas
@@ -3170,6 +3176,7 @@ Feature.Friends.Label.NewFriend,Nova amizade
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
 Feature.Friends.Label.NoFriendsYet,{name} ainda não tem amizades.
 Feature.Friends.Label.NowTrusted,{username} agora faz parte dos seus amigos confiáveis
+Feature.Friends.Label.OneMutual,1 conexão em comum
 Feature.Friends.Label.PYMK,Pessoas que você talvez conheça
 Feature.Friends.Label.Pending,
 Feature.Friends.Label.PlayedByUser,<b>{name}</b> jogou

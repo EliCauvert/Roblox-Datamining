@@ -239,18 +239,23 @@ return function(p1)
 		p1.enableExplicitFeedback
 	})
 	local var33 = reactModule.useCallback(function()
-		-- upvalues: var26 (ref), var32 (ref), var23 (ref), var24 (ref), fFlagLuaAppHapticTriggeredTelemetry (copy), universeId (ref), p1 (ref), getOverflowMenuSignalStore (copy), hoverKey (ref)
+		-- upvalues: var26 (ref), fFlagLuaAppSduiSponsoredTwoByOneTile (copy), p1 (ref), var32 (ref), var23 (ref), var24 (ref), fFlagLuaAppHapticTriggeredTelemetry (copy), universeId (ref), getOverflowMenuSignalStore (copy), hoverKey (ref)
 		local current = var26.current
 		var26.current = true
 		
-		if current == false and next(var32) ~= nil then
+		if fFlagLuaAppSduiSponsoredTwoByOneTile and current == false and p1.onTouchLongPress then
+			p1.onTouchLongPress()
+			
+			return
+		elseif current == false and next(var32) ~= nil then
 			if var23 and not var24 then
 				var23("TwoByOneTileLongPress", "Press", if fFlagLuaAppHapticTriggeredTelemetry then p1.appPage or "Unknown" else nil, if fFlagLuaAppHapticTriggeredTelemetry then if fFlagLuaAppHapticTriggeredTelemetry then { universeId = universeId, sortId = p1.topicId } else nil else nil)
 			end
 			getOverflowMenuSignalStore().openMenu(hoverKey)
 		end
 	end, {
-		hoverKey, p1.appPage, p1.topicId, var23, var32, var24, universeId
+		hoverKey, p1.appPage, p1.topicId, var23, var32, var24, universeId,
+		if fFlagLuaAppSduiSponsoredTwoByOneTile then p1.onTouchLongPress else nil
 	})
 	local var34 = reactModule.useCallback(function(p2)
 		-- upvalues: var9 (ref), setGamePlaySession (copy), sessionType (copy), var25 (ref), hoverTileCoordinator (copy), p1 (ref), placeId (ref), universeId (ref), gameCollectionItemTypes (copy), fFlagLuaAppDemoModePlayButtonTelemetry (copy)
@@ -361,6 +366,7 @@ return function(p1)
 	end
 	return if p1.isHidden then reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
+		Size = if fFlagLuaAppSduiSponsoredTwoByOneTile then p1.rootSize else nil,
 		LayoutOrder = p1.layoutOrder,
 		ZIndex = p1.zIndex,
 		ref = var44
@@ -372,7 +378,7 @@ return function(p1)
 			ref = var22,
 			SelectionOrder = p1.SelectionOrder
 		}, {
-			HiddenTileContent = reactModule.createElement(hiddenTileContent, {
+			HiddenTileContent = if fFlagLuaAppSduiSponsoredTwoByOneTile and p1.renderHiddenState then p1.renderHiddenState(var22) else reactModule.createElement(hiddenTileContent, {
 				appPage = p1.appPage,
 				collectionId = p1.topicId,
 				setGameHidden = p1.setGameHidden,
@@ -569,7 +575,12 @@ return function(p1)
 					Position = UDim2.new(1, 0, 1, 0)
 				})
 			}),
-			OverflowMenu = reactModule.createElement(spanTileOverflowMenuModule, {
+			OverflowMenu = if fFlagLuaAppSduiSponsoredTwoByOneTile and p1.renderOverflowMenu then p1.renderOverflowMenu({
+				isHovered = var25,
+				isSelected = var20,
+				menuKey = hoverKey,
+				parentRef = var22
+			}) else reactModule.createElement(spanTileOverflowMenuModule, {
 				zIndex = 4,
 				hoverKey = hoverKey,
 				parentRef = var22,

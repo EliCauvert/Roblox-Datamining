@@ -1,4 +1,5 @@
 ﻿return {
+	Constants = require(script.Constants),
 	Enums = {
 		CatalogCategoryTaxonomyUUIDs = require(script.Enums.CatalogCategoryTaxonomyUUIDs),
 		FocusType = require(script.Enums.FocusType),

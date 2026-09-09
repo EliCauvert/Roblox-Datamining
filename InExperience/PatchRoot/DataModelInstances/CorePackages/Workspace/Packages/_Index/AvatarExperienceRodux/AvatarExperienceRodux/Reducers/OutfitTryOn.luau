@@ -54,11 +54,10 @@ local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnab
 local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
 local fFlagParseHeadShapeFromAPIResponse = avatarExperienceFlagsModule.FFlagParseHeadShapeFromAPIResponse
 local fFlagHeadRefinementFacialAnimationToggle = avatarExperienceFlagsModule.FFlagHeadRefinementFacialAnimationToggle
-local fFlagDynamicHeadsMigration = avatarExperienceFlagsModule.FFlagDynamicHeadsMigration
 local var1 = 0
 
 local function formatItem(p1, p2)
-	-- upvalues: fFlagAXMISEnableMultiShopping (ref), fFlagDynamicHeadsMigration (ref), itemTypeEnum (ref), BUNDLE_TYPE_ID_STRINGS (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), fFlagParseHeadShapeFromAPIResponse (ref), fFlagHeadRefinementFacialAnimationToggle (ref), fFlagAXDurablesForMIS (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), LAYERED_CLOTHING_ORDER (ref), LAYERED_ASSET_TYPES (ref), cryoModule (ref), ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE (ref), LAYERED_MAKEUP_ORDER (ref), var1 (write)
+	-- upvalues: fFlagAXMISEnableMultiShopping (ref), itemTypeEnum (ref), BUNDLE_TYPE_ID_STRINGS (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), fFlagParseHeadShapeFromAPIResponse (ref), fFlagHeadRefinementFacialAnimationToggle (ref), fFlagAXDurablesForMIS (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), LAYERED_CLOTHING_ORDER (ref), LAYERED_ASSET_TYPES (ref), cryoModule (ref), ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE (ref), LAYERED_MAKEUP_ORDER (ref), var1 (write)
 	local var2 = if p1.receivedBundleInfo then true else false
 	local bundleInfo = p1.bundleInfo
 	
@@ -66,7 +65,7 @@ local function formatItem(p1, p2)
 		local t = {}
 		
 		for i, v in p1.bundleItems do
-			if fFlagDynamicHeadsMigration and v.type == itemTypeEnum.Asset then
+			if v.type == itemTypeEnum.Asset then
 				local assetType = v.assetType
 				
 				if not assetType and p1.itemSubType == BUNDLE_TYPE_ID_STRINGS.DynamicHead then
@@ -83,16 +82,6 @@ local function formatItem(p1, p2)
 					end
 					t[v.id] = t_1
 				end
-			elseif v.type == itemTypeEnum.Asset and v.assetType then
-				local t_1 = { assetType = v.assetType }
-				
-				if fFlagParseHeadShapeFromAPIResponse and v.meta and v.meta.headShape ~= nil then
-					t_1.headShape = v.meta.headShape
-				end
-				if fFlagHeadRefinementFacialAnimationToggle and v.meta and v.meta.staticFacialAnimation ~= nil then
-					t_1.staticFacialAnimation = v.meta.staticFacialAnimation
-				end
-				t[v.id] = t_1
 			end
 		end
 		bundleInfo = t

@@ -87,7 +87,6 @@ local var1 = if fFlagGameTileMigrateOffLegacyPresence then require(parent.Friend
 local fFlagLuaAppHapticTriggeredTelemetry = require(parent.SharedFlags).FFlagLuaAppHapticTriggeredTelemetry
 local fFlagLuaAppEnableSponsoredReportAd = require(parent.SharedFlags).FFlagLuaAppEnableSponsoredReportAd
 local fFlagLuaAppNotInterestedReportPlaceId = require(parent.SharedFlags).FFlagLuaAppNotInterestedReportPlaceId
-local fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone = require(parent.SharedFlags).FFlagLuaAppHomeFirstTileThumbnailLoadedMilestone
 local fFlagLuaAppNarrowTileSmallerFooterFont = require(parent.SharedFlags).FFlagLuaAppNarrowTileSmallerFooterFont
 local fFlagLuaAppNarrowTileHideRating = require(parent.SharedFlags).FFlagLuaAppNarrowTileHideRating
 local fFlagLuaAppNarrowTileHidePlayerCount = require(parent.SharedFlags).FFlagLuaAppNarrowTileHidePlayerCount
@@ -173,7 +172,6 @@ appGameTile.validateProps = tModule.strictInterface({
 	appPage = tModule.optional(tModule.string),
 	isHidden = tModule.optional(tModule.boolean),
 	isNarrowScreenXSmall = tModule.optional(tModule.boolean),
-	onTileImageLoaded = if fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone then tModule.optional(tModule.callback) else nil,
 	sponsoredUserCohort = tModule.optional(tModule.string),
 	enableSponsoredFeedback = tModule.optional(tModule.boolean),
 	availableMenuItems = tModule.optional(tModule.table),
@@ -697,7 +695,7 @@ function appGameTile.renderGridTilesFooter(p2)
 end
 
 function appGameTile.renderContent(p2, p3, p4, p5)
-	-- upvalues: gameTileConstantsModule (ref), gameTileViewConfigModule (ref), fFlagMigrateGameInfoToStore (ref), reactModule (ref), gameStatsModule (ref), hiddenTileContentModule (ref), gameTileVideoThumbnailModule (ref), fFlagLuaAppVideoTileDisableActivation (ref), fFlagLuaAppContinueSortInstantPlay (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref), fFlagLuaAppGameTileExtractGameDetailsCallback (ref), fFlagLuaAppGameDetailsAttributionFix (ref), luaAppKeepTileBadgesDuringVideo (ref), roactModule (ref), gameTileThumbnailBadgesModule (ref), foundationModule (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), fFlagLuaAppGameTileNotInterestedDirectAction (ref), gameTileContextualActionsModule (ref), gameTileOverflowMenuModule (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), fFlagLuaAppEnableSponsoredReportAd (ref), gameTileViewModule (ref), fFlagLuaAppMigrateGameTileHoverFixes (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), appExperienceActionRowModule (ref), fFlagLuaAppUnifyPlayButtonTile (ref), instantPlayLauncherModule (ref), discoveryAnalyticsModule (ref)
+	-- upvalues: gameTileConstantsModule (ref), gameTileViewConfigModule (ref), fFlagMigrateGameInfoToStore (ref), reactModule (ref), gameStatsModule (ref), hiddenTileContentModule (ref), gameTileVideoThumbnailModule (ref), fFlagLuaAppVideoTileDisableActivation (ref), fFlagLuaAppContinueSortInstantPlay (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref), fFlagLuaAppGameTileExtractGameDetailsCallback (ref), fFlagLuaAppGameDetailsAttributionFix (ref), luaAppKeepTileBadgesDuringVideo (ref), roactModule (ref), gameTileThumbnailBadgesModule (ref), foundationModule (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), fFlagLuaAppGameTileNotInterestedDirectAction (ref), gameTileContextualActionsModule (ref), gameTileOverflowMenuModule (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), fFlagLuaAppEnableSponsoredReportAd (ref), gameTileViewModule (ref), fFlagLuaAppMigrateGameTileHoverFixes (ref), appExperienceActionRowModule (ref), fFlagLuaAppUnifyPlayButtonTile (ref), instantPlayLauncherModule (ref), discoveryAnalyticsModule (ref)
 	local createElement
 	local size = p2.props.Size or UDim2.fromScale(1, 1)
 	local imageThumbnail = p2.props.imageThumbnail
@@ -810,7 +808,6 @@ function appGameTile.renderContent(p2, p3, p4, p5)
 			containmentSidePadding = gameTileViewConfigModule.getContainmentSidePadding(p4.Tokens, p2.props.gameTileLayoutType, p2.props.foundationTokens),
 			Size = UDim2.fromScale(1, 1),
 			image = imageThumbnail,
-			onTileImageLoaded = if fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone then p2.props.onTileImageLoaded else nil,
 			thumbnailComponent = createElement,
 			title = if isHidden then nil else var7,
 			isDisabled = if isHidden then true else p2.props.isDisabled,

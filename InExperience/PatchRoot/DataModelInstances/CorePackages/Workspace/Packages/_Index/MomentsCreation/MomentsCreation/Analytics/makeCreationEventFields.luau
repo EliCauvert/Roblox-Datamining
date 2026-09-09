@@ -1,9 +1,7 @@
 ﻿local momentsCommonModule = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsCommon)
 local eventNames = momentsCommonModule.Analytics.EventNames
-local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
-local getFFlagMomentsAnalyticsProducerPrereqs = momentsCommonModule.Flags.GetFFlagMomentsAnalyticsProducerPrereqs
 local getFFlagEnableMomentTextGeneration = momentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
-local creationFlowSteps = funnelEventNames.CreationFlowSteps
+local creationFlowSteps = momentsCommonModule.Analytics.FunnelEventNames.CreationFlowSteps
 local t = {
 	[eventNames.MomentsEditingFlowContinueToEditButtonPressed] = creationFlowSteps.GalleryItemSelectedContinuePressed,
 	[eventNames.MomentsEditingFlowContinueToDescriptionButtonPressed] = creationFlowSteps.EditingScreenContinuePressed,
@@ -21,47 +19,35 @@ local t_1 = {
 
 return {
 	makeStepField = function(p1)
-		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref), t (ref)
-		if not getFFlagMomentsAnalyticsProducerPrereqs() then
-			return {}
-		end
+		-- upvalues: t (ref)
 		local var1 = t[p1]
 		
 		return if var1 == nil then {} else { step = var1 }
 	end,
 	makeStepFieldFromState = function(p1)
-		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref), t_1 (ref)
-		if not getFFlagMomentsAnalyticsProducerPrereqs() then
-			return {}
-		end
+		-- upvalues: t_1 (ref)
 		local var1 = if p1 ~= nil then nil else t_1[p1]
 		
 		return if var1 == nil then {} else { step = var1 }
 	end,
 	makeToolField = function(p1)
-		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref)
-		return if getFFlagMomentsAnalyticsProducerPrereqs() then if p1 == nil or p1.kind == nil then {} else { tool = p1.kind } else {}
+		return if p1 == nil or p1.kind == nil then {} else { tool = p1.kind }
 	end,
 	makeToolFieldFromKind = function(p1)
-		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref)
-		return if getFFlagMomentsAnalyticsProducerPrereqs() then if p1 == nil then {} else { tool = p1 } else {}
+		return if p1 == nil then {} else { tool = p1 }
 	end,
 	makeCreationBaseFields = function(p1)
-		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref)
-		return if getFFlagMomentsAnalyticsProducerPrereqs() then if p1 == nil then {} else { creationSessionId = p1 } else {}
+		return if p1 == nil then {} else { creationSessionId = p1 }
 	end,
 	makeCaptureDescriptorFields = function(p1)
-		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref)
 		local t = {
 			sourcePlaceId = tostring(p1.SourcePlaceId),
 			localId = tostring(p1.LocalId)
 		}
 		local captureType = p1.CaptureType
 		t.captureType = if typeof(captureType) == "EnumItem" then captureType.Name elseif captureType == nil then nil else tostring(captureType)
+		t.universeId = tostring(p1.SourceUniverseId)
 		
-		if getFFlagMomentsAnalyticsProducerPrereqs() then
-			t.universeId = tostring(p1.SourceUniverseId)
-		end
 		return t
 	end,
 	makeGeneratedTextOutcomeFields = function(p1, p2, p3, p4)

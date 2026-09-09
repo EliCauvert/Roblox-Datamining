@@ -6,7 +6,6 @@ local fFlagAXCatalogM41Props = avatarExperienceFlagsModule.FFlagAXCatalogM41Prop
 local fFlagAXCatalogM41FullMasks = avatarExperienceFlagsModule.FFlagAXCatalogM41FullMasks
 local fFlagAXCatalogM41HandAndArm = avatarExperienceFlagsModule.FFlagAXCatalogM41HandAndArm
 local fFlagAXFixHandAndArmWidgetApiContext = avatarExperienceFlagsModule.FFlagAXFixHandAndArmWidgetApiContext
-local fFlagDynamicHeadsMigration = avatarExperienceFlagsModule.FFlagDynamicHeadsMigration
 
 return if fFlagAXCatalogBodySuits then enumerateModule(script.Name, {
 	Featured = "Featured",
@@ -38,8 +37,6 @@ return if fFlagAXCatalogBodySuits then enumerateModule(script.Name, {
 	FullBodies = "Full Bodies",
 	Heads = "Heads",
 	Hair = "Hair",
-	ClassicHeads = if not fFlagDynamicHeadsMigration then "Classic Heads" else nil,
-	ClassicFaces = if not fFlagDynamicHeadsMigration then "Classic Faces" else nil,
 	MakeupLooks = "Makeup Looks",
 	EyeMakeup = "Eye Makeup",
 	FaceMakeup = "Face Makeup",
@@ -78,8 +75,6 @@ return if fFlagAXCatalogBodySuits then enumerateModule(script.Name, {
 	FullBodies = "Full Bodies",
 	Heads = "Heads",
 	Hair = "Hair",
-	ClassicHeads = if not fFlagDynamicHeadsMigration then "Classic Heads" else nil,
-	ClassicFaces = if not fFlagDynamicHeadsMigration then "Classic Faces" else nil,
 	MakeupLooks = "Makeup Looks",
 	EyeMakeup = "Eye Makeup",
 	FaceMakeup = "Face Makeup",

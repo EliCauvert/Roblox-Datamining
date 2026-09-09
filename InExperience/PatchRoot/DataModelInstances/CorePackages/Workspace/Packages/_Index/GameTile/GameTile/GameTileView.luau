@@ -12,12 +12,11 @@ local zoomAnimatedFrameModule = require(gameTile.ZoomAnimatedFrame)
 local gameTileViewConfigModule = require(gameTile.GameTileViewConfig)
 local fFlagLuaAppMigrateGameTileHoverFixes = require(parent.SharedFlags).FFlagLuaAppMigrateGameTileHoverFixes
 local fFlagLuaAppGameViewTileBackgroundColorOverride = require(parent.SharedFlags).FFlagLuaAppGameViewTileBackgroundColorOverride
-local fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone = require(parent.SharedFlags).FFlagLuaAppHomeFirstTileThumbnailLoadedMilestone
 local fFlagLuaAppHomePageFirstImageLoadObserver = require(parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
 local useTokens = require(parent.Foundation).Hooks.useTokens
 
 return function(p1)
-	-- upvalues: useDesignTokens (ref), useTokens (ref), gameTileViewConfigModule (ref), useCursor (ref), fFlagLuaAppMigrateGameTileHoverFixes (ref), fFlagLuaAppGameViewTileBackgroundColorOverride (ref), reactModule (ref), zoomAnimatedFrameModule (ref), imageSetLabel (ref), images (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), loadableImage (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), rightAlignedButtonWrapperModule (ref)
+	-- upvalues: useDesignTokens (ref), useTokens (ref), gameTileViewConfigModule (ref), useCursor (ref), fFlagLuaAppMigrateGameTileHoverFixes (ref), fFlagLuaAppGameViewTileBackgroundColorOverride (ref), reactModule (ref), zoomAnimatedFrameModule (ref), imageSetLabel (ref), images (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), loadableImage (ref), rightAlignedButtonWrapperModule (ref)
 	local var1 = useDesignTokens()
 	local var2 = if p1.isUnifiedGameTile then p1.numLinesForTitle or 1 else nil
 	local numLinesForMetadata = p1.numLinesForMetadata or 1
@@ -173,8 +172,7 @@ return function(p1)
 			Size = UDim2.new(1, 0, 1, if p1.isContained and not isUnifiedGameTile then var4 else 0),
 			cornerRadius = uDim,
 			ScaleType = if p1.isContained and not isUnifiedGameTile then Enum.ScaleType.Tile else nil,
-			TileSize = if p1.isContained and not isUnifiedGameTile then UDim2.new(1, 0, 1, -var4) else nil,
-			onLoaded = if fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone then p1.onTileImageLoaded else nil
+			TileSize = if p1.isContained and not isUnifiedGameTile then UDim2.new(1, 0, 1, -var4) else nil
 		})
 	end
 	local createElement_7

@@ -177,6 +177,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation contien
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,"En CurveAnimation, las partes del cuerpo no pueden estar a menos de {minHeight} studs ni a más de {maxDistance} studs de la HumanoidRootPart. Corrige la animación."
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,Los elementos secundarios MarkerCurves y AnimationRigData de CurveAnimation no pueden tener elementos secundarios.
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"La jerarquía de CurveAnimation contiene Scripts, LocalScripts o ModuleScripts. Elimínalos."
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,CurveAnimation contiene una carpeta duplicada de parte del cuerpo “{bodyPartName}” en “{instancePath}”. Cada parte del cuerpo puede aparecer como máximo una vez en la jerarquía de la animación.
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,Error al cargar los datos de CurveAnimation. Es posible que el recurso de animación no sea válido o no se pueda acceder a él.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation contiene la carpeta de parte del cuerpo {folderName} que tiene una jerarquía no válida (tiene elementos secundarios que no están permitidos o que están configurados incorrectamente).
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"La carpeta “{boneName}” en CurveAnimation no es un nombre de hueso HRD/DRD reconocido. Las subcarpetas de animación deben ser partes del cuerpo R15 válidas o nombres de huesos reconocidos (por ejemplo, HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase o huesos de los dedos, como LeftHandIndex1)."
@@ -204,6 +205,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation cont
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"En CurveAnimation, en el segundo {time}, la parte del cuerpo {bodyPart} se mueve a una velocidad de rotación de {speed} grados por segundo. {maxSpeed} es la velocidad máxima en grados por segundo. Corrige la animación."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"En CurveAnimation, en el segundo{time}, la parte del cuerpo {bodyPart} se mueve a una velocidad de {speed} studs por segundo. {maxSpeed} es la velocidad máxima en studs por segundo. Corrige la animación."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,"En CurveAnimation, la parte del cuerpo {bodyPart} se mueve más de {maxMovement} studs entre fotogramas. Corrige la animación."
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,La estructura de CurveAnimation no es válida: {detail}. Asegúrate de que la animación siga el esquema esperado.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation tiene {count} descendientes. El máximo permitido es {maxAllowed}. Reduce el número de descendientes.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation contiene Curves con demasiadas claves. {maxAllowed} es el máximo por Curve. Corrige la animación.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation contiene más de {maxAllowed} MarkerCurve(s). Asegúrate de que no haya más de {maxAllowed} MarkerCurve(s) secundario(s).
@@ -1232,16 +1234,19 @@ Feature.AccountSettings.Message.Error.InvalidGuildedUrl,La URL del perfil de Gui
 Feature.AccountSettings.Message.Error.InvalidTwitchUrl,La URL del perfil de Twitch no es válida.
 Feature.AccountSettings.Message.Error.InvalidXUrl,El nombre de usuario de X no es válido.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,La URL de YouTube no es válida.
+Feature.AddFriends.Action.FriendAdded,Amistad añadida
 Feature.AddFriends.Action.IgnoreConnectionRequest,Ignorar solicitud de conexión
 Feature.AddFriends.Action.IgnoreFriendRequest,Ignorar solicitud de amistad
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignorar solicitud de amistad de confianza
 Feature.AddFriends.Action.RequestIgnored,Solicitud ignorada
+Feature.AddFriends.Label.AddFriendsTooltip,Comienza encontrando a tus amigos para que puedan explorar Roblox juntos.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Encuentra gente en Roblox buscando por su nombre de usuario o nombre.
 Feature.AddFriends.Label.ConnectWithContacts,Invita a contactos o conecta con amigos que ya están en Roblox.
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Buscar personas
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.SearchForFriendsPrompt,Busca personas en Roblox a través de su nombre de usuario o de su nombre de visualización.
 Feature.AddFriends.Label.SyncWithContacts,Sincroniza tus contactos para encontrar e invitar a amigos
+Feature.AddFriends.Title.AddFriendsTooltipTitle,¡Roblox es mejor si lo disfrutas con tus amigos!
 Feature.AddFriends.Title.ConnectWithContacts,Añadir de Contactos
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,Accede a más contenido y funciones.
 Feature.AgeVerificationUpsell.Button.Cancel,
@@ -1341,6 +1346,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Alcanzaste tu lími
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Esa indicación no cumple con nuestras pautas. Intenta describir otra cosa.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Este fondo no cumple con las Normas de la comunidad de Roblox, por lo que no se añadió a tu inventario. Intenta generar uno nuevo."
 Feature.Avatar.BackgroundGeneration.Error.System,Algo salió mal al generar tu fondo. Inténtalo de nuevo.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,Alcanzaste tu límite de publicaciones de por vida.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,Alcanzaste tu límite diario de publicaciones. Inténtalo de nuevo mañana.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,Alcanzaste tu límite de publicación por hora. Inténtalo de nuevo la próxima hora.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,Alcanzaste tu límite mensual de publicaciones. Inténtalo de nuevo el próximo mes.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exclusivo con Plus
@@ -2049,7 +2058,7 @@ Feature.Build.Label.InProgress,En curso
 Feature.Build.Label.InputNeeded,Se necesita una entrada
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitado
-Feature.Build.Label.Live,En vivo
+Feature.Build.Label.Live,Publicada
 Feature.Build.Label.Loading,Cargando…
 Feature.Build.Label.ManagedPricing,Precios administrados
 Feature.Build.Label.ManagedPricingMixed,Combinado entre los productos actuales
@@ -2071,7 +2080,7 @@ Feature.Build.Label.PricingOptions,Opciones de precios
 Feature.Build.Label.Private,Privada
 Feature.Build.Label.Public,Público
 Feature.Build.Label.PubliclyUnavailable,No disponible públicamente
-Feature.Build.Label.Published,Publicada
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,
 Feature.Build.Label.RegionalPricing,Precio regional
@@ -3062,7 +3071,8 @@ Feature.Friends.Action.Close,
 Feature.Friends.Action.ConnectionAdded,Conexión añadida
 Feature.Friends.Action.ConnectionRequestSent,Solicitud de conexión enviada
 Feature.Friends.Action.EditProfile,Editar perfil
-Feature.Friends.Action.FriendAdded,Amistad añadida
+Feature.Friends.Action.FindFriends,
+Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,Amistad eliminada
 Feature.Friends.Action.FriendRequestSent,Solicitud de amistad enviada
 Feature.Friends.Action.GetStarted,Primeros pasos
@@ -3153,9 +3163,10 @@ Feature.Friends.Label.IntroducingConnections,Presentamos las Conexiones
 Feature.Friends.Label.JoinedInYear,Se unió en {year}
 Feature.Friends.Label.ManageFriendsList,Gestiona tu lista de amigos
 Feature.Friends.Label.ManageFriendsListCaption,Revisa las amistades con las que has interactuado el menor número de veces para mantener actualizada tu lista de amigos.
+Feature.Friends.Label.MultipleMutuals,{numConnections} conexiones en común
 Feature.Friends.Label.MutualConnection,1 conexión en común
 Feature.Friends.Label.MutualConnectionTitle,1 conexión mutua
-Feature.Friends.Label.MutualConnections,{numConnections} conexiones en común
+Feature.Friends.Label.MutualConnections,
 Feature.Friends.Label.MutualConnectionsTitle,{numConnections} conexiones mutuas
 Feature.Friends.Label.MutualFriendTitle,1 amistad en común
 Feature.Friends.Label.MutualFriends,Amigos en común
@@ -3165,6 +3176,7 @@ Feature.Friends.Label.NewFriend,Amigo nuevo
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
 Feature.Friends.Label.NoFriendsYet,{name} aún no tiene amistades.
 Feature.Friends.Label.NowTrusted,{username} ahora es una amistad de confianza
+Feature.Friends.Label.OneMutual,
 Feature.Friends.Label.PYMK,Personas que quizás conozcas
 Feature.Friends.Label.Pending,
 Feature.Friends.Label.PlayedByUser,Jugado por <b>{name}</b>

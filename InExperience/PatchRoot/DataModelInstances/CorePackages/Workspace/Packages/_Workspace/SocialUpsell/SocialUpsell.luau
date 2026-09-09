@@ -10,9 +10,6 @@ return {
 		SocialUpsellAnalytics = require(script.Analytics.SocialUpsellAnalytics),
 		Enum = require(script.Analytics.Enum)
 	},
-	Flags = {
-		FFlagAddAEGIS2Analytics = require(script.Flag.FFlagAddAEGIS2Analytics)
-	},
 	Enum = require(script.Enum),
 	Utils = {
 		createCommonSocialUpsellBannerConfig = require(script.Utils.createCommonSocialUpsellBannerConfig),

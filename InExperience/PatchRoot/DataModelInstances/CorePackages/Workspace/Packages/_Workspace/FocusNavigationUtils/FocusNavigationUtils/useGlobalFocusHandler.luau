@@ -6,9 +6,7 @@ local parent = focusNavigationUtils.Parent
 local reactModule = require(parent.React)
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local messageBus = require(parent.MessageBus).MessageBus
-local loggingProtocolModule = require(parent.LoggingProtocol)
 local navigationModule = require(parent.Navigation)
-local mutedError = require(parent.Loggers).mutedError
 local responsiveModule = require(parent.Responsive)
 local sessionType = require(parent.Sessionization).SessionType
 local useLastInputMethodModule = require(focusNavigationUtils.useLastInputMethod)
@@ -21,7 +19,6 @@ local useAutoFocusModule = require(focusNavigationUtils.useAutoFocus)
 local useDescendantHasFocusModule = require(focusNavigationUtils.useDescendantHasFocus)
 local globalFocusTelemetryModule = require(focusNavigationUtils.GlobalFocusTelemetry)
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local tenFootUiCorrectAutoFocusLoggingBehavior = game:DefineFastFlag("TenFootUiCorrectAutoFocusLoggingBehavior", false)
 local autoFocusFailsafeThreshold = game:DefineFastInt("AutoFocusFailsafeThreshold", 5)
 local fFlagEnablePeekViewFocusNav = require(parent.SharedFlags).FFlagEnablePeekViewFocusNav
 local fFlagAXMigrateAXToGlobalAutofocus = require(parent.SharedFlags).FFlagAXMigrateAXToGlobalAutofocus
@@ -30,7 +27,6 @@ local fFlagAppIaHomeSubTab = sharedFlagsModule.FFlagAppIaHomeSubTab
 local fFlagLuaAppResponsiveEnginePreferredInput = sharedFlagsModule.FFlagLuaAppResponsiveEnginePreferredInput
 local fFlagLuaAppsDefaultSelection = sharedFlagsModule.FFlagLuaAppsDefaultSelection
 local fFlagEnableDrawerFocusNav = sharedFlagsModule.FFlagEnableDrawerFocusNav
-local globalFocusFailureTelemetry = game:DefineFastFlag("GlobalFocusFailureTelemetry", false)
 local t = {
 	[Enum.UserInputType.MouseButton1] = true,
 	[Enum.UserInputType.MouseButton2] = true,
@@ -38,27 +34,23 @@ local t = {
 	[Enum.UserInputType.Touch] = true
 }
 local var1 = messageBus.Subscriber.new()
-local default = loggingProtocolModule.default
 
 local function gameLeaveMessageValidator(p1)
 	return typeof(p1) == "table"
 end
 
 local function _(p1)
-	-- upvalues: globalFocusFailureTelemetry (ref), runService (ref), autoFocusFailsafeThreshold (ref)
-	local var2 = if globalFocusFailureTelemetry then false else nil
+	-- upvalues: runService (ref), autoFocusFailsafeThreshold (ref)
+	local var2 = false
 	local var3 = 0
 	
 	return runService.Heartbeat:Connect(function(p2)
-		-- upvalues: var3 (write), autoFocusFailsafeThreshold (copy), globalFocusFailureTelemetry (copy), var2 (write), p1 (ref)
+		-- upvalues: var3 (write), autoFocusFailsafeThreshold (copy), var2 (write), p1 (ref)
 		var3 += p2
 		
-		if autoFocusFailsafeThreshold < var3 and (not globalFocusFailureTelemetry or not var2) then
+		if autoFocusFailsafeThreshold < var3 and not var2 then
 			p1()
-			
-			if globalFocusFailureTelemetry then
-				var2 = true
-			end
+			var2 = true
 			var3 = 0
 		end
 	end)
@@ -89,21 +81,21 @@ local function createGameLeaveSubscription(p1)
 end
 
 return function(p1)
-	-- upvalues: useLastInputMethodModule (ref), useFocusGuiObject (ref), useFocusedGuiObject (ref), reactModule (ref), globalFocusFailureTelemetry (ref), useLastInputModeModule (ref), fFlagLuaAppResponsiveEnginePreferredInput (ref), responsiveModule (ref), sessionService (ref), sessionType (ref), globalFocusTelemetryModule (ref), userInputService (ref), t (ref), navigationModule (ref), useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnumModule (ref), fFlagEnablePeekViewFocusNav (ref), fFlagAXMigrateAXToGlobalAutofocus (ref), fFlagAppIaHomeSubTab (ref), fFlagEnableDrawerFocusNav (ref), useAutoFocusModule (ref), useDescendantHasFocusModule (ref), fFlagLuaAppsDefaultSelection (ref), useSelector (ref), tenFootUiCorrectAutoFocusLoggingBehavior (ref), mutedError (ref), default (ref), runService (ref), autoFocusFailsafeThreshold (ref), createGameLeaveSubscription (ref)
+	-- upvalues: useLastInputMethodModule (ref), useFocusGuiObject (ref), useFocusedGuiObject (ref), reactModule (ref), useLastInputModeModule (ref), fFlagLuaAppResponsiveEnginePreferredInput (ref), responsiveModule (ref), sessionService (ref), sessionType (ref), globalFocusTelemetryModule (ref), userInputService (ref), t (ref), navigationModule (ref), useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnumModule (ref), fFlagEnablePeekViewFocusNav (ref), fFlagAXMigrateAXToGlobalAutofocus (ref), fFlagAppIaHomeSubTab (ref), fFlagEnableDrawerFocusNav (ref), useAutoFocusModule (ref), useDescendantHasFocusModule (ref), fFlagLuaAppsDefaultSelection (ref), useSelector (ref), runService (ref), autoFocusFailsafeThreshold (ref), createGameLeaveSubscription (ref)
 	local var2 = useLastInputMethodModule()
 	local var3 = useFocusGuiObject()
 	local var4 = useFocusedGuiObject()
 	local var5 = reactModule.useRef(var4)
-	local var6 = if globalFocusFailureTelemetry then reactModule.useRef(false) else nil
+	local var6 = reactModule.useRef(false)
 	local isFocus = useLastInputModeModule() == "Focus"
 	local var7 = if fFlagLuaAppResponsiveEnginePreferredInput then responsiveModule.usePreferredInput() else nil
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var5 (ref), sessionService (copy), sessionType (copy), var2 (ref), globalFocusFailureTelemetry (copy), var6 (ref), globalFocusTelemetryModule (copy)
+		-- upvalues: var4 (ref), var5 (ref), sessionService (copy), sessionType (copy), var2 (ref), var6 (ref), globalFocusTelemetryModule (copy)
 		if var4 ~= nil and var5.current == nil then
 			sessionService:SetSession(sessionType.StructuralIdentifier.Level1, sessionType.StructuralIdentifier.FocusNavigation, var2)
 			var5.current = var4
 		end
-		if globalFocusFailureTelemetry and var4 ~= nil and var6.current then
+		if var4 ~= nil and var6.current then
 			globalFocusTelemetryModule.sendAutoFocusRecoveryCounter()
 			var6.current = false
 		end
@@ -141,22 +133,17 @@ return function(p1)
 			var3(nil)
 		end
 	end, { var10, isFocus })
-	local var12 = nil
-	local var13 = nil
-	
-	if globalFocusFailureTelemetry then
-		var12 = reactModule.useRef(nil)
-		var13 = reactModule.useRef(nil)
-		local currentRouteState = navigationModule.getCurrentRouteState(var8)
-		local var14 = if currentRouteState then currentRouteState.routeName else nil
-		reactModule.useEffect(function()
-			-- upvalues: var14 (ref), var12 (write), var13 (write)
-			if var14 ~= var12.current then
-				var13.current = var12.current
-				var12.current = var14
-			end
-		end, { var14 })
-	end
+	local var12 = reactModule.useRef(nil)
+	local var13 = reactModule.useRef(nil)
+	local currentRouteState = navigationModule.getCurrentRouteState(var8)
+	local var14 = if currentRouteState then currentRouteState.routeName else nil
+	reactModule.useEffect(function()
+		-- upvalues: var14 (ref), var12 (ref), var13 (ref)
+		if var14 ~= var12.current then
+			var13.current = var12.current
+			var12.current = var14
+		end
+	end, { var14 })
 	local var15 = useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.NavBar)
 	local var16 = useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.RouterView)
 	local var17 = useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.CentralOverlay)
@@ -258,13 +245,13 @@ return function(p1)
 			var3
 		})
 	end
-	local var44 = if globalFocusFailureTelemetry then useSelector(function(p2)
+	local var44 = useSelector(function(p2)
 		return p2.CentralOverlay.OverlayType
-	end) else nil
+	end)
 	local var45 = if fFlagLuaAppResponsiveEnginePreferredInput then if var7 ~= responsiveModule.Input.Directional then isFocus else true else isFocus
 	var45 = var45 and (not var41 and not p1)
 	reactModule.useEffect(function()
-		-- upvalues: var28 (ref), var45 (ref), globalFocusFailureTelemetry (copy), globalFocusTelemetryModule (copy), var27 (ref), var4 (ref), var42 (write), var18 (ref), var17 (ref), var20 (ref), var19 (ref), var22 (ref), var16 (ref), var23 (ref), var15 (ref), var21 (ref), var24 (ref), var25 (ref), var13 (write), var12 (write), var44 (ref), var6 (ref), tenFootUiCorrectAutoFocusLoggingBehavior (copy), mutedError (copy), default (copy), runService (copy), autoFocusFailsafeThreshold (copy), createGameLeaveSubscription (copy)
+		-- upvalues: var28 (ref), var45 (ref), globalFocusTelemetryModule (copy), var27 (ref), var4 (ref), var42 (write), var18 (ref), var17 (ref), var20 (ref), var19 (ref), var22 (ref), var16 (ref), var23 (ref), var15 (ref), var21 (ref), var24 (ref), var25 (ref), var13 (ref), var12 (ref), var44 (ref), var6 (ref), runService (copy), autoFocusFailsafeThreshold (copy), createGameLeaveSubscription (copy)
 		local var46 = nil
 		local heartbeatConnection = nil
 		
@@ -280,46 +267,38 @@ return function(p1)
 			var46 = var28()
 			
 			local var47 = function()
-				-- upvalues: globalFocusFailureTelemetry (copy), globalFocusTelemetryModule (copy), var27 (copy), var4 (copy), var42 (copy), var18 (copy), var17 (copy), var20 (copy), var19 (copy), var22 (copy), var16 (copy), var23 (copy), var15 (copy), var21 (copy), var24 (copy), var25 (copy), var13 (copy), var12 (copy), var44 (copy), var6 (copy), tenFootUiCorrectAutoFocusLoggingBehavior (copy), mutedError (copy), default (copy), var46 (write), var28 (copy)
-				if globalFocusFailureTelemetry then
-					globalFocusTelemetryModule.sendAutoFocusFailureCounter(var27)
-					globalFocusTelemetryModule.sendAutoFocusFailureEvent(var4, if var42 then var42.current else {}, var27, {
-						moderationOverlay = var18,
-						centralOverlay = var17,
-						contextualMenu = var20,
-						popUp = var19,
-						peekView = var22,
-						routerView = var16,
-						subRouterView = var23,
-						globalNavBar = var15,
-						searchBar = var21,
-						auxiliaryView = var24,
-						headerView = var25
-					}, if var13 then var13.current else nil, if var12 then var12.current else nil, var44)
-					var6.current = true
-				elseif tenFootUiCorrectAutoFocusLoggingBehavior then
-					mutedError("[useGlobalFocusHandler] globalFocusHandler failed to autofocus with " .. #var27 .. " targets, retrying")
-				else
-					default:logEvent("GamePadFocusFailsafeActivated", { targetCount = #var27 })
-				end
+				-- upvalues: globalFocusTelemetryModule (copy), var27 (copy), var4 (copy), var42 (copy), var18 (copy), var17 (copy), var20 (copy), var19 (copy), var22 (copy), var16 (copy), var23 (copy), var15 (copy), var21 (copy), var24 (copy), var25 (copy), var13 (copy), var12 (copy), var44 (copy), var6 (copy), var46 (write), var28 (copy)
+				globalFocusTelemetryModule.sendAutoFocusFailureCounter(var27)
+				globalFocusTelemetryModule.sendAutoFocusFailureEvent(var4, if var42 then var42.current else {}, var27, {
+					moderationOverlay = var18,
+					centralOverlay = var17,
+					contextualMenu = var20,
+					popUp = var19,
+					peekView = var22,
+					routerView = var16,
+					subRouterView = var23,
+					globalNavBar = var15,
+					searchBar = var21,
+					auxiliaryView = var24,
+					headerView = var25
+				}, var13.current, var12.current, var44)
+				var6.current = true
+				
 				if var46 then
 					var46.cancel()
 				end
 				var46 = var28()
 			end
 			
-			local var48 = if globalFocusFailureTelemetry then false else nil
+			local var48 = false
 			local var49 = 0
 			heartbeatConnection = runService.Heartbeat:Connect(function(p2)
-				-- upvalues: var49 (write), autoFocusFailsafeThreshold (copy), globalFocusFailureTelemetry (copy), var48 (write), var47 (ref)
+				-- upvalues: var49 (write), autoFocusFailsafeThreshold (copy), var48 (write), var47 (ref)
 				var49 += p2
 				
-				if autoFocusFailsafeThreshold < var49 and (not globalFocusFailureTelemetry or not var48) then
+				if autoFocusFailsafeThreshold < var49 and not var48 then
 					var47()
-					
-					if globalFocusFailureTelemetry then
-						var48 = true
-					end
+					var48 = true
 					var49 = 0
 				end
 			end)

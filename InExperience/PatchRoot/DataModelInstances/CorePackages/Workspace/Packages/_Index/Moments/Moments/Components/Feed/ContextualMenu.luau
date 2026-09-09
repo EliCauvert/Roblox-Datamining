@@ -34,7 +34,6 @@ local signalActionTypeModule = require(moments.Enums.SignalActionType)
 local fFlagMomentsIPReporting = sharedFlagsModule.FFlagMomentsIPReporting
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
-local fFlagMomentsReportWithFeedId = sharedFlagsModule.FFlagMomentsReportWithFeedId
 local reportMomentDialogModule = require(moments.Components.Feed.ReportMomentDialog)
 local ipReportConfirmationDialogModule = require(moments.Components.Feed.IpReportConfirmationDialog)
 local useMomentsHost = require(moments.MomentsHostContext).useMomentsHost
@@ -51,7 +50,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), useFeed (ref), useMomentsHost (ref), useToggleState (ref), fFlagMomentsIPReporting (ref), reactModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), getModeratedItemsStoreModule (ref), getToastStoreModule (ref), signalsReactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), checkDebugAccessModule (ref), reportMomentModule (ref), fFlagMomentsReportWithFeedId (ref), makeRecommendationAttributionModule (ref), signalActionTypeModule (ref), makeFeedActionFieldsModule (ref), getPostFeedItemIdModule (ref), reportModalCovering (ref), localPlayer (ref), foundationModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), menu (ref), iconButton (ref), threeDotsVertical (ref), reportMomentDialogModule (ref), ipReportConfirmationDialogModule (ref), view (ref), speakerSlash (ref), speaker (ref)
+	-- upvalues: useLocalization (ref), t (ref), useFeed (ref), useMomentsHost (ref), useToggleState (ref), fFlagMomentsIPReporting (ref), reactModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), getModeratedItemsStoreModule (ref), getToastStoreModule (ref), signalsReactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), checkDebugAccessModule (ref), reportMomentModule (ref), makeRecommendationAttributionModule (ref), signalActionTypeModule (ref), makeFeedActionFieldsModule (ref), getPostFeedItemIdModule (ref), reportModalCovering (ref), localPlayer (ref), foundationModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), menu (ref), iconButton (ref), threeDotsVertical (ref), reportMomentDialogModule (ref), ipReportConfirmationDialogModule (ref), view (ref), speakerSlash (ref), speaker (ref)
 	local var1 = useLocalization(t)
 	local var2 = useFeed()
 	local openMomentsFeedReport = useMomentsHost().openMomentsFeedReport
@@ -116,7 +115,7 @@ return function(p1)
 		var3.disable()
 	end, { var3.disable, var18.toggleFeedDebugMode })
 	local var26 = reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: p1 (ref), fFlagMomentsIPReporting (copy), reportMomentModule (copy), fFlagMomentsReportWithFeedId (copy), makeRecommendationAttributionModule (copy), var2 (ref), signalActionTypeModule (copy), makeFeedActionFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), var19 (ref), var20 (ref), var1 (ref)
+		-- upvalues: p1 (ref), fFlagMomentsIPReporting (copy), reportMomentModule (copy), makeRecommendationAttributionModule (copy), var2 (ref), signalActionTypeModule (copy), makeFeedActionFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), var19 (ref), var20 (ref), var1 (ref)
 		if not p1.moment then
 			return nil
 		end
@@ -126,8 +125,8 @@ return function(p1)
 		
 		if not p4 then
 			local ok, status, var30 = pcall(function()
-				-- upvalues: fFlagMomentsIPReporting (copy), reportMomentModule (copy), fFlagMomentsReportWithFeedId (copy), p1 (copy), p2 (ref)
-				return if fFlagMomentsIPReporting then reportMomentModule(if fFlagMomentsReportWithFeedId then p1.moment.recommendationMetadata.feedItemId else p1.moment.momentId, p2):await() else reportMomentModule(if fFlagMomentsReportWithFeedId then p1.moment.recommendationMetadata.feedItemId else p1.moment.momentId):await()
+				-- upvalues: fFlagMomentsIPReporting (copy), reportMomentModule (copy), p1 (copy), p2 (ref)
+				return if fFlagMomentsIPReporting then reportMomentModule(p1.moment.recommendationMetadata.feedItemId, p2):await() else reportMomentModule(p1.moment.recommendationMetadata.feedItemId):await()
 			end)
 			var27 = ok
 			var28 = status
@@ -234,7 +233,7 @@ return function(p1)
 		align = foundationModule.Enums.PopoverAlign.End,
 		isOpen = var3.enabled,
 		items = reactModule.useMemo(function()
-			-- upvalues: var21 (ref), var1 (ref), var23 (ref), var22 (ref), var24 (ref), p1 (ref), localPlayer (copy), fFlagMomentsReportWithFeedId (copy), foundationModule (copy), var27 (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), var30 (ref), checkDebugAccessModule (copy), var25 (ref)
+			-- upvalues: var21 (ref), var1 (ref), var23 (ref), var22 (ref), var24 (ref), p1 (ref), localPlayer (copy), foundationModule (copy), var27 (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), var30 (ref), checkDebugAccessModule (copy), var25 (ref)
 			local list = {
 				{
 					id = "details",
@@ -251,7 +250,7 @@ return function(p1)
 			}
 			local var33 = p1.moment.recommendationMetadata ~= nil and (p1.moment.recommendationMetadata.feedItemId ~= nil and p1.moment.recommendationMetadata.feedItemId ~= "")
 			
-			if p1.moment.creatorId ~= (if localPlayer then localPlayer.UserId else nil) and (not fFlagMomentsReportWithFeedId or var33) then
+			if p1.moment.creatorId ~= (if localPlayer then localPlayer.UserId else nil) and var33 then
 				table.insert(list, {
 					id = "reportAbuse",
 					icon = foundationModule.Enums.IconName.Flag,

@@ -271,7 +271,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,{partName}メッシュ�
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,{partName}メッシュ{axis}軸サイズの{currentSize}スタッドが、個々のパーツの最小許容サイズ{minSize}スタッドより小さくなっています。メッシュを拡大してください。
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,アタッチメント{attName}は、{partName}の子孫要素内に正確に1回だけ存在する必要があります。
 Common.UGCValidation.ErrorLabel.NoAttributes,「{RootInstanceName}」（またはその子孫）に属性が含まれています。「{InstanceNameList}」から属性を削除する必要があります。
-Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName}「{InstancePath}}」に無効なプロパティがあります：{ProblematicProperties}。表示されているバイト数の上限を超えています（上限が0の場合、そのプロパティは空である必要があります）。それ以外のプロパティにはNaN/Inf値が含まれているか、デフォルトのサイズ上限を超えています。
+Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName}「{InstancePath}」に無効なプロパティがあります：{ProblematicProperties}。表示されているバイト数の上限を超えています（上限が0の場合、そのプロパティは空である必要があります）。それ以外のプロパティにはNaN/Inf値が含まれているか、デフォルトのサイズ上限を超えています。
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,「{PartName}」のリグアタッチメント「{AttachmentName}」は、このボディパーツの隣接パーツに接続するジョイント境界の近くに配置する必要があります。現在の位置[{CurrentPosition}]は接続面から離れすぎています。[{ClosestValidPosition}]に近づけてください。
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Robloxにアセットをアップロードするには、必ず1件のインスタンスと関連したアップロードタイプを選択する必要があります。
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,このアセットは大きすぎるためアップロードできません（{sizeBytes}バイト。上限は{maxSizeBytes}バイトです）。サイズを小さくしてから、もう一度お試しください。
@@ -1233,16 +1233,19 @@ Feature.AccountSettings.Message.Error.InvalidGuildedUrl,Guilded のプロフィ�
 Feature.AccountSettings.Message.Error.InvalidTwitchUrl,TwitchのプロフィールページのURLが無効です。
 Feature.AccountSettings.Message.Error.InvalidXUrl,Xのユーザー名が無効です。
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,YouTubeのURLが無効です。
+Feature.AddFriends.Action.FriendAdded,友達が追加されました
 Feature.AddFriends.Action.IgnoreConnectionRequest,つながりリクエストを無視
 Feature.AddFriends.Action.IgnoreFriendRequest,友達リクエストを無視
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,信頼できる友達リクエストを無視
 Feature.AddFriends.Action.RequestIgnored,リクエストを無視しました
+Feature.AddFriends.Label.AddFriendsTooltip,まずは友達を見つけることから始めましょう。Robloxを一緒に楽しめます。
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Robloxで人を見つけるには、ユーザーネームか名前で検索してください。
 Feature.AddFriends.Label.ConnectWithContacts,連絡先にある人を招待するか、すでに知っている友達とロブロックスでつながりましょう！
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,人を探す
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,人をサーチ
 Feature.AddFriends.Label.SearchForFriendsPrompt,Robloxで人を見つけるには、ユーザーネームや表示名で検索してください。
 Feature.AddFriends.Label.SyncWithContacts,連絡先を同期して友達を見つけて招待しましょう！
+Feature.AddFriends.Title.AddFriendsTooltipTitle,友達と一緒なら、Robloxをもっと楽しめます！
 Feature.AddFriends.Title.ConnectWithContacts,連絡先で追加
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,より多くのコンテンツや機能を使えるようにしましょう。
 Feature.AgeVerificationUpsell.Button.Cancel,
@@ -1996,6 +1999,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,"詳細は1,000文字以�
 Feature.Build.Error.DeveloperProductNameRequired,製品名を入力してください。
 Feature.Build.Error.DeveloperProductNameTooLong,名前は50文字以下にしてください。
 Feature.Build.Error.DeveloperProductPriceInvalid,"価格は1から1,000,000,000 Robuxまでの整数にしてください。"
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,製品を販売する前に、[編集]を選択して価格を追加してください。
 Feature.Build.Error.DeveloperProductTextModerated,Robloxの内容審査により、この製品のテキストが変更されました。別の表現を試してください。
 Feature.Build.Error.ManagedPricingPartialUpdate,一部の製品を更新できませんでした。
 Feature.Build.Error.MonetizationOptionUpdate,オプションを更新できませんでした。もう一度お試しください。
@@ -2054,7 +2058,7 @@ Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,入力が必要です
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,限定
-Feature.Build.Label.Live,公開中
+Feature.Build.Label.Live,公開済み
 Feature.Build.Label.Loading,読み込み中...
 Feature.Build.Label.ManagedPricing,管理価格設定
 Feature.Build.Label.ManagedPricingMixed,既存の製品で設定が混在
@@ -2076,7 +2080,7 @@ Feature.Build.Label.PricingOptions,価格設定オプション
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,
 Feature.Build.Label.PubliclyUnavailable,公開不可
-Feature.Build.Label.Published,公開済み
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,準備完了
 Feature.Build.Label.RegionalPricing,地域別価格設定
@@ -3067,7 +3071,8 @@ Feature.Friends.Action.Close,
 Feature.Friends.Action.ConnectionAdded,つながりを追加しました
 Feature.Friends.Action.ConnectionRequestSent,つながりリクエストを送信しました
 Feature.Friends.Action.EditProfile,プロフィールを編集
-Feature.Friends.Action.FriendAdded,友達が追加されました
+Feature.Friends.Action.FindFriends,
+Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,友達が削除されました
 Feature.Friends.Action.FriendRequestSent,友達リクエストが送信されました
 Feature.Friends.Action.GetStarted,始める
@@ -3158,6 +3163,7 @@ Feature.Friends.Label.IntroducingConnections,「つながり」のご紹介
 Feature.Friends.Label.JoinedInYear,{year} 年に利用開始
 Feature.Friends.Label.ManageFriendsList,友達リストを管理
 Feature.Friends.Label.ManageFriendsListCaption,やりとりが少なかった友達を確認して、友達リストを最新の状態にしておきましょう。
+Feature.Friends.Label.MultipleMutuals,共通のつながり{numConnections}人
 Feature.Friends.Label.MutualConnection,共通のつながり 1人
 Feature.Friends.Label.MutualConnectionTitle,共通のつながり1人
 Feature.Friends.Label.MutualConnections,共通のつながり {numConnections} 人
@@ -3170,6 +3176,7 @@ Feature.Friends.Label.NewFriend,新しい友達
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount} 件以上
 Feature.Friends.Label.NoFriendsYet,{name}さんにはまだ友達がいません。
 Feature.Friends.Label.NowTrusted,{username}さんが信頼する友達になりました
+Feature.Friends.Label.OneMutual,
 Feature.Friends.Label.PYMK,知り合いかも
 Feature.Friends.Label.Pending,
 Feature.Friends.Label.PlayedByUser,<b>{name}</b>さんがプレイ済み

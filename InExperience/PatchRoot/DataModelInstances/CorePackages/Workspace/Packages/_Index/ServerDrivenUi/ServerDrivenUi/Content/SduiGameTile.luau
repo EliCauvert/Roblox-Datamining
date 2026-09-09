@@ -18,7 +18,9 @@ local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiBuilder = sduiCoreSystemModule.SduiBuilder
 local sduiErrors = sduiCoreSystemModule.SduiErrors
 local getSduiComponentWrapper = sduiCoreSystemModule.getSduiComponentWrapper
-local sduiPlayButton = require(parent.SduiSharedContent).SduiPlayButton
+local sduiSharedContentModule = require(parent.SduiSharedContent)
+local sduiPlayButton = sduiSharedContentModule.SduiPlayButton
+local sduiTileOverflowMenu = sduiSharedContentModule.SduiTileOverflowMenu
 local sduiParsers = sduiCoreSystemModule.SduiParsers
 local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
 local useUidRefString = sduiCoreSystemModule.useUidRefString
@@ -30,7 +32,6 @@ local zoomAnimatedFrame = gameTileModule.ZoomAnimatedFrame
 local getGameTileHiddenStore = gameTileModule.getGameTileHiddenStore
 local getOverflowMenuSignalStore = appBloxModule.getOverflowMenuSignalStore
 local sduiTileModule = require(serverDrivenUi.Content.SduiTile)
-local sduiGameTileOverflowMenuModule = require(serverDrivenUi.Content.SduiGameTileOverflowMenu)
 local sduiGameVideoThumbnailModule = require(serverDrivenUi.Content.SduiGameVideoThumbnail)
 local tileHoverShadowModule = require(serverDrivenUi.Content.TileHoverShadow)
 local sduiGameTileFooterModule = require(serverDrivenUi.Content.SduiGameTileFooter)
@@ -43,10 +44,10 @@ local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSdu
 local fFlagLuaAppSduiGameTileFeedback = require(parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local sduiGameTileDisableDefaultPlayButtonOnHover = game:DefineFastFlag("SduiGameTileDisableDefaultPlayButtonOnHover", false)
-local var1 = if fFlagLuaAppSduiGameTileFeedback then signalsModule.createSignal(table.freeze({})) else nil
+local var1 = if fFlagLuaAppSduiGameTileFeedback then signalsModule.createSignal(false) else nil
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), usePreferences (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppSduiGameTileHoverShadow (ref), reactModule (ref), useUidRefString (ref), fFlagLuaAppSduiGameTileFeedback (ref), getGameTileHiddenStore (ref), var1 (write), signalsReactModule (ref), sduiErrors (ref), getInputModeStore (ref), sduiParseHelpers (ref), videoEndReason (ref), sduiParsers (ref), sduiActionType (ref), getOverflowMenuSignalStore (ref), default (ref), responsiveModule (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), sduiGameTileDisableDefaultPlayButtonOnHover (ref), sduiBuilder (ref), fFlagSduiFixSearchTelemetry (ref), findAnalyticsFieldInAncestors (ref), sduiPlayButton (ref), localizeStrings (ref), discoveryAnalyticsModule (ref), sduiHoldToPlayModule (ref), sduiGameTileFooterModule (ref), sduiGameTileOverflowMenuModule (ref), sduiDefaultTileImageModule (ref), sduiGameVideoThumbnailModule (ref), getSduiComponentWrapper (ref), sduiTileModule (ref), cryoModule (ref), zoomAnimatedFrame (ref), tileHoverShadowModule (ref)
+	-- upvalues: useTokens (ref), usePreferences (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppSduiGameTileHoverShadow (ref), reactModule (ref), useUidRefString (ref), fFlagLuaAppSduiGameTileFeedback (ref), var1 (write), getGameTileHiddenStore (ref), signalsModule (ref), signalsReactModule (ref), sduiErrors (ref), getInputModeStore (ref), sduiParseHelpers (ref), videoEndReason (ref), sduiParsers (ref), sduiActionType (ref), getOverflowMenuSignalStore (ref), default (ref), responsiveModule (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), sduiGameTileDisableDefaultPlayButtonOnHover (ref), sduiBuilder (ref), fFlagSduiFixSearchTelemetry (ref), findAnalyticsFieldInAncestors (ref), sduiPlayButton (ref), localizeStrings (ref), discoveryAnalyticsModule (ref), sduiHoldToPlayModule (ref), sduiGameTileFooterModule (ref), sduiTileOverflowMenu (ref), sduiDefaultTileImageModule (ref), sduiGameVideoThumbnailModule (ref), getSduiComponentWrapper (ref), sduiTileModule (ref), cryoModule (ref), zoomAnimatedFrame (ref), tileHoverShadowModule (ref)
 	local var2 = useTokens()
 	local var3 = usePreferences()
 	local enableLegacyHoverState = not fFlagSduiTileDisableLegacyHover and p1.enableLegacyHoverState
@@ -70,7 +71,18 @@ return reactModule.memo(function(p1)
 	
 	if fFlagLuaAppSduiGameTileFeedback then
 		var8 = p1.overflowMenuComponent ~= nil and (p1.collectionId ~= nil and (p1.collectionId ~= "" and p1.hiddenStateComponent ~= nil))
-		var9 = signalsReactModule.useSignalState(if var8 then getGameTileHiddenStore(p1.collectionId).getHiddenGames else var1)[universeId] == true and p1.hiddenStateComponent ~= nil
+		var9 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+			-- upvalues: var8 (write), var1 (copy), getGameTileHiddenStore (copy), p1 (ref), signalsModule (copy), universeId (ref)
+			if var8 then
+				local getHiddenGames = getGameTileHiddenStore(p1.collectionId).getHiddenGames
+				
+				return signalsModule.createComputed(function(p2)
+					-- upvalues: getHiddenGames (ref), universeId (copy)
+					return getHiddenGames(p2)[universeId] == true
+				end)
+			end
+			return var1
+		end, { var8, p1.collectionId, universeId }))
 		triggerFeedback = p1.sduiContext.dependencies.triggerFeedback
 	end
 	local var10 = reactModule.useRef(false)
@@ -86,7 +98,7 @@ return reactModule.memo(function(p1)
 			-- upvalues: sduiParseHelpers (copy), p1 (copy), sduiErrors (copy), getInputModeStore (copy)
 			p1.sduiContext.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToExecuteAction, {
 				componentType = "GameTile",
-				message = `Error executing GameTile.onActivated error: '{if p3 then sduiParseHelpers.stringifyValue(p3) else ""}' config: {sduiParseHelpers.stringifyValue(p1.componentConfig)}`,
+				message = `Error executing GameTile.onActivated error: '{if p4 then sduiParseHelpers.stringifyValue(p4) else ""}' config: {sduiParseHelpers.stringifyValue(p1.componentConfig)}`,
 				name = getInputModeStore(false).getLastInputType(false)
 			}, p1.sduiContext.appPage)
 		end
@@ -350,7 +362,9 @@ return reactModule.memo(function(p1)
 		p1.disableDefaultFooterLogic, p1.footerComponent, p1.sduiContext,
 		p1.analyticsContext, p1.ratingText, p1.playerCount
 	})
-	local var29 = if fFlagLuaAppSduiGameTileFeedback and var8 and (p1.overflowMenuComponent and not var9) then reactModule.createElement(sduiGameTileOverflowMenuModule, {
+	local var29 = if fFlagLuaAppSduiGameTileFeedback and var8 and (p1.overflowMenuComponent and not var9) then reactModule.createElement(sduiTileOverflowMenu, {
+		debugName = "SduiGameTile.OverflowMenu",
+		zIndex = 5,
 		componentConfig = p1.overflowMenuComponent,
 		isHovered = var15,
 		isSelected = var13,
@@ -371,8 +385,7 @@ return reactModule.memo(function(p1)
 				image = p1.image,
 				thumbnailBackgroundStyle = p1.thumbnailBackgroundStyle,
 				isContained = p1.isContained,
-				cardCornerRadius = cornerRadius,
-				onTileImageLoaded = p1.onTileImageLoaded
+				cardCornerRadius = cornerRadius
 			}) else p1.imageComponent,
 			universeId = universeId,
 			placeId = placeId,

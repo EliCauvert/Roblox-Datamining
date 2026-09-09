@@ -6,14 +6,21 @@ local sduiComponentType = sduiCoreSystemModule.SduiComponentType
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiRequestFriendshipAction = sharedFlagsModule.FFlagSduiRequestFriendshipAction
 local fFlagLuaAppSduiHomeFriendCarousel = sharedFlagsModule.FFlagLuaAppSduiHomeFriendCarousel
+local fFlagLuaAppSduiHomePageSupport = sharedFlagsModule.FFlagLuaAppSduiHomePageSupport
 
 return function()
-	-- upvalues: sduiComponentType (ref), fFlagLuaAppSduiHomeFriendCarousel (ref), socialServerDrivenUi (ref), fFlagSduiRequestFriendshipAction (ref), getSduiComponentRegistry (ref)
+	-- upvalues: sduiComponentType (ref), fFlagLuaAppSduiHomeFriendCarousel (ref), socialServerDrivenUi (ref), fFlagLuaAppSduiHomePageSupport (ref), fFlagSduiRequestFriendshipAction (ref), getSduiComponentRegistry (ref)
 	getSduiComponentRegistry().registerComponentDefinitions({
 		[sduiComponentType.FriendCarousel] = if fFlagLuaAppSduiHomeFriendCarousel then {
 			getLazyComponent = function()
 				-- upvalues: socialServerDrivenUi (copy)
 				return require(socialServerDrivenUi.Components.SduiFriendCarousel)
+			end
+		} else nil,
+		[sduiComponentType.PymkCarousel] = if fFlagLuaAppSduiHomePageSupport then {
+			getLazyComponent = function()
+				-- upvalues: socialServerDrivenUi (copy)
+				return require(socialServerDrivenUi.Components.SduiPymkCarousel)
 			end
 		} else nil,
 		[sduiComponentType.FriendRequestButton] = if fFlagSduiRequestFriendshipAction then {

@@ -1232,16 +1232,19 @@ Feature.AccountSettings.Message.Error.InvalidGuildedUrl,The Guilded profile url 
 Feature.AccountSettings.Message.Error.InvalidTwitchUrl,The Twitch profile url is invalid.
 Feature.AccountSettings.Message.Error.InvalidXUrl,The X handle is invalid.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,The YouTube url is invalid.
+Feature.AddFriends.Action.FriendAdded,Friend Added
 Feature.AddFriends.Action.IgnoreConnectionRequest,Ignore Connection Request
 Feature.AddFriends.Action.IgnoreFriendRequest,Ignore friend request
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignore trusted friend request
 Feature.AddFriends.Action.RequestIgnored,Request Ignored
+Feature.AddFriends.Label.AddFriendsTooltip,Get started by finding your friends so you can explore Roblox together.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Find people on Roblox by searching for their username or name.
 Feature.AddFriends.Label.ConnectWithContacts,Invite contacts or connect with friends already on Roblox!
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Search for People
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Search for people
 Feature.AddFriends.Label.SearchForFriendsPrompt,Find people on Roblox by searching for their username or display name.
 Feature.AddFriends.Label.SyncWithContacts,Sync contacts to find and invite friends!
+Feature.AddFriends.Title.AddFriendsTooltipTitle,Roblox is better with friends!
 Feature.AddFriends.Title.ConnectWithContacts,Add from Contacts
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,Unlock more content and features.
 Feature.AgeVerificationUpsell.Button.Cancel,
@@ -3069,7 +3072,8 @@ Feature.Friends.Action.Close,
 Feature.Friends.Action.ConnectionAdded,Connection Added
 Feature.Friends.Action.ConnectionRequestSent,Connection Request Sent
 Feature.Friends.Action.EditProfile,Edit profile
-Feature.Friends.Action.FriendAdded,Friend Added
+Feature.Friends.Action.FindFriends,
+Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,Friend Removed
 Feature.Friends.Action.FriendRequestSent,Friend Request Sent
 Feature.Friends.Action.GetStarted,Get Started
@@ -3160,6 +3164,7 @@ Feature.Friends.Label.IntroducingConnections,Introducing Connections
 Feature.Friends.Label.JoinedInYear,Joined in {year}
 Feature.Friends.Label.ManageFriendsList,Manage Your Friends List
 Feature.Friends.Label.ManageFriendsListCaption,Review the friends you've interacted with least to keep your friends list up to date.
+Feature.Friends.Label.MultipleMutuals,{numConnections} mutuals
 Feature.Friends.Label.MutualConnection,1 mutual Connection
 Feature.Friends.Label.MutualConnectionTitle,1 Mutual Connection
 Feature.Friends.Label.MutualConnections,{numConnections} mutual Connections
@@ -3172,6 +3177,7 @@ Feature.Friends.Label.NewFriend,New Friend
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
 Feature.Friends.Label.NoFriendsYet,{name} doesn’t have any friends yet.
 Feature.Friends.Label.NowTrusted,{username} is now a trusted friend
+Feature.Friends.Label.OneMutual,1 mutual
 Feature.Friends.Label.PYMK,People You May Know
 Feature.Friends.Label.Pending,
 Feature.Friends.Label.PlayedByUser,Played by <b>{name}</b>
@@ -3517,7 +3523,7 @@ Feature.Moments.Label.FeedFailedToLoad,Feed failed to load
 Feature.Moments.Label.FeedMyMoments,My Moments
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,How to use Capture
-Feature.Moments.Label.LinkCopied,Link copied.
+Feature.Moments.Label.LinkCopied,Link copied
 Feature.Moments.Label.LinkCopyFailed,Failed to copy link.
 Feature.Moments.Label.ModeratedRodeoBody,"We removed this Moment because it goes against our Community Standards. To keep your Moments visible, make sure you know and follow the rules."
 Feature.Moments.Label.MomentDeletedBody,

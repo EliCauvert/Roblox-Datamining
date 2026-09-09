@@ -15,7 +15,6 @@ local getUpsellSignalStoreModule = require(socialUpsell.SignalStores.getUpsellSi
 local socialUpsellAnalyticsModule = require(socialUpsell.Analytics.SocialUpsellAnalytics)
 local upsellComponentModule = require(socialUpsell.Analytics.Enum.UpsellComponent)
 local eventTypes = require(parent.SocialLuaAnalytics).Analytics.Enums.EventTypes
-local fFlagAddUpsellEntryComponentToAnalyticsModule = require(socialUpsell.Flag.FFlagAddUpsellEntryComponentToAnalytics)
 local fFlagAgeBasedUXHomepageVerificationBannerGreyButton = require(parent.SharedFlags).FFlagAgeBasedUXHomepageVerificationBannerGreyButton
 local UPSELL_BUTTON_ACTION = constantsModule.UPSELL_BUTTON_ACTION
 local buttonVariant = foundationModule.Enums.ButtonVariant
@@ -85,7 +84,7 @@ local function getBannerPropsFromConfig(p1, p2)
 end
 
 return function(p3)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), httpService (ref), getUpsellSignalStoreModule (ref), socialUpsellAnalyticsModule (ref), upsellComponentModule (ref), useEffect (ref), eventTypes (ref), fFlagAddUpsellEntryComponentToAnalyticsModule (ref), useCallback (ref), UPSELL_BUTTON_ACTION (ref), getBannerPropsFromConfig (ref), banner (ref)
+	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), httpService (ref), getUpsellSignalStoreModule (ref), socialUpsellAnalyticsModule (ref), upsellComponentModule (ref), useEffect (ref), eventTypes (ref), useCallback (ref), UPSELL_BUTTON_ACTION (ref), getBannerPropsFromConfig (ref), banner (ref)
 	local var3 = cryoModule.Dictionary.union(t, p3)
 	local var4 = reactModule.useMemo(function()
 		-- upvalues: var3 (ref), httpService (copy)
@@ -98,7 +97,7 @@ return function(p3)
 		return socialUpsellAnalyticsModule.evaluateUpsellStage(var3.upsellEntrySurface, upsellComponentModule.Banner, var3.upsellEntryComponent)
 	end, { var3.upsellEntrySurface, var3.upsellEntryComponent })
 	useEffect(function()
-		-- upvalues: var4 (ref), var5 (ref), socialUpsellAnalyticsModule (copy), eventTypes (copy), var3 (ref), var7 (ref), upsellComponentModule (copy), fFlagAddUpsellEntryComponentToAnalyticsModule (copy)
+		-- upvalues: var4 (ref), var5 (ref), socialUpsellAnalyticsModule (copy), eventTypes (copy), var3 (ref), var7 (ref), upsellComponentModule (copy)
 		if var4 and var5.current ~= var4 then
 			socialUpsellAnalyticsModule.logUpsellEvent(eventTypes.SocialUpsellShown, {
 				upsellPurpose = var3.config.type,
@@ -107,7 +106,7 @@ return function(p3)
 				upsellImpressionId = var4,
 				upsellComponent = upsellComponentModule.Banner,
 				conversationId = var3.conversationId,
-				upsellEntryComponent = if fFlagAddUpsellEntryComponentToAnalyticsModule then var3.upsellEntryComponent else nil
+				upsellEntryComponent = var3.upsellEntryComponent
 			})
 			var5.current = var4
 		end
@@ -116,7 +115,7 @@ return function(p3)
 		var3.upsellEntrySurface,
 		var7,
 		var4,
-		if fFlagAddUpsellEntryComponentToAnalyticsModule then var3.upsellEntryComponent else nil
+		var3.upsellEntryComponent
 	})
 	useEffect(function()
 		-- upvalues: var3 (ref), var6 (ref)
@@ -130,9 +129,9 @@ return function(p3)
 		end
 	end, { var3.upsellEntrySurface, var3.config, var6 })
 	local var8 = useCallback(function(p4, p5)
-		-- upvalues: socialUpsellAnalyticsModule (copy), eventTypes (copy), var3 (ref), var7 (ref), var4 (ref), upsellComponentModule (copy), fFlagAddUpsellEntryComponentToAnalyticsModule (copy)
+		-- upvalues: socialUpsellAnalyticsModule (copy), eventTypes (copy), var3 (ref), var7 (ref), var4 (ref), upsellComponentModule (copy)
 		return function()
-			-- upvalues: socialUpsellAnalyticsModule (copy), eventTypes (copy), var3 (copy), var7 (copy), var4 (copy), upsellComponentModule (copy), p5 (ref), fFlagAddUpsellEntryComponentToAnalyticsModule (copy), p4 (ref)
+			-- upvalues: socialUpsellAnalyticsModule (copy), eventTypes (copy), var3 (copy), var7 (copy), var4 (copy), upsellComponentModule (copy), p5 (ref), p4 (ref)
 			socialUpsellAnalyticsModule.logUpsellEvent(eventTypes.SocialUpsellButtonClick, {
 				upsellPurpose = var3.config.type,
 				upsellEntrySurface = var3.upsellEntrySurface,
@@ -141,7 +140,7 @@ return function(p3)
 				upsellComponent = upsellComponentModule.Banner,
 				btn = p5,
 				conversationId = var3.conversationId,
-				upsellEntryComponent = if fFlagAddUpsellEntryComponentToAnalyticsModule then var3.upsellEntryComponent else nil
+				upsellEntryComponent = var3.upsellEntryComponent
 			})
 			p4(var4)
 		end
@@ -150,7 +149,7 @@ return function(p3)
 		var3.config.type,
 		var7,
 		var4,
-		if fFlagAddUpsellEntryComponentToAnalyticsModule then var3.upsellEntryComponent else nil
+		var3.upsellEntryComponent
 	})
 	local var9 = useCallback(var8(var3.onPrimaryAction, UPSELL_BUTTON_ACTION.Primary), { var8, var3.onPrimaryAction })
 	local var10 = useCallback(var8(var3.onSecondaryAction, UPSELL_BUTTON_ACTION.Secondary), { var8, var3.onSecondaryAction })

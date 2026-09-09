@@ -25,15 +25,25 @@ local isSubjectToDesktopPolicies = dependenciesModule.isSubjectToDesktopPolicies
 local fFlagEnableRecommendationsForPCGDK = require(parent_1.SharedFlags).FFlagEnableRecommendationsForPCGDK
 local fFlagFixIsConsoleCheckForSocialCarousel = require(parent_1.SharedFlags).FFlagFixIsConsoleCheckForSocialCarousel
 local fFlagSocialCarouselMigrateRecommendations = require(parent_1.SharedFlags).FFlagSocialCarouselMigrateRecommendations
+local fFlagLuaSupportMicroGamepadPreferredInput = require(parent_1.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 
-local var2 = function(_)
-	-- upvalues: showRecommendationsModule (ref), isSubjectToDesktopPolicies (ref), fFlagEnableRecommendationsForPCGDK (ref), thirdPartyUserService (ref), fFlagFixIsConsoleCheckForSocialCarousel (ref), userInputService (ref)
--- FATAL: Failed to generate AST for `unnamed` function:
-runtime : [KeyError] :11990: 3
-Traceback:
-	runtime : [lunaux]:11990 function decompile_function
-	runtime : [lunaux]:1933 function normalize_cfg
-	runtime : [lunaux]:1320 function match_weird_patterns
+local var2 = function(p1)
+	-- upvalues: showRecommendationsModule (ref), isSubjectToDesktopPolicies (ref), fFlagEnableRecommendationsForPCGDK (ref), thirdPartyUserService (ref), fFlagFixIsConsoleCheckForSocialCarousel (ref), userInputService (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref)
+	local var3
+	if showRecommendationsModule(p1) then
+		var3 = not isSubjectToDesktopPolicies()
+		
+		if not var3 then
+			if showRecommendationsModule(p1) and fFlagEnableRecommendationsForPCGDK and thirdPartyUserService then
+				var3 = thirdPartyUserService:HaveActiveUser()
+				
+				if not var3 then
+					var3 = showRecommendationsModule(p1) and (fFlagFixIsConsoleCheckForSocialCarousel and (if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad else true))
+				end
+			end
+		end
+		return var3
+	end
 end
 
 local var3 = 0

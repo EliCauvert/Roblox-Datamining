@@ -4,18 +4,19 @@ local reactModule = require(parent.React)
 local inputTypeModule = require(parent.InputType)
 local getInputGroup = inputTypeModule.getInputGroup
 local inputTypeConstants = inputTypeModule.InputTypeConstants
+local fFlagLuaSupportMicroGamepadPreferredInput = require(parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 
 local function _(p1)
-	-- upvalues: inputTypeConstants (ref)
-	return if p1.PreferredInput == Enum.PreferredInput.Gamepad then inputTypeConstants.Gamepad elseif p1.TouchEnabled then inputTypeConstants.Touch else inputTypeConstants.MouseAndKeyboard
+	-- upvalues: fFlagLuaSupportMicroGamepadPreferredInput (ref), inputTypeConstants (ref)
+	return if p1.PreferredInput == Enum.PreferredInput.Gamepad or fFlagLuaSupportMicroGamepadPreferredInput and p1.PreferredInput == Enum.PreferredInput.MicroGamepad then inputTypeConstants.Gamepad elseif p1.TouchEnabled then inputTypeConstants.Touch else inputTypeConstants.MouseAndKeyboard
 end
 
 return function(p1)
-	-- upvalues: userInputService (ref), reactModule (ref), inputTypeConstants (ref), getInputGroup (ref)
+	-- upvalues: userInputService (ref), reactModule (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), inputTypeConstants (ref), getInputGroup (ref)
 	p1 = p1 or userInputService
 	local var1, var2 = reactModule.useState(function()
-		-- upvalues: p1 (ref), inputTypeConstants (copy)
-		return if p1.PreferredInput == Enum.PreferredInput.Gamepad then inputTypeConstants.Gamepad elseif p1.TouchEnabled then inputTypeConstants.Touch else inputTypeConstants.MouseAndKeyboard
+		-- upvalues: p1 (ref), fFlagLuaSupportMicroGamepadPreferredInput (copy), inputTypeConstants (copy)
+		return if p1.PreferredInput == Enum.PreferredInput.Gamepad or fFlagLuaSupportMicroGamepadPreferredInput and p1.PreferredInput == Enum.PreferredInput.MicroGamepad then inputTypeConstants.Gamepad elseif p1.TouchEnabled then inputTypeConstants.Touch else inputTypeConstants.MouseAndKeyboard
 	end)
 	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), var2 (ref), getInputGroup (copy)

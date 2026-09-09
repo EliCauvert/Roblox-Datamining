@@ -1,12 +1,14 @@
 ﻿local contextActionService = game:GetService("ContextActionService")
 local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local signalsModule = require(inExperienceSideSheet.Parent.Signals)
+local parent = inExperienceSideSheet.Parent
+local signalsModule = require(parent.Signals)
 local analyticsConstantsModule = require(inExperienceSideSheet.Analytics.AnalyticsConstants)
 local sidesheetAnalyticsModule = require(inExperienceSideSheet.Analytics.SidesheetAnalytics)
 local enumsModule = require(inExperienceSideSheet.Common.Enums)
 local getIntegrationsStoreModule = require(inExperienceSideSheet.Stores.GetIntegrationsStore)
 local getSideSheetVisibilityModule = require(inExperienceSideSheet.Utils.getSideSheetVisibility)
 local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
+local fFlagShowSwitchServerButton = require(parent.SharedFlags).FFlagShowSwitchServerButton
 
 local function createActionBinding(p1)
 	-- upvalues: signalsModule (ref)
@@ -25,11 +27,15 @@ local function createActionBinding(p1)
 end
 
 return function()
-	-- upvalues: enumsModule (ref), createActionBinding (ref), signalsModule (ref), getIntegrationsStoreModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), getSideSheetVisibilityModule (ref), contextActionService (ref)
+	-- upvalues: enumsModule (ref), createActionBinding (ref), fFlagShowSwitchServerButton (ref), signalsModule (ref), getIntegrationsStoreModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), getSideSheetVisibilityModule (ref), contextActionService (ref)
 	local t = {
 		[enumsModule.ActionBinding.Leave] = createActionBinding({ Enum.KeyCode.L, Enum.KeyCode.ButtonX }),
 		[enumsModule.ActionBinding.Respawn] = createActionBinding({ Enum.KeyCode.R, Enum.KeyCode.ButtonY })
 	}
+	
+	if fFlagShowSwitchServerButton then
+		t[enumsModule.ActionBinding.SwitchServer] = createActionBinding(nil)
+	end
 	local var1 = signalsModule.createEffect(function(p1)
 		-- upvalues: getIntegrationsStoreModule (copy), t (ref), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
 		for i, v in getIntegrationsStoreModule(p1).getSessionActionIntegrations(p1) do
@@ -49,20 +55,22 @@ return function()
 		end
 	end)
 	local var2 = signalsModule.createEffect(function(p2)
-		-- upvalues: getSideSheetVisibilityModule (copy), t (ref), contextActionService (copy)
+		-- upvalues: getSideSheetVisibilityModule (copy), t (ref), fFlagShowSwitchServerButton (copy), contextActionService (copy)
 		if getSideSheetVisibilityModule(p2) then
 			for i, v in t do
-				local var3 = function(_, p3, _)
-					-- upvalues: v (ref)
-					if p3 == Enum.UserInputState.Begin then
-						v.getOnActivated()()
+				if not fFlagShowSwitchServerButton or v.keyCodes ~= nil then
+					local var3 = function(_, p3, _)
+						-- upvalues: v (ref)
+						if p3 == Enum.UserInputState.Begin then
+							v.getOnActivated()()
+						end
 					end
-				end
-				
-				if v.getIsEnabled(p2) then
-					contextActionService:BindCoreAction(i, var3, false, unpack(v.keyCodes))
-				else
-					contextActionService:UnbindCoreAction(i)
+					
+					if v.getIsEnabled(p2) then
+						contextActionService:BindCoreAction(i, var3, false, unpack(v.keyCodes))
+					else
+						contextActionService:UnbindCoreAction(i)
+					end
 				end
 			end
 			return

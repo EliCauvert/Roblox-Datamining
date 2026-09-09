@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableDialogAfterSquadJoin1", false)

@@ -12,13 +12,22 @@ local fFlagPlayerListReduceRerendersModule = require(parent.Flags.FFlagPlayerLis
 local fFlagPlayerListRemoveTopStatModule = require(parent.Flags.FFlagPlayerListRemoveTopStat)
 local fFlagEnableMobilePlayerListOnConsole = playerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
 local playerListTopStatCheckGamepad = game:DefineFastFlag("PlayerListTopStatCheckGamepad", false)
+local fFlagLuaSupportMicroGamepadPreferredInput = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 local var1 = nil
 
 if not fFlagPlayerListRemoveTopStatModule then
 	local var2
 	if playerListTopStatCheckGamepad then
-		var2 = userInputService.PreferredInput == Enum.PreferredInput.Gamepad
-		var2 = nil
+		var2 = true
+		
+		if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad then
+			var2 = fFlagLuaSupportMicroGamepadPreferredInput
+			
+			if var2 then
+				var2 = userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad
+				var2 = nil
+			end
+		end
 	else
 		var2 = true
 	end

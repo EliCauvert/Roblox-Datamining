@@ -21,7 +21,6 @@ local getDeepValueModule = require(appChat.Utils.getDeepValue)
 local fFlagReadAppChatFetchingVariable = require(parent.SharedFlags).FFlagReadAppChatFetchingVariable
 local fFlagAppChatNavigateBackIfOSAUnacknowledged = require(parent.SharedFlags).FFlagAppChatNavigateBackIfOSAUnacknowledged
 local fFlagEnableSquadRegroupExperimentation = require(parent.SharedFlags).FFlagEnableSquadRegroupExperimentation
-local fFlagEnableDialogAfterSquadJoin = require(parent.SharedFlags).FFlagEnableDialogAfterSquadJoin
 local shouldShowOSAForConversationModule = require(appChat.Utils.shouldShowOSAForConversation)
 local getOverlayStoreModule = require(appChat.Stores.GetOverlayStore)
 local overlayTypesModule = require(appChat.Stores.GetOverlayStore.OverlayTypes)
@@ -85,7 +84,7 @@ return {
 	end,
 	useIsChatUserMessagesEnabled = useIsChatUserMessagesEnabledModule,
 	shouldShowOSAForConversation = if fFlagAppChatNavigateBackIfOSAUnacknowledged then shouldShowOSAForConversationModule else nil,
-	showGroupOSADialog = if fFlagEnableDialogAfterSquadJoin then function(p1, p2, p3)
+	showGroupOSADialog = function(p1, p2, p3)
 		-- upvalues: getOverlayStoreModule (ref), overlayTypesModule (ref), httpService (ref)
 		local var1 = getOverlayStoreModule(false)
 		var1.showOverlay(overlayTypesModule.GroupOSADialog, {
@@ -102,5 +101,5 @@ return {
 				p3()
 			end
 		})
-	end else nil
+	end
 }

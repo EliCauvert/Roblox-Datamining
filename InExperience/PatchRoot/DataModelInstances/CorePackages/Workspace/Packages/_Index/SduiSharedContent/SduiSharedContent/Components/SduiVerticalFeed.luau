@@ -44,7 +44,7 @@ local sduiVerticalFeedScrollPreloadDistancePx = game:DefineFastInt("SduiVertical
 local sduiVerticalFeedScrollUnderfillDebounceMs = game:DefineFastInt("SduiVerticalFeedScrollUnderfillDebounceMs", 50)
 local sduiEnableBackToTop = game:DefineFastFlag("SduiEnableBackToTop", false)
 local sduiVerticalFeedBottomSpacerLayoutOrderConstant = game:DefineFastFlag("SduiVerticalFeedBottomSpacerLayoutOrderConstant", false)
-local sduiVerticalFeedPageShellSupport = game:DefineFastFlag("SduiVerticalFeedPageShellSupport", false)
+local fFlagSduiVerticalFeedPageShellSupport = sharedFlagsModule.FFlagSduiVerticalFeedPageShellSupport
 local fFlagLuaAppSduiVideoThumbnail = sharedFlagsModule.FFlagLuaAppSduiVideoThumbnail
 local var1 = if fFlagSduiVerticalFeedProgressiveFillOnScroll then signalsModule.createSignal(nil) else nil
 local var2 = if fFlagSduiVerticalFeedProgressiveFillOnScroll then table.freeze({}) else nil
@@ -121,7 +121,7 @@ local function useProgressiveRowCapWithScroll(p1, p2, p3, p4, p5, p6, p7, p8)
 end
 
 return reactModule.memo(function(p9)
-	-- upvalues: fFlagLuaAppSduiVideoThumbnail (ref), useTokens (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), useNavBarPlacement (ref), appNavBarModule (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), sduiVerticalFeedPageShellSupport (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (ref), appCommonLibModule (ref), fFlagLuaAppSduiHomeFriendCarousel (ref), fFlagSduiSrpScrollAway (ref), scrollMovementDirection (ref), sduiEnableBackToTop (ref), useAnimateScrollViewToSelection (ref), useLastInputMode (ref), useProgressiveRowCapWithScroll (ref), sduiVerticalFeedScrollUnderfillDebounceMs (ref), useProgressiveRowCapModule (ref), useVerticalScrolledToEndThresholdModule (ref), sduiVerticalFeedBottomSpacerLayoutOrderConstant (ref), backToTopButtonModule (ref), fFlagSduiPoolBackedFeed (ref), PoolStoreLayoutStoreWiring (ref), sduiFeedImpressionsDetectorModule (ref), buildSduiFeedChildrenModule (ref), sduiFeedContextModule (ref), collectionLayoutStoreProvider (ref), view (ref), viewportVideoAutoplaySync (ref), scrollDetector (ref), sduiStickyHeaderModule (ref), pullToRefreshSpinner (ref)
+	-- upvalues: fFlagLuaAppSduiVideoThumbnail (ref), useTokens (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), useNavBarPlacement (ref), appNavBarModule (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), fFlagSduiVerticalFeedPageShellSupport (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (ref), appCommonLibModule (ref), fFlagLuaAppSduiHomeFriendCarousel (ref), fFlagSduiSrpScrollAway (ref), scrollMovementDirection (ref), sduiEnableBackToTop (ref), useAnimateScrollViewToSelection (ref), useLastInputMode (ref), useProgressiveRowCapWithScroll (ref), sduiVerticalFeedScrollUnderfillDebounceMs (ref), useProgressiveRowCapModule (ref), useVerticalScrolledToEndThresholdModule (ref), sduiVerticalFeedBottomSpacerLayoutOrderConstant (ref), backToTopButtonModule (ref), fFlagSduiPoolBackedFeed (ref), PoolStoreLayoutStoreWiring (ref), sduiFeedImpressionsDetectorModule (ref), buildSduiFeedChildrenModule (ref), sduiFeedContextModule (ref), collectionLayoutStoreProvider (ref), view (ref), viewportVideoAutoplaySync (ref), scrollDetector (ref), sduiStickyHeaderModule (ref), pullToRefreshSpinner (ref)
 	local var7
 	local analyticsContext = p9.analyticsContext
 	local sduiContext = p9.sduiContext
@@ -154,7 +154,7 @@ return reactModule.memo(function(p9)
 	local scrollBarThickness = p9.scrollBarThickness or (if usePreferredInput() == responsiveModule.Input.Pointer then 4 else 0)
 	local var14, var15 = reactModule.useState(nil)
 	local var16 = reactModule.useRef(nil)
-	local var17 = if sduiVerticalFeedPageShellSupport then p9.scrollingFrameRef or var16 else nil
+	local var17 = if fFlagSduiVerticalFeedPageShellSupport then p9.scrollingFrameRef or var16 else nil
 	local var18 = if fFlagSduiVerticalFeedProgressiveFillOnScroll then reactModule.useRef(nil) else nil
 	local var19 = reactModule.useRef(nil)
 	
@@ -172,7 +172,7 @@ return reactModule.memo(function(p9)
 		var21 = reactModule.useRef(nil)
 		
 		if var21.current == nil then
-			var21.current = if sduiVerticalFeedPageShellSupport and p9.refreshSignal then p9.refreshSignal else appCommonLibModule.Signal.new()
+			var21.current = if fFlagSduiVerticalFeedPageShellSupport and p9.refreshSignal then p9.refreshSignal else appCommonLibModule.Signal.new()
 		end
 		var22 = reactModule.useCallback(function()
 			-- upvalues: var21 (write), p9 (ref)
@@ -203,30 +203,30 @@ return reactModule.memo(function(p9)
 		var23.current = y
 	end, { var20, p9.onScrollDirectionChanged }) else nil
 	local var26 = reactModule.useMemo(function()
-		-- upvalues: var19 (ref), sduiVerticalFeedPageShellSupport (copy), var17 (write), var16 (ref)
+		-- upvalues: var19 (ref), fFlagSduiVerticalFeedPageShellSupport (copy), var17 (write), var16 (ref)
 		return {
 			scrollViewPositionChangedSignal = var19.current,
-			verticalScrollingFrameRef = if sduiVerticalFeedPageShellSupport then var17 else var16
+			verticalScrollingFrameRef = if fFlagSduiVerticalFeedPageShellSupport then var17 else var16
 		}
 	end, {
 		var19,
 		var16,
-		if sduiVerticalFeedPageShellSupport then var17 else nil
+		if fFlagSduiVerticalFeedPageShellSupport then var17 else nil
 	})
 	local gapBetweenFeedItems = p9.gapBetweenFeedItems or var10.Gap.Large
 	local var27 = reactModule.useMemo(function()
-		-- upvalues: var19 (ref), sduiVerticalFeedPageShellSupport (copy), var17 (write), var16 (ref), fFlagLuaAppSduiHomeFriendCarousel (copy), var21 (write)
+		-- upvalues: var19 (ref), fFlagSduiVerticalFeedPageShellSupport (copy), var17 (write), var16 (ref), fFlagLuaAppSduiHomeFriendCarousel (copy), var21 (write)
 		return {
 			scrollViewPositionChangedSignal = var19.current,
-			verticalScrollingFrameRef = if sduiVerticalFeedPageShellSupport then var17 else var16,
+			verticalScrollingFrameRef = if fFlagSduiVerticalFeedPageShellSupport then var17 else var16,
 			refreshSignal = if fFlagLuaAppSduiHomeFriendCarousel then var21.current else nil
 		}
 	end, {
 		var19,
-		if sduiVerticalFeedPageShellSupport then var17 else var16
+		if fFlagSduiVerticalFeedPageShellSupport then var17 else var16
 	})
 	
-	if not sduiVerticalFeedPageShellSupport then
+	if not fFlagSduiVerticalFeedPageShellSupport then
 		var17 = p9.scrollingFrameRef or var16
 	end
 	local var28 = nil
@@ -304,7 +304,7 @@ return reactModule.memo(function(p9)
 		var20,
 		if fFlagSduiSrpScrollAway then var25 else nil
 	})
-	useAnimateScrollViewToSelection(var17, 0.4)
+	useAnimateScrollViewToSelection(if fFlagSduiVerticalFeedPageShellSupport and p9.scrollToSelectionAnimationManagedByParent then nil else var17, 0.4)
 	local isNotCursor = useLastInputMode() ~= "Cursor"
 	local thresholdFromEnd = p9.thresholdFromEnd or 600
 	local var33 = nil

@@ -29,7 +29,6 @@ local sendSduiHttpRequestModule = require(sduiSharedUtilities.sendSduiHttpReques
 local fFlagSduiProtobufJsonDecode = require(parent.SharedFlags).FFlagSduiProtobufJsonDecode
 local sduiEnableClearOnEmptyResponse = game:DefineFastFlag("SduiEnableClearOnEmptyResponse", false)
 local fFlagSduiAllowNoConfigsBuilt = require(parent.SharedFlags).FFlagSduiAllowNoConfigsBuilt
-local fFlagSduiConfigFetchTakesPostBody = require(parent.SharedFlags).FFlagSduiConfigFetchTakesPostBody
 local fFlagSduiClientTemplateCache = require(parent.SharedFlags).FFlagSduiClientTemplateCache
 local fFlagSduiAlwaysCacheWithIdentifier = require(parent.SharedFlags).FFlagSduiAlwaysCacheWithIdentifier
 local fFlagLuaAppSduiStreamingChunkedResponses = require(parent.SharedFlags).FFlagLuaAppSduiStreamingChunkedResponses
@@ -64,7 +63,7 @@ local function getSduiRequestEndpointForCounters(p1)
 end
 
 return function(p2)
-	-- upvalues: createDataCache (ref), fFlagSduiApiStoreOnSuccessAndRefresh (ref), signalsModule (ref), promiseModule (ref), fFlagSduiRequestCountersModule (ref), getSduiRequestEndpointForCounters (ref), fFlagSduiProtobufJsonDecode (ref), sduiResponseType (ref), fFlagSduiConfigFetchTakesPostBody (ref), fFlagLuaAppSduiStreamingChunkedResponses (ref), makeProtobufJsonResponseDecoder (ref), makeProtoResponseDecoder (ref), handleSduiApiResponseModule (ref), sduiProtobufResponseHelpersModule (ref), fFlagSduiClientDrivenTemplates (ref), fFlagSduiPaginatePostBody (ref), fFlagSduiAllowNoConfigsBuilt (ref), fFlagSduiClientTemplateCache (ref), createSduiStreamingResponseHandlerModule (ref), fFlagSduiUseHttpClientModule (ref), accumulateSduiCacheSubEntriesModule (ref), sduiPageAnalyticsModule (ref), sduiRequestStatus (ref), sduiParseHelpers (ref), sduiLogger (ref), sduiErrors (ref), sduiEnableClearOnEmptyResponse (ref), cryoModule (ref), sduiApiStorePostConfigModule (ref), sduiRetryPolicyModule (ref), sduiPageRequestPriority (ref), sendSduiHttpRequestModule (ref), httpService (ref), createDataResolver (ref), resolveSduiCacheEntryModule (ref), fFlagSduiAlwaysCacheWithIdentifier (ref), fFlagAppChatConversationTrustedFriendUpsellBanner (ref), fFlagSduiDismissPromptAction (ref), fFlagSduiApiStoreExposeGetInputData (ref)
+	-- upvalues: createDataCache (ref), fFlagSduiApiStoreOnSuccessAndRefresh (ref), signalsModule (ref), promiseModule (ref), fFlagSduiRequestCountersModule (ref), getSduiRequestEndpointForCounters (ref), fFlagSduiProtobufJsonDecode (ref), sduiResponseType (ref), fFlagLuaAppSduiStreamingChunkedResponses (ref), makeProtobufJsonResponseDecoder (ref), makeProtoResponseDecoder (ref), handleSduiApiResponseModule (ref), sduiProtobufResponseHelpersModule (ref), fFlagSduiClientDrivenTemplates (ref), fFlagSduiPaginatePostBody (ref), fFlagSduiAllowNoConfigsBuilt (ref), fFlagSduiClientTemplateCache (ref), createSduiStreamingResponseHandlerModule (ref), fFlagSduiUseHttpClientModule (ref), accumulateSduiCacheSubEntriesModule (ref), sduiPageAnalyticsModule (ref), sduiRequestStatus (ref), sduiParseHelpers (ref), sduiLogger (ref), sduiErrors (ref), sduiEnableClearOnEmptyResponse (ref), cryoModule (ref), sduiApiStorePostConfigModule (ref), sduiRetryPolicyModule (ref), sduiPageRequestPriority (ref), sendSduiHttpRequestModule (ref), httpService (ref), createDataResolver (ref), resolveSduiCacheEntryModule (ref), fFlagSduiAlwaysCacheWithIdentifier (ref), fFlagAppChatConversationTrustedFriendUpsellBanner (ref), fFlagSduiDismissPromptAction (ref), fFlagSduiApiStoreExposeGetInputData (ref)
 	local var1 = createDataCache()
 	local t = {}
 	local t_1 = {}
@@ -116,7 +115,7 @@ return function(p2)
 		supportsMultiGet = false,
 		cache = var1,
 		fetchFn = function(p3, p4)
-			-- upvalues: t (ref), promiseModule (copy), fFlagSduiRequestCountersModule (copy), getSduiRequestEndpointForCounters (copy), fFlagSduiProtobufJsonDecode (copy), sduiResponseType (copy), fFlagSduiConfigFetchTakesPostBody (copy), fFlagLuaAppSduiStreamingChunkedResponses (copy), makeProtobufJsonResponseDecoder (copy), makeProtoResponseDecoder (copy), handleSduiApiResponseModule (copy), sduiProtobufResponseHelpersModule (copy), fFlagSduiClientDrivenTemplates (copy), getInputDataSignals (ref), fFlagSduiPaginatePostBody (copy), fFlagSduiAllowNoConfigsBuilt (copy), fFlagSduiClientTemplateCache (copy), createSduiStreamingResponseHandlerModule (copy), fFlagSduiUseHttpClientModule (copy), fFlagSduiApiStoreOnSuccessAndRefresh (copy), accumulateSduiCacheSubEntriesModule (copy), var1 (ref), sduiPageAnalyticsModule (copy), t_1 (ref), sduiRequestStatus (copy), t_2 (ref), sduiParseHelpers (copy), sduiLogger (copy), sduiErrors (copy), sduiEnableClearOnEmptyResponse (copy), cryoModule (copy), sduiApiStorePostConfigModule (copy), sduiRetryPolicyModule (copy), p2 (ref), sduiPageRequestPriority (copy), sendSduiHttpRequestModule (copy), httpService (copy)
+			-- upvalues: t (ref), promiseModule (copy), fFlagSduiRequestCountersModule (copy), getSduiRequestEndpointForCounters (copy), fFlagSduiProtobufJsonDecode (copy), sduiResponseType (copy), fFlagLuaAppSduiStreamingChunkedResponses (copy), makeProtobufJsonResponseDecoder (copy), makeProtoResponseDecoder (copy), handleSduiApiResponseModule (copy), sduiProtobufResponseHelpersModule (copy), fFlagSduiClientDrivenTemplates (copy), getInputDataSignals (ref), fFlagSduiPaginatePostBody (copy), fFlagSduiAllowNoConfigsBuilt (copy), fFlagSduiClientTemplateCache (copy), createSduiStreamingResponseHandlerModule (copy), fFlagSduiUseHttpClientModule (copy), fFlagSduiApiStoreOnSuccessAndRefresh (copy), accumulateSduiCacheSubEntriesModule (copy), var1 (ref), sduiPageAnalyticsModule (copy), t_1 (ref), sduiRequestStatus (copy), t_2 (ref), sduiParseHelpers (copy), sduiLogger (copy), sduiErrors (copy), sduiEnableClearOnEmptyResponse (copy), cryoModule (copy), sduiApiStorePostConfigModule (copy), sduiRetryPolicyModule (copy), p2 (ref), sduiPageRequestPriority (copy), sendSduiHttpRequestModule (copy), httpService (copy)
 			local var3 = t[p3]
 			
 			if not var3 then
@@ -128,7 +127,7 @@ return function(p2)
 			loadTimer.logUiRequestSent()
 			local var5 = fFlagSduiProtobufJsonDecode and var3.responseType == sduiResponseType.ProtobufJson
 			local postConfig = var3.postConfig
-			local var6 = if fFlagSduiConfigFetchTakesPostBody and postConfig then "POST" else "GET"
+			local var6 = if postConfig then "POST" else "GET"
 			local var7 = if fFlagLuaAppSduiStreamingChunkedResponses then var3.enableStreaming else nil
 			local var8 = if var5 then makeProtobufJsonResponseDecoder(var3.apiProto) else makeProtoResponseDecoder(var3.apiProto)
 			
@@ -348,15 +347,15 @@ return function(p2)
 			
 			if not fFlagSduiUseHttpClientModule then
 				return createRequestPromise(function(p11)
-					-- upvalues: httpService (copy), url (ref), var6 (ref), var5 (ref), fFlagSduiConfigFetchTakesPostBody (copy), postConfig (ref), sduiApiStorePostConfigModule (copy), var10 (ref), sduiPageRequestPriority (copy)
+					-- upvalues: httpService (copy), url (ref), var6 (ref), var5 (ref), postConfig (ref), sduiApiStorePostConfigModule (copy), var10 (ref), sduiPageRequestPriority (copy)
 					httpService:RequestInternal({
 						Url = url,
 						Method = var6,
 						Headers = {
 							Accept = if var5 then "application/json" else "application/x-protobuf",
-							["Content-Type"] = if fFlagSduiConfigFetchTakesPostBody and postConfig then sduiApiStorePostConfigModule.getContentTypeHeaderFromPostConfig(postConfig) else nil
+							["Content-Type"] = if postConfig then sduiApiStorePostConfigModule.getContentTypeHeaderFromPostConfig(postConfig) else nil
 						},
-						Body = if fFlagSduiConfigFetchTakesPostBody and postConfig then sduiApiStorePostConfigModule.getBodyFromPostConfig(postConfig) else nil,
+						Body = if postConfig then sduiApiStorePostConfigModule.getBodyFromPostConfig(postConfig) else nil,
 						OnMessage = if var10 then var10.handleChunk else nil,
 						Priority = sduiPageRequestPriority
 					}):Start(p11)
@@ -364,8 +363,8 @@ return function(p2)
 					return nil
 				end)
 			end
-			local var36 = if fFlagSduiConfigFetchTakesPostBody and postConfig then sduiApiStorePostConfigModule.getBodyFromPostConfig(postConfig) else nil
-			local var37 = if fFlagSduiConfigFetchTakesPostBody and postConfig then sduiApiStorePostConfigModule.getContentTypeHeaderFromPostConfig(postConfig) else nil
+			local var36 = if postConfig then sduiApiStorePostConfigModule.getBodyFromPostConfig(postConfig) else nil
+			local var37 = if postConfig then sduiApiStorePostConfigModule.getContentTypeHeaderFromPostConfig(postConfig) else nil
 			local var38 = sduiRetryPolicyModule.resolve(var3.retry)
 			
 			if fFlagSduiRequestCountersModule and var38 ~= nil then

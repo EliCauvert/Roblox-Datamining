@@ -18,7 +18,10 @@
 	getOtherDisplayNameInWhisperChannel = require(script.getOtherDisplayNameInWhisperChannel),
 	getPresetIconRichText = require(script.getPresetIconRichText),
 	getPresetIconSize = require(script.getPresetIconSize),
+	getTextChannelDisplayMode = require(script.getTextChannelDisplayMode),
 	isPresetMessage = require(script.isPresetMessage),
+	markTextChannelAsDefault = require(script.markTextChannelAsDefault),
+	shouldRenderTextChannelInDefaultWindow = require(script.shouldRenderTextChannelInDefaultWindow),
 	watchForErrors = require(script.watchForErrors),
 	["jest.config"] = script["jest.config"]
 }

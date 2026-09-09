@@ -218,7 +218,6 @@
 	FFlagEnableHeadShapeForCharacterManager = require(script.FFlagEnableHeadShapeForCharacterManager),
 	FFlagParseHeadShapeFromAPIResponse = require(script.FFlagParseHeadShapeFromAPIResponse),
 	FFlagAXHideHeadAdjustmentForDefaultHead = require(script.FFlagAXHideHeadAdjustmentForDefaultHead),
-	FFlagDynamicHeadsMigration = require(script.FFlagDynamicHeadsMigration),
 	FFlagHeadRefinementFacialAnimationToggle = require(script.FFlagHeadRefinementFacialAnimationToggle),
 	FFlagAXShowHeadAdjustmentInRightControlBar = require(script.FFlagAXShowHeadAdjustmentInRightControlBar),
 	FFlagAXSkipEmotesInAvatarData = require(script.FFlagAXSkipEmotesInAvatarData),
@@ -385,7 +384,10 @@
 	FFlagAXFixVRControlBarFlicker = require(script.FFlagAXFixVRControlBarFlicker),
 	FFlagAXFixSearchLandingQuickButtonsOffset = require(script.FFlagAXFixSearchLandingQuickButtonsOffset),
 	FFlagAXAvatarPreviewPhotoboothMomentsButton = require(script.FFlagAXAvatarPreviewPhotoboothMomentsButton),
+	FFlagAXIaBSelectableItemCardRow = require(script.FFlagAXIaBSelectableItemCardRow),
 	FFlagAXFixR6CharacterPlacement = require(script.FFlagAXFixR6CharacterPlacement),
 	FFlagAXFixWidgetListSeeAllListReuse = require(script.FFlagAXFixWidgetListSeeAllListReuse),
-	FFlagAXCatalogHttpLinkSalesTypeFilter = require(script.FFlagAXCatalogHttpLinkSalesTypeFilter)
+	FFlagAXCatalogHttpLinkSalesTypeFilter = require(script.FFlagAXCatalogHttpLinkSalesTypeFilter),
+	FFlagAXIaBDiscountPriceLine = require(script.FFlagAXIaBDiscountPriceLine),
+	FFlagAXActionButtonRoundedRectCursor = require(script.FFlagAXActionButtonRoundedRectCursor)
 }

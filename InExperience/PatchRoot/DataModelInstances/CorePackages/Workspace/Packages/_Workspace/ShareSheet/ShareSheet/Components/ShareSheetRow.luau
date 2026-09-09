@@ -1,18 +1,20 @@
-﻿local parent = script:FindFirstAncestor("ShareSheet").Parent
+﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
+local parent = shareSheet.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local scrollView = foundationModule.ScrollView
 local visibility = foundationModule.Enums.Visibility
 local useTokens = foundationModule.Hooks.useTokens
+local fFlagSharePplPickerModule = require(shareSheet.Flags.FFlagSharePplPicker)
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), scrollView (ref), visibility (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), scrollView (ref), fFlagSharePplPickerModule (ref), visibility (ref)
 	local var1 = useTokens()
 	
 	return reactModule.createElement(scrollView, {
 		tag = "size-full-0 auto-y",
 		LayoutOrder = p1.LayoutOrder,
-		padding = {
+		padding = if fFlagSharePplPickerModule and p1.hasHorizontalPadding == false then nil else {
 			left = UDim.new(0, var1.Padding.XLarge),
 			right = UDim.new(0, var1.Padding.XLarge)
 		},

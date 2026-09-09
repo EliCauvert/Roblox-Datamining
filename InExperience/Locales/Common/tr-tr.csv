@@ -1233,16 +1233,19 @@ Feature.AccountSettings.Message.Error.InvalidGuildedUrl,Guilded profil url'si ge
 Feature.AccountSettings.Message.Error.InvalidTwitchUrl,Twitch profil url'si geçersiz.
 Feature.AccountSettings.Message.Error.InvalidXUrl,X hesap adı geçersiz.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,YouTube url'si geçersiz.
+Feature.AddFriends.Action.FriendAdded,Arkadaş Eklendi
 Feature.AddFriends.Action.IgnoreConnectionRequest,Bağlantı Talebini Yok Say
 Feature.AddFriends.Action.IgnoreFriendRequest,Arkadaşlık isteğini yok say
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Güvenilir arkadaş olarak ekleme talebini yok say
 Feature.AddFriends.Action.RequestIgnored,İstek Yok Sayıldı
+Feature.AddFriends.Label.AddFriendsTooltip,Roblox'u birlikte keşfedebilmen için arkadaşlarını bul.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Kullanıcı adlarını veya adlarını arayarak Roblox'taki kişileri bul.
 Feature.AddFriends.Label.ConnectWithContacts,Rehberindeki kişileri davet et veya hâlihazırda Roblox'ta olan arkadaşlarınla bağlantı kur!
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,İnsanlar Ara
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,İnsanlar ara
 Feature.AddFriends.Label.SearchForFriendsPrompt,Kullanıcı adlarını veya görünen adlarını arayarak Roblox'taki kişileri bul.
 Feature.AddFriends.Label.SyncWithContacts,Rehberini senkronize et ve arkadaşlarını davet et!
+Feature.AddFriends.Title.AddFriendsTooltipTitle,Roblox arkadaşlarla daha güzel!
 Feature.AddFriends.Title.ConnectWithContacts,Kişiler rehberinden ekle
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,Daha fazla içerik ve özelliğin kilidini aç.
 Feature.AgeVerificationUpsell.Button.Cancel,
@@ -1996,6 +1999,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,Açıklama 1.000 karakter
 Feature.Build.Error.DeveloperProductNameRequired,Bir ürün adı gir.
 Feature.Build.Error.DeveloperProductNameTooLong,Ad 50 karakter veya daha kısa olmalıdır.
 Feature.Build.Error.DeveloperProductPriceInvalid,Fiyat 1 ile 1.000.000.000 Robux arasında bir tam sayı olmalıdır.
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,Bir ürünü satışa sunmadan önce Düzenle'yi seç ve bir fiyat ekle.
 Feature.Build.Error.DeveloperProductTextModerated,Roblox denetimi bu ürünün metnini değiştirdi. Farklı bir ifade dene.
 Feature.Build.Error.ManagedPricingPartialUpdate,Bazı ürünler güncellenemedi.
 Feature.Build.Error.MonetizationOptionUpdate,Seçenek güncellenemedi. Tekrar dene.
@@ -2054,7 +2058,7 @@ Feature.Build.Label.InProgress,Devam ediyor
 Feature.Build.Label.InputNeeded,Giriş gerekli
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Sınırlı
-Feature.Build.Label.Live,Canlı
+Feature.Build.Label.Live,Yayınlandı
 Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Yönetilen fiyatlandırma
 Feature.Build.Label.ManagedPricingMixed,Mevcut ürünler arasında karışık
@@ -2076,7 +2080,7 @@ Feature.Build.Label.PricingOptions,Fiyatlandırma seçenekleri
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,Herkese Açık
 Feature.Build.Label.PubliclyUnavailable,Herkese açık değil
-Feature.Build.Label.Published,Yayınlandı
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Hazır
 Feature.Build.Label.RegionalPricing,Bölgesel fiyatlandırma
@@ -3067,7 +3071,8 @@ Feature.Friends.Action.Close,
 Feature.Friends.Action.ConnectionAdded,Bağlantı Eklendi
 Feature.Friends.Action.ConnectionRequestSent,Bağlantı Talebi Gönderildi
 Feature.Friends.Action.EditProfile,Profili düzenle
-Feature.Friends.Action.FriendAdded,Arkadaş Eklendi
+Feature.Friends.Action.FindFriends,
+Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,Arkadaşlıktan Çıkarıldı
 Feature.Friends.Action.FriendRequestSent,Arkadaşlık İsteği Gönderildi
 Feature.Friends.Action.GetStarted,
@@ -3158,6 +3163,7 @@ Feature.Friends.Label.IntroducingConnections,Karşınızda Bağlantılar
 Feature.Friends.Label.JoinedInYear,{year} yılında katıldı 
 Feature.Friends.Label.ManageFriendsList,Arkadaş Listeni Yönet
 Feature.Friends.Label.ManageFriendsListCaption,Arkadaş listeni güncel tutmak için en az etkileşimde bulunduğun arkadaşlarını incele.
+Feature.Friends.Label.MultipleMutuals,{numConnections} ortak kişi
 Feature.Friends.Label.MutualConnection,1 ortak bağlantı
 Feature.Friends.Label.MutualConnectionTitle,Etkileşim Ağında 1 Ortak Kişi
 Feature.Friends.Label.MutualConnections,{numConnections} ortak bağlantı
@@ -3170,6 +3176,7 @@ Feature.Friends.Label.NewFriend,Yeni Arkadaş
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
 Feature.Friends.Label.NoFriendsYet,{name} henüz hiç arkadaşa sahip değil.
 Feature.Friends.Label.NowTrusted,{username} artık güvenilir arkadaşın
+Feature.Friends.Label.OneMutual,1 ortak kişi
 Feature.Friends.Label.PYMK,Tanıyor Olabileceğin Kişiler
 Feature.Friends.Label.Pending,Bekliyor
 Feature.Friends.Label.PlayedByUser,<b>{name}</b> oynadı

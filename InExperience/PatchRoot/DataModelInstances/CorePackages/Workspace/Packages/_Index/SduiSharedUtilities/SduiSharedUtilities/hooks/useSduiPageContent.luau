@@ -24,6 +24,7 @@ local function SduiPageWholeContent(p1)
 		extraLocalProps = reactModule.useMemo(function()
 			-- upvalues: verticalScrollingFrameRef (ref), var1 (ref), p1 (ref)
 			return {
+				scrollToSelectionAnimationManagedByParent = true,
 				scrollingFrameRef = verticalScrollingFrameRef,
 				verticalScrollingFrameRef = verticalScrollingFrameRef,
 				scrollViewPositionChangedSignal = var1.scrollViewPositionChangedSignal,

@@ -13,23 +13,24 @@ local fStringPlayerListOverrideTypeModule = require(parent.Flags.FStringPlayerLi
 local fFlagEnableMobilePlayerListOnConsole = playerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
 local fFlagPlayerListUseMobileOnSmallDisplay = playerListModule.Flags.FFlagPlayerListUseMobileOnSmallDisplay
 local fFlagPlayerListReskin = playerListModule.Flags.FFlagPlayerListReskin
+local fFlagLuaSupportMicroGamepadPreferredInput = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 
 local function _()
-	-- upvalues: userInputService (ref)
-	return if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true
+	-- upvalues: userInputService (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref)
+	return if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad else true else true
 end
 
 local _ = function()
-	-- upvalues: fFlagPlayerListReskin (ref), fFlagEnableMobilePlayerListOnConsole (ref), guiService (ref), userInputService (ref)
-	return fFlagPlayerListReskin and (fFlagEnableMobilePlayerListOnConsole and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true)))
+	-- upvalues: fFlagPlayerListReskin (ref), fFlagEnableMobilePlayerListOnConsole (ref), guiService (ref), userInputService (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref)
+	return fFlagPlayerListReskin and (fFlagEnableMobilePlayerListOnConsole and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad else true else true)))
 end
 
 local function isSmallTouchScreen()
-	-- upvalues: fFlagPlayerListReskin (ref), fFlagEnableMobilePlayerListOnConsole (ref), guiService (ref), userInputService (ref), fFlagPlayerListUseMobileOnSmallDisplay (ref), utilityModule (ref), fStringPlayerListOverrideTypeModule (ref)
+	-- upvalues: fFlagPlayerListReskin (ref), fFlagEnableMobilePlayerListOnConsole (ref), guiService (ref), userInputService (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), fFlagPlayerListUseMobileOnSmallDisplay (ref), utilityModule (ref), fStringPlayerListOverrideTypeModule (ref)
 	local var1
 	if _G.__TESTEZ_RUNNING_TEST__ then
 		return false
-	elseif fFlagPlayerListReskin and (fFlagEnableMobilePlayerListOnConsole and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true))) then
+	elseif fFlagPlayerListReskin and (fFlagEnableMobilePlayerListOnConsole and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad else true else true))) then
 		return true
 	elseif fFlagPlayerListUseMobileOnSmallDisplay then
 		var1 = guiService.ViewportDisplaySize == Enum.DisplaySize.Small
@@ -49,7 +50,16 @@ local function isSmallTouchScreen()
 		var3 = true
 		
 		if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then
-			local _ = userInputService.PreferredInput == Enum.PreferredInput.Gamepad
+			var3 = true
+			
+			if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad then
+				var3 = fFlagLuaSupportMicroGamepadPreferredInput
+				
+				if var3 then
+					var3 = userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad
+					var3 = nil
+				end
+			end
 		end
 	else
 		var3 = false
@@ -58,14 +68,14 @@ local function isSmallTouchScreen()
 end
 
 return function()
-	-- upvalues: isSmallTouchScreen (ref), VRService (ref), fFlagPlayerListReskin (ref), fFlagEnableMobilePlayerListOnConsole (ref), guiService (ref), userInputService (ref), tenFootInterfaceModule (ref), fFlagPlayerListPersistVisibilityModule (ref)
+	-- upvalues: isSmallTouchScreen (ref), VRService (ref), fFlagPlayerListReskin (ref), fFlagEnableMobilePlayerListOnConsole (ref), guiService (ref), userInputService (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), tenFootInterfaceModule (ref), fFlagPlayerListPersistVisibilityModule (ref)
 	local var1 = not isSmallTouchScreen()
 	
 	if var1 then
 		var1 = not VRService.VREnabled
 		
 		if var1 then
-			if not (fFlagPlayerListReskin and (fFlagEnableMobilePlayerListOnConsole and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true)))) and not fFlagEnableMobilePlayerListOnConsole then
+			if not (fFlagPlayerListReskin and (fFlagEnableMobilePlayerListOnConsole and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad else true else true)))) and not fFlagEnableMobilePlayerListOnConsole then
 				var1 = not tenFootInterfaceModule:IsEnabled()
 				
 				if var1 then

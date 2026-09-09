@@ -8,7 +8,8 @@ local viewTypeModule = require(script.Enums.ViewType)
 local inspectAndBuyVersionModule = require(script.Enums.InspectAndBuyVersion)
 local constantsModule = require(script.Constants)
 local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
-local fFlagAXEnableIaBTimedOptionsBulkPurchase = require(parent.AvatarExperienceFlags).FFlagAXEnableIaBTimedOptionsBulkPurchase
+local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+local fFlagAXEnableIaBTimedOptionsBulkPurchase = avatarExperienceFlagsModule.FFlagAXEnableIaBTimedOptionsBulkPurchase
 local _ = require(script.Stores.createItemSelectionStore)
 
 return {
@@ -35,7 +36,8 @@ return {
 	},
 	Components = {
 		BuyActionBar = if fFlagSocialEnableProfileInspectAndBuy then require(script.Components.Common.BuyActionBar) else nil,
-		ResponsivePanelLayout = require(script.Components.Common.ResponsivePanelLayout)
+		ResponsivePanelLayout = require(script.Components.Common.ResponsivePanelLayout),
+		SelectableItemCardRow = if avatarExperienceFlagsModule.FFlagAXIaBSelectableItemCardRow then require(script.Components.Common.SelectableItemCardRow.SelectableCardRowContainer) else nil
 	},
 	Contexts = {
 		ItemSelectionStoreContext = if fFlagAXEnableIaBTimedOptionsBulkPurchase then require(script.Contexts.ItemSelectionStoreContext) else nil

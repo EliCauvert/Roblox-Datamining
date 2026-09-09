@@ -8,6 +8,7 @@ local mappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSign
 local switchServerModule = require(corePackagesService.Workspace.Packages.SwitchServer)
 local constants = switchServerModule.Constants
 local switchServerStore = switchServerModule.GetSwitchServerStore(false)
+local isPioneerLaunch = require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch
 local signal = require(corePackagesService.Workspace.Packages.AppCommonLib).Signal
 local signalsUtilsModule = require(corePackagesService.Workspace.Packages.SignalsUtils)
 local var1 = false
@@ -29,7 +30,7 @@ local var4 = serviceModule:register({
 	initialAvailability = serviceModule.AvailabilitySignal.Unavailable,
 	id = constantsModule.SWITCH_SERVER_ID,
 	label = constants.BUTTON.LABEL,
-	sideSheetPlacement = sideSheetPlacement.Page,
+	sideSheetPlacement = if isPioneerLaunch() then sideSheetPlacement.SessionAction else sideSheetPlacement.Page,
 	activated = function()
 		-- upvalues: switchServerStore (ref)
 		switchServerStore.setConfirmationOpen(true)

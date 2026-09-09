@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("FriendsChatEnforceInputCharacterLimit", false)
+﻿return game:DefineFastFlag("FriendsChatEnforceInputCharacterLimit2", false) and require(script:FindFirstAncestor("FriendsChat").Parent.SharedFlags).FFlagChatInputBarGuardInvalidUtf8

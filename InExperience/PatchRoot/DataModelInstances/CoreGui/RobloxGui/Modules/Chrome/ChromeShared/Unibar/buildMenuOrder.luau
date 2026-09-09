@@ -19,7 +19,6 @@ local fFlagShowSwitchServerButton = sharedFlagsModule.FFlagShowSwitchServerButto
 local isPioneerLaunch = require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch
 local var1 = if fFlagIntegrateTraversalHistoryInSideSheet then require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).Traversal else nil
 local var2 = if var1 then var1.Flags.FFlagAddTraversalHistory else false
-local isSideSheetEnabledModule_1 = fFlagShowSwitchServerButton and isSideSheetEnabledModule
 
 local function _(p1, p2, p3)
 	if p1[p2] ~= nil then
@@ -28,7 +27,7 @@ local function _(p1, p2, p3)
 end
 
 return function()
-	-- upvalues: isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), argoPartyExperimentation (ref), fFlagExpChatCanShowFriendsTab (ref), isSpatial (ref), guiService (ref), isInExperienceUIVREnabled (ref), var2 (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), fFlagAddInviteFriendsIntegration (ref), constantsModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), isSideSheetEnabledModule_1 (ref), fFlagEnableInExperienceShop (ref), inExperienceSideSheetModule (ref), isPioneerLaunch (ref), isSideSheetEnabledModule (ref)
+	-- upvalues: isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), argoPartyExperimentation (ref), fFlagExpChatCanShowFriendsTab (ref), isSpatial (ref), guiService (ref), isInExperienceUIVREnabled (ref), var2 (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), fFlagAddInviteFriendsIntegration (ref), constantsModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), fFlagShowSwitchServerButton (ref), fFlagEnableInExperienceShop (ref), inExperienceSideSheetModule (ref), isPioneerLaunch (ref), isSideSheetEnabledModule (ref)
 	local var3 = isConnectDropdownEnabledModule()
 	
 	if var3 then
@@ -42,7 +41,7 @@ return function()
 		trust_and_safety = 40,
 		connect_dropdown = if var3 then 50 else nil,
 		[constantsModule.AVATAR_SWITCHER_ID] = if fFlagEnableInExperienceAvatarSwitcher then 60 else nil,
-		[constantsModule.SWITCH_SERVER_ID] = if isSideSheetEnabledModule_1 then 65 else nil,
+		[constantsModule.SWITCH_SERVER_ID] = if fFlagShowSwitchServerButton then 65 else nil,
 		[constantsModule.IN_EXPERIENCE_SHOP_ID] = if fFlagEnableInExperienceShop then 70 else nil,
 		leaderboard = 80,
 		emotes = 90,
@@ -65,6 +64,11 @@ return function()
 		t.traversal_history = nil
 		t.camera_entrypoint = nil
 		t.gallery = nil
+		local SWITCH_SERVER_ID = constantsModule.SWITCH_SERVER_ID
+		
+		if t[SWITCH_SERVER_ID] ~= nil then
+			t[SWITCH_SERVER_ID] = 200
+		end
 	elseif not isSideSheetEnabledModule then
 		if t.connect_dropdown ~= nil then
 			t.connect_dropdown = 10

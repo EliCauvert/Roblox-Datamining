@@ -2,7 +2,9 @@
 local parent = script:FindFirstAncestor("Responsive").Parent
 local appCommonLibModule = require(parent.AppCommonLib)
 local signal = appCommonLibModule.Signal
-local fFlagLuaAppResponsiveEnginePreferredInput = require(parent.SharedFlags).FFlagLuaAppResponsiveEnginePreferredInput
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagLuaAppResponsiveEnginePreferredInput = sharedFlagsModule.FFlagLuaAppResponsiveEnginePreferredInput
+local fFlagLuaSupportMicroGamepadPreferredInput = sharedFlagsModule.FFlagLuaSupportMicroGamepadPreferredInput
 local t = {
 	Pointer = "Pointer",
 	Touch = "Touch",
@@ -49,6 +51,9 @@ local var2 = if fFlagLuaAppResponsiveEnginePreferredInput then {
 	[Enum.PreferredInput.KeyboardAndMouse] = t.Pointer
 } else nil
 
+if fFlagLuaAppResponsiveEnginePreferredInput and fFlagLuaSupportMicroGamepadPreferredInput then
+	var2[Enum.PreferredInput.MicroGamepad] = t.Directional
+end
 function getPreferredInput()
 	-- upvalues: fFlagLuaAppResponsiveEnginePreferredInput (ref), userInputService (ref), var2 (ref), t (ref), appCommonLibModule (ref), t_3 (ref), t_4 (ref)
 	if fFlagLuaAppResponsiveEnginePreferredInput then

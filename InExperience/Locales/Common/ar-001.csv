@@ -160,6 +160,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,يحتوي CurveAnimat
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,لا يمكن أن تكون أجزاء الجسد في CurveAnimation أسفل {minHeight} من الأزرار أو على بعد أكثر من {maxDistance} من الأزرار عن HumanoidRootPart. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,لا يمكن أن يحتوي العنصران الفرعيان MarkerCurves وAnimationRigData في CurveAnimation على عناصر فرعية
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,يحتوي تسلسل CurveAnimation الهرمي على Scripts أو LocalScripts أو ModuleScripts. يُرجى إزالتها.
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,"تحتوي CurveAnimation على مجلد مكرر لجزء الجسد ""{bodyPartName}"" عند ""{instancePath}"". قد يظهر كل جزء من الجسد مرة واحدة على الأكثر في التسلسل الهرمي للحركة."
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,تعذَّر تحميل بيانات CurveAnimation. قد يكون أصل الحركة غير صالح أو يتعذَّر الوصول إليه.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,تحتوي CurveAnimation على مجلد جزء الجسد {folderName} والذي يتضمن تسلسلًا هرميًا غير صالح (يحتوي على عناصر تابعة غير مسموح بها أو تم إعدادها بشكل غير صحيح)
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"المجلد ""{boneName}"" في CurveAnimation ليس اسم عظم HRD/DRD معترفًا به. يجب أن تكون المجلدات الفرعية للحركة إما أجزاء جسد R15 صالحة أو أسماء عظام معترف بها (مثل HeadBase وSpine وChest وLeftClavicle وRightClavicle وLeftToeBase وRightToeBase أو عظام الأصابع مثل LeftHandIndex1)."
@@ -187,6 +188,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,تحتوي CurveAni
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,في CurveAnimation عند الزمن {time} ثانية، يتحرك جزء الجسد {bodyPart} بسرعة دوران {speed} من الدرجات في الثانية. الحد الأقصى للسرعة هو {maxSpeed} درجة في الثانية. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,في CurveAnimation عند الزمن {time} ثانية، يتحرك جزء الجسد {bodyPart} بسرعة {speed} من الأزرار في الثانية. الحد الأقصى للسرعة هو {maxSpeed} من الأزرار في الثانية. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,يتحرك جزء الجسد {bodyPart} في CurveAnimation مسافة تزيد عن {maxMovement} من الأزرار بين الإطارات. يُرجى إصلاح الحركة.
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,بنية CurveAnimation غير صالحة: {detail}. يُرجى التأكد من أن الحركة تتبع المخطط المتوقع.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,يحتوي CurveAnimation على {count} من العناصر التابعة. الحد الأقصى المسموح به هو {maxAllowed}. يُرجى تقليل عدد العناصر التابعة.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,تحتوي CurveAnimation على Curves بها عدد كبير جدًا من المفاتيح. الحد الأقصى لكل Curve هو {maxAllowed}. يُرجى إصلاح الحركة.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,تحتوي CurveAnimation على أكثر من {maxAllowed} من عناصر MarkerCurve. يُرجى التأكد من عدم وجود أكثر من {maxAllowed} من عناصر MarkerCurve التابعة.
@@ -1211,16 +1213,19 @@ Feature.AccountSettings.Message.Error.InvalidGuildedUrl,رابط الملف ال
 Feature.AccountSettings.Message.Error.InvalidTwitchUrl,رابط ملفك الشخصي على Twitch غير صالح.
 Feature.AccountSettings.Message.Error.InvalidXUrl,مقبض X غير صالح.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,رابط YouTube غير صالح.
+Feature.AddFriends.Action.FriendAdded,تمت إضافة صديق
 Feature.AddFriends.Action.IgnoreConnectionRequest,تجاهل طلب الاتصال
 Feature.AddFriends.Action.IgnoreFriendRequest,تجاهل طلب الصداقة
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,تجاهل طلب الصديق الموثوق به
 Feature.AddFriends.Action.RequestIgnored,تم تجاهل الطلب
+Feature.AddFriends.Label.AddFriendsTooltip,ابدأ بالبحث عن أصدقائك لاستكشاف Roblox برفقتهم.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,العثور على أشخاص على Roblox عن طريق البحث عن اسم المستخدم أو اسم العرض.
 Feature.AddFriends.Label.ConnectWithContacts,دعوة جهات اتصالك أو الاتصال بأصدقاء على Roblox.
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,البحث عن أشخاص
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.SearchForFriendsPrompt,
 Feature.AddFriends.Label.SyncWithContacts,قم بمزامنة جهات الاتصال للعثور على الأصدقاء ودعوتهم.
+Feature.AddFriends.Title.AddFriendsTooltipTitle,Roblox أكثر متعة مع الأصدقاء!
 Feature.AddFriends.Title.ConnectWithContacts,إضافة من جهات الاتصال
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,فتح المزيد من المحتوى والميزات.
 Feature.AgeVerificationUpsell.Button.Cancel,
@@ -1320,6 +1325,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,لقد وصلت إ�
 Feature.Avatar.BackgroundGeneration.Error.Moderation,هذه المطالبة لا تتبع قواعدنا الإرشادية. حاوِل وصف شيء آخر.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,هذه الخلفية لا تتوافق مع معايير مجتمع Roblox، لذا لم تتم إضافتها إلى مقتنياتك. حاول إنشاء خلفية جديدة.
 Feature.Avatar.BackgroundGeneration.Error.System,حدث خطأ ما أثناء إنشاء الخلفية. يُرجى المحاولة مرة أخرى.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,لقد وصلت إلى الحد الأقصى للنشر المُخصص لحسابك.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,لقد وصلت إلى الحد الأقصى للنشر اليومي. حاول مرة أخرى غدًا.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,لقد وصلت إلى الحد الأقصى للنشر في الساعة. حاول مرة أخرى في الساعة التالية.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,لقد وصلت إلى الحد الأقصى للنشر الشهري. حاول مرة أخرى في الشهر المقبل.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,حصريًا مع اشتراك Plus
@@ -1970,6 +1979,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,يجب أن يتكون ا
 Feature.Build.Error.DeveloperProductNameRequired,أدخل اسم المنتج.
 Feature.Build.Error.DeveloperProductNameTooLong,يجب أن يتكون الاسم من 50 حرفًا أو أقل.
 Feature.Build.Error.DeveloperProductPriceInvalid,"ينبغي أن يكون السعر عددًا صحيحًا من 1 إلى 1,000,000,000 من عملات Robux."
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,"اضغط على ""تحرير"" وأضف سعرًا قبل طرح المنتج للبيع."
 Feature.Build.Error.DeveloperProductTextModerated,تم تغيير نص هذا المنتج من قِبل فريق الإشراف لدى منصّة Roblox. جرّب صياغة مختلفة.
 Feature.Build.Error.ManagedPricingPartialUpdate,تعذَّر تحديث بعض المنتجات.
 Feature.Build.Error.MonetizationOptionUpdate,تعذَّر تحديث الخيار. حاول مرة أخرى.
@@ -2028,7 +2038,7 @@ Feature.Build.Label.InProgress,قيد التقدم
 Feature.Build.Label.InputNeeded,الإدخال مطلوب
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,محدودة
-Feature.Build.Label.Live,مباشر
+Feature.Build.Label.Live,منشورة
 Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,التسعير المُدار
 Feature.Build.Label.ManagedPricingMixed,مختلط عبر المنتجات الحالية
@@ -3041,6 +3051,7 @@ Feature.Friends.Action.Close,
 Feature.Friends.Action.ConnectionAdded,تمت إضافة جهة الاتصال
 Feature.Friends.Action.ConnectionRequestSent,تم ارسال طلب الاتصال
 Feature.Friends.Action.EditProfile,تحرير الملف الشخصي
+Feature.Friends.Action.FindFriends,العثور على أصدقاء
 Feature.Friends.Action.FriendAdded,تمت إضافة الصديق
 Feature.Friends.Action.FriendRemoved,تمت إزالة الصديق
 Feature.Friends.Action.FriendRequestSent,تم إرسال طلب صداقة
@@ -3132,10 +3143,11 @@ Feature.Friends.Label.IntroducingConnections,"نقدِّم لك ""جهات ال�
 Feature.Friends.Label.JoinedInYear,انضم إلى المنصة في {year}
 Feature.Friends.Label.ManageFriendsList,إدارة قائمة أصدقائك
 Feature.Friends.Label.ManageFriendsListCaption,راجع الأصدقاء الذين تفاعلت معهم أقل من غيرهم للحفاظ على قائمة محدّثة.
+Feature.Friends.Label.MultipleMutuals,{numConnections} من جهات التواصل المشتركة
 Feature.Friends.Label.MutualConnection,جهة اتصال واحدة مشتركة
 Feature.Friends.Label.MutualConnectionTitle,جهة تواصل مشتركة واحدة
 Feature.Friends.Label.MutualConnections,{numConnections} من جهات الاتصال المشتركة
-Feature.Friends.Label.MutualConnectionsTitle,{numConnections} من جهات التواصل المشتركة
+Feature.Friends.Label.MutualConnectionsTitle,
 Feature.Friends.Label.MutualFriendTitle,صديق مشترك واحد
 Feature.Friends.Label.MutualFriends,أصدقاء مشتركون
 Feature.Friends.Label.MutualFriendsTitle,{numConnections} من الأصدقاء المشتركين
@@ -3144,6 +3156,7 @@ Feature.Friends.Label.NewFriend,صديق جديد
 Feature.Friends.Label.NewFriendRequestsMax,أكثر من {maxRequestsCount}
 Feature.Friends.Label.NoFriendsYet,ليس لدى {name} أي أصدقاء بعد.
 Feature.Friends.Label.NowTrusted,{username} الآن ضمن أصدقائك الموثوقين
+Feature.Friends.Label.OneMutual,
 Feature.Friends.Label.PYMK,أشخاص قد تعرفهم
 Feature.Friends.Label.Pending,
 Feature.Friends.Label.PlayedByUser,تم اللعب بواسطة <b>{name}</b>

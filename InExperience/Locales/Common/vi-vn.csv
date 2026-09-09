@@ -1233,16 +1233,19 @@ Feature.AccountSettings.Message.Error.InvalidGuildedUrl,Đường dẫn url hồ
 Feature.AccountSettings.Message.Error.InvalidTwitchUrl,Địa chỉ url của hồ sơ Twitch không hợp lệ.
 Feature.AccountSettings.Message.Error.InvalidXUrl,Handle X không hợp lệ.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,Địa chỉ url của YouTube không hợp lệ.
+Feature.AddFriends.Action.FriendAdded,Đã Thêm Người Bạn
 Feature.AddFriends.Action.IgnoreConnectionRequest,Bỏ qua yêu cầu làm người quen
 Feature.AddFriends.Action.IgnoreFriendRequest,Bỏ qua yêu cầu kết bạn
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Bỏ qua yêu cầu làm bạn bè đáng tin cậy
 Feature.AddFriends.Action.RequestIgnored,Đã Bỏ Qua Yêu Cầu
+Feature.AddFriends.Label.AddFriendsTooltip,Bắt đầu bằng cách tìm bạn bè của bạn để bạn có thể khám phá Roblox cùng nhau.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Tìm người chơi trên Roblox bằng cách tìm kiếm tên tài khoản hoặc tên của họ.
 Feature.AddFriends.Label.ConnectWithContacts,Mời liên hệ hoặc kết nối với bạn bè đang chơi Roblox!
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Tìm Kiếm Người Chơi
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Tìm kiếm mọi người
 Feature.AddFriends.Label.SearchForFriendsPrompt,Tìm người chơi trên Roblox bằng cách tìm kiếm tên người chơi hoặc tên hiển thị của họ.
 Feature.AddFriends.Label.SyncWithContacts,Đồng bộ danh bạ để tìm và mời bạn bè!
+Feature.AddFriends.Title.AddFriendsTooltipTitle,Roblox sẽ vui hơn khi chơi cùng bạn bè!
 Feature.AddFriends.Title.ConnectWithContacts,Thêm từ Danh bạ
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,Mở khóa thêm nhiều nội dung và tính năng khác.
 Feature.AgeVerificationUpsell.Button.Cancel,
@@ -1996,6 +1999,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,Nội dung mô tả khôn
 Feature.Build.Error.DeveloperProductNameRequired,Nhập tên sản phẩm.
 Feature.Build.Error.DeveloperProductNameTooLong,Tên chỉ được chứa tối đa 50 ký tự.
 Feature.Build.Error.DeveloperProductPriceInvalid,Giá phải là một số nguyên từ 1 đến 1.000.000.000 Robux.
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,Hãy chọn Chỉnh sửa và thêm giá trước khi đăng bán sản phẩm.
 Feature.Build.Error.DeveloperProductTextModerated,Bộ phận kiểm duyệt của Roblox đã thay đổi văn bản của sản phẩm này. Hãy thử dùng cách diễn đạt khác.
 Feature.Build.Error.ManagedPricingPartialUpdate,Không thể cập nhật một số sản phẩm.
 Feature.Build.Error.MonetizationOptionUpdate,Không thể cập nhật tùy chọn. Vui lòng thử lại.
@@ -2054,7 +2058,7 @@ Feature.Build.Label.InProgress,Đang thực hiện
 Feature.Build.Label.InputNeeded,Cần thông tin đầu vào
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Giới hạn
-Feature.Build.Label.Live,Đã ra mắt
+Feature.Build.Label.Live,Đã đăng
 Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Giá được quản lý
 Feature.Build.Label.ManagedPricingMixed,Kết hợp trên các sản phẩm hiện tại
@@ -2076,7 +2080,7 @@ Feature.Build.Label.PricingOptions,Tùy chọn định giá
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,Công khai
 Feature.Build.Label.PubliclyUnavailable,Chưa phát hành công khai
-Feature.Build.Label.Published,Đã đăng
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Sẵn sàng
 Feature.Build.Label.RegionalPricing,Giá theo vùng
@@ -3067,7 +3071,8 @@ Feature.Friends.Action.Close,
 Feature.Friends.Action.ConnectionAdded,Đã thêm Người quen
 Feature.Friends.Action.ConnectionRequestSent,Đã gửi yêu cầu làm Người quen
 Feature.Friends.Action.EditProfile,Chỉnh sửa hồ sơ
-Feature.Friends.Action.FriendAdded,Đã Thêm Người Bạn
+Feature.Friends.Action.FindFriends,
+Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,Đã Loại Bỏ Người Bạn
 Feature.Friends.Action.FriendRequestSent,Đã Gửi Yêu Cầu Kết Bạn
 Feature.Friends.Action.GetStarted,Bắt Đầu
@@ -3158,10 +3163,11 @@ Feature.Friends.Label.IntroducingConnections,Giới thiệu tính năng Người
 Feature.Friends.Label.JoinedInYear,Đã tham gia vào năm {year}
 Feature.Friends.Label.ManageFriendsList,Quản Lý Danh Sách Bạn Bè Của Bạn
 Feature.Friends.Label.ManageFriendsListCaption,Xem lại bạn bè mà bạn ít tương tác nhất để giữ cho danh sách bạn bè của bạn được cập nhật.
+Feature.Friends.Label.MultipleMutuals,{numConnections} người quen chung
 Feature.Friends.Label.MutualConnection,1 Người quen chung
 Feature.Friends.Label.MutualConnectionTitle,1 người quen chung
 Feature.Friends.Label.MutualConnections,{numConnections} Người quen chung
-Feature.Friends.Label.MutualConnectionsTitle,{numConnections} người quen chung
+Feature.Friends.Label.MutualConnectionsTitle,
 Feature.Friends.Label.MutualFriendTitle,1 bạn bè chung
 Feature.Friends.Label.MutualFriends,Bạn Bè Chung
 Feature.Friends.Label.MutualFriendsTitle,{numConnections} bạn bè chung
@@ -3170,6 +3176,7 @@ Feature.Friends.Label.NewFriend,Bạn mới
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
 Feature.Friends.Label.NoFriendsYet,{name} chưa có bạn bè.
 Feature.Friends.Label.NowTrusted,{username} hiện đã trở thành bạn bè đáng tin cậy
+Feature.Friends.Label.OneMutual,
 Feature.Friends.Label.PYMK,Những Người Bạn Có Thể Biết
 Feature.Friends.Label.Pending,Chờ Xử Lý
 Feature.Friends.Label.PlayedByUser,Người từng chơi: <b>{name}</b>

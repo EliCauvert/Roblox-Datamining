@@ -176,6 +176,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation 包含�
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,CurveAnimation 中的身體部位不能低於距 HumanoidRootPart 高度 {minHeight} 個磚塊的位置，也不能高於距 HumanoidRootPart 高度 {maxDistance} 個磚塊的位置。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation 的子資料夾類型 MarkerCurves 和 AnimationRigData 不得有子資料夾
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,CurveAnimation 層級包含 Scripts、LocalScripts 或 ModuleScripts。請將之移除。
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,在「{instancePath}」，CurveAnimation 含有重複的身體部位資料夾「{bodyPartName}」。每個身體部位在動畫階層中最多只能出現一次。
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,無法載入 CurveAnimation 資料。動畫素材可能無效或無法存取。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation 包含具有無效層級的身體部位資料夾 {folderName}（其子資料夾不被允許或設定不正確）
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,CurveAnimation 中的資料夾「{boneName}」並非可辨識的 HRD/DRD 骨骼名稱。動畫子資料夾必須為有效的 R15 身體部位，或可辨識的骨骼名稱（例如：HeadBase、Spine、Chest、LeftClavicle、RightClavicle、LeftToeBase、RightToeBase，或 LeftHandIndex1 等手指骨骼）。
@@ -203,6 +204,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation 包�
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,在 CurveAnimation 中的第 {time} 秒，身體部位 {bodyPart} 以每秒 {speed} 度的旋轉速度移動。每秒最多可旋轉 {maxSpeed} 度。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,在 CurveAnimation 中的第 {time} 秒，身體部位 {bodyPart} 以每秒 {speed} 個磚塊的速度移動。每秒最多可移動 {maxSpeed} 個磚塊。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,CurveAnimation 中的身體部位 {bodyPart}，在不同影格之間移動的距離超過 {maxMovement} 個磚塊。請修正此動畫。
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,CurveAnimation 結構無效：{detail}。請確認動畫符合預期的架構。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation 具有 {count} 個後代（上限為 {maxAllowed} 個）。請減少後代數量。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation 包含的 Curve 含有過多索引鍵（每個 Curve 的上限為 {maxAllowed} 個）。請修正此動畫。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation 包含 {maxAllowed} 個以上的 MarkerCurve。請確保 MarkerCurve 後代的數量不超過 {maxAllowed} 個。
@@ -1230,16 +1232,19 @@ Feature.AccountSettings.Message.Error.InvalidGuildedUrl,Guilded 個人檔案網�
 Feature.AccountSettings.Message.Error.InvalidTwitchUrl,Twitch 網址無效。
 Feature.AccountSettings.Message.Error.InvalidXUrl,X 使用者名稱無效。
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,YouTube 網址無效。
+Feature.AddFriends.Action.FriendAdded,已新增好友
 Feature.AddFriends.Action.IgnoreConnectionRequest,忽略聯繫對象邀請
 Feature.AddFriends.Action.IgnoreFriendRequest,忽略好友邀請
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,忽略信任的好友邀請
 Feature.AddFriends.Action.RequestIgnored,已忽略邀請
+Feature.AddFriends.Label.AddFriendsTooltip,先找到您的朋友，一起開始探索 Roblox。
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,搜尋使用者名稱或名字，在 Roblox 找到其他人。
 Feature.AddFriends.Label.ConnectWithContacts,邀請聯絡人或與已經在 Roblox 的好友交流！
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,搜尋帳號
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,搜尋人員
 Feature.AddFriends.Label.SearchForFriendsPrompt,搜尋使用者名稱或顯示名稱，在 Roblox 找到其他人。
 Feature.AddFriends.Label.SyncWithContacts,同步聯絡人以尋找及邀請好友！
+Feature.AddFriends.Title.AddFriendsTooltipTitle,Roblox 跟好友一起享受更棒！
 Feature.AddFriends.Title.ConnectWithContacts,透過聯絡人新增
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,解鎖更多內容和功能。
 Feature.AgeVerificationUpsell.Button.Cancel,
@@ -1339,6 +1344,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,你已達到使用�
 Feature.Avatar.BackgroundGeneration.Error.Moderation,該提示不符合我們的準則。請嘗試描述其他內容。
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,此背景不符合 Roblox 社群標準，因此未新增到你的道具欄。請嘗試生成新背景。
 Feature.Avatar.BackgroundGeneration.Error.System,生成背景時發生錯誤，請再試一次。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,你已達到總發佈上限。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,你已達到每日發佈上限。請明天再試。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,你已達到每小時發佈上限。請下一個小時再試。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,你已達到每月發佈上限。請下個月再試。
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}／{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus 專屬
@@ -1989,6 +1998,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,"說明長度不得超過
 Feature.Build.Error.DeveloperProductNameRequired,輸入產品名稱。
 Feature.Build.Error.DeveloperProductNameTooLong,名稱長度不得超過 50 個字元。
 Feature.Build.Error.DeveloperProductPriceInvalid,"價格須為 1 到 1,000,000,000 Robux 之間的整數。"
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,將產品上架販售前，請先選擇「編輯」並新增價格。
 Feature.Build.Error.DeveloperProductTextModerated,Roblox 審核人員已變更此產品的文字。請嘗試使用其他文字。
 Feature.Build.Error.ManagedPricingPartialUpdate,無法更新部分產品。
 Feature.Build.Error.MonetizationOptionUpdate,無法更新選項，請再試一次。
@@ -2047,7 +2057,7 @@ Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,必須輸入內容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,受限
-Feature.Build.Label.Live,已發布
+Feature.Build.Label.Live,已發佈
 Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,管理定價
 Feature.Build.Label.ManagedPricingMixed,混合套用於現有產品
@@ -2069,7 +2079,7 @@ Feature.Build.Label.PricingOptions,定價選項
 Feature.Build.Label.Private,私人
 Feature.Build.Label.Public,公開
 Feature.Build.Label.PubliclyUnavailable,尚未開放大眾遊玩
-Feature.Build.Label.Published,已發佈
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,就緒
 Feature.Build.Label.RegionalPricing,區域定價
@@ -3060,7 +3070,8 @@ Feature.Friends.Action.Close,
 Feature.Friends.Action.ConnectionAdded,已新增聯繫對象
 Feature.Friends.Action.ConnectionRequestSent,已傳送聯繫對象邀請
 Feature.Friends.Action.EditProfile,編輯個人檔案
-Feature.Friends.Action.FriendAdded,已新增好友
+Feature.Friends.Action.FindFriends,
+Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,已移除好友
 Feature.Friends.Action.FriendRequestSent,已傳送好友邀請
 Feature.Friends.Action.GetStarted,
@@ -3151,10 +3162,11 @@ Feature.Friends.Label.IntroducingConnections,隆重介紹聯絡對象
 Feature.Friends.Label.JoinedInYear,加入年份：{year}
 Feature.Friends.Label.ManageFriendsList,管理您的朋友清單
 Feature.Friends.Label.ManageFriendsListCaption,檢閱最少與您互動的朋友，以將朋友清單保持在最新狀態。
+Feature.Friends.Label.MultipleMutuals,{numConnections} 位共同聯絡對象
 Feature.Friends.Label.MutualConnection,1 位共同聯繫對象
 Feature.Friends.Label.MutualConnectionTitle,1 位共同聯絡對象
 Feature.Friends.Label.MutualConnections,{numConnections} 位共同聯繫對象
-Feature.Friends.Label.MutualConnectionsTitle,{numConnections} 位共同聯絡對象
+Feature.Friends.Label.MutualConnectionsTitle,
 Feature.Friends.Label.MutualFriendTitle,1 位共同好友
 Feature.Friends.Label.MutualFriends,共同好友
 Feature.Friends.Label.MutualFriendsTitle,{numConnections} 位共同好友
@@ -3163,6 +3175,7 @@ Feature.Friends.Label.NewFriend,新好友
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
 Feature.Friends.Label.NoFriendsYet,{name} 還沒有任何好友。
 Feature.Friends.Label.NowTrusted,{username} 現已成為信任的聯絡對象
+Feature.Friends.Label.OneMutual,
 Feature.Friends.Label.PYMK,您可能認識
 Feature.Friends.Label.Pending,待處理
 Feature.Friends.Label.PlayedByUser,<b>{name}</b>玩過

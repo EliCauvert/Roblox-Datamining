@@ -11,7 +11,6 @@ local centralOverlayModule = require(parent.CentralOverlay)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableArgusImmersiveNav = sharedFlagsModule.FFlagEnableArgusImmersiveNav
 local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
-local fFlagMomentsReportWithFeedId = sharedFlagsModule.FFlagMomentsReportWithFeedId
 local fFlagAbuseReportSubmissionTargetV4 = sharedFlagsModule.FFlagAbuseReportSubmissionTargetV4
 local view = foundationModule.View
 local iconButton = foundationModule.IconButton
@@ -35,7 +34,7 @@ local createUserMomentsFeedSourceModule = require(parent.Moments.CreateUserMomen
 local reportMoment = momentsModule.reportMoment
 
 return if fFlagEnableArgusImmersiveNav then function()
-	-- upvalues: useNavigation (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useDispatch (ref), closeCentralOverlay (ref), reportMoment (ref), fFlagMomentsReportWithFeedId (ref), openDynamicAbuseReport (ref), abuseVector (ref), fFlagAbuseReportSubmissionTargetV4 (ref), useScreenSize (ref), view (ref), momentsImmersivePresentation (ref), immersiveFeedKind (ref)
+	-- upvalues: useNavigation (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useDispatch (ref), closeCentralOverlay (ref), reportMoment (ref), openDynamicAbuseReport (ref), abuseVector (ref), fFlagAbuseReportSubmissionTargetV4 (ref), useScreenSize (ref), view (ref), momentsImmersivePresentation (ref), immersiveFeedKind (ref)
 	local var1 = useNavigation()
 	local extraProps = var1.getParam("extraProps")
 	local var2 = if extraProps and extraProps.targetUserId then extraProps.targetUserId else 0
@@ -50,11 +49,11 @@ return if fFlagEnableArgusImmersiveNav then function()
 	if fFlagEnableReportingFlowForMomentsFeed then
 		local var6 = useDispatch()
 		var5 = reactModule.useCallback(function(p1)
-			-- upvalues: var6 (ref), closeCentralOverlay (copy), reportMoment (copy), fFlagMomentsReportWithFeedId (copy), openDynamicAbuseReport (copy), abuseVector (copy), fFlagAbuseReportSubmissionTargetV4 (copy)
+			-- upvalues: var6 (ref), closeCentralOverlay (copy), reportMoment (copy), openDynamicAbuseReport (copy), abuseVector (copy), fFlagAbuseReportSubmissionTargetV4 (copy)
 			local var7 = false
 			
 			local function submitMomentsIp(_)
-				-- upvalues: var7 (write), p1 (ref), var6 (copy), closeCentralOverlay (copy), reportMoment (copy), fFlagMomentsReportWithFeedId (copy)
+				-- upvalues: var7 (write), p1 (ref), var6 (copy), closeCentralOverlay (copy), reportMoment (copy)
 				var7 = true
 				
 				local function _(p2)
@@ -67,7 +66,7 @@ return if fFlagEnableArgusImmersiveNav then function()
 					end
 				end
 				
-				return reportMoment(if fFlagMomentsReportWithFeedId then p1.feedItemId else p1.momentId, "IntellectualProperty"):andThen(function(p2)
+				return reportMoment(p1.feedItemId, "IntellectualProperty"):andThen(function(p2)
 					-- upvalues: p1 (copy), var6 (copy), closeCentralOverlay (copy)
 					local reportCode = p2.reportCode
 					p1.onClose()

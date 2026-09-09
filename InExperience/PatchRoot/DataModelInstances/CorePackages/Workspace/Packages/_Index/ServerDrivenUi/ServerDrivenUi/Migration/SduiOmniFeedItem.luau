@@ -10,12 +10,11 @@ local sduiErrors = sduiCoreSystemModule.SduiErrors
 local getSduiComponentWrapper = sduiCoreSystemModule.getSduiComponentWrapper
 local fIntLuaAppDelayImpressionsMaxUpdates = require(parent.SharedFlags).FIntLuaAppDelayImpressionsMaxUpdates
 local fFlagLuaAppCompositionAlways = require(parent.SharedFlags).FFlagLuaAppCompositionAlways
-local fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone = require(parent.SharedFlags).FFlagLuaAppHomeFirstTileThumbnailLoadedMilestone
 local var1 = game:DefineFastInt("SduiOmniFeedItemLogDelayMs", 500) / 1000
 local useSduiItemCollectionSignalModule = require(serverDrivenUi.DataStore.useSduiItemCollectionSignal)
 
 return reactModule.memo(function(p1)
-	-- upvalues: omniFeedPropsKey (ref), fFlagLuaAppCompositionAlways (ref), argCheckModule (ref), reactModule (ref), usePageSideMargin (ref), appPage (ref), useSduiItemCollectionSignalModule (ref), var1 (ref), sduiErrors (ref), getSduiComponentWrapper (ref), fIntLuaAppDelayImpressionsMaxUpdates (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref)
+	-- upvalues: omniFeedPropsKey (ref), fFlagLuaAppCompositionAlways (ref), argCheckModule (ref), reactModule (ref), usePageSideMargin (ref), appPage (ref), useSduiItemCollectionSignalModule (ref), var1 (ref), sduiErrors (ref), getSduiComponentWrapper (ref), fIntLuaAppDelayImpressionsMaxUpdates (ref)
 	local appPage_1 = p1[omniFeedPropsKey].appPage
 	local feedItemStartRow = p1[omniFeedPropsKey].feedItemStartRow
 	local verticalScrollingFrameRef = p1[omniFeedPropsKey].verticalScrollingFrameRef
@@ -62,7 +61,7 @@ return reactModule.memo(function(p1)
 		end)
 	end
 	return reactModule.useMemo(function()
-		-- upvalues: var6 (ref), getSduiComponentWrapper (copy), reactModule (copy), topicId (ref), sduiContext (ref), scrollViewPositionChangedSignal (ref), verticalScrollingFrameRef (ref), p1 (ref), var2 (ref), var4 (ref), feedItemStartRow (ref), fIntLuaAppDelayImpressionsMaxUpdates (copy), selectionOrderBase (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (copy), omniFeedPropsKey (copy), var7 (ref)
+		-- upvalues: var6 (ref), getSduiComponentWrapper (copy), reactModule (copy), topicId (ref), sduiContext (ref), scrollViewPositionChangedSignal (ref), verticalScrollingFrameRef (ref), p1 (ref), var2 (ref), var4 (ref), feedItemStartRow (ref), fIntLuaAppDelayImpressionsMaxUpdates (copy), selectionOrderBase (ref), var7 (ref)
 		return if var6 == nil then nil else reactModule.createElement(getSduiComponentWrapper(var6), {
 			debugName = topicId,
 			componentConfig = var6,
@@ -76,15 +75,13 @@ return reactModule.memo(function(p1)
 				startRow = feedItemStartRow,
 				numUpdatesToDelayImpressions = fIntLuaAppDelayImpressionsMaxUpdates,
 				selectionOrderBase = selectionOrderBase,
-				appCompositionEnabled = var2,
-				onTileImageLoaded = if fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone then p1[omniFeedPropsKey].onTileImageLoaded else nil
+				appCompositionEnabled = var2
 			},
 			localAnalyticsData = var7
 		})
 	end, {
 		var6, topicId, var7, feedItemStartRow, var4, p1.topicId, p1.sortIndex,
 		scrollViewPositionChangedSignal, verticalScrollingFrameRef, sduiContext,
-		selectionOrderBase,
-		if fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone then p1[omniFeedPropsKey].onTileImageLoaded else nil
+		selectionOrderBase
 	})
 end)

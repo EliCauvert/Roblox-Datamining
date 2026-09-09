@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppSduiSponsoredTwoByOneTileDev", false) and require(script.Parent.FFlagMigrateGameInfoToStore)
+﻿return game:DefineFastFlag("LuaAppSduiSponsoredTwoByOneTile2", false) and (require(script.Parent.FFlagLuaAppSduiGameTileFeedback) and require(script.Parent.FFlagMigrateGameInfoToStore))

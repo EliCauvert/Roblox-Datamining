@@ -1,6 +1,7 @@
 ﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local unifiedEventLogConstants = require(parent.AvatarExperienceAnalytics).UnifiedEventLogConstants
 local unifiedEventLogEnums = require(parent.AvatarExperienceAnalytics).UnifiedEventLogEnums
+local sendUnifiedEventLog = require(parent.AvatarExperienceAnalytics).sendUnifiedEventLog
 local avatarScreen = require(parent.AvatarExperienceNavigation).Enums.AvatarScreen
 local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
@@ -17,6 +18,7 @@ local fFlagAXEnableHomeTryOnComplexView = sharedFlagsModule.FFlagAXEnableHomeTry
 local fFlagAXFixPurchaseSurfaceLogging = sharedFlagsModule.FFlagAXFixPurchaseSurfaceLogging
 local fFlagAXAvatarSortInDiscoveryUnifiedPurchase = sharedFlagsModule.FFlagAXAvatarSortInDiscoveryUnifiedPurchase
 local fFlagAXFixHomeAvatarsUnifiedPurchase = sharedFlagsModule.FFlagAXFixHomeAvatarsUnifiedPurchase
+local fFlagAXDiscoveryItemPurchaseAttribution = sharedFlagsModule.FFlagAXDiscoveryItemPurchaseAttribution
 local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
 local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local AXFixHomepageTryOnScreenAnalytics = game:DefineFastFlag("AXFixHomepageTryOnScreenAnalytics", false)
@@ -24,7 +26,7 @@ local var2 = if fFlagAXTryOnScreenImprovements then {
 	[appPage.Home] = impressionEnums.MarketplaceSurfaceType.DISCOVERY_HOMEPAGE,
 	[appPage.SearchPage] = impressionEnums.MarketplaceSurfaceType.DISCOVERY_SEARCH_RESULTS
 } else nil
-local var3 = if fFlagAXAvatarSortInDiscoveryUnifiedPurchase then {
+local var3 = if fFlagAXDiscoveryItemPurchaseAttribution or fFlagAXAvatarSortInDiscoveryUnifiedPurchase then {
 	[appPage.Home] = unifiedLoggingSurface.DISCOVERY_HOMEPAGE,
 	[appPage.SearchPage] = unifiedLoggingSurface.DISCOVERY_SEARCH_RESULTS
 } else nil
@@ -40,7 +42,7 @@ local function _(p1, p2, p3)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: sduiActionType (ref), sduiErrorType (ref), unifiedEventLogEnums (ref), fFlagAXAvatarSortInDiscoveryUnifiedPurchase (ref), var3 (ref), fFlagAXFixHomeAvatarsUnifiedPurchase (ref), findAnalyticsFieldInAncestors (ref), fFlagAXTryOnScreenImprovements (ref), var2 (ref), impressionEnums (ref), AXFixHomepageTryOnScreenAnalytics (ref), appPage (ref), analyticsService (ref), unifiedLoggingSurface (ref), unifiedEventLogConstants (ref), avatarScreen (ref), fFlagAXFixPurchaseSurfaceLogging (ref), fFlagAXEnableHomeTryOnComplexView (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
+	-- upvalues: sduiActionType (ref), sduiErrorType (ref), unifiedEventLogEnums (ref), fFlagAXDiscoveryItemPurchaseAttribution (ref), fFlagAXAvatarSortInDiscoveryUnifiedPurchase (ref), var3 (ref), fFlagAXFixHomeAvatarsUnifiedPurchase (ref), findAnalyticsFieldInAncestors (ref), fFlagAXTryOnScreenImprovements (ref), var2 (ref), impressionEnums (ref), AXFixHomepageTryOnScreenAnalytics (ref), appPage (ref), analyticsService (ref), unifiedLoggingSurface (ref), sendUnifiedEventLog (ref), unifiedEventLogConstants (ref), avatarScreen (ref), fFlagAXFixPurchaseSurfaceLogging (ref), fFlagAXEnableHomeTryOnComplexView (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
 	local var4 = if p1 then p1.actionParams else nil
 	
 	if var4 == nil then
@@ -98,7 +100,7 @@ return function(p1, p2, p3)
 	end
 	local text = var6 .. var8
 	local appPage_1 = nil
-	local var8 = if fFlagAXAvatarSortInDiscoveryUnifiedPurchase then var3[p3.appPage] else nil
+	local var8 = if fFlagAXDiscoveryItemPurchaseAttribution or fFlagAXAvatarSortInDiscoveryUnifiedPurchase then var3[p3.appPage] else nil
 	local var9 = if fFlagAXFixHomeAvatarsUnifiedPurchase then {
 		widgetId = findAnalyticsFieldInAncestors("widgetId", p2),
 		widgetType = findAnalyticsFieldInAncestors("widgetType", p2),
@@ -171,7 +173,11 @@ return function(p1, p2, p3)
 					widgetItemPrice = itemPrice
 				}
 			end
-			analyticsService.EventStream:sendTelemetryEvent(unifiedEventLogConstants.EVENT_NAME, unifiedEventLogConstants.EVENT_NAME, t_1)
+			if fFlagAXDiscoveryItemPurchaseAttribution then
+				sendUnifiedEventLog(t_1)
+			else
+				analyticsService.EventStream:sendTelemetryEvent(unifiedEventLogConstants.EVENT_NAME, unifiedEventLogConstants.EVENT_NAME, t_1)
+			end
 		end
 	end
 	local t = {

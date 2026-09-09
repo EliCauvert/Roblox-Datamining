@@ -8,8 +8,6 @@ local upsellComponentModule = require(socialUpsell.Analytics.Enum.UpsellComponen
 local upsellStageModule = require(socialUpsell.Analytics.Enum.UpsellStage)
 local _ = require(parent.SocialLuaAnalytics).Analytics.Enums.EventTypes
 local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local fFlagAddAEGIS2AnalyticsModule = require(socialUpsell.Flag.FFlagAddAEGIS2Analytics)
-local fFlagAddUpsellEntryComponentToAnalyticsModule = require(socialUpsell.Flag.FFlagAddUpsellEntryComponentToAnalytics)
 local t = {
 	description = "Upsell Banner Analytics Event",
 	backends = { "EventIngest" },
@@ -18,8 +16,8 @@ local t = {
 }
 
 function evaluateUpsellStage(p1, p2, p3)
-	-- upvalues: upsellComponentModule (ref), upsellEntrySurfaceTypeModule (ref), fFlagAddAEGIS2AnalyticsModule (ref), upsellStageModule (ref)
-	return if p2 == upsellComponentModule.Modal then if p3 == upsellComponentModule.Modal and (p1 == upsellEntrySurfaceTypeModule.Homepage or fFlagAddAEGIS2AnalyticsModule and (p1 == upsellEntrySurfaceTypeModule.InExperienceChatInputBar or p1 == upsellEntrySurfaceTypeModule.InExperienceVoiceChatIcon)) then upsellStageModule.Fae else upsellStageModule.FaeDetails else upsellStageModule.Fae
+	-- upvalues: upsellComponentModule (ref), upsellEntrySurfaceTypeModule (ref), upsellStageModule (ref)
+	return if p2 == upsellComponentModule.Modal then if p3 == upsellComponentModule.Modal and (p1 == upsellEntrySurfaceTypeModule.Homepage or p1 == upsellEntrySurfaceTypeModule.InExperienceChatInputBar or p1 == upsellEntrySurfaceTypeModule.InExperienceVoiceChatIcon) then upsellStageModule.Fae else upsellStageModule.FaeDetails else upsellStageModule.Fae
 end
 
 local function _(p1, p2, p3)
@@ -27,7 +25,7 @@ local function _(p1, p2, p3)
 end
 
 function logUpsellEvent(p1, p2)
-	-- upvalues: cryoModule (ref), t (ref), rbxAnalyticsService (ref), fFlagAddUpsellEntryComponentToAnalyticsModule (ref), fFlagAddAEGIS2AnalyticsModule (ref), telemetryService (ref)
+	-- upvalues: cryoModule (ref), t (ref), rbxAnalyticsService (ref), telemetryService (ref)
 	local var1 = cryoModule.Dictionary.join(t, { eventName = p1 })
 	local playSessionId = rbxAnalyticsService:GetPlaySessionId()
 	local t_1 = {
@@ -39,7 +37,7 @@ function logUpsellEvent(p1, p2)
 		conversationId = p2.conversationId or nil,
 		playSessionId = if playSessionId ~= "" then nil else playSessionId,
 		clientTimeStamp = os.time(),
-		upsellEntryComponent = if fFlagAddUpsellEntryComponentToAnalyticsModule then p2.upsellEntryComponent else nil
+		upsellEntryComponent = p2.upsellEntryComponent
 	}
 	local upsellPurpose = p2.upsellPurpose
 	local upsellEntrySurface = p2.upsellEntrySurface
@@ -47,11 +45,8 @@ function logUpsellEvent(p1, p2)
 	t_1.upsellIdentifier = if upsellPurpose and upsellEntrySurface and upsellComponent then upsellPurpose .. upsellEntrySurface .. upsellComponent else nil
 	t_1.upsellPurpose = p2.upsellPurpose
 	local list = { "addSessionInfo" }
-	
-	if fFlagAddAEGIS2AnalyticsModule then
-		table.insert(list, "addPlaceId")
-		table.insert(list, "addUniverseId")
-	end
+	table.insert(list, "addPlaceId")
+	table.insert(list, "addUniverseId")
 	telemetryService:LogEvent(var1, { customFields = t_1, standardizedFields = list })
 end
 

@@ -820,14 +820,17 @@ Feature.AccountSettings.Message.Error.InvalidGuildedUrl,Неверная ссы�
 Feature.AccountSettings.Message.Error.InvalidTwitchUrl,Неверная ссылка на страницу Twitch.
 Feature.AccountSettings.Message.Error.InvalidXUrl,Неверный дескриптор X.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,Неверная ссылка на страницу YouTube.
+Feature.AddFriends.Action.FriendAdded,Друг добавлен
 Feature.AddFriends.Action.IgnoreConnectionRequest,Игнорировать запрос дружбы
 Feature.AddFriends.Action.IgnoreFriendRequest,
 Feature.AddFriends.Action.RequestIgnored,Запрос заблокирован
+Feature.AddFriends.Label.AddFriendsTooltip,"Начни с поиска друзей, чтобы исследовать Roblox вместе."
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"Находи пользователей Roblox, используя поиск по имени пользователя или отображаемому имени."
 Feature.AddFriends.Label.ConnectWithContacts,"Приглашай своих друзей или общайся с друзьями, которые уже в Roblox!"
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Поиск людей
 Feature.AddFriends.Label.SearchForFriendsPrompt,"Найди людей в Roblox, используя поиск по имени пользователя или отображаемому имени."
 Feature.AddFriends.Label.SyncWithContacts,"Синхронизируй контакты, чтобы найти и пригласить друзей!"
+Feature.AddFriends.Title.AddFriendsTooltipTitle,В Roblox намного веселее с друзьями!
 Feature.AddFriends.Title.ConnectWithContacts,Добавить из контактов
 Feature.AgeVerificationUpsell.Button.Cancel,
 Feature.AgeVerificationUpsell.Button.Settings,Подтвердить мой возраст
@@ -1784,7 +1787,8 @@ Feature.Friends.Action.Close,
 Feature.Friends.Action.ConnectionAdded,Контакт добавлен
 Feature.Friends.Action.ConnectionRequestSent,Запрос на добавление в контакты отправлен
 Feature.Friends.Action.EditProfile,Изменить профиль
-Feature.Friends.Action.FriendAdded,Друг добавлен
+Feature.Friends.Action.FindFriends,
+Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,Друг удалён
 Feature.Friends.Action.FriendRequestSent,Запрос дружбы отправлен
 Feature.Friends.Action.GetStarted,Начало работы

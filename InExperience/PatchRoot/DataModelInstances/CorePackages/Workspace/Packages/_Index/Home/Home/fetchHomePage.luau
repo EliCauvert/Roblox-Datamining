@@ -16,9 +16,11 @@ local buildHomePageRequestModule = require(home.buildHomePageRequest)
 local measureHomeCollectionLayoutModule = require(home.measureHomeCollectionLayout)
 local writeHomePageSduiPrefetchDescriptorModule = require(home.writeHomePageSduiPrefetchDescriptor)
 local prefetchProtocol = require(parent.PrefetchProtocol).PrefetchProtocol
+local friendRecommendations = require(parent.HomeStore).FriendRecommendations
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiClientTemplateCache = sharedFlagsModule.FFlagSduiClientTemplateCache
 local fFlagEnableHomePageSduiPrefetch = sharedFlagsModule.FFlagEnableHomePageSduiPrefetch
+local fFlagLuaAppSduiHomePageSupport = sharedFlagsModule.FFlagLuaAppSduiHomePageSupport
 
 local function _(p1, p2)
 	-- upvalues: homeConstantsModule (ref)
@@ -29,6 +31,13 @@ local _ = function(p1)
 	local var1 = if type(p1) == "table" then p1.request_id else nil
 	
 	return if var1 == nil or var1 == "" then nil else var1
+end
+
+local _ = function(p1)
+	local var1 = if type(p1) == "table" then p1.hydration_data else nil
+	local var2 = if type(var1) == "table" then var1.friend_recommendation else nil
+	
+	return if type(var2) == "table" then var2 else {}
 end
 
 local function commitHomeSession(_, p1)
@@ -45,7 +54,7 @@ local function commitHomeSession(_, p1)
 end
 
 local function fetchHomePage(p1, p2)
-	-- upvalues: homeConstantsModule (ref), getSduiApiStore (ref), fFlagEnableHomePageSduiPrefetch (ref), homePageSessionModule (ref), prefetchProtocol (ref), parent (ref), sduiCapabilities (ref), measureHomeCollectionLayoutModule (ref), sduiResponseType (ref), getHomePageUrlModule (ref), appPage (ref), sduiApiStorePostConfigContentType (ref), buildHomePageRequestModule (ref), fFlagSduiClientTemplateCache (ref), getSduiTemplateStore (ref), sduiSharedUtilitiesModule (ref), commitHomeSession (ref), writeHomePageSduiPrefetchDescriptorModule (ref), fetchHomePage (ref)
+	-- upvalues: homeConstantsModule (ref), getSduiApiStore (ref), fFlagEnableHomePageSduiPrefetch (ref), homePageSessionModule (ref), prefetchProtocol (ref), parent (ref), sduiCapabilities (ref), measureHomeCollectionLayoutModule (ref), sduiResponseType (ref), getHomePageUrlModule (ref), appPage (ref), sduiApiStorePostConfigContentType (ref), buildHomePageRequestModule (ref), fFlagSduiClientTemplateCache (ref), getSduiTemplateStore (ref), sduiSharedUtilitiesModule (ref), fFlagLuaAppSduiHomePageSupport (ref), friendRecommendations (ref), commitHomeSession (ref), writeHomePageSduiPrefetchDescriptorModule (ref), fetchHomePage (ref)
 	local configKey = homeConstantsModule.ConfigKey
 	local var1 = getSduiApiStore()
 	local var2 = if p2 then p2.forceRefresh else nil
@@ -96,7 +105,13 @@ local function fetchHomePage(p1, p2)
 		enableTemplateCache = if fFlagSduiClientTemplateCache then true else nil,
 		mergeStrategy = sduiSharedUtilitiesModule.streamingFeedMergeStrategy,
 		onSuccess = function(p3, p4)
-			-- upvalues: commitHomeSession (copy), fFlagEnableHomePageSduiPrefetch (copy), writeHomePageSduiPrefetchDescriptorModule (copy), enabledCapabilityNumbers (ref)
+			-- upvalues: fFlagLuaAppSduiHomePageSupport (copy), friendRecommendations (copy), commitHomeSession (copy), fFlagEnableHomePageSduiPrefetch (copy), writeHomePageSduiPrefetchDescriptorModule (copy), enabledCapabilityNumbers (ref)
+			if fFlagLuaAppSduiHomePageSupport then
+				local replaceFriendRecommendations = friendRecommendations.getStore().replaceFriendRecommendations
+				local var8 = if type(p4) == "table" then p4.hydration_data else nil
+				local var9 = if type(var8) == "table" then var8.friend_recommendation else nil
+				replaceFriendRecommendations(if type(var9) == "table" then var9 else {})
+			end
 			commitHomeSession(p3, p4)
 			
 			if fFlagEnableHomePageSduiPrefetch then

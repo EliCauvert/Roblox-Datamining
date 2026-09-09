@@ -1214,16 +1214,19 @@ Feature.AccountSettings.Message.Error.InvalidGuildedUrl,L'Url del profilo Gilded
 Feature.AccountSettings.Message.Error.InvalidTwitchUrl,L'URL del profilo Twitch non è valido.
 Feature.AccountSettings.Message.Error.InvalidXUrl,L'handle X non è valido.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,L'URL YouTube non è valido.
+Feature.AddFriends.Action.FriendAdded,Amico Aggiunto
 Feature.AddFriends.Action.IgnoreConnectionRequest,Ignora richiesta di contatto
 Feature.AddFriends.Action.IgnoreFriendRequest,Ignora richiesta di amicizia
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignora richiesta di amico affidabile
 Feature.AddFriends.Action.RequestIgnored,Richiesta Ignorata
+Feature.AddFriends.Label.AddFriendsTooltip,Inizia a trovare i tuoi amici in modo da poter esplorare Roblox insieme.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Trova persone su Roblox cercando il loro nome utente o il nome visualizzato.
 Feature.AddFriends.Label.ConnectWithContacts,Invita contatti o connettiti con amici già su Roblox!
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Ricerca per Persone
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Ricerca gente
 Feature.AddFriends.Label.SearchForFriendsPrompt,
 Feature.AddFriends.Label.SyncWithContacts,Sincronizza i contatti per trovare e invitare amici!
+Feature.AddFriends.Title.AddFriendsTooltipTitle,Roblox è meglio con gli amici!
 Feature.AddFriends.Title.ConnectWithContacts,Aggiungi dai contatti
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,Sblocca più contenuti e funzionalità.
 Feature.AgeVerificationUpsell.Button.Cancel,
@@ -1977,6 +1980,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,La descrizione deve conte
 Feature.Build.Error.DeveloperProductNameRequired,Inserisci un nome per il prodotto.
 Feature.Build.Error.DeveloperProductNameTooLong,Il nome deve contenere 50 caratteri o meno.
 Feature.Build.Error.DeveloperProductPriceInvalid,Il prezzo deve essere un numero intero compreso tra 1 e 1.000.000.000 di Robux.
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,Seleziona Modifica e aggiungi un prezzo prima di pubblicare un annuncio di vendita per un prodotto.
 Feature.Build.Error.DeveloperProductTextModerated,La moderazione di Roblox ha modificato il testo di questo prodotto. Prova una formulazione diversa.
 Feature.Build.Error.ManagedPricingPartialUpdate,Non è stato possibile aggiornare alcuni prodotti.
 Feature.Build.Error.MonetizationOptionUpdate,Non è stato possibile aggiornare l'opzione. Riprova.
@@ -2035,7 +2039,7 @@ Feature.Build.Label.InProgress,In corso
 Feature.Build.Label.InputNeeded,Input necessario
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitata
-Feature.Build.Label.Live,
+Feature.Build.Label.Live,Pubblicato
 Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Prezzi gestiti
 Feature.Build.Label.ManagedPricingMixed,Misti tra i prodotti attuali
@@ -3048,6 +3052,7 @@ Feature.Friends.Action.Close,
 Feature.Friends.Action.ConnectionAdded,Contatto aggiunto
 Feature.Friends.Action.ConnectionRequestSent,Richiesta di contatto inviata
 Feature.Friends.Action.EditProfile,Modifica profilo
+Feature.Friends.Action.FindFriends,
 Feature.Friends.Action.FriendAdded,Amico/a aggiunto
 Feature.Friends.Action.FriendRemoved,Amico rimosso
 Feature.Friends.Action.FriendRequestSent,Richiesta di amicizia inviata
@@ -3139,6 +3144,7 @@ Feature.Friends.Label.IntroducingConnections,Ti presentiamo i Contatti
 Feature.Friends.Label.JoinedInYear,Sulla piattaforma dal {year}
 Feature.Friends.Label.ManageFriendsList,Gestisci la tua rubrica amici
 Feature.Friends.Label.ManageFriendsListCaption,Rivedi gli amici con cui hai interagito di meno per mantenere la tua lista di amici aggiornata.
+Feature.Friends.Label.MultipleMutuals,{numConnections} collegamenti in comune
 Feature.Friends.Label.MutualConnection,1 contatto in comune
 Feature.Friends.Label.MutualConnectionTitle,
 Feature.Friends.Label.MutualConnections,{numConnections} contatti in comune
@@ -3151,6 +3157,7 @@ Feature.Friends.Label.NewFriend,Nuovo amico
 Feature.Friends.Label.NewFriendRequestsMax,Più di {maxRequestsCount}
 Feature.Friends.Label.NoFriendsYet,{name} non ha ancora amici.
 Feature.Friends.Label.NowTrusted,{username} è ora un tuo amico affidabile
+Feature.Friends.Label.OneMutual,1 collegamento in comune
 Feature.Friends.Label.PYMK,Persone che potresti conoscere
 Feature.Friends.Label.Pending,
 Feature.Friends.Label.PlayedByUser,Giocato da <b>{name}</b>

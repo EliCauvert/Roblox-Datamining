@@ -2,7 +2,9 @@
 local textChatService = game:GetService("TextChatService")
 local parent = script:FindFirstAncestor("ExpChatServer").Parent
 local list = require(parent.llama).List
-local var1 = require(parent.ExpChatShared).Logger:new("ExpChat/" .. script.Name)
+local expChatSharedModule = require(parent.ExpChatShared)
+local markTextChannelAsDefault = expChatSharedModule.markTextChannelAsDefault
+local var1 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 
 local function _(p1, p2)
 	-- upvalues: textChatService (ref), var1 (ref)
@@ -25,11 +27,12 @@ local _ = function(p1, p2)
 end
 
 local function createWhisperChannel(p1, p2)
-	-- upvalues: textChatService (ref), list (ref)
+	-- upvalues: textChatService (ref), markTextChannelAsDefault (ref), list (ref)
 	local formattedText = string.format("RBXWhisper:%d_%d", if p1 < p2 then p1 else p2, if p2 < p1 then p1 else p2)
 	local textChannels = textChatService:FindFirstChild("TextChannels") or textChatService
 	local textChannel = Instance.new("TextChannel")
 	textChannel.Name = formattedText
+	markTextChannelAsDefault(textChannel)
 	textChannel.Parent = textChannels
 	textChannel:AddUserAsync(p1)
 	textChannel:AddUserAsync(p2)

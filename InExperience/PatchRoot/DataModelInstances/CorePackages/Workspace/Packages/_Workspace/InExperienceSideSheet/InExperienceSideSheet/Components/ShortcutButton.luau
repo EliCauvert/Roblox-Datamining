@@ -1,6 +1,6 @@
 ﻿local parent = script:FindFirstAncestor("InExperienceSideSheet").Parent
 local reactModule = require(parent.React)
-local _ = require(parent.Signals)
+local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local foundationModule = require(parent.Foundation)
@@ -10,31 +10,32 @@ local icon = foundationModule.Icon
 local iconSize = foundationModule.Enums.IconSize
 local text = foundationModule.Text
 local view = foundationModule.View
+local var1 = signalsModule.createSignal(nil)
 
 local _ = function(p1)
 	return p1 + (1 - p1) * 0.5
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), signalsReactModule (ref), reactModule (ref), iconSize (ref), isBuilderIcon (ref), view (ref), icon (ref), text (ref)
-	local var1 = useTokens()
-	local var2 = useLocalization({ label = p1.label })
-	local var3 = signalsReactModule.useSignalState(p1.getIsEnabled)
-	local var4 = signalsReactModule.useSignalState(p1.getShortcutIcon)
-	local var5 = reactModule.useCallback(function()
+	-- upvalues: useTokens (ref), useLocalization (ref), signalsReactModule (ref), var1 (ref), reactModule (ref), iconSize (ref), isBuilderIcon (ref), view (ref), icon (ref), text (ref)
+	local var2 = useTokens()
+	local var3 = useLocalization({ label = p1.label })
+	local var4 = signalsReactModule.useSignalState(p1.getIsEnabled)
+	local var5 = signalsReactModule.useSignalState(p1.getShortcutIcon or var1)
+	local var6 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref)
 		p1.getOnActivated()()
 	end, { p1.getOnActivated })
 	local medium = iconSize.Medium
-	local xSmall = var1.Gap.XSmall
+	local xSmall = var2.Gap.XSmall
 	
-	if isBuilderIcon(var4) then
+	if isBuilderIcon(var5) then
 		medium = iconSize.XLarge
-		xSmall = var1.Gap.Small
+		xSmall = var2.Gap.Small
 	end
-	local var6
-	local var7 = if p1.isEmphasis then var1.Color.ActionSoftEmphasis.Background else var1.Color.ActionStandard.Background
-	local var8 = if p1.isEmphasis then var1.Color.ActionSoftEmphasis.Foreground else var1.Color.ActionStandard.Foreground
+	local var7
+	local var8 = if p1.isEmphasis then var2.Color.ActionSoftEmphasis.Background else var2.Color.ActionStandard.Background
+	local var9 = if p1.isEmphasis then var2.Color.ActionSoftEmphasis.Foreground else var2.Color.ActionStandard.Foreground
 	local createElement = reactModule.createElement
 	local t = {
 		tag = {
@@ -48,23 +49,23 @@ return reactModule.memo(function(p1)
 			FillDirection = Enum.FillDirection.Horizontal,
 			Padding = UDim.new(0, xSmall)
 		},
-		isDisabled = not var3
+		isDisabled = not var4
 	}
-	local t_1 = { Color3 = var7.Color3 }
+	local t_1 = { Color3 = var8.Color3 }
 	
-	if var3 then
-		var6 = var7.Transparency
+	if var4 then
+		var7 = var8.Transparency
 	else
-		local transparency = var7.Transparency
-		var6 = transparency + (1 - transparency) * 0.5
+		local transparency = var8.Transparency
+		var7 = transparency + (1 - transparency) * 0.5
 	end
-	t_1.Transparency = var6
+	t_1.Transparency = var7
 	t.backgroundStyle = t_1
-	t.onActivated = var5
+	t.onActivated = var6
 	t.LayoutOrder = p1.layoutOrder
 	
 	return createElement(view, t, {
-		ShortcutIcon = if var4 then reactModule.createElement(icon, { LayoutOrder = 1, name = var4, size = medium }) else nil,
+		ShortcutIcon = if var5 then reactModule.createElement(icon, { LayoutOrder = 1, name = var5, size = medium }) else nil,
 		Text = reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = {
@@ -74,10 +75,10 @@ return reactModule.memo(function(p1)
 				["content-action-standard"] = not p1.isEmphasis,
 				["content-action-soft-emphasis"] = p1.isEmphasis
 			},
-			Text = var2.label,
+			Text = var3.label,
 			textStyle = {
-				Color3 = var8.Color3,
-				Transparency = if var3 then var8.Transparency else 0.5
+				Color3 = var9.Color3,
+				Transparency = if var4 then var9.Transparency else 0.5
 			}
 		})
 	})

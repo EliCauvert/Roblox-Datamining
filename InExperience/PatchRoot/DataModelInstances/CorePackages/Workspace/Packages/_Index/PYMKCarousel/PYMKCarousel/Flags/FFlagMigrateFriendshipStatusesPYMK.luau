@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("MigrateFriendshipStatusesPYMK_v1", false) and require(script:FindFirstAncestor("PYMKCarousel").Parent.SharedFlags).FFlagEnableGetFriendshipStatus

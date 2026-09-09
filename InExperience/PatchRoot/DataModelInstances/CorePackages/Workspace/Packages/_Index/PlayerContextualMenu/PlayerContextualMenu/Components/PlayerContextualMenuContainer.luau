@@ -23,7 +23,6 @@ local name = require(parent.Loggers).Logger:new(script.Name)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
 local getFFlagAppChatPCMFixBlocking = sharedFlagsModule.getFFlagAppChatPCMFixBlocking
-local fFlagRenameDeprecatedUIBloxTokens = sharedFlagsModule.FFlagRenameDeprecatedUIBloxTokens
 local recommendationContextType = require(parent.FriendsRodux).config({ keyPath = "PlayerContextualMenu.Friends" }).Enums.RecommendationContextType
 local useRecommendationContextualInfoDisplay = require(parent.SocialCommon).Hooks.useRecommendationContextualInfoDisplay
 local _ = require(script.Parent.Types)
@@ -100,7 +99,7 @@ local t_1 = {
 }
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), roactRodux (ref), robloxAppHooksModule (ref), navigationModule (ref), appSessionService (ref), useLocalization (ref), t_1 (ref), toastRoduxModule (ref), reactModule (ref), setupFireEvent (ref), analyticsService (ref), useHttpRequestModule (ref), url (ref), getFFlagAppChatPCMFixBlocking (ref), fFlagUserBlockingApiPlayerContextMenuEnabledModule (ref), blockingModule (ref), name (ref), useDesignTokens (ref), fFlagRenameDeprecatedUIBloxTokens (ref), userProfilesModule (ref), var2 (ref), recommendationContextType (ref), getPresenceIconModule (ref), getPresenceTextModule (ref), useRecommendationContextualInfoDisplay (ref), eventNames (ref), setGamePlaySession (ref), sessionType (ref), discoveryAnalyticsModule (ref), getCurrentRouteState (ref), appPage (ref), button (ref), buttonType (ref), launchGameWithAnalytics (ref), fFlagUserProfileConsoleUseNewReportFlowModule (ref), openDynamicAbuseReportModule (write), abuseVectorModule (write), closeCentralOverlay (write), fFlagSkipBlockModal (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), friendsModule (ref), images (ref), playerContextualMenuVendorImagePath (ref), NO_OPT_CALLBACK (ref), dashModule (ref), playerContextualMenuComponentModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), roactRodux (ref), robloxAppHooksModule (ref), navigationModule (ref), appSessionService (ref), useLocalization (ref), t_1 (ref), toastRoduxModule (ref), reactModule (ref), setupFireEvent (ref), analyticsService (ref), useHttpRequestModule (ref), url (ref), getFFlagAppChatPCMFixBlocking (ref), fFlagUserBlockingApiPlayerContextMenuEnabledModule (ref), blockingModule (ref), name (ref), useDesignTokens (ref), userProfilesModule (ref), var2 (ref), recommendationContextType (ref), getPresenceIconModule (ref), getPresenceTextModule (ref), useRecommendationContextualInfoDisplay (ref), eventNames (ref), setGamePlaySession (ref), sessionType (ref), discoveryAnalyticsModule (ref), getCurrentRouteState (ref), appPage (ref), button (ref), buttonType (ref), launchGameWithAnalytics (ref), fFlagUserProfileConsoleUseNewReportFlowModule (ref), openDynamicAbuseReportModule (write), abuseVectorModule (write), closeCentralOverlay (write), fFlagSkipBlockModal (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), friendsModule (ref), images (ref), playerContextualMenuVendorImagePath (ref), NO_OPT_CALLBACK (ref), dashModule (ref), playerContextualMenuComponentModule (ref)
 	local var3 = cryoModule.Dictionary.union(t, p1)
 	local var4 = roactRodux.useDispatch()
 	local var5 = robloxAppHooksModule.useLocalUserId()
@@ -157,9 +156,8 @@ return function(p1)
 		end, { var13, var4, var3.subjectUserId })
 	end
 	local var14 = useDesignTokens(function(p2)
-		-- upvalues: fFlagRenameDeprecatedUIBloxTokens (copy)
 		return {
-			iconEmphasis = if fFlagRenameDeprecatedUIBloxTokens then p2.Color.Content.Emphasis else p2.Semantic.Icon.Emphasis,
+			iconEmphasis = p2.Color.Content.Emphasis,
 			onlinePresence = p2.Color.System.Success,
 			joinEventButtonHeight = p2.Size.Size_1200
 		}
@@ -487,7 +485,7 @@ return function(p1)
 		headerProps = reactModule.useMemo(function()
 			-- upvalues: ? (write), var15 (ref), var3 (ref), recommendationContextType (copy), var16 (write), var17 (write), var19 (ref), playerContextualMenuVendorImagePath (copy), var22 (write), var20 (write), var21 (write), var26 (ref), var27 (ref), var25 (ref)
 			return {
-				displayNameItem = { icon = nil, labelText = u392, isLoading = var15.loading },
+				displayNameItem = { icon = nil, labelText = u390, isLoading = var15.loading },
 				userNameItem = if var3.recommendationContext == recommendationContextType.Contacts then nil else {
 					icon = nil,
 					labelText = "@" .. var47,
@@ -511,7 +509,7 @@ return function(p1)
 				renderJoinEventButton = var25
 			}
 		end, {
-			var15, u864, var16, var17, var19, var20, var22, var21, var25, var26, var27,
+			var15, u859, var16, var17, var19, var20, var22, var21, var25, var26, var27,
 			var3.recommendationContext
 		}),
 		buttonProps = reactModule.useMemo(function()

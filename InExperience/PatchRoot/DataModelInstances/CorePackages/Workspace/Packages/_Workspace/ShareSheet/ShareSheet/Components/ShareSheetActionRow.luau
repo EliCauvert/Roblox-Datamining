@@ -9,9 +9,10 @@ local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemet
 local copyLinkModule = require(shareSheet.copyLink)
 local shareLinkModule = require(shareSheet.shareLink)
 local iconName = foundationModule.Enums.IconName
+local fFlagSharePplPickerModule = require(shareSheet.Flags.FFlagSharePplPicker)
 
 return function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), copyLinkModule (ref), shareSheetTelemetryModule (ref), shareLinkModule (ref), shareSheetRowModule (ref), shareSheetItemContainerModule (ref), iconName (ref)
+	-- upvalues: reactModule (ref), useLocalization (ref), copyLinkModule (ref), shareSheetTelemetryModule (ref), shareLinkModule (ref), shareSheetRowModule (ref), fFlagSharePplPickerModule (ref), shareSheetItemContainerModule (ref), iconName (ref)
 	local var1, var2 = reactModule.useState(false)
 	local var3 = reactModule.useRef(nil)
 	local var4 = useLocalization({
@@ -60,7 +61,10 @@ return function(p1)
 		end
 	end, {})
 	
-	return reactModule.createElement(shareSheetRowModule, { LayoutOrder = p1.LayoutOrder }, {
+	return reactModule.createElement(shareSheetRowModule, {
+		hasHorizontalPadding = if fFlagSharePplPickerModule then p1.hasHorizontalPadding else nil,
+		LayoutOrder = p1.LayoutOrder
+	}, {
 		CopyLink = reactModule.createElement(shareSheetItemContainerModule, {
 			LayoutOrder = 1,
 			icon = if var1 then iconName.Check else iconName.ChainLink,

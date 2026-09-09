@@ -117,7 +117,6 @@ local t = {
 	FFlagSideSheetAndroidBack = game:DefineFastFlag("SideSheetAndroidBack", false),
 	FFlagAddInviteFriendsIntegration = sharedFlagsModule.FFlagAddInviteFriendsIntegration,
 	FFlagIntegrateTraversalHistoryInSideSheet = sharedFlagsModule.FFlagIntegrateTraversalHistoryInSideSheet,
-	FFlagIGMSelectionGroup = game:DefineFastFlag("IGMSelectionGroup", false),
 	isExitModalRemoved = require(robloxGui.Modules.Settings.Flags.isExitModalRemoved),
 	FFlagEnableExitModalExposure = game:DefineFastFlag("EnableExitModalExposure", false)
 }
@@ -1694,23 +1693,17 @@ local function CreateSettingsHub()
 		t_2.PageViewClipper = create("Frame")({
 			Name = "PageViewClipper",
 			BackgroundTransparency = 1,
+			ClipsDescendants = true,
+			LayoutOrder = 1,
+			SelectionGroup = true,
 			Size = UDim2.new(t_2.HubBar.Size.X.Scale, t_2.HubBar.Size.X.Offset, 1, (-t_2.HubBar.Size.Y.Offset) - t_2.HubBar.Position.Y.Offset - var36),
 			Position = UDim2.new(t_2.HubBar.Position.X.Scale, t_2.HubBar.Position.X.Offset, t_2.HubBar.Position.Y.Scale, t_2.HubBar.Position.Y.Offset + t_2.HubBar.Size.Y.Offset + 1),
 			AnchorPoint = Vector2.new(0.5, 0),
-			ClipsDescendants = true,
-			LayoutOrder = 1,
 			Parent = page,
-			SelectionGroup = if t.FFlagIGMSelectionGroup then true else nil,
-			SelectionBehaviorLeft = if t.FFlagIGMSelectionGroup then Enum.SelectionBehavior.Stop else nil,
-			SelectionBehaviorRight = if t.FFlagIGMSelectionGroup then Enum.SelectionBehavior.Stop else nil,
-			SelectionBehaviorDown = if t.FFlagIGMSelectionGroup then Enum.SelectionBehavior.Escape else nil,
-			SelectionBehaviorUp = if t.FFlagIGMSelectionGroup then Enum.SelectionBehavior.Escape else nil,
-			if t.FFlagIGMSelectionGroup then nil else create("ImageButton")({
-				Name = "InputCapture",
-				BackgroundTransparency = 1,
-				Image = "",
-				Size = UDim2.new(1, 0, 1, 0)
-			})
+			SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
+			SelectionBehaviorRight = Enum.SelectionBehavior.Stop,
+			SelectionBehaviorDown = Enum.SelectionBehavior.Escape,
+			SelectionBehaviorUp = Enum.SelectionBehavior.Escape
 		})
 		
 		if t.FFlagEnableConsoleExpControls and t.ChromeEnabled then
@@ -2694,7 +2687,7 @@ local function CreateSettingsHub()
 		local _ = nil
 		local _ = t_2.Pages.CurrentPage
 		
-		if u9629 ~= nil and u9629.ShouldDisableDefaultScroll == true then
+		if u9579 ~= nil and u9579.ShouldDisableDefaultScroll == true then
 			t_2.PageView.ScrollBarThickness = 0
 			t_2.PageView.ScrollingEnabled = false
 			t_2.PageView.CanvasPosition = Vector2.new(0, 0)
@@ -2718,7 +2711,7 @@ local function CreateSettingsHub()
 			if p19 == "AbsoluteSize" then
 				local _ = nil
 				local _ = t_2.Pages.CurrentPage
-				local var62 = u10134
+				local var62 = u10084
 				
 				if not (var62 ~= nil and var62.ShouldDisableDefaultScroll == true) then
 					t_2.PageView.CanvasSize = UDim2.new(0, 0, 0, t_2.Pages.CurrentPage:GetSize().Y)

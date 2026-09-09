@@ -1,1 +1,1 @@
-﻿return require(script.Parent.FFlagDynamicHeadsMigration) and game:DefineFastFlag("EnableHeadShapeForCharacterManager6", false)
+﻿return game:DefineFastFlag("EnableHeadShapeForCharacterManager6", false)

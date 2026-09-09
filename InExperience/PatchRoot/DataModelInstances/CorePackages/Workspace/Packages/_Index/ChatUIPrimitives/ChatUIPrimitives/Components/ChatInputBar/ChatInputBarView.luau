@@ -3,6 +3,8 @@ local reactModule = require(parent.React)
 local reactIsModule = require(parent.ReactIs)
 local foundationModule = require(parent.Foundation)
 local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
+local fFlagChatInputBarGuardInvalidUtf8 = require(parent.SharedFlags).FFlagChatInputBarGuardInvalidUtf8
+local getTextLengthIfValidUtf8Module = require(script.Parent.getTextLengthIfValidUtf8)
 local channelChipModule = require(script.Parent.ChannelChip)
 local chatAutocompleteDropdownModule = require(script.Parent.Autocomplete.ChatAutocompleteDropdown)
 local useChatAutocompleteEngineModule = require(script.Parent.Autocomplete.useChatAutocompleteEngine)
@@ -396,7 +398,7 @@ local function renderComposer(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), fFlagExpChatEnableFriendsTab (ref), reactModule (ref), reactIsModule (ref), deriveBackgroundStyle (ref), deriveTransparency (ref), useChatAutocompleteEngineModule (ref), renderComposer (ref), renderLegacy (ref)
+	-- upvalues: foundationModule (ref), fFlagExpChatEnableFriendsTab (ref), reactModule (ref), reactIsModule (ref), deriveBackgroundStyle (ref), deriveTransparency (ref), useChatAutocompleteEngineModule (ref), fFlagChatInputBarGuardInvalidUtf8 (ref), getTextLengthIfValidUtf8Module (ref), renderComposer (ref), renderLegacy (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local themedColors = p1.themedColors
 	local var2 = if themedColors then var1.Color.Surface.Surface_100.Color3 else var1.DarkMode.Surface.Surface_100.Color3
@@ -480,18 +482,31 @@ return reactModule.memo(function(p1)
 		end
 	end, { textBoxRef })
 	local var21 = reactModule.useCallback(function(p2)
-		-- upvalues: maximumCharacterLimit (ref), var13 (ref), var15 (ref), onChange (ref), var12 (ref)
+		-- upvalues: maximumCharacterLimit (ref), fFlagChatInputBarGuardInvalidUtf8 (copy), getTextLengthIfValidUtf8Module (copy), var13 (ref), var15 (ref), onChange (ref), var12 (ref)
 		local text = p2.Text
 		
 		if maximumCharacterLimit ~= nil then
-			local normalized = utf8.nfcnormalize(text)
-			
-			if maximumCharacterLimit < (utf8.len(normalized) or #normalized) then
-				p2.Text = var13.current
+			if fFlagChatInputBarGuardInvalidUtf8 then
+				local var22 = getTextLengthIfValidUtf8Module(text)
 				
-				return
+				if var22 ~= nil then
+					if maximumCharacterLimit < var22 then
+						p2.Text = var13.current
+						
+						return
+					end
+					var13.current = text
+				end
+			else
+				local normalized = utf8.nfcnormalize(text)
+				
+				if maximumCharacterLimit < (utf8.len(normalized) or #normalized) then
+					p2.Text = var13.current
+					
+					return
+				end
+				var13.current = text
 			end
-			var13.current = text
 		end
 		var15(text == "")
 		

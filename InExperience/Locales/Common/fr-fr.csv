@@ -177,6 +177,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation contien
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,"Dans une CurveAnimation, les parties du corps ne peuvent pas se trouver à moins de {minHeight} studs ou à plus de {maxDistance} studs de la HumanoidRootPart. Merci de corriger l'animation."
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,les enfants MarkerCurves et AnimationRigData de CurveAnimation ne peuvent pas avoir d'enfants.
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"La hiérarchie CurveAnimation contient des Scripts, des LocalScripts ou des ModuleScripts. Supprime-les."
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,CurveAnimation contient un dossier de partie du corps en double « {bodyPartName} » au chemin d'accès suivant : « {instancePath} ». Chaque partie du corps ne peut apparaître qu'une seule fois dans la hiérarchie de l'animation.
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,Impossible de charger les données CurveAnimation. L'élément d'animation peut être invalide ou inaccessible.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation contient le dossier de partie du corps {folderName} présentant une hiérarchie invalide (il contient des enfants non autorisés ou mal configurés)
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"Le dossier « {boneName} » dans CurveAnimation n'est pas un nom d'os HRD/DRD reconnu. Les sous-dossiers d'animation doivent être soit des parties du corps R15 valides, soit des noms d'os reconnus (par exemple : HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase ou des os de doigts tels que LeftHandIndex1)."
@@ -204,6 +205,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation cont
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,"Dans CurveAnimation, à {time} secondes, la partie du corps {bodyPart} se déplace à une vitesse de rotation de {speed} degrés/seconde. La vitesse maximale en degrés/seconde est de {maxSpeed}. Merci de corriger l'animation."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,"Dans CurveAnimation, à {time} secondes, la partie du corps {bodyPart} se déplace à une vitesse de {speed} studs/seconde. La vitesse maximale en studs/seconde est de {maxSpeed}. Merci de corriger l'animation."
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,"Dans CurveAnimation, la partie du corps {bodyPart} se déplace de plus de {maxMovement} studs entre les images. Merci de corriger l'animation."
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,Structure de CurveAnimation invalide : {detail}. Vérifie que l'animation respecte le schéma attendu.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation a {count} descendants. Le maximum autorisé est de {maxAllowed}. Réduis le nombre de descendants.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation contient des Curves avec trop de clés. Le maximum par Curve est de {maxAllowed}. Merci de corriger l'animation.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation contient plus de {maxAllowed} descendants MarkerCurve. Veille à ce qu'il n'en contienne pas plus de {maxAllowed}.
@@ -1231,16 +1233,19 @@ Feature.AccountSettings.Message.Error.InvalidGuildedUrl,L'Url du profil Guilded 
 Feature.AccountSettings.Message.Error.InvalidTwitchUrl,L'URL du profil Twitch n'est pas valide.
 Feature.AccountSettings.Message.Error.InvalidXUrl,Le gestionnaire X n'est pas valide.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,L'URL YouTube n'est pas valide.
+Feature.AddFriends.Action.FriendAdded,Ami ajouté
 Feature.AddFriends.Action.IgnoreConnectionRequest,Ignorer la demande de connexion
 Feature.AddFriends.Action.IgnoreFriendRequest,Ignorer la demande d'amitié
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignorer la demande d'ajout aux amis de confiance
 Feature.AddFriends.Action.RequestIgnored,Demande ignorée
+Feature.AddFriends.Label.AddFriendsTooltip,Commence par trouver tes amis afin que vous puissiez explorer Roblox ensemble.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Trouve des personnes sur Roblox en recherchant leur nom d'utilisateur ou leur nom.
 Feature.AddFriends.Label.ConnectWithContacts,Invite des contacts ou communique avec des amis qui déjà sur Roblox !
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Rechercher des personnes
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.SearchForFriendsPrompt,Trouve des personnes sur Roblox en recherchant leur nom d'utilisateur ou leur nom d'affichage.
 Feature.AddFriends.Label.SyncWithContacts,Synchronise les contacts pour trouver et inviter des amis !
+Feature.AddFriends.Title.AddFriendsTooltipTitle,Roblox est meilleur avec des amis !
 Feature.AddFriends.Title.ConnectWithContacts,Ajouter à partir des Contacts
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,Débloque davantage de contenus et de fonctionnalités.
 Feature.AgeVerificationUpsell.Button.Cancel,
@@ -1340,6 +1345,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Tu as atteint ta li
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Cette invite ne respecte pas nos directives. Rédiges-en une autre.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Cet arrière-plan n'est pas conforme aux Normes de la communauté Roblox et n'a donc pas été ajouté à ton inventaire. Essaie d'en générer un nouveau.
 Feature.Avatar.BackgroundGeneration.Error.System,Une erreur s'est produite lors de la génération de ton arrière-plan. Réessaie.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,Tu as atteint ta limite totale de publications.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,Tu as atteint ta limite quotidienne de publication. Réessaie demain.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,Tu as atteint ta limite horaire de publication. Réessaie dans une heure.
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,Tu as atteint ta limite mensuelle de publication. Réessaie le mois prochain.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exclusivité Plus
@@ -1990,6 +1999,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,La description ne peut pa
 Feature.Build.Error.DeveloperProductNameRequired,Saisis un nom de produit.
 Feature.Build.Error.DeveloperProductNameTooLong,Le nom ne doit pas dépasser 50 caractères.
 Feature.Build.Error.DeveloperProductPriceInvalid,Le prix doit être un nombre entier compris entre 1 et 1 000 000 000 Robux.
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,Sélectionne Modifier et ajoute un prix avant de mettre un produit en vente.
 Feature.Build.Error.DeveloperProductTextModerated,La modération de Roblox a modifié le texte de ce produit. Reformule-le.
 Feature.Build.Error.ManagedPricingPartialUpdate,Impossible de mettre à jour certains produits.
 Feature.Build.Error.MonetizationOptionUpdate,Impossible de mettre à jour l'option. Réessaie.
@@ -2048,7 +2058,7 @@ Feature.Build.Label.InProgress,En cours
 Feature.Build.Label.InputNeeded,Saisie requise
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limité
-Feature.Build.Label.Live,En ligne
+Feature.Build.Label.Live,Publié
 Feature.Build.Label.Loading,Chargement…
 Feature.Build.Label.ManagedPricing,Tarification gérée
 Feature.Build.Label.ManagedPricingMixed,Mixte pour les produits actuels
@@ -2070,7 +2080,7 @@ Feature.Build.Label.PricingOptions,Options de tarification
 Feature.Build.Label.Private,Privé
 Feature.Build.Label.Public,Public
 Feature.Build.Label.PubliclyUnavailable,Non disponible au public
-Feature.Build.Label.Published,Publié
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,Acheté
 Feature.Build.Label.Ready,Prêt
 Feature.Build.Label.RegionalPricing,Prix régionaux
@@ -3061,7 +3071,8 @@ Feature.Friends.Action.Close,
 Feature.Friends.Action.ConnectionAdded,Connexion ajoutée
 Feature.Friends.Action.ConnectionRequestSent,Demande de connexion envoyée
 Feature.Friends.Action.EditProfile,Modifier le profil
-Feature.Friends.Action.FriendAdded,Ami ajouté
+Feature.Friends.Action.FindFriends,
+Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,Ami(e) retiré(e)
 Feature.Friends.Action.FriendRequestSent,Demande d'ami envoyée
 Feature.Friends.Action.GetStarted,
@@ -3152,6 +3163,7 @@ Feature.Friends.Label.IntroducingConnections,Introduction des Connexions
 Feature.Friends.Label.JoinedInYear,Inscrit en {year}
 Feature.Friends.Label.ManageFriendsList,Gérer ta liste d'amis
 Feature.Friends.Label.ManageFriendsListCaption,Passe en revue les amis avec lesquels tu as interagi pour garder votre liste d'amis à jour.
+Feature.Friends.Label.MultipleMutuals,{numConnections} connexions en commun
 Feature.Friends.Label.MutualConnection,1 connexion mutuelle
 Feature.Friends.Label.MutualConnectionTitle,1 connexion mutuelle
 Feature.Friends.Label.MutualConnections,{numConnections} connexions mutuelles
@@ -3164,6 +3176,7 @@ Feature.Friends.Label.NewFriend,Nouvel ami
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
 Feature.Friends.Label.NoFriendsYet,{name} n'a pas encore d'amis.
 Feature.Friends.Label.NowTrusted,{username} est maintenant un ami de confiance
+Feature.Friends.Label.OneMutual,1 connexion en commun
 Feature.Friends.Label.PYMK,Personnes que tu peux connaître
 Feature.Friends.Label.Pending,
 Feature.Friends.Label.PlayedByUser,Jouée par <b>{name}</b>
@@ -4847,7 +4860,7 @@ InGame.PlayerList.Retry,
 InGame.Presence.Label.InGame,
 InGame.Presence.Label.InStudio,En Studio
 InGame.Presence.Label.Offline,Hors ligne
-InGame.Presence.Label.Online,
+InGame.Presence.Label.Online,En ligne
 InGame.UnknownNamespace.BACKPACK_SEARCH,
 InGame.UnknownNamespace.GameChat.FriendChatNotifier.JoinMessage,Ton ami(e) {RBX_NAME} a rejoint l'expérience.
 InGame.UnknownNamespace.GameChat_ChatCommandsTeller_MuteCommand,/mute <interlocuteur> : bâillonne un interlocuteur.

@@ -6,10 +6,11 @@ local priceStatusModule = require(avatarExperienceInspectAndBuy.Enums.PriceStatu
 local getPriceStatusModule = require(avatarExperienceInspectAndBuy.Utils.getPriceStatus)
 local _ = require(avatarExperienceInspectAndBuy.Types)
 local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
+local fFlagAXIaBDiscountPriceLine = require(parent.AvatarExperienceFlags).FFlagAXIaBDiscountPriceLine
 local var1 = if fFlagSocialEnableProfileInspectAndBuy then require(avatarExperienceInspectAndBuy.Utils.getPriceStatusInShop) else nil
 
 return function(p1, p2, p3, p4)
-	-- upvalues: fFlagSocialEnableProfileInspectAndBuy (ref), var1 (ref), getPriceStatusModule (ref), priceStatusModule (ref)
+	-- upvalues: fFlagSocialEnableProfileInspectAndBuy (ref), var1 (ref), getPriceStatusModule (ref), fFlagAXIaBDiscountPriceLine (ref), priceStatusModule (ref)
 	local var2
 	local t = {}
 	local _ = nil
@@ -19,6 +20,15 @@ return function(p1, p2, p3, p4)
 		var2 = var1(p1)
 	else
 		var2 = getPriceStatusModule(p1, true)
+	end
+	local var3 = nil
+	
+	if fFlagAXIaBDiscountPriceLine and p1.discountInformation then
+		local discountInformation = p1.discountInformation
+		
+		if discountInformation.totalDiscountAmount and discountInformation.totalDiscountAmount > 0 then
+			var3 = discountInformation
+		end
 	end
 	local t_1 = {
 		[priceStatusModule.Owned] = { { type = "text", text = p3[priceStatusModule.Owned] } },
@@ -37,7 +47,15 @@ return function(p1, p2, p3, p4)
 				colorStyle = p2.Color.System.Warning
 			}
 		},
-		[priceStatusModule.PurchaseFromRoblox] = { { type = "price", price = p1.priceInRobux } },
+		[priceStatusModule.PurchaseFromRoblox] = if var3 then {
+			{
+				type = "price",
+				strikethrough = true,
+				isOriginalPrice = true,
+				price = var3.originalPrice
+			},
+			{ type = "price", price = p1.priceInRobux }
+		} else { { type = "price", price = p1.priceInRobux } },
 		[priceStatusModule.PurchaseFromResale] = if p1.isOffSale then {
 			{
 				type = "price",

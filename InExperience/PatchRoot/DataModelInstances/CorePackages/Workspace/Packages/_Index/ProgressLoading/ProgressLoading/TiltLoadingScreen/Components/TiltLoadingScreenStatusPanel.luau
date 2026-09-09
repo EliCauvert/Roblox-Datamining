@@ -35,7 +35,7 @@ local function _(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), fIntAutoJoinNewServerTimeMs (ref), runService (ref), constantsModule (ref), coreGuiService (ref), localizationService (ref), view (ref), enums (ref), text (ref), progress (ref), button (ref), isPioneerLaunch (ref), footerModule (ref)
+	-- upvalues: useLocalization (ref), reactModule (ref), fIntAutoJoinNewServerTimeMs (ref), runService (ref), constantsModule (ref), coreGuiService (ref), localizationService (ref), view (ref), isPioneerLaunch (ref), enums (ref), text (ref), progress (ref), button (ref), footerModule (ref)
 	local var1
 	local var2 = useLocalization({
 		antiAddictionText = "Authentication.Login.WeChat.AntiAddictionText",
@@ -164,7 +164,11 @@ return reactModule.memo(function(p1)
 	}, {
 		Status = reactModule.createElement(view, {
 			LayoutOrder = 1,
-			tag = "col align-x-center gap-small size-full-0 auto-y",
+			testId = "tilt-loading-screen-status",
+			tag = {
+				["col align-x-center gap-small size-full-0 auto-y"] = true,
+				["padding-bottom-small"] = isPioneerLaunch()
+			},
 			onActivated = var12,
 			stateLayer = { affordance = enums.StateLayerAffordance.None }
 		}, {

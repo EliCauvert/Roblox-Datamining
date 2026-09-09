@@ -18,7 +18,7 @@ local var1 = socialLuaAnalyticsModule.Telemetry.new({
 	backendsList = {
 		{
 			type = "EventIngest",
-			standardizedFields = if require(momentsCommon.Flags.GetFFlagMomentsAnalyticsProducerPrereqs)() then { "addSessionInfo", "addSessionId" } else nil,
+			standardizedFields = { "addSessionInfo", "addSessionId" },
 			overrideName = function(p1)
 				return p1.eventName
 			end,

@@ -1,5 +1,4 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
+﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local dataHydrationModule = require(parent.DataHydration)
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
@@ -10,17 +9,17 @@ local videoEndReason = videoUtilsModule.AnalyticsEnums.VideoEndReason
 local isVideoEligibleForPlayability = videoUtilsModule.isVideoEligibleForPlayability
 local useCanDevicePlayVideoPreview = videoUtilsModule.useCanDevicePlayVideoPreview
 local sduiVideoThumbnailModule = require(script.Parent.SduiVideoThumbnail)
-local useSduiGameVideoAnalyticsModule = require(serverDrivenUi.Analytics.useSduiGameVideoAnalytics)
+local useSduiVideoAnalytics = require(parent.SduiSharedContent).useSduiVideoAnalytics
 local fIntLuaAppGameTileVideoDwellTimeInSec = require(parent.SharedFlags).FIntLuaAppGameTileVideoDwellTimeInSec
 local fIntLuaAppGameTileVideoVisiblePercent = require(parent.SharedFlags).FIntLuaAppGameTileVideoVisiblePercent
 
 return function(p1)
-	-- upvalues: dataHydrationModule (ref), signalsReactModule (ref), useSduiGameVideoAnalyticsModule (ref), reactModule (ref), videoEndReason (ref), useCanDevicePlayVideoPreview (ref), tileVideoBlockingConfig (ref), sduiVideoThumbnailModule (ref), isVideoEligibleForPlayability (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref)
+	-- upvalues: dataHydrationModule (ref), signalsReactModule (ref), useSduiVideoAnalytics (ref), reactModule (ref), videoEndReason (ref), useCanDevicePlayVideoPreview (ref), tileVideoBlockingConfig (ref), sduiVideoThumbnailModule (ref), isVideoEligibleForPlayability (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref)
 	local playabilityStore = dataHydrationModule.Game.getPlayabilityStore(false)
 	local playability = playabilityStore.getPlayability(p1.universeId)
 	local var1 = signalsReactModule.useSignalState(playability.data)
 	local var2 = signalsReactModule.useSignalState(playability.status) == dataHydrationModule.DataStatus.Ready
-	local var3 = useSduiGameVideoAnalyticsModule(p1.analyticsContext, p1.sduiContext.appPage, p1.universeId, p1.placeId)
+	local var3 = useSduiVideoAnalytics(p1.analyticsContext, p1.sduiContext.appPage, p1.universeId, p1.placeId)
 	local var4 = reactModule.useCallback(function(p2)
 		-- upvalues: var2 (ref), var3 (ref), videoEndReason (copy)
 		if var2 then

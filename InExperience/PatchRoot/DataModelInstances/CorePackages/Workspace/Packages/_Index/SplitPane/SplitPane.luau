@@ -6,5 +6,7 @@
 	SplitPaneNavigationLayout = require(script.Components.SplitPaneNavigationLayout),
 	isSupportPaneScreen = require(script.Utils.isSupportPaneScreen),
 	SplitPaneSlot = require(script.Parent.AppSplitView).Enums.SplitPaneSlot,
+	SplitL3SessionHelper = require(script.Utils.SplitL3SessionHelper),
+	SplitL3SessionManager = require(script.Components.SplitL3SessionManager),
 	["jest.config"] = script["jest.config"]
 }

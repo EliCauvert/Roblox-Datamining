@@ -56,6 +56,7 @@ local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPres
 local fFlagExpChatPresetChatSendEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatSendEnabled
 local fFlagExpChatUniverseChatPresetEnabledModule = require(expChat.Flags.FFlagExpChatUniverseChatPresetEnabled)
 local fFlagExpChatPresetChatGamepadEnabledModule = require(expChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
+local fFlagLuaSupportMicroGamepadPreferredInput = sharedFlagsModule.FFlagLuaSupportMicroGamepadPreferredInput
 local fFlagAEGIS2EnableGatesForExpChatModule = require(expChat.Flags.FFlagAEGIS2EnableGatesForExpChat)
 local fFlagDebugForceEnableChatButtonOnModule = require(expChat.Flags.FFlagDebugForceEnableChatButtonOn)
 local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
@@ -186,7 +187,7 @@ appLayout.defaultProps = {
 local t = { frequency = 1.25, dampingRatio = 1 }
 
 function appLayout.init(p1)
-	-- upvalues: fFlagDebugFriendsChatModule (ref), fFlagDebugExpChatPerfModule (ref), userInputService (ref), roactModule (ref), otterModule (ref), getTransparencyStoreModule (ref), getFFlagExpChatTriggerWindowStatusEventModule (ref), getChatWindowStatusStoreModule (ref), fFlagExpChatWindowStatusEventFixesModule (ref), playersService (ref), textChatService (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), fFlagExpChatTransparentFocusSupportModule (ref), fFlagExpChatDictationFadeOverrideModule (ref), t (ref), createEffect (ref), fFlagAEGIS2EnableGatesForExpChatModule (ref), getChatStatusStoreModule (ref), fFlagExpChatPresetChatEnabled (ref), getPresetChatStoreModule (ref), constantsModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), fFlagExpChatPresetChatSendEnabled (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), getChatLayoutStoreModule (ref), reactFocusNavigationModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), getFocusNavigationStoreModule (ref), focusUtils (ref)
+	-- upvalues: fFlagDebugFriendsChatModule (ref), fFlagDebugExpChatPerfModule (ref), userInputService (ref), roactModule (ref), otterModule (ref), getTransparencyStoreModule (ref), getFFlagExpChatTriggerWindowStatusEventModule (ref), getChatWindowStatusStoreModule (ref), fFlagExpChatWindowStatusEventFixesModule (ref), playersService (ref), textChatService (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), fFlagExpChatTransparentFocusSupportModule (ref), fFlagExpChatDictationFadeOverrideModule (ref), t (ref), createEffect (ref), fFlagAEGIS2EnableGatesForExpChatModule (ref), getChatStatusStoreModule (ref), fFlagExpChatPresetChatEnabled (ref), getPresetChatStoreModule (ref), constantsModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), fFlagExpChatPresetChatSendEnabled (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), getChatLayoutStoreModule (ref), reactFocusNavigationModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), getFocusNavigationStoreModule (ref), focusUtils (ref)
 	p1.state = {}
 	
 	if fFlagDebugFriendsChatModule or fFlagDebugExpChatPerfModule then
@@ -315,7 +316,7 @@ function appLayout.init(p1)
 	end
 	if fFlagExpChatPresetChatEnabled then
 		p1.disposePresetFlyOutAvailableEffect = createEffect(function(p2)
-			-- upvalues: getPresetChatStoreModule (copy), constantsModule (copy), fFlagExpChatPresetChatGamepadEnabledModule (copy), userInputService (copy), p1 (ref), fFlagExpChatPresetChatSendEnabled (copy), fFlagExpChatUniverseChatPresetEnabledModule (copy)
+			-- upvalues: getPresetChatStoreModule (copy), constantsModule (copy), fFlagExpChatPresetChatGamepadEnabledModule (copy), userInputService (copy), fFlagLuaSupportMicroGamepadPreferredInput (copy), p1 (ref), fFlagExpChatPresetChatSendEnabled (copy), fFlagExpChatUniverseChatPresetEnabledModule (copy)
 			local var7 = getPresetChatStoreModule(p2)
 			local isEnabled = var7.getIsEnabled(p2)
 			local accessLevel = var7.getAccessLevel(p2)
@@ -323,7 +324,7 @@ function appLayout.init(p1)
 			local _ = nil
 			p1:setState({
 				isPresetFlyOutAvailable = isEnabled and (fFlagExpChatPresetChatSendEnabled and (accessLevel == constantsModule.AccessLevel.Enabled and (if p1.props.targetTextChannel == nil then fFlagExpChatUniverseChatPresetEnabledModule else true))),
-				presetLayoutMode = if layoutModeOverride == constantsModule.LayoutMode.Tray or layoutModeOverride == constantsModule.LayoutMode.FlyOut then layoutModeOverride elseif fFlagExpChatPresetChatGamepadEnabledModule and userInputService.PreferredInput == Enum.PreferredInput.Gamepad then constantsModule.LayoutMode.FlyOut elseif userInputService.TouchEnabled and not userInputService.MouseEnabled then constantsModule.LayoutMode.Tray else constantsModule.LayoutMode.FlyOut
+				presetLayoutMode = if layoutModeOverride == constantsModule.LayoutMode.Tray or layoutModeOverride == constantsModule.LayoutMode.FlyOut then layoutModeOverride elseif fFlagExpChatPresetChatGamepadEnabledModule and (userInputService.PreferredInput == Enum.PreferredInput.Gamepad or fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad) then constantsModule.LayoutMode.FlyOut elseif userInputService.TouchEnabled and not userInputService.MouseEnabled then constantsModule.LayoutMode.Tray else constantsModule.LayoutMode.FlyOut
 			})
 		end)
 	end

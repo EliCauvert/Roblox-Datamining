@@ -168,7 +168,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation 包含�
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,CurveAnimation 中的身体部位距离 HumanoidRootPart 不能低于 {minHeight} 格或高于 {maxDistance} 格。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation 的子级 MarkerCurves 和 AnimationRigData 不能有子级
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,CurveAnimation 层级结构包含 Scripts、LocalScripts 或 ModuleScripts。请将它们移除。
-Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,
+Common.UGCValidation.ErrorLabel.CurveAnim_DuplicateBodyPartFolder,CurveAnimation 包含重复的身体部件文件夹“{bodyPartName}”，位于“{instancePath}”。每个身体部位在动画层级结构中最多只能出现一次。
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,加载 CurveAnimation 数据失败。动画素材可能无效或无法访问。
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation 包含具有无效层级结构的身体部位文件夹“{folderName}”（包含不允许的子文件夹或设置不正确）
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchyDetail,
@@ -197,7 +197,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_PositionSeparation,CurveAnimation 中�
 Common.UGCValidation.ErrorLabel.CurveAnim_RotationTooFast,在 CurveAnimation 的第 {time} 秒，身体部位“{bodyPart}”以 {speed} 度/秒的旋转速度移动。最大旋转速度为 {maxSpeed} 度/秒。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFast,在 CurveAnimation 的第 {time} 秒，身体部位“{bodyPart}”以 {speed} 格/秒的速度移动。最大速度为 {maxSpeed} 格/秒。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_SpeedTooFastLegacy,CurveAnimation 中的身体部位“{bodyPart}”在帧之间移动的距离超过 {maxMovement} 格。请修改该动画。
-Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,
+Common.UGCValidation.ErrorLabel.CurveAnim_StrictSchemaViolation,CurveAnimation 结构无效：{detail}。请确保动画符合预期架构。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation 拥有 {count} 个子对象。允许的最大数量为 {maxAllowed} 个。请减少子对象数量。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation 包含关键帧过多的 Curve。每个 Curve 最多只能有 {maxAllowed} 个关键帧。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation 包含超过 {maxAllowed} 个 MarkerCurve。请确保 MarkerCurve 的子对象数量不超过 {maxAllowed} 个。
@@ -1223,16 +1223,19 @@ Feature.AccountSettings.Message.Error.InvalidGuildedUrl,导引个人资料网址
 Feature.AccountSettings.Message.Error.InvalidTwitchUrl,Twitch 个人资料网址无效。
 Feature.AccountSettings.Message.Error.InvalidXUrl,X 句柄无效。
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,YouTube 网址无效。
+Feature.AddFriends.Action.FriendAdded,好友已添加
 Feature.AddFriends.Action.IgnoreConnectionRequest,忽略联系人请求
 Feature.AddFriends.Action.IgnoreFriendRequest,忽略好友邀请
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,忽略可信好友请求
 Feature.AddFriends.Action.RequestIgnored,申请已忽略
+Feature.AddFriends.Label.AddFriendsTooltip,找到你的好友，一起开始探索 Roblox。
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,通过搜索用户名或昵称，在 Roblox 上找到你想找的人。
 Feature.AddFriends.Label.ConnectWithContacts,邀请联系人或与已经在 Roblox 上的好友交流！
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,搜索用户
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.SearchForFriendsPrompt,搜索用户名或昵称，在 Roblox 上找到对方。
 Feature.AddFriends.Label.SyncWithContacts,同步联系人以寻找并不接受预付卡。邀请好友！
+Feature.AddFriends.Title.AddFriendsTooltipTitle,和好友一起玩 Roblox 更开心！
 Feature.AddFriends.Title.ConnectWithContacts,从通讯录添加
 Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect,解锁更多内容和功能。
 Feature.AgeVerificationUpsell.Button.Cancel,
@@ -1332,10 +1335,10 @@ Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,你已达到使用�
 Feature.Avatar.BackgroundGeneration.Error.Moderation,该指令不符合我们的指南。请尝试描述其他内容。
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,此背景不符合 Roblox 社区准则，因此未添加至你的道具栏。请尝试生成新背景。
 Feature.Avatar.BackgroundGeneration.Error.System,为你生成背景时出错。请重试。
-Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,
-Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,
-Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,
-Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaAllTime,你已达到终身发布数量上限。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaDaily,你已达到每日发布数量上限。请明天再试。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaHourly,你已达到每小时发布数量上限。请在下一个小时重试。
+Feature.Avatar.BackgroundGeneration.Error.UploadQuotaMonthly,你已达到每月发布数量上限。请下个月再试。
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus 专属
@@ -1988,7 +1991,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,描述不能超过 1000 �
 Feature.Build.Error.DeveloperProductNameRequired,输入产品名称。
 Feature.Build.Error.DeveloperProductNameTooLong,名称不能超过 50 个字符。
 Feature.Build.Error.DeveloperProductPriceInvalid,"价格必须为 1 到 1,000,000,000 Robux 的整数。"
-Feature.Build.Error.DeveloperProductPriceRequiredForSale,
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,在发布待售产品之前，请选择“编辑”并添加价格。
 Feature.Build.Error.DeveloperProductTextModerated,Roblox 审核团队更改了此产品的文本。请尝试使用其他措辞。
 Feature.Build.Error.ManagedPricingPartialUpdate,无法更新某些商品。
 Feature.Build.Error.MonetizationOptionUpdate,无法更新选项。请重试。
@@ -3059,7 +3062,8 @@ Feature.Friends.Action.Close,
 Feature.Friends.Action.ConnectionAdded,联系人已添加
 Feature.Friends.Action.ConnectionRequestSent,联系人请求已发送
 Feature.Friends.Action.EditProfile,编辑个人资料
-Feature.Friends.Action.FriendAdded,好友已添加
+Feature.Friends.Action.FindFriends,
+Feature.Friends.Action.FriendAdded,
 Feature.Friends.Action.FriendRemoved,好友已被移除
 Feature.Friends.Action.FriendRequestSent,已发送好友邀请
 Feature.Friends.Action.GetStarted,开始使用
@@ -3150,9 +3154,10 @@ Feature.Friends.Label.IntroducingConnections,隆重介绍“联系人”
 Feature.Friends.Label.JoinedInYear,加入年份：{year}
 Feature.Friends.Label.ManageFriendsList,管理你的好友列表
 Feature.Friends.Label.ManageFriendsListCaption,查看与你互动最少的好友，让你的好友列表保持更新状态。
+Feature.Friends.Label.MultipleMutuals,{numConnections} 位共同联系人
 Feature.Friends.Label.MutualConnection,1 位共同联系人
 Feature.Friends.Label.MutualConnectionTitle,
-Feature.Friends.Label.MutualConnections,{numConnections} 位共同联系人
+Feature.Friends.Label.MutualConnections,
 Feature.Friends.Label.MutualConnectionsTitle,
 Feature.Friends.Label.MutualFriendTitle,1 位共同好友
 Feature.Friends.Label.MutualFriends,共同好友
@@ -3162,6 +3167,7 @@ Feature.Friends.Label.NewFriend,新好友
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
 Feature.Friends.Label.NoFriendsYet,{name}还没有任何好友。
 Feature.Friends.Label.NowTrusted,{username} 现已成为你信赖的好友
+Feature.Friends.Label.OneMutual,
 Feature.Friends.Label.PYMK,你可能认识的人
 Feature.Friends.Label.Pending,待处理
 Feature.Friends.Label.PlayedByUser,<b>{name}</b>玩过

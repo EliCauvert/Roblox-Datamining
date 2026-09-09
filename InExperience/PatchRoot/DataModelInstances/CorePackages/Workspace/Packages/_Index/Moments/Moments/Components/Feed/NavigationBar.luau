@@ -12,13 +12,14 @@ local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
 local useFormFactor = momentsCommonModule.Hooks.useFormFactor
 local usePreferredInputModule = require(moments.Hooks.usePreferredInput)
 local useTokens = foundationModule.Hooks.useTokens
+local fFlagLuaSupportMicroGamepadPreferredInput = require(parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 local formFactor = momentsCommonModule.Enums.FormFactor
 
 return function(p1)
-	-- upvalues: useDeviceInsets (ref), useFormFactor (ref), usePreferredInputModule (ref), useTokens (ref), formFactor (ref), reactModule (ref), view (ref), iconButton (ref), chevronLargeUp (ref), foundationModule (ref), chevronLargeDown (ref)
+	-- upvalues: useDeviceInsets (ref), useFormFactor (ref), usePreferredInputModule (ref), useTokens (ref), formFactor (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), reactModule (ref), view (ref), iconButton (ref), chevronLargeUp (ref), foundationModule (ref), chevronLargeDown (ref)
 	local var1 = usePreferredInputModule()
 	
-	return if useFormFactor() == formFactor.MobileLandscape then nil elseif not (var1 ~= Enum.PreferredInput.KeyboardAndMouse and var1 ~= Enum.PreferredInput.Gamepad) then if p1.active then reactModule.createElement(view, {
+	return if useFormFactor() == formFactor.MobileLandscape then nil elseif not (var1 ~= Enum.PreferredInput.KeyboardAndMouse and not (if var1 ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and var1 == Enum.PreferredInput.MicroGamepad else true)) then if p1.active then reactModule.createElement(view, {
 		tag = "size-full",
 		padding = {
 			right = UDim.new(0, math.max(useDeviceInsets().right, useTokens().Padding.XLarge))

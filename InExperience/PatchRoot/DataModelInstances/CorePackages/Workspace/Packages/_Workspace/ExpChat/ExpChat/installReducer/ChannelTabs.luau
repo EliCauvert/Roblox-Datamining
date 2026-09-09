@@ -3,6 +3,8 @@ local parent = expChat.Parent
 local roduxModule = require(parent.Rodux)
 local dictionary = require(parent.llama).Dictionary
 local expChatSharedModule = require(parent.ExpChatShared)
+local shouldRenderTextChannelInDefaultWindow = expChatSharedModule.shouldRenderTextChannelInDefaultWindow
+local getTextChannelDisplayMode = expChatSharedModule.getTextChannelDisplayMode
 local sharedFlagsModule = require(parent.SharedFlags)
 local var1 = expChatSharedModule.Logger:new("ExpChat/Reducers/" .. script.Name)
 local actions = expChat.Actions
@@ -239,12 +241,14 @@ return roduxModule.createReducer(t, {
 		}
 	end,
 	[localTextChannelParticipantAddedModule.name] = function(p5, p6)
-		-- upvalues: var1 (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatFriendsTabRequireDefaultChannels (ref), fFlagExpChatEnableFriendsTab (ref), friendsChatTabNameModule (ref), insertTabAndReorder (ref), dictionary (ref)
+		-- upvalues: var1 (ref), shouldRenderTextChannelInDefaultWindow (ref), getTextChannelDisplayMode (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatFriendsTabRequireDefaultChannels (ref), fFlagExpChatEnableFriendsTab (ref), friendsChatTabNameModule (ref), insertTabAndReorder (ref), dictionary (ref)
 		local var2
 		local name = p6.textChannel.Name
 		var1:trace("LocalTextChannelParticipantAdded dispatched: {}", name)
 		
 		if p5.allChannelTabs[name] ~= nil or name == "RBXSystem" then
+			return p5
+		elseif not shouldRenderTextChannelInDefaultWindow(p6.textChannel, getTextChannelDisplayMode()) then
 			return p5
 		elseif not getFFlagTextChatEnableUniverseChatTabs() then
 			var2 = fFlagExpChatFriendsTabRequireDefaultChannels and (fFlagExpChatEnableFriendsTab and not p5.channelTabsConfigurationEnabled)

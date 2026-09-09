@@ -11,6 +11,7 @@
 	GetFFlagExpChatSyntheticSystemMessageRichText = require(script.GetFFlagExpChatSyntheticSystemMessageRichText),
 	GetFFlagEnableExpChatUniverseChatTabNames = require(script.GetFFlagEnableExpChatUniverseChatTabNames),
 	GetFFlagExpChatSuppressWelcomeMessageTabUnread = require(script.GetFFlagExpChatSuppressWelcomeMessageTabUnread),
+	GetFFlagExpChatUseIsDefaultTextChannel = require(script.GetFFlagExpChatUseIsDefaultTextChannel),
 	GetFFlagTextChatEnableUniverseChatTabs = require(script.GetFFlagTextChatEnableUniverseChatTabs),
 	getFFlagUseCharacterStore = require(script.getFFlagUseCharacterStore),
 	FIntPresetChatCooldownLuaMs = require(script.FIntPresetChatCooldownLuaMs)

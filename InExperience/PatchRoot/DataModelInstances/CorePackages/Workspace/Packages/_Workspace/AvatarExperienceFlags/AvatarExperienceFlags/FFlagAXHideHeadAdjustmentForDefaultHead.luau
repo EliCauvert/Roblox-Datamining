@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXHideHeadAdjustmentForDefaultHead", false) and require(script.Parent.FFlagDynamicHeadsMigration)
+﻿return game:DefineFastFlag("AXHideHeadAdjustmentForDefaultHead", false)

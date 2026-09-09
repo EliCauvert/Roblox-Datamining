@@ -2,42 +2,46 @@
 local parent = appPageShell.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local useAnimateScrollViewToSelection = require(parent.AppBlox).useAnimateScrollViewToSelection
+local useLastInputMode = require(parent.FocusNavigationUtils).useLastInputMode
 local _ = require(appPageShell.PageTypes)
 local _ = require(appPageShell.createPageScrollStore)
 local scrollView = foundationModule.ScrollView
 local view = foundationModule.View
 local frozen = table.freeze({ Selectable = false })
-local frozen_1 = table.freeze({
-	AutomaticCanvasSize = Enum.AutomaticSize.Y,
-	CanvasSize = UDim2.new(1, 0, 0, 0),
-	ScrollingDirection = Enum.ScrollingDirection.Y
-})
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), scrollView (ref), frozen (ref), frozen_1 (ref), view (ref)
+	-- upvalues: useAnimateScrollViewToSelection (ref), useLastInputMode (ref), reactModule (ref), scrollView (ref), frozen (ref), view (ref)
 	local scrollStore = p1.scrollStore
 	local slots = p1.slots
 	local contentTopPadding = p1.contentTopPadding
 	local contentBottomPadding = p1.contentBottomPadding
+	local scrollingFrameRef = p1.scrollingFrameRef
+	useAnimateScrollViewToSelection(scrollingFrameRef, 0.4)
+	local isNotCursor = useLastInputMode() ~= "Cursor"
 	local var1 = reactModule.useCallback(function(p2)
 		-- upvalues: scrollStore (ref)
 		scrollStore.setViewportHeight(p2.AbsoluteWindowSize.Y)
 		scrollStore.setContentHeight(p2.AbsoluteCanvasSize.Y)
 	end, { scrollStore })
-	local scrollingFrameRef = p1.scrollingFrameRef
 	
 	return reactModule.createElement(scrollView, {
 		ClipsDescendants = false,
 		scrollingFrameRef = reactModule.useCallback(function(p2)
 			-- upvalues: scrollStore (ref), scrollingFrameRef (ref)
 			scrollStore.setScrollingFrame(p2)
-			
-			if scrollingFrameRef then
-				scrollingFrameRef.current = p2
-			end
+			scrollingFrameRef.current = p2
 		end, { scrollStore, scrollingFrameRef }),
 		selection = frozen,
-		scroll = frozen_1,
+		scroll = reactModule.useMemo(function()
+			-- upvalues: isNotCursor (ref)
+			return table.freeze({
+				AutomaticCanvasSize = Enum.AutomaticSize.Y,
+				CanvasSize = UDim2.new(1, 0, 0, 0),
+				ScrollingDirection = Enum.ScrollingDirection.Y,
+				ScrollingEnabled = not isNotCursor
+			})
+		end, { isNotCursor }),
 		onCanvasPositionChanged = reactModule.useCallback(function(p2)
 			-- upvalues: var1 (ref), scrollStore (ref)
 			var1(p2)

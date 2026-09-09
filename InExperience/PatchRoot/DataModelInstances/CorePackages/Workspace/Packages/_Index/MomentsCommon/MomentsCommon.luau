@@ -8,7 +8,6 @@ return {
 	Flags = {
 		ArgusExperiment = require(script.Flags.ArgusExperiment),
 		GetFFlagEnableMomentTextGeneration = require(script.Flags.GetFFlagEnableMomentTextGeneration),
-		GetFFlagMomentsAnalyticsProducerPrereqs = require(script.Flags.GetFFlagMomentsAnalyticsProducerPrereqs),
 		GetFFlagMomentsCreationSaveDraft = require(script.Flags.GetFFlagMomentsCreationSaveDraft),
 		GetFFlagMomentsNonInfiniteScroll = require(script.Flags.GetFFlagMomentsNonInfiniteScroll),
 		GetFFlagMomentsStickerButton = require(script.Flags.GetFFlagMomentsStickerButton),

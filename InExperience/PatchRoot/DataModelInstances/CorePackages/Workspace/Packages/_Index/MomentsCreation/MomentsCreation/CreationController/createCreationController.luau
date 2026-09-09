@@ -23,7 +23,6 @@ local eventNames = momentsCommonModule.Analytics.EventNames
 local sessionManager = momentsCommonModule.Analytics.SessionManager
 local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
 local getFFlagEnableMomentTextGeneration = momentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
-local getFFlagMomentsAnalyticsProducerPrereqs = momentsCommonModule.Flags.GetFFlagMomentsAnalyticsProducerPrereqs
 local getFFlagMomentsCreationSaveDraft = momentsCommonModule.Flags.GetFFlagMomentsCreationSaveDraft
 local fFlagMomentsRealtimeSessionTelemetry = momentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
 local fFlagMomentsContentStatsTelemetry = momentsCommonModule.Flags.FFlagMomentsContentStatsTelemetry
@@ -32,12 +31,12 @@ local createComputed = signalsModule.createComputed
 local createSignal = signalsModule.createSignal
 
 return function(p1)
-	-- upvalues: creationToolRegistryModule (ref), defaultCreationToolsModule (ref), getFFlagMomentsAnalyticsProducerPrereqs (ref), sessionManager (ref), funnelEventNames (ref), getFFlagMomentsCreationPersistEditSessionModule (ref), createSignal (ref), createComputed (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSAudioOverlayModule (ref), createCapturePreviewControllerModule (ref), createTTSAudioManagerModule (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), creationFlowStateModule (ref), getFFlagMomentsCreationSaveDraft (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), fFlagMomentsContentStatsTelemetry (ref), createEditSessionModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), dialogTypeModule (ref), makeDefaultTextOverlayEditModule (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref)
+	-- upvalues: creationToolRegistryModule (ref), defaultCreationToolsModule (ref), sessionManager (ref), funnelEventNames (ref), getFFlagMomentsCreationPersistEditSessionModule (ref), createSignal (ref), createComputed (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSAudioOverlayModule (ref), createCapturePreviewControllerModule (ref), createTTSAudioManagerModule (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), creationFlowStateModule (ref), getFFlagMomentsCreationSaveDraft (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), fFlagMomentsContentStatsTelemetry (ref), createEditSessionModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), dialogTypeModule (ref), makeDefaultTextOverlayEditModule (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref)
 	local store = p1.store
 	local host = p1.host or {}
 	local registry = p1.registry or creationToolRegistryModule(defaultCreationToolsModule)
 	
-	if getFFlagMomentsAnalyticsProducerPrereqs() and sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow) == nil then
+	if sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow) == nil then
 		sessionManager.startSession(funnelEventNames.FunnelTypes.CreationFlow)
 	end
 	local getActiveSession, var1
@@ -454,7 +453,7 @@ return function(p1)
 		getVoiceCoachmarkDismissed = var11,
 		dismissVoiceCoachmark = dismissVoiceCoachmark,
 		publish = function()
-			-- upvalues: store (ref), host (ref), var24 (ref), dialogTypeModule (copy), dismissModal (ref), fFlagMomentTextGenerationFilteredSignal (copy), emitGeneratedTextFeedback (ref), getFFlagMomentsAnalyticsProducerPrereqs (copy), sessionManager (copy), funnelEventNames (copy), preview (ref), var5 (ref), cryoModule (copy), makeCreationEventFieldsModule (copy), eventNames (copy), getFFlagEnableMomentTextGeneration (copy), fireAnalyticsEventModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), dismiss (ref)
+			-- upvalues: store (ref), host (ref), var24 (ref), dialogTypeModule (copy), dismissModal (ref), fFlagMomentTextGenerationFilteredSignal (copy), emitGeneratedTextFeedback (ref), sessionManager (copy), funnelEventNames (copy), preview (ref), var5 (ref), cryoModule (copy), makeCreationEventFieldsModule (copy), eventNames (copy), getFFlagEnableMomentTextGeneration (copy), fireAnalyticsEventModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), dismiss (ref)
 			local description = store.getDescription(false)
 			
 			if host.isTextFiltered ~= nil and host.isTextFiltered(description) then
@@ -471,49 +470,49 @@ return function(p1)
 					emitGeneratedTextFeedback(generatedTextFeedback)
 				end
 			end
-			local var18 = if getFFlagMomentsAnalyticsProducerPrereqs() then sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow) else nil
+			local sessionId = sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)
 			
 			if host.createMoment ~= nil then
-				host.createMoment(store.getSelectedCapture(false), var5(false), description, var18, preview.playback.getTimeLength(false))
+				host.createMoment(store.getSelectedCapture(false), var5(false), description, sessionId, preview.playback.getTimeLength(false))
 			end
 			local textOverlayEdits
-			local var19 = cryoModule.Dictionary.join(makeCreationEventFieldsModule.makeStepField(eventNames.MomentsEditingFlowPublished), makeCreationEventFieldsModule.makeCreationBaseFields(var18))
+			local var18 = cryoModule.Dictionary.join(makeCreationEventFieldsModule.makeStepField(eventNames.MomentsEditingFlowPublished), makeCreationEventFieldsModule.makeCreationBaseFields(sessionId))
 			
 			if getFFlagEnableMomentTextGeneration() then
 				textOverlayEdits = store.getTextOverlayEdits(false)
-				var19 = cryoModule.Dictionary.join(var19, makeCreationEventFieldsModule.makeGeneratedTextOutcomeFields(store.getGeneratedDescription(false), description, store.getGeneratedSummary(false), if textOverlayEdits == nil or textOverlayEdits[1] == nil then nil else textOverlayEdits[1].text))
+				var18 = cryoModule.Dictionary.join(var18, makeCreationEventFieldsModule.makeGeneratedTextOutcomeFields(store.getGeneratedDescription(false), description, store.getGeneratedSummary(false), if textOverlayEdits == nil or textOverlayEdits[1] == nil then nil else textOverlayEdits[1].text))
 			end
-			fireAnalyticsEventModule(eventNames.MomentsEditingFlowPublished, var19)
+			fireAnalyticsEventModule(eventNames.MomentsEditingFlowPublished, var18)
 			
 			if fFlagMomentsRealtimeSessionTelemetry then
 				momentsCommonModule.Analytics.reportMomentsCreationStep("published")
 			end
 			if fFlagMomentsContentStatsTelemetry then
 				textOverlayEdits = momentsCommonModule.Analytics
-				local var20 = var5(false)
-				local var21 = 0
+				local var19 = var5(false)
+				local var20 = 0
 				
-				if var20.music ~= nil then
-					var21 += 1
+				if var19.music ~= nil then
+					var20 += 1
 					textOverlayEdits.reportMomentsPublishedWithEdit("music")
 				end
-				if var20.trim ~= nil then
-					var21 += 1
+				if var19.trim ~= nil then
+					var20 += 1
 					textOverlayEdits.reportMomentsPublishedWithEdit("trim")
 				end
-				if var20.textOverlays ~= nil and #var20.textOverlays > 0 then
-					var21 += 1
+				if var19.textOverlays ~= nil and #var19.textOverlays > 0 then
+					var20 += 1
 					textOverlayEdits.reportMomentsPublishedWithEdit("text_overlay")
 				end
-				if var20.stickerOverlays ~= nil and #var20.stickerOverlays > 0 then
-					var21 += 1
+				if var19.stickerOverlays ~= nil and #var19.stickerOverlays > 0 then
+					var20 += 1
 					textOverlayEdits.reportMomentsPublishedWithEdit("sticker")
 				end
 				if description ~= nil and description ~= "" then
-					var21 += 1
+					var20 += 1
 					textOverlayEdits.reportMomentsPublishedWithEdit("description")
 				end
-				textOverlayEdits.reportMomentsPublishedEditCount(var21)
+				textOverlayEdits.reportMomentsPublishedEditCount(var20)
 				local selectedCapture = store.getSelectedCapture(false)
 				
 				if selectedCapture ~= nil then

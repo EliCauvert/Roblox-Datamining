@@ -29,6 +29,7 @@ local networkingFriends = dependenciesModule.NetworkingFriends
 local paginatedFriendsCarouselIXPModule = require(parent.Experiments.PaginatedFriendsCarouselIXP)
 local earlierFetchTimeForFriendsCarouselV1 = game:DefineFastFlag("EarlierFetchTimeForFriendsCarousel_v1", false)
 local prefetchProfileNamesOnStartupV2 = game:DefineFastFlag("PrefetchProfileNamesOnStartup_v2", false)
+local fFlagGateContactAutoSyncByPolicyModule = require(parent.Flags.FFlagGateContactAutoSyncByPolicy)
 local fIntFriendsCarouselInitialFetchSize = require(parent_1.SharedFlags).FIntFriendsCarouselInitialFetchSize
 local fFlagRegisterQRCodeKeyInEngine = require(parent_1.SharedFlags).FFlagRegisterQRCodeKeyInEngine
 local fFlagFriendsCountDataHydrationMigrationEnabled = require(parent_1.SharedFlags).FFlagFriendsCountDataHydrationMigrationEnabled
@@ -57,21 +58,20 @@ return universalAppPolicy.connect(function(p1)
 		isContactImporterPolicyEnabled = p1.getContactImporterEnabled()
 	}
 end)(function(p1)
-	-- upvalues: useDispatch (ref), useLocalUserId (ref), getAppFeaturePolicies (ref), useFetchContactImporterInfoOnce (ref), earlierFetchTimeForFriendsCarouselV1 (ref), paginatedFriendsCarouselIXPModule (ref), apolloFriendsModule (ref), fFlagFriendSortedByPresenceSignalsImplementation (ref), reactModule (ref), var1 (ref), useSignalState (ref), useQuery (ref), queries (ref), userIdExists (ref), cryoModule (ref), fIntFriendsCarouselInitialFetchSize (ref), prefetchProfileNamesOnStartupV2 (ref), var3 (ref), fFlagSocialCarouselMigrateRecommendations (ref), friendsRecommendationsStore (ref), dataSource (ref), useAutoSyncContacts (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), networkingFriends (ref), fFlagAddFriendsPageUseSections (ref), friendsRequestsStore (ref), messageBusService (ref), realtimeMessageId (ref), analyticsFactory (ref), t (ref), defaultAnalyticsService (ref), appStorageService (ref), var2 (ref), permissionsProtocol (ref)
+	-- upvalues: useDispatch (ref), useLocalUserId (ref), getAppFeaturePolicies (ref), useFetchContactImporterInfoOnce (ref), earlierFetchTimeForFriendsCarouselV1 (ref), paginatedFriendsCarouselIXPModule (ref), apolloFriendsModule (ref), fFlagFriendSortedByPresenceSignalsImplementation (ref), reactModule (ref), var1 (ref), useSignalState (ref), useQuery (ref), queries (ref), userIdExists (ref), cryoModule (ref), fIntFriendsCarouselInitialFetchSize (ref), prefetchProfileNamesOnStartupV2 (ref), var3 (ref), fFlagSocialCarouselMigrateRecommendations (ref), friendsRecommendationsStore (ref), dataSource (ref), fFlagGateContactAutoSyncByPolicyModule (ref), useAutoSyncContacts (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), networkingFriends (ref), fFlagAddFriendsPageUseSections (ref), friendsRequestsStore (ref), messageBusService (ref), realtimeMessageId (ref), analyticsFactory (ref), t (ref), defaultAnalyticsService (ref), appStorageService (ref), var2 (ref), permissionsProtocol (ref)
 	local var4
 	local var5 = useDispatch()
 	local var6 = useLocalUserId()
-	useFetchContactImporterInfoOnce({
-		policyIsEnabled = p1.isContactImporterPolicyEnabled or getAppFeaturePolicies().getContactImporterEnabled()
-	})
+	local isContactImporterPolicyEnabled = p1.isContactImporterPolicyEnabled or getAppFeaturePolicies().getContactImporterEnabled()
+	useFetchContactImporterInfoOnce({ policyIsEnabled = isContactImporterPolicyEnabled })
 	local var7 = nil
 	local var8 = nil
 	
 	if earlierFetchTimeForFriendsCarouselV1 then
-		var4, var25 = paginatedFriendsCarouselIXPModule.usePaginatedFriendsCarouselExperiment()
+		var4, var27 = paginatedFriendsCarouselIXPModule.usePaginatedFriendsCarouselExperiment()
 		local t_1 = {
 			userId = var6,
-			sort = if var4 and var25 then var25 else apolloFriendsModule.Enums.Sort.FriendshipScore
+			sort = if var4 and var27 then var27 else apolloFriendsModule.Enums.Sort.FriendshipScore
 		}
 		
 		if fFlagFriendSortedByPresenceSignalsImplementation then
@@ -127,7 +127,11 @@ end)(function(p1)
 			end
 		end, { var6 })
 	end
-	useAutoSyncContacts()
+	if fFlagGateContactAutoSyncByPolicyModule then
+		useAutoSyncContacts(isContactImporterPolicyEnabled)
+	else
+		useAutoSyncContacts()
+	end
 	reactModule.useEffect(function()
 		-- upvalues: userIdExists (copy), var6 (ref), fFlagFriendsCountDataHydrationMigrationEnabled (copy), var1 (copy), var5 (ref), networkingFriends (copy)
 		if userIdExists(var6) then

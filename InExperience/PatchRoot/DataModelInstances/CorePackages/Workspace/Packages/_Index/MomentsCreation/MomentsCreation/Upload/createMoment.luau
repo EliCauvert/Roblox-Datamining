@@ -8,7 +8,6 @@ local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalytics
 local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
 local normalizeMomentMetadataModule = require(momentsCreation.Utils.normalizeMomentMetadata)
 local getFFlagMomentsCreationNormalizeMetadataEnumsModule = require(momentsCreation.Flags.GetFFlagMomentsCreationNormalizeMetadataEnums)
-local getFFlagMomentsAnalyticsProducerPrereqs = momentsCommonModule.Flags.GetFFlagMomentsAnalyticsProducerPrereqs
 local getFFlagMomentsUseUploadPostAsync = momentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
 local makePostMetadataModule = require(momentsCreation.Utils.makePostMetadata)
 local _game = game
@@ -29,7 +28,7 @@ local function _(p1)
 end
 
 return function(p1, p2, p3, p4)
-	-- upvalues: captureServiceUploadUniverseIdOverrideEngineFeature (ref), _game (ref), getFFlagMomentsCreationNormalizeMetadataEnumsModule (ref), normalizeMomentMetadataModule (ref), getFFlagMomentsUseUploadPostAsync (ref), makePostMetadataModule (ref), captureService (ref), getFFlagMomentsAnalyticsProducerPrereqs (ref), makeCreationEventFieldsModule (ref), fireAnalyticsEventModule (ref), eventNames (ref)
+	-- upvalues: captureServiceUploadUniverseIdOverrideEngineFeature (ref), _game (ref), getFFlagMomentsCreationNormalizeMetadataEnumsModule (ref), normalizeMomentMetadataModule (ref), getFFlagMomentsUseUploadPostAsync (ref), makePostMetadataModule (ref), captureService (ref), makeCreationEventFieldsModule (ref), fireAnalyticsEventModule (ref), eventNames (ref)
 	local gameId, var1
 	if captureServiceUploadUniverseIdOverrideEngineFeature then
 		gameId = _game.GameId
@@ -67,7 +66,16 @@ return function(p1, p2, p3, p4)
 		gameId = ok
 		var2 = status
 	end
-	if getFFlagMomentsAnalyticsProducerPrereqs() and not gameId then
+	if gameId then
+		local var4 = makeCreationEventFieldsModule.makeCaptureDescriptorFields(p1)
+		
+		for i, v in makeCreationEventFieldsModule.makeCreationBaseFields(p4) do
+			var4[i] = v
+		end
+		fireAnalyticsEventModule(eventNames.EditingFlowMomentPublished, var4)
+		
+		return
+	else
 		local t = {
 			status = "GenericFailure",
 			captureType = makeCreationEventFieldsModule.enumName(p1.CaptureType),
@@ -79,14 +87,5 @@ return function(p1, p2, p3, p4)
 			t[i] = v
 		end
 		fireAnalyticsEventModule(eventNames.UploadCaptureFailed, t)
-		
-		return
-	else
-		local var4 = makeCreationEventFieldsModule.makeCaptureDescriptorFields(p1)
-		
-		for i, v in makeCreationEventFieldsModule.makeCreationBaseFields(p4) do
-			var4[i] = v
-		end
-		fireAnalyticsEventModule(eventNames.EditingFlowMomentPublished, var4)
 	end
 end

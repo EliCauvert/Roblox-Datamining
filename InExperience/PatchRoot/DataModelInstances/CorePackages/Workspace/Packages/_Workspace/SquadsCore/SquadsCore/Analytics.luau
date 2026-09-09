@@ -1,8 +1,5 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local parent = script:FindFirstAncestor("SquadsCore").Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
-local playSessionId = rbxAnalyticsService:GetPlaySessionId()
+﻿local socialLuaAnalyticsModule = require(script:FindFirstAncestor("SquadsCore").Parent.SocialLuaAnalytics)
+local playSessionId = game:GetService("RbxAnalyticsService"):GetPlaySessionId()
 
 return {
 	Analytics = socialLuaAnalyticsModule.Analytics.AnalyticsFactory.setUpAnalyticsFactory({
@@ -22,5 +19,5 @@ return {
 		}
 	}),
 	EventNames = require(script.EventNames),
-	logInExpCoplayTelemetry = if sharedFlagsModule.FFlagEnableSquadCoplayAnalytic then require(script.logInExpCoplayTelemetry) else nil
+	logInExpCoplayTelemetry = require(script.logInExpCoplayTelemetry)
 }

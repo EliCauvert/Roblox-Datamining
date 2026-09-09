@@ -21,6 +21,7 @@ local autocompleteDropdownTypeChangedModule = require(expChat.Actions.Autocomple
 local autocompleteDropdownDeactivatedModule = require(expChat.Actions.AutocompleteDropdownDeactivated)
 local memoizeChatInputApp = game:DefineFastFlag("MemoizeChatInputApp", false)
 local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
+local fFlagLuaSupportMicroGamepadPreferredInput = sharedFlagsModule.FFlagLuaSupportMicroGamepadPreferredInput
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 local flags = expChat.Flags
 local getFFlagUnreduxLastInputTypeChangedModule = require(flags.getFFlagUnreduxLastInputTypeChanged)
@@ -39,10 +40,10 @@ chatInputBarApp.defaultProps = {
 
 if getFFlagUnreduxLastInputTypeChangedModule() then
 	function chatInputBarApp.init(p1)
-		-- upvalues: userInputService (ref), getInputGroup (ref), inputTypeModule (ref)
+		-- upvalues: userInputService (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), getInputGroup (ref), inputTypeModule (ref)
 		p1:setState({
 			isUsingTouch = userInputService.TouchEnabled,
-			isUsingGamepad = userInputService.PreferredInput == Enum.PreferredInput.Gamepad
+			isUsingGamepad = if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad else true
 		})
 		p1.connection = userInputService.LastInputTypeChanged:Connect(function(p2)
 			-- upvalues: getInputGroup (copy), p1 (ref), inputTypeModule (copy)

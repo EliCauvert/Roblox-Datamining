@@ -33,15 +33,14 @@ return reactModule.memo(function(p1)
 				startRow = var1.feedItemStartRow,
 				numUpdatesToDelayImpressions = fIntLuaAppDelayImpressionsMaxUpdates,
 				selectionOrderBase = var1.selectionOrderBase,
-				onTileImageLoaded = var1.onTileImageLoaded,
 				videoPlaybackContext = var1.videoPlaybackContext,
 				index = p1.sortIndex,
 				collectionPosition = p1.sortIndex
 			}
 		end, {
 			var1.scrollViewPositionChangedSignal, var1.verticalScrollingFrameRef,
-			var1.feedItemStartRow, var1.selectionOrderBase, var1.onTileImageLoaded,
-			var1.videoPlaybackContext, p1.sortIndex
+			var1.feedItemStartRow, var1.selectionOrderBase, var1.videoPlaybackContext,
+			p1.sortIndex
 		}),
 		appCompositionEnabledOverride = var1.appCompositionEnabled == true,
 		LayoutOrder = p1.sortIndex

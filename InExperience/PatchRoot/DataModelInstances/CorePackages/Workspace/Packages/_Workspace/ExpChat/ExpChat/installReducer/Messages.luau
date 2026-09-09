@@ -3,6 +3,8 @@ local playersService = game:GetService("Players")
 local expChat = script:FindFirstAncestor("ExpChat")
 local parent = expChat.Parent
 local expChatSharedModule = require(parent.ExpChatShared)
+local shouldRenderTextChannelInDefaultWindow = expChatSharedModule.shouldRenderTextChannelInDefaultWindow
+local getTextChannelDisplayMode = expChatSharedModule.getTextChannelDisplayMode
 local roduxModule = require(parent.Rodux)
 local llamaModule = require(parent.llama)
 local list = llamaModule.List
@@ -307,7 +309,7 @@ local function mapByMessageIdInOrderHelper(p1, p2, p3)
 end
 
 local function mapByMessageIdInOrder(p1, p2)
-	-- upvalues: fFlagEnableInExpChatRewriteModule (ref), getTextAndTranslationModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), fFlagExpChatFixLocalUserVerifiedBadgeModule (ref), outgoingMessageSentModule (ref), playersService (ref), fFlagExpChatPresetChatEnabled (ref), set (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatDisableUniverseBubbleChat (ref), getFFlagTextChatEnableUniverseChatTabs (ref), computeNameColor (ref), getFFlagExpChatTelemetryEventTriggerModule (ref), fFlagChatLineReportingGlobalMuteEnabled (ref), mapByMessageIdInOrderHelper (ref)
+	-- upvalues: fFlagEnableInExpChatRewriteModule (ref), getTextAndTranslationModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), fFlagExpChatFixLocalUserVerifiedBadgeModule (ref), outgoingMessageSentModule (ref), playersService (ref), fFlagExpChatPresetChatEnabled (ref), set (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatDisableUniverseBubbleChat (ref), getFFlagTextChatEnableUniverseChatTabs (ref), shouldRenderTextChannelInDefaultWindow (ref), getTextChannelDisplayMode (ref), computeNameColor (ref), getFFlagExpChatTelemetryEventTriggerModule (ref), fFlagChatLineReportingGlobalMuteEnabled (ref), mapByMessageIdInOrderHelper (ref)
 	local var1, var2
 	local textChatMessage = p2.textChatMessage
 	local _ = nil
@@ -332,14 +334,14 @@ local function mapByMessageIdInOrder(p1, p2)
 	elseif textChatMessage.Status ~= Enum.TextChatMessageStatus.Success then
 		var5 = textChatMessage.Status ~= Enum.TextChatMessageStatus.Sending
 	end
-	local var7 = var5 and not (if var6 then set.has(p1._mutedUserIds, var6) else false)
-	var7 = false
+	var5 = var5 and not (if var6 then set.has(p1._mutedUserIds, var6) else false)
+	local var7 = if (if fFlagExpChatUseChatConfigStore then getChatConfigurationStoreModule(false).getIsBubbleChatEnabled(false) else p1.isBubbleChatEnabled) and var5 and (not fFlagEnableInExpChatSummaryOnLuaModule or var6 ~= nil) and (textChatMessage.Status == Enum.TextChatMessageStatus.Success or textChatMessage.Status == Enum.TextChatMessageStatus.Sending) then true else false
 	
-	if (if fFlagExpChatUseChatConfigStore then getChatConfigurationStoreModule(false).getIsBubbleChatEnabled(false) else p1.isBubbleChatEnabled) and var7 and (not fFlagEnableInExpChatSummaryOnLuaModule or var6 ~= nil) and (textChatMessage.Status == Enum.TextChatMessageStatus.Success or textChatMessage.Status == Enum.TextChatMessageStatus.Sending) then
-		var7 = true
-	end
 	if fFlagExpChatDisableUniverseBubbleChat and getFFlagTextChatEnableUniverseChatTabs() and p2.isUniverseChat == true then
 		var7 = false
+	end
+	if not p2.isUniverseChat and p2.channelNameOverride == nil and not shouldRenderTextChannelInDefaultWindow(textChatMessage.TextChannel, getTextChannelDisplayMode()) then
+		var5 = false
 	end
 	local var8 = if getFFlagExpChatProtectedChatInternalAPIs() then textChatMessage.PrefixTextInternal else textChatMessage.PrefixText
 	
@@ -357,7 +359,7 @@ local function mapByMessageIdInOrder(p1, p2)
 		status = textChatMessage.Status,
 		timestamp = textChatMessage.Timestamp,
 		isVisibleInBubbleChat = var7,
-		isVisibleInChatWindow = var7,
+		isVisibleInChatWindow = var5,
 		bubbleChatMessageProperties = textChatMessage.BubbleChatMessageProperties,
 		chatWindowMessageProperties = textChatMessage.ChatWindowMessageProperties,
 		textChatMessageInstance = if getFFlagExpChatTelemetryEventTriggerModule() then textChatMessage else nil,

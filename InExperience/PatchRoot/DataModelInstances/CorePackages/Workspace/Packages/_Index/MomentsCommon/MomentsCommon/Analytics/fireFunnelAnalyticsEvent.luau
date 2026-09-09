@@ -13,7 +13,7 @@ local var1 = socialLuaAnalyticsModule.Telemetry.new({
 	backendsList = {
 		{
 			type = "EventIngest",
-			standardizedFields = if require(momentsCommon.Flags.GetFFlagMomentsAnalyticsProducerPrereqs)() then { "addSessionInfo", "addSessionId" } else nil,
+			standardizedFields = { "addSessionInfo", "addSessionId" },
 			format = function(p1, _)
 				-- upvalues: cryoModule (ref)
 				return cryoModule.Dictionary.join(p1.customFields or {}, {

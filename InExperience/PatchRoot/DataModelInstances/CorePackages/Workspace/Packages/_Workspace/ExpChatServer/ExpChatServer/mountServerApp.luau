@@ -19,6 +19,7 @@ local analytics = expChatSharedModule.Analytics
 local var1 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 local getFFlagExpChatAlwaysRunTCS = sharedFlagsModule.getFFlagExpChatAlwaysRunTCS
 local fFlagExpChatAddUserAsyncNilCheck = expChatSharedModule.Flags.FFlagExpChatAddUserAsyncNilCheck
+local markTextChannelAsDefault = expChatSharedModule.markTextChannelAsDefault
 local expChatBackfillTeamChannels = game:DefineFastFlag("ExpChatBackfillTeamChannels", false)
 local expChatBackfillTeamChannelsParentCheck = game:DefineFastFlag("ExpChatBackfillTeamChannelsParentCheck", false)
 
@@ -37,7 +38,7 @@ local _ = function()
 end
 
 return function(p1)
-	-- upvalues: var1 (ref), createStoreModule (ref), createDispatchRemoteFunctionModule (ref), analytics (ref), watchForErrors (ref), textChatService (ref), fFlagExpChatAddUserAsyncNilCheck (ref), expChatBackfillTeamChannels (ref), expChatBackfillTeamChannelsParentCheck (ref), teamsService (ref), config (ref), playersService (ref), commands (ref), list (ref), getFFlagExpChatAlwaysRunTCS (ref), countParticipantsInTextChannel (ref), playerAdded (ref), playerRemoved (ref)
+	-- upvalues: var1 (ref), createStoreModule (ref), createDispatchRemoteFunctionModule (ref), analytics (ref), watchForErrors (ref), textChatService (ref), markTextChannelAsDefault (ref), fFlagExpChatAddUserAsyncNilCheck (ref), expChatBackfillTeamChannels (ref), expChatBackfillTeamChannelsParentCheck (ref), teamsService (ref), config (ref), playersService (ref), commands (ref), list (ref), getFFlagExpChatAlwaysRunTCS (ref), countParticipantsInTextChannel (ref), playerAdded (ref), playerRemoved (ref)
 	var1:trace("mountServerApp started")
 	local var2 = createStoreModule()
 	createDispatchRemoteFunctionModule()
@@ -65,12 +66,13 @@ return function(p1)
 		end
 		
 		local function _(p3)
-			-- upvalues: findChannel (ref), textChannels (ref)
+			-- upvalues: findChannel (ref), markTextChannelAsDefault (copy), textChannels (ref)
 			local var3 = findChannel(p3)
 			
 			if not var3 then
 				var3 = Instance.new("TextChannel")
 				var3.Name = p3
+				markTextChannelAsDefault(var3)
 				var3.Parent = textChannels
 			end
 			return var3
@@ -86,24 +88,26 @@ return function(p1)
 		end
 		
 		local function createTeamChannel(p5)
-			-- upvalues: findChannel (ref), textChannels (ref), var1 (copy), fFlagExpChatAddUserAsyncNilCheck (copy), findTextSourceFromChannelWithUserId (ref), expChatBackfillTeamChannels (copy), expChatBackfillTeamChannelsParentCheck (copy), teamsService (copy)
+			-- upvalues: findChannel (ref), markTextChannelAsDefault (copy), textChannels (ref), var1 (copy), fFlagExpChatAddUserAsyncNilCheck (copy), findTextSourceFromChannelWithUserId (ref), expChatBackfillTeamChannels (copy), expChatBackfillTeamChannelsParentCheck (copy), teamsService (copy)
 			local text = "RBXTeam" .. tostring(p5.TeamColor.Name)
 			local var3 = findChannel(text)
 			
 			if not var3 then
 				var3 = Instance.new("TextChannel")
 				var3.Name = text
+				markTextChannelAsDefault(var3)
 				var3.Parent = textChannels
 			end
 			var1:debug("Creating team TextChannel: {}", var3.Name)
 			p5.PlayerAdded:Connect(function(p6)
-				-- upvalues: p5 (ref), findChannel (copy), textChannels (copy), fFlagExpChatAddUserAsyncNilCheck (copy)
+				-- upvalues: p5 (ref), findChannel (copy), markTextChannelAsDefault (copy), textChannels (copy), fFlagExpChatAddUserAsyncNilCheck (copy)
 				local text = "RBXTeam" .. tostring(p5.TeamColor.Name)
 				local var4 = findChannel(text)
 				
 				if not var4 then
 					var4 = Instance.new("TextChannel")
 					var4.Name = text
+					markTextChannelAsDefault(var4)
 					var4.Parent = textChannels
 				end
 				local userId = var4:AddUserAsync(p6.UserId)
@@ -121,13 +125,14 @@ return function(p1)
 				end
 			end)
 			p5.PlayerRemoved:Connect(function(p6)
-				-- upvalues: p5 (ref), findChannel (copy), textChannels (copy), findTextSourceFromChannelWithUserId (copy)
+				-- upvalues: p5 (ref), findChannel (copy), markTextChannelAsDefault (copy), textChannels (copy), findTextSourceFromChannelWithUserId (copy)
 				local text = "RBXTeam" .. tostring(p5.TeamColor.Name)
 				local var4 = findChannel(text)
 				
 				if not var4 then
 					var4 = Instance.new("TextChannel")
 					var4.Name = text
+					markTextChannelAsDefault(var4)
 					var4.Parent = textChannels
 				end
 				local var5 = findTextSourceFromChannelWithUserId(var4, p6.UserId)
@@ -149,6 +154,7 @@ return function(p1)
 					if not var5 then
 						var5 = Instance.new("TextChannel")
 						var5.Name = text_1
+						markTextChannelAsDefault(var5)
 						var5.Parent = textChannels
 					end
 					local userId = var5:AddUserAsync(v.UserId)
@@ -161,13 +167,14 @@ return function(p1)
 				end
 			end
 			p5:GetPropertyChangedSignal("TeamColor"):Connect(function()
-				-- upvalues: p5 (ref), findChannel (copy), textChannels (copy)
+				-- upvalues: p5 (ref), findChannel (copy), markTextChannelAsDefault (copy), textChannels (copy)
 				local text = "RBXTeam" .. tostring(p5.TeamColor.Name)
 				local var6 = findChannel(text)
 				
 				if not var6 then
 					var6 = Instance.new("TextChannel")
 					var6.Name = text
+					markTextChannelAsDefault(var6)
 					var6.Parent = textChannels
 				end
 				var6.Name = "RBXTeam" .. tostring(p5.TeamColor.Name)
@@ -204,6 +211,7 @@ return function(p1)
 			if not var6 then
 				var6 = Instance.new("TextChannel")
 				var6.Name = i_1
+				markTextChannelAsDefault(var6)
 				var6.Parent = textChannels
 			end
 			table.insert(t, var6)
