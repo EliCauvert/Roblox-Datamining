@@ -388,6 +388,7 @@
 	FFlagAXFixR6CharacterPlacement = require(script.FFlagAXFixR6CharacterPlacement),
 	FFlagAXFixWidgetListSeeAllListReuse = require(script.FFlagAXFixWidgetListSeeAllListReuse),
 	FFlagAXCatalogHttpLinkSalesTypeFilter = require(script.FFlagAXCatalogHttpLinkSalesTypeFilter),
+	FFlagAXPhotoboothMomentsPage = require(script.FFlagAXPhotoboothMomentsPage),
 	FFlagAXIaBDiscountPriceLine = require(script.FFlagAXIaBDiscountPriceLine),
 	FFlagAXActionButtonRoundedRectCursor = require(script.FFlagAXActionButtonRoundedRectCursor)
 }

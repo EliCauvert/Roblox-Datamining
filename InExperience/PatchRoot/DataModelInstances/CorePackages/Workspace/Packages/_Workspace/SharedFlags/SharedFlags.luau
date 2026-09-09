@@ -774,6 +774,7 @@ return {
 	GetFFlagEnableSupportCenter = require(script.GetFFlagEnableSupportCenter),
 	FFlagEnableAccountUnlockDeepLink = require(script.FFlagEnableAccountUnlockDeepLink),
 	FFlagEnableAdConsentUserSettingsPublish = require(script.FFlagEnableAdConsentUserSettingsPublish),
+	FFlagAdConsentForwardCachedRegion = require(script.FFlagAdConsentForwardCachedRegion),
 	FFlagAccountLockReceiverClosesModal = require(script.FFlagAccountLockReceiverClosesModal),
 	FFlagShowAccountUnlockMismatchDialog = require(script.FFlagShowAccountUnlockMismatchDialog),
 	FFlagEnablePersonaLivenessQR = require(script.FFlagEnablePersonaLivenessQR),

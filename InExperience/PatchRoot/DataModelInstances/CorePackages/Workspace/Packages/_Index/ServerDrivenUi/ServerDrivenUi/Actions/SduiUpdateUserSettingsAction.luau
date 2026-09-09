@@ -3,13 +3,16 @@ local updateUserSettings = require(parent.LegallySensitiveContent).updateUserSet
 local linkingProtocolModule = require(parent.LinkingProtocol)
 local linkingProtocol = linkingProtocolModule.LinkingProtocol
 local adConsentAttributionAdapter = linkingProtocolModule.AdConsentAttributionAdapter
-local enableAdConsentUserSettingsPublish = game:DefineFastFlag("EnableAdConsentUserSettingsPublish", false)
+local readCachedAdConsentRegion = linkingProtocolModule.readCachedAdConsentRegion
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagEnableAdConsentUserSettingsPublish = sharedFlagsModule.FFlagEnableAdConsentUserSettingsPublish
+local fFlagAdConsentForwardCachedRegion = sharedFlagsModule.FFlagAdConsentForwardCachedRegion
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 
 return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), updateUserSettings (ref), enableAdConsentUserSettingsPublish (ref), adConsentAttributionAdapter (ref), linkingProtocol (ref)
+	-- upvalues: sduiErrorType (ref), sduiActionType (ref), updateUserSettings (ref), fFlagEnableAdConsentUserSettingsPublish (ref), fFlagAdConsentForwardCachedRegion (ref), readCachedAdConsentRegion (ref), adConsentAttributionAdapter (ref), linkingProtocol (ref)
 	local var1 = if p1 then p1.actionParams else nil
 	
 	if var1 == nil then
@@ -42,19 +45,19 @@ return function(p1, _, p2, _)
 		return
 	end
 	local ok, status = pcall(function()
-		-- upvalues: updateUserSettings (copy), settings (ref), auditData (ref), enableAdConsentUserSettingsPublish (copy), adConsentAttributionAdapter (copy), linkingProtocol (copy), p2 (ref), sduiErrorType (copy), sduiActionType (copy)
+		-- upvalues: updateUserSettings (copy), settings (ref), auditData (ref), fFlagEnableAdConsentUserSettingsPublish (copy), fFlagAdConsentForwardCachedRegion (copy), readCachedAdConsentRegion (copy), adConsentAttributionAdapter (copy), linkingProtocol (copy), p2 (ref), sduiErrorType (copy), sduiActionType (copy)
 		local var2 = updateUserSettings(settings, auditData)
 		
-		if enableAdConsentUserSettingsPublish then
+		if fFlagEnableAdConsentUserSettingsPublish then
 			var2 = var2:andThen(function()
-				-- upvalues: settings (copy), adConsentAttributionAdapter (copy), linkingProtocol (copy)
+				-- upvalues: settings (copy), fFlagAdConsentForwardCachedRegion (copy), readCachedAdConsentRegion (copy), adConsentAttributionAdapter (copy), linkingProtocol (copy)
 				local allowSellShareData = settings.allowSellShareData
 				
 				if allowSellShareData ~= nil then
 					adConsentAttributionAdapter.resolveAndPublish(linkingProtocol.default, "ConsentChanged", function()
 						-- upvalues: allowSellShareData (ref)
 						return allowSellShareData
-					end)
+					end, if fFlagAdConsentForwardCachedRegion then readCachedAdConsentRegion() else nil)
 				end
 			end)
 		end

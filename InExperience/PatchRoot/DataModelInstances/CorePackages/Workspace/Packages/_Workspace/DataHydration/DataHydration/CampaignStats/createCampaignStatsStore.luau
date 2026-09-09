@@ -34,9 +34,9 @@ return function(p1)
 			-- upvalues: var2 (ref)
 			return var2.fetchItem(tostring(p2))
 		end,
-		getAndFetchCampaignStats = function(p2)
+		getAndFetchCampaignStats = function(p2, p3)
 			-- upvalues: var2 (ref)
-			return var2.getAndFetchItem(tostring(p2))
+			return var2.getAndFetchItem(tostring(p2), p3)
 		end,
 		isCampaignStatsRequestInQueueOrInFlight = function(p2)
 			-- upvalues: var2 (ref)
@@ -44,7 +44,15 @@ return function(p1)
 		end,
 		updateCampaignStats = function(p2, p3)
 			-- upvalues: var1 (ref)
-			var1.replaceItem(tostring(p2), p3)
+			var1.replaceItem(tostring(p2), {
+				byCampaign = p3,
+				failedMetrics = {
+					plays = false,
+					adClicks = false,
+					adViews = false,
+					playtimeSeconds = false
+				}
+			})
 		end,
 		clear = var2.clear,
 		dispose = var2.dispose

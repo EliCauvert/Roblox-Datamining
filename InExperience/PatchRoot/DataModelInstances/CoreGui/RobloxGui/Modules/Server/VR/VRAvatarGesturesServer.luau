@@ -7,6 +7,7 @@ local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local avatarUtil = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).AvatarUtil
 local connectionUtil = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).ConnectionUtil
 local VRAvatarGesturesAnalyticsThrottleHundrethsPercent = game:DefineFastInt("VRAvatarGesturesAnalyticsThrottleHundrethsPercent", 0)
+local VRAvatarGesturesUseNilForHandChainRootRebuild = game:DefineFastFlag("VRAvatarGesturesUseNilForHandChainRootRebuild", false)
 local t = {}
 t.__index = t
 
@@ -188,6 +189,7 @@ function t.findOrCreateColliders(_, p2, p3)
 end
 
 function t:createHandCollider(p2, p3)
+	-- upvalues: VRAvatarGesturesUseNilForHandChainRootRebuild (ref)
 	self:findOrCreateColliders(p2 .. "Hand", p3)
 	local var3 = p3:FindFirstChild(p2 .. "Hand")
 	local humanoid = p3:FindFirstChild("Humanoid")
@@ -200,7 +202,11 @@ function t:createHandCollider(p2, p3)
 			local var5 = p3:FindFirstChild(p2 .. "UpperArm")
 			
 			if var5 then
-				var4.ChainRoot = var3
+				if VRAvatarGesturesUseNilForHandChainRootRebuild then
+					var4.ChainRoot = nil
+				else
+					var4.ChainRoot = var3
+				end
 				coroutine.wrap(function()
 					-- upvalues: var4 (ref), var5 (ref)
 					task.wait(0.1)

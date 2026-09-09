@@ -1,13 +1,15 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
+﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
+local parent = buildExperience.Parent
 local localizationService = game:GetService("LocalizationService")
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local numberLocalization = require(parent.Localization).NumberLocalization
+local noDataPlaceholderModule = require(buildExperience.Components.Analytics.noDataPlaceholder)
 local text = foundationModule.Text
 local view = foundationModule.View
 
 local function metricCell(p1, p2, p3, p4, p5)
-	-- upvalues: reactModule (ref), view (ref), text (ref), numberLocalization (ref)
+	-- upvalues: reactModule (ref), view (ref), text (ref), numberLocalization (ref), noDataPlaceholderModule (ref)
 	return reactModule.createElement(view, { tag = "col fill gap-xxsmall auto-y", LayoutOrder = p1 }, {
 		Label = reactModule.createElement(text, {
 			LayoutOrder = 1,
@@ -17,7 +19,7 @@ local function metricCell(p1, p2, p3, p4, p5)
 		Value = reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = "size-full-0 auto-y text-heading-small text-align-x-left content-emphasis",
-			Text = numberLocalization.localizeDecimal(p3, p4, 0),
+			Text = if p3 ~= nil then noDataPlaceholderModule else numberLocalization.localizeDecimal(p3, p4, 0),
 			testId = p5
 		})
 	})

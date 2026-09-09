@@ -1,1 +1,0 @@
-﻿return game:DefineFastString("AppChatChatBubbleUIRevampIxpLayer", "Social.AppChat")

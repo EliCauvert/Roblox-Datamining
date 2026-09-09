@@ -8,14 +8,10 @@ local responseStatus = require(parent.AppChatNetworking).Constants.ResponseStatu
 local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
 local fFlagAppChatMessageTTIMilestonesModule = require(appChat.Flags.FFlagAppChatMessageTTIMilestones)
 local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
-local fFlagAppChatCatchSendMessageSyncErrorModule = require(appChat.Flags.FFlagAppChatCatchSendMessageSyncError)
 local name = require(appChat.Logger):new(script.Name)
 
 local function invokeSendMessage(p1, p2)
-	-- upvalues: fFlagAppChatCatchSendMessageSyncErrorModule (ref), name (ref), promiseModule (ref)
-	if not fFlagAppChatCatchSendMessageSyncErrorModule then
-		return p1:sendMessage(p2)
-	end
+	-- upvalues: name (ref), promiseModule (ref)
 	local ok, status = pcall(function()
 		-- upvalues: p1 (ref), p2 (ref)
 		return p1:sendMessage(p2)

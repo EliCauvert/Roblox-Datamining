@@ -22,7 +22,6 @@ local fFlagExtendScrollingFramesBySafeInsets = require(parent.SharedFlags).FFlag
 local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
 local fixConsoleEDPDirectionalNavigation = game:DefineFastFlag("FixConsoleEDPDirectionalNavigation", false)
 local fFlagLuaAppEdpConsoleMediaGalleryVideo = require(parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
-local fixDeviceSafePaddingAccess = game:DefineFastFlag("FixDeviceSafePaddingAccess", false)
 local t = {
 	itemPadding = 36,
 	trailingWhitespace = 3000,
@@ -31,7 +30,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: t (ref), cryoModule (ref), reactModule (ref), getPlatformConfigModule (ref), signal (ref), useAnimateFullscreenModule (ref), detailsPageHeaderModule (ref), useDetailsPageRenderItemsModule (ref), detailsPageRenderItemModule (ref), fixDeviceSafePaddingAccess (ref), fFlagEnableLeftNavOnConsole (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), fullscreenFrameModule (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), loadableImage (ref), overlay (ref), animatedFlatList (ref), fixConsoleEDPDirectionalNavigation (ref)
+	-- upvalues: t (ref), cryoModule (ref), reactModule (ref), getPlatformConfigModule (ref), signal (ref), useAnimateFullscreenModule (ref), detailsPageHeaderModule (ref), useDetailsPageRenderItemsModule (ref), detailsPageRenderItemModule (ref), fFlagEnableLeftNavOnConsole (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), fullscreenFrameModule (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), loadableImage (ref), overlay (ref), animatedFlatList (ref), fixConsoleEDPDirectionalNavigation (ref)
 	local var1 = t
 	
 	if p1.tokens then
@@ -94,7 +93,7 @@ return function(p1)
 		var1.actionBarHeight, var1.actionBarWidth, p1.actionBarWidth,
 		p1.renderActionBarLabelImpressionsDetector, var12
 	}), var6, var1.safeAreaSize)
-	local var16 = if not fixDeviceSafePaddingAccess then if fFlagEnableLeftNavOnConsole or fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil elseif fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil
+	local var16 = if fFlagEnableLeftNavOnConsole or fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil
 	
 	return reactModule.createElement(if fFlagEnableLeftNavOnConsole then fullscreenFrameModule else "Frame", {
 		[reactModule.Change.AbsoluteSize] = var8,

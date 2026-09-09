@@ -35,6 +35,7 @@ return {
 	ColorAdjustment = "ColorAdjustment",
 	BodyShape = "BodyShape",
 	Photobooth = "Photobooth",
+	PhotoboothMomentsPage = if avatarExperienceFlagsModule.FFlagAXPhotoboothMomentsPage then "PhotoboothMomentsPage" else nil,
 	BackgroundGeneration = "BackgroundGeneration",
 	EditProfileImage = "EditProfileImage",
 	AppCatalogContextMenuHost = "AppCatalogContextMenuHost",

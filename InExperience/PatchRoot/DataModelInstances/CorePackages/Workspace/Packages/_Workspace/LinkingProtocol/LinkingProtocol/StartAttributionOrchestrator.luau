@@ -1,7 +1,9 @@
 ﻿local parent = script.Parent
+local parent_1 = parent.Parent
 local _ = require(parent.LinkingProtocolTypes)
 local attributionTelemetryModule = require(parent.AttributionTelemetry)
 local getFFlagEnableStartAttributionTelemetryModule = require(parent.Flags.getFFlagEnableStartAttributionTelemetry)
+local fFlagAdConsentForwardCachedRegion = require(parent_1.SharedFlags).FFlagAdConsentForwardCachedRegion
 local t = {}
 local t_1 = {
 	AT = true,
@@ -39,24 +41,24 @@ local t_1 = {
 }
 
 local function _(p1)
-	-- upvalues: t_1 (ref)
-	return p1 == nil or t_1[string.upper(p1)] == true
+	-- upvalues: fFlagAdConsentForwardCachedRegion (ref), t_1 (ref)
+	return p1 == nil or (if fFlagAdConsentForwardCachedRegion and string.match(p1, "^%a%a$") == nil then true else t_1[string.upper(p1)] == true)
 end
 
 local _ = function(p1, p2)
-	-- upvalues: t_1 (ref)
+	-- upvalues: fFlagAdConsentForwardCachedRegion (ref), t_1 (ref)
 	return {
-		isSubjectToGdpr = p2 == nil or t_1[string.upper(p2)] == true,
+		isSubjectToGdpr = p2 == nil or (if fFlagAdConsentForwardCachedRegion and string.match(p2, "^%a%a$") == nil then true else t_1[string.upper(p2)] == true),
 		consented = p1
 	}
 end
 
 function t.computeDecision(p1, p2)
-	-- upvalues: t_1 (ref)
+	-- upvalues: fFlagAdConsentForwardCachedRegion (ref), t_1 (ref)
 	return if p1 == nil then { applySharingFilter = true, dmaConsent = nil } else {
 		applySharingFilter = not p1,
 		dmaConsent = {
-			isSubjectToGdpr = p2 == nil or t_1[string.upper(p2)] == true,
+			isSubjectToGdpr = p2 == nil or (if fFlagAdConsentForwardCachedRegion and string.match(p2, "^%a%a$") == nil then true else t_1[string.upper(p2)] == true),
 			consented = p1
 		}
 	}

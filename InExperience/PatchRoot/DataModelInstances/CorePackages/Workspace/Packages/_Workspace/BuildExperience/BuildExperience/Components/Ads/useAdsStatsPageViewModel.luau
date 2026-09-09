@@ -54,7 +54,7 @@ local function formatDateRange(p1, p2, p3)
 	end)
 end
 
-local _ = function(p1, p2, p3)
+local _ = function(p1, p2, p3, p4)
 	-- upvalues: analyticsUnitModule (ref), statsCardValueFormatModule (ref), iconPosition (ref)
 	return {
 		deltaValue = 0,
@@ -64,12 +64,13 @@ local _ = function(p1, p2, p3)
 		statValueFormat = statsCardValueFormatModule.Regular,
 		statIcon = p3,
 		statIconPosition = iconPosition.Left,
-		deltaUnit = analyticsUnitModule.Percent
+		deltaUnit = analyticsUnitModule.Percent,
+		hasData = p4
 	}
 end
 
 return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: useGetAdCampaignsModule (ref), useGetCampaignStatsModule (ref), useGetAdCampaignEligibilityModule (ref), adCampaignEligibilityUtilsModule (ref), useCreateAdCampaignModule (ref), reactModule (ref), useLocalization (ref), localizationStringsModule (ref), localizationModule (ref), WINDOW_DAYS (ref), mSPERDAY (ref), t (ref), toStartMs (ref), campaignEndMs (ref), campaignEndExclusiveMs (ref), iconName (ref), analyticsUnitModule (ref), statsCardValueFormatModule (ref), iconPosition (ref), formatDateRange (ref), useOpenWebViewWithResumeRefreshModule (ref), var1 (ref)
+	-- upvalues: useGetAdCampaignsModule (ref), useGetCampaignStatsModule (ref), useGetAdCampaignEligibilityModule (ref), useCreateAdCampaignModule (ref), reactModule (ref), useLocalization (ref), localizationStringsModule (ref), localizationModule (ref), WINDOW_DAYS (ref), mSPERDAY (ref), t (ref), toStartMs (ref), campaignEndMs (ref), campaignEndExclusiveMs (ref), iconName (ref), analyticsUnitModule (ref), statsCardValueFormatModule (ref), iconPosition (ref), formatDateRange (ref), adCampaignEligibilityUtilsModule (ref), useOpenWebViewWithResumeRefreshModule (ref), var1 (ref)
 	local var2, var3 = useGetAdCampaignsModule(p2)
 	local var4 = false
 	
@@ -83,9 +84,8 @@ return function(p1, p2, p3, p4, p5, p6)
 			end
 		end
 	end
-	local var6, var7 = useGetCampaignStatsModule(if var4 then p1 else nil, p3)
-	local var8, var9 = useGetAdCampaignEligibilityModule(p1, p5)
-	local var10 = adCampaignEligibilityUtilsModule.freeCreditsRemaining(var8)
+	local var6, var7, var8 = useGetCampaignStatsModule(if var4 then p1 else nil, p3)
+	local var9, var10 = useGetAdCampaignEligibilityModule(p1, p5)
 	local var11 = useCreateAdCampaignModule(p1, nil, p6)
 	local var12, var13 = reactModule.useState(false)
 	local var14, var15 = reactModule.useState(nil)
@@ -113,12 +113,12 @@ return function(p1, p2, p3, p4, p5, p6)
 		end
 	end, { var11.isCreatePending, var11.hasCreateError })
 	reactModule.useEffect(function()
-		-- upvalues: var16 (ref), var9 (ref), var8 (ref), var10 (ref), var18 (ref), var17 (ref)
-		if var16 and var9 == "Ready" and (var8 ~= nil and var10 ~= var18.current) then
+		-- upvalues: var10 (ref), var9 (ref), var18 (ref), var16 (ref), var17 (ref)
+		if var16 and ((var10 == "Ready" and (var9 ~= nil and var9 ~= var18.current)) or var10 == "Failed") then
 			var18.current = nil
 			var17(false)
 		end
-	end, { var16, var9, var8, var10 })
+	end, { var16, var10, var9 })
 	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), var17 (ref)
 		var18.current = nil
@@ -152,7 +152,7 @@ return function(p1, p2, p3, p4, p5, p6)
 	local error = var25.error
 	local dateRange = var25.dateRange
 	local var26 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref), var6 (ref), var24 (ref), WINDOW_DAYS (copy), mSPERDAY (copy), p1 (ref), t (copy), toStartMs (copy), campaignEndMs (copy), campaignEndExclusiveMs (copy), gamePlays (ref), iconName (copy), analyticsUnitModule (copy), statsCardValueFormatModule (copy), iconPosition (copy), adClicks (ref), adViews (ref), playTime (ref), formatDateRange (copy), dateRange (ref)
+		-- upvalues: var2 (ref), var6 (ref), var24 (ref), WINDOW_DAYS (copy), mSPERDAY (copy), p1 (ref), t (copy), toStartMs (copy), campaignEndMs (copy), campaignEndExclusiveMs (copy), gamePlays (ref), iconName (copy), var8 (ref), analyticsUnitModule (copy), statsCardValueFormatModule (copy), iconPosition (copy), adClicks (ref), adViews (ref), playTime (ref), formatDateRange (copy), dateRange (ref)
 		local var27 = var2 or {}
 		local var28 = var6 or {}
 		local var29 = var24 - WINDOW_DAYS * mSPERDAY
@@ -181,7 +181,7 @@ return function(p1, p2, p3, p4, p5, p6)
 		end)
 		
 		local function buildSummaryCards(p7)
-			-- upvalues: gamePlays (copy), iconName (copy), analyticsUnitModule (copy), statsCardValueFormatModule (copy), iconPosition (copy), adClicks (copy), adViews (copy), playTime (copy)
+			-- upvalues: gamePlays (copy), iconName (copy), var8 (copy), analyticsUnitModule (copy), statsCardValueFormatModule (copy), iconPosition (copy), adClicks (copy), adViews (copy), playTime (copy)
 			return {
 				{
 					deltaValue = 0,
@@ -191,7 +191,8 @@ return function(p1, p2, p3, p4, p5, p6)
 					statValueFormat = statsCardValueFormatModule.Regular,
 					statIcon = iconName.CirclePlay,
 					statIconPosition = iconPosition.Left,
-					deltaUnit = analyticsUnitModule.Percent
+					deltaUnit = analyticsUnitModule.Percent,
+					hasData = not var8.plays
 				},
 				{
 					deltaValue = 0,
@@ -201,7 +202,8 @@ return function(p1, p2, p3, p4, p5, p6)
 					statValueFormat = statsCardValueFormatModule.Regular,
 					statIcon = iconName.Crosshairs,
 					statIconPosition = iconPosition.Left,
-					deltaUnit = analyticsUnitModule.Percent
+					deltaUnit = analyticsUnitModule.Percent,
+					hasData = not var8.adClicks
 				},
 				{
 					deltaValue = 0,
@@ -211,7 +213,8 @@ return function(p1, p2, p3, p4, p5, p6)
 					statValueFormat = statsCardValueFormatModule.Regular,
 					statIcon = iconName.Eye,
 					statIconPosition = iconPosition.Left,
-					deltaUnit = analyticsUnitModule.Percent
+					deltaUnit = analyticsUnitModule.Percent,
+					hasData = not var8.adViews
 				},
 				{
 					deltaValue = 0,
@@ -220,7 +223,8 @@ return function(p1, p2, p3, p4, p5, p6)
 					statUnit = analyticsUnitModule.Temporal,
 					statIcon = iconName.Clock,
 					statIconPosition = iconPosition.Left,
-					deltaUnit = analyticsUnitModule.Percent
+					deltaUnit = analyticsUnitModule.Percent,
+					hasData = not var8.playtimeSeconds
 				}
 			}
 		end
@@ -239,9 +243,9 @@ return function(p1, p2, p3, p4, p5, p6)
 		for i_2, v_2 in t_2 do
 			table.insert(t_4, {
 				dateText = formatDateRange(dateRange, v_2.startMs, v_2.endMs) or "",
-				adViews = v_2.stats.adViews,
-				adClicks = v_2.stats.adClicks,
-				gamePlays = v_2.stats.plays,
+				adViews = if var8.adViews then nil else v_2.stats.adViews,
+				adClicks = if var8.adClicks then nil else v_2.stats.adClicks,
+				gamePlays = if var8.plays then nil else v_2.stats.plays,
 				labels = {
 					adViews = adViews,
 					adClicks = adClicks,
@@ -251,18 +255,18 @@ return function(p1, p2, p3, p4, p5, p6)
 		end
 		return { activeCampaigns = t_3, pastCampaigns = t_4 }
 	end, {
-		p1, var2, var6, var24, gamePlays, adClicks, adViews, playTime, dateRange,
-		var25[localizationModule.RobloxLocaleIdKey]
+		p1, var2, var6, var8, var24, gamePlays, adClicks, adViews, playTime,
+		dateRange, var25[localizationModule.RobloxLocaleIdKey]
 	})
 	local var33 = if #var26.activeCampaigns <= 0 then #var26.pastCampaigns > 0 else true
 	local var34 = if var3 ~= "Failed" then var4 and var7 == "Failed" else true
-	local var35 = not var34 and (if var3 ~= "NotReady" then if var4 then true else not var33 and (p1 ~= nil and var9 == "NotReady") else true)
+	local var35 = not var34 and (if var3 ~= "NotReady" then if var4 then true else not var33 and (p1 ~= nil and var10 == "NotReady") else true)
 	local var36 = var20 and (not var35 and not var34)
-	local var37 = if var8 ~= nil then nil else var8.offer
+	local var37 = if var9 ~= nil then nil else var9.offer
 	local var38 = if var37 ~= nil then nil else var37.durationDays
 	local var39 = if var14 == nil or var38 == nil then nil else var14 + math.max(0, var38 - 1) * mSPERDAY
-	local var40 = adCampaignEligibilityUtilsModule.isEligibleForFreePromotion(var8) and adCampaignEligibilityUtilsModule.hasFreeCredit(var8)
-	local var41 = var40 and adCampaignEligibilityUtilsModule.hasUsableOffer(var8)
+	local var40 = adCampaignEligibilityUtilsModule.isEligibleForFreePromotion(var9) and adCampaignEligibilityUtilsModule.hasFreeCredit(var9)
+	local var41 = var40 and adCampaignEligibilityUtilsModule.hasUsableOffer(var9)
 	local var42 = useOpenWebViewWithResumeRefreshModule(var1(), var25.adsManager, var11.refresh)
 	
 	return {
@@ -276,7 +280,7 @@ return function(p1, p2, p3, p4, p5, p6)
 		emptyTitle = if var40 then var25.emptyTitleFree else var25.emptyTitle,
 		emptySubtitle = if var40 then var25.emptySubtitleFree else var25.emptySubtitle,
 		showPromotionCard = var33 and var40,
-		promotionFreeCreditsRemaining = adCampaignEligibilityUtilsModule.freeCreditsRemaining(var8),
+		promotionFreeCreditsRemaining = adCampaignEligibilityUtilsModule.freeCreditsRemaining(var9),
 		createButtonText = var25.create,
 		createButtonIsExternal = not var41,
 		isPromotionCreatePending = var11.isCreatePending or var16,
@@ -304,9 +308,9 @@ return function(p1, p2, p3, p4, p5, p6)
 		end, { var16, var41, var42, var11.clearCreateError }),
 		onClosePromotionSheet = var19,
 		onCreateCampaign = reactModule.useCallback(function()
-			-- upvalues: var18 (ref), var10 (ref), var11 (ref)
-			var18.current = var10
+			-- upvalues: var18 (ref), var9 (ref), var11 (ref)
+			var18.current = var9
 			var11.createCampaign()
-		end, { var10, var11.createCampaign })
+		end, { var9, var11.createCampaign })
 	}
 end

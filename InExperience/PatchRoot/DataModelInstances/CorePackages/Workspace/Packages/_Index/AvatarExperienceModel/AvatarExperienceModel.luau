@@ -1,6 +1,7 @@
 ﻿return {
 	Constants = require(script.Constants),
 	Enums = {
+		AvatarEditorSubcategories = require(script.Enums.AvatarEditorSubcategories),
 		CatalogCategoryTaxonomyUUIDs = require(script.Enums.CatalogCategoryTaxonomyUUIDs),
 		FocusType = require(script.Enums.FocusType),
 		HeadShape = require(script.Enums.HeadShape),

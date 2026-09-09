@@ -1,4 +1,4 @@
-﻿local fFlagRemoveClassicHeadsAndFaces = require(script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent.AvatarExperienceFlags).FFlagRemoveClassicHeadsAndFaces
+﻿local fFlagRemoveClassicHeadsAndFaces = require(script:FindFirstAncestor("AvatarExperienceModel").Parent.AvatarExperienceFlags).FFlagRemoveClassicHeadsAndFaces
 
 return {
 	CreatedCharacters = "CreatedCharacters",

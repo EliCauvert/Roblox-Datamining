@@ -1,10 +1,10 @@
 ﻿local _ = require(script.Parent.Types)
-local avatarEditorSubcategoriesModule = require(script.Parent.Enums.AvatarEditorSubcategories)
 local inventoryFiltersModule = require(script.Parent.Enums.InventoryFilters)
 local slotTypeModule = require(script.Parent.Enums.SlotType)
 local t = {}
 local categoriesModule = require(script.Parent.Enums.Categories)
 local parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
+local avatarEditorSubcategories = require(parent.AvatarExperienceModel).Enums.AvatarEditorSubcategories
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagRemoveClassicHeadsAndFaces = avatarExperienceFlagsModule.FFlagRemoveClassicHeadsAndFaces
 local fFlagAXMigrateBuilderIcons = avatarExperienceFlagsModule.FFlagAXMigrateBuilderIcons
@@ -175,19 +175,19 @@ local t_3 = {
 			{
 				name = "Body",
 				nameTranslationKey = "Feature.Catalog.Label.FullBody",
-				editorSubcategory = avatarEditorSubcategoriesModule.PurchasedCharacters,
+				editorSubcategory = avatarEditorSubcategories.PurchasedCharacters,
 				assetTypes = {}
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Hair",
 				icon = t_1.Hair,
-				editorSubcategory = avatarEditorSubcategoriesModule.Hair,
+				editorSubcategory = avatarEditorSubcategories.Hair,
 				assetTypes = { Enum.AvatarAssetType.HairAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Head",
 				icon = t_1.ClassicHead,
-				editorSubcategory = avatarEditorSubcategoriesModule.Heads,
+				editorSubcategory = avatarEditorSubcategories.Heads,
 				assetTypes = {
 					Enum.AvatarAssetType.DynamicHead,
 					Enum.AvatarAssetType.Head
@@ -197,7 +197,7 @@ local t_3 = {
 				name = "Classic Face",
 				nameTranslationKey = "Feature.Avatar.Label.Face",
 				icon = t_1.Faces,
-				editorSubcategory = avatarEditorSubcategoriesModule.ClassicFaces,
+				editorSubcategory = avatarEditorSubcategories.ClassicFaces,
 				assetTypes = { Enum.AvatarAssetType.Face }
 			},
 			{
@@ -205,31 +205,31 @@ local t_3 = {
 				nameTranslationKey = "Feature.Avatar.Label.Build",
 				assetTypes = {},
 				icon = t_1.Build,
-				editorSubcategory = avatarEditorSubcategoriesModule.Build
+				editorSubcategory = avatarEditorSubcategories.Build
 			},
 			{
 				name = "Skin",
 				nameTranslationKey = "Feature.Avatar.Label.Skin",
-				editorSubcategory = avatarEditorSubcategoriesModule.Skin,
+				editorSubcategory = avatarEditorSubcategories.Skin,
 				assetTypes = {}
 			}
 		} else {
 			{
 				name = "Body",
 				nameTranslationKey = "Feature.Catalog.Label.FullBody",
-				editorSubcategory = avatarEditorSubcategoriesModule.PurchasedCharacters,
+				editorSubcategory = avatarEditorSubcategories.PurchasedCharacters,
 				assetTypes = {}
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Hair",
 				icon = t_1.Hair,
-				editorSubcategory = avatarEditorSubcategoriesModule.Hair,
+				editorSubcategory = avatarEditorSubcategories.Hair,
 				assetTypes = { Enum.AvatarAssetType.HairAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Head",
 				icon = t_1.ClassicHead,
-				editorSubcategory = avatarEditorSubcategoriesModule.Heads,
+				editorSubcategory = avatarEditorSubcategories.Heads,
 				assetTypes = { Enum.AvatarAssetType.DynamicHead }
 			},
 			{
@@ -237,12 +237,12 @@ local t_3 = {
 				nameTranslationKey = "Feature.Avatar.Label.Build",
 				assetTypes = {},
 				icon = t_1.Build,
-				editorSubcategory = avatarEditorSubcategoriesModule.Build
+				editorSubcategory = avatarEditorSubcategories.Build
 			},
 			{
 				name = "Skin",
 				nameTranslationKey = "Feature.Avatar.Label.Skin",
-				editorSubcategory = avatarEditorSubcategoriesModule.Skin,
+				editorSubcategory = avatarEditorSubcategories.Skin,
 				assetTypes = {}
 			}
 		}
@@ -257,12 +257,12 @@ local t_3 = {
 				nameTranslationKey = "Feature.Avatar.Label.Eyelashes",
 				hide = true,
 				icon = t_1.Eyelashes,
-				editorSubcategory = avatarEditorSubcategoriesModule.MakeupLooks,
+				editorSubcategory = avatarEditorSubcategories.MakeupLooks,
 				eligibleSubcategories = {
-					avatarEditorSubcategoriesModule.MakeupLooks,
-					avatarEditorSubcategoriesModule.EyeMakeup,
-					avatarEditorSubcategoriesModule.FaceMakeup,
-					avatarEditorSubcategoriesModule.LipMakeup
+					avatarEditorSubcategories.MakeupLooks,
+					avatarEditorSubcategories.EyeMakeup,
+					avatarEditorSubcategories.FaceMakeup,
+					avatarEditorSubcategories.LipMakeup
 				},
 				assetTypes = {}
 			},
@@ -273,11 +273,11 @@ local t_3 = {
 				deselectable = true,
 				slotType = slotTypeModule.LayeredSlot,
 				eligibleSubcategories = {
-					avatarEditorSubcategoriesModule.EyeMakeup,
-					avatarEditorSubcategoriesModule.FaceMakeup,
-					avatarEditorSubcategoriesModule.LipMakeup
+					avatarEditorSubcategories.EyeMakeup,
+					avatarEditorSubcategories.FaceMakeup,
+					avatarEditorSubcategories.LipMakeup
 				},
-				editorSubcategory = avatarEditorSubcategoriesModule.EyeMakeup,
+				editorSubcategory = avatarEditorSubcategories.EyeMakeup,
 				assetTypes = {
 					Enum.AvatarAssetType.EyeMakeup,
 					Enum.AvatarAssetType.FaceMakeup,
@@ -288,14 +288,14 @@ local t_3 = {
 				nameTranslationKey = "Feature.Avatar.Label.Eyelashes",
 				deselectable = true,
 				icon = t_1.Eyelashes,
-				editorSubcategory = avatarEditorSubcategoriesModule.Eyelashes,
+				editorSubcategory = avatarEditorSubcategories.Eyelashes,
 				assetTypes = { Enum.AvatarAssetType.EyelashAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Eyebrows",
 				deselectable = true,
 				icon = t_1.Eyebrows,
-				editorSubcategory = avatarEditorSubcategoriesModule.Eyebrows,
+				editorSubcategory = avatarEditorSubcategories.Eyebrows,
 				assetTypes = { Enum.AvatarAssetType.EyebrowAccessory }
 			}
 		}
@@ -308,7 +308,7 @@ local t_3 = {
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Top",
 				icon = t_1.Shirts,
-				editorSubcategory = avatarEditorSubcategoriesModule.Tops,
+				editorSubcategory = avatarEditorSubcategories.Tops,
 				assetTypes = {
 					Enum.AvatarAssetType.ShirtAccessory,
 					Enum.AvatarAssetType.TShirtAccessory,
@@ -318,13 +318,13 @@ local t_3 = {
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Outerwear",
 				icon = t_1.Jackets,
-				editorSubcategory = avatarEditorSubcategoriesModule.Outerwear,
+				editorSubcategory = avatarEditorSubcategories.Outerwear,
 				assetTypes = { Enum.AvatarAssetType.JacketAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Bottom",
 				icon = t_1.Pants,
-				editorSubcategory = avatarEditorSubcategoriesModule.Bottoms,
+				editorSubcategory = avatarEditorSubcategories.Bottoms,
 				assetTypes = {
 					Enum.AvatarAssetType.PantsAccessory,
 					Enum.AvatarAssetType.ShortsAccessory,
@@ -334,25 +334,25 @@ local t_3 = {
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Shoes",
 				icon = t_1.Shoes,
-				editorSubcategory = avatarEditorSubcategoriesModule.Shoes,
+				editorSubcategory = avatarEditorSubcategories.Shoes,
 				assetTypes = { Enum.AvatarAssetType.RightShoeAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.ShirtClassic",
 				icon = t_1.ClassicShirts,
-				editorSubcategory = avatarEditorSubcategoriesModule.ClassicShirts,
+				editorSubcategory = avatarEditorSubcategories.ClassicShirts,
 				assetTypes = { Enum.AvatarAssetType.Shirt }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.PantsClassic",
 				icon = t_1.ClassicPants,
-				editorSubcategory = avatarEditorSubcategoriesModule.ClassicPants,
+				editorSubcategory = avatarEditorSubcategories.ClassicPants,
 				assetTypes = { Enum.AvatarAssetType.Pants }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.TShirtClassic",
 				icon = t_1.ClassicTShirts,
-				editorSubcategory = avatarEditorSubcategoriesModule.ClassicTShirts,
+				editorSubcategory = avatarEditorSubcategories.ClassicTShirts,
 				assetTypes = { Enum.AvatarAssetType.TShirt }
 			}
 		}
@@ -366,49 +366,49 @@ local t_3 = {
 				name = "Head",
 				nameTranslationKey = "Feature.Avatar.Label.Head",
 				icon = t_1.Head,
-				editorSubcategory = avatarEditorSubcategoriesModule.Hats,
+				editorSubcategory = avatarEditorSubcategories.Hats,
 				assetTypes = { Enum.AvatarAssetType.Hat }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Face",
 				icon = t_1.Face,
-				editorSubcategory = avatarEditorSubcategoriesModule.Face,
+				editorSubcategory = avatarEditorSubcategories.Face,
 				assetTypes = { Enum.AvatarAssetType.FaceAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Neck",
 				icon = t_1.Neck,
-				editorSubcategory = avatarEditorSubcategoriesModule.Neck,
+				editorSubcategory = avatarEditorSubcategories.Neck,
 				assetTypes = { Enum.AvatarAssetType.NeckAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Back",
 				icon = t_1.Back,
-				editorSubcategory = avatarEditorSubcategoriesModule.Back,
+				editorSubcategory = avatarEditorSubcategories.Back,
 				assetTypes = { Enum.AvatarAssetType.BackAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Waist",
 				icon = t_1.Waist,
-				editorSubcategory = avatarEditorSubcategoriesModule.Waist,
+				editorSubcategory = avatarEditorSubcategories.Waist,
 				assetTypes = { Enum.AvatarAssetType.WaistAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Shoulder",
 				icon = t_1.Shoulder,
-				editorSubcategory = avatarEditorSubcategoriesModule.Shoulder,
+				editorSubcategory = avatarEditorSubcategories.Shoulder,
 				assetTypes = { Enum.AvatarAssetType.ShoulderAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Front",
 				icon = t_1.Front,
-				editorSubcategory = avatarEditorSubcategoriesModule.Front,
+				editorSubcategory = avatarEditorSubcategories.Front,
 				assetTypes = { Enum.AvatarAssetType.FrontAccessory }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Gear",
 				icon = t_1.Gear,
-				editorSubcategory = avatarEditorSubcategoriesModule.Gear,
+				editorSubcategory = avatarEditorSubcategories.Gear,
 				assetTypes = { Enum.AvatarAssetType.Gear }
 			}
 		}
@@ -427,49 +427,49 @@ local t_3 = {
 			{
 				nameTranslationKey = "Feature.Avatar.Label.AnimationFullSet",
 				icon = t_1.Animation,
-				editorSubcategory = avatarEditorSubcategoriesModule.AnimationFullSets,
+				editorSubcategory = avatarEditorSubcategories.AnimationFullSets,
 				assetTypes = { Enum.AvatarAssetType.IdleAnimation }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Idle",
 				icon = t_1.Idle,
-				editorSubcategory = avatarEditorSubcategoriesModule.IdleAnimations,
+				editorSubcategory = avatarEditorSubcategories.IdleAnimations,
 				assetTypes = { Enum.AvatarAssetType.IdleAnimation }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Walk",
 				icon = t_1.Walk,
-				editorSubcategory = avatarEditorSubcategoriesModule.WalkAnimations,
+				editorSubcategory = avatarEditorSubcategories.WalkAnimations,
 				assetTypes = { Enum.AvatarAssetType.WalkAnimation }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Run",
 				icon = t_1.Animation,
-				editorSubcategory = avatarEditorSubcategoriesModule.RunAnimations,
+				editorSubcategory = avatarEditorSubcategories.RunAnimations,
 				assetTypes = { Enum.AvatarAssetType.RunAnimation }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Jump",
 				icon = t_1.Jump,
-				editorSubcategory = avatarEditorSubcategoriesModule.JumpAnimations,
+				editorSubcategory = avatarEditorSubcategories.JumpAnimations,
 				assetTypes = { Enum.AvatarAssetType.JumpAnimation }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Fall",
 				icon = t_1.Fall,
-				editorSubcategory = avatarEditorSubcategoriesModule.FallAnimations,
+				editorSubcategory = avatarEditorSubcategories.FallAnimations,
 				assetTypes = { Enum.AvatarAssetType.FallAnimation }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Climb",
 				icon = t_1.Climb,
-				editorSubcategory = avatarEditorSubcategoriesModule.ClimbAnimations,
+				editorSubcategory = avatarEditorSubcategories.ClimbAnimations,
 				assetTypes = { Enum.AvatarAssetType.ClimbAnimation }
 			},
 			{
 				nameTranslationKey = "Feature.Avatar.Label.Swim",
 				icon = t_1.Swim,
-				editorSubcategory = avatarEditorSubcategoriesModule.SwimAnimations,
+				editorSubcategory = avatarEditorSubcategories.SwimAnimations,
 				assetTypes = { Enum.AvatarAssetType.SwimAnimation }
 			}
 		}

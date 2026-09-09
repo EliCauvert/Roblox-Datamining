@@ -12,6 +12,7 @@ local fFlagAXFixGamepadNavigationOnOutfitManagement = avatarExperienceFlagsModul
 local fFlagAXOutfitPageRevamp = avatarExperienceFlagsModule.FFlagAXOutfitPageRevamp
 local fFlagAXAvatarFoldersEnabled = avatarExperienceFlagsModule.FFlagAXAvatarFoldersEnabled
 local fFlagAXBackgroundGenerationAnalytics = avatarExperienceFlagsModule.FFlagAXBackgroundGenerationAnalytics
+local fFlagAXPhotoboothMomentsPage = avatarExperienceFlagsModule.FFlagAXPhotoboothMomentsPage
 local AXEnableMultiTryOnUI = game:DefineFastFlag("AXEnableMultiTryOnUI", false)
 local AXKeepTryOnsInAvatarEditor = game:DefineFastFlag("AXKeepTryOnsInAvatarEditor", false)
 local fFlagAXFixAvatarScreenVR = avatarExperienceFlagsModule.FFlagAXFixAvatarScreenVR
@@ -392,6 +393,9 @@ end
 if fFlagEditProfileImageV2Enabled then
 	t_1[avatarScreenModule.EditProfileImage] = { isTryOnOutfitResetPage = true }
 	t_1[avatarScreenModule.AppCatalogContextMenuHost] = { isTransparent = true }
+end
+if fFlagAXPhotoboothMomentsPage then
+	t_1[avatarScreenModule.PhotoboothMomentsPage] = { isTryOnOutfitResetPage = true }
 end
 local t_2 = {}
 

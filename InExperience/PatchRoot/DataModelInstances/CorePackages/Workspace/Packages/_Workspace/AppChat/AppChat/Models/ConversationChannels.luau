@@ -7,25 +7,21 @@ local orderedMap = require(parent.AppCommonLib).OrderedMap
 local constantsModule = require(appChat.Constants)
 local conversationModule = require(script.Parent.Conversation)
 local dateTime = require(parent.Time).DateTime
-local fFlagAppChatNilGuardMessageSortModule = require(appChat.Flags.FFlagAppChatNilGuardMessageSort)
 
 local function getMessageId(p1)
 	return p1.id
 end
 
 local function messageSortPredicate(p1, p2)
-	-- upvalues: fFlagAppChatNilGuardMessageSortModule (ref)
-	if fFlagAppChatNilGuardMessageSortModule then
-		local sent = p1 and p1.sent
-		local sent_1 = p2 and p2.sent
-		
-		if not sent and not sent_1 then
-			return (if p2 then p2.id else "") < (if p1 then p1.id else "")
-		elseif not sent then
-			return false
-		elseif not sent_1 then
-			return true
-		end
+	local sent = p1 and p1.sent
+	local sent_1 = p2 and p2.sent
+	
+	if not sent and not sent_1 then
+		return (if p2 then p2.id else "") < (if p1 then p1.id else "")
+	elseif not sent then
+		return false
+	elseif not sent_1 then
+		return true
 	end
 	local unixTimestamp = p1.sent:GetUnixTimestamp()
 	local unixTimestamp_1 = p2.sent:GetUnixTimestamp()
