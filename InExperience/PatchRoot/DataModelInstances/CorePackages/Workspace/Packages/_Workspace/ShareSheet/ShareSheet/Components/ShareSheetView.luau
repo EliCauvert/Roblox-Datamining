@@ -6,8 +6,8 @@ local divider = foundationModule.Divider
 local sheet = foundationModule.Sheet
 local text = foundationModule.Text
 local view = foundationModule.View
-local fFlagSharePplPickerModule = require(shareSheet.Flags.FFlagSharePplPicker)
-local fIntSharePplPickerSnapPointHundredthsPercent = require(shareSheet.ShareSheetConstants).FIntSharePplPickerSnapPointHundredthsPercent
+local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
+local fIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent = require(shareSheet.ShareSheetConstants).FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent
 local peoplePickerModule = require(shareSheet.Components.PeoplePicker)
 local shareSheetActionRowModule = require(script.Parent.ShareSheetActionRow)
 local shareSheetSocialRowModule = require(script.Parent.ShareSheetSocialRow)
@@ -22,44 +22,36 @@ local function setContentScrollingFrameRef(value)
 end
 
 return function(p1)
-	-- upvalues: fFlagSharePplPickerModule (ref), fIntSharePplPickerSnapPointHundredthsPercent (ref), reactModule (ref), shareSheetTelemetryModule (ref), sheet (ref), peoplePickerModule (ref), text (ref), setContentScrollingFrameRef (ref), view (ref), shareSheetSocialRowModule (ref), divider (ref), shareSendRowModule (ref), shareSheetActionRowModule (ref)
+	-- upvalues: fFlagShareSheetPeoplePickerEnabledModule (ref), fIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent (ref), reactModule (ref), shareSheetTelemetryModule (ref), sheet (ref), peoplePickerModule (ref), text (ref), setContentScrollingFrameRef (ref), view (ref), shareSheetSocialRowModule (ref), divider (ref), shareSendRowModule (ref), shareSheetActionRowModule (ref)
 	local var1 = next(p1.selectedConversationIds) ~= nil or p1.isSending == true
 	local peoplePicker = nil
-	local var2 = nil
+	local var2 = false
 	local list = nil
 	local var3 = nil
-	local var4 = nil
 	
-	if fFlagSharePplPickerModule then
+	if fFlagShareSheetPeoplePickerEnabledModule then
 		peoplePicker = p1.peoplePicker
 		var2 = p1.isPeoplePickerDisplayed == true
 		
 		if var2 then
-			local var5 = fIntSharePplPickerSnapPointHundredthsPercent / 10000
-			list = { var5 }
-			var3 = var5
+			local var4 = fIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent / 10000
+			list = { var4 }
+			var3 = var4
 		end
-		var4 = reactModule.useCallback(function(p2)
-			-- upvalues: var2 (write)
-			if p2 then
-				p2.AutomaticSize = if var2 then Enum.AutomaticSize.None else Enum.AutomaticSize.Y
-				p2.ScrollBarThickness = 0
-			end
-		end, { var2 })
 	end
 	return reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
-		centerSheetHeight = if fFlagSharePplPickerModule then var3 else nil,
+		centerSheetHeight = if fFlagShareSheetPeoplePickerEnabledModule then var3 else nil,
 		isOpen = p1.isOpen,
 		onClose = reactModule.useCallback(function()
 			-- upvalues: p1 (ref), shareSheetTelemetryModule (copy)
 			p1.onCloseWithReason(shareSheetTelemetryModule.CloseReason.UserDismissed)
 		end, { p1.onCloseWithReason }),
-		snapPoints = if fFlagSharePplPickerModule then list else nil
+		snapPoints = if fFlagShareSheetPeoplePickerEnabledModule then list else nil
 	}, {
 		Header = reactModule.createElement(sheet.Header, {
-			hasCloseAffordance = if fFlagSharePplPickerModule then not var2 else true
-		}, if fFlagSharePplPickerModule and var2 then {
+			hasCloseAffordance = if fFlagShareSheetPeoplePickerEnabledModule then not var2 else true
+		}, if fFlagShareSheetPeoplePickerEnabledModule and var2 then {
 			Picker = reactModule.createElement(peoplePickerModule.PeoplePickerHeader, peoplePicker.headerProps)
 		} else {
 			Title = reactModule.createElement(text, {
@@ -69,15 +61,15 @@ return function(p1)
 			})
 		}),
 		Content = reactModule.createElement(sheet.Content, {
-			scrollingFrameRef = if fFlagSharePplPickerModule then var4 else setContentScrollingFrameRef,
-			isContentFullBleed = if fFlagSharePplPickerModule then not var2 else true
+			scrollingFrameRef = if fFlagShareSheetPeoplePickerEnabledModule and p1.scrollingFrameRef ~= nil then p1.scrollingFrameRef else setContentScrollingFrameRef,
+			isContentFullBleed = if fFlagShareSheetPeoplePickerEnabledModule then not var2 else true
 		}, {
 			ContentLayout = reactModule.createElement(view, {
 				tag = {
 					["col size-full-0 auto-y"] = true,
-					["gap-xlarge"] = if fFlagSharePplPickerModule then not var2 else true
+					["gap-xlarge"] = if fFlagShareSheetPeoplePickerEnabledModule then not var2 else true
 				}
-			}, if fFlagSharePplPickerModule and var2 then {
+			}, if fFlagShareSheetPeoplePickerEnabledModule and var2 then {
 				PeoplePicker = reactModule.createElement(peoplePickerModule.PeoplePickerList, peoplePicker.listProps)
 			} else {
 				SocialRow = if p1.shouldShowSocialRow then reactModule.createElement(shareSheetSocialRowModule, {
@@ -85,11 +77,11 @@ return function(p1)
 					conversationEligibility = p1.conversationEligibility,
 					isLoading = p1.isSocialRowLoading,
 					onConversationActivated = p1.onConversationActivated,
-					onMoreActivated = if fFlagSharePplPickerModule then p1.onMoreActivated else nil,
+					onMoreActivated = if fFlagShareSheetPeoplePickerEnabledModule then p1.onMoreActivated else nil,
 					selectedConversationIds = p1.selectedConversationIds
 				}) else nil,
 				RowDivider = if p1.shouldShowSocialRow then reactModule.createElement(divider, { LayoutOrder = 2, testId = "share-sheet-row-divider" }) else nil,
-				ActionsRow = if fFlagSharePplPickerModule then nil elseif var1 then reactModule.createElement(shareSendRowModule, {
+				ActionsRow = if fFlagShareSheetPeoplePickerEnabledModule then nil elseif var1 then reactModule.createElement(shareSendRowModule, {
 					LayoutOrder = 3,
 					isLoading = p1.isSending,
 					label = p1.sendLabel,
@@ -105,7 +97,7 @@ return function(p1)
 				})
 			})
 		}),
-		Actions = if fFlagSharePplPickerModule then reactModule.createElement(sheet.Actions, nil, {
+		Actions = if fFlagShareSheetPeoplePickerEnabledModule then reactModule.createElement(sheet.Actions, nil, {
 			Footer = if var1 then reactModule.createElement(shareSendRowModule, {
 				hasHorizontalPadding = false,
 				shouldFillButton = false,

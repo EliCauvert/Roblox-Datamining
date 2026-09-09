@@ -28,7 +28,7 @@ return function(p1)
 	return if p1.videoDuration <= 0 then nil else reactModule.createElement("Frame", {
 		AnchorPoint = Vector2.new(0, 0.5),
 		Position = UDim2.fromScale(0, 0.5),
-		Size = UDim2.new(math.clamp(p1.audioDuration / p1.videoDuration, 0, 1), 0, 1, -4),
+		Size = UDim2.new(math.clamp(p1.audioDuration / p1.videoDuration, 0, 1), 0, 1, 0),
 		BackgroundColor3 = var1.Color.ActionEmphasis.Background.Color3,
 		BackgroundTransparency = 0.4,
 		BorderSizePixel = 0,

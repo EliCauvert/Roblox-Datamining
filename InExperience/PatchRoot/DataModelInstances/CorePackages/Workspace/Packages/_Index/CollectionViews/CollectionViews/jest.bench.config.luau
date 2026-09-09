@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("CollectionViews").Parent.Dev.JestConfigs).createBenchmarkConfig("CollectionViewsBenchmarks")

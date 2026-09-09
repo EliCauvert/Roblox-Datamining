@@ -1,8 +1,6 @@
 ﻿local playersService = game:GetService("Players")
-local corePackagesService = game:GetService("CorePackages")
 local _ = game:GetService("CoreGui")
-local userProfileStore = require(corePackagesService.Workspace.Packages.UserProfiles).Stores.UserProfileStore
-local fFlagUserProfileStoreQueryRefetch = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagUserProfileStoreQueryRefetch
+local userProfileStore = require(game:GetService("CorePackages").Workspace.Packages.UserProfiles).Stores.UserProfileStore
 local fixCharacterNameHandlerNilProfileCrash = game:DefineFastFlag("FixCharacterNameHandlerNilProfileCrash", false)
 local t = {}
 local _ = {
@@ -128,7 +126,7 @@ local function onPlayerAdded(p1)
 end
 
 local function onPlayerRemoving(p1)
-	-- upvalues: t (ref), fFlagUserProfileStoreQueryRefetch (ref), userProfileStore (ref)
+	-- upvalues: t (ref), userProfileStore (ref)
 	local var1 = t[p1]
 	
 	if t[p1] then
@@ -137,9 +135,7 @@ local function onPlayerRemoving(p1)
 		end
 		t[p1] = nil
 	end
-	if fFlagUserProfileStoreQueryRefetch then
-		userProfileStore.get().invalidateCachedNamesForUserIds({ tostring(p1.UserId) })
-	end
+	userProfileStore.get().invalidateCachedNamesForUserIds({ tostring(p1.UserId) })
 end
 
 setCurrentPlayersNames()

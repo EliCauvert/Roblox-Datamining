@@ -17,6 +17,7 @@ local fFlagLuaAppPlayLoadingClickTelemetryMobile = require(parent.SharedFlags).F
 local fFlagLuaAppTextOnlyPlayButton = require(parent.SharedFlags).FFlagLuaAppTextOnlyPlayButton
 local fFlagLuaAppIconTextPlayButton = require(parent.SharedFlags).FFlagLuaAppIconTextPlayButton
 local fFlagLuaAppUpdatePlayButtonText = require(parent.SharedFlags).FFlagLuaAppUpdatePlayButtonText
+local fFlagLuaAppPlayButtonPrivatePT = require(parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePT
 local images = UIBloxModule.App.ImageSet.Images
 local play = images["icons/common/play"]
 local unavailable = images["icons/status/unavailable"]
@@ -35,7 +36,7 @@ playButton.validateProps = tModule.strictInterface({
 })
 
 function playButton.renderWithLocalization(p1, p2)
-	-- upvalues: fFlagLuaAppEnablePlaySquadButton (ref), playButtonStatesModule (ref), fFlagLuaAppPlayButtonLoadingPrimary (ref), buttonType (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), play (ref), getFFlagIsSquadEnabled (ref), robux (ref), unavailable (ref), roactModule (ref), comboButton (ref), truncationCollapse (ref), button (ref), fFlagLuaAppPlayLoadingClickTelemetryMobile (ref), reactModule (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref)
+	-- upvalues: fFlagLuaAppEnablePlaySquadButton (ref), playButtonStatesModule (ref), fFlagLuaAppPlayButtonLoadingPrimary (ref), buttonType (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), play (ref), getFFlagIsSquadEnabled (ref), robux (ref), fFlagLuaAppPlayButtonPrivatePT (ref), unavailable (ref), roactModule (ref), comboButton (ref), truncationCollapse (ref), button (ref), fFlagLuaAppPlayLoadingClickTelemetryMobile (ref), reactModule (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref)
 	local size = p1.props.Size
 	local layoutOrder = p1.props.LayoutOrder
 	local price = p1.props.price
@@ -82,6 +83,9 @@ function playButton.renderWithLocalization(p1, p2)
 	elseif playButtonState == playButtonStatesModule.DemoMode then
 		secondary = buttonType.PrimarySystem
 		unavailable_1 = p2.playDemo
+	elseif fFlagLuaAppPlayButtonPrivatePT and playButtonState == playButtonStatesModule.Playtest then
+		secondary = buttonType.PrimarySystem
+		unavailable_1 = p2.playtest
 	elseif playButtonState == playButtonStatesModule.ActionNeeded then
 		secondary = buttonType.PrimaryContextual
 		unavailable_1 = p2.unlock
@@ -146,7 +150,7 @@ function playButton.renderWithLocalization(p1, p2)
 end
 
 function playButton.render(p1)
-	-- upvalues: withLocalization (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref)
+	-- upvalues: withLocalization (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), fFlagLuaAppPlayButtonPrivatePT (ref)
 	return withLocalization({
 		join = "Feature.ExperienceDetails.PlayButtonText.ActionNeeded",
 		unlock = "Feature.ExperienceDetails.PlayButtonText.Unlock",
@@ -154,7 +158,8 @@ function playButton.render(p1)
 		unavailable = "Feature.ExperienceDetails.PlayButtonText.Unavailable",
 		waitingForParty = "Feature.Squads.Action.WaitingForParty",
 		playDemo = "Feature.ExperienceDetails.PlayButtonText.PlayDemo",
-		play = if (fFlagLuaAppTextOnlyPlayButton or fFlagLuaAppIconTextPlayButton) and fFlagLuaAppUpdatePlayButtonText then "Feature.ExperienceDetails.PlayButtonText.Play" else nil
+		play = if (fFlagLuaAppTextOnlyPlayButton or fFlagLuaAppIconTextPlayButton) and fFlagLuaAppUpdatePlayButtonText then "Feature.ExperienceDetails.PlayButtonText.Play" else nil,
+		playtest = if fFlagLuaAppPlayButtonPrivatePT then "Feature.Build.Action.Playtest" else nil
 	})(function(p2)
 		-- upvalues: p1 (ref)
 		return p1:renderWithLocalization(p2)

@@ -3,15 +3,17 @@ local parent = serverDrivenUi.Parent
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local abbreviateCount = require(parent.Localization).abbreviateCount
+local _ = require(parent.Foundation)
 local images = require(parent.FoundationImages).Images
 local _ = require(parent.SduiCoreSystem)
 local sduiGameTileActiveFriendsFooterModule = require(serverDrivenUi.Content.SduiGameTileActiveFriendsFooter)
 local sduiTileFooterModule = require(serverDrivenUi.Content.SduiTileFooter)
 local sduiInGameFriendsDataModule = require(serverDrivenUi.DataStore.SduiInGameFriendsData)
 local fFlagLuaAppFixInlineSignalsReactPattern = require(parent.SharedFlags).FFlagLuaAppFixInlineSignalsReactPattern
+local fFlagLuaAppSduiGameTileMetadataFontStyle = require(parent.SharedFlags).FFlagLuaAppSduiGameTileMetadataFontStyle
 
 return reactModule.memo(function(p1)
-	-- upvalues: sduiInGameFriendsDataModule (ref), fFlagLuaAppFixInlineSignalsReactPattern (ref), reactModule (ref), signalsReactModule (ref), sduiTileFooterModule (ref), sduiGameTileActiveFriendsFooterModule (ref), images (ref), abbreviateCount (ref)
+	-- upvalues: sduiInGameFriendsDataModule (ref), fFlagLuaAppFixInlineSignalsReactPattern (ref), reactModule (ref), signalsReactModule (ref), sduiTileFooterModule (ref), fFlagLuaAppSduiGameTileMetadataFontStyle (ref), sduiGameTileActiveFriendsFooterModule (ref), images (ref), abbreviateCount (ref)
 	local _ = nil
 	local getInGameFriendsByGame = sduiInGameFriendsDataModule.getInGameFriendsByGame
 	local var1 = if fFlagLuaAppFixInlineSignalsReactPattern then signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
@@ -40,7 +42,8 @@ return reactModule.memo(function(p1)
 		return reactModule.createElement(sduiTileFooterModule, {
 			testId = "--sdui-game-tile-footer-age-rating",
 			leftText = p1.ageRatingText,
-			analyticsContext = p1.analyticsContext
+			analyticsContext = p1.analyticsContext,
+			fontStyle = if fFlagLuaAppSduiGameTileMetadataFontStyle then p1.metadataFontStyle else nil
 		})
 	elseif var1 then
 		return reactModule.createElement(sduiGameTileActiveFriendsFooterModule, {
@@ -70,6 +73,7 @@ return reactModule.memo(function(p1)
 		leftText = ratingText,
 		leftIcon = var2,
 		rightText = var4,
-		rightIcon = var3
+		rightIcon = var3,
+		fontStyle = if fFlagLuaAppSduiGameTileMetadataFontStyle then p1.metadataFontStyle else nil
 	})
 end)

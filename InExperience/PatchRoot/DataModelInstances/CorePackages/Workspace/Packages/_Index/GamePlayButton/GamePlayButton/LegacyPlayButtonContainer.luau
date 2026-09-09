@@ -21,9 +21,10 @@ local fFlagLuaAppEnablePlaySquadButton = require(parent.SharedFlags).FFlagLuaApp
 local fFlagLuaAppPlayButtonLoadingDurationTelemetry = require(parent.SharedFlags).FFlagLuaAppPlayButtonLoadingDurationTelemetry
 local fFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP = require(parent.SharedFlags).FFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP
 local fIntLuaAppPlayButtonSecondaryButtonGap = require(parent.SharedFlags).FIntLuaAppPlayButtonSecondaryButtonGap
+local fFlagLuaAppPlayButtonPrivatePT = require(parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePT
 
 local var1 = function(p1)
-	-- upvalues: useLocalization (ref), useTokens (ref), roactModule (ref), playButtonViewModule (ref), menuDirection (ref), inputSize (ref)
+	-- upvalues: useLocalization (ref), fFlagLuaAppPlayButtonPrivatePT (ref), useTokens (ref), roactModule (ref), playButtonViewModule (ref), menuDirection (ref), inputSize (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
@@ -43,7 +44,8 @@ local var1 = function(p1)
 				unlock = "Feature.ExperienceDetails.PlayButtonText.Unlock",
 				joinWithParty = "Feature.Squads.Action.JoinWithParty",
 				unavailable = "Feature.ExperienceDetails.PlayButtonText.Unavailable",
-				waitingForParty = "Feature.Squads.Action.WaitingForParty"
+				waitingForParty = "Feature.Squads.Action.WaitingForParty",
+				playtest = if fFlagLuaAppPlayButtonPrivatePT then "Feature.Build.Action.Playtest" else nil
 			}),
 			tokens = useTokens(),
 			onPlayButtonActivated = p1.onPlayButtonActivated,

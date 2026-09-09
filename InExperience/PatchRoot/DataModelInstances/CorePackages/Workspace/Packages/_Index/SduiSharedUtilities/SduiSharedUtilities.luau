@@ -44,7 +44,9 @@ return {
 		return require(script.createTemplateApiRequestConfig)(p1)
 	end else nil,
 	handleSduiApiResponse = require(script.handleSduiApiResponse),
-	prewarmAppTemplatesOnLaunch = require(script.prewarmAppTemplatesOnLaunch),
+	prewarmAppTemplatesOnLaunch = function()
+		return require(script.prewarmAppTemplatesOnLaunch)()
+	end,
 	SduiLoadTimer = sduiLoadTimerModule,
 	SduiSurfaceLoadTimeTracker = sduiSurfaceLoadTimeTrackerModule,
 	SduiPageEntryPoint = require(script.SduiPageEntryPoint),

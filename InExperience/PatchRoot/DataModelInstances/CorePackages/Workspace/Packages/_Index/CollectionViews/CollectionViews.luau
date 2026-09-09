@@ -3,6 +3,7 @@ local calculateSpanAwareGridsModule = require(script.calculateSpanAwareGrids)
 
 return {
 	["jest.config"] = script["jest.config"],
+	["jest.bench.config"] = script["jest.bench.config"],
 	CollectionCarousel = require(script.Carousel.CollectionCarousel),
 	CollectionGrid = require(script.Grid.CollectionGrid),
 	CollectionViewTypes = collectionViewTypesModule,

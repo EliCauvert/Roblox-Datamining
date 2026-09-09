@@ -11,7 +11,6 @@ local getOverflowMenuSignalStore = appBloxModule.getOverflowMenuSignalStore
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
 local getInputModeStore = responsiveModule.GetInputModeStore
 local fFlagLuaAppFixExplicitFeedbackConsoleTelemetry = sharedFlagsModule.FFlagLuaAppFixExplicitFeedbackConsoleTelemetry
-local luaAppGameTileOverflowMenuSelectionCloseFix = game:DefineFastFlag("LuaAppGameTileOverflowMenuSelectionCloseFix", false)
 local t = {
 	[Enum.KeyCode.ButtonStart] = focusNavigationEventNameEnum.OpenQuickMenu
 }
@@ -21,7 +20,7 @@ local t_1 = {
 }
 
 return function(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), getOverflowMenuSignalStore (ref), fFlagLuaAppFixExplicitFeedbackConsoleTelemetry (ref), reactFocusNavigationModule (ref), t (ref), t_1 (ref), getInputModeStore (ref), responsiveModule (ref), guiService (ref), luaAppGameTileOverflowMenuSelectionCloseFix (ref)
+	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), getOverflowMenuSignalStore (ref), fFlagLuaAppFixExplicitFeedbackConsoleTelemetry (ref), reactFocusNavigationModule (ref), t (ref), t_1 (ref), getInputModeStore (ref), responsiveModule (ref), guiService (ref)
 	local var1, var2 = reactModule.useState(nil)
 	local var3 = reactModule.useRef(false)
 	local var4, var5 = reactModule.useMemo(function()
@@ -75,36 +74,26 @@ return function(p1, p2, p3, p4)
 	end, { var1 })
 	local var8 = reactModule.useRef(p2)
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), p2 (ref), var3 (ref), luaAppGameTileOverflowMenuSelectionCloseFix (copy), getOverflowMenuSignalStore (copy), p1 (ref), guiService (copy), p3 (ref)
+		-- upvalues: var8 (ref), p2 (ref), var3 (ref), getOverflowMenuSignalStore (copy), p1 (ref), guiService (copy), p3 (ref)
 		if var8.current ~= p2 then
 			var8.current = p2
 			
 			if not p2 and not var3.current then
-				if luaAppGameTileOverflowMenuSelectionCloseFix then
-					local var9 = getOverflowMenuSignalStore()
+				local var9 = getOverflowMenuSignalStore()
+				
+				if not var9.getIsMenuOpen(p1) then
+					var9.closeMenu(p1)
 					
-					if not var9.getIsMenuOpen(p1) then
-						var9.closeMenu(p1)
-						
-						return
-					end
-					local selectedCoreObject = guiService.SelectedCoreObject
-					
-					if p3 and p3.current and (selectedCoreObject and not selectedCoreObject:IsDescendantOf(p3.current)) then
-						var9.closeMenu(p1)
-						
-						return
-					end
-				else
-					getOverflowMenuSignalStore().closeMenu(p1)
+					return
+				end
+				local selectedCoreObject = guiService.SelectedCoreObject
+				
+				if p3 and p3.current and (selectedCoreObject and not selectedCoreObject:IsDescendantOf(p3.current)) then
+					var9.closeMenu(p1)
 				end
 			end
 		end
-	end, {
-		p2,
-		if luaAppGameTileOverflowMenuSelectionCloseFix then p1 else nil,
-		if luaAppGameTileOverflowMenuSelectionCloseFix then p3 else nil
-	})
+	end, { p2, p1, p3 })
 	local var9 = reactModule.useCallback(function()
 		-- upvalues: var1 (ref), guiService (copy), var3 (ref), getOverflowMenuSignalStore (copy), p1 (ref)
 		if var1 and guiService.SelectedCoreObject and guiService.SelectedCoreObject:IsDescendantOf(var1) then

@@ -5,16 +5,16 @@ local foundationModule = require(parent.Foundation)
 local scrollView = foundationModule.ScrollView
 local visibility = foundationModule.Enums.Visibility
 local useTokens = foundationModule.Hooks.useTokens
-local fFlagSharePplPickerModule = require(shareSheet.Flags.FFlagSharePplPicker)
+local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), scrollView (ref), fFlagSharePplPickerModule (ref), visibility (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), scrollView (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), visibility (ref)
 	local var1 = useTokens()
 	
 	return reactModule.createElement(scrollView, {
 		tag = "size-full-0 auto-y",
 		LayoutOrder = p1.LayoutOrder,
-		padding = if fFlagSharePplPickerModule and p1.hasHorizontalPadding == false then nil else {
+		padding = if fFlagShareSheetPeoplePickerEnabledModule and p1.hasHorizontalPadding == false then nil else {
 			left = UDim.new(0, var1.Padding.XLarge),
 			right = UDim.new(0, var1.Padding.XLarge)
 		},

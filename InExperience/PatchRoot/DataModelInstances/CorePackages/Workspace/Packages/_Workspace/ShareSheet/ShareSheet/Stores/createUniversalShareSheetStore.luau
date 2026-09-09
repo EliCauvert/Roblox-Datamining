@@ -1,16 +1,16 @@
 ﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
 local signalsModule = require(shareSheet.Parent.Signals)
-local fFlagSharePplPickerModule = require(shareSheet.Flags.FFlagSharePplPicker)
+local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemetry)
 
 return function()
-	-- upvalues: signalsModule (ref), fFlagSharePplPickerModule (ref), shareSheetTelemetryModule (ref)
+	-- upvalues: signalsModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), shareSheetTelemetryModule (ref)
 	local var1, var2 = signalsModule.createSignal(false)
 	local var3, var4 = signalsModule.createSignal(nil)
 	
 	local function hide(p1)
-		-- upvalues: fFlagSharePplPickerModule (copy), var2 (ref), var3 (ref), var4 (ref), shareSheetTelemetryModule (copy)
-		if fFlagSharePplPickerModule then
+		-- upvalues: fFlagShareSheetPeoplePickerEnabledModule (copy), var2 (ref), var3 (ref), var4 (ref), shareSheetTelemetryModule (copy)
+		if fFlagShareSheetPeoplePickerEnabledModule then
 			var2(false)
 		end
 		local var5 = var3(false)

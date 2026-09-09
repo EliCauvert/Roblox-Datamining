@@ -50,6 +50,7 @@ local fFlagLuaAppIconTextPlayButton = require(parent.SharedFlags).FFlagLuaAppIco
 local fFlagLuaAppUpdatePlayButtonText = require(parent.SharedFlags).FFlagLuaAppUpdatePlayButtonText
 local fFlagLuaAppLogExposurePlayButtonUX = require(parent.SharedFlags).FFlagLuaAppLogExposurePlayButtonUX
 local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
+local fFlagLuaAppPlayButtonPrivatePT = require(parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePT
 local luaAppFixAppExperienceActionRowLoadingState = game:DefineFastFlag("LuaAppFixAppExperienceActionRowLoadingState", false)
 local gameTileExperimentationModule = require(gameTile.GameTileExperimentation)
 local var1 = if fFlagLuaAppUnifyPlayButtonTile then 40 else nil
@@ -120,7 +121,7 @@ function appExperienceActionRow.willUnmount(p1)
 end
 
 function appExperienceActionRow.render(p1)
-	-- upvalues: fFlagLuaAppUnifyPlayButtonTile (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), fFlagLuaAppUnifyPlayButtonTileIxp (ref), gameTileExperimentationModule (ref), withLocalization (ref), roactModule (ref), playButton (ref), buttonSize (ref), var1 (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), experienceActionRow (ref), fFlagLuaAppSupportDisablePlayableWhenLoading (ref), playButtonStates (ref), fFlagLuaAppEnablePlaySquadButton (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref)
+	-- upvalues: fFlagLuaAppUnifyPlayButtonTile (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), fFlagLuaAppUnifyPlayButtonTileIxp (ref), gameTileExperimentationModule (ref), withLocalization (ref), roactModule (ref), playButton (ref), buttonSize (ref), var1 (ref), fFlagLuaAppPlayButtonPrivatePT (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), experienceActionRow (ref), fFlagLuaAppSupportDisablePlayableWhenLoading (ref), playButtonStates (ref), fFlagLuaAppEnablePlaySquadButton (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref)
 	if fFlagLuaAppUnifyPlayButtonTile then
 		if p1.props.isUnifiedGameTileEnabled and (not fFlagLuaAppUnifyPlayButtonTileIxp and not fFlagLuaAppUnifyPlayButtonAllSurfacesIxp or (if fFlagLuaAppUnifyPlayButtonAllSurfacesIxp then p1.props.hasUnifiedPlayButtonIxp else fFlagLuaAppUnifyPlayButtonTileIxp and gameTileExperimentationModule.getIsPlayButtonMigrationEnabled())) then
 			local horizontalPadding = p1.props.horizontalPadding or 0
@@ -155,6 +156,7 @@ function appExperienceActionRow.render(p1)
 		unavailableText = "Feature.ExperienceDetails.PlayButtonText.Unavailable",
 		buyText = "Feature.ExperienceDetails.PlayButtonText.Buy",
 		playDemoText = "Feature.ExperienceDetails.PlayButtonText.PlayDemo",
+		playtestText = if fFlagLuaAppPlayButtonPrivatePT then "Feature.Build.Action.Playtest" else nil,
 		playText = if fFlagLuaAppTextOnlyPlayButton or fFlagLuaAppIconTextPlayButton then if fFlagLuaAppUpdatePlayButtonText then "Feature.ExperienceDetails.PlayButtonText.Play" else "Feature.ExperienceDetails.PlayButtonText.ActionNeeded" else nil
 	})(function(p2)
 		-- upvalues: roactModule (copy), experienceActionRow (copy), p1 (ref), fFlagLuaAppSupportDisablePlayableWhenLoading (copy), playButtonStates (copy), fFlagLuaAppEnablePlaySquadButton (copy), getFFlagUIBloxUseFoundationButton (copy), fFlagLuaAppPlayButtonOptOutFoundationButton (copy)
@@ -189,8 +191,32 @@ function appExperienceActionRow.isOverflowButtonVisible(p1)
 end
 
 function appExperienceActionRow.isButtonEnabled(p1)
-	-- upvalues: fFlagLuaAppEnablePlayableStateWhenLoading (ref), getFFlagIsSquadEnabled (ref), playButtonStates (ref), fFlagLuaAppSupportDisablePlayableWhenLoading (ref)
-	return if fFlagLuaAppEnablePlayableStateWhenLoading and p1.props.playabilityStatus == nil and (getFFlagIsSquadEnabled() and p1.props.playButtonState == playButtonStates.WaitingForParty) then false elseif p1.props.playabilityStatus ~= nil then if p1.props.playButtonState ~= playButtonStates.Playable then not fFlagLuaAppSupportDisablePlayableWhenLoading or (if getFFlagIsSquadEnabled() then true else p1:isActionNeeded() or (p1:requiresPurchase() or (p1:requiresFiatPurchase() or p1.props.playButtonState == playButtonStates.DemoMode))) else true else true
+	-- upvalues: fFlagLuaAppEnablePlayableStateWhenLoading (ref), getFFlagIsSquadEnabled (ref), playButtonStates (ref), fFlagLuaAppSupportDisablePlayableWhenLoading (ref), fFlagLuaAppPlayButtonPrivatePT (ref)
+	if fFlagLuaAppEnablePlayableStateWhenLoading and p1.props.playabilityStatus == nil and (getFFlagIsSquadEnabled() and p1.props.playButtonState == playButtonStates.WaitingForParty) then
+		return false
+	end
+	local var2 = true
+	
+	if p1.props.playabilityStatus ~= nil then
+		var2 = true
+		
+		if p1.props.playButtonState ~= playButtonStates.Playable then
+			if not fFlagLuaAppSupportDisablePlayableWhenLoading then
+				var2 = true
+				
+				if p1.props.playButtonState ~= playButtonStates.Loading then
+					if getFFlagIsSquadEnabled() then
+						var2 = true
+						
+						if p1.props.playButtonState ~= playButtonStates.PlayableWithParty then
+							var2 = p1:isActionNeeded() or (p1:requiresPurchase() or (p1:requiresFiatPurchase() or (if p1.props.playButtonState ~= playButtonStates.DemoMode then fFlagLuaAppPlayButtonPrivatePT and p1.props.playButtonState == playButtonStates.Playtest else true)))
+						end
+					end
+				end
+			end
+		end
+	end
+	return var2
 end
 
 function appExperienceActionRow.requiresFiatPurchase(p1)
@@ -209,18 +235,18 @@ function appExperienceActionRow.isActionNeeded(p1)
 end
 
 function appExperienceActionRow.getButtonText(p1, p2)
-	-- upvalues: fFlagLuaAppEnablePlaySquadButton (ref), playButtonStates (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref)
-	return if p1.props.showButtonText and not p1:isButtonEnabled() then if fFlagLuaAppEnablePlaySquadButton and p1.props.playButtonState == playButtonStates.WaitingForParty then nil else p2.unavailableText elseif p1:isActionNeeded() then p2.unlockText elseif p1:requiresPurchase() then tostring(p1.props.price or "--") elseif p1:requiresFiatPurchase() then p2.buyText elseif p1.props.playButtonState == playButtonStates.DemoMode then p2.playDemoText elseif (fFlagLuaAppTextOnlyPlayButton or fFlagLuaAppIconTextPlayButton) and p1.props.playButtonState == playButtonStates.Playable then p2.playText else nil
+	-- upvalues: fFlagLuaAppEnablePlaySquadButton (ref), playButtonStates (ref), fFlagLuaAppPlayButtonPrivatePT (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref)
+	return if p1.props.showButtonText and not p1:isButtonEnabled() then if fFlagLuaAppEnablePlaySquadButton and p1.props.playButtonState == playButtonStates.WaitingForParty then nil else p2.unavailableText elseif p1:isActionNeeded() then p2.unlockText elseif p1:requiresPurchase() then tostring(p1.props.price or "--") elseif p1:requiresFiatPurchase() then p2.buyText elseif p1.props.playButtonState == playButtonStates.DemoMode then p2.playDemoText elseif fFlagLuaAppPlayButtonPrivatePT and p1.props.playButtonState == playButtonStates.Playtest then p2.playtestText elseif (fFlagLuaAppTextOnlyPlayButton or fFlagLuaAppIconTextPlayButton) and p1.props.playButtonState == playButtonStates.Playable then p2.playText else nil
 end
 
 function appExperienceActionRow.getButtonType(p1)
-	-- upvalues: fFlagLuaAppSupportDisablePlayableWhenLoading (ref), luaAppFixAppExperienceActionRowLoadingState (ref), fFlagLuaAppPlayButtonLoadingPrimary (ref), playButtonStates (ref), buttonType (ref)
-	return if fFlagLuaAppSupportDisablePlayableWhenLoading and (luaAppFixAppExperienceActionRowLoadingState or not fFlagLuaAppPlayButtonLoadingPrimary) and p1.props.playButtonState == playButtonStates.Loading then if luaAppFixAppExperienceActionRowLoadingState then if fFlagLuaAppPlayButtonLoadingPrimary then buttonType.PrimaryContextual else buttonType.Secondary else buttonType.Secondary elseif p1.props.playButtonState == playButtonStates.DemoMode then buttonType.PrimarySystem elseif p1:isButtonEnabled() then buttonType.PrimaryContextual else buttonType.Secondary
+	-- upvalues: fFlagLuaAppSupportDisablePlayableWhenLoading (ref), luaAppFixAppExperienceActionRowLoadingState (ref), fFlagLuaAppPlayButtonLoadingPrimary (ref), playButtonStates (ref), buttonType (ref), fFlagLuaAppPlayButtonPrivatePT (ref)
+	return if fFlagLuaAppSupportDisablePlayableWhenLoading and (luaAppFixAppExperienceActionRowLoadingState or not fFlagLuaAppPlayButtonLoadingPrimary) and p1.props.playButtonState == playButtonStates.Loading then if luaAppFixAppExperienceActionRowLoadingState then if fFlagLuaAppPlayButtonLoadingPrimary then buttonType.PrimaryContextual else buttonType.Secondary else buttonType.Secondary elseif p1.props.playButtonState == playButtonStates.DemoMode or fFlagLuaAppPlayButtonPrivatePT and p1.props.playButtonState == playButtonStates.Playtest then buttonType.PrimarySystem elseif p1:isButtonEnabled() then buttonType.PrimaryContextual else buttonType.Secondary
 end
 
 function appExperienceActionRow.getButtonIcon(p1)
-	-- upvalues: fFlagLuaAppSupportDisablePlayableWhenLoading (ref), playButtonStates (ref), images (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppEnablePlaySquadButton (ref)
-	return if fFlagLuaAppSupportDisablePlayableWhenLoading and p1.props.playButtonState == playButtonStates.Loading then nil elseif p1:requiresPurchase() then images["icons/common/robux"] elseif p1:requiresFiatPurchase() or p1.props.playButtonState == playButtonStates.DemoMode or p1:isActionNeeded() then nil elseif fFlagLuaAppTextOnlyPlayButton and p1.props.playButtonState == playButtonStates.Playable then nil elseif p1:isButtonEnabled() then images["icons/common/play"] elseif fFlagLuaAppEnablePlaySquadButton and p1.props.playButtonState == playButtonStates.WaitingForParty then images["icons/common/play"] else images["icons/status/unavailable"]
+	-- upvalues: fFlagLuaAppSupportDisablePlayableWhenLoading (ref), playButtonStates (ref), images (ref), fFlagLuaAppPlayButtonPrivatePT (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppEnablePlaySquadButton (ref)
+	return if fFlagLuaAppSupportDisablePlayableWhenLoading and p1.props.playButtonState == playButtonStates.Loading then nil elseif p1:requiresPurchase() then images["icons/common/robux"] elseif p1:requiresFiatPurchase() or p1.props.playButtonState == playButtonStates.DemoMode or fFlagLuaAppPlayButtonPrivatePT and p1.props.playButtonState == playButtonStates.Playtest or p1:isActionNeeded() then nil elseif fFlagLuaAppTextOnlyPlayButton and p1.props.playButtonState == playButtonStates.Playable then nil elseif p1:isButtonEnabled() then images["icons/common/play"] elseif fFlagLuaAppEnablePlaySquadButton and p1.props.playButtonState == playButtonStates.WaitingForParty then images["icons/common/play"] else images["icons/status/unavailable"]
 end
 
 return roactServices.connect({ sessionService = appSessionService })(roactRoduxModule.connect(function(p1, p2)

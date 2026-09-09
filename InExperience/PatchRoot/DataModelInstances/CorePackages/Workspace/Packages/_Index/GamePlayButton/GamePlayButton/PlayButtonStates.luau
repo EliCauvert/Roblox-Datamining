@@ -7,5 +7,6 @@
 	WaitingForParty = "WaitingForParty",
 	ActionNeeded = "ActionNeeded",
 	FiatPaidAccess = "FiatPaidAccess",
-	DemoMode = "DemoMode"
+	DemoMode = "DemoMode",
+	Playtest = "Playtest"
 }

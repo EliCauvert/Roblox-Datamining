@@ -26,5 +26,6 @@
 	ContextualPlayabilityExperienceBlockedParentalControls = "ContextualPlayabilityExperienceBlockedParentalControls",
 	ContextualPlayabilityAgeCheckRequired = "ContextualPlayabilityAgeCheckRequired",
 	ContextualPlayabilityRequireParentApproval = "ContextualPlayabilityRequireParentApproval",
+	ContextualPlayabilityTrustedFriendRequired = "ContextualPlayabilityTrustedFriendRequired",
 	ContextualPlayabilityCoreGated = "ContextualPlayabilityCoreGated"
 }

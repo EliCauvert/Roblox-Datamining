@@ -8,10 +8,10 @@ local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local fillBehavior = foundationModule.Enums.FillBehavior
 local inputSize = foundationModule.Enums.InputSize
-local fFlagSharePplPickerModule = require(shareSheet.Flags.FFlagSharePplPicker)
+local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 
 return function(p1)
-	-- upvalues: reactModule (ref), view (ref), fFlagSharePplPickerModule (ref), textInput (ref), inputSize (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
+	-- upvalues: reactModule (ref), view (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), textInput (ref), inputSize (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local var1
 	local var2, var3 = reactModule.useState("")
 	local var4 = reactModule.useCallback(function()
@@ -22,7 +22,7 @@ return function(p1)
 	local t = { testId = "share-send-row" }
 	local t_1 = { ["col gap-medium size-full-0 auto-y"] = true }
 	
-	if fFlagSharePplPickerModule then
+	if fFlagShareSheetPeoplePickerEnabledModule then
 		var1 = p1.hasHorizontalPadding ~= false
 		var1 = nil
 	else
@@ -50,7 +50,7 @@ return function(p1)
 			testId = "share-send-button",
 			text = p1.label,
 			variant = buttonVariant.Emphasis,
-			fillBehavior = if fFlagSharePplPickerModule and p1.shouldFillButton == false then nil else fillBehavior.Fill,
+			fillBehavior = if fFlagShareSheetPeoplePickerEnabledModule and p1.shouldFillButton == false then nil else fillBehavior.Fill,
 			isLoading = p1.isLoading,
 			size = inputSize.Medium,
 			onActivated = var4,

@@ -41,6 +41,7 @@ return {
 		FailedToLogPlayerTileImpressions = "FailedToLogPlayerTileImpressions",
 		FailedToLogPromptImpressions = "FailedToLogPromptImpressions",
 		FailedToMapRobloxComponentToTemplate = "FailedToMapRobloxComponentToTemplate",
+		FailedToApplyFallbackResponse = "FailedToApplyFallbackResponse",
 		FailedToOpenLink = "FailedToOpenLink",
 		FailedToPaginateRequest = "FailedToPaginateRequest",
 		FailedToParse = "FailedToParse",

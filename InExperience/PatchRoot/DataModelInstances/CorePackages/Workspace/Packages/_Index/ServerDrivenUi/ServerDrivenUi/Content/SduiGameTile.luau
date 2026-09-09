@@ -42,12 +42,13 @@ local fFlagLuaAppResetHoverOnSduiPlayButtonActivation = require(parent.SharedFla
 local fFlagLuaAppSduiGameTileHoverShadow = require(parent.SharedFlags).FFlagLuaAppSduiGameTileHoverShadow
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local fFlagLuaAppSduiGameTileFeedback = require(parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
+local fFlagLuaAppSduiGameTileMetadataFontStyle = require(parent.SharedFlags).FFlagLuaAppSduiGameTileMetadataFontStyle
 local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local sduiGameTileDisableDefaultPlayButtonOnHover = game:DefineFastFlag("SduiGameTileDisableDefaultPlayButtonOnHover", false)
 local var1 = if fFlagLuaAppSduiGameTileFeedback then signalsModule.createSignal(false) else nil
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), usePreferences (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppSduiGameTileHoverShadow (ref), reactModule (ref), useUidRefString (ref), fFlagLuaAppSduiGameTileFeedback (ref), var1 (write), getGameTileHiddenStore (ref), signalsModule (ref), signalsReactModule (ref), sduiErrors (ref), getInputModeStore (ref), sduiParseHelpers (ref), videoEndReason (ref), sduiParsers (ref), sduiActionType (ref), getOverflowMenuSignalStore (ref), default (ref), responsiveModule (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), sduiGameTileDisableDefaultPlayButtonOnHover (ref), sduiBuilder (ref), fFlagSduiFixSearchTelemetry (ref), findAnalyticsFieldInAncestors (ref), sduiPlayButton (ref), localizeStrings (ref), discoveryAnalyticsModule (ref), sduiHoldToPlayModule (ref), sduiGameTileFooterModule (ref), sduiTileOverflowMenu (ref), sduiDefaultTileImageModule (ref), sduiGameVideoThumbnailModule (ref), getSduiComponentWrapper (ref), sduiTileModule (ref), cryoModule (ref), zoomAnimatedFrame (ref), tileHoverShadowModule (ref)
+	-- upvalues: useTokens (ref), usePreferences (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppSduiGameTileHoverShadow (ref), reactModule (ref), useUidRefString (ref), fFlagLuaAppSduiGameTileFeedback (ref), var1 (write), getGameTileHiddenStore (ref), signalsModule (ref), signalsReactModule (ref), sduiErrors (ref), getInputModeStore (ref), sduiParseHelpers (ref), videoEndReason (ref), sduiParsers (ref), sduiActionType (ref), getOverflowMenuSignalStore (ref), default (ref), responsiveModule (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), sduiGameTileDisableDefaultPlayButtonOnHover (ref), sduiBuilder (ref), fFlagSduiFixSearchTelemetry (ref), findAnalyticsFieldInAncestors (ref), sduiPlayButton (ref), localizeStrings (ref), discoveryAnalyticsModule (ref), sduiHoldToPlayModule (ref), sduiGameTileFooterModule (ref), fFlagLuaAppSduiGameTileMetadataFontStyle (ref), sduiTileOverflowMenu (ref), sduiDefaultTileImageModule (ref), sduiGameVideoThumbnailModule (ref), getSduiComponentWrapper (ref), sduiTileModule (ref), cryoModule (ref), zoomAnimatedFrame (ref), tileHoverShadowModule (ref)
 	local var2 = useTokens()
 	local var3 = usePreferences()
 	local enableLegacyHoverState = not fFlagSduiTileDisableLegacyHover and p1.enableLegacyHoverState
@@ -344,7 +345,7 @@ return reactModule.memo(function(p1)
 		end
 	end
 	local var28 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), reactModule (copy), sduiGameTileFooterModule (copy), var15 (ref), var13 (ref), universeId (ref), placeId (ref)
+		-- upvalues: p1 (ref), reactModule (copy), sduiGameTileFooterModule (copy), var15 (ref), var13 (ref), universeId (ref), placeId (ref), fFlagLuaAppSduiGameTileMetadataFontStyle (copy)
 		return if p1.disableDefaultFooterLogic then p1.footerComponent else reactModule.createElement(sduiGameTileFooterModule, {
 			isHovered = var15,
 			isSelected = var13,
@@ -355,12 +356,14 @@ return reactModule.memo(function(p1)
 			placeId = placeId,
 			analyticsContext = p1.analyticsContext,
 			ratingText = p1.ratingText,
-			playerCount = p1.playerCount
+			playerCount = p1.playerCount,
+			metadataFontStyle = if fFlagLuaAppSduiGameTileMetadataFontStyle then p1.metadataFontStyle else nil
 		})
 	end, {
 		var15, var13, universeId, placeId, p1.ageRatingText,
 		p1.disableDefaultFooterLogic, p1.footerComponent, p1.sduiContext,
-		p1.analyticsContext, p1.ratingText, p1.playerCount
+		p1.analyticsContext, p1.ratingText, p1.playerCount,
+		if fFlagLuaAppSduiGameTileMetadataFontStyle then p1.metadataFontStyle else nil
 	})
 	local var29 = if fFlagLuaAppSduiGameTileFeedback and var8 and (p1.overflowMenuComponent and not var9) then reactModule.createElement(sduiTileOverflowMenu, {
 		debugName = "SduiGameTile.OverflowMenu",

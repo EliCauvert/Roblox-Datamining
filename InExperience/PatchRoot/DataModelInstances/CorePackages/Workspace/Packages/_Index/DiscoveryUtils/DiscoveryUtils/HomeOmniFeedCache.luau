@@ -5,6 +5,7 @@ local luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache = game:DefineFastS
 
 return {
 	HOME_OMNI_FEED_CACHE_VERSION = 2,
+	HOME_SDUI_FEED_CACHE_VERSION = 3,
 	cacheOmniRecommendationsData = function(p1)
 		-- upvalues: luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (ref), discoveryClientAppStorageModule (ref), discoveryEventErrorLoggerModule (ref)
 		assert(p1.pageType, "pageType is required")
@@ -74,5 +75,40 @@ return {
 				discoveryEventErrorLoggerModule.reportError("HomeOmniFeedCacheError", status)
 			end
 		end)
+	end,
+	getTopicIdToNumCacheItems = function()
+		-- upvalues: luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (ref)
+		local t = {}
+		
+		for i, v in string.split(luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache, ",") do
+			local parts = string.split(v, ":")
+			local var5 = tonumber(parts[1])
+			local var6 = tonumber(parts[2])
+			
+			if var5 and var6 then
+				t[tostring(var5)] = { count = 0, cap = var6 }
+			end
+		end
+		return t
+	end,
+	cacheSduiHomePageData = function(p2)
+		-- upvalues: discoveryClientAppStorageModule (ref), discoveryEventErrorLoggerModule (ref)
+		task.spawn(function()
+			-- upvalues: discoveryClientAppStorageModule (copy), p2 (ref), discoveryEventErrorLoggerModule (copy)
+			local ok, status = pcall(function()
+				-- upvalues: discoveryClientAppStorageModule (copy), p2 (copy)
+				discoveryClientAppStorageModule.setJsonStorageData(discoveryClientAppStorageModule.CacheKey.HomeOmniFeedCache, p2, 3)
+			end)
+			
+			if not ok then
+				discoveryEventErrorLoggerModule.reportError("HomeSduiFeedCacheError", status)
+			end
+		end)
+	end,
+	getCachedSduiHomePageData = function()
+		-- upvalues: discoveryClientAppStorageModule (ref)
+		local jsonStorageData = discoveryClientAppStorageModule.getJsonStorageData(discoveryClientAppStorageModule.CacheKey.HomeOmniFeedCache, 3)
+		
+		return if type(jsonStorageData) == "string" then jsonStorageData else nil
 	end
 }

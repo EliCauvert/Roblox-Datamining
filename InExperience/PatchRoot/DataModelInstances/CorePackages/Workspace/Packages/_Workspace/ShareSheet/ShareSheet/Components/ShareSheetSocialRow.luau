@@ -7,11 +7,11 @@ local skeleton = foundationModule.Skeleton
 local view = foundationModule.View
 local iconName = foundationModule.Enums.IconName
 local radius = foundationModule.Enums.Radius
-local fFlagSharePplPickerModule = require(shareSheet.Flags.FFlagSharePplPicker)
+local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 local shareSheetConstantsModule = require(shareSheet.ShareSheetConstants)
 local shareSheetRowModule = require(script.Parent.ShareSheetRow)
 local shareSheetItemContainerModule = require(script.Parent.ShareSheetItemContainer)
-local var1 = if fFlagSharePplPickerModule then require(shareSheet.Utils.ConversationUtils) else nil
+local var1 = if fFlagShareSheetPeoplePickerEnabledModule then require(shareSheet.Utils.ConversationUtils) else nil
 local playersService = game:GetService("Players")
 local _ = require(parent.AppChat.GetConversationListStore)
 
@@ -61,7 +61,7 @@ local function createSkeletonItems()
 end
 
 local function ShareSheetConversationItem(p3)
-	-- upvalues: reactModule (ref), fFlagSharePplPickerModule (ref), var1 (ref), shareSheetItemContainerModule (ref)
+	-- upvalues: reactModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), var1 (ref), shareSheetItemContainerModule (ref)
 	local var2, var3, displayName
 	local conversation = p3.conversation
 	local id = conversation.id
@@ -73,7 +73,7 @@ local function ShareSheetConversationItem(p3)
 	local _ = nil
 	local _ = nil
 	
-	if fFlagSharePplPickerModule then
+	if fFlagShareSheetPeoplePickerEnabledModule then
 		local participantUserIds, participantUserIds_1 = var1.getParticipantUserIds(conversation, p3.localUserId)
 		var2 = participantUserIds
 		var3 = participantUserIds_1
@@ -105,9 +105,9 @@ local function ShareSheetConversationItem(p3)
 end
 
 return function(p4)
-	-- upvalues: playersService (ref), fFlagSharePplPickerModule (ref), useLocalization (ref), createSkeletonItems (ref), reactModule (ref), ShareSheetConversationItem (ref), shareSheetItemContainerModule (ref), iconName (ref), shareSheetRowModule (ref)
+	-- upvalues: playersService (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), useLocalization (ref), createSkeletonItems (ref), reactModule (ref), ShareSheetConversationItem (ref), shareSheetItemContainerModule (ref), iconName (ref), shareSheetRowModule (ref)
 	local var6 = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0)
-	local var7 = if fFlagSharePplPickerModule then useLocalization({ more = "CommonUI.Features.Label.More" }) else nil
+	local var7 = if fFlagShareSheetPeoplePickerEnabledModule then useLocalization({ more = "CommonUI.Features.Label.More" }) else nil
 	local t = {}
 	
 	if p4.isLoading or p4.conversationEligibility.isLoading then
@@ -125,7 +125,7 @@ return function(p4)
 				LayoutOrder = i
 			})
 		end
-		if fFlagSharePplPickerModule then
+		if fFlagShareSheetPeoplePickerEnabledModule then
 			t.More = reactModule.createElement(shareSheetItemContainerModule, {
 				icon = iconName.ThreeDotsHorizontal,
 				label = var7.more,
