@@ -2379,7 +2379,6 @@ Feature.Build.Label.GamePlays,عدد مرات تشغيل اللعبة
 Feature.Build.Label.GetMoreBuildUsage,احصل على المزيد من استخدام ميزة Build
 Feature.Build.Label.Hi,مرحبًا
 Feature.Build.Label.IconThumbnails,الأيقونة والصور المصغرة
-Feature.Build.Label.Images2D,الصور ثنائية الأبعاد
 Feature.Build.Label.InProgress,قيد التقدم
 Feature.Build.Label.InputNeeded,الإدخال مطلوب
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}

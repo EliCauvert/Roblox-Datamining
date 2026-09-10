@@ -2400,7 +2400,6 @@ Feature.Build.Label.GamePlays,게임 플레이 횟수
 Feature.Build.Label.GetMoreBuildUsage,Build 사용량 더 구매하기
 Feature.Build.Label.Hi,안녕하세요
 Feature.Build.Label.IconThumbnails,아이콘 및 섬네일
-Feature.Build.Label.Images2D,2D 이미지
 Feature.Build.Label.InProgress,진행 중
 Feature.Build.Label.InputNeeded,입력 필요
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}

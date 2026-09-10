@@ -2399,7 +2399,6 @@ Feature.Build.Label.GamePlays,Oyun oynama sayısı
 Feature.Build.Label.GetMoreBuildUsage,Daha fazla İnşa Et kullanım hakkı al
 Feature.Build.Label.Hi,Merhaba
 Feature.Build.Label.IconThumbnails,Simge ve küçük resimler
-Feature.Build.Label.Images2D,2 Boyutlu Görseller
 Feature.Build.Label.InProgress,Devam ediyor
 Feature.Build.Label.InputNeeded,Giriş gerekli
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
