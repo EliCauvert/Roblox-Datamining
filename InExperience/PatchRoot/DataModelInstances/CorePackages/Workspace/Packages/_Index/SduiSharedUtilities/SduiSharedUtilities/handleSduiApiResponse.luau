@@ -25,13 +25,16 @@ local fFlagPromptsHandlerEnabled = require(parent.SharedFlags).FFlagPromptsHandl
 local fFlagSduiImprovedErrorDimensions = require(parent.SharedFlags).FFlagSduiImprovedErrorDimensions
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagSduiEventDetailsSupport = require(parent.SharedFlags).FFlagSduiEventDetailsSupport
+local fFlagSduiDismissPromptPageScope = require(parent.SharedFlags).FFlagSduiDismissPromptPageScope
 local fFlagLuaAppSduiStreamingChunkedResponses = require(parent.SharedFlags).FFlagLuaAppSduiStreamingChunkedResponses
+local fFlagLuaAppEnableSduiHomePage = require(parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local fFlagSduiClientTemplateCache = require(parent.SharedFlags).FFlagSduiClientTemplateCache
 local fFlagSduiPaginatePostBody = require(parent.SharedFlags).FFlagSduiPaginatePostBody
 local fFlagSduiGameIconSupport = require(parent.SharedFlags).FFlagSduiGameIconSupport
 local fFlagSduiApiStoreOnSuccessAndRefresh = require(parent.SharedFlags).FFlagSduiApiStoreOnSuccessAndRefresh
 local fFlagSduiUseHttpClientModule = require(sduiSharedUtilities.Flags.FFlagSduiUseHttpClient)
 local fFlagSduiClientDrivenTemplates = require(parent.SharedFlags).FFlagSduiClientDrivenTemplates
+local fFlagLuaAppSduiHomePageSupport = require(parent.SharedFlags).FFlagLuaAppSduiHomePageSupport
 local cryoModule = require(parent.Cryo)
 
 local function mergeTables(p1, p2)
@@ -55,7 +58,7 @@ local function mergeTables(p1, p2)
 end
 
 return function(p3)
-	-- upvalues: fFlagSduiClientDrivenTemplates (ref), fFlagSduiPaginatePostBody (ref), fFlagSduiAllowNoConfigsBuilt (ref), fFlagSduiUseHttpClientModule (ref), sduiRequestStatus (ref), sduiLogger (ref), sduiErrors (ref), fFlagSduiImprovedErrorDimensions (ref), fFlagSduiNilHydrationGuard (ref), getSduiDataBinder (ref), fFlagSduiClientTemplateCache (ref), getSduiTemplateStoreModule (ref), recordTemplateUsage (ref), sduiUsageRecorder (ref), sduiProtobufResponseHelpersModule (ref), fFlagSduiAlwaysCacheWithIdentifier (ref), fFlagLuaAppSduiStreamingChunkedResponses (ref), sduiInputDataMergeModule (ref), createBuilderConfig (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref), getSduiClientBindingBuilder (ref), fFlagEnableSduiV2HomepagePrompts (ref), fFlagPromptsHandlerEnabled (ref), fFlagEnableHomepagePromptsForModalsAndBanners (ref), cryoModule (ref), fFlagSduiGameIconSupport (ref), processClientHintsModule (ref), fFlagSduiApiStoreOnSuccessAndRefresh (ref)
+	-- upvalues: fFlagSduiClientDrivenTemplates (ref), fFlagSduiPaginatePostBody (ref), fFlagSduiAllowNoConfigsBuilt (ref), fFlagLuaAppEnableSduiHomePage (ref), fFlagSduiUseHttpClientModule (ref), sduiRequestStatus (ref), sduiLogger (ref), sduiErrors (ref), fFlagSduiImprovedErrorDimensions (ref), fFlagSduiNilHydrationGuard (ref), getSduiDataBinder (ref), fFlagSduiClientTemplateCache (ref), getSduiTemplateStoreModule (ref), recordTemplateUsage (ref), sduiUsageRecorder (ref), sduiProtobufResponseHelpersModule (ref), fFlagSduiAlwaysCacheWithIdentifier (ref), fFlagLuaAppSduiStreamingChunkedResponses (ref), sduiInputDataMergeModule (ref), createBuilderConfig (ref), fFlagSduiDismissPromptPageScope (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref), getSduiClientBindingBuilder (ref), fFlagLuaAppSduiHomePageSupport (ref), fFlagEnableSduiV2HomepagePrompts (ref), fFlagPromptsHandlerEnabled (ref), fFlagEnableHomepagePromptsForModalsAndBanners (ref), cryoModule (ref), fFlagSduiGameIconSupport (ref), processClientHintsModule (ref), fFlagSduiApiStoreOnSuccessAndRefresh (ref)
 	local response = p3.response
 	local decodeResponse = p3.decodeResponse
 	local parsePageEntriesFromResponse = p3.parsePageEntriesFromResponse
@@ -72,6 +75,7 @@ return function(p3)
 	local var2 = if fFlagSduiPaginatePostBody then p3.buildNextPagePostBody else nil
 	local var3 = if fFlagSduiAllowNoConfigsBuilt then p3.allowNoConfigsBuilt else nil
 	local mergeStrategy = p3.mergeStrategy
+	local enableInputDataMerge = fFlagLuaAppEnableSduiHomePage and p3.enableInputDataMerge
 	assert(configCacheKey, "configCacheKey must exist")
 	loadTimer.logNetRequestStats(if fFlagSduiUseHttpClientModule then response.stats or {} else response.Stats)
 	loadTimer.logResponseDecodeBegin()
@@ -182,13 +186,13 @@ return function(p3)
 		local var11 = var10.get(false)
 		local enableStreamingMerge = fFlagLuaAppSduiStreamingChunkedResponses and p3.enableStreamingMerge
 		
-		if not paginateResponse and not enableStreamingMerge or not var11 then
+		if not paginateResponse and not (if fFlagLuaAppEnableSduiHomePage then enableInputDataMerge else enableStreamingMerge) or not var11 then
 			var10.set(componentInputData)
 		elseif componentInputData then
 			var10.set(sduiInputDataMergeModule.merge(var10.get(false), componentInputData, mergeStrategy))
 		end
 		if not paginateResponse then
-			var8 = enableStreamingMerge and var11
+			var8 = (if fFlagLuaAppEnableSduiHomePage then enableInputDataMerge else enableStreamingMerge) and var11
 		end
 		if var8 then
 			var8 = v.robloxComponentType
@@ -198,8 +202,8 @@ return function(p3)
 				
 				if var12 then
 					local ok_1, status_1 = pcall(function()
-						-- upvalues: createBuilderConfig (copy), surfaceKey (ref), configCacheKey (ref), fFlagSduiClientTemplateCache (copy), enableTemplateCache (ref), resolveTemplateForRobloxComponent (ref), t (write), var5 (ref), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy), fFlagSduiChartsSortDetailGenreFilter (copy), getSduiClientBindingBuilder (copy), var12 (ref), var10 (ref)
-						return getSduiClientBindingBuilder().buildConfigForComponent(var12, var10.get, createBuilderConfig({
+						-- upvalues: createBuilderConfig (copy), surfaceKey (ref), configCacheKey (ref), fFlagSduiClientTemplateCache (copy), enableTemplateCache (ref), resolveTemplateForRobloxComponent (ref), t (write), var5 (ref), fFlagSduiDismissPromptPageScope (copy), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy), fFlagSduiChartsSortDetailGenreFilter (copy), getSduiClientBindingBuilder (copy), var12 (ref), fFlagLuaAppSduiHomePageSupport (copy), v (ref), var10 (ref)
+						return getSduiClientBindingBuilder().buildConfigForComponent(var12, if fFlagLuaAppSduiHomePageSupport and v.componentInputDataGetter then v.componentInputDataGetter else var10.get, createBuilderConfig({
 							appPage = surfaceKey,
 							debugName = configCacheKey,
 							getTemplateForRobloxComponent = function(p5)
@@ -207,7 +211,7 @@ return function(p3)
 								return if fFlagSduiClientTemplateCache and enableTemplateCache then resolveTemplateForRobloxComponent(p5) else t[p5]
 							end,
 							localizedLiterals = var5,
-							configKey = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport or fFlagSduiChartsSortDetailGenreFilter then configCacheKey else nil
+							configKey = if fFlagSduiDismissPromptPageScope or fFlagSduiExperienceDetailsSupport or (fFlagSduiEventDetailsSupport or fFlagSduiChartsSortDetailGenreFilter) then configCacheKey else nil
 						}))
 					end)
 					

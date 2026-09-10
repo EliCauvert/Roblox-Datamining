@@ -94,6 +94,7 @@ return {
 					name = v_1.name,
 					items = v_1.items,
 					paymentSessionId = v_1.paymentSessionId,
+					bonusJwt = v_1.bonusJwt,
 					robuxPackages = list_1
 				}
 			end

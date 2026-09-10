@@ -6,7 +6,6 @@ local debugCrossExpVoiceIXPLayer = game:DefineFastString("DebugCrossExpVoiceIXPL
 local partyVoiceVolumeEngineFeature = game:GetEngineFeature("PartyVoiceVolume")
 local t = {}
 t.__index = t
-local partyVoiceDisallowIXPLayerExposureOnInit = game:DefineFastFlag("PartyVoiceDisallowIXPLayerExposureOnInit", false)
 local t_1 = {
 	CrossExpVoiceDebugVariant_0 = { partyVoiceExp = false },
 	CrossExpVoiceDebugVariant_1 = { partyVoiceExp = true }
@@ -21,7 +20,7 @@ function t.new()
 end
 
 function t:initialize()
-	-- upvalues: experimentCacheManager (ref), crossExpVoiceIXPLayer (ref), debugCrossExpVoiceIXPLayer (ref), t_1 (ref), partyVoiceDisallowIXPLayerExposureOnInit (ref)
+	-- upvalues: experimentCacheManager (ref), crossExpVoiceIXPLayer (ref), debugCrossExpVoiceIXPLayer (ref), t_1 (ref)
 	local var1 = experimentCacheManager.default:getLayerVariables(crossExpVoiceIXPLayer)
 	
 	if var1 ~= nil then
@@ -31,9 +30,6 @@ function t:initialize()
 	if debugCrossExpVoiceIXPLayer ~= "None" then
 		self.initialized = true
 		self.variant = t_1[debugCrossExpVoiceIXPLayer] or self.variant
-	end
-	if self.initialized and not partyVoiceDisallowIXPLayerExposureOnInit then
-		self:logLayerExposure()
 	end
 end
 

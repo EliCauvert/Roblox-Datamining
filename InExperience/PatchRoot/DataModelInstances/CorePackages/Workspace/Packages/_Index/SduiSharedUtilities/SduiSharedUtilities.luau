@@ -1,4 +1,5 @@
 ﻿local sduiResponseType = require(script.SduiIntegrationTypes).SduiResponseType
+local sduiRequestConcurrencyPolicy = require(script.SduiIntegrationTypes).SduiRequestConcurrencyPolicy
 local sduiLoadTimerModule = require(script.SduiLoadTimer)
 local sduiSurfaceLoadTimeTrackerModule = require(script.SduiSurfaceLoadTimeTracker)
 local _ = require(script.SduiIntegrationTypes)
@@ -65,6 +66,7 @@ return {
 	UiStatus = require(script.SduiIntegrationTypes).UiStatus,
 	SduiProtobufResponseHelpers = require(script.SduiProtobufResponseHelpers),
 	SduiPageAnalytics = require(script.SduiPageAnalytics),
+	SduiRequestConcurrencyPolicy = sduiRequestConcurrencyPolicy,
 	SduiResponseType = sduiResponseType,
 	SduiApiStorePostConfigContentType = require(script.SduiApiStorePostConfig).SduiApiStorePostConfigContentType,
 	SduiOverlayEntryPoint = require(script.SduiOverlayEntryPoint),

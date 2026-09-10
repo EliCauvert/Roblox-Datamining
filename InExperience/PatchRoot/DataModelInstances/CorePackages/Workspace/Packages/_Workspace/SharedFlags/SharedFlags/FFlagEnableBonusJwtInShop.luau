@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnableBonusJwtInShop", false) and require(script.Parent.FFlagEnableRobuxInExperienceShop)

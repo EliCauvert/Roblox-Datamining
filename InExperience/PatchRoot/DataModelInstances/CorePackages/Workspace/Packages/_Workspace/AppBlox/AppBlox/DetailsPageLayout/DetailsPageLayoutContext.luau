@@ -11,6 +11,7 @@
 	gradientTopBleedOffset = 80,
 	initialScrollY = 0,
 	hasValidContainerSize = false,
+	disableFocusNavEngineScroll = false,
 	containerHeight = nil,
 	headerOpacity = nil,
 	stickyHeaderActive = false,

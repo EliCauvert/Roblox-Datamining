@@ -22,7 +22,6 @@ local catalogItemCardItemInfoEnumModule = require(script.Parent.Enums.CatalogIte
 local catalogItemCardStatusIconTypeEnumModule = require(script.Parent.Enums.CatalogItemCardStatusIconTypeEnum)
 local catalogItemCardSelectedOverlayModule = require(script.Parent.CatalogItemCardSelectedOverlay)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local moveLimitedBadgeToTopLeft = game:DefineFastFlag("MoveLimitedBadgeToTopLeft", false)
 local fFlagAXRootSlotBasedEditorFlag = require(parent.AvatarExperienceFlags).FFlagAXRootSlotBasedEditorFlag
 local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShopping
 local fFlagAXInventoryDurablesSupport = avatarExperienceFlagsModule.FFlagAXInventoryDurablesSupport
@@ -83,7 +82,7 @@ local function buildSelectedOverlayBadge(p1, p2, p3)
 end
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: fFlagAXModeratedItemIconUpdates (ref), useTokens (ref), t_2 (ref), t_1 (ref), useSelector (ref), selectIsPortrait (ref), t (ref), fFlagAXSelectedBorderWrapsBackground (ref), reactModule (ref), foundationModule (ref), icon (ref), iconSize (ref), itemCard (ref), fFlagAXMISEnableMultiShopping (ref), itemCardHeader (ref), catalogItemCardSelectedOverlayModule (ref), fFlagAXFixBadgeStatusConfigOptions (ref), buildSelectedOverlayBadge (ref), fFlagAXShowFaeUpsell (ref), catalogItemCardStatusIconTypeEnumModule (ref), var4 (ref), fFlagAXInventoryDurablesSupport (ref), var3 (ref), itemCardHeaderCornersOverlay (ref), itemCardStatus (ref), itemCardBadge (ref), buildBadgeStatusContent (ref), itemCardIcon (ref), moveLimitedBadgeToTopLeft (ref), itemCardFooter (ref), fFlagAXRootSlotBasedEditorFlag (ref)
+	-- upvalues: fFlagAXModeratedItemIconUpdates (ref), useTokens (ref), t_2 (ref), t_1 (ref), useSelector (ref), selectIsPortrait (ref), t (ref), fFlagAXSelectedBorderWrapsBackground (ref), reactModule (ref), foundationModule (ref), icon (ref), iconSize (ref), itemCard (ref), fFlagAXMISEnableMultiShopping (ref), itemCardHeader (ref), catalogItemCardSelectedOverlayModule (ref), fFlagAXFixBadgeStatusConfigOptions (ref), buildSelectedOverlayBadge (ref), fFlagAXShowFaeUpsell (ref), catalogItemCardStatusIconTypeEnumModule (ref), var4 (ref), fFlagAXInventoryDurablesSupport (ref), var3 (ref), itemCardHeaderCornersOverlay (ref), itemCardStatus (ref), itemCardBadge (ref), buildBadgeStatusContent (ref), itemCardIcon (ref), itemCardFooter (ref), fFlagAXRootSlotBasedEditorFlag (ref)
 	local var5
 	local var6 = if fFlagAXModeratedItemIconUpdates then useTokens() else nil
 	local title = p1.title or (p1.creator or p1.priceLineContent)
@@ -175,9 +174,8 @@ return reactModule.forwardRef(function(p1, p2)
 				{ type = "icon", icon = var3 },
 				{ type = "text", text = p1.expirationTime }
 			}
-		}) elseif moveLimitedBadgeToTopLeft and var8 then reactModule.createElement(itemCardBadge, { content = var8 }) else nil
+		}) elseif var8 then reactModule.createElement(itemCardBadge, { content = var8 }) else nil
 		t_5.topLeftSlot = createElement_3
-		t_5.bottomLeftSlot = if moveLimitedBadgeToTopLeft or not var8 then nil else reactModule.createElement(itemCardBadge, { content = var8 })
 		t_5.bottomRightSlot = if var7 then reactModule.createElement(itemCardBadge, { content = { { type = "icon", icon = var7 } } }) else nil
 		createElement_2 = createElement_2(var12, t_5)
 	end

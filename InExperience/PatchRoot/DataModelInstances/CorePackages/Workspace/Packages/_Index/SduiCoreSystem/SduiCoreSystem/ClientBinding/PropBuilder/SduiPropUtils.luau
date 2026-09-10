@@ -25,6 +25,7 @@ local fFlagSduiImprovedErrorDimensions = require(parent.SharedFlags).FFlagSduiIm
 local fFlagSduiFormatArgFormatters = require(parent.SharedFlags).FFlagSduiFormatArgFormatters
 local fFlagSduiInlineNestedComponentSchema = require(parent.SharedFlags).FFlagSduiInlineNestedComponentSchema
 local fFlagSduiIsEmptyConditions = require(parent.SharedFlags).FFlagSduiIsEmptyConditions
+local fFlagSduiDismissPromptPageScope = require(parent.SharedFlags).FFlagSduiDismissPromptPageScope
 local fFlagSduiHydrationFetchIfMissing = require(parent.SharedFlags).FFlagSduiHydrationFetchIfMissing
 local fFlagSduiClientPageScope = require(parent.SharedFlags).FFlagSduiClientPageScope
 local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAppSduiColorPropMigration
@@ -331,8 +332,57 @@ local function isSame(p11, p12)
 	return p11 == p12
 end
 
+local var10 = nil
+
+if fFlagSduiDismissPromptPageScope then
+	local function contains(p11, p12)
+		-- upvalues: isSame (ref)
+		if typeof(p11) ~= "table" or typeof(p12) ~= "string" then
+			return false
+		elseif p11[p12] ~= nil then
+			return true
+		end
+		for i, v in p11 do
+			if typeof(i) == "number" and isSame(v, p12) then
+				return true
+			end
+		end
+		return false
+	end
+	
+	var10 = function(p13, p14)
+		-- upvalues: dataStatus (ref), contains (ref)
+		local var11, var12 = p14(p13.field)
+		
+		if var12 and var12 ~= dataStatus.Ready then
+			return nil, var12
+		end
+		local kind = p13.kind
+		
+		if kind == nil or kind.type == nil then
+			error("nil target kind in ContainsCondition")
+		end
+		local var13 = nil
+		
+		if kind.type == "string_value" then
+			var13 = kind.value
+		elseif kind.type == "binding_path_value" then
+			local _ = nil
+			local var14, var15 = p14(kind.value)
+			var13 = var14
+			local var16 = var15
+			
+			if var16 and var16 ~= dataStatus.Ready then
+				return nil, var16
+			end
+			return if var13 == nil then nil else contains(var11, var13)
+		else
+			error(`Unknown ContainsCondition target kind {kind.type}`)
+		end
+	end
+end
 local function evaluateCondition(p11, p12, p13, p14, p15)
-	-- upvalues: splitDottedPathModule (ref), resolveBindingPathValue (ref), fFlagSduiClientPageScope (ref), dataStatus (ref), validateNumbers (ref), isSame (ref), fFlagSduiIsEmptyConditions (ref), evaluateCondition (ref)
+	-- upvalues: splitDottedPathModule (ref), resolveBindingPathValue (ref), fFlagSduiClientPageScope (ref), dataStatus (ref), validateNumbers (ref), isSame (ref), fFlagSduiIsEmptyConditions (ref), fFlagSduiDismissPromptPageScope (ref), var10 (write), evaluateCondition (ref)
 	if p12 == nil then
 		return true
 	end
@@ -345,182 +395,184 @@ local function evaluateCondition(p11, p12, p13, p14, p15)
 	if value == nil then
 		error("nil conditionValue in condition")
 	end
-	local var10, var11
-	local function _(p16)
+	local var11, var12
+	local function getFieldObject(p16)
 		-- upvalues: splitDottedPathModule (copy), resolveBindingPathValue (copy), p11 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
-		local var12 = splitDottedPathModule(p16)
-		local ok, status, var13 = pcall(function()
-			-- upvalues: resolveBindingPathValue (copy), p11 (copy), var12 (ref), p13 (copy), p15 (copy), fFlagSduiClientPageScope (copy), p14 (copy)
-			return resolveBindingPathValue(p11, var12, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
+		local var13 = splitDottedPathModule(p16)
+		local ok, status, var14 = pcall(function()
+			-- upvalues: resolveBindingPathValue (copy), p11 (copy), var13 (ref), p13 (copy), p15 (copy), fFlagSduiClientPageScope (copy), p14 (copy)
+			return resolveBindingPathValue(p11, var13, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
 		end)
 		
 		if ok then
-			return status, var13
+			return status, var14
 		end
-		return nil, var13
+		return nil, var14
 	end
 	
 	if type == "comparison" then
-		local var12, var13
-		local var14 = splitDottedPathModule(value.field)
-		local ok, status, var15 = pcall(function()
-			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var14 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
-			return resolveBindingPathValue(p11, var14, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
+		local var13, var14
+		local var15 = splitDottedPathModule(value.field)
+		local ok, status, var16 = pcall(function()
+			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var15 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
+			return resolveBindingPathValue(p11, var15, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
 		end)
 		
 		if ok then
-			var12 = status
-			var13 = var15
+			var13 = status
+			var14 = var16
 		else
-			var12 = nil
-			var13 = var15
+			var13 = nil
+			var14 = var16
 		end
-		if var12 == nil or var13 and var13 ~= dataStatus.Ready then
-			return nil, var13
+		if var13 == nil or var14 and var14 ~= dataStatus.Ready then
+			return nil, var14
 		end
 		local value_1 = value.kind.value
 		local op = value.op
 		
 		if op == "OP_LT" then
-			local var16, var17 = validateNumbers(op, var12, value_1)
-			var12 = var16
-			value_1 = var17
+			local var17, var18 = validateNumbers(op, var13, value_1)
+			var13 = var17
+			value_1 = var18
 			
-			return var12 < value_1
+			return var13 < value_1
 		elseif op == "OP_LTE" then
-			local var18, var19 = validateNumbers(op, var12, value_1)
-			var12 = var18
-			value_1 = var19
+			local var19, var20 = validateNumbers(op, var13, value_1)
+			var13 = var19
+			value_1 = var20
 			
-			return var12 <= value_1
+			return var13 <= value_1
 		elseif op == "OP_GT" then
-			local var20, var21 = validateNumbers(op, var12, value_1)
-			var12 = var20
-			value_1 = var21
+			local var21, var22 = validateNumbers(op, var13, value_1)
+			var13 = var21
+			value_1 = var22
 			
-			return value_1 < var12
+			return value_1 < var13
 		elseif op == "OP_GTE" then
-			local var22, var23 = validateNumbers(op, var12, value_1)
-			var12 = var22
-			value_1 = var23
+			local var23, var24 = validateNumbers(op, var13, value_1)
+			var13 = var23
+			value_1 = var24
 			
-			return value_1 <= var12
+			return value_1 <= var13
 		elseif op == "OP_E" then
-			return isSame(var12, value_1)
+			return isSame(var13, value_1)
 		elseif op == "OP_NE" then
-			return not isSame(var12, value_1)
+			return not isSame(var13, value_1)
 		end
 		error(`Unknown operator for comparison {op}`)
 	elseif type == "is_null" then
-		local var24, var25
-		local var26 = splitDottedPathModule(value.field)
-		local ok, status, var27 = pcall(function()
-			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var26 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
-			return resolveBindingPathValue(p11, var26, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
+		local var25, var26
+		local var27 = splitDottedPathModule(value.field)
+		local ok, status, var28 = pcall(function()
+			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var27 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
+			return resolveBindingPathValue(p11, var27, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
 		end)
 		
 		if ok then
-			var24 = status
-			var25 = var27
+			var25 = status
+			var26 = var28
 		else
-			var24 = nil
-			var25 = var27
+			var25 = nil
+			var26 = var28
 		end
-		if var25 and var25 ~= dataStatus.Ready then
-			return nil, var25
+		if var26 and var26 ~= dataStatus.Ready then
+			return nil, var26
 		end
-		return var24 == nil
+		return var25 == nil
 	elseif type == "is_not_null" then
-		local var28, var29
-		local var30 = splitDottedPathModule(value.field)
-		local ok, status, var31 = pcall(function()
-			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var30 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
-			return resolveBindingPathValue(p11, var30, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
+		local var29, var30
+		local var31 = splitDottedPathModule(value.field)
+		local ok, status, var32 = pcall(function()
+			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var31 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
+			return resolveBindingPathValue(p11, var31, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
 		end)
 		
 		if ok then
-			var28 = status
-			var29 = var31
+			var29 = status
+			var30 = var32
 		else
-			var28 = nil
-			var29 = var31
+			var29 = nil
+			var30 = var32
 		end
-		if var29 and var29 ~= dataStatus.Ready then
-			return nil, var29
+		if var30 and var30 ~= dataStatus.Ready then
+			return nil, var30
 		end
-		return var28 ~= nil
+		return var29 ~= nil
 	elseif fFlagSduiIsEmptyConditions and type == "is_empty" then
-		local var32, var33
-		local var34 = splitDottedPathModule(value.field)
-		local ok, status, var35 = pcall(function()
-			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var34 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
-			return resolveBindingPathValue(p11, var34, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
+		local var33, var34
+		local var35 = splitDottedPathModule(value.field)
+		local ok, status, var36 = pcall(function()
+			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var35 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
+			return resolveBindingPathValue(p11, var35, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
 		end)
 		
 		if ok then
-			var32 = status
-			var33 = var35
+			var33 = status
+			var34 = var36
 		else
-			var32 = nil
-			var33 = var35
+			var33 = nil
+			var34 = var36
 		end
-		if var33 and var33 ~= dataStatus.Ready then
-			return nil, var33
+		if var34 and var34 ~= dataStatus.Ready then
+			return nil, var34
 		end
-		return var32 == nil or (if type(var32) == "string" then var32 == "" else type(var32) == "table" and next(var32) == nil)
+		return var33 == nil or (if type(var33) == "string" then var33 == "" else type(var33) == "table" and next(var33) == nil)
 	elseif fFlagSduiIsEmptyConditions and type == "is_not_empty" then
-		local var36, var37
-		local var38 = splitDottedPathModule(value.field)
-		local ok, status, var39 = pcall(function()
-			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var38 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
-			return resolveBindingPathValue(p11, var38, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
+		local var37, var38
+		local var39 = splitDottedPathModule(value.field)
+		local ok, status, var40 = pcall(function()
+			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var39 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
+			return resolveBindingPathValue(p11, var39, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
 		end)
 		
 		if ok then
-			var36 = status
-			var37 = var39
+			var37 = status
+			var38 = var40
 		else
-			var36 = nil
-			var37 = var39
+			var37 = nil
+			var38 = var40
 		end
-		local var40
-		if var37 and var37 ~= dataStatus.Ready then
-			return nil, var37
-		elseif var36 == nil then
-			var40 = true
-		elseif type(var36) == "string" then
-			local _ = var36 == ""
-		elseif type(var36) == "table" then
-			var40 = next(var36) == nil
-			var40 = nil
+		local var41
+		if var38 and var38 ~= dataStatus.Ready then
+			return nil, var38
+		elseif var37 == nil then
+			var41 = true
+		elseif type(var37) == "string" then
+			local _ = var37 == ""
+		elseif type(var37) == "table" then
+			var41 = next(var37) == nil
+			var41 = nil
 		else
-			var40 = false
+			var41 = false
 		end
-		return not var40
+		return not var41
+	elseif fFlagSduiDismissPromptPageScope and type == "contains" then
+		return var10(value, getFieldObject)
 	elseif type == "and_condition" then
 		for i, v in value.conditions do
-			var10, var87 = evaluateCondition(p11, v, p13, p14, p15)
+			var11, var96 = evaluateCondition(p11, v, p13, p14, p15)
 			
-			if not var11 or var11 == dataStatus.Ready then
-				if not var10 then
-					return var10
+			if not var12 or var12 == dataStatus.Ready then
+				if not var11 then
+					return var11
 				end
 			end
-			return var10, var11
+			return var11, var12
 		end
 		return true
 	elseif type ~= "or_condition" then
 		return nil
 	end
 	for i, v in value.conditions do
-		var10, var87 = evaluateCondition(p11, v, p13, p14, p15)
+		var11, var96 = evaluateCondition(p11, v, p13, p14, p15)
 		
-		if not var11 or var11 == dataStatus.Ready then
-			if var10 or var10 == nil then
-				return var10, var11
+		if not var12 or var12 == dataStatus.Ready then
+			if var11 or var11 == nil then
+				return var11, var12
 			end
 		end
-		return var10, var11
+		return var11, var12
 	end
 	return false
 end
@@ -528,34 +580,34 @@ end
 local function selectConditionalOption(p16, p17, p18, p19, p20)
 	-- upvalues: evaluateCondition (ref), dataStatus (ref)
 	for i, v in p17 do
-		local var41, var42 = evaluateCondition(p16, v.condition, p18, p19, p20)
+		local var42, var43 = evaluateCondition(p16, v.condition, p18, p19, p20)
 		
-		if not var41 then
-			if var42 and var42 ~= dataStatus.Ready then
-				return var41, var42
+		if not var42 then
+			if var43 and var43 ~= dataStatus.Ready then
+				return var42, var43
 			end
 		end
-		return v, var42
+		return v, var43
 	end
 	return nil
 end
 
 local function resolveTablePropValue(p21, p22, p23, p24, _, _, _, _, _)
 	-- upvalues: cryoModule (ref), frozen_1 (ref), dataStatus (ref)
-	local var43 = cryoModule.Dictionary.join(p24 or frozen_1, p22 or frozen_1)
-	local var44 = nil
+	local var44 = cryoModule.Dictionary.join(p24 or frozen_1, p22 or frozen_1)
+	local var45 = nil
 	
 	if p23 then
 		for i, v in p23 do
-			var43[i] = v(p21).data
+			var44[i] = v(p21).data
 			local status = v(p21).status
 			
 			if status and status ~= dataStatus.Ready then
-				var44 = status
+				var45 = status
 			end
 		end
 	end
-	return var43, var44
+	return var44, var45
 end
 
 return {
@@ -576,30 +628,30 @@ return {
 		
 		return signalsModule.createComputed(function(p33)
 			-- upvalues: selectConditionalOption (copy), options (ref), p26 (ref), p27 (ref), p29 (ref), p30 (ref), p28 (ref), p31 (ref), propResultCategory (copy), dataStatus (copy), p32 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), frozen (copy)
-			local ok, status, var45 = pcall(function()
+			local ok, status, var46 = pcall(function()
 				-- upvalues: selectConditionalOption (copy), p33 (ref), options (copy), p26 (copy), p27 (copy), p29 (copy), p30 (copy), p28 (copy), p31 (copy), propResultCategory (copy), dataStatus (copy)
-				local var46, var47 = selectConditionalOption(p33, options, p26, p27, p29)
+				local var47, var48 = selectConditionalOption(p33, options, p26, p27, p29)
 				
-				if var46 == nil then
-					return nil, var47
+				if var47 == nil then
+					return nil, var48
 				end
-				local var48, var49 = p30(var46 and (var46.kind and var46.kind.type), var46 and (var46.kind and var46.kind.value), p26, p29, p27, p28, p31)
+				local var49, var50 = p30(var47 and (var47.kind and var47.kind.type), var47 and (var47.kind and var47.kind.value), p26, p29, p27, p28, p31)
 				
-				if var49 == propResultCategory.PropSignal then
-					local var50 = var48(p33)
-					var48 = var50.data
+				if var50 == propResultCategory.PropSignal then
+					local var51 = var49(p33)
+					var49 = var51.data
 					
-					if var50.status and var50.status ~= dataStatus.Ready then
-						var47 = var50.status
+					if var51.status and var51.status ~= dataStatus.Ready then
+						var48 = var51.status
 					end
 				end
-				return var48, var47
+				return var49, var48
 			end)
 			
 			if ok then
 				return {
 					data = status,
-					status = var45,
+					status = var46,
 					isNestedComponentConfig = p32
 				}
 			end
@@ -622,15 +674,15 @@ return {
 			currentComponentType = p26.currentComponentType
 			currentParserName = p26.currentParserName
 		end
-		local var45, var46, var47 = p29(value, p25, p28, p26, p27)
+		local var46, var47, var48 = p29(value, p25, p28, p26, p27)
 		
 		return signalsModule.createComputed(function(p31)
-			-- upvalues: resolveTablePropValue (copy), var45 (ref), var46 (ref), var47 (ref), p25 (ref), p26 (ref), p27 (ref), p28 (ref), p29 (ref), fFlagSduiFocusNavActionsStructured (copy), p30 (ref), sduiParseHelpersModule (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), frozen (copy)
-			local ok, status, var48 = pcall(function()
-				-- upvalues: resolveTablePropValue (copy), p31 (ref), var45 (copy), var46 (copy), var47 (copy), p25 (copy), p26 (copy), p27 (copy), p28 (copy), p29 (copy)
-				local var49, var50 = resolveTablePropValue(p31, var45, var46, var47, p25, p26, p27, p28, p29)
+			-- upvalues: resolveTablePropValue (copy), var46 (ref), var47 (ref), var48 (ref), p25 (ref), p26 (ref), p27 (ref), p28 (ref), p29 (ref), fFlagSduiFocusNavActionsStructured (copy), p30 (ref), sduiParseHelpersModule (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), frozen (copy)
+			local ok, status, var49 = pcall(function()
+				-- upvalues: resolveTablePropValue (copy), p31 (ref), var46 (copy), var47 (copy), var48 (copy), p25 (copy), p26 (copy), p27 (copy), p28 (copy), p29 (copy)
+				local var50, var51 = resolveTablePropValue(p31, var46, var47, var48, p25, p26, p27, p28, p29)
 				
-				return var49, var50
+				return var50, var51
 			end)
 			
 			if not ok then
@@ -661,7 +713,7 @@ return {
 				end
 				status = status_1
 			end
-			return { data = status, status = var48 }
+			return { data = status, status = var49 }
 		end, tutilsModule.shallowEqual)
 	end,
 	selectConditionalOption = selectConditionalOption,
@@ -675,29 +727,29 @@ return {
 	end,
 	resolveFieldMap = function(p25, p26, p27, p28, p29, p30, p31)
 		-- upvalues: resolveTablePropValue (ref)
-		local var45, var46 = p31(p25, p26, p27, p28, p29)
+		local var46, var47 = p31(p25, p26, p27, p28, p29)
 		
-		return resolveTablePropValue(p30, var45, var46, nil, p26, p28, p29, p27, nil)
+		return resolveTablePropValue(p30, var46, var47, nil, p26, p28, p29, p27, nil)
 	end,
 	mapArrayWithFieldMap = function(p25, p26, p27, p28, p29, p30, p31)
 		-- upvalues: buildDataBindingSourcesForTemplateModule (ref), resolveTablePropValue (ref)
 		local t = {}
 		
 		for i, v in p25 do
-			local var45 = buildDataBindingSourcesForTemplateModule(v, p26)
-			
-			local var46 = function()
-				-- upvalues: var45 (ref)
-				return var45
-			end
+			local var46 = buildDataBindingSourcesForTemplateModule(v, p26)
 			
 			local var47 = function()
+				-- upvalues: var46 (ref)
+				return var46
+			end
+			
+			local var48 = function()
 				-- upvalues: v (ref)
 				return v
 			end
 			
-			local var48, var49 = p31(p27, var46, var47, p28, p29)
-			table.insert(t, resolveTablePropValue(p30, var48, var49, nil, var46, p28, p29, var47, nil))
+			local var49, var50 = p31(p27, var47, var48, p28, p29)
+			table.insert(t, resolveTablePropValue(p30, var49, var50, nil, var47, p28, p29, var48, nil))
 		end
 		return t
 	end,

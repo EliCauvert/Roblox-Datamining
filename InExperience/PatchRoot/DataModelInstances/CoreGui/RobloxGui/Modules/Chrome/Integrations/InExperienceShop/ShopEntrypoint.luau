@@ -83,7 +83,7 @@ else
 end
 t.initialAvailability = unavailable
 t.id = constantsModule.IN_EXPERIENCE_SHOP_ID
-t.sideSheetPlacement = sideSheetPlacement.Page
+t.sideSheetPlacement = sideSheetPlacement.AboveFold
 t.windowSize = var2
 t.startingWindowPosition = shopWindowLayoutModule.getStartingWindowPosition()
 

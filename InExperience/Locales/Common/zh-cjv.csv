@@ -65,8 +65,6 @@ Amp.Upsell.Message.EmailSent,我们已将一封电子邮件发送至 {parentEmai
 Amp.Upsell.Message.EmailSentPluralParent,我们已向你关联的家长发送电子邮件
 Amp.Upsell.Title.AskYourParent,询问你的家长
 Amp.Upsell.Title.RequestSent,请求已发送
-Application.Logout.Action.Logout,退出登录
-Application.Logout.Message.Confirmation,是否确定退出登录？
 Authentication.AccountSwitch.Action.SwitchAccount,切换帐户
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,快速登录
@@ -941,6 +939,8 @@ CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,你要离开吗？
 CoreScripts.InGameMenu.Traversal.HistoryDescription,加入之前访问过的游戏
 CoreScripts.InGameMenu.Traversal.LeaveBody,你即将离开此游戏并返回“{PREVIOUS_EXPERIENCE}”。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
+CoreScripts.InGameMenu.UnlockMore.Description,聊天、好友和更多游戏
+CoreScripts.InGameMenu.UnlockMore.Title,解锁更多 Roblox 功能
 CoreScripts.InGameMenu.Vibration,震动
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,来切换菜单导航
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,某些体验需要按
@@ -1343,6 +1343,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus 专属
 Feature.Avatar.BackgroundGeneration.Label.Name,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,描述背景需求…
 Feature.Avatar.BackgroundGeneration.Status.Generating,正在为你生成背景…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,正在为你准备背景…
@@ -1461,6 +1470,7 @@ Feature.Avatar.Label.ClassicTShirts,经典 T 恤
 Feature.Avatar.Label.ClearByCategory,清除{category}
 Feature.Avatar.Label.Climb,攀爬
 Feature.Avatar.Label.ClimbAnimations,攀爬动画
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,名称只能包含字母、数字和空格。
 Feature.Avatar.Label.CountSelected,已选择 {itemCount} 个物品
 Feature.Avatar.Label.Creations,
@@ -1573,6 +1583,7 @@ Feature.Avatar.Label.RecentlyWorn,最近穿戴
 Feature.Avatar.Label.RemoveFromSetBody,这些虚拟形象将从此集合中移除。它们不会被删除。
 Feature.Avatar.Label.Replace,替换
 Feature.Avatar.Label.ResetToNewCharacter,你即将切换至新角色，是否想要重置全部穿搭道具，或保留？
+Feature.Avatar.Label.ResetTryOn,
 Feature.Avatar.Label.Right,右
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,
@@ -1628,6 +1639,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,妆容层叠
 Feature.Avatar.Label.Title.ManageAvatars,管理虚拟形象
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,我的道具栏
 Feature.Avatar.Label.Title.ProfilePhoto,个人资料照片
 Feature.Avatar.Label.Title.ReplaceAvatar,替换虚拟形象
@@ -1768,6 +1780,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,
+Feature.Avatar.Title.MyAvatar,
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,自定义功能有了新的外观！
 Feature.Avatar.Title.NewToMarketplaceItemWidget,商城新品
@@ -2045,6 +2058,7 @@ Feature.Build.Label.GamePlays,游戏游玩次数
 Feature.Build.Label.GetMoreBuildUsage,获得更多 Build 使用额度
 Feature.Build.Label.Hi,你好
 Feature.Build.Label.IconThumbnails,标志和缩略图
+Feature.Build.Label.Images2D,2D 图像
 Feature.Build.Label.InProgress,进行中
 Feature.Build.Label.InputNeeded,需要输入内容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2076,6 +2090,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,准备就绪
 Feature.Build.Label.RegionalPricing,区域定价
 Feature.Build.Label.ResetsDaily,每日重置
+Feature.Build.Label.ResetsMonthly,每月重置
+Feature.Build.Label.ResetsWeekly,每周重置
 Feature.Build.Label.RestoredVersion,已恢复 {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2083,7 +2099,6 @@ Feature.Build.Label.SearchAssets,搜索素材
 Feature.Build.Label.SearchGames,搜索游戏
 Feature.Build.Label.SearchTasks,搜索任务
 Feature.Build.Label.SelectOption,选择一个选项
-Feature.Build.Label.ShareAddedFriends,分享给已添加的好友
 Feature.Build.Label.Shared,已共享
 Feature.Build.Label.ShopButton,商店按钮
 Feature.Build.Label.ShopUi,商店用户界面
@@ -2220,7 +2235,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,暂无版本历史记录。
 Feature.Build.Message.OneTaskCompleted,已完成 1 项任务
 Feature.Build.Message.OutOfBuildUsage,你的 Build 使用额度已用完。请查看你的选项，以便使用 Robux 继续创建。
+Feature.Build.Message.PlaytestInviteSendFailedBody,你无法向以下用户发送聊天邀请链接：
+Feature.Build.Message.PlaytestInviteSendFailedHint,请使用分享按钮获取链接。
 Feature.Build.Message.PlaytestersAdded,已添加 {INVITED_COUNT} 位测试玩家，共 {MAX_INVITES} 位
+Feature.Build.Message.PrivatePlaytestInvite,{username}邀请你参加“{experienceName}”的私人游戏测试
 Feature.Build.Message.PublicPublishFailed,你的游戏已发布，但无法公开。请重试。
 Feature.Build.Message.PublishExpandAudience,发布并扩大受众范围
 Feature.Build.Message.PublishNotReverted,你的发布未还原。请重试。
@@ -2241,8 +2259,10 @@ Feature.Build.Message.ShareLinkFailed,无法创建分享链接。请重试。
 Feature.Build.Message.SignedOut,你已注销。请登录并重试。
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} 个任务已完成
 Feature.Build.Message.ThinkingSeconds,正在思考（{SECONDS} 秒）
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,
 Feature.Build.Message.TryAgain,请重试。
 Feature.Build.Message.TurnToPortrait,将你的设备切换为竖向模式，以继续在游戏上操作。
+Feature.Build.Message.UpdateSettingsToPlaytest,
 Feature.Build.Message.VersionHistoryLoad,无法加载版本历史记录。
 Feature.Build.Message.WhatToCreate,你今天想创作什么？
 Feature.Build.Message.WorkedMinutesSeconds,已完成（{MINUTES} 分 {REM_SECONDS} 秒）
@@ -2284,6 +2304,7 @@ Feature.Build.Title.GetUsers,获取用户
 Feature.Build.Title.ManagedPricingAcknowledgement,是否开启托管定价？
 Feature.Build.Title.NoMonetizationProducts,开始在你的游戏中赚取收入
 Feature.Build.Title.NoRobuxForUsage,没有剩余的 Robux 可用于购买 Build 使用额度
+Feature.Build.Title.PlaytestInviteSendFailed,无法发送邀请
 Feature.Build.Title.Playtesters,测试玩家
 Feature.Build.Title.PlaytestersOnlyPlay,只有测试玩家可以游玩
 Feature.Build.Title.PromoteGame,推广你的游戏
@@ -3229,6 +3250,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,移除信赖的好友
 Feature.Friends.TrustedFriend.AddBack.Header,“信赖的好友”请求
 Feature.Friends.TrustedFriend.Info.Modal.Header,新的信赖好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,添加信赖的好友
+Feature.Friends.TrustedFriend.Label.Title,信赖的好友
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}现已成为你的信赖好友
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信赖的好友已移除
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,“信赖的好友”请求已发送
@@ -3511,7 +3533,7 @@ Feature.Moments.Label.FeedFailedToLoad,无法加载推送
 Feature.Moments.Label.FeedMyMoments,我的精彩瞬间
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,如何使用截图
-Feature.Moments.Label.LinkCopied,链接已复制。
+Feature.Moments.Label.LinkCopied,链接已复制
 Feature.Moments.Label.LinkCopyFailed,无法复制链接。
 Feature.Moments.Label.ModeratedRodeoBody,该精彩瞬间因违反社区准则已被移除。为了让精彩瞬间正常展示，请务必了解并遵守相关规则。
 Feature.Moments.Label.MomentDeletedBody,
@@ -4015,6 +4037,7 @@ Feature.SettingsHub.Label.NoConnectionsScreen,先添加几个联系人，这样�
 Feature.SettingsHub.Label.NoFriendsPageMessage,添加好友，一起探索。
 Feature.SettingsHub.Label.NoFriendsScreen,认识更多朋友，邀请他们和你一起体验！
 Feature.SettingsHub.Label.QuitButton,
+Feature.SettingsHub.Label.QuitConfirmation,确定要退出吗？
 Feature.SettingsHub.Label.ReasonForAbuse,滥用原因？
 Feature.SettingsHub.Label.Report.BlockDisplayName,屏蔽 {DISPLAY_NAME}（@{RBX_NAME}）
 Feature.SettingsHub.Label.Report.OtherActionsHeader,其他可以采取的步骤
@@ -4778,6 +4801,7 @@ InGame.HelpMenu.Label.PlayerScripts,玩家脚本：
 InGame.HelpMenu.Label.ServerChannel,服务器频道：
 InGame.HelpMenu.Label.ServerVersion,服务器版本：
 InGame.HelpMenu.LeftArrow,左箭头
+InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,右箭头
 InGame.HelpMenu.UpArrow,上箭头
 InGame.InspectMenu.Action.Cancel,
@@ -4867,6 +4891,13 @@ InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,你正在团队“{RBX_NAME}
 InGame.UnknownNamespace.Network,（网络）
 InGame.UnknownNamespace.Received,已收到
 InGame.UnknownNamespace.Sent,
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,无法将“{experience_name}”添加至桌面
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,无法将“{experience_name}”添加至主屏幕
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,“{experience_name}”的快捷方式已存在
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,已成功将“{experience_name}”添加到桌面
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,已成功将“{experience_name}”添加至主屏幕
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,查看快捷键
 Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,其他 {notificationCount} 个
 Notifications.NotificationStream.Label.AllCaughtUp,没有新的通知了！

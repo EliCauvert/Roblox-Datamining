@@ -10,7 +10,7 @@ return serviceModule:register({
 	id = "traversal_history",
 	label = "CoreScripts.TopBar.Traversal.History",
 	initialAvailability = serviceModule.AvailabilitySignal.Available,
-	sideSheetPlacement = sideSheetPlacement.Page,
+	sideSheetPlacement = sideSheetPlacement.BelowFold,
 	activated = function(_)
 		-- upvalues: inGameMenuIntegrationUtilsModule (ref), traversalHistoryPage (ref)
 		inGameMenuIntegrationUtilsModule.toggleIGMPage("TraversalHistoryPage", traversalHistoryPage:get())

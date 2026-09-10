@@ -7,9 +7,7 @@ local t = {
 	audio = "Feature.Build.Label.Sounds",
 	created = "Feature.Build.Label.Created",
 	empty = "Feature.Build.Message.NoAssetsFound",
-	icon = "Feature.Build.Label.IconThumbnails",
-	image = "Feature.Build.Label.IconThumbnails",
-	limited = "Feature.Build.Label.Limited",
+	image = "Feature.Build.Label.Images2D",
 	loadError = "Feature.Build.Message.AssetsLoadFailed",
 	model = "Feature.Build.Label.Models3D",
 	purchased = "Feature.Build.Label.Purchased",
@@ -17,22 +15,20 @@ local t = {
 	searchPlaceholder = "Feature.Build.Label.SearchAssets",
 	shared = "Feature.Build.Label.Shared",
 	showMore = "CommonUI.Controls.Action.ShowMore",
-	thumbnail = "Feature.Build.Label.IconThumbnails",
 	title = "Feature.Build.Title.AssetLibrary",
 	updated = "Feature.Build.Label.Updated"
 }
 
 return function()
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref)
-	local cloned = table.clone(useLocalization(t))
-	cloned.model = "Models"
-	local var1 = reactModule.useRef(cloned)
+	local var1 = useLocalization(t)
+	local var2 = reactModule.useRef(var1)
 	
-	for i, v in cloned do
-		if var1.current[i] ~= v then
-			var1.current = cloned
+	for i, v in var1 do
+		if var2.current[i] ~= v then
+			var2.current = var1
 			break
 		end
 	end
-	return var1.current
+	return var2.current
 end

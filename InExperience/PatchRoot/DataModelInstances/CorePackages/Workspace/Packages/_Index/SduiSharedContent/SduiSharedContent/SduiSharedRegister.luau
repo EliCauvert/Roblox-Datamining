@@ -28,6 +28,7 @@ local fFlagLuaAppUnlockUpsellSupport = require(parent.SharedFlags).FFlagLuaAppUn
 local fFlagSduiDevStoreSeeAllSupport = require(parent.SharedFlags).FFlagSduiDevStoreSeeAllSupport
 local fFlagSduiPlayWithReward = require(parent.SharedFlags).FFlagSduiPlayWithReward
 local fFlagSduiDismissPromptAction = require(parent.SharedFlags).FFlagSduiDismissPromptAction
+local fFlagLuaAppSduiMovePromptsActions = require(parent.SharedFlags).FFlagLuaAppSduiMovePromptsActions
 local fFlagSduiShimmerTextComponentEnabled = require(parent.SharedFlags).FFlagSduiShimmerTextComponentEnabled
 local fFlagSduiTooltipComponentEnabled = require(parent.SharedFlags).FFlagSduiTooltipComponentEnabled
 local fFlagSduiRevealTextComponentEnabled = require(parent.SharedFlags).FFlagSduiRevealTextComponentEnabled
@@ -40,7 +41,7 @@ local fFlagSduiNavigate = require(parent.SharedFlags).FFlagSduiNavigate
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 
 local function registerSharedActions()
-	-- upvalues: sduiActionType (ref), sduiSharedContent (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiDismissPromptAction (ref), fFlagSduiShowToastAction (ref), fFlagSduiActionSequence (ref), fFlagSduiNavigate (ref), getSduiActionHandlerRegistry (ref)
+	-- upvalues: sduiActionType (ref), sduiSharedContent (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiDismissPromptAction (ref), fFlagLuaAppSduiMovePromptsActions (ref), fFlagSduiShowToastAction (ref), fFlagSduiActionSequence (ref), fFlagSduiNavigate (ref), getSduiActionHandlerRegistry (ref)
 	getSduiActionHandlerRegistry().registerActionHandlerConfigs({
 		[sduiActionType.CustomAnalyticsEvent] = {
 			skipUnifiedLogging = true,
@@ -77,7 +78,7 @@ local function registerSharedActions()
 				return require(sduiSharedContent.Actions.SduiOpenSocialProofUserListSheetAction)
 			end
 		} else nil,
-		[sduiActionType.DismissPrompt] = if fFlagSduiDismissPromptAction then {
+		[sduiActionType.DismissPrompt] = if fFlagSduiDismissPromptAction and not fFlagLuaAppSduiMovePromptsActions then {
 			skipUnifiedLogging = false,
 			lazyHandler = function()
 				-- upvalues: sduiSharedContent (copy)

@@ -68,7 +68,7 @@ end)
 chromeUtilsModule.setCoreGuiAvailability(serviceModule:register({
 	id = "leaderboard",
 	label = "CoreScripts.TopBar.Leaderboard",
-	sideSheetPlacement = sideSheetPlacement.Vertical,
+	sideSheetPlacement = sideSheetPlacement.BelowFold,
 	activated = function(_)
 		-- upvalues: isInExperienceUIVREnabled (ref), VRService (ref), robloxGui (ref), playerListManagerModule (ref), isSpatial (ref), inExperienceUIVRIXP (ref), chromeIntegrationUtilsModule (ref)
 		if not isInExperienceUIVREnabled and VRService.VREnabled then
@@ -104,7 +104,7 @@ end)
 local var11 = serviceModule:register({
 	id = "emotes",
 	label = "CoreScripts.TopBar.Emotes",
-	sideSheetPlacement = sideSheetPlacement.Vertical,
+	sideSheetPlacement = sideSheetPlacement.BelowFold,
 	activated = function(_)
 		-- upvalues: emotesMenuMasterModule (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), inExperienceUIVRIXP (ref), chromeIntegrationUtilsModule (ref)
 		if emotesMenuMasterModule:isOpen() then
@@ -182,7 +182,7 @@ end
 chromeUtilsModule.setCoreGuiAvailability(serviceModule:register({
 	id = "backpack",
 	label = "CoreScripts.TopBar.Inventory",
-	sideSheetPlacement = sideSheetPlacement.Page,
+	sideSheetPlacement = sideSheetPlacement.BelowFold,
 	activated = function(_)
 		-- upvalues: fFlagEnableNewBackpack (ref), var2 (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), inExperienceUIVRIXP (ref), chromeIntegrationUtilsModule (ref), var3 (ref)
 		if fFlagEnableNewBackpack then
@@ -226,7 +226,7 @@ chromeUtilsModule.setCoreGuiAvailability(serviceModule:register({
 local var15 = serviceModule:register({
 	id = "respawn",
 	label = "CoreScripts.InGameMenu.QuickActions.Respawn",
-	sideSheetPlacement = sideSheetPlacement.Vertical,
+	sideSheetPlacement = sideSheetPlacement.BelowFold,
 	activated = function(_)
 		-- upvalues: respawnUtilsModule (ref)
 		respawnUtilsModule.respawnPage()

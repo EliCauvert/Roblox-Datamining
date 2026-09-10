@@ -5,6 +5,7 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local constantsModule = require(inExperienceShop.Constants)
 local _ = require(inExperienceShop.Types)
 local fFlagEnableRobuxInExperienceShop = sharedFlagsModule.FFlagEnableRobuxInExperienceShop
+local fFlagEnableBonusJwtInShop = sharedFlagsModule.FFlagEnableBonusJwtInShop
 local _ = require(script.Parent.multiGetProductInfo)
 local shopItemMappingModule = require(script.Parent.shopItemMapping)
 local hydrateRobuxBonusItemsModule = require(script.Parent.hydrateRobuxBonusItems)
@@ -22,7 +23,7 @@ local t = {
 }
 
 return function(p1, p2)
-	-- upvalues: t (ref), constantsModule (ref), fFlagEnableRobuxInExperienceShop (ref), toRobuxPackageItem (ref), promiseModule (ref), fFlagEnableExperienceShopGlobalIconModule (ref), appendBonusItemRequests (ref), makeRequestKey (ref), toShopItem (ref), logCounterModule (ref), productInfoFailedItemsCounterModule (ref), mergeBonusItemDetailsIntoSections (ref)
+	-- upvalues: t (ref), constantsModule (ref), fFlagEnableRobuxInExperienceShop (ref), fFlagEnableBonusJwtInShop (ref), toRobuxPackageItem (ref), promiseModule (ref), fFlagEnableExperienceShopGlobalIconModule (ref), appendBonusItemRequests (ref), makeRequestKey (ref), toShopItem (ref), logCounterModule (ref), productInfoFailedItemsCounterModule (ref), mergeBonusItemDetailsIntoSections (ref)
 	local list = { t }
 	local t_1 = {}
 	local t_2 = {}
@@ -39,6 +40,9 @@ return function(p1, p2)
 			
 			if fFlagEnableRobuxInExperienceShop and metadata ~= nil and metadata.paymentSessionId ~= nil then
 				t_5.paymentSessionId = metadata.paymentSessionId
+			end
+			if fFlagEnableBonusJwtInShop and metadata ~= nil and metadata.bonusJwt ~= nil then
+				t_5.bonusJwt = metadata.bonusJwt
 			end
 			t_1[var2] = t_5
 			local var3 = 0

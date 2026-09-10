@@ -190,6 +190,7 @@ return reactModule.memo(function(p1)
 			Tile = reactModule.createElement(robuxPackageTileContainerModule, {
 				pkg = var11,
 				paymentSessionId = p1.paymentSessionId,
+				bonusJwt = p1.bonusJwt,
 				onBonusItemActivated = onItemActivated,
 				mediaHeightScale = if p4 == nil or p4.shopWidth <= 0 then nil else computeRobuxPackageMediaHeightScale(p4.shopWidth, p4.gap),
 				categoryId = t.categoryId,
@@ -199,7 +200,7 @@ return reactModule.memo(function(p1)
 		})
 	end, {
 		var9, onItemActivated, onItemActivated, var4, var5, p1.paymentSessionId,
-		p1.sectionId
+		p1.bonusJwt, p1.sectionId
 	})
 	
 	return reactModule.createElement(view, {

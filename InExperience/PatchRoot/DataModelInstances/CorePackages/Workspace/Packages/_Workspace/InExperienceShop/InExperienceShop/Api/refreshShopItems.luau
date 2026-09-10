@@ -111,6 +111,7 @@ return {
 					name = v_1.name,
 					items = list_1,
 					paymentSessionId = v_1.paymentSessionId,
+					bonusJwt = v_1.bonusJwt,
 					robuxPackages = v_1.robuxPackages
 				}
 			end
@@ -183,6 +184,7 @@ return {
 				name = v_2.name,
 				items = list_1,
 				paymentSessionId = v_2.paymentSessionId,
+				bonusJwt = v_2.bonusJwt,
 				robuxPackages = v_2.robuxPackages
 			}
 			continue

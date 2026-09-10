@@ -74,8 +74,6 @@ Amp.Upsell.Message.EmailSent,Nous avons envoyé un email à {parentEmail}
 Amp.Upsell.Message.EmailSentPluralParent,Nous avons envoyé à l'adresse email associée à tes parents
 Amp.Upsell.Title.AskYourParent,Demande à tes parents
 Amp.Upsell.Title.RequestSent,Demande envoyée
-Application.Logout.Action.Logout,Déconnexion
-Application.Logout.Message.Confirmation,Veux-tu vraiment quitter ?
 Authentication.AccountSwitch.Action.SwitchAccount,Changer de compte
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Connexion rapide
@@ -949,6 +947,8 @@ CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Tu t'en vas ?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Rejoindre des jeux visités récemment
 CoreScripts.InGameMenu.Traversal.LeaveBody,Tu es sur le point de quitter ce jeu pour retourner sur {PREVIOUS_EXPERIENCE}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
+CoreScripts.InGameMenu.UnlockMore.Description,"Chat, demandes d'amitié et plein de jeux"
+CoreScripts.InGameMenu.UnlockMore.Title,Débloque plus de fonctionnalités sur Roblox
 CoreScripts.InGameMenu.Vibration,Vibration
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,pour basculer la navigation du menu
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,Certaines expériences nécessitent d'appuyer sur
@@ -2053,6 +2053,7 @@ Feature.Build.Label.GamePlays,Parties jouées
 Feature.Build.Label.GetMoreBuildUsage,Obtenir plus de capacités d'utilisation de Construire
 Feature.Build.Label.Hi,Bonjour
 Feature.Build.Label.IconThumbnails,Icône et miniatures
+Feature.Build.Label.Images2D,Images 2D
 Feature.Build.Label.InProgress,En cours
 Feature.Build.Label.InputNeeded,Saisie requise
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2084,6 +2085,8 @@ Feature.Build.Label.Purchased,Acheté
 Feature.Build.Label.Ready,Prêt
 Feature.Build.Label.RegionalPricing,Prix régionaux
 Feature.Build.Label.ResetsDaily,Réinitialisation quotidienne
+Feature.Build.Label.ResetsMonthly,Réinitialisation mensuelle
+Feature.Build.Label.ResetsWeekly,Réinitialisation hebdomadaire
 Feature.Build.Label.RestoredVersion,{VERSION} restaurée
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,Chercher
@@ -2091,7 +2094,6 @@ Feature.Build.Label.SearchAssets,Rechercher des contenus
 Feature.Build.Label.SearchGames,Rechercher des jeux
 Feature.Build.Label.SearchTasks,Rechercher des tâches
 Feature.Build.Label.SelectOption,Sélectionner une option
-Feature.Build.Label.ShareAddedFriends,Partager avec les amis que tu as ajoutés
 Feature.Build.Label.Shared,Partagé
 Feature.Build.Label.ShopButton,Bouton Boutique
 Feature.Build.Label.ShopUi,Interface utilisateur de la boutique
@@ -2228,7 +2230,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Aucun historique des versions pour le moment.
 Feature.Build.Message.OneTaskCompleted,1 tâche terminée
 Feature.Build.Message.OutOfBuildUsage,Tu ne peux plus utiliser la fonctionnalité Construire. Consulte tes options pour utiliser des Robux et continuer à créer.
+Feature.Build.Message.PlaytestInviteSendFailedBody,Les utilisateurs suivants n'ont pas pu recevoir ton lien d'invitation :
+Feature.Build.Message.PlaytestInviteSendFailedHint,Utilise le bouton Partager pour obtenir un lien.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} testeurs sur {MAX_INVITES} ajoutés
+Feature.Build.Message.PrivatePlaytestInvite,{username} t'invite à un test de jeu privé pour {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Ton jeu a été publié, mais n'a pas pu être rendu public. Réessaye."
 Feature.Build.Message.PublishExpandAudience,Publie pour élargir ton public
 Feature.Build.Message.PublishNotReverted,Ta publication n'a pas été rétablie. Réessaie.
@@ -2292,6 +2297,7 @@ Feature.Build.Title.GetUsers,Obtenir des utilisateurs
 Feature.Build.Title.ManagedPricingAcknowledgement,Activer la tarification gérée ?
 Feature.Build.Title.NoMonetizationProducts,Gagne de l'argent dans ton expérience
 Feature.Build.Title.NoRobuxForUsage,Il ne reste plus de Robux pour utiliser Construire
+Feature.Build.Title.PlaytestInviteSendFailed,Impossible d'envoyer les invitations
 Feature.Build.Title.Playtesters,Testeurs
 Feature.Build.Title.PlaytestersOnlyPlay,Seuls les testeurs peuvent y jouer
 Feature.Build.Title.PromoteGame,Fais la promotion de ton jeu
@@ -3238,6 +3244,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Retirer des amis de con
 Feature.Friends.TrustedFriend.AddBack.Header,Demande d'ajout aux Amis de confiance
 Feature.Friends.TrustedFriend.Info.Modal.Header,Nouvel ami de confiance
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Ajouter un ami de confiance
+Feature.Friends.TrustedFriend.Label.Title,Ami de confiance
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,L'utilisateur {name} est devenu un ami de confiance
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Ami de confiance supprimé
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Demande d'ajout aux amis de confiance envoyée
@@ -3521,7 +3528,7 @@ Feature.Moments.Label.FeedFailedToLoad,Échec du chargement des actus
 Feature.Moments.Label.FeedMyMoments,Mes moments
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,Comment utiliser la capture
-Feature.Moments.Label.LinkCopied,Lien copié.
+Feature.Moments.Label.LinkCopied,Lien copié
 Feature.Moments.Label.LinkCopyFailed,Impossible de copier le lien.
 Feature.Moments.Label.ModeratedRodeoBody,"Nous avons retiré ce Moment, car il est contraire aux normes de la communauté. Pour que tes Moments restent visibles, tu dois connaître les règles et les respecter."
 Feature.Moments.Label.MomentDeletedBody,
@@ -4002,7 +4009,7 @@ Feature.SettingsHub.Label.Connect,
 Feature.SettingsHub.Label.Connected,Connecté(e)
 Feature.SettingsHub.Label.ConnectionsListLoadErrorMessage,Impossible de charger les connexions. Réessaie plus tard.
 Feature.SettingsHub.Label.DefaultInviteMessage,Veux-tu inviter {DisplayName} à te rejoindre ?
-Feature.SettingsHub.Label.Disconnect,
+Feature.SettingsHub.Label.Disconnect,Déconnexion
 Feature.SettingsHub.Label.Disconnected,Déconnecté(e)
 Feature.SettingsHub.Label.DontLeaveButton,
 Feature.SettingsHub.Label.FriendsListLoadErrorMessage,Impossible de te mettre en contact avec des amis. Réessaie plus tard.
@@ -4021,6 +4028,7 @@ Feature.SettingsHub.Label.NoConnectionsScreen,Fais des connexions pour pouvoir l
 Feature.SettingsHub.Label.NoFriendsPageMessage,Ajoute des amis pour que vous puissiez explorer ensemble.
 Feature.SettingsHub.Label.NoFriendsScreen,Fais-toi des amis pour pouvoir les inviter à te rejoindre !
 Feature.SettingsHub.Label.QuitButton,
+Feature.SettingsHub.Label.QuitConfirmation,Veux-tu vraiment quitter l'application ?
 Feature.SettingsHub.Label.ReasonForAbuse,Raison de l'abus ?
 Feature.SettingsHub.Label.Report.BlockDisplayName,Bloquer {DISPLAY_NAME} (@{RBX_NAME})
 Feature.SettingsHub.Label.Report.OtherActionsHeader,Autres mesures que tu peux prendre
@@ -4783,6 +4791,7 @@ InGame.HelpMenu.Label.PlayerScripts,PlayerScripts :
 InGame.HelpMenu.Label.ServerChannel,Cannal du serveur :
 InGame.HelpMenu.Label.ServerVersion,Version du serveur :
 InGame.HelpMenu.LeftArrow,
+InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,
 InGame.HelpMenu.UpArrow,
 InGame.InspectMenu.Action.Cancel,
@@ -4872,6 +4881,13 @@ InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,Vous êtes désormais dans l
 InGame.UnknownNamespace.Network,(Réseau)
 InGame.UnknownNamespace.Received,Reçus
 InGame.UnknownNamespace.Sent,
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,Échec de l'ajout de {experience_name} sur le bureau
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,Échec de l'ajout de {experience_name} à l'écran d'accueil
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,Un raccourci vers {experience_name} existe déjà.
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,Expérience {experience_name} ajoutée au bureau
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,Expérience {experience_name} ajoutée à l'écran d'accueil
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,Voir le raccourci
 Notifications.NotificationStream.Bundle.ShowLess,Afficher moins
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} de plus
 Notifications.NotificationStream.Label.AllCaughtUp,Tu es à jour !

@@ -46,6 +46,7 @@ local sduiEnableBackToTop = game:DefineFastFlag("SduiEnableBackToTop", false)
 local sduiVerticalFeedBottomSpacerLayoutOrderConstant = game:DefineFastFlag("SduiVerticalFeedBottomSpacerLayoutOrderConstant", false)
 local fFlagSduiVerticalFeedPageShellSupport = sharedFlagsModule.FFlagSduiVerticalFeedPageShellSupport
 local fFlagLuaAppSduiVideoThumbnail = sharedFlagsModule.FFlagLuaAppSduiVideoThumbnail
+local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
 local var1 = if fFlagSduiVerticalFeedProgressiveFillOnScroll then signalsModule.createSignal(nil) else nil
 local var2 = if fFlagSduiVerticalFeedProgressiveFillOnScroll then table.freeze({}) else nil
 
@@ -121,7 +122,7 @@ local function useProgressiveRowCapWithScroll(p1, p2, p3, p4, p5, p6, p7, p8)
 end
 
 return reactModule.memo(function(p9)
-	-- upvalues: fFlagLuaAppSduiVideoThumbnail (ref), useTokens (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), useNavBarPlacement (ref), appNavBarModule (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), fFlagSduiVerticalFeedPageShellSupport (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (ref), appCommonLibModule (ref), fFlagLuaAppSduiHomeFriendCarousel (ref), fFlagSduiSrpScrollAway (ref), scrollMovementDirection (ref), sduiEnableBackToTop (ref), useAnimateScrollViewToSelection (ref), useLastInputMode (ref), useProgressiveRowCapWithScroll (ref), sduiVerticalFeedScrollUnderfillDebounceMs (ref), useProgressiveRowCapModule (ref), useVerticalScrolledToEndThresholdModule (ref), sduiVerticalFeedBottomSpacerLayoutOrderConstant (ref), backToTopButtonModule (ref), fFlagSduiPoolBackedFeed (ref), PoolStoreLayoutStoreWiring (ref), sduiFeedImpressionsDetectorModule (ref), buildSduiFeedChildrenModule (ref), sduiFeedContextModule (ref), collectionLayoutStoreProvider (ref), view (ref), viewportVideoAutoplaySync (ref), scrollDetector (ref), sduiStickyHeaderModule (ref), pullToRefreshSpinner (ref)
+	-- upvalues: fFlagLuaAppSduiVideoThumbnail (ref), useTokens (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), useNavBarPlacement (ref), appNavBarModule (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), fFlagSduiVerticalFeedPageShellSupport (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (ref), appCommonLibModule (ref), fFlagLuaAppSduiHomeFriendCarousel (ref), fFlagSduiSrpScrollAway (ref), scrollMovementDirection (ref), sduiEnableBackToTop (ref), useAnimateScrollViewToSelection (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), useLastInputMode (ref), useProgressiveRowCapWithScroll (ref), sduiVerticalFeedScrollUnderfillDebounceMs (ref), useProgressiveRowCapModule (ref), useVerticalScrolledToEndThresholdModule (ref), sduiVerticalFeedBottomSpacerLayoutOrderConstant (ref), backToTopButtonModule (ref), fFlagSduiPoolBackedFeed (ref), PoolStoreLayoutStoreWiring (ref), sduiFeedImpressionsDetectorModule (ref), buildSduiFeedChildrenModule (ref), sduiFeedContextModule (ref), collectionLayoutStoreProvider (ref), view (ref), viewportVideoAutoplaySync (ref), scrollDetector (ref), sduiStickyHeaderModule (ref), pullToRefreshSpinner (ref)
 	local var7
 	local analyticsContext = p9.analyticsContext
 	local sduiContext = p9.sduiContext
@@ -304,7 +305,7 @@ return reactModule.memo(function(p9)
 		var20,
 		if fFlagSduiSrpScrollAway then var25 else nil
 	})
-	useAnimateScrollViewToSelection(if fFlagSduiVerticalFeedPageShellSupport and p9.scrollToSelectionAnimationManagedByParent then nil else var17, 0.4)
+	useAnimateScrollViewToSelection(if fFlagSduiVerticalFeedPageShellSupport and p9.scrollToSelectionAnimationManagedByParent then nil else var17, 0.4, if fFlagLuaAppMediaGalleryGamepadSupport then p9.scrollToSelectionRevealOnly else nil)
 	local isNotCursor = useLastInputMode() ~= "Cursor"
 	local thresholdFromEnd = p9.thresholdFromEnd or 600
 	local var33 = nil

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BuildExperienceAssetLibrary2", false)
+﻿return game:DefineFastFlag("BuildExperienceAssetLibrary", false)

@@ -1,4 +1,5 @@
-﻿local parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+﻿local chatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local parent = chatUIPrimitives.Parent
 local reactModule = require(parent.React)
 local reactIsModule = require(parent.ReactIs)
 local foundationModule = require(parent.Foundation)
@@ -8,6 +9,8 @@ local getTextLengthIfValidUtf8Module = require(script.Parent.getTextLengthIfVali
 local channelChipModule = require(script.Parent.ChannelChip)
 local chatAutocompleteDropdownModule = require(script.Parent.Autocomplete.ChatAutocompleteDropdown)
 local useChatAutocompleteEngineModule = require(script.Parent.Autocomplete.useChatAutocompleteEngine)
+local expressionTrayViewModule = require(chatUIPrimitives.Components.ExpressionTray.ExpressionTrayView)
+local useExpressionTrayModule = require(chatUIPrimitives.Hooks.useExpressionTray)
 
 local function _(p1, p2)
 	return p1 + p2 * (1 - p1)
@@ -27,6 +30,13 @@ local function deriveBackgroundStyle(value, p1, p2)
 		-- upvalues: value (ref), p1 (ref)
 		return { Color3 = value, Transparency = p1 + p3 * (1 - p1) }
 	end) else { Color3 = value, Transparency = p1 + p2 * (1 - p1) }
+end
+
+local _ = function(p1, p2)
+	local cloned = table.clone(p1)
+	cloned.variant = p2
+	
+	return cloned
 end
 
 local function renderDropdown(p1)
@@ -97,7 +107,10 @@ local function renderLegacy(p1)
 		Size = UDim2.new(1, 0, 0, 0),
 		ref = p1.barContainerRef
 	}
-	local t_1 = { Dropdown = renderDropdown(p1) }
+	local t_1 = {
+		Dropdown = renderDropdown(p1),
+		TrayOverlay = p1.trayOverlay
+	}
 	local createElement_1 = reactModule.createElement
 	local view_1 = foundationModule.View
 	local t_2 = { tag = "auto-y", Size = UDim2.fromScale(1, 0) }
@@ -130,7 +143,7 @@ local function renderLegacy(p1)
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
-			Action = props.leftAddon
+			Action = p1.leadingAddon
 		}) else nil
 	}
 	
@@ -273,12 +286,15 @@ local function renderComposer(p1)
 	local createElement = reactModule.createElement
 	local view = foundationModule.View
 	local t = { tag = "size-full-0 auto-y", ref = p1.barContainerRef }
-	local t_1 = { Dropdown = renderDropdown(p1) }
+	local t_1 = {
+		Dropdown = renderDropdown(p1),
+		TrayOverlay = p1.trayOverlay
+	}
 	local createElement_1 = reactModule.createElement
 	local view_1 = foundationModule.View
 	local t_2 = { tag = "row align-y-center gap-small size-full-0 auto-y" }
 	local t_3 = {
-		LeadingButton = if p1.showLeadingAction then reactModule.createElement(foundationModule.View, { LayoutOrder = 1, tag = "auto-xy" }, { Action = props.leftAddon }) else nil
+		LeadingButton = if p1.showLeadingAction then reactModule.createElement(foundationModule.View, { LayoutOrder = 1, tag = "auto-xy" }, { Action = p1.leadingAddon }) else nil
 	}
 	local createElement_2 = reactModule.createElement
 	local view_2 = foundationModule.View
@@ -398,7 +414,7 @@ local function renderComposer(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), fFlagExpChatEnableFriendsTab (ref), reactModule (ref), reactIsModule (ref), deriveBackgroundStyle (ref), deriveTransparency (ref), useChatAutocompleteEngineModule (ref), fFlagChatInputBarGuardInvalidUtf8 (ref), getTextLengthIfValidUtf8Module (ref), renderComposer (ref), renderLegacy (ref)
+	-- upvalues: foundationModule (ref), fFlagExpChatEnableFriendsTab (ref), reactModule (ref), reactIsModule (ref), deriveBackgroundStyle (ref), deriveTransparency (ref), useChatAutocompleteEngineModule (ref), fFlagChatInputBarGuardInvalidUtf8 (ref), getTextLengthIfValidUtf8Module (ref), useExpressionTrayModule (ref), expressionTrayViewModule (ref), renderComposer (ref), renderLegacy (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local themedColors = p1.themedColors
 	local var2 = if themedColors then var1.Color.Surface.Surface_100.Color3 else var1.DarkMode.Surface.Surface_100.Color3
@@ -538,16 +554,34 @@ return reactModule.memo(function(p1)
 			var15(true)
 		end
 	end, { canLocalUserChat })
-	local var24 = if p1.leftAddon then true else false
+	local var24 = useExpressionTrayModule(p1.expressionTray)
+	local var25 = nil
+	local var26 = nil
+	
+	if var24 ~= nil and var24.isVisible then
+		local createElement = reactModule.createElement
+		local cloned = table.clone(var24)
+		cloned.variant = "entry"
+		var25 = createElement(expressionTrayViewModule, cloned)
+		local createElement_1 = reactModule.createElement
+		local var27 = expressionTrayViewModule
+		local cloned_1 = table.clone(var24)
+		cloned_1.variant = "overlay"
+		var26 = createElement_1(var27, cloned_1)
+	end
+	local var28 = if var25 ~= nil then p1.leftAddon else var25
+	local var29 = var28 ~= nil
 	local t = {
 		sendButtonContainerWidth = 30,
 		tokens = var1,
 		props = p1,
+		leadingAddon = var28,
+		trayOverlay = var26,
 		canChat = canLocalUserChat,
 		isEmpty = var14,
 		isSendDisabled = var14 or not canLocalUserChat,
-		hasLeadingAction = var24,
-		showLeadingAction = var24 and (var14 and not var6),
+		hasLeadingAction = var29,
+		showLeadingAction = var29 and (var14 and not var6),
 		shouldReplaceDisabledContent = var6,
 		transparencyValue = transparencyValue,
 		textColor = var4,

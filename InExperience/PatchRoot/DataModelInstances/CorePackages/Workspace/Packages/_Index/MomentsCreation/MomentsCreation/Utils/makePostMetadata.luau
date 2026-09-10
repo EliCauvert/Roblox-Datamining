@@ -1,15 +1,38 @@
 ﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
 local _ = require(momentsCreation.Parent.MomentsTypes)
 local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
+local fFlagMomentsFixPostUploadEnumNormalizationModule = require(momentsCreation.Flags.FFlagMomentsFixPostUploadEnumNormalization)
 local momentsPostCtaUseCaptureUniverse = game:DefineFastFlag("MomentsPostCtaUseCaptureUniverse", false)
 
+local function _(p1)
+	return if typeof(p1) == "EnumItem" then p1.Name else p1
+end
+
 local function convertTextOverlayStyle(p1)
-	return {
-		font = p1.font.Name,
-		fontColor = { p1.fontColor.R, p1.fontColor.G, p1.fontColor.B },
-		fontSize = p1.fontSize,
-		textXAlignment = p1.textXAlignment.Name
-	}
+	-- upvalues: fFlagMomentsFixPostUploadEnumNormalizationModule (ref)
+	local var1
+	local t = {}
+	
+	if fFlagMomentsFixPostUploadEnumNormalizationModule then
+		local font = p1.font
+		var1 = if typeof(font) == "EnumItem" then font.Name else font
+	else
+		var1 = p1.font.Name
+	end
+	local var2
+	t.font = var1
+	t.fontColor = { p1.fontColor.R, p1.fontColor.G, p1.fontColor.B }
+	t.fontSize = p1.fontSize
+	
+	if fFlagMomentsFixPostUploadEnumNormalizationModule then
+		local textXAlignment = p1.textXAlignment
+		var2 = if typeof(textXAlignment) == "EnumItem" then textXAlignment.Name else textXAlignment
+	else
+		var2 = p1.textXAlignment.Name
+	end
+	t.textXAlignment = var2
+	
+	return t
 end
 
 local function convertTextOverlay(p1)
@@ -25,7 +48,7 @@ local function convertTextOverlay(p1)
 end
 
 return function(p1)
-	-- upvalues: convertTextOverlay (ref), getFFlagMomentsTTSAudioOverlayModule (ref), momentsPostCtaUseCaptureUniverse (ref)
+	-- upvalues: convertTextOverlay (ref), getFFlagMomentsTTSAudioOverlayModule (ref), momentsPostCtaUseCaptureUniverse (ref), fFlagMomentsFixPostUploadEnumNormalizationModule (ref)
 	local t = { caption = p1.description }
 	
 	if p1.edits then
@@ -62,16 +85,24 @@ return function(p1)
 			}
 		end
 	end
+	local universeId
 	local var1 = p1.universeIdOverride or p1.universeId
 	
 	if momentsPostCtaUseCaptureUniverse then
-		local universeId = p1.universeId
+		universeId = p1.universeId
 		var1 = if universeId == nil or universeId <= 0 then p1.universeIdOverride else universeId
 	end
 	if var1 and p1.placeId then
 		t.primaryCta = { experienceId = var1, placeId = p1.placeId }
 	end
-	if p1.captureType == Enum.CaptureType.Video then
+	if fFlagMomentsFixPostUploadEnumNormalizationModule then
+		local captureType = p1.captureType
+		universeId = (if typeof(captureType) == "EnumItem" then captureType.Name else captureType) == Enum.CaptureType.Video.Name
+		universeId = nil
+	else
+		universeId = p1.captureType == Enum.CaptureType.Video
+	end
+	if universeId then
 		t.durationSeconds = p1.assetTotalDuration
 	end
 	return t

@@ -300,152 +300,159 @@ return function()
 			
 			if var17 == nil then return end
 			local t = {}
+			local var18 = false
 			
 			for i, v in var17.requests do
-				if v.id ~= p4 then
+				if v.id == p4 then
+					var18 = true
+				else
 					table.insert(t, v)
 				end
 			end
-			var7.replaceItem(var15, {
-				requests = t,
-				nextPageCursor = var17.nextPageCursor,
-				hasMore = var17.hasMore
-			})
+			if var18 then
+				var7.replaceItem(var15, {
+					requests = t,
+					nextPageCursor = var17.nextPageCursor,
+					hasMore = var17.hasMore
+				})
+				
+				return
+			end
 		end,
 		appendNewUserId = function(p5)
 			-- upvalues: localUserIdStore (copy), getLocalPlayerUserId (copy), var12 (ref), var7 (ref), friendsStoreModule (copy)
-			local var18 = if p5 == nil then nil else tostring(p5)
+			local var19 = if p5 == nil then nil else tostring(p5)
 			
-			if not var18 then return end
-			local var19
+			if not var19 then return end
+			local var20
 			local currentUserId = localUserIdStore.getCurrentUserId(false)
 			
 			if currentUserId == "" then
-				local var20 = getLocalPlayerUserId()
-				var19 = if var20 then tostring(var20) else ""
+				local var21 = getLocalPlayerUserId()
+				var20 = if var21 then tostring(var21) else ""
 			else
-				var19 = currentUserId
+				var20 = currentUserId
 			end
-			local var21 = var12.getCachedItem(var19).data(false)
-			local t = { isUnseen = true, id = var18 }
+			local var22 = var12.getCachedItem(var20).data(false)
+			local t = { isUnseen = true, id = var19 }
 			
-			if var21 == nil then
-				var7.replaceItem(var19, { nextPageCursor = nil, hasMore = false, requests = { t } })
+			if var22 == nil then
+				var7.replaceItem(var20, { nextPageCursor = nil, hasMore = false, requests = { t } })
 			else
 				local list = { t }
 				
-				for i, v in var21.requests do
-					if v.id ~= var18 then
+				for i, v in var22.requests do
+					if v.id ~= var19 then
 						table.insert(list, v)
 					end
 				end
-				var7.replaceItem(var19, {
+				var7.replaceItem(var20, {
 					requests = list,
-					nextPageCursor = var21.nextPageCursor,
-					hasMore = var21.hasMore
+					nextPageCursor = var22.nextPageCursor,
+					hasMore = var22.hasMore
 				})
 			end
-			friendsStoreModule.get().UpdateFriendshipStatus(var18, Enum.FriendStatus.FriendRequestReceived)
+			friendsStoreModule.get().UpdateFriendshipStatus(var19, Enum.FriendStatus.FriendRequestReceived)
 		end,
 		getFriendsRequestCount = function(p6)
 			-- upvalues: localUserIdStore (copy), getLocalPlayerUserId (copy), var13 (ref)
-			local var22
+			local var23
 			local currentUserId = localUserIdStore.getCurrentUserId(false)
 			
 			if currentUserId == "" then
-				local var23 = getLocalPlayerUserId()
-				var22 = if var23 then tostring(var23) else ""
+				local var24 = getLocalPlayerUserId()
+				var23 = if var24 then tostring(var24) else ""
 			else
-				var22 = currentUserId
+				var23 = currentUserId
 			end
 			if p6 and p6.skipFetch then
-				return var13.getCachedItem(var22)
+				return var13.getCachedItem(var23)
 			elseif p6 and p6.forceFetch then
-				local var24
+				local var25
 				local fetchItem = var13.fetchItem
 				local currentUserId_1 = localUserIdStore.getCurrentUserId(false)
 				
 				if currentUserId_1 == "" then
-					local var25 = getLocalPlayerUserId()
-					var24 = if var25 then tostring(var25) else ""
+					local var26 = getLocalPlayerUserId()
+					var25 = if var26 then tostring(var26) else ""
 				else
-					var24 = currentUserId_1
+					var25 = currentUserId_1
 				end
-				fetchItem(var24)
+				fetchItem(var25)
 			end
-			return var13.getAndFetchItem(var22)
+			return var13.getAndFetchItem(var23)
 		end,
 		refetchFriendRequestCount = function()
 			-- upvalues: var13 (ref), localUserIdStore (copy), getLocalPlayerUserId (copy)
-			local var22
+			local var23
 			local fetchItem = var13.fetchItem
 			local currentUserId = localUserIdStore.getCurrentUserId(false)
 			
 			if currentUserId == "" then
-				local var23 = getLocalPlayerUserId()
-				var22 = if var23 then tostring(var23) else ""
+				local var24 = getLocalPlayerUserId()
+				var23 = if var24 then tostring(var24) else ""
 			else
-				var22 = currentUserId
+				var23 = currentUserId
 			end
-			fetchItem(var22)
+			fetchItem(var23)
 		end,
 		getNewFriendsRequestCount = function(p6)
 			-- upvalues: localUserIdStore (copy), getLocalPlayerUserId (copy), var14 (ref)
-			local var22
+			local var23
 			local currentUserId = localUserIdStore.getCurrentUserId(false)
 			
 			if currentUserId == "" then
-				local var23 = getLocalPlayerUserId()
-				var22 = if var23 then tostring(var23) else ""
+				local var24 = getLocalPlayerUserId()
+				var23 = if var24 then tostring(var24) else ""
 			else
-				var22 = currentUserId
+				var23 = currentUserId
 			end
-			return if p6 and p6.skipFetch then var14.getCachedItem(var22) else var14.getAndFetchItem(var22)
+			return if p6 and p6.skipFetch then var14.getCachedItem(var23) else var14.getAndFetchItem(var23)
 		end,
 		refetchNewFriendRequestCount = function()
 			-- upvalues: var14 (ref), localUserIdStore (copy), getLocalPlayerUserId (copy)
-			local var22
+			local var23
 			local fetchItem = var14.fetchItem
 			local currentUserId = localUserIdStore.getCurrentUserId(false)
 			
 			if currentUserId == "" then
-				local var23 = getLocalPlayerUserId()
-				var22 = if var23 then tostring(var23) else ""
+				local var24 = getLocalPlayerUserId()
+				var23 = if var24 then tostring(var24) else ""
 			else
-				var22 = currentUserId
+				var23 = currentUserId
 			end
-			fetchItem(var22)
+			fetchItem(var23)
 		end,
 		clearNewFriendRequest = function()
 			-- upvalues: requestsModule (copy), var9 (ref), localUserIdStore (copy), getLocalPlayerUserId (copy)
 			return requestsModule.ClearNewFriendRequests():andThen(function()
 				-- upvalues: var9 (copy), localUserIdStore (copy), getLocalPlayerUserId (copy)
-				local var22
+				local var23
 				local replaceItem = var9.replaceItem
 				local currentUserId = localUserIdStore.getCurrentUserId(false)
 				
 				if currentUserId == "" then
-					local var23 = getLocalPlayerUserId()
-					var22 = if var23 then tostring(var23) else ""
+					local var24 = getLocalPlayerUserId()
+					var23 = if var24 then tostring(var24) else ""
 				else
-					var22 = currentUserId
+					var23 = currentUserId
 				end
-				replaceItem(var22, 0)
+				replaceItem(var23, 0)
 			end)
 		end,
 		clearNewFriendRequestCount = function()
 			-- upvalues: var9 (ref), localUserIdStore (copy), getLocalPlayerUserId (copy)
-			local var22
+			local var23
 			local replaceItem = var9.replaceItem
 			local currentUserId = localUserIdStore.getCurrentUserId(false)
 			
 			if currentUserId == "" then
-				local var23 = getLocalPlayerUserId()
-				var22 = if var23 then tostring(var23) else ""
+				local var24 = getLocalPlayerUserId()
+				var23 = if var24 then tostring(var24) else ""
 			else
-				var22 = currentUserId
+				var23 = currentUserId
 			end
-			replaceItem(var22, 0)
+			replaceItem(var23, 0)
 		end,
 		clear = function()
 			-- upvalues: var12 (ref), var13 (ref), var14 (ref)

@@ -4,6 +4,7 @@ local _ = require(script.Types.AssetInfo)
 local _ = require(script.Types.OutfitTryOn)
 local _ = require(script.Types.BodyColors)
 local _ = require(script.Types.HydratedWidgetData)
+local _ = require(script.Types.AXCommonState)
 
 return {
 	Actions = {

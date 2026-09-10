@@ -1,1 +1,6 @@
-﻿return { Source = { ItemSelected = "item_selected" } }
+﻿return {
+	Source = {
+		ItemSelected = "item_selected",
+		RobuxWidget = "robux_widget"
+	}
+}

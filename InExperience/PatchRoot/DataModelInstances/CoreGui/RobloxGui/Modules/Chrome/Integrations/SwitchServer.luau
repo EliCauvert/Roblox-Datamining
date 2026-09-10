@@ -30,7 +30,7 @@ local var4 = serviceModule:register({
 	initialAvailability = serviceModule.AvailabilitySignal.Unavailable,
 	id = constantsModule.SWITCH_SERVER_ID,
 	label = constants.BUTTON.LABEL,
-	sideSheetPlacement = if isPioneerLaunch() then sideSheetPlacement.SessionAction else sideSheetPlacement.Page,
+	sideSheetPlacement = if isPioneerLaunch() then sideSheetPlacement.SessionAction else sideSheetPlacement.BelowFold,
 	activated = function()
 		-- upvalues: switchServerStore (ref)
 		switchServerStore.setConfirmationOpen(true)

@@ -6,16 +6,20 @@ local analyticsModule = require(parent.Services.Analytics)
 local constantsModule = require(parent.Constants)
 local setItemBeingPurchasedModule = require(parent.Actions.SetItemBeingPurchased)
 local sendCounterModule = require(parent.Thunks.SendCounter)
+local reportPurchaseAttemptUnifiedEventModule = require(parent.Thunks.ReportPurchaseAttemptUnifiedEvent)
+local fFlagAXIaBSinglePurchaseUnifiedEventsModule = require(parent.Flags.FFlagAXIaBSinglePurchaseUnifiedEvents)
 local list = { analyticsModule }
 
 return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), setItemBeingPurchasedModule (ref), constantsModule (ref), marketplaceService (ref), playersService (ref), sendCounterModule (ref)
+	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), constantsModule (ref), fFlagAXIaBSinglePurchaseUnifiedEventsModule (ref), setItemBeingPurchasedModule (ref), marketplaceService (ref), playersService (ref), sendCounterModule (ref), reportPurchaseAttemptUnifiedEventModule (ref)
 	return thunkModule.new(script.Name, list, function(p8, p9)
-		-- upvalues: analyticsModule (copy), setItemBeingPurchasedModule (copy), p1 (ref), p2 (ref), p4 (ref), constantsModule (copy), marketplaceService (copy), playersService (copy), p3 (ref), p5 (ref), p6 (ref), sendCounterModule (copy), p7 (ref)
+		-- upvalues: analyticsModule (copy), p4 (ref), p2 (ref), constantsModule (copy), fFlagAXIaBSinglePurchaseUnifiedEventsModule (copy), p6 (ref), setItemBeingPurchasedModule (copy), p1 (ref), marketplaceService (copy), playersService (copy), p3 (ref), p5 (ref), sendCounterModule (copy), p7 (ref), reportPurchaseAttemptUnifiedEventModule (copy)
 		local var1 = p9[analyticsModule]
-		p8:dispatch(setItemBeingPurchasedModule(p1, p2))
+		local var2 = p4 ~= nil and p2 ~= constantsModule.ItemType.Bundle
+		local var3 = if fFlagAXIaBSinglePurchaseUnifiedEventsModule and var2 then p6 else nil
+		p8:dispatch(setItemBeingPurchasedModule(p1, p2, var3))
 		
-		if p4 ~= nil and p2 ~= constantsModule.ItemType.Bundle then
+		if var2 then
 			marketplaceService:PromptCollectiblesPurchase(playersService.LocalPlayer, p1, p3, p5, p4, p6)
 			p8:dispatch(sendCounterModule(constantsModule.Counters.PromptLimitedCollectiblesPurchase))
 		elseif p2 == constantsModule.ItemType.Bundle then
@@ -31,6 +35,11 @@ return function(p1, p2, p3, p4, p5, p6, p7)
 			end
 		else
 			p8:dispatch(sendCounterModule(constantsModule.Counters.PromptPurchaseUnknownItemType))
+		end
+		if fFlagAXIaBSinglePurchaseUnifiedEventsModule then
+			p8:dispatch(reportPurchaseAttemptUnifiedEventModule(p1, p2, var3))
+			
+			return
 		end
 		var1.reportPurchaseAttempt(p2, p1)
 	end)

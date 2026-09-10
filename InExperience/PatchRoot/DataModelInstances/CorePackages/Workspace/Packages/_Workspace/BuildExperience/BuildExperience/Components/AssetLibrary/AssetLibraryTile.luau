@@ -1,9 +1,7 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
+﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local _ = require(script.Parent.AssetLibraryTypes)
-local modelViewportModule = require(buildExperience.Components.ModelLibrary.ModelViewport)
 local icon = foundationModule.Icon
 local image = foundationModule.Image
 local text = foundationModule.Text
@@ -12,24 +10,20 @@ local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 
 return reactModule.memo(function(value)
-	-- upvalues: reactModule (ref), view (ref), modelViewportModule (ref), image (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
-	local var1 = value.onActivated ~= nil
-	local tileKey = value.tileKey or tostring(value.assetId)
-	
-	return reactModule.createElement("TextButton", {
-		Active = var1,
-		AutoButtonColor = var1,
-		BackgroundTransparency = 1,
-		BorderSizePixel = 0,
+	-- upvalues: reactModule (ref), view (ref), foundationModule (ref), image (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
+	return reactModule.createElement(view, {
+		tag = "col gap-small radius-medium",
 		LayoutOrder = value.LayoutOrder,
-		Selectable = var1,
-		Size = value.Size or UDim2.fromOffset(120, 168),
-		Text = "",
-		[reactModule.Event.Activated] = if var1 then function()
+		onActivated = function()
 			-- upvalues: value (ref)
-			value.onActivated()
-		end else nil,
-		[reactModule.Tag] = `col gap-small radius-medium data-testid=AssetLibrary.Tile.{tileKey}`
+			value.onActivated(value.assetId)
+		end,
+		selection = { Selectable = true },
+		stateLayer = {
+			affordance = foundationModule.Enums.StateLayerAffordance.None
+		},
+		Size = value.Size or UDim2.fromOffset(120, 168),
+		testId = `AssetLibrary.Tile.{value.assetId}`
 	}, {
 		Thumbnail = reactModule.createElement(view, {
 			LayoutOrder = 1,
@@ -37,7 +31,7 @@ return reactModule.memo(function(value)
 			Size = value.mediaSize or UDim2.fromScale(1, 0),
 			aspectRatio = if value.mediaSize == nil then 1 else nil
 		}, {
-			Media = if value.model ~= nil then if value.thumbnail ~= nil then reactModule.createElement(icon, {
+			Media = if value.thumbnail ~= nil then reactModule.createElement(icon, {
 				tag = "auto-xy content-default",
 				name = if value.assetType == "Audio" then iconName.MusicNote else iconName.Image,
 				size = iconSize.Large
@@ -45,12 +39,7 @@ return reactModule.memo(function(value)
 				tag = "size-full radius-medium",
 				Image = value.thumbnail,
 				ScaleType = Enum.ScaleType.Crop,
-				testId = `AssetLibrary.Tile.{tileKey}.Image`
-			}) else reactModule.createElement(modelViewportModule, {
-				isInteractive = false,
-				model = value.model,
-				size = UDim2.fromScale(1, 1),
-				testId = `AssetLibrary.Tile.{tileKey}.Model`
+				testId = `AssetLibrary.Tile.{value.assetId}.Image`
 			})
 		}),
 		Content = reactModule.createElement(view, { LayoutOrder = 2, tag = "col size-full-0 auto-y" }, {

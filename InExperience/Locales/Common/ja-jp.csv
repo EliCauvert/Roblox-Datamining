@@ -74,8 +74,6 @@ Amp.Upsell.Message.EmailSent,{parentEmail} にメールを送信しました
 Amp.Upsell.Message.EmailSentPluralParent,紐づけされた保護者の方にメールを送信しました
 Amp.Upsell.Title.AskYourParent,保護者の許可を取る
 Amp.Upsell.Title.RequestSent,リクエストを送信しました
-Application.Logout.Action.Logout,ログアウト
-Application.Logout.Message.Confirmation,ログアウトしますか？
 Authentication.AccountSwitch.Action.SwitchAccount,アカウントを切り替える
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,クイックログイン
@@ -949,6 +947,8 @@ CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,
 CoreScripts.InGameMenu.Traversal.HistoryDescription,以前プレイしたゲームに参加
 CoreScripts.InGameMenu.Traversal.LeaveBody,このゲームから退出し、{PREVIOUS_EXPERIENCE}に戻ろうとしています。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
+CoreScripts.InGameMenu.UnlockMore.Description,チャット、友達、その他のゲーム
+CoreScripts.InGameMenu.UnlockMore.Title,Robloxのロックをより多く解除
 CoreScripts.InGameMenu.Vibration,バイブレーション
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,必要がある場合もあります。
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,バーチャル空間の中にはメニューのナビゲーションを押す
@@ -2053,6 +2053,7 @@ Feature.Build.Label.GamePlays,プレイ数
 Feature.Build.Label.GetMoreBuildUsage,もっとビルド使用量を獲得
 Feature.Build.Label.Hi,こんにちは
 Feature.Build.Label.IconThumbnails,アイコンとサムネイル
+Feature.Build.Label.Images2D,2D画像
 Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,入力が必要です
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2084,6 +2085,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,準備完了
 Feature.Build.Label.RegionalPricing,地域別価格設定
 Feature.Build.Label.ResetsDaily,毎日リセット
+Feature.Build.Label.ResetsMonthly,毎月リセット
+Feature.Build.Label.ResetsWeekly,毎週リセット
 Feature.Build.Label.RestoredVersion,復元済みの{VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2091,7 +2094,6 @@ Feature.Build.Label.SearchAssets,アセットをサーチ
 Feature.Build.Label.SearchGames,ゲームをサーチ
 Feature.Build.Label.SearchTasks,タスクをサーチ
 Feature.Build.Label.SelectOption,オプションを選択
-Feature.Build.Label.ShareAddedFriends,追加した友達とシェア
 Feature.Build.Label.Shared,シェア済み
 Feature.Build.Label.ShopButton,ショップボタン
 Feature.Build.Label.ShopUi,ショップUI
@@ -2228,7 +2230,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,まだバージョン履歴はありません。
 Feature.Build.Message.OneTaskCompleted,1つのタスクが完了しました
 Feature.Build.Message.OutOfBuildUsage,ビルド使用量がなくなりました。作成を続けるには、Robuxを使用するためのオプションをご確認ください。
+Feature.Build.Message.PlaytestInviteSendFailedBody,次のユーザーに招待のチャットリンクを送信できませんでした：
+Feature.Build.Message.PlaytestInviteSendFailedHint,[シェア]ボタンを使用して、リンクを取得してください。
 Feature.Build.Message.PlaytestersAdded,{MAX_INVITES}人中{INVITED_COUNT}人のプレイテスターが追加されました
+Feature.Build.Message.PrivatePlaytestInvite,{username}さんがあなたを{experienceName}のプライベートサーバープレイテストに招待しました
 Feature.Build.Message.PublicPublishFailed,ゲームは公開手続きが行われましたが、公開できませんでした。もう一度お試しください。
 Feature.Build.Message.PublishExpandAudience,公開してオーディエンスを拡大
 Feature.Build.Message.PublishNotReverted,公開は元に戻りませんでした。もう一度お試しください。
@@ -2292,6 +2297,7 @@ Feature.Build.Title.GetUsers,ユーザーを獲得
 Feature.Build.Title.ManagedPricingAcknowledgement,管理価格設定をオンにしますか？
 Feature.Build.Title.NoMonetizationProducts,ゲーム内で収益を獲得
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
+Feature.Build.Title.PlaytestInviteSendFailed,招待を送信できませんでした
 Feature.Build.Title.Playtesters,プレイテスター
 Feature.Build.Title.PlaytestersOnlyPlay,プレイテスターだけがプレイできます
 Feature.Build.Title.PromoteGame,ゲームを宣伝
@@ -3238,6 +3244,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,信頼する友達を�
 Feature.Friends.TrustedFriend.AddBack.Header,信頼する友達リクエスト
 Feature.Friends.TrustedFriend.Info.Modal.Header,新しい信頼する友達
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,信頼する友達を追加
+Feature.Friends.TrustedFriend.Label.Title,信頼する友達
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}さんが信頼する友達になりました
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信頼する友達が削除されました
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,信頼する友達リクエストが送信されました
@@ -3521,7 +3528,7 @@ Feature.Moments.Label.FeedFailedToLoad,ロードできませんでした
 Feature.Moments.Label.FeedMyMoments,マイモーメント
 Feature.Moments.Label.FeedTrending,トレンド
 Feature.Moments.Label.HowToUseCaptureTitle,切り抜きの使い方
-Feature.Moments.Label.LinkCopied,リンクをコピーしました。
+Feature.Moments.Label.LinkCopied,リンクをコピーしました
 Feature.Moments.Label.LinkCopyFailed,リンクをコピーできませんでした。
 Feature.Moments.Label.ModeratedRodeoBody,このモーメントは、コミュニティ基準に違反しているため削除されました。モーメントを表示し続けるには、ルールを理解し従っていることを確認してください。
 Feature.Moments.Label.MomentDeletedBody,
@@ -4020,6 +4027,7 @@ Feature.SettingsHub.Label.NoConnectionsScreen,つながりを追加して一緒�
 Feature.SettingsHub.Label.NoFriendsPageMessage,友達を追加して一緒に探検しましょう。
 Feature.SettingsHub.Label.NoFriendsScreen,友達を作って一緒に参加できるように招待しよう！
 Feature.SettingsHub.Label.QuitButton,やめる
+Feature.SettingsHub.Label.QuitConfirmation,終了してもよろしいですか？
 Feature.SettingsHub.Label.ReasonForAbuse,規約違反の理由を教えてください。
 Feature.SettingsHub.Label.Report.BlockDisplayName,{DISPLAY_NAME} (@{RBX_NAME}) さんをブロック
 Feature.SettingsHub.Label.Report.OtherActionsHeader,他にできること
@@ -4782,6 +4790,7 @@ InGame.HelpMenu.Label.PlayerScripts,PlayerScripts:
 InGame.HelpMenu.Label.ServerChannel,サーバーチャンネル:
 InGame.HelpMenu.Label.ServerVersion,サーバーバージョン:
 InGame.HelpMenu.LeftArrow,
+InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,
 InGame.HelpMenu.UpArrow,
 InGame.InspectMenu.Action.Cancel,
@@ -4871,6 +4880,13 @@ InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,あなたは現在「{RBX_NA
 InGame.UnknownNamespace.Network,(ネットワーク)
 InGame.UnknownNamespace.Received,受信済み
 InGame.UnknownNamespace.Sent,送付済み
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,{experience_name}のショートカットをデスクトップに追加できませんでした
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,{experience_name}のショートカットをホーム画面に追加できませんでした
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,{experience_name}のショートカットはすでに存在します
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,{experience_name}のショートカットをデスクトップに追加しました
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,{experience_name}のショートカットをホーム画面に追加しました
+InstantApps.Shortcuts.Label.TryAgain,もう一度試す
+InstantApps.Shortcuts.Label.ViewShortcut,ショートカットを表示
 Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,あと {notificationCount}
 Notifications.NotificationStream.Label.AllCaughtUp,通知はありません。

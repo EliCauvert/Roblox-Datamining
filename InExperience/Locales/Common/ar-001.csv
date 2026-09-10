@@ -57,8 +57,6 @@ Amp.Upsell.Message.EmailSent,أرسلنا بريدًا إلكترونيًا إل
 Amp.Upsell.Message.EmailSentPluralParent,أرسلنا بريدًا إلكترونيًا إلى بريد والديك
 Amp.Upsell.Title.AskYourParent,اطلب الإذن من والديك
 Amp.Upsell.Title.RequestSent,تم إرسال الطلب
-Application.Logout.Action.Logout,تسجيل الخروج
-Application.Logout.Message.Confirmation,هل أنت متأكد من أنك تريد تسجيل الخروج؟
 Authentication.AccountSwitch.Action.SwitchAccount,تبديل الحسابات
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,تسجيل دخول سريع
@@ -932,6 +930,8 @@ CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,هل تريد الخروج؟
 CoreScripts.InGameMenu.Traversal.HistoryDescription,انضم إلى الألعاب التي قمت بزيارتها سابقًا
 CoreScripts.InGameMenu.Traversal.LeaveBody,أنت على وشك الخروج من هذه اللعبة والرجوع إلى {PREVIOUS_EXPERIENCE}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
+CoreScripts.InGameMenu.UnlockMore.Description,الدردشة والأصدقاء والمزيد من الألعاب
+CoreScripts.InGameMenu.UnlockMore.Title,افتح المزيد من الميزات على منصّة Roblox
 CoreScripts.InGameMenu.Vibration,اهتزاز
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,لتبديل التنقل في القائمة
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,بعض التجارب تتطلب الضغط
@@ -2033,6 +2033,7 @@ Feature.Build.Label.GamePlays,عدد مرات تشغيل اللعبة
 Feature.Build.Label.GetMoreBuildUsage,احصل على المزيد من استخدام ميزة Build
 Feature.Build.Label.Hi,مرحبًا
 Feature.Build.Label.IconThumbnails,الأيقونة والصور المصغرة
+Feature.Build.Label.Images2D,الصور ثنائية الأبعاد
 Feature.Build.Label.InProgress,قيد التقدم
 Feature.Build.Label.InputNeeded,الإدخال مطلوب
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2064,6 +2065,8 @@ Feature.Build.Label.Purchased,تم الشراء
 Feature.Build.Label.Ready,جاهزة
 Feature.Build.Label.RegionalPricing,التسعير الإقليمي
 Feature.Build.Label.ResetsDaily,تتم إعادة التعيين يوميًا
+Feature.Build.Label.ResetsMonthly,تتم إعادة التعيين شهريًا
+Feature.Build.Label.ResetsWeekly,تتم إعادة التعيين أسبوعيًا
 Feature.Build.Label.RestoredVersion,تمت استعادة {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,بحث
@@ -2071,7 +2074,6 @@ Feature.Build.Label.SearchAssets,البحث في الأصول
 Feature.Build.Label.SearchGames,البحث في الألعاب
 Feature.Build.Label.SearchTasks,البحث في المهام
 Feature.Build.Label.SelectOption,حدّد خيارًا
-Feature.Build.Label.ShareAddedFriends,مشاركة مع الأصدقاء الذين أضفتهم
 Feature.Build.Label.Shared,تمت المشاركة
 Feature.Build.Label.ShopButton,زر المتجر
 Feature.Build.Label.ShopUi,واجهة المستخدم للمتجر
@@ -2208,7 +2210,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,لا يوجد سجل إصدارات حتى الآن.
 Feature.Build.Message.OneTaskCompleted,تم إكمال مهمة واحدة
 Feature.Build.Message.OutOfBuildUsage,لقد نفد رصيدك من استخدام ميزة Build. اعرض خياراتك لاستخدام عملات Robux لمواصلة الإنشاء.
+Feature.Build.Message.PlaytestInviteSendFailedBody,تعذر إرسال رابط دعوة الدردشة إلى المستخدمين التاليين:
+Feature.Build.Message.PlaytestInviteSendFailedHint,"يُرجى استخدام زر ""مشاركة"" للحصول على الرابط."
 Feature.Build.Message.PlaytestersAdded,تمت إضافة {INVITED_COUNT} من أصل {MAX_INVITES} من مختبري اللعب
+Feature.Build.Message.PrivatePlaytestInvite,تمت دعوتك من قِبل {username} إلى اختبار لعب خاص لتجربة {experienceName}
 Feature.Build.Message.PublicPublishFailed,تم نشر لعبتك، ولكن تعذَّر جعلها عامة. حاول مرة أخرى.
 Feature.Build.Message.PublishExpandAudience,يمكنك النشر لتوسيع نطاق جمهورك
 Feature.Build.Message.PublishNotReverted,لم يتم التراجع عن عملية النشر. حاوِل مرة أخرى.
@@ -2272,6 +2277,7 @@ Feature.Build.Title.GetUsers,الحصول على المستخدمين
 Feature.Build.Title.ManagedPricingAcknowledgement,هل تريد تشغيل التسعير المُدار؟
 Feature.Build.Title.NoMonetizationProducts,ابدأ الكسب في لعبتك
 Feature.Build.Title.NoRobuxForUsage,لم يتبقَ أي عملات Robux لاستخدام ميزة Build
+Feature.Build.Title.PlaytestInviteSendFailed,تعذَّر إرسال الدعوات
 Feature.Build.Title.Playtesters,مختبرو اللعب
 Feature.Build.Title.PlaytestersOnlyPlay,يمكن لمختبري اللعب فقط تشغيل اللعبة
 Feature.Build.Title.PromoteGame,روّج للعبتك
@@ -3218,6 +3224,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,إزالة صديق م�
 Feature.Friends.TrustedFriend.AddBack.Header,طلب صديق موثوق
 Feature.Friends.TrustedFriend.Info.Modal.Header,صديق موثوق جديد
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,إضافة صديق موثوق
+Feature.Friends.TrustedFriend.Label.Title,صديق موثوق
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,أصبح {name} الآن من أصدقائك الموثوقين
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,تم إزالة الصديق الموثوق
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,تم إرسال طلب إضافة كصديق موثوق
@@ -3501,7 +3508,7 @@ Feature.Moments.Label.FeedFailedToLoad,تعذَّر تحميل الموجز
 Feature.Moments.Label.FeedMyMoments,لحظاتي
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,كيفية استخدام اللقطات
-Feature.Moments.Label.LinkCopied,تم نسخ الرابط.
+Feature.Moments.Label.LinkCopied,تم نسخ الرابط
 Feature.Moments.Label.LinkCopyFailed,تعذّر نسخ الرابط.
 Feature.Moments.Label.ModeratedRodeoBody,أزلنا هذه اللحظة لأنها تنتهك معايير مجتمعنا. ولضمان استمرار ظهور لحظاتك، احرص على معرفة القواعد واتباعها.
 Feature.Moments.Label.MomentDeletedBody,
@@ -4001,6 +4008,7 @@ Feature.SettingsHub.Label.NoConnectionsScreen,أنشئ جهات اتصال حت�
 Feature.SettingsHub.Label.NoFriendsPageMessage,أضف أصدقاءك حتى تتمكن من الاستكشاف واللعب معهم.
 Feature.SettingsHub.Label.NoFriendsScreen,أنشئ صداقات لكي تتمكن من دعوتهم للانضمام إليك.
 Feature.SettingsHub.Label.QuitButton,إنهاء
+Feature.SettingsHub.Label.QuitConfirmation,هل أنت متأكد من أنك تريد الإنهاء؟
 Feature.SettingsHub.Label.ReasonForAbuse,سبب الإساءة؟
 Feature.SettingsHub.Label.Report.BlockDisplayName,حظر {DISPLAY_NAME} (@{RBX_NAME})
 Feature.SettingsHub.Label.Report.OtherActionsHeader,خطوات أخرى يمكنك اتخاذها
@@ -4763,6 +4771,7 @@ InGame.HelpMenu.Label.PlayerScripts,PlayerScripts:
 InGame.HelpMenu.Label.ServerChannel,قناة الخادم:
 InGame.HelpMenu.Label.ServerVersion,إصدار الخادم:
 InGame.HelpMenu.LeftArrow,السهم الأيسر
+InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,السهم الأيمن
 InGame.HelpMenu.UpArrow,سهم للأعلى
 InGame.InspectMenu.Action.Cancel,
@@ -4852,6 +4861,13 @@ InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,صرت الآن عضوًا �
 InGame.UnknownNamespace.Network,(الشبكة)
 InGame.UnknownNamespace.Received,تم استلامها
 InGame.UnknownNamespace.Sent,أرسلت
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,تعذَّرت إضافة {experience_name} إلى سطح المكتب
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,تعذَّرت إضافة {experience_name} إلى الشاشة الرئيسية
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,اختصار تجربة {experience_name} موجود بالفعل
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,تمت إضافة {experience_name} إلى سطح المكتب بنجاح
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,تمت إضافة {experience_name} إلى الشاشة الرئيسية بنجاح
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,عرض الاختصار
 Notifications.NotificationStream.Bundle.ShowLess,عرض أقل
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} إضافية
 Notifications.NotificationStream.Label.AllCaughtUp,لقد أتممت كل المهام!

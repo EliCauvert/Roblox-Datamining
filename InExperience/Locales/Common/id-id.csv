@@ -74,8 +74,6 @@ Amp.Upsell.Message.EmailSent,Kami telah mengirim email ke {parentEmail}
 Amp.Upsell.Message.EmailSentPluralParent,Kami telah mengirim email ke email orang tuamu yang terdaftar di akunmu
 Amp.Upsell.Title.AskYourParent,Minta izin orang tua
 Amp.Upsell.Title.RequestSent,Permintaan terkirim
-Application.Logout.Action.Logout,Log Out
-Application.Logout.Message.Confirmation,Kamu yakin ingin log out?
 Authentication.AccountSwitch.Action.SwitchAccount,Beralih Akun
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Beralih akun
 Authentication.CrossDevice.Heading.QuickLogin,Log In Cepat
@@ -949,6 +947,8 @@ CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Ingin keluar?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Gabung ke game yang dikunjungi sebelumnya
 CoreScripts.InGameMenu.Traversal.LeaveBody,Kamu akan keluar dari game ini dan kembali ke {PREVIOUS_EXPERIENCE}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
+CoreScripts.InGameMenu.UnlockMore.Description,"Chat, teman, dan lebih banyak game"
+CoreScripts.InGameMenu.UnlockMore.Title,Buka lebih banyak fitur Roblox
 CoreScripts.InGameMenu.Vibration,Getaran
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,perlu ditekan untuk menampilkan menu navigasi
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,"Di beberapa pengalaman virtual,"
@@ -2053,6 +2053,7 @@ Feature.Build.Label.GamePlays,Game dimainkan
 Feature.Build.Label.GetMoreBuildUsage,Dapatkan lebih banyak kuota penggunaan Build
 Feature.Build.Label.Hi,Hai
 Feature.Build.Label.IconThumbnails,Ikon & thumbnail
+Feature.Build.Label.Images2D,Gambar 2D
 Feature.Build.Label.InProgress,Sedang berlangsung
 Feature.Build.Label.InputNeeded,Input diperlukan
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2084,6 +2085,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Siap
 Feature.Build.Label.RegionalPricing,Harga regional
 Feature.Build.Label.ResetsDaily,Reset setiap hari
+Feature.Build.Label.ResetsMonthly,Direset setiap bulan
+Feature.Build.Label.ResetsWeekly,Direset setiap minggu
 Feature.Build.Label.RestoredVersion,{VERSION} dipulihkan
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2091,7 +2094,6 @@ Feature.Build.Label.SearchAssets,Cari aset
 Feature.Build.Label.SearchGames,Cari game
 Feature.Build.Label.SearchTasks,Cari tugas
 Feature.Build.Label.SelectOption,Pilih opsi
-Feature.Build.Label.ShareAddedFriends,Bagikan kepada teman yang kamu tambahkan
 Feature.Build.Label.Shared,Dibagikan
 Feature.Build.Label.ShopButton,Tombol Belanja
 Feature.Build.Label.ShopUi,UI Belanja
@@ -2228,7 +2230,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Belum ada riwayat versi.
 Feature.Build.Message.OneTaskCompleted,1 tugas selesai
 Feature.Build.Message.OutOfBuildUsage,Kuota penggunaan Build-mu sudah habis. Lihat opsi untuk menggunakan Robux agar bisa terus berkreasi.
+Feature.Build.Message.PlaytestInviteSendFailedBody,Kamu tidak bisa mengirim link chat undangan kepada pengguna berikut:
+Feature.Build.Message.PlaytestInviteSendFailedHint,Gunakan tombol Bagikan untuk mendapatkan link.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} dari {MAX_INVITES} playtester ditambahkan
+Feature.Build.Message.PrivatePlaytestInvite,{username} mengundangmu ke playtest privat {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Game-mu telah dipublikasikan, tetapi tidak dapat dibuat publik. Coba lagi."
 Feature.Build.Message.PublishExpandAudience,Publikasikan untuk memperluas audiensmu
 Feature.Build.Message.PublishNotReverted,Publikasimu gagal dibatalkan. Coba lagi.
@@ -2292,6 +2297,7 @@ Feature.Build.Title.GetUsers,Dapatkan pengguna
 Feature.Build.Title.ManagedPricingAcknowledgement,Aktifkan Harga Terkelola?
 Feature.Build.Title.NoMonetizationProducts,Mulai hasilkan pendapatan di game-mu
 Feature.Build.Title.NoRobuxForUsage,Tidak ada Robux yang tersisa untuk penggunaan Build
+Feature.Build.Title.PlaytestInviteSendFailed,Tidak dapat mengirim undangan
 Feature.Build.Title.Playtesters,Playtester
 Feature.Build.Title.PlaytestersOnlyPlay,Hanya playtester yang bisa memainkannya
 Feature.Build.Title.PromoteGame,Promosikan game-mu
@@ -3236,6 +3242,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Hapus teman tepercaya
 Feature.Friends.TrustedFriend.AddBack.Header,Permintaan pertemanan tepercaya
 Feature.Friends.TrustedFriend.Info.Modal.Header,Teman tepercaya baru
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Tambahkan teman tepercaya
+Feature.Friends.TrustedFriend.Label.Title,Teman tepercaya
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} sekarang adalah teman tepercaya
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Teman tepercaya dihapus
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Permintaan teman tepercaya terkirim
@@ -3519,7 +3526,7 @@ Feature.Moments.Label.FeedFailedToLoad,Feed gagal di-load
 Feature.Moments.Label.FeedMyMoments,Moment Saya
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,Cara menggunakan Media
-Feature.Moments.Label.LinkCopied,Link disalin.
+Feature.Moments.Label.LinkCopied,Link disalin
 Feature.Moments.Label.LinkCopyFailed,Gagal menyalin link.
 Feature.Moments.Label.ModeratedRodeoBody,"Kami menghapus Moment ini karena bertentangan dengan Standar Komunitas kami. Agar Moment-mu tetap terlihat, pastikan kamu memahami dan mematuhi peraturan."
 Feature.Moments.Label.MomentDeletedBody,
@@ -4019,6 +4026,7 @@ Feature.SettingsHub.Label.NoConnectionsScreen,Dapatkan Koneksi agar kamu bisa me
 Feature.SettingsHub.Label.NoFriendsPageMessage,Tambahkan teman agar kamu dapat menjelajah bersama.
 Feature.SettingsHub.Label.NoFriendsScreen,Bertemanlah agar kamu dapat mengundang mereka untuk bergabung dengan kamu.
 Feature.SettingsHub.Label.QuitButton,
+Feature.SettingsHub.Label.QuitConfirmation,Yakin ingin keluar?
 Feature.SettingsHub.Label.ReasonForAbuse,Alasan Penyalahgunaan?
 Feature.SettingsHub.Label.Report.BlockDisplayName,Blokir {DISPLAY_NAME} (@{RBX_NAME})
 Feature.SettingsHub.Label.Report.OtherActionsHeader,Langkah lain yang dapat kamu lakukan
@@ -4781,6 +4789,7 @@ InGame.HelpMenu.Label.PlayerScripts,PlayerScripts:
 InGame.HelpMenu.Label.ServerChannel,Channel Server:
 InGame.HelpMenu.Label.ServerVersion,Versi Server:
 InGame.HelpMenu.LeftArrow,Panah Kiri
+InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,Panah Kanan
 InGame.HelpMenu.UpArrow,Panah Atas
 InGame.InspectMenu.Action.Cancel,
@@ -4870,6 +4879,13 @@ InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,Kamu sekarang berada di tim 
 InGame.UnknownNamespace.Network,(Jaringan)
 InGame.UnknownNamespace.Received,Menerima
 InGame.UnknownNamespace.Sent,
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,Gagal menambahkan {experience_name} ke desktop
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,Gagal menambahkan {experience_name} ke layar beranda
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,Pintasan ke {experience_name} sudah ada
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,Berhasil menambahkan {experience_name} ke desktop
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,Berhasil menambahkan {experience_name} ke layar beranda
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,Lihat Pintasan
 Notifications.NotificationStream.Bundle.ShowLess,Lebih sedikit
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} lainnya
 Notifications.NotificationStream.Label.AllCaughtUp,Tidak ada notifikasi.

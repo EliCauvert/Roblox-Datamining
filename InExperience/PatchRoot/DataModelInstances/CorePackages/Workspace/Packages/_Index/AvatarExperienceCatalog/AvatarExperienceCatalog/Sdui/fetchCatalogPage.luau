@@ -9,13 +9,13 @@ local avatarScreen = require(parent.AvatarExperienceNavigation).Enums.AvatarScre
 local fFlagAXFetchCatalogPageReturnsPromise = require(parent.AvatarExperienceFlags).FFlagAXFetchCatalogPageReturnsPromise
 local getCatalogPageUrlModule = require(script.Parent.Utils.getCatalogPageUrl)
 local getCatalogConfigKeyModule = require(script.Parent.Utils.getCatalogConfigKey)
-local normalizeScreenSizeForWireModule = require(script.Parent.Utils.normalizeScreenSizeForWire)
+local normalizeScreenSizeForWire = require(parent.AvatarExperienceCommon).Utils.normalizeScreenSizeForWire
 
 return function(p1, p2, p3)
-	-- upvalues: parent (ref), normalizeScreenSizeForWireModule (ref), getSduiApiStore (ref), sduiResponseType (ref), getCatalogPageUrlModule (ref), avatarScreen (ref), getCatalogConfigKeyModule (ref), sduiApiStorePostConfigContentType (ref), fFlagAXFetchCatalogPageReturnsPromise (ref), promiseModule (ref)
+	-- upvalues: parent (ref), normalizeScreenSizeForWire (ref), getSduiApiStore (ref), sduiResponseType (ref), getCatalogPageUrlModule (ref), avatarScreen (ref), getCatalogConfigKeyModule (ref), sduiApiStorePostConfigContentType (ref), fFlagAXFetchCatalogPageReturnsPromise (ref), promiseModule (ref)
 	local marketplaceCatalogPage = require(parent.ServiceContractsProto).apppageplatform.marketplacecatalog.marketplace_catalog_page
 	local cloned = table.clone(p1)
-	cloned.screenSize = normalizeScreenSizeForWireModule(p1.screenSize)
+	cloned.screenSize = normalizeScreenSizeForWire(p1.screenSize)
 	
 	return if fFlagAXFetchCatalogPageReturnsPromise then getSduiApiStore().fetchIfNeeded({
 		responseType = sduiResponseType.Protobuf,

@@ -20,7 +20,6 @@ local enums = foundationModule.Enums
 local stateLayerAffordance = enums.StateLayerAffordance
 local getFFlagLuaAppEnableOpenTypeSupport = require(parent.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
 local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
-local fixFriendsLandingTileGamepadSelection = game:DefineFastFlag("FixFriendsLandingTileGamepadSelection", false)
 local t = {
 	userPresence = nil,
 	index = 1,
@@ -31,7 +30,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: llama (ref), t (ref), useStyle (ref), useTokens (ref), useLocalization (ref), react (ref), view (ref), stateLayerAffordance (ref), playerTile (ref), fixFriendsLandingTileGamepadSelection (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), skeleton (ref), text (ref), verifiedBadgesModule (ref), fFlagEnableBlackbirdCheck (ref), foundationModule (ref), enums (ref), playerContext (ref)
+	-- upvalues: llama (ref), t (ref), useStyle (ref), useTokens (ref), useLocalization (ref), react (ref), view (ref), stateLayerAffordance (ref), playerTile (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), skeleton (ref), text (ref), verifiedBadgesModule (ref), fFlagEnableBlackbirdCheck (ref), foundationModule (ref), enums (ref), playerContext (ref)
 	local var1 = llama.Dictionary.join(t, p1 or {})
 	local var2 = useStyle()
 	local var3 = useTokens()
@@ -62,12 +61,12 @@ return function(p1)
 			react.createElement(playerTile, {
 				title = "",
 				subtitle = "",
+				Selectable = false,
 				tileSize = UDim2.fromScale(1, 1),
 				thumbnail = var1.user.thumbnail,
 				onActivated = var1.openPlayerProfile,
 				forwardedRef = var1.playerTileRef,
 				buttons = var1.buttons,
-				Selectable = if fixFriendsLandingTileGamepadSelection then false else true,
 				openTypeFeatures = if getFFlagLuaAppEnableOpenTypeSupport() then openTypeSupport:getUserNameStylisticAlternative() else nil
 			})
 		})
@@ -132,7 +131,7 @@ return function(p1)
 			tag = "content-default auto-xy text-align-x-left",
 			LayoutOrder = 2,
 			fontStyle = var3.Typography.BodySmall,
-			Text = " \226\128\162 " .. var9.trustedText
+			Text = " \226\128\162 " .. var8.trustedText
 		})))
 	})
 	t_4.RelevancyContainer = react.createElement(view, {
@@ -141,6 +140,7 @@ return function(p1)
 	}, {
 		ContextualPresence = var1.relevancyInfo and (var1.relevancyInfo.text and react.createElement(playerContext, {
 			layoutOrder = 2,
+			Selectable = false,
 			fontStyle = var2.Font.CaptionBody,
 			icon = icon,
 			iconColor = iconColor,
@@ -148,8 +148,7 @@ return function(p1)
 			iconTransparency = iconTransparency,
 			text = if var1.relevancyInfo then var1.relevancyInfo.text else nil,
 			textColorStyle = textDefault,
-			onActivated = var1.openPlayerProfile,
-			Selectable = if fixFriendsLandingTileGamepadSelection then false else nil
+			onActivated = var1.openPlayerProfile
 		}))
 	})
 	t_2.TextColumn = createElement_1(view, t_3, t_4)

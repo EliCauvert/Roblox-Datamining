@@ -1,4 +1,5 @@
 ﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local sharedFlagsModule = require(purchasePrompt.Parent.SharedFlags)
 local contentProviderService = game:GetService("ContentProvider")
 local marketplaceService = game:GetService("MarketplaceService")
 local playersService = game:GetService("Players")
@@ -13,6 +14,7 @@ end)
 local upsellFlowModule = require(purchasePrompt.Enums.UpsellFlow)
 local getUpsellFlowModule = require(purchasePrompt.NativeUpsell.getUpsellFlow)
 local getFFlagEnablePaymentSessionIdInRobuxPurchaseModule = require(purchasePrompt.Flags.GetFFlagEnablePaymentSessionIdInRobuxPurchase)
+local fFlagEnableBonusJwtInShop = sharedFlagsModule.FFlagEnableBonusJwtInShop
 
 local function _()
 	-- upvalues: contentProviderService (ref)
@@ -37,48 +39,41 @@ local _ = function(p1, p2)
 	webViewService:OpenWindow(p1, "", true)
 end
 
-return function(p1)
-	-- upvalues: getFFlagEnablePaymentSessionIdInRobuxPurchaseModule (ref), runService (ref), userInputService (ref), getUpsellFlowModule (ref), upsellFlowModule (ref), playersService (ref), marketplaceService (ref), var1 (write), contentProviderService (ref), webViewService (ref)
+local function startPurchase(p1, p2)
+	-- upvalues: userInputService (ref), getUpsellFlowModule (ref), upsellFlowModule (ref), playersService (ref), marketplaceService (ref), var1 (write), contentProviderService (ref), webViewService (ref)
 	local mobileProductId = p1.mobileProductId
 	local productId = p1.productId
-	local var2 = if getFFlagEnablePaymentSessionIdInRobuxPurchaseModule() then p1.paymentSessionId or "" else ""
+	local var2 = getUpsellFlowModule(userInputService:GetPlatform())
 	
-	if runService:IsStudio() then return end
-	local var3 = getUpsellFlowModule(userInputService:GetPlatform())
-	
-	if var3 == upsellFlowModule.Mobile then
+	if var2 == upsellFlowModule.Mobile then
 		local localPlayer = playersService.LocalPlayer
 		local nativePurchaseWithLocalPlayerEngineFeature = game:GetEngineFeature("NativePurchaseWithLocalPlayer")
 		local promptNativePurchaseWithPaymentSessionIdEngineFeature = game:GetEngineFeature("PromptNativePurchaseWithPaymentSessionId")
 		pcall(function()
-			-- upvalues: marketplaceService (copy), nativePurchaseWithLocalPlayerEngineFeature (ref), promptNativePurchaseWithPaymentSessionIdEngineFeature (ref), mobileProductId (ref), var2 (ref), localPlayer (ref)
+			-- upvalues: marketplaceService (copy), nativePurchaseWithLocalPlayerEngineFeature (ref), promptNativePurchaseWithPaymentSessionIdEngineFeature (ref), mobileProductId (ref), p2 (ref), localPlayer (ref), p1 (ref)
 			local promptNativePurchaseWithLocalPlayerWithPaymentSessionId = marketplaceService.PromptNativePurchaseWithLocalPlayerWithPaymentSessionId
 			local promptNativePurchaseWithLocalPlayer = marketplaceService.PromptNativePurchaseWithLocalPlayer
 			local promptNativePurchaseWithPaymentSessionId = marketplaceService.PromptNativePurchaseWithPaymentSessionId
 			local promptNativePurchase = marketplaceService.PromptNativePurchase
 			
 			if nativePurchaseWithLocalPlayerEngineFeature and promptNativePurchaseWithPaymentSessionIdEngineFeature and typeof(promptNativePurchaseWithLocalPlayerWithPaymentSessionId) == "function" then
-				promptNativePurchaseWithLocalPlayerWithPaymentSessionId(marketplaceService, mobileProductId, var2)
-				
-				return
+				promptNativePurchaseWithLocalPlayerWithPaymentSessionId(marketplaceService, mobileProductId, p2)
 			elseif nativePurchaseWithLocalPlayerEngineFeature and typeof(promptNativePurchaseWithLocalPlayer) == "function" then
 				promptNativePurchaseWithLocalPlayer(marketplaceService, mobileProductId)
-				
-				return
 			elseif promptNativePurchaseWithPaymentSessionIdEngineFeature and typeof(promptNativePurchaseWithPaymentSessionId) == "function" then
-				promptNativePurchaseWithPaymentSessionId(marketplaceService, localPlayer, mobileProductId, var2)
-				
-				return
+				promptNativePurchaseWithPaymentSessionId(marketplaceService, localPlayer, mobileProductId, p2)
 			elseif typeof(promptNativePurchase) == "function" then
 				promptNativePurchase(marketplaceService, localPlayer, mobileProductId)
-				
-				return
+			else
+				error("MarketplaceService has no PromptNativePurchase APIs bound")
 			end
-			error("MarketplaceService has no PromptNativePurchase APIs bound")
+			if p1.onNativePurchaseLaunched ~= nil then
+				p1.onNativePurchaseLaunched()
+			end
 		end)
 		
 		return
-	elseif var3 == upsellFlowModule.Xbox then
+	elseif var2 == upsellFlowModule.Xbox then
 		if var1 == nil then
 			return
 		end
@@ -88,15 +83,15 @@ return function(p1)
 		end)
 		
 		return
-	elseif var3 == upsellFlowModule.Web then
+	elseif var2 == upsellFlowModule.Web then
 		if productId == nil then return end
-		local var4 = ("%supgrades/paymentmethods?ap=%s"):format(string.gsub(contentProviderService.BaseUrl:lower(), "/m%.", "/www."), tostring(productId))
+		local var3 = ("%supgrades/paymentmethods?ap=%s"):format(string.gsub(contentProviderService.BaseUrl:lower(), "/m%.", "/www."), tostring(productId))
 		
-		if var2 ~= "" then
-			var4 = ("%s&paymentSessionId=%s"):format(var4, var2)
+		if p2 ~= "" then
+			var3 = ("%s&paymentSessionId=%s"):format(var3, p2)
 		end
 		pcall(function()
-			-- upvalues: var4 (write), p1 (ref), webViewService (copy)
+			-- upvalues: var3 (write), p1 (ref), webViewService (copy)
 			local onWebViewClosed = p1.onWebViewClosed
 			local onWindowClosedConnection = nil
 			onWindowClosedConnection = webViewService.OnWindowClosed:Connect(function()
@@ -111,7 +106,36 @@ return function(p1)
 					onWebViewClosed()
 				end
 			end)
-			webViewService:OpenWindow(var4, "", true)
+			webViewService:OpenWindow(var3, "", true)
 		end)
+	end
+end
+
+return function(p1)
+	-- upvalues: getFFlagEnablePaymentSessionIdInRobuxPurchaseModule (ref), runService (ref), fFlagEnableBonusJwtInShop (ref), getUpsellFlowModule (ref), userInputService (ref), upsellFlowModule (ref), startPurchase (ref)
+	local var2 = if getFFlagEnablePaymentSessionIdInRobuxPurchaseModule() then p1.paymentSessionId or "" else ""
+	
+	if runService:IsStudio() then
+		return nil
+	elseif fFlagEnableBonusJwtInShop then
+		local var3 = getUpsellFlowModule(userInputService:GetPlatform())
+		local var4 = var3 ~= upsellFlowModule.Mobile and var3 ~= upsellFlowModule.Web
+		local bonusJwt = p1.bonusJwt
+		local redeemBonusToken = p1.redeemBonusToken
+		
+		if var4 or typeof(bonusJwt) ~= "string" or (bonusJwt == "" or redeemBonusToken == nil) then
+			startPurchase(p1, var2)
+			
+			return nil
+		end
+		local ok, status = pcall(function()
+			-- upvalues: redeemBonusToken (ref), bonusJwt (ref)
+			return redeemBonusToken(bonusJwt, game.GameId)
+		end)
+		
+		return if ok then if typeof(status) == "table" and typeof(status.andThen) == "function" then status:andThen(function(p2)
+			-- upvalues: startPurchase (copy), p1 (ref)
+			startPurchase(p1, if typeof(p2) == "string" then p2 else "")
+		end) else nil else nil
 	end
 end

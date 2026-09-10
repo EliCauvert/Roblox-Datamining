@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("RedeemBonusTokenTimeoutMs", 5000)

@@ -28,6 +28,7 @@ return function(p1)
 				robuxPackages = item.robuxPackages,
 				featuredRobuxPackage = item.featuredRobuxPackage,
 				paymentSessionId = item.paymentSessionId,
+				bonusJwt = item.bonusJwt,
 				itemsPerRow = itemsPerRow,
 				onCategoryActivated = p1.onCategoryActivated,
 				onItemActivated = p1.onItemActivated,

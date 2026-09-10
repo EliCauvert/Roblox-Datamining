@@ -1,7 +1,8 @@
-﻿local parent = script:FindFirstAncestor("Home").Parent
+﻿local home = script:FindFirstAncestor("Home")
+local parent = home.Parent
 local var1 = require(parent.UrlBuilder).UrlBuilder.new({
-	path = "discovery-api/v2/home-page",
-	base = require(parent.Http).Url.APIS_URL
+	base = require(parent.Http).Url.APIS_URL,
+	path = require(home.HomeConstants).ApiName
 })
 
 return function()

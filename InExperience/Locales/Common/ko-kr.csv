@@ -74,8 +74,6 @@ Amp.Upsell.Message.EmailSent,{parentEmail}(으)로 이메일이 전송되었습�
 Amp.Upsell.Message.EmailSentPluralParent,연결된 보호자 이메일 주소로 이메일이 전송되었습니다
 Amp.Upsell.Title.AskYourParent,보호자에게 요청하세요
 Amp.Upsell.Title.RequestSent,요청 전송 완료
-Application.Logout.Action.Logout,로그아웃
-Application.Logout.Message.Confirmation,정말로 로그아웃할까요?
 Authentication.AccountSwitch.Action.SwitchAccount,계정 전환
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,빠른 로그인
@@ -948,6 +946,8 @@ CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,
 CoreScripts.InGameMenu.Traversal.HistoryDescription,이전에 방문한 게임에 참가
 CoreScripts.InGameMenu.Traversal.LeaveBody,이 체험에서 나가고 {PREVIOUS_EXPERIENCE}(으)로 돌아갑니다.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
+CoreScripts.InGameMenu.UnlockMore.Description,"채팅, 친구, 더 많은 게임"
+CoreScripts.InGameMenu.UnlockMore.Title,더 다양한 Roblox 기능을 이용하세요
 CoreScripts.InGameMenu.Vibration,진동 
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,을 눌러야 합니다
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,일부 체험에서는 메뉴 탐색 전환을 위해
@@ -2052,6 +2052,7 @@ Feature.Build.Label.GamePlays,게임 플레이 횟수
 Feature.Build.Label.GetMoreBuildUsage,Build 사용량 더 구매하기
 Feature.Build.Label.Hi,안녕하세요
 Feature.Build.Label.IconThumbnails,아이콘 및 섬네일
+Feature.Build.Label.Images2D,2D 이미지
 Feature.Build.Label.InProgress,진행 중
 Feature.Build.Label.InputNeeded,입력 필요
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2083,6 +2084,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,준비
 Feature.Build.Label.RegionalPricing,지역별 가격
 Feature.Build.Label.ResetsDaily,매일 재설정
+Feature.Build.Label.ResetsMonthly,매월 초기화
+Feature.Build.Label.ResetsWeekly,매주 초기화
 Feature.Build.Label.RestoredVersion,{VERSION} 복원됨
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2090,7 +2093,6 @@ Feature.Build.Label.SearchAssets,애셋 검색
 Feature.Build.Label.SearchGames,게임 검색
 Feature.Build.Label.SearchTasks,작업 검색
 Feature.Build.Label.SelectOption,옵션 선택
-Feature.Build.Label.ShareAddedFriends,추가한 친구와 공유
 Feature.Build.Label.Shared,공유 완료
 Feature.Build.Label.ShopButton,상점 버튼
 Feature.Build.Label.ShopUi,상점 UI
@@ -2227,7 +2229,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,아직 버전 기록이 없습니다.
 Feature.Build.Message.OneTaskCompleted,1개 작업 완료
 Feature.Build.Message.OutOfBuildUsage,Build 사용량이 소진되었습니다. 계속 제작하려면 Robux 사용 옵션을 확인하세요.
+Feature.Build.Message.PlaytestInviteSendFailedBody,다음 사용자에게 초대 채팅 링크를 보낼 수 없습니다:
+Feature.Build.Message.PlaytestInviteSendFailedHint,공유 버튼을 사용하여 링크를 받으세요.
 Feature.Build.Message.PlaytestersAdded,{MAX_INVITES}명 중 {INVITED_COUNT}명의 플레이테스터가 추가됨
+Feature.Build.Message.PrivatePlaytestInvite,{username} 님이 나를 {experienceName}의 비공개 플레이테스트에 초대했습니다
 Feature.Build.Message.PublicPublishFailed,게임이 게시되었지만 공개되지 못했습니다. 다시 시도하세요.
 Feature.Build.Message.PublishExpandAudience,오디언스를 확대하려면 게시하세요
 Feature.Build.Message.PublishNotReverted,게시한 내용을 되돌리지 못했습니다. 다시 시도하세요.
@@ -2291,6 +2296,7 @@ Feature.Build.Title.GetUsers,사용자 가져오기
 Feature.Build.Title.ManagedPricingAcknowledgement,관리형 가격 책정을 켜시겠습니까?
 Feature.Build.Title.NoMonetizationProducts,게임 내에서 수익을 올리세요
 Feature.Build.Title.NoRobuxForUsage,Build 사용량을 위한 Robux가 남아 있지 않음
+Feature.Build.Title.PlaytestInviteSendFailed,초대를 보낼 수 없음
 Feature.Build.Title.Playtesters,플레이테스터
 Feature.Build.Title.PlaytestersOnlyPlay,플레이테스터만 플레이할 수 있습니다
 Feature.Build.Title.PromoteGame,게임을 홍보하세요
@@ -3238,6 +3244,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,신뢰할 수 있는 �
 Feature.Friends.TrustedFriend.AddBack.Header,신뢰할 수 있는 친구 요청
 Feature.Friends.TrustedFriend.Info.Modal.Header,신뢰할 수 있는 새로운 친구
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,신뢰할 수 있는 친구 추가하기
+Feature.Friends.TrustedFriend.Label.Title,신뢰할 수 있는 친구
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} 님은 이제 신뢰할 수 있는 친구입니다
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,신뢰할 수 있는 친구에서 삭제함
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,신뢰할 수 있는 친구 요청을 보냄
@@ -3522,7 +3529,7 @@ Feature.Moments.Label.FeedFailedToLoad,피드를 불러오지 못했습니다.
 Feature.Moments.Label.FeedMyMoments,내 모멘트
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,캡처 사용 방법
-Feature.Moments.Label.LinkCopied,링크를 복사했습니다.
+Feature.Moments.Label.LinkCopied,링크 복사됨
 Feature.Moments.Label.LinkCopyFailed,링크를 복사하지 못했습니다.
 Feature.Moments.Label.ModeratedRodeoBody,이 모멘트는 당사 커뮤니티 규정에 위배되므로 삭제되었습니다. 모멘트가 계속 표시되도록 하려면 규정을 숙지하고 준수하세요.
 Feature.Moments.Label.MomentDeletedBody,
@@ -4022,6 +4029,7 @@ Feature.SettingsHub.Label.NoConnectionsScreen,인맥을 맺고 사람들을 초�
 Feature.SettingsHub.Label.NoFriendsPageMessage,친구를 추가해 함께 탐험하세요.
 Feature.SettingsHub.Label.NoFriendsScreen,친구를 사귄 후 초대해 함께 방문하세요!
 Feature.SettingsHub.Label.QuitButton,종료
+Feature.SettingsHub.Label.QuitConfirmation,정말 종료하시겠습니까?
 Feature.SettingsHub.Label.ReasonForAbuse,규정 위반 이유
 Feature.SettingsHub.Label.Report.BlockDisplayName,{DISPLAY_NAME}(@{RBX_NAME})님 차단
 Feature.SettingsHub.Label.Report.OtherActionsHeader,취할 수 있는 기타 조치
@@ -4784,6 +4792,7 @@ InGame.HelpMenu.Label.PlayerScripts,PlayerScripts:
 InGame.HelpMenu.Label.ServerChannel,서버 채널:
 InGame.HelpMenu.Label.ServerVersion,서버 버전:
 InGame.HelpMenu.LeftArrow,
+InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,
 InGame.HelpMenu.UpArrow,
 InGame.InspectMenu.Action.Cancel,
@@ -4873,6 +4882,13 @@ InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,현재 '{RBX_NAME}'팀에 �
 InGame.UnknownNamespace.Network,(네트워크)
 InGame.UnknownNamespace.Received,받음
 InGame.UnknownNamespace.Sent,보냄
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,{experience_name} 데스크톱에 추가 실패
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,홈 화면에 {experience_name} 추가 실패
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,{experience_name} 바로 가기가 이미 존재합니다
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,{experience_name} 데스크톱에  추가 완료
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,홈 화면에 {experience_name} 추가 완료
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,바로 가기 보기
 Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount}개 더 보기
 Notifications.NotificationStream.Label.AllCaughtUp,모두 확인했습니다.

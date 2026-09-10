@@ -63,13 +63,12 @@ local fFlagExtendScrollingFramesBySafeInsets = require(parent.SharedFlags).FFlag
 local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
 local fStringIsUserInTcEligibleCountryAmpFeature = require(parent.SharedFlags).FStringIsUserInTcEligibleCountryAmpFeature
 local fStringCanAccessTrustedContactsAmpNameSpace = require(parent.SharedFlags).FStringCanAccessTrustedContactsAmpNameSpace
-local fixSearchYNavigation = game:DefineFastFlag("FixSearchYNavigation", false)
 local fixFriendsLandingRightMargin = game:DefineFastFlag("FixFriendsLandingRightMargin", false)
 local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDefaultSelection
 local fFlagAddFriendsPageCapitalization = require(parent.SharedFlags).FFlagAddFriendsPageCapitalization
 
 return function(p1)
-	-- upvalues: useLocalization (ref), fFlagAddFriendsPageCapitalization (ref), reactModule (ref), friendsLandingContextModule (ref), friendsLandingAnalyticsModule (ref), useNavigation (ref), useDesignTokens (ref), useUiModeInfo (ref), fFlagFixScalingOnFriendsLandingModule (ref), useTokens (ref), useFocusGuiObject (ref), fFlagFixCohubUiBugs (ref), getPageMargin (ref), useScreenSize (ref), uiMode (ref), focusNavigationUtilsModule (ref), inputHandlersModule (ref), fixSearchYNavigation (ref), fFlagEnableLeftNavOnConsole (ref), appPage (ref), robloxAppEnumsModule (ref), enumScreensModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), useTextSizeOffset (ref), fFlagConnectionManagementChips (ref), ampApiProvider (ref), fStringIsUserInTcEligibleCountryAmpFeature (ref), fStringCanAccessTrustedContactsAmpNameSpace (ref), accessResponseEnum (ref), fFlagFriendsPageAlwaysOpenPPV (ref), convertUserPresenceTypeToString (ref), buttonClickEventsModule (ref), constantsModule (ref), fFlagFriendsPageUserListEnabled (ref), fFlagFriendsPageUnifiedOpenProfileLogic (ref), friendTileModule (ref), dependencyArray (ref), var1 (ref), filterStatesModule (ref), fFlagCreateConnectionsHub (ref), gridMetrics (ref), useAnimatedScrollToSelection (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), isFromConnectionsHubModule (ref), fFlagLuaAppsDefaultSelection (ref), useFocusOnMount (ref), roactModule (ref), horizontalPageMargin (ref), fixFriendsLandingRightMargin (ref), refreshScrollingFrame (ref), filterByButtonModule (ref), emptyResultsViewModule (ref), noFriendsViewModule (ref), userListLayoutAdaptor (ref), layoutMode (ref), collectionGrid (ref), button (ref), buttonType (ref)
+	-- upvalues: useLocalization (ref), fFlagAddFriendsPageCapitalization (ref), reactModule (ref), friendsLandingContextModule (ref), friendsLandingAnalyticsModule (ref), useNavigation (ref), useDesignTokens (ref), useUiModeInfo (ref), fFlagFixScalingOnFriendsLandingModule (ref), useTokens (ref), useFocusGuiObject (ref), fFlagFixCohubUiBugs (ref), getPageMargin (ref), useScreenSize (ref), uiMode (ref), focusNavigationUtilsModule (ref), inputHandlersModule (ref), fFlagEnableLeftNavOnConsole (ref), appPage (ref), robloxAppEnumsModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), useTextSizeOffset (ref), fFlagConnectionManagementChips (ref), ampApiProvider (ref), fStringIsUserInTcEligibleCountryAmpFeature (ref), fStringCanAccessTrustedContactsAmpNameSpace (ref), accessResponseEnum (ref), fFlagFriendsPageAlwaysOpenPPV (ref), convertUserPresenceTypeToString (ref), enumScreensModule (ref), buttonClickEventsModule (ref), constantsModule (ref), fFlagFriendsPageUserListEnabled (ref), fFlagFriendsPageUnifiedOpenProfileLogic (ref), friendTileModule (ref), dependencyArray (ref), var1 (ref), filterStatesModule (ref), fFlagCreateConnectionsHub (ref), gridMetrics (ref), useAnimatedScrollToSelection (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), isFromConnectionsHubModule (ref), fFlagLuaAppsDefaultSelection (ref), useFocusOnMount (ref), roactModule (ref), horizontalPageMargin (ref), fixFriendsLandingRightMargin (ref), refreshScrollingFrame (ref), filterByButtonModule (ref), emptyResultsViewModule (ref), noFriendsViewModule (ref), userListLayoutAdaptor (ref), layoutMode (ref), collectionGrid (ref), button (ref), buttonType (ref)
 	local var2 = useLocalization({
 		pageError = "CommonUI.Messages.Response.PageError",
 		successText = "Feature.Friends.Action.FriendRemoved",
@@ -80,7 +79,6 @@ return function(p1)
 	local var3 = reactModule.useContext(friendsLandingContextModule.Context)
 	local var4 = reactModule.useContext(friendsLandingAnalyticsModule.Context)
 	local var5 = useNavigation()
-	local navigateToLuaAppPages = var3.navigateToLuaAppPages
 	local var6 = useDesignTokens()
 	local var7 = useUiModeInfo()
 	local var8 = if fFlagFixScalingOnFriendsLandingModule then useTokens() else nil
@@ -89,14 +87,10 @@ return function(p1)
 	local var11 = var7.uiMode == uiMode.TenFoot
 	local isCursor = focusNavigationUtilsModule.useLastInputMode() == "Cursor"
 	local var12 = reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.Search, inputHandlersModule.onRelease(function(p2)
-		-- upvalues: fixSearchYNavigation (copy), var11 (ref), fFlagEnableLeftNavOnConsole (copy), var5 (ref), appPage (copy), robloxAppEnumsModule (copy), navigateToLuaAppPages (ref), enumScreensModule (copy)
+		-- upvalues: var11 (ref), fFlagEnableLeftNavOnConsole (copy), var5 (ref), appPage (copy), robloxAppEnumsModule (copy)
 		p2:cancel()
 		
-		if not fixSearchYNavigation then
-			navigateToLuaAppPages[enumScreensModule.SearchPage]()
-			
-			return
-		elseif var11 and not fFlagEnableLeftNavOnConsole then
+		if var11 and not fFlagEnableLeftNavOnConsole then
 			var5.navigate(appPage.SearchPage, {
 				defaultSearchType = robloxAppEnumsModule.SearchTypes.Players
 			})

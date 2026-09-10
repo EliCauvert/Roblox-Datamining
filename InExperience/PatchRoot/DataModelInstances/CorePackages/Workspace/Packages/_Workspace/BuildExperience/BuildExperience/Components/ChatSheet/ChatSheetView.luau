@@ -78,14 +78,11 @@ return function(p1)
 		Actions = reactModule.createElement(var1.Actions, nil, {
 			Footer = reactModule.createElement(chatActionsModule, {
 				composerText = p1.composerText,
-				composerTextRevision = p1.composerTextRevision,
 				composerErrorText = p1.composerErrorText,
 				onComposerChanged = p1.onComposerChanged,
 				images = if fFlagBuildExperienceChatImageAttachmentsModule then p1.composerImages else nil,
 				onImagesChanged = if fFlagBuildExperienceChatImageAttachmentsModule then p1.onComposerImagesChanged else nil,
 				onRetryImage = if fFlagBuildExperienceChatImageAttachmentsModule then p1.onRetryComposerImage else nil,
-				references = p1.composerReferences,
-				onRemoveReference = p1.onRemoveComposerReference,
 				isImageSendBlocked = if fFlagBuildExperienceChatImageAttachmentsModule then p1.isComposerSendBlocked else nil,
 				placeholder = var2.composerPlaceholder,
 				textBoxRef = p1.textBoxRef,

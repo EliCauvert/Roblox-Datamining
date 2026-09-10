@@ -73,8 +73,6 @@ Amp.Upsell.Message.EmailSent,Wir haben eine E-Mail an {parentEmail} gesendet
 Amp.Upsell.Message.EmailSentPluralParent,Wir haben eine E-Mail an deine verbundenen Eltern gesendet
 Amp.Upsell.Title.AskYourParent,Frage deine Eltern
 Amp.Upsell.Title.RequestSent,Anfrage gesendet
-Application.Logout.Action.Logout,Abmelden
-Application.Logout.Message.Confirmation,Möchtest du dich wirklich abmelden?
 Authentication.AccountSwitch.Action.SwitchAccount,Konto wechseln
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Schnellanmeldung
@@ -1989,6 +1987,7 @@ Feature.Build.Label.GamePlays,Spielaufrufe
 Feature.Build.Label.GetMoreBuildUsage,Mehr Build-Kontingent holen
 Feature.Build.Label.Hi,Hallo
 Feature.Build.Label.IconThumbnails,Symbol und Vorschaubilder
+Feature.Build.Label.Images2D,2D-Bilder
 Feature.Build.Label.InProgress,In Arbeit
 Feature.Build.Label.InputNeeded,Eingabe erforderlich
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2020,6 +2019,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Bereit
 Feature.Build.Label.RegionalPricing,Regionale Preisgestaltung
 Feature.Build.Label.ResetsDaily,Wird täglich zurückgesetzt
+Feature.Build.Label.ResetsMonthly,Wird monatlich zurückgesetzt
+Feature.Build.Label.ResetsWeekly,Wird wöchentlich zurückgesetzt
 Feature.Build.Label.RestoredVersion,{VERSION} wurde wiederhergestellt
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2027,7 +2028,6 @@ Feature.Build.Label.SearchAssets,Objekte durchsuchen
 Feature.Build.Label.SearchGames,Spiele suchen
 Feature.Build.Label.SearchTasks,Aufgaben suchen
 Feature.Build.Label.SelectOption,Wähle eine Option
-Feature.Build.Label.ShareAddedFriends,"Mit Freunden teilen, die du hinzugefügt hast"
 Feature.Build.Label.Shared,Geteilt
 Feature.Build.Label.ShopButton,Kaufen-Button
 Feature.Build.Label.ShopUi,Shop-UI
@@ -2165,6 +2165,7 @@ Feature.Build.Message.NoVersionHistory,Noch kein Versionsverlauf.
 Feature.Build.Message.OneTaskCompleted,1 Aufgabe abgeschlossen
 Feature.Build.Message.OutOfBuildUsage,"Dein Build-Kontingent ist aufgebraucht. Sieh dir deine Optionen an, um Robux zu verwenden und weiter zu erstellen."
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} von {MAX_INVITES} Spieletestern hinzugefügt
+Feature.Build.Message.PrivatePlaytestInvite,{username} hat dich zum privaten Spieltest {experienceName} eingeladen
 Feature.Build.Message.PublicPublishFailed,"Dein Spiel wurde veröffentlicht, konnte aber nicht öffentlich gemacht werden. Bitte versuche es erneut."
 Feature.Build.Message.PublishExpandAudience,"Veröffentliche, um deine Zielgruppe zu vergrößern"
 Feature.Build.Message.PublishNotReverted,Deine Veröffentlichung wurde nicht rückgängig gemacht. Bitte versuche es erneut.
@@ -3174,6 +3175,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Vertrauten Freund entfe
 Feature.Friends.TrustedFriend.AddBack.Header,Anfrage zum Hinzufügen als vertrauter Freund
 Feature.Friends.TrustedFriend.Info.Modal.Header,Neuer vertrauter Freund
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Vertrauten Freund hinzufügen
+Feature.Friends.TrustedFriend.Label.Title,Vertrauter Freund
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} ist jetzt ein vertrauter Freund
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Vertrauter Freund entfernt
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Anfrage zum Hinzufügen als vertrauter Freund gesendet
@@ -3954,6 +3956,7 @@ Feature.SettingsHub.Label.NoConnectionsScreen,Füge Connections hinzu und lade s
 Feature.SettingsHub.Label.NoFriendsPageMessage,"Füge Freunde hinzu, damit ihr gemeinsam erkunden könnt."
 Feature.SettingsHub.Label.NoFriendsScreen,Finde Freunde und lade sie zu gemeinsamen Experiences ein!
 Feature.SettingsHub.Label.QuitButton,Beenden
+Feature.SettingsHub.Label.QuitConfirmation,Möchtest du wirklich beenden?
 Feature.SettingsHub.Label.ReasonForAbuse,Grund des Verstoßes?
 Feature.SettingsHub.Label.Report.BlockDisplayName,{DISPLAY_NAME} (@{RBX_NAME}) blockieren
 Feature.SettingsHub.Label.Report.OtherActionsHeader,"Andere Maßnahmen, die du erheben kannst"
@@ -4716,6 +4719,7 @@ InGame.HelpMenu.Label.PlayerScripts,SpielerScripts:
 InGame.HelpMenu.Label.ServerChannel,Serverkanal:
 InGame.HelpMenu.Label.ServerVersion,Serverversion:
 InGame.HelpMenu.LeftArrow,Linkspfeil
+InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,Rechtspfeil
 InGame.HelpMenu.UpArrow,Aufwärtspfeil
 InGame.InspectMenu.Action.Cancel,
@@ -4805,6 +4809,13 @@ InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,Du bist nun Mitglied im Team
 InGame.UnknownNamespace.Network,(Netzwerk)
 InGame.UnknownNamespace.Received,Empfangen
 InGame.UnknownNamespace.Sent,
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,{experience_name} konnte nicht zum Desktop hinzugefügt werden
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,{experience_name} konnte nicht zum Startbildschirm hinzugefügt werden
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,Verknüpfung zu {experience_name} existiert bereits
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,{experience_name} wurde erfolgreich zum Desktop hinzugefügt
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,{experience_name} wurde erfolgreich zum Startbildschirm hinzugefügt
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,Verknüpfung anzeigen
 Notifications.NotificationStream.Bundle.ShowLess,Weniger anzeigen
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} mehr
 Notifications.NotificationStream.Label.AllCaughtUp,Auf dem neuesten Stand!

@@ -74,8 +74,6 @@ Amp.Upsell.Message.EmailSent,Enviamos un correo electrónico a {parentEmail}
 Amp.Upsell.Message.EmailSentPluralParent,Enviamos un correo electrónico al correo de tu padre o madre vinculado
 Amp.Upsell.Title.AskYourParent,Pregunta a tus padres
 Amp.Upsell.Title.RequestSent,Solicitud enviada
-Application.Logout.Action.Logout,Cerrar sesión
-Application.Logout.Message.Confirmation,¿Quieres cerrar la sesión?
 Authentication.AccountSwitch.Action.SwitchAccount,Cambiar cuentas
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Inicio de sesión rápido
@@ -2000,6 +1998,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,La descripción debe tene
 Feature.Build.Error.DeveloperProductNameRequired,Ingresa un nombre para el producto.
 Feature.Build.Error.DeveloperProductNameTooLong,El nombre debe tener 50 caracteres o menos.
 Feature.Build.Error.DeveloperProductPriceInvalid,"El precio debe ser un número entero de 1 a 1,000,000,000 Robux."
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,Selecciona Editar y agrega un precio antes de poner un producto a la venta.
 Feature.Build.Error.DeveloperProductTextModerated,La moderación de Roblox cambió el texto de este producto. Prueba con otras palabras.
 Feature.Build.Error.ManagedPricingPartialUpdate,No pudimos actualizar algunos productos.
 Feature.Build.Error.MonetizationOptionUpdate,No pudimos actualizar la opción. Inténtalo de nuevo.
@@ -2053,6 +2052,7 @@ Feature.Build.Label.GamePlays,Reproducciones del juego
 Feature.Build.Label.GetMoreBuildUsage,Obtener más uso de la compilación
 Feature.Build.Label.Hi,Hola
 Feature.Build.Label.IconThumbnails,Ícono y miniaturas
+Feature.Build.Label.Images2D,Imágenes 2D
 Feature.Build.Label.InProgress,En curso
 Feature.Build.Label.InputNeeded,Se necesita una entrada
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2084,6 +2084,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,
 Feature.Build.Label.RegionalPricing,Precio regional
 Feature.Build.Label.ResetsDaily,Se restablece diariamente
+Feature.Build.Label.ResetsMonthly,Se restablece mensualmente
+Feature.Build.Label.ResetsWeekly,Se restablece semanalmente
 Feature.Build.Label.RestoredVersion,Se restauró {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2091,7 +2093,6 @@ Feature.Build.Label.SearchAssets,Buscar recursos
 Feature.Build.Label.SearchGames,Buscar juegos
 Feature.Build.Label.SearchTasks,Buscar tareas
 Feature.Build.Label.SelectOption,Elige una opción
-Feature.Build.Label.ShareAddedFriends,Comparte con las amistades que añadiste
 Feature.Build.Label.Shared,Compartido
 Feature.Build.Label.ShopButton,Botón de la Tienda
 Feature.Build.Label.ShopUi,Interfaz de usuario de la Tienda
@@ -2229,6 +2230,7 @@ Feature.Build.Message.NoVersionHistory,Aún no hay historial de versiones.
 Feature.Build.Message.OneTaskCompleted,1 tarea completada
 Feature.Build.Message.OutOfBuildUsage,Ya no puedes usar la compilación. Consulta tus opciones para usar Robux y seguir creando.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} de {MAX_INVITES} evaluadores de juego añadidos
+Feature.Build.Message.PrivatePlaytestInvite,{username} te invitó a una prueba de juego privada {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Tu juego se publicó, pero no se pudo hacer público. Inténtalo de nuevo."
 Feature.Build.Message.PublishExpandAudience,Publica para ampliar tu público
 Feature.Build.Message.PublishNotReverted,Tu publicación no se revirtió. Inténtalo de nuevo.
@@ -3238,6 +3240,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Eliminar de amistad de 
 Feature.Friends.TrustedFriend.AddBack.Header,Solicitud de amigo de confianza
 Feature.Friends.TrustedFriend.Info.Modal.Header,Nuevo amigo de confianza
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Agregar como amistad de confianza
+Feature.Friends.TrustedFriend.Label.Title,Amistad de confianza
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} ahora es una amistad de confianza
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Amistad de confianza eliminada
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Solicitud para ser amistad de confianza enviada
@@ -4021,6 +4024,7 @@ Feature.SettingsHub.Label.NoConnectionsScreen,Añade Conexiones para invitarlas 
 Feature.SettingsHub.Label.NoFriendsPageMessage,Agrega amigos para que puedan explorar juntos.
 Feature.SettingsHub.Label.NoFriendsScreen,¡Haz amistades para invitarlas a unirse!
 Feature.SettingsHub.Label.QuitButton,
+Feature.SettingsHub.Label.QuitConfirmation,¿Realmente quieres salir?
 Feature.SettingsHub.Label.ReasonForAbuse,¿Razón del abuso?
 Feature.SettingsHub.Label.Report.BlockDisplayName,Bloquear {DISPLAY_NAME} (@{RBX_NAME})
 Feature.SettingsHub.Label.Report.OtherActionsHeader,Otras medidas que puedes tomar
@@ -4783,6 +4787,7 @@ InGame.HelpMenu.Label.PlayerScripts,PlayerScripts:
 InGame.HelpMenu.Label.ServerChannel,Canal del servidor:
 InGame.HelpMenu.Label.ServerVersion,Versión del servidor:
 InGame.HelpMenu.LeftArrow,
+InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,
 InGame.HelpMenu.UpArrow,
 InGame.InspectMenu.Action.Cancel,
@@ -4872,6 +4877,13 @@ InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,"Ahora formas parte del equi
 InGame.UnknownNamespace.Network,(Red)
 InGame.UnknownNamespace.Received,Recibido
 InGame.UnknownNamespace.Sent,Enviados
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,No se pudo añadir {experience_name} a la computadora
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,{experience_name} no se pudo añadir a la pantalla de inicio
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,El atajo a {experience_name} ya existe
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,Se añadió {experience_name} correctamente a la computadora
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,{experience_name} se añadió correctamente a la pantalla de inicio
+InstantApps.Shortcuts.Label.TryAgain,Intentar de nuevo
+InstantApps.Shortcuts.Label.ViewShortcut,Ver atajo
 Notifications.NotificationStream.Bundle.ShowLess,Mostrar menos
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} más
 Notifications.NotificationStream.Label.AllCaughtUp,¡Ya estás al tanto de todo!

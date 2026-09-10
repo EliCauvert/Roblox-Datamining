@@ -5,6 +5,7 @@ local reactUtilsModule = require(parent.ReactUtils)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppClampBannerPaddingToViewport = sharedFlagsModule.FFlagLuaAppClampBannerPaddingToViewport
+local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
 local scrollView = foundationModule.ScrollView
 local view = foundationModule.View
 local detailsPageLayoutContextModule = require(script.Parent.DetailsPageLayoutContext)
@@ -14,7 +15,7 @@ local var1 = if fFlagLuaAppClampBannerPaddingToViewport then reactModule.createB
 local _ = nil
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), detailsPageLayoutContextModule (ref), reactUtilsModule (ref), fFlagLuaAppClampBannerPaddingToViewport (ref), var1 (ref), detailsPageLayoutUtilsModule (ref), view (ref), scrollView (ref), fFlagSduiExperienceDetailsSupport (ref), t (ref)
+	-- upvalues: reactModule (ref), detailsPageLayoutContextModule (ref), reactUtilsModule (ref), fFlagLuaAppClampBannerPaddingToViewport (ref), var1 (ref), detailsPageLayoutUtilsModule (ref), view (ref), scrollView (ref), fFlagSduiExperienceDetailsSupport (ref), t (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref)
 	local var2 = reactModule.useContext(detailsPageLayoutContextModule)
 	local contentTopOffset = var2.contentTopOffset
 	local hasFullBleed = var2.hasFullBleed
@@ -164,7 +165,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(1, 0, 0, 0),
 				ScrollingDirection = Enum.ScrollingDirection.Y,
-				ScrollingEnabled = not isFullscreenOverlay
+				ScrollingEnabled = if fFlagLuaAppMediaGalleryGamepadSupport then not isFullscreenOverlay and not (var2.disableFocusNavEngineScroll == true) else not isFullscreenOverlay
 			},
 			onAbsoluteCanvasSizeChanged = function(value)
 				-- upvalues: var7 (ref), onCanvasSizeChanged (ref)

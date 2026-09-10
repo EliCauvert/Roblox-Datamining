@@ -36,6 +36,7 @@
 	Lib = { CartIdService = require(script.Lib.CartIdService) },
 	Store = {
 		SeenImpressionsStore = require(script.Store.SeenImpressionsStore),
+		UnifiedEventPageStore = require(script.Store.UnifiedEventPageStore),
 		UnifiedSelectionListStore = require(script.Store.UnifiedSelectionListStore)
 	},
 	Surfaces = {

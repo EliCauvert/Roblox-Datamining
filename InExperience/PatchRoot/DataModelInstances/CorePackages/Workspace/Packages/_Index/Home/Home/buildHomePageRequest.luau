@@ -25,6 +25,7 @@ return function(p2, p3)
 		if p3.sessionId and p3.sessionId ~= "" then
 			t.session_id = p3.sessionId
 		end
+		t.topic_ids = p3.topicIds
 		t.contextual_features = buildContextualFeatures(p3)
 		
 		if p3.cachedRobloxComponentToTemplateId then

@@ -6,6 +6,7 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local responsiveModule = require(parent.Responsive)
 local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
 local sduiPageWrapperEntryPoint = sduiSharedUtilitiesModule.SduiPageWrapperEntryPoint
+local usePageScopeRef = sduiSharedUtilitiesModule.usePageScopeRef
 local videoUtilsModule = require(parent.VideoUtils)
 local refreshHomePageModule = require(home.refreshHomePage)
 local fetchHomePageModule = require(home.fetchHomePage)
@@ -13,14 +14,19 @@ local useHomeCollectionLayoutSyncModule = require(home.useHomeCollectionLayoutSy
 local homeConstantsModule = require(home.HomeConstants)
 local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
+local fFlagSduiDismissPromptPageScope = require(parent.SharedFlags).FFlagSduiDismissPromptPageScope
 
 local function _(p1, p2)
 	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: homeConstantsModule (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fetchHomePageModule (ref), home (ref), useHomeCollectionLayoutSyncModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), responsiveModule (ref), videoUtilsModule (ref), sduiPageWrapperEntryPoint (ref), refreshHomePageModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref)
+	-- upvalues: homeConstantsModule (ref), fFlagSduiDismissPromptPageScope (ref), usePageScopeRef (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fetchHomePageModule (ref), home (ref), useHomeCollectionLayoutSyncModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), responsiveModule (ref), videoUtilsModule (ref), sduiPageWrapperEntryPoint (ref), refreshHomePageModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref)
 	local configKey = homeConstantsModule.ConfigKey
+	
+	if fFlagSduiDismissPromptPageScope then
+		usePageScopeRef(configKey)
+	end
 	local pageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: pageTimer (ref), sduiSharedUtilitiesModule (copy), appPage (copy)
@@ -47,6 +53,7 @@ return reactModule.memo(function(p1)
 	return reactModule.createElement(sduiPageWrapperEntryPoint, {
 		appPage = appPage.Home,
 		configKey = configKey,
+		contentIdentifier = homeConstantsModule.ContentIdentifier,
 		pageTimer = var1,
 		refresh = refreshHomePageModule,
 		pageTopPadding = p1.pageTopPadding,

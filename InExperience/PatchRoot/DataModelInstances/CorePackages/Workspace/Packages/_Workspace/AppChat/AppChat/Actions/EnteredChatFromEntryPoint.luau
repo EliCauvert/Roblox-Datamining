@@ -1,9 +1,13 @@
 ﻿local appChat = script:FindFirstAncestor("AppChat")
 local parent = appChat.Parent
 local roduxModule = require(parent.Rodux)
-local _ = require(parent.SocialCommon)
+local socialCommonModule = require(parent.SocialCommon)
 local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
 local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
+
+if require(parent.SharedFlags).FFlagSharedChatEntryPointAction then
+	return socialCommonModule.Actions.EnteredChatFromEntryPoint
+end
 local var1 = false
 
 return roduxModule.makeActionCreator(script.Name, function(p1)

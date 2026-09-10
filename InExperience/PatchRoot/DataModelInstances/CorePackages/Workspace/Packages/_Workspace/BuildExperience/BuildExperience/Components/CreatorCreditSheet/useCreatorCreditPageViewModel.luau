@@ -120,6 +120,7 @@ return function()
 		pageProps = {
 			dailyPctUsed = if var2 then var2.freeTrialPctUsed else 0,
 			resetHours = if var2 then getHoursUntilResetModule(var2.nextResetEligibleTime) else nil,
+			resetPeriod = if var2 then var2.freeTrialResetPeriod else nil,
 			additionalEnabled = var8,
 			dailyLimit = var9,
 			hasLimitConfigured = var10,

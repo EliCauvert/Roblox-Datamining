@@ -10,6 +10,7 @@ local normalizeMomentMetadataModule = require(momentsCreation.Utils.normalizeMom
 local completeMomentUploadModule = require(momentsCreation.Upload.completeMomentUpload)
 local loggerModule = require(momentsCreation.Logger)
 local getFFlagMomentsCreationNormalizeMetadataEnumsModule = require(momentsCreation.Flags.GetFFlagMomentsCreationNormalizeMetadataEnums)
+local fFlagMomentsFixPostUploadEnumNormalizationModule = require(momentsCreation.Flags.FFlagMomentsFixPostUploadEnumNormalization)
 local getFFlagMomentsUseBackendPostStatusNotificationModule = require(momentsCreation.Flags.GetFFlagMomentsUseBackendPostStatusNotification)
 local getFFlagMomentsUseUploadPostAsync = momentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
 local fFlagMomentsRealtimeSessionTelemetry = momentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
@@ -42,12 +43,12 @@ local _ = function(p1)
 end
 
 return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: captureService (ref), captureServiceUploadUniverseIdOverrideEngineFeature (ref), _game (ref), getFFlagMomentsCreationNormalizeMetadataEnumsModule (ref), normalizeMomentMetadataModule (ref), loggerModule (ref), captureServiceStartUploadCoreScriptBypassEngineFeature (ref), enumName (ref), getFFlagMomentsUseBackendPostStatusNotificationModule (ref), fFlagMomentsRealtimeSessionTelemetry (ref), fFlagMomentsUploadOutcomeTelemetry (ref), momentsCommonModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), getFFlagMomentsUseUploadPostAsync (ref), makePostMetadataModule (ref), makeCreationEventFieldsModule (ref), completeMomentUploadModule (ref)
-	local var1
+	-- upvalues: captureService (ref), captureServiceUploadUniverseIdOverrideEngineFeature (ref), _game (ref), getFFlagMomentsCreationNormalizeMetadataEnumsModule (ref), normalizeMomentMetadataModule (ref), loggerModule (ref), captureServiceStartUploadCoreScriptBypassEngineFeature (ref), enumName (ref), getFFlagMomentsUseBackendPostStatusNotificationModule (ref), fFlagMomentsRealtimeSessionTelemetry (ref), fFlagMomentsUploadOutcomeTelemetry (ref), momentsCommonModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), getFFlagMomentsUseUploadPostAsync (ref), makePostMetadataModule (ref), fFlagMomentsFixPostUploadEnumNormalizationModule (ref), makeCreationEventFieldsModule (ref), completeMomentUploadModule (ref)
+	local gameId, var1
 	p10 = p10 or captureService
 	
 	if captureServiceUploadUniverseIdOverrideEngineFeature then
-		local gameId = _game.GameId
+		gameId = _game.GameId
 		
 		if gameId == nil or gameId <= 0 then
 			local cloned = table.clone(p2)
@@ -59,6 +60,8 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 	else
 		var1 = p2
 	end
+	gameId = var1
+	
 	if getFFlagMomentsCreationNormalizeMetadataEnumsModule() then
 		var1 = normalizeMomentMetadataModule(var1)
 	end
@@ -66,14 +69,14 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 	p5.setUploading()
 	p6.triggerToast({ title = p4.publishingTitle, text = p4.publishingBody })
 	
-	local function gameId(p11)
+	local function _(p11)
 		-- upvalues: p9 (ref)
 		p11.creationSessionId = p9
 		
 		return p11
 	end
 	
-	local function _(p11, p12)
+	local _ = function(p11, p12)
 		-- upvalues: fFlagMomentsRealtimeSessionTelemetry (copy), fFlagMomentsUploadOutcomeTelemetry (copy), momentsCommonModule (copy), p1 (ref), p9 (ref), fireAnalyticsEventModule (copy), eventNames (copy)
 		if fFlagMomentsRealtimeSessionTelemetry then
 			momentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed", if fFlagMomentsUploadOutcomeTelemetry then p12 else nil)
@@ -84,10 +87,10 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 	end
 	
 	task.spawn(function()
-		-- upvalues: getFFlagMomentsUseUploadPostAsync (copy), loggerModule (copy), p1 (ref), enumName (copy), makePostMetadataModule (copy), var1 (write), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy), p9 (ref), p10 (ref), completeMomentUploadModule (copy), p5 (ref), p6 (ref), p7 (ref), p8 (ref), p4 (ref), fFlagMomentsRealtimeSessionTelemetry (copy), fFlagMomentsUploadOutcomeTelemetry (copy), momentsCommonModule (copy), captureServiceStartUploadCoreScriptBypassEngineFeature (copy), p3 (ref)
+		-- upvalues: getFFlagMomentsUseUploadPostAsync (copy), loggerModule (copy), p1 (ref), enumName (copy), makePostMetadataModule (copy), fFlagMomentsFixPostUploadEnumNormalizationModule (copy), gameId (ref), var1 (write), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy), p9 (ref), p10 (ref), completeMomentUploadModule (copy), p5 (ref), p6 (ref), p7 (ref), p8 (ref), p4 (ref), fFlagMomentsRealtimeSessionTelemetry (copy), fFlagMomentsUploadOutcomeTelemetry (copy), momentsCommonModule (copy), captureServiceStartUploadCoreScriptBypassEngineFeature (copy), p3 (ref)
 		if getFFlagMomentsUseUploadPostAsync() then
 			loggerModule:debug("event=path_selected path=post_upload localId={}", string.gsub(string.gsub(enumName(p1.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"))
-			local var2 = makePostMetadataModule(var1)
+			local var2 = makePostMetadataModule(if fFlagMomentsFixPostUploadEnumNormalizationModule then gameId else var1)
 			local editingFlowMomentPublished = eventNames.EditingFlowMomentPublished
 			local var3 = makeCreationEventFieldsModule.makeCaptureDescriptorFields(p1)
 			var3.creationSessionId = p9

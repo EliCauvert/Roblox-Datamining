@@ -74,8 +74,6 @@ Amp.Upsell.Message.EmailSent,{parentEmail} adresine bir e-posta yolladık
 Amp.Upsell.Message.EmailSentPluralParent,Hesabına bağlantılı ebeveynlerine bir e-posta gönderdik
 Amp.Upsell.Title.AskYourParent,Ebeveynine sor
 Amp.Upsell.Title.RequestSent,Talep gönderildi
-Application.Logout.Action.Logout,Çıkış Yap
-Application.Logout.Message.Confirmation,Çıkış yapmak istediğine emin misin?
 Authentication.AccountSwitch.Action.SwitchAccount,Hesap Değiştir
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Hesap değiştir
 Authentication.CrossDevice.Heading.QuickLogin,Hızlı giriş
@@ -2053,6 +2051,7 @@ Feature.Build.Label.GamePlays,Oyun oynama sayısı
 Feature.Build.Label.GetMoreBuildUsage,Daha fazla İnşa Et kullanım hakkı al
 Feature.Build.Label.Hi,Merhaba
 Feature.Build.Label.IconThumbnails,Simge ve küçük resimler
+Feature.Build.Label.Images2D,2 Boyutlu Görseller
 Feature.Build.Label.InProgress,Devam ediyor
 Feature.Build.Label.InputNeeded,Giriş gerekli
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2084,6 +2083,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Hazır
 Feature.Build.Label.RegionalPricing,Bölgesel fiyatlandırma
 Feature.Build.Label.ResetsDaily,Her gün sıfırlanır
+Feature.Build.Label.ResetsMonthly,Her ay sıfırlanır
+Feature.Build.Label.ResetsWeekly,Her hafta sıfırlanır
 Feature.Build.Label.RestoredVersion,{VERSION} geri yüklendi
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2091,7 +2092,6 @@ Feature.Build.Label.SearchAssets,Varlık ara
 Feature.Build.Label.SearchGames,Oyun ara
 Feature.Build.Label.SearchTasks,Görev ara
 Feature.Build.Label.SelectOption,Bir seçenek belirle
-Feature.Build.Label.ShareAddedFriends,Eklediğin arkadaşlarla paylaş
 Feature.Build.Label.Shared,Paylaşıldı
 Feature.Build.Label.ShopButton,Alışveriş yap düğmesi
 Feature.Build.Label.ShopUi,Alışveriş yap kullanıcı arayüzü
@@ -2229,6 +2229,7 @@ Feature.Build.Message.NoVersionHistory,Henüz sürüm geçmişi yok.
 Feature.Build.Message.OneTaskCompleted,1 görev tamamlandı
 Feature.Build.Message.OutOfBuildUsage,İnşa Et kullanım hakkın tükendi. Bir şeyler oluşturmaya devam etmek için Robux kullanma seçeneklerini görüntüle.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT}/{MAX_INVITES} oynanış testçisi eklendi
+Feature.Build.Message.PrivatePlaytestInvite,"{username}, seni {experienceName} için özel oynanış testine davet etti"
 Feature.Build.Message.PublicPublishFailed,Oyunun yayınlandı ancak herkese açık hâle getirilemedi. Tekrar dene.
 Feature.Build.Message.PublishExpandAudience,Kitleni genişletmek için yayınla
 Feature.Build.Message.PublishNotReverted,Yayınlaman geri döndürülmedi. Tekrar dene.
@@ -3238,6 +3239,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Güvenilir arkadaşlard
 Feature.Friends.TrustedFriend.AddBack.Header,Güvenilir arkadaş olma talebi
 Feature.Friends.TrustedFriend.Info.Modal.Header,Yeni güvenilir arkadaş
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Güvenilir arkadaş olarak ekle
+Feature.Friends.TrustedFriend.Label.Title,Güvenilir arkadaş
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} artık güvenilir arkadaşın
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Güvenilir arkadaş kaldırıldı
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Güvenilir arkadaş olma talebi gönderildi
@@ -4021,6 +4023,7 @@ Feature.SettingsHub.Label.NoConnectionsScreen,Sana katılmaları için davet ede
 Feature.SettingsHub.Label.NoFriendsPageMessage,Beraber keşfedebilmek için arkadaşlarını ekle.
 Feature.SettingsHub.Label.NoFriendsScreen,Sana katılmaları için davet edebilmek adına arkadaşlar edin!
 Feature.SettingsHub.Label.QuitButton,
+Feature.SettingsHub.Label.QuitConfirmation,Çıkmak istediğinden emin misin?
 Feature.SettingsHub.Label.ReasonForAbuse,Kötüye Kullanımın Nedeni Nedir?
 Feature.SettingsHub.Label.Report.BlockDisplayName,{DISPLAY_NAME} (@{RBX_NAME}) adlı kullanıcıyı engelle
 Feature.SettingsHub.Label.Report.OtherActionsHeader,Atabileceğin Diğer Adımlar
@@ -4783,6 +4786,7 @@ InGame.HelpMenu.Label.PlayerScripts,Oyuncu Kodlamaları:
 InGame.HelpMenu.Label.ServerChannel,Sunucu Kanalı:
 InGame.HelpMenu.Label.ServerVersion,Sunucu Sürümü:
 InGame.HelpMenu.LeftArrow,Sol Ok Tuşu
+InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,Sağ Ok Tuşu
 InGame.HelpMenu.UpArrow,Yukarı Ok Tuşu
 InGame.InspectMenu.Action.Cancel,
@@ -4872,6 +4876,13 @@ InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,"Artık ""{RBX_NAME}"" takı
 InGame.UnknownNamespace.Network,(Ağ bağlantısı)
 InGame.UnknownNamespace.Received,Alındı
 InGame.UnknownNamespace.Sent,
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,{experience_name} masaüstüne eklenemedi
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,{experience_name} ana ekrana eklenemedi
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,{experience_name} için kısayol zaten var
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,{experience_name} masaüstüne başarıyla eklendi
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,{experience_name} ana ekrana başarıyla eklendi
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,Kısayolu Görüntüle
 Notifications.NotificationStream.Bundle.ShowLess,Daha azını göster
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} daha
 Notifications.NotificationStream.Label.AllCaughtUp,Tüm bildirimleri okudun!

@@ -1,6 +1,7 @@
 ﻿return {
 	SduiDataBindingResponsiveFieldName = {
 		isCompactTouch = "isCompactTouch",
+		isDirectional = "isDirectional",
 		isPortrait = "isPortrait",
 		isSpatial = "isSpatial",
 		lastInput = "lastInput",

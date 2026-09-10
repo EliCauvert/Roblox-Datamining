@@ -14,14 +14,13 @@ local fFlagEnableExperienceDetailsBottomSheet = require(parent.SharedFlags).FFla
 local fFlagLuaAppEdpBottomSheetPeekViewEvents = require(parent.SharedFlags).FFlagLuaAppEdpBottomSheetPeekViewEvents
 local fFlagSduiEdpPrefetchPlayability = require(parent.SharedFlags).FFlagSduiEdpPrefetchPlayability
 local fFlagLuaAppSduiEdpEnabled = require(parent.SharedFlags).FFlagLuaAppSduiEdpEnabled
-local fFlagSduiEdpInheritGameDetailSourceSession = require(parent.SharedFlags).FFlagSduiEdpInheritGameDetailSourceSession
 local fFlagLuaAppAddSeeAllFlagToGameDetailReferral = require(parent.SharedFlags).FFlagLuaAppAddSeeAllFlagToGameDetailReferral
 local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local fFlagLuaAppSduiSponsoredTwoByOneTile = require(parent.SharedFlags).FFlagLuaAppSduiSponsoredTwoByOneTile
 local t = {}
 
 return function(p1, p2, p3)
-	-- upvalues: sduiErrors (ref), getInputModeStore (ref), t (ref), findAnalyticsFieldInAncestors (ref), intervalPerformanceTracker (ref), fFlagSduiFixSearchTelemetry (ref), sduiParsers (ref), fFlagLuaAppSduiSponsoredTwoByOneTile (ref), cryoModule (ref), fFlagLuaAppAddSeeAllFlagToGameDetailReferral (ref), sponsoredGamesRecordClick (ref), calculateRowPositionFields (ref), fFlagSduiEdpInheritGameDetailSourceSession (ref), openGameDetails (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), fFlagEnableExperienceDetailsBottomSheet (ref), appPage (ref), fFlagSduiEdpPrefetchPlayability (ref), fFlagLuaAppSduiEdpEnabled (ref)
+	-- upvalues: sduiErrors (ref), getInputModeStore (ref), t (ref), findAnalyticsFieldInAncestors (ref), intervalPerformanceTracker (ref), fFlagSduiFixSearchTelemetry (ref), sduiParsers (ref), fFlagLuaAppSduiSponsoredTwoByOneTile (ref), cryoModule (ref), fFlagLuaAppAddSeeAllFlagToGameDetailReferral (ref), sponsoredGamesRecordClick (ref), calculateRowPositionFields (ref), openGameDetails (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), fFlagEnableExperienceDetailsBottomSheet (ref), appPage (ref), fFlagSduiEdpPrefetchPlayability (ref), fFlagLuaAppSduiEdpEnabled (ref)
 	p3.dependencies.logger.reportCounter(sduiErrors.SduiCounterName.OpenGameDetailsAction, { name = getInputModeStore(false).getLastInputType(false) }, true)
 	local var1 = if p1 then p1.actionParams else t
 	local var2 = findAnalyticsFieldInAncestors("itemComponentType", p2)
@@ -77,7 +76,7 @@ return function(p1, p2, p3)
 	local var14 = calculateRowPositionFields(var3, itemsPerRow, startRowNumber)
 	local var15 = findAnalyticsFieldInAncestors("appliedFilters", p2)
 	
-	if fFlagSduiEdpInheritGameDetailSourceSession and var1.inheritReferralSession == true then
+	if var1.inheritReferralSession == true then
 		dependencies.gameAnalytics.reportOpenGameDetailFromGameDetail(if fFlagLuaAppSduiSponsoredTwoByOneTile and placeIdOverride then placeIdOverride else placeId, var3, totalNumberOfItems_1, var5, var6, tostring(universeId), p3.appPage, findAnalyticsFieldInAncestors("hostUniverseId", p2))
 	else
 		dependencies.gameAnalytics.reportOpenGameDetailWithId(if fFlagLuaAppSduiSponsoredTwoByOneTile and placeIdOverride then placeIdOverride else placeId, tostring(collectionId_1), var11, collectionPosition_1, var3, totalNumberOfItems_1, var5, var6, tostring(universeId), p3.appPage, tostring(var9), var15, var4, true, var14.positionInRow, var14.rowInSort, var14.rowOnPage, var12, nil, if fFlagLuaAppSduiSponsoredTwoByOneTile and var8 then var8 else nil, nil, nil, if fFlagLuaAppAddSeeAllFlagToGameDetailReferral then var13 else nil)

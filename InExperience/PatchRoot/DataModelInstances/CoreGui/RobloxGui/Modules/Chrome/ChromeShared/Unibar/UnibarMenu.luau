@@ -11,7 +11,6 @@ local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpCon
 local fFlagAddUILessMode = sharedFlagsModule.FFlagAddUILessMode
 local fIntAddUILessModeVariant = sharedFlagsModule.FIntAddUILessModeVariant
 local fFlagAppNavMyStatsTab = sharedFlagsModule.FFlagAppNavMyStatsTab
-local fFlagBuildExperienceModelLibrary = sharedFlagsModule.FFlagBuildExperienceModelLibrary
 local fFlagUnibarMenuOpenSubmenu = require(script.Parent.Parent.Parent.Flags).FFlagUnibarMenuOpenSubmenu
 local fFlagTokenizeUnibarConstantsWithStyleProvider = require(chromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
 local fFlagEnablePlaytestModeUnibar = sharedFlagsModule.FFlagEnablePlaytestModeUnibar
@@ -52,7 +51,7 @@ local argoPartyExperimentation = require(corePackagesService.Workspace.Packages.
 
 if not getFFlagChromeCentralizedConfiguration() then
 	function configureUnibar()
-		-- upvalues: buildMenuOrderModule (ref), getFFlagDebugEnableUnibarDummyIntegrations (ref), isConnectUnibarEnabledModule (ref), argoPartyExperimentation (ref), constantsModule_1 (ref), fFlagAppNavMyStatsTab (ref), fFlagBuildExperienceModelLibrary (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), serviceModule (ref)
+		-- upvalues: buildMenuOrderModule (ref), getFFlagDebugEnableUnibarDummyIntegrations (ref), isConnectUnibarEnabledModule (ref), argoPartyExperimentation (ref), constantsModule_1 (ref), fFlagAppNavMyStatsTab (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), serviceModule (ref)
 		local var3 = buildMenuOrderModule()
 		local list = { "nine_dot", "chat", "toggle_mic_mute" }
 		table.insert(list, 3, "join_voice")
@@ -70,9 +69,6 @@ if not getFFlagChromeCentralizedConfiguration() then
 			table.insert(list, index, constantsModule_1.TOGGLE_MIC_INTEGRATION_ID)
 		end
 		if fFlagAppNavMyStatsTab then
-			if fFlagBuildExperienceModelLibrary then
-				table.insert(list, "model_library")
-			end
 			table.insert(list, "assistant_build")
 		end
 		if isInExperienceUIVREnabled and isSpatial() then

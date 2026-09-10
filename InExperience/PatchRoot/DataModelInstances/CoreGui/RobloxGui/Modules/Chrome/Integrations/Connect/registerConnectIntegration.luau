@@ -28,7 +28,7 @@ return function(p1, p2)
 	local var2 = p1 == "connect_unibar" and getFFlagIsSquadEnabled()
 	local var3 = serviceModule:register({
 		id = p1,
-		sideSheetPlacement = if p1 == "connect_unibar" then sideSheetPlacement.Unibar else sideSheetPlacement.Vertical,
+		sideSheetPlacement = if p1 == "connect_unibar" then sideSheetPlacement.Unibar else sideSheetPlacement.BelowFold,
 		label = if argoPartyExperimentation.getIsRenameEnabled() then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Title.FriendsChat" else "Feature.Squads.Label.Party" elseif getFFlagIsSquadEnabled() then "Feature.Squads.Label.Party" else "Feature.Chat.Label.RobloxChat",
 		activated = function()
 			-- upvalues: inExperienceAppChatModalModule (copy), chromeIntegrationUtilsModule (copy), responsiveModule (copy), focusUtils (copy), localStoreModule (copy), getFStringConnectTooltipLocalStorageKeyModule (copy)

@@ -41,7 +41,7 @@ return serviceModule:register({
 	cachePosition = true,
 	label = "CoreScripts.TopBar.Music",
 	initialAvailability = serviceModule.AvailabilitySignal.Available,
-	sideSheetPlacement = sideSheetPlacement.Page,
+	sideSheetPlacement = sideSheetPlacement.BelowFold,
 	windowSize = var1,
 	activated = function()
 		-- upvalues: responsiveModule (ref), chromeModule (ref), focusMusicWindow (ref), var2 (ref), serviceModule (ref)

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppMediaGalleryGamepadSupportDev", false)
+﻿return game:DefineFastFlag("LuaAppMediaGalleryGamepadSupport", false)

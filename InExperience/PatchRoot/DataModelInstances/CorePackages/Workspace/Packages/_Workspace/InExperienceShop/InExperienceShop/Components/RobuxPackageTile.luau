@@ -113,7 +113,8 @@ return reactModule.memo(function(p1)
 				variant = if p1.isPrimaryRobuxPackage == true then buttonVariant.SoftEmphasis else buttonVariant.Standard,
 				size = inputSize.Small,
 				width = UDim.new(1, 0),
-				onActivated = p1.onBuyActivated or function() end
+				onActivated = p1.onBuyActivated or function() end,
+				isLoading = p1.isBuyLoading
 			})
 		})
 	})

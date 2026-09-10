@@ -1,4 +1,5 @@
-﻿local parent = script:FindFirstAncestor("InExperienceSideSheet").Parent
+﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local parent = inExperienceSideSheet.Parent
 local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
@@ -10,6 +11,7 @@ local icon = foundationModule.Icon
 local iconSize = foundationModule.Enums.IconSize
 local text = foundationModule.Text
 local view = foundationModule.View
+local buttonWidth = require(inExperienceSideSheet.Common.Enums).ButtonWidth
 local var1 = signalsModule.createSignal(nil)
 
 local _ = function(p1)
@@ -17,7 +19,7 @@ local _ = function(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), signalsReactModule (ref), var1 (ref), reactModule (ref), iconSize (ref), isBuilderIcon (ref), view (ref), icon (ref), text (ref)
+	-- upvalues: useTokens (ref), useLocalization (ref), signalsReactModule (ref), var1 (ref), reactModule (ref), iconSize (ref), isBuilderIcon (ref), buttonWidth (ref), view (ref), icon (ref), text (ref)
 	local var2 = useTokens()
 	local var3 = useLocalization({ label = p1.label })
 	local var4 = signalsReactModule.useSignalState(p1.getIsEnabled)
@@ -34,16 +36,15 @@ return reactModule.memo(function(p1)
 		xSmall = var2.Gap.Small
 	end
 	local var7
-	local var8 = if p1.isEmphasis then var2.Color.ActionSoftEmphasis.Background else var2.Color.ActionStandard.Background
-	local var9 = if p1.isEmphasis then var2.Color.ActionSoftEmphasis.Foreground else var2.Color.ActionStandard.Foreground
+	local background = var2.Color.ActionStandard.Background
+	local foreground = var2.Color.ActionStandard.Foreground
+	local var8 = (p1.width or buttonWidth.Full) == buttonWidth.Full
 	local createElement = reactModule.createElement
 	local t = {
 		tag = {
-			["fill row gap-small align-y-center align-x-center radius-medium"] = true,
-			["size-0-1000"] = not p1.isSmall,
-			["size-0-800"] = p1.isSmall,
-			["bg-action-standard"] = not p1.isEmphasis,
-			["bg-action-soft-emphasis"] = p1.isEmphasis
+			["row align-x-center align-y-center gap-small radius-medium bg-action-standard"] = true,
+			["size-full-1000"] = var8,
+			["fill size-0-1000"] = not var8
 		},
 		layout = {
 			FillDirection = Enum.FillDirection.Horizontal,
@@ -51,12 +52,12 @@ return reactModule.memo(function(p1)
 		},
 		isDisabled = not var4
 	}
-	local t_1 = { Color3 = var8.Color3 }
+	local t_1 = { Color3 = background.Color3 }
 	
 	if var4 then
-		var7 = var8.Transparency
+		var7 = background.Transparency
 	else
-		local transparency = var8.Transparency
+		local transparency = background.Transparency
 		var7 = transparency + (1 - transparency) * 0.5
 	end
 	t_1.Transparency = var7
@@ -67,18 +68,12 @@ return reactModule.memo(function(p1)
 	return createElement(view, t, {
 		ShortcutIcon = if var5 then reactModule.createElement(icon, { LayoutOrder = 1, name = var5, size = medium }) else nil,
 		Text = reactModule.createElement(text, {
+			tag = "auto-x text-label-medium content-action-standard",
 			LayoutOrder = 2,
-			tag = {
-				["auto-x"] = true,
-				["text-title-medium"] = not p1.isSmall,
-				["text-title-small"] = p1.isSmall,
-				["content-action-standard"] = not p1.isEmphasis,
-				["content-action-soft-emphasis"] = p1.isEmphasis
-			},
 			Text = var3.label,
 			textStyle = {
-				Color3 = var9.Color3,
-				Transparency = if var4 then var9.Transparency else 0.5
+				Color3 = foreground.Color3,
+				Transparency = if var4 then foreground.Transparency else 0.5
 			}
 		})
 	})

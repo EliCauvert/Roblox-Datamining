@@ -1,4 +1,6 @@
-﻿return {
+﻿local _ = require(script.types)
+
+return {
 	WhyThisAdModal = require(script.WhyThisAdModal),
 	SponsoredUserCohort = require(script.Enums.SponsoredUserCohort),
 	OneByTwoTile = require(script.OneByTwoTile),

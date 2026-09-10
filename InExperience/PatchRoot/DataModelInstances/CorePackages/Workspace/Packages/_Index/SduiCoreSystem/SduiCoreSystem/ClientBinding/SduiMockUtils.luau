@@ -129,6 +129,17 @@ return {
 			kind = p4
 		}
 	end,
+	createMockContainsConditionOption = function(p3, p4, p5, p6)
+		return {
+			condition = {
+				kind = {
+					type = "contains",
+					value = { field = p3, kind = { type = p4, value = p5 } }
+				}
+			},
+			kind = p6
+		}
+	end,
 	createMockAndConditionOption = function(p3, p4)
 		return {
 			condition = {

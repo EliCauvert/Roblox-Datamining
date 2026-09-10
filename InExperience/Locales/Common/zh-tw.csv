@@ -73,8 +73,6 @@ Amp.Upsell.Message.EmailSent,我們已傳送電子郵件至 {parentEmail}
 Amp.Upsell.Message.EmailSentPluralParent,我們已傳送電子郵件給您連結的家長
 Amp.Upsell.Title.AskYourParent,詢問您的家長
 Amp.Upsell.Title.RequestSent,已傳送請求
-Application.Logout.Action.Logout,登出
-Application.Logout.Message.Confirmation,確定登出？
 Authentication.AccountSwitch.Action.SwitchAccount,切換帳戶
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,切換帳號
 Authentication.CrossDevice.Heading.QuickLogin,快速登入
@@ -948,6 +946,8 @@ CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,你要離開了嗎？
 CoreScripts.InGameMenu.Traversal.HistoryDescription,加入先前造訪過的遊戲
 CoreScripts.InGameMenu.Traversal.LeaveBody,你即將離開此遊戲，並返回「{PREVIOUS_EXPERIENCE}」。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
+CoreScripts.InGameMenu.UnlockMore.Description,聊天、好友和更多遊戲
+CoreScripts.InGameMenu.UnlockMore.Title,解鎖更多 Roblox 內容
 CoreScripts.InGameMenu.Vibration,震動
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,來切換選單導航
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,某些體驗需要按
@@ -2052,6 +2052,7 @@ Feature.Build.Label.GamePlays,遊戲遊玩次數
 Feature.Build.Label.GetMoreBuildUsage,取得更多組建使用量
 Feature.Build.Label.Hi,嗨
 Feature.Build.Label.IconThumbnails,圖示和縮圖
+Feature.Build.Label.Images2D,2D 圖片
 Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,必須輸入內容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2083,6 +2084,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,就緒
 Feature.Build.Label.RegionalPricing,區域定價
 Feature.Build.Label.ResetsDaily,每日重置
+Feature.Build.Label.ResetsMonthly,每月重置
+Feature.Build.Label.ResetsWeekly,每週重置
 Feature.Build.Label.RestoredVersion,已還原 {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2090,7 +2093,6 @@ Feature.Build.Label.SearchAssets,搜尋素材
 Feature.Build.Label.SearchGames,搜尋遊戲
 Feature.Build.Label.SearchTasks,搜尋任務
 Feature.Build.Label.SelectOption,選擇一個選項
-Feature.Build.Label.ShareAddedFriends,與你新增的好友分享
 Feature.Build.Label.Shared,已分享
 Feature.Build.Label.ShopButton,商店按鈕
 Feature.Build.Label.ShopUi,商店使用者介面
@@ -2227,7 +2229,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,尚無版本紀錄。
 Feature.Build.Message.OneTaskCompleted,已完成 1 項任務
 Feature.Build.Message.OutOfBuildUsage,你的組建使用量已用完。查看你的選項，使用 Robux 以繼續創作。
+Feature.Build.Message.PlaytestInviteSendFailedBody,你無法向以下使用者傳送聊天邀請連結：
+Feature.Build.Message.PlaytestInviteSendFailedHint,請使用「分享」按鈕來取得連結。
 Feature.Build.Message.PlaytestersAdded,已新增 {INVITED_COUNT} 位遊戲測試員，共 {MAX_INVITES} 位
+Feature.Build.Message.PrivatePlaytestInvite,{username} 邀請你加入私人試玩 {experienceName}
 Feature.Build.Message.PublicPublishFailed,你的遊戲已發佈，但無法設為公開，請再試一次。
 Feature.Build.Message.PublishExpandAudience,發佈以擴大受眾
 Feature.Build.Message.PublishNotReverted,無法還原發佈的內容，請再試一次。
@@ -2291,6 +2296,7 @@ Feature.Build.Title.GetUsers,取得使用者
 Feature.Build.Title.ManagedPricingAcknowledgement,是否開啟管理定價功能？
 Feature.Build.Title.NoMonetizationProducts,開始在遊戲中賺取收入
 Feature.Build.Title.NoRobuxForUsage,沒有剩餘的 Robux 可用於購買組建使用量
+Feature.Build.Title.PlaytestInviteSendFailed,無法傳送邀請
 Feature.Build.Title.Playtesters,遊戲測試員
 Feature.Build.Title.PlaytestersOnlyPlay,只有遊戲測試員可以遊玩
 Feature.Build.Title.PromoteGame,宣傳你的遊戲
@@ -3237,6 +3243,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,移除信任的好友
 Feature.Friends.TrustedFriend.AddBack.Header,信任的好友邀請
 Feature.Friends.TrustedFriend.Info.Modal.Header,新的信任好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,新增信任的好友
+Feature.Friends.TrustedFriend.Label.Title,信任的好友
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} 現已成為信任的好友
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信任的好友已移除
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,已傳送信任的好友邀請
@@ -3520,7 +3527,7 @@ Feature.Moments.Label.FeedFailedToLoad,無法載入饋送
 Feature.Moments.Label.FeedMyMoments,我的美好時光
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,如何使用截圖功能
-Feature.Moments.Label.LinkCopied,連結已複製。
+Feature.Moments.Label.LinkCopied,連結已複製
 Feature.Moments.Label.LinkCopyFailed,無法複製連結。
 Feature.Moments.Label.ModeratedRodeoBody,由於違反《社群標準》，我們已將此「美好時光」移除。如要繼續對外顯示「美好時光」，請務必瞭解並遵守規範。
 Feature.Moments.Label.MomentDeletedBody,
@@ -4020,6 +4027,7 @@ Feature.SettingsHub.Label.NoConnectionsScreen,建立聯繫對象，一起同樂�
 Feature.SettingsHub.Label.NoFriendsPageMessage,新增好友一起探索。
 Feature.SettingsHub.Label.NoFriendsScreen,結交好友，開始同樂！
 Feature.SettingsHub.Label.QuitButton,退出
+Feature.SettingsHub.Label.QuitConfirmation,確定要退出嗎？
 Feature.SettingsHub.Label.ReasonForAbuse,檢舉濫用的原因？
 Feature.SettingsHub.Label.Report.BlockDisplayName,封鎖 {DISPLAY_NAME}（@{RBX_NAME}）
 Feature.SettingsHub.Label.Report.OtherActionsHeader,其他可以採取的步驟
@@ -4146,7 +4154,7 @@ Feature.SocialContextToast.Message.FollowedFriendNotInGame,{FRIEND_NAME} 已離�
 Feature.SocialContextToast.Message.FriendInNonRootPlace,「{FRIEND_NAME}」在此體驗中已移動到受限制的位置
 Feature.SocialContextToast.Message.FriendJoinedYou,{FRIEND_NAME} 已加入您
 Feature.SocialContextToast.Message.InvitationConfirmation,邀請已送出
-Feature.SocialContextToast.Message.InvitationFailure,無法傳送邀請
+Feature.SocialContextToast.Message.InvitationFailure,
 Feature.SocialContextToast.Message.InviteeJoinedYou,{INVITEE_NAME}透過您的邀請加入了遊戲！
 Feature.SocialContextToast.Message.YouJoinedManyFriends,您已加入 {FRIEND_NAME} 和其他 {FRIEND_COUNT} 位好友
 Feature.SocialContextToast.Message.YouJoinedOneFriend,您已加入 {FRIEND_NAME}
@@ -4782,6 +4790,7 @@ InGame.HelpMenu.Label.PlayerScripts,PlayerScripts:
 InGame.HelpMenu.Label.ServerChannel,伺服器頻道：
 InGame.HelpMenu.Label.ServerVersion,伺服器版本：
 InGame.HelpMenu.LeftArrow,←
+InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,→
 InGame.HelpMenu.UpArrow,↑
 InGame.InspectMenu.Action.Cancel,
@@ -4871,6 +4880,13 @@ InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,您在「{RBX_NAME}」隊伍
 InGame.UnknownNamespace.Network,（網路）
 InGame.UnknownNamespace.Received,收到
 InGame.UnknownNamespace.Sent,
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,無法將「{experience_name}」新增至桌面
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,無法將 {experience_name} 新增到首頁畫面
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,「{experience_name}」的捷徑已存在
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,已成功新增「{experience_name}」至桌面
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,已成功新增 {experience_name} 到首頁畫面
+InstantApps.Shortcuts.Label.TryAgain,再試一次
+InstantApps.Shortcuts.Label.ViewShortcut,檢視捷徑
 Notifications.NotificationStream.Bundle.ShowLess,顯示更少
 Notifications.NotificationStream.Bundle.ShowMoreV2,其他 {notificationCount} 個
 Notifications.NotificationStream.Label.AllCaughtUp,都看完了！

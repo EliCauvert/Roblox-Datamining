@@ -20,7 +20,6 @@ local _ = require(script.Parent.Types)
 local reactModule = require(parent.React)
 local fFlagExtendScrollingFramesBySafeInsets = require(parent.SharedFlags).FFlagExtendScrollingFramesBySafeInsets
 local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
-local fixConsoleEDPDirectionalNavigation = game:DefineFastFlag("FixConsoleEDPDirectionalNavigation", false)
 local fFlagLuaAppEdpConsoleMediaGalleryVideo = require(parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
 local t = {
 	itemPadding = 36,
@@ -30,7 +29,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: t (ref), cryoModule (ref), reactModule (ref), getPlatformConfigModule (ref), signal (ref), useAnimateFullscreenModule (ref), detailsPageHeaderModule (ref), useDetailsPageRenderItemsModule (ref), detailsPageRenderItemModule (ref), fFlagEnableLeftNavOnConsole (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), fullscreenFrameModule (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), loadableImage (ref), overlay (ref), animatedFlatList (ref), fixConsoleEDPDirectionalNavigation (ref)
+	-- upvalues: t (ref), cryoModule (ref), reactModule (ref), getPlatformConfigModule (ref), signal (ref), useAnimateFullscreenModule (ref), detailsPageHeaderModule (ref), useDetailsPageRenderItemsModule (ref), detailsPageRenderItemModule (ref), fFlagEnableLeftNavOnConsole (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), fullscreenFrameModule (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), loadableImage (ref), overlay (ref), animatedFlatList (ref)
 	local var1 = t
 	
 	if p1.tokens then
@@ -129,6 +128,7 @@ return function(p1)
 		Content = reactModule.createElement(animatedFlatList, {
 			animated = true,
 			UNSTABLE_forceSiblingLayoutUpdate = true,
+			isSequentiallySelectable = true,
 			onSelectedIndexChanged = reactModule.useCallback(function(p2)
 				-- upvalues: var12 (ref), var15 (ref), var3 (ref)
 				var12:fire()
@@ -181,8 +181,7 @@ return function(p1)
 				VerticalScrollBarInset = Enum.ScrollBarInset.None
 			},
 			animationConfig = var1.animationConfig,
-			overrideAutomaticCanvasSize = if fFlagEnableLeftNavOnConsole then false else true,
-			isSequentiallySelectable = if fixConsoleEDPDirectionalNavigation then true else nil
+			overrideAutomaticCanvasSize = if fFlagEnableLeftNavOnConsole then false else true
 		}),
 		Fullscreen = reactModule.createElement("CanvasGroup", {
 			BorderSizePixel = 0,

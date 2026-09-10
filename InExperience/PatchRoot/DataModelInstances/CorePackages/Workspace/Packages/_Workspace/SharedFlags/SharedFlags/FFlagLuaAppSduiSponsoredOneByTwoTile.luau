@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("LuaAppSduiSponsoredOneByTwoTile", false) and (require(script.Parent.FFlagLuaAppSduiSponsoredTwoByOneTile) and require(script.Parent.FFlagLuaAppEnableHomepageOneByTwoTile))

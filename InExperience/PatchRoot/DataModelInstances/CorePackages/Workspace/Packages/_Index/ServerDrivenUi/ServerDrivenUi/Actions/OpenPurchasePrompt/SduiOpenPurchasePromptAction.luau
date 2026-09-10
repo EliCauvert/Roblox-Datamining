@@ -16,6 +16,7 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiDevStoreSeeAllSupport = sharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagEnableHomeGameItemOwnershipUpdate = sharedFlagsModule.FFlagEnableHomeGameItemOwnershipUpdate
+local fFlagEnableSearchGameItemOwnershipUpdate = sharedFlagsModule.FFlagEnableSearchGameItemOwnershipUpdate
 local fFlagEnableLaunchAfterPurchase = sharedFlagsModule.FFlagEnableLaunchAfterPurchase
 local experienceService = game:GetService("ExperienceService")
 local playersService = game:GetService("Players")
@@ -61,14 +62,14 @@ local function _(p2, p3)
 end
 
 local function buildOnPurchaseSuccess(p2, p3, p4, p5)
-	-- upvalues: productKind (ref), productPurchaseSurface (ref), fFlagEnableHomeGameItemOwnershipUpdate (ref), dataHydrationModule (ref), fFlagSduiDevStoreSeeAllSupport (ref), playersService (ref)
-	return if p4 then if p3 == productKind.Gamepass and (p2 == productPurchaseSurface.EDP or fFlagEnableHomeGameItemOwnershipUpdate and p2 == productPurchaseSurface.HomePageGameItemShop) then function()
+	-- upvalues: productKind (ref), productPurchaseSurface (ref), fFlagEnableHomeGameItemOwnershipUpdate (ref), fFlagEnableSearchGameItemOwnershipUpdate (ref), dataHydrationModule (ref), fFlagSduiDevStoreSeeAllSupport (ref), playersService (ref)
+	return if p4 then if p3 == productKind.Gamepass and (p2 == productPurchaseSurface.EDP or fFlagEnableHomeGameItemOwnershipUpdate and p2 == productPurchaseSurface.HomePageGameItemShop or fFlagEnableSearchGameItemOwnershipUpdate and p2 == productPurchaseSurface.SearchPageGameItemShop) then function()
 		-- upvalues: dataHydrationModule (copy), p4 (ref)
 		dataHydrationModule.Game.getGamePassStore(false).updateGamePassInfo(p4, { isOwned = true })
 	end elseif fFlagSduiDevStoreSeeAllSupport and p3 == productKind.DeveloperSubscription and p2 == productPurchaseSurface.EDP then function()
 		-- upvalues: dataHydrationModule (copy), p4 (ref)
 		dataHydrationModule.Game.getGameSubscriptionStore(false).updateGameSubscriptionInfo(p4, { isSubscribed = true })
-	end elseif p3 == productKind.Product and (fFlagSduiDevStoreSeeAllSupport and p2 == productPurchaseSurface.EDP or fFlagEnableHomeGameItemOwnershipUpdate and p2 == productPurchaseSurface.HomePageGameItemShop) and p5 then function()
+	end elseif p3 == productKind.Product and p5 and (fFlagSduiDevStoreSeeAllSupport and p2 == productPurchaseSurface.EDP or fFlagEnableHomeGameItemOwnershipUpdate and p2 == productPurchaseSurface.HomePageGameItemShop or fFlagEnableSearchGameItemOwnershipUpdate and p2 == productPurchaseSurface.SearchPageGameItemShop) then function()
 		-- upvalues: playersService (copy), dataHydrationModule (copy), p5 (ref)
 		local localPlayer = playersService.LocalPlayer
 		local userId = localPlayer and localPlayer.UserId
@@ -155,7 +156,8 @@ local function normalizeProductPayload(p2, p3)
 end
 
 local t = {
-	[productPurchaseSurface.HomePageGameItemShop] = "homePageGameItemShop"
+	[productPurchaseSurface.HomePageGameItemShop] = "homePageGameItemShop",
+	[productPurchaseSurface.SearchPageGameItemShop] = if fFlagEnableSearchGameItemOwnershipUpdate then "searchPageGameItemShop" else nil
 }
 
 local function buildPurchasePayload(p2)

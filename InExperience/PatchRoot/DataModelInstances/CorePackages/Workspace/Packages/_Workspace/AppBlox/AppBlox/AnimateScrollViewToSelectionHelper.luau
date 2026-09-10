@@ -1,9 +1,12 @@
 ﻿local userGameSettingsService = UserSettings():GetService("UserGameSettings")
 local gamepadService = game:GetService("GamepadService")
 local tweenService = game:GetService("TweenService")
+local appBlox = script:FindFirstAncestor("AppBlox")
+local centerOnFocusScrollModule = require(appBlox.CenterOnFocusScroll)
+local fFlagLuaAppMediaGalleryGamepadSupport = require(appBlox.Parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 
-function AnimateScrollViewToSelectionHelper(p1, p2, p3)
-	-- upvalues: gamepadService (ref), userGameSettingsService (ref), tweenService (ref)
+function AnimateScrollViewToSelectionHelper(p1, p2, p3, p4)
+	-- upvalues: gamepadService (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), centerOnFocusScrollModule (ref), userGameSettingsService (ref), tweenService (ref)
 	local t = {}
 	local var1 = nil
 	
@@ -18,16 +21,27 @@ function AnimateScrollViewToSelectionHelper(p1, p2, p3)
 			-- upvalues: y_1 (write), p1 (ref)
 			y_1 = p1.AbsoluteWindowSize.Y
 		end))
-		table.insert(t, p1.SelectionChanged:Connect(function(_, _, p4)
-			-- upvalues: p1 (ref), gamepadService (copy), var1 (write), y_1 (write), y (write), userGameSettingsService (copy), p3 (ref), tweenService (copy), p2 (ref)
-			if not p4 or not p4:IsDescendantOf(p1) or gamepadService.GamepadCursorEnabled then return end
+		table.insert(t, p1.SelectionChanged:Connect(function(_, _, p5)
+			-- upvalues: p1 (ref), gamepadService (copy), var1 (write), fFlagLuaAppMediaGalleryGamepadSupport (copy), p4 (ref), centerOnFocusScrollModule (copy), y (write), y_1 (write), userGameSettingsService (copy), p3 (ref), tweenService (copy), p2 (ref)
+			if not p5 or not p5:IsDescendantOf(p1) or gamepadService.GamepadCursorEnabled then return end
 			if var1 then
 				var1:Cancel()
 				var1 = nil
 			end
+			local vector2
+			local y_2 = p5.AbsoluteSize.Y
+			local y_3 = p5.AbsolutePosition.Y
 			local canvasPosition = p1.CanvasPosition
-			local vector2 = Vector2.new(canvasPosition.X, canvasPosition.Y + (p4.AbsolutePosition.Y - (y_1 * 0.5 - p4.AbsoluteSize.Y * 0.5 + y)))
+			local _ = nil
 			
+			if fFlagLuaAppMediaGalleryGamepadSupport and p4 then
+				local revealOnlyCanvasY = centerOnFocusScrollModule.getRevealOnlyCanvasY(y_3, y_2, canvasPosition, y, y_1)
+				
+				if revealOnlyCanvasY == nil then return end
+				vector2 = Vector2.new(canvasPosition.X, revealOnlyCanvasY)
+			else
+				vector2 = Vector2.new(canvasPosition.X, canvasPosition.Y + (y_3 - (y_1 * 0.5 - y_2 * 0.5 + y)))
+			end
 			if userGameSettingsService.ReducedMotion or p3 and p3() then
 				p1.CanvasPosition = vector2
 				

@@ -35,6 +35,7 @@ return function()
 			refreshShopItemInfo = jest.fn(),
 			fetchGamePassOwnership = jest.fn(),
 			pollGamePassOwnership = jest.fn(),
+			bonusGamePassIdForNativePurchase = jest.fn(),
 			setItemsPerRow = var16,
 			setShouldOpenToRobuxTab = var18
 		},

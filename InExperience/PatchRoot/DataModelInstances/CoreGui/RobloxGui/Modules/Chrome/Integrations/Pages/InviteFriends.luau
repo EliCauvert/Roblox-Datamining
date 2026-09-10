@@ -31,7 +31,7 @@ return serviceModule:register({
 	id = "invite_friends",
 	initialAvailability = if not runService:IsStudio() and (playersService.LocalPlayer ~= nil and playersService.LocalPlayer.UserId > 0) then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
 	label = if fFlagConnectionsToFriendsRename then "CoreScripts.InGameMenu.PageTitle.InviteFriends" else "CommonUI.Features.Label.InviteConnections",
-	sideSheetPlacement = sideSheetPlacement.Vertical,
+	sideSheetPlacement = sideSheetPlacement.AboveFold,
 	activated = inGameMenuIntegrationUtilsModule.toggleInviteFriendsPage,
 	isActivated = var2,
 	components = {

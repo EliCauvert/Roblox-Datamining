@@ -35,7 +35,7 @@ local var4 = serviceModule:register({
 	draggable = true,
 	initialAvailability = if all and not fFlagRemoveAvatarSwitcherIfUnsupported then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
 	id = constantsModule.AVATAR_SWITCHER_ID,
-	sideSheetPlacement = sideSheetPlacement.Vertical,
+	sideSheetPlacement = sideSheetPlacement.AboveFold,
 	activated = function(_)
 		-- upvalues: serviceModule (ref), constantsModule (ref)
 		serviceModule:toggleWindow(constantsModule.AVATAR_SWITCHER_ID)

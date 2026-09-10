@@ -597,6 +597,20 @@ return function()
 	return {
 		GetOnlineFriends = GetOnlineFriends,
 		GetOnlineFriendsStatus = GetOnlineFriendsStatus,
+		RefetchOnlineFriends = function()
+			-- upvalues: var18 (ref), localUserIdStore (copy), getLocalPlayerUserId (copy)
+			local var49
+			local fetchItem = var18.fetchItem
+			local currentUserId = localUserIdStore.getCurrentUserId(false)
+			
+			if currentUserId == "" then
+				local var50 = getLocalPlayerUserId()
+				var49 = if var50 then tostring(var50) else ""
+			else
+				var49 = currentUserId
+			end
+			fetchItem(var49)
+		end,
 		GetOnlineFriendsByUniverseId = GetOnlineFriendsByUniverseId,
 		GetAllFriends = function()
 			-- upvalues: localUserIdStore (copy), getLocalPlayerUserId (copy), var33 (ref), var47 (ref)
@@ -658,121 +672,6 @@ return function()
 			return var23.getAndFetchItem(p18)
 		end,
 		UpdateIsFriendsWith = UpdateIsFriendsWith,
-		GetFriendshipStatus = function(p18, p19)
-			-- upvalues: fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var28 (ref)
-			return if not (not fFlagEnableGetFriendshipStatus and not fFlagSduiRequestFriendshipAction or p18 == "") then if fFlagEnableGetFriendshipStatus and p19 and p19.skipFetch then var28.getCachedItem(p18) else var28.getAndFetchItem(p18) else nil
-		end,
-		UpdateFriendshipStatus = function(p18, p19)
-			-- upvalues: fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (ref), UpdateIsFriendsWith (ref)
-			if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
-				var6.replaceItem(p18, p19)
-				UpdateIsFriendsWith(p18, p19 == Enum.FriendStatus.Friend)
-				
-				return
-			end
-		end,
-		RequestFriendship = function(p18, p19, p20)
-			-- upvalues: fFlagEnableGetFriendshipStatus (copy), requestsModule (copy), fFlagSduiRequestFriendshipAction (copy), var6 (ref), UpdateIsFriendsWith (ref)
-			return (if fFlagEnableGetFriendshipStatus and p20 and p20.isContact then requestsModule.RequestFriendshipFromContactId(p18) else requestsModule.RequestFriendshipFromUserId(p18, p19)):andThen(function()
-				-- upvalues: p18 (ref), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (copy), UpdateIsFriendsWith (copy)
-				local friendRequestSent = Enum.FriendStatus.FriendRequestSent
-				
-				if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
-					var6.replaceItem(p18, friendRequestSent)
-					UpdateIsFriendsWith(p18, friendRequestSent == Enum.FriendStatus.Friend)
-					
-					return
-				end
-			end):catch(function(p21)
-				-- upvalues: p18 (ref), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (copy), UpdateIsFriendsWith (copy)
-				if (if type(p21) == "table" then p21.firstErrorCode else nil) ~= 5 then
-					error(p21)
-					
-					return
-				end
-				local var49 = p18
-				local friend = Enum.FriendStatus.Friend
-				
-				if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
-					var6.replaceItem(var49, friend)
-					UpdateIsFriendsWith(var49, friend == Enum.FriendStatus.Friend)
-					
-					return
-				end
-			end)
-		end,
-		AcceptFriendRequest = function(p18)
-			-- upvalues: requestsModule (copy), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (ref), UpdateIsFriendsWith (ref)
-			return requestsModule.AcceptFriendRequestFromUserId(p18):andThen(function()
-				-- upvalues: p18 (ref), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (copy), UpdateIsFriendsWith (copy)
-				local friend = Enum.FriendStatus.Friend
-				
-				if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
-					var6.replaceItem(p18, friend)
-					UpdateIsFriendsWith(p18, friend == Enum.FriendStatus.Friend)
-					
-					return
-				end
-			end):catch(function(p19)
-				-- upvalues: p18 (ref), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (copy), UpdateIsFriendsWith (copy)
-				if (if type(p19) == "table" then p19.firstErrorCode else nil) ~= 5 then
-					error(p19)
-					
-					return
-				end
-				local var49 = p18
-				local friend = Enum.FriendStatus.Friend
-				
-				if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
-					var6.replaceItem(var49, friend)
-					UpdateIsFriendsWith(var49, friend == Enum.FriendStatus.Friend)
-					
-					return
-				end
-			end)
-		end,
-		DeclineFriendRequest = function(p18)
-			-- upvalues: requestsModule (copy), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (ref), UpdateIsFriendsWith (ref)
-			return requestsModule.DeclineFriendRequestFromUserId(p18):andThen(function()
-				-- upvalues: p18 (ref), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (copy), UpdateIsFriendsWith (copy)
-				local notFriend = Enum.FriendStatus.NotFriend
-				
-				if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
-					var6.replaceItem(p18, notFriend)
-					UpdateIsFriendsWith(p18, notFriend == Enum.FriendStatus.Friend)
-					
-					return
-				end
-			end)
-		end,
-		Unfriend = function(p18)
-			-- upvalues: requestsModule (copy), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (ref), UpdateIsFriendsWith (ref)
-			return requestsModule.UnfriendTargetUserId(p18):andThen(function()
-				-- upvalues: p18 (ref), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (copy), UpdateIsFriendsWith (copy)
-				local notFriend = Enum.FriendStatus.NotFriend
-				
-				if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
-					var6.replaceItem(p18, notFriend)
-					UpdateIsFriendsWith(p18, notFriend == Enum.FriendStatus.Friend)
-					
-					return
-				end
-			end)
-		end,
-		RefetchOnlineFriends = function()
-			-- upvalues: var18 (ref), localUserIdStore (copy), getLocalPlayerUserId (copy)
-			local var49
-			local fetchItem = var18.fetchItem
-			local currentUserId = localUserIdStore.getCurrentUserId(false)
-			
-			if currentUserId == "" then
-				local var50 = getLocalPlayerUserId()
-				var49 = if var50 then tostring(var50) else ""
-			else
-				var49 = currentUserId
-			end
-			fetchItem(var49)
-		end,
 		GetFriendsCountByUserId = function(p18, p19)
 			-- upvalues: fFlagFriendsCountDataHydrationMigrationEnabled (copy), var36 (ref)
 			return if fFlagFriendsCountDataHydrationMigrationEnabled then if p19 and p19.skipFetch then var36.getCachedItem(p18) else var36.getAndFetchItem(p18) else nil
@@ -866,6 +765,107 @@ return function()
 				var51 = currentUserId
 			end
 			updateItem(var51, t)
+		end,
+		GetFriendshipStatus = function(p20, p21)
+			-- upvalues: fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var28 (ref)
+			return if not (not fFlagEnableGetFriendshipStatus and not fFlagSduiRequestFriendshipAction or p20 == "") then if fFlagEnableGetFriendshipStatus and p21 and p21.skipFetch then var28.getCachedItem(p20) else var28.getAndFetchItem(p20) else nil
+		end,
+		UpdateFriendshipStatus = function(p20, p21)
+			-- upvalues: fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (ref), UpdateIsFriendsWith (ref)
+			if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
+				var6.replaceItem(p20, p21)
+				UpdateIsFriendsWith(p20, p21 == Enum.FriendStatus.Friend)
+				
+				return
+			end
+		end,
+		RequestFriendship = function(p20, p21, p22)
+			-- upvalues: fFlagEnableGetFriendshipStatus (copy), requestsModule (copy), fFlagSduiRequestFriendshipAction (copy), var6 (ref), UpdateIsFriendsWith (ref)
+			return (if fFlagEnableGetFriendshipStatus and p22 and p22.isContact then requestsModule.RequestFriendshipFromContactId(p20) else requestsModule.RequestFriendshipFromUserId(p20, p21)):andThen(function()
+				-- upvalues: p20 (ref), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (copy), UpdateIsFriendsWith (copy)
+				local friendRequestSent = Enum.FriendStatus.FriendRequestSent
+				
+				if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
+					var6.replaceItem(p20, friendRequestSent)
+					UpdateIsFriendsWith(p20, friendRequestSent == Enum.FriendStatus.Friend)
+					
+					return
+				end
+			end):catch(function(p23)
+				-- upvalues: p20 (ref), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (copy), UpdateIsFriendsWith (copy)
+				if (if type(p23) == "table" then p23.firstErrorCode else nil) ~= 5 then
+					error(p23)
+					
+					return
+				end
+				local var53 = p20
+				local friend = Enum.FriendStatus.Friend
+				
+				if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
+					var6.replaceItem(var53, friend)
+					UpdateIsFriendsWith(var53, friend == Enum.FriendStatus.Friend)
+					
+					return
+				end
+			end)
+		end,
+		AcceptFriendRequest = function(p20)
+			-- upvalues: requestsModule (copy), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (ref), UpdateIsFriendsWith (ref)
+			return requestsModule.AcceptFriendRequestFromUserId(p20):andThen(function()
+				-- upvalues: p20 (ref), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (copy), UpdateIsFriendsWith (copy)
+				local friend = Enum.FriendStatus.Friend
+				
+				if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
+					var6.replaceItem(p20, friend)
+					UpdateIsFriendsWith(p20, friend == Enum.FriendStatus.Friend)
+					
+					return
+				end
+			end):catch(function(p21)
+				-- upvalues: p20 (ref), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (copy), UpdateIsFriendsWith (copy)
+				if (if type(p21) == "table" then p21.firstErrorCode else nil) ~= 5 then
+					error(p21)
+					
+					return
+				end
+				local var53 = p20
+				local friend = Enum.FriendStatus.Friend
+				
+				if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
+					var6.replaceItem(var53, friend)
+					UpdateIsFriendsWith(var53, friend == Enum.FriendStatus.Friend)
+					
+					return
+				end
+			end)
+		end,
+		DeclineFriendRequest = function(p20)
+			-- upvalues: requestsModule (copy), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (ref), UpdateIsFriendsWith (ref)
+			return requestsModule.DeclineFriendRequestFromUserId(p20):andThen(function()
+				-- upvalues: p20 (ref), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (copy), UpdateIsFriendsWith (copy)
+				local notFriend = Enum.FriendStatus.NotFriend
+				
+				if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
+					var6.replaceItem(p20, notFriend)
+					UpdateIsFriendsWith(p20, notFriend == Enum.FriendStatus.Friend)
+					
+					return
+				end
+			end)
+		end,
+		Unfriend = function(p20)
+			-- upvalues: requestsModule (copy), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (ref), UpdateIsFriendsWith (ref)
+			return requestsModule.UnfriendTargetUserId(p20):andThen(function()
+				-- upvalues: p20 (ref), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (copy), UpdateIsFriendsWith (copy)
+				local notFriend = Enum.FriendStatus.NotFriend
+				
+				if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
+					var6.replaceItem(p20, notFriend)
+					UpdateIsFriendsWith(p20, notFriend == Enum.FriendStatus.Friend)
+					
+					return
+				end
+			end)
 		end
 	}
 end

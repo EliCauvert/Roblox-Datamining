@@ -19,7 +19,12 @@ return function(p1)
 	local playability = playabilityStore.getPlayability(p1.universeId)
 	local var1 = signalsReactModule.useSignalState(playability.data)
 	local var2 = signalsReactModule.useSignalState(playability.status) == dataHydrationModule.DataStatus.Ready
-	local var3 = useSduiVideoAnalytics(p1.analyticsContext, p1.sduiContext.appPage, p1.universeId, p1.placeId)
+	local var3 = useSduiVideoAnalytics(p1.analyticsContext, p1.sduiContext.appPage, {
+		source = "universe",
+		sourceId = p1.universeId,
+		universeId = p1.universeId,
+		placeId = p1.placeId
+	})
 	local var4 = reactModule.useCallback(function(p2)
 		-- upvalues: var2 (ref), var3 (ref), videoEndReason (copy)
 		if var2 then

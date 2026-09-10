@@ -56,6 +56,7 @@ return {
 	CheckboxFeedbackFormModal = checkboxFeedbackFormModalModule,
 	TextFeedbackFormModal = if sharedFlagsModule.FFlagLuaAppTextFeedbackFormModal then require(script.TextFeedbackFormModal) else nil,
 	ProvideFeedbackToast = require(script.ProvideFeedbackToast),
+	SnackbarWrapper = require(script.SnackbarWrapper),
 	EmptyTile = require(script.EmptyTile),
 	useCloseWithBackButton = require(script.DetailsPage.Hooks.useCloseWithBackButton),
 	OverflowMenu = require(script.OverflowMenu.OverflowMenu),

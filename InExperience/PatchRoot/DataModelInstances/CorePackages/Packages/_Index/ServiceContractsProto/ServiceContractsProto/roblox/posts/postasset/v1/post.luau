@@ -1841,7 +1841,7 @@ t_13.__index = t_13
 function t_13.new(p13)
 	-- upvalues: t_13 (ref)
 	return setmetatable({
-		look_id = if p13 == nil or p13.look_id == nil then "" else p13.look_id
+		outfit_id = if p13 == nil or p13.outfit_id == nil then 0 else p13.outfit_id
 	}, t_13)
 end
 
@@ -1850,9 +1850,9 @@ function t_13:encode()
 	local buff = buffer.create(0)
 	local var278 = 0
 	
-	if self.look_id ~= nil and self.look_id ~= "" then
-		local var279, var280 = protoModule.writeTag(buff, var278, 1, protoModule.wireTypes.lengthDelimited)
-		var279, var448 = protoModule.writeString(var279, var280, self.look_id)
+	if self.outfit_id ~= nil and self.outfit_id ~= 0 then
+		local var279, var280 = protoModule.writeTag(buff, var278, 1, protoModule.wireTypes.varint)
+		var279, var448 = protoModule.writeVarInt(var279, var280, self.outfit_id)
 		buff = var279
 		var278 = var280
 	end
@@ -1868,42 +1868,40 @@ function t_13.decode(p13)
 	local var279 = 0
 	while var279 < buffer.len(p13) do
 		local _ = nil
-		local var280 = nil
-		local var281, var282, var283 = protoModule.readTag(p13, var279)
+		local _ = nil
+		local var280, var281, var282 = protoModule.readTag(p13, var279)
+		local var283 = var280
 		local var284 = var281
-		var280 = var282
-		var279 = var283
+		var279 = var282
 		
-		if var280 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var285, var286 = protoModule.readVarInt(p13, var279)
-			local _ = var285
-			var279 = var286
-			continue
-		end
-		if var280 == protoModule.wireTypes.lengthDelimited then
-			if var284 == 1 then
+		if var284 == protoModule.wireTypes.varint then
+			if var283 == 1 then
 				local _ = nil
-				local var287, var288 = protoModule.readBuffer(p13, var279)
-				var279 = var288
-				var278.look_id = buffer.tostring(var287)
+				local var285, var286 = protoModule.readVarIntI64(p13, var279)
+				var279 = var286
+				var278.outfit_id = var285
 			else
 				local _ = nil
-				local var289, var290 = protoModule.readVarInt(p13, var279)
-				var279 = var290 + var289
+				local var287, var288 = protoModule.readVarInt(p13, var279)
+				local _ = var287
+				var279 = var288
 			end
-		elseif var280 == protoModule.wireTypes.i32 then
+		elseif var284 == protoModule.wireTypes.lengthDelimited then
+			local _ = nil
+			local var289, var290 = protoModule.readVarInt(p13, var279)
+			var279 = var290 + var289
+		elseif var284 == protoModule.wireTypes.i32 then
 			local _ = nil
 			local var291, var292 = protoModule.readFixed32(p13, var279)
 			local _ = var291
 			var279 = var292
-		elseif var280 == protoModule.wireTypes.i64 then
+		elseif var284 == protoModule.wireTypes.i64 then
 			local _ = nil
 			local var293, var294 = protoModule.readFixed64(p13, var279)
 			local _ = var293
 			var279 = var294
 		else
-			error("Unsupported wire type: " .. var452)
+			error("Unsupported wire type: " .. var456)
 		end
 	end
 	return var278
@@ -1912,8 +1910,8 @@ end
 function t_13:jsonEncode()
 	local t = {}
 	
-	if self.look_id ~= nil and self.look_id ~= "" then
-		t.lookId = self.look_id
+	if self.outfit_id ~= nil and self.outfit_id ~= 0 then
+		t.outfitId = self.outfit_id
 	end
 	return t
 end
@@ -1922,11 +1920,11 @@ function t_13:jsonDecode()
 	-- upvalues: t_13 (ref)
 	local var295 = t_13.new()
 	
-	if self.look_id ~= nil then
-		var295.look_id = self.look_id
+	if self.outfit_id ~= nil then
+		var295.outfit_id = self.outfit_id
 	end
-	if self.lookId ~= nil then
-		var295.look_id = self.lookId
+	if self.outfitId ~= nil then
+		var295.outfit_id = self.outfitId
 	end
 	return var295
 end

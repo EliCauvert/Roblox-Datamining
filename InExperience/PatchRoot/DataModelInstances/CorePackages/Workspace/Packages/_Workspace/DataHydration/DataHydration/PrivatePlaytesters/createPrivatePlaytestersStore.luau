@@ -51,23 +51,29 @@ return function(p1)
 				if #t_1 == 0 then
 					var1.replaceItem(tostring(p2), p4)
 					
-					return promiseModule.resolve(p4)
+					return promiseModule.resolve({})
 				end
 				return playtestersRequestsModule.addPlaytester(p2, t_1, t):andThen(function(p5)
-					-- upvalues: var1 (copy), p2 (copy)
+					-- upvalues: var1 (copy), p2 (copy), t_1 (ref)
 					var1.replaceItem(tostring(p2), p5)
+					local t = {}
 					
-					return p5
+					for i, v in t_1 do
+						if table.find(p5, v) ~= nil then
+							table.insert(t, v)
+						end
+					end
+					return t
 				end)
 			end)
 		end,
-		removeInvite = function(p4, p5)
+		removeInvite = function(p5, p6)
 			-- upvalues: playtestersRequestsModule (copy), t (ref), var1 (ref)
-			return playtestersRequestsModule.removePlaytester(p4, p5, t):andThen(function(p6)
-				-- upvalues: var1 (copy), p4 (ref)
-				var1.replaceItem(tostring(p4), p6)
+			return playtestersRequestsModule.removePlaytester(p5, p6, t):andThen(function(p7)
+				-- upvalues: var1 (copy), p5 (ref)
+				var1.replaceItem(tostring(p5), p7)
 				
-				return p6
+				return p7
 			end)
 		end
 	}

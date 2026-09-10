@@ -47,6 +47,8 @@ local setIsSubjectToChinaPoliciesModule = require(parent.Actions.SetIsSubjectToC
 local updateStoreIdModule = require(parent.Actions.UpdateStoreId)
 local var2 = if require(parent.Flags.FFlagAXEnableFetchAvatarPreview) then require(parent.Thunks.GetAssetsFromHumanoidDescriptionV2) else require(parent.Thunks.GetAssetsFromHumanoidDescription)
 local updateOwnedStatusModule = require(parent.Thunks.UpdateOwnedStatus)
+local reportPurchaseSuccessUnifiedEventModule = require(parent.Thunks.ReportPurchaseSuccessUnifiedEvent)
+local fFlagAXIaBSinglePurchaseUnifiedEventsModule = require(parent.Flags.FFlagAXIaBSinglePurchaseUnifiedEvents)
 local getCharacterModelFromUserIdModule = require(parent.Thunks.GetCharacterModelFromUserId)
 local getPlayerNameModule = require(parent.Thunks.GetPlayerName)
 local inspectAndBuyContextModule = require(parent.Components.InspectAndBuyContext)
@@ -108,7 +110,7 @@ function inspectAndBuy.updateView(p1)
 end
 
 function inspectAndBuy.init(p1)
-	-- upvalues: networkModule (ref), fFlagAXEnableInspectAndBuyVersionAnalyticsModule (ref), analyticsModule (ref), fFlagEnableInspectAndBuyV2RootFlag (ref), inspectAndBuyVersion (ref), roduxModule (ref), inspectAndBuyReducerModule (ref), thunkModule (ref), constantsModule (ref), compactViewModule (ref), wideViewModule (ref), wideLandscapeViewModule (ref), updateStoreIdModule (ref), setPlayerNameModule (ref), setLocaleModule (ref), localizationService (ref), setPlayerIdModule (ref), var2 (ref), updateOwnedStatusModule (ref), setItemBeingPurchasedModule (ref)
+	-- upvalues: networkModule (ref), fFlagAXEnableInspectAndBuyVersionAnalyticsModule (ref), analyticsModule (ref), fFlagEnableInspectAndBuyV2RootFlag (ref), inspectAndBuyVersion (ref), roduxModule (ref), inspectAndBuyReducerModule (ref), thunkModule (ref), constantsModule (ref), compactViewModule (ref), wideViewModule (ref), wideLandscapeViewModule (ref), updateStoreIdModule (ref), setPlayerNameModule (ref), setLocaleModule (ref), localizationService (ref), setPlayerIdModule (ref), var2 (ref), fFlagAXIaBSinglePurchaseUnifiedEventsModule (ref), reportPurchaseSuccessUnifiedEventModule (ref), updateOwnedStatusModule (ref), setItemBeingPurchasedModule (ref)
 	local playerId = p1.props.playerId
 	local playerName = p1.props.playerName
 	local ctx = p1.props.ctx
@@ -141,12 +143,16 @@ function inspectAndBuy.init(p1)
 		p1.state.store:dispatch(var2(p1.humanoidDescription, false))
 	end
 	function p3.onPromptPurchaseFinished(_, p2, p3)
-		-- upvalues: p1 (ref), constantsModule (copy), updateOwnedStatusModule (copy), setItemBeingPurchasedModule (copy)
+		-- upvalues: p1 (ref), constantsModule (copy), fFlagAXIaBSinglePurchaseUnifiedEventsModule (copy), reportPurchaseSuccessUnifiedEventModule (copy), updateOwnedStatusModule (copy), setItemBeingPurchasedModule (copy)
 		local itemBeingPurchased = p1.state.store:getState().itemBeingPurchased
 		p1.analytics.sendCounter(constantsModule.Counters.PurchaseFinished)
 		
 		if p3 and tostring(p2) == itemBeingPurchased.itemId then
-			p1.analytics.reportPurchaseSuccess(itemBeingPurchased.itemType, itemBeingPurchased.itemId)
+			if fFlagAXIaBSinglePurchaseUnifiedEventsModule then
+				p1.state.store:dispatch(reportPurchaseSuccessUnifiedEventModule(itemBeingPurchased.itemId, itemBeingPurchased.itemType, itemBeingPurchased.resalePrice))
+			else
+				p1.analytics.reportPurchaseSuccess(itemBeingPurchased.itemType, itemBeingPurchased.itemId)
+			end
 			p1.state.store:dispatch(updateOwnedStatusModule(itemBeingPurchased.itemId, itemBeingPurchased.itemType))
 			
 			if itemBeingPurchased.itemType == constantsModule.ItemType.Asset then

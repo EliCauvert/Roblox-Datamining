@@ -28,7 +28,7 @@ return serviceModule:register({
 	id = "trust_and_safety",
 	label = "CoreScripts.InGameMenu.QuickActions.Report",
 	initialAvailability = serviceModule.AvailabilitySignal.Available,
-	sideSheetPlacement = sideSheetPlacement.Page,
+	sideSheetPlacement = sideSheetPlacement.AboveFold,
 	activated = function(_)
 		-- upvalues: robloxGui (ref), var1 (write)
 		local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)

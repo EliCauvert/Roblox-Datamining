@@ -17,6 +17,7 @@ local fFlagRemoveFriendsChatUnibarEntrypoints = sharedFlagsModule.FFlagRemoveFri
 local fFlagExpChatCanShowFriendsTab = sharedFlagsModule.FFlagExpChatCanShowFriendsTab
 local fFlagShowSwitchServerButton = sharedFlagsModule.FFlagShowSwitchServerButton
 local isPioneerLaunch = require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch
+local fFlagEnableSideSheetRobuxWidgetModule = require(chrome.Flags.FFlagEnableSideSheetRobuxWidget)
 local var1 = if fFlagIntegrateTraversalHistoryInSideSheet then require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).Traversal else nil
 local var2 = if var1 then var1.Flags.FFlagAddTraversalHistory else false
 
@@ -27,7 +28,7 @@ local function _(p1, p2, p3)
 end
 
 return function()
-	-- upvalues: isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), argoPartyExperimentation (ref), fFlagExpChatCanShowFriendsTab (ref), isSpatial (ref), guiService (ref), isInExperienceUIVREnabled (ref), var2 (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), fFlagAddInviteFriendsIntegration (ref), constantsModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), fFlagShowSwitchServerButton (ref), fFlagEnableInExperienceShop (ref), inExperienceSideSheetModule (ref), isPioneerLaunch (ref), isSideSheetEnabledModule (ref)
+	-- upvalues: isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), argoPartyExperimentation (ref), fFlagExpChatCanShowFriendsTab (ref), isSpatial (ref), guiService (ref), isInExperienceUIVREnabled (ref), var2 (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), fFlagEnableSideSheetRobuxWidgetModule (ref), isSideSheetEnabledModule (ref), fFlagAddInviteFriendsIntegration (ref), constantsModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), fFlagShowSwitchServerButton (ref), fFlagEnableInExperienceShop (ref), isPioneerLaunch (ref), inExperienceSideSheetModule (ref)
 	local var3 = isConnectDropdownEnabledModule()
 	
 	if var3 then
@@ -35,6 +36,7 @@ return function()
 	end
 	local var4 = not isInExperienceUIVREnabled or not isSpatial()
 	local t = {
+		RobuxWidget = if fFlagEnableSideSheetRobuxWidgetModule and isSideSheetEnabledModule then 5 else nil,
 		invite_friends = if fFlagAddInviteFriendsIntegration then 10 else nil,
 		people = 20,
 		settings = 30,
@@ -52,13 +54,13 @@ return function()
 		gallery = 140,
 		selfie_view = if var4 then 150 else nil,
 		music_entrypoint = if not isSpatial() and not guiService:IsTenFootInterface() then 160 else nil,
+		AccountUpsell = if isPioneerLaunch() then 170 else nil,
 		[inExperienceSideSheetModule.Enums.ActionBinding.Leave] = 180,
 		[inExperienceSideSheetModule.Enums.ActionBinding.Respawn] = 190
 	}
 	
 	if isPioneerLaunch() then
 		t.connect_dropdown = nil
-		t.invite_friends = nil
 		t[constantsModule.AVATAR_SWITCHER_ID] = nil
 		t.emotes = nil
 		t.traversal_history = nil

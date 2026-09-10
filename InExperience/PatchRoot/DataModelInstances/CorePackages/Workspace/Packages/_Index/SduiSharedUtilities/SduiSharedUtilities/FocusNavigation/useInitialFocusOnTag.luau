@@ -3,10 +3,17 @@ local collectionService = game:GetService("CollectionService")
 local reactModule = require(parent.React)
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local responsiveModule = require(parent.Responsive)
+local fFlagLuaAppMediaGalleryGamepadSupport = require(parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 
 return function(p1, p2)
-	-- upvalues: responsiveModule (ref), reactFocusNavigationModule (ref), reactModule (ref), collectionService (ref)
-	local var1 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
+	-- upvalues: fFlagLuaAppMediaGalleryGamepadSupport (ref), responsiveModule (ref), reactFocusNavigationModule (ref), reactModule (ref), collectionService (ref)
+	local var1
+	if fFlagLuaAppMediaGalleryGamepadSupport then
+		var1 = responsiveModule.useLastInput() == responsiveModule.Input.Directional
+		var1 = nil
+	else
+		var1 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
+	end
 	local var2 = reactFocusNavigationModule.useFocusGuiObject()
 	local var3 = reactModule.useRef(false)
 	reactModule.useEffect(function()

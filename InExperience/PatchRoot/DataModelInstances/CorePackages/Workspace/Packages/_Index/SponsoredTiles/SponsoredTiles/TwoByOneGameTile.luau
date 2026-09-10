@@ -9,6 +9,7 @@ local gameTileThumbnailBadges = gameTileModule.GameTileThumbnailBadges
 local getAvailableGameTileOverflowMenuItems = gameTileModule.getAvailableGameTileOverflowMenuItems
 local spanTileOverflowMenuModule = require(sponsoredTiles.SpanTileOverflowMenu.SpanTileOverflowMenu)
 local twoByOneGameTileTelemetryModule = require(sponsoredTiles.TwoByOneGameTileTelemetry)
+local _ = require(sponsoredTiles.types)
 local hiddenTileContent = gameTileModule.HiddenTileContent
 local itemLayoutDataParsingUtils = gameTileModule.ItemLayoutDataParsingUtils
 local hoverTileCoordinator = gameTileModule.HoverTileCoordinator

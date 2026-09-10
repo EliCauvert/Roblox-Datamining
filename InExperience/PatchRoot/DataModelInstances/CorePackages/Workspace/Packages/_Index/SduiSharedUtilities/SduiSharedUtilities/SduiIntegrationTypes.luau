@@ -1,5 +1,6 @@
 ﻿return {
 	NavButtonType = { back = "back", close = "close", none = "none" },
+	SduiRequestConcurrencyPolicy = { Dedupe = "dedupe", LatestWins = "latestWins" },
 	SduiRequestStatus = {
 		FailedToLoad = "FailedToLoad",
 		LoadedFromCache = "LoadedFromCache",

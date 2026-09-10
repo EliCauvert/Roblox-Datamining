@@ -57,8 +57,6 @@ Amp.Upsell.Message.EmailSent,เราได้ส่งอีเมลไปท
 Amp.Upsell.Message.EmailSentPluralParent,เราได้ส่งอีเมลไปยังอีเมลของผู้ปกครองที่เชื่อมโยงอยู่กับบัญชีของคุณแล้ว
 Amp.Upsell.Title.AskYourParent,ขออนุญาตผู้ปกครองของคุณ
 Amp.Upsell.Title.RequestSent,ส่งคำขอแล้ว
-Application.Logout.Action.Logout,ลงชื่อออก
-Application.Logout.Message.Confirmation,คุณแน่ใจหรือไม่ว่าคุณต้องการลงชื่อออก?
 Authentication.AccountSwitch.Action.SwitchAccount,สลับบัญชี
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,ลงชื่อเข้าใช้ด่วน
@@ -932,6 +930,8 @@ CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,
 CoreScripts.InGameMenu.Traversal.HistoryDescription,เข้าร่วมเกมที่เคยเล่น
 CoreScripts.InGameMenu.Traversal.LeaveBody,คุณกำลังจะออกจากเกมนี้และกลับไปที่ {PREVIOUS_EXPERIENCE}
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
+CoreScripts.InGameMenu.UnlockMore.Description,แชท เพื่อน และเกมเพิ่มเติม
+CoreScripts.InGameMenu.UnlockMore.Title,ปลดล็อค Roblox เพิ่มเติม
 CoreScripts.InGameMenu.Vibration,
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,เพื่อเปิด/ปิดการนำทางบนเมนู
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,บางประสบการณ์จำเป็นต้องกดที่
@@ -2036,6 +2036,7 @@ Feature.Build.Label.GamePlays,จำนวนการเล่นเกม
 Feature.Build.Label.GetMoreBuildUsage,รับโควต้าการใช้งาน Build เพิ่ม
 Feature.Build.Label.Hi,สวัสดี
 Feature.Build.Label.IconThumbnails,ไอคอนและภาพขนาดย่อ
+Feature.Build.Label.Images2D,ภาพ 2D
 Feature.Build.Label.InProgress,อยู่ระหว่างดำเนินการ
 Feature.Build.Label.InputNeeded,ต้องกรอกข้อมูล
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2067,6 +2068,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,พร้อม
 Feature.Build.Label.RegionalPricing,ราคาตามภูมิภาค
 Feature.Build.Label.ResetsDaily,รีเซ็ตทุกวัน
+Feature.Build.Label.ResetsMonthly,รีเซ็ตทุกเดือน
+Feature.Build.Label.ResetsWeekly,รีเซ็ตทุกสัปดาห์
 Feature.Build.Label.RestoredVersion,กู้คืน {VERSION} แล้ว
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2074,7 +2077,6 @@ Feature.Build.Label.SearchAssets,ค้นหาทรัพยากร
 Feature.Build.Label.SearchGames,ค้นหาเกม
 Feature.Build.Label.SearchTasks,ค้นหางาน
 Feature.Build.Label.SelectOption,เลือก 1 ข้อ
-Feature.Build.Label.ShareAddedFriends,แชร์กับเพื่อนที่คุณเพิ่ม
 Feature.Build.Label.Shared,แชร์แล้ว
 Feature.Build.Label.ShopButton,ปุ่มร้านค้า
 Feature.Build.Label.ShopUi,UI ของร้านค้า
@@ -2211,7 +2213,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,ยังไม่มีประวัติเวอร์ชัน
 Feature.Build.Message.OneTaskCompleted,เสร็จแล้ว 1 งาน
 Feature.Build.Message.OutOfBuildUsage,คุณใช้โควต้าการใช้งาน Build หมดแล้ว ดูตัวเลือกของคุณเพื่อใช้ Robux สร้างต่อ
+Feature.Build.Message.PlaytestInviteSendFailedBody,คุณไม่สามารถส่งลิงก์เชิญเข้าร่วมแชทให้ผู้ใช้ต่อไปนี้ได้:
+Feature.Build.Message.PlaytestInviteSendFailedHint,โปรดใช้ปุ่มแชร์เพื่อรับลิงก์
 Feature.Build.Message.PlaytestersAdded,เพิ่มผู้ทดสอบเกมไป {INVITED_COUNT} จาก {MAX_INVITES} คนแล้ว
+Feature.Build.Message.PrivatePlaytestInvite,{username} ชวนคุณเข้าร่วมการทดลองเล่น {experienceName} แบบส่วนตัว
 Feature.Build.Message.PublicPublishFailed,เผยแพร่เกมของคุณแล้ว แต่ไม่สามารถตั้งค่าเป็นสาธารณะได้ โปรดลองอีกครั้ง
 Feature.Build.Message.PublishExpandAudience,เผยแพร่เพื่อขยายกลุ่มเป้าหมายของคุณ
 Feature.Build.Message.PublishNotReverted,ย้อนกลับการเผยแพร่ของคุณไม่สำเร็จ โปรดลองอีกครั้ง
@@ -2275,6 +2280,7 @@ Feature.Build.Title.GetUsers,ดึงดูดผู้ใช้
 Feature.Build.Title.ManagedPricingAcknowledgement,เปิดการตั้งราคาแบบมีการจัดการใช่ไหม?
 Feature.Build.Title.NoMonetizationProducts,เริ่มสร้างรายได้ในเกมของคุณ
 Feature.Build.Title.NoRobuxForUsage,ไม่มี Robux เหลือสำหรับโควต้าการใช้งาน Build
+Feature.Build.Title.PlaytestInviteSendFailed,ไม่สามารถส่งคำเชิญได้
 Feature.Build.Title.Playtesters,ผู้ทดลองเล่น
 Feature.Build.Title.PlaytestersOnlyPlay,เฉพาะผู้ทดลองเล่นเท่านั้นที่เล่นได้
 Feature.Build.Title.PromoteGame,โปรโมตเกมของคุณ
@@ -3221,6 +3227,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,ลบเพื่อ�
 Feature.Friends.TrustedFriend.AddBack.Header,คำขอเป็นเพื่อนที่เชื่อได้
 Feature.Friends.TrustedFriend.Info.Modal.Header,เพื่อนที่เชื่อได้รายใหม่
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,เพิ่มเพื่อนที่เชื่อได้
+Feature.Friends.TrustedFriend.Label.Title,เพื่อนที่เชื่อได้
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} เป็นเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,ลบเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,ส่งคำขอเป็นเพื่อนที่เชื่อได้แล้ว
@@ -4004,6 +4011,7 @@ Feature.SettingsHub.Label.NoConnectionsScreen,สร้างเครือข�
 Feature.SettingsHub.Label.NoFriendsPageMessage,เพิ่มเพื่อนเพื่อให้คุณสามารถสำรวจด้วยกันได้
 Feature.SettingsHub.Label.NoFriendsScreen,หาเพื่อนแล้วเชิญให้เข้าร่วมประสบการณ์ต่างๆ กับคุณ!
 Feature.SettingsHub.Label.QuitButton,
+Feature.SettingsHub.Label.QuitConfirmation,
 Feature.SettingsHub.Label.ReasonForAbuse,เหตุผลที่รายงาน
 Feature.SettingsHub.Label.Report.BlockDisplayName,บล็อค {DISPLAY_NAME} (@{RBX_NAME})
 Feature.SettingsHub.Label.Report.OtherActionsHeader,สิ่งอื่นที่คุณสามารถทำได้
@@ -4766,6 +4774,7 @@ InGame.HelpMenu.Label.PlayerScripts,PlayerScripts:
 InGame.HelpMenu.Label.ServerChannel,ช่องเซิร์ฟเวอร์:
 InGame.HelpMenu.Label.ServerVersion,เวอร์ชันเซิร์ฟเวอร์:
 InGame.HelpMenu.LeftArrow,
+InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,
 InGame.HelpMenu.UpArrow,
 InGame.InspectMenu.Action.Cancel,
@@ -4855,6 +4864,13 @@ InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,"คุณอยู่ใน
 InGame.UnknownNamespace.Network,(เครือข่าย)
 InGame.UnknownNamespace.Received,ได้รับ
 InGame.UnknownNamespace.Sent,
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,เพิ่ม {experience_name} ไปยังเดสก์ท็อปไม่สำเร็จ
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,เพิ่ม {experience_name} ไปยังหน้าหลักไม่สำเร็จ
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,มีทางลัดไป {experience_name} อยู่แล้ว
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,เพิ่ม {experience_name} ไปยังเดสก์ท็อปสำเร็จเรียบร้อยแล้ว
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,เพิ่ม {experience_name} ไปยังหน้าหลักสำเร็จเรียบร้อยแล้ว
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,ดูทางลัด
 Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,แสดงเพิ่มอีก {notificationCount} รายการ
 Notifications.NotificationStream.Label.AllCaughtUp,ดูครบหมดแล้ว!

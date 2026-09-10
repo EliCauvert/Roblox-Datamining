@@ -38,8 +38,6 @@ Amp.Upsell.Message.EmailSent,Мы отправили эл. письмо на а�
 Amp.Upsell.Message.EmailSentPluralParent,Мы отправили эл. письмо твоим родителям на связанный аккаунт
 Amp.Upsell.Title.AskYourParent,Спроси родителей
 Amp.Upsell.Title.RequestSent,Запрос отправлен
-Application.Logout.Action.Logout,Выход
-Application.Logout.Message.Confirmation,Точно хочешь выйти?
 Authentication.AccountSwitch.Action.SwitchAccount,Переключить аккаунт
 Authentication.CrossDevice.Heading.QuickLogin,Быстрый вход
 Authentication.Login.Action.QuickSignIn,
@@ -361,7 +359,7 @@ CoreScripts.FTUX.Label.JoinVoiceDescription,Слушать и общаться �
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,
 CoreScripts.Feedback.EntryPoint.ButtonText,Отправить отзыв
 CoreScripts.Feedback.EntryPoint.OptionText,Отправить отзыв о переводе
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Выход
 CoreScripts.Feedback.FeedbackBar.HelpButton,Помощь
 CoreScripts.Feedback.FeedbackBar.MainLabel,
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Оставь комментарий ниже (необязательно)
@@ -2937,6 +2935,7 @@ InGame.HelpMenu.Label.PlayerScripts,СкриптИгрока:
 InGame.HelpMenu.Label.ServerChannel,Канал сервера:
 InGame.HelpMenu.Label.ServerVersion,Версия сервера:
 InGame.HelpMenu.LeftArrow,
+InGame.HelpMenu.Resume,Вернуться
 InGame.HelpMenu.RightArrow,
 InGame.HelpMenu.UpArrow,
 InGame.InspectMenu.Action.Cancel,

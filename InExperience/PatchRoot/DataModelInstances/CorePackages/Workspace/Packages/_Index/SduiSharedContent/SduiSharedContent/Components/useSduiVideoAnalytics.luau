@@ -26,10 +26,10 @@ local _ = function(value, p1, p2, p3)
 	})
 end
 
-return function(p1, p2, p3, p4)
+return function(p1, p2, p3)
 	-- upvalues: reactModule (ref), findAnalyticsFieldInAncestors (ref), fFlagLuaAppBroadenVideoAnalytics (ref), discoveryEventErrorLogger (ref), discoveryVideoPlayEvent (ref), discoveryVideoLoadEvent (ref), videoLogger (ref), videoActions (ref), discoveryVideoLoopEvent (ref), discoveryVideoEndEvent (ref)
-	local var1 = reactModule.useCallback(function(p5)
-		-- upvalues: p1 (ref), findAnalyticsFieldInAncestors (copy), p3 (ref), p4 (ref), fFlagLuaAppBroadenVideoAnalytics (copy)
+	local var1 = reactModule.useCallback(function(p4)
+		-- upvalues: p1 (ref), findAnalyticsFieldInAncestors (copy), p3 (ref), fFlagLuaAppBroadenVideoAnalytics (copy)
 		local var2
 		local var3 = if p1.getCollectionData then p1.getCollectionData() else nil
 		local var4 = findAnalyticsFieldInAncestors("videoAssetId", p1)
@@ -37,9 +37,9 @@ return function(p1, p2, p3, p4)
 		local nativeAdData = findAnalyticsFieldInAncestors("nativeAdData", p1) or findAnalyticsFieldInAncestors("adId", p1)
 		local t = {
 			videoAssetId = var5,
-			videoPlaybackSessionId = p5 or "INVALID_SESSION_ID",
-			universeId = p3,
-			rootPlaceId = p4
+			videoPlaybackSessionId = p4 or "INVALID_SESSION_ID",
+			universeId = p3.universeId,
+			rootPlaceId = p3.placeId
 		}
 		
 		if var3 then
@@ -71,40 +71,40 @@ return function(p1, p2, p3, p4)
 		t.contentType = var8
 		
 		return t
-	end, { p1, p3, p4 })
-	local var2 = reactModule.useCallback(function(_, p5)
-		-- upvalues: var1 (ref), p2 (ref), p3 (ref), p4 (ref), discoveryEventErrorLogger (copy), discoveryVideoPlayEvent (copy)
-		local var3 = var1(p5)
+	end, { p1, p3.universeId, p3.placeId })
+	local var2 = reactModule.useCallback(function(_, p4)
+		-- upvalues: var1 (ref), p2 (ref), p3 (ref), discoveryEventErrorLogger (copy), discoveryVideoPlayEvent (copy)
+		local var3 = var1(p4)
 		
 		if not var3.videoAssetId then
 			local var4 = p2
 			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "play" is missing videoAssetId on page "{var19}"`, {
 				actionType = "play",
 				pageContext = var4,
-				universeId = p3,
-				placeId = p4
+				universeId = p3.universeId,
+				placeId = p3.placeId
 			})
 		end
 		discoveryVideoPlayEvent(p2, var3)
-	end, { var1, p2, p3, p4 })
-	local var3 = reactModule.useCallback(function(_, p5, p6, p7)
-		-- upvalues: var1 (ref), p2 (ref), p3 (ref), p4 (ref), discoveryEventErrorLogger (copy), discoveryVideoLoadEvent (copy), videoLogger (copy), videoActions (copy)
-		local var4 = var1(p5)
+	end, { var1, p2, p3.universeId, p3.placeId })
+	local var3 = reactModule.useCallback(function(_, p4, p5, p6)
+		-- upvalues: var1 (ref), p2 (ref), p3 (ref), discoveryEventErrorLogger (copy), discoveryVideoLoadEvent (copy), videoLogger (copy), videoActions (copy)
+		local var4 = var1(p4)
 		
 		if not var4.videoAssetId then
 			local var5 = p2
 			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "load" is missing videoAssetId on page "{var21}"`, {
 				actionType = "load",
 				pageContext = var5,
-				universeId = p3,
-				placeId = p4
+				universeId = p3.universeId,
+				placeId = p3.placeId
 			})
 		end
 		discoveryVideoLoadEvent(p2, {
 			videoAssetId = var4.videoAssetId,
 			videoPlaybackSessionId = var4.videoPlaybackSessionId,
-			totalDuration = p6,
-			loadTime = p7,
+			totalDuration = p5,
+			loadTime = p6,
 			universeId = var4.universeId,
 			rootPlaceId = var4.rootPlaceId,
 			gameSetTypeId = var4.gameSetTypeId,
@@ -114,58 +114,60 @@ return function(p1, p2, p3, p4)
 			contentType = var4.contentType
 		})
 		
-		if var4.videoAssetId then
+		if var4.videoAssetId and p3.sourceId then
 			videoLogger.reportVideoAction(videoActions.load, p2, {
-				source = "universe",
 				videoAssetId = var4.videoAssetId,
-				sourceId = p3,
+				source = p3.source,
+				sourceId = p3.sourceId,
 				playbackSessionId = var4.videoPlaybackSessionId
-			}, { loadTime = p7 })
+			}, { loadTime = p6 })
 		end
-	end, { var1, p2, p3, p4 })
-	local var4 = reactModule.useCallback(function(_, p5)
-		-- upvalues: var1 (ref), p2 (ref), p3 (ref), p4 (ref), discoveryEventErrorLogger (copy), discoveryVideoLoopEvent (copy)
-		local var5 = var1(p5)
+	end, {
+		var1, p2, p3.source, p3.sourceId, p3.universeId, p3.placeId
+	})
+	local var4 = reactModule.useCallback(function(_, p4)
+		-- upvalues: var1 (ref), p2 (ref), p3 (ref), discoveryEventErrorLogger (copy), discoveryVideoLoopEvent (copy)
+		local var5 = var1(p4)
 		
 		if not var5.videoAssetId then
 			local var6 = p2
 			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "loop" is missing videoAssetId on page "{var23}"`, {
 				actionType = "loop",
 				pageContext = var6,
-				universeId = p3,
-				placeId = p4
+				universeId = p3.universeId,
+				placeId = p3.placeId
 			})
 		end
 		discoveryVideoLoopEvent(p2, var5)
-	end, { var1, p2, p3, p4 })
-	local var5 = reactModule.useCallback(function(_, p5, p6, p7, p8)
-		-- upvalues: var1 (ref), p2 (ref), p3 (ref), p4 (ref), discoveryEventErrorLogger (copy), discoveryVideoEndEvent (copy)
-		local var6 = var1(p6)
+	end, { var1, p2, p3.universeId, p3.placeId })
+	local var5 = reactModule.useCallback(function(_, p4, p5, p6, p7)
+		-- upvalues: var1 (ref), p2 (ref), p3 (ref), discoveryEventErrorLogger (copy), discoveryVideoEndEvent (copy)
+		local var6 = var1(p5)
 		
 		if not var6.videoAssetId then
 			local var7 = p2
 			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "end" is missing videoAssetId on page "{var25}"`, {
 				actionType = "end",
 				pageContext = var7,
-				universeId = p3,
-				placeId = p4
+				universeId = p3.universeId,
+				placeId = p3.placeId
 			})
 		end
 		discoveryVideoEndEvent(p2, {
 			videoAssetId = var6.videoAssetId,
 			videoPlaybackSessionId = var6.videoPlaybackSessionId,
-			endReason = p5,
-			playbackTime = p7,
+			endReason = p4,
+			playbackTime = p6,
 			universeId = var6.universeId,
 			rootPlaceId = var6.rootPlaceId,
 			gameSetTypeId = var6.gameSetTypeId,
 			sortPos = var6.sortPos,
-			targetUniverseId = p8,
+			targetUniverseId = p7,
 			nativeAdData = var6.nativeAdData,
 			tileType = var6.tileType,
 			contentType = var6.contentType
 		})
-	end, { var1, p2, p3, p4 })
+	end, { var1, p2, p3.universeId, p3.placeId })
 	
 	return reactModule.useMemo(function()
 		-- upvalues: var2 (ref), var3 (ref), var4 (ref), var5 (ref)

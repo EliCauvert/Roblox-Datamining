@@ -172,7 +172,7 @@ local t = {
 					}
 				}
 			},
-			metadata = { paymentSessionId = "1234" }
+			metadata = { paymentSessionId = "1234", bonusJwt = "mock-bonus-jwt" }
 		}
 	},
 	metadata = {

@@ -21,6 +21,7 @@ local _ = function()
 		robuxBalance = 500,
 		robuxSpentToday = 0,
 		limitRemaining = 100,
+		freeTrialResetPeriod = "Daily",
 		limitSettings = {
 			additionalUsageEnabled = false,
 			dailyLimitSet = true,
@@ -95,6 +96,7 @@ return function(p1)
 				robuxBalance = 500,
 				robuxSpentToday = 0,
 				limitRemaining = 100,
+				freeTrialResetPeriod = "Daily",
 				limitSettings = {
 					additionalUsageEnabled = false,
 					dailyLimitSet = true,
@@ -173,6 +175,7 @@ return function(p1)
 				robuxBalance = 500,
 				robuxSpentToday = 0,
 				limitRemaining = 100,
+				freeTrialResetPeriod = "Daily",
 				limitSettings = {
 					additionalUsageEnabled = false,
 					dailyLimitSet = true,

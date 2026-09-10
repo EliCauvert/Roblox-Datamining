@@ -1,4 +1,5 @@
 ﻿return {
+	AccountUpgradeRequest = require(script.AccountUpgradeRequest),
 	GetAuthMetaData = require(script.GetAuthMetaData),
 	GetCountryCodes = require(script.GetCountryCodes),
 	GetGameMedia = require(script.GetGameMedia),

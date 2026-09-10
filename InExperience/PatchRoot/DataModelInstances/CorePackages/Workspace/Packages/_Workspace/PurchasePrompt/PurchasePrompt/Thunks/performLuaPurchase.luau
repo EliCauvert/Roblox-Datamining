@@ -29,7 +29,8 @@ local fFlagEnableRequestLocationTypeForSduiPurchaseModule = require(purchaseProm
 local productPurchaseSurface = require(parent.PurchasePromptLite).Enums.ProductPurchaseSurface
 local t = {
 	[productPurchaseSurface.EDP] = "ExperienceDetailPage",
-	[productPurchaseSurface.HomePageGameItemShop] = "HomePageGameItemShop"
+	[productPurchaseSurface.HomePageGameItemShop] = "HomePageGameItemShop",
+	[productPurchaseSurface.SearchPageGameItemShop] = if require(parent.SharedFlags).FFlagEnableSearchGameItemOwnershipUpdate then "SearchPageGameItemShop" else nil
 }
 local parseEconomicRestrictionsFailureReason = IAPExperienceModule.Utility.parseEconomicRestrictionsFailureReason
 local parseEconomicRestrictionsExpirationTimeInMinutes = IAPExperienceModule.Utility.parseEconomicRestrictionsExpirationTimeInMinutes

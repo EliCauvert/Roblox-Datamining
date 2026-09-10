@@ -13,6 +13,9 @@ return {
 	engineError = function(p1, p2)
 		return { kind = "Engine", message = p1, cause = p2 }
 	end,
+	badRequestError = function(p1, p2)
+		return { kind = "BadRequest", message = p1, cause = p2 }
+	end,
 	rejectNetwork = function(p1, p2)
 		-- upvalues: promiseModule (ref)
 		return promiseModule.reject({ kind = "Network", message = p1, cause = p2 })
@@ -28,5 +31,9 @@ return {
 	rejectEngine = function(p1, p2)
 		-- upvalues: promiseModule (ref)
 		return promiseModule.reject({ kind = "Engine", message = p1, cause = p2 })
+	end,
+	rejectBadRequest = function(p1, p2)
+		-- upvalues: promiseModule (ref)
+		return promiseModule.reject({ kind = "BadRequest", message = p1, cause = p2 })
 	end
 }

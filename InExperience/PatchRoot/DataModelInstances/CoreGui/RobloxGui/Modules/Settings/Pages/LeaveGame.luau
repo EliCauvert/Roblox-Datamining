@@ -50,9 +50,9 @@ local function LeaveButtonsContainer(p1)
 	local var7 = useLastInput()
 	local var8 = useFocusGuiObject()
 	local var9 = useLocalization({
-		ConfirmLeaveGame = if isPioneerLaunch() then localizationKeys.LogoutConfirmation else constantsModule.ConfirmLeaveGameLocalizedKey,
-		LeaveGame = if isPioneerLaunch() then localizationKeys.LogoutButton else constantsModule.LeaveGameLocalizedKey,
-		DontLeaveGame = if isPioneerLaunch() then localizationKeys.Cancel else constantsModule.DontLeaveGameLocalizedKey
+		ConfirmLeaveGame = if isPioneerLaunch() then localizationKeys.QuitConfirmation else constantsModule.ConfirmLeaveGameLocalizedKey,
+		LeaveGame = if isPioneerLaunch() then localizationKeys.QuitButton else constantsModule.LeaveGameLocalizedKey,
+		DontLeaveGame = if isPioneerLaunch() then localizationKeys.Resume else constantsModule.DontLeaveGameLocalizedKey
 	})
 	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), input (copy), var8 (ref), var6 (ref)
@@ -189,7 +189,7 @@ local var6 = (function()
 		BackgroundTransparency = 1,
 		TextWrapped = true,
 		ZIndex = 2,
-		Text = if isPioneerLaunch() then robloxTranslatorModule:FormatByKey(localizationKeys.LogoutConfirmation) else robloxTranslatorModule:FormatByKey(constantsModule.ConfirmLeaveGameLocalizedKey),
+		Text = if isPioneerLaunch() then robloxTranslatorModule:FormatByKey(localizationKeys.QuitConfirmation) else robloxTranslatorModule:FormatByKey(constantsModule.ConfirmLeaveGameLocalizedKey),
 		Font = themeModule.font(Enum.Font.SourceSansBold, "Confirmation"),
 		FontSize = themeModule.fontSize(Enum.FontSize.Size36, "Confirmation"),
 		TextColor3 = Color3.new(1, 1, 1),
@@ -221,7 +221,7 @@ local var6 = (function()
 	elseif var4 then
 		var7.FontSize = Enum.FontSize.Size48
 	end
-	leaveGamePage.LeaveGameButton = utilityModule:MakeStyledButton("LeaveGame", if isPioneerLaunch() then robloxTranslatorModule:FormatByKey(localizationKeys.LogoutButton) else "Leave", nil, function()
+	leaveGamePage.LeaveGameButton = utilityModule:MakeStyledButton("LeaveGame", if isPioneerLaunch() then robloxTranslatorModule:FormatByKey(localizationKeys.QuitButton) else "Leave", nil, function()
 		-- upvalues: isPioneerLaunch (copy), leaveGameModule (copy)
 		if isPioneerLaunch() then
 			leaveGameModule(false, { shouldNativeExit = true })

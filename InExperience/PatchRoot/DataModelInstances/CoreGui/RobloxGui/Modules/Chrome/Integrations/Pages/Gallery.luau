@@ -19,7 +19,7 @@ if var2 then
 		id = "gallery",
 		label = "Feature.Captures.Title.Gallery",
 		initialAvailability = if var2 then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
-		sideSheetPlacement = sideSheetPlacement.Page,
+		sideSheetPlacement = sideSheetPlacement.BelowFold,
 		activated = function(_)
 			-- upvalues: inGameMenuIntegrationUtilsModule (ref), capturesPage (ref)
 			inGameMenuIntegrationUtilsModule.toggleIGMPage("CapturesPage", capturesPage:get())

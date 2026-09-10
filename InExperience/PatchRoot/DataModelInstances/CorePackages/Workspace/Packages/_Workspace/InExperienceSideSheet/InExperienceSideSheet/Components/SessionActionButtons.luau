@@ -7,14 +7,8 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableWhatsNew = sharedFlagsModule.FFlagEnableWhatsNew
 local fFlagShowSwitchServerButton = sharedFlagsModule.FFlagShowSwitchServerButton
 local var1 = if fFlagEnableWhatsNew then require(parent.WhatsNew).WhatsNewAnchor else nil
-local shortcutButtonModule = require(inExperienceSideSheet.Components.ShortcutButton)
-local getSideSheetConfigStoreModule = require(inExperienceSideSheet.Stores.GetSideSheetConfigStore)
 local getSessionActionButtonsStoreModule = require(inExperienceSideSheet.Stores.GetSessionActionButtonsStore)
-
-local function getIsHeightSmall(p1)
-	-- upvalues: getSideSheetConfigStoreModule (ref)
-	return getSideSheetConfigStoreModule(p1).getIsHeightSmall(p1)
-end
+local buildSessionActionButtonLayoutModule = require(inExperienceSideSheet.Utils.buildSessionActionButtonLayout)
 
 local function getSessionActionButtonConfigs(p1)
 	-- upvalues: getSessionActionButtonsStoreModule (ref)
@@ -22,27 +16,23 @@ local function getSessionActionButtonConfigs(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: signalsReactModule (ref), getIsHeightSmall (ref), getSessionActionButtonConfigs (ref), fFlagShowSwitchServerButton (ref), reactModule (ref), shortcutButtonModule (ref), view (ref), fFlagEnableWhatsNew (ref), var1 (ref)
-	local var2 = signalsReactModule.useSignalState(getIsHeightSmall)
-	local t = {}
+	-- upvalues: signalsReactModule (ref), getSessionActionButtonConfigs (ref), fFlagShowSwitchServerButton (ref), buildSessionActionButtonLayoutModule (ref), reactModule (ref), view (ref), fFlagEnableWhatsNew (ref), var1 (ref)
+	local var2 = signalsReactModule.useSignalState(getSessionActionButtonConfigs)
+	local var3 = var2
 	
-	for i, v in signalsReactModule.useSignalState(getSessionActionButtonConfigs) do
-		if not fFlagShowSwitchServerButton or v.getIsHidden == nil or not v.getIsHidden() then
-			t[v.name] = reactModule.createElement(shortcutButtonModule, {
-				label = v.label,
-				getShortcutIcon = v.getShortcutIcon,
-				getOnActivated = v.getOnActivated,
-				getIsEnabled = v.getIsEnabled,
-				isEmphasis = v.isEmphasis,
-				isSmall = var2,
-				layoutOrder = i
-			})
+	if fFlagShowSwitchServerButton then
+		var3 = {}
+		
+		for i, v in var2 do
+			if v.getIsHidden == nil or not v.getIsHidden() then
+				table.insert(var3, v)
+			end
 		end
 	end
-	local var3 = reactModule.createElement(view, {
-		tag = "size-full-0 auto-y row gap-small",
+	local var4 = reactModule.createElement(view, {
+		tag = "col gap-small size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder
-	}, t)
+	}, buildSessionActionButtonLayoutModule(var3))
 	
-	return if fFlagEnableWhatsNew then reactModule.createElement(var1, { anchorId = "LeaveRespawn", LayoutOrder = p1.layoutOrder }, { SessionActions = var3 }) else var3
+	return if fFlagEnableWhatsNew then reactModule.createElement(var1, { anchorId = "LeaveRespawn", LayoutOrder = p1.layoutOrder }, { SessionActions = var4 }) else var4
 end)

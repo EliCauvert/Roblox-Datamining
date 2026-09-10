@@ -31,10 +31,9 @@ local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavi
 local fFlagEnableAbuseReportRevampFlow = require(parent.SharedFlags).FFlagEnableAbuseReportRevampFlow
 local fFlagDisableBlockAndReport = require(parent.SharedFlags).FFlagDisableBlockAndReport
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
-local socialBlockingModalFocusNavSupport = game:DefineFastFlag("SocialBlockingModalFocusNavSupport", false)
 
 return function()
-	-- upvalues: useNavigation (ref), fFlagDisableBlockAndReport (ref), useLocalUserId (ref), useDispatch (ref), useScreenSize (ref), useLayerCollector (ref), reactModule (ref), useSocialBlockingModalAnalytics (ref), eventNames (ref), useShowToastOnErrorModule (ref), myUserBlockingNetworkingModule (ref), fFlagEnableAbuseReportRevampFlow (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), appPage (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), userProfilesModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), buttonType (ref), socialBlockingModalFocusNavSupport (ref), interactiveAlert (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
+	-- upvalues: useNavigation (ref), fFlagDisableBlockAndReport (ref), useLocalUserId (ref), useDispatch (ref), useScreenSize (ref), useLayerCollector (ref), reactModule (ref), useSocialBlockingModalAnalytics (ref), eventNames (ref), useShowToastOnErrorModule (ref), myUserBlockingNetworkingModule (ref), fFlagEnableAbuseReportRevampFlow (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), appPage (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), userProfilesModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), buttonType (ref), interactiveAlert (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var2 = useNavigation()
 	local navProps = var2.getParam("navProps")
 	local userId = navProps.userId
@@ -138,35 +137,8 @@ return function()
 		},
 		bodyText = if fFlagConnectionsToFriendsRename then "Feature.BlockingModal.Message.BlockConfirmation.FriendsRename" else "Feature.BlockingModal.Message.BlockConfirmation"
 	})
-	local var16 = reactModule.useMemo(function()
-		-- upvalues: buttonType (copy), var15 (ref), var13 (ref), fFlagDisableBlockAndReport (copy), var3 (ref), var12 (ref), var11 (ref)
-		local t = {}
-		table.insert(t, {
-			buttonType = buttonType.Secondary,
-			props = { text = var15.cancelBtnText, onActivated = var13 }
-		})
-		
-		if not fFlagDisableBlockAndReport or not var3 then
-			table.insert(t, {
-				buttonType = buttonType.Alert,
-				props = { text = var15.blockAndReportBtnText, onActivated = var12 }
-			})
-		end
-		table.insert(t, {
-			buttonType = buttonType.Alert,
-			props = { text = var15.blockBtnText, onActivated = var11 }
-		})
-		
-		return t
-	end, {
-		var15,
-		var13,
-		var12,
-		var3,
-		var11
-	})
 	
-	return if socialBlockingModalFocusNavSupport then reactModule.createElement(focusRoot, {
+	return reactModule.createElement(focusRoot, {
 		isIsolated = true,
 		isAutoFocusRoot = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
@@ -177,13 +149,35 @@ return function()
 			screenSize = var6,
 			title = var15.title,
 			bodyText = var15.bodyText,
-			buttonStackInfo = { buttons = var16 or {} }
+			buttonStackInfo = {
+				buttons = reactModule.useMemo(function()
+					-- upvalues: buttonType (copy), var15 (ref), var13 (ref), fFlagDisableBlockAndReport (copy), var3 (ref), var12 (ref), var11 (ref)
+					local t = {}
+					table.insert(t, {
+						buttonType = buttonType.Secondary,
+						props = { text = var15.cancelBtnText, onActivated = var13 }
+					})
+					
+					if not fFlagDisableBlockAndReport or not var3 then
+						table.insert(t, {
+							buttonType = buttonType.Alert,
+							props = { text = var15.blockAndReportBtnText, onActivated = var12 }
+						})
+					end
+					table.insert(t, {
+						buttonType = buttonType.Alert,
+						props = { text = var15.blockBtnText, onActivated = var11 }
+					})
+					
+					return t
+				end, {
+					var15,
+					var13,
+					var12,
+					var3,
+					var11
+				}) or {}
+			}
 		})
-	}) else reactModule.createElement(interactiveAlert, {
-		richText = true,
-		screenSize = var6,
-		title = var15.title,
-		bodyText = var15.bodyText,
-		buttonStackInfo = { buttons = var16 or {} }
 	})
 end

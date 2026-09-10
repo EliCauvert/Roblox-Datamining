@@ -92,5 +92,6 @@
 	SocialUpsellOverlay = "SocialUpsellOverlay",
 	NotificationsModal = "NotificationsModal",
 	SystemTrayModal = "SystemTrayModal",
-	WhyThisAdModal = "WhyThisAdModal"
+	WhyThisAdModal = "WhyThisAdModal",
+	PinExperienceResultSnackbar = "PinExperienceResultSnackbar"
 }

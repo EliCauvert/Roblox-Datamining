@@ -6,14 +6,16 @@ local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
 local toastType = toastRoduxModule.Enums.ToastType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiActionType = sduiCoreSystemModule.SduiActionType
+local getSduiActionHandlerRegistry = sduiCoreSystemModule.getSduiActionHandlerRegistry
 local sduiActionParams = sduiCoreSystemModule.SduiActionParams
 local getStringParam = sduiActionParams.getStringParam
 local getBooleanParam = sduiActionParams.getBooleanParam
-local fFlagSduiDismissPromptAction = require(parent.SharedFlags).FFlagSduiDismissPromptAction
 local sduiDismissPromptActionModule = require(sduiSharedContent.Actions.SduiDismissPromptAction)
+local fFlagSduiDismissPromptAction = require(parent.SharedFlags).FFlagSduiDismissPromptAction
+local fFlagLuaAppSduiMovePromptsActions = require(parent.SharedFlags).FFlagLuaAppSduiMovePromptsActions
 
 return function(p1, p2, p3, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), getStringParam (ref), toastType (ref), setCurrentToastMessage (ref), fFlagSduiDismissPromptAction (ref), getBooleanParam (ref), sduiDismissPromptActionModule (ref)
+	-- upvalues: sduiErrorType (ref), sduiActionType (ref), getStringParam (ref), toastType (ref), setCurrentToastMessage (ref), fFlagSduiDismissPromptAction (ref), getBooleanParam (ref), fFlagLuaAppSduiMovePromptsActions (ref), getSduiActionHandlerRegistry (ref), sduiDismissPromptActionModule (ref)
 	local var1 = if p1 then p1.actionParams else nil
 	
 	if var1 == nil then
@@ -43,9 +45,28 @@ return function(p1, p2, p3, _)
 	}))
 	
 	if fFlagSduiDismissPromptAction and getBooleanParam(var1, "dismissPrompt", false) then
-		sduiDismissPromptActionModule({
+		local t = {
 			actionType = sduiActionType.DismissPrompt,
 			actionParams = { promptType = var1.promptType, promptId = var1.promptId }
-		}, p2, p3)
+		}
+		
+		if fFlagLuaAppSduiMovePromptsActions then
+			local actionHandlerConfig = getSduiActionHandlerRegistry().getActionHandlerConfig(sduiActionType.DismissPrompt)
+			
+			if actionHandlerConfig and actionHandlerConfig.handler then
+				actionHandlerConfig.handler(t, p2, p3)
+				
+				return
+			end
+			p3.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
+				message = "DismissPrompt handler is not registered",
+				propName = "dismissPrompt",
+				name = sduiActionType.ShowToast
+			}, p3.appPage)
+			
+			return
+		else
+			sduiDismissPromptActionModule(t, p2, p3)
+		end
 	end
 end

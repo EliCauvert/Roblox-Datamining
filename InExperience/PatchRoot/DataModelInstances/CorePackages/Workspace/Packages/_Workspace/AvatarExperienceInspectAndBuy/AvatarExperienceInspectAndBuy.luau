@@ -27,7 +27,8 @@ return {
 		convertAssetInfoToItemData = if fFlagAXEnableIaBTimedOptionsBulkPurchase then require(script.Utils.convertAssetInfoToItemData) else nil,
 		convertBundleInfoToItemData = if fFlagAXEnableIaBTimedOptionsBulkPurchase then require(script.Utils.convertBundleInfoToItemData) else nil,
 		itemDetailsUtils = if fFlagAXEnableIaBTimedOptionsBulkPurchase then require(script.Utils.itemDetailsUtils) else nil,
-		buildBulkPurchaseAnalyticsPayload = if fFlagAXEnableIaBTimedOptionsBulkPurchase then require(script.Utils.buildBulkPurchaseAnalyticsPayload) else nil
+		buildBulkPurchaseAnalyticsPayload = if fFlagAXEnableIaBTimedOptionsBulkPurchase then require(script.Utils.buildBulkPurchaseAnalyticsPayload) else nil,
+		buildItemDataFromAXRodux = require(script.Utils.buildItemDataFromAXRodux)
 	},
 	Hooks = {
 		useViewBreakpoints = useViewBreakpointsModule,

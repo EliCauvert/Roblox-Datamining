@@ -20,7 +20,7 @@ local var2 = serviceModule:register({
 	id = "camera_entrypoint",
 	label = "Feature.SettingsHub.Label.Captures",
 	initialAvailability = if starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.All) or starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Captures) then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
-	sideSheetPlacement = sideSheetPlacement.Page,
+	sideSheetPlacement = sideSheetPlacement.BelowFold,
 	activated = function(_)
 		-- upvalues: capturesAppModule (ref)
 		capturesAppModule.onToggleActivationFromChrome()

@@ -312,7 +312,7 @@ function t:register(p1)
 	local id = self._integrationsConnections[p1.id]
 	
 	if isSideSheetEnabledModule and p1.sideSheetPlacement == nil then
-		p1.sideSheetPlacement = sideSheetPlacement.Vertical
+		p1.sideSheetPlacement = sideSheetPlacement.BelowFold
 	end
 	if p1.initialAvailability == nil then
 		p1.initialAvailability = t.AvailabilitySignal.Unavailable
@@ -540,7 +540,7 @@ if isSideSheetEnabledModule then
 		local t_5 = {}
 		
 		local function addIntegration(p5)
-			-- upvalues: self (ref), sideSheetPlacement (copy), t_1 (ref), var6 (write), t_2 (ref), t_3 (ref), fFlagEnableSideSheetWidgets (copy), isPioneerLaunch (copy), t_4 (ref), t_5 (ref), t (ref)
+			-- upvalues: self (ref), sideSheetPlacement (copy), t_1 (ref), var6 (write), t (ref), t_2 (ref), t_3 (ref), fFlagEnableSideSheetWidgets (copy), isPioneerLaunch (copy), t_4 (ref), t_5 (ref)
 			local var7 = self._integrations[p5]
 			
 			if not var7 or var7.sideSheetPlacement == sideSheetPlacement.None or not self:isIntegrationValid(p5) then return end
@@ -548,7 +548,11 @@ if isSideSheetEnabledModule then
 				table.insert(t_1, self:createIconProps(p5, var6))
 				
 				return
-			elseif var7.sideSheetPlacement == sideSheetPlacement.Page then
+			elseif var7.sideSheetPlacement == sideSheetPlacement.AboveFold then
+				table.insert(t, self:createIconProps(p5, var6))
+				
+				return
+			elseif var7.sideSheetPlacement == sideSheetPlacement.BelowFold then
 				table.insert(t_2, self:createIconProps(p5, var6))
 				
 				return
@@ -566,20 +570,11 @@ if isSideSheetEnabledModule then
 						return
 					end
 				end
-			elseif var7.sideSheetPlacement ~= sideSheetPlacement.FixedFooterTop then
-				if var7.sideSheetPlacement == sideSheetPlacement.Vertical then
-					table.insert(t_2, self:createIconProps(p5, var6))
-					
-					return
-				end
-				table.insert(t, self:createIconProps(p5, var6))
-			elseif fFlagEnableSideSheetWidgets or isPioneerLaunch() then
+			elseif var7.sideSheetPlacement == sideSheetPlacement.FixedFooterTop and (fFlagEnableSideSheetWidgets or isPioneerLaunch()) then
 				local var9 = self:createWidgetProps(p5, var6)
 				
 				if var9 then
 					table.insert(t_5, var9)
-					
-					return
 				end
 			end
 		end
@@ -598,8 +593,8 @@ if isSideSheetEnabledModule then
 		end
 		registerSideSheetIntegrations({
 			unibarIntegrations = t_1,
-			toggleIntegrations = t,
-			pageIntegrations = t_2,
+			aboveFoldIntegrations = t,
+			belowFoldIntegrations = t_2,
 			sessionActionIntegrations = t_3,
 			scrollableWidgetIntegrations = t_4,
 			fixedFooterWidgetIntegrations = t_5

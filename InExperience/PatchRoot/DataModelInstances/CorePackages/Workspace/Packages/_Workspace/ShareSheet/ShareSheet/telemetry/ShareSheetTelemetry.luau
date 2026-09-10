@@ -1,5 +1,9 @@
 ﻿local telemetryService = game:GetService("TelemetryService")
-local loggingProtocolModule = require(script:FindFirstAncestor("ShareSheet").Parent.LoggingProtocol)
+local shareSheet = script:FindFirstAncestor("ShareSheet")
+local parent = shareSheet.Parent
+local _ = require(parent.AppChat.GetExternalChatMessageSenderStore)
+local loggingProtocolModule = require(parent.LoggingProtocol)
+local getElapsedTimeMsModule = require(shareSheet.getElapsedTimeMs)
 local eventIngest = loggingProtocolModule.TelemetryBackends.EventIngest
 local shareSheetTelemetryThrottleHundredthsPercent = game:DefineFastInt("ShareSheetTelemetryThrottleHundredthsPercent", 10000)
 local t = {
@@ -37,6 +41,13 @@ local t = {
 		backends = { eventIngest },
 		throttlingPercentage = shareSheetTelemetryThrottleHundredthsPercent,
 		lastUpdated = { 2026, 8, 3 }
+	},
+	MessageSendResult = {
+		eventName = "shareSheetMessageSendResult",
+		description = "Per-recipient share sheet message send results",
+		backends = { eventIngest },
+		throttlingPercentage = shareSheetTelemetryThrottleHundredthsPercent,
+		lastUpdated = { 2026, 9, 8 }
 	}
 }
 local list = {
@@ -59,7 +70,12 @@ local t_1 = {
 		ConversationSelected = "conversationSelected",
 		ConversationDeselected = "conversationDeselected",
 		CustomMessageComposerFocused = "customMessageComposerFocused",
-		CustomMessageSubmitted = "customMessageSubmitted"
+		CustomMessageSubmitted = "customMessageSubmitted",
+		ViewMessage = "viewMessage"
+	},
+	ViewDestination = {
+		Conversation = "conversation",
+		ChatLanding = "chatLanding"
 	},
 	logShareSheetOpened = function(p1)
 		-- upvalues: telemetryService (ref), t (ref), list (ref)
@@ -95,6 +111,20 @@ local t_4 = {
 	throttlingPercentage = shareSheetTelemetryThrottleHundredthsPercent,
 	lastUpdated = { 2026, 8, 3 }
 }
+local t_5 = {
+	eventName = "shareSheetMessageSendResult",
+	description = "Count of per-recipient share sheet message send results",
+	backends = { loggingProtocolModule.TelemetryBackends.Counter },
+	throttlingPercentage = shareSheetTelemetryThrottleHundredthsPercent,
+	lastUpdated = { 2026, 9, 8 }
+}
+local t_6 = {
+	eventName = "shareSheetMessageSendResultDurationMs",
+	description = "Duration in milliseconds from recipient send invocation to result",
+	backends = { loggingProtocolModule.TelemetryBackends.Stats },
+	throttlingPercentage = shareSheetTelemetryThrottleHundredthsPercent,
+	lastUpdated = { 2026, 9, 8 }
+}
 
 function t_1.logLifecycle(p1)
 	-- upvalues: telemetryService (ref), t (ref), list (ref), t_1 (ref), t_2 (ref), t_3 (ref)
@@ -113,6 +143,43 @@ function t_1.logInteraction(p1)
 			interactionType = p1.interactionType
 		}
 	}, 1)
+end
+
+function t_1.logMessageSendResult(p1)
+	-- upvalues: telemetryService (ref), t (ref), list (ref), t_6 (ref), t_5 (ref)
+	telemetryService:LogEvent(t.MessageSendResult, { standardizedFields = list, customFields = p1 })
+	telemetryService:LogStat(t_6, {
+		customFields = {
+			context = p1.context,
+			sendStatus = p1.sendStatus,
+			hasCustomMessage = p1.hasCustomMessage
+		}
+	}, p1.durationMs)
+	telemetryService:LogCounter(t_5, {
+		customFields = {
+			context = p1.context,
+			sendStatus = p1.sendStatus,
+			hasCustomMessage = p1.hasCustomMessage
+		}
+	}, 1)
+end
+
+function t_1.startMessageSendResult(p1)
+	-- upvalues: t_1 (ref), getElapsedTimeMsModule (ref)
+	local processTime = os.clock()
+	
+	return function(p2)
+		-- upvalues: t_1 (copy), p1 (ref), getElapsedTimeMsModule (copy), processTime (ref)
+		t_1.logMessageSendResult({
+			context = p1.context,
+			telemetryId = p1.telemetryId,
+			requestedConversationId = p1.requestedConversationId,
+			resolvedConversationId = p2.conversationId,
+			sendStatus = p2.status,
+			hasCustomMessage = p1.hasCustomMessage,
+			durationMs = getElapsedTimeMsModule(processTime)
+		})
+	end
 end
 
 return t_1

@@ -54,6 +54,8 @@ local sduiGlobalRegistryFallback = game:DefineFastFlag("SduiGlobalRegistryFallba
 local sduiVerticalFeedProgressiveFillOnScroll2 = game:DefineFastFlag("SduiVerticalFeedProgressiveFillOnScroll2", false)
 local sduiGlobalRegistryFallback_1 = game:DefineFastFlag("LuaAppUnlockUpsellSupport", false) and sduiGlobalRegistryFallback
 local sduiDismissPromptAction = game:DefineFastFlag("SduiDismissPromptAction", false)
+local luaAppSduiMovePromptsActions = game:DefineFastFlag("LuaAppSduiMovePromptsActions", false)
+local luaAppSduiMovePromptsActions_1 = game:DefineFastFlag("SduiDismissPromptPageScope", false) and (sduiClientPageScope2 and (sduiDismissPromptAction and luaAppSduiMovePromptsActions))
 local fFlagLuaAppEnableNxMRoduxApportioningModule = require(script.FFlagLuaAppEnableNxMRoduxApportioning)
 local fFlagLuaAppApportioningInCollectionViewsModule = require(script.FFlagLuaAppApportioningInCollectionViews)
 local fFlagLuaAppApportioningInCollectionViewsModule_1 = game:DefineFastFlag("SduiPoolBackedFeed", false) and fFlagLuaAppApportioningInCollectionViewsModule
@@ -104,7 +106,7 @@ local enableSplitPanel_1 = game:DefineFastFlag("EnableSplitPaneSessionL3", false
 local sduiClientTemplateCache = game:DefineFastFlag("SduiClientTemplateCache", false)
 local sduiClientTemplateCache_1 = game:DefineFastFlag("SduiTemplateApiPostRequest", false) and sduiClientTemplateCache
 local homePageSduiPrefetch = game:DefineFastFlag("EnableHomePageSduiPrefetch", false) and game:GetEngineFeature("HomePageSduiPrefetch")
-local luaAppSduiHomePageSupportDev = game:DefineFastFlag("LuaAppSduiHomePageSupportDev", false)
+local luaAppSduiHomePageSupport3 = game:DefineFastFlag("LuaAppSduiHomePageSupport3", false)
 local sduiEdpClientTemplateCache = sduiClientTemplateCache and game:DefineFastFlag("SduiEdpClientTemplateCache", false)
 local sduiClientDrivenTemplates = game:DefineFastFlag("SduiClientDrivenTemplates", false)
 local sduiClientDrivenTemplates_1 = game:DefineFastFlag("SduiEdpTemplatePrewarm", false) and (sduiEdpClientTemplateCache and sduiClientDrivenTemplates)
@@ -518,6 +520,7 @@ return {
 	FFlagUserListUseSheet = require(script.FFlagUserListUseSheet),
 	FFlagUserListCtaIntegrationEnabled = require(script.FFlagUserListCtaIntegrationEnabled),
 	FFlagUserListCtaAnalyticsEnabled = require(script.FFlagUserListCtaAnalyticsEnabled),
+	FFlagSharedChatEntryPointAction = require(script.FFlagSharedChatEntryPointAction),
 	FFlagUserListUsernameFallbackConfig = require(script.FFlagUserListUsernameFallbackConfig),
 	FFlagMutualConnectionsListPagination = require(script.FFlagMutualConnectionsListPagination),
 	FFlagEnableSocialProofOnItemDetailsRoactGamepadNavigation = require(script.FFlagEnableSocialProofOnItemDetailsRoactGamepadNavigation),
@@ -675,7 +678,6 @@ return {
 	FFlagAddGamepadBumperNavigation = game:DefineFastFlag("AddGamepadBumperNavigation3", false),
 	FFlagDontUseCrossPlayGlobalEffect = game:DefineFastFlag("DontUseCrossPlayGlobalEffect", false),
 	FFlagLuaAppsDefaultSelection = game:DefineFastFlag("LuaAppsDefaultSelection", false),
-	FFlagPlayStationBumperHint = game:DefineFastFlag("PlayStationBumperHint", false),
 	FFlagAppChatOnConsoles = game:DefineFastFlag("AppChatOnConsoles", false),
 	FFlagExpChatFriendsTabUsePolicy = game:DefineFastFlag("ExpChatFriendsTabUsePolicy", false),
 	getFStringSocialUserSearchResultsPageLayer = require(script.getFStringSocialUserSearchResultsPageLayer),
@@ -788,7 +790,6 @@ return {
 	FFlagSduiExperienceDetailsSupport = luaAppVoteOptimisticUpdateRaceFix_1,
 	FFlagSduiCommunitySectionSupport = game:DefineFastFlag("SduiCommunitySectionSupport", false) and luaAppVoteOptimisticUpdateRaceFix_1,
 	FFlagLuaAppEdpShowBuildTag = game:DefineFastFlag("LuaAppEdpShowBuildTag", false) and luaAppVoteOptimisticUpdateRaceFix_1,
-	FFlagSduiEdpInheritGameDetailSourceSession = game:DefineFastFlag("SduiEdpInheritGameDetailSourceSession", false),
 	FFlagSduiDeferredListItems = game:DefineFastFlag("SduiDeferredListItems2", false),
 	FFlagSduiFavoritesHydrationStructured = sduiFavoritesHydrationStructured,
 	FFlagSduiOptionalUniverseHydration = sduiOptionalUniverseHydration,
@@ -965,8 +966,8 @@ return {
 	FFlagLuaAppMoveProfileIntoTopBarIXP = require(script.FFlagLuaAppMoveProfileIntoTopBarIXP),
 	FFlagLuaAppMoveProfileIntoTopBar = require(script.FFlagLuaAppMoveProfileIntoTopBar),
 	FFlagLuaAppChartsAppPage = game:DefineFastFlag("LuaAppChartsAppPage", false) and sduiNilHydrationGuard,
-	FFlagLuaAppEnableSduiHomePage = game:DefineFastFlag("LuaAppEnableSduiHomePageDev", false) and (luaAppSduiHomePageSupportDev and (sduiGameIconSupport and (sduiApiStoreOnSuccessAndRefresh and (homePageSduiPrefetch and (sduiVerticalFeedProgressiveFillOnScroll2 and sduiVerticalFeedPageShellSupport2))))),
-	FFlagLuaAppSduiHomePageSupport = luaAppSduiHomePageSupportDev,
+	FFlagLuaAppEnableSduiHomePage = game:DefineFastFlag("LuaAppEnableSduiHomePage3", false) and (luaAppSduiHomePageSupport3 and (sduiGameIconSupport and (sduiApiStoreOnSuccessAndRefresh and (homePageSduiPrefetch and (sduiVerticalFeedProgressiveFillOnScroll2 and sduiVerticalFeedPageShellSupport2))))),
+	FFlagLuaAppSduiHomePageSupport = luaAppSduiHomePageSupport3,
 	FFlagLuaAppSharedHomePageInteractive = game:DefineFastFlag("LuaAppSharedHomePageInteractive", false),
 	FFlagSduiChartsSortDetailGenreFilter = game:DefineFastFlag("SduiChartsSortDetailGenreFilter", false) and (sduiClientPageScope2 and require(script.FFlagSduiOptionSelectorCollection)),
 	FFlagSduiChartsPlaceholderMergeStrategySupport = sduiChartsPlaceholderMergeStrategySupport,
@@ -1047,6 +1048,7 @@ return {
 	FFlagLuaAppEmphasisGameTileVideo = require(script.FFlagLuaAppEmphasisGameTileVideo),
 	FFlagLuaAppSearchResultsPageGameTileVideo = require(script.FFlagLuaAppSearchResultsPageGameTileVideo),
 	FFlagLuaAppVideoAutoplayFeedElection = require(script.FFlagLuaAppVideoAutoplayFeedElection),
+	FFlagLuaAppSduiSponsoredOneByTwoTile = require(script.FFlagLuaAppSduiSponsoredOneByTwoTile),
 	FFlagLuaAppSduiSponsoredTwoByOneTile = require(script.FFlagLuaAppSduiSponsoredTwoByOneTile),
 	FFlagLuaAppHomeReduceRenders = game:DefineFastFlag("LuaAppHomeReduceRenders", false),
 	FFlagLuaAppVideoTileDisableActivation = game:DefineFastFlag("LuaAppVideoTileDisableActivation", false),
@@ -1084,7 +1086,7 @@ return {
 	FFlagLuaAppIconPlayButton = game:DefineFastFlag("LuaAppIconPlayButton", false) or require(script.FFlagLuaAppUnifyPlayButtonAllSurfacesIxp),
 	FFlagLuaAppPlayButtonLoadingSkeleton = game:DefineFastFlag("LuaAppPlayButtonLoadingSkeleton3", false) or require(script.FFlagLuaAppUnifyPlayButtonAllSurfacesIxp),
 	FFlagLuaAppDemoModePlayButtonTelemetry = game:DefineFastFlag("LuaAppDemoModePlayButtonTelemetry2", false),
-	FFlagLuaAppPlayButtonPrivatePT = game:DefineFastFlag("LuaAppPlayButtonPrivatePTDev", false),
+	FFlagLuaAppPlayButtonPrivatePT = game:DefineFastFlag("LuaAppPlayButtonPrivatePT", false),
 	FFlagLuaAppUseTokenHeightForPlayButton = game:DefineFastFlag("LuaAppUseTokenHeightForPlayButton", false),
 	FFlagLuaAppTextOnlyPlayButton = game:DefineFastFlag("LuaAppTextOnlyPlayButton", false),
 	FFlagLuaAppIconTextPlayButton = game:DefineFastFlag("LuaAppIconTextPlayButton", false),
@@ -1220,6 +1222,7 @@ return {
 	FFlagSduiGameItemsComponent = game:DefineFastFlag("SduiGameItemsComponent", false),
 	FFlagSduiSupportRatingNoPercent = game:DefineFastFlag("SduiSupportRatingNoPercent", false),
 	FFlagEnableHomeGameItemOwnershipUpdate = game:DefineFastFlag("EnableHomeGameItemOwnershipUpdate", false),
+	FFlagEnableSearchGameItemOwnershipUpdate = game:DefineFastFlag("EnableSearchGameItemOwnershipUpdate", false),
 	FFlagSduiClientPageScope = sduiClientPageScope2,
 	FFlagSduiLocalFeedFilter = game:DefineFastFlag("SduiLocalFeedFilter", false),
 	FFlagLuaAppSduiHomeUserInfo = game:DefineFastFlag("LuaAppSduiHomeUserInfo", false),
@@ -1227,6 +1230,8 @@ return {
 	FFlagFixSduiEdpTtiPeekCategory = game:DefineFastFlag("FixSduiEdpTtiPeekCategory", false),
 	FFlagLuaAppDevStoreSeeAllSduiEnabled = game:DefineFastFlag("LuaAppDevStoreSeeAllSduiEnabled", false),
 	FFlagSduiDismissPromptAction = sduiDismissPromptAction,
+	FFlagLuaAppSduiMovePromptsActions = luaAppSduiMovePromptsActions,
+	FFlagSduiDismissPromptPageScope = luaAppSduiMovePromptsActions_1,
 	FFlagSduiNavigate = game:DefineFastFlag("SduiNavigate", false),
 	FFlagLuaAppDevStoreSeeAllForceRefreshOnNavigate = game:DefineFastFlag("LuaAppDevStoreSeeAllForceRefreshOnNavigate", false),
 	FFlagEnableExperienceDetailsBottomSheet = luaAppSduiEdpHideSystemBarOnPeekViewMount_1,
@@ -1344,7 +1349,6 @@ return {
 	GetFFlagEnableAuthsecImageUpdate = require(script.GetFFlagEnableAuthsecImageUpdate),
 	FFlagLuafiedWechatQQLogin = require(script.FFlagLuafiedWechatQQLogin),
 	FFlagAXMigrateSaveOutfitPromptFromRoactGamepad = require(script.FFlagAXMigrateSaveOutfitPromptFromRoactGamepad),
-	FFlagAXMigrateAvatarEditorItemCardInputBindingsToFocusNavigation = require(script.FFlagAXMigrateAvatarEditorItemCardInputBindingsToFocusNavigation),
 	FFlagAXMigrateItemDetailsContainerInputBindingsToFocusNavigation = require(script.FFlagAXMigrateItemDetailsContainerInputBindingsToFocusNavigation),
 	FFlagAXMigrateRecommendedItemsGridToFocusNavigation = require(script.FFlagAXMigrateRecommendedItemsGridToFocusNavigation),
 	FFlagAXMigratePurchasePromptInteractiveToFocusNavigation = require(script.FFlagAXMigratePurchasePromptInteractiveToFocusNavigation),
@@ -1401,7 +1405,6 @@ return {
 	FFlagEnableHeaderBarButtonsUpdate = require(script.FFlagEnableHeaderBarButtonsUpdate),
 	FFlagEnableAndroidTvAppPolicies = require(script.FFlagEnableAndroidTvAppPolicies),
 	FFlagUsesCancelSearchAppPolicy = require(script.FFlagUsesCancelSearchAppPolicy),
-	FFlagFullscreenElementsIgnoreSafeArea = game:DefineFastFlag("FullscreenElementsIgnoreSafeArea", false),
 	FFlagGuacStickyShortcutBarEnabled = require(script.FFlagGuacStickyShortcutBarEnabled),
 	FFlagFixAppNavContainerShortcutBarHeight = require(script.FFlagFixAppNavContainerShortcutBarHeight),
 	FFlagGamepadIconSupportCheck = require(script.FFlagGamepadIconSupportCheck),
@@ -1511,6 +1514,7 @@ return {
 	FFlagAppIaHomeSubTabScrollAwayFull = game:DefineFastFlag("AppIaHomeSubTabScrollAwayFull", false),
 	FFlagSubTabFixMissingProfileWidget = game:DefineFastFlag("SubTabFixMissingProfileWidget", false),
 	FFlagSubTabRemoveFlyoutDependency = game:DefineFastFlag("SubTabRemoveFlyoutDependency", false),
+	FFlagSubTabUseHomeContainerOnConsole = game:DefineFastFlag("SubTabUseHomeContainerOnConsole", false),
 	FFlagHiddenFriendsSortHeaderRemoveFlyoutDependency = game:DefineFastFlag("HiddenFriendsSortHeaderRemoveFlyoutDependency", false),
 	FFlagEnableDrawerFocusNav = require(script.FFlagEnableDrawerFocusNav),
 	FFlagEnableDrawerAnimatingHook = game:DefineFastFlag("EnableDrawerAnimatingHook", false),
@@ -1608,6 +1612,7 @@ return {
 	FFlagEnablePurchasePayloadInExperienceShop = game:DefineFastFlag("EnablePurchasePayloadInExperienceShop", false) and game:GetEngineFeature("EnablePurchasePayload"),
 	FFlagPassShopPurchaseSurfaceToBuyModal = game:DefineFastFlag("PassShopPurchaseSurfaceToBuyModal", false),
 	FFlagEnableRobuxInExperienceShop = require(script.FFlagEnableRobuxInExperienceShop),
+	FFlagEnableBonusJwtInShop = require(script.FFlagEnableBonusJwtInShop),
 	FFlagEnableUserOffers = require(script.FFlagEnableUserOffers),
 	FFlagSkipBuyDelayForExperienceShop = game:DefineFastFlag("SkipBuyDelayForExperienceShop", false),
 	UpsellSuggestionsAPIMaxPackages = game:DefineFastInt("UpsellSuggestionsAPIMaxPackagesV3", 1),
@@ -1770,7 +1775,6 @@ return {
 	FFlagAppNavMyStatsTab = game:DefineFastFlag("AppNavMyStatsTab3", false),
 	FFlagReplaceNavbarIconsWithFoundation = game:DefineFastFlag("ReplaceNavbarIconsWithFoundation2", false),
 	FFlagEnableBuildTabOverride = game:DefineFastFlag("EnableBuildTabOverride", false),
-	FFlagBuildExperienceModelLibrary = game:DefineFastFlag("BuildExperienceModelLibrary", false),
 	FFlagBuildExperienceAnalytics = game:DefineFastFlag("BuildExperienceAnalytics", false),
 	FFlagBuildExperienceClientDataModelTools = game:DefineFastFlag("BuildExperienceClientDataModelTools2", false),
 	FFlagComposerControlAlignment = game:DefineFastFlag("ComposerControlAlignment", false),
@@ -1827,5 +1831,7 @@ return {
 	FFlagEnableDeferredAssetManagerService = game:GetEngineFeature("EnableDeferredAssetManagerService"),
 	FFlagCustomTitleBarM1Enabled = game:GetEngineFeature("CustomTitleBarM1Enabled"),
 	FFlagAddSDUIEditProfileFramesAction = game:DefineFastFlag("AddSDUIEditProfileFramesAction", false),
-	FFlagLuaSupportMicroGamepadPreferredInput = game:DefineFastFlag("LuaSupportMicroGamepadPreferredInput", false)
+	FFlagLuaSupportMicroGamepadPreferredInput = game:DefineFastFlag("LuaSupportMicroGamepadPreferredInput", false),
+	FFlagPinShortcutEnableOnCompleteCallback = game:GetEngineFeature("PinShortcutEnableOnCompleteCallback"),
+	FFlagAddPinExperienceTargetDestinationGUACPolicy = game:DefineFastFlag("AddPinExperienceTargetDestinationGUACPolicy", false)
 }

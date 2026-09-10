@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("PlatformLeaderboardsExposure3Layer", "Social.PlatformLeaderboardsInGameExposureValidConfigOnly.PlatformLeaderboardsM3")

@@ -1,6 +1,9 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedUtilities").Parent
+﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local parent = sduiSharedUtilities.Parent
 local httpClientModule = require(parent.HttpClient)
 local promiseModule = require(parent.Promise)
+local buildSduiRequestHeadersModule = require(sduiSharedUtilities.buildSduiRequestHeaders)
+local fFlagSduiMrRouterHeadersModule = require(sduiSharedUtilities.Flags.FFlagSduiMrRouterHeaders)
 
 local function _(p1)
 	return {
@@ -10,7 +13,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: httpClientModule (ref), promiseModule (ref)
+	-- upvalues: httpClientModule (ref), fFlagSduiMrRouterHeadersModule (ref), buildSduiRequestHeadersModule (ref), promiseModule (ref)
 	local var1 = p1.network or httpClientModule.createRequestInternalNetwork({ transportFailuresAsResponses = true })
 	
 	if p1.retry then
@@ -35,7 +38,7 @@ return function(p1)
 		method = p1.method,
 		url = p1.url,
 		body = p1.body,
-		headers = { Accept = p1.accept },
+		headers = if fFlagSduiMrRouterHeadersModule then buildSduiRequestHeadersModule(p1.accept, nil) else { Accept = p1.accept },
 		encode = httpClientModule.encodeRaw(p1.contentType or "application/json"),
 		decode = function(p2)
 			if p2.statusCode >= 400 or p2.httpError ~= nil and p2.httpError ~= Enum.HttpError.OK or p2.wasTransportFailure == true then

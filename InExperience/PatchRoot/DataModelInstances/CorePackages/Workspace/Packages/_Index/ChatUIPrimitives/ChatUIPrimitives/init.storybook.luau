@@ -6,7 +6,7 @@ local foundationProvider = require(parent.Foundation).FoundationProvider
 return {
 	name = chatUIPrimitives.Name,
 	roact = reactModule,
-	reactRoblox = require(parent.Dev.ReactRoblox),
+	reactRoblox = require(parent.ReactRoblox),
 	storyRoots = { chatUIPrimitives },
 	mapStory = function(p1)
 		-- upvalues: reactModule (ref), foundationProvider (ref)

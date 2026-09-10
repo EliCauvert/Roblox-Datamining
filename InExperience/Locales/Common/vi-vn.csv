@@ -74,8 +74,6 @@ Amp.Upsell.Message.EmailSent,Chúng tôi đã gửi một email đến {parentEm
 Amp.Upsell.Message.EmailSentPluralParent,Chúng tôi đã gửi email đến tài khoản phụ huynh liên kết của bạn
 Amp.Upsell.Title.AskYourParent,Hỏi phụ huynh
 Amp.Upsell.Title.RequestSent,Đã gửi yêu cầu
-Application.Logout.Action.Logout,Đăng Xuất
-Application.Logout.Message.Confirmation,Bạn có chắc muốn đăng xuất không?
 Authentication.AccountSwitch.Action.SwitchAccount,Chuyển đổi tài khoản
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Đăng Nhập Nhanh
@@ -2053,6 +2051,7 @@ Feature.Build.Label.GamePlays,Lượt chơi
 Feature.Build.Label.GetMoreBuildUsage,Mua thêm lượt sử dụng Build
 Feature.Build.Label.Hi,Xin chào
 Feature.Build.Label.IconThumbnails,Biểu tượng và hình nhỏ
+Feature.Build.Label.Images2D,Hình ảnh 2D
 Feature.Build.Label.InProgress,Đang thực hiện
 Feature.Build.Label.InputNeeded,Cần thông tin đầu vào
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2084,6 +2083,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Sẵn sàng
 Feature.Build.Label.RegionalPricing,Giá theo vùng
 Feature.Build.Label.ResetsDaily,Làm mới hằng ngày
+Feature.Build.Label.ResetsMonthly,Đặt lại hằng tháng
+Feature.Build.Label.ResetsWeekly,Đặt lại hằng tuần
 Feature.Build.Label.RestoredVersion,Đã khôi phục {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2091,7 +2092,6 @@ Feature.Build.Label.SearchAssets,Tìm kiếm tài sản
 Feature.Build.Label.SearchGames,Tìm kiếm trò chơi
 Feature.Build.Label.SearchTasks,Tìm kiếm nhiệm vụ
 Feature.Build.Label.SelectOption,Chọn một tùy chọn
-Feature.Build.Label.ShareAddedFriends,Chia sẻ với bạn bè mà bạn đã thêm
 Feature.Build.Label.Shared,Đã chia sẻ
 Feature.Build.Label.ShopButton,Nút Cửa hàng
 Feature.Build.Label.ShopUi,UI cửa hàng
@@ -2229,6 +2229,7 @@ Feature.Build.Message.NoVersionHistory,Chưa có lịch sử phiên bản.
 Feature.Build.Message.OneTaskCompleted,Đã hoàn thành 1 nhiệm vụ
 Feature.Build.Message.OutOfBuildUsage,Bạn đã hết lượt sử dụng Build. Hãy xem các lựa chọn sử dụng Robux để tiếp tục sáng tạo.
 Feature.Build.Message.PlaytestersAdded,Đã thêm {INVITED_COUNT} trên {MAX_INVITES} người chơi thử
+Feature.Build.Message.PrivatePlaytestInvite,{username} đã mời bạn chơi thử riêng tư {experienceName}
 Feature.Build.Message.PublicPublishFailed,Trò chơi của bạn đã được đăng nhưng chưa đăng công khai. Vui lòng thử lại.
 Feature.Build.Message.PublishExpandAudience,Đăng để mở rộng đối tượng của bạn
 Feature.Build.Message.PublishNotReverted,Không hủy đăng được. Vui lòng thử lại.
@@ -3238,6 +3239,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Xóa bạn bè đáng t
 Feature.Friends.TrustedFriend.AddBack.Header,Yêu cầu trở thành Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Info.Modal.Header,Bạn bè đáng tin cậy mới
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Thêm bạn bè đáng tin cậy
+Feature.Friends.TrustedFriend.Label.Title,Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} đã trở thành bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Đã xóa Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Đã gửi yêu cầu trở thành bạn bè đáng tin cậy
@@ -4021,6 +4023,7 @@ Feature.SettingsHub.Label.NoConnectionsScreen,Tạo Người quen để có th�
 Feature.SettingsHub.Label.NoFriendsPageMessage,Thêm bạn bè để cùng nhau khám phá.
 Feature.SettingsHub.Label.NoFriendsScreen,Kết bạn để bạn có thể mời họ tham gia cùng bạn!
 Feature.SettingsHub.Label.QuitButton,
+Feature.SettingsHub.Label.QuitConfirmation,Bạn có chắc chắn muốn thoát không?
 Feature.SettingsHub.Label.ReasonForAbuse,Lý Do Vi Phạm?
 Feature.SettingsHub.Label.Report.BlockDisplayName,Chặn {DISPLAY_NAME} (@{RBX_NAME})
 Feature.SettingsHub.Label.Report.OtherActionsHeader,Các bước khác bạn có thể thực hiện
@@ -4783,6 +4786,7 @@ InGame.HelpMenu.Label.PlayerScripts,PlayerScripts:
 InGame.HelpMenu.Label.ServerChannel,Kênh Máy Chủ:
 InGame.HelpMenu.Label.ServerVersion,Phiên Bản Máy Chủ:
 InGame.HelpMenu.LeftArrow,Mũi Tên Sang Trái
+InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,Mũi Tên Sang Phải
 InGame.HelpMenu.UpArrow,Mũi Tên Lên
 InGame.InspectMenu.Action.Cancel,
@@ -4872,6 +4876,13 @@ InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,"Bạn hiện đang ở tron
 InGame.UnknownNamespace.Network,(Mạng)
 InGame.UnknownNamespace.Received,Đã Nhận
 InGame.UnknownNamespace.Sent,Đã Gửi
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,Không thể thêm {experience_name} vào màn hình
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,Không thể thêm {experience_name} vào màn hình chính
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,Lối tắt đến {experience_name} đã tồn tại
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,Đã thêm {experience_name} vào màn hình thành công
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,Đã thêm {experience_name} vào màn hình chính thành công
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,Xem lối tắt
 Notifications.NotificationStream.Bundle.ShowLess,Ẩn bớt
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} thông báo khác
 Notifications.NotificationStream.Label.AllCaughtUp,Không có thông báo mới nào!

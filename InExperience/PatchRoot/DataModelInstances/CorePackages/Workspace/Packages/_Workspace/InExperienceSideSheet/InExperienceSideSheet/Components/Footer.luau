@@ -6,17 +6,18 @@ local _ = require(parent.Signals)
 local foundationModule = require(parent.Foundation)
 local divider = foundationModule.Divider
 local view = foundationModule.View
+local isPioneerLaunch = require(parent.PioneerUtils).isPioneerLaunch
 local sessionActionButtonsModule = require(inExperienceSideSheet.Components.SessionActionButtons)
 local sideSheetWidgetListModule = require(inExperienceSideSheet.Components.SideSheetWidgetList)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
-local fFlagEnableSideSheetWidgets = sharedFlagsModule.FFlagEnableSideSheetWidgets or require(parent.PioneerUtils).isPioneerLaunch()
+local fFlagEnableSideSheetWidgets = sharedFlagsModule.FFlagEnableSideSheetWidgets or isPioneerLaunch()
 
 return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), view (ref), fFlagSideSheetFocusNav (ref), fFlagEnableSideSheetWidgets (ref), sideSheetWidgetListModule (ref), chromeModule (ref), divider (ref), sessionActionButtonsModule (ref)
 	return reactModule.createElement(view, {
 		tag = {
-			["col size-full-0 auto-y padding-bottom-medium padding-right-xlarge"] = true,
+			["col size-full-0 auto-y padding-bottom-xlarge padding-right-xlarge"] = true,
 			["padding-left-small"] = fFlagSideSheetFocusNav or fFlagEnableSideSheetWidgets
 		},
 		LayoutOrder = p1.layoutOrder
@@ -27,7 +28,7 @@ return reactModule.memo(function(p1)
 			placement = chromeModule.Enums.SideSheetPlacement.FixedFooterTop
 		}) else nil,
 		FooterDivider = reactModule.createElement(view, {
-			tag = "size-full-0 auto-y padding-bottom-medium",
+			tag = "size-full-0 auto-y padding-y-medium",
 			LayoutOrder = if fFlagEnableSideSheetWidgets then 2 else 1
 		}, { Divider = reactModule.createElement(divider) }),
 		SessionActionButtons = reactModule.createElement(sessionActionButtonsModule, {

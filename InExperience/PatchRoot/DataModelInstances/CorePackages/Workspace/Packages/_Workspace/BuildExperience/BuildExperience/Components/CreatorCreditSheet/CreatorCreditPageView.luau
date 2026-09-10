@@ -6,6 +6,7 @@ local numberLocalization = require(parent.Localization).NumberLocalization
 local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local fFlagBuildExperienceFreeTrialResetPeriodModule = require(buildExperience.Flags.FFlagBuildExperienceFreeTrialResetPeriod)
 local button = foundationModule.Button
 local icon = foundationModule.Icon
 local progress = foundationModule.Progress
@@ -31,11 +32,13 @@ local _ = function(p1)
 end
 
 local function FreeUsageCard(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), progress (ref), progressShape (ref), progressSize (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), fFlagBuildExperienceFreeTrialResetPeriodModule (ref), reactModule (ref), view (ref), text (ref), progress (ref), progressShape (ref), progressSize (ref)
 	local pctUsed = p1.pctUsed
 	local var1 = if pctUsed < 0 then 0 elseif pctUsed > 100 then 100 else pctUsed
 	local var2 = useLocalization({
 		caption = localizationStringsModule.CREATOR_CREDIT_FREE_USAGE_CAPTION,
+		captionWeekly = localizationStringsModule.CREATOR_CREDIT_FREE_USAGE_CAPTION_WEEKLY,
+		captionMonthly = localizationStringsModule.CREATOR_CREDIT_FREE_USAGE_CAPTION_MONTHLY,
 		label = localizationStringsModule.CREATOR_CREDIT_FREE_USAGE_LABEL,
 		percentUsed = {
 			localizationStringsModule.CREATOR_CREDIT_PERCENT_USED,
@@ -46,6 +49,7 @@ local function FreeUsageCard(p1)
 			HOURS = p1.resetHours
 		}
 	})
+	local _ = nil
 	
 	return reactModule.createElement(view, {
 		tag = "col gap-small size-full-0 auto-y padding-large radius-large bg-shift-100",
@@ -76,7 +80,7 @@ local function FreeUsageCard(p1)
 			LayoutOrder = 4,
 			tag = "size-full-0 auto-y padding-top-medium text-body-small text-align-x-left content-muted",
 			testId = "creator-credit-page-free-usage-reset",
-			Text = if math.floor(var1 + 0.5) > 0 and p1.resetHours ~= nil then var2.resetHours else var2.caption
+			Text = if fFlagBuildExperienceFreeTrialResetPeriodModule then if (if p1.resetPeriod ~= nil then p1.resetPeriod == "Daily" else true) and math.floor(var1 + 0.5) > 0 and p1.resetHours ~= nil then var2.resetHours elseif p1.resetPeriod == "Weekly" then var2.captionWeekly elseif p1.resetPeriod == "Monthly" then var2.captionMonthly else var2.caption elseif math.floor(var1 + 0.5) > 0 and p1.resetHours ~= nil then var2.resetHours else var2.caption
 		})
 	})
 end
@@ -267,7 +271,8 @@ return function(p1)
 		FreeUsage = reactModule.createElement(FreeUsageCard, {
 			LayoutOrder = 1,
 			pctUsed = p1.dailyPctUsed,
-			resetHours = p1.resetHours
+			resetHours = p1.resetHours,
+			resetPeriod = p1.resetPeriod
 		}),
 		AdditionalUsage = reactModule.createElement(AdditionalUsageCard, {
 			LayoutOrder = 2,

@@ -7,6 +7,7 @@ local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiDevStoreSeeAllSupport = sharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
 local fFlagEnableHomeGameItemOwnershipUpdate = sharedFlagsModule.FFlagEnableHomeGameItemOwnershipUpdate
+local fFlagEnableSearchGameItemOwnershipUpdate = sharedFlagsModule.FFlagEnableSearchGameItemOwnershipUpdate
 local createDataCacheModule = require(dataHydration.createDataCache)
 local createDataResolverModule = require(dataHydration.createDataResolver)
 local _ = require(dataHydration.DataHydrationTypes)
@@ -19,12 +20,12 @@ local function _(p1, p2)
 end
 
 return function()
-	-- upvalues: createDataCacheModule (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagEnableHomeGameItemOwnershipUpdate (ref), createDataResolverModule (ref), logResponseError (ref), fFlagLuaAppUseGameTransactionsApiForReceipts (ref), discoveryEventErrorLogger (ref), promiseModule (ref), fetchGameDeveloperProductStatusesModule (ref)
+	-- upvalues: createDataCacheModule (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagEnableHomeGameItemOwnershipUpdate (ref), fFlagEnableSearchGameItemOwnershipUpdate (ref), createDataResolverModule (ref), logResponseError (ref), fFlagLuaAppUseGameTransactionsApiForReceipts (ref), discoveryEventErrorLogger (ref), promiseModule (ref), fetchGameDeveloperProductStatusesModule (ref)
 	local var1 = createDataCacheModule()
 	local var2 = nil
 	local var3 = nil
 	
-	if fFlagSduiDevStoreSeeAllSupport or fFlagEnableHomeGameItemOwnershipUpdate then
+	if fFlagSduiDevStoreSeeAllSupport or fFlagEnableHomeGameItemOwnershipUpdate or fFlagEnableSearchGameItemOwnershipUpdate then
 		var2 = createDataCacheModule()
 		var3 = createDataResolverModule({
 			supportsMultiGet = false,

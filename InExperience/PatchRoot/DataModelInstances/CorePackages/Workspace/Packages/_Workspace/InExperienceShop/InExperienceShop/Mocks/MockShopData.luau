@@ -213,6 +213,7 @@ local list_2 = {
 	{ name = "Top picks", items = pickRandomItems() },
 	{
 		name = "Robux",
+		bonusJwt = "mock-bonus-jwt",
 		robuxPackages = {
 			{
 				id = "229",
@@ -301,7 +302,8 @@ local function buildShopData()
 				id = var2,
 				name = v.name,
 				items = v.items or {},
-				robuxPackages = v.robuxPackages
+				robuxPackages = v.robuxPackages,
+				bonusJwt = v.bonusJwt
 			})
 		end
 	end

@@ -312,16 +312,6 @@ return function(p3)
 		return rpcCallSync(acpProtocolModule.Methods.SessionFindByUniverse, p5)
 	end
 	
-	local function sessionListModels(p5)
-		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
-		assert(typeof(p5) == "table", "sessionListModels requires params")
-		assert(typeof(p5.sessionId) == "string" and p5.sessionId ~= "", "sessionId is required")
-		assert(if p5.pageSize ~= nil then typeof(p5.pageSize) == "number" else true, "pageSize must be a number")
-		assert(if p5.pageToken ~= nil then typeof(p5.pageToken) == "string" else true, "pageToken must be a string")
-		
-		return rpcCallSync(acpProtocolModule.Methods.SessionListModels, p5)
-	end
-	
 	local function sessionLoad(p5, p6)
 		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
 		assert(typeof(p5) == "string" and p5 ~= "", "sessionId is required")
@@ -687,7 +677,6 @@ return function(p3)
 			return t_4
 		end,
 		sessionFindByUniverse = sessionFindByUniverse,
-		sessionListModels = sessionListModels,
 		sessionLoad = sessionLoad,
 		sessionReadTasks = sessionReadTasks,
 		sessionPrompt = sessionPrompt,

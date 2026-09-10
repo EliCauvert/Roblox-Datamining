@@ -8,5 +8,6 @@
 	InExperienceShopDetails = "InExperienceShopDetails",
 	InExperienceShopSearch = "InExperienceShopSearch",
 	Profile = "Profile",
-	HomePageGameItemShop = "HomePageGameItemShop"
+	HomePageGameItemShop = "HomePageGameItemShop",
+	SearchPageGameItemShop = "SearchPageGameItemShop"
 }

@@ -4,15 +4,12 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local pickedUserListModule = require(buildExperience.Components.UserPicker.PickedUserList)
 local badge = foundationModule.Badge
-local button = foundationModule.Button
 local list = foundationModule.List
 local text = foundationModule.Text
 local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
 
 return function(p1)
-	-- upvalues: reactModule (ref), list (ref), view (ref), text (ref), badge (ref), button (ref), buttonVariant (ref), inputSize (ref), pickedUserListModule (ref)
+	-- upvalues: reactModule (ref), list (ref), view (ref), text (ref), badge (ref), pickedUserListModule (ref)
 	local testId = p1.testId or "private-invites-management"
 	local isInviteDisabled = p1.isInviteDisabled
 	local var1 = reactModule.createElement(list.Item, {
@@ -46,25 +43,6 @@ return function(p1)
 			LayoutOrder = 2,
 			tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-muted",
 			Text = p1.subtitle
-		}),
-		ShareLink = reactModule.createElement(view, {
-			LayoutOrder = 3,
-			tag = "row align-y-center gap-small size-full-0 auto-y padding-large stroke-standard stroke-default radius-large bg-surface-0",
-			testId = `{testId}-share-link`
-		}, {
-			Title = reactModule.createElement(text, {
-				LayoutOrder = 1,
-				tag = "fill auto-y text-title-medium text-wrap text-align-x-left content-default",
-				Text = p1.shareWithFriendsTitle
-			}),
-			Share = reactModule.createElement(button, {
-				LayoutOrder = 2,
-				text = p1.shareWithFriendsButtonText,
-				onActivated = p1.onShareLink,
-				variant = buttonVariant.Standard,
-				size = inputSize.Small,
-				testId = `{testId}-share-link-button`
-			})
 		}),
 		Table = reactModule.createElement(pickedUserListModule, {
 			layoutOrder = 4,

@@ -57,8 +57,6 @@ Amp.Upsell.Message.EmailSent,我们已将一封电子邮件发送至 {parentEmai
 Amp.Upsell.Message.EmailSentPluralParent,我们已向你关联的家长发送电子邮件
 Amp.Upsell.Title.AskYourParent,询问你的家长
 Amp.Upsell.Title.RequestSent,请求已发送
-Application.Logout.Action.Logout,退出登录
-Application.Logout.Message.Confirmation,是否确定退出登录？
 Authentication.AccountSwitch.Action.SwitchAccount,切换帐户
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,快速登录
@@ -932,6 +930,8 @@ CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,你要离开吗？
 CoreScripts.InGameMenu.Traversal.HistoryDescription,加入之前访问过的游戏
 CoreScripts.InGameMenu.Traversal.LeaveBody,你即将离开此游戏并返回“{PREVIOUS_EXPERIENCE}”。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
+CoreScripts.InGameMenu.UnlockMore.Description,聊天、好友和更多游戏
+CoreScripts.InGameMenu.UnlockMore.Title,解锁更多 Roblox 功能
 CoreScripts.InGameMenu.Vibration,震动
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,来切换菜单导航
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,某些体验需要按
@@ -2034,6 +2034,7 @@ Feature.Build.Label.GamePlays,游戏游玩次数
 Feature.Build.Label.GetMoreBuildUsage,获得更多 Build 使用额度
 Feature.Build.Label.Hi,你好
 Feature.Build.Label.IconThumbnails,标志和缩略图
+Feature.Build.Label.Images2D,2D 图像
 Feature.Build.Label.InProgress,进行中
 Feature.Build.Label.InputNeeded,需要输入内容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2065,6 +2066,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,准备就绪
 Feature.Build.Label.RegionalPricing,区域定价
 Feature.Build.Label.ResetsDaily,每日重置
+Feature.Build.Label.ResetsMonthly,每月重置
+Feature.Build.Label.ResetsWeekly,每周重置
 Feature.Build.Label.RestoredVersion,已恢复 {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2072,7 +2075,6 @@ Feature.Build.Label.SearchAssets,搜索素材
 Feature.Build.Label.SearchGames,搜索游戏
 Feature.Build.Label.SearchTasks,搜索任务
 Feature.Build.Label.SelectOption,选择一个选项
-Feature.Build.Label.ShareAddedFriends,分享给已添加的好友
 Feature.Build.Label.Shared,已共享
 Feature.Build.Label.ShopButton,商店按钮
 Feature.Build.Label.ShopUi,商店用户界面
@@ -2209,7 +2211,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,暂无版本历史记录。
 Feature.Build.Message.OneTaskCompleted,已完成 1 项任务
 Feature.Build.Message.OutOfBuildUsage,你的 Build 使用额度已用完。请查看你的选项，以便使用 Robux 继续创建。
+Feature.Build.Message.PlaytestInviteSendFailedBody,你无法向以下用户发送聊天邀请链接：
+Feature.Build.Message.PlaytestInviteSendFailedHint,请使用分享按钮获取链接。
 Feature.Build.Message.PlaytestersAdded,已添加 {INVITED_COUNT} 位测试玩家，共 {MAX_INVITES} 位
+Feature.Build.Message.PrivatePlaytestInvite,{username}邀请你参加“{experienceName}”的私人游戏测试
 Feature.Build.Message.PublicPublishFailed,你的游戏已发布，但无法公开。请重试。
 Feature.Build.Message.PublishExpandAudience,发布并扩大受众范围
 Feature.Build.Message.PublishNotReverted,你的发布未还原。请重试。
@@ -2273,6 +2278,7 @@ Feature.Build.Title.GetUsers,获取用户
 Feature.Build.Title.ManagedPricingAcknowledgement,是否开启托管定价？
 Feature.Build.Title.NoMonetizationProducts,开始在你的游戏中赚取收入
 Feature.Build.Title.NoRobuxForUsage,没有剩余的 Robux 可用于购买 Build 使用额度
+Feature.Build.Title.PlaytestInviteSendFailed,无法发送邀请
 Feature.Build.Title.Playtesters,测试玩家
 Feature.Build.Title.PlaytestersOnlyPlay,只有测试玩家可以游玩
 Feature.Build.Title.PromoteGame,推广你的游戏
@@ -3217,6 +3223,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,移除信赖的好友
 Feature.Friends.TrustedFriend.AddBack.Header,“信赖的好友”请求
 Feature.Friends.TrustedFriend.Info.Modal.Header,新的信赖好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,添加信赖的好友
+Feature.Friends.TrustedFriend.Label.Title,信赖的好友
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}现已成为你的信赖好友
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信赖的好友已移除
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,“信赖的好友”请求已发送
@@ -3499,7 +3506,7 @@ Feature.Moments.Label.FeedFailedToLoad,无法加载推送
 Feature.Moments.Label.FeedMyMoments,我的精彩瞬间
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,如何使用截图
-Feature.Moments.Label.LinkCopied,链接已复制。
+Feature.Moments.Label.LinkCopied,链接已复制
 Feature.Moments.Label.LinkCopyFailed,无法复制链接。
 Feature.Moments.Label.ModeratedRodeoBody,该精彩瞬间因违反社区准则已被移除。为了让精彩瞬间正常展示，请务必了解并遵守相关规则。
 Feature.Moments.Label.MomentDeletedBody,
@@ -3998,6 +4005,7 @@ Feature.SettingsHub.Label.NoConnectionsScreen,先添加几个联系人，这样�
 Feature.SettingsHub.Label.NoFriendsPageMessage,添加好友，一起探索。
 Feature.SettingsHub.Label.NoFriendsScreen,认识更多朋友，邀请他们和你一起体验！
 Feature.SettingsHub.Label.QuitButton,
+Feature.SettingsHub.Label.QuitConfirmation,确定要退出吗？
 Feature.SettingsHub.Label.ReasonForAbuse,滥用原因？
 Feature.SettingsHub.Label.Report.BlockDisplayName,屏蔽 {DISPLAY_NAME}（@{RBX_NAME}）
 Feature.SettingsHub.Label.Report.OtherActionsHeader,其他可以采取的步骤
@@ -4760,6 +4768,7 @@ InGame.HelpMenu.Label.PlayerScripts,玩家脚本：
 InGame.HelpMenu.Label.ServerChannel,服务器频道：
 InGame.HelpMenu.Label.ServerVersion,服务器版本：
 InGame.HelpMenu.LeftArrow,左箭头
+InGame.HelpMenu.Resume,
 InGame.HelpMenu.RightArrow,右箭头
 InGame.HelpMenu.UpArrow,上箭头
 InGame.InspectMenu.Action.Cancel,
@@ -4849,6 +4858,13 @@ InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,你正在团队“{RBX_NAME}
 InGame.UnknownNamespace.Network,（网络）
 InGame.UnknownNamespace.Received,已收到
 InGame.UnknownNamespace.Sent,
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,无法将“{experience_name}”添加至桌面
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,无法将“{experience_name}”添加至主屏幕
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,“{experience_name}”的快捷方式已存在
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,已成功将“{experience_name}”添加到桌面
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,已成功将“{experience_name}”添加至主屏幕
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,查看快捷键
 Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,其他 {notificationCount} 个
 Notifications.NotificationStream.Label.AllCaughtUp,没有新的通知了！

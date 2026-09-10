@@ -48,6 +48,7 @@ return function(value, _, p1)
 			appPage = p1.appPage,
 			collectionId = collectionId,
 			dispatch = p1.dependencies.dispatch,
+			isSponsored = if typeof(var1.isSponsored) == "boolean" then var1.isSponsored else nil,
 			localizedStrings = localizeStrings(p1.dependencies.localization, {
 				checkboxListTitle = "Feature.GameDetails.Message.HidingExperienceQuestion",
 				dialogText = "Feature.GameDetails.Message.HelpImproveExperience",

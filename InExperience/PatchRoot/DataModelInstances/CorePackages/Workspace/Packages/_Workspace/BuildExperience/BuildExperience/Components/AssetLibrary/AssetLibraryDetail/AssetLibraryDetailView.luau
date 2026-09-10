@@ -5,10 +5,6 @@ local reactModule = require(parent.React)
 local assetLibraryAudioPlayerContainerModule = require(script.Parent.Parent.AssetLibraryAudioPlayer.AssetLibraryAudioPlayerContainer)
 local _ = require(script.Parent.Parent.AssetLibraryTypes)
 local overflowMenuPageShellModule = require(buildExperience.Components.BuildPillMenu.OverflowMenuPageShell)
-local chatActionsModule = require(buildExperience.Components.Chat.ChatActions)
-local _ = require(buildExperience.Components.ModelLibrary.collectWorkspaceModels)
-local modelViewportModule = require(buildExperience.Components.ModelLibrary.ModelViewport)
-local button = foundationModule.Button
 local image = foundationModule.Image
 local iconButton = foundationModule.IconButton
 local skeleton = foundationModule.Skeleton
@@ -32,109 +28,21 @@ local function getAttribution(p1)
 end
 
 return function(value)
-	-- upvalues: reactModule (ref), view (ref), modelViewportModule (ref), image (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), button (ref), chatActionsModule (ref), skeleton (ref), radius (ref), getAttribution (ref), assetLibraryAudioPlayerContainerModule (ref), overflowMenuPageShellModule (ref)
+	-- upvalues: reactModule (ref), view (ref), image (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), skeleton (ref), radius (ref), getAttribution (ref), assetLibraryAudioPlayerContainerModule (ref), overflowMenuPageShellModule (ref)
 	local asset = value.asset
-	local liveModel = value.liveModel
-	local apiModel = value.apiModel
 	local var1 = if asset == nil or asset.assetType ~= "Audio" then "" else asset.displayName
 	local var2 = nil
 	
-	if value.status == "Ready" and (liveModel ~= nil or apiModel ~= nil) then
-		return reactModule.createElement(view, {
-			tag = "col size-full clip bg-surface-100",
-			testId = "AssetLibrary.Preview"
-		}, {
-			Media = reactModule.createElement(view, {
-				LayoutOrder = 2,
-				ClipsDescendants = true,
-				ZIndex = 1,
-				testId = "AssetLibrary.Preview.ModelRegion",
-				Size = UDim2.fromScale(1, 0),
-				flexItem = { FlexMode = Enum.UIFlexMode.Fill }
-			}, {
-				Viewport = if liveModel ~= nil then reactModule.createElement(image, {
-					testId = "AssetLibrary.Preview.ModelImage",
-					Image = apiModel.thumbnail or "rbxasset://textures/ui/GuiImagePlaceholder.png",
-					ScaleType = Enum.ScaleType.Fit,
-					Size = UDim2.fromScale(1, 1)
-				}) else reactModule.createElement(modelViewportModule, {
-					backgroundTransparency = 1,
-					cameraDistanceScale = 1.25,
-					testId = "AssetLibrary.Preview.Model",
-					model = liveModel.model,
-					size = UDim2.fromScale(1, 1)
-				})
-			}),
-			Header = reactModule.createElement(view, {
-				LayoutOrder = 1,
-				ZIndex = 2,
-				testId = "AssetLibrary.Preview-header",
-				tag = {
-					["composition-content-header"] = true,
-					["row align-y-center gap-small size-full-0 auto-y padding-y-small bg-surface-100"] = true
-				}
-			}, {
-				Back = reactModule.createElement(iconButton, {
-					LayoutOrder = 1,
-					isCircular = true,
-					testId = "AssetLibrary.Preview-close",
-					icon = iconName.ChevronLargeLeft,
-					onActivated = value.onBack,
-					size = inputSize.Medium,
-					variant = buttonVariant.Utility
-				}),
-				Title = reactModule.createElement(text, {
-					LayoutOrder = 2,
-					tag = "fill text-heading-medium text-align-x-left text-truncate-end content-emphasis",
-					testId = "AssetLibrary.Preview-title",
-					Text = if liveModel ~= nil then apiModel.name else liveModel.name
-				})
-			}),
-			Actions = reactModule.createElement(view, {
-				LayoutOrder = 3,
-				ZIndex = 3,
-				tag = "col gap-small size-full-0 auto-y padding-medium bg-surface-100",
-				testId = "AssetLibrary.Preview.Actions"
-			}, {
-				ViewInWorld = reactModule.createElement(button, {
-					LayoutOrder = 1,
-					ZIndex = 4,
-					text = "View in World",
-					testId = "AssetLibrary.Preview.SeeInWorld",
-					width = UDim.new(1, 0),
-					onActivated = function()
-						-- upvalues: liveModel (ref), value (ref), apiModel (ref)
-						if liveModel ~= nil and value.onSeeInWorld ~= nil then
-							value.onSeeInWorld(liveModel)
-							
-							return
-						elseif apiModel ~= nil and value.onViewApiModelInWorld ~= nil then
-							value.onViewApiModelInWorld(apiModel)
-						end
-					end,
-					variant = buttonVariant.Emphasis,
-					size = inputSize.Medium
-				}),
-				Composer = if value.chatActions ~= nil then nil else reactModule.createElement(view, {
-					LayoutOrder = 2,
-					ZIndex = 4,
-					tag = "size-full-0 auto-y padding-top-xxsmall",
-					testId = "AssetLibrary.Preview.Composer"
-				}, {
-					Actions = reactModule.createElement(chatActionsModule, value.chatActions)
-				})
-			})
-		})
-	elseif value.status == "Ready" and asset ~= nil and asset.assetType ~= "Audio" then
+	if value.status == "Ready" and asset ~= nil and asset.assetType ~= "Audio" then
 		local createElement_1
-		local thumbnail = asset.thumbnail or `rbxthumb://type=Asset&id={asset.assetId}&w=420&h=420`
+		local assetId = `rbxthumb://type=Asset&id={asset.assetId}&w=420&h=420`
 		local createElement = reactModule.createElement
 		local var3 = view
 		local t = { tag = "size-full clip", testId = "AssetLibrary.Preview" }
 		local t_1 = {
 			Media = reactModule.createElement(image, {
 				testId = "AssetLibrary.Preview.Media",
-				Image = thumbnail,
+				Image = assetId,
 				ScaleType = Enum.ScaleType.Fit,
 				Size = UDim2.fromScale(1, 1)
 			}),
@@ -279,31 +187,7 @@ return function(value)
 			error("Non-audio ready assets render through the immersive preview")
 		end
 	end
-	return if value.presentation == "Sheet" then reactModule.createElement(view, { tag = "col size-full", testId = "AssetLibrary.Preview" }, {
-		Header = reactModule.createElement(view, {
-			LayoutOrder = 1,
-			tag = {
-				["composition-content-header"] = true,
-				["row align-y-center gap-small size-full-0 auto-y padding-y-small"] = true
-			}
-		}, {
-			Back = reactModule.createElement(iconButton, {
-				LayoutOrder = 1,
-				isCircular = true,
-				testId = "AssetLibrary.Preview-close",
-				icon = iconName.ChevronLargeLeft,
-				onActivated = value.onBack,
-				size = inputSize.Medium,
-				variant = buttonVariant.Utility
-			}),
-			Title = reactModule.createElement(text, {
-				LayoutOrder = 2,
-				tag = "fill text-heading-small text-align-x-left content-emphasis",
-				Text = var1
-			})
-		}),
-		Content = reactModule.createElement(view, { LayoutOrder = 2, tag = "fill size-full-0" }, { Body = var2 })
-	}) else reactModule.createElement(overflowMenuPageShellModule, {
+	return reactModule.createElement(overflowMenuPageShellModule, {
 		testId = "AssetLibrary.Preview",
 		title = var1,
 		closeIcon = iconName.ChevronLargeLeft,

@@ -10,7 +10,7 @@ return serviceModule:register({
 	id = "settings",
 	label = "CoreScripts.InGameMenu.PageTitle.GameSettings",
 	initialAvailability = serviceModule.AvailabilitySignal.Available,
-	sideSheetPlacement = sideSheetPlacement.Page,
+	sideSheetPlacement = sideSheetPlacement.AboveFold,
 	activated = function(_)
 		-- upvalues: inGameMenuIntegrationUtilsModule (ref), gameSettingsPage (ref)
 		inGameMenuIntegrationUtilsModule.toggleIGMPage("GameSettingsPage", gameSettingsPage:get())

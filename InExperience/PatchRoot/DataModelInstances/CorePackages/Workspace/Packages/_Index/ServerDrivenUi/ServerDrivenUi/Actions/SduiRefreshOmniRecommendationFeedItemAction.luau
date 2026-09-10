@@ -1,8 +1,11 @@
 ﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local sduiCoreSystemModule = require(serverDrivenUi.Parent.SduiCoreSystem)
+local parent = serverDrivenUi.Parent
+local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local refreshOmniRecommendationFeedItemModule = require(serverDrivenUi.Actions.refreshOmniRecommendationFeedItem)
+local refreshHomePageFeedItemModule = require(parent.Home.refreshHomePageFeedItem)
+local fFlagLuaAppEnableSduiHomePage = require(parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
 
 local function _(p1, p2, p3)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref)
@@ -14,7 +17,7 @@ local function _(p1, p2, p3)
 end
 
 return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), refreshOmniRecommendationFeedItemModule (ref)
+	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagLuaAppEnableSduiHomePage (ref), refreshHomePageFeedItemModule (ref), refreshOmniRecommendationFeedItemModule (ref)
 	local var1 = if p1 then p1.actionParams else nil
 	
 	if var1 == nil then
@@ -72,7 +75,10 @@ return function(p1, _, p2)
 			}, p2.appPage)
 		end
 	end
-	return refreshOmniRecommendationFeedItemModule(p2.dependencies.networking, p2.appPage, topicId, feedItemKey, requestIntent, function(p3, p4)
+	return if fFlagLuaAppEnableSduiHomePage then refreshHomePageFeedItemModule(topicId, feedItemKey, requestIntent, function(p3, p4)
+		-- upvalues: p2 (ref)
+		p2.dependencies.logger.reportError(p3, p4, p2.appPage)
+	end, { contextFeatures = t }) else refreshOmniRecommendationFeedItemModule(p2.dependencies.networking, p2.appPage, topicId, feedItemKey, requestIntent, function(p3, p4)
 		-- upvalues: p2 (ref)
 		p2.dependencies.logger.reportError(p3, p4, p2.appPage)
 	end, { contextFeatures = t })

@@ -16,9 +16,10 @@ local constantsModule = require(parent.Common.Constants)
 local fFlagPlayerListFixPlatformLeaderboardSizingModule = require(parent.Flags.FFlagPlayerListFixPlatformLeaderboardSizing)
 local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
 local fFlagPlayerListTwoTabsOnLegacyPerformanceModule = require(parent.Flags.FFlagPlayerListTwoTabsOnLegacyPerformance)
+local fFlagPlatformLeaderboardsExposure3EnabledModule = require(parent.Flags.FFlagPlatformLeaderboardsExposure3Enabled)
 
 return reactModule.memo(function(value)
-	-- upvalues: reactModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), inExperienceLocalesModule (ref), localizationService (ref), fFlagPlayerListTwoTabsOnLegacyPerformanceModule (ref), useLegacyVisibilityMirrorModule (ref), signalsReactModule (ref), fFlagPlayerListFixPlatformLeaderboardSizingModule (ref), constantsModule (ref), view (ref), platformLeaderboardViewModule (ref), leaderboardTabsModule (ref), localizationProvider (ref), foundationProvider (ref), theme (ref)
+	-- upvalues: reactModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), inExperienceLocalesModule (ref), localizationService (ref), fFlagPlayerListTwoTabsOnLegacyPerformanceModule (ref), useLegacyVisibilityMirrorModule (ref), signalsReactModule (ref), fFlagPlayerListFixPlatformLeaderboardSizingModule (ref), constantsModule (ref), view (ref), platformLeaderboardViewModule (ref), leaderboardTabsModule (ref), fFlagPlatformLeaderboardsExposure3EnabledModule (ref), localizationProvider (ref), foundationProvider (ref), theme (ref)
 	local frame
 	local server, server_1 = reactModule.useState("server")
 	local var1 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useMemo(function()
@@ -95,7 +96,8 @@ return reactModule.memo(function(value)
 			LeaderboardTabs = reactModule.createElement(leaderboardTabsModule, {
 				activeTabId = server,
 				onActivated = server_1,
-				onPlatformTabsUnavailable = var2
+				onPlatformTabsUnavailable = var2,
+				isVisible = if fFlagPlatformLeaderboardsExposure3EnabledModule then value.isVisible else nil
 			})
 		}),
 		TitleBar = if var3 then value.titleBar else nil,
