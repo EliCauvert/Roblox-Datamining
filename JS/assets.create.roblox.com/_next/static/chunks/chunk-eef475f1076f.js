@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "b043f4c8-81ea-c84e-84ed-ff36ba96eeca")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "6cc16cfe-2b33-59a8-9cc5-0b2e2d68829f")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 522829, e => {
@@ -32,8 +32,10 @@
     "use strict";
     var t = e.i(416340),
         r = e.i(157310),
-        n = e.i(704066);
-    let a = {
+        n = e.i(252842),
+        a = e.i(704066),
+        i = e.i(533968);
+    let o = {
             experienceHasPerformanceMonitoringAccess: !1,
             userCanViewAnalyticsForUniverse: !1,
             userCanManageAnalyticsAlertForUniverse: !1,
@@ -41,7 +43,7 @@
             experienceHasExperimentationMinDau: !1,
             experienceHasNoInGameExperiment: !1
         },
-        i = e => ({
+        s = e => ({
             experienceHasPerformanceMonitoringAccess: !0 === e.experienceHasPerformanceMonitoringAccess,
             userCanViewAnalyticsForUniverse: !0 === e.userCanViewAnalyticsForUniverse,
             userCanManageAnalyticsAlertForUniverse: !0 === e.userCanManageAnalyticsAlertForUniverse,
@@ -50,24 +52,32 @@
             experienceHasNoInGameExperiment: !0 === e.experienceHasNoInGameExperiment
         });
     e.s(["useAnalyticsExperiencePermissions", 0, e => {
-        let o = void 0 !== e && e > 0 ? e : void 0,
-            s = (0, r.useQuery)({
-                queryKey: ["analytics-permissions", null != o ? o : "invalid-experience"],
-                queryFn: () => n.developerAnalyticsAggregationsClient.getfeaturePermissionsGetFeaturePermission(void 0 === o ? {} : {
-                    universeId: o
-                }),
-                select: i,
-                enabled: void 0 !== o,
+        let u = void 0 !== e && e > 0 ? e : void 0,
+            c = (0, r.useQuery)({
+                queryKey: ["analytics-permissions", null != u ? u : "invalid-experience"],
+                queryFn: async () => {
+                    try {
+                        return await a.developerAnalyticsAggregationsClient.getfeaturePermissionsGetFeaturePermission(void 0 === u ? {} : {
+                            universeId: u
+                        })
+                    } catch (t) {
+                        var e;
+                        if ((null == (e = (0, i.getResponseFromError)(t)) ? void 0 : e.status) === n.StatusCodes.FORBIDDEN) return o;
+                        throw t
+                    }
+                },
+                select: s,
+                enabled: void 0 !== u,
                 staleTime: 1 / 0
             });
         return (0, t.useMemo)(() => {
             var e;
             return {
-                ...null != (e = s.data) ? e : a,
-                isPending: s.isPending,
-                isError: s.isError
+                ...null != (e = c.data) ? e : o,
+                isPending: c.isPending,
+                isError: c.isError
             }
-        }, [s.data, s.isError, s.isPending])
+        }, [c.data, c.isError, c.isPending])
     }])
 }, 545154, 595028, e => {
     "use strict";
@@ -5220,5 +5230,5 @@
     }])
 }]);
 
-//# debugId=b043f4c8-81ea-c84e-84ed-ff36ba96eeca
-//# sourceMappingURL=0vbzds3y482cq.js.map
+//# debugId=6cc16cfe-2b33-59a8-9cc5-0b2e2d68829f
+//# sourceMappingURL=0m3ptqwosztri.js.map
