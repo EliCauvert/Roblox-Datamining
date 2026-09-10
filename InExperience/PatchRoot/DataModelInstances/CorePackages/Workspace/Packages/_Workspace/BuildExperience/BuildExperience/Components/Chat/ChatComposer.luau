@@ -39,7 +39,7 @@ return function(p1)
 	end, { p1.text })
 	local var5 = p1.isAssistantResponding and p1.canSendWhileResponding ~= true
 	local var6 = p1.composerErrorText ~= nil
-	local var7 = p1.images ~= nil and #p1.images > 0
+	local var7 = p1.images ~= nil or p1.hasAttachments == true
 	local var8 = p1.isAttachmentSupported and p1.onOpenCaptureGallery ~= nil
 	local var9 = reactModule.useCallback(function(p2)
 		-- upvalues: var4 (ref), p1 (ref)
@@ -61,6 +61,12 @@ return function(p1)
 			p1.onOpenCaptureGallery()
 		end
 	end, { p1.textBoxRef, p1.onOpenCaptureGallery })
+	reactModule.useEffect(function()
+		-- upvalues: p1 (ref), var4 (ref)
+		if p1.textRevision ~= nil then
+			var4.setIsComposerEmpty(string.gsub(p1.text:getValue(), "^%s*(.-)%s*$", "%1") == "")
+		end
+	end, { p1.text, p1.textRevision, var4 })
 	useReleaseFocusOnDownSwipeModule(var3, p1.textBoxRef)
 	
 	return reactModule.createElement(var1, {

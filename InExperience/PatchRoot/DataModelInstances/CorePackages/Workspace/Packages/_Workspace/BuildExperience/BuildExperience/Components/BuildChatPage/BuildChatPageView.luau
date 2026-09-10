@@ -259,43 +259,49 @@ return function(p4)
 					tag = "fill text-heading-small text-align-x-left text-truncate-split content-emphasis",
 					Text = if p4.isNewGameTarget then chatConstantsModule.BUILD_CHAT_PAGE_TITLE else p4.target.experienceName
 				}),
-				Play = reactModule.createElement(playButtonModule, {
+				Actions = reactModule.createElement(view, {
 					LayoutOrder = 3,
-					isActive = true,
-					activeIcon = iconName.PlaySmall,
-					inActiveIcon = iconName.PlaySmall,
-					isDisabled = p4.isNewGameTarget and not p4.hasPublishedTurn,
-					onActivated = p4.onPlayActivated,
-					variant = buttonVariant.Utility
-				}),
-				AgentDetail = if taskState then reactModule.createElement(agentDetailMenuModule, { layoutOrder = 4, onActivated = p4.onOpenAgentsPage }) else nil,
-				AssetLibrary = if fFlagBuildExperienceAssetLibraryModule then reactModule.createElement(iconButton, {
-					LayoutOrder = 5,
-					isCircular = true,
-					testId = "build-header-asset-library-menu",
-					icon = iconName.SquaresGridPlus,
-					isDisabled = p4.isAgentDetailDisabled,
-					onActivated = p4.onOpenAssetLibraryPage,
-					size = inputSize.Medium,
-					variant = buttonVariant.Utility
-				}) else nil,
-				Overflow = reactModule.createElement(buildOverflowMenuButtonModule, {
-					layoutOrder = 6,
-					icon = iconName.ThreeDotsHorizontal,
-					isDisabled = not fFlagEnableBuildOverflowMenuForNewGamesModule and p4.target.universeId == nil,
-					hasPublishedTurn = p4.hasPublishedTurn,
-					hasPublishedVersion = p4.hasPublishedVersion,
-					target = {
-						universeId = p4.target.universeId,
-						placeId = p4.target.placeId,
-						sessionId = p4.target.sessionId,
-						isNewGameTarget = p4.isNewGameTarget
-					},
-					store = p4.buildOverflowMenuStore,
-					onAction = p4.onOverflowMenuAction,
-					onOpenCreatorCreditPage = p4.onOpenCreatorCreditPage,
-					onOpenGetUsersPage = p4.onOpenGetUsersPage,
-					isUniversePublic = if fFlagEnableBuildAdPromotionModule then p4.isUniversePublic else nil
+					tag = "row align-y-center gap-small auto-xy",
+					testId = "BuildChatPage.HeaderActions"
+				}, {
+					Play = reactModule.createElement(playButtonModule, {
+						LayoutOrder = 1,
+						isActive = true,
+						activeIcon = iconName.PlaySmall,
+						inActiveIcon = iconName.PlaySmall,
+						isDisabled = p4.isNewGameTarget and not p4.hasPublishedTurn,
+						onActivated = p4.onPlayActivated,
+						variant = buttonVariant.Utility
+					}),
+					AgentDetail = if taskState then reactModule.createElement(agentDetailMenuModule, { layoutOrder = 2, onActivated = p4.onOpenAgentsPage }) else nil,
+					AssetLibrary = if fFlagBuildExperienceAssetLibraryModule then reactModule.createElement(iconButton, {
+						LayoutOrder = 3,
+						isCircular = true,
+						testId = "build-header-asset-library-menu",
+						icon = iconName.SquaresGridPlus,
+						isDisabled = p4.isAgentDetailDisabled,
+						onActivated = p4.onOpenAssetLibraryPage,
+						size = inputSize.Medium,
+						variant = buttonVariant.Utility
+					}) else nil,
+					Overflow = reactModule.createElement(buildOverflowMenuButtonModule, {
+						layoutOrder = 4,
+						icon = iconName.ThreeDotsHorizontal,
+						isDisabled = not fFlagEnableBuildOverflowMenuForNewGamesModule and p4.target.universeId == nil,
+						hasPublishedTurn = p4.hasPublishedTurn,
+						hasPublishedVersion = p4.hasPublishedVersion,
+						target = {
+							universeId = p4.target.universeId,
+							placeId = p4.target.placeId,
+							sessionId = p4.target.sessionId,
+							isNewGameTarget = p4.isNewGameTarget
+						},
+						store = p4.buildOverflowMenuStore,
+						onAction = p4.onOverflowMenuAction,
+						onOpenCreatorCreditPage = p4.onOpenCreatorCreditPage,
+						onOpenGetUsersPage = p4.onOpenGetUsersPage,
+						isUniversePublic = if fFlagEnableBuildAdPromotionModule then p4.isUniversePublic else nil
+					})
 				})
 			}),
 			SubagentStatus = if taskState and p4.hasTaskGroups then reactModule.createElement(scrollView, {

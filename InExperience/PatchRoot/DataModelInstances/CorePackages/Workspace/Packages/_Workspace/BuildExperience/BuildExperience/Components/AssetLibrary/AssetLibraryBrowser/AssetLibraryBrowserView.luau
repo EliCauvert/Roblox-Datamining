@@ -2,7 +2,6 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
 local assetLibraryTileModule = require(script.Parent.Parent.AssetLibraryTile)
 local _ = require(script.Parent.Parent.AssetLibraryTypes)
 local overflowMenuPageShellModule = require(buildExperience.Components.BuildPillMenu.OverflowMenuPageShell)
@@ -25,12 +24,14 @@ local function AssetLibrarySearchField(value)
 	local var1 = useTokens()
 	
 	return reactModule.createElement(view, {
-		tag = "row align-y-center gap-small size-full-0 auto-y padding-left-medium padding-right-xsmall stroke-default radius-circle bg-surface-100",
+		LayoutOrder = 2,
+		tag = "row align-y-center fill gap-small auto-y padding-left-medium padding-right-xsmall stroke-default radius-circle bg-surface-100",
 		testId = "AssetLibrary.Search"
 	}, {
 		SearchIcon = reactModule.createElement(icon, {
 			LayoutOrder = 1,
 			tag = "auto-xy content-default",
+			testId = "AssetLibrary.Search.Icon",
 			name = iconName.MagnifyingGlass,
 			size = iconSize.Small
 		}),
@@ -92,21 +93,23 @@ local function renderLoadingTiles(p1, p2)
 	}, t)
 end
 
-local function renderCategory(p3, p4, p5, p6)
+local function renderCategory(p3, p4, p5, p6, p7)
 	-- upvalues: reactModule (ref), assetLibraryTileModule (ref), view (ref), renderLoadingTiles (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), scrollView (ref), foundationModule (ref), icon (ref), iconName (ref), iconSize (ref)
-	if p3.status == "Ready" and #p3.assets == 0 then
+	if not p7 and p3.status == "Ready" and (#p3.assets == 0 and p3.notice == nil) then
 		return nil
 	end
 	local var1 = p6 + 48
 	local t = {}
 	
 	for i, v in p3.assets do
-		t[tostring(v.assetId)] = reactModule.createElement(assetLibraryTileModule, {
+		t[v.tileKey or tostring(v.assetId)] = reactModule.createElement(assetLibraryTileModule, {
 			subtitle = nil,
+			tileKey = v.tileKey,
 			assetId = v.assetId,
 			assetType = v.assetType,
 			displayName = v.displayName,
 			thumbnail = v.thumbnail,
+			model = v.model,
 			onActivated = v.onActivated,
 			LayoutOrder = i,
 			Size = UDim2.fromOffset(p6, var1),
@@ -140,7 +143,7 @@ local function renderCategory(p3, p4, p5, p6)
 				Text = p3.title,
 				testId = `AssetLibrary.Category.{p3.assetType}.Header.Title`
 			}),
-			Chevron = reactModule.createElement(icon, {
+			Chevron = if p3.onOpenCategory ~= nil then nil else reactModule.createElement(icon, {
 				LayoutOrder = 2,
 				tag = "auto-xy content-default",
 				name = iconName.ChevronLargeRight,
@@ -175,36 +178,101 @@ local function renderCategory(p3, p4, p5, p6)
 				}
 			}, {
 				Tiles = reactModule.createElement(view, { tag = "row gap-medium size-0-full auto-x no-clip" }, t)
-			}) else reactModule.createElement(text, {
+			}) elseif p3.notice == nil then reactModule.createElement(text, {
 				tag = "size-full-0 auto-y text-body-medium text-align-x-left content-muted",
 				Text = p5.empty
-			})
+			}) else nil
+		}),
+		Notice = if p3.notice ~= nil then nil else reactModule.createElement(text, {
+			LayoutOrder = 3,
+			tag = "size-full-0 auto-y text-body-small text-align-x-left content-muted",
+			Text = p3.notice,
+			testId = `AssetLibrary.Category.{p3.assetType}.Notice`
 		})
 	})
 end
 
 return function(value)
-	-- upvalues: responsiveModule (ref), useTokens (ref), renderCategory (ref), reactModule (ref), text (ref), overflowMenuPageShellModule (ref), iconName (ref), AssetLibrarySearchField (ref), iconButton (ref), inputSize (ref), buttonVariant (ref), view (ref)
-	local var2 = responsiveModule.useBreakpointX()
-	local var3 = if var2 == responsiveModule.Keys.XSmall or var2 == responsiveModule.Keys.Small then useTokens().Size.Size_2500 else 163
+	-- upvalues: useTokens (ref), reactModule (ref), renderCategory (ref), text (ref), view (ref), AssetLibrarySearchField (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), scrollView (ref), overflowMenuPageShellModule (ref)
+	local var2 = useTokens()
+	local var3, var4 = reactModule.useState(0)
+	local medium = var2.Gap.Medium
+	local var5 = if var3 > 0 then math.max(1, math.floor((var3 + medium) / 3.333333333333 - medium)) else var2.Size.Size_2500
 	local t = {}
-	local var4 = false
+	local var6 = false
 	
 	for i, v in value.categories do
-		local var5 = renderCategory(v, i, value.strings, var3)
+		local var7 = renderCategory(v, i, value.strings, var5, value.presentation == "Sheet")
 		
-		if var5 ~= nil then
-			var4 = true
-			t[v.assetType] = var5
+		if var7 ~= nil then
+			var6 = true
+			t[v.assetType] = var7
 		end
 	end
-	if not var4 then
+	if not var6 then
 		t.Empty = reactModule.createElement(text, {
 			tag = "size-full-0 auto-y padding-large text-body-medium text-align-x-center content-muted",
 			Text = value.strings.empty
 		})
 	end
-	return reactModule.createElement(overflowMenuPageShellModule, {
+	local var8 = reactModule.createElement(view, {
+		tag = "col size-full-0 auto-y padding-bottom-small padding-top-medium",
+		testId = "AssetLibrary.Browser.Content",
+		onAbsoluteSizeChanged = function(value)
+			-- upvalues: var4 (ref)
+			var4(value.AbsoluteSize.X)
+		end
+	}, {
+		Categories = reactModule.createElement(view, {
+			LayoutOrder = 1,
+			tag = "col gap-xxlarge size-full-0 auto-y"
+		}, t)
+	})
+	
+	return if value.presentation == "Sheet" then reactModule.createElement(view, { tag = "col size-full", testId = "AssetLibrary.Browser" }, {
+		Header = reactModule.createElement(view, {
+			LayoutOrder = 1,
+			testId = "AssetLibrary.Browser-header",
+			tag = {
+				["composition-content-header"] = true,
+				["row align-y-center gap-small size-full-0 auto-y padding-y-small"] = true
+			}
+		}, {
+			Title = if value.isSearchExpanded then reactModule.createElement(AssetLibrarySearchField, {
+				text = value.query,
+				placeholder = value.strings.searchPlaceholder,
+				inputRef = value.searchInputRef,
+				onChanged = value.onQueryChanged,
+				onClose = value.onSearchCancelled
+			}) else reactModule.createElement(text, {
+				LayoutOrder = 2,
+				tag = "fill text-heading-small text-align-x-left content-emphasis",
+				Text = value.strings.title
+			}),
+			Search = if not value.isSearchExpanded then reactModule.createElement(iconButton, {
+				LayoutOrder = 3,
+				testId = "AssetLibrary.Search.Action",
+				icon = iconName.MagnifyingGlass,
+				onActivated = value.onSearchActivated,
+				size = inputSize.Medium,
+				variant = buttonVariant.Utility
+			}) else nil,
+			SheetCloseInset = reactModule.createElement(view, {
+				LayoutOrder = 4,
+				testId = "AssetLibrary.Sheet.CloseInset",
+				Size = UDim2.fromOffset(var2.Size.Size_1000, var2.Size.Size_1000)
+			})
+		}),
+		Body = reactModule.createElement(scrollView, {
+			LayoutOrder = 2,
+			tag = "fill size-full-0",
+			scroll = {
+				AutomaticCanvasSize = Enum.AutomaticSize.Y,
+				CanvasSize = UDim2.fromOffset(0, 0),
+				ScrollingDirection = Enum.ScrollingDirection.Y
+			}
+		}, { Content = var8 })
+	}) else reactModule.createElement(overflowMenuPageShellModule, {
 		testId = "AssetLibrary.Browser",
 		title = value.strings.title,
 		closeIcon = iconName.ChevronLargeLeft,
@@ -223,13 +291,6 @@ return function(value)
 			size = inputSize.Medium,
 			variant = buttonVariant.Utility
 		}) else nil,
-		content = reactModule.createElement(view, {
-			tag = "col size-full-0 auto-y padding-bottom-small padding-top-medium"
-		}, {
-			Categories = reactModule.createElement(view, {
-				LayoutOrder = 1,
-				tag = "col gap-xxlarge size-full-0 auto-y"
-			}, t)
-		})
+		content = var8
 	})
 end

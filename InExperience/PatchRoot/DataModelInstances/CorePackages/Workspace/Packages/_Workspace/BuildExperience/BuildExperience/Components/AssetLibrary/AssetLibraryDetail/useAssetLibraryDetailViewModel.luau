@@ -91,6 +91,7 @@ return function(value)
 		asset = var3.asset,
 		status = var3.status,
 		strings = var1,
-		onBack = value.onBack
+		onBack = value.onBack,
+		presentation = value.presentation
 	}
 end

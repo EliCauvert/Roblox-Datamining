@@ -87,7 +87,10 @@ return function(value)
 						displayName = var8.displayName,
 						subtitle = getAssetTileSubtitleModule(var8, var1),
 						thumbnail = if value.assetType == "Audio" then nil else `rbxthumb://type=Asset&id={v_1}&w=420&h=420`,
-						onActivated = value.onOpenAsset
+						onActivated = function()
+							-- upvalues: value (copy), v_1 (ref)
+							value.onOpenAsset(v_1)
+						end
 					})
 				end
 			end
@@ -105,7 +108,7 @@ return function(value)
 	}))
 	
 	return {
-		title = if value.assetType == "Model" then var1.model elseif value.assetType == "Image" then var1.image else var1.audio,
+		title = if value.assetType == "Model" then var1.model else var1.audio,
 		assets = var3.assets,
 		status = var3.status,
 		hasMore = not var3.loadMoreFailed and (var3.nextPageToken ~= nil and var3.nextPageToken ~= ""),
@@ -141,6 +144,7 @@ return function(value)
 			value.assetType,
 			value.universeId,
 			var3.failedPageTokens
-		})
+		}),
+		presentation = value.presentation
 	}
 end

@@ -1770,6 +1770,7 @@ return {
 	FFlagAppNavMyStatsTab = game:DefineFastFlag("AppNavMyStatsTab3", false),
 	FFlagReplaceNavbarIconsWithFoundation = game:DefineFastFlag("ReplaceNavbarIconsWithFoundation2", false),
 	FFlagEnableBuildTabOverride = game:DefineFastFlag("EnableBuildTabOverride", false),
+	FFlagBuildExperienceModelLibrary = game:DefineFastFlag("BuildExperienceModelLibrary", false),
 	FFlagBuildExperienceAnalytics = game:DefineFastFlag("BuildExperienceAnalytics", false),
 	FFlagBuildExperienceClientDataModelTools = game:DefineFastFlag("BuildExperienceClientDataModelTools2", false),
 	FFlagComposerControlAlignment = game:DefineFastFlag("ComposerControlAlignment", false),
