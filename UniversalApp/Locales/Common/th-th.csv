@@ -2382,6 +2382,7 @@ Feature.Build.Label.GamePlays,จำนวนการเล่นเกม
 Feature.Build.Label.GetMoreBuildUsage,รับโควต้าการใช้งาน Build เพิ่ม
 Feature.Build.Label.Hi,สวัสดี
 Feature.Build.Label.IconThumbnails,ไอคอนและภาพขนาดย่อ
+Feature.Build.Label.Images2D,ภาพ 2D
 Feature.Build.Label.InProgress,อยู่ระหว่างดำเนินการ
 Feature.Build.Label.InputNeeded,ต้องกรอกข้อมูล
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2413,6 +2414,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,พร้อม
 Feature.Build.Label.RegionalPricing,ราคาตามภูมิภาค
 Feature.Build.Label.ResetsDaily,รีเซ็ตทุกวัน
+Feature.Build.Label.ResetsMonthly,รีเซ็ตทุกเดือน
+Feature.Build.Label.ResetsWeekly,รีเซ็ตทุกสัปดาห์
 Feature.Build.Label.RestoredVersion,กู้คืน {VERSION} แล้ว
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2420,7 +2423,6 @@ Feature.Build.Label.SearchAssets,ค้นหาทรัพยากร
 Feature.Build.Label.SearchGames,ค้นหาเกม
 Feature.Build.Label.SearchTasks,ค้นหางาน
 Feature.Build.Label.SelectOption,
-Feature.Build.Label.ShareAddedFriends,แชร์กับเพื่อนที่คุณเพิ่ม
 Feature.Build.Label.Shared,แชร์แล้ว
 Feature.Build.Label.ShopButton,ปุ่มร้านค้า
 Feature.Build.Label.ShopUi,UI ของร้านค้า
@@ -2557,7 +2559,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,ยังไม่มีประวัติเวอร์ชัน
 Feature.Build.Message.OneTaskCompleted,เสร็จแล้ว 1 งาน
 Feature.Build.Message.OutOfBuildUsage,คุณใช้โควต้าการใช้งาน Build หมดแล้ว ดูตัวเลือกของคุณเพื่อใช้ Robux สร้างต่อ
+Feature.Build.Message.PlaytestInviteSendFailedBody,คุณไม่สามารถส่งลิงก์เชิญเข้าร่วมแชทให้ผู้ใช้ต่อไปนี้ได้:
+Feature.Build.Message.PlaytestInviteSendFailedHint,โปรดใช้ปุ่มแชร์เพื่อรับลิงก์
 Feature.Build.Message.PlaytestersAdded,เพิ่มผู้ทดสอบเกมไป {INVITED_COUNT} จาก {MAX_INVITES} คนแล้ว
+Feature.Build.Message.PrivatePlaytestInvite,{username} ชวนคุณเข้าร่วมการทดลองเล่น {experienceName} แบบส่วนตัว
 Feature.Build.Message.PublicPublishFailed,เผยแพร่เกมของคุณแล้ว แต่ไม่สามารถตั้งค่าเป็นสาธารณะได้ โปรดลองอีกครั้ง
 Feature.Build.Message.PublishExpandAudience,เผยแพร่เพื่อขยายกลุ่มเป้าหมายของคุณ
 Feature.Build.Message.PublishNotReverted,ย้อนกลับการเผยแพร่ของคุณไม่สำเร็จ โปรดลองอีกครั้ง
@@ -2621,6 +2626,7 @@ Feature.Build.Title.GetUsers,ดึงดูดผู้ใช้
 Feature.Build.Title.ManagedPricingAcknowledgement,เปิดการตั้งราคาแบบมีการจัดการใช่ไหม?
 Feature.Build.Title.NoMonetizationProducts,เริ่มสร้างรายได้ในเกมของคุณ
 Feature.Build.Title.NoRobuxForUsage,ไม่มี Robux เหลือสำหรับโควต้าการใช้งาน Build
+Feature.Build.Title.PlaytestInviteSendFailed,ไม่สามารถส่งคำเชิญได้
 Feature.Build.Title.Playtesters,ผู้ทดลองเล่น
 Feature.Build.Title.PlaytestersOnlyPlay,เฉพาะผู้ทดลองเล่นเท่านั้นที่เล่นได้
 Feature.Build.Title.PromoteGame,โปรโมตเกมของคุณ
@@ -3595,6 +3601,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,เพื่อนที่เ�
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,เพิ่มเพื่อนที่เชื่อได้
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
+Feature.Friends.TrustedFriend.Label.Title,เพื่อนที่เชื่อได้
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} เป็นเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,ลบเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,ส่งคำขอเป็นเพื่อนที่เชื่อได้แล้ว
@@ -5505,7 +5512,15 @@ InGame.UnknownNamespace.GameChat_ChatCommandsTeller_WhisperCommand,/whisper <ผ
 InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage,คนรู้จักของคุณที่ใช้ชื่อ {RBX_NAME} เข้าร่วมประสบการณ์แล้ว
 InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf,คุณไม่สามารถแชทแบบส่วนตัวกับตัวเองได้
 InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,"คุณอยู่ในทีม ""{RBX_NAME}"" แล้วตอนนี้"
+InstantApps.Shortcuts.Label.AddToDesktopMenuItem,เพิ่มไปยังเดสก์ท็อป
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,เพิ่มไปยังหน้าหลัก
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,เพิ่ม {experience_name} ไปยังเดสก์ท็อปไม่สำเร็จ
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,เพิ่ม {experience_name} ไปยังหน้าหลักไม่สำเร็จ
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,มีทางลัดไป {experience_name} อยู่แล้ว
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,เพิ่ม {experience_name} ไปยังเดสก์ท็อปสำเร็จเรียบร้อยแล้ว
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,เพิ่ม {experience_name} ไปยังหน้าหลักสำเร็จเรียบร้อยแล้ว
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,ดูทางลัด
 Luobu.Authentication.Login.Label.AntiAddictionText,
 Luobu.Authentication.Login.Label.NetworkLicense,
 Luobu.Authentication.Message.UnknownErrorTryAgain,เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ โปรดลองรีสตาร์ทแอป

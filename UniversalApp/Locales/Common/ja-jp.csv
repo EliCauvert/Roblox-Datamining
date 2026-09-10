@@ -2399,6 +2399,7 @@ Feature.Build.Label.GamePlays,プレイ数
 Feature.Build.Label.GetMoreBuildUsage,もっとビルド使用量を獲得
 Feature.Build.Label.Hi,こんにちは
 Feature.Build.Label.IconThumbnails,アイコンとサムネイル
+Feature.Build.Label.Images2D,2D画像
 Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,入力が必要です
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2430,6 +2431,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,準備完了
 Feature.Build.Label.RegionalPricing,地域別価格設定
 Feature.Build.Label.ResetsDaily,毎日リセット
+Feature.Build.Label.ResetsMonthly,毎月リセット
+Feature.Build.Label.ResetsWeekly,毎週リセット
 Feature.Build.Label.RestoredVersion,復元済みの{VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2437,7 +2440,6 @@ Feature.Build.Label.SearchAssets,アセットをサーチ
 Feature.Build.Label.SearchGames,ゲームをサーチ
 Feature.Build.Label.SearchTasks,タスクをサーチ
 Feature.Build.Label.SelectOption,オプションを選択
-Feature.Build.Label.ShareAddedFriends,追加した友達とシェア
 Feature.Build.Label.Shared,シェア済み
 Feature.Build.Label.ShopButton,ショップボタン
 Feature.Build.Label.ShopUi,ショップUI
@@ -2574,7 +2576,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,まだバージョン履歴はありません。
 Feature.Build.Message.OneTaskCompleted,1つのタスクが完了しました
 Feature.Build.Message.OutOfBuildUsage,ビルド使用量がなくなりました。作成を続けるには、Robuxを使用するためのオプションをご確認ください。
+Feature.Build.Message.PlaytestInviteSendFailedBody,次のユーザーに招待のチャットリンクを送信できませんでした：
+Feature.Build.Message.PlaytestInviteSendFailedHint,[シェア]ボタンを使用して、リンクを取得してください。
 Feature.Build.Message.PlaytestersAdded,{MAX_INVITES}人中{INVITED_COUNT}人のプレイテスターが追加されました
+Feature.Build.Message.PrivatePlaytestInvite,{username}さんがあなたを{experienceName}のプライベートサーバープレイテストに招待しました
 Feature.Build.Message.PublicPublishFailed,ゲームは公開手続きが行われましたが、公開できませんでした。もう一度お試しください。
 Feature.Build.Message.PublishExpandAudience,公開してオーディエンスを拡大
 Feature.Build.Message.PublishNotReverted,公開は元に戻りませんでした。もう一度お試しください。
@@ -2638,6 +2643,7 @@ Feature.Build.Title.GetUsers,ユーザーを獲得
 Feature.Build.Title.ManagedPricingAcknowledgement,管理価格設定をオンにしますか？
 Feature.Build.Title.NoMonetizationProducts,ゲーム内で収益を獲得
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
+Feature.Build.Title.PlaytestInviteSendFailed,招待を送信できませんでした
 Feature.Build.Title.Playtesters,プレイテスター
 Feature.Build.Title.PlaytestersOnlyPlay,プレイテスターだけがプレイできます
 Feature.Build.Title.PromoteGame,ゲームを宣伝
@@ -3612,6 +3618,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,新しい信頼する友達
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,信頼する友達を追加
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,「信頼できる友達」を追加
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,信頼できる友達に追加
+Feature.Friends.TrustedFriend.Label.Title,信頼する友達
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}さんが信頼する友達になりました
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信頼する友達が削除されました
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,信頼する友達リクエストが送信されました
@@ -4050,7 +4057,7 @@ Feature.Moments.Label.FeedFailedToLoad,ロードできませんでした
 Feature.Moments.Label.FeedMyMoments,マイモーメント
 Feature.Moments.Label.FeedTrending,トレンド
 Feature.Moments.Label.HowToUseCaptureTitle,切り抜きの使い方
-Feature.Moments.Label.LinkCopied,リンクをコピーしました。
+Feature.Moments.Label.LinkCopied,リンクをコピーしました
 Feature.Moments.Label.LinkCopyFailed,リンクをコピーできませんでした。
 Feature.Moments.Label.ModeratedRodeoBody,このモーメントは、コミュニティ基準に違反しているため削除されました。モーメントを表示し続けるには、ルールを理解し従っていることを確認してください。
 Feature.Moments.Label.MomentDeletedBody,
@@ -5520,7 +5527,15 @@ InGame.UnknownNamespace.GameChat_ChatCommandsTeller_WhisperCommand,/whisper <ス
 InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage,あなたがつながっている {RBX_NAME} がバーチャル空間に参加しました。
 InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf,自分自身に話しかけることは出来ません。
 InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,あなたは現在「{RBX_NAME}」チームに所属しています。
+InstantApps.Shortcuts.Label.AddToDesktopMenuItem,デスクトップに追加
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,ホーム画面に追加
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,{experience_name}のショートカットをデスクトップに追加できませんでした
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,{experience_name}のショートカットをホーム画面に追加できませんでした
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,{experience_name}のショートカットはすでに存在します
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,{experience_name}のショートカットをデスクトップに追加しました
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,{experience_name}のショートカットをホーム画面に追加しました
+InstantApps.Shortcuts.Label.TryAgain,もう一度試す
+InstantApps.Shortcuts.Label.ViewShortcut,ショートカットを表示
 Luobu.Authentication.Login.Label.AntiAddictionText,
 Luobu.Authentication.Login.Label.NetworkLicense,
 Luobu.Authentication.Message.UnknownErrorTryAgain,不明なエラーが発生しました。アプリを再起動してください。

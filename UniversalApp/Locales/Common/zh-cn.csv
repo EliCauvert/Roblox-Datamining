@@ -2380,6 +2380,7 @@ Feature.Build.Label.GamePlays,游戏游玩次数
 Feature.Build.Label.GetMoreBuildUsage,获得更多 Build 使用额度
 Feature.Build.Label.Hi,你好
 Feature.Build.Label.IconThumbnails,标志和缩略图
+Feature.Build.Label.Images2D,2D 图像
 Feature.Build.Label.InProgress,进行中
 Feature.Build.Label.InputNeeded,需要输入内容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2411,6 +2412,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,准备就绪
 Feature.Build.Label.RegionalPricing,区域定价
 Feature.Build.Label.ResetsDaily,每日重置
+Feature.Build.Label.ResetsMonthly,每月重置
+Feature.Build.Label.ResetsWeekly,每周重置
 Feature.Build.Label.RestoredVersion,已恢复 {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2418,7 +2421,6 @@ Feature.Build.Label.SearchAssets,搜索素材
 Feature.Build.Label.SearchGames,搜索游戏
 Feature.Build.Label.SearchTasks,搜索任务
 Feature.Build.Label.SelectOption,选择一个选项
-Feature.Build.Label.ShareAddedFriends,分享给已添加的好友
 Feature.Build.Label.Shared,已共享
 Feature.Build.Label.ShopButton,商店按钮
 Feature.Build.Label.ShopUi,商店用户界面
@@ -2555,7 +2557,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,暂无版本历史记录。
 Feature.Build.Message.OneTaskCompleted,已完成 1 项任务
 Feature.Build.Message.OutOfBuildUsage,你的 Build 使用额度已用完。请查看你的选项，以便使用 Robux 继续创建。
+Feature.Build.Message.PlaytestInviteSendFailedBody,你无法向以下用户发送聊天邀请链接：
+Feature.Build.Message.PlaytestInviteSendFailedHint,请使用分享按钮获取链接。
 Feature.Build.Message.PlaytestersAdded,已添加 {INVITED_COUNT} 位测试玩家，共 {MAX_INVITES} 位
+Feature.Build.Message.PrivatePlaytestInvite,{username}邀请你参加“{experienceName}”的私人游戏测试
 Feature.Build.Message.PublicPublishFailed,你的游戏已发布，但无法公开。请重试。
 Feature.Build.Message.PublishExpandAudience,发布并扩大受众范围
 Feature.Build.Message.PublishNotReverted,你的发布未还原。请重试。
@@ -2619,6 +2624,7 @@ Feature.Build.Title.GetUsers,获取用户
 Feature.Build.Title.ManagedPricingAcknowledgement,是否开启托管定价？
 Feature.Build.Title.NoMonetizationProducts,开始在你的游戏中赚取收入
 Feature.Build.Title.NoRobuxForUsage,没有剩余的 Robux 可用于购买 Build 使用额度
+Feature.Build.Title.PlaytestInviteSendFailed,无法发送邀请
 Feature.Build.Title.Playtesters,测试玩家
 Feature.Build.Title.PlaytestersOnlyPlay,只有测试玩家可以游玩
 Feature.Build.Title.PromoteGame,推广你的游戏
@@ -3591,6 +3597,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,新的信赖好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,添加信赖的好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,添加可信好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
+Feature.Friends.TrustedFriend.Label.Title,信赖的好友
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}现已成为你的信赖好友
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信赖的好友已移除
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,“信赖的好友”请求已发送
@@ -4028,7 +4035,7 @@ Feature.Moments.Label.FeedFailedToLoad,无法加载推送
 Feature.Moments.Label.FeedMyMoments,我的精彩瞬间
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,如何使用截图
-Feature.Moments.Label.LinkCopied,链接已复制。
+Feature.Moments.Label.LinkCopied,链接已复制
 Feature.Moments.Label.LinkCopyFailed,无法复制链接。
 Feature.Moments.Label.ModeratedRodeoBody,该精彩瞬间因违反社区准则已被移除。为了让精彩瞬间正常展示，请务必了解并遵守相关规则。
 Feature.Moments.Label.MomentDeletedBody,
@@ -5499,7 +5506,15 @@ InGame.UnknownNamespace.GameChat_ChatCommandsTeller_WhisperCommand,/whisper <用
 InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage,你的联系人“{RBX_NAME}”已加入体验。
 InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf,你无法与自己开启私人频道。
 InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,你正在团队“{RBX_NAME}”中。
+InstantApps.Shortcuts.Label.AddToDesktopMenuItem,添加至桌面
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,添加至主屏幕
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,无法将“{experience_name}”添加至桌面
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,无法将“{experience_name}”添加至主屏幕
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,“{experience_name}”的快捷方式已存在
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,已成功将“{experience_name}”添加到桌面
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,已成功将“{experience_name}”添加至主屏幕
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,查看快捷键
 Luobu.Authentication.Login.Label.AntiAddictionText,不适用
 Luobu.Authentication.Login.Label.NetworkLicense,
 Luobu.Authentication.Message.UnknownErrorTryAgain,出现未知错误。请尝试重新启动应用程序。

@@ -2399,6 +2399,7 @@ Feature.Build.Label.GamePlays,Game dimainkan
 Feature.Build.Label.GetMoreBuildUsage,Dapatkan lebih banyak kuota penggunaan Build
 Feature.Build.Label.Hi,Hai
 Feature.Build.Label.IconThumbnails,Ikon & thumbnail
+Feature.Build.Label.Images2D,Gambar 2D
 Feature.Build.Label.InProgress,Sedang berlangsung
 Feature.Build.Label.InputNeeded,Input diperlukan
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2430,6 +2431,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Siap
 Feature.Build.Label.RegionalPricing,Harga regional
 Feature.Build.Label.ResetsDaily,Reset setiap hari
+Feature.Build.Label.ResetsMonthly,Direset setiap bulan
+Feature.Build.Label.ResetsWeekly,Direset setiap minggu
 Feature.Build.Label.RestoredVersion,{VERSION} dipulihkan
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2437,7 +2440,6 @@ Feature.Build.Label.SearchAssets,Cari aset
 Feature.Build.Label.SearchGames,Cari game
 Feature.Build.Label.SearchTasks,Cari tugas
 Feature.Build.Label.SelectOption,Pilih opsi
-Feature.Build.Label.ShareAddedFriends,Bagikan kepada teman yang kamu tambahkan
 Feature.Build.Label.Shared,Dibagikan
 Feature.Build.Label.ShopButton,Tombol Belanja
 Feature.Build.Label.ShopUi,UI Belanja
@@ -2574,7 +2576,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Belum ada riwayat versi.
 Feature.Build.Message.OneTaskCompleted,1 tugas selesai
 Feature.Build.Message.OutOfBuildUsage,Kuota penggunaan Build-mu sudah habis. Lihat opsi untuk menggunakan Robux agar bisa terus berkreasi.
+Feature.Build.Message.PlaytestInviteSendFailedBody,Kamu tidak bisa mengirim link chat undangan kepada pengguna berikut:
+Feature.Build.Message.PlaytestInviteSendFailedHint,Gunakan tombol Bagikan untuk mendapatkan link.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} dari {MAX_INVITES} playtester ditambahkan
+Feature.Build.Message.PrivatePlaytestInvite,{username} mengundangmu ke playtest privat {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Game-mu telah dipublikasikan, tetapi tidak dapat dibuat publik. Coba lagi."
 Feature.Build.Message.PublishExpandAudience,Publikasikan untuk memperluas audiensmu
 Feature.Build.Message.PublishNotReverted,Publikasimu gagal dibatalkan. Coba lagi.
@@ -2638,6 +2643,7 @@ Feature.Build.Title.GetUsers,Dapatkan pengguna
 Feature.Build.Title.ManagedPricingAcknowledgement,Aktifkan Harga Terkelola?
 Feature.Build.Title.NoMonetizationProducts,Mulai hasilkan pendapatan di game-mu
 Feature.Build.Title.NoRobuxForUsage,Tidak ada Robux yang tersisa untuk penggunaan Build
+Feature.Build.Title.PlaytestInviteSendFailed,Tidak dapat mengirim undangan
 Feature.Build.Title.Playtesters,Playtester
 Feature.Build.Title.PlaytestersOnlyPlay,Hanya playtester yang bisa memainkannya
 Feature.Build.Title.PromoteGame,Promosikan game-mu
@@ -3610,6 +3616,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Teman tepercaya baru
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Tambahkan teman tepercaya
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Tambahkan Teman Tepercaya
+Feature.Friends.TrustedFriend.Label.Title,Teman tepercaya
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} sekarang adalah teman tepercaya
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Teman tepercaya dihapus
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Permintaan teman tepercaya terkirim
@@ -4048,7 +4055,7 @@ Feature.Moments.Label.FeedFailedToLoad,Feed gagal di-load
 Feature.Moments.Label.FeedMyMoments,Moment Saya
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,Cara menggunakan Media
-Feature.Moments.Label.LinkCopied,Link disalin.
+Feature.Moments.Label.LinkCopied,Link disalin
 Feature.Moments.Label.LinkCopyFailed,Gagal menyalin link.
 Feature.Moments.Label.ModeratedRodeoBody,"Kami menghapus Moment ini karena bertentangan dengan Standar Komunitas kami. Agar Moment-mu tetap terlihat, pastikan kamu memahami dan mematuhi peraturan."
 Feature.Moments.Label.MomentDeletedBody,
@@ -5520,7 +5527,15 @@ InGame.UnknownNamespace.GameChat_ChatCommandsTeller_WhisperCommand,/whisper <spe
 InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage,Koneksimu {RBX_NAME} telah bergabung ke pengalaman virtual ini.
 InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf,Kamu tidak dapat berbisik ke diri sendiri.
 InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,Kamu sekarang berada di tim {RBX_NAME}.
+InstantApps.Shortcuts.Label.AddToDesktopMenuItem,Tambahkan ke Desktop
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,Tambahkan ke Layar Beranda
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,Gagal menambahkan {experience_name} ke desktop
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,Gagal menambahkan {experience_name} ke layar beranda
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,Pintasan ke {experience_name} sudah ada
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,Berhasil menambahkan {experience_name} ke desktop
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,Berhasil menambahkan {experience_name} ke layar beranda
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,Lihat Pintasan
 Luobu.Authentication.Login.Label.AntiAddictionText,N/A
 Luobu.Authentication.Login.Label.NetworkLicense,
 Luobu.Authentication.Message.UnknownErrorTryAgain,Terjadi eror. Coba mulai ulang aplikasi.

@@ -2379,6 +2379,7 @@ Feature.Build.Label.GamePlays,عدد مرات تشغيل اللعبة
 Feature.Build.Label.GetMoreBuildUsage,احصل على المزيد من استخدام ميزة Build
 Feature.Build.Label.Hi,مرحبًا
 Feature.Build.Label.IconThumbnails,الأيقونة والصور المصغرة
+Feature.Build.Label.Images2D,الصور ثنائية الأبعاد
 Feature.Build.Label.InProgress,قيد التقدم
 Feature.Build.Label.InputNeeded,الإدخال مطلوب
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2410,6 +2411,8 @@ Feature.Build.Label.Purchased,تم الشراء
 Feature.Build.Label.Ready,جاهزة
 Feature.Build.Label.RegionalPricing,التسعير الإقليمي
 Feature.Build.Label.ResetsDaily,تتم إعادة التعيين يوميًا
+Feature.Build.Label.ResetsMonthly,تتم إعادة التعيين شهريًا
+Feature.Build.Label.ResetsWeekly,تتم إعادة التعيين أسبوعيًا
 Feature.Build.Label.RestoredVersion,تمت استعادة {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,بحث
@@ -2417,7 +2420,6 @@ Feature.Build.Label.SearchAssets,البحث في الأصول
 Feature.Build.Label.SearchGames,البحث في الألعاب
 Feature.Build.Label.SearchTasks,البحث في المهام
 Feature.Build.Label.SelectOption,حدّد خيارًا
-Feature.Build.Label.ShareAddedFriends,مشاركة مع الأصدقاء الذين أضفتهم
 Feature.Build.Label.Shared,تمت المشاركة
 Feature.Build.Label.ShopButton,زر المتجر
 Feature.Build.Label.ShopUi,واجهة المستخدم للمتجر
@@ -2554,7 +2556,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,لا يوجد سجل إصدارات حتى الآن.
 Feature.Build.Message.OneTaskCompleted,تم إكمال مهمة واحدة
 Feature.Build.Message.OutOfBuildUsage,لقد نفد رصيدك من استخدام ميزة Build. اعرض خياراتك لاستخدام عملات Robux لمواصلة الإنشاء.
+Feature.Build.Message.PlaytestInviteSendFailedBody,تعذر إرسال رابط دعوة الدردشة إلى المستخدمين التاليين:
+Feature.Build.Message.PlaytestInviteSendFailedHint,"يُرجى استخدام زر ""مشاركة"" للحصول على الرابط."
 Feature.Build.Message.PlaytestersAdded,تمت إضافة {INVITED_COUNT} من أصل {MAX_INVITES} من مختبري اللعب
+Feature.Build.Message.PrivatePlaytestInvite,تمت دعوتك من قِبل {username} إلى اختبار لعب خاص لتجربة {experienceName}
 Feature.Build.Message.PublicPublishFailed,تم نشر لعبتك، ولكن تعذَّر جعلها عامة. حاول مرة أخرى.
 Feature.Build.Message.PublishExpandAudience,يمكنك النشر لتوسيع نطاق جمهورك
 Feature.Build.Message.PublishNotReverted,لم يتم التراجع عن عملية النشر. حاوِل مرة أخرى.
@@ -2618,6 +2623,7 @@ Feature.Build.Title.GetUsers,الحصول على المستخدمين
 Feature.Build.Title.ManagedPricingAcknowledgement,هل تريد تشغيل التسعير المُدار؟
 Feature.Build.Title.NoMonetizationProducts,ابدأ الكسب في لعبتك
 Feature.Build.Title.NoRobuxForUsage,لم يتبقَ أي عملات Robux لاستخدام ميزة Build
+Feature.Build.Title.PlaytestInviteSendFailed,تعذَّر إرسال الدعوات
 Feature.Build.Title.Playtesters,مختبرو اللعب
 Feature.Build.Title.PlaytestersOnlyPlay,يمكن لمختبري اللعب فقط تشغيل اللعبة
 Feature.Build.Title.PromoteGame,روّج للعبتك
@@ -3592,6 +3598,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,صديق موثوق جديد
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,إضافة صديق موثوق
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,إضافة أصدقاء موثوق بهم
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
+Feature.Friends.TrustedFriend.Label.Title,صديق موثوق
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,أصبح {name} الآن من أصدقائك الموثوقين
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,تم إزالة الصديق الموثوق
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,تم إرسال طلب إضافة كصديق موثوق
@@ -4030,7 +4037,7 @@ Feature.Moments.Label.FeedFailedToLoad,تعذَّر تحميل الموجز
 Feature.Moments.Label.FeedMyMoments,لحظاتي
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,كيفية استخدام اللقطات
-Feature.Moments.Label.LinkCopied,تم نسخ الرابط.
+Feature.Moments.Label.LinkCopied,تم نسخ الرابط
 Feature.Moments.Label.LinkCopyFailed,تعذّر نسخ الرابط.
 Feature.Moments.Label.ModeratedRodeoBody,أزلنا هذه اللحظة لأنها تنتهك معايير مجتمعنا. ولضمان استمرار ظهور لحظاتك، احرص على معرفة القواعد واتباعها.
 Feature.Moments.Label.MomentDeletedBody,
@@ -5501,7 +5508,15 @@ InGame.UnknownNamespace.GameChat_ChatCommandsTeller_WhisperCommand,/whisper <spe
 InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage,انضمت جهة تواصلك {RBX_NAME} إلى التجربة.
 InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf,لا يمكنك إجراء دردشة خاصة مع نفسك.
 InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,صرت الآن عضوًا في فريق '{RBX_NAME}'.
+InstantApps.Shortcuts.Label.AddToDesktopMenuItem,إضافة إلى سطح المكتب
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,إضافة إلى الشاشة الرئيسية
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,تعذَّرت إضافة {experience_name} إلى سطح المكتب
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,تعذَّرت إضافة {experience_name} إلى الشاشة الرئيسية
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,اختصار تجربة {experience_name} موجود بالفعل
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,تمت إضافة {experience_name} إلى سطح المكتب بنجاح
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,تمت إضافة {experience_name} إلى الشاشة الرئيسية بنجاح
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,عرض الاختصار
 Luobu.Authentication.Login.Label.AntiAddictionText,
 Luobu.Authentication.Login.Label.NetworkLicense,
 Luobu.Authentication.Message.UnknownErrorTryAgain,حدث خطأ غير معروف. الرجاء إعادة تشغيل التطبيق.

@@ -35,7 +35,8 @@ function t_1.new(p1)
 		refund_policy_text = if p1 == nil or p1.refund_policy_text == nil then nil else p1.refund_policy_text,
 		refund_article_id = if p1 == nil or p1.refund_article_id == nil then nil else p1.refund_article_id,
 		preview_video_id = if p1 == nil or p1.preview_video_id == nil then nil else p1.preview_video_id,
-		creation_source = if p1 == nil or p1.creation_source == nil then nil else p1.creation_source
+		creation_source = if p1 == nil or p1.creation_source == nil then nil else p1.creation_source,
+		promotional_text = if p1 == nil or p1.promotional_text == nil then nil else p1.promotional_text
 	}, t_1)
 end
 
@@ -212,6 +213,12 @@ function t_1:encode()
 		buff = var56
 		var1 = var57
 	end
+	if self.promotional_text ~= nil then
+		local var58, var59 = protoModule.writeTag(buff, var1, 29, protoModule.wireTypes.lengthDelimited)
+		var58, var63 = protoModule.writeString(var58, var59, self.promotional_text)
+		buff = var58
+		var1 = var59
+	end
 	local buff_1 = buffer.create(var1)
 	buffer.copy(buff_1, 0, buff, 0, var1)
 	
@@ -379,23 +386,28 @@ function t_1.decode(p1)
 				local var64, var65 = protoModule.readBuffer(p1, var2)
 				var2 = var65
 				var1.creation_source = buffer.tostring(var64)
+			elseif var7 == 29 then
+				local _ = nil
+				local var66, var67 = protoModule.readBuffer(p1, var2)
+				var2 = var67
+				var1.promotional_text = buffer.tostring(var66)
 			else
 				local _ = nil
-				local var66, var67 = protoModule.readVarInt(p1, var2)
-				var2 = var67 + var66
+				local var68, var69 = protoModule.readVarInt(p1, var2)
+				var2 = var69 + var68
 			end
 		elseif var3 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var68, var69 = protoModule.readFixed32(p1, var2)
-			local _ = var68
-			var2 = var69
-		elseif var3 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var70, var71 = protoModule.readFixed64(p1, var2)
+			local var70, var71 = protoModule.readFixed32(p1, var2)
 			local _ = var70
 			var2 = var71
+		elseif var3 == protoModule.wireTypes.i64 then
+			local _ = nil
+			local var72, var73 = protoModule.readFixed64(p1, var2)
+			local _ = var72
+			var2 = var73
 		else
-			error("Unsupported wire type: " .. var65)
+			error("Unsupported wire type: " .. var67)
 		end
 	end
 	return var1
@@ -488,173 +500,182 @@ function t_1:jsonEncode()
 	if self.creation_source ~= nil then
 		t.creationSource = self.creation_source
 	end
+	if self.promotional_text ~= nil then
+		t.promotionalText = self.promotional_text
+	end
 	return t
 end
 
 function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
-	local var72 = t_1.new()
+	local var74 = t_1.new()
 	
 	if self.id ~= nil then
-		var72.id = self.id
+		var74.id = self.id
 	end
 	if self.name ~= nil then
-		var72.name = self.name
+		var74.name = self.name
 	end
 	if self.description ~= nil then
-		var72.description = self.description
+		var74.description = self.description
 	end
 	if self.root_place_id ~= nil then
-		var72.root_place_id = self.root_place_id
+		var74.root_place_id = self.root_place_id
 	end
 	if self.rootPlaceId ~= nil then
-		var72.root_place_id = self.rootPlaceId
+		var74.root_place_id = self.rootPlaceId
 	end
 	if self.creator_type ~= nil then
-		var72.creator_type = self.creator_type
+		var74.creator_type = self.creator_type
 	end
 	if self.creatorType ~= nil then
-		var72.creator_type = self.creatorType
+		var74.creator_type = self.creatorType
 	end
 	if self.creator_id ~= nil then
-		var72.creator_id = self.creator_id
+		var74.creator_id = self.creator_id
 	end
 	if self.creatorId ~= nil then
-		var72.creator_id = self.creatorId
+		var74.creator_id = self.creatorId
 	end
 	if self.player_count ~= nil then
-		var72.player_count = self.player_count
+		var74.player_count = self.player_count
 	end
 	if self.playerCount ~= nil then
-		var72.player_count = self.playerCount
+		var74.player_count = self.playerCount
 	end
 	if self.total_up_votes ~= nil then
-		var72.total_up_votes = self.total_up_votes
+		var74.total_up_votes = self.total_up_votes
 	end
 	if self.totalUpVotes ~= nil then
-		var72.total_up_votes = self.totalUpVotes
+		var74.total_up_votes = self.totalUpVotes
 	end
 	if self.total_down_votes ~= nil then
-		var72.total_down_votes = self.total_down_votes
+		var74.total_down_votes = self.total_down_votes
 	end
 	if self.totalDownVotes ~= nil then
-		var72.total_down_votes = self.totalDownVotes
+		var74.total_down_votes = self.totalDownVotes
 	end
 	if self.is_voice_supported ~= nil then
-		var72.is_voice_supported = self.is_voice_supported
+		var74.is_voice_supported = self.is_voice_supported
 	end
 	if self.isVoiceSupported ~= nil then
-		var72.is_voice_supported = self.isVoiceSupported
+		var74.is_voice_supported = self.isVoiceSupported
 	end
 	if self.is_camera_supported ~= nil then
-		var72.is_camera_supported = self.is_camera_supported
+		var74.is_camera_supported = self.is_camera_supported
 	end
 	if self.isCameraSupported ~= nil then
-		var72.is_camera_supported = self.isCameraSupported
+		var74.is_camera_supported = self.isCameraSupported
 	end
 	if self.localized_fiat_price ~= nil then
-		var72.localized_fiat_price = self.localized_fiat_price
+		var74.localized_fiat_price = self.localized_fiat_price
 	end
 	if self.localizedFiatPrice ~= nil then
-		var72.localized_fiat_price = self.localizedFiatPrice
+		var74.localized_fiat_price = self.localizedFiatPrice
 	end
 	if self.genre_l1 ~= nil then
-		var72.genre_l1 = self.genre_l1
+		var74.genre_l1 = self.genre_l1
 	end
 	if self.genreL1 ~= nil then
-		var72.genre_l1 = self.genreL1
+		var74.genre_l1 = self.genreL1
 	end
 	if self.genre_l2 ~= nil then
-		var72.genre_l2 = self.genre_l2
+		var74.genre_l2 = self.genre_l2
 	end
 	if self.genreL2 ~= nil then
-		var72.genre_l2 = self.genreL2
+		var74.genre_l2 = self.genreL2
 	end
 	if self.maximum_server_size ~= nil then
-		var72.maximum_server_size = self.maximum_server_size
+		var74.maximum_server_size = self.maximum_server_size
 	end
 	if self.maximumServerSize ~= nil then
-		var72.maximum_server_size = self.maximumServerSize
+		var74.maximum_server_size = self.maximumServerSize
 	end
 	if self.created_date ~= nil then
-		var72.created_date = self.created_date
+		var74.created_date = self.created_date
 	end
 	if self.createdDate ~= nil then
-		var72.created_date = self.createdDate
+		var74.created_date = self.createdDate
 	end
 	if self.updated_date ~= nil then
-		var72.updated_date = self.updated_date
+		var74.updated_date = self.updated_date
 	end
 	if self.updatedDate ~= nil then
-		var72.updated_date = self.updatedDate
+		var74.updated_date = self.updatedDate
 	end
 	if self.favorite_count ~= nil then
-		var72.favorite_count = self.favorite_count
+		var74.favorite_count = self.favorite_count
 	end
 	if self.favoriteCount ~= nil then
-		var72.favorite_count = self.favoriteCount
+		var74.favorite_count = self.favoriteCount
 	end
 	if self.total_visits ~= nil then
-		var72.total_visits = self.total_visits
+		var74.total_visits = self.total_visits
 	end
 	if self.totalVisits ~= nil then
-		var72.total_visits = self.totalVisits
+		var74.total_visits = self.totalVisits
 	end
 	if self.canonical_url_path ~= nil then
-		var72.canonical_url_path = self.canonical_url_path
+		var74.canonical_url_path = self.canonical_url_path
 	end
 	if self.canonicalUrlPath ~= nil then
-		var72.canonical_url_path = self.canonicalUrlPath
+		var74.canonical_url_path = self.canonicalUrlPath
 	end
 	if self.game_minimum_age ~= nil then
-		var72.game_minimum_age = self.game_minimum_age
+		var74.game_minimum_age = self.game_minimum_age
 	end
 	if self.gameMinimumAge ~= nil then
-		var72.game_minimum_age = self.gameMinimumAge
+		var74.game_minimum_age = self.gameMinimumAge
 	end
 	if self.game_age_display_name ~= nil then
-		var72.game_age_display_name = self.game_age_display_name
+		var74.game_age_display_name = self.game_age_display_name
 	end
 	if self.gameAgeDisplayName ~= nil then
-		var72.game_age_display_name = self.gameAgeDisplayName
+		var74.game_age_display_name = self.gameAgeDisplayName
 	end
 	if self.content_maturity ~= nil then
-		var72.content_maturity = self.content_maturity
+		var74.content_maturity = self.content_maturity
 	end
 	if self.contentMaturity ~= nil then
-		var72.content_maturity = self.contentMaturity
+		var74.content_maturity = self.contentMaturity
 	end
 	if self.is_officially_licensed ~= nil then
-		var72.is_officially_licensed = self.is_officially_licensed
+		var74.is_officially_licensed = self.is_officially_licensed
 	end
 	if self.isOfficiallyLicensed ~= nil then
-		var72.is_officially_licensed = self.isOfficiallyLicensed
+		var74.is_officially_licensed = self.isOfficiallyLicensed
 	end
 	if self.refund_policy_text ~= nil then
-		var72.refund_policy_text = self.refund_policy_text
+		var74.refund_policy_text = self.refund_policy_text
 	end
 	if self.refundPolicyText ~= nil then
-		var72.refund_policy_text = self.refundPolicyText
+		var74.refund_policy_text = self.refundPolicyText
 	end
 	if self.refund_article_id ~= nil then
-		var72.refund_article_id = self.refund_article_id
+		var74.refund_article_id = self.refund_article_id
 	end
 	if self.refundArticleId ~= nil then
-		var72.refund_article_id = self.refundArticleId
+		var74.refund_article_id = self.refundArticleId
 	end
 	if self.preview_video_id ~= nil then
-		var72.preview_video_id = self.preview_video_id
+		var74.preview_video_id = self.preview_video_id
 	end
 	if self.previewVideoId ~= nil then
-		var72.preview_video_id = self.previewVideoId
+		var74.preview_video_id = self.previewVideoId
 	end
 	if self.creation_source ~= nil then
-		var72.creation_source = self.creation_source
+		var74.creation_source = self.creation_source
 	end
 	if self.creationSource ~= nil then
-		var72.creation_source = self.creationSource
+		var74.creation_source = self.creationSource
 	end
-	return var72
+	if self.promotional_text ~= nil then
+		var74.promotional_text = self.promotional_text
+	end
+	if self.promotionalText ~= nil then
+		var74.promotional_text = self.promotionalText
+	end
+	return var74
 end
 
 t_1.descriptor = {

@@ -2399,6 +2399,7 @@ Feature.Build.Label.GamePlays,Lượt chơi
 Feature.Build.Label.GetMoreBuildUsage,Mua thêm lượt sử dụng Build
 Feature.Build.Label.Hi,Xin chào
 Feature.Build.Label.IconThumbnails,Biểu tượng và hình nhỏ
+Feature.Build.Label.Images2D,Hình ảnh 2D
 Feature.Build.Label.InProgress,Đang thực hiện
 Feature.Build.Label.InputNeeded,Cần thông tin đầu vào
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2430,6 +2431,8 @@ Feature.Build.Label.Purchased,Đã mua
 Feature.Build.Label.Ready,Sẵn sàng
 Feature.Build.Label.RegionalPricing,Giá theo vùng
 Feature.Build.Label.ResetsDaily,Làm mới hằng ngày
+Feature.Build.Label.ResetsMonthly,Đặt lại hằng tháng
+Feature.Build.Label.ResetsWeekly,Đặt lại hằng tuần
 Feature.Build.Label.RestoredVersion,Đã khôi phục {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2437,7 +2440,6 @@ Feature.Build.Label.SearchAssets,Tìm kiếm tài sản
 Feature.Build.Label.SearchGames,Tìm kiếm trò chơi
 Feature.Build.Label.SearchTasks,Tìm kiếm nhiệm vụ
 Feature.Build.Label.SelectOption,Chọn một tùy chọn
-Feature.Build.Label.ShareAddedFriends,Chia sẻ với bạn bè mà bạn đã thêm
 Feature.Build.Label.Shared,Đã chia sẻ
 Feature.Build.Label.ShopButton,Nút Cửa hàng
 Feature.Build.Label.ShopUi,UI cửa hàng
@@ -2575,6 +2577,7 @@ Feature.Build.Message.NoVersionHistory,Chưa có lịch sử phiên bản.
 Feature.Build.Message.OneTaskCompleted,Đã hoàn thành 1 nhiệm vụ
 Feature.Build.Message.OutOfBuildUsage,Bạn đã hết lượt sử dụng Build. Hãy xem các lựa chọn sử dụng Robux để tiếp tục sáng tạo.
 Feature.Build.Message.PlaytestersAdded,Đã thêm {INVITED_COUNT} trên {MAX_INVITES} người chơi thử
+Feature.Build.Message.PrivatePlaytestInvite,{username} đã mời bạn chơi thử riêng tư {experienceName}
 Feature.Build.Message.PublicPublishFailed,Trò chơi của bạn đã được đăng nhưng chưa đăng công khai. Vui lòng thử lại.
 Feature.Build.Message.PublishExpandAudience,Đăng để mở rộng đối tượng của bạn
 Feature.Build.Message.PublishNotReverted,Không hủy đăng được. Vui lòng thử lại.
@@ -3612,6 +3615,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Bạn bè đáng tin cậy mới
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Thêm bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
+Feature.Friends.TrustedFriend.Label.Title,Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} đã trở thành bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Đã xóa Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Đã gửi yêu cầu trở thành bạn bè đáng tin cậy
@@ -5522,7 +5526,15 @@ InGame.UnknownNamespace.GameChat_ChatCommandsTeller_WhisperCommand,/whisper <spe
 InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage,Người quen của bạn là {RBX_NAME} đã tham gia trải nghiệm.
 InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf,Bạn không thể nói thầm với chính mình.
 InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,"Bạn hiện đang ở trong nhóm ""{RBX_NAME}""."
+InstantApps.Shortcuts.Label.AddToDesktopMenuItem,Thêm vào máy tính
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,Thêm vào màn hình chính
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,Không thể thêm {experience_name} vào màn hình
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,Không thể thêm {experience_name} vào màn hình chính
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,Lối tắt đến {experience_name} đã tồn tại
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,Đã thêm {experience_name} vào màn hình thành công
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,Đã thêm {experience_name} vào màn hình chính thành công
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,Xem lối tắt
 Luobu.Authentication.Login.Label.AntiAddictionText,Không Áp Dụng
 Luobu.Authentication.Login.Label.NetworkLicense,
 Luobu.Authentication.Message.UnknownErrorTryAgain,Đã xảy ra lỗi không xác định. Vui lòng khởi động lại ứng dụng.

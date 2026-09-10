@@ -2399,6 +2399,7 @@ Feature.Build.Label.GamePlays,Oyun oynama sayısı
 Feature.Build.Label.GetMoreBuildUsage,Daha fazla İnşa Et kullanım hakkı al
 Feature.Build.Label.Hi,Merhaba
 Feature.Build.Label.IconThumbnails,Simge ve küçük resimler
+Feature.Build.Label.Images2D,2 Boyutlu Görseller
 Feature.Build.Label.InProgress,Devam ediyor
 Feature.Build.Label.InputNeeded,Giriş gerekli
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2430,6 +2431,8 @@ Feature.Build.Label.Purchased,Satın alındı
 Feature.Build.Label.Ready,Hazır
 Feature.Build.Label.RegionalPricing,Bölgesel fiyatlandırma
 Feature.Build.Label.ResetsDaily,Her gün sıfırlanır
+Feature.Build.Label.ResetsMonthly,Her ay sıfırlanır
+Feature.Build.Label.ResetsWeekly,Her hafta sıfırlanır
 Feature.Build.Label.RestoredVersion,{VERSION} geri yüklendi
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2437,7 +2440,6 @@ Feature.Build.Label.SearchAssets,Varlık ara
 Feature.Build.Label.SearchGames,Oyun ara
 Feature.Build.Label.SearchTasks,Görev ara
 Feature.Build.Label.SelectOption,Bir seçenek belirle
-Feature.Build.Label.ShareAddedFriends,Eklediğin arkadaşlarla paylaş
 Feature.Build.Label.Shared,Paylaşıldı
 Feature.Build.Label.ShopButton,Alışveriş yap düğmesi
 Feature.Build.Label.ShopUi,Alışveriş yap kullanıcı arayüzü
@@ -2575,6 +2577,7 @@ Feature.Build.Message.NoVersionHistory,Henüz sürüm geçmişi yok.
 Feature.Build.Message.OneTaskCompleted,1 görev tamamlandı
 Feature.Build.Message.OutOfBuildUsage,İnşa Et kullanım hakkın tükendi. Bir şeyler oluşturmaya devam etmek için Robux kullanma seçeneklerini görüntüle.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT}/{MAX_INVITES} oynanış testçisi eklendi
+Feature.Build.Message.PrivatePlaytestInvite,"{username}, seni {experienceName} için özel oynanış testine davet etti"
 Feature.Build.Message.PublicPublishFailed,Oyunun yayınlandı ancak herkese açık hâle getirilemedi. Tekrar dene.
 Feature.Build.Message.PublishExpandAudience,Kitleni genişletmek için yayınla
 Feature.Build.Message.PublishNotReverted,Yayınlaman geri döndürülmedi. Tekrar dene.
@@ -3612,6 +3615,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Yeni güvenilir arkadaş
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Güvenilir arkadaş olarak ekle
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Güvenilir arkadaşlara ekle
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Güvenilir Arkadaş Ekle
+Feature.Friends.TrustedFriend.Label.Title,Güvenilir arkadaş
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} artık güvenilir arkadaşın
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Güvenilir arkadaş kaldırıldı
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Güvenilir arkadaş olma talebi gönderildi
@@ -5522,7 +5526,15 @@ InGame.UnknownNamespace.GameChat_ChatCommandsTeller_WhisperCommand,/whisper <spe
 InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage,Etkileşim ağında bulunan {RBX_NAME} deneyime katıldı.
 InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf,Kendinle bir özel mesaj kanalı açamazsın.
 InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,"Artık ""{RBX_NAME}"" takımındasın."
+InstantApps.Shortcuts.Label.AddToDesktopMenuItem,Masaüstüne Ekle
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,Ana Ekrana Ekle
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,{experience_name} masaüstüne eklenemedi
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,{experience_name} ana ekrana eklenemedi
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,{experience_name} için kısayol zaten var
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,{experience_name} masaüstüne başarıyla eklendi
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,{experience_name} ana ekrana başarıyla eklendi
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,Kısayolu Görüntüle
 Luobu.Authentication.Login.Label.AntiAddictionText,
 Luobu.Authentication.Login.Label.NetworkLicense,
 Luobu.Authentication.Message.UnknownErrorTryAgain,Bilinmeyen bir hata oluştu. Lütfen uygulamayı yeniden başlatmayı dene.

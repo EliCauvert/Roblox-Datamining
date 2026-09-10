@@ -2393,6 +2393,7 @@ Feature.Build.Label.GamePlays,Spielaufrufe
 Feature.Build.Label.GetMoreBuildUsage,Mehr Build-Kontingent holen
 Feature.Build.Label.Hi,Hallo
 Feature.Build.Label.IconThumbnails,Symbol und Vorschaubilder
+Feature.Build.Label.Images2D,2D-Bilder
 Feature.Build.Label.InProgress,In Arbeit
 Feature.Build.Label.InputNeeded,Eingabe erforderlich
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2424,6 +2425,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Bereit
 Feature.Build.Label.RegionalPricing,Regionale Preisgestaltung
 Feature.Build.Label.ResetsDaily,Wird täglich zurückgesetzt
+Feature.Build.Label.ResetsMonthly,Wird monatlich zurückgesetzt
+Feature.Build.Label.ResetsWeekly,Wird wöchentlich zurückgesetzt
 Feature.Build.Label.RestoredVersion,{VERSION} wurde wiederhergestellt
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2431,7 +2434,6 @@ Feature.Build.Label.SearchAssets,Objekte durchsuchen
 Feature.Build.Label.SearchGames,Spiele suchen
 Feature.Build.Label.SearchTasks,Aufgaben suchen
 Feature.Build.Label.SelectOption,Wähle eine Option
-Feature.Build.Label.ShareAddedFriends,"Mit Freunden teilen, die du hinzugefügt hast"
 Feature.Build.Label.Shared,Geteilt
 Feature.Build.Label.ShopButton,Kaufen-Button
 Feature.Build.Label.ShopUi,Shop-UI
@@ -2569,6 +2571,7 @@ Feature.Build.Message.NoVersionHistory,Noch kein Versionsverlauf.
 Feature.Build.Message.OneTaskCompleted,1 Aufgabe abgeschlossen
 Feature.Build.Message.OutOfBuildUsage,"Dein Build-Kontingent ist aufgebraucht. Sieh dir deine Optionen an, um Robux zu verwenden und weiter zu erstellen."
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} von {MAX_INVITES} Spieletestern hinzugefügt
+Feature.Build.Message.PrivatePlaytestInvite,{username} hat dich zum privaten Spieltest {experienceName} eingeladen
 Feature.Build.Message.PublicPublishFailed,"Dein Spiel wurde veröffentlicht, konnte aber nicht öffentlich gemacht werden. Bitte versuche es erneut."
 Feature.Build.Message.PublishExpandAudience,"Veröffentliche, um deine Zielgruppe zu vergrößern"
 Feature.Build.Message.PublishNotReverted,Deine Veröffentlichung wurde nicht rückgängig gemacht. Bitte versuche es erneut.
@@ -3606,6 +3609,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Neuer vertrauter Freund
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Vertrauten Freund hinzufügen
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Vertraute Freunde hinzufügen
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
+Feature.Friends.TrustedFriend.Label.Title,Vertrauter Freund
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} ist jetzt ein vertrauter Freund
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Vertrauter Freund entfernt
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Anfrage zum Hinzufügen als vertrauter Freund gesendet
@@ -5511,7 +5515,15 @@ InGame.UnknownNamespace.GameChat_ChatCommandsTeller_WhisperCommand,/whisper <Spr
 InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage,Deine Connection {RBX_NAME} ist der Experience beigetreten.
 InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf,Du kannst dir nicht selbst etwas zuflüstern.
 InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,Du bist nun Mitglied im Team „{RBX_NAME}“.
+InstantApps.Shortcuts.Label.AddToDesktopMenuItem,Zum Desktop hinzufügen
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,Zum Startbildschirm hinzufügen
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,{experience_name} konnte nicht zum Desktop hinzugefügt werden
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,{experience_name} konnte nicht zum Startbildschirm hinzugefügt werden
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,Verknüpfung zu {experience_name} existiert bereits
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,{experience_name} wurde erfolgreich zum Desktop hinzugefügt
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,{experience_name} wurde erfolgreich zum Startbildschirm hinzugefügt
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,Verknüpfung anzeigen
 Luobu.Authentication.Login.Label.AntiAddictionText,
 Luobu.Authentication.Login.Label.NetworkLicense,
 Luobu.Authentication.Message.UnknownErrorTryAgain,Ein unbekannter Fehler ist aufgetreten. Bitte versuchen Sie die App neu.

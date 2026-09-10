@@ -2346,6 +2346,7 @@ Feature.Build.Error.DeveloperProductDescriptionTooLong,La descripción debe tene
 Feature.Build.Error.DeveloperProductNameRequired,Ingresa un nombre para el producto.
 Feature.Build.Error.DeveloperProductNameTooLong,El nombre debe tener 50 caracteres o menos.
 Feature.Build.Error.DeveloperProductPriceInvalid,"El precio debe ser un número entero de 1 a 1,000,000,000 Robux."
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,Selecciona Editar y agrega un precio antes de poner un producto a la venta.
 Feature.Build.Error.DeveloperProductTextModerated,La moderación de Roblox cambió el texto de este producto. Prueba con otras palabras.
 Feature.Build.Error.ManagedPricingPartialUpdate,No pudimos actualizar algunos productos.
 Feature.Build.Error.MonetizationOptionUpdate,No pudimos actualizar la opción. Inténtalo de nuevo.
@@ -2399,6 +2400,7 @@ Feature.Build.Label.GamePlays,Reproducciones del juego
 Feature.Build.Label.GetMoreBuildUsage,Obtener más uso de la compilación
 Feature.Build.Label.Hi,Hola
 Feature.Build.Label.IconThumbnails,Ícono y miniaturas
+Feature.Build.Label.Images2D,Imágenes 2D
 Feature.Build.Label.InProgress,En curso
 Feature.Build.Label.InputNeeded,Se necesita una entrada
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2430,6 +2432,8 @@ Feature.Build.Label.Purchased,Comprado
 Feature.Build.Label.Ready,
 Feature.Build.Label.RegionalPricing,Precio regional
 Feature.Build.Label.ResetsDaily,Se restablece diariamente
+Feature.Build.Label.ResetsMonthly,Se restablece mensualmente
+Feature.Build.Label.ResetsWeekly,Se restablece semanalmente
 Feature.Build.Label.RestoredVersion,Se restauró {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2437,7 +2441,6 @@ Feature.Build.Label.SearchAssets,Buscar recursos
 Feature.Build.Label.SearchGames,Buscar juegos
 Feature.Build.Label.SearchTasks,Buscar tareas
 Feature.Build.Label.SelectOption,Elige una opción
-Feature.Build.Label.ShareAddedFriends,Comparte con las amistades que añadiste
 Feature.Build.Label.Shared,Compartido
 Feature.Build.Label.ShopButton,Botón de la Tienda
 Feature.Build.Label.ShopUi,Interfaz de usuario de la Tienda
@@ -2575,6 +2578,7 @@ Feature.Build.Message.NoVersionHistory,Aún no hay historial de versiones.
 Feature.Build.Message.OneTaskCompleted,1 tarea completada
 Feature.Build.Message.OutOfBuildUsage,Ya no puedes usar la compilación. Consulta tus opciones para usar Robux y seguir creando.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} de {MAX_INVITES} evaluadores de juego añadidos
+Feature.Build.Message.PrivatePlaytestInvite,{username} te invitó a una prueba de juego privada {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Tu juego se publicó, pero no se pudo hacer público. Inténtalo de nuevo."
 Feature.Build.Message.PublishExpandAudience,Publica para ampliar tu público
 Feature.Build.Message.PublishNotReverted,Tu publicación no se revirtió. Inténtalo de nuevo.
@@ -3612,6 +3616,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Nuevo amigo de confianza
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Agregar como amistad de confianza
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Añadir amigos de confianza
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
+Feature.Friends.TrustedFriend.Label.Title,Amistad de confianza
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} ahora es una amistad de confianza
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Amistad de confianza eliminada
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Solicitud para ser amistad de confianza enviada
@@ -5522,7 +5527,15 @@ InGame.UnknownNamespace.GameChat_ChatCommandsTeller_WhisperCommand,/whisper <usu
 InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage,Tu conexión {RBX_NAME} se unió a la experiencia.
 InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf,No puedes enviarte mensajes privados a ti mismo.
 InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,"Ahora formas parte del equipo ""{RBX_NAME}""."
+InstantApps.Shortcuts.Label.AddToDesktopMenuItem,Agregar al escritorio
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,Añadir a la pantalla de Inicio
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,No se pudo añadir {experience_name} a la computadora
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,{experience_name} no se pudo añadir a la pantalla de inicio
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,El atajo a {experience_name} ya existe
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,Se añadió {experience_name} correctamente a la computadora
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,{experience_name} se añadió correctamente a la pantalla de inicio
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,Ver atajo
 Luobu.Authentication.Login.Label.AntiAddictionText,N/A
 Luobu.Authentication.Login.Label.NetworkLicense,
 Luobu.Authentication.Message.UnknownErrorTryAgain,"Se produjo un error desconocido. Por favor, intente reiniciar la aplicación."

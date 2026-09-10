@@ -2399,6 +2399,7 @@ Feature.Build.Label.GamePlays,Rozegrane gry
 Feature.Build.Label.GetMoreBuildUsage,Zdobądź więcej użyć funkcji Buduj
 Feature.Build.Label.Hi,Cześć
 Feature.Build.Label.IconThumbnails,Ikona i miniatury
+Feature.Build.Label.Images2D,Obrazy 2D
 Feature.Build.Label.InProgress,W toku
 Feature.Build.Label.InputNeeded,Wymagane wprowadzenie
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2430,6 +2431,8 @@ Feature.Build.Label.Purchased,Kupiono
 Feature.Build.Label.Ready,
 Feature.Build.Label.RegionalPricing,Ceny regionalne
 Feature.Build.Label.ResetsDaily,Resetuje się codziennie
+Feature.Build.Label.ResetsMonthly,Resetuje się co miesiąc
+Feature.Build.Label.ResetsWeekly,Resetuje się co tydzień
 Feature.Build.Label.RestoredVersion,Przywrócono {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2437,7 +2440,6 @@ Feature.Build.Label.SearchAssets,Wyszukaj zasoby
 Feature.Build.Label.SearchGames,Szukaj gier
 Feature.Build.Label.SearchTasks,Wyszukaj zadania
 Feature.Build.Label.SelectOption,Wybierz opcję
-Feature.Build.Label.ShareAddedFriends,Udostępnij dodanym znajomym
 Feature.Build.Label.Shared,Udostępniono
 Feature.Build.Label.ShopButton,Przycisk Sklepu
 Feature.Build.Label.ShopUi,Interfejs użytkownika sklepu
@@ -2574,7 +2576,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Nie ma jeszcze historii wersji.
 Feature.Build.Message.OneTaskCompleted,1 zadanie ukończone
 Feature.Build.Message.OutOfBuildUsage,"Skończyły Ci się użycia funkcji Buduj. Zobacz opcje użycia Robuxów, aby kontynuować tworzenie."
+Feature.Build.Message.PlaytestInviteSendFailedBody,Nie udało Ci się wysłać linku do czatu z zaproszeniem do następujących użytkowników:
+Feature.Build.Message.PlaytestInviteSendFailedHint,"Użyj przycisku Udostępnij, aby uzyskać link."
 Feature.Build.Message.PlaytestersAdded,Dodano {INVITED_COUNT} z {MAX_INVITES} testerów gry
+Feature.Build.Message.PrivatePlaytestInvite,{username} zaprosił(a) Cię do prywatnego playtestu projektu „{experienceName}”
 Feature.Build.Message.PublicPublishFailed,"Twoja gra została opublikowana, ale nie udało się jej udostępnić publicznie. Spróbuj ponownie."
 Feature.Build.Message.PublishExpandAudience,"Opublikuj, aby zwiększyć liczbę odbiorców"
 Feature.Build.Message.PublishNotReverted,Twoja publikacja nie została cofnięta. Spróbuj ponownie.
@@ -2638,6 +2643,7 @@ Feature.Build.Title.GetUsers,Pozyskaj użytkowników
 Feature.Build.Title.ManagedPricingAcknowledgement,Włączyć zarządzane ceny?
 Feature.Build.Title.NoMonetizationProducts,Zacznij zarabiać w swojej grze
 Feature.Build.Title.NoRobuxForUsage,Nie masz już Robuxów na użycia funkcji Buduj
+Feature.Build.Title.PlaytestInviteSendFailed,Nie udało się wysłać zaproszeń
 Feature.Build.Title.Playtesters,Testerzy
 Feature.Build.Title.PlaytestersOnlyPlay,Tylko testerzy mogą grać
 Feature.Build.Title.PromoteGame,Promuj swoją grę
@@ -3612,6 +3618,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Nowy zaufany znajomy
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Dodaj zaufanych znajomych
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
+Feature.Friends.TrustedFriend.Label.Title,Zaufany znajomy
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} jest teraz zaufanym znajomym
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Wysłano prośbę o dodanie do zaufanych znajomych
@@ -4050,7 +4057,7 @@ Feature.Moments.Label.FeedFailedToLoad,Nie udało się wczytać kanału aktualno
 Feature.Moments.Label.FeedMyMoments,Moje momenty
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,Jak korzystać z funkcji przechwytywania
-Feature.Moments.Label.LinkCopied,Skopiowano link.
+Feature.Moments.Label.LinkCopied,Skopiowano link
 Feature.Moments.Label.LinkCopyFailed,Nie udało się skopiować linku.
 Feature.Moments.Label.ModeratedRodeoBody,"Usunęliśmy ten moment, ponieważ jest on niezgodny z naszymi Standardami społeczności. Aby Twoje momenty były widoczne, zapoznaj się z zasadami i ich przestrzegaj."
 Feature.Moments.Label.MomentDeletedBody,
@@ -5522,7 +5529,15 @@ InGame.UnknownNamespace.GameChat_ChatCommandsTeller_WhisperCommand,/whisper <mó
 InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage,
 InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf,Nie możesz szeptać do siebie.
 InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,Jesteś teraz w zespole „{RBX_NAME}”.
+InstantApps.Shortcuts.Label.AddToDesktopMenuItem,Dodaj do panelu
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,Dodaj do ekranu głównego
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,Nie udało się dodać projektu {experience_name} do panelu
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,Nie udało się dodać projektu {experience_name} do ekranu głównego
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,Skrót do projektu {experience_name} już istnieje
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,Dodano projekt {experience_name} do panelu
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,Dodano projekt {experience_name} do ekranu głównego
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,Wyświetl skrót
 Luobu.Authentication.Login.Label.AntiAddictionText,
 Luobu.Authentication.Login.Label.NetworkLicense,
 Luobu.Authentication.Message.UnknownErrorTryAgain,Wystąpił nieznany błąd. Spróbuj ponownie uruchomić aplikację.

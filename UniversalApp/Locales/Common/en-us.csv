@@ -1714,6 +1714,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Description
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exclusive with Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,Name
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,today
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,this hour
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,this month
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,{count} backgrounds left
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,{count} background left
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,days
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,hours
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,minutes
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,Resets in
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Describe your background…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Generating your background…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparing your background…
@@ -1832,6 +1841,7 @@ Feature.Avatar.Label.ClassicTShirts,Classic T-Shirts
 Feature.Avatar.Label.ClearByCategory,Clear {category}
 Feature.Avatar.Label.Climb,Climb
 Feature.Avatar.Label.ClimbAnimations,Climb Animations
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Name can only contain letter, numbers, and spaces"
 Feature.Avatar.Label.CountSelected,{itemCount} Selected
 Feature.Avatar.Label.Creations,Creations
@@ -1944,6 +1954,7 @@ Feature.Avatar.Label.RecentlyWorn,Recently worn
 Feature.Avatar.Label.RemoveFromSetBody,These avatars will be removed from this set. They won't be deleted.
 Feature.Avatar.Label.Replace,Replace
 Feature.Avatar.Label.ResetToNewCharacter,You are switching to a new character; would you like to reset all outfit items or keep them?
+Feature.Avatar.Label.ResetTryOn,Reset to current avatar
 Feature.Avatar.Label.Right,R
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,Right Arms
@@ -1999,6 +2010,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,Makeup Layering
 Feature.Avatar.Label.Title.ManageAvatars,Manage Avatars
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,My Inventory
 Feature.Avatar.Label.Title.ProfilePhoto,Profile Photo
 Feature.Avatar.Label.Title.ReplaceAvatar,Replace Avatar
@@ -2138,6 +2150,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,Move
+Feature.Avatar.Title.MyAvatar,My Avatar
 Feature.Avatar.Title.NameAvatarOutfit,Name your avatar
 Feature.Avatar.Title.NewCustomizeLook,Customize Has A New Look!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,New to Marketplace
@@ -2406,6 +2419,7 @@ Feature.Build.Label.GamePlays,Game plays
 Feature.Build.Label.GetMoreBuildUsage,Get more Build usage
 Feature.Build.Label.Hi,Hi
 Feature.Build.Label.IconThumbnails,Icon & thumbnails
+Feature.Build.Label.Images2D,2D Images
 Feature.Build.Label.InProgress,In progress
 Feature.Build.Label.InputNeeded,Input needed
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2437,6 +2451,8 @@ Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Ready
 Feature.Build.Label.RegionalPricing,Regional pricing
 Feature.Build.Label.ResetsDaily,Resets daily
+Feature.Build.Label.ResetsMonthly,Resets monthly
+Feature.Build.Label.ResetsWeekly,Resets weekly
 Feature.Build.Label.RestoredVersion,Restored {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
@@ -2444,7 +2460,6 @@ Feature.Build.Label.SearchAssets,Search assets
 Feature.Build.Label.SearchGames,Search games
 Feature.Build.Label.SearchTasks,Search tasks
 Feature.Build.Label.SelectOption,Select an option
-Feature.Build.Label.ShareAddedFriends,Share with friends you added
 Feature.Build.Label.Shared,Shared
 Feature.Build.Label.ShopButton,Shop button
 Feature.Build.Label.ShopUi,Shop UI
@@ -2581,7 +2596,10 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,No version history yet.
 Feature.Build.Message.OneTaskCompleted,1 task completed
 Feature.Build.Message.OutOfBuildUsage,You're out of Build usage. View your options to use Robux to keep creating.
+Feature.Build.Message.PlaytestInviteSendFailedBody,You were not able to send an invite chat link to the following users:
+Feature.Build.Message.PlaytestInviteSendFailedHint,Please use the Share button to get a link.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} of {MAX_INVITES} playtesters added
+Feature.Build.Message.PrivatePlaytestInvite,{username} invited you to private playtest {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Your game was published, but couldn't be made public. Try again."
 Feature.Build.Message.PublishExpandAudience,Publish to expand your audience
 Feature.Build.Message.PublishNotReverted,Your publish wasn't reverted. Try again.
@@ -2602,8 +2620,10 @@ Feature.Build.Message.ShareLinkFailed,Couldn't create the share link. Try again.
 Feature.Build.Message.SignedOut,You're signed out. Sign in and try again.
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} tasks completed
 Feature.Build.Message.ThinkingSeconds,Thinking for {SECONDS}s
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,Become trusted friends with this creator to playtest this game.
 Feature.Build.Message.TryAgain,Try again.
 Feature.Build.Message.TurnToPortrait,Turn your device to portrait mode to continue working on your game.
+Feature.Build.Message.UpdateSettingsToPlaytest,"To play this game, update your playtest setting."
 Feature.Build.Message.VersionHistoryLoad,Version history couldn't load.
 Feature.Build.Message.WhatToCreate,What do you want to create today?
 Feature.Build.Message.WorkedMinutesSeconds,Worked for {MINUTES}m{REM_SECONDS}s
@@ -2645,6 +2665,7 @@ Feature.Build.Title.GetUsers,Get users
 Feature.Build.Title.ManagedPricingAcknowledgement,Turn on Managed Pricing?
 Feature.Build.Title.NoMonetizationProducts,Start earning in your game
 Feature.Build.Title.NoRobuxForUsage,No Robux left for Build usage
+Feature.Build.Title.PlaytestInviteSendFailed,Couldn't send invites
 Feature.Build.Title.Playtesters,Playtesters
 Feature.Build.Title.PlaytestersOnlyPlay,Only playtesters can play
 Feature.Build.Title.PromoteGame,Promote your game
@@ -3619,6 +3640,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,New trusted friend
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Add trusted friend
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Add trusted friends
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Add Trusted Friends
+Feature.Friends.TrustedFriend.Label.Title,Trusted friend
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} is a trusted friend now
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Trusted friend removed
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Trusted friend request sent
@@ -5536,7 +5558,15 @@ InGame.UnknownNamespace.GameChat_ChatCommandsTeller_WhisperCommand,/whisper <spe
 InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage,Your connection {RBX_NAME} has joined the experience.
 InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf,You cannot whisper to yourself.
 InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,You are now on the '{RBX_NAME}' team.
+InstantApps.Shortcuts.Label.AddToDesktopMenuItem,Add to Desktop
 InstantApps.Shortcuts.Label.AddToHomeMenuItem,Add to Home Screen
+InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop,Failed to add {experience_name} to desktop
+InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,Failed to add {experience_name} to home screen
+InstantApps.Shortcuts.Label.ShortcutAlreadyExists,Shortcut to {experience_name} already exists
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,Successfully added {experience_name} to desktop
+InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,Successfully added {experience_name} to home screen
+InstantApps.Shortcuts.Label.TryAgain,
+InstantApps.Shortcuts.Label.ViewShortcut,View Shortcut
 Luobu.Authentication.Login.Label.AntiAddictionText,
 Luobu.Authentication.Login.Label.NetworkLicense,
 Luobu.Authentication.Message.UnknownErrorTryAgain,An unknown error occured. Please try restarting the app.
