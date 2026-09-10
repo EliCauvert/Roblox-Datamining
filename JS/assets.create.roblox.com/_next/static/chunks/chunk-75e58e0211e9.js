@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "1dbbb7fb-41c9-1450-37fa-56212e04bca1")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "c3557c21-e3fd-3479-7100-d43059dc2509")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 913893, 285929, e => {
@@ -1499,11 +1499,11 @@
             NUMBER_1: 1,
             NUMBER_2: 2
         },
-        j = function(e) {
+        j = (function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            return n(t, e), t.prototype.v1ContentMetadataAppealPostRaw = function(e, t) {
+            n(t, e), t.prototype.v1ContentMetadataAppealPostRaw = function(e, t) {
                 return s(this, void 0, void 0, function() {
                     var r, n, s;
                     return o(this, function(o) {
@@ -1584,9 +1584,8 @@
                         }
                     })
                 })
-            }, t
-        }(i.BaseAPI),
-        H = function(e) {
+            }
+        }(i.BaseAPI), function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
@@ -1624,14 +1623,14 @@
                     })
                 })
             }, t
-        }(i.BaseAPI),
-        K = {
+        }(i.BaseAPI)),
+        H = {
             NUMBER_0: 0,
             NUMBER_1: 1,
             NUMBER_2: 2,
             NUMBER_3: 3
         },
-        z = function(e) {
+        K = function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
@@ -1925,7 +1924,7 @@
                 })
             }, t
         }(i.BaseAPI),
-        W = function(e) {
+        z = function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
@@ -2041,7 +2040,7 @@
                 })
             }, t
         }(i.BaseAPI),
-        X = function(e) {
+        W = function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
@@ -2272,12 +2271,12 @@
                 })
             }, t
         }(i.BaseAPI),
-        Y = {
+        X = {
             NUMBER_0: 0,
             NUMBER_1: 1,
             NUMBER_2: 2
         },
-        Z = function(e) {
+        Y = function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
@@ -2432,7 +2431,7 @@
                 })
             }, t
         }(i.BaseAPI),
-        $ = function(e) {
+        Z = function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
@@ -2598,7 +2597,7 @@
                 })
             }, t
         }(i.BaseAPI);
-    e.s(["CollectiblesApi", 0, F, "ContentMetadataApi", 0, j, "DelistingApi", 0, H, "FoldersApi", 0, z, "ItemApi", 0, W, "MarketplaceItemApi", 0, X, "PermissionsApi", 0, Z, "PublishingPreferencesApi", 0, $, "RobloxAvatarMarketplacePublishingAvatarMarketplacePublishingGatewayV1Beta1ItemDelistingStatusStatusEnum", 0, {
+    e.s(["CollectiblesApi", 0, F, "DelistingApi", 0, j, "FoldersApi", 0, K, "ItemApi", 0, z, "MarketplaceItemApi", 0, W, "PermissionsApi", 0, Y, "PublishingPreferencesApi", 0, Z, "RobloxAvatarMarketplacePublishingAvatarMarketplacePublishingGatewayV1Beta1ItemDelistingStatusStatusEnum", 0, {
         NUMBER_0: 0,
         NUMBER_1: 1,
         NUMBER_2: 2
@@ -2754,7 +2753,7 @@
         NUMBER_25: 25,
         NUMBER_50: 50,
         NUMBER_100: 100
-    }, "V1DelistItemPostTargetTypeEnum", 0, K, "V1ItemsByCreatorGetAssetTypeEnum", 0, {
+    }, "V1DelistItemPostTargetTypeEnum", 0, H, "V1ItemsByCreatorGetAssetTypeEnum", 0, {
         NUMBER_0: 0,
         NUMBER_1: 1,
         NUMBER_2: 2,
@@ -2846,7 +2845,7 @@
         NUMBER_1: 1,
         NUMBER_2: 2,
         NUMBER_3: 3
-    }, "V1ItemsGetItemTypeEnum", 0, Y, "V1ItemsPriceFloorGetCollectibleItemTypeEnum", 0, {
+    }, "V1ItemsGetItemTypeEnum", 0, X, "V1ItemsPriceFloorGetCollectibleItemTypeEnum", 0, {
         NUMBER_0: 0,
         NUMBER_1: 1,
         NUMBER_2: 2
@@ -3052,8 +3051,8 @@
         NUMBER_2: 2,
         NUMBER_3: 3
     }], 285929);
-    var ee = e.i(272593);
-    let et = new class {
+    var $ = e.i(272593);
+    let ee = new class {
         checkItemConfigurationAccess(e, t) {
             let i = {
                 targetType: e ? S.NUMBER_1 : S.NUMBER_0,
@@ -3071,7 +3070,7 @@
         }
         delistItem(e, t) {
             let i = {
-                targetType: e ? K.NUMBER_1 : K.NUMBER_0,
+                targetType: e ? H.NUMBER_1 : H.NUMBER_0,
                 targetId: t
             };
             return this.delistingApi.v1DelistItemPost(i)
@@ -3224,7 +3223,7 @@
         }
         getItem(e, t) {
             let i = {
-                itemType: e ? Y.NUMBER_1 : Y.NUMBER_0,
+                itemType: e ? X.NUMBER_1 : X.NUMBER_0,
                 itemId: t
             };
             return this.marketplaceItemApi.v1ItemsGet(i)
@@ -3286,18 +3285,6 @@
                 licenseId: o
             };
             return this.collectiblesApi.v1CollectiblesRevenueSplitGet(l)
-        }
-        getContentMetadataAppealStatus(e, t, i) {
-            return this.contentMetadataApi.v1ContentMetadataAppealStatusGet({
-                targetType: e,
-                targetId: t,
-                appealType: i
-            })
-        }
-        createContentMetadataAppeal(e) {
-            return this.contentMetadataApi.v1ContentMetadataAppealPost({
-                request: e
-            })
         }
         getFolder(e) {
             return this.foldersApi.v1FoldersFolderIdGet({
@@ -3405,13 +3392,13 @@
             })
         }
         constructor() {
-            (0, t._)(this, "collectiblesApi", void 0), (0, t._)(this, "delistingApi", void 0), (0, t._)(this, "itemConfigurationApi", void 0), (0, t._)(this, "marketplaceItemApi", void 0), (0, t._)(this, "permissionsApi", void 0), (0, t._)(this, "contentMetadataApi", void 0), (0, t._)(this, "foldersApi", void 0), (0, t._)(this, "publishingPreferencesApi", void 0);
-            const e = (0, ee.createClientConfiguration)("itemconfiguration", "bedev1");
-            this.collectiblesApi = new F(e), this.delistingApi = new H(e), this.itemConfigurationApi = new W(e), this.marketplaceItemApi = new X(e), this.permissionsApi = new Z(e), this.contentMetadataApi = new j(e), this.foldersApi = new z(e), this.publishingPreferencesApi = new $(e)
+            (0, t._)(this, "collectiblesApi", void 0), (0, t._)(this, "delistingApi", void 0), (0, t._)(this, "itemConfigurationApi", void 0), (0, t._)(this, "marketplaceItemApi", void 0), (0, t._)(this, "permissionsApi", void 0), (0, t._)(this, "foldersApi", void 0), (0, t._)(this, "publishingPreferencesApi", void 0);
+            const e = (0, $.createClientConfiguration)("itemconfiguration", "bedev1");
+            this.collectiblesApi = new F(e), this.delistingApi = new j(e), this.itemConfigurationApi = new z(e), this.marketplaceItemApi = new W(e), this.permissionsApi = new Y(e), this.foldersApi = new K(e), this.publishingPreferencesApi = new Z(e)
         }
     };
-    e.s(["default", 0, et], 913893)
+    e.s(["default", 0, ee], 913893)
 }]);
 
-//# debugId=1dbbb7fb-41c9-1450-37fa-56212e04bca1
-//# sourceMappingURL=0cxqqf8u-y743.js.map
+//# debugId=c3557c21-e3fd-3479-7100-d43059dc2509
+//# sourceMappingURL=0vni1tdjl5t-i.js.map

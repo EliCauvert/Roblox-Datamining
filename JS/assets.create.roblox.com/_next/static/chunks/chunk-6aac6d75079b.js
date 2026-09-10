@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "f5cd9407-bc55-fbb1-f823-ecb6c8850495")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "b6bee70b-d374-8f0f-29ca-b691300679a3")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 523426, e => {
@@ -348,8 +348,8 @@
                 ageVerificationUpsellBannerHighPriorityDate: u
             }
         } = (0, s.useSettings)(), [d, p] = (0, a.useState)(!0), [b, y] = (0, a.useState)("doNotShow"), {
-            isFetched: S,
-            user: C
+            isFetched: C,
+            user: S
         } = (0, n.useRobloxAuthentication)(), {
             unifiedLogger: A
         } = (0, r.useUnifiedLoggerProvider)(), {
@@ -368,7 +368,7 @@
             await f(), p(!0)
         }, [p]);
         (0, a.useEffect)(() => {
-            E && S && (null == C ? void 0 : C.id) && (async () => {
+            E && C && (null == S ? void 0 : S.id) && (async () => {
                 let e = !1;
                 try {
                     e = await m()
@@ -404,7 +404,7 @@
                     }
                 })
             })
-        }, [E, S, C, A]);
+        }, [E, C, S, A]);
         let x = (0, a.useMemo)(() => {
             let e = E && "doNotShow" !== b;
             return {
@@ -423,9 +423,9 @@
 }, 968439, e => {
     "use strict";
     var t, a = e.i(721281),
-        n = e.i(703440),
+        n = e.i(280162),
         i = e.i(272593),
-        r = ((t = {}).PrivacyPolicyUri = "privacyPolicyUri", t.TermsOfServiceUri = "termsOfServiceUri", t.Summary = "summary", t.Name = "name", t);
+        r = ((t = {}).PrivacyPolicyUri = "privacyPolicyUri", t.TermsOfServiceUri = "termsOfServiceUri", t.Summary = "summary", t.Name = "name", t.CategoryJustification = "categoryJustification", t.VideoUri = "videoUri", t.RequestedCategory = "requestedCategory", t);
     let s = new class {
             createApplicationForUser(e) {
                 return this.applicationApi.applicationCreateApplicationForUser(e)
@@ -1050,8 +1050,8 @@
         v = e.i(706442),
         b = e.i(196945),
         y = e.i(156071),
-        S = e.i(790806),
-        C = e.i(759283),
+        C = e.i(790806),
+        S = e.i(759283),
         A = e.i(384340);
     let w = (0, v.makeStyles)()(() => ({
             dialogTitle: {
@@ -1091,13 +1091,13 @@
                         vertical: "bottom",
                         horizontal: "center"
                     },
-                    autoHideDuration: C.toastDurationTime,
+                    autoHideDuration: S.toastDurationTime,
                     autoHide: !0,
                     onClose: T
                 })
             }, [x, T]), [U, R] = (0, a.useState)(), [N, D] = (0, a.useState)(), [F, O] = (0, a.useState)(), [k, V] = (0, a.useState)(), L = (0, a.useCallback)(async () => {
                 if (null == l ? void 0 : l.senderUserId) try {
-                    let e = await S.default.getUserById(Number.parseInt(l.senderUserId, 10));
+                    let e = await C.default.getUserById(Number.parseInt(l.senderUserId, 10));
                     O(e.name), V(!1)
                 } catch (e) {
                     V(!0)
@@ -1226,9 +1226,9 @@
                     dialogContent: u,
                     dialogActions: v
                 }
-            } = I(), [b, y] = (0, a.useState)(), [C, A] = (0, a.useState)(), w = (0, a.useCallback)(async () => {
+            } = I(), [b, y] = (0, a.useState)(), [S, A] = (0, a.useState)(), w = (0, a.useCallback)(async () => {
                 if (null == s ? void 0 : s.senderUserId) try {
-                    let e = await S.default.getUserById(Number.parseInt(s.senderUserId, 10));
+                    let e = await C.default.getUserById(Number.parseInt(s.senderUserId, 10));
                     y(e.name), A(!1)
                 } catch (e) {
                     A(!0)
@@ -1257,11 +1257,11 @@
                         }), (0, t.jsx)(h.Typography, {
                             variant: "body1",
                             children: o ? (0, t.jsx)(t.Fragment, {
-                                children: C ? l("Message.InvitationAcceptedWithoutUsername") : l("Message.InvitationAccepted", {
+                                children: S ? l("Message.InvitationAcceptedWithoutUsername") : l("Message.InvitationAccepted", {
                                     username: null != b ? b : ""
                                 })
                             }) : (0, t.jsx)(t.Fragment, {
-                                children: C ? l("Message.InvitationDeclinedWithoutUsername") : l("Message.InvitationDeclined", {
+                                children: S ? l("Message.InvitationDeclinedWithoutUsername") : l("Message.InvitationDeclined", {
                                     username: null != b ? b : ""
                                 })
                             })
@@ -1292,7 +1292,7 @@
             user: d
         } = (0, r.useAuthentication)(), p = (0, u.useCurrentGroup)(), {
             currentItemGroupId: m
-        } = (0, c.default)(), [f, g] = (0, a.useState)(), [h, v] = (0, a.useState)(), [b, y] = (0, a.useState)(), [S, C] = (0, a.useState)(!1), [A, w] = (0, a.useState)(!1), [I, U] = (0, a.useState)(), [R, N] = (0, a.useState)(!1), D = null == d ? void 0 : d.id, F = (0, a.useMemo)(() => {
+        } = (0, c.default)(), [f, g] = (0, a.useState)(), [h, v] = (0, a.useState)(), [b, y] = (0, a.useState)(), [C, S] = (0, a.useState)(!1), [A, w] = (0, a.useState)(!1), [I, U] = (0, a.useState)(), [R, N] = (0, a.useState)(!1), D = null == d ? void 0 : d.id, F = (0, a.useMemo)(() => {
             var e;
             return null != (e = null == p ? void 0 : p.id) ? e : m
         }, [p, m]), O = l.query[T.InviteQueryKey], k = l.isReady, V = (0, a.useCallback)(() => {
@@ -1323,7 +1323,7 @@
                         let e = await s.default.organizationClient.getOrganization(F.toString());
                         g(e), await M(e.id)
                     } else g(void 0);
-                    C(!1)
+                    S(!1)
                 } catch (e) {
                     g(null), v(null), y(null)
                 } finally {
@@ -1331,7 +1331,7 @@
                 }
             }
         }, [F, L, M, O, k]), j = (0, a.useCallback)(() => {
-            C(!0), B()
+            S(!0), B()
         }, [B]), G = (0, a.useCallback)(async () => {
             (null == f ? void 0 : f.id) && await M(null == f ? void 0 : f.id)
         }, [M, null == f ? void 0 : f.id]), _ = (0, a.useMemo)(() => ({
@@ -1339,9 +1339,9 @@
             permissions: h,
             refreshOrganization: j,
             refreshPermission: G,
-            isOrganizationRefreshRequired: S,
+            isOrganizationRefreshRequired: C,
             isOrganizationLoading: A
-        }), [f, h, j, G, S, A]);
+        }), [f, h, j, G, C, A]);
         return (0, a.useEffect)(() => {
             B()
         }, [B]), (0, t.jsx)(P.default.Provider, {
@@ -1723,12 +1723,12 @@
             })), y = g && a.default.createElement("span", {
                 className: (0, t.default)("content-emphasis flex-shrink-0", n),
                 "aria-hidden": "true"
-            }, l), S = h && a.default.createElement("span", {
+            }, l), C = h && a.default.createElement("span", {
                 className: (0, t.default)("content-emphasis flex-shrink-0", n),
                 "aria-hidden": "true"
-            }, c), C = (g || h) && a.default.createElement("div", {
+            }, c), S = (g || h) && a.default.createElement("div", {
                 className: "flex justify-between width-full gap-xsmall"
-            }, g ? y : a.default.createElement("span", null), h ? S : a.default.createElement("span", null));
+            }, g ? y : a.default.createElement("span", null), h ? C : a.default.createElement("span", null));
             return a.default.createElement("div", {
                 ref: i,
                 className: (0, t.default)("block width-full", r),
@@ -1740,9 +1740,9 @@
                 ...p
             }, v ? a.default.createElement("div", {
                 className: "flex items-center gap-small width-full"
-            }, y, b, S) : a.default.createElement("div", {
+            }, y, b, C) : a.default.createElement("div", {
                 className: "flex flex-col gap-small width-full"
-            }, "Top" === u && C, b, "Bottom" === u && C))
+            }, "Top" === u && S, b, "Bottom" === u && S))
         });
     i.displayName = "ProgressBar", e.s(["ProgressBar", 0, i])
 }, 176148, e => {
@@ -1782,18 +1782,18 @@
                 strokeWidth: m,
                 textClass: f,
                 valueContainerSize: g
-            } = n[s], h = (p - m) / 2, v = 2 * Math.PI * h, b = p / 2, y = Math.min(100, Math.max(0, l)), S = c && void 0 !== g ? g : p, C = "Determinate" === o;
+            } = n[s], h = (p - m) / 2, v = 2 * Math.PI * h, b = p / 2, y = Math.min(100, Math.max(0, l)), C = c && void 0 !== g ? g : p, S = "Determinate" === o;
             return a.default.createElement("div", {
                 ref: i,
                 className: (0, t.default)("foundation-web-progress-circle inline-flex items-center justify-center", r),
                 role: "progressbar",
                 "aria-label": u,
-                "aria-valuemin": C ? 0 : void 0,
-                "aria-valuemax": C ? 100 : void 0,
-                "aria-valuenow": C ? y : void 0,
+                "aria-valuemin": S ? 0 : void 0,
+                "aria-valuemax": S ? 100 : void 0,
+                "aria-valuenow": S ? y : void 0,
                 style: {
-                    width: S,
-                    height: S
+                    width: C,
+                    height: C
                 },
                 ...d
             }, a.default.createElement("svg", {
@@ -1816,11 +1816,11 @@
                 r: h,
                 fill: "none",
                 strokeWidth: m,
-                strokeDasharray: C ? v : "".concat(.75 * v, " ").concat(.25 * v),
-                strokeDashoffset: C ? v * (1 - y / 100) : 0,
+                strokeDasharray: S ? v : "".concat(.75 * v, " ").concat(.25 * v),
+                strokeDashoffset: S ? v * (1 - y / 100) : 0,
                 strokeLinecap: "round",
-                className: (0, t.default)(!C && "foundation-web-progress-circle-indeterminate"),
-                style: C ? {
+                className: (0, t.default)(!S && "foundation-web-progress-circle-indeterminate"),
+                style: S ? {
                     stroke: "var(--fui-future-alpha-color-system-progress)",
                     transform: "rotate(-90deg)",
                     transformOrigin: "50% 50%",
@@ -1829,7 +1829,7 @@
                     stroke: "var(--fui-future-alpha-color-system-progress)",
                     transformOrigin: "50% 50%"
                 }
-            })), C && c && "Large" === s && a.default.createElement("div", {
+            })), S && c && "Large" === s && a.default.createElement("div", {
                 className: (0, t.default)("absolute content-emphasis flex items-center justify-center", f),
                 "aria-hidden": "true"
             }, a.default.createElement("span", null, Math.round(y)), a.default.createElement("span", null, "%")))
@@ -1950,5 +1950,5 @@
     }])
 }]);
 
-//# debugId=f5cd9407-bc55-fbb1-f823-ecb6c8850495
-//# sourceMappingURL=0wbjgf_-ta16c.js.map
+//# debugId=b6bee70b-d374-8f0f-29ca-b691300679a3
+//# sourceMappingURL=0-j-7h9ds-lzr.js.map

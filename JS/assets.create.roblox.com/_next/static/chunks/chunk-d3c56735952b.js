@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "dafecccc-341e-dc9f-8a14-ca2273b0aad4")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "d9673ab2-f851-1ab4-a51f-cdfc601065d3")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 736570, t => {
@@ -1045,7 +1045,7 @@
                 })
             }, r
         }(n.BaseAPI)),
-        f = function(t) {
+        h = function(t) {
             function r() {
                 return null !== t && t.apply(this, arguments) || this
             }
@@ -1089,7 +1089,7 @@
                 })
             }, r
         }(n.BaseAPI),
-        h = (function(t) {
+        f = (function(t) {
             function r() {
                 return null !== t && t.apply(this, arguments) || this
             }
@@ -1300,7 +1300,7 @@
         StudioStartPage: "StudioStartPage",
         StudioPublishNewPlace: "StudioPublishNewPlace",
         StudioSaveNewPlace: "StudioSaveNewPlace"
-    }, "GroupsApi", 0, m, "LandingEligibilityApi", 0, f, "SignalsApi", 0, h, "UserScreenApi", 0, g, "YourPlaceReengagementApi", 0, y])
+    }, "GroupsApi", 0, m, "LandingEligibilityApi", 0, h, "SignalsApi", 0, f, "UserScreenApi", 0, g, "YourPlaceReengagementApi", 0, y])
 }, 918697, t => {
     "use strict";
     var n = t.i(677753),
@@ -1842,7 +1842,7 @@
             updatedUtc: (0, n.exists)(r, "updatedUtc") ? s(r.updatedUtc) : void 0
         }
     }
-    var f = function(t) {
+    var h = function(t) {
         function s() {
             return null !== t && t.apply(this, arguments) || this
         }
@@ -2198,7 +2198,7 @@
             })
         }, s
     }(n.BaseAPI);
-    t.s(["SearchApi", 0, f])
+    t.s(["SearchApi", 0, h])
 }, 865611, (t, n, r) => {
     "use strict";
     var o, a, i, l, s, u;
@@ -2244,7 +2244,7 @@
         if (!1 === n) return c(n, t, a, i);
         for (;
             "object" == typeof n && void 0 !== n.ref;) o = n.ref, n = b[n.ref];
-        if (Array.isArray(n)) return -1 !== (l = n).indexOf(t) ? t : c(l.map(t => f(t)), t, a, i);
+        if (Array.isArray(n)) return -1 !== (l = n).indexOf(t) ? t : c(l.map(t => h(t)), t, a, i);
         if ("object" == typeof n) return n.hasOwnProperty("unionMembers") ? function(t, n) {
             let o = t.length;
             for (let a = 0; a < o; a++) {
@@ -2254,8 +2254,8 @@
                 } catch (t) {}
             }
             return c(t, n, a, i)
-        }(n.unionMembers, t) : n.hasOwnProperty("arrayItems") ? (s = n.arrayItems, Array.isArray(t) ? t.map(t => m(t, s, r)) : c(f("array"), t, a, i)) : n.hasOwnProperty("props") ? function(t, n, l) {
-            if (null === l || "object" != typeof l || Array.isArray(l)) return c(f(o || "object"), l, a, i);
+        }(n.unionMembers, t) : n.hasOwnProperty("arrayItems") ? (s = n.arrayItems, Array.isArray(t) ? t.map(t => m(t, s, r)) : c(h("array"), t, a, i)) : n.hasOwnProperty("props") ? function(t, n, l) {
+            if (null === l || "object" != typeof l || Array.isArray(l)) return c(h(o || "object"), l, a, i);
             let s = {};
             return Object.getOwnPropertyNames(t).forEach(n => {
                 let a = t[n],
@@ -2269,18 +2269,18 @@
             var l, s, u;
             if (null === t) return null;
             let n = new Date(t);
-            return isNaN(n.valueOf()) ? c(f("Date"), t, a, i) : n
+            return isNaN(n.valueOf()) ? c(h("Date"), t, a, i) : n
         }
         return typeof(u = n) == typeof t ? t : c(u, t, a, i)
     }
 
-    function f(t) {
+    function h(t) {
         return {
             literal: t
         }
     }
 
-    function h(t) {
+    function f(t) {
         return {
             arrayItems: t
         }
@@ -2368,7 +2368,7 @@
         }, {
             json: "labels",
             js: "labels",
-            typ: g(void 0, h(""))
+            typ: g(void 0, f(""))
         }, {
             json: "likes",
             js: "likes",
@@ -2396,7 +2396,7 @@
         }, {
             json: "reference",
             js: "reference",
-            typ: g(void 0, h(""))
+            typ: g(void 0, f(""))
         }, {
             json: "resultTargetReference",
             js: "resultTargetReference",
@@ -2404,11 +2404,11 @@
         }, {
             json: "searchKeywords",
             js: "searchKeywords",
-            typ: g(void 0, h(""))
+            typ: g(void 0, f(""))
         }, {
             json: "suggest",
             js: "suggest",
-            typ: g(void 0, h(""))
+            typ: g(void 0, f(""))
         }, {
             json: "summary",
             js: "summary",
@@ -2416,7 +2416,7 @@
         }, {
             json: "tags",
             js: "tags",
-            typ: g(void 0, h(""))
+            typ: g(void 0, f(""))
         }, {
             json: "thumbnails",
             js: "thumbnails",
@@ -2559,14 +2559,14 @@
         }
     }
 
-    function f(t, n) {
+    function h(t, n) {
         return {
             props: t,
             additional: n
         }
     }
 
-    function h(t) {
+    function f(t) {
         return {
             ref: t
         }
@@ -2576,17 +2576,17 @@
     }), r.Convert = r.DocumentationSubType = r.DocumentationContentType = void 0, (o || (r.DocumentationContentType = o = {})).Article = "Article", (i = a || (r.DocumentationSubType = a = {})).Article = "Article", i.Education = "Education", i.Guide = "Guide", i.Tutorial = "Tutorial", r.Convert = class {
         static toIndexDocumentModel(t) {
             var n;
-            return n = JSON.parse(t), c(n, h("IndexDocumentModel"), s)
+            return n = JSON.parse(t), c(n, f("IndexDocumentModel"), s)
         }
         static indexDocumentModelToJson(t) {
-            return JSON.stringify(c(t, h("IndexDocumentModel"), u), null, 2)
+            return JSON.stringify(c(t, f("IndexDocumentModel"), u), null, 2)
         }
     };
     let g = {
-        IndexDocumentModel: f([{
+        IndexDocumentModel: h([{
             json: "author",
             js: "author",
-            typ: m(void 0, h("Author"))
+            typ: m(void 0, f("Author"))
         }, {
             json: "clicks",
             js: "clicks",
@@ -2610,11 +2610,11 @@
         }, {
             json: "documentationContentType",
             js: "documentationContentType",
-            typ: h("DocumentationContentType")
+            typ: f("DocumentationContentType")
         }, {
             json: "documentationSubType",
             js: "documentationSubType",
-            typ: h("DocumentationSubType")
+            typ: f("DocumentationSubType")
         }, {
             json: "documentationThirdType",
             js: "documentationThirdType",
@@ -2686,7 +2686,7 @@
         }, {
             json: "thumbnails",
             js: "thumbnails",
-            typ: m(void 0, h("Thumbnails"))
+            typ: m(void 0, f("Thumbnails"))
         }, {
             json: "title",
             js: "title",
@@ -2700,7 +2700,7 @@
             js: "views",
             typ: m(void 0, 3.14)
         }], !1),
-        Author: f([{
+        Author: h([{
             json: "avatarUrl",
             js: "avatarUrl",
             typ: m(void 0, "")
@@ -2717,7 +2717,7 @@
             js: "userId",
             typ: m(void 0, "")
         }], "any"),
-        Thumbnails: f([{
+        Thumbnails: h([{
             json: "default",
             js: "default",
             typ: m(void 0, "any")
@@ -2819,14 +2819,14 @@
         }
     }
 
-    function f(t, n) {
+    function h(t, n) {
         return {
             props: t,
             additional: n
         }
     }
 
-    function h(t) {
+    function f(t) {
         return {
             ref: t
         }
@@ -2836,17 +2836,17 @@
     }), r.Convert = r.DocumentationThirdType = r.DocumentationType = void 0, (o || (r.DocumentationType = o = {})).CloudAPI = "CloudApi", (i = a || (r.DocumentationThirdType = a = {})).Delete = "Delete", i.Get = "Get", i.Head = "Head", i.Operation = "Operation", i.Options = "Options", i.Patch = "Patch", i.Post = "Post", i.Put = "Put", i.Schema = "Schema", r.Convert = class {
         static toIndexDocumentModel(t) {
             var n;
-            return n = JSON.parse(t), c(n, h("IndexDocumentModel"), s)
+            return n = JSON.parse(t), c(n, f("IndexDocumentModel"), s)
         }
         static indexDocumentModelToJson(t) {
-            return JSON.stringify(c(t, h("IndexDocumentModel"), u), null, 2)
+            return JSON.stringify(c(t, f("IndexDocumentModel"), u), null, 2)
         }
     };
     let g = {
-        IndexDocumentModel: f([{
+        IndexDocumentModel: h([{
             json: "author",
             js: "author",
-            typ: m(void 0, h("Author"))
+            typ: m(void 0, f("Author"))
         }, {
             json: "clicks",
             js: "clicks",
@@ -2870,15 +2870,15 @@
         }, {
             json: "documentationContentType",
             js: "documentationContentType",
-            typ: h("DocumentationType")
+            typ: f("DocumentationType")
         }, {
             json: "documentationSubType",
             js: "documentationSubType",
-            typ: h("DocumentationType")
+            typ: f("DocumentationType")
         }, {
             json: "documentationThirdType",
             js: "documentationThirdType",
-            typ: m(void 0, h("DocumentationThirdType"))
+            typ: m(void 0, f("DocumentationThirdType"))
         }, {
             json: "engagementScore",
             js: "engagementScore",
@@ -2946,7 +2946,7 @@
         }, {
             json: "thumbnails",
             js: "thumbnails",
-            typ: m(void 0, h("Thumbnails"))
+            typ: m(void 0, f("Thumbnails"))
         }, {
             json: "title",
             js: "title",
@@ -2960,7 +2960,7 @@
             js: "views",
             typ: m(void 0, 3.14)
         }], !1),
-        Author: f([{
+        Author: h([{
             json: "avatarUrl",
             js: "avatarUrl",
             typ: m(void 0, "")
@@ -2977,7 +2977,7 @@
             js: "userId",
             typ: m(void 0, "")
         }], "any"),
-        Thumbnails: f([{
+        Thumbnails: h([{
             json: "default",
             js: "default",
             typ: m(void 0, "any")
@@ -3072,14 +3072,14 @@
         }
     }
 
-    function f() {
+    function h() {
         for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
         return {
             unionMembers: n
         }
     }
 
-    function h(t, n) {
+    function f(t, n) {
         return {
             props: t,
             additional: n
@@ -3103,26 +3103,26 @@
         }
     };
     let y = {
-        IndexDocumentModel: h([{
+        IndexDocumentModel: f([{
             json: "author",
             js: "author",
-            typ: f(void 0, g("Author"))
+            typ: h(void 0, g("Author"))
         }, {
             json: "clicks",
             js: "clicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "commentsCount",
             js: "commentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "createdAtUtc",
             js: "createdAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "description",
             js: "description",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayedSummary",
             js: "displayedSummary",
@@ -3138,11 +3138,11 @@
         }, {
             json: "documentationThirdType",
             js: "documentationThirdType",
-            typ: f(void 0, g("DocumentationThirdType"))
+            typ: h(void 0, g("DocumentationThirdType"))
         }, {
             json: "engagementScore",
             js: "engagementScore",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "id",
             js: "id",
@@ -3154,11 +3154,11 @@
         }, {
             json: "labels",
             js: "labels",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "likes",
             js: "likes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "locale",
             js: "locale",
@@ -3166,23 +3166,23 @@
         }, {
             json: "rawClicks",
             js: "rawClicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawCommentsCount",
             js: "rawCommentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawLikes",
             js: "rawLikes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawViews",
             js: "rawViews",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "reference",
             js: "reference",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "resultTargetReference",
             js: "resultTargetReference",
@@ -3190,23 +3190,23 @@
         }, {
             json: "searchKeywords",
             js: "searchKeywords",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "suggest",
             js: "suggest",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "summary",
             js: "summary",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "tags",
             js: "tags",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "thumbnails",
             js: "thumbnails",
-            typ: f(void 0, g("Thumbnails"))
+            typ: h(void 0, g("Thumbnails"))
         }, {
             json: "title",
             js: "title",
@@ -3214,33 +3214,33 @@
         }, {
             json: "updatedAtUtc",
             js: "updatedAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "views",
             js: "views",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }], !1),
-        Author: h([{
+        Author: f([{
             json: "avatarUrl",
             js: "avatarUrl",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayName",
             js: "displayName",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "name",
             js: "name",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "userId",
             js: "userId",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }], "any"),
-        Thumbnails: h([{
+        Thumbnails: f([{
             json: "default",
             js: "default",
-            typ: f(void 0, "any")
+            typ: h(void 0, "any")
         }], "any"),
         DocumentationContentType: ["CloudApi"],
         DocumentationSubType: ["Domains"],
@@ -3333,14 +3333,14 @@
         }
     }
 
-    function f() {
+    function h() {
         for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
         return {
             unionMembers: n
         }
     }
 
-    function h(t, n) {
+    function f(t, n) {
         return {
             props: t,
             additional: n
@@ -3364,26 +3364,26 @@
         }
     };
     let y = {
-        IndexDocumentModel: h([{
+        IndexDocumentModel: f([{
             json: "author",
             js: "author",
-            typ: f(void 0, g("Author"))
+            typ: h(void 0, g("Author"))
         }, {
             json: "clicks",
             js: "clicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "commentsCount",
             js: "commentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "createdAtUtc",
             js: "createdAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "description",
             js: "description",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayedSummary",
             js: "displayedSummary",
@@ -3399,11 +3399,11 @@
         }, {
             json: "documentationThirdType",
             js: "documentationThirdType",
-            typ: f(void 0, g("DocumentationThirdType"))
+            typ: h(void 0, g("DocumentationThirdType"))
         }, {
             json: "engagementScore",
             js: "engagementScore",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "id",
             js: "id",
@@ -3415,11 +3415,11 @@
         }, {
             json: "labels",
             js: "labels",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "likes",
             js: "likes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "locale",
             js: "locale",
@@ -3427,23 +3427,23 @@
         }, {
             json: "rawClicks",
             js: "rawClicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawCommentsCount",
             js: "rawCommentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawLikes",
             js: "rawLikes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawViews",
             js: "rawViews",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "reference",
             js: "reference",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "resultTargetReference",
             js: "resultTargetReference",
@@ -3451,23 +3451,23 @@
         }, {
             json: "searchKeywords",
             js: "searchKeywords",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "suggest",
             js: "suggest",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "summary",
             js: "summary",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "tags",
             js: "tags",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "thumbnails",
             js: "thumbnails",
-            typ: f(void 0, g("Thumbnails"))
+            typ: h(void 0, g("Thumbnails"))
         }, {
             json: "title",
             js: "title",
@@ -3475,33 +3475,33 @@
         }, {
             json: "updatedAtUtc",
             js: "updatedAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "views",
             js: "views",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }], !1),
-        Author: h([{
+        Author: f([{
             json: "avatarUrl",
             js: "avatarUrl",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayName",
             js: "displayName",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "name",
             js: "name",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "userId",
             js: "userId",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }], "any"),
-        Thumbnails: h([{
+        Thumbnails: f([{
             json: "default",
             js: "default",
-            typ: f(void 0, "any")
+            typ: h(void 0, "any")
         }], "any"),
         DocumentationContentType: ["CloudApi"],
         DocumentationSubType: ["Features"],
@@ -3594,14 +3594,14 @@
         }
     }
 
-    function f() {
+    function h() {
         for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
         return {
             unionMembers: n
         }
     }
 
-    function h(t, n) {
+    function f(t, n) {
         return {
             props: t,
             additional: n
@@ -3625,26 +3625,26 @@
         }
     };
     let y = {
-        IndexDocumentModel: h([{
+        IndexDocumentModel: f([{
             json: "author",
             js: "author",
-            typ: f(void 0, g("Author"))
+            typ: h(void 0, g("Author"))
         }, {
             json: "clicks",
             js: "clicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "commentsCount",
             js: "commentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "createdAtUtc",
             js: "createdAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "description",
             js: "description",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayedSummary",
             js: "displayedSummary",
@@ -3660,11 +3660,11 @@
         }, {
             json: "documentationThirdType",
             js: "documentationThirdType",
-            typ: f(void 0, g("DocumentationThirdType"))
+            typ: h(void 0, g("DocumentationThirdType"))
         }, {
             json: "engagementScore",
             js: "engagementScore",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "id",
             js: "id",
@@ -3676,11 +3676,11 @@
         }, {
             json: "labels",
             js: "labels",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "likes",
             js: "likes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "locale",
             js: "locale",
@@ -3688,23 +3688,23 @@
         }, {
             json: "rawClicks",
             js: "rawClicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawCommentsCount",
             js: "rawCommentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawLikes",
             js: "rawLikes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawViews",
             js: "rawViews",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "reference",
             js: "reference",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "resultTargetReference",
             js: "resultTargetReference",
@@ -3712,23 +3712,23 @@
         }, {
             json: "searchKeywords",
             js: "searchKeywords",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "suggest",
             js: "suggest",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "summary",
             js: "summary",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "tags",
             js: "tags",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "thumbnails",
             js: "thumbnails",
-            typ: f(void 0, g("Thumbnails"))
+            typ: h(void 0, g("Thumbnails"))
         }, {
             json: "title",
             js: "title",
@@ -3736,33 +3736,33 @@
         }, {
             json: "updatedAtUtc",
             js: "updatedAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "views",
             js: "views",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }], !1),
-        Author: h([{
+        Author: f([{
             json: "avatarUrl",
             js: "avatarUrl",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayName",
             js: "displayName",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "name",
             js: "name",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "userId",
             js: "userId",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }], "any"),
-        Thumbnails: h([{
+        Thumbnails: f([{
             json: "default",
             js: "default",
-            typ: f(void 0, "any")
+            typ: h(void 0, "any")
         }], "any"),
         DocumentationContentType: ["CloudApi"],
         DocumentationSubType: ["Legacy"],
@@ -3849,13 +3849,13 @@
         }
     }
 
-    function f(t) {
+    function h(t) {
         return {
             arrayItems: t
         }
     }
 
-    function h() {
+    function f() {
         for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
         return {
             unionMembers: n
@@ -3889,23 +3889,23 @@
         IndexDocumentModel: g([{
             json: "author",
             js: "author",
-            typ: h(void 0, y("Author"))
+            typ: f(void 0, y("Author"))
         }, {
             json: "clicks",
             js: "clicks",
-            typ: h(void 0, 3.14)
+            typ: f(void 0, 3.14)
         }, {
             json: "commentsCount",
             js: "commentsCount",
-            typ: h(void 0, 3.14)
+            typ: f(void 0, 3.14)
         }, {
             json: "createdAtUtc",
             js: "createdAtUtc",
-            typ: h(void 0, Date)
+            typ: f(void 0, Date)
         }, {
             json: "description",
             js: "description",
-            typ: h(void 0, "")
+            typ: f(void 0, "")
         }, {
             json: "displayedSummary",
             js: "displayedSummary",
@@ -3921,11 +3921,11 @@
         }, {
             json: "documentationThirdType",
             js: "documentationThirdType",
-            typ: h(void 0, y("DocumentationThirdType"))
+            typ: f(void 0, y("DocumentationThirdType"))
         }, {
             json: "engagementScore",
             js: "engagementScore",
-            typ: h(void 0, 3.14)
+            typ: f(void 0, 3.14)
         }, {
             json: "id",
             js: "id",
@@ -3937,11 +3937,11 @@
         }, {
             json: "labels",
             js: "labels",
-            typ: h(void 0, f(""))
+            typ: f(void 0, h(""))
         }, {
             json: "likes",
             js: "likes",
-            typ: h(void 0, 3.14)
+            typ: f(void 0, 3.14)
         }, {
             json: "locale",
             js: "locale",
@@ -3949,23 +3949,23 @@
         }, {
             json: "rawClicks",
             js: "rawClicks",
-            typ: h(void 0, 3.14)
+            typ: f(void 0, 3.14)
         }, {
             json: "rawCommentsCount",
             js: "rawCommentsCount",
-            typ: h(void 0, 3.14)
+            typ: f(void 0, 3.14)
         }, {
             json: "rawLikes",
             js: "rawLikes",
-            typ: h(void 0, 3.14)
+            typ: f(void 0, 3.14)
         }, {
             json: "rawViews",
             js: "rawViews",
-            typ: h(void 0, 3.14)
+            typ: f(void 0, 3.14)
         }, {
             json: "reference",
             js: "reference",
-            typ: h(void 0, f(""))
+            typ: f(void 0, h(""))
         }, {
             json: "resultTargetReference",
             js: "resultTargetReference",
@@ -3973,23 +3973,23 @@
         }, {
             json: "searchKeywords",
             js: "searchKeywords",
-            typ: h(void 0, f(""))
+            typ: f(void 0, h(""))
         }, {
             json: "suggest",
             js: "suggest",
-            typ: h(void 0, f(""))
+            typ: f(void 0, h(""))
         }, {
             json: "summary",
             js: "summary",
-            typ: h(void 0, "")
+            typ: f(void 0, "")
         }, {
             json: "tags",
             js: "tags",
-            typ: h(void 0, f(""))
+            typ: f(void 0, h(""))
         }, {
             json: "thumbnails",
             js: "thumbnails",
-            typ: h(void 0, y("Thumbnails"))
+            typ: f(void 0, y("Thumbnails"))
         }, {
             json: "title",
             js: "title",
@@ -3997,33 +3997,33 @@
         }, {
             json: "updatedAtUtc",
             js: "updatedAtUtc",
-            typ: h(void 0, Date)
+            typ: f(void 0, Date)
         }, {
             json: "views",
             js: "views",
-            typ: h(void 0, 3.14)
+            typ: f(void 0, 3.14)
         }], !1),
         Author: g([{
             json: "avatarUrl",
             js: "avatarUrl",
-            typ: h(void 0, "")
+            typ: f(void 0, "")
         }, {
             json: "displayName",
             js: "displayName",
-            typ: h(void 0, "")
+            typ: f(void 0, "")
         }, {
             json: "name",
             js: "name",
-            typ: h(void 0, "")
+            typ: f(void 0, "")
         }, {
             json: "userId",
             js: "userId",
-            typ: h(void 0, "")
+            typ: f(void 0, "")
         }], "any"),
         Thumbnails: g([{
             json: "default",
             js: "default",
-            typ: h(void 0, "any")
+            typ: f(void 0, "any")
         }], "any"),
         DocumentationContentType: ["CloudApi"],
         DocumentationSubType: ["Instruction", "V1"],
@@ -4116,14 +4116,14 @@
         }
     }
 
-    function f() {
+    function h() {
         for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
         return {
             unionMembers: n
         }
     }
 
-    function h(t, n) {
+    function f(t, n) {
         return {
             props: t,
             additional: n
@@ -4147,26 +4147,26 @@
         }
     };
     let y = {
-        IndexDocumentModel: h([{
+        IndexDocumentModel: f([{
             json: "author",
             js: "author",
-            typ: f(void 0, g("Author"))
+            typ: h(void 0, g("Author"))
         }, {
             json: "clicks",
             js: "clicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "commentsCount",
             js: "commentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "createdAtUtc",
             js: "createdAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "description",
             js: "description",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayedSummary",
             js: "displayedSummary",
@@ -4182,11 +4182,11 @@
         }, {
             json: "documentationThirdType",
             js: "documentationThirdType",
-            typ: f(void 0, g("DocumentationThirdType"))
+            typ: h(void 0, g("DocumentationThirdType"))
         }, {
             json: "engagementScore",
             js: "engagementScore",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "id",
             js: "id",
@@ -4198,11 +4198,11 @@
         }, {
             json: "labels",
             js: "labels",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "likes",
             js: "likes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "locale",
             js: "locale",
@@ -4210,23 +4210,23 @@
         }, {
             json: "rawClicks",
             js: "rawClicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawCommentsCount",
             js: "rawCommentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawLikes",
             js: "rawLikes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawViews",
             js: "rawViews",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "reference",
             js: "reference",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "resultTargetReference",
             js: "resultTargetReference",
@@ -4234,23 +4234,23 @@
         }, {
             json: "searchKeywords",
             js: "searchKeywords",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "suggest",
             js: "suggest",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "summary",
             js: "summary",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "tags",
             js: "tags",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "thumbnails",
             js: "thumbnails",
-            typ: f(void 0, g("Thumbnails"))
+            typ: h(void 0, g("Thumbnails"))
         }, {
             json: "title",
             js: "title",
@@ -4258,33 +4258,33 @@
         }, {
             json: "updatedAtUtc",
             js: "updatedAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "views",
             js: "views",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }], !1),
-        Author: h([{
+        Author: f([{
             json: "avatarUrl",
             js: "avatarUrl",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayName",
             js: "displayName",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "name",
             js: "name",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "userId",
             js: "userId",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }], "any"),
-        Thumbnails: h([{
+        Thumbnails: f([{
             json: "default",
             js: "default",
-            typ: f(void 0, "any")
+            typ: h(void 0, "any")
         }], "any"),
         DocumentationContentType: ["CloudApi"],
         DocumentationSubType: ["V2"],
@@ -4384,14 +4384,14 @@
         }
     }
 
-    function f(t, n) {
+    function h(t, n) {
         return {
             props: t,
             additional: n
         }
     }
 
-    function h(t) {
+    function f(t) {
         return {
             ref: t
         }
@@ -4401,17 +4401,17 @@
     }), r.Convert = r.DocumentationSubType = r.DocumentationContentType = void 0, (o || (r.DocumentationContentType = o = {})).DevForum = "DevForum", (i = a || (r.DocumentationSubType = a = {})).Announcements = "Announcements", i.CommunityResources = "CommunityResources", i.CommunityTutorials = "CommunityTutorials", i.RobloxStaff = "RobloxStaff", r.Convert = class {
         static toIndexDocumentModel(t) {
             var n;
-            return n = JSON.parse(t), c(n, h("IndexDocumentModel"), s)
+            return n = JSON.parse(t), c(n, f("IndexDocumentModel"), s)
         }
         static indexDocumentModelToJson(t) {
-            return JSON.stringify(c(t, h("IndexDocumentModel"), u), null, 2)
+            return JSON.stringify(c(t, f("IndexDocumentModel"), u), null, 2)
         }
     };
     let g = {
-        IndexDocumentModel: f([{
+        IndexDocumentModel: h([{
             json: "author",
             js: "author",
-            typ: m(void 0, h("Author"))
+            typ: m(void 0, f("Author"))
         }, {
             json: "clicks",
             js: "clicks",
@@ -4435,11 +4435,11 @@
         }, {
             json: "documentationContentType",
             js: "documentationContentType",
-            typ: h("DocumentationContentType")
+            typ: f("DocumentationContentType")
         }, {
             json: "documentationSubType",
             js: "documentationSubType",
-            typ: h("DocumentationSubType")
+            typ: f("DocumentationSubType")
         }, {
             json: "documentationThirdType",
             js: "documentationThirdType",
@@ -4511,7 +4511,7 @@
         }, {
             json: "thumbnails",
             js: "thumbnails",
-            typ: m(void 0, h("Thumbnails"))
+            typ: m(void 0, f("Thumbnails"))
         }, {
             json: "title",
             js: "title",
@@ -4525,7 +4525,7 @@
             js: "views",
             typ: m(void 0, 3.14)
         }], !1),
-        Author: f([{
+        Author: h([{
             json: "avatarUrl",
             js: "avatarUrl",
             typ: m(void 0, "")
@@ -4542,7 +4542,7 @@
             js: "userId",
             typ: m(void 0, "")
         }], "any"),
-        Thumbnails: f([{
+        Thumbnails: h([{
             json: "default",
             js: "default",
             typ: m(void 0, "any")
@@ -4644,14 +4644,14 @@
         }
     }
 
-    function f(t, n) {
+    function h(t, n) {
         return {
             props: t,
             additional: n
         }
     }
 
-    function h(t) {
+    function f(t) {
         return {
             ref: t
         }
@@ -4661,17 +4661,17 @@
     }), r.Convert = r.DocumentationSubType = r.DocumentationContentType = void 0, (o || (r.DocumentationContentType = o = {})).CreatorHub = "CreatorHub", (i = a || (r.DocumentationSubType = a = {})).Experience = "Experience", i.Hub = "Hub", r.Convert = class {
         static toIndexDocumentModel(t) {
             var n;
-            return n = JSON.parse(t), c(n, h("IndexDocumentModel"), s)
+            return n = JSON.parse(t), c(n, f("IndexDocumentModel"), s)
         }
         static indexDocumentModelToJson(t) {
-            return JSON.stringify(c(t, h("IndexDocumentModel"), u), null, 2)
+            return JSON.stringify(c(t, f("IndexDocumentModel"), u), null, 2)
         }
     };
     let g = {
-        IndexDocumentModel: f([{
+        IndexDocumentModel: h([{
             json: "author",
             js: "author",
-            typ: m(void 0, h("Author"))
+            typ: m(void 0, f("Author"))
         }, {
             json: "breadcrumbs",
             js: "breadcrumbs",
@@ -4711,11 +4711,11 @@
         }, {
             json: "documentationContentType",
             js: "documentationContentType",
-            typ: h("DocumentationContentType")
+            typ: f("DocumentationContentType")
         }, {
             json: "documentationSubType",
             js: "documentationSubType",
-            typ: h("DocumentationSubType")
+            typ: f("DocumentationSubType")
         }, {
             json: "documentationThirdType",
             js: "documentationThirdType",
@@ -4815,7 +4815,7 @@
         }, {
             json: "thumbnails",
             js: "thumbnails",
-            typ: m(void 0, h("Thumbnails"))
+            typ: m(void 0, f("Thumbnails"))
         }, {
             json: "title",
             js: "title",
@@ -4833,7 +4833,7 @@
             js: "views",
             typ: m(void 0, 3.14)
         }], !1),
-        Author: f([{
+        Author: h([{
             json: "avatarUrl",
             js: "avatarUrl",
             typ: m(void 0, "")
@@ -4850,7 +4850,7 @@
             js: "userId",
             typ: m(void 0, "")
         }], "any"),
-        Thumbnails: f([{
+        Thumbnails: h([{
             json: "default",
             js: "default",
             typ: m(void 0, "any")
@@ -4945,14 +4945,14 @@
         }
     }
 
-    function f() {
+    function h() {
         for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
         return {
             unionMembers: n
         }
     }
 
-    function h(t, n) {
+    function f(t, n) {
         return {
             props: t,
             additional: n
@@ -4976,26 +4976,26 @@
         }
     };
     let y = {
-        IndexDocumentModel: h([{
+        IndexDocumentModel: f([{
             json: "author",
             js: "author",
-            typ: f(void 0, g("Author"))
+            typ: h(void 0, g("Author"))
         }, {
             json: "clicks",
             js: "clicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "commentsCount",
             js: "commentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "createdAtUtc",
             js: "createdAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "description",
             js: "description",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayedSummary",
             js: "displayedSummary",
@@ -5011,11 +5011,11 @@
         }, {
             json: "documentationThirdType",
             js: "documentationThirdType",
-            typ: f(void 0, g("DocumentationThirdType"))
+            typ: h(void 0, g("DocumentationThirdType"))
         }, {
             json: "engagementScore",
             js: "engagementScore",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "id",
             js: "id",
@@ -5027,11 +5027,11 @@
         }, {
             json: "labels",
             js: "labels",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "likes",
             js: "likes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "locale",
             js: "locale",
@@ -5039,23 +5039,23 @@
         }, {
             json: "rawClicks",
             js: "rawClicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawCommentsCount",
             js: "rawCommentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawLikes",
             js: "rawLikes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawViews",
             js: "rawViews",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "reference",
             js: "reference",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "resultTargetReference",
             js: "resultTargetReference",
@@ -5063,23 +5063,23 @@
         }, {
             json: "searchKeywords",
             js: "searchKeywords",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "suggest",
             js: "suggest",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "summary",
             js: "summary",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "tags",
             js: "tags",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "thumbnails",
             js: "thumbnails",
-            typ: f(void 0, g("Thumbnails"))
+            typ: h(void 0, g("Thumbnails"))
         }, {
             json: "title",
             js: "title",
@@ -5087,33 +5087,33 @@
         }, {
             json: "updatedAtUtc",
             js: "updatedAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "views",
             js: "views",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }], !1),
-        Author: h([{
+        Author: f([{
             json: "avatarUrl",
             js: "avatarUrl",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayName",
             js: "displayName",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "name",
             js: "name",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "userId",
             js: "userId",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }], "any"),
-        Thumbnails: h([{
+        Thumbnails: f([{
             json: "default",
             js: "default",
-            typ: f(void 0, "any")
+            typ: h(void 0, "any")
         }], "any"),
         DocumentationContentType: ["LuaApi"],
         DocumentationSubType: ["Class"],
@@ -5206,14 +5206,14 @@
         }
     }
 
-    function f() {
+    function h() {
         for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
         return {
             unionMembers: n
         }
     }
 
-    function h(t, n) {
+    function f(t, n) {
         return {
             props: t,
             additional: n
@@ -5237,26 +5237,26 @@
         }
     };
     let y = {
-        IndexDocumentModel: h([{
+        IndexDocumentModel: f([{
             json: "author",
             js: "author",
-            typ: f(void 0, g("Author"))
+            typ: h(void 0, g("Author"))
         }, {
             json: "clicks",
             js: "clicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "commentsCount",
             js: "commentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "createdAtUtc",
             js: "createdAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "description",
             js: "description",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayedSummary",
             js: "displayedSummary",
@@ -5272,11 +5272,11 @@
         }, {
             json: "documentationThirdType",
             js: "documentationThirdType",
-            typ: f(void 0, g("DocumentationThirdType"))
+            typ: h(void 0, g("DocumentationThirdType"))
         }, {
             json: "engagementScore",
             js: "engagementScore",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "id",
             js: "id",
@@ -5288,11 +5288,11 @@
         }, {
             json: "labels",
             js: "labels",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "likes",
             js: "likes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "locale",
             js: "locale",
@@ -5300,23 +5300,23 @@
         }, {
             json: "rawClicks",
             js: "rawClicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawCommentsCount",
             js: "rawCommentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawLikes",
             js: "rawLikes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawViews",
             js: "rawViews",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "reference",
             js: "reference",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "resultTargetReference",
             js: "resultTargetReference",
@@ -5324,23 +5324,23 @@
         }, {
             json: "searchKeywords",
             js: "searchKeywords",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "suggest",
             js: "suggest",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "summary",
             js: "summary",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "tags",
             js: "tags",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "thumbnails",
             js: "thumbnails",
-            typ: f(void 0, g("Thumbnails"))
+            typ: h(void 0, g("Thumbnails"))
         }, {
             json: "title",
             js: "title",
@@ -5348,33 +5348,33 @@
         }, {
             json: "updatedAtUtc",
             js: "updatedAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "views",
             js: "views",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }], !1),
-        Author: h([{
+        Author: f([{
             json: "avatarUrl",
             js: "avatarUrl",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayName",
             js: "displayName",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "name",
             js: "name",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "userId",
             js: "userId",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }], "any"),
-        Thumbnails: h([{
+        Thumbnails: f([{
             json: "default",
             js: "default",
-            typ: f(void 0, "any")
+            typ: h(void 0, "any")
         }], "any"),
         DocumentationContentType: ["LuaApi"],
         DocumentationSubType: ["DataType"],
@@ -5474,14 +5474,14 @@
         }
     }
 
-    function f(t, n) {
+    function h(t, n) {
         return {
             props: t,
             additional: n
         }
     }
 
-    function h(t) {
+    function f(t) {
         return {
             ref: t
         }
@@ -5491,17 +5491,17 @@
     }), r.Convert = r.DocumentationThirdType = r.DocumentationSubType = r.DocumentationContentType = void 0, (o || (r.DocumentationContentType = o = {})).LuaAPI = "LuaApi", (a || (r.DocumentationSubType = a = {})).Enum = "Enum", (i || (r.DocumentationThirdType = i = {})).EnumItem = "EnumItem", r.Convert = class {
         static toIndexDocumentModel(t) {
             var n;
-            return n = JSON.parse(t), c(n, h("IndexDocumentModel"), s)
+            return n = JSON.parse(t), c(n, f("IndexDocumentModel"), s)
         }
         static indexDocumentModelToJson(t) {
-            return JSON.stringify(c(t, h("IndexDocumentModel"), u), null, 2)
+            return JSON.stringify(c(t, f("IndexDocumentModel"), u), null, 2)
         }
     };
     let g = {
-        IndexDocumentModel: f([{
+        IndexDocumentModel: h([{
             json: "author",
             js: "author",
-            typ: m(void 0, h("Author"))
+            typ: m(void 0, f("Author"))
         }, {
             json: "clicks",
             js: "clicks",
@@ -5525,15 +5525,15 @@
         }, {
             json: "documentationContentType",
             js: "documentationContentType",
-            typ: h("DocumentationContentType")
+            typ: f("DocumentationContentType")
         }, {
             json: "documentationSubType",
             js: "documentationSubType",
-            typ: h("DocumentationSubType")
+            typ: f("DocumentationSubType")
         }, {
             json: "documentationThirdType",
             js: "documentationThirdType",
-            typ: m(void 0, h("DocumentationThirdType"))
+            typ: m(void 0, f("DocumentationThirdType"))
         }, {
             json: "engagementScore",
             js: "engagementScore",
@@ -5601,7 +5601,7 @@
         }, {
             json: "thumbnails",
             js: "thumbnails",
-            typ: m(void 0, h("Thumbnails"))
+            typ: m(void 0, f("Thumbnails"))
         }, {
             json: "title",
             js: "title",
@@ -5615,7 +5615,7 @@
             js: "views",
             typ: m(void 0, 3.14)
         }], !1),
-        Author: f([{
+        Author: h([{
             json: "avatarUrl",
             js: "avatarUrl",
             typ: m(void 0, "")
@@ -5632,7 +5632,7 @@
             js: "userId",
             typ: m(void 0, "")
         }], "any"),
-        Thumbnails: f([{
+        Thumbnails: h([{
             json: "default",
             js: "default",
             typ: m(void 0, "any")
@@ -5728,14 +5728,14 @@
         }
     }
 
-    function f() {
+    function h() {
         for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
         return {
             unionMembers: n
         }
     }
 
-    function h(t, n) {
+    function f(t, n) {
         return {
             props: t,
             additional: n
@@ -5759,26 +5759,26 @@
         }
     };
     let y = {
-        IndexDocumentModel: h([{
+        IndexDocumentModel: f([{
             json: "author",
             js: "author",
-            typ: f(void 0, g("Author"))
+            typ: h(void 0, g("Author"))
         }, {
             json: "clicks",
             js: "clicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "commentsCount",
             js: "commentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "createdAtUtc",
             js: "createdAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "description",
             js: "description",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayedSummary",
             js: "displayedSummary",
@@ -5794,11 +5794,11 @@
         }, {
             json: "documentationThirdType",
             js: "documentationThirdType",
-            typ: f(void 0, g("DocumentationThirdType"))
+            typ: h(void 0, g("DocumentationThirdType"))
         }, {
             json: "engagementScore",
             js: "engagementScore",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "id",
             js: "id",
@@ -5810,11 +5810,11 @@
         }, {
             json: "labels",
             js: "labels",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "likes",
             js: "likes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "locale",
             js: "locale",
@@ -5822,23 +5822,23 @@
         }, {
             json: "rawClicks",
             js: "rawClicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawCommentsCount",
             js: "rawCommentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawLikes",
             js: "rawLikes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawViews",
             js: "rawViews",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "reference",
             js: "reference",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "resultTargetReference",
             js: "resultTargetReference",
@@ -5846,23 +5846,23 @@
         }, {
             json: "searchKeywords",
             js: "searchKeywords",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "suggest",
             js: "suggest",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "summary",
             js: "summary",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "tags",
             js: "tags",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "thumbnails",
             js: "thumbnails",
-            typ: f(void 0, g("Thumbnails"))
+            typ: h(void 0, g("Thumbnails"))
         }, {
             json: "title",
             js: "title",
@@ -5870,33 +5870,33 @@
         }, {
             json: "updatedAtUtc",
             js: "updatedAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "views",
             js: "views",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }], !1),
-        Author: h([{
+        Author: f([{
             json: "avatarUrl",
             js: "avatarUrl",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayName",
             js: "displayName",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "name",
             js: "name",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "userId",
             js: "userId",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }], "any"),
-        Thumbnails: h([{
+        Thumbnails: f([{
             json: "default",
             js: "default",
-            typ: f(void 0, "any")
+            typ: h(void 0, "any")
         }], "any"),
         DocumentationContentType: ["LuaApi"],
         DocumentationSubType: ["Global"],
@@ -5989,14 +5989,14 @@
         }
     }
 
-    function f() {
+    function h() {
         for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
         return {
             unionMembers: n
         }
     }
 
-    function h(t, n) {
+    function f(t, n) {
         return {
             props: t,
             additional: n
@@ -6020,26 +6020,26 @@
         }
     };
     let y = {
-        IndexDocumentModel: h([{
+        IndexDocumentModel: f([{
             json: "author",
             js: "author",
-            typ: f(void 0, g("Author"))
+            typ: h(void 0, g("Author"))
         }, {
             json: "clicks",
             js: "clicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "commentsCount",
             js: "commentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "createdAtUtc",
             js: "createdAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "description",
             js: "description",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayedSummary",
             js: "displayedSummary",
@@ -6055,11 +6055,11 @@
         }, {
             json: "documentationThirdType",
             js: "documentationThirdType",
-            typ: f(void 0, g("DocumentationThirdType"))
+            typ: h(void 0, g("DocumentationThirdType"))
         }, {
             json: "engagementScore",
             js: "engagementScore",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "id",
             js: "id",
@@ -6071,11 +6071,11 @@
         }, {
             json: "labels",
             js: "labels",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "likes",
             js: "likes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "locale",
             js: "locale",
@@ -6083,23 +6083,23 @@
         }, {
             json: "rawClicks",
             js: "rawClicks",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawCommentsCount",
             js: "rawCommentsCount",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawLikes",
             js: "rawLikes",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "rawViews",
             js: "rawViews",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }, {
             json: "reference",
             js: "reference",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "resultTargetReference",
             js: "resultTargetReference",
@@ -6107,23 +6107,23 @@
         }, {
             json: "searchKeywords",
             js: "searchKeywords",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "suggest",
             js: "suggest",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "summary",
             js: "summary",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "tags",
             js: "tags",
-            typ: f(void 0, m(""))
+            typ: h(void 0, m(""))
         }, {
             json: "thumbnails",
             js: "thumbnails",
-            typ: f(void 0, g("Thumbnails"))
+            typ: h(void 0, g("Thumbnails"))
         }, {
             json: "title",
             js: "title",
@@ -6131,33 +6131,33 @@
         }, {
             json: "updatedAtUtc",
             js: "updatedAtUtc",
-            typ: f(void 0, Date)
+            typ: h(void 0, Date)
         }, {
             json: "views",
             js: "views",
-            typ: f(void 0, 3.14)
+            typ: h(void 0, 3.14)
         }], !1),
-        Author: h([{
+        Author: f([{
             json: "avatarUrl",
             js: "avatarUrl",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "displayName",
             js: "displayName",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "name",
             js: "name",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }, {
             json: "userId",
             js: "userId",
-            typ: f(void 0, "")
+            typ: h(void 0, "")
         }], "any"),
-        Thumbnails: h([{
+        Thumbnails: f([{
             json: "default",
             js: "default",
-            typ: f(void 0, "any")
+            typ: h(void 0, "any")
         }], "any"),
         DocumentationContentType: ["LuaApi"],
         DocumentationSubType: ["Library"],
@@ -6207,7 +6207,7 @@
         if (null === n) return null === t ? t : i(n, t, a, l);
         if (!1 === n) return i(n, t, a, l);
         for (;
-            "object" == typeof n && void 0 !== n.ref;) o = n.ref, n = h[n.ref];
+            "object" == typeof n && void 0 !== n.ref;) o = n.ref, n = f[n.ref];
         if (Array.isArray(n)) return -1 !== (s = n).indexOf(t) ? t : i(s.map(t => c(t)), t, a, l);
         if ("object" == typeof n) return n.hasOwnProperty("unionMembers") ? function(t, n) {
             let o = t.length;
@@ -6264,7 +6264,7 @@
         }
     }
 
-    function f(t) {
+    function h(t) {
         return {
             ref: t
         }
@@ -6274,17 +6274,17 @@
     }), r.Convert = r.DocumentationSubType = r.DocumentationContentType = void 0, (o || (r.DocumentationContentType = o = {})).Video = "Video", (a || (r.DocumentationSubType = a = {})).YouTubeVideo = "YouTubeVideo", r.Convert = class {
         static toIndexDocumentModel(t) {
             var n;
-            return n = JSON.parse(t), u(n, f("IndexDocumentModel"), l)
+            return n = JSON.parse(t), u(n, h("IndexDocumentModel"), l)
         }
         static indexDocumentModelToJson(t) {
-            return JSON.stringify(u(t, f("IndexDocumentModel"), s), null, 2)
+            return JSON.stringify(u(t, h("IndexDocumentModel"), s), null, 2)
         }
     };
-    let h = {
+    let f = {
         IndexDocumentModel: m([{
             json: "author",
             js: "author",
-            typ: p(void 0, f("Author"))
+            typ: p(void 0, h("Author"))
         }, {
             json: "clicks",
             js: "clicks",
@@ -6308,11 +6308,11 @@
         }, {
             json: "documentationContentType",
             js: "documentationContentType",
-            typ: f("DocumentationContentType")
+            typ: h("DocumentationContentType")
         }, {
             json: "documentationSubType",
             js: "documentationSubType",
-            typ: f("DocumentationSubType")
+            typ: h("DocumentationSubType")
         }, {
             json: "documentationThirdType",
             js: "documentationThirdType",
@@ -6384,7 +6384,7 @@
         }, {
             json: "thumbnails",
             js: "thumbnails",
-            typ: p(void 0, f("Thumbnails"))
+            typ: p(void 0, h("Thumbnails"))
         }, {
             json: "title",
             js: "title",
@@ -6645,13 +6645,13 @@
         }
     }
 
-    function f(t, r) {
+    function h(t, r) {
         return null == t ? t : {
             data: (0, n.exists)(t, "data") ? t.data.map(d) : void 0
         }
     }
     "function" == typeof SuppressedError && SuppressedError;
-    var h = function(t) {
+    var f = function(t) {
             function r() {
                 return null !== t && t.apply(this, arguments) || this
             }
@@ -6782,7 +6782,7 @@
                                 }, r)];
                             case 1:
                                 return l = i.sent(), [2, new n.JSONApiResponse(l, function(t) {
-                                    return f(t)
+                                    return h(t)
                                 })]
                         }
                     })
@@ -6893,7 +6893,7 @@
                                 }, r)];
                             case 1:
                                 return l = i.sent(), [2, new n.JSONApiResponse(l, function(t) {
-                                    return f(t)
+                                    return h(t)
                                 })]
                         }
                     })
@@ -7054,8 +7054,8 @@
                 })
             }, r
         }(n.BaseAPI));
-    t.s(["CountryRegionsApi", 0, h, "LocaleApi", 0, g])
-}, 874286, 324201, 263692, 710319, 668833, 773470, 797117, 500192, 157924, 470527, 616420, 332719, t => {
+    t.s(["CountryRegionsApi", 0, f, "LocaleApi", 0, g])
+}, 874286, 710319, 324201, 668833, 773470, 797117, 500192, 157924, 470527, 616420, 332719, t => {
     "use strict";
     var n = t.i(197649),
         r = t.i(416340);
@@ -7083,148 +7083,8 @@
                 ...c
             })
         });
-    a.displayName = "Icon", t.s(["Icon", 0, a], 874286);
-    let i = "relative clip group/interactable focus-visible:outline-focus disabled:outline-none",
-        l = t => {
-            let {
-                className: o
-            } = t;
-            return r.default.createElement("div", {
-                "aria-hidden": !0,
-                "data-testid": "foundation-web-state-layer",
-                className: (0, n.default)("absolute inset-[0] transition-colors group-hover/interactable:bg-[var(--color-state-hover)] group-active/interactable:bg-[var(--color-state-press)] group-disabled/interactable:bg-none", o)
-            })
-        },
-        s = "opacity-[0.5]",
-        u = t => {
-            let {
-                width: n,
-                height: o
-            } = t;
-            return r.default.createElement("svg", {
-                className: "foundation-web-loading-spinner",
-                width: n,
-                height: o,
-                viewBox: "0 0 20 20",
-                fill: "none",
-                xmlns: "http://www.w3.org/2000/svg"
-            }, r.default.createElement("path", {
-                fillRule: "evenodd",
-                clipRule: "evenodd",
-                fill: "currentColor",
-                d: "M10 2.75C8.56609 2.75 7.16438 3.1752 5.97212 3.97185C4.77986 4.76849 3.85061 5.90078 3.30188 7.22554C2.75314 8.55031 2.60957 10.008 2.88931 11.4144C3.16905 12.8208 3.85955 14.1126 4.87348 15.1265C5.88741 16.1405 7.17924 16.831 8.5856 17.1107C9.99196 17.3904 11.4497 17.2469 12.7745 16.6981C14.0992 16.1494 15.2315 15.2201 16.0282 14.0279C16.8248 12.8356 17.25 11.4339 17.25 10C17.25 9.58579 17.5858 9.25 18 9.25C18.4142 9.25 18.75 9.58579 18.75 10C18.75 11.7306 18.2368 13.4223 17.2754 14.8612C16.3139 16.3002 14.9473 17.4217 13.3485 18.0839C11.7496 18.7462 9.9903 18.9195 8.29296 18.5819C6.59563 18.2443 5.03653 17.4109 3.81282 16.1872C2.58911 14.9635 1.75575 13.4044 1.41813 11.707C1.08051 10.0097 1.25379 8.25037 1.91606 6.65152C2.57832 5.05267 3.69983 3.6861 5.13876 2.72464C6.57769 1.76318 8.26942 1.25 10 1.25C10.4142 1.25 10.75 1.58579 10.75 2C10.75 2.41421 10.4142 2.75 10 2.75Z"
-            }))
-        };
-    var c = t.i(23342);
-    let d = {
-            Large: 24,
-            Medium: 20,
-            Small: 16,
-            XSmall: 12
-        },
-        p = {
-            Large: ["radius-medium", "text-label-large", "height-1200", "padding-x-medium"],
-            Medium: ["radius-medium", "text-label-medium", "height-1000", "padding-x-medium"],
-            Small: ["radius-medium", "text-label-small", "height-800", "padding-x-small"],
-            XSmall: ["radius-small", "text-label-small", "height-600", "padding-x-small"]
-        },
-        m = {
-            Emphasis: ["bg-action-emphasis", "content-action-emphasis"],
-            Standard: ["bg-action-standard", "content-action-standard"],
-            SoftEmphasis: ["bg-action-soft-emphasis", "content-action-soft-emphasis"],
-            Utility: ["bg-action-subtle", "content-action-standard"],
-            Link: ["bg-action-link", "content-system-emphasis"],
-            Alert: ["bg-action-alert", "content-action-alert"],
-            ActionUtility: ["bg-action-subtle", "content-action-standard"]
-        },
-        f = {
-            Emphasis: ["bg-action-standard", "content-action-standard"],
-            Standard: ["bg-action-standard", "content-action-standard"],
-            SoftEmphasis: ["bg-action-standard", "content-action-standard"],
-            Utility: ["bg-action-subtle", "content-action-standard"],
-            Link: ["bg-action-link", "content-system-emphasis"],
-            Alert: ["bg-action-standard", "content-action-standard"],
-            ActionUtility: ["bg-action-subtle", "content-action-standard"]
-        },
-        h = (0, r.forwardRef)((t, o) => {
-            let {
-                children: h,
-                className: g,
-                style: y,
-                isDisabled: v = !1,
-                isLoading: b = !1,
-                icon: C,
-                size: E = "Large",
-                variant: w = "Emphasis",
-                asChild: S,
-                ...I
-            } = t, x = (0, n.default)("foundation-web-button", v ? s : [i, "cursor-pointer"], "relative flex items-center justify-center stroke-none padding-y-none select-none", p[E], v ? f[w] : m[w], g), A = {
-                textDecoration: "none",
-                ...y
-            }, T = t => r.default.createElement(r.default.Fragment, null, r.default.createElement(l, null), b && r.default.createElement("div", {
-                "aria-hidden": "true",
-                className: "absolute flex"
-            }, r.default.createElement(u, {
-                width: d[E],
-                height: d[E]
-            })), r.default.createElement("span", {
-                className: (0, n.default)("flex items-center min-width-0", "Large" === E || "Medium" === E ? "gap-small" : "gap-xsmall", b && "invisible")
-            }, C && r.default.createElement(a, {
-                name: C,
-                size: E
-            }), r.default.createElement("span", {
-                className: "padding-y-xsmall text-truncate-end text-no-wrap"
-            }, t)));
-            if (S) {
-                let {
-                    as: t,
-                    ...n
-                } = I, a = r.default.Children.only(h);
-                return r.default.createElement(c.Slot, {
-                    ref: o,
-                    ...n,
-                    className: x,
-                    style: A,
-                    "aria-disabled": v || void 0
-                }, r.default.cloneElement(a, {}, T(a.props.children)))
-            }
-            if ("a" === I.as) {
-                let {
-                    as: t,
-                    href: n,
-                    ...a
-                } = I;
-                return r.default.createElement("a", {
-                    ref: o,
-                    ...a,
-                    "aria-disabled": v,
-                    href: v ? void 0 : n,
-                    className: x,
-                    style: A
-                }, T(h))
-            }
-            let {
-                as: k,
-                ...D
-            } = I;
-            return r.default.createElement("button", {
-                ref: o,
-                type: "button",
-                ...D,
-                disabled: v,
-                className: x,
-                style: A
-            }, T(h))
-        });
-    t.s(["Button", 0, h], 324201);
-    let g = 0,
-        y = function() {
-            let t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "«r",
-                n = (0, r.useRef)();
-            return n.current || (g += 1, n.current = "".concat(t).concat(g)), n.current
-        };
 
-    function v(t) {
+    function i(t) {
         let {
             className: o
         } = t;
@@ -7243,220 +7103,192 @@
             fill: "currentColor"
         }))
     }
-    let b = {
-            Small: "padding-xsmall",
-            Medium: "padding-small",
-            Large: "padding-medium"
-        },
-        C = {
-            Utility: "bg-action-link",
-            OverMedia: "bg-over-media-100"
-        },
-        E = t => {
-            let {
-                variant: o,
-                size: s,
-                isCircular: u,
-                className: c,
-                ...d
-            } = t;
-            return r.default.createElement("button", {
-                type: "button",
-                className: (0, n.default)("foundation-web-close-affordance flex stroke-none bg-none cursor-pointer", i, C[o], b[s], u && "radius-circle", c),
-                ...d
-            }, r.default.createElement(l, null), r.default.createElement(a, {
-                name: "icon-regular-x",
-                size: s
-            }))
-        };
-    var w = t.i(167878);
-    let S = ["dark-theme", "light-theme", "system-theme"];
-    var I = t.i(734463);
-    let x = r.createContext({
-            hasCloseAffordance: !1,
-            titleId: "",
-            descriptionId: ""
-        }),
-        A = t => {
-            var n, r, o, a, i;
-            let l = null != (n = null == (o = (a = window).matchMedia) || null == (r = o.call(a, "(pointer: coarse)")) ? void 0 : r.matches) && n,
-                s = null == (i = document.activeElement) ? void 0 : i.matches(":focus-visible");
-            l && !s && t.preventDefault()
-        };
-    t.s(["EducationalTooltip", 0, t => {
-        let {
-            open: n,
-            defaultOpen: o,
-            onOpenChange: a,
-            children: i
-        } = t;
-        return r.createElement(I.Root, {
-            open: n,
-            defaultOpen: o,
-            onOpenChange: a
-        }, i)
-    }, "EducationalTooltipBody", 0, t => {
-        let {
-            children: o,
-            className: a
-        } = t, {
-            hasCloseAffordance: i
-        } = r.useContext(x);
-        return r.createElement("div", {
-            className: (0, n.default)("padding-medium", i && "padding-right-[var(--size-1100)]", a)
-        }, o)
-    }, "EducationalTooltipContent", 0, t => {
-        let {
-            position: o,
-            hasBeak: a = !0,
-            hasCloseAffordance: i,
-            closeLabel: l,
-            onOpenAutoFocus: s,
-            className: u,
-            children: c
-        } = t, [d, p] = o.split("-"), m = "dark" === function() {
-            let t = (0, w.useMediaQuery)("(prefers-color-scheme: dark)", {
-                    defaultValue: !1,
-                    initializeWithValue: !1
-                }),
-                n = (0, r.useCallback)(() => {
-                    if ("u" > typeof document) {
-                        let t = [document.body, document.documentElement].find(t => S.some(n => t.classList.contains(n)));
-                        if (null == t ? void 0 : t.classList.contains("dark-theme")) return "dark";
-                        if (null == t ? void 0 : t.classList.contains("light-theme")) return "light"
-                    }
-                    return t ? "dark" : "light"
-                }, [t]),
-                [o, a] = (0, r.useState)("light");
-            return (0, r.useEffect)(() => {
-                if (a(n()), "u" < typeof document || "u" < typeof MutationObserver) return;
-                let t = new MutationObserver(() => {
-                        a(n())
-                    }),
-                    r = {
-                        attributes: !0,
-                        attributeFilter: ["class"]
-                    };
-                return t.observe(document.documentElement, r), t.observe(document.body, r), () => {
-                    t.disconnect()
-                }
-            }, [n]), o
-        }() ? "light-theme" : "dark-theme", f = y("fui-edu-tooltip"), h = "".concat(f, "-title"), g = "".concat(f, "-desc"), b = r.useMemo(() => ({
-            hasCloseAffordance: !!i,
-            titleId: h,
-            descriptionId: g
-        }), [i, h, g]);
-        return r.createElement(I.Portal, null, r.createElement(I.Content, {
-            side: d,
-            align: p,
-            sideOffset: 6,
-            "aria-labelledby": h,
-            "aria-describedby": g,
-            onOpenAutoFocus: null != s ? s : A,
-            className: (0, n.default)(m, "relative foundation-web-portal-zindex bg-surface-100 radius-medium shadow-transient-low", "min-width-[240px] max-width-[296px]", u)
-        }, a && r.createElement(I.Arrow, {
-            asChild: !0
-        }, r.createElement("div", {
-            style: {
-                color: "var(--color-surface-100)"
-            }
-        }, r.createElement(v, null))), i && r.createElement("div", {
-            className: "absolute top-[var(--size-50)] right-[var(--size-100)]"
-        }, r.createElement(I.Close, {
-            asChild: !0
-        }, r.createElement(E, {
-            variant: "Utility",
-            size: "Medium",
-            isCircular: !0,
-            "aria-label": l || ""
-        }))), r.createElement(x.Provider, {
-            value: b
-        }, c)))
-    }, "EducationalTooltipDescription", 0, t => {
-        let {
-            children: o,
-            className: a
-        } = t, {
-            descriptionId: i
-        } = r.useContext(x);
-        return r.createElement("div", {
-            id: i,
-            className: (0, n.default)("text-body-medium content-default padding-top-xsmall", a)
-        }, o)
-    }, "EducationalTooltipTitle", 0, t => {
-        let {
-            children: o,
-            className: a
-        } = t, {
-            titleId: i
-        } = r.useContext(x);
-        return r.createElement("div", {
-            id: i,
-            className: (0, n.default)("text-title-large content-emphasis", a)
-        }, o)
-    }, "EducationalTooltipTrigger", 0, t => {
-        let {
-            asChild: n,
-            className: o,
-            children: a
-        } = t;
-        return r.createElement(I.Trigger, {
-            asChild: n,
-            className: o
-        }, a)
-    }], 263692);
-    var T = t.i(989665);
+    a.displayName = "Icon", t.s(["Icon", 0, a], 874286);
+    var l = t.i(989665);
 
-    function k(t) {
+    function s(t) {
         let {
             position: o,
             hasBeak: a = !0,
-            title: i,
-            description: l,
-            ariaLabel: s,
-            delayDurationMs: u = 500,
-            children: c,
-            open: d,
-            onOpenChange: p,
-            contentClassName: m
-        } = t, [f, h] = o.split("-"), g = null != s ? s : "string" == typeof i && null == l ? i : void 0;
-        return r.createElement(T.Provider, {
-            delayDuration: u
-        }, r.createElement(T.Root, {
-            open: d,
-            onOpenChange: p
-        }, c, r.createElement(T.Portal, null, r.createElement(T.Content, {
-            side: f,
-            align: h,
-            "aria-label": g,
-            className: (0, n.default)("foundation-web-portal-zindex bg-inverse-surface-0 padding-y-xsmall padding-x-small radius-small shadow-transient-low", m),
+            title: s,
+            description: u,
+            ariaLabel: c,
+            delayDurationMs: d = 500,
+            children: p,
+            open: m,
+            onOpenChange: h,
+            contentClassName: f
+        } = t, [g, y] = o.split("-"), v = null != c ? c : "string" == typeof s && null == u ? s : void 0;
+        return r.createElement(l.Provider, {
+            delayDuration: d
+        }, r.createElement(l.Root, {
+            open: m,
+            onOpenChange: h
+        }, p, r.createElement(l.Portal, null, r.createElement(l.Content, {
+            side: g,
+            align: y,
+            "aria-label": v,
+            className: (0, n.default)("foundation-web-portal-zindex bg-inverse-surface-0 padding-y-xsmall padding-x-small radius-small shadow-transient-low", f),
             sideOffset: 5
-        }, a && r.createElement(T.Arrow, {
+        }, a && r.createElement(l.Arrow, {
             asChild: !0
-        }, r.createElement(v, {
+        }, r.createElement(i, {
             className: "content-[var(--inverse-surface-0)]"
         })), r.createElement("div", {
             className: "flex flex-col text-truncate-split"
         }, r.createElement("div", {
             className: "text-caption-medium content-inverse-default"
-        }, i), l && r.createElement("div", {
+        }, s), u && r.createElement("div", {
             className: "text-body-small padding-top-xsmall content-inverse-default max-width-[calc(var(--size-100)*50)]"
-        }, l))))))
+        }, u))))))
     }
 
-    function D(t) {
+    function u(t) {
         let {
             children: n,
             asChild: o,
             className: a
         } = t;
-        return r.createElement(T.Trigger, {
+        return r.createElement(l.Trigger, {
             asChild: o,
             className: a
         }, n)
     }
-    t.s(["Tooltip", 0, k, "TooltipTrigger", 0, D], 710319);
-    let j = (0, r.forwardRef)((t, o) => {
+    t.s(["Tooltip", 0, s, "TooltipTrigger", 0, u], 710319);
+    let c = "relative clip group/interactable focus-visible:outline-focus disabled:outline-none",
+        d = t => {
+            let {
+                className: o
+            } = t;
+            return r.default.createElement("div", {
+                "aria-hidden": !0,
+                "data-testid": "foundation-web-state-layer",
+                className: (0, n.default)("absolute inset-[0] transition-colors group-hover/interactable:bg-[var(--color-state-hover)] group-active/interactable:bg-[var(--color-state-press)] group-disabled/interactable:bg-none", o)
+            })
+        },
+        p = "opacity-[0.5]",
+        m = t => {
+            let {
+                width: n,
+                height: o
+            } = t;
+            return r.default.createElement("svg", {
+                className: "foundation-web-loading-spinner",
+                width: n,
+                height: o,
+                viewBox: "0 0 20 20",
+                fill: "none",
+                xmlns: "http://www.w3.org/2000/svg"
+            }, r.default.createElement("path", {
+                fillRule: "evenodd",
+                clipRule: "evenodd",
+                fill: "currentColor",
+                d: "M10 2.75C8.56609 2.75 7.16438 3.1752 5.97212 3.97185C4.77986 4.76849 3.85061 5.90078 3.30188 7.22554C2.75314 8.55031 2.60957 10.008 2.88931 11.4144C3.16905 12.8208 3.85955 14.1126 4.87348 15.1265C5.88741 16.1405 7.17924 16.831 8.5856 17.1107C9.99196 17.3904 11.4497 17.2469 12.7745 16.6981C14.0992 16.1494 15.2315 15.2201 16.0282 14.0279C16.8248 12.8356 17.25 11.4339 17.25 10C17.25 9.58579 17.5858 9.25 18 9.25C18.4142 9.25 18.75 9.58579 18.75 10C18.75 11.7306 18.2368 13.4223 17.2754 14.8612C16.3139 16.3002 14.9473 17.4217 13.3485 18.0839C11.7496 18.7462 9.9903 18.9195 8.29296 18.5819C6.59563 18.2443 5.03653 17.4109 3.81282 16.1872C2.58911 14.9635 1.75575 13.4044 1.41813 11.707C1.08051 10.0097 1.25379 8.25037 1.91606 6.65152C2.57832 5.05267 3.69983 3.6861 5.13876 2.72464C6.57769 1.76318 8.26942 1.25 10 1.25C10.4142 1.25 10.75 1.58579 10.75 2C10.75 2.41421 10.4142 2.75 10 2.75Z"
+            }))
+        };
+    var h = t.i(23342);
+    let f = {
+            Large: 24,
+            Medium: 20,
+            Small: 16,
+            XSmall: 12
+        },
+        g = {
+            Large: ["radius-medium", "text-label-large", "height-1200", "padding-x-medium"],
+            Medium: ["radius-medium", "text-label-medium", "height-1000", "padding-x-medium"],
+            Small: ["radius-medium", "text-label-small", "height-800", "padding-x-small"],
+            XSmall: ["radius-small", "text-label-small", "height-600", "padding-x-small"]
+        },
+        y = {
+            Emphasis: ["bg-action-emphasis", "content-action-emphasis"],
+            Standard: ["bg-action-standard", "content-action-standard"],
+            SoftEmphasis: ["bg-action-soft-emphasis", "content-action-soft-emphasis"],
+            Utility: ["bg-action-subtle", "content-action-standard"],
+            Link: ["bg-action-link", "content-system-emphasis"],
+            Alert: ["bg-action-alert", "content-action-alert"],
+            ActionUtility: ["bg-action-subtle", "content-action-standard"]
+        },
+        v = {
+            Emphasis: ["bg-action-standard", "content-action-standard"],
+            Standard: ["bg-action-standard", "content-action-standard"],
+            SoftEmphasis: ["bg-action-standard", "content-action-standard"],
+            Utility: ["bg-action-subtle", "content-action-standard"],
+            Link: ["bg-action-link", "content-system-emphasis"],
+            Alert: ["bg-action-standard", "content-action-standard"],
+            ActionUtility: ["bg-action-subtle", "content-action-standard"]
+        },
+        b = (0, r.forwardRef)((t, o) => {
+            let {
+                children: i,
+                className: l,
+                style: s,
+                isDisabled: u = !1,
+                isLoading: b = !1,
+                icon: C,
+                size: E = "Large",
+                variant: w = "Emphasis",
+                asChild: S,
+                ...I
+            } = t, x = (0, n.default)("foundation-web-button", u ? p : [c, "cursor-pointer"], "relative flex items-center justify-center stroke-none padding-y-none select-none", g[E], u ? v[w] : y[w], l), A = {
+                textDecoration: "none",
+                ...s
+            }, T = t => r.default.createElement(r.default.Fragment, null, r.default.createElement(d, null), b && r.default.createElement("div", {
+                "aria-hidden": "true",
+                className: "absolute flex"
+            }, r.default.createElement(m, {
+                width: f[E],
+                height: f[E]
+            })), r.default.createElement("span", {
+                className: (0, n.default)("flex items-center min-width-0", "Large" === E || "Medium" === E ? "gap-small" : "gap-xsmall", b && "invisible")
+            }, C && r.default.createElement(a, {
+                name: C,
+                size: E
+            }), r.default.createElement("span", {
+                className: "padding-y-xsmall text-truncate-end text-no-wrap"
+            }, t)));
+            if (S) {
+                let {
+                    as: t,
+                    ...n
+                } = I, a = r.default.Children.only(i);
+                return r.default.createElement(h.Slot, {
+                    ref: o,
+                    ...n,
+                    className: x,
+                    style: A,
+                    "aria-disabled": u || void 0
+                }, r.default.cloneElement(a, {}, T(a.props.children)))
+            }
+            if ("a" === I.as) {
+                let {
+                    as: t,
+                    href: n,
+                    ...a
+                } = I;
+                return r.default.createElement("a", {
+                    ref: o,
+                    ...a,
+                    "aria-disabled": u,
+                    href: u ? void 0 : n,
+                    className: x,
+                    style: A
+                }, T(i))
+            }
+            let {
+                as: k,
+                ...D
+            } = I;
+            return r.default.createElement("button", {
+                ref: o,
+                type: "button",
+                ...D,
+                disabled: u,
+                className: x,
+                style: A
+            }, T(i))
+        });
+    t.s(["Button", 0, b], 324201);
+    let C = (0, r.forwardRef)((t, o) => {
         let {
             className: a,
             style: i,
@@ -7503,91 +7335,118 @@
             className: (0, n.default)("stroke-default self-stretch", a)
         })
     });
-    j.displayName = "Divider", t.s(["Divider", 0, j], 668833);
-    let R = (0, r.forwardRef)((t, o) => {
-        let {
-            title: i,
-            icon: l,
-            actionLabel: s,
-            onAction: u,
-            actions: c,
-            onClose: d,
-            closeIconAriaLabel: p = "Dismiss snackbar",
-            shouldAutoDismiss: m,
-            autoDismissDurationMs: f,
-            className: g,
-            ...y
-        } = t, [v, b] = (0, r.useState)("enter"), C = (0, r.useRef)(void 0), w = (0, r.useRef)(void 0), S = (0, r.useRef)(void 0), I = (0, r.useRef)(null), x = null != c ? c : s && u && r.default.createElement(h, {
-            size: "Small",
-            variant: "Utility",
-            className: "content-inverse-emphasis",
-            onClick: u,
-            ref: I
-        }, s), A = !!x, T = i.length > 80, k = null == m || m, D = 4e3;
-        A && (D = T ? 1e4 : 7e3);
-        let j = null != f ? f : D,
-            R = (0, r.useCallback)(() => {
-                "exit" !== v && (b("exit"), void 0 !== w.current && (window.clearTimeout(w.current), w.current = void 0), S.current = window.setTimeout(() => {
-                    null == d || d()
-                }, 150))
-            }, [d, v]);
-        (0, r.useEffect)(() => (C.current = window.requestAnimationFrame(() => {
-            b("idle")
-        }), () => {
-            void 0 !== C.current && window.cancelAnimationFrame(C.current)
-        }), []), (0, r.useEffect)(() => {
-            void 0 !== w.current && (window.clearTimeout(w.current), w.current = void 0), k && "exit" !== v && (w.current = window.setTimeout(() => {
-                R()
-            }, j))
-        }, [j, k, v, R]), (0, r.useEffect)(() => {
-            var t;
-            A && (null == (t = I.current) || t.focus())
-        }, [A]), (0, r.useEffect)(() => () => {
-            void 0 !== w.current && window.clearTimeout(w.current), void 0 !== S.current && window.clearTimeout(S.current), void 0 !== C.current && window.cancelAnimationFrame(C.current)
-        }, []);
-        let L = {
-                position: "fixed",
-                left: "50%",
-                bottom: "max(var(--padding-xxlarge, 32px), env(safe-area-inset-bottom))",
-                transform: "translate(-50%, ".concat("idle" === v ? "0" : "120%", ")"),
-                zIndex: "var(--foundation-portal-zindex, 9999)"
-            },
-            _ = y.style ? {
-                ...L,
-                ...y.style
-            } : L;
-        return r.default.createElement("div", {
-            ref: o,
-            role: "status",
-            "aria-live": "polite",
-            className: (0, n.default)("flex items-center gap-xxlarge radius-medium shadow-transient-low bg-inverse-surface-0 padding-x-medium padding-y-medium stroke-standard shrink-0", "max-width-[480px] min-height-[48px]", "min-width-[min(100%-max(2_*_var(--margin-small),env(safe-area-inset-left)+env(safe-area-inset-right)),393px)]", "foundation-web-portal-zindex pointer-events-auto", "exit" === v ? "ease-standard-in" : "ease-standard-out", g),
-            style: {
-                ..._,
-                transitionDuration: "".concat("exit" === v ? 150 : 200, "ms"),
-                transitionProperty: "transform"
-            },
-            ...y
-        }, r.default.createElement("div", {
-            className: "flex items-center gap-medium grow-1 basis-0 min-h-[40px]"
-        }, l && r.default.createElement(a, {
-            name: l,
-            size: "Small",
-            className: "shrink-0 content-inverse-emphasis"
-        }), r.default.createElement("div", {
-            className: "grow-1 basis-0 text-caption-large content-inverse-emphasis text-truncate-end"
-        }, i)), r.default.createElement("div", {
-            className: "flex items-center justify-end gap-small shrink-0"
-        }, x, d && r.default.createElement(E, {
-            variant: "Utility",
-            size: "Small",
-            isCircular: !0,
-            className: "content-inverse-emphasis",
-            "aria-label": p,
-            onClick: R
-        })))
-    });
-    t.s(["Snackbar", 0, R], 773470);
-    let L = t => {
+    C.displayName = "Divider", t.s(["Divider", 0, C], 668833);
+    let E = {
+            Small: "padding-xsmall",
+            Medium: "padding-small",
+            Large: "padding-medium"
+        },
+        w = {
+            Utility: "bg-action-link",
+            OverMedia: "bg-over-media-100"
+        },
+        S = t => {
+            let {
+                variant: o,
+                size: i,
+                isCircular: l,
+                className: s,
+                ...u
+            } = t;
+            return r.default.createElement("button", {
+                type: "button",
+                className: (0, n.default)("foundation-web-close-affordance flex stroke-none bg-none cursor-pointer", c, w[o], E[i], l && "radius-circle", s),
+                ...u
+            }, r.default.createElement(d, null), r.default.createElement(a, {
+                name: "icon-regular-x",
+                size: i
+            }))
+        },
+        I = (0, r.forwardRef)((t, o) => {
+            let {
+                title: i,
+                icon: l,
+                actionLabel: s,
+                onAction: u,
+                actions: c,
+                onClose: d,
+                closeIconAriaLabel: p = "Dismiss snackbar",
+                shouldAutoDismiss: m,
+                autoDismissDurationMs: h,
+                className: f,
+                ...g
+            } = t, [y, v] = (0, r.useState)("enter"), C = (0, r.useRef)(void 0), E = (0, r.useRef)(void 0), w = (0, r.useRef)(void 0), I = (0, r.useRef)(null), x = null != c ? c : s && u && r.default.createElement(b, {
+                size: "Small",
+                variant: "Utility",
+                className: "content-inverse-emphasis",
+                onClick: u,
+                ref: I
+            }, s), A = !!x, T = i.length > 80, k = null == m || m, D = 4e3;
+            A && (D = T ? 1e4 : 7e3);
+            let j = null != h ? h : D,
+                R = (0, r.useCallback)(() => {
+                    "exit" !== y && (v("exit"), void 0 !== E.current && (window.clearTimeout(E.current), E.current = void 0), w.current = window.setTimeout(() => {
+                        null == d || d()
+                    }, 150))
+                }, [d, y]);
+            (0, r.useEffect)(() => (C.current = window.requestAnimationFrame(() => {
+                v("idle")
+            }), () => {
+                void 0 !== C.current && window.cancelAnimationFrame(C.current)
+            }), []), (0, r.useEffect)(() => {
+                void 0 !== E.current && (window.clearTimeout(E.current), E.current = void 0), k && "exit" !== y && (E.current = window.setTimeout(() => {
+                    R()
+                }, j))
+            }, [j, k, y, R]), (0, r.useEffect)(() => {
+                var t;
+                A && (null == (t = I.current) || t.focus())
+            }, [A]), (0, r.useEffect)(() => () => {
+                void 0 !== E.current && window.clearTimeout(E.current), void 0 !== w.current && window.clearTimeout(w.current), void 0 !== C.current && window.cancelAnimationFrame(C.current)
+            }, []);
+            let _ = {
+                    position: "fixed",
+                    left: "50%",
+                    bottom: "max(var(--padding-xxlarge, 32px), env(safe-area-inset-bottom))",
+                    transform: "translate(-50%, ".concat("idle" === y ? "0" : "120%", ")"),
+                    zIndex: "var(--foundation-portal-zindex, 9999)"
+                },
+                L = g.style ? {
+                    ..._,
+                    ...g.style
+                } : _;
+            return r.default.createElement("div", {
+                ref: o,
+                role: "status",
+                "aria-live": "polite",
+                className: (0, n.default)("flex items-center gap-xxlarge radius-medium shadow-transient-low bg-inverse-surface-0 padding-x-medium padding-y-medium stroke-standard shrink-0", "max-width-[480px] min-height-[48px]", "min-width-[min(100%-max(2_*_var(--margin-small),env(safe-area-inset-left)+env(safe-area-inset-right)),393px)]", "foundation-web-portal-zindex pointer-events-auto", "exit" === y ? "ease-standard-in" : "ease-standard-out", f),
+                style: {
+                    ...L,
+                    transitionDuration: "".concat("exit" === y ? 150 : 200, "ms"),
+                    transitionProperty: "transform"
+                },
+                ...g
+            }, r.default.createElement("div", {
+                className: "flex items-center gap-medium grow-1 basis-0 min-h-[40px]"
+            }, l && r.default.createElement(a, {
+                name: l,
+                size: "Small",
+                className: "shrink-0 content-inverse-emphasis"
+            }), r.default.createElement("div", {
+                className: "grow-1 basis-0 text-caption-large content-inverse-emphasis text-truncate-end"
+            }, i)), r.default.createElement("div", {
+                className: "flex items-center justify-end gap-small shrink-0"
+            }, x, d && r.default.createElement(S, {
+                variant: "Utility",
+                size: "Small",
+                isCircular: !0,
+                className: "content-inverse-emphasis",
+                "aria-label": p,
+                onClick: R
+            })))
+        });
+    t.s(["Snackbar", 0, I], 773470);
+    var x = t.i(734463);
+    let A = t => {
         var n, r, o, a, i, l;
         let s = null != (n = null == (o = (a = window).matchMedia) || null == (r = o.call(a, "(pointer: coarse)")) ? void 0 : r.matches) && n,
             u = null == (i = document.activeElement) ? void 0 : i.matches(":focus-visible");
@@ -7602,7 +7461,7 @@
             onOpenChange: a,
             children: i
         } = t;
-        return r.createElement(I.Root, {
+        return r.createElement(x.Root, {
             open: n,
             defaultOpen: o,
             onOpenChange: a
@@ -7612,7 +7471,7 @@
             children: n,
             ...o
         } = t;
-        return r.createElement(I.Close, o, n)
+        return r.createElement(x.Close, o, n)
     }, "PopoverContent", 0, function(t) {
         let {
             side: o = "bottom",
@@ -7624,13 +7483,13 @@
             onOpenAutoFocus: c,
             ...d
         } = t;
-        return r.createElement(I.Portal, null, r.createElement(I.Content, {
+        return r.createElement(x.Portal, null, r.createElement(x.Content, {
             side: o,
             align: a,
             sideOffset: i,
             ...d,
             "aria-label": null != u ? u : d["aria-label"],
-            onOpenAutoFocus: null != c ? c : L,
+            onOpenAutoFocus: null != c ? c : A,
             className: (0, n.default)("foundation-web-portal-zindex", l)
         }, s))
     }, "PopoverTrigger", 0, function(t) {
@@ -7640,23 +7499,29 @@
             className: a,
             children: i
         } = t;
-        return r.createElement(I.Trigger, {
+        return r.createElement(x.Trigger, {
             asChild: n,
             disabled: o,
             className: a
         }, i)
     }], 797117);
-    let _ = t => {
+    let T = 0,
+        k = function() {
+            let t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "«r",
+                n = (0, r.useRef)();
+            return n.current || (T += 1, n.current = "".concat(t).concat(T)), n.current
+        },
+        D = t => {
             let {
                 title: n,
                 description: o,
                 position: i = "top-center"
             } = t;
-            return r.default.createElement(k, {
+            return r.default.createElement(s, {
                 position: i,
                 title: n,
                 description: o
-            }, r.default.createElement(D, {
+            }, r.default.createElement(u, {
                 asChild: !0
             }, r.default.createElement("span", {
                 role: "button",
@@ -7669,55 +7534,55 @@
                 size: "Small"
             }))))
         },
-        F = {
+        j = {
             Standard: "bg-none",
             Contrast: "bg-shift-200",
             Utility: "bg-none"
         },
-        N = {
+        R = {
             Standard: "stroke-standard",
             Contrast: "stroke-none",
             Utility: "stroke-none"
         };
-    var M = t.i(563921);
-    let P = (0, r.createContext)(null),
-        B = {
+    var _ = t.i(563921);
+    let L = (0, r.createContext)(null),
+        F = {
             XSmall: "size-300",
             Small: "size-400",
             Medium: "size-500",
             Large: "size-600"
         },
-        O = {
+        N = {
             XSmall: "padding-x-medium",
             Small: "padding-x-medium",
             Medium: "padding-x-medium",
             Large: "padding-x-large"
         },
-        H = {
+        M = {
             XSmall: "text-title-small",
             Small: "text-title-small",
             Medium: "text-title-medium",
             Large: "text-title-large"
         },
-        U = {
+        P = {
             XSmall: "text-body-small",
             Small: "text-body-small",
             Medium: "text-body-medium",
             Large: "text-body-large"
         },
-        z = {
+        B = {
             XSmall: "gap-xsmall",
             Small: "gap-small",
             Medium: "gap-small",
             Large: "gap-small"
         },
-        V = {
+        O = {
             XSmall: "radius-small",
             Small: "radius-medium",
             Medium: "radius-medium",
             Large: "radius-medium"
         },
-        q = {
+        H = {
             XSmall: "height-600",
             Small: "height-800",
             Medium: "height-1000",
@@ -7727,112 +7592,112 @@
         let {
             label: a,
             labelTooltip: i,
-            ariaLabelledBy: s,
-            ariaLabel: u,
-            className: c,
-            size: d,
+            ariaLabelledBy: l,
+            ariaLabel: s,
+            className: u,
+            size: c,
             variant: p = "Standard",
             value: m,
-            placeholder: f,
-            isDisabled: h,
+            placeholder: h,
+            isDisabled: f,
             hasError: g,
-            hint: v,
-            onValueChange: b,
-            onOpenChange: C,
-            children: E
-        } = t, w = y(), S = (0, r.useMemo)(() => ({
-            size: d
-        }), [d]), I = a ? r.default.createElement("span", {
-            id: w,
-            className: (0, n.default)(H[d], "content-emphasis")
+            hint: y,
+            onValueChange: v,
+            onOpenChange: b,
+            children: C
+        } = t, E = k(), w = (0, r.useMemo)(() => ({
+            size: c
+        }), [c]), S = a ? r.default.createElement("span", {
+            id: E,
+            className: (0, n.default)(M[c], "content-emphasis")
         }, a) : null;
-        return r.default.createElement(P.Provider, {
-            value: S
+        return r.default.createElement(L.Provider, {
+            value: w
         }, r.default.createElement("div", {
-            className: (0, n.default)("flex flex-col", h && ["opacity-[0.5]", "pointer-events-none"], z[d], c)
-        }, I && (i ? r.default.createElement("div", {
+            className: (0, n.default)("flex flex-col", f && ["opacity-[0.5]", "pointer-events-none"], B[c], u)
+        }, S && (i ? r.default.createElement("div", {
             className: "flex items-center gap-xsmall"
-        }, I, r.default.createElement(_, i)) : I), r.default.createElement(M.Root, {
+        }, S, r.default.createElement(D, i)) : S), r.default.createElement(_.Root, {
             value: m,
-            disabled: h,
-            onValueChange: b,
-            onOpenChange: C
-        }, r.default.createElement(M.Trigger, {
-            className: (0, n.default)("relative clip group/interactable outline-none", "foundation-web-input flex items-center justify-between width-full cursor-pointer", F[p], N[p], V[d], q[d], O[d], U[d], g ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis", void 0 === m ? "content-muted" : "content-default"),
+            disabled: f,
+            onValueChange: v,
+            onOpenChange: b
+        }, r.default.createElement(_.Trigger, {
+            className: (0, n.default)("relative clip group/interactable outline-none", "foundation-web-input flex items-center justify-between width-full cursor-pointer", j[p], R[p], O[c], H[c], N[c], P[c], g ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis", void 0 === m ? "content-muted" : "content-default"),
             ref: o,
-            "aria-labelledby": a ? w : s,
-            "aria-label": u
-        }, r.default.createElement(l, null), r.default.createElement("div", {
+            "aria-labelledby": a ? E : l,
+            "aria-label": s
+        }, r.default.createElement(d, null), r.default.createElement("div", {
             className: "grow-1 text-truncate-split text-align-x-left"
-        }, r.default.createElement(M.Value, {
-            placeholder: f
-        })), r.default.createElement(M.Icon, {
-            className: (0, n.default)(B[d], "icon icon-regular-chevron-large-down content-default")
-        })), r.default.createElement(M.Portal, null, r.default.createElement(M.Content, {
+        }, r.default.createElement(_.Value, {
+            placeholder: h
+        })), r.default.createElement(_.Icon, {
+            className: (0, n.default)(F[c], "icon icon-regular-chevron-large-down content-default")
+        })), r.default.createElement(_.Portal, null, r.default.createElement(_.Content, {
             position: "popper",
             className: "padding-y-small foundation-web-portal-zindex",
             style: {
                 maxHeight: "var(--radix-select-content-available-height)"
             }
-        }, E))), v && r.default.createElement("span", {
+        }, C))), y && r.default.createElement("span", {
             className: (0, n.default)("text-caption-small", {
                 "content-system-alert": g,
                 "content-default": !g
             })
-        }, v)))
+        }, y)))
     }).displayName = "Dropdown";
-    var W = t.i(142953);
-    let G = {
+    var U = t.i(142953);
+    let z = {
             XSmall: "radius-medium",
             Small: "radius-large",
             Medium: "radius-large",
             Large: "radius-large"
         },
-        K = {
+        V = {
             XSmall: "padding-xsmall",
             Small: "padding-small",
             Medium: "padding-small",
             Large: "padding-small"
         },
-        J = {
+        q = {
             XSmall: "padding-x-medium",
             Small: "padding-x-medium",
             Medium: "padding-x-medium",
             Large: "padding-x-large"
         },
-        Z = {
+        W = {
             XSmall: "padding-y-xsmall",
             Small: "padding-y-small",
             Medium: "padding-y-small",
             Large: "padding-y-medium"
         },
-        X = {
+        G = {
             XSmall: "gap-x-medium",
             Small: "gap-x-medium",
             Medium: "gap-x-medium",
             Large: "gap-x-large"
         },
-        Y = {
+        K = {
             XSmall: "gap-y-xxsmall",
             Small: "gap-y-xxsmall",
             Medium: "gap-y-xsmall",
             Large: "gap-y-xsmall"
         },
-        Q = {
+        J = {
             XSmall: "text-body-small",
             Small: "text-body-small",
             Medium: "text-body-medium",
             Large: "text-body-large"
         },
-        $ = {
+        Z = {
             XSmall: "radius-small",
             Small: "radius-medium",
             Medium: "radius-medium",
             Large: "radius-medium"
         },
-        ee = (0, r.createContext)(null),
-        et = () => {
-            let t = (0, r.useContext)(ee);
+        X = (0, r.createContext)(null),
+        Y = () => {
+            let t = (0, r.useContext)(X);
             if (!t) throw Error("Menu components must be used within a Menu");
             return t
         };
@@ -7842,10 +7707,10 @@
             children: a,
             className: i,
             size: l
-        } = t, s = (0, r.useContext)(P), u = s ? "dropdown" : "standalone", c = null != (o = null != l ? l : null == s ? void 0 : s.size) ? o : "Medium", d = (0, r.useMemo)(() => ({
+        } = t, s = (0, r.useContext)(L), u = s ? "dropdown" : "standalone", c = null != (o = null != l ? l : null == s ? void 0 : s.size) ? o : "Medium", d = (0, r.useMemo)(() => ({
             size: c,
             mode: u
-        }), [c, u]), p = (0, n.default)("foundation-web-menu bg-surface-100 stroke-standard stroke-default shadow-transient-high", G[c], i), m = "standalone" === u ? r.default.createElement(W.Root, {
+        }), [c, u]), p = (0, n.default)("foundation-web-menu bg-surface-100 stroke-standard stroke-default shadow-transient-high", z[c], i), m = "standalone" === u ? r.default.createElement(U.Root, {
             asChild: !0,
             orientation: "vertical",
             loop: !0
@@ -7856,9 +7721,9 @@
         }, a)) : r.default.createElement("div", {
             className: p
         }, a);
-        return r.default.createElement(ee.Provider, {
+        return r.default.createElement(X.Provider, {
             value: d
-        }, "dropdown" === u ? r.default.createElement(M.Viewport, {
+        }, "dropdown" === u ? r.default.createElement(_.Viewport, {
             asChild: !0,
             style: {
                 width: "var(--radix-popper-anchor-width)"
@@ -7867,13 +7732,13 @@
     }, "MenuItem", 0, t => {
         let o, {
                 value: a,
-                leading: s,
-                title: u,
-                description: d,
-                trailing: p,
-                disabled: m,
-                className: f,
-                onSelect: h,
+                leading: i,
+                title: l,
+                description: s,
+                trailing: u,
+                disabled: p,
+                className: m,
+                onSelect: f,
                 asChild: g,
                 children: y,
                 ...v
@@ -7881,14 +7746,14 @@
             {
                 size: b,
                 mode: C
-            } = et(),
-            E = (0, n.default)(i, "foundation-web-menu-item flex items-center content-default text-truncate-split focus-visible:hover:outline-none cursor-pointer stroke-none bg-none text-align-x-left width-full", Q[b], J[b], Z[b], X[b], $[b], m && "opacity-[0.5]", m && "pointer-events-none", f),
+            } = Y(),
+            E = (0, n.default)(c, "foundation-web-menu-item flex items-center content-default text-truncate-split focus-visible:hover:outline-none cursor-pointer stroke-none bg-none text-align-x-left width-full", J[b], q[b], W[b], G[b], Z[b], p && "opacity-[0.5]", p && "pointer-events-none", m),
             w = r.default.createElement("span", {
                 className: "foundation-web-menu-item-title text-no-wrap text-truncate-split content-emphasis"
-            }, u);
+            }, l);
         switch (C) {
             case "dropdown":
-                w = r.default.createElement(M.ItemText, {
+                w = r.default.createElement(_.ItemText, {
                     asChild: !0
                 }, w);
                 break;
@@ -7897,26 +7762,26 @@
             default:
                 console.error("Invalid menu mode:", C)
         }
-        let S = r.default.createElement(r.default.Fragment, null, !m && r.default.createElement(l, null), s, r.default.createElement("div", {
-            className: (0, n.default)("grow-1 text-truncate-split flex flex-col", Y[b])
-        }, w, d && r.default.createElement("div", {
+        let S = r.default.createElement(r.default.Fragment, null, !p && r.default.createElement(d, null), i, r.default.createElement("div", {
+            className: (0, n.default)("grow-1 text-truncate-split flex flex-col", K[b])
+        }, w, s && r.default.createElement("div", {
             className: "foundation-web-menu-item-description content-muted"
-        }, d)), p);
+        }, s)), u);
         if (g) {
             let {
                 as: t,
                 ...n
-            } = v, a = r.default.Children.only(y), i = void 0 === u && a.props.children;
-            o = r.default.createElement(c.Slot, {
+            } = v, a = r.default.Children.only(y), i = void 0 === l && a.props.children;
+            o = r.default.createElement(h.Slot, {
                 ...n,
                 role: "standalone" === C ? "menuitem" : void 0,
-                "aria-disabled": m || void 0,
+                "aria-disabled": p || void 0,
                 className: E,
                 style: {
                     outlineOffset: 0
                 },
-                onClick: m ? void 0 : h
-            }, i ? r.default.cloneElement(a, {}, r.default.createElement(r.default.Fragment, null, !m && r.default.createElement(l, null), a.props.children)) : r.default.cloneElement(a, {}, S))
+                onClick: p ? void 0 : f
+            }, i ? r.default.cloneElement(a, {}, r.default.createElement(r.default.Fragment, null, !p && r.default.createElement(d, null), a.props.children)) : r.default.cloneElement(a, {}, S))
         } else if ("a" === v.as) {
             let {
                 as: t,
@@ -7926,14 +7791,14 @@
             o = r.default.createElement("a", {
                 ...a,
                 role: "standalone" === C ? "menuitem" : void 0,
-                "aria-disabled": m,
-                href: m ? void 0 : n,
+                "aria-disabled": p,
+                href: p ? void 0 : n,
                 className: E,
                 style: {
                     outlineOffset: 0,
                     textDecoration: "none"
                 },
-                onClick: m ? void 0 : h
+                onClick: p ? void 0 : f
             }, S)
         } else {
             let {
@@ -7944,19 +7809,19 @@
                 type: "button",
                 ...n,
                 role: "standalone" === C ? "menuitem" : void 0,
-                "aria-disabled": m,
+                "aria-disabled": p,
                 className: E,
                 style: {
                     outlineOffset: 0
                 },
-                onClick: m ? void 0 : h
+                onClick: p ? void 0 : f
             }, S)
         }
-        return "dropdown" === C ? r.default.createElement(M.Item, {
+        return "dropdown" === C ? r.default.createElement(_.Item, {
             value: a,
-            disabled: m,
+            disabled: p,
             asChild: !0
-        }, o) : r.default.createElement(W.Item, {
+        }, o) : r.default.createElement(U.Item, {
             asChild: !0,
             focusable: !0,
             tabStopId: a
@@ -7971,12 +7836,12 @@
             className: u
         } = t, {
             size: c
-        } = et(), d = (0, n.default)("foundation-web-menu-label flex items-center content-default text-truncate-split text-align-x-left width-full", Q[c], J[c], Z[c], X[c], s && "opacity-[0.5]", u);
+        } = Y(), d = (0, n.default)("foundation-web-menu-label flex items-center content-default text-truncate-split text-align-x-left width-full", J[c], q[c], W[c], G[c], s && "opacity-[0.5]", u);
         return r.default.createElement("div", {
             role: "none",
             className: d
         }, i, r.default.createElement("div", {
-            className: (0, n.default)("grow-1 text-truncate-split flex flex-col", Y[c])
+            className: (0, n.default)("grow-1 text-truncate-split flex flex-col", K[c])
         }, r.default.createElement("span", {
             className: "foundation-web-menu-label-title text-no-wrap text-truncate-split content-emphasis"
         }, o), a && r.default.createElement("div", {
@@ -7988,10 +7853,10 @@
             className: a
         } = t, {
             size: i
-        } = et();
+        } = Y();
         return r.default.createElement("div", {
             role: "group",
-            className: (0, n.default)(K[i], a)
+            className: (0, n.default)(V[i], a)
         }, o)
     }, "MenuSeparator", 0, t => {
         let {
@@ -8002,19 +7867,19 @@
             className: (0, n.default)("foundation-web-menu-separator", o)
         })
     }], 500192);
-    let en = {
+    let Q = {
             Large: "size-1200",
             Medium: "size-1000",
             Small: "size-800",
             XSmall: "size-600"
         },
-        er = {
+        $ = {
             XSmall: "size-400",
             Small: "size-500",
             Medium: "size-600",
             Large: "size-700"
         },
-        eo = {
+        ee = {
             Large: {
                 circular: "radius-circle",
                 square: "radius-medium"
@@ -8032,28 +7897,28 @@
                 square: "radius-small"
             }
         },
-        ea = {
+        et = {
             Emphasis: "bg-action-emphasis",
             Standard: "bg-action-standard",
             Alert: "bg-action-alert",
             Utility: "bg-action-link",
             OverMedia: "bg-over-media-0"
         },
-        ei = {
+        en = {
             Emphasis: "bg-action-standard",
             Standard: "bg-action-standard",
             Alert: "bg-action-standard",
             Utility: "bg-action-link",
             OverMedia: "bg-over-media-0"
         },
-        el = {
+        er = {
             Emphasis: "bg-action-emphasis",
             Standard: "bg-action-standard",
             Alert: "bg-action-standard",
             Utility: "bg-shift-300",
             OverMedia: "bg-over-media-0"
         },
-        es = {
+        eo = {
             Default: {
                 Emphasis: "content-action-emphasis",
                 Standard: "content-action-standard",
@@ -8069,7 +7934,7 @@
                 OverMedia: "content-inverse-emphasis"
             }
         },
-        eu = {
+        ea = {
             Default: {
                 Emphasis: "content-action-standard",
                 Standard: "content-action-standard",
@@ -8085,14 +7950,14 @@
                 OverMedia: "content-inverse-emphasis"
             }
         },
-        ec = (0, r.forwardRef)((t, o) => {
+        ei = (0, r.forwardRef)((t, o) => {
             let a, {
-                className: u,
-                icon: d,
-                ariaLabel: p,
-                isDisabled: m = !1,
-                isCircular: f = !1,
-                isSelected: h = !1,
+                className: i,
+                icon: l,
+                ariaLabel: s,
+                isDisabled: u = !1,
+                isCircular: m = !1,
+                isSelected: f = !1,
                 size: g = "Large",
                 variant: y = "Emphasis",
                 iconColor: v = "Default",
@@ -8100,22 +7965,22 @@
                 children: C,
                 ...E
             } = t;
-            a = m ? ei[y] : h ? el[y] : ea[y];
-            let w = (0, n.default)("foundation-web-icon-button", m ? s : [i, "cursor-pointer"], "relative flex items-center justify-center padding-none stroke-none select-none", en[g], eo[g][f ? "circular" : "square"], a, u),
-                S = r.default.createElement(r.default.Fragment, null, r.default.createElement(l, null), r.default.createElement("span", {
-                    className: (0, n.default)("icon", d, er[g], m ? eu[v][y] : es[v][y])
+            a = u ? en[y] : f ? er[y] : et[y];
+            let w = (0, n.default)("foundation-web-icon-button", u ? p : [c, "cursor-pointer"], "relative flex items-center justify-center padding-none stroke-none select-none", Q[g], ee[g][m ? "circular" : "square"], a, i),
+                S = r.default.createElement(r.default.Fragment, null, r.default.createElement(d, null), r.default.createElement("span", {
+                    className: (0, n.default)("icon", l, $[g], u ? ea[v][y] : eo[v][y])
                 }));
             if (b) {
                 let {
                     as: t,
                     ...n
                 } = E, a = r.default.Children.only(C);
-                return r.default.createElement(c.Slot, {
+                return r.default.createElement(h.Slot, {
                     ref: o,
                     ...n,
                     className: w,
-                    "aria-label": p,
-                    "aria-disabled": m || void 0
+                    "aria-label": s,
+                    "aria-disabled": u || void 0
                 }, r.default.cloneElement(a, {}, S))
             }
             if ("a" === E.as) {
@@ -8127,9 +7992,9 @@
                 return r.default.createElement("a", {
                     ref: o,
                     ...a,
-                    "aria-label": p,
-                    "aria-disabled": m,
-                    href: m ? void 0 : n,
+                    "aria-label": s,
+                    "aria-disabled": u,
+                    href: u ? void 0 : n,
                     className: w
                 }, S)
             }
@@ -8141,13 +8006,13 @@
                 ref: o,
                 type: "button",
                 ...x,
-                "aria-label": p,
-                disabled: m,
+                "aria-label": s,
+                disabled: u,
                 className: w
             }, S)
         });
-    t.s(["IconButton", 0, ec], 157924);
-    let ed = {
+    t.s(["IconButton", 0, ei], 157924);
+    let el = {
             Small: {
                 dimension: 16,
                 strokeWidth: 2,
@@ -8166,7 +8031,7 @@
                 valueContainerSize: 52
             }
         },
-        ep = r.default.forwardRef((t, o) => {
+        es = r.default.forwardRef((t, o) => {
             let {
                 className: a,
                 size: i = "Large",
@@ -8178,9 +8043,9 @@
             } = t, {
                 dimension: p,
                 strokeWidth: m,
-                textClass: f,
-                valueContainerSize: h
-            } = ed[i], g = (p - m) / 2, y = 2 * Math.PI * g, v = p / 2, b = Math.min(100, Math.max(0, s)), C = u && void 0 !== h ? h : p, E = "Determinate" === l;
+                textClass: h,
+                valueContainerSize: f
+            } = el[i], g = (p - m) / 2, y = 2 * Math.PI * g, v = p / 2, b = Math.min(100, Math.max(0, s)), C = u && void 0 !== f ? f : p, E = "Determinate" === l;
             return r.default.createElement("div", {
                 ref: o,
                 className: (0, n.default)("foundation-web-progress-circle inline-flex items-center justify-center", a),
@@ -8228,14 +8093,14 @@
                     transformOrigin: "50% 50%"
                 }
             })), E && u && "Large" === i && r.default.createElement("div", {
-                className: (0, n.default)("absolute content-emphasis flex items-center justify-center", f),
+                className: (0, n.default)("absolute content-emphasis flex items-center justify-center", h),
                 "aria-hidden": "true"
             }, r.default.createElement("span", null, Math.round(b)), r.default.createElement("span", null, "%")))
         });
-    ep.displayName = "ProgressCircle", t.s(["ProgressCircle", 0, ep], 470527);
-    var em = t.i(425353),
-        ef = t.i(199512);
-    let eh = (0, r.createContext)({
+    es.displayName = "ProgressCircle", t.s(["ProgressCircle", 0, es], 470527);
+    var eu = t.i(425353),
+        ec = t.i(199512);
+    let ed = (0, r.createContext)({
             size: "Medium",
             isModal: !0,
             hasCloseAffordance: !1,
@@ -8244,27 +8109,27 @@
             hasDescription: !1,
             type: "Default"
         }),
-        eg = () => {
-            let t = (0, r.useContext)(eh);
+        ep = () => {
+            let t = (0, r.useContext)(ed);
             if (!t) throw Error("Dialog components must be used within a Dialog");
             return t
         },
-        ey = {
+        em = {
             Small: "padding-x-large",
             Medium: "padding-x-xlarge",
             Large: "padding-x-xlarge"
         },
-        ev = {
+        eh = {
             Small: "padding-top-large",
             Medium: "padding-top-xlarge",
             Large: "padding-top-xlarge"
         },
-        eb = {
+        ef = {
             Small: "padding-bottom-large",
             Medium: "padding-bottom-xlarge",
             Large: "padding-bottom-xlarge"
         },
-        eC = t => {
+        eg = t => {
             let {
                 open: n,
                 onOpenChange: o,
@@ -8277,8 +8142,8 @@
                 hasMarginTop: d = !0,
                 hasMarginBottom: p = !0,
                 hasDescription: m = !1,
-                experimentalDisablePointerEventsStylingOnBody: f = !1
-            } = t, h = (0, r.useMemo)(() => ({
+                experimentalDisablePointerEventsStylingOnBody: h = !1
+            } = t, f = (0, r.useMemo)(() => ({
                 size: i,
                 isModal: s,
                 type: l,
@@ -8289,20 +8154,20 @@
                 hasDescription: m
             }), [i, s, l, u, c, d, p, m]);
             return (0, r.useEffect)(() => {
-                f && setTimeout(() => {
+                h && setTimeout(() => {
                     Object.assign(document.body.style, {
                         pointerEvents: "unset"
                     })
                 }, 0)
-            }, [f, n]), r.default.createElement(eh.Provider, {
-                value: h
-            }, r.default.createElement(em.Root, {
+            }, [h, n]), r.default.createElement(ed.Provider, {
+                value: f
+            }, r.default.createElement(eu.Root, {
                 open: n,
                 onOpenChange: o
             }, a))
         };
-    eC.displayName = "Dialog";
-    let eE = t => {
+    eg.displayName = "Dialog";
+    let ey = t => {
         let {
             children: o,
             className: a,
@@ -8315,34 +8180,34 @@
             size: d,
             isModal: p,
             hasCloseAffordance: m,
-            closeLabel: f,
-            hasDescription: h
-        } = eg(), g = (0, n.default)("foundation-web-dialog-overlay padding-medium foundation-web-portal-zindex", p && "bg-common-backdrop", l), y = (0, n.default)("relative radius-large bg-surface-100 stroke-muted stroke-standard foundation-web-dialog-content shadow-transient-high", a);
-        return r.default.createElement(em.Portal, null, r.default.createElement(em.Overlay, {
+            closeLabel: h,
+            hasDescription: f
+        } = ep(), g = (0, n.default)("foundation-web-dialog-overlay padding-medium foundation-web-portal-zindex", p && "bg-common-backdrop", l), y = (0, n.default)("relative radius-large bg-surface-100 stroke-muted stroke-standard foundation-web-dialog-content shadow-transient-high", a);
+        return r.default.createElement(eu.Portal, null, r.default.createElement(eu.Overlay, {
             className: g,
             style: s
-        }, r.default.createElement(em.Content, {
+        }, r.default.createElement(eu.Content, {
             className: y,
             "data-size": d,
             style: i,
             onOpenAutoFocus: u,
-            ...!h && {
+            ...!f && {
                 "aria-describedby": void 0
             },
             ...c
         }, m && r.default.createElement("div", {
             className: "absolute foundation-web-dialog-close-container"
-        }, r.default.createElement(em.Close, {
+        }, r.default.createElement(eu.Close, {
             asChild: !0
-        }, r.default.createElement(E, {
+        }, r.default.createElement(S, {
             variant: "OverMedia",
             size: d,
             isCircular: !0,
-            "aria-label": f
+            "aria-label": h
         }))), o)))
     };
-    eE.displayName = "DialogContent";
-    let ew = t => {
+    ey.displayName = "DialogContent";
+    let ev = t => {
         let {
             children: o,
             className: a,
@@ -8351,105 +8216,105 @@
             size: l,
             hasMarginTop: s,
             hasMarginBottom: u
-        } = eg(), c = (0, n.default)(ey[l], s && ev[l], u && eb[l], a);
+        } = ep(), c = (0, n.default)(em[l], s && eh[l], u && ef[l], a);
         return r.default.createElement("div", {
             className: c,
             ...i
         }, o)
     };
-    ew.displayName = "DialogBody";
-    let eS = t => {
+    ev.displayName = "DialogBody";
+    let eb = t => {
         let {
             children: n,
             className: o,
             hidden: a,
             ...i
-        } = t, l = r.default.createElement(em.Title, {
+        } = t, l = r.default.createElement(eu.Title, {
             className: o,
             ...i
         }, n);
-        return a ? r.default.createElement(ef.VisuallyHidden, null, l) : l
+        return a ? r.default.createElement(ec.VisuallyHidden, null, l) : l
     };
-    eS.displayName = "DialogTitle";
-    let eI = t => {
+    eb.displayName = "DialogTitle";
+    let eC = t => {
         let {
             children: o,
             className: a,
             ...i
         } = t, {
             size: l
-        } = eg(), s = (0, n.default)(ey[l], eb[l], a);
+        } = ep(), s = (0, n.default)(em[l], ef[l], a);
         return r.default.createElement("div", {
             className: s,
             ...i
         }, o)
     };
-    eI.displayName = "DialogFooter", t.s(["Dialog", 0, eC, "DialogBody", 0, ew, "DialogContent", 0, eE, "DialogFooter", 0, eI, "DialogTitle", 0, eS], 616420);
-    let ex = (0, r.createContext)(null),
-        eA = {
+    eC.displayName = "DialogFooter", t.s(["Dialog", 0, eg, "DialogBody", 0, ev, "DialogContent", 0, ey, "DialogFooter", 0, eC, "DialogTitle", 0, eb], 616420);
+    let eE = (0, r.createContext)(null),
+        ew = {
             XSmall: "text-body-small",
             Small: "text-body-small",
             Medium: "text-body-medium",
             Large: "text-body-medium"
         },
-        eT = {
+        eS = {
             XSmall: "text-title-small",
             Small: "text-title-small",
             Medium: "text-title-medium",
             Large: "text-title-large"
         },
-        ek = {
+        eI = {
             XSmall: "text-body-small",
             Small: "text-body-small",
             Medium: "text-body-medium",
             Large: "text-body-large"
         },
-        eD = (0, r.forwardRef)((t, o) => {
+        ex = (0, r.forwardRef)((t, o) => {
             let {
                 isContained: a,
                 size: i,
-                divider: s,
-                alignment: u,
-                title: c,
-                isTitleBold: d = !0,
+                divider: l,
+                alignment: s,
+                title: u,
+                isTitleBold: c = !0,
                 text: p,
                 isMultiline: m,
-                metadata: f,
-                description: h,
+                metadata: h,
+                description: f,
                 leading: g,
                 trailing: y,
                 onSelect: v,
                 className: b
-            } = t, C = void 0 === f && void 0 === h && void 0 === u && void 0 === i;
+            } = t, C = void 0 === h && void 0 === f && void 0 === s && void 0 === i;
             if ((void 0 !== p || void 0 !== m) && !C) throw Error('ListItem: Cannot use deprecated "text" or "isMultiline" props with "metadata", "description", "alignment", or "size".');
             let E = null != i ? i : "Large",
                 w = void 0 !== v,
                 S = w ? "button" : "div",
                 I = !!C && m,
-                x = "Top" === u ? "justify-start" : "justify-center";
+                x = "Top" === s ? "justify-start" : "justify-center";
             I && (x = "justify-start");
             let A = r.default.createElement(S, {
-                    className: (0, n.default)("bg-none width-full flex gap-medium stroke-none foundation-web-list-item padding-y-none", a ? "padding-x-medium" : "padding-x-xlarge", "Full" === s && "foundation-web-list-item-bottom-divider", w && "relative clip group/interactable focus-visible:outline-focus disabled:outline-none", w && "cursor-pointer", b),
+                    className: (0, n.default)("bg-none width-full flex gap-medium stroke-none foundation-web-list-item padding-y-none", a ? "padding-x-medium" : "padding-x-xlarge", "Full" === l && "foundation-web-list-item-bottom-divider", w && "relative clip group/interactable focus-visible:outline-focus disabled:outline-none", w && "cursor-pointer", b),
                     ...w && {
                         onClick: () => v()
                     }
-                }, w && r.default.createElement(l, null), g && r.default.createElement("div", {
+                }, w && r.default.createElement(d, null), g && r.default.createElement("div", {
                     className: (0, n.default)("flex flex-col padding-y-large", x)
                 }, g), r.default.createElement("div", {
                     className: "flex fill clip-x padding-y-large gap-x-medium relative "
                 }, r.default.createElement("div", {
                     className: (0, n.default)("flex flex-col fill clip-x justify-center", I && "gap-xsmall")
-                }, c && r.default.createElement("div", {
-                    className: (0, n.default)("content-emphasis text-align-x-start", d ? eT[E] : ek[E])
-                }, c), C && p && r.default.createElement("div", {
-                    className: (0, n.default)("content-default text-align-x-start", eA[E], !m && "text-truncate-split text-no-wrap")
-                }, p), !C && f && r.default.createElement("div", {
-                    className: (0, n.default)("content-default text-align-x-start text-truncate-split text-no-wrap", eA[E])
-                }, f), !C && h && r.default.createElement("div", {
-                    className: (0, n.default)("content-default text-align-x-start padding-top-xsmall", eA[E])
-                }, h)), y && r.default.createElement("div", {
+                }, u && r.default.createElement("div", {
+                    className: (0, n.default)("content-emphasis text-align-x-start", c ? eS[E] : eI[E])
+                }, u), C && p && r.default.createElement("div", {
+                    className: (0, n.default)("content-default text-align-x-start", ew[E], !m && "text-truncate-split text-no-wrap")
+                }, p), !C && h && r.default.createElement("div", {
+                    className: (0, n.default)("content-default text-align-x-start text-truncate-split text-no-wrap", ew[E])
+                }, h), !C && f && r.default.createElement("div", {
+                    className: (0, n.default)("content-default text-align-x-start padding-top-xsmall", ew[E])
+                }, f)), y && r.default.createElement("div", {
                     className: (0, n.default)("flex flex-col", x)
-                }, y), "Inset" === s && r.default.createElement("div", {
+                }, y), "Inset" === l && r.default.createElement("div", {
                     className: "foundation-web-list-item-inset-divider"
                 }))),
                 T = (0, r.useMemo)(() => ({
@@ -8460,12 +8325,12 @@
                 style: {
                     listStyle: "none"
                 }
-            }, r.default.createElement(ex.Provider, {
+            }, r.default.createElement(eE.Provider, {
                 value: T
             }, A))
         });
-    eD.displayName = "ListItem";
-    let ej = (0, r.forwardRef)((t, o) => {
+    ex.displayName = "ListItem";
+    let eA = (0, r.forwardRef)((t, o) => {
         let {
             children: a,
             className: i,
@@ -8478,7 +8343,7 @@
             ...s
         }, a)
     });
-    ej.displayName = "List", t.s(["List", 0, ej, "ListItem", 0, eD], 332719)
+    eA.displayName = "List", t.s(["List", 0, eA, "ListItem", 0, ex], 332719)
 }, 779722, t => {
     "use strict";
     var n = t.i(197649),
@@ -8514,19 +8379,19 @@
             delayDurationMs: d = 500,
             children: p,
             open: m,
-            onOpenChange: f,
-            contentClassName: h
+            onOpenChange: h,
+            contentClassName: f
         } = t, [g, y] = i.split("-"), v = null != c ? c : "string" == typeof s && null == u ? s : void 0;
         return r.createElement(a.Provider, {
             delayDuration: d
         }, r.createElement(a.Root, {
             open: m,
-            onOpenChange: f
+            onOpenChange: h
         }, p, r.createElement(a.Portal, null, r.createElement(a.Content, {
             side: g,
             align: y,
             "aria-label": v,
-            className: (0, n.default)("foundation-web-portal-zindex bg-inverse-surface-0 padding-y-xsmall padding-x-small radius-small shadow-transient-low", h),
+            className: (0, n.default)("foundation-web-portal-zindex bg-inverse-surface-0 padding-y-xsmall padding-x-small radius-small shadow-transient-low", f),
             sideOffset: 5
         }, l && r.createElement(a.Arrow, {
             asChild: !0
@@ -8576,10 +8441,10 @@
         p = t.i(963320),
         m = t.i(715843);
 
-    function f(t) {
+    function h(t) {
         return (0, l.g)("MuiBadge", t)
     }
-    var h = (0, c.g)("MuiBadge", ["root", "badge", "dot", "standard", "anchorOriginTopRight", "anchorOriginBottomRight", "anchorOriginTopLeft", "anchorOriginBottomLeft", "invisible", "colorError", "colorInfo", "colorPrimary", "colorSecondary", "colorSuccess", "colorWarning", "overlapRectangular", "overlapCircular", "anchorOriginTopLeftCircular", "anchorOriginTopLeftRectangular", "anchorOriginTopRightCircular", "anchorOriginTopRightRectangular", "anchorOriginBottomLeftCircular", "anchorOriginBottomLeftRectangular", "anchorOriginBottomRightCircular", "anchorOriginBottomRightRectangular"]);
+    var f = (0, c.g)("MuiBadge", ["root", "badge", "dot", "standard", "anchorOriginTopRight", "anchorOriginBottomRight", "anchorOriginTopLeft", "anchorOriginBottomLeft", "invisible", "colorError", "colorInfo", "colorPrimary", "colorSecondary", "colorSuccess", "colorWarning", "overlapRectangular", "overlapCircular", "anchorOriginTopLeftCircular", "anchorOriginTopLeftRectangular", "anchorOriginTopRightCircular", "anchorOriginTopRightRectangular", "anchorOriginBottomLeftCircular", "anchorOriginBottomLeftRectangular", "anchorOriginBottomRightCircular", "anchorOriginBottomRightRectangular"]);
     let g = ["anchorOrigin", "className", "classes", "component", "components", "componentsProps", "children", "overlap", "color", "invisible", "max", "badgeContent", "slots", "slotProps", "showZero", "variant"],
         y = (0, s.s)("span", {
             name: "MuiBadge",
@@ -8660,7 +8525,7 @@
                         right: 0,
                         transform: "scale(1) translate(50%, -50%)",
                         transformOrigin: "100% 0%",
-                        ["&.".concat(h.invisible)]: {
+                        ["&.".concat(f.invisible)]: {
                             transform: "scale(0) translate(50%, -50%)"
                         }
                     }
@@ -8676,7 +8541,7 @@
                         right: 0,
                         transform: "scale(1) translate(50%, 50%)",
                         transformOrigin: "100% 100%",
-                        ["&.".concat(h.invisible)]: {
+                        ["&.".concat(f.invisible)]: {
                             transform: "scale(0) translate(50%, 50%)"
                         }
                     }
@@ -8692,7 +8557,7 @@
                         left: 0,
                         transform: "scale(1) translate(-50%, -50%)",
                         transformOrigin: "0% 0%",
-                        ["&.".concat(h.invisible)]: {
+                        ["&.".concat(f.invisible)]: {
                             transform: "scale(0) translate(-50%, -50%)"
                         }
                     }
@@ -8708,7 +8573,7 @@
                         left: 0,
                         transform: "scale(1) translate(-50%, 50%)",
                         transformOrigin: "0% 100%",
-                        ["&.".concat(h.invisible)]: {
+                        ["&.".concat(f.invisible)]: {
                             transform: "scale(0) translate(-50%, 50%)"
                         }
                     }
@@ -8724,7 +8589,7 @@
                         right: "14%",
                         transform: "scale(1) translate(50%, -50%)",
                         transformOrigin: "100% 0%",
-                        ["&.".concat(h.invisible)]: {
+                        ["&.".concat(f.invisible)]: {
                             transform: "scale(0) translate(50%, -50%)"
                         }
                     }
@@ -8740,7 +8605,7 @@
                         right: "14%",
                         transform: "scale(1) translate(50%, 50%)",
                         transformOrigin: "100% 100%",
-                        ["&.".concat(h.invisible)]: {
+                        ["&.".concat(f.invisible)]: {
                             transform: "scale(0) translate(50%, 50%)"
                         }
                     }
@@ -8756,7 +8621,7 @@
                         left: "14%",
                         transform: "scale(1) translate(-50%, -50%)",
                         transformOrigin: "0% 0%",
-                        ["&.".concat(h.invisible)]: {
+                        ["&.".concat(f.invisible)]: {
                             transform: "scale(0) translate(-50%, -50%)"
                         }
                     }
@@ -8772,7 +8637,7 @@
                         left: "14%",
                         transform: "scale(1) translate(-50%, 50%)",
                         transformOrigin: "0% 100%",
-                        ["&.".concat(h.invisible)]: {
+                        ["&.".concat(f.invisible)]: {
                             transform: "scale(0) translate(-50%, 50%)"
                         }
                     }
@@ -8790,7 +8655,7 @@
             }
         }),
         b = r.forwardRef(function(t, n) {
-            var r, o, a, c, h, b;
+            var r, o, a, c, f, b;
             let C = (0, p.u)({
                     props: t,
                     name: "MuiBadge"
@@ -8810,8 +8675,8 @@
                     invisible: D = !1,
                     max: j = 99,
                     badgeContent: R,
-                    slots: L,
-                    slotProps: _,
+                    slots: _,
+                    slotProps: L,
                     showZero: F = !1,
                     variant: N = "standard"
                 } = C,
@@ -8886,12 +8751,12 @@
                         root: ["root"],
                         badge: ["badge", i, o && "invisible", "anchorOrigin".concat((0, l.a)(r.vertical)).concat((0, l.a)(r.horizontal)), "anchorOrigin".concat((0, l.a)(r.vertical)).concat((0, l.a)(r.horizontal)).concat((0, l.a)(a)), "overlap".concat((0, l.a)(a)), "default" !== n && "color".concat((0, l.a)(n))]
                     };
-                    return (0, s.a)(c, f, u)
+                    return (0, s.a)(c, h, u)
                 })(J),
-                X = null != (r = null != (o = null == L ? void 0 : L.root) ? o : I.Root) ? r : y,
-                Y = null != (a = null != (c = null == L ? void 0 : L.badge) ? c : I.Badge) ? a : v,
-                Q = null != (h = null == _ ? void 0 : _.root) ? h : x.root,
-                $ = null != (b = null == _ ? void 0 : _.badge) ? b : x.badge,
+                X = null != (r = null != (o = null == _ ? void 0 : _.root) ? o : I.Root) ? r : y,
+                Y = null != (a = null != (c = null == _ ? void 0 : _.badge) ? c : I.Badge) ? a : v,
+                Q = null != (f = null == L ? void 0 : L.root) ? f : x.root,
+                $ = null != (b = null == L ? void 0 : L.badge) ? b : x.badge,
                 ee = (0, m.u)({
                     elementType: X,
                     externalSlotProps: Q,
@@ -8976,8 +8841,8 @@
     function m(t) {
         return (0, n.g)("MuiFormControl", t)
     }(0, s.g)("MuiFormControl", ["root", "marginNone", "marginNormal", "marginDense", "fullWidth", "disabled"]);
-    let f = ["children", "className", "color", "component", "disabled", "error", "focused", "fullWidth", "hiddenLabel", "margin", "required", "size", "variant"],
-        h = (0, a.s)("div", {
+    let h = ["children", "className", "color", "component", "disabled", "error", "focused", "fullWidth", "hiddenLabel", "margin", "required", "size", "variant"],
+        f = (0, a.s)("div", {
             name: "MuiFormControl",
             slot: "Root",
             overridesResolver: (t, o) => {
@@ -9029,7 +8894,7 @@
                     size: k = "medium",
                     variant: D = "outlined"
                 } = g,
-                j = (0, n._)(g, f),
+                j = (0, n._)(g, h),
                 R = (0, r._)({}, g, {
                     color: b,
                     component: C,
@@ -9042,7 +8907,7 @@
                     size: k,
                     variant: D
                 }),
-                L = (t => {
+                _ = (t => {
                     let {
                         classes: r,
                         margin: o,
@@ -9052,7 +8917,7 @@
                     };
                     return (0, a.a)(l, m, r)
                 })(R),
-                [_, F] = o.useState(() => {
+                [L, F] = o.useState(() => {
                     let t = !1;
                     return y && o.Children.forEach(y, n => {
                         if (!(0, d.i)(n, ["Input", "Select"])) return;
@@ -9070,7 +8935,7 @@
             E && P && B(!1);
             let O = void 0 === S || E ? P : S,
                 H = o.useMemo(() => ({
-                    adornedStart: _,
+                    adornedStart: L,
                     setAdornedStart: F,
                     color: b,
                     disabled: E,
@@ -9095,13 +8960,13 @@
                     registerEffect: p,
                     required: T,
                     variant: D
-                }), [_, b, E, w, N, O, I, x, p, T, k, D]);
+                }), [L, b, E, w, N, O, I, x, p, T, k, D]);
             return (0, u.jsx)(l.F.Provider, {
                 value: H,
-                children: (0, u.jsx)(h, (0, r._)({
+                children: (0, u.jsx)(f, (0, r._)({
                     as: C,
                     ownerState: R,
-                    className: (0, a.c)(L.root, v),
+                    className: (0, a.c)(_.root, v),
                     ref: s
                 }, j, {
                     children: y
@@ -9159,11 +9024,11 @@
                     className: d,
                     component: m = "p"
                 } = i,
-                f = (0, n._)(i, C),
-                h = (0, l.u)(),
+                h = (0, n._)(i, C),
+                f = (0, l.u)(),
                 g = (0, p.f)({
                     props: i,
-                    muiFormControl: h,
+                    muiFormControl: f,
                     states: ["variant", "size", "disabled", "error", "filled", "focused", "required"]
                 }),
                 b = (0, r._)({}, i, {
@@ -9197,7 +9062,7 @@
                 ownerState: b,
                 className: (0, a.c)(w.root, d),
                 ref: o
-            }, f, {
+            }, h, {
                 children: " " === s ? v || (v = (0, u.jsx)("span", {
                     className: "notranslate",
                     children: "​"
@@ -9226,7 +9091,7 @@
     }
     var p = (0, s.g)("MuiFormLabel", ["root", "colorSecondary", "focused", "disabled", "error", "filled", "required", "asterisk"]);
     let m = ["children", "className", "color", "component", "disabled", "error", "filled", "focused", "required"],
-        f = (0, a.s)("label", {
+        h = (0, a.s)("label", {
             name: "MuiFormLabel",
             slot: "Root",
             overridesResolver: (t, n) => {
@@ -9257,7 +9122,7 @@
                 }
             })
         }),
-        h = (0, a.s)("span", {
+        f = (0, a.s)("span", {
             name: "MuiFormLabel",
             slot: "Asterisk",
             overridesResolver: (t, n) => n.asterisk
@@ -9312,13 +9177,13 @@
                     };
                     return (0, a.a)(p, d, r)
                 })(E);
-            return (0, u.jsxs)(f, (0, r._)({
+            return (0, u.jsxs)(h, (0, r._)({
                 as: y,
                 ownerState: E,
                 className: (0, a.c)(w.root, g),
                 ref: o
             }, v, {
-                children: [p, C.required && (0, u.jsxs)(h, {
+                children: [p, C.required && (0, u.jsxs)(f, {
                     ownerState: E,
                     "aria-hidden": !0,
                     className: w.asterisk,
@@ -9347,8 +9212,8 @@
         return (0, n.g)("MuiInputAdornment", t)
     }
     var p, m = (0, l.g)("MuiInputAdornment", ["root", "filled", "standard", "outlined", "positionStart", "positionEnd", "disablePointerEvents", "hiddenLabel", "sizeSmall"]);
-    let f = ["children", "className", "component", "disablePointerEvents", "disableTypography", "position", "variant"],
-        h = (0, a.s)("div", {
+    let h = ["children", "className", "component", "disablePointerEvents", "disableTypography", "position", "variant"],
+        f = (0, a.s)("div", {
             name: "MuiInputAdornment",
             slot: "Root",
             overridesResolver: (t, r) => {
@@ -9395,7 +9260,7 @@
                     position: E,
                     variant: w
                 } = m,
-                S = (0, n._)(m, f),
+                S = (0, n._)(m, h),
                 I = (0, i.u)() || {},
                 x = w;
             w && I.variant, I && !x && (x = I.variant);
@@ -9421,7 +9286,7 @@
                 })(A);
             return (0, s.jsx)(i.F.Provider, {
                 value: null,
-                children: (0, s.jsx)(h, (0, r._)({
+                children: (0, s.jsx)(f, (0, r._)({
                     as: v,
                     ownerState: A,
                     className: (0, a.c)(T.root, y),
@@ -9461,8 +9326,8 @@
         return (0, n.g)("MuiInputLabel", t)
     }
     var m = (0, s.g)("MuiInputLabel", ["root", "focused", "disabled", "error", "required", "asterisk", "formControl", "sizeSmall", "shrink", "animated", "standard", "filled", "outlined"]);
-    let f = ["disableAnimation", "margin", "shrink", "variant", "className"],
-        h = (0, a.s)(c.F, {
+    let h = ["disableAnimation", "margin", "shrink", "variant", "className"],
+        f = (0, a.s)(c.F, {
             shouldForwardProp: t => (0, a.r)(t) || "classes" === t,
             name: "MuiInputLabel",
             slot: "Root",
@@ -9540,7 +9405,7 @@
                     shrink: m,
                     className: g
                 } = s,
-                y = (0, n._)(s, f),
+                y = (0, n._)(s, h),
                 v = (0, l.u)(),
                 b = m;
             void 0 === b && v && (b = v.filled || v.focused || v.adornedStart);
@@ -9570,10 +9435,10 @@
                     } = t, m = {
                         root: ["root", i && "formControl", !u && "animated", s && "shrink", l && "normal" !== l && "size".concat((0, n.a)(l)), c],
                         asterisk: [d && "asterisk"]
-                    }, f = (0, a.a)(m, p, o);
-                    return (0, r._)({}, o, f)
+                    }, h = (0, a.a)(m, p, o);
+                    return (0, r._)({}, o, h)
                 })(E);
-            return (0, u.jsx)(h, (0, r._)({
+            return (0, u.jsx)(f, (0, r._)({
                 "data-shrink": b,
                 ownerState: E,
                 ref: o,
@@ -9597,8 +9462,8 @@
         d = t.i(969708),
         p = t.i(945272),
         m = t.i(208958),
-        f = t.i(488339),
-        h = t.i(239508);
+        h = t.i(488339),
+        f = t.i(239508);
     t.i(485511), t.i(737153);
     var g = t.i(232625);
     let y = ["className"],
@@ -9705,8 +9570,8 @@
                     ContainerProps: {
                         className: R
                     } = {},
-                    dense: L = !1,
-                    disabled: _ = !1,
+                    dense: _ = !1,
+                    disabled: L = !1,
                     disableGutters: F = !1,
                     disablePadding: N = !1,
                     divider: M = !1,
@@ -9720,10 +9585,10 @@
                 V = (0, n._)(E, v),
                 q = o.useContext(i.L),
                 W = o.useMemo(() => ({
-                    dense: L || q.dense || !1,
+                    dense: _ || q.dense || !1,
                     alignItems: w,
                     disableGutters: F
-                }), [w, q.dense, L, F]),
+                }), [w, q.dense, _, F]),
                 G = o.useRef(null);
             (0, d.u)(() => {
                 S && G.current && G.current.focus()
@@ -9735,7 +9600,7 @@
                     autoFocus: S,
                     button: I,
                     dense: W.dense,
-                    disabled: _,
+                    disabled: L,
                     disableGutters: F,
                     disablePadding: N,
                     divider: M,
@@ -9765,7 +9630,7 @@
                 $ = H.root || D.root || {},
                 ee = (0, r._)({
                     className: (0, a.c)(X.root, $.className, A),
-                    disabled: _
+                    disabled: L
                 }, V),
                 et = T || "li";
             return I && (ee.component = T || "div", ee.focusVisibleClassName = (0, a.c)(l.l.focusVisible, P), et = g.B), J ? (et = ee.component || T ? et : "div", "li" === j && ("li" === et ? et = "div" : "li" === ee.component && (ee.component = "div")), (0, s.jsx)(i.L.Provider, {
@@ -9776,7 +9641,7 @@
                     ref: Y,
                     ownerState: Z
                 }, z, {
-                    children: [(0, s.jsx)(Q, (0, r._)({}, $, !(0, f.i)(Q) && {
+                    children: [(0, s.jsx)(Q, (0, r._)({}, $, !(0, h.i)(Q) && {
                         as: et,
                         ownerState: (0, r._)({}, Z, $.ownerState)
                     }, ee, {
@@ -9788,10 +9653,10 @@
                 children: (0, s.jsxs)(Q, (0, r._)({}, $, {
                     as: et,
                     ref: Y
-                }, !(0, f.i)(Q) && {
+                }, !(0, h.i)(Q) && {
                     ownerState: (0, r._)({}, Z, $.ownerState)
                 }, ee, {
-                    children: [K, B && (0, s.jsx)(h.L, {
+                    children: [K, B && (0, s.jsx)(f.L, {
                         children: B
                     })]
                 }))
@@ -9841,9 +9706,9 @@
                     name: "MuiListItemSecondaryAction"
                 }),
                 {
-                    className: f
+                    className: h
                 } = m,
-                h = (0, n._)(m, d),
+                f = (0, n._)(m, d),
                 g = o.useContext(i.L),
                 y = (0, r._)({}, m, {
                     disableGutters: g.disableGutters
@@ -9858,10 +9723,10 @@
                     }, c, r)
                 })(y);
             return (0, s.jsx)(p, (0, r._)({
-                className: (0, a.c)(v.root, f),
+                className: (0, a.c)(v.root, h),
                 ownerState: y,
                 ref: l
-            }, h))
+            }, f))
         });
     m.muiName = "ListItemSecondaryAction", t.s(["L", 0, m])
 }, 173206, t => {
@@ -9928,16 +9793,16 @@
                 {
                     className: p,
                     color: m = "default",
-                    component: f = "li",
-                    disableGutters: h = !1,
+                    component: h = "li",
+                    disableGutters: f = !1,
                     disableSticky: g = !1,
                     inset: y = !1
                 } = i,
                 v = (0, n._)(i, c),
                 b = (0, r._)({}, i, {
                     color: m,
-                    component: f,
-                    disableGutters: h,
+                    component: h,
+                    disableGutters: f,
                     disableSticky: g,
                     inset: y
                 }),
@@ -9954,7 +9819,7 @@
                     return (0, a.a)(c, u, r)
                 })(b);
             return (0, l.jsx)(d, (0, r._)({
-                as: f,
+                as: h,
                 className: (0, a.c)(C.root, p),
                 ref: o,
                 ownerState: b
@@ -10018,7 +9883,7 @@
                 }
             }
         }),
-        f = (0, a.s)("span", {
+        h = (0, a.s)("span", {
             name: "MuiCardActionArea",
             slot: "FocusHighlight",
             overridesResolver: (t, n) => n.focusHighlight
@@ -10042,7 +9907,7 @@
                 })
             }
         }),
-        h = o.forwardRef(function(t, o) {
+        f = o.forwardRef(function(t, o) {
             let i = (0, s.u)({
                     props: t,
                     name: "MuiCardActionArea"
@@ -10050,7 +9915,7 @@
                 {
                     children: u,
                     className: d,
-                    focusVisibleClassName: h
+                    focusVisibleClassName: f
                 } = i,
                 g = (0, n._)(i, p),
                 y = (t => {
@@ -10064,11 +9929,11 @@
                 })(i);
             return (0, l.jsxs)(m, (0, r._)({
                 className: (0, a.c)(y.root, d),
-                focusVisibleClassName: (0, a.c)(h, y.focusVisible),
+                focusVisibleClassName: (0, a.c)(f, y.focusVisible),
                 ref: o,
                 ownerState: i
             }, g, {
-                children: [u, (0, l.jsx)(f, {
+                children: [u, (0, l.jsx)(h, {
                     className: y.focusHighlight,
                     ownerState: i
                 })]
@@ -10130,7 +9995,7 @@
                 ref: o
             }, d))
         });
-    t.s(["C", 0, h, "a", 0, b])
+    t.s(["C", 0, f, "a", 0, b])
 }, 222040, t => {
     "use strict";
     var n = t.i(763937);
@@ -10231,8 +10096,8 @@
                 }),
                 {
                     className: m,
-                    disabled: f = !1,
-                    disableFocusRipple: h = !1,
+                    disabled: h = !1,
+                    disableFocusRipple: f = !1,
                     fullWidth: g,
                     icon: y,
                     iconPosition: v = "top",
@@ -10249,8 +10114,8 @@
                 } = p,
                 D = (0, n._)(p, c),
                 j = (0, r._)({}, p, {
-                    disabled: f,
-                    disableFocusRipple: h,
+                    disabled: h,
+                    disableFocusRipple: f,
                     selected: I,
                     icon: !!y,
                     iconPosition: v,
@@ -10275,16 +10140,16 @@
                     };
                     return (0, a.a)(m, i.g, r)
                 })(j),
-                L = y && C && o.isValidElement(y) ? o.cloneElement(y, {
+                _ = y && C && o.isValidElement(y) ? o.cloneElement(y, {
                     className: (0, a.c)(R.iconWrapper, y.props.className)
                 }) : y;
             return (0, l.jsxs)(d, (0, r._)({
-                focusRipple: !h,
+                focusRipple: !f,
                 className: (0, a.c)(R.root, m),
                 ref: s,
                 role: "tab",
                 "aria-selected": I,
-                disabled: f,
+                disabled: h,
                 onClick: t => {
                     !I && E && E(t, T), w && w(t)
                 },
@@ -10295,9 +10160,9 @@
                 tabIndex: I ? 0 : -1
             }, D, {
                 children: [(0, l.jsxs)(o.Fragment, "top" === v || "start" === v ? {
-                    children: [L, C]
+                    children: [_, C]
                 } : {
-                    children: [C, L]
+                    children: [C, _]
                 }), b]
             }))
         });
@@ -10317,8 +10182,8 @@
         d = t.i(937547),
         p = t.i(625845),
         m = t.i(696180),
-        f = t.i(963320),
-        h = t.i(715843),
+        h = t.i(963320),
+        f = t.i(715843),
         g = t.i(586278);
     t.i(197094);
     var y = t.i(888265),
@@ -10379,7 +10244,7 @@
         }),
         k = a.forwardRef(function(t, n) {
             var a, s;
-            let c = (0, f.u)({
+            let c = (0, h.u)({
                     props: t,
                     name: "MuiTabScrollButton"
                 }),
@@ -10406,7 +10271,7 @@
                 })(C),
                 w = null != (a = p.StartScrollButtonIcon) ? a : y.K,
                 S = null != (s = p.EndScrollButtonIcon) ? s : y.a,
-                x = (0, h.u)({
+                x = (0, f.u)({
                     elementType: w,
                     externalSlotProps: m.startScrollButtonIcon,
                     additionalProps: {
@@ -10414,7 +10279,7 @@
                     },
                     ownerState: C
                 }),
-                k = (0, h.u)({
+                k = (0, f.u)({
                     elementType: S,
                     externalSlotProps: m.endScrollButtonIcon,
                     additionalProps: {
@@ -10439,8 +10304,8 @@
     }
     var j = (0, m.g)("MuiTabs", ["root", "vertical", "flexContainer", "flexContainerVertical", "centered", "scroller", "fixed", "scrollableX", "scrollableY", "hideScrollbar", "scrollButtons", "scrollButtonsHideMobile", "indicator"]);
     let R = ["aria-label", "aria-labelledby", "action", "centered", "children", "className", "component", "allowScrollButtonsMobile", "indicatorColor", "onChange", "orientation", "ScrollButtonComponent", "scrollButtons", "selectionFollowsFocus", "slots", "slotProps", "TabIndicatorProps", "TabScrollButtonProps", "textColor", "value", "variant", "visibleScrollbar"],
-        L = (t, n) => t === n ? t.firstChild : n && n.nextElementSibling ? n.nextElementSibling : t.firstChild,
-        _ = (t, n) => t === n ? t.lastChild : n && n.previousElementSibling ? n.previousElementSibling : t.lastChild,
+        _ = (t, n) => t === n ? t.firstChild : n && n.nextElementSibling ? n.nextElementSibling : t.firstChild,
+        L = (t, n) => t === n ? t.lastChild : n && n.previousElementSibling ? n.previousElementSibling : t.lastChild,
         F = (t, n, r) => {
             let o = !1,
                 a = r(t, n);
@@ -10599,7 +10464,7 @@
         }),
         H = {},
         U = a.forwardRef(function(t, n) {
-            let c, m, y = (0, f.u)({
+            let c, m, y = (0, h.u)({
                     props: t,
                     name: "MuiTabs"
                 }),
@@ -10675,17 +10540,17 @@
                         hideScrollbar: [o && "hideScrollbar"]
                     }, D, c)
                 })(ed),
-                em = (0, h.u)({
+                em = (0, f.u)({
                     elementType: Z.StartScrollButtonIcon,
                     externalSlotProps: X.startScrollButtonIcon,
                     ownerState: ed
                 }),
-                ef = (0, h.u)({
+                eh = (0, f.u)({
                     elementType: Z.EndScrollButtonIcon,
                     externalSlotProps: X.endScrollButtonIcon,
                     ownerState: ed
                 }),
-                [eh, eg] = a.useState(!1),
+                [ef, eg] = a.useState(!1),
                 [ey, ev] = a.useState(H),
                 [eb, eC] = a.useState(!1),
                 [eE, ew] = a.useState(!1),
@@ -10757,7 +10622,7 @@
                         (t >= 1 || n >= 1) && ev(a)
                     }
                 }),
-                eL = function(t) {
+                e_ = function(t) {
                     let {
                         animation: n = !0
                     } = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
@@ -10782,9 +10647,9 @@
                         duration: v.transitions.duration.standard
                     }) : ek.current[ei] = t
                 },
-                e_ = t => {
+                eL = t => {
                     let n = ek.current[ei];
-                    ea ? n += t : (n += t * (w ? -1 : 1), n *= w && "reverse" === C() ? -1 : 1), eL(n)
+                    ea ? n += t : (n += t * (w ? -1 : 1), n *= w && "reverse" === C() ? -1 : 1), e_(n)
                 },
                 eF = () => {
                     let t = ek.current[eu],
@@ -10811,9 +10676,9 @@
                         tabsMeta: n,
                         tabMeta: r
                     } = ej();
-                    r && n && (r[el] < n[el] ? eL(n[ei] + (r[el] - n[el]), {
+                    r && n && (r[el] < n[el] ? e_(n[ei] + (r[el] - n[el]), {
                         animation: t
-                    }) : r[es] > n[es] && eL(n[ei] + (r[es] - n[es]), {
+                    }) : r[es] > n[es] && e_(n[ei] + (r[es] - n[es]), {
                         animation: t
                     }))
                 }),
@@ -10887,7 +10752,7 @@
                     let r = n === ee;
                     return eO += 1, a.cloneElement(t, (0, o._)({
                         fullWidth: "fullWidth" === et,
-                        indicator: r && !eh && eB,
+                        indicator: r && !ef && eB,
                         selected: r,
                         selectionFollowsFocus: J,
                         onChange: q,
@@ -10910,7 +10775,7 @@
                     orientation: W,
                     direction: w ? "right" : "left",
                     onClick: () => {
-                        e_(-1 * eF())
+                        eL(-1 * eF())
                     },
                     disabled: !eb
                 }, Q, {
@@ -10920,12 +10785,12 @@
                         EndScrollButtonIcon: Z.EndScrollButtonIcon
                     },
                     slotProps: {
-                        endScrollButtonIcon: ef
+                        endScrollButtonIcon: eh
                     },
                     orientation: W,
                     direction: w ? "left" : "right",
                     onClick: () => {
-                        e_(eF())
+                        eL(eF())
                     },
                     disabled: !eE
                 }, Q, {
@@ -10959,22 +10824,22 @@
                                 a = "horizontal" === W ? "ArrowRight" : "ArrowDown";
                             switch ("horizontal" === W && w && (o = "ArrowRight", a = "ArrowLeft"), t.key) {
                                 case o:
-                                    t.preventDefault(), F(n, r, _);
-                                    break;
-                                case a:
                                     t.preventDefault(), F(n, r, L);
                                     break;
+                                case a:
+                                    t.preventDefault(), F(n, r, _);
+                                    break;
                                 case "Home":
-                                    t.preventDefault(), F(n, null, L);
+                                    t.preventDefault(), F(n, null, _);
                                     break;
                                 case "End":
-                                    t.preventDefault(), F(n, null, _)
+                                    t.preventDefault(), F(n, null, L)
                             }
                         },
                         ref: eD,
                         role: "tablist",
                         children: eH
-                    }), eh && eB]
+                    }), ef && eB]
                 }), eU.scrollButtonEnd]
             }))
         });
@@ -10994,8 +10859,8 @@
         p = t.i(879494);
     t.i(197094);
     var m = t.i(542600),
-        f = t.i(219270),
-        h = t.i(543870);
+        h = t.i(219270),
+        f = t.i(543870);
 
     function g(t) {
         return (0, r.g)("MuiTextField", t)
@@ -11003,8 +10868,8 @@
     let y = ["autoComplete", "autoFocus", "children", "className", "color", "defaultValue", "disabled", "error", "FormHelperTextProps", "fullWidth", "helperText", "id", "InputLabelProps", "inputProps", "InputProps", "inputRef", "label", "maxRows", "minRows", "multiline", "name", "onBlur", "onChange", "onFocus", "placeholder", "required", "rows", "select", "SelectProps", "type", "value", "variant"],
         v = {
             standard: m.M,
-            filled: f.M,
-            outlined: h.M
+            filled: h.M,
+            outlined: f.M
         },
         b = (0, a.s)(s.F, {
             name: "MuiTextField",
@@ -11018,8 +10883,8 @@
                 }),
                 {
                     autoComplete: m,
-                    autoFocus: f = !1,
-                    children: h,
+                    autoFocus: h = !1,
+                    children: f,
                     className: C,
                     color: E = "primary",
                     defaultValue: w,
@@ -11032,8 +10897,8 @@
                     InputLabelProps: D,
                     inputProps: j,
                     InputProps: R,
-                    inputRef: L,
-                    label: _,
+                    inputRef: _,
+                    label: L,
                     maxRows: F,
                     minRows: N,
                     multiline: M = !1,
@@ -11052,7 +10917,7 @@
                 } = i,
                 Z = (0, r._)(i, y),
                 X = (0, n._)({}, i, {
-                    autoFocus: f,
+                    autoFocus: h,
                     color: E,
                     disabled: S,
                     error: I,
@@ -11071,14 +10936,14 @@
                     }, g, n)
                 })(X),
                 Q = {};
-            "outlined" === J && (D && void 0 !== D.shrink && (Q.notched = D.shrink), Q.label = _), q && (W && W.native || (Q.id = void 0), Q["aria-describedby"] = void 0);
+            "outlined" === J && (D && void 0 !== D.shrink && (Q.notched = D.shrink), Q.label = L), q && (W && W.native || (Q.id = void 0), Q["aria-describedby"] = void 0);
             let $ = (0, c.u)(k),
                 ee = T && $ ? "".concat($, "-helper-text") : void 0,
-                et = _ && $ ? "".concat($, "-label") : void 0,
+                et = L && $ ? "".concat($, "-label") : void 0,
                 en = (0, l.jsx)(v[J], (0, n._)({
                     "aria-describedby": ee,
                     autoComplete: m,
-                    autoFocus: f,
+                    autoFocus: h,
                     defaultValue: w,
                     fullWidth: A,
                     multiline: M,
@@ -11089,7 +10954,7 @@
                     type: G,
                     value: K,
                     id: $,
-                    inputRef: L,
+                    inputRef: _,
                     onBlur: B,
                     onChange: O,
                     onFocus: H,
@@ -11107,11 +10972,11 @@
                 variant: J,
                 ownerState: X
             }, Z, {
-                children: [null != _ && "" !== _ && (0, l.jsx)(d.I, (0, n._)({
+                children: [null != L && "" !== L && (0, l.jsx)(d.I, (0, n._)({
                     htmlFor: $,
                     id: et
                 }, D, {
-                    children: _
+                    children: L
                 })), q ? (0, l.jsx)(p.S, (0, n._)({
                     "aria-describedby": ee,
                     id: $,
@@ -11119,7 +10984,7 @@
                     value: K,
                     input: en
                 }, W, {
-                    children: h
+                    children: f
                 })) : en, T && (0, l.jsx)(s.a, (0, n._)({
                     id: ee
                 }, x, {
@@ -11137,8 +11002,8 @@
         d = t.i(273589),
         p = t.i(962560),
         m = t.i(42569),
-        f = t.i(270673),
-        h = t.i(696180),
+        h = t.i(270673),
+        f = t.i(696180),
         g = t.i(221628),
         y = t.i(578084),
         v = t.i(613689);
@@ -11188,15 +11053,15 @@
         D = "right",
         j = "left",
         R = "auto",
-        L = ["top", k, D, j],
-        _ = "start",
+        _ = ["top", k, D, j],
+        L = "start",
         F = "viewport",
         N = "popper",
-        M = L.reduce(function(t, n) {
-            return t.concat([n + "-" + _, n + "-end"])
+        M = _.reduce(function(t, n) {
+            return t.concat([n + "-" + L, n + "-end"])
         }, []),
-        P = [].concat(L, [R]).reduce(function(t, n) {
-            return t.concat([n, n + "-" + _, n + "-end"])
+        P = [].concat(_, [R]).reduce(function(t, n) {
+            return t.concat([n, n + "-" + L, n + "-end"])
         }, []),
         B = ["beforeRead", "read", "afterRead", "beforeMain", "main", "afterMain", "beforeWrite", "write", "afterWrite"];
 
@@ -11368,17 +11233,17 @@
             d = t.roundOffsets,
             p = t.isFixed,
             m = l.x,
-            f = void 0 === m ? 0 : m,
-            h = l.y,
-            g = void 0 === h ? 0 : h,
+            h = void 0 === m ? 0 : m,
+            f = l.y,
+            g = void 0 === f ? 0 : f,
             y = "function" == typeof d ? d({
-                x: f,
+                x: h,
                 y: g
             }) : {
-                x: f,
+                x: h,
                 y: g
             };
-        f = y.x, g = y.y;
+        h = y.x, g = y.y;
         var v = l.hasOwnProperty("x"),
             b = l.hasOwnProperty("y"),
             C = j,
@@ -11388,22 +11253,22 @@
             var S = er(r),
                 I = "clientHeight",
                 x = "clientWidth";
-            S === H(r) && "static" !== $(S = ee(r)).position && "absolute" === s && (I = "scrollHeight", x = "scrollWidth"), ("top" === a || (a === j || a === D) && "end" === i) && (E = k, g -= (p && S === w && w.visualViewport ? w.visualViewport.height : S[I]) - o.height, g *= u ? 1 : -1), (a === j || ("top" === a || a === k) && "end" === i) && (C = D, f -= (p && S === w && w.visualViewport ? w.visualViewport.width : S[x]) - o.width, f *= u ? 1 : -1)
+            S === H(r) && "static" !== $(S = ee(r)).position && "absolute" === s && (I = "scrollHeight", x = "scrollWidth"), ("top" === a || (a === j || a === D) && "end" === i) && (E = k, g -= (p && S === w && w.visualViewport ? w.visualViewport.height : S[I]) - o.height, g *= u ? 1 : -1), (a === j || ("top" === a || a === k) && "end" === i) && (C = D, h -= (p && S === w && w.visualViewport ? w.visualViewport.width : S[x]) - o.width, h *= u ? 1 : -1)
         }
-        var A, T, R, L, _, F, N = Object.assign({
+        var A, T, R, _, L, F, N = Object.assign({
                 position: s
             }, c && eu),
             M = !0 === d ? (A = {
-                x: f,
+                x: h,
                 y: g
-            }, T = H(r), R = A.x, L = A.y, {
-                x: K(R * (_ = T.devicePixelRatio || 1)) / _ || 0,
-                y: K(L * _) / _ || 0
+            }, T = H(r), R = A.x, _ = A.y, {
+                x: K(R * (L = T.devicePixelRatio || 1)) / L || 0,
+                y: K(_ * L) / L || 0
             }) : {
-                x: f,
+                x: h,
                 y: g
             };
-        return f = M.x, g = M.y, u ? Object.assign({}, N, ((F = {})[E] = b ? "0" : "", F[C] = v ? "0" : "", F.transform = 1 >= (w.devicePixelRatio || 1) ? "translate(" + f + "px, " + g + "px)" : "translate3d(" + f + "px, " + g + "px, 0)", F)) : Object.assign({}, N, ((n = {})[E] = b ? g + "px" : "", n[C] = v ? f + "px" : "", n.transform = "", n))
+        return h = M.x, g = M.y, u ? Object.assign({}, N, ((F = {})[E] = b ? "0" : "", F[C] = v ? "0" : "", F.transform = 1 >= (w.devicePixelRatio || 1) ? "translate(" + h + "px, " + g + "px)" : "translate3d(" + h + "px, " + g + "px, 0)", F)) : Object.assign({}, N, ((n = {})[E] = b ? g + "px" : "", n[C] = v ? h + "px" : "", n.transform = "", n))
     }
     var ed = {
             passive: !0
@@ -11420,14 +11285,14 @@
             return ep[t]
         })
     }
-    var ef = {
+    var eh = {
         start: "end",
         end: "start"
     };
 
-    function eh(t) {
+    function ef(t) {
         return t.replace(/start|end/g, function(t) {
-            return ef[t]
+            return eh[t]
         })
     }
 
@@ -11544,7 +11409,7 @@
         if (null != c) {
             var d = "y" === c ? "height" : "width";
             switch (l) {
-                case _:
+                case L:
                     n[c] = n[c] - (r[d] / 2 - o[d] / 2);
                     break;
                 case "end":
@@ -11559,8 +11424,8 @@
         var r, o, a, i, l, s, u, c, d = n,
             p = d.placement,
             m = void 0 === p ? t.placement : p,
-            f = d.strategy,
-            h = void 0 === f ? t.strategy : f,
+            h = d.strategy,
+            f = void 0 === h ? t.strategy : h,
             g = d.boundary,
             y = d.rootBoundary,
             v = d.elementContext,
@@ -11568,15 +11433,15 @@
             C = d.altBoundary,
             E = d.padding,
             w = void 0 === E ? 0 : E,
-            S = ei("number" != typeof w ? w : el(w, L)),
+            S = ei("number" != typeof w ? w : el(w, _)),
             I = t.rects.popper,
             x = t.elements[void 0 !== C && C ? b === N ? "reference" : N : b],
             A = (r = U(x) ? x : x.contextElement || ee(t.elements.popper), o = void 0 === g ? "clippingParents" : g, a = void 0 === y ? F : y, u = (s = [].concat("clippingParents" === o ? (i = eb(et(r)), U(l = ["absolute", "fixed"].indexOf($(r).position) >= 0 && z(r) ? er(r) : r) ? i.filter(function(t) {
                 return U(t) && Q(t, l) && "body" !== O(t)
             }) : []) : [].concat(o), [a]))[0], (c = s.reduce(function(t, n) {
-                var o = eE(r, n, h);
+                var o = eE(r, n, f);
                 return t.top = W(o.top, t.top), t.right = G(o.right, t.right), t.bottom = G(o.bottom, t.bottom), t.left = W(o.left, t.left), t
-            }, eE(r, u, h))).width = c.right - c.left, c.height = c.bottom - c.top, c.x = c.left, c.y = c.top, c),
+            }, eE(r, u, f))).width = c.right - c.left, c.height = c.bottom - c.top, c.x = c.left, c.y = c.top, c),
             T = X(t.elements.reference),
             j = ew({
                 reference: T,
@@ -11585,12 +11450,12 @@
                 placement: m
             }),
             R = eC(Object.assign({}, I, j)),
-            _ = b === N ? R : T,
+            L = b === N ? R : T,
             M = {
-                top: A.top - _.top + S.top,
-                bottom: _.bottom - A.bottom + S.bottom,
-                left: A.left - _.left + S.left,
-                right: _.right - A.right + S.right
+                top: A.top - L.top + S.top,
+                bottom: L.bottom - A.bottom + S.bottom,
+                left: A.left - L.left + S.left,
+                right: L.right - A.right + S.right
             },
             P = t.modifiersData.offset;
         if (b === N && P) {
@@ -11790,23 +11655,23 @@
                     r = t.options,
                     o = t.name;
                 if (!n.modifiersData[o]._skip) {
-                    for (var a = r.mainAxis, i = void 0 === a || a, l = r.altAxis, s = void 0 === l || l, u = r.fallbackPlacements, c = r.padding, d = r.boundary, p = r.rootBoundary, m = r.altBoundary, f = r.flipVariations, h = void 0 === f || f, g = r.allowedAutoPlacements, y = n.options.placement, v = q(y), b = u || (v !== y && h ? function(t) {
+                    for (var a = r.mainAxis, i = void 0 === a || a, l = r.altAxis, s = void 0 === l || l, u = r.fallbackPlacements, c = r.padding, d = r.boundary, p = r.rootBoundary, m = r.altBoundary, h = r.flipVariations, f = void 0 === h || h, g = r.allowedAutoPlacements, y = n.options.placement, v = q(y), b = u || (v !== y && f ? function(t) {
                             if (q(t) === R) return [];
                             var n = em(t);
-                            return [eh(t), n, eh(n)]
+                            return [ef(t), n, ef(n)]
                         }(y) : [em(y)]), C = [y].concat(b).reduce(function(t, r) {
-                            var o, a, i, l, s, u, m, f, y, v, b, C;
+                            var o, a, i, l, s, u, m, h, y, v, b, C;
                             return t.concat(q(r) === R ? (a = (o = {
                                 placement: r,
                                 boundary: d,
                                 rootBoundary: p,
                                 padding: c,
-                                flipVariations: h,
+                                flipVariations: f,
                                 allowedAutoPlacements: g
-                            }).placement, i = o.boundary, l = o.rootBoundary, s = o.padding, u = o.flipVariations, f = void 0 === (m = o.allowedAutoPlacements) ? P : m, 0 === (b = (v = (y = es(a)) ? u ? M : M.filter(function(t) {
+                            }).placement, i = o.boundary, l = o.rootBoundary, s = o.padding, u = o.flipVariations, h = void 0 === (m = o.allowedAutoPlacements) ? P : m, 0 === (b = (v = (y = es(a)) ? u ? M : M.filter(function(t) {
                                 return es(t) === y
-                            }) : L).filter(function(t) {
-                                return f.indexOf(t) >= 0
+                            }) : _).filter(function(t) {
+                                return h.indexOf(t) >= 0
                             })).length && (b = v), Object.keys(C = b.reduce(function(t, r) {
                                 return t[r] = eS(n, {
                                     placement: r,
@@ -11820,7 +11685,7 @@
                         }, []), E = n.rects.reference, w = n.rects.popper, S = new Map, I = !0, x = C[0], A = 0; A < C.length; A++) {
                         var T = C[A],
                             F = q(T),
-                            N = es(T) === _,
+                            N = es(T) === L,
                             B = ["top", k].indexOf(F) >= 0,
                             O = B ? "width" : "height",
                             H = eS(n, {
@@ -11851,7 +11716,7 @@
                                     })
                                 });
                                 if (n) return x = n, "break"
-                            }, G = h ? 3 : 1; G > 0 && "break" !== W(G); G--);
+                            }, G = f ? 3 : 1; G > 0 && "break" !== W(G); G--);
                     n.placement !== x && (n.modifiersData[o]._skip = !0, n.placement = x, n.reset = !0)
                 }
             },
@@ -11876,8 +11741,8 @@
                     d = r.tether,
                     p = void 0 === d || d,
                     m = r.tetherOffset,
-                    f = void 0 === m ? 0 : m,
-                    h = eS(n, {
+                    h = void 0 === m ? 0 : m,
+                    f = eS(n, {
                         boundary: l,
                         rootBoundary: s,
                         padding: c,
@@ -11891,9 +11756,9 @@
                     E = n.modifiersData.popperOffsets,
                     w = n.rects.reference,
                     S = n.rects.popper,
-                    I = "function" == typeof f ? f(Object.assign({}, n.rects, {
+                    I = "function" == typeof h ? h(Object.assign({}, n.rects, {
                         placement: n.placement
-                    })) : f,
+                    })) : h,
                     x = "number" == typeof I ? {
                         mainAxis: I,
                         altAxis: I
@@ -11908,15 +11773,15 @@
                     };
                 if (E) {
                     if (void 0 === a || a) {
-                        var R, L = "y" === b ? "top" : j,
+                        var R, _ = "y" === b ? "top" : j,
                             F = "y" === b ? k : D,
                             N = "y" === b ? "height" : "width",
                             M = E[b],
-                            P = M + h[L],
-                            B = M - h[F],
+                            P = M + f[_],
+                            B = M - f[F],
                             O = p ? -S[N] / 2 : 0,
-                            H = y === _ ? w[N] : S[N],
-                            U = y === _ ? -S[N] : -w[N],
+                            H = y === L ? w[N] : S[N],
+                            U = y === L ? -S[N] : -w[N],
                             z = n.elements.arrow,
                             V = p && z ? Y(z) : {
                                 width: 0,
@@ -11928,7 +11793,7 @@
                                 bottom: 0,
                                 left: 0
                             },
-                            J = K[L],
+                            J = K[_],
                             Z = K[F],
                             X = ea(0, w[N], V[N]),
                             Q = v ? w[N] / 2 - O - X - J - x.mainAxis : H - X - J - x.mainAxis,
@@ -11944,13 +11809,13 @@
                             ed = "x" === b ? k : D,
                             ep = E[C],
                             em = "y" === C ? "height" : "width",
-                            ef = ep + h[ec],
-                            eh = ep - h[ed],
+                            eh = ep + f[ec],
+                            ef = ep - f[ed],
                             eg = -1 !== ["top", j].indexOf(g),
                             ey = null != (eu = null == A ? void 0 : A[C]) ? eu : 0,
-                            ev = eg ? ef : ep - w[em] - S[em] - ey + x.altAxis,
-                            eb = eg ? ep + w[em] + S[em] - ey - x.altAxis : eh,
-                            eC = p && eg ? (el = ea(ev, ep, eb)) > eb ? eb : el : ea(p ? ev : ef, ep, p ? eb : eh);
+                            ev = eg ? eh : ep - w[em] - S[em] - ey + x.altAxis,
+                            eb = eg ? ep + w[em] + S[em] - ey - x.altAxis : ef,
+                            eC = p && eg ? (el = ea(ev, ep, eb)) > eb ? eb : el : ea(p ? ev : eh, ep, p ? eb : ef);
                         E[C] = eC, T[C] = eC - ep
                     }
                     n.modifiersData[o] = T
@@ -11973,16 +11838,16 @@
                 if (i && l) {
                     var d, p = (d = a.padding, ei("number" != typeof(d = "function" == typeof d ? d(Object.assign({}, r.rects, {
                             placement: r.placement
-                        })) : d) ? d : el(d, L))),
+                        })) : d) ? d : el(d, _))),
                         m = Y(i),
-                        f = "y" === u ? "top" : j,
-                        h = "y" === u ? k : D,
+                        h = "y" === u ? "top" : j,
+                        f = "y" === u ? k : D,
                         g = r.rects.reference[c] + r.rects.reference[u] - l[u] - r.rects.popper[c],
                         y = l[u] - r.rects.reference[u],
                         v = er(i),
                         b = v ? "y" === u ? v.clientHeight || 0 : v.clientWidth || 0 : 0,
-                        C = p[f],
-                        E = b - m[c] - p[h],
+                        C = p[h],
+                        E = b - m[c] - p[f],
                         w = b / 2 - m[c] / 2 + (g / 2 - y / 2),
                         S = ea(C, w, E);
                     r.modifiersData[o] = ((n = {})[u] = S, n.centerOffset = S - w, n)
@@ -12052,7 +11917,7 @@
                         reference: U(t) ? eb(t) : t.contextElement ? eb(t.contextElement) : [],
                         popper: eb(n)
                     };
-                    var l, c, m, f, h, g, y = (l = Object.keys(g = [].concat(o, s.options.modifiers).reduce(function(t, n) {
+                    var l, c, m, h, f, g, y = (l = Object.keys(g = [].concat(o, s.options.modifiers).reduce(function(t, n) {
                         var r = t[n.name];
                         return t[n.name] = r ? Object.assign({}, r, n, {
                             options: Object.assign({}, r.options, n.options),
@@ -12060,7 +11925,7 @@
                         }) : n, t
                     }, {})).map(function(t) {
                         return g[t]
-                    }), c = new Map, m = new Set, f = [], l.forEach(function(t) {
+                    }), c = new Map, m = new Set, h = [], l.forEach(function(t) {
                         c.set(t.name, t)
                     }), l.forEach(function(t) {
                         m.has(t.name) || function t(n) {
@@ -12069,10 +11934,10 @@
                                     var r = c.get(n);
                                     r && t(r)
                                 }
-                            }), f.push(n)
+                            }), h.push(n)
                         }(t)
-                    }), h = f, B.reduce(function(t, n) {
-                        return t.concat(h.filter(function(t) {
+                    }), f = h, B.reduce(function(t, n) {
+                        return t.concat(f.filter(function(t) {
                             return t.phase === n
                         }))
                     }, []));
@@ -12100,26 +11965,26 @@
                             r = t.popper;
                         if (eT(n, r)) {
                             s.rects = {
-                                reference: (o = er(r), a = "fixed" === s.options.strategy, p = z(o), m = z(o) && (l = K((i = o.getBoundingClientRect()).width) / o.offsetWidth || 1, u = K(i.height) / o.offsetHeight || 1, 1 !== l || 1 !== u), f = ee(o), h = X(n, m, a), g = {
+                                reference: (o = er(r), a = "fixed" === s.options.strategy, p = z(o), m = z(o) && (l = K((i = o.getBoundingClientRect()).width) / o.offsetWidth || 1, u = K(i.height) / o.offsetHeight || 1, 1 !== l || 1 !== u), h = ee(o), f = X(n, m, a), g = {
                                     scrollLeft: 0,
                                     scrollTop: 0
                                 }, y = {
                                     x: 0,
                                     y: 0
-                                }, (p || !p && !a) && (("body" !== O(o) || ev(f)) && (g = o !== H(o) && z(o) ? {
+                                }, (p || !p && !a) && (("body" !== O(o) || ev(h)) && (g = o !== H(o) && z(o) ? {
                                     scrollLeft: o.scrollLeft,
                                     scrollTop: o.scrollTop
-                                } : eg(o)), z(o) ? ((y = X(o, !0)).x += o.clientLeft, y.y += o.clientTop) : f && (y.x = ey(f))), {
-                                    x: h.left + g.scrollLeft - y.x,
-                                    y: h.top + g.scrollTop - y.y,
-                                    width: h.width,
-                                    height: h.height
+                                } : eg(o)), z(o) ? ((y = X(o, !0)).x += o.clientLeft, y.y += o.clientTop) : h && (y.x = ey(h))), {
+                                    x: f.left + g.scrollLeft - y.x,
+                                    y: f.top + g.scrollTop - y.y,
+                                    width: f.width,
+                                    height: f.height
                                 }),
                                 popper: Y(r)
                             }, s.reset = !1, s.placement = s.options.placement, s.orderedModifiers.forEach(function(t) {
                                 return s.modifiersData[t.name] = Object.assign({}, t.data)
                             });
-                            for (var o, a, i, l, u, p, m, f, h, g, y, v = 0; v < s.orderedModifiers.length; v++)
+                            for (var o, a, i, l, u, p, m, h, f, g, y, v = 0; v < s.orderedModifiers.length; v++)
                                 if (!0 !== s.reset) {
                                     var b = s.orderedModifiers[v],
                                         C = b.fn,
@@ -12165,14 +12030,14 @@
 
     function eD(t) {
         return (0, d.g)("MuiPopper", t)
-    }(0, h.g)("MuiPopper", ["root"]);
+    }(0, f.g)("MuiPopper", ["root"]);
     let ej = ["anchorEl", "children", "direction", "disablePortal", "modifiers", "open", "placement", "popperOptions", "popperRef", "slotProps", "slots", "TransitionProps", "ownerState"],
         eR = ["anchorEl", "children", "container", "direction", "disablePortal", "keepMounted", "modifiers", "open", "placement", "popperOptions", "popperRef", "style", "transition", "slotProps", "slots"];
 
-    function eL(t) {
+    function e_(t) {
         return "function" == typeof t ? t() : t
     }
-    let e_ = {},
+    let eL = {},
         eF = s.forwardRef(function(t, n) {
             var r;
             let {
@@ -12182,8 +12047,8 @@
                 disablePortal: l,
                 modifiers: u,
                 open: c,
-                placement: f,
-                popperOptions: h,
+                placement: h,
+                popperOptions: f,
                 popperRef: y,
                 slotProps: v = {},
                 slots: w = {},
@@ -12206,15 +12071,15 @@
                         default:
                             return t
                     }
-                }(f, i),
-                [R, L] = s.useState(j),
-                [_, F] = s.useState(eL(o));
+                }(h, i),
+                [R, _] = s.useState(j),
+                [L, F] = s.useState(e_(o));
             s.useEffect(() => {
                 T.current && T.current.forceUpdate()
             }), s.useEffect(() => {
-                o && F(eL(o))
+                o && F(e_(o))
             }, [o]), (0, C.u)(() => {
-                if (!_ || !c) return;
+                if (!L || !c) return;
                 let t = [{
                     name: "preventOverflow",
                     options: {
@@ -12233,19 +12098,19 @@
                         let {
                             state: n
                         } = t;
-                        L(n.placement)
+                        _(n.placement)
                     }
                 }];
-                null != u && (t = t.concat(u)), h && null != h.modifiers && (t = t.concat(h.modifiers));
-                let n = ek(_, x.current, (0, p._)({
+                null != u && (t = t.concat(u)), f && null != f.modifiers && (t = t.concat(f.modifiers));
+                let n = ek(L, x.current, (0, p._)({
                     placement: j
-                }, h, {
+                }, f, {
                     modifiers: t
                 }));
                 return D.current(n), () => {
                     n.destroy(), D.current(null)
                 }
-            }, [_, l, u, c, h, j]);
+            }, [L, l, u, c, f, j]);
             let N = {
                 placement: R
             };
@@ -12283,9 +12148,9 @@
                     disablePortal: u = !1,
                     keepMounted: c = !1,
                     modifiers: m,
-                    open: f,
-                    placement: h = "bottom",
-                    popperOptions: b = e_,
+                    open: h,
+                    placement: f = "bottom",
+                    popperOptions: b = eL,
                     popperRef: C,
                     style: E,
                     transition: w = !1,
@@ -12294,14 +12159,14 @@
                 } = t,
                 x = (0, d._)(t, eR),
                 [A, T] = s.useState(!0);
-            if (!c && !f && (!w || A)) return null;
+            if (!c && !h && (!w || A)) return null;
             if (i) r = i;
             else if (o) {
-                let t = eL(o);
+                let t = e_(o);
                 r = t && void 0 !== t.nodeType ? (0, y.o)(t).body : (0, y.o)(null).body
             }
             let k = w ? {
-                in: f,
+                in: h,
                 onEnter: () => {
                     T(!1)
                 },
@@ -12318,8 +12183,8 @@
                     disablePortal: u,
                     modifiers: m,
                     ref: n,
-                    open: w ? !A : f,
-                    placement: h,
+                    open: w ? !A : h,
+                    placement: f,
                     popperOptions: b,
                     popperRef: C,
                     slotProps: S,
@@ -12329,7 +12194,7 @@
                         position: "fixed",
                         top: 0,
                         left: 0,
-                        display: f || !c || w && !A ? void 0 : "none"
+                        display: h || !c || w && !A ? void 0 : "none"
                     }, E),
                     TransitionProps: k,
                     children: a
@@ -12356,8 +12221,8 @@
                     componentsProps: u,
                     container: c,
                     disablePortal: m,
-                    keepMounted: f,
-                    modifiers: h,
+                    keepMounted: h,
+                    modifiers: f,
                     open: y,
                     placement: v,
                     popperOptions: b,
@@ -12372,8 +12237,8 @@
                     anchorEl: i,
                     container: c,
                     disablePortal: m,
-                    keepMounted: f,
-                    modifiers: h,
+                    keepMounted: h,
+                    modifiers: f,
                     open: y,
                     placement: v,
                     popperOptions: b,
@@ -12406,7 +12271,7 @@
         return (0, d.g)("MuiTooltip", t)
     }
     t.i(537500);
-    var eZ = (0, h.g)("MuiTooltip", ["popper", "popperInteractive", "popperArrow", "popperClose", "tooltip", "tooltipArrow", "touch", "tooltipPlacementLeft", "tooltipPlacementRight", "tooltipPlacementTop", "tooltipPlacementBottom", "arrow"]);
+    var eZ = (0, f.g)("MuiTooltip", ["popper", "popperInteractive", "popperArrow", "popperClose", "tooltip", "tooltipArrow", "touch", "tooltipPlacementLeft", "tooltipPlacementRight", "tooltipPlacementTop", "tooltipPlacementBottom", "arrow"]);
     let eX = ["arrow", "children", "classes", "components", "componentsProps", "describeChild", "disableFocusListener", "disableHoverListener", "disableInteractive", "disableTouchListener", "enterDelay", "enterNextDelay", "enterTouchDelay", "followCursor", "id", "leaveDelay", "leaveTouchDelay", "onClose", "onOpen", "open", "placement", "PopperComponent", "PopperProps", "slotProps", "slots", "title", "TransitionComponent", "TransitionProps"],
         eY = (0, m.s)(eB, {
             name: "MuiTooltip",
@@ -12583,15 +12448,15 @@
         }
     }
     let e3 = s.forwardRef(function(t, n) {
-        var r, o, a, i, l, u, c, h, y, v, C, E, S, I, x, A, T, k, D;
+        var r, o, a, i, l, u, c, f, y, v, C, E, S, I, x, A, T, k, D;
         let j = (0, w.u)({
                 props: t,
                 name: "MuiTooltip"
             }),
             {
                 arrow: R = !1,
-                children: L,
-                components: _ = {},
+                children: _,
+                components: L = {},
                 componentsProps: F = {},
                 describeChild: N = !1,
                 disableFocusListener: M = !1,
@@ -12618,17 +12483,17 @@
                 TransitionProps: er
             } = j,
             eo = (0, d._)(j, eX),
-            ea = s.isValidElement(L) ? L : (0, g.jsx)("span", {
-                children: L
+            ea = s.isValidElement(_) ? _ : (0, g.jsx)("span", {
+                children: _
             }),
             ei = (0, eO.u)(),
-            el = (0, f.u)(),
+            el = (0, h.u)(),
             [es, eu] = s.useState(),
             [ec, ed] = s.useState(null),
             ep = s.useRef(!1),
             em = B || V,
-            ef = (0, eH.u)(),
             eh = (0, eH.u)(),
+            ef = (0, eH.u)(),
             eg = (0, eH.u)(),
             ey = (0, eH.u)(),
             [ev, eb] = (0, eU.u)({
@@ -12650,17 +12515,17 @@
             ex = (0, eV.u)(t => {
                 e1.start(800 + W, () => {
                     e0 = !1
-                }), eb(!1), K && eC && K(t), ef.start(ei.transitions.duration.shortest, () => {
+                }), eb(!1), K && eC && K(t), eh.start(ei.transitions.duration.shortest, () => {
                     ep.current = !1
                 })
             }),
             eA = t => {
-                ep.current && "touchstart" !== t.type || (es && es.removeAttribute("title"), eh.clear(), eg.clear(), H || e0 && U ? eh.start(e0 ? U : H, () => {
+                ep.current && "touchstart" !== t.type || (es && es.removeAttribute("title"), ef.clear(), eg.clear(), H || e0 && U ? ef.start(e0 ? U : H, () => {
                     eI(t)
                 }) : eI(t))
             },
             eT = t => {
-                eh.clear(), eg.start(W, () => {
+                ef.clear(), eg.start(W, () => {
                     ex(t)
                 })
             },
@@ -12670,12 +12535,12 @@
                 onFocus: ej,
                 ref: eR
             } = (0, eq.u)(),
-            [, eL] = s.useState(!1),
-            e_ = t => {
-                eD(t), !1 === ek.current && (eL(!1), eT(t))
+            [, e_] = s.useState(!1),
+            eL = t => {
+                eD(t), !1 === ek.current && (e_(!1), eT(t))
             },
             eF = t => {
-                es || eu(t.currentTarget), ej(t), !0 === ek.current && (eL(!0), eA(t))
+                es || eu(t.currentTarget), ej(t), !0 === ek.current && (e_(!0), eA(t))
             },
             eN = t => {
                 ep.current = !0;
@@ -12712,14 +12577,14 @@
             } : {}),
             e6 = {};
         O || (e5.onTouchStart = t => {
-            eN(t), eg.clear(), ef.clear(), eS(), ew.current = document.body.style.WebkitUserSelect, document.body.style.WebkitUserSelect = "none", ey.start(z, () => {
+            eN(t), eg.clear(), eh.clear(), eS(), ew.current = document.body.style.WebkitUserSelect, document.body.style.WebkitUserSelect = "none", ey.start(z, () => {
                 document.body.style.WebkitUserSelect = ew.current, eA(t)
             })
         }, e5.onTouchEnd = t => {
             ea.props.onTouchEnd && ea.props.onTouchEnd(t), eS(), eg.start(G, () => {
                 ex(t)
             })
-        }), P || (e5.onMouseOver = e4(eA, e5.onMouseOver), e5.onMouseLeave = e4(eT, e5.onMouseLeave), em || (e6.onMouseOver = eA, e6.onMouseLeave = eT)), M || (e5.onFocus = e4(eF, e5.onFocus), e5.onBlur = e4(e_, e5.onBlur), em || (e6.onFocus = eF, e6.onBlur = e_));
+        }), P || (e5.onMouseOver = e4(eA, e5.onMouseOver), e5.onMouseLeave = e4(eT, e5.onMouseLeave), em || (e6.onMouseOver = eA, e6.onMouseLeave = eT)), M || (e5.onFocus = e4(eF, e5.onFocus), e5.onBlur = e4(eL, e5.onBlur), em || (e6.onFocus = eF, e6.onBlur = eL));
         let e8 = s.useMemo(() => {
                 var t;
                 let n = [{
@@ -12756,10 +12621,10 @@
                 };
                 return (0, m.a)(l, eJ, n)
             })(e7),
-            te = null != (r = null != (o = ee.popper) ? o : _.Popper) ? r : eY,
-            tt = null != (a = null != (i = null != (l = ee.transition) ? l : _.Transition) ? i : en) ? a : eG.G,
-            tn = null != (u = null != (c = ee.tooltip) ? c : _.Tooltip) ? u : eQ,
-            tr = null != (h = null != (y = ee.arrow) ? y : _.Arrow) ? h : e$,
+            te = null != (r = null != (o = ee.popper) ? o : L.Popper) ? r : eY,
+            tt = null != (a = null != (i = null != (l = ee.transition) ? l : L.Transition) ? i : en) ? a : eG.G,
+            tn = null != (u = null != (c = ee.tooltip) ? c : L.Tooltip) ? u : eQ,
+            tr = null != (f = null != (y = ee.arrow) ? y : L.Arrow) ? f : e$,
             to = (0, eK.a)(te, (0, p._)({}, Q, null != (v = $.popper) ? v : F.popper, {
                 className: (0, m.c)(e9.popper, null == Q ? void 0 : Q.className, null == (C = null != (E = $.popper) ? E : F.popper) ? void 0 : C.className)
             }), e7),
@@ -12849,8 +12714,8 @@
         d = t.i(221628),
         p = t.i(270673),
         m = t.i(42569),
-        f = t.i(478036),
-        h = t.i(437272);
+        h = t.i(478036),
+        f = t.i(437272);
 
     function g(t) {
         return (0, c.p)("MuiSimpleTreeView", t)
@@ -13072,8 +12937,8 @@
                 {
                     metaLookup: p,
                     modelLookup: m,
-                    orderedChildrenIds: f,
-                    childrenIndexes: h,
+                    orderedChildrenIds: h,
+                    childrenIndexes: f,
                     itemsChildren: g
                 } = (0, c.x)({
                     storeParameters: t,
@@ -13083,7 +12948,7 @@
                     isItemExpandable: (t, n) => !!n && n.length > 0,
                     otherItemsMetaLookup: n
                 });
-            for (let t of (Object.assign(n, p), Object.assign(r, m), o[d] = f, a[d] = h, g)) i(t.children || [], t.id, u + 1)
+            for (let t of (Object.assign(n, p), Object.assign(r, m), o[d] = h, a[d] = f, g)) i(t.children || [], t.id, u + 1)
         }(t.items, null, 0), {
             itemMetaLookup: n,
             itemModelLookup: r,
@@ -13314,7 +13179,7 @@
     }
     let j = "u" > typeof document ? o.useLayoutEffect : () => {},
         R = [];
-    class L {
+    class _ {
         on(t, n) {
             let r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {},
                 o = this.events[t];
@@ -13356,7 +13221,7 @@
         }
     }
 
-    function _(t) {
+    function L(t) {
         var n, r, o, a, i, l;
         return {
             disabledItemsFocusable: null != (n = t.disabledItemsFocusable) && n,
@@ -13624,7 +13489,7 @@
             let n = (n, r, o) => {
                     void 0 !== t[r] && (n[r] = t[r])
                 },
-                r = _(t);
+                r = L(t);
             n(r, "expandedItems", "defaultExpandedItems"), n(r, "selectedItems", "defaultSelectedItems"), this.state.providedTreeId === t.id && void 0 !== this.state.treeId || (N += 1, r.treeId = "mui-tree-view-".concat(N)), !this.mapper.shouldIgnoreItemsStateUpdate(t) && w.shouldRebuildItemsState(t, this.parameters) && Object.assign(r, w.buildItemsStateIfNeeded(t));
             let o = this.mapper.updateStateFromParameters(r, t, n);
             this.update(o), this.parameters = t
@@ -13634,12 +13499,12 @@
                 return (0, s._)({
                     treeId: void 0,
                     focusedItemId: null
-                }, _(t), w.buildItemsStateIfNeeded(t), {
+                }, L(t), w.buildItemsStateIfNeeded(t), {
                     expandedItems: F(t.expandedItems, t.defaultExpandedItems, []),
                     selectedItems: F(t.selectedItems, t.defaultSelectedItems, t.multiSelect ? y : null)
                 })
             }(t);
-            super(o.getInitialState(a, t)), (0, n._)(this, "initialParameters", null), (0, n._)(this, "eventManager", new L), (0, n._)(this, "timeoutManager", new M), (0, n._)(this, "itemPluginManager", new U), (0, n._)(this, "disposeEffect", () => this.timeoutManager.clearAll), (0, n._)(this, "shouldIgnoreItemsStateUpdate", () => this.mapper.shouldIgnoreItemsStateUpdate(this.parameters)), (0, n._)(this, "registerStoreEffect", (t, n) => {
+            super(o.getInitialState(a, t)), (0, n._)(this, "initialParameters", null), (0, n._)(this, "eventManager", new _), (0, n._)(this, "timeoutManager", new M), (0, n._)(this, "itemPluginManager", new U), (0, n._)(this, "disposeEffect", () => this.timeoutManager.clearAll), (0, n._)(this, "shouldIgnoreItemsStateUpdate", () => this.mapper.shouldIgnoreItemsStateUpdate(this.parameters)), (0, n._)(this, "registerStoreEffect", (t, n) => {
                 let r = t(this.state);
                 this.subscribe(o => {
                     let a = t(o);
@@ -13666,16 +13531,16 @@
                 label: d,
                 itemId: p,
                 id: m
-            } = n, f = o.useContext(k);
-            if (null == f) throw Error("MUI X: Could not find the Tree View Children Item context.\nIt looks like you rendered your component outside of a SimpleTreeView parent component.\nThis can also happen if you are bundling multiple versions of the Tree View.");
+            } = n, h = o.useContext(k);
+            if (null == h) throw Error("MUI X: Could not find the Tree View Children Item context.\nIt looks like you rendered your component outside of a SimpleTreeView parent component.\nThis can also happen if you are bundling multiple versions of the Tree View.");
             let {
-                registerChild: h,
+                registerChild: f,
                 unregisterChild: g,
                 parentId: y
-            } = f, v = (0, c.I)(l), b = o.useRef(null), C = (0, c.c)(b, a), E = (0, c.a)(i, c.g.treeItemIdAttribute, p, m);
-            return j(() => (h(E, p), () => {
+            } = h, v = (0, c.I)(l), b = o.useRef(null), C = (0, c.c)(b, a), E = (0, c.a)(i, c.g.treeItemIdAttribute, p, m);
+            return j(() => (f(E, p), () => {
                 g(E), g(E)
-            }), [i, h, g, E, p]), j(() => i.jsxItems.insertJSXItem({
+            }), [i, f, g, E, p]), j(() => i.jsxItems.insertJSXItem({
                 id: p,
                 idAttribute: m,
                 parentId: y,
@@ -13776,7 +13641,7 @@
         }),
         X = o.forwardRef(function(t, n) {
             var r, a, i;
-            let l, m, f, h, y, v = J({
+            let l, m, h, f, y, v = J({
                     props: t,
                     name: "MuiSimpleTreeView"
                 }),
@@ -13798,8 +13663,8 @@
                         expandedItems: d,
                         defaultExpandedItems: p,
                         onExpandedItemsChange: m,
-                        onItemExpansionToggle: f,
-                        expansionTrigger: h,
+                        onItemExpansionToggle: h,
+                        expansionTrigger: f,
                         disableSelection: g,
                         selectedItems: y,
                         defaultSelectedItems: v,
@@ -13822,8 +13687,8 @@
                             expandedItems: d,
                             defaultExpandedItems: p,
                             onExpandedItemsChange: m,
-                            onItemExpansionToggle: f,
-                            expansionTrigger: h,
+                            onItemExpansionToggle: h,
+                            expansionTrigger: f,
                             disableSelection: g,
                             selectedItems: y,
                             defaultSelectedItems: v,
@@ -13833,7 +13698,7 @@
                             onSelectedItemsChange: S,
                             onItemSelectionToggle: I,
                             onItemFocus: x
-                        }), [i, l, s, c, d, p, m, f, h, g, y, v, b, E, w, S, I, x]),
+                        }), [i, l, s, c, d, p, m, h, f, g, y, v, b, E, w, S, I, x]),
                         forwardedProps: A
                     }
                 }(v),
@@ -13843,14 +13708,14 @@
                     isRtl: l
                 }))).current, l, I]), a = m.disposeEffect, o.useEffect(a, R), m),
                 T = o.useRef(null),
-                k = (i = (0, c.c)(n, T), f = (0, c.a)(A, c.g.treeId), h = (0, c.a)(A, c.i.itemChildrenIndentation), y = (0, c.a)(A, c.s.isMultiSelectEnabled), t => (0, s._)({
+                k = (i = (0, c.c)(n, T), h = (0, c.a)(A, c.g.treeId), f = (0, c.a)(A, c.i.itemChildrenIndentation), y = (0, c.a)(A, c.s.isMultiSelectEnabled), t => (0, s._)({
                     ref: i,
                     role: "tree",
-                    id: f,
+                    id: h,
                     "aria-multiselectable": y
                 }, x, t, {
                     style: (0, s._)({}, x.style, {
-                        "--TreeView-itemChildrenIndentation": "number" == typeof h ? "".concat(h, "px") : h
+                        "--TreeView-itemChildrenIndentation": "number" == typeof f ? "".concat(f, "px") : f
                     }),
                     onFocus: n => {
                         var r;
@@ -13861,7 +13726,7 @@
                         null == (r = t.onBlur) || r.call(t, n), A.focus.handleRootBlur(n)
                     }
                 })),
-                L = (t => {
+                _ = (t => {
                     let {
                         classes: n
                     } = t;
@@ -13875,17 +13740,17 @@
                         itemCheckbox: ["itemCheckbox"]
                     }, g, n), [n])
                 })(v),
-                _ = null != (r = null == E ? void 0 : E.root) ? r : Z,
+                L = null != (r = null == E ? void 0 : E.root) ? r : Z,
                 F = (0, c.k)({
-                    elementType: _,
+                    elementType: L,
                     externalSlotProps: null == w ? void 0 : w.root,
-                    className: L.root,
+                    className: _.root,
                     getSlotProps: k,
                     ownerState: v
                 });
             return (0, d.jsx)(b, {
                 store: A,
-                classes: L,
+                classes: _,
                 slots: E,
                 slotProps: w,
                 apiRef: S,
@@ -13895,7 +13760,7 @@
                     idAttribute: null,
                     children: (0, d.jsx)(c.T.Provider, {
                         value: 0,
-                        children: (0, d.jsx)(_, (0, s._)({}, F))
+                        children: (0, d.jsx)(L, (0, s._)({}, F))
                     })
                 })
             })
@@ -13927,8 +13792,8 @@
                 });
             return o.default.createElement(X, (0, r._)({}, c, {
                 slots: {
-                    collapseIcon: f.E,
-                    expandIcon: h.N
+                    collapseIcon: h.E,
+                    expandIcon: f.N
                 },
                 className: d.classes.root,
                 ref: n
@@ -13972,13 +13837,13 @@
             };
         n = (null == p ? void 0 : p.icon) ? "icon" : a.expandable ? a.expanded ? "collapseIcon" : "expandIcon" : "endIcon";
         let m = p[n],
-            f = (0, c.k)({
+            h = (0, c.k)({
                 elementType: m,
                 externalSlotProps: t => (0, s._)({}, (0, c.r)(l[n], t), (0, c.r)(null == o ? void 0 : o[n], t)),
                 ownerState: {}
             }),
-            h = (0, u._)(f, el);
-        return m ? (0, d.jsx)(m, (0, s._)({}, h)) : null
+            f = (0, u._)(h, el);
+        return m ? (0, d.jsx)(m, (0, s._)({}, f)) : null
     }
     let ec = (0, m.s)("div", {
         name: "MuiTreeItemDragAndDropOverlay",
@@ -14074,8 +13939,8 @@
                 }
             })
         }),
-        ef = ["visible"],
-        eh = ["id", "itemId", "label", "disabled", "disableSelection", "children", "slots", "slotProps", "classes"],
+        eh = ["visible"],
+        ef = ["id", "itemId", "label", "disabled", "disableSelection", "children", "slots", "slotProps", "classes"],
         eg = (0, c.l)(),
         ey = (0, m.s)("li", {
             name: "MuiTreeItem",
@@ -14204,7 +14069,7 @@
         eI = (0, m.s)(o.forwardRef((t, n) => {
             let {
                 visible: r
-            } = t, o = (0, u._)(t, ef);
+            } = t, o = (0, u._)(t, eh);
             return r ? (0, d.jsx)(et.M, (0, s._)({}, o, {
                 ref: n
             })) : null
@@ -14215,7 +14080,7 @@
             padding: 0
         }),
         ex = o.forwardRef(function(t, n) {
-            var r, a, i, l, p, f, h, g, y, v;
+            var r, a, i, l, p, h, f, g, y, v;
             let b = eg({
                     props: t,
                     name: "MuiTreeItem"
@@ -14231,12 +14096,12 @@
                     slotProps: T = {},
                     classes: k
                 } = b,
-                D = (0, u._)(b, eh),
+                D = (0, u._)(b, ef),
                 {
                     getContextProviderProps: j,
                     getRootProps: R,
-                    getContentProps: L,
-                    getIconContainerProps: _,
+                    getContentProps: _,
+                    getIconContainerProps: L,
                     getCheckboxProps: F,
                     getLabelProps: N,
                     getGroupTransitionProps: M,
@@ -14255,9 +14120,9 @@
                         itemId: d,
                         label: p,
                         children: m,
-                        rootRef: f
+                        rootRef: h
                     } = t, {
-                        rootRef: h,
+                        rootRef: f,
                         contentRef: g,
                         propsEnhancers: y
                     } = n(t), {
@@ -14266,7 +14131,7 @@
                     } = (0, c.b)({
                         itemId: d,
                         children: m
-                    }), C = o.useRef(null), E = o.useRef(null), w = (0, c.c)(f, h, C), S = (0, c.c)(g, E), I = o.useRef(null), x = (0, c.a)(a, c.s.isCheckboxSelectionEnabled), A = (0, c.a)(a, c.g.treeItemIdAttribute, d, u), T = (0, c.a)(a, c.h.isItemTheDefaultFocusableItem, d), k = {
+                    }), C = o.useRef(null), E = o.useRef(null), w = (0, c.c)(h, f, C), S = (0, c.c)(g, E), I = o.useRef(null), x = (0, c.a)(a, c.s.isCheckboxSelectionEnabled), A = (0, c.a)(a, c.g.treeItemIdAttribute, d, u), T = (0, c.a)(a, c.h.isItemTheDefaultFocusableItem, d), k = {
                         rootRefObject: C,
                         contentRefObject: E,
                         interactions: v
@@ -14478,7 +14343,7 @@
                 W = null != (a = A.content) ? a : ev,
                 G = (0, c.k)({
                     elementType: W,
-                    getSlotProps: L,
+                    getSlotProps: _,
                     externalSlotProps: T.content,
                     ownerState: {},
                     className: (0, m.c)(z.content, U.expanded && z.expanded, U.selected && z.selected, U.focused && z.focused, U.disabled && z.disabled, U.editing && z.editing, U.editable && z.editable)
@@ -14486,7 +14351,7 @@
                 K = null != (i = A.iconContainer) ? i : eC,
                 J = (0, c.k)({
                     elementType: K,
-                    getSlotProps: _,
+                    getSlotProps: L,
                     externalSlotProps: T.iconContainer,
                     ownerState: {},
                     className: z.iconContainer
@@ -14507,7 +14372,7 @@
                     ownerState: {},
                     className: z.checkbox
                 }),
-                $ = null != (f = A.groupTransition) ? f : void 0,
+                $ = null != (h = A.groupTransition) ? h : void 0,
                 ee = (0, c.k)({
                     elementType: $,
                     getSlotProps: M,
@@ -14515,7 +14380,7 @@
                     ownerState: {},
                     className: z.groupTransition
                 }),
-                et = null != (h = A.labelInput) ? h : em,
+                et = null != (f = A.labelInput) ? f : em,
                 en = (0, c.k)({
                     elementType: et,
                     getSlotProps: P,
@@ -14632,11 +14497,11 @@
         d = t.i(696180),
         p = t.i(726756),
         m = t.i(963320),
-        f = (0, u.c)((0, c.jsx)("path", {
+        h = (0, u.c)((0, c.jsx)("path", {
             d: "M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
         }), "Person");
 
-    function h(t) {
+    function f(t) {
         return (0, i.g)("MuiAvatar", t)
     }
     var g = (0, d.g)("MuiAvatar", ["root", "colorDefault", "circular", "rounded", "square", "img", "fallback"]);
@@ -14710,7 +14575,7 @@
             color: "transparent",
             textIndent: 1e4
         }),
-        C = (0, s.s)(f, {
+        C = (0, s.s)(h, {
             name: "MuiAvatar",
             slot: "Fallback",
             overridesResolver: (t, n) => n.fallback
@@ -14727,7 +14592,7 @@
                     alt: a,
                     children: u,
                     className: d,
-                    component: f = "div",
+                    component: h = "div",
                     slots: g = {},
                     slotProps: E = {},
                     imgProps: w,
@@ -14764,12 +14629,12 @@
                 })),
                 j = I || x,
                 R = j && "error" !== D,
-                L = (0, l._)({}, o, {
+                _ = (0, l._)({}, o, {
                     colorDefault: !R,
-                    component: f,
+                    component: h,
                     variant: A
                 }),
-                _ = (t => {
+                L = (t => {
                     let {
                         classes: n,
                         variant: r,
@@ -14779,10 +14644,10 @@
                         root: ["root", r, o && "colorDefault"],
                         img: ["img"],
                         fallback: ["fallback"]
-                    }, h, n)
-                })(L),
+                    }, f, n)
+                })(_),
                 [F, N] = (0, p.u)("img", {
-                    className: _.img,
+                    className: L.img,
                     elementType: b,
                     externalForwardedProps: {
                         slots: g,
@@ -14796,15 +14661,15 @@
                         srcSet: x,
                         sizes: S
                     },
-                    ownerState: L
+                    ownerState: _
                 });
             return k = R ? (0, c.jsx)(F, (0, l._)({}, N)) : u || 0 === u ? u : j && a ? a[0] : (0, c.jsx)(C, {
-                ownerState: L,
-                className: _.fallback
+                ownerState: _,
+                className: L.fallback
             }), (0, c.jsx)(v, (0, l._)({
-                as: f,
-                ownerState: L,
-                className: (0, s.c)(_.root, d),
+                as: h,
+                ownerState: _,
+                className: (0, s.c)(L.root, d),
                 ref: n
             }, T, {
                 children: k
@@ -14912,15 +14777,15 @@
                         classes: (0, a.default)(c, d)
                     }
                 }),
-                f = m.classes,
-                h = f.root,
-                g = f.iconSize,
+                h = m.classes,
+                f = h.root,
+                g = h.iconSize,
                 y = m.cx,
                 v = p ? r.default.cloneElement(o, {
                     className: y(o.props.className, g)
                 }) : null;
             return r.default.createElement("div", {
-                className: h,
+                className: f,
                 ref: n
             }, v, u)
         });
@@ -14971,7 +14836,7 @@
         d = t.i(221628),
         p = t.i(963320);
     let m = ["className"],
-        f = (0, s.s)("div", {
+        h = (0, s.s)("div", {
             name: "MuiListItemIcon",
             slot: "Root",
             overridesResolver: (t, n) => {
@@ -14994,7 +14859,7 @@
                 marginTop: 8
             })
         }),
-        h = r.forwardRef(function(t, n) {
+        f = r.forwardRef(function(t, n) {
             let o = (0, p.u)({
                     props: t,
                     name: "MuiListItemIcon"
@@ -15002,7 +14867,7 @@
                 {
                     className: a
                 } = o,
-                h = (0, i._)(o, m),
+                f = (0, i._)(o, m),
                 g = r.useContext(c.L),
                 y = (0, l._)({}, o, {
                     alignItems: g.alignItems
@@ -15016,11 +14881,11 @@
                         root: ["root", "flex-start" === n && "alignItemsFlexStart"]
                     }, u.g, r)
                 })(y);
-            return (0, d.jsx)(f, (0, l._)({
+            return (0, d.jsx)(h, (0, l._)({
                 className: (0, s.c)(v.root, a),
                 ownerState: y,
                 ref: n
-            }, h))
+            }, f))
         });
     var g = (0, o.default)({
             name: "ListItemIcon"
@@ -15040,7 +14905,7 @@
                         classes: (0, a.default)(i, l)
                     }
                 });
-            return r.default.createElement(h, (0, n._)({}, s, {
+            return r.default.createElement(f, (0, n._)({}, s, {
                 classes: u.classes,
                 ref: o
             }))
@@ -15644,9 +15509,9 @@
         }),
         p = (0, r.forwardRef)(function(t, s) {
             var p, m = t.InputProps,
-                f = void 0 === m ? {} : m,
-                h = t.SelectProps,
-                g = void 0 === h ? {} : h,
+                h = void 0 === m ? {} : m,
+                f = t.SelectProps,
+                g = void 0 === f ? {} : f,
                 y = t.InputLabelProps,
                 v = void 0 === y ? {} : y,
                 b = t.variant,
@@ -15657,17 +15522,17 @@
                 I = (0, n.a)(t, ["InputProps", "SelectProps", "InputLabelProps", "variant", "multiple", "displayEmpty", "renderValue"]),
                 x = (0, a.useStyles)(void 0, {
                     props: {
-                        classes: null == f ? void 0 : f.classes
+                        classes: null == h ? void 0 : h.classes
                     }
                 }),
                 A = (0, o.useStyles)(void 0, {
                     props: {
-                        classes: null == f ? void 0 : f.classes
+                        classes: null == h ? void 0 : h.classes
                     }
                 }),
                 T = (0, i.useStyles)(void 0, {
                     props: {
-                        classes: null == f ? void 0 : f.classes
+                        classes: null == h ? void 0 : h.classes
                     }
                 }),
                 k = T.classes;
@@ -15697,7 +15562,7 @@
                 InputLabelProps: (0, n._)((0, n._)({}, v), {
                     classes: D.classes
                 }),
-                InputProps: (0, n._)((0, n._)({}, f), {
+                InputProps: (0, n._)((0, n._)({}, h), {
                     classes: k
                 }),
                 variant: C,
@@ -15731,9 +15596,9 @@
             var u = t.FormHelperTextProps,
                 p = void 0 === u ? {} : u,
                 m = t.InputProps,
-                f = void 0 === m ? {} : m,
-                h = t.InputLabelProps,
-                g = void 0 === h ? {} : h,
+                h = void 0 === m ? {} : m,
+                f = t.InputLabelProps,
+                g = void 0 === f ? {} : f,
                 y = t.variant,
                 v = void 0 === y ? "outlined" : y,
                 b = t.className,
@@ -15746,17 +15611,17 @@
                 }),
                 S = (0, a.useStyles)(void 0, {
                     props: {
-                        classes: f.classes
+                        classes: h.classes
                     }
                 }),
                 I = (0, o.useStyles)(void 0, {
                     props: {
-                        classes: f.classes
+                        classes: h.classes
                     }
                 }),
                 x = (0, i.useStyles)(void 0, {
                     props: {
-                        classes: f.classes
+                        classes: h.classes
                     }
                 }),
                 A = x.classes;
@@ -15773,7 +15638,7 @@
                 InputLabelProps: (0, n._)((0, n._)({}, g), {
                     classes: T.classes
                 }),
-                InputProps: (0, n._)((0, n._)({}, f), {
+                InputProps: (0, n._)((0, n._)({}, h), {
                     classes: A
                 }),
                 FormHelperTextProps: (0, n._)((0, n._)({}, p), {
@@ -15942,7 +15807,7 @@
             n = p
         }
     });
-    let f = {
+    let h = {
         active: "active",
         checked: "checked",
         completed: "completed",
@@ -15957,9 +15822,9 @@
         selected: "selected"
     };
 
-    function h(t, n) {
+    function f(t, n) {
         let r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "Mui",
-            o = f[n];
+            o = h[n];
         return o ? "".concat(r, "-").concat(o) : "".concat(m.generate(t), "-").concat(n)
     }
 
@@ -15967,7 +15832,7 @@
         let r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "Mui",
             o = {};
         return n.forEach(n => {
-            o[n] = h(t, n, r)
+            o[n] = f(t, n, r)
         }), o
     }
     let y = r.createContext(null),
@@ -16067,12 +15932,12 @@
                     memoize: d,
                     memoizeOptions: p = [],
                     argsMemoize: m = x,
-                    argsMemoizeOptions: f = [],
-                    devModeChecks: h = {}
+                    argsMemoizeOptions: h = [],
+                    devModeChecks: f = {}
                 } = {
                     ...a,
                     ...u
-                }, g = E(p), y = E(f), v = (function(t) {
+                }, g = E(p), y = E(h), v = (function(t) {
                     let n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "expected all items to be functions, instead received the following types: ";
                     if (!t.every(t => "function" == typeof t)) {
                         let r = t.map(t => "function" == typeof t ? "function ".concat(t.name || "unnamed", "()") : typeof t).join(", ");
@@ -16259,7 +16124,7 @@
                         default:
                             throw Error("Unsupported number of arguments")
                     }
-                    L && (r = [...r, L]), (d = D(...r)).selectorArgs = a, o.set(c, d)
+                    _ && (r = [...r, _]), (d = D(...r)).selectorArgs = a, o.set(c, d)
                 }
                 switch (s) {
                     case 3:
@@ -16283,7 +16148,7 @@
                 }
             }
         };
-    var L, _, F = {},
+    var _, L, F = {},
         N = {};
     ({
         get exports() {
@@ -16293,8 +16158,8 @@
             F = e
         }
     }).exports = function() {
-        if (_) return N;
-        _ = 1;
+        if (L) return N;
+        L = 1;
         var t = r.default,
             n = "function" == typeof Object.is ? Object.is : function(t, n) {
                 return t === n && (0 !== t || 1 / t == 1 / n) || t != t && n != n
@@ -16372,7 +16237,7 @@
                 };
                 p.current = m
             } else m = p.current;
-            var f = o(t, (p = l(function() {
+            var h = o(t, (p = l(function() {
                 function t(t) {
                     if (!i) {
                         if (i = !0, o = t, t = c(t), void 0 !== d && m.hasValue) {
@@ -16394,8 +16259,8 @@
                 }]
             }, [r, u, c, d]))[0], p[1]);
             return i(function() {
-                m.hasValue = !0, m.value = f
-            }, [f]), s(f), f
+                m.hasValue = !0, m.value = h
+            }, [h]), s(h), h
         }, B
     }();
     let O = parseInt(r.version, 10) >= 19 ? function(t, n, o, a, i) {
@@ -16566,11 +16431,11 @@
                 p = !0,
                 m = !0;
             for (; !d && !c;) p && (i.push(s), c = -1 !== l.indexOf(s), p = null !== s, !c && p && (s = K.itemParentId(t, s))), m && !c && (l.push(u), d = -1 !== i.indexOf(u), m = null !== u, !d && m && (u = K.itemParentId(t, u)));
-            let f = c ? s : u,
-                h = K.itemOrderedChildrenIds(t, f),
-                g = i[i.indexOf(f) - 1],
-                y = l[l.indexOf(f) - 1];
-            return h.indexOf(g) < h.indexOf(y) ? [n, r] : [r, n]
+            let h = c ? s : u,
+                f = K.itemOrderedChildrenIds(t, h),
+                g = i[i.indexOf(h) - 1],
+                y = l[l.indexOf(h) - 1];
+            return f.indexOf(g) < f.indexOf(y) ? [n, r] : [r, n]
         },
         ea = r.createContext(() => -1),
         ei = {
@@ -16649,32 +16514,32 @@
         } = t, {
             store: o,
             publicAPI: a
-        } = v(), i = H(o, $.isItemExpandable, n), l = H(o, eu.isItemLoading, n), s = H(o, eu.itemHasError, n), u = ec(r) || i, c = H(o, $.isItemExpanded, n), d = H(o, es.isItemFocused, n), p = H(o, Y.isItemSelected, n), m = H(o, K.isItemDisabled, n), f = H(o, ei.isItemBeingEdited, n), h = {
+        } = v(), i = H(o, $.isItemExpandable, n), l = H(o, eu.isItemLoading, n), s = H(o, eu.itemHasError, n), u = ec(r) || i, c = H(o, $.isItemExpanded, n), d = H(o, es.isItemFocused, n), p = H(o, Y.isItemSelected, n), m = H(o, K.isItemDisabled, n), h = H(o, ei.isItemBeingEdited, n), f = {
             expandable: u,
             expanded: c,
             focused: d,
             selected: p,
             disabled: m,
-            editing: f,
+            editing: h,
             editable: H(o, ei.isItemEditable, n),
             loading: l,
             error: s
         }, g = () => {
-            o.labelEditing && (f ? o.labelEditing.setEditedItem(null) : o.labelEditing.setEditedItem(n))
+            o.labelEditing && (h ? o.labelEditing.setEditedItem(null) : o.labelEditing.setEditedItem(n))
         };
         return {
             interactions: {
                 handleExpansion: t => {
-                    if (h.disabled) return;
-                    h.focused || o.focus.focusItem(t, n);
+                    if (f.disabled) return;
+                    f.focused || o.focus.focusItem(t, n);
                     let r = Y.isMultiSelectEnabled(o.state) && (t.shiftKey || t.ctrlKey || t.metaKey);
-                    !h.expandable || r && $.isItemExpanded(o.state, n) || o.expansion.setItemExpansion({
+                    !f.expandable || r && $.isItemExpanded(o.state, n) || o.expansion.setItemExpansion({
                         event: t,
                         itemId: n
                     })
                 },
                 handleSelection: t => {
-                    Y.canItemBeSelected(o.state, n) && (h.focused || h.editing || o.focus.focusItem(t, n), Y.isMultiSelectEnabled(o.state) && (t.shiftKey || t.ctrlKey || t.metaKey) ? t.shiftKey ? o.selection.expandSelectionRange(t, n) : o.selection.setItemSelection({
+                    Y.canItemBeSelected(o.state, n) && (f.focused || f.editing || o.focus.focusItem(t, n), Y.isMultiSelectEnabled(o.state) && (t.shiftKey || t.ctrlKey || t.metaKey) ? t.shiftKey ? o.selection.expandSelectionRange(t, n) : o.selection.setItemSelection({
                         event: t,
                         itemId: n,
                         keepExistingSelection: !0
@@ -16702,7 +16567,7 @@
                     o.labelEditing && ei.isItemBeingEdited(o.state, n) && (g(), o.focus.focusItem(t, n))
                 }
             },
-            status: h,
+            status: f,
             publicAPI: a
         }
     }, "c", 0, function(t, n, r, o) {
@@ -16749,8 +16614,8 @@
             ownerState: s,
             skipResolvingSlotProps: p = !1,
             ...m
-        } = t, f = p ? {} : d(l, s), {
-            props: h,
+        } = t, h = p ? {} : d(l, s), {
+            props: f,
             internalRef: g
         } = function(t) {
             let {
@@ -16784,8 +16649,8 @@
                 d = c(a),
                 p = c(i),
                 m = n(s),
-                f = (0, o.c)(null == m ? void 0 : m.className, null == r ? void 0 : r.className, l, null == i ? void 0 : i.className, null == a ? void 0 : a.className),
-                h = {
+                h = (0, o.c)(null == m ? void 0 : m.className, null == r ? void 0 : r.className, l, null == i ? void 0 : i.className, null == a ? void 0 : a.className),
+                f = {
                     ...null == m ? void 0 : m.style,
                     ...null == r ? void 0 : r.style,
                     ...null == i ? void 0 : i.style,
@@ -16797,16 +16662,16 @@
                     ...p,
                     ...d
                 };
-            return f.length > 0 && (g.className = f), Object.keys(h).length > 0 && (g.style = h), {
+            return h.length > 0 && (g.className = h), Object.keys(f).length > 0 && (g.style = f), {
                 props: g,
                 internalRef: m.ref
             }
         }({
             ...m,
-            externalSlotProps: f
+            externalSlotProps: h
         });
         return a = {
-            ...h,
+            ...f,
             ref: function() {
                 for (var t = arguments.length, n = Array(t), o = 0; o < t; o++) n[o] = arguments[o];
                 let a = r.useRef(void 0),
@@ -16830,7 +16695,7 @@
                 return r.useMemo(() => n.every(t => null == t) ? null : t => {
                     a.current && (a.current(), a.current = void 0), null != t && (a.current = i(t))
                 }, n)
-            }(g, null == f ? void 0 : f.ref, null == (n = t.additionalProps) ? void 0 : n.ref)
+            }(g, null == h ? void 0 : h.ref, null == (n = t.additionalProps) ? void 0 : n.ref)
         }, void 0 === i || "string" == typeof i ? a : {
             ...a,
             ownerState: {
@@ -16854,8 +16719,8 @@
         }
         return o
     }, "n", 0, function(t) {
-        return h("MuiTreeItem", t)
-    }, "o", 0, g, "p", 0, h, "q", 0, l, "r", 0, d, "s", 0, Y, "t", 0, ed, "u", 0, v, "v", 0, y, "w", 0, b, "x", 0, function(t) {
+        return f("MuiTreeItem", t)
+    }, "o", 0, g, "p", 0, f, "q", 0, l, "r", 0, d, "s", 0, Y, "t", 0, ed, "u", 0, v, "v", 0, y, "w", 0, b, "x", 0, function(t) {
         let {
             storeParameters: n,
             items: r,
@@ -16967,8 +16832,8 @@
                 },
                 eventId: t.eventId || (0, a.lastEventId)()
             },
-            f = u.document.createElement("script");
-        f.async = !0, f.crossOrigin = "anonymous", f.src = function(t, n) {
+            h = u.document.createElement("script");
+        h.async = !0, h.crossOrigin = "anonymous", h.src = function(t, n) {
             let r, o, a = (0, i.makeDsn)(t);
             if (!a) return "";
             let l = "".concat((r = a.protocol ? "".concat(a.protocol, ":") : "", o = a.port ? ":".concat(a.port) : "", "".concat(r, "//").concat(a.host).concat(o).concat(a.path ? "/".concat(a.path) : "", "/api/")), "embed/error-page/"),
@@ -16983,10 +16848,10 @@
             return "".concat(l, "?").concat(s)
         }(p, m);
         let {
-            onLoad: h,
+            onLoad: f,
             onClose: g
         } = m;
-        if (h && (f.onload = h), g) {
+        if (f && (h.onload = f), g) {
             let t = n => {
                 if ("__sentry_reportdialog_closed__" === n.data) try {
                     g()
@@ -16996,21 +16861,21 @@
             };
             u.addEventListener("message", t)
         }
-        s.appendChild(f)
+        s.appendChild(h)
     }
     var d = t.i(416340);
     let p = "u" < typeof __SENTRY_DEBUG__ || __SENTRY_DEBUG__;
     var m = t.i(379705);
-    let f = Symbol.for("react.forward_ref"),
-        h = Symbol.for("react.memo"),
+    let h = Symbol.for("react.forward_ref"),
+        f = Symbol.for("react.memo"),
         g = {};
-    g[f] = {
+    g[h] = {
         $$typeof: !0,
         render: !0,
         defaultProps: !0,
         displayName: !0,
         propTypes: !0
-    }, g[h] = {
+    }, g[f] = {
         $$typeof: !0,
         compare: !0,
         defaultProps: !0,
@@ -17035,7 +16900,7 @@
             } = this.props;
             (0, r.withScope)(p => {
                 i && i(p, t, o);
-                let f = function(t, n, o) {
+                let h = function(t, n, o) {
                     let i, {
                         componentStack: l
                     } = n;
@@ -17058,13 +16923,13 @@
                         type: "auto.function.react.error_boundary"
                     }
                 });
-                l && l(t, o, f), s && (this._lastEventId = f, this._openFallbackReportDialog && c({
+                l && l(t, o, h), s && (this._lastEventId = h, this._openFallbackReportDialog && c({
                     ...u,
-                    eventId: f
+                    eventId: h
                 })), this.setState({
                     error: t,
                     componentStack: o,
-                    eventId: f
+                    eventId: h
                 })
             })
         }
@@ -17134,8 +16999,8 @@
         d = t.i(988012),
         p = t.i(447055),
         m = t.i(620068),
-        f = t.i(573672),
-        h = t.i(464782),
+        h = t.i(573672),
+        f = t.i(464782),
         g = t.i(418400),
         y = t.i(872204),
         v = t.i(649841),
@@ -17152,8 +17017,8 @@
         D = t.i(220552),
         j = t.i(28160),
         R = t.i(310634),
-        L = t.i(208215),
-        _ = t.i(935606),
+        _ = t.i(208215),
+        L = t.i(935606),
         F = t.i(904090),
         N = t.i(795536),
         M = t.i(306512),
@@ -17188,8 +17053,8 @@
         ed = t.i(235937),
         ep = t.i(764978),
         em = t.i(183047),
-        ef = t.i(890026),
-        eh = t.i(481854),
+        eh = t.i(890026),
+        ef = t.i(481854),
         eg = t.i(552586),
         ey = t.i(978923),
         ev = t.i(928435),
@@ -17206,8 +17071,8 @@
         eD = t.i(408822),
         ej = t.i(339295),
         eR = t.i(41043),
-        eL = t.i(625378),
-        e_ = t.i(95244),
+        e_ = t.i(625378),
+        eL = t.i(95244),
         eF = t.i(770009),
         eN = t.i(734306),
         eM = t.i(731693),
@@ -17239,30 +17104,29 @@
         e7 = t.i(780481),
         e9 = t.i(710675),
         te = t.i(874286),
-        tt = t.i(263692),
-        tn = t.i(710319),
-        tr = t.i(324201),
-        to = t.i(668833),
-        ta = t.i(773470),
-        ti = t.i(797117),
-        tl = t.i(500192),
-        ts = t.i(157924),
-        tu = t.i(470527),
-        tc = t.i(616420),
-        td = t.i(332719),
-        tp = t.i(197649),
-        tm = t.i(540513),
-        tf = t.i(149285),
+        tt = t.i(710319),
+        tn = t.i(324201),
+        tr = t.i(668833),
+        to = t.i(773470),
+        ta = t.i(797117),
+        ti = t.i(500192),
+        tl = t.i(157924),
+        ts = t.i(470527),
+        tu = t.i(616420),
+        tc = t.i(332719),
+        td = t.i(197649),
+        tp = t.i(540513),
+        tm = t.i(149285),
         th = t.i(16782),
-        tg = t.i(918697),
-        ty = t.i(319332),
-        tv = t.i(445465),
-        tb = t.i(581577),
-        tC = t.i(252842),
-        tE = t.i(736570),
-        tw = t.i(502585),
-        tS = t.i(772738);
-    let tI = (0, r.createContext)({
+        tf = t.i(918697),
+        tg = t.i(319332),
+        ty = t.i(445465),
+        tv = t.i(581577),
+        tb = t.i(252842),
+        tC = t.i(736570),
+        tE = t.i(502585),
+        tw = t.i(772738);
+    let tS = (0, r.createContext)({
         environment: "production",
         robloxEnvironment: "production",
         target: "global",
@@ -17296,11 +17160,11 @@
         }
     });
 
-    function tx() {
-        return (0, r.useContext)(tI)
+    function tI() {
+        return (0, r.useContext)(tS)
     }
-    tI.displayName = "NavigationConfigsContext";
-    let tA = (0, i.makeStyles)()(() => ({
+    tS.displayName = "NavigationConfigsContext";
+    let tx = (0, i.makeStyles)()(() => ({
             scroll: {
                 overflowY: "scroll",
                 overflowX: "hidden",
@@ -17318,69 +17182,69 @@
                 }
             }
         })),
-        tT = "rail",
-        tk = "header",
-        tD = "content",
-        tj = ["Documentation", "Assistant"],
-        tR = "creator-hub-rail-icon-only";
+        tA = "rail",
+        tT = "header",
+        tk = "content",
+        tD = ["Documentation", "Assistant"],
+        tj = "creator-hub-rail-icon-only";
 
-    function tL(t, n) {
+    function tR(t, n) {
         return "production" === n ? "luobu" === t ? "roblox.qq.com" : "roblox.com" : "staging" === n ? "luobu" === t ? "robloxlabs.cn" : "sitetest1.robloxlabs.com" : "luobu" === t ? "luobutest.robloxlabs.cn" : "sitetest3.robloxlabs.com"
     }
 
     function t_(t, n, r) {
         return "production" === r ? "luobu" === n ? "https://apis.api.robloxdev.cn/".concat(t) : "https://apis.roblox.com/".concat(t) : "staging" === r ? "luobu" === n ? "https://apis.robloxlabs.cn/".concat(t) : "https://apis.sitetest1.robloxlabs.com/".concat(t) : "luobu" === n ? "https://apis.luobutest.robloxlabs.cn/".concat(t) : "https://apis.sitetest3.robloxlabs.com/".concat(t)
     }
-    let tF = "https://create.roblox.com",
-        tN = "https://create.sitetest1.robloxlabs.com",
-        tM = "https://create.sitetest3.robloxlabs.com",
-        tP = "https://create.robloxdev.cn",
-        tB = "https://create.robloxlabs.cn",
-        tO = "https://create.luobutest.robloxlabs.cn",
-        tH = (t, n) => "luobu" === t ? "production" === n ? "https://create.robloxdev.cn/" : "sitetest1" === n || "development" === n ? "https://create.robloxlabs.cn/" : "https://create.luobutest.robloxlabs.cn/" : "production" === n ? "https://create.roblox.com/" : "https://create.".concat("development" === n ? "sitetest1" : n, ".robloxlabs.com/");
+    let tL = "https://create.roblox.com",
+        tF = "https://create.sitetest1.robloxlabs.com",
+        tN = "https://create.sitetest3.robloxlabs.com",
+        tM = "https://create.robloxdev.cn",
+        tP = "https://create.robloxlabs.cn",
+        tB = "https://create.luobutest.robloxlabs.cn",
+        tO = (t, n) => "luobu" === t ? "production" === n ? "https://create.robloxdev.cn/" : "sitetest1" === n || "development" === n ? "https://create.robloxlabs.cn/" : "https://create.luobutest.robloxlabs.cn/" : "production" === n ? "https://create.roblox.com/" : "https://create.".concat("development" === n ? "sitetest1" : n, ".robloxlabs.com/");
 
-    function tU(t, n) {
+    function tH(t, n) {
         return "luobu" === t ? "production" === n ? "roblox.qq.com" : "sitetest1" === n || "development" === n ? "robloxlabs.cn" : "luobutest.robloxlabs.cn" : "production" === n ? "roblox.com" : "".concat("development" === n ? "sitetest1" : n, ".robloxlabs.com")
     }
 
-    function tz(t, n, r) {
+    function tU(t, n, r) {
         return "production" === r ? "luobu" === n ? "https://apis.api.robloxdev.cn/".concat(t) : "https://apis.roblox.com/".concat(t) : "luobu" === n ? "sitetest1" === r || "development" === r ? "https://apis.robloxlabs.cn/".concat(t) : "https://apis.luobutest.robloxlabs.cn/".concat(t) : "https://apis.".concat("development" === r ? "sitetest1" : r, ".robloxlabs.com/").concat(t)
     }
 
-    function tV(t, n, r) {
+    function tz(t, n, r) {
         return "production" === r ? "luobu" === n ? "https://".concat(t, ".api.robloxdev.cn").concat(t) : "https://".concat(t, ".roblox.com") : "luobu" === n ? "sitetest1" === r || "development" === r ? "https://".concat(t, ".robloxlabs.cn") : "https://".concat(t, ".luobutest.robloxlabs.cn") : "https://".concat(t, ".").concat("development" === r ? "sitetest1" : r, ".robloxlabs.com")
     }
-    let tq = ["creatorHome", "groupList", e5.GroupListSurface.CreatorHub],
-        tW = "Home",
-        tG = "CreatorDashboard",
-        tK = "Updates",
-        tJ = "Advertise";
+    let tV = ["creatorHome", "groupList", e5.GroupListSurface.CreatorHub],
+        tq = "Home",
+        tW = "CreatorDashboard",
+        tG = "Updates",
+        tK = "Advertise";
 
-    function tZ(t) {
+    function tJ(t) {
         return ["CreatorHub", "Home", "CreatorDashboard", "RoadMap", "Explore"].includes(t)
     }
-    let tX = /^[a-z]{2}-[a-z]{2}$/,
-        tY = () => {
+    let tZ = /^[a-z]{2}-[a-z]{2}$/,
+        tX = () => {
             let {
                 target: t,
                 robloxEnvironment: n,
                 currentProduct: a
-            } = tx(), i = (0, o.usePathname)();
+            } = tI(), i = (0, o.usePathname)();
             return (0, r.useMemo)(() => {
                 var r;
                 let o = ["Documentation", "Assistant"].includes(a),
-                    l = tH(t, n),
+                    l = tO(t, n),
                     s = null != (r = null == i ? void 0 : i.split("/").filter(Boolean)) ? r : [],
                     u = "docs" === s[0] ? s[1] : s[0],
-                    c = u && tX.test(u) ? "".concat(u, "/") : "",
-                    d = tZ(a) ? "/" : l,
+                    c = u && tZ.test(u) ? "".concat(u, "/") : "",
+                    d = tJ(a) ? "/" : l,
                     p = "Store" === a ? "/" : "".concat(l, "store/"),
                     m = "Talent" === a ? "/" : "".concat(l, "talent/"),
-                    f = o ? "/".concat(c) : "".concat(l, "docs/"),
-                    h = "".concat(l, "docs/").concat(c),
+                    h = o ? "/".concat(c) : "".concat(l, "docs/"),
+                    f = "".concat(l, "docs/").concat(c),
                     g = "production" === n ? "https://devforum.roblox.com" : "sitetest3" === n ? "https://devforum.sitetest3.robloxlabs.com/" : "https://devforum.sitetest1.robloxlabs.com/",
                     y = "Advertise" === a ? "/" : "".concat(l, "advertise"),
-                    v = "https://".concat(tU(t, n), "/");
+                    v = "https://".concat(tH(t, n), "/");
                 return {
                     Dashboard: {
                         home: d,
@@ -17421,24 +17285,24 @@
                         home: m
                     },
                     Documentation: {
-                        home: f,
-                        absoluteHome: h,
+                        home: h,
+                        absoluteHome: f,
                         assistant: "".concat(o ? "" : "".concat(l, "docs"), "/assistant"),
-                        studio: "".concat(f, "studio"),
-                        engine: "".concat(f, "reference/engine"),
-                        cloud: "".concat(f, "cloud"),
-                        create: "".concat(f, "platform"),
-                        createExperiences: "".concat(f, "experiences"),
-                        createAvatar: "".concat(f, "avatar"),
-                        createAssets: "".concat(f, "assets"),
-                        createSamples: "".concat(f, "samples"),
-                        scaleAnalytics: "".concat(f, "production/analytics"),
-                        monetize: "".concat(f, "monetize"),
-                        newToRobloxGetStarted: "".concat(f, "get-started"),
-                        newToRobloxTutorials: "".concat(f, "tutorials"),
-                        communityCreatorPrograms: "".concat(f, "creator-programs"),
-                        communityEducators: "".concat(f, "education/educator-onboarding/landing"),
-                        communityGuidelinesAndPolicies: "".concat(f, "safety")
+                        studio: "".concat(h, "studio"),
+                        engine: "".concat(h, "reference/engine"),
+                        cloud: "".concat(h, "cloud"),
+                        create: "".concat(h, "platform"),
+                        createExperiences: "".concat(h, "experiences"),
+                        createAvatar: "".concat(h, "avatar"),
+                        createAssets: "".concat(h, "assets"),
+                        createSamples: "".concat(h, "samples"),
+                        scaleAnalytics: "".concat(h, "production/analytics"),
+                        monetize: "".concat(h, "monetize"),
+                        newToRobloxGetStarted: "".concat(h, "get-started"),
+                        newToRobloxTutorials: "".concat(h, "tutorials"),
+                        communityCreatorPrograms: "".concat(h, "creator-programs"),
+                        communityEducators: "".concat(h, "education/educator-onboarding/landing"),
+                        communityGuidelinesAndPolicies: "".concat(h, "safety")
                     },
                     Forum: {
                         home: g
@@ -17456,21 +17320,21 @@
                 }
             }, [a, t, n, i])
         },
-        tQ = "User",
-        t$ = "Group",
-        t0 = "Priority",
-        t1 = "Recent",
-        t2 = "CreatedAt",
-        t4 = "Alphabetically",
-        t3 = new Set(["virtual", "audienceReach"]),
-        t5 = new Set(["/dashboard/creations", "/credentials", "/dashboard/creations/upload", "/", "/dashboard/analytics", "/dashboard/group/profile", "/dashboard/group/members", "/dashboard/group/activity-history", "/dashboard/group/payouts", "/dashboard/group/roles"]),
-        t6 = (0, r.createContext)(null),
-        t8 = () => {
-            let t = (0, r.useContext)(t6);
+        tY = "User",
+        tQ = "Group",
+        t$ = "Priority",
+        t0 = "Recent",
+        t1 = "CreatedAt",
+        t2 = "Alphabetically",
+        t4 = new Set(["virtual", "audienceReach"]),
+        t3 = new Set(["/dashboard/creations", "/credentials", "/dashboard/creations/upload", "/", "/dashboard/analytics", "/dashboard/group/profile", "/dashboard/group/members", "/dashboard/group/activity-history", "/dashboard/group/payouts", "/dashboard/group/roles"]),
+        t5 = (0, r.createContext)(null),
+        t6 = () => {
+            let t = (0, r.useContext)(t5);
             if (null === t) throw Error("useWorkspaces must be used within a WorkspaceProvider");
             return t
         },
-        t7 = t => {
+        t8 = t => {
             var n, o;
             let {
                 children: a
@@ -17486,15 +17350,15 @@
                 let {
                     target: t,
                     robloxEnvironment: n
-                } = tx(), {
+                } = tI(), {
                     user: o
                 } = (0, eQ.useRobloxAuthentication)(), a = (0, r.useMemo)(() => new e5.GroupsApi(new e6.Configuration({
-                    basePath: tz("creator-home-api", t, n),
+                    basePath: tU("creator-home-api", t, n),
                     credentials: "include",
                     enableMrRouter: !0
                 })), [n, t]);
                 return (0, e1.useQuery)({
-                    queryKey: tq,
+                    queryKey: tV,
                     enabled: !!o,
                     queryFn: () => a.groupsListGroups({
                         surface: e5.GroupListSurface.CreatorHub
@@ -17502,15 +17366,15 @@
                 })
             })(), {
                 currentProduct: p
-            } = tx(), {
+            } = tI(), {
                 data: m,
-                isLoading: f
+                isLoading: h
             } = (t => {
                 let {
                     target: n,
                     robloxEnvironment: o
-                } = tx(), a = (0, r.useMemo)(() => new e8.UsersApi(new e6.Configuration({
-                    basePath: tV("users", n, o),
+                } = tI(), a = (0, r.useMemo)(() => new e8.UsersApi(new e6.Configuration({
+                    basePath: tz("users", n, o),
                     credentials: "include",
                     enableMrRouter: !0
                 })), [o, n]);
@@ -17522,9 +17386,9 @@
                 })
             })(null == s ? void 0 : s.id), {
                 Dashboard: {
-                    creations: h
+                    creations: f
                 }
-            } = tY(), [g, y] = (0, e0.useLocalStorage)("workspaceSort", t4), [v, b] = (0, e0.useLocalStorage)("creatorHubGroup.".concat(null == s ? void 0 : s.id), null), [C, E] = (0, e0.useLocalStorage)("creatorHubGroupData.".concat(null == s ? void 0 : s.id), {}), w = (0, r.useMemo)(() => {
+            } = tX(), [g, y] = (0, e0.useLocalStorage)("workspaceSort", t2), [v, b] = (0, e0.useLocalStorage)("creatorHubGroup.".concat(null == s ? void 0 : s.id), null), [C, E] = (0, e0.useLocalStorage)("creatorHubGroupData.".concat(null == s ? void 0 : s.id), {}), w = (0, r.useMemo)(() => {
                 var t;
                 return null != (t = null == u ? void 0 : u.groups) ? t : []
             }, [null == u ? void 0 : u.groups]), S = (0, r.useMemo)(() => {
@@ -17532,29 +17396,29 @@
                 return {
                     creatorId: null != (t = null == m ? void 0 : m.id) ? t : 0,
                     creatorName: null == m ? void 0 : m.name,
-                    creatorType: tQ,
+                    creatorType: tY,
                     priority: null != (n = null == (o = C.user) ? void 0 : o.priority) ? n : 0,
                     createdAt: null != (r = null == m ? void 0 : m.created) ? r : 0,
                     lastSelected: null == (a = C.user) ? void 0 : a.lastSelected
                 }
             }, [null == m ? void 0 : m.created, null == m ? void 0 : m.id, null == m ? void 0 : m.name, null == (n = C.user) ? void 0 : n.lastSelected, null == (o = C.user) ? void 0 : o.priority]), I = (0, r.useMemo)(() => {
-                if (f || c) return null;
+                if (h || c) return null;
                 let t = [S, ...w.map(t => {
                     var n, r, o, a;
                     return {
                         creatorId: t.id,
                         creatorName: t.name,
-                        creatorType: t$,
+                        creatorType: tQ,
                         createdAt: t.createdAt,
                         priority: null != (n = null == (o = C[t.id]) ? void 0 : o.priority) ? n : 0,
                         lastSelected: null != (r = null == (a = C[t.id]) ? void 0 : a.lastSelected) ? r : 0
                     }
                 })];
-                return g === t2 && (t = null == t ? void 0 : t.sort((t, n) => t.createdAt < n.createdAt ? -1 : 1)), g === t0 && (t = null == t ? void 0 : t.sort((t, n) => n.priority - t.priority)), g === t1 && (t = null == t ? void 0 : t.sort((t, n) => n.lastSelected - t.lastSelected)), g === t4 && (t = null == t ? void 0 : t.sort((t, n) => {
+                return g === t1 && (t = null == t ? void 0 : t.sort((t, n) => t.createdAt < n.createdAt ? -1 : 1)), g === t$ && (t = null == t ? void 0 : t.sort((t, n) => n.priority - t.priority)), g === t0 && (t = null == t ? void 0 : t.sort((t, n) => n.lastSelected - t.lastSelected)), g === t2 && (t = null == t ? void 0 : t.sort((t, n) => {
                     var r, o;
                     return (null != (r = t.creatorName) ? r : "").toLowerCase() < (null != (o = n.creatorName) ? o : "").toLowerCase() ? -1 : 1
                 })), t
-            }, [f, c, w, S, g, C]), x = (0, r.useMemo)(() => {
+            }, [h, c, w, S, g, C]), x = (0, r.useMemo)(() => {
                 var t;
                 return null === v ? S : null != (t = null == I ? void 0 : I.find(t => {
                     let {
@@ -17583,10 +17447,10 @@
                         ...t,
                         [r]: n
                     }
-                }), n = i.query.tab, l && (t5.has(l) || l && l.startsWith("/dashboard/group/") || "/dashboard/transactions" === l && "string" == typeof n && t3.has(n)) || p !== tG || eY.default.push({
-                    pathname: h
+                }), n = i.query.tab, l && (t3.has(l) || l && l.startsWith("/dashboard/group/") || "/dashboard/transactions" === l && "string" == typeof n && t4.has(n)) || p !== tW || eY.default.push({
+                    pathname: f
                 })
-            }, [h, l, i.query.tab, p, b, E]), T = (0, r.useCallback)(t => {
+            }, [f, l, i.query.tab, p, b, E]), T = (0, r.useCallback)(t => {
                 b(t)
             }, [b]);
             (0, r.useEffect)(() => {
@@ -17607,18 +17471,18 @@
                 workspaces: I,
                 currentWorkspace: x,
                 sort: g,
-                isLoading: c && f,
+                isLoading: c && h,
                 setSort: y,
                 refreshWorkspaces: d,
                 setCurrentWorkspace: A,
                 setWorkspaceByGroupId: T
-            }), [x, c, f, d, A, y, T, g, I]);
-            return r.default.createElement(t6.Provider, {
+            }), [x, c, h, d, A, y, T, g, I]);
+            return r.default.createElement(t5.Provider, {
                 value: k
             }, a)
         },
-        t9 = t => t.metaKey || t.ctrlKey || t.shiftKey || t.altKey || 0 !== t.button,
-        ne = (0, i.makeStyles)()(t => ({
+        t7 = t => t.metaKey || t.ctrlKey || t.shiftKey || t.altKey || 0 !== t.button,
+        t9 = (0, i.makeStyles)()(t => ({
             container: {
                 display: "flex",
                 flexDirection: "column",
@@ -17695,7 +17559,7 @@
                 padding: 0
             }
         })),
-        nt = t => {
+        ne = t => {
             let {
                 href: n,
                 external: o,
@@ -17716,7 +17580,7 @@
                 rel: "noreferrer"
             }, u) : n.startsWith("http") ? r.default.createElement("a", c, u) : r.default.createElement(e7.default, c, u)
         },
-        nn = t => {
+        nt = t => {
             let {
                 onToolSelect: n,
                 tool: o,
@@ -17729,30 +17593,30 @@
                     heading: d,
                     nestedLabel: p,
                     itemBox: m,
-                    trailing: f,
-                    link: h,
+                    trailing: h,
+                    link: f,
                     selected: g,
                     list: y
                 }
-            } = ne(), v = (0, r.useCallback)((t, r) => {
-                t9(t.nativeEvent) || n(r)
+            } = t9(), v = (0, r.useCallback)((t, r) => {
+                t7(t.nativeEvent) || n(r)
             }, [n]), b = o.href, C = a === o.key, E = r.default.createElement(l.Typography, {
                 variant: "smallLabel2",
                 classes: {
                     root: i(c, d)
                 }
             }, o.label), w = o.adornment ? r.default.createElement("span", {
-                className: f
+                className: h
             }, o.adornment) : null;
             return r.default.createElement(s.Grid, {
                 classes: {
                     root: u
                 }
-            }, b ? r.default.createElement(nt, {
+            }, b ? r.default.createElement(ne, {
                 href: b,
                 external: o.external,
                 toolKey: o.key,
-                className: i(m, h, C && g),
+                className: i(m, f, C && g),
                 ariaCurrent: C ? "page" : void 0,
                 onClick: v
             }, E, w) : r.default.createElement("div", {
@@ -17761,12 +17625,12 @@
                 className: y
             }, o.items.map(t => {
                 let n = a === t.key;
-                return r.default.createElement(nt, {
+                return r.default.createElement(ne, {
                     key: t.key,
                     href: t.href,
                     external: t.external,
                     toolKey: t.key,
-                    className: i(m, h, n && g),
+                    className: i(m, f, n && g),
                     ariaCurrent: n ? "page" : void 0,
                     onClick: v
                 }, r.default.createElement(l.Typography, {
@@ -17775,11 +17639,11 @@
                         root: i(c, p)
                     }
                 }, t.label), t.adornment ? r.default.createElement("span", {
-                    className: f
+                    className: h
                 }, t.adornment) : null)
             })) : null)
         },
-        nr = (0, i.makeStyles)()((t, n) => {
+        nn = (0, i.makeStyles)()((t, n) => {
             let {
                 isFirst: r
             } = n;
@@ -17814,11 +17678,11 @@
                 }
             }
         }),
-        no = t => {
+        nr = t => {
             var n, r;
             return 1 + (null != (n = null == (r = t.items) ? void 0 : r.length) ? n : 0)
         },
-        na = t => {
+        no = t => {
             let {
                 onToolSelect: n,
                 columns: o,
@@ -17832,16 +17696,16 @@
                     columnsRow: d,
                     column: p
                 }
-            } = nr({
+            } = nn({
                 isFirst: l
-            }), m = (0, r.useMemo)(() => a.filter(t => !!t), [a]), f = (0, r.useMemo)(() => ((t, n) => {
+            }), m = (0, r.useMemo)(() => a.filter(t => !!t), [a]), h = (0, r.useMemo)(() => ((t, n) => {
                 if (n <= 1 || t.length <= 1) return [t];
-                let r = t.reduce((t, n) => t + no(n), 0),
+                let r = t.reduce((t, n) => t + nr(n), 0),
                     o = 0,
                     a = 1,
                     i = 1 / 0;
                 for (let n = 0; n < t.length - 1; n += 1) {
-                    let l = Math.abs((o += no(t[n])) - (r - o));
+                    let l = Math.abs((o += nr(t[n])) - (r - o));
                     l <= i && (i = l, a = n + 1)
                 }
                 return [t.slice(0, a), t.slice(a)]
@@ -17852,20 +17716,20 @@
                 className: c
             }, r.default.createElement(u.Divider, null)), r.default.createElement("div", {
                 className: d
-            }, f.map(t => r.default.createElement("div", {
+            }, h.map(t => r.default.createElement("div", {
                 key: t.map(t => t.key).join("-"),
                 className: p
-            }, t.map(t => r.default.createElement(nn, {
+            }, t.map(t => r.default.createElement(nt, {
                 onToolSelect: n,
                 key: t.key,
                 tool: t,
                 selectedKey: i
             }))))))
         },
-        ni = t => t.length > 1 && t.endsWith("/") ? t.slice(0, -1) : t,
-        nl = "https://create.roblox.com",
-        ns = t => new URL(t.split("#")[0] || "/", nl),
-        nu = (0, i.makeStyles)()(t => ({
+        na = t => t.length > 1 && t.endsWith("/") ? t.slice(0, -1) : t,
+        ni = "https://create.roblox.com",
+        nl = t => new URL(t.split("#")[0] || "/", ni),
+        ns = (0, i.makeStyles)()(t => ({
             container: {
                 display: "flex",
                 flexDirection: "column",
@@ -17909,7 +17773,7 @@
                 flex: "0 0 auto"
             }
         })),
-        nc = t => {
+        nu = t => {
             let {
                 onToolSelect: n,
                 onClose: o
@@ -17919,14 +17783,14 @@
                     container: i,
                     header: u,
                     title: m,
-                    closeButton: f,
-                    sections: h
+                    closeButton: h,
+                    sections: f
                 }
-            } = nu(), {
+            } = ns(), {
                 classes: {
                     scroll: g
                 }
-            } = tA(), y = function() {
+            } = tx(), y = function() {
                 let t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "",
                     n, {
                         Dashboard: o,
@@ -17936,140 +17800,140 @@
                         Roblox: s,
                         Forum: u,
                         Talent: d
-                    } = tY(),
+                    } = tX(),
                     {
                         currentWorkspace: p
-                    } = t8(),
+                    } = t6(),
                     {
                         enableTalentHubV2M2: m
-                    } = tx(),
+                    } = tI(),
                     {
-                        translate: f
+                        translate: h
                     } = (0, e$.useTranslation)(),
-                    h = (0, e0.useDebounce)(t, 100),
+                    f = (0, e0.useDebounce)(t, 100),
                     g = (n = d.home, m ? n.replace(/\/talent\/?$/, "/hire") : n),
                     y = (0, r.useMemo)(() => ({
                         creations: {
                             key: "creations",
-                            label: f("Heading.Creations"),
+                            label: h("Heading.Creations"),
                             href: o.creations,
                             items: [{
                                 key: "experience",
-                                label: f("Heading.Experiences"),
+                                label: h("Heading.Experiences"),
                                 href: o.creations
                             }, {
                                 key: "avatarItems",
-                                label: f("Title.AvatarItems"),
+                                label: h("Title.AvatarItems"),
                                 href: o.avatarItems
                             }, {
                                 key: "developerItems",
-                                label: f("Label.DevelopmentItems"),
+                                label: h("Label.DevelopmentItems"),
                                 href: o.developerItems
                             }, {
                                 key: "shareLinks",
-                                label: f("Heading.ShareLinks"),
+                                label: h("Heading.ShareLinks"),
                                 href: o.shareLinks
                             }]
                         },
                         apiKeys: {
                             key: "apiKeys",
-                            label: f("Heading.APIKeys"),
+                            label: h("Heading.APIKeys"),
                             href: o.apiKeys
                         },
                         oAuth2: {
                             key: "oAuth2",
-                            label: f("Heading.OAuth2"),
+                            label: h("Heading.OAuth2"),
                             href: o.oAuth
                         },
                         finance: {
                             key: "finance",
-                            label: f("Heading.Finance"),
+                            label: h("Heading.Finance"),
                             href: o.devEx,
                             items: [{
                                 key: "devEx",
-                                label: f("Heading.DevEx"),
+                                label: h("Heading.DevEx"),
                                 href: o.devEx
                             }, {
                                 key: "payouts",
-                                label: f("Heading.Payouts"),
+                                label: h("Heading.Payouts"),
                                 href: o.payouts
                             }, {
                                 key: "transactions",
-                                label: f("Heading.Transactions"),
+                                label: h("Heading.Transactions"),
                                 href: o.transactions
                             }]
                         },
                         analytics: {
                             key: "analytics",
-                            label: f("Heading.Analytics"),
+                            label: h("Heading.Analytics"),
                             href: o.analytics
                         },
                         learn: {
                             key: "learn",
-                            label: f("Heading.Learn"),
+                            label: h("Heading.Learn"),
                             href: a.home,
                             items: [{
                                 key: "getStarted",
-                                label: f("Title.GetStarted"),
+                                label: h("Title.GetStarted"),
                                 href: a.newToRobloxGetStarted
                             }, {
                                 key: "tutorials",
-                                label: f("Title.Tutorials"),
+                                label: h("Title.Tutorials"),
                                 href: a.newToRobloxTutorials
                             }, {
                                 key: "engineReference",
-                                label: f("Label.EngineReference"),
+                                label: h("Label.EngineReference"),
                                 href: a.engine
                             }, {
                                 key: "openCloudReference",
-                                label: f("Label.OpenCloudReference"),
+                                label: h("Label.OpenCloudReference"),
                                 href: a.cloud
                             }]
                         },
                         store: {
                             key: "store",
-                            label: f("Heading.Store"),
+                            label: h("Heading.Store"),
                             href: i.home,
                             items: [{
                                 key: "models",
-                                label: f("Title.Models"),
+                                label: h("Title.Models"),
                                 href: i.models
                             }, {
                                 key: "plugins",
-                                label: f("Heading.Plugins"),
+                                label: h("Heading.Plugins"),
                                 href: i.plugins
                             }, {
                                 key: "audio",
-                                label: f("Title.Audio"),
+                                label: h("Title.Audio"),
                                 href: i.audio
                             }, {
                                 key: "decals",
-                                label: f("Label.Decals"),
+                                label: h("Label.Decals"),
                                 href: i.decals
                             }]
                         },
                         translation: {
                             key: "translation",
-                            label: f("Heading.Translation"),
+                            label: h("Heading.Translation"),
                             href: o.translations
                         },
                         licenses: {
                             key: "licenses",
-                            label: f("Heading.Licenses"),
+                            label: h("Heading.Licenses"),
                             href: o.licenses
                         },
                         ads: {
                             key: "ads",
-                            label: f("Title.Ads"),
+                            label: h("Title.Ads"),
                             href: l.home,
                             external: !0,
                             items: [{
                                 key: "adsManager",
-                                label: f("Heading.AdsManager"),
+                                label: h("Heading.AdsManager"),
                                 href: l.home
                             }, {
                                 key: "sponsoredItems",
-                                label: f("Heading.SponsoredItems"),
+                                label: h("Heading.SponsoredItems"),
                                 href: "Group" === p.creatorType ? s.getGroupSponsoredItems(p.creatorId) : s.sponsoredItems,
                                 external: !0,
                                 adornment: r.default.createElement(c.LaunchIcon, {
@@ -18079,53 +17943,53 @@
                         },
                         collaboration: {
                             key: "collaboration",
-                            label: f("Heading.Collaboration"),
+                            label: h("Heading.Collaboration"),
                             href: o.groupProfile,
                             items: [{
                                 key: "members",
-                                label: f("Label.Members"),
+                                label: h("Label.Members"),
                                 href: o.groupMembers
                             }, {
                                 key: "roles",
-                                label: f("Label.Roles"),
+                                label: h("Label.Roles"),
                                 href: o.groupRoles
                             }, {
                                 key: "activityHistory",
-                                label: f("Label.ActivityHistory"),
+                                label: h("Label.ActivityHistory"),
                                 href: o.groupActivityHistory
                             }]
                         },
                         intellectualProperty: {
                             key: "intellectualProperty",
-                            label: f("Heading.IP"),
+                            label: h("Heading.IP"),
                             href: o.intellectualProperty
                         },
                         forum: {
                             key: "forum",
-                            label: f("Heading.Forums"),
+                            label: h("Heading.Forums"),
                             href: u.home
                         },
                         talent: {
                             key: "talent",
-                            label: f("Heading.Talent"),
+                            label: h("Heading.Talent"),
                             href: g
                         },
                         roadmap: {
                             key: "roadmap",
-                            label: f("Heading.Roadmap"),
+                            label: h("Heading.Roadmap"),
                             href: o.roadmap
                         },
                         changelog: {
                             key: "changelog",
-                            label: f("Heading.Changelog"),
+                            label: h("Heading.Changelog"),
                             href: o.updates
                         },
                         creatorPrograms: {
                             key: "creatorPrograms",
-                            label: f("Title.CreatorPrograms"),
+                            label: h("Title.CreatorPrograms"),
                             href: o.build
                         }
-                    }), [f, o.creations, o.avatarItems, o.developerItems, o.shareLinks, o.apiKeys, o.oAuth, o.devEx, o.payouts, o.transactions, o.analytics, o.translations, o.licenses, o.groupProfile, o.groupMembers, o.groupRoles, o.groupActivityHistory, o.intellectualProperty, o.roadmap, o.updates, o.build, a.home, a.newToRobloxGetStarted, a.newToRobloxTutorials, a.engine, a.cloud, i.home, i.models, i.plugins, i.audio, i.decals, l.home, p.creatorType, p.creatorId, s, u.home, g]);
+                    }), [h, o.creations, o.avatarItems, o.developerItems, o.shareLinks, o.apiKeys, o.oAuth, o.devEx, o.payouts, o.transactions, o.analytics, o.translations, o.licenses, o.groupProfile, o.groupMembers, o.groupRoles, o.groupActivityHistory, o.intellectualProperty, o.roadmap, o.updates, o.build, a.home, a.newToRobloxGetStarted, a.newToRobloxTutorials, a.engine, a.cloud, i.home, i.models, i.plugins, i.audio, i.decals, l.home, p.creatorType, p.creatorId, s, u.home, g]);
                 return (0, r.useMemo)(() => ((t, n) => {
                     if (n.length < 1) return t;
                     let r = n.toLowerCase(),
@@ -18152,7 +18016,7 @@
                             })
                         }
                     }), o
-                })(y, h), [h, y])
+                })(y, f), [f, y])
             }(), {
                 asPath: v
             } = (0, eY.useRouter)(), {
@@ -18161,7 +18025,7 @@
                 currentWorkspace: {
                     creatorType: C
                 }
-            } = t8(), E = (0, r.useCallback)(t => {
+            } = t6(), E = (0, r.useCallback)(t => {
                 n(t)
             }, [n]), w = (0, r.useRef)(null), [S, I] = (0, r.useState)(2);
             (0, r.useEffect)(() => {
@@ -18182,7 +18046,7 @@
             let x = (0, r.useMemo)(() => [y.creations, y.apiKeys, y.oAuth2, y.store, y.licenses, y.translation], [y.apiKeys, y.creations, y.licenses, y.oAuth2, y.store, y.translation]),
                 A = (0, r.useMemo)(() => {
                     let t = [y.finance, y.analytics];
-                    return C === t$ && t.push(y.collaboration), t.push(y.ads), C === tQ && t.push(y.intellectualProperty), t
+                    return C === tQ && t.push(y.collaboration), t.push(y.ads), C === tY && t.push(y.intellectualProperty), t
                 }, [C, y.ads, y.analytics, y.collaboration, y.finance, y.intellectualProperty]),
                 T = (0, r.useMemo)(() => [y.learn, y.forum, y.changelog, y.creatorPrograms, y.talent, y.roadmap], [y.changelog, y.creatorPrograms, y.forum, y.learn, y.roadmap, y.talent]),
                 k = (0, r.useMemo)(() => {
@@ -18204,11 +18068,11 @@
                         } = t;
                         if (!((t, n) => {
                                 try {
-                                    let r = new URL(n.split("#")[0] || "/", nl),
-                                        o = ns(t);
+                                    let r = new URL(n.split("#")[0] || "/", ni),
+                                        o = nl(t);
                                     if ("create.roblox.com" !== o.host && o.host !== r.host) return !1;
-                                    let a = ni(r.pathname),
-                                        i = ni(o.pathname);
+                                    let a = na(r.pathname),
+                                        i = na(o.pathname);
                                     if (!(a === i || "/" !== i && a.startsWith("".concat(i, "/")))) return !1;
                                     for (let [t, n] of o.searchParams.entries())
                                         if (r.searchParams.get(t) !== n) return !1;
@@ -18223,8 +18087,8 @@
                             queryCount: s
                         } = (t => {
                             try {
-                                let n = ns(t),
-                                    r = ni(n.pathname);
+                                let n = nl(t),
+                                    r = na(n.pathname);
                                 return {
                                     pathLength: "/" === r ? 0 : r.length,
                                     queryCount: [...n.searchParams].length
@@ -18254,76 +18118,76 @@
                     root: m
                 }
             }, b("Heading.AllTools")), r.default.createElement(d.IconButton, {
-                className: f,
+                className: h,
                 "aria-label": b("AriaLabel.Close"),
                 onClick: o,
                 color: "secondary"
             }, r.default.createElement(p.CloseIcon, null))), r.default.createElement(s.Grid, {
                 classes: {
-                    root: h
+                    root: f
                 }
-            }, r.default.createElement(na, {
+            }, r.default.createElement(no, {
                 isFirst: !0,
                 columns: S,
                 onToolSelect: E,
                 selectedKey: k,
                 tools: x
-            }), r.default.createElement(na, {
+            }), r.default.createElement(no, {
                 columns: S,
                 onToolSelect: E,
                 selectedKey: k,
                 tools: A
-            }), r.default.createElement(na, {
+            }), r.default.createElement(no, {
                 columns: S,
                 onToolSelect: E,
                 selectedKey: k,
                 tools: T
             })))
         };
-    var nd, np, nm, nf, nh, ng, ny, nv, nb, nC = ((nd = {}).Load = "load", nd.Click = "click", nd.Hover = "hover", nd.Impression = "impression", nd.Error = "error", nd),
-        nE = ((np = {}).BellIcon = "bellIcon", np.ClickOutside = "clickOutside", np);
-    let nw = "knowledge",
-        nS = t => {
+    var nc, nd, np, nm, nh, nf, ng, ny, nv, nb = ((nc = {}).Load = "load", nc.Click = "click", nc.Hover = "hover", nc.Impression = "impression", nc.Error = "error", nc),
+        nC = ((nd = {}).BellIcon = "bellIcon", nd.ClickOutside = "clickOutside", nd);
+    let nE = "knowledge",
+        nw = t => {
             let n = {
                 hasUnSeenNotifications: String(t.hasUnSeenNotifications)
             };
             return void 0 !== t.unreadNotificationCount && (n.unreadNotificationCount = String(t.unreadNotificationCount)), void 0 !== t.notificationsCount && (n.notificationsCount = String(t.notificationsCount)), n
         },
-        nI = {
+        nS = {
             eventType: "loadNav",
             context: "load"
         },
-        nx = t => ({
+        nI = t => ({
             eventType: "clickNavTab",
             context: "click",
             eventValue: t
         }),
-        nA = t => ({
+        nx = t => ({
             eventType: "clickNavPrimaryRail",
             context: "click",
             eventValue: t
         }),
-        nT = {
+        nA = {
             eventType: "clickNavMenuIcon",
             context: "click"
         },
-        nk = {
+        nT = {
             eventType: "clickCreatorIcon",
             context: "click"
         },
-        nD = {
+        nk = {
             eventType: "clickNavBackToCreator",
             context: "click"
         },
-        nj = {
+        nD = {
             eventType: "OpenNavUserMenuButton",
             context: "click"
         },
-        nR = {
+        nj = {
             eventType: "settingsEntryPointClicked",
             context: "click"
         },
-        nL = {
+        nR = {
             eventType: "ClickCopyUserId",
             context: "click"
         },
@@ -18331,15 +18195,28 @@
             eventType: "ClickNavSwitchAccounts",
             context: "click"
         },
-        nF = {
+        nL = {
             eventType: "ClickNavLogOut",
             context: "click"
         },
-        nN = (t, n) => ({
+        nF = (t, n) => ({
             eventType: "ClickNavDropdownMenuItemTab",
             context: "click",
             eventValue: "".concat(t, ".").concat(n)
         }),
+        nN = (t, n) => {
+            var r, o, a, i, l, s, u, c;
+            return {
+                id: t.notificationId,
+                type: t.notificationType,
+                title: null != (r = null == (s = t.creatorStreamNotificationContent) ? void 0 : s.title) ? r : "",
+                notificationGroupIndex: null != (o = null == n ? void 0 : n.toString()) ? o : "",
+                clickAction: null != (a = null == (u = t.creatorStreamNotificationContent) ? void 0 : u.clickAction) ? a : "",
+                referenceId: null != (i = t.referenceId) ? i : "",
+                read: null != (l = null == (c = t.read) ? void 0 : c.toString()) ? l : "false",
+                productTeam: nE
+            }
+        },
         nM = t => {
             let n = {};
             return t.forEach(t => {
@@ -18353,7 +18230,7 @@
                 context: "impression",
                 parameters: {
                     ...n,
-                    productTeam: nw
+                    productTeam: nE
                 }
             }
         },
@@ -18361,8 +18238,8 @@
             eventType: "NotificationBellIconImpression",
             context: "impression",
             parameters: {
-                ...nS(t),
-                productTeam: nw
+                ...nw(t),
+                productTeam: nE
             }
         }),
         nB = t => ({
@@ -18471,10 +18348,10 @@
                 unmountTimer: null
             }), d = "large";
             a ? d = "small" : o && (d = "medium");
-            let [p, f] = (0, r.useReducer)(nO, (t => {
+            let [p, h] = (0, r.useReducer)(nO, (t => {
                 let {
                     screenSize: n
-                } = t, r = "large" === n ? "persistent" : "temporary", o = "true" === localStorage.getItem(tR);
+                } = t, r = "large" === n ? "persistent" : "temporary", o = "true" === localStorage.getItem(tj);
                 return {
                     primaryRailOpen: "large" === n,
                     primaryRailCompact: "persistent" === r && o,
@@ -18490,65 +18367,65 @@
                 screenSize: d
             }));
             (0, r.useEffect)(() => {
-                f({
+                h({
                     type: "setScreenSize",
                     payload: d
                 })
             }, [d]);
-            let h = (0, r.useCallback)(() => {
+            let f = (0, r.useCallback)(() => {
                     u(!0), setTimeout(() => u(!1), 225)
                 }, []),
                 g = (0, r.useCallback)(t => {
                     let n = c.current;
                     if (n.unmountTimer && (clearTimeout(n.unmountTimer), n.unmountTimer = null), null === n.committed) {
-                        n.committed = t, f({
+                        n.committed = t, h({
                             type: "setSecondaryRail",
                             payload: t
                         }), setTimeout(() => l(!0));
                         return
                     }
-                    t ? (n.committed || h(), n.committed = !0, f({
+                    t ? (n.committed || f(), n.committed = !0, h({
                         type: "setSecondaryRail",
                         payload: !0
                     })) : n.unmountTimer = setTimeout(() => {
-                        n.committed = !1, h(), f({
+                        n.committed = !1, f(), h({
                             type: "setSecondaryRail",
                             payload: !1
                         })
                     }, 50)
-                }, [h]),
+                }, [f]),
                 y = (0, r.useCallback)(t => {
-                    f({
+                    h({
                         type: "setLearn",
                         payload: t
                     })
                 }, []),
                 v = (0, r.useCallback)(t => {
-                    f({
+                    h({
                         type: "setAllTools",
                         payload: t
                     })
                 }, []),
                 b = (0, r.useCallback)(t => {
-                    f({
+                    h({
                         type: "setPrimaryRailOpen",
                         payload: t
                     })
                 }, []),
                 C = (0, r.useCallback)(t => {
-                    h(), f({
+                    f(), h({
                         type: "setPrimaryRailCompact",
                         payload: t
                     })
-                }, [h]),
+                }, [f]),
                 E = (0, r.useCallback)(t => {
-                    h(), f({
+                    f(), h({
                         type: "setIconOnly",
                         payload: t
                     })
-                }, [h]),
+                }, [f]),
                 w = (0, r.useCallback)(() => {
-                    f({
+                    h({
                         type: "setLearnNavigatedFromCreatorHub"
                     })
                 }, []),
@@ -18577,13 +18454,13 @@
             context: i,
             parameters: l
         } = r, s = "".concat(n, ".").concat(a);
-        o && (s = "".concat(s, ".").concat(o)), i === nC.Load || i === nC.Impression ? t.logImpressionEvent({
+        o && (s = "".concat(s, ".").concat(o)), i === nb.Load || i === nb.Impression ? t.logImpressionEvent({
             eventName: s,
             parameters: l
-        }) : i === nC.Hover ? t.logHoverEvent({
+        }) : i === nb.Hover ? t.logHoverEvent({
             eventName: s,
             parameters: l
-        }) : i === nC.Error ? t.logErrorEvent({
+        }) : i === nb.Error ? t.logErrorEvent({
             eventName: s,
             parameters: l
         }) : t.logClickEvent({
@@ -18600,7 +18477,7 @@
                 currentProduct: a,
                 robloxEnvironment: i,
                 target: l
-            } = tx(), s = (o = tU(l, i), "https://ecsv2.".concat(o)), u = (0, r.useMemo)(() => new e9.UnifiedLogger({
+            } = tI(), s = (o = tH(l, i), "https://ecsv2.".concat(o)), u = (0, r.useMemo)(() => new e9.UnifiedLogger({
                 eventBaseUrl: s,
                 product: "CreatorHubShell",
                 sessionProductGroup: "CreatorHub"
@@ -18626,11 +18503,11 @@
             } = t, {
                 classes: l
             } = nG();
-            return r.default.createElement(f.MenuItem, {
+            return r.default.createElement(h.MenuItem, {
                 classes: l,
                 selected: o,
                 onClick: () => a(n)
-            }, i, o && r.default.createElement(h.CheckIcon, null))
+            }, i, o && r.default.createElement(f.CheckIcon, null))
         },
         nJ = t => {
             let {
@@ -18640,20 +18517,20 @@
                 translate: a
             } = (0, e$.useTranslation)();
             return r.default.createElement(s.Grid, null, r.default.createElement(nK, {
+                value: t$,
+                selected: n === t$,
+                onSelect: o
+            }, a("Label.Priority")), r.default.createElement(nK, {
                 value: t0,
                 selected: n === t0,
                 onSelect: o
-            }, a("Label.Priority")), r.default.createElement(nK, {
+            }, a("Label.RecentlyUsed")), r.default.createElement(nK, {
                 value: t1,
                 selected: n === t1,
                 onSelect: o
-            }, a("Label.RecentlyUsed")), r.default.createElement(nK, {
+            }, a("Label.DateCreated")), r.default.createElement(nK, {
                 value: t2,
                 selected: n === t2,
-                onSelect: o
-            }, a("Label.DateCreated")), r.default.createElement(nK, {
-                value: t4,
-                selected: n === t4,
                 onSelect: o
             }, a("Label.Alphabetically")))
         },
@@ -18717,8 +18594,8 @@
                 classes: {
                     container: p,
                     paper: m,
-                    saveSortButton: f,
-                    item: h,
+                    saveSortButton: h,
+                    item: f,
                     backButton: b,
                     workspaces: C
                 }
@@ -18753,11 +18630,11 @@
                 }
             }, r.default.createElement(s.Grid, {
                 classes: {
-                    root: d(h, C)
+                    root: d(f, C)
                 }
             }, c), r.default.createElement(s.Grid, {
                 classes: {
-                    root: h
+                    root: f
                 }
             }, r.default.createElement(y.Button, {
                 classes: {
@@ -18774,7 +18651,7 @@
             }), r.default.createElement(y.Button, {
                 fullWidth: !0,
                 classes: {
-                    root: f
+                    root: h
                 },
                 variant: "contained",
                 onClick: () => {
@@ -18847,7 +18724,7 @@
             let {
                 creator: a,
                 className: i
-            } = t, l = null != (n = a.creatorId) ? n : 0, s = a.creatorType === t$ ? tm.ThumbnailTypes.groupIcon : tm.ThumbnailTypes.avatarHeadshot, u = null != (o = a.creatorName) ? o : "avatar", c = a.creatorType === t$ ? "rounded" : "circular", {
+            } = t, l = null != (n = a.creatorId) ? n : 0, s = a.creatorType === tQ ? tp.ThumbnailTypes.groupIcon : tp.ThumbnailTypes.avatarHeadshot, u = null != (o = a.creatorName) ? o : "avatar", c = a.creatorType === tQ ? "rounded" : "circular", {
                 data: d,
                 isLoading: p,
                 isError: m
@@ -18855,21 +18732,21 @@
                 queryKey: ["workspaceThumbnail", s, l],
                 queryFn: l > 0 ? async () => {
                     var t;
-                    return null != (t = (await tm.ThumbnailClient.getThumbnailImage(s, l)).imageUrl) ? t : null
+                    return null != (t = (await tp.ThumbnailClient.getThumbnailImage(s, l)).imageUrl) ? t : null
                 } : e2.skipToken,
                 retry: !1,
                 staleTime: 1 / 0
-            }), f = p || m ? void 0 : d;
-            return f ? r.default.createElement(E.Avatar, {
+            }), h = p || m ? void 0 : d;
+            return h ? r.default.createElement(E.Avatar, {
                 className: i,
                 variant: c,
                 alt: u,
-                src: f
+                src: h
             }) : r.default.createElement(E.Avatar, {
                 className: i,
                 variant: c,
                 alt: u
-            }, r.default.createElement(tm.Thumbnail2d, {
+            }, r.default.createElement(tp.Thumbnail2d, {
                 targetId: l,
                 type: s,
                 alt: u
@@ -18922,22 +18799,22 @@
                 classes: {
                     root: p,
                     label: m,
-                    hiddenLabel: f,
-                    largeAvatar: h,
+                    hiddenLabel: h,
+                    largeAvatar: f,
                     avatar: g
                 }
             } = n0(), {
                 translate: y
             } = (0, e$.useTranslation)(), {
                 Roblox: v
-            } = tY();
+            } = tX();
             return r.default.createElement(s.Grid, {
                 classes: {
                     root: p
                 }
             }, r.default.createElement(n$, {
                 creator: n,
-                className: "large" === c ? h : g
+                className: "large" === c ? f : g
             }), r.default.createElement(s.Grid, {
                 sx: {
                     overflow: "hidden",
@@ -18949,7 +18826,7 @@
                 title: n.creatorName,
                 classes: {
                     root: d(m, {
-                        [f]: u
+                        [h]: u
                     })
                 },
                 noWrap: !0
@@ -19071,7 +18948,7 @@
                 onSortUpdate: d,
                 onWorkspaceSelect: p
             } = t, {
-                translate: h
+                translate: f
             } = (0, e$.useTranslation)(), {
                 cx: g,
                 classes: {
@@ -19082,7 +18959,7 @@
                     menuList: E,
                     menuItem: w,
                     sortMenu: S,
-                    sortMenuList: _,
+                    sortMenuList: L,
                     listItem: F,
                     currentWorkplaceList: N,
                     link: M,
@@ -19090,9 +18967,9 @@
                 }
             } = n2(), [B, O] = (0, r.useState)(!1), [H, U] = (0, r.useState)(!1), [z, V] = (0, r.useState)(null), {
                 Dashboard: q
-            } = tY(), {
+            } = tX(), {
                 enableGroupModeration: W
-            } = tx(), G = (0, m.useMediaQuery)(t => t.breakpoints.down("Medium")), {
+            } = tI(), G = (0, m.useMediaQuery)(t => t.breakpoints.down("Medium")), {
                 transitions: {
                     duration: {
                         standard: K
@@ -19140,7 +19017,7 @@
                     className: M
                 }, r.default.createElement(l.Typography, {
                     variant: "smallLabel2"
-                }, h("Label.Settings")))), r.default.createElement(A.ListItem, {
+                }, f("Label.Settings")))), r.default.createElement(A.ListItem, {
                     classes: {
                         root: F
                     }
@@ -19149,7 +19026,7 @@
                     className: M
                 }, r.default.createElement(l.Typography, {
                     variant: "smallLabel2"
-                }, h("Label.Members")))), r.default.createElement(A.ListItem, {
+                }, f("Label.Members")))), r.default.createElement(A.ListItem, {
                     classes: {
                         root: F
                     }
@@ -19158,7 +19035,7 @@
                     className: M
                 }, r.default.createElement(l.Typography, {
                     variant: "smallLabel2"
-                }, h("Label.Roles")))), W && r.default.createElement(A.ListItem, {
+                }, f("Label.Roles")))), W && r.default.createElement(A.ListItem, {
                     classes: {
                         root: F
                     }
@@ -19167,7 +19044,7 @@
                     className: M
                 }, r.default.createElement(l.Typography, {
                     variant: "smallLabel2"
-                }, h("Label.Moderation")))), r.default.createElement(A.ListItem, {
+                }, f("Label.Moderation")))), r.default.createElement(A.ListItem, {
                     classes: {
                         root: F
                     }
@@ -19176,14 +19053,14 @@
                     className: M
                 }, r.default.createElement(l.Typography, {
                     variant: "smallLabel2"
-                }, h("Label.ActivityHistory")))))), r.default.createElement(u.Divider, {
+                }, f("Label.ActivityHistory")))))), r.default.createElement(u.Divider, {
                     key: "diver"
                 }), r.default.createElement(nQ, {
                     key: "controls",
                     sortButtonRef: V,
                     onCreate: ee,
                     setIsSortMenuOpen: U
-                }), ...o.flatMap(t => t.creatorType === Q.creatorType && t.creatorId === Q.creatorId ? null : r.default.createElement(f.MenuItem, {
+                }), ...o.flatMap(t => t.creatorType === Q.creatorType && t.creatorId === Q.creatorId ? null : r.default.createElement(h.MenuItem, {
                     key: "".concat(t.creatorId, "-").concat(t.creatorType),
                     value: t.creatorId,
                     classes: {
@@ -19196,14 +19073,14 @@
                     adornment: "User" === t.creatorType ? r.default.createElement(l.Typography, {
                         variant: "smallLabel2"
                     }, r.default.createElement(T.Label, {
-                        labelText: h("Label.You")
+                        labelText: f("Label.You")
                     })) : void 0
                 })))];
             return r.default.createElement(k.FormControl, {
                 fullWidth: !0
             }, r.default.createElement(D.Menu, {
                 classes: {
-                    list: _,
+                    list: L,
                     paper: g(y, S)
                 },
                 open: Y,
@@ -19220,7 +19097,7 @@
                 }
             }, r.default.createElement(j.ListSubheader, null, r.default.createElement(l.Typography, {
                 variant: "captionHeader"
-            }, h("Label.SortBy"))), r.default.createElement(nJ, {
+            }, f("Label.SortBy"))), r.default.createElement(nJ, {
                 sortBy: a,
                 onSortUpdate: d
             })), r.default.createElement(R.Select, {
@@ -19239,7 +19116,7 @@
                 }),
                 SelectProps: {
                     open: Z,
-                    IconComponent: L.ExpandMoreIcon,
+                    IconComponent: _.ExpandMoreIcon,
                     onClose: () => O(!1),
                     onOpen: () => {
                         O(!0)
@@ -19282,19 +19159,19 @@
                 Dashboard: {
                     createGroups: a
                 }
-            } = tY(), {
+            } = tX(), {
                 sort: i,
                 setSort: l,
                 workspaces: s,
                 currentWorkspace: u,
                 isLoading: c,
                 setCurrentWorkspace: d
-            } = t8(), p = (0, r.useCallback)(() => {
+            } = t6(), p = (0, r.useCallback)(() => {
                 /^https?:\/\//.test(a) ? window.location.assign(a) : eY.default.push(a)
             }, [a]);
             return null === s || c ? r.default.createElement("div", {
                 className: o
-            }, r.default.createElement(_.CircularProgress, {
+            }, r.default.createElement(L.CircularProgress, {
                 color: "secondary"
             })) : r.default.createElement(n4, {
                 collapsed: n,
@@ -19509,8 +19386,8 @@
                     header: d,
                     headerCompact: p,
                     headerContainer: m,
-                    startIcon: f,
-                    headerLabel: h,
+                    startIcon: h,
+                    headerLabel: f,
                     labelTransition: g,
                     labelHidden: v,
                     label: b
@@ -19527,7 +19404,7 @@
                     root: c(d, {
                         [p]: i
                     }),
-                    startIcon: f
+                    startIcon: h
                 },
                 color: "primary",
                 startIcon: n,
@@ -19535,7 +19412,7 @@
             }, r.default.createElement(l.Typography, {
                 variant: "hero",
                 classes: {
-                    root: c(b, h, {
+                    root: c(b, f, {
                         [g]: s,
                         [v]: i
                     })
@@ -19566,8 +19443,8 @@
                 adornment: d,
                 compact: p = !1,
                 bottom: m = !1,
-                fixedIcon: f = !1,
-                iconOnlyHover: h = !1,
+                fixedIcon: h = !1,
+                iconOnlyHover: f = !1,
                 disableTooltip: g = !1,
                 enableAnimation: v = !1,
                 href: b
@@ -19575,7 +19452,7 @@
                 iconOnly: E,
                 isReady: w,
                 shouldAnimate: S
-            } = nU(), I = E || f, x = !g && I && !S && !!u, {
+            } = nU(), I = E || h, x = !g && I && !S && !!u, {
                 cx: A,
                 classes: {
                     railItem: T,
@@ -19583,8 +19460,8 @@
                     railItemBottom: D,
                     railItemWrapper: j,
                     railItemNoHover: R,
-                    railItemIconOnly: L,
-                    startIcon: _,
+                    railItemIconOnly: _,
+                    startIcon: L,
                     startIconCompact: M,
                     startIconTransition: P,
                     verticalLabel: B,
@@ -19593,7 +19470,7 @@
                     label: U
                 }
             } = rt(), z = (0, r.useCallback)(t => {
-                b && t9(t) || o(t)
+                b && t7(t) || o(t)
             }, [b, o]), V = i && s ? s : a, q = p && !I ? "captionSmall" : "largeLabel2", W = {
                 onClick: z,
                 variant: "text",
@@ -19601,14 +19478,14 @@
                 "aria-label": null != c ? c : I && "string" == typeof u ? u : void 0,
                 classes: {
                     root: A({
-                        [L]: I,
+                        [_]: I,
                         [T]: !I,
                         [k]: p && !I,
-                        [R]: !h,
-                        "radius-medium hover:bg-shift-200 active:bg-shift-300": h && !i,
-                        "radius-medium bg-shift-200 hover:bg-shift-300 active:bg-shift-300": h && i
+                        [R]: !f,
+                        "radius-medium hover:bg-shift-200 active:bg-shift-300": f && !i,
+                        "radius-medium bg-shift-200 hover:bg-shift-300 active:bg-shift-300": f && i
                     }),
-                    startIcon: A(_, {
+                    startIcon: A(L, {
                         [M]: p && !I,
                         [P]: v && !I,
                         "hover:bg-shift-200 active:bg-shift-300": p && !I && !i,
@@ -19644,7 +19521,7 @@
                 ref: n,
                 className: A(j, {
                     [D]: m,
-                    "hover:bg-shift-200 active:bg-shift-300": !h && (!p || I) && !i,
+                    "hover:bg-shift-200 active:bg-shift-300": !f && (!p || I) && !i,
                     "bg-shift-200 hover:bg-shift-300 active:bg-shift-300": i && (!p || I),
                     "content-emphasis": !p || I
                 })
@@ -19669,137 +19546,9 @@
                 }
             }, C))
         }),
-        ra = String(1049),
-        ri = "sidebar-toggle-edu-tooltip",
+        ra = "var(--ease-standard-out)",
+        ri = "var(--time-50)",
         rl = t => {
-            let {
-                enabled: n,
-                collapsed: o,
-                children: a
-            } = t, {
-                translate: i
-            } = (0, e$.useTranslation)(), [l, s] = (0, e0.useLocalStorage)("creator-hub-sidebar-toggle-tooltip-seen-v2", "false"), [u, c] = (0, r.useState)("hidden"), [d, p] = (0, r.useState)(null), m = (0, r.useRef)(o), f = (0, r.useRef)(null), h = (0, r.useRef)(null), g = i("AriaLabel.Close"), y = n && "true" !== l, v = "entering" === u || "open" === u || "exiting" === u, b = (0, r.useCallback)(() => {
-                c("hidden"), s("true"), f.current = null
-            }, [s]), C = (0, r.useCallback)(() => {
-                c(t => "open" === t || "entering" === t ? "exiting" : t)
-            }, []), E = (0, r.useCallback)(() => {
-                let t = h.current;
-                t && p(t.getBoundingClientRect())
-            }, []);
-            (0, r.useEffect)(() => {
-                if (!y || "hidden" !== u) return;
-                let t = requestAnimationFrame(() => {
-                    c("entering")
-                });
-                return () => {
-                    cancelAnimationFrame(t)
-                }
-            }, [y, u]), (0, r.useEffect)(() => {
-                if ("entering" !== u) return;
-                let t = requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        c("open")
-                    })
-                });
-                return () => {
-                    cancelAnimationFrame(t)
-                }
-            }, [u]), (0, r.useEffect)(() => {
-                if ("exiting" !== u) return;
-                let t = window.setTimeout(() => {
-                    c("hidden"), s("true"), f.current = null
-                }, 100);
-                return () => {
-                    window.clearTimeout(t)
-                }
-            }, [u, s]), (0, r.useLayoutEffect)(() => {
-                if (!v) return;
-                E();
-                let t = h.current,
-                    n = t && "u" > typeof ResizeObserver ? new ResizeObserver(E) : null;
-                return t && n && n.observe(t), window.addEventListener("resize", E), window.addEventListener("scroll", E, !0), () => {
-                    null == n || n.disconnect(), window.removeEventListener("resize", E), window.removeEventListener("scroll", E, !0)
-                }
-            }, [v, o, E]), (0, r.useEffect)(() => {
-                if ("open" !== u && "entering" !== u && "exiting" !== u) return;
-                let t = eY.default.events;
-                if (t) return t.on("routeChangeStart", b), () => {
-                    t.off("routeChangeStart", b)
-                }
-            }, [u, b]), (0, r.useEffect)(() => {
-                let t = o && !m.current;
-                m.current = o, t && C()
-            }, [o, C]), (0, r.useLayoutEffect)(() => {
-                var t;
-                if (!v) return;
-                let n = null != (t = f.current) ? t : document.querySelector(".".concat(ri));
-                n instanceof HTMLElement && (f.current = n, function(t, n) {
-                    t.style.marginLeft = "16px", t.style.zIndex = ra;
-                    let r = t.closest("[data-radix-popper-content-wrapper]");
-                    if (r instanceof HTMLElement && (r.style.zIndex = ra), t.style.transitionProperty = "opacity, translate", t.style.transitionDuration = "100ms", t.style.transitionTimingFunction = "exiting" === n ? "ease-out" : "ease-in", "open" === n) {
-                        t.style.opacity = "1", t.style.translate = "0";
-                        return
-                    }
-                    if ("exiting" === n) {
-                        t.style.opacity = "0", t.style.translate = "-8px 0";
-                        return
-                    }
-                    t.style.opacity = "0", t.style.translate = "8px 0"
-                }(n, u))
-            }, [u, v]), (0, r.useEffect)(() => {
-                var t;
-                if ("open" !== u && "entering" !== u) return;
-                let n = null != (t = f.current) ? t : document.querySelector(".".concat(ri));
-                if (!(n instanceof HTMLElement)) return;
-                let r = n.querySelector("button");
-                if (!(r instanceof HTMLElement)) return;
-                let o = () => {
-                    C()
-                };
-                return r.addEventListener("click", o), () => {
-                    r.removeEventListener("click", o)
-                }
-            }, [u, C]);
-            let w = "Heading.NewSidebarToggle",
-                S = "Description.NewSidebarToggle",
-                I = i(w),
-                x = i(S),
-                A = v && d && "u" > typeof document ? (0, tf.createPortal)(r.default.createElement(tt.EducationalTooltip, {
-                    open: v
-                }, r.default.createElement(tt.EducationalTooltipTrigger, {
-                    asChild: !0
-                }, r.default.createElement("span", {
-                    "aria-hidden": !0,
-                    style: {
-                        position: "fixed",
-                        left: d.left,
-                        top: d.top,
-                        width: d.width,
-                        height: d.height,
-                        pointerEvents: "none",
-                        opacity: 0
-                    }
-                })), r.default.createElement(tt.EducationalTooltipContent, {
-                    position: "right-end",
-                    hasCloseAffordance: !0,
-                    closeLabel: g,
-                    onOpenAutoFocus: t => {
-                        t.preventDefault()
-                    },
-                    className: ri
-                }, r.default.createElement(tt.EducationalTooltipBody, {
-                    className: "padding-medium"
-                }, r.default.createElement(tt.EducationalTooltipTitle, null, I === w ? "New sidebar toggle" : I), r.default.createElement(tt.EducationalTooltipDescription, null, x === S ? "Free up some page space by shrinking your navigation." : x)))), document.body) : null;
-            return r.default.createElement(r.default.Fragment, null, r.default.createElement("div", {
-                ref: h,
-                style: {
-                    width: "100%"
-                }
-            }, a), A)
-        },
-        rs = "var(--ease-standard-out)",
-        ru = "var(--time-50)",
-        rc = t => {
             let {
                 enableAnimation: n,
                 onClick: o
@@ -19811,9 +19560,9 @@
                 translate: s
             } = (0, e$.useTranslation)(), [u, c] = (0, r.useState)(!1), d = s("Action.LogInAllTools"), p = s("Action.LogIn"), m = a && !l;
             !m && u && c(!1);
-            let f = n ? a ? "width 175ms ".concat(rs, ", opacity ").concat(ru, " ").concat(rs, " 175ms") : "width 175ms ".concat(rs, " ").concat(ru, ", opacity ").concat(ru, " ").concat(rs) : "none",
-                h = n ? a ? "opacity ".concat(ru, " ").concat(rs, " 175ms") : "opacity ".concat(ru, " ").concat(rs) : "none",
-                g = i ? a ? "opacity ".concat(ru, " ").concat(rs) : "opacity ".concat(ru, " ").concat(rs, " 225ms") : "none",
+            let h = n ? a ? "width 175ms ".concat(ra, ", opacity ").concat(ri, " ").concat(ra, " 175ms") : "width 175ms ".concat(ra, " ").concat(ri, ", opacity ").concat(ri, " ").concat(ra) : "none",
+                f = n ? a ? "opacity ".concat(ri, " ").concat(ra, " 175ms") : "opacity ".concat(ri, " ").concat(ra) : "none",
+                g = i ? a ? "opacity ".concat(ri, " ").concat(ra) : "opacity ".concat(ri, " ").concat(ra, " 225ms") : "none",
                 y = r.default.createElement("div", {
                     className: "relative width-full min-height-1000"
                 }, r.default.createElement("div", {
@@ -19821,9 +19570,9 @@
                     className: "absolute top-[0] left-[0] [z-index:0] height-1000 bg-action-standard radius-medium pointer-events-none ".concat(a ? "width-1000" : "width-full"),
                     style: {
                         opacity: +!a,
-                        transition: f
+                        transition: h
                     }
-                }), r.default.createElement(tr.Button, {
+                }), r.default.createElement(tn.Button, {
                     variant: "Standard",
                     size: "Medium",
                     onClick: o,
@@ -19834,7 +19583,7 @@
                     className: "absolute left-[var(--size-250)] top-[50%] size-500 [z-index:1] [transform:translateY(-50%)] flex items-center justify-center content-emphasis pointer-events-none",
                     style: {
                         opacity: +!!a,
-                        transition: h
+                        transition: f
                     }
                 }, r.default.createElement(te.Icon, {
                     name: "icon-regular-arrow-right-to-portrait-rectangle",
@@ -19848,7 +19597,7 @@
                 }, d)));
             return r.default.createElement("div", {
                 className: "flex width-full min-height-1000 items-center radius-medium ".concat(m ? "hover:bg-shift-200 active:bg-shift-300 content-emphasis" : "")
-            }, r.default.createElement(tn.Tooltip, {
+            }, r.default.createElement(tt.Tooltip, {
                 position: "right-center",
                 title: p,
                 delayDurationMs: 100,
@@ -19857,12 +19606,12 @@
                 onOpenChange: t => {
                     m && c(t)
                 }
-            }, r.default.createElement(tn.TooltipTrigger, {
+            }, r.default.createElement(tt.TooltipTrigger, {
                 asChild: !0
             }, y)))
         },
-        rd = ["/dashboard/devex", "/dashboard/transactions", "/dashboard/account-information", "/dashboard/billing", "/dashboard/payments", "/dashboard/revenue-share-agreements", "/dashboard/group/payouts", "/dashboard/group/revenue-share-agreements"],
-        rp = t => {
+        rs = ["/dashboard/devex", "/dashboard/transactions", "/dashboard/account-information", "/dashboard/billing", "/dashboard/payments", "/dashboard/revenue-share-agreements", "/dashboard/group/payouts", "/dashboard/group/revenue-share-agreements"],
+        ru = t => {
             let {
                 pathname: n,
                 isAuth: o,
@@ -19875,15 +19624,15 @@
                 classes: {
                     railContainer: d,
                     railContainerCompact: p,
-                    railContainerIconOnly: f,
-                    railContainerTransition: h,
+                    railContainerIconOnly: h,
+                    railContainerTransition: f,
                     labelsRailContainer: g
                 }
             } = rt(), {
                 classes: {
                     scroll: y
                 }
-            } = tA(), {
+            } = tx(), {
                 iconOnly: v,
                 primaryRailCompact: b,
                 drawerVariant: C,
@@ -19897,32 +19646,32 @@
                 setPrimaryRailOpen: k
             } = nU(), {
                 currentProduct: D
-            } = tx(), {
+            } = tI(), {
                 currentWorkspace: {
                     creatorType: j
                 }
-            } = t8(), {
+            } = t6(), {
                 translate: R
-            } = (0, e$.useTranslation)(), L = (0, m.useMediaQuery)(t => t.breakpoints.down("Medium")), {
-                Dashboard: _,
+            } = (0, e$.useTranslation)(), _ = (0, m.useMediaQuery)(t => t.breakpoints.down("Medium")), {
+                Dashboard: L,
                 Store: F,
                 Forum: N,
                 Ads: z,
                 Roblox: V,
                 Documentation: q
-            } = tY(), W = ["Documentation", "Assistant"].includes(D), [G, K] = (0, r.useState)(null), J = (0, r.useCallback)((t, n) => {
-                l(nA(t)), null != n && K(n), "temporary" === C && "Learn" !== t && k(!1), "Learn" === t ? W && A(!0) : A(!1)
+            } = tX(), W = ["Documentation", "Assistant"].includes(D), [G, K] = (0, r.useState)(null), J = (0, r.useCallback)((t, n) => {
+                l(nx(t)), null != n && K(n), "temporary" === C && "Learn" !== t && k(!1), "Learn" === t ? W && A(!0) : A(!1)
             }, [C, l, A, k, W]), Z = (0, r.useMemo)(() => {
                 if (w) return "Documentation";
-                if (n.startsWith(_.updates)) return tK;
-                if (D === tG) {
-                    if (n.startsWith(_.creations)) return "Creations";
-                    if (n.startsWith(_.analytics)) return "Analytics";
-                    if (rd.includes(n)) return "Finances";
-                    if (n.startsWith(_.collaborations)) return "Collaboration"
+                if (n.startsWith(L.updates)) return tG;
+                if (D === tW) {
+                    if (n.startsWith(L.creations)) return "Creations";
+                    if (n.startsWith(L.analytics)) return "Analytics";
+                    if (rs.includes(n)) return "Finances";
+                    if (n.startsWith(L.collaborations)) return "Collaboration"
                 }
-                return [tW, "Documentation", "Store", "Forum", tJ, tK, "Talent"].includes(D) ? D : null
-            }, [w, D, n, _.creations, _.analytics, _.collaborations, _.updates]);
+                return [tq, "Documentation", "Store", "Forum", tK, tG, "Talent"].includes(D) ? D : null
+            }, [w, D, n, L.creations, L.analytics, L.collaborations, L.updates]);
             null != G && Z === G && K(null);
             let X = null != G ? G : Z;
             return ((0, r.useEffect)(() => {
@@ -19937,9 +19686,9 @@
             }, []), a) ? r.default.createElement(s.Grid, {
                 classes: {
                     root: c(y, d, {
-                        [h]: S,
+                        [f]: S,
                         [p]: b && !v,
-                        [f]: v,
+                        [h]: v,
                         [g]: b
                     })
                 }
@@ -19948,13 +19697,13 @@
                 icon: r.default.createElement(M.RobloxIcon, null),
                 label: R("Label.Creator"),
                 onClick: () => J("Header"),
-                href: _.home
+                href: L.home
             })) : r.default.createElement(s.Grid, {
                 classes: {
                     root: c(y, d, {
-                        [h]: S,
+                        [f]: S,
                         [p]: b && !v,
-                        [f]: v,
+                        [h]: v,
                         [g]: b
                     })
                 }
@@ -19964,7 +19713,7 @@
                 icon: r.default.createElement(M.RobloxIcon, null),
                 label: R("Label.Creator"),
                 onClick: () => J("Header"),
-                href: _.home
+                href: L.home
             }), o && r.default.createElement(n5, {
                 collapsed: b
             }), r.default.createElement(ro, {
@@ -19975,7 +19724,7 @@
                 activeIcon: r.default.createElement(P.BuilderHomeFillIcon, null),
                 label: R("Heading.Home"),
                 onClick: () => J("Home", "Home"),
-                href: _.home
+                href: L.home
             }), o && r.default.createElement(ro, {
                 enableAnimation: S && I,
                 compact: b,
@@ -19990,7 +19739,7 @@
                 active: "Creations" === X,
                 label: R("Heading.Creations"),
                 onClick: () => J("Creations", "Creations"),
-                href: _.creations
+                href: L.creations
             }), r.default.createElement(ro, {
                 enableAnimation: S && I,
                 compact: b,
@@ -20041,13 +19790,13 @@
                     name: "icon-filled-megaphone-cheer",
                     size: "Medium"
                 }),
-                active: X === tK,
+                active: X === tG,
                 label: R("Heading.Updates"),
-                onClick: () => J(tK, tK),
-                href: _.updates
+                onClick: () => J(tG, tG),
+                href: L.updates
             }), o && r.default.createElement(r.default.Fragment, null, (!b || v) && r.default.createElement("div", {
                 className: "padding-y-small width-full"
-            }, r.default.createElement(to.Divider, null)), r.default.createElement(ro, {
+            }, r.default.createElement(tr.Divider, null)), r.default.createElement(ro, {
                 enableAnimation: S && I,
                 compact: b,
                 icon: r.default.createElement(n9, null),
@@ -20055,7 +19804,7 @@
                 active: "Finances" === X,
                 label: R("Heading.Finances"),
                 onClick: () => J("Finances", "Finances"),
-                href: _.finances
+                href: L.finances
             }), r.default.createElement(ro, {
                 enableAnimation: S && I,
                 compact: b,
@@ -20070,8 +19819,8 @@
                 active: "Analytics" === X,
                 label: R("Title.Analytics"),
                 onClick: () => J("Analytics", "Analytics"),
-                href: _.analytics
-            }), j === t$ && r.default.createElement(ro, {
+                href: L.analytics
+            }), j === tQ && r.default.createElement(ro, {
                 enableAnimation: S && I,
                 compact: b,
                 icon: r.default.createElement(te.Icon, {
@@ -20085,11 +19834,11 @@
                 active: "Collaboration" === X,
                 label: R("Heading.Collaboration"),
                 onClick: () => J("Collaboration", "Collaboration"),
-                href: _.groupProfile
+                href: L.groupProfile
             }), r.default.createElement(ro, {
                 enableAnimation: S && I,
                 compact: b,
-                active: X === tJ,
+                active: X === tK,
                 icon: r.default.createElement(te.Icon, {
                     name: "icon-regular-circle-line-target-cursor",
                     size: "Medium"
@@ -20099,11 +19848,11 @@
                     size: "Medium"
                 }),
                 label: R("Heading.Ads"),
-                onClick: () => J("Ads", tJ),
+                onClick: () => J("Ads", tK),
                 href: z.home
             }), (!b || v) && r.default.createElement("div", {
                 className: "padding-y-small width-full"
-            }, r.default.createElement(to.Divider, null))), o ? r.default.createElement(ro, {
+            }, r.default.createElement(tr.Divider, null))), o ? r.default.createElement(ro, {
                 enableAnimation: S && I,
                 compact: b,
                 icon: r.default.createElement(te.Icon, {
@@ -20112,7 +19861,7 @@
                 }),
                 label: R("Heading.AllTools"),
                 onClick: () => {
-                    l(nA("AllTools")), T(!E)
+                    l(nx("AllTools")), T(!E)
                 }
             }) : b && !v ? r.default.createElement(ro, {
                 enableAnimation: S && I,
@@ -20123,12 +19872,12 @@
                 }),
                 label: R("Action.LogIn"),
                 onClick: () => {
-                    l(nA("AllToolsLogin")), u()
+                    l(nx("AllToolsLogin")), u()
                 }
-            }) : r.default.createElement(rc, {
+            }) : r.default.createElement(rl, {
                 enableAnimation: S && I,
                 onClick: () => {
-                    l(nA("AllToolsLogin")), u()
+                    l(nx("AllToolsLogin")), u()
                 }
             }), r.default.createElement(ro, {
                 enableAnimation: S && I,
@@ -20138,7 +19887,7 @@
                 label: R("Label.RobloxWebsite"),
                 onClick: () => J("RobloxWebsite"),
                 href: V.home
-            }), !L && r.default.createElement(ro, {
+            }), !_ && r.default.createElement(ro, {
                 enableAnimation: S && I,
                 compact: b,
                 icon: r.default.createElement(U.StudioIcon, null),
@@ -20146,10 +19895,7 @@
                 onClick: () => {
                     J("studio"), i()
                 }
-            }), "persistent" === C && r.default.createElement(rl, {
-                enabled: !0,
-                collapsed: v
-            }, r.default.createElement(ro, {
+            }), "persistent" === C && r.default.createElement(ro, {
                 enableAnimation: S && I,
                 compact: b,
                 icon: r.default.createElement(te.Icon, {
@@ -20163,13 +19909,13 @@
                         eventType: "clickNavPrimaryRailCollapse",
                         context: "click",
                         eventValue: t ? "collapse" : "expand"
-                    }), x(t), localStorage.setItem(tR, String(t))
+                    }), x(t), localStorage.setItem(tj, String(t))
                 }
-            })))
+            }))
         },
-        rm = (0, i.makeStyles)()(t => ({
+        rc = (0, i.makeStyles)()(t => ({
             container: {
-                gridArea: tT,
+                gridArea: tA,
                 zIndex: 1049
             },
             rails: {
@@ -20221,7 +19967,7 @@
                 width: 293
             }
         })),
-        rf = t => {
+        rd = t => {
             let {
                 pathname: n,
                 secondarySize: o = "small",
@@ -20234,8 +19980,8 @@
                 allToolsOpen: d,
                 drawerVariant: p,
                 setHasSecondaryRail: m,
-                setPrimaryRailOpen: f,
-                setAllToolsOpen: h
+                setPrimaryRailOpen: h,
+                setAllToolsOpen: f
             } = nU(), y = !!l, {
                 login: v,
                 isFetched: b,
@@ -20266,16 +20012,16 @@
                     docked: D,
                     secondaryRail: j,
                     experienceSecondaryRail: R,
-                    mediumSecondaryRail: L,
-                    largeSecondaryRail: _
+                    mediumSecondaryRail: _,
+                    largeSecondaryRail: L
                 }
-            } = rm(), {
+            } = rc(), {
                 classes: {
                     scroll: F
                 }
-            } = tA(), N = (0, r.useCallback)(() => {
-                h(!1), "temporary" === p && f(!1)
-            }, [p, h, f]), M = (0, r.useCallback)((t, n) => {
+            } = tx(), N = (0, r.useCallback)(() => {
+                f(!1), "temporary" === p && h(!1)
+            }, [p, f, h]), M = (0, r.useCallback)((t, n) => {
                 let r;
                 i((r = {
                     productName: t
@@ -20294,7 +20040,7 @@
             }, r.default.createElement(g.Drawer, {
                 open: u,
                 variant: p,
-                onClose: () => f(!1),
+                onClose: () => h(!1),
                 classes: {
                     docked: D
                 },
@@ -20308,7 +20054,7 @@
                 className: S(x, S({
                     [k]: !u
                 }))
-            }, r.default.createElement(s.Grid, null, r.default.createElement(rp, {
+            }, r.default.createElement(s.Grid, null, r.default.createElement(ru, {
                 isAuth: !!C,
                 isLoading: !b,
                 login: v,
@@ -20319,8 +20065,8 @@
                 classes: {
                     root: S(j, F, {
                         [R]: "experience" === o,
-                        [L]: "medium" === o,
-                        [_]: "large" === o
+                        [_]: "medium" === o,
+                        [L]: "large" === o
                     })
                 }
             }, l)), r.default.createElement(g.Drawer, {
@@ -20340,22 +20086,22 @@
                         transition: "left 225ms ease-out"
                     }
                 }
-            }, r.default.createElement(nc, {
+            }, r.default.createElement(nu, {
                 onToolSelect: M,
-                onClose: () => h(!1)
+                onClose: () => f(!1)
             }))))
         },
-        rh = (0, r.createContext)({}),
-        rg = t => {
+        rp = (0, r.createContext)({}),
+        rm = t => {
             let {
                 children: n
             } = t, {
                 environment: o,
                 target: a
-            } = tx(), i = (0, r.useMemo)(() => {
+            } = tI(), i = (0, r.useMemo)(() => {
                 let t = t_("creator-notifications", a, o);
-                return new tg.CreatorStreamNotificationsApi(new e6.Configuration({
-                    robloxSiteDomain: tL(a, o),
+                return new tf.CreatorStreamNotificationsApi(new e6.Configuration({
+                    robloxSiteDomain: tR(a, o),
                     basePath: t,
                     credentials: "include",
                     enableMrRouter: !0
@@ -20363,16 +20109,16 @@
             }, [o, a]), l = (0, r.useMemo)(() => ({
                 notificationClient: i
             }), [i]);
-            return r.default.createElement(rh.Provider, {
+            return r.default.createElement(rp.Provider, {
                 value: l
             }, n)
         },
-        ry = () => {
-            let t = (0, r.useContext)(rh);
+        rh = () => {
+            let t = (0, r.useContext)(rp);
             if (null == t.notificationClient) throw Error("useNotificationClient must be used within a NotificationClientProvider");
             return t
         },
-        rv = new class {
+        rf = new class {
             on(t, n) {
                 this.listeners[t].add(n)
             }
@@ -20395,7 +20141,7 @@
                 })
             }
         },
-        rb = t => {
+        rg = t => {
             let {
                 content: n
             } = t, {
@@ -20403,7 +20149,7 @@
             } = (0, e$.useTranslation)();
             return r.default.createElement(r.default.Fragment, null, o(n))
         },
-        rC = (0, r.createContext)({
+        ry = (0, r.createContext)({
             anchorRef: null,
             buttonId: "",
             isLastMovementKeyboard: !1,
@@ -20423,8 +20169,8 @@
                 throw Error("Not implemented")
             }
         });
-    rC.displayName = "TopNavigationDropdownTab";
-    let rE = t => {
+    ry.displayName = "TopNavigationDropdownTab";
+    let rv = t => {
             let {
                 anchorRef: n,
                 buttonId: o,
@@ -20437,7 +20183,7 @@
                 onMouseEnterMenu: d,
                 onMouseLeaveMenu: p,
                 onKeyDownMenu: m
-            } = t, f = (0, r.useMemo)(() => ({
+            } = t, h = (0, r.useMemo)(() => ({
                 anchorRef: n,
                 buttonId: o,
                 isLastMovementKeyboard: i,
@@ -20449,11 +20195,11 @@
                 onMouseLeaveMenu: p,
                 onKeyDownMenu: m
             }), [n, o, i, l, s, u, c, d, p, m]);
-            return r.default.createElement(rC.Provider, {
-                value: f
+            return r.default.createElement(ry.Provider, {
+                value: h
             }, a)
         },
-        rw = (0, i.makeStyles)()((t, n) => {
+        rb = (0, i.makeStyles)()((t, n) => {
             let {
                 menuMinWidth: r
             } = n;
@@ -20463,7 +20209,7 @@
                 }
             }
         }),
-        rS = (0, i.makeStyles)()(() => ({
+        rC = (0, i.makeStyles)()(() => ({
             menuList: {
                 pointerEvents: "auto"
             },
@@ -20471,9 +20217,9 @@
                 pointerEvents: "none"
             }
         })),
-        rI = (t, n) => null != t && null !== n,
-        rx = (t, n) => "" === n || "/" === n ? t : "".concat(t, "/").concat(n.replace(/^\//, "")),
-        rA = t => {
+        rE = (t, n) => null != t && null !== n,
+        rw = (t, n) => "" === n || "/" === n ? t : "".concat(t, "/").concat(n.replace(/^\//, "")),
+        rS = t => {
             let {
                 items: n
             } = t, {
@@ -20486,19 +20232,19 @@
                 setIsMenuOpen: d,
                 onMouseEnterMenu: p,
                 onMouseLeaveMenu: m,
-                onKeyDownMenu: h
-            } = (0, r.useContext)(rC), {
+                onKeyDownMenu: f
+            } = (0, r.useContext)(ry), {
                 sendEvent: g
-            } = tx(), {
+            } = tI(), {
                 classes: {
                     popoverStyle: y,
                     menuList: v
                 }
-            } = rS(), b = (0, r.useCallback)(() => {
+            } = rC(), b = (0, r.useCallback)(() => {
                 d(!1)
             }, [d]), C = (0, r.useCallback)(t => {
-                rI(t.path, c) && (g(nN(c.key, t.path)), setTimeout(() => {
-                    b(), window.open(rx(c.href, t.path), "_self")
+                rE(t.path, c) && (g(nF(c.key, t.path)), setTimeout(() => {
+                    b(), window.open(rw(c.href, t.path), "_self")
                 }, 100))
             }, [b, g, c]);
             return r.default.createElement(D.Menu, {
@@ -20516,7 +20262,7 @@
                     },
                     onMouseEnter: p,
                     onMouseLeave: m,
-                    onKeyDown: h
+                    onKeyDown: f
                 },
                 PopoverClasses: {
                     root: y
@@ -20529,17 +20275,17 @@
                 "aria-labelledby": a,
                 role: "menu",
                 variant: "menu"
-            }, n.map((t, o) => [...t.map(t => r.default.createElement(f.MenuItem, {
+            }, n.map((t, o) => [...t.map(t => r.default.createElement(h.MenuItem, {
                 role: "menuitem",
                 onClick: n => {
                     n.preventDefault(), C(t)
                 },
                 key: t.title,
                 component: "a",
-                href: rI(t.path, c) ? rx(c.href, t.path) : void 0
+                href: rE(t.path, c) ? rw(c.href, t.path) : void 0
             }, t.title)), o < n.length - 1 ? r.default.createElement(u.Divider, null) : null]))
         },
-        rT = (0, i.makeStyles)()(t => ({
+        rI = (0, i.makeStyles)()(t => ({
             listItem: {
                 paddingTop: t.spacing(1.5),
                 paddingBottom: t.spacing(1.5)
@@ -20548,7 +20294,7 @@
                 padding: t.spacing(.5, 0)
             }
         })),
-        rk = t => {
+        rx = t => {
             let {
                 translatedItems: n,
                 tab: o
@@ -20557,11 +20303,11 @@
                     listItem: a,
                     dividerContainer: i
                 }
-            } = rT(), {
+            } = rI(), {
                 sendEvent: s
-            } = tx(), c = (0, r.useCallback)(t => {
-                s(nN(o.key, t.path)), setTimeout(() => {
-                    window.open(rx(o.href, t.path), "_self")
+            } = tI(), c = (0, r.useCallback)(t => {
+                s(nF(o.key, t.path)), setTimeout(() => {
+                    window.open(rw(o.href, t.path), "_self")
                 }, 100)
             }, [s, o]);
             return r.default.createElement(x.List, null, n.map((t, s) => r.default.createElement(r.default.Fragment, {
@@ -20573,7 +20319,7 @@
                     root: a
                 }
             }, r.default.createElement(q.Link, {
-                href: rx(o.href, t.path),
+                href: rw(o.href, t.path),
                 color: "inherit",
                 underline: "none"
             }, r.default.createElement(l.Typography, {
@@ -20583,7 +20329,7 @@
                 className: i
             }, r.default.createElement(u.Divider, null)))))
         },
-        rD = [
+        rA = [
             [{
                 translationKey: "Heading.Licenses",
                 path: "/explore/licenses"
@@ -20595,32 +20341,40 @@
                 path: "/roadmap"
             }]
         ],
-        rj = t => {
+        rT = t => {
             let {
                 tab: n
             } = t, {
                 translate: o
             } = (0, e$.useTranslation)(), {
                 isCompact: a
-            } = tx(), i = (0, r.useMemo)(() => rD.map(t => t.map(t => ({
+            } = tI(), i = (0, r.useMemo)(() => rA.map(t => t.map(t => ({
                 path: t.path,
                 title: o(t.translationKey)
             }))), [o]);
-            return a ? r.default.createElement(rk, {
+            return a ? r.default.createElement(rx, {
                 translatedItems: i,
                 tab: n
-            }) : r.default.createElement(rA, {
+            }) : r.default.createElement(rS, {
                 items: i
             })
         };
-    var rR = ((nm = {}).Dropdown = "Dropdown", nm.Basic = "Basic", nm);
-    let rL = {
+    var rk = ((np = {}).Dropdown = "Dropdown", np.Basic = "Basic", np);
+    let rD = {
             key: "CreatorHub",
             title: "Heading.Creator",
-            href: tF,
+            href: tL,
             path: ""
         },
-        r_ = {
+        rj = {
+            icon: r.default.createElement(Q.HomeOutlinedIcon, null),
+            activeIcon: r.default.createElement(Y.HomeIcon, null),
+            key: "Home",
+            title: "Heading.Home",
+            href: tL,
+            path: "/"
+        },
+        rR = {
             icon: r.default.createElement(Q.HomeOutlinedIcon, null),
             activeIcon: r.default.createElement(Y.HomeIcon, null),
             key: "Home",
@@ -20628,7 +20382,7 @@
             href: tF,
             path: "/"
         },
-        rF = {
+        r_ = {
             icon: r.default.createElement(Q.HomeOutlinedIcon, null),
             activeIcon: r.default.createElement(Y.HomeIcon, null),
             key: "Home",
@@ -20636,15 +20390,21 @@
             href: tN,
             path: "/"
         },
-        rN = {
-            icon: r.default.createElement(Q.HomeOutlinedIcon, null),
-            activeIcon: r.default.createElement(Y.HomeIcon, null),
-            key: "Home",
-            title: "Heading.Home",
-            href: tM,
-            path: "/"
+        rL = {
+            icon: r.default.createElement(ee.BookOutlinedIcon, null),
+            activeIcon: r.default.createElement($.BookIcon, null),
+            key: "Documentation",
+            title: "Heading.Learn",
+            href: "".concat(tL, "/docs"),
+            path: "/docs"
         },
-        rM = {
+        rF = {
+            key: "Assistant",
+            title: "Heading.Assistant",
+            href: "".concat(tL, "/docs/assistant"),
+            path: "/docs/assistant"
+        },
+        rN = {
             icon: r.default.createElement(ee.BookOutlinedIcon, null),
             activeIcon: r.default.createElement($.BookIcon, null),
             key: "Documentation",
@@ -20652,13 +20412,7 @@
             href: "".concat(tF, "/docs"),
             path: "/docs"
         },
-        rP = {
-            key: "Assistant",
-            title: "Heading.Assistant",
-            href: "".concat(tF, "/docs/assistant"),
-            path: "/docs/assistant"
-        },
-        rB = {
+        rM = {
             icon: r.default.createElement(ee.BookOutlinedIcon, null),
             activeIcon: r.default.createElement($.BookIcon, null),
             key: "Documentation",
@@ -20666,80 +20420,72 @@
             href: "".concat(tN, "/docs"),
             path: "/docs"
         },
-        rO = {
-            icon: r.default.createElement(ee.BookOutlinedIcon, null),
-            activeIcon: r.default.createElement($.BookIcon, null),
-            key: "Documentation",
-            title: "Heading.Learn",
-            href: "".concat(tM, "/docs"),
-            path: "/docs"
+        rP = {
+            icon: r.default.createElement(et.LanguageIcon, null),
+            activeIcon: r.default.createElement(et.LanguageIcon, null),
+            key: "Explore",
+            title: "Heading.Explore",
+            href: tL,
+            dropdownContentComponent: rT,
+            path: "/",
+            tabPath: "/explore/licenses"
         },
-        rH = {
+        rB = {
             icon: r.default.createElement(et.LanguageIcon, null),
             activeIcon: r.default.createElement(et.LanguageIcon, null),
             key: "Explore",
             title: "Heading.Explore",
             href: tF,
-            dropdownContentComponent: rj,
+            dropdownContentComponent: rT,
             path: "/",
             tabPath: "/explore/licenses"
         },
-        rU = {
+        rO = {
             icon: r.default.createElement(et.LanguageIcon, null),
             activeIcon: r.default.createElement(et.LanguageIcon, null),
             key: "Explore",
             title: "Heading.Explore",
             href: tN,
-            dropdownContentComponent: rj,
+            dropdownContentComponent: rT,
             path: "/",
             tabPath: "/explore/licenses"
         },
-        rz = {
-            icon: r.default.createElement(et.LanguageIcon, null),
-            activeIcon: r.default.createElement(et.LanguageIcon, null),
-            key: "Explore",
-            title: "Heading.Explore",
-            href: tM,
-            dropdownContentComponent: rj,
-            path: "/",
-            tabPath: "/explore/licenses"
-        },
-        rV = {
+        rH = {
             icon: r.default.createElement(er.ForumOutlinedIcon, null),
             activeIcon: r.default.createElement(en.ForumIcon, null),
             key: "Forum",
             title: "Heading.Forums",
             href: "https://devforum.roblox.com/"
         },
-        rq = {
+        rU = {
             icon: r.default.createElement(er.ForumOutlinedIcon, null),
             activeIcon: r.default.createElement(en.ForumIcon, null),
             key: "Forum",
             title: "Heading.Forums",
             href: "https://forum.robloxdev.cn/"
         },
-        rW = {
+        rz = {
             icon: r.default.createElement(er.ForumOutlinedIcon, null),
             activeIcon: r.default.createElement(en.ForumIcon, null),
             key: "Forum",
             title: "Heading.Forums",
             href: "https://devforum.sitetest1.robloxlabs.com"
         },
-        rG = {
+        rV = {
             icon: r.default.createElement(er.ForumOutlinedIcon, null),
             activeIcon: r.default.createElement(en.ForumIcon, null),
             key: "Forum",
             title: "Heading.Forums",
             href: "https://devforum.sitetest3.robloxlabs.com"
         },
-        rK = {
+        rq = {
             icon: r.default.createElement(eo.EventIcon, null),
             activeIcon: r.default.createElement(eo.EventIcon, null),
             key: "CreatorEvents",
             title: "Heading.CreatorEvents",
             href: "https://events.roblox.com"
         },
-        rJ = {
+        rW = {
             key: "Community",
             title: "Label.Community",
             href: "https://devforum.roblox.com",
@@ -20750,20 +20496,20 @@
                     isMenuOpen: n,
                     setIsMenuOpen: o,
                     tab: a
-                } = (0, r.useContext)(rC), {
+                } = (0, r.useContext)(ry), {
                     sendEvent: i
-                } = tx(), [l, s] = (0, r.useState)(), {
+                } = tI(), [l, s] = (0, r.useState)(), {
                     classes: {
                         menu: u
                     }
-                } = rw({
+                } = rb({
                     menuMinWidth: l
                 }), c = (null == a ? void 0 : a.subTabs) || [];
                 (0, r.useEffect)(() => {
                     t && s(t.getBoundingClientRect().width)
                 }, [t]);
                 let d = (0, r.useCallback)(t => {
-                    i(nN((null == a ? void 0 : a.key) || "", t.key)), setTimeout(() => {
+                    i(nF((null == a ? void 0 : a.key) || "", t.key)), setTimeout(() => {
                         window.open(t.href, "_self")
                     }, 100)
                 }, [a, i]);
@@ -20783,7 +20529,7 @@
                     anchorEl: t,
                     onClose: () => o(!1),
                     variant: "menu"
-                }, c.map(t => r.default.createElement(f.MenuItem, {
+                }, c.map(t => r.default.createElement(h.MenuItem, {
                     component: "a",
                     href: t.href,
                     onClick: n => {
@@ -20791,20 +20537,42 @@
                     },
                     key: t.key,
                     value: t.key
-                }, r.default.createElement(rb, {
+                }, r.default.createElement(rg, {
                     content: t.title
                 }))))
             },
-            subTabs: [rV, rK]
+            subTabs: [rH, rq]
         },
-        rZ = [r_, {
+        rG = [rj, {
+            icon: r.default.createElement(G.DashboardOutlinedIcon, null),
+            activeIcon: r.default.createElement(W.DashboardIcon, null),
+            key: "CreatorDashboard",
+            title: "Heading.Dashboard",
+            href: "".concat(tL, "/dashboard/creations"),
+            path: "/dashboard/creations"
+        }, rL, rP, {
+            icon: r.default.createElement(J.ShoppingCartOutlinedIcon, null),
+            activeIcon: r.default.createElement(K.ShoppingCartIcon, null),
+            key: "Store",
+            title: "Heading.Store",
+            href: "".concat(tL, "/store"),
+            path: "/store"
+        }, {
+            icon: r.default.createElement(X.PeopleOutlineOutlinedIcon, null),
+            activeIcon: r.default.createElement(Z.PeopleIcon, null),
+            key: "CommunityEvents",
+            title: "Heading.CommunityEvents",
+            href: "".concat(tL, "/events"),
+            path: "/events"
+        }, rH],
+        rK = [rR, {
             icon: r.default.createElement(G.DashboardOutlinedIcon, null),
             activeIcon: r.default.createElement(W.DashboardIcon, null),
             key: "CreatorDashboard",
             title: "Heading.Dashboard",
             href: "".concat(tF, "/dashboard/creations"),
             path: "/dashboard/creations"
-        }, rM, rH, {
+        }, rN, rB, {
             icon: r.default.createElement(J.ShoppingCartOutlinedIcon, null),
             activeIcon: r.default.createElement(K.ShoppingCartIcon, null),
             key: "Store",
@@ -20818,15 +20586,15 @@
             title: "Heading.CommunityEvents",
             href: "".concat(tF, "/events"),
             path: "/events"
-        }, rV],
-        rX = [rF, {
+        }, rz],
+        rJ = [r_, {
             icon: r.default.createElement(G.DashboardOutlinedIcon, null),
             activeIcon: r.default.createElement(W.DashboardIcon, null),
             key: "CreatorDashboard",
             title: "Heading.Dashboard",
             href: "".concat(tN, "/dashboard/creations"),
             path: "/dashboard/creations"
-        }, rB, rU, {
+        }, rM, rO, {
             icon: r.default.createElement(J.ShoppingCartOutlinedIcon, null),
             activeIcon: r.default.createElement(K.ShoppingCartIcon, null),
             key: "Store",
@@ -20840,64 +20608,42 @@
             title: "Heading.CommunityEvents",
             href: "".concat(tN, "/events"),
             path: "/events"
-        }, rW],
-        rY = [rN, {
-            icon: r.default.createElement(G.DashboardOutlinedIcon, null),
-            activeIcon: r.default.createElement(W.DashboardIcon, null),
-            key: "CreatorDashboard",
-            title: "Heading.Dashboard",
-            href: "".concat(tM, "/dashboard/creations"),
-            path: "/dashboard/creations"
-        }, rO, rz, {
-            icon: r.default.createElement(J.ShoppingCartOutlinedIcon, null),
-            activeIcon: r.default.createElement(K.ShoppingCartIcon, null),
-            key: "Store",
-            title: "Heading.Store",
-            href: "".concat(tM, "/store"),
-            path: "/store"
-        }, {
-            icon: r.default.createElement(X.PeopleOutlineOutlinedIcon, null),
-            activeIcon: r.default.createElement(Z.PeopleIcon, null),
-            key: "CommunityEvents",
-            title: "Heading.CommunityEvents",
-            href: "".concat(tM, "/events"),
-            path: "/events"
-        }, rG],
-        rQ = [{
-            icon: r.default.createElement(G.DashboardOutlinedIcon, null),
-            activeIcon: r.default.createElement(W.DashboardIcon, null),
-            key: "CreatorDashboard",
-            title: "Heading.Dashboard",
-            href: "".concat(tB, "/creations")
-        }, rq],
-        r$ = [{
-            icon: r.default.createElement(G.DashboardOutlinedIcon, null),
-            activeIcon: r.default.createElement(W.DashboardIcon, null),
-            key: "CreatorDashboard",
-            title: "Heading.Dashboard",
-            href: "".concat(tO, "/creations")
-        }, rq],
-        r0 = [{
+        }, rV],
+        rZ = [{
             icon: r.default.createElement(G.DashboardOutlinedIcon, null),
             activeIcon: r.default.createElement(W.DashboardIcon, null),
             key: "CreatorDashboard",
             title: "Heading.Dashboard",
             href: "".concat(tP, "/creations")
-        }, rq],
-        r1 = [rL, ...rZ, rP].reduce((t, n) => (t.set(n.key, n.title), t), new Map),
-        r2 = [rL, {
+        }, rU],
+        rX = [{
+            icon: r.default.createElement(G.DashboardOutlinedIcon, null),
+            activeIcon: r.default.createElement(W.DashboardIcon, null),
+            key: "CreatorDashboard",
+            title: "Heading.Dashboard",
+            href: "".concat(tB, "/creations")
+        }, rU],
+        rY = [{
+            icon: r.default.createElement(G.DashboardOutlinedIcon, null),
+            activeIcon: r.default.createElement(W.DashboardIcon, null),
+            key: "CreatorDashboard",
+            title: "Heading.Dashboard",
+            href: "".concat(tM, "/creations")
+        }, rU],
+        rQ = [rD, ...rG, rF].reduce((t, n) => (t.set(n.key, n.title), t), new Map),
+        r$ = [rD, {
             key: "Advertise",
             title: "Heading.AdsManager",
-            href: tF,
+            href: tL,
             path: "/advertise"
         }, {
             key: "Talent",
             title: "Heading.Talent",
-            href: tF,
+            href: tL,
             path: "/talent"
-        }, ...rZ].reduce((t, n) => (t.set(n.key, n), t), new Map),
-        r4 = "Small",
-        r3 = (0, i.makeStyles)()(t => ({
+        }, ...rG].reduce((t, n) => (t.set(n.key, n), t), new Map),
+        r0 = "Small",
+        r1 = (0, i.makeStyles)()(t => ({
             container: {
                 borderRadius: 8,
                 height: "100%",
@@ -20944,7 +20690,7 @@
                 pointerEvents: "none"
             }
         })),
-        r5 = (0, i.makeStyles)()(t => ({
+        r2 = (0, i.makeStyles)()(t => ({
             container: {
                 borderRadius: 8,
                 display: "flex",
@@ -21004,19 +20750,19 @@
                 paddingBottom: 6
             }
         })),
-        r6 = ["get", "put", "post", "delete", "options", "head", "patch", "trace"],
-        r8 = (0, e6.createFetchClient)({}),
-        r7 = async function(t) {
+        r4 = ["get", "put", "post", "delete", "options", "head", "patch", "trace"],
+        r3 = (0, e6.createFetchClient)({}),
+        r5 = async function(t) {
             let n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 5e3,
                 r = t.method.toLowerCase();
-            if (!r6.includes(r)) throw Error("Unsupported notification CTA HTTP method: ".concat(t.method));
+            if (!r4.includes(r)) throw Error("Unsupported notification CTA HTTP method: ".concat(t.method));
             let o = new AbortController,
                 a = setTimeout(() => o.abort(), n);
             try {
                 var i, l;
                 let {
                     response: n
-                } = await r8.request(r, t.url, {
+                } = await r3.request(r, t.url, {
                     credentials: "include",
                     headers: null != (i = t.headers) ? i : void 0,
                     body: null != (l = t.body) ? l : void 0,
@@ -21028,25 +20774,28 @@
             } finally {
                 clearTimeout(a)
             }
-        }, r9 = {
+        }, r6 = {
             development: "roblox-studio",
             production: "roblox-studio",
             sitetest1: "roblox-studio-sitetest1",
             sitetest2: "roblox-studio-sitetest2",
             sitetest3: "roblox-studio-sitetest3"
-        }, oe = t => {
+        }, r8 = t => {
+            t.stopPropagation()
+        }, r7 = t => {
             let {
-                button: n
-            } = t, {
-                action: o,
-                httpRequest: a,
-                timeoutMs: i,
-                buttonText: l,
-                successText: s,
-                errorText: u
+                button: n,
+                onCtaClick: o
+            } = t, a, {
+                action: i,
+                httpRequest: l,
+                timeoutMs: s,
+                buttonText: u,
+                successText: c,
+                errorText: d
             } = n, {
-                launchStudioAction: c,
-                dialog: d
+                launchStudioAction: p,
+                dialog: m
             } = (() => {
                 let {
                     open: t,
@@ -21062,11 +20811,11 @@
                         target: o,
                         robloxEnvironment: a,
                         sendEvent: i
-                    } = tx(), {
+                    } = tI(), {
                         isCompatible: l,
                         open: s,
                         dialog: u
-                    } = (0, tb.useStudio)({
+                    } = (0, tv.useStudio)({
                         "Action.DownloadStudio": r("Action.DownloadStudio"),
                         "Message.CheckingStudio": r("Message.CheckingStudio") || r("Label.CheckingForStudio"),
                         "Message.OpenStudioError": r("Message.OpenStudioError") || r("Error.UnexpectedError"),
@@ -21096,7 +20845,7 @@
                         open: r => s(r, {
                             userId: null == t ? void 0 : t.id,
                             locale: null != n ? n : e$.Locale.English,
-                            protocolScheme: "luobu" === o && (0, tC.getCurrentPlatform)() === tC.Platform.Windows ? "roblox-studio-qq" : r9[a],
+                            protocolScheme: "luobu" === o && (0, tb.getCurrentPlatform)() === tb.Platform.Windows ? "roblox-studio-qq" : r6[a],
                             distributorType: "Global"
                         })
                     }
@@ -21110,19 +20859,19 @@
                         switch (r) {
                             case "OpenStudioDefault":
                                 t({
-                                    task: tb.EStudioTaskType.Default
+                                    task: tv.EStudioTaskType.Default
                                 });
                                 return;
                             case "OpenStudioReturnFromLogin":
                                 t({
-                                    task: tb.EStudioTaskType.ReturnFromLogin
+                                    task: tv.EStudioTaskType.ReturnFromLogin
                                 });
                                 return;
                             case "OpenStudioViewAsset": {
                                 let r = null == o ? void 0 : o.assetId;
                                 if (!r) return void console.error("OpenStudioViewAsset notification action missing assetId", n);
                                 t({
-                                    task: tb.EStudioTaskType.ViewAsset,
+                                    task: tv.EStudioTaskType.ViewAsset,
                                     assetId: r
                                 });
                                 return
@@ -21132,7 +20881,7 @@
                                     a = null == o ? void 0 : o.universeId;
                                 if (!r || !a) return void console.error("OpenStudioEditPlace notification action missing placeId/universeId", n);
                                 t({
-                                    task: tb.EStudioTaskType.EditPlace,
+                                    task: tv.EStudioTaskType.EditPlace,
                                     placeId: r,
                                     universeId: a
                                 });
@@ -21145,11 +20894,12 @@
                     dialog: n
                 }
             })(), {
-                mutate: p,
-                reset: m,
-                isPending: f,
-                isSuccess: h,
-                isError: g
+                mutate: h,
+                reset: f,
+                isPending: g,
+                isSuccess: y,
+                isError: v,
+                submittedAt: b
             } = (0, e4.useMutation)({
                 onError: t => console.error("Notification button click error", t),
                 mutationFn: t => {
@@ -21157,53 +20907,54 @@
                         httpRequest: n,
                         timeoutMs: r
                     } = t;
-                    return r7(n, r)
+                    return r5(n, r)
                 }
-            }), y = (0, r.useCallback)(t => {
-                if (t.stopPropagation(), t.preventDefault(), a) {
-                    if ("get" === a.method.toLowerCase()) return void window.open(a.url, "_self");
-                    p({
-                        httpRequest: a,
-                        timeoutMs: i
+            }), C = (0, r.useCallback)(t => {
+                if (t.stopPropagation(), t.preventDefault(), null == o || o(n), l) {
+                    if ("get" === l.method.toLowerCase()) return void window.open(l.url, "_self");
+                    h({
+                        httpRequest: l,
+                        timeoutMs: s
                     })
-                } else o && c(o)
-            }, [o, c, a, i, p]);
-            return r.default.createElement(r.default.Fragment, null, r.default.createElement(tr.Button, {
+                } else i && p(i)
+            }, [i, n, p, l, s, h, o]);
+            return y ? a = c : v && (a = d), r.default.createElement(r.default.Fragment, null, r.default.createElement(tn.Button, {
                 variant: "Standard",
                 size: "Small",
                 className: "grow basis-0",
-                isLoading: f,
-                onClick: y
-            }, l), h && s ? r.default.createElement(ta.Snackbar, {
-                title: s,
+                isLoading: g,
+                isDisabled: g,
+                onClick: C
+            }, u), a && "u" > typeof document ? (0, tm.createPortal)(r.default.createElement(to.Snackbar, {
+                key: b,
+                title: a,
                 shouldAutoDismiss: !0,
-                onClose: m
-            }) : null, g && u ? r.default.createElement(ta.Snackbar, {
-                title: u,
-                shouldAutoDismiss: !0,
-                onClose: m
-            }) : null, d)
+                onClose: f,
+                onClick: r8
+            }), document.body) : null, m)
         };
-    oe.displayName = "NotificationCtaButtonContent";
-    let ot = () => null;
-    ot.displayName = "HiddenFallback";
-    let on = t => {
+    r7.displayName = "NotificationCtaButtonContent";
+    let r9 = () => null;
+    r9.displayName = "HiddenFallback";
+    let oe = t => {
         let {
-            button: n
+            button: n,
+            onCtaClick: o
         } = t;
-        return r.default.createElement(tv.ErrorBoundary, {
-            fallback: r.default.createElement(ot, null)
-        }, r.default.createElement(oe, {
-            button: n
+        return r.default.createElement(ty.ErrorBoundary, {
+            fallback: r.default.createElement(r9, null)
+        }, r.default.createElement(r7, {
+            button: n,
+            onCtaClick: o
         }))
     };
-    on.displayName = "NotificationCtaButton";
-    var or = ((nf = or || {})[nf.Invalid = 0] = "Invalid", nf[nf.Universe = 1] = "Universe", nf[nf.User = 2] = "User", nf[nf.Static = 3] = "Static", nf[nf.Asset = 4] = "Asset", nf[nf.Group = 5] = "Group", nf);
-    let oo = {
+    oe.displayName = "NotificationCtaButton";
+    var ot = ((nm = ot || {})[nm.Invalid = 0] = "Invalid", nm[nm.Universe = 1] = "Universe", nm[nm.User = 2] = "User", nm[nm.Static = 3] = "Static", nm[nm.Asset = 4] = "Asset", nm[nm.Group = 5] = "Group", nm);
+    let on = {
             CampaignFilledNeutral: r.default.createElement(eC.CampaignIcon, {
                 color: "action"
             }),
-            CheckFilledPositive: r.default.createElement(h.CheckIcon, {
+            CheckFilledPositive: r.default.createElement(f.CheckIcon, {
                 color: "success"
             }),
             CopyrightNeutral: r.default.createElement(eb.CopyrightIcon, {
@@ -21233,10 +20984,10 @@
             EventNeutral: r.default.createElement(eo.EventIcon, {
                 color: "action"
             }),
-            HappyFilledNeutral: r.default.createElement(eh.EmojiEmotionsIcon, {
+            HappyFilledNeutral: r.default.createElement(ef.EmojiEmotionsIcon, {
                 color: "action"
             }),
-            NotificationBell: r.default.createElement(ef.NotificationsIcon, {
+            NotificationBell: r.default.createElement(eh.NotificationsIcon, {
                 color: "action"
             }),
             PlayArrowFilledEmphasis: r.default.createElement(em.PlayArrowIcon, {
@@ -21298,7 +21049,7 @@
                 size: "XLarge"
             })
         },
-        oa = {
+        or = {
             FilledBell: r.default.createElement(te.Icon, {
                 name: "icon-filled-bell",
                 size: "XLarge",
@@ -21348,21 +21099,21 @@
                 }
             })
         },
-        oi = t => {
+        oo = t => {
             let {
                 targetId: n = "RegularBell",
                 enableNotificationsM2: o = !1
             } = t, {
                 translate: a
             } = (0, e$.useTranslation)(), i = null;
-            return i = o ? oa[n] || oa.FilledBell : oo[n] || oo.NotificationBell, r.default.cloneElement(i, {
+            return i = o ? or[n] || or.FilledBell : on[n] || on.NotificationBell, r.default.cloneElement(i, {
                 alt: a("Label.Icon"),
                 style: {
                     fontSize: 28
                 }
             })
         },
-        ol = (0, i.makeStyles)()(() => ({
+        oa = (0, i.makeStyles)()(() => ({
             m2Thumbnail: {
                 width: 48,
                 height: 48
@@ -21372,7 +21123,7 @@
                 height: 24
             }
         })),
-        os = t => {
+        oi = t => {
             let {
                 size: n = 48
             } = t;
@@ -21398,18 +21149,18 @@
                 fill: "white"
             }))))
         },
-        ou = t => {
+        ol = t => {
             let {
                 children: n
             } = t, {
                 classes: o,
                 cx: a
-            } = ol();
+            } = oa();
             return r.default.createElement("div", {
                 className: a("bg-surface-300 radius-medium flex items-center justify-center", o.m2Thumbnail)
             }, n)
         },
-        oc = t => {
+        os = t => {
             var n, o, a, i, l, s;
             let {
                 targetType: u,
@@ -21419,16 +21170,16 @@
                 translate: p
             } = (0, e$.useTranslation)(), {
                 classes: m
-            } = ol();
-            if ("RobloxLogo" === c) return r.default.createElement(os, {
+            } = oa();
+            if ("RobloxLogo" === c) return r.default.createElement(oi, {
                 size: 48
             });
             switch (u) {
-                case or.Universe:
-                    if (d) return r.default.createElement(ou, null, r.default.createElement(tm.Thumbnail2d, {
+                case ot.Universe:
+                    if (d) return r.default.createElement(ol, null, r.default.createElement(tp.Thumbnail2d, {
                         "data-target-id": c,
                         targetId: null != (n = Number(c)) ? n : 0,
-                        type: tm.ThumbnailTypes.gameIcon,
+                        type: tp.ThumbnailTypes.gameIcon,
                         imgClassName: "radius-medium",
                         alt: p("Label.UniverseThumbnailAltString")
                     }));
@@ -21436,19 +21187,19 @@
                         alt: p("Label.UniverseThumbnailAltString"),
                         variant: "rounded",
                         className: m.m1Thumbnail
-                    }, r.default.createElement(tm.Thumbnail2d, {
+                    }, r.default.createElement(tp.Thumbnail2d, {
                         targetId: null != (o = Number(c)) ? o : 0,
-                        type: tm.ThumbnailTypes.gameIcon,
+                        type: tp.ThumbnailTypes.gameIcon,
                         imgClassName: "radius-medium",
                         alt: p("Label.UniverseThumbnailAltString")
                     }));
-                case or.User:
+                case ot.User:
                     if (d) return r.default.createElement(E.Avatar, {
                         className: m.m2Thumbnail
-                    }, r.default.createElement(tm.Thumbnail2d, {
+                    }, r.default.createElement(tp.Thumbnail2d, {
                         "data-target-id": c,
                         targetId: null != (a = Number(c)) ? a : 0,
-                        type: tm.ThumbnailTypes.avatarHeadshot,
+                        type: tp.ThumbnailTypes.avatarHeadshot,
                         imgClassName: "radius-medium",
                         alt: p("Label.AvatarThumbnail")
                     }));
@@ -21456,40 +21207,40 @@
                         alt: p("Label.AvatarThumbnail"),
                         variant: "rounded",
                         className: m.m1Thumbnail
-                    }, r.default.createElement(tm.Thumbnail2d, {
+                    }, r.default.createElement(tp.Thumbnail2d, {
                         targetId: null != (i = Number(c)) ? i : 0,
-                        type: tm.ThumbnailTypes.avatarHeadshot,
+                        type: tp.ThumbnailTypes.avatarHeadshot,
                         imgClassName: "radius-medium",
                         alt: p("Label.AvatarThumbnail")
                     }));
-                case or.Static:
-                    return r.default.createElement(ou, null, r.default.createElement(oi, {
+                case ot.Static:
+                    return r.default.createElement(ol, null, r.default.createElement(oo, {
                         targetId: c,
                         enableNotificationsM2: d
                     }));
-                case or.Asset:
-                    return r.default.createElement(ou, null, r.default.createElement(tm.Thumbnail2d, {
+                case ot.Asset:
+                    return r.default.createElement(ol, null, r.default.createElement(tp.Thumbnail2d, {
                         "data-target-id": c,
                         targetId: null != (l = Number(c)) ? l : 0,
-                        type: tm.ThumbnailTypes.assetThumbnail,
+                        type: tp.ThumbnailTypes.assetThumbnail,
                         imgClassName: "radius-medium",
                         alt: p("Label.AssetIconAltString")
                     }));
-                case or.Group:
-                    return r.default.createElement(ou, null, r.default.createElement(tm.Thumbnail2d, {
+                case ot.Group:
+                    return r.default.createElement(ol, null, r.default.createElement(tp.Thumbnail2d, {
                         "data-target-id": c,
                         targetId: null != (s = Number(c)) ? s : 0,
-                        type: tm.ThumbnailTypes.groupIcon,
+                        type: tp.ThumbnailTypes.groupIcon,
                         imgClassName: "radius-medium",
                         alt: p("Label.GroupIconAltString")
                     }));
                 default:
-                    return r.default.createElement(ou, null, r.default.createElement(oi, {
+                    return r.default.createElement(ol, null, r.default.createElement(oo, {
                         enableNotificationsM2: d
                     }))
             }
         },
-        od = (0, i.makeStyles)()(t => ({
+        ou = (0, i.makeStyles)()(t => ({
             skeleton: {
                 position: "fixed",
                 height: "100vh",
@@ -21590,7 +21341,7 @@
                 boxSizing: "content-box",
                 height: "calc(100vh - 72px) !important",
                 overflowY: "auto",
-                [t.breakpoints.down(r4)]: {
+                [t.breakpoints.down(r0)]: {
                     maxHeight: 712,
                     height: "calc(100vh - 72px) !important",
                     marginTop: 2,
@@ -21676,7 +21427,7 @@
                 }
             }
         })),
-        op = (0, i.makeStyles)()(t => ({
+        oc = (0, i.makeStyles)()(t => ({
             card: {
                 borderRadius: 8,
                 backgroundColor: "transparent"
@@ -21744,7 +21495,7 @@
             root: {
                 maxWidth: 360,
                 outlineOffset: -5,
-                [t.breakpoints.down(r4)]: {
+                [t.breakpoints.down(r0)]: {
                     width: "100%"
                 }
             },
@@ -21813,7 +21564,7 @@
                 zIndex: "".concat(t.zIndex.drawer + 3, " !important")
             }
         })),
-        om = t => {
+        od = t => {
             var n, o;
             let {
                 notification: a,
@@ -21829,8 +21580,8 @@
                 underline: "none"
             }, l)) : r.default.createElement(r.default.Fragment, null, l)
         },
-        of = "relative content-default flex hover:bg-surface-200 focus-visible:bg-surface-200 focus-visible:outline-focus -margin-top-xsmall margin-bottom-xsmall",
-        oh = t => {
+        op = "relative content-default flex hover:bg-surface-200 focus-visible:bg-surface-200 focus-visible:outline-focus -margin-top-xsmall margin-bottom-xsmall",
+        om = t => {
             let {
                 className: n,
                 ariaHidden: o
@@ -21838,8 +21589,8 @@
                 translate: a
             } = (0, e$.useTranslation)(), {
                 cx: i
-            } = op();
-            return r.default.createElement(ts.IconButton, {
+            } = oc();
+            return r.default.createElement(tl.IconButton, {
                 size: "Large",
                 as: "button",
                 variant: "Utility",
@@ -21849,8 +21600,8 @@
                 className: i("shrink-0", n)
             })
         },
-        og = (0, r.forwardRef)((t, n) => {
-            var o, a, i, u, c, d, p, m, h, g, y, v, b, C, E, w;
+        oh = (0, r.forwardRef)((t, n) => {
+            var o, a, i, u, c, d, p, m, f, g, y, v, b, C, E, w;
             let {
                 notificationContent: S,
                 reportNewUnseenNotifFrontier: I,
@@ -21859,32 +21610,36 @@
                 enableNotificationsM2: T = !1,
                 unseenNotifFrontierIndex: k,
                 isListOverflowing: j
-            } = t, R, L, _, {
+            } = t, R, _, L, {
                 translate: F
             } = (0, e$.useTranslation)(), {
                 sendEvent: N
-            } = tx(), {
+            } = tI(), {
                 classes: M,
                 cx: P
-            } = op(), [B, O] = (0, r.useState)(null), [H, U] = (0, r.useState)(!1), [z, V] = (0, r.useState)(!1), W = (0, r.useRef)(null), G = (0, r.useRef)(null), K = (0, r.useRef)(null), J = (0, r.useCallback)(t => {
+            } = oc(), [B, O] = (0, r.useState)(null), [H, U] = (0, r.useState)(!1), [z, V] = (0, r.useState)(!1), W = (0, r.useRef)(null), G = (0, r.useRef)(null), K = (0, r.useRef)(null), J = (0, r.useCallback)(t => {
                 G.current = t, n && "current" in n && (n.current = t)
             }, [n]), Z = (0, r.useCallback)(() => {
-                var t, n, r, o, a, i, l, s;
+                x && S.notificationId && !S.read && x(S.notificationId, !0)
+            }, [x, S.notificationId, S.read]), X = (0, r.useCallback)(() => {
                 N({
                     eventType: "clickNotification",
                     context: "click",
-                    parameters: {
-                        id: S.notificationId,
-                        type: S.notificationType,
-                        title: null != (t = null == (i = S.creatorStreamNotificationContent) ? void 0 : i.title) ? t : "",
-                        notificationGroupIndex: null != (n = null == A ? void 0 : A.toString()) ? n : "",
-                        clickAction: null != (r = null == (l = S.creatorStreamNotificationContent) ? void 0 : l.clickAction) ? r : "",
-                        referenceId: null != (o = S.referenceId) ? o : "",
-                        read: null != (a = null == (s = S.read) ? void 0 : s.toString()) ? a : "false",
-                        productTeam: nw
-                    }
+                    parameters: nN(S, A)
                 })
-            }, [S, N, A]), X = function(t) {
+            }, [S, A, N]), Y = (0, r.useCallback)(() => {
+                X(), Z()
+            }, [Z, X]), Q = (0, r.useCallback)(t => {
+                var n;
+                N({
+                    eventType: "clickNotificationCtaButton",
+                    context: "click",
+                    parameters: {
+                        ...nN(S, A),
+                        buttonText: null != (n = t.buttonText) ? n : ""
+                    }
+                }), Z()
+            }, [Z, S, A, N]), $ = function(t) {
                 let n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "Label.ElapsedTime",
                     {
                         translate: o
@@ -21945,7 +21700,7 @@
                     }
                 }, [t, s, i]), i
             }((null != (o = S.createdUtcTimeInMs) ? o : 0) / 1e3, "Label.ElapsedTimeShort");
-            R = (0, r.useRef)({}), L = (0, r.useRef)(null), _ = (0, r.useMemo)(() => {
+            R = (0, r.useRef)({}), _ = (0, r.useRef)(null), L = (0, r.useMemo)(() => {
                 let t = () => {
                     var t, n, r, o, a, i, l, s;
                     S && N({
@@ -21959,16 +21714,16 @@
                             clickAction: null != (r = null == (l = S.creatorStreamNotificationContent) ? void 0 : l.clickAction) ? r : "",
                             referenceId: null != (o = S.referenceId) ? o : "",
                             read: null != (a = null == (s = S.read) ? void 0 : s.toString()) ? a : "false",
-                            productTeam: nw
+                            productTeam: nE
                         }
                     })
                 };
                 return {
                     debounced: () => {
-                        L.current && window.clearTimeout(L.current), L.current = window.setTimeout(t, 100)
+                        _.current && window.clearTimeout(_.current), _.current = window.setTimeout(t, 100)
                     },
                     cancel: () => {
-                        L.current && (window.clearTimeout(L.current), L.current = null)
+                        _.current && (window.clearTimeout(_.current), _.current = null)
                     }
                 }
             }, [S, N, A]), (0, r.useEffect)(() => {
@@ -21980,7 +21735,7 @@
                                 var n;
                                 let t = null != (n = S.notificationId) ? n : "",
                                     r = R.current[t];
-                                (!r || Date.now() - r >= 6e4) && _.debounced(), R.current[t] = Date.now()
+                                (!r || Date.now() - r >= 6e4) && L.debounced(), R.current[t] = Date.now()
                             }
                         })
                     }, {
@@ -22002,35 +21757,50 @@
                         threshold: .8
                     });
                 return n.observe(t), r.observe(t), () => {
-                    n.unobserve(t), n.disconnect(), r.unobserve(t), r.disconnect(), _.cancel()
+                    n.unobserve(t), n.disconnect(), r.unobserve(t), r.disconnect(), L.cancel()
                 }
-            }, [K, S, _, A, I, T, k]);
-            let Y = (0, r.useCallback)(() => {
+            }, [K, S, L, A, I, T, k]);
+            let ee = (0, r.useCallback)(t => {
+                    t && !z && N({
+                        eventType: "openNotificationOverflowMenu",
+                        context: "click",
+                        parameters: nN(S, A)
+                    }), V(t)
+                }, [z, S, A, N]),
+                et = (0, r.useCallback)(() => {
                     O(null)
                 }, []),
-                Q = (0, r.useCallback)(t => {
-                    t.stopPropagation(), t.preventDefault(), Y()
-                }, [Y]),
-                $ = (0, r.useCallback)(t => {
-                    x && S.notificationId && x(S.notificationId, t), V(!1)
-                }, [x, S.notificationId]),
-                ee = !S.read,
-                et = (0, r.useCallback)(() => {
-                    $(!S.read)
-                }, [$, S.read]),
+                en = (0, r.useCallback)(t => {
+                    t.stopPropagation(), t.preventDefault(), et()
+                }, [et]),
+                er = (0, r.useCallback)(t => {
+                    N(t ? {
+                        eventType: "clickNotificationMarkAsRead",
+                        context: "click",
+                        parameters: nN(S, A)
+                    } : {
+                        eventType: "clickNotificationMarkAsUnread",
+                        context: "click",
+                        parameters: nN(S, A)
+                    }), x && S.notificationId && x(S.notificationId, t), V(!1)
+                }, [x, S, A, N]),
+                eo = !S.read,
+                ea = (0, r.useCallback)(() => {
+                    er(!S.read)
+                }, [er, S.read]),
                 {
-                    sanitizedNotificationTitle: en,
-                    plainNotificationTitle: er,
-                    sanitizedNotificationBody: eo,
-                    plainNotificationBody: ea
+                    sanitizedNotificationTitle: ei,
+                    plainNotificationTitle: el,
+                    sanitizedNotificationBody: es,
+                    plainNotificationBody: eu
                 } = (0, r.useMemo)(() => {
                     var t, n;
                     let r = {
                             ALLOWED_TAGS: ["b", "i", "u", "s", "br"],
                             ALLOWED_ATTR: []
                         },
-                        o = ty.default.sanitize("".concat(null == S || null == (t = S.creatorStreamNotificationContent) ? void 0 : t.title), r),
-                        a = ty.default.sanitize("".concat(null == S || null == (n = S.creatorStreamNotificationContent) ? void 0 : n.body), r),
+                        o = tg.default.sanitize("".concat(null == S || null == (t = S.creatorStreamNotificationContent) ? void 0 : t.title), r),
+                        a = tg.default.sanitize("".concat(null == S || null == (n = S.creatorStreamNotificationContent) ? void 0 : n.body), r),
                         i = o.replaceAll(/<[^>]*>?/g, "").trim(),
                         l = a.replaceAll(/<[^>]*>?/g, "").trim();
                     return {
@@ -22040,19 +21810,19 @@
                         plainNotificationBody: l
                     }
                 }, [null == (i = S.creatorStreamNotificationContent) ? void 0 : i.title, null == (u = S.creatorStreamNotificationContent) ? void 0 : u.body]),
-                ei = !!(null == S || null == (c = S.creatorStreamNotificationContent) ? void 0 : c.body);
+                ec = !!(null == S || null == (c = S.creatorStreamNotificationContent) ? void 0 : c.body);
             if ((0, r.useEffect)(() => {
                     if (W.current) {
                         let t = parseFloat(getComputedStyle(W.current).lineHeight) || 19.6;
-                        U(W.current.offsetHeight > 1.5 * t || ei)
+                        U(W.current.offsetHeight > 1.5 * t || ec)
                     }
-                }, [en, ei]), T) {
+                }, [ei, ec]), T) {
                 let t = !S.read,
                     n = !!(null == S || null == (y = S.creatorStreamNotificationContent) ? void 0 : y.clickAction),
                     o = r.default.createElement("div", {
                         ref: K,
                         className: P("flex", M.contentWrapper)
-                    }, r.default.createElement(oc, {
+                    }, r.default.createElement(os, {
                         targetType: null == S || null == (v = S.creatorStreamNotificationContent) ? void 0 : v.targetType,
                         targetId: null == S || null == (b = S.creatorStreamNotificationContent) ? void 0 : b.targetId,
                         enableNotificationsM2: T
@@ -22062,50 +21832,51 @@
                         className: "flex relative"
                     }, r.default.createElement("h4", {
                         className: P(M.title, M.truncatedText, "text-title-medium", {
-                            "content-emphasis": ee,
-                            "content-muted": !ee
+                            "content-emphasis": eo,
+                            "content-muted": !eo
                         }),
-                        title: er,
+                        title: el,
                         dangerouslySetInnerHTML: {
-                            __html: en
+                            __html: ei
                         }
                     }), r.default.createElement("div", {
                         className: P("padding-left-small padding-right-small no-wrap text-no-wrap text-body-small", {
-                            "content-default": ee,
-                            "content-muted": !ee
+                            "content-default": eo,
+                            "content-muted": !eo
                         })
-                    }, X), t && r.default.createElement(eE.Badge, {
+                    }, $), t && r.default.createElement(eE.Badge, {
                         className: M.readIndicator,
                         variant: "dot"
-                    }), r.default.createElement(oh, {
+                    }), r.default.createElement(om, {
                         className: P(M.overflowBtnHidden, M.overflowBtn),
                         ariaHidden: !0
-                    })), ea && r.default.createElement("p", {
-                        title: ea,
+                    })), eu && r.default.createElement("p", {
+                        title: eu,
                         className: P(M.truncatedText, "margin-none text-body-medium", {
-                            "content-default": ee,
-                            "content-muted": !ee
+                            "content-default": eo,
+                            "content-muted": !eo
                         }),
                         dangerouslySetInnerHTML: {
-                            __html: eo
+                            __html: es
                         }
                     }), !!(null == S || null == (E = S.creatorStreamNotificationContent) || null == (C = E.buttons) ? void 0 : C.length) && r.default.createElement("div", {
                         className: "flex gap-small padding-top-medium"
-                    }, S.creatorStreamNotificationContent.buttons.map(t => r.default.createElement(on, {
+                    }, S.creatorStreamNotificationContent.buttons.map(t => r.default.createElement(oe, {
                         key: t.buttonText,
-                        button: t
+                        button: t,
+                        onCtaClick: Q
                     }))))),
-                    a = r.default.createElement(ti.Popover, {
+                    a = r.default.createElement(ta.Popover, {
                         open: z,
-                        onOpenChange: V
-                    }, r.default.createElement(ti.PopoverTrigger, {
+                        onOpenChange: ee
+                    }, r.default.createElement(ta.PopoverTrigger, {
                         asChild: !0
                     }, r.default.createElement("div", {
                         className: M.overflowBtnClickableWrapper
-                    }, r.default.createElement(oh, {
+                    }, r.default.createElement(om, {
                         className: P("padding-large", M.overflowBtnClickable, M.overflowBtn),
                         ariaHidden: !1
-                    }))), r.default.createElement(ti.PopoverContent, {
+                    }))), r.default.createElement(ta.PopoverContent, {
                         side: "bottom",
                         align: "end",
                         className: M.overflowMenuPortal,
@@ -22119,26 +21890,26 @@
                         onKeyDown: t => {
                             ("Enter" === t.key || " " === t.key) && (t.stopPropagation(), t.preventDefault())
                         }
-                    }, r.default.createElement(tl.Menu, {
+                    }, r.default.createElement(ti.Menu, {
                         size: "Medium",
                         "aria-label": F("Label.ActionsForContent", {
-                            content: F(ee ? "Label.MarkAsRead" : "Label.MarkAsUnread")
+                            content: F(eo ? "Label.MarkAsRead" : "Label.MarkAsUnread")
                         }),
                         className: P("bg-surface-200 radius-medium", M.overflowMenu)
-                    }, r.default.createElement(tl.MenuItem, {
+                    }, r.default.createElement(ti.MenuItem, {
                         className: "radius-medium",
-                        value: ee ? "mark-as-read" : "mark-as-unread",
-                        title: F(ee ? "Label.MarkAsRead" : "Label.MarkAsUnread"),
-                        "aria-label": F(ee ? "Label.MarkAsRead" : "Label.MarkAsUnread"),
+                        value: eo ? "mark-as-read" : "mark-as-unread",
+                        title: F(eo ? "Label.MarkAsRead" : "Label.MarkAsUnread"),
+                        "aria-label": F(eo ? "Label.MarkAsRead" : "Label.MarkAsUnread"),
                         tabIndex: 0,
-                        onSelect: et,
+                        onSelect: ea,
                         onKeyDown: t => {
                             var n, r;
-                            "Enter" === t.key || " " === t.key ? (t.preventDefault(), et(), null == (n = G.current) || n.focus()) : ("Tab" === t.key || "ArrowDown" === t.key || "ArrowUp" === t.key || "ArrowLeft" === t.key || "ArrowRight" === t.key || "Escape" === t.key) && (null == (r = G.current) || r.focus())
+                            "Enter" === t.key || " " === t.key ? (t.preventDefault(), ea(), null == (n = G.current) || n.focus()) : ("Tab" === t.key || "ArrowDown" === t.key || "ArrowUp" === t.key || "ArrowLeft" === t.key || "ArrowRight" === t.key || "Escape" === t.key) && (null == (r = G.current) || r.focus())
                         }
                     })))));
                 return n ? r.default.createElement("div", {
-                    className: P(of, M.root, {
+                    className: P(op, M.root, {
                         [M.isOnOverflowingList]: j
                     })
                 }, r.default.createElement("div", {
@@ -22149,12 +21920,13 @@
                     href: null == (w = S.creatorStreamNotificationContent) ? void 0 : w.clickAction,
                     underline: "none",
                     className: "focus-visible:block focus-visible:bg-surface-200 focus-visible:outline-focus",
-                    color: "inherit"
+                    color: "inherit",
+                    onClick: Y
                 }, o), a)) : r.default.createElement("div", {
                     tabIndex: 0,
                     role: "alert",
                     ref: J,
-                    className: P(of, M.root, {
+                    className: P(op, M.root, {
                         [M.isOnOverflowingList]: j
                     })
                 }, r.default.createElement("div", {
@@ -22165,9 +21937,9 @@
                 classes: {
                     root: M.card
                 }
-            }, r.default.createElement(om, {
+            }, r.default.createElement(od, {
                 notification: S,
-                onNotificationClick: Z
+                onNotificationClick: X
             }, r.default.createElement(s.Grid, {
                 ref: K,
                 className: P(M.container, H && M.containerMultiLine),
@@ -22178,7 +21950,7 @@
             }, r.default.createElement(s.Grid, {
                 item: !0,
                 XSmall: "auto"
-            }, r.default.createElement(oc, {
+            }, r.default.createElement(os, {
                 targetType: null == S || null == (d = S.creatorStreamNotificationContent) ? void 0 : d.targetType,
                 targetId: null == S || null == (p = S.creatorStreamNotificationContent) ? void 0 : p.targetId,
                 enableNotificationsM2: T
@@ -22195,7 +21967,7 @@
                 variant: "body1",
                 className: M.truncatedText,
                 dangerouslySetInnerHTML: {
-                    __html: en
+                    __html: ei
                 }
             }), (null == S || null == (m = S.creatorStreamNotificationContent) ? void 0 : m.body) && r.default.createElement(l.Typography, {
                 variant: "body2",
@@ -22210,7 +21982,7 @@
                 className: M.rightSection
             }, r.default.createElement("div", {
                 className: M.badgeContainer
-            }, !S.read && (null == S || null == (h = S.creatorStreamNotificationContent) ? void 0 : h.clickAction) && r.default.createElement(eE.Badge, {
+            }, !S.read && (null == S || null == (f = S.creatorStreamNotificationContent) ? void 0 : f.clickAction) && r.default.createElement(eE.Badge, {
                 variant: "dot"
             }), !(null == S || null == (g = S.creatorStreamNotificationContent) ? void 0 : g.clickAction) && r.default.createElement(eE.Badge, {
                 variant: "dot",
@@ -22220,12 +21992,12 @@
             })), r.default.createElement(l.Typography, {
                 color: "secondary",
                 className: M.timeText
-            }, X))))), r.default.createElement(D.Menu, {
+            }, $))))), r.default.createElement(D.Menu, {
                 id: "notification-menu-".concat(null != A ? A : 0, "-").concat(null != (a = S.createdUtcTimeInMs) ? a : 0),
                 variant: "modal",
                 anchorEl: B,
                 open: !!B,
-                onClose: Y,
+                onClose: et,
                 anchorOrigin: {
                     vertical: "bottom",
                     horizontal: "right"
@@ -22237,532 +22009,526 @@
                 MenuListProps: {
                     "aria-labelledby": F("Label.NotificationMenuAria")
                 }
-            }, r.default.createElement(f.MenuItem, {
+            }, r.default.createElement(h.MenuItem, {
                 variant: "standardMenu",
-                onClick: Q
+                onClick: en
             }, r.default.createElement(l.Typography, {
                 variant: "body1",
                 color: "primary"
             }, F("Action.TurnOffNotifications")))))
         });
-    og.displayName = "Notification";
-    let oy = t => {
-            let {
-                notificationGroup: n,
-                notificationGroupIndex: o,
-                markReadStatus: a
-            } = t, {
-                classes: i
-            } = r5(), [u, c] = (0, r.useState)(!1), d = (0, r.useRef)(null), [p, m] = (0, r.useState)(0);
-            (0, r.useEffect)(() => {
-                var t;
-                m((null == (t = d.current) ? void 0 : t.offsetHeight) || 0), d.current && (d.current.style.height = "0px", d.current.style.transition = "all 500ms")
-            }, []);
-            let f = () => {
-                c(!u), d.current && (d.current.style.height = u ? "0px" : "".concat(p, "px"))
-            };
-            return 0 === n.children.length ? r.default.createElement(og, {
-                markReadStatus: a,
-                enableNotificationsM2: !1,
-                notificationGroupIndex: o,
-                notificationContent: n.titleNotification
-            }) : r.default.createElement(s.Grid, {
-                className: i.container
-            }, r.default.createElement("div", {
-                className: "".concat(i.bundleLabel, " ").concat(u ? "" : i.hidden)
-            }, r.default.createElement(l.Typography, {
-                variant: "footer"
-            }, "Bundle"), r.default.createElement(l.Typography, {
-                variant: "footer",
-                color: "info",
-                onClick: f
-            }, "Show Less")), r.default.createElement(s.Grid, {
-                onClick: () => {
-                    u || f(), n.titleNotification.read || a(n.titleNotification.notificationId, !0)
-                },
-                className: "".concat(i.rootNotif, " ").concat(u ? i.paddingBottom : "")
-            }, r.default.createElement(og, {
-                enableNotificationsM2: !1,
-                notificationContent: n.titleNotification
-            }), r.default.createElement("div", {
-                className: "".concat(i.bundleDecorationContainer, " ").concat(u ? i.hidden : "")
-            }, r.default.createElement("div", {
-                className: i.decorationTop
-            }), n.children.length > 1 && r.default.createElement("div", {
-                className: i.decorationBottom
-            }))), r.default.createElement("div", {
-                ref: d
-            }, n.children.map((t, n) => r.default.createElement("div", {
-                key: t.notificationId,
-                className: "".concat(i.bundleDecorationContainer, " ").concat(u ? "" : i.notExpanded),
-                style: {
-                    transform: u ? "translateY(0%)" : "translateY(-".concat((n + 1) * 110, "%)"),
-                    zIndex: -n - 1
-                }
-            }, r.default.createElement(og, {
-                enableNotificationsM2: !1,
-                notificationContent: t
-            })))))
-        },
-        ov = t => {
-            let {
-                size: n,
-                enableNotificationsM2: o
-            } = t, a = (0, I.useTheme)();
-            return o ? r.default.createElement("svg", {
-                width: n,
-                height: n,
-                viewBox: "0 0 62 53",
-                fill: "none",
-                xmlns: "http://www.w3.org/2000/svg"
-            }, r.default.createElement("path", {
-                d: "M28.5365 2.7375C29.5246 1.0875 31.9949 1.0875 32.983 2.7375L59.662 47.2875C60.6501 48.9375 59.415 51 57.4387 51H4.08078C2.10456 51 0.869423 48.9375 1.85753 47.2875L28.5365 2.7375Z",
-                stroke: a.palette.content.standard,
-                strokeWidth: "3",
-                strokeLinecap: "round",
-                strokeLinejoin: "round"
-            }), r.default.createElement("circle", {
-                cx: "30.6846",
-                cy: "38.8516",
-                r: "2.375",
-                fill: a.palette.content.standard
-            }), r.default.createElement("path", {
-                d: "M30.6846 30.75V19.5",
-                stroke: a.palette.content.standard,
-                strokeWidth: "3",
-                strokeLinecap: "round"
-            })) : r.default.createElement("svg", {
-                width: n,
-                height: n,
-                viewBox: "0 0 96 96",
-                fill: "none",
-                xmlns: "http://www.w3.org/2000/svg"
-            }, r.default.createElement("path", {
-                opacity: "0.7",
-                fillRule: "evenodd",
-                clipRule: "evenodd",
-                d: "M8 42C8 57.44 20.56 70 36 70C40.5891 70 44.9237 68.8905 48.7498 66.9256C51.1395 64.5674 52.9104 61.5717 53.3346 58.6658C54.2226 51.5538 54.2226 44.4458 53.3346 37.3318C52.4966 31.5958 46.4046 25.5038 40.6666 24.6658C37.1106 24.2218 33.5546 23.9998 30.0006 23.9998C26.4446 23.9998 22.8886 24.2218 19.3346 24.6658C16.4289 25.0902 13.4324 26.8619 11.0733 29.2524C9.10912 33.078 8 37.4118 8 42ZM30.0006 64.3638C36.1066 64.3638 45.6546 56.0358 46.7226 55.0858C47.6226 54.2858 47.7026 52.9058 46.9046 52.0058C46.1026 51.1058 44.7246 51.0238 43.8246 51.8238C40.2646 54.9838 33.3626 59.9998 30.0006 59.9998C26.6366 59.9998 19.7366 54.9838 16.1766 51.8238C15.2746 51.0238 13.8986 51.1058 13.0966 52.0058C12.2966 52.9058 12.3766 54.2858 13.2766 55.0858C14.3466 56.0358 23.8926 64.3638 30.0006 64.3638ZM23.4546 41.4538C23.4546 39.6458 21.9886 38.1818 20.1806 38.1818C18.3746 38.1818 16.9106 39.6458 16.9106 41.4538C16.9106 43.2618 18.3746 44.7258 20.1806 44.7258C21.9886 44.7258 23.4546 43.2618 23.4546 41.4538ZM43.0906 41.4538C43.0906 39.6458 41.6246 38.1818 39.8186 38.1818C38.0126 38.1818 36.5446 39.6458 36.5446 41.4538C36.5446 43.2618 38.0126 44.7258 39.8186 44.7258C41.6246 44.7258 43.0906 43.2618 43.0906 41.4538Z",
-                fill: a.palette.content.muted
-            }), r.default.createElement("path", {
-                opacity: "0.7",
-                fillRule: "evenodd",
-                clipRule: "evenodd",
-                d: "M74.1684 12.292C76.4464 9.746 79.4864 8 83.8184 8C89.4784 8 93.3164 10.926 93.3164 16.13V16.208C93.3164 21.222 89.8204 23.31 85.4904 24.146L85.0724 26.73H81.1944L80.3224 20.308L80.5124 20.122C85.4904 19.93 87.5044 18.562 87.5044 16.36V16.284C87.5044 14.422 86.0984 13.282 83.7024 13.282C81.4244 13.282 79.4864 14.23 77.6624 16.092L74.1684 12.292ZM86 36.0008H80V30.0008H86V36.0008Z",
-                fill: a.palette.content.muted
-            }), r.default.createElement("path", {
-                fillRule: "evenodd",
-                clipRule: "evenodd",
-                d: "M36 70C20.56 70 8 57.44 8 42C8 26.56 20.56 14 36 14C51.44 14 64 26.56 64 42C64 57.44 51.44 70 36 70ZM62.508 63.266C67.186 57.44 70 50.052 70 42C70 23.222 54.778 8 36 8C17.222 8 2 23.222 2 42C2 60.778 17.222 76 36 76C43.116 76 49.712 73.808 55.172 70.072L71.93 86.828C73.88 88.782 77.046 88.782 79 86.828C80.954 84.874 80.954 81.71 79 79.758L62.508 63.266Z",
-                fill: a.palette.content.muted
-            }))
-        },
-        ob = t => {
-            let {
-                size: n,
-                enableNotificationsM2: o
-            } = t, a = (0, I.useTheme)();
-            return o ? r.default.createElement("svg", {
-                width: "121",
-                height: "121",
-                viewBox: "0 0 121 121",
-                fill: "none",
-                xmlns: "http://www.w3.org/2000/svg"
-            }, r.default.createElement("path", {
-                d: "M92.0911 1.1032L3.2259 24.9146C1.6255 25.3434 0.675757 26.9884 1.10458 28.5888L24.9159 117.454C25.3448 119.054 26.9898 120.004 28.5902 119.575L117.455 95.7639C119.056 95.3351 120.005 93.6901 119.577 92.0897L95.7653 3.22452C95.3365 1.62412 93.6915 0.674375 92.0911 1.1032Z",
-                stroke: a.palette.components.divider,
-                strokeOpacity: "1",
-                strokeWidth: "2"
-            }), r.default.createElement("path", {
-                d: "M71.7557 45.5874C73.8177 43.5252 77.3407 44.5027 78.0457 47.3325L87.1957 84.0964C87.6637 85.9744 86.0067 87.6964 84.1117 87.3004L46.1737 79.3764C43.2557 78.7674 42.1817 75.1614 44.2887 73.0544L71.7557 45.5874ZM72.1497 81.7364L84.1407 84.2414L81.2517 72.6354L72.1497 81.7364ZM58.1897 78.8204L68.6407 81.0034L80.4057 69.2378L77.8887 59.1226L58.1897 78.8204ZM75.1357 48.0571C74.9947 47.4912 74.2887 47.2961 73.8767 47.7085L46.4097 75.1754C45.9887 75.5964 46.2047 76.3184 46.7877 76.4404L54.7427 78.1014C54.8077 77.9884 54.8877 77.8814 54.9837 77.7854L77.0437 55.7251L75.1357 48.0571Z",
-                fill: a.palette.content.standard
-            }), r.default.createElement("path", {
-                d: "M26.4535 72.1214C31.3395 61.6564 41.1115 60.5319 47.0685 60.9829C47.8945 61.0455 48.5135 61.7655 48.4515 62.5913C48.3895 63.4172 47.6695 64.0364 46.8435 63.9741C41.3605 63.5589 33.2655 64.6238 29.1725 73.3914C28.8215 74.1414 27.9285 74.4654 27.1785 74.1144C26.4275 73.7644 26.1035 72.8724 26.4535 72.1214Z",
-                fill: a.palette.content.standard
-            }), r.default.createElement("path", {
-                d: "M31.0469 50.9712C32.1509 50.9712 33.0469 51.8668 33.0469 52.9712C33.0469 54.0758 32.1509 54.9712 31.0469 54.9712C29.9419 54.9712 29.0469 54.0758 29.0469 52.9712C29.0469 51.8668 29.9419 50.9712 31.0469 50.9712Z",
-                fill: a.palette.content.standard
-            }), r.default.createElement("path", {
-                d: "M42.0519 46.2212C44.2639 46.2212 46.0579 48.0148 46.0579 50.2271C46.0579 52.4393 44.2639 54.2329 42.0519 54.2329C39.8399 54.2328 38.0469 52.4392 38.0469 50.2271C38.0469 48.0149 39.8399 46.2213 42.0519 46.2212Z",
-                fill: a.palette.content.standard
-            }), r.default.createElement("path", {
-                d: "M54.6738 29.8218C55.0058 29.0632 55.8898 28.7176 56.6478 29.0493C57.4068 29.3815 57.7528 30.2661 57.4208 31.0249C53.8728 39.136 57.2078 46.9044 59.2838 49.7105C59.7768 50.3764 59.6358 51.3155 58.9698 51.8081C58.3038 52.3006 57.3647 52.1604 56.8717 51.4946C54.3987 48.1521 50.5538 39.2404 54.6738 29.8218Z",
-                fill: a.palette.content.standard
-            }), r.default.createElement("path", {
-                d: "M72.6631 28.3198C73.4481 28.0552 74.3001 28.4766 74.5651 29.2612C74.8291 30.0462 74.4071 30.8978 73.6221 31.1626C70.1381 32.3376 68.0011 35.206 66.9011 38.1548C66.3541 39.6218 66.0881 41.0519 66.0391 42.1958C66.0151 42.7679 66.0461 43.2391 66.1081 43.5894C66.1761 43.9655 66.2591 44.0875 66.2471 44.0718C66.7441 44.7343 66.6091 45.6743 65.9471 46.1714C65.2851 46.6681 64.3451 46.5339 63.8481 45.8716C63.4591 45.3537 63.2621 44.708 63.1561 44.1196C63.0461 43.5025 63.0111 42.8033 63.0421 42.0679C63.1051 40.5955 63.4391 38.8546 64.0911 37.106C65.3901 33.6224 68.0521 29.8752 72.6631 28.3198Z",
-                fill: a.palette.content.standard
-            }), r.default.createElement("path", {
-                d: "M27.4829 40.5728C29.1049 40.573 30.4199 41.8875 30.4199 43.5093C30.4199 45.131 29.1049 46.4456 27.4829 46.4458C25.8619 46.4458 24.5469 45.1311 24.5469 43.5093C24.5469 41.8874 25.8619 40.5728 27.4829 40.5728Z",
-                fill: a.palette.content.standard
-            }), r.default.createElement("path", {
-                d: "M37.7586 34.1626C37.9196 33.5625 38.5365 33.206 39.1365 33.3667L44.0395 34.6802C44.6395 34.841 44.9965 35.458 44.8355 36.0581L43.5216 40.9614C43.3606 41.5615 42.7435 41.9181 42.1435 41.7573L37.2405 40.4429C36.6405 40.2821 36.2845 39.6651 36.4445 39.065L37.7586 34.1626Z",
-                fill: a.palette.content.standard
-            })) : r.default.createElement("svg", {
-                width: n,
-                height: n,
-                viewBox: "0 0 96 96",
-                fill: "none",
-                xmlns: "http://www.w3.org/2000/svg"
-            }, r.default.createElement("path", {
-                d: "M12.2034 86.9165L48.3634 73.9965C53.8834 72.0365 55.4834 64.9565 51.3234 60.7965L33.2034 42.6765C29.0434 38.5165 22.0034 40.1165 20.0034 45.6365L7.08344 81.7965C5.96344 84.9965 9.00344 88.0365 12.2034 86.9165Z",
-                fill: a.palette.content.muted
-            }), r.default.createElement("path", {
-                d: "M56.4834 49.7565L76.7234 29.5165C78.6834 27.5565 81.8434 27.5565 83.8034 29.5165L84.0434 29.7565C85.2034 30.9165 87.1234 30.9165 88.2834 29.7565C89.4434 28.5965 89.4434 26.6765 88.2834 25.5165L88.0434 25.2765C83.7634 20.9965 76.7634 20.9965 72.4834 25.2765L52.2434 45.5165C51.0834 46.6765 51.0834 48.5965 52.2434 49.7565C53.4034 50.9165 55.3234 50.9165 56.4834 49.7565Z",
-                fill: a.palette.content.muted
-            }), r.default.createElement("path", {
-                d: "M36.4834 29.2765L36.2434 29.5165C35.0834 30.6765 35.0834 32.5965 36.2434 33.7565C37.4034 34.9165 39.3234 34.9165 40.4834 33.7565L40.7234 33.5165C45.0034 29.2365 45.0034 22.2365 40.7234 17.9565L40.5234 17.7565C39.3234 16.5565 37.4034 16.5565 36.2434 17.7565C35.0834 18.9165 35.0834 20.8365 36.2434 21.9965L36.4834 22.2365C38.4034 24.1565 38.4034 27.3565 36.4834 29.2765Z",
-                fill: a.palette.content.muted
-            }), r.default.createElement("path", {
-                d: "M64.4834 49.2765L60.2434 53.5165C59.0834 54.6765 59.0834 56.5965 60.2434 57.7565C61.4034 58.9165 63.3234 58.9165 64.4834 57.7565L68.7234 53.5165C70.6834 51.5565 73.8434 51.5565 75.8034 53.5165L80.1234 57.8365C81.2834 58.9965 83.2034 58.9965 84.3634 57.8365C85.5234 56.6765 85.5234 54.7565 84.3634 53.5965L80.0434 49.2765C75.7234 44.9965 68.7634 44.9965 64.4834 49.2765Z",
-                fill: a.palette.content.muted
-            }), r.default.createElement("path", {
-                d: "M56.4834 25.2765L44.2434 37.5165C43.0834 38.6765 43.0834 40.5965 44.2434 41.7565C45.4034 42.9165 47.3234 42.9165 48.4834 41.7565L60.7234 29.5165C65.0034 25.2365 65.0034 18.2365 60.7234 13.9565L56.4834 9.7165C55.3234 8.5565 53.4034 8.5565 52.2434 9.7165C51.0834 10.8765 51.0834 12.7965 52.2434 13.9565L56.4834 18.1965C58.4034 20.1565 58.4034 23.3565 56.4834 25.2765Z",
-                fill: a.palette.content.muted
-            }))
-        },
-        oC = (0, i.makeStyles)()({
-            header: {
-                paddingLeft: 12,
-                paddingRight: 6,
-                paddingTop: 12,
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center"
+    oh.displayName = "Notification";
+    let of = t => {
+        let {
+            notificationGroup: n,
+            notificationGroupIndex: o,
+            markReadStatus: a
+        } = t, {
+            classes: i
+        } = r2(), [u, c] = (0, r.useState)(!1), d = (0, r.useRef)(null), [p, m] = (0, r.useState)(0);
+        (0, r.useEffect)(() => {
+            var t;
+            m((null == (t = d.current) ? void 0 : t.offsetHeight) || 0), d.current && (d.current.style.height = "0px", d.current.style.transition = "all 500ms")
+        }, []);
+        let h = () => {
+            c(!u), d.current && (d.current.style.height = u ? "0px" : "".concat(p, "px"))
+        };
+        return 0 === n.children.length ? r.default.createElement(oh, {
+            markReadStatus: a,
+            enableNotificationsM2: !1,
+            notificationGroupIndex: o,
+            notificationContent: n.titleNotification
+        }) : r.default.createElement(s.Grid, {
+            className: i.container
+        }, r.default.createElement("div", {
+            className: "".concat(i.bundleLabel, " ").concat(u ? "" : i.hidden)
+        }, r.default.createElement(l.Typography, {
+            variant: "footer"
+        }, "Bundle"), r.default.createElement(l.Typography, {
+            variant: "footer",
+            color: "info",
+            onClick: h
+        }, "Show Less")), r.default.createElement(s.Grid, {
+            onClick: () => {
+                u || h(), n.titleNotification.read || a(n.titleNotification.notificationId, !0)
             },
-            markAllAsReadButton: {
-                padding: 8
-            },
-            iconButton: {
-                padding: 4
-            },
-            headerM2: {
-                flex: 1
-            },
-            markAllAsReadButtonM2: {
-                marginTop: 5
-            },
-            settingsButtonM2: {
-                marginTop: 5,
-                marginRight: -2
+            className: "".concat(i.rootNotif, " ").concat(u ? i.paddingBottom : "")
+        }, r.default.createElement(oh, {
+            enableNotificationsM2: !1,
+            notificationContent: n.titleNotification
+        }), r.default.createElement("div", {
+            className: "".concat(i.bundleDecorationContainer, " ").concat(u ? i.hidden : "")
+        }, r.default.createElement("div", {
+            className: i.decorationTop
+        }), n.children.length > 1 && r.default.createElement("div", {
+            className: i.decorationBottom
+        }))), r.default.createElement("div", {
+            ref: d
+        }, n.children.map((t, n) => r.default.createElement("div", {
+            key: t.notificationId,
+            className: "".concat(i.bundleDecorationContainer, " ").concat(u ? "" : i.notExpanded),
+            style: {
+                transform: u ? "translateY(0%)" : "translateY(-".concat((n + 1) * 110, "%)"),
+                zIndex: -n - 1
             }
-        }),
-        oE = t => {
-            let {
-                notifications: n,
-                newNotificationExists: o,
-                userId: a,
-                markAllAsRead: i,
-                setExpanded: u,
-                onSettingsClick: c,
-                markAllIsDisabled: p = 0 === n.length,
-                markAllReadRef: m = null,
-                enableNotificationsM2: f = !1
-            } = t, {
-                translate: h
-            } = (0, e$.useTranslation)(), {
-                sendEvent: g,
-                environment: v,
-                target: b
-            } = tx(), {
-                notificationClient: C
-            } = ry(), {
-                classes: E,
-                cx: w
-            } = oC(), S = (0, r.useCallback)(() => {
-                var t, r;
-                c ? c() : window.open("".concat("luobu" === b ? "production" === v ? tP : "staging" === v ? tB : tO : (null == (r = window) || null == (t = r.location) ? void 0 : t.origin) ? window.location.host.startsWith("devforum") || window.location.host.startsWith("music") ? window.location.origin.replace(/(devforum|music)/, "create") : window.location.origin : "production" === v ? tF : "staging" === v ? tN : tM, "/settings/notifications"), "_self"), u(!1), g({
-                    eventType: "ClickNotificationSettingsButton",
-                    context: "click",
-                    parameters: {
-                        ...nS({
-                            hasUnSeenNotifications: o,
-                            unreadNotificationCount: n.filter(t => !t.titleNotification.read).length,
-                            notificationsCount: n.length
-                        }),
-                        productTeam: nw
-                    }
-                })
-            }, [v, c, g, u, b, o, n]), I = (0, r.useCallback)(() => {
-                try {
-                    null == C || C.creatorStreamNotificationsMarkAllCreatorStreamNotificationsRead({
-                        userId: a,
-                        creatorStreamNotificationsMarkAllCreatorStreamNotificationsReadRequest: {
-                            notificationChannel: 8
-                        }
-                    })
-                } catch (t) {
-                    console.error("Failed to mark all as read", t)
-                }
-                i(), g({
-                    eventType: "MarkAllNotificationsRead",
-                    context: "click",
-                    parameters: {
-                        ...nS({
-                            hasUnSeenNotifications: o,
-                            unreadNotificationCount: n.filter(t => !t.titleNotification.read).length,
-                            notificationsCount: n.length
-                        }),
-                        productTeam: nw
-                    }
-                })
-            }, [a, C, i, g, o, n]);
-            return f ? r.default.createElement("div", {
-                className: "flex padding-left-xlarge padding-right-medium flex-row items-center justify-items-center"
-            }, r.default.createElement("h2", {
-                className: w(E.headerM2, "padding-top-large padding-bottom-medium margin-none text-heading-small content-emphasis")
-            }, h("Heading.NotificationTray")), r.default.createElement(tr.Button, {
-                className: E.markAllAsReadButtonM2,
-                variant: "Utility",
-                size: "Medium",
-                isDisabled: p,
-                ref: m,
-                onClick: I
-            }, h("Label.MarkAllRead")), r.default.createElement(ts.IconButton, {
-                icon: "icon-regular-gear",
-                size: "Medium",
-                variant: "Utility",
-                className: E.settingsButtonM2,
-                ariaLabel: h("Action.Settings"),
-                onClick: S
-            })) : r.default.createElement(s.Grid, {
-                className: E.header
-            }, r.default.createElement(l.Typography, {
-                variant: "h6"
-            }, h("Heading.NotificationTray")), r.default.createElement("div", null, r.default.createElement(y.Button, {
-                size: "small",
-                variant: "text",
-                color: "secondary",
-                className: E.markAllAsReadButton,
-                onClick: I
-            }, h("Action.MarkAllAsRead")), r.default.createElement(d.IconButton, {
-                "aria-label": h("Action.Settings"),
-                onClick: S
-            }, r.default.createElement(eI.SettingsIcon, {
-                color: "secondary"
-            }))))
+        }, r.default.createElement(oh, {
+            enableNotificationsM2: !1,
+            notificationContent: t
+        })))))
+    }, og = t => {
+        let {
+            size: n,
+            enableNotificationsM2: o
+        } = t, a = (0, I.useTheme)();
+        return o ? r.default.createElement("svg", {
+            width: n,
+            height: n,
+            viewBox: "0 0 62 53",
+            fill: "none",
+            xmlns: "http://www.w3.org/2000/svg"
+        }, r.default.createElement("path", {
+            d: "M28.5365 2.7375C29.5246 1.0875 31.9949 1.0875 32.983 2.7375L59.662 47.2875C60.6501 48.9375 59.415 51 57.4387 51H4.08078C2.10456 51 0.869423 48.9375 1.85753 47.2875L28.5365 2.7375Z",
+            stroke: a.palette.content.standard,
+            strokeWidth: "3",
+            strokeLinecap: "round",
+            strokeLinejoin: "round"
+        }), r.default.createElement("circle", {
+            cx: "30.6846",
+            cy: "38.8516",
+            r: "2.375",
+            fill: a.palette.content.standard
+        }), r.default.createElement("path", {
+            d: "M30.6846 30.75V19.5",
+            stroke: a.palette.content.standard,
+            strokeWidth: "3",
+            strokeLinecap: "round"
+        })) : r.default.createElement("svg", {
+            width: n,
+            height: n,
+            viewBox: "0 0 96 96",
+            fill: "none",
+            xmlns: "http://www.w3.org/2000/svg"
+        }, r.default.createElement("path", {
+            opacity: "0.7",
+            fillRule: "evenodd",
+            clipRule: "evenodd",
+            d: "M8 42C8 57.44 20.56 70 36 70C40.5891 70 44.9237 68.8905 48.7498 66.9256C51.1395 64.5674 52.9104 61.5717 53.3346 58.6658C54.2226 51.5538 54.2226 44.4458 53.3346 37.3318C52.4966 31.5958 46.4046 25.5038 40.6666 24.6658C37.1106 24.2218 33.5546 23.9998 30.0006 23.9998C26.4446 23.9998 22.8886 24.2218 19.3346 24.6658C16.4289 25.0902 13.4324 26.8619 11.0733 29.2524C9.10912 33.078 8 37.4118 8 42ZM30.0006 64.3638C36.1066 64.3638 45.6546 56.0358 46.7226 55.0858C47.6226 54.2858 47.7026 52.9058 46.9046 52.0058C46.1026 51.1058 44.7246 51.0238 43.8246 51.8238C40.2646 54.9838 33.3626 59.9998 30.0006 59.9998C26.6366 59.9998 19.7366 54.9838 16.1766 51.8238C15.2746 51.0238 13.8986 51.1058 13.0966 52.0058C12.2966 52.9058 12.3766 54.2858 13.2766 55.0858C14.3466 56.0358 23.8926 64.3638 30.0006 64.3638ZM23.4546 41.4538C23.4546 39.6458 21.9886 38.1818 20.1806 38.1818C18.3746 38.1818 16.9106 39.6458 16.9106 41.4538C16.9106 43.2618 18.3746 44.7258 20.1806 44.7258C21.9886 44.7258 23.4546 43.2618 23.4546 41.4538ZM43.0906 41.4538C43.0906 39.6458 41.6246 38.1818 39.8186 38.1818C38.0126 38.1818 36.5446 39.6458 36.5446 41.4538C36.5446 43.2618 38.0126 44.7258 39.8186 44.7258C41.6246 44.7258 43.0906 43.2618 43.0906 41.4538Z",
+            fill: a.palette.content.muted
+        }), r.default.createElement("path", {
+            opacity: "0.7",
+            fillRule: "evenodd",
+            clipRule: "evenodd",
+            d: "M74.1684 12.292C76.4464 9.746 79.4864 8 83.8184 8C89.4784 8 93.3164 10.926 93.3164 16.13V16.208C93.3164 21.222 89.8204 23.31 85.4904 24.146L85.0724 26.73H81.1944L80.3224 20.308L80.5124 20.122C85.4904 19.93 87.5044 18.562 87.5044 16.36V16.284C87.5044 14.422 86.0984 13.282 83.7024 13.282C81.4244 13.282 79.4864 14.23 77.6624 16.092L74.1684 12.292ZM86 36.0008H80V30.0008H86V36.0008Z",
+            fill: a.palette.content.muted
+        }), r.default.createElement("path", {
+            fillRule: "evenodd",
+            clipRule: "evenodd",
+            d: "M36 70C20.56 70 8 57.44 8 42C8 26.56 20.56 14 36 14C51.44 14 64 26.56 64 42C64 57.44 51.44 70 36 70ZM62.508 63.266C67.186 57.44 70 50.052 70 42C70 23.222 54.778 8 36 8C17.222 8 2 23.222 2 42C2 60.778 17.222 76 36 76C43.116 76 49.712 73.808 55.172 70.072L71.93 86.828C73.88 88.782 77.046 88.782 79 86.828C80.954 84.874 80.954 81.71 79 79.758L62.508 63.266Z",
+            fill: a.palette.content.muted
+        }))
+    }, oy = t => {
+        let {
+            size: n,
+            enableNotificationsM2: o
+        } = t, a = (0, I.useTheme)();
+        return o ? r.default.createElement("svg", {
+            width: "121",
+            height: "121",
+            viewBox: "0 0 121 121",
+            fill: "none",
+            xmlns: "http://www.w3.org/2000/svg"
+        }, r.default.createElement("path", {
+            d: "M92.0911 1.1032L3.2259 24.9146C1.6255 25.3434 0.675757 26.9884 1.10458 28.5888L24.9159 117.454C25.3448 119.054 26.9898 120.004 28.5902 119.575L117.455 95.7639C119.056 95.3351 120.005 93.6901 119.577 92.0897L95.7653 3.22452C95.3365 1.62412 93.6915 0.674375 92.0911 1.1032Z",
+            stroke: a.palette.components.divider,
+            strokeOpacity: "1",
+            strokeWidth: "2"
+        }), r.default.createElement("path", {
+            d: "M71.7557 45.5874C73.8177 43.5252 77.3407 44.5027 78.0457 47.3325L87.1957 84.0964C87.6637 85.9744 86.0067 87.6964 84.1117 87.3004L46.1737 79.3764C43.2557 78.7674 42.1817 75.1614 44.2887 73.0544L71.7557 45.5874ZM72.1497 81.7364L84.1407 84.2414L81.2517 72.6354L72.1497 81.7364ZM58.1897 78.8204L68.6407 81.0034L80.4057 69.2378L77.8887 59.1226L58.1897 78.8204ZM75.1357 48.0571C74.9947 47.4912 74.2887 47.2961 73.8767 47.7085L46.4097 75.1754C45.9887 75.5964 46.2047 76.3184 46.7877 76.4404L54.7427 78.1014C54.8077 77.9884 54.8877 77.8814 54.9837 77.7854L77.0437 55.7251L75.1357 48.0571Z",
+            fill: a.palette.content.standard
+        }), r.default.createElement("path", {
+            d: "M26.4535 72.1214C31.3395 61.6564 41.1115 60.5319 47.0685 60.9829C47.8945 61.0455 48.5135 61.7655 48.4515 62.5913C48.3895 63.4172 47.6695 64.0364 46.8435 63.9741C41.3605 63.5589 33.2655 64.6238 29.1725 73.3914C28.8215 74.1414 27.9285 74.4654 27.1785 74.1144C26.4275 73.7644 26.1035 72.8724 26.4535 72.1214Z",
+            fill: a.palette.content.standard
+        }), r.default.createElement("path", {
+            d: "M31.0469 50.9712C32.1509 50.9712 33.0469 51.8668 33.0469 52.9712C33.0469 54.0758 32.1509 54.9712 31.0469 54.9712C29.9419 54.9712 29.0469 54.0758 29.0469 52.9712C29.0469 51.8668 29.9419 50.9712 31.0469 50.9712Z",
+            fill: a.palette.content.standard
+        }), r.default.createElement("path", {
+            d: "M42.0519 46.2212C44.2639 46.2212 46.0579 48.0148 46.0579 50.2271C46.0579 52.4393 44.2639 54.2329 42.0519 54.2329C39.8399 54.2328 38.0469 52.4392 38.0469 50.2271C38.0469 48.0149 39.8399 46.2213 42.0519 46.2212Z",
+            fill: a.palette.content.standard
+        }), r.default.createElement("path", {
+            d: "M54.6738 29.8218C55.0058 29.0632 55.8898 28.7176 56.6478 29.0493C57.4068 29.3815 57.7528 30.2661 57.4208 31.0249C53.8728 39.136 57.2078 46.9044 59.2838 49.7105C59.7768 50.3764 59.6358 51.3155 58.9698 51.8081C58.3038 52.3006 57.3647 52.1604 56.8717 51.4946C54.3987 48.1521 50.5538 39.2404 54.6738 29.8218Z",
+            fill: a.palette.content.standard
+        }), r.default.createElement("path", {
+            d: "M72.6631 28.3198C73.4481 28.0552 74.3001 28.4766 74.5651 29.2612C74.8291 30.0462 74.4071 30.8978 73.6221 31.1626C70.1381 32.3376 68.0011 35.206 66.9011 38.1548C66.3541 39.6218 66.0881 41.0519 66.0391 42.1958C66.0151 42.7679 66.0461 43.2391 66.1081 43.5894C66.1761 43.9655 66.2591 44.0875 66.2471 44.0718C66.7441 44.7343 66.6091 45.6743 65.9471 46.1714C65.2851 46.6681 64.3451 46.5339 63.8481 45.8716C63.4591 45.3537 63.2621 44.708 63.1561 44.1196C63.0461 43.5025 63.0111 42.8033 63.0421 42.0679C63.1051 40.5955 63.4391 38.8546 64.0911 37.106C65.3901 33.6224 68.0521 29.8752 72.6631 28.3198Z",
+            fill: a.palette.content.standard
+        }), r.default.createElement("path", {
+            d: "M27.4829 40.5728C29.1049 40.573 30.4199 41.8875 30.4199 43.5093C30.4199 45.131 29.1049 46.4456 27.4829 46.4458C25.8619 46.4458 24.5469 45.1311 24.5469 43.5093C24.5469 41.8874 25.8619 40.5728 27.4829 40.5728Z",
+            fill: a.palette.content.standard
+        }), r.default.createElement("path", {
+            d: "M37.7586 34.1626C37.9196 33.5625 38.5365 33.206 39.1365 33.3667L44.0395 34.6802C44.6395 34.841 44.9965 35.458 44.8355 36.0581L43.5216 40.9614C43.3606 41.5615 42.7435 41.9181 42.1435 41.7573L37.2405 40.4429C36.6405 40.2821 36.2845 39.6651 36.4445 39.065L37.7586 34.1626Z",
+            fill: a.palette.content.standard
+        })) : r.default.createElement("svg", {
+            width: n,
+            height: n,
+            viewBox: "0 0 96 96",
+            fill: "none",
+            xmlns: "http://www.w3.org/2000/svg"
+        }, r.default.createElement("path", {
+            d: "M12.2034 86.9165L48.3634 73.9965C53.8834 72.0365 55.4834 64.9565 51.3234 60.7965L33.2034 42.6765C29.0434 38.5165 22.0034 40.1165 20.0034 45.6365L7.08344 81.7965C5.96344 84.9965 9.00344 88.0365 12.2034 86.9165Z",
+            fill: a.palette.content.muted
+        }), r.default.createElement("path", {
+            d: "M56.4834 49.7565L76.7234 29.5165C78.6834 27.5565 81.8434 27.5565 83.8034 29.5165L84.0434 29.7565C85.2034 30.9165 87.1234 30.9165 88.2834 29.7565C89.4434 28.5965 89.4434 26.6765 88.2834 25.5165L88.0434 25.2765C83.7634 20.9965 76.7634 20.9965 72.4834 25.2765L52.2434 45.5165C51.0834 46.6765 51.0834 48.5965 52.2434 49.7565C53.4034 50.9165 55.3234 50.9165 56.4834 49.7565Z",
+            fill: a.palette.content.muted
+        }), r.default.createElement("path", {
+            d: "M36.4834 29.2765L36.2434 29.5165C35.0834 30.6765 35.0834 32.5965 36.2434 33.7565C37.4034 34.9165 39.3234 34.9165 40.4834 33.7565L40.7234 33.5165C45.0034 29.2365 45.0034 22.2365 40.7234 17.9565L40.5234 17.7565C39.3234 16.5565 37.4034 16.5565 36.2434 17.7565C35.0834 18.9165 35.0834 20.8365 36.2434 21.9965L36.4834 22.2365C38.4034 24.1565 38.4034 27.3565 36.4834 29.2765Z",
+            fill: a.palette.content.muted
+        }), r.default.createElement("path", {
+            d: "M64.4834 49.2765L60.2434 53.5165C59.0834 54.6765 59.0834 56.5965 60.2434 57.7565C61.4034 58.9165 63.3234 58.9165 64.4834 57.7565L68.7234 53.5165C70.6834 51.5565 73.8434 51.5565 75.8034 53.5165L80.1234 57.8365C81.2834 58.9965 83.2034 58.9965 84.3634 57.8365C85.5234 56.6765 85.5234 54.7565 84.3634 53.5965L80.0434 49.2765C75.7234 44.9965 68.7634 44.9965 64.4834 49.2765Z",
+            fill: a.palette.content.muted
+        }), r.default.createElement("path", {
+            d: "M56.4834 25.2765L44.2434 37.5165C43.0834 38.6765 43.0834 40.5965 44.2434 41.7565C45.4034 42.9165 47.3234 42.9165 48.4834 41.7565L60.7234 29.5165C65.0034 25.2365 65.0034 18.2365 60.7234 13.9565L56.4834 9.7165C55.3234 8.5565 53.4034 8.5565 52.2434 9.7165C51.0834 10.8765 51.0834 12.7965 52.2434 13.9565L56.4834 18.1965C58.4034 20.1565 58.4034 23.3565 56.4834 25.2765Z",
+            fill: a.palette.content.muted
+        }))
+    }, ov = (0, i.makeStyles)()({
+        header: {
+            paddingLeft: 12,
+            paddingRight: 6,
+            paddingTop: 12,
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center"
         },
-        ow = t => {
-            let {
-                handler: n
-            } = t, o = (0, r.useRef)(null);
-            return (0, r.useEffect)(() => {
-                let t = o.current;
-                if (!t) return;
-                let r = new IntersectionObserver(t => {
-                    t.forEach(t => {
-                        t.isIntersecting && n()
-                    })
-                }, {
-                    root: null,
-                    threshold: .9
-                });
-                return r.observe(t), () => r.disconnect()
-            }, [o, n]), r.default.createElement("div", {
-                ref: o,
-                style: {
-                    height: 0,
-                    width: 0,
-                    opacity: 0
+        markAllAsReadButton: {
+            padding: 8
+        },
+        iconButton: {
+            padding: 4
+        },
+        headerM2: {
+            flex: 1
+        },
+        markAllAsReadButtonM2: {
+            marginTop: 5
+        },
+        settingsButtonM2: {
+            marginTop: 5,
+            marginRight: -2
+        }
+    }), ob = t => {
+        let {
+            notifications: n,
+            newNotificationExists: o,
+            userId: a,
+            markAllAsRead: i,
+            setExpanded: u,
+            onSettingsClick: c,
+            markAllIsDisabled: p = 0 === n.length,
+            markAllReadRef: m = null,
+            enableNotificationsM2: h = !1
+        } = t, {
+            translate: f
+        } = (0, e$.useTranslation)(), {
+            sendEvent: g,
+            environment: v,
+            target: b
+        } = tI(), {
+            notificationClient: C
+        } = rh(), {
+            classes: E,
+            cx: w
+        } = ov(), S = (0, r.useCallback)(() => {
+            var t, r;
+            c ? c() : window.open("".concat("luobu" === b ? "production" === v ? tM : "staging" === v ? tP : tB : (null == (r = window) || null == (t = r.location) ? void 0 : t.origin) ? window.location.host.startsWith("devforum") || window.location.host.startsWith("music") ? window.location.origin.replace(/(devforum|music)/, "create") : window.location.origin : "production" === v ? tL : "staging" === v ? tF : tN, "/settings/notifications"), "_self"), u(!1), g({
+                eventType: "ClickNotificationSettingsButton",
+                context: "click",
+                parameters: {
+                    ...nw({
+                        hasUnSeenNotifications: o,
+                        unreadNotificationCount: n.filter(t => !t.titleNotification.read).length,
+                        notificationsCount: n.length
+                    }),
+                    productTeam: nE
                 }
             })
-        },
-        oS = r.default.forwardRef((t, n) => {
-            let {
-                failedToLoadPage: o,
-                loadingMoreNotifs: a,
-                avoidLoadingMoreNotifs: i,
+        }, [v, c, g, u, b, o, n]), I = (0, r.useCallback)(() => {
+            try {
+                null == C || C.creatorStreamNotificationsMarkAllCreatorStreamNotificationsRead({
+                    userId: a,
+                    creatorStreamNotificationsMarkAllCreatorStreamNotificationsReadRequest: {
+                        notificationChannel: 8
+                    }
+                })
+            } catch (t) {
+                console.error("Failed to mark all as read", t)
+            }
+            i(), g({
+                eventType: "MarkAllNotificationsRead",
+                context: "click",
+                parameters: {
+                    ...nw({
+                        hasUnSeenNotifications: o,
+                        unreadNotificationCount: n.filter(t => !t.titleNotification.read).length,
+                        notificationsCount: n.length
+                    }),
+                    productTeam: nE
+                }
+            })
+        }, [a, C, i, g, o, n]);
+        return h ? r.default.createElement("div", {
+            className: "flex padding-left-xlarge padding-right-medium flex-row items-center justify-items-center"
+        }, r.default.createElement("h2", {
+            className: w(E.headerM2, "padding-top-large padding-bottom-medium margin-none text-heading-small content-emphasis")
+        }, f("Heading.NotificationTray")), r.default.createElement(tn.Button, {
+            className: E.markAllAsReadButtonM2,
+            variant: "Utility",
+            size: "Medium",
+            isDisabled: p,
+            ref: m,
+            onClick: I
+        }, f("Label.MarkAllRead")), r.default.createElement(tl.IconButton, {
+            icon: "icon-regular-gear",
+            size: "Medium",
+            variant: "Utility",
+            className: E.settingsButtonM2,
+            ariaLabel: f("Action.Settings"),
+            onClick: S
+        })) : r.default.createElement(s.Grid, {
+            className: E.header
+        }, r.default.createElement(l.Typography, {
+            variant: "h6"
+        }, f("Heading.NotificationTray")), r.default.createElement("div", null, r.default.createElement(y.Button, {
+            size: "small",
+            variant: "text",
+            color: "secondary",
+            className: E.markAllAsReadButton,
+            onClick: I
+        }, f("Action.MarkAllAsRead")), r.default.createElement(d.IconButton, {
+            "aria-label": f("Action.Settings"),
+            onClick: S
+        }, r.default.createElement(eI.SettingsIcon, {
+            color: "secondary"
+        }))))
+    }, oC = t => {
+        let {
+            handler: n
+        } = t, o = (0, r.useRef)(null);
+        return (0, r.useEffect)(() => {
+            let t = o.current;
+            if (!t) return;
+            let r = new IntersectionObserver(t => {
+                t.forEach(t => {
+                    t.isIntersecting && n()
+                })
+            }, {
+                root: null,
+                threshold: .9
+            });
+            return r.observe(t), () => r.disconnect()
+        }, [o, n]), r.default.createElement("div", {
+            ref: o,
+            style: {
+                height: 0,
+                width: 0,
+                opacity: 0
+            }
+        })
+    }, oE = r.default.forwardRef((t, n) => {
+        let {
+            failedToLoadPage: o,
+            loadingMoreNotifs: a,
+            avoidLoadingMoreNotifs: i,
+            notifications: l,
+            newNotificationExists: s,
+            userId: u,
+            markAllAsRead: c,
+            setExpanded: d,
+            onSettingsClick: p,
+            markReadStatus: m,
+            listRef: h,
+            freshNotificationsSnackbar: f = {
+                count: 0,
+                show: !1,
+                close: () => {},
+                onScrollToTop: () => {}
+            },
+            failedMarkingNotification: g,
+            setFailedMarkingNotification: y,
+            retryNotifications: v,
+            setNewUnseenNotifFrontier: b,
+            reportNewUnseenNotifFrontier: C,
+            listScrollRef: E,
+            unseenNotifFrontierIndex: w,
+            trayContentFirstFocusableElRef: S,
+            showNewLookTooltip: I
+        } = t, {
+            count: x = 0,
+            show: A = !1,
+            close: T = () => {},
+            onScrollToTop: k
+        } = f, {
+            translate: D
+        } = (0, e$.useTranslation)(), [j, R] = (0, r.useState)(!1), {
+            classes: _,
+            cx: L
+        } = ou(), [F, N] = (0, r.useState)(!1), M = (0, r.useCallback)(t => {
+            h.current = t, R(!!t)
+        }, [h]), P = (0, r.useCallback)(() => {
+            let t = h.current;
+            t && N(t.scrollHeight > t.clientHeight)
+        }, [h]);
+        (0, r.useEffect)(() => {
+            let t = h.current;
+            if (!t) return;
+            P();
+            let n = new ResizeObserver(P);
+            return n.observe(t), () => n.disconnect()
+        }, [h, P, l.length, a]);
+        let B = L("flex flex-col items-center justify-center", _.listContainerM2),
+            O = (0, r.useCallback)(() => {
+                h.current && (h.current.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                }), k())
+            }, [h, k]),
+            H = (0, r.useCallback)(() => {
+                b(l[0].titleNotification.notificationId)
+            }, [b, l]);
+        (0, r.useEffect)(() => {
+            let t = h.current;
+            if (!t) return;
+            let n = () => {
+                    (null == E ? void 0 : E.current) && (E.current = {
+                        scrollTop: t.scrollTop,
+                        scrollHeight: t.scrollHeight
+                    })
+                },
+                r = () => {
+                    requestAnimationFrame(n)
+                };
+            return n(), t.addEventListener("scroll", n), t.addEventListener("focusin", r), () => {
+                t.removeEventListener("scroll", n), t.removeEventListener("focusin", r)
+            }
+        }, [h, j, E]);
+        let U = null,
+            z = !1;
+        l && 0 !== l.length ? U = r.default.createElement("div", {
+            ref: M,
+            className: L(_.scrollableY, _.scrollableYM2)
+        }, r.default.createElement(oC, {
+            handler: H
+        }), l.map((t, n) => {
+            let o = {
+                notificationContent: t.titleNotification,
+                notificationGroupIndex: n,
+                markReadStatus: m,
+                enableNotificationsM2: !0,
+                isListOverflowing: F,
+                reportNewUnseenNotifFrontier: C,
+                unseenNotifFrontierIndex: w
+            };
+            return 0 === n ? r.default.createElement(oh, {
+                ...o,
+                key: t.titleNotification.notificationId,
+                ref: S
+            }) : r.default.createElement(oh, {
+                key: t.titleNotification.notificationId,
+                ...o
+            })
+        }), a && !i && r.default.createElement("div", {
+            className: "flex items-center justify-center padding-large"
+        }, r.default.createElement(ts.ProgressCircle, {
+            size: "Medium",
+            variant: "Indeterminate",
+            ariaLabel: D("Label.LoadingMore"),
+            value: 50
+        }))) : a ? U = r.default.createElement("div", {
+            className: B
+        }, r.default.createElement(ts.ProgressCircle, {
+            size: "Large",
+            variant: "Indeterminate",
+            ariaLabel: D("Label.Loading"),
+            value: 50
+        })) : o ? (z = !0, U = r.default.createElement("div", {
+            className: B
+        }, r.default.createElement("div", {
+            className: "flex flex-col items-center gap-2"
+        }, r.default.createElement(og, {
+            enableNotificationsM2: !0,
+            size: 72
+        }), r.default.createElement("h4", {
+            className: L(_.emptyStateHeader, _.errorStateHeader, "text-heading-small content-emphasis")
+        }, D("Label.SomethingWentWrong") || "Something went wrong"), r.default.createElement("p", {
+            className: L(_.emptyStateDescription, "text-body-medium content-default")
+        }, D("Description.NotificationsFailed") || "Notifications failed to load")), r.default.createElement(tn.Button, {
+            className: _.retryButton,
+            variant: "Standard",
+            size: "Medium",
+            onClick: t => {
+                t.preventDefault(), t.stopPropagation(), v()
+            }
+        }, D("Label.Retry") || "Retry"))) : U = r.default.createElement("div", {
+            className: B
+        }, r.default.createElement(oy, {
+            enableNotificationsM2: !0,
+            size: 128
+        }), r.default.createElement("h2", {
+            className: L(_.emptyStateHeader, "text-heading-small content-emphasis")
+        }, D("Label.NoNotificationsAvailable")), r.default.createElement("p", {
+            className: L(_.emptyStateDescription, "text-body-medium content-default")
+        }, D("Description.NoNotificationsAvailable")));
+        let V = !z && (o || g),
+            q = (0, r.useMemo)(() => 0 === x ? "" : D(1 === x ? "Label.OneNewNotification" : "Message.NewNotificationsWithCount", {
+                count: Math.min(10, x) + (x >= 10 ? "+" : "")
+            }), [x, D]),
+            W = (0, r.useMemo)(() => 0 === l.length, [l]),
+            G = r.default.createElement("div", {
+                ref: n,
+                "aria-label": D("Label.NotificationTray") || "Notification Tray",
+                className: L("shadow-transient-high radius-large stroke-standard stroke-muted bg-surface-100 border-color-standard border border-radius-large relative flex flex-col", _.notificationsM2)
+            }, V && r.default.createElement(to.Snackbar, {
+                onClose: () => y(!1),
+                shouldAutoDismiss: !0,
+                title: D("Message.GenericError")
+            }), A && x > 0 && r.default.createElement("div", {
+                className: _.snackbarM2Wrapper
+            }, r.default.createElement(to.Snackbar, {
+                className: _.snackbarM2,
+                title: q,
+                shouldAutoDismiss: !0,
+                onClose: T,
+                onClick: t => {
+                    t.stopPropagation(), null === t.target.closest("button") && O()
+                },
+                onKeyDown: t => {
+                    t.stopPropagation(), ("Enter" === t.key || " " === t.key) && O()
+                }
+            })), r.default.createElement(ob, {
+                markAllIsDisabled: W,
+                markAllReadRef: W ? void 0 : S,
                 notifications: l,
                 newNotificationExists: s,
                 userId: u,
                 markAllAsRead: c,
                 setExpanded: d,
                 onSettingsClick: p,
-                markReadStatus: m,
-                listRef: f,
-                freshNotificationsSnackbar: h = {
-                    count: 0,
-                    show: !1,
-                    close: () => {},
-                    onScrollToTop: () => {}
-                },
-                failedMarkingNotification: g,
-                setFailedMarkingNotification: y,
-                retryNotifications: v,
-                setNewUnseenNotifFrontier: b,
-                reportNewUnseenNotifFrontier: C,
-                listScrollRef: E,
-                unseenNotifFrontierIndex: w,
-                trayContentFirstFocusableElRef: S,
-                showNewLookTooltip: I
-            } = t, {
-                count: x = 0,
-                show: A = !1,
-                close: T = () => {},
-                onScrollToTop: k
-            } = h, {
-                translate: D
-            } = (0, e$.useTranslation)(), [j, R] = (0, r.useState)(!1), {
-                classes: L,
-                cx: _
-            } = od(), [F, N] = (0, r.useState)(!1), M = (0, r.useCallback)(t => {
-                f.current = t, R(!!t)
-            }, [f]), P = (0, r.useCallback)(() => {
-                let t = f.current;
-                t && N(t.scrollHeight > t.clientHeight)
-            }, [f]);
-            (0, r.useEffect)(() => {
-                let t = f.current;
-                if (!t) return;
-                P();
-                let n = new ResizeObserver(P);
-                return n.observe(t), () => n.disconnect()
-            }, [f, P, l.length, a]);
-            let B = _("flex flex-col items-center justify-center", L.listContainerM2),
-                O = (0, r.useCallback)(() => {
-                    f.current && (f.current.scrollTo({
-                        top: 0,
-                        behavior: "smooth"
-                    }), k())
-                }, [f, k]),
-                H = (0, r.useCallback)(() => {
-                    b(l[0].titleNotification.notificationId)
-                }, [b, l]);
-            (0, r.useEffect)(() => {
-                let t = f.current;
-                if (!t) return;
-                let n = () => {
-                        (null == E ? void 0 : E.current) && (E.current = {
-                            scrollTop: t.scrollTop,
-                            scrollHeight: t.scrollHeight
-                        })
-                    },
-                    r = () => {
-                        requestAnimationFrame(n)
-                    };
-                return n(), t.addEventListener("scroll", n), t.addEventListener("focusin", r), () => {
-                    t.removeEventListener("scroll", n), t.removeEventListener("focusin", r)
-                }
-            }, [f, j, E]);
-            let U = null,
-                z = !1;
-            l && 0 !== l.length ? U = r.default.createElement("div", {
-                ref: M,
-                className: _(L.scrollableY, L.scrollableYM2)
-            }, r.default.createElement(ow, {
-                handler: H
-            }), l.map((t, n) => {
-                let o = {
-                    notificationContent: t.titleNotification,
-                    notificationGroupIndex: n,
-                    markReadStatus: m,
-                    enableNotificationsM2: !0,
-                    isListOverflowing: F,
-                    reportNewUnseenNotifFrontier: C,
-                    unseenNotifFrontierIndex: w
-                };
-                return 0 === n ? r.default.createElement(og, {
-                    ...o,
-                    key: t.titleNotification.notificationId,
-                    ref: S
-                }) : r.default.createElement(og, {
-                    key: t.titleNotification.notificationId,
-                    ...o
-                })
-            }), a && !i && r.default.createElement("div", {
-                className: "flex items-center justify-center padding-large"
-            }, r.default.createElement(tu.ProgressCircle, {
-                size: "Medium",
-                variant: "Indeterminate",
-                ariaLabel: D("Label.LoadingMore"),
-                value: 50
-            }))) : a ? U = r.default.createElement("div", {
-                className: B
-            }, r.default.createElement(tu.ProgressCircle, {
-                size: "Large",
-                variant: "Indeterminate",
-                ariaLabel: D("Label.Loading"),
-                value: 50
-            })) : o ? (z = !0, U = r.default.createElement("div", {
-                className: B
-            }, r.default.createElement("div", {
-                className: "flex flex-col items-center gap-2"
-            }, r.default.createElement(ov, {
-                enableNotificationsM2: !0,
-                size: 72
-            }), r.default.createElement("h4", {
-                className: _(L.emptyStateHeader, L.errorStateHeader, "text-heading-small content-emphasis")
-            }, D("Label.SomethingWentWrong") || "Something went wrong"), r.default.createElement("p", {
-                className: _(L.emptyStateDescription, "text-body-medium content-default")
-            }, D("Description.NotificationsFailed") || "Notifications failed to load")), r.default.createElement(tr.Button, {
-                className: L.retryButton,
-                variant: "Standard",
-                size: "Medium",
-                onClick: t => {
-                    t.preventDefault(), t.stopPropagation(), v()
-                }
-            }, D("Label.Retry") || "Retry"))) : U = r.default.createElement("div", {
-                className: B
-            }, r.default.createElement(ob, {
-                enableNotificationsM2: !0,
-                size: 128
-            }), r.default.createElement("h2", {
-                className: _(L.emptyStateHeader, "text-heading-small content-emphasis")
-            }, D("Label.NoNotificationsAvailable")), r.default.createElement("p", {
-                className: _(L.emptyStateDescription, "text-body-medium content-default")
-            }, D("Description.NoNotificationsAvailable")));
-            let V = !z && (o || g),
-                q = (0, r.useMemo)(() => 0 === x ? "" : D(1 === x ? "Label.OneNewNotification" : "Message.NewNotificationsWithCount", {
-                    count: Math.min(10, x) + (x >= 10 ? "+" : "")
-                }), [x, D]),
-                W = (0, r.useMemo)(() => 0 === l.length, [l]),
-                G = r.default.createElement("div", {
-                    ref: n,
-                    "aria-label": D("Label.NotificationTray") || "Notification Tray",
-                    className: _("shadow-transient-high radius-large stroke-standard stroke-muted bg-surface-100 border-color-standard border border-radius-large relative flex flex-col", L.notificationsM2)
-                }, V && r.default.createElement(ta.Snackbar, {
-                    onClose: () => y(!1),
-                    shouldAutoDismiss: !0,
-                    title: D("Message.GenericError")
-                }), A && x > 0 && r.default.createElement("div", {
-                    className: L.snackbarM2Wrapper
-                }, r.default.createElement(ta.Snackbar, {
-                    className: L.snackbarM2,
-                    title: q,
-                    shouldAutoDismiss: !0,
-                    onClose: T,
-                    onClick: t => {
-                        t.stopPropagation(), null === t.target.closest("button") && O()
-                    },
-                    onKeyDown: t => {
-                        t.stopPropagation(), ("Enter" === t.key || " " === t.key) && O()
-                    }
-                })), r.default.createElement(oE, {
-                    markAllIsDisabled: W,
-                    markAllReadRef: W ? void 0 : S,
-                    notifications: l,
-                    newNotificationExists: s,
-                    userId: u,
-                    markAllAsRead: c,
-                    setExpanded: d,
-                    onSettingsClick: p,
-                    enableNotificationsM2: !0
-                }), U);
-            return r.default.createElement(tn.Tooltip, {
-                hasBeak: !0,
-                delayDurationMs: 0,
-                open: I,
-                onOpenChange: () => {},
-                title: D("Message.NotificationsHasNewLookTitle"),
-                description: D("Message.NotificationsHasNewLookDescription"),
-                position: "left-start",
-                contentClassName: L.tooltipContent
-            }, r.default.createElement(tn.TooltipTrigger, {
-                asChild: !0
-            }, G))
-        });
-    oS.displayName = "NotificationListM2";
-    var oI = ((nh = oI || {}).Refresh = "refresh", nh.Paginate = "paginate", nh.ReloadAll = "reloadAll", nh);
-    let ox = r.default.forwardRef((t, n) => {
+                enableNotificationsM2: !0
+            }), U);
+        return r.default.createElement(tt.Tooltip, {
+            hasBeak: !0,
+            delayDurationMs: 0,
+            open: I,
+            onOpenChange: () => {},
+            title: D("Message.NotificationsHasNewLookTitle"),
+            description: D("Message.NotificationsHasNewLookDescription"),
+            position: "left-start",
+            contentClassName: _.tooltipContent
+        }, r.default.createElement(tt.TooltipTrigger, {
+            asChild: !0
+        }, G))
+    });
+    oE.displayName = "NotificationListM2";
+    var ow = ((nh = ow || {}).Refresh = "refresh", nh.Paginate = "paginate", nh.ReloadAll = "reloadAll", nh);
+    let oS = r.default.forwardRef((t, n) => {
         let {
             failedToLoad: o,
             listRef: a,
@@ -22772,8 +22538,8 @@
             noMoreNotifications: d,
             notifications: p,
             setNewNotificationExists: m,
-            setNotifications: f,
-            userId: h,
+            setNotifications: h,
+            userId: f,
             loadPage: g,
             setExpanded: v,
             onSettingsClick: b,
@@ -22791,44 +22557,46 @@
         } = (0, e$.useTranslation)(), {
             classes: j,
             cx: R
-        } = od(), {
-            notificationClient: L
-        } = ry(), [F, N] = (0, r.useState)(!1), M = o && 0 === p.length, P = !M && !d && (!p || 0 === p.length), B = !M && !P, O = (0, r.useCallback)(() => {
-            m(!1), f([]), g(oI.ReloadAll)
-        }, [g, m, f]), H = (0, r.useCallback)(() => {
-            f(t => t.map(t => {
+        } = ou(), {
+            notificationClient: _
+        } = rh(), [F, N] = (0, r.useState)(!1), M = o && 0 === p.length, P = !M && !d && (!p || 0 === p.length), B = !M && !P, O = (0, r.useCallback)(() => {
+            m(!1), h([]), g(ow.ReloadAll)
+        }, [g, m, h]), H = (0, r.useCallback)(() => {
+            h(t => t.map(t => {
                 var n;
                 let r = structuredClone(t);
                 return r.titleNotification.read = !0, null == (n = r.children) || n.forEach(t => {
                     t.read = !0
                 }), r
             }))
-        }, [f]), U = (0, r.useCallback)((t, n) => {
-            f(r => r.map(r => r.titleNotification.notificationId !== n ? r : {
+        }, [h]), U = (0, r.useCallback)((t, n) => {
+            h(r => r.map(r => r.titleNotification.notificationId !== n ? r : {
                 ...r,
                 titleNotification: {
                     ...r.titleNotification,
                     read: t
                 }
             }))
-        }, [f]), z = (0, r.useCallback)(async (t, n) => {
+        }, [h]), z = (0, r.useCallback)(async (t, n) => {
             try {
-                await (null == L ? void 0 : L.creatorStreamNotificationsMarkCreatorStreamNotificationsRead({
-                    userId: h,
+                await (null == _ ? void 0 : _.creatorStreamNotificationsMarkCreatorStreamNotificationsRead({
+                    userId: f,
                     notificationId: t,
                     creatorStreamNotificationsMarkCreatorStreamNotificationsReadRequest: {
                         status: n
                     }
+                }, {
+                    keepalive: !0
                 })), U(n, t), N(!1)
             } catch (t) {
                 N(!0)
             }
-        }, [L, U, h]);
+        }, [_, U, f]);
         return ((0, r.useEffect)(() => {
             let t = t => U(!0, t),
                 n = t => U(!1, t);
-            return rv.on("notificationRead", t), rv.on("notificationUnread", n), rv.on("allNotificationsRead", H), () => {
-                rv.removeListener("notificationRead", t), rv.removeListener("notificationUnread", n), rv.removeListener("allNotificationsRead", H)
+            return rf.on("notificationRead", t), rf.on("notificationUnread", n), rf.on("allNotificationsRead", H), () => {
+                rf.removeListener("notificationRead", t), rf.removeListener("notificationUnread", n), rf.removeListener("allNotificationsRead", H)
             }
         }, [H, U]), (0, r.useEffect)(() => {
             if (!B) return () => {};
@@ -22839,14 +22607,14 @@
                             scrollTop: n,
                             clientHeight: r
                         } = a.current;
-                        t - n - r <= 250 && g(oI.Paginate)
+                        t - n - r <= 250 && g(ow.Paginate)
                     }
                 },
                 n = a.current;
             return n && n.addEventListener("scroll", t), () => {
                 n && n.removeEventListener("scroll", t)
             }
-        }, [B, a, g]), C) ? r.default.createElement(oS, {
+        }, [B, a, g]), C) ? r.default.createElement(oE, {
             ref: n,
             showNewLookTooltip: k,
             trayContentFirstFocusableElRef: T,
@@ -22857,7 +22625,7 @@
             loadingMoreNotifs: i,
             notifications: p,
             newNotificationExists: c,
-            userId: h,
+            userId: f,
             markAllAsRead: u,
             setExpanded: v,
             onSettingsClick: b,
@@ -22892,10 +22660,10 @@
             className: j.snackbarContent
         }, r.default.createElement(l.Typography, {
             variant: "body1"
-        }, D("Action.ViewNewNotifications"))))), r.default.createElement(oE, {
+        }, D("Action.ViewNewNotifications"))))), r.default.createElement(ob, {
             notifications: p,
             newNotificationExists: c,
-            userId: h,
+            userId: f,
             markAllAsRead: u,
             setExpanded: v,
             onSettingsClick: b,
@@ -22917,7 +22685,7 @@
             item: !0
         }, r.default.createElement(s.Grid, {
             item: !0
-        }, r.default.createElement(ov, {
+        }, r.default.createElement(og, {
             size: 128
         })), r.default.createElement(s.Grid, {
             item: !0
@@ -22939,19 +22707,19 @@
             justifyContent: "center",
             alignItems: "center",
             className: j.fullCenter
-        }, r.default.createElement(_.CircularProgress, null)), B && p.length > 0 && r.default.createElement(s.Grid, {
+        }, r.default.createElement(L.CircularProgress, null)), B && p.length > 0 && r.default.createElement(s.Grid, {
             ref: a,
             className: R(j.listContainer, j.scrollableY)
         }, p.map((t, n) => r.default.createElement(s.Grid, {
             className: j.notificationContainer,
             key: "group-".concat(t.titleNotification.notificationId)
-        }, ("None" === t.groupingType || "Summarized" === t.groupingType) && r.default.createElement(og, {
+        }, ("None" === t.groupingType || "Summarized" === t.groupingType) && r.default.createElement(oh, {
             enableNotificationsM2: null != C && C,
             reportNewUnseenNotifFrontier: w,
             notificationContent: t.titleNotification,
             notificationGroupIndex: n,
             markReadStatus: z
-        }), "Bundled" === t.groupingType && r.default.createElement(oy, {
+        }), "Bundled" === t.groupingType && r.default.createElement(of, {
             notificationGroup: t,
             notificationGroupIndex: n,
             markReadStatus: z
@@ -22960,7 +22728,7 @@
             justifyContent: "center",
             alignItems: "center",
             className: j.bottomLoader
-        }, r.default.createElement(_.CircularProgress, null))), B && 0 === p.length && r.default.createElement(s.Grid, {
+        }, r.default.createElement(L.CircularProgress, null))), B && 0 === p.length && r.default.createElement(s.Grid, {
             container: !0,
             justifyContent: "center",
             alignItems: "center",
@@ -22969,7 +22737,7 @@
             className: j.fullCenter
         }, r.default.createElement(s.Grid, {
             item: !0
-        }, r.default.createElement(ob, {
+        }, r.default.createElement(oy, {
             size: 128
         })), r.default.createElement(s.Grid, {
             item: !0
@@ -22978,14 +22746,14 @@
             color: "secondary"
         }, D("Label.NoNotificationsAvailable")))))))
     });
-    ox.displayName = "NotificationList";
-    let oA = t => {
+    oS.displayName = "NotificationList";
+    let oI = t => {
             let {
                 count: n
             } = t, {
                 classes: o,
                 cx: a
-            } = r3(), {
+            } = r1(), {
                 translate: i
             } = (0, e$.useTranslation)(), l = (0, r.useMemo)(() => n >= 99 ? "99+" : n.toString(), [n]), s = (0, r.useMemo)(() => i("Message.UnreadNotificationsWithCount", {
                 count: l
@@ -22996,7 +22764,7 @@
                 "aria-label": s
             }, l)
         },
-        oT = t => {
+        ox = t => {
             let {
                 userId: n,
                 size: o = "large",
@@ -23006,11 +22774,11 @@
             } = t, {
                 classes: u,
                 cx: c
-            } = r3(), {
+            } = r1(), {
                 translate: p
             } = (0, e$.useTranslation)(), {
-                notificationClient: f
-            } = ry(), [h, g] = (0, e0.useLocalStorage)("NotificationTrayNewLookSeen.".concat(n), "false"), [y, v] = (0, r.useState)(!1), [b, C] = (0, r.useState)(!1), [E, w] = (0, r.useState)([]), [S, I] = (0, r.useState)(""), [x, A] = (0, r.useState)(!1), [T, k] = (0, r.useState)(!1), [D, j] = (0, r.useState)(!1), [R, L] = (0, r.useState)(0), [_, F] = (0, r.useState)(0), [N, M] = (0, r.useState)(!1), [P, B] = (0, r.useState)(void 0), [O, H] = (0, r.useState)(!1), U = (0, r.useRef)({
+                notificationClient: h
+            } = rh(), [f, g] = (0, e0.useLocalStorage)("NotificationTrayNewLookSeen.".concat(n), "false"), [y, v] = (0, r.useState)(!1), [b, C] = (0, r.useState)(!1), [E, w] = (0, r.useState)([]), [S, I] = (0, r.useState)(""), [x, A] = (0, r.useState)(!1), [T, k] = (0, r.useState)(!1), [D, j] = (0, r.useState)(!1), [R, _] = (0, r.useState)(0), [L, F] = (0, r.useState)(0), [N, M] = (0, r.useState)(!1), [P, B] = (0, r.useState)(void 0), [O, H] = (0, r.useState)(!1), U = (0, r.useRef)({
                 scrollTop: 0,
                 scrollHeight: 0
             }), z = (0, r.useRef)(!0), V = (0, r.useRef)(!1), q = (0, r.useRef)(null), W = (0, r.useRef)(null), G = (0, r.useRef)(null), K = (0, r.useRef)(null), J = (0, r.useRef)(0), Z = (0, r.useRef)(""), X = (0, r.useRef)(!0), Y = (0, r.useRef)(!1), Q = (0, r.useRef)({}), $ = (0, r.useRef)({}), ee = (0, r.useRef)(!1), et = (0, r.useRef)(!1), en = (0, r.useRef)(!1), er = (0, r.useRef)(y), eo = (0, r.useRef)(null), ea = (0, r.useRef)(null), {
@@ -23049,13 +22817,13 @@
                     }), n
                 }))
             }, []), em = (0, r.useCallback)(async t => {
-                if (!x && (!D || t !== oI.Paginate) && !Q.current[t]) try {
+                if (!x && (!D || t !== ow.Paginate) && !Q.current[t]) try {
                     var r, o, a, s;
                     Q.current[t] = !0, z.current = !1, A(!0), k(!1);
                     let u = X.current,
-                        c = 0 === E.length || t === oI.Refresh || t === oI.ReloadAll || !Z.current,
+                        c = 0 === E.length || t === ow.Refresh || t === ow.ReloadAll || !Z.current,
                         d = c ? "" : Z.current,
-                        p = await (null == f ? void 0 : f.creatorStreamNotificationsGetCreatorStreamNotificationsByUser({
+                        p = await (null == h ? void 0 : h.creatorStreamNotificationsGetCreatorStreamNotificationsByUser({
                             userId: n,
                             count: 15,
                             notificationChannel: 8,
@@ -23076,26 +22844,26 @@
                                 n.push(r)
                             }), n
                         })(null == p ? void 0 : p.creatorStreamNotifications),
-                        h = [],
+                        f = [],
                         g = {
                             merged: [],
                             freshNotifications: []
                         };
                     switch (t) {
-                        case oI.Paginate:
-                            w(t => ((h = [...t, ...m]).length > 150 + _ && j(!0), h)), m && 0 !== m.length && (null == p ? void 0 : p.nextCursor) || j(!0), Z.current = null != (a = null == p ? void 0 : p.nextCursor) ? a : "";
+                        case ow.Paginate:
+                            w(t => ((f = [...t, ...m]).length > 150 + L && j(!0), f)), m && 0 !== m.length && (null == p ? void 0 : p.nextCursor) || j(!0), Z.current = null != (a = null == p ? void 0 : p.nextCursor) ? a : "";
                             break;
-                        case oI.ReloadAll:
+                        case ow.ReloadAll:
                             w(m), er.current && m.length > 0 && es(m[0].titleNotification.notificationId), F(0), j(!(null == p ? void 0 : p.nextCursor) || m.length >= 150), Z.current = null != (s = null == p ? void 0 : p.nextCursor) ? s : "", requestAnimationFrame(() => {
                                 G.current && (G.current.scrollTop = 0)
                             });
                             break;
-                        case oI.Refresh:
+                        case ow.Refresh:
                             let y, v;
-                            (null == p ? void 0 : p.nextCursor) || j(!0), y = new Set(E.map(t => t.titleNotification.notificationId)), h = (g = {
+                            (null == p ? void 0 : p.nextCursor) || j(!0), y = new Set(E.map(t => t.titleNotification.notificationId)), f = (g = {
                                 merged: [...v = m.filter(t => !y.has(t.titleNotification.notificationId)), ...E],
                                 freshNotifications: v
-                            }).merged, F(t => t + g.freshNotifications.length), w(h), g.freshNotifications.length > 0 && (L(t => N ? t + g.freshNotifications.length : g.freshNotifications.length), er.current && M(!0));
+                            }).merged, F(t => t + g.freshNotifications.length), w(f), g.freshNotifications.length > 0 && (_(t => N ? t + g.freshNotifications.length : g.freshNotifications.length), er.current && M(!0));
                             break;
                         default:
                             throw Error("Invalid loadNotificationsType: ".concat(String(t)))
@@ -23103,16 +22871,16 @@
                 } catch (t) {
                     k(!0)
                 } finally {
-                    Q.current[t] = !1, A(!1), H(!0), en.current = er.current && t === oI.Refresh
+                    Q.current[t] = !1, A(!1), H(!0), en.current = er.current && t === ow.Refresh
                 }
-            }, [l, es, x, _, D, f, E, i, N, n]), eh = (0, r.useCallback)(t => {
+            }, [l, es, x, L, D, h, E, i, N, n]), ef = (0, r.useCallback)(t => {
                 let n = $.current[t];
                 n && clearTimeout(n), $.current[t] = setTimeout(async () => {
                     delete $.current[t], await em(t)
                 }, 250)
             }, [em]), eg = (0, r.useCallback)(t => {
-                l || I(t), l && eh(oI.Refresh)
-            }, [l, eh, I]), ey = (0, r.useMemo)(() => !ed && "true" !== h && E.length > 0, [ed, h, E.length]);
+                l || I(t), l && ef(ow.Refresh)
+            }, [l, ef, I]), ey = (0, r.useMemo)(() => !ed && "true" !== f && E.length > 0, [ed, f, E.length]);
             (0, r.useEffect)(() => {
                 !l && y && E.length > 0 && el(null == E ? void 0 : E[0].titleNotification.notificationId)
             }, [l, y, E, el]), (0, r.useLayoutEffect)(() => {
@@ -23129,8 +22897,8 @@
             }, [l, E, es]), (0, r.useEffect)(() => {
                 !l && !ee.current && y && P && (ee.current = !0, i(nM(P)))
             }, [l, y, P, i]), (0, r.useEffect)(() => {
-                N || L(0)
-            }, [N, L]), (0, r.useEffect)(() => {
+                N || _(0)
+            }, [N, _]), (0, r.useEffect)(() => {
                 var t, n, r, o;
                 if (er.current = y, !et.current && y && (eo.current = Date.now(), ea.current = null, E.length > 0 && es(E[0].titleNotification.notificationId), Y.current && (null == (t = W.current) || t.focus()), G.current && (G.current.scrollTop = 0, U.current = {
                         scrollTop: 0,
@@ -23139,7 +22907,7 @@
                     let t;
                     M(!1), en.current = !1, es(void 0);
                     let a = eo.current ? Date.now() - eo.current : void 0,
-                        l = null != (n = ea.current) ? n : nE.ClickOutside;
+                        l = null != (n = ea.current) ? n : nC.ClickOutside;
                     i((o = {
                         hasUnSeenNotifications: !1,
                         unreadNotificationCount: E.filter(t => !t.titleNotification.read).length,
@@ -23149,13 +22917,13 @@
                         context: "click",
                         parameters: {
                             ...t,
-                            ...nS(o),
-                            productTeam: nw
+                            ...nw(o),
+                            productTeam: nE
                         }
                     })), eo.current = null, ea.current = null, Y.current && (null == (r = K.current) || r.focus())
                 }
                 et.current = y, Y.current = !1
-            }, [y, E, es, i, M, L, ei]), (0, r.useEffect)(() => {
+            }, [y, E, es, i, M, _, ei]), (0, r.useEffect)(() => {
                 C(!!S && ec !== S)
             }, [ec, S]), (0, r.useEffect)(() => {
                 let t = setInterval(() => {
@@ -23169,23 +22937,23 @@
                     let t = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
                     b && w([]), v(n => {
                         var r;
-                        return n ? (ea.current = nE.BellIcon, "true" !== h && g("true")) : (i({
+                        return n ? (ea.current = nC.BellIcon, "true" !== f && g("true")) : (i({
                             eventType: "OpenNotificationTray",
                             context: "click",
                             parameters: {
-                                ...nS({
+                                ...nw({
                                     hasUnSeenNotifications: b,
                                     unreadNotificationCount: E.filter(t => !t.titleNotification.read).length,
                                     notificationsCount: E.length
                                 }),
-                                productTeam: nw
+                                productTeam: nE
                             }
                         }), C(!1), t && (Y.current = !0, null == (r = W.current) || r.focus())), !n
                     })
-                }, [b, E, i, h, g]),
+                }, [b, E, i, f, g]),
                 eb = (0, r.useCallback)(() => {
-                    v(!1), "true" !== h && g("true")
-                }, [h, g]);
+                    v(!1), "true" !== f && g("true")
+                }, [f, g]);
             (0, r.useEffect)(() => {
                 let t;
                 return !ed && l && ey && !y && E.length > 0 && (ev(), t = setTimeout(() => {
@@ -23200,12 +22968,12 @@
                 return document.addEventListener("click", t), () => {
                     document.removeEventListener("click", t)
                 }
-            }, [y, ev, eb]), (0, r.useEffect)(() => (rv.on("newNotification", eg), () => {
-                rv.removeListener("newNotification", eg)
+            }, [y, ev, eb]), (0, r.useEffect)(() => (rf.on("newNotification", eg), () => {
+                rf.removeListener("newNotification", eg)
             }), [eg]), (0, r.useEffect)(() => {
-                T || x || 0 !== E.length || D || eh(oI.ReloadAll)
-            }, [T, x, eh, E, D]);
-            let eC = y ? ef.NotificationsIcon : eA.NotificationsOutlinedIcon;
+                T || x || 0 !== E.length || D || ef(ow.ReloadAll)
+            }, [T, x, ef, E, D]);
+            let eC = y ? eh.NotificationsIcon : eA.NotificationsOutlinedIcon;
             (0, r.useEffect)(() => {
                 if (O && !V.current) {
                     var t, n;
@@ -23235,7 +23003,7 @@
                 className: u.bellButtonContainer
             }, r.default.createElement("div", {
                 className: "relative"
-            }, r.default.createElement(ts.IconButton, {
+            }, r.default.createElement(tl.IconButton, {
                 variant: "OverMedia",
                 ref: K,
                 size: "Medium",
@@ -23244,9 +23012,9 @@
                 onKeyDown: t => {
                     ("Enter" === t.key || " " === t.key) && (t.preventDefault(), ev(!0))
                 }
-            }), r.default.createElement(oA, {
+            }), r.default.createElement(oI, {
                 count: eS
-            }))), (0, tf.createPortal)(r.default.createElement("div", {
+            }))), (0, tm.createPortal)(r.default.createElement("div", {
                 tabIndex: -1,
                 role: "dialog",
                 className: u.popperContent,
@@ -23256,7 +23024,7 @@
                 style: {
                     display: y ? "block" : "none"
                 }
-            }, r.default.createElement(ox, {
+            }, r.default.createElement(oS, {
                 ref: q,
                 showNewLookTooltip: ey,
                 trayContentFirstFocusableElRef: W,
@@ -23267,7 +23035,7 @@
                 failedToLoad: T,
                 listRef: G,
                 expanded: y,
-                loadPage: eh,
+                loadPage: ef,
                 loadingTray: x || z.current,
                 markAllAsRead: ep,
                 newNotificationExists: b,
@@ -23301,7 +23069,7 @@
             }, b && r.default.createElement(eE.Badge, {
                 variant: "dot",
                 color: "primary"
-            }, r.default.createElement(eC, null)), !b && r.default.createElement(eC, null))), y && r.default.createElement(ox, {
+            }, r.default.createElement(eC, null)), !b && r.default.createElement(eC, null))), y && r.default.createElement(oS, {
                 showNewLookTooltip: ey,
                 trayContentFirstFocusableElRef: W,
                 unseenNotifFrontierIndex: eu,
@@ -23311,7 +23079,7 @@
                 ref: q,
                 failedToLoad: T,
                 listRef: G,
-                loadPage: eh,
+                loadPage: ef,
                 loadingTray: x,
                 markAllAsRead: ep,
                 newNotificationExists: b,
@@ -23329,25 +23097,25 @@
                     show: N,
                     close: () => M(!1),
                     onScrollToTop: () => {
-                        L(0), M(!1)
+                        _(0), M(!1)
                     }
                 }
             }))
         },
-        ok = t => {
+        oA = t => {
             let {
                 children: n
             } = t, {
                 environment: o,
                 signalRCrossTab: a
-            } = tx();
+            } = tI();
             return (0, th.useSignalR)((0, r.useCallback)((t, n) => {
                 if ("CreatorHubTray" === t) {
                     let t = JSON.parse(n);
                     if (!(null == t ? void 0 : t.Action)) {
                         "production" !== o && console.warn("Empty Notification Tray SignalR Message:", n);
                         return
-                    }(!t.Action || "New" === t.Action) && t.NotificationId ? rv.emit("newNotification", t.NotificationId) : "MarkRead" === t.Action && t.NotificationId ? rv.emit("notificationRead", t.NotificationId) : "MarkUnread" === t.Action && t.NotificationId ? rv.emit("notificationUnread", t.NotificationId) : "MarkAllRead" === t.Action ? rv.emit("allNotificationsRead") : "production" !== o && console.warn("Unhandled Notification Tray message:", t)
+                    }(!t.Action || "New" === t.Action) && t.NotificationId ? rf.emit("newNotification", t.NotificationId) : "MarkRead" === t.Action && t.NotificationId ? rf.emit("notificationRead", t.NotificationId) : "MarkUnread" === t.Action && t.NotificationId ? rf.emit("notificationUnread", t.NotificationId) : "MarkAllRead" === t.Action ? rf.emit("allNotificationsRead") : "production" !== o && console.warn("Unhandled Notification Tray message:", t)
                 }
             }, [o]), (0, th.getRealTimeNotificationsBasePath)(o), {
                 crossTab: {
@@ -23356,22 +23124,22 @@
                 }
             }), r.default.createElement(r.default.Fragment, null, n)
         },
-        oD = t => {
+        oT = t => {
             let {
                 user: n,
                 ...o
             } = t, {
                 sendEvent: a,
                 enableNotificationsM2: i
-            } = tx();
-            return null !== n && n.id ? r.default.createElement(rg, null, r.default.createElement(ok, null, r.default.createElement(oT, {
+            } = tI();
+            return null !== n && n.id ? r.default.createElement(rm, null, r.default.createElement(oA, null, r.default.createElement(ox, {
                 userId: n.id,
                 sendEvent: a,
                 enableNotificationsM2: i,
                 ...o
             }))) : null
         },
-        oj = t => {
+        ok = t => {
             let {
                 user: n
             } = t, {
@@ -23380,13 +23148,13 @@
                 Documentation: {
                     assistant: a
                 }
-            } = tY(), {
+            } = tX(), {
                 currentProduct: i,
                 analyticsAssistantChatHref: l,
                 analyticsAssistantChatUniverseId: s,
                 sendEvent: u
-            } = tx();
-            return n && (null != l || tj.includes(i)) ? r.default.createElement(d.IconButton, {
+            } = tI();
+            return n && (null != l || tD.includes(i)) ? r.default.createElement(d.IconButton, {
                 color: "secondary",
                 size: "medium",
                 "aria-label": o("Heading.Assistant"),
@@ -23410,7 +23178,7 @@
                 name: "icon-regular-nebula"
             })) : null
         },
-        oR = t => {
+        oD = t => {
             let {
                 text: n,
                 onSelect: o,
@@ -23423,15 +23191,15 @@
                 disabled: i,
                 className: i ? "pointer-events-none" : void 0
             };
-            return r.default.createElement(ti.PopoverClose, {
+            return r.default.createElement(ta.PopoverClose, {
                 asChild: !0
-            }, a ? r.default.createElement(tl.MenuItem, {
+            }, a ? r.default.createElement(ti.MenuItem, {
                 as: "a",
                 href: a,
                 ...l
-            }) : r.default.createElement(tl.MenuItem, l))
+            }) : r.default.createElement(ti.MenuItem, l))
         },
-        oL = (t, n) => {
+        oj = (t, n) => {
             let r = {
                 ...t
             };
@@ -23444,27 +23212,27 @@
             return r
         };
 
-    function o_(t, n) {
+    function oR(t, n) {
         var r;
-        let o = rL;
-        return t && (o = null != (r = r2.get(t)) ? r : rL), oL(o, n).href
+        let o = rD;
+        return t && (o = null != (r = r$.get(t)) ? r : rD), oj(o, n).href
     }
-    let oF = "creatorHubSwitchedAccounts",
-        oN = "RBXASBlob",
-        oM = "RBXASBlobSynced";
-    var oP = ((ng = {}).CheckLoaded = "checkLoadedRequest", ng.ReadLocalStorage = "readLocalStorageRequest", ng.SetLocalStorage = "setLocalStorageRequest", ng),
-        oB = ((ny = {}).Loaded = "loaded", ny.LocalStorageValue = "localStorageValue", ny.SetLocalStorageValueAck = "setLocalStorageValueAck", ny);
-    class oO extends Error {
+    let o_ = "creatorHubSwitchedAccounts",
+        oL = "RBXASBlob",
+        oF = "RBXASBlobSynced";
+    var oN = ((nf = {}).CheckLoaded = "checkLoadedRequest", nf.ReadLocalStorage = "readLocalStorageRequest", nf.SetLocalStorage = "setLocalStorageRequest", nf),
+        oM = ((ng = {}).Loaded = "loaded", ng.LocalStorageValue = "localStorageValue", ng.SetLocalStorageValueAck = "setLocalStorageValueAck", ng);
+    class oP extends Error {
         constructor(t, r) {
             super("Operation: ".concat(t, " timed out after ").concat(r, " ms.")), (0, n._)(this, "operation", void 0), this.name = "TimeoutError", this.operation = t
         }
     }
 
-    function oH(t, n) {
+    function oB(t, n) {
         let r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 2e4;
         return new Promise((o, a) => {
             let i, l = setTimeout(() => {
-                null == i || i(), a(new oO(t, r))
+                null == i || i(), a(new oP(t, r))
             }, r);
             n({
                 onSuccess: t => {
@@ -23479,15 +23247,15 @@
             })
         })
     }
-    let oU = (t, n) => "https://www.".concat(tL(t, n)),
-        oz = (t, n) => {
+    let oO = (t, n) => "https://www.".concat(tR(t, n)),
+        oH = (t, n) => {
             if (document) {
                 let o = document.getElementById("account-switcher-frame");
                 if (null === o) {
                     var r;
                     let o;
                     return {
-                        accountSwitcherFrame: ((o = document.createElement("iframe")).id = "account-switcher-frame", o.style.cssText = "position: fixed; top: 0; left: 0; width: 0; height: 0; border: none;", o.src = "".concat(oU(t, n), "/account-switcher/iframe"), o.sandbox = "allow-scripts allow-same-origin allow-popups", (null == (r = document) ? void 0 : r.body) ? document.body.appendChild(o) : null),
+                        accountSwitcherFrame: ((o = document.createElement("iframe")).id = "account-switcher-frame", o.style.cssText = "position: fixed; top: 0; left: 0; width: 0; height: 0; border: none;", o.src = "".concat(oO(t, n), "/account-switcher/iframe"), o.sandbox = "allow-scripts allow-same-origin allow-popups", (null == (r = document) ? void 0 : r.body) ? document.body.appendChild(o) : null),
                         wasCreated: !0
                     }
                 }
@@ -23502,13 +23270,13 @@
             }
         };
 
-    function oV(t, n, r, o) {
+    function oU(t, n, r, o) {
         var a;
-        null == t || null == (a = t.contentWindow) || a.postMessage(o, oU(n, r))
+        null == t || null == (a = t.contentWindow) || a.postMessage(o, oO(n, r))
     }
 
-    function oq(t, n, r, o, a) {
-        let i = oU(n, r),
+    function oz(t, n, r, o, a) {
+        let i = oO(n, r),
             l = null == t ? void 0 : t.contentWindow,
             s = t => {
                 if (t.origin !== i || t.source !== l) return;
@@ -23520,84 +23288,84 @@
             };
         return window.addEventListener("message", s), s
     }
-    async function oW(t, n) {
+    async function oV(t, n) {
         let {
             accountSwitcherFrame: r,
             wasCreated: o
-        } = oz(t, n);
-        return o ? oH("checkAccountSwitcherFrameReady", o => {
+        } = oH(t, n);
+        return o ? oB("checkAccountSwitcherFrameReady", o => {
             let {
                 onSuccess: a,
                 onTimeout: i
-            } = o, l = oq(r, t, n, oB.Loaded, (t, n) => {
+            } = o, l = oz(r, t, n, oM.Loaded, (t, n) => {
                 window.removeEventListener("message", n), a(r)
             });
             i(() => {
                 window.removeEventListener("message", l)
-            }), oV(r, t, n, {
-                msg: oP.CheckLoaded
+            }), oU(r, t, n, {
+                msg: oN.CheckLoaded
             })
         }) : r
     }
-    async function oG(t, n) {
-        let r = await oW(t, n);
-        return oH("readRBXASBlob", o => {
+    async function oq(t, n) {
+        let r = await oV(t, n);
+        return oB("readRBXASBlob", o => {
             let {
                 onSuccess: a,
                 onTimeout: i
-            } = o, l = oq(r, t, n, oB.LocalStorageValue, (t, n) => {
-                if (t.key === oN) {
+            } = o, l = oz(r, t, n, oM.LocalStorageValue, (t, n) => {
+                if (t.key === oL) {
                     let r = null !== t.value ? t.value.replaceAll('"', "") : "";
                     window.removeEventListener("message", n), a(r)
                 }
             });
             i(() => {
                 window.removeEventListener("message", l)
-            }), oV(r, t, n, {
-                msg: oP.ReadLocalStorage,
-                key: oN
+            }), oU(r, t, n, {
+                msg: oN.ReadLocalStorage,
+                key: oL
             })
         })
     }
-    async function oK(t, n, r) {
-        let o = await oW(t, n);
-        return oH("syncRBXASBlob", a => {
+    async function oW(t, n, r) {
+        let o = await oV(t, n);
+        return oB("syncRBXASBlob", a => {
             let {
                 onSuccess: i,
                 onTimeout: l
-            } = a, s = !1, u = !1, c = oq(o, t, n, oB.SetLocalStorageValueAck, (t, n) => {
-                t.key === oN ? s = !0 : t.key === oM && (u = !0), s && u && (window.removeEventListener("message", n), i())
+            } = a, s = !1, u = !1, c = oz(o, t, n, oM.SetLocalStorageValueAck, (t, n) => {
+                t.key === oL ? s = !0 : t.key === oF && (u = !0), s && u && (window.removeEventListener("message", n), i())
             });
             l(() => {
                 window.removeEventListener("message", c)
-            }), oV(o, t, n, {
-                msg: oP.SetLocalStorage,
-                key: oN,
+            }), oU(o, t, n, {
+                msg: oN.SetLocalStorage,
+                key: oL,
                 value: '"'.concat(r, '"')
-            }), oV(o, t, n, {
-                msg: oP.SetLocalStorage,
-                key: oM,
+            }), oU(o, t, n, {
+                msg: oN.SetLocalStorage,
+                key: oF,
                 value: "true"
             })
         })
     }
-    let oJ = "accountSwitcher_";
+    let oG = "accountSwitcher_";
 
-    function oZ() {
+    function oK() {
         let {
             target: t,
             robloxEnvironment: n
-        } = tx();
-        return (0, r.useMemo)(() => new tE.DefaultApi(new e6.Configuration({
-            basePath: tz("account-switcher", t, n),
+        } = tI();
+        return (0, r.useMemo)(() => new tC.DefaultApi(new e6.Configuration({
+            basePath: tU("account-switcher", t, n),
             credentials: "include",
             enableMrRouter: !0
         })), [t, n])
     }
 
-    function oX(t) {
+    function oJ(t) {
         var n;
-        let r = oZ(),
+        let r = oK(),
             {
                 user: o,
                 isFetched: a
@@ -23605,25 +23373,25 @@
             {
                 target: i,
                 environment: l
-            } = tx();
+            } = tI();
         return (0, e1.useQuery)({
             enabled: (null == t ? void 0 : t.enabled) && a && null !== o,
             queryFn: async () => {
-                let t = await oG(i, l),
+                let t = await oq(i, l),
                     n = await r.accountSwitchGetLoggedInUsersMetadata({
                         post: {
                             encryptedUsersDataBlob: t,
                             removeInvalidActiveUser: !1
                         }
                     });
-                return n.encryptedUsersDataBlob && t !== n.encryptedUsersDataBlob && await oK(i, l, n.encryptedUsersDataBlob), n
+                return n.encryptedUsersDataBlob && t !== n.encryptedUsersDataBlob && await oW(i, l, n.encryptedUsersDataBlob), n
             },
-            queryKey: ["".concat(oJ, "getLoggedInUsersMetadata")],
+            queryKey: ["".concat(oG, "getLoggedInUsersMetadata")],
             retry: null == t ? void 0 : t.retry,
             staleTime: null != (n = null == t ? void 0 : t.staleTime) ? n : 1e4
         })
     }
-    let oY = t => {
+    let oZ = t => {
             var n, o, a, i;
             let {
                 isLoaded: l,
@@ -23635,16 +23403,16 @@
             } = (0, e$.useTranslation)(), {
                 currentProduct: p,
                 target: m,
-                environment: f,
-                sendEvent: h
-            } = tx(), {
+                environment: h,
+                sendEvent: f
+            } = tI(), {
                 mutate: g,
                 isPending: y,
                 isSuccess: v,
                 variables: b
             } = function(t, n) {
                 let r = (0, e3.useQueryClient)(),
-                    o = oZ(),
+                    o = oK(),
                     {
                         translate: a
                     } = (0, e$.useTranslation)(),
@@ -23653,11 +23421,11 @@
                         target: l,
                         environment: s,
                         sendEvent: u
-                    } = tx(),
-                    [, c] = (0, e0.useSessionStorage)(oF, null);
+                    } = tI(),
+                    [, c] = (0, e0.useSessionStorage)(o_, null);
                 return (0, e4.useMutation)({
                     mutationFn: async t => {
-                        let n = await oG(l, s),
+                        let n = await oq(l, s),
                             r = await o.accountSwitch({
                                 post: {
                                     ...t,
@@ -23666,7 +23434,7 @@
                             });
                         if (!r.encryptedUsersDataBlob) throw Error("Switch accounts failed: encryptedUsersDataBlob was null");
                         if (r.errors && r.errors.length > 0) throw Error("Switch accounts failed: ".concat(r.errors.map(t => "Error code ".concat(t.code, ": ").concat(t.message)).join(", ")));
-                        return await oK(l, s, r.encryptedUsersDataBlob), {
+                        return await oW(l, s, r.encryptedUsersDataBlob), {
                             ...r,
                             encryptedUsersDataBlob: r.encryptedUsersDataBlob
                         }
@@ -23696,7 +23464,7 @@
                             title: a("Message.AccountSwitchFailed"),
                             isError: !0
                         }), r.resetQueries({
-                            queryKey: ["".concat(oJ, "getLoggedInUsersMetadata")]
+                            queryKey: ["".concat(oG, "getLoggedInUsersMetadata")]
                         })
                     },
                     onSuccess: (t, n) => {
@@ -23721,20 +23489,20 @@
                             switchedFromUserId: Number(n.switchedFromUserId),
                             switchedToUserId: Number(n.switchedToUserId)
                         }), setTimeout(() => {
-                            window.open(o_(i, window.location.origin), "_self")
+                            window.open(oR(i, window.location.origin), "_self")
                         }, 100)
                     },
-                    mutationKey: ["".concat(oJ, "useSwitchAccounts")]
+                    mutationKey: ["".concat(oG, "useSwitchAccounts")]
                 })
             }(u, c), {
                 data: C,
                 isSuccess: w,
                 error: S
-            } = oX({
+            } = oJ({
                 enabled: l && s
-            }), [I, x] = (0, r.useState)(!1), A = y || v, T = "https://www.".concat(tL(m, f), "/login?returnUrl=").concat(encodeURIComponent(o_(p, window.location.origin))), k = null != (n = null == C || null == (a = C.loggedInUsersMetadata) ? void 0 : a.map(t => t.userId).sort((t, n) => Number(null != t ? t : 0) - Number(null != n ? n : 0)).join(",")) ? n : "";
+            }), [I, x] = (0, r.useState)(!1), A = y || v, T = "https://www.".concat(tR(m, h), "/login?returnUrl=").concat(encodeURIComponent(oR(p, window.location.origin))), k = null != (n = null == C || null == (a = C.loggedInUsersMetadata) ? void 0 : a.map(t => t.userId).sort((t, n) => Number(null != t ? t : 0) - Number(null != n ? n : 0)).join(",")) ? n : "";
             (0, r.useEffect)(() => {
-                s && S && (h((t => {
+                s && S && (f((t => {
                     let {
                         error: n
                     } = t;
@@ -23751,8 +23519,8 @@
                     title: d("Message.AccountSwitchFailed"),
                     isError: !0
                 }), u(!1))
-            }, [s, S, h, u, c, d]), (0, r.useEffect)(() => {
-                s && w && h((t => {
+            }, [s, S, f, u, c, d]), (0, r.useEffect)(() => {
+                s && w && f((t => {
                     let {
                         userIdsViewedCsv: n
                     } = t;
@@ -23766,13 +23534,13 @@
                 })({
                     userIdsViewedCsv: k
                 }))
-            }, [w, s, h, k]);
+            }, [w, s, f, k]);
             let D = (0, r.useCallback)(t => {
                     t || x(!1), u(t)
                 }, [u]),
                 j = (0, r.useCallback)(t => {
                     var n, r;
-                    h((t => {
+                    f((t => {
                         let {
                             switchedFromUserId: n,
                             switchedToUserId: r,
@@ -23795,9 +23563,9 @@
                         switchedFromUserId: null == C ? void 0 : C.activeUserId,
                         switchedToUserId: t.toString()
                     })
-                }, [null == C ? void 0 : C.activeUserId, h, g, k]),
+                }, [null == C ? void 0 : C.activeUserId, f, g, k]),
                 R = (0, r.useCallback)(() => {
-                    x(!0), h((t => {
+                    x(!0), f((t => {
                         let {
                             userIdsViewedCsv: n
                         } = t;
@@ -23813,21 +23581,21 @@
                     })), setTimeout(() => {
                         window.open(T, "_self")
                     }, 100)
-                }, [T, h, k]),
-                L = (0, r.useCallback)(t => (null == C ? void 0 : C.activeUserId) === t ? r.default.createElement(te.Icon, {
+                }, [T, f, k]),
+                _ = (0, r.useCallback)(t => (null == C ? void 0 : C.activeUserId) === t ? r.default.createElement(te.Icon, {
                     name: "icon-filled-circle-check",
                     size: "Medium",
                     className: "content-emphasis outline-none",
                     "data-testid": "active-user-icon"
                 }) : A && (null == b ? void 0 : b.switchedToUserId) === t ? r.default.createElement("div", {
                     className: "flex justify-center items-center min-width-500 min-height-500"
-                }, r.default.createElement(tu.ProgressCircle, {
+                }, r.default.createElement(ts.ProgressCircle, {
                     ariaLabel: "Switching Accounts",
                     variant: "Indeterminate",
                     size: "Small",
                     "data-testid": "loading-switch-accounts"
                 })) : void 0, [A, null == C ? void 0 : C.activeUserId, null == b ? void 0 : b.switchedToUserId]),
-                _ = (0, r.useMemo)(() => {
+                L = (0, r.useMemo)(() => {
                     var t;
                     let n = null != (t = null == C ? void 0 : C.loggedInUsersMetadata) ? t : [],
                         r = null == C ? void 0 : C.activeUserId;
@@ -23839,7 +23607,7 @@
                 F = !w || !l,
                 N = (null != (o = null == C || null == (i = C.loggedInUsersMetadata) ? void 0 : i.length) ? o : 0) >= 5,
                 M = A || N || F || I;
-            return r.default.createElement(tc.Dialog, {
+            return r.default.createElement(tu.Dialog, {
                 isModal: !0,
                 open: s,
                 size: "Medium",
@@ -23848,21 +23616,21 @@
                 hasMarginBottom: !1,
                 hasMarginTop: !1,
                 onOpenChange: D
-            }, r.default.createElement(tc.DialogContent, null, r.default.createElement(tc.DialogTitle, {
+            }, r.default.createElement(tu.DialogContent, null, r.default.createElement(tu.DialogTitle, {
                 className: "flex items-center text-heading-large padding-x-xlarge margin-none padding-top-medium min-height-1800"
-            }, d("Heading.SwitchAccounts")), r.default.createElement(tc.DialogBody, {
+            }, d("Heading.SwitchAccounts")), r.default.createElement(tu.DialogBody, {
                 className: "!padding-x-none flex flex-col medium:min-width-[480px]"
             }, F ? r.default.createElement("div", {
                 className: "fill flex justify-center items-center min-height-2000"
-            }, r.default.createElement(tu.ProgressCircle, {
+            }, r.default.createElement(ts.ProgressCircle, {
                 ariaLabel: "Loading Account Switcher",
                 variant: "Indeterminate",
                 size: "Medium"
-            })) : r.default.createElement(td.List, null, _.map(t => {
+            })) : r.default.createElement(tc.List, null, L.map(t => {
                 var n, o, a, i;
                 let l = null != (n = null == (i = t.displayName) ? void 0 : i.trim()) ? n : "",
                     s = "" === l ? d("Label.Avatar") : l;
-                return r.default.createElement(td.ListItem, {
+                return r.default.createElement(tc.ListItem, {
                     isContained: !0,
                     divider: "None",
                     key: t.userId,
@@ -23870,21 +23638,21 @@
                     leading: r.default.createElement(E.Avatar, {
                         alt: s,
                         className: "min-width-1200 min-height-1200"
-                    }, r.default.createElement(tm.Thumbnail2d, {
+                    }, r.default.createElement(tp.Thumbnail2d, {
                         targetId: Number(null != (o = t.userId) ? o : 0),
-                        type: tm.ThumbnailTypes.avatarHeadshot,
+                        type: tp.ThumbnailTypes.avatarHeadshot,
                         alt: s
                     })),
-                    trailing: L(null != (a = t.userId) ? a : ""),
+                    trailing: _(null != (a = t.userId) ? a : ""),
                     title: t.displayName,
                     metadata: "@".concat(t.username),
-                    className: (0, tp.clsx)("padding-x-xlarge", A && "pointer-events-none")
+                    className: (0, td.clsx)("padding-x-xlarge", A && "pointer-events-none")
                 })
-            }))), N && r.default.createElement(to.Divider, null), r.default.createElement(tc.DialogFooter, {
+            }))), N && r.default.createElement(tr.Divider, null), r.default.createElement(tu.DialogFooter, {
                 className: "flex flex-col padding-top-xlarge gap-medium"
             }, N && r.default.createElement("div", {
                 className: "text-caption-medium"
-            }, d("Message.AccountLimitReached")), r.default.createElement(tr.Button, {
+            }, d("Message.AccountLimitReached")), r.default.createElement(tn.Button, {
                 as: "a",
                 isDisabled: M,
                 variant: "Standard",
@@ -23894,7 +23662,7 @@
                 "data-testid": "add-account-button"
             }, d("Action.AddAccount")))))
         },
-        oQ = t => {
+        oX = t => {
             let {
                 config: n,
                 setConfig: o
@@ -23904,20 +23672,20 @@
                 title: a,
                 isError: i
             } = n;
-            return r.default.createElement(ta.Snackbar, {
+            return r.default.createElement(to.Snackbar, {
                 shouldAutoDismiss: !0,
                 icon: i ? "icon-regular-triangle-exclamation" : void 0,
                 onClose: () => o(void 0),
                 title: a
             })
         },
-        o$ = () => {
+        oY = () => {
             var t;
             if (!window.navigator) return !1;
             let n = null != (t = window.navigator.userAgent) ? t : "";
             return /RobloxApp\/|ROBLOX\s+\w+\s+App/i.test(n)
         },
-        o0 = t => {
+        oQ = t => {
             var n;
             let {
                 desktopDropdownContent: o,
@@ -23929,59 +23697,59 @@
                 setIsLogoutInProgress: c,
                 setIsPopoverOpen: d,
                 setSnackbarConfig: p
-            } = t, m, f, {
-                translate: h
+            } = t, m, h, {
+                translate: f
             } = (0, e$.useTranslation)(), {
                 currentProduct: g,
                 target: y,
                 robloxEnvironment: v,
                 sendEvent: b
-            } = tx(), {
+            } = tI(), {
                 logout: C,
                 user: E
-            } = (0, eQ.useRobloxAuthentication)(), w = (m = tH(y, v), f = tZ(g) ? "/" : m, "".concat(f, "settings/preferences")), S = (0, r.useCallback)(() => {
-                b(nR)
+            } = (0, eQ.useRobloxAuthentication)(), w = (m = tO(y, v), h = tJ(g) ? "/" : m, "".concat(h, "settings/preferences")), S = (0, r.useCallback)(() => {
+                b(nj)
             }, [b]), I = (0, r.useCallback)(() => {
-                (null == E ? void 0 : E.id) && (b(nL), navigator.clipboard.writeText(E.id.toString())), p({
-                    title: h("Message.UserIdCopied"),
+                (null == E ? void 0 : E.id) && (b(nR), navigator.clipboard.writeText(E.id.toString())), p({
+                    title: f("Message.UserIdCopied"),
                     isError: !1
                 }), d(!1)
-            }, [b, d, p, h, E]), x = (0, r.useCallback)(() => {
+            }, [b, d, p, f, E]), x = (0, r.useCallback)(() => {
                 b(n_), u(!0)
             }, [b, u]), A = (0, r.useCallback)(async () => {
-                b(nF), c(!0), localStorage.removeItem(tR);
+                b(nL), c(!0), localStorage.removeItem(tj);
                 try {
                     await C()
                 } catch (t) {}
                 s && s(), c(!1)
-            }, [C, s, b, c]), T = !o$();
-            return r.default.createElement(tl.Menu, {
+            }, [C, s, b, c]), T = !oY();
+            return r.default.createElement(ti.Menu, {
                 size: "Medium",
                 className: "min-width-[260px]"
-            }, r.default.createElement(tl.MenuSection, null, r.default.createElement(tl.MenuLabel, {
-                title: h("Label.SignedInAs", {
+            }, r.default.createElement(ti.MenuSection, null, r.default.createElement(ti.MenuLabel, {
+                title: f("Label.SignedInAs", {
                     username: null != (n = null == E ? void 0 : E.name) ? n : ""
                 }),
                 disabled: !0
-            }), r.default.createElement(oR, {
-                text: h("Heading.Settings"),
+            }), r.default.createElement(oD, {
+                text: f("Heading.Settings"),
                 onSelect: S,
                 href: w
-            })), r.default.createElement(tl.MenuSeparator, null), o && o.length > 0 && r.default.createElement(r.default.Fragment, null, r.default.createElement(tl.MenuSection, null, o), r.default.createElement(tl.MenuSeparator, null)), r.default.createElement(tl.MenuSection, null, r.default.createElement(oR, {
+            })), r.default.createElement(ti.MenuSeparator, null), o && o.length > 0 && r.default.createElement(r.default.Fragment, null, r.default.createElement(ti.MenuSection, null, o), r.default.createElement(ti.MenuSeparator, null)), r.default.createElement(ti.MenuSection, null, r.default.createElement(oD, {
                 key: "CopyUserId",
-                text: h("Action.CopyUserId"),
+                text: f("Action.CopyUserId"),
                 onSelect: I
-            }), l && (!a || i) ? r.default.createElement(oR, {
+            }), l && (!a || i) ? r.default.createElement(oD, {
                 key: "SwitchAccounts",
-                text: h("Action.SwitchAccounts"),
+                text: f("Action.SwitchAccounts"),
                 onSelect: x
-            }) : null), T && r.default.createElement(r.default.Fragment, null, r.default.createElement(tl.MenuSeparator, null), r.default.createElement(tl.MenuSection, null, r.default.createElement(oR, {
+            }) : null), T && r.default.createElement(r.default.Fragment, null, r.default.createElement(ti.MenuSeparator, null), r.default.createElement(ti.MenuSection, null, r.default.createElement(oD, {
                 key: "LogOut",
-                text: h("Action.LogOut"),
+                text: f("Action.LogOut"),
                 onSelect: A
             }))))
         },
-        o1 = t => {
+        o$ = t => {
             let {
                 isOpen: n,
                 switchedFromUserId: o,
@@ -23990,7 +23758,7 @@
                 translate: i
             } = (0, e$.useTranslation)(), {
                 sendEvent: l
-            } = tx(), [s, u] = (0, r.useState)(!1);
+            } = tI(), [s, u] = (0, r.useState)(!1);
             (0, r.useEffect)(() => {
                 n && l((t => {
                     var n;
@@ -24036,20 +23804,20 @@
                 d = (0, r.useCallback)(t => {
                     t.preventDefault()
                 }, []);
-            return r.default.createElement(tc.Dialog, {
+            return r.default.createElement(tu.Dialog, {
                 isModal: !0,
                 open: n,
                 size: "Small",
                 hasCloseAffordance: !1
-            }, r.default.createElement(tc.DialogContent, {
+            }, r.default.createElement(tu.DialogContent, {
                 onOpenAutoFocus: d
-            }, r.default.createElement(tc.DialogTitle, {
+            }, r.default.createElement(tu.DialogTitle, {
                 className: "text-heading-medium padding-x-large padding-top-large margin-none outline-none"
-            }, i("Heading.RefreshNeeded")), r.default.createElement(tc.DialogBody, {
+            }, i("Heading.RefreshNeeded")), r.default.createElement(tu.DialogBody, {
                 className: "padding-top-xsmall"
-            }, i("Message.ThisPageWillRefresh")), r.default.createElement(tc.DialogFooter, {
+            }, i("Message.ThisPageWillRefresh")), r.default.createElement(tu.DialogFooter, {
                 className: "flex"
-            }, r.default.createElement(tr.Button, {
+            }, r.default.createElement(tn.Button, {
                 variant: "Emphasis",
                 isDisabled: s,
                 onClick: s ? void 0 : c,
@@ -24057,8 +23825,8 @@
                 "data-testid": "refresh-dialog-button"
             }, i("Action.Ok")))))
         },
-        o2 = "flex justify-center items-center min-width-1900 min-height-1200",
-        o4 = t => {
+        o0 = "flex justify-center items-center min-width-1900 min-height-1200",
+        o1 = t => {
             var n;
             let {
                 desktopDropdownContent: o,
@@ -24069,19 +23837,19 @@
             } = (0, e$.useTranslation)(), {
                 currentProduct: s,
                 sendEvent: u
-            } = tx(), {
+            } = tI(), {
                 login: c,
                 user: d,
                 isFetched: p
             } = (0, eQ.useRobloxAuthentication)(), {
                 data: m,
-                isSuccess: f
+                isSuccess: h
             } = (t => {
                 let {
                     target: n,
                     robloxEnvironment: o
-                } = tx(), a = (0, r.useMemo)(() => new e8.UsersApi(new e6.Configuration({
-                    basePath: tV("users", n, o),
+                } = tI(), a = (0, r.useMemo)(() => new e8.UsersApi(new e6.Configuration({
+                    basePath: tz("users", n, o),
                     credentials: "include",
                     enableMrRouter: !0
                 })), [o, n]);
@@ -24107,7 +23875,7 @@
             })({
                 enabled: p && null !== d && "Forum" !== s,
                 refetchOnWindowFocus: !0
-            }), h = !o$() && !(() => {
+            }), f = !oY() && !(() => {
                 var t;
                 if (!window.navigator) return !1;
                 let n = null != (t = window.navigator.userAgent) ? t : "",
@@ -24127,33 +23895,33 @@
                 let {
                     target: n,
                     environment: o
-                } = tx(), [a, i] = (0, r.useState)(!1), [l, s] = (0, r.useState)(!1);
+                } = tI(), [a, i] = (0, r.useState)(!1), [l, s] = (0, r.useState)(!1);
                 return (0, r.useEffect)(() => {
                     if (!t) return;
                     let {
                         accountSwitcherFrame: r,
                         wasCreated: a
-                    } = oz(n, o);
-                    oq(r, n, o, oB.Loaded, (t, n) => {
+                    } = oH(n, o);
+                    oz(r, n, o, oM.Loaded, (t, n) => {
                         let {
                             enabled: r
                         } = t;
                         i(!0), s(r), window.removeEventListener("message", n)
-                    }), a || oV(r, n, o, {
-                        msg: oP.CheckLoaded
+                    }), a || oU(r, n, o, {
+                        msg: oN.CheckLoaded
                     })
                 }, [t, n, o]), {
                     isLoaded: a,
                     isEnabled: l
                 }
-            }(h && v);
-            oX({
-                enabled: h && C
+            }(f && v);
+            oJ({
+                enabled: f && C
             });
-            let [w, S] = (0, r.useState)(void 0), [I, x] = (0, r.useState)(0), [A, T] = (0, r.useState)(!1), [k, D] = (0, e0.useSessionStorage)(oF, null), j = !p || A;
+            let [w, S] = (0, r.useState)(void 0), [I, x] = (0, r.useState)(0), [A, T] = (0, r.useState)(!1), [k, D] = (0, e0.useSessionStorage)(o_, null), j = !p || A;
             (0, r.useEffect)(() => {
-                p && f && (null == d ? void 0 : d.id) !== (null == m ? void 0 : m.id) && x(2)
-            }, [null == m ? void 0 : m.id, f, p, null == d ? void 0 : d.id]), (0, r.useEffect)(() => {
+                p && h && (null == d ? void 0 : d.id) !== (null == m ? void 0 : m.id) && x(2)
+            }, [null == m ? void 0 : m.id, h, p, null == d ? void 0 : d.id]), (0, r.useEffect)(() => {
                 var t;
                 p && i && null !== k && (null == d ? void 0 : d.id) !== (null == k ? void 0 : k.switchedFromUserId) && ((null == d ? void 0 : d.id) === (null == k ? void 0 : k.switchedToUserId) && S({
                     title: l("Message.YouSwitchedTo", {
@@ -24165,62 +23933,62 @@
             let R = (0, r.useCallback)(t => {
                     x(+!!t)
                 }, []),
-                L = (0, r.useCallback)(t => {
+                _ = (0, r.useCallback)(t => {
                     "Tab" === t.key && y(!1)
                 }, []),
-                _ = (0, r.useCallback)(t => {
-                    t && (u(nj), b(!0)), y(t)
+                L = (0, r.useCallback)(t => {
+                    t && (u(nD), b(!0)), y(t)
                 }, [u]);
             return j ? r.default.createElement("div", {
-                className: o2
-            }, r.default.createElement(tu.ProgressCircle, {
+                className: o0
+            }, r.default.createElement(ts.ProgressCircle, {
                 ariaLabel: "Loading Navigation",
                 variant: "Indeterminate",
                 size: "Medium"
             })) : null === d ? r.default.createElement("div", {
-                className: o2
-            }, r.default.createElement(tr.Button, {
+                className: o0
+            }, r.default.createElement(tn.Button, {
                 size: "Large",
                 variant: "Utility",
                 onClick: () => c()
-            }, l("Action.LogIn"))) : r.default.createElement(r.default.Fragment, null, r.default.createElement(oQ, {
+            }, l("Action.LogIn"))) : r.default.createElement(r.default.Fragment, null, r.default.createElement(oX, {
                 config: w,
                 setConfig: S
-            }), r.default.createElement(oY, {
+            }), r.default.createElement(oZ, {
                 isLoaded: C,
                 isOpen: 1 === I,
                 setIsOpen: R,
                 setSnackbarConfig: S
-            }), r.default.createElement(o1, {
+            }), r.default.createElement(o$, {
                 isOpen: 2 === I,
                 switchedFromUserId: d.id,
                 switchedToUserId: null == m ? void 0 : m.id
             }), r.default.createElement("div", {
-                className: o2
-            }, r.default.createElement(ti.Popover, {
+                className: o0
+            }, r.default.createElement(ta.Popover, {
                 open: g,
-                onOpenChange: _
-            }, r.default.createElement(ti.PopoverTrigger, {
+                onOpenChange: L
+            }, r.default.createElement(ta.PopoverTrigger, {
                 asChild: !0
-            }, r.default.createElement(tr.Button, {
+            }, r.default.createElement(tn.Button, {
                 size: "Large",
                 variant: "Utility"
             }, r.default.createElement(n$, {
                 creator: {
                     creatorId: null != (n = d.id) ? n : 0,
                     creatorName: d.name,
-                    creatorType: tQ
+                    creatorType: tY
                 }
-            }))), r.default.createElement(ti.PopoverContent, {
+            }))), r.default.createElement(ta.PopoverContent, {
                 side: "bottom",
                 align: "end",
                 ariaLabel: l("Label.NavigationMenu"),
-                onKeyDown: L
-            }, r.default.createElement(o0, {
+                onKeyDown: _
+            }, r.default.createElement(oQ, {
                 desktopDropdownContent: o,
                 isAccountSwitcherFrameLoaded: C,
                 isAccountSwitcherEnabled: E,
-                isAccountSwitcherSupported: h,
+                isAccountSwitcherSupported: f,
                 onLogout: a,
                 setIsDialogOpen: R,
                 setIsLogoutInProgress: T,
@@ -24228,7 +23996,7 @@
                 setSnackbarConfig: S
             })))))
         },
-        o3 = t => {
+        o2 = t => {
             let {
                 menuItems: n,
                 onLogout: o
@@ -24238,23 +24006,23 @@
                     onClick: o,
                     label: a
                 } = t;
-                return r.default.createElement(oR, {
+                return r.default.createElement(oD, {
                     key: n,
                     text: a,
                     onSelect: o,
                     href: n
                 })
             });
-            return r.default.createElement(o4, {
+            return r.default.createElement(o1, {
                 desktopDropdownContent: a,
                 onLogout: o
             })
         },
-        o5 = (0, i.makeStyles)()(t => ({
+        o4 = (0, i.makeStyles)()(t => ({
             header: {
                 fontSize: "24px",
                 fontWeight: 600,
-                gridArea: tk,
+                gridArea: tT,
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
@@ -24294,7 +24062,7 @@
                 marginLeft: "0px"
             }
         })),
-        o6 = [{
+        o3 = [{
             path: "https://www.roblox.com/info/terms",
             title: "Label.Terms"
         }, {
@@ -24307,16 +24075,16 @@
             path: "https://www.roblox.com/info/help",
             title: "Label.Support"
         }],
-        o8 = [...o6, {
+        o5 = [...o3, {
             path: "https://en.help.roblox.com/hc/de/articles/4401758349844-Impressum",
             title: "Label.Impressum"
         }],
-        o7 = {
+        o6 = {
             path: "https://www.youtube.com/Roblox",
             title: "YouTube",
-            icon: e_.YouTubeIcon
+            icon: eL.YouTubeIcon
         },
-        o9 = [{
+        o8 = [{
             path: "https://x.com/Roblox",
             title: "X",
             icon: eD.XIcon
@@ -24331,9 +24099,9 @@
         }, {
             path: "https://www.instagram.com/roblox/",
             title: "Instagram",
-            icon: eL.InstagramIcon
-        }, o7],
-        ae = (0, i.makeStyles)()(t => ({
+            icon: e_.InstagramIcon
+        }, o6],
+        o7 = (0, i.makeStyles)()(t => ({
             root: {
                 backgroundColor: t.palette.surface[0],
                 width: "100%",
@@ -24392,9 +24160,9 @@
             }
         }));
 
-    function at() {}
+    function o9() {}
 
-    function an(t) {
+    function ae(t) {
         let {
             className: n,
             behavior: o,
@@ -24406,13 +24174,13 @@
         } = (0, e$.useLocalization)(), {
             environment: c,
             target: p
-        } = tx(), m = (0, r.useMemo)(() => {
+        } = tI(), m = (0, r.useMemo)(() => {
             var t;
-            return null != (t = null == o ? void 0 : o.settingsLink) ? t : "https://".concat(tL(p, c), "/my/account")
+            return null != (t = null == o ? void 0 : o.settingsLink) ? t : "https://".concat(tR(p, c), "/my/account")
         }, [null == o ? void 0 : o.settingsLink, c, p]), {
             classes: {
-                root: f,
-                container: h,
+                root: h,
+                container: f,
                 separator: g,
                 companyInfo: y,
                 copyright: v,
@@ -24420,15 +24188,15 @@
                 social: C
             },
             cx: w
-        } = ae();
+        } = o7();
         return r.default.createElement(s.Grid, {
             classes: {
-                root: w(f, n)
+                root: w(h, n)
             },
             container: !0,
             justifyContent: "center"
         }, r.default.createElement(s.Grid, {
-            className: h,
+            className: f,
             container: !0
         }, r.default.createElement(s.Grid, {
             className: y
@@ -24437,10 +24205,10 @@
             variant: "footer",
             color: "secondary"
         }, i("Description.CopyrightMessage", {
-            copyrightYear: "".concat((0, tC.getCurrentYear)())
+            copyrightYear: "".concat((0, tb.getCurrentYear)())
         })), r.default.createElement(s.Grid, {
             className: b
-        }, ((null == o ? void 0 : o.showGermanyOnlyLink) === !0 ? o8 : o6).reduce((t, n, o, a) => {
+        }, ((null == o ? void 0 : o.showGermanyOnlyLink) === !0 ? o5 : o3).reduce((t, n, o, a) => {
             let {
                 path: s,
                 title: u
@@ -24466,7 +24234,7 @@
             color: "secondary"
         }, "·"), a))), r.default.createElement(s.Grid, {
             className: C
-        }, o9.map(t => {
+        }, o8.map(t => {
             let {
                 path: n,
                 title: a,
@@ -24493,10 +24261,10 @@
             avatar: r.default.createElement(E.Avatar, {
                 alt: "language"
             }, r.default.createElement(et.LanguageIcon, null)),
-            onClick: at
+            onClick: o9
         })))))
     }
-    let ar = [{
+    let at = [{
             title: "Label.CreatorHub",
             links: [{
                 path: "https://create.roblox.com",
@@ -24575,7 +24343,7 @@
                 title: "Heading.Licenses"
             }]
         }],
-        ao = (0, i.makeStyles)()(t => ({
+        an = (0, i.makeStyles)()(t => ({
             root: {
                 backgroundColor: t.palette.surface[0],
                 width: "100%",
@@ -24599,7 +24367,7 @@
             }
         }));
 
-    function aa(t) {
+    function ar(t) {
         let {
             className: n
         } = t, {
@@ -24611,7 +24379,7 @@
                 accordion: u
             },
             cx: c
-        } = ao(), d = (0, m.useMediaQuery)(t => t.breakpoints.down("Medium"));
+        } = an(), d = (0, m.useMediaQuery)(t => t.breakpoints.down("Medium"));
         return r.default.createElement(s.Grid, {
             classes: {
                 root: c(a, n)
@@ -24621,7 +24389,7 @@
             justifyContent: "center"
         }, r.default.createElement(s.Grid, {
             className: i
-        }, d ? ar.map(t => {
+        }, d ? at.map(t => {
             let {
                 title: n,
                 links: a
@@ -24647,7 +24415,7 @@
                     variant: "footer"
                 }, o(a))))
             }))))
-        }) : ar.map(t => {
+        }) : at.map(t => {
             let {
                 title: n,
                 links: a
@@ -24675,7 +24443,7 @@
             }))
         })))
     }
-    class ai extends e6.BaseAPI {
+    class ao extends e6.BaseAPI {
         async loadBehavior(t) {
             return (await this.request({
                 path: "/v1/bundles/".concat(t),
@@ -24692,16 +24460,16 @@
             }))
         }
     }
-    let al = {
+    let aa = {
             showGermanyOnlyLink: !1
         },
-        as = (0, i.makeStyles)()(t => ({
+        ai = (0, i.makeStyles)()(t => ({
             root: {
                 display: "flex",
                 flexDirection: "column",
                 flex: 1,
                 minWidth: 0,
-                gridArea: tD,
+                gridArea: tk,
                 padding: "0px 32px",
                 alignItems: "center",
                 overscrollBehavior: "auto contain",
@@ -24738,7 +24506,7 @@
                 zIndex: t.zIndex.mobileStepper
             }
         })),
-        au = r.default.forwardRef((t, n) => {
+        al = r.default.forwardRef((t, n) => {
             let {
                 children: o,
                 stickyContent: a,
@@ -24749,17 +24517,17 @@
             } = t, d = function() {
                 let {
                     currentProduct: t
-                } = tx(), {
+                } = tI(), {
                     Dashboard: n,
                     Roblox: o
-                } = tY(), {
+                } = tX(), {
                     data: a,
                     isError: i
                 } = (() => {
                     let {
                         target: t,
                         robloxEnvironment: n
-                    } = tx(), o = (0, r.useMemo)(() => new ai(tz("guac-v2", t, n)), [n, t]);
+                    } = tI(), o = (0, r.useMemo)(() => new ao(tU("guac-v2", t, n)), [n, t]);
                     return (0, e1.useQuery)({
                         queryKey: ["guac", "loadBehavior"],
                         queryFn: () => o.loadBehavior("creator-hub-footer-link")
@@ -24771,8 +24539,8 @@
                     let {
                         target: t,
                         robloxEnvironment: n
-                    } = tx(), o = (0, r.useMemo)(() => new tw.LocaleApi(new e6.Configuration({
-                        basePath: tV("locale", t, n),
+                    } = tI(), o = (0, r.useMemo)(() => new tE.LocaleApi(new e6.Configuration({
+                        basePath: tz("locale", t, n),
                         credentials: "include",
                         enableMrRouter: !0
                     })), [n, t]);
@@ -24784,7 +24552,7 @@
                 return (0, r.useMemo)(() => {
                     let r = ["Documentation", "Assistant"].includes(t),
                         u = r ? n.creatorSettings : o.accountSettings,
-                        c = r ? "https://www.youtube.com/@RobloxLearn" : o7.path;
+                        c = r ? "https://www.youtube.com/@RobloxLearn" : o6.path;
                     if (i && s) return {
                         showGermanyOnlyLink: !0,
                         youTubeLink: c,
@@ -24805,7 +24573,7 @@
                         }
                     }
                     return {
-                        ...al,
+                        ...aa,
                         youTubeLink: c,
                         settingsLink: u
                     }
@@ -24814,15 +24582,15 @@
                 cx: p,
                 classes: {
                     root: m,
-                    content: f,
-                    sticky: h,
+                    content: h,
+                    sticky: f,
                     banner: g
                 }
-            } = as(), {
+            } = ai(), {
                 classes: {
                     scroll: y
                 }
-            } = tA();
+            } = tx();
             return r.default.createElement(s.Grid, {
                 ref: n,
                 id: u,
@@ -24831,7 +24599,7 @@
                 }
             }, a && r.default.createElement(s.Grid, {
                 classes: {
-                    root: h
+                    root: f
                 }
             }, a), l && r.default.createElement(s.Grid, {
                 classes: {
@@ -24839,33 +24607,33 @@
                 }
             }, l), r.default.createElement(s.Grid, {
                 classes: {
-                    root: f
+                    root: h
                 }
-            }, o), i && r.default.createElement(aa, null), r.default.createElement(an, {
+            }, o), i && r.default.createElement(ar, null), r.default.createElement(ae, {
                 behavior: d,
                 additionalLinks: c
             }))
         });
-    au.displayName = "PageContent";
-    let ac = (0, i.makeStyles)()(() => ({
+    al.displayName = "PageContent";
+    let as = (0, i.makeStyles)()(() => ({
             container: {
                 display: "grid",
                 height: "100vh",
                 width: "100vw",
                 overflow: "hidden",
-                gridTemplateAreas: '\n      "'.concat(tT, " ").concat(tk, '"\n      "').concat(tT, " ").concat(tD, '"\n    '),
+                gridTemplateAreas: '\n      "'.concat(tA, " ").concat(tT, '"\n      "').concat(tA, " ").concat(tk, '"\n    '),
                 gridTemplateRows: "auto 1fr",
                 gridTemplateColumns: "auto 1fr"
             }
         })),
-        ad = t => {
+        au = t => {
             let {
                 children: n
             } = t, {
                 classes: {
                     container: a
                 }
-            } = ac(), i = (0, o.usePathname)(), {
+            } = as(), i = (0, o.usePathname)(), {
                 drawerVariant: l,
                 setPrimaryRailOpen: u,
                 setAllToolsOpen: c
@@ -24878,7 +24646,7 @@
                 }
             }, n)
         },
-        ap = t => {
+        ac = t => {
             let {
                 children: n
             } = t, {
@@ -24887,25 +24655,25 @@
                 environment: l,
                 currentProduct: s,
                 creatorHubSearchIxpParams: u
-            } = tx(), c = tL(i, l);
+            } = tI(), c = tR(i, l);
             return r.default.createElement(a.SearchConfigProvider, {
                 robloxSiteDomain: c,
                 currentProduct: s,
                 creatorHubSearchIxpParams: u
-            }, r.default.createElement(a.NavigationSearchProvider, null, r.default.createElement(ad, null, r.default.createElement(o ? a.SearchContainerRaw : a.SearchContainer, null), n)))
+            }, r.default.createElement(a.NavigationSearchProvider, null, r.default.createElement(au, null, r.default.createElement(o ? a.SearchContainerRaw : a.SearchContainer, null), n)))
         },
-        am = t => {
+        ad = t => {
             let {
                 children: n
             } = t;
-            return r.default.createElement(nW, null, r.default.createElement(t7, null, r.default.createElement(ap, null, n)))
+            return r.default.createElement(nW, null, r.default.createElement(t8, null, r.default.createElement(ac, null, n)))
         };
 
-    function af(t) {
+    function ap(t) {
         var n;
-        return t ? "Forum" === t ? "Heading.DeveloperForum" : null != (n = r1.get(t)) ? n : rL.title : rL.title
+        return t ? "Forum" === t ? "Heading.DeveloperForum" : null != (n = rQ.get(t)) ? n : rD.title : rD.title
     }
-    am.Header = t => {
+    ad.Header = t => {
         let {
             children: n,
             menuItems: o,
@@ -24916,10 +24684,10 @@
                 header: c,
                 subItem: p,
                 title: m,
-                hamburgerTitle: f,
-                container: h
+                hamburgerTitle: h,
+                container: f
             }
-        } = o5(), {
+        } = o4(), {
             primaryRailOpen: g,
             drawerVariant: y,
             setPrimaryRailOpen: v
@@ -24932,12 +24700,12 @@
             }
         }, r.default.createElement(s.Grid, {
             classes: {
-                root: h
+                root: f
             }
         }, r.default.createElement(s.Grid, {
             classes: {
                 root: u(m, {
-                    [f]: "persistent" === y && !1
+                    [h]: "persistent" === y && !1
                 })
             }
         }, r.default.createElement(d.IconButton, {
@@ -24950,16 +24718,16 @@
             classes: {
                 root: p
             }
-        }, r.default.createElement(oj, {
+        }, r.default.createElement(ok, {
             user: b
-        }), r.default.createElement(a.HubSearchIcon, null), r.default.createElement(oD, {
+        }), r.default.createElement(a.HubSearchIcon, null), r.default.createElement(oT, {
             user: b,
             size: "medium"
-        }), r.default.createElement(o3, {
+        }), r.default.createElement(o2, {
             onLogout: i,
             menuItems: o
         }))))
-    }, am.PageContent = au, am.Rail = t => {
+    }, ad.PageContent = al, ad.Rail = t => {
         let {
             children: n,
             ...o
@@ -24970,13 +24738,13 @@
         })(), {
             pathname: i
         } = (0, eY.useRouter)();
-        return r.default.createElement(rf, {
+        return r.default.createElement(rd, {
             pathname: i,
             sendEvent: a,
             ...o
         }, n)
     };
-    let ah = t => {
+    let am = t => {
             let {
                 navigationDropdownTabs: n,
                 ...o
@@ -24991,20 +24759,20 @@
                     position: d
                 } = t, p = (0, r.useMemo)(() => {
                     var t;
-                    return t = "luobu" === l ? "production" === s ? r0 : "staging" === s ? rQ : r$ : "production" === s ? rZ : "staging" === s ? rX : rY, u ? t.filter(t => !u.includes(t.key)) : t
+                    return t = "luobu" === l ? "production" === s ? rY : "staging" === s ? rZ : rX : "production" === s ? rG : "staging" === s ? rK : rJ, u ? t.filter(t => !u.includes(t.key)) : t
                 }, [u, s, l]), m = null == (n = window) ? void 0 : n.location.origin;
                 ((null == (o = window) ? void 0 : o.location.host.startsWith("devforum")) || (null == (a = window) ? void 0 : a.location.host.startsWith("music"))) && (m = null == m ? void 0 : m.replace(/(devforum|music)/, "create"));
-                let f = (i = m, p.map(t => oL(t, i)));
+                let h = (i = m, p.map(t => oj(t, i)));
                 if ("luobu" === l) return p;
-                let h = f.findIndex(t => "Forum" === t.key);
-                return "dropdown" === c ? "topNav" === d ? f = f.map(t => "Forum" === t.key ? rJ : t) : f.splice(h + 1, 0, rK) : "tab" === c && f.splice(h + 1, 0, rK), f
+                let f = h.findIndex(t => "Forum" === t.key);
+                return "dropdown" === c ? "topNav" === d ? h = h.map(t => "Forum" === t.key ? rW : t) : h.splice(f + 1, 0, rq) : "tab" === c && h.splice(f + 1, 0, rq), h
             })(o).map(t => ({
                 ...t,
-                type: (null == n ? void 0 : n.includes(t.key)) ? rR.Dropdown : "Basic"
+                type: (null == n ? void 0 : n.includes(t.key)) ? rk.Dropdown : "Basic"
             }))
         },
-        ag = /^\/docs\/([a-z]{2}-[a-z]{2,3})/,
-        ay = (0, i.makeStyles)()(t => ({
+        ah = /^\/docs\/([a-z]{2}-[a-z]{2,3})/,
+        af = (0, i.makeStyles)()(t => ({
             button: {
                 paddingTop: "18px",
                 paddingBottom: "18px",
@@ -25025,15 +24793,15 @@
                 color: t.palette.content.muted
             }
         })),
-        av = t => {
+        ag = t => {
             let {
                 tab: n,
                 focused: o
             } = t, {
                 sendEvent: a
-            } = tx(), {
+            } = tI(), {
                 translate: i
-            } = (0, e$.useTranslation)(), s = i(n.title), [u, c] = (0, r.useState)(!1), [d, p] = (0, r.useState)(!1), [m, f] = (0, r.useState)(!1), [h, g] = (0, r.useState)(!1), v = "top-navigation-dropdown-tab-button-".concat(n.key), b = "top-navigation-dropdown-tab-menu-".concat(n.key), {
+            } = (0, e$.useTranslation)(), s = i(n.title), [u, c] = (0, r.useState)(!1), [d, p] = (0, r.useState)(!1), [m, h] = (0, r.useState)(!1), [f, g] = (0, r.useState)(!1), v = "top-navigation-dropdown-tab-button-".concat(n.key), b = "top-navigation-dropdown-tab-menu-".concat(n.key), {
                 classes: {
                     selected: C,
                     unselected: E,
@@ -25041,9 +24809,9 @@
                     title: S
                 },
                 cx: I
-            } = ay(), x = (0, r.useRef)(null), A = (0, r.useCallback)(() => {
-                c(!1), a(nx(n.key)), setTimeout(() => {
-                    let t, r = (null == (t = window.location.pathname.match(ag)) ? void 0 : t[1]) || "",
+            } = af(), x = (0, r.useRef)(null), A = (0, r.useCallback)(() => {
+                c(!1), a(nI(n.key)), setTimeout(() => {
+                    let t, r = (null == (t = window.location.pathname.match(ah)) ? void 0 : t[1]) || "",
                         o = n.tabPath ? "".concat(n.href).concat(n.tabPath) : n.href,
                         a = r ? "".concat(o, "/").concat(r) : o;
                     window.open(a, "_self")
@@ -25061,18 +24829,18 @@
             }, [T]), j = (0, r.useCallback)(() => {
                 p(!1), m || k()
             }, [m, k]), R = (0, r.useCallback)(() => {
-                g(!1), f(!0), T()
-            }, [T]), L = (0, r.useCallback)(() => {
-                f(!1), d || k()
-            }, [d, k]), _ = (0, r.useCallback)(() => {
-                h ? T() : A()
-            }, [h, A, T]), F = t => "Escape" === t.key || "Tab" === t.key, N = (0, r.useCallback)(t => {
+                g(!1), h(!0), T()
+            }, [T]), _ = (0, r.useCallback)(() => {
+                h(!1), d || k()
+            }, [d, k]), L = (0, r.useCallback)(() => {
+                f ? T() : A()
+            }, [f, A, T]), F = t => "Escape" === t.key || "Tab" === t.key, N = (0, r.useCallback)(t => {
                 g(!0), F(t) && k()
             }, [k]), M = (0, r.useCallback)(t => {
                 g(!0), F(t) && k()
             }, [k]);
             return r.default.createElement(r.default.Fragment, null, s && r.default.createElement(y.Button, {
-                onClick: _,
+                onClick: L,
                 onMouseEnter: D,
                 onMouseLeave: j,
                 onKeyDown: N,
@@ -25088,24 +24856,24 @@
                 variant: "largeLabel1"
             }, s), r.default.createElement(eB.ArrowDropDownRoundedIcon, {
                 className: o ? C : E
-            })), n.dropdownContentComponent && r.default.createElement(rE, {
+            })), n.dropdownContentComponent && r.default.createElement(rv, {
                 anchorRef: x.current,
                 buttonId: v,
-                isLastMovementKeyboard: h,
+                isLastMovementKeyboard: f,
                 isMenuOpen: u,
                 menuId: b,
                 tab: n,
                 setIsMenuOpen: c,
                 onMouseEnterMenu: R,
-                onMouseLeaveMenu: L,
+                onMouseLeaveMenu: _,
                 onKeyDownMenu: M
             }, r.default.createElement(n.dropdownContentComponent)))
         },
-        ab = t => t.split("-").reduce((t, n) => {
+        ay = t => t.split("-").reduce((t, n) => {
             var r;
             return t + (null != (r = n[0]) ? r : "").toUpperCase() + n.slice(1)
         }, ""),
-        aC = (0, i.makeStyles)()({
+        av = (0, i.makeStyles)()({
             flex: {
                 display: "flex"
             },
@@ -25152,7 +24920,7 @@
                 flexWrap: "nowrap"
             }
         }),
-        aE = (0, r.forwardRef)((t, n) => {
+        ab = (0, r.forwardRef)((t, n) => {
             let {
                 classes: o,
                 flexDirection: a,
@@ -25166,14 +24934,14 @@
                     ...d
                 },
                 cx: p
-            } = aC();
+            } = av();
             return r.default.createElement("div", {
                 ref: n,
-                className: p(c, null == o ? void 0 : o.root, d["flexDirection".concat(ab(null != a ? a : ""))], d["flexWrap".concat(ab(null != i ? i : ""))], d["alignItems".concat(ab(null != s ? s : ""))], d["justifyContent".concat(ab(null != l ? l : ""))])
+                className: p(c, null == o ? void 0 : o.root, d["flexDirection".concat(ay(null != a ? a : ""))], d["flexWrap".concat(ay(null != i ? i : ""))], d["alignItems".concat(ay(null != s ? s : ""))], d["justifyContent".concat(ay(null != l ? l : ""))])
             }, u)
         });
-    aE.displayName = "Flex";
-    let aw = (0, i.makeStyles)()(t => ({
+    ab.displayName = "Flex";
+    let aC = (0, i.makeStyles)()(t => ({
             drawerPaper: {
                 width: "100%",
                 [t.breakpoints.up("Medium")]: {
@@ -25203,7 +24971,7 @@
                 backgroundColor: t.palette.backdropOverlay
             }
         })),
-        aS = t => {
+        aE = t => {
             let {
                 open: n,
                 className: o,
@@ -25215,9 +24983,9 @@
                     drawerPaperBelowAppBar: s,
                     backdrop: u
                 }
-            } = aw(), {
+            } = aC(), {
                 drawerVariant: c
-            } = tx(), d = "belowAppBar" === c;
+            } = tI(), d = "belowAppBar" === c;
             return r.default.createElement(g.Drawer, {
                 className: o,
                 anchor: "left",
@@ -25234,7 +25002,7 @@
                 }
             }, i)
         },
-        aI = (0, i.makeStyles)()(t => ({
+        aw = (0, i.makeStyles)()(t => ({
             root: {
                 width: "100%",
                 height: 60,
@@ -25248,7 +25016,7 @@
                 }
             }
         })),
-        ax = t => {
+        aS = t => {
             let {
                 className: n,
                 children: o
@@ -25257,7 +25025,7 @@
                     root: a
                 },
                 cx: i
-            } = aI();
+            } = aw();
             return r.default.createElement(s.Grid, {
                 className: i(a, n),
                 container: !0,
@@ -25265,12 +25033,12 @@
                 wrap: "nowrap"
             }, o)
         },
-        aA = (0, i.makeStyles)()(t => ({
+        aI = (0, i.makeStyles)()(t => ({
             heading: {
                 padding: t.spacing(0, 0, 0, .5)
             }
         })),
-        aT = t => {
+        ax = t => {
             let {
                 header: n,
                 onClickClose: o
@@ -25278,8 +25046,8 @@
                 classes: {
                     heading: a
                 }
-            } = aA();
-            return r.default.createElement(ax, null, r.default.createElement(s.Grid, {
+            } = aI();
+            return r.default.createElement(aS, null, r.default.createElement(s.Grid, {
                 container: !0,
                 alignItems: "center",
                 wrap: "nowrap",
@@ -25303,7 +25071,7 @@
                 size: "large"
             }, r.default.createElement(p.CloseIcon, null)))))
         },
-        ak = (0, i.makeStyles)()(t => ({
+        aA = (0, i.makeStyles)()(t => ({
             drawerContent: {
                 padding: t.spacing(0, 3)
             },
@@ -25314,7 +25082,7 @@
                 padding: t.spacing(0, 3)
             }
         })),
-        aD = t => {
+        aT = t => {
             let {
                 open: n,
                 onClickClose: o,
@@ -25328,18 +25096,18 @@
                     backButtonContainer: p,
                     dividerContainer: m
                 }
-            } = ak(), {
-                translate: f
-            } = (0, e$.useTranslation)(), h = af(c);
-            return r.default.createElement(aS, {
+            } = aA(), {
+                translate: h
+            } = (0, e$.useTranslation)(), f = ap(c);
+            return r.default.createElement(aE, {
                 open: n,
                 onClose: o
-            }, r.default.createElement(aT, {
-                header: r.default.createElement(rb, {
-                    content: h
+            }, r.default.createElement(ax, {
+                header: r.default.createElement(rg, {
+                    content: f
                 }),
                 onClickClose: o
-            }), r.default.createElement(aE, {
+            }), r.default.createElement(ab, {
                 flexDirection: "row",
                 alignItems: "center",
                 classes: {
@@ -25349,22 +25117,22 @@
                 startIcon: r.default.createElement(v.ChevronLeftIcon, null),
                 onClick: a,
                 color: "secondary",
-                "aria-label": f("Action.Back")
+                "aria-label": h("Action.Back")
             }, r.default.createElement(l.Typography, {
                 variant: "captionHeader",
                 color: "primary"
-            }, f(s)))), r.default.createElement("div", {
+            }, h(s)))), r.default.createElement("div", {
                 className: m
             }, r.default.createElement(u.Divider, null)), r.default.createElement("div", {
                 className: d
             }, i))
         },
-        aj = (0, i.makeStyles)()(t => ({
+        ak = (0, i.makeStyles)()(t => ({
             drawerContent: {
                 padding: t.spacing(2, 3)
             }
         })),
-        aR = t => {
+        aD = t => {
             let {
                 open: n,
                 onClickClose: o,
@@ -25374,12 +25142,12 @@
                 classes: {
                     drawerContent: l
                 }
-            } = aj(), s = af(i);
-            return r.default.createElement(aS, {
+            } = ak(), s = ap(i);
+            return r.default.createElement(aE, {
                 open: n,
                 onClose: o
-            }, r.default.createElement(aT, {
-                header: r.default.createElement(rb, {
+            }, r.default.createElement(ax, {
+                header: r.default.createElement(rg, {
                     content: s
                 }),
                 onClickClose: o
@@ -25387,7 +25155,7 @@
                 className: l
             }, a))
         },
-        aL = (0, i.makeStyles)()(t => ({
+        aj = (0, i.makeStyles)()(t => ({
             listItem: {
                 padding: t.spacing(1.5, 1)
             },
@@ -25418,7 +25186,7 @@
                 minWidth: 40
             }
         })),
-        a_ = t => {
+        aR = t => {
             let {
                 open: n,
                 onClickClose: o
@@ -25431,7 +25199,7 @@
                 drawerVariant: d,
                 navigationDropdownTabs: p,
                 sendEvent: m
-            } = tx(), f = ah({
+            } = tI(), h = am({
                 target: i,
                 environment: a,
                 position: "drawer",
@@ -25440,16 +25208,16 @@
                 navigationDropdownTabs: p
             }), {
                 classes: {
-                    listItem: h,
+                    listItem: f,
                     listItemNew: g,
                     listItemIcon: y
                 }
-            } = aL(), [v, b] = (0, r.useState)(new Map), C = (0, r.useCallback)(t => {
+            } = aj(), [v, b] = (0, r.useState)(new Map), C = (0, r.useCallback)(t => {
                 m({
                     eventType: "clickNavList",
                     context: "click",
                     eventValue: t.key
-                }), t.type === rR.Dropdown && t.dropdownContentComponent ? b(n => new Map(n).set(t.key, !0)) : (b(new Map), setTimeout(() => {
+                }), t.type === rk.Dropdown && t.dropdownContentComponent ? b(n => new Map(n).set(t.key, !0)) : (b(new Map), setTimeout(() => {
                     let n = t.tabPath ? "".concat(t.href).concat(t.tabPath) : t.href;
                     window.open(n, "_self")
                 }, 100))
@@ -25458,11 +25226,11 @@
             }, []), w = (0, r.useCallback)(() => {
                 b(new Map), o()
             }, [o]), S = "belowAppBar" === d;
-            return r.default.createElement(aR, {
+            return r.default.createElement(aD, {
                 open: n,
                 onClickClose: w,
                 productKey: "CreatorHub"
-            }, r.default.createElement(x.List, null, f.map(t => {
+            }, r.default.createElement(x.List, null, h.map(t => {
                 let {
                     icon: o
                 } = t, {
@@ -25476,7 +25244,7 @@
                     onClick: n => {
                         n.preventDefault(), C(t)
                     },
-                    className: S ? g : h,
+                    className: S ? g : f,
                     selected: s === t.key
                 }, S && null != o && r.default.createElement(ez.ListItemIcon, {
                     className: y
@@ -25489,9 +25257,9 @@
                 }, r.default.createElement(l.Typography, {
                     color: "primary",
                     variant: "largeLabel1"
-                }, r.default.createElement(rb, {
+                }, r.default.createElement(rg, {
                     content: t.title
-                })))), t.type === rR.Dropdown && t.dropdownContentComponent && r.default.createElement(aD, {
+                })))), t.type === rk.Dropdown && t.dropdownContentComponent && r.default.createElement(aT, {
                     open: n && (v.get(t.key) || !1),
                     onClickBack: () => E(t.key),
                     onClickClose: w,
@@ -25502,13 +25270,13 @@
                 })))
             })))
         },
-        aF = (0, i.makeStyles)()(t => ({
+        a_ = (0, i.makeStyles)()(t => ({
             drawerContent: {
                 padding: t.spacing(2, 3),
                 flexGrow: 1
             }
         })),
-        aN = t => {
+        aL = t => {
             let {
                 open: n,
                 onClickClose: o,
@@ -25518,11 +25286,11 @@
                 classes: {
                     drawerContent: l
                 }
-            } = aF();
-            return r.default.createElement(aS, {
+            } = a_();
+            return r.default.createElement(aE, {
                 open: n,
                 onClose: o
-            }, r.default.createElement(ax, null, r.default.createElement(s.Grid, {
+            }, r.default.createElement(aS, null, r.default.createElement(s.Grid, {
                 container: !0,
                 alignItems: "center",
                 wrap: "nowrap",
@@ -25533,7 +25301,7 @@
             }, r.default.createElement(y.Button, {
                 startIcon: r.default.createElement(eV.ArrowBackIcon, null),
                 onClick: a
-            }, r.default.createElement(rb, {
+            }, r.default.createElement(rg, {
                 content: "Heading.Creator"
             }))), r.default.createElement(s.Grid, {
                 item: !0
@@ -25546,7 +25314,7 @@
                 className: l
             }, i))
         },
-        aM = (0, i.makeStyles)()(t => ({
+        aF = (0, i.makeStyles)()(t => ({
             root: {
                 width: "100%",
                 height: 60,
@@ -25599,7 +25367,7 @@
                 }
             }
         })),
-        aP = (0, i.makeStyles)()(t => ({
+        aN = (0, i.makeStyles)()(t => ({
             tabs: {
                 padding: "6px 0"
             },
@@ -25626,52 +25394,52 @@
                 }
             }
         }));
-    var aB = ((nv = aB || {}).disableProducts = "disableProducts", nv.enableLuobu = "enableLuobu", nv.creatorEventsVariant = "creatorEventsVariant", nv.enableAssistant = "enableAssistant", nv.enableCourses = "enableCourses", nv.enableNotificationsM2 = "enableNotificationsM2", nv),
-        aO = ((nb = aO || {}).enableTalentHubV2M2 = "enableTalentHubV2M2", nb);
-    let aH = tS.z.object({
-            enableNotificationsM2: tS.z.boolean().nullable().default(!1),
-            enableAssistant: tS.z.boolean().default(!1),
-            disableProducts: tS.z.array(tS.z.string()).nullable().default(null),
-            enableLuobu: tS.z.boolean().nullable().default(null),
-            creatorEventsVariant: tS.z.string().nullable().default(null),
-            enableCourses: tS.z.boolean().nullable().default(!1),
-            enableTalentHubV2M2: tS.z.union([tS.z.boolean(), tS.z.number()]).nullable().default(!1),
-            creatorHubSearchIxpParams: tS.z.number().nullable().default(a.DEFAULT_CREATOR_HUB_SEARCH_VERSION)
+    var aM = ((ny = aM || {}).disableProducts = "disableProducts", ny.enableLuobu = "enableLuobu", ny.creatorEventsVariant = "creatorEventsVariant", ny.enableAssistant = "enableAssistant", ny.enableCourses = "enableCourses", ny.enableNotificationsM2 = "enableNotificationsM2", ny),
+        aP = ((nv = aP || {}).enableTalentHubV2M2 = "enableTalentHubV2M2", nv);
+    let aB = tw.z.object({
+            enableNotificationsM2: tw.z.boolean().nullable().default(!1),
+            enableAssistant: tw.z.boolean().default(!1),
+            disableProducts: tw.z.array(tw.z.string()).nullable().default(null),
+            enableLuobu: tw.z.boolean().nullable().default(null),
+            creatorEventsVariant: tw.z.string().nullable().default(null),
+            enableCourses: tw.z.boolean().nullable().default(!1),
+            enableTalentHubV2M2: tw.z.union([tw.z.boolean(), tw.z.number()]).nullable().default(!1),
+            creatorHubSearchIxpParams: tw.z.number().nullable().default(a.DEFAULT_CREATOR_HUB_SEARCH_VERSION)
         }),
-        aU = tS.z.object({
-            disableProducts: tS.z.array(tS.z.string()).default([]),
-            enableLuobu: tS.z.boolean().default(!1),
-            enableNotificationsM2: tS.z.boolean().default(!1),
-            enableAssistant: tS.z.boolean().default(!1),
-            creatorEventsVariant: tS.z.string().nullable().default(null),
-            layoutVariant: tS.z.string().nullable().default(null),
-            enableCourses: tS.z.boolean().default(!1),
-            enableTalentHubV2M2: tS.z.union([tS.z.boolean(), tS.z.number()]).default(!1),
-            creatorHubSearchIxpParams: tS.z.number().nullable().default(a.DEFAULT_CREATOR_HUB_SEARCH_VERSION)
+        aO = tw.z.object({
+            disableProducts: tw.z.array(tw.z.string()).default([]),
+            enableLuobu: tw.z.boolean().default(!1),
+            enableNotificationsM2: tw.z.boolean().default(!1),
+            enableAssistant: tw.z.boolean().default(!1),
+            creatorEventsVariant: tw.z.string().nullable().default(null),
+            layoutVariant: tw.z.string().nullable().default(null),
+            enableCourses: tw.z.boolean().default(!1),
+            enableTalentHubV2M2: tw.z.union([tw.z.boolean(), tw.z.number()]).default(!1),
+            creatorHubSearchIxpParams: tw.z.number().nullable().default(a.DEFAULT_CREATOR_HUB_SEARCH_VERSION)
         }),
-        az = tS.z.preprocess(t => null != t ? t : void 0, tS.z.boolean().optional()).catch(void 0),
-        aV = tS.z.preprocess(t => null != t ? t : void 0, tS.z.number().optional()).catch(void 0),
-        aq = tS.z.preprocess(t => null != t ? t : void 0, tS.z.string().optional()).catch(void 0),
-        aW = tS.z.object({
-            disableProducts: tS.z.preprocess(t => null != t ? t : void 0, tS.z.array(tS.z.string()).optional()).catch(void 0),
-            enableLuobu: az,
-            enableNotificationsM2: az,
-            enableAssistant: az,
-            creatorEventsVariant: aq,
-            layoutVariant: aq
+        aH = tw.z.preprocess(t => null != t ? t : void 0, tw.z.boolean().optional()).catch(void 0),
+        aU = tw.z.preprocess(t => null != t ? t : void 0, tw.z.number().optional()).catch(void 0),
+        az = tw.z.preprocess(t => null != t ? t : void 0, tw.z.string().optional()).catch(void 0),
+        aV = tw.z.object({
+            disableProducts: tw.z.preprocess(t => null != t ? t : void 0, tw.z.array(tw.z.string()).optional()).catch(void 0),
+            enableLuobu: aH,
+            enableNotificationsM2: aH,
+            enableAssistant: aH,
+            creatorEventsVariant: az,
+            layoutVariant: az
         }).catch({}),
-        aG = tS.z.object({
-            enableCourses: az
+        aq = tw.z.object({
+            enableCourses: aH
         }).catch({}),
-        aK = tS.z.object({
-            searchVersion: aV
+        aW = tw.z.object({
+            searchVersion: aU
         }).catch({}),
-        aJ = tS.z.object({
-            enableTalentHubV2M2: tS.z.preprocess(t => null != t ? t : void 0, tS.z.union([tS.z.boolean(), tS.z.number()]).optional()).catch(void 0)
+        aG = tw.z.object({
+            enableTalentHubV2M2: tw.z.preprocess(t => null != t ? t : void 0, tw.z.union([tw.z.boolean(), tw.z.number()]).optional()).catch(void 0)
         }).catch({}),
-        aZ = "_navigation",
-        aX = aH.parse({});
-    async function aY(t, n, r, o) {
+        aK = "_navigation",
+        aJ = aB.parse({});
+    async function aZ(t, n, r, o) {
         let a = t_("product-experimentation-platform", n, r),
             i = Object.values(o).join(","),
             l = "".concat(a, "/v1/projects/1/layers/").concat(t, "/values?parameters=").concat(i),
@@ -25680,22 +25448,22 @@
             });
         return await s.json()
     }
-    async function aQ(t, n, r) {
-        let [o, a, i, l, s] = await Promise.allSettled([aY("CreatorHub.Navigation", t, n, r), aY("CreatorHub.Navigation.User", t, n, r), aY("CreatorHub.CreatorDocumentation.UserId", t, n, {
+    async function aX(t, n, r) {
+        let [o, a, i, l, s] = await Promise.allSettled([aZ("CreatorHub.Navigation", t, n, r), aZ("CreatorHub.Navigation.User", t, n, r), aZ("CreatorHub.CreatorDocumentation.UserId", t, n, {
             enableCourses: "enableCourses"
-        }), aY("CreatorHub.CreatorDocumentation.Search.UserId", t, n, {
+        }), aZ("CreatorHub.CreatorDocumentation.Search.UserId", t, n, {
             searchVersion: "searchVersion"
-        }), aY("CreatorHub.TalentHub.UserId", t, n, aO)]);
+        }), aZ("CreatorHub.TalentHub.UserId", t, n, aP)]);
         return "fulfilled" === o.status && "fulfilled" === a.status && "fulfilled" === i.status && "fulfilled" === l.status && "fulfilled" === s.status ? {
-            ixpParamsValue: aW.parse(o.value),
-            ixpParamsByUserValue: aW.parse(a.value),
-            ixpParamsByUserIdValue: aG.parse(i.value),
-            ixpParamsCreatorHubSearchValue: aK.parse(l.value),
-            ixpParamsTalentHubValue: aJ.parse(s.value)
+            ixpParamsValue: aV.parse(o.value),
+            ixpParamsByUserValue: aV.parse(a.value),
+            ixpParamsByUserIdValue: aq.parse(i.value),
+            ixpParamsCreatorHubSearchValue: aW.parse(l.value),
+            ixpParamsTalentHubValue: aG.parse(s.value)
         } : null
     }
-    async function a$(t, n) {
-        let r = await aQ(t, n, aB);
+    async function aY(t, n) {
+        let r = await aX(t, n, aM);
         if (r) {
             var o, a, i;
             let {
@@ -25705,7 +25473,7 @@
                 ixpParamsCreatorHubSearchValue: s,
                 ixpParamsTalentHubValue: u
             } = r;
-            return aU.parse({
+            return aO.parse({
                 disableProducts: null != (o = t.disableProducts) ? o : n.disableProducts,
                 enableLuobu: t.enableLuobu || n.enableLuobu,
                 enableNotificationsM2: t.enableNotificationsM2 || n.enableNotificationsM2,
@@ -25719,12 +25487,12 @@
         }
         return null
     }
-    let a0 = r.useLayoutEffect,
-        a1 = {
+    let aQ = r.useLayoutEffect,
+        a$ = {
             enabled: !1,
             isFetched: !1
         },
-        a2 = ((0, i.makeStyles)()(t => ({
+        a0 = ((0, i.makeStyles)()(t => ({
             column: {
                 padding: "16px 24px"
             },
@@ -25751,9 +25519,9 @@
                 color: t.palette.text.primary
             }
         })), "navTreeLabel"),
-        a4 = "navTreeContentWithTrailing",
-        a3 = "navTreeExpandOnly",
-        a5 = (0, i.makeStyles)()(t => ({
+        a1 = "navTreeContentWithTrailing",
+        a2 = "navTreeExpandOnly",
+        a4 = (0, i.makeStyles)()(t => ({
             root: {
                 display: "flex",
                 flexDirection: "column",
@@ -25762,19 +25530,19 @@
                     paddingTop: 8,
                     marginLeft: 0
                 },
-                ["& .".concat(a2)]: {
+                ["& .".concat(a0)]: {
                     paddingLeft: 12
                 },
-                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(a2)]: {
+                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(a0)]: {
                     paddingLeft: 24
                 },
-                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a2)]: {
+                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a0)]: {
                     paddingLeft: 36
                 },
-                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a2)]: {
+                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a0)]: {
                     paddingLeft: 48
                 },
-                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a2)]: {
+                ["& .".concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(eK.treeItemClasses.groupTransition, " .").concat(a0)]: {
                     paddingLeft: 60
                 },
                 ["& .".concat(eK.treeItemClasses.content)]: {
@@ -25830,7 +25598,7 @@
                         color: "inherit"
                     }
                 },
-                ["& .".concat(eK.treeItemClasses.content, ".").concat(a4, " .").concat(eK.treeItemClasses.iconContainer, ":not(:empty)")]: {
+                ["& .".concat(eK.treeItemClasses.content, ".").concat(a1, " .").concat(eK.treeItemClasses.iconContainer, ":not(:empty)")]: {
                     paddingLeft: 4
                 },
                 ["& .".concat(eK.treeItemClasses.iconContainer, ":empty")]: {
@@ -25839,13 +25607,13 @@
                     margin: 0,
                     padding: 0
                 },
-                ["&& .".concat(eK.treeItemClasses.content, ".").concat(a3, "[data-focused]:not([data-selected])")]: {
+                ["&& .".concat(eK.treeItemClasses.content, ".").concat(a2, "[data-focused]:not([data-selected])")]: {
                     backgroundColor: "transparent"
                 },
-                ["&& .".concat(eK.treeItemClasses.content, ":hover, && .").concat(eK.treeItemClasses.content, ".").concat(a3, "[data-focused]:not([data-selected]):hover, && .").concat(eK.treeItemClasses.content, "[data-selected], && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused], && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a3, ")")]: {
+                ["&& .".concat(eK.treeItemClasses.content, ":hover, && .").concat(eK.treeItemClasses.content, ".").concat(a2, "[data-focused]:not([data-selected]):hover, && .").concat(eK.treeItemClasses.content, "[data-selected], && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused], && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a2, ")")]: {
                     backgroundColor: "var(--color-shift-200)"
                 },
-                ["&& .".concat(eK.treeItemClasses.content, ":active:hover, && .").concat(eK.treeItemClasses.content, ".").concat(a3, "[data-focused]:not([data-selected]):active:hover, && .").concat(eK.treeItemClasses.content, "[data-selected]:hover, && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused]:hover, && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a3, "):hover")]: {
+                ["&& .".concat(eK.treeItemClasses.content, ":active:hover, && .").concat(eK.treeItemClasses.content, ".").concat(a2, "[data-focused]:not([data-selected]):active:hover, && .").concat(eK.treeItemClasses.content, "[data-selected]:hover, && .").concat(eK.treeItemClasses.content, "[data-selected][data-focused]:hover, && .").concat(eK.treeItemClasses.content, "[data-focused]:not(.").concat(a2, "):hover")]: {
                     backgroundColor: "var(--color-shift-300)"
                 },
                 ["& .".concat(eK.treeItemClasses.label)]: {
@@ -25874,7 +25642,7 @@
                 color: "inherit"
             }
         })),
-        a6 = (0, i.makeStyles)()(() => ({
+        a3 = (0, i.makeStyles)()(() => ({
             link: {
                 fontWeight: "inherit",
                 color: "inherit",
@@ -25980,10 +25748,10 @@
                 }
             }
         })),
-        a8 = t => {
-            t9(t.nativeEvent) && t.stopPropagation()
+        a5 = t => {
+            t7(t.nativeEvent) && t.stopPropagation()
         },
-        a7 = {
+        a6 = {
             timeout: 100,
             easing: {
                 enter: "ease-out",
@@ -26001,10 +25769,10 @@
                 tab: l,
                 labelText: s
             }
-        } = aP(), {
+        } = aN(), {
             currentProduct: u,
             enableAssistant: c
-        } = tx();
+        } = tI();
         return o || c ? r.default.createElement(eW.Tabs, {
             onClick: n,
             className: i,
@@ -26013,7 +25781,7 @@
                 hidden: !0
             }
         }, "g", r.default.createElement(eq.Tab, {
-            value: rP.key,
+            value: rF.key,
             className: l,
             label: r.default.createElement("div", null, r.default.createElement(te.Icon, {
                 name: "icon-regular-nebula",
@@ -26021,17 +25789,17 @@
                 size: "Medium"
             }), r.default.createElement("span", {
                 className: s
-            }, r.default.createElement(rb, {
-                content: rP.title
+            }, r.default.createElement(rg, {
+                content: rF.title
             }))),
             component: "a",
-            href: rP.href
+            href: rF.href
         })) : null
-    }, "AuthenticationStatusContainer", 0, o3, "CreatorHubLayout", 0, am, "CurrentProductName", 0, () => {
+    }, "AuthenticationStatusContainer", 0, o2, "CreatorHubLayout", 0, ad, "CurrentProductName", 0, () => {
         let {
             currentProduct: t
-        } = tx(), n = af(t);
-        return r.default.createElement(rb, {
+        } = tI(), n = ap(t);
+        return r.default.createElement(rg, {
             content: n
         })
     }, "NavigationConfigsProvider", 0, t => {
@@ -26043,10 +25811,10 @@
             compactBreakpoint: s,
             drawerVariant: u = "fullScreen",
             children: c,
-            signalRCrossTab: d = a1,
+            signalRCrossTab: d = a$,
             useStaticTranslations: p = !1,
-            enableGroupModeration: f = !1,
-            analyticsAssistantChatHref: h,
+            enableGroupModeration: h = !1,
+            analyticsAssistantChatHref: f,
             analyticsAssistantChatUniverseId: g
         } = t, y = (0, m.useMediaQuery)(t => t.breakpoints.down(null != s ? s : "Large")), v = null != o ? o : "development" === n ? "sitetest3" : "staging" === n ? "sitetest1" : "production", [b, C] = (0, r.useState)({
             enableAssistant: !1,
@@ -26058,7 +25826,7 @@
             enableTalentHubV2M2: !1,
             creatorHubSearchIxpParams: a.DEFAULT_CREATOR_HUB_SEARCH_VERSION
         }), [E, w] = (0, r.useState)(["Explore"]);
-        a0(() => {
+        aQ(() => {
             let {
                 creatorEventsVariant: t,
                 enableAssistant: r,
@@ -26068,7 +25836,7 @@
                 creatorHubSearchIxpParams: s
             } = function(t, n) {
                 var r;
-                let o = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : aX,
+                let o = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : aJ,
                     a = null != (r = function(t) {
                         try {
                             let n = window.localStorage.getItem(t);
@@ -26076,14 +25844,14 @@
                         } catch (n) {
                             return console.warn("Error reading localStorage key “".concat(t, "”:"), n), null
                         }
-                    }(aZ)) ? r : o;
-                return a$(t, n).then(t => (function(t, n) {
+                    }(aK)) ? r : o;
+                return aY(t, n).then(t => (function(t, n) {
                     try {
                         window.localStorage.setItem(t, JSON.stringify(n))
                     } catch (n) {
                         console.warn("Error setting localStorage key “".concat(t, "”:"), n)
                     }
-                })(aZ, null != t ? t : o)), a
+                })(aK, null != t ? t : o)), a
             }(i, n);
             C({
                 ...b,
@@ -26098,7 +25866,7 @@
         let S = (0, r.useMemo)(() => {
                 let t;
                 return new e9.UnifiedLogger({
-                    eventBaseUrl: (t = tL(i, n), "https://ecsv2.".concat(t)),
+                    eventBaseUrl: (t = tR(i, n), "https://ecsv2.".concat(t)),
                     product: "CreatorHubShell",
                     sessionProductGroup: "CreatorHub"
                 })
@@ -26135,14 +25903,14 @@
                     enableNotificationsM2: null != (r = b.enableNotificationsM2) && r,
                     isCompact: y,
                     signalRCrossTab: d,
-                    enableGroupModeration: f,
-                    analyticsAssistantChatHref: h,
+                    enableGroupModeration: h,
+                    analyticsAssistantChatHref: f,
                     analyticsAssistantChatUniverseId: g,
                     ...x,
                     sendEvent: I
                 }
-            }, [n, v, i, l, b, u, E, y, d, f, h, g, x, I, p]);
-        return r.default.createElement(tI.Provider, {
+            }, [n, v, i, l, b, u, E, y, d, h, f, g, x, I, p]);
+        return r.default.createElement(tS.Provider, {
             value: A
         }, r.default.createElement(nz, null, c))
     }, "NavigationTree", 0, t => {
@@ -26160,8 +25928,8 @@
                 expandIcon: d,
                 collapseIcon: p
             }
-        } = a5(), [m, f] = (0, r.useState)(null != i ? i : []), h = (0, r.useCallback)((t, n) => {
-            o && n.filter(t => !m.includes(t)).forEach(o), a && m.filter(t => !n.includes(t)).forEach(a), f(n)
+        } = a4(), [m, h] = (0, r.useState)(null != i ? i : []), f = (0, r.useCallback)((t, n) => {
+            o && n.filter(t => !m.includes(t)).forEach(o), a && m.filter(t => !n.includes(t)).forEach(a), h(n)
         }, [m, a, o]), g = (0, r.useCallback)((t, n) => {
             u && t && n && u(t, n)
         }, [u]);
@@ -26181,7 +25949,7 @@
                 root: c
             },
             expandedItems: m,
-            onExpandedItemsChange: h,
+            onExpandedItemsChange: f,
             defaultSelectedItems: l,
             selectedItems: null != s ? s : null,
             onSelectedItemsChange: g
@@ -26198,9 +25966,9 @@
             slotProps: d,
             disableSelection: p,
             onClick: m,
-            ...f
+            ...h
         } = t, {
-            cx: h,
+            cx: f,
             classes: {
                 link: g,
                 linkWithExpandIcon: y,
@@ -26212,39 +25980,39 @@
                 category: S,
                 subheading: I
             }
-        } = a6(), x = "smallLabel2" === u, A = s ? rr(s) : void 0, T = null != p ? p : null == o, k = r.default.Children.count(i) > 0, D = (0, r.useCallback)(t => {
+        } = a3(), x = "smallLabel2" === u, A = s ? rr(s) : void 0, T = null != p ? p : null == o, k = r.default.Children.count(i) > 0, D = (0, r.useCallback)(t => {
             let n = t.target instanceof Element ? t.target : null;
             k && (null == n ? void 0 : n.closest(".".concat(eK.treeItemClasses.iconContainer))) || null == m || m(t)
         }, [k, m]), j = r.default.createElement("div", {
-            className: h(v, o ? b : void 0, k ? C : void 0)
+            className: f(v, o ? b : void 0, k ? C : void 0)
         }, r.default.createElement(l.Typography, {
             classes: {
-                root: h(a2, E, x ? S : I)
+                root: f(a0, E, x ? S : I)
             },
             variant: u
         }, a), A ? r.default.createElement("span", {
-            className: h("navTreeTrailing", w)
+            className: f("navTreeTrailing", w)
         }, A) : null);
         return o && (j = r.default.createElement(e7.default, {
-            className: h(g, k ? y : void 0),
+            className: f(g, k ? y : void 0),
             href: o,
-            onClick: a8
+            onClick: a5
         }, j)), r.default.createElement(eX.TreeItem, {
             nodeId: n,
             label: j,
             classes: {
                 ...c,
-                content: h(null == c ? void 0 : c.content, s ? a4 : void 0, T ? a3 : void 0)
+                content: f(null == c ? void 0 : c.content, s ? a1 : void 0, T ? a2 : void 0)
             },
             slotProps: {
                 ...d,
-                groupTransition: a7
+                groupTransition: a6
             },
-            ...f,
+            ...h,
             onClick: D,
             disableSelection: T
         }, i)
-    }, "NotificationBellV2", 0, oD, "PrivateFooter", 0, an, "PublicFooter", 0, aa, "REQUIRED_TRANSLATION_NAMESPACES", 0, ["CreatorDashboard.Navigation", "CreatorDocumentation.Navigation", "CreatorDashboard.Controls", "CreatorDashboard.AssetTypes", "CreatorDocumentation.Search"], "TopNavigation", 0, t => {
+    }, "NotificationBellV2", 0, oT, "PrivateFooter", 0, ae, "PublicFooter", 0, ar, "REQUIRED_TRANSLATION_NAMESPACES", 0, ["CreatorDashboard.Navigation", "CreatorDocumentation.Navigation", "CreatorDashboard.Controls", "CreatorDashboard.AssetTypes", "CreatorDocumentation.Search"], "TopNavigation", 0, t => {
         let {
             rightContent: n,
             bottomContent: o,
@@ -26256,10 +26024,10 @@
                 tabClass: c,
                 header: p,
                 headerButton: m,
-                heading: f
+                heading: h
             },
-            cx: h
-        } = aM(), {
+            cx: f
+        } = aF(), {
             homeDrawerOpen: g,
             productNavigationDrawerOpen: y,
             environment: v,
@@ -26272,48 +26040,48 @@
             sendEvent: x,
             toggleHomeDrawerOpen: A,
             toggleProductNavigationDrawer: T
-        } = tx(), k = (0, r.useMemo)(() => "production" === v ? r_.href : "staging" === v ? rF.href : rN.href, [v]), D = ah({
+        } = tI(), k = (0, r.useMemo)(() => "production" === v ? rj.href : "staging" === v ? rR.href : r_.href, [v]), D = am({
             target: b,
             environment: v,
             position: "topNav",
             disableProducts: E,
             creatorEventsVariant: w,
             navigationDropdownTabs: S
-        }), j = af(C), R = C === tW ? tG : C;
+        }), j = ap(C), R = C === tq ? tW : C;
         (0, r.useEffect)(() => {
-            x(nI)
+            x(nS)
         }, [x]);
-        let L = (0, r.useCallback)(t => {
-                x(nx(t.key)), setTimeout(() => {
+        let _ = (0, r.useCallback)(t => {
+                x(nI(t.key)), setTimeout(() => {
                     window.open(t.href, "_self")
                 }, 100)
             }, [x]),
-            _ = (0, r.useMemo)(() => D.filter(t => I || "Home" !== t.key).map(t => {
+            L = (0, r.useMemo)(() => D.filter(t => I || "Home" !== t.key).map(t => {
                 let n = t.title,
                     o = r.default.createElement(eq.Tab, {
                         className: c,
                         component: "a",
                         href: t.href,
                         onClick: n => {
-                            n.preventDefault(), L(t)
+                            n.preventDefault(), _(t)
                         },
                         key: t.key,
                         value: t.key,
                         tabIndex: 0,
-                        label: r.default.createElement(rb, {
+                        label: r.default.createElement(rg, {
                             content: n
                         })
                     });
-                return t.type === rR.Dropdown ? r.default.createElement(av, {
+                return t.type === rk.Dropdown ? r.default.createElement(ag, {
                     focused: t.key === R,
                     key: t.key,
                     tab: t
                 }) : o
-            }), [I, D, L, c, R]);
+            }), [I, D, _, c, R]);
         if (I) return r.default.createElement("header", {
             className: p
         }, r.default.createElement(s.Grid, {
-            className: h(u, i),
+            className: f(u, i),
             component: "nav",
             container: !0,
             direction: "row",
@@ -26330,7 +26098,7 @@
         }, r.default.createElement(d.IconButton, {
             color: "secondary",
             onClick: () => {
-                null != a ? T(!y) : A(!g), x(nT)
+                null != a ? T(!y) : A(!g), x(nA)
             },
             "aria-label": "menu",
             size: "large"
@@ -26338,11 +26106,11 @@
             classes: {
                 root: m
             },
-            href: o_(C, window.location.origin)
+            href: oR(C, window.location.origin)
         }, r.default.createElement(l.Typography, {
             variant: "h5",
-            className: f
-        }, r.default.createElement(rb, {
+            className: h
+        }, r.default.createElement(rg, {
             content: j
         }))))), r.default.createElement(s.Grid, {
             container: !0,
@@ -26350,25 +26118,25 @@
             wrap: "nowrap"
         }, n)), o, r.default.createElement(s.Grid, {
             id: "top-navigation-drawer"
-        }, a ? r.default.createElement(aN, {
+        }, a ? r.default.createElement(aL, {
             open: y,
             onClickClose: () => {
                 T(!1)
             },
             onClickBack: () => {
-                A(!0), x(nD)
+                A(!0), x(nk)
             }
-        }, a) : null, r.default.createElement(a_, {
+        }, a) : null, r.default.createElement(aR, {
             open: g,
             onClickClose: () => {
                 A(!1)
             }
         })));
-        let F = (null == D ? void 0 : D.find(t => t.key === R && t.type === rR.Dropdown)) !== void 0;
+        let F = (null == D ? void 0 : D.find(t => t.key === R && t.type === rk.Dropdown)) !== void 0;
         return r.default.createElement("header", {
             className: p
         }, r.default.createElement(s.Grid, {
-            className: h(u, i),
+            className: f(u, i),
             component: "nav",
             container: !0,
             direction: "row",
@@ -26383,7 +26151,7 @@
             wrap: "nowrap"
         }, r.default.createElement(q.Link, {
             onClick: () => {
-                x(nk)
+                x(nT)
             },
             classes: {
                 root: m
@@ -26391,8 +26159,8 @@
             href: k
         }, r.default.createElement(M.RobloxIcon, null), r.default.createElement(l.Typography, {
             variant: "hero",
-            className: f
-        }, r.default.createElement(rb, {
+            className: h
+        }, r.default.createElement(rg, {
             content: "Label.Creator"
         }))), r.default.createElement(s.Grid, {
             item: !0,
@@ -26402,11 +26170,11 @@
             TabIndicatorProps: {
                 hidden: !0
             }
-        }, _)))), r.default.createElement(s.Grid, {
+        }, L)))), r.default.createElement(s.Grid, {
             XSmall: "auto",
             item: !0
         }, n)), o)
-    }, "getGroupsQueryKey", 0, tq, "useNavigationConfigs", 0, tx, "useRailContext", 0, nU, "useWorkspaces", 0, t8])
+    }, "getGroupsQueryKey", 0, tV, "useNavigationConfigs", 0, tI, "useRailContext", 0, nU, "useWorkspaces", 0, t6])
 }, 798731, 319332, t => {
     "use strict";
     var n = t.i(2226),
@@ -26421,8 +26189,8 @@
         d = t.i(368987),
         p = t.i(58361),
         m = t.i(357704),
-        f = t.i(126565),
-        h = t.i(572591),
+        h = t.i(126565),
+        f = t.i(572591),
         g = t.i(860952),
         y = t.i(281268),
         v = t.i(13087),
@@ -26439,8 +26207,8 @@
         D = t.i(382058),
         j = t.i(169722),
         R = t.i(559956),
-        L = t.i(291037),
-        _ = t.i(777004),
+        _ = t.i(291037),
+        L = t.i(777004),
         F = t.i(210598),
         N = t.i(125803),
         M = t.i(39128),
@@ -26492,8 +26260,8 @@
         ed = ej(Array.prototype.lastIndexOf),
         ep = ej(Array.prototype.pop),
         em = ej(Array.prototype.push),
-        ef = ej(Array.prototype.splice),
-        eh = Array.isArray,
+        eh = ej(Array.prototype.splice),
+        ef = Array.isArray,
         eg = ej(String.prototype.toLowerCase),
         ey = ej(String.prototype.toString),
         ev = ej(String.prototype.match),
@@ -26522,7 +26290,7 @@
 
     function eR(t, n) {
         let r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : eg;
-        if (ee && ee(t, null), !eh(n)) return t;
+        if (ee && ee(t, null), !ef(n)) return t;
         let o = n.length;
         for (; o--;) {
             let a = n[o];
@@ -26535,7 +26303,7 @@
         return t
     }
 
-    function eL(t) {
+    function e_(t) {
         let n = ei(null);
         for (let o of $(t)) {
             var r = function(t) {
@@ -26571,15 +26339,15 @@
             }();
             let a = r[0],
                 i = r[1];
-            eA(t, a) && (eh(i) ? n[a] = function(t) {
+            eA(t, a) && (ef(i) ? n[a] = function(t) {
                 for (let n = 0; n < t.length; n++) eA(t, n) || (t[n] = null);
                 return t
-            }(i) : i && "object" == typeof i && i.constructor === Object ? n[a] = eL(i) : n[a] = i)
+            }(i) : i && "object" == typeof i && i.constructor === Object ? n[a] = e_(i) : n[a] = i)
         }
         return n
     }
 
-    function e_(t, n) {
+    function eL(t, n) {
         for (; null !== t;) {
             let r = er(t, n);
             if (r) {
@@ -26654,17 +26422,17 @@
             d = r.Element,
             p = r.NodeFilter,
             m = r.NamedNodeMap,
-            f = void 0 === m ? r.NamedNodeMap || r.MozNamedAttrMap : m,
-            h = r.HTMLFormElement,
+            h = void 0 === m ? r.NamedNodeMap || r.MozNamedAttrMap : m,
+            f = r.HTMLFormElement,
             g = r.DOMParser,
             y = r.trustedTypes,
             v = d.prototype,
-            b = e_(v, "cloneNode"),
-            C = e_(v, "remove"),
-            E = e_(v, "nextSibling"),
-            w = e_(v, "childNodes"),
-            S = e_(v, "parentNode"),
-            I = c && c.prototype ? e_(c.prototype, "nodeType") : null;
+            b = eL(v, "cloneNode"),
+            C = eL(v, "remove"),
+            E = eL(v, "nextSibling"),
+            w = eL(v, "childNodes"),
+            S = eL(v, "parentNode"),
+            I = c && c.prototype ? eL(c.prototype, "nodeType") : null;
         if ("function" == typeof u) {
             let t = a.createElement("template");
             t.content && t.content.ownerDocument && (a = t.content.ownerDocument)
@@ -26676,9 +26444,9 @@
             D = A.createDocumentFragment,
             j = A.getElementsByTagName,
             R = i.importNode,
-            L = e2();
+            _ = e2();
         o.isSupported = "function" == typeof $ && "function" == typeof S && T && void 0 !== T.createHTMLDocument;
-        let _ = eX,
+        let L = eX,
             F = null,
             N = eR({}, [...eF, ...eN, ...eM, ...eB, ...eH]),
             M = null,
@@ -26764,23 +26532,23 @@
             tm = function() {
                 let t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
                 if (tc && tc === t) return;
-                t && "object" == typeof t || (t = {}), t = eL(t), tu = "application/xhtml+xml" === (tl = -1 === ts.indexOf(t.PARSER_MEDIA_TYPE) ? "text/html" : t.PARSER_MEDIA_TYPE) ? ey : eg, F = eA(t, "ALLOWED_TAGS") && eh(t.ALLOWED_TAGS) ? eR({}, t.ALLOWED_TAGS, tu) : N, M = eA(t, "ALLOWED_ATTR") && eh(t.ALLOWED_ATTR) ? eR({}, t.ALLOWED_ATTR, tu) : P, tn = eA(t, "ALLOWED_NAMESPACES") && eh(t.ALLOWED_NAMESPACES) ? eR({}, t.ALLOWED_NAMESPACES, ey) : tr, e5 = eA(t, "ADD_URI_SAFE_ATTR") && eh(t.ADD_URI_SAFE_ATTR) ? eR(eL(e6), t.ADD_URI_SAFE_ATTR, tu) : e6, e4 = eA(t, "ADD_DATA_URI_TAGS") && eh(t.ADD_DATA_URI_TAGS) ? eR(eL(e3), t.ADD_DATA_URI_TAGS, tu) : e3, eu = eA(t, "FORBID_CONTENTS") && eh(t.FORBID_CONTENTS) ? eR({}, t.FORBID_CONTENTS, tu) : ej, O = eA(t, "FORBID_TAGS") && eh(t.FORBID_TAGS) ? eR({}, t.FORBID_TAGS, tu) : eL({}), H = eA(t, "FORBID_ATTR") && eh(t.FORBID_ATTR) ? eR({}, t.FORBID_ATTR, tu) : eL({}), es = !!eA(t, "USE_PROFILES") && (t.USE_PROFILES && "object" == typeof t.USE_PROFILES ? eL(t.USE_PROFILES) : t.USE_PROFILES), z = !1 !== t.ALLOW_ARIA_ATTR, V = !1 !== t.ALLOW_DATA_ATTR, q = t.ALLOW_UNKNOWN_PROTOCOLS || !1, W = !1 !== t.ALLOW_SELF_CLOSE_IN_ATTR, G = t.SAFE_FOR_TEMPLATES || !1, K = !1 !== t.SAFE_FOR_XML, J = t.WHOLE_DOCUMENT || !1, Y = t.RETURN_DOM || !1, Q = t.RETURN_DOM_FRAGMENT || !1, ee = t.RETURN_TRUSTED_TYPE || !1, X = t.FORCE_BODY || !1, et = !1 !== t.SANITIZE_DOM, en = t.SANITIZE_NAMED_PROPS || !1, ea = !1 !== t.KEEP_CONTENT, el = t.IN_PLACE || !1, _ = ! function(t) {
+                t && "object" == typeof t || (t = {}), t = e_(t), tu = "application/xhtml+xml" === (tl = -1 === ts.indexOf(t.PARSER_MEDIA_TYPE) ? "text/html" : t.PARSER_MEDIA_TYPE) ? ey : eg, F = eA(t, "ALLOWED_TAGS") && ef(t.ALLOWED_TAGS) ? eR({}, t.ALLOWED_TAGS, tu) : N, M = eA(t, "ALLOWED_ATTR") && ef(t.ALLOWED_ATTR) ? eR({}, t.ALLOWED_ATTR, tu) : P, tn = eA(t, "ALLOWED_NAMESPACES") && ef(t.ALLOWED_NAMESPACES) ? eR({}, t.ALLOWED_NAMESPACES, ey) : tr, e5 = eA(t, "ADD_URI_SAFE_ATTR") && ef(t.ADD_URI_SAFE_ATTR) ? eR(e_(e6), t.ADD_URI_SAFE_ATTR, tu) : e6, e4 = eA(t, "ADD_DATA_URI_TAGS") && ef(t.ADD_DATA_URI_TAGS) ? eR(e_(e3), t.ADD_DATA_URI_TAGS, tu) : e3, eu = eA(t, "FORBID_CONTENTS") && ef(t.FORBID_CONTENTS) ? eR({}, t.FORBID_CONTENTS, tu) : ej, O = eA(t, "FORBID_TAGS") && ef(t.FORBID_TAGS) ? eR({}, t.FORBID_TAGS, tu) : e_({}), H = eA(t, "FORBID_ATTR") && ef(t.FORBID_ATTR) ? eR({}, t.FORBID_ATTR, tu) : e_({}), es = !!eA(t, "USE_PROFILES") && (t.USE_PROFILES && "object" == typeof t.USE_PROFILES ? e_(t.USE_PROFILES) : t.USE_PROFILES), z = !1 !== t.ALLOW_ARIA_ATTR, V = !1 !== t.ALLOW_DATA_ATTR, q = t.ALLOW_UNKNOWN_PROTOCOLS || !1, W = !1 !== t.ALLOW_SELF_CLOSE_IN_ATTR, G = t.SAFE_FOR_TEMPLATES || !1, K = !1 !== t.SAFE_FOR_XML, J = t.WHOLE_DOCUMENT || !1, Y = t.RETURN_DOM || !1, Q = t.RETURN_DOM_FRAGMENT || !1, ee = t.RETURN_TRUSTED_TYPE || !1, X = t.FORCE_BODY || !1, et = !1 !== t.SANITIZE_DOM, en = t.SANITIZE_NAMED_PROPS || !1, ea = !1 !== t.KEEP_CONTENT, el = t.IN_PLACE || !1, L = ! function(t) {
                     try {
                         return ek(t, ""), !0
                     } catch (t) {
                         return !1
                     }
-                }(t.ALLOWED_URI_REGEXP) ? eX : t.ALLOWED_URI_REGEXP, te = "string" == typeof t.NAMESPACE ? t.NAMESPACE : e9, to = eA(t, "MATHML_TEXT_INTEGRATION_POINTS") && t.MATHML_TEXT_INTEGRATION_POINTS && "object" == typeof t.MATHML_TEXT_INTEGRATION_POINTS ? eL(t.MATHML_TEXT_INTEGRATION_POINTS) : eR({}, ["mi", "mo", "mn", "ms", "mtext"]), ta = eA(t, "HTML_INTEGRATION_POINTS") && t.HTML_INTEGRATION_POINTS && "object" == typeof t.HTML_INTEGRATION_POINTS ? eL(t.HTML_INTEGRATION_POINTS) : eR({}, ["annotation-xml"]);
-                let r = eA(t, "CUSTOM_ELEMENT_HANDLING") && t.CUSTOM_ELEMENT_HANDLING && "object" == typeof t.CUSTOM_ELEMENT_HANDLING ? eL(t.CUSTOM_ELEMENT_HANDLING) : ei(null);
-                if (B = ei(null), eA(r, "tagNameCheck") && tp(r.tagNameCheck) && (B.tagNameCheck = r.tagNameCheck), eA(r, "attributeNameCheck") && tp(r.attributeNameCheck) && (B.attributeNameCheck = r.attributeNameCheck), eA(r, "allowCustomizedBuiltInElements") && "boolean" == typeof r.allowCustomizedBuiltInElements && (B.allowCustomizedBuiltInElements = r.allowCustomizedBuiltInElements), G && (V = !1), Q && (Y = !0), es && (F = eR({}, eH), M = ei(null), !0 === es.html && (eR(F, eF), eR(M, eU)), !0 === es.svg && (eR(F, eN), eR(M, ez), eR(M, eq)), !0 === es.svgFilters && (eR(F, eM), eR(M, ez), eR(M, eq)), !0 === es.mathMl && (eR(F, eB), eR(M, eV), eR(M, eq))), U.tagCheck = null, U.attributeCheck = null, eA(t, "ADD_TAGS") && ("function" == typeof t.ADD_TAGS ? U.tagCheck = t.ADD_TAGS : eh(t.ADD_TAGS) && (F === N && (F = eL(F)), eR(F, t.ADD_TAGS, tu))), eA(t, "ADD_ATTR") && ("function" == typeof t.ADD_ATTR ? U.attributeCheck = t.ADD_ATTR : eh(t.ADD_ATTR) && (M === P && (M = eL(M)), eR(M, t.ADD_ATTR, tu))), eA(t, "ADD_URI_SAFE_ATTR") && eh(t.ADD_URI_SAFE_ATTR) && eR(e5, t.ADD_URI_SAFE_ATTR, tu), eA(t, "FORBID_CONTENTS") && eh(t.FORBID_CONTENTS) && (eu === ej && (eu = eL(eu)), eR(eu, t.FORBID_CONTENTS, tu)), eA(t, "ADD_FORBID_CONTENTS") && eh(t.ADD_FORBID_CONTENTS) && (eu === ej && (eu = eL(eu)), eR(eu, t.ADD_FORBID_CONTENTS, tu)), ea && (F["#text"] = !0), J && eR(F, ["html", "head", "body"]), F.table && (eR(F, ["tbody"]), delete O.tbody), t.TRUSTED_TYPES_POLICY) {
+                }(t.ALLOWED_URI_REGEXP) ? eX : t.ALLOWED_URI_REGEXP, te = "string" == typeof t.NAMESPACE ? t.NAMESPACE : e9, to = eA(t, "MATHML_TEXT_INTEGRATION_POINTS") && t.MATHML_TEXT_INTEGRATION_POINTS && "object" == typeof t.MATHML_TEXT_INTEGRATION_POINTS ? e_(t.MATHML_TEXT_INTEGRATION_POINTS) : eR({}, ["mi", "mo", "mn", "ms", "mtext"]), ta = eA(t, "HTML_INTEGRATION_POINTS") && t.HTML_INTEGRATION_POINTS && "object" == typeof t.HTML_INTEGRATION_POINTS ? e_(t.HTML_INTEGRATION_POINTS) : eR({}, ["annotation-xml"]);
+                let r = eA(t, "CUSTOM_ELEMENT_HANDLING") && t.CUSTOM_ELEMENT_HANDLING && "object" == typeof t.CUSTOM_ELEMENT_HANDLING ? e_(t.CUSTOM_ELEMENT_HANDLING) : ei(null);
+                if (B = ei(null), eA(r, "tagNameCheck") && tp(r.tagNameCheck) && (B.tagNameCheck = r.tagNameCheck), eA(r, "attributeNameCheck") && tp(r.attributeNameCheck) && (B.attributeNameCheck = r.attributeNameCheck), eA(r, "allowCustomizedBuiltInElements") && "boolean" == typeof r.allowCustomizedBuiltInElements && (B.allowCustomizedBuiltInElements = r.allowCustomizedBuiltInElements), G && (V = !1), Q && (Y = !0), es && (F = eR({}, eH), M = ei(null), !0 === es.html && (eR(F, eF), eR(M, eU)), !0 === es.svg && (eR(F, eN), eR(M, ez), eR(M, eq)), !0 === es.svgFilters && (eR(F, eM), eR(M, ez), eR(M, eq)), !0 === es.mathMl && (eR(F, eB), eR(M, eV), eR(M, eq))), U.tagCheck = null, U.attributeCheck = null, eA(t, "ADD_TAGS") && ("function" == typeof t.ADD_TAGS ? U.tagCheck = t.ADD_TAGS : ef(t.ADD_TAGS) && (F === N && (F = e_(F)), eR(F, t.ADD_TAGS, tu))), eA(t, "ADD_ATTR") && ("function" == typeof t.ADD_ATTR ? U.attributeCheck = t.ADD_ATTR : ef(t.ADD_ATTR) && (M === P && (M = e_(M)), eR(M, t.ADD_ATTR, tu))), eA(t, "ADD_URI_SAFE_ATTR") && ef(t.ADD_URI_SAFE_ATTR) && eR(e5, t.ADD_URI_SAFE_ATTR, tu), eA(t, "FORBID_CONTENTS") && ef(t.FORBID_CONTENTS) && (eu === ej && (eu = e_(eu)), eR(eu, t.FORBID_CONTENTS, tu)), eA(t, "ADD_FORBID_CONTENTS") && ef(t.ADD_FORBID_CONTENTS) && (eu === ej && (eu = e_(eu)), eR(eu, t.ADD_FORBID_CONTENTS, tu)), ea && (F["#text"] = !0), J && eR(F, ["html", "head", "body"]), F.table && (eR(F, ["tbody"]), delete O.tbody), t.TRUSTED_TYPES_POLICY) {
                     if ("function" != typeof t.TRUSTED_TYPES_POLICY.createHTML) throw eD('TRUSTED_TYPES_POLICY configuration option must provide a "createHTML" hook.');
                     if ("function" != typeof t.TRUSTED_TYPES_POLICY.createScriptURL) throw eD('TRUSTED_TYPES_POLICY configuration option must provide a "createScriptURL" hook.');
                     x = (n = t.TRUSTED_TYPES_POLICY).createHTML("")
                 } else void 0 === n && (n = e1(y, l)), null !== n && "string" == typeof x && (x = n.createHTML(""));
                 eo && eo(t), tc = t
             },
-            tf = eR({}, [...eN, ...eM, ...eP]),
-            th = eR({}, [...eB, ...eO]),
+            th = eR({}, [...eN, ...eM, ...eP]),
+            tf = eR({}, [...eB, ...eO]),
             tg = function(t) {
                 let n = S(t);
                 n && n.tagName || (n = {
@@ -26789,7 +26557,7 @@
                 });
                 let r = eg(t.tagName),
                     o = eg(n.tagName);
-                return !!tn[t.namespaceURI] && (t.namespaceURI === e7 ? n.namespaceURI === e9 ? "svg" === r : n.namespaceURI === e8 ? "svg" === r && ("annotation-xml" === o || to[o]) : !!tf[r] : t.namespaceURI === e8 ? n.namespaceURI === e9 ? "math" === r : n.namespaceURI === e7 ? "math" === r && ta[o] : !!th[r] : t.namespaceURI === e9 ? (n.namespaceURI !== e7 || !!ta[o]) && (n.namespaceURI !== e8 || !!to[o]) && !th[r] && (ti[r] || !tf[r]) : "application/xhtml+xml" === tl && !!tn[t.namespaceURI])
+                return !!tn[t.namespaceURI] && (t.namespaceURI === e7 ? n.namespaceURI === e9 ? "svg" === r : n.namespaceURI === e8 ? "svg" === r && ("annotation-xml" === o || to[o]) : !!th[r] : t.namespaceURI === e8 ? n.namespaceURI === e9 ? "math" === r : n.namespaceURI === e7 ? "math" === r && ta[o] : !!tf[r] : t.namespaceURI === e9 ? (n.namespaceURI !== e7 || !!ta[o]) && (n.namespaceURI !== e8 || !!to[o]) && !tf[r] && (ti[r] || !th[r]) : "application/xhtml+xml" === tl && !!tn[t.namespaceURI])
             },
             ty = function(t) {
                 em(o.removed, {
@@ -26857,7 +26625,7 @@
                 }
             },
             tw = function(t) {
-                return t instanceof h && ("string" != typeof t.nodeName || "string" != typeof t.textContent || "function" != typeof t.removeChild || !(t.attributes instanceof f) || "function" != typeof t.removeAttribute || "function" != typeof t.setAttribute || "string" != typeof t.namespaceURI || "function" != typeof t.insertBefore || "function" != typeof t.hasChildNodes)
+                return t instanceof f && ("string" != typeof t.nodeName || "string" != typeof t.textContent || "function" != typeof t.removeChild || !(t.attributes instanceof h) || "function" != typeof t.removeAttribute || "function" != typeof t.setAttribute || "string" != typeof t.namespaceURI || "function" != typeof t.insertBefore || "function" != typeof t.hasChildNodes)
             },
             tS = function(t) {
                 if (!I || "object" != typeof t || null === t) return !1;
@@ -26875,9 +26643,9 @@
         }
         let tx = function(t) {
                 let n = null;
-                if (tI(L.beforeSanitizeElements, t, null), tw(t)) return ty(t), !0;
+                if (tI(_.beforeSanitizeElements, t, null), tw(t)) return ty(t), !0;
                 let r = tu(t.nodeName);
-                if (tI(L.uponSanitizeElement, t, {
+                if (tI(_.uponSanitizeElement, t, {
                         tagName: r,
                         allowedTags: F
                     }), K && t.hasChildNodes() && !tS(t.firstElementChild) && ek(/<[/\w!]/g, t.innerHTML) && ek(/<[/\w!]/g, t.textContent) || K && t.namespaceURI === e9 && "style" === r && tS(t.firstElementChild) || 7 === t.nodeType || K && 8 === t.nodeType && ek(/<[/\w]/g, t.data)) return ty(t), !0;
@@ -26900,7 +26668,7 @@
                     n = eb(n, t, " ")
                 }), t.textContent !== n && (em(o.removed, {
                     element: t.cloneNode()
-                }), t.textContent = n)), tI(L.afterSanitizeElements, t, null), !1)
+                }), t.textContent = n)), tI(_.afterSanitizeElements, t, null), !1)
             },
             tA = function(t, n, r) {
                 if (H[n] || et && ("id" === n || "name" === n) && (r in a || r in td)) return !1;
@@ -26910,7 +26678,7 @@
                 else if (!o || H[n]) {
                     if (!(tk(t) && (B.tagNameCheck instanceof RegExp && ek(B.tagNameCheck, t) || B.tagNameCheck instanceof Function && B.tagNameCheck(t)) && (B.attributeNameCheck instanceof RegExp && ek(B.attributeNameCheck, n) || B.attributeNameCheck instanceof Function && B.attributeNameCheck(n, t)) || "is" === n && B.allowCustomizedBuiltInElements && (B.tagNameCheck instanceof RegExp && ek(B.tagNameCheck, r) || B.tagNameCheck instanceof Function && B.tagNameCheck(r)))) return !1
                 } else if (e5[n]);
-                else if (ek(_, eb(r, eQ, "")));
+                else if (ek(L, eb(r, eQ, "")));
                 else if (("src" === n || "xlink:href" === n || "href" === n) && "script" !== t && 0 === eC(r, "data:") && e4[t]);
                 else if (q && !ek(eY, eb(r, eQ, "")));
                 else if (r) return !1;
@@ -26921,7 +26689,7 @@
                 return !tT[eg(t)] && ek(e0, t)
             },
             tD = function(t) {
-                tI(L.beforeSanitizeAttributes, t, null);
+                tI(_.beforeSanitizeAttributes, t, null);
                 let r = t.attributes;
                 if (!r || tw(t)) return;
                 let a = {
@@ -26939,7 +26707,7 @@
                         c = l.value,
                         d = tu(s),
                         p = "value" === s ? c : eE(c);
-                    if (a.attrName = d, a.attrValue = p, a.keepAttr = !0, a.forceKeepAttr = void 0, tI(L.uponSanitizeAttribute, t, a), p = a.attrValue, en && ("id" === d || "name" === d) && 0 !== eC(p, er) && (tv(s, t), p = er + p), K && ek(/((--!?|])>)|<\/(style|script|title|xmp|textarea|noscript|iframe|noembed|noframes)/i, p) || "attributename" === d && ev(p, "href")) {
+                    if (a.attrName = d, a.attrValue = p, a.keepAttr = !0, a.forceKeepAttr = void 0, tI(_.uponSanitizeAttribute, t, a), p = a.attrValue, en && ("id" === d || "name" === d) && 0 !== eC(p, er) && (tv(s, t), p = er + p), K && ek(/((--!?|])>)|<\/(style|script|title|xmp|textarea|noscript|iframe|noembed|noframes)/i, p) || "attributename" === d && ev(p, "href")) {
                         tv(s, t);
                         continue
                     }
@@ -26971,13 +26739,13 @@
                         tv(s, t)
                     }
                 }
-                tI(L.afterSanitizeAttributes, t, null)
+                tI(_.afterSanitizeAttributes, t, null)
             },
             tj = function(t) {
                 let n = null,
                     r = tC(t);
-                for (tI(L.beforeSanitizeShadowDOM, t, null); n = r.nextNode();) tI(L.uponSanitizeShadowNode, n, null), tx(n), tD(n), n.content instanceof s && tj(n.content);
-                tI(L.afterSanitizeShadowDOM, t, null)
+                for (tI(_.beforeSanitizeShadowDOM, t, null); n = r.nextNode();) tI(_.uponSanitizeShadowNode, n, null), tx(n), tD(n), n.content instanceof s && tj(n.content);
+                tI(_.afterSanitizeShadowDOM, t, null)
             },
             tR = function(t) {
                 if (1 === t.nodeType && t.shadowRoot instanceof s) {
@@ -27015,7 +26783,7 @@
                         case "function":
                         case "object": {
                             if (null === t) return eT(t);
-                            let n = e_(t, "toString");
+                            let n = eL(t, "toString");
                             if ("function" == typeof n) {
                                 let r = n(t);
                                 return "string" == typeof r ? r : eT(r)
@@ -27059,17 +26827,17 @@
         }, o.isValidAttribute = function(t, n, r) {
             return tc || tm({}), tA(tu(t), tu(n), r)
         }, o.addHook = function(t, n) {
-            "function" == typeof n && em(L[t], n)
+            "function" == typeof n && em(_[t], n)
         }, o.removeHook = function(t, n) {
             if (void 0 !== n) {
-                let r = ed(L[t], n);
-                return -1 === r ? void 0 : ef(L[t], r, 1)[0]
+                let r = ed(_[t], n);
+                return -1 === r ? void 0 : eh(_[t], r, 1)[0]
             }
-            return ep(L[t])
+            return ep(_[t])
         }, o.removeHooks = function(t) {
-            L[t] = []
+            _[t] = []
         }, o.removeAllHooks = function() {
-            L = e2()
+            _ = e2()
         }, o
     }();
     t.s(["default", 0, e4], 319332);
@@ -27093,17 +26861,17 @@
     function tm(t, n) {
         return "".concat("roblox.qq.com" === n ? "https://apis.api.robloxdev.cn" : "https://apis.".concat(n), "/").concat(t)
     }
-    let tf = (0, a.createContext)({
+    let th = (0, a.createContext)({
         robloxSiteDomain: td,
         eventLogger: tc(td),
         currentProduct: "CreatorDashboard",
         creatorHubSearchIxpParams: 1
     });
 
-    function th() {
-        return (0, a.useContext)(tf)
+    function tf() {
+        return (0, a.useContext)(th)
     }
-    tf.displayName = "SearchConfigContext";
+    th.displayName = "SearchConfigContext";
     var tg = ((e6 = {}).DialogClosed = "DocsSearch_DialogClosed", e6.DialogOpened = "DocsSearch_DialogOpened", e6.Performed = "DocsSearch_Performed", e6.ResultClicked = "DocsSearch_ResultClicked", e6.AskAssistantClicked = "DocsSearch_AskAssistant_Clicked", e6.AskAssistantImpression = "DocsSearch_AskAssistant_Impression", e6.CategoryClicked = "DocsSearch_Category_Clicked", e6.CategoryCleared = "DocsSearch_Category_Cleared", e6.QueryCleared = "DocsSearch_Query_Cleared", e6.RecentlyVisitedClicked = "DocsSearch_RecentlyVisited_Clicked", e6.RecentlyVisitedDeleted = "DocsSearch_RecentlyVisited_Deleted", e6.RecentlyVisitedImpression = "DocsSearch_RecentlyVisited_Impression", e6.RecommendationClicked = "DocsSearch_RecommendedSearch_Clicked", e6.RecommendationImpression = "DocsSearch_RecommendedSearch_Impression", e6.ResultItemImpression = "DocsSearch_ResultItem_Impression", e6.SearchInStoreClicked = "DocsSearch_SearchInStore_Clicked", e6.StoreCategoryTileClicked = "DocsSearch_StoreCategoryTile_Clicked", e6),
         ty = ((e8 = {}).Search = "search", e8.SearchResults = "searchResults", e8),
         tv = ((e7 = {}).ClearQueryButton = "clearQueryButton", e7.Click = "click", e7.ClickCategoryPill = "click:categoryPill", e7.ClickCategoryTitle = "click:categoryTitle", e7.ClickWithCtrl = "click:ctrl", e7.ClickWithCmd = "click:cmd", e7.Input = "input", e7.KeyboardBackspace = "kbBackspace", e7.KeyboardEnter = "kbEnter", e7.KeyboardEnterWithCtrl = "kbEnter:ctrl", e7.KeyboardEnterWithCmd = "kbEnter:cmd", e7.KeyboardEnterCategoryPill = "kbEnter:categoryPill", e7.KeyboardEnterCategoryTitle = "kbEnter:categoryTitle", e7.KeyboardEscape = "kbEscape", e7.ModalClickOut = "modalClickOut", e7.LandingSearchButton = "landingSearchButton", e7.SearchCompleted = "searchCompleted", e7.NavSearchIcon = "navSearchIcon", e7.Shortcut = "shortcut", e7),
@@ -27171,13 +26939,13 @@
             Features: V.DocumentationSubType.Features,
             Instruction: "Instruction"
         },
-        tL = {
+        t_ = {
             Announcements: V.DocumentationSubType.Announcements,
             RobloxStaff: V.DocumentationSubType.RobloxStaff,
             CommunityResources: V.DocumentationSubType.CommunityResources,
             CommunityTutorials: V.DocumentationSubType.CommunityTutorials
         },
-        t_ = {
+        tL = {
             Endpoint: V.DocumentationThirdType.Endpoint,
             API: V.DocumentationThirdType.API,
             Resource: V.DocumentationThirdType.Resource
@@ -27214,9 +26982,9 @@
             if (null === r || !n[r]) return t;
             t.push(n[r]);
             let a = {
-                [t_.Endpoint]: "Label.CloudAPITypeEndpoint",
-                [t_.API]: "Label.CloudAPITypeAPI",
-                [t_.Resource]: "Label.CloudAPITypeResource"
+                [tL.Endpoint]: "Label.CloudAPITypeEndpoint",
+                [tL.API]: "Label.CloudAPITypeAPI",
+                [tL.Resource]: "Label.CloudAPITypeResource"
             };
             return null !== o && a[o] && t.push(a[o]), t
         }
@@ -27587,8 +27355,8 @@
             this.chunks.forEach(n => {
                 let {
                     pattern: r,
-                    alphabet: f,
-                    startIndex: h
+                    alphabet: h,
+                    startIndex: f
                 } = n, {
                     isMatch: g,
                     score: y,
@@ -27606,20 +27374,20 @@
                     if (n.length > 32) throw Error("Pattern length exceeds max of 32.");
                     let p = n.length,
                         m = t.length,
-                        f = Math.max(0, Math.min(a, m)),
-                        h = l,
-                        g = f,
+                        h = Math.max(0, Math.min(a, m)),
+                        f = l,
+                        g = h,
                         y = (t, n) => {
                             let r = t / p;
                             if (d) return r;
-                            let o = Math.abs(f - n);
+                            let o = Math.abs(h - n);
                             return i ? r + o / i : o ? 1 : r
                         },
                         v = u > 1 || c,
                         b = v ? Array(m) : [];
                     for (;
                         (o = t.indexOf(n, g)) > -1;)
-                        if (h = Math.min(y(0, o), h), g = o + p, v) {
+                        if (f = Math.min(y(0, o), f), g = o + p, v) {
                             let t = 0;
                             for (; t < p;) b[o + t] = 1, t += 1
                         } g = -1;
@@ -27631,21 +27399,21 @@
                     for (let n = 0; n < p; n += 1) {
                         let o = 0,
                             a = S;
-                        for (; o < a;) y(n, f + a) <= h ? o = a : S = a, a = Math.floor((S - o) / 2 + o);
+                        for (; o < a;) y(n, h + a) <= f ? o = a : S = a, a = Math.floor((S - o) / 2 + o);
                         S = a;
-                        let i = Math.max(1, f - a + 1),
-                            l = s ? m : Math.min(f + a, m) + p,
+                        let i = Math.max(1, h - a + 1),
+                            l = s ? m : Math.min(h + a, m) + p,
                             u = Array(l + 2);
                         u[l + 1] = (1 << n) - 1;
                         for (let o = l; o >= i; o -= 1) {
                             let a = o - 1,
                                 l = r[t[a]];
-                            if (u[o] = (u[o + 1] << 1 | 1) & l, n && (u[o] |= (C[o + 1] | C[o]) << 1 | 1 | C[o + 1]), u[o] & I && (E = y(n, a)) <= h) {
-                                if (h = E, g = a, w = n, g <= f) break;
-                                i = Math.max(1, 2 * f - g)
+                            if (u[o] = (u[o + 1] << 1 | 1) & l, n && (u[o] |= (C[o + 1] | C[o]) << 1 | 1 | C[o + 1]), u[o] & I && (E = y(n, a)) <= f) {
+                                if (f = E, g = a, w = n, g <= h) break;
+                                i = Math.max(1, 2 * h - g)
                             }
                         }
-                        if (y(n + 1, f) > h) break;
+                        if (y(n + 1, h) > f) break;
                         C = u
                     }
                     if (v && g >= 0) {
@@ -27673,8 +27441,8 @@
                         t.length ? c && (x.indices = t) : x.isMatch = !1
                     }
                     return x
-                }(t, r, f, {
-                    location: a + h,
+                }(t, r, h, {
+                    location: a + f,
                     distance: i,
                     threshold: l,
                     findAllMatches: s,
@@ -27684,11 +27452,11 @@
                 });
                 g && (m = !0), p += y, g && v && d.push(...v)
             });
-            let f = {
+            let h = {
                 isMatch: m,
                 score: m ? p / this.chunks.length : 1
             };
-            return m && o && (f.indices = t$(d)), f
+            return m && o && (h.indices = t$(d)), h
         }
         constructor(t, {
             location: n = tX.location,
@@ -28076,7 +27844,7 @@
         for (let [n, r] of t.docTermFieldHits) l.set(n > a ? o(n) : n, r);
         t.docTermFieldHits = l
     }
-    class nf {
+    class nh {
         _getSearcher(t) {
             if (this._lastQuery === t) return this._lastSearcher;
             let n = ne(t, this._invertedIndex ? {
@@ -28415,7 +28183,7 @@
             }, this.options.useExtendedSearch, this.options.useTokenSearch, this._keyStore = new tG(this.options.keys), this._docs = t, this._myIndex = null, this._invertedIndex = null, this.setCollection(t, r), this._lastQuery = null, this._lastSearcher = null
         }
     }
-    nf.version = "7.4.0", nf.createIndex = tQ, nf.parseIndex = function(t) {
+    nh.version = "7.4.0", nh.createIndex = tQ, nh.parseIndex = function(t) {
         let {
             getFn: n = tX.getFn,
             fieldNormWeight: r = tX.fieldNormWeight
@@ -28427,13 +28195,13 @@
             fieldNormWeight: r
         });
         return i.setKeys(o), i.setIndexRecords(a), i
-    }, nf.config = tX, nf.match = function(t, n, r) {
+    }, nh.config = tX, nh.match = function(t, n, r) {
         if (r && r.useTokenSearch) throw Error("Fuse.match does not support useTokenSearch: token search requires corpus-level statistics (df, fieldCount) that a one-off string comparison does not have. Use new Fuse(...).search(...) instead.");
         return ne(t, {
             ...tX,
             ...r
         }).searchIn(n)
-    }, nf.parseQuery = na, t9(class {
+    }, nh.parseQuery = na, t9(class {
         static condition(t, n) {
             return n.useExtendedSearch
         }
@@ -28621,11 +28389,11 @@
             }
             this.combineAll = "all" === n.tokenMatch, this.numTerms = this.termSearchers.length, this.useMask = this.numTerms <= 31
         }
-    }), nf.use = function() {
+    }), nh.use = function() {
         for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
         n.forEach(t => t9(t))
     };
-    let nh = function() {
+    let nf = function() {
             for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
             return n.filter(t => t.length > 0).map((t, n) => 0 === n ? t.replace(/\/+$/, "") : t.replaceAll(/^\/+|\/+$/g, "")).join("/")
         },
@@ -28636,7 +28404,7 @@
         nC = t => "rrf" in t ? t.rrf : 0,
         nE = t => "object" == typeof t && null != t && "value" in t && "string" == typeof t.value && (void 0 === t.rrf || "number" == typeof t.rrf),
         nw = t => "rrf" in t,
-        nS = t => new nf(t, {
+        nS = t => new nh(t, {
             includeScore: !0,
             includeMatches: !0,
             threshold: .2,
@@ -28719,10 +28487,10 @@
         }
         static async getDataset(t) {
             let r;
-            if ("titles" === n.default.env.recommendedSearchType) r = nh("https://assets.create.roblox.com/b58ee12768a9c2f22edf7a23ad5ddaa67b6f3f23", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
+            if ("titles" === n.default.env.recommendedSearchType) r = nf("https://assets.create.roblox.com/fa0b0b331a3ae775dd9024c5f4e07bea605f8b12", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
             else {
                 if (!ny()) return [];
-                r = nh("https://assets.create.roblox.com/b58ee12768a9c2f22edf7a23ad5ddaa67b6f3f23", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
+                r = nf("https://assets.create.roblox.com/fa0b0b331a3ae775dd9024c5f4e07bea605f8b12", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
             }
             let o = await fetch(r),
                 a = await o.json();
@@ -28786,9 +28554,9 @@
                 l(t), d(!0), u(tx.All)
             }, []), m = (0, a.useCallback)(t => {
                 u(t)
-            }, []), f = (0, a.useCallback)(() => {
+            }, []), h = (0, a.useCallback)(() => {
                 l(o), d(!1), u(tx.All)
-            }, [o]), h = (0, a.useCallback)(() => {
+            }, [o]), f = (0, a.useCallback)(() => {
                 l(o), d(r), u(tx.All)
             }, [o, r]), g = !c, y = r && i === tA, v = (0, a.useMemo)(() => !!g || "Hub" !== i && i === tA && !!r, [g, i, r]), b = (0, a.useMemo)(() => g ? 4 : i === tA && r ? 3 : void 0, [g, i, r]), C = (0, a.useMemo)(() => ({
                 displayFilter: i,
@@ -28796,13 +28564,13 @@
                 isDocSiteContext: r,
                 setDisplayFilter: p,
                 setSubFilter: m,
-                clearFilters: f,
-                presetFilters: h,
+                clearFilters: h,
+                presetFilters: f,
                 shouldShowSubcategoryChips: y,
                 shouldShowFilterChips: v,
                 isFilterDefault: g,
                 maxResultsPerCategory: b
-            }), [i, s, r, p, m, f, h, y, v, g, b]);
+            }), [i, s, r, p, m, h, f, y, v, g, b]);
             return a.default.createElement(nT.Provider, {
                 value: C
             }, n)
@@ -28815,25 +28583,25 @@
         };
     var nj = ((te = {}).List = "data-list-container", te.Chips = "data-filter-chips-container", te),
         nR = ((tt = {}).ListItem = "list-item", tt.Chip = "chip", tt);
-    let nL = "search-input",
-        n_ = {
-            searchInput: "#".concat(nL),
+    let n_ = "search-input",
+        nL = {
+            searchInput: "#".concat(n_),
             listItems: '[data-list-container] [data-search-navigation-element="list-item"]',
             chips: '[data-filter-chips-container] [data-search-navigation-element="chip"]',
             allFocusable: '[data-list-container] [data-search-navigation-element="list-item"], [data-filter-chips-container] [data-search-navigation-element="chip"]'
         },
-        nF = () => Array.from(document.querySelectorAll(n_.listItems)),
+        nF = () => Array.from(document.querySelectorAll(nL.listItems)),
         nN = t => {
             let n = (0, a.useCallback)(n => {
                 let r, o = t.current;
                 if (!o) return;
-                let a = Array.from(document.querySelectorAll(n_.allFocusable)),
+                let a = Array.from(document.querySelectorAll(nL.allFocusable)),
                     i = a.findIndex(t => t === o || o.contains(t));
                 if (-1 !== i) {
                     var l;
                     if ("up" === n) {
                         if (o.closest("[data-list-container]") && 0 === nF().findIndex(t => t === o || o.contains(t))) {
-                            let t = document.querySelector(n_.searchInput);
+                            let t = document.querySelector(nL.searchInput);
                             if (t) return void t.focus()
                         }
                         r = i > 0 ? i - 1 : a.length - 1
@@ -28844,14 +28612,14 @@
                                 let t = a.findIndex(t => t === o || o.contains(t)),
                                     n = a.slice(t + 1).find(t => t.closest("[data-filter-chips-container]"));
                                 if (n) return void n.focus();
-                                let r = document.querySelector(n_.searchInput);
+                                let r = document.querySelector(nL.searchInput);
                                 if (r) return void r.focus()
                             }
                         }
                         if (o.closest("[data-filter-chips-container]")) {
-                            let t = Array.from(document.querySelectorAll(n_.chips));
+                            let t = Array.from(document.querySelectorAll(nL.chips));
                             if (t.findIndex(t => t === o || o.contains(t)) === t.length - 1) {
-                                let t = document.querySelector(n_.searchInput);
+                                let t = document.querySelector(nL.searchInput);
                                 if (t) return void t.focus()
                             }
                         }
@@ -28988,7 +28756,7 @@
                 currentProduct: s,
                 searchResults: u,
                 searchSessionId: c
-            } = t, d = nU(u, r), p = Array.from(new Set(d.map(t => t.documentationContentType))), m = nB.findIndex(t => t.value === r), f = nO.findIndex(t => t.value === r);
+            } = t, d = nU(u, r), p = Array.from(new Set(d.map(t => t.documentationContentType))), m = nB.findIndex(t => t.value === r), h = nO.findIndex(t => t.value === r);
             n.logClickEvent({
                 eventName: tg.CategoryClicked,
                 parameters: {
@@ -28998,7 +28766,7 @@
                     numCategories: p.length.toString(),
                     numResults: d.length.toString(),
                     query: l,
-                    positionIndex: (-1 !== m ? m : f).toString(),
+                    positionIndex: (-1 !== m ? m : h).toString(),
                     refPageUrl: window.location.pathname,
                     resultCategories: p.join("|"),
                     currentProduct: s,
@@ -29174,7 +28942,7 @@
             } = t, {
                 currentProduct: u,
                 eventLogger: c
-            } = th(), {
+            } = tf(), {
                 recommendations: d,
                 isEnabled: p,
                 setRecommendationQuery: m
@@ -29486,7 +29254,7 @@
                 height: 28
             }
         })),
-        rf = t => {
+        rh = t => {
             let {
                 universeId: n,
                 name: r = ""
@@ -29503,7 +29271,7 @@
                 returnPolicy: Y.ReturnPolicy.PlaceHolder
             }))
         },
-        rh = t => {
+        rf = t => {
             let {
                 assetId: n,
                 name: r = ""
@@ -29533,7 +29301,7 @@
                     }
                     return null
                 }(t) : null;
-                return n ? a.default.createElement(rf, {
+                return n ? a.default.createElement(rh, {
                     universeId: n,
                     name: t.title
                 }) : a.default.createElement(v.BuilderExperiencesIcon, null)
@@ -29550,12 +29318,12 @@
                 name: "icon-regular-curved-rectangle-megaphone",
                 size: "Medium"
             }),
-            "/advertise": a.default.createElement(h.BuilderMegaphoneIcon, null),
-            "/store/asset": t => t.documentationContentType === tx.Store && t.storeThumbnailAssetId ? a.default.createElement(rh, {
+            "/advertise": a.default.createElement(f.BuilderMegaphoneIcon, null),
+            "/store/asset": t => t.documentationContentType === tx.Store && t.storeThumbnailAssetId ? a.default.createElement(rf, {
                 assetId: t.storeThumbnailAssetId,
                 name: t.title
-            }) : a.default.createElement(f.BuilderStoreIcon, null),
-            "/store": a.default.createElement(f.BuilderStoreIcon, null),
+            }) : a.default.createElement(h.BuilderStoreIcon, null),
+            "/store": a.default.createElement(h.BuilderStoreIcon, null),
             "/docs": a.default.createElement(m.BuilderInternIcon, null),
             "/devforum": a.default.createElement(p.BuilderChatSideIcon, null)
         },
@@ -29795,7 +29563,7 @@
                 breadcrumb: o,
                 detailText: "",
                 detailHtml: ""
-            }), p = (0, a.useMemo)(() => rx(d), [d]), m = !!c || !!p, f = t => c ? a.default.createElement("span", {
+            }), p = (0, a.useMemo)(() => rx(d), [d]), m = !!c || !!p, h = t => c ? a.default.createElement("span", {
                 className: t
             }, c) : a.default.createElement("span", {
                 className: t,
@@ -29804,12 +29572,12 @@
                 }
             });
             if (!u && !m) return null;
-            if (!u) return f();
+            if (!u) return h();
             if (!m) return a.default.createElement(a.default.Fragment, null, u);
-            let h = u.split(l.TITLE_SEPARATOR);
-            if (h.length > 1) {
-                let t = h.slice(0, -1).join(l.TITLE_SEPARATOR),
-                    n = h[h.length - 1];
+            let f = u.split(l.TITLE_SEPARATOR);
+            if (f.length > 1) {
+                let t = f.slice(0, -1).join(l.TITLE_SEPARATOR),
+                    n = f[f.length - 1];
                 return a.default.createElement("span", {
                     className: s.container
                 }, a.default.createElement("span", {
@@ -29818,7 +29586,7 @@
                     className: s.fixed
                 }, "".concat(l.TITLE_SEPARATOR).concat(n)), a.default.createElement("span", {
                     className: s.boldSeparator
-                }, nY), f(s.fixed))
+                }, nY), h(s.fixed))
             }
             return a.default.createElement("span", {
                 className: s.container
@@ -29826,7 +29594,7 @@
                 className: s.shrinkable
             }, u), a.default.createElement("span", {
                 className: s.boldSeparator
-            }, nY), f(s.fixed))
+            }, nY), h(s.fixed))
         },
         rT = a.default.memo(t => {
             var n, r, i;
@@ -29837,32 +29605,32 @@
                 locale: d,
                 onKeyboardModifierDetected: p
             } = t, m = (0, a.useRef)(null), {
-                onKeyDownSearch: f
-            } = nN(m), [h, g] = (0, a.useState)(u), {
+                onKeyDownSearch: h
+            } = nN(m), [f, g] = (0, a.useState)(u), {
                 classes: y,
                 cx: v
             } = rE({
-                isSecondaryActionNonInteractive: !(null == h ? void 0 : h.onClick)
+                isSecondaryActionNonInteractive: !(null == f ? void 0 : f.onClick)
             }), {
                 translate: x
             } = (0, o.useTranslation)(), {
                 robloxSiteDomain: A
-            } = th(), T = "".concat(tp(A), "/docs"), k = (0, a.useMemo)(() => n$(l, x), [l, x]), D = (0, a.useMemo)(() => {
+            } = tf(), T = "".concat(tp(A), "/docs"), k = (0, a.useMemo)(() => n$(l, x), [l, x]), D = (0, a.useMemo)(() => {
                 var t;
                 return !!(null != (t = l.hubBreadcrumb) ? t : l.authorName)
-            }, [l]), j = (0, a.useMemo)(() => rx(l.title), [l.title]), R = (0, a.useMemo)(() => rx(l.description), [l.description]), L = D ? a.default.createElement(c.Typography, {
+            }, [l]), j = (0, a.useMemo)(() => rx(l.title), [l.title]), R = (0, a.useMemo)(() => rx(l.description), [l.description]), _ = D ? a.default.createElement(c.Typography, {
                 variant: "body2",
                 color: "inherit",
                 className: y.listItemDescription
             }, a.default.createElement(rA, {
                 item: l
-            })) : l.documentationSubType === tL.RobloxStaff || l.documentationSubType === tL.CommunityResources || l.documentationSubType === tL.CommunityTutorials ? a.default.createElement(c.Typography, {
+            })) : l.documentationSubType === t_.RobloxStaff || l.documentationSubType === t_.CommunityResources || l.documentationSubType === t_.CommunityTutorials ? a.default.createElement(c.Typography, {
                 variant: "body2",
                 color: "inherit",
                 className: y.listItemDescription
             }, (null == (r = l.author) ? void 0 : r.name) ? x("Label.PostedBy", {
                 authorName: null == (i = l.author) ? void 0 : i.name
-            }) : "") : l.documentationSubType === tL.Announcements ? a.default.createElement(ra, {
+            }) : "") : l.documentationSubType === t_.Announcements ? a.default.createElement(ra, {
                 utcTime: l.updatedAtUtc,
                 locale: null != d ? d : o.Locale.English,
                 fallbackText: l.translatedCategoryDisplayText
@@ -29906,7 +29674,7 @@
                             return
                         }
                         null == (r = m.current) || r.click()
-                    } else f(t)
+                    } else h(t)
                 },
                 componentsProps: {
                     root: {
@@ -29944,21 +29712,21 @@
                     color: "secondary",
                     variant: "outlined"
                 }))),
-                secondary: L
+                secondary: _
             }), a.default.createElement(S.ListItemSecondaryAction, {
                 className: y.listItemSecondaryAction
-            }, h.onClick || h.onKeyDown ? a.default.createElement(I.IconButton, {
+            }, f.onClick || f.onKeyDown ? a.default.createElement(I.IconButton, {
                 edge: "end",
                 size: "small",
                 color: "inherit",
-                "aria-label": null != (n = h.label) ? n : "",
-                onClick: h.onClick,
-                onKeyDown: h.onKeyDown
-            }, a.default.createElement(h.Icon, {
+                "aria-label": null != (n = f.label) ? n : "",
+                onClick: f.onClick,
+                onKeyDown: f.onKeyDown
+            }, a.default.createElement(f.Icon, {
                 fontSize: "small",
                 color: "inherit",
                 "aria-hidden": "true"
-            })) : a.default.createElement(h.Icon, {
+            })) : a.default.createElement(f.Icon, {
                 fontSize: "small",
                 color: "inherit",
                 "aria-hidden": "true"
@@ -29973,29 +29741,29 @@
             className: d,
             ariaLabel: p,
             endAdornment: m,
-            impressionContext: f
-        } = t, h, g, y, v, b, C, E, w, S, I, A, {
+            impressionContext: h
+        } = t, f, g, y, v, b, C, E, w, S, I, A, {
             translate: T
         } = (0, o.useTranslation)(), {
             targetLocale: k
         } = (0, a.useContext)(n5), {
             currentProduct: D,
             eventLogger: j
-        } = th(), R = (0, a.useRef)(null);
-        s = f ? {
+        } = tf(), R = (0, a.useRef)(null);
+        s = h ? {
             currentProduct: D,
             locale: k,
-            query: f.query,
-            rank: f.rank,
+            query: h.query,
+            rank: h.rank,
             resultCategory: null != (n = u.documentationContentType) ? n : "",
             resultTitle: u.title,
             resultUrl: null != (r = u.path) ? r : "",
-            searchSessionId: f.searchSessionId
-        } : null, h = (0, a.useRef)(new Set), g = (0, a.useRef)(null), y = null == s ? void 0 : s.searchSessionId, v = null == s ? void 0 : s.resultUrl, b = null == s ? void 0 : s.currentProduct, C = null == s ? void 0 : s.locale, E = null == s ? void 0 : s.query, w = null == s ? void 0 : s.rank, S = null == s ? void 0 : s.resultCategory, A = (0, a.useMemo)(() => {
+            searchSessionId: h.searchSessionId
+        } : null, f = (0, a.useRef)(new Set), g = (0, a.useRef)(null), y = null == s ? void 0 : s.searchSessionId, v = null == s ? void 0 : s.resultUrl, b = null == s ? void 0 : s.currentProduct, C = null == s ? void 0 : s.locale, E = null == s ? void 0 : s.query, w = null == s ? void 0 : s.rank, S = null == s ? void 0 : s.resultCategory, A = (0, a.useMemo)(() => {
             let t = () => {
                 if (null == y || null == v) return;
                 let t = "".concat(y, ":").concat(v);
-                h.current.has(t) || (h.current.add(t), j.logImpressionEvent({
+                f.current.has(t) || (f.current.add(t), j.logImpressionEvent({
                     eventName: tg.ResultItemImpression,
                     parameters: {
                         currentProduct: null != b ? b : "",
@@ -30034,8 +29802,8 @@
                 n.unobserve(t), n.disconnect(), A.cancel()
             }
         }, [R, y, v, A]);
-        let L = (0, a.useMemo)(() => n$(u, T), [u, T]),
-            _ = u.documentationContentType !== tx.Store && (null == (l = u.path) ? void 0 : l.startsWith("http"));
+        let _ = (0, a.useMemo)(() => n$(u, T), [u, T]),
+            L = u.documentationContentType !== tx.Store && (null == (l = u.path) ? void 0 : l.startsWith("http"));
         return a.default.createElement("div", {
             ref: R
         }, a.default.createElement(rr, {
@@ -30046,9 +29814,9 @@
             },
             isDocSiteUrl: u.documentationContentType !== tx.CreatorHub,
             skipLocalePrefix: !0,
-            target: _ ? "_blank" : void 0,
-            rel: _ ? "noopener noreferrer" : void 0,
-            "aria-label": null != p ? p : n1(u, L, T),
+            target: L ? "_blank" : void 0,
+            rel: L ? "noopener noreferrer" : void 0,
+            "aria-label": null != p ? p : n1(u, _, T),
             style: {
                 textDecoration: "none",
                 color: "inherit"
@@ -30056,7 +29824,7 @@
         }, a.default.createElement(rT, {
             item: u,
             className: d,
-            endAdornment: _ ? {
+            endAdornment: L ? {
                 Icon: x.OpenInNewIcon
             } : m,
             locale: k,
@@ -30150,9 +29918,9 @@
                 onClickItem: d,
                 onRemove: p,
                 impressionContext: m,
-                allResultsLabel: f
+                allResultsLabel: h
             } = t, {
-                classes: h,
+                classes: f,
                 cx: g
             } = rj(), {
                 translate: y
@@ -30205,39 +29973,39 @@
                     nz(t) ? null == u || u(tv.ClickCategoryTitle) : null == u || u(tv.KeyboardEnterCategoryTitle)
                 };
             return a.default.createElement(a.default.Fragment, null, !n && i && a.default.createElement("div", {
-                className: g(h.sectionTitleContainer, {
-                    [h.sectionTitleHasButtonIcon]: r
+                className: g(f.sectionTitleContainer, {
+                    [f.sectionTitleHasButtonIcon]: r
                 })
             }, a.default.createElement(c.Typography, {
                 variant: "tableHead",
                 component: "h2",
                 color: "primary",
                 onClick: r ? S : void 0,
-                className: g(h.sectionTitle, {
-                    [h.isClickable]: r
+                className: g(f.sectionTitle, {
+                    [f.isClickable]: r
                 })
             }, i), r && a.default.createElement(I.IconButton, {
                 onClick: S,
                 "aria-label": y("Label.ClickFilter") || "Click filter",
                 color: "secondary",
-                className: h.chevronButton
+                className: f.chevronButton
             }, a.default.createElement(T.ChevronRightIcon, null))), n && a.default.createElement("div", {
-                className: h.sectionTitleContainerAllResults
+                className: f.sectionTitleContainerAllResults
             }, a.default.createElement(I.IconButton, {
                 onClick: x,
-                "aria-label": null != f ? f : y("Label.AllResults") || "All Results",
+                "aria-label": null != h ? h : y("Label.AllResults") || "All Results",
                 color: "secondary",
-                className: h.chevronButton
+                className: f.chevronButton
             }, a.default.createElement(k.ChevronLeftIcon, null)), a.default.createElement(c.Typography, {
                 variant: "tableHead",
                 component: "h2",
                 color: "primary",
-                className: g(h.sectionTitleAllResults, {
-                    [h.isClickable]: r
+                className: g(f.sectionTitleAllResults, {
+                    [f.isClickable]: r
                 }),
                 onClick: r ? x : void 0
-            }, null != f ? f : y("Label.AllResults") || "All Results")), a.default.createElement(D.List, {
-                className: h.listContainer,
+            }, null != h ? h : y("Label.AllResults") || "All Results")), a.default.createElement(D.List, {
+                className: f.listContainer,
                 "data-list-container": nj.List,
                 tabIndex: -1
             }, E.map((t, n) => p ? a.default.createElement(rD, {
@@ -30266,7 +30034,7 @@
                 }
             })))
         },
-        rL = t => {
+        r_ = t => {
             let {
                 isContentTypeFilterDefault: n,
                 searchListItems: r,
@@ -30279,9 +30047,9 @@
                 searchSessionId: p,
                 query: m
             } = t, {
-                setExclusions: f
+                setExclusions: h
             } = (0, a.useContext)(n8), {
-                translate: h
+                translate: f
             } = (0, o.useTranslation)(), {
                 displayFilter: g,
                 isFilterDefault: y,
@@ -30289,8 +30057,8 @@
                 maxResultsPerCategory: b
             } = (0, a.useContext)(nT);
             (0, a.useEffect)(() => {
-                f(Object.values(r).flat().map(t => t.title))
-            }, [r, f]);
+                h(Object.values(r).flat().map(t => t.title))
+            }, [r, h]);
             let C = (0, a.useMemo)(() => Object.values(r).flat().reduce((t, n) => {
                     var r, o;
                     let a = tk(null != (r = n.documentationContentType) ? r : null);
@@ -30305,7 +30073,7 @@
                     searchSessionId: p,
                     query: m
                 } : void 0,
-                I = g === tA && v ? h("Label.AllLearnResults") || "All Learn Results" : void 0,
+                I = g === tA && v ? f("Label.AllLearnResults") || "All Learn Results" : void 0,
                 x = nB.find(t => t.value === tT),
                 A = !!i && i.length > 0,
                 T = (0, a.useMemo)(() => i ? function(t) {
@@ -30333,7 +30101,7 @@
                             key: t,
                             isTitleClickable: !0,
                             items: o,
-                            title: h(r.translationKey) || r.fallbackLabel,
+                            title: f(r.translationKey) || r.fallbackLabel,
                             onClickItem: l,
                             onClickTitle: t => null == c ? void 0 : c(r, t),
                             showAllResultsButton: !1,
@@ -30347,7 +30115,7 @@
                             key: t,
                             isTitleClickable: !0,
                             items: n,
-                            title: h(x.translationKey) || x.fallbackLabel,
+                            title: f(x.translationKey) || x.fallbackLabel,
                             onClickItem: l,
                             onClickTitle: t => null == c ? void 0 : c(x, t),
                             showAllResultsButton: !1,
@@ -30359,7 +30127,7 @@
                     key: "store",
                     isTitleClickable: !0,
                     items: T,
-                    title: h(x.translationKey) || x.fallbackLabel || "Store",
+                    title: f(x.translationKey) || x.fallbackLabel || "Store",
                     onClickItem: l,
                     onClearFilter: t => null == d ? void 0 : d(x, t),
                     showAllResultsButton: !0,
@@ -30372,7 +30140,7 @@
                         key: "hub",
                         isTitleClickable: !0,
                         items: n,
-                        title: h(null != (o = null == r ? void 0 : r.translationKey) ? o : "Label.Hub") || (null == r ? void 0 : r.fallbackLabel) || "Hub",
+                        title: f(null != (o = null == r ? void 0 : r.translationKey) ? o : "Label.Hub") || (null == r ? void 0 : r.fallbackLabel) || "Hub",
                         onClickItem: l,
                         onClearFilter: r ? t => null == d ? void 0 : d(r, t) : void 0,
                         showAllResultsButton: !0,
@@ -30387,7 +30155,7 @@
                             key: t,
                             isTitleClickable: !0,
                             items: o,
-                            title: h(i.translationKey) || i.fallbackLabel,
+                            title: f(i.translationKey) || i.fallbackLabel,
                             onClickItem: l,
                             onClickTitle: t => null == s ? void 0 : s(i, t),
                             onClearFilter: t => null == u ? void 0 : u(i, t),
@@ -30402,7 +30170,7 @@
                         key: "learn",
                         isTitleClickable: !0,
                         items: t,
-                        title: h(null != (m = null == o ? void 0 : o.translationKey) ? m : "Label.Learn") || (null == o ? void 0 : o.fallbackLabel) || "Learn",
+                        title: f(null != (m = null == o ? void 0 : o.translationKey) ? m : "Label.Learn") || (null == o ? void 0 : o.fallbackLabel) || "Learn",
                         onClickItem: l,
                         onClearFilter: o ? t => null == d ? void 0 : d(o, t) : void 0,
                         showAllResultsButton: !0,
@@ -30416,7 +30184,7 @@
                         key: t,
                         isTitleClickable: !0,
                         items: o,
-                        title: h(i.translationKey),
+                        title: f(i.translationKey),
                         onClickItem: l,
                         onClickTitle: t => null == s ? void 0 : s(i, t),
                         onClearFilter: t => null == u ? void 0 : u(i, t),
@@ -30426,7 +30194,7 @@
                 })
             })())
         },
-        r_ = (0, s.makeStyles)()((t, n) => {
+        rL = (0, s.makeStyles)()((t, n) => {
             let {
                 isSearchContentNothing: r = !1
             } = n;
@@ -30804,25 +30572,25 @@
                 onClickItem: r
             } = t, {
                 robloxSiteDomain: i
-            } = th(), {
+            } = tf(), {
                 translate: l
             } = (0, o.useTranslation)(), {
                 classes: s
             } = rU(), u = (0, a.useRef)(null), {
                 onKeyDownSearch: d
-            } = nN(u), [p, m] = (0, a.useState)(!1), f = n.trim(), h = rH(tp(i), "/store/models", n);
-            if (!f) return null;
+            } = nN(u), [p, m] = (0, a.useState)(!1), h = n.trim(), f = rH(tp(i), "/store/models", n);
+            if (!h) return null;
             let g = l("Label.InStoreSuffix") || "in Store",
                 y = l("Label.SearchInStoreAriaLabel", {
-                    query: f
-                }) || "Search for ".concat(f, " in the Creator Store");
+                    query: h
+                }) || "Search for ".concat(h, " in the Creator Store");
             return a.default.createElement("a", {
                 ref: u,
-                href: h,
+                href: f,
                 tabIndex: 0,
                 "data-search-navigation-element": nR.ListItem,
                 onClick: t => {
-                    r(h, nz(t) ? nq(t, !1) : tv.KeyboardEnter)
+                    r(f, nz(t) ? nq(t, !1) : tv.KeyboardEnter)
                 },
                 onKeyDown: d,
                 onFocus: () => m(!0),
@@ -30840,7 +30608,7 @@
                 className: s.label
             }, a.default.createElement("span", {
                 className: s.query
-            }, f), " ", a.default.createElement("span", {
+            }, h), " ", a.default.createElement("span", {
                 className: s.suffix
             }, g)), p && a.default.createElement("span", {
                 className: s.endAdornment,
@@ -30958,7 +30726,7 @@
         } = (0, o.useTranslation)(), {
             currentProduct: u,
             eventLogger: c
-        } = th(), [d, p] = (0, a.useState)([]), {
+        } = tf(), [d, p] = (0, a.useState)([]), {
             classes: m
         } = rW();
         (0, a.useEffect)(() => {
@@ -30966,7 +30734,7 @@
                 p(await rq.getRecentlyVisited())
             })()
         }, []);
-        let f = async t => {
+        let h = async t => {
             p(await rq.removeFromRecentlyVisited(t))
         };
         return (0, a.useEffect)(() => {
@@ -31036,7 +30804,7 @@
                     recentlyVisited: d,
                     currentProduct: u,
                     searchSessionId: l
-                }), f(t)
+                }), h(t)
             },
             onClickItem: (t, n) => {
                 (t => {
@@ -31197,7 +30965,7 @@
                 onClickItem: r
             } = t, {
                 robloxSiteDomain: i
-            } = th(), {
+            } = tf(), {
                 translate: l
             } = (0, o.useTranslation)(), {
                 classes: s
@@ -31298,7 +31066,7 @@
                             },
                             p = u ? t.experienceName : void 0,
                             m = u ? null != d ? d : t.breadcrumb || void 0 : void 0,
-                            f = u ? t.creatorName : void 0;
+                            h = u ? t.creatorName : void 0;
                         return {
                             ...t,
                             title: c,
@@ -31311,7 +31079,7 @@
                             updatedAtUtc: t.updatedAtUtc,
                             entityName: p,
                             hubBreadcrumb: m,
-                            authorName: f
+                            authorName: h
                         }
                     }), t
                 }, {}),
@@ -31391,11 +31159,11 @@
                 setSearchDialogOpenWithEvent: p
             } = tw(), {
                 currentProduct: m,
-                eventLogger: f
-            } = th(), h = function() {
+                eventLogger: h
+            } = tf(), f = function() {
                 let {
                     robloxSiteDomain: t
-                } = th();
+                } = tf();
                 return (0, a.useMemo)(() => {
                     var n;
                     return n = new U.SearchApi(new z.Configuration({
@@ -31418,9 +31186,9 @@
                                 searchSessionId: p
                             } = t, m = async t => {
                                 var r, o, a, i, l, s, u, c, d;
-                                let p, m, f = null != (r = t.documentationContentType) ? r : "";
-                                "CreatorHub" === f ? p = ["CreatorHub"] : "Learn" === f ? p = ["Article", "CloudApi", "DevForum", "LuaApi", "Video"] : f && (p = [f]), m = (null == p ? void 0 : p.length) === 1 && "CreatorHub" === p[0] ? 200 : "Learn" === f ? 100 : null != (o = t.pageSize) ? o : 100;
-                                let h = {
+                                let p, m, h = null != (r = t.documentationContentType) ? r : "";
+                                "CreatorHub" === h ? p = ["CreatorHub"] : "Learn" === h ? p = ["Article", "CloudApi", "DevForum", "LuaApi", "Video"] : h && (p = [h]), m = (null == p ? void 0 : p.length) === 1 && "CreatorHub" === p[0] ? 200 : "Learn" === h ? 100 : null != (o = t.pageSize) ? o : 100;
+                                let f = {
                                         query: null != (a = t.keyword) ? a : "",
                                         locale: null != (i = t.locale) ? i : "",
                                         searchSessionId: null != (l = t.searchSessionId) ? l : "",
@@ -31432,7 +31200,7 @@
                                         entityId: null != (u = t.tag) ? u : ""
                                     },
                                     g = (d = await n.searchSearchCreatorHub({
-                                        searchSearchCreatorHubRequest: h
+                                        searchSearchCreatorHubRequest: f
                                     })).results ? {
                                         searchSessionId: d.searchSessionId,
                                         totalResults: d.totalResults,
@@ -31447,8 +31215,8 @@
                                                 title: t.title,
                                                 displayedSummary: t.displayedSummary,
                                                 documentationContentType: tI(tx, d = null != (n = t.contentType) ? n : "") ? d : null,
-                                                documentationSubType: tI(tD, p = null != (r = t.subType) ? r : "") || tI(tj, p) || tI(tR, p) || tI(tL, p) ? p : null,
-                                                documentationThirdType: tI(t_, m = null != (o = t.thirdType) ? o : "") || tI(tF, m) ? m : null,
+                                                documentationSubType: tI(tD, p = null != (r = t.subType) ? r : "") || tI(tj, p) || tI(tR, p) || tI(t_, p) ? p : null,
+                                                documentationThirdType: tI(tL, m = null != (o = t.thirdType) ? o : "") || tI(tF, m) ? m : null,
                                                 resultTargetReference: t.resultTargetReference,
                                                 url: null != (a = t.resultTargetReference) ? a : null,
                                                 tags: t.tags,
@@ -31482,7 +31250,7 @@
                                         url: "/".concat(y).concat(r)
                                     }
                                 })), g
-                            }, f = async (t, n, r) => {
+                            }, h = async (t, n, r) => {
                                 try {
                                     let o = await m(t);
                                     if ((!o.results || 0 === o.results.length) && d && !r) {
@@ -31490,7 +31258,7 @@
                                                 ...t,
                                                 locale: ""
                                             },
-                                            o = await f(r, n, !0);
+                                            o = await h(r, n, !0);
                                         if (!o || !o.results || 0 === o.results.length) return {
                                             isError: !1,
                                             results: []
@@ -31526,7 +31294,7 @@
                                         let o;
                                         return await (o = 200 * (n + 1), new Promise(t => {
                                             setTimeout(t, o)
-                                        })), f(t, n + 1, r)
+                                        })), h(t, n + 1, r)
                                     }
                                     return tS("searchClient: failed to fetch search results ".concat(o instanceof Error ? o.message : String(o))), {
                                         isError: !0,
@@ -31534,7 +31302,7 @@
                                     }
                                 }
                             };
-                            return f({
+                            return h({
                                 keyword: r,
                                 isFuzzyMatch: s,
                                 documentationContentType: o,
@@ -31578,7 +31346,7 @@
                 } = t, c = function() {
                     let {
                         robloxSiteDomain: t
-                    } = th();
+                    } = tf();
                     return (0, a.useMemo)(() => (function(t, n) {
                         let {
                             robloxSiteDomain: r
@@ -31615,11 +31383,11 @@
                                 };
                             return (null != (s = (await c(0)).creatorStoreAssets) ? s : []).map(t => (function(t, n, r, o) {
                                 var a, i, l, s, u, c, d, p;
-                                let m, f, h = t.asset;
-                                if (!h) return null;
-                                let g = h.id;
+                                let m, h, f = t.asset;
+                                if (!f) return null;
+                                let g = f.id;
                                 if ("number" != typeof g) return null;
-                                let y = null != (a = null == (d = h.previewAssets) || null == (c = d.imagePreviewAssets) ? void 0 : c[0]) ? a : null,
+                                let y = null != (a = null == (d = f.previewAssets) || null == (c = d.imagePreviewAssets) ? void 0 : c[0]) ? a : null,
                                     v = t.creatorStoreProduct,
                                     b = function(t) {
                                         var n, r, o, a;
@@ -31636,18 +31404,18 @@
                                             amount: c
                                         }
                                     }(null == v ? void 0 : v.purchasePrice);
-                                return (null == v ? void 0 : v.purchasePrice) && b && 0 !== b.amount ? (m = !1, f = b) : (m = !0, f = null), {
+                                return (null == v ? void 0 : v.purchasePrice) && b && 0 !== b.amount ? (m = !1, h = b) : (m = !0, h = null), {
                                     id: g,
-                                    name: null != (i = h.name) ? i : "",
-                                    description: null != (l = h.description) ? l : "",
-                                    assetTypeId: null != (s = h.assetTypeId) ? s : null,
+                                    name: null != (i = f.name) ? i : "",
+                                    description: null != (l = f.description) ? l : "",
+                                    assetTypeId: null != (s = f.assetTypeId) ? s : null,
                                     categoryType: n,
                                     categoryPath: r,
                                     creatorName: null != (u = null == (p = t.creator) ? void 0 : p.name) ? u : "",
                                     thumbnailAssetId: y,
                                     url: "".concat(o, "/store/asset/").concat(g),
                                     isFree: m,
-                                    price: f
+                                    price: h
                                 }
                             })(t, r, a, o)).filter(t => null !== t).map(t => ({
                                 ...t,
@@ -31713,15 +31481,15 @@
                 }(), {
                     eventLogger: d,
                     currentProduct: p
-                } = th(), [m, f] = (0, a.useState)([]), [h, g] = (0, a.useState)(!1), y = (0, a.useRef)(new Map);
+                } = tf(), [m, h] = (0, a.useState)([]), [f, g] = (0, a.useState)(!1), y = (0, a.useRef)(new Map);
                 return (0, a.useEffect)(() => {
                     if (0 === n.length || !(r && (o || i === tT))) {
-                        f([]), g(!1);
+                        h([]), g(!1);
                         return
                     }
                     if (y.current.has(n)) {
                         var t;
-                        f(null != (t = y.current.get(n)) ? t : []), g(!1);
+                        h(null != (t = y.current.get(n)) ? t : []), g(!1);
                         return
                     }
                     let a = !1;
@@ -31782,7 +31550,7 @@
                                     storeCategoryIndex: t.categoryIndex
                                 }
                             });
-                            f(r), g(!1), !t.isError && (y.current.set(n, r), r.length > 0 && nV({
+                            h(r), g(!1), !t.isError && (y.current.set(n, r), r.length > 0 && nV({
                                 eventLogger: d,
                                 category: "Store",
                                 interaction: tv.Input,
@@ -31796,14 +31564,14 @@
                             }))
                         } catch (t) {
                             if (a) return;
-                            tS("useStoreSearch: failed to fetch Store search results ".concat(t instanceof Error ? t.message : String(t))), f([]), g(!1)
+                            tS("useStoreSearch: failed to fetch Store search results ".concat(t instanceof Error ? t.message : String(t))), h([]), g(!1)
                         }
                     })(), () => {
                         a = !0
                     }
                 }, [n, r, o, i]), {
                     storeResults: m,
-                    isStoreLoading: h
+                    isStoreLoading: f
                 }
             }({
                 query: (null != J ? J : K).trim(),
@@ -31813,17 +31581,17 @@
                 searchSessionId: r,
                 locale: c,
                 translate: s
-            }), eu = (0, a.useRef)(null), ec = (0, a.useRef)(null), ed = (null != J ? J : K).trim(), ep = P === nP, em = ep && S, ef = (0, a.useMemo)(() => P !== nP ? P : S ? nP : "Hub" === g ? tx.CreatorHub : g === tA ? tA : nP, [P, g, S]), eh = ep ? x : void 0, {
+            }), eu = (0, a.useRef)(null), ec = (0, a.useRef)(null), ed = (null != J ? J : K).trim(), ep = P === nP, em = ep && S, eh = (0, a.useMemo)(() => P !== nP ? P : S ? nP : "Hub" === g ? tx.CreatorHub : g === tA ? tA : nP, [P, g, S]), ef = ep ? x : void 0, {
                 searchListItems: eg,
                 resultsByContentType: ey,
                 numberOfItems: ev
-            } = (0, a.useMemo)(() => r4(ea, eh), [ea, eh]), eb = 0 === q.length, eC = ev + el.length;
+            } = (0, a.useMemo)(() => r4(ea, ef), [ea, ef]), eb = 0 === q.length, eC = ev + el.length;
             i = eb || 0 === ed.length ? ep ? "null" : "nothing" : eC > 0 ? "items" : $ || es || "" === Y ? "loading" : "empty";
             let eE = em && "loading" !== i && ng(),
                 ew = C && ep && ["null", "items"].includes(i),
                 {
                     classes: eS
-                } = r_({
+                } = rL({
                     isSearchContentNothing: "nothing" === i
                 }),
                 eI = (0, a.useMemo)(() => {
@@ -31849,7 +31617,7 @@
                     if (0 === ed.length) return a.default.startTransition(() => {
                         ei([]), Q(""), ee(!1)
                     });
-                    let d = "".concat(ed, "-").concat(ef);
+                    let d = "".concat(ed, "-").concat(eh);
                     if (d in r5) {
                         let t = null != (o = r5[d]) ? o : [];
                         a.default.startTransition(() => {
@@ -31861,11 +31629,11 @@
                         ee(!0)
                     }, 300);
                     try {
-                        if (l = await h.search({
+                        if (l = await f.search({
                                 locale: c,
                                 keyword: ed,
                                 pageSize: 20,
-                                documentationContentType: ef,
+                                documentationContentType: eh,
                                 searchSessionId: r
                             }), n) return;
                         u = (i = l).results ? i.results.map(t => {
@@ -31910,9 +31678,9 @@
                                 creatorName: t.creatorName
                             }
                         }) : [];
-                        let t = r4(u, eh);
+                        let t = r4(u, ef);
                         nV({
-                            eventLogger: f,
+                            eventLogger: h,
                             category: O,
                             interaction: tv.Input,
                             isRecommended: et,
@@ -31936,7 +31704,7 @@
                 })(), () => {
                     n = !0, t && clearTimeout(t)
                 }
-            }, [ed, ef]), (0, a.useEffect)(() => {
+            }, [ed, eh]), (0, a.useEffect)(() => {
                 J && Z(null)
             }, [J]);
             let ex = nH.find(t => t.value === P),
@@ -31944,7 +31712,7 @@
                 eT = (0, a.useCallback)((t, n) => {
                     var o;
                     null == (o = T.current) || o.focus(), (t.value !== g || S) && (y(t.value), B(nP), nG({
-                        eventLogger: f,
+                        eventLogger: h,
                         category: t.value,
                         interaction: n,
                         isRecommended: et,
@@ -31954,11 +31722,11 @@
                         searchResults: eI,
                         searchSessionId: r
                     }))
-                }, [f, g, S, y, et, c, q, m, eI, r]),
+                }, [h, g, S, y, et, c, q, m, eI, r]),
                 ek = (0, a.useCallback)((t, n) => {
                     var o;
                     null == (o = T.current) || o.focus(), "" !== t.value && (v(), B(nP), nK({
-                        eventLogger: f,
+                        eventLogger: h,
                         category: t.value,
                         interaction: n,
                         isRecommended: et,
@@ -31968,7 +31736,7 @@
                         searchResults: eI,
                         searchSessionId: r
                     }))
-                }, [f, v, et, c, q, m, eI, r]),
+                }, [h, v, et, c, q, m, eI, r]),
                 eD = (0, a.useCallback)(() => {
                     var t;
                     G(""), B(nP), v(), null == (t = T.current) || t.focus()
@@ -31981,7 +31749,7 @@
                 }, [eD, p]),
                 eR = (0, a.useCallback)(t => {
                     if (eb && "Backspace" === t.key) eD(), nK({
-                        eventLogger: f,
+                        eventLogger: h,
                         category: O,
                         interaction: tv.KeyboardBackspace,
                         isRecommended: et,
@@ -31996,25 +31764,11 @@
                         let n = nF()[0];
                         n && n.focus()
                     }
-                }, [f, O, q, eb, et, c, eD, m, ea, r]),
-                eL = (0, a.useCallback)((t, n) => {
-                    var o;
-                    null == (o = T.current) || o.focus(), t.value !== P && (B(t.value), nG({
-                        eventLogger: f,
-                        category: t.value,
-                        interaction: n,
-                        isRecommended: et,
-                        locale: c,
-                        query: q,
-                        currentProduct: m,
-                        searchResults: ea,
-                        searchSessionId: r
-                    }))
-                }, [f, P, et, c, q, m, ea, r]),
+                }, [h, O, q, eb, et, c, eD, m, ea, r]),
                 e_ = (0, a.useCallback)((t, n) => {
                     var o;
-                    null == (o = T.current) || o.focus(), t.value !== nP && (B(nP), nK({
-                        eventLogger: f,
+                    null == (o = T.current) || o.focus(), t.value !== P && (B(t.value), nG({
+                        eventLogger: h,
                         category: t.value,
                         interaction: n,
                         isRecommended: et,
@@ -32024,7 +31778,21 @@
                         searchResults: ea,
                         searchSessionId: r
                     }))
-                }, [f, et, c, q, m, ea, r]),
+                }, [h, P, et, c, q, m, ea, r]),
+                eL = (0, a.useCallback)((t, n) => {
+                    var o;
+                    null == (o = T.current) || o.focus(), t.value !== nP && (B(nP), nK({
+                        eventLogger: h,
+                        category: t.value,
+                        interaction: n,
+                        isRecommended: et,
+                        locale: c,
+                        query: q,
+                        currentProduct: m,
+                        searchResults: ea,
+                        searchSessionId: r
+                    }))
+                }, [h, et, c, q, m, ea, r]),
                 eF = (0, a.useCallback)(t => {
                     G(t.target.value), en(!1)
                 }, []),
@@ -32055,7 +31823,7 @@
                             }
                         })
                     })({
-                        eventLogger: f,
+                        eventLogger: h,
                         interaction: tv.Click,
                         locale: c,
                         query: q,
@@ -32065,7 +31833,7 @@
                     })
                 },
                 eP = t => {
-                    nz(t) && ex && e_(ex, tv.ClickCategoryPill)
+                    nz(t) && ex && eL(ex, tv.ClickCategoryPill)
                 },
                 eB = t => {
                     nz(t) && eA && ek(eA, tv.ClickCategoryPill)
@@ -32078,7 +31846,7 @@
                     tabIndex: 0,
                     onClick: eP,
                     onKeyDown: t => {
-                        nD(t) && ex && e_(ex, tv.KeyboardEnterCategoryPill)
+                        nD(t) && ex && eL(ex, tv.KeyboardEnterCategoryPill)
                     },
                     deleteIcon: a.default.createElement(A.CloseIcon, {
                         color: "secondary",
@@ -32104,7 +31872,7 @@
                 }),
                 eU = !S,
                 ez = P !== nP;
-            return a.default.createElement(L.Dialog, {
+            return a.default.createElement(_.Dialog, {
                 "aria-label": s("Label.Search"),
                 open: n,
                 TransitionProps: R,
@@ -32115,7 +31883,7 @@
                 classes: {
                     paper: eS.dialogPaper
                 }
-            }, a.default.createElement(n7, null, a.default.createElement(_.DialogContent, {
+            }, a.default.createElement(n7, null, a.default.createElement(L.DialogContent, {
                 className: eS.dialogContent
             }, a.default.createElement("div", {
                 className: eS.searchContainer
@@ -32123,7 +31891,7 @@
                 label: null,
                 fullWidth: !0,
                 autoComplete: "off",
-                id: nL,
+                id: n_,
                 placeholder: s("Label.Search") || "Search",
                 value: q,
                 onChange: eF,
@@ -32167,7 +31935,7 @@
                                     }
                                 })
                             })({
-                                eventLogger: f,
+                                eventLogger: h,
                                 category: O,
                                 interaction: tv.Click,
                                 isRecommended: et,
@@ -32214,7 +31982,7 @@
                 wrap: "nowrap",
                 "data-list-container": nj.List,
                 className: eS.resultsContainer
-            }, "items" === i && a.default.createElement(rL, {
+            }, "items" === i && a.default.createElement(r_, {
                 searchListItems: eg,
                 storeItems: el,
                 isContentTypeFilterDefault: ep,
@@ -32258,7 +32026,7 @@
                             }
                         })
                     })({
-                        eventLogger: f,
+                        eventLogger: h,
                         category: O,
                         interaction: n,
                         isRecommended: et,
@@ -32270,8 +32038,8 @@
                         searchSessionId: r
                     }), nW(n) || ej(tv.SearchCompleted)
                 },
-                onClickFilter: eL,
-                onClearFilter: e_,
+                onClickFilter: e_,
+                onClearFilter: eL,
                 onClickDisplayFilter: eT,
                 onClearDisplayFilter: ek,
                 searchSessionId: r,
@@ -32305,7 +32073,7 @@
             }), S ? a.default.createElement(rB, {
                 onClickFilter: eT
             }) : E ? a.default.createElement(rP, {
-                onClickFilter: eL
+                onClickFilter: e_
             }) : null), g === tT && "items" === i && a.default.createElement(a.default.Fragment, null, q.trim().length > 0 && a.default.createElement(rz, {
                 query: q,
                 onClickItem: (t, n) => {
@@ -32333,7 +32101,7 @@
                             }
                         })
                     })({
-                        eventLogger: f,
+                        eventLogger: h,
                         interaction: n,
                         locale: c,
                         query: q,
@@ -32377,7 +32145,7 @@
                             }
                         })
                     })({
-                        eventLogger: f,
+                        eventLogger: h,
                         interaction: n,
                         locale: c,
                         query: q,
@@ -32413,7 +32181,7 @@
             } = (0, i.useRobloxAuthentication)(),
             {
                 eventLogger: p
-            } = th(),
+            } = tf(),
             m = (0, a.useCallback)(() => c({
                 interaction: tv.Shortcut
             }), [c]);
@@ -32549,7 +32317,7 @@
                 isFetched: u
             } = (0, i.useRobloxAuthentication)(), c = null == s ? void 0 : s.id, {
                 robloxSiteDomain: d
-            } = th(), p = (0, a.useMemo)(() => {
+            } = tf(), p = (0, a.useMemo)(() => {
                 let t;
                 return t = new ts.CreatorSettingsAPIApi(new z.Configuration({
                     robloxSiteDomain: d,
@@ -32633,7 +32401,7 @@
         } = t, {
             currentProduct: i,
             eventLogger: l
-        } = th(), [s, u] = (0, a.useState)(!1), [c, d] = (0, a.useState)(() => oc()), p = (0, a.useCallback)(t => {
+        } = tf(), [s, u] = (0, a.useState)(!1), [c, d] = (0, a.useState)(() => oc()), p = (0, a.useCallback)(t => {
             let {
                 searchDialogOpen: n,
                 interaction: o
@@ -32703,14 +32471,14 @@
                 searchDialogOpen: !0,
                 interaction: t.interaction
             })
-        }, [s, p]), f = (0, a.useMemo)(() => ({
+        }, [s, p]), h = (0, a.useMemo)(() => ({
             searchSessionId: c,
             searchDialogOpen: s,
             setSearchDialogOpenWithEvent: p,
             toggleSearchDialogOpenWithEvent: m
         }), [c, s, p, m]);
         return a.default.createElement(tE.Provider, {
-            value: f
+            value: h
         }, n)
     }, "SearchConfigProvider", 0, function(t) {
         let {
@@ -32724,7 +32492,7 @@
             currentProduct: r,
             creatorHubSearchIxpParams: o
         }), [n, l, r, o]);
-        return a.default.createElement(tf.Provider, {
+        return a.default.createElement(th.Provider, {
             value: s
         }, i)
     }, "SearchContainer", 0, on, "SearchContainerRaw", 0, ot], 798731)
@@ -32786,7 +32554,7 @@
             this.statusCode = t, this.statusText = n, this.content = r
         }
     }
-    class f {
+    class h {
         get(t, n) {
             return this.send({
                 ...n,
@@ -32812,10 +32580,10 @@
             return ""
         }
     }(eq = eX || (eX = {}))[eq.Trace = 0] = "Trace", eq[eq.Debug = 1] = "Debug", eq[eq.Information = 2] = "Information", eq[eq.Warning = 3] = "Warning", eq[eq.Error = 4] = "Error", eq[eq.Critical = 5] = "Critical", eq[eq.None = 6] = "None";
-    class h {
+    class f {
         log(t, n) {}
     }
-    h.instance = new h;
+    f.instance = new f;
     class g {
         static isRequired(t, n) {
             if (null == t) throw Error("The '".concat(n, "' argument is required."))
@@ -32927,7 +32695,7 @@
     function I(t) {
         return t.stack ? t.stack : t.message ? t.message : "".concat(t)
     }
-    class x extends f {
+    class x extends h {
         async send(t) {
             let n, r;
             if (t.abortSignal && t.abortSignal.aborted) throw new l;
@@ -32999,7 +32767,7 @@
         }
         return r
     }
-    class T extends f {
+    class T extends h {
         send(t) {
             return t.abortSignal && t.abortSignal.aborted ? Promise.reject(new l) : t.method ? t.url ? new Promise((n, r) => {
                 let o = new XMLHttpRequest;
@@ -33022,7 +32790,7 @@
             super(), this._logger = t
         }
     }
-    class k extends f {
+    class k extends h {
         send(t) {
             return t.abortSignal && t.abortSignal.aborted ? Promise.reject(new l) : t.method ? t.url ? this._httpClient.send(t) : Promise.reject(Error("No url defined.")) : Promise.reject(Error("No method defined."))
         }
@@ -33086,7 +32854,7 @@
             this.observers = []
         }
     }
-    class L {
+    class _ {
         async _send(t) {
             let n = this._protocol.writeMessage(t),
                 r = Promise.resolve();
@@ -33096,7 +32864,7 @@
                     o = () => {};
                 b(n) ? this._bufferedByteCount += n.byteLength : this._bufferedByteCount += n.length, this._bufferedByteCount >= this._bufferSize && (r = new Promise((n, r) => {
                     t = n, o = r
-                })), this._messages.push(new _(n, this._totalMessageCount, t, o))
+                })), this._messages.push(new L(n, this._totalMessageCount, t, o))
             }
             try {
                 this._reconnectInProgress || await this._connection.send(n)
@@ -33169,7 +32937,7 @@
             this._bufferSize = 1e5, this._messages = [], this._totalMessageCount = 0, this._waitForSequenceMessage = !1, this._nextReceivingSequenceId = 1, this._latestReceivedSequenceId = 0, this._bufferedByteCount = 0, this._reconnectInProgress = !1, this._protocol = t, this._connection = n, this._bufferSize = r
         }
     }
-    class _ {
+    class L {
         constructor(t, n, r, o) {
             this._message = t, this._id = n, this._resolver = r, this._rejector = o
         }
@@ -33218,7 +32986,7 @@
                     version: n
                 };
                 if (this._logger.log(eX.Debug, "Sending handshake request."), await this._sendMessage(this._handshakeProtocol.writeHandshakeRequest(r)), this._logger.log(eX.Information, "Using HubProtocol '".concat(this._protocol.name, "'.")), this._cleanupTimeout(), this._resetTimeoutPeriod(), this._resetKeepAliveInterval(), await t, this._stopDuringStartError) throw this._stopDuringStartError;
-                (this.connection.features.reconnect || 0) && (this._messageBuffer = new L(this._protocol, this.connection, this._statefulReconnectBufferSize), this.connection.features.disconnected = this._messageBuffer._disconnected.bind(this._messageBuffer), this.connection.features.resend = () => {
+                (this.connection.features.reconnect || 0) && (this._messageBuffer = new _(this._protocol, this.connection, this._statefulReconnectBufferSize), this.connection.features.disconnected = this._messageBuffer._disconnected.bind(this._messageBuffer), this.connection.features.resend = () => {
                     if (this._messageBuffer) return this._messageBuffer._resend()
                 }), this.connection.features.inherentKeepAlive || await this._sendMessage(this._cachedPingMessage)
             } catch (t) {
@@ -33598,7 +33366,7 @@
     }
     class P {}
     P.Authorization = "Authorization", P.Cookie = "Cookie";
-    class B extends f {
+    class B extends h {
         async send(t) {
             let n = !0;
             this._accessTokenFactory && (!this._accessToken || t.url && t.url.indexOf("/negotiate?") > 0) && (n = !1, this._accessToken = await this._accessTokenFactory()), this._setAuthorizationHeader(t);
@@ -34001,7 +33769,7 @@
         }
         constructor(n, r = {}) {
             var o;
-            if (this._stopPromiseResolver = () => {}, this.features = {}, this._negotiateVersion = 1, g.isRequired(n, "url"), this._logger = void 0 === (o = r.logger) ? new w(eX.Information) : null === o ? h.instance : void 0 !== o.log ? o : new w(o), this.baseUrl = this._resolveUrl(n), (r = r || {}).logMessageContent = void 0 !== r.logMessageContent && r.logMessageContent, "boolean" == typeof r.withCredentials || void 0 === r.withCredentials) r.withCredentials = void 0 === r.withCredentials || r.withCredentials;
+            if (this._stopPromiseResolver = () => {}, this.features = {}, this._negotiateVersion = 1, g.isRequired(n, "url"), this._logger = void 0 === (o = r.logger) ? new w(eX.Information) : null === o ? f.instance : void 0 !== o.log ? o : new w(o), this.baseUrl = this._resolveUrl(n), (r = r || {}).logMessageContent = void 0 !== r.logMessageContent && r.logMessageContent, "boolean" == typeof r.withCredentials || void 0 === r.withCredentials) r.withCredentials = void 0 === r.withCredentials || r.withCredentials;
             else throw Error("withCredentials option was not a 'boolean' or 'undefined' value");
             r.timeout = void 0 === r.timeout ? 1e5 : r.timeout;
             let a = null,
@@ -34066,7 +33834,7 @@
         parseMessages(t, n) {
             if ("string" != typeof t) throw Error("Invalid input for JSON hub protocol. Expected a string.");
             if (!t) return [];
-            null === n && (n = h.instance);
+            null === n && (n = f.instance);
             let r = D.parse(t),
                 o = [];
             for (let t of r) {
@@ -34178,7 +33946,7 @@
             let t = this.httpConnectionOptions || {};
             if (void 0 === t.logger && (t.logger = this.logger), !this.url) throw Error("The 'HubConnectionBuilder.withUrl' method must be called before building the connection.");
             let n = new V(this.url, t);
-            return F.create(n, this.logger || h.instance, this.protocol || new G, this.reconnectPolicy, this._serverTimeoutInMilliseconds, this._keepAliveIntervalInMilliseconds, this._statefulReconnectBufferSize)
+            return F.create(n, this.logger || f.instance, this.protocol || new G, this.reconnectPolicy, this._serverTimeoutInMilliseconds, this._keepAliveIntervalInMilliseconds, this._statefulReconnectBufferSize)
         }
     }
     let Z = () => (() => {
@@ -34229,47 +33997,47 @@
         ed = new Set,
         ep = [],
         em = new Set,
-        ef = t => {
+        eh = t => {
             ep.forEach(n => {
                 try {
                     n(t)
                 } catch (t) {}
             })
         },
-        eh = () => {
-            ef("Master is: ".concat(eo))
+        ef = () => {
+            eh("Master is: ".concat(eo))
         },
         eg = () => Date.now().toString(),
         ey = t => {
-            ef("Announcing: Is this tab the master? ".concat(t)), ed.forEach(n => {
+            eh("Announcing: Is this tab the master? ".concat(t)), ed.forEach(n => {
                 try {
                     n(t)
                 } catch (t) {
-                    ef("Error running subscribed election result handler: ".concat(JSON.stringify(t)))
+                    eh("Error running subscribed election result handler: ".concat(JSON.stringify(t)))
                 }
             })
         },
         ev = () => {
-            ea && (ef("Relinquishing master role (connection unhealthy)"), ea = !1, eo = "", el = 0, em.clear(), localStorage.getItem(en.masterId) === ec && (localStorage.removeItem(en.masterId), localStorage.removeItem(en.masterLastResponseTime)), ey(!1))
+            ea && (eh("Relinquishing master role (connection unhealthy)"), ea = !1, eo = "", el = 0, em.clear(), localStorage.getItem(en.masterId) === ec && (localStorage.removeItem(en.masterId), localStorage.removeItem(en.masterLastResponseTime)), ey(!1))
         },
         eb = () => {
-            ef("Declaring myself as the master ".concat(ec)), eo = ec, ea = !0, $(en.masterId, ec), localStorage.removeItem(en.electionInProgress), ey(!0), es && window.removeEventListener("unload", es), es = () => {
+            eh("Declaring myself as the master ".concat(ec)), eo = ec, ea = !0, $(en.masterId, ec), localStorage.removeItem(en.electionInProgress), ey(!0), es && window.removeEventListener("unload", es), es = () => {
                 let t = localStorage.getItem(en.masterId);
                 t && t === ec && (localStorage.removeItem(en.masterId), localStorage.removeItem(en.masterLastResponseTime))
             }, window.addEventListener("unload", es)
         },
         eC = () => {
             let t = localStorage.getItem(en.electionInProgress);
-            eo = "", t ? (ef("Election already in progress"), window.setTimeout(() => {
-                eo && 0 !== eo.length ? eo !== ec && ey(!1) : eb(), eh()
-            }, 400 + eu())) : (ef("Election not in progress"), localStorage.setItem(en.electionInProgress, eg()), eo && 0 !== eo.length ? eo !== ec && ey(!1) : eb(), eh())
+            eo = "", t ? (eh("Election already in progress"), window.setTimeout(() => {
+                eo && 0 !== eo.length ? eo !== ec && ey(!1) : eb(), ef()
+            }, 400 + eu())) : (eh("Election not in progress"), localStorage.setItem(en.electionInProgress, eg()), eo && 0 !== eo.length ? eo !== ec && ey(!1) : eb(), ef())
         },
         eE = () => {
-            ef("Checking if Master still active"), ea || Date.now() - el <= 2500 || (er = "", $(en.masterIdRequest, "q"), window.setTimeout(() => {
+            eh("Checking if Master still active"), ea || Date.now() - el <= 2500 || (er = "", $(en.masterIdRequest, "q"), window.setTimeout(() => {
                 if (0 === er.length) {
                     if (ea || Date.now() - el <= 2500) return void eb();
-                    ef("Master did not respond. Initiating election"), eC()
-                } else eo !== er && (ey(!1), eo = er, eh())
+                    eh("Master did not respond. Initiating election"), eC()
+                } else eo !== er && (ey(!1), eo = er, ef())
             }, 1500 + eu()))
         },
         ew = () => {
@@ -34287,16 +34055,16 @@
         },
         eI = () => {
             let t = localStorage.getItem(en.masterId);
-            ef("Binding to events"), Q(en.masterIdRequest, et, t => {
-                ea && 0 === em.size && "q" === t && (ef("Query Received - Confirming Still Master"), $(en.masterIdResponse, ec), localStorage.setItem(en.masterLastResponseTime, eg()))
+            eh("Binding to events"), Q(en.masterIdRequest, et, t => {
+                ea && 0 === em.size && "q" === t && (eh("Query Received - Confirming Still Master"), $(en.masterIdResponse, ec), localStorage.setItem(en.masterLastResponseTime, eg()))
             }), Q(en.masterId, et, t => {
                 if (t) {
-                    ef("Received Notice Of Master"), el = Date.now();
+                    eh("Received Notice Of Master"), el = Date.now();
                     let n = ea;
-                    (ea = (eo = t) === ec) || !n || (ey(!1), ew()), ea && !n && eb(), localStorage.removeItem(en.electionInProgress), eh()
+                    (ea = (eo = t) === ec) || !n || (ey(!1), ew()), ea && !n && eb(), localStorage.removeItem(en.electionInProgress), ef()
                 }
             }), Q(en.masterIdResponse, et, t => {
-                t ? (ef("Master Responded to Query"), el = Date.now(), er = t, ew()) : ef("Master Responded to Query - no message")
+                t ? (eh("Master Responded to Query"), el = Date.now(), er = t, ew()) : eh("Master Responded to Query - no message")
             });
             let n = localStorage.getItem(en.masterLastResponseTime);
             el = n && 0 !== n.length ? parseInt(n, 10) : 0, t ? t === ec ? ea = !0 : el > 0 && Date.now() - el > 2e4 ? eC() : eE() : eC(), window.setTimeout(() => {
@@ -34313,15 +34081,15 @@
         eD = new Map,
         ej = new Map,
         eR = new Map,
-        eL = new Map,
         e_ = new Map,
+        eL = new Map,
         eF = function(t) {
             for (var n, r = arguments.length, o = Array(r > 1 ? r - 1 : 0), a = 1; a < r; a++) o[a - 1] = arguments[a];
-            eX.Warning >= (null != (n = eL.get(t)) ? n : eX.None) && console.warn(...o)
+            eX.Warning >= (null != (n = e_.get(t)) ? n : eX.None) && console.warn(...o)
         },
         eN = function(t) {
             for (var n, r = arguments.length, o = Array(r > 1 ? r - 1 : 0), a = 1; a < r; a++) o[a - 1] = arguments[a];
-            eX.Error >= (null != (n = eL.get(t)) ? n : eX.None) && console.error(...o)
+            eX.Error >= (null != (n = e_.get(t)) ? n : eX.None) && console.error(...o)
         },
         eM = function(t, n) {
             var r;
@@ -34340,11 +34108,11 @@
         },
         eP = t => t instanceof Error ? t : void 0,
         eB = (t, n) => {
-            let r = e_.get(t),
+            let r = eL.get(t),
                 o = r ? r.then(n, n) : n(),
                 a = Promise.resolve(o).then(() => void 0, () => void 0);
-            return e_.set(t, a), a.then(() => {
-                e_.get(t) === a && e_.delete(t)
+            return eL.set(t, a), a.then(() => {
+                eL.get(t) === a && eL.delete(t)
             }), o
         },
         eO = (t, n) => eB(n, async () => {
@@ -34401,7 +34169,7 @@
                     }
                 }, [t]), n
             }(!d && c);
-        eL.set(r, i);
+        e_.set(r, i);
         let m = (0, o.useRef)(t);
         (0, o.useEffect)(() => {
             m.current = t
@@ -34411,7 +34179,7 @@
                 n = t
             }(c)
         }, [d, c]);
-        let f = (0, o.useMemo)(() => "useSignalR.".concat(r, ".").concat(ee()), [r]);
+        let h = (0, o.useMemo)(() => "useSignalR.".concat(r, ".").concat(ee()), [r]);
         (0, o.useEffect)(() => {
             var n;
             let o = null != (n = ek.get(r)) ? n : new Set;
@@ -34508,7 +34276,7 @@
                 }), ej.delete(r), eR.set(r, !1))
             }
         }, [d, p, r, i, u]), (0, o.useEffect)(() => {
-            if (!d && !p && c && Z()) return Q(eT, f, t => {
+            if (!d && !p && c && Z()) return Q(eT, h, t => {
                 if (t) try {
                     let n = JSON.parse(t);
                     if ("object" != typeof n || null === n || !("namespace" in n) || "string" != typeof n.namespace || !("detail" in n) || "string" != typeof n.detail || !("basePath" in n) || "string" != typeof n.basePath || n.basePath !== r) return;
@@ -34518,9 +34286,9 @@
                 }
             }), () => {
                 let t, n;
-                t = X(eT, f), (n = Y.get(t)) && (window.removeEventListener("storage", n), Y.delete(t))
+                t = X(eT, h), (n = Y.get(t)) && (window.removeEventListener("storage", n), Y.delete(t))
             }
-        }, [d, p, r, f, c]), (0, o.useEffect)(() => {
+        }, [d, p, r, h, c]), (0, o.useEffect)(() => {
             if (d || !p) return;
             let t = async () => {
                 eA(r, !1), ev();
@@ -34567,5 +34335,5 @@
     }])
 }]);
 
-//# debugId=dafecccc-341e-dc9f-8a14-ca2273b0aad4
-//# sourceMappingURL=3zskicqr2-4p1.js.map
+//# debugId=d9673ab2-f851-1ab4-a51f-cdfc601065d3
+//# sourceMappingURL=02jmco68ntc8x.js.map

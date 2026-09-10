@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "c8f2b0e6-3df8-621e-1d88-926a6af45696")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "cc015a80-b4bf-75c6-cb25-ced2ff34ada6")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 97782, e => {
@@ -2045,6 +2045,39 @@
                 breadcrumbType: ee.default.AudienceReach,
                 getLinkPath: e => "/dashboard/creations/experiences/".concat(e.baseId, "/audience-reach")
             },
+            "game-details": {
+                displayName: e => {
+                    let {
+                        translate: t
+                    } = e;
+                    return et({
+                        key: "Heading.GameDetails"
+                    }, t)
+                },
+                breadcrumbType: ee.default.GameDetails
+            },
+            "content-rating": {
+                displayName: e => {
+                    let {
+                        translate: t
+                    } = e;
+                    return et({
+                        key: "Heading.ContentRatings"
+                    }, t)
+                },
+                breadcrumbType: ee.default.ContentRating
+            },
+            "game-join": {
+                displayName: e => {
+                    let {
+                        translate: t
+                    } = e;
+                    return et({
+                        key: "Title.GameJoin"
+                    }, t)
+                },
+                breadcrumbType: ee.default.GameJoin
+            },
             "player-support": {
                 displayName: e => {
                     let {
@@ -2326,7 +2359,7 @@
                     children: D.length > 1 && D
                 }), " "]
             })
-        }, [h.TranslationNamespace.Creations, h.TranslationNamespace.Features, h.TranslationNamespace.AssetTypes, h.TranslationNamespace.SendrNotificationPreferences, h.TranslationNamespace.Advanced, h.TranslationNamespace.OpenCloud, h.TranslationNamespace.Error, h.TranslationNamespace.DataCollectionSettings, h.TranslationNamespace.UnifiedNavigation, h.TranslationNamespace.Payouts, h.TranslationNamespace.Matchmaking, h.TranslationNamespace.Environments, h.TranslationNamespace.Navigation, h.TranslationNamespace.MarketplaceOnboarding, h.TranslationNamespace.PublicPublish, h.TranslationNamespace.ExperienceAlerts, h.TranslationNamespace.PlayerFeedback, h.TranslationNamespace.DevEx]),
+        }, [h.TranslationNamespace.Creations, h.TranslationNamespace.Features, h.TranslationNamespace.AssetTypes, h.TranslationNamespace.SendrNotificationPreferences, h.TranslationNamespace.Advanced, h.TranslationNamespace.OpenCloud, h.TranslationNamespace.Error, h.TranslationNamespace.DataCollectionSettings, h.TranslationNamespace.UnifiedNavigation, h.TranslationNamespace.Payouts, h.TranslationNamespace.Matchmaking, h.TranslationNamespace.Environments, h.TranslationNamespace.Navigation, h.TranslationNamespace.MarketplaceOnboarding, h.TranslationNamespace.PublicPublish, h.TranslationNamespace.ExperienceAlerts, h.TranslationNamespace.PlayerFeedback, h.TranslationNamespace.DevEx, h.TranslationNamespace.Publishing]),
         ed = () => {
             let {
                 currentItemType: e,
@@ -3481,7 +3514,7 @@
                     color: "secondary",
                     component: "span",
                     children: [z, (0, t.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/b58ee12768a9c2f22edf7a23ad5ddaa67b6f3f23/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/fa0b0b331a3ae775dd9024c5f4e07bea605f8b12/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -5108,5 +5141,5 @@
     }, "useCookieConsentContext", 0, j], 260241)
 }]);
 
-//# debugId=c8f2b0e6-3df8-621e-1d88-926a6af45696
-//# sourceMappingURL=2340ijuohx_t6.js.map
+//# debugId=cc015a80-b4bf-75c6-cb25-ced2ff34ada6
+//# sourceMappingURL=18bw2ep_fr8y4.js.map
