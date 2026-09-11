@@ -3690,6 +3690,7 @@ Feature.Profile.Action.ShareProfile,Chia sẻ hồ sơ
 Feature.Profile.Action.ShareProfileLink,Chia sẻ đường liên kết đến hồ sơ
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,Chia Sẻ Mã QR
+Feature.Profile.Action.Trade,Buôn Bán
 Feature.Profile.Action.UserBlocked,Người Chơi Bị Chặn
 Feature.Profile.Action.ViewFullProfile,Xem hồ sơ đầy đủ
 Feature.Profile.Action.ViewProfile,Xem hồ sơ
@@ -4336,6 +4337,7 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,Không rời khỏi
 Feature.VerificationUpsell.Action.EditPhoneNumber,Chỉnh Sửa Số Điện Thoại
 Feature.VerificationUpsell.Action.EnableVoice,
+Feature.VerificationUpsell.Action.Logout,Vẫn đăng xuất
 Feature.VerificationUpsell.Action.Next,Tiếp theo
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

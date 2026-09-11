@@ -3676,6 +3676,7 @@ Feature.Profile.Action.ShareProfile,प्रोफ़ाइल शेयर क
 Feature.Profile.Action.ShareProfileLink,प्रोफ़ाइल लिंक शेयर करें
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,QR कोड शेयर करें
+Feature.Profile.Action.Trade,ट्रेड करें
 Feature.Profile.Action.UserBlocked,यूज़र को ब्लॉक किया गया
 Feature.Profile.Action.ViewFullProfile,पूरी प्रोफ़ाइल देखें
 Feature.Profile.Action.ViewProfile,
@@ -4323,6 +4324,7 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,न निकलें
 Feature.VerificationUpsell.Action.EditPhoneNumber,फ़ोन नंबर एडिट करें
 Feature.VerificationUpsell.Action.EnableVoice,
+Feature.VerificationUpsell.Action.Logout,फिर भी लॉग आउट करें
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

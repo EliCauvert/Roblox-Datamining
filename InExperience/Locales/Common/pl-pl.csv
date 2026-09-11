@@ -3695,6 +3695,7 @@ Feature.Profile.Action.ShareProfile,Udostępnij profil
 Feature.Profile.Action.ShareProfileLink,Udostępnij link do profilu
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
+Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,Użytkownik zablokowany
 Feature.Profile.Action.ViewFullProfile,Wyświetl pełny profil
 Feature.Profile.Action.ViewProfile,
@@ -4341,6 +4342,7 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,Nie wychodź
 Feature.VerificationUpsell.Action.EditPhoneNumber,Edytuj numer telefonu
 Feature.VerificationUpsell.Action.EnableVoice,Włącz czat głosowy
+Feature.VerificationUpsell.Action.Logout,Wyloguj mimo to
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

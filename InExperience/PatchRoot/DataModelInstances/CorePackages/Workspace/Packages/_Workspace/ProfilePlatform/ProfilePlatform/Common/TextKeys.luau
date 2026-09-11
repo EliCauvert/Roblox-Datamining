@@ -1,4 +1,5 @@
-﻿local fFlagConnectionsToFriendsRename = require(script:FindFirstAncestor("ProfilePlatform").Parent.SharedFlags).FFlagConnectionsToFriendsRename
+﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local fFlagConnectionsToFriendsRename = require(profilePlatform.Parent.SharedFlags).FFlagConnectionsToFriendsRename
 
 return {
 	Profile = "CommonUI.Features.Label.Profile",
@@ -40,7 +41,7 @@ return {
 	RemoveTrustedConnection = if fFlagConnectionsToFriendsRename then "Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend" else "Feature.Friends.TrustedConnection.Action.RemoveTrustedConnection",
 	ViewPlatformProfile = "Feature.Friends.Action.ViewPlatformProfile",
 	CurrencyTransfer = "Features.Transfers.RobuxTransfer.Heading.SendRobux",
-	TradeItems = "CommonUI.Features.Label.Trades",
+	TradeItems = if require(profilePlatform.Flags.FFlagProfilePlatformTradeActionLabel) then "Feature.Profile.Action.Trade" else "CommonUI.Features.Label.Trades",
 	BlockLimitReached = "Feature.Profile.Message.BlockError",
 	BlockTargetAlreadyBlocked = "Feature.Friends.Error.TargetAlreadyBlockedError",
 	UnblockTargetNotBlocked = "Feature.Friends.Error.UnblockTargetNotBlockedError",

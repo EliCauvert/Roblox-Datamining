@@ -13,46 +13,61 @@ local tempRnSwitchNavigatorName = constants.TempRnSwitchNavigatorName
 
 return function(p1, p2)
 	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), computeSplitEligibilityModule (ref), reactModule (ref), splitPaneContextModule (ref), tempRnSwitchNavigatorName (ref), splitPaneSlot (ref), viewState (ref), roactNavigationModule (ref)
-	local options
+	local options, v
 	local store = splitPaneStoreModule.getStore()
 	local var1 = signalsReactModule.useSignalState(store.getIsBreakpointEnabled)
-	local var2 = computeSplitEligibilityModule(p1)
-	local var3 = var1 and var2
-	local var4 = reactModule.useContext(splitPaneContextModule).renderSupportContent ~= nil
-	local var5 = p1[1] ~= nil and (p1[1].descriptor ~= nil and (p1[1].descriptor.state ~= nil and p1[1].descriptor.state.routeName == tempRnSwitchNavigatorName))
+	local var2 = signalsReactModule.useSignalState(store.getSupportPaneMode)
+	local var3 = computeSplitEligibilityModule(p1)
+	local var4 = var1 and var3
+	local var5 = reactModule.useContext(splitPaneContextModule).renderSupportContent ~= nil
+	local var6 = p1[1] ~= nil and (p1[1].descriptor ~= nil and (p1[1].descriptor.state ~= nil and p1[1].descriptor.state.routeName == tempRnSwitchNavigatorName))
 	local t = {}
-	local var6 = nil
-	local var7 = false
+	local var7 = nil
+	local var8 = false
 	
-	if var3 then
+	if var4 then
 		for i = #p1, 1, -1 do
 			options = p1[i].descriptor.options
-			local splitPaneEligibility = options.splitPaneEligibility
+			v = options.splitPaneEligibility
 			
-			if splitPaneEligibility == splitPaneSlot.Support then
+			if v == splitPaneSlot.Support then
 				table.insert(t, 1, i)
-			elseif (options.transparent or options.overlayEnabled) and splitPaneEligibility == nil or #t <= 0 then
+			elseif (options.transparent or options.overlayEnabled) and v == nil or #t <= 0 then
 				continue
 			end
-			var6 = i
+			var7 = i
 		end
 	elseif not var1 then
 		for i, v in p1 do
 			if v.descriptor.options.splitPaneEligibility == splitPaneSlot.Support and v.viewState ~= viewState.Closing then
-				var7 = true
+				var8 = true
 				break
 			end
 		end
 	end
-	local var8 = var6 ~= nil and #t > 0
-	options = var7 or (var8 or var3 and (var4 and p2 >= 1))
+	local var9 = var7 ~= nil and #t > 0
+	options = var8 or (var9 or var4 and (var5 and p2 >= 1))
+	v = nil
+	
+	if var4 then
+		for i_1 = #p1, 1, -1 do
+			local options_1 = p1[i_1].descriptor.options
+			local splitPaneEligibility = options_1.splitPaneEligibility
+			
+			if splitPaneEligibility == splitPaneSlot.Support or (options_1.transparent or options_1.overlayEnabled) and splitPaneEligibility == nil then
+				continue
+			end
+			v = i_1
+			break
+		end
+	end
 	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), store (ref), var2 (ref), p1 (ref), splitPaneSlot (copy), roactNavigationModule (copy)
-		if not var5 then return end
+		-- upvalues: var6 (ref), store (ref), var3 (ref), p1 (ref), splitPaneSlot (copy), roactNavigationModule (copy)
+		if not var6 then return end
 		local isSplitEligible = store.getIsSplitEligible(false)
-		store.setIsSplitEligible(var2)
+		store.setIsSplitEligible(var3)
 		
-		if not isSplitEligible or var2 then return end
+		if not isSplitEligible or var3 then return end
 		local descriptor = p1[1].descriptor
 		
 		if descriptor == nil or descriptor.navigation == nil then return end
@@ -65,19 +80,19 @@ return function(p1, p2)
 				local splitPaneEligibility = descriptor_1.options.splitPaneEligibility
 				
 				if splitPaneEligibility ~= nil and splitPaneEligibility ~= splitPaneSlot.Content then
-					local var9 = if descriptor_1.state ~= nil then descriptor_1.state.key else nil
+					local var10 = if descriptor_1.state ~= nil then descriptor_1.state.key else nil
 					
-					if var9 ~= nil then
-						navigation.dispatch(roactNavigationModule.StackActions.pop({ prune = false, immediate = true, key = var9 }))
+					if var10 ~= nil then
+						navigation.dispatch(roactNavigationModule.StackActions.pop({ prune = false, immediate = true, key = var10 }))
 					end
 				end
 			end
 		end
-	end, { var5, var2, p1, store })
+	end, { var6, var3, p1, store })
 	reactModule.useEffect(function()
-		-- upvalues: options (ref), var5 (ref), store (ref), p1 (ref), viewState (copy), splitPaneSlot (copy)
+		-- upvalues: options (ref), var6 (ref), store (ref), p1 (ref), viewState (copy), splitPaneSlot (copy)
 		if options then return end
-		if var5 then
+		if var6 then
 			store.setTemporarySupportPaneMode(nil)
 		end
 		for i, v in p1 do
@@ -85,11 +100,16 @@ return function(p1, p2)
 				v.setClosed()
 			end
 		end
-	end, { var5, options, p1, store })
+	end, { var6, options, p1, store })
 	
 	return {
 		isSplitLayoutEnabled = options,
-		isRouteActiveOnPane = var8,
-		paneIndices = t
+		isRouteActiveOnPane = var9,
+		paneIndices = t,
+		contentTopCandidate = v,
+		splitPrimaryIndex = var7,
+		supportPaneMode = var2,
+		isRootAppStack = var6,
+		isSplitEnabled = var4
 	}
 end

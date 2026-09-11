@@ -21,6 +21,7 @@ local useGetOneToOneFriendIdFromConversationIdModule = require(appChat.Hooks.use
 local useConversationAvatarPresenceImageModule = require(appChat.Hooks.useConversationAvatarPresenceImage)
 local presenceBubbleCellStyledModule = require(script.Parent.PresenceBubbleCellStyled)
 local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppChatPresenceStoreMigration)
+local fFlagAppChatServerSideConversationSearchModule = require(appChat.Flags.FFlagAppChatServerSideConversationSearch)
 local t = {
 	messageUnavailableKey = "Feature.Chat.Message.MessageUnavailable",
 	boldTitle = true,
@@ -32,7 +33,7 @@ local t = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useIsUserPendingModule (ref), useIsInExperienceModule (ref), useGetOneToOneFriendIdFromConversationIdModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), fFlagAppChatPresenceStoreMigrationModule (ref), useConversationAvatarPresenceImageModule (ref), focusNavigationUtilsModule (ref), useNavigation (ref), fFlagLuaAppEnablePageLoadTracker (ref), fFlagLuaAppEnableChatMilestones (ref), usePageTracker (ref), reactModule (ref), enumScreensModule (ref), getConversationTitleModule (ref), useLocalization (ref), presenceBubbleCellStyledModule (ref), images (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useIsUserPendingModule (ref), useIsInExperienceModule (ref), useGetOneToOneFriendIdFromConversationIdModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), fFlagAppChatPresenceStoreMigrationModule (ref), useConversationAvatarPresenceImageModule (ref), focusNavigationUtilsModule (ref), useNavigation (ref), fFlagLuaAppEnablePageLoadTracker (ref), fFlagLuaAppEnableChatMilestones (ref), usePageTracker (ref), reactModule (ref), fFlagAppChatServerSideConversationSearchModule (ref), enumScreensModule (ref), getConversationTitleModule (ref), useLocalization (ref), presenceBubbleCellStyledModule (ref), images (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local conversation = var1.conversation
 	local var2 = useIsUserPendingModule(conversation or {})
@@ -49,9 +50,10 @@ return reactModule.memo(function(p1)
 			var9:sendMilestone("main_cta_interactable")
 		end
 	end, {})
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), var8 (ref), enumScreensModule (copy), var1 (ref)
-		if var7 == "Focus" and var8 then
+	local var10 = fFlagAppChatServerSideConversationSearchModule and (var1.conversation.isSearchResult == true and var1.onActivated ~= nil)
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: var7 (ref), var8 (ref), var10 (ref), enumScreensModule (copy), var1 (ref)
+		if var7 == "Focus" and var8 and not var10 then
 			var8.navigate(enumScreensModule.ChatConversation, {
 				navigatedWithFocus = true,
 				conversationId = var1.conversation.id
@@ -61,22 +63,28 @@ return reactModule.memo(function(p1)
 		elseif var1.onActivated then
 			var1.onActivated(var1.conversation)
 		end
-	end, { var1.onActivated, var1.conversation, var7, var8 })
-	local var11 = getConversationTitleModule(conversation)
-	local var12 = var1.subTitleText and var1.subTitleText:split("\n")
-	local var13 = if var12 then var12[1] else ""
-	local var14 = useLocalization({ subTitleText = var1.messageUnavailableKey })
+	end, {
+		var1.onActivated,
+		var1.conversation,
+		var7,
+		var8,
+		var10
+	})
+	local var12 = getConversationTitleModule(conversation)
+	local var13 = var1.subTitleText and var1.subTitleText:split("\n")
+	local var14 = if var13 then var13[1] else ""
+	local var15 = useLocalization({ subTitleText = var1.messageUnavailableKey })
 	
 	if var2 then
-		var13 = var14.subTitleText
+		var14 = var15.subTitleText
 	end
 	return reactModule.createElement(presenceBubbleCellStyledModule, {
 		boldTitle = var1.boldTitle,
 		style = var1.style,
 		childWidth = var1.childWidth,
-		onActivated = var10,
+		onActivated = var11,
 		onCircleActivated = var1.onCircleActivated,
-		subTitleText = var13,
+		subTitleText = var14,
 		subTitleTimestamp = var1.subTitleTimestamp,
 		subTitleIcon = if var2 then images["icons/status/private_small"] else nil,
 		secondaryTitleText = var1.secondaryTitleText,
@@ -84,9 +92,10 @@ return reactModule.memo(function(p1)
 		Size = var1.Size,
 		isLoading = var1.isLoading,
 		avatarCirclePresenceImage = if fFlagAppChatPresenceStoreMigrationModule then var6 else conversation.presenceImage,
-		titleText = var11,
+		titleText = var12,
 		thumbnails = conversation.thumbnails,
 		conversationId = conversation.id,
+		participants = if fFlagAppChatServerSideConversationSearchModule and conversation.isSearchResult then conversation.participants else nil,
 		hideLeftAvatarPadding = var1.hideLeftAvatarPadding,
 		paddingLeft = var1.paddingLeft,
 		paddingRight = var1.paddingRight,

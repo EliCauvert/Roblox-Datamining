@@ -160,6 +160,7 @@ return reactModule.memo(function(p1)
 		}, {
 			conversationFacePile = if var15 then reactModule.createElement(conversationFacePileModule, {
 				conversationId = var1.conversationId,
+				participants = var1.participants,
 				onActivated = var1.onCircleActivated or var1.onActivated,
 				selectable = if var1.onCircleActivated == nil then false else nil
 			}) else nil,

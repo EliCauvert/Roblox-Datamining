@@ -3678,6 +3678,7 @@ Feature.Profile.Action.ShareProfile,แชร์โปรไฟล์
 Feature.Profile.Action.ShareProfileLink,แชร์ลิงก์โปรไฟล์
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,แชร์รหัส QR
+Feature.Profile.Action.Trade,แลกเปลี่ยน
 Feature.Profile.Action.UserBlocked,บล็อคผู้ใช้นี้แล้ว
 Feature.Profile.Action.ViewFullProfile,ดูโปรไฟล์แบบเต็ม
 Feature.Profile.Action.ViewProfile,
@@ -4324,6 +4325,7 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,ไม่ต้องการออก
 Feature.VerificationUpsell.Action.EditPhoneNumber,แก้ไขหมายเลขโทรศัพท์
 Feature.VerificationUpsell.Action.EnableVoice,เปิดใช้งานการแชทด้วยเสียง
+Feature.VerificationUpsell.Action.Logout,ลงชื่อออกเลย
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

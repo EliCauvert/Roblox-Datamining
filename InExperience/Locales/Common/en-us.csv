@@ -3711,6 +3711,7 @@ Feature.Profile.Action.ShareProfile,Share profile
 Feature.Profile.Action.ShareProfileLink,Share profile link
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,Share QR code
+Feature.Profile.Action.Trade,Trade
 Feature.Profile.Action.UserBlocked,User Blocked
 Feature.Profile.Action.ViewFullProfile,View full profile
 Feature.Profile.Action.ViewProfile,View profile
@@ -4362,6 +4363,7 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,Don't leave
 Feature.VerificationUpsell.Action.EditPhoneNumber,Edit Phone Number
 Feature.VerificationUpsell.Action.EnableVoice,Enable Voice Chat
+Feature.VerificationUpsell.Action.Logout,Log out anyway
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

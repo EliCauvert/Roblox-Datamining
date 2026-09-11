@@ -33,6 +33,7 @@ return function()
 			fetchAllShopData = jest.fn(),
 			prefetchWidgetsOnly = jest.fn(),
 			refreshShopItemInfo = jest.fn(),
+			refreshRobuxWidgetsAfterPurchase = jest.fn(),
 			fetchGamePassOwnership = jest.fn(),
 			pollGamePassOwnership = jest.fn(),
 			bonusGamePassIdForNativePurchase = jest.fn(),

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("HideBonusInShopWhenNotClaimable", false) and require(script:FindFirstAncestor("InExperienceShop").Parent.SharedFlags).FFlagEnableRobuxInExperienceShop

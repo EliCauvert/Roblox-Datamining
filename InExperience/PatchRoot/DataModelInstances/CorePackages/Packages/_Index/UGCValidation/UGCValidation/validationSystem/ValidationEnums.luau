@@ -127,7 +127,8 @@ t.ValidationModule = {
 	CurveAnimBoneHierarchyValid = "CurveAnimBoneHierarchyValid",
 	CurveAnimLoopingRequired = "CurveAnimLoopingRequired",
 	CurveAnimStrictSchema = "CurveAnimStrictSchema",
-	EmissiveMapAllowed = "EmissiveMapAllowed"
+	EmissiveMapAllowed = "EmissiveMapAllowed",
+	EmissiveAreaChecks = "EmissiveAreaChecks"
 }
 t.SharedDataMember = {
 	jobId = "jobId",

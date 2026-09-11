@@ -2,9 +2,11 @@
 local t = { MeshId = true, CageMeshId = true, ReferenceMeshId = true }
 local t_1 = {
 	TextureId = true,
+	ColorMap = true,
 	MetalnessMap = true,
 	NormalMap = true,
-	RoughnessMap = true
+	RoughnessMap = true,
+	EmissiveMask = true
 }
 
 return function(p1)

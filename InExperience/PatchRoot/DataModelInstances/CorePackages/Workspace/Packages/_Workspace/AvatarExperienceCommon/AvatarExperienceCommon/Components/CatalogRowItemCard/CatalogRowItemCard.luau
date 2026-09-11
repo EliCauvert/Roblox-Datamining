@@ -19,6 +19,7 @@ local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Optio
 local fFlagAXModeratedItemIconUpdates = avatarExperienceFlagsModule.FFlagAXModeratedItemIconUpdates
 local _ = require(avatarExperienceCommon.Types.TimedOptionType)
 local fFlagAXEnableTimedOptionsForCatalogRowCard = avatarExperienceFlagsModule.FFlagAXEnableTimedOptionsForCatalogRowCard
+local fFlagAXRemoveDynamicHeadBadge = avatarExperienceFlagsModule.FFlagAXRemoveDynamicHeadBadge
 local t = {
 	DYNAMIC_HEAD = "icons/menu/clothing/dynamicHead",
 	LIMITED = "icons/status/item/limited",
@@ -45,7 +46,7 @@ local t_3 = {
 }
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), t_3 (ref), t_2 (ref), t_1 (ref), reactModule (ref), itemCardHeader (ref), itemCardHeaderCornersOverlay (ref), itemCardBadge (ref), itemCardStatus (ref), itemCardIcon (ref), catalogRowItemCardFooterModule (ref), fFlagAXDurables2Option (ref), fFlagAXDurablesForMIS (ref), fFlagAXEnableTimedOptionsForCatalogRowCard (ref)
+	-- upvalues: useTokens (ref), t_3 (ref), t_2 (ref), t_1 (ref), reactModule (ref), itemCardHeader (ref), itemCardHeaderCornersOverlay (ref), itemCardBadge (ref), itemCardStatus (ref), itemCardIcon (ref), fFlagAXRemoveDynamicHeadBadge (ref), catalogRowItemCardFooterModule (ref), fFlagAXDurables2Option (ref), fFlagAXDurablesForMIS (ref), fFlagAXEnableTimedOptionsForCatalogRowCard (ref)
 	local var1 = useTokens()
 	local var2 = if p1.itemInfo then t_3[p1.itemInfo] else nil
 	local var3 = if p1.itemType then t_2[p1.itemType] else nil
@@ -83,7 +84,7 @@ return reactModule.forwardRef(function(p1, p2)
 					}
 				}) elseif p1.itemStatus then if p1.itemStatus.type == "text" then reactModule.createElement(itemCardStatus, { text = p1.itemStatus.text }) elseif var4 then reactModule.createElement(itemCardIcon, { icon = var4 }) else nil else nil,
 				bottomLeftSlot = if var3 then reactModule.createElement(itemCardBadge, { content = var3 }) else nil,
-				bottomRightSlot = if var2 then reactModule.createElement(itemCardBadge, { content = { { type = "icon", icon = var2 } } }) else nil
+				bottomRightSlot = if fFlagAXRemoveDynamicHeadBadge then nil elseif var2 then reactModule.createElement(itemCardBadge, { content = { { type = "icon", icon = var2 } } }) else nil
 			})
 		}, p1.presentationSlot),
 		Footer = reactModule.createElement(catalogRowItemCardFooterModule, {

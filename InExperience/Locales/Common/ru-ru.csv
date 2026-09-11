@@ -2132,6 +2132,7 @@ Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,Поделиться профилем
 Feature.Profile.Action.ShareProfileLink,Поделись ссылкой на профиль
 Feature.Profile.Action.ToQRCode,Поделиться QR-кодом
+Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,
 Feature.Profile.Action.ViewFullProfile,Посмотреть профиль
 Feature.Profile.Description.AboutModalCaption,"Пусть другие узнают больше о тебе. Оставайся в безопасности, не сообщай личные данные."
@@ -2611,6 +2612,7 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,
 Feature.VerificationUpsell.Action.EditPhoneNumber,
 Feature.VerificationUpsell.Action.EnableVoice,
+Feature.VerificationUpsell.Action.Logout,Выйти всё равно
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

@@ -3696,6 +3696,7 @@ Feature.Profile.Action.ShareProfile,Compartilhar perfil
 Feature.Profile.Action.ShareProfileLink,Compartilhe o link do perfil
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
+Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,Usuário bloqueado
 Feature.Profile.Action.ViewFullProfile,Ver perfil completo
 Feature.Profile.Action.ViewProfile,
@@ -4340,6 +4341,7 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,
 Feature.VerificationUpsell.Action.EditPhoneNumber,Editar número de telefone
 Feature.VerificationUpsell.Action.EnableVoice,Ativar o Bate-papo de voz
+Feature.VerificationUpsell.Action.Logout,Sair mesmo assim
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

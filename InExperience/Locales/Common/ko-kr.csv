@@ -3696,6 +3696,7 @@ Feature.Profile.Action.ShareProfile,프로필 공유
 Feature.Profile.Action.ShareProfileLink,프로필 링크 공유
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
+Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,사용자 차단됨
 Feature.Profile.Action.ViewFullProfile,전체 프로필 보기
 Feature.Profile.Action.ViewProfile,
@@ -4342,6 +4343,7 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,
 Feature.VerificationUpsell.Action.EditPhoneNumber,휴대폰 번호 수정
 Feature.VerificationUpsell.Action.EnableVoice,음성 채팅 사용
+Feature.VerificationUpsell.Action.Logout,무시하고 로그아웃
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

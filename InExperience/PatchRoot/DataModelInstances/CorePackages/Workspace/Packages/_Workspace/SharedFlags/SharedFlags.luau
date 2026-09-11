@@ -103,6 +103,7 @@ local guacMomentsFeatureList = game:DefineFastFlag("GuacMomentsFeatureList", fal
 local guacMomentsFeatureList_1 = game:DefineFastFlag("MomentsAutoplayAmpPolicy2", false) and guacMomentsFeatureList
 local enableSplitPanel = game:DefineFastFlag("EnableSplitPanel", false)
 local enableSplitPanel_1 = game:DefineFastFlag("EnableSplitPaneSessionL3", false) and enableSplitPanel
+local enableSplitPanel_2 = game:DefineFastFlag("EnableOnScreenAPIIntegration", false) and enableSplitPanel
 local sduiClientTemplateCache = game:DefineFastFlag("SduiClientTemplateCache", false)
 local sduiClientTemplateCache_1 = game:DefineFastFlag("SduiTemplateApiPostRequest", false) and sduiClientTemplateCache
 local homePageSduiPrefetch = game:DefineFastFlag("EnableHomePageSduiPrefetch", false) and game:GetEngineFeature("HomePageSduiPrefetch")
@@ -505,6 +506,7 @@ return {
 	FFlagExpChatSelectTextChatTabByName = require(script.FFlagExpChatSelectTextChatTabByName),
 	FFlagDebugFriendsChat = require(script.FFlagDebugFriendsChat),
 	FFlagFriendsChatOsaSystemMessage = game:DefineFastFlag("FriendsChatOsaSystemMessage", false),
+	FFlagFriendsChatDiscloseUpdateSecondVersion = game:DefineFastFlag("FriendsChatDiscloseUpdateSecondVersion", false),
 	FFlagFriendsChatEnableConversationConsent = game:DefineFastFlag("FriendsChatEnableConversationConsent2", false),
 	FFlagFriendsChatConversationListShowScrollBar = require(script.FFlagFriendsChatConversationListShowScrollBar),
 	FFlagCIDeeplinkEnabledForAll = require(script.FFlagCIDeeplinkEnabledForAll),
@@ -536,6 +538,8 @@ return {
 	GetFFlagExpChatUseVoiceParticipantsStore = require(script.GetFFlagExpChatUseVoiceParticipantsStore),
 	GetFFlagDebugShowAudioDeviceInputDebugger = require(script.GetFFlagDebugShowAudioDeviceInputDebugger),
 	FFlagEditProfileBackgroundEnabled = require(script.FFlagEditProfileBackgroundEnabled),
+	FFlagAppBloxConfirmationDialogFocusNav = require(script.FFlagAppBloxConfirmationDialogFocusNav),
+	FFlagEditProfileImageV2ConsoleEnabled = require(script.FFlagEditProfileImageV2ConsoleEnabled),
 	FFlagEditProfileImageV2Enabled = require(script.FFlagEditProfileImageV2Enabled),
 	FFlagEditProfileImageRigTypeOverride = require(script.FFlagEditProfileImageRigTypeOverride),
 	FFlagEditProfileImageR15UpgradePrompt = require(script.FFlagEditProfileImageR15UpgradePrompt),
@@ -721,6 +725,7 @@ return {
 	GetFFlagAddMorePhoneUpsellEvents = require(script.GetFFlagAddMorePhoneUpsellEvents),
 	GetFFlagIntegratePhoneUpsellJoinVoice = require(script.GetFFlagIntegratePhoneUpsellJoinVoice),
 	GetFFlagInExperiencePhoneUpsellNewCopy = require(script.GetFFlagInExperiencePhoneUpsellNewCopy),
+	FFlagPhoneUpsellLegalLinkPolicy = game:DefineFastFlag("PhoneUpsellLegalLinkPolicy", false),
 	FFlagHomePhoneVerificationUpsellNewCopy = require(script.FFlagHomePhoneVerificationUpsellNewCopy),
 	FFlagLogoutPhoneVerificationUpsellCopy = require(script.FFlagLogoutPhoneVerificationUpsellCopy),
 	FFlagInExperienceAddPhoneViewNewCopy = require(script.FFlagInExperienceAddPhoneViewNewCopy),
@@ -928,6 +933,7 @@ return {
 	FFlagLuaAppNotInterestedFeedbackFormTelemetry = game:DefineFastFlag("LuaAppNotInterestedFeedbackFormTelemetry", false),
 	FFlagLuaAppNotInterestedReportPlaceId = game:DefineFastFlag("LuaAppNotInterestedReportPlaceId", false),
 	FFlagLuaAppFixExplicitFeedbackConsoleTelemetry = game:DefineFastFlag("LuaAppFixExplicitFeedbackConsoleTelemetry", false),
+	FFlagLuaAppGameTileOverflowMenuFocusTransferFix = game:DefineFastFlag("LuaAppGameTileOverflowMenuFocusTransferFix", false),
 	FFlagLuaAppAddSessionIdToUserSignals = game:DefineFastFlag("LuaAppAddSessionIdToUserSignals", false),
 	FFlagLuaAppAddSocialLinkClickTelemetryToEdp = game:DefineFastFlag("LuaAppAddSocialLinkClickTelemetryToEdp", false),
 	FFlagLuaAppAddSocialLinkImpressionsTelemetryToEdp = game:DefineFastFlag("LuaAppAddSocialLinkImpressionsTelemetryToEdp", false),
@@ -1012,6 +1018,7 @@ return {
 	FFlagLuaAppSupportDisablePlayableWhenLoading = luaAppSupportDisablePlayableWhenLoading,
 	FFlagEnableSplitPane = enableSplitPanel,
 	FFlagEnableSplitPaneSessionL3 = enableSplitPanel_1,
+	FFlagEnableOnScreenAPIIntegration = enableSplitPanel_2,
 	FFlagLuaAppDisablePlayableWhenLoadingForce = luaAppSupportDisablePlayableWhenLoading and game:DefineFastFlag("LuaAppDisablePlayableWhenLoadingForce", false),
 	FFlagLuaAppFixDetailsPageThumbnailRenderInPhone = require(script.FFlagLuaAppFixDetailsPageThumbnailRenderInPhone),
 	FFlagLuaAppDesktopMediaGalleryTelemetry = require(script.FFlagLuaAppDesktopMediaGalleryTelemetry),
@@ -1074,7 +1081,6 @@ return {
 	FIntGameGridFlexFeedItemTileNumPerFeed = game:DefineFastInt("GameGridFlexFeedItemTileNumPerFeed", 30),
 	FIntLuaAppGameGridRevealMoreButtonGapPx = game:DefineFastInt("LuaAppGameGridRevealMoreButtonGapPx", 12),
 	FFlagItemImpressionsAddGameMetadata = require(script.FFlagItemImpressionsAddGameMetadata),
-	FFlagLuaAppEventDetailsPageDisableCtaOnUnplayable = game:DefineFastFlag("LuaAppEventDetailsPageDisableCtaOnUnplayable", false),
 	FFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox = require(script.FFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox),
 	FFlagLuaAppUnifyPlayButtonTile = require(script.FFlagLuaAppUnifyPlayButtonTile),
 	FFlagLuaAppUnifyPlayButtonTileIxp = require(script.FFlagLuaAppUnifyPlayButtonTileIxp),
@@ -1329,6 +1335,7 @@ return {
 	GetFIntAccountRecoverySecondsBetweenResends = require(script.GetFIntAccountRecoverySecondsBetweenResends),
 	FFlagEnableLuaAccountSwitch = require(script.FFlagEnableLuaAccountSwitch),
 	FFlagEnableNavigateToLoginAfterLogoutAll = require(script.FFlagEnableNavigateToLoginAfterLogoutAll),
+	FFlagUseGenericAccountSwitchSignOutCopy = game:DefineFastFlag("UseGenericAccountSwitchSignOutCopy", false),
 	GetFFlagFixAccountSwitcherOverlayBackgroundTap = require(script.GetFFlagFixAccountSwitcherOverlayBackgroundTap),
 	GetFFlagEnableLoginDisambiguationFoundationSwitcher = require(script.GetFFlagEnableLoginDisambiguationFoundationSwitcher),
 	GetFFlagEnableAccountSwitcherSignedOutAccounts = require(script.GetFFlagEnableAccountSwitcherSignedOutAccounts),

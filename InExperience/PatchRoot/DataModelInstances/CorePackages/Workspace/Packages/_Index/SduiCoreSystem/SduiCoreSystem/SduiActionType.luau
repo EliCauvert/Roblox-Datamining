@@ -47,6 +47,8 @@
 	OpenAmpWizard = "OpenAmpWizard",
 	OpenPhoneUpsellModal = "OpenPhoneUpsellModal",
 	OpenEmailUpsellModal = "OpenEmailUpsellModal",
+	OpenTrustedFriendsUpsellModal = "OpenTrustedFriendsUpsellModal",
+	RecordPartyChatConversationUpsellAcknowledgement = "RecordPartyChatConversationUpsellAcknowledgement",
 	ToggleExperienceFavorite = "ToggleExperienceFavorite",
 	ToggleExperienceFollow = "ToggleExperienceFollow",
 	ToggleExperienceVote = "ToggleExperienceVote",

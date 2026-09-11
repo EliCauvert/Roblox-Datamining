@@ -3694,6 +3694,7 @@ Feature.Profile.Action.ShareProfile,プロフィールを共有
 Feature.Profile.Action.ShareProfileLink,プロフィールのリンクを共有
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
+Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,ユーザーがブロックされています
 Feature.Profile.Action.ViewFullProfile,プロフィール全体を表示
 Feature.Profile.Action.ViewProfile,プロフィールを表示
@@ -4340,6 +4341,7 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,
 Feature.VerificationUpsell.Action.EditPhoneNumber,電話番号を編集
 Feature.VerificationUpsell.Action.EnableVoice,ボイスチャットをオンにする
+Feature.VerificationUpsell.Action.Logout,ログアウトする
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

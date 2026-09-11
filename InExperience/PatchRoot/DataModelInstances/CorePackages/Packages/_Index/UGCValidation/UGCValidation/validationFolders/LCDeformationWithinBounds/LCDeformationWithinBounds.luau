@@ -11,6 +11,7 @@ local t = {
 	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData }
 }
+local getEngineFeatureLayeredClothingDecompositionModule = require(parent.flags.getEngineFeatureLayeredClothingDecomposition)
 local var1 = game:DefineFastInt("LCPostDeformSizeMultiplierEyebrowEyelashHundredths", 100) / 100
 local t_1 = {
 	[Enum.AssetType.EyebrowAccessory] = var1,
@@ -19,7 +20,7 @@ local t_1 = {
 local var2 = game:DefineFastInt("LCPostDeformSizeMultiplierGeneralHundredths", 100) / 100
 
 function t.run(p1, p2)
-	-- upvalues: validationRulesUtilModule (ref), t_1 (ref), var2 (ref), UGCValidationService (ref), vector3UtilsModule (ref), errorSourceStringsModule (ref), valueToStringModule (ref)
+	-- upvalues: validationRulesUtilModule (ref), t_1 (ref), var2 (ref), getEngineFeatureLayeredClothingDecompositionModule (ref), UGCValidationService (ref), vector3UtilsModule (ref), errorSourceStringsModule (ref), valueToStringModule (ref)
 	local handle = p2.rootInstance:FindFirstChild("Handle")
 	local handle_1 = p2.renderMeshesData.Handle
 	local assetType = p2.uploadEnum.assetType
@@ -34,7 +35,7 @@ function t.run(p1, p2)
 	end
 	local var5 = var4 * (t_1[assetType] or var2)
 	
-	if not vector3UtilsModule.isFirstLessOrEqual(UGCValidationService:GetLayeredClothingPostDeformationSize(p2.rootInstance, handle_1.editable, handle_1.scale), var5) then
+	if not vector3UtilsModule.isFirstLessOrEqual(if getEngineFeatureLayeredClothingDecompositionModule() then UGCValidationService:GetLayeredClothingPostDeformationSizeAsync(p2.rootInstance, handle_1.editable, handle_1.scale) else UGCValidationService:GetLayeredClothingPostDeformationSize(p2.rootInstance, handle_1.editable, handle_1.scale), var5) then
 		p1:fail(errorSourceStringsModule.Keys.LCDeformTooLarge, { maxSize = valueToStringModule(var5) }, handle)
 	end
 end

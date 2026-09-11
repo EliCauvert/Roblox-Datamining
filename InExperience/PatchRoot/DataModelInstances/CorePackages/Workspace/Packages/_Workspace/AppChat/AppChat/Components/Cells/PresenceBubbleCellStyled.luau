@@ -51,6 +51,7 @@ return reactModule.memo(function(p1)
 		isLoading = var2.isLoading,
 		showNewPresenceImage = isTable,
 		conversationId = var2.conversationId,
+		participants = var2.participants,
 		BackgroundColor3 = theme.BackgroundDefault.Color,
 		BackgroundTransparency = style.Tokens.Color.None.Transparency,
 		onPressedBackgroundColor3 = theme.BackgroundOnPress.Color,

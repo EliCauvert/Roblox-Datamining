@@ -16,23 +16,36 @@ return function(p1)
 		LayoutOrder = p1.layoutOrder
 	}, {
 		Primary = reactModule.createElement(view, { LayoutOrder = 1, tag = "fill auto-y" }, {
-			Button = reactModule.createElement(button, {
-				fillBehavior = fillBehavior.Fill,
-				isDisabled = p1.primaryIsDisabled,
-				isLoading = p1.primaryIsLoading,
-				onActivated = p1.primaryOnActivated,
-				size = inputSize.Large,
-				text = p1.primaryText,
-				variant = p1.primaryVariant,
-				width = UDim.new(1, 0)
+			ButtonBounds = reactModule.createElement("Frame", {
+				BackgroundTransparency = 1,
+				AutomaticSize = Enum.AutomaticSize.Y,
+				Size = UDim2.new(1, 0, 0, 0),
+				ref = p1.primaryRef
+			}, {
+				Button = reactModule.createElement(button, {
+					fillBehavior = fillBehavior.Fill,
+					isDisabled = p1.primaryIsDisabled,
+					isLoading = p1.primaryIsLoading,
+					onActivated = p1.primaryOnActivated,
+					size = inputSize.Large,
+					text = p1.primaryText,
+					variant = p1.primaryVariant,
+					width = UDim.new(1, 0)
+				})
 			})
 		}),
-		Delete = reactModule.createElement(iconButton, {
+		Delete = reactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
 			LayoutOrder = 2,
-			icon = iconName.TrashCan,
-			onActivated = p1.onDelete,
-			size = inputSize.Large,
-			variant = buttonVariant.Standard
+			AutomaticSize = Enum.AutomaticSize.XY,
+			ref = p1.deleteRef
+		}, {
+			IconButton = reactModule.createElement(iconButton, {
+				icon = iconName.TrashCan,
+				onActivated = p1.onDelete,
+				size = inputSize.Large,
+				variant = buttonVariant.Standard
+			})
 		})
 	})
 end

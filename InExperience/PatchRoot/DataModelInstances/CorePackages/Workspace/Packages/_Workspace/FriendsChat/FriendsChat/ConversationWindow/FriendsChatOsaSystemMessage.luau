@@ -1,10 +1,12 @@
 ﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
 local universalAppPolicyModule = require(parent.UniversalAppPolicy)
 local userProfilesModule = require(parent.UserProfiles)
 local friendsChatTextMessageModule = require(script.Parent.Parent.Message.FriendsChatTextMessage)
 local buildRowDisplayModule = require(script.Parent.Parent.Message.MessageDisplayStore.buildRowDisplay)
 local friendsChatOsaAcknowledgementModule = require(script.Parent.FriendsChatOsaAcknowledgement)
+local fFlagFriendsChatDiscloseUpdateSecondVersion = sharedFlagsModule.FFlagFriendsChatDiscloseUpdateSecondVersion
 local userProfileStore = userProfilesModule.Stores.UserProfileStore
 
 local function getProfileDisplayName(p1, p2)
@@ -33,14 +35,17 @@ local function getProfileDisplayName(p1, p2)
 end
 
 local function buildDisplay(p1, p2, p3, p4)
-	-- upvalues: universalAppPolicyModule (ref), buildRowDisplayModule (ref)
+	-- upvalues: universalAppPolicyModule (ref), fFlagFriendsChatDiscloseUpdateSecondVersion (ref), buildRowDisplayModule (ref)
 	local canSeeChatTerminology = universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology()
 	p2 = p2 or p1 == nil
 	
 	return buildRowDisplayModule({
 		kind = "systemMessage",
 		variant = "default",
-		body = `{p3(if canSeeChatTerminology then if p2 then "Feature.Chat.Heading.SafeChattingWithThisUser" else {
+		body = `{p3(if canSeeChatTerminology then if p2 then if fFlagFriendsChatDiscloseUpdateSecondVersion then "Feature.Chat.Heading.FirstConversationWithThisUser" else "Feature.Chat.Heading.SafeChattingWithThisUser" elseif fFlagFriendsChatDiscloseUpdateSecondVersion then {
+			"Feature.Chat.Heading.FirstConversationWith",
+			displayName = p1
+		} else {
 			"Feature.Chat.Heading.SafeChattingWithUsername",
 			displayName = p1
 		} elseif p2 then "Feature.Chat.Heading.FirstInteractionWithThisPerson" else {
