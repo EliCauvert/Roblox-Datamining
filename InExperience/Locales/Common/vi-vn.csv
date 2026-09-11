@@ -1353,6 +1353,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Mô tả
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Dành riêng cho Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,hôm nay
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,trong 1 tiếng này
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,trong tháng này
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,Còn {count} hình nền
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,ngày
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,giờ
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,phút
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,Đặt lại sau
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Mô tả hình nền của bạn…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Đang tạo hình nền của bạn…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Đang chuẩn bị hình nền của bạn…
@@ -1471,6 +1480,7 @@ Feature.Avatar.Label.ClassicTShirts,Áo Thun Cổ Điển
 Feature.Avatar.Label.ClearByCategory,Xóa {category}
 Feature.Avatar.Label.Climb,Leo
 Feature.Avatar.Label.ClimbAnimations,Hiệu Ứng Leo
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Tên chỉ được chứa chữ cái, số và dấu cách"
 Feature.Avatar.Label.CountSelected,Đã Chọn {itemCount}
 Feature.Avatar.Label.Creations,Sản phẩm sáng tạo
@@ -1582,6 +1592,7 @@ Feature.Avatar.Label.RecentlyWorn,Vừa mặc
 Feature.Avatar.Label.RemoveFromSetBody,Các avatar này sẽ bị gỡ khỏi bộ nhưng sẽ không bị xóa.
 Feature.Avatar.Label.Replace,Thay thế
 Feature.Avatar.Label.ResetToNewCharacter,Bạn đang chuyển sang một hồ sơ mới; bạn muốn đặt lại tất cả vật phẩm trang phục hay giữ chúng?
+Feature.Avatar.Label.ResetTryOn,Trả về avatar hiện tại
 Feature.Avatar.Label.Right,P
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,
@@ -1637,6 +1648,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,Chỉnh đầu
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,Trang điểm nhiều lớp
 Feature.Avatar.Label.Title.ManageAvatars,Quản lý avatar
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,Kho của tôi
 Feature.Avatar.Label.Title.ProfilePhoto,Ảnh đại diện
 Feature.Avatar.Label.Title.ReplaceAvatar,Thay avatar
@@ -1776,6 +1788,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,Cài về mặc định
 Feature.Avatar.Title.MakeupSortUnequip,Hủy trang bị vật phẩm
 Feature.Avatar.Title.Move,
+Feature.Avatar.Title.MyAvatar,
 Feature.Avatar.Title.NameAvatarOutfit,Đặt tên cho avatar của bạn
 Feature.Avatar.Title.NewCustomizeLook,Tính năng tùy chỉnh có diện mạo mới!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Vật Phẩm Mới

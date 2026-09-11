@@ -1287,6 +1287,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exklusiv mit Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,heute
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,in dieser Stunde
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,in diesem Monat
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,Noch {count} Hintergründe
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,Noch {count} Hintergrund
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,Tagen
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,Stunden
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,Minuten
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,Wird zurückgesetzt in
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Beschreibe deinen Hintergrund …
 Feature.Avatar.BackgroundGeneration.Status.Generating,Dein Hintergrund wird generiert …
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Dein Hintergrund wird vorbereitet …
@@ -1405,6 +1414,7 @@ Feature.Avatar.Label.ClassicTShirts,Klassische T-Shirts
 Feature.Avatar.Label.ClearByCategory,{category} löschen
 Feature.Avatar.Label.Climb,Klettern
 Feature.Avatar.Label.ClimbAnimations,Kletteranimationen
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Namen können nur Buchstaben, Ziffern und Leerzeichen enthalten"
 Feature.Avatar.Label.CountSelected,{itemCount} ausgewählt
 Feature.Avatar.Label.Creations,Schöpfungen
@@ -1516,6 +1526,7 @@ Feature.Avatar.Label.RecentlyWorn,Kürzlich getragen
 Feature.Avatar.Label.RemoveFromSetBody,Diese Avatare werden aus diesem Set entfernt. Sie werden nicht gelöscht.
 Feature.Avatar.Label.Replace,Ersetzen
 Feature.Avatar.Label.ResetToNewCharacter,Du wechselst zu einem neuen Charakter; möchtest du alle Outfit-Artikel zurücksetzen oder beibehalten?
+Feature.Avatar.Label.ResetTryOn,Auf aktuellen Avatar zurücksetzen
 Feature.Avatar.Label.Right,R
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,Rechte Arme
@@ -1571,6 +1582,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,Make-up-Schichten
 Feature.Avatar.Label.Title.ManageAvatars,Avatare verwalten
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,Mein Inventar
 Feature.Avatar.Label.Title.ProfilePhoto,Profilfoto
 Feature.Avatar.Label.Title.ReplaceAvatar,Avatar ersetzen
@@ -1710,6 +1722,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,Schieben
+Feature.Avatar.Title.MyAvatar,Mein Avatar
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,Wir haben die Anpassungsfunktion überarbeitet!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Neu auf dem Marktplatz

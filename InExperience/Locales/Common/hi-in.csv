@@ -1334,6 +1334,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus के साथ एक्सक्लूसिव
 Feature.Avatar.BackgroundGeneration.Label.Name,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,इस घंटे
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,{count} बैकग्राउंड बाकी हैं
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,{count} बैकग्राउंड बाकी है
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,घंटे
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,मिनट
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,इतने समय में रीसेट होगा
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,अपने बैकग्राउंड के बारे में बताएँ…
 Feature.Avatar.BackgroundGeneration.Status.Generating,आपका बैकग्राउंड जेनरेट हो रहा है…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,आपका बैकग्राउंड तैयार हो रहा है…
@@ -1452,6 +1461,7 @@ Feature.Avatar.Label.ClassicTShirts,क्लासिक टी-शर्ट
 Feature.Avatar.Label.ClearByCategory,{category} डिलीट करें
 Feature.Avatar.Label.Climb,क्लाइंब
 Feature.Avatar.Label.ClimbAnimations,क्लाइंब ऐनिमेशन
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"नाम में सिर्फ़ अक्षर, नंबर और स्पेस हो सकते हैं"
 Feature.Avatar.Label.CountSelected,{itemCount} चुना गया
 Feature.Avatar.Label.Creations,क्रिएशन
@@ -1563,6 +1573,7 @@ Feature.Avatar.Label.RecentlyWorn,हाल ही में पहना/इस
 Feature.Avatar.Label.RemoveFromSetBody,इन अवतार को इस सेट से हटा दिया जाएगा. ये डिलीट नहीं होंगे.
 Feature.Avatar.Label.Replace,बदलें
 Feature.Avatar.Label.ResetToNewCharacter,आप एक नए कैरेक्टर पर स्विच कर रहे हैं; क्या आप सभी आउटफ़िट आइटम रीसेट करना चाहते हैं या अपने पास रखना चाहते हैं?
+Feature.Avatar.Label.ResetTryOn,मौजूदा अवतार पर रीसेट करें
 Feature.Avatar.Label.Right,R
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,दायां हाथ
@@ -1618,6 +1629,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,सिर की एडजस्टम
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,मेकअप लेयरिंग
 Feature.Avatar.Label.Title.ManageAvatars,अवतार मैनेज करें
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,मेरी इन्वेंट्री
 Feature.Avatar.Label.Title.ProfilePhoto,प्रोफ़ाइल फ़ोटो
 Feature.Avatar.Label.Title.ReplaceAvatar,अवतार बदलें
@@ -1757,6 +1769,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,आइटम को हटाएँ
 Feature.Avatar.Title.Move,
+Feature.Avatar.Title.MyAvatar,मेरा अवतार
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,कस्टमाइज़ सेक्शन अब एक नये लुक में दिखता है!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,मार्केटप्लेस में नया
@@ -2507,7 +2520,7 @@ Feature.Catalog.Label.Filter.Curator,क्यूरेटर
 Feature.Catalog.Label.Filter.Filters,
 Feature.Catalog.Label.Filter.Hide,छिपाएँ
 Feature.Catalog.Label.Filter.PriceMax,मैक्स
-Feature.Catalog.Label.Filter.PriceMin,मिनट
+Feature.Catalog.Label.Filter.PriceMin,
 Feature.Catalog.Label.Filter.SalesType,बिक्री का टाइप
 Feature.Catalog.Label.Filter.Show,दिखाएँ
 Feature.Catalog.Label.Filter.Sorts,छाँटें

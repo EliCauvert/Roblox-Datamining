@@ -34,7 +34,6 @@ return {
 	},
 	Enums = {
 		ScreenLayout = require(script.Enums.ScreenLayout),
-		AvatarEditorCategories = require(script.Enums.AvatarEditorCategories),
 		Categories = require(script.Enums.Categories),
 		ItemView = require(script.Enums.ItemView),
 		NavigationParams = require(script.Enums.NavigationParams),

@@ -1353,6 +1353,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Wyłącznie w ramach subskrypcji Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,dzisiaj
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,w tej godzinie
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,w tym miesiącu
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,Pozostała liczba teł: {count}
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,Pozostało {count} tło
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,dni
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,godz.
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,min
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,Resetuje się za
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Opisz swoje tło...
 Feature.Avatar.BackgroundGeneration.Status.Generating,Generowanie Twojego tła...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Przygotowywanie Twojego tła...
@@ -1471,6 +1480,7 @@ Feature.Avatar.Label.ClassicTShirts,Koszulki klasyczne
 Feature.Avatar.Label.ClearByCategory,Wyczyść {category}
 Feature.Avatar.Label.Climb,Wspinaczka
 Feature.Avatar.Label.ClimbAnimations,Animacje – wspinaczka
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Nazwa może zawierać wyłącznie litery, cyfry i spacje"
 Feature.Avatar.Label.CountSelected,Wybrano {itemCount}
 Feature.Avatar.Label.Creations,Dzieła
@@ -1582,6 +1592,7 @@ Feature.Avatar.Label.RecentlyWorn,Ostatnio noszone
 Feature.Avatar.Label.RemoveFromSetBody,Te awatary zostaną usunięte z tego zestawu. Nie zostaną usunięte.
 Feature.Avatar.Label.Replace,Zamień
 Feature.Avatar.Label.ResetToNewCharacter,"Zmieniasz na nową postać. Chcesz zresetować wszystkie przedmioty składające się na strój, czy zachować je?"
+Feature.Avatar.Label.ResetTryOn,Zresetuj do bieżącego awatara
 Feature.Avatar.Label.Right,P
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,Prawe ręce
@@ -1637,6 +1648,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,Nakładanie warstw makijażu
 Feature.Avatar.Label.Title.ManageAvatars,Zarządzaj awatarami
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,Moje wyposażenie
 Feature.Avatar.Label.Title.ProfilePhoto,Zdjęcie profilowe
 Feature.Avatar.Label.Title.ReplaceAvatar,Zastąp awatara
@@ -1776,6 +1788,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,Zdejmij element
 Feature.Avatar.Title.Move,
+Feature.Avatar.Title.MyAvatar,Mój awatar
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,Funkcja Dostosuj ma nowy wygląd!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Nowości na rynku
