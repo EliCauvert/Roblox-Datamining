@@ -1334,6 +1334,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus 专属
 Feature.Avatar.BackgroundGeneration.Label.Name,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,（今天）
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,（本小时）
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,（本月）
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,剩余 {count} 个背景
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,天后
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,小时后
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,分钟后
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,重置时间：
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,描述背景需求…
 Feature.Avatar.BackgroundGeneration.Status.Generating,正在为你生成背景…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,正在为你准备背景…
@@ -1451,6 +1460,7 @@ Feature.Avatar.Label.ClassicTShirts,经典 T 恤
 Feature.Avatar.Label.ClearByCategory,清除{category}
 Feature.Avatar.Label.Climb,攀爬
 Feature.Avatar.Label.ClimbAnimations,攀爬动画
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,名称只能包含字母、数字和空格。
 Feature.Avatar.Label.CountSelected,已选择 {itemCount} 个物品
 Feature.Avatar.Label.Creations,
@@ -1562,6 +1572,7 @@ Feature.Avatar.Label.RecentlyWorn,最近穿戴
 Feature.Avatar.Label.RemoveFromSetBody,这些虚拟形象将从此集合中移除。它们不会被删除。
 Feature.Avatar.Label.Replace,替换
 Feature.Avatar.Label.ResetToNewCharacter,你即将切换至新角色，是否想要重置全部穿搭道具，或保留？
+Feature.Avatar.Label.ResetTryOn,重置为当前虚拟形象
 Feature.Avatar.Label.Right,右
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,
@@ -1617,6 +1628,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,妆容层叠
 Feature.Avatar.Label.Title.ManageAvatars,管理虚拟形象
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,我的道具栏
 Feature.Avatar.Label.Title.ProfilePhoto,个人资料照片
 Feature.Avatar.Label.Title.ReplaceAvatar,替换虚拟形象
@@ -1757,6 +1769,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,
+Feature.Avatar.Title.MyAvatar,
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,自定义功能有了新的外观！
 Feature.Avatar.Title.NewToMarketplaceItemWidget,商城新品

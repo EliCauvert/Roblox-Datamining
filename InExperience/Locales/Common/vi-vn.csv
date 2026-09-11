@@ -947,6 +947,8 @@ CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Bạn muốn rời đi?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Tham gia trò chơi bạn từng truy cập
 CoreScripts.InGameMenu.Traversal.LeaveBody,Bạn sắp thoát khỏi trò chơi này để quay về {PREVIOUS_EXPERIENCE}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Bạn chắc chắn rời đi chứ?
+CoreScripts.InGameMenu.UnlockMore.Description,"Trò chuyện, bạn bè và nhiều trò chơi hơn"
+CoreScripts.InGameMenu.UnlockMore.Title,Mở khóa thêm tính năng của Roblox
 CoreScripts.InGameMenu.Vibration,Rung
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,để chuyển điều hướng trình đơn
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,Một số trải nghiệm yêu cầu nhấn
@@ -2228,6 +2230,8 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Chưa có lịch sử phiên bản.
 Feature.Build.Message.OneTaskCompleted,Đã hoàn thành 1 nhiệm vụ
 Feature.Build.Message.OutOfBuildUsage,Bạn đã hết lượt sử dụng Build. Hãy xem các lựa chọn sử dụng Robux để tiếp tục sáng tạo.
+Feature.Build.Message.PlaytestInviteSendFailedBody,Bạn không thể gửi liên kết mời tham gia trò chuyện cho những người dùng sau:
+Feature.Build.Message.PlaytestInviteSendFailedHint,Vui lòng sử dụng nút Chia sẻ để lấy đường liên kết.
 Feature.Build.Message.PlaytestersAdded,Đã thêm {INVITED_COUNT} trên {MAX_INVITES} người chơi thử
 Feature.Build.Message.PrivatePlaytestInvite,{username} đã mời bạn chơi thử riêng tư {experienceName}
 Feature.Build.Message.PublicPublishFailed,Trò chơi của bạn đã được đăng nhưng chưa đăng công khai. Vui lòng thử lại.
@@ -2293,6 +2297,7 @@ Feature.Build.Title.GetUsers,Thu hút người dùng
 Feature.Build.Title.ManagedPricingAcknowledgement,Mở chế độ Giá được quản lý?
 Feature.Build.Title.NoMonetizationProducts,Bắt đầu kiếm tiền trong trò chơi của bạn
 Feature.Build.Title.NoRobuxForUsage,Không còn Robux để sử dụng Build
+Feature.Build.Title.PlaytestInviteSendFailed,Không gửi được lời mời
 Feature.Build.Title.Playtesters,Người chơi thử
 Feature.Build.Title.PlaytestersOnlyPlay,Chỉ người chơi thử mới có thể chơi
 Feature.Build.Title.PromoteGame,Quảng bá trò chơi của bạn
@@ -3523,7 +3528,7 @@ Feature.Moments.Label.FeedFailedToLoad,Không tải được bản tin
 Feature.Moments.Label.FeedMyMoments,Khoảnh khắc của tôi
 Feature.Moments.Label.FeedTrending,Thịnh hành
 Feature.Moments.Label.HowToUseCaptureTitle,Cách dùng Ảnh chụp/video quay màn hình
-Feature.Moments.Label.LinkCopied,Đã sao chép đường liên kết.
+Feature.Moments.Label.LinkCopied,Đã sao chép đường liên kết
 Feature.Moments.Label.LinkCopyFailed,Không thể sao chép đường liên kết.
 Feature.Moments.Label.ModeratedRodeoBody,"Chúng tôi đã xóa Khoảnh khắc này do vi phạm Tiêu chuẩn cộng đồng của chúng tôi. Để Khoảnh khắc được hiển thị, bạn cần nắm rõ và tuân thủ quy tắc."
 Feature.Moments.Label.MomentDeletedBody,

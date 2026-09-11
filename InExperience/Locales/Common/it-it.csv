@@ -1334,6 +1334,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,In esclusiva con il piano Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,oggi
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,quest'ora
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,questo mese
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,{count} sfondi rimanenti
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,{count} sfondo rimanente
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,giorni
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,ore
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,minuti
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,Ripristino tra
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Descrivi il tuo sfondo...
 Feature.Avatar.BackgroundGeneration.Status.Generating,Generazione dello sfondo in corso...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparazione dello sfondo in corso...
@@ -1452,6 +1461,7 @@ Feature.Avatar.Label.ClassicTShirts,Magliette classiche
 Feature.Avatar.Label.ClearByCategory,Elimina {category}
 Feature.Avatar.Label.Climb,Scala
 Feature.Avatar.Label.ClimbAnimations,Animazioni scalata
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"I nomi possono contenere solo lettere, numeri e spazi."
 Feature.Avatar.Label.CountSelected,{itemCount} Selezionato
 Feature.Avatar.Label.Creations,Creazioni
@@ -1563,6 +1573,7 @@ Feature.Avatar.Label.RecentlyWorn,Indossati di recente
 Feature.Avatar.Label.RemoveFromSetBody,Questi avatar saranno rimossi da questo set. Non saranno cancellati.
 Feature.Avatar.Label.Replace,Sostituisci
 Feature.Avatar.Label.ResetToNewCharacter,Stai passando a un nuovo personaggio; vuoi resettare tutti gli oggetti del'outfit o mantenerli?
+Feature.Avatar.Label.ResetTryOn,Ripristina l'avatar attuale
 Feature.Avatar.Label.Right,R
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,Braccia destre
@@ -1618,6 +1629,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,Strati del trucco
 Feature.Avatar.Label.Title.ManageAvatars,Gestisci avatar
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,Il mio inventario
 Feature.Avatar.Label.Title.ProfilePhoto,Foto del profilo
 Feature.Avatar.Label.Title.ReplaceAvatar,Sostituisci avatar
@@ -1757,6 +1769,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,Rimuovi l'oggetto
 Feature.Avatar.Title.Move,
+Feature.Avatar.Title.MyAvatar,Il mio Avatar
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,La funzione Personalizza ha un nuovo look!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Nuovo al Marketplace

@@ -218,6 +218,8 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,Cannot detect mouth open
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Dynamic Heads on the marketplace must be animated, but this head has no FACS data."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Cannot detect right eye close expression for the Dynamic Head. Please adjust cage landmarks for the right eye to match where the right eye on the head and make sure it can be closed.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Cannot detect frown expression for the Dynamic Head. Please adjust cage landmarks for the mouth to match where the mouth on the head and make sure it can show frown expression.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Emissive Area Above Threshold.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Emissive Area Exceeded.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,This asset uses emissive maps which are only available to creators in the Trusted Creator Program. Please remove all emissive map content or join the program before uploading.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,The published animation is missing a valid maximum part translation value. Please republish the animation.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,The published animation is missing a valid UGC emote marker. Please republish the animation.
@@ -1860,10 +1862,10 @@ Feature.BlockingModal.Heading.BlockUser,Block {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Blocking this user will remove them as a Connection or follower. They won't be able to send messages, requests or invites to you.<br /><br />They won't be notified that you blocked them."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Blocking this user will remove them as a friend or follower. They won't be able to send messages, requests or invites to you.<br /><br />They won't be notified that you blocked them."
 Feature.Build.Action.Add,
-Feature.Build.Action.AddFriends,Add friends
-Feature.Build.Action.AddPlaytester,Add playtester
-Feature.Build.Action.AddPlaytesters,Add playtesters
-Feature.Build.Action.AddToPlaytest,Add to playtest
+Feature.Build.Action.AddFriends,Invite friends
+Feature.Build.Action.AddPlaytester,Invite early tester
+Feature.Build.Action.AddPlaytesters,Invite early testers
+Feature.Build.Action.AddToPlaytest,
 Feature.Build.Action.AgreeAndEnable,Agree and turn on
 Feature.Build.Action.Approve,Approve
 Feature.Build.Action.Archive,Archive
@@ -1975,7 +1977,7 @@ Feature.Build.Description.BuildReplyNotif,Get notified when Build has a reply fo
 Feature.Build.Description.BuyRobuxToCreate,"Buy more Robux to keep creating, or wait for your free Build usage to reset tomorrow."
 Feature.Build.Description.BuyUsageOrWait,"Buy more Build usage with Robux, or wait for your daily limit to reset."
 Feature.Build.Description.CampaignRunDates,Your campaign will run {startDate} – {endDate}
-Feature.Build.Description.ChoosePlaytesters,Choose friends to help you playtest.
+Feature.Build.Description.ChoosePlaytesters,Choose friends to preview your game.
 Feature.Build.Description.CreateDeveloperProduct,"Create ""{NAME}"" for {PRICE} Robux, off sale."
 Feature.Build.Description.DeactivateDeveloperProduct,Take developer product {PRODUCT_ID} off sale.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"If you have earned Robux, those will be applied first toward the cost of the ad campaign."
@@ -1984,7 +1986,7 @@ Feature.Build.Description.FriendsLinkOnly,Only your friends can access this link
 Feature.Build.Description.GameCreationDone,I've completed creating and publishing your game. You can open it to playtest.
 Feature.Build.Description.GameSavedPlaytest,I've completed creating your game and saved a new version. You can open it to playtest.
 Feature.Build.Description.HubSettings,Manage all settings on Creator Hub
-Feature.Build.Description.InviteFriendLimit,"Choose up to {MAX_INVITES} friends, then share the link to the game."
+Feature.Build.Description.InviteFriendLimit,Invite up to {MAX_INVITES} friends to play while you create.
 Feature.Build.Description.MakeAudienceAvail,Publish your experience to make it available to this audience.
 Feature.Build.Description.ManageAppearance,Manage how your game appears to others.
 Feature.Build.Description.ManageDeveloperProduct,Manage developer product.
@@ -1996,7 +1998,7 @@ Feature.Build.Description.NoMonetizationProducts,Describe an item you want to cr
 Feature.Build.Description.PlayAfterPublish,Choose who can play after you publish this experience.
 Feature.Build.Description.PlaytestLatest,You're playtesting your latest version. Publish it when you're ready to share.
 Feature.Build.Description.PlaytestLocked,You can start playtesting after you create your first game.
-Feature.Build.Description.PlaytesterAccess,Add friends as playtesters or change your game's Audience setting to let more people play.
+Feature.Build.Description.PlaytesterAccess,Invite friends as early testers or change your game's Audience setting to let more people play.
 Feature.Build.Description.PricingRules,Set pricing rules
 Feature.Build.Description.PrivateShare,Change your game's Audience setting to share it.
 Feature.Build.Description.PromoteGameWithAdCampaign,Boost your audience with a {durationDays}-day ad campaign and get your game discovered.
@@ -2200,7 +2202,7 @@ Feature.Build.Message.AdsPromotionBannerTitle,You have {promotionCount} free pro
 Feature.Build.Message.AdsPromotionBannerTitleSingular,You have 1 free promotion left
 Feature.Build.Message.AdsStatsEmpty,Boost your audience with an ad campaign and get your game discovered
 Feature.Build.Message.AdsStatsEmptyFree,Boost your audience with a free ad campaign and get your game discovered
-Feature.Build.Message.AllFriendsAdded,You've added all your friends as playtesters.
+Feature.Build.Message.AllFriendsAdded,You've invited all your friends as early testers.
 Feature.Build.Message.AnswerBuildQuestion,Answer Build's question below.
 Feature.Build.Message.AssetDetailsUnavailable,Asset details are unavailable.
 Feature.Build.Message.AssetsLoadFailed,Unable to load assets.
@@ -2238,15 +2240,15 @@ Feature.Build.Message.LoadingVersions,Loading version history...
 Feature.Build.Message.NoAssetsFound,No assets found.
 Feature.Build.Message.NoCapturesAvailable,No captures available
 Feature.Build.Message.NoDescriptionProvided,No description provided.
-Feature.Build.Message.NoFriendsToAdd,You don't have any friends to add yet. Find people to connect with on Roblox first.
+Feature.Build.Message.NoFriendsToAdd,You don't have any friends to invite yet. Find people to connect with on Roblox first.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,No version history yet.
 Feature.Build.Message.OneTaskCompleted,1 task completed
 Feature.Build.Message.OutOfBuildUsage,You're out of Build usage. View your options to use Robux to keep creating.
 Feature.Build.Message.PlaytestInviteSendFailedBody,You were not able to send an invite chat link to the following users:
 Feature.Build.Message.PlaytestInviteSendFailedHint,Please use the Share button to get a link.
-Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} of {MAX_INVITES} playtesters added
-Feature.Build.Message.PrivatePlaytestInvite,{username} invited you to private playtest {experienceName}
+Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} of {MAX_INVITES} early testers invited
+Feature.Build.Message.PrivatePlaytestInvite,{username} invited you to be an early tester for {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Your game was published, but couldn't be made public. Try again."
 Feature.Build.Message.PublishExpandAudience,Publish to expand your audience
 Feature.Build.Message.PublishNotReverted,Your publish wasn't reverted. Try again.
@@ -2267,10 +2269,10 @@ Feature.Build.Message.ShareLinkFailed,Couldn't create the share link. Try again.
 Feature.Build.Message.SignedOut,You're signed out. Sign in and try again.
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} tasks completed
 Feature.Build.Message.ThinkingSeconds,Thinking for {SECONDS}s
-Feature.Build.Message.TrustedFriendsRequiredForPlaytest,Become trusted friends with this creator to playtest this game.
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,Become trusted friends with this creator to play their game.
 Feature.Build.Message.TryAgain,Try again.
 Feature.Build.Message.TurnToPortrait,Turn your device to portrait mode to continue working on your game.
-Feature.Build.Message.UpdateSettingsToPlaytest,"To play this game, update your playtest setting."
+Feature.Build.Message.UpdateSettingsToPlaytest,"To play this game, update your game preview setting."
 Feature.Build.Message.VersionHistoryLoad,Version history couldn't load.
 Feature.Build.Message.WhatToCreate,What do you want to create today?
 Feature.Build.Message.WorkedMinutesSeconds,Worked for {MINUTES}m{REM_SECONDS}s
@@ -2285,7 +2287,7 @@ Feature.Build.Placeholder.DescribeProductUpdate,Describe an update
 Feature.Build.Prompt.CreateDeveloperProduct,"Help me create a developer product, wire it into the game, verify and publish the changes, and make it available for purchase."
 Feature.Build.Title.AdCampaignActive,Ad campaign is active
 Feature.Build.Title.AdCampaignDuration,{durationDays}-day ad campaign
-Feature.Build.Title.AddFriendsToPlaytest,Add friends to help you playtest
+Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Add images
 Feature.Build.Title.AdsStatsEmpty,Start a campaign
 Feature.Build.Title.AdsStatsEmptyFree,Start your first campaign
@@ -2313,7 +2315,7 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Turn on Managed Pricing?
 Feature.Build.Title.NoMonetizationProducts,Start earning in your game
 Feature.Build.Title.NoRobuxForUsage,No Robux left for Build usage
 Feature.Build.Title.PlaytestInviteSendFailed,Couldn't send invites
-Feature.Build.Title.Playtesters,Playtesters
+Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersOnlyPlay,Only playtesters can play
 Feature.Build.Title.PromoteGame,Promote your game
 Feature.Build.Title.PromoteGameFree,Promote your game for free

@@ -948,6 +948,8 @@ CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Únete a juegos visitados anteriormente
 CoreScripts.InGameMenu.Traversal.LeaveBody,Estás a punto de abandonar este juego y regresar a {PREVIOUS_EXPERIENCE}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
+CoreScripts.InGameMenu.UnlockMore.Description,"Chat, amigos y más juegos"
+CoreScripts.InGameMenu.UnlockMore.Title,Desbloquea más de Roblox
 CoreScripts.InGameMenu.Vibration,Vibración
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,para activar o desactivar el menú de navigación
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,Algunas experiencias necesitan que presiones
@@ -2229,6 +2231,8 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Aún no hay historial de versiones.
 Feature.Build.Message.OneTaskCompleted,1 tarea completada
 Feature.Build.Message.OutOfBuildUsage,Ya no puedes usar la compilación. Consulta tus opciones para usar Robux y seguir creando.
+Feature.Build.Message.PlaytestInviteSendFailedBody,No pudiste enviar un enlace de invitación de chat a los siguientes usuarios:
+Feature.Build.Message.PlaytestInviteSendFailedHint,Usa el botón Compartir para obtener un enlace.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} de {MAX_INVITES} evaluadores de juego añadidos
 Feature.Build.Message.PrivatePlaytestInvite,{username} te invitó a una prueba de juego privada {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Tu juego se publicó, pero no se pudo hacer público. Inténtalo de nuevo."
@@ -2294,6 +2298,7 @@ Feature.Build.Title.GetUsers,Obtener usuarios
 Feature.Build.Title.ManagedPricingAcknowledgement,¿Quieres activar Precios gestionados?
 Feature.Build.Title.NoMonetizationProducts,Comienza a ganar en tu juego
 Feature.Build.Title.NoRobuxForUsage,No quedan Robux para el uso de la compilación
+Feature.Build.Title.PlaytestInviteSendFailed,No se pudieron enviar las invitaciones
 Feature.Build.Title.Playtesters,Evaluadores de juego
 Feature.Build.Title.PlaytestersOnlyPlay,Solo los evaluadores de juego pueden jugar
 Feature.Build.Title.PromoteGame,Promociona tu juego
@@ -3524,7 +3529,7 @@ Feature.Moments.Label.FeedFailedToLoad,No se pudo cargar el feed
 Feature.Moments.Label.FeedMyMoments,Mis Momentos
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,Cómo usar las Capturas
-Feature.Moments.Label.LinkCopied,Enlace copiado.
+Feature.Moments.Label.LinkCopied,Enlace copiado
 Feature.Moments.Label.LinkCopyFailed,Error al copiar el enlace.
 Feature.Moments.Label.ModeratedRodeoBody,"Eliminamos este Momento porque va en contra de nuestras Normas de la comunidad. Para que tus Momentos sigan siendo visibles, asegúrate de conocer y seguir las reglas."
 Feature.Moments.Label.MomentDeletedBody,
