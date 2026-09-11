@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "6cc16cfe-2b33-59a8-9cc5-0b2e2d68829f")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "99f03fa3-0c77-de3e-98a8-e60305d8d640")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 522829, e => {
@@ -41,7 +41,8 @@
             userCanManageAnalyticsAlertForUniverse: !1,
             canSaveCustomDashboards: !1,
             experienceHasExperimentationMinDau: !1,
-            experienceHasNoInGameExperiment: !1
+            experienceHasNoInGameExperiment: !1,
+            experienceHasInsightsAccess: !1
         },
         s = e => ({
             experienceHasPerformanceMonitoringAccess: !0 === e.experienceHasPerformanceMonitoringAccess,
@@ -49,15 +50,17 @@
             userCanManageAnalyticsAlertForUniverse: !0 === e.userCanManageAnalyticsAlertForUniverse,
             canSaveCustomDashboards: !0 === e.canSaveCustomDashboards,
             experienceHasExperimentationMinDau: !0 === e.experienceHasExperimentationMinDau,
-            experienceHasNoInGameExperiment: !0 === e.experienceHasNoInGameExperiment
+            experienceHasNoInGameExperiment: !0 === e.experienceHasNoInGameExperiment,
+            experienceHasInsightsAccess: !0 === e.experienceHasInsightsAccess
         });
     e.s(["useAnalyticsExperiencePermissions", 0, e => {
         let u = void 0 !== e && e > 0 ? e : void 0,
             c = (0, r.useQuery)({
                 queryKey: ["analytics-permissions", null != u ? u : "invalid-experience"],
                 queryFn: async () => {
+                    if (void 0 === u) throw Error("Feature permissions require a valid universe id.");
                     try {
-                        return await a.developerAnalyticsAggregationsClient.getfeaturePermissionsGetFeaturePermission(void 0 === u ? {} : {
+                        return await a.developerAnalyticsAggregationsClient.getfeaturePermissionsGetFeaturePermission({
                             universeId: u
                         })
                     } catch (t) {
@@ -2172,6 +2175,9 @@
         return {
             metric: W(e.metric),
             seriesKey: e.seriesKey,
+            ...e.filters ? {
+                filters: K(e.filters)
+            } : {},
             ...e.aggregation ? {
                 aggregation: G(e.aggregation, M, "aggregation")
             } : {}
@@ -2241,6 +2247,9 @@
                                 return n = "".concat(t, ".dataSpec.metrics[").concat(r, "]"), B(e) || H("".concat(n, " must be an object.")), ("string" != typeof(i = null != (a = e.seriesKey) ? a : e.series_key) || 0 === i.length) && H("".concat(n, ".seriesKey must be set.")), {
                                     metric: $(e.metric, "".concat(n, ".metric")),
                                     seriesKey: i,
+                                    ...void 0 === e.filters ? {} : {
+                                        filters: j(e.filters, "".concat(n, ".filters"))
+                                    },
                                     ...void 0 !== e.aggregation ? {
                                         aggregation: (o = L(e.aggregation, O, "aggregation"), (0, T.isChartAggregation)(o) ? o : H("Unsupported chart aggregation ".concat(o, ".")))
                                     } : {}
@@ -4565,7 +4574,8 @@
             metric: ev(r.metric, "".concat(t, ".metric")),
             seriesKey: el(w(r.seriesKey, "".concat(t, ".seriesKey")), "".concat(t, ".seriesKey")),
             displayName: void 0 !== r.displayName && null !== r.displayName ? el(O(C(r.displayName, "".concat(t, ".displayName"))), "".concat(t, ".displayName")) : void 0,
-            aggregation: eo(r.aggregation, "".concat(t, ".aggregation"))
+            aggregation: eo(r.aggregation, "".concat(t, ".aggregation")),
+            filters: void 0 === r.filters ? void 0 : ep(r.filters, "".concat(t, ".filters"))
         }
     }
 
@@ -5230,5 +5240,5 @@
     }])
 }]);
 
-//# debugId=6cc16cfe-2b33-59a8-9cc5-0b2e2d68829f
-//# sourceMappingURL=0m3ptqwosztri.js.map
+//# debugId=99f03fa3-0c77-de3e-98a8-e60305d8d640
+//# sourceMappingURL=0jl118x9rezh_.js.map

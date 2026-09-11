@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "b6bee70b-d374-8f0f-29ca-b691300679a3")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "ac620b02-2e31-2702-eeb4-3e5a016ba7d5")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 523426, e => {
@@ -235,8 +235,18 @@
             namespace: "immersive-ads",
             name: "isManagedRewardedTabEnabled",
             defaultValue: !1
+        }),
+        i = (0, t.defineFlag)({
+            namespace: "immersive-ads",
+            name: "managedRewardedCtrBenchmarkLow",
+            defaultValue: .01
+        }),
+        r = (0, t.defineFlag)({
+            namespace: "immersive-ads",
+            name: "managedRewardedCtrBenchmarkHigh",
+            defaultValue: .05
         });
-    e.s(["isAdsPageRedesignEnabled", 0, a, "isManagedRewardedTabEnabled", 0, n])
+    e.s(["isAdsPageRedesignEnabled", 0, a, "isManagedRewardedTabEnabled", 0, n, "managedRewardedCtrBenchmarkHigh", 0, r, "managedRewardedCtrBenchmarkLow", 0, i])
 }, 477797, e => {
     "use strict";
     var t = e.i(157700);
@@ -351,9 +361,9 @@
             isFetched: C,
             user: S
         } = (0, n.useRobloxAuthentication)(), {
-            unifiedLogger: A
+            unifiedLogger: w
         } = (0, r.useUnifiedLoggerProvider)(), {
-            isHighPriority: w,
+            isHighPriority: A,
             isEnabled: E
         } = (0, a.useMemo)(() => {
             let e = h(l),
@@ -373,7 +383,7 @@
                 try {
                     e = await m()
                 } catch (e) {
-                    A.logErrorEvent({
+                    w.logErrorEvent({
                         eventName: i.default.AgeVerificationUpsellBannerError,
                         parameters: {
                             branch: "isDismissedToday",
@@ -386,7 +396,7 @@
                 try {
                     t = await v()
                 } catch (e) {
-                    A.logErrorEvent({
+                    w.logErrorEvent({
                         eventName: i.default.AgeVerificationUpsellBannerError,
                         parameters: {
                             branch: "getEligibility",
@@ -396,7 +406,7 @@
                 }
                 y(t)
             })().catch(e => {
-                A.logErrorEvent({
+                w.logErrorEvent({
                     eventName: i.default.AgeVerificationUpsellBannerError,
                     parameters: {
                         branch: "runAsync",
@@ -404,17 +414,17 @@
                     }
                 })
             })
-        }, [E, C, S, A]);
+        }, [E, C, S, w]);
         let x = (0, a.useMemo)(() => {
             let e = E && "doNotShow" !== b;
             return {
                 isBannerVisible: e && !d,
                 isBannerEligible: e,
-                isHighPriority: w,
+                isHighPriority: A,
                 variant: "doNotShow" !== b ? b : "ageVerification",
                 dismissBanner: I
             }
-        }, [E, b, d, w, I]);
+        }, [E, b, d, A, I]);
         return (0, t.jsx)(g.Provider, {
             value: x,
             children: o
@@ -1052,8 +1062,8 @@
         y = e.i(156071),
         C = e.i(790806),
         S = e.i(759283),
-        A = e.i(384340);
-    let w = (0, v.makeStyles)()(() => ({
+        w = e.i(384340);
+    let A = (0, v.makeStyles)()(() => ({
             dialogTitle: {
                 marginBottom: 12
             },
@@ -1075,13 +1085,13 @@
                 translate: c
             } = (0, i.useTranslation)(), {
                 organization: u
-            } = (0, A.default)(), {
+            } = (0, w.default)(), {
                 classes: {
                     dialogTitle: v,
                     dialogContent: E,
                     dialogSubActions: I
                 }
-            } = w(), {
+            } = A(), {
                 enqueue: x,
                 close: T
             } = (0, b.useSnackbar)(), P = (0, a.useCallback)(e => {
@@ -1095,17 +1105,17 @@
                     autoHide: !0,
                     onClose: T
                 })
-            }, [x, T]), [U, R] = (0, a.useState)(), [N, D] = (0, a.useState)(), [F, O] = (0, a.useState)(), [k, V] = (0, a.useState)(), L = (0, a.useCallback)(async () => {
+            }, [x, T]), [R, U] = (0, a.useState)(), [N, F] = (0, a.useState)(), [k, D] = (0, a.useState)(), [O, V] = (0, a.useState)(), L = (0, a.useCallback)(async () => {
                 if (null == l ? void 0 : l.senderUserId) try {
                     let e = await C.default.getUserById(Number.parseInt(l.senderUserId, 10));
-                    O(e.name), V(!1)
+                    D(e.name), V(!1)
                 } catch (e) {
                     V(!0)
                 }
             }, [l]), M = (0, a.useCallback)(async () => {
                 if ((null == u ? void 0 : u.id) && (null == u ? void 0 : u.groupId)) try {
                     let e = await y.default.getGroupInfo(Number.parseInt(u.groupId, 10));
-                    R(null == e ? void 0 : e.name)
+                    U(null == e ? void 0 : e.name)
                 } catch (e) {
                     P(c("Error.GroupInformation"))
                 }
@@ -1118,25 +1128,25 @@
                 }, [r]),
                 j = (0, a.useCallback)(async () => {
                     if ((null == l ? void 0 : l.organizationId) && (null == l ? void 0 : l.id)) {
-                        D(!0);
+                        F(!0);
                         try {
                             await s.default.invitationClient.acceptOrDeclineInvitation(l.organizationId, l.id, {
                                 status: o.InvitationStatusType.Declined
                             }), r(!1)
                         } catch (e) {
-                            P(c("Error.DecliningInvitation")), D(!1)
+                            P(c("Error.DecliningInvitation")), F(!1)
                         }
                     }
                 }, [l.id, l.organizationId, r, P, c]),
                 G = (0, a.useCallback)(async () => {
                     if ((null == l ? void 0 : l.organizationId) && (null == l ? void 0 : l.id)) {
-                        D(!0);
+                        F(!0);
                         try {
                             await s.default.invitationClient.acceptOrDeclineInvitation(l.organizationId, l.id, {
                                 status: o.InvitationStatusType.Accepted
                             }), r(!0)
                         } catch (e) {
-                            P(c("Error.AcceptingInvitation")), D(!1)
+                            P(c("Error.AcceptingInvitation")), F(!1)
                         }
                     }
                 }, [l.id, l.organizationId, r, P, c]);
@@ -1155,15 +1165,15 @@
                                 variant: "h4",
                                 className: v,
                                 children: c("Label.JoinOrganization", {
-                                    organizationName: null != U ? U : c("Label.Group")
+                                    organizationName: null != R ? R : c("Label.Group")
                                 })
                             })
                         }), (0, t.jsx)(g.Grid, {
                             container: !0,
                             children: (0, t.jsx)(h.Typography, {
                                 variant: "body1",
-                                children: k ? c("Message.JoinOrganizationWithoutUsername") : c("Message.JoinOrganization", {
-                                    username: null != F ? F : ""
+                                children: O ? c("Message.JoinOrganizationWithoutUsername") : c("Message.JoinOrganization", {
+                                    username: null != k ? k : ""
                                 })
                             })
                         })]
@@ -1226,17 +1236,17 @@
                     dialogContent: u,
                     dialogActions: v
                 }
-            } = I(), [b, y] = (0, a.useState)(), [S, A] = (0, a.useState)(), w = (0, a.useCallback)(async () => {
+            } = I(), [b, y] = (0, a.useState)(), [S, w] = (0, a.useState)(), A = (0, a.useCallback)(async () => {
                 if (null == s ? void 0 : s.senderUserId) try {
                     let e = await C.default.getUserById(Number.parseInt(s.senderUserId, 10));
-                    y(e.name), A(!1)
+                    y(e.name), w(!1)
                 } catch (e) {
-                    A(!0)
+                    w(!0)
                 }
             }, [s]);
             (0, a.useEffect)(() => {
-                w()
-            }, [w]);
+                A()
+            }, [A]);
             let E = (0, a.useCallback)(() => {
                 r()
             }, [r]);
@@ -1285,52 +1295,52 @@
         }, [l.TranslationNamespace.Organization]);
     var T = e.i(582977),
         P = e.i(672401);
-    let U = (0, i.withTranslation)(e => {
+    let R = (0, i.withTranslation)(e => {
         let {
             children: i
         } = e, l = (0, n.useRouter)(), {
             user: d
         } = (0, r.useAuthentication)(), p = (0, u.useCurrentGroup)(), {
             currentItemGroupId: m
-        } = (0, c.default)(), [f, g] = (0, a.useState)(), [h, v] = (0, a.useState)(), [b, y] = (0, a.useState)(), [C, S] = (0, a.useState)(!1), [A, w] = (0, a.useState)(!1), [I, U] = (0, a.useState)(), [R, N] = (0, a.useState)(!1), D = null == d ? void 0 : d.id, F = (0, a.useMemo)(() => {
+        } = (0, c.default)(), [f, g] = (0, a.useState)(), [h, v] = (0, a.useState)(), [b, y] = (0, a.useState)(), [C, S] = (0, a.useState)(!1), [w, A] = (0, a.useState)(!1), [I, R] = (0, a.useState)(), [U, N] = (0, a.useState)(!1), F = null == d ? void 0 : d.id, k = (0, a.useMemo)(() => {
             var e;
             return null != (e = null == p ? void 0 : p.id) ? e : m
-        }, [p, m]), O = l.query[T.InviteQueryKey], k = l.isReady, V = (0, a.useCallback)(() => {
+        }, [p, m]), D = l.query[T.InviteQueryKey], O = l.isReady, V = (0, a.useCallback)(() => {
             n.default.push("https://create.".concat("roblox.com", "/dashboard/creations"))
         }, []), L = (0, a.useCallback)(async e => {
-            if (!D) return void y(null);
+            if (!F) return void y(null);
             try {
-                let t = await s.default.userClient.getUserInvitationByOrganization(e, D.toString());
+                let t = await s.default.userClient.getUserInvitationByOrganization(e, F.toString());
                 y(t)
             } catch (e) {
                 y(null), V()
             }
-        }, [D, V]), M = (0, a.useCallback)(async e => {
-            if (!D) return void v(null);
+        }, [F, V]), M = (0, a.useCallback)(async e => {
+            if (!F) return void v(null);
             try {
-                let t = await s.default.userClient.getUserPermissions(e, D.toString());
+                let t = await s.default.userClient.getUserPermissions(e, F.toString());
                 v(t)
             } catch (e) {
                 v(null)
             }
-        }, [D]), B = (0, a.useCallback)(async () => {
-            if (k) {
-                w(!0);
+        }, [F]), B = (0, a.useCallback)(async () => {
+            if (O) {
+                A(!0);
                 try {
-                    if ("string" == typeof O) return void await L(O);
-                    if (!F) return void g(null);
-                    if (y(null), F) {
-                        let e = await s.default.organizationClient.getOrganization(F.toString());
+                    if ("string" == typeof D) return void await L(D);
+                    if (!k) return void g(null);
+                    if (y(null), k) {
+                        let e = await s.default.organizationClient.getOrganization(k.toString());
                         g(e), await M(e.id)
                     } else g(void 0);
                     S(!1)
                 } catch (e) {
                     g(null), v(null), y(null)
                 } finally {
-                    w(!1)
+                    A(!1)
                 }
             }
-        }, [F, L, M, O, k]), j = (0, a.useCallback)(() => {
+        }, [k, L, M, D, O]), j = (0, a.useCallback)(() => {
             S(!0), B()
         }, [B]), G = (0, a.useCallback)(async () => {
             (null == f ? void 0 : f.id) && await M(null == f ? void 0 : f.id)
@@ -1340,8 +1350,8 @@
             refreshOrganization: j,
             refreshPermission: G,
             isOrganizationRefreshRequired: C,
-            isOrganizationLoading: A
-        }), [f, h, j, G, C, A]);
+            isOrganizationLoading: w
+        }), [f, h, j, G, C, w]);
         return (0, a.useEffect)(() => {
             B()
         }, [B]), (0, t.jsx)(P.default.Provider, {
@@ -1351,11 +1361,11 @@
                     children: [(0, t.jsx)(E, {
                         open: b.invitationStatusType === o.InvitationStatusType.Open && void 0 === I,
                         onClose: e => {
-                            !0 === e ? (U(!0), N(!0)) : !1 === e ? (U(!1), N(!0)) : (V(), y(null))
+                            !0 === e ? (R(!0), N(!0)) : !1 === e ? (R(!1), N(!0)) : (V(), y(null))
                         },
                         invitation: b
                     }), (0, t.jsx)(x, {
-                        open: R,
+                        open: U,
                         onClose: () => {
                             N(!1), !0 === I && j(), V()
                         },
@@ -1366,7 +1376,7 @@
             })
         })
     }, [l.TranslationNamespace.Organization]);
-    e.s(["default", 0, U], 911502)
+    e.s(["default", 0, R], 911502)
 }, 758835, e => {
     "use strict";
     var t = e.i(416340),
@@ -1950,5 +1960,5 @@
     }])
 }]);
 
-//# debugId=b6bee70b-d374-8f0f-29ca-b691300679a3
-//# sourceMappingURL=0-j-7h9ds-lzr.js.map
+//# debugId=ac620b02-2e31-2702-eeb4-3e5a016ba7d5
+//# sourceMappingURL=1fyd4rbqk04i-.js.map

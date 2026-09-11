@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "01aea066-0ae3-82b4-cb4c-50d9eb18faf4")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "9fa2ec1c-c05b-59e2-ba75-3dcf96f32b89")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 656350, t => {
@@ -10424,6 +10424,15 @@
             contextType: "static"
         }
     }, {
+        flag: cq.enableAudienceReachV2,
+        metadata: {
+            namespace: "creator-gameops",
+            name: "enableAudienceReachV2",
+            defaultValue: !1,
+            valueType: "boolean",
+            contextType: "static"
+        }
+    }, {
         flag: ck.isUpdatedPublishingFlowEnabled,
         metadata: {
             namespace: "creator-platform",
@@ -10487,6 +10496,15 @@
             contextType: "universe"
         }
     }, {
+        flag: cL.isAcquisitionThumbnailUpsellEnabled,
+        metadata: {
+            namespace: "game-discovery-serving",
+            name: "isAcquisitionThumbnailUpsellEnabled",
+            defaultValue: !1,
+            valueType: "boolean",
+            contextType: "universe"
+        }
+    }, {
         flag: cO,
         metadata: {
             namespace: "groups",
@@ -10511,6 +10529,24 @@
             name: "isManagedRewardedTabEnabled",
             defaultValue: !1,
             valueType: "boolean",
+            contextType: "static"
+        }
+    }, {
+        flag: cN.managedRewardedCtrBenchmarkLow,
+        metadata: {
+            namespace: "immersive-ads",
+            name: "managedRewardedCtrBenchmarkLow",
+            defaultValue: .01,
+            valueType: "number",
+            contextType: "static"
+        }
+    }, {
+        flag: cN.managedRewardedCtrBenchmarkHigh,
+        metadata: {
+            namespace: "immersive-ads",
+            name: "managedRewardedCtrBenchmarkHigh",
+            defaultValue: .05,
+            valueType: "number",
             contextType: "static"
         }
     }, {
@@ -10729,7 +10765,7 @@
     var c3 = t.i(37819),
         c6 = t.i(431346),
         c8 = t.i(881670);
-    let c5 = "".concat("".concat("https://assets.create.roblox.com/fadf6bf6d993be27303a59803a17d15c24ba1757/assets", "/opengraph"), "/global_og_image.png"),
+    let c5 = "".concat("".concat("https://assets.create.roblox.com/0d9fdcf3b3b5acaf0d07c5244cf7bf8607b48798/assets", "/opengraph"), "/global_og_image.png"),
         c9 = (0, ob.withTranslation)(t => {
             let {
                 openGraphMetadata: {
@@ -13588,5 +13624,5 @@
     n.exports = t.r(959610)
 }]);
 
-//# debugId=01aea066-0ae3-82b4-cb4c-50d9eb18faf4
-//# sourceMappingURL=2_fxwiw51dkqz.js.map
+//# debugId=9fa2ec1c-c05b-59e2-ba75-3dcf96f32b89
+//# sourceMappingURL=33jlgxye4_ous.js.map

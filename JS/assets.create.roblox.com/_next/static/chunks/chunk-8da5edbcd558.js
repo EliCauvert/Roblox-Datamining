@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "e07d9e42-6ea7-1c6c-ee55-fb743e2d9930")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "567057c1-a231-9c7e-e083-d49258910bac")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 846130, e => {
@@ -23,8 +23,13 @@
             namespace: "creator-gameops",
             name: "enablePlayerSupportCreatorTicketReroute",
             defaultValue: !1
+        }),
+        i = (0, t.defineFlag)({
+            namespace: "creator-gameops",
+            name: "enableAudienceReachV2",
+            defaultValue: !1
         });
-    e.s(["enablePlayerHostedEvents", 0, n, "enablePlayerSupport", 0, a, "enablePlayerSupportCreatorTicketReroute", 0, r])
+    e.s(["enableAudienceReachV2", 0, i, "enablePlayerHostedEvents", 0, n, "enablePlayerSupport", 0, a, "enablePlayerSupportCreatorTicketReroute", 0, r])
 }, 787617, e => {
     "use strict";
     let t = (0, e.i(157700).defineFlag)({
@@ -35,12 +40,18 @@
     e.s(["isUpdatedPublishingFlowEnabled", 0, t])
 }, 242002, e => {
     "use strict";
-    let t = (0, e.i(157700).defineFlag)({
-        namespace: "game-discovery-serving",
-        name: "isHomeAcquisitionSignalsEnabled",
-        defaultValue: !0
-    });
-    e.s(["isHomeAcquisitionSignalsEnabled", 0, t])
+    var t = e.i(157700);
+    let a = (0, t.defineFlag)({
+            namespace: "game-discovery-serving",
+            name: "isHomeAcquisitionSignalsEnabled",
+            defaultValue: !0
+        }),
+        n = (0, t.defineFlag)({
+            namespace: "game-discovery-serving",
+            name: "isAcquisitionThumbnailUpsellEnabled",
+            defaultValue: !1
+        });
+    e.s(["isAcquisitionThumbnailUpsellEnabled", 0, n, "isHomeAcquisitionSignalsEnabled", 0, a])
 }, 82899, e => {
     "use strict";
     let t = (0, e.i(157700).defineFlag)({
@@ -1010,7 +1021,7 @@
                 children: L
             } = e, k = (0, a.default)(), U = (0, l.useMemo)(() => ({
                 size: w
-            }), [w]), M = h ? l.default.createElement("span", {
+            }), [w]), T = h ? l.default.createElement("span", {
                 id: k,
                 className: (0, i.default)(c[w], "content-emphasis")
             }, h) : null;
@@ -1018,9 +1029,9 @@
                 value: U
             }, l.default.createElement("div", {
                 className: (0, i.default)("flex flex-col", P && ["opacity-[0.5]", "pointer-events-none"], f[w], E)
-            }, M && (b ? l.default.createElement("div", {
+            }, T && (b ? l.default.createElement("div", {
                 className: "flex items-center gap-xsmall"
-            }, M, l.default.createElement(n.LabelTooltip, b)) : M), l.default.createElement(s.Root, {
+            }, T, l.default.createElement(n.LabelTooltip, b)) : T), l.default.createElement(s.Root, {
                 value: S,
                 disabled: P,
                 onValueChange: R,
@@ -1737,5 +1748,5 @@
     }])
 }]);
 
-//# debugId=e07d9e42-6ea7-1c6c-ee55-fb743e2d9930
-//# sourceMappingURL=22h1mg-xbk64c.js.map
+//# debugId=567057c1-a231-9c7e-e083-d49258910bac
+//# sourceMappingURL=1008rq232aj0u.js.map

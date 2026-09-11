@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "5be1f1d8-18f6-b263-3e85-4ca93e94369a")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "8ea85c7b-cf67-df26-dd26-bf04c118a498")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 134731, e => {
@@ -613,7 +613,7 @@
     var t = e.i(221628),
         a = e.i(416340),
         r = e.i(237401),
-        n = e.i(974729),
+        n = e.i(495662),
         i = e.i(52746),
         s = e.i(197649),
         l = e.i(79187),
@@ -628,7 +628,7 @@
         h = e.i(917852),
         v = e.i(576069),
         y = e.i(663563);
-    let b = "".concat("https://assets.create.roblox.com/fadf6bf6d993be27303a59803a17d15c24ba1757/assets", "/home/publish_eligibility_banner.webp"),
+    let b = "".concat("https://assets.create.roblox.com/0d9fdcf3b3b5acaf0d07c5244cf7bf8607b48798/assets", "/home/publish_eligibility_banner.webp"),
         A = (0, l.withTranslation)(e => {
             var A;
             let {
@@ -3775,5 +3775,5 @@
     }], 630986)
 }]);
 
-//# debugId=5be1f1d8-18f6-b263-3e85-4ca93e94369a
-//# sourceMappingURL=19doozs6us4ko.js.map
+//# debugId=8ea85c7b-cf67-df26-dd26-bf04c118a498
+//# sourceMappingURL=32xh09dupam3n.js.map
