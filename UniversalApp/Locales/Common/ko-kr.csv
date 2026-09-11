@@ -1710,6 +1710,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{max}개 중 {count}개
 Feature.Avatar.BackgroundGeneration.Label.Description,설명
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus 독점 제공
 Feature.Avatar.BackgroundGeneration.Label.Name,이름
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,이번 시간
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,배경 {count}개 남음
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,시간
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,분
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,재설정까지 남은 시간:
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,배경을 설명해 주세요...
 Feature.Avatar.BackgroundGeneration.Status.Generating,배경 생성 중...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,배경 준비 중...
@@ -1828,6 +1837,7 @@ Feature.Avatar.Label.ClassicTShirts,클래식 티셔츠
 Feature.Avatar.Label.ClearByCategory,{category} 지우기
 Feature.Avatar.Label.Climb,오르기
 Feature.Avatar.Label.ClimbAnimations,오르기 애니메이션
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"이름에는 알파벳과 숫자, 빈 칸만 사용할 수 있어요"
 Feature.Avatar.Label.CountSelected,{itemCount}개 선택됨
 Feature.Avatar.Label.Creations,작품
@@ -1939,6 +1949,7 @@ Feature.Avatar.Label.RecentlyWorn,최근 장착
 Feature.Avatar.Label.RemoveFromSetBody,"해당 아바타가 이 세트에서 제거되며, 삭제되지는 않습니다."
 Feature.Avatar.Label.Replace,교체
 Feature.Avatar.Label.ResetToNewCharacter,새 캐릭터로 전환 중입니다. 전체 코스튬 아이템을 재설정할까요? 아니면 그대로 유지할까요?
+Feature.Avatar.Label.ResetTryOn,현재 아바타로 재설정
 Feature.Avatar.Label.Right,우
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,
@@ -1994,6 +2005,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,메이크업 레이어링
 Feature.Avatar.Label.Title.ManageAvatars,아바타 관리
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,내 인벤토리
 Feature.Avatar.Label.Title.ProfilePhoto,프로필 사진
 Feature.Avatar.Label.Title.ReplaceAvatar,아바타 교체
@@ -2133,6 +2145,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,
+Feature.Avatar.Title.MyAvatar,
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,꾸미기에 새로운 스타일이 추가됐습니다!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,마켓플레이스 첫 등장

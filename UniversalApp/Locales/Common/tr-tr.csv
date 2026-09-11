@@ -1709,6 +1709,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Açıklama
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus'a özel
 Feature.Avatar.BackgroundGeneration.Label.Name,Ad
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,bugün
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,bu saatte
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,bu ay
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,{count} arka plan kaldı
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,gün
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,saat
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,dakika
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,Sıfırlanması için kalan süre:
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Arka planını tarif et…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Arka planın oluşturuluyor…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Arka planın hazırlanıyor…
@@ -1827,6 +1836,7 @@ Feature.Avatar.Label.ClassicTShirts,Klasik Tişörtler
 Feature.Avatar.Label.ClearByCategory,{category} kategorisini temizle
 Feature.Avatar.Label.Climb,Tırmanma
 Feature.Avatar.Label.ClimbAnimations,Tırmanma Animasyonları
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Kostüm adı yalnızca harfler, sayılar ve boşluklar içerebilir"
 Feature.Avatar.Label.CountSelected,{itemCount} Öğe Seçildi
 Feature.Avatar.Label.Creations,Yaratımlar
@@ -1938,6 +1948,7 @@ Feature.Avatar.Label.RecentlyWorn,Yakın zamanda giyilen
 Feature.Avatar.Label.RemoveFromSetBody,Bu avatarlar bu setten kaldırılacak ancak silinmeyecek.
 Feature.Avatar.Label.Replace,Değiştir
 Feature.Avatar.Label.ResetToNewCharacter,Yeni bir karaktere geçiş yapıyorsun. Tüm kıyafet öğelerini sıfırlamak mı yoksa saklamak mı istersin?
+Feature.Avatar.Label.ResetTryOn,Mevcut avatara sıfırla
 Feature.Avatar.Label.Right,Sağ
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,Sağ Kollar
@@ -1993,6 +2004,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,Makyaj Katmanlama
 Feature.Avatar.Label.Title.ManageAvatars,Avatarları Yönet
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,Envanterim
 Feature.Avatar.Label.Title.ProfilePhoto,Profil Fotoğrafı
 Feature.Avatar.Label.Title.ReplaceAvatar,Avatarı Değiştir
@@ -2132,6 +2144,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,Hareket Et
+Feature.Avatar.Title.MyAvatar,Avatarım
 Feature.Avatar.Title.NameAvatarOutfit,Avatarına ad ver
 Feature.Avatar.Title.NewCustomizeLook,Özelleştir Yeni Bir Görünüme Kavuştu!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Pazar Yerinde Yeniler
