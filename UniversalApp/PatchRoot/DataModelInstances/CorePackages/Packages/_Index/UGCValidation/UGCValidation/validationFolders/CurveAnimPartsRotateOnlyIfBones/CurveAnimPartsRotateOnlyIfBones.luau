@@ -9,7 +9,8 @@ local getFFlagUGCValidateEmotesBonesAllowedModule = require(parent.flags.getFFla
 local getFFlagUGCValidateAnimPartsRotationOnlyModule = require(parent.flags.getFFlagUGCValidateAnimPartsRotationOnly)
 local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.getFFlagUGCValidationAnimationPackSupport)
 local getFFlagUGCValidateAnimTranslationThresholdModule = require(parent.flags.getFFlagUGCValidateAnimTranslationThreshold)
-local UGCValidateBodyPartTranslationMaxDistanceHundredths = game:DefineFastInt("UGCValidateBodyPartTranslationMaxDistanceHundredths", 50)
+local UGCValidateBodyPartTranslationMaxDistanceHundredths = game:DefineFastInt("UGCValidateBodyPartTranslationMaxDistanceHundredths", 100)
+local UGCValidateLowerTorsoTranslationMaxDistanceHundredths = game:DefineFastInt("UGCValidateLowerTorsoTranslationMaxDistanceHundredths", 200)
 local t = {
 	categories = { validationEnumsModule.UploadCategory.EMOTE_ANIMATION }
 }
@@ -35,10 +36,11 @@ t.prereqTests = {
 }
 
 function t.run(p1, p2)
-	-- upvalues: getFFlagUGCValidateAnimPartsRotationOnlyModule (ref), validationEnumsModule (ref), UGCValidateBodyPartTranslationMaxDistanceHundredths (ref), curveAnimBoneHierarchyUtilsModule (ref), curveAnimationHierarchyUtilsModule (ref), getFFlagUGCValidateAnimTranslationThresholdModule (ref), curveAnimTranslationUtilsModule (ref), errorSourceStringsModule (ref)
+	-- upvalues: getFFlagUGCValidateAnimPartsRotationOnlyModule (ref), validationEnumsModule (ref), UGCValidateBodyPartTranslationMaxDistanceHundredths (ref), UGCValidateLowerTorsoTranslationMaxDistanceHundredths (ref), curveAnimBoneHierarchyUtilsModule (ref), curveAnimationHierarchyUtilsModule (ref), getFFlagUGCValidateAnimTranslationThresholdModule (ref), curveAnimTranslationUtilsModule (ref), errorSourceStringsModule (ref)
 	local var1
 	local var2 = getFFlagUGCValidateAnimPartsRotationOnlyModule() and p2.uploadCategory == validationEnumsModule.UploadCategory.ANIMATION
 	local var3 = UGCValidateBodyPartTranslationMaxDistanceHundredths / 100
+	local var4 = UGCValidateLowerTorsoTranslationMaxDistanceHundredths / 100
 	
 	for i, v in p2.curveAnimations do
 		local v_1
@@ -55,13 +57,14 @@ function t.run(p1, p2)
 				for i_2, i_1 in v:GetDescendants() do
 					if i_1:IsA("Folder") and curveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(i_1.Name) then
 						if getFFlagUGCValidateAnimTranslationThresholdModule() then
-							v_1, var14 = curveAnimTranslationUtilsModule.translationExceedsThreshold(i_1, var3)
+							v_1 = if i_1.Name == "LowerTorso" then var4 else var3
+							local var5, var6 = curveAnimTranslationUtilsModule.translationExceedsThreshold(i_1, v_1)
 							
-							if v_1 then
+							if var5 then
 								p1:fail(errorSourceStringsModule.Keys.CurveAnim_BodyPartTranslationExceedsThreshold, {
 									bodyPartName = i_1.Name,
-									distance = string.format("%.3f", var14),
-									maxDistance = string.format("%.3f", var3)
+									distance = string.format("%.3f", var6),
+									maxDistance = string.format("%.3f", v_1)
 								})
 							end
 						elseif curveAnimTranslationUtilsModule.positionHasKeyframes(i_1) then

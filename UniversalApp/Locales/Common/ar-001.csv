@@ -207,6 +207,7 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,تسجيل الدخ�
 Authentication.AccountSwitch.Action.SwitchAccount,تبديل الحسابات
 Authentication.AccountSwitch.Description.AccountLimit.2,لقد وصلت إلى الحد الأقصى المسموح به لعدد الحسابات. لإضافة حساب جديد، يُرجى إزالة أحد الحسابات الحالية أولاً.
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,المتابعة باسم {username} ستؤدي إلى تسجيل خروجك من حساباتك الأخرى.
+Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,ستؤدي المتابعة إلى تسجيل خروجك من حساباتك الأخرى.
 Authentication.AccountSwitch.Description.LogoutConfirmation,يتعين عليك تسجيل الخروج من حسابات Roblox الأخرى على هذا الجهاز قبل إضافة حساب جديد
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,الرجاء إعادة المحاولة لاحقًا
 Authentication.AccountSwitch.Description.RemoveAllAccounts,بمجرد تسجيل الخروج، ستتم إزالة كل الحسابات من هذا الجهاز.
@@ -4597,6 +4598,7 @@ Feature.Profile.Action.ShareProfile,مشاركة الملف الشخصي
 Feature.Profile.Action.ShareProfileLink,مشاركة رابط الملف الشخصي
 Feature.Profile.Action.SwitchAvatar,تبديل الأفاتار
 Feature.Profile.Action.ToQRCode,
+Feature.Profile.Action.Trade,التبادل
 Feature.Profile.Action.UserBlocked,المستخدم محظور
 Feature.Profile.Action.ViewFullProfile,عرض الملف الشخصي بأكمله
 Feature.Profile.Action.ViewProfile,

@@ -224,6 +224,7 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,Mevcut hesaba giriş
 Authentication.AccountSwitch.Action.SwitchAccount,Hesap Değiştir
 Authentication.AccountSwitch.Description.AccountLimit.2,Hesap sınırına ulaştın. Yeni bir hesap eklemek için lütfen mevcut bir hesabı kaldır.
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,{username} olarak devam etmek diğer hesaplarından çıkış yapmana sebep olur.
+Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,Devam etmek diğer hesaplarından çıkış yapmana sebep olur.
 Authentication.AccountSwitch.Description.LogoutConfirmation,Yeni bir hesap eklemeden önce bu cihazdaki diğer Roblox hesaplarından çıkış yapman gerekiyor
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Lütfen daha sonra tekrar dene
 Authentication.AccountSwitch.Description.RemoveAllAccounts,Çıkış yaptığında tüm hesaplar bu cihazdan kaldırılacaktır.
@@ -4614,6 +4615,7 @@ Feature.Profile.Action.ShareProfile,Profili paylaş
 Feature.Profile.Action.ShareProfileLink,Profil Bağlantısını Paylaş
 Feature.Profile.Action.SwitchAvatar,Avatar değiştir
 Feature.Profile.Action.ToQRCode,QR kodunu paylaş
+Feature.Profile.Action.Trade,Takas
 Feature.Profile.Action.UserBlocked,Kullanıcı Engellendi
 Feature.Profile.Action.ViewFullProfile,Profilin tamamını görüntüle
 Feature.Profile.Action.ViewProfile,Profili görüntüle

@@ -207,6 +207,7 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,ลงชื่อ�
 Authentication.AccountSwitch.Action.SwitchAccount,สลับบัญชี
 Authentication.AccountSwitch.Description.AccountLimit.2,คุณมีบัญชีถึงจำนวนสูงสุดแล้ว หากต้องการเพิ่มบัญชีใหม่ โปรดลบบัญชีที่มีอยู่ออกก่อน
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,การดำเนินการต่อโดยใช้ {username} จะนำคุณออกจากระบบบัญชีอื่นของคุณ
+Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,การดำเนินการต่อจะนำคุณออกจากระบบบัญชีอื่นของคุณ
 Authentication.AccountSwitch.Description.LogoutConfirmation,คุณจะต้องลงชื่อออกจากบัญชี Roblox บัญชีอื่นของคุณบนอุปกรณ์นี้ก่อนจึงจะเพิ่มบัญชีใหม่ได้
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,โปรดลองอีกครั้งในภายหลัง
 Authentication.AccountSwitch.Description.RemoveAllAccounts,เมื่อคุณลงชื่อออก บัญชีทั้งหมดจะถูกลบออกจากอุปกรณ์นี้
@@ -4600,6 +4601,7 @@ Feature.Profile.Action.ShareProfile,แชร์โปรไฟล์
 Feature.Profile.Action.ShareProfileLink,แชร์ลิงก์โปรไฟล์
 Feature.Profile.Action.SwitchAvatar,เปลี่ยนอวาตาร์
 Feature.Profile.Action.ToQRCode,แชร์รหัส QR
+Feature.Profile.Action.Trade,แลกเปลี่ยน
 Feature.Profile.Action.UserBlocked,บล็อคผู้ใช้นี้แล้ว
 Feature.Profile.Action.ViewFullProfile,ดูโปรไฟล์แบบเต็ม
 Feature.Profile.Action.ViewProfile,

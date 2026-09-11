@@ -224,6 +224,7 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,Iniciar sesión en u
 Authentication.AccountSwitch.Action.SwitchAccount,Cambiar cuentas
 Authentication.AccountSwitch.Description.AccountLimit.2,"Alcanzaste el límite de cuentas. Para añadir una nueva, primero elimina una existente."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,"Si continúas como {username}, se cerrarán tus otras cuentas."
+Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,"Si continúas, se cerrarán tus otras cuentas."
 Authentication.AccountSwitch.Description.LogoutConfirmation,Necesitarás cerrar sesión en tus otras cuentas de Roblox en este dispositivo antes de añadir una cuenta nueva
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Inténtalo de nuevo más tarde
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Una vez que cierres sesión, todas las cuentas se eliminarán de este dispositivo."
@@ -4615,6 +4616,7 @@ Feature.Profile.Action.ShareProfile,Compartir perfil
 Feature.Profile.Action.ShareProfileLink,Compartir enlace de perfil
 Feature.Profile.Action.SwitchAvatar,Cambiar avatar
 Feature.Profile.Action.ToQRCode,
+Feature.Profile.Action.Trade,Intercambiar
 Feature.Profile.Action.UserBlocked,Usuario bloqueado
 Feature.Profile.Action.ViewFullProfile,Ver perfil completo
 Feature.Profile.Action.ViewProfile,

@@ -224,6 +224,7 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,Bei bestehendem Kont
 Authentication.AccountSwitch.Action.SwitchAccount,Konto wechseln
 Authentication.AccountSwitch.Description.AccountLimit.2,"Du hast dein Kontolimit erreicht. Um ein neues Konto hinzuzufügen, musst du zuerst ein Konto entfernen."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,"Wenn du als {username} fortfährst, wirst du von deinen anderen Konten abgemeldet."
+Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,"Wenn du fortfährst, wirst du von deinen anderen Konten abgemeldet."
 Authentication.AccountSwitch.Description.LogoutConfirmation,"Du musst dich von deinen anderen Roblox-Konten auf diesem Gerät abmelden, bevor du ein neues Konto hinzufügen kannst"
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Bitte versuche es später erneut
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Sobald du dich abmeldest, werden alle Konten von diesem Gerät entfernt."
@@ -4608,6 +4609,7 @@ Feature.Profile.Action.ShareProfile,Profil teilen
 Feature.Profile.Action.ShareProfileLink,Profillink teilen
 Feature.Profile.Action.SwitchAvatar,Avatar wechseln
 Feature.Profile.Action.ToQRCode,
+Feature.Profile.Action.Trade,Tauschen
 Feature.Profile.Action.UserBlocked,Benutzer blockiert
 Feature.Profile.Action.ViewFullProfile,Vollständiges Profil anzeigen
 Feature.Profile.Action.ViewProfile,

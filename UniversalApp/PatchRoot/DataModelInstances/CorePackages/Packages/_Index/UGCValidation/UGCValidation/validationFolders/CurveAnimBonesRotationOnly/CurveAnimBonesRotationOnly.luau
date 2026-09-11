@@ -8,7 +8,7 @@ local getFFlagUGCValidateEmotesBonesAllowedModule = require(parent.flags.getFFla
 local getFFlagUGCValidateAnimBonesSupportModule = require(parent.flags.getFFlagUGCValidateAnimBonesSupport)
 local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.getFFlagUGCValidationAnimationPackSupport)
 local getFFlagUGCValidateAnimTranslationThresholdModule = require(parent.flags.getFFlagUGCValidateAnimTranslationThreshold)
-local UGCValidateBoneTranslationMaxDistanceHundredths = game:DefineFastInt("UGCValidateBoneTranslationMaxDistanceHundredths", 50)
+local UGCValidateBoneTranslationMaxDistanceHundredths = game:DefineFastInt("UGCValidateBoneTranslationMaxDistanceHundredths", 100)
 local t = {
 	categories = { validationEnumsModule.UploadCategory.EMOTE_ANIMATION }
 }

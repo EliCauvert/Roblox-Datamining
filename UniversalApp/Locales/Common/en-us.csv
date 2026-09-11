@@ -225,6 +225,7 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,Sign in to existing 
 Authentication.AccountSwitch.Action.SwitchAccount,Switch Accounts
 Authentication.AccountSwitch.Description.AccountLimit.2,"You’ve reached your account limit. To add a new one, remove an account first."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,Continuing as {username} will sign you out of your other accounts.
+Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,Continuing will sign you out of your other accounts.
 Authentication.AccountSwitch.Description.LogoutConfirmation,You’ll need to log out of your other Roblox accounts on this device before adding a new account
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Please try again later
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Once you sign out, all accounts will be removed from this device."
@@ -4645,6 +4646,7 @@ Feature.Profile.Action.ShareProfile,Share profile
 Feature.Profile.Action.ShareProfileLink,Share profile link
 Feature.Profile.Action.SwitchAvatar,Switch avatar
 Feature.Profile.Action.ToQRCode,Share QR code
+Feature.Profile.Action.Trade,Trade
 Feature.Profile.Action.UserBlocked,User Blocked
 Feature.Profile.Action.ViewFullProfile,View full profile
 Feature.Profile.Action.ViewProfile,View profile

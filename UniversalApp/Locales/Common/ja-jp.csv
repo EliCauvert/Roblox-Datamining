@@ -224,6 +224,7 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,既存のアカウ�
 Authentication.AccountSwitch.Action.SwitchAccount,アカウントを切り替える
 Authentication.AccountSwitch.Description.AccountLimit.2,アカウント数の上限に達しました。新しいアカウントを追加するには、まずアカウントを削除してください。
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,{username}として続行すると、他のアカウントからログアウトされます。
+Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,続けると、他のアカウントからログアウトされます。
 Authentication.AccountSwitch.Description.LogoutConfirmation,新しいアカウントを追加する前に、このデバイスで他のRobloxアカウントからログアウトする必要があります
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,後でもう一度お試しください
 Authentication.AccountSwitch.Description.RemoveAllAccounts,ログアウトすると、すべてのアカウントがこのデバイスから削除されます。
@@ -4615,6 +4616,7 @@ Feature.Profile.Action.ShareProfile,プロフィールを共有
 Feature.Profile.Action.ShareProfileLink,プロフィールのリンクを共有
 Feature.Profile.Action.SwitchAvatar,アバターを切り替え
 Feature.Profile.Action.ToQRCode,
+Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,ユーザーがブロックされています
 Feature.Profile.Action.ViewFullProfile,プロフィール全体を表示
 Feature.Profile.Action.ViewProfile,プロフィールを表示

@@ -207,6 +207,7 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,登录现有帐户
 Authentication.AccountSwitch.Action.SwitchAccount,切换帐户
 Authentication.AccountSwitch.Description.AccountLimit.2,你已达到帐户数量上限。要添加新帐户，请先移除一个帐户。
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,如果以“{username}”的身份继续，你将从其他帐户中注销。
+Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,如果继续操作，你将从其他帐户注销。
 Authentication.AccountSwitch.Description.LogoutConfirmation,您必须注销此设备上的其他 Roblox 帐户才能添加新帐户
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,请稍后重试
 Authentication.AccountSwitch.Description.RemoveAllAccounts,注销后，所有帐户都将从此设备中移除。
@@ -4594,6 +4595,7 @@ Feature.Profile.Action.ShareProfile,分享个人资料
 Feature.Profile.Action.ShareProfileLink,分享个人资料链接
 Feature.Profile.Action.SwitchAvatar,切换虚拟形象
 Feature.Profile.Action.ToQRCode,
+Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,用户已屏蔽
 Feature.Profile.Action.ViewFullProfile,查看完整个人资料
 Feature.Profile.Action.ViewProfile,
