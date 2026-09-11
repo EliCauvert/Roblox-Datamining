@@ -722,6 +722,8 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,无法检测到动态头
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,商城中的动态头部必须是动画形式，但此头部没有 FACS 数据。
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,无法检测到动态头部的右眼闭合表情。请调整右眼的笼架标记，使其与头部右眼的位置相匹配，并确保其可以闭合。
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,无法检测到动态头部的皱眉表情。请调整嘴部的笼架标记，使其与头部的嘴巴位置相匹配，并确保它可以显示皱眉表情。
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,此素材使用了发光贴图，这些贴图仅限“受信任创作者计划”创作者使用。请移除所有发光贴图内容或加入该计划后再上传。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,已发布的动画缺少有效的部件最大位移值。请重新发布该动画。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,已发布的动画缺少有效的用户生成内容动作标记。请重新发布该动画。
@@ -1706,15 +1708,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,描述
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus 专属
 Feature.Avatar.BackgroundGeneration.Label.Name,名称
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,（今天）
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,（本小时）
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,（本月）
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,剩余 {count} 个背景
 Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,天后
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,小时后
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,分钟后
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,重置时间：
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,描述背景需求…
 Feature.Avatar.BackgroundGeneration.Status.Generating,正在为你生成背景…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,正在为你准备背景…
@@ -1946,7 +1948,7 @@ Feature.Avatar.Label.RecentlyWorn,最近穿戴
 Feature.Avatar.Label.RemoveFromSetBody,这些虚拟形象将从此集合中移除。它们不会被删除。
 Feature.Avatar.Label.Replace,替换
 Feature.Avatar.Label.ResetToNewCharacter,你即将切换至新角色，是否想要重置全部穿搭道具，或保留？
-Feature.Avatar.Label.ResetTryOn,
+Feature.Avatar.Label.ResetTryOn,重置为当前虚拟形象
 Feature.Avatar.Label.Right,右
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,

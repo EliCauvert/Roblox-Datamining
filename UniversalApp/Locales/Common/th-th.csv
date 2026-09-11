@@ -1692,6 +1692,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,คำอธิบาย
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,พื้นหลังสุดพิเศษเมื่อสมัคร Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,ชื่อ
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,ในวันนี้
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,ในชั่วโมงนี้
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,ในเดือนนี้
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,เผยแพร่พื้นหลังได้อีก {count} ครั้ง
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,ชั่วโมง
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,นาที
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,รีเซ็ตใน
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,อธิบายพื้นหลังของคุณ...
 Feature.Avatar.BackgroundGeneration.Status.Generating,กำลังสร้างพื้นหลังของคุณ...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,กำลังเตรียมพื้นหลังของคุณ...
@@ -1810,6 +1819,7 @@ Feature.Avatar.Label.ClassicTShirts,เสื้อยืดแบบคลา�
 Feature.Avatar.Label.ClearByCategory,ถอด{category}
 Feature.Avatar.Label.Climb,ปีน
 Feature.Avatar.Label.ClimbAnimations,แอนิเมชันการปีน
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,ชื่อจะต้องประกอบด้วยตัวหนังสือ ตัวเลข และช่องว่างเท่านั้น
 Feature.Avatar.Label.CountSelected,เลือกแล้ว {itemCount} ไอเท็ม
 Feature.Avatar.Label.Creations,ผลงานสร้างสรรค์
@@ -1921,6 +1931,7 @@ Feature.Avatar.Label.RecentlyWorn,สวมใส่ล่าสุด
 Feature.Avatar.Label.RemoveFromSetBody,อวาตาร์เหล่านี้จะถูกลบออกจากเซ็ต แต่ตัวอวาตาร์จะไม่ถูกลบ
 Feature.Avatar.Label.Replace,แทนที่
 Feature.Avatar.Label.ResetToNewCharacter,คุณกำลังสลับไปยังตัวละครใหม่ คุณต้องการรีเซ็ตไอเท็มเครื่องแต่งกายทั้งหมดหรือเก็บไว้?
+Feature.Avatar.Label.ResetTryOn,รีเซ็ตเป็นอวาตาร์ปัจจุบัน
 Feature.Avatar.Label.Right,R
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,
@@ -1976,6 +1987,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,การแต่งหน้าซ้อนกัน
 Feature.Avatar.Label.Title.ManageAvatars,จัดการอวาตาร์
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,คลังไอเท็มของฉัน
 Feature.Avatar.Label.Title.ProfilePhoto,รูปโปรไฟล์
 Feature.Avatar.Label.Title.ReplaceAvatar,แทนที่อวาตาร์
@@ -2115,6 +2127,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,เคลื่อนย้าย
+Feature.Avatar.Title.MyAvatar,
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,การปรับแต่งมาพร้อมกับโฉมใหม่!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,ใหม่ในมาร์เก็ตเพลส
