@@ -78,12 +78,15 @@ Authentication.AccountSwitch.Action.SwitchAccount,Switch Accounts
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Switch accounts
 Authentication.CrossDevice.Heading.QuickLogin,Quick Sign-in
 Authentication.Login.Action.QuickSignIn,Quick sign-in
+Authentication.Login.Action.Save,Save
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Exit Roblox to switch account for {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Use a different Roblox account
 Authentication.Login.Error.PasskeyOnlyAccount,Your account only has a passkey set up for sign-in. Try signing in with your passkey or recover your account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Cannot verify platform account. Please try again later.
 Authentication.Login.Heading.IncompatibleAccounts,Incompatible Accounts
+Authentication.Login.Label.Email,Email
 Authentication.Login.Label.LearnMore,Learn more
+Authentication.Login.Label.Username,Username
 Authentication.Login.LinkIllegalChildAccountLinking,This Roblox account could not be linked to an Xbox child account. Please try another account or check your settings.
 Authentication.Login.Response.AlreadyLinked,This Roblox account is already linked to a different account on {platform}. Please try logging in with a different Roblox account.
 Authentication.Login.Response.IncorrectEmailOrPassword,Incorrect email or password.
@@ -101,12 +104,57 @@ Authentication.Login.Response.SomethingWentWrong,
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,Something went wrong. Please try another way to sign in.
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Your email is not verified. Please login with your username.
 Authentication.Login.WeChat.AntiAddictionText,"Boycott bad experiences, refuse pirated experiences. Be aware of self-defense and being deceived. Visiting experiences is good for your brain, but too much experience visit can harm your health. Manage your time well and enjoy a healthy lifestyle."
+Authentication.SignUp.Action.ApplyOnNextRespawn,Apply on next respawn
+Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ExitModalLeave,Leave
+Authentication.SignUp.Action.RespawnNow,Respawn now
+Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Retry log in
 Authentication.SignUp.Description.AccountAlreadyLinked,Your account on {platformAccountName} is already linked to a Roblox account. Please try to log in again.
+Authentication.SignUp.Description.BirthdayHint,Enter date
+Authentication.SignUp.Description.Try,Try
+Authentication.SignUp.Description.UsernameChanged,"All set! Your account is ready and linked to {platform}. Respawn now to see your updated username in the game, or it'll apply next time."
+Authentication.SignUp.Description.UsernameUnchanged,You're in! Your account is ready and linked to {platform}. Chat with friends and play millions of Roblox games.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Your Roblox account will be linked to your account on {platform}. You can unlink from the Settings screen at any time. There may be a cool down before being able to link to another account on {platform}. By clicking {ctaButton}, you are agreeing to the Terms of Use including the arbitration clause and you are acknowledging the Privacy Policy."
+Authentication.SignUp.Header.SetUpYourRobloxAccount,Set up your Roblox account
 Authentication.SignUp.Heading.CountryCodeSelector,Select country
 Authentication.SignUp.Heading.RetryLogIn,Retry Log In
+Authentication.SignUp.Label.Birthday,Birthday
+Authentication.SignUp.Label.Continue,
+Authentication.SignUp.Label.Day,Day
+Authentication.SignUp.Label.EnterYourEmail,Enter your email
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,Must be older to play this game
+Authentication.SignUp.Label.ErrorsWithPassword,There are errors with the password.
+Authentication.SignUp.Label.ErrorsWithUsername,There are errors with the username.
+Authentication.SignUp.Label.ExitModalSubtitle,"Your account’s almost created. If you leave, you’ll lose your progress."
+Authentication.SignUp.Label.ExitModalTitle,Leave account creation?
+Authentication.SignUp.Label.Gender,Gender
+Authentication.SignUp.Label.GenderFemale,Female
+Authentication.SignUp.Label.GenderMale,Male
+Authentication.SignUp.Label.Month,Month
+Authentication.SignUp.Label.PasswordError1,Is at least 8 characters long
+Authentication.SignUp.Label.PasswordError2,Does not match username
+Authentication.SignUp.Label.PasswordError2.V2,Doesn't match username
+Authentication.SignUp.Label.PasswordError3,Is not a simple password
+Authentication.SignUp.Label.PasswordError3.V2,Isn't a simple password
+Authentication.SignUp.Label.PasswordPlaceholder,At least 8 characters
+Authentication.SignUp.Label.SelectBirthdaySentenceCase,Select birthday
+Authentication.SignUp.Label.UsernameError1,"Contains only letters, numbers, and _"
+Authentication.SignUp.Label.UsernameError2,Is between 3 and 20 characters long
+Authentication.SignUp.Label.UsernameError3,Is not already in use
+Authentication.SignUp.Label.UsernameError4,Is appropriate for Roblox
+Authentication.SignUp.Label.UsernameError5,Does not start or end with _
+Authentication.SignUp.Label.UsernameError6,Has at most one _
+Authentication.SignUp.Label.UsernameError7,Does not contain private information
+Authentication.SignUp.Label.Year,Year
+Authentication.SignUp.Message.Username.NoRealNameUse,Don't use your real name
+Authentication.SignUp.PasswordErrorLength,Is between 8 and 200 characters long
+Authentication.SignUp.Response.BirthdayMustBeSetFirst,Birthday must be set first.
 Authentication.SignUp.Response.ErrorTryAgain,
+Authentication.SignUp.Response.InvalidBirthday,Invalid birthday.
+Authentication.SignUp.Response.InvalidEmail,Invalid email address.
+Authentication.SignUp.Response.UsernameMustBeSetFirst,Username must be set first.
+Authentication.SignUp.Subtitle.YourProgressCarriesOver,Your progress carries over when you complete setup.
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,2-Step Verification is required to make further transactions. Go to Settings > Security to complete 2-Step Verification.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Too many attempts. Please try again later.
@@ -295,7 +343,7 @@ CommonUI.Controls.Action.Confirm,Confirm
 CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,Done
 CommonUI.Controls.Action.Next,Next
-CommonUI.Controls.Action.OK,OK
+CommonUI.Controls.Action.OK,
 CommonUI.Controls.Action.Refresh,Refresh
 CommonUI.Controls.Action.ResetAll,Reset all
 CommonUI.Controls.Action.Search,Search
@@ -308,7 +356,7 @@ CommonUI.Controls.Label.April,April
 CommonUI.Controls.Label.AprilAbbreviated,Apr
 CommonUI.Controls.Label.August,August
 CommonUI.Controls.Label.AugustAbbreviated,Aug
-CommonUI.Controls.Label.Day,Day
+CommonUI.Controls.Label.Day,
 CommonUI.Controls.Label.December,December
 CommonUI.Controls.Label.DecemberAbbreviated,Dec
 CommonUI.Controls.Label.February,February
@@ -350,7 +398,7 @@ CommonUI.Controls.Label.Tuesday,Tuesday
 CommonUI.Controls.Label.TuesdayAbbreviated,Tu
 CommonUI.Controls.Label.Wednesday,Wednesday
 CommonUI.Controls.Label.WednesdayAbbreviated,We
-CommonUI.Controls.Label.Year,Year
+CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,No results found
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Continue,
@@ -415,6 +463,7 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,Dismiss
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,Reset
+CommonUI.Messages.Label.Password,Password
 CommonUI.Messages.Response.NoResults,No results
 CommonUI.Messages.Response.PageError,Error loading page
 CommonUI.Messages.Response.SomethingWentWrong,Something went wrong
@@ -708,7 +757,7 @@ CoreScripts.InGameMenu.ConfirmLeaveGame,Are you sure you want to leave?
 CoreScripts.InGameMenu.ControllerBar.Back,
 CoreScripts.InGameMenu.ControllerBar.Cancel,
 CoreScripts.InGameMenu.ControllerBar.CloseMoreMenu,Close More Menu
-CoreScripts.InGameMenu.ControllerBar.Leave,Leave
+CoreScripts.InGameMenu.ControllerBar.Leave,
 CoreScripts.InGameMenu.ControllerBar.OpenMoreMenu,Open More Menu
 CoreScripts.InGameMenu.ControllerBar.Respawn,Respawn
 CoreScripts.InGameMenu.ControllerBar.RespawnCharacter,Respawn Character
@@ -1298,7 +1347,7 @@ Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Restore last saved avatar
 Feature.Avatar.Action.Revert,Revert
 Feature.Avatar.Action.Rotate,
-Feature.Avatar.Action.Save,Save
+Feature.Avatar.Action.Save,
 Feature.Avatar.Action.SaveAsNew,Save as new
 Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,Select multiple items
@@ -2428,7 +2477,7 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,Sell
 Feature.Catalog.Action.ShareVia,Share via...
 Feature.Catalog.Action.Submit,
-Feature.Catalog.Action.Try,Try
+Feature.Catalog.Action.Try,
 Feature.Catalog.Action.Upgrade,Upgrade
 Feature.Catalog.Action.ViewDetailsPage,View Details Page
 Feature.Catalog.Action.ViewExperienceDetails,View Experience Details
@@ -2672,7 +2721,7 @@ Feature.Catalog.Label.Trending,Trending
 Feature.Catalog.Label.TryOns,Try-Ons
 Feature.Catalog.Label.TryOnsMultiple,Try-Ons ({numItems})
 Feature.Catalog.Label.Unlimited,Unlimited
-Feature.Catalog.Label.Username,Username
+Feature.Catalog.Label.Username,
 Feature.Catalog.Label.UsingBundleParts,Using {count} bundle parts
 Feature.Catalog.Label.WaistAccessories,Waist Accessories
 Feature.Catalog.Label.WearAfterPurchase,Wear item after purchase
@@ -3936,6 +3985,7 @@ Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Continue your report
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,Finish your report
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Thank you for starting your IP Infringement report
 Feature.ReportAbuse.Title.SelectInSceneThankYou,Thank you for your report
+Feature.RobloxSubscription.Action.JoinIn,Join in {time}
 Feature.RobloxSubscription.Action.Subscribe,Subscribe
 Feature.RobloxSubscription.Action.TryItForFree,Try it for free
 Feature.RobloxSubscription.Body.AlreadySubscribed,Your Plus subscription already provides in-game benefits.
@@ -3945,6 +3995,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,Verify your age with an age
 Feature.RobloxSubscription.Description.Benefit.Customize,Customize with profile frames and app themes
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% off first 60 days, then 20% off items and avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,More fun for less Robux. Subscribe to Roblox Plus.
+Feature.RobloxSubscription.Description.JoinEarly,Join early with Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Free private servers
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -3963,6 +4014,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Good news
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Get Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus unavailable here
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,You can join the event before everybody else.
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Early access with Plus
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Account status, violations, and appeals"
 Feature.Schools.Label.Classmates,Classmates
 Feature.Screentime.Content.ScreentimeLimitDialog,You've reached your daily screen time limit. Come back tomorrow to access Roblox again.

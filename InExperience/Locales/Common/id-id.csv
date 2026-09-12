@@ -78,12 +78,15 @@ Authentication.AccountSwitch.Action.SwitchAccount,Beralih Akun
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Beralih akun
 Authentication.CrossDevice.Heading.QuickLogin,Log In Cepat
 Authentication.Login.Action.QuickSignIn,Log in cepat
+Authentication.Login.Action.Save,Simpan
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Keluar dari Roblox untuk beralih ke akun {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Gunakan akun Roblox lain
 Authentication.Login.Error.PasskeyOnlyAccount,Akunmu hanya memiliki passkey yang diatur untuk log in. Coba log in dengan passkey atau pulihkan akunmu.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Tidak dapat memverifikasi akun platform. Coba lagi nanti.
 Authentication.Login.Heading.IncompatibleAccounts,Akun Tidak Kompatibel
+Authentication.Login.Label.Email,Email
 Authentication.Login.Label.LearnMore,Pelajari selengkapnya
+Authentication.Login.Label.Username,Nama pengguna
 Authentication.Login.LinkIllegalChildAccountLinking,Akun Roblox ini tidak bisa dihubungkan ke akun anak Xbox. Coba akun lain atau periksa pengaturanmu.
 Authentication.Login.Response.AlreadyLinked,Akun Roblox ini sudah terhubung ke akun di {platform}. Coba log in dengan akun Roblox yang berbeda.
 Authentication.Login.Response.IncorrectEmailOrPassword,Email atau password salah.
@@ -101,12 +104,57 @@ Authentication.Login.Response.SomethingWentWrong,Terjadi kesalahan. Harap coba l
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,Ada yang salah. Harap coba cara lain untuk log in.
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Email kamu belum terverifikasi. Log in dengan nama pengguna kamu.
 Authentication.Login.WeChat.AntiAddictionText,"Boikot pengalaman virtual yang tidak baik, tolak pengalaman virtual bajakan. Pahami cara membela diri dan jangan sampai tertipu. Menghabiskan waktu di pengalaman virtual baik untuk otak, tetapi terlalu banyak dapat mengganggu kesehatan. Atur waktumu dengan baik dan nikmati gaya hidup sehat."
+Authentication.SignUp.Action.ApplyOnNextRespawn,Terapkan pada respawn berikutnya
+Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ExitModalLeave,Keluar
+Authentication.SignUp.Action.RespawnNow,Respawn sekarang
+Authentication.SignUp.Button.OKCaptialized,OKE
 Authentication.SignUp.Button.RetryLogIn,Coba log in lagi
 Authentication.SignUp.Description.AccountAlreadyLinked,Akunmu di {platformAccountName} sudah terhubung dengan akun Roblox. Coba log in lagi.
+Authentication.SignUp.Description.BirthdayHint,Masukkan tanggal
+Authentication.SignUp.Description.Try,Coba
+Authentication.SignUp.Description.UsernameChanged,"Semua siap. Akunmu sudah siap dan terhubung ke {platform}. Respawn sekarang untuk melihat nama pengguna terbarumu dalam game, atau nama pengguna akan diterapkan pada lain waktu."
+Authentication.SignUp.Description.UsernameUnchanged,Kamu sudah masuk. Akunmu sudah siap dan terhubung ke {platform}. Chat dengan teman dan mainkan jutaan game Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Akun Roblox-mu akan dihubungkan ke akunmu di {platform}. Kamu dapat memutus hubungan dari layar Pengaturan kapan saja. Kamu mungkin harus menunggu beberapa saat sebelum dapat terhubung ke akun lain di {platform}. Dengan mengklik {ctaButton}, kamu menyetujui Ketentuan Penggunaan termasuk klausa arbitrase dan menerima Kebijakan Privasi."
+Authentication.SignUp.Header.SetUpYourRobloxAccount,Siapkan akun Roblox-mu
 Authentication.SignUp.Heading.CountryCodeSelector,Pilih negara
 Authentication.SignUp.Heading.RetryLogIn,
+Authentication.SignUp.Label.Birthday,Tanggal lahir
+Authentication.SignUp.Label.Continue,
+Authentication.SignUp.Label.Day,Hari
+Authentication.SignUp.Label.EnterYourEmail,Masukkan emailmu
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,Kamu belum cukup umur untuk memainkan game ini
+Authentication.SignUp.Label.ErrorsWithPassword,Ada eror pada password.
+Authentication.SignUp.Label.ErrorsWithUsername,Ada eror pada nama pengguna.
+Authentication.SignUp.Label.ExitModalSubtitle,"Akunmu hampir selesai dibuat. Jika keluar, progresmu akan hilang."
+Authentication.SignUp.Label.ExitModalTitle,Keluar dari proses pembuatan akun?
+Authentication.SignUp.Label.Gender,Gender
+Authentication.SignUp.Label.GenderFemale,Perempuan
+Authentication.SignUp.Label.GenderMale,Laki-laki
+Authentication.SignUp.Label.Month,Bulan
+Authentication.SignUp.Label.PasswordError1,Panjangnya minimal 8 karakter
+Authentication.SignUp.Label.PasswordError2,Berbeda dengan nama pengguna
+Authentication.SignUp.Label.PasswordError2.V2,Tidak sesuai dengan nama pengguna
+Authentication.SignUp.Label.PasswordError3,Bukan password yang simpel
+Authentication.SignUp.Label.PasswordError3.V2,
+Authentication.SignUp.Label.PasswordPlaceholder,Minimal 8 karakter
+Authentication.SignUp.Label.SelectBirthdaySentenceCase,Pilih tanggal lahir
+Authentication.SignUp.Label.UsernameError1,"Hanya terdiri atas huruf, angka, dan _"
+Authentication.SignUp.Label.UsernameError2,Dengan panjang antara 3 hingga 20 karakter
+Authentication.SignUp.Label.UsernameError3,Belum digunakan
+Authentication.SignUp.Label.UsernameError4,Pantas untuk Roblox
+Authentication.SignUp.Label.UsernameError5,Tidak dimulai atau diakhiri dengan _
+Authentication.SignUp.Label.UsernameError6,Menggunakan maksimum satu _
+Authentication.SignUp.Label.UsernameError7,Tidak mengandung informasi pribadi
+Authentication.SignUp.Label.Year,Tahun
+Authentication.SignUp.Message.Username.NoRealNameUse,Jangan gunakan namamu yang sebenarnya
+Authentication.SignUp.PasswordErrorLength,Di antara 8 sampai 200 karakter
+Authentication.SignUp.Response.BirthdayMustBeSetFirst,Kamu harus mengatur tanggal lahir kamu terlebih dahulu.
 Authentication.SignUp.Response.ErrorTryAgain,Terjadi eror. Coba lagi nanti.
+Authentication.SignUp.Response.InvalidBirthday,Tanggal lahir tidak valid.
+Authentication.SignUp.Response.InvalidEmail,Alamat email tidak valid.
+Authentication.SignUp.Response.UsernameMustBeSetFirst,Nama pengguna harus diatur terlebih dahulu.
+Authentication.SignUp.Subtitle.YourProgressCarriesOver,Progresmu akan tetap tersimpan setelah kamu menyelesaikan penyiapan.
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,Verifikasi 2 Langkah diperlukan untuk melakukan transaksi lebih lanjut. Buka Pengaturan > Keamanan untuk menyelesaikan Verifikasi 2 Langkah.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Terlalu banyak percobaan. Coba lagi nanti.
@@ -292,7 +340,7 @@ CommonUI.Controls.Action.Confirm,Konfirmasi
 CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,Selesai
 CommonUI.Controls.Action.Next,Berikutnya
-CommonUI.Controls.Action.OK,OKE
+CommonUI.Controls.Action.OK,
 CommonUI.Controls.Action.Refresh,Refresh
 CommonUI.Controls.Action.ResetAll,Reset semua
 CommonUI.Controls.Action.Search,Cari
@@ -305,7 +353,7 @@ CommonUI.Controls.Label.April,April
 CommonUI.Controls.Label.AprilAbbreviated,Apr
 CommonUI.Controls.Label.August,Agustus
 CommonUI.Controls.Label.AugustAbbreviated,Agu
-CommonUI.Controls.Label.Day,Hari
+CommonUI.Controls.Label.Day,
 CommonUI.Controls.Label.December,Desember
 CommonUI.Controls.Label.DecemberAbbreviated,Des
 CommonUI.Controls.Label.February,Februari
@@ -347,7 +395,7 @@ CommonUI.Controls.Label.Tuesday,Selasa
 CommonUI.Controls.Label.TuesdayAbbreviated,Sel
 CommonUI.Controls.Label.Wednesday,Rabu
 CommonUI.Controls.Label.WednesdayAbbreviated,Rab
-CommonUI.Controls.Label.Year,Tahun
+CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,Tidak ada hasil
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Continue,
@@ -412,6 +460,7 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,Reset
+CommonUI.Messages.Label.Password,Password
 CommonUI.Messages.Response.NoResults,
 CommonUI.Messages.Response.PageError,Terjadi eror saat me-load halaman
 CommonUI.Messages.Response.SomethingWentWrong,Terjadi masalah
@@ -599,7 +648,7 @@ CoreScripts.FTUX.Label.SideSheetUpdate,Menu masih berisi semua fitur pentingmu.
 CoreScripts.FTUX.Label.SocialOnboarding,"Akses fitur sosialmu dengan mudah dari bilah atas, termasuk Chat."
 CoreScripts.Feedback.EntryPoint.ButtonText,Beri Masukan
 CoreScripts.Feedback.EntryPoint.OptionText,Beri Masukan Terjemahan
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Keluar
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
 CoreScripts.Feedback.FeedbackBar.HelpButton,Bantuan
 CoreScripts.Feedback.FeedbackBar.MainLabel,
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Berikan komentar tambahan di bawah ini (opsional)
@@ -1277,7 +1326,7 @@ Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,Edit Foto Profil
 Feature.Avatar.Action.GoBack,
 Feature.Avatar.Action.GotIt,
-Feature.Avatar.Action.Keep,Simpan
+Feature.Avatar.Action.Keep,
 Feature.Avatar.Action.Leave,
 Feature.Avatar.Action.ManageCharacters,Kelola Karakter
 Feature.Avatar.Action.ManageMakeupLooks,Kelola tampilan
@@ -1311,7 +1360,7 @@ Feature.Avatar.Action.ShowMore,Tampilkan Selengkapnya
 Feature.Avatar.Action.SlotEmote,Masukkan Emote ke Slot
 Feature.Avatar.Action.Stay,Tetap di sini
 Feature.Avatar.Action.Switch,Alihkan
-Feature.Avatar.Action.TryOn,Coba
+Feature.Avatar.Action.TryOn,
 Feature.Avatar.Action.Unequip,Lepas
 Feature.Avatar.Action.Unselect,Hapus Pilihan
 Feature.Avatar.Action.UnslotEmote,Keluarkan Emote dari Slot
@@ -3907,7 +3956,7 @@ Feature.ReportAbuse.ProblemSurface.ItemOrAsset,Item atau aset
 Feature.ReportAbuse.ProblemSurface.Movement,Gerakan atau emote pemain
 Feature.ReportAbuse.ProblemSurface.MusicOrSoundEffect,Musik atau efek suara
 Feature.ReportAbuse.ProblemSurface.TextChat,Teks
-Feature.ReportAbuse.ProblemSurface.Username,Nama pengguna
+Feature.ReportAbuse.ProblemSurface.Username,
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Lanjutkan laporanmu
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,Selesaikan laporanmu
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Terima kasih telah memulai laporan Pelanggaran Kekayaan Intelektual

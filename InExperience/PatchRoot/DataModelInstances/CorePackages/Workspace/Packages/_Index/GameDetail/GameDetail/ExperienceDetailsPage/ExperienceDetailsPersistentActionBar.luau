@@ -10,6 +10,7 @@ local playButton = gamePlayButtonModule.PlayButton
 local usePlayButtonState = gamePlayButtonModule.usePlayButtonState
 local usePlayButtonContextualMessage = gamePlayButtonModule.usePlayButtonContextualMessage
 local playButtonContextualMessageImpressionsDetector = gamePlayButtonModule.PlayButtonContextualMessageImpressionsDetector
+local plusEarlyAccessUpsellBanner = gamePlayButtonModule.PlusEarlyAccessUpsellBanner
 local experienceDetailsPageConstantsModule = require(script.Parent.ExperienceDetailsPageConstants)
 local experienceDetailsFallbackActionBarModule = require(script.Parent.Fallback.ExperienceDetailsFallbackActionBar)
 local sduiFeatureEntryPoint = require(parent.SduiSharedUtilities).SduiFeatureEntryPoint
@@ -19,6 +20,7 @@ local roactServiceTagsModule = require(parent.RoactServiceTags)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox = sharedFlagsModule.FFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox
 local fFlagLuaAppLaunchWhenLoadingEdp = sharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
+local fFlagEnableGameJoinEarlyAccess = sharedFlagsModule.FFlagEnableGameJoinEarlyAccess
 
 local function PersistentActionBarContextualMessage(p1)
 	-- upvalues: useRoactService (ref), roactServiceTagsModule (ref), useTokens (ref), reactModule (ref), usePlayButtonState (ref), usePlayButtonContextualMessage (ref), view (ref), text (ref), playButtonContextualMessageImpressionsDetector (ref), appPage (ref)
@@ -51,7 +53,7 @@ local function PersistentActionBarContextualMessage(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), view (ref), sduiFeatureEntryPoint (ref), appPage (ref), experienceDetailsPageConstantsModule (ref), experienceDetailsFallbackActionBarModule (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), PersistentActionBarContextualMessage (ref)
+	-- upvalues: reactModule (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagEnableGameJoinEarlyAccess (ref), view (ref), sduiFeatureEntryPoint (ref), appPage (ref), experienceDetailsPageConstantsModule (ref), experienceDetailsFallbackActionBarModule (ref), PersistentActionBarContextualMessage (ref), plusEarlyAccessUpsellBanner (ref)
 	return reactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
@@ -59,8 +61,8 @@ return reactModule.memo(function(p1)
 		[reactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChange
 	}, {
 		Content = reactModule.createElement(view, {
-			tag = "col size-full-0 auto-y gap-small bg-surface-0 align-x-center padding-x-medium padding-top-medium stroke-default",
-			testId = "--edp-persistent-action-bar"
+			testId = "--edp-persistent-action-bar",
+			tag = if fFlagEnableGameJoinEarlyAccess then "col size-full-0 auto-y gap-small bg-surface-0 align-x-center padding-x-medium padding-top-medium stroke-default padding-bottom-xsmall" else "col size-full-0 auto-y gap-small bg-surface-0 align-x-center padding-x-medium padding-top-medium stroke-default"
 		}, {
 			Row = reactModule.createElement(view, {
 				tag = "row size-full-0 auto-y gap-small",
@@ -101,11 +103,14 @@ return reactModule.memo(function(p1)
 						placeId = p1.placeIdOverride,
 						buttonSize = buttonSize.Large,
 						fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-						launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil
+						launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil,
+						enableEarlyAccessPlusTooltip = if fFlagEnableGameJoinEarlyAccess then true else nil,
+						enableEarlyAccessState = if fFlagEnableGameJoinEarlyAccess then true else nil
 					})
 				})
 			}),
-			ContextualMessage = reactModule.createElement(PersistentActionBarContextualMessage, { universeId = p1.universeId })
+			ContextualMessage = reactModule.createElement(PersistentActionBarContextualMessage, { universeId = p1.universeId }),
+			PlusUpsell = if fFlagEnableGameJoinEarlyAccess then reactModule.createElement(plusEarlyAccessUpsellBanner, { LayoutOrder = 3, universeId = p1.universeId }) else nil
 		})
 	})
 end)

@@ -78,12 +78,15 @@ Authentication.AccountSwitch.Action.SwitchAccount,アカウントを切り替え
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,クイックログイン
 Authentication.Login.Action.QuickSignIn,クイックサインイン
+Authentication.Login.Action.Save,保存
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Robloxから退出して {platformAccountName} のアカウントを切り替え
 Authentication.Login.Button.UseDifferentRobloxAccount,別のRobloxアカウントを使用
 Authentication.Login.Error.PasskeyOnlyAccount,アカウントにはログイン用のパスキーが設定されています。パスキーでログインするか、アカウントを回復してください。
 Authentication.Login.Error.PlatformAccountConnectionFailure,プラットフォーム用アカウントを確認できません。後でもう一度お試しください。
 Authentication.Login.Heading.IncompatibleAccounts,アカウントに互換性がありません
+Authentication.Login.Label.Email,メールアドレス
 Authentication.Login.Label.LearnMore,もっと詳しく
+Authentication.Login.Label.Username,ユーザーネーム
 Authentication.Login.LinkIllegalChildAccountLinking,このRobloxアカウントはXboxの子ども用アカウントに紐づけできませんでした。別のRobloxアカウントを試すか、その設定を確認してください。
 Authentication.Login.Response.AlreadyLinked,このRobloxアカウントは {platform} ですでに別のアカウントに紐づけられています。別のRobloxアカウントでログインしてみてください。
 Authentication.Login.Response.IncorrectEmailOrPassword,メールアドレスまたはパスワードが間違っています。
@@ -101,12 +104,57 @@ Authentication.Login.Response.SomethingWentWrong,何らかの問題が発生し�
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,問題が発生しました。別の方法でログインしてください。
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,メールアドレスが認証されていません。ユーザーネームでログインしてください。
 Authentication.Login.WeChat.AntiAddictionText,不適切なバーチャル空間には参加しないように心掛け、海賊版は拒否しましょう。自衛意識を高め、騙されないようにしましょう。バーチャル空間を訪問することは脳の働きを高めてくれますが、度がすぎると健康を害する恐れがあります。時間管理をきちんと行い、健康的なライフスタイルをお楽しみください。
+Authentication.SignUp.Action.ApplyOnNextRespawn,次のリスポーンで適用
+Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ExitModalLeave,退出
+Authentication.SignUp.Action.RespawnNow,今すぐリスポーン
+Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,ログインをやり直す
 Authentication.SignUp.Description.AccountAlreadyLinked,あなたのプロフィール（{platformAccountName}）は、すでにRobloxアカウントにリンク済みです。もう一度ログインしてみてください。
+Authentication.SignUp.Description.BirthdayHint,日付を入力
+Authentication.SignUp.Description.Try,こちらをお試しください
+Authentication.SignUp.Description.UsernameChanged,完了しました！お使いのアカウントの準備が整い、{platform}に紐づけられました。更新したユーザー名を今すぐゲーム内に反映させるには、リスポーンしてください。何もしなくても、次回から適用されます。
+Authentication.SignUp.Description.UsernameUnchanged,完了しました！お使いのアカウントの準備が整い、{platform}に紐づけられました。友達とチャットしたり、何百万ものRobloxゲームをプレイしたりしましょう。
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,お持ちのRoblox（ロブロックス）アカウントは {platform} 上のアカウントに紐づけられます。設定画面からいつでも紐づけを解除できます。また {platform} 上の他のアカウントとの紐づけができるようになるまでには、クールダウン期間があるかもしれません。{ctaButton} をクリックすると、仲裁条項を含む利用規約に同意し、プライバシーポリシーを承認したことになります。
+Authentication.SignUp.Header.SetUpYourRobloxAccount,Robloxアカウントを設定
 Authentication.SignUp.Heading.CountryCodeSelector,国を選択
 Authentication.SignUp.Heading.RetryLogIn,
+Authentication.SignUp.Label.Birthday,生年月日
+Authentication.SignUp.Label.Continue,
+Authentication.SignUp.Label.Day,日
+Authentication.SignUp.Label.EnterYourEmail,メールアドレスを入力
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,このゲームをプレイするには、一定の年齢以上である必要があります
+Authentication.SignUp.Label.ErrorsWithPassword,パスワードにエラーがあります。
+Authentication.SignUp.Label.ErrorsWithUsername,ユーザーネームにエラーがあります。
+Authentication.SignUp.Label.ExitModalSubtitle,アカウント作成はほぼ完了しています。退出するとと進捗が失われます。
+Authentication.SignUp.Label.ExitModalTitle,アカウント作成を退出しますか？
+Authentication.SignUp.Label.Gender,性別
+Authentication.SignUp.Label.GenderFemale,女性
+Authentication.SignUp.Label.GenderMale,男性
+Authentication.SignUp.Label.Month,月
+Authentication.SignUp.Label.PasswordError1,半角英字8文字以上
+Authentication.SignUp.Label.PasswordError2,ユーザーネームと同一ではないこと
+Authentication.SignUp.Label.PasswordError2.V2,ユーザーネームと一致するものは使用できません
+Authentication.SignUp.Label.PasswordError3,分かりやすいパスワードではないこと
+Authentication.SignUp.Label.PasswordError3.V2,推測されやすいパスワードは使用できません
+Authentication.SignUp.Label.PasswordPlaceholder,半角英数字で8文字以上
+Authentication.SignUp.Label.SelectBirthdaySentenceCase,生年月日を選択
+Authentication.SignUp.Label.UsernameError1,半角英数字と下線 _ のみ使用可
+Authentication.SignUp.Label.UsernameError2,半角英字3文字以上20文字以内
+Authentication.SignUp.Label.UsernameError3,使われていないユーザーネームであること
+Authentication.SignUp.Label.UsernameError4,Robloxに不適切な文言を入れないこと
+Authentication.SignUp.Label.UsernameError5,始めまたは終わりに下線 _ を入れないこと
+Authentication.SignUp.Label.UsernameError6,下線 _ の使用は最大で1つ
+Authentication.SignUp.Label.UsernameError7,個人情報などを入れないこと
+Authentication.SignUp.Label.Year,年
+Authentication.SignUp.Message.Username.NoRealNameUse,本名を使用しないでください
+Authentication.SignUp.PasswordErrorLength,8～200文字で入力してください
+Authentication.SignUp.Response.BirthdayMustBeSetFirst,最初に誕生日を設定する必要があります。
 Authentication.SignUp.Response.ErrorTryAgain,
+Authentication.SignUp.Response.InvalidBirthday,生年月日が無効です。
+Authentication.SignUp.Response.InvalidEmail,メールアドレスが無効です。
+Authentication.SignUp.Response.UsernameMustBeSetFirst,最初にユーザーネームを設定する必要があります。
+Authentication.SignUp.Subtitle.YourProgressCarriesOver,設定を完了すると、進行状況が引き継がれます。
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,取引を進めるには、2段階認証が必要です。 設定 > セキュリティ に行って、2段階認証を完了してください。
 Authentication.TwoStepVerification.Response.TooManyAttempts,試行回数が多すぎます。後でもう一度お試しください。
@@ -292,7 +340,7 @@ CommonUI.Controls.Action.Confirm,確認
 CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,完了
 CommonUI.Controls.Action.Next,次へ
-CommonUI.Controls.Action.OK,OK
+CommonUI.Controls.Action.OK,
 CommonUI.Controls.Action.Refresh,リフレッシュ
 CommonUI.Controls.Action.ResetAll,すべてリセット
 CommonUI.Controls.Action.Search,サーチ
@@ -305,7 +353,7 @@ CommonUI.Controls.Label.April,4月
 CommonUI.Controls.Label.AprilAbbreviated,
 CommonUI.Controls.Label.August,8月
 CommonUI.Controls.Label.AugustAbbreviated,
-CommonUI.Controls.Label.Day,日
+CommonUI.Controls.Label.Day,
 CommonUI.Controls.Label.December,12月
 CommonUI.Controls.Label.DecemberAbbreviated,
 CommonUI.Controls.Label.February,2月
@@ -323,7 +371,7 @@ CommonUI.Controls.Label.March,3月
 CommonUI.Controls.Label.MarchAbbreviated,
 CommonUI.Controls.Label.May,5月
 CommonUI.Controls.Label.Monday,月曜日
-CommonUI.Controls.Label.MondayAbbreviated,月
+CommonUI.Controls.Label.MondayAbbreviated,
 CommonUI.Controls.Label.November,11月
 CommonUI.Controls.Label.NovemberAbbreviated,
 CommonUI.Controls.Label.October,10月
@@ -347,7 +395,7 @@ CommonUI.Controls.Label.Tuesday,火曜日
 CommonUI.Controls.Label.TuesdayAbbreviated,火
 CommonUI.Controls.Label.Wednesday,水曜日
 CommonUI.Controls.Label.WednesdayAbbreviated,水
-CommonUI.Controls.Label.Year,年
+CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,結果が見つかりません
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Continue,
@@ -412,6 +460,7 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,無視
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,リセット
+CommonUI.Messages.Label.Password,パスワード
 CommonUI.Messages.Response.NoResults,結果はありません
 CommonUI.Messages.Response.PageError,ページの読み込みエラー
 CommonUI.Messages.Response.SomethingWentWrong,何らかの問題が発生しました
@@ -705,7 +754,7 @@ CoreScripts.InGameMenu.ConfirmLeaveGame,退出しますか？
 CoreScripts.InGameMenu.ControllerBar.Back,
 CoreScripts.InGameMenu.ControllerBar.Cancel,
 CoreScripts.InGameMenu.ControllerBar.CloseMoreMenu,「その他のメニュー」を閉じる
-CoreScripts.InGameMenu.ControllerBar.Leave,退出
+CoreScripts.InGameMenu.ControllerBar.Leave,
 CoreScripts.InGameMenu.ControllerBar.OpenMoreMenu,「その他のメニュー」を開く
 CoreScripts.InGameMenu.ControllerBar.Respawn,リスポーン
 CoreScripts.InGameMenu.ControllerBar.RespawnCharacter,キャラクターをリスポーンする
@@ -1297,7 +1346,7 @@ Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,前回のアバターを復元
 Feature.Avatar.Action.Revert,元に戻す
 Feature.Avatar.Action.Rotate,
-Feature.Avatar.Action.Save,保存
+Feature.Avatar.Action.Save,
 Feature.Avatar.Action.SaveAsNew,新規として保存
 Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,複数のアイテムを選択
@@ -2668,7 +2717,7 @@ Feature.Catalog.Label.Trending,人気急上昇
 Feature.Catalog.Label.TryOns,試着
 Feature.Catalog.Label.TryOnsMultiple,試着 ({numItems})
 Feature.Catalog.Label.Unlimited,無制限
-Feature.Catalog.Label.Username,ユーザーネーム
+Feature.Catalog.Label.Username,
 Feature.Catalog.Label.UsingBundleParts,{count} 点のバンドルパーツを使用
 Feature.Catalog.Label.WaistAccessories,腰用アクセサリ
 Feature.Catalog.Label.WearAfterPurchase,購入後にアイテムを装備
@@ -3673,11 +3722,11 @@ Feature.Parents.Description.EnterParentEmail.PC,保護者の方は、紐づけ�
 Feature.Parents.Description.EnterParentEmailV4,この手順は、保護者の方にお願いしてください。{lineBreak}当社から保護者の方には、年齢を確認し、あなたのアカウントと紐づけるようメールを送信します。{lineBreak}保護者の方は、紐づけした後に保護者コントロール機能、お子様のスクリーン時間や友達に関する使用状況などにアクセスできるようになります。
 Feature.Parents.Description.EnterParentEmailWithoutParentalControl,この手順は、保護者の方にお願いしてください。{lineBreak}当社から保護者の方には、年齢を確認し、あなたのアカウントと紐づけるようメールを送信します。{lineBreak}保護者の方は、紐づけした後にお子様の特定の機能にアクセスできるようになります。
 Feature.Parents.Description.ParentalEmailFooter,このメールアドレスは、保護者権限つきのRobloxアカウントに紐づけられます。当社のデータ慣行について詳しくは、 {linkStart}プライバシーポリシー{linkEnd}をごらんください。
-Feature.Parents.Label.Email,メールアドレス
+Feature.Parents.Label.Email,
 Feature.Parents.Label.ParentEmail,保護者のメールアドレス
 Feature.Parents.Message.ConflictingPendingConsent,すでに許可をリクエストしています。新しいリクエストを送信するには、[設定] でリクエストをキャンセルしてください。
 Feature.Parents.Message.EmailIneligible,このメールは対象外です。 Robloxで保護者権限のリクエストをするには、別のメールアドレスを使用してください。
-Feature.Parents.Message.InvalidEmail,メールアドレスが無効です。
+Feature.Parents.Message.InvalidEmail,
 Feature.Parents.Message.RequestCreatedEmailNotSent,Robloxアカウントを紐づけた後、保護者コントロールで保護者の方にこのリクエストが表示されます。
 Feature.Parents.Message.SomethingWentWrong,
 Feature.Parents.Message.TooManyAttemptAskParent,試行回数が多すぎます。すでに許可をリクエストしている場合は、保護者の方にEメールを確認してもらってください。

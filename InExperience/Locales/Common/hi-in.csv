@@ -61,12 +61,15 @@ Authentication.AccountSwitch.Action.SwitchAccount,अकाउंट बदल�
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,क्विक साइन-इन
 Authentication.Login.Action.QuickSignIn,क्विक साइन-इन करें
+Authentication.Login.Action.Save,सेव करें
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} के अकाउंट पर स्विच करने के लिए Roblox से बाहर निकलें
 Authentication.Login.Button.UseDifferentRobloxAccount,किसी दूसरे Roblox अकाउंट का इस्तेमाल करें
 Authentication.Login.Error.PasskeyOnlyAccount,"आपके अकाउंट में साइन-इन करने के लिए सिर्फ़ पास-की सेटअप है. अपने अकाउंट को वापस पाने के लिए, अपनी पास-की से साइन-इन करके देखें."
 Authentication.Login.Error.PlatformAccountConnectionFailure,प्लैटफ़ॉर्म अकाउंट वेरिफ़ाई नहीं किया जा सका. बाद में फिर से कोशिश करें.
 Authentication.Login.Heading.IncompatibleAccounts,अकाउंट कंपैटिबल नहीं हैं
+Authentication.Login.Label.Email,ईमेल
 Authentication.Login.Label.LearnMore,ज़्यादा जानें
+Authentication.Login.Label.Username,यूज़रनेम
 Authentication.Login.LinkIllegalChildAccountLinking,इस Roblox अकाउंट को Xbox चाइल्ड अकाउंट से लिंक नहीं किया जा सका. कृपया कोई दूसरे अकाउंट से कोशिश करें या अपनी सेटिंग चेक करें.
 Authentication.Login.Response.AlreadyLinked,इस Roblox अकाउंट को पहले से ही {platform} पर किसी दूसरे अकाउंट से लिंक किया गया है. किसी दूसरे Roblox अकाउंट से लॉग इन करने की कोशिश करें.
 Authentication.Login.Response.IncorrectEmailOrPassword,ईमेल या पासवर्ड गलत है.
@@ -84,12 +87,57 @@ Authentication.Login.Response.SomethingWentWrong,कुछ गड़बड़ �
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,कुछ गड़बड़ी हुई. दूसरे तरीके से साइन-इन करें.
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,आपके ईमेल को वेरिफ़ाई नहीं किया गया है. अपने यूज़रनेम से लॉग इन करें.
 Authentication.Login.WeChat.AntiAddictionText,"बुरे एक्सपीरिएंस से बचें. पायरेटेड का इस्तेमाल न करें. खुद को सुरक्षित रखने और धोखाधड़ी से बचने के लिए सतर्क रहें. नए एक्सपीरिएंस की खोज करना, आपके दिमाग के लिए अच्छा है, लेकिन बहुत ज़्यादा आपके स्वास्थ्य को नुकसान पहुँचा सकता है. अपना समय अच्छी तरह से मैनेज करें और स्वस्थ रहें."
+Authentication.SignUp.Action.ApplyOnNextRespawn,अगली बार रीस्पॉन करने पर लागू करें
+Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ExitModalLeave,छोड़ें
+Authentication.SignUp.Action.RespawnNow,अभी रीस्पॉन करें
+Authentication.SignUp.Button.OKCaptialized,ठीक है
 Authentication.SignUp.Button.RetryLogIn,फिर से लॉग इन करने की कोशिश करें
 Authentication.SignUp.Description.AccountAlreadyLinked,{platformAccountName} पर मौजूद आपका अकाउंट पहले से ही Roblox अकाउंट से लिंक किया हुआ है. दोबारा लॉग इन करने की कोशिश करें.
+Authentication.SignUp.Description.BirthdayHint,तारीख डालें
+Authentication.SignUp.Description.Try,आज़माएँ
+Authentication.SignUp.Description.UsernameChanged,सब हो गया! आपका अकाउंट तैयार है और {platform} से लिंक किया हआ है. गेम में अपना अपडेट किया हुआ यूज़रनेम देखने के लिए अभी रीस्पॉन करें या यह अगली बार लागू होगा.
+Authentication.SignUp.Description.UsernameUnchanged,आप शामिल हो गए हैं! आपका अकाउंट तैयार है और {platform} से लिंक किया हुआ है. फ़्रेंड्स के साथ चैट करें और लाखों Roblox गेम्स खेलें.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"आपका Roblox अकाउंट, {platform} पर आपके अकाउंट से लिंक हो जाएगा. कभी भी सेटिंग स्क्रीन से अनलिंक किया जा सकता है. {platform} पर किसी दूसरे अकाउंट से लिंक करने से पहले कुछ इंतज़ार करना पड़ सकता है. {ctaButton} पर क्लिक करने का मतलब है कि आप आर्बिट्रेशन क्लॉज़ सहित उपयोग की शर्तों से सहमत हैं और आपने प्राइवेसी पॉलिसी को स्वीकार किया है."
+Authentication.SignUp.Header.SetUpYourRobloxAccount,अपना Roblox अकाउंट सेट अप करें
 Authentication.SignUp.Heading.CountryCodeSelector,देश चुनें
 Authentication.SignUp.Heading.RetryLogIn,
+Authentication.SignUp.Label.Birthday,जन्मदिन
+Authentication.SignUp.Label.Continue,
+Authentication.SignUp.Label.Day,दिन
+Authentication.SignUp.Label.EnterYourEmail,अपना ईमेल पता डालें
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,इस गेम को खेलने के लिए उम्र ज़्यादा होनी चाहिए
+Authentication.SignUp.Label.ErrorsWithPassword,पासवर्ड में कुछ गड़बड़ियाँ हैं.
+Authentication.SignUp.Label.ErrorsWithUsername,यूज़रनेम में कुछ गड़बड़ियाँ हैं.
+Authentication.SignUp.Label.ExitModalSubtitle,"आपका अकाउंट लगभग बन चुका है. छोड़ देने पर, पूरा नहीं होगा."
+Authentication.SignUp.Label.ExitModalTitle,अकाउंट नहीं बनाना है?
+Authentication.SignUp.Label.Gender,जेंडर
+Authentication.SignUp.Label.GenderFemale,महिला
+Authentication.SignUp.Label.GenderMale,पुरुष
+Authentication.SignUp.Label.Month,महीना
+Authentication.SignUp.Label.PasswordError1,कम से कम 8 कैरेक्टर लंबा है
+Authentication.SignUp.Label.PasswordError2,यूज़रनेम से मेल नहीं खाता
+Authentication.SignUp.Label.PasswordError2.V2,
+Authentication.SignUp.Label.PasswordError3,आसान पासवर्ड नहीं है
+Authentication.SignUp.Label.PasswordError3.V2,
+Authentication.SignUp.Label.PasswordPlaceholder,कम से कम 8 कैरेक्टर
+Authentication.SignUp.Label.SelectBirthdaySentenceCase,जन्मदिन चुनें
+Authentication.SignUp.Label.UsernameError1,"इसमें सिर्फ़ अक्षर, संख्याएँ और _ शामिल हैं"
+Authentication.SignUp.Label.UsernameError2,3 से 20 कैरेक्टर के बीच का है
+Authentication.SignUp.Label.UsernameError3,यह पहले से इस्तेमाल में नहीं है
+Authentication.SignUp.Label.UsernameError4,Roblox के लिए सही है
+Authentication.SignUp.Label.UsernameError5,_ से शुरू या खत्म नहीं होता
+Authentication.SignUp.Label.UsernameError6,ज़्यादा से ज़्यादा एक _ है
+Authentication.SignUp.Label.UsernameError7,इसमें निजी जानकारी नहीं है
+Authentication.SignUp.Label.Year,साल
+Authentication.SignUp.Message.Username.NoRealNameUse,असली नाम इस्तेमाल न करें
+Authentication.SignUp.PasswordErrorLength,8 से 200 कैरेक्टर के बीच है
+Authentication.SignUp.Response.BirthdayMustBeSetFirst,जन्मदिन सबसे पहले सेट किया जाना चाहिए.
 Authentication.SignUp.Response.ErrorTryAgain,"कुछ गड़बड़ी हुई. बाद में, फिर से कोशिश करें."
+Authentication.SignUp.Response.InvalidBirthday,जन्मदिन अमान्य है.
+Authentication.SignUp.Response.InvalidEmail,ईमेल एड्रेस गलत है.
+Authentication.SignUp.Response.UsernameMustBeSetFirst,यूज़रनेम पहले सेट किया जाना चाहिए.
+Authentication.SignUp.Subtitle.YourProgressCarriesOver,"सेटअप पूरा करने पर, आपकी प्रोग्रेस आगे के लिए सेव हो जाती है."
 Authentication.TwoStepVerification.Action.GoToSecurity,सेटिंग्स
 Authentication.TwoStepVerification.Label.TwoStepRequired,"आगे के ट्रांज़ैक्शन के लिए, 2-स्टेप वेरिफ़िकेशन ज़रूरी है. 2-स्टेप वेरिफ़िकेशन के लिए सेटिंग्स > सिक्योरिटी पर जाएँ."
 Authentication.TwoStepVerification.Response.TooManyAttempts,"बहुत कोशिशें हो चुकी हैं. बाद में, फिर से कोशिश करें."
@@ -274,7 +322,7 @@ CommonUI.Controls.Action.Confirm,कंफ़र्म करें
 CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,हो गया
 CommonUI.Controls.Action.Next,अगला
-CommonUI.Controls.Action.OK,ठीक है
+CommonUI.Controls.Action.OK,
 CommonUI.Controls.Action.Refresh,रीफ़्रेश करें
 CommonUI.Controls.Action.ResetAll,सभी को रीसेट करें
 CommonUI.Controls.Action.Search,सर्च करें
@@ -287,7 +335,7 @@ CommonUI.Controls.Label.April,अप्रैल
 CommonUI.Controls.Label.AprilAbbreviated,
 CommonUI.Controls.Label.August,अगस्त
 CommonUI.Controls.Label.AugustAbbreviated,
-CommonUI.Controls.Label.Day,दिन
+CommonUI.Controls.Label.Day,
 CommonUI.Controls.Label.December,दिसंबर
 CommonUI.Controls.Label.DecemberAbbreviated,
 CommonUI.Controls.Label.February,फ़रवरी
@@ -329,7 +377,7 @@ CommonUI.Controls.Label.Tuesday,मंगलवार
 CommonUI.Controls.Label.TuesdayAbbreviated,मंगल
 CommonUI.Controls.Label.Wednesday,बुधवार
 CommonUI.Controls.Label.WednesdayAbbreviated,बुध
-CommonUI.Controls.Label.Year,साल
+CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,कोई रिज़ल्ट नहीं मिला
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Continue,
@@ -394,6 +442,7 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,खारिज करें
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,रीसेट करें
+CommonUI.Messages.Label.Password,पासवर्ड
 CommonUI.Messages.Response.NoResults,कोई रिज़ल्ट नहीं मिला.
 CommonUI.Messages.Response.PageError,पेज लोड करने में गड़बड़ी हुई
 CommonUI.Messages.Response.SomethingWentWrong,
@@ -687,7 +736,7 @@ CoreScripts.InGameMenu.ConfirmLeaveGame,क्या आप वाकई अभ�
 CoreScripts.InGameMenu.ControllerBar.Back,
 CoreScripts.InGameMenu.ControllerBar.Cancel,
 CoreScripts.InGameMenu.ControllerBar.CloseMoreMenu,और मेन्यू बंद करें
-CoreScripts.InGameMenu.ControllerBar.Leave,छोड़ें
+CoreScripts.InGameMenu.ControllerBar.Leave,
 CoreScripts.InGameMenu.ControllerBar.OpenMoreMenu,और मेन्यू खोलें
 CoreScripts.InGameMenu.ControllerBar.Respawn,
 CoreScripts.InGameMenu.ControllerBar.RespawnCharacter,कैरेक्टर रीसेट करें
@@ -1278,7 +1327,7 @@ Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,आखिरी बार सेव किए गए अवतार को रीस्टोर करें
 Feature.Avatar.Action.Revert,रिवर्ट करें
 Feature.Avatar.Action.Rotate,
-Feature.Avatar.Action.Save,सेव करें
+Feature.Avatar.Action.Save,
 Feature.Avatar.Action.SaveAsNew,नए नाम से सेव करें
 Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,कई आइटम चुनें
@@ -2405,7 +2454,7 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,बेचें
 Feature.Catalog.Action.ShareVia,इसके ज़रिए शेयर करें...
 Feature.Catalog.Action.Submit,
-Feature.Catalog.Action.Try,आज़माएँ
+Feature.Catalog.Action.Try,
 Feature.Catalog.Action.Upgrade,अपग्रेड करें
 Feature.Catalog.Action.ViewDetailsPage,जानकारी पेज देखें
 Feature.Catalog.Action.ViewExperienceDetails,एक्सपीरिएंस की जानकारी देखें
@@ -2649,7 +2698,7 @@ Feature.Catalog.Label.Trending,ट्रेंडिंग
 Feature.Catalog.Label.TryOns,ट्राइ-ऑन
 Feature.Catalog.Label.TryOnsMultiple,ट्राई-ऑन ({numItems})
 Feature.Catalog.Label.Unlimited,अनलिमिटेड
-Feature.Catalog.Label.Username,यूज़रनेम
+Feature.Catalog.Label.Username,
 Feature.Catalog.Label.UsingBundleParts,{count} बंडल पार्ट्स का इस्तेमाल किया जा रहा है
 Feature.Catalog.Label.WaistAccessories,कमर की ऐक्सेसरीज़
 Feature.Catalog.Label.WearAfterPurchase,खरीदने के बाद आइटम पहनें
@@ -3655,7 +3704,7 @@ Feature.Parents.Description.EnterParentEmail.PC,"लिंक होने क�
 Feature.Parents.Description.EnterParentEmailV4,"इस स्टेप के लिए अपने पेरेंट्स की मदद माँगें.{lineBreak}हम आपके पेरेंट की उम्र वेरिफ़ाई करने और उन्हें आपके अकाउंट से लिंक करने के लिए, उन्हें एक ईमेल भेजेंगे.{lineBreak}लिंक हो जाने के बाद पेरेंट्स को पेरेंटल कंट्रोल्स का ऐक्सेस, बच्चों के स्क्रीन टाइम और उनके फ़्रेंड्स की जानकारी के साथ और कई फ़ायदे मिलेंगे."
 Feature.Parents.Description.EnterParentEmailWithoutParentalControl,अपने पेरेंट से इस स्टेप में मदद करने के लिए कहें.{lineBreak}हम आपके पेरेंट को एक ईमेल भेजकर उनकी उम्र वेरिफ़ाई करेंगे और उन्हें आपके अकाउंट से लिंक करेंगे.{lineBreak}लिंक हो जाने के बाद पेरेंट अपने बच्चे के लिए कुछ कार्रवाइयों को मंज़ूरी दे सकेंगे.
 Feature.Parents.Description.ParentalEmailFooter,"यह ईमेल एड्रेस, पेरेंट प्रिवेलेज वाले आपके Roblox अकाउंट से जोड़ा जाएगा. डेटा हैंडल करने के हमारे तरीकों के बारे में ज़्यादा जानने के लिए, हमारी {linkStart}प्राइवेसी पॉलिसी{linkEnd} देखें."
-Feature.Parents.Label.Email,ईमेल
+Feature.Parents.Label.Email,
 Feature.Parents.Label.ParentEmail,पेरेंट का ईमेल
 Feature.Parents.Message.ConflictingPendingConsent,"आपने पहले ही परमिशन की रिक्वेस्ट कर दी है. नई रिक्वेस्ट सबमिट करने के लिए, पहले सेटिंग में जाकर अपनी पुरानी रिक्वेस्ट कैंसिल करें."
 Feature.Parents.Message.EmailIneligible,"यह ईमेल योग्य नहीं है. Roblox पर पेरेंट की परमिशन की रिक्वेस्ट करने के लिए, कोई दूसरा ईमेल इस्तेमाल करें."
@@ -3928,7 +3977,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"""जारी रख
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"""इसे फ़्री में आज़माएँ"" पर क्लिक करने का मतलब है कि आप {linkStart}Roblox के सब्सक्रिप्शन की शर्तों{linkEnd} से सहमत हैं. आपका फ़्री ट्रायल 1 महीने में खत्म हो जाएगा और आपसे हर महीने शुल्क अपने आप ले लिया जाएगा. सब्सक्रिप्शन को कभी भी कैंसिल किया जा सकता है."
 Feature.RobloxSubscription.Label.FreeTrialText,फ़्री ट्रायल पाएँ
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 महीने के लिए फ़्री,{boldEnd} फिर {price}/{periodType}"
-Feature.RobloxSubscription.Label.month,महीना
+Feature.RobloxSubscription.Label.month,
 Feature.RobloxSubscription.Label.months,महीने
 Feature.RobloxSubscription.Title.AgeCheckTrial,Plus का 1 हफ़्ते का फ़्री ट्रायल पाएँ
 Feature.RobloxSubscription.Title.AlreadySubscribed,अच्छी खबर

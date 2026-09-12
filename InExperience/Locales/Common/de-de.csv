@@ -77,12 +77,15 @@ Authentication.AccountSwitch.Action.SwitchAccount,Konto wechseln
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Schnellanmeldung
 Authentication.Login.Action.QuickSignIn,
+Authentication.Login.Action.Save,Speichern
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,"Roblox verlassen, um dich bei einem anderen {platformAccountName}-Konto anzumelden"
 Authentication.Login.Button.UseDifferentRobloxAccount,Ein anderes Roblox-Konto verwenden
 Authentication.Login.Error.PasskeyOnlyAccount,"Für dein Konto ist nur ein Passkey für die Anmeldung eingerichtet. Versuche, dich mit deinem Passkey anzumelden, oder stelle dein Konto wieder her."
 Authentication.Login.Error.PlatformAccountConnectionFailure,Das Plattform-Konto kann nicht verifiziert werden. Bitte versuche es später erneut.
 Authentication.Login.Heading.IncompatibleAccounts,Konten nicht kompatibel
+Authentication.Login.Label.Email,E-Mail-Adresse
 Authentication.Login.Label.LearnMore,Mehr erfahren
+Authentication.Login.Label.Username,Benutzername
 Authentication.Login.LinkIllegalChildAccountLinking,Dieses Roblox-Konto konnte nicht mit einem Xbox-Kinderkonto verknüpft werden. Bitte versuche es mit einem anderen Konto oder überprüfe deine Einstellungen.
 Authentication.Login.Response.AlreadyLinked,Dieses Roblox-Konto ist bereits mit einem anderen Konto auf {platform} verknüpft. Bitte versuche dich mit einem anderen Roblox-Konto anzumelden.
 Authentication.Login.Response.IncorrectEmailOrPassword,E-Mail-Adresse oder Passwort falsch.
@@ -100,12 +103,57 @@ Authentication.Login.Response.SomethingWentWrong,
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,"Etwas ist schiefgelaufen. Bitte versuche, dich auf eine andere Weise anzumelden."
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Deine E-Mail-Adresse ist nicht verifiziert. Melde dich bitte mit deinem Benutzernamen an.
 Authentication.Login.WeChat.AntiAddictionText,"Boykottiere schlechte Experiences und lehne Raubkopien ab. Sei dir über Selbstverteidigung und Täuschungsversuche im Klaren. Der Besuch von Experiences ist gut für dein Gehirn, aber zu viel des Guten kann deine Gesundheit beeinträchtigen. Teile dir deine Zeit gut ein und führe einen gesunden Lebensstil."
+Authentication.SignUp.Action.ApplyOnNextRespawn,Beim nächsten Respawn anwenden
+Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ExitModalLeave,Verlassen
+Authentication.SignUp.Action.RespawnNow,Jetzt respawnen
+Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Erneut anmelden
 Authentication.SignUp.Description.AccountAlreadyLinked,"Dein {platformAccountName}-Konto ist bereits mit einem Roblox-Konto verlinkt. Bitte versuche erneut, dich anzumelden."
+Authentication.SignUp.Description.BirthdayHint,Datum eingeben
+Authentication.SignUp.Description.Try,Versuchen
+Authentication.SignUp.Description.UsernameChanged,"Erledigt! Dein Konto ist bereit und mit {platform} verknüpft. Respawne jetzt, um deinen aktualisierten Benutzernamen im Spiel zu sehen. Ansonsten wird er erst beim nächsten Mal verwendet."
+Authentication.SignUp.Description.UsernameUnchanged,Du bist dabei! Dein Konto ist bereit und mit {platform} verknüpft. Chatte mit Freunden und spiele Millionen von Spielen auf Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Dein Roblox-Konto wird mit deinem {platform}-Konto verknüpft. Du kannst die Verknüpfung jederzeit in den Einstellungen aufheben. Es kann sein, dass es etwas dauert, bis du eine Verknüpfung mit einem anderen {platform}-Konto herstellen kannst. Durch das Anklicken von {ctaButton} erklärst du dich mit den Nutzungsbedingungen einschließlich der Schiedsklausel einverstanden und erkennst die Datenschutzrichtlinie an."
+Authentication.SignUp.Header.SetUpYourRobloxAccount,Richte dein Roblox-Konto ein
 Authentication.SignUp.Heading.CountryCodeSelector,Land wählen
 Authentication.SignUp.Heading.RetryLogIn,
+Authentication.SignUp.Label.Birthday,Geburtstag
+Authentication.SignUp.Label.Continue,
+Authentication.SignUp.Label.Day,Tag
+Authentication.SignUp.Label.EnterYourEmail,Gib deine E-Mail-Adresse ein
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,"Man muss älter sein, um dieses Spiel zu spielen"
+Authentication.SignUp.Label.ErrorsWithPassword,Das Passwort enthält Fehler.
+Authentication.SignUp.Label.ErrorsWithUsername,Der Benutzername enthält Fehler.
+Authentication.SignUp.Label.ExitModalSubtitle,"Dein Konto ist fast fertig. Wenn du die Seite verlässt, wird dein Fortschritt nicht gespeichert."
+Authentication.SignUp.Label.ExitModalTitle,Kontoerstellung verlassen?
+Authentication.SignUp.Label.Gender,Geschlecht
+Authentication.SignUp.Label.GenderFemale,Weiblich
+Authentication.SignUp.Label.GenderMale,Männlich
+Authentication.SignUp.Label.Month,Monat
+Authentication.SignUp.Label.PasswordError1,Ist mindestens 8 Zeichen lang
+Authentication.SignUp.Label.PasswordError2,Stimmt nicht mit dem Benutzernamen überein
+Authentication.SignUp.Label.PasswordError2.V2,
+Authentication.SignUp.Label.PasswordError3,Ist kein einfaches Passwort
+Authentication.SignUp.Label.PasswordError3.V2,
+Authentication.SignUp.Label.PasswordPlaceholder,Mindestens 8 Zeichen
+Authentication.SignUp.Label.SelectBirthdaySentenceCase,Geburtstag wählen
+Authentication.SignUp.Label.UsernameError1,"Enthält nur Buchstaben, Zahlen und _"
+Authentication.SignUp.Label.UsernameError2,Ist zwischen 3 und 20 Zeichen lang
+Authentication.SignUp.Label.UsernameError3,Ist noch nicht im Gebrauch
+Authentication.SignUp.Label.UsernameError4,Eignet sich für Roblox
+Authentication.SignUp.Label.UsernameError5,Beginnt und endet nicht mit _
+Authentication.SignUp.Label.UsernameError6,Hat höchstens ein _
+Authentication.SignUp.Label.UsernameError7,Beinhaltet keine private Informationen
+Authentication.SignUp.Label.Year,Jahr
+Authentication.SignUp.Message.Username.NoRealNameUse,Verwende nicht deinen echten Namen
+Authentication.SignUp.PasswordErrorLength,Ist zwischen 8 und 200 Zeichen lang
+Authentication.SignUp.Response.BirthdayMustBeSetFirst,Der Geburtstag muss zuerst festgelegt werden.
 Authentication.SignUp.Response.ErrorTryAgain,
+Authentication.SignUp.Response.InvalidBirthday,Ungültiger Geburtstag
+Authentication.SignUp.Response.InvalidEmail,Ungültige E-Mail-Adresse
+Authentication.SignUp.Response.UsernameMustBeSetFirst,Der Benutzername muss zuerst festgelegt werden.
+Authentication.SignUp.Subtitle.YourProgressCarriesOver,"Dein Fortschritt wird übertragen, wenn du die Einrichtung abschließt."
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,"Zweistufige Verifizierung ist erforderlich, um weitere Transaktionen zu tätigen. Gehe zu Einstellungen > Sicherheit, um die Einrichtung der zweistufigen Verifizierung abzuschließen."
 Authentication.TwoStepVerification.Response.TooManyAttempts,Zu viele Versuche. Bitte versuche es später erneut.
@@ -304,7 +352,7 @@ CommonUI.Controls.Label.April,April
 CommonUI.Controls.Label.AprilAbbreviated,Apr.
 CommonUI.Controls.Label.August,August
 CommonUI.Controls.Label.AugustAbbreviated,Aug.
-CommonUI.Controls.Label.Day,Tag
+CommonUI.Controls.Label.Day,
 CommonUI.Controls.Label.December,Dezember
 CommonUI.Controls.Label.DecemberAbbreviated,Dez.
 CommonUI.Controls.Label.February,Februar
@@ -346,7 +394,7 @@ CommonUI.Controls.Label.Tuesday,Dienstag
 CommonUI.Controls.Label.TuesdayAbbreviated,Di
 CommonUI.Controls.Label.Wednesday,Mittwoch
 CommonUI.Controls.Label.WednesdayAbbreviated,Mi
-CommonUI.Controls.Label.Year,Jahr
+CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,Keine Ergebnisse gefunden
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Continue,
@@ -411,6 +459,7 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,Verwerfen
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,Zurücksetzen
+CommonUI.Messages.Label.Password,Passwort
 CommonUI.Messages.Response.NoResults,Keine Ergebnisse
 CommonUI.Messages.Response.PageError,Fehler beim Laden der Seite 
 CommonUI.Messages.Response.SomethingWentWrong,Es ist ein Problem aufgetreten
@@ -544,7 +593,7 @@ CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.NewBalance,Kontostand nach
 CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.TotalCost,Gesamtbestellung
 CoreScripts.BulkPurchasePrompt.SuccessPrompt.Body,Du hast {itemCount} Artikel gekauft. Du findest sie in deinem Inventar.
 CoreScripts.BulkPurchasePrompt.SuccessPrompt.Heading,
-CoreScripts.CancelUserSubscriptionPrompt.Error.ButtonText,OK
+CoreScripts.CancelUserSubscriptionPrompt.Error.ButtonText,
 CoreScripts.CancelUserSubscriptionPrompt.ErrorCancellingPrompt.Body,Es ist ein Fehler aufgetreten und die Aboverlängerung wurde nicht gekündigt. Bitte versuche es erneut.
 CoreScripts.CancelUserSubscriptionPrompt.ErrorCancellingPrompt.Heading,Fehler
 CoreScripts.CancelUserSubscriptionPrompt.ExpiringPrompt.Body,Dein Abo wurde bereits erfolgreich gekündigt. Es ist keine weitere Aktion erforderlich.
@@ -598,7 +647,7 @@ CoreScripts.FTUX.Label.SideSheetUpdate,Das Menü enthält weiterhin alle deine w
 CoreScripts.FTUX.Label.SocialOnboarding,"Greife über die obere Leiste schnell auf deine Social-Funktionen zu, einschließlich des Chats."
 CoreScripts.Feedback.EntryPoint.ButtonText,Feedback einreichen
 CoreScripts.Feedback.EntryPoint.OptionText,Übersetzungs-Feedback geben
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Verlassen
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
 CoreScripts.Feedback.FeedbackBar.HelpButton,Hilfe
 CoreScripts.Feedback.FeedbackBar.MainLabel,Gib dein Feedback
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Gib zusätzliche Kommentare unten ein
@@ -1231,7 +1280,7 @@ Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Zuletzt gespeicherten Avatar wiederherstellen
 Feature.Avatar.Action.Revert,
 Feature.Avatar.Action.Rotate,
-Feature.Avatar.Action.Save,Speichern
+Feature.Avatar.Action.Save,
 Feature.Avatar.Action.SaveAsNew,Als neu speichern
 Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,Mehrere Items auswählen
@@ -2602,7 +2651,7 @@ Feature.Catalog.Label.Trending,Populär
 Feature.Catalog.Label.TryOns,Try-Ons
 Feature.Catalog.Label.TryOnsMultiple,Try-Ons ({numItems})
 Feature.Catalog.Label.Unlimited,Unbegrenzt
-Feature.Catalog.Label.Username,Benutzername
+Feature.Catalog.Label.Username,
 Feature.Catalog.Label.UsingBundleParts,Benutzt {count} Bündelteile
 Feature.Catalog.Label.WaistAccessories,Taillen-Accessoires
 Feature.Catalog.Label.WearAfterPurchase,Artikel nach dem Kauf anlegen
@@ -3608,11 +3657,11 @@ Feature.Parents.Description.EnterParentEmail.PC,"Eltern erhalten nach der Verkn�
 Feature.Parents.Description.EnterParentEmailV4,"Bitte deine Eltern, dir bei diesem Schritt zu helfen.{lineBreak}Wir schicken eine E-Mail an deine Eltern, um ihr Alter zu verifizieren und sie mit deinem Konto zu verknüpfen.{lineBreak}Eltern, nach der Verknüpfung erhaltet ihr Zugriff auf die Kindersicherung, sowie Einsichten in Aktivitäten deines Kindes wie Bildschirmzeit, Freunde, Ausgaben und mehr."
 Feature.Parents.Description.EnterParentEmailWithoutParentalControl,"Bitte deine Eltern, dir bei diesem Schritt zu helfen.{lineBreak}Wir schicken eine E-Mail an deine Eltern, um ihr Alter zu verifizieren und sie mit deinem Konto zu verknüpfen.{lineBreak}Nach der Verknüpfung haben Eltern die Möglichkeit, bestimmte Aktionen für ihr Kind zu genehmigen."
 Feature.Parents.Description.ParentalEmailFooter,"Diese E-Mail-Adresse wird mit deinem Roblox-Konto mit Elternrechten verknüpft. Um mehr über unsere Datenpraktiken zu erfahren, lies bitte unsere {linkStart}Datenschutzrichtlinie{linkEnd}."
-Feature.Parents.Label.Email,E-Mail-Adresse
+Feature.Parents.Label.Email,
 Feature.Parents.Label.ParentEmail,E-Mail-Adresse deiner Eltern
 Feature.Parents.Message.ConflictingPendingConsent,"Du hast bereits um Erlaubnis gefragt. Um eine neue Anfrage zu senden, storniere bitte zuerst deine Anfrage in den Einstellungen."
 Feature.Parents.Message.EmailIneligible,"Diese E-Mail ist nicht zulässig. Verwende eine andere E-Mail, um Elternberechtigung bei Roblox anzufordern."
-Feature.Parents.Message.InvalidEmail,Ungültige E-Mail-Adresse
+Feature.Parents.Message.InvalidEmail,
 Feature.Parents.Message.RequestCreatedEmailNotSent,"Nachdem du ein Roblox-Konto verbunden hast, sehen deine Eltern diese Anfrage im Bereich Kindersicherung."
 Feature.Parents.Message.SomethingWentWrong,
 Feature.Parents.Message.TooManyAttemptAskParent,"Zu viele Versuche. Wenn du schon um Erlaubnis gefragt hast, bitte deine Eltern, ihre E-Mails zu überprüfen."
@@ -3878,7 +3927,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Indem du auf ""Weiter
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Indem du auf ""Kostenlos ausprobieren"" klickst, stimmst du den {linkStart}Abonnementbedingungen von Roblox{linkEnd} zu. Deine kostenlose Testversion endet in 1 Monat. Dir wird jeden Monat automatisch eine Gebühr berechnet und du kannst jederzeit kündigen."
 Feature.RobloxSubscription.Label.FreeTrialText,Kostenlose Testversion holen
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 Monat kostenlos,{boldEnd} danach {price}/{periodType}"
-Feature.RobloxSubscription.Label.month,Monat
+Feature.RobloxSubscription.Label.month,
 Feature.RobloxSubscription.Label.months,Monate
 Feature.RobloxSubscription.Title.AgeCheckTrial,Hol dir Roblox Plus eine Woche lang kostenlos
 Feature.RobloxSubscription.Title.AlreadySubscribed,Gute Neuigkeiten

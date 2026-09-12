@@ -78,12 +78,15 @@ Authentication.AccountSwitch.Action.SwitchAccount,Chuyển đổi tài khoản
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Đăng Nhập Nhanh
 Authentication.Login.Action.QuickSignIn,Đăng nhập nhanh
+Authentication.Login.Action.Save,Lưu
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Thoát Roblox để chuyển tài khoản sang {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Sử dụng tài khoản Roblox khác
 Authentication.Login.Error.PasskeyOnlyAccount,Tài khoản của bạn được thiết lập ở chế độ chỉ cho phép đăng nhập bằng khóa bảo mật. Hãy đăng nhập bằng khóa bảo mật hoặc tiến hành khôi phục tài khoản.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Không xác minh được tài khoản trên nền tảng. Vui lòng thử lại sau.
 Authentication.Login.Heading.IncompatibleAccounts,Tài khoản không phù hợp
+Authentication.Login.Label.Email,Email
 Authentication.Login.Label.LearnMore,Tìm hiểu thêm
+Authentication.Login.Label.Username,Tên người dùng
 Authentication.Login.LinkIllegalChildAccountLinking,Không thể liên kết tài khoản Roblox này với tài khoản Xbox của trẻ em. Vui lòng thử dùng một tài khoản khác hoặc kiểm tra tùy chọn cài đặt của bạn.
 Authentication.Login.Response.AlreadyLinked,Tài khoản Roblox này đã được liên kết với một tài khoản dùng cho {platform}. Vui lòng thử đăng nhập bằng một tài khoản Roblox khác.
 Authentication.Login.Response.IncorrectEmailOrPassword,Sai địa chỉ email hoặc mật khẩu.
@@ -101,12 +104,57 @@ Authentication.Login.Response.SomethingWentWrong,Đã xảy ra sự cố. Vui l�
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,Đã xảy ra sự cố. Vui lòng thử cách khác để đăng nhập.
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Địa chỉ email của bạn chưa được xác minh. Vui lòng đăng nhập bằng tên người dùng của bạn.
 Authentication.Login.WeChat.AntiAddictionText,"Tẩy chay trò chơi xấu, không chơi trò chơi bị bẻ khóa. Chú ý để tự bảo vệ mình và không bị lừa. Chơi trò chơi có tác động tốt tới não bộ của bạn nhưng chơi quá nhiều trò chơi có thể ảnh hướng xấu tới sức khỏe của bạn. Hãy quản lý thời gian của bạn hiệu quả và tận hưởng lối sống lành mạnh."
+Authentication.SignUp.Action.ApplyOnNextRespawn,Áp dụng cho lần hồi sinh tiếp theo
+Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ExitModalLeave,Thoát
+Authentication.SignUp.Action.RespawnNow,Hồi sinh ngay
+Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Thử đăng nhập lại
 Authentication.SignUp.Description.AccountAlreadyLinked,Tài khoản dùng cho {platformAccountName} đã được liên kết với một tài khoản Roblox. Vui lòng thử đăng nhập lại.
+Authentication.SignUp.Description.BirthdayHint,Nhập ngày
+Authentication.SignUp.Description.Try,Thử
+Authentication.SignUp.Description.UsernameChanged,"Mọi thứ đã sẵn sàng! Tài khoản của bạn đã sẵn sàng và được liên kết với {platform}. Hãy hồi sinh ngay để xem tên tài khoản mới của bạn trong trò chơi, nếu không thay đổi sẽ áp dụng cho lần tới."
+Authentication.SignUp.Description.UsernameUnchanged,Thành công rồi! Tài khoản của bạn đã sẵn sàng và được liên kết với {platform}. Hãy thỏa sức trò chuyện cùng bạn bè và khám phá hàng triệu trò chơi trên Roblox nhé.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Tài khoản Roblox của bạn sẽ được liên kết với tài khoản dùng cho {platform}. Bạn có thể hủy liên kết từ màn hình Cài đặt bất kỳ lúc nào. Bạn có thể phải chờ một lúc trước khi có thể liên kết với một tài khoản dùng cho {platform}. Bằng việc nhấp chuột vào {ctaButton}, bạn đồng ý với Điều khoản sử dụng, bao gồm điều khoản trọng tài, và bạn cũng xác nhận Chính sách quyền riêng tư."
+Authentication.SignUp.Header.SetUpYourRobloxAccount,Thiết lập tài khoản Roblox của bạn
 Authentication.SignUp.Heading.CountryCodeSelector,Chọn quốc gia
 Authentication.SignUp.Heading.RetryLogIn,
+Authentication.SignUp.Label.Birthday,Ngày sinh
+Authentication.SignUp.Label.Continue,
+Authentication.SignUp.Label.Day,Ngày
+Authentication.SignUp.Label.EnterYourEmail,Nhập email của bạn
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,Bạn phải đủ tuổi để chơi trò chơi này
+Authentication.SignUp.Label.ErrorsWithPassword,Đã xảy ra lỗi với mật khẩu.
+Authentication.SignUp.Label.ErrorsWithUsername,Đã xảy ra lỗi với tên người dùng.
+Authentication.SignUp.Label.ExitModalSubtitle,"Tài khoản của bạn sắp được tạo xong. Nếu bạn thoát, tiến trình của bạn sẽ không được lưu."
+Authentication.SignUp.Label.ExitModalTitle,Thoát khỏi quy trình tạo tài khoản?
+Authentication.SignUp.Label.Gender,Giới tính
+Authentication.SignUp.Label.GenderFemale,Nữ
+Authentication.SignUp.Label.GenderMale,Nam
+Authentication.SignUp.Label.Month,Tháng
+Authentication.SignUp.Label.PasswordError1,Dài tối thiểu 8 ký tự
+Authentication.SignUp.Label.PasswordError2,Không trùng với tên người dùng
+Authentication.SignUp.Label.PasswordError2.V2,Không trùng với tên tài khoản
+Authentication.SignUp.Label.PasswordError3,Không phải là mật khẩu dễ đoán
+Authentication.SignUp.Label.PasswordError3.V2,Không phải mật khẩu quá đơn giản
+Authentication.SignUp.Label.PasswordPlaceholder,Tối thiểu 8 ký tự
+Authentication.SignUp.Label.SelectBirthdaySentenceCase,Chọn ngày sinh
+Authentication.SignUp.Label.UsernameError1,"Chỉ chứa chữ cái, chữ số, và ký tự _"
+Authentication.SignUp.Label.UsernameError2,Dài từ 3 đến 20 ký tự
+Authentication.SignUp.Label.UsernameError3,Chưa được sử dụng
+Authentication.SignUp.Label.UsernameError4,Phù hợp với Roblox
+Authentication.SignUp.Label.UsernameError5,Không bắt đầu hoặc kết thúc bằng ký tự _
+Authentication.SignUp.Label.UsernameError6,Có tối đa một ký tự _
+Authentication.SignUp.Label.UsernameError7,Không chứa thông tin cá nhân
+Authentication.SignUp.Label.Year,Năm
+Authentication.SignUp.Message.Username.NoRealNameUse,Không dùng tên thật của bạn
+Authentication.SignUp.PasswordErrorLength,Có độ dài từ 8 đến 200 ký tự
+Authentication.SignUp.Response.BirthdayMustBeSetFirst,Phải chọn ngày sinh trước.
 Authentication.SignUp.Response.ErrorTryAgain,
+Authentication.SignUp.Response.InvalidBirthday,Ngày sinh không hợp lệ.
+Authentication.SignUp.Response.InvalidEmail,Địa chỉ email không hợp lệ.
+Authentication.SignUp.Response.UsernameMustBeSetFirst,Phải đặt tên người dùng trước.
+Authentication.SignUp.Subtitle.YourProgressCarriesOver,Tiến trình của bạn sẽ được giữ nguyên khi bạn thiết lập xong.
 Authentication.TwoStepVerification.Action.GoToSecurity,Cài đặt
 Authentication.TwoStepVerification.Label.TwoStepRequired,Yêu cầu Xác minh 2 bước để thực hiện các giao dịch tiếp theo. Đến Cài đặt > Bảo mật để hoàn thành Xác minh 2 bước.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Quá nhiều lần thử. Vui lòng thử lại sau.
@@ -292,7 +340,7 @@ CommonUI.Controls.Action.Confirm,Xác nhận
 CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,Xong
 CommonUI.Controls.Action.Next,Tiếp
-CommonUI.Controls.Action.OK,OK
+CommonUI.Controls.Action.OK,
 CommonUI.Controls.Action.Refresh,Làm mới
 CommonUI.Controls.Action.ResetAll,Trả tất cả về mặc định
 CommonUI.Controls.Action.Search,Tìm kiếm
@@ -305,7 +353,7 @@ CommonUI.Controls.Label.April,Tháng 4
 CommonUI.Controls.Label.AprilAbbreviated,Th4
 CommonUI.Controls.Label.August,Tháng 8
 CommonUI.Controls.Label.AugustAbbreviated,Th8
-CommonUI.Controls.Label.Day,Ngày
+CommonUI.Controls.Label.Day,
 CommonUI.Controls.Label.December,Tháng 12
 CommonUI.Controls.Label.DecemberAbbreviated,Th12
 CommonUI.Controls.Label.February,Tháng 2
@@ -347,7 +395,7 @@ CommonUI.Controls.Label.Tuesday,Thứ 3
 CommonUI.Controls.Label.TuesdayAbbreviated,T3
 CommonUI.Controls.Label.Wednesday,Thứ 4
 CommonUI.Controls.Label.WednesdayAbbreviated,T4
-CommonUI.Controls.Label.Year,Năm
+CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,Không tìm thấy kết quả
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Continue,
@@ -412,6 +460,7 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,Bỏ qua
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,Đặt lại
+CommonUI.Messages.Label.Password,Mật khẩu
 CommonUI.Messages.Response.NoResults,Không có kết quả
 CommonUI.Messages.Response.PageError,Lỗi khi tải trang
 CommonUI.Messages.Response.SomethingWentWrong,Đã xảy ra sự cố
@@ -599,7 +648,7 @@ CoreScripts.FTUX.Label.SideSheetUpdate,Menu này vẫn chứa mọi tính năng 
 CoreScripts.FTUX.Label.SocialOnboarding,"Dễ dàng truy cập các tính năng xã hội của bạn từ thanh trên cùng, kể cả tính năng Trò chuyện."
 CoreScripts.Feedback.EntryPoint.ButtonText,Đưa Ra Phản Hồi
 CoreScripts.Feedback.EntryPoint.OptionText,Đưa Ra Phản Hồi Về Bản Dịch
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Thoát
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
 CoreScripts.Feedback.FeedbackBar.HelpButton,Trợ Giúp
 CoreScripts.Feedback.FeedbackBar.MainLabel,
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,"Hãy để lại bình luận bổ sung ở bên dưới, nếu có"
@@ -1297,7 +1346,7 @@ Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Khôi phục avatar đã lưu gần đây nhất
 Feature.Avatar.Action.Revert,Hoàn lại
 Feature.Avatar.Action.Rotate,
-Feature.Avatar.Action.Save,Lưu
+Feature.Avatar.Action.Save,
 Feature.Avatar.Action.SaveAsNew,Lưu mới
 Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,Chọn nhiều vật phẩm

@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("AccountUpgradeAmpNameSpace", "account_authentication/AccountAuthentication")

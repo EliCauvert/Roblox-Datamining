@@ -49,7 +49,6 @@ local sduiApiStoreExposeGetInputData_1 = game:DefineFastFlag("SduiUseInputData",
 local sduiPageEntryPointResolvedSlot = game:DefineFastFlag("SduiPageEntryPointResolvedSlot", false)
 local sduiPageEntryPointResolvedSlot_1 = game:DefineFastFlag("SduiSearchResultsPageEnabled", false) and (sduiApiStoreExposeGetInputData_1 and sduiPageEntryPointResolvedSlot)
 local sduiChartsPlaceholderMergeStrategySupport = game:DefineFastFlag("SduiChartsPlaceholderMergeStrategySupport", false)
-local sduiGenericContainerDispatch = game:DefineFastFlag("SduiGenericContainerDispatch", false)
 local sduiGlobalRegistryFallback = game:DefineFastFlag("SduiGlobalRegistryFallback", false)
 local sduiVerticalFeedProgressiveFillOnScroll2 = game:DefineFastFlag("SduiVerticalFeedProgressiveFillOnScroll2", false)
 local sduiGlobalRegistryFallback_1 = game:DefineFastFlag("LuaAppUnlockUpsellSupport", false) and sduiGlobalRegistryFallback
@@ -167,12 +166,10 @@ return {
 	FFlagAXMigrateCatalogPageInputBindings = require(script.FFlagAXMigrateCatalogPageInputBindings),
 	FFlagAXMigrateEquipSlotsInputBindingsToRoactGamepad = require(script.FFlagAXMigrateEquipSlotsInputBindingsToRoactGamepad),
 	FFlagAXMigrateSceneGamepadHandlerInputBindings = require(script.FFlagAXMigrateSceneGamepadHandlerInputBindings),
-	FFlagAXMigrateAXToGlobalAutofocus = require(script.FFlagAXMigrateAXToGlobalAutofocus),
 	FFlagAXLegacyIXPExposureLogging = require(script.FFlagAXLegacyIXPExposureLogging),
 	FFlagAXCloseFilterOnBackgroundTap = require(script.FFlagAXCloseFilterOnBackgroundTap),
 	FFlagAXMigrateQuickButtonsToGlobalAutoFocus = require(script.FFlagAXMigrateQuickButtonsToGlobalAutoFocus),
 	FFlagAXMigrateManageOutfitPageInputBindingsToFocusNavigation = require(script.FFlagAXMigrateManageOutfitPageInputBindingsToFocusNavigation),
-	FFlagAXMigrateItemDetailsInputBindingsToFocusNavigation = require(script.FFlagAXMigrateItemDetailsInputBindingsToFocusNavigation),
 	FFlagAXFixOrientationInputBlocking = require(script.FFlagAXFixOrientationInputBlocking),
 	FFlagAXMigrateSystemSliderToFoundationSlider = require(script.FFlagAXMigrateSystemSliderToFoundationSlider),
 	FFlagLuaAppDerivedStackAndSwitchState = game:DefineFastFlag("LuaAppDerivedStackAndSwitchState", false),
@@ -849,7 +846,7 @@ return {
 	FFlagSduiNilHydrationGuard = sduiNilHydrationGuard,
 	FFlagSduiPlayWithReward = game:DefineFastFlag("SduiPlayWithReward", false),
 	FFlagSduiPlayWithRewardGapFix = game:DefineFastFlag("SduiPlayWithRewardGapFix", false),
-	FFlagSduiActionSequence = game:DefineFastFlag("SduiActionSequence", false) and sduiGenericContainerDispatch,
+	FFlagSduiActionSequence = game:DefineFastFlag("SduiActionSequence", false),
 	FFlagLuaAppAddVideoIneligiblePlayabilityStatus = game:DefineFastFlag("LuaAppAddVideoIneligiblePlayabilityStatus", false),
 	FFlagConnectionAmpUpsellOnLeave = connectionAmpUpsellOnLeave,
 	FFlagConnectionAmpParentalApprovalUpsell = connectionAmpParentalApprovalUpsell,
@@ -860,8 +857,7 @@ return {
 	FFlagLuaAppLogOmniRecommendationsMetadata = game:DefineFastFlag("LuaAppLogOmniRecommendationsMetadata2", false),
 	FFlagLuaAppUseEffectInSignalPreprocessing = game:DefineFastFlag("LuaAppUseEffectInSignalPreprocessing", false),
 	FFlagSduiOneofPropSupport = game:DefineFastFlag("SduiOneofPropSupport", false),
-	FFlagSduiGenericContainerDispatch = sduiGenericContainerDispatch,
-	FFlagSduiFocusNavActionsStructured = game:DefineFastFlag("SduiFocusNavActionsStructured", false) and sduiGenericContainerDispatch,
+	FFlagSduiFocusNavActionsStructured = game:DefineFastFlag("SduiFocusNavActionsStructured", false),
 	FFlagLuaAppResetHoverOnSduiPlayButtonActivation = game:DefineFastFlag("LuaAppResetHoverOnSduiPlayButtonActivation", false),
 	FFlagLuaAppClampBannerPaddingToViewport = game:DefineFastFlag("LuaAppClampBannerPaddingToViewport", false),
 	FFlagDetailsPageLayoutSeedContainerSize = game:DefineFastFlag("DetailsPageLayoutSeedContainerSize", false),
@@ -1842,5 +1838,6 @@ return {
 	FFlagAddSDUIEditProfileFramesAction = game:DefineFastFlag("AddSDUIEditProfileFramesAction", false),
 	FFlagLuaSupportMicroGamepadPreferredInput = game:DefineFastFlag("LuaSupportMicroGamepadPreferredInput", false),
 	FFlagPinShortcutEnableOnCompleteCallback = game:GetEngineFeature("PinShortcutEnableOnCompleteCallback"),
-	FFlagAddPinExperienceTargetDestinationGUACPolicy = game:DefineFastFlag("AddPinExperienceTargetDestinationGUACPolicy", false)
+	FFlagAddPinExperienceTargetDestinationGUACPolicy = game:DefineFastFlag("AddPinExperienceTargetDestinationGUACPolicy", false),
+	FFlagEnableGameJoinEarlyAccess = game:DefineFastFlag("EnableGameJoinEarlyAccess", false)
 }

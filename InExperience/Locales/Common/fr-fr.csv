@@ -78,12 +78,15 @@ Authentication.AccountSwitch.Action.SwitchAccount,Changer de compte
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Connexion rapide
 Authentication.Login.Action.QuickSignIn,
+Authentication.Login.Action.Save,Enregistrer
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Quitter Roblox pour changer de compte pour {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Utiliser un compte Roblox différent
 Authentication.Login.Error.PasskeyOnlyAccount,Ton compte n'a qu'un passkey configuré pour te connecter. Essaie de te connecter avec ton mot de passe ou de récupérer ton compte.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Impossible de vérifier le compte de la plateforme. Réessayer plus tard.
 Authentication.Login.Heading.IncompatibleAccounts,Comptes incompatibles
+Authentication.Login.Label.Email,E-mail
 Authentication.Login.Label.LearnMore,En savoir plus
+Authentication.Login.Label.Username,Nom d'utilisateur
 Authentication.Login.LinkIllegalChildAccountLinking,Ce compte Roblox n'a pas pu être lié à un compte enfant Xbox. Veuillez essayer un autre compte ou vérifier vos paramètres.
 Authentication.Login.Response.AlreadyLinked,Ce compte Roblox est déjà lié à un autre compte sur {platform}. Essaie de te connecter avec un autre compte Roblox.
 Authentication.Login.Response.IncorrectEmailOrPassword,Adresse e-mail ou mot de passe invalide.
@@ -101,12 +104,57 @@ Authentication.Login.Response.SomethingWentWrong,Un problème est survenu. Rées
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,Une erreur est survenue. Essaie un autre moyen de te connecter.
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Votre adresse e-mail n'a pas été confirmée. Veuillez vous connecter avec votre nom d'utilisateur.
 Authentication.Login.WeChat.AntiAddictionText,"Boycotte les mauvaises expériences, refuse les expériences pirates. Sois conscient de te défendre et d'être déçu. Visiter des expériences est bon pour ton cerveau, mais trop de visites d'expériences peut nuire à ta santé. Gère bien ton temps et adopte un mode de vie sain."
+Authentication.SignUp.Action.ApplyOnNextRespawn,Appliquer à la prochaine réapparition
+Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ExitModalLeave,Quitter
+Authentication.SignUp.Action.RespawnNow,Réapparaître
+Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Réessayer de te connecter
 Authentication.SignUp.Description.AccountAlreadyLinked,Ton compte sur {platformAccountName} est déjà lié à un compte Roblox. Essaie de te connecter à nouveau.
+Authentication.SignUp.Description.BirthdayHint,Saisir la date
+Authentication.SignUp.Description.Try,Essayer
+Authentication.SignUp.Description.UsernameChanged,"Tout est prêt ! Ton compte est prêt et lié à {platform}. Réapparais maintenant pour voir ton nom d'utilisateur mis à jour dans le jeu, sinon il sera mis à jour la prochaine fois."
+Authentication.SignUp.Description.UsernameUnchanged,Tu y es ! Ton compte est prêt et lié à {platform}. Chatte avec tes amis et joue à des millions de jeux Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Ton compte Roblox sera lié à ton compte sur {platform}. Tu peux le dissocier à tout moment à partir de l'écran Paramètres. Il peut y avoir un temps de ralentissement avant de pouvoir établir un lien avec un autre compte sur {platform}. En cliquant sur {ctaButton}, tu acceptes les conditions d'utilisation, y compris la clause d'arbitrage, et tu reconnais la politique de confidentialité."
+Authentication.SignUp.Header.SetUpYourRobloxAccount,Configurer ton compte Roblox
 Authentication.SignUp.Heading.CountryCodeSelector,Sélectionner le pays
 Authentication.SignUp.Heading.RetryLogIn,
+Authentication.SignUp.Label.Birthday,Date anniversaire
+Authentication.SignUp.Label.Continue,
+Authentication.SignUp.Label.Day,Jour
+Authentication.SignUp.Label.EnterYourEmail,Saisissez votre adresse e-mail
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,Tu es trop jeune pour jouer à cette expérience.
+Authentication.SignUp.Label.ErrorsWithPassword,Le mot de passe comporte des erreurs.
+Authentication.SignUp.Label.ErrorsWithUsername,Le nom d'utilisateur comporte des erreurs.
+Authentication.SignUp.Label.ExitModalSubtitle,"La création de ton compte est presque terminée. Si tu quittes cette étape, ta progression sera perdue."
+Authentication.SignUp.Label.ExitModalTitle,Quitter la création de compte ?
+Authentication.SignUp.Label.Gender,Genre
+Authentication.SignUp.Label.GenderFemale,Femme
+Authentication.SignUp.Label.GenderMale,Homme
+Authentication.SignUp.Label.Month,Mois
+Authentication.SignUp.Label.PasswordError1,Doit compter au moins 8 caractères.
+Authentication.SignUp.Label.PasswordError2,N'est pas similaire à ton nom de compte
+Authentication.SignUp.Label.PasswordError2.V2,Ne correspond pas au nom d'utilisateur
+Authentication.SignUp.Label.PasswordError3,N'est pas un mot de passe simple
+Authentication.SignUp.Label.PasswordError3.V2,Ce mot de passe est robuste
+Authentication.SignUp.Label.PasswordPlaceholder,Au moins 8 caractères
+Authentication.SignUp.Label.SelectBirthdaySentenceCase,Sélectionner la date d'anniversaire
+Authentication.SignUp.Label.UsernameError1,"Uniquement des lettres, des nombres et _"
+Authentication.SignUp.Label.UsernameError2,Entre 3 et 20 caractères
+Authentication.SignUp.Label.UsernameError3,N'est pas déjà utilisé
+Authentication.SignUp.Label.UsernameError4,est approprié pour Roblox
+Authentication.SignUp.Label.UsernameError5,Ne commence ni ne se termine par _
+Authentication.SignUp.Label.UsernameError6,A au plus un seul _
+Authentication.SignUp.Label.UsernameError7,Aucune information personnelle
+Authentication.SignUp.Label.Year,Année
+Authentication.SignUp.Message.Username.NoRealNameUse,Veuillez ne pas utiliser votre vrai nom
+Authentication.SignUp.PasswordErrorLength,Comporte entre 8 et 200 caractères
+Authentication.SignUp.Response.BirthdayMustBeSetFirst,La date anniversaire doit d'abord être saisie.
 Authentication.SignUp.Response.ErrorTryAgain,Un problème est survenu. Veuillez réessayer plus tard.
+Authentication.SignUp.Response.InvalidBirthday,Date d'anniversaire invalide.
+Authentication.SignUp.Response.InvalidEmail,Adresse e-mail invalide.
+Authentication.SignUp.Response.UsernameMustBeSetFirst,Le nom d'utilisateur doit être défini en premier.
+Authentication.SignUp.Subtitle.YourProgressCarriesOver,Ta progression sera enregistrée une fois la configuration terminée.
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,Une vérification en deux étapes est nécessaire pour effectuer d'autres transactions. Allez dans Paramètres > Sécurité pour effectuer la vérification en deux étapes.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Trop de tentatives. Veuillez réessayer plus tard.
@@ -305,7 +353,7 @@ CommonUI.Controls.Label.April,Avril
 CommonUI.Controls.Label.AprilAbbreviated,Avr.
 CommonUI.Controls.Label.August,Août
 CommonUI.Controls.Label.AugustAbbreviated,
-CommonUI.Controls.Label.Day,Jour
+CommonUI.Controls.Label.Day,
 CommonUI.Controls.Label.December,Décembre
 CommonUI.Controls.Label.DecemberAbbreviated,Déc.
 CommonUI.Controls.Label.February,Février
@@ -347,7 +395,7 @@ CommonUI.Controls.Label.Tuesday,mardi
 CommonUI.Controls.Label.TuesdayAbbreviated,mar.
 CommonUI.Controls.Label.Wednesday,mercredi
 CommonUI.Controls.Label.WednesdayAbbreviated,mer.
-CommonUI.Controls.Label.Year,Année
+CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,Aucun résultat trouvé
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Continue,
@@ -410,8 +458,9 @@ CommonUI.Features.StudioCTA.Tooltip.Body,Télécharge Studio GRATUITEMENT !
 CommonUI.Features.StudioCTA.Tooltip.Title,Commence à créer sur Roblox
 CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,Rejeter
-CommonUI.Messages.Action.OK,OK
+CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,Réinitialiser
+CommonUI.Messages.Label.Password,Mot de passe
 CommonUI.Messages.Response.NoResults,Aucun résultat
 CommonUI.Messages.Response.PageError,Erreur téléchargement page
 CommonUI.Messages.Response.SomethingWentWrong,Quelque chose s'est mal passé
@@ -599,7 +648,7 @@ CoreScripts.FTUX.Label.SideSheetUpdate,Le menu contient toujours toutes tes fonc
 CoreScripts.FTUX.Label.SocialOnboarding,"Accède facilement à tes fonctionnalités sociales, y compris le Chat, depuis la barre supérieure."
 CoreScripts.Feedback.EntryPoint.ButtonText,Envoyer un commentaire
 CoreScripts.Feedback.EntryPoint.OptionText,Donner des commentaires sur la traduction
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Quitter
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
 CoreScripts.Feedback.FeedbackBar.HelpButton,Aide
 CoreScripts.Feedback.FeedbackBar.MainLabel,
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Ajoute ci-dessous tout commentaire supplémentaire
@@ -1297,7 +1346,7 @@ Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Restaurer le dernier avatar enregistré
 Feature.Avatar.Action.Revert,Revenir à
 Feature.Avatar.Action.Rotate,
-Feature.Avatar.Action.Save,Enregistrer
+Feature.Avatar.Action.Save,
 Feature.Avatar.Action.SaveAsNew,Enregistrer comme nouveau
 Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,Sélectionner plusieurs articles
@@ -2411,7 +2460,7 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,Vendre
 Feature.Catalog.Action.ShareVia,Partager via...
 Feature.Catalog.Action.Submit,
-Feature.Catalog.Action.Try,Essayer
+Feature.Catalog.Action.Try,
 Feature.Catalog.Action.Upgrade,Améliorer
 Feature.Catalog.Action.ViewDetailsPage,Voir la page de détails
 Feature.Catalog.Action.ViewExperienceDetails,Voir les détails de l'expérience
@@ -2655,7 +2704,7 @@ Feature.Catalog.Label.Trending,Tendance
 Feature.Catalog.Label.TryOns,Essais
 Feature.Catalog.Label.TryOnsMultiple,Essai ({numItems})
 Feature.Catalog.Label.Unlimited,Illimité
-Feature.Catalog.Label.Username,Nom d'utilisateur
+Feature.Catalog.Label.Username,
 Feature.Catalog.Label.UsingBundleParts,Utiliser des pièces de bundle {count}
 Feature.Catalog.Label.WaistAccessories,Accessoires de taille
 Feature.Catalog.Label.WearAfterPurchase,Porter objet après achat

@@ -34,7 +34,6 @@ local enableFastScrollingFixTest = game:DefineFastFlag("EnableFastScrollingFixTe
 local fFlagEnablePeekViewFocusNav = require(parent.SharedFlags).FFlagEnablePeekViewFocusNav
 local getFFlagPreventSuperBriefPeekViewClose = require(parent.SharedFlags).GetFFlagPreventSuperBriefPeekViewClose
 local AXMigratePeekViewToFocusNavigation = game:DefineFastFlag("AXMigratePeekViewToFocusNavigation", false)
-local fFlagAXMigrateAXToGlobalAutofocus = require(parent.SharedFlags).FFlagAXMigrateAXToGlobalAutofocus
 local fFlagAXScrollingFramesShouldAnimateOnFocus = require(parent.SharedFlags).FFlagAXScrollingFramesShouldAnimateOnFocus
 local fixPeekViewAnimationJitter = game:DefineFastFlag("FixPeekViewAnimationJitter", false)
 local fFlagPeekViewFixBriefHeightLayoutRace = require(parent.SharedFlags).FFlagPeekViewFixBriefHeightLayoutRace
@@ -69,12 +68,12 @@ peekView.defaultProps = {
 	hideDraggerInSuperBrief = false,
 	minimizeToSuperBrief = false,
 	customBackground = nil,
+	shouldCaptureFocus = true,
 	hasSolidDragger = true,
 	draggerImageStyle = nil,
 	briefViewContentHeight = UDim.new(0.5, 0),
 	fullViewContentHeight = if not AXMigratePeekViewToFocusNavigation then UDim.new(1, 0) else nil,
-	elasticBehavior = Enum.ElasticBehavior.Always,
-	shouldCaptureFocus = if fFlagAXMigrateAXToGlobalAutofocus then true else nil
+	elasticBehavior = Enum.ElasticBehavior.Always
 }
 
 function peekView.init(p1)
@@ -762,7 +761,7 @@ function peekView.handleThumbstickInput(p1, p2, p3)
 end
 
 function peekView.renderWithStyle(p1, p2)
-	-- upvalues: roactModule (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagProfilePlatformPeekDraggerContrast (ref), AXMigratePeekViewToFocusNavigation (ref), superBrief (ref), imageSetLabel (ref), swipe (ref), focusable (ref), roactGamepadModule (ref), fFlagEnablePeekViewFocusNav (ref), fFlagPeekViewFixBriefHeightLayoutRace (ref), rect (ref), brief (ref), full (ref), fFlagAXMigrateAXToGlobalAutofocus (ref), focusNavigableSurfaceWrapper (ref), focusNavigationUtilsModule (ref), externalEventConnection (ref), userInputService (ref)
+	-- upvalues: roactModule (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagProfilePlatformPeekDraggerContrast (ref), AXMigratePeekViewToFocusNavigation (ref), superBrief (ref), imageSetLabel (ref), swipe (ref), focusable (ref), roactGamepadModule (ref), fFlagEnablePeekViewFocusNav (ref), fFlagPeekViewFixBriefHeightLayoutRace (ref), rect (ref), brief (ref), full (ref), focusNavigableSurfaceWrapper (ref), focusNavigationUtilsModule (ref), externalEventConnection (ref), userInputService (ref)
 	local color_1, transparency
 	local children = p1.props[roactModule.Children]
 	local bottomDockedContainerHeight = p1.props.bottomDockedContainerHeight
@@ -931,11 +930,11 @@ function peekView.renderWithStyle(p1, p2)
 				})
 			})
 		}),
-		ClipFrameContainer = if fFlagAXMigrateAXToGlobalAutofocus and not p1.props.shouldCaptureFocus then nil elseif fFlagEnablePeekViewFocusNav then roactModule.createElement(focusNavigableSurfaceWrapper, {
+		ClipFrameContainer = if not p1.props.shouldCaptureFocus then nil elseif fFlagEnablePeekViewFocusNav then roactModule.createElement(focusNavigableSurfaceWrapper, {
 			isIsolated = true,
 			surfaceIdentifier = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum.PeekView
 		}, { ClipFrame = createElement_1 }) else nil,
-		ClipFrame = if fFlagAXMigrateAXToGlobalAutofocus and not p1.props.shouldCaptureFocus then createElement_1 elseif fFlagEnablePeekViewFocusNav then nil else createElement_1,
+		ClipFrame = if not p1.props.shouldCaptureFocus then createElement_1 elseif fFlagEnablePeekViewFocusNav then nil else createElement_1,
 		InputBegan = roactModule.createElement(externalEventConnection, {
 			event = userInputService.InputBegan,
 			callback = p1.inputBeganCallback

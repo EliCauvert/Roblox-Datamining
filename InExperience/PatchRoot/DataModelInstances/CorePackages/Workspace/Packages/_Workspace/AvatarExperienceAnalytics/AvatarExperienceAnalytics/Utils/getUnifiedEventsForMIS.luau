@@ -1,9 +1,14 @@
 ﻿local avatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
 local cartIdServiceModule = require(avatarExperienceAnalytics.Lib.CartIdService)
 local unifiedEventLogEnumsModule = require(avatarExperienceAnalytics.UnifiedEventLogEnums)
+local AXAddAttributionToCheckoutCartPurchases = game:DefineFastFlag("AXAddAttributionToCheckoutCartPurchases", false)
+
+local function _(p1)
+	return "MIS_" .. p0
+end
 
 return function(p1, p2, p3, p4, p5)
-	-- upvalues: cartIdServiceModule (ref), unifiedEventLogEnumsModule (ref)
+	-- upvalues: AXAddAttributionToCheckoutCartPurchases (ref), cartIdServiceModule (ref), unifiedEventLogEnumsModule (ref)
 	local var1
 	local var2 = 0
 	local t = {}
@@ -33,7 +38,7 @@ return function(p1, p2, p3, p4, p5)
 				end
 			end
 			table.insert(t_4, {
-				cartId = cartIdServiceModule.getCartId(),
+				cartId = if AXAddAttributionToCheckoutCartPurchases then "MIS_" .. cartIdServiceModule.getCartId() else cartIdServiceModule.getCartId(),
 				action = p5,
 				itemId = v.itemId,
 				itemType = if v.itemType == "Asset" then unifiedEventLogEnumsModule.MarketplaceUnifiedItemType.ASSET else unifiedEventLogEnumsModule.MarketplaceUnifiedItemType.BUNDLE,
@@ -57,7 +62,7 @@ return function(p1, p2, p3, p4, p5)
 		local var4 = if #t > 0 then table.concat(t, ",") else ""
 		local var5 = if #t_1 > 0 then table.concat(t_1, ",") else ""
 		local t_5 = {
-			cartId = cartIdServiceModule.getCartId(),
+			cartId = if AXAddAttributionToCheckoutCartPurchases then "MIS_" .. cartIdServiceModule.getCartId() else cartIdServiceModule.getCartId(),
 			action = p5,
 			itemId = p3.itemId,
 			itemType = unifiedEventLogEnumsModule.MarketplaceUnifiedItemType.LOOK
@@ -78,7 +83,7 @@ return function(p1, p2, p3, p4, p5)
 		local var6 = if #t_2 > 0 then table.concat(t_2, ",") else ""
 		local var7 = if #t_3 > 0 then table.concat(t_3, ",") else ""
 		local t_5 = {
-			cartId = cartIdServiceModule.getCartId(),
+			cartId = if AXAddAttributionToCheckoutCartPurchases then "MIS_" .. cartIdServiceModule.getCartId() else cartIdServiceModule.getCartId(),
 			action = p5,
 			itemId = p4.itemId,
 			itemType = unifiedEventLogEnumsModule.MarketplaceUnifiedItemType.LOOK

@@ -78,12 +78,15 @@ Authentication.AccountSwitch.Action.SwitchAccount,Trocar de conta
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Acesso rápido
 Authentication.Login.Action.QuickSignIn,
+Authentication.Login.Action.Save,Salvar
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Saia da Roblox para mudar de conta para {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Use uma conta Roblox diferente
 Authentication.Login.Error.PasskeyOnlyAccount,Sua conta só tem uma chave de acesso configurada para entrar. Tente entrar com sua chave de acesso ou recupere sua conta.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Não é possível verificar a conta da plataforma. Tente novamente mais tarde.
 Authentication.Login.Heading.IncompatibleAccounts,Contas Incompatíveis
+Authentication.Login.Label.Email,E-mail
 Authentication.Login.Label.LearnMore,Saiba mais
+Authentication.Login.Label.Username,Nome de usuário
 Authentication.Login.LinkIllegalChildAccountLinking,Não foi possível vincular esta conta Roblox a uma conta infantil do Xbox. Tente usar outra conta ou verifique suas configurações.
 Authentication.Login.Response.AlreadyLinked,Esta conta Roblox já está vinculada a uma conta para a {platform}. Tente fazer login com uma conta Roblox diferente.
 Authentication.Login.Response.IncorrectEmailOrPassword,E-mail ou senha incorretos.
@@ -101,12 +104,57 @@ Authentication.Login.Response.SomethingWentWrong,
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,Algo deu errado. Tente outra maneira de entrar.
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Seu e-mail não foi verificado. Entre com seu nome de usuário.
 Authentication.Login.WeChat.AntiAddictionText,"Boicote experiências ruins, recuse experiências pirateadas. Saiba se defender e lidar com fraudes. Participar de experiências é bom para o cérebro, mas passar tempo demais nelas pode prejudicar sua saúde. Administre bem o seu tempo e desfrute de um estilo de vida saudável."
+Authentication.SignUp.Action.ApplyOnNextRespawn,Aplicar na próxima regeneração
+Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ExitModalLeave,Sair
+Authentication.SignUp.Action.RespawnNow,Regenerar agora
+Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Tente fazer login novamente
 Authentication.SignUp.Description.AccountAlreadyLinked,Sua conta para a {platformAccountName} já está vinculada a uma conta Roblox. Tente iniciar a sessão novamente.
+Authentication.SignUp.Description.BirthdayHint,Inserir data
+Authentication.SignUp.Description.Try,Testar
+Authentication.SignUp.Description.UsernameChanged,"Tudo pronto! Sua conta está pronta e vinculada a {platform}. Renasça agora para ver seu nome de usuário atualizado no jogo, ou ele será aplicado na próxima vez."
+Authentication.SignUp.Description.UsernameUnchanged,Você entrou! Sua conta está pronta e vinculada a {platform}. Converse com amigos e jogue milhões de jogos da Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Sua conta Roblox será vinculada à sua conta para a {platform}. Você pode desvincular sua conta a partir das configurações a qualquer momento. Pode haver um período de espera antes de você poder vincular outra conta para a {platform}. Ao clicar em {ctaButton}, você concorda com os Termos de Uso, incluindo a cláusula de arbitragem e você entende e aceita a Política de Privacidade."
+Authentication.SignUp.Header.SetUpYourRobloxAccount,Configure sua conta Roblox
 Authentication.SignUp.Heading.CountryCodeSelector,Selecione o país
 Authentication.SignUp.Heading.RetryLogIn,Tentar iniciar a sessão novamente
+Authentication.SignUp.Label.Birthday,Data de nascimento
+Authentication.SignUp.Label.Continue,
+Authentication.SignUp.Label.Day,Dia
+Authentication.SignUp.Label.EnterYourEmail,Digite seu e-mail
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,Você precisa ter a idade mínima exigida para jogar esta experiência
+Authentication.SignUp.Label.ErrorsWithPassword,Há problemas na senha.
+Authentication.SignUp.Label.ErrorsWithUsername,Há problemas no nome de usuário.
+Authentication.SignUp.Label.ExitModalSubtitle,"Sua conta está quase pronta. Se você sair, perderá seu progresso."
+Authentication.SignUp.Label.ExitModalTitle,Você está saindo da criação de conta?
+Authentication.SignUp.Label.Gender,Gênero
+Authentication.SignUp.Label.GenderFemale,Feminino
+Authentication.SignUp.Label.GenderMale,Masculino
+Authentication.SignUp.Label.Month,Mês
+Authentication.SignUp.Label.PasswordError1,Contém pelo menos 8 caracteres
+Authentication.SignUp.Label.PasswordError2,Não é igual ao nome de usuário
+Authentication.SignUp.Label.PasswordError2.V2,
+Authentication.SignUp.Label.PasswordError3,Não é uma senha simples
+Authentication.SignUp.Label.PasswordError3.V2,
+Authentication.SignUp.Label.PasswordPlaceholder,Mínimo de 8 caracteres
+Authentication.SignUp.Label.SelectBirthdaySentenceCase,Selecione a data de nascimento
+Authentication.SignUp.Label.UsernameError1,"Contém apenas letras, números e _"
+Authentication.SignUp.Label.UsernameError2,Contém entre 3 e 20 caracteres
+Authentication.SignUp.Label.UsernameError3,Não está sendo usado
+Authentication.SignUp.Label.UsernameError4,É apropriado para Roblox
+Authentication.SignUp.Label.UsernameError5,Não começa ou termina com _
+Authentication.SignUp.Label.UsernameError6,Contém no máximo um _
+Authentication.SignUp.Label.UsernameError7,Não contém informações pessoais
+Authentication.SignUp.Label.Year,Ano
+Authentication.SignUp.Message.Username.NoRealNameUse,Não use o seu nome real
+Authentication.SignUp.PasswordErrorLength,Tem entre 8 e 200 caracteres
+Authentication.SignUp.Response.BirthdayMustBeSetFirst,A data de nascimento deve ser definida primeiro.
 Authentication.SignUp.Response.ErrorTryAgain,
+Authentication.SignUp.Response.InvalidBirthday,Data de nascimento inválida.
+Authentication.SignUp.Response.InvalidEmail,Endereço de e-mail inválido.
+Authentication.SignUp.Response.UsernameMustBeSetFirst,O nome de usuário deve ser definido primeiro.
+Authentication.SignUp.Subtitle.YourProgressCarriesOver,Seu progresso é transferido quando você conclui a configuração.
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,A verificação em duas etapas é obrigatória para fazer mais transações. Vá em Configurações > Segurança para completar a verificação em duas etapas.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Tentativas excessivas. Tente novamente mais tarde.
@@ -292,7 +340,7 @@ CommonUI.Controls.Action.Confirm,Confirmar
 CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,Pronto
 CommonUI.Controls.Action.Next,Próximo
-CommonUI.Controls.Action.OK,OK
+CommonUI.Controls.Action.OK,
 CommonUI.Controls.Action.Refresh,Atualizar
 CommonUI.Controls.Action.ResetAll,Redefinir tudo
 CommonUI.Controls.Action.Search,Pesquisar
@@ -305,7 +353,7 @@ CommonUI.Controls.Label.April,Abril
 CommonUI.Controls.Label.AprilAbbreviated,Abr.
 CommonUI.Controls.Label.August,Agosto
 CommonUI.Controls.Label.AugustAbbreviated,Ago.
-CommonUI.Controls.Label.Day,Dia
+CommonUI.Controls.Label.Day,
 CommonUI.Controls.Label.December,Dezembro
 CommonUI.Controls.Label.DecemberAbbreviated,Dez.
 CommonUI.Controls.Label.February,Fevereiro
@@ -347,7 +395,7 @@ CommonUI.Controls.Label.Tuesday,Terça-feira
 CommonUI.Controls.Label.TuesdayAbbreviated,Ter
 CommonUI.Controls.Label.Wednesday,Quarta-feira
 CommonUI.Controls.Label.WednesdayAbbreviated,Qua
-CommonUI.Controls.Label.Year,Ano
+CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,Nenhum resultado encontrado
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Continue,
@@ -412,6 +460,7 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,Descartar
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,Redefinir
+CommonUI.Messages.Label.Password,Senha
 CommonUI.Messages.Response.NoResults,Nenhum resultado
 CommonUI.Messages.Response.PageError,Erro ao carregar página
 CommonUI.Messages.Response.SomethingWentWrong,
@@ -599,7 +648,7 @@ CoreScripts.FTUX.Label.SideSheetUpdate,O menu ainda contém todos os seus recurs
 CoreScripts.FTUX.Label.SocialOnboarding,"Acesse facilmente seus recursos sociais na barra superior, incluindo o bate-papo."
 CoreScripts.Feedback.EntryPoint.ButtonText,Dar feedback
 CoreScripts.Feedback.EntryPoint.OptionText,Dar feedback de tradução
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Sair
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
 CoreScripts.Feedback.FeedbackBar.HelpButton,Ajuda
 CoreScripts.Feedback.FeedbackBar.MainLabel,
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Adicione comentários abaixo
@@ -1297,7 +1346,7 @@ Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Restaurar último avatar salvo
 Feature.Avatar.Action.Revert,Reverter
 Feature.Avatar.Action.Rotate,
-Feature.Avatar.Action.Save,Salvar
+Feature.Avatar.Action.Save,
 Feature.Avatar.Action.SaveAsNew,Salvar como novo
 Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,Selecionar múltiplos itens
@@ -2424,7 +2473,7 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,Vender
 Feature.Catalog.Action.ShareVia,Compartilhar via...
 Feature.Catalog.Action.Submit,
-Feature.Catalog.Action.Try,Testar
+Feature.Catalog.Action.Try,
 Feature.Catalog.Action.Upgrade,Melhorar
 Feature.Catalog.Action.ViewDetailsPage,Visualizar página de detalhes
 Feature.Catalog.Action.ViewExperienceDetails,Ver detalhes da experiência
@@ -2668,7 +2717,7 @@ Feature.Catalog.Label.Trending,Tendências
 Feature.Catalog.Label.TryOns,Combinações
 Feature.Catalog.Label.TryOnsMultiple,Combinações ({numItems})
 Feature.Catalog.Label.Unlimited,Ilimitado
-Feature.Catalog.Label.Username,Nome de usuário
+Feature.Catalog.Label.Username,
 Feature.Catalog.Label.UsingBundleParts,Usando {count} pacote de peças
 Feature.Catalog.Label.WaistAccessories,Acessórios de cintura
 Feature.Catalog.Label.WearAfterPurchase,Usar item após a compra

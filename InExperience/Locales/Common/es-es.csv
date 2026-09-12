@@ -78,12 +78,15 @@ Authentication.AccountSwitch.Action.SwitchAccount,Cambiar cuentas
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Inicio de sesión rápido
 Authentication.Login.Action.QuickSignIn,
+Authentication.Login.Action.Save,Guardar
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Sal de Roblox para cambiar la cuenta de {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Usar una cuenta Roblox diferente
 Authentication.Login.Error.PasskeyOnlyAccount,Tu cuenta solo tiene una llave de acceso configurada para iniciar sesión. Intenta iniciar sesión con tu llave o recupera la cuenta.
 Authentication.Login.Error.PlatformAccountConnectionFailure,No se puede verificar la cuenta de la plataforma. Inténtalo de nuevo más tarde.
 Authentication.Login.Heading.IncompatibleAccounts,Cuentas incompatibles
+Authentication.Login.Label.Email,Correo electrónico
 Authentication.Login.Label.LearnMore,Más información
+Authentication.Login.Label.Username,Nombre de usuario
 Authentication.Login.LinkIllegalChildAccountLinking,Esta cuenta de Roblox no se pudo vincular a una cuenta infantil de Xbox. Inténtalo con otra cuenta o revisa tu configuración.
 Authentication.Login.Response.AlreadyLinked,Esta cuenta de Roblox ya está vinculada a una cuenta diferente en {platform}. Intenta iniciar sesión con una cuenta Roblox diferente.
 Authentication.Login.Response.IncorrectEmailOrPassword,Correo electrónico o contraseña incorrectos.
@@ -101,17 +104,62 @@ Authentication.Login.Response.SomethingWentWrong,Algo salió mal. Inténtalo de 
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,Algo salió mal. Intenta otra forma de iniciar sesión.
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Tu correo electrónico no se ha verificado. Inicia sesión con tu nombre de usuario.
 Authentication.Login.WeChat.AntiAddictionText,"Boicotea experiencias con contenido inapropiado y di no a la piratería. Protégete y no dejes que te engañen. Visitar experiencias es bueno, pero visitarlas por demasiado tiempo puede perjudicar tu salud. Gestiona bien tu tiempo libre para poder vivir una vida saludable."
+Authentication.SignUp.Action.ApplyOnNextRespawn,Aplicar en la próxima regeneración
+Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ExitModalLeave,Salir
+Authentication.SignUp.Action.RespawnNow,Reaparecer ahora
+Authentication.SignUp.Button.OKCaptialized,Aceptar
 Authentication.SignUp.Button.RetryLogIn,Volver a iniciar sesión
 Authentication.SignUp.Description.AccountAlreadyLinked,Tu cuenta {platformAccountName} ya está vinculada a una cuenta de Roblox. Intenta iniciar sesión de nuevo.
+Authentication.SignUp.Description.BirthdayHint,Ingresa la fecha
+Authentication.SignUp.Description.Try,Probar
+Authentication.SignUp.Description.UsernameChanged,"¡Todo listo! Tu cuenta está lista y vinculada a {platform}. Reaparece ahora para ver tu nombre de usuario actualizado en el juego, o se aplicará la próxima vez."
+Authentication.SignUp.Description.UsernameUnchanged,¡Ya estás dentro! Tu cuenta está lista y vinculada a {platform}. Chatea con amistades y juega millones de juegos de Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Tu cuenta Roblox se vinculará a tu cuenta en {platform}. Puedes desvincularla en cualquier momento desde la pantalla de Configuración. Puede haber un tiempo de enfriamiento antes de poder vincularla a otra cuenta en {platform}. Al hacer clic en {ctaButton}, aceptas los Términos de uso, incluida la cláusula de arbitraje, y la Política de privacidad."
+Authentication.SignUp.Header.SetUpYourRobloxAccount,Configura tu cuenta de Roblox
 Authentication.SignUp.Heading.CountryCodeSelector,Selecciona el país
 Authentication.SignUp.Heading.RetryLogIn,
+Authentication.SignUp.Label.Birthday,Fecha de nacimiento
+Authentication.SignUp.Label.Continue,Continuar
+Authentication.SignUp.Label.Day,Día
+Authentication.SignUp.Label.EnterYourEmail,Ingresa tu correo electrónico
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,Debes ser mayor para jugar este juego
+Authentication.SignUp.Label.ErrorsWithPassword,Hay errores en la contraseña.
+Authentication.SignUp.Label.ErrorsWithUsername,Hay errores en el nombre de usuario.
+Authentication.SignUp.Label.ExitModalSubtitle,"Tu cuenta casi está lista. Si te vas, perderás tu progreso."
+Authentication.SignUp.Label.ExitModalTitle,¿Salir de la creación de cuenta?
+Authentication.SignUp.Label.Gender,Sexo
+Authentication.SignUp.Label.GenderFemale,Mujer
+Authentication.SignUp.Label.GenderMale,Hombre
+Authentication.SignUp.Label.Month,Mes
+Authentication.SignUp.Label.PasswordError1,Contiene un mínimo de 8 caracteres
+Authentication.SignUp.Label.PasswordError2,No coincide con tu nombre de usuario
+Authentication.SignUp.Label.PasswordError2.V2,No coincide con el nombre de usuario
+Authentication.SignUp.Label.PasswordError3,No es una contraseña sencilla
+Authentication.SignUp.Label.PasswordError3.V2,No es cualquier contraseña
+Authentication.SignUp.Label.PasswordPlaceholder,Por lo menos 8 caracteres
+Authentication.SignUp.Label.SelectBirthdaySentenceCase,Selecciona fecha de nacimiento
+Authentication.SignUp.Label.UsernameError1,"Solo puede contener letras, números y _"
+Authentication.SignUp.Label.UsernameError2,Entre 3 y 20 caracteres
+Authentication.SignUp.Label.UsernameError3,No está en uso
+Authentication.SignUp.Label.UsernameError4,Es adecuado para Roblox
+Authentication.SignUp.Label.UsernameError5,No empieza ni termina con _
+Authentication.SignUp.Label.UsernameError6,Solo puede contener un _
+Authentication.SignUp.Label.UsernameError7,No contiene información personal
+Authentication.SignUp.Label.Year,Año
+Authentication.SignUp.Message.Username.NoRealNameUse,No utilices tu nombre real
+Authentication.SignUp.PasswordErrorLength,Tiene entre 8 y 200 caracteres
+Authentication.SignUp.Response.BirthdayMustBeSetFirst,Antes debes determinar tu fecha de nacimiento.
 Authentication.SignUp.Response.ErrorTryAgain,
+Authentication.SignUp.Response.InvalidBirthday,Fecha de nacimiento no válida.
+Authentication.SignUp.Response.InvalidEmail,Dirección de correo electrónico no válida.
+Authentication.SignUp.Response.UsernameMustBeSetFirst,Antes debes determinar el nombre de usuario.
+Authentication.SignUp.Subtitle.YourProgressCarriesOver,Tu progreso se transfiere cuando completas la configuración.
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,"Para realizar transacciones adicionales, se requiere activar la verificación en dos pasos. Ve a Configuración > Seguridad para completar la verificación en dos pasos."
 Authentication.TwoStepVerification.Response.TooManyAttempts,Demasiados intentos. Inténtalo de nuevo más tarde.
 Authentication.TwoStepVerification.Title.VerificationRequired,Verificación obligatoria
-AvatarGeneration.SelfieConsent.AgreeButton,Aceptar
+AvatarGeneration.SelfieConsent.AgreeButton,
 AvatarGeneration.SelfieConsent.BodyTextLink,"Al cargar una imagen, afirmas que tienes derecho a usarla y das tu consentimiento para que Roblox recopile, use y comparta una representación generada por IA con los creadores para avatares."
 AvatarGeneration.SelfieConsent.CancelButton,
 AvatarGeneration.SelfieConsent.PrivacyLinkText,
@@ -290,7 +338,7 @@ CommonUI.Controls.Action.Apply,Aplicar
 CommonUI.Controls.Action.Back,Volver
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.Confirm,Confirmar
-CommonUI.Controls.Action.Continue,Continuar
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,Hecho
 CommonUI.Controls.Action.Next,Siguiente
 CommonUI.Controls.Action.OK,
@@ -306,7 +354,7 @@ CommonUI.Controls.Label.April,Abril
 CommonUI.Controls.Label.AprilAbbreviated,Abr.
 CommonUI.Controls.Label.August,Agosto
 CommonUI.Controls.Label.AugustAbbreviated,Ago.
-CommonUI.Controls.Label.Day,Día
+CommonUI.Controls.Label.Day,
 CommonUI.Controls.Label.December,Diciembre
 CommonUI.Controls.Label.DecemberAbbreviated,Dic.
 CommonUI.Controls.Label.February,Febrero
@@ -348,7 +396,7 @@ CommonUI.Controls.Label.Tuesday,Martes
 CommonUI.Controls.Label.TuesdayAbbreviated,Mar
 CommonUI.Controls.Label.Wednesday,Miércoles
 CommonUI.Controls.Label.WednesdayAbbreviated,Mié
-CommonUI.Controls.Label.Year,Año
+CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,Sin resultados
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Continue,
@@ -413,6 +461,7 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,Descartar
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,Restablecer
+CommonUI.Messages.Label.Password,Contraseña
 CommonUI.Messages.Response.NoResults,
 CommonUI.Messages.Response.PageError,Error al cargar la página
 CommonUI.Messages.Response.SomethingWentWrong,Algo salió mal.
@@ -600,7 +649,7 @@ CoreScripts.FTUX.Label.SideSheetUpdate,El menú aún contiene todas tus funcione
 CoreScripts.FTUX.Label.SocialOnboarding,"Accede fácilmente a tus funciones sociales desde la barra superior, incluido el Chat."
 CoreScripts.Feedback.EntryPoint.ButtonText,Enviar comentarios
 CoreScripts.Feedback.EntryPoint.OptionText,Enviar comentarios de traducción
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Salir
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
 CoreScripts.Feedback.FeedbackBar.HelpButton,Ayuda
 CoreScripts.Feedback.FeedbackBar.MainLabel,
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Escribe cualquier comentario adicional a continuación
@@ -1278,7 +1327,7 @@ Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,Editar foto de perfil
 Feature.Avatar.Action.GoBack,
 Feature.Avatar.Action.GotIt,Entendido
-Feature.Avatar.Action.Keep,Guardar
+Feature.Avatar.Action.Keep,
 Feature.Avatar.Action.Leave,
 Feature.Avatar.Action.ManageCharacters,Gestionar personajes
 Feature.Avatar.Action.ManageMakeupLooks,Administrar estilos
@@ -1312,7 +1361,7 @@ Feature.Avatar.Action.ShowMore,
 Feature.Avatar.Action.SlotEmote,Insertar emote en el espacio
 Feature.Avatar.Action.Stay,Quedarse
 Feature.Avatar.Action.Switch,Cambiar
-Feature.Avatar.Action.TryOn,Probar
+Feature.Avatar.Action.TryOn,
 Feature.Avatar.Action.Unequip,Quitar
 Feature.Avatar.Action.Unselect,
 Feature.Avatar.Action.UnslotEmote,Quitar emote del espacio
@@ -3735,7 +3784,7 @@ Feature.Profile.Heading.ProfileFrame,Marco del perfil
 Feature.Profile.Heading.ProfilePictureSaved,Imagen de perfil guardada correctamente
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,
-Feature.Profile.Heading.Username,Nombre de usuario
+Feature.Profile.Heading.Username,
 Feature.Profile.Heading.UsernameUpdated,Nombre de usuario actualizado
 Feature.Profile.Label.AboutDetailsHeading,Acerca de {name}
 Feature.Profile.Label.AboutPlaceholder,Di algo...

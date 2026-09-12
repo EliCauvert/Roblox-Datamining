@@ -570,7 +570,7 @@ if isSideSheetEnabledModule then
 						return
 					end
 				end
-			elseif var7.sideSheetPlacement == sideSheetPlacement.FixedFooterTop and (fFlagEnableSideSheetWidgets or isPioneerLaunch()) then
+			elseif var7.sideSheetPlacement == sideSheetPlacement.ScrollableContentBottom and (fFlagEnableSideSheetWidgets or isPioneerLaunch()) then
 				local var9 = self:createWidgetProps(p5, var6)
 				
 				if var9 then
@@ -596,8 +596,8 @@ if isSideSheetEnabledModule then
 			aboveFoldIntegrations = t,
 			belowFoldIntegrations = t_2,
 			sessionActionIntegrations = t_3,
-			scrollableWidgetIntegrations = t_4,
-			fixedFooterWidgetIntegrations = t_5
+			scrollableContentTopWidgetIntegrations = t_4,
+			scrollableContentBottomWidgetIntegrations = t_5
 		})
 	end
 end
