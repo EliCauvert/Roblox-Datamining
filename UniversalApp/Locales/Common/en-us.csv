@@ -4833,6 +4833,7 @@ Feature.ReportAbuse.ProblemDescription.Swearing,"Swearing, cursing, or profanity
 Feature.ReportAbuse.ProblemDescription.Violence,Extreme violence or gore
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Continue your report
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Thank you for starting your IP Infringement report
+Feature.RobloxSubscription.Action.JoinIn,Join in {time}
 Feature.RobloxSubscription.Action.Subscribe,Subscribe
 Feature.RobloxSubscription.Action.TryItForFree,Try it for free
 Feature.RobloxSubscription.Body.AlreadySubscribed,Your Plus subscription already provides in-game benefits.
@@ -4842,6 +4843,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,Verify your age with an age
 Feature.RobloxSubscription.Description.Benefit.Customize,Customize with profile frames and app themes
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% off first 60 days, then 20% off items and avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,More fun for less Robux. Subscribe to Roblox Plus.
+Feature.RobloxSubscription.Description.JoinEarly,Join early with Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Free private servers
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4860,6 +4862,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Good news
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Get Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus unavailable here
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,You can join the event before everybody else.
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Early access with Plus
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Account status, violations, and appeals"
 Feature.Schools.Action.AlreadyGraduated,I've already graduated
 Feature.Schools.Action.CantFindSchool,Can't find your school?
