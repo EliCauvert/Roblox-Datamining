@@ -207,7 +207,6 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,تسجيل الدخ�
 Authentication.AccountSwitch.Action.SwitchAccount,تبديل الحسابات
 Authentication.AccountSwitch.Description.AccountLimit.2,لقد وصلت إلى الحد الأقصى المسموح به لعدد الحسابات. لإضافة حساب جديد، يُرجى إزالة أحد الحسابات الحالية أولاً.
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,المتابعة باسم {username} ستؤدي إلى تسجيل خروجك من حساباتك الأخرى.
-Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,ستؤدي المتابعة إلى تسجيل خروجك من حساباتك الأخرى.
 Authentication.AccountSwitch.Description.LogoutConfirmation,يتعين عليك تسجيل الخروج من حسابات Roblox الأخرى على هذا الجهاز قبل إضافة حساب جديد
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,الرجاء إعادة المحاولة لاحقًا
 Authentication.AccountSwitch.Description.RemoveAllAccounts,بمجرد تسجيل الخروج، ستتم إزالة كل الحسابات من هذا الجهاز.
@@ -3599,7 +3598,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,صديق موثوق جديد
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,إضافة صديق موثوق
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,إضافة أصدقاء موثوق بهم
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
-Feature.Friends.TrustedFriend.Label.Title,صديق موثوق
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,أصبح {name} الآن من أصدقائك الموثوقين
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,تم إزالة الصديق الموثوق
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,تم إرسال طلب إضافة كصديق موثوق
@@ -4598,7 +4596,6 @@ Feature.Profile.Action.ShareProfile,مشاركة الملف الشخصي
 Feature.Profile.Action.ShareProfileLink,مشاركة رابط الملف الشخصي
 Feature.Profile.Action.SwitchAvatar,تبديل الأفاتار
 Feature.Profile.Action.ToQRCode,
-Feature.Profile.Action.Trade,التبادل
 Feature.Profile.Action.UserBlocked,المستخدم محظور
 Feature.Profile.Action.ViewFullProfile,عرض الملف الشخصي بأكمله
 Feature.Profile.Action.ViewProfile,

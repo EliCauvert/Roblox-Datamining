@@ -224,7 +224,6 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,既存のアカウ�
 Authentication.AccountSwitch.Action.SwitchAccount,アカウントを切り替える
 Authentication.AccountSwitch.Description.AccountLimit.2,アカウント数の上限に達しました。新しいアカウントを追加するには、まずアカウントを削除してください。
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,{username}として続行すると、他のアカウントからログアウトされます。
-Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,続けると、他のアカウントからログアウトされます。
 Authentication.AccountSwitch.Description.LogoutConfirmation,新しいアカウントを追加する前に、このデバイスで他のRobloxアカウントからログアウトする必要があります
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,後でもう一度お試しください
 Authentication.AccountSwitch.Description.RemoveAllAccounts,ログアウトすると、すべてのアカウントがこのデバイスから削除されます。
@@ -1709,15 +1708,6 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,詳細
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus限定
 Feature.Avatar.BackgroundGeneration.Label.Name,名前
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,（今日の残数）
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,（この1時間の残数）
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,（今月の残数）
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,あと{count}個の背景
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,時間
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,分
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,リセットまであと
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,作成したい背景を入力…
 Feature.Avatar.BackgroundGeneration.Status.Generating,背景を生成しています…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,背景を準備しています…
@@ -1836,7 +1826,6 @@ Feature.Avatar.Label.ClassicTShirts,定番のTシャツ
 Feature.Avatar.Label.ClearByCategory,{category} を外す
 Feature.Avatar.Label.Climb,登る
 Feature.Avatar.Label.ClimbAnimations,登るアニメ
-Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,名前に使用できるのは、文字、半角英数字、およびスペースだけです。
 Feature.Avatar.Label.CountSelected,{itemCount} 点を選択済み
 Feature.Avatar.Label.Creations,作品
@@ -1948,7 +1937,6 @@ Feature.Avatar.Label.RecentlyWorn,最近の装備
 Feature.Avatar.Label.RemoveFromSetBody,これらのアバターはこのセットから削除されます。アバター自体は削除されません。
 Feature.Avatar.Label.Replace,置き換え
 Feature.Avatar.Label.ResetToNewCharacter,新しいキャラクターに切りかえています。すべての衣装アイテムをリセットしますか。それともキープしますか。
-Feature.Avatar.Label.ResetTryOn,現在のアバターにリセット
 Feature.Avatar.Label.Right,右
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,
@@ -2004,7 +1992,6 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,メイクの重ね塗り
 Feature.Avatar.Label.Title.ManageAvatars,アバター管理
-Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,
 Feature.Avatar.Label.Title.ProfilePhoto,プロフィール写真
 Feature.Avatar.Label.Title.ReplaceAvatar,アバターを置き換え
@@ -2144,7 +2131,6 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,移動
-Feature.Avatar.Title.MyAvatar,
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,カスタマイズ機能をリニューアル！
 Feature.Avatar.Title.NewToMarketplaceItemWidget,マーケットプレイスでの新着
@@ -3632,7 +3618,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,新しい信頼する友達
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,信頼する友達を追加
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,「信頼できる友達」を追加
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,信頼できる友達に追加
-Feature.Friends.TrustedFriend.Label.Title,信頼する友達
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}さんが信頼する友達になりました
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信頼する友達が削除されました
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,信頼する友達リクエストが送信されました
@@ -4629,7 +4614,6 @@ Feature.Profile.Action.ShareProfile,プロフィールを共有
 Feature.Profile.Action.ShareProfileLink,プロフィールのリンクを共有
 Feature.Profile.Action.SwitchAvatar,アバターを切り替え
 Feature.Profile.Action.ToQRCode,
-Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,ユーザーがブロックされています
 Feature.Profile.Action.ViewFullProfile,プロフィール全体を表示
 Feature.Profile.Action.ViewProfile,プロフィールを表示

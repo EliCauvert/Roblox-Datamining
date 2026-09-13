@@ -224,7 +224,6 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,Iniciar sesión en u
 Authentication.AccountSwitch.Action.SwitchAccount,Cambiar cuentas
 Authentication.AccountSwitch.Description.AccountLimit.2,"Alcanzaste el límite de cuentas. Para añadir una nueva, primero elimina una existente."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,"Si continúas como {username}, se cerrarán tus otras cuentas."
-Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,"Si continúas, se cerrarán tus otras cuentas."
 Authentication.AccountSwitch.Description.LogoutConfirmation,Necesitarás cerrar sesión en tus otras cuentas de Roblox en este dispositivo antes de añadir una cuenta nueva
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Inténtalo de nuevo más tarde
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Una vez que cierres sesión, todas las cuentas se eliminarán de este dispositivo."
@@ -2578,8 +2577,6 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Aún no hay historial de versiones.
 Feature.Build.Message.OneTaskCompleted,1 tarea completada
 Feature.Build.Message.OutOfBuildUsage,Ya no puedes usar la compilación. Consulta tus opciones para usar Robux y seguir creando.
-Feature.Build.Message.PlaytestInviteSendFailedBody,No pudiste enviar un enlace de invitación de chat a los siguientes usuarios:
-Feature.Build.Message.PlaytestInviteSendFailedHint,Usa el botón Compartir para obtener un enlace.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} de {MAX_INVITES} evaluadores de juego añadidos
 Feature.Build.Message.PrivatePlaytestInvite,{username} te invitó a una prueba de juego privada {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Tu juego se publicó, pero no se pudo hacer público. Inténtalo de nuevo."
@@ -2645,7 +2642,6 @@ Feature.Build.Title.GetUsers,Obtener usuarios
 Feature.Build.Title.ManagedPricingAcknowledgement,¿Quieres activar Precios gestionados?
 Feature.Build.Title.NoMonetizationProducts,Comienza a ganar en tu juego
 Feature.Build.Title.NoRobuxForUsage,No quedan Robux para el uso de la compilación
-Feature.Build.Title.PlaytestInviteSendFailed,No se pudieron enviar las invitaciones
 Feature.Build.Title.Playtesters,Evaluadores de juego
 Feature.Build.Title.PlaytestersOnlyPlay,Solo los evaluadores de juego pueden jugar
 Feature.Build.Title.PromoteGame,Promociona tu juego
@@ -3620,7 +3616,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Nuevo amigo de confianza
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Agregar como amistad de confianza
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Añadir amigos de confianza
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
-Feature.Friends.TrustedFriend.Label.Title,Amistad de confianza
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} ahora es una amistad de confianza
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Amistad de confianza eliminada
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Solicitud para ser amistad de confianza enviada
@@ -4059,7 +4054,7 @@ Feature.Moments.Label.FeedFailedToLoad,No se pudo cargar el feed
 Feature.Moments.Label.FeedMyMoments,Mis Momentos
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,Cómo usar las Capturas
-Feature.Moments.Label.LinkCopied,Enlace copiado
+Feature.Moments.Label.LinkCopied,Enlace copiado.
 Feature.Moments.Label.LinkCopyFailed,Error al copiar el enlace.
 Feature.Moments.Label.ModeratedRodeoBody,"Eliminamos este Momento porque va en contra de nuestras Normas de la comunidad. Para que tus Momentos sigan siendo visibles, asegúrate de conocer y seguir las reglas."
 Feature.Moments.Label.MomentDeletedBody,
@@ -4619,7 +4614,6 @@ Feature.Profile.Action.ShareProfile,Compartir perfil
 Feature.Profile.Action.ShareProfileLink,Compartir enlace de perfil
 Feature.Profile.Action.SwitchAvatar,Cambiar avatar
 Feature.Profile.Action.ToQRCode,
-Feature.Profile.Action.Trade,Intercambiar
 Feature.Profile.Action.UserBlocked,Usuario bloqueado
 Feature.Profile.Action.ViewFullProfile,Ver perfil completo
 Feature.Profile.Action.ViewProfile,

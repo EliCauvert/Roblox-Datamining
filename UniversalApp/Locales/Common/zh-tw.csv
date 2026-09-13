@@ -223,7 +223,6 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,登入現有帳號
 Authentication.AccountSwitch.Action.SwitchAccount,切換帳戶
 Authentication.AccountSwitch.Description.AccountLimit.2,已達到帳號數量上限。如要新增帳號，請先移除現有帳號。
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,繼續以 {username} 的身分使用，系統會將你登出其他帳號。
-Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,繼續操作，系統會將你登出其他帳號。
 Authentication.AccountSwitch.Description.LogoutConfirmation,"在添加新帳號之前,您必須在此設備上登出其他 Roblox 帳號"
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,請稍後再試
 Authentication.AccountSwitch.Description.RemoveAllAccounts,登出後，所有帳號將從此裝置中移除。
@@ -3631,7 +3630,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,新的信任好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,新增信任的好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
-Feature.Friends.TrustedFriend.Label.Title,信任的好友
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} 現已成為信任的好友
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信任的好友已移除
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,已傳送信任的好友邀請
@@ -4630,7 +4628,6 @@ Feature.Profile.Action.ShareProfile,分享個人檔案
 Feature.Profile.Action.ShareProfileLink,分享個人檔案連結
 Feature.Profile.Action.SwitchAvatar,切換虛擬人偶
 Feature.Profile.Action.ToQRCode,
-Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,已封鎖使用者
 Feature.Profile.Action.ViewFullProfile,檢視完整個人檔案
 Feature.Profile.Action.ViewProfile,

@@ -224,7 +224,6 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,Zaloguj się na istn
 Authentication.AccountSwitch.Action.SwitchAccount,Przełącz konta
 Authentication.AccountSwitch.Description.AccountLimit.2,"Osiągnięto limit kont. Usuń jedno z nich, aby dodać nowe."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,Kontynuowanie jako {username} spowoduje wylogowanie z pozostałych kont.
-Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,Kontynuowanie spowoduje wylogowanie z pozostałych kont.
 Authentication.AccountSwitch.Description.LogoutConfirmation,Przed dodaniem nowego konta konieczne będzie wylogowanie się z pozostałych kont na platformie Roblox na tym urządzeniu
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Spróbuj ponownie później
 Authentication.AccountSwitch.Description.RemoveAllAccounts,Po wylogowaniu wszystkie konta zostaną usunięte z tego urządzenia.
@@ -3632,7 +3631,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Nowy zaufany znajomy
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Dodaj zaufanych znajomych
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
-Feature.Friends.TrustedFriend.Label.Title,Zaufany znajomy
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} jest teraz zaufanym znajomym
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Wysłano prośbę o dodanie do zaufanych znajomych
@@ -4631,7 +4629,6 @@ Feature.Profile.Action.ShareProfile,Udostępnij profil
 Feature.Profile.Action.ShareProfileLink,Udostępnij link do profilu
 Feature.Profile.Action.SwitchAvatar,Przełącz awatara
 Feature.Profile.Action.ToQRCode,
-Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,Użytkownik zablokowany
 Feature.Profile.Action.ViewFullProfile,Wyświetl pełny profil
 Feature.Profile.Action.ViewProfile,

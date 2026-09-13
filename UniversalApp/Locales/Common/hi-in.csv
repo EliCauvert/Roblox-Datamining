@@ -207,7 +207,6 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,मौजूदा �
 Authentication.AccountSwitch.Action.SwitchAccount,अकाउंट बदलें
 Authentication.AccountSwitch.Description.AccountLimit.2,"आपकी अकाउंट लिमिट पूरी हो गई है. नया अकाउंट जोड़ने के लिए, पहले किसी मौजूदा अकाउंट को हटाना होगा."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,"{username} के तौर पर जारी रखने पर, आपको आपके अन्य अकाउंट से साइन आउट कर दिया जाएगा."
-Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,"जारी रखने पर, आपको आपके अन्य अकाउंट से साइन आउट कर दिया जाएगा."
 Authentication.AccountSwitch.Description.LogoutConfirmation,"नया अकाउंट जोड़ने से पहले, आपको इस डिवाइस पर अपने दूसरे Roblox अकाउंट से लॉग आउट करना होगा"
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,"बाद में, फिर से कोशिश करें"
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"साइन आउट करने के बाद, इस डिवाइस से सभी अकाउंट हटा दिए जाएँगे."
@@ -3612,7 +3611,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,नया भरोसेमं�
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,भरोसेमंद फ़्रेंड जोड़ें
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,भरोसेमंद दोस्त जोड़ें
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,भरोसेमंद फ़्रेंड्स जोड़ें
-Feature.Friends.TrustedFriend.Label.Title,भरोसेमंद फ़्रेंड
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} अब एक भरोसेमंद फ़्रेंड हैं
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,भरोसेमंद फ़्रेंड को हटाया गया
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,भरोसेमंद फ़्रेंड की रिक्वेस्ट भेजी गई
@@ -4611,7 +4609,6 @@ Feature.Profile.Action.ShareProfile,प्रोफ़ाइल शेयर क
 Feature.Profile.Action.ShareProfileLink,प्रोफ़ाइल लिंक शेयर करें
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,QR कोड शेयर करें
-Feature.Profile.Action.Trade,ट्रेड करें
 Feature.Profile.Action.UserBlocked,यूज़र को ब्लॉक किया गया
 Feature.Profile.Action.ViewFullProfile,पूरी प्रोफ़ाइल देखें
 Feature.Profile.Action.ViewProfile,

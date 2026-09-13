@@ -1,4 +1,4 @@
-﻿local _ = { cacheSize = 256 }
+﻿local _ = { cacheSize = 256, unicodeData = false }
 local tbl = setmetatable({}, { __mode = "k" })
 local t = {}
 local t_1 = {}
@@ -1653,7 +1653,7 @@ local t_9 = {
 local function tokenize_ptn(p30, p31)
 	-- upvalues: t_8 (ref), t_9 (ref), list_3 (ref), list_1 (ref), t_5 (ref), t_4 (ref), t_6 (ref), list_2 (ref), list (ref)
 	if p31.unicode then
-		return "USE_UNICODE_DATA has always been false, so you cannot also use the unicode flag"
+		return "options.unicodeData cannot be turned off while having unicode flag"
 	end
 	local var58 = 1
 	local n = p30.n
@@ -1820,7 +1820,7 @@ local function tokenize_ptn(p30, p31)
 											table.insert(t, t_6[var61] or t_5[var61] or var61)
 										end
 									end
-									return "USE_UNICODE_DATA in regexp has always been disabled. Do not use the flag \\p"
+									return "options.unicodeData cannot be turned off when using \\p"
 								elseif p30[var58 + 1] == 123 and p30[var58 + 2] == 85 and (p30[var58 + 3] == 43 and p31.unicode) then
 									var58 += 4
 									var62 = var58
@@ -2229,7 +2229,7 @@ local function tokenize_ptn(p30, p31)
 									table.insert(s, 1, if type(byteOffset) == "string" then { "class", byteOffset, false } else byteOffset or p30[var58])
 								end
 							end
-							return "USE_UNICODE_DATA in regexp has always been disabled. Do not use the flag \\p"
+							return "options.unicodeData cannot be turned off when using \\p"
 						elseif p31.ignoreCase and p30[var58] >= 97 and p30[var58] <= 122 then
 							table.insert(s, 1, p30[var58] - 32)
 						else

@@ -225,7 +225,6 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,기존 계정에 로
 Authentication.AccountSwitch.Action.SwitchAccount,계정 전환
 Authentication.AccountSwitch.Description.AccountLimit.2,계정 한도에 도달했습니다. 새 계정을 추가하려면 먼저 계정을 삭제하세요.
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,{username} 계정으로 계속 진행하면 다른 계정에서 로그아웃됩니다.
-Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,계속 진행하면 다른 계정에서 로그아웃됩니다.
 Authentication.AccountSwitch.Description.LogoutConfirmation,새 계정을 추가하려면 먼저 이 기기의 다른 Roblox 계정에서 로그아웃해야 합니다
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,나중에 다시 시도하세요
 Authentication.AccountSwitch.Description.RemoveAllAccounts,로그아웃하면 이 기기에서 모든 계정이 삭제됩니다.
@@ -3634,7 +3633,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,신뢰할 수 있는 새로운 �
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,신뢰할 수 있는 친구 추가하기
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,신뢰할 수 있는 친구 추가
-Feature.Friends.TrustedFriend.Label.Title,신뢰할 수 있는 친구
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} 님은 이제 신뢰할 수 있는 친구입니다
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,신뢰할 수 있는 친구에서 삭제함
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,신뢰할 수 있는 친구 요청을 보냄
@@ -4634,7 +4632,6 @@ Feature.Profile.Action.ShareProfile,프로필 공유
 Feature.Profile.Action.ShareProfileLink,프로필 링크 공유
 Feature.Profile.Action.SwitchAvatar,아바타 전환
 Feature.Profile.Action.ToQRCode,
-Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,사용자 차단됨
 Feature.Profile.Action.ViewFullProfile,전체 프로필 보기
 Feature.Profile.Action.ViewProfile,

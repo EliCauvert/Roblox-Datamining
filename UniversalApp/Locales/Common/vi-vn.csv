@@ -224,7 +224,6 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,Đăng nhập vào t
 Authentication.AccountSwitch.Action.SwitchAccount,Chuyển đổi tài khoản
 Authentication.AccountSwitch.Description.AccountLimit.2,"Bạn đã đạt giới hạn số lượng tài khoản. Để thêm tài khoản mới, vui lòng xóa bớt một tài khoản trước."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,"Nếu tiếp tục với tư cách {username}, bạn sẽ được đăng xuất khỏi các tài khoản khác."
-Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,"Nếu tiếp tục, bạn sẽ bị đăng xuất khỏi các tài khoản khác."
 Authentication.AccountSwitch.Description.LogoutConfirmation,Bạn sẽ cần đăng xuất khỏi các tài khoản Roblox khác trên thiết bị này trước khi thêm tài khoản mới
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Vui lòng thử lại sau
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Sau khi bạn đăng xuất, tất cả các tài khoản sẽ bị xóa khỏi thiết bị này."
@@ -2590,8 +2589,6 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Chưa có lịch sử phiên bản.
 Feature.Build.Message.OneTaskCompleted,Đã hoàn thành 1 nhiệm vụ
 Feature.Build.Message.OutOfBuildUsage,Bạn đã hết lượt sử dụng Build. Hãy xem các lựa chọn sử dụng Robux để tiếp tục sáng tạo.
-Feature.Build.Message.PlaytestInviteSendFailedBody,Bạn không thể gửi liên kết mời tham gia trò chuyện cho những người dùng sau:
-Feature.Build.Message.PlaytestInviteSendFailedHint,Vui lòng sử dụng nút Chia sẻ để lấy đường liên kết.
 Feature.Build.Message.PlaytestersAdded,Đã thêm {INVITED_COUNT} trên {MAX_INVITES} người chơi thử
 Feature.Build.Message.PrivatePlaytestInvite,{username} đã mời bạn chơi thử riêng tư {experienceName}
 Feature.Build.Message.PublicPublishFailed,Trò chơi của bạn đã được đăng nhưng chưa đăng công khai. Vui lòng thử lại.
@@ -2657,7 +2654,6 @@ Feature.Build.Title.GetUsers,Thu hút người dùng
 Feature.Build.Title.ManagedPricingAcknowledgement,Mở chế độ Giá được quản lý?
 Feature.Build.Title.NoMonetizationProducts,Bắt đầu kiếm tiền trong trò chơi của bạn
 Feature.Build.Title.NoRobuxForUsage,Không còn Robux để sử dụng Build
-Feature.Build.Title.PlaytestInviteSendFailed,Không gửi được lời mời
 Feature.Build.Title.Playtesters,Người chơi thử
 Feature.Build.Title.PlaytestersOnlyPlay,Chỉ người chơi thử mới có thể chơi
 Feature.Build.Title.PromoteGame,Quảng bá trò chơi của bạn
@@ -3632,7 +3628,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Bạn bè đáng tin cậy mới
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Thêm bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
-Feature.Friends.TrustedFriend.Label.Title,Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} đã trở thành bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Đã xóa Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Đã gửi yêu cầu trở thành bạn bè đáng tin cậy
@@ -4071,7 +4066,7 @@ Feature.Moments.Label.FeedFailedToLoad,Không tải được bản tin
 Feature.Moments.Label.FeedMyMoments,Khoảnh khắc của tôi
 Feature.Moments.Label.FeedTrending,Thịnh hành
 Feature.Moments.Label.HowToUseCaptureTitle,Cách dùng Ảnh chụp/video quay màn hình
-Feature.Moments.Label.LinkCopied,Đã sao chép đường liên kết
+Feature.Moments.Label.LinkCopied,Đã sao chép đường liên kết.
 Feature.Moments.Label.LinkCopyFailed,Không thể sao chép đường liên kết.
 Feature.Moments.Label.ModeratedRodeoBody,"Chúng tôi đã xóa Khoảnh khắc này do vi phạm Tiêu chuẩn cộng đồng của chúng tôi. Để Khoảnh khắc được hiển thị, bạn cần nắm rõ và tuân thủ quy tắc."
 Feature.Moments.Label.MomentDeletedBody,
@@ -4631,7 +4626,6 @@ Feature.Profile.Action.ShareProfile,Chia sẻ hồ sơ
 Feature.Profile.Action.ShareProfileLink,Chia sẻ đường liên kết đến hồ sơ
 Feature.Profile.Action.SwitchAvatar,Đổi avatar
 Feature.Profile.Action.ToQRCode,Chia Sẻ Mã QR
-Feature.Profile.Action.Trade,Buôn Bán
 Feature.Profile.Action.UserBlocked,Người Chơi Bị Chặn
 Feature.Profile.Action.ViewFullProfile,Xem hồ sơ đầy đủ
 Feature.Profile.Action.ViewProfile,Xem hồ sơ
