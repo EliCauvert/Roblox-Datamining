@@ -5,7 +5,7 @@
 		BelowFold = "below_fold",
 		SessionAction = "session_action",
 		ScrollableContentTop = "scrollable_content_top",
-		ScrollableContentBottom = "scrollable_content_bottom",
+		FixedFooterTop = "fixed_footer_top",
 		None = "none"
 	}
 }

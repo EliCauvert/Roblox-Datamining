@@ -14,7 +14,7 @@ return function(p1)
 	local var5 = p1.maxChars < text
 	local var6 = isError and not var4
 	
-	if not (var3 == 0 and ((p1.hasGenerated or p1.lastSavedText ~= "") and var2)) then
+	if not (var3 == 0 and (p1.lastGeneratedText ~= "" and var2)) then
 		var1 = false
 		
 		if var3 > 0 then

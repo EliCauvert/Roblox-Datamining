@@ -24,6 +24,7 @@ local fFlagSduiMarketplaceCatalogSortSupport = require(parent.SharedFlags).FFlag
 local fFlagSduiSystemBannerComponent = require(parent.SharedFlags).FFlagSduiSystemBannerComponent
 local fFlagSduiTileHoldAction = require(parent.SharedFlags).FFlagSduiTileHoldAction
 local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAppSduiColorPropMigration
+local fFlagSduiGenericContainerDispatch = require(parent.SharedFlags).FFlagSduiGenericContainerDispatch
 local fFlagSduiFocusNavActionsStructured = require(parent.SharedFlags).FFlagSduiFocusNavActionsStructured
 local fFlagSduiParseProtoGradientFields = require(parent.SharedFlags).FFlagSduiParseProtoGradientFields
 local fFlagLuaAppSduiSponsoredTwoByOneTile = require(parent.SharedFlags).FFlagLuaAppSduiSponsoredTwoByOneTile
@@ -206,7 +207,7 @@ end
 t.ArrayOfPymkItemDataProp = var6
 t.ActionProp = buildActionPropModule
 t.TableProp = buildTablePropModule
-t.ContainerProp = buildContainerPropModule
+t.ContainerProp = if fFlagSduiGenericContainerDispatch then buildContainerPropModule else nil
 t.ArrayOfMenuItemProp = buildRepeatedPropModule
 t.MenuItemProp = buildTablePropModule
 t.MenuItem = buildTablePropModule

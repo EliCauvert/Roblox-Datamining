@@ -52,7 +52,7 @@ return function(p1)
 				local t = {}
 				local ok, status = pcall(httpService.JSONDecode, httpService, var11.response.Body)
 				
-				if ok and status ~= nil and status.data ~= nil then
+				if ok then
 					for i, v in pairs(status.data) do
 						v.universeId = tostring(v.universeId)
 						local id = var12[v.id]

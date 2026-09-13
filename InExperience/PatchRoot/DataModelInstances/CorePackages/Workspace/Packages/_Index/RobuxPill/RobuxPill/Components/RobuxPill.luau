@@ -5,18 +5,16 @@ local useTokens = foundationModule.Hooks.useTokens
 local text = foundationModule.Text
 local icon = foundationModule.Icon
 local button = foundationModule.Button
-local skeleton = foundationModule.Skeleton
 local iconSize = foundationModule.Enums.IconSize
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
-local radius = foundationModule.Enums.Radius
 
 local function _(p1)
 	return tostring(p1):reverse():gsub("(%d%d%d)", "%1,"):reverse():gsub("^,", "")
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), icon (ref), iconName (ref), iconSize (ref), skeleton (ref), radius (ref), text (ref), button (ref), inputSize (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), icon (ref), iconName (ref), iconSize (ref), text (ref), button (ref), inputSize (ref)
 	local var1 = useTokens()
 	local var2 = p1.showBorder == nil or p1.showBorder
 	
@@ -36,16 +34,10 @@ return reactModule.memo(function(p1)
 		}, {
 			RobuxIcon = reactModule.createElement(icon, {
 				LayoutOrder = 1,
-				testId = "robux-icon",
 				name = iconName.Robux,
 				size = iconSize.Medium
 			}),
-			RobuxAmount = if p1.robuxBalance == nil then reactModule.createElement(foundationModule.View, { tag = "size-2500-800", LayoutOrder = 2 }, {
-				Skeleton = reactModule.createElement(skeleton, {
-					testId = "robux-balance-skeleton",
-					radius = radius.Medium
-				})
-			}) else reactModule.createElement(text, {
+			RobuxAmount = reactModule.createElement(text, {
 				tag = "auto-y text-title-large text-align-x-left text-truncate-end content-emphasis",
 				LayoutOrder = 2,
 				Size = UDim2.new(0.5, 0, 0, 0),

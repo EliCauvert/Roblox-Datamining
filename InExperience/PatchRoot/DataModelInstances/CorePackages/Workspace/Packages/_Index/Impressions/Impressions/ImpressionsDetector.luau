@@ -4,9 +4,7 @@ local roactModule = require(parent.Roact)
 local argCheckModule = require(parent.ArgCheck)
 local tModule = require(parent.t)
 local withNavigationFocus = require(parent.RoactNavigation).withNavigationFocus
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = sharedFlagsModule.FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions
-local fFlagEnableOnScreenAPIIntegration = sharedFlagsModule.FFlagEnableOnScreenAPIIntegration
+local fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = require(parent.SharedFlags).FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions
 local constantsModule = require(script.Parent.Constants)
 local impressionDetectorWithoutNavigationModule = require(script.Parent.ImpressionDetectorWithoutNavigation)
 local impressionsDetector = roactModule.PureComponent:extend("ImpressionsDetector")
@@ -175,20 +173,4 @@ function impressionsDetector.didUpdate(p2, _, _)
 	p2:_requestImpressions()
 end
 
-if fFlagEnableOnScreenAPIIntegration then
-	local useIsRouteOnScreen = require(parent.RobloxAppNavigation).useIsRouteOnScreen
-	
-	return function(p2)
-		-- upvalues: useIsRouteOnScreen (ref), roactModule (ref), impressionDetectorWithoutNavigationModule (ref)
-		local var1 = useIsRouteOnScreen()
-		
-		if var1 == p2.isFocused then
-			return roactModule.createElement(impressionDetectorWithoutNavigationModule, p2)
-		end
-		local cloned = table.clone(p2)
-		cloned.isFocused = var1
-		
-		return roactModule.createElement(impressionDetectorWithoutNavigationModule, cloned)
-	end
-end
 return withNavigationFocus(impressionDetectorWithoutNavigationModule)

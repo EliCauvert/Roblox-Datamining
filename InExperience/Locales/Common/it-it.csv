@@ -61,15 +61,12 @@ Authentication.AccountSwitch.Action.SwitchAccount,Cambia Account
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Cambia account
 Authentication.CrossDevice.Heading.QuickLogin,Accesso rapido
 Authentication.Login.Action.QuickSignIn,
-Authentication.Login.Action.Save,Salva
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Esci da Roblox per cambiare l'account {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Usa un altro account Roblox
 Authentication.Login.Error.PasskeyOnlyAccount,Il tuo account dispone solo di una passkey configurata per l'accesso. Prova ad accedere con la passkey o ripristina l'account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Impossibile verificare l'account della piattaforma. Riprova più tardi.
 Authentication.Login.Heading.IncompatibleAccounts,Account incompatibili
-Authentication.Login.Label.Email,E-mail
 Authentication.Login.Label.LearnMore,Maggiori informazioni
-Authentication.Login.Label.Username,Nome utente
 Authentication.Login.LinkIllegalChildAccountLinking,Questo account Roblox non può essere collegato a un account Xbox per bambini. Prova con un altro account o verifica le impostazioni.
 Authentication.Login.Response.AlreadyLinked,Questo account Roblox è già collegato a un altro account per {platform}. Prova ad accedere con un altro account Roblox.
 Authentication.Login.Response.IncorrectEmailOrPassword,E-mail o password non valide.
@@ -87,57 +84,12 @@ Authentication.Login.Response.SomethingWentWrong,
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,Qualcosa è andato storto. Prova ad accedere in un altro modo.
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Il tuo indirizzo e-mail non è stato verificato. Accedi con il tuo nome utente.
 Authentication.Login.WeChat.AntiAddictionText,"Boicotta le brutte esperienze, rifiuta le esperienze piratate. Sii consapevole dell'autodifesa e dell'essere ingannati. Le esperienze di visita fanno bene al cervello, ma troppe visite di esperienza possono danneggiare la tua salute. Gestisci bene il tuo tempo e goditi uno stile di vita sano."
-Authentication.SignUp.Action.ApplyOnNextRespawn,Applica alla prossima rigenerazione
-Authentication.SignUp.Action.Cancel,
-Authentication.SignUp.Action.ExitModalLeave,Esci
-Authentication.SignUp.Action.RespawnNow,Rigenera ora
-Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Riprova ad accedere
 Authentication.SignUp.Description.AccountAlreadyLinked,Il tuo account per {platformAccountName} è già collegato a un account Roblox. Prova ad accedere di nuovo.
-Authentication.SignUp.Description.BirthdayHint,Inserisci la data
-Authentication.SignUp.Description.Try,Prova
-Authentication.SignUp.Description.UsernameChanged,"Tutto in ordine! Il tuo account è pronto e collegato alla piattaforma {platform}. Ricarica per visualizzare il tuo nome utente aggiornato nel gioco. In caso contrario, la modifica verrà applicata alla prossima sessione."
-Authentication.SignUp.Description.UsernameUnchanged,Ci sei! Il tuo account è pronto e collegato alla piattaforma {platform}. Chatta con gli amici e gioca a milioni di giochi Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Il tuo account Roblox sarà collegato al tuo account per {platform}. Puoi scollegarli dalla schermata Impostazioni in qualsiasi momento. Ci potrebbe essere una pausa prima di essere in grado di collegare a un altro account per {platform}. Facendo clic su {ctaButton}, accetti i Termini di Utilizzo, compresa la clausola di arbitrato e stai riconoscendo l'Informativa sulla privacy."
-Authentication.SignUp.Header.SetUpYourRobloxAccount,Configura il tuo account Roblox
 Authentication.SignUp.Heading.CountryCodeSelector,Seleziona paese
 Authentication.SignUp.Heading.RetryLogIn,
-Authentication.SignUp.Label.Birthday,Data di nascita
-Authentication.SignUp.Label.Continue,
-Authentication.SignUp.Label.Day,Giorno
-Authentication.SignUp.Label.EnterYourEmail,Inserisci la tua email
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,Devi essere più grande per giocare a questo gioco
-Authentication.SignUp.Label.ErrorsWithPassword,Si è verificato un errore con la password.
-Authentication.SignUp.Label.ErrorsWithUsername,Si è verificato un errore con il nome utente.
-Authentication.SignUp.Label.ExitModalSubtitle,"Hai quasi finito la creazione dell'account. Se esci, perderai i progressi."
-Authentication.SignUp.Label.ExitModalTitle,Vuoi interrompere la creazione dell'account?
-Authentication.SignUp.Label.Gender,Sesso
-Authentication.SignUp.Label.GenderFemale,Femmina
-Authentication.SignUp.Label.GenderMale,Maschio
-Authentication.SignUp.Label.Month,Mese
-Authentication.SignUp.Label.PasswordError1,È lunga almeno 8 caratteri
-Authentication.SignUp.Label.PasswordError2,È diversa dal nome utente
-Authentication.SignUp.Label.PasswordError2.V2,
-Authentication.SignUp.Label.PasswordError3,Non è una password facile da indovinare
-Authentication.SignUp.Label.PasswordError3.V2,
-Authentication.SignUp.Label.PasswordPlaceholder,Almeno 8 caratteri
-Authentication.SignUp.Label.SelectBirthdaySentenceCase,Seleziona data di nascita
-Authentication.SignUp.Label.UsernameError1,"Contiene solo lettere, numeri e _"
-Authentication.SignUp.Label.UsernameError2,È lungo tra i 3 e i 20 caratteri
-Authentication.SignUp.Label.UsernameError3,Non è già in uso
-Authentication.SignUp.Label.UsernameError4,È appropriato per Roblox
-Authentication.SignUp.Label.UsernameError5,Non inizia né termina con _
-Authentication.SignUp.Label.UsernameError6,Contiene al massimo un _
-Authentication.SignUp.Label.UsernameError7,Non contiene informazioni private
-Authentication.SignUp.Label.Year,Anno
-Authentication.SignUp.Message.Username.NoRealNameUse,Non usare il tuo vero nome
-Authentication.SignUp.PasswordErrorLength,È lunga tra 8 e 200 caratteri
-Authentication.SignUp.Response.BirthdayMustBeSetFirst,Occorre prima impostare la data di nascita.
 Authentication.SignUp.Response.ErrorTryAgain,
-Authentication.SignUp.Response.InvalidBirthday,Data di nascita non valida
-Authentication.SignUp.Response.InvalidEmail,Indirizzo e-mail non valido.
-Authentication.SignUp.Response.UsernameMustBeSetFirst,Occorre prima impostare il nome utente.
-Authentication.SignUp.Subtitle.YourProgressCarriesOver,I tuoi progressi verranno trasferiti quando completerai la configurazione.
 Authentication.TwoStepVerification.Action.GoToSecurity,Impostazioni
 Authentication.TwoStepVerification.Label.TwoStepRequired,La verifica in due passaggi è necessaria per effettuare ulteriori transazioni. Vai su Impostazioni> Sicurezza per completare la verifica in due passaggi.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Troppi tentativi. Riprova più tardi.
@@ -323,7 +275,7 @@ CommonUI.Controls.Action.Confirm,Conferma
 CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,Fatto
 CommonUI.Controls.Action.Next,Avanti
-CommonUI.Controls.Action.OK,
+CommonUI.Controls.Action.OK,OK
 CommonUI.Controls.Action.Refresh,Aggiorna
 CommonUI.Controls.Action.ResetAll,Ripristina tutto
 CommonUI.Controls.Action.Search,Cerca
@@ -336,7 +288,7 @@ CommonUI.Controls.Label.April,Aprile
 CommonUI.Controls.Label.AprilAbbreviated,Apr
 CommonUI.Controls.Label.August,Agosto
 CommonUI.Controls.Label.AugustAbbreviated,Ago
-CommonUI.Controls.Label.Day,
+CommonUI.Controls.Label.Day,Giorno
 CommonUI.Controls.Label.December,Dicembre
 CommonUI.Controls.Label.DecemberAbbreviated,Dic
 CommonUI.Controls.Label.February,Febbraio
@@ -378,7 +330,7 @@ CommonUI.Controls.Label.Tuesday,martedì
 CommonUI.Controls.Label.TuesdayAbbreviated,mar
 CommonUI.Controls.Label.Wednesday,mercoledì
 CommonUI.Controls.Label.WednesdayAbbreviated,mer
-CommonUI.Controls.Label.Year,
+CommonUI.Controls.Label.Year,Anno
 CommonUI.Controls.NoResultsFound,Nessun risultato trovato
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Continue,
@@ -443,7 +395,6 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,Reimposta
-CommonUI.Messages.Label.Password,Password
 CommonUI.Messages.Response.NoResults,Nessun risultato
 CommonUI.Messages.Response.PageError,Errore durante il caricamento della pagina
 CommonUI.Messages.Response.SomethingWentWrong,
@@ -631,7 +582,7 @@ CoreScripts.FTUX.Label.SideSheetUpdate,Il menu contiene ancora tutte le tue funz
 CoreScripts.FTUX.Label.SocialOnboarding,"Accedi facilmente alle tue funzionalità social dalla barra in alto, inclusa la Chat."
 CoreScripts.Feedback.EntryPoint.ButtonText,Dai un feedback
 CoreScripts.Feedback.EntryPoint.OptionText,Dai un feedback sulla traduzione
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Esci
 CoreScripts.Feedback.FeedbackBar.HelpButton,Guida
 CoreScripts.Feedback.FeedbackBar.MainLabel,
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Fornisci eventuali commenti aggiuntivi qui sotto
@@ -1327,7 +1278,7 @@ Feature.Avatar.Action.Reset,Ripristina
 Feature.Avatar.Action.RestoreLastSaved,Ripristina l'ultimo avatar salvato
 Feature.Avatar.Action.Revert,
 Feature.Avatar.Action.Rotate,
-Feature.Avatar.Action.Save,
+Feature.Avatar.Action.Save,Salva
 Feature.Avatar.Action.SaveAsNew,Salva come nuovo
 Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,Seleziona più elementi
@@ -1341,7 +1292,7 @@ Feature.Avatar.Action.ShowMore,
 Feature.Avatar.Action.SlotEmote,Aggiungi emoticon
 Feature.Avatar.Action.Stay,Rimani
 Feature.Avatar.Action.Switch,Cambiare
-Feature.Avatar.Action.TryOn,
+Feature.Avatar.Action.TryOn,Prova
 Feature.Avatar.Action.Unequip,Disequipaggia
 Feature.Avatar.Action.Unselect,
 Feature.Avatar.Action.UnslotEmote,Rimuovi emoticon
@@ -1383,15 +1334,6 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,In esclusiva con il piano Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,oggi
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,quest'ora
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,questo mese
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,{count} sfondi rimanenti
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,{count} sfondo rimanente
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,giorni
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,ore
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,minuti
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,Ripristino tra
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Descrivi il tuo sfondo...
 Feature.Avatar.BackgroundGeneration.Status.Generating,Generazione dello sfondo in corso...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparazione dello sfondo in corso...
@@ -1510,7 +1452,6 @@ Feature.Avatar.Label.ClassicTShirts,Magliette classiche
 Feature.Avatar.Label.ClearByCategory,Elimina {category}
 Feature.Avatar.Label.Climb,Scala
 Feature.Avatar.Label.ClimbAnimations,Animazioni scalata
-Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"I nomi possono contenere solo lettere, numeri e spazi."
 Feature.Avatar.Label.CountSelected,{itemCount} Selezionato
 Feature.Avatar.Label.Creations,Creazioni
@@ -1622,7 +1563,6 @@ Feature.Avatar.Label.RecentlyWorn,Indossati di recente
 Feature.Avatar.Label.RemoveFromSetBody,Questi avatar saranno rimossi da questo set. Non saranno cancellati.
 Feature.Avatar.Label.Replace,Sostituisci
 Feature.Avatar.Label.ResetToNewCharacter,Stai passando a un nuovo personaggio; vuoi resettare tutti gli oggetti del'outfit o mantenerli?
-Feature.Avatar.Label.ResetTryOn,Ripristina l'avatar attuale
 Feature.Avatar.Label.Right,R
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,Braccia destre
@@ -1678,7 +1618,6 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,Strati del trucco
 Feature.Avatar.Label.Title.ManageAvatars,Gestisci avatar
-Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,Il mio inventario
 Feature.Avatar.Label.Title.ProfilePhoto,Foto del profilo
 Feature.Avatar.Label.Title.ReplaceAvatar,Sostituisci avatar
@@ -1818,7 +1757,6 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,Rimuovi l'oggetto
 Feature.Avatar.Title.Move,
-Feature.Avatar.Title.MyAvatar,Il mio Avatar
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,La funzione Personalizza ha un nuovo look!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Nuovo al Marketplace
@@ -2698,7 +2636,7 @@ Feature.Catalog.Label.Trending,Tendenze
 Feature.Catalog.Label.TryOns,
 Feature.Catalog.Label.TryOnsMultiple,Le tue prove ({numItems})
 Feature.Catalog.Label.Unlimited,Illimitato
-Feature.Catalog.Label.Username,
+Feature.Catalog.Label.Username,Nome utente
 Feature.Catalog.Label.UsingBundleParts,Usare le {count} parti del pacchetto
 Feature.Catalog.Label.WaistAccessories,Accessori vita
 Feature.Catalog.Label.WearAfterPurchase,Indossa oggetto dopo l'acquisto
@@ -3287,7 +3225,6 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Rimuovi amico affidabil
 Feature.Friends.TrustedFriend.AddBack.Header,Richiesta di amico affidabile
 Feature.Friends.TrustedFriend.Info.Modal.Header,Nuovo amico affidabile
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Aggiungi amico affidabile
-Feature.Friends.TrustedFriend.Label.Title,Amico affidabile
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} è ora un tuo amico affidabile
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Amico affidabile rimosso
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Richiesta come amico affidabile inviata
@@ -3738,7 +3675,6 @@ Feature.Profile.Action.ShareProfile,Condividi profilo
 Feature.Profile.Action.ShareProfileLink,Condividi il link del profilo
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
-Feature.Profile.Action.Trade,Scambia
 Feature.Profile.Action.UserBlocked,Utente bloccato
 Feature.Profile.Action.ViewFullProfile,Visualizza il profilo completo
 Feature.Profile.Action.ViewProfile,
@@ -4385,7 +4321,6 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,
 Feature.VerificationUpsell.Action.EditPhoneNumber,Modifica numero di telefono
 Feature.VerificationUpsell.Action.EnableVoice,Abilita Chat Vocale
-Feature.VerificationUpsell.Action.Logout,Esci comunque
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

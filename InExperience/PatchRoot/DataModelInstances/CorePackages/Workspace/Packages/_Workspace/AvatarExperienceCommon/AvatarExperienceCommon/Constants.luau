@@ -4,6 +4,7 @@ local _ = require(script.Parent.Types.CategoryTypes.CategoryTypes)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local outfitTypesModule = require(script.Parent.Enums.OutfitTypes)
 local inventoryOutfitTypeModule = require(script.Parent.Enums.InventoryOutfitType)
+local fFlagAXCatalogBodySuits = avatarExperienceFlagsModule.FFlagAXCatalogBodySuits
 local fFlagAXCatalogMakeupSupport = avatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
 local fFlagAXInventoryDurablesSupport = avatarExperienceFlagsModule.FFlagAXInventoryDurablesSupport
 local t = {}
@@ -105,16 +106,86 @@ local t_9 = {
 }
 local t_10 = { IS_LEFT = "IS_LEFT", IS_RIGHT = "IS_RIGHT" }
 local t_11 = {
+	BodyCategories = {
+		Heads = 8.5,
+		Hair = 8.5,
+		ClassicHeads = 6.5,
+		ClassicFaces = 7
+	},
+	DynamicBodyCategories = {
+		Style = 6.5,
+		Hair = 8.5,
+		ClassicHeads = 6.5,
+		ClassicFaces = 7,
+		Torsos = 9,
+		Arms = 13,
+		Legs = 13.5
+	},
+	CatalogAccessories = {
+		Hats = 11,
+		Face = 4.5,
+		Neck = 9,
+		Shoulder = 11,
+		Front = 9.5,
+		Back = 21,
+		Waist = 17
+	},
+	AvatarEditorAccessories = {
+		Hats = 11,
+		Face = 7,
+		Neck = 9,
+		Shoulder = 11,
+		Front = 9.5,
+		Back = 21,
+		Waist = 17
+	},
+	AccessoryAdjustment = {
+		Hat = 11,
+		Face = 7,
+		Neck = 9,
+		Shoulder = 11,
+		Front = 21,
+		Back = 21,
+		Waist = 17
+	},
+	Clothing = {
+		Shirts = 12,
+		TShirts = 12,
+		Sweaters = 12,
+		Jackets = 12,
+		Pants = 12,
+		Shorts = 12,
+		Shoes = 12,
+		ClassicShirts = 12,
+		ClassicTShirts = 12,
+		ClassicPants = 12,
+		Tops = 12,
+		Outerwear = 12,
+		Bottoms = 12,
+		Bodysuits = if fFlagAXCatalogBodySuits then 12 else nil
+	},
+	Makeup = {
+		Makeup = game:DefineFastInt("AXMakeupZoomRadius", 7),
+		MakeupLooks = game:DefineFastInt("AXMakeupLooksZoomRadius", 7),
+		Eyelashes = game:DefineFastInt("AXEyelashesZoomRadius", 7),
+		Eyebrows = game:DefineFastInt("AXEyebrowsZoomRadius", 7),
+		FaceMakeup = game:DefineFastInt("AXFaceMakeupZoomRadius", 7),
+		LipMakeup = game:DefineFastInt("AXLipMakeupZoomRadius", 7),
+		EyeMakeup = game:DefineFastInt("AXEyeMakeupZoomRadius", 7)
+	},
+	Special = { HeadRefinement = 7 }
+}
+local t_12 = {
 	Seen = "AXTooltipSeen",
 	TimeDismiss = "AXTooltipTimeDismiss",
 	ClickDismiss = "AXTooltipClickDismiss",
 	CallbackDismiss = "AXTooltipCallbackDismiss"
 }
-local t_12 = {
+local t_13 = {
 	CreateOutfitKey = "avatar.createOutfit",
 	CreateMakeupLookKey = if fFlagAXCatalogMakeupSupport then "avatar.createMakeupLook" else nil
 }
-local t_13 = {
+local t_14 = {
 	[t_3.EyebrowAccessory] = 0,
 	[t_3.EyelashAccessory] = 1,
 	[t_3.Pants] = 2,
@@ -131,7 +202,7 @@ local t_13 = {
 	[t_3.JacketAccessory] = 12,
 	[t_3.HairAccessory] = 13
 }
-local t_14 = {
+local t_15 = {
 	[tostring(Enum.AssetType.TShirtAccessory.Value)] = Enum.AccessoryType.TShirt,
 	[tostring(Enum.AssetType.ShirtAccessory.Value)] = Enum.AccessoryType.Shirt,
 	[tostring(Enum.AssetType.PantsAccessory.Value)] = Enum.AccessoryType.Pants,
@@ -145,30 +216,30 @@ local t_14 = {
 	[tostring(Enum.AssetType.EyebrowAccessory.Value)] = Enum.AccessoryType.Eyebrow,
 	[tostring(Enum.AssetType.EyelashAccessory.Value)] = Enum.AccessoryType.Eyelash
 }
-local t_15 = {
+local t_16 = {
 	[t_3.EyeMakeup] = true,
 	[t_3.FaceMakeup] = true,
 	[t_3.LipMakeup] = true,
 	[t_3.EyebrowAccessory] = true,
 	[t_3.EyelashAccessory] = true
 }
-local t_16 = { Avatar = "Avatar", Makeup = "Makeup", Outfit = "Outfit" }
-local t_17 = {
+local t_17 = { Avatar = "Avatar", Makeup = "Makeup", Outfit = "Outfit" }
+local t_18 = {
 	[t_3.EyeMakeup] = Enum.MakeupType.Eye,
 	[t_3.FaceMakeup] = Enum.MakeupType.Face,
 	[t_3.LipMakeup] = Enum.MakeupType.Lip
 }
-local t_18 = {
+local t_19 = {
 	[Enum.MakeupType.Eye] = t_3.EyeMakeup,
 	[Enum.MakeupType.Face] = t_3.FaceMakeup,
 	[Enum.MakeupType.Lip] = t_3.LipMakeup
 }
-local t_19 = {
+local t_20 = {
 	[t_3.FaceMakeup] = 0,
 	[t_3.LipMakeup] = 1,
 	[t_3.EyeMakeup] = 2
 }
-local t_20 = {
+local t_21 = {
 	Head = Enum.BodyPart.Head,
 	LeftArm = Enum.BodyPart.LeftArm,
 	LeftLeg = Enum.BodyPart.LeftLeg,
@@ -176,8 +247,8 @@ local t_20 = {
 	RightLeg = Enum.BodyPart.RightLeg,
 	Torso = Enum.BodyPart.Torso
 }
-local t_21 = { AttributeKey = "IXP_LAYER", TagName = "WIDGET" }
-local t_22 = {
+local t_22 = { AttributeKey = "IXP_LAYER", TagName = "WIDGET" }
+local t_23 = {
 	[inventoryOutfitTypeModule.Body] = outfitTypesModule.Avatar,
 	[inventoryOutfitTypeModule.Avatar] = outfitTypesModule.Avatar,
 	[inventoryOutfitTypeModule.DynamicHead] = outfitTypesModule.DynamicHead,
@@ -186,7 +257,7 @@ local t_22 = {
 	[inventoryOutfitTypeModule.PurchasedMakeup] = outfitTypesModule.Makeup,
 	[inventoryOutfitTypeModule.CreatedMakeup] = outfitTypesModule.Makeup
 }
-local t_23 = {
+local t_24 = {
 	["1"] = inventoryOutfitTypeModule.Body,
 	["2"] = inventoryOutfitTypeModule.DynamicHead,
 	["3"] = inventoryOutfitTypeModule.Avatar,
@@ -195,10 +266,10 @@ local t_23 = {
 	["6"] = inventoryOutfitTypeModule.PurchasedMakeup,
 	["7"] = inventoryOutfitTypeModule.CreatedMakeup
 }
-local t_24 = {}
+local t_25 = {}
 
-for i_3, v_3 in t_23 do
-	t_24[v_3] = tonumber(i_3)
+for i_3, v_3 in t_24 do
+	t_25[v_3] = tonumber(i_3)
 end
 return {
 	BODY_BUNDLE_TYPE_ID = "1",
@@ -218,25 +289,26 @@ return {
 	NAVIGATION_DIRECTION = t_10,
 	LANDSCAPE_UI_WIDTH_PERCENTAGE = 0.6,
 	LANDSCAPE_SCENE_WIDTH_PERCENTAGE = 0.4,
+	CAMERA_ZOOM_RADIUS = t_11,
 	AVATAR_BLOCKY_DEFAULT_BUNDLE_ID = "356",
 	AX_TOOLTIP_STORAGE_KEY = "AXTooltipStorageKey",
-	AX_TOOLTIP_COUNTERS = t_11,
-	AVATAR_EDITOR_CONSTANTS = t_12,
-	LAYERED_CLOTHING_ORDER = t_13,
-	LAYERED_ASSET_TYPES = t_14,
-	ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE = t_17,
-	MAKEUP_TYPE_TO_ASSET_TYPE_ID = t_18,
-	LAYERED_MAKEUP_ORDER = t_19,
-	MAKEUP_LOOK_ASSET_TYPES = t_15,
+	AX_TOOLTIP_COUNTERS = t_12,
+	AVATAR_EDITOR_CONSTANTS = t_13,
+	LAYERED_CLOTHING_ORDER = t_14,
+	LAYERED_ASSET_TYPES = t_15,
+	ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE = t_18,
+	MAKEUP_TYPE_TO_ASSET_TYPE_ID = t_19,
+	LAYERED_MAKEUP_ORDER = t_20,
+	MAKEUP_LOOK_ASSET_TYPES = t_16,
 	MAX_MAKEUP_LAYERS = 6,
-	LOOK_TYPE = t_16,
+	LOOK_TYPE = t_17,
 	MIN_MAKEUP_ITEMS_FOR_LAYERING_BUTTON = 2,
 	LabelAbuseTypeMapping = labelAbuseTypeMappingModule,
-	BODY_PART_NAME_TO_ENUM = t_20,
+	BODY_PART_NAME_TO_ENUM = t_21,
 	STATIC_FACIAL_ANIMATION = "StaticFacialAnimation",
 	NON_EDITABLE_MAKEUP_GRANT_KEY = "NonEditableMakeup",
-	INVENTORY_OUTFIT_TYPE_TO_OUTFIT_TYPE = t_22,
-	INVENTORY_TYPE_ID_TO_INVENTORY_OUTFIT_TYPE = t_23,
-	INVENTORY_OUTFIT_TYPE_TO_INVENTORY_TYPE_ID = t_24,
-	IXP_WIDGET_LAYER_EXPOSURE = t_21
+	INVENTORY_OUTFIT_TYPE_TO_OUTFIT_TYPE = t_23,
+	INVENTORY_TYPE_ID_TO_INVENTORY_OUTFIT_TYPE = t_24,
+	INVENTORY_OUTFIT_TYPE_TO_INVENTORY_TYPE_ID = t_25,
+	IXP_WIDGET_LAYER_EXPOSURE = t_22
 }

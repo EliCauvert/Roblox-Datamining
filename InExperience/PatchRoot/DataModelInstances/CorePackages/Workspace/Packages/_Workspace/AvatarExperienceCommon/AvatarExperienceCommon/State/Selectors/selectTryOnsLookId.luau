@@ -1,6 +1,8 @@
-﻿local LOOK_TYPE = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants).LOOK_TYPE
+﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local LOOK_TYPE = require(avatarExperienceCommon.Constants).LOOK_TYPE
+local fFlagAXMISEnableMultiShopping = require(avatarExperienceCommon.Parent.AvatarExperienceFlags).FFlagAXMISEnableMultiShopping
 
 return function(p1)
-	-- upvalues: LOOK_TYPE (ref)
-	return if p1.AvatarExperience.AvatarScene.OutfitTryOn.LastToggledLookType == LOOK_TYPE.Makeup then p1.AvatarExperience.AvatarScene.OutfitTryOn.MakeupLookId else p1.AvatarExperience.AvatarScene.OutfitTryOn.LookId
+	-- upvalues: fFlagAXMISEnableMultiShopping (ref), LOOK_TYPE (ref)
+	return if fFlagAXMISEnableMultiShopping and (if fFlagAXMISEnableMultiShopping then p1.AvatarExperience.AvatarScene.OutfitTryOn.LastToggledLookType else nil) == LOOK_TYPE.Makeup then p1.AvatarExperience.AvatarScene.OutfitTryOn.MakeupLookId else p1.AvatarExperience.AvatarScene.OutfitTryOn.LookId
 end

@@ -72,7 +72,6 @@ conversationListWithTopBar.defaultProps = {
 	entryHeight = 64,
 	canAccessParty = false,
 	isPartyQuickStartEnabled = false,
-	isSearchActive = false,
 	itemList = {},
 	navigateToSquadLobby = function() end,
 	canvasTopPadding = if fFlagAppIaScrollAway then 0 else nil
@@ -81,10 +80,9 @@ conversationListWithTopBar.defaultProps = {
 function conversationListWithTopBar.getDerivedStateFromProps(p1)
 	-- upvalues: cryoModule (ref), searchFilterPredicate (ref)
 	local filterText = p1.filterText
-	local itemList = p1.itemList
 	
-	return if p1.isSearchActive then { filteredItemList = itemList } else {
-		filteredItemList = cryoModule.List.filterMap(itemList, function(p2)
+	return {
+		filteredItemList = cryoModule.List.filterMap(p1.itemList, function(p2)
 			-- upvalues: searchFilterPredicate (copy), filterText (ref)
 			return if searchFilterPredicate(filterText, p2.title) then p2 else nil
 		end)

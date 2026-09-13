@@ -21,7 +21,7 @@ return reactModule.memo(function(p1)
 	return reactModule.createElement(view, {
 		tag = {
 			["col size-full-0 auto-y"] = true,
-			["padding-right-xlarge"] = if p1.placement ~= chromeModule.Enums.SideSheetPlacement.ScrollableContentTop then p1.placement == chromeModule.Enums.SideSheetPlacement.ScrollableContentBottom else true
+			["padding-right-xlarge"] = p1.placement == chromeModule.Enums.SideSheetPlacement.ScrollableContentTop
 		},
 		LayoutOrder = p1.layoutOrder
 	}, t)

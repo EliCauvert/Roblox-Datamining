@@ -2,8 +2,6 @@
 local signalsModule = require(appChat.Parent.Signals)
 local _ = require(appChat.Stores.GetConversationStore.createConversationStore)
 local getConversationIdsModule = require(appChat.Utils.getConversationIds)
-local searchIntroducedConversationIdsModule = require(appChat.Stores.searchIntroducedConversationIds)
-local fFlagAppChatServerSideConversationSearchModule = require(appChat.Flags.FFlagAppChatServerSideConversationSearch)
 
 local function _(p1)
 	local lastUpdated = p1.lastUpdated
@@ -29,51 +27,31 @@ local function containsAllFrozenConversations(p1, p2)
 	return true
 end
 
-local function excludeSearchIntroduced(p3)
-	-- upvalues: searchIntroducedConversationIdsModule (ref)
-	local t = {}
-	
-	for i, v in p3 do
-		if not searchIntroducedConversationIdsModule.has(v.id) then
-			table.insert(t, v)
-		end
-	end
-	return t
-end
-
-local _ = function(p4, p5)
-	-- upvalues: fFlagAppChatServerSideConversationSearchModule (ref), excludeSearchIntroduced (ref), conversationSortPredicate (ref)
-	local conversations = p4.getConversations(p5)
-	
-	if fFlagAppChatServerSideConversationSearchModule then
-		conversations = excludeSearchIntroduced(conversations)
-	end
+local _ = function(p3, p4)
+	-- upvalues: conversationSortPredicate (ref)
+	local conversations = p3.getConversations(p4)
 	table.sort(conversations, conversationSortPredicate)
 	
 	return conversations
 end
 
-return function(p4)
-	-- upvalues: signalsModule (ref), fFlagAppChatServerSideConversationSearchModule (ref), excludeSearchIntroduced (ref), conversationSortPredicate (ref), getConversationIdsModule (ref), containsAllFrozenConversations (ref)
+return function(p3)
+	-- upvalues: signalsModule (ref), conversationSortPredicate (ref), getConversationIdsModule (ref), containsAllFrozenConversations (ref)
 	local var1 = nil
 	local var2, var3 = signalsModule.createSignal(false)
-	p4.addClearListener(function()
+	p3.addClearListener(function()
 		-- upvalues: var1 (write), var3 (ref)
 		var1 = nil
 		var3(false)
 	end)
 	
-	local function getOrderedConversationIds(p5)
-		-- upvalues: p4 (ref), fFlagAppChatServerSideConversationSearchModule (copy), excludeSearchIntroduced (copy), conversationSortPredicate (copy), getConversationIdsModule (copy), var2 (ref), var1 (write), containsAllFrozenConversations (copy)
-		local conversations = p4.getConversations(p5)
-		
-		if fFlagAppChatServerSideConversationSearchModule then
-			conversations = excludeSearchIntroduced(conversations)
-		end
+	local function getOrderedConversationIds(p4)
+		-- upvalues: p3 (ref), conversationSortPredicate (copy), getConversationIdsModule (copy), var2 (ref), var1 (write), containsAllFrozenConversations (copy)
+		local conversations = p3.getConversations(p4)
 		table.sort(conversations, conversationSortPredicate)
 		local var4 = getConversationIdsModule(conversations)
 		
-		if var2(p5) ~= true or var1 == nil then
+		if var2(p4) ~= true or var1 == nil then
 			var1 = var4
 			
 			return var4
@@ -91,12 +69,12 @@ return function(p4)
 	
 	return {
 		getOrderedConversationIds = getOrderedConversationIds,
-		getConversations = function(p5)
-			-- upvalues: getOrderedConversationIds (ref), p4 (ref)
+		getConversations = function(p4)
+			-- upvalues: getOrderedConversationIds (ref), p3 (ref)
 			local t = {}
 			
-			for i, v in getOrderedConversationIds(p5) do
-				local conversation = p4.getConversation(v, p5)
+			for i, v in getOrderedConversationIds(p4) do
+				local conversation = p3.getConversation(v, p4)
 				
 				if conversation ~= nil then
 					table.insert(t, conversation)
@@ -104,9 +82,9 @@ return function(p4)
 			end
 			return t
 		end,
-		getListStatus = function(p6)
-			-- upvalues: p4 (ref)
-			return p4.getListStatus(p6)
+		getListStatus = function(p5)
+			-- upvalues: p3 (ref)
+			return p3.getListStatus(p5)
 		end,
 		setLatestMessagesFetching = function(value)
 			-- upvalues: var3 (ref)

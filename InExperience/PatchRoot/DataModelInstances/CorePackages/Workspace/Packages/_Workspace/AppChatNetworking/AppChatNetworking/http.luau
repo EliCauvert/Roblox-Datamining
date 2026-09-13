@@ -8,7 +8,6 @@
 	GetUserConversations = require(script.GetUserConversations),
 	MarkConversationRead = require(script.MarkConversationRead),
 	RecordModalSequenceResponse = require(script.RecordModalSequenceResponse),
-	SearchConversations = require(script.SearchConversations),
 	SendChatTextMessage = require(script.SendChatTextMessage),
 	GetSuggestions = require(script.GetSuggestions)
 }

@@ -34,7 +34,6 @@ local signalActionTypeModule = require(moments.Enums.SignalActionType)
 local fFlagMomentsIPReporting = sharedFlagsModule.FFlagMomentsIPReporting
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
-local momentsUseSmallOverflowMenu = game:DefineFastFlag("MomentsUseSmallOverflowMenu", false)
 local reportMomentDialogModule = require(moments.Components.Feed.ReportMomentDialog)
 local ipReportConfirmationDialogModule = require(moments.Components.Feed.IpReportConfirmationDialog)
 local useMomentsHost = require(moments.MomentsHostContext).useMomentsHost
@@ -51,7 +50,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), useFeed (ref), useMomentsHost (ref), useToggleState (ref), fFlagMomentsIPReporting (ref), reactModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), getModeratedItemsStoreModule (ref), getToastStoreModule (ref), signalsReactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), checkDebugAccessModule (ref), reportMomentModule (ref), makeRecommendationAttributionModule (ref), signalActionTypeModule (ref), makeFeedActionFieldsModule (ref), getPostFeedItemIdModule (ref), reportModalCovering (ref), localPlayer (ref), foundationModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), menu (ref), momentsUseSmallOverflowMenu (ref), iconButton (ref), threeDotsVertical (ref), reportMomentDialogModule (ref), ipReportConfirmationDialogModule (ref), view (ref), speakerSlash (ref), speaker (ref)
+	-- upvalues: useLocalization (ref), t (ref), useFeed (ref), useMomentsHost (ref), useToggleState (ref), fFlagMomentsIPReporting (ref), reactModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), getModeratedItemsStoreModule (ref), getToastStoreModule (ref), signalsReactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), checkDebugAccessModule (ref), reportMomentModule (ref), makeRecommendationAttributionModule (ref), signalActionTypeModule (ref), makeFeedActionFieldsModule (ref), getPostFeedItemIdModule (ref), reportModalCovering (ref), localPlayer (ref), foundationModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), menu (ref), iconButton (ref), threeDotsVertical (ref), reportMomentDialogModule (ref), ipReportConfirmationDialogModule (ref), view (ref), speakerSlash (ref), speaker (ref)
 	local var1 = useLocalization(t)
 	local var2 = useFeed()
 	local openMomentsFeedReport = useMomentsHost().openMomentsFeedReport
@@ -279,8 +278,7 @@ return function(p1)
 			p1.moment, var21, var22, var1, var25, var23, var24, var27, var30
 		}),
 		onPressedOutside = var3.disable,
-		side = foundationModule.Enums.PopoverSide.Left,
-		size = if momentsUseSmallOverflowMenu then foundationModule.Enums.InputSize.Small else nil
+		side = foundationModule.Enums.PopoverSide.Left
 	}, {
 		ContextualMenuButton = reactModule.createElement(iconButton, {
 			testId = "FeedContextualMenuButton",

@@ -1,5 +1,4 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local parent = inExperienceSideSheet.Parent
+﻿local parent = script:FindFirstAncestor("InExperienceSideSheet").Parent
 local _ = require(parent.Chrome)
 local foundationModule = require(parent.Foundation)
 local localizationModule = require(parent.Localization)
@@ -11,12 +10,9 @@ local iconName = foundationModule.Enums.IconName
 local iconVariant = foundationModule.Enums.IconVariant
 local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = localizationModule.Hooks.useLocalization
-local analyticsConstantsModule = require(inExperienceSideSheet.Analytics.AnalyticsConstants)
-local sidesheetAnalyticsModule = require(inExperienceSideSheet.Analytics.SidesheetAnalytics)
-local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), view (ref), icon (ref), iconName (ref), iconVariant (ref), text (ref)
+	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), iconVariant (ref), text (ref)
 	local var1 = useTokens()
 	local var2 = useLocalization({
 		title = "CoreScripts.InGameMenu.UnlockMore.Title",
@@ -31,12 +27,7 @@ return reactModule.memo(function(p1)
 		Card = reactModule.createElement(view, {
 			tag = "row align-y-center size-full-0 auto-y padding-medium radius-medium bg-shift-200",
 			testId = "account-upsell-card",
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: p1 (ref), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
-				p1.onActivated()
-				toggleSideSheetModule(false)
-				sidesheetAnalyticsModule.logSidesheetClosed(analyticsConstantsModule.Source.AccountUpsell)
-			end, { p1.onActivated })
+			onActivated = p1.onActivated
 		}, {
 			LeadingAccessory = reactModule.createElement(view, {
 				LayoutOrder = 1,

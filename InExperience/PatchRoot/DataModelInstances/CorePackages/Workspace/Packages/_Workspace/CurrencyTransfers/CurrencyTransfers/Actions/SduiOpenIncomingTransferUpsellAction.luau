@@ -7,10 +7,8 @@ local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
 local incomingTransferHomepagePromptDismissModule = require(currencyTransfers.Utils.IncomingTransferHomepagePromptDismiss)
 local appPage = require(parent.RobloxAppEnums).AppPage
 local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
+local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local fFlagSduiDismissPromptPageScope = sharedFlagsModule.FFlagSduiDismissPromptPageScope
 
 local function parseTransferRequestIdFromUrl(value)
 	local matchIndex = string.find(string.lower(value), "transferrequestid=", 1, true)
@@ -38,7 +36,7 @@ local function _(p1)
 end
 
 return function(a, _, p1)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), parseTransferRequestIdFromUrl (ref), incomingTransferHomepagePromptDismissModule (ref), sduiParseHelpers (ref), fFlagSduiDismissPromptPageScope (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
+	-- upvalues: sduiErrorType (ref), sduiActionType (ref), parseTransferRequestIdFromUrl (ref), incomingTransferHomepagePromptDismissModule (ref), sduiParseHelpers (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
 	local var2 = if a then a.actionParams else nil
 	
 	if var2 == nil then
@@ -100,8 +98,7 @@ return function(a, _, p1)
 				name = sduiActionType.OpenIncomingTransferUpsell,
 				message = "reportPromptDismiss failed: " .. sduiParseHelpers.stringifyValue(p2)
 			}, p1.appPage)
-		end,
-		configKey = if fFlagSduiDismissPromptPageScope then p1.configKey else nil
+		end
 	})
 	local t = {
 		name = appPage.TransferRobuxFlow,

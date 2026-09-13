@@ -1,5 +1,4 @@
-﻿local avatarEditorCategoriesModule = require(script.Enums.AvatarEditorCategories)
-local avatarEditorSubcategoriesModule = require(script.Enums.AvatarEditorSubcategories)
+﻿local avatarEditorSubcategoriesModule = require(script.Enums.AvatarEditorSubcategories)
 local catalogCategoryTaxonomyUUIDsModule = require(script.Enums.CatalogCategoryTaxonomyUUIDs)
 local constantsModule = require(script.Constants)
 local focusTypeModule = require(script.Enums.FocusType)
@@ -17,7 +16,6 @@ local _ = require(script.Types.AXCollectibleInstance)
 return {
 	Constants = constantsModule,
 	Enums = {
-		AvatarEditorCategories = avatarEditorCategoriesModule,
 		AvatarEditorSubcategories = avatarEditorSubcategoriesModule,
 		CatalogCategoryTaxonomyUUIDs = catalogCategoryTaxonomyUUIDsModule,
 		FocusType = focusTypeModule,

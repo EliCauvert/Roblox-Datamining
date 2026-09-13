@@ -1,6 +1,5 @@
 ﻿local playersService = game:GetService("Players")
-local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local parent = inExperienceSideSheet.Parent
+local parent = script:FindFirstAncestor("InExperienceSideSheet").Parent
 local foundationModule = require(parent.Foundation)
 local profileCardModule = require(parent.ProfileCard)
 local reactModule = require(parent.React)
@@ -8,7 +7,6 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local view = foundationModule.View
 local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
 local fFlagFlyoutSidePanelUseProfileFrameThumbnail = sharedFlagsModule.FFlagFlyoutSidePanelUseProfileFrameThumbnail
-local unibarListModule = require(inExperienceSideSheet.Components.UnibarList)
 local readHasRobloxSubscriptionLua = fFlagEnableBlackbirdCheck and game:GetEngineFeature("ReadHasRobloxSubscriptionLua")
 local var1 = if readHasRobloxSubscriptionLua then {
 	"Name",
@@ -121,23 +119,20 @@ local function useLocalUser()
 end
 
 return reactModule.memo(function(p2)
-	-- upvalues: useLocalUser (ref), reactModule (ref), view (ref), profileCardModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagFlyoutSidePanelUseProfileFrameThumbnail (ref), unibarListModule (ref)
+	-- upvalues: useLocalUser (ref), reactModule (ref), view (ref), profileCardModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagFlyoutSidePanelUseProfileFrameThumbnail (ref)
 	local var7, var8 = useLocalUser()
 	
 	return reactModule.createElement(view, {
-		tag = "row align-y-center gap-small size-full-0 auto-y padding-right-xlarge padding-top-large",
+		tag = "size-full-0 auto-y padding-right-xlarge padding-top-large",
 		testId = "user-profile-row",
 		LayoutOrder = p2.layoutOrder
 	}, {
-		ProfileCardContainer = reactModule.createElement(view, { tag = "fill auto-y", LayoutOrder = 0 }, {
-			ProfileCard = reactModule.createElement(profileCardModule.ProfileCard, {
-				layoutOrder = 0,
-				isCompact = true,
-				localUserModel = var7,
-				isRobloxSubscriber = if fFlagEnableBlackbirdCheck then var8 else nil,
-				useProfileFrameThumbnail = fFlagFlyoutSidePanelUseProfileFrameThumbnail
-			})
-		}),
-		UnibarList = reactModule.createElement(unibarListModule, { layoutOrder = 1 })
+		ProfileCard = reactModule.createElement(profileCardModule.ProfileCard, {
+			layoutOrder = 0,
+			isCompact = true,
+			localUserModel = var7,
+			isRobloxSubscriber = if fFlagEnableBlackbirdCheck then var8 else nil,
+			useProfileFrameThumbnail = fFlagFlyoutSidePanelUseProfileFrameThumbnail
+		})
 	})
 end)

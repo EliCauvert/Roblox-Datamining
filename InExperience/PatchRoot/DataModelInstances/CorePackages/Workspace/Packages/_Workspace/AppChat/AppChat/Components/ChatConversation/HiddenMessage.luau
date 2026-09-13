@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
 local foundationModule = require(parent.Foundation)
-local chatBubbleContainerModule = require(script.Parent.Bubble.ChatBubbleContainer)
+local chatBubbleContainerAutomaticSizeModule = require(script.Parent.Bubble.ChatBubbleContainerAutomaticSize)
 local t = {
 	isIncoming = false,
 	hasTail = false,
@@ -16,11 +16,11 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), reactModule (ref), chatBubbleContainerModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), reactModule (ref), chatBubbleContainerAutomaticSizeModule (ref)
 	local var1 = cryoModule.Dictionary.union(t, p1)
 	local var2 = foundationModule.Hooks.useTokens()
 	
-	return reactModule.createElement(chatBubbleContainerModule, {
+	return reactModule.createElement(chatBubbleContainerAutomaticSizeModule, {
 		isIncoming = var1.isIncoming,
 		hasTail = var1.hasTail,
 		isPending = var1.isPending,

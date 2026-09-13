@@ -78,15 +78,12 @@ Authentication.AccountSwitch.Action.SwitchAccount,Hesap Değiştir
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Hesap değiştir
 Authentication.CrossDevice.Heading.QuickLogin,Hızlı giriş
 Authentication.Login.Action.QuickSignIn,
-Authentication.Login.Action.Save,Kaydet
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} hesabını değiştirmek için Roblox'tan çıkış yap
 Authentication.Login.Button.UseDifferentRobloxAccount,Farklı bir Roblox hesabı kullan
 Authentication.Login.Error.PasskeyOnlyAccount,Hesabına yalnızca giriş yapmak için bir geçiş anahtarı ayarlanmış. Geçiş anahtarınla giriş yapmayı dene veya hesabını kurtar.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Platform hesabı doğrulanamıyor. Lütfen daha sonra tekrar dene.
 Authentication.Login.Heading.IncompatibleAccounts,Uyumsuz Hesaplar
-Authentication.Login.Label.Email,E-posta
 Authentication.Login.Label.LearnMore,Daha fazla bilgi edin
-Authentication.Login.Label.Username,Kullanıcı adı
 Authentication.Login.LinkIllegalChildAccountLinking,Bu Roblox hesabı bir Xbox çocuk hesabına bağlanamadı. Lütfen başka bir hesabı dene veya ayarlarını kontrol et.
 Authentication.Login.Response.AlreadyLinked,Bu Roblox hesabı zaten {platform} için hesap farklı bir hesaba bağlı. Lütfen farklı bir Roblox hesabıyla giriş yapmayı dene.
 Authentication.Login.Response.IncorrectEmailOrPassword,Hatalı e-posta veya şifre.
@@ -104,57 +101,12 @@ Authentication.Login.Response.SomethingWentWrong,Bir şeyler yanlış gitti. Lü
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,Bir şeyler yanlış gitti. Lütfen başka bir yöntemle giriş yapmayı dene.
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,E-postan doğrulanmadı. Lütfen kullanıcı adınla giriş yap.
 Authentication.Login.WeChat.AntiAddictionText,"Kötü deneyimleri boykot et ve korsan deneyimlerden kaçın. Kandırılma ve kendini savunma konusunda bilinçli ol. Deneyim ziyaretleri, zihnin için faydalıdır ancak çok fazla deneyim ziyareti, sağlığına zarar verebilir. Zamanını iyi kullan ve sağlıklı bir yaşam tarzı benimsemeye özen göster."
-Authentication.SignUp.Action.ApplyOnNextRespawn,Bir dahaki sıfırlamada uygula
-Authentication.SignUp.Action.Cancel,
-Authentication.SignUp.Action.ExitModalLeave,Ayrıl
-Authentication.SignUp.Action.RespawnNow,Şimdi sıfırla
-Authentication.SignUp.Button.OKCaptialized,Tamam
 Authentication.SignUp.Button.RetryLogIn,Giriş yapmayı tekrar dene
 Authentication.SignUp.Description.AccountAlreadyLinked,{platformAccountName} için hesap zaten bir Roblox hesabına bağlı. Lütfen tekrar giriş yapmayı dene.
-Authentication.SignUp.Description.BirthdayHint,Tarih gir
-Authentication.SignUp.Description.Try,Dene
-Authentication.SignUp.Description.UsernameChanged,"Her şey tamam! Hesabın hazır ve {platform} ile bağlandı. Güncellenen kullanıcı adını oyunda görmek için şimdi sıfırla, aksi takdirde bir dahaki sefere uygulanacak."
-Authentication.SignUp.Description.UsernameUnchanged,Artık buradasın! Hesabın hazır ve {platform} ile bağlandı. Arkadaşlarınla sohbet et ve milyonlarca Roblox oyunu oyna.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Roblox hesabın, {platform} için hesap bağlanacak. Bu bağlantıyı Ayarlar ekranından istediğin zaman kopartabilirsin. {platform} için hesap başka bir hesaba bağlanmadan önce bir bekleme süresi olabilir. {ctaButton} düğmesine tıklayarak tahkim maddesi de dâhil olmak üzere Kullanım Koşulları'nı kabul etmiş ve Gizlilik Politikası'nı onaylamış olursun."
-Authentication.SignUp.Header.SetUpYourRobloxAccount,Roblox hesabını kur
 Authentication.SignUp.Heading.CountryCodeSelector,Ülke seç
 Authentication.SignUp.Heading.RetryLogIn,
-Authentication.SignUp.Label.Birthday,Doğum Günü
-Authentication.SignUp.Label.Continue,Devam Et
-Authentication.SignUp.Label.Day,Gün
-Authentication.SignUp.Label.EnterYourEmail,E-posta adresini gir
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,Bu oyunu oynamak için daha büyük olman gerekiyor
-Authentication.SignUp.Label.ErrorsWithPassword,Şifre ile ilgili hatalar var.
-Authentication.SignUp.Label.ErrorsWithUsername,Kullanıcı adıyla ilgili hatalar var.
-Authentication.SignUp.Label.ExitModalSubtitle,Hesabın neredeyse oluşturuldu. Ayrılırsan şu ana kadarki ilerlemeni kaybedeceksin.
-Authentication.SignUp.Label.ExitModalTitle,Hesap oluşturma işleminden ayrılmak mı istiyorsun?
-Authentication.SignUp.Label.Gender,Cinsiyet
-Authentication.SignUp.Label.GenderFemale,Kadın
-Authentication.SignUp.Label.GenderMale,Erkek
-Authentication.SignUp.Label.Month,Ay
-Authentication.SignUp.Label.PasswordError1,En az 8 karakter uzunluğunda
-Authentication.SignUp.Label.PasswordError2,Kullanıcı adı ile eşleşmiyor
-Authentication.SignUp.Label.PasswordError2.V2,
-Authentication.SignUp.Label.PasswordError3,Basit bir şifre değil
-Authentication.SignUp.Label.PasswordError3.V2,
-Authentication.SignUp.Label.PasswordPlaceholder,En az 8 karakter
-Authentication.SignUp.Label.SelectBirthdaySentenceCase,Doğum günü seç
-Authentication.SignUp.Label.UsernameError1,"Yalnızca harfler, sayılar ve _ içeriyor"
-Authentication.SignUp.Label.UsernameError2,3 ila 20 karakter uzunluğunda
-Authentication.SignUp.Label.UsernameError3,Kullanımda değil
-Authentication.SignUp.Label.UsernameError4,Roblox için uygun
-Authentication.SignUp.Label.UsernameError5,_ ile başlamıyor ve bitmiyor
-Authentication.SignUp.Label.UsernameError6,En fazla bir tane _ içeriyor
-Authentication.SignUp.Label.UsernameError7,Özel bilgiler içermiyor
-Authentication.SignUp.Label.Year,Yıl
-Authentication.SignUp.Message.Username.NoRealNameUse,Gerçek adını kullanma
-Authentication.SignUp.PasswordErrorLength,8 ila 200 karakter uzunluğunda
-Authentication.SignUp.Response.BirthdayMustBeSetFirst,Önce doğum günü ayarlanmalı.
 Authentication.SignUp.Response.ErrorTryAgain,
-Authentication.SignUp.Response.InvalidBirthday,Geçersiz doğum günü.
-Authentication.SignUp.Response.InvalidEmail,Geçersiz e-posta adresi.
-Authentication.SignUp.Response.UsernameMustBeSetFirst,Önce kullanıcı adı ayarlanmalı.
-Authentication.SignUp.Subtitle.YourProgressCarriesOver,Kurulumu tamamladığında ilerlemen aktarılır.
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,Daha fazla işlem yapabilmek için 2 Aşamalı Doğrulama gerekiyor. 2 Aşamalı Doğrulamayı tamamlamak için Ayarlar > Güvenlik menüsüne git.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Çok fazla girişimde bulunuldu. Lütfen daha sonra tekrar dene.
@@ -337,10 +289,10 @@ CommonUI.Controls.Action.Apply,Uygula
 CommonUI.Controls.Action.Back,Geri
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.Confirm,Onayla
-CommonUI.Controls.Action.Continue,
+CommonUI.Controls.Action.Continue,Devam Et
 CommonUI.Controls.Action.Done,Bitti
 CommonUI.Controls.Action.Next,İleri
-CommonUI.Controls.Action.OK,
+CommonUI.Controls.Action.OK,Tamam
 CommonUI.Controls.Action.Refresh,Yenile
 CommonUI.Controls.Action.ResetAll,Tümünü sıfırla
 CommonUI.Controls.Action.Search,Ara
@@ -353,7 +305,7 @@ CommonUI.Controls.Label.April,Nisan
 CommonUI.Controls.Label.AprilAbbreviated,Nis.
 CommonUI.Controls.Label.August,Ağustos
 CommonUI.Controls.Label.AugustAbbreviated,Ağu.
-CommonUI.Controls.Label.Day,
+CommonUI.Controls.Label.Day,Gün
 CommonUI.Controls.Label.December,Aralık
 CommonUI.Controls.Label.DecemberAbbreviated,Ara.
 CommonUI.Controls.Label.February,Şubat
@@ -395,7 +347,7 @@ CommonUI.Controls.Label.Tuesday,Salı
 CommonUI.Controls.Label.TuesdayAbbreviated,Sa
 CommonUI.Controls.Label.Wednesday,Çarşamba
 CommonUI.Controls.Label.WednesdayAbbreviated,Ça
-CommonUI.Controls.Label.Year,
+CommonUI.Controls.Label.Year,Yıl
 CommonUI.Controls.NoResultsFound,Hiçbir sonuç bulunamadı
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Continue,
@@ -460,7 +412,6 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,Sıfırla
-CommonUI.Messages.Label.Password,Şifre
 CommonUI.Messages.Response.NoResults,Sonuç yok
 CommonUI.Messages.Response.PageError,Sayfa yüklenirken hata
 CommonUI.Messages.Response.SomethingWentWrong,Bir şeyler yanlış gitti
@@ -754,7 +705,7 @@ CoreScripts.InGameMenu.ConfirmLeaveGame,Ayrılmak istediğine emin misin?
 CoreScripts.InGameMenu.ControllerBar.Back,
 CoreScripts.InGameMenu.ControllerBar.Cancel,
 CoreScripts.InGameMenu.ControllerBar.CloseMoreMenu,Daha Fazla Menüsünü Kapat
-CoreScripts.InGameMenu.ControllerBar.Leave,
+CoreScripts.InGameMenu.ControllerBar.Leave,Ayrıl
 CoreScripts.InGameMenu.ControllerBar.OpenMoreMenu,Daha Fazla Menüsünü Aç
 CoreScripts.InGameMenu.ControllerBar.Respawn,
 CoreScripts.InGameMenu.ControllerBar.RespawnCharacter,Karakteri Sıfırla
@@ -996,8 +947,6 @@ CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Ayrılıyor musun?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Daha önce ziyaret edilen oyunlara katıl
 CoreScripts.InGameMenu.Traversal.LeaveBody,Bu oyundan ayrılıp {PREVIOUS_EXPERIENCE} oyununa dönmek üzeresin.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
-CoreScripts.InGameMenu.UnlockMore.Description,"Sohbet, arkadaşlar ve daha fazla oyun"
-CoreScripts.InGameMenu.UnlockMore.Title,Roblox'ta daha fazlasının kilidini aç
 CoreScripts.InGameMenu.Vibration,Titreşim
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,tuşuna basmayı gerektirir
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,"Bazı deneyimler, menüde gezinmek için"
@@ -1346,7 +1295,7 @@ Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Son kaydedilen avatarı geri yükle
 Feature.Avatar.Action.Revert,Geri Döndür
 Feature.Avatar.Action.Rotate,
-Feature.Avatar.Action.Save,
+Feature.Avatar.Action.Save,Kaydet
 Feature.Avatar.Action.SaveAsNew,Yeni olarak kaydet
 Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,Birden fazla öğe seç
@@ -2292,8 +2241,6 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Henüz sürüm geçmişi yok.
 Feature.Build.Message.OneTaskCompleted,1 görev tamamlandı
 Feature.Build.Message.OutOfBuildUsage,İnşa Et kullanım hakkın tükendi. Bir şeyler oluşturmaya devam etmek için Robux kullanma seçeneklerini görüntüle.
-Feature.Build.Message.PlaytestInviteSendFailedBody,Aşağıdaki kullanıcılara sohbet bağlantısı içeren davet gönderemedin:
-Feature.Build.Message.PlaytestInviteSendFailedHint,Bağlantı almak için lütfen Paylaş düğmesini kullan.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT}/{MAX_INVITES} oynanış testçisi eklendi
 Feature.Build.Message.PrivatePlaytestInvite,"{username}, seni {experienceName} için özel oynanış testine davet etti"
 Feature.Build.Message.PublicPublishFailed,Oyunun yayınlandı ancak herkese açık hâle getirilemedi. Tekrar dene.
@@ -2359,7 +2306,6 @@ Feature.Build.Title.GetUsers,Kullanıcıları al
 Feature.Build.Title.ManagedPricingAcknowledgement,Yönetilen Fiyatlandırma açılsın mı?
 Feature.Build.Title.NoMonetizationProducts,Oyununda kazanmaya başla
 Feature.Build.Title.NoRobuxForUsage,İnşa Et kullanım hakkı için Robux kalmadı
-Feature.Build.Title.PlaytestInviteSendFailed,Davetler gönderilemedi
 Feature.Build.Title.Playtesters,Oynanış Testçileri
 Feature.Build.Title.PlaytestersOnlyPlay,Yalnızca oynanış testçileri oynayabilir
 Feature.Build.Title.PromoteGame,Oyununun tanıtımını yap
@@ -2473,7 +2419,7 @@ Feature.Catalog.Action.Report,Bildirim
 Feature.Catalog.Action.Sell,Sat
 Feature.Catalog.Action.ShareVia,Paylaş...
 Feature.Catalog.Action.Submit,
-Feature.Catalog.Action.Try,
+Feature.Catalog.Action.Try,Dene
 Feature.Catalog.Action.Upgrade,Yükselt
 Feature.Catalog.Action.ViewDetailsPage,Ayrıntılar Sayfasını Görüntüle
 Feature.Catalog.Action.ViewExperienceDetails,Deneyim Detaylarını Görüntüle
@@ -2717,7 +2663,7 @@ Feature.Catalog.Label.Trending,Popüler
 Feature.Catalog.Label.TryOns,Üstüne Deneyebildiklerin
 Feature.Catalog.Label.TryOnsMultiple,Üstüne Deneyebildiklerin ({numItems})
 Feature.Catalog.Label.Unlimited,Sınırsız
-Feature.Catalog.Label.Username,
+Feature.Catalog.Label.Username,Kullanıcı adı
 Feature.Catalog.Label.UsingBundleParts,{count} set parçası içerir
 Feature.Catalog.Label.WaistAccessories,Bel Aksesuarları
 Feature.Catalog.Label.WearAfterPurchase,
@@ -3306,7 +3252,6 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Güvenilir arkadaşlard
 Feature.Friends.TrustedFriend.AddBack.Header,Güvenilir arkadaş olma talebi
 Feature.Friends.TrustedFriend.Info.Modal.Header,Yeni güvenilir arkadaş
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Güvenilir arkadaş olarak ekle
-Feature.Friends.TrustedFriend.Label.Title,Güvenilir arkadaş
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} artık güvenilir arkadaşın
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Güvenilir arkadaş kaldırıldı
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Güvenilir arkadaş olma talebi gönderildi
@@ -3590,7 +3535,7 @@ Feature.Moments.Label.FeedFailedToLoad,Sayfa yüklenemedi
 Feature.Moments.Label.FeedMyMoments,Anlarım
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,Yakalama nasıl kullanılır?
-Feature.Moments.Label.LinkCopied,Bağlantı kopyalandı
+Feature.Moments.Label.LinkCopied,Bağlantı kopyalandı.
 Feature.Moments.Label.LinkCopyFailed,Bağlantı kopyalanamadı.
 Feature.Moments.Label.ModeratedRodeoBody,Topluluk Standartlarımıza aykırı olduğu için bu Anı kaldırdık. Anlarının görünür kalması için kuralları öğrenip uygulamaya özen göstermelisin.
 Feature.Moments.Label.MomentDeletedBody,
@@ -3757,7 +3702,6 @@ Feature.Profile.Action.ShareProfile,Profili paylaş
 Feature.Profile.Action.ShareProfileLink,Profil Bağlantısını Paylaş
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,QR kodunu paylaş
-Feature.Profile.Action.Trade,Takas
 Feature.Profile.Action.UserBlocked,Kullanıcı Engellendi
 Feature.Profile.Action.ViewFullProfile,Profilin tamamını görüntüle
 Feature.Profile.Action.ViewProfile,Profili görüntüle
@@ -4404,7 +4348,6 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,
 Feature.VerificationUpsell.Action.EditPhoneNumber,Telefon Numarasını Düzenle
 Feature.VerificationUpsell.Action.EnableVoice,Sesli Sohbeti Etkinleştir
-Feature.VerificationUpsell.Action.Logout,Yine de çıkış yap
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

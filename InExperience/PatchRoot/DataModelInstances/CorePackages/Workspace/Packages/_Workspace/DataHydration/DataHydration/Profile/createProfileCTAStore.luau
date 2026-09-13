@@ -6,8 +6,6 @@ local _ = require(dataHydration.DataHydrationTypes)
 local cryoModule = require(parent.Cryo)
 local requestsModule = require(dataHydration.Profile.Requests)
 local _ = require(dataHydration.Profile.Enums.ProfileCTAEnums)
-local hydratePresenceFromProfileMetadataModule = require(dataHydration.Profile.hydratePresenceFromProfileMetadata)
-local fFlagProfileCTAHydratePresenceFromMetadataModule = require(dataHydration.Flags.FFlagProfileCTAHydratePresenceFromMetadata)
 game:DefineFastInt("ProfileCTAStoreProcessDelaySec", 1)
 
 local _ = function()
@@ -15,18 +13,18 @@ local _ = function()
 end
 
 return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), cryoModule (ref), requestsModule (ref), fFlagProfileCTAHydratePresenceFromMetadataModule (ref), hydratePresenceFromProfileMetadataModule (ref)
+	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), cryoModule (ref), requestsModule (ref)
 	local var1 = createDataCacheModule()
 	local var2 = createDataResolverModule({
 		requestBatchSize = 25,
 		cache = var1,
 		queueProcessDelaySec = game:GetFastInt("ProfileCTAStoreProcessDelaySec"),
 		fetchFn = function(p1)
-			-- upvalues: cryoModule (copy), requestsModule (copy), fFlagProfileCTAHydratePresenceFromMetadataModule (copy), hydratePresenceFromProfileMetadataModule (copy)
+			-- upvalues: cryoModule (copy), requestsModule (copy)
 			local var3 = cryoModule.Dictionary.keys(p1)
 			
 			return requestsModule.GetUserProfileCTA(var3):andThen(function(p2)
-				-- upvalues: var3 (ref), fFlagProfileCTAHydratePresenceFromMetadataModule (copy), hydratePresenceFromProfileMetadataModule (copy)
+				-- upvalues: var3 (ref)
 				local t = {}
 				
 				if p2.responseBody and p2.responseBody.profiles then
@@ -34,10 +32,6 @@ return function()
 						local var4 = tostring(v)
 						local var5 = p2.responseBody.profiles[var4]
 						t[var4] = var5 and (var5.components and (var5.components.Actions or {}))
-						
-						if fFlagProfileCTAHydratePresenceFromMetadataModule then
-							hydratePresenceFromProfileMetadataModule(var4, var5 and var5.metadata)
-						end
 					end
 				end
 				return t

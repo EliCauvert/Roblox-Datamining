@@ -69,15 +69,12 @@ Authentication.AccountSwitch.Action.SwitchAccount,切换帐户
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,快速登录
 Authentication.Login.Action.QuickSignIn,
-Authentication.Login.Action.Save,保存
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,退出 Roblox 以切换为 {platformAccountName} 帐户
 Authentication.Login.Button.UseDifferentRobloxAccount,使用其他 Roblox 帐户
 Authentication.Login.Error.PasskeyOnlyAccount,你的帐户只设置了登录密码。请尝试使用你的通行密钥登录，或恢复你的帐户。
 Authentication.Login.Error.PlatformAccountConnectionFailure,无法验证平台帐户。请稍后重试。
 Authentication.Login.Heading.IncompatibleAccounts,帐户不兼容
-Authentication.Login.Label.Email,电子邮件
 Authentication.Login.Label.LearnMore,了解更多
-Authentication.Login.Label.Username,用户名
 Authentication.Login.LinkIllegalChildAccountLinking,此 Roblox 帐户无法关联到 Xbox 儿童帐户。请改用其他帐户或检查你的设置。
 Authentication.Login.Response.AlreadyLinked,此 Roblox 帐户已访问{platform}的账号一个帐户。请使用一个不同的 Roblox 帐户尝试登录。
 Authentication.Login.Response.IncorrectEmailOrPassword,电子邮件或密码不正确。
@@ -95,57 +92,12 @@ Authentication.Login.Response.SomethingWentWrong,
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,发生错误，请尝试其他方式登录。
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,你的电子邮件未经验证。请使用你的用户名登录。
 Authentication.Login.WeChat.AntiAddictionText,抵制不良作品，拒绝盗版作品。注意自我保护，谨防受骗上当。适度娱乐益脑，过度沉迷伤身。合理安排时间，享受健康生活。
-Authentication.SignUp.Action.ApplyOnNextRespawn,在下次重生时应用
-Authentication.SignUp.Action.Cancel,
-Authentication.SignUp.Action.ExitModalLeave,离开
-Authentication.SignUp.Action.RespawnNow,立即重生
-Authentication.SignUp.Button.OKCaptialized,好的
 Authentication.SignUp.Button.RetryLogIn,重试登录
 Authentication.SignUp.Description.AccountAlreadyLinked,你在 {platformAccountName} 上的帐户已与一个 Roblox 帐户关联。请尝试重新登录。
-Authentication.SignUp.Description.BirthdayHint,输入日期
-Authentication.SignUp.Description.Try,试一试
-Authentication.SignUp.Description.UsernameChanged,一切就绪！你的帐户已准备就绪并已连接至 {platform}。立即重生即可在游戏中看到更新后的用户名，否则更新将在下次重生时应用。
-Authentication.SignUp.Description.UsernameUnchanged,大功告成！你的帐户已准备就绪并已连接至 {platform}。与朋友聊天，畅玩数百万款 Roblox 游戏。
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"您的 Roblox 帐户将链接到您的访问{platform}的账号。你可以随时在“设置”页面取消关联。在能够链接到另一个帐户之前,可能会有一个访问{platform}的账号。点按 {ctaButton} 即表示你同意《使用条款》（包括其中的仲裁条款），并确认已阅读《隐私政策》。"
-Authentication.SignUp.Header.SetUpYourRobloxAccount,设置你的 Roblox 帐户
 Authentication.SignUp.Heading.CountryCodeSelector,选择国家/地区
 Authentication.SignUp.Heading.RetryLogIn,
-Authentication.SignUp.Label.Birthday,生日
-Authentication.SignUp.Label.Continue,
-Authentication.SignUp.Label.Day,日
-Authentication.SignUp.Label.EnterYourEmail,输入你的电子邮箱
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,尚未达到游玩此游戏的年龄
-Authentication.SignUp.Label.ErrorsWithPassword,密码发生错误。
-Authentication.SignUp.Label.ErrorsWithUsername,用户名发生错误。
-Authentication.SignUp.Label.ExitModalSubtitle,你的帐户即将创建完成。如果离开，将会丢失当前进度。
-Authentication.SignUp.Label.ExitModalTitle,离开帐户创建页面？
-Authentication.SignUp.Label.Gender,性别
-Authentication.SignUp.Label.GenderFemale,女
-Authentication.SignUp.Label.GenderMale,男
-Authentication.SignUp.Label.Month,月
-Authentication.SignUp.Label.PasswordError1,8 个字符以上
-Authentication.SignUp.Label.PasswordError2,与用户名不匹配
-Authentication.SignUp.Label.PasswordError2.V2,
-Authentication.SignUp.Label.PasswordError3,不容易被猜到
-Authentication.SignUp.Label.PasswordError3.V2,不是简单密码
-Authentication.SignUp.Label.PasswordPlaceholder,最少 8 个字符
-Authentication.SignUp.Label.SelectBirthdaySentenceCase,选择生日
-Authentication.SignUp.Label.UsernameError1,只包含字母、数字及“ _”
-Authentication.SignUp.Label.UsernameError2,3 到 20 个字符之间
-Authentication.SignUp.Label.UsernameError3,未被使用
-Authentication.SignUp.Label.UsernameError4,未包含不当字眼
-Authentication.SignUp.Label.UsernameError5,开头或结尾都不是“_”
-Authentication.SignUp.Label.UsernameError6,最多有一个“_”
-Authentication.SignUp.Label.UsernameError7,未包含私人信息
-Authentication.SignUp.Label.Year,年
-Authentication.SignUp.Message.Username.NoRealNameUse,请勿使用你的真实姓名。
-Authentication.SignUp.PasswordErrorLength,长度在 8 到 200 个字符之间
-Authentication.SignUp.Response.BirthdayMustBeSetFirst,必须先设定生日。
 Authentication.SignUp.Response.ErrorTryAgain,有地方出错了。请稍后重试。
-Authentication.SignUp.Response.InvalidBirthday,生日无效。
-Authentication.SignUp.Response.InvalidEmail,电子邮件地址无效。
-Authentication.SignUp.Response.UsernameMustBeSetFirst,必须先设定用户名。
-Authentication.SignUp.Subtitle.YourProgressCarriesOver,完成设置后，你的进度会保留。
 Authentication.TwoStepVerification.Action.GoToSecurity,设置
 Authentication.TwoStepVerification.Label.TwoStepRequired,若要继续交易需要进行两步验证。请前往设置 > 安全来完成两步验证。
 Authentication.TwoStepVerification.Response.TooManyAttempts,尝试次数过多。请稍后重试。
@@ -347,7 +299,7 @@ CommonUI.Controls.Label.April,4月
 CommonUI.Controls.Label.AprilAbbreviated,
 CommonUI.Controls.Label.August,8月
 CommonUI.Controls.Label.AugustAbbreviated,
-CommonUI.Controls.Label.Day,
+CommonUI.Controls.Label.Day,日
 CommonUI.Controls.Label.December,12月
 CommonUI.Controls.Label.DecemberAbbreviated,
 CommonUI.Controls.Label.February,2月
@@ -389,7 +341,7 @@ CommonUI.Controls.Label.Tuesday,星期二
 CommonUI.Controls.Label.TuesdayAbbreviated,周二
 CommonUI.Controls.Label.Wednesday,星期三
 CommonUI.Controls.Label.WednesdayAbbreviated,周三
-CommonUI.Controls.Label.Year,
+CommonUI.Controls.Label.Year,年
 CommonUI.Controls.NoResultsFound,未找到结果
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Continue,
@@ -454,7 +406,6 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,忽略
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,重置
-CommonUI.Messages.Label.Password,密码
 CommonUI.Messages.Response.NoResults,无结果
 CommonUI.Messages.Response.PageError,加载页面出错
 CommonUI.Messages.Response.SomethingWentWrong,有地方出错了
@@ -588,7 +539,7 @@ CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.NewBalance,购买后的余
 CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.TotalCost,订单合计
 CoreScripts.BulkPurchasePrompt.SuccessPrompt.Body,你已成功购买 {itemCount} 个道具。你可以在自己的道具栏中找到这些道具。
 CoreScripts.BulkPurchasePrompt.SuccessPrompt.Heading,
-CoreScripts.CancelUserSubscriptionPrompt.Error.ButtonText,
+CoreScripts.CancelUserSubscriptionPrompt.Error.ButtonText,好的
 CoreScripts.CancelUserSubscriptionPrompt.ErrorCancellingPrompt.Body,发生错误，订阅续订未取消。请重试。
 CoreScripts.CancelUserSubscriptionPrompt.ErrorCancellingPrompt.Heading,错误
 CoreScripts.CancelUserSubscriptionPrompt.ExpiringPrompt.Body,你的订阅已成功取消。无需采取进一步行动。
@@ -748,7 +699,7 @@ CoreScripts.InGameMenu.ConfirmLeaveGame,是否确定要离开？
 CoreScripts.InGameMenu.ControllerBar.Back,
 CoreScripts.InGameMenu.ControllerBar.Cancel,
 CoreScripts.InGameMenu.ControllerBar.CloseMoreMenu,关闭更多选项菜单
-CoreScripts.InGameMenu.ControllerBar.Leave,
+CoreScripts.InGameMenu.ControllerBar.Leave,离开
 CoreScripts.InGameMenu.ControllerBar.OpenMoreMenu,开启更多选项菜单
 CoreScripts.InGameMenu.ControllerBar.Respawn,重生
 CoreScripts.InGameMenu.ControllerBar.RespawnCharacter,重生角色
@@ -1338,7 +1289,7 @@ Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,恢复最后保存的虚拟形象
 Feature.Avatar.Action.Revert,还原
 Feature.Avatar.Action.Rotate,
-Feature.Avatar.Action.Save,
+Feature.Avatar.Action.Save,保存
 Feature.Avatar.Action.SaveAsNew,储存为新装扮
 Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,选择多个物品
@@ -2310,10 +2261,8 @@ Feature.Build.Message.ShareLinkFailed,无法创建分享链接。请重试。
 Feature.Build.Message.SignedOut,你已注销。请登录并重试。
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} 个任务已完成
 Feature.Build.Message.ThinkingSeconds,正在思考（{SECONDS} 秒）
-Feature.Build.Message.TrustedFriendsRequiredForPlaytest,
 Feature.Build.Message.TryAgain,请重试。
 Feature.Build.Message.TurnToPortrait,将你的设备切换为竖向模式，以继续在游戏上操作。
-Feature.Build.Message.UpdateSettingsToPlaytest,
 Feature.Build.Message.VersionHistoryLoad,无法加载版本历史记录。
 Feature.Build.Message.WhatToCreate,你今天想创作什么？
 Feature.Build.Message.WorkedMinutesSeconds,已完成（{MINUTES} 分 {REM_SECONDS} 秒）
@@ -2469,7 +2418,7 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,出售
 Feature.Catalog.Action.ShareVia,分享方式：
 Feature.Catalog.Action.Submit,
-Feature.Catalog.Action.Try,
+Feature.Catalog.Action.Try,试一试
 Feature.Catalog.Action.Upgrade,升级
 Feature.Catalog.Action.ViewDetailsPage,查看详情页面
 Feature.Catalog.Action.ViewExperienceDetails,查看体验详情
@@ -2713,7 +2662,7 @@ Feature.Catalog.Label.Trending,热门
 Feature.Catalog.Label.TryOns,
 Feature.Catalog.Label.TryOnsMultiple,试穿 {numItems} 件
 Feature.Catalog.Label.Unlimited,无限
-Feature.Catalog.Label.Username,
+Feature.Catalog.Label.Username,用户名
 Feature.Catalog.Label.UsingBundleParts,使用 {count} 个组合部件
 Feature.Catalog.Label.WaistAccessories,腰部配饰
 Feature.Catalog.Label.WearAfterPurchase,购买后穿戴物品
@@ -3301,7 +3250,6 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,移除信赖的好友
 Feature.Friends.TrustedFriend.AddBack.Header,“信赖的好友”请求
 Feature.Friends.TrustedFriend.Info.Modal.Header,新的信赖好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,添加信赖的好友
-Feature.Friends.TrustedFriend.Label.Title,信赖的好友
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}现已成为你的信赖好友
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信赖的好友已移除
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,“信赖的好友”请求已发送
@@ -3717,7 +3665,7 @@ Feature.Parents.Description.EnterParentEmail.PC,关联完成后，家长将可�
 Feature.Parents.Description.EnterParentEmailV4,请寻求家长协助完成此步骤。{lineBreak}我们将发送电子邮件给你的家长以验证年龄，并关联至你的帐户。{lineBreak}关联后，家长将具备访问家长控制、孩子的屏幕使用时间与好友洞察报告等功能的权限。
 Feature.Parents.Description.EnterParentEmailWithoutParentalControl,请寻求家长协助完成此步骤。{lineBreak}我们将发送电子邮件给你的家长以验证年龄，并关联至你的帐户。{lineBreak}关联后，家长将可批准孩子的特定操作。
 Feature.Parents.Description.ParentalEmailFooter,该电子邮件地址将关联至您在 Roblox 上具备家长权限的帐户。请参阅{linkStart}隐私政策{linkEnd}来进一步了解我们的数据处理方式。
-Feature.Parents.Label.Email,
+Feature.Parents.Label.Email,电子邮件
 Feature.Parents.Label.ParentEmail,家长的电子邮件
 Feature.Parents.Message.ConflictingPendingConsent,你已申请权限。要提交新申请，请先在设置中取消你的请求。
 Feature.Parents.Message.EmailIneligible,此电子邮件不符合条件。请使用其他电子邮件地址来请求家长许可。
@@ -3751,7 +3699,6 @@ Feature.Profile.Action.ShareProfile,分享个人资料
 Feature.Profile.Action.ShareProfileLink,分享个人资料链接
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
-Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,用户已屏蔽
 Feature.Profile.Action.ViewFullProfile,查看完整个人资料
 Feature.Profile.Action.ViewProfile,
@@ -4407,7 +4354,6 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,
 Feature.VerificationUpsell.Action.EditPhoneNumber,编辑电话号码
 Feature.VerificationUpsell.Action.EnableVoice,启用语音聊天
-Feature.VerificationUpsell.Action.Logout,仍然注销
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

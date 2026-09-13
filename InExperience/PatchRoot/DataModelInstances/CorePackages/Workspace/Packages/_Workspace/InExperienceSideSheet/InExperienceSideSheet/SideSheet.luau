@@ -54,11 +54,10 @@ local list = {
 local t = {
 	ExperienceDetails = 0,
 	HeaderDivider = 1,
-	TopWidgets = 2,
+	Widgets = 2,
 	PrimaryList = if fFlagEnableSideSheetWidgets_1 then 3 else 2,
 	ListDivider = if fFlagEnableSideSheetWidgets_1 then 4 else 3,
-	SecondaryList = if fFlagEnableSideSheetWidgets_1 then 5 else 4,
-	BottomWidgets = if fFlagEnableSideSheetWidgets_1 then 6 else 5
+	SecondaryList = if fFlagEnableSideSheetWidgets_1 then 5 else 4
 }
 local t_1 = {}
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
@@ -80,27 +79,27 @@ local function getBelowFoldIntegrations(p1)
 	return getIntegrationsStoreModule(p1).getBelowFoldIntegrations(p1)
 end
 
-local function getScrollableContentTopWidgetIntegrations(p1)
+local function getScrollableWidgetIntegrations(p1)
 	-- upvalues: getIntegrationsStoreModule (ref)
-	return getIntegrationsStoreModule(p1).getScrollableContentTopWidgetIntegrations(p1)
+	return getIntegrationsStoreModule(p1).getScrollableWidgetIntegrations(p1)
 end
 
-local function getScrollableContentBottomWidgetIntegrations(p1)
+local function getFixedFooterWidgetIntegrations(p1)
 	-- upvalues: getIntegrationsStoreModule (ref)
-	return getIntegrationsStoreModule(p1).getScrollableContentBottomWidgetIntegrations(p1)
+	return getIntegrationsStoreModule(p1).getFixedFooterWidgetIntegrations(p1)
 end
 
 local var2 = if fFlagSideSheetFocusNav then require(parent.ReactFocusNavigation).useFocusGuiObject else nil
 local var3 = nil
 
 local function SideSheetContent(p1)
-	-- upvalues: useTokens (ref), useStyleSheet (ref), useBackgroundStyleModule (ref), signalsReactModule (ref), getDeviceSafePadding (ref), fFlagMountUnmountSideSheet (ref), useDrawerShouldMount (ref), getScrollableContentTopWidgetIntegrations (ref), fFlagEnableSideSheetWidgets_1 (ref), reactModule (ref), sidesheetAnalyticsModule (ref), fFlagSideSheetFocusNav (ref), var2 (write), useLastInputMode (ref), usePreferredInput (ref), fFlagShowSwitchServerButton (ref), signalsModule (ref), getSideSheetVisibilityModule (ref), responsiveModule (ref), mouseIconOverrideService (ref), getSwitchServerStore (ref), switchServerTelemetry (ref), contextActionService (ref), list (ref), toggleSideSheetModule (ref), fFlagUseAnimateScrollViewToSelectionHelper (ref), useSideSheetFocusNavScrollViewAnimationModule (ref), isPioneerLaunch (ref), userProfileRowModule (ref), t (ref), experienceDetailsRowModule (ref), view (ref), divider (ref), sideSheetWidgetListModule (ref), chromeModule (ref), verticalListModule (ref), getAboveFoldIntegrations (ref), getBelowFoldIntegrations (ref), getScrollableContentBottomWidgetIntegrations (ref), scrollView (ref), footerModule (ref), fFlagEnableWhatsNew (ref), var1 (ref), drawerContainer (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
+	-- upvalues: useTokens (ref), useStyleSheet (ref), useBackgroundStyleModule (ref), signalsReactModule (ref), getDeviceSafePadding (ref), fFlagMountUnmountSideSheet (ref), useDrawerShouldMount (ref), getScrollableWidgetIntegrations (ref), fFlagEnableSideSheetWidgets_1 (ref), reactModule (ref), sidesheetAnalyticsModule (ref), fFlagSideSheetFocusNav (ref), var2 (write), useLastInputMode (ref), usePreferredInput (ref), fFlagShowSwitchServerButton (ref), signalsModule (ref), getSideSheetVisibilityModule (ref), responsiveModule (ref), mouseIconOverrideService (ref), getSwitchServerStore (ref), switchServerTelemetry (ref), contextActionService (ref), list (ref), toggleSideSheetModule (ref), fFlagUseAnimateScrollViewToSelectionHelper (ref), useSideSheetFocusNavScrollViewAnimationModule (ref), isPioneerLaunch (ref), userProfileRowModule (ref), t (ref), experienceDetailsRowModule (ref), view (ref), divider (ref), sideSheetWidgetListModule (ref), chromeModule (ref), verticalListModule (ref), getAboveFoldIntegrations (ref), getBelowFoldIntegrations (ref), scrollView (ref), footerModule (ref), getFixedFooterWidgetIntegrations (ref), fFlagEnableWhatsNew (ref), var1 (ref), drawerContainer (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var4 = useTokens()
 	local var5 = useStyleSheet()
 	local var6 = useBackgroundStyleModule()
 	local var7 = signalsReactModule.useSignalState(getDeviceSafePadding)
 	local var8 = if fFlagMountUnmountSideSheet then useDrawerShouldMount() else true
-	local var9 = fFlagEnableSideSheetWidgets_1 and #signalsReactModule.useSignalState(getScrollableContentTopWidgetIntegrations) > 0
+	local var9 = fFlagEnableSideSheetWidgets_1 and #signalsReactModule.useSignalState(getScrollableWidgetIntegrations) > 0
 	local var10 = reactModule.useCallback(function(p2)
 		-- upvalues: sidesheetAnalyticsModule (copy)
 		sidesheetAnalyticsModule.logSidesheetClosed(p2.source)
@@ -238,9 +237,9 @@ local function SideSheetContent(p1)
 				tag = "size-full-0 auto-y padding-right-xlarge",
 				LayoutOrder = t.HeaderDivider
 			}, { Divider = reactModule.createElement(divider) }),
-			TopWidgets = if fFlagEnableSideSheetWidgets_1 then reactModule.createElement(sideSheetWidgetListModule, {
-				integrationsGetter = getScrollableContentTopWidgetIntegrations,
-				layoutOrder = t.TopWidgets,
+			Widgets = if fFlagEnableSideSheetWidgets_1 then reactModule.createElement(sideSheetWidgetListModule, {
+				integrationsGetter = getScrollableWidgetIntegrations,
+				layoutOrder = t.Widgets,
 				placement = chromeModule.Enums.SideSheetPlacement.ScrollableContentTop
 			}) else nil,
 			AboveFoldList = reactModule.createElement(verticalListModule, {
@@ -255,14 +254,12 @@ local function SideSheetContent(p1)
 			BelowFoldList = reactModule.createElement(verticalListModule, {
 				layoutOrder = t.SecondaryList,
 				integrationsGetter = getBelowFoldIntegrations
-			}),
-			BottomWidgets = if fFlagEnableSideSheetWidgets_1 then reactModule.createElement(sideSheetWidgetListModule, {
-				integrationsGetter = getScrollableContentBottomWidgetIntegrations,
-				layoutOrder = t.BottomWidgets,
-				placement = chromeModule.Enums.SideSheetPlacement.ScrollableContentBottom
-			}) else nil
+			})
 		}),
-		Footer = reactModule.createElement(footerModule, { layoutOrder = 2 })
+		Footer = reactModule.createElement(footerModule, {
+			layoutOrder = 2,
+			integrationsGetter = getFixedFooterWidgetIntegrations
+		})
 	})
 	
 	if fFlagEnableWhatsNew then

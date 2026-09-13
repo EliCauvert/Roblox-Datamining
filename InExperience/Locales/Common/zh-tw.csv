@@ -77,15 +77,12 @@ Authentication.AccountSwitch.Action.SwitchAccount,切換帳戶
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,切換帳號
 Authentication.CrossDevice.Heading.QuickLogin,快速登入
 Authentication.Login.Action.QuickSignIn,
-Authentication.Login.Action.Save,儲存
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,離開 Roblox 以切換成 {platformAccountName} 帳號
 Authentication.Login.Button.UseDifferentRobloxAccount,使用其他 Roblox 帳號
 Authentication.Login.Error.PasskeyOnlyAccount,您的帳號只有一組密碼金鑰可用於登入。請嘗試使用密碼金鑰登入或恢復帳號。
 Authentication.Login.Error.PlatformAccountConnectionFailure,無法驗證平台帳號，請稍後再試。
 Authentication.Login.Heading.IncompatibleAccounts,帳號不相容
-Authentication.Login.Label.Email,電子郵件地址
 Authentication.Login.Label.LearnMore,了解更多
-Authentication.Login.Label.Username,使用者名稱
 Authentication.Login.LinkIllegalChildAccountLinking,此 Roblox 帳號無法連結至 Xbox 兒童帳號。請嘗試使用其他帳號，或檢查你的設定。
 Authentication.Login.Response.AlreadyLinked,這個 Roblox 帳號已連結到 {platform} 上的其他帳號。請嘗試使用其他 Roblox 帳號登入。
 Authentication.Login.Response.IncorrectEmailOrPassword,電子郵件或密碼不正確。
@@ -103,57 +100,12 @@ Authentication.Login.Response.SomethingWentWrong,
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,發生錯誤。請嘗試以其他方法登入。
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,您的電子郵件未驗證，請以您的使用者名稱登入。
 Authentication.Login.WeChat.AntiAddictionText,抵制劣質與抄襲體驗！玩遊戲有益身心，但過度沉迷會對身體造成影響。控制遊戲時間，享受健康人生！
-Authentication.SignUp.Action.ApplyOnNextRespawn,在下次重生時套用
-Authentication.SignUp.Action.Cancel,
-Authentication.SignUp.Action.ExitModalLeave,離開
-Authentication.SignUp.Action.RespawnNow,立即重生
-Authentication.SignUp.Button.OKCaptialized,確定
 Authentication.SignUp.Button.RetryLogIn,重試登入
 Authentication.SignUp.Description.AccountAlreadyLinked,你的 {platformAccountName} 帳號已與 Roblox 帳號綁定。請試著重新登入。
-Authentication.SignUp.Description.BirthdayHint,輸入日期
-Authentication.SignUp.Description.Try,試用
-Authentication.SignUp.Description.UsernameChanged,大功告成！你的帳號已準備就緒並連結到 {platform}。立即重生，即可在遊戲中看到更新後的使用者名稱，或在下次重生時套用。
-Authentication.SignUp.Description.UsernameUnchanged,大功告成！你的帳號已準備就緒並連結到 {platform}。歡迎與好友聊天，並暢玩數百萬個 Roblox 遊戲。
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,您的 Roblox 帳號將連結到您在 {platform} 的帳號。您可以隨時從設定畫面取消連結。成功連結到 {platform} 上的另一個帳號之前，可能會有一段時間的等待期。按一下「{ctaButton}」即表示您同意使用條款（包括仲裁條款），並瞭解隱私權政策。
-Authentication.SignUp.Header.SetUpYourRobloxAccount,設定你的 Roblox 帳號
 Authentication.SignUp.Heading.CountryCodeSelector,選擇國家
 Authentication.SignUp.Heading.RetryLogIn,
-Authentication.SignUp.Label.Birthday,生日
-Authentication.SignUp.Label.Continue,
-Authentication.SignUp.Label.Day,日
-Authentication.SignUp.Label.EnterYourEmail,輸入你的電子郵件
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,此遊戲有遊玩年齡限制
-Authentication.SignUp.Label.ErrorsWithPassword,密碼不符規定。
-Authentication.SignUp.Label.ErrorsWithUsername,使用者名稱不符規定。
-Authentication.SignUp.Label.ExitModalSubtitle,帳號即將建立完成。如果離開，將會失去目前的進度。
-Authentication.SignUp.Label.ExitModalTitle,要離開帳號建立流程嗎？
-Authentication.SignUp.Label.Gender,性別
-Authentication.SignUp.Label.GenderFemale,女
-Authentication.SignUp.Label.GenderMale,男
-Authentication.SignUp.Label.Month,月
-Authentication.SignUp.Label.PasswordError1,8 個字元以上
-Authentication.SignUp.Label.PasswordError2,與使用者名稱不符
-Authentication.SignUp.Label.PasswordError2.V2,
-Authentication.SignUp.Label.PasswordError3,不容易被猜到
-Authentication.SignUp.Label.PasswordError3.V2,不容易被猜到的密碼
-Authentication.SignUp.Label.PasswordPlaceholder,
-Authentication.SignUp.Label.SelectBirthdaySentenceCase,選擇生日
-Authentication.SignUp.Label.UsernameError1,只包含字母、數字、「＿」
-Authentication.SignUp.Label.UsernameError2,3 到 20 個字元之間
-Authentication.SignUp.Label.UsernameError3,未被使用
-Authentication.SignUp.Label.UsernameError4,不包含不當字眼
-Authentication.SignUp.Label.UsernameError5,不以「_」開頭或結尾
-Authentication.SignUp.Label.UsernameError6,最多使用 1 個「＿」
-Authentication.SignUp.Label.UsernameError7,不含有私人資料
-Authentication.SignUp.Label.Year,年
-Authentication.SignUp.Message.Username.NoRealNameUse,請勿使用您的真實姓名
-Authentication.SignUp.PasswordErrorLength,必須為 8 到 200 個字元之間
-Authentication.SignUp.Response.BirthdayMustBeSetFirst,請先設定生日。
 Authentication.SignUp.Response.ErrorTryAgain,
-Authentication.SignUp.Response.InvalidBirthday,生日無效。
-Authentication.SignUp.Response.InvalidEmail,此電子郵件地址無效。
-Authentication.SignUp.Response.UsernameMustBeSetFirst,請先設定使用者名稱。
-Authentication.SignUp.Subtitle.YourProgressCarriesOver,完成設定後，你的進度將會保留。
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,繼續交易之前需要進行雙步驟驗證。請前往設定 > 安全完成雙步驟驗證。
 Authentication.TwoStepVerification.Response.TooManyAttempts,嘗試次數過多，請稍後再試。
@@ -339,7 +291,7 @@ CommonUI.Controls.Action.Confirm,確認
 CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,完成
 CommonUI.Controls.Action.Next,下一個
-CommonUI.Controls.Action.OK,
+CommonUI.Controls.Action.OK,確定
 CommonUI.Controls.Action.Refresh,重新整理
 CommonUI.Controls.Action.ResetAll,重置全部
 CommonUI.Controls.Action.Search,搜尋
@@ -352,7 +304,7 @@ CommonUI.Controls.Label.April,4 月
 CommonUI.Controls.Label.AprilAbbreviated,
 CommonUI.Controls.Label.August,8 月
 CommonUI.Controls.Label.AugustAbbreviated,
-CommonUI.Controls.Label.Day,
+CommonUI.Controls.Label.Day,日
 CommonUI.Controls.Label.December,12 月
 CommonUI.Controls.Label.DecemberAbbreviated,
 CommonUI.Controls.Label.February,2 月
@@ -394,7 +346,7 @@ CommonUI.Controls.Label.Tuesday,星期二
 CommonUI.Controls.Label.TuesdayAbbreviated,週二
 CommonUI.Controls.Label.Wednesday,星期三
 CommonUI.Controls.Label.WednesdayAbbreviated,週三
-CommonUI.Controls.Label.Year,
+CommonUI.Controls.Label.Year,年
 CommonUI.Controls.NoResultsFound,找不到結果
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Continue,
@@ -459,7 +411,6 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,重置
-CommonUI.Messages.Label.Password,密碼
 CommonUI.Messages.Response.NoResults,沒有結果
 CommonUI.Messages.Response.PageError,載入頁面時發生錯誤
 CommonUI.Messages.Response.SomethingWentWrong,
@@ -647,7 +598,7 @@ CoreScripts.FTUX.Label.SideSheetUpdate,選單仍舊包含所有基本功能。
 CoreScripts.FTUX.Label.SocialOnboarding,從頂端列輕鬆存取聊天等社交功能。
 CoreScripts.Feedback.EntryPoint.ButtonText,給予回饋
 CoreScripts.Feedback.EntryPoint.OptionText,給予翻譯回饋
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,離開
 CoreScripts.Feedback.FeedbackBar.HelpButton,協助
 CoreScripts.Feedback.FeedbackBar.MainLabel,
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,請在下方提供其他留言
@@ -1345,7 +1296,7 @@ Feature.Avatar.Action.Reset,重設
 Feature.Avatar.Action.RestoreLastSaved,還原上次儲存的虛擬人偶
 Feature.Avatar.Action.Revert,還原
 Feature.Avatar.Action.Rotate,
-Feature.Avatar.Action.Save,
+Feature.Avatar.Action.Save,儲存
 Feature.Avatar.Action.SaveAsNew,儲存為新裝扮
 Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,選擇多個道具
@@ -2472,7 +2423,7 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,販賣
 Feature.Catalog.Action.ShareVia,分享方式……
 Feature.Catalog.Action.Submit,
-Feature.Catalog.Action.Try,
+Feature.Catalog.Action.Try,試用
 Feature.Catalog.Action.Upgrade,升級
 Feature.Catalog.Action.ViewDetailsPage,檢視詳情頁面
 Feature.Catalog.Action.ViewExperienceDetails,查看體驗詳情
@@ -2716,7 +2667,7 @@ Feature.Catalog.Label.Trending,熱門
 Feature.Catalog.Label.TryOns,
 Feature.Catalog.Label.TryOnsMultiple,試穿（{numItems}）
 Feature.Catalog.Label.Unlimited,無限
-Feature.Catalog.Label.Username,
+Feature.Catalog.Label.Username,使用者名稱
 Feature.Catalog.Label.UsingBundleParts,使用 {count} 個組合包道具
 Feature.Catalog.Label.WaistAccessories,腰部飾品
 Feature.Catalog.Label.WearAfterPurchase,
@@ -3305,7 +3256,6 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,移除信任的好友
 Feature.Friends.TrustedFriend.AddBack.Header,信任的好友邀請
 Feature.Friends.TrustedFriend.Info.Modal.Header,新的信任好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,新增信任的好友
-Feature.Friends.TrustedFriend.Label.Title,信任的好友
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} 現已成為信任的好友
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信任的好友已移除
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,已傳送信任的好友邀請
@@ -3722,7 +3672,7 @@ Feature.Parents.Description.EnterParentEmail.PC,連結帳號後，家長可以�
 Feature.Parents.Description.EnterParentEmailV4,請尋求家長協助進行此步驟。{lineBreak}我們會傳送電子郵件給您的家長以驗證年齡，並連結到您的帳號。{lineBreak}連結後，家長將可使用家長監護、孩子的螢幕使用時間與好友洞察報告等功能。
 Feature.Parents.Description.EnterParentEmailWithoutParentalControl,請尋求家長協助進行此步驟。{lineBreak}我們會傳送電子郵件給您的家長以驗證年齡，並連結到您的帳號。{lineBreak}連結後，家長可核准孩子的特定動作。
 Feature.Parents.Description.ParentalEmailFooter,這個電子郵件地址將與您具有家長權限的 Roblox 帳號相連。欲深入了解我們的資料規範，請瀏覽{linkStart}隱私權政策{linkEnd}。
-Feature.Parents.Label.Email,
+Feature.Parents.Label.Email,電子郵件地址
 Feature.Parents.Label.ParentEmail,家長的電子郵件地址
 Feature.Parents.Message.ConflictingPendingConsent,您已提出許可請求。若要提交新的請求，請先在「設定」中取消您的請求。
 Feature.Parents.Message.EmailIneligible,這個電子郵件地址不符資格。請使用另一個電子郵件地址在 Roblox 申請家長許可。
@@ -3756,7 +3706,6 @@ Feature.Profile.Action.ShareProfile,分享個人檔案
 Feature.Profile.Action.ShareProfileLink,分享個人檔案連結
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
-Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,
 Feature.Profile.Action.ViewFullProfile,檢視完整個人檔案
 Feature.Profile.Action.ViewProfile,
@@ -4403,7 +4352,6 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,
 Feature.VerificationUpsell.Action.EditPhoneNumber,編輯手機號碼
 Feature.VerificationUpsell.Action.EnableVoice,啟用語音聊天
-Feature.VerificationUpsell.Action.Logout,仍要登出
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

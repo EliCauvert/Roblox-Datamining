@@ -61,15 +61,12 @@ Authentication.AccountSwitch.Action.SwitchAccount,تبديل الحسابات
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,تسجيل دخول سريع
 Authentication.Login.Action.QuickSignIn,
-Authentication.Login.Action.Save,حفظ
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,يجب الخروج من منصة Roblox للتبديل إلى الحساب على منصة {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,استخدِم حساب Roblox مختلف
 Authentication.Login.Error.PasskeyOnlyAccount,تم إعداد حسابك لتسجيل الدخول باستخدام مفتاح مرور فقط. جرِّب تسجيل الدخول باستخدام مفتاح المرور أو استعادة حسابك.
 Authentication.Login.Error.PlatformAccountConnectionFailure,يتعذّر التحقق من حساب المنصة. يُرجى إعادة المحاولة لاحقًا.
 Authentication.Login.Heading.IncompatibleAccounts,حسابات غير متوافقة
-Authentication.Login.Label.Email,البريد الإلكتروني
 Authentication.Login.Label.LearnMore,اعرف المزيد
-Authentication.Login.Label.Username,اسم المستخدم
 Authentication.Login.LinkIllegalChildAccountLinking,لا يمكن ربط هذا الحساب على منصّة Roblox بحساب طفل على Xbox. يُرجى تجربة حساب آخر أو التحقُّق من إعداداتك.
 Authentication.Login.Response.AlreadyLinked,حساب Roblox هذا مرتبط بالفعل مختلف على حساب {platform}. الرجاء محاولة تسجيل الدخول بحساب Roblox آخر.
 Authentication.Login.Response.IncorrectEmailOrPassword,البريد الإلكتروني أو كلمة المرور غير صحيحة.
@@ -87,62 +84,17 @@ Authentication.Login.Response.SomethingWentWrong,حدث خطأ ما. الرجا�
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,حدث خطأ ما. الرجاء تجربة طريقة أخرى لتسجيل الدخول.
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,لم يتم التحقق من بريدك الإلكتروني. الرجاء تسجيل الدخول باسم المستخدم الخاص بك.
 Authentication.Login.WeChat.AntiAddictionText,ابتعد عن التجارب السيئة وارفض المشاركة في التجارب المقرصنة. ابقَ متيقظًا واحذر الخداع. إن المشاركة في بعض التجارب مفيدة لعقلك، لكن الإفراط فيها يمكن أن يضر بصحتك. لذلك نوصيك بإدارة وقتك بالمفيد النافع واتباع نمط حياة سليم.
-Authentication.SignUp.Action.ApplyOnNextRespawn,تطبيق عند إعادة الظهور التالي
-Authentication.SignUp.Action.Cancel,
-Authentication.SignUp.Action.ExitModalLeave,الخروج
-Authentication.SignUp.Action.RespawnNow,إعادة الظهور الآن
-Authentication.SignUp.Button.OKCaptialized,موافق
 Authentication.SignUp.Button.RetryLogIn,إعادة محاولة تسجيل الدخول
 Authentication.SignUp.Description.AccountAlreadyLinked,حساب على منصة {platformAccountName} مرتبط بالفعل بحساب على منصة Roblox. يُرجى محاولة تسجيل الدخول مرة أخرى.
-Authentication.SignUp.Description.BirthdayHint,أدخِل التاريخ
-Authentication.SignUp.Description.Try,جرب
-Authentication.SignUp.Description.UsernameChanged,كل شيء جاهز! حسابك جاهز ومرتبط بمنصّة {platform}. أعد الظهور الآن لرؤية اسم المستخدم المحدث في اللعبة، أو سيُطبق التغيير في المرة القادمة.
-Authentication.SignUp.Description.UsernameUnchanged,لقد انضممت! حسابك جاهز ومرتبط بمنصّة {platform}. يمكنك الدردشة مع الأصدقاء وتشغيل الملايين من ألعاب منصّة Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,سيتم ربط حسابك في منصة Roblox بحسابك على حساب {platform}. يمكنك إلغاء الربط من شاشة الإعدادات في أي وقت. قد تكون هناك فترة انتظار قبل أن تتمكن من ربط الحساب بحساب آخر على حساب {platform}. من خلال النقر على {ctaButton}، أنت توافق على شروط الاستخدام بما في ذلك شرط التحكيم وأنت تُقِر بسياسة الخصوصية.
-Authentication.SignUp.Header.SetUpYourRobloxAccount,إعداد حسابك على منصّة Roblox
 Authentication.SignUp.Heading.CountryCodeSelector,حدد البلد
 Authentication.SignUp.Heading.RetryLogIn,
-Authentication.SignUp.Label.Birthday,تاريخ الميلاد
-Authentication.SignUp.Label.Continue,
-Authentication.SignUp.Label.Day,يوم
-Authentication.SignUp.Label.EnterYourEmail,أدخل بريدك الإلكتروني
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,يجب أن تكون أكبر سنًا لتشغيل هذه اللعبة
-Authentication.SignUp.Label.ErrorsWithPassword,هناك أخطاء في كلمة المرور.
-Authentication.SignUp.Label.ErrorsWithUsername,هناك أخطاء في اسم المستخدم.
-Authentication.SignUp.Label.ExitModalSubtitle,لقد أوشكت على إنشاء حسابك. إذا خرجت من الصفحة الآن، فستفقد التقدم الذي أحرزته.
-Authentication.SignUp.Label.ExitModalTitle,هل تريد الخروج من صفحة إنشاء الحساب؟
-Authentication.SignUp.Label.Gender,الجنس
-Authentication.SignUp.Label.GenderFemale,أنثى
-Authentication.SignUp.Label.GenderMale,ذكر
-Authentication.SignUp.Label.Month,شهر
-Authentication.SignUp.Label.PasswordError1,طول 8 أحرف على الأقل
-Authentication.SignUp.Label.PasswordError2,لا تتطابق مع اسم المستخدم
-Authentication.SignUp.Label.PasswordError2.V2,
-Authentication.SignUp.Label.PasswordError3,ليست كلمة مرور بسيطة
-Authentication.SignUp.Label.PasswordError3.V2,كلمة المرور ليست بسيطة
-Authentication.SignUp.Label.PasswordPlaceholder,8 أحرف على الأقل
-Authentication.SignUp.Label.SelectBirthdaySentenceCase,حدِّد تاريخ الميلاد
-Authentication.SignUp.Label.UsernameError1,يحتوي فقط على أحرف وأرقام والرمز _
-Authentication.SignUp.Label.UsernameError2,طول بين 3 و 20 حرفا
-Authentication.SignUp.Label.UsernameError3,غير مستخدم مسبقًا
-Authentication.SignUp.Label.UsernameError4,ملائم على Roblox
-Authentication.SignUp.Label.UsernameError5,لا يمكن أن يبدأ أو ينتهي بالرمز _
-Authentication.SignUp.Label.UsernameError6,يحتوي على رمز _ واحد فقط
-Authentication.SignUp.Label.UsernameError7,لا يحتوي على معلومات خاصة
-Authentication.SignUp.Label.Year,السنة
-Authentication.SignUp.Message.Username.NoRealNameUse,لا تستخدم اسمك الحقيقي
-Authentication.SignUp.PasswordErrorLength,يجب أن يكون طول كلمة المرور بين 8 و200 حرف
-Authentication.SignUp.Response.BirthdayMustBeSetFirst,لا بد من تعيين تاريخ الميلاد أولاً.
 Authentication.SignUp.Response.ErrorTryAgain,
-Authentication.SignUp.Response.InvalidBirthday,عيد ميلاد غير صالح.
-Authentication.SignUp.Response.InvalidEmail,عنوان البريد الإلكتروني غير صالح.
-Authentication.SignUp.Response.UsernameMustBeSetFirst,لا بد من تعيين اسم المستخدم أولاً.
-Authentication.SignUp.Subtitle.YourProgressCarriesOver,سيتم حفظ تقدمك عند إكمال الإعداد.
 Authentication.TwoStepVerification.Action.GoToSecurity,الإعدادات
 Authentication.TwoStepVerification.Label.TwoStepRequired,عملية التحقق بخطوتين مطلوبة لإجراء المزيد من المعاملات. اذهب إلى الإعدادات> الأمان لإتمام عملية التحقق بخطوتين.
 Authentication.TwoStepVerification.Response.TooManyAttempts,محاولات كثيرة جدًا. الرجاء المحاولة لاحقاً.
 Authentication.TwoStepVerification.Title.VerificationRequired,التحقق مطلوب
-AvatarGeneration.SelfieConsent.AgreeButton,
+AvatarGeneration.SelfieConsent.AgreeButton,موافق
 AvatarGeneration.SelfieConsent.BodyTextLink,من خلال رفع صورة، فإنك تؤكد أنك تملك الحق في استخدامها، وتقبل بأن تجمع منصة Roblox عرضًا تم إنشاؤه بالذكاء الاصطناعي التوليدي وتستخدمه وتشاركه مع المصمّمين لأغراض إنشاء الأفاتار.
 AvatarGeneration.SelfieConsent.CancelButton,
 AvatarGeneration.SelfieConsent.PrivacyLinkText,
@@ -378,7 +330,7 @@ CommonUI.Controls.Label.Tuesday,الثلاثاء
 CommonUI.Controls.Label.TuesdayAbbreviated,
 CommonUI.Controls.Label.Wednesday,الأربعاء
 CommonUI.Controls.Label.WednesdayAbbreviated,
-CommonUI.Controls.Label.Year,
+CommonUI.Controls.Label.Year,السنة
 CommonUI.Controls.NoResultsFound,لا توجد نتائج
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Continue,
@@ -443,7 +395,6 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,تجاهل
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,Reset
-CommonUI.Messages.Label.Password,كلمة المرور
 CommonUI.Messages.Response.NoResults,
 CommonUI.Messages.Response.PageError,خطأ في تحميل الصفحة
 CommonUI.Messages.Response.SomethingWentWrong,
@@ -631,7 +582,7 @@ CoreScripts.FTUX.Label.SideSheetUpdate,لا تزال القائمة تحتوي �
 CoreScripts.FTUX.Label.SocialOnboarding,يمكنك الوصول بسهولة إلى ميزات التواصل الاجتماعي لديك من الشريط العلوي، بما في ذلك خاصية الدردشة.
 CoreScripts.Feedback.EntryPoint.ButtonText,تقديم ملاحظات
 CoreScripts.Feedback.EntryPoint.OptionText,ملاحظات حول الترجمة
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,الخروج
 CoreScripts.Feedback.FeedbackBar.HelpButton,المساعدة
 CoreScripts.Feedback.FeedbackBar.MainLabel,
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,يمكنك تقديم أي تعليقات إضافية أدناه
@@ -1326,7 +1277,7 @@ Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,استعادة الأفاتار المحفوظ آخر مرة
 Feature.Avatar.Action.Revert,
 Feature.Avatar.Action.Rotate,
-Feature.Avatar.Action.Save,
+Feature.Avatar.Action.Save,حفظ
 Feature.Avatar.Action.SaveAsNew,حفظ كجديد
 Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,حدد عناصر متعددة
@@ -2681,10 +2632,10 @@ Feature.Catalog.Label.TotalItemsParenthesis,
 Feature.Catalog.Label.TotalUnformatted,المجموع
 Feature.Catalog.Label.Tradable,قابلة للتبادل
 Feature.Catalog.Label.Trending,رائجة
-Feature.Catalog.Label.TryOns,
+Feature.Catalog.Label.TryOns,جرب
 Feature.Catalog.Label.TryOnsMultiple,تجريب ({numItems})
 Feature.Catalog.Label.Unlimited,Unlimited
-Feature.Catalog.Label.Username,
+Feature.Catalog.Label.Username,اسم المستخدم
 Feature.Catalog.Label.UsingBundleParts,تستخدم {count} أجزاء من الحزمة
 Feature.Catalog.Label.WaistAccessories,أكسسوارات للخصر
 Feature.Catalog.Label.WearAfterPurchase,ارتداء العنصر بعد شرائه
@@ -3273,7 +3224,6 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,إزالة صديق م�
 Feature.Friends.TrustedFriend.AddBack.Header,طلب صديق موثوق
 Feature.Friends.TrustedFriend.Info.Modal.Header,صديق موثوق جديد
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,إضافة صديق موثوق
-Feature.Friends.TrustedFriend.Label.Title,صديق موثوق
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,أصبح {name} الآن من أصدقائك الموثوقين
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,تم إزالة الصديق الموثوق
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,تم إرسال طلب إضافة كصديق موثوق
@@ -3690,7 +3640,7 @@ Feature.Parents.Description.EnterParentEmail.PC,بعد ربط حساب الوا�
 Feature.Parents.Description.EnterParentEmailV4,اطلب من والديك مساعدتك في هذه الخطوة.{lineBreak}سنرسل رسالة بريد إلكتروني إلى والديك للتحقق من عمرهم وربط حسابهم بحسابك.{lineBreak}بعد ربط حساب الوالدين بحسابك، سيتمكن الوالدين من الوصول إلى أدوات رقابة الوالدين والمعلومات التفصيلية عن وقت الشاشة الذي يقضيه الطفل وقائمة أصدقائه والمزيد.
 Feature.Parents.Description.EnterParentEmailWithoutParentalControl,اطلب من والديك مساعدتك في هذه الخطوة.{lineBreak}سنرسِل رسالة بريد إلكتروني إلى والديك للتحقق من عمرَيهما وربط حسابهما بحسابك.{lineBreak}بعد ربط حساب الوالدين بحساب الطفل، سيتمكن الوالدان من الموافقة على بعض الإجراءات في حساب طفلهما.
 Feature.Parents.Description.ParentalEmailFooter,سيتم ربط عنوان البريد الإلكتروني هذا بحسابك على Roblox مع امتيازات الوالدين. لمعرفة المزيد عن ممارساتنا فيما يتعلق بالبيانات، يرجى الاطلاع على {linkStart}سياسة الخصوصية{linkEnd} الخاصة بنا.
-Feature.Parents.Label.Email,
+Feature.Parents.Label.Email,البريد الإلكتروني
 Feature.Parents.Label.ParentEmail,البريد الإلكتروني للوالدين
 Feature.Parents.Message.ConflictingPendingConsent,لقد سبق لك تقديم طلب للحصول على إذن. لإرسال طلب جديد، قم أولاً بإلغاء طلبك السابق في الإعدادات.
 Feature.Parents.Message.EmailIneligible,هذا البريد الإلكتروني غير مؤهل. لطلب إذن من الوالدين على Roblox، استخدم بريد إلكتروني مختلف.
@@ -3724,7 +3674,6 @@ Feature.Profile.Action.ShareProfile,مشاركة الملف الشخصي
 Feature.Profile.Action.ShareProfileLink,مشاركة رابط الملف الشخصي
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
-Feature.Profile.Action.Trade,التبادل
 Feature.Profile.Action.UserBlocked,المستخدم محظور
 Feature.Profile.Action.ViewFullProfile,عرض الملف الشخصي بأكمله
 Feature.Profile.Action.ViewProfile,
@@ -3963,7 +3912,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"بالضغط على "
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"بالضغط على ""جرب مجانًا""، فإنك توافق على {linkStart}شروط الاشتراك في Roblox.{linkEnd} ستنتهي الفترة التجريبية المجانية بعد شهر واحد وسيتم تحصيل الرسوم منك تلقائيًا كل شهر ويمكنك الإلغاء في أي وقت."
 Feature.RobloxSubscription.Label.FreeTrialText,احصل على فترة تجريبية مجانية
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}شهر واحد مجانًا،{boldEnd} ثم {price}/{periodType}
-Feature.RobloxSubscription.Label.month,
+Feature.RobloxSubscription.Label.month,شهر
 Feature.RobloxSubscription.Label.months,أشهر
 Feature.RobloxSubscription.Title.AgeCheckTrial,احصل على أسبوع مجاني من Plus
 Feature.RobloxSubscription.Title.AlreadySubscribed,خبر سار
@@ -4371,7 +4320,6 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,
 Feature.VerificationUpsell.Action.EditPhoneNumber,تحرير رقم الهاتف
 Feature.VerificationUpsell.Action.EnableVoice,تمكين المحادثة الصوتية
-Feature.VerificationUpsell.Action.Logout,تسجيل الخروج على أي حال
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

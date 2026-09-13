@@ -14,6 +14,5 @@
 	ProfilePlatform = "profilePlatform",
 	OmniSearchBar = "omniSearchBar",
 	ConnectionsHub = "connectionsHub",
-	ChatDetails = "chatDetails",
-	PartyChatConversationUpsell = "partyChatConversationUpsell"
+	ChatDetails = "chatDetails"
 }

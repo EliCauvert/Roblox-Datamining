@@ -18,15 +18,20 @@ return function(p1)
 	local var1
 	local var2 = useDeviceInsets()
 	local var3 = useTokens()
+	local keyboardInset = p1.keyboardInset
 	local isGenerating = p1.isGenerating
 	local isInputInvalid = p1.isInputInvalid
 	local createElement = reactModule.createElement
 	local t = {
 		tag = "col align-x-center align-y-top gap-xlarge size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
+		onAbsoluteSizeChanged = p1.onContainerMeasured,
 		padding = {
 			top = UDim.new(0, var3.Padding.XLarge),
-			bottom = UDim.new(0, math.max(var2.bottom, var3.Padding.XLarge)),
+			bottom = if typeof(keyboardInset) == "number" then UDim.new(0, math.max(var2.bottom, var3.Padding.XLarge) + keyboardInset) else keyboardInset:map(function(p2)
+				-- upvalues: var2 (ref), var3 (ref)
+				return UDim.new(0, math.max(var2.bottom, var3.Padding.XLarge) + p2)
+			end),
 			left = UDim.new(0, math.max(var2.left, var3.Padding.XLarge)),
 			right = UDim.new(0, math.max(var2.right, var3.Padding.XLarge))
 		}
@@ -82,8 +87,7 @@ return function(p1)
 					TextWrapped = true,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
-					[reactModule.Change.Text] = p1.onTextChanged,
-					[reactModule.Event.FocusLost] = p1.onTextBoxFocusLost
+					[reactModule.Change.Text] = p1.onTextChanged
 				})
 			}),
 			HelperRow = reactModule.createElement(view, {
@@ -116,8 +120,6 @@ return function(p1)
 		var1 = var1(voiceActionBarModule, {
 			layoutOrder = 3,
 			onDelete = p1.onDelete,
-			primaryRef = p1.createButtonRef,
-			deleteRef = p1.deleteButtonRef,
 			primaryText = if p1.showSave then p1.saveText elseif isGenerating then "" else p1.createText,
 			primaryOnActivated = if p1.showSave then p1.onSave else p1.onCreateVoiceover,
 			primaryIsDisabled = if p1.showSave then false else not p1.canGenerate and not isGenerating,
@@ -136,23 +138,16 @@ return function(p1)
 		})
 	else
 		var1 = reactModule.createElement
-		var1 = var1("Frame", {
-			BackgroundTransparency = 1,
+		var1 = var1(button, {
 			LayoutOrder = 3,
-			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = UDim2.new(1, 0, 0, 0),
-			ref = p1.createButtonRef
-		}, {
-			Button = reactModule.createElement(button, {
-				fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-				isDisabled = not p1.canGenerate and not isGenerating,
-				isLoading = isGenerating,
-				onActivated = p1.onCreateVoiceover,
-				size = foundationModule.Enums.InputSize.Large,
-				text = if isGenerating then "" else p1.createText,
-				variant = if p1.canGenerate or isGenerating then foundationModule.Enums.ButtonVariant.Emphasis else foundationModule.Enums.ButtonVariant.Standard,
-				width = UDim.new(1, 0)
-			})
+			fillBehavior = foundationModule.Enums.FillBehavior.Fill,
+			isDisabled = not p1.canGenerate and not isGenerating,
+			isLoading = isGenerating,
+			onActivated = p1.onCreateVoiceover,
+			size = foundationModule.Enums.InputSize.Large,
+			text = if isGenerating then "" else p1.createText,
+			variant = if p1.canGenerate or isGenerating then foundationModule.Enums.ButtonVariant.Emphasis else foundationModule.Enums.ButtonVariant.Standard,
+			width = UDim.new(1, 0)
 		})
 	end
 	t_1.ActionButton = var1

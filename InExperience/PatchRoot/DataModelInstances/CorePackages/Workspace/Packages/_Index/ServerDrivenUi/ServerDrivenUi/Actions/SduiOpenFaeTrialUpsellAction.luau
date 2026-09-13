@@ -4,7 +4,6 @@ local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
 local getSduiApiStore = require(parent.SduiSharedUtilities).getSduiApiStore
-local setPromptDismissedInPageScope = require(parent.PromptsServerDrivenUi).setPromptDismissedInPageScope
 local startFacialAgeEstimation = require(parent.SocialUpsell).Thunks.startFacialAgeEstimation
 local robloxSubscriptionPurchaseAppModule = require(parent.RobloxSubscriptionPurchaseApp)
 local surfaceName = robloxSubscriptionPurchaseAppModule.SurfaceName
@@ -16,7 +15,6 @@ local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
 local fFlagRobloxPlusUpsellRefreshOnComplete = sharedFlagsModule.FFlagRobloxPlusUpsellRefreshOnComplete
-local fFlagSduiDismissPromptPageScope = sharedFlagsModule.FFlagSduiDismissPromptPageScope
 local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local var2 = require(parent.UrlBuilder).UrlBuilder.new({
 	path = "plus",
@@ -32,7 +30,7 @@ local var2 = require(parent.UrlBuilder).UrlBuilder.new({
 })
 
 return function(p1, _, p2)
-	-- upvalues: fFlagRobloxPlusUpsellRefreshOnComplete (ref), appPage (ref), surfaceName (ref), surfaceContext (ref), var2 (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), claimTrial (ref), subscriptionGrantType (ref), getSduiApiStore (ref), fFlagSduiDismissPromptPageScope (ref), setPromptDismissedInPageScope (ref), sduiErrorType (ref), sduiActionType (ref), sduiParseHelpers (ref), startFacialAgeEstimation (ref)
+	-- upvalues: fFlagRobloxPlusUpsellRefreshOnComplete (ref), appPage (ref), surfaceName (ref), surfaceContext (ref), var2 (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), claimTrial (ref), subscriptionGrantType (ref), getSduiApiStore (ref), sduiErrorType (ref), sduiActionType (ref), sduiParseHelpers (ref), startFacialAgeEstimation (ref)
 	local dispatch = p2.dependencies.dispatch
 	local localization = p2.dependencies.localization
 	local var3 = if fFlagRobloxPlusUpsellRefreshOnComplete then if p1 then p1.actionParams else nil else nil
@@ -51,7 +49,7 @@ return function(p1, _, p2)
 			surfaceName = surfaceName.HomepageFaeTrialBanner,
 			surfaceContext = surfaceContext.InApp,
 			onCtaOverride = function(p3, p4)
-				-- upvalues: appPage (copy), var2 (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), dispatch (ref), navigateDown (copy), claimTrial (copy), subscriptionGrantType (copy), fFlagRobloxPlusUpsellRefreshOnComplete (copy), getSduiApiStore (copy), fFlagSduiDismissPromptPageScope (copy), var4 (ref), p2 (ref), setPromptDismissedInPageScope (copy), sduiErrorType (copy), sduiActionType (copy), sduiParseHelpers (copy), startFacialAgeEstimation (copy)
+				-- upvalues: appPage (copy), var2 (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), dispatch (ref), navigateDown (copy), claimTrial (copy), subscriptionGrantType (copy), fFlagRobloxPlusUpsellRefreshOnComplete (copy), getSduiApiStore (copy), var4 (ref), p2 (ref), sduiErrorType (copy), sduiActionType (copy), sduiParseHelpers (copy), startFacialAgeEstimation (copy)
 				local function openConfirmationWebview(p5)
 					-- upvalues: appPage (copy), var2 (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), dispatch (copy), navigateDown (copy)
 					local t = {
@@ -69,23 +67,14 @@ return function(p1, _, p2)
 				end
 				
 				dispatch(startFacialAgeEstimation("FacialAgeEstimationHomepagePlusFreeTrialBanner", function()
-					-- upvalues: claimTrial (copy), subscriptionGrantType (copy), p3 (ref), fFlagRobloxPlusUpsellRefreshOnComplete (copy), getSduiApiStore (copy), fFlagSduiDismissPromptPageScope (copy), var4 (copy), p2 (copy), setPromptDismissedInPageScope (copy), openConfirmationWebview (ref), sduiErrorType (copy), sduiActionType (copy), sduiParseHelpers (copy)
+					-- upvalues: claimTrial (copy), subscriptionGrantType (copy), p3 (ref), fFlagRobloxPlusUpsellRefreshOnComplete (copy), getSduiApiStore (copy), var4 (copy), openConfirmationWebview (ref), p2 (copy), sduiErrorType (copy), sduiActionType (copy), sduiParseHelpers (copy)
 					claimTrial(subscriptionGrantType.FaeFreeTrial):andThen(function()
-						-- upvalues: p3 (copy), fFlagRobloxPlusUpsellRefreshOnComplete (copy), getSduiApiStore (copy), fFlagSduiDismissPromptPageScope (copy), var4 (copy), p2 (copy), setPromptDismissedInPageScope (copy), openConfirmationWebview (copy)
+						-- upvalues: p3 (copy), fFlagRobloxPlusUpsellRefreshOnComplete (copy), getSduiApiStore (copy), var4 (copy), openConfirmationWebview (copy)
 						local var5 = if fFlagRobloxPlusUpsellRefreshOnComplete then function()
-							-- upvalues: getSduiApiStore (copy), fFlagSduiDismissPromptPageScope (copy), var4 (copy), p2 (copy), setPromptDismissedInPageScope (copy), p3 (copy)
+							-- upvalues: getSduiApiStore (copy), var4 (copy), p3 (copy)
 							local dismissEntry = getSduiApiStore().dismissEntry
 							
-							if fFlagSduiDismissPromptPageScope then
-								if typeof(var4) == "string" then
-									if dismissEntry then
-										dismissEntry(var4)
-									end
-									if typeof(p2.configKey) == "string" and p2.configKey ~= "" then
-										setPromptDismissedInPageScope(p2.configKey, var4)
-									end
-								end
-							elseif dismissEntry and typeof(var4) == "string" then
+							if dismissEntry and typeof(var4) == "string" then
 								dismissEntry(var4)
 							end
 							p3()

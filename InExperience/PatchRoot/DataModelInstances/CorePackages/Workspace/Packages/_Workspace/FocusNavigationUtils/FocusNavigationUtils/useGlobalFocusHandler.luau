@@ -21,6 +21,7 @@ local globalFocusTelemetryModule = require(focusNavigationUtils.GlobalFocusTelem
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local autoFocusFailsafeThreshold = game:DefineFastInt("AutoFocusFailsafeThreshold", 5)
 local fFlagEnablePeekViewFocusNav = require(parent.SharedFlags).FFlagEnablePeekViewFocusNav
+local fFlagAXMigrateAXToGlobalAutofocus = require(parent.SharedFlags).FFlagAXMigrateAXToGlobalAutofocus
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagAppIaHomeSubTab = sharedFlagsModule.FFlagAppIaHomeSubTab
 local fFlagLuaAppResponsiveEnginePreferredInput = sharedFlagsModule.FFlagLuaAppResponsiveEnginePreferredInput
@@ -80,7 +81,7 @@ local function createGameLeaveSubscription(p1)
 end
 
 return function(p1)
-	-- upvalues: useLastInputMethodModule (ref), useFocusGuiObject (ref), useFocusedGuiObject (ref), reactModule (ref), useLastInputModeModule (ref), fFlagLuaAppResponsiveEnginePreferredInput (ref), responsiveModule (ref), sessionService (ref), sessionType (ref), globalFocusTelemetryModule (ref), userInputService (ref), t (ref), navigationModule (ref), useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnumModule (ref), fFlagEnablePeekViewFocusNav (ref), fFlagAppIaHomeSubTab (ref), fFlagEnableDrawerFocusNav (ref), useAutoFocusModule (ref), useDescendantHasFocusModule (ref), fFlagLuaAppsDefaultSelection (ref), useSelector (ref), runService (ref), autoFocusFailsafeThreshold (ref), createGameLeaveSubscription (ref)
+	-- upvalues: useLastInputMethodModule (ref), useFocusGuiObject (ref), useFocusedGuiObject (ref), reactModule (ref), useLastInputModeModule (ref), fFlagLuaAppResponsiveEnginePreferredInput (ref), responsiveModule (ref), sessionService (ref), sessionType (ref), globalFocusTelemetryModule (ref), userInputService (ref), t (ref), navigationModule (ref), useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnumModule (ref), fFlagEnablePeekViewFocusNav (ref), fFlagAXMigrateAXToGlobalAutofocus (ref), fFlagAppIaHomeSubTab (ref), fFlagEnableDrawerFocusNav (ref), useAutoFocusModule (ref), useDescendantHasFocusModule (ref), fFlagLuaAppsDefaultSelection (ref), useSelector (ref), runService (ref), autoFocusFailsafeThreshold (ref), createGameLeaveSubscription (ref)
 	local var2 = useLastInputMethodModule()
 	local var3 = useFocusGuiObject()
 	local var4 = useFocusedGuiObject()
@@ -151,12 +152,12 @@ return function(p1)
 	local var20 = useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.ContextualMenu)
 	local var21 = useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.SearchBar)
 	local var22 = if fFlagEnablePeekViewFocusNav then useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.PeekView) else nil
-	local var23 = useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.SubRouterView)
-	local var24 = useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.Auxiliary)
+	local var23 = if fFlagAXMigrateAXToGlobalAutofocus then useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.SubRouterView) else nil
+	local var24 = if fFlagAXMigrateAXToGlobalAutofocus then useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.Auxiliary) else nil
 	local var25 = if fFlagAppIaHomeSubTab then useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.HeaderView) else nil
 	local var26 = if fFlagEnableDrawerFocusNav then useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.Drawer) else nil
 	local var27 = reactModule.useMemo(function()
-		-- upvalues: var18 (ref), var17 (ref), var20 (ref), var19 (ref), var22 (ref), fFlagEnableDrawerFocusNav (copy), var26 (ref), var16 (ref), var23 (ref), var15 (ref), var21 (ref), var24 (ref), fFlagAppIaHomeSubTab (copy), var25 (ref)
+		-- upvalues: var18 (ref), var17 (ref), var20 (ref), var19 (ref), var22 (ref), fFlagEnableDrawerFocusNav (copy), var26 (ref), var16 (ref), fFlagAXMigrateAXToGlobalAutofocus (copy), var23 (ref), var15 (ref), var21 (ref), var24 (ref), fFlagAppIaHomeSubTab (copy), var25 (ref)
 		local t = {}
 		
 		if var18 then
@@ -186,7 +187,7 @@ return function(p1)
 		elseif var16 then
 			table.insert(t, var16)
 		end
-		if var23 then
+		if fFlagAXMigrateAXToGlobalAutofocus and var23 then
 			table.insert(t, var23)
 		end
 		if var15 then
@@ -195,7 +196,7 @@ return function(p1)
 		if var21 then
 			table.insert(t, var21)
 		end
-		if var24 then
+		if fFlagAXMigrateAXToGlobalAutofocus and var24 then
 			table.insert(t, var24)
 		end
 		if fFlagAppIaHomeSubTab and var25 then
@@ -203,7 +204,9 @@ return function(p1)
 		end
 		return t
 	end, {
-		var18, var16, var15, var17, var20, var19, var22, var23, var24,
+		var18, var16, var15, var17, var20, var19, var22,
+		if fFlagAXMigrateAXToGlobalAutofocus then var23 else nil,
+		if fFlagAXMigrateAXToGlobalAutofocus then var24 else nil,
 		if fFlagAppIaHomeSubTab then var25 else nil,
 		if fFlagEnableDrawerFocusNav then var21 else nil,
 		if fFlagEnableDrawerFocusNav then var26 else nil
@@ -216,18 +219,18 @@ return function(p1)
 	local var33 = useDescendantHasFocusModule(var20)
 	local var34 = useDescendantHasFocusModule(var19)
 	local var35 = useDescendantHasFocusModule(var21)
-	local var36 = useDescendantHasFocusModule(var23)
-	local var37 = useDescendantHasFocusModule(var24)
+	local var36 = if fFlagAXMigrateAXToGlobalAutofocus then useDescendantHasFocusModule(var23) else nil
+	local var37 = if fFlagAXMigrateAXToGlobalAutofocus then useDescendantHasFocusModule(var24) else nil
 	local var38 = if fFlagEnablePeekViewFocusNav then useDescendantHasFocusModule(var22) else false
 	local var39 = if fFlagAppIaHomeSubTab then useDescendantHasFocusModule(var25) else false
 	local var40 = if fFlagEnableDrawerFocusNav then useDescendantHasFocusModule(var26) else false
 	local _ = nil
-	local var41 = if var18 then var32 elseif var17 then var31 elseif var20 then var33 elseif var19 then var34 elseif var22 then var38 elseif fFlagEnableDrawerFocusNav and var26 then var40 else var29 or (var30 or (var35 or (var36 or (var37 or fFlagAppIaHomeSubTab and var39))))
+	local var41 = if var18 then var32 elseif var17 then var31 elseif var20 then var33 elseif var19 then var34 elseif var22 then var38 elseif fFlagEnableDrawerFocusNav and var26 then var40 elseif fFlagAXMigrateAXToGlobalAutofocus then var29 or (var30 or (var35 or (var36 or (var37 or fFlagAppIaHomeSubTab and var39)))) else var29 or (var30 or (var35 or fFlagAppIaHomeSubTab and var39))
 	local var42 = nil
 	
 	if fFlagLuaAppsDefaultSelection then
 		var42 = reactModule.useRef(var27)
-		local var43 = if var18 and not var32 then true elseif var17 and not var31 then true elseif var20 and not var33 then true elseif var19 and not var34 then true elseif var22 and not var38 then true elseif fFlagEnableDrawerFocusNav and var26 and not var40 then true elseif var16 and not var30 then true elseif var23 and not var36 then true elseif var15 and not var29 then true elseif var21 and not var35 then true elseif var24 and not var37 then true elseif fFlagAppIaHomeSubTab and var25 and not var39 then true else false
+		local var43 = if var18 and not var32 then true elseif var17 and not var31 then true elseif var20 and not var33 then true elseif var19 and not var34 then true elseif var22 and not var38 then true elseif fFlagEnableDrawerFocusNav and var26 and not var40 then true elseif var16 and not var30 then true elseif fFlagAXMigrateAXToGlobalAutofocus and var23 and not var36 then true elseif var15 and not var29 then true elseif var21 and not var35 then true elseif fFlagAXMigrateAXToGlobalAutofocus and var24 and not var37 then true elseif fFlagAppIaHomeSubTab and var25 and not var39 then true else false
 		reactModule.useEffect(function()
 			-- upvalues: var7 (ref), responsiveModule (copy), var42 (write), var27 (ref), p1 (ref), var43 (ref), var3 (ref)
 			if var7 == responsiveModule.Input.Directional and var42.current ~= var27 and (not p1 and var43) then
@@ -291,12 +294,12 @@ return function(p1)
 			local var49 = 0
 			heartbeatConnection = runService.Heartbeat:Connect(function(p2)
 				-- upvalues: var49 (write), autoFocusFailsafeThreshold (copy), var48 (write), var47 (ref)
-				var21 += p2
+				var49 += p2
 				
-				if autoFocusFailsafeThreshold < var21 and not var48 then
+				if autoFocusFailsafeThreshold < var49 and not var48 then
 					var47()
 					var48 = true
-					var21 = 0
+					var49 = 0
 				end
 			end)
 		end

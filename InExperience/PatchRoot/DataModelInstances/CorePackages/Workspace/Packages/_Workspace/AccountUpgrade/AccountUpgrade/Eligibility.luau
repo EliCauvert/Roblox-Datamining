@@ -1,1 +1,0 @@
-﻿return { getAvailability = require(script.getAvailability) }

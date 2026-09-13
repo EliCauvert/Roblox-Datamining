@@ -8,22 +8,28 @@ local _ = require(virtualEvents.Parent.VirtualEventsState)
 local usePlayButtonState = require(virtualEvents.Parent.GamePlayButton).usePlayButtonState
 local roactNetworking = require(virtualEvents.Parent.RoactServiceTags).RoactNetworking
 local useRoactService = require(virtualEvents.Parent.RobloxAppHooks).useRoactService
+local fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable = require(virtualEvents.Parent.SharedFlags).FFlagLuaAppEventDetailsPageDisableCtaOnUnplayable
 local images = UIBloxModule.App.ImageSet.Images
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 
 return function(p1, p2, p3, p4)
-	-- upvalues: useLocalization (ref), useRoactService (ref), roactNetworking (ref), usePlayButtonState (ref), getEventCtaButtonStateModule (ref), reactModule (ref), buttonType (ref), images (ref)
+	-- upvalues: useLocalization (ref), fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable (ref), useRoactService (ref), roactNetworking (ref), usePlayButtonState (ref), getEventCtaButtonStateModule (ref), reactModule (ref), buttonType (ref), images (ref)
 	local var1 = useLocalization({
 		notifyMe = "Feature.VirtualEvents.NotifyMe",
 		unfollowEvent = "Feature.VirtualEvents.UnfollowEvent",
 		joinEvent = "Feature.VirtualEvents.JoinEvent",
 		goHome = "Feature.VirtualEvents.GoHome"
 	})
-	local var2 = getEventCtaButtonStateModule(usePlayButtonState(useRoactService(roactNetworking), tostring(p1.universeId)))
-	local isJoinEventDisabled = var2.isJoinEventDisabled
-	local isRsvpDisabled = var2.isRsvpDisabled
+	local isRsvpDisabled = nil
+	local isJoinEventDisabled = nil
+	
+	if fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable then
+		local var2 = getEventCtaButtonStateModule(usePlayButtonState(useRoactService(roactNetworking), tostring(p1.universeId)))
+		isJoinEventDisabled = var2.isJoinEventDisabled
+		isRsvpDisabled = var2.isRsvpDisabled
+	end
 	local var3 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), p2 (ref), buttonType (copy), var1 (ref), images (copy), p3 (ref), p4 (ref), isRsvpDisabled (ref), isJoinEventDisabled (ref)
+		-- upvalues: p1 (ref), p2 (ref), buttonType (copy), var1 (ref), images (copy), p3 (ref), p4 (ref), fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable (copy), isRsvpDisabled (write), isJoinEventDisabled (write)
 		return if p1.eventStatus == "cancelled" or p1.eventStatus == "moderated" then {
 			props = {
 				buttonType = buttonType.Secondary,
@@ -38,7 +44,7 @@ return function(p1, p2, p3, p4)
 				icon = images["icons/actions/favoriteOn"],
 				onActivated = p3.onRsvpChanged,
 				buttonRef = p4,
-				isDisabled = isRsvpDisabled
+				isDisabled = if fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable then isRsvpDisabled else nil
 			}
 		} else {
 			props = {
@@ -47,7 +53,7 @@ return function(p1, p2, p3, p4)
 				icon = images["icons/actions/favoriteOff"],
 				onActivated = p3.onRsvpChanged,
 				buttonRef = p4,
-				isDisabled = isRsvpDisabled
+				isDisabled = if fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable then isRsvpDisabled else nil
 			}
 		} elseif p2 == "Ongoing" or p2 == "ElapsedImminent" then {
 			props = {
@@ -55,11 +61,13 @@ return function(p1, p2, p3, p4)
 				text = var1.joinEvent,
 				onActivated = p3.onJoinEvent,
 				buttonRef = p4,
-				isDisabled = isJoinEventDisabled
+				isDisabled = if fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable then isJoinEventDisabled else nil
 			}
 		} else nil
 	end, {
-		p1, p2, p3, p4, isRsvpDisabled, isJoinEventDisabled
+		p1, p2, p3, p4,
+		if fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable then isRsvpDisabled else nil,
+		if fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable then isJoinEventDisabled else nil
 	})
 	local var4 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), p2 (ref), images (copy), p3 (ref)

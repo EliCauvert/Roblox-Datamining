@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("AccountUpgradeMinimumAge", 13)

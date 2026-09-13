@@ -7,10 +7,9 @@ local fFlagLuaAppSduiVerificationUpsellActions = require(parent.SharedFlags).FFl
 local fFlagSduiRequestFriendshipActionHandler = require(parent.SharedFlags).FFlagSduiRequestFriendshipActionHandler
 local fFlagEditProfileFramesEnabled = require(parent.SharedFlags).FFlagEditProfileFramesEnabled
 local fFlagAddSDUIEditProfileFramesAction = require(parent.SharedFlags).FFlagAddSDUIEditProfileFramesAction
-local fFlagAppChatConversationTrustedFriendUpsellBanner = require(parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
 
 return function()
-	-- upvalues: sduiActionType (ref), fFlagLuaAppSduiVerificationUpsellActions (ref), socialServerDrivenUi (ref), fFlagSduiRequestFriendshipActionHandler (ref), fFlagEditProfileFramesEnabled (ref), fFlagAddSDUIEditProfileFramesAction (ref), fFlagAppChatConversationTrustedFriendUpsellBanner (ref), getSduiActionHandlerRegistry (ref)
+	-- upvalues: sduiActionType (ref), fFlagLuaAppSduiVerificationUpsellActions (ref), socialServerDrivenUi (ref), fFlagSduiRequestFriendshipActionHandler (ref), fFlagEditProfileFramesEnabled (ref), fFlagAddSDUIEditProfileFramesAction (ref), getSduiActionHandlerRegistry (ref)
 	getSduiActionHandlerRegistry().registerActionHandlerConfigs({
 		[sduiActionType.OpenFacialAgeEstimation] = if not fFlagLuaAppSduiVerificationUpsellActions then {
 			lazyHandler = function()
@@ -47,19 +46,6 @@ return function()
 			lazyHandler = function()
 				-- upvalues: socialServerDrivenUi (copy)
 				return require(socialServerDrivenUi.Actions.SduiOpenProfileFramesEditorAction)
-			end
-		} else nil,
-		[sduiActionType.OpenTrustedFriendsUpsellModal] = if fFlagAppChatConversationTrustedFriendUpsellBanner then {
-			lazyHandler = function()
-				-- upvalues: socialServerDrivenUi (copy)
-				return require(socialServerDrivenUi.Actions.SduiOpenTrustedFriendsUpsellModalAction)
-			end
-		} else nil,
-		[sduiActionType.RecordPartyChatConversationUpsellAcknowledgement] = if fFlagAppChatConversationTrustedFriendUpsellBanner then {
-			skipUnifiedLogging = true,
-			lazyHandler = function()
-				-- upvalues: socialServerDrivenUi (copy)
-				return require(socialServerDrivenUi.Actions.SduiRecordPartyChatConversationUpsellAcknowledgementAction)
 			end
 		} else nil
 	})

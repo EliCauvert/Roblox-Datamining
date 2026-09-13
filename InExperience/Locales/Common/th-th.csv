@@ -61,15 +61,12 @@ Authentication.AccountSwitch.Action.SwitchAccount,สลับบัญชี
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,ลงชื่อเข้าใช้ด่วน
 Authentication.Login.Action.QuickSignIn,
-Authentication.Login.Action.Save,บันทึก
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,ออกจาก Roblox เพื่อสลับไปใช้บัญชี {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,ใช้บัญชี Roblox บัญชีอื่น
 Authentication.Login.Error.PasskeyOnlyAccount,บัญชีของคุณตั้งค่าให้ลงชื่อเข้าใช้ด้วยพาสคีย์เท่านั้น ลองลงชื่อเข้าใช้ด้วยพาสคีย์หรือกู้คืนบัญชี
 Authentication.Login.Error.PlatformAccountConnectionFailure,ไม่สามารถยืนยันบัญชีแพลตฟอร์มได้ โปรดลองอีกครั้งในภายหลัง
 Authentication.Login.Heading.IncompatibleAccounts,บัญชีที่เข้ากันไม่ได้
-Authentication.Login.Label.Email,อีเมล
 Authentication.Login.Label.LearnMore,เรียนรู้เพิ่มเติม
-Authentication.Login.Label.Username,ชื่อผู้ใช้
 Authentication.Login.LinkIllegalChildAccountLinking,บัญชี Roblox นี้ไม่สามารถเชื่อมโยงกับบัญชี Xbox ของบุตรหลานได้ โปรดลองใช้บัญชีอื่นหรือตรวจสอบการตั้งค่าของคุณ
 Authentication.Login.Response.AlreadyLinked,บัญชี Roblox นี้เชื่อมโยงอยู่กับบัญชีสำหรับ {platform} แล้ว โปรดลงชื่อเข้าใช้ด้วยบัญชี Roblox บัญชีอื่น
 Authentication.Login.Response.IncorrectEmailOrPassword,อีเมลหรือรหัสผ่านไม่ถูกต้อง
@@ -87,57 +84,12 @@ Authentication.Login.Response.SomethingWentWrong,
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,มีปัญหาบางอย่างเกิดขึ้น โปรดลองลงชื่อเข้าใช้ด้วยวิธีอื่น
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,อีเมลของคุณยังไม่ได้รับการตรวจสอบยืนยัน โปรดลงชื่อเข้าใช้ด้วยชื่อผู้ใช้ของคุณ
 Authentication.Login.WeChat.AntiAddictionText,คว่ำบาตรประสบการณ์แย่ๆ ปฏิเสธประสบการณ์ที่ละเมิดลิขสิทธิ์ รู้จักการป้องกันตัวและระวังไม่ให้ถูกหลอกลวง การเยี่ยมชมประสบการณ์ต่างๆ นั้นดีต่อสมองของคุณ แต่หากเยี่ยมชมหลายประสบการณ์มากเกินไปอาจก่อให้เกิดอันตรายต่อสุขภาพของคุณได้ บริหารเวลาของคุณให้ดีและสนุกกับการใช้ชีวิตแบบเฮลธ์ตี้
-Authentication.SignUp.Action.ApplyOnNextRespawn,ใช้เมื่อเกิดใหม่ครั้งต่อไป
-Authentication.SignUp.Action.Cancel,
-Authentication.SignUp.Action.ExitModalLeave,ออก
-Authentication.SignUp.Action.RespawnNow,เกิดใหม่ตอนนี้เลย
-Authentication.SignUp.Button.OKCaptialized,ตกลง
 Authentication.SignUp.Button.RetryLogIn,ลองเข้าสู่ระบบอีกครั้ง
 Authentication.SignUp.Description.AccountAlreadyLinked,บัญชีสำหรับ {platformAccountName} ของคุณเชื่อมโยงกับบัญชี Roblox อยู่แล้ว โปรดลองลงชื่อเข้าใช้อีกครั้ง
-Authentication.SignUp.Description.BirthdayHint,กรอกวันที่
-Authentication.SignUp.Description.Try,
-Authentication.SignUp.Description.UsernameChanged,เรียบร้อยแล้ว! บัญชีของคุณพร้อมใช้งานและเชื่อมโยงกับ {platform} แล้ว เกิดใหม่ตอนนี้เลย แล้วมาดูชื่อผู้ใช้ที่อัปเดตในเกมกัน หรือจะใช้ในครั้งต่อไปก็ได้
-Authentication.SignUp.Description.UsernameUnchanged,คุณเข้าร่วมแล้ว! บัญชีของคุณพร้อมใช้งานและเชื่อมโยงกับ {platform} แล้ว มาแชทกับเพื่อนและเล่นเกม Roblox นับล้านกัน
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,บัญชี Roblox ของคุณจะเชื่อมโยงกับบัญชี Roblox ของคุณจะเชื่อมโยงกับบัญชีสำหรับ {platform}  คุณสามารถยกเลิกการเชื่อมโยงได้ตลอดเวลาที่หน้าจอการตั้งค่า โดยอาจมีช่วงคูลดาวน์ก่อนที่จะสามารถเชื่อมโยงกับบัญชี Roblox ของคุณจะเชื่อมโยงกับบัญชีสำหรับ {platform}  ได้ การคลิก{ctaButton} จะถือว่าคุณยอมรับข้อกําหนดการใช้งานรวม ซึ่งรวมถึงข้อกำหนดการใช้อนุญาโตตุลาการและรับทราบถึงนโยบายความเป็นส่วนตัว
-Authentication.SignUp.Header.SetUpYourRobloxAccount,ตั้งค่าบัญชี Roblox ของคุณ
 Authentication.SignUp.Heading.CountryCodeSelector,เลือกประเทศ
 Authentication.SignUp.Heading.RetryLogIn,ลองลงชื่อเข้าใช้อีกครั้ง
-Authentication.SignUp.Label.Birthday,วันเกิด
-Authentication.SignUp.Label.Continue,
-Authentication.SignUp.Label.Day,วัน
-Authentication.SignUp.Label.EnterYourEmail,กรอกอีเมลของคุณ
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,ต้องมีอายุมากกว่านี้เพื่อเล่นเกมนี้
-Authentication.SignUp.Label.ErrorsWithPassword,มีข้อผิดพลาดเกิดขึ้นกับรหัสผ่าน
-Authentication.SignUp.Label.ErrorsWithUsername,มีข้อผิดพลาดเกิดขึ้นกับชื่อผู้ใช้
-Authentication.SignUp.Label.ExitModalSubtitle,คุณสร้างบัญชีเกือบเสร็จแล้ว หากออกตอนนี้ ความคืบหน้าที่ทำไว้จะหายไป
-Authentication.SignUp.Label.ExitModalTitle,ต้องการออกจากการสร้างบัญชีใช่ไหม?
-Authentication.SignUp.Label.Gender,เพศ
-Authentication.SignUp.Label.GenderFemale,หญิง
-Authentication.SignUp.Label.GenderMale,ชาย
-Authentication.SignUp.Label.Month,เดือน
-Authentication.SignUp.Label.PasswordError1,มีความยาวอย่างน้อย 8 อักขระ
-Authentication.SignUp.Label.PasswordError2,ต้องไม่ตรงกับชื่อผู้ใช้
-Authentication.SignUp.Label.PasswordError2.V2,
-Authentication.SignUp.Label.PasswordError3,ไม่ใช่รหัสผ่านที่คาดเดาได้ง่าย
-Authentication.SignUp.Label.PasswordError3.V2,
-Authentication.SignUp.Label.PasswordPlaceholder,อย่างน้อย 8 อักขระ
-Authentication.SignUp.Label.SelectBirthdaySentenceCase,เลือกวันเกิด
-Authentication.SignUp.Label.UsernameError1,ต้องประกอบด้วยตัวอักษร ตัวเลข และ _ เท่านั้น
-Authentication.SignUp.Label.UsernameError2,มีความยาวระหว่าง 3 ถึง 20 อักขระ
-Authentication.SignUp.Label.UsernameError3,ยังไม่ถูกใช้ไป
-Authentication.SignUp.Label.UsernameError4,เหมาะสมสำหรับ Roblox
-Authentication.SignUp.Label.UsernameError5,ไม่ขึ้นต้นหรือลงท้ายด้วย _
-Authentication.SignUp.Label.UsernameError6,มี _ ได้สูงสุดหนึ่งตัว
-Authentication.SignUp.Label.UsernameError7,ต้องไม่มีข้อมูลส่วนตัว
-Authentication.SignUp.Label.Year,ปี
-Authentication.SignUp.Message.Username.NoRealNameUse,อย่าใช้ชื่อจริงของคุณ
-Authentication.SignUp.PasswordErrorLength,มีความยาวระหว่าง 8 ถึง 200 อักขระ
-Authentication.SignUp.Response.BirthdayMustBeSetFirst,ต้องระบุวันเกิดก่อน
 Authentication.SignUp.Response.ErrorTryAgain,
-Authentication.SignUp.Response.InvalidBirthday,วันเกิดไม่ถูกต้อง
-Authentication.SignUp.Response.InvalidEmail,ที่อยู่อีเมลไม่ถูกต้อง
-Authentication.SignUp.Response.UsernameMustBeSetFirst,ต้องระบุชื่อผู้ใช้ก่อน
-Authentication.SignUp.Subtitle.YourProgressCarriesOver,พอตั้งค่าเสร็จ ก็เล่นต่อจากเดิมได้เลย
 Authentication.TwoStepVerification.Action.GoToSecurity,การตั้งค่า
 Authentication.TwoStepVerification.Label.TwoStepRequired,"จำเป็นต้องตรวจสอบยืนยันตัวตน 2 ขั้นตอนเพื่อทำธุรกรรมต่อ โปรดไปที่ ""การตั้งค่า > ความปลอดภัย"" เพื่อทำการตรวจสอบยืนยันตัวตน 2 ขั้นตอนให้เสร็จสิ้น"
 Authentication.TwoStepVerification.Response.TooManyAttempts,มีการดำเนินการซ้ำมากเกินไป โปรดลองอีกครั้งในภายหลัง
@@ -323,7 +275,7 @@ CommonUI.Controls.Action.Confirm,ยืนยัน
 CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,เสร็จสิ้น
 CommonUI.Controls.Action.Next,ถัดไป
-CommonUI.Controls.Action.OK,
+CommonUI.Controls.Action.OK,ตกลง
 CommonUI.Controls.Action.Refresh,รีเฟรช
 CommonUI.Controls.Action.ResetAll,รีเซ็ตทั้งหมด
 CommonUI.Controls.Action.Search,ค้นหา
@@ -336,7 +288,7 @@ CommonUI.Controls.Label.April,เมษายน
 CommonUI.Controls.Label.AprilAbbreviated,เม.ย.
 CommonUI.Controls.Label.August,สิงหาคม
 CommonUI.Controls.Label.AugustAbbreviated,ส.ค.
-CommonUI.Controls.Label.Day,
+CommonUI.Controls.Label.Day,วัน
 CommonUI.Controls.Label.December,ธันวาคม
 CommonUI.Controls.Label.DecemberAbbreviated,ธ.ค.
 CommonUI.Controls.Label.February,กุมภาพันธ์
@@ -378,7 +330,7 @@ CommonUI.Controls.Label.Tuesday,วันอังคาร
 CommonUI.Controls.Label.TuesdayAbbreviated,อ.
 CommonUI.Controls.Label.Wednesday,วันพุธ
 CommonUI.Controls.Label.WednesdayAbbreviated,เรา
-CommonUI.Controls.Label.Year,
+CommonUI.Controls.Label.Year,ปี
 CommonUI.Controls.NoResultsFound,ไม่พบผลการค้นหา
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Continue,
@@ -443,7 +395,6 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,รีเซ็ต
-CommonUI.Messages.Label.Password,รหัสผ่าน
 CommonUI.Messages.Response.NoResults,
 CommonUI.Messages.Response.PageError,เกิดข้อผิดพลาดในการโหลดหน้านี้
 CommonUI.Messages.Response.SomethingWentWrong,
@@ -631,7 +582,7 @@ CoreScripts.FTUX.Label.SideSheetUpdate,เมนูยังคงมีคุ�
 CoreScripts.FTUX.Label.SocialOnboarding,เข้าถึงคุณสมบัติทางโซเชียลของคุณได้อย่างง่ายดายจากแถบด้านบน รวมถึงแชท
 CoreScripts.Feedback.EntryPoint.ButtonText,ให้ข้อเสนอแนะ
 CoreScripts.Feedback.EntryPoint.OptionText,ให้ข้อเสนอแนะเกี่ยวกับคำแปล
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,ออก
 CoreScripts.Feedback.FeedbackBar.HelpButton,ความช่วยเหลือ
 CoreScripts.Feedback.FeedbackBar.MainLabel,
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,ระบุความคิดเห็นเพิ่มเติมได้ที่ด้านล่าง
@@ -1329,7 +1280,7 @@ Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,กู้คืนอวาตาร์ที่บันทึกล่าสุด
 Feature.Avatar.Action.Revert,แปลงกลับ
 Feature.Avatar.Action.Rotate,
-Feature.Avatar.Action.Save,
+Feature.Avatar.Action.Save,บันทึก
 Feature.Avatar.Action.SaveAsNew,บันทึกเป็นรายการใหม่
 Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,เลือกหลายไอเท็ม
@@ -1385,15 +1336,6 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,พื้นหลังสุดพิเศษเมื่อสมัคร Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,ในวันนี้
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,ในชั่วโมงนี้
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,ในเดือนนี้
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,เผยแพร่พื้นหลังได้อีก {count} ครั้ง
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,ชั่วโมง
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,นาที
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,รีเซ็ตใน
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,อธิบายพื้นหลังของคุณ...
 Feature.Avatar.BackgroundGeneration.Status.Generating,กำลังสร้างพื้นหลังของคุณ...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,กำลังเตรียมพื้นหลังของคุณ...
@@ -1512,7 +1454,6 @@ Feature.Avatar.Label.ClassicTShirts,เสื้อยืดแบบคลา�
 Feature.Avatar.Label.ClearByCategory,ถอด{category}
 Feature.Avatar.Label.Climb,ปีน
 Feature.Avatar.Label.ClimbAnimations,แอนิเมชันการปีน
-Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,ชื่อจะต้องประกอบด้วยตัวหนังสือ ตัวเลข และช่องว่างเท่านั้น
 Feature.Avatar.Label.CountSelected,เลือกแล้ว {itemCount} ไอเท็ม
 Feature.Avatar.Label.Creations,ผลงานสร้างสรรค์
@@ -1624,7 +1565,6 @@ Feature.Avatar.Label.RecentlyWorn,สวมใส่ล่าสุด
 Feature.Avatar.Label.RemoveFromSetBody,อวาตาร์เหล่านี้จะถูกลบออกจากเซ็ต แต่ตัวอวาตาร์จะไม่ถูกลบ
 Feature.Avatar.Label.Replace,แทนที่
 Feature.Avatar.Label.ResetToNewCharacter,คุณกำลังสลับไปยังตัวละครใหม่ คุณต้องการรีเซ็ตไอเท็มเครื่องแต่งกายทั้งหมดหรือเก็บไว้?
-Feature.Avatar.Label.ResetTryOn,รีเซ็ตเป็นอวาตาร์ปัจจุบัน
 Feature.Avatar.Label.Right,R
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,
@@ -1680,7 +1620,6 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,การแต่งหน้าซ้อนกัน
 Feature.Avatar.Label.Title.ManageAvatars,จัดการอวาตาร์
-Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,คลังไอเท็มของฉัน
 Feature.Avatar.Label.Title.ProfilePhoto,รูปโปรไฟล์
 Feature.Avatar.Label.Title.ReplaceAvatar,แทนที่อวาตาร์
@@ -1820,7 +1759,6 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,เคลื่อนย้าย
-Feature.Avatar.Title.MyAvatar,
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,การปรับแต่งมาพร้อมกับโฉมใหม่!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,ใหม่ในมาร์เก็ตเพลส
@@ -2700,7 +2638,7 @@ Feature.Catalog.Label.Trending,กำลังนิยม
 Feature.Catalog.Label.TryOns,
 Feature.Catalog.Label.TryOnsMultiple,ลองสวม ({numItems})
 Feature.Catalog.Label.Unlimited,ไม่ใช่ลิมิเต็ด
-Feature.Catalog.Label.Username,
+Feature.Catalog.Label.Username,ชื่อผู้ใช้
 Feature.Catalog.Label.UsingBundleParts,กำลังใช้ชิ้นส่วนของชุดรวมอยู่ {count} ชิ้น
 Feature.Catalog.Label.WaistAccessories,ไอเท็มเสริมสำหรับเอว
 Feature.Catalog.Label.WearAfterPurchase,สวมไอเท็มหลังจากที่ซื้อแล้ว
@@ -3289,7 +3227,6 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,ลบเพื่อ�
 Feature.Friends.TrustedFriend.AddBack.Header,คำขอเป็นเพื่อนที่เชื่อได้
 Feature.Friends.TrustedFriend.Info.Modal.Header,เพื่อนที่เชื่อได้รายใหม่
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,เพิ่มเพื่อนที่เชื่อได้
-Feature.Friends.TrustedFriend.Label.Title,เพื่อนที่เชื่อได้
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} เป็นเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,ลบเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,ส่งคำขอเป็นเพื่อนที่เชื่อได้แล้ว
@@ -3706,11 +3643,11 @@ Feature.Parents.Description.EnterParentEmail.PC,สำหรับผู้ป�
 Feature.Parents.Description.EnterParentEmailV4,ขอให้ผู้ปกครองเข้ามาช่วยคุณในขั้นตอนนี้{lineBreak}เราจะส่งอีเมลไปให้ผู้ปกครองของคุณ เพื่อยืนยันอายุ และเชื่อมโยงอีเมลนั้นกับบัญชีของคุณ{lineBreak}สำหรับผู้ปกครอง เมื่อเชื่อมโยงแล้ว คุณจะได้รับสิทธิ์เข้าถึงการควบคุมโดยผู้ปกครอง ข้อมูลเชิงลึกเกี่ยวกับเวลาหน้าจอ เพื่อน และข้อมูลอื่นๆ อีกมากมายของบุตรหลาน
 Feature.Parents.Description.EnterParentEmailWithoutParentalControl,ขอให้ผู้ปกครองเข้ามาช่วยคุณในขั้นตอนนี้{lineBreak}เราจะส่งอีเมลไปให้ผู้ปกครองของคุณ เพื่อยืนยันอายุ และเชื่อมโยงอีเมลนั้นกับบัญชีของคุณ{lineBreak}สำหรับผู้ปกครอง เมื่อเชื่อมโยงแล้ว คุณจะสามารถอนุมัติการดำเนินการบางอย่างสำหรับบุตรหลานของคุณได้
 Feature.Parents.Description.ParentalEmailFooter,ที่อยู่อีเมลนี้จะเชื่อมโยงกับบัญชี Roblox ของคุณที่มีสิทธิ์ของผู้ปกครอง หากต้องการเรียนรู้เพิ่มเติมเกี่ยวกับวิธีการใช้ข้อมูลของเรา โปรดไปที่{linkStart}นโยบายความเป็นส่วนตัว{linkEnd}ของเรา
-Feature.Parents.Label.Email,
+Feature.Parents.Label.Email,อีเมล
 Feature.Parents.Label.ParentEmail,อีเมลของผู้ปกครอง
 Feature.Parents.Message.ConflictingPendingConsent,คุณได้ขออนุญาตแล้ว หากต้องการส่งคำขอใหม่ โปรดยกเลิกคำขอในการตั้งค่าก่อน
 Feature.Parents.Message.EmailIneligible,ไม่สามารถใช้อีเมลนี้ได้ หากต้องการขออนุญาตจากผู้ปกครองบน Roblox โปรดใช้อีเมลอื่น
-Feature.Parents.Message.InvalidEmail,
+Feature.Parents.Message.InvalidEmail,ที่อยู่อีเมลไม่ถูกต้อง
 Feature.Parents.Message.RequestCreatedEmailNotSent,หลังจากเชื่อมโยงบัญชี Roblox แล้ว ผู้ปกครองของคุณจะเห็นคำขอนี้ในการควบคุมโดยผู้ปกครอง
 Feature.Parents.Message.SomethingWentWrong,
 Feature.Parents.Message.TooManyAttemptAskParent,มีการดำเนินการซ้ำมากเกินไป หากคุณได้ขออนุญาตแล้ว โปรดขอให้ผู้ปกครองตรวจสอบอีเมลของตนเอง
@@ -3740,7 +3677,6 @@ Feature.Profile.Action.ShareProfile,แชร์โปรไฟล์
 Feature.Profile.Action.ShareProfileLink,แชร์ลิงก์โปรไฟล์
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,แชร์รหัส QR
-Feature.Profile.Action.Trade,แลกเปลี่ยน
 Feature.Profile.Action.UserBlocked,บล็อคผู้ใช้นี้แล้ว
 Feature.Profile.Action.ViewFullProfile,ดูโปรไฟล์แบบเต็ม
 Feature.Profile.Action.ViewProfile,
@@ -3979,7 +3915,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"การคลิก
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"การคลิก ""ลองใช้ฟรี"" จะถือว่าคุณยอมรับ{linkStart}ข้อกำหนดการสมัครสมาชิกของ Roblox{linkEnd} ช่วงทดลองใช้ฟรีของคุณจะสิ้นสุดในอีก 1 เดือน โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติและคุณยกเลิกได้ทุกเมื่อ"
 Feature.RobloxSubscription.Label.FreeTrialText,ทดลองใช้ฟรี
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}ฟรี 1 เดือน{boldEnd} จากนั้น {price}/{periodType}
-Feature.RobloxSubscription.Label.month,
+Feature.RobloxSubscription.Label.month,เดือน
 Feature.RobloxSubscription.Label.months,
 Feature.RobloxSubscription.Title.AgeCheckTrial,รับ Plus ฟรี 1 สัปดาห์
 Feature.RobloxSubscription.Title.AlreadySubscribed,ข่าวดี
@@ -4387,7 +4323,6 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,ไม่ต้องการออก
 Feature.VerificationUpsell.Action.EditPhoneNumber,แก้ไขหมายเลขโทรศัพท์
 Feature.VerificationUpsell.Action.EnableVoice,เปิดใช้งานการแชทด้วยเสียง
-Feature.VerificationUpsell.Action.Logout,ลงชื่อออกเลย
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

@@ -51,7 +51,7 @@ local function _(p1)
 			var1 = true
 			
 			if p1.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityAgeCheckRequired then
-				var1 = if p1.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityTrustedFriendRequired then if p1.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityPlaytestDisabled then fFlagLuaAppParentApprovedExperiences and p1.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRequireParentApproval else true else true
+				var1 = if p1.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityTrustedFriendRequired then fFlagLuaAppParentApprovedExperiences and p1.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRequireParentApproval else true
 			end
 		end
 	end
@@ -73,7 +73,7 @@ local function selectSecondaryPlayButtonState(p1, p2)
 				var1 = true
 				
 				if privatePlaytestInfo.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityAgeCheckRequired then
-					var1 = if privatePlaytestInfo.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityTrustedFriendRequired then if privatePlaytestInfo.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityPlaytestDisabled then fFlagLuaAppParentApprovedExperiences and privatePlaytestInfo.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRequireParentApproval else true else true
+					var1 = if privatePlaytestInfo.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityTrustedFriendRequired then fFlagLuaAppParentApprovedExperiences and privatePlaytestInfo.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRequireParentApproval else true
 				end
 			end
 		end

@@ -16,7 +16,6 @@ local phoneNumberTextBox = authCommonModule.Components.PhoneNumberTextBox
 local linkButton = UIBloxModule.App.Button.LinkButton
 local mergePropsModule = require(phoneUpsell.Utils.mergeProps)
 local fFlagHomePhoneVerificationUpsellNewCopy = require(parent.SharedFlags).FFlagHomePhoneVerificationUpsellNewCopy
-local fFlagPhoneUpsellFocusNavigationModule = require(phoneUpsell.Flags.FFlagPhoneUpsellFocusNavigation)
 local t = {
 	alwaysShowLegalText = false,
 	requireLegalTextCheckbox = false,
@@ -25,7 +24,7 @@ local t = {
 	shouldShowVerificationText = if fFlagHomePhoneVerificationUpsellNewCopy then false else nil
 }
 
-local function getButtonStackProps(p1, p2, p3, p4, p5, p6)
+local function getButtonStackProps(p1, p2, p3, p4, p5)
 	-- upvalues: buttonType (ref)
 	local list = {
 		{
@@ -40,28 +39,21 @@ local function getButtonStackProps(p1, p2, p3, p4, p5, p6)
 			props = { isDisabled = false, onActivated = p5, text = p4 }
 		})
 	end
-	local t = {
+	return {
 		buttonHeight = 48,
 		forcedFillDirection = Enum.FillDirection.Vertical,
 		buttons = list
 	}
-	
-	if p6 then
-		t.disableRoactGamepadButtonSelection = true
-		list[#list].props.NextSelectionUp = p6.NextSelectionUp
-	end
-	return t
 end
 
 return function(p1)
-	-- upvalues: mergePropsModule (ref), t (ref), reactModule (ref), getPartialPageModalMiddleContentWidth (ref), fFlagHomePhoneVerificationUpsellNewCopy (ref), withStyle (ref), withLocalization (ref), partialPageModal (ref), getButtonStackProps (ref), fFlagPhoneUpsellFocusNavigationModule (ref), textBoxStateWrapper (ref), phoneNumberTextBox (ref), text (ref), checkbox (ref), linkButton (ref)
+	-- upvalues: mergePropsModule (ref), t (ref), reactModule (ref), getPartialPageModalMiddleContentWidth (ref), fFlagHomePhoneVerificationUpsellNewCopy (ref), withStyle (ref), withLocalization (ref), partialPageModal (ref), getButtonStackProps (ref), textBoxStateWrapper (ref), phoneNumberTextBox (ref), text (ref), checkbox (ref), linkButton (ref)
 	local var1 = mergePropsModule(t, p1)
 	
 	local function noOp() end
 	
 	local var2, var3 = reactModule.useState(false)
-	local var4 = reactModule.useRef(nil)
-	local var5 = getPartialPageModalMiddleContentWidth(var1.screenSize.X)
+	local var4 = getPartialPageModalMiddleContentWidth(var1.screenSize.X)
 	local t_1 = {
 		phoneNumberKey = "Feature.VerificationUpsell.Label.PhoneNumber",
 		phonePrivacyDisclaimerKey = "Feature.VerificationUpsell.Description.PhoneNumberNeverPublic",
@@ -78,9 +70,9 @@ return function(p1)
 		t_1.extraButtonKey = var1.extraButtonKey
 	end
 	return withStyle(function(p2)
-		-- upvalues: withLocalization (copy), t_1 (ref), var1 (ref), var2 (ref), reactModule (copy), partialPageModal (copy), getButtonStackProps (copy), fFlagPhoneUpsellFocusNavigationModule (copy), var4 (ref), var5 (ref), textBoxStateWrapper (copy), phoneNumberTextBox (copy), noOp (ref), fFlagHomePhoneVerificationUpsellNewCopy (copy), text (copy), checkbox (copy), var3 (ref), linkButton (copy)
+		-- upvalues: withLocalization (copy), t_1 (ref), var1 (ref), var2 (ref), reactModule (copy), partialPageModal (copy), getButtonStackProps (copy), var4 (ref), textBoxStateWrapper (copy), phoneNumberTextBox (copy), noOp (ref), fFlagHomePhoneVerificationUpsellNewCopy (copy), text (copy), checkbox (copy), var3 (ref), linkButton (copy)
 		return withLocalization(t_1)(function(p3)
-			-- upvalues: p2 (ref), var1 (copy), var2 (copy), reactModule (copy), partialPageModal (copy), getButtonStackProps (copy), fFlagPhoneUpsellFocusNavigationModule (copy), var4 (copy), var5 (copy), textBoxStateWrapper (copy), phoneNumberTextBox (copy), noOp (copy), fFlagHomePhoneVerificationUpsellNewCopy (copy), text (copy), checkbox (copy), var3 (copy), linkButton (copy)
+			-- upvalues: p2 (ref), var1 (copy), var2 (copy), reactModule (copy), partialPageModal (copy), getButtonStackProps (copy), var4 (copy), textBoxStateWrapper (copy), phoneNumberTextBox (copy), noOp (copy), fFlagHomePhoneVerificationUpsellNewCopy (copy), text (copy), checkbox (copy), var3 (copy), linkButton (copy)
 			local baseSize = p2.Font.BaseSize
 			local relativeSize = p2.Font.Body.RelativeSize
 			local relativeSize_1 = p2.Font.CaptionHeader.RelativeSize
@@ -88,14 +80,14 @@ return function(p1)
 			local t = {
 				title = p3.titleKey,
 				screenSize = var1.screenSize,
-				buttonStackProps = getButtonStackProps(p3.buttonKey, var1.onSetPhoneNumber, var1.isDisabled or var1.requireLegalTextCheckbox and not var2, p3.extraButtonKey, var1.onExtraButtonClick, if fFlagPhoneUpsellFocusNavigationModule and (var1.countryCode.prefix == "1" and not var1.disableLegalText) then { NextSelectionUp = var4 } else nil),
+				buttonStackProps = getButtonStackProps(p3.buttonKey, var1.onSetPhoneNumber, var1.isDisabled or var1.requireLegalTextCheckbox and not var2, p3.extraButtonKey, var1.onExtraButtonClick),
 				onCloseClicked = var1.onClose,
 				position = var1.isKeyboardShowing and UDim2.new(0.5, 0, 1, -var1.keyboardHeight) or nil,
 				anchorPoint = var1.isKeyboardShowing and Vector2.new(0.5, 1) or nil
 			}
 			local t_1 = {}
 			local createElement_1 = reactModule.createElement
-			local var6 = "Frame"
+			local var5 = "Frame"
 			local t_2 = {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -121,7 +113,7 @@ return function(p1)
 					TextTransparency = p2.Theme.TextDefault.Transparency,
 					Font = p2.Font.Body.Font,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Size = UDim2.new(0, var5, 0, 0),
+					Size = UDim2.new(0, var4, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}),
 				PhoneInput = reactModule.createElement(textBoxStateWrapper, {
@@ -162,7 +154,7 @@ return function(p1)
 					TextTransparency = p2.Theme.TextEmphasis.Transparency,
 					Font = p2.Font.Body.Font,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Size = UDim2.new(0, var5, 0, 24)
+					Size = UDim2.new(0, var4, 0, 24)
 				}),
 				VerificationText = if fFlagHomePhoneVerificationUpsellNewCopy and var1.shouldShowVerificationText then reactModule.createElement(text, {
 					tag = "auto-y size-full-0 text-wrap text-body-small text-align-x-left",
@@ -170,13 +162,13 @@ return function(p1)
 					Text = p3.verificationKey
 				}) else nil
 			}
-			local var7 = not var1.disableLegalText
+			local var6 = not var1.disableLegalText
 			
-			if var7 then
-				var7 = if var1.requireLegalTextCheckbox then reactModule.createElement("Frame", {
+			if var6 then
+				var6 = if var1.requireLegalTextCheckbox then reactModule.createElement("Frame", {
 					LayoutOrder = 3,
 					BackgroundTransparency = 1,
-					Size = UDim2.new(0, var5, 0, 0),
+					Size = UDim2.new(0, var4, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}, {
 					UIListLayout = reactModule.createElement("UIListLayout", {
@@ -208,11 +200,11 @@ return function(p1)
 					TextTransparency = p2.Theme.TextDefault.Transparency,
 					Font = p2.Font.Body.Font,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Size = UDim2.new(0, var5, 0, 0),
+					Size = UDim2.new(0, var4, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}) else nil
 			end
-			t_3.LegalTextContainer = var7
+			t_3.LegalTextContainer = var6
 			t_3.LegalButtonsContainer = var1.countryCode.prefix == "1" and (not var1.disableLegalText and reactModule.createElement("Frame", {
 				LayoutOrder = 4,
 				BackgroundTransparency = 1,
@@ -231,8 +223,7 @@ return function(p1)
 					fontStyle = "CaptionBody",
 					text = p3.termsOfUseKey,
 					onActivated = var1.onTermsOfUseClick,
-					size = UDim2.fromScale(0.2, 0.2),
-					buttonRef = if fFlagPhoneUpsellFocusNavigationModule then var4 else nil
+					size = UDim2.fromScale(0.2, 0.2)
 				}),
 				TextButtonDivider = reactModule.createElement("TextLabel", {
 					LayoutOrder = 6,
@@ -253,7 +244,7 @@ return function(p1)
 					onActivated = var1.onPrivacyPolicyClick
 				})
 			}))
-			t_1.Middle = createElement_1(var6, t_2, t_3)
+			t_1.Middle = createElement_1(var5, t_2, t_3)
 			
 			return createElement(partialPageModal, t, t_1)
 		end)

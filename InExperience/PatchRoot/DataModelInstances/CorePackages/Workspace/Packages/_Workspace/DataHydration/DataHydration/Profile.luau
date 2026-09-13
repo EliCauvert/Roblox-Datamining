@@ -1,4 +1,1 @@
-﻿return {
-	ProfileCTAStore = require(script.ProfileCTAStore),
-	hydratePresenceFromProfileMetadata = require(script.hydratePresenceFromProfileMetadata)
-}
+﻿return { ProfileCTAStore = require(script.ProfileCTAStore) }
