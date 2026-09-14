@@ -452,9 +452,9 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "Description.VPCRequestIarcEsrbAo": "Content suitable only for adults ages 18 and up. May include prolonged scenes of intense violence, graphic sexual content and/or gambling with real currency.",
     "Description.VPCRequestRobuxTransferLimits": "This will update the daily and monthly limits on the amount of Robux your child can transfer.",
     "Heading.ConversationalRequest.RobuxTransferLimits": "Set your child's Robux transfer limits",
-    "Email.PrivatePlaytest.Subject": "Private Playtest is coming to Roblox",
-    "Email.PrivatePlaytest.Intro": "Your child will soon get access to Private Playtest. This feature allows your child to test games created by friends in similar age groups and trusted friends, before these games may be rated or published to our games catalog for kids and young teens.",
-    "Email.PrivatePlaytest.Control": "You will be able to control who can join your child's private playtests within {aTagWithHref}{parentalControlsLink}{hrefEnd}Parental Controls{htmlCloseAHref}.",
-    "Email.PrivatePlaytest.Closing": "Thanks,{lineBreak}Roblox"
+    "Email.PrivatePlaytest.Subject": "Friend game previews are coming to Roblox",
+    "Email.PrivatePlaytest.Intro": "Your child will soon be able to preview games created by friends in similar age groups or trusted friends, before they're available in our games catalog for kids and young teens. When your child tests a game, Roblox will conduct a preliminary review against our safety standards.",
+    "Email.PrivatePlaytest.Control": "You can manage your child's game preview access anytime in {aTagWithHref}{parentalControlsLink}{hrefEnd}Parental Controls{htmlCloseAHref}.",
+    "Email.PrivatePlaytest.Closing": "Thank you,{lineBreak}The Roblox Team"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Parents");

@@ -1912,6 +1912,7 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Message.RecoveryCodesNotCopied": "Backup Codes Failed to Copy",
     "Label.Subscriptions.FreeWithPlusUntil": "Free With Plus Until {freeExpirationDate}",
     "Description.PrivatePlaytest.ConsentDescription": "Your child would be able to test games before they're available in our games catalog for kids and young teens.",
-    "Heading.PrivatePlayest.ConsentRequest": "Who can invite your child to preview their games?"
+    "Heading.PrivatePlayest.ConsentRequest": "Who can invite your child to preview their games?",
+    "Disclaimer.PrivatePlaytestOnContentMaturityConsent": "Your child may still be able to test a limited set of early access games created by friends before these games are available in our catalog for kids and young teens"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSettings");
