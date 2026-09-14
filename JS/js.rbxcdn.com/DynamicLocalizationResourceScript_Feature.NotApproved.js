@@ -423,6 +423,8 @@ Roblox.LangDynamic["Feature.NotApproved"] = {
     "Description.Mistake.Kids": "Did we make a mistake? You can appeal.",
     "Description.WarningDescription.Kids": "You broke a rule. You may get suspended if this goes on.",
     "Description.BannedDescription.Kids": "You can’t use this account any more.",
-    "Action.Pending": "Pending"
+    "Action.Pending": "Pending",
+    "Action.ViewAppealGuidelines": "View appeal guidelines",
+    "Label.AbuseType.ChildEndangerment.V4": "Child Safety"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.NotApproved");
