@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "fe1ff16f-7f2e-cfc6-80d2-23e21fefed2f")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "7805b9d0-5b92-622d-6f48-29b33608d884")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 656350, t => {
@@ -10507,15 +10507,6 @@
             contextType: "static"
         }
     }, {
-        flag: lO.isHomeAcquisitionSignalsEnabled,
-        metadata: {
-            namespace: "game-discovery-serving",
-            name: "isHomeAcquisitionSignalsEnabled",
-            defaultValue: !0,
-            valueType: "boolean",
-            contextType: "universe"
-        }
-    }, {
         flag: lO.isAcquisitionThumbnailUpsellEnabled,
         metadata: {
             namespace: "game-discovery-serving",
@@ -10794,7 +10785,7 @@
     var l8 = t.i(37819),
         l5 = t.i(431346),
         l9 = t.i(881670);
-    let l7 = "".concat("".concat("https://assets.create.roblox.com/5b18d3499dd17d67506b198090959cd79d4567d0/assets", "/opengraph"), "/global_og_image.png"),
+    let l7 = "".concat("".concat("https://assets.create.roblox.com/bc1f661b78168b20af894614f3b014d00227cca6/assets", "/opengraph"), "/global_og_image.png"),
         ce = (0, ob.withTranslation)(t => {
             let {
                 openGraphMetadata: {
@@ -13653,5 +13644,5 @@
     n.exports = t.r(959610)
 }]);
 
-//# debugId=fe1ff16f-7f2e-cfc6-80d2-23e21fefed2f
-//# sourceMappingURL=3or_zg1o6wg-r.js.map
+//# debugId=7805b9d0-5b92-622d-6f48-29b33608d884
+//# sourceMappingURL=2nly84cvtxnw_.js.map
