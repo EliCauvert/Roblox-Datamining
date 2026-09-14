@@ -5,7 +5,6 @@ local reactModule = require(parent.React)
 local reactUtilsModule = require(parent.ReactUtils)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local constantsModule = require(foundation.Constants)
-local flagsModule = require(foundation.Utility.Flags)
 local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
 local sheet = script:FindFirstAncestor("Sheet")
 local sheetContextModule = require(sheet.SheetContext)
@@ -17,7 +16,7 @@ local isScrollingFrameOverflowingYModule = require(foundation.Utility.isScrollin
 local useComposedRef = reactUtilsModule.useComposedRef
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokensModule (ref), reactModule (ref), sheetContextModule (ref), isScrollingFrameOverflowingYModule (ref), sheetTypeModule (ref), flagsModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), dashModule (ref), useComposedRef (ref), scrollViewModule (ref), constantsModule (ref)
+	-- upvalues: useTokensModule (ref), reactModule (ref), sheetContextModule (ref), isScrollingFrameOverflowingYModule (ref), sheetTypeModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), dashModule (ref), useComposedRef (ref), scrollViewModule (ref), constantsModule (ref)
 	local var1 = useTokensModule()
 	local var2 = reactModule.useContext(sheetContextModule)
 	local innerScrollingEnabled = var2.innerScrollingEnabled
@@ -109,8 +108,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			testId = `{testId}--content--full-bleed-spacer`
 		}) else nil,
 		Children = reactModule.createElement(reactModule.Fragment, nil, p1.children),
-		ContentInteractionSinkContainer = if flagsModule.FoundationBottomSheetGestureInteractionSink then if flagsModule.FoundationBottomSheetGestureInteractionSink then reactModule.createElement("Folder", nil, {
-			ContentInteractionSink = if if flagsModule.FoundationBottomSheetGestureInteractionSink then var2.isVerticalSheetGesture else nil then reactModule.createElement(viewModule, {
+		ContentInteractionSinkContainer = reactModule.createElement("Folder", nil, {
+			ContentInteractionSink = if var2.isVerticalSheetGesture then reactModule.createElement(viewModule, {
 				Selectable = false,
 				ZIndex = 2,
 				Size = UDim2.fromScale(1, 1),
@@ -118,6 +117,6 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				stateLayer = { affordance = stateLayerAffordanceModule.None },
 				onActivated = dashModule.noop
 			}) else nil
-		}) else nil else nil
+		})
 	}))
 end))

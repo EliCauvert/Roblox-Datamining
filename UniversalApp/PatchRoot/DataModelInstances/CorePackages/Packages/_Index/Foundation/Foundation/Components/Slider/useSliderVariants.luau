@@ -27,7 +27,7 @@ local function variantsFactory(p1)
 				knob = {
 					hasShadow = true,
 					style = p1.Color.Extended.White.White_100,
-					dragStyle = p1.Color.ActionEmphasis.Background
+					dragStyle = if flagsModule.FoundationSystemEmphasisNonActions then p1.Color.System.Emphasis else p1.Color.ActionEmphasis.Background
 				}
 			},
 			[sliderVariantModule.Standard] = {

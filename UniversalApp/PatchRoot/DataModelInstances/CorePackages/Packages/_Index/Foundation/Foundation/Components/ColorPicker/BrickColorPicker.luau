@@ -1,5 +1,6 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local reactModule = require(foundation.Parent.React)
+local flagsModule = require(foundation.Utility.Flags)
 local imageModule = require(foundation.Components.Image)
 local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
 local _ = require(foundation.Components.Types)
@@ -67,7 +68,7 @@ local function BottomRowSwatches(p2)
 end
 
 return function(p3)
-	-- upvalues: useTokensModule (ref), reactModule (ref), brickColorConstantsModule (ref), calculateGridRadius (ref), imageModule (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), BottomRowSwatches (ref)
+	-- upvalues: useTokensModule (ref), reactModule (ref), brickColorConstantsModule (ref), calculateGridRadius (ref), imageModule (ref), flagsModule (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), BottomRowSwatches (ref)
 	local var6 = useTokensModule()
 	local size200 = var6.Size.Size_200
 	local size350 = var6.Size.Size_350
@@ -134,7 +135,7 @@ return function(p3)
 		var9, size200, var7, var8, var6.Size.Size_100, var6.Size.Size_50
 	})
 	local var18 = reactModule.useCallback(function(p4, p5)
-		-- upvalues: var11 (ref), reactModule (copy), imageModule (copy), size350 (ref), size200_1 (ref), size400 (ref), var6 (ref)
+		-- upvalues: var11 (ref), reactModule (copy), imageModule (copy), size350 (ref), size200_1 (ref), size400 (ref), flagsModule (copy), var6 (ref)
 		local uDim2 = UDim2.fromOffset(p4.x - var11.offset.X, p4.y - var11.offset.Y)
 		local t = {}
 		
@@ -145,7 +146,7 @@ return function(p3)
 				Size = UDim2.fromOffset(size350 + size200_1, size400 + size200_1),
 				Position = uDim2,
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				imageStyle = var6.Color.ActionEmphasis.Background
+				imageStyle = if flagsModule.FoundationSystemEmphasisNonActions then var6.Color.System.Emphasis else var6.Color.ActionEmphasis.Background
 			})
 		end
 		t.hexagon = reactModule.createElement(imageModule, {
@@ -158,7 +159,13 @@ return function(p3)
 		})
 		
 		return t
-	end, { var11.offset.X, var11.offset.Y, size350, size400 })
+	end, {
+		var11.offset.X,
+		var11.offset.Y,
+		size350,
+		size400,
+		if flagsModule.FoundationSystemEmphasisNonActions then var6 else nil
+	})
 	
 	return reactModule.createElement(viewModule, withCommonPropsModule(p3, { tag = "col align-x-center gap-small size-full-0 auto-y" }), {
 		ColorGrid = reactModule.createElement(viewModule, {

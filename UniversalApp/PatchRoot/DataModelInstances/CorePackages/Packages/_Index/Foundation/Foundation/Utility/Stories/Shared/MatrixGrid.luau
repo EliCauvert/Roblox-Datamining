@@ -5,6 +5,12 @@ local reactModule = require(parent.React)
 local textModule = require(foundation.Components.Text)
 local _ = require(foundation.Components.Types)
 local viewModule = require(foundation.Components.View)
+local t = {
+	left = "text-align-x-left",
+	center = "text-align-x-center"
+}
+local t_1 = { left = "align-x-left", center = "align-x-center" }
+local t_2 = { top = "align-y-top", center = "align-y-center" }
 
 local function matrixLabel(p1)
 	-- upvalues: reactModule (ref), textModule (ref)
@@ -49,98 +55,88 @@ local function renderCells(p1, p2, p3)
 	return t
 end
 
+local function rowView(p4)
+	-- upvalues: reactModule (ref), viewModule (ref)
+	return reactModule.createElement(viewModule, {
+		tag = p4.tag,
+		backgroundStyle = p4.row.backgroundStyle,
+		stroke = if p4.row.stroke then {
+			Color = p4.row.stroke.Color,
+			Transparency = p4.row.stroke.Transparency,
+			Thickness = p4.row.stroke.Thickness
+		} else nil,
+		LayoutOrder = p4.LayoutOrder
+	}, p4.children)
+end
+
 return {
 	MatrixGrid = function(p4)
-		-- upvalues: dashModule (ref), reactModule (ref), textModule (ref), viewModule (ref), renderCells (ref)
+		-- upvalues: t (ref), t_1 (ref), t_2 (ref), dashModule (ref), reactModule (ref), textModule (ref), viewModule (ref), renderCells (ref), rowView (ref)
 		local var2 = p4.showLabelColumn == nil or p4.showLabelColumn
 		local var3 = p4.showHeader == nil or p4.showHeader
 		local labelColumnWidth = p4.labelColumnWidth or 80
 		local headerTextAlign = p4.headerTextAlign or "center"
 		local cellAlign = p4.cellAlign or "center"
+		local rowAlign = p4.rowAlign or "center"
 		local rowGap = p4.rowGap or "large"
-		local var4 = if headerTextAlign == "left" then "text-align-x-left" else "text-align-x-center"
-		local var5 = if cellAlign == "left" then "align-x-left" else "align-x-center"
-		local text = "row align-y-center gap-" .. rowGap .. " auto-xy"
-		local text_1 = "row align-y-center gap-" .. rowGap .. " auto-x"
-		local var6 = 1
-		local t = {}
+		local var4 = t[headerTextAlign]
+		local var5 = t_1[cellAlign]
+		local var6 = t_2[rowAlign]
+		local var7 = `row {var6} gap-{rowGap} auto-xy`
+		local var8 = `row {var6} gap-{rowGap} auto-xy`
+		local var9 = 1
+		local t_3 = {}
 		
 		if var3 then
-			local var7 = dashModule.map(p4.columnHeaders, function(p5, p6)
+			local var10 = dashModule.map(p4.columnHeaders, function(p5, p6)
 				-- upvalues: p4 (ref), reactModule (copy), textModule (copy), var4 (ref)
-				local var8 = if p4.cellColumnWidths then p4.cellColumnWidths[p6] else p4.cellColumnWidth
+				local var11 = if p4.cellColumnWidths then p4.cellColumnWidths[p6] else p4.cellColumnWidth
 				
 				return reactModule.createElement(textModule, {
 					Text = p5,
 					tag = `auto-xy text-caption-small content-muted {var4}`,
-					Size = if var8 then UDim2.fromOffset(var8, 0) else nil,
+					Size = if var11 then UDim2.fromOffset(var11, 0) else nil,
 					LayoutOrder = p6
 				})
 			end)
 			
 			if var2 then
-				t.HeaderRow = reactModule.createElement(viewModule, { tag = `padding-y-small {text}`, LayoutOrder = var6 }, {
+				t_3.HeaderRow = reactModule.createElement(viewModule, { tag = `padding-y-small {var7}`, LayoutOrder = var9 }, {
 					Corner = reactModule.createElement(viewModule, {
 						LayoutOrder = 1,
 						Size = UDim2.fromOffset(labelColumnWidth, 0)
 					}),
-					Cells = reactModule.createElement(viewModule, { LayoutOrder = 2, tag = text_1 }, var7)
+					Cells = reactModule.createElement(viewModule, { LayoutOrder = 2, tag = var8 }, var10)
 				})
 			else
-				t.HeaderRow = reactModule.createElement(viewModule, { tag = `padding-y-small {text}`, LayoutOrder = var6 }, var7)
+				t_3.HeaderRow = reactModule.createElement(viewModule, { tag = `padding-y-small {var7}`, LayoutOrder = var9 }, var10)
 			end
-			var6 += 1
+			var9 += 1
 		end
 		for i, v in p4.rows do
-			local t_1 = {}
+			local t_4 = {}
 			
 			if var2 then
-				t_1.Label = reactModule.createElement(viewModule, {
-					tag = "col align-y-center size-full-0 auto-y clip",
+				t_4.Label = reactModule.createElement(viewModule, {
 					LayoutOrder = 1,
+					tag = `col size-full-0 auto-y clip {var6}`,
 					Size = UDim2.fromOffset(labelColumnWidth, 0)
 				}, { Content = v.label })
-				t_1.Cells = reactModule.createElement(viewModule, { LayoutOrder = 2, tag = text_1 }, renderCells(p4, v.cells, var5))
+				t_4.Cells = reactModule.createElement(viewModule, { LayoutOrder = 2, tag = var8 }, renderCells(p4, v.cells, var5))
 			else
 				for i_1, v_1 in renderCells(p4, v.cells, var5) do
-					t_1[i_1] = v_1
+					t_4[i_1] = v_1
 				end
 			end
-			local text_2 = "padding-y-small " .. (if v.rowTag then text .. " " .. v.rowTag else text)
-			
-			if v.backgroundStyle and v.stroke then
-				t[`Row-{i}`] = reactModule.createElement(viewModule, {
-					tag = text_2,
-					backgroundStyle = v.backgroundStyle,
-					stroke = {
-						Color = v.stroke.Color,
-						Transparency = v.stroke.Transparency,
-						Thickness = v.stroke.Thickness
-					},
-					LayoutOrder = var6
-				}, t_1)
-			elseif v.backgroundStyle then
-				t[`Row-{i}`] = reactModule.createElement(viewModule, {
-					tag = text_2,
-					backgroundStyle = v.backgroundStyle,
-					LayoutOrder = var6
-				}, t_1)
-			elseif v.stroke then
-				t[`Row-{i}`] = reactModule.createElement(viewModule, {
-					tag = text_2,
-					stroke = {
-						Color = v.stroke.Color,
-						Transparency = v.stroke.Transparency,
-						Thickness = v.stroke.Thickness
-					},
-					LayoutOrder = var6
-				}, t_1)
-			else
-				t[`Row-{i}`] = reactModule.createElement(viewModule, { tag = text_2, LayoutOrder = var6 }, t_1)
-			end
-			var6 += 1
+			t_3[`Row-{i}`] = reactModule.createElement(rowView, {
+				tag = "padding-y-small " .. (if v.rowTag then var7 .. " " .. v.rowTag else var7),
+				LayoutOrder = var9,
+				row = v,
+				children = t_4
+			})
+			var9 += 1
 		end
-		return reactModule.createElement(viewModule, { tag = "col auto-xy" }, t)
+		return reactModule.createElement(viewModule, { tag = "col auto-xy" }, t_3)
 	end,
 	matrixLabel = matrixLabel,
 	matrixInfoLabel = matrixInfoLabel

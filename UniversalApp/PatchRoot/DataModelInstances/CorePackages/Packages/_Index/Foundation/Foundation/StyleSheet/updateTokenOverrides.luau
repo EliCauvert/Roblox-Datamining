@@ -10,7 +10,7 @@ local scaleValueModule = require(foundation.Utility.scaleValue)
 
 return function(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: getOverrideAttributesModule (ref), flagsModule (ref), scaleValueModule (ref)
-	for i, v in getOverrideAttributesModule(if flagsModule.FoundationThemeName then p2 else nil, p3, p4, p6) do
+	for i, v in getOverrideAttributesModule(p2, p3, p4, p6) do
 		local var1 = if flagsModule.FoundationDisableTokenScaling then v else scaleValueModule(v, p5)
 		p1:SetAttribute(i, var1)
 		

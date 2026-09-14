@@ -28,6 +28,7 @@ local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local t = {
 	isOpen = false,
+	hasArrow = true,
 	testId = "--foundation-coachmark",
 	align = popoverAlignModule.Start,
 	side = popoverSideModule.Right
@@ -78,8 +79,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	return reactModule.createElement(popoverModule.Root, { isOpen = var1.isOpen, testId = var1.testId }, {
 		Anchor = reactModule.createElement(popoverModule.Anchor, withCommonPropsModule(var1, { anchorRef = var1.anchorRef }), var1.children),
 		Content = reactModule.createElement(popoverModule.Content, {
-			hasArrow = true,
 			DO_NOT_USE_hasContentInputSink = true,
+			hasArrow = var1.hasArrow,
 			align = var1.align,
 			onPressedOutside = if flagsModule.FoundationCoachmarkPressedOutside then var1.onPressedOutside else nil,
 			side = { position = var1.side, offset = var2.Size.Size_200 },

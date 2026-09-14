@@ -1,6 +1,5 @@
 ﻿local parent = script.Parent
 local foundation = script:FindFirstAncestor("Foundation")
-local flagsModule = require(foundation.Utility.Flags)
 local reactModule = require(foundation.Parent.React)
 local _ = require(foundation.Providers.Style.Tokens)
 local _ = require(parent.Rules.Types)
@@ -12,7 +11,7 @@ local _ = require(foundation.Enums.Device)
 local _ = require(foundation.Enums.ThemeName)
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), useGeneratedRulesModule (ref), flagsModule (ref), getOverrideAttributesModule (ref), createStyleSheetRulesModule (ref)
+	-- upvalues: reactModule (ref), useGeneratedRulesModule (ref), getOverrideAttributesModule (ref), createStyleSheetRulesModule (ref)
 	local var1, var2 = reactModule.useState(nil)
 	local var3 = reactModule.useRef({})
 	reactModule.useLayoutEffect(function()
@@ -21,16 +20,11 @@ return reactModule.memo(function(p1)
 			p1.setStyleSheetRef.current(var1)
 		end
 	end, { var1 })
-	local var4 = useGeneratedRulesModule(if flagsModule.FoundationThemeName then p1.themeName else nil, p1.colorMode, p1.device)
+	local var4 = useGeneratedRulesModule(p1.themeName, p1.colorMode, p1.device)
 	local var5 = reactModule.useMemo(function()
-		-- upvalues: getOverrideAttributesModule (copy), flagsModule (copy), p1 (ref)
-		return getOverrideAttributesModule(if flagsModule.FoundationThemeName then p1.themeName else nil, p1.colorMode, p1.device, p1.tokenOverrides)
-	end, {
-		if flagsModule.FoundationThemeName then p1.themeName else nil,
-		p1.colorMode,
-		p1.device,
-		p1.tokenOverrides
-	})
+		-- upvalues: getOverrideAttributesModule (copy), p1 (ref)
+		return getOverrideAttributesModule(p1.themeName, p1.colorMode, p1.device, p1.tokenOverrides)
+	end, { p1.themeName, p1.colorMode, p1.device, p1.tokenOverrides })
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		FoundationStyleSheet = reactModule.createElement("StyleSheet", { ref = var2 }, reactModule.useMemo(function()

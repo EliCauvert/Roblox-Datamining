@@ -25,7 +25,7 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useAvatarVariantsModule (ref), getAvatarSizeModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), flagsModule (ref), mapBindableModule (ref), getRbxThumbModule (ref), thumbnailTypeModule (ref), thumbnailSizeModule (ref), statusIndicatorModule (ref), dashModule (ref), indicatorModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useAvatarVariantsModule (ref), getAvatarSizeModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), mapBindableModule (ref), getRbxThumbModule (ref), thumbnailTypeModule (ref), thumbnailSizeModule (ref), flagsModule (ref), statusIndicatorModule (ref), dashModule (ref), indicatorModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useTokensModule()
 	local var3 = usePresentationContext()
@@ -40,13 +40,13 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		Size = UDim2.fromOffset(var5, var5)
 	}), {
 		Image = reactModule.createElement(imageModule, {
-			Image = if flagsModule.FoundationAvatarBindableUserId then mapBindableModule(var1.userId, function(p3)
-				-- upvalues: getRbxThumbModule (copy), thumbnailTypeModule (copy), thumbnailSizeModule (copy), flagsModule (copy), var1 (ref)
-				return getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, p3, thumbnailSizeModule.Medium, if flagsModule.FoundationAvatarIncludeProfileFrame then { includeProfileFrame = var1.includeProfileFrame } else nil)
-			end) else getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, var1.userId, thumbnailSizeModule.Medium, if flagsModule.FoundationAvatarIncludeProfileFrame then { includeProfileFrame = var1.includeProfileFrame } else nil),
+			Image = mapBindableModule(var1.userId, function(p3)
+				-- upvalues: getRbxThumbModule (copy), thumbnailTypeModule (copy), thumbnailSizeModule (copy), var1 (ref)
+				return getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, p3, thumbnailSizeModule.Medium, { includeProfileFrame = var1.includeProfileFrame })
+			end),
 			tag = var4.avatar.tag,
 			backgroundStyle = var1.backgroundStyle,
-			testId = if flagsModule.FoundationAvatarBindableUserId then `{var1.testId}--image` else nil
+			testId = `{var1.testId}--image`
 		}),
 		Indicator = if flagsModule.FoundationAvatarBeta then if var4.statusIndicator.isVisible then if flagsModule.FoundationStatusIndicatorMask then reactModule.createElement(statusIndicatorModule, {
 			testId = `{var1.testId}--status-indicator`,

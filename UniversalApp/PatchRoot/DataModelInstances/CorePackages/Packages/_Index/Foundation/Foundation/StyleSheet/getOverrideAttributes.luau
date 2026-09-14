@@ -31,7 +31,7 @@ return function(p4, p5, p6, p7)
 	elseif not p7 or not next(p7) then
 		return t
 	end
-	local tokens = tokensModule.getTokens(p5, p6, 1, nil, if flagsModule.FoundationThemeName then p4 else nil)
+	local tokens = tokensModule.getTokens(p5, p6, 1, nil, p4)
 	
 	for i, v in p7 do
 		local var1 = tokenProcessingUtilitiesModule.resolveTokenOverride(tokens, i, v)

@@ -89,9 +89,9 @@ end
 local function DialogExample(p2)
 	-- upvalues: reactModule (ref), dialogModule (ref), medium (ref)
 	return reactModule.createElement(dialogModule.Root, {
+		hasBackdrop = true,
+		disablePortal = false,
 		size = p2.size or medium,
-		hasBackdrop = p2.hasBackdrop ~= nil or p2.hasBackdrop,
-		disablePortal = if p2.disablePortal ~= nil then false else p2.disablePortal,
 		onClose = p2.onClose
 	}, {
 		DialogMedia = p2.children.DialogMedia,
@@ -183,7 +183,6 @@ return {
 			}),
 			DialogRoot = if var1 then reactModule.createElement(DialogExample, {
 				size = p2.size,
-				hasBackdrop = p2.hasBackdrop,
 				onClose = function()
 					-- upvalues: var2 (ref)
 					var2(false)
@@ -207,8 +206,6 @@ return {
 			}),
 			DialogRoot = if var1 then reactModule.createElement(DialogExample, {
 				size = p2.controls.size,
-				hasBackdrop = p2.controls.hasBackdrop,
-				disablePortal = p2.controls.disablePortal,
 				onClose = function()
 					-- upvalues: var2 (ref)
 					var2(false)

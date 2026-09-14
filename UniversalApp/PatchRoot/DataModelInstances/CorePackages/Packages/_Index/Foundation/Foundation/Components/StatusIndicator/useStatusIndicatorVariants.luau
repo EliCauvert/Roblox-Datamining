@@ -32,8 +32,12 @@ function variantsFactory(p1)
 				content = { style = p1.LightMode.Content.Emphasis }
 			},
 			[statusIndicatorVariantModule.Emphasis] = if flagsModule.FoundationActionEmphasisStatusIndicator then {
-				container = { tag = "bg-action-emphasis" },
-				content = { style = p1.Color.ActionEmphasis.Foreground }
+				container = {
+					tag = if flagsModule.FoundationSystemEmphasisNonActions then "bg-system-emphasis" else "bg-action-emphasis"
+				},
+				content = {
+					style = if flagsModule.FoundationSystemEmphasisNonActions then p1.DarkMode.Content.Emphasis else p1.Color.ActionEmphasis.Foreground
+				}
 			} else {
 				container = { tag = "bg-system-emphasis" },
 				content = { style = p1.DarkMode.Content.Emphasis }

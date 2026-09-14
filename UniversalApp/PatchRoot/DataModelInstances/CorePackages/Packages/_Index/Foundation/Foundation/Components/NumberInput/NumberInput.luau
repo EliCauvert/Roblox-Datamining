@@ -239,45 +239,26 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		end
 	end, { var39, var1.onFocusLost, var1.value, var22 })
 	local var41 = reactModule.useCallback(function(p3)
-		-- upvalues: var24 (ref), var10 (ref), flagsModule (copy), var1 (ref), var12 (ref), onChangeCallbackReasonModule (copy)
+		-- upvalues: var24 (ref), var10 (ref), var1 (ref), var12 (ref), onChangeCallbackReasonModule (copy)
 		var24(p3)
 		
 		if not var10() then return end
-		if flagsModule.FoundationNumberInputOnTextChanged then
-			local var42 = tonumber(p3)
-			
-			if var1.onTextChanged == nil then
-				if var42 == nil then
-					var12(true)
-					
-					return
-				elseif var42 == nil then
-					return
-				else
-					var12(false)
-					var1.onChanged(var42, onChangeCallbackReasonModule.Keyboard)
-					
-					return
-				end
-			else
-				var1.onTextChanged(p3)
-			end
-		else
-			local var43 = tonumber(p3)
-			
-			if var43 == nil then
+		local var42 = tonumber(p3)
+		
+		if var1.onTextChanged == nil then
+			if var42 == nil then
 				var12(true)
 				
 				return
+			elseif var42 ~= nil then
+				var12(false)
+				var1.onChanged(var42, onChangeCallbackReasonModule.Keyboard)
 			end
-			var12(false)
-			var1.onChanged(var43, onChangeCallbackReasonModule.Keyboard)
+			return
+		else
+			var1.onTextChanged(p3)
 		end
-	end, {
-		var10,
-		var1.onChanged,
-		if flagsModule.FoundationNumberInputOnTextChanged then var1.onTextChanged else nil
-	})
+	end, { var10, var1.onChanged, var1.onTextChanged })
 	local var42 = reactModule.useCallback(function()
 		-- upvalues: getBindableValueModule (copy), var20 (ref), var39 (ref), var18 (ref), onChangeCallbackReasonModule (copy)
 		if getBindableValueModule(var20) then

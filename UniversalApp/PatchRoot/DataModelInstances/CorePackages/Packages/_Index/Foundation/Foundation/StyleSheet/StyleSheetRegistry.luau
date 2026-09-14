@@ -16,12 +16,12 @@ local t_1 = {}
 local var1 = false
 
 local function createStyleSheet(p1, p2, p3, p4, p5)
-	-- upvalues: deviceModule (ref), themeNameModule (ref), flagsModule (ref), foundationStyleSheets (ref), getOverrideAttributesModule (ref), getGeneratedRulesModule (ref)
+	-- upvalues: deviceModule (ref), themeNameModule (ref), foundationStyleSheets (ref), getOverrideAttributesModule (ref), getGeneratedRulesModule (ref)
 	p2 = p2 or deviceModule.Desktop
 	p3 = p3 or 1
 	p5 = p5 or themeNameModule.Default
 	local styleSheet = Instance.new("StyleSheet")
-	local var2 = if flagsModule.FoundationThemeName then `{p5}-` else ""
+	local var2 = `{p5}-`
 	styleSheet.Name = if p4 ~= nil then `{var2}{p1}-{p2}-{p3}` else `{var2}{p1}-{p2}-{p3}-{tostring(p4)}`
 	styleSheet.Parent = foundationStyleSheets
 	
@@ -32,10 +32,10 @@ local function createStyleSheet(p1, p2, p3, p4, p5)
 		device = p2,
 		scale = p3,
 		tokenOverrides = p4,
-		overrideAttributes = getOverrideAttributesModule(if flagsModule.FoundationThemeName then p5 else nil, p1, p2, p4),
+		overrideAttributes = getOverrideAttributesModule(p5, p1, p2, p4),
 		instance = styleSheet,
 		tags = {},
-		rules = getGeneratedRulesModule(if flagsModule.FoundationThemeName then p5 else nil, p1, p2),
+		rules = getGeneratedRulesModule(p5, p1, p2),
 		attributes = {}
 	}
 end
@@ -102,16 +102,15 @@ local function addRegisteredStyleSheetTags(p3, p4)
 end
 
 local function resolveStyleSheet(p5, p6, p7, p8, p9)
-	-- upvalues: deviceModule (ref), themeNameModule (ref), t (ref), flagsModule (ref), t_1 (ref), createStyleSheet (ref)
+	-- upvalues: deviceModule (ref), themeNameModule (ref), t (ref), t_1 (ref), createStyleSheet (ref)
 	p6 = p6 or deviceModule.Desktop
 	p7 = p7 or 1
 	p9 = p9 or themeNameModule.Default
 	
 	for i, v in t do
-		if (not flagsModule.FoundationThemeName or v.themeName == p9) and (v.colorMode == p5 and v.device == p6) and (v.scale == p7 and v.tokenOverrides == p8) then
-			if flagsModule.FoundationStyleSheetRefCounting then
-				t_1[i] = nil
-			end
+		if v.themeName == p9 and v.colorMode == p5 and (v.device == p6 and v.scale == p7) and v.tokenOverrides == p8 then
+			t_1[i] = nil
+			
 			return i
 		end
 	end
@@ -171,12 +170,8 @@ end
 return {
 	resolveStyleSheet = resolveStyleSheet,
 	getStyleSheet = function(p10, p11, p12, p13, p14)
-		-- upvalues: resolveStyleSheet (ref), flagsModule (ref), t (ref), t_1 (ref)
+		-- upvalues: resolveStyleSheet (ref), t (ref), t_1 (ref)
 		local var7 = resolveStyleSheet(p10, p11, p12, p13, p14)
-		
-		if not flagsModule.FoundationStyleSheetRefCounting then
-			return var7
-		end
 		local var8 = t[var7]
 		
 		if var8 == nil then
@@ -189,8 +184,7 @@ return {
 	end,
 	addStyleTags = addStyleTags,
 	acquireStyleSheet = function(p10)
-		-- upvalues: flagsModule (ref), t (ref), t_1 (ref)
-		if not flagsModule.FoundationStyleSheetRefCounting then return end
+		-- upvalues: t (ref), t_1 (ref)
 		local var7 = t[p10]
 		
 		if var7 == nil then
@@ -200,8 +194,7 @@ return {
 		t_1[p10] = nil
 	end,
 	releaseStyleSheet = function(p10)
-		-- upvalues: flagsModule (ref), t (ref), t_1 (ref), var1 (write), flushPendingCleanup (ref)
-		if not flagsModule.FoundationStyleSheetRefCounting then return end
+		-- upvalues: t (ref), t_1 (ref), var1 (write), flushPendingCleanup (ref)
 		local var7 = t[p10]
 		
 		if var7 == nil or var7.refCount == 0 then return end

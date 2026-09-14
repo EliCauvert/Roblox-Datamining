@@ -106,20 +106,13 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3)
 		local userPresence = nil
 		local _ = nil
 		
-		if not flagsModule.FoundationAvatarBindableUserId then
-			userId = v
-			
-			if typeof(v) == "table" then
-				userPresence = v.userPresence
-				userId = v.userId
-			end
-		elseif typeof(v) == "table" then
+		if typeof(v) == "table" then
 			userPresence = v.userPresence
 			userId = v.userId
 		else
 			userId = v
 		end
-		local var8 = if flagsModule.FoundationAvatarBindableUserId then tostring(getBindableValueModule(userId)) else nil
+		local var8 = tostring(getBindableValueModule(userId))
 		local var9 = #var2.avatars - (i - 1)
 		
 		if var2.max < i then
@@ -137,7 +130,7 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3)
 			break
 		end
 		t_1[i] = reactModule.createElement(avatarModule, {
-			key = if flagsModule.FoundationAvatarBindableUserId then var8 else tostring(userId),
+			key = var8,
 			userId = userId,
 			backgroundStyle = shift300,
 			backplateStyle = backplateStyle,
@@ -146,7 +139,7 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3)
 			LayoutOrder = i,
 			Position = uDim2,
 			ZIndex = var9,
-			testId = if flagsModule.FoundationAvatarBindableUserId then `{var2.testId}--avatar-{var30}` else `{var21.testId}--avatar-{userId}`
+			testId = `{var2.testId}--avatar-{var30}`
 		})
 	end
 	return reactModule.createElement(viewModule, withCommonPropsModule(var2, { tag = "auto-xy", ref = p3 }), t_1)

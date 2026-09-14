@@ -1,5 +1,5 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
-local colorModeModule = require(foundation.Enums.ColorMode)
+local _ = require(foundation.Enums.ColorMode)
 local deviceModule = require(foundation.Enums.Device)
 local flagsModule = require(foundation.Utility.Flags)
 local fontNameModule = require(foundation.Enums.FontName)
@@ -9,14 +9,6 @@ local t = {
 	Common = function()
 		-- upvalues: foundation (ref)
 		return require(foundation.Generated.StyleRules.CommonAttribute)
-	end,
-	Dark = function()
-		-- upvalues: foundation (ref)
-		return require(foundation.Generated.StyleRules.DarkAttribute)
-	end,
-	Light = function()
-		-- upvalues: foundation (ref)
-		return require(foundation.Generated.StyleRules.LightAttribute)
 	end,
 	Console = function()
 		-- upvalues: foundation (ref)
@@ -234,32 +226,25 @@ local t_2 = {
 }
 
 return function(p1, p2, p3)
-	-- upvalues: themeNameModule (ref), t (ref), flagsModule (ref), t_1 (ref), colorModeModule (ref), deviceModule (ref), typographyVariantsModule (ref), builderSans (ref), t_2 (ref)
+	-- upvalues: themeNameModule (ref), t (ref), t_1 (ref), deviceModule (ref), flagsModule (ref), typographyVariantsModule (ref), builderSans (ref), t_2 (ref)
 	p1 = p1 or themeNameModule.Default
-	local var1 = nil
 	local _ = nil
 	local _ = nil
-	local var2 = t.Common()
-	
-	if flagsModule.FoundationThemeName then
-		var1 = (t_1[p1] or t_1[themeNameModule.Default])[p2]()
-	elseif p2 == colorModeModule.Dark then
-		var1 = t.Dark()
-	elseif p2 == colorModeModule.Light then
-		var1 = t.Light()
-	end
+	local _ = nil
+	local var1 = t.Common()
+	local var2 = (t_1[p1] or t_1[themeNameModule.Default])[p2]()
 	local var3 = if p3 == deviceModule.Console and not flagsModule.FoundationDisableTokenScaling then t.Console() else t.Desktop()
 	
-	if not var1 or not var3 or not var2 then
+	if not var2 or not var3 or not var1 then
 		return {}
 	end
-	local cloned = table.clone(var3)
+	var2 = table.clone(var3)
 	
-	for i, v in var2 do
-		cloned[i] = v
+	for i, v in var1 do
+		var2[i] = v
 	end
-	for i_1, v_1 in var1 do
-		cloned[i_1] = v_1
+	for i_1, v_1 in var2 do
+		var2[i_1] = v_1
 	end
 	if flagsModule.FoundationThemedTypography then
 		local var4 = (t_2[typographyVariantsModule[p1] or builderSans] or t_2[builderSans])[if p3 == deviceModule.Console and not flagsModule.FoundationDisableTokenScaling then deviceModule.Console else deviceModule.Desktop]
@@ -269,10 +254,10 @@ return function(p1, p2, p3)
 			
 			if var5 then
 				for i_2, v_2 in var5 do
-					cloned[i_2] = v_2
+					var2[i_2] = v_2
 				end
 			end
 		end
 	end
-	return cloned
+	return var2
 end

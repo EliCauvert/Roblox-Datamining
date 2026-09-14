@@ -15,8 +15,10 @@ local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local useAccordionModule = require(script.Parent.Parent.useAccordion)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
+local inputPlacementModule = require(foundation.Enums.InputPlacement)
 local _ = require(foundation.Enums.InputSize)
 local _ = require(foundation.Providers.Style.Tokens)
+local flagsModule = require(foundation.Utility.Flags)
 local useAccordionItemVariantsModule = require(script.Parent.Parent.useAccordionItemVariants)
 local t = { hasDivider = true, isExpanded = false }
 
@@ -28,7 +30,7 @@ local function _(p1)
 end
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePreferencesModule (ref), reactModule (ref), reactOtterModule (ref), useAccordionModule (ref), useAccordionItemVariantsModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), textModule (ref), icon (ref), dividerModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePreferencesModule (ref), reactModule (ref), reactOtterModule (ref), useAccordionModule (ref), useAccordionItemVariantsModule (ref), inputPlacementModule (ref), textModule (ref), viewModule (ref), withCommonPropsModule (ref), flagsModule (ref), iconModule (ref), icon (ref), dividerModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useTokensModule()
 	local reducedMotion = usePreferencesModule().reducedMotion
@@ -97,8 +99,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	end, { var4, reducedMotion, var3 })
 	local var14 = useAccordionModule()
 	local onAccordionItemActivated = var14.onAccordionItemActivated
-	local var15 = useAccordionItemVariantsModule(var2, var14.itemSize, false)
-	local var16 = if var1.onActivated then var1.onActivated elseif onAccordionItemActivated then onAccordionItemActivated(var1.id, var4) else reactModule.useCallback(function()
+	local var15 = useAccordionItemVariantsModule(var2, var14.itemSize, var14.isContained)
+	local var16 = var14.chevronPosition == inputPlacementModule.Start
+	local var17 = if var16 then 3 else 1
+	local var18 = if var16 then 1 else 3
+	local var19 = if var1.onActivated then var1.onActivated elseif onAccordionItemActivated then onAccordionItemActivated(var1.id, var4) else reactModule.useCallback(function()
 		-- upvalues: var4 (ref), var12 (ref), var5 (ref)
 		if var4 then
 			var12()
@@ -107,7 +112,19 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		end
 		var5(true)
 	end, { var4 })
-	var1.testId = `{var14.testId}--item-{var15.id}`
+	var1.testId = `{var14.testId}--item-{var17.id}`
+	local var20 = var1.description ~= nil
+	local var21 = reactModule.createElement(textModule, {
+		LayoutOrder = 2,
+		Text = var1.text,
+		tag = {
+			[var15.text.tag] = true,
+			grow = not var20,
+			["size-full-0"] = var20
+		},
+		testId = `{var1.testId}--title`
+	})
+	local var22 = if var1.icon then var1.icon else var1.leadingIcon
 	
 	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
 		tag = var15.container.tag,
@@ -118,24 +135,47 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		Header = reactModule.createElement(viewModule, {
 			LayoutOrder = 1,
 			tag = var15.header.tag,
-			onActivated = var16,
+			AutomaticSize = if var20 then Enum.AutomaticSize.Y else nil,
+			onActivated = var19,
 			testId = `{var1.testId}--header`
 		}, {
-			LeadingIcon = if var1.leadingIcon then reactModule.createElement(iconModule, {
-				LayoutOrder = 1,
-				name = if type(var1.leadingIcon) == "table" then var1.leadingIcon.name else var1.leadingIcon,
-				variant = if type(var1.leadingIcon) == "table" then var1.leadingIcon.variant else nil,
+			Icon = if flagsModule.FoundationAccordionBeta then if var22 then reactModule.createElement(iconModule, {
+				LayoutOrder = var17,
+				name = if type(var22) == "table" then var22.name else var22,
+				variant = if type(var22) == "table" then var22.variant else nil,
+				style = var15.icon.style,
+				size = var15.icon.size,
+				testId = `{var1.testId}--leading-icon`
+			}) else nil else nil,
+			LeadingIcon = if flagsModule.FoundationAccordionBeta then nil elseif var22 then reactModule.createElement(iconModule, {
+				LayoutOrder = var17,
+				name = if type(var22) == "table" then var22.name else var22,
+				variant = if type(var22) == "table" then var22.variant else nil,
 				style = var15.icon.style,
 				size = var15.icon.size,
 				testId = `{var1.testId}--leading-icon`
 			}) else nil,
-			Title = reactModule.createElement(textModule, {
+			Title = if not var20 then var21 else nil,
+			TextContainer = if var20 then reactModule.createElement(viewModule, {
 				LayoutOrder = 2,
-				Text = var1.text,
-				tag = var15.text.tag,
-				testId = `{var1.testId}--title`
-			}),
-			CollapseIcon = reactModule.createElement(viewModule, { tag = "auto-xy", LayoutOrder = 3 }, {
+				tag = var15.textContainer.tag,
+				testId = `{var1.testId}--text-container`
+			}, {
+				Title = var21,
+				Description = reactModule.createElement(textModule, {
+					LayoutOrder = 3,
+					TextWrapped = false,
+					Text = var1.description,
+					TextTruncate = Enum.TextTruncate.AtEnd,
+					tag = var15.description.tag,
+					testId = `{var1.testId}--description`
+				})
+			}) else nil,
+			CollapseIcon = reactModule.createElement(viewModule, {
+				tag = "auto-xy",
+				LayoutOrder = var18,
+				testId = `{var1.testId}--collapse-icon-container`
+			}, {
 				Icon = reactModule.createElement(iconModule, {
 					name = icon.ChevronLargeDown,
 					Rotation = var7,

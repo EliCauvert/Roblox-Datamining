@@ -180,12 +180,9 @@ return reactModule.memo(reactModule.forwardRef(function(value, p1)
 			-- upvalues: var1 (ref)
 			return UDim2.fromOffset(p2, var1.Stroke.Thick)
 		end),
-		AnchorPoint = if flagsModule.FoundationFixTabsBorderPosition then Vector2.new(0, 1) else nil,
+		AnchorPoint = Vector2.new(0, 1),
 		Position = reactModule.joinBindings({ highlightPosition, activeItemHeight }):map(function(p2)
-			-- upvalues: flagsModule (copy), var1 (ref)
-			local var23 = p2[2]
-			
-			return UDim2.fromOffset(p2[1], if flagsModule.FoundationFixTabsBorderPosition then var23 else var23 - var1.Stroke.Thick)
+			return UDim2.fromOffset(p2[1], p2[2])
 		end),
 		backgroundStyle = var1.Color.System.Contrast,
 		testId = `{var2.testId}--animated-border`
