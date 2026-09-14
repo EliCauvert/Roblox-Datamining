@@ -729,6 +729,8 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,Tidak dapat mendeteksi e
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Kepala Dinamis di marketplace harus dianimasikan, tetapi kepala ini tidak memiliki data FACS."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Tidak dapat mendeteksi ekspresi mata kanan tertutup untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mata kanan agar sesuai dengan posisi mata kanan di kepala dan pastikan mata tersebut dapat ditutup.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Tidak dapat mendeteksi ekspresi cemberut untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mulut agar sesuai dengan posisi mulut di kepala dan pastikan mulut dapat menunjukkan ekspresi cemberut.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Area Emisif di Atas Ambang Batas.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Area Emisif Terlampaui.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Aset ini menggunakan peta emisif yang hanya tersedia untuk kreator dalam Program Kreator Tepercaya. Hapus semua konten peta emisif atau gabung ke program sebelum meng-upload.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Animasi yang dipublikasikan tidak memiliki nilai translasi maksimum bagian yang valid. Publikasikan ulang animasi.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Animasi yang dipublikasikan tidak memiliki penanda emote UGC yang valid. Publikasikan ulang animasi.
@@ -1709,6 +1711,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Deskripsi
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Eksklusif dengan Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,Nama
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,hari ini
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,jam ini
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,bulan ini
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,{count} latar belakang lagi
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,hari
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,jam
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,menit
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,Direset dalam
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Deskripsikan latar belakangmu…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Membuat latar belakangmu…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Mempersiapkan latar belakangmu…
@@ -1827,6 +1838,7 @@ Feature.Avatar.Label.ClassicTShirts,Kaus Klasik
 Feature.Avatar.Label.ClearByCategory,Hapus {category}
 Feature.Avatar.Label.Climb,Panjat
 Feature.Avatar.Label.ClimbAnimations,Animasi Panjat
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Nama hanya dapat terdiri dari huruf, angka, dan spasi"
 Feature.Avatar.Label.CountSelected,{itemCount} Terpilih
 Feature.Avatar.Label.Creations,Kreasi
@@ -1938,6 +1950,7 @@ Feature.Avatar.Label.RecentlyWorn,Dipakai baru-baru ini
 Feature.Avatar.Label.RemoveFromSetBody,Avatar ini akan dikeluarkan dari set ini. Avatar tidak akan dihapus.
 Feature.Avatar.Label.Replace,Ganti
 Feature.Avatar.Label.ResetToNewCharacter,Kamu beralih ke karakter baru. Kamu ingin mereset semua item pakaian atau menyimpannya?
+Feature.Avatar.Label.ResetTryOn,Reset ke avatar saat ini
 Feature.Avatar.Label.Right,R
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,
@@ -1993,6 +2006,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,Pelapisan Makeup
 Feature.Avatar.Label.Title.ManageAvatars,Kelola Avatar
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,Inventaris Saya
 Feature.Avatar.Label.Title.ProfilePhoto,Foto Profil
 Feature.Avatar.Label.Title.ReplaceAvatar,Ganti Avatar
@@ -2132,6 +2146,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,
+Feature.Avatar.Title.MyAvatar,
 Feature.Avatar.Title.NameAvatarOutfit,Beri nama avatarmu
 Feature.Avatar.Title.NewCustomizeLook,Kustomisasi Punya Tampilan Baru
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Baru di Marketplace
@@ -2194,10 +2209,10 @@ Feature.BlockingModal.Heading.BlockUser,Blokir {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Memblokir pengguna ini akan menghapusnya sebagai Koneksi atau pengikut. Dia tidak akan dapat mengirim pesan, permintaan, atau undangan kepadamu.<br /><br />Dia tidak akan diberi tahu bahwa kamu memblokirnya."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Memblokir pengguna ini akan menghapusnya sebagai teman atau pengikut. Dia tidak akan dapat mengirim pesan, permintaan, atau undangan kepadamu.<br /><br />Dia tidak akan diberi tahu bahwa kamu memblokirnya."
 Feature.Build.Action.Add,Tambah
-Feature.Build.Action.AddFriends,
-Feature.Build.Action.AddPlaytester,Tambahkan playtester
+Feature.Build.Action.AddFriends,Undang teman
+Feature.Build.Action.AddPlaytester,Undang penguji tahap awal
 Feature.Build.Action.AddPlaytesters,
-Feature.Build.Action.AddToPlaytest,Tambahkan ke playtest
+Feature.Build.Action.AddToPlaytest,
 Feature.Build.Action.AgreeAndEnable,Setujui dan nyalakan
 Feature.Build.Action.Approve,Setujui
 Feature.Build.Action.Archive,Arsipkan
@@ -2309,7 +2324,7 @@ Feature.Build.Description.BuildReplyNotif,Dapatkan notifikasi saat Build memilik
 Feature.Build.Description.BuyRobuxToCreate,"Beli lebih banyak Robux untuk terus berkreasi, atau tunggu hingga kuota penggunaan Build gratismu direset besok."
 Feature.Build.Description.BuyUsageOrWait,"Beli lebih banyak kuota penggunaan Build dengan Robux, atau tunggu hingga batas harianmu direset."
 Feature.Build.Description.CampaignRunDates,Kampanyemu akan berlangsung {startDate}—{endDate}
-Feature.Build.Description.ChoosePlaytesters,Pilih teman untuk membantumu melakukan playtest.
+Feature.Build.Description.ChoosePlaytesters,Pilih teman untuk melihat preview game-mu.
 Feature.Build.Description.CreateDeveloperProduct,"Buat ""{NAME}"" dengan membayar {PRICE} Robux, tidak dijual."
 Feature.Build.Description.DeactivateDeveloperProduct,Hentikan penjualan produk delevoper {PRODUCT_ID}.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"Jika kamu punya perolehan Robux, Robux tersebut akan digunakan terlebih dahulu untuk membayar biaya kampanye iklan."
@@ -2318,7 +2333,7 @@ Feature.Build.Description.FriendsLinkOnly,Hanya temanmu yang dapat mengakses lin
 Feature.Build.Description.GameCreationDone,Saya telah selesai membuat dan memublikasikan game-mu. Kamu dapat membukanya untuk melakukan playtest.
 Feature.Build.Description.GameSavedPlaytest,Saya telah selesai membuat game-mu dan menyimpan versi baru. Kamu dapat membukanya untuk melakukan playtest.
 Feature.Build.Description.HubSettings,Kelola semua pengaturan di Pusat Kreator
-Feature.Build.Description.InviteFriendLimit,"Pilih maksimal {MAX_INVITES} teman, lalu bagikan link game."
+Feature.Build.Description.InviteFriendLimit,Undang maksimal {MAX_INVITES} teman untuk bermain sambil berkreasi.
 Feature.Build.Description.MakeAudienceAvail,Publikasikan pengalaman virtualmu agar tersedia bagi audiens ini.
 Feature.Build.Description.ManageAppearance,Kelola tampilan game-mu bagi pengguna lain.
 Feature.Build.Description.ManageDeveloperProduct,Kelola produk developer.
@@ -2330,7 +2345,7 @@ Feature.Build.Description.NoMonetizationProducts,Deskripsikan item yang ingin ka
 Feature.Build.Description.PlayAfterPublish,Pilih siapa yang bisa bermain setelah kamu memublikasikan pengalaman virtual ini.
 Feature.Build.Description.PlaytestLatest,Kamu sedang melakukan playtest pada versi terbarumu. Publikasikan saat kamu siap untuk membagikannya.
 Feature.Build.Description.PlaytestLocked,Kamu dapat memulai playtest setelah membuat game pertamamu.
-Feature.Build.Description.PlaytesterAccess,Tambahkan teman sebagai playtester atau ubah pengaturan Audiens game-mu agar lebih banyak pengguna dapat memainkannya.
+Feature.Build.Description.PlaytesterAccess,Undang teman sebagai penguji tahap awal atau ubah pengaturan Audiens game-mu agar lebih banyak pengguna dapat memainkannya.
 Feature.Build.Description.PricingRules,Tetapkan aturan harga
 Feature.Build.Description.PrivateShare,Ubah pengaturan Audiens game-mu untuk membagikannya.
 Feature.Build.Description.PromoteGameWithAdCampaign,Jangkau lebih banyak audiens dengan kampanye iklan {durationDays} hari agar game-mu lebih mudah ditemukan.
@@ -2534,7 +2549,7 @@ Feature.Build.Message.AdsPromotionBannerTitle,Kamu masih punya {promotionCount} 
 Feature.Build.Message.AdsPromotionBannerTitleSingular,Kamu masih punya 1 promosi gratis
 Feature.Build.Message.AdsStatsEmpty,Jangkau lebih banyak audiens dengan kampanye iklan agar game-mu lebih mudah ditemukan
 Feature.Build.Message.AdsStatsEmptyFree,Jangkau lebih banyak audiens dengan kampanye iklan gratis agar game-mu lebih mudah ditemukan
-Feature.Build.Message.AllFriendsAdded,Kamu telah menambahkan semua temanmu sebagai playtester.
+Feature.Build.Message.AllFriendsAdded,Kamu telah mengundang semua temanmu sebagai penguji tahap awal.
 Feature.Build.Message.AnswerBuildQuestion,Jawab pertanyaan Build di bawah ini.
 Feature.Build.Message.AssetDetailsUnavailable,Detail aset tidak tersedia.
 Feature.Build.Message.AssetsLoadFailed,Tidak bisa me-load aset.
@@ -2572,15 +2587,15 @@ Feature.Build.Message.LoadingVersions,Me-load riwayat versi...
 Feature.Build.Message.NoAssetsFound,Tidak ada aset yang ditemukan.
 Feature.Build.Message.NoCapturesAvailable,Tidak ada media yang tersedia
 Feature.Build.Message.NoDescriptionProvided,Tidak ada deskripsi yang diberikan.
-Feature.Build.Message.NoFriendsToAdd,Kamu belum memiliki teman untuk ditambahkan. Temukan pengguna untuk terhubung di Roblox terlebih dahulu.
+Feature.Build.Message.NoFriendsToAdd,Kamu belum memiliki teman untuk diundang. Temukan pengguna untuk terhubung di Roblox dulu.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Belum ada riwayat versi.
 Feature.Build.Message.OneTaskCompleted,1 tugas selesai
 Feature.Build.Message.OutOfBuildUsage,Kuota penggunaan Build-mu sudah habis. Lihat opsi untuk menggunakan Robux agar bisa terus berkreasi.
 Feature.Build.Message.PlaytestInviteSendFailedBody,Kamu tidak bisa mengirim link chat undangan kepada pengguna berikut:
 Feature.Build.Message.PlaytestInviteSendFailedHint,Gunakan tombol Bagikan untuk mendapatkan link.
-Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} dari {MAX_INVITES} playtester ditambahkan
-Feature.Build.Message.PrivatePlaytestInvite,{username} mengundangmu ke playtest privat {experienceName}
+Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} dari {MAX_INVITES} penguji tahap awal diundang
+Feature.Build.Message.PrivatePlaytestInvite,{username} mengundangmu menjadi penguji tahap awal untuk {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Game-mu telah dipublikasikan, tetapi tidak dapat dibuat publik. Coba lagi."
 Feature.Build.Message.PublishExpandAudience,Publikasikan untuk memperluas audiensmu
 Feature.Build.Message.PublishNotReverted,Publikasimu gagal dibatalkan. Coba lagi.
@@ -2617,7 +2632,7 @@ Feature.Build.Placeholder.DescribeProductUpdate,Deskripsikan perubahan
 Feature.Build.Prompt.CreateDeveloperProduct,"Bantu saya membuat produk developer, menghubungkannya ke game, memverifikasi dan memublikasikan perubahannya, serta membuatnya tersedia untuk dibeli."
 Feature.Build.Title.AdCampaignActive,Kampanye iklan aktif
 Feature.Build.Title.AdCampaignDuration,Kampanye iklan {durationDays} hari
-Feature.Build.Title.AddFriendsToPlaytest,Tambahkan teman untuk membantumu melakukan playtest
+Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Tambahkan gambar
 Feature.Build.Title.AdsStatsEmpty,Mulai kampanye
 Feature.Build.Title.AdsStatsEmptyFree,Mulai kampanye pertamamu
@@ -2645,7 +2660,7 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Aktifkan Harga Terkelola?
 Feature.Build.Title.NoMonetizationProducts,Mulai hasilkan pendapatan di game-mu
 Feature.Build.Title.NoRobuxForUsage,Tidak ada Robux yang tersisa untuk penggunaan Build
 Feature.Build.Title.PlaytestInviteSendFailed,Tidak dapat mengirim undangan
-Feature.Build.Title.Playtesters,Playtester
+Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersOnlyPlay,Hanya playtester yang bisa memainkannya
 Feature.Build.Title.PromoteGame,Promosikan game-mu
 Feature.Build.Title.PromoteGameFree,Promosikan game-mu secara gratis

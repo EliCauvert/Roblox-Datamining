@@ -712,6 +712,8 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,无法检测到动态头
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,商城中的动态头部必须是动画形式，但此头部没有 FACS 数据。
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,无法检测到动态头部的右眼闭合表情。请调整右眼的笼架标记，使其与头部右眼的位置相匹配，并确保其可以闭合。
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,无法检测到动态头部的皱眉表情。请调整嘴部的笼架标记，使其与头部的嘴巴位置相匹配，并确保它可以显示皱眉表情。
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,自发光面积超过阈值。
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,自发光面积超出上限。
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,此素材使用了发光贴图，这些贴图仅限“受信任创作者计划”创作者使用。请移除所有发光贴图内容或加入该计划后再上传。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,已发布的动画缺少有效的部件最大位移值。请重新发布该动画。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,已发布的动画缺少有效的用户生成内容动作标记。请重新发布该动画。
@@ -2189,9 +2191,9 @@ Feature.BlockingModal.Message.BlockConfirmation,屏蔽此用户将会把他们�
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,屏蔽此用户会将其从你的好友或粉丝列表中移除。此用户将无法向你发送消息、请求或邀请。<br /><br />对方不会收到你已屏蔽他们的通知。
 Feature.Build.Action.Add,
 Feature.Build.Action.AddFriends,
-Feature.Build.Action.AddPlaytester,添加测试玩家
+Feature.Build.Action.AddPlaytester,邀请初期测试玩家
 Feature.Build.Action.AddPlaytesters,
-Feature.Build.Action.AddToPlaytest,添加至游戏测试
+Feature.Build.Action.AddToPlaytest,
 Feature.Build.Action.AgreeAndEnable,同意并开启
 Feature.Build.Action.Approve,
 Feature.Build.Action.Archive,存档
@@ -2303,7 +2305,7 @@ Feature.Build.Description.BuildReplyNotif,在 Build 回复你后获得通知。
 Feature.Build.Description.BuyRobuxToCreate,购买更多 Robux 以继续创建，或等待你的免费 Build 使用额度在明天重置。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 购买更多 Build 使用额度，或等待你的每日限额重置。
 Feature.Build.Description.CampaignRunDates,你的广告活动将在 {startDate} – {endDate}期间投放
-Feature.Build.Description.ChoosePlaytesters,选择好友来帮助你进行游戏测试。
+Feature.Build.Description.ChoosePlaytesters,选择好友来抢先体验你的游戏。
 Feature.Build.Description.CreateDeveloperProduct,创建“{NAME}”，售价 {PRICE} Robux，已下架。
 Feature.Build.Description.DeactivateDeveloperProduct,将开发者产品 {PRODUCT_ID} 下架。
 Feature.Build.Description.EarnedRobuxAppliedFirst,如果你已赚取 Robux，这些 Robux 将首先用于支付广告活动费用。
@@ -2312,7 +2314,7 @@ Feature.Build.Description.FriendsLinkOnly,只有你的好友才能访问此链�
 Feature.Build.Description.GameCreationDone,我已完成游戏的创建和发布。你可以打开它进行游戏测试。
 Feature.Build.Description.GameSavedPlaytest,我已完成游戏的创建并保存了新版本。你可以打开它进行游戏测试。
 Feature.Build.Description.HubSettings,在创作者中心管理所有设置
-Feature.Build.Description.InviteFriendLimit,选择最多 {MAX_INVITES} 位好友，然后分享游戏链接。
+Feature.Build.Description.InviteFriendLimit,在你创建时，邀请最多 {MAX_INVITES} 位好友一起游玩。
 Feature.Build.Description.MakeAudienceAvail,面向此受众群体发布你的体验。
 Feature.Build.Description.ManageAppearance,管理你的游戏向他人显示的方式。
 Feature.Build.Description.ManageDeveloperProduct,管理开发者产品。
@@ -2324,7 +2326,7 @@ Feature.Build.Description.NoMonetizationProducts,描述你想创作的道具，�
 Feature.Build.Description.PlayAfterPublish,选择谁可以在此体验发布后游玩。
 Feature.Build.Description.PlaytestLatest,你正在对最新版本进行游戏测试。准备好分享后即可发布。
 Feature.Build.Description.PlaytestLocked,创建你的第一款游戏后，你就可以开始游戏测试。
-Feature.Build.Description.PlaytesterAccess,将好友添加为测试玩家，或更改游戏的受众设置，允许更多人游玩。
+Feature.Build.Description.PlaytesterAccess,邀请好友成为初期测试玩家，或更改游戏的受众设置，允许更多人游玩。
 Feature.Build.Description.PricingRules,设置定价规则
 Feature.Build.Description.PrivateShare,更改游戏的受众设置以分享该游戏。
 Feature.Build.Description.PromoteGameWithAdCampaign,通过为期 {durationDays} 天的广告活动扩大受众群体，让你的游戏被他人发现。
@@ -2528,7 +2530,7 @@ Feature.Build.Message.AdsPromotionBannerTitle,你还有 {promotionCount} 次免�
 Feature.Build.Message.AdsPromotionBannerTitleSingular,你还有 1 次免费推广机会
 Feature.Build.Message.AdsStatsEmpty,通过广告活动扩大受众群体，让更多玩家发现你的游戏
 Feature.Build.Message.AdsStatsEmptyFree,通过免费广告活动扩大受众群体，让更多玩家发现你的游戏
-Feature.Build.Message.AllFriendsAdded,你已将所有好友添加为测试玩家。
+Feature.Build.Message.AllFriendsAdded,你已邀请所有好友成为初期测试玩家。
 Feature.Build.Message.AnswerBuildQuestion,在下方回答 Build 的问题。
 Feature.Build.Message.AssetDetailsUnavailable,无法显示素材详情。
 Feature.Build.Message.AssetsLoadFailed,无法加载素材。
@@ -2566,15 +2568,15 @@ Feature.Build.Message.LoadingVersions,正在加载版本历史记录…
 Feature.Build.Message.NoAssetsFound,未找到素材。
 Feature.Build.Message.NoCapturesAvailable,无可用截图
 Feature.Build.Message.NoDescriptionProvided,没有提供描述。
-Feature.Build.Message.NoFriendsToAdd,你还没有任何可添加的好友。请先在 Roblox 上找到要建立联系的人。
+Feature.Build.Message.NoFriendsToAdd,你还没有任何可邀请的好友。请先在 Roblox 上找到要建立联系的人。
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,暂无版本历史记录。
 Feature.Build.Message.OneTaskCompleted,已完成 1 项任务
 Feature.Build.Message.OutOfBuildUsage,你的 Build 使用额度已用完。请查看你的选项，以便使用 Robux 继续创建。
 Feature.Build.Message.PlaytestInviteSendFailedBody,你无法向以下用户发送聊天邀请链接：
 Feature.Build.Message.PlaytestInviteSendFailedHint,请使用分享按钮获取链接。
-Feature.Build.Message.PlaytestersAdded,已添加 {INVITED_COUNT} 位测试玩家，共 {MAX_INVITES} 位
-Feature.Build.Message.PrivatePlaytestInvite,{username}邀请你参加“{experienceName}”的私人游戏测试
+Feature.Build.Message.PlaytestersAdded,已邀请 {INVITED_COUNT} 位初期测试玩家，最多可邀请 {MAX_INVITES} 位
+Feature.Build.Message.PrivatePlaytestInvite,{username}已邀请你成为“{experienceName}”的初期测试玩家
 Feature.Build.Message.PublicPublishFailed,你的游戏已发布，但无法公开。请重试。
 Feature.Build.Message.PublishExpandAudience,发布并扩大受众范围
 Feature.Build.Message.PublishNotReverted,你的发布未还原。请重试。
@@ -2595,8 +2597,10 @@ Feature.Build.Message.ShareLinkFailed,无法创建分享链接。请重试。
 Feature.Build.Message.SignedOut,你已注销。请登录并重试。
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} 个任务已完成
 Feature.Build.Message.ThinkingSeconds,正在思考（{SECONDS} 秒）
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,成为此创作者的可信好友，以便游玩他们的游戏。
 Feature.Build.Message.TryAgain,请重试。
 Feature.Build.Message.TurnToPortrait,将你的设备切换为竖向模式，以继续在游戏上操作。
+Feature.Build.Message.UpdateSettingsToPlaytest,要游玩此游戏，请更新你的游戏预览设置。
 Feature.Build.Message.VersionHistoryLoad,无法加载版本历史记录。
 Feature.Build.Message.WhatToCreate,你今天想创作什么？
 Feature.Build.Message.WorkedMinutesSeconds,已完成（{MINUTES} 分 {REM_SECONDS} 秒）
@@ -2611,7 +2615,7 @@ Feature.Build.Placeholder.DescribeProductUpdate,描述一项更新
 Feature.Build.Prompt.CreateDeveloperProduct,帮助我创建开发者产品，将其接入游戏，验证并发布更改，供玩家购买。
 Feature.Build.Title.AdCampaignActive,广告活动已启动
 Feature.Build.Title.AdCampaignDuration,{durationDays} 天广告活动
-Feature.Build.Title.AddFriendsToPlaytest,添加好友来帮助你进行游戏测试
+Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,添加图片
 Feature.Build.Title.AdsStatsEmpty,开始广告活动
 Feature.Build.Title.AdsStatsEmptyFree,开始你的第一个广告活动
@@ -2639,7 +2643,7 @@ Feature.Build.Title.ManagedPricingAcknowledgement,是否开启托管定价？
 Feature.Build.Title.NoMonetizationProducts,开始在你的游戏中赚取收入
 Feature.Build.Title.NoRobuxForUsage,没有剩余的 Robux 可用于购买 Build 使用额度
 Feature.Build.Title.PlaytestInviteSendFailed,无法发送邀请
-Feature.Build.Title.Playtesters,测试玩家
+Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersOnlyPlay,只有测试玩家可以游玩
 Feature.Build.Title.PromoteGame,推广你的游戏
 Feature.Build.Title.PromoteGameFree,免费推广你的游戏
@@ -4793,6 +4797,7 @@ Feature.ReportAbuse.ProblemDescription.Swearing,粗口、谩骂或脏话
 Feature.ReportAbuse.ProblemDescription.Violence,极端暴力或血腥
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,
 Feature.ReportAbuse.Title.SelectInSceneIpReport,感谢你开始举报 IP 侵权行为
+Feature.RobloxSubscription.Action.JoinIn,{time} 加入
 Feature.RobloxSubscription.Action.Subscribe,
 Feature.RobloxSubscription.Action.TryItForFree,免费试用
 Feature.RobloxSubscription.Body.AlreadySubscribed,Plus 订阅已为你提供了游戏内权益。
@@ -4802,6 +4807,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,为表达我们的谢意，
 Feature.RobloxSubscription.Description.Benefit.Customize,使用个人资料边框和 App 主题进行自定义
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,前 60 天享道具与虚拟形象九折优惠，之后享八折优惠
 Feature.RobloxSubscription.Description.ExclusiveBenefits,以更少的 Robux 享受更多乐趣。订阅 Roblox Plus。
+Feature.RobloxSubscription.Description.JoinEarly,Plus 订阅用户提前加入
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"点按\u{201C}{ctaText}\u{201D}，即表示你同意 <a href=""{termsUrl}"">Roblox 订阅条款</a>。系统将每月自动向你收取费用，直至你取消订阅。"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,免费私人服务器
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4820,6 +4826,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,好消息
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,获取 Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus 在这里不可用
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,你可以比其他人更早加入活动。
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Plus 订阅用户抢先体验
 Feature.SafetyDashboard.Heading.AccountStatus.V2,帐户状态、违规和申诉
 Feature.Schools.Action.AlreadyGraduated,我已经毕业了
 Feature.Schools.Action.CantFindSchool,找不到你的学校？

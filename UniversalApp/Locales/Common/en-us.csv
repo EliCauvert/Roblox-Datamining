@@ -4140,6 +4140,7 @@ Feature.NotApproved.Action.ReactivateAccount,Re-activate My Account
 Feature.NotApproved.Action.ReportMistake,Report a mistake
 Feature.NotApproved.Action.RuleConfirmation,I agree to know and follow the rules.
 Feature.NotApproved.Action.UserAgree,
+Feature.NotApproved.Action.ViewAppealGuidelines,View appeal guidelines
 Feature.NotApproved.Action.ViewLess,View less
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,View rules

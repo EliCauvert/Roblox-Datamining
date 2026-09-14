@@ -729,6 +729,8 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,Impossible de détecter 
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Les têtes dynamiques du Marketplace doivent être animées, mais cette tête ne contient pas de données relatives au système de codage facial."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Impossible de détecter la fermeture de l'œil droit pour la tête dynamique. Ajuste les points de repère de la cage pour que l'œil droit soit correctement positionné et puisse se fermer.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Impossible de détecter le froncement de sourcils pour la tête dynamique. Ajuste les points de repère de la cage pour que la bouche soit correctement positionnée et puisse froncer.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Zone émissive supérieure au seuil.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Zone émissive dépassée.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Ce contenu utilise des cartes émissives qui ne sont disponibles que pour les créateurs du programme des créateurs de confiance. Supprime tout contenu de cartes émissives ou rejoins le programme avant de l'importer.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Il manque une valeur de translation maximale valide à l'animation publiée. Republie l'animation.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Il manque un marqueur d'emote UGC valide à l'animation publiée. Republie l'animation.
@@ -1709,6 +1711,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Description
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exclusivité Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,Nom
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,pour aujourd'hui
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,pour cette heure
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,pour ce mois-ci
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,{count} arrière-plans restants
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,{count} arrière-plan restant
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,jours
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,heures
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,minutes
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,Réinitialisation dans
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Décris ton arrière-plan…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Génération de ton arrière-plan…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Préparation de ton arrière-plan…
@@ -1827,6 +1838,7 @@ Feature.Avatar.Label.ClassicTShirts,T-shirts classiques
 Feature.Avatar.Label.ClearByCategory,Effacer {category}
 Feature.Avatar.Label.Climb,Escalade
 Feature.Avatar.Label.ClimbAnimations,Animations d'escalade
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Les noms peuvent uniquement contenir des lettres, des chiffres et des espaces."
 Feature.Avatar.Label.CountSelected,{itemCount} Sélectionné.e.s
 Feature.Avatar.Label.Creations,Créations
@@ -1938,6 +1950,7 @@ Feature.Avatar.Label.RecentlyWorn,Récemment porté
 Feature.Avatar.Label.RemoveFromSetBody,"Ces avatars seront retirés de cet ensemble, mais ne seront pas supprimés."
 Feature.Avatar.Label.Replace,Remplacer
 Feature.Avatar.Label.ResetToNewCharacter,Tu passes à un nouveau personnage ; veux-tu réinitialiser tous les articles de ta tenue ou les conserver ?
+Feature.Avatar.Label.ResetTryOn,Rétablir l'avatar actuel
 Feature.Avatar.Label.Right,R
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,Bras droits
@@ -1993,6 +2006,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,Couches de maquillage
 Feature.Avatar.Label.Title.ManageAvatars,Gérer les avatars
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,Mon inventaire
 Feature.Avatar.Label.Title.ProfilePhoto,Photo de profil
 Feature.Avatar.Label.Title.ReplaceAvatar,Remplacer l'avatar
@@ -2132,6 +2146,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,Réinitialiser par défaut
 Feature.Avatar.Title.MakeupSortUnequip,Déséquiper l'item
 Feature.Avatar.Title.Move,Déplacer
+Feature.Avatar.Title.MyAvatar,Mon avatar
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,La personnalisation a un nouveau look !
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Nouveau sur le marketplace
@@ -2195,9 +2210,9 @@ Feature.BlockingModal.Message.BlockConfirmation,"Le fait de bloquer cet utilisat
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Bloquer cet utilisateur lui retire son statut d'ami ou de follower. Il ne pourra plus t'envoyer de messages, de demandes ou d'invitations.<br /><br />Il ne saura pas que tu l'as bloqué."
 Feature.Build.Action.Add,
 Feature.Build.Action.AddFriends,
-Feature.Build.Action.AddPlaytester,Ajouter un testeur
-Feature.Build.Action.AddPlaytesters,Ajouter des testeurs
-Feature.Build.Action.AddToPlaytest,Ajouter au test de jeu
+Feature.Build.Action.AddPlaytester,Inviter un testeur en avant-première
+Feature.Build.Action.AddPlaytesters,Inviter des testeurs en avant-première
+Feature.Build.Action.AddToPlaytest,
 Feature.Build.Action.AgreeAndEnable,Accepter et activer
 Feature.Build.Action.Approve,
 Feature.Build.Action.Archive,Archiver
@@ -2309,7 +2324,7 @@ Feature.Build.Description.BuildReplyNotif,Recevoir une notification lorsque tu r
 Feature.Build.Description.BuyRobuxToCreate,"Achète plus de Robux pour continuer à créer, ou attends que ton utilisation gratuite de la fonctionnalité Construire soit réinitialisée demain."
 Feature.Build.Description.BuyUsageOrWait,Achète plus de capacités d'utilisation de Construire avec des Robux ou attends que ta limite quotidienne soit réinitialisée.
 Feature.Build.Description.CampaignRunDates,Ta campagne se déroulera du {startDate} au {endDate} 
-Feature.Build.Description.ChoosePlaytesters,Choisis des amis pour t'aider à tester le jeu.
+Feature.Build.Description.ChoosePlaytesters,Choisis des amis pour tester ton jeu.
 Feature.Build.Description.CreateDeveloperProduct,Crée « {NAME} » pour {PRICE} Robux (hors vente).
 Feature.Build.Description.DeactivateDeveloperProduct,Retire le produit développeur {PRODUCT_ID} de la vente.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"Si tu as gagné des Robux, ceux-ci seront d'abord utilisés pour couvrir le coût de la campagne publicitaire."
@@ -2318,7 +2333,7 @@ Feature.Build.Description.FriendsLinkOnly,Seuls tes amis peuvent accéder à ce 
 Feature.Build.Description.GameCreationDone,J'ai terminé la création et la publication de ton jeu. Tu peux l'ouvrir pour le tester.
 Feature.Build.Description.GameSavedPlaytest,J'ai terminé la création de ton jeu et j'ai enregistré une nouvelle version. Lance-le pour le tester.
 Feature.Build.Description.HubSettings,Gère tous les paramètres dans le Hub Création
-Feature.Build.Description.InviteFriendLimit,"Choisis jusqu'à {MAX_INVITES} amis, puis partage le lien vers le jeu."
+Feature.Build.Description.InviteFriendLimit,Invite jusqu'à {MAX_INVITES} amis à jouer pendant que tu crées.
 Feature.Build.Description.MakeAudienceAvail,Publie ton expérience pour la rendre accessible à ce public.
 Feature.Build.Description.ManageAppearance,Gère la façon dont ton jeu apparaît pour les autres.
 Feature.Build.Description.ManageDeveloperProduct,Gère le produit développeur.
@@ -2330,7 +2345,7 @@ Feature.Build.Description.NoMonetizationProducts,"Pour commencer à gagner des R
 Feature.Build.Description.PlayAfterPublish,Choisis qui pourra jouer après la publication de cette expérience.
 Feature.Build.Description.PlaytestLatest,Tu es en train de tester ta dernière version. Publie-la quand tu veux.
 Feature.Build.Description.PlaytestLocked,Crée ton premier jeu pour commencer à le tester.
-Feature.Build.Description.PlaytesterAccess,Ajoute des amis en tant que testeurs ou modifie le paramètre Public de ton jeu pour permettre à davantage de personnes d'y jouer.
+Feature.Build.Description.PlaytesterAccess,Invite des amis à tester ton jeu en avant-première ou modifie son paramètre Audience pour permettre à davantage de personnes d'y jouer.
 Feature.Build.Description.PricingRules,Définir les règles de tarification
 Feature.Build.Description.PrivateShare,Modifie le paramètre Public de ton jeu pour le partager.
 Feature.Build.Description.PromoteGameWithAdCampaign,Booste ton audience avec une campagne publicitaire de {durationDays} jours pour faire découvrir ton jeu.
@@ -2534,7 +2549,7 @@ Feature.Build.Message.AdsPromotionBannerTitle,Il te reste {promotionCount} prom
 Feature.Build.Message.AdsPromotionBannerTitleSingular,Il te reste 1 promotion gratuite
 Feature.Build.Message.AdsStatsEmpty,Développe ton audience avec une campagne publicitaire pour faire découvrir ton jeu
 Feature.Build.Message.AdsStatsEmptyFree,Développe ton audience avec une campagne publicitaire gratuite pour faire découvrir ton jeu
-Feature.Build.Message.AllFriendsAdded,Tu as ajouté tous tes amis en tant que testeurs.
+Feature.Build.Message.AllFriendsAdded,Tu as invité tous tes amis au test en avant-première.
 Feature.Build.Message.AnswerBuildQuestion,Réponds à la question de la fonctionnalité Construire ci-dessous.
 Feature.Build.Message.AssetDetailsUnavailable,Les détails du contenu sont indisponibles.
 Feature.Build.Message.AssetsLoadFailed,Impossible de charger les contenus.
@@ -2572,15 +2587,15 @@ Feature.Build.Message.LoadingVersions,Chargement de l'historique des versions…
 Feature.Build.Message.NoAssetsFound,Aucun contenu trouvé.
 Feature.Build.Message.NoCapturesAvailable,Aucune capture disponible
 Feature.Build.Message.NoDescriptionProvided,Aucune description fournie.
-Feature.Build.Message.NoFriendsToAdd,Tu n'as pas encore d'amis à ajouter. Trouve d'abord des personnes avec qui te connecter sur Roblox.
+Feature.Build.Message.NoFriendsToAdd,Tu n'as aucun ami à inviter. Trouve d'abord des personnes avec qui te connecter sur Roblox.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Aucun historique des versions pour le moment.
 Feature.Build.Message.OneTaskCompleted,1 tâche terminée
 Feature.Build.Message.OutOfBuildUsage,Tu ne peux plus utiliser la fonctionnalité Construire. Consulte tes options pour utiliser des Robux et continuer à créer.
 Feature.Build.Message.PlaytestInviteSendFailedBody,Les utilisateurs suivants n'ont pas pu recevoir ton lien d'invitation :
 Feature.Build.Message.PlaytestInviteSendFailedHint,Utilise le bouton Partager pour obtenir un lien.
-Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} testeurs sur {MAX_INVITES} ajoutés
-Feature.Build.Message.PrivatePlaytestInvite,{username} t'invite à un test de jeu privé pour {experienceName}
+Feature.Build.Message.PlaytestersAdded,Testeurs en avant-première invités : {INVITED_COUNT}/{MAX_INVITES}
+Feature.Build.Message.PrivatePlaytestInvite,{username} t'invite à tester {experienceName} en avant-première
 Feature.Build.Message.PublicPublishFailed,"Ton jeu a été publié, mais n'a pas pu être rendu public. Réessaye."
 Feature.Build.Message.PublishExpandAudience,Publie pour élargir ton public
 Feature.Build.Message.PublishNotReverted,Ta publication n'a pas été rétablie. Réessaie.
@@ -2617,7 +2632,7 @@ Feature.Build.Placeholder.DescribeProductUpdate,Décris une mise à jour
 Feature.Build.Prompt.CreateDeveloperProduct,"Aide-moi à créer un produit développeur, à l'intégrer au jeu, à vérifier et à publier les modifications, et à le rendre disponible à l'achat."
 Feature.Build.Title.AdCampaignActive,La campagne publicitaire est active
 Feature.Build.Title.AdCampaignDuration,Campagne publicitaire de {durationDays} jours
-Feature.Build.Title.AddFriendsToPlaytest,Ajoute des amis pour t'aider à tester le jeu
+Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Ajouter des images
 Feature.Build.Title.AdsStatsEmpty,Lancer une campagne
 Feature.Build.Title.AdsStatsEmptyFree,Lance ta première campagne
@@ -2645,7 +2660,7 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Activer la tarification géré
 Feature.Build.Title.NoMonetizationProducts,Gagne de l'argent dans ton expérience
 Feature.Build.Title.NoRobuxForUsage,Il ne reste plus de Robux pour utiliser Construire
 Feature.Build.Title.PlaytestInviteSendFailed,Impossible d'envoyer les invitations
-Feature.Build.Title.Playtesters,Testeurs
+Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersOnlyPlay,Seuls les testeurs peuvent y jouer
 Feature.Build.Title.PromoteGame,Fais la promotion de ton jeu
 Feature.Build.Title.PromoteGameFree,Fais la promotion de ton jeu gratuitement

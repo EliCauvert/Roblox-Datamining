@@ -729,6 +729,8 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,"Der Ausdruck ""Geöffne
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Dynamische Köpfe auf dem Marktplatz müssen animiert sein, aber diesem Kopf fehlen FACS-Daten."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,"Der Ausdruck ""Rechtes Auge geschlossen"" kann für den dynamischen Kopf nicht erkannt werden. Bitte passe die Cage-Orientierungspunkte für das rechte Auge so an, dass sie mit der Position des rechten Auges auf dem Kopf übereinstimmen, und stelle sicher, dass es geschlossen werden kann."
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,"Der Ausdruck ""Stirnrunzeln"" für den dynamischen Kopf kann nicht erkannt werden. Bitte passe die Cage-Orientierungspunkte für den Mund so an, dass sie mit der Position des Mundes auf dem Kopf übereinstimmen, und stelle sicher, dass er den Ausdruck ""Stirnrunzeln"" zeigen kann."
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Emissiver Bereich über dem Schwellenwert.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Emissiver Bereich überschritten.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,"Dieses Objekt verwendet Emissionskarten, die nur für Creator im Programm für vertraute Creator verfügbar sind. Bitte entferne alle Emissionskarteninhalte oder tritt dem Programm vor dem Hochladen bei."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Der veröffentlichten Animation fehlt ein gültiger maximaler Wert für die Teileverschiebung. Bitte veröffentliche die Animation erneut.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Der veröffentlichten Animation fehlt ein gültiger UGC-Emote-Marker. Bitte veröffentliche die Animation erneut.
@@ -2201,10 +2203,10 @@ Feature.BlockingModal.Heading.BlockUser,{DisplayName} blockieren?
 Feature.BlockingModal.Message.BlockConfirmation,"Wenn du diese Person blockierst, wird sie als Connection oder Follower entfernt. Er oder sie kann dir keine Nachrichten, Anfragen oder Einladungen mehr senden.<br /><br />Die Person wird nicht darüber benachrichtigt, dass du sie blockiert hast."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Wenn du diesen Benutzer blockierst, wird er als Freund oder Follower entfernt. Er oder sie kann dir keine Nachrichten, Anfragen oder Einladungen mehr senden.<br /><br />Der Benutzer wird nicht darüber benachrichtigt, dass du ihn oder sie blockiert hast."
 Feature.Build.Action.Add,
-Feature.Build.Action.AddFriends,
-Feature.Build.Action.AddPlaytester,Spieletester hinzufügen
+Feature.Build.Action.AddFriends,Freunde einladen
+Feature.Build.Action.AddPlaytester,Vorabtester einladen
 Feature.Build.Action.AddPlaytesters,
-Feature.Build.Action.AddToPlaytest,Zum Spieltest hinzufügen
+Feature.Build.Action.AddToPlaytest,
 Feature.Build.Action.AgreeAndEnable,Zustimmen und einschalten
 Feature.Build.Action.Approve,
 Feature.Build.Action.Archive,Archivieren
@@ -2316,7 +2318,7 @@ Feature.Build.Description.BuildReplyNotif,"Erhalte Benachrichtigungen, wenn Buil
 Feature.Build.Description.BuyRobuxToCreate,"Kaufe mehr Robux, um weiter zu erstellen, oder warte, bis dein kostenloses Build-Kontingent morgen zurückgesetzt wird."
 Feature.Build.Description.BuyUsageOrWait,"Kaufe mehr Build-Kontingent mit Robux oder warte, bis dein Tageslimit zurückgesetzt wird."
 Feature.Build.Description.CampaignRunDates,Deine Kampagne läuft von {startDate}–{endDate}.
-Feature.Build.Description.ChoosePlaytesters,"Wähle Freunde aus, die dir beim Spieltest helfen."
+Feature.Build.Description.ChoosePlaytesters,"Wähle Freunde aus, die eine Vorschau deines Spiels erhalten."
 Feature.Build.Description.CreateDeveloperProduct,"Erstelle ""{NAME}"" für {PRICE} Robux (nicht mehr im Verkauf)."
 Feature.Build.Description.DeactivateDeveloperProduct,Nimm das Entwicklerprodukt {PRODUCT_ID} aus dem Verkauf.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"Wenn du Robux verdient hast, werden diese zuerst auf die Kosten der Werbekampagne angerechnet."
@@ -2325,7 +2327,7 @@ Feature.Build.Description.FriendsLinkOnly,"Nur deine Freunde können auf diesen 
 Feature.Build.Description.GameCreationDone,"Ich habe die Erstellung und Veröffentlichung deines Spiels abgeschlossen. Du kannst es öffnen, um es zu testen."
 Feature.Build.Description.GameSavedPlaytest,"Ich habe die Erstellung deines Spiels abgeschlossen und eine neue Version gespeichert. Du kannst es öffnen, um es zu testen."
 Feature.Build.Description.HubSettings,Verwalte alle Einstellungen im Creator Hub
-Feature.Build.Description.InviteFriendLimit,Wähle bis zu {MAX_INVITES} Freunde aus und teile dann den Link zum Spiel.
+Feature.Build.Description.InviteFriendLimit,"Lade bis zu {MAX_INVITES} Freunde zum Spielen ein, während du etwas erstellst."
 Feature.Build.Description.MakeAudienceAvail,"Veröffentliche deine Experience, um sie für diese Zielgruppe verfügbar zu machen."
 Feature.Build.Description.ManageAppearance,"Verwalte, wie dein Spiel für andere angezeigt wird."
 Feature.Build.Description.ManageDeveloperProduct,Verwalte das Entwicklerprodukt.
@@ -2337,7 +2339,7 @@ Feature.Build.Description.NoMonetizationProducts,"Beschreibe einen Artikel, den 
 Feature.Build.Description.PlayAfterPublish,"Wähle aus, wer diese Experience spielen kann, nachdem du sie veröffentlicht hast."
 Feature.Build.Description.PlaytestLatest,"Du testest gerade die neueste Version. Veröffentliche sie, wenn du bereit bist, sie zu teilen."
 Feature.Build.Description.PlaytestLocked,"Du kannst mit dem Spieltest beginnen, nachdem du dein erstes Spiel erstellt hast."
-Feature.Build.Description.PlaytesterAccess,"Füge Freunde als Spieltester hinzu oder ändere die Zielgruppeneinstellung deines Spiels, damit mehr Personen spielen können."
+Feature.Build.Description.PlaytesterAccess,"Lade Freunde als Vorabtester ein oder ändere die Zielgruppeneinstellung deines Spiels, damit mehr Personen spielen können."
 Feature.Build.Description.PricingRules,Preisgestaltungsregeln festlegen
 Feature.Build.Description.PrivateShare,"Ändere die Zielgruppeneinstellung deines Spiels, um es zu teilen."
 Feature.Build.Description.PromoteGameWithAdCampaign,"Vergrößere deine Zielgruppe mit einer {durationDays}-tägigen Werbekampagne und sorge dafür, dass dein Spiel besser entdeckt wird."
@@ -2541,7 +2543,7 @@ Feature.Build.Message.AdsPromotionBannerTitle,Du hast noch {promotionCount} kost
 Feature.Build.Message.AdsPromotionBannerTitleSingular,Du hast noch 1 kostenlose Werbeaktion
 Feature.Build.Message.AdsStatsEmpty,"Vergrößere deine Zielgruppe mit einer Werbekampagne und sorge dafür, dass dein Spiel besser entdeckt wird"
 Feature.Build.Message.AdsStatsEmptyFree,"Vergrößere deine Zielgruppe mit einer kostenlosen Werbekampagne und sorge dafür, dass dein Spiel besser entdeckt wird"
-Feature.Build.Message.AllFriendsAdded,Du hast alle deine Freunde als Spieletester hinzugefügt.
+Feature.Build.Message.AllFriendsAdded,Du hast alle deine Freunde als Vorabtester eingeladen.
 Feature.Build.Message.AnswerBuildQuestion,Beantworte unten die Frage von Build.
 Feature.Build.Message.AssetDetailsUnavailable,Objekt-Infos sind nicht verfügbar.
 Feature.Build.Message.AssetsLoadFailed,Objekte können nicht geladen werden.
@@ -2579,15 +2581,15 @@ Feature.Build.Message.LoadingVersions,Versionsverlauf wird geladen …
 Feature.Build.Message.NoAssetsFound,Keine Objekte gefunden.
 Feature.Build.Message.NoCapturesAvailable,Keine Aufnahmen verfügbar
 Feature.Build.Message.NoDescriptionProvided,Keine Beschreibung vorhanden.
-Feature.Build.Message.NoFriendsToAdd,"Du hast noch keine Freunde, die du hinzufügen kannst. Finde zuerst Personen, mit denen du dich auf Roblox verbinden kannst."
+Feature.Build.Message.NoFriendsToAdd,"Du hast noch keine Freunde, die du einladen kannst. Finde zuerst Personen, mit denen du dich auf Roblox verbinden kannst."
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Noch kein Versionsverlauf.
 Feature.Build.Message.OneTaskCompleted,1 Aufgabe abgeschlossen
 Feature.Build.Message.OutOfBuildUsage,"Dein Build-Kontingent ist aufgebraucht. Sieh dir deine Optionen an, um Robux zu verwenden und weiter zu erstellen."
 Feature.Build.Message.PlaytestInviteSendFailedBody,Du konntest keinen Einladungs-Chat-Link an die folgenden Benutzer senden:
 Feature.Build.Message.PlaytestInviteSendFailedHint,"Bitte verwende die Schaltfläche ""Teilen"", um einen Link zu erhalten."
-Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} von {MAX_INVITES} Spieletestern hinzugefügt
-Feature.Build.Message.PrivatePlaytestInvite,{username} hat dich zum privaten Spieltest {experienceName} eingeladen
+Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} von {MAX_INVITES} Vorabtestern eingeladen
+Feature.Build.Message.PrivatePlaytestInvite,"{username} hat dich eingeladen, Vorabtester für {experienceName} zu sein"
 Feature.Build.Message.PublicPublishFailed,"Dein Spiel wurde veröffentlicht, konnte aber nicht öffentlich gemacht werden. Bitte versuche es erneut."
 Feature.Build.Message.PublishExpandAudience,"Veröffentliche, um deine Zielgruppe zu vergrößern"
 Feature.Build.Message.PublishNotReverted,Deine Veröffentlichung wurde nicht rückgängig gemacht. Bitte versuche es erneut.
@@ -2624,7 +2626,7 @@ Feature.Build.Placeholder.DescribeProductUpdate,Beschreibe ein Update
 Feature.Build.Prompt.CreateDeveloperProduct,"Hilf mir, ein Entwicklerprodukt zu erstellen, es in das Spiel einzubinden, die Änderungen zu prüfen und zu veröffentlichen und es zum Kauf anzubieten."
 Feature.Build.Title.AdCampaignActive,Werbekampagne ist aktiv
 Feature.Build.Title.AdCampaignDuration,{durationDays}-tägige Werbekampagne
-Feature.Build.Title.AddFriendsToPlaytest,"Füge Freunde hinzu, die dir beim Spieltest helfen"
+Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Bilder hinzufügen
 Feature.Build.Title.AdsStatsEmpty,Kampagne starten
 Feature.Build.Title.AdsStatsEmptyFree,Deine erste Kampagne starten
@@ -2652,7 +2654,7 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Verwaltete Preisgestaltung akt
 Feature.Build.Title.NoMonetizationProducts,"Beginne, in deinem Spiel Einnahmen zu erzielen"
 Feature.Build.Title.NoRobuxForUsage,Keine Robux mehr für das Build-Kontingent übrig
 Feature.Build.Title.PlaytestInviteSendFailed,Einladungen konnten nicht gesendet werden
-Feature.Build.Title.Playtesters,Spieletester
+Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersOnlyPlay,Nur Spieletester können spielen
 Feature.Build.Title.PromoteGame,Bewirb dein Spiel
 Feature.Build.Title.PromoteGameFree,Bewirb dein Spiel kostenlos
@@ -3653,7 +3655,7 @@ Feature.GameDetails.Action.CopyLink,
 Feature.GameDetails.Action.CreatePrivateGame,Privaten Server erstellen
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Feedback geben
-Feature.GameDetails.Action.InviteFriends,Freunde einladen
+Feature.GameDetails.Action.InviteFriends,
 Feature.GameDetails.Action.JoinFriendsInGame,Schließ dich deinen Freunden an
 Feature.GameDetails.Action.NotInterested,Nicht interessiert
 Feature.GameDetails.Action.PauseVideo,Video pausieren

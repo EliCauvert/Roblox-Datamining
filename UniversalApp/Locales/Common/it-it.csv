@@ -713,6 +713,8 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,Impossibile rilevare se 
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Le teste dinamiche sul marketplace devono essere animate, ma questa testa non dispone di alcun dato del sistema di codifica facciale."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Impossibile rilevare se l'occhio destro della testa dinamica sia chiuso o meno. Regola i punti di riferimento della gabbia per l'occhio destro in modo che corrispondano a dove si trova l'occhio destro sulla testa e assicurati che possa essere chiuso.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Impossibile rilevare l'espressione accigliata della testa dinamica. Regola i punti di riferimento della gabbia per la bocca in modo che corrispondano a dove si trova la bocca sulla testa e assicurati che possa mostrare tale espressione.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Area emissiva al di sopra della soglia.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Area emissiva superata.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Questa risorsa utilizza mappe emissive che sono disponibili solo per i creatori del programma Trusted Creator. Rimuovi tutti i contenuti delle mappe emissive o partecipa al programma prima di caricare.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Nell'animazione pubblicata manca un valore valido di traslazione massima della parte. Ripubblica l'animazione.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Nell'animazione pubblicata manca un indicatore di emote UGC valido. Ripubblica l'animazione.
@@ -2190,9 +2192,9 @@ Feature.BlockingModal.Message.BlockConfirmation,"Bloccando questo utente, lo rim
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Bloccando questo utente, lo rimuoverai dagli amici o dai follower e non potrà più inviarti messaggi, richieste o inviti.<br /><br />L'utente non riceverà alcuna notifica relativa al blocco."
 Feature.Build.Action.Add,
 Feature.Build.Action.AddFriends,
-Feature.Build.Action.AddPlaytester,Aggiungi playtester
-Feature.Build.Action.AddPlaytesters,
-Feature.Build.Action.AddToPlaytest,Aggiungi al test di giocabilità
+Feature.Build.Action.AddPlaytester,Invita un early tester
+Feature.Build.Action.AddPlaytesters,Invita early tester
+Feature.Build.Action.AddToPlaytest,
 Feature.Build.Action.AgreeAndEnable,Accetta e attiva
 Feature.Build.Action.Approve,Approva
 Feature.Build.Action.Archive,Archivia
@@ -2304,7 +2306,7 @@ Feature.Build.Description.BuildReplyNotif,Ricevi una notifica quando Build ha un
 Feature.Build.Description.BuyRobuxToCreate,Acquista più Robux per continuare a creare o attendi che il tuo utilizzo gratuito di Costruisci venga ripristinato domani.
 Feature.Build.Description.BuyUsageOrWait,Acquista più utilizzo di Build con Robux o attendi il ripristino del limite giornaliero.
 Feature.Build.Description.CampaignRunDates,La tua campagna sarà attiva dal giorno {startDate} al giorno {endDate}
-Feature.Build.Description.ChoosePlaytesters,Scegli gli amici che ti aiuteranno nel test di giocabilità.
+Feature.Build.Description.ChoosePlaytesters,Scegli gli amici che proveranno il tuo gioco in anteprima.
 Feature.Build.Description.CreateDeveloperProduct,"Crea ""{NAME}"" per {PRICE} Robux, non in vendita."
 Feature.Build.Description.DeactivateDeveloperProduct,Ritira dalla vendita il Developer Product {PRODUCT_ID}.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"Se hai guadagnato Robux, questi verranno applicati per primi al costo della campagna pubblicitaria."
@@ -2313,7 +2315,7 @@ Feature.Build.Description.FriendsLinkOnly,Solo i tuoi amici possono accedere a q
 Feature.Build.Description.GameCreationDone,Ho completato la creazione e la pubblicazione del tuo gioco. Puoi aprirlo per eseguire il test di giocabilità.
 Feature.Build.Description.GameSavedPlaytest,Ho completato la creazione del tuo gioco e ho salvato una nuova versione. Puoi aprirlo per eseguire il test di giocabilità.
 Feature.Build.Description.HubSettings,Gestisci tutte le impostazioni sull'Hub Creatore.
-Feature.Build.Description.InviteFriendLimit,"Scegli fino a {MAX_INVITES} amici, poi condividi il link al gioco."
+Feature.Build.Description.InviteFriendLimit,Invita fino a {MAX_INVITES} amici a giocare mentre crei.
 Feature.Build.Description.MakeAudienceAvail,Pubblica la tua esperienza per renderla disponibile a questo pubblico.
 Feature.Build.Description.ManageAppearance,Gestisci il modo in cui il tuo gioco appare agli altri.
 Feature.Build.Description.ManageDeveloperProduct,Gestisci il Developer Product.
@@ -2325,7 +2327,7 @@ Feature.Build.Description.NoMonetizationProducts,Descrivi un oggetto che vuoi cr
 Feature.Build.Description.PlayAfterPublish,Scegli chi può giocare a questa esperienza dopo la pubblicazione.
 Feature.Build.Description.PlaytestLatest,Stai testando la tua ultima versione. Pubblicala quando è pronta per la condivisione.
 Feature.Build.Description.PlaytestLocked,Puoi iniziare il playtest dopo aver creato il tuo primo gioco.
-Feature.Build.Description.PlaytesterAccess,Aggiungi amici come playtester o modifica l'impostazione Pubblico del tuo gioco per consentire a più persone di giocare.
+Feature.Build.Description.PlaytesterAccess,Invita amici come early tester o modifica l'impostazione Pubblico del tuo gioco per consentire a più persone di giocare.
 Feature.Build.Description.PricingRules,Imposta regole di prezzo
 Feature.Build.Description.PrivateShare,Modifica l'impostazione Pubblico del tuo gioco per condividerlo.
 Feature.Build.Description.PromoteGameWithAdCampaign,Aumenta il tuo pubblico con una campagna pubblicitaria di {durationDays} giorni e fai scoprire il tuo gioco.
@@ -2529,7 +2531,7 @@ Feature.Build.Message.AdsPromotionBannerTitle,Hai {promotionCount} promozioni gr
 Feature.Build.Message.AdsPromotionBannerTitleSingular,Hai ancora 1 promozione gratuita
 Feature.Build.Message.AdsStatsEmpty,Fai crescere il tuo pubblico con una campagna pubblicitaria per far scoprire il tuo gioco
 Feature.Build.Message.AdsStatsEmptyFree,Fai crescere il tuo pubblico con una campagna pubblicitaria gratuita per far scoprire il tuo gioco
-Feature.Build.Message.AllFriendsAdded,Hai aggiunto tutti i tuoi amici come playtester.
+Feature.Build.Message.AllFriendsAdded,Hai invitato tutti i tuoi amici come early tester.
 Feature.Build.Message.AnswerBuildQuestion,Rispondi alla domanda di Build qui sotto.
 Feature.Build.Message.AssetDetailsUnavailable,I dettagli della risorsa non sono disponibili.
 Feature.Build.Message.AssetsLoadFailed,Impossibile caricare le risorse.
@@ -2567,15 +2569,15 @@ Feature.Build.Message.LoadingVersions,Caricamento della cronologia delle version
 Feature.Build.Message.NoAssetsFound,Nessuna risorsa trovata.
 Feature.Build.Message.NoCapturesAvailable,Nessuno screenshot disponibile
 Feature.Build.Message.NoDescriptionProvided,Nessuna descrizione fornita.
-Feature.Build.Message.NoFriendsToAdd,Non hai ancora amici da aggiungere. Trova prima persone con cui connetterti su Roblox.
+Feature.Build.Message.NoFriendsToAdd,Non hai ancora amici da invitare. Trova prima persone con cui connetterti su Roblox.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Non è ancora presente alcuna cronologia delle versioni.
 Feature.Build.Message.OneTaskCompleted,1 attività completata
 Feature.Build.Message.OutOfBuildUsage,Hai esaurito l'utilizzo di Costruisci. Visualizza le opzioni per utilizzare Robux e continuare a creare.
 Feature.Build.Message.PlaytestInviteSendFailedBody,Non è stato possibile inviare un link di invito alla chat ai seguenti utenti:
 Feature.Build.Message.PlaytestInviteSendFailedHint,Utilizza il tasto Condividi per ottenere un link.
-Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} di {MAX_INVITES} playtester aggiunti
-Feature.Build.Message.PrivatePlaytestInvite,{username} ti ha invitato a un test di giocabilità privato per {experienceName}
+Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} di {MAX_INVITES} early tester invitati
+Feature.Build.Message.PrivatePlaytestInvite,"{username} ti ha invitato a essere un early tester per il gioco ""{experienceName}"""
 Feature.Build.Message.PublicPublishFailed,"Il tuo gioco è stato pubblicato, ma non è stato possibile renderlo pubblico. Riprova."
 Feature.Build.Message.PublishExpandAudience,Pubblica per ampliare il tuo pubblico
 Feature.Build.Message.PublishNotReverted,La tua pubblicazione non è stata ripristinata. Riprova.
@@ -2596,8 +2598,10 @@ Feature.Build.Message.ShareLinkFailed,Non è stato possibile creare il link di c
 Feature.Build.Message.SignedOut,Hai effettuato la disconnessione. Accedi e riprova.
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} attività completate
 Feature.Build.Message.ThinkingSeconds,Sto pensando da {SECONDS} sec
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,Diventa amico affidabile di questo creatore per giocare al suo gioco.
 Feature.Build.Message.TryAgain,
 Feature.Build.Message.TurnToPortrait,Passa il dispositivo in modalità verticale per continuare a lavorare al tuo gioco.
+Feature.Build.Message.UpdateSettingsToPlaytest,"Per giocare, aggiorna le impostazioni di anteprima del gioco."
 Feature.Build.Message.VersionHistoryLoad,Impossibile caricare la cronologia versioni.
 Feature.Build.Message.WhatToCreate,Cosa vuoi creare oggi?
 Feature.Build.Message.WorkedMinutesSeconds,Ha lavorato per {MINUTES} m {REM_SECONDS} s
@@ -2612,7 +2616,7 @@ Feature.Build.Placeholder.DescribeProductUpdate,Descrivi un aggiornamento
 Feature.Build.Prompt.CreateDeveloperProduct,"Aiutami a creare un Developer Product, a integrarlo nel gioco, a verificare e pubblicare le modifiche e a renderlo disponibile per l'acquisto."
 Feature.Build.Title.AdCampaignActive,La campagna pubblicitaria è attiva
 Feature.Build.Title.AdCampaignDuration,Campagna pubblicitaria di {durationDays} giorni
-Feature.Build.Title.AddFriendsToPlaytest,Aggiungi gli amici che ti aiuteranno nel test di giocabilità
+Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Aggiungi immagini
 Feature.Build.Title.AdsStatsEmpty,Avvia una campagna
 Feature.Build.Title.AdsStatsEmptyFree,Avvia la tua prima campagna
@@ -2640,7 +2644,7 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Attivare i prezzi gestiti?
 Feature.Build.Title.NoMonetizationProducts,Inizia a guadagnare nel tuo gioco
 Feature.Build.Title.NoRobuxForUsage,Nessun Robux rimasto per l'utilizzo di Build
 Feature.Build.Title.PlaytestInviteSendFailed,Impossibile inviare gli inviti
-Feature.Build.Title.Playtesters,Tester di gioco
+Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersOnlyPlay,Solo i playtester possono giocare
 Feature.Build.Title.PromoteGame,Promuovi il tuo gioco
 Feature.Build.Title.PromoteGameFree,Promuovi il tuo gioco gratuitamente
@@ -4798,6 +4802,7 @@ Feature.ReportAbuse.ProblemDescription.Swearing,"Bestemmie, imprecazioni o volga
 Feature.ReportAbuse.ProblemDescription.Violence,Violenza estrema o contenuti cruenti
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Continua con la tua segnalazione
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Grazie per aver avviato la segnalazione di violazione dell'IP
+Feature.RobloxSubscription.Action.JoinIn,Partecipa tra {time}
 Feature.RobloxSubscription.Action.Subscribe,Sottoscrizione
 Feature.RobloxSubscription.Action.TryItForFree,Prova gratis
 Feature.RobloxSubscription.Body.AlreadySubscribed,Il tuo abbonamento Plus ti offre già vantaggi in-game.
@@ -4807,6 +4812,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,Esegui una verifica dell'et
 Feature.RobloxSubscription.Description.Benefit.Customize,Personalizza con cornici del profilo e temi dell'app
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% di sconto nei primi 60 giorni, poi 20% di sconto su articoli e avatar"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Più divertimento con meno Robux. Abbonati a Roblox Plus.
+Feature.RobloxSubscription.Description.JoinEarly,Unisciti in anticipo con il piano Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Cliccando su \u{201C}{ctaText}\u{201D}, accetti le <a href=""{termsUrl}"">Condizioni di abbonamento di Roblox</a>. Ti verrà addebitato automaticamente un importo a cadenza mensile fino all'eventuale disdetta."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Server privati gratuiti
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4825,6 +4831,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Buone notizie
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Ottieni Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus non è disponibile qui
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Puoi partecipare all'evento prima di tutti gli altri.
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Accesso anticipato con il piano Plus
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Stato dell'account, violazioni e ricorsi"
 Feature.Schools.Action.AlreadyGraduated,Mi sono già diplomat*
 Feature.Schools.Action.CantFindSchool,Non trovi la tua scuola?

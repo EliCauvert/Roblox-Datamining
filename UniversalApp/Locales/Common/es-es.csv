@@ -1710,6 +1710,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Descripción
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exclusivo con Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,Nombre
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,hoy
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,esta hora
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,este mes
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,Quedan {count} fondos restantes
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,Queda {count} publicación de fondo
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,días
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,horas
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,minutos
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,Se restablecerá en
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Describe tu fondo…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Generando tu fondo…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparando tu fondo…
@@ -1828,6 +1837,7 @@ Feature.Avatar.Label.ClassicTShirts,Camisetas clásicas
 Feature.Avatar.Label.ClearByCategory,Eliminar {category}
 Feature.Avatar.Label.Climb,Escalada
 Feature.Avatar.Label.ClimbAnimations,Animaciones de escalada
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Los nombres solo pueden contener letras, números y espacios"
 Feature.Avatar.Label.CountSelected,{itemCount} seleccionado(s)
 Feature.Avatar.Label.Creations,Creaciones
@@ -1939,6 +1949,7 @@ Feature.Avatar.Label.RecentlyWorn,Vestido recientemente
 Feature.Avatar.Label.RemoveFromSetBody,Estos avatares se eliminarán de este conjunto. No se borrarán.
 Feature.Avatar.Label.Replace,Reemplazar
 Feature.Avatar.Label.ResetToNewCharacter,Estás pasando a un nuevo personaje. ¿Quieres cambiar todos los objetos del conjunto o guardarlos?
+Feature.Avatar.Label.ResetTryOn,Restablecer al avatar actual
 Feature.Avatar.Label.Right,Der.
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,Brazos derechos
@@ -1994,6 +2005,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,Capas de maquillaje
 Feature.Avatar.Label.Title.ManageAvatars,Administrar avatares
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,Mi inventario
 Feature.Avatar.Label.Title.ProfilePhoto,Foto de perfil
 Feature.Avatar.Label.Title.ReplaceAvatar,Reemplazar avatar
@@ -2133,6 +2145,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,Mover
+Feature.Avatar.Title.MyAvatar,Mi avatar
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,La personalización tiene un nuevo look.
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Nuevo en el Mercado

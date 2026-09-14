@@ -729,6 +729,8 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,動く頭の口を開い
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,マーケットプレイス上の「動く頭」はアニメ化されている必要がありますが、この頭にはFACSデータがありません。
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,動く頭の右目を閉じた表情を検出できません。右目のケージのランドマークを調整して、頭の右目の位置に合わせ、閉じられるようにしてください。
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,動く頭のしかめっ面の表情を検出できません。口のケージのランドマークを調整して、頭の口の位置に合わせ、しかめっ面の表情ができるようにしてください。
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,エミッシブエリアがしきい値を超えています。
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,エミッシブエリアの面積が上限を超えています。
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,このアセットは、信頼できるクリエータープログラムのクリエーターのみが利用できるエミッシブマップを使用しています。アップロードする前に、すべてのエミッシブマップコンテンツを削除するか、プログラムに参加してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,公開されたアニメーションには有効なパーツの最大移動量がありません。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,公開されたアニメーションには有効なUGCリアクションマーカーがありません。アニメーションを再公開してください。
@@ -2208,9 +2210,9 @@ Feature.BlockingModal.Message.BlockConfirmation,このユーザーをブロッ�
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,このユーザーをブロックすると友達またはフォロワーから削除されます。ブロックされた人は、あなたにメッセージやリクエスト、招待状を送れなくなります。<br /><br />あなたがブロックしたことは相手に通知されません。
 Feature.Build.Action.Add,
 Feature.Build.Action.AddFriends,
-Feature.Build.Action.AddPlaytester,プレイテスターを追加
+Feature.Build.Action.AddPlaytester,早期テスターを招待
 Feature.Build.Action.AddPlaytesters,
-Feature.Build.Action.AddToPlaytest,プレイテストに追加
+Feature.Build.Action.AddToPlaytest,
 Feature.Build.Action.AgreeAndEnable,同意してオンにする
 Feature.Build.Action.Approve,承認
 Feature.Build.Action.Archive,アーカイブ
@@ -2322,7 +2324,7 @@ Feature.Build.Description.BuildReplyNotif,ビルドで返信が届いたとき�
 Feature.Build.Description.BuyRobuxToCreate,作成を続けるには、Robuxをさらに購入するか、明日になって無料のビルド使用量がリセットされるのをお待ちください。
 Feature.Build.Description.BuyUsageOrWait,Robuxでビルド使用量をさらに購入するか、1日あたりの限度額がリセットされるのをお待ちください。
 Feature.Build.Description.CampaignRunDates,キャンペーンは、{startDate}～{endDate}に実施されます。
-Feature.Build.Description.ChoosePlaytesters,プレイテストに協力してもらう友達を選択してください。
+Feature.Build.Description.ChoosePlaytesters,ゲームをテストプレイしてもらう友達を選択してください。
 Feature.Build.Description.CreateDeveloperProduct,{PRICE} Robuxの「{NAME}」を作成し、非売品にします。
 Feature.Build.Description.DeactivateDeveloperProduct,開発者製品（{PRODUCT_ID}）を非売品にします。
 Feature.Build.Description.EarnedRobuxAppliedFirst,獲得済みRobuxをお持ちの場合、広告キャンペーンの費用にはそちらが先に充当されます。
@@ -2331,7 +2333,7 @@ Feature.Build.Description.FriendsLinkOnly,このリンクにアクセスでき�
 Feature.Build.Description.GameCreationDone,ゲームの作成と公開が完了しました。ゲームを開いてプレイテストできます。
 Feature.Build.Description.GameSavedPlaytest,ゲームの作成が完了し、新しいバージョンが保存されました。ゲームを開いてプレイテストできます。
 Feature.Build.Description.HubSettings,クリエーターハブですべての設定を管理します
-Feature.Build.Description.InviteFriendLimit,友達を{MAX_INVITES}人まで選択して、ゲームへのリンクをシェアしましょう。
+Feature.Build.Description.InviteFriendLimit,最大{MAX_INVITES}人の友達を招待して、制作中のゲームをプレイしてもらえます。
 Feature.Build.Description.MakeAudienceAvail,このオーディエンスが利用できるようにするには、バーチャル空間を公開してください。
 Feature.Build.Description.ManageAppearance,他のユーザーへのゲームの表示のされ方を管理しましょう。
 Feature.Build.Description.ManageDeveloperProduct,開発者製品を管理します。
@@ -2343,7 +2345,7 @@ Feature.Build.Description.NoMonetizationProducts,ゲーム内でRobuxを獲得�
 Feature.Build.Description.PlayAfterPublish,このバーチャル空間を公開した後、誰がプレイできるかを選択します。
 Feature.Build.Description.PlaytestLatest,最新バージョンのプレイテスト中です。シェアする準備ができたら公開してください。
 Feature.Build.Description.PlaytestLocked,プレイテストは、最初のゲームを制作した後に開始可能です。
-Feature.Build.Description.PlaytesterAccess,友達をプレイテスターとして追加するか、ゲームのオーディエンス設定を変更して、より多くの人にプレイしてもらいましょう。
+Feature.Build.Description.PlaytesterAccess,友達を早期テスターとして招待するか、ゲームのオーディエンス設定を変更して、より多くの人にプレイしてもらいましょう。
 Feature.Build.Description.PricingRules,価格設定ルールを設定
 Feature.Build.Description.PrivateShare,ゲームのオーディエンス設定を変更してシェアしてください。
 Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}日間の広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう。
@@ -2547,7 +2549,7 @@ Feature.Build.Message.AdsPromotionBannerTitle,無料プロモーションがあ�
 Feature.Build.Message.AdsPromotionBannerTitleSingular,無料プロモーションが1回残っています
 Feature.Build.Message.AdsStatsEmpty,広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう
 Feature.Build.Message.AdsStatsEmptyFree,無料の広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう
-Feature.Build.Message.AllFriendsAdded,すべての友達をプレイテスターとして追加しました。
+Feature.Build.Message.AllFriendsAdded,すべての友達を早期テスターとして招待しました。
 Feature.Build.Message.AnswerBuildQuestion,以下のビルドの質問に答えてください。
 Feature.Build.Message.AssetDetailsUnavailable,アセットの詳細は表示できません。
 Feature.Build.Message.AssetsLoadFailed,アセットを読み込めません。
@@ -2585,15 +2587,15 @@ Feature.Build.Message.LoadingVersions,バージョン履歴を読み込み中...
 Feature.Build.Message.NoAssetsFound,アセットが見つかりません。
 Feature.Build.Message.NoCapturesAvailable,添付できる切り抜きはありません
 Feature.Build.Message.NoDescriptionProvided,詳細がありません。
-Feature.Build.Message.NoFriendsToAdd,まだ追加する友達がいません。まずはRobloxでつながる人を見つけましょう。
+Feature.Build.Message.NoFriendsToAdd,まだ招待できる友達がいません。まずはRobloxでつながる相手を見つけましょう。
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,まだバージョン履歴はありません。
 Feature.Build.Message.OneTaskCompleted,1つのタスクが完了しました
 Feature.Build.Message.OutOfBuildUsage,ビルド使用量がなくなりました。作成を続けるには、Robuxを使用するためのオプションをご確認ください。
 Feature.Build.Message.PlaytestInviteSendFailedBody,次のユーザーに招待のチャットリンクを送信できませんでした：
 Feature.Build.Message.PlaytestInviteSendFailedHint,[シェア]ボタンを使用して、リンクを取得してください。
-Feature.Build.Message.PlaytestersAdded,{MAX_INVITES}人中{INVITED_COUNT}人のプレイテスターが追加されました
-Feature.Build.Message.PrivatePlaytestInvite,{username}さんがあなたを{experienceName}のプライベートサーバープレイテストに招待しました
+Feature.Build.Message.PlaytestersAdded,{MAX_INVITES}人中{INVITED_COUNT}人の早期テスターを招待済み
+Feature.Build.Message.PrivatePlaytestInvite,{username}さんから『{experienceName}』の早期テスターとして招待されました
 Feature.Build.Message.PublicPublishFailed,ゲームは公開手続きが行われましたが、公開できませんでした。もう一度お試しください。
 Feature.Build.Message.PublishExpandAudience,公開してオーディエンスを拡大
 Feature.Build.Message.PublishNotReverted,公開は元に戻りませんでした。もう一度お試しください。
@@ -2630,7 +2632,7 @@ Feature.Build.Placeholder.DescribeProductUpdate,更新内容を説明してく�
 Feature.Build.Prompt.CreateDeveloperProduct,開発者製品を作成してゲームに組み込み、変更を検証して公開し、購入できるようにしてください。
 Feature.Build.Title.AdCampaignActive,広告キャンペーンが有効です
 Feature.Build.Title.AdCampaignDuration,{durationDays}日間の広告キャンペーン
-Feature.Build.Title.AddFriendsToPlaytest,プレイテストに協力してもらう友達を追加してください
+Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,画像を追加
 Feature.Build.Title.AdsStatsEmpty,キャンペーンを開始
 Feature.Build.Title.AdsStatsEmptyFree,最初のキャンペーンを開始
@@ -2658,7 +2660,7 @@ Feature.Build.Title.ManagedPricingAcknowledgement,管理価格設定をオンに
 Feature.Build.Title.NoMonetizationProducts,ゲーム内で収益を獲得
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
 Feature.Build.Title.PlaytestInviteSendFailed,招待を送信できませんでした
-Feature.Build.Title.Playtesters,プレイテスター
+Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersOnlyPlay,プレイテスターだけがプレイできます
 Feature.Build.Title.PromoteGame,ゲームを宣伝
 Feature.Build.Title.PromoteGameFree,ゲームを無料で宣伝する

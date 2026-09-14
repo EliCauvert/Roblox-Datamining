@@ -728,6 +728,8 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,無法偵測到動態頭
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,市集上的動態頭部必須要能夠活動，但這個頭部沒有 FACS 資料。
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,無法偵測到動態頭部閉上右眼的表情。請根據右眼在頭部上的位置，調整右眼的圍籠地標，並確保眼睛是閉上的狀態。
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,無法偵測到動態頭部皺眉的表情。請根據嘴巴在頭部上的位置，調整嘴巴的圍籠地標，並確保是皺眉的表情。
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,發光區域超過閾值。
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,超出發光區域。
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,此素材使用僅供「信任創作者計畫」中的創作者使用的發光貼圖。請移除所有發光貼圖內容，或在上傳前加入該計畫。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,已發佈的動畫缺少有效的部位最大平移距離值。請重新發佈此動畫。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,已發佈的動畫缺少有效的 UGC 動作標記。請重新發佈此動畫。
@@ -2207,9 +2209,9 @@ Feature.BlockingModal.Message.BlockConfirmation,封鎖此使用者，系統會�
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,若封鎖此使用者，系統會一併將其從「好友」或「追蹤者」名單移除，對方將無法向你傳送訊息、請求或邀請。<br /><br />對方不會收到遭你封鎖的通知。
 Feature.Build.Action.Add,
 Feature.Build.Action.AddFriends,
-Feature.Build.Action.AddPlaytester,新增遊戲測試員
+Feature.Build.Action.AddPlaytester,邀請搶先遊玩的測試員
 Feature.Build.Action.AddPlaytesters,
-Feature.Build.Action.AddToPlaytest,新增至試玩
+Feature.Build.Action.AddToPlaytest,
 Feature.Build.Action.AgreeAndEnable,同意並開啟
 Feature.Build.Action.Approve,核准
 Feature.Build.Action.Archive,封存
@@ -2321,7 +2323,7 @@ Feature.Build.Description.BuildReplyNotif,在組建回覆你時收到通知。
 Feature.Build.Description.BuyRobuxToCreate,購買更多 Robux 以繼續創作，或等待明天重置的免費組建使用量。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 購買更多組建使用量，或等待每日上限重置。
 Feature.Build.Description.CampaignRunDates,你的活動將在 {startDate} – {endDate}期間投放
-Feature.Build.Description.ChoosePlaytesters,選擇好友協助你試玩。
+Feature.Build.Description.ChoosePlaytesters,選擇好友預覽你的遊戲。
 Feature.Build.Description.CreateDeveloperProduct,以 {PRICE} Robux 建立「{NAME}」，已下架。
 Feature.Build.Description.DeactivateDeveloperProduct,將開發者產品 {PRODUCT_ID} 下架。
 Feature.Build.Description.EarnedRobuxAppliedFirst,若已賺取 Robux，這些 Robux 將會優先用於支付廣告活動費用。
@@ -2330,7 +2332,7 @@ Feature.Build.Description.FriendsLinkOnly,只有你的好友能存取此連結�
 Feature.Build.Description.GameCreationDone,我已建立完成並發佈你的遊戲。你可以打開遊戲試玩。
 Feature.Build.Description.GameSavedPlaytest,我已建立遊戲並儲存了新版本。你可以打開遊戲試玩。
 Feature.Build.Description.HubSettings,在創作者中心管理所有設定
-Feature.Build.Description.InviteFriendLimit,選擇最多 {MAX_INVITES} 位好友，然後分享遊戲連結。
+Feature.Build.Description.InviteFriendLimit,在你創作時，邀請最多 {MAX_INVITES} 位好友一起遊玩。
 Feature.Build.Description.MakeAudienceAvail,發佈體驗，讓此受眾可以存取。
 Feature.Build.Description.ManageAppearance,管理遊戲向其他人顯示的方式。
 Feature.Build.Description.ManageDeveloperProduct,管理開發者產品。
@@ -2342,7 +2344,7 @@ Feature.Build.Description.NoMonetizationProducts,描述你想要建立的物品�
 Feature.Build.Description.PlayAfterPublish,選擇發佈此體驗後可遊玩的對象。
 Feature.Build.Description.PlaytestLatest,你正在試玩最新版本。準備好分享後即可發佈。
 Feature.Build.Description.PlaytestLocked,建立第一個遊戲後，即可開始進行遊戲測試。
-Feature.Build.Description.PlaytesterAccess,新增好友為遊戲測試員，或變更遊戲的受眾設定，讓更多人玩。
+Feature.Build.Description.PlaytesterAccess,邀請好友成為搶先遊玩的測試員，或變更遊戲的受眾設定，讓更多人遊玩。
 Feature.Build.Description.PricingRules,設定定價規則
 Feature.Build.Description.PrivateShare,變更遊戲的受眾設定以分享。
 Feature.Build.Description.PromoteGameWithAdCampaign,透過為期 {durationDays} 天的廣告活動增加受眾，讓遊戲能被他人發現。
@@ -2546,7 +2548,7 @@ Feature.Build.Message.AdsPromotionBannerTitle,你還有 {promotionCount} 次免�
 Feature.Build.Message.AdsPromotionBannerTitleSingular,你還有 1 次免費促銷機會
 Feature.Build.Message.AdsStatsEmpty,透過廣告活動拓展受眾，讓更多人發現你的遊戲
 Feature.Build.Message.AdsStatsEmptyFree,透過免費廣告活動拓展受眾，讓更多人發現你的遊戲
-Feature.Build.Message.AllFriendsAdded,你已將所有好友新增為遊戲測試員。
+Feature.Build.Message.AllFriendsAdded,你已邀請所有好友成為搶先遊玩的測試員。
 Feature.Build.Message.AnswerBuildQuestion,在下方回答組建的問題。
 Feature.Build.Message.AssetDetailsUnavailable,無法取得素材詳細資訊。
 Feature.Build.Message.AssetsLoadFailed,無法載入素材。
@@ -2584,15 +2586,15 @@ Feature.Build.Message.LoadingVersions,正在載入版本紀錄...
 Feature.Build.Message.NoAssetsFound,找不到素材。
 Feature.Build.Message.NoCapturesAvailable,沒有可用的截圖
 Feature.Build.Message.NoDescriptionProvided,未提供說明。
-Feature.Build.Message.NoFriendsToAdd,你沒有可新增的好友。請先在 Roblox 上尋找可交流的對象。
+Feature.Build.Message.NoFriendsToAdd,你沒有可邀請的好友。請先在 Roblox 上尋找可交流的對象。
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,尚無版本紀錄。
 Feature.Build.Message.OneTaskCompleted,已完成 1 項任務
 Feature.Build.Message.OutOfBuildUsage,你的組建使用量已用完。查看你的選項，使用 Robux 以繼續創作。
 Feature.Build.Message.PlaytestInviteSendFailedBody,你無法向以下使用者傳送聊天邀請連結：
 Feature.Build.Message.PlaytestInviteSendFailedHint,請使用「分享」按鈕來取得連結。
-Feature.Build.Message.PlaytestersAdded,已新增 {INVITED_COUNT} 位遊戲測試員，共 {MAX_INVITES} 位
-Feature.Build.Message.PrivatePlaytestInvite,{username} 邀請你加入私人試玩 {experienceName}
+Feature.Build.Message.PlaytestersAdded,已邀請 {INVITED_COUNT} 位早鳥測試員，共 {MAX_INVITES} 位
+Feature.Build.Message.PrivatePlaytestInvite,{username} 邀請你成為搶先遊玩 {experienceName} 的測試員
 Feature.Build.Message.PublicPublishFailed,你的遊戲已發佈，但無法設為公開，請再試一次。
 Feature.Build.Message.PublishExpandAudience,發佈以擴大受眾
 Feature.Build.Message.PublishNotReverted,無法還原發佈的內容，請再試一次。
@@ -2629,7 +2631,7 @@ Feature.Build.Placeholder.DescribeProductUpdate,描述一項更新
 Feature.Build.Prompt.CreateDeveloperProduct,協助我建立開發者產品、將其連接到遊戲中、驗證和發佈變更，並開放購買。
 Feature.Build.Title.AdCampaignActive,廣告活動已生效
 Feature.Build.Title.AdCampaignDuration,為期 {durationDays} 天的廣告活動
-Feature.Build.Title.AddFriendsToPlaytest,新增好友協助你試玩
+Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,新增圖片
 Feature.Build.Title.AdsStatsEmpty,啟動廣告活動
 Feature.Build.Title.AdsStatsEmptyFree,啟動你的第一個廣告活動
@@ -2657,7 +2659,7 @@ Feature.Build.Title.ManagedPricingAcknowledgement,是否開啟管理定價功能
 Feature.Build.Title.NoMonetizationProducts,開始在遊戲中賺取收入
 Feature.Build.Title.NoRobuxForUsage,沒有剩餘的 Robux 可用於購買組建使用量
 Feature.Build.Title.PlaytestInviteSendFailed,無法傳送邀請
-Feature.Build.Title.Playtesters,遊戲測試員
+Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersOnlyPlay,只有遊戲測試員可以遊玩
 Feature.Build.Title.PromoteGame,宣傳你的遊戲
 Feature.Build.Title.PromoteGameFree,免費宣傳你的遊戲

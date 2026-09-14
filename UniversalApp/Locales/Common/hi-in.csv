@@ -712,6 +712,8 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,"डायनैमि�
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"मार्केटप्लेस पर डायनैमिक हेड को ऐनिमेट किया जाना चाहिए, लेकिन इस हेड में कोई FACS डेटा नहीं है."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,"डायनैमिक हेड के लिए दाहिनी आँख बंद करने का एक्सप्रेशन नहीं मिल रहा है. कृपया दाहिनी आँख के लिए केज लैंडमार्क को एडजस्ट करें, ताकि वह सिर पर दाहिनी आँख की जगह से मैच करे और पक्का करें कि उसे बंद किया जा सकता है."
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,"डायनैमिक हेड के लिए फ़्राउन एक्सप्रेशन का पता नहीं लगाया जा सकता. कृपया मुँह के लिए केज लैंडमार्क को एडजस्ट करें, ताकि वह सिर पर मुँह से मैच करे और पक्का करें कि यह फ़्राउन एक्सप्रेशन दिखा सकता है."
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,एमिसिव एरिया थ्रेशहोल्ड से ऊपर है.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,एमिसिव एरिया अपनी सीमा से ऊपर जा चुका है.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,"यह ऐसेट एमिसिव मैप का इस्तेमाल करता है, जो सिर्फ़ 'भरोसेमंद क्रिएटर प्रोग्राम' में शामिल क्रिएटर्स के लिए उपलब्ध हैं. कृपया सभी एमिसिव मैप कॉन्टेंट हटा दें या अपलोड करने से पहले प्रोग्राम में शामिल हो जाएँ."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,"पब्लिश किए गए ऐनिमेशन में, एक 'मैक्सिमम पार्ट ट्रांसलेशन' की मान्य वैल्यू मौजूद नहीं है. कृपया ऐनिमेशन को फिर से पब्लिश करें."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,पब्लिश किए गए ऐनिमेशन में एक मान्य UGC emote मार्कर मौजूद नहीं है. कृपया ऐनिमेशन को फिर से पब्लिश करें.
@@ -2188,9 +2190,9 @@ Feature.BlockingModal.Message.BlockConfirmation,"इस यूज़र को �
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"इस यूज़र को ब्लॉक करने से उन्हें फ़्रेंड या फ़ॉलोअर के तौर पर हटा दिया जाएगा. वे आपको मैसेज, रिक्वेस्ट या इनवाइट नहीं भेज पाएँगे.<br /><br />उन्हें यह नहीं बताया जाएगा कि आपने उन्हें ब्लॉक कर दिया है."
 Feature.Build.Action.Add,
 Feature.Build.Action.AddFriends,
-Feature.Build.Action.AddPlaytester,प्लेटेस्टर जोड़ें
-Feature.Build.Action.AddPlaytesters,प्लेटेस्टर्स जोड़ें
-Feature.Build.Action.AddToPlaytest,प्ले-टेस्ट में जोड़ें
+Feature.Build.Action.AddPlaytester,अर्ली टेस्टर को इनवाइट करें
+Feature.Build.Action.AddPlaytesters,अर्ली टेस्टर्स को इनवाइट करें
+Feature.Build.Action.AddToPlaytest,
 Feature.Build.Action.AgreeAndEnable,सहमति दें और चालू करें
 Feature.Build.Action.Approve,
 Feature.Build.Action.Archive,आर्काइव करें
@@ -2302,7 +2304,7 @@ Feature.Build.Description.BuildReplyNotif,बिल्ड से आपके �
 Feature.Build.Description.BuyRobuxToCreate,"क्रिएट करना जारी रखने के लिए, और Robux खरीदें या कल अपने मुफ़्त बिल्ड के इस्तेमाल के रीसेट होने का इंतज़ार करें."
 Feature.Build.Description.BuyUsageOrWait,Robux की मदद से बिल्ड का ज़्यादा इस्तेमाल खरीदें या अपनी रोज़ाना की लिमिट के रीसेट होने का इंतज़ार करें.
 Feature.Build.Description.CampaignRunDates,आपका कैंपेन {startDate} – {endDate} तक चलेगा
-Feature.Build.Description.ChoosePlaytesters,प्ले-टेस्ट में आपकी मदद करने के लिए फ़्रेंड्स चुनें.
+Feature.Build.Description.ChoosePlaytesters,चुनें कि कौन-से फ़्रेंड्स आपका गेम प्रीव्यू कर सकते हैं.
 Feature.Build.Description.CreateDeveloperProduct,"{PRICE} Robux में ""{NAME}"" क्रिएट करें, बिक्री से हटाया गया."
 Feature.Build.Description.DeactivateDeveloperProduct,डेवलपर प्रॉडक्ट {PRODUCT_ID} को बिक्री से हटाएँ.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"अगर आपने Robux कमाए हैं, तो उनका इस्तेमाल सबसे पहले ऐड कैंपेन की लागत पर किया जाएगा."
@@ -2311,7 +2313,7 @@ Feature.Build.Description.FriendsLinkOnly,"सिर्फ़ आपके फ�
 Feature.Build.Description.GameCreationDone,मैंने आपका गेम बनाने और पब्लिश करने का काम पूरा कर लिया है. इसे प्ले-टेस्ट करने के लिए खोला जा सकता है.
 Feature.Build.Description.GameSavedPlaytest,मैंने आपका गेम बनाने का काम पूरा कर लिया है और एक नया वर्ज़न सेव कर लिया है. इसे प्लेटेस्ट करने के लिए खोला जा सकता है.
 Feature.Build.Description.HubSettings,Creator Hub पर सभी सेटिंग्स मैनेज करें
-Feature.Build.Description.InviteFriendLimit,"{MAX_INVITES} फ़्रेंड्स तक चुनें, फिर गेम का लिंक शेयर करें."
+Feature.Build.Description.InviteFriendLimit,"क्रिएट करने के दौरान, ज़्यादा-से-ज़्यादा {MAX_INVITES} फ़्रेंड्स को खेलने के लिए इनवाइट करें."
 Feature.Build.Description.MakeAudienceAvail,"अपने एक्सपीरिएंस को इस ऑडियंस के लिए उपलब्ध कराने के लिए, उसे पब्लिश करें."
 Feature.Build.Description.ManageAppearance,यह मैनेज करें कि आपका गेम दूसरों को कैसा दिखता है.
 Feature.Build.Description.ManageDeveloperProduct,डेवलपर प्रॉडक्ट मैनेज करें.
@@ -2323,7 +2325,7 @@ Feature.Build.Description.NoMonetizationProducts,"उस आइटम के ब
 Feature.Build.Description.PlayAfterPublish,यह चुनें कि इस एक्सपीरिएंस के पब्लिश होने के बाद इसे कौन-कौन खेल सकता है.
 Feature.Build.Description.PlaytestLatest,"आपने अपने सबसे नए वर्ज़न को प्लेटेस्ट किया है. जब आप शेयर करने के लिए तैयार हों, तो उसे पब्लिश करें."
 Feature.Build.Description.PlaytestLocked,"अपना पहला गेम क्रिएट करने के बाद, प्लेटेस्टिंग शुरू की जा सकती है."
-Feature.Build.Description.PlaytesterAccess,"दोस्तों को प्लेटेस्टर के रूप में जोड़ें या ज़्यादा लोगों को खेलने देने के लिए, अपने गेम की ऑडियंस सेटिंग बदलें."
+Feature.Build.Description.PlaytesterAccess,फ़्रेंड्स को अर्ली टेस्टर के रूप में इनवाइट करें या अपने गेम की ऑडियंस सेटिंग बदलकर ज़्यादा लोगों को अपना गेम खेलने दें.
 Feature.Build.Description.PricingRules,कीमत तय करने के नियम सेट करें
 Feature.Build.Description.PrivateShare,"इसे शेयर करने के लिए, अपने गेम की ऑडियंस सेटिंग बदलें."
 Feature.Build.Description.PromoteGameWithAdCampaign,"{durationDays}-दिन के ऐड कैंपेन की मदद से, अपनी ऑडियंस बढ़ाएँ और अपने गेम को लोगों की नज़रों में लाएँ."
@@ -2527,7 +2529,7 @@ Feature.Build.Message.AdsPromotionBannerTitle,आपके पास {promotionC
 Feature.Build.Message.AdsPromotionBannerTitleSingular,आपके पास 1 फ़्री प्रमोशन बचा है
 Feature.Build.Message.AdsStatsEmpty,"ऐड कैंपेन की मदद से, अपनी ऑडियंस बढ़ाएँ और अपने गेम को लोगों की नज़रों में लाएँ"
 Feature.Build.Message.AdsStatsEmptyFree,"फ़्री ऐड कैंपेन की मदद से, अपनी ऑडियंस बढ़ाएँ और अपने गेम को लोगों की नज़रों में लाएँ"
-Feature.Build.Message.AllFriendsAdded,आपने अपने सभी फ़्रेंड्स को प्लेटेस्टर्स के रूप में जोड़ लिया है.
+Feature.Build.Message.AllFriendsAdded,आपने अपने सभी फ़्रेंड्स को अर्ली टेस्टर्स के रूप में इनवाइट किया है.
 Feature.Build.Message.AnswerBuildQuestion,नीचे बिल्ड के सवाल का जवाब दें.
 Feature.Build.Message.AssetDetailsUnavailable,ऐसेट की जानकारी उपलब्ध नहीं है.
 Feature.Build.Message.AssetsLoadFailed,ऐसेट लोड नहीं हो सके.
@@ -2565,15 +2567,15 @@ Feature.Build.Message.LoadingVersions,वर्ज़न हिस्ट्र�
 Feature.Build.Message.NoAssetsFound,कोई ऐसेट नहीं मिला.
 Feature.Build.Message.NoCapturesAvailable,कोई कैप्चर उपलब्ध नहीं है
 Feature.Build.Message.NoDescriptionProvided,कोई जानकारी नहीं दी गई.
-Feature.Build.Message.NoFriendsToAdd,फ़िलहाल आपके पास जोड़ने के लिए कोई दोस्त नहीं है. पहले Roblox पर लोगों से जुड़ें.
+Feature.Build.Message.NoFriendsToAdd,फ़िलहाल आपके पास इनवाइट करने के लिए कोई फ़्रेंड नहीं है. पहले Roblox पर लोगों से जुड़ें.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,अभी तक कोई वर्ज़न हिस्ट्री नहीं है.
 Feature.Build.Message.OneTaskCompleted,1 टास्क पूरा हुआ
 Feature.Build.Message.OutOfBuildUsage,"आपके बिल्ड का इस्तेमाल खत्म हो गया है. क्रिएट करना जारी रखने के लिए, Robux का इस्तेमाल करने के अपने विकल्प देखें."
 Feature.Build.Message.PlaytestInviteSendFailedBody,इन यूज़र्स को इनवाइट चैट लिंक नहीं भेजा जा सका :
 Feature.Build.Message.PlaytestInviteSendFailedHint,"लिंक पाने के लिए, 'शेयर करें' बटन का इस्तेमाल करें."
-Feature.Build.Message.PlaytestersAdded,{MAX_INVITES} में से {INVITED_COUNT} प्लेटेस्टर्स जोड़े गए
-Feature.Build.Message.PrivatePlaytestInvite,{username} ने आपको {experienceName} के प्राइवेट प्लेटेस्ट के लिए इनवाइट किया है
+Feature.Build.Message.PlaytestersAdded,{MAX_INVITES} में से {INVITED_COUNT} अर्ली टेस्टर्स को इनवाइट किया गया
+Feature.Build.Message.PrivatePlaytestInvite,{username} ने आपको {experienceName} का अर्ली टेस्टर बनने के लिए इनवाइट किया है
 Feature.Build.Message.PublicPublishFailed,"आपका गेम पब्लिश किया गया, लेकिन पब्लिक नहीं किया जा सका. फिर से कोशिश करें."
 Feature.Build.Message.PublishExpandAudience,अपनी ऑडियंस बढ़ाने के लिए पब्लिश करें
 Feature.Build.Message.PublishNotReverted,आपका पब्लिश रिवर्ट नहीं हुआ. फिर से कोशिश करें.
@@ -2610,7 +2612,7 @@ Feature.Build.Placeholder.DescribeProductUpdate,कोई अपडेट बत
 Feature.Build.Prompt.CreateDeveloperProduct,"डेवलपर प्रॉडक्ट बनाने, उसे गेम में जोड़ने, बदलावों को वेरिफ़ाई करके पब्लिश करने और उसे खरीदारी के लिए उपलब्ध कराने में मेरी मदद करें."
 Feature.Build.Title.AdCampaignActive,ऐड कैंपेन ऐक्टिव है
 Feature.Build.Title.AdCampaignDuration,{durationDays}-दिन का ऐड कैंपेन
-Feature.Build.Title.AddFriendsToPlaytest,प्ले-टेस्ट में आपकी मदद करने के लिए फ़्रेंड्स जोड़ें
+Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,इमेज जोड़ें
 Feature.Build.Title.AdsStatsEmpty,कैंपेन शुरू करें
 Feature.Build.Title.AdsStatsEmptyFree,अपना पहला कैंपेन शुरू करें
@@ -2638,7 +2640,7 @@ Feature.Build.Title.ManagedPricingAcknowledgement,'मैनेज की जा
 Feature.Build.Title.NoMonetizationProducts,अपने गेम में कमाना शुरू करें
 Feature.Build.Title.NoRobuxForUsage,बिल्ड के इस्तेमाल के लिए कोई Robux नहीं बचा
 Feature.Build.Title.PlaytestInviteSendFailed,इनवाइट नहीं भेजे जा सके
-Feature.Build.Title.Playtesters,प्लेटेस्टर्स
+Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersOnlyPlay,सिर्फ़ प्लेटेस्टर्स खेल सकते हैं
 Feature.Build.Title.PromoteGame,अपने गेम को प्रमोट करें
 Feature.Build.Title.PromoteGameFree,अपने गेम को फ़्री में प्रमोट करें

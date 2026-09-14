@@ -711,6 +711,8 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,تعذّر اكتشاف 
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,يجب أن تكون الرؤوس الديناميكية في المتجر متحركة، لكن هذا الرأس لا يحتوي على بيانات نظام FACS.
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,تعذّر اكتشاف تعبير إغلاق العين اليمنى للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالعين اليمنى لتتطابق مع موضع العين اليمنى على الرأس والتأكد من إمكانية إغلاقها.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,تعذّر اكتشاف تعبير العبوس للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالفم لتتطابق مع موضع الفم على الرأس والتأكد من إمكانية إظهار تعبير العبوس.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,تتجاوز المنطقة المُضيئة الحد المسموح به.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,تم تجاوز المنطقة المُضيئة.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,يستخدم هذا الأصل خرائط إضاءة ذاتية متاحة فقط للمصممين في برنامج المصممين الموثوق بهم. يُرجى إزالة محتوى خرائط الإضاءة الذاتية بالكامل أو الانضمام إلى البرنامج قبل الرفع.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,تفتقد الحركة المنشورة إلى قيمة صالحة للحد الأقصى لإزاحة الأجزاء. يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,تفتقد الحركة المنشورة إلى علامة حركة تعبيرية صالحة من تصميم المستخدم (UGC). يُرجى إعادة نشر الحركة.
@@ -1689,6 +1691,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,الوصف
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,حصريًا مع اشتراك Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,الاسم
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,هذه الساعة
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,عدد الخلفيات المتبقية: {count}
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,{count} خلفية واحدة متبقية
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,من الأيام
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,من الساعات
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,من الدقائق
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,ستتم إعادة التعيين خلال
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,صِف الخلفية...
 Feature.Avatar.BackgroundGeneration.Status.Generating,جارٍ إنشاء الخلفية...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,جارٍ تحضير الخلفية...
@@ -1807,6 +1818,7 @@ Feature.Avatar.Label.ClassicTShirts,تي شيرت كلاسيكية
 Feature.Avatar.Label.ClearByCategory,مسح {category}
 Feature.Avatar.Label.Climb,تسلق
 Feature.Avatar.Label.ClimbAnimations,حركة تسلق
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,يمكن أن يحتوي الاسم على حرف وأرقام ومسافات فقط
 Feature.Avatar.Label.CountSelected,{itemCount} محددة
 Feature.Avatar.Label.Creations,التصاميم
@@ -1918,6 +1930,7 @@ Feature.Avatar.Label.RecentlyWorn,تم ارتداؤها مؤخرًا
 Feature.Avatar.Label.RemoveFromSetBody,ستتم إزالة هذه الأفاتارات من هذه المجموعة. ولن يتم حذفها.
 Feature.Avatar.Label.Replace,استبدال
 Feature.Avatar.Label.ResetToNewCharacter,أنت تبدّل إلى الشخصية الجديدة؛ هل تريد إعادة تعيين جميع عناصر الزي أو تريد الاحتفاظ بها؟
+Feature.Avatar.Label.ResetTryOn,إعادة التعيين إلى الأفاتار الحالي
 Feature.Avatar.Label.Right,R
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,
@@ -1973,6 +1986,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,المقتنيات
 Feature.Avatar.Label.Title.MakeupLayering,ترتيب طبقات المكياج
 Feature.Avatar.Label.Title.ManageAvatars,إدارة الأفاتار
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,مقتنياتي
 Feature.Avatar.Label.Title.ProfilePhoto,صورة الملف الشخصي
 Feature.Avatar.Label.Title.ReplaceAvatar,استبدال الأفاتار
@@ -2112,6 +2126,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,إعادة التعيين إلى الافتراضي
 Feature.Avatar.Title.MakeupSortUnequip,ترك العنصر
 Feature.Avatar.Title.Move,نقل
+Feature.Avatar.Title.MyAvatar,أفاتاري
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,ميزات التخصيص تظهر بواجهة جديدة!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,جديد المتجر
@@ -2174,10 +2189,10 @@ Feature.BlockingModal.Heading.BlockUser,هل تريد حظر {DisplayName}؟
 Feature.BlockingModal.Message.BlockConfirmation,سيؤدي حظر هذا المستخدم إلى إزالته من قائمة جهات تواصلك أو متابعيك، ولن يتمكّن من إرسال أي رسائل أو طلبات أو دعوات إليك.<br /><br />لن يتم إعلامه بأنك قمت بحظره.
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,سيؤدي حظر هذا المستخدم إلى إزالته من قائمة أصدقائك أو متابعيك، ولن يتمكَّن من إرسال أي رسائل أو طلبات أو دعوات إليك.<br /><br />لن يتم إعلامه بأنك قمت بحظره.
 Feature.Build.Action.Add,
-Feature.Build.Action.AddFriends,
-Feature.Build.Action.AddPlaytester,إضافة مختبر لعب
-Feature.Build.Action.AddPlaytesters,إضافة مختبري لعب
-Feature.Build.Action.AddToPlaytest,إضافة إلى اختبار اللعب
+Feature.Build.Action.AddFriends,دعوة الأصدقاء
+Feature.Build.Action.AddPlaytester,دعوة مختبر لعب مبكر واحد
+Feature.Build.Action.AddPlaytesters,دعوة مختبري اللعب المبكرين
+Feature.Build.Action.AddToPlaytest,
 Feature.Build.Action.AgreeAndEnable,الموافقة والتشغيل
 Feature.Build.Action.Approve,
 Feature.Build.Action.Archive,أرشفة
@@ -2289,7 +2304,7 @@ Feature.Build.Description.BuildReplyNotif,احصل على إشعار عندما 
 Feature.Build.Description.BuyRobuxToCreate,اشترِ المزيد من عملات Robux لمواصلة الإنشاء، أو انتظر حتى تتم إعادة تعيين استخدام ميزة Build المجاني غدًا.
 Feature.Build.Description.BuyUsageOrWait,اشترِ المزيد من استخدام ميزة Build باستخدام عملات Robux، أو انتظر حتى تتم إعادة تعيين الحد اليومي.
 Feature.Build.Description.CampaignRunDates,
-Feature.Build.Description.ChoosePlaytesters,اختر الأصدقاء لمساعدتك في اختبار اللعب.
+Feature.Build.Description.ChoosePlaytesters,اختر أصدقاء لمعاينة لعبتك.
 Feature.Build.Description.CreateDeveloperProduct,"إنشاء ""{NAME}"" مقابل {PRICE} من عملات Robux، غير معروض للبيع."
 Feature.Build.Description.DeactivateDeveloperProduct,إيقاف بيع منتج المطوّر {PRODUCT_ID}.
 Feature.Build.Description.EarnedRobuxAppliedFirst,إذا كنت قد ربحت عملات Robux، فسيتم تطبيقها أولًا لتغطية تكلفة الحملة الإعلانية.
@@ -2298,7 +2313,7 @@ Feature.Build.Description.FriendsLinkOnly,يمكن فقط لأصدقائك ال�
 Feature.Build.Description.GameCreationDone,لقد أكملت إنشاء لعبتك ونشرها. يمكنك فتحها لاختبار اللعب.
 Feature.Build.Description.GameSavedPlaytest,لقد أكملتُ إنشاء لعبتك وحفظت إصدارًا جديدًا. يمكنك فتحها لاختبار اللعب.
 Feature.Build.Description.HubSettings,يمكنك إدارة جميع الإعدادات في مركز المصمم
-Feature.Build.Description.InviteFriendLimit,اختر ما يصل إلى {MAX_INVITES} من الأصدقاء، ثم شارك رابط اللعبة.
+Feature.Build.Description.InviteFriendLimit,يمكنك دعوة ما يصل إلى {MAX_INVITES} من الأصدقاء للعب أثناء الإنشاء.
 Feature.Build.Description.MakeAudienceAvail,انشر تجربتك لتكون متاحة لهذا الجمهور.
 Feature.Build.Description.ManageAppearance,يمكنك إدارة كيفية ظهور لعبتك للآخرين.
 Feature.Build.Description.ManageDeveloperProduct,إدارة منتج المطوّر.
@@ -2310,7 +2325,7 @@ Feature.Build.Description.NoMonetizationProducts,صِف عنصرًا ترغب ف
 Feature.Build.Description.PlayAfterPublish,اختر من يمكنه اللعب بعد نشر هذه التجربة.
 Feature.Build.Description.PlaytestLatest,أنت تختبر اللعب لأحدث إصدار لديك. انشره عندما تكون مستعدًا لمشاركته.
 Feature.Build.Description.PlaytestLocked,يمكنك بدء اختبار اللعب بعد إنشاء لعبتك الأولى.
-Feature.Build.Description.PlaytesterAccess,أضف الأصدقاء كمختبري لعب أو غيّر إعدادات الجمهور للعبتك للسماح للمزيد من الأشخاص باللعب.
+Feature.Build.Description.PlaytesterAccess,يمكنك دعوة الأصدقاء كمختبري لعب مبكرين أو تغيير إعدادات جمهور لعبتك للسماح لمزيد من الأشخاص باللعب.
 Feature.Build.Description.PricingRules,إعداد قواعد التسعير
 Feature.Build.Description.PrivateShare,غيّر إعدادات الجمهور للعبتك لمشاركتها.
 Feature.Build.Description.PromoteGameWithAdCampaign,زوِّد أعداد جمهورك من خلال حملة إعلانية لمدة {durationDays} من الأيام واجعل لعبتك متاحة للاكتشاف.
@@ -2514,7 +2529,7 @@ Feature.Build.Message.AdsPromotionBannerTitle,لديك {promotionCount} من ا�
 Feature.Build.Message.AdsPromotionBannerTitleSingular,لديك عرض خاص مجاني واحد متبقٍ
 Feature.Build.Message.AdsStatsEmpty,زوِّد أعداد جمهورك من خلال حملة إعلانية واجعل لعبتك متاحة للاكتشاف
 Feature.Build.Message.AdsStatsEmptyFree,زوِّد أعداد جمهورك من خلال حملة إعلانية مجانية واجعل لعبتك متاحة للاكتشاف
-Feature.Build.Message.AllFriendsAdded,لقد أضفت جميع أصدقائك كمختبري لعب.
+Feature.Build.Message.AllFriendsAdded,لقد دعوت جميع أصدقائك كمختبري لعب مبكرين.
 Feature.Build.Message.AnswerBuildQuestion,أجب عن سؤال ميزة Build أدناه.
 Feature.Build.Message.AssetDetailsUnavailable,تفاصيل الأصل غير متاحة.
 Feature.Build.Message.AssetsLoadFailed,تعذّر تحميل الأصول.
@@ -2552,15 +2567,15 @@ Feature.Build.Message.LoadingVersions,جارٍ تحميل سجل الإصدار�
 Feature.Build.Message.NoAssetsFound,لم يتم العثور على أي أصول.
 Feature.Build.Message.NoCapturesAvailable,لا توجد أي لقطات متاحة
 Feature.Build.Message.NoDescriptionProvided,لم يتم تقديم وصف.
-Feature.Build.Message.NoFriendsToAdd,ليس لديك أي أصدقاء لإضافتهم حتى الآن. ابحث عن أشخاص للتواصل معهم على منصّة Roblox أولًا.
+Feature.Build.Message.NoFriendsToAdd,ليس لديك أي أصدقاء لدعوتهم حتى الآن. ابحث عن أشخاص للتواصل معهم على منصّة Roblox أولًا.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,لا يوجد سجل إصدارات حتى الآن.
 Feature.Build.Message.OneTaskCompleted,تم إكمال مهمة واحدة
 Feature.Build.Message.OutOfBuildUsage,لقد نفد رصيدك من استخدام ميزة Build. اعرض خياراتك لاستخدام عملات Robux لمواصلة الإنشاء.
 Feature.Build.Message.PlaytestInviteSendFailedBody,تعذر إرسال رابط دعوة الدردشة إلى المستخدمين التاليين:
 Feature.Build.Message.PlaytestInviteSendFailedHint,"يُرجى استخدام زر ""مشاركة"" للحصول على الرابط."
-Feature.Build.Message.PlaytestersAdded,تمت إضافة {INVITED_COUNT} من أصل {MAX_INVITES} من مختبري اللعب
-Feature.Build.Message.PrivatePlaytestInvite,تمت دعوتك من قِبل {username} إلى اختبار لعب خاص لتجربة {experienceName}
+Feature.Build.Message.PlaytestersAdded,تمت دعوة {INVITED_COUNT} من أصل {MAX_INVITES} من مختبري اللعب المبكرين
+Feature.Build.Message.PrivatePlaytestInvite,تمت دعوتك من قِبل {username} لتكون مختبر لعب مبكر لتجربة {experienceName}
 Feature.Build.Message.PublicPublishFailed,تم نشر لعبتك، ولكن تعذَّر جعلها عامة. حاول مرة أخرى.
 Feature.Build.Message.PublishExpandAudience,يمكنك النشر لتوسيع نطاق جمهورك
 Feature.Build.Message.PublishNotReverted,لم يتم التراجع عن عملية النشر. حاوِل مرة أخرى.
@@ -2597,7 +2612,7 @@ Feature.Build.Placeholder.DescribeProductUpdate,صِف تحديثًا
 Feature.Build.Prompt.CreateDeveloperProduct,ساعدني في إنشاء منتج المطوّر، وربطه باللعبة، والتحقق من التغييرات ونشرها، وجعله متاحًا للشراء.
 Feature.Build.Title.AdCampaignActive,الحملة الإعلانية نشطة
 Feature.Build.Title.AdCampaignDuration,حملة إعلانية لمدة {durationDays} من الأيام
-Feature.Build.Title.AddFriendsToPlaytest,أضف الأصدقاء لمساعدتك في اختبار اللعب
+Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,إضافة صور
 Feature.Build.Title.AdsStatsEmpty,بدء حملة
 Feature.Build.Title.AdsStatsEmptyFree,ابدأ حملتك الأولى
@@ -2625,7 +2640,7 @@ Feature.Build.Title.ManagedPricingAcknowledgement,هل تريد تشغيل ال�
 Feature.Build.Title.NoMonetizationProducts,ابدأ الكسب في لعبتك
 Feature.Build.Title.NoRobuxForUsage,لم يتبقَ أي عملات Robux لاستخدام ميزة Build
 Feature.Build.Title.PlaytestInviteSendFailed,تعذَّر إرسال الدعوات
-Feature.Build.Title.Playtesters,مختبرو اللعب
+Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersOnlyPlay,يمكن لمختبري اللعب فقط تشغيل اللعبة
 Feature.Build.Title.PromoteGame,روّج للعبتك
 Feature.Build.Title.PromoteGameFree,روّج للعبتك مجانًا
@@ -3626,7 +3641,7 @@ Feature.GameDetails.Action.CopyLink,
 Feature.GameDetails.Action.CreatePrivateGame,إنشاء خادم خاص
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,تقديم الملاحظات
-Feature.GameDetails.Action.InviteFriends,دعوة الأصدقاء
+Feature.GameDetails.Action.InviteFriends,
 Feature.GameDetails.Action.JoinFriendsInGame,الانضمام إلى الأصدقاء
 Feature.GameDetails.Action.NotInterested,غير مهتم
 Feature.GameDetails.Action.PauseVideo,إيقاف الفيديو مؤقتًا

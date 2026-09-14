@@ -730,6 +730,8 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,다이내믹 헤드의 �
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"마켓플레이스의 다이내믹 헤드는 애니메이션화되어 있어야 하지만, 이 헤드에는 FACS 데이터가 없습니다."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,다이내믹 헤드의 오른쪽 눈 감기 표정을 감지할 수 없습니다. 오른쪽 눈의 케이지 랜드마크를 조정하여 머리의 오른쪽 눈과 일치시키고 감을 수 있는지 확인하세요.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,다이내믹 헤드의 찡그린 표정을 감지할 수 없습니다. 입의 케이지 랜드마크를 조정하여 머리에서 입이 있는 위치와 일치시키고 찡그린 표정을 지을 수 있는지 확인하세요.
+Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,이미시브 영역이 기준값을 초과했습니다.
+Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,이미시브 영역이 초과되었습니다.
 Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,이 애셋은 신뢰할 수 있는 크리에이터 프로그램에 속한 크리에이터만 사용할 수 있는 발광형 맵을 사용합니다. 업로드하기 전에 모든 발광형 맵 콘텐츠를 제거하거나 프로그램에 참여하세요.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,게시된 애니메이션에 유효한 최대 부위 이동 거리 값이 없습니다. 애니메이션을 다시 게시하세요.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,게시된 애니메이션에 유효한 UGC 감정 표현 마커가 없습니다. 애니메이션을 다시 게시하세요.
@@ -2209,9 +2211,9 @@ Feature.BlockingModal.Message.BlockConfirmation,"이 사용자를 차단하면 �
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"이 사용자를 차단하면 친구 또는 팔로워 목록에서 삭제됩니다. 상대가 메시지나 요청, 초대 등을 내게 보낼 수 없습니다.<br /><br />차단한 사실은 상대에게 알려지지 않습니다."
 Feature.Build.Action.Add,
 Feature.Build.Action.AddFriends,
-Feature.Build.Action.AddPlaytester,플레이테스터 추가
+Feature.Build.Action.AddPlaytester,얼리 테스터 초대
 Feature.Build.Action.AddPlaytesters,
-Feature.Build.Action.AddToPlaytest,플레이테스트에 추가
+Feature.Build.Action.AddToPlaytest,
 Feature.Build.Action.AgreeAndEnable,동의하고 켜기
 Feature.Build.Action.Approve,
 Feature.Build.Action.Archive,보관
@@ -2323,7 +2325,7 @@ Feature.Build.Description.BuildReplyNotif,Build에서 답변이 있을 때 알�
 Feature.Build.Description.BuyRobuxToCreate,"계속 제작하려면 Robux를 더 구매하거나, 내일 무료 Build 사용량이 초기화될 때까지 기다리세요."
 Feature.Build.Description.BuyUsageOrWait,"Robux로 Build 사용량을 더 구매하거나, 일일 한도가 초기화될 때까지 기다리세요."
 Feature.Build.Description.CampaignRunDates,캠페인은 {startDate}~{endDate} 에 실행됩니다.
-Feature.Build.Description.ChoosePlaytesters,플레이테스트를 도와줄 친구를 선택하세요.
+Feature.Build.Description.ChoosePlaytesters,게임을 미리 볼 친구를 선택하세요.
 Feature.Build.Description.CreateDeveloperProduct,"{PRICE} Robux로 ""{NAME}""을(를) 만듭니다(판매 중단)."
 Feature.Build.Description.DeactivateDeveloperProduct,개발자 상품 {PRODUCT_ID}을(를) 판매 중단합니다.
 Feature.Build.Description.EarnedRobuxAppliedFirst,"Robux를 획득한 경우, 해당 Robux가 광고 캠페인 비용에 우선 적용됩니다."
@@ -2332,7 +2334,7 @@ Feature.Build.Description.FriendsLinkOnly,친구만 이 링크에 액세스할 �
 Feature.Build.Description.GameCreationDone,게임 생성 및 게시가 완료되었습니다. 게임을 열어 플레이테스트할 수 있습니다.
 Feature.Build.Description.GameSavedPlaytest,게임 생성이 완료되었으며 새 버전이 저장되었습니다. 게임을 열어 플레이테스트할 수 있습니다.
 Feature.Build.Description.HubSettings,크리에이터 허브에서 모든 설정을 관리하세요
-Feature.Build.Description.InviteFriendLimit,친구를 최대 {MAX_INVITES}명 선택한 후 게임 링크를 공유하세요.
+Feature.Build.Description.InviteFriendLimit,최대 {MAX_INVITES}명의 친구를 초대하여 제작하는 동안 플레이해 보세요.
 Feature.Build.Description.MakeAudienceAvail,이 대상에게 체험을 제공하려면 게시하세요.
 Feature.Build.Description.ManageAppearance,게임이 다른 사람에게 표시되는 방식을 관리하세요.
 Feature.Build.Description.ManageDeveloperProduct,개발자 상품을 관리합니다.
@@ -2344,7 +2346,7 @@ Feature.Build.Description.NoMonetizationProducts,게임 내에서 Robux를 획�
 Feature.Build.Description.PlayAfterPublish,이 체험을 게시한 후 플레이할 수 있는 사람을 선택하세요.
 Feature.Build.Description.PlaytestLatest,최신 버전을 플레이테스트하고 있습니다. 공유할 준비가 되면 게시하세요.
 Feature.Build.Description.PlaytestLocked,첫 게임을 만든 후 플레이테스트를 시작할 수 있습니다.
-Feature.Build.Description.PlaytesterAccess,친구를 플레이테스터로 추가하거나 게임의 대상 설정을 변경하여 더 많은 사람이 플레이할 수 있도록 하세요.
+Feature.Build.Description.PlaytesterAccess,친구를 얼리 테스터로 초대하거나 게임의 대상 설정을 변경하여 더 많은 사람이 플레이할 수 있도록 하세요.
 Feature.Build.Description.PricingRules,가격 규칙 설정
 Feature.Build.Description.PrivateShare,게임을 공유하려면 게임의 대상 설정을 변경하세요.
 Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}일 광고 캠페인으로 오디언스를 확대하고 게임을 홍보하세요.
@@ -2548,7 +2550,7 @@ Feature.Build.Message.AdsPromotionBannerTitle,무료 프로모션이 {promotionC
 Feature.Build.Message.AdsPromotionBannerTitleSingular,무료 프로모션이 1건 남았습니다
 Feature.Build.Message.AdsStatsEmpty,광고 캠페인으로 오디언스를 확대하고 게임을 홍보하세요
 Feature.Build.Message.AdsStatsEmptyFree,무료 광고 캠페인으로 오디언스를 확대하고 게임을 홍보하세요
-Feature.Build.Message.AllFriendsAdded,모든 친구를 플레이테스터로 추가했습니다.
+Feature.Build.Message.AllFriendsAdded,모든 친구를 얼리 테스터로 초대했습니다.
 Feature.Build.Message.AnswerBuildQuestion,아래에서 Build의 질문에 답하세요.
 Feature.Build.Message.AssetDetailsUnavailable,애셋 세부 정보를 이용할 수 없습니다.
 Feature.Build.Message.AssetsLoadFailed,애셋을 불러오지 못했습니다.
@@ -2586,15 +2588,15 @@ Feature.Build.Message.LoadingVersions,버전 기록을 불러오는 중...
 Feature.Build.Message.NoAssetsFound,애셋을 찾을 수 없습니다.
 Feature.Build.Message.NoCapturesAvailable,사용 가능한 캡처가 없습니다.
 Feature.Build.Message.NoDescriptionProvided,설명을 입력하지 않았습니다.
-Feature.Build.Message.NoFriendsToAdd,아직 추가할 친구가 없습니다. 먼저 Roblox에서 친구를 찾아보세요.
+Feature.Build.Message.NoFriendsToAdd,아직 초대할 친구가 없습니다. 먼저 Roblox에서 친구를 찾아보세요.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,아직 버전 기록이 없습니다.
 Feature.Build.Message.OneTaskCompleted,1개 작업 완료
 Feature.Build.Message.OutOfBuildUsage,Build 사용량이 소진되었습니다. 계속 제작하려면 Robux 사용 옵션을 확인하세요.
 Feature.Build.Message.PlaytestInviteSendFailedBody,다음 사용자에게 초대 채팅 링크를 보낼 수 없습니다:
 Feature.Build.Message.PlaytestInviteSendFailedHint,공유 버튼을 사용하여 링크를 받으세요.
-Feature.Build.Message.PlaytestersAdded,{MAX_INVITES}명 중 {INVITED_COUNT}명의 플레이테스터가 추가됨
-Feature.Build.Message.PrivatePlaytestInvite,{username} 님이 나를 {experienceName}의 비공개 플레이테스트에 초대했습니다
+Feature.Build.Message.PlaytestersAdded,얼리 테스터 {MAX_INVITES}명 중 {INVITED_COUNT}명 초대함
+Feature.Build.Message.PrivatePlaytestInvite,{username} 님이 나를 {experienceName}의 얼리 테스터로 초대했습니다.
 Feature.Build.Message.PublicPublishFailed,게임이 게시되었지만 공개되지 못했습니다. 다시 시도하세요.
 Feature.Build.Message.PublishExpandAudience,오디언스를 확대하려면 게시하세요
 Feature.Build.Message.PublishNotReverted,게시한 내용을 되돌리지 못했습니다. 다시 시도하세요.
@@ -2615,8 +2617,10 @@ Feature.Build.Message.ShareLinkFailed,공유 링크를 생성하지 못했습니
 Feature.Build.Message.SignedOut,로그아웃되었습니다. 로그인한 후 다시 시도해 주세요.
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS}개 작업 완료
 Feature.Build.Message.ThinkingSeconds,{SECONDS}초 동안 생각 중
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,이 크리에이터의 게임을 플레이하려면 이 크리에이터와 신뢰할 수 있는 친구가 되세요.
 Feature.Build.Message.TryAgain,다시 시도하세요.
 Feature.Build.Message.TurnToPortrait,게임을 계속 진행하려면 기기를 세로 모드로 전환하세요.
+Feature.Build.Message.UpdateSettingsToPlaytest,이 게임을 하려면 게임 미리보기 설정을 업데이트하세요.
 Feature.Build.Message.VersionHistoryLoad,버전 기록을 불러오지 못했습니다.
 Feature.Build.Message.WhatToCreate,오늘 무엇을 만들어 보시겠어요?
 Feature.Build.Message.WorkedMinutesSeconds,{MINUTES}분 {REM_SECONDS}초 동안 작업함
@@ -2631,7 +2635,7 @@ Feature.Build.Placeholder.DescribeProductUpdate,업데이트 설명
 Feature.Build.Prompt.CreateDeveloperProduct,"개발자 상품을 만들고, 게임에 연결하고, 변경 사항을 확인 및 게시하고, 구매할 수 있도록 도와주세요."
 Feature.Build.Title.AdCampaignActive,광고 캠페인이 활성화되었습니다
 Feature.Build.Title.AdCampaignDuration,{durationDays}일 광고 캠페인
-Feature.Build.Title.AddFriendsToPlaytest,플레이테스트를 도와줄 친구 추가
+Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,이미지 추가
 Feature.Build.Title.AdsStatsEmpty,캠페인 시작하기
 Feature.Build.Title.AdsStatsEmptyFree,첫 번째 캠페인 시작하기
@@ -2659,7 +2663,7 @@ Feature.Build.Title.ManagedPricingAcknowledgement,관리형 가격 책정을 켜
 Feature.Build.Title.NoMonetizationProducts,게임 내에서 수익을 올리세요
 Feature.Build.Title.NoRobuxForUsage,Build 사용량을 위한 Robux가 남아 있지 않음
 Feature.Build.Title.PlaytestInviteSendFailed,초대를 보낼 수 없음
-Feature.Build.Title.Playtesters,플레이테스터
+Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersOnlyPlay,플레이테스터만 플레이할 수 있습니다
 Feature.Build.Title.PromoteGame,게임을 홍보하세요
 Feature.Build.Title.PromoteGameFree,게임을 무료로 홍보하세요
@@ -4819,6 +4823,7 @@ Feature.ReportAbuse.ProblemDescription.Swearing,"욕설, 저주 또는 비속어
 Feature.ReportAbuse.ProblemDescription.Violence,극단적인 폭력 또는 고어
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,신고 계속하기
 Feature.ReportAbuse.Title.SelectInSceneIpReport,지적 재산권 침해에 대한 신고 절차를 시작해 주셔서 감사합니다
+Feature.RobloxSubscription.Action.JoinIn,{time}에 참가하기
 Feature.RobloxSubscription.Action.Subscribe,
 Feature.RobloxSubscription.Action.TryItForFree,무료로 이용해 보기
 Feature.RobloxSubscription.Body.AlreadySubscribed,이미 Plus 구독을 통해 게임 내 혜택을 적용받고 계시네요.
@@ -4828,6 +4833,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,나이 확인을 완료하�
 Feature.RobloxSubscription.Description.Benefit.Customize,프로필 프레임 및 앱 테마로 사용자 정의하기
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"아이템 및 아바타 첫 60일 동안 10% 할인, 이후 20% 할인"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Roblox Plus 구독을 통해 적은 Robux로 더 큰 즐거움을 누리세요.
+Feature.RobloxSubscription.Description.JoinEarly,Plus로 일찍 참여하기
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}를 클릭하면 <a href=""{termsUrl}"">Roblox 구독 약관</a>에 동의하는 것으로 간주됩니다. 구독을 취소하기 전까지 매월 자동으로 요금이 청구됩니다."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,무료 비공개 서버
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4846,6 +4852,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,좋은 소식
 Feature.RobloxSubscription.Title.GenericError,오류가 발생했습니다
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus 구독하기
 Feature.RobloxSubscription.Title.UnsupportedPlatform,여기에서는 Roblox Plus를 이용할 수 없습니다
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,다른 사람보다 먼저 이벤트에 참가할 수 있습니다.
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Plus 구독으로 얼리 액세스
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"계정 상태, 규정 위반 및 이의 신청"
 Feature.Schools.Action.AlreadyGraduated,이미 졸업했습니다
 Feature.Schools.Action.CantFindSchool,재학 중인 학교를 찾을 수 없나요?
