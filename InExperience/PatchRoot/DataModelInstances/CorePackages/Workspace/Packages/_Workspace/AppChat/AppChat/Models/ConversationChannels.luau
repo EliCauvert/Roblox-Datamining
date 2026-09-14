@@ -52,6 +52,11 @@ local function getFriendId(p1)
 	return "friends:unknown-id"
 end
 
+local _ = function(p2)
+	-- upvalues: getFriendId (ref)
+	return if p2.source == "friends" then getFriendId(p2) else tostring(p2.id)
+end
+
 local t = {
 	ModerationType = {
 		TrustedComms = "trusted_comms",
@@ -206,6 +211,11 @@ end
 function t.getFriendConversationId(p3)
 	-- upvalues: getFriendId (ref)
 	return getFriendId({ participant_user_ids = p3 })
+end
+
+function t.getConversationId(p3)
+	-- upvalues: getFriendId (ref)
+	return if p3.source == "friends" then getFriendId(p3) else tostring(p3.id)
 end
 
 return t

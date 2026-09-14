@@ -2060,7 +2060,6 @@ Feature.Build.Label.GamePlays,游戏游玩次数
 Feature.Build.Label.GetMoreBuildUsage,获得更多 Build 使用额度
 Feature.Build.Label.Hi,你好
 Feature.Build.Label.IconThumbnails,标志和缩略图
-Feature.Build.Label.Images2D,2D 图像
 Feature.Build.Label.InProgress,进行中
 Feature.Build.Label.InputNeeded,需要输入内容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2261,8 +2260,10 @@ Feature.Build.Message.ShareLinkFailed,无法创建分享链接。请重试。
 Feature.Build.Message.SignedOut,你已注销。请登录并重试。
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} 个任务已完成
 Feature.Build.Message.ThinkingSeconds,正在思考（{SECONDS} 秒）
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,
 Feature.Build.Message.TryAgain,请重试。
 Feature.Build.Message.TurnToPortrait,将你的设备切换为竖向模式，以继续在游戏上操作。
+Feature.Build.Message.UpdateSettingsToPlaytest,
 Feature.Build.Message.VersionHistoryLoad,无法加载版本历史记录。
 Feature.Build.Message.WhatToCreate,你今天想创作什么？
 Feature.Build.Message.WorkedMinutesSeconds,已完成（{MINUTES} 分 {REM_SECONDS} 秒）
@@ -3250,6 +3251,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,移除信赖的好友
 Feature.Friends.TrustedFriend.AddBack.Header,“信赖的好友”请求
 Feature.Friends.TrustedFriend.Info.Modal.Header,新的信赖好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,添加信赖的好友
+Feature.Friends.TrustedFriend.Label.Title,信赖的好友
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}现已成为你的信赖好友
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信赖的好友已移除
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,“信赖的好友”请求已发送
@@ -3699,6 +3701,7 @@ Feature.Profile.Action.ShareProfile,分享个人资料
 Feature.Profile.Action.ShareProfileLink,分享个人资料链接
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
+Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,用户已屏蔽
 Feature.Profile.Action.ViewFullProfile,查看完整个人资料
 Feature.Profile.Action.ViewProfile,
@@ -3921,7 +3924,6 @@ Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,完成举报
 Feature.ReportAbuse.Title.SelectInSceneIpReport,感谢你开始举报 IP 侵权行为
 Feature.ReportAbuse.Title.SelectInSceneThankYou,感谢你的举报
-Feature.RobloxSubscription.Action.JoinIn,
 Feature.RobloxSubscription.Action.Subscribe,订阅
 Feature.RobloxSubscription.Action.TryItForFree,免费试用
 Feature.RobloxSubscription.Body.AlreadySubscribed,Plus 订阅已为你提供了游戏内权益。
@@ -3931,7 +3933,6 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,为表达我们的谢意，
 Feature.RobloxSubscription.Description.Benefit.Customize,使用个人资料边框和 App 主题进行自定义
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,前 60 天享道具与虚拟形象九折优惠，之后享八折优惠
 Feature.RobloxSubscription.Description.ExclusiveBenefits,以更少的 Robux 享受更多乐趣。订阅 Roblox Plus。
-Feature.RobloxSubscription.Description.JoinEarly,
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"点按\u{201C}{ctaText}\u{201D}，即表示你同意 <a href=""{termsUrl}"">Roblox 订阅条款</a>。系统将每月自动向你收取费用，直至你取消订阅。"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,免费私人服务器
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -3950,8 +3951,6 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,好消息
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,获取 Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus 在这里不可用
-Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,
-Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,
 Feature.SafetyDashboard.Heading.AccountStatus.V2,帐户状态、违规和申诉
 Feature.Schools.Label.Classmates,同学
 Feature.Screentime.Content.ScreentimeLimitDialog,你已达到每日屏幕时间限制。明天再回来访问 Roblox。
@@ -4354,6 +4353,7 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,
 Feature.VerificationUpsell.Action.EditPhoneNumber,编辑电话号码
 Feature.VerificationUpsell.Action.EnableVoice,启用语音聊天
+Feature.VerificationUpsell.Action.Logout,仍然注销
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

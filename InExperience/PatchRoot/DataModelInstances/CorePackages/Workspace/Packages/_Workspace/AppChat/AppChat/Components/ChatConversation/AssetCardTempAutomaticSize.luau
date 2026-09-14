@@ -2,7 +2,7 @@
 local parent = appChat.Parent
 local roactModule = require(parent.Roact)
 local cryoModule = require(parent.Cryo)
-local chatBubbleContainerAutomaticSizeModule = require(script.Parent.Bubble.ChatBubbleContainerAutomaticSize)
+local chatBubbleContainerModule = require(script.Parent.Bubble.ChatBubbleContainer)
 local constantsModule = require(appChat.Constants)
 local useScaledValue = require(parent.Foundation).Hooks.useScaledValue
 local placeIdContainerModule = require(appChat.Components.ChatConversation.ShareLinkComponents.GameCardComponents.PlaceIdContainer)
@@ -29,7 +29,7 @@ local t = {
 }
 
 return function(value)
-	-- upvalues: cryoModule (ref), t (ref), shareLinkContainerModule (ref), placeIdContainerModule (ref), gameCardContainerModule (ref), useScaledValue (ref), constantsModule (ref), roactModule (ref), chatBubbleContainerAutomaticSizeModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), shareLinkContainerModule (ref), placeIdContainerModule (ref), gameCardContainerModule (ref), useScaledValue (ref), constantsModule (ref), roactModule (ref), chatBubbleContainerModule (ref)
 	local var1 = cryoModule.Dictionary.union(t, value)
 	local var2 = cryoModule.Dictionary.union(t.additionalProps, var1.additionalProps)
 	local var3 = if var2.shareLink then shareLinkContainerModule elseif var2.placeId then placeIdContainerModule else gameCardContainerModule
@@ -42,7 +42,7 @@ return function(value)
 	var2.isPending = var1.isPending
 	var2.isRepliedTo = var1.isRepliedTo
 	
-	return roactModule.createElement(chatBubbleContainerAutomaticSizeModule, {
+	return roactModule.createElement(chatBubbleContainerModule, {
 		hasTail = var1.hasTail,
 		isIncoming = var1.isIncoming,
 		isPending = isPending,

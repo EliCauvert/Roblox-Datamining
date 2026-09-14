@@ -17,6 +17,7 @@ return {
 		SessionPrompt = "session/prompt",
 		SessionCancel = "session/cancel",
 		SessionFindByUniverse = "_roblox/session/find_by_universe",
+		SessionListModels = "_roblox/session/list_models",
 		SessionDelete = "_roblox/session/delete",
 		SessionUpdateInfo = "_roblox/session/update_info",
 		SessionReadTasks = "_roblox/session/read_tasks",

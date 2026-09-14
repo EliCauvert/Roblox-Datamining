@@ -1,23 +1,12 @@
 ﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
 local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
+local signalsReactModule = require(parent.SignalsReact)
 local getGameMediaStore = require(parent.DataHydration).Game.getGameMediaStore
 
 return function(p1)
-	-- upvalues: reactModule (ref), getGameMediaStore (ref), signalsModule (ref)
-	local var1, var2 = reactModule.useState(getGameMediaStore().getAndFetchGameMedia(tostring(p1)).data)
-	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), getGameMediaStore (copy), p1 (ref), var2 (ref)
-		local var3 = signalsModule.createEffect(function(p2)
-			-- upvalues: getGameMediaStore (copy), p1 (copy), var2 (copy)
-			var2(getGameMediaStore(p2).getAndFetchGameMedia(tostring(p1)).data(p2))
-		end)
-		
-		return function()
-			-- upvalues: var3 (ref)
-			var3()
-		end
-	end, { p1 })
+	-- upvalues: getGameMediaStore (ref), signalsReactModule (ref), reactModule (ref)
+	local andFetchGameMedia = getGameMediaStore(false).getAndFetchGameMedia(tostring(p1))
+	local var1 = signalsReactModule.useSignalState(andFetchGameMedia.data)
 	
 	return {
 		icon = reactModule.useMemo(function()
@@ -33,16 +22,16 @@ return function(p1)
 			
 			for i, v in var1 do
 				local text
-				local var3 = "image"
+				local var2 = "image"
 				local _ = nil
-				local var4 = tostring(v.videoId or v.imageId)
+				local var3 = tostring(v.videoId or v.imageId)
 				
 				if v.videoId then
-					var3 = "video"
+					var2 = "video"
 					text = "rbxassetid://" .. tostring(v.videoId)
 					table.insert(t, {
-						id = var4,
-						mediaType = var3,
+						id = var3,
+						mediaType = var2,
 						assetSource = text,
 						assetResourceName = if v.imageId then `assets/{v.imageId}` else nil
 					})
@@ -51,6 +40,7 @@ return function(p1)
 				end
 			end
 			return t
-		end, { var1 })
+		end, { var1 }),
+		status = signalsReactModule.useSignalState(andFetchGameMedia.status)
 	}
 end

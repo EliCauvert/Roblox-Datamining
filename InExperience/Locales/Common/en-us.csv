@@ -2068,7 +2068,6 @@ Feature.Build.Label.GamePlays,Game plays
 Feature.Build.Label.GetMoreBuildUsage,Get more Build usage
 Feature.Build.Label.Hi,Hi
 Feature.Build.Label.IconThumbnails,Icon & thumbnails
-Feature.Build.Label.Images2D,2D Images
 Feature.Build.Label.InProgress,In progress
 Feature.Build.Label.InputNeeded,Input needed
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2269,8 +2268,10 @@ Feature.Build.Message.ShareLinkFailed,Couldn't create the share link. Try again.
 Feature.Build.Message.SignedOut,You're signed out. Sign in and try again.
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} tasks completed
 Feature.Build.Message.ThinkingSeconds,Thinking for {SECONDS}s
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,Become trusted friends with this creator to play their game.
 Feature.Build.Message.TryAgain,Try again.
 Feature.Build.Message.TurnToPortrait,Turn your device to portrait mode to continue working on your game.
+Feature.Build.Message.UpdateSettingsToPlaytest,"To play this game, update your game preview setting."
 Feature.Build.Message.VersionHistoryLoad,Version history couldn't load.
 Feature.Build.Message.WhatToCreate,What do you want to create today?
 Feature.Build.Message.WorkedMinutesSeconds,Worked for {MINUTES}m{REM_SECONDS}s
@@ -3260,6 +3261,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Remove trusted friend
 Feature.Friends.TrustedFriend.AddBack.Header,Trusted friend request
 Feature.Friends.TrustedFriend.Info.Modal.Header,New trusted friend
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Add trusted friend
+Feature.Friends.TrustedFriend.Label.Title,Trusted friend
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} is a trusted friend now
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Trusted friend removed
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Trusted friend request sent
@@ -3710,6 +3712,7 @@ Feature.Profile.Action.ShareProfile,Share profile
 Feature.Profile.Action.ShareProfileLink,Share profile link
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,Share QR code
+Feature.Profile.Action.Trade,Trade
 Feature.Profile.Action.UserBlocked,User Blocked
 Feature.Profile.Action.ViewFullProfile,View full profile
 Feature.Profile.Action.ViewProfile,View profile
@@ -3932,7 +3935,6 @@ Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Continue your report
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,Finish your report
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Thank you for starting your IP Infringement report
 Feature.ReportAbuse.Title.SelectInSceneThankYou,Thank you for your report
-Feature.RobloxSubscription.Action.JoinIn,Join in {time}
 Feature.RobloxSubscription.Action.Subscribe,Subscribe
 Feature.RobloxSubscription.Action.TryItForFree,Try it for free
 Feature.RobloxSubscription.Body.AlreadySubscribed,Your Plus subscription already provides in-game benefits.
@@ -3942,7 +3944,6 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,Verify your age with an age
 Feature.RobloxSubscription.Description.Benefit.Customize,Customize with profile frames and app themes
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% off first 60 days, then 20% off items and avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,More fun for less Robux. Subscribe to Roblox Plus.
-Feature.RobloxSubscription.Description.JoinEarly,Join early with Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Free private servers
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -3961,8 +3962,6 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Good news
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Get Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus unavailable here
-Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,You can join the event before everybody else.
-Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Early access with Plus
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Account status, violations, and appeals"
 Feature.Schools.Label.Classmates,Classmates
 Feature.Screentime.Content.ScreentimeLimitDialog,You've reached your daily screen time limit. Come back tomorrow to access Roblox again.
@@ -4365,6 +4364,7 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,Don't leave
 Feature.VerificationUpsell.Action.EditPhoneNumber,Edit Phone Number
 Feature.VerificationUpsell.Action.EnableVoice,Enable Voice Chat
+Feature.VerificationUpsell.Action.Logout,Log out anyway
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

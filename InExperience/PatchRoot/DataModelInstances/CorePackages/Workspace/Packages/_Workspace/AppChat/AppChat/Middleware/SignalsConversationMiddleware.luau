@@ -3,6 +3,7 @@ local appChat = script:FindFirstAncestor("AppChat")
 local parent = appChat.Parent
 local appChatNetworkingModule = require(parent.AppChatNetworking)
 local cryoModule = require(parent.Cryo)
+local signalsExperimentalModule = require(parent.SignalsExperimental)
 local constantsModule = require(appChat.Constants)
 local conversationsModule = require(appChat.Conversations)
 local conversationChannelsModule = require(appChat.Models.ConversationChannels)
@@ -11,6 +12,7 @@ local messageModelModule = require(appChat.Models.MessageModel)
 local getConversationMessageViewModelStoreModule = require(appChat.Stores.GetConversationMessageViewModelStore)
 local getConversationListStoreModule = require(appChat.Stores.GetConversationListStore)
 local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
+local searchIntroducedConversationIdsModule = require(appChat.Stores.searchIntroducedConversationIds)
 local networkingBlockingModule = require(appChat.Http.NetworkingBlocking)
 local networkingChatModule = require(appChat.Http.NetworkingChat)
 local changedParticipantsModule = require(appChat.Conversations.Actions.ChangedParticipants)
@@ -34,6 +36,7 @@ local setPinnedGameForConversationModule = require(appChat.Conversations.Actions
 local setUserLeavingConversationModule = require(appChat.Conversations.Actions.SetUserLeavingConversation)
 local setUserTypingModule = require(appChat.Conversations.Actions.SetUserTyping)
 local fFlagAppChatConversationStoreModule = require(appChat.Flags.FFlagAppChatConversationStore)
+local fFlagAppChatServerSideConversationSearchModule = require(appChat.Flags.FFlagAppChatServerSideConversationSearch)
 local t = {
 	[constantsModule.OptInVariant.OsaContextCard] = {
 		field = "osaAcknowledgementStatus",
@@ -45,21 +48,28 @@ local t = {
 	}
 }
 
-local function _(p1, p2)
-	-- upvalues: conversationChannelsModule (ref)
-	if p2 == nil or p2.status == "failed" then
+local function upsertConversationResponse(p1, p2)
+	-- upvalues: conversationChannelsModule (ref), fFlagAppChatServerSideConversationSearchModule (ref), signalsExperimentalModule (ref), searchIntroducedConversationIdsModule (ref)
+	if p2 == nil or p2.status == "failed" then return end
+	local var1 = conversationChannelsModule.fromChannelsApi(p2)
+	
+	if fFlagAppChatServerSideConversationSearchModule then
+		signalsExperimentalModule.batch(function()
+			-- upvalues: p1 (ref), var1 (ref), searchIntroducedConversationIdsModule (copy)
+			p1.upsertConversation(var1)
+			searchIntroducedConversationIdsModule.remove(var1.id)
+		end)
+		
 		return
 	end
-	p1.upsertConversation(conversationChannelsModule.fromChannelsApi(p2))
+	p1.upsertConversation(var1)
 end
 
-local _ = function(p1, p2)
-	-- upvalues: conversationChannelsModule (ref)
+local function _(p1, p2)
+	-- upvalues: upsertConversationResponse (ref)
 	if p2 == nil or p2.conversations == nil then return end
 	for i, v in p2.conversations do
-		if v ~= nil and v.status ~= "failed" then
-			p1.upsertConversation(conversationChannelsModule.fromChannelsApi(v))
-		end
+		upsertConversationResponse(p1, v)
 	end
 end
 
@@ -276,7 +286,7 @@ local _ = function(p7)
 end
 
 local function updateConversationLastUpdatedFromMessages(p7, p8, p9, p10)
-	-- upvalues: getConversationMessageViewModelStoreModule (ref), cryoModule (ref)
+	-- upvalues: getConversationMessageViewModelStoreModule (ref), fFlagAppChatServerSideConversationSearchModule (ref), searchIntroducedConversationIdsModule (ref), cryoModule (ref)
 	if p8 == nil or p9 == nil then return end
 	local conversation = p7.getConversation(p8, false)
 	
@@ -380,6 +390,10 @@ local function updateConversationLastUpdatedFromMessages(p7, p8, p9, p10)
 		
 		if var10 < var7 then
 			t.lastUpdated = var9
+			
+			if fFlagAppChatServerSideConversationSearchModule then
+				searchIntroducedConversationIdsModule.remove(p8)
+			end
 		end
 		if p10 then
 			t.hasUnreadMessages = true
@@ -395,36 +409,24 @@ local function updateConversationLastUpdatedFromMessages(p7, p8, p9, p10)
 end
 
 local function handleCreateConversationSucceeded(p11, p12)
-	-- upvalues: conversationChannelsModule (ref)
+	-- upvalues: upsertConversationResponse (ref)
 	local responseBody = p11.responseBody
-	local var13 = responseBody and (responseBody.conversations and responseBody.conversations[1])
-	
-	if var13 ~= nil then
-		if var13.status == "failed" then return end
-		p12.upsertConversation(conversationChannelsModule.fromChannelsApi(var13))
-	end
+	upsertConversationResponse(p12, responseBody and (responseBody.conversations and responseBody.conversations[1]))
 end
 
 local function handleDuplicateConversationSucceeded(p11, p12)
-	-- upvalues: conversationChannelsModule (ref)
+	-- upvalues: upsertConversationResponse (ref)
 	local responseBody = p11.responseBody
-	local var13 = responseBody and (responseBody.conversations and responseBody.conversations[1])
-	
-	if var13 ~= nil then
-		if var13.status == "failed" then return end
-		p12.upsertConversation(conversationChannelsModule.fromChannelsApi(var13))
-	end
+	upsertConversationResponse(p12, responseBody and (responseBody.conversations and responseBody.conversations[1]))
 end
 
 local function handleGetUserConversationsSucceeded(p11, p12)
-	-- upvalues: conversationChannelsModule (ref)
+	-- upvalues: upsertConversationResponse (ref)
 	local responseBody = p11.responseBody
 	
 	if responseBody ~= nil and responseBody.conversations ~= nil then
 		for i, v in responseBody.conversations do
-			if v ~= nil and v.status ~= "failed" then
-				p12.upsertConversation(conversationChannelsModule.fromChannelsApi(v))
-			end
+			upsertConversationResponse(p12, v)
 		end
 	end
 	local nextCursor = p11.responseBody and p11.responseBody.next_cursor
@@ -441,15 +443,13 @@ local function handleGetUserConversationsFailed(_, p13)
 end
 
 local function handleGetConversationDetailsSucceeded(p13, p14)
-	-- upvalues: conversationChannelsModule (ref)
+	-- upvalues: upsertConversationResponse (ref)
 	local responseBody = p13.responseBody
 	
 	if responseBody ~= nil then
 		if responseBody.conversations == nil then return end
 		for i, v in responseBody.conversations do
-			if v ~= nil and v.status ~= "failed" then
-				p14.upsertConversation(conversationChannelsModule.fromChannelsApi(v))
-			end
+			upsertConversationResponse(p14, v)
 		end
 	end
 end

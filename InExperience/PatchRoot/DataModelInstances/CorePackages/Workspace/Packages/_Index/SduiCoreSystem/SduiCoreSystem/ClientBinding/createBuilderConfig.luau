@@ -8,6 +8,7 @@ local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagSduiEventDetailsSupport = require(parent.SharedFlags).FFlagSduiEventDetailsSupport
 local fFlagSduiChartsSortDetailGenreFilter = require(parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
+local fFlagSduiDismissPromptPageScope = require(parent.SharedFlags).FFlagSduiDismissPromptPageScope
 
 local function _(p1, p2)
 	-- upvalues: sduiLoggerModule (ref), sduiErrorsModule (ref)
@@ -33,7 +34,7 @@ local function _(p1, p2)
 end
 
 return function(p3)
-	-- upvalues: getPropBuilderModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref)
+	-- upvalues: getPropBuilderModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiDismissPromptPageScope (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref)
 	local t = {
 		appPage = p3.appPage,
 		debugName = p3.debugName,
@@ -63,7 +64,7 @@ return function(p3)
 		return var1
 	end
 	
-	t.configKey = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport or fFlagSduiChartsSortDetailGenreFilter then p3.configKey else nil
+	t.configKey = if fFlagSduiDismissPromptPageScope or fFlagSduiExperienceDetailsSupport or (fFlagSduiEventDetailsSupport or fFlagSduiChartsSortDetailGenreFilter) then p3.configKey else nil
 	
 	return t
 end

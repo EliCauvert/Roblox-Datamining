@@ -7,8 +7,6 @@ return {
 	delayedAmpWizardCompletionCallbackOverride = require(script.PlayButtonLaunchChecks.delayedAmpWizardCompletionCallbackOverride),
 	LegacyPlayButtonContainer = require(script.LegacyPlayButtonContainer),
 	PlayButton = require(script.PlayButton),
-	PlusEarlyAccessUpsellBanner = require(script.PlusEarlyAccessUpsellBanner),
-	useEarlyAccessCaption = require(script.EarlyAccess.useEarlyAccessCaption),
 	PlayButtonView = require(script.PlayButtonView),
 	PlayButtonReferralSource = require(script.PlayButtonReferralSource),
 	PlayButtonStates = require(script.PlayButtonStates),

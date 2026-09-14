@@ -2053,7 +2053,6 @@ Feature.Build.Label.GamePlays,Game dimainkan
 Feature.Build.Label.GetMoreBuildUsage,Dapatkan lebih banyak kuota penggunaan Build
 Feature.Build.Label.Hi,Hai
 Feature.Build.Label.IconThumbnails,Ikon & thumbnail
-Feature.Build.Label.Images2D,Gambar 2D
 Feature.Build.Label.InProgress,Sedang berlangsung
 Feature.Build.Label.InputNeeded,Input diperlukan
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3242,6 +3241,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Hapus teman tepercaya
 Feature.Friends.TrustedFriend.AddBack.Header,Permintaan pertemanan tepercaya
 Feature.Friends.TrustedFriend.Info.Modal.Header,Teman tepercaya baru
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Tambahkan teman tepercaya
+Feature.Friends.TrustedFriend.Label.Title,Teman tepercaya
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} sekarang adalah teman tepercaya
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Teman tepercaya dihapus
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Permintaan teman tepercaya terkirim
@@ -3692,6 +3692,7 @@ Feature.Profile.Action.ShareProfile,Bagikan profil
 Feature.Profile.Action.ShareProfileLink,Bagikan Tautan Profil
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,Bagikan kode QR
+Feature.Profile.Action.Trade,Tukar
 Feature.Profile.Action.UserBlocked,
 Feature.Profile.Action.ViewFullProfile,Lihat profil lengkap
 Feature.Profile.Action.ViewProfile,Lihat profil
@@ -4338,6 +4339,7 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,Jangan keluar
 Feature.VerificationUpsell.Action.EditPhoneNumber,Edit Nomor Ponsel
 Feature.VerificationUpsell.Action.EnableVoice,
+Feature.VerificationUpsell.Action.Logout,Tetap log out
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

@@ -5,12 +5,13 @@ local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedF
 local fFlagEnableInExperienceAvatarSwitcher = sharedFlagsModule.FFlagEnableInExperienceAvatarSwitcher
 local fFlagAddInviteFriendsIntegration = sharedFlagsModule.FFlagAddInviteFriendsIntegration
 local fFlagAppNavMyStatsTab = sharedFlagsModule.FFlagAppNavMyStatsTab
+local fFlagBuildExperienceAssetLibrary = sharedFlagsModule.FFlagBuildExperienceAssetLibrary
 local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local argoPartyExperimentation = require(corePackagesService.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
 
 return {
 	OverflowMenu = require(script.OverflowMenu),
-	AssistantBuild = if fFlagAppNavMyStatsTab then require(script.AssistantBuild) else nil,
+	AssistantBuild = if fFlagAppNavMyStatsTab or fFlagBuildExperienceAssetLibrary then require(script.AssistantBuild) else nil,
 	Chat = require(script.ExpChat.ChatChromeIntegration),
 	ConnectUnibar = if argoPartyExperimentation.getIsRenameEnabled() then nil else require(script.Connect.ConnectIconUnibar),
 	ConnectDropdown = if sharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints and sharedFlagsModule.FFlagExpChatCanShowFriendsTab and argoPartyExperimentation.getIsRenameEnabled() then nil else require(script.Connect.ConnectIconDropdown),

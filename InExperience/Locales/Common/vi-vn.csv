@@ -947,6 +947,8 @@ CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Bạn muốn rời đi?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Tham gia trò chơi bạn từng truy cập
 CoreScripts.InGameMenu.Traversal.LeaveBody,Bạn sắp thoát khỏi trò chơi này để quay về {PREVIOUS_EXPERIENCE}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Bạn chắc chắn rời đi chứ?
+CoreScripts.InGameMenu.UnlockMore.Description,"Trò chuyện, bạn bè và nhiều trò chơi hơn"
+CoreScripts.InGameMenu.UnlockMore.Title,Mở khóa thêm tính năng của Roblox
 CoreScripts.InGameMenu.Vibration,Rung
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,để chuyển điều hướng trình đơn
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,Một số trải nghiệm yêu cầu nhấn
@@ -1351,15 +1353,6 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Mô tả
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Dành riêng cho Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,hôm nay
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,trong 1 tiếng này
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,trong tháng này
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,Còn {count} hình nền
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,ngày
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,giờ
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,phút
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,Đặt lại sau
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Mô tả hình nền của bạn…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Đang tạo hình nền của bạn…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Đang chuẩn bị hình nền của bạn…
@@ -1478,7 +1471,6 @@ Feature.Avatar.Label.ClassicTShirts,Áo Thun Cổ Điển
 Feature.Avatar.Label.ClearByCategory,Xóa {category}
 Feature.Avatar.Label.Climb,Leo
 Feature.Avatar.Label.ClimbAnimations,Hiệu Ứng Leo
-Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Tên chỉ được chứa chữ cái, số và dấu cách"
 Feature.Avatar.Label.CountSelected,Đã Chọn {itemCount}
 Feature.Avatar.Label.Creations,Sản phẩm sáng tạo
@@ -1590,7 +1582,6 @@ Feature.Avatar.Label.RecentlyWorn,Vừa mặc
 Feature.Avatar.Label.RemoveFromSetBody,Các avatar này sẽ bị gỡ khỏi bộ nhưng sẽ không bị xóa.
 Feature.Avatar.Label.Replace,Thay thế
 Feature.Avatar.Label.ResetToNewCharacter,Bạn đang chuyển sang một hồ sơ mới; bạn muốn đặt lại tất cả vật phẩm trang phục hay giữ chúng?
-Feature.Avatar.Label.ResetTryOn,Trả về avatar hiện tại
 Feature.Avatar.Label.Right,P
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,
@@ -1646,7 +1637,6 @@ Feature.Avatar.Label.Title.HeadAdjustment,Chỉnh đầu
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,Trang điểm nhiều lớp
 Feature.Avatar.Label.Title.ManageAvatars,Quản lý avatar
-Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,Kho của tôi
 Feature.Avatar.Label.Title.ProfilePhoto,Ảnh đại diện
 Feature.Avatar.Label.Title.ReplaceAvatar,Thay avatar
@@ -1786,7 +1776,6 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,Cài về mặc định
 Feature.Avatar.Title.MakeupSortUnequip,Hủy trang bị vật phẩm
 Feature.Avatar.Title.Move,
-Feature.Avatar.Title.MyAvatar,
 Feature.Avatar.Title.NameAvatarOutfit,Đặt tên cho avatar của bạn
 Feature.Avatar.Title.NewCustomizeLook,Tính năng tùy chỉnh có diện mạo mới!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Vật Phẩm Mới
@@ -2064,7 +2053,6 @@ Feature.Build.Label.GamePlays,Lượt chơi
 Feature.Build.Label.GetMoreBuildUsage,Mua thêm lượt sử dụng Build
 Feature.Build.Label.Hi,Xin chào
 Feature.Build.Label.IconThumbnails,Biểu tượng và hình nhỏ
-Feature.Build.Label.Images2D,Hình ảnh 2D
 Feature.Build.Label.InProgress,Đang thực hiện
 Feature.Build.Label.InputNeeded,Cần thông tin đầu vào
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2241,6 +2229,8 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Chưa có lịch sử phiên bản.
 Feature.Build.Message.OneTaskCompleted,Đã hoàn thành 1 nhiệm vụ
 Feature.Build.Message.OutOfBuildUsage,Bạn đã hết lượt sử dụng Build. Hãy xem các lựa chọn sử dụng Robux để tiếp tục sáng tạo.
+Feature.Build.Message.PlaytestInviteSendFailedBody,Bạn không thể gửi liên kết mời tham gia trò chuyện cho những người dùng sau:
+Feature.Build.Message.PlaytestInviteSendFailedHint,Vui lòng sử dụng nút Chia sẻ để lấy đường liên kết.
 Feature.Build.Message.PlaytestersAdded,Đã thêm {INVITED_COUNT} trên {MAX_INVITES} người chơi thử
 Feature.Build.Message.PrivatePlaytestInvite,{username} đã mời bạn chơi thử riêng tư {experienceName}
 Feature.Build.Message.PublicPublishFailed,Trò chơi của bạn đã được đăng nhưng chưa đăng công khai. Vui lòng thử lại.
@@ -2306,6 +2296,7 @@ Feature.Build.Title.GetUsers,Thu hút người dùng
 Feature.Build.Title.ManagedPricingAcknowledgement,Mở chế độ Giá được quản lý?
 Feature.Build.Title.NoMonetizationProducts,Bắt đầu kiếm tiền trong trò chơi của bạn
 Feature.Build.Title.NoRobuxForUsage,Không còn Robux để sử dụng Build
+Feature.Build.Title.PlaytestInviteSendFailed,Không gửi được lời mời
 Feature.Build.Title.Playtesters,Người chơi thử
 Feature.Build.Title.PlaytestersOnlyPlay,Chỉ người chơi thử mới có thể chơi
 Feature.Build.Title.PromoteGame,Quảng bá trò chơi của bạn
@@ -3252,6 +3243,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Xóa bạn bè đáng t
 Feature.Friends.TrustedFriend.AddBack.Header,Yêu cầu trở thành Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Info.Modal.Header,Bạn bè đáng tin cậy mới
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Thêm bạn bè đáng tin cậy
+Feature.Friends.TrustedFriend.Label.Title,Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} đã trở thành bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Đã xóa Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Đã gửi yêu cầu trở thành bạn bè đáng tin cậy
@@ -3535,7 +3527,7 @@ Feature.Moments.Label.FeedFailedToLoad,Không tải được bản tin
 Feature.Moments.Label.FeedMyMoments,Khoảnh khắc của tôi
 Feature.Moments.Label.FeedTrending,Thịnh hành
 Feature.Moments.Label.HowToUseCaptureTitle,Cách dùng Ảnh chụp/video quay màn hình
-Feature.Moments.Label.LinkCopied,Đã sao chép đường liên kết.
+Feature.Moments.Label.LinkCopied,Đã sao chép đường liên kết
 Feature.Moments.Label.LinkCopyFailed,Không thể sao chép đường liên kết.
 Feature.Moments.Label.ModeratedRodeoBody,"Chúng tôi đã xóa Khoảnh khắc này do vi phạm Tiêu chuẩn cộng đồng của chúng tôi. Để Khoảnh khắc được hiển thị, bạn cần nắm rõ và tuân thủ quy tắc."
 Feature.Moments.Label.MomentDeletedBody,
@@ -3702,6 +3694,7 @@ Feature.Profile.Action.ShareProfile,Chia sẻ hồ sơ
 Feature.Profile.Action.ShareProfileLink,Chia sẻ đường liên kết đến hồ sơ
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,Chia Sẻ Mã QR
+Feature.Profile.Action.Trade,Buôn Bán
 Feature.Profile.Action.UserBlocked,Người Chơi Bị Chặn
 Feature.Profile.Action.ViewFullProfile,Xem hồ sơ đầy đủ
 Feature.Profile.Action.ViewProfile,Xem hồ sơ
@@ -4348,6 +4341,7 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,Không rời khỏi
 Feature.VerificationUpsell.Action.EditPhoneNumber,Chỉnh Sửa Số Điện Thoại
 Feature.VerificationUpsell.Action.EnableVoice,
+Feature.VerificationUpsell.Action.Logout,Vẫn đăng xuất
 Feature.VerificationUpsell.Action.Next,Tiếp theo
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

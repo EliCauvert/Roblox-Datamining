@@ -10,6 +10,7 @@ local buildPillMenuModule = require(script.Parent.BuildPillMenu)
 local buildPillMenuPageHostModule = require(script.Parent.BuildPillMenuPageHost)
 local fFlagBuildExperienceAssetLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceAssetLibrary)
 local getBuildPillMenuPortalStoreModule = require(buildExperience.Stores.GetBuildPillMenuPortalStore)
+local getModelLibraryStoreModule = require(buildExperience.Stores.GetModelLibraryStore)
 local fFlagBuildPublishNavigationSheetModule = require(buildExperience.Flags.FFlagBuildPublishNavigationSheet)
 local var2 = if fFlagBuildPublishNavigationSheetModule then require(buildExperience.Components.PublishSheet.PublishSheetController) else nil
 local view = foundationModule.View
@@ -28,7 +29,7 @@ local _ = function(p1, p2)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: getBuildPillMenuPortalStoreModule (ref), signalsReactModule (ref), useOverlay (ref), useStyleSheet (ref), fFlagBuildDesktopReadinessModule (ref), useTokens (ref), var1 (ref), reactModule (ref), fFlagBuildPublishNavigationSheetModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), view (ref), buildPillMenuModule (ref), reactRobloxModule (ref), buildPillMenuPageHostModule (ref), var2 (ref)
+	-- upvalues: getBuildPillMenuPortalStoreModule (ref), signalsReactModule (ref), useOverlay (ref), useStyleSheet (ref), fFlagBuildDesktopReadinessModule (ref), useTokens (ref), var1 (ref), reactModule (ref), fFlagBuildPublishNavigationSheetModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), getModelLibraryStoreModule (ref), view (ref), buildPillMenuModule (ref), reactRobloxModule (ref), buildPillMenuPageHostModule (ref), var2 (ref)
 	local var3 = signalsReactModule.useSignalState(getBuildPillMenuPortalStoreModule().getPortalTarget)
 	local var4 = useOverlay()
 	local var5 = useStyleSheet()
@@ -69,8 +70,8 @@ return reactModule.memo(function(p1)
 		var12({ type = "agents" })
 	end, {})
 	local var20 = if fFlagBuildExperienceAssetLibraryModule then reactModule.useCallback(function()
-		-- upvalues: var12 (ref)
-		var12({ type = "asset-library" })
+		-- upvalues: getModelLibraryStoreModule (copy)
+		getModelLibraryStoreModule().setIsOpen(true)
 	end, {}) else nil
 	local var21 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref)
@@ -175,6 +176,7 @@ return reactModule.memo(function(p1)
 				onOpenInvitePicker = var21,
 				onOpenAgentsPage = var19,
 				onOpenAssetLibraryPage = var20,
+				onOpenCaptureMode = p1.onOpenCaptureMode,
 				onOpenCreatorCreditPage = var23
 			})
 		})

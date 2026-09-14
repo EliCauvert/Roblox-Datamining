@@ -2,6 +2,7 @@
 local parent = appChat.Parent
 local _ = require(parent.AppChatNetworking)
 local cryoModule = require(parent.Cryo)
+local signalsExperimentalModule = require(parent.SignalsExperimental)
 local conversationChannelsModule = require(appChat.Models.ConversationChannels)
 local _ = require(appChat.Stores.GetConversationStore)
 local getResponseBodyModule = require(script.Parent.getResponseBody)
@@ -9,20 +10,30 @@ local buildValidMessagesModule = require(script.Parent.buildValidMessages)
 local ingestBatchModule = require(script.Parent.ingestBatch)
 local ingestOperationModule = require(script.Parent.IngestOperation)
 local fFlagAppChatIngestConversationMessagesModule = require(appChat.Flags.FFlagAppChatIngestConversationMessages)
+local searchIntroducedConversationIdsModule = require(appChat.Stores.searchIntroducedConversationIds)
+local fFlagAppChatServerSideConversationSearchModule = require(appChat.Flags.FFlagAppChatServerSideConversationSearch)
 
 local function _(p1)
 	return if p1 ~= nil then p1 == "" else true
 end
 
 local function upsertConversationResponse(p1, p2)
-	-- upvalues: conversationChannelsModule (ref), fFlagAppChatIngestConversationMessagesModule (ref), buildValidMessagesModule (ref), ingestBatchModule (ref), ingestOperationModule (ref)
+	-- upvalues: conversationChannelsModule (ref), fFlagAppChatServerSideConversationSearchModule (ref), signalsExperimentalModule (ref), searchIntroducedConversationIdsModule (ref), fFlagAppChatIngestConversationMessagesModule (ref), buildValidMessagesModule (ref), ingestBatchModule (ref), ingestOperationModule (ref)
 	if p2 == nil or p2.status == "failed" then return end
 	if p2.source == conversationChannelsModule.Source.Channels and p2.type == conversationChannelsModule.Type.OneToOne and p2.participant_user_ids ~= nil then
 		p1.removeConversation(conversationChannelsModule.getFriendConversationId(p2.participant_user_ids))
 	end
 	local var1 = conversationChannelsModule.fromChannelsApi(p2)
-	p1.upsertConversation(var1)
 	
+	if fFlagAppChatServerSideConversationSearchModule then
+		signalsExperimentalModule.batch(function()
+			-- upvalues: p1 (ref), var1 (ref), searchIntroducedConversationIdsModule (copy)
+			p1.upsertConversation(var1)
+			searchIntroducedConversationIdsModule.remove(var1.id)
+		end)
+	else
+		p1.upsertConversation(var1)
+	end
 	if fFlagAppChatIngestConversationMessagesModule then
 		local var2 = buildValidMessagesModule(var1.id, p2.messages or {})
 		

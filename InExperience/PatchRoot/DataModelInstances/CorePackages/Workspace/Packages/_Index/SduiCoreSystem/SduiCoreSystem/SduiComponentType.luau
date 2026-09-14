@@ -70,7 +70,6 @@
 	PlayButton = "PlayButton",
 	PlayWithReward = "PlayWithReward",
 	PlayButtonContextualMessage = "PlayButtonContextualMessage",
-	PlusEarlyAccessUpsell = "PlusEarlyAccessUpsell",
 	RevealRowsButtonWithDivider = "RevealRowsButtonWithDivider",
 	RevealText = "RevealText",
 	SectionHeader = "SectionHeader",

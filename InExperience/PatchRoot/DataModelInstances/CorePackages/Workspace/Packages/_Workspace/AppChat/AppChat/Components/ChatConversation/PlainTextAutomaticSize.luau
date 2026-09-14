@@ -1,7 +1,7 @@
 ﻿local textService = game:GetService("TextService")
 local appChat = script:FindFirstAncestor("AppChat")
 local parent = appChat.Parent
-local chatBubbleContainerAutomaticSizeModule = require(script.Parent.Bubble.ChatBubbleContainerAutomaticSize)
+local chatBubbleContainerModule = require(script.Parent.Bubble.ChatBubbleContainer)
 local reactModule = require(parent.React)
 local useStyle = require(parent.UIBlox).Core.Style.useStyle
 local cryoModule = require(parent.Cryo)
@@ -28,7 +28,7 @@ local t = {
 }
 
 function PlainText(p1)
-	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useStyle (ref), textService (ref), fFlagAppChatEnableAutotranslationModule (ref), reactModule (ref), chatBubbleContainerAutomaticSizeModule (ref), view (ref), text (ref), divider (ref), dividerVariant (ref)
+	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useStyle (ref), textService (ref), fFlagAppChatEnableAutotranslationModule (ref), reactModule (ref), chatBubbleContainerModule (ref), view (ref), text (ref), divider (ref), dividerVariant (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local var2 = useTokens()
 	local var3 = useStyle()
@@ -66,7 +66,7 @@ function PlainText(p1)
 			sizeConstraint = var6
 		}
 		
-		return reactModule.createElement(chatBubbleContainerAutomaticSizeModule, {
+		return reactModule.createElement(chatBubbleContainerModule, {
 			isIncoming = var1.isIncoming,
 			hasTail = var1.hasTail,
 			isPending = var1.isPending,
@@ -107,7 +107,7 @@ function PlainText(p1)
 			})
 		})
 	end
-	return reactModule.createElement(chatBubbleContainerAutomaticSizeModule, {
+	return reactModule.createElement(chatBubbleContainerModule, {
 		isIncoming = var1.isIncoming,
 		hasTail = var1.hasTail,
 		isPending = var1.isPending,

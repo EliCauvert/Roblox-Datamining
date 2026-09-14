@@ -376,6 +376,7 @@
 	FFlagAXPlusExclusiveBackgroundTryOn = require(script.FFlagAXPlusExclusiveBackgroundTryOn),
 	FFlagAXFixBackgroundGenerationResultMenuNavigation = require(script.FFlagAXFixBackgroundGenerationResultMenuNavigation),
 	FFlagAXSkipTapDetection = require(script.FFlagAXSkipTapDetection),
+	FFlagAXUnifiedEventPageContext = require(script.FFlagAXUnifiedEventPageContext),
 	FFlagAXReturnModeratedPlusExclusiveBackgrounds = require(script.FFlagAXReturnModeratedPlusExclusiveBackgrounds),
 	FFlagAXAddSectionsToItemInfoRowPrompt = require(script.FFlagAXAddSectionsToItemInfoRowPrompt),
 	FFlagAXSurfaceItemInfoRowPromptVR = require(script.FFlagAXSurfaceItemInfoRowPromptVR),
@@ -390,6 +391,7 @@
 	FFlagAXFixR6CharacterPlacement = require(script.FFlagAXFixR6CharacterPlacement),
 	FFlagAXFixWidgetListSeeAllListReuse = require(script.FFlagAXFixWidgetListSeeAllListReuse),
 	FFlagAXCatalogHttpLinkSalesTypeFilter = require(script.FFlagAXCatalogHttpLinkSalesTypeFilter),
+	FFlagAXRemoveDynamicHeadBadge = require(script.FFlagAXRemoveDynamicHeadBadge),
 	FFlagAXPhotoboothMomentsPage = require(script.FFlagAXPhotoboothMomentsPage),
 	FFlagAXIaBDiscountPriceLine = require(script.FFlagAXIaBDiscountPriceLine),
 	FFlagAXActionButtonRoundedRectCursor = require(script.FFlagAXActionButtonRoundedRectCursor)

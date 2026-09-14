@@ -1353,15 +1353,6 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exclusivo com o Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,hoje
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,nesta hora
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,neste mês
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,Restam {count} planos de fundo
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,Resta {count} plano de fundo
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,dias
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,horas
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,minutos
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,Reinicia em
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Descreva seu plano de fundo...
 Feature.Avatar.BackgroundGeneration.Status.Generating,Gerando seu plano de fundo...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparando seu plano de fundo...
@@ -1480,7 +1471,6 @@ Feature.Avatar.Label.ClassicTShirts,Camisetas clássicas
 Feature.Avatar.Label.ClearByCategory,Remover {category}
 Feature.Avatar.Label.Climb,Escalar
 Feature.Avatar.Label.ClimbAnimations,Animações de escalada
-Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"O nome só pode conter letras, números e espaços"
 Feature.Avatar.Label.CountSelected,{itemCount} selecionado(s)
 Feature.Avatar.Label.Creations,Criações
@@ -1592,7 +1582,6 @@ Feature.Avatar.Label.RecentlyWorn,Usados recentemente
 Feature.Avatar.Label.RemoveFromSetBody,"Este avatar será removido do conjunto, mas não será excluído."
 Feature.Avatar.Label.Replace,Substituir
 Feature.Avatar.Label.ResetToNewCharacter,Você está mudando para um novo personagem; gostaria de redefinir todos os itens de roupa ou mantê-los?
-Feature.Avatar.Label.ResetTryOn,Redefinir para o avatar atual
 Feature.Avatar.Label.Right,R
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,Braços direitos
@@ -1648,7 +1637,6 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,Camadas de maquiagem
 Feature.Avatar.Label.Title.ManageAvatars,Gerenciar avatares
-Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,Meu inventário
 Feature.Avatar.Label.Title.ProfilePhoto,Foto do perfil
 Feature.Avatar.Label.Title.ReplaceAvatar,Substituir avatar
@@ -1788,7 +1776,6 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,
-Feature.Avatar.Title.MyAvatar,Meu avatar
 Feature.Avatar.Title.NameAvatarOutfit,Dê um nome para o seu avatar
 Feature.Avatar.Title.NewCustomizeLook,Personalizar tem uma nova aparência!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Novo no Mercado
@@ -2066,7 +2053,6 @@ Feature.Build.Label.GamePlays,Jogadas
 Feature.Build.Label.GetMoreBuildUsage,Obtenha mais limite de uso para a função Criar
 Feature.Build.Label.Hi,Olá
 Feature.Build.Label.IconThumbnails,Ícone e miniaturas
-Feature.Build.Label.Images2D,Imagens 2D
 Feature.Build.Label.InProgress,Em andamento
 Feature.Build.Label.InputNeeded,Informações necessárias
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3257,6 +3243,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Remover dos amigos conf
 Feature.Friends.TrustedFriend.AddBack.Header,Pedido de amizade confiável
 Feature.Friends.TrustedFriend.Info.Modal.Header,Nova amizade confiável
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Adicionar aos amigos confiáveis
+Feature.Friends.TrustedFriend.Label.Title,Amigo confiável
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,Agora {name} faz parte dos seus amigos confiáveis
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Amizade confiável removida
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Pedido de amizade confiável enviado
@@ -3708,6 +3695,7 @@ Feature.Profile.Action.ShareProfile,Compartilhar perfil
 Feature.Profile.Action.ShareProfileLink,Compartilhe o link do perfil
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,
+Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,Usuário bloqueado
 Feature.Profile.Action.ViewFullProfile,Ver perfil completo
 Feature.Profile.Action.ViewProfile,
@@ -4352,6 +4340,7 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,
 Feature.VerificationUpsell.Action.EditPhoneNumber,Editar número de telefone
 Feature.VerificationUpsell.Action.EnableVoice,Ativar o Bate-papo de voz
+Feature.VerificationUpsell.Action.Logout,Sair mesmo assim
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

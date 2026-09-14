@@ -42,13 +42,51 @@ local function streamWords(p1)
 	return t
 end
 
+local list = {
+	{
+		nextPageToken = "mock-session-models-page-2",
+		models = {
+			{
+				path = "Workspace.CastleCourtyard",
+				name = "Castle Courtyard",
+				status = "ready",
+				imageUrl = "rbxasset://textures/ui/GuiImagePlaceholder.png",
+				boundingBox = { center = { 0, 12, 0 }, size = { 96, 24, 96 } }
+			},
+			{
+				path = "Workspace.PineTreeCluster",
+				name = "Pine Tree Cluster",
+				status = "pending",
+				boundingBox = { center = { 40, 18, -20 }, size = { 32, 36, 28 } }
+			},
+			{
+				path = "Workspace.RaceCar",
+				name = "Race Car",
+				status = "failed",
+				boundingBox = { center = { -28, 3, 14 }, size = { 14, 6, 24 } }
+			}
+		}
+	},
+	{
+		models = {
+			{
+				path = "Workspace.SpawnPlaza",
+				name = "Spawn Plaza",
+				status = "ready",
+				imageUrl = "rbxasset://textures/ui/GuiImagePlaceholder.png",
+				boundingBox = { center = { 0, 1, 0 }, size = { 64, 2, 64 } }
+			}
+		}
+	}
+}
+
 local function httpStatusForCode(p2)
 	-- upvalues: acpProtocolModule (ref)
 	return if p2 == acpProtocolModule.ErrorCodes.NotFound then 404 elseif p2 == acpProtocolModule.ErrorCodes.Gone then 410 elseif p2 == acpProtocolModule.ErrorCodes.Conflict then 409 elseif p2 == acpProtocolModule.ErrorCodes.UpstreamUnavailable then 502 elseif p2 == acpProtocolModule.ErrorCodes.Unauthorized then 401 elseif p2 == acpProtocolModule.ErrorCodes.Forbidden then 403 elseif p2 == acpProtocolModule.ErrorCodes.InternalError then 500 else 400
 end
 
 return function(p2)
-	-- upvalues: acpProtocolModule (ref), streamWords (ref), jsonError (ref), httpStatusForCode (ref), jsonOk (ref), httpService (ref), createCreatorAgentChatStoreModule (ref)
+	-- upvalues: acpProtocolModule (ref), streamWords (ref), list (ref), jsonError (ref), httpStatusForCode (ref), jsonOk (ref), httpService (ref), createCreatorAgentChatStoreModule (ref)
 	p2 = p2 or {}
 	local chunkDelay = p2.chunkDelay or 0.04
 	local t = {}
@@ -435,6 +473,33 @@ return function(p2)
 			
 			return { sessions = t_1 }, nil
 		end,
+		[acpProtocolModule.Methods.SessionListModels] = function(p9)
+			-- upvalues: t (ref), acpProtocolModule (copy), list (copy)
+			local var11, t_1
+			local sessionId = t[p9.sessionId]
+			
+			if sessionId == nil or sessionId.closedUtc ~= nil then
+				var11 = nil
+				t_1 = {
+					message = "session not found",
+					code = acpProtocolModule.ErrorCodes.NotFound
+				}
+			else
+				var11 = sessionId
+				t_1 = nil
+			end
+			if t_1 then
+				return nil, t_1
+			elseif p9.pageToken == nil then
+				return list[1], nil
+			elseif p9.pageToken == list[1].nextPageToken then
+				return list[2], nil
+			end
+			return nil, {
+				message = "invalid pageToken",
+				code = acpProtocolModule.ErrorCodes.InvalidParams
+			}
+		end,
 		[acpProtocolModule.Methods.SessionLoad] = function(p9)
 			-- upvalues: t (ref), acpProtocolModule (copy)
 			local var11, t_1
@@ -608,9 +673,9 @@ return function(p2)
 			local method = t_1[p9.method]
 			
 			if method == nil then
-				return jsonError(p9.id, acpProtocolModule.ErrorCodes.MethodNotFound, "Method not found: " .. p48.method, 404)
+				return jsonError(p9.id, acpProtocolModule.ErrorCodes.MethodNotFound, "Method not found: " .. p49.method, 404)
 			end
-			ok, status, var58 = pcall(method, p9.params or {})
+			ok, status, var61 = pcall(method, p9.params or {})
 			
 			return if ok then if var11 then jsonError(p9.id, var11.code, var11.message, httpStatusForCode(var11.code)) else jsonOk(p9.id, status) else jsonError(p9.id, acpProtocolModule.ErrorCodes.InternalError, tostring(status), 500)
 		end

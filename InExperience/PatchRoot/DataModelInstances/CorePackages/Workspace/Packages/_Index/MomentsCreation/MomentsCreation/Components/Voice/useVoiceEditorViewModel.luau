@@ -8,7 +8,7 @@ local useEffect = reactModule.useEffect
 local useState = reactModule.useState
 local useSignalState = signalsReactModule.useSignalState
 local _ = require(script.Parent.VoiceEditorView)
-local useDescriptionKeyboardInsetModule = require(momentsCreation.Hooks.useDescriptionKeyboardInset)
+local useOnScreenKeyboardHeightModule = require(momentsCreation.Hooks.useOnScreenKeyboardHeight)
 local computeVoiceButtonStateModule = require(momentsCreation.Utils.computeVoiceButtonState)
 local getFIntMomentsTTSDefaultVoiceIdModule = require(momentsCreation.Flags.GetFIntMomentsTTSDefaultVoiceId)
 local getFIntMomentsTTSMaxCharactersModule = require(momentsCreation.Flags.GetFIntMomentsTTSMaxCharacters)
@@ -20,6 +20,16 @@ local function _(p1)
 	return p1:gsub("^%s*(.-)%s*$", "%1")
 end
 
+local _ = function(p1, p2, p3)
+	if p1 == nil then
+		return false
+	end
+	local absolutePosition = p1.AbsolutePosition
+	local absoluteSize = p1.AbsoluteSize
+	
+	return absolutePosition.X <= p2 and (p2 <= absolutePosition.X + absoluteSize.X and (absolutePosition.Y <= p3 and p3 <= absolutePosition.Y + absoluteSize.Y))
+end
+
 local t = {
 	moderated = "Your script must follow the safety rules",
 	quotaExceeded = "You've hit the voiceover limit.",
@@ -28,69 +38,72 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: getFIntMomentsTTSMaxCharactersModule (ref), useDescriptionKeyboardInsetModule (ref), useState (ref), reactModule (ref), useSignalState (ref), useEffect (ref), signalsModule (ref), dialogTypeModule (ref), t (ref), useCallback (ref), var1 (ref), computeVoiceButtonStateModule (ref)
+	-- upvalues: getFIntMomentsTTSMaxCharactersModule (ref), useOnScreenKeyboardHeightModule (ref), useState (ref), reactModule (ref), useSignalState (ref), useEffect (ref), signalsModule (ref), dialogTypeModule (ref), t (ref), useCallback (ref), var1 (ref), computeVoiceButtonStateModule (ref)
 	local var2
 	local controller = p1.controller
 	local var3 = getFIntMomentsTTSMaxCharactersModule()
 	local playback = controller.preview.playback
 	local ttsAudio = controller.ttsAudio
 	assert(ttsAudio ~= nil, "VoiceEditor requires controller.ttsAudio")
-	local var4, var5 = useDescriptionKeyboardInsetModule(true)
-	local var6, var7 = useState("")
+	local var4 = useOnScreenKeyboardHeightModule() > 0
+	local var5, var6 = useState("")
+	local var7 = reactModule.useRef(nil)
 	local var8 = reactModule.useRef(nil)
-	local var9, var10 = useState(false)
+	local var9 = reactModule.useRef(nil)
+	local var10 = reactModule.useRef(false)
 	local var11, var12 = useState(false)
-	local var13, var14 = useState("")
-	local var15 = reactModule.useRef("")
-	local var16 = reactModule.useRef(false)
-	local var17 = reactModule.useRef(nil)
-	local var18 = reactModule.useRef(0)
-	local var19 = useSignalState(ttsAudio.getState)
-	local var20 = useSignalState(ttsAudio.getErrorReason)
-	local var21 = useSignalState(ttsAudio.getTimeLength)
-	local var22 = useSignalState(ttsAudio.getWaveform)
-	local var23 = reactModule.useRef(false)
-	local var24, var25 = useState(controller.getActiveSession(false))
+	local var13, var14 = useState(false)
+	local var15, var16 = useState("")
+	local var17 = reactModule.useRef("")
+	local var18 = reactModule.useRef(false)
+	local var19 = reactModule.useRef(nil)
+	local var20 = reactModule.useRef(0)
+	local var21 = useSignalState(ttsAudio.getState)
+	local var22 = useSignalState(ttsAudio.getErrorReason)
+	local var23 = useSignalState(ttsAudio.getTimeLength)
+	local var24 = useSignalState(ttsAudio.getWaveform)
+	local var25 = reactModule.useRef(false)
+	local var26, var27 = useState(controller.getActiveSession(false))
 	useEffect(function()
-		-- upvalues: signalsModule (copy), var25 (ref), controller (ref)
+		-- upvalues: signalsModule (copy), var27 (ref), controller (ref)
 		return signalsModule.createEffect(function(p2)
-			-- upvalues: var25 (copy), controller (copy)
-			var25(controller.getActiveSession(p2))
+			-- upvalues: var27 (copy), controller (copy)
+			var27(controller.getActiveSession(p2))
 		end)
 	end, { controller })
 	useEffect(function()
-		-- upvalues: var23 (ref), var24 (ref), var7 (ref), var15 (ref), var10 (ref), var14 (ref), var16 (ref), var8 (ref)
-		if var23.current then return end
-		if var24 == nil then return end
-		local draft = var24.getDraft(false)
+		-- upvalues: var25 (ref), var26 (ref), var6 (ref), var17 (ref), var12 (ref), var16 (ref), var18 (ref), var7 (ref)
+		if var25.current then return end
+		if var26 == nil then return end
+		local draft = var26.getDraft(false)
 		
 		if draft == nil or draft.text == nil or #draft.text <= 0 then
-			var23.current = true
+			var25.current = true
 		else
-			var23.current = true
-			var7(draft.text)
-			var15.current = draft.text
-			var10(true)
-			var14(draft.text)
-			var16.current = true
+			var25.current = true
+			var6(draft.text)
+			var17.current = draft.text
+			var12(true)
+			var16(draft.text)
+			var18.current = true
 			
-			if var8.current then
-				var8.current.Text = draft.text
+			if var7.current then
+				var7.current.Text = draft.text
 				
 				return
 			end
 		end
-	end, { var24 })
+	end, { var26 })
 	useEffect(function()
-		-- upvalues: var19 (ref), var15 (ref), var10 (ref), var16 (ref), var18 (ref), playback (ref), ttsAudio (ref), controller (ref), dialogTypeModule (copy), t (copy), var17 (ref)
-		if var19 == "ready" and var15.current ~= "" then
-			var10(true)
+		-- upvalues: var21 (ref), var17 (ref), var12 (ref), var18 (ref), var20 (ref), playback (ref), ttsAudio (ref), controller (ref), dialogTypeModule (copy), t (copy), var19 (ref)
+		if var21 == "ready" and var17.current ~= "" then
+			var12(true)
 			
-			if var16.current then
+			if var18.current then
 				return
 			else
-				var16.current = true
-				var18.current = 0
+				var18.current = true
+				var20.current = 0
 				playback.seek(0)
 				ttsAudio.seek(0)
 				playback.play()
@@ -98,8 +111,8 @@ return function(p1)
 				
 				return
 			end
-		elseif var19 == "error" then
-			var10(false)
+		elseif var21 == "error" then
+			var12(false)
 			local errorReason = ttsAudio.getErrorReason(false)
 			
 			if errorReason ~= "moderated" then
@@ -108,11 +121,11 @@ return function(p1)
 					modalProps = {
 						message = t[errorReason] or "Voiceover generation failed.",
 						onTryAgain = function()
-							-- upvalues: controller (copy), var17 (copy)
+							-- upvalues: controller (copy), var19 (copy)
 							controller.dismissModal()
 							
-							if var17.current ~= nil then
-								var17.current()
+							if var19.current ~= nil then
+								var19.current()
 							end
 						end,
 						onDismiss = controller.dismissModal
@@ -120,24 +133,24 @@ return function(p1)
 				})
 			end
 		end
-	end, { var19 })
-	local var26, var27 = useState(playback.getIsPlaying(false))
+	end, { var21 })
+	local var28, var29 = useState(playback.getIsPlaying(false))
 	useEffect(function()
-		-- upvalues: signalsModule (copy), var27 (ref), playback (ref)
+		-- upvalues: signalsModule (copy), var29 (ref), playback (ref)
 		return signalsModule.createEffect(function(p2)
-			-- upvalues: var27 (copy), playback (copy)
-			var27(playback.getIsPlaying(p2))
+			-- upvalues: var29 (copy), playback (copy)
+			var29(playback.getIsPlaying(p2))
 		end)
 	end, { playback })
 	useEffect(function()
-		-- upvalues: var21 (ref), playback (ref), ttsAudio (ref)
-		if var21 <= 0 then return end
-		local var28 = 0 + var21
+		-- upvalues: var23 (ref), playback (ref), ttsAudio (ref)
+		if var23 <= 0 then return end
+		local var30 = 0 + var23
 		
 		if playback.getIsPlaying(false) then
 			local position = playback.getPosition(false)
 			
-			if position >= 0 and position < var28 then
+			if position >= 0 and position < var30 then
 				ttsAudio.play()
 				
 				return
@@ -145,178 +158,245 @@ return function(p1)
 		else
 			ttsAudio.pause()
 		end
-	end, { var26, var21 })
+	end, { var28, var23 })
 	useEffect(function()
-		-- upvalues: var21 (ref), signalsModule (copy), playback (ref), var18 (ref), ttsAudio (ref)
-		if var21 <= 0 then
+		-- upvalues: var23 (ref), signalsModule (copy), playback (ref), var20 (ref), ttsAudio (ref)
+		if var23 <= 0 then
 			return
 		end
-		local var28 = 0 + var21
+		local var30 = 0 + var23
 		
 		return signalsModule.createEffect(function(p2)
-			-- upvalues: playback (copy), var18 (copy), var28 (ref), ttsAudio (copy)
+			-- upvalues: playback (copy), var20 (copy), var30 (ref), ttsAudio (copy)
 			local position = playback.getPosition(p2)
-			local current = var18.current
-			var18.current = position
+			local current = var20.current
+			var20.current = position
 			
-			if current - position > 0.5 and playback.getIsPlaying(false) and (position >= 0 and position < var28) then
+			if current - position > 0.5 and playback.getIsPlaying(false) and (position >= 0 and position < var30) then
 				ttsAudio.seek(position - 0)
 				ttsAudio.play()
 			end
 		end)
-	end, { var21 })
-	local var28 = useCallback(function(p2)
-		-- upvalues: var21 (ref), ttsAudio (ref)
-		if var21 <= 0 then return end
-		if p2 >= 0 and p2 < 0 + var21 then
+	end, { var23 })
+	local var30 = useCallback(function(p2)
+		-- upvalues: var23 (ref), ttsAudio (ref)
+		if var23 <= 0 then return end
+		if p2 >= 0 and p2 < 0 + var23 then
 			ttsAudio.seek(p2 - 0)
 		end
-	end, { var21 })
-	local var29 = useCallback(function(p2)
-		-- upvalues: var7 (ref), controller (ref), var1 (copy)
-		local var30 = p2.Text:gsub("[\r\n]+", " ")
+	end, { var23 })
+	local var31 = useCallback(function(p2)
+		-- upvalues: var6 (ref), controller (ref), var1 (copy)
+		local var32 = p2.Text:gsub("[\r\n]+", " ")
 		
-		if var30 ~= p2.Text then
-			p2.Text = var30
+		if var32 ~= p2.Text then
+			p2.Text = var32
 		end
-		var7(var30)
+		var6(var32)
 		local activeSession = controller.getActiveSession(false)
 		
 		if activeSession == nil then
 			return
 		end
-		activeSession.update(if var30 ~= "" then nil else { startTime = 0, text = var30, voiceId = var1 })
+		activeSession.update(if var32 ~= "" then nil else { startTime = 0, text = var32, voiceId = var1 })
 	end, { controller })
-	local var30 = computeVoiceButtonStateModule({
-		text = var6,
-		lastGeneratedText = var15.current,
-		lastSavedText = var13,
+	local var32 = computeVoiceButtonStateModule({
+		text = var5,
+		lastGeneratedText = var17.current,
+		lastSavedText = var15,
 		maxChars = var3,
-		ttsState = var19,
-		errorReason = var20,
-		hasGenerated = var9,
-		hasCleared = var11
+		ttsState = var21,
+		errorReason = var22,
+		hasGenerated = var11,
+		hasCleared = var13
 	})
-	local isGenerating = var30.isGenerating
-	local charCount = var30.charCount
-	local isOverLimit = var30.isOverLimit
-	local canGenerate = var30.canGenerate
-	local showSave = var30.showSave
-	local isModerated = var30.isModerated
+	local isGenerating = var32.isGenerating
+	local charCount = var32.charCount
+	local isOverLimit = var32.isOverLimit
+	local canGenerate = var32.canGenerate
+	local var33 = var32.showSave and not var4
+	local isModerated = var32.isModerated
 	local isOverLimit_1 = isOverLimit or isModerated
-	local var31 = reactModule.useRef(false)
+	local var34 = reactModule.useRef(false)
 	useEffect(function()
-		-- upvalues: var19 (ref), var31 (ref)
-		if var19 ~= "loading" then
-			var31.current = false
+		-- upvalues: var21 (ref), var34 (ref)
+		if var21 ~= "loading" then
+			var34.current = false
 		end
-	end, { var19 })
-	local var32 = useCallback(function()
-		-- upvalues: var31 (ref), ttsAudio (ref), canGenerate (ref), var6 (ref), var15 (ref), controller (ref), var10 (ref), var12 (ref), var1 (copy), var16 (ref)
-		if var31.current then return end
+	end, { var21 })
+	local var35 = useCallback(function()
+		-- upvalues: var34 (ref), ttsAudio (ref), canGenerate (ref), var7 (ref), var5 (ref), var17 (ref), controller (ref), var12 (ref), var14 (ref), var1 (copy), var18 (ref)
+		if var34.current then return end
 		if ttsAudio.getState(false) == "loading" then return end
 		if not canGenerate then return end
-		var31.current = true
-		local var33 = var6:gsub("^%s*(.-)%s*$", "%1")
-		var15.current = var33
+		if var7.current ~= nil then
+			var7.current:ReleaseFocus()
+		end
+		var34.current = true
+		local var36 = var5:gsub("^%s*(.-)%s*$", "%1")
+		var17.current = var36
 		local activeSession = controller.getActiveSession(false)
 		
-		if var33 == "" then
-			var31.current = false
+		if var36 == "" then
+			var34.current = false
 			controller.clearActiveTool()
-			var10(false)
-			var12(true)
+			var12(false)
+			var14(true)
 			
 			return
 		end
-		var12(false)
+		var14(false)
 		
 		if activeSession ~= nil then
-			activeSession.update({ startTime = 0, text = var33, voiceId = var1 })
+			activeSession.update({ startTime = 0, text = var36, voiceId = var1 })
 		end
-		var16.current = false
-		ttsAudio.generate(var33, var1)
-	end, { var6, controller, canGenerate })
-	var17.current = var32
-	local var33 = useCallback(function()
-		-- upvalues: var15 (ref), controller (ref), var1 (copy), var14 (ref)
-		local current = var15.current
+		var18.current = false
+		ttsAudio.generate(var36, var1)
+	end, { var5, controller, canGenerate })
+	var19.current = var35
+	local var36 = useCallback(function()
+		-- upvalues: var17 (ref), controller (ref), var1 (copy), var16 (ref)
+		local current = var17.current
 		local activeSession = controller.getActiveSession(false)
 		
 		if activeSession ~= nil then
 			activeSession.update(if current ~= "" then nil else { startTime = 0, text = current, voiceId = var1 })
 		end
-		var14(current)
+		var16(current)
 		controller.commitActiveTool()
 	end, { controller })
-	local var34 = useCallback(function()
-		-- upvalues: controller (ref), var7 (ref), var8 (ref), var10 (ref), var12 (ref), var15 (ref), var16 (ref), var14 (ref), dialogTypeModule (copy)
+	local var37 = useCallback(function()
+		-- upvalues: var10 (ref), var4 (ref), var7 (ref), controller (ref), var6 (ref), var12 (ref), var14 (ref), var17 (ref), var18 (ref), var16 (ref), dialogTypeModule (copy)
+		var10.current = var4
+		
+		local function _()
+			-- upvalues: var10 (copy), var7 (copy)
+			if var10.current and var7.current ~= nil then
+				var7.current:CaptureFocus()
+			end
+		end
+		
 		controller.showModal({
 			modalType = dialogTypeModule.VoiceoverDelete,
 			modalProps = {
 				onConfirm = function()
-					-- upvalues: controller (copy), var7 (copy), var8 (copy), var10 (copy), var12 (copy), var15 (copy), var16 (copy), var14 (copy)
+					-- upvalues: controller (copy), var6 (copy), var7 (copy), var12 (copy), var14 (copy), var17 (copy), var18 (copy), var16 (copy), var10 (copy)
 					controller.dismissModal()
-					var7("")
+					var6("")
 					
-					if var8.current then
-						var8.current.Text = ""
+					if var7.current then
+						var7.current.Text = ""
 					end
-					var10(false)
 					var12(false)
-					var15.current = ""
-					var16.current = false
+					var14(false)
+					var17.current = ""
+					var18.current = false
 					controller.clearActiveTool()
 					controller.saveActiveTool()
-					var14("")
+					var16("")
+					
+					if var10.current and var7.current ~= nil then
+						var7.current:CaptureFocus()
+					end
 				end,
-				onCancel = controller.dismissModal
+				onCancel = function()
+					-- upvalues: controller (copy), var10 (copy), var7 (copy)
+					controller.dismissModal()
+					
+					if var10.current and var7.current ~= nil then
+						var7.current:CaptureFocus()
+					end
+				end
 			}
 		})
-	end, { controller })
-	local var35, var36 = useState(controller.preview.getCapture(false))
-	local var37, var38 = useState(playback.getDuration(false))
+	end, { controller, var4 })
+	local var38 = useCallback(function(_, _, p2)
+		-- upvalues: var8 (ref), var33 (ref), var36 (ref), var35 (ref), var9 (ref), var37 (ref)
+		if p2 == nil then return end
+		local var39
+		local position = p2.Position
+		local current = var8.current
+		local x = position.X
+		local y = position.Y
+		
+		if current == nil then
+			var39 = false
+		else
+			local absolutePosition = current.AbsolutePosition
+			local absoluteSize = current.AbsoluteSize
+			var39 = absolutePosition.X <= x and (x <= absolutePosition.X + absoluteSize.X and (absolutePosition.Y <= y and y <= absolutePosition.Y + absoluteSize.Y))
+		end
+		if var39 then
+			if var33 then
+				var36()
+				
+				return
+			end
+			var35()
+			
+			return
+		else
+			local var40
+			local current_1 = var9.current
+			local x_1 = position.X
+			local y_1 = position.Y
+			
+			if current_1 == nil then
+				var40 = false
+			else
+				local absolutePosition = current_1.AbsolutePosition
+				local absoluteSize = current_1.AbsoluteSize
+				var40 = absolutePosition.X <= x_1 and (x_1 <= absolutePosition.X + absoluteSize.X and (absolutePosition.Y <= y_1 and y_1 <= absolutePosition.Y + absoluteSize.Y))
+			end
+			if var40 then
+				var37()
+			end
+		end
+	end, { var33, var36, var35, var37 })
+	local var39, var40 = useState(controller.preview.getCapture(false))
+	local var41, var42 = useState(playback.getDuration(false))
 	useEffect(function()
-		-- upvalues: signalsModule (copy), var36 (ref), controller (ref), var38 (ref), playback (ref)
+		-- upvalues: signalsModule (copy), var40 (ref), controller (ref), var42 (ref), playback (ref)
 		return signalsModule.createEffect(function(p2)
-			-- upvalues: var36 (copy), controller (copy), var38 (copy), playback (copy)
-			var36(controller.preview.getCapture(p2))
-			var38(playback.getDuration(p2))
+			-- upvalues: var40 (copy), controller (copy), var42 (copy), playback (copy)
+			var40(controller.preview.getCapture(p2))
+			var42(playback.getDuration(p2))
 		end)
 	end, { controller, playback })
-	local var39 = if isOverLimit then "Exceeds character limit" elseif isModerated then "Your script must follow the safety rules" elseif isGenerating then "Creating your voiceover..." else "Voice trimmed to video length"
+	local var43 = if isOverLimit then "Exceeds character limit" elseif isModerated then "Your script must follow the safety rules" elseif isGenerating then "Creating your voiceover..." else "Voice trimmed to video length"
 	
-	if var19 ~= "ready" then
-		var2 = var19 == "playing" and (var21 > 0 and var37 > 0)
+	if var21 ~= "ready" then
+		var2 = var21 == "playing" and (var23 > 0 and var41 > 0)
 	end
 	return {
 		placeholderText = "Type what you want your voiceover to say. Up to 300 characters.",
 		createText = "Create voiceover",
 		saveText = "Save",
 		layoutOrder = p1.layoutOrder,
-		keyboardInset = var4,
-		onContainerMeasured = var5,
 		playback = playback,
-		capture = var35,
-		onTimelineSeek = var28,
+		capture = var39,
+		onTimelineSeek = var30,
 		showAudioWaveform = var2,
-		audioDuration = var21,
-		videoDuration = var37,
-		waveformSamples = var22,
-		text = var6,
-		textBoxRef = var8,
-		onTextChanged = var29,
+		audioDuration = var23,
+		videoDuration = var41,
+		waveformSamples = var24,
+		text = var5,
+		textBoxRef = var7,
+		onTextChanged = var31,
+		onTextBoxFocusLost = var38,
+		createButtonRef = var8,
+		deleteButtonRef = var9,
 		isGenerating = isGenerating,
 		isInputInvalid = isOverLimit_1,
-		helperText = var39,
+		helperText = var43,
 		charCount = charCount,
 		maxChars = var3,
 		isOverLimit = isOverLimit,
-		showSave = showSave,
+		showSave = var33,
 		canGenerate = canGenerate,
-		onSave = var33,
-		onCreateVoiceover = var32,
+		onSave = var36,
+		onCreateVoiceover = var35,
 		showDelete = var2,
-		onDelete = var34
+		onDelete = var37
 	}
 end

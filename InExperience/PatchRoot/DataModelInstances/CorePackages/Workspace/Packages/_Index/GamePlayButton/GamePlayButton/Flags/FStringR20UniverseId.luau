@@ -1,1 +1,0 @@
-﻿return game:DefineFastString("R20UniverseId", "")

@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("RobloxAppNavigation").Parent.React).createContext(nil)

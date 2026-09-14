@@ -82,6 +82,10 @@ while not localPlayer do
 	playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
 	localPlayer = playersService.LocalPlayer
 end
+if game:GetEngineFeature("IsViewingCloudEdit") then
+	local buildExperienceModule = require(corePackagesService.Workspace.Packages.BuildExperience)
+	runService.RenderStepped:Connect(buildExperienceModule.createTeamCreateFreeCamera(workspace.CurrentCamera, userInputService, buildExperienceModule.GetModelLibraryStore()).step)
+end
 if game:GetEngineFeature("SoundServiceControlsDefaultListenerLocation") then
 	scriptContextService:AddCoreScriptLocal("CoreScripts/DefaultListenerLocation", script.Parent)
 end
@@ -148,6 +152,7 @@ end
 if getFFlagChromeCentralizedConfiguration() then
 	coroutine.wrap(safeRequire)(modules.Chrome.ConfigureChrome)
 end
+local status
 coroutine.wrap(safeRequire)(modules.SelfieView)
 coroutine.wrap(safeRequire)(modules.TopBar)
 
@@ -160,14 +165,18 @@ end
 if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAppNavMyStatsTab then
 	local var2 = coroutine.wrap(safeRequire)(corePackagesService.Workspace.Packages.BuildExperiencePlaytestLaunch.BuildModeLaunch)
 	local var3 = coroutine.wrap(safeRequire)(corePackagesService.Workspace.Packages.BuildExperience)
-	local var4 = var3 and (var2 and var2:hasBuildMode())
+	status = var3 and (var2 and var2:hasBuildMode())
+	local var4 = if status ~= true then game:GetEngineFeature("IsViewingCloudEdit") else true
 	
 	if var3 then
-		var3.mountCreatorAgentResumeToastReceiver(var4 == true)
+		var3.mountCreatorAgentResumeToastReceiver(status == true)
 	end
 	if var3 and var4 then
 		game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat, false)
 		var3.mountChatSheet()
+	end
+	if var3 and require(corePackagesService.Workspace.Packages.SharedFlags).FFlagBuildExperienceAssetLibrary and (status == true or game:GetEngineFeature("IsViewingCloudEdit")) then
+		var3.mountModelLibrary(var2:takeModelLibraryLaunchData())
 	end
 end
 if fFlagTopBarRefactor then
@@ -225,7 +234,7 @@ scriptContextService:AddCoreScriptLocal("CoreScripts/PlayerRagdoll", robloxGui)
 coroutine.wrap(safeRequire)(robloxGui.Modules.ChatSelector)
 coroutine.wrap(safeRequire)(robloxGui.Modules.PlayerList.PlayerListManager)
 local _ = nil
-local ok, status = pcall(function()
+ok, status = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserRoactBubbleChatBeta")
 end)
 
@@ -268,13 +277,13 @@ scriptContextService:AddCoreScriptLocal("CoreScripts/FriendPlayerPrompt", roblox
 
 if enablePromptAgeCheckListener then
 	local var6
-	local promptAgeCheckHandler = modules.PromptAgeCheckHandler
-	local ok_1, status_1 = pcall(require, promptAgeCheckHandler)
+	status = modules.PromptAgeCheckHandler
+	local ok_1, status_1 = pcall(require, status)
 	
 	if ok_1 then
 		var6 = status_1
 	else
-		warn("Failure to Start CoreScript module " .. promptAgeCheckHandler.Name .. ".\n" .. status_1)
+		warn("Failure to Start CoreScript module " .. status.Name .. ".\n" .. status_1)
 		var6 = nil
 	end
 	if var6 then

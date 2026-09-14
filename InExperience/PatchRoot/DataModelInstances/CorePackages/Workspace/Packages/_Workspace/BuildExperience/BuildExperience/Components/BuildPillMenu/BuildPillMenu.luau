@@ -9,6 +9,7 @@ local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 local agentDetailMenuModule = require(script.Parent.AgentDetailMenu)
 local buildOverflowMenuButtonModule = require(script.Parent.BuildOverflowMenuButton)
+local captureModeButtonModule = require(script.Parent.CaptureModeButton)
 local stopPlaytestButtonModule = require(script.Parent.StopPlaytestButton)
 local getBuildOverflowMenuStoreModule = require(buildExperience.Stores.GetBuildOverflowMenuStore)
 local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
@@ -19,12 +20,12 @@ local fFlagBuildExperienceRemoveAgentTaskUiModule = require(buildExperience.Flag
 local fFlagBuildExperienceMenuImprovementsModule = require(buildExperience.Flags.FFlagBuildExperienceMenuImprovements)
 
 return function(p1)
-	-- upvalues: getBuildOverflowMenuStoreModule (ref), publishStatusModule (ref), reactModule (ref), view (ref), fFlagBuildExperienceMenuImprovementsModule (ref), stopPlaytestButtonModule (ref), leaveExperienceModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), agentDetailMenuModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), buildOverflowMenuButtonModule (ref)
+	-- upvalues: getBuildOverflowMenuStoreModule (ref), publishStatusModule (ref), reactModule (ref), view (ref), fFlagBuildExperienceMenuImprovementsModule (ref), stopPlaytestButtonModule (ref), leaveExperienceModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), agentDetailMenuModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), captureModeButtonModule (ref), buildOverflowMenuButtonModule (ref)
 	local var1 = publishStatusModule.usePublishStatus(p1.target)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		Pill = reactModule.createElement(view, {
-			tag = "row align-y-center gap-xsmall size-0-1100 auto-x padding-x-xsmall radius-circle clip bg-over-media-0",
+			tag = "row align-y-center gap-xsmall auto-xy padding-x-xsmall radius-circle clip bg-over-media-0",
 			Position = p1.position,
 			AnchorPoint = p1.anchorPoint,
 			LayoutOrder = p1.layoutOrder,
@@ -50,8 +51,9 @@ return function(p1)
 				size = inputSize.Medium,
 				variant = buttonVariant.Utility
 			}) else nil,
+			CaptureMode = if p1.onOpenCaptureMode ~= nil then nil else reactModule.createElement(captureModeButtonModule, { layoutOrder = 3, onActivated = p1.onOpenCaptureMode }),
 			Overflow = reactModule.createElement(buildOverflowMenuButtonModule, {
-				layoutOrder = 3,
+				layoutOrder = 4,
 				icon = iconName.ThreeDotsHorizontal,
 				store = p1.store or getBuildOverflowMenuStoreModule(),
 				target = p1.target,

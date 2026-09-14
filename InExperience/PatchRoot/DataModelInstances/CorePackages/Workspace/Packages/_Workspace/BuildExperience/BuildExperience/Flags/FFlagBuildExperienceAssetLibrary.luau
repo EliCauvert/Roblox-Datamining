@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BuildExperienceAssetLibrary", false)
+﻿return require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags).FFlagBuildExperienceAssetLibrary

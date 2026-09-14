@@ -18,19 +18,14 @@ local function ChatAppInner(p1)
 	
 	return reactModule.createElement(foundationModule.View, { Size = p1.Size or UDim2.fromScale(1, 1) }, {
 		chatView = reactModule.createElement(foundationModule.View, {
-			tag = "col fill clip",
+			tag = "col fill size-full clip",
 			cornerRadius = if not fFlagExpChatTextChannelWindowThemeByBackgroundModule then UDim.new(0, var1.Radius.Medium) else nil,
-			Size = UDim2.fromScale(1, 1),
 			backgroundStyle = if not fFlagExpChatTextChannelWindowThemeByBackgroundModule then {
 				Transparency = 0.3,
 				Color3 = var1.DarkMode.Surface.Surface_100.Color3
 			} else nil
 		}, {
-			messageList = reactModule.createElement(foundationModule.View, {
-				tag = "fill",
-				LayoutOrder = var2(),
-				Size = UDim2.fromScale(1, 0)
-			}, {
+			messageList = reactModule.createElement(foundationModule.View, { tag = "fill size-full-0", LayoutOrder = var2() }, {
 				content = reactModule.createElement(messageListAreaModule, {
 					channelState = p1.channelState,
 					messagesSignal = p1.messagesSignal,
@@ -39,9 +34,8 @@ local function ChatAppInner(p1)
 				})
 			}),
 			inputBar = reactModule.createElement(foundationModule.View, {
-				tag = "auto-y padding-small",
-				LayoutOrder = var2(),
-				Size = UDim2.new(1, 0, 0, 0)
+				tag = "size-full-0 auto-y padding-small",
+				LayoutOrder = var2()
 			}, {
 				host = reactModule.createElement(textChatWindowInputBarHostModule, {
 					targetChannel = p1.targetChannel,

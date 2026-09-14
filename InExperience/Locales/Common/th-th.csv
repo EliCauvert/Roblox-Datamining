@@ -1336,6 +1336,15 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,พื้นหลังสุดพิเศษเมื่อสมัคร Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,ในวันนี้
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,ในชั่วโมงนี้
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,ในเดือนนี้
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,เผยแพร่พื้นหลังได้อีก {count} ครั้ง
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,ชั่วโมง
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,นาที
+Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,รีเซ็ตใน
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,อธิบายพื้นหลังของคุณ...
 Feature.Avatar.BackgroundGeneration.Status.Generating,กำลังสร้างพื้นหลังของคุณ...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,กำลังเตรียมพื้นหลังของคุณ...
@@ -1454,6 +1463,7 @@ Feature.Avatar.Label.ClassicTShirts,เสื้อยืดแบบคลา�
 Feature.Avatar.Label.ClearByCategory,ถอด{category}
 Feature.Avatar.Label.Climb,ปีน
 Feature.Avatar.Label.ClimbAnimations,แอนิเมชันการปีน
+Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,ชื่อจะต้องประกอบด้วยตัวหนังสือ ตัวเลข และช่องว่างเท่านั้น
 Feature.Avatar.Label.CountSelected,เลือกแล้ว {itemCount} ไอเท็ม
 Feature.Avatar.Label.Creations,ผลงานสร้างสรรค์
@@ -1565,6 +1575,7 @@ Feature.Avatar.Label.RecentlyWorn,สวมใส่ล่าสุด
 Feature.Avatar.Label.RemoveFromSetBody,อวาตาร์เหล่านี้จะถูกลบออกจากเซ็ต แต่ตัวอวาตาร์จะไม่ถูกลบ
 Feature.Avatar.Label.Replace,แทนที่
 Feature.Avatar.Label.ResetToNewCharacter,คุณกำลังสลับไปยังตัวละครใหม่ คุณต้องการรีเซ็ตไอเท็มเครื่องแต่งกายทั้งหมดหรือเก็บไว้?
+Feature.Avatar.Label.ResetTryOn,รีเซ็ตเป็นอวาตาร์ปัจจุบัน
 Feature.Avatar.Label.Right,R
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,
@@ -1620,6 +1631,7 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,การแต่งหน้าซ้อนกัน
 Feature.Avatar.Label.Title.ManageAvatars,จัดการอวาตาร์
+Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,คลังไอเท็มของฉัน
 Feature.Avatar.Label.Title.ProfilePhoto,รูปโปรไฟล์
 Feature.Avatar.Label.Title.ReplaceAvatar,แทนที่อวาตาร์
@@ -1759,6 +1771,7 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,เคลื่อนย้าย
+Feature.Avatar.Title.MyAvatar,
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,การปรับแต่งมาพร้อมกับโฉมใหม่!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,ใหม่ในมาร์เก็ตเพลส
@@ -2036,7 +2049,6 @@ Feature.Build.Label.GamePlays,จำนวนการเล่นเกม
 Feature.Build.Label.GetMoreBuildUsage,รับโควต้าการใช้งาน Build เพิ่ม
 Feature.Build.Label.Hi,สวัสดี
 Feature.Build.Label.IconThumbnails,ไอคอนและภาพขนาดย่อ
-Feature.Build.Label.Images2D,ภาพ 2D
 Feature.Build.Label.InProgress,อยู่ระหว่างดำเนินการ
 Feature.Build.Label.InputNeeded,ต้องกรอกข้อมูล
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3227,6 +3239,7 @@ Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,ลบเพื่อ�
 Feature.Friends.TrustedFriend.AddBack.Header,คำขอเป็นเพื่อนที่เชื่อได้
 Feature.Friends.TrustedFriend.Info.Modal.Header,เพื่อนที่เชื่อได้รายใหม่
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,เพิ่มเพื่อนที่เชื่อได้
+Feature.Friends.TrustedFriend.Label.Title,เพื่อนที่เชื่อได้
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} เป็นเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,ลบเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,ส่งคำขอเป็นเพื่อนที่เชื่อได้แล้ว
@@ -3677,6 +3690,7 @@ Feature.Profile.Action.ShareProfile,แชร์โปรไฟล์
 Feature.Profile.Action.ShareProfileLink,แชร์ลิงก์โปรไฟล์
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,แชร์รหัส QR
+Feature.Profile.Action.Trade,แลกเปลี่ยน
 Feature.Profile.Action.UserBlocked,บล็อคผู้ใช้นี้แล้ว
 Feature.Profile.Action.ViewFullProfile,ดูโปรไฟล์แบบเต็ม
 Feature.Profile.Action.ViewProfile,
@@ -4323,6 +4337,7 @@ Feature.VerificationUpsell.Action.Continue,
 Feature.VerificationUpsell.Action.DontLeave,ไม่ต้องการออก
 Feature.VerificationUpsell.Action.EditPhoneNumber,แก้ไขหมายเลขโทรศัพท์
 Feature.VerificationUpsell.Action.EnableVoice,เปิดใช้งานการแชทด้วยเสียง
+Feature.VerificationUpsell.Action.Logout,ลงชื่อออกเลย
 Feature.VerificationUpsell.Action.Next,
 Feature.VerificationUpsell.Action.NotNow,
 Feature.VerificationUpsell.Action.NotNow.2,

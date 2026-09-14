@@ -18,7 +18,6 @@ local fFlagLuaAppTextOnlyPlayButton = require(parent.SharedFlags).FFlagLuaAppTex
 local fFlagLuaAppIconTextPlayButton = require(parent.SharedFlags).FFlagLuaAppIconTextPlayButton
 local fFlagLuaAppUpdatePlayButtonText = require(parent.SharedFlags).FFlagLuaAppUpdatePlayButtonText
 local fFlagLuaAppPlayButtonPrivatePT = require(parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePT
-local fFlagEnableGameJoinEarlyAccess = require(parent.SharedFlags).FFlagEnableGameJoinEarlyAccess
 local images = UIBloxModule.App.ImageSet.Images
 local play = images["icons/common/play"]
 local unavailable = images["icons/status/unavailable"]
@@ -37,7 +36,7 @@ playButton.validateProps = tModule.strictInterface({
 })
 
 function playButton.renderWithLocalization(p1, p2)
-	-- upvalues: fFlagLuaAppEnablePlaySquadButton (ref), playButtonStatesModule (ref), fFlagLuaAppPlayButtonLoadingPrimary (ref), buttonType (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), play (ref), getFFlagIsSquadEnabled (ref), robux (ref), fFlagLuaAppPlayButtonPrivatePT (ref), unavailable (ref), fFlagEnableGameJoinEarlyAccess (ref), roactModule (ref), comboButton (ref), truncationCollapse (ref), button (ref), fFlagLuaAppPlayLoadingClickTelemetryMobile (ref), reactModule (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref)
+	-- upvalues: fFlagLuaAppEnablePlaySquadButton (ref), playButtonStatesModule (ref), fFlagLuaAppPlayButtonLoadingPrimary (ref), buttonType (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), play (ref), getFFlagIsSquadEnabled (ref), robux (ref), fFlagLuaAppPlayButtonPrivatePT (ref), unavailable (ref), roactModule (ref), comboButton (ref), truncationCollapse (ref), button (ref), fFlagLuaAppPlayLoadingClickTelemetryMobile (ref), reactModule (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref)
 	local size = p1.props.Size
 	local layoutOrder = p1.props.LayoutOrder
 	local price = p1.props.price
@@ -93,10 +92,6 @@ function playButton.renderWithLocalization(p1, p2)
 	elseif playButtonState == playButtonStatesModule.UnplayableOther then
 		secondary = buttonType.Secondary
 		var5 = unavailable
-		unavailable_1 = p2.unavailable
-		var2 = true
-	elseif fFlagEnableGameJoinEarlyAccess and playButtonState == playButtonStatesModule.EarlyAccessLocked then
-		secondary = buttonType.Secondary
 		unavailable_1 = p2.unavailable
 		var2 = true
 	else
