@@ -20,9 +20,9 @@ return function()
 		setBelowFoldIntegrations = var6,
 		getSessionActionIntegrations = var7,
 		setSessionActionIntegrations = var8,
-		getScrollableWidgetIntegrations = var9,
-		setScrollableWidgetIntegrations = var10,
-		getFixedFooterWidgetIntegrations = var11,
-		setFixedFooterWidgetIntegrations = var12
+		getScrollableContentTopWidgetIntegrations = var9,
+		setScrollableContentTopWidgetIntegrations = var10,
+		getScrollableContentBottomWidgetIntegrations = var11,
+		setScrollableContentBottomWidgetIntegrations = var12
 	}
 end

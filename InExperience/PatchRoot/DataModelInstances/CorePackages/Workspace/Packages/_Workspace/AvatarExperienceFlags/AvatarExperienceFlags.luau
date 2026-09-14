@@ -128,6 +128,7 @@
 	FFlagAXOrganicItemPosition = require(script.FFlagAXOrganicItemPosition),
 	FFlagAXFixSelectedItemIndexBleed = require(script.FFlagAXFixSelectedItemIndexBleed),
 	FFlagAXFixItemDetailsPurchaseAttribution = require(script.FFlagAXFixItemDetailsPurchaseAttribution),
+	FFlagAXFixUnifiedPurchaseFieldLanding = require(script.FFlagAXFixUnifiedPurchaseFieldLanding),
 	FFlagAXFixSearchPurchaseSurface = require(script.FFlagAXFixSearchPurchaseSurface),
 	FFlagAXFixSduiCatalogRowJump = require(script.FFlagAXFixSduiCatalogRowJump),
 	FFlagAXSduiFeedBackToTopAndNavClearance = require(script.FFlagAXSduiFeedBackToTopAndNavClearance),

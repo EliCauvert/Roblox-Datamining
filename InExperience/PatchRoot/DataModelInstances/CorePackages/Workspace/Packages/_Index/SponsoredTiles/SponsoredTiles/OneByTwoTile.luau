@@ -62,6 +62,7 @@ local fFlagLuaAppSduiSponsoredOneByTwoTile = sharedFlagsModule.FFlagLuaAppSduiSp
 local fFlagMigrateGameInfoToStore = sharedFlagsModule.FFlagMigrateGameInfoToStore
 local luaAppDefaultGameAdTileText = game:DefineFastFlag("LuaAppDefaultGameAdTileText", false)
 local fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad = sharedFlagsModule.FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad
+local fFlagLuaAppEnableReportExperience = sharedFlagsModule.FFlagLuaAppEnableReportExperience
 local luaAppOneByTwoTileLogoWidthPercentLandscape = game:DefineFastInt("LuaAppOneByTwoTileLogoWidthPercentLandscape", 40)
 local luaAppOneByTwoTileLogoWidthPercentSquare = game:DefineFastInt("LuaAppOneByTwoTileLogoWidthPercentSquare", 25)
 local luaAppOneByTwoTileGradientBottomTransparencyPercent = game:DefineFastInt("LuaAppOneByTwoTileGradientBottomTransparencyPercent", 25)
@@ -78,7 +79,7 @@ local function _(p1, p2)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), responsiveModule (ref), reactModule (ref), useIsHoveredTile (ref), omniRecommendationsContentType (ref), luaAppDefaultGameAdTileText (ref), fFlagMigrateGameInfoToStore (ref), gameHydrationReactModule (ref), useGameInfosSelector (ref), useOverflowMenuOpen (ref), useTriggerFeedback (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), gameCollectionItemTypes (ref), useTagAsSponsoredAdViewabilityCandidate (ref), videoPlaybackCoordinator (ref), getAvailableGameTileOverflowMenuItems (ref), fFlagLuaAppSduiSponsoredOneByTwoTile (ref), fFlagLuaAppHapticTriggeredTelemetry (ref), getOverflowMenuSignalStore (ref), fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad (ref), videoLoadingState (ref), oneByTwoTileTelemetryModule (ref), useCanDevicePlayVideoPreview (ref), tileVideoBlockingConfig (ref), useRoactService (ref), roactNetworking (ref), appSessionService (ref), useNavigation (ref), useLocalization (ref), discoveryAnalyticsModule (ref), sponsoredGamesRecordClick (ref), setGamePlaySession (ref), sessionType (ref), hoverTileCoordinator (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), videoEndReason (ref), appPage (ref), impressionsTagUtility (ref), useValidTileBadges (ref), var1 (ref), var2 (ref), buttonSize (ref), videoDisplay (ref), var4 (ref), var5 (ref), var3 (ref), gameTileThumbnailBadges (ref), image (ref), spanTileOverflowMenuModule (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), playButton (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), getPlaybackDetectionMethod (ref), videoPlaybackDetector (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref)
+	-- upvalues: useTokens (ref), responsiveModule (ref), reactModule (ref), useIsHoveredTile (ref), omniRecommendationsContentType (ref), luaAppDefaultGameAdTileText (ref), fFlagMigrateGameInfoToStore (ref), gameHydrationReactModule (ref), useGameInfosSelector (ref), useOverflowMenuOpen (ref), useTriggerFeedback (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), gameCollectionItemTypes (ref), useTagAsSponsoredAdViewabilityCandidate (ref), videoPlaybackCoordinator (ref), getAvailableGameTileOverflowMenuItems (ref), fFlagLuaAppEnableReportExperience (ref), fFlagLuaAppSduiSponsoredOneByTwoTile (ref), fFlagLuaAppHapticTriggeredTelemetry (ref), getOverflowMenuSignalStore (ref), fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad (ref), videoLoadingState (ref), oneByTwoTileTelemetryModule (ref), useCanDevicePlayVideoPreview (ref), tileVideoBlockingConfig (ref), useRoactService (ref), roactNetworking (ref), appSessionService (ref), useNavigation (ref), useLocalization (ref), discoveryAnalyticsModule (ref), sponsoredGamesRecordClick (ref), setGamePlaySession (ref), sessionType (ref), hoverTileCoordinator (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), videoEndReason (ref), appPage (ref), impressionsTagUtility (ref), useValidTileBadges (ref), var1 (ref), var2 (ref), buttonSize (ref), videoDisplay (ref), var4 (ref), var5 (ref), var3 (ref), gameTileThumbnailBadges (ref), image (ref), spanTileOverflowMenuModule (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), playButton (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), getPlaybackDetectionMethod (ref), videoPlaybackDetector (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref)
 	local var6 = useTokens()
 	local var7 = responsiveModule.useResponsive({ responsiveModule.BreakpointConfig.sizes.Small }) == responsiveModule.Keys.Small
 	local var8 = reactModule.useRef(nil)
@@ -144,18 +145,17 @@ return reactModule.memo(function(p1)
 	local var23
 	local var24 = if p1.videoPlaybackContext then p1.videoPlaybackContext.videoPlaybackCoordinator else videoPlaybackCoordinator.default
 	local var25 = reactModule.useMemo(function()
-		-- upvalues: getAvailableGameTileOverflowMenuItems (copy), var13 (ref), p1 (ref), var14 (ref)
+		-- upvalues: getAvailableGameTileOverflowMenuItems (copy), var13 (ref), p1 (ref), fFlagLuaAppEnableReportExperience (copy), var14 (ref)
 		return getAvailableGameTileOverflowMenuItems({
 			isSponsored = var13,
 			enableSponsoredFeedback = p1.enableSponsoredFeedback,
 			enableReportAd = p1.enableReportAd,
+			enableReportExperience = if fFlagLuaAppEnableReportExperience then if var14 then nil else p1.enableReportExperience else nil,
 			enableExplicitFeedback = if var14 then nil else p1.enableExplicitFeedback
 		})
 	end, {
-		var13,
-		var14,
-		p1.enableSponsoredFeedback,
-		p1.enableReportAd,
+		var13, var14, p1.enableSponsoredFeedback, p1.enableReportAd,
+		if fFlagLuaAppEnableReportExperience then p1.enableReportExperience else nil,
 		p1.enableExplicitFeedback
 	})
 	local var26 = reactModule.useCallback(function()
@@ -512,6 +512,7 @@ return reactModule.memo(function(p1)
 	else
 		var62 = nil
 	end
+	local createElement_3
 	t_4.loadImmediately = var62
 	t_4.Size = UDim2.fromScale(1, 1)
 	t_4.ScaleType = Enum.ScaleType.Crop
@@ -556,29 +557,36 @@ return reactModule.memo(function(p1)
 		Size = UDim2.new(var61, 0, 1, 0),
 		aspectRatio = var60
 	}) else nil
-	t_3.OverflowMenu = if fFlagLuaAppSduiSponsoredOneByTwoTile and p1.renderOverflowMenu then p1.renderOverflowMenu({
-		isHovered = var11,
-		isSelected = var15,
-		menuKey = hoverKey,
-		parentRef = var8
-	}) else reactModule.createElement(spanTileOverflowMenuModule, {
-		zIndex = 4,
-		hoverKey = hoverKey,
-		parentRef = var8,
-		universeId = p1.universeId,
-		placeId = if fFlagLuaAppNotInterestedReportPlaceId then p1.placeId else nil,
-		adId = p1.adId,
-		payerName = p1.payerName,
-		sponsoredUserCohort = p1.sponsoredUserCohort,
-		appPage = p1.appPage,
-		topicId = p1.topicId,
-		isSponsored = var13,
-		contentType = p1.contentType,
-		setGameHidden = if fFlagLuaAppSduiSponsoredOneByTwoTile then p1.setGameHidden or function() end else p1.setGameHidden,
-		isHovered = var11,
-		isSelected = var15,
-		availableMenuItems = var25
-	})
+	
+	if fFlagLuaAppSduiSponsoredOneByTwoTile and p1.renderOverflowMenu then
+		createElement_3 = p1.renderOverflowMenu({
+			isHovered = var11,
+			isSelected = var15,
+			menuKey = hoverKey,
+			parentRef = var8
+		})
+	else
+		createElement_3 = reactModule.createElement
+		createElement_3 = createElement_3(spanTileOverflowMenuModule, {
+			zIndex = 4,
+			hoverKey = hoverKey,
+			parentRef = var8,
+			universeId = p1.universeId,
+			placeId = if fFlagLuaAppNotInterestedReportPlaceId or fFlagLuaAppEnableReportExperience then p1.placeId else nil,
+			adId = p1.adId,
+			payerName = p1.payerName,
+			sponsoredUserCohort = p1.sponsoredUserCohort,
+			appPage = p1.appPage,
+			topicId = p1.topicId,
+			isSponsored = var13,
+			contentType = p1.contentType,
+			setGameHidden = if fFlagLuaAppSduiSponsoredOneByTwoTile then p1.setGameHidden or function() end else p1.setGameHidden,
+			isHovered = var11,
+			isSelected = var15,
+			availableMenuItems = var25
+		})
+	end
+	t_3.OverflowMenu = createElement_3
 	t_3.BottomStack = reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,

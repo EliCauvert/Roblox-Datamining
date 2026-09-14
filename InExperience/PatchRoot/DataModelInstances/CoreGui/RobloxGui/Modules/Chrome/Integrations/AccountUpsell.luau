@@ -1,21 +1,38 @@
 ﻿local chrome = script:FindFirstAncestor("Chrome")
 local corePackagesService = game:GetService("CorePackages")
+local accountUpgradeModule = require(corePackagesService.Workspace.Packages.AccountUpgrade)
 local chromeModule = require(corePackagesService.Workspace.Packages.Chrome)
 local serviceModule = require(chrome.Service)
+local inExperienceSideSheetModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheet)
 local isPioneerLaunch = require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch
 local reactModule = require(corePackagesService.Packages.React)
+local pioneer = accountUpgradeModule.AccountUpgradeFlow.Pioneer
+local var1 = nil
 
-local function openAccountUpsell() end
+local function openAccountUpsell()
+	-- upvalues: accountUpgradeModule (ref), pioneer (ref), var1 (write)
+	if accountUpgradeModule.InExperienceController.mount({
+		flow = pioneer,
+		onComplete = function(p1)
+			-- upvalues: var1 (copy)
+			if p1.reason == "success" and var1 then
+				var1.availability:unavailable()
+			end
+		end
+	}) == "already_mounted" then
+		accountUpgradeModule.InExperienceController.unmount()
+	end
+end
 
-local var1 = if isPioneerLaunch() then {
+local var2 = if isPioneerLaunch() then {
 	id = "AccountUpsell",
 	label = "CoreScripts.InGameMenu.UnlockMore.Title",
 	activated = function() end,
-	sideSheetPlacement = chromeModule.Enums.SideSheetPlacement.FixedFooterTop,
+	sideSheetPlacement = chromeModule.Enums.SideSheetPlacement.ScrollableContentBottom,
 	components = {
 		Widget = function(p1)
-			-- upvalues: corePackagesService (ref), reactModule (ref), openAccountUpsell (ref)
-			return reactModule.createElement(require(corePackagesService.Workspace.Packages.InExperienceSideSheet).AccountUpsell, {
+			-- upvalues: reactModule (ref), inExperienceSideSheetModule (ref), openAccountUpsell (ref)
+			return reactModule.createElement(inExperienceSideSheetModule.AccountUpsell, {
 				layoutOrder = p1.layoutOrder,
 				placement = p1.placement,
 				onActivated = openAccountUpsell
@@ -23,10 +40,9 @@ local var1 = if isPioneerLaunch() then {
 		end
 	}
 } else nil
-local var2 = nil
 
-if var1 then
-	var1.initialAvailability = serviceModule.AvailabilitySignal.Available
-	var2 = serviceModule:register(var1)
+if var2 then
+	var2.initialAvailability = serviceModule.AvailabilitySignal.Available
+	var1 = serviceModule:register(var2)
 end
-return var2 or {}
+return var1 or {}

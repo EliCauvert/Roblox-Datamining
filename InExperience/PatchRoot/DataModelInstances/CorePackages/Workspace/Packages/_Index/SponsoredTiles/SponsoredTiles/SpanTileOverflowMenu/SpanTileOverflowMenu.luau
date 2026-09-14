@@ -9,9 +9,10 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppGameTileNotInterestedDirectAction = sharedFlagsModule.FFlagLuaAppGameTileNotInterestedDirectAction
 local fFlagLuaAppEnableHomepageOneByTwoTile = sharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
 local fFlagLuaAppNotInterestedReportPlaceId = sharedFlagsModule.FFlagLuaAppNotInterestedReportPlaceId
+local fFlagLuaAppEnableReportExperience = sharedFlagsModule.FFlagLuaAppEnableReportExperience
 
 return function(p1)
-	-- upvalues: useOverflowMenuOpen (ref), reactModule (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppGameTileNotInterestedDirectAction (ref), gameTileContextualActions (ref), gameTileOverflowMenu (ref), fFlagLuaAppNotInterestedReportPlaceId (ref)
+	-- upvalues: useOverflowMenuOpen (ref), reactModule (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppGameTileNotInterestedDirectAction (ref), gameTileContextualActions (ref), gameTileOverflowMenu (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), fFlagLuaAppEnableReportExperience (ref)
 	local var1
 	local hoverKey = p1.hoverKey
 	local var2 = useOverflowMenuOpen(hoverKey)
@@ -70,7 +71,7 @@ return function(p1)
 			isHovered = p1.isHovered,
 			isSelected = p1.isSelected,
 			universeId = tostring(p1.universeId or ""),
-			placeId = if fFlagLuaAppNotInterestedReportPlaceId then p1.placeId else nil,
+			placeId = if fFlagLuaAppNotInterestedReportPlaceId or fFlagLuaAppEnableReportExperience then p1.placeId else nil,
 			collectionId = p1.topicId,
 			appPage = p1.appPage,
 			setGameHidden = p1.setGameHidden,

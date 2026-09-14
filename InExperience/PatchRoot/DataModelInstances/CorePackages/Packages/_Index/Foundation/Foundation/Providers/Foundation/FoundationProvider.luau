@@ -26,7 +26,7 @@ return function(p1)
 		reactModule.createElement(elevationProvider, nil),
 		reactModule.createElement(preferencesProviderModule, var1),
 		reactModule.createElement(styleProviderModule, {
-			themeName = if flagsModule.FoundationThemeName then p1.themeName else nil,
+			themeName = p1.themeName,
 			colorMode = p1.colorMode,
 			theme = p1.theme,
 			device = p1.device,

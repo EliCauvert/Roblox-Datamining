@@ -1,5 +1,6 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local reactModule = require(foundation.Parent.React)
+local _ = require(foundation.Enums.InputPlacement)
 local _ = require(foundation.Enums.InputSize)
 local _ = require(foundation.Components.Types)
 local accordionContextModule = require(script.Parent.AccordionContext)

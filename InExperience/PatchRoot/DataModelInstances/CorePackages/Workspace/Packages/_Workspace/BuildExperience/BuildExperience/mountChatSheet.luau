@@ -12,7 +12,6 @@ local _ = require(buildExperience.Components.BuildPillMenu.BuildPillMenuPortal)
 local chatSheetModule = require(buildExperience.Components.ChatSheet.ChatSheet)
 local getPlayButtonStoreModule = require(buildExperience.Stores.GetPlayButtonStore)
 local clientLogsCollectorModule = require(buildExperience.Chat.clientLogsCollector)
-local fFlagBuildExperienceAssetLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceAssetLibrary)
 local fFlagBuildExperienceUserMessageHapticFeedbackModule = require(buildExperience.Flags.FFlagBuildExperienceUserMessageHapticFeedback)
 local localizationProvider = localizationModule.LocalizationProvider
 local var1 = if fFlagBuildExperienceUserMessageHapticFeedbackModule then require(parent.RobloxAppInteractionFeedbackConfig).AppInteractionFeedbackProvider else nil
@@ -25,7 +24,7 @@ end
 local fIntInGameBuildChatSheetSnapPoint = game:DefineFastInt("FIntInGameBuildChatSheetSnapPoint", 50)
 
 local function ConnectedChatSheet()
-	-- upvalues: getPlayButtonStoreModule (ref), reactModule (ref), chatSheetModule (ref), fIntInGameBuildChatSheetSnapPoint (ref), fFlagBuildExperienceAssetLibraryModule (ref)
+	-- upvalues: getPlayButtonStoreModule (ref), reactModule (ref), chatSheetModule (ref), fIntInGameBuildChatSheetSnapPoint (ref)
 	local var2 = getPlayButtonStoreModule()
 	local var3 = var2.useIsActive()
 	local var4 = var2.useResumeTarget()
@@ -38,7 +37,7 @@ local function ConnectedChatSheet()
 			var2.setIsActive(false)
 		end, { var2 }),
 		snapPoints = { fIntInGameBuildChatSheetSnapPoint / 100 },
-		topBarPillMenuTarget = if var3 or fFlagBuildExperienceAssetLibraryModule then {
+		topBarPillMenuTarget = if var3 then {
 			isNewGameTarget = false,
 			universeId = game.GameId,
 			placeId = game.PlaceId

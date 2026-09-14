@@ -46,64 +46,58 @@ return function(p1)
 		var4 = var6
 		var5 = var7
 	end
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		Sheet = reactModule.createElement(var1.Root, {
-			ref = var5,
-			isOpen = p1.isOpen,
-			snapPoints = p1.snapPoints,
-			defaultSnapPointIndex = p1.defaultSnapPointIndex,
-			size = if fFlagBuildDesktopReadinessModule then dialogSize.Large else nil,
-			onClose = p1.onClose
-		}, {
-			Content = reactModule.createElement(ChatSheetContent, { setScrollingFrame = p1.scrollingFrameRef }, {
-				MessageList = reactModule.createElement(view, {
-					testId = "ChatSheet.MessageList",
-					layout = {
-						FillDirection = Enum.FillDirection.Vertical,
-						Padding = UDim.new(0, var3.Size.Size_800)
-					},
-					tag = {
-						["size-full"] = #p1.messages == 0,
-						["size-full-0 auto-y"] = #p1.messages > 0
-					}
-				}, chatMessageListModule({
-					messages = p1.messages,
-					clockBinding = p1.clockBinding,
-					localToolActions = p1.localToolActions,
-					emptyState = reactModule.createElement(buildEmptyStateModule),
-					isHistoryLoading = p1.isHistoryLoading,
-					onPlaytest = p1.onPlaytest,
-					isPlaytestLoading = p1.isPlaytestLoading
-				}))
-			}),
-			Actions = reactModule.createElement(var1.Actions, nil, {
-				Footer = reactModule.createElement(chatActionsModule, {
-					composerText = p1.composerText,
-					composerTextRevision = p1.composerTextRevision,
-					composerErrorText = p1.composerErrorText,
-					onComposerChanged = p1.onComposerChanged,
-					images = if fFlagBuildExperienceChatImageAttachmentsModule then p1.composerImages else nil,
-					onImagesChanged = if fFlagBuildExperienceChatImageAttachmentsModule then p1.onComposerImagesChanged else nil,
-					onRetryImage = if fFlagBuildExperienceChatImageAttachmentsModule then p1.onRetryComposerImage else nil,
-					references = p1.composerReferences,
-					onRemoveReference = p1.onRemoveComposerReference,
-					isImageSendBlocked = if fFlagBuildExperienceChatImageAttachmentsModule then p1.isComposerSendBlocked else nil,
-					placeholder = var2.composerPlaceholder,
-					textBoxRef = p1.textBoxRef,
-					isAssistantResponding = p1.isAssistantResponding,
-					canStopAssistantResponse = p1.canStopAssistantResponse,
-					canSendWhileResponding = p1.canSendWhileResponding,
-					onSend = p1.onSend,
-					onStop = p1.onStop
-				})
+	return reactModule.createElement(var1.Root, {
+		ref = var5,
+		isOpen = p1.isOpen,
+		snapPoints = p1.snapPoints,
+		defaultSnapPointIndex = p1.defaultSnapPointIndex,
+		size = if fFlagBuildDesktopReadinessModule then dialogSize.Large else nil,
+		onClose = p1.onClose
+	}, {
+		Content = reactModule.createElement(ChatSheetContent, { setScrollingFrame = p1.scrollingFrameRef }, {
+			MessageList = reactModule.createElement(view, {
+				testId = "ChatSheet.MessageList",
+				layout = {
+					FillDirection = Enum.FillDirection.Vertical,
+					Padding = UDim.new(0, var3.Size.Size_800)
+				},
+				tag = {
+					["size-full"] = #p1.messages == 0,
+					["size-full-0 auto-y"] = #p1.messages > 0
+				}
+			}, chatMessageListModule({
+				messages = p1.messages,
+				clockBinding = p1.clockBinding,
+				localToolActions = p1.localToolActions,
+				emptyState = reactModule.createElement(buildEmptyStateModule),
+				isHistoryLoading = p1.isHistoryLoading,
+				onPlaytest = p1.onPlaytest,
+				isPlaytestLoading = p1.isPlaytestLoading
+			}))
+		}),
+		Actions = reactModule.createElement(var1.Actions, nil, {
+			Footer = reactModule.createElement(chatActionsModule, {
+				composerText = p1.composerText,
+				composerErrorText = p1.composerErrorText,
+				onComposerChanged = p1.onComposerChanged,
+				images = if fFlagBuildExperienceChatImageAttachmentsModule then p1.composerImages else nil,
+				onImagesChanged = if fFlagBuildExperienceChatImageAttachmentsModule then p1.onComposerImagesChanged else nil,
+				onRetryImage = if fFlagBuildExperienceChatImageAttachmentsModule then p1.onRetryComposerImage else nil,
+				isImageSendBlocked = if fFlagBuildExperienceChatImageAttachmentsModule then p1.isComposerSendBlocked else nil,
+				placeholder = var2.composerPlaceholder,
+				textBoxRef = p1.textBoxRef,
+				isAssistantResponding = p1.isAssistantResponding,
+				canStopAssistantResponse = p1.canStopAssistantResponse,
+				canSendWhileResponding = p1.canSendWhileResponding,
+				onSend = p1.onSend,
+				onStop = p1.onStop
 			})
 		}),
 		TopBarPillMenu = if p1.topBarPillMenuTarget ~= nil then nil else reactModule.createElement(buildPillMenuPortalModule, {
 			testId = "build-pill-menu",
 			sheet = var4,
 			target = p1.topBarPillMenuTarget,
-			onOpenChat = p1.onOpenChat,
-			onOpenCaptureMode = p1.onOpenCaptureMode
+			onOpenChat = p1.onOpenChat
 		})
 	})
 end

@@ -8,7 +8,9 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local accordionContextModule = require(script.Parent.AccordionContext)
 local _ = require(script.Parent.useAccordion)
 local t = {
+	isContained = false,
 	testId = "--foundation-accordion",
+	chevronPosition = require(foundation.Enums.InputPlacement).End,
 	size = require(foundation.Enums.InputSize).Medium,
 	width = UDim.new(1, 0)
 }
@@ -28,11 +30,21 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				return {
 					onAccordionItemActivated = var1.onActivated,
 					itemSize = var1.size,
+					isContained = var1.isContained,
+					chevronPosition = var1.chevronPosition,
 					testId = var1.testId
 				}
-			end, { var1.onActivated, var1.size, var1.testId }) else nil else {
+			end, {
+				var1.onActivated,
+				var1.size,
+				var1.isContained,
+				var1.chevronPosition,
+				var1.testId
+			}) else nil else {
 				onAccordionItemActivated = var1.onActivated,
 				itemSize = var1.size,
+				isContained = var1.isContained,
+				chevronPosition = var1.chevronPosition,
 				testId = var1.testId
 			}
 		}, var1.children)

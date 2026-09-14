@@ -9,6 +9,7 @@ local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local useGameInfosSelector = require(parent.GameInfosRodux).useGameInfosSelector
 local gameHydrationReactModule = require(parent.GameHydrationReact)
 local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
+local fFlagEnableGameJoinEarlyAccess = require(parent.SharedFlags).FFlagEnableGameJoinEarlyAccess
 local useGameProductInfoSelector = require(parent.GameProductInfoRodux).useGameProductInfoSelector
 local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
 local useLocalization = require(parent.Localization).Hooks.useLocalization
@@ -47,7 +48,7 @@ local _ = function(p1, p2, p3)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: useAppPolicy (ref), useSelector (ref), fFlagMigrateGameInfoToStore (ref), gameHydrationReactModule (ref), useGameInfosSelector (ref), useGameProductInfoSelector (ref), useLocalization (ref), playButtonStatesModule (ref), var1 (ref), experienceDetailsNoticeType (ref)
+	-- upvalues: useAppPolicy (ref), useSelector (ref), fFlagMigrateGameInfoToStore (ref), gameHydrationReactModule (ref), useGameInfosSelector (ref), useGameProductInfoSelector (ref), useLocalization (ref), playButtonStatesModule (ref), var1 (ref), experienceDetailsNoticeType (ref), fFlagEnableGameJoinEarlyAccess (ref), playabilityStatusEnum (ref)
 	local var2 = useAppPolicy(function(p4)
 		return {
 			experienceDetailsNoticeType = p4.getExperienceDetailsNoticeType()
@@ -101,6 +102,6 @@ return function(p1, p2, p3)
 		t.unplayableOtherFallback = var7
 		local var11 = useLocalization(t)
 		
-		return if (p2 == playButtonStatesModule.Playable or p2 == playButtonStatesModule.PlayableWithParty or p2 == playButtonStatesModule.WaitingForParty) and var2.experienceDetailsNoticeType == experienceDetailsNoticeType.InExperiencePurchase then var11.agreeToNotice elseif var3 and var3 ~= "" then var3 elseif p2 == playButtonStatesModule.UnplayableOther then var11.unplayableOtherFallback else nil
+		return if (p2 == playButtonStatesModule.Playable or p2 == playButtonStatesModule.PlayableWithParty or p2 == playButtonStatesModule.WaitingForParty) and var2.experienceDetailsNoticeType == experienceDetailsNoticeType.InExperiencePurchase then var11.agreeToNotice elseif fFlagEnableGameJoinEarlyAccess and p3 ~= nil and p3.playabilityStatus == playabilityStatusEnum.PlusSubscriptionRequired then nil elseif var3 and var3 ~= "" then var3 elseif p2 == playButtonStatesModule.UnplayableOther then var11.unplayableOtherFallback else nil
 	end
 end

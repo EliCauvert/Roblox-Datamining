@@ -8,8 +8,9 @@ local getTileBadgeByPositionConfigFromEntry = gameTileModule.getTileBadgeByPosit
 local resolveWideAssetId = gameTileModule.resolveWideAssetId
 local _ = require(parent.VideoUtils)
 local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
+local fFlagLuaAppEnableReportExperience = require(parent.SharedFlags).FFlagLuaAppEnableReportExperience
 local var1 = reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), getTileBadgeByPositionConfigFromEntry (ref), twoByOneGameTileModule (ref), fFlagMigrateGameInfoToStore (ref), resolveWideAssetId (ref)
+	-- upvalues: reactModule (ref), getTileBadgeByPositionConfigFromEntry (ref), twoByOneGameTileModule (ref), fFlagLuaAppEnableReportExperience (ref), fFlagMigrateGameInfoToStore (ref), resolveWideAssetId (ref)
 	local var2 = -((p1.maxItemIndex or 0) + 1)
 	
 	return reactModule.createElement(twoByOneGameTileModule, {
@@ -40,6 +41,7 @@ local var1 = reactModule.memo(function(p1)
 		reportExperienceLaunched = p1.reportExperienceLaunched,
 		enableSponsoredFeedback = p1.enableSponsoredFeedback,
 		enableReportAd = p1.enableReportAd,
+		enableReportExperience = if fFlagLuaAppEnableReportExperience then p1.enableReportExperience else nil,
 		enableExplicitFeedback = p1.enableExplicitFeedback,
 		placeIdOverride = p1.item.placeIdOverride,
 		launchDataOverride = p1.item.launchDataOverride,

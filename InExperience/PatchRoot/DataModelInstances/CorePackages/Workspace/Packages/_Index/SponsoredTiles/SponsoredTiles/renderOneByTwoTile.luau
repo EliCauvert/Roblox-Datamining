@@ -5,8 +5,9 @@ local reactModule = require(parent.React)
 local oneByTwoTileModule = require(sponsoredTiles.OneByTwoTile)
 local getTileBadgeByPositionConfigFromEntry = require(parent.GameTile).getTileBadgeByPositionConfigFromEntry
 local _ = require(parent.VideoUtils)
+local fFlagLuaAppEnableReportExperience = require(parent.SharedFlags).FFlagLuaAppEnableReportExperience
 local var1 = reactModule.memo(function(p1)
-	-- upvalues: getTileBadgeByPositionConfigFromEntry (ref), reactModule (ref), oneByTwoTileModule (ref)
+	-- upvalues: getTileBadgeByPositionConfigFromEntry (ref), reactModule (ref), oneByTwoTileModule (ref), fFlagLuaAppEnableReportExperience (ref)
 	local var2 = -((p1.maxItemIndex or 0) + 1)
 	
 	return reactModule.createElement(oneByTwoTileModule, {
@@ -45,6 +46,7 @@ local var1 = reactModule.memo(function(p1)
 		setGameHidden = p1.setGameHidden,
 		enableSponsoredFeedback = p1.enableSponsoredFeedback,
 		enableReportAd = p1.enableReportAd,
+		enableReportExperience = if fFlagLuaAppEnableReportExperience then p1.enableReportExperience else nil,
 		enableExplicitFeedback = p1.enableExplicitFeedback,
 		onSelectionGained = reactModule.useCallback(function()
 			-- upvalues: p1 (ref)

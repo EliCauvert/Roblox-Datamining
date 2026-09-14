@@ -24,6 +24,7 @@ return {
 	MarketplaceAsset = require(script.MarketplaceAsset),
 	MarketplaceBundle = require(script.MarketplaceBundle),
 	MarketplaceLook = require(script.MarketplaceLook),
+	CollectibleItem = require(script.CollectibleItem),
 	Song = require(script.Song),
 	UserSettings = require(script.UserSettings),
 	UserProfile = if fFlagSduiExperienceDetailsSupport then if fFlagSduiExperienceDetailsSupport then require(script.UserProfile) else nil else nil,

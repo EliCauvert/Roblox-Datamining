@@ -13,6 +13,7 @@
 	marketplaceAsset = "marketplaceAsset",
 	marketplaceBundle = "marketplaceBundle",
 	marketplaceLook = "marketplaceLook",
+	collectibleItem = "collectibleItem",
 	song = "song",
 	gamePass = "gamePass",
 	gameDeveloperProduct = "gameDeveloperProduct",

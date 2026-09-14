@@ -15,14 +15,13 @@ local fFlagSduiOneofPropSupport = sharedFlagsModule.FFlagSduiOneofPropSupport
 local fFlagSduiNestedComponentListProp = sharedFlagsModule.FFlagSduiNestedComponentListProp
 local fFlagSduiImprovedErrorDimensions = sharedFlagsModule.FFlagSduiImprovedErrorDimensions
 local fFlagSduiInlineNestedComponentSchema = sharedFlagsModule.FFlagSduiInlineNestedComponentSchema
-local fFlagSduiGenericContainerDispatch = sharedFlagsModule.FFlagSduiGenericContainerDispatch
 local fFlagSduiDeferredListItems = sharedFlagsModule.FFlagSduiDeferredListItems
 
 local function buildProp(p1, p2, p3, p4, p5)
-	-- upvalues: fFlagSduiOneofPropSupport (ref), buildProp (ref), fFlagSduiGenericContainerDispatch (ref), fFlagSduiImprovedErrorDimensions (ref)
+	-- upvalues: fFlagSduiOneofPropSupport (ref), buildProp (ref), fFlagSduiImprovedErrorDimensions (ref)
 	if fFlagSduiOneofPropSupport and p1.oneof_prop and p1.oneof_prop.value then
 		return buildProp(p1.oneof_prop.value, p2, p3, p4, p5)
-	elseif fFlagSduiGenericContainerDispatch and typeof(p1) == "table" and p1.descriptor == nil then
+	elseif typeof(p1) == "table" and p1.descriptor == nil then
 		return p4.getPropBuilder("ContainerProp")(nil, p1, p2, p3, p4, p5)
 	end
 	local type = p1 and (p1.kind and p1.kind.type)

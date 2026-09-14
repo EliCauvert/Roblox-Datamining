@@ -9,6 +9,6 @@ return function(p1)
 	var1.setAboveFoldIntegrations(p1.aboveFoldIntegrations)
 	var1.setBelowFoldIntegrations(p1.belowFoldIntegrations)
 	var1.setSessionActionIntegrations(p1.sessionActionIntegrations)
-	var1.setScrollableWidgetIntegrations(p1.scrollableWidgetIntegrations)
-	var1.setFixedFooterWidgetIntegrations(p1.fixedFooterWidgetIntegrations)
+	var1.setScrollableContentTopWidgetIntegrations(p1.scrollableContentTopWidgetIntegrations)
+	var1.setScrollableContentBottomWidgetIntegrations(p1.scrollableContentBottomWidgetIntegrations)
 end

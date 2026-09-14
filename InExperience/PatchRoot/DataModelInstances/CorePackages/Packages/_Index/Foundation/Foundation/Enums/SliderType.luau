@@ -1,0 +1,1 @@
+﻿return { Single = "Single", Range = "Range" }

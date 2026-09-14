@@ -14,7 +14,7 @@ local fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule = require(module
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local reactUtilsModule = require(corePackagesService.Packages.ReactUtils)
 local chatModerationFrameLayoutOrder = game:DefineFastInt("ChatModerationFrameLayoutOrder", 9)
-local t = { OverscanAdjustButton = 1 }
+local t = { MoreSettingsBanner = 0, OverscanAdjustButton = 1 }
 
 if fFlagEnableModerateChatRemoteEvent then
 	t.ChatModerationFrame = chatModerationFrameLayoutOrder
@@ -112,6 +112,7 @@ local t_1 = nil
 if fFlagIEMSettingsGroupsModule then
 	local var1 = reactUtilsModule.createNextOrder()
 	t_1 = {
+		MoreSettingsBanner = var1(),
 		AudioHeader = var1(),
 		VolumeFrame = var1(),
 		VoiceChatVolumeFrame = if fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule then var1() else nil,

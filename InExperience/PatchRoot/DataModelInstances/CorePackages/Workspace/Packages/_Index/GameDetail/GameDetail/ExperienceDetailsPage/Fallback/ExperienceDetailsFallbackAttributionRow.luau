@@ -20,6 +20,7 @@ local fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox = sharedFlagsModule.FFlagLua
 local fFlagLuaAppLaunchWhenLoadingEdp = sharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
 local fFlagLuaAppSduiEdpFallbackAttributionFromCache = sharedFlagsModule.FFlagLuaAppSduiEdpFallbackAttributionFromCache
 local fFlagSduiScalePlayButtonAndImageSizes = sharedFlagsModule.FFlagSduiScalePlayButtonAndImageSizes
+local fFlagEnableGameJoinEarlyAccess = sharedFlagsModule.FFlagEnableGameJoinEarlyAccess
 
 local function VerifiedBadgeIcon()
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), foundationModule (ref)
@@ -43,7 +44,7 @@ local function VerifiedBadgeIcon()
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), responsiveModule (ref), edpFallbackIconSize (ref), fFlagSduiScalePlayButtonAndImageSizes (ref), useImageLoadFadeModule (ref), reactModule (ref), view (ref), image (ref), skeleton (ref), text (ref), radius (ref), VerifiedBadgeIcon (ref), fFlagLuaAppSduiEdpFallbackAttributionFromCache (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), edpFallbackActionBarPlayButtonWidth (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref)
+	-- upvalues: useTokens (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), responsiveModule (ref), edpFallbackIconSize (ref), fFlagSduiScalePlayButtonAndImageSizes (ref), useImageLoadFadeModule (ref), reactModule (ref), view (ref), image (ref), skeleton (ref), text (ref), radius (ref), VerifiedBadgeIcon (ref), fFlagLuaAppSduiEdpFallbackAttributionFromCache (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), edpFallbackActionBarPlayButtonWidth (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagEnableGameJoinEarlyAccess (ref)
 	local var1
 	local var2 = useTokens()
 	local isSmallScreen = p1.isSmallScreen
@@ -194,7 +195,8 @@ return reactModule.memo(function(p1)
 					useUIBloxButton = fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox,
 					buttonSize = buttonSize.Large,
 					width = UDim.new(0, if fFlagSduiScalePlayButtonAndImageSizes then edpFallbackActionBarPlayButtonWidth * var2.Config.UI.Scale else edpFallbackActionBarPlayButtonWidth),
-					launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil
+					launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil,
+					enableEarlyAccessPlusTooltip = if fFlagEnableGameJoinEarlyAccess then true else nil
 				}),
 				OverflowSkeleton1 = if var3 then reactModule.createElement(skeleton, {
 					LayoutOrder = 2,

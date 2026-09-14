@@ -38,13 +38,15 @@ local userSignalTypes = userSignalsModule.UserSignalTypes
 local fFlagLuaAppMakeDisclaimerOptInForFeedbackForm = sharedFlagsModule.FFlagLuaAppMakeDisclaimerOptInForFeedbackForm
 local fFlagLuaAppNotInterestedFeedbackFormTelemetry = sharedFlagsModule.FFlagLuaAppNotInterestedFeedbackFormTelemetry
 local fFlagLuaAppEnableSponsoredReportAd = sharedFlagsModule.FFlagLuaAppEnableSponsoredReportAd
+local fFlagLuaAppEnableReportExperience = sharedFlagsModule.FFlagLuaAppEnableReportExperience
+local fFlagAddThumbnailSelectorReport = sharedFlagsModule.FFlagAddThumbnailSelectorReport
 local fFlagLuaAppNotInterestedReportPlaceId = sharedFlagsModule.FFlagLuaAppNotInterestedReportPlaceId
 local fFlagLuaAppEnableHomepageOneByTwoTile = sharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
 local fFlagLuaAppContinueSortInstantPlay = sharedFlagsModule.FFlagLuaAppContinueSortInstantPlay
 local fFlagLuaAppExtractNotInterestedHelper = sharedFlagsModule.FFlagLuaAppExtractNotInterestedHelper
 
 return function(p1, p2)
-	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), useLocalization (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppContinueSortInstantPlay (ref), reactModule (ref), userSignalTypes (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), flaggedMutedError (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), postSendUserSignal (ref), httpService (ref), mutedError (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref), tileOverflowMenuItems (ref), fFlagLuaAppExtractNotInterestedHelper (ref), activateGameNotInterestedModule (ref), setCentralOverlay (ref), centralOverlayType (ref), iconName (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref)
+	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), useLocalization (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppEnableReportExperience (ref), fFlagLuaAppContinueSortInstantPlay (ref), reactModule (ref), userSignalTypes (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), flaggedMutedError (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), postSendUserSignal (ref), httpService (ref), mutedError (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref), tileOverflowMenuItems (ref), fFlagLuaAppExtractNotInterestedHelper (ref), activateGameNotInterestedModule (ref), setCentralOverlay (ref), centralOverlayType (ref), iconName (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), fFlagAddThumbnailSelectorReport (ref)
 	local var1 = useDispatch()
 	local var2 = useRoactService(roactNetworking)
 	local var3 = useLocalization({
@@ -59,6 +61,7 @@ return function(p1, p2)
 		inappropriateContent = "Feature.GameDetails.Label.InappropriateContent",
 		somethingElse = "Feature.GameDetails.Label.SomethingElse",
 		reportAd = if fFlagLuaAppEnableSponsoredReportAd then "Feature.GameDetails.Action.ReportAd" else nil,
+		reportExperience = if fFlagLuaAppEnableReportExperience then "Feature.GameDetails.Action.Report" else nil,
 		gameDetails = if fFlagLuaAppContinueSortInstantPlay then "Feature.GameDetails.Action.GameDetails" else nil
 	})
 	local collectionId = p1.collectionId or ""
@@ -307,9 +310,30 @@ return function(p1, p2)
 			p2(tileOverflowMenuItems.ReportAd)
 		end
 	end, { var1, p1.adId, p2 }) else nil
+	local var14 = if fFlagLuaAppEnableReportExperience then reactModule.useCallback(function()
+		-- upvalues: p1 (ref), flaggedMutedError (copy), var1 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), fFlagAddThumbnailSelectorReport (copy), closeCentralOverlay (copy), p2 (ref), tileOverflowMenuItems (copy)
+		if not p1.placeId then
+			flaggedMutedError("ReportExperienceError", "Report experience clicked without valid target place id")
+			
+			return
+		end
+		var1(openDynamicAbuseReportModule({
+			abuseVector = abuseVectorModule.Place,
+			targetId = p1.placeId,
+			custom = if fFlagAddThumbnailSelectorReport then { universeId = p1.universeId } else nil,
+			onClose = function()
+				-- upvalues: var1 (copy), closeCentralOverlay (copy)
+				var1(closeCentralOverlay())
+			end
+		}))
+		
+		if p2 then
+			p2(tileOverflowMenuItems.ReportExperience)
+		end
+	end, { var1, p1.placeId, p1.universeId, p2 }) else nil
 	
 	return reactModule.useMemo(function()
-		-- upvalues: fFlagLuaAppContinueSortInstantPlay (copy), p1 (ref), tileOverflowMenuItems (copy), var3 (ref), var10 (ref), var11 (write), var12 (ref), fFlagLuaAppEnableSponsoredReportAd (copy), iconName (copy), var13 (ref)
+		-- upvalues: fFlagLuaAppContinueSortInstantPlay (copy), p1 (ref), tileOverflowMenuItems (copy), var3 (ref), var10 (ref), var11 (write), var12 (ref), fFlagLuaAppEnableSponsoredReportAd (copy), iconName (copy), var13 (ref), fFlagLuaAppEnableReportExperience (copy), var14 (ref)
 		local t = {}
 		
 		if fFlagLuaAppContinueSortInstantPlay and p1.availableMenuItems[tileOverflowMenuItems.GameDetails] then
@@ -344,10 +368,19 @@ return function(p1, p2)
 				onActivated = var13
 			})
 		end
+		if fFlagLuaAppEnableReportExperience and p1.availableMenuItems[tileOverflowMenuItems.ReportExperience] then
+			table.insert(t, {
+				icon = iconName.Flag,
+				id = tileOverflowMenuItems.ReportExperience,
+				text = var3.reportExperience,
+				onActivated = var14
+			})
+		end
 		return t
 	end, {
 		if fFlagLuaAppContinueSortInstantPlay then var10 else nil, var11, var3, var12,
 		p1.isSponsored, p1.availableMenuItems,
-		if fFlagLuaAppEnableSponsoredReportAd then var13 else nil
+		if fFlagLuaAppEnableSponsoredReportAd then var13 else nil,
+		if fFlagLuaAppEnableReportExperience then var14 else nil
 	})
 end

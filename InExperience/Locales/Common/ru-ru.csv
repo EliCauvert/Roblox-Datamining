@@ -41,12 +41,15 @@ Amp.Upsell.Title.RequestSent,Запрос отправлен
 Authentication.AccountSwitch.Action.SwitchAccount,Переключить аккаунт
 Authentication.CrossDevice.Heading.QuickLogin,Быстрый вход
 Authentication.Login.Action.QuickSignIn,
+Authentication.Login.Action.Save,Сохранить
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Выполни выход из Roblox для смены аккаунта для {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Использовать другой аккаунт Roblox
 Authentication.Login.Error.PasskeyOnlyAccount,Твой аккаунт имеет только ключ доступа для входа в систему. Попробуй войти с паролем или восстановить свой аккаунт.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Не удаётся проверить аккаунт. Повтори попытку позже.
 Authentication.Login.Heading.IncompatibleAccounts,Несовместимые аккаунты
+Authentication.Login.Label.Email,Эл. почта
 Authentication.Login.Label.LearnMore,Подробнее
+Authentication.Login.Label.Username,Имя пользователя
 Authentication.Login.Response.AlreadyLinked,Этот аккаунт Roblox уже связан с другим аккаунтом на: {platform}. Попробуй войти с другим аккаунтом Roblox.
 Authentication.Login.Response.IncorrectEmailOrPassword,Неверная эл. почта или пароль.
 Authentication.Login.Response.IncorrectOtpCode,Неверный код. Проверь ещё раз и повтори попытку.
@@ -62,12 +65,40 @@ Authentication.Login.Response.SomethingWentWrong,
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,Что-то пошло не так. Попробуй выполнить вход другим способом.
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,"Этот адрес эл. почты не подтверждён. Войди, используя своё имя пользователя."
 Authentication.Login.WeChat.AntiAddictionText,"Не участвуй в плохих и пиратских проектах. Будь начеку, чтобы избежать обмана. Не проводи слишком много времени в сети, это может навредить здоровью. Разумно распределяй своё время и наслаждайся правильным образом жизни."
+Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Button.RetryLogIn,Повторить вход
 Authentication.SignUp.Description.AccountAlreadyLinked,Твой аккаунт {platformAccountName} уже связан с аккаунтом Roblox. Попробуй повторить вход.
+Authentication.SignUp.Description.Try,Попробовать
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Твой аккаунт Roblox будет привязан к твоему аккаунту на платформе {platform}. Ты можешь отменить привязку в любое время в настройках. Может пройти некоторое время, прежде чем ты сможешь привязать свой аккаунт к аккаунту на платформе {platform}. Нажимая кнопку «{ctaButton}», ты соглашаешься с Условиями использования, включая арбитражную оговорку, и принимаешь Политику конфиденциальности."
 Authentication.SignUp.Heading.CountryCodeSelector,Выбор страны
 Authentication.SignUp.Heading.RetryLogIn,
+Authentication.SignUp.Label.Birthday,Дата рождения
+Authentication.SignUp.Label.Continue,Продолжить
+Authentication.SignUp.Label.Day,День
+Authentication.SignUp.Label.ErrorsWithPassword,Пароль содержит ошибки.
+Authentication.SignUp.Label.ErrorsWithUsername,Имя пользователя содержит ошибки.
+Authentication.SignUp.Label.Gender,Пол
+Authentication.SignUp.Label.GenderFemale,Женский
+Authentication.SignUp.Label.GenderMale,Мужской
+Authentication.SignUp.Label.Month,Месяц
+Authentication.SignUp.Label.PasswordError1,Не менее 8 символов
+Authentication.SignUp.Label.PasswordError2,Не совпадает с именем пользователя
+Authentication.SignUp.Label.PasswordError3,Не является слишком простым
+Authentication.SignUp.Label.PasswordPlaceholder,
+Authentication.SignUp.Label.UsernameError1,"Содержит только буквы, цифры и символ «_»"
+Authentication.SignUp.Label.UsernameError2,Содержит от 3 до 20 символов
+Authentication.SignUp.Label.UsernameError3,Не используется другими пользователями
+Authentication.SignUp.Label.UsernameError4,Подходит для Roblox
+Authentication.SignUp.Label.UsernameError5,Не начинается и не оканчивается символом «_»
+Authentication.SignUp.Label.UsernameError6,Содержит не более одного символа «_»
+Authentication.SignUp.Label.UsernameError7,Не содержит личные данные
+Authentication.SignUp.Label.Year,Год
+Authentication.SignUp.Message.Username.NoRealNameUse,Не указывай своё настоящее имя
+Authentication.SignUp.Response.BirthdayMustBeSetFirst,Сначала укажи дату рождения.
 Authentication.SignUp.Response.ErrorTryAgain,
+Authentication.SignUp.Response.InvalidBirthday,Неверная дата рождения.
+Authentication.SignUp.Response.InvalidEmail,Неверный адрес эл. почты.
+Authentication.SignUp.Response.UsernameMustBeSetFirst,Сначала укажи имя пользователя.
 Authentication.TwoStepVerification.Action.GoToSecurity,Настройки
 Authentication.TwoStepVerification.Label.TwoStepRequired,"Необходима двухшаговая проверка для совершения дальнейших транзакций. Перейди в Настройки > Безопасность, чтобы завершить двухшаговую проверку."
 Authentication.TwoStepVerification.Response.TooManyAttempts,Слишком много попыток. Повтори позже.
@@ -92,7 +123,7 @@ CommonUI.Controls.Action.Apply,Применить
 CommonUI.Controls.Action.Back,Назад
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.Confirm,Подтверждаю
-CommonUI.Controls.Action.Continue,Продолжить
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,Готово
 CommonUI.Controls.Action.Next,Далее
 CommonUI.Controls.Action.OK,OK
@@ -107,7 +138,7 @@ CommonUI.Controls.Label.April,апр
 CommonUI.Controls.Label.AprilAbbreviated,
 CommonUI.Controls.Label.August,авг
 CommonUI.Controls.Label.AugustAbbreviated,
-CommonUI.Controls.Label.Day,День
+CommonUI.Controls.Label.Day,
 CommonUI.Controls.Label.December,дек
 CommonUI.Controls.Label.DecemberAbbreviated,
 CommonUI.Controls.Label.February,фев
@@ -141,7 +172,7 @@ CommonUI.Controls.Label.Tuesday,Вторник
 CommonUI.Controls.Label.TuesdayAbbreviated,Вт
 CommonUI.Controls.Label.Wednesday,Среда
 CommonUI.Controls.Label.WednesdayAbbreviated,Ср
-CommonUI.Controls.Label.Year,Год
+CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,Ничего не найдено
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Send,
@@ -193,6 +224,7 @@ CommonUI.Messages.Action.Apply,
 CommonUI.Messages.Action.Dismiss,Отклонить
 CommonUI.Messages.Action.OK,
 CommonUI.Messages.Action.Reset,Сброс
+CommonUI.Messages.Label.Password,Пароль
 CommonUI.Messages.Response.NoResults,
 CommonUI.Messages.Response.PageError,Ошибка при загрузке страницы
 CommonUI.Messages.Response.SomethingWentWrong,
@@ -866,7 +898,7 @@ Feature.Avatar.Action.Rename,
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.Revert,Вернуть
 Feature.Avatar.Action.Rotate,
-Feature.Avatar.Action.Save,Сохранить
+Feature.Avatar.Action.Save,
 Feature.Avatar.Action.SaveAsNew,Сохранить как новый
 Feature.Avatar.Action.Select,Выбрать
 Feature.Avatar.Action.SelectMultipleItems,Выбрать несколько предметов
@@ -1477,7 +1509,7 @@ Feature.Catalog.Label.Trending,Популярные
 Feature.Catalog.Label.TryOns,Примерка
 Feature.Catalog.Label.TryOnsMultiple,Примерка ({numItems})
 Feature.Catalog.Label.Unlimited,Неограниченные предметы
-Feature.Catalog.Label.Username,Имя пользователя
+Feature.Catalog.Label.Username,
 Feature.Catalog.Label.UsingBundleParts,Использование {count} деталей набора
 Feature.Catalog.Label.WaistAccessories,Аксессуары для талии
 Feature.Catalog.Label.WearAfterPurchase,Надеть предмет после покупки

@@ -2,7 +2,7 @@
 local playtestExperienceModule = require(script.Parent.playtestExperience)
 local releaseAnyFocusModule = require(script.Parent.releaseAnyFocus)
 
-return function(p1, p2, p3, p4, p5, p6)
+return function(p1, p2, p3, p4)
 	-- upvalues: getPlaytestLoadingStoreModule (ref), releaseAnyFocusModule (ref), playtestExperienceModule (ref)
 	local var1 = getPlaytestLoadingStoreModule()
 	
@@ -11,17 +11,15 @@ return function(p1, p2, p3, p4, p5, p6)
 	end
 	var1.setPlaytestStatusForPlaceId(p1, "Loading")
 	task.defer(function()
-		-- upvalues: releaseAnyFocusModule (copy), playtestExperienceModule (copy), p1 (ref), p2 (ref), p3 (ref), p5 (ref), p6 (ref), var1 (ref), p4 (ref)
+		-- upvalues: releaseAnyFocusModule (copy), playtestExperienceModule (copy), p1 (ref), p2 (ref), p3 (ref), var1 (ref), p4 (ref)
 		local var2 = nil
 		local var3 = "experience_launch"
 		
 		if not xpcall(function()
-			-- upvalues: releaseAnyFocusModule (copy), var3 (write), playtestExperienceModule (copy), p1 (copy), p2 (copy), p3 (copy), p5 (copy), p6 (copy), var1 (copy), p4 (copy)
+			-- upvalues: releaseAnyFocusModule (copy), var3 (write), playtestExperienceModule (copy), p1 (copy), p2 (copy), p3 (copy), var1 (copy), p4 (copy)
 			releaseAnyFocusModule()
 			var3 = playtestExperienceModule(p1, p2, {
 				isTeamTest = p3,
-				tcViewer = p5,
-				launchData = p6,
 				onTeleportFailed = function()
 					-- upvalues: var1 (copy), p1 (copy), p4 (copy)
 					var1.setPlaytestStatusForPlaceId(p1, "Idle")
@@ -31,9 +29,9 @@ return function(p1, p2, p3, p4, p5, p6)
 					end
 				end
 			})
-		end, function(p7)
+		end, function(p5)
 			-- upvalues: var2 (write)
-			var2 = debug.traceback(tostring(p7), 2)
+			var2 = debug.traceback(tostring(p5), 2)
 		end) then
 			var1.setPlaytestStatusForPlaceId(p1, "Idle")
 			

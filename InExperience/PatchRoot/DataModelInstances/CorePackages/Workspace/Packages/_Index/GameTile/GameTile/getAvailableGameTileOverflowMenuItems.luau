@@ -3,9 +3,10 @@ local sharedFlagsModule = require(gameTile.Parent.SharedFlags)
 local tileOverflowMenuItems = require(gameTile.GameTileConstants).TileOverflowMenuItems
 local fFlagLuaAppEnableSponsoredReportAd = sharedFlagsModule.FFlagLuaAppEnableSponsoredReportAd
 local fFlagLuaAppContinueSortInstantPlay = sharedFlagsModule.FFlagLuaAppContinueSortInstantPlay
+local fFlagLuaAppEnableReportExperience = sharedFlagsModule.FFlagLuaAppEnableReportExperience
 
 return function(p1)
-	-- upvalues: fFlagLuaAppEnableSponsoredReportAd (ref), tileOverflowMenuItems (ref), fFlagLuaAppContinueSortInstantPlay (ref)
+	-- upvalues: fFlagLuaAppEnableSponsoredReportAd (ref), tileOverflowMenuItems (ref), fFlagLuaAppContinueSortInstantPlay (ref), fFlagLuaAppEnableReportExperience (ref)
 	local t = {}
 	
 	if fFlagLuaAppEnableSponsoredReportAd then
@@ -25,6 +26,9 @@ return function(p1)
 	end
 	if fFlagLuaAppContinueSortInstantPlay and p1.enableGameDetails then
 		t[tileOverflowMenuItems.GameDetails] = true
+	end
+	if fFlagLuaAppEnableReportExperience and p1.enableReportExperience and not p1.isSponsored then
+		t[tileOverflowMenuItems.ReportExperience] = true
 	end
 	return t
 end

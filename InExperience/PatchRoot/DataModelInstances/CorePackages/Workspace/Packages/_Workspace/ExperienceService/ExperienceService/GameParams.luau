@@ -5,12 +5,11 @@ local t = {
 	end
 }
 
-function t.fromPlaceId(p1, p2, p3)
+function t.fromPlaceId(p1, p2)
 	-- upvalues: t (ref)
 	local var1 = t.new()
 	var1.placeId = p1
 	var1.isTeamTest = p2
-	var1.tcViewer = p3
 	
 	return var1
 end

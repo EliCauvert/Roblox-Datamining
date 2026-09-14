@@ -11,7 +11,6 @@ local fFlagBuildExperienceUserMessageHapticFeedbackModule = require(buildExperie
 local fFlagBuildExperienceChatImageAttachmentsModule = require(buildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local var1 = if fFlagBuildExperienceChatImageAttachmentsModule then require(script.Parent.ChatImagePreviewList) else nil
-local chatReferencePreviewListModule = require(script.Parent.ChatReferencePreviewList)
 local var2 = if fFlagBuildExperienceUserMessageHapticFeedbackModule then require(parent.InteractionFeedback).useTriggerFeedback else nil
 local menu = foundationModule.Menu
 local text = foundationModule.Text
@@ -123,7 +122,7 @@ local function CopyableUserMessageBubble(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), view (ref), chatReferencePreviewListModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), var1 (ref), fFlagBuildExperienceCopyChatMessagesModule (ref), CopyableUserMessageBubble (ref), UserMessageBubble (ref)
+	-- upvalues: reactModule (ref), view (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), var1 (ref), fFlagBuildExperienceCopyChatMessagesModule (ref), CopyableUserMessageBubble (ref), UserMessageBubble (ref)
 	local text = p1.message.text
 	
 	return reactModule.createElement(view, {
@@ -136,18 +135,13 @@ return reactModule.memo(function(p1)
 			tag = "col align-x-right gap-xsmall auto-y",
 			Size = UDim2.new(0.78, 0, 0, 0)
 		}, {
-			References = if p1.message.references == nil or #p1.message.references <= 0 then nil else reactModule.createElement(chatReferencePreviewListModule, {
-				LayoutOrder = 1,
-				testId = "ChatUserMessage.References",
-				references = p1.message.references
-			}),
 			Images = if fFlagBuildExperienceChatImageAttachmentsModule and p1.message.images ~= nil and #p1.message.images > 0 then reactModule.createElement(var1, {
 				alignRight = true,
-				LayoutOrder = 2,
+				LayoutOrder = 1,
 				testId = "ChatUserMessage.Images",
 				images = p1.message.images
 			}) else nil,
-			Bubble = if text == "" then nil elseif fFlagBuildExperienceCopyChatMessagesModule then reactModule.createElement(CopyableUserMessageBubble, { LayoutOrder = 3, messageText = text }) else reactModule.createElement(UserMessageBubble, { LayoutOrder = 3, messageText = text })
+			Bubble = if text == "" then nil elseif fFlagBuildExperienceCopyChatMessagesModule then reactModule.createElement(CopyableUserMessageBubble, { LayoutOrder = 2, messageText = text }) else reactModule.createElement(UserMessageBubble, { LayoutOrder = 2, messageText = text })
 		})
 	})
 end)

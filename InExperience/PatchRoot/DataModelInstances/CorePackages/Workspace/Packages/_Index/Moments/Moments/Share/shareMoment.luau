@@ -5,7 +5,6 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local default = require(parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
 local analytics = momentsCommonModule.Analytics
 local eventNames = analytics.EventNames
-local fFlagMomentsCopyShareLinkWhenShareSheetUnavailableModule = require(moments.Flags.FFlagMomentsCopyShareLinkWhenShareSheetUnavailable)
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local makeFeedActionFieldsModule = require(moments.Analytics.makeFeedActionFields)
 local fetchShareLinkModule = require(script.Parent.fetchShareLink)
@@ -14,11 +13,11 @@ local getToastStoreModule = require(moments.Stores.GetToastStore)
 local readAppPolicyModule = require(script.Parent.readAppPolicy)
 
 return function(p1)
-	-- upvalues: getToastStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), fetchShareLinkModule (ref), fFlagMomentsCopyShareLinkWhenShareSheetUnavailableModule (ref), readAppPolicyModule (ref), default (ref), getShareCountsStoreModule (ref), makeFeedActionFieldsModule (ref), analytics (ref), eventNames (ref)
+	-- upvalues: getToastStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), fetchShareLinkModule (ref), readAppPolicyModule (ref), default (ref), getShareCountsStoreModule (ref), makeFeedActionFieldsModule (ref), analytics (ref), eventNames (ref)
 	local momentId = p1.momentId
 	local strings = p1.strings
 	task.spawn(function()
-		-- upvalues: getToastStoreModule (copy), strings (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), p1 (ref), fetchShareLinkModule (copy), momentId (ref), fFlagMomentsCopyShareLinkWhenShareSheetUnavailableModule (copy), readAppPolicyModule (copy), default (copy), getShareCountsStoreModule (copy), makeFeedActionFieldsModule (copy), analytics (copy), eventNames (copy)
+		-- upvalues: getToastStoreModule (copy), strings (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), p1 (ref), fetchShareLinkModule (copy), momentId (ref), readAppPolicyModule (copy), default (copy), getShareCountsStoreModule (copy), makeFeedActionFieldsModule (copy), analytics (copy), eventNames (copy)
 		local function _()
 			-- upvalues: getToastStoreModule (copy), strings (copy)
 			getToastStoreModule(false).triggerToast({ text = "", title = strings.linkCopyFailed })
@@ -41,22 +40,19 @@ return function(p1)
 			
 			return
 		elseif not pcall(function()
-			-- upvalues: fFlagMomentsCopyShareLinkWhenShareSheetUnavailableModule (copy), readAppPolicyModule (copy), default (copy), status (ref)
-			if fFlagMomentsCopyShareLinkWhenShareSheetUnavailableModule then
-				local eligibleForCapturesFeature
-				local var1 = readAppPolicyModule()
-				
-				if var1 then
-					eligibleForCapturesFeature = var1.EnableShareCaptureCTA and (var1.EligibleForCapturesFeature or false)
-				end
-				if eligibleForCapturesFeature then
-					default:shareUrl({ context = "MomentsFeed", url = status })
-					
-					return
-				else
-					default:setClipboardText({ context = "MomentsFeed", text = status })
-				end
+			-- upvalues: readAppPolicyModule (copy), default (copy), status (ref)
+			local eligibleForCapturesFeature
+			local var1 = readAppPolicyModule()
+			
+			if var1 then
+				eligibleForCapturesFeature = var1.EnableShareCaptureCTA and (var1.EligibleForCapturesFeature or false)
 			end
+			if eligibleForCapturesFeature then
+				default:shareUrl({ context = "MomentsFeed", url = status })
+				
+				return
+			end
+			default:setClipboardText({ context = "MomentsFeed", text = status })
 		end) then
 			getToastStoreModule(false).triggerToast({ text = "", title = strings.linkCopyFailed })
 			

@@ -44,12 +44,14 @@
 	},
 	Utils = {
 		UnifiedEventLoggingUtils = require(script.Utils.UnifiedEventLoggingUtils),
+		aliasSortAndFiltersToLegacyKeys = require(script.Utils.aliasSortAndFiltersToLegacyKeys),
 		getMarketplaceUnifiedItemType = require(script.Utils.getMarketplaceUnifiedItemType),
 		getTimedOptionForItemData = require(script.Utils.getTimedOptionForItemData),
 		getUnifiedEventsForMIS = require(script.Utils.getUnifiedEventsForMIS),
 		getUnifiedLoggingSurface = require(script.Utils.getUnifiedLoggingSurface),
 		getUnifiedLoggingSurfaceForAppPage = require(script.Utils.getUnifiedLoggingSurfaceForAppPage),
 		getUnifiedLoggingSurfaceForRoute = require(script.Utils.getUnifiedLoggingSurfaceForRoute),
+		mapAnalyticsMetadataFields = require(script.Utils.mapAnalyticsMetadataFields),
 		mapMarketplaceSurfaceToUnifiedLoggingSurface = require(script.Utils.mapMarketplaceSurfaceToUnifiedLoggingSurface),
 		getItemSelectionAction = require(script.Utils.getItemSelectionAction),
 		getCatalogItemUnifiedLoggingFields = require(script.Utils.getCatalogItemUnifiedLoggingFields)

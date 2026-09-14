@@ -15,7 +15,6 @@ local constantsModule = require(momentsCreation.Constants)
 local getCaptureContentModule = require(momentsCreation.Capture.getCaptureContent)
 local getCaptureVideoContentModule = require(momentsCreation.Capture.getCaptureVideoContent)
 local useCreationMusicSyncModule = require(momentsCreation.Hooks.useCreationMusicSync)
-local getFFlagMomentsScreenshotMusicScrubberModule = require(momentsCreation.Flags.GetFFlagMomentsScreenshotMusicScrubber)
 local getFFlagMomentsCreationGalleryPreviewSwapFixModule = require(momentsCreation.Flags.GetFFlagMomentsCreationGalleryPreviewSwapFix)
 local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
 local getTtsDuckScalarModule = require(momentsCreation.Audio.getTtsDuckScalar)
@@ -46,7 +45,7 @@ local function VideoPreviewSurface(p1)
 	local var9 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), music (ref), audio (ref)
-		function var26.current()
+		function var25.current()
 			-- upvalues: music (copy), audio (copy)
 			if music ~= nil then
 				audio.timeline.seek(0)
@@ -189,7 +188,7 @@ local function VideoPreviewSurface(p1)
 end
 
 local function ScreenshotPreviewSurface(p2)
-	-- upvalues: useCreationMusicSyncModule (ref), constantsModule (ref), reactModule (ref), getFFlagMomentsScreenshotMusicScrubberModule (ref), view (ref), getCaptureContentModule (ref)
+	-- upvalues: useCreationMusicSyncModule (ref), constantsModule (ref), reactModule (ref), view (ref), getCaptureContentModule (ref)
 	local preview = p2.preview
 	local capture = p2.capture
 	local var10 = useCreationMusicSyncModule(preview, constantsModule.ScreenshotMusicDuration, p2.ttsAudio)
@@ -204,12 +203,8 @@ local function ScreenshotPreviewSurface(p2)
 		preview.setReadiness("Ready")
 	end, { preview, capture })
 	reactModule.useEffect(function()
-		-- upvalues: getFFlagMomentsScreenshotMusicScrubberModule (copy), preview (ref), music (ref), elapsed (ref), constantsModule (copy)
-		if getFFlagMomentsScreenshotMusicScrubberModule() then
-			preview.setPosition(if music ~= nil then 0 else math.clamp(elapsed, 0, constantsModule.ScreenshotMusicDuration))
-			
-			return
-		end
+		-- upvalues: preview (ref), music (ref), elapsed (ref), constantsModule (copy)
+		preview.setPosition(if music ~= nil then 0 else math.clamp(elapsed, 0, constantsModule.ScreenshotMusicDuration))
 	end, { preview, music, elapsed })
 	
 	return reactModule.createElement(view, {

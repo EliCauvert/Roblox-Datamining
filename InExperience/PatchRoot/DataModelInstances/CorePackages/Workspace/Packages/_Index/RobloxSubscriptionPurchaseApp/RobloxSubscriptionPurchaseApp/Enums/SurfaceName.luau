@@ -12,5 +12,6 @@
 	SettingsAppThemeUpsell = "SettingsAppThemeUpsell",
 	ProfileFramesUpsell = "ProfileFramesUpsell",
 	AiBackgroundUpsell = "AiBackgroundUpsell",
-	AvatarBackgrounds = "AvatarBackgrounds"
+	AvatarBackgrounds = "AvatarBackgrounds",
+	GameJoinEarlyAccessUpsell = "GameJoinEarlyAccessUpsell"
 }

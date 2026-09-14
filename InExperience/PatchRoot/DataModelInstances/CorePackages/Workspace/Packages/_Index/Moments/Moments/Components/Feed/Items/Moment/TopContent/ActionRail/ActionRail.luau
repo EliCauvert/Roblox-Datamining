@@ -16,18 +16,16 @@ local reactionButtonModule = require(script.Parent.ReactionButton)
 local contextualMenuModule = require(moments.Components.Feed.ContextualMenu)
 local useMomentsSession = require(moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
-local fFlagMomentsFixFeedShareArrowIconModule = require(moments.Flags.FFlagMomentsFixFeedShareArrowIcon)
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
 local useConfigurationModule = require(moments.Hooks.useConfiguration)
 local useShareMomentModule = require(moments.Share.useShareMoment)
 local var1 = if fFlagMomentsComments then require(moments.Components.Comments.Sheet) else nil
-local paperAirplane = builderIconsModule.Icon.PaperAirplane
 local arrowThickToRight = builderIconsModule.Icon.ArrowThickToRight
 local speechBubbleAlignLeft = builderIconsModule.Icon.SpeechBubbleAlignLeft
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactUtilsModule (ref), momentContextModule (ref), useShareMomentModule (ref), useSignalBinding (ref), fFlagMomentsComments (ref), useSignalState (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), useConfigurationModule (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), reactModule (ref), reactionButtonModule (ref), railItemModule (ref), speechBubbleAlignLeft (ref), var1 (ref), fFlagMomentsFixFeedShareArrowIconModule (ref), arrowThickToRight (ref), paperAirplane (ref), contextualMenuModule (ref), view (ref)
+	-- upvalues: reactUtilsModule (ref), momentContextModule (ref), useShareMomentModule (ref), useSignalBinding (ref), fFlagMomentsComments (ref), useSignalState (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), useConfigurationModule (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), reactModule (ref), reactionButtonModule (ref), railItemModule (ref), speechBubbleAlignLeft (ref), var1 (ref), arrowThickToRight (ref), contextualMenuModule (ref), view (ref)
 	local var2 = reactUtilsModule.createNextOrder()
 	local var3 = momentContextModule.useMoment()
 	local store = var3.store
@@ -82,7 +80,7 @@ return reactModule.memo(function(p1)
 		end
 		t.Share = reactModule.createElement(railItemModule, {
 			LayoutOrder = var2(),
-			slot = if fFlagMomentsFixFeedShareArrowIconModule then arrowThickToRight else paperAirplane,
+			slot = arrowThickToRight,
 			count = var5,
 			animationRatio = animationRatio,
 			isDisabled = var9,

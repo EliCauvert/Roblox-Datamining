@@ -86,6 +86,7 @@ return {
 			MarketplaceAsset = if p1 then p1.MarketplaceAsset else nil,
 			MarketplaceBundle = if p1 then p1.MarketplaceBundle else nil,
 			MarketplaceLook = if p1 then p1.MarketplaceLook else nil,
+			CollectibleItem = if p1 then p1.CollectibleItem else nil,
 			MediaAsset = if p1 then p1.MediaAsset else nil,
 			UserProfile = if p1 then p1.UserProfile else nil,
 			Community = if p1 then p1.Community else nil,

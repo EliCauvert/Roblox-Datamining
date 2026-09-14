@@ -26,7 +26,8 @@ local t = {
 	[sduiDataBindingContentTypeModule.gameSubscription] = if fFlagSduiDevStoreSeeAllSupport then { "subscription_id" } else nil,
 	[sduiDataBindingContentTypeModule.playability] = if fFlagSduiExperienceDetailsSupport then { "universe_id" } else nil,
 	[sduiDataBindingContentTypeModule.universeUserVoteFeedbackMetadata] = if fFlagSduiExperienceDetailsSupport then { "root_place_id" } else nil,
-	[sduiDataBindingContentTypeModule.userProfile] = if fFlagSduiExperienceDetailsSupport then { "user_id" } else nil
+	[sduiDataBindingContentTypeModule.userProfile] = if fFlagSduiExperienceDetailsSupport then { "user_id" } else nil,
+	[sduiDataBindingContentTypeModule.collectibleItem] = if sharedFlagsModule.FFlagSduiAddCollectibleItemDataHydration then { "collectible_item_id" } else nil
 }
 
 return function(p1, p2)

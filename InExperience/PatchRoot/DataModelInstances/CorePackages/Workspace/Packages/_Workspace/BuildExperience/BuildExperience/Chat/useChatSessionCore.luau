@@ -25,11 +25,9 @@ local fFlagBuildExperiencePersistPlaytestLogsModule = require(buildExperience.Fl
 local fFlagBuildExperienceShowThinkingBeforeUniverseCreationModule = require(buildExperience.Flags.FFlagBuildExperienceShowThinkingBeforeUniverseCreation)
 local fFlagBuildAdUpsellModule = require(buildExperience.Flags.FFlagBuildAdUpsell)
 local fFlagBuildExperiencePinForBuild = sharedFlagsModule.FFlagBuildExperiencePinForBuild
-local fFlagBuildExperienceAssetLibrary = sharedFlagsModule.FFlagBuildExperienceAssetLibrary
 local _ = require(script.Parent.chatTypes)
 local creatorAgentChatModule_1 = require(script.Parent.creatorAgentChat)
 local parseSessionStreamModule = require(script.Parent.parseSessionStream)
-local selectedInstanceReminderModule = require(script.Parent.selectedInstanceReminder)
 local sessionPromptMessageFilterModule = require(script.Parent.sessionPromptMessageFilter)
 local useAgentRollbackRequestModule = require(script.Parent.useAgentRollbackRequest)
 local useChatScrollModule = require(script.Parent.useChatScroll)
@@ -120,20 +118,6 @@ local _ = function(p4)
 	return string.gsub(p4, "^%s*(.-)%s*$", "%1")
 end
 
-local function appendReferenceReminder(a, b)
-	-- upvalues: selectedInstanceReminderModule (ref)
-	if #b == 0 then
-		return a
-	end
-	local var9 = if typeof(a) == "string" then if a == "" then {} else { { type = "text", text = a } } else table.clone(a)
-	table.insert(var9, {
-		type = "text",
-		text = selectedInstanceReminderModule.encodeReferences(b)
-	})
-	
-	return var9
-end
-
 local _ = function(p4)
 	-- upvalues: placeVersionHistoryModule (ref)
 	if p4 == nil then
@@ -183,7 +167,7 @@ local _ = function(p4, p5, p6, p7, p8)
 end
 
 return function(p4)
-	-- upvalues: reactModule (ref), localizationRoactContext (ref), localizationStringsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperiencePersistPlaytestLogsModule (ref), fFlagBuildExperienceClientDataModelTools (ref), fFlagBuildAdUpsellModule (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule (ref), creatorAgentChatModule (ref), getAgentRollbackRequestStoreModule (ref), var7 (ref), signalsModule (ref), signalsReactModule (ref), var4 (ref), var5 (ref), var6 (ref), fFlagBuildExperienceShowThinkingBeforeUniverseCreationModule (ref), parseSessionStreamModule (ref), fFlagBuildAgentRollbackModule (ref), sessionPromptMessageFilterModule (ref), fFlagBuildExperienceAssetLibrary (ref), var3 (ref), hasPendingLocalToolResponse (ref), noteLiveAdUpsellTurns (ref), placeVersionHistoryModule (ref), reactUtilsModule (ref), useChatScrollModule (ref), getPlaytestLoadingStoreModule (ref), fFlagBuildExperienceChatHistoryPrefetchModule (ref), fFlagBuildExperiencePinForBuild (ref), messageBusService (ref), gameMessageId (ref), appLifecycleObserverService (ref), fFlagBuildExperienceFixChatBottomLockModule (ref), fFlagBuildExperiencePersistChatDraftModule (ref), var1 (ref), var2 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), creatorAgentChatModule_1 (ref), buildAgentRollbackPromptModule (ref), useAgentRollbackRequestModule (ref), universeCreateModule (ref), getDefaultTemplatePlaceIdModule (ref), debug (ref), universeConfigurationModule (ref), appendReferenceReminder (ref), launchPlaytestWithLoadingStateModule (ref)
+	-- upvalues: reactModule (ref), localizationRoactContext (ref), localizationStringsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperiencePersistPlaytestLogsModule (ref), fFlagBuildExperienceClientDataModelTools (ref), fFlagBuildAdUpsellModule (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule (ref), creatorAgentChatModule (ref), getAgentRollbackRequestStoreModule (ref), var7 (ref), signalsModule (ref), signalsReactModule (ref), var4 (ref), var5 (ref), var6 (ref), fFlagBuildExperienceShowThinkingBeforeUniverseCreationModule (ref), parseSessionStreamModule (ref), fFlagBuildAgentRollbackModule (ref), sessionPromptMessageFilterModule (ref), var3 (ref), hasPendingLocalToolResponse (ref), noteLiveAdUpsellTurns (ref), placeVersionHistoryModule (ref), reactUtilsModule (ref), useChatScrollModule (ref), getPlaytestLoadingStoreModule (ref), fFlagBuildExperienceChatHistoryPrefetchModule (ref), fFlagBuildExperiencePinForBuild (ref), messageBusService (ref), gameMessageId (ref), appLifecycleObserverService (ref), fFlagBuildExperienceFixChatBottomLockModule (ref), fFlagBuildExperiencePersistChatDraftModule (ref), var1 (ref), var2 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), creatorAgentChatModule_1 (ref), buildAgentRollbackPromptModule (ref), useAgentRollbackRequestModule (ref), universeCreateModule (ref), getDefaultTemplatePlaceIdModule (ref), debug (ref), universeConfigurationModule (ref), launchPlaytestWithLoadingStateModule (ref)
 	local var9 = reactModule.useContext(localizationRoactContext)
 	local chat_create_universe_error = var9:Format(localizationStringsModule.CHAT_CREATE_UNIVERSE_ERROR)
 	local var10 = if fFlagBuildExperienceChatImageAttachmentsModule then var9:Format(localizationStringsModule.CHAT_CAPTURE_UPLOAD_ERROR) else nil
@@ -287,7 +271,7 @@ return function(p4)
 	end, { var21, sessionId })
 	local var38 = sessionId
 	local var39 = if if var36 == nil or var36.session ~= var21 then false else var38 == nil or var38 == "" or (if var36.sessionId ~= var38 then var36.sessionId == nil and var36.session.getCasSessionId() == var38 else true) then var36 else nil
-	var85, var83 = reactModule.useState(nil)
+	var82, var80 = reactModule.useState(nil)
 	local var40 = reactModule.useRef(nil)
 	local var41 = reactModule.useRef(nil)
 	local var42 = reactModule.useRef(0)
@@ -301,7 +285,7 @@ return function(p4)
 	end, { var38 })
 	local current = var41.current
 	local var45 = sessionId
-	local var46 = if if current == nil or current.session ~= var21 then false else var45 == nil or var45 == "" or (if current.sessionId ~= var45 then current.sessionId == nil and current.session.getCasSessionId() == var45 else true) then var85 else nil
+	local var46 = if if current == nil or current.session ~= var21 then false else var45 == nil or var45 == "" or (if current.sessionId ~= var45 then current.sessionId == nil and current.session.getCasSessionId() == var45 else true) then var82 else nil
 	local var47 = if var46 ~= nil then var4 else var46.getOptimisticLocalTools
 	current = if var46 ~= nil then var5 else var46.getLocalToolActions
 	var45 = if var46 ~= nil then var6 else var46.getSetupErrorText
@@ -320,7 +304,7 @@ return function(p4)
 		var51
 	})
 	local var53 = reactModule.useMemo(function()
-		-- upvalues: parseSessionStreamModule (copy), var24 (ref), var21 (ref), sessionId (write), universeId (write), placeId (write), var48 (ref), var34 (ref), fFlagBuildAgentRollbackModule (copy), sessionPromptMessageFilterModule (copy), fFlagBuildExperienceChatImageAttachmentsModule (copy), fFlagBuildExperienceAssetLibrary (copy), var52 (ref), var39 (ref)
+		-- upvalues: parseSessionStreamModule (copy), var24 (ref), var21 (ref), sessionId (write), universeId (write), placeId (write), var48 (ref), var34 (ref), fFlagBuildAgentRollbackModule (copy), sessionPromptMessageFilterModule (copy), fFlagBuildExperienceChatImageAttachmentsModule (copy), var52 (ref), var39 (ref)
 		return parseSessionStreamModule(var24, {
 			sessionId = if var21 ~= nil then sessionId else var21.getCasSessionId() or sessionId,
 			universeId = if var21 ~= nil then universeId else var21.universeId,
@@ -328,8 +312,6 @@ return function(p4)
 			optimisticLocalTools = var48,
 			pendingUserMessage = if var34 == nil or fFlagBuildAgentRollbackModule and not sessionPromptMessageFilterModule.shouldOptimisticallyDisplay(var34.text) then nil else var34.text,
 			pendingUserImages = if fFlagBuildExperienceChatImageAttachmentsModule and var34 ~= nil and (not fFlagBuildAgentRollbackModule or sessionPromptMessageFilterModule.shouldOptimisticallyDisplay(var34.text)) then var34.images else nil,
-			pendingUserReferences = if fFlagBuildExperienceAssetLibrary and var34 ~= nil then var34.references else nil,
-			includeSelectedInstanceReferences = fFlagBuildExperienceAssetLibrary,
 			pendingUserMessageAfterSequenceId = if var34 ~= nil then nil else var34.afterSequenceId,
 			liveAssistantMessage = var52,
 			optimisticCancelledStartSequenceId = if var39 ~= nil then nil else var39.startSequenceId
@@ -479,96 +461,94 @@ return function(p4)
 		t_1 = reactModule.useRef({})
 	end
 	local v
-	local var83, var84 = reactModule.useState({})
-	local var85 = reactModule.useRef({})
-	local var86 = reactModule.useRef(nil)
-	local var87 = reactUtilsModule.useClock()
-	local var88 = useChatScrollModule()
-	local var89 = reactModule.useCallback(function(p5, p6)
+	local var83 = reactModule.useRef(nil)
+	local var84 = reactUtilsModule.useClock()
+	local var85 = useChatScrollModule()
+	local var86 = reactModule.useCallback(function(p5, p6)
 		-- upvalues: getPlaytestLoadingStoreModule (copy)
 		getPlaytestLoadingStoreModule().setAgentStatusForPlaceId(p5, p6)
 	end, {})
-	local var90 = reactModule.useCallback(function(p5)
-		-- upvalues: var88 (ref), var21 (ref), fFlagBuildExperienceChatHistoryPrefetchModule (copy)
-		local var91 = function()
+	local var87 = reactModule.useCallback(function(p5)
+		-- upvalues: var85 (ref), var21 (ref), fFlagBuildExperienceChatHistoryPrefetchModule (copy)
+		local var88 = function()
 			-- upvalues: p5 (ref)
 			return if p5 == nil then false else p5()
 		end
 		
-		var88.captureDistanceFromBottom()
+		var85.captureDistanceFromBottom()
 		
 		if var21 == nil then return end
 		if fFlagBuildExperienceChatHistoryPrefetchModule then
-			var21.requestOlderHistoryWhile(var91, function()
-				-- upvalues: var88 (copy)
-				return var88.isNearTopRef.current
+			var21.requestOlderHistoryWhile(var88, function()
+				-- upvalues: var85 (copy)
+				return var85.isNearTopRef.current
 			end)
 			
 			return
 		end
 		task.spawn(function()
-			-- upvalues: var21 (copy), var91 (ref), var88 (copy), p5 (ref)
-			if var21.loadOlderHistory(var91) and var21.getNextHistoryPageToken() ~= nil and var88.isAtTopRef.current then
+			-- upvalues: var21 (copy), var88 (ref), var85 (copy), p5 (ref)
+			if var21.loadOlderHistory(var88) and var21.getNextHistoryPageToken() ~= nil and var85.isAtTopRef.current then
 				task.delay(0.1, function()
-					-- upvalues: p5 (copy), var88 (copy), var21 (copy), var91 (copy)
+					-- upvalues: p5 (copy), var85 (copy), var21 (copy), var88 (copy)
 					if if p5 ~= nil then false else p5() then return end
-					if var88.isViewportUnderfilled() then
-						var21.loadOlderHistory(var91)
+					if var85.isViewportUnderfilled() then
+						var21.loadOlderHistory(var88)
 					end
 				end)
 			end
 		end)
-	end, { var21, var88 })
-	local var91 = reactModule.useCallback(function(p5)
-		-- upvalues: var21 (ref), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var88 (ref), var90 (ref)
+	end, { var21, var85 })
+	local var88 = reactModule.useCallback(function(p5)
+		-- upvalues: var21 (ref), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var85 (ref), var87 (ref)
 		task.delay(0.1, function()
-			-- upvalues: p5 (ref), var21 (copy), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var88 (copy), var90 (copy)
+			-- upvalues: p5 (ref), var21 (copy), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var85 (copy), var87 (copy)
 			if p5() then return end
 			if var21 == nil then return end
 			if var21.getNextHistoryPageToken() == nil then return end
 			if fFlagBuildExperienceChatHistoryPrefetchModule then
-				if var88.isNearTopRef.current then
-					var90(p5)
+				if var85.isNearTopRef.current then
+					var87(p5)
 					
 					return
 				else
 					return
 				end
-			elseif var88.isViewportUnderfilled() then
+			elseif var85.isViewportUnderfilled() then
 			else
 			end
 		end)
-	end, { var90, var88, var21 })
-	local var92 = reactModule.useCallback(function(p5)
-		-- upvalues: var21 (ref), var91 (ref)
+	end, { var87, var85, var21 })
+	local var89 = reactModule.useCallback(function(p5)
+		-- upvalues: var21 (ref), var88 (ref)
 		if var21 == nil then return end
 		if var21.getNextHistoryPageToken() == nil then
 			return
 		end
-		var91(p5)
-	end, { var91, var21 })
-	local var93 = reactModule.useRef(var92)
-	var93.current = var92
+		var88(p5)
+	end, { var88, var21 })
+	local var90 = reactModule.useRef(var89)
+	var90.current = var89
 	reactModule.useEffect(function()
-		-- upvalues: var88 (ref), var90 (ref)
-		var88.setOnScrolledToTop(function()
-			-- upvalues: var90 (copy)
-			var90(nil)
+		-- upvalues: var85 (ref), var87 (ref)
+		var85.setOnScrolledToTop(function()
+			-- upvalues: var87 (copy)
+			var87(nil)
 		end)
 		
 		return function()
-			-- upvalues: var88 (copy)
-			var88.setOnScrolledToTop(nil)
+			-- upvalues: var85 (copy)
+			var85.setOnScrolledToTop(nil)
 		end
-	end, { var88.setOnScrolledToTop, var90 })
+	end, { var85.setOnScrolledToTop, var87 })
 	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), var21 (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 (ref), var29 (write), sessionId (write), universeId (write), var93 (ref), fFlagBuildExperienceChatHistoryPrefetchModule (copy), creatorAgentChatStore (ref), fFlagBuildExperiencePinForBuild (copy), var14 (ref), placeId (write)
+		-- upvalues: var18 (ref), var21 (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 (ref), var29 (write), sessionId (write), universeId (write), var90 (ref), fFlagBuildExperienceChatHistoryPrefetchModule (copy), creatorAgentChatStore (ref), fFlagBuildExperiencePinForBuild (copy), var14 (ref), placeId (write)
 		if var18 and var21 ~= nil then
-			local var94 = false
+			local var91 = false
 			
 			local function _(value)
-				-- upvalues: fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 (copy), var29 (copy), var94 (write), var21 (copy), sessionId (copy), universeId (copy), var18 (copy)
-				if fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 and var29 ~= nil and not var94 then
+				-- upvalues: fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 (copy), var29 (copy), var91 (write), var21 (copy), sessionId (copy), universeId (copy), var18 (copy)
+				if fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 and var29 ~= nil and not var91 then
 					var29({
 						session = var21,
 						sessionId = sessionId,
@@ -581,7 +561,7 @@ return function(p4)
 				end
 			end
 			
-			local var95 = not (var21.hasLoadedHistory() and #var21.getMergedHistory(false) > 0)
+			local var92 = not (var21.hasLoadedHistory() and #var21.getMergedHistory(false) > 0)
 			
 			if fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 and var29 ~= nil then
 				var29({
@@ -589,50 +569,50 @@ return function(p4)
 					sessionId = sessionId,
 					universeId = universeId,
 					hydrateHistoryWhen = var18,
-					isLoading = var95
+					isLoading = var92
 				})
 			end
 			local function isHydrateCancelled()
-				-- upvalues: var94 (write), sessionId (ref), var21 (copy)
-				return if var94 then true elseif sessionId == nil or sessionId == "" then false else var21.getCasSessionId() ~= sessionId
+				-- upvalues: var91 (write), sessionId (ref), var21 (copy)
+				return if var91 then true elseif sessionId == nil or sessionId == "" then false else var21.getCasSessionId() ~= sessionId
 			end
 			
 			local _ = function()
-				-- upvalues: var94 (write), sessionId (ref), var21 (copy), var93 (copy), isHydrateCancelled (ref)
-				local var96
-				if var94 then
-					var96 = true
+				-- upvalues: var91 (write), sessionId (ref), var21 (copy), var90 (copy), isHydrateCancelled (ref)
+				local var93
+				if var91 then
+					var93 = true
 				elseif sessionId == nil or sessionId == "" then
-					var96 = false
+					var93 = false
 				else
-					var96 = var21.getCasSessionId() ~= sessionId
-					var96 = nil
+					var93 = var21.getCasSessionId() ~= sessionId
+					var93 = nil
 				end
-				if var96 then
+				if var93 then
 					return
 				end
-				var93.current(isHydrateCancelled)
+				var90.current(isHydrateCancelled)
 			end
 			
 			local function hydrateKnownSession(p5)
-				-- upvalues: var21 (copy), var94 (write), sessionId (ref), var93 (copy), isHydrateCancelled (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 (copy), var29 (copy), sessionId (copy), universeId (copy), var18 (copy), fFlagBuildExperienceChatHistoryPrefetchModule (copy)
+				-- upvalues: var21 (copy), var91 (write), sessionId (ref), var90 (copy), isHydrateCancelled (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 (copy), var29 (copy), sessionId (copy), universeId (copy), var18 (copy), fFlagBuildExperienceChatHistoryPrefetchModule (copy)
 				var21.setCasSessionId(p5)
 				
 				if var21.hasLoadedHistory() and #var21.getMergedHistory(false) > 0 then
-					local var96
-					if var94 then
-						var96 = true
+					local var93
+					if var91 then
+						var93 = true
 					elseif sessionId == nil or sessionId == "" then
-						var96 = false
+						var93 = false
 					else
-						var96 = var21.getCasSessionId() ~= sessionId
-						var96 = nil
+						var93 = var21.getCasSessionId() ~= sessionId
+						var93 = nil
 					end
-					if not var96 then
-						var93.current(isHydrateCancelled)
+					if not var93 then
+						var90.current(isHydrateCancelled)
 					end
 					if fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 and var29 ~= nil then
-						if var94 then return end
+						if var91 then return end
 						var29({
 							isLoading = false,
 							session = var21,
@@ -643,31 +623,31 @@ return function(p4)
 					end
 					return
 				elseif if fFlagBuildExperienceChatHistoryPrefetchModule then var21.refreshSession(isHydrateCancelled, true) else var21.refreshSession(isHydrateCancelled) then
-					local var97
-					if var94 then
-						var97 = true
+					local var94
+					if var91 then
+						var94 = true
 					elseif sessionId == nil or sessionId == "" then
-						var97 = false
+						var94 = false
 					else
-						var97 = var21.getCasSessionId() ~= sessionId
-						var97 = nil
+						var94 = var21.getCasSessionId() ~= sessionId
+						var94 = nil
 					end
-					if not var97 then
-						if var94 then
-							var97 = true
+					if not var94 then
+						if var91 then
+							var94 = true
 						elseif sessionId == nil or sessionId == "" then
-							var97 = false
+							var94 = false
 						else
-							var97 = var21.getCasSessionId() ~= sessionId
-							var97 = nil
+							var94 = var21.getCasSessionId() ~= sessionId
+							var94 = nil
 						end
-						if not var97 then
-							var93.current(isHydrateCancelled)
+						if not var94 then
+							var90.current(isHydrateCancelled)
 						end
 					end
 				end
 				if fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 and var29 ~= nil then
-					if var94 then return end
+					if var91 then return end
 					var29({
 						isLoading = false,
 						session = var21,
@@ -679,14 +659,14 @@ return function(p4)
 			end
 			
 			task.spawn(function()
-				-- upvalues: sessionId (copy), hydrateKnownSession (ref), universeId (copy), var21 (copy), fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 (copy), var29 (copy), var94 (write), var18 (copy), creatorAgentChatStore (copy), fFlagBuildExperiencePinForBuild (copy), sessionId (ref), var14 (copy), placeId (copy)
+				-- upvalues: sessionId (copy), hydrateKnownSession (ref), universeId (copy), var21 (copy), fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 (copy), var29 (copy), var91 (write), var18 (copy), creatorAgentChatStore (copy), fFlagBuildExperiencePinForBuild (copy), sessionId (ref), var14 (copy), placeId (copy)
 				if sessionId ~= nil and sessionId ~= "" then
 					hydrateKnownSession(sessionId)
 					
 					return
 				elseif universeId == nil or universeId == 0 or var21.hasLoadedHistory() and #var21.getMergedHistory(false) > 0 then
 					if fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 and var29 ~= nil then
-						if var94 then return end
+						if var91 then return end
 						var29({
 							isLoading = false,
 							session = var21,
@@ -697,27 +677,27 @@ return function(p4)
 					end
 					return
 				else
-					local var96 = creatorAgentChatStore.sessionFindByUniverse({
+					local var93 = creatorAgentChatStore.sessionFindByUniverse({
 						sort = "desc",
 						universeId = universeId,
 						application = if fFlagBuildExperiencePinForBuild then "build" else nil,
 						filterByPinForBuild = if fFlagBuildExperiencePinForBuild then true else nil
 					})
-					while var96.state(false).status == "pending" do
-						local var97
-						if var94 then
-							var97 = true
+					while var93.state(false).status == "pending" do
+						local var94
+						if var91 then
+							var94 = true
 						elseif sessionId == nil or sessionId == "" then
-							var97 = false
+							var94 = false
 						else
-							var97 = var21.getCasSessionId() ~= sessionId
-							var97 = nil
+							var94 = var21.getCasSessionId() ~= sessionId
+							var94 = nil
 						end
-						if var97 then break end
+						if var94 then break end
 						task.wait()
 					end
 					local result
-					if var94 then
+					if var91 then
 						result = true
 					elseif sessionId == nil or sessionId == "" then
 						result = false
@@ -725,9 +705,9 @@ return function(p4)
 						result = var21.getCasSessionId() ~= sessionId
 						result = nil
 					end
-					if result or var96.state(false).status ~= "succeeded" then
+					if result or var93.state(false).status ~= "succeeded" then
 						if fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 and var29 ~= nil then
-							if var94 then return end
+							if var91 then return end
 							var29({
 								isLoading = false,
 								session = var21,
@@ -738,16 +718,16 @@ return function(p4)
 						end
 						return
 					else
-						result = var96.state(false).result
-						local var98 = if result ~= nil then nil else result.sessions
-						local var99 = if typeof(var98) == "table" then var98[1] else nil
-						local var100 = if typeof(var99) == "table" then var99.sessionId else nil
+						result = var93.state(false).result
+						local var95 = if result ~= nil then nil else result.sessions
+						local var96 = if typeof(var95) == "table" then var95[1] else nil
+						local var97 = if typeof(var96) == "table" then var96.sessionId else nil
 						
-						if typeof(var100) == "string" and var100 ~= "" then
+						if typeof(var97) == "string" and var97 ~= "" then
 							var14({
 								universeId = universeId,
 								placeId = placeId,
-								sessionId = var100
+								sessionId = var97
 							})
 							
 							return
@@ -755,7 +735,7 @@ return function(p4)
 						var21.markHistoryLoaded()
 						
 						if fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 and var29 ~= nil then
-							if var94 then return end
+							if var91 then return end
 							var29({
 								isLoading = false,
 								session = var21,
@@ -769,8 +749,8 @@ return function(p4)
 			end)
 			
 			return function()
-				-- upvalues: var94 (write)
-				var94 = true
+				-- upvalues: var91 (write)
+				var91 = true
 			end
 		elseif fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1 and var29 ~= nil then
 			var29({
@@ -786,14 +766,14 @@ return function(p4)
 		fFlagBuildExperienceChatHistoryLoadingSkeletonModule_1
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var21 (ref), sessionId (write), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var93 (ref), messageBusService (copy), gameMessageId (copy), fFlagBuildExperiencePersistPlaytestLogsModule (copy), fFlagBuildExperienceClientDataModelTools (copy), var15 (write), appLifecycleObserverService (copy)
+		-- upvalues: var21 (ref), sessionId (write), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var90 (ref), messageBusService (copy), gameMessageId (copy), fFlagBuildExperiencePersistPlaytestLogsModule (copy), fFlagBuildExperienceClientDataModelTools (copy), var15 (write), appLifecycleObserverService (copy)
 		if var21 == nil then
 			return
 		end
-		local var96 = false
+		local var93 = false
 		
 		local function refreshKnownSession()
-			-- upvalues: var21 (copy), sessionId (copy), var96 (write), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var93 (copy)
+			-- upvalues: var21 (copy), sessionId (copy), var93 (write), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var90 (copy)
 			local casSessionId = var21.getCasSessionId()
 			
 			if (casSessionId == nil or casSessionId == "") and (sessionId ~= nil and sessionId ~= "") then
@@ -803,22 +783,22 @@ return function(p4)
 				return
 			end
 			task.spawn(function()
-				-- upvalues: var96 (copy), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var21 (copy), var93 (copy)
+				-- upvalues: var93 (copy), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var21 (copy), var90 (copy)
 				local function isRefreshCancelled()
-					-- upvalues: var96 (copy)
-					return var96
+					-- upvalues: var93 (copy)
+					return var93
 				end
 				
-				if (if fFlagBuildExperienceChatHistoryPrefetchModule then var21.refreshSession(isRefreshCancelled, true) else var21.refreshSession(isRefreshCancelled)) and not var96 then
-					var93.current(function()
-						-- upvalues: var96 (copy)
-						return var96
+				if (if fFlagBuildExperienceChatHistoryPrefetchModule then var21.refreshSession(isRefreshCancelled, true) else var21.refreshSession(isRefreshCancelled)) and not var93 then
+					var90.current(function()
+						-- upvalues: var93 (copy)
+						return var93
 					end)
 				end
 			end)
 		end
 		
-		local var97 = messageBusService:Subscribe(gameMessageId, function(_)
+		local var94 = messageBusService:Subscribe(gameMessageId, function(_)
 			-- upvalues: fFlagBuildExperiencePersistPlaytestLogsModule (copy), fFlagBuildExperienceClientDataModelTools (copy), var15 (copy), refreshKnownSession (ref)
 			if (fFlagBuildExperiencePersistPlaytestLogsModule or fFlagBuildExperienceClientDataModelTools) and var15 ~= nil then
 				var15.current = true
@@ -828,37 +808,37 @@ return function(p4)
 		local onUnhideConnection = appLifecycleObserverService.OnUnhide:Connect(refreshKnownSession)
 		
 		return function()
-			-- upvalues: var96 (write), var97 (ref), onUnhideConnection (ref)
-			var96 = true
-			var97:Disconnect()
+			-- upvalues: var93 (write), var94 (ref), onUnhideConnection (ref)
+			var93 = true
+			var94:Disconnect()
 			onUnhideConnection:Disconnect()
 		end
 	end, { var21, sessionId, var15 })
 	reactModule.useEffect(function()
-		-- upvalues: fFlagBuildExperienceFixChatBottomLockModule (copy), var18 (ref), var88 (ref)
+		-- upvalues: fFlagBuildExperienceFixChatBottomLockModule (copy), var18 (ref), var85 (ref)
 		if fFlagBuildExperienceFixChatBottomLockModule and var18 then
-			var88.lockToBottom()
+			var85.lockToBottom()
 			
 			return
 		end
-	end, { var18, var21, sessionId, var88 })
-	local var96 = reactModule.useCallback(function(p5)
+	end, { var18, var21, sessionId, var85 })
+	local var93 = reactModule.useCallback(function(p5)
 		-- upvalues: var73 (ref), var70 (ref), var72 (ref)
 		var73.current = p5
 		var70(p5)
 		var72(nil)
 	end, { var70, var72 })
-	local var97 = if fFlagBuildExperiencePersistChatDraftModule then reactModule.useCallback(function()
+	local var94 = if fFlagBuildExperiencePersistChatDraftModule then reactModule.useCallback(function()
 		-- upvalues: var75 (ref)
 		if var75.current ~= nil then
 			task.cancel(var75.current)
 			var75.current = nil
 		end
 	end, {}) else nil
-	local var98 = if fFlagBuildExperiencePersistChatDraftModule then reactModule.useCallback(function(p5)
-		-- upvalues: var74 (ref), var97 (ref), var76 (ref), var75 (ref), var1 (copy)
+	local var95 = if fFlagBuildExperiencePersistChatDraftModule then reactModule.useCallback(function(p5)
+		-- upvalues: var74 (ref), var94 (ref), var76 (ref), var75 (ref), var1 (copy)
 		var74.current = p5
-		var97()
+		var94()
 		local current = var76.current
 		
 		if current == nil or current == "" then
@@ -869,61 +849,61 @@ return function(p4)
 			var75.current = nil
 			var1.setChatDraft(current, p5)
 		end)
-	end, { var97 }) else nil
-	local var99 = if fFlagBuildExperiencePersistChatDraftModule then reactModule.useCallback(function(p5)
-		-- upvalues: var76 (ref), var74 (ref), var97 (ref), var1 (copy)
+	end, { var94 }) else nil
+	local var96 = if fFlagBuildExperiencePersistChatDraftModule then reactModule.useCallback(function(p5)
+		-- upvalues: var76 (ref), var74 (ref), var94 (ref), var1 (copy)
 		local current = var76.current
 		
 		if current == nil or current == "" then
 			return
 		end
 		var74.current = p5
-		var97()
+		var94()
 		var1.setChatDraft(current, p5)
-	end, { var97 }) else nil
-	local var100 = if fFlagBuildExperiencePersistChatDraftModule then reactModule.useCallback(function(p5, p6)
-		-- upvalues: var74 (ref), var97 (ref), var1 (copy)
+	end, { var94 }) else nil
+	local var97 = if fFlagBuildExperiencePersistChatDraftModule then reactModule.useCallback(function(p5, p6)
+		-- upvalues: var74 (ref), var94 (ref), var1 (copy)
 		if p6 == nil or p6 == "" or var74.current ~= p5 then
 			return
 		end
 		var74.current = ""
-		var97()
+		var94()
 		var1.setChatDraft(p6, "")
-	end, { var97 }) else nil
-	local var101 = reactModule.useCallback(function(p5)
-		-- upvalues: var96 (ref), fFlagBuildExperiencePersistChatDraftModule (copy), var98 (ref)
-		var96(p5)
+	end, { var94 }) else nil
+	local var98 = reactModule.useCallback(function(p5)
+		-- upvalues: var93 (ref), fFlagBuildExperiencePersistChatDraftModule (copy), var95 (ref)
+		var93(p5)
 		
 		if fFlagBuildExperiencePersistChatDraftModule then
-			var98(p5)
+			var95(p5)
 		end
-	end, { var96, var98 })
+	end, { var93, var95 })
 	reactModule.useEffect(function()
-		-- upvalues: fFlagBuildExperiencePersistChatDraftModule (copy), var23 (ref), var77 (ref), var97 (ref), var73 (ref), var74 (ref), var1 (copy), var96 (ref), var75 (ref)
+		-- upvalues: fFlagBuildExperiencePersistChatDraftModule (copy), var23 (ref), var77 (ref), var94 (ref), var73 (ref), var74 (ref), var1 (copy), var93 (ref), var75 (ref)
 		if not fFlagBuildExperiencePersistChatDraftModule then return end
 		if var23 == nil or var23 == "" then return end
 		local current = var77.current
 		var77.current = var23
-		var97()
+		var94()
 		
 		if current == nil and var73.current ~= "" then
 			var74.current = var73.current
 			var1.setChatDraft(var23, var73.current)
 		else
-			local var102 = var1.getChatDraft(var23) or ""
-			var74.current = var102
-			var96(var102)
+			local var99 = var1.getChatDraft(var23) or ""
+			var74.current = var99
+			var93(var99)
 		end
 		return function()
-			-- upvalues: var75 (copy), var97 (copy), var1 (copy), var23 (copy), var74 (copy)
-			local var103 = var75.current ~= nil
-			var97()
+			-- upvalues: var75 (copy), var94 (copy), var1 (copy), var23 (copy), var74 (copy)
+			local var100 = var75.current ~= nil
+			var94()
 			
-			if var103 then
+			if var100 then
 				var1.setChatDraft(var23, var74.current)
 			end
 		end
-	end, { var23, var97, var96 })
+	end, { var23, var94, var93 })
 	
 	local function _(p5)
 		-- upvalues: t_1 (write), var78 (write)
@@ -964,7 +944,7 @@ return function(p4)
 	
 	local function beginComposerImageUpload(p8)
 		-- upvalues: var80 (ref), var79 (ref), updateComposerImage (ref), var72 (ref), var2 (copy), fFlagBuildExperienceChatImageAttachmentsModule (copy), var10 (ref)
-		local var102
+		local var99
 		var80.current += 1
 		local current = var80.current
 		var79.current[p8] = current
@@ -978,14 +958,14 @@ return function(p4)
 			return cloned
 		end) do
 			if v.uploadStatus == "failed" then
-				var102 = true
-				if not var102 then
+				var99 = true
+				if not var99 then
 					var72(nil)
 				end
 				var2(p8):andThen(function(p9)
 					-- upvalues: var79 (copy), p8 (ref), current (ref), updateComposerImage (copy), var72 (copy)
 					if var79.current[p8] ~= current then return end
-					local var103
+					local var100
 					var79.current[p8] = nil
 					
 					for i, v in updateComposerImage(p8, function(p10)
@@ -998,14 +978,14 @@ return function(p4)
 						return cloned
 					end) do
 						if v.uploadStatus == "failed" then
-							var103 = true
-							if not var103 then
+							var100 = true
+							if not var100 then
 								var72(nil)
 							end
 							return
 						end
 					end
-					var103 = false
+					var100 = false
 				end):catch(function(p10)
 					-- upvalues: var79 (copy), p8 (ref), current (ref), updateComposerImage (copy), fFlagBuildExperienceChatImageAttachmentsModule (copy), var72 (copy), var10 (copy)
 					if var79.current[p8] ~= current then return end
@@ -1028,50 +1008,50 @@ return function(p4)
 				return
 			end
 		end
-		var102 = false
+		var99 = false
 	end
 	
 	local function setComposerImages(value)
 		-- upvalues: t_1 (write), var79 (ref), var78 (write), var72 (ref), beginComposerImageUpload (ref)
-		local var103
+		local var100
 		local current = t_1.current
 		local t = {}
 		local t_2 = {}
 		
 		for i = 1, math.min(#value, 2) do
-			local var104 = value[i]
-			var103 = var104
+			local var101 = value[i]
+			var100 = var101
 			
-			if var104.capture ~= nil and var104.uri == nil and var104.uploadStatus == nil then
+			if var101.capture ~= nil and var101.uri == nil and var101.uploadStatus == nil then
 				for i, v in current do
-					if v.capture == var104.capture then
-						var103 = v
+					if v.capture == var101.capture then
+						var100 = v
 						break
 					end
 				end
 			end
-			if var103.uri ~= nil and var103.uploadStatus == nil then
-				var103 = table.clone(var103)
-				var103.uploadStatus = "uploaded"
-			elseif var103.capture ~= nil and var103.uri == nil and var103.uploadStatus == nil then
-				var103 = table.clone(var103)
-				var103.uploadStatus = "uploading"
-				table.insert(t_2, var103.capture)
+			if var100.uri ~= nil and var100.uploadStatus == nil then
+				var100 = table.clone(var100)
+				var100.uploadStatus = "uploaded"
+			elseif var100.capture ~= nil and var100.uri == nil and var100.uploadStatus == nil then
+				var100 = table.clone(var100)
+				var100.uploadStatus = "uploading"
+				table.insert(t_2, var100.capture)
 			end
-			table.insert(t, var103)
+			table.insert(t, var100)
 		end
-		local var105
-		for i_1, var103 in current do
-			var105 = false
+		local var102
+		for i_1, var100 in current do
+			var102 = false
 			
 			for i_3, v_1 in t do
-				if v_1.capture == var103.capture then
-					var105 = true
+				if v_1.capture == var100.capture then
+					var102 = true
 					break
 				end
 			end
-			if not var105 and var103.capture ~= nil then
-				var79.current[var103.capture] = nil
+			if not var102 and var100.capture ~= nil then
+				var79.current[var100.capture] = nil
 			end
 		end
 		t_1.current = t
@@ -1079,94 +1059,56 @@ return function(p4)
 		if var78 ~= nil then
 			var78(t)
 		end
-		local var106
-		for var103, v_1 in t do
+		local var103
+		for var100, v_1 in t do
 			if v_1.uploadStatus == "failed" then
-				var106 = true
-				if not var106 then
+				var103 = true
+				if not var103 then
 					var72(nil)
 				end
-				for i_3, var103 in t_2 do
-					beginComposerImageUpload(var103)
+				for i_3, var100 in t_2 do
+					beginComposerImageUpload(var100)
 				end
 				return
 			end
 		end
-		var106 = false
+		var103 = false
 	end
 	
-	local var107 = reactModule.useRef(setComposerImages)
-	var107.current = setComposerImages
+	local var104 = reactModule.useRef(setComposerImages)
+	var104.current = setComposerImages
 	
 	local function retryComposerImage(p9)
 		-- upvalues: t_1 (write), beginComposerImageUpload (ref)
-		local var108 = t_1.current[p9]
+		local var105 = t_1.current[p9]
 		
-		if var108 == nil or var108.capture == nil or var108.uploadStatus ~= "failed" then
+		if var105 == nil or var105.capture == nil or var105.uploadStatus ~= "failed" then
 			return
 		end
-		beginComposerImageUpload(var108.capture)
+		beginComposerImageUpload(var105.capture)
 	end
 	
-	local var108 = reactModule.useCallback(function(p9)
-		-- upvalues: var85 (ref), var84 (ref), var72 (ref)
-		var85.current = p9
-		var84(p9)
-		var72(nil)
-	end, { var72 })
-	local var109 = reactModule.useCallback(function(p9)
-		-- upvalues: var85 (ref), var108 (ref)
-		for i, v in var85.current do
-			if v.path == p9.path then
-				return false
-			end
-		end
-		local cloned = table.clone(var85.current)
-		table.insert(cloned, p9)
-		var108(cloned)
-		
-		return true
-	end, { var108 })
-	local var110 = reactModule.useCallback(function(p10)
-		-- upvalues: var85 (ref), var108 (ref)
-		local cloned = table.clone(var85.current)
-		table.remove(cloned, p10)
-		var108(cloned)
-	end, { var108 })
-	local var111 = reactModule.useCallback(function(p10)
-		-- upvalues: var85 (ref), var108 (ref)
-		for i, v in var85.current do
-			if v.path == p10 then
-				local cloned = table.clone(var85.current)
-				table.remove(cloned, i)
-				var108(cloned)
-				
-				return true
-			end
-		end
-		return false
-	end, { var108 })
-	local var112 = false
+	local var105 = false
 	
 	for i, v in t do
 		if v.uri == nil or v.uploadStatus == "uploading" or v.uploadStatus == "failed" then
-			var112 = true
+			var105 = true
 			break
 		end
 	end
-	local var113 = if fFlagBuildExperienceToolResultFailureRecoveryModule then reactModule.useCallback(function(p11)
-		-- upvalues: var42 (ref), var41 (ref), var21 (ref), sessionId (write), var73 (ref), var101 (ref), creatorAgentChatModule_1 (copy), var9 (ref), var72 (ref)
-		return function(p12, p13)
-			-- upvalues: var42 (copy), p11 (ref), var41 (copy), var21 (copy), sessionId (copy), var73 (copy), var101 (copy), creatorAgentChatModule_1 (copy), var9 (copy), var72 (copy)
-			if var42.current == p11 then
+	local var106 = if fFlagBuildExperienceToolResultFailureRecoveryModule then reactModule.useCallback(function(p9)
+		-- upvalues: var42 (ref), var41 (ref), var21 (ref), sessionId (write), var73 (ref), var98 (ref), creatorAgentChatModule_1 (copy), var9 (ref), var72 (ref)
+		return function(p10, p11)
+			-- upvalues: var42 (copy), p9 (ref), var41 (copy), var21 (copy), sessionId (copy), var73 (copy), var98 (copy), creatorAgentChatModule_1 (copy), var9 (copy), var72 (copy)
+			if var42.current == p9 then
 				local current = var41.current
-				local var114 = sessionId
+				local var107 = sessionId
 				
-				if not (if current == nil or current.session ~= var21 then false else var114 == nil or var114 == "" or (if current.sessionId ~= var114 then current.sessionId == nil and current.session.getCasSessionId() == var114 else true)) then return end
-				if p12 ~= nil and var73.current == "" then
-					var101(p12)
+				if not (if current == nil or current.session ~= var21 then false else var107 == nil or var107 == "" or (if current.sessionId ~= var107 then current.sessionId == nil and current.session.getCasSessionId() == var107 else true)) then return end
+				if p10 ~= nil and var73.current == "" then
+					var98(p10)
 				end
-				var72(var9:Format(creatorAgentChatModule_1.getToolResultFailureComposerError(p13)))
+				var72(var9:Format(creatorAgentChatModule_1.getToolResultFailureComposerError(p11)))
 				
 				return
 			end
@@ -1174,29 +1116,29 @@ return function(p4)
 	end, {
 		var21,
 		sessionId,
-		var101,
+		var98,
 		var72,
 		var9
 	}) else nil
-	local var114 = reactModule.useCallback(function(p11, p12, p13, p14, p15, p16)
-		-- upvalues: var42 (ref), var44 (ref), var43 (ref), var35 (ref), p4 (ref), var89 (ref), fFlagBuildExperienceChatImageAttachmentsModule (copy), var107 (ref), fFlagBuildExperienceAssetLibrary (copy), var108 (ref), var101 (ref), creatorAgentChatModule_1 (copy), var9 (ref), var72 (ref), var88 (ref), sessionId (write), var12 (ref)
-		if var42.current ~= p11 then return end
+	local var107 = reactModule.useCallback(function(p9, p10, p11, p12, p13)
+		-- upvalues: var42 (ref), var44 (ref), var43 (ref), var35 (ref), p4 (ref), var86 (ref), fFlagBuildExperienceChatImageAttachmentsModule (copy), var104 (ref), var98 (ref), creatorAgentChatModule_1 (copy), var9 (ref), var72 (ref), var85 (ref), sessionId (write), var12 (ref)
+		if var42.current ~= p9 then return end
 		var44(nil)
 		var43.current = nil
 		var35(nil)
 		
-		if p12 == nil then
-			if p16.placeId ~= nil then
-				var89(p16.placeId, "Completed")
+		if p10 == nil then
+			if p13.placeId ~= nil then
+				var86(p13.placeId, "Completed")
 			end
-			var88.scrollToBottomAfterSend()
-			local casSessionId = p16.getCasSessionId()
+			var85.scrollToBottomAfterSend()
+			local casSessionId = p13.getCasSessionId()
 			
 			if casSessionId ~= nil and casSessionId ~= "" then
-				if p4.createUniverseOnFirstPrompt and sessionId == nil and p16.universeId ~= nil then
+				if p4.createUniverseOnFirstPrompt and sessionId == nil and p13.universeId ~= nil then
 					local t = {
-						universeId = p16.universeId,
-						placeId = p16.placeId,
+						universeId = p13.universeId,
+						placeId = p13.placeId,
 						sessionId = casSessionId
 					}
 					var12(t)
@@ -1206,52 +1148,49 @@ return function(p4)
 					end
 				end
 				task.spawn(function()
-					-- upvalues: p16 (ref), var42 (copy), p11 (ref)
-					p16.refreshSession(function()
-						-- upvalues: var42 (copy), p11 (copy)
-						return var42.current ~= p11
+					-- upvalues: p13 (ref), var42 (copy), p9 (ref)
+					p13.refreshSession(function()
+						-- upvalues: var42 (copy), p9 (copy)
+						return var42.current ~= p9
 					end)
 				end)
 			end
 			return
 		elseif p4.onPromptFailure ~= nil then
-			p4.onPromptFailure(p12.errorCode, p12.outOfCreditsReason)
+			p4.onPromptFailure(p10.errorCode, p10.outOfCreditsReason)
 		end
-		if p16.placeId ~= nil then
-			var89(p16.placeId, "Idle")
+		if p13.placeId ~= nil then
+			var86(p13.placeId, "Idle")
 		end
-		if fFlagBuildExperienceChatImageAttachmentsModule and p14 ~= nil then
-			var107.current(p14)
+		if fFlagBuildExperienceChatImageAttachmentsModule and p12 ~= nil then
+			var104.current(p12)
 		end
-		if fFlagBuildExperienceAssetLibrary and p15 ~= nil then
-			var108(p15)
-		end
-		if p13 ~= nil then
-			var101(p13)
-			var72(var9:Format(creatorAgentChatModule_1.getPromptFailureComposerError(p12)))
+		if p11 ~= nil then
+			var98(p11)
+			var72(var9:Format(creatorAgentChatModule_1.getPromptFailureComposerError(p10)))
 		end
 		task.spawn(function()
-			-- upvalues: p16 (ref), var42 (copy), p11 (ref)
-			p16.refreshSession(function()
-				-- upvalues: var42 (copy), p11 (copy)
-				return var42.current ~= p11
+			-- upvalues: p13 (ref), var42 (copy), p9 (ref)
+			p13.refreshSession(function()
+				-- upvalues: var42 (copy), p9 (copy)
+				return var42.current ~= p9
 			end)
 		end)
 	end, {
 		p4.createUniverseOnFirstPrompt, p4.onPromptFailure, p4.onProjectResolved,
-		sessionId, var89, var12, var88, var101, var108, var72, var44, var35, var9
+		sessionId, var86, var12, var85, var98, var72, var44, var35, var9
 	})
-	local var115 = reactModule.useRef(var18)
+	local var108 = reactModule.useRef(var18)
 	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), var115 (ref), var62 (ref), var46 (ref), var88 (ref)
-		local var116 = var18 and not var115.current
-		var115.current = var18
+		-- upvalues: var18 (ref), var108 (ref), var62 (ref), var46 (ref), var85 (ref)
+		local var109 = var18 and not var108.current
+		var108.current = var18
 		
 		if not var18 then return end
-		if var116 or var62 or var46 ~= nil then
-			var88.scrollToBottomUnconditionally()
-			task.defer(var88.scrollToBottomUnconditionally)
-			task.delay(0.15, var88.scrollToBottomUnconditionally)
+		if var109 or var62 or var46 ~= nil then
+			var85.scrollToBottomUnconditionally()
+			task.defer(var85.scrollToBottomUnconditionally)
+			task.delay(0.15, var85.scrollToBottomUnconditionally)
 			
 			return
 		end
@@ -1260,56 +1199,56 @@ return function(p4)
 		var62,
 		var46,
 		#messages,
-		var88
+		var85
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var40 (ref), var41 (ref), var21 (ref), sessionId (write), var39 (ref), var42 (ref), var43 (ref), placeId (write), var89 (ref), creatorAgentChatModule_1 (copy), var114 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), var113 (write), var16 (write), var44 (ref), var88 (ref), var53 (ref), var46 (ref), creatorAgentChatStore (ref), var62 (ref)
-		local var116
+		-- upvalues: var40 (ref), var41 (ref), var21 (ref), sessionId (write), var39 (ref), var42 (ref), var43 (ref), placeId (write), var86 (ref), creatorAgentChatModule_1 (copy), var107 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), var106 (write), var16 (write), var44 (ref), var85 (ref), var53 (ref), var46 (ref), creatorAgentChatStore (ref), var62 (ref)
+		local var109
 		if var40.current ~= nil then
 			local current = var41.current
-			var116 = sessionId
+			var109 = sessionId
 			
-			if if current == nil or current.session ~= var21 then false else var116 == nil or var116 == "" or (if current.sessionId ~= var116 then current.sessionId == nil and current.session.getCasSessionId() == var116 else true) then return end
+			if if current == nil or current.session ~= var21 then false else var109 == nil or var109 == "" or (if current.sessionId ~= var109 then current.sessionId == nil and current.session.getCasSessionId() == var109 else true) then return end
 		end
 		if var39 ~= nil then return end
 		if var21 == nil then return end
-		local var117
+		local var110
 		local casSessionId = var21.getCasSessionId()
 		
 		if typeof(casSessionId) == "string" and casSessionId ~= "" then
-			var117 = casSessionId
+			var110 = casSessionId
 		else
-			var116 = var21.universeId
+			var109 = var21.universeId
 			local placeId_1 = var21.placeId
-			var117 = if var116 == nil or placeId_1 == nil then nil else `{var116}:{placeId_1}`
+			var110 = if var109 == nil or placeId_1 == nil then nil else `{var109}:{placeId_1}`
 		end
-		if var117 == nil then return end
-		local function current(p11, p12)
-			-- upvalues: var42 (copy), var43 (copy), placeId (copy), var89 (copy), creatorAgentChatModule_1 (copy), var21 (copy), var114 (copy), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), var113 (copy), var16 (copy), var44 (copy), var88 (copy)
+		if var110 == nil then return end
+		local function current(p9, p10)
+			-- upvalues: var42 (copy), var43 (copy), placeId (copy), var86 (copy), creatorAgentChatModule_1 (copy), var21 (copy), var107 (copy), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), var106 (copy), var16 (copy), var44 (copy), var85 (copy)
 			var42.current += 1
 			local current = var42.current
-			var43.current = p12
+			var43.current = p10
 			
 			if placeId ~= nil then
-				var89(placeId, "Loading")
+				var86(placeId, "Loading")
 			end
-			local var118 = creatorAgentChatModule_1.createResumedAssistantTurn(var21, p11, function(p13)
-				-- upvalues: var114 (copy), current (ref), var21 (copy)
-				var114(current, p13, nil, nil, nil, var21)
-			end, if p12 ~= nil then nil else p12 - 1, if fFlagBuildExperienceToolResultFailureRecoveryModule then var113(current) else nil, var16)
-			var44(var118, var21)
-			var118.start()
-			var88.scrollToBottomUnconditionally()
+			local var111 = creatorAgentChatModule_1.createResumedAssistantTurn(var21, p9, function(p11)
+				-- upvalues: var107 (copy), current (ref), var21 (copy)
+				var107(current, p11, nil, nil, var21)
+			end, if p10 ~= nil then nil else p10 - 1, if fFlagBuildExperienceToolResultFailureRecoveryModule then var106(current) else nil, var16)
+			var44(var111, var21)
+			var111.start()
+			var85.scrollToBottomUnconditionally()
 		end
 		
 		if var53.activeTurnState == nil or var53.activeTurnItemIndex == nil or var53.activeTurnState.isDone then
 			var43.current = nil
-			casSessionId = creatorAgentChatStore.getActiveTurnHandle(var117)
-			var116 = if casSessionId ~= nil then nil else casSessionId.state(false)
-			local var118 = casSessionId ~= nil and (var116 ~= nil and not var116.isDone)
+			casSessionId = creatorAgentChatStore.getActiveTurnHandle(var110)
+			var109 = if casSessionId ~= nil then nil else casSessionId.state(false)
+			local var111 = casSessionId ~= nil and (var109 ~= nil and not var109.isDone)
 			
-			if not var62 and not var118 then return end
-			if var118 then
+			if not var62 and not var111 then return end
+			if var111 then
 				current(casSessionId, nil)
 			end
 			return
@@ -1317,112 +1256,107 @@ return function(p4)
 			casSessionId = var53.activeTurnStartSequenceId
 			
 			if var43.current == casSessionId and var46 ~= nil then return end
-			var116 = creatorAgentChatStore.resumeTurnFromHistory(var117, var53.activeTurnState, var53.activeTurnSequenceIds)
+			var109 = creatorAgentChatStore.resumeTurnFromHistory(var110, var53.activeTurnState, var53.activeTurnSequenceIds)
 			
-			if var116 ~= nil then
-				current(var116, casSessionId)
+			if var109 ~= nil then
+				current(var109, casSessionId)
 			end
 		end
 	end, {
-		var53, var21, sessionId, creatorAgentChatStore, var62, var46, placeId, var89,
-		var114, var88, var44, var39, var113, var16
+		var53, var21, sessionId, creatorAgentChatStore, var62, var46, placeId, var86,
+		var107, var85, var44, var39, var106, var16
 	})
-	local var116 = reactModule.useCallback(function(p11, p12, p13, p14, p15, p16, p17, p18, p19, p20)
-		-- upvalues: var35 (ref), var55 (write), fFlagBuildExperiencePersistChatDraftModule (copy), var100 (ref), sessionId (write), fFlagBuildAgentRollbackModule (copy), creatorAgentChatModule_1 (copy), var114 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), var113 (write), var16 (write), var89 (ref), var44 (ref), var88 (ref)
-		var35({
-			text = p12,
-			images = p14,
-			references = p15,
-			afterSequenceId = p17
-		})
-		local var117 = var55
+	local var109 = reactModule.useCallback(function(p9, p10, p11, p12, p13, p14, p15, p16, p17)
+		-- upvalues: var35 (ref), var55 (write), fFlagBuildExperiencePersistChatDraftModule (copy), var97 (ref), sessionId (write), fFlagBuildAgentRollbackModule (copy), creatorAgentChatModule_1 (copy), var107 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), var106 (write), var16 (write), var86 (ref), var44 (ref), var85 (ref)
+		var35({ text = p10, images = p12, afterSequenceId = p14 })
+		local var110 = var55
 		
-		if fFlagBuildExperiencePersistChatDraftModule and p18 ~= nil then
-			local var118 = var117
+		if fFlagBuildExperiencePersistChatDraftModule and p15 ~= nil then
+			local var111 = var110
 			
-			var117 = function(p21)
-				-- upvalues: var118 (ref), var100 (copy), p18 (ref), p11 (ref), sessionId (copy)
-				if var118 ~= nil then
-					var118(p21)
+			var110 = function(p18)
+				-- upvalues: var111 (ref), var97 (copy), p15 (ref), p9 (ref), sessionId (copy)
+				if var111 ~= nil then
+					var111(p18)
 				end
-				var100(p18, p11.getCasSessionId() or sessionId)
+				var97(p15, p9.getCasSessionId() or sessionId)
 			end
 		end
-		if fFlagBuildAgentRollbackModule and p19 ~= nil then
-			local var119 = var117
+		if fFlagBuildAgentRollbackModule and p16 ~= nil then
+			local var112 = var110
 			
-			var117 = function(p21)
-				-- upvalues: var119 (ref), p19 (ref)
-				if var119 ~= nil then
-					var119(p21)
+			var110 = function(p18)
+				-- upvalues: var112 (ref), p16 (ref)
+				if var112 ~= nil then
+					var112(p18)
 				end
-				p19()
+				p16()
 			end
 		end
 		local _ = nil
-		local var120 = creatorAgentChatModule_1.createLiveAssistantTurn(p11, p13, function(p21)
-			-- upvalues: var114 (copy), p16 (ref), p18 (ref), p14 (ref), p15 (ref), p11 (ref), p20 (ref)
-			var114(p16, p21, p18, p14, p15, p11)
+		local var113 = creatorAgentChatModule_1.createLiveAssistantTurn(p9, p11, function(p18)
+			-- upvalues: var107 (copy), p13 (ref), p15 (ref), p12 (ref), p9 (ref), p17 (ref)
+			var107(p13, p18, p15, p12, p9)
 			
-			if p20 ~= nil then
-				p20()
+			if p17 ~= nil then
+				p17()
 			end
-		end, if fFlagBuildExperienceToolResultFailureRecoveryModule then var113(p16) else nil, var16, var117)
+		end, if fFlagBuildExperienceToolResultFailureRecoveryModule then var106(p13) else nil, var16, var110)
 		
-		if p11.placeId ~= nil then
-			var89(p11.placeId, "Loading")
+		if p9.placeId ~= nil then
+			var86(p9.placeId, "Loading")
 		end
-		var44(var120, p11)
-		var88.scrollToBottomAfterSend()
-		var120.start()
+		var44(var113, p9)
+		var85.scrollToBottomAfterSend()
+		var113.start()
 	end, {
-		var114, var89, var88, var44, var35, var113, var16, var55, var100, sessionId
+		var107, var86, var85, var44, var35, var106, var16, var55, var97, sessionId
 	})
 	v = nil
 	
 	if fFlagBuildAgentRollbackModule then
-		local var117 = reactModule.useRef(var53.latestSequenceId)
-		var117.current = var53.latestSequenceId
+		local var110 = reactModule.useRef(var53.latestSequenceId)
+		var110.current = var53.latestSequenceId
 		v = useAgentRollbackRequestModule({
 			universeId = universeId,
 			placeId = placeId,
 			session = var21,
 			activeTurnHandleRef = var40,
-			startRollbackTurn = reactModule.useCallback(function(p11, p12, p13)
-				-- upvalues: var21 (ref), var88 (ref), var42 (ref), var37 (ref), buildAgentRollbackPromptModule (copy), var116 (ref), var117 (ref)
+			startRollbackTurn = reactModule.useCallback(function(p9, p10, p11)
+				-- upvalues: var21 (ref), var85 (ref), var42 (ref), var37 (ref), buildAgentRollbackPromptModule (copy), var109 (ref), var110 (ref)
 				if var21 == nil then
-					p13()
+					p11()
 					
 					return
 				end
-				var88.captureStickToBottomForSend()
+				var85.captureStickToBottomForSend()
 				var42.current += 1
 				local current = var42.current
 				var37(nil)
-				local var118 = buildAgentRollbackPromptModule(p11.versionNumber, p11.noteTitle, p11.noteDescription)
-				var116(var21, var118, var118, nil, {}, current, var117.current, nil, function()
-					-- upvalues: var88 (copy), p12 (ref)
-					var88.scrollToBottomUnconditionally()
-					p12()
-				end, p13)
-			end, { var21, var88, var37, var116 })
+				local var111 = buildAgentRollbackPromptModule(p9.versionNumber, p9.noteTitle, p9.noteDescription)
+				var109(var21, var111, var111, nil, current, var110.current, nil, function()
+					-- upvalues: var85 (copy), p10 (ref)
+					var85.scrollToBottomUnconditionally()
+					p10()
+				end, p11)
+			end, { var21, var85, var37, var109 })
 		})
 	end
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var85 (ref), var41 (ref), var21 (ref), sessionId (write), var42 (ref), var43 (ref), fFlagBuildAgentRollbackModule (copy), v (write), var89 (ref), var44 (ref), var35 (ref), var37 (ref)
-		if var85 ~= nil then
+		-- upvalues: var82 (ref), var41 (ref), var21 (ref), sessionId (write), var42 (ref), var43 (ref), fFlagBuildAgentRollbackModule (copy), v (write), var86 (ref), var44 (ref), var35 (ref), var37 (ref)
+		if var82 ~= nil then
 			local current = var41.current
-			local var118 = sessionId
+			local var111 = sessionId
 			
-			if if current == nil or current.session ~= var21 then false else var118 == nil or var118 == "" or (if current.sessionId ~= var118 then current.sessionId == nil and current.session.getCasSessionId() == var118 else true) then return end
+			if if current == nil or current.session ~= var21 then false else var111 == nil or var111 == "" or (if current.sessionId ~= var111 then current.sessionId == nil and current.session.getCasSessionId() == var111 else true) then return end
 			local current = var41.current
 			var42.current += 1
 			var43.current = nil
 			
-			if not fFlagBuildAgentRollbackModule or not v.stopRequestBeforeReceipt(var85) then
-				var85.detach()
+			if not fFlagBuildAgentRollbackModule or not v.stopRequestBeforeReceipt(var82) then
+				var82.detach()
 			elseif current ~= nil and current.session.placeId ~= nil then
-				var89(current.session.placeId, "Idle")
+				var86(current.session.placeId, "Idle")
 			end
 			var44(nil, nil)
 			var35(nil)
@@ -1431,154 +1365,140 @@ return function(p4)
 			return
 		end
 	end, {
-		var21, sessionId, var85, var44,
+		var21, sessionId, var82, var44,
 		if fFlagBuildAgentRollbackModule then v else nil,
-		if fFlagBuildAgentRollbackModule then var89 else nil
+		if fFlagBuildAgentRollbackModule then var86 else nil
 	})
-	local var118 = reactModule.useCallback(function(p11, p12, p13, p14, p15, p16)
-		-- upvalues: var35 (ref), universeCreateModule (copy), getDefaultTemplatePlaceIdModule (copy), debug (copy), var42 (ref), universeConfigurationModule (copy), var12 (ref), p4 (ref), creatorAgentChatStore (ref), sessionId (write), var116 (ref), var44 (ref), var101 (ref), fFlagBuildExperienceChatImageAttachmentsModule (copy), var107 (ref), fFlagBuildExperienceAssetLibrary (copy), var108 (ref), var72 (ref), chat_create_universe_error (ref)
-		var35({
-			text = p11,
-			images = p13,
-			references = p14,
-			afterSequenceId = p16
-		})
+	local var111 = reactModule.useCallback(function(p9, p10, p11, p12, p13)
+		-- upvalues: var35 (ref), universeCreateModule (copy), getDefaultTemplatePlaceIdModule (copy), debug (copy), var42 (ref), universeConfigurationModule (copy), var12 (ref), p4 (ref), creatorAgentChatStore (ref), sessionId (write), var109 (ref), var44 (ref), var98 (ref), fFlagBuildExperienceChatImageAttachmentsModule (copy), var104 (ref), var72 (ref), chat_create_universe_error (ref)
+		var35({ text = p9, images = p11, afterSequenceId = p13 })
 		local processTime = os.clock()
 		universeCreateModule.getUniverseCreateStore().createUniverse({
 			isPublish = true,
 			templatePlaceId = getDefaultTemplatePlaceIdModule()
-		}):andThen(function(p17)
-			-- upvalues: debug (copy), processTime (ref), var42 (copy), p15 (ref), universeConfigurationModule (copy), var12 (copy), p4 (copy), creatorAgentChatStore (copy), sessionId (copy), var116 (copy), p11 (ref), p12 (ref), p13 (ref), p14 (ref), p16 (ref)
+		}):andThen(function(p14)
+			-- upvalues: debug (copy), processTime (ref), var42 (copy), p12 (ref), universeConfigurationModule (copy), var12 (copy), p4 (copy), creatorAgentChatStore (copy), sessionId (copy), var109 (copy), p9 (ref), p10 (ref), p11 (ref), p13 (ref)
 			debug.log("info", "build_experience create_universe succeeded", {
 				durationMs = math.floor((os.clock() - processTime) * 1000 + 0.5),
-				universeId = p17.universeId,
-				rootPlaceId = p17.rootPlaceId
+				universeId = p14.universeId,
+				rootPlaceId = p14.rootPlaceId
 			})
 			
-			if var42.current == p15 then
+			if var42.current == p12 then
 				local universeConfigurationStore = universeConfigurationModule.getUniverseConfigurationStore()
 				
-				return universeConfigurationStore.patchConfiguration(p17.universeId, { audiences = { 1 } }):andThen(function()
-					-- upvalues: universeConfigurationStore (ref), p17 (ref)
-					return universeConfigurationStore.setTeamCreate(p17.universeId, true)
+				return universeConfigurationStore.patchConfiguration(p14.universeId, { audiences = { 1 } }):andThen(function()
+					-- upvalues: universeConfigurationStore (ref), p14 (ref)
+					return universeConfigurationStore.setTeamCreate(p14.universeId, true)
 				end):andThen(function()
-					-- upvalues: var42 (copy), p15 (copy), p17 (ref), var12 (copy), p4 (copy), creatorAgentChatStore (copy), sessionId (copy), var116 (copy), p11 (copy), p12 (copy), p13 (copy), p14 (copy), p16 (copy)
-					if var42.current ~= p15 then
+					-- upvalues: var42 (copy), p12 (copy), p14 (ref), var12 (copy), p4 (copy), creatorAgentChatStore (copy), sessionId (copy), var109 (copy), p9 (copy), p10 (copy), p11 (copy), p13 (copy)
+					if var42.current ~= p12 then
 						return nil
 					end
-					local t = { universeId = p17.universeId, placeId = p17.rootPlaceId }
+					local t = { universeId = p14.universeId, placeId = p14.rootPlaceId }
 					var12(t)
 					
 					if p4.onProjectResolved ~= nil then
 						p4.onProjectResolved(t)
 					end
-					var116(creatorAgentChatStore.getSessionForProject(p17.universeId, p17.rootPlaceId, sessionId), p11, p12, p13, p14, p15, p16, p11)
+					var109(creatorAgentChatStore.getSessionForProject(p14.universeId, p14.rootPlaceId, sessionId), p9, p10, p11, p12, p13, p9)
 					
 					return nil
 				end)
 			end
 			return nil
-		end):catch(function(p17)
-			-- upvalues: debug (copy), processTime (ref), var42 (copy), p15 (ref), var44 (copy), var35 (copy), var101 (copy), p11 (ref), fFlagBuildExperienceChatImageAttachmentsModule (copy), p13 (ref), var107 (copy), fFlagBuildExperienceAssetLibrary (copy), var108 (copy), p14 (ref), var72 (copy), chat_create_universe_error (copy)
+		end):catch(function(p14)
+			-- upvalues: debug (copy), processTime (ref), var42 (copy), p12 (ref), var44 (copy), var35 (copy), var98 (copy), p9 (ref), fFlagBuildExperienceChatImageAttachmentsModule (copy), p11 (ref), var104 (copy), var72 (copy), chat_create_universe_error (copy)
 			debug.log("warn", "build_experience create_or_configure_universe failed", {
 				durationMs = math.floor((os.clock() - processTime) * 1000 + 0.5),
-				error = p17
+				error = p14
 			})
 			
-			if var42.current ~= p15 then return end
+			if var42.current ~= p12 then return end
 			var44(nil)
 			var35(nil)
-			var101(p11)
+			var98(p9)
 			
-			if fFlagBuildExperienceChatImageAttachmentsModule and p13 ~= nil then
-				var107.current(p13)
-			end
-			if fFlagBuildExperienceAssetLibrary then
-				var108(p14)
+			if fFlagBuildExperienceChatImageAttachmentsModule and p11 ~= nil then
+				var104.current(p11)
 			end
 			var72(chat_create_universe_error)
 		end)
 	end, {
-		sessionId, creatorAgentChatStore, p4.onProjectResolved, var44, var101, var108,
-		var72, var12, var35, var116, chat_create_universe_error
+		sessionId, creatorAgentChatStore, p4.onProjectResolved, var44, var98, var72,
+		var12, var35, var109, chat_create_universe_error
 	})
-	local var119 = reactModule.useCallback(function()
-		-- upvalues: var73 (ref), fFlagBuildExperienceChatImageAttachmentsModule (copy), t_1 (write), fFlagBuildExperienceAssetLibrary (copy), var85 (ref), var101 (ref), var62 (ref), var41 (ref), var21 (ref), sessionId (write), var40 (ref), var86 (ref), var88 (ref), p4 (ref), universeId (write), fFlagBuildAgentRollbackModule (copy), placeId (write), var20 (ref), var42 (ref), var37 (ref), fFlagBuildExperiencePersistChatDraftModule (copy), var99 (ref), var96 (ref), var107 (ref), var108 (ref), appendReferenceReminder (copy), var118 (ref), var53 (ref), var116 (ref)
+	local var112 = reactModule.useCallback(function()
+		-- upvalues: var73 (ref), fFlagBuildExperienceChatImageAttachmentsModule (copy), t_1 (write), var98 (ref), var62 (ref), var41 (ref), var21 (ref), sessionId (write), var40 (ref), var83 (ref), var85 (ref), p4 (ref), universeId (write), fFlagBuildAgentRollbackModule (copy), placeId (write), var20 (ref), var42 (ref), var37 (ref), fFlagBuildExperiencePersistChatDraftModule (copy), var96 (ref), var93 (ref), var104 (ref), var111 (ref), var53 (ref), var109 (ref)
 		local v
 		local replaced = string.gsub(var73.current, "^%s*(.-)%s*$", "%1")
-		local var120 = if fFlagBuildExperienceChatImageAttachmentsModule then t_1.current else {}
-		local var121 = if fFlagBuildExperienceAssetLibrary then var85.current else {}
+		local var113 = if fFlagBuildExperienceChatImageAttachmentsModule then t_1.current else {}
 		
-		if replaced == "" and #var120 == 0 and #var121 == 0 then
-			var101("")
+		if replaced == "" and #var113 == 0 then
+			var98("")
 			
 			return false
 		elseif fFlagBuildExperienceChatImageAttachmentsModule then
-			for i, v in var120 do
+			for i, v in var113 do
 				if v.uri == nil or v.uploadStatus == "uploading" or v.uploadStatus == "failed" then
 					return false
 				end
 			end
 		end
 		if var62 then
-			if fFlagBuildExperienceChatImageAttachmentsModule and #var120 > 0 or #var121 > 0 then
+			if fFlagBuildExperienceChatImageAttachmentsModule and #var113 > 0 then
 				return false
 			end
 			local current = var41.current
 			v = sessionId
-			local var122 = if if current == nil or current.session ~= var21 then false else v == nil or v == "" or (if current.sessionId ~= v then current.sessionId == nil and current.session.getCasSessionId() == v else true) then var40.current else nil
+			local var114 = if if current == nil or current.session ~= var21 then false else v == nil or v == "" or (if current.sessionId ~= v then current.sessionId == nil and current.session.getCasSessionId() == v else true) then var40.current else nil
 			
-			if var122 == nil or not var122.trySubmitComposerText(replaced) then
+			if var114 == nil or not var114.trySubmitComposerText(replaced) then
 				return false
 			end
-			var101("")
+			var98("")
 			
-			if var86.current then
-				var86.current.releaseFocus()
+			if var83.current then
+				var83.current.releaseFocus()
 			end
-			var88.scrollToBottomAfterSend()
+			var85.scrollToBottomAfterSend()
 			
 			return true
 		else
-			local var123 = p4.createUniverseOnFirstPrompt == true and universeId == nil
+			local var115 = p4.createUniverseOnFirstPrompt == true and universeId == nil
 			
-			if not var123 and var21 == nil then
+			if not var115 and var21 == nil then
 				return false
 			elseif fFlagBuildAgentRollbackModule and placeId ~= nil and var20.getIsPendingForPlaceId(placeId)(false) then
 				return false
 			end
-			var88.captureStickToBottomForSend()
+			var85.captureStickToBottomForSend()
 			var42.current += 1
 			local current = var42.current
 			var37(nil)
 			
 			if fFlagBuildExperiencePersistChatDraftModule then
-				var99(replaced)
+				var96(replaced)
 			end
-			var96("")
+			var93("")
 			
 			if fFlagBuildExperienceChatImageAttachmentsModule then
-				var107.current({})
+				var104.current({})
 			end
-			if fFlagBuildExperienceAssetLibrary then
-				var108({})
+			if var83.current then
+				var83.current.releaseFocus()
 			end
-			if var86.current then
-				var86.current.releaseFocus()
-			end
-			local function current(p11, p12)
-				-- upvalues: appendReferenceReminder (copy), var121 (ref), var123 (ref), var118 (copy), replaced (ref), current (ref), var53 (copy), var116 (copy), var21 (copy)
-				local var124 = appendReferenceReminder(p11, var121)
-				
-				if var123 then
-					var118(replaced, var124, p12, var121, current, var53.latestSequenceId)
+			local function current(p9, p10)
+				-- upvalues: var115 (ref), var111 (copy), replaced (ref), current (ref), var53 (copy), var109 (copy), var21 (copy)
+				if var115 then
+					var111(replaced, p9, p10, current, var53.latestSequenceId)
 					
 					return
 				end
-				var116(var21, replaced, var124, p12, var121, current, var53.latestSequenceId, replaced)
+				var109(var21, replaced, p9, p10, current, var53.latestSequenceId, replaced)
 			end
 			
-			if fFlagBuildExperienceChatImageAttachmentsModule and #var120 ~= 0 then
+			if fFlagBuildExperienceChatImageAttachmentsModule and #var113 ~= 0 then
 				local t = {}
 				
 				if replaced ~= "" then
@@ -1586,7 +1506,7 @@ return function(p4)
 				end
 				v = {}
 				
-				for i, v_1 in var120 do
+				for i, v_1 in var113 do
 					local uri = v_1.uri
 					table.insert(t, { type = "image", uri = uri })
 					table.insert(v, {
@@ -1595,36 +1515,30 @@ return function(p4)
 						uri = uri
 					})
 				end
-				local var124 = appendReferenceReminder(t, var121)
-				
-				if var123 then
-					var118(replaced, var124, v, var121, current, var53.latestSequenceId)
+				if var115 then
+					var111(replaced, t, v, current, var53.latestSequenceId)
 				else
-					var116(var21, replaced, var124, v, var121, current, var53.latestSequenceId, replaced)
+					var109(var21, replaced, t, v, current, var53.latestSequenceId, replaced)
 				end
 				return true
+			elseif var115 then
+				var111(replaced, replaced, nil, current, var53.latestSequenceId)
 			else
-				local var125 = appendReferenceReminder(replaced, var121)
-				
-				if var123 then
-					var118(replaced, var125, nil, var121, current, var53.latestSequenceId)
-				else
-					var116(var21, replaced, var125, nil, var121, current, var53.latestSequenceId, replaced)
-				end
-				return true
+				var109(var21, replaced, replaced, nil, current, var53.latestSequenceId, replaced)
 			end
+			return true
 		end
 	end, {
-		var21, sessionId, universeId, placeId, var62, var88, var101, var108, var96,
-		var99, var118, var116, p4.createUniverseOnFirstPrompt, var37, var53,
+		var21, sessionId, universeId, placeId, var62, var85, var98, var93, var96,
+		var111, var109, p4.createUniverseOnFirstPrompt, var37, var53,
 		if fFlagBuildAgentRollbackModule then var20 else nil
 	})
-	local var126 = reactModule.useCallback(function()
-		-- upvalues: var41 (ref), var21 (ref), sessionId (write), var40 (ref), fFlagBuildAgentRollbackModule (copy), v (write), var42 (ref), var44 (ref), var43 (ref), var35 (ref), var37 (ref), var53 (ref), placeId (write), var89 (ref)
+	local var116 = reactModule.useCallback(function()
+		-- upvalues: var41 (ref), var21 (ref), sessionId (write), var40 (ref), fFlagBuildAgentRollbackModule (copy), v (write), var42 (ref), var44 (ref), var43 (ref), var35 (ref), var37 (ref), var53 (ref), placeId (write), var86 (ref)
 		local current = var41.current
-		local var127 = if if current == nil or current.session ~= var21 then false else sessionId == nil or sessionId == "" or (if current.sessionId ~= sessionId then current.sessionId == nil and current.session.getCasSessionId() == sessionId else true) then var40.current else nil
+		local var117 = if if current == nil or current.session ~= var21 then false else sessionId == nil or sessionId == "" or (if current.sessionId ~= sessionId then current.sessionId == nil and current.session.getCasSessionId() == sessionId else true) then var40.current else nil
 		
-		if var127 == nil then
+		if var117 == nil then
 			if fFlagBuildAgentRollbackModule then
 				v.cancelRequestBeforeTurnStarts()
 			end
@@ -1632,8 +1546,8 @@ return function(p4)
 		else
 			var42.current += 1
 			
-			if not fFlagBuildAgentRollbackModule or not v.stopRequestBeforeReceipt(var127) then
-				var127.stop()
+			if not fFlagBuildAgentRollbackModule or not v.stopRequestBeforeReceipt(var117) then
+				var117.stop()
 			end
 			var44(nil)
 			var43.current = nil
@@ -1645,40 +1559,40 @@ return function(p4)
 			})
 			
 			if placeId ~= nil then
-				var89(placeId, "Idle")
+				var86(placeId, "Idle")
 			end
 		end
 	end, {
-		var21, sessionId, placeId, var89, var44, var35, var37, var53,
+		var21, sessionId, placeId, var86, var44, var35, var37, var53,
 		if fFlagBuildAgentRollbackModule then v else nil
 	})
-	local var127 = p4.autoFocusComposer == nil or p4.autoFocusComposer
-	local var128 = if p4.focusComposerWhen == nil then var127 else p4.focusComposerWhen
+	local var117 = p4.autoFocusComposer == nil or p4.autoFocusComposer
+	local var118 = if p4.focusComposerWhen == nil then var117 else p4.focusComposerWhen
 	reactModule.useEffect(function()
-		-- upvalues: var127 (ref), var128 (ref), var86 (ref)
-		if var127 and var128 then
-			local var129 = false
+		-- upvalues: var117 (ref), var118 (ref), var83 (ref)
+		if var117 and var118 then
+			local var119 = false
 			
-			local var130 = function()
-				-- upvalues: var129 (write)
-				return var129
+			local var120 = function()
+				-- upvalues: var119 (write)
+				return var119
 			end
 			
-			local var131 = 8
+			local var121 = 8
 			
 			local function tryFocus()
-				-- upvalues: var130 (ref), var86 (ref), var131 (write), tryFocus (ref)
-				if var130() then return end
-				local current = var86.current
+				-- upvalues: var120 (ref), var83 (ref), var121 (write), tryFocus (ref)
+				if var120() then return end
+				local current = var83.current
 				
 				if current then
 					current.focus()
 					
 					return
 				end
-				var48 -= 1
+				var121 -= 1
 				
-				if var48 > 0 then
+				if var121 > 0 then
 					task.delay(0, tryFocus)
 				end
 			end
@@ -1686,44 +1600,40 @@ return function(p4)
 			task.defer(tryFocus)
 			
 			return function()
-				-- upvalues: var129 (write)
-				var129 = true
+				-- upvalues: var119 (write)
+				var119 = true
 			end
 		end
 		return function() end
-	end, { var127, var128 })
+	end, { var117, var118 })
 	local t_2 = {
 		messages = messages,
 		localToolActions = var49,
 		composerText = var69,
 		composerErrorText = var71,
-		setComposerText = var101,
+		setComposerText = var98,
 		composerImages = if fFlagBuildExperienceChatImageAttachmentsModule then t else {},
 		setComposerImages = setComposerImages,
 		retryComposerImage = retryComposerImage,
-		composerReferences = var83,
-		addComposerReference = var109,
-		removeComposerReference = var110,
-		removeComposerReferenceByPath = var111,
-		isComposerSendBlocked = if fFlagBuildExperienceChatImageAttachmentsModule then var112 else var62 and #var83 > 0,
+		isComposerSendBlocked = fFlagBuildExperienceChatImageAttachmentsModule and var105,
 		isAssistantResponding = var62,
-		canStopAssistantResponse = u1922,
+		canStopAssistantResponse = u1810,
 		canSendWhileResponding = var63,
-		sendMessage = var119,
-		stopAssistantResponse = var126,
-		setScrollingFrame = var88.setScrollingFrame,
-		textBoxRef = var86,
-		clockBinding = var87,
+		sendMessage = var112,
+		stopAssistantResponse = var116,
+		setScrollingFrame = var85.setScrollingFrame,
+		textBoxRef = var83,
+		clockBinding = var84,
 		playtestPlaceId = placeId,
-		launchPlaytest = if placeId ~= nil then nil else reactModule.useCallback(function(p11)
+		launchPlaytest = if placeId ~= nil then nil else reactModule.useCallback(function(p9)
 			-- upvalues: placeId (write), var15 (write), fFlagBuildExperiencePersistPlaytestLogsModule (copy), fFlagBuildExperienceClientDataModelTools (copy), launchPlaytestWithLoadingStateModule (copy)
 			if placeId == nil then return end
-			local var129 = if (fFlagBuildExperiencePersistPlaytestLogsModule or fFlagBuildExperienceClientDataModelTools) and (game.GameId == 0 and var15 ~= nil) then function()
+			local var119 = if (fFlagBuildExperiencePersistPlaytestLogsModule or fFlagBuildExperienceClientDataModelTools) and (game.GameId == 0 and var15 ~= nil) then function()
 				-- upvalues: var15 (ref)
 				var15.current = true
 			end else nil
 			
-			if launchPlaytestWithLoadingStateModule(placeId, p11, true, var129) and var129 ~= nil and var15 ~= nil then
+			if launchPlaytestWithLoadingStateModule(placeId, p9, true, var119) and var119 ~= nil and var15 ~= nil then
 				var15.current = false
 			end
 		end, { placeId, var15 }),

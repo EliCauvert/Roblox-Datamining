@@ -53,6 +53,7 @@ return {
 		NotInterested = "NotInterested",
 		WhyThisAd = "WhyThisAd",
 		GameDetails = if sharedFlagsModule.FFlagLuaAppContinueSortInstantPlay then "GameDetails" else nil,
-		ReportAd = if sharedFlagsModule.FFlagLuaAppEnableSponsoredReportAd then "ReportAd" else nil
+		ReportAd = if sharedFlagsModule.FFlagLuaAppEnableSponsoredReportAd then "ReportAd" else nil,
+		ReportExperience = if sharedFlagsModule.FFlagLuaAppEnableReportExperience then "ReportExperience" else nil
 	}
 }

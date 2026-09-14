@@ -28,5 +28,6 @@
 	ContextualPlayabilityRequireParentApproval = "ContextualPlayabilityRequireParentApproval",
 	ContextualPlayabilityPlaytestDisabled = "ContextualPlayabilityPlaytestDisabled",
 	ContextualPlayabilityTrustedFriendRequired = "ContextualPlayabilityTrustedFriendRequired",
-	ContextualPlayabilityCoreGated = "ContextualPlayabilityCoreGated"
+	ContextualPlayabilityCoreGated = "ContextualPlayabilityCoreGated",
+	PlusSubscriptionRequired = "PlusSubscriptionRequired"
 }

@@ -7,15 +7,20 @@ local unifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
 local unifiedEventLoggingUtilsModule = require(avatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)
 local sendUnifiedEventLogModule = require(script.Parent.sendUnifiedEventLog)
 local sendUnifiedEventLogForInstanceModule = require(script.Parent.sendUnifiedEventLogForInstance)
+local mapAnalyticsMetadataFieldsModule = require(avatarExperienceAnalytics.Utils.mapAnalyticsMetadataFields)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local unifiedSelectionListStoreModule = require(script.Parent.Store.UnifiedSelectionListStore)
 local lastDeferredSingleItemStoreModule = require(script.Parent.Store.LastDeferredSingleItemStore)
 local fFlagAXAvatarSortInDiscoveryUnifiedPurchase = require(parent.SharedFlags).FFlagAXAvatarSortInDiscoveryUnifiedPurchase
 local fFlagAXMISEnableMultiShoppingUnifiedEvents = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
 local fFlagAXFixSingleItemPurchaseWidgetLogging = avatarExperienceFlagsModule.FFlagAXFixSingleItemPurchaseWidgetLogging
+local fFlagAXFixUnifiedPurchaseFieldLanding = avatarExperienceFlagsModule.FFlagAXFixUnifiedPurchaseFieldLanding
 
 return function(p1)
-	-- upvalues: fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedSelectionListStoreModule (ref), unifiedEventLogConstantsModule (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (ref), unifiedEventLogEnumsModule (ref), lastDeferredSingleItemStoreModule (ref), unifiedEventLoggingUtilsModule (ref), sendUnifiedEventLogModule (ref), cryoModule (ref), collectionService (ref), fFlagAXAvatarSortInDiscoveryUnifiedPurchase (ref), sendUnifiedEventLogForInstanceModule (ref)
+	-- upvalues: fFlagAXFixUnifiedPurchaseFieldLanding (ref), mapAnalyticsMetadataFieldsModule (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedSelectionListStoreModule (ref), unifiedEventLogConstantsModule (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (ref), unifiedEventLogEnumsModule (ref), lastDeferredSingleItemStoreModule (ref), unifiedEventLoggingUtilsModule (ref), sendUnifiedEventLogModule (ref), cryoModule (ref), collectionService (ref), fFlagAXAvatarSortInDiscoveryUnifiedPurchase (ref), sendUnifiedEventLogForInstanceModule (ref)
+	if fFlagAXFixUnifiedPurchaseFieldLanding then
+		p1 = mapAnalyticsMetadataFieldsModule(p1)
+	end
 	if fFlagAXMISEnableMultiShoppingUnifiedEvents then
 		local selectionList = unifiedSelectionListStoreModule.getSelectionList()
 		local text = unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemId"

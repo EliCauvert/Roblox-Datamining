@@ -12,7 +12,6 @@ local iconImagesDEPRECATED = foundationImagesModule.IconImages_DEPRECATED
 local getScaledSliceModule = require(script.Parent.ImageSet.getScaledSlice)
 local isCloudAssetModule = require(script.Parent.CloudAsset.isCloudAsset)
 local isFoundationImageModule = require(script.Parent.ImageSet.isFoundationImage)
-local flagsModule = require(foundation.Utility.Flags)
 local guiObjectChildrenModule = require(foundation.Utility.GuiObjectChildren)
 local _ = require(foundation.Components.Types)
 local indexBindableModule = require(foundation.Utility.indexBindable)
@@ -55,7 +54,7 @@ local _ = function(p1)
 end
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), reactIsModule (ref), isCloudAssetModule (ref), isFoundationImageModule (ref), assets (ref), iconImagesDEPRECATED (ref), var1 (ref), images (ref), getScaledSliceModule (ref), useDefaultTagsModule (ref), useStyleTagsModule (ref), useOnLoadedModule (ref), flagsModule (ref), withGuiObjectPropsModule (ref), indexBindableModule (ref), interactableModule (ref), guiObjectChildrenModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), reactIsModule (ref), isCloudAssetModule (ref), isFoundationImageModule (ref), assets (ref), iconImagesDEPRECATED (ref), var1 (ref), images (ref), getScaledSliceModule (ref), useDefaultTagsModule (ref), useStyleTagsModule (ref), useOnLoadedModule (ref), withGuiObjectPropsModule (ref), indexBindableModule (ref), interactableModule (ref), guiObjectChildrenModule (ref)
 	local var2 = withDefaultsModule(p1, t)
 	local var3 = if var2.onStateChanged == nil then if var2.onActivated == nil then var2.onSecondaryActivated ~= nil else true else true
 	local aspectRatio = var2.aspectRatio
@@ -306,12 +305,12 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local var15 = withGuiObjectPropsModule(var2, {
 		AutoButtonColor = if var14 == "ImageButton" then var2.AutoButtonColor else nil,
 		Image = var6,
-		ImageContent = if flagsModule.FoundationImageContentSupport then reactModule.useMemo(function()
+		ImageContent = reactModule.useMemo(function()
 			-- upvalues: reactIsModule (copy), var2 (ref)
 			return if reactIsModule.isBinding(var2.ImageContent) then var2.ImageContent:map(function(p3)
 				return if typeof(p3) == "string" then Content.fromUri(p3) else p3
 			end) elseif typeof(var2.ImageContent) == "string" then Content.fromUri(var2.ImageContent) else var2.ImageContent
-		end, { var2.ImageContent }) else nil,
+		end, { var2.ImageContent }),
 		ImageColor3 = if var2.imageStyle then indexBindableModule(var2.imageStyle, "Color3") else nil,
 		ImageTransparency = if var2.imageStyle then indexBindableModule(var2.imageStyle, "Transparency") else nil,
 		ImageRectOffset = var7,

@@ -14,7 +14,6 @@ local useFormFactor = momentsCommonModule.Hooks.useFormFactor
 local useLocalization = localizationModule.Hooks.useLocalization
 local useTokens = foundationModule.Hooks.useTokens
 local formFactor = momentsCommonModule.Enums.FormFactor
-local fFlagMomentsFixHowToCaptureTextOverflowModule = require(moments.Flags.FFlagMomentsFixHowToCaptureTextOverflow)
 local constantsModule = require(moments.Constants)
 local analytics = momentsCommonModule.Analytics
 local eventNames = analytics.EventNames
@@ -44,7 +43,7 @@ local list = {
 }
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), useDeviceInsets (ref), useTokens (ref), useFormFactor (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), list (ref), view (ref), formFactor (ref), icon (ref), foundationModule (ref), text (ref), fFlagMomentsFixHowToCaptureTextOverflowModule (ref), image (ref), button (ref)
+	-- upvalues: useLocalization (ref), t (ref), useDeviceInsets (ref), useTokens (ref), useFormFactor (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), list (ref), view (ref), formFactor (ref), icon (ref), foundationModule (ref), text (ref), image (ref), button (ref)
 	local var1 = useLocalization(t)
 	local var2 = useDeviceInsets()
 	local var3 = useTokens()
@@ -122,11 +121,8 @@ return function(p1)
 		}, {
 			Title = reactModule.createElement(text, {
 				LayoutOrder = 1,
-				Text = var1.title,
-				tag = {
-					["size-full-0 auto-y text-heading-large text-wrap text-align-x-center content-emphasis"] = fFlagMomentsFixHowToCaptureTextOverflowModule,
-					["auto-xy text-heading-large text-align-x-center content-emphasis"] = not fFlagMomentsFixHowToCaptureTextOverflowModule
-				}
+				tag = "size-full-0 auto-y text-heading-large text-wrap text-align-x-center content-emphasis",
+				Text = var1.title
 			}),
 			StepImage = reactModule.createElement(image, {
 				LayoutOrder = 2,
@@ -141,11 +137,8 @@ return function(p1)
 			}, t_1),
 			Description = reactModule.createElement(text, {
 				LayoutOrder = 4,
-				Text = var1[var10.descriptionKey],
-				tag = {
-					["size-full-0 auto-y text-body-large text-wrap text-align-x-center content-muted"] = fFlagMomentsFixHowToCaptureTextOverflowModule,
-					["auto-xy text-body-large text-align-x-center content-muted"] = not fFlagMomentsFixHowToCaptureTextOverflowModule
-				}
+				tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-center content-muted",
+				Text = var1[var10.descriptionKey]
 			}),
 			Nav = reactModule.createElement(view, {
 				LayoutOrder = 5,

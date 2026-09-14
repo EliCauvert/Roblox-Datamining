@@ -3,7 +3,6 @@
 	useAppFocusRoot = require(script.useAppFocusRoot),
 	useAutoFocus = require(script.useAutoFocus),
 	useDescendantHasFocus = require(script.useDescendantHasFocus),
-	useDisableAutoFocus = require(script.useDisableAutoFocus),
 	useFirstFocusableDescendantRef = require(script.useFirstFocusableDescendantRef),
 	useFocusNavigableSurfaceRegistryConnection = require(script.useFocusNavigableSurfaceRegistryConnection),
 	useFocusedTextBox = require(script.useFocusedTextBox),

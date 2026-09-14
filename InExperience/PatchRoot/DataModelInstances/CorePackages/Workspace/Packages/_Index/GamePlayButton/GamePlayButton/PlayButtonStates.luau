@@ -8,5 +8,6 @@
 	ActionNeeded = "ActionNeeded",
 	FiatPaidAccess = "FiatPaidAccess",
 	DemoMode = "DemoMode",
-	Playtest = "Playtest"
+	Playtest = "Playtest",
+	EarlyAccessLocked = "EarlyAccessLocked"
 }
