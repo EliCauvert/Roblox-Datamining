@@ -216,6 +216,7 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,登录现有帐户
 Authentication.AccountSwitch.Action.SwitchAccount,切换帐户
 Authentication.AccountSwitch.Description.AccountLimit.2,你已达到帐户数量上限。要添加新帐户，请先移除一个帐户。
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,如果以“{username}”的身份继续，你将从其他帐户中注销。
+Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,如果继续操作，你将从其他帐户注销。
 Authentication.AccountSwitch.Description.LogoutConfirmation,您必须注销此设备上的其他 Roblox 帐户才能添加新帐户
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,请稍后重试
 Authentication.AccountSwitch.Description.RemoveAllAccounts,注销后，所有帐户都将从此设备中移除。
@@ -2413,7 +2414,6 @@ Feature.Build.Label.GamePlays,游戏游玩次数
 Feature.Build.Label.GetMoreBuildUsage,获得更多 Build 使用额度
 Feature.Build.Label.Hi,你好
 Feature.Build.Label.IconThumbnails,标志和缩略图
-Feature.Build.Label.Images2D,2D 图像
 Feature.Build.Label.InProgress,进行中
 Feature.Build.Label.InputNeeded,需要输入内容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2614,8 +2614,10 @@ Feature.Build.Message.ShareLinkFailed,无法创建分享链接。请重试。
 Feature.Build.Message.SignedOut,你已注销。请登录并重试。
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} 个任务已完成
 Feature.Build.Message.ThinkingSeconds,正在思考（{SECONDS} 秒）
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,
 Feature.Build.Message.TryAgain,请重试。
 Feature.Build.Message.TurnToPortrait,将你的设备切换为竖向模式，以继续在游戏上操作。
+Feature.Build.Message.UpdateSettingsToPlaytest,
 Feature.Build.Message.VersionHistoryLoad,无法加载版本历史记录。
 Feature.Build.Message.WhatToCreate,你今天想创作什么？
 Feature.Build.Message.WorkedMinutesSeconds,已完成（{MINUTES} 分 {REM_SECONDS} 秒）
@@ -3630,6 +3632,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,新的信赖好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,添加信赖的好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,添加可信好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
+Feature.Friends.TrustedFriend.Label.Title,信赖的好友
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}现已成为你的信赖好友
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信赖的好友已移除
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,“信赖的好友”请求已发送
@@ -4633,6 +4636,7 @@ Feature.Profile.Action.ShareProfile,分享个人资料
 Feature.Profile.Action.ShareProfileLink,分享个人资料链接
 Feature.Profile.Action.SwitchAvatar,切换虚拟形象
 Feature.Profile.Action.ToQRCode,
+Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,用户已屏蔽
 Feature.Profile.Action.ViewFullProfile,查看完整个人资料
 Feature.Profile.Action.ViewProfile,
@@ -4817,7 +4821,6 @@ Feature.ReportAbuse.ProblemDescription.Swearing,粗口、谩骂或脏话
 Feature.ReportAbuse.ProblemDescription.Violence,极端暴力或血腥
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,
 Feature.ReportAbuse.Title.SelectInSceneIpReport,感谢你开始举报 IP 侵权行为
-Feature.RobloxSubscription.Action.JoinIn,
 Feature.RobloxSubscription.Action.Subscribe,
 Feature.RobloxSubscription.Action.TryItForFree,免费试用
 Feature.RobloxSubscription.Body.AlreadySubscribed,Plus 订阅已为你提供了游戏内权益。
@@ -4827,7 +4830,6 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,为表达我们的谢意，
 Feature.RobloxSubscription.Description.Benefit.Customize,使用个人资料边框和 App 主题进行自定义
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,前 60 天享道具与虚拟形象九折优惠，之后享八折优惠
 Feature.RobloxSubscription.Description.ExclusiveBenefits,以更少的 Robux 享受更多乐趣。订阅 Roblox Plus。
-Feature.RobloxSubscription.Description.JoinEarly,
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"点按\u{201C}{ctaText}\u{201D}，即表示你同意 <a href=""{termsUrl}"">Roblox 订阅条款</a>。系统将每月自动向你收取费用，直至你取消订阅。"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,免费私人服务器
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4846,8 +4848,6 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,好消息
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,获取 Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus 在这里不可用
-Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,
-Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,
 Feature.SafetyDashboard.Heading.AccountStatus.V2,帐户状态、违规和申诉
 Feature.Schools.Action.AlreadyGraduated,我已经毕业了
 Feature.Schools.Action.CantFindSchool,找不到你的学校？

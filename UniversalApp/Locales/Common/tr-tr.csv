@@ -224,6 +224,7 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,Mevcut hesaba giriş
 Authentication.AccountSwitch.Action.SwitchAccount,Hesap Değiştir
 Authentication.AccountSwitch.Description.AccountLimit.2,Hesap sınırına ulaştın. Yeni bir hesap eklemek için lütfen mevcut bir hesabı kaldır.
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,{username} olarak devam etmek diğer hesaplarından çıkış yapmana sebep olur.
+Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,Devam etmek diğer hesaplarından çıkış yapmana sebep olur.
 Authentication.AccountSwitch.Description.LogoutConfirmation,Yeni bir hesap eklemeden önce bu cihazdaki diğer Roblox hesaplarından çıkış yapman gerekiyor
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Lütfen daha sonra tekrar dene
 Authentication.AccountSwitch.Description.RemoveAllAccounts,Çıkış yaptığında tüm hesaplar bu cihazdan kaldırılacaktır.
@@ -1708,15 +1709,6 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Açıklama
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus'a özel
 Feature.Avatar.BackgroundGeneration.Label.Name,Ad
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,bugün
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,bu saatte
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,bu ay
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,{count} arka plan kaldı
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,gün
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,saat
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,dakika
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,Sıfırlanması için kalan süre:
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Arka planını tarif et…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Arka planın oluşturuluyor…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Arka planın hazırlanıyor…
@@ -1835,7 +1827,6 @@ Feature.Avatar.Label.ClassicTShirts,Klasik Tişörtler
 Feature.Avatar.Label.ClearByCategory,{category} kategorisini temizle
 Feature.Avatar.Label.Climb,Tırmanma
 Feature.Avatar.Label.ClimbAnimations,Tırmanma Animasyonları
-Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Kostüm adı yalnızca harfler, sayılar ve boşluklar içerebilir"
 Feature.Avatar.Label.CountSelected,{itemCount} Öğe Seçildi
 Feature.Avatar.Label.Creations,Yaratımlar
@@ -1947,7 +1938,6 @@ Feature.Avatar.Label.RecentlyWorn,Yakın zamanda giyilen
 Feature.Avatar.Label.RemoveFromSetBody,Bu avatarlar bu setten kaldırılacak ancak silinmeyecek.
 Feature.Avatar.Label.Replace,Değiştir
 Feature.Avatar.Label.ResetToNewCharacter,Yeni bir karaktere geçiş yapıyorsun. Tüm kıyafet öğelerini sıfırlamak mı yoksa saklamak mı istersin?
-Feature.Avatar.Label.ResetTryOn,Mevcut avatara sıfırla
 Feature.Avatar.Label.Right,Sağ
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,Sağ Kollar
@@ -2003,7 +1993,6 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,Makyaj Katmanlama
 Feature.Avatar.Label.Title.ManageAvatars,Avatarları Yönet
-Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,Envanterim
 Feature.Avatar.Label.Title.ProfilePhoto,Profil Fotoğrafı
 Feature.Avatar.Label.Title.ReplaceAvatar,Avatarı Değiştir
@@ -2143,7 +2132,6 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,Hareket Et
-Feature.Avatar.Title.MyAvatar,Avatarım
 Feature.Avatar.Title.NameAvatarOutfit,Avatarına ad ver
 Feature.Avatar.Title.NewCustomizeLook,Özelleştir Yeni Bir Görünüme Kavuştu!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Pazar Yerinde Yeniler
@@ -2412,7 +2400,6 @@ Feature.Build.Label.GamePlays,Oyun oynama sayısı
 Feature.Build.Label.GetMoreBuildUsage,Daha fazla İnşa Et kullanım hakkı al
 Feature.Build.Label.Hi,Merhaba
 Feature.Build.Label.IconThumbnails,Simge ve küçük resimler
-Feature.Build.Label.Images2D,2 Boyutlu Görseller
 Feature.Build.Label.InProgress,Devam ediyor
 Feature.Build.Label.InputNeeded,Giriş gerekli
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2589,6 +2576,8 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Henüz sürüm geçmişi yok.
 Feature.Build.Message.OneTaskCompleted,1 görev tamamlandı
 Feature.Build.Message.OutOfBuildUsage,İnşa Et kullanım hakkın tükendi. Bir şeyler oluşturmaya devam etmek için Robux kullanma seçeneklerini görüntüle.
+Feature.Build.Message.PlaytestInviteSendFailedBody,Aşağıdaki kullanıcılara sohbet bağlantısı içeren davet gönderemedin:
+Feature.Build.Message.PlaytestInviteSendFailedHint,Bağlantı almak için lütfen Paylaş düğmesini kullan.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT}/{MAX_INVITES} oynanış testçisi eklendi
 Feature.Build.Message.PrivatePlaytestInvite,"{username}, seni {experienceName} için özel oynanış testine davet etti"
 Feature.Build.Message.PublicPublishFailed,Oyunun yayınlandı ancak herkese açık hâle getirilemedi. Tekrar dene.
@@ -2654,6 +2643,7 @@ Feature.Build.Title.GetUsers,Kullanıcıları al
 Feature.Build.Title.ManagedPricingAcknowledgement,Yönetilen Fiyatlandırma açılsın mı?
 Feature.Build.Title.NoMonetizationProducts,Oyununda kazanmaya başla
 Feature.Build.Title.NoRobuxForUsage,İnşa Et kullanım hakkı için Robux kalmadı
+Feature.Build.Title.PlaytestInviteSendFailed,Davetler gönderilemedi
 Feature.Build.Title.Playtesters,Oynanış Testçileri
 Feature.Build.Title.PlaytestersOnlyPlay,Yalnızca oynanış testçileri oynayabilir
 Feature.Build.Title.PromoteGame,Oyununun tanıtımını yap
@@ -3628,6 +3618,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Yeni güvenilir arkadaş
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Güvenilir arkadaş olarak ekle
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Güvenilir arkadaşlara ekle
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Güvenilir Arkadaş Ekle
+Feature.Friends.TrustedFriend.Label.Title,Güvenilir arkadaş
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} artık güvenilir arkadaşın
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Güvenilir arkadaş kaldırıldı
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Güvenilir arkadaş olma talebi gönderildi
@@ -4066,7 +4057,7 @@ Feature.Moments.Label.FeedFailedToLoad,Sayfa yüklenemedi
 Feature.Moments.Label.FeedMyMoments,Anlarım
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,Yakalama nasıl kullanılır?
-Feature.Moments.Label.LinkCopied,Bağlantı kopyalandı.
+Feature.Moments.Label.LinkCopied,Bağlantı kopyalandı
 Feature.Moments.Label.LinkCopyFailed,Bağlantı kopyalanamadı.
 Feature.Moments.Label.ModeratedRodeoBody,Topluluk Standartlarımıza aykırı olduğu için bu Anı kaldırdık. Anlarının görünür kalması için kuralları öğrenip uygulamaya özen göstermelisin.
 Feature.Moments.Label.MomentDeletedBody,
@@ -4626,6 +4617,7 @@ Feature.Profile.Action.ShareProfile,Profili paylaş
 Feature.Profile.Action.ShareProfileLink,Profil Bağlantısını Paylaş
 Feature.Profile.Action.SwitchAvatar,Avatar değiştir
 Feature.Profile.Action.ToQRCode,QR kodunu paylaş
+Feature.Profile.Action.Trade,Takas
 Feature.Profile.Action.UserBlocked,Kullanıcı Engellendi
 Feature.Profile.Action.ViewFullProfile,Profilin tamamını görüntüle
 Feature.Profile.Action.ViewProfile,Profili görüntüle

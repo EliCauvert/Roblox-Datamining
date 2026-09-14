@@ -223,6 +223,7 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,登入現有帳號
 Authentication.AccountSwitch.Action.SwitchAccount,切換帳戶
 Authentication.AccountSwitch.Description.AccountLimit.2,已達到帳號數量上限。如要新增帳號，請先移除現有帳號。
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,繼續以 {username} 的身分使用，系統會將你登出其他帳號。
+Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,繼續操作，系統會將你登出其他帳號。
 Authentication.AccountSwitch.Description.LogoutConfirmation,"在添加新帳號之前,您必須在此設備上登出其他 Roblox 帳號"
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,請稍後再試
 Authentication.AccountSwitch.Description.RemoveAllAccounts,登出後，所有帳號將從此裝置中移除。
@@ -1707,15 +1708,6 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}／{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,說明
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus 專屬
 Feature.Avatar.BackgroundGeneration.Label.Name,名稱
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,這個小時
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,剩下 {count} 個背景
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,天
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,小時
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,分鐘
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,在此時間後重置：
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,描述你的背景…
 Feature.Avatar.BackgroundGeneration.Status.Generating,正在生成你的背景…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,正在準備你的背景…
@@ -1834,7 +1826,6 @@ Feature.Avatar.Label.ClassicTShirts,經典 T 恤
 Feature.Avatar.Label.ClearByCategory,清除{category}
 Feature.Avatar.Label.Climb,攀爬
 Feature.Avatar.Label.ClimbAnimations,攀爬動畫
-Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,名稱只能含有字母、數字及空格。
 Feature.Avatar.Label.CountSelected,已選擇 {itemCount} 個道具
 Feature.Avatar.Label.Creations,作品
@@ -1946,7 +1937,6 @@ Feature.Avatar.Label.RecentlyWorn,最近穿戴
 Feature.Avatar.Label.RemoveFromSetBody,這些虛擬人偶將從此組合中移除，但不會遭刪除。
 Feature.Avatar.Label.Replace,取代
 Feature.Avatar.Label.ResetToNewCharacter,您即將切換到新角色，您想重置還是保留所有服飾道具？
-Feature.Avatar.Label.ResetTryOn,重置為目前的虛擬人偶
 Feature.Avatar.Label.Right,右
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,
@@ -2002,7 +1992,6 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,妝容分層
 Feature.Avatar.Label.Title.ManageAvatars,管理虛擬人偶
-Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,我的道具欄
 Feature.Avatar.Label.Title.ProfilePhoto,個人檔案相片
 Feature.Avatar.Label.Title.ReplaceAvatar,取代虛擬人偶
@@ -2142,7 +2131,6 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,重置為預設
 Feature.Avatar.Title.MakeupSortUnequip,解除裝備的道具
 Feature.Avatar.Title.Move,移動
-Feature.Avatar.Title.MyAvatar,
 Feature.Avatar.Title.NameAvatarOutfit,為虛擬人偶命名
 Feature.Avatar.Title.NewCustomizeLook,自訂功能推出新外觀！
 Feature.Avatar.Title.NewToMarketplaceItemWidget,剛開始使用市集
@@ -2411,7 +2399,6 @@ Feature.Build.Label.GamePlays,遊戲遊玩次數
 Feature.Build.Label.GetMoreBuildUsage,取得更多組建使用量
 Feature.Build.Label.Hi,嗨
 Feature.Build.Label.IconThumbnails,圖示和縮圖
-Feature.Build.Label.Images2D,2D 圖片
 Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,必須輸入內容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3630,6 +3617,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,新的信任好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,新增信任的好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
+Feature.Friends.TrustedFriend.Label.Title,信任的好友
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} 現已成為信任的好友
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信任的好友已移除
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,已傳送信任的好友邀請
@@ -4628,6 +4616,7 @@ Feature.Profile.Action.ShareProfile,分享個人檔案
 Feature.Profile.Action.ShareProfileLink,分享個人檔案連結
 Feature.Profile.Action.SwitchAvatar,切換虛擬人偶
 Feature.Profile.Action.ToQRCode,
+Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,已封鎖使用者
 Feature.Profile.Action.ViewFullProfile,檢視完整個人檔案
 Feature.Profile.Action.ViewProfile,

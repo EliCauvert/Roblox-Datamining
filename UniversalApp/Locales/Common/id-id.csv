@@ -224,6 +224,7 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,Log in ke akun yang 
 Authentication.AccountSwitch.Action.SwitchAccount,Beralih Akun
 Authentication.AccountSwitch.Description.AccountLimit.2,"Kamu telah mencapai batas akun. Untuk menambahkan akun baru, hapus satu akun terlebih dahulu."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,"Dengan melanjutkan sebagai {username}, kamu akan log out dari akunmu yang lain."
+Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,"Dengan melanjutkan, kamu akan log out dari akunmu yang lain."
 Authentication.AccountSwitch.Description.LogoutConfirmation,Kamu harus log out dari akun Roblox kamu yang lain di perangkat ini sebelum menambahkan akun baru
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Coba lagi nanti
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Setelah kamu log out, semua akun akan dihapus dari perangkat ini."
@@ -2399,7 +2400,6 @@ Feature.Build.Label.GamePlays,Game dimainkan
 Feature.Build.Label.GetMoreBuildUsage,Dapatkan lebih banyak kuota penggunaan Build
 Feature.Build.Label.Hi,Hai
 Feature.Build.Label.IconThumbnails,Ikon & thumbnail
-Feature.Build.Label.Images2D,Gambar 2D
 Feature.Build.Label.InProgress,Sedang berlangsung
 Feature.Build.Label.InputNeeded,Input diperlukan
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3616,6 +3616,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Teman tepercaya baru
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Tambahkan teman tepercaya
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Tambahkan Teman Tepercaya
+Feature.Friends.TrustedFriend.Label.Title,Teman tepercaya
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} sekarang adalah teman tepercaya
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Teman tepercaya dihapus
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Permintaan teman tepercaya terkirim
@@ -4614,6 +4615,7 @@ Feature.Profile.Action.ShareProfile,Bagikan profil
 Feature.Profile.Action.ShareProfileLink,Bagikan Tautan Profil
 Feature.Profile.Action.SwitchAvatar,Beralih avatar
 Feature.Profile.Action.ToQRCode,Bagikan kode QR
+Feature.Profile.Action.Trade,Tukar
 Feature.Profile.Action.UserBlocked,Pengguna Diblokir
 Feature.Profile.Action.ViewFullProfile,Lihat profil lengkap
 Feature.Profile.Action.ViewProfile,Lihat profil

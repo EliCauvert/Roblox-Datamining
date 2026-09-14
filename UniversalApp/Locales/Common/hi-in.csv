@@ -207,6 +207,7 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,मौजूदा �
 Authentication.AccountSwitch.Action.SwitchAccount,अकाउंट बदलें
 Authentication.AccountSwitch.Description.AccountLimit.2,"आपकी अकाउंट लिमिट पूरी हो गई है. नया अकाउंट जोड़ने के लिए, पहले किसी मौजूदा अकाउंट को हटाना होगा."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,"{username} के तौर पर जारी रखने पर, आपको आपके अन्य अकाउंट से साइन आउट कर दिया जाएगा."
+Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,"जारी रखने पर, आपको आपके अन्य अकाउंट से साइन आउट कर दिया जाएगा."
 Authentication.AccountSwitch.Description.LogoutConfirmation,"नया अकाउंट जोड़ने से पहले, आपको इस डिवाइस पर अपने दूसरे Roblox अकाउंट से लॉग आउट करना होगा"
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,"बाद में, फिर से कोशिश करें"
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"साइन आउट करने के बाद, इस डिवाइस से सभी अकाउंट हटा दिए जाएँगे."
@@ -1688,15 +1689,6 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,विवरण
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus के साथ एक्सक्लूसिव
 Feature.Avatar.BackgroundGeneration.Label.Name,नाम
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,इस घंटे
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,{count} बैकग्राउंड बाकी हैं
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,{count} बैकग्राउंड बाकी है
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,घंटे
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,मिनट
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,इतने समय में रीसेट होगा
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,अपने बैकग्राउंड के बारे में बताएँ…
 Feature.Avatar.BackgroundGeneration.Status.Generating,आपका बैकग्राउंड जेनरेट हो रहा है…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,आपका बैकग्राउंड तैयार हो रहा है…
@@ -1815,7 +1807,6 @@ Feature.Avatar.Label.ClassicTShirts,क्लासिक टी-शर्ट
 Feature.Avatar.Label.ClearByCategory,{category} डिलीट करें
 Feature.Avatar.Label.Climb,क्लाइंब
 Feature.Avatar.Label.ClimbAnimations,क्लाइंब ऐनिमेशन
-Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"नाम में सिर्फ़ अक्षर, नंबर और स्पेस हो सकते हैं"
 Feature.Avatar.Label.CountSelected,{itemCount} चुना गया
 Feature.Avatar.Label.Creations,क्रिएशन
@@ -1927,7 +1918,6 @@ Feature.Avatar.Label.RecentlyWorn,हाल ही में पहना/इस
 Feature.Avatar.Label.RemoveFromSetBody,इन अवतार को इस सेट से हटा दिया जाएगा. ये डिलीट नहीं होंगे.
 Feature.Avatar.Label.Replace,बदलें
 Feature.Avatar.Label.ResetToNewCharacter,आप एक नए कैरेक्टर पर स्विच कर रहे हैं; क्या आप सभी आउटफ़िट आइटम रीसेट करना चाहते हैं या अपने पास रखना चाहते हैं?
-Feature.Avatar.Label.ResetTryOn,मौजूदा अवतार पर रीसेट करें
 Feature.Avatar.Label.Right,R
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,दायां हाथ
@@ -1983,7 +1973,6 @@ Feature.Avatar.Label.Title.HeadAdjustment,सिर की एडजस्टम
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,मेकअप लेयरिंग
 Feature.Avatar.Label.Title.ManageAvatars,अवतार मैनेज करें
-Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,मेरी इन्वेंट्री
 Feature.Avatar.Label.Title.ProfilePhoto,प्रोफ़ाइल फ़ोटो
 Feature.Avatar.Label.Title.ReplaceAvatar,अवतार बदलें
@@ -2123,7 +2112,6 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,आइटम को हटाएँ
 Feature.Avatar.Title.Move,मूव करें
-Feature.Avatar.Title.MyAvatar,मेरा अवतार
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,कस्टमाइज़ सेक्शन अब एक नये लुक में दिखता है!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,मार्केटप्लेस में नया
@@ -2392,7 +2380,6 @@ Feature.Build.Label.GamePlays,गेम प्ले
 Feature.Build.Label.GetMoreBuildUsage,बिल्ड का और इस्तेमाल पाएँ
 Feature.Build.Label.Hi,हैलो
 Feature.Build.Label.IconThumbnails,आइकॉन और थंबनेल
-Feature.Build.Label.Images2D,2D इमेज
 Feature.Build.Label.InProgress,जारी है
 Feature.Build.Label.InputNeeded,इनपुट चाहिए
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2809,7 +2796,7 @@ Feature.Catalog.Label.Filter.Curator,क्यूरेटर
 Feature.Catalog.Label.Filter.Filters,
 Feature.Catalog.Label.Filter.Hide,छिपाएँ
 Feature.Catalog.Label.Filter.PriceMax,मैक्स
-Feature.Catalog.Label.Filter.PriceMin,
+Feature.Catalog.Label.Filter.PriceMin,मिनट
 Feature.Catalog.Label.Filter.SalesType,बिक्री का टाइप
 Feature.Catalog.Label.Filter.Show,दिखाएँ
 Feature.Catalog.Label.Filter.Sorts,छाँटें
@@ -3611,6 +3598,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,नया भरोसेमं�
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,भरोसेमंद फ़्रेंड जोड़ें
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,भरोसेमंद दोस्त जोड़ें
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,भरोसेमंद फ़्रेंड्स जोड़ें
+Feature.Friends.TrustedFriend.Label.Title,भरोसेमंद फ़्रेंड
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} अब एक भरोसेमंद फ़्रेंड हैं
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,भरोसेमंद फ़्रेंड को हटाया गया
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,भरोसेमंद फ़्रेंड की रिक्वेस्ट भेजी गई
@@ -4609,6 +4597,7 @@ Feature.Profile.Action.ShareProfile,प्रोफ़ाइल शेयर क
 Feature.Profile.Action.ShareProfileLink,प्रोफ़ाइल लिंक शेयर करें
 Feature.Profile.Action.SwitchAvatar,
 Feature.Profile.Action.ToQRCode,QR कोड शेयर करें
+Feature.Profile.Action.Trade,ट्रेड करें
 Feature.Profile.Action.UserBlocked,यूज़र को ब्लॉक किया गया
 Feature.Profile.Action.ViewFullProfile,पूरी प्रोफ़ाइल देखें
 Feature.Profile.Action.ViewProfile,

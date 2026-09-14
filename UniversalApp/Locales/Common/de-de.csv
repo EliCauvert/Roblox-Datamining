@@ -224,6 +224,7 @@ Authentication.AccountSwitch.Action.SignInToExistingAccount,Bei bestehendem Kont
 Authentication.AccountSwitch.Action.SwitchAccount,Konto wechseln
 Authentication.AccountSwitch.Description.AccountLimit.2,"Du hast dein Kontolimit erreicht. Um ein neues Konto hinzuzufügen, musst du zuerst ein Konto entfernen."
 Authentication.AccountSwitch.Description.ContinueSignOutOthers,"Wenn du als {username} fortfährst, wirst du von deinen anderen Konten abgemeldet."
+Authentication.AccountSwitch.Description.ContinueSignOutOthersGeneric,"Wenn du fortfährst, wirst du von deinen anderen Konten abgemeldet."
 Authentication.AccountSwitch.Description.LogoutConfirmation,"Du musst dich von deinen anderen Roblox-Konten auf diesem Gerät abmelden, bevor du ein neues Konto hinzufügen kannst"
 Authentication.AccountSwitch.Description.PleaseTryAgainLater,Bitte versuche es später erneut
 Authentication.AccountSwitch.Description.RemoveAllAccounts,"Sobald du dich abmeldest, werden alle Konten von diesem Gerät entfernt."
@@ -1702,15 +1703,6 @@ Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Beschreibung
 Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exklusiv mit Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,Name
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodDaily,heute
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodHourly,in dieser Stunde
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaPeriodMonthly,in diesem Monat
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingPlural,Noch {count} Hintergründe
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaRemainingSingular,Noch {count} Hintergrund
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetDays,Tagen
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetHours,Stunden
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetMinutes,Minuten
-Feature.Avatar.BackgroundGeneration.Label.PublishQuotaResetPrefix,Wird zurückgesetzt in
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Beschreibe deinen Hintergrund …
 Feature.Avatar.BackgroundGeneration.Status.Generating,Dein Hintergrund wird generiert …
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Dein Hintergrund wird vorbereitet …
@@ -1829,7 +1821,6 @@ Feature.Avatar.Label.ClassicTShirts,Klassische T-Shirts
 Feature.Avatar.Label.ClearByCategory,{category} löschen
 Feature.Avatar.Label.Climb,Klettern
 Feature.Avatar.Label.ClimbAnimations,Kletteranimationen
-Feature.Avatar.Label.Continue,
 Feature.Avatar.Label.CostumeWarning,"Namen können nur Buchstaben, Ziffern und Leerzeichen enthalten"
 Feature.Avatar.Label.CountSelected,{itemCount} ausgewählt
 Feature.Avatar.Label.Creations,Schöpfungen
@@ -1941,7 +1932,6 @@ Feature.Avatar.Label.RecentlyWorn,Kürzlich getragen
 Feature.Avatar.Label.RemoveFromSetBody,Diese Avatare werden aus diesem Set entfernt. Sie werden nicht gelöscht.
 Feature.Avatar.Label.Replace,Ersetzen
 Feature.Avatar.Label.ResetToNewCharacter,Du wechselst zu einem neuen Charakter; möchtest du alle Outfit-Artikel zurücksetzen oder beibehalten?
-Feature.Avatar.Label.ResetTryOn,Auf aktuellen Avatar zurücksetzen
 Feature.Avatar.Label.Right,R
 Feature.Avatar.Label.RightArm,
 Feature.Avatar.Label.RightArms,Rechte Arme
@@ -1997,7 +1987,6 @@ Feature.Avatar.Label.Title.HeadAdjustment,
 Feature.Avatar.Label.Title.Inventory,
 Feature.Avatar.Label.Title.MakeupLayering,Make-up-Schichten
 Feature.Avatar.Label.Title.ManageAvatars,Avatare verwalten
-Feature.Avatar.Label.Title.MyAvatars,
 Feature.Avatar.Label.Title.MyInventory,Mein Inventar
 Feature.Avatar.Label.Title.ProfilePhoto,Profilfoto
 Feature.Avatar.Label.Title.ReplaceAvatar,Avatar ersetzen
@@ -2137,7 +2126,6 @@ Feature.Avatar.Title.MakeupSortPage,
 Feature.Avatar.Title.MakeupSortReset,
 Feature.Avatar.Title.MakeupSortUnequip,
 Feature.Avatar.Title.Move,Schieben
-Feature.Avatar.Title.MyAvatar,Mein Avatar
 Feature.Avatar.Title.NameAvatarOutfit,
 Feature.Avatar.Title.NewCustomizeLook,Wir haben die Anpassungsfunktion überarbeitet!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Neu auf dem Marktplatz
@@ -2406,7 +2394,6 @@ Feature.Build.Label.GamePlays,Spielaufrufe
 Feature.Build.Label.GetMoreBuildUsage,Mehr Build-Kontingent holen
 Feature.Build.Label.Hi,Hallo
 Feature.Build.Label.IconThumbnails,Symbol und Vorschaubilder
-Feature.Build.Label.Images2D,2D-Bilder
 Feature.Build.Label.InProgress,In Arbeit
 Feature.Build.Label.InputNeeded,Eingabe erforderlich
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2583,6 +2570,8 @@ Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Noch kein Versionsverlauf.
 Feature.Build.Message.OneTaskCompleted,1 Aufgabe abgeschlossen
 Feature.Build.Message.OutOfBuildUsage,"Dein Build-Kontingent ist aufgebraucht. Sieh dir deine Optionen an, um Robux zu verwenden und weiter zu erstellen."
+Feature.Build.Message.PlaytestInviteSendFailedBody,Du konntest keinen Einladungs-Chat-Link an die folgenden Benutzer senden:
+Feature.Build.Message.PlaytestInviteSendFailedHint,"Bitte verwende die Schaltfläche ""Teilen"", um einen Link zu erhalten."
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} von {MAX_INVITES} Spieletestern hinzugefügt
 Feature.Build.Message.PrivatePlaytestInvite,{username} hat dich zum privaten Spieltest {experienceName} eingeladen
 Feature.Build.Message.PublicPublishFailed,"Dein Spiel wurde veröffentlicht, konnte aber nicht öffentlich gemacht werden. Bitte versuche es erneut."
@@ -2648,6 +2637,7 @@ Feature.Build.Title.GetUsers,Benutzer gewinnen
 Feature.Build.Title.ManagedPricingAcknowledgement,Verwaltete Preisgestaltung aktivieren?
 Feature.Build.Title.NoMonetizationProducts,"Beginne, in deinem Spiel Einnahmen zu erzielen"
 Feature.Build.Title.NoRobuxForUsage,Keine Robux mehr für das Build-Kontingent übrig
+Feature.Build.Title.PlaytestInviteSendFailed,Einladungen konnten nicht gesendet werden
 Feature.Build.Title.Playtesters,Spieletester
 Feature.Build.Title.PlaytestersOnlyPlay,Nur Spieletester können spielen
 Feature.Build.Title.PromoteGame,Bewirb dein Spiel
@@ -3622,6 +3612,7 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Neuer vertrauter Freund
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Vertrauten Freund hinzufügen
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Vertraute Freunde hinzufügen
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
+Feature.Friends.TrustedFriend.Label.Title,Vertrauter Freund
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} ist jetzt ein vertrauter Freund
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Vertrauter Freund entfernt
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Anfrage zum Hinzufügen als vertrauter Freund gesendet
@@ -4060,7 +4051,7 @@ Feature.Moments.Label.FeedFailedToLoad,Feed konnte nicht geladen werden
 Feature.Moments.Label.FeedMyMoments,Meine Moments
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.HowToUseCaptureTitle,So verwendest du Aufnahmen
-Feature.Moments.Label.LinkCopied,Link kopiert.
+Feature.Moments.Label.LinkCopied,Link kopiert
 Feature.Moments.Label.LinkCopyFailed,Link wurde nicht kopiert.
 Feature.Moments.Label.ModeratedRodeoBody,"Wir haben diesen Moment entfernt, da er gegen unsere Community-Regeln verstößt. Damit deine Moments sichtbar bleiben, solltest du die Regeln kennen und einhalten."
 Feature.Moments.Label.MomentDeletedBody,
@@ -4620,6 +4611,7 @@ Feature.Profile.Action.ShareProfile,Profil teilen
 Feature.Profile.Action.ShareProfileLink,Profillink teilen
 Feature.Profile.Action.SwitchAvatar,Avatar wechseln
 Feature.Profile.Action.ToQRCode,
+Feature.Profile.Action.Trade,Tauschen
 Feature.Profile.Action.UserBlocked,Benutzer blockiert
 Feature.Profile.Action.ViewFullProfile,Vollständiges Profil anzeigen
 Feature.Profile.Action.ViewProfile,

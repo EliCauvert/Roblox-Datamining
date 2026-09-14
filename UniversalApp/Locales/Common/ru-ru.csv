@@ -2576,6 +2576,7 @@ Feature.Profile.Action.Save,
 Feature.Profile.Action.ShareProfile,Поделиться профилем
 Feature.Profile.Action.ShareProfileLink,Поделись ссылкой на профиль
 Feature.Profile.Action.ToQRCode,Поделиться QR-кодом
+Feature.Profile.Action.Trade,
 Feature.Profile.Action.UserBlocked,Пользователь заблокирован
 Feature.Profile.Action.ViewFullProfile,Посмотреть профиль
 Feature.Profile.Description.AboutModalCaption,"Пусть другие узнают больше о тебе. Оставайся в безопасности, не сообщай личные данные."
