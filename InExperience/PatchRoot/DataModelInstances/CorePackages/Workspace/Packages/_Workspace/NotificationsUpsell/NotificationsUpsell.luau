@@ -4,5 +4,6 @@
 	setupPushNotificationsUpsell = require(script.setupPushNotificationsUpsell),
 	NotificationsUpsellConstants = require(script.NotificationsUpsellConstants),
 	ModalEventConstants = require(script.Analytics.ModalEventConstants),
-	PushUpsellEventConfig = require(script.Analytics.RobloxTelemetryConfigs.PushUpsellEventName)
+	PushUpsellEventConfig = require(script.Analytics.RobloxTelemetryConfigs.PushUpsellEventName),
+	requestPushNotificationPermission = require(script.requestPushNotificationPermission)
 }

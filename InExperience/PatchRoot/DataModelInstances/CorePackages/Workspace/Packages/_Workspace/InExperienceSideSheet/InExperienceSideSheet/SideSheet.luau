@@ -1,5 +1,6 @@
 ﻿local contextActionService = game:GetService("ContextActionService")
 local coreGuiService = game:GetService("CoreGui")
+local guiService = game:GetService("GuiService")
 local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
 local parent = inExperienceSideSheet.Parent
 local chromeModule = require(parent.Chrome)
@@ -94,7 +95,7 @@ local var2 = if fFlagSideSheetFocusNav then require(parent.ReactFocusNavigation)
 local var3 = nil
 
 local function SideSheetContent(p1)
-	-- upvalues: useTokens (ref), useStyleSheet (ref), useBackgroundStyleModule (ref), signalsReactModule (ref), getDeviceSafePadding (ref), fFlagMountUnmountSideSheet (ref), useDrawerShouldMount (ref), getScrollableContentTopWidgetIntegrations (ref), fFlagEnableSideSheetWidgets_1 (ref), reactModule (ref), sidesheetAnalyticsModule (ref), fFlagSideSheetFocusNav (ref), var2 (write), useLastInputMode (ref), usePreferredInput (ref), fFlagShowSwitchServerButton (ref), signalsModule (ref), getSideSheetVisibilityModule (ref), responsiveModule (ref), mouseIconOverrideService (ref), getSwitchServerStore (ref), switchServerTelemetry (ref), contextActionService (ref), list (ref), toggleSideSheetModule (ref), fFlagUseAnimateScrollViewToSelectionHelper (ref), useSideSheetFocusNavScrollViewAnimationModule (ref), isPioneerLaunch (ref), userProfileRowModule (ref), t (ref), experienceDetailsRowModule (ref), view (ref), divider (ref), sideSheetWidgetListModule (ref), chromeModule (ref), verticalListModule (ref), getAboveFoldIntegrations (ref), getBelowFoldIntegrations (ref), getScrollableContentBottomWidgetIntegrations (ref), scrollView (ref), footerModule (ref), fFlagEnableWhatsNew (ref), var1 (ref), drawerContainer (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
+	-- upvalues: useTokens (ref), useStyleSheet (ref), useBackgroundStyleModule (ref), signalsReactModule (ref), getDeviceSafePadding (ref), fFlagMountUnmountSideSheet (ref), useDrawerShouldMount (ref), getScrollableContentTopWidgetIntegrations (ref), fFlagEnableSideSheetWidgets_1 (ref), reactModule (ref), sidesheetAnalyticsModule (ref), fFlagSideSheetFocusNav (ref), var2 (write), useLastInputMode (ref), usePreferredInput (ref), fFlagShowSwitchServerButton (ref), signalsModule (ref), getSideSheetVisibilityModule (ref), guiService (ref), responsiveModule (ref), mouseIconOverrideService (ref), getSwitchServerStore (ref), switchServerTelemetry (ref), contextActionService (ref), list (ref), toggleSideSheetModule (ref), fFlagUseAnimateScrollViewToSelectionHelper (ref), useSideSheetFocusNavScrollViewAnimationModule (ref), isPioneerLaunch (ref), userProfileRowModule (ref), t (ref), experienceDetailsRowModule (ref), view (ref), divider (ref), sideSheetWidgetListModule (ref), chromeModule (ref), verticalListModule (ref), getAboveFoldIntegrations (ref), getBelowFoldIntegrations (ref), getScrollableContentBottomWidgetIntegrations (ref), scrollView (ref), footerModule (ref), fFlagEnableWhatsNew (ref), var1 (ref), drawerContainer (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var4 = useTokens()
 	local var5 = useStyleSheet()
 	local var6 = useBackgroundStyleModule()
@@ -126,6 +127,22 @@ local function SideSheetContent(p1)
 	local var16 = reactModule.useRef(false)
 	local var17 = usePreferredInput()
 	local var18 = if fFlagShowSwitchServerButton then reactModule.useRef(false) else nil
+	reactModule.useEffect(function()
+		-- upvalues: signalsModule (copy), getSideSheetVisibilityModule (copy), guiService (copy)
+		local var19 = signalsModule.createEffect(function(p2)
+			-- upvalues: getSideSheetVisibilityModule (copy), guiService (copy)
+			guiService:SetMenuIsOpen(getSideSheetVisibilityModule(p2), "InExperienceSideSheet")
+		end)
+		
+		return function()
+			-- upvalues: var19 (ref), guiService (copy)
+			var19()
+			
+			if guiService.MenuIsOpen then
+				guiService:SetMenuIsOpen(false, "InExperienceSideSheet")
+			end
+		end
+	end, {})
 	reactModule.useEffect(function()
 		-- upvalues: signalsModule (copy), getSideSheetVisibilityModule (copy), p1 (ref), var15 (ref), var17 (ref), responsiveModule (copy), var16 (ref), mouseIconOverrideService (copy), fFlagSideSheetFocusNav (copy), var11 (write), fFlagShowSwitchServerButton (copy), getSwitchServerStore (copy), var18 (write), switchServerTelemetry (copy)
 		local var19 = signalsModule.createEffect(function(p2)

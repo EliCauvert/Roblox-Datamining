@@ -16,6 +16,7 @@ local _ = require(avatarExperienceCatalog.Api.GetMarketplaceOffersBanner.Marketp
 local marketplaceOffersBannerDisplayModule = require(avatarExperienceCatalog.Api.GetMarketplaceOffersBanner.marketplaceOffersBannerDisplay)
 local useAXCatalogStoreContextModule = require(avatarExperienceCatalog.Context.useAXCatalogStoreContext)
 local _ = require(avatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
+local catalogOffersBannerImpressionsStoreModule = require(avatarExperienceCatalog.Stores.catalogOffersBannerImpressionsStore)
 local useCatalogOffersBannerDismissHydrationModule = require(avatarExperienceCatalog.Hooks.useCatalogOffersBannerDismissHydration)
 local useCatalogOffersBannerOffersFetchModule = require(avatarExperienceCatalog.Hooks.useCatalogOffersBannerOffersFetch)
 local catalogOffersBannerAppStorageModule = require(avatarExperienceCatalog.Utils.catalogOffersBannerAppStorage)
@@ -25,11 +26,13 @@ local getMarketplaceOffersBannerOfferDisplayId = marketplaceOffersBannerDisplayM
 local getMarketplaceOffersBannerOfferDisplayTitle = marketplaceOffersBannerDisplayModule.getMarketplaceOffersBannerOfferDisplayTitle
 local useTokens = foundationModule.Hooks.useTokens
 local useSignalState = signalsReactModule.useSignalState
-local fFlagAXCatalogOffersAutoOpenFTUXSheet = require(parent.AvatarExperienceFlags).FFlagAXCatalogOffersAutoOpenFTUXSheet
+local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+local fFlagAXCatalogOffersAutoOpenFTUXSheet = avatarExperienceFlagsModule.FFlagAXCatalogOffersAutoOpenFTUXSheet
 local AXSendImpressionsForCatalogOffersBanner = game:DefineFastFlag("AXSendImpressionsForCatalogOffersBanner", false)
+local fFlagAXOfferBannerImpressionOnlyOnStartup = avatarExperienceFlagsModule.FFlagAXOfferBannerImpressionOnlyOnStartup
 
 return function(p1)
-	-- upvalues: useAXCatalogStoreContextModule (ref), useNetworking (ref), useTokens (ref), reactModule (ref), useLocalization (ref), catalogOffersBannerAppStorageModule (ref), getMarketplaceOffersBannerOfferDisplayId (ref), useSignalState (ref), fFlagAXCatalogOffersAutoOpenFTUXSheet (ref), useCatalogOffersBannerDismissHydrationModule (ref), useCatalogOffersBannerOffersFetchModule (ref), getMarketplaceOffersBannerOfferDisplayTitle (ref), AXSendImpressionsForCatalogOffersBanner (ref), sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), unifiedLoggingElementNameEnums (ref), httpService (ref), catalogOffersBannerOfferModalsModule (ref)
+	-- upvalues: useAXCatalogStoreContextModule (ref), useNetworking (ref), useTokens (ref), reactModule (ref), useLocalization (ref), catalogOffersBannerAppStorageModule (ref), getMarketplaceOffersBannerOfferDisplayId (ref), useSignalState (ref), fFlagAXCatalogOffersAutoOpenFTUXSheet (ref), useCatalogOffersBannerDismissHydrationModule (ref), useCatalogOffersBannerOffersFetchModule (ref), getMarketplaceOffersBannerOfferDisplayTitle (ref), AXSendImpressionsForCatalogOffersBanner (ref), fFlagAXOfferBannerImpressionOnlyOnStartup (ref), catalogOffersBannerImpressionsStoreModule (ref), sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), unifiedLoggingElementNameEnums (ref), httpService (ref), catalogOffersBannerOfferModalsModule (ref)
 	local catalogOffersBannerStore = useAXCatalogStoreContextModule().catalogOffersBannerStore
 	local var1 = useNetworking()
 	local var2 = useTokens()
@@ -96,8 +99,9 @@ return function(p1)
 	
 	if AXSendImpressionsForCatalogOffersBanner then
 		reactModule.useEffect(function()
-			-- upvalues: var17 (ref), var3 (ref), var18 (ref), sendUnifiedEventLog (copy), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), unifiedLoggingElementNameEnums (copy), httpService (copy)
-			if not var17 and var3 and var18 then
+			-- upvalues: var17 (ref), var3 (ref), var18 (ref), fFlagAXOfferBannerImpressionOnlyOnStartup (copy), catalogOffersBannerImpressionsStoreModule (copy), sendUnifiedEventLog (copy), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), unifiedLoggingElementNameEnums (copy), httpService (copy)
+			if not var17 and var3 and var18 and (not fFlagAXOfferBannerImpressionOnlyOnStartup or var3.offerId and not catalogOffersBannerImpressionsStoreModule.hasSeenOfferId(var3.offerId)) then
+				catalogOffersBannerImpressionsStoreModule.addOfferId(var3.offerId)
 				sendUnifiedEventLog({
 					action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_IMPRESSION,
 					surface = unifiedLoggingSurface.CATALOG,

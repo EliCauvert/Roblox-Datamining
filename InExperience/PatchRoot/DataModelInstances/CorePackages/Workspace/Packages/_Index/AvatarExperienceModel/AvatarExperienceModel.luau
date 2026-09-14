@@ -4,6 +4,7 @@ local catalogCategoryTaxonomyUUIDsModule = require(script.Enums.CatalogCategoryT
 local constantsModule = require(script.Constants)
 local focusTypeModule = require(script.Enums.FocusType)
 local headShapeModule = require(script.Enums.HeadShape)
+local inventoryOutfitTypeModule = require(script.Enums.InventoryOutfitType)
 local recommendationsTypeModule = require(script.Enums.RecommendationsType)
 local _ = require(script.Types.CommonTypes)
 local _ = require(script.Types.DiscountType)
@@ -22,6 +23,7 @@ return {
 		CatalogCategoryTaxonomyUUIDs = catalogCategoryTaxonomyUUIDsModule,
 		FocusType = focusTypeModule,
 		HeadShape = headShapeModule,
+		InventoryOutfitType = inventoryOutfitTypeModule,
 		RecommendationsType = recommendationsTypeModule
 	}
 }

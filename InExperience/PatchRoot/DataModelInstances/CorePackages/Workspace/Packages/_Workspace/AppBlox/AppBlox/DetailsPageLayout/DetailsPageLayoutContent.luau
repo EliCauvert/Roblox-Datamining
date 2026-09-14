@@ -6,6 +6,7 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppClampBannerPaddingToViewport = sharedFlagsModule.FFlagLuaAppClampBannerPaddingToViewport
 local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
+local fFlagLuaAppEdpDirectionalGradientMidTransparency = sharedFlagsModule.FFlagLuaAppEdpDirectionalGradientMidTransparency
 local scrollView = foundationModule.ScrollView
 local view = foundationModule.View
 local detailsPageLayoutContextModule = require(script.Parent.DetailsPageLayoutContext)
@@ -15,7 +16,7 @@ local var1 = if fFlagLuaAppClampBannerPaddingToViewport then reactModule.createB
 local _ = nil
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), detailsPageLayoutContextModule (ref), reactUtilsModule (ref), fFlagLuaAppClampBannerPaddingToViewport (ref), var1 (ref), detailsPageLayoutUtilsModule (ref), view (ref), scrollView (ref), fFlagSduiExperienceDetailsSupport (ref), t (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref)
+	-- upvalues: reactModule (ref), detailsPageLayoutContextModule (ref), reactUtilsModule (ref), fFlagLuaAppClampBannerPaddingToViewport (ref), var1 (ref), detailsPageLayoutUtilsModule (ref), view (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), scrollView (ref), fFlagSduiExperienceDetailsSupport (ref), t (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref)
 	local var2 = reactModule.useContext(detailsPageLayoutContextModule)
 	local contentTopOffset = var2.contentTopOffset
 	local hasFullBleed = var2.hasFullBleed
@@ -33,6 +34,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local actionBarHeight = var2.actionBarHeight
 	local testId = var2.testId
 	local gradientTopBleedOffset = var2.gradientTopBleedOffset
+	local gradientMidTransparency = var2.gradientMidTransparency
 	assert(testId, "DetailsPageLayout.Content must be used within DetailsPageLayout.Root")
 	local var3 = reactUtilsModule.useComposedRef(p1.scrollingFrameRef, reactModule.useCallback(function(p3)
 		-- upvalues: initialScrollY (ref)
@@ -149,7 +151,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					Rotation = 270,
 					Transparency = NumberSequence.new({
 						NumberSequenceKeypoint.new(0, 0),
-						NumberSequenceKeypoint.new(0.5, 0.25),
+						NumberSequenceKeypoint.new(0.5, if fFlagLuaAppEdpDirectionalGradientMidTransparency then gradientMidTransparency or 0.25 else 0.25),
 						NumberSequenceKeypoint.new(1, 1)
 					})
 				})

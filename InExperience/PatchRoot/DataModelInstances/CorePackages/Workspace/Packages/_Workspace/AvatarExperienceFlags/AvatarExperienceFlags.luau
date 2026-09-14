@@ -137,6 +137,7 @@
 	FFlagAXCatalogOffersClearOnLogout = require(script.FFlagAXCatalogOffersClearOnLogout),
 	FFlagAXCatalogOffersBannerMockApi = require(script.FFlagAXCatalogOffersBannerMockApi),
 	FFlagAXCatalogOffersDismissedStorageKeyFix = require(script.FFlagAXCatalogOffersDismissedStorageKeyFix),
+	FFlagAXOfferBannerImpressionOnlyOnStartup = require(script.FFlagAXOfferBannerImpressionOnlyOnStartup),
 	FFlagAXPartialPageModalBackgroundShim = require(script.FFlagAXPartialPageModalBackgroundShim),
 	FFlagAXMigrateBuilderIcons = require(script.FFlagAXMigrateBuilderIcons),
 	FFlagAXCustomizeBackgrounds = require(script.FFlagAXCustomizeBackgrounds),

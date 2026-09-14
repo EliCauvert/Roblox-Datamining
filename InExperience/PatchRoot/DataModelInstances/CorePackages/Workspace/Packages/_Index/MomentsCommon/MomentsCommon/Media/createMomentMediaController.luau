@@ -100,6 +100,7 @@ return function(p1, p2)
 					kind = "tts",
 					id = `tts:{i - 1}`,
 					assetId = v.assetId,
+					assetAccessContext = v.assetAccessContext,
 					startTime = v.startTime,
 					parent = folder
 				}, services)

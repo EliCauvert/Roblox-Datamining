@@ -19,6 +19,7 @@ local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceD
 local fFlagLuaAppClampBannerPaddingToViewport = sharedFlagsModule.FFlagLuaAppClampBannerPaddingToViewport
 local fFlagDetailsPageLayoutSeedContainerSize = sharedFlagsModule.FFlagDetailsPageLayoutSeedContainerSize
 local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
+local fFlagLuaAppEdpDirectionalGradientMidTransparency = sharedFlagsModule.FFlagLuaAppEdpDirectionalGradientMidTransparency
 local t = {
 	testId = "app-blox-details-page",
 	fullBleedAspectRatio = 1.777777777778,
@@ -27,7 +28,7 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), withDefaults (ref), t (ref), compositionTags (ref), reactModule (ref), responsiveModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), fFlagDetailsPageLayoutSeedContainerSize (ref), useNavBarSize (ref), useNavBarPlacement (ref), displayModule (ref), appNavBarModule (ref), detailsPageLayoutUtilsModule (ref), fFlagLuaAppClampBannerPaddingToViewport (ref), detailsPageLayoutContextModule (ref), view (ref), stateLayerAffordance (ref), fFlagSduiExperienceDetailsSupport (ref)
+	-- upvalues: useDeviceInsets (ref), useTokens (ref), withDefaults (ref), t (ref), compositionTags (ref), reactModule (ref), responsiveModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), fFlagDetailsPageLayoutSeedContainerSize (ref), useNavBarSize (ref), useNavBarPlacement (ref), displayModule (ref), appNavBarModule (ref), detailsPageLayoutUtilsModule (ref), fFlagLuaAppClampBannerPaddingToViewport (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), detailsPageLayoutContextModule (ref), view (ref), stateLayerAffordance (ref), fFlagSduiExperienceDetailsSupport (ref)
 	local var1 = useDeviceInsets()
 	local var2 = useTokens()
 	local var3 = withDefaults(p1, t)
@@ -169,7 +170,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	
 	return reactModule.createElement(detailsPageLayoutContextModule.Provider, {
 		value = reactModule.useMemo(function()
-			-- upvalues: var5 (ref), var6 (ref), var7 (ref), var8 (ref), var9 (ref), var3 (ref), var16 (ref), var10 (ref), var11 (ref), var48 (ref), var42 (ref), var12 (ref), var13 (ref), var35 (ref), var37 (ref), fFlagLuaAppMediaGalleryGamepadSupport (copy), var40 (ref), var44 (ref), var24 (ref), var47 (ref), var19 (ref), var18 (ref), var20 (ref), var21 (ref)
+			-- upvalues: var5 (ref), var6 (ref), var7 (ref), var8 (ref), var9 (ref), var3 (ref), var16 (ref), var10 (ref), var11 (ref), var48 (ref), var42 (ref), var12 (ref), var13 (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (copy), var35 (ref), var37 (ref), fFlagLuaAppMediaGalleryGamepadSupport (copy), var40 (ref), var44 (ref), var24 (ref), var47 (ref), var19 (ref), var18 (ref), var20 (ref), var21 (ref)
 			return {
 				hasFullBleed = var5,
 				hasHeader = var6,
@@ -184,6 +185,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				contentTopOffset = var42,
 				fullBleedOverlapOffset = var12,
 				gradientTopBleedOffset = var13,
+				gradientMidTransparency = if fFlagLuaAppEdpDirectionalGradientMidTransparency then var3.gradientMidTransparency else nil,
 				initialScrollY = var35,
 				hasValidContainerSize = var37,
 				disableFocusNavEngineScroll = if fFlagLuaAppMediaGalleryGamepadSupport then var3.disableFocusNavEngineScroll else nil,
@@ -199,8 +201,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				setOnExitFullscreenOverlay = var21
 			}
 		end, {
-			var5, var3.isFullscreen, var16, var12, var13, var35, var37, var24,
-			var3.onClose, var3.testId, var40, var44, var48, var47, var19, var20,
+			var5, var3.isFullscreen, var16, var12, var13,
+			if fFlagLuaAppEdpDirectionalGradientMidTransparency then var3.gradientMidTransparency else nil,
+			var35, var37, var24, var3.onClose, var3.testId, var40, var44, var48, var47,
+			var19, var20,
 			if fFlagLuaAppMediaGalleryGamepadSupport then var3.disableFocusNavEngineScroll else nil
 		})
 	}, reactModule.createElement(view, {

@@ -3,7 +3,7 @@ local labelAbuseTypeMappingModule = require(script.Parent.LabelAbuseTypeMapping)
 local _ = require(script.Parent.Types.CategoryTypes.CategoryTypes)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local outfitTypesModule = require(script.Parent.Enums.OutfitTypes)
-local inventoryOutfitTypeModule = require(script.Parent.Enums.InventoryOutfitType)
+local inventoryOutfitType = require(parent.AvatarExperienceModel).Enums.InventoryOutfitType
 local fFlagAXCatalogMakeupSupport = avatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
 local fFlagAXInventoryDurablesSupport = avatarExperienceFlagsModule.FFlagAXInventoryDurablesSupport
 local t = {}
@@ -178,22 +178,22 @@ local t_20 = {
 }
 local t_21 = { AttributeKey = "IXP_LAYER", TagName = "WIDGET" }
 local t_22 = {
-	[inventoryOutfitTypeModule.Body] = outfitTypesModule.Avatar,
-	[inventoryOutfitTypeModule.Avatar] = outfitTypesModule.Avatar,
-	[inventoryOutfitTypeModule.DynamicHead] = outfitTypesModule.DynamicHead,
-	[inventoryOutfitTypeModule.Shoes] = outfitTypesModule.Shoes,
-	[inventoryOutfitTypeModule.Animations] = outfitTypesModule.Animations,
-	[inventoryOutfitTypeModule.PurchasedMakeup] = outfitTypesModule.Makeup,
-	[inventoryOutfitTypeModule.CreatedMakeup] = outfitTypesModule.Makeup
+	[inventoryOutfitType.Body] = outfitTypesModule.Avatar,
+	[inventoryOutfitType.Avatar] = outfitTypesModule.Avatar,
+	[inventoryOutfitType.DynamicHead] = outfitTypesModule.DynamicHead,
+	[inventoryOutfitType.Shoes] = outfitTypesModule.Shoes,
+	[inventoryOutfitType.Animations] = outfitTypesModule.Animations,
+	[inventoryOutfitType.PurchasedMakeup] = outfitTypesModule.Makeup,
+	[inventoryOutfitType.CreatedMakeup] = outfitTypesModule.Makeup
 }
 local t_23 = {
-	["1"] = inventoryOutfitTypeModule.Body,
-	["2"] = inventoryOutfitTypeModule.DynamicHead,
-	["3"] = inventoryOutfitTypeModule.Avatar,
-	["4"] = inventoryOutfitTypeModule.Shoes,
-	["5"] = inventoryOutfitTypeModule.Animations,
-	["6"] = inventoryOutfitTypeModule.PurchasedMakeup,
-	["7"] = inventoryOutfitTypeModule.CreatedMakeup
+	["1"] = inventoryOutfitType.Body,
+	["2"] = inventoryOutfitType.DynamicHead,
+	["3"] = inventoryOutfitType.Avatar,
+	["4"] = inventoryOutfitType.Shoes,
+	["5"] = inventoryOutfitType.Animations,
+	["6"] = inventoryOutfitType.PurchasedMakeup,
+	["7"] = inventoryOutfitType.CreatedMakeup
 }
 local t_24 = {}
 

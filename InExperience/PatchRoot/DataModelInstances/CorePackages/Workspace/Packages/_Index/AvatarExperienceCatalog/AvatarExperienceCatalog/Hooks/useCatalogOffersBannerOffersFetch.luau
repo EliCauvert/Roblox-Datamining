@@ -3,21 +3,24 @@ local parent = avatarExperienceCatalog.Parent
 local playersService = game:GetService("Players")
 local reactModule = require(parent.React)
 local useAvatarRoute = require(parent.AvatarExperienceNavigation).AvatarRoute.Hooks.useAvatarRoute
-local fFlagAXCatalogOffersClearOnLogout = require(parent.AvatarExperienceFlags).FFlagAXCatalogOffersClearOnLogout
+local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+local fFlagAXCatalogOffersClearOnLogout = avatarExperienceFlagsModule.FFlagAXCatalogOffersClearOnLogout
 local AXCatalogOffersRefetchOnVisible = game:DefineFastFlag("AXCatalogOffersRefetchOnVisible", false)
+local fFlagAXOfferBannerImpressionOnlyOnStartup = avatarExperienceFlagsModule.FFlagAXOfferBannerImpressionOnlyOnStartup
 local _ = require(avatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
+local catalogOffersBannerImpressionsStoreModule = require(avatarExperienceCatalog.Stores.catalogOffersBannerImpressionsStore)
 local getLocalUserIdModule = require(avatarExperienceCatalog.Utils.getLocalUserId)
 
 return function(p1, p2)
-	-- upvalues: fFlagAXCatalogOffersClearOnLogout (ref), reactModule (ref), getLocalUserIdModule (ref), playersService (ref), AXCatalogOffersRefetchOnVisible (ref), useAvatarRoute (ref)
+	-- upvalues: fFlagAXCatalogOffersClearOnLogout (ref), reactModule (ref), getLocalUserIdModule (ref), playersService (ref), fFlagAXOfferBannerImpressionOnlyOnStartup (ref), catalogOffersBannerImpressionsStoreModule (ref), AXCatalogOffersRefetchOnVisible (ref), useAvatarRoute (ref)
 	if fFlagAXCatalogOffersClearOnLogout then
 		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), p2 (ref), getLocalUserIdModule (copy), playersService (copy)
+			-- upvalues: p1 (ref), p2 (ref), getLocalUserIdModule (copy), playersService (copy), fFlagAXOfferBannerImpressionOnlyOnStartup (copy), catalogOffersBannerImpressionsStoreModule (copy)
 			local var1 = if not (p1.getHasCompletedOffersFetch(false) or p1.getOffersFetchInProgress(false)) then p1.fetchOffers(p2) else nil
 			local var2 = getLocalUserIdModule(playersService)
 			
 			local function handle()
-				-- upvalues: getLocalUserIdModule (copy), playersService (copy), var2 (write), var1 (write), p1 (copy), p2 (copy)
+				-- upvalues: getLocalUserIdModule (copy), playersService (copy), var2 (write), var1 (write), p1 (copy), fFlagAXOfferBannerImpressionOnlyOnStartup (copy), catalogOffersBannerImpressionsStoreModule (copy), p2 (copy)
 				local var3 = getLocalUserIdModule(playersService)
 				
 				if var3 == var2 then return end
@@ -30,6 +33,9 @@ return function(p1, p2)
 				p1.setPayload(nil)
 				p1.setDismissed(false)
 				
+				if fFlagAXOfferBannerImpressionOnlyOnStartup then
+					catalogOffersBannerImpressionsStoreModule.clearOfferIds()
+				end
 				if var3 ~= nil and var3 ~= "-1" then
 					var1 = p1.fetchOffers(p2)
 				end

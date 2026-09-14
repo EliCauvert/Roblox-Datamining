@@ -151,11 +151,11 @@ function chatLandingScreen.render(p1)
 	return roactModule.createElement(topBarProviderModule, {
 		screenName = enumScreensModule.ChatLanding,
 		render = function(p2)
-			-- upvalues: enumScreensModule (copy), argCheckModule (copy), roactModule (copy), chatLandingContainerModule (copy), var1 (ref), p1 (ref), key (ref), showSearchRow (ref), chatSearchBoxModule (copy), topBarHeight (ref), getFFlagEnablePushNotificationsUpsellModalChat (copy), checkAndOpenChatPushUpsellModule (copy)
+			-- upvalues: enumScreensModule (copy), argCheckModule (copy), roactModule (copy), chatLandingContainerModule (copy), showSearchRow (ref), var1 (ref), p1 (ref), key (ref), chatSearchBoxModule (copy), topBarHeight (ref), getFFlagEnablePushNotificationsUpsellModalChat (copy), checkAndOpenChatPushUpsellModule (copy)
 			local screenTopBar = p2.getScreenTopBar(enumScreensModule.ChatLanding)
 			argCheckModule.isType(screenTopBar, "table", "screenTopBar")
 			local var2 = roactModule.createElement(chatLandingContainerModule, {
-				isShowingFilterBox = screenTopBar.shouldRenderCenter,
+				isShowingFilterBox = screenTopBar.shouldRenderCenter or showSearchRow,
 				filterText = screenTopBar.filterText,
 				topBarHeight = var1.getScreenProps("topBarHeight", 0),
 				navigateToAddFriends = p1.props.navigation.getScreenProps("navigateToAddFriends", {}),

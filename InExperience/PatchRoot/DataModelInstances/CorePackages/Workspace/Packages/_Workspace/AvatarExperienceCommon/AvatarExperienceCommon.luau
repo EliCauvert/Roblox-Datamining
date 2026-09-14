@@ -42,7 +42,6 @@ local catalogCategoryKeyModule = require(script.Enums.CatalogCategoryKey)
 local catalogSubcategoryKeyModule = require(script.Enums.CatalogSubcategoryKey)
 local noPriceStatusModule = require(script.Enums.NoPriceStatus)
 local itemPurchaseActionTypeEnumModule = require(script.Enums.ItemPurchaseActionTypeEnum)
-local inventoryOutfitTypeModule = require(script.Enums.InventoryOutfitType)
 local fullViewModule = require(script.Enums.FullView)
 local wearTimeFilterModule = require(script.Enums.WearTimeFilter)
 local characterHistoryStateChangeButtonActivatedModule = require(script.State.CharacterHistoryStateChangeButtonActivated)
@@ -113,7 +112,6 @@ return {
 	},
 	Enums = {
 		OutfitTypes = require(script.Enums.OutfitTypes),
-		InventoryOutfitType = inventoryOutfitTypeModule,
 		ItemTypeEnum = itemTypeEnumModule,
 		ItemRestrictions = itemRestrictionsModule,
 		ItemStatus = itemStatusModule,

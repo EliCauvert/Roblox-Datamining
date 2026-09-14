@@ -42,12 +42,14 @@ local fFlagSduiContainerQueries = sharedFlagsModule.FFlagSduiContainerQueries
 local fFlagSduiPlayWithRewardGapFix = sharedFlagsModule.FFlagSduiPlayWithRewardGapFix
 local sduiEdpPageScopeIsTenFoot = game:DefineFastFlag("SduiEdpPageScopeIsTenFoot", false)
 local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
+local fFlagLuaAppEdpDirectionalGradientMidTransparency = sharedFlagsModule.FFlagLuaAppEdpDirectionalGradientMidTransparency
 local edpBannerAspectRatioTenths = game:DefineFastInt("EdpBannerAspectRatioTenths", 0)
 local edpFullBleedOverlapOffset = game:DefineFastInt("EdpFullBleedOverlapOffset", 180)
 local edpGradientTopBleedOffset = game:DefineFastInt("EdpGradientTopBleedOffset", 120)
 local edpBannerBottomVisiblePercent = game:DefineFastInt("EdpBannerBottomVisiblePercent", 20)
 local edpDirectionalFullBleedOverlapOffset = game:DefineFastInt("EdpDirectionalFullBleedOverlapOffset", 195)
 local edpDirectionalBannerBottomVisiblePercent = game:DefineFastInt("EdpDirectionalBannerBottomVisiblePercent", 50)
+local edpDirectionalGradientMidTransparencyHundredths = game:DefineFastInt("EdpDirectionalGradientMidTransparencyHundredths", 12)
 local t = {
 	SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 	SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
@@ -55,7 +57,7 @@ local t = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: gameDetail (ref), experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), reactModule (ref), usePageScopeRef (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useNavigation (ref), useRoactService (ref), appSessionService (ref), useTokens (ref), useGetCurrentLegacyRoute (ref), fFlagSduiPlayWithRewardGapFix (ref), filterPlayWithReward (ref), sduiEdpPageScopeIsTenFoot (ref), isTenFoot (ref), guiService (ref), removeGameDetailSessionIfDepartedModule (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), fFlagSduiContainerQueries (ref), usePublishContainerWidthModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), responsiveModule (ref), detailsPageLayout (ref), t (ref), edpBannerAspectRatioTenths (ref), edpDirectionalFullBleedOverlapOffset (ref), edpFullBleedOverlapOffset (ref), edpGradientTopBleedOffset (ref), edpDirectionalBannerBottomVisiblePercent (ref), edpBannerBottomVisiblePercent (ref), sduiFeatureEntryPoint (ref), appPage (ref), experienceDetailsPageConstantsModule (ref), experienceDetailsFallbackBannerImageModule (ref), foundationModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), fFlagSduiExperienceDetailsSupport (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref)
+	-- upvalues: gameDetail (ref), experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), reactModule (ref), usePageScopeRef (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useNavigation (ref), useRoactService (ref), appSessionService (ref), useTokens (ref), useGetCurrentLegacyRoute (ref), fFlagSduiPlayWithRewardGapFix (ref), filterPlayWithReward (ref), sduiEdpPageScopeIsTenFoot (ref), isTenFoot (ref), guiService (ref), removeGameDetailSessionIfDepartedModule (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), fFlagSduiContainerQueries (ref), usePublishContainerWidthModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), responsiveModule (ref), detailsPageLayout (ref), t (ref), edpBannerAspectRatioTenths (ref), edpDirectionalFullBleedOverlapOffset (ref), edpFullBleedOverlapOffset (ref), edpGradientTopBleedOffset (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), edpDirectionalGradientMidTransparencyHundredths (ref), edpDirectionalBannerBottomVisiblePercent (ref), edpBannerBottomVisiblePercent (ref), sduiFeatureEntryPoint (ref), appPage (ref), experienceDetailsPageConstantsModule (ref), experienceDetailsFallbackBannerImageModule (ref), foundationModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), fFlagSduiExperienceDetailsSupport (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref)
 	local var1
 	local useExperienceDetailsFocusNavigationModule = require(gameDetail.FocusNavigation.useExperienceDetailsFocusNavigation)
 	local universeId = experienceDetailsPageUtilsModule.getUniverseId(p1)
@@ -148,6 +150,7 @@ return reactModule.memo(function(p1)
 		fullBleedAspectRatio = if fFlagLuaAppMediaGalleryGamepadSupport and var1 and edpBannerAspectRatioTenths > 0 then edpBannerAspectRatioTenths / 10 else nil,
 		fullBleedOverlapOffset = if fFlagLuaAppMediaGalleryGamepadSupport and var1 then edpDirectionalFullBleedOverlapOffset else edpFullBleedOverlapOffset,
 		gradientTopBleedOffset = if fFlagLuaAppMediaGalleryGamepadSupport and var1 then edpGradientTopBleedOffset else nil,
+		gradientMidTransparency = if fFlagLuaAppEdpDirectionalGradientMidTransparency and fFlagLuaAppMediaGalleryGamepadSupport and var1 then edpDirectionalGradientMidTransparencyHundredths / 100 else nil,
 		bannerBottomVisiblePercent = if fFlagLuaAppMediaGalleryGamepadSupport and var1 then edpDirectionalBannerBottomVisiblePercent / 100 else edpBannerBottomVisiblePercent / 100,
 		reserveHeaderBarSpace = if fFlagLuaAppMediaGalleryGamepadSupport and var1 then false else nil,
 		disableFocusNavEngineScroll = if fFlagLuaAppMediaGalleryGamepadSupport and var1 then true else nil,

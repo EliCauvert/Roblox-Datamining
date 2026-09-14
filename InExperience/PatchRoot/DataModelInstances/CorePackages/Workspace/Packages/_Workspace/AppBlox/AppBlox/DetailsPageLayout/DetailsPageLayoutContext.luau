@@ -9,6 +9,7 @@
 	contentTopOffset = nil,
 	fullBleedOverlapOffset = 180,
 	gradientTopBleedOffset = 80,
+	gradientMidTransparency = nil,
 	initialScrollY = 0,
 	hasValidContainerSize = false,
 	disableFocusNavEngineScroll = false,

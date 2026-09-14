@@ -55,6 +55,7 @@
 	OpenFacialAgeEstimation = "OpenFacialAgeEstimation",
 	OpenAddConnectionsPage = "OpenAddConnectionsPage",
 	RequestFriendship = "RequestFriendship",
+	RequestPushNotificationPermission = "RequestPushNotificationPermission",
 	OpenMarketplace = "OpenMarketplace",
 	Navigate = "Navigate",
 	OpenMarketplaceCatalogFilters = "OpenMarketplaceCatalogFilters",

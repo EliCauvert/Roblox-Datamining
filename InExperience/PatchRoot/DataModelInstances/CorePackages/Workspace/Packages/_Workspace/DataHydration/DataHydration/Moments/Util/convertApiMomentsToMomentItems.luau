@@ -110,7 +110,8 @@ local function normalizeTtsEdit(p1)
 		text = if type(p1.text) == "string" then p1.text else "",
 		voiceId = if type(p1.voiceId) == "number" then p1.voiceId else 0,
 		startTime = if type(p1.startTime) == "number" then p1.startTime else 0,
-		assetId = var1
+		assetId = var1,
+		assetAccessContext = if type(p1.assetAccessContext) == "string" then p1.assetAccessContext else nil
 	}
 end
 

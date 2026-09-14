@@ -235,10 +235,10 @@ function chatLandingScreenWithSwitchNavigator.render(p1)
 							LeftContainer = roactModule.createElement(topBarProviderModule, {
 								screenName = enumScreensModule.ChatLanding,
 								render = function(p4)
-									-- upvalues: enumScreensModule (copy), argCheckModule (copy), p3 (ref), showSearchRow_1 (ref), roactModule (copy), chatLandingSearchRowModule (copy), topBarHeight (copy), var1 (copy), chatSearchBoxModule (copy), fFlagAppChatConsoleFocusFixesModule (copy), p1 (copy), chatLandingTopBarModule (copy), providerModule (copy), p2 (copy), appChatFixChatLandingContainerKeyPropConflict (copy), chatLandingContainerModule (copy), key (copy)
+									-- upvalues: enumScreensModule (copy), argCheckModule (copy), showSearchRow_1 (ref), p3 (ref), roactModule (copy), chatLandingSearchRowModule (copy), topBarHeight (copy), var1 (copy), chatSearchBoxModule (copy), fFlagAppChatConsoleFocusFixesModule (copy), p1 (copy), chatLandingTopBarModule (copy), providerModule (copy), p2 (copy), appChatFixChatLandingContainerKeyPropConflict (copy), chatLandingContainerModule (copy), key (copy)
 									local screenTopBar = p4.getScreenTopBar(enumScreensModule.ChatLanding)
 									argCheckModule.isType(screenTopBar, "table", "screenTopBar")
-									local shouldRenderCenter = screenTopBar.shouldRenderCenter or p3
+									local shouldRenderCenter = screenTopBar.shouldRenderCenter or showSearchRow_1
 									
 									return roactModule.createElement("Frame", {
 										Size = UDim2.new(0.37, 0, 1, 0),
