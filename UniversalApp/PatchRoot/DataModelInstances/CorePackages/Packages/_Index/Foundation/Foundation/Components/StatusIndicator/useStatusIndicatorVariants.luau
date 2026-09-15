@@ -12,11 +12,10 @@ local var1 = _G.__DEV__ == true
 local font = Font.new(require(foundation.Constants).BUILDER_SANS_FONT_ASSET, Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
 
 function variantsFactory(p1)
-	-- upvalues: font (ref), flagsModule (ref), statusIndicatorVariantModule (ref), statusIndicatorShapeModule (ref), statusIndicatorSizeModule (ref)
+	-- upvalues: font (ref), statusIndicatorVariantModule (ref), flagsModule (ref), statusIndicatorShapeModule (ref), statusIndicatorSizeModule (ref)
 	return {
 		common = {
-			content = { tag = "auto-xy text-align-x-left", font = font },
-			stroke = if flagsModule.FoundationAvatarBeta then nil else { Thickness = p1.Size.Size_50 }
+			content = { tag = "auto-xy text-align-x-left", font = font }
 		},
 		variants = {
 			[statusIndicatorVariantModule.Alert] = {
@@ -58,14 +57,7 @@ function variantsFactory(p1)
 				container = { backgroundStyle = p1.Color.Extended.Orange.Orange_600 }
 			}
 		},
-		hasValue = if flagsModule.FoundationAvatarBeta then {
-			[true] = {
-				container = {
-					tag = "row align-x-center align-y-center size-400-400 auto-x padding-xsmall"
-				}
-			}
-		} else {
-			[false] = { container = { tag = "size-200-200" } },
+		hasValue = {
 			[true] = {
 				container = {
 					tag = "row align-x-center align-y-center size-400-400 auto-x padding-xsmall"
@@ -79,9 +71,7 @@ function variantsFactory(p1)
 			},
 			[statusIndicatorShapeModule.Ring] = {
 				container = { tag = "align-x-center align-y-center radius-circle" },
-				ring = {
-					tag = if flagsModule.FoundationAvatarBeta then "radius-circle bg-surface-100" else "size-100-100 radius-circle bg-surface-100"
-				},
+				ring = { tag = "radius-circle bg-surface-100" },
 				stroke = { LineJoinMode = Enum.LineJoinMode.Round }
 			},
 			[statusIndicatorShapeModule.Square] = {
@@ -89,7 +79,7 @@ function variantsFactory(p1)
 				stroke = { LineJoinMode = Enum.LineJoinMode.Miter }
 			}
 		},
-		sizes = if flagsModule.FoundationAvatarBeta then {
+		sizes = {
 			[statusIndicatorSizeModule.XSmall] = {
 				container = {
 					size = UDim2.fromOffset(p1.Size.Size_150, p1.Size.Size_150)
@@ -126,7 +116,7 @@ function variantsFactory(p1)
 				},
 				stroke = { Thickness = p1.Stroke.Thicker }
 			}
-		} else nil
+		}
 	}
 end
 
@@ -142,7 +132,7 @@ return function(p1, p2, p3, p4, p5, p6)
 	end
 	local statusIndicator = variantsContextModule.useVariants("StatusIndicator", variantsFactory, p1)
 	
-	return composeStyleVariantModule(statusIndicator.common, statusIndicator.variants[p2], statusIndicator.hasValue[p3], statusIndicator.shape[p4], if flagsModule.FoundationAvatarBeta then if not p3 then statusIndicator.sizes[p5] else {} else nil, if p6 then {
+	return composeStyleVariantModule(statusIndicator.common, statusIndicator.variants[p2], statusIndicator.hasValue[p3], statusIndicator.shape[p4], if not p3 then statusIndicator.sizes[p5] else {}, if p6 then {
 		stroke = {
 			Color = indexBindableModule(p6, "Color3"),
 			Transparency = indexBindableModule(p6, "Transparency")

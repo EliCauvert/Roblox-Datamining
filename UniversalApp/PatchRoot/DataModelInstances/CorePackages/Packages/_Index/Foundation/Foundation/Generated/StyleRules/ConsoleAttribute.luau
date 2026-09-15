@@ -85,10 +85,10 @@
 			}
 		}
 	},
-	["size-full-2100"] = {
-		properties = { Size = "$SizeFull_2100" },
+	["size-200-1400"] = {
+		properties = { Size = "$Size200_1400" },
 		attributes = {
-			[1] = { name = "SizeFull_2100", value = UDim2.new(1, 0, 0, 126) }
+			[1] = { name = "Size200_1400", value = UDim2.new(0, 12, 0, 84) }
 		}
 	},
 	["size-700-250"] = {
@@ -204,9 +204,11 @@
 			}
 		}
 	},
-	["items-center"] = {
-		pseudo = "UIListLayout",
-		properties = { ItemLineAlignment = Enum.ItemLineAlignment.Center }
+	["size-1000-150"] = {
+		properties = { Size = "$Size1000_150" },
+		attributes = {
+			[1] = { name = "Size1000_150", value = UDim2.new(0, 60, 0, 9) }
+		}
 	},
 	["size-1600-1500"] = {
 		properties = { Size = "$Size1600_1500" },
@@ -457,10 +459,10 @@
 			[1] = { name = "Size50_400", value = UDim2.new(0, 3, 0, 24) }
 		}
 	},
-	["size-0-500"] = {
-		properties = { Size = "$Size0_500" },
+	["size-250-200"] = {
+		properties = { Size = "$Size250_200" },
 		attributes = {
-			[1] = { name = "Size0_500", value = UDim2.new(0, 0, 0, 30) }
+			[1] = { name = "Size250_200", value = UDim2.new(0, 15, 0, 12) }
 		}
 	},
 	["size-1300-100"] = {
@@ -550,10 +552,10 @@
 			[1] = { name = "Size1100_1600", value = UDim2.new(0, 66, 0, 96) }
 		}
 	},
-	["size-500-800"] = {
-		properties = { Size = "$Size500_800" },
+	["size-1100-500"] = {
+		properties = { Size = "$Size1100_500" },
 		attributes = {
-			[1] = { name = "Size500_800", value = UDim2.new(0, 30, 0, 48) }
+			[1] = { name = "Size1100_500", value = UDim2.new(0, 66, 0, 30) }
 		}
 	},
 	["size-250-2400"] = {
@@ -759,10 +761,10 @@
 			[1] = { name = "SizeFull_900", value = UDim2.new(1, 0, 0, 54) }
 		}
 	},
-	["size-1000-250"] = {
-		properties = { Size = "$Size1000_250" },
+	["size-1200-1600"] = {
+		properties = { Size = "$Size1200_1600" },
 		attributes = {
-			[1] = { name = "Size1000_250", value = UDim2.new(0, 60, 0, 15) }
+			[1] = { name = "Size1200_1600", value = UDim2.new(0, 72, 0, 96) }
 		}
 	},
 	["size-2100-450"] = {
@@ -1035,10 +1037,10 @@
 			[1] = { name = "Size300_1000", value = UDim2.new(0, 18, 0, 60) }
 		}
 	},
-	["size-250-550"] = {
-		properties = { Size = "$Size250_550" },
+	["size-0-1300"] = {
+		properties = { Size = "$Size0_1300" },
 		attributes = {
-			[1] = { name = "Size250_550", value = UDim2.new(0, 15, 0, 33) }
+			[1] = { name = "Size0_1300", value = UDim2.new(0, 0, 0, 78) }
 		}
 	},
 	["size-2200-250"] = {
@@ -1065,10 +1067,10 @@
 			[1] = { name = "Size900_800", value = UDim2.new(0, 54, 0, 48) }
 		}
 	},
-	["size-400-3000"] = {
-		properties = { Size = "$Size400_3000" },
+	["size-550-1300"] = {
+		properties = { Size = "$Size550_1300" },
 		attributes = {
-			[1] = { name = "Size400_3000", value = UDim2.new(0, 24, 0, 180) }
+			[1] = { name = "Size550_1300", value = UDim2.new(0, 33, 0, 78) }
 		}
 	},
 	["size-700-1600"] = {
@@ -1153,10 +1155,10 @@
 			[1] = { name = "Size100_2300", value = UDim2.new(0, 6, 0, 138) }
 		}
 	},
-	["size-1300-800"] = {
-		properties = { Size = "$Size1300_800" },
+	["size-900-850"] = {
+		properties = { Size = "$Size900_850" },
 		attributes = {
-			[1] = { name = "Size1300_800", value = UDim2.new(0, 78, 0, 48) }
+			[1] = { name = "Size900_850", value = UDim2.new(0, 54, 0, 51) }
 		}
 	},
 	["size-2600-2500"] = {
@@ -1233,10 +1235,10 @@
 		pseudo = "UIListLayout",
 		properties = { HorizontalFlex = Enum.UIFlexAlignment.Fill }
 	},
-	["size-150-2900"] = {
-		properties = { Size = "$Size150_2900" },
+	["size-100-full"] = {
+		properties = { Size = "$Size100_Full" },
 		attributes = {
-			[1] = { name = "Size150_2900", value = UDim2.new(0, 9, 0, 174) }
+			[1] = { name = "Size100_Full", value = UDim2.new(0, 6, 1, 0) }
 		}
 	},
 	["size-2800-1100"] = {
@@ -1438,10 +1440,10 @@
 			[1] = { name = "Size900_500", value = UDim2.new(0, 54, 0, 30) }
 		}
 	},
-	["size-1200-2900"] = {
-		properties = { Size = "$Size1200_2900" },
+	["size-0-350"] = {
+		properties = { Size = "$Size0_350" },
 		attributes = {
-			[1] = { name = "Size1200_2900", value = UDim2.new(0, 72, 0, 174) }
+			[1] = { name = "Size0_350", value = UDim2.new(0, 0, 0, 21) }
 		}
 	},
 	["size-2600-1300"] = {
@@ -1519,10 +1521,10 @@
 			[1] = { name = "Size2200_800", value = UDim2.new(0, 132, 0, 48) }
 		}
 	},
-	["size-900-550"] = {
-		properties = { Size = "$Size900_550" },
+	["size-50-200"] = {
+		properties = { Size = "$Size50_200" },
 		attributes = {
-			[1] = { name = "Size900_550", value = UDim2.new(0, 54, 0, 33) }
+			[1] = { name = "Size50_200", value = UDim2.new(0, 3, 0, 12) }
 		}
 	},
 	["size-1000-300"] = {
@@ -1741,10 +1743,10 @@
 			[1] = { name = "Size350_2400", value = UDim2.new(0, 21, 0, 144) }
 		}
 	},
-	["size-700-1400"] = {
-		properties = { Size = "$Size700_1400" },
+	["size-850-250"] = {
+		properties = { Size = "$Size850_250" },
 		attributes = {
-			[1] = { name = "Size700_1400", value = UDim2.new(0, 42, 0, 84) }
+			[1] = { name = "Size850_250", value = UDim2.new(0, 51, 0, 15) }
 		}
 	},
 	["size-1100-2500"] = {
@@ -1768,10 +1770,10 @@
 			}
 		}
 	},
-	["size-0-1100"] = {
-		properties = { Size = "$Size0_1100" },
+	["size-550-0"] = {
+		properties = { Size = "$Size550_0" },
 		attributes = {
-			[1] = { name = "Size0_1100", value = UDim2.new(0, 0, 0, 66) }
+			[1] = { name = "Size550_0", value = UDim2.new(0, 33, 0, 0) }
 		}
 	},
 	["size-2300-1400"] = {
@@ -1903,10 +1905,10 @@
 			[1] = { name = "Size150_2200", value = UDim2.new(0, 9, 0, 132) }
 		}
 	},
-	["size-450-100"] = {
-		properties = { Size = "$Size450_100" },
+	["size-450-50"] = {
+		properties = { Size = "$Size450_50" },
 		attributes = {
-			[1] = { name = "Size450_100", value = UDim2.new(0, 27, 0, 6) }
+			[1] = { name = "Size450_50", value = UDim2.new(0, 27, 0, 3) }
 		}
 	},
 	["radius-top-left-medium"] = {
@@ -2002,10 +2004,10 @@
 			[1] = { name = "SizeFull_700", value = UDim2.new(1, 0, 0, 42) }
 		}
 	},
-	["size-150-100"] = {
-		properties = { Size = "$Size150_100" },
+	["size-600-full"] = {
+		properties = { Size = "$Size600_Full" },
 		attributes = {
-			[1] = { name = "Size150_100", value = UDim2.new(0, 9, 0, 6) }
+			[1] = { name = "Size600_Full", value = UDim2.new(0, 36, 1, 0) }
 		}
 	},
 	["size-200-1300"] = {
@@ -2154,10 +2156,10 @@
 			[1] = { name = "Size1500_2800", value = UDim2.new(0, 90, 0, 168) }
 		}
 	},
-	["size-100-1800"] = {
-		properties = { Size = "$Size100_1800" },
+	["size-200-2100"] = {
+		properties = { Size = "$Size200_2100" },
 		attributes = {
-			[1] = { name = "Size100_1800", value = UDim2.new(0, 6, 0, 108) }
+			[1] = { name = "Size200_2100", value = UDim2.new(0, 12, 0, 126) }
 		}
 	},
 	["size-150-1100"] = {
@@ -2487,10 +2489,10 @@
 			[1] = { name = "Size1200_300", value = UDim2.new(0, 72, 0, 18) }
 		}
 	},
-	["size-250-600"] = {
-		properties = { Size = "$Size250_600" },
+	["size-700-1700"] = {
+		properties = { Size = "$Size700_1700" },
 		attributes = {
-			[1] = { name = "Size250_600", value = UDim2.new(0, 15, 0, 36) }
+			[1] = { name = "Size700_1700", value = UDim2.new(0, 42, 0, 102) }
 		}
 	},
 	["gap-xxlarge"] = {
@@ -2528,40 +2530,10 @@
 			[1] = { name = "Size1300_2200", value = UDim2.new(0, 78, 0, 132) }
 		}
 	},
-	["size-2000-1300"] = {
-		properties = { Size = "$Size2000_1300" },
-		attributes = {
-			[1] = { name = "Size2000_1300", value = UDim2.new(0, 120, 0, 78) }
-		}
-	},
-	["margin-top-small"] = {
-		pseudo = "UIPadding",
-		properties = { PaddingTop = "$MarginSmall" },
-		attributes = { [1] = { name = "MarginSmall", value = UDim.new(0, 30) } }
-	},
 	["size-300-250"] = {
 		properties = { Size = "$Size300_250" },
 		attributes = {
 			[1] = { name = "Size300_250", value = UDim2.new(0, 18, 0, 15) }
-		}
-	},
-	["margin-top-none"] = {
-		pseudo = "UIPadding",
-		properties = { PaddingTop = "$MarginNone" },
-		attributes = { [1] = { name = "MarginNone", value = UDim.new(0, 0) } }
-	},
-	["padding-top-xxlarge"] = {
-		pseudo = "UIPadding",
-		properties = { PaddingTop = "$PaddingXxlarge" },
-		attributes = {
-			[1] = { name = "PaddingXxlarge", value = UDim.new(0, 36) }
-		}
-	},
-	["padding-top-xlarge"] = {
-		pseudo = "UIPadding",
-		properties = { PaddingTop = "$PaddingXlarge" },
-		attributes = {
-			[1] = { name = "PaddingXlarge", value = UDim.new(0, 30) }
 		}
 	},
 	["size-2100-150"] = {
@@ -2615,21 +2587,10 @@
 			[1] = { name = "Size1600_550", value = UDim2.new(0, 96, 0, 33) }
 		}
 	},
-	["padding-top-large"] = {
-		pseudo = "UIPadding",
-		properties = { PaddingTop = "$PaddingLarge" },
-		attributes = { [1] = { name = "PaddingLarge", value = UDim.new(0, 24) } }
-	},
 	["size-800-350"] = {
 		properties = { Size = "$Size800_350" },
 		attributes = {
 			[1] = { name = "Size800_350", value = UDim2.new(0, 48, 0, 21) }
-		}
-	},
-	["size-1500-2600"] = {
-		properties = { Size = "$Size1500_2600" },
-		attributes = {
-			[1] = { name = "Size1500_2600", value = UDim2.new(0, 90, 0, 156) }
 		}
 	},
 	["size-800-1900"] = {
@@ -2661,11 +2622,6 @@
 			[1] = { name = "SizeFull_1900", value = UDim2.new(1, 0, 0, 114) }
 		}
 	},
-	["padding-top-small"] = {
-		pseudo = "UIPadding",
-		properties = { PaddingTop = "$PaddingSmall" },
-		attributes = { [1] = { name = "PaddingSmall", value = UDim.new(0, 12) } }
-	},
 	["size-1200-250"] = {
 		properties = { Size = "$Size1200_250" },
 		attributes = {
@@ -2690,28 +2646,6 @@
 			[1] = { name = "Size700_2800", value = UDim2.new(0, 42, 0, 168) }
 		}
 	},
-	["size-1400-full"] = {
-		properties = { Size = "$Size1400_Full" },
-		attributes = {
-			[1] = { name = "Size1400_Full", value = UDim2.new(0, 84, 1, 0) }
-		}
-	},
-	["size-1300-2400"] = {
-		properties = { Size = "$Size1300_2400" },
-		attributes = {
-			[1] = { name = "Size1300_2400", value = UDim2.new(0, 78, 0, 144) }
-		}
-	},
-	["gap-large"] = {
-		pseudo = "UIListLayout",
-		properties = { Padding = "$GapLarge" },
-		attributes = { [1] = { name = "GapLarge", value = UDim.new(0, 24) } }
-	},
-	["margin-left-medium"] = {
-		pseudo = "UIPadding",
-		properties = { PaddingLeft = "$MarginMedium" },
-		attributes = { [1] = { name = "MarginMedium", value = UDim.new(0, 36) } }
-	},
 	["size-900-3000"] = {
 		properties = { Size = "$Size900_3000" },
 		attributes = {
@@ -2728,34 +2662,10 @@
 		},
 		attributes = { [1] = { name = "PaddingXsmall", value = UDim.new(0, 6) } }
 	},
-	["size-2500-700"] = {
-		properties = { Size = "$Size2500_700" },
-		attributes = {
-			[1] = { name = "Size2500_700", value = UDim2.new(0, 150, 0, 42) }
-		}
-	},
-	["margin-left-none"] = {
-		pseudo = "UIPadding",
-		properties = { PaddingLeft = "$MarginNone" },
-		attributes = { [1] = { name = "MarginNone", value = UDim.new(0, 0) } }
-	},
-	["size-2500-0"] = {
-		properties = { Size = "$Size2500_0" },
-		attributes = {
-			[1] = { name = "Size2500_0", value = UDim2.new(0, 150, 0, 0) }
-		}
-	},
 	["size-1600-0"] = {
 		properties = { Size = "$Size1600_0" },
 		attributes = {
 			[1] = { name = "Size1600_0", value = UDim2.new(0, 96, 0, 0) }
-		}
-	},
-	["padding-left-xlarge"] = {
-		pseudo = "UIPadding",
-		properties = { PaddingLeft = "$PaddingXlarge" },
-		attributes = {
-			[1] = { name = "PaddingXlarge", value = UDim.new(0, 30) }
 		}
 	},
 	["size-1200-1000"] = {
@@ -2770,30 +2680,10 @@
 			[1] = { name = "Size850_400", value = UDim2.new(0, 51, 0, 24) }
 		}
 	},
-	["padding-left-large"] = {
-		pseudo = "UIPadding",
-		properties = { PaddingLeft = "$PaddingLarge" },
-		attributes = { [1] = { name = "PaddingLarge", value = UDim.new(0, 24) } }
-	},
-	["size-2700-1900"] = {
-		properties = { Size = "$Size2700_1900" },
+	["size-2000-1300"] = {
+		properties = { Size = "$Size2000_1300" },
 		attributes = {
-			[1] = {
-				name = "Size2700_1900",
-				value = UDim2.new(0, 162, 0, 114)
-			}
-		}
-	},
-	["size-850-1000"] = {
-		properties = { Size = "$Size850_1000" },
-		attributes = {
-			[1] = { name = "Size850_1000", value = UDim2.new(0, 51, 0, 60) }
-		}
-	},
-	["size-1600-2200"] = {
-		properties = { Size = "$Size1600_2200" },
-		attributes = {
-			[1] = { name = "Size1600_2200", value = UDim2.new(0, 96, 0, 132) }
+			[1] = { name = "Size2000_1300", value = UDim2.new(0, 120, 0, 78) }
 		}
 	},
 	["size-1500-1900"] = {
@@ -2808,12 +2698,10 @@
 			[1] = { name = "Size1800_700", value = UDim2.new(0, 108, 0, 42) }
 		}
 	},
-	["padding-left-xxsmall"] = {
+	["margin-top-small"] = {
 		pseudo = "UIPadding",
-		properties = { PaddingLeft = "$PaddingXxsmall" },
-		attributes = {
-			[1] = { name = "PaddingXxsmall", value = UDim.new(0, 3) }
-		}
+		properties = { PaddingTop = "$MarginSmall" },
+		attributes = { [1] = { name = "MarginSmall", value = UDim.new(0, 30) } }
 	},
 	["size-50-900"] = {
 		properties = { Size = "$Size50_900" },
@@ -2821,35 +2709,36 @@
 			[1] = { name = "Size50_900", value = UDim2.new(0, 3, 0, 54) }
 		}
 	},
-	["padding-left-none"] = {
+	["margin-top-none"] = {
 		pseudo = "UIPadding",
-		properties = { PaddingLeft = "$PaddingNone" },
-		attributes = { [1] = { name = "PaddingNone", value = UDim.new(0, 0) } }
+		properties = { PaddingTop = "$MarginNone" },
+		attributes = { [1] = { name = "MarginNone", value = UDim.new(0, 0) } }
 	},
-	["size-150-900"] = {
-		properties = { Size = "$Size150_900" },
+	["padding-top-xxlarge"] = {
+		pseudo = "UIPadding",
+		properties = { PaddingTop = "$PaddingXxlarge" },
 		attributes = {
-			[1] = { name = "Size150_900", value = UDim2.new(0, 9, 0, 54) }
+			[1] = { name = "PaddingXxlarge", value = UDim.new(0, 36) }
 		}
 	},
-	["size-2700-1700"] = {
-		properties = { Size = "$Size2700_1700" },
+	["size-1700-2000"] = {
+		properties = { Size = "$Size1700_2000" },
 		attributes = {
 			[1] = {
-				name = "Size2700_1700",
-				value = UDim2.new(0, 162, 0, 102)
+				name = "Size1700_2000",
+				value = UDim2.new(0, 102, 0, 120)
 			}
 		}
 	},
-	["margin-right-small"] = {
+	["padding-top-large"] = {
 		pseudo = "UIPadding",
-		properties = { PaddingRight = "$MarginSmall" },
-		attributes = { [1] = { name = "MarginSmall", value = UDim.new(0, 30) } }
+		properties = { PaddingTop = "$PaddingLarge" },
+		attributes = { [1] = { name = "PaddingLarge", value = UDim.new(0, 24) } }
 	},
-	["size-550-50"] = {
-		properties = { Size = "$Size550_50" },
+	["size-1500-2600"] = {
+		properties = { Size = "$Size1500_2600" },
 		attributes = {
-			[1] = { name = "Size550_50", value = UDim2.new(0, 33, 0, 3) }
+			[1] = { name = "Size1500_2600", value = UDim2.new(0, 90, 0, 156) }
 		}
 	},
 	["size-250-2200"] = {
@@ -2882,12 +2771,10 @@
 			[1] = { name = "Size2700_1200", value = UDim2.new(0, 162, 0, 72) }
 		}
 	},
-	["padding-right-xxlarge"] = {
+	["padding-top-small"] = {
 		pseudo = "UIPadding",
-		properties = { PaddingRight = "$PaddingXxlarge" },
-		attributes = {
-			[1] = { name = "PaddingXxlarge", value = UDim.new(0, 36) }
-		}
+		properties = { PaddingTop = "$PaddingSmall" },
+		attributes = { [1] = { name = "PaddingSmall", value = UDim.new(0, 12) } }
 	},
 	["size-2300-1800"] = {
 		properties = { Size = "$Size2300_1800" },
@@ -2898,11 +2785,10 @@
 			}
 		}
 	},
-	["padding-right-xlarge"] = {
-		pseudo = "UIPadding",
-		properties = { PaddingRight = "$PaddingXlarge" },
+	["size-1400-full"] = {
+		properties = { Size = "$Size1400_Full" },
 		attributes = {
-			[1] = { name = "PaddingXlarge", value = UDim.new(0, 30) }
+			[1] = { name = "Size1400_Full", value = UDim2.new(0, 84, 1, 0) }
 		}
 	},
 	["size-50-full"] = {
@@ -2935,10 +2821,11 @@
 			[1] = { name = "Size1300_2700", value = UDim2.new(0, 78, 0, 162) }
 		}
 	},
-	["padding-right-small"] = {
-		pseudo = "UIPadding",
-		properties = { PaddingRight = "$PaddingSmall" },
-		attributes = { [1] = { name = "PaddingSmall", value = UDim.new(0, 12) } }
+	["size-400-1900"] = {
+		properties = { Size = "$Size400_1900" },
+		attributes = {
+			[1] = { name = "Size400_1900", value = UDim2.new(0, 24, 0, 114) }
+		}
 	},
 	["size-full-3000"] = {
 		properties = { Size = "$SizeFull_3000" },
@@ -2964,18 +2851,20 @@
 			[1] = { name = "Size1800_250", value = UDim2.new(0, 108, 0, 15) }
 		}
 	},
-	["size-1100"] = {
-		properties = { Size = "$Size1100" },
-		attributes = {
-			[1] = { name = "Size1100", value = UDim2.new(0, 66, 0, 66) }
-		}
-	},
-	["padding-right-xxsmall"] = {
+	["margin-left-medium"] = {
 		pseudo = "UIPadding",
-		properties = { PaddingRight = "$PaddingXxsmall" },
-		attributes = {
-			[1] = { name = "PaddingXxsmall", value = UDim.new(0, 3) }
-		}
+		properties = { PaddingLeft = "$MarginMedium" },
+		attributes = { [1] = { name = "MarginMedium", value = UDim.new(0, 36) } }
+	},
+	["padding-small"] = {
+		pseudo = "UIPadding",
+		properties = {
+			PaddingBottom = "$PaddingSmall",
+			PaddingTop = "$PaddingSmall",
+			PaddingLeft = "$PaddingSmall",
+			PaddingRight = "$PaddingSmall"
+		},
+		attributes = { [1] = { name = "PaddingSmall", value = UDim.new(0, 12) } }
 	},
 	["size-2300-700"] = {
 		properties = { Size = "$Size2300_700" },
@@ -2983,15 +2872,18 @@
 			[1] = { name = "Size2300_700", value = UDim2.new(0, 138, 0, 42) }
 		}
 	},
-	["padding-right-none"] = {
+	["margin-left-none"] = {
 		pseudo = "UIPadding",
-		properties = { PaddingRight = "$PaddingNone" },
-		attributes = { [1] = { name = "PaddingNone", value = UDim.new(0, 0) } }
+		properties = { PaddingLeft = "$MarginNone" },
+		attributes = { [1] = { name = "MarginNone", value = UDim.new(0, 0) } }
 	},
-	["size-2500-100"] = {
-		properties = { Size = "$Size2500_100" },
+	["size-1700-2600"] = {
+		properties = { Size = "$Size1700_2600" },
 		attributes = {
-			[1] = { name = "Size2500_100", value = UDim2.new(0, 150, 0, 6) }
+			[1] = {
+				name = "Size1700_2600",
+				value = UDim2.new(0, 102, 0, 156)
+			}
 		}
 	},
 	["size-1900-450"] = {
@@ -3006,15 +2898,17 @@
 			[1] = { name = "Size1600_400", value = UDim2.new(0, 96, 0, 24) }
 		}
 	},
-	["margin-bottom-medium"] = {
+	["padding-left-xlarge"] = {
 		pseudo = "UIPadding",
-		properties = { PaddingBottom = "$MarginMedium" },
-		attributes = { [1] = { name = "MarginMedium", value = UDim.new(0, 36) } }
+		properties = { PaddingLeft = "$PaddingXlarge" },
+		attributes = {
+			[1] = { name = "PaddingXlarge", value = UDim.new(0, 30) }
+		}
 	},
-	["margin-bottom-small"] = {
+	["padding-left-large"] = {
 		pseudo = "UIPadding",
-		properties = { PaddingBottom = "$MarginSmall" },
-		attributes = { [1] = { name = "MarginSmall", value = UDim.new(0, 30) } }
+		properties = { PaddingLeft = "$PaddingLarge" },
+		attributes = { [1] = { name = "PaddingLarge", value = UDim.new(0, 24) } }
 	},
 	["size-full-2500"] = {
 		properties = { Size = "$SizeFull_2500" },
@@ -3022,10 +2916,13 @@
 			[1] = { name = "SizeFull_2500", value = UDim2.new(1, 0, 0, 150) }
 		}
 	},
-	["size-700-200"] = {
-		properties = { Size = "$Size700_200" },
+	["size-2700-2000"] = {
+		properties = { Size = "$Size2700_2000" },
 		attributes = {
-			[1] = { name = "Size700_200", value = UDim2.new(0, 42, 0, 12) }
+			[1] = {
+				name = "Size2700_2000",
+				value = UDim2.new(0, 162, 0, 120)
+			}
 		}
 	},
 	col = {
@@ -3035,31 +2932,29 @@
 			FillDirection = Enum.FillDirection.Vertical
 		}
 	},
-	["padding-bottom-xxlarge"] = {
-		pseudo = "UIPadding",
-		properties = { PaddingBottom = "$PaddingXxlarge" },
+	["size-1200-2600"] = {
+		properties = { Size = "$Size1200_2600" },
 		attributes = {
-			[1] = { name = "PaddingXxlarge", value = UDim.new(0, 36) }
+			[1] = { name = "Size1200_2600", value = UDim2.new(0, 72, 0, 156) }
 		}
 	},
-	["padding-bottom-xlarge"] = {
-		pseudo = "UIPadding",
-		properties = { PaddingBottom = "$PaddingXlarge" },
+	["size-2300-1200"] = {
+		properties = { Size = "$Size2300_1200" },
 		attributes = {
-			[1] = { name = "PaddingXlarge", value = UDim.new(0, 30) }
+			[1] = { name = "Size2300_1200", value = UDim2.new(0, 138, 0, 72) }
 		}
 	},
-	["padding-bottom-medium"] = {
+	["padding-left-xxsmall"] = {
 		pseudo = "UIPadding",
-		properties = { PaddingBottom = "$PaddingMedium" },
+		properties = { PaddingLeft = "$PaddingXxsmall" },
 		attributes = {
-			[1] = { name = "PaddingMedium", value = UDim.new(0, 18) }
+			[1] = { name = "PaddingXxsmall", value = UDim.new(0, 3) }
 		}
 	},
-	["padding-bottom-small"] = {
+	["padding-left-none"] = {
 		pseudo = "UIPadding",
-		properties = { PaddingBottom = "$PaddingSmall" },
-		attributes = { [1] = { name = "PaddingSmall", value = UDim.new(0, 12) } }
+		properties = { PaddingLeft = "$PaddingNone" },
+		attributes = { [1] = { name = "PaddingNone", value = UDim.new(0, 0) } }
 	},
 	["size-800"] = {
 		properties = { Size = "$Size800" },
@@ -3067,10 +2962,11 @@
 			[1] = { name = "Size800", value = UDim2.new(0, 48, 0, 48) }
 		}
 	},
-	["padding-bottom-xsmall"] = {
-		pseudo = "UIPadding",
-		properties = { PaddingBottom = "$PaddingXsmall" },
-		attributes = { [1] = { name = "PaddingXsmall", value = UDim.new(0, 6) } }
+	["size-400-1500"] = {
+		properties = { Size = "$Size400_1500" },
+		attributes = {
+			[1] = { name = "Size400_1500", value = UDim2.new(0, 24, 0, 90) }
+		}
 	},
 	["align-x-left"] = {
 		pseudo = "UIListLayout",
@@ -3085,44 +2981,12 @@
 			}
 		}
 	},
-	["shadow-overlay-100"] = {
+	["size-2700-1800"] = {
+		properties = { Size = "$Size2700_1800" },
 		attributes = {
-			[1] = { name = "ShadowBlurSize100", value = UDim.new(0, 6) },
-			[2] = {
-				name = "ShadowOffsetSize50",
-				value = UDim2.new(0, 0, 0, 3)
-			}
-		},
-		pseudoName = "shadow-overlay-100-1",
-		pseudo = "UIShadow",
-		properties = {
-			Offset = "$ShadowOffsetSize50",
-			Transparency = 0.92,
-			BlurRadius = "$ShadowBlurSize100",
-			Color = Color3.new(0, 0, 0),
-			ZIndex = -1,
-			Spread = UDim2.new(0, -1, 0, -1)
-		},
-		children = {
 			[1] = {
-				attributes = {
-					[1] = { name = "ShadowBlurSize500", value = UDim.new(0, 30) },
-					[2] = {
-						name = "ShadowOffsetSize250",
-						value = UDim2.new(0, 0, 0, 15)
-					}
-				},
-				pseudo = "UIShadow",
-				properties = {
-					Offset = "$ShadowOffsetSize250",
-					Transparency = 0.92,
-					BlurRadius = "$ShadowBlurSize500",
-					Color = Color3.new(0, 0, 0),
-					ZIndex = -2,
-					Spread = UDim2.new(0, -1, 0, -1)
-				},
-				pseudoName = "shadow-overlay-100-2",
-				tag = "shadow-overlay-100"
+				name = "Size2700_1800",
+				value = UDim2.new(0, 162, 0, 108)
 			}
 		}
 	},
@@ -3179,13 +3043,10 @@
 			[1] = { name = "Size350_2300", value = UDim2.new(0, 21, 0, 138) }
 		}
 	},
-	["margin-x-large"] = {
+	["margin-right-small"] = {
 		pseudo = "UIPadding",
-		properties = {
-			PaddingLeft = "$MarginLarge",
-			PaddingRight = "$MarginLarge"
-		},
-		attributes = { [1] = { name = "MarginLarge", value = UDim.new(0, 72) } }
+		properties = { PaddingRight = "$MarginSmall" },
+		attributes = { [1] = { name = "MarginSmall", value = UDim.new(0, 30) } }
 	},
 	["size-1600-100"] = {
 		properties = { Size = "$Size1600_100" },
@@ -3205,13 +3066,11 @@
 			[1] = { name = "Size0_2700", value = UDim2.new(0, 0, 0, 162) }
 		}
 	},
-	["margin-x-medium"] = {
-		pseudo = "UIPadding",
-		properties = {
-			PaddingLeft = "$MarginMedium",
-			PaddingRight = "$MarginMedium"
-		},
-		attributes = { [1] = { name = "MarginMedium", value = UDim.new(0, 36) } }
+	["size-450-100"] = {
+		properties = { Size = "$Size450_100" },
+		attributes = {
+			[1] = { name = "Size450_100", value = UDim2.new(0, 27, 0, 6) }
+		}
 	},
 	["size-3000-900"] = {
 		properties = { Size = "$Size3000_900" },
@@ -3219,13 +3078,12 @@
 			[1] = { name = "Size3000_900", value = UDim2.new(0, 180, 0, 54) }
 		}
 	},
-	["margin-x-small"] = {
+	["padding-right-xxlarge"] = {
 		pseudo = "UIPadding",
-		properties = {
-			PaddingLeft = "$MarginSmall",
-			PaddingRight = "$MarginSmall"
-		},
-		attributes = { [1] = { name = "MarginSmall", value = UDim.new(0, 30) } }
+		properties = { PaddingRight = "$PaddingXxlarge" },
+		attributes = {
+			[1] = { name = "PaddingXxlarge", value = UDim.new(0, 36) }
+		}
 	},
 	["size-1800-1700"] = {
 		properties = { Size = "$Size1800_1700" },
@@ -3245,19 +3103,17 @@
 			}
 		}
 	},
-	["size-800-850"] = {
-		properties = { Size = "$Size800_850" },
+	["padding-right-xlarge"] = {
+		pseudo = "UIPadding",
+		properties = { PaddingRight = "$PaddingXlarge" },
 		attributes = {
-			[1] = { name = "Size800_850", value = UDim2.new(0, 48, 0, 51) }
+			[1] = { name = "PaddingXlarge", value = UDim.new(0, 30) }
 		}
 	},
-	["size-2200-2200"] = {
-		properties = { Size = "$Size2200_2200" },
+	["size-1300-2800"] = {
+		properties = { Size = "$Size1300_2800" },
 		attributes = {
-			[1] = {
-				name = "Size2200_2200",
-				value = UDim2.new(0, 132, 0, 132)
-			}
+			[1] = { name = "Size1300_2800", value = UDim2.new(0, 78, 0, 168) }
 		}
 	},
 	["size-1000-1400"] = {
@@ -3281,15 +3137,10 @@
 			}
 		}
 	},
-	["padding-x-xlarge"] = {
+	["padding-right-small"] = {
 		pseudo = "UIPadding",
-		properties = {
-			PaddingLeft = "$PaddingXlarge",
-			PaddingRight = "$PaddingXlarge"
-		},
-		attributes = {
-			[1] = { name = "PaddingXlarge", value = UDim.new(0, 30) }
-		}
+		properties = { PaddingRight = "$PaddingSmall" },
+		attributes = { [1] = { name = "PaddingSmall", value = UDim.new(0, 12) } }
 	},
 	["size-50-600"] = {
 		properties = { Size = "$Size50_600" },
@@ -3297,14 +3148,10 @@
 			[1] = { name = "Size50_600", value = UDim2.new(0, 3, 0, 36) }
 		}
 	},
-	["padding-x-medium"] = {
-		pseudo = "UIPadding",
-		properties = {
-			PaddingLeft = "$PaddingMedium",
-			PaddingRight = "$PaddingMedium"
-		},
+	["size-1100-400"] = {
+		properties = { Size = "$Size1100_400" },
 		attributes = {
-			[1] = { name = "PaddingMedium", value = UDim.new(0, 18) }
+			[1] = { name = "Size1100_400", value = UDim2.new(0, 66, 0, 24) }
 		}
 	},
 	["size-0-700"] = {
@@ -3313,21 +3160,17 @@
 			[1] = { name = "Size0_700", value = UDim2.new(0, 0, 0, 42) }
 		}
 	},
-	["padding-x-small"] = {
+	["padding-right-xxsmall"] = {
 		pseudo = "UIPadding",
-		properties = {
-			PaddingLeft = "$PaddingSmall",
-			PaddingRight = "$PaddingSmall"
-		},
-		attributes = { [1] = { name = "PaddingSmall", value = UDim.new(0, 12) } }
+		properties = { PaddingRight = "$PaddingXxsmall" },
+		attributes = {
+			[1] = { name = "PaddingXxsmall", value = UDim.new(0, 3) }
+		}
 	},
-	["padding-x-xsmall"] = {
+	["padding-right-none"] = {
 		pseudo = "UIPadding",
-		properties = {
-			PaddingLeft = "$PaddingXsmall",
-			PaddingRight = "$PaddingXsmall"
-		},
-		attributes = { [1] = { name = "PaddingXsmall", value = UDim.new(0, 6) } }
+		properties = { PaddingRight = "$PaddingNone" },
+		attributes = { [1] = { name = "PaddingNone", value = UDim.new(0, 0) } }
 	},
 	["size-300-1500"] = {
 		properties = { Size = "$Size300_1500" },
@@ -3341,43 +3184,34 @@
 			[1] = { name = "Size1000_1900", value = UDim2.new(0, 60, 0, 114) }
 		}
 	},
-	["size-200-1500"] = {
-		properties = { Size = "$Size200_1500" },
+	["size-2500-150"] = {
+		properties = { Size = "$Size2500_150" },
 		attributes = {
-			[1] = { name = "Size200_1500", value = UDim2.new(0, 12, 0, 90) }
+			[1] = { name = "Size2500_150", value = UDim2.new(0, 150, 0, 9) }
 		}
 	},
-	["size-2000-1400"] = {
-		properties = { Size = "$Size2000_1400" },
-		attributes = {
-			[1] = { name = "Size2000_1400", value = UDim2.new(0, 120, 0, 84) }
-		}
-	},
-	["margin-y-large"] = {
+	["margin-bottom-medium"] = {
 		pseudo = "UIPadding",
-		properties = {
-			PaddingBottom = "$MarginLarge",
-			PaddingTop = "$MarginLarge"
-		},
-		attributes = { [1] = { name = "MarginLarge", value = UDim.new(0, 72) } }
+		properties = { PaddingBottom = "$MarginMedium" },
+		attributes = { [1] = { name = "MarginMedium", value = UDim.new(0, 36) } }
 	},
-	["padding-y-xlarge"] = {
+	["margin-bottom-small"] = {
 		pseudo = "UIPadding",
-		properties = {
-			PaddingBottom = "$PaddingXlarge",
-			PaddingTop = "$PaddingXlarge"
-		},
-		attributes = {
-			[1] = { name = "PaddingXlarge", value = UDim.new(0, 30) }
-		}
-	},
-	["margin-y-small"] = {
-		pseudo = "UIPadding",
-		properties = {
-			PaddingBottom = "$MarginSmall",
-			PaddingTop = "$MarginSmall"
-		},
+		properties = { PaddingBottom = "$MarginSmall" },
 		attributes = { [1] = { name = "MarginSmall", value = UDim.new(0, 30) } }
+	},
+	["size-2100-900"] = {
+		properties = { Size = "$Size2100_900" },
+		attributes = {
+			[1] = { name = "Size2100_900", value = UDim2.new(0, 126, 0, 54) }
+		}
+	},
+	["padding-bottom-xxlarge"] = {
+		pseudo = "UIPadding",
+		properties = { PaddingBottom = "$PaddingXxlarge" },
+		attributes = {
+			[1] = { name = "PaddingXxlarge", value = UDim.new(0, 36) }
+		}
 	},
 	["size-50-2500"] = {
 		properties = { Size = "$Size50_2500" },
@@ -3391,23 +3225,18 @@
 			[1] = { name = "Size50_1800", value = UDim2.new(0, 3, 0, 108) }
 		}
 	},
-	["size-2800-2800"] = {
-		properties = { Size = "$Size2800_2800" },
+	["padding-bottom-xlarge"] = {
+		pseudo = "UIPadding",
+		properties = { PaddingBottom = "$PaddingXlarge" },
 		attributes = {
-			[1] = {
-				name = "Size2800_2800",
-				value = UDim2.new(0, 168, 0, 168)
-			}
+			[1] = { name = "PaddingXlarge", value = UDim.new(0, 30) }
 		}
 	},
-	["padding-y-xxlarge"] = {
+	["padding-bottom-medium"] = {
 		pseudo = "UIPadding",
-		properties = {
-			PaddingBottom = "$PaddingXxlarge",
-			PaddingTop = "$PaddingXxlarge"
-		},
+		properties = { PaddingBottom = "$PaddingMedium" },
 		attributes = {
-			[1] = { name = "PaddingXxlarge", value = UDim.new(0, 36) }
+			[1] = { name = "PaddingMedium", value = UDim.new(0, 18) }
 		}
 	},
 	["margin-y-medium"] = {
@@ -3418,13 +3247,10 @@
 		},
 		attributes = { [1] = { name = "MarginMedium", value = UDim.new(0, 36) } }
 	},
-	["padding-y-large"] = {
+	["padding-bottom-small"] = {
 		pseudo = "UIPadding",
-		properties = {
-			PaddingBottom = "$PaddingLarge",
-			PaddingTop = "$PaddingLarge"
-		},
-		attributes = { [1] = { name = "PaddingLarge", value = UDim.new(0, 24) } }
+		properties = { PaddingBottom = "$PaddingSmall" },
+		attributes = { [1] = { name = "PaddingSmall", value = UDim.new(0, 12) } }
 	},
 	["size-1400-1600"] = {
 		properties = { Size = "$Size1400_1600" },
@@ -3432,23 +3258,16 @@
 			[1] = { name = "Size1400_1600", value = UDim2.new(0, 84, 0, 96) }
 		}
 	},
-	["padding-y-medium"] = {
+	["padding-bottom-xsmall"] = {
 		pseudo = "UIPadding",
-		properties = {
-			PaddingBottom = "$PaddingMedium",
-			PaddingTop = "$PaddingMedium"
-		},
-		attributes = {
-			[1] = { name = "PaddingMedium", value = UDim.new(0, 18) }
-		}
+		properties = { PaddingBottom = "$PaddingXsmall" },
+		attributes = { [1] = { name = "PaddingXsmall", value = UDim.new(0, 6) } }
 	},
-	["padding-y-small"] = {
-		pseudo = "UIPadding",
-		properties = {
-			PaddingBottom = "$PaddingSmall",
-			PaddingTop = "$PaddingSmall"
-		},
-		attributes = { [1] = { name = "PaddingSmall", value = UDim.new(0, 12) } }
+	["size-150-900"] = {
+		properties = { Size = "$Size150_900" },
+		attributes = {
+			[1] = { name = "Size150_900", value = UDim2.new(0, 9, 0, 54) }
+		}
 	},
 	["size-150-1500"] = {
 		properties = { Size = "$Size150_1500" },
@@ -3456,13 +3275,13 @@
 			[1] = { name = "Size150_1500", value = UDim2.new(0, 9, 0, 90) }
 		}
 	},
-	["padding-y-none"] = {
+	["margin-x-large"] = {
 		pseudo = "UIPadding",
 		properties = {
-			PaddingBottom = "$PaddingNone",
-			PaddingTop = "$PaddingNone"
+			PaddingLeft = "$MarginLarge",
+			PaddingRight = "$MarginLarge"
 		},
-		attributes = { [1] = { name = "PaddingNone", value = UDim.new(0, 0) } }
+		attributes = { [1] = { name = "MarginLarge", value = UDim.new(0, 72) } }
 	},
 	["size-1300-2600"] = {
 		properties = { Size = "$Size1300_2600" },
@@ -3476,74 +3295,48 @@
 			[1] = { name = "Size2800_100", value = UDim2.new(0, 168, 0, 6) }
 		}
 	},
-	["margin-large"] = {
+	["margin-x-medium"] = {
 		pseudo = "UIPadding",
 		properties = {
-			PaddingBottom = "$MarginLarge",
-			PaddingTop = "$MarginLarge",
-			PaddingLeft = "$MarginLarge",
-			PaddingRight = "$MarginLarge"
-		},
-		attributes = { [1] = { name = "MarginLarge", value = UDim.new(0, 72) } }
-	},
-	["size-450-350"] = {
-		properties = { Size = "$Size450_350" },
-		attributes = {
-			[1] = { name = "Size450_350", value = UDim2.new(0, 27, 0, 21) }
-		}
-	},
-	["margin-medium"] = {
-		pseudo = "UIPadding",
-		properties = {
-			PaddingBottom = "$MarginMedium",
-			PaddingTop = "$MarginMedium",
 			PaddingLeft = "$MarginMedium",
 			PaddingRight = "$MarginMedium"
 		},
 		attributes = { [1] = { name = "MarginMedium", value = UDim.new(0, 36) } }
 	},
-	["margin-small"] = {
+	["size-600-2800"] = {
+		properties = { Size = "$Size600_2800" },
+		attributes = {
+			[1] = { name = "Size600_2800", value = UDim2.new(0, 36, 0, 168) }
+		}
+	},
+	["margin-x-small"] = {
 		pseudo = "UIPadding",
 		properties = {
-			PaddingBottom = "$MarginSmall",
-			PaddingTop = "$MarginSmall",
 			PaddingLeft = "$MarginSmall",
 			PaddingRight = "$MarginSmall"
 		},
 		attributes = { [1] = { name = "MarginSmall", value = UDim.new(0, 30) } }
 	},
-	["size-850-250"] = {
-		properties = { Size = "$Size850_250" },
+	["size-200-1600"] = {
+		properties = { Size = "$Size200_1600" },
 		attributes = {
-			[1] = { name = "Size850_250", value = UDim2.new(0, 51, 0, 15) }
+			[1] = { name = "Size200_1600", value = UDim2.new(0, 12, 0, 96) }
 		}
 	},
-	["text-label-medium"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = { name = "TextPaddingLabelMedium", value = UDim.new(0, -2) }
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingLabelMedium",
-					PaddingTop = "$TextPaddingLabelMedium"
-				},
-				tag = "text-label-medium"
-			}
-		},
+	["size-1600-2300"] = {
+		properties = { Size = "$Size1600_2300" },
+		attributes = {
+			[1] = { name = "Size1600_2300", value = UDim2.new(0, 96, 0, 138) }
+		}
+	},
+	["padding-x-xlarge"] = {
+		pseudo = "UIPadding",
 		properties = {
-			Font = "$FontLabelMedium",
-			TextSize = "$TextSizeLabelMedium",
-			LineHeight = 0.778
+			PaddingLeft = "$PaddingXlarge",
+			PaddingRight = "$PaddingXlarge"
 		},
 		attributes = {
-			[1] = {
-				name = "FontLabelMedium",
-				value = Enum.Font.BuilderSansMedium
-			},
-			[2] = { name = "TextSizeLabelMedium", value = 27 }
+			[1] = { name = "PaddingXlarge", value = UDim.new(0, 30) }
 		}
 	},
 	["size-1700-200"] = {
@@ -3558,42 +3351,23 @@
 			[1] = { name = "Size500_100", value = UDim2.new(0, 30, 0, 6) }
 		}
 	},
-	["padding-xxlarge"] = {
+	["padding-x-medium"] = {
 		pseudo = "UIPadding",
 		properties = {
-			PaddingBottom = "$PaddingXxlarge",
-			PaddingTop = "$PaddingXxlarge",
-			PaddingLeft = "$PaddingXxlarge",
-			PaddingRight = "$PaddingXxlarge"
+			PaddingLeft = "$PaddingMedium",
+			PaddingRight = "$PaddingMedium"
 		},
 		attributes = {
-			[1] = { name = "PaddingXxlarge", value = UDim.new(0, 36) }
+			[1] = { name = "PaddingMedium", value = UDim.new(0, 18) }
 		}
 	},
-	["text-body-large"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = { name = "TextPaddingBodyLarge", value = UDim.new(0, 1) }
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingBodyLarge",
-					PaddingTop = "$TextPaddingBodyLarge"
-				},
-				tag = "text-body-large"
-			}
-		},
+	["padding-x-small"] = {
+		pseudo = "UIPadding",
 		properties = {
-			Font = "$FontBodyLarge",
-			TextSize = "$TextSizeBodyLarge",
-			LineHeight = 1.1
+			PaddingLeft = "$PaddingSmall",
+			PaddingRight = "$PaddingSmall"
 		},
-		attributes = {
-			[1] = { name = "FontBodyLarge", value = Enum.Font.BuilderSans },
-			[2] = { name = "TextSizeBodyLarge", value = 30 }
-		}
+		attributes = { [1] = { name = "PaddingSmall", value = UDim.new(0, 12) } }
 	},
 	["size-2600-550"] = {
 		properties = { Size = "$Size2600_550" },
@@ -3601,14 +3375,13 @@
 			[1] = { name = "Size2600_550", value = UDim2.new(0, 156, 0, 33) }
 		}
 	},
-	["size-1700-2800"] = {
-		properties = { Size = "$Size1700_2800" },
-		attributes = {
-			[1] = {
-				name = "Size1700_2800",
-				value = UDim2.new(0, 102, 0, 168)
-			}
-		}
+	["padding-x-xsmall"] = {
+		pseudo = "UIPadding",
+		properties = {
+			PaddingLeft = "$PaddingXsmall",
+			PaddingRight = "$PaddingXsmall"
+		},
+		attributes = { [1] = { name = "PaddingXsmall", value = UDim.new(0, 6) } }
 	},
 	["size-1600-2600"] = {
 		properties = { Size = "$Size1600_2600" },
@@ -3622,16 +3395,45 @@
 			[1] = { name = "Size2700_1100", value = UDim2.new(0, 162, 0, 66) }
 		}
 	},
-	["padding-medium"] = {
-		pseudo = "UIPadding",
-		properties = {
-			PaddingBottom = "$PaddingMedium",
-			PaddingTop = "$PaddingMedium",
-			PaddingLeft = "$PaddingMedium",
-			PaddingRight = "$PaddingMedium"
-		},
+	["shadow-overlay-100"] = {
 		attributes = {
-			[1] = { name = "PaddingMedium", value = UDim.new(0, 18) }
+			[1] = { name = "ShadowBlurSize100", value = UDim.new(0, 6) },
+			[2] = {
+				name = "ShadowOffsetSize50",
+				value = UDim2.new(0, 0, 0, 3)
+			}
+		},
+		pseudoName = "shadow-overlay-100-1",
+		pseudo = "UIShadow",
+		properties = {
+			Offset = "$ShadowOffsetSize50",
+			Transparency = 0.92,
+			BlurRadius = "$ShadowBlurSize100",
+			Color = Color3.new(0, 0, 0),
+			ZIndex = -1,
+			Spread = UDim2.new(0, -1, 0, -1)
+		},
+		children = {
+			[1] = {
+				attributes = {
+					[1] = { name = "ShadowBlurSize500", value = UDim.new(0, 30) },
+					[2] = {
+						name = "ShadowOffsetSize250",
+						value = UDim2.new(0, 0, 0, 15)
+					}
+				},
+				pseudo = "UIShadow",
+				properties = {
+					Offset = "$ShadowOffsetSize250",
+					Transparency = 0.92,
+					BlurRadius = "$ShadowBlurSize500",
+					Color = Color3.new(0, 0, 0),
+					ZIndex = -2,
+					Spread = UDim2.new(0, -1, 0, -1)
+				},
+				pseudoName = "shadow-overlay-100-2",
+				tag = "shadow-overlay-100"
+			}
 		}
 	},
 	["size-2000-150"] = {
@@ -3668,15 +3470,11 @@
 		pseudo = "UIListLayout",
 		properties = { VerticalFlex = Enum.UIFlexAlignment.SpaceAround }
 	},
-	["padding-small"] = {
-		pseudo = "UIPadding",
-		properties = {
-			PaddingBottom = "$PaddingSmall",
-			PaddingTop = "$PaddingSmall",
-			PaddingLeft = "$PaddingSmall",
-			PaddingRight = "$PaddingSmall"
-		},
-		attributes = { [1] = { name = "PaddingSmall", value = UDim.new(0, 12) } }
+	["size-2000-1400"] = {
+		properties = { Size = "$Size2000_1400" },
+		attributes = {
+			[1] = { name = "Size2000_1400", value = UDim2.new(0, 120, 0, 84) }
+		}
 	},
 	["size-1900-2300"] = {
 		properties = { Size = "$Size1900_2300" },
@@ -3693,24 +3491,21 @@
 			[1] = { name = "Size550_850", value = UDim2.new(0, 33, 0, 51) }
 		}
 	},
-	["size-2900-2700"] = {
-		properties = { Size = "$Size2900_2700" },
-		attributes = {
-			[1] = {
-				name = "Size2900_2700",
-				value = UDim2.new(0, 174, 0, 162)
-			}
-		}
-	},
-	["padding-none"] = {
+	["margin-y-large"] = {
 		pseudo = "UIPadding",
 		properties = {
-			PaddingBottom = "$PaddingNone",
-			PaddingTop = "$PaddingNone",
-			PaddingLeft = "$PaddingNone",
-			PaddingRight = "$PaddingNone"
+			PaddingBottom = "$MarginLarge",
+			PaddingTop = "$MarginLarge"
 		},
-		attributes = { [1] = { name = "PaddingNone", value = UDim.new(0, 0) } }
+		attributes = { [1] = { name = "MarginLarge", value = UDim.new(0, 72) } }
+	},
+	["margin-y-small"] = {
+		pseudo = "UIPadding",
+		properties = {
+			PaddingBottom = "$MarginSmall",
+			PaddingTop = "$MarginSmall"
+		},
+		attributes = { [1] = { name = "MarginSmall", value = UDim.new(0, 30) } }
 	},
 	["size-3000-850"] = {
 		properties = { Size = "$Size3000_850" },
@@ -3724,35 +3519,13 @@
 			[1] = { name = "Size2000_100", value = UDim2.new(0, 120, 0, 6) }
 		}
 	},
-	["text-caption-medium"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = {
-						name = "TextPaddingCaptionMedium",
-						value = UDim.new(0, 2)
-					}
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingCaptionMedium",
-					PaddingTop = "$TextPaddingCaptionMedium"
-				},
-				tag = "text-caption-medium"
-			}
-		},
-		properties = {
-			Font = "$FontCaptionMedium",
-			TextSize = "$TextSizeCaptionMedium",
-			LineHeight = 1.2
-		},
+	["size-2800-2900"] = {
+		properties = { Size = "$Size2800_2900" },
 		attributes = {
 			[1] = {
-				name = "FontCaptionMedium",
-				value = Enum.Font.BuilderSansMedium
-			},
-			[2] = { name = "TextSizeCaptionMedium", value = 22.5 }
+				name = "Size2800_2900",
+				value = UDim2.new(0, 168, 0, 174)
+			}
 		}
 	},
 	["size-800-2500"] = {
@@ -3783,32 +3556,14 @@
 			}
 		}
 	},
-	["text-caption-small"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = { name = "TextPaddingCaptionSmall", value = UDim.new(0, 0) }
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingCaptionSmall",
-					PaddingTop = "$TextPaddingCaptionSmall"
-				},
-				tag = "text-caption-small"
-			}
-		},
+	["padding-y-xxlarge"] = {
+		pseudo = "UIPadding",
 		properties = {
-			Font = "$FontCaptionSmall",
-			TextSize = "$TextSizeCaptionSmall",
-			LineHeight = 1.077
+			PaddingBottom = "$PaddingXxlarge",
+			PaddingTop = "$PaddingXxlarge"
 		},
 		attributes = {
-			[1] = {
-				name = "FontCaptionSmall",
-				value = Enum.Font.BuilderSansMedium
-			},
-			[2] = { name = "TextSizeCaptionSmall", value = 19.5 }
+			[1] = { name = "PaddingXxlarge", value = UDim.new(0, 36) }
 		}
 	},
 	["size-1200-2200"] = {
@@ -3817,45 +3572,23 @@
 			[1] = { name = "Size1200_2200", value = UDim2.new(0, 72, 0, 132) }
 		}
 	},
-	["size-1700-2000"] = {
-		properties = { Size = "$Size1700_2000" },
+	["padding-y-xlarge"] = {
+		pseudo = "UIPadding",
+		properties = {
+			PaddingBottom = "$PaddingXlarge",
+			PaddingTop = "$PaddingXlarge"
+		},
 		attributes = {
-			[1] = {
-				name = "Size1700_2000",
-				value = UDim2.new(0, 102, 0, 120)
-			}
+			[1] = { name = "PaddingXlarge", value = UDim.new(0, 30) }
 		}
 	},
-	["text-display-small"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = {
-						name = "TextPaddingDisplaySmall",
-						value = UDim.new(0, -1)
-					}
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingDisplaySmall",
-					PaddingTop = "$TextPaddingDisplaySmall"
-				},
-				tag = "text-display-small"
-			}
-		},
+	["padding-y-large"] = {
+		pseudo = "UIPadding",
 		properties = {
-			Font = "$FontDisplaySmall",
-			TextSize = "$TextSizeDisplaySmall",
-			LineHeight = 0.96
+			PaddingBottom = "$PaddingLarge",
+			PaddingTop = "$PaddingLarge"
 		},
-		attributes = {
-			[1] = {
-				name = "FontDisplaySmall",
-				value = Enum.Font.BuilderSansBold
-			},
-			[2] = { name = "TextSizeDisplaySmall", value = 75 }
-		}
+		attributes = { [1] = { name = "PaddingLarge", value = UDim.new(0, 24) } }
 	},
 	["size-550-1000"] = {
 		properties = { Size = "$Size550_1000" },
@@ -3881,32 +3614,14 @@
 			[1] = { name = "PaddingXlarge", value = UDim.new(0, 30) }
 		}
 	},
-	["text-title-medium"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = { name = "TextPaddingTitleMedium", value = UDim.new(0, 1) }
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingTitleMedium",
-					PaddingTop = "$TextPaddingTitleMedium"
-				},
-				tag = "text-title-medium"
-			}
-		},
+	["padding-y-medium"] = {
+		pseudo = "UIPadding",
 		properties = {
-			Font = "$FontTitleMedium",
-			TextSize = "$TextSizeTitleMedium",
-			LineHeight = 1.111
+			PaddingBottom = "$PaddingMedium",
+			PaddingTop = "$PaddingMedium"
 		},
 		attributes = {
-			[1] = {
-				name = "FontTitleMedium",
-				value = Enum.Font.BuilderSansBold
-			},
-			[2] = { name = "TextSizeTitleMedium", value = 27 }
+			[1] = { name = "PaddingMedium", value = UDim.new(0, 18) }
 		}
 	},
 	["size-100-2600"] = {
@@ -3921,33 +3636,13 @@
 			[1] = { name = "Size1800", value = UDim2.new(0, 108, 0, 108) }
 		}
 	},
-	["text-title-small"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = { name = "TextPaddingTitleSmall", value = UDim.new(0, 2) }
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingTitleSmall",
-					PaddingTop = "$TextPaddingTitleSmall"
-				},
-				tag = "text-title-small"
-			}
-		},
+	["padding-y-small"] = {
+		pseudo = "UIPadding",
 		properties = {
-			Font = "$FontTitleSmall",
-			TextSize = "$TextSizeTitleSmall",
-			LineHeight = 1.2
+			PaddingBottom = "$PaddingSmall",
+			PaddingTop = "$PaddingSmall"
 		},
-		attributes = {
-			[1] = {
-				name = "FontTitleSmall",
-				value = Enum.Font.BuilderSansBold
-			},
-			[2] = { name = "TextSizeTitleSmall", value = 22.5 }
-		}
+		attributes = { [1] = { name = "PaddingSmall", value = UDim.new(0, 12) } }
 	},
 	["size-200-150"] = {
 		properties = { Size = "$Size200_150" },
@@ -3955,70 +3650,33 @@
 			[1] = { name = "Size200_150", value = UDim2.new(0, 12, 0, 9) }
 		}
 	},
-	["text-heading-medium"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = {
-						name = "TextPaddingHeadingMedium",
-						value = UDim.new(0, 1)
-					}
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingHeadingMedium",
-					PaddingTop = "$TextPaddingHeadingMedium"
-				},
-				tag = "text-heading-medium"
-			}
-		},
+	["padding-y-none"] = {
+		pseudo = "UIPadding",
 		properties = {
-			Font = "$FontHeadingMedium",
-			TextSize = "$TextSizeHeadingMedium",
-			LineHeight = 1.067
+			PaddingBottom = "$PaddingNone",
+			PaddingTop = "$PaddingNone"
 		},
-		attributes = {
-			[1] = {
-				name = "FontHeadingMedium",
-				value = Enum.Font.BuilderSansBold
-			},
-			[2] = { name = "TextSizeHeadingMedium", value = 45 }
-		}
+		attributes = { [1] = { name = "PaddingNone", value = UDim.new(0, 0) } }
 	},
-	["text-title-large"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = { name = "TextPaddingTitleLarge", value = UDim.new(0, 1) }
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingTitleLarge",
-					PaddingTop = "$TextPaddingTitleLarge"
-				},
-				tag = "text-title-large"
-			}
-		},
+	["margin-large"] = {
+		pseudo = "UIPadding",
 		properties = {
-			Font = "$FontTitleLarge",
-			TextSize = "$TextSizeTitleLarge",
-			LineHeight = 1.1
+			PaddingBottom = "$MarginLarge",
+			PaddingTop = "$MarginLarge",
+			PaddingLeft = "$MarginLarge",
+			PaddingRight = "$MarginLarge"
 		},
-		attributes = {
-			[1] = {
-				name = "FontTitleLarge",
-				value = Enum.Font.BuilderSansBold
-			},
-			[2] = { name = "TextSizeTitleLarge", value = 30 }
-		}
+		attributes = { [1] = { name = "MarginLarge", value = UDim.new(0, 72) } }
 	},
-	["size-800-150"] = {
-		properties = { Size = "$Size800_150" },
-		attributes = {
-			[1] = { name = "Size800_150", value = UDim2.new(0, 48, 0, 9) }
-		}
+	["margin-medium"] = {
+		pseudo = "UIPadding",
+		properties = {
+			PaddingBottom = "$MarginMedium",
+			PaddingTop = "$MarginMedium",
+			PaddingLeft = "$MarginMedium",
+			PaddingRight = "$MarginMedium"
+		},
+		attributes = { [1] = { name = "MarginMedium", value = UDim.new(0, 36) } }
 	},
 	["size-600-200"] = {
 		properties = { Size = "$Size600_200" },
@@ -4032,44 +3690,32 @@
 			[1] = { name = "Size1200_2500", value = UDim2.new(0, 72, 0, 150) }
 		}
 	},
-	["size-2500-1400"] = {
-		properties = { Size = "$Size2500_1400" },
-		attributes = {
-			[1] = { name = "Size2500_1400", value = UDim2.new(0, 150, 0, 84) }
-		}
-	},
-	["text-label-small"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = { name = "TextPaddingLabelSmall", value = UDim.new(0, -2) }
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingLabelSmall",
-					PaddingTop = "$TextPaddingLabelSmall"
-				},
-				tag = "text-label-small"
-			}
-		},
+	["margin-small"] = {
+		pseudo = "UIPadding",
 		properties = {
-			Font = "$FontLabelSmall",
-			TextSize = "$TextSizeLabelSmall",
-			LineHeight = 0.8
+			PaddingBottom = "$MarginSmall",
+			PaddingTop = "$MarginSmall",
+			PaddingLeft = "$MarginSmall",
+			PaddingRight = "$MarginSmall"
 		},
+		attributes = { [1] = { name = "MarginSmall", value = UDim.new(0, 30) } }
+	},
+	["size-600-0"] = {
+		properties = { Size = "$Size600_0" },
 		attributes = {
-			[1] = {
-				name = "FontLabelSmall",
-				value = Enum.Font.BuilderSansMedium
-			},
-			[2] = { name = "TextSizeLabelSmall", value = 22.5 }
+			[1] = { name = "Size600_0", value = UDim2.new(0, 36, 0, 0) }
 		}
 	},
-	["size-1700-250"] = {
-		properties = { Size = "$Size1700_250" },
+	["padding-xxlarge"] = {
+		pseudo = "UIPadding",
+		properties = {
+			PaddingBottom = "$PaddingXxlarge",
+			PaddingTop = "$PaddingXxlarge",
+			PaddingLeft = "$PaddingXxlarge",
+			PaddingRight = "$PaddingXxlarge"
+		},
 		attributes = {
-			[1] = { name = "Size1700_250", value = UDim2.new(0, 102, 0, 15) }
+			[1] = { name = "PaddingXxlarge", value = UDim.new(0, 36) }
 		}
 	},
 	["size-1300-900"] = {
@@ -4078,29 +3724,13 @@
 			[1] = { name = "Size1300_900", value = UDim2.new(0, 78, 0, 54) }
 		}
 	},
-	["text-body-small"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = { name = "TextPaddingBodySmall", value = UDim.new(0, 2) }
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingBodySmall",
-					PaddingTop = "$TextPaddingBodySmall"
-				},
-				tag = "text-body-small"
-			}
-		},
-		properties = {
-			Font = "$FontBodySmall",
-			TextSize = "$TextSizeBodySmall",
-			LineHeight = 1.2
-		},
+	["size-1700-2800"] = {
+		properties = { Size = "$Size1700_2800" },
 		attributes = {
-			[1] = { name = "FontBodySmall", value = Enum.Font.BuilderSans },
-			[2] = { name = "TextSizeBodySmall", value = 22.5 }
+			[1] = {
+				name = "Size1700_2800",
+				value = UDim2.new(0, 102, 0, 168)
+			}
 		}
 	},
 	["size-1200-1500"] = {
@@ -4109,32 +3739,16 @@
 			[1] = { name = "Size1200_1500", value = UDim2.new(0, 72, 0, 90) }
 		}
 	},
-	["text-heading-small"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = { name = "TextPaddingHeadingSmall", value = UDim.new(0, 0) }
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingHeadingSmall",
-					PaddingTop = "$TextPaddingHeadingSmall"
-				},
-				tag = "text-heading-small"
-			}
-		},
+	["padding-medium"] = {
+		pseudo = "UIPadding",
 		properties = {
-			Font = "$FontHeadingSmall",
-			TextSize = "$TextSizeHeadingSmall",
-			LineHeight = 0.96
+			PaddingBottom = "$PaddingMedium",
+			PaddingTop = "$PaddingMedium",
+			PaddingLeft = "$PaddingMedium",
+			PaddingRight = "$PaddingMedium"
 		},
 		attributes = {
-			[1] = {
-				name = "FontHeadingSmall",
-				value = Enum.Font.BuilderSansBold
-			},
-			[2] = { name = "TextSizeHeadingSmall", value = 37.5 }
+			[1] = { name = "PaddingMedium", value = UDim.new(0, 18) }
 		}
 	},
 	["margin-left-small"] = {
@@ -4160,10 +3774,13 @@
 			[1] = { name = "Size2300_350", value = UDim2.new(0, 138, 0, 21) }
 		}
 	},
-	["size-1400-300"] = {
-		properties = { Size = "$Size1400_300" },
+	["size-2900-2800"] = {
+		properties = { Size = "$Size2900_2800" },
 		attributes = {
-			[1] = { name = "Size1400_300", value = UDim2.new(0, 84, 0, 18) }
+			[1] = {
+				name = "Size2900_2800",
+				value = UDim2.new(0, 174, 0, 168)
+			}
 		}
 	},
 	["size-1100-2800"] = {
@@ -4193,21 +3810,26 @@
 			[1] = { name = "Size2900_100", value = UDim2.new(0, 174, 0, 6) }
 		}
 	},
+	["padding-none"] = {
+		pseudo = "UIPadding",
+		properties = {
+			PaddingBottom = "$PaddingNone",
+			PaddingTop = "$PaddingNone",
+			PaddingLeft = "$PaddingNone",
+			PaddingRight = "$PaddingNone"
+		},
+		attributes = { [1] = { name = "PaddingNone", value = UDim.new(0, 0) } }
+	},
 	["stroke-thicker"] = {
 		pseudo = "UIStroke",
 		properties = { Thickness = "$StrokeThicknessThicker" },
 		attributes = { [1] = { name = "StrokeThicknessThicker", value = 4.5 } }
 	},
-	["size-2800-900"] = {
-		properties = { Size = "$Size2800_900" },
+	["size-2800-1000"] = {
+		properties = { Size = "$Size2800_1000" },
 		attributes = {
-			[1] = { name = "Size2800_900", value = UDim2.new(0, 168, 0, 54) }
+			[1] = { name = "Size2800_1000", value = UDim2.new(0, 168, 0, 60) }
 		}
-	},
-	["stroke-standard"] = {
-		pseudo = "UIStroke",
-		properties = { Thickness = "$StrokeThicknessStandard" },
-		attributes = { [1] = { name = "StrokeThicknessStandard", value = 1.5 } }
 	},
 	["size-850-1300"] = {
 		properties = { Size = "$Size850_1300" },
@@ -4215,27 +3837,23 @@
 			[1] = { name = "Size850_1300", value = UDim2.new(0, 51, 0, 78) }
 		}
 	},
-	["size-350-900"] = {
-		properties = { Size = "$Size350_900" },
+	["stroke-standard"] = {
+		pseudo = "UIStroke",
+		properties = { Thickness = "$StrokeThicknessStandard" },
+		attributes = { [1] = { name = "StrokeThicknessStandard", value = 1.5 } }
+	},
+	["size-850-1000"] = {
+		properties = { Size = "$Size850_1000" },
 		attributes = {
-			[1] = { name = "Size350_900", value = UDim2.new(0, 21, 0, 54) }
+			[1] = { name = "Size850_1000", value = UDim2.new(0, 51, 0, 60) }
 		}
 	},
-	["size-2700-2800"] = {
-		properties = { Size = "$Size2700_2800" },
+	["size-2700-2900"] = {
+		properties = { Size = "$Size2700_2900" },
 		attributes = {
 			[1] = {
-				name = "Size2700_2800",
-				value = UDim2.new(0, 162, 0, 168)
-			}
-		}
-	},
-	["size-3000-2600"] = {
-		properties = { Size = "$Size3000_2600" },
-		attributes = {
-			[1] = {
-				name = "Size3000_2600",
-				value = UDim2.new(0, 180, 0, 156)
+				name = "Size2700_2900",
+				value = UDim2.new(0, 162, 0, 174)
 			}
 		}
 	},
@@ -4254,6 +3872,19 @@
 			}
 		}
 	},
+	["size-3000-2600"] = {
+		properties = { Size = "$Size3000_2600" },
+		attributes = {
+			[1] = {
+				name = "Size3000_2600",
+				value = UDim2.new(0, 180, 0, 156)
+			}
+		}
+	},
+	["items-stretch"] = {
+		pseudo = "UIListLayout",
+		properties = { ItemLineAlignment = Enum.ItemLineAlignment.Stretch }
+	},
 	["size-3000-2500"] = {
 		properties = { Size = "$Size3000_2500" },
 		attributes = {
@@ -4263,14 +3894,16 @@
 			}
 		}
 	},
-	["items-stretch"] = {
-		pseudo = "UIListLayout",
-		properties = { ItemLineAlignment = Enum.ItemLineAlignment.Stretch }
-	},
-	["size-1200-500"] = {
-		properties = { Size = "$Size1200_500" },
+	["size-550-50"] = {
+		properties = { Size = "$Size550_50" },
 		attributes = {
-			[1] = { name = "Size1200_500", value = UDim2.new(0, 72, 0, 30) }
+			[1] = { name = "Size550_50", value = UDim2.new(0, 33, 0, 3) }
+		}
+	},
+	["size-1600-800"] = {
+		properties = { Size = "$Size1600_800" },
+		attributes = {
+			[1] = { name = "Size1600_800", value = UDim2.new(0, 96, 0, 48) }
 		}
 	},
 	["size-3000-2200"] = {
@@ -4280,12 +3913,6 @@
 				name = "Size3000_2200",
 				value = UDim2.new(0, 180, 0, 132)
 			}
-		}
-	},
-	["size-1600-800"] = {
-		properties = { Size = "$Size1600_800" },
-		attributes = {
-			[1] = { name = "Size1600_800", value = UDim2.new(0, 96, 0, 48) }
 		}
 	},
 	["size-3000-2000"] = {
@@ -4303,28 +3930,22 @@
 			[1] = { name = "Size1400_1700", value = UDim2.new(0, 84, 0, 102) }
 		}
 	},
-	["size-1000-50"] = {
-		properties = { Size = "$Size1000_50" },
-		attributes = {
-			[1] = { name = "Size1000_50", value = UDim2.new(0, 60, 0, 3) }
-		}
-	},
 	["size-500-1300"] = {
 		properties = { Size = "$Size500_1300" },
 		attributes = {
 			[1] = { name = "Size500_1300", value = UDim2.new(0, 30, 0, 78) }
 		}
 	},
-	["size-450-800"] = {
-		properties = { Size = "$Size450_800" },
+	["size-1000-800"] = {
+		properties = { Size = "$Size1000_800" },
 		attributes = {
-			[1] = { name = "Size450_800", value = UDim2.new(0, 27, 0, 48) }
+			[1] = { name = "Size1000_800", value = UDim2.new(0, 60, 0, 48) }
 		}
 	},
-	["size-1300-200"] = {
-		properties = { Size = "$Size1300_200" },
+	["size-150-550"] = {
+		properties = { Size = "$Size150_550" },
 		attributes = {
-			[1] = { name = "Size1300_200", value = UDim2.new(0, 78, 0, 12) }
+			[1] = { name = "Size150_550", value = UDim2.new(0, 9, 0, 33) }
 		}
 	},
 	["radius-top-left-none"] = {
@@ -4367,10 +3988,10 @@
 			[1] = { name = "Size1800_100", value = UDim2.new(0, 108, 0, 6) }
 		}
 	},
-	["size-3000-1200"] = {
-		properties = { Size = "$Size3000_1200" },
+	["size-550-1100"] = {
+		properties = { Size = "$Size550_1100" },
 		attributes = {
-			[1] = { name = "Size3000_1200", value = UDim2.new(0, 180, 0, 72) }
+			[1] = { name = "Size550_1100", value = UDim2.new(0, 33, 0, 66) }
 		}
 	},
 	["size-400-700"] = {
@@ -4385,16 +4006,16 @@
 			[1] = { name = "Size700_850", value = UDim2.new(0, 42, 0, 51) }
 		}
 	},
+	["size-3000-1200"] = {
+		properties = { Size = "$Size3000_1200" },
+		attributes = {
+			[1] = { name = "Size3000_1200", value = UDim2.new(0, 180, 0, 72) }
+		}
+	},
 	["size-3000-1100"] = {
 		properties = { Size = "$Size3000_1100" },
 		attributes = {
 			[1] = { name = "Size3000_1100", value = UDim2.new(0, 180, 0, 66) }
-		}
-	},
-	["size-3000-1000"] = {
-		properties = { Size = "$Size3000_1000" },
-		attributes = {
-			[1] = { name = "Size3000_1000", value = UDim2.new(0, 180, 0, 60) }
 		}
 	},
 	["size-2000-full"] = {
@@ -4415,10 +4036,10 @@
 			[1] = { name = "SizeFull_2200", value = UDim2.new(1, 0, 0, 132) }
 		}
 	},
-	["size-3000-700"] = {
-		properties = { Size = "$Size3000_700" },
+	["size-3000-1000"] = {
+		properties = { Size = "$Size3000_1000" },
 		attributes = {
-			[1] = { name = "Size3000_700", value = UDim2.new(0, 180, 0, 42) }
+			[1] = { name = "Size3000_1000", value = UDim2.new(0, 180, 0, 60) }
 		}
 	},
 	["size-2600-500"] = {
@@ -4436,6 +4057,12 @@
 			}
 		}
 	},
+	["size-3000-700"] = {
+		properties = { Size = "$Size3000_700" },
+		attributes = {
+			[1] = { name = "Size3000_700", value = UDim2.new(0, 180, 0, 42) }
+		}
+	},
 	["size-3000-600"] = {
 		properties = { Size = "$Size3000_600" },
 		attributes = {
@@ -4448,22 +4075,16 @@
 			[1] = { name = "Size3000_550", value = UDim2.new(0, 180, 0, 33) }
 		}
 	},
-	["size-3000-500"] = {
-		properties = { Size = "$Size3000_500" },
-		attributes = {
-			[1] = { name = "Size3000_500", value = UDim2.new(0, 180, 0, 30) }
-		}
-	},
 	["size-1600-1400"] = {
 		properties = { Size = "$Size1600_1400" },
 		attributes = {
 			[1] = { name = "Size1600_1400", value = UDim2.new(0, 96, 0, 84) }
 		}
 	},
-	["size-50-200"] = {
-		properties = { Size = "$Size50_200" },
+	["size-3000-500"] = {
+		properties = { Size = "$Size3000_500" },
 		attributes = {
-			[1] = { name = "Size50_200", value = UDim2.new(0, 3, 0, 12) }
+			[1] = { name = "Size3000_500", value = UDim2.new(0, 180, 0, 30) }
 		}
 	},
 	["size-1900-1800"] = {
@@ -4515,38 +4136,22 @@
 			}
 		}
 	},
-	["radius-top-medium"] = {
-		attributes = { [1] = { name = "RadiusMedium", value = UDim.new(0, 12) } },
-		properties = {
-			TopRightRadius = "$RadiusMedium",
-			TopLeftRadius = "$RadiusMedium"
-		},
-		pseudo = "UICorner",
-		priority = 2,
-		children = {
-			[1] = {
-				pseudo = "UICorner",
-				priority = 0,
-				properties = {
-					TopRightRadius = UDim.new(0, 0),
-					TopLeftRadius = UDim.new(0, 0),
-					BottomRightRadius = UDim.new(0, 0),
-					BottomLeftRadius = UDim.new(0, 0)
-				},
-				tag = "radius-top-medium"
-			}
+	["size-1100-100"] = {
+		properties = { Size = "$Size1100_100" },
+		attributes = {
+			[1] = { name = "Size1100_100", value = UDim2.new(0, 66, 0, 6) }
+		}
+	},
+	["size-1000-100"] = {
+		properties = { Size = "$Size1000_100" },
+		attributes = {
+			[1] = { name = "Size1000_100", value = UDim2.new(0, 60, 0, 6) }
 		}
 	},
 	["size-3000-350"] = {
 		properties = { Size = "$Size3000_350" },
 		attributes = {
 			[1] = { name = "Size3000_350", value = UDim2.new(0, 180, 0, 21) }
-		}
-	},
-	["size-150-1200"] = {
-		properties = { Size = "$Size150_1200" },
-		attributes = {
-			[1] = { name = "Size150_1200", value = UDim2.new(0, 9, 0, 72) }
 		}
 	},
 	["size-850-200"] = {
@@ -4561,10 +4166,10 @@
 			[1] = { name = "Size50_2800", value = UDim2.new(0, 3, 0, 168) }
 		}
 	},
-	["size-3000-250"] = {
-		properties = { Size = "$Size3000_250" },
+	["size-150-1200"] = {
+		properties = { Size = "$Size150_1200" },
 		attributes = {
-			[1] = { name = "Size3000_250", value = UDim2.new(0, 180, 0, 15) }
+			[1] = { name = "Size150_1200", value = UDim2.new(0, 9, 0, 72) }
 		}
 	},
 	["size-250-100"] = {
@@ -4573,10 +4178,10 @@
 			[1] = { name = "Size250_100", value = UDim2.new(0, 15, 0, 6) }
 		}
 	},
-	["size-3000-200"] = {
-		properties = { Size = "$Size3000_200" },
+	["size-3000-250"] = {
+		properties = { Size = "$Size3000_250" },
 		attributes = {
-			[1] = { name = "Size3000_200", value = UDim2.new(0, 180, 0, 12) }
+			[1] = { name = "Size3000_250", value = UDim2.new(0, 180, 0, 15) }
 		}
 	},
 	["radius-bottom-left-small"] = {
@@ -4604,10 +4209,10 @@
 			[1] = { name = "Size500_1400", value = UDim2.new(0, 30, 0, 84) }
 		}
 	},
-	["size-3000-150"] = {
-		properties = { Size = "$Size3000_150" },
+	["size-3000-200"] = {
+		properties = { Size = "$Size3000_200" },
 		attributes = {
-			[1] = { name = "Size3000_150", value = UDim2.new(0, 180, 0, 9) }
+			[1] = { name = "Size3000_200", value = UDim2.new(0, 180, 0, 12) }
 		}
 	},
 	["size-full-850"] = {
@@ -4622,10 +4227,10 @@
 			[1] = { name = "Size1200_1400", value = UDim2.new(0, 72, 0, 84) }
 		}
 	},
-	["size-3000-100"] = {
-		properties = { Size = "$Size3000_100" },
+	["size-3000-150"] = {
+		properties = { Size = "$Size3000_150" },
 		attributes = {
-			[1] = { name = "Size3000_100", value = UDim2.new(0, 180, 0, 6) }
+			[1] = { name = "Size3000_150", value = UDim2.new(0, 180, 0, 9) }
 		}
 	},
 	["size-600-1700"] = {
@@ -4670,10 +4275,10 @@
 			}
 		}
 	},
-	["size-3000-50"] = {
-		properties = { Size = "$Size3000_50" },
+	["size-3000-100"] = {
+		properties = { Size = "$Size3000_100" },
 		attributes = {
-			[1] = { name = "Size3000_50", value = UDim2.new(0, 180, 0, 3) }
+			[1] = { name = "Size3000_100", value = UDim2.new(0, 180, 0, 6) }
 		}
 	},
 	["size-2400-1200"] = {
@@ -4712,10 +4317,10 @@
 			[1] = { name = "Size1200_700", value = UDim2.new(0, 72, 0, 42) }
 		}
 	},
-	["size-1700-800"] = {
-		properties = { Size = "$Size1700_800" },
+	["size-3000-50"] = {
+		properties = { Size = "$Size3000_50" },
 		attributes = {
-			[1] = { name = "Size1700_800", value = UDim2.new(0, 102, 0, 48) }
+			[1] = { name = "Size3000_50", value = UDim2.new(0, 180, 0, 3) }
 		}
 	},
 	["size-900-1100"] = {
@@ -4730,6 +4335,12 @@
 			[1] = { name = "Size0_1500", value = UDim2.new(0, 0, 0, 90) }
 		}
 	},
+	["size-1700-800"] = {
+		properties = { Size = "$Size1700_800" },
+		attributes = {
+			[1] = { name = "Size1700_800", value = UDim2.new(0, 102, 0, 48) }
+		}
+	},
 	["size-2900-3000"] = {
 		properties = { Size = "$Size2900_3000" },
 		attributes = {
@@ -4739,21 +4350,12 @@
 			}
 		}
 	},
-	["size-2100-2500"] = {
-		properties = { Size = "$Size2100_2500" },
+	["size-2100-2700"] = {
+		properties = { Size = "$Size2100_2700" },
 		attributes = {
 			[1] = {
-				name = "Size2100_2500",
-				value = UDim2.new(0, 126, 0, 150)
-			}
-		}
-	},
-	["size-2900-2800"] = {
-		properties = { Size = "$Size2900_2800" },
-		attributes = {
-			[1] = {
-				name = "Size2900_2800",
-				value = UDim2.new(0, 174, 0, 168)
+				name = "Size2100_2700",
+				value = UDim2.new(0, 126, 0, 162)
 			}
 		}
 	},
@@ -4769,21 +4371,21 @@
 			[1] = { name = "PaddingXxsmall", value = UDim.new(0, 3) }
 		}
 	},
+	["size-2900-2700"] = {
+		properties = { Size = "$Size2900_2700" },
+		attributes = {
+			[1] = {
+				name = "Size2900_2700",
+				value = UDim2.new(0, 174, 0, 162)
+			}
+		}
+	},
 	["size-2900-2600"] = {
 		properties = { Size = "$Size2900_2600" },
 		attributes = {
 			[1] = {
 				name = "Size2900_2600",
 				value = UDim2.new(0, 174, 0, 156)
-			}
-		}
-	},
-	["size-2900-2500"] = {
-		properties = { Size = "$Size2900_2500" },
-		attributes = {
-			[1] = {
-				name = "Size2900_2500",
-				value = UDim2.new(0, 174, 0, 150)
 			}
 		}
 	},
@@ -4829,21 +4431,21 @@
 			[1] = { name = "Size1100_Full", value = UDim2.new(0, 66, 1, 0) }
 		}
 	},
+	["size-2900-2500"] = {
+		properties = { Size = "$Size2900_2500" },
+		attributes = {
+			[1] = {
+				name = "Size2900_2500",
+				value = UDim2.new(0, 174, 0, 150)
+			}
+		}
+	},
 	["size-2900-2400"] = {
 		properties = { Size = "$Size2900_2400" },
 		attributes = {
 			[1] = {
 				name = "Size2900_2400",
 				value = UDim2.new(0, 174, 0, 144)
-			}
-		}
-	},
-	["size-2900-2300"] = {
-		properties = { Size = "$Size2900_2300" },
-		attributes = {
-			[1] = {
-				name = "Size2900_2300",
-				value = UDim2.new(0, 174, 0, 138)
 			}
 		}
 	},
@@ -4875,21 +4477,21 @@
 			[1] = { name = "SizeFull_1700", value = UDim2.new(1, 0, 0, 102) }
 		}
 	},
+	["size-2900-2300"] = {
+		properties = { Size = "$Size2900_2300" },
+		attributes = {
+			[1] = {
+				name = "Size2900_2300",
+				value = UDim2.new(0, 174, 0, 138)
+			}
+		}
+	},
 	["size-2900-2200"] = {
 		properties = { Size = "$Size2900_2200" },
 		attributes = {
 			[1] = {
 				name = "Size2900_2200",
 				value = UDim2.new(0, 174, 0, 132)
-			}
-		}
-	},
-	["size-2900-2100"] = {
-		properties = { Size = "$Size2900_2100" },
-		attributes = {
-			[1] = {
-				name = "Size2900_2100",
-				value = UDim2.new(0, 174, 0, 126)
 			}
 		}
 	},
@@ -4905,6 +4507,15 @@
 			[1] = { name = "Size1300_1300", value = UDim2.new(0, 78, 0, 78) }
 		}
 	},
+	["size-2900-2100"] = {
+		properties = { Size = "$Size2900_2100" },
+		attributes = {
+			[1] = {
+				name = "Size2900_2100",
+				value = UDim2.new(0, 174, 0, 126)
+			}
+		}
+	},
 	["size-2900-2000"] = {
 		properties = { Size = "$Size2900_2000" },
 		attributes = {
@@ -4914,19 +4525,10 @@
 			}
 		}
 	},
-	["size-50-450"] = {
-		properties = { Size = "$Size50_450" },
+	["size-150-400"] = {
+		properties = { Size = "$Size150_400" },
 		attributes = {
-			[1] = { name = "Size50_450", value = UDim2.new(0, 3, 0, 27) }
-		}
-	},
-	["size-2900-1800"] = {
-		properties = { Size = "$Size2900_1800" },
-		attributes = {
-			[1] = {
-				name = "Size2900_1800",
-				value = UDim2.new(0, 174, 0, 108)
-			}
+			[1] = { name = "Size150_400", value = UDim2.new(0, 9, 0, 24) }
 		}
 	},
 	["size-1200-full"] = {
@@ -5021,6 +4623,15 @@
 			}
 		}
 	},
+	["size-2900-1800"] = {
+		properties = { Size = "$Size2900_1800" },
+		attributes = {
+			[1] = {
+				name = "Size2900_1800",
+				value = UDim2.new(0, 174, 0, 108)
+			}
+		}
+	},
 	["size-2900-1700"] = {
 		properties = { Size = "$Size2900_1700" },
 		attributes = {
@@ -5030,44 +4641,16 @@
 			}
 		}
 	},
-	["size-2300-1100"] = {
-		properties = { Size = "$Size2300_1100" },
-		attributes = {
-			[1] = { name = "Size2300_1100", value = UDim2.new(0, 138, 0, 66) }
-		}
-	},
 	["size-2700-50"] = {
 		properties = { Size = "$Size2700_50" },
 		attributes = {
 			[1] = { name = "Size2700_50", value = UDim2.new(0, 162, 0, 3) }
 		}
 	},
-	["text-label-large"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = { name = "TextPaddingLabelLarge", value = UDim.new(0, -3) }
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingLabelLarge",
-					PaddingTop = "$TextPaddingLabelLarge"
-				},
-				tag = "text-label-large"
-			}
-		},
-		properties = {
-			Font = "$FontLabelLarge",
-			TextSize = "$TextSizeLabelLarge",
-			LineHeight = 0.8
-		},
+	["size-1300-1900"] = {
+		properties = { Size = "$Size1300_1900" },
 		attributes = {
-			[1] = {
-				name = "FontLabelLarge",
-				value = Enum.Font.BuilderSansMedium
-			},
-			[2] = { name = "TextSizeLabelLarge", value = 30 }
+			[1] = { name = "Size1300_1900", value = UDim2.new(0, 78, 0, 114) }
 		}
 	},
 	["size-1000-2400"] = {
@@ -5082,16 +4665,19 @@
 			[1] = { name = "Size100_1400", value = UDim2.new(0, 6, 0, 84) }
 		}
 	},
+	["size-2800-1700"] = {
+		properties = { Size = "$Size2800_1700" },
+		attributes = {
+			[1] = {
+				name = "Size2800_1700",
+				value = UDim2.new(0, 168, 0, 102)
+			}
+		}
+	},
 	["size-2900-1400"] = {
 		properties = { Size = "$Size2900_1400" },
 		attributes = {
 			[1] = { name = "Size2900_1400", value = UDim2.new(0, 174, 0, 84) }
-		}
-	},
-	["size-2900-1300"] = {
-		properties = { Size = "$Size2900_1300" },
-		attributes = {
-			[1] = { name = "Size2900_1300", value = UDim2.new(0, 174, 0, 78) }
 		}
 	},
 	["gap-xsmall"] = {
@@ -5147,6 +4733,12 @@
 			[1] = { name = "Size1700_550", value = UDim2.new(0, 102, 0, 33) }
 		}
 	},
+	["size-2900-1300"] = {
+		properties = { Size = "$Size2900_1300" },
+		attributes = {
+			[1] = { name = "Size2900_1300", value = UDim2.new(0, 174, 0, 78) }
+		}
+	},
 	["size-2900-1100"] = {
 		properties = { Size = "$Size2900_1100" },
 		attributes = {
@@ -5183,16 +4775,16 @@
 			[1] = { name = "Size2900_550", value = UDim2.new(0, 174, 0, 33) }
 		}
 	},
-	["size-2900-500"] = {
-		properties = { Size = "$Size2900_500" },
-		attributes = {
-			[1] = { name = "Size2900_500", value = UDim2.new(0, 174, 0, 30) }
-		}
-	},
 	["size-200-1900"] = {
 		properties = { Size = "$Size200_1900" },
 		attributes = {
 			[1] = { name = "Size200_1900", value = UDim2.new(0, 12, 0, 114) }
+		}
+	},
+	["size-2900-500"] = {
+		properties = { Size = "$Size2900_500" },
+		attributes = {
+			[1] = { name = "Size2900_500", value = UDim2.new(0, 174, 0, 30) }
 		}
 	},
 	["size-2900-450"] = {
@@ -5225,12 +4817,6 @@
 			[1] = { name = "Size2900_200", value = UDim2.new(0, 174, 0, 12) }
 		}
 	},
-	["size-2900-150"] = {
-		properties = { Size = "$Size2900_150" },
-		attributes = {
-			[1] = { name = "Size2900_150", value = UDim2.new(0, 174, 0, 9) }
-		}
-	},
 	["size-550-800"] = {
 		properties = { Size = "$Size550_800" },
 		attributes = {
@@ -5249,22 +4835,22 @@
 			[1] = { name = "Size1200_550", value = UDim2.new(0, 72, 0, 33) }
 		}
 	},
+	["size-2900-150"] = {
+		properties = { Size = "$Size2900_150" },
+		attributes = {
+			[1] = { name = "Size2900_150", value = UDim2.new(0, 174, 0, 9) }
+		}
+	},
 	["size-2900-50"] = {
 		properties = { Size = "$Size2900_50" },
 		attributes = {
 			[1] = { name = "Size2900_50", value = UDim2.new(0, 174, 0, 3) }
 		}
 	},
-	["size-2200-700"] = {
-		properties = { Size = "$Size2200_700" },
+	["size-700-2200"] = {
+		properties = { Size = "$Size700_2200" },
 		attributes = {
-			[1] = { name = "Size2200_700", value = UDim2.new(0, 132, 0, 42) }
-		}
-	},
-	["size-300-3000"] = {
-		properties = { Size = "$Size300_3000" },
-		attributes = {
-			[1] = { name = "Size300_3000", value = UDim2.new(0, 18, 0, 180) }
+			[1] = { name = "Size700_2200", value = UDim2.new(0, 42, 0, 132) }
 		}
 	},
 	["size-2300-1700"] = {
@@ -5276,10 +4862,10 @@
 			}
 		}
 	},
-	["size-400-1600"] = {
-		properties = { Size = "$Size400_1600" },
+	["size-200-1500"] = {
+		properties = { Size = "$Size200_1500" },
 		attributes = {
-			[1] = { name = "Size400_1600", value = UDim2.new(0, 24, 0, 96) }
+			[1] = { name = "Size200_1500", value = UDim2.new(0, 12, 0, 90) }
 		}
 	},
 	["size-2000-2800"] = {
@@ -5328,13 +4914,10 @@
 			}
 		}
 	},
-	["size-2800-2900"] = {
-		properties = { Size = "$Size2800_2900" },
+	["size-700-600"] = {
+		properties = { Size = "$Size700_600" },
 		attributes = {
-			[1] = {
-				name = "Size2800_2900",
-				value = UDim2.new(0, 168, 0, 174)
-			}
+			[1] = { name = "Size700_600", value = UDim2.new(0, 42, 0, 36) }
 		}
 	},
 	["margin-y-none"] = {
@@ -5345,6 +4928,15 @@
 		},
 		attributes = { [1] = { name = "MarginNone", value = UDim.new(0, 0) } }
 	},
+	["size-2800-2800"] = {
+		properties = { Size = "$Size2800_2800" },
+		attributes = {
+			[1] = {
+				name = "Size2800_2800",
+				value = UDim2.new(0, 168, 0, 168)
+			}
+		}
+	},
 	["size-2800-2700"] = {
 		properties = { Size = "$Size2800_2700" },
 		attributes = {
@@ -5354,16 +4946,16 @@
 			}
 		}
 	},
-	["size-2200-1200"] = {
-		properties = { Size = "$Size2200_1200" },
-		attributes = {
-			[1] = { name = "Size2200_1200", value = UDim2.new(0, 132, 0, 72) }
-		}
-	},
 	["size-100-1300"] = {
 		properties = { Size = "$Size100_1300" },
 		attributes = {
 			[1] = { name = "Size100_1300", value = UDim2.new(0, 6, 0, 78) }
+		}
+	},
+	["size-1500-full"] = {
+		properties = { Size = "$Size1500_Full" },
+		attributes = {
+			[1] = { name = "Size1500_Full", value = UDim2.new(0, 90, 1, 0) }
 		}
 	},
 	["size-2800-2100"] = {
@@ -5384,19 +4976,10 @@
 			}
 		}
 	},
-	["size-550-0"] = {
-		properties = { Size = "$Size550_0" },
+	["size-50-500"] = {
+		properties = { Size = "$Size50_500" },
 		attributes = {
-			[1] = { name = "Size550_0", value = UDim2.new(0, 33, 0, 0) }
-		}
-	},
-	["size-2800-1700"] = {
-		properties = { Size = "$Size2800_1700" },
-		attributes = {
-			[1] = {
-				name = "Size2800_1700",
-				value = UDim2.new(0, 168, 0, 102)
-			}
+			[1] = { name = "Size50_500", value = UDim2.new(0, 3, 0, 30) }
 		}
 	},
 	["size-2500-550"] = {
@@ -5435,16 +5018,16 @@
 			[1] = { name = "Size1600_600", value = UDim2.new(0, 96, 0, 36) }
 		}
 	},
+	["size-800-700"] = {
+		properties = { Size = "$Size800_700" },
+		attributes = {
+			[1] = { name = "Size800_700", value = UDim2.new(0, 48, 0, 42) }
+		}
+	},
 	["size-2800-1400"] = {
 		properties = { Size = "$Size2800_1400" },
 		attributes = {
 			[1] = { name = "Size2800_1400", value = UDim2.new(0, 168, 0, 84) }
-		}
-	},
-	["size-2800-1300"] = {
-		properties = { Size = "$Size2800_1300" },
-		attributes = {
-			[1] = { name = "Size2800_1300", value = UDim2.new(0, 168, 0, 78) }
 		}
 	},
 	["size-200-3000"] = {
@@ -5459,10 +5042,10 @@
 			[1] = { name = "Size250_1800", value = UDim2.new(0, 15, 0, 108) }
 		}
 	},
-	["size-2800-1000"] = {
-		properties = { Size = "$Size2800_1000" },
+	["size-2800-1300"] = {
+		properties = { Size = "$Size2800_1300" },
 		attributes = {
-			[1] = { name = "Size2800_1000", value = UDim2.new(0, 168, 0, 60) }
+			[1] = { name = "Size2800_1300", value = UDim2.new(0, 168, 0, 78) }
 		}
 	},
 	["stroke-thick"] = {
@@ -5476,10 +5059,10 @@
 			[1] = { name = "Size600_700", value = UDim2.new(0, 36, 0, 42) }
 		}
 	},
-	["size-2800-850"] = {
-		properties = { Size = "$Size2800_850" },
+	["size-2800-900"] = {
+		properties = { Size = "$Size2800_900" },
 		attributes = {
-			[1] = { name = "Size2800_850", value = UDim2.new(0, 168, 0, 51) }
+			[1] = { name = "Size2800_900", value = UDim2.new(0, 168, 0, 54) }
 		}
 	},
 	["size-450-2200"] = {
@@ -5494,16 +5077,16 @@
 			[1] = { name = "Size200_1700", value = UDim2.new(0, 12, 0, 102) }
 		}
 	},
-	["size-2800-800"] = {
-		properties = { Size = "$Size2800_800" },
+	["size-2800-850"] = {
+		properties = { Size = "$Size2800_850" },
 		attributes = {
-			[1] = { name = "Size2800_800", value = UDim2.new(0, 168, 0, 48) }
+			[1] = { name = "Size2800_850", value = UDim2.new(0, 168, 0, 51) }
 		}
 	},
-	["size-500-1900"] = {
-		properties = { Size = "$Size500_1900" },
+	["size-450-2100"] = {
+		properties = { Size = "$Size450_2100" },
 		attributes = {
-			[1] = { name = "Size500_1900", value = UDim2.new(0, 30, 0, 114) }
+			[1] = { name = "Size450_2100", value = UDim2.new(0, 27, 0, 126) }
 		}
 	},
 	["size-700-50"] = {
@@ -5512,22 +5095,22 @@
 			[1] = { name = "Size700_50", value = UDim2.new(0, 42, 0, 3) }
 		}
 	},
+	["size-2800-800"] = {
+		properties = { Size = "$Size2800_800" },
+		attributes = {
+			[1] = { name = "Size2800_800", value = UDim2.new(0, 168, 0, 48) }
+		}
+	},
 	["size-2800-700"] = {
 		properties = { Size = "$Size2800_700" },
 		attributes = {
 			[1] = { name = "Size2800_700", value = UDim2.new(0, 168, 0, 42) }
 		}
 	},
-	["size-1500-full"] = {
-		properties = { Size = "$Size1500_Full" },
+	["size-300-350"] = {
+		properties = { Size = "$Size300_350" },
 		attributes = {
-			[1] = { name = "Size1500_Full", value = UDim2.new(0, 90, 1, 0) }
-		}
-	},
-	["size-2800-500"] = {
-		properties = { Size = "$Size2800_500" },
-		attributes = {
-			[1] = { name = "Size2800_500", value = UDim2.new(0, 168, 0, 30) }
+			[1] = { name = "Size300_350", value = UDim2.new(0, 18, 0, 21) }
 		}
 	},
 	["size-300-1600"] = {
@@ -5536,10 +5119,10 @@
 			[1] = { name = "Size300_1600", value = UDim2.new(0, 18, 0, 96) }
 		}
 	},
-	["size-2800-400"] = {
-		properties = { Size = "$Size2800_400" },
+	["size-2800-500"] = {
+		properties = { Size = "$Size2800_500" },
 		attributes = {
-			[1] = { name = "Size2800_400", value = UDim2.new(0, 168, 0, 24) }
+			[1] = { name = "Size2800_500", value = UDim2.new(0, 168, 0, 30) }
 		}
 	},
 	["size-1200-800"] = {
@@ -5564,16 +5147,16 @@
 		pseudo = "UIListLayout",
 		properties = { VerticalFlex = Enum.UIFlexAlignment.SpaceBetween }
 	},
+	["size-2800-400"] = {
+		properties = { Size = "$Size2800_400" },
+		attributes = {
+			[1] = { name = "Size2800_400", value = UDim2.new(0, 168, 0, 24) }
+		}
+	},
 	["size-2800-350"] = {
 		properties = { Size = "$Size2800_350" },
 		attributes = {
 			[1] = { name = "Size2800_350", value = UDim2.new(0, 168, 0, 21) }
-		}
-	},
-	["size-2800-300"] = {
-		properties = { Size = "$Size2800_300" },
-		attributes = {
-			[1] = { name = "Size2800_300", value = UDim2.new(0, 168, 0, 18) }
 		}
 	},
 	["size-900-900"] = {
@@ -5582,10 +5165,10 @@
 			[1] = { name = "Size900_900", value = UDim2.new(0, 54, 0, 54) }
 		}
 	},
-	["size-1300-1100"] = {
-		properties = { Size = "$Size1300_1100" },
+	["size-2800-300"] = {
+		properties = { Size = "$Size2800_300" },
 		attributes = {
-			[1] = { name = "Size1300_1100", value = UDim2.new(0, 78, 0, 66) }
+			[1] = { name = "Size2800_300", value = UDim2.new(0, 168, 0, 18) }
 		}
 	},
 	["size-2900-1600"] = {
@@ -5605,10 +5188,10 @@
 		properties = { PaddingLeft = "$PaddingXsmall" },
 		attributes = { [1] = { name = "PaddingXsmall", value = UDim.new(0, 6) } }
 	},
-	["size-2700-1600"] = {
-		properties = { Size = "$Size2700_1600" },
+	["size-900-550"] = {
+		properties = { Size = "$Size900_550" },
 		attributes = {
-			[1] = { name = "Size2700_1600", value = UDim2.new(0, 162, 0, 96) }
+			[1] = { name = "Size900_550", value = UDim2.new(0, 54, 0, 33) }
 		}
 	},
 	["size-200-1000"] = {
@@ -5617,10 +5200,19 @@
 			[1] = { name = "Size200_1000", value = UDim2.new(0, 12, 0, 60) }
 		}
 	},
-	["size-full-150"] = {
-		properties = { Size = "$SizeFull_150" },
+	["size-2700-1700"] = {
+		properties = { Size = "$Size2700_1700" },
 		attributes = {
-			[1] = { name = "SizeFull_150", value = UDim2.new(1, 0, 0, 9) }
+			[1] = {
+				name = "Size2700_1700",
+				value = UDim2.new(0, 162, 0, 102)
+			}
+		}
+	},
+	["size-850-800"] = {
+		properties = { Size = "$Size850_800" },
+		attributes = {
+			[1] = { name = "Size850_800", value = UDim2.new(0, 51, 0, 48) }
 		}
 	},
 	["size-2800-full"] = {
@@ -5629,16 +5221,16 @@
 			[1] = { name = "Size2800_Full", value = UDim2.new(0, 168, 1, 0) }
 		}
 	},
-	["size-1100-2000"] = {
-		properties = { Size = "$Size1100_2000" },
-		attributes = {
-			[1] = { name = "Size1100_2000", value = UDim2.new(0, 66, 0, 120) }
-		}
-	},
 	["size-900-450"] = {
 		properties = { Size = "$Size900_450" },
 		attributes = {
 			[1] = { name = "Size900_450", value = UDim2.new(0, 54, 0, 27) }
+		}
+	},
+	["size-1200-400"] = {
+		properties = { Size = "$Size1200_400" },
+		attributes = {
+			[1] = { name = "Size1200_400", value = UDim2.new(0, 72, 0, 24) }
 		}
 	},
 	["size-2700-3000"] = {
@@ -5647,15 +5239,6 @@
 			[1] = {
 				name = "Size2700_3000",
 				value = UDim2.new(0, 162, 0, 180)
-			}
-		}
-	},
-	["size-2700-2900"] = {
-		properties = { Size = "$Size2700_2900" },
-		attributes = {
-			[1] = {
-				name = "Size2700_2900",
-				value = UDim2.new(0, 162, 0, 174)
 			}
 		}
 	},
@@ -5735,12 +5318,12 @@
 			[1] = { name = "Size450_700", value = UDim2.new(0, 27, 0, 42) }
 		}
 	},
-	["size-2700-2600"] = {
-		properties = { Size = "$Size2700_2600" },
+	["size-2700-2800"] = {
+		properties = { Size = "$Size2700_2800" },
 		attributes = {
 			[1] = {
-				name = "Size2700_2600",
-				value = UDim2.new(0, 162, 0, 156)
+				name = "Size2700_2800",
+				value = UDim2.new(0, 162, 0, 168)
 			}
 		}
 	},
@@ -5750,10 +5333,13 @@
 			[1] = { name = "Size250_900", value = UDim2.new(0, 15, 0, 54) }
 		}
 	},
-	["size-2100-200"] = {
-		properties = { Size = "$Size2100_200" },
+	["size-2700-2600"] = {
+		properties = { Size = "$Size2700_2600" },
 		attributes = {
-			[1] = { name = "Size2100_200", value = UDim2.new(0, 126, 0, 12) }
+			[1] = {
+				name = "Size2700_2600",
+				value = UDim2.new(0, 162, 0, 156)
+			}
 		}
 	},
 	["size-600-3000"] = {
@@ -5772,6 +5358,12 @@
 		properties = { Size = "$Size900_1700" },
 		attributes = {
 			[1] = { name = "Size900_1700", value = UDim2.new(0, 54, 0, 102) }
+		}
+	},
+	["size-2100-200"] = {
+		properties = { Size = "$Size2100_200" },
+		attributes = {
+			[1] = { name = "Size2100_200", value = UDim2.new(0, 126, 0, 12) }
 		}
 	},
 	["size-2700-2400"] = {
@@ -5801,15 +5393,6 @@
 			}
 		}
 	},
-	["size-2700-2000"] = {
-		properties = { Size = "$Size2700_2000" },
-		attributes = {
-			[1] = {
-				name = "Size2700_2000",
-				value = UDim2.new(0, 162, 0, 120)
-			}
-		}
-	},
 	["padding-left-medium"] = {
 		pseudo = "UIPadding",
 		properties = { PaddingLeft = "$PaddingMedium" },
@@ -5817,13 +5400,10 @@
 			[1] = { name = "PaddingMedium", value = UDim.new(0, 18) }
 		}
 	},
-	["size-2700-1800"] = {
-		properties = { Size = "$Size2700_1800" },
+	["size-500-200"] = {
+		properties = { Size = "$Size500_200" },
 		attributes = {
-			[1] = {
-				name = "Size2700_1800",
-				value = UDim2.new(0, 162, 0, 108)
-			}
+			[1] = { name = "Size500_200", value = UDim2.new(0, 30, 0, 12) }
 		}
 	},
 	["radius-bottom-right-small"] = {
@@ -5862,6 +5442,12 @@
 			[1] = { name = "Size2800_50", value = UDim2.new(0, 168, 0, 3) }
 		}
 	},
+	["size-2700-1600"] = {
+		properties = { Size = "$Size2700_1600" },
+		attributes = {
+			[1] = { name = "Size2700_1600", value = UDim2.new(0, 162, 0, 96) }
+		}
+	},
 	["size-2700-1500"] = {
 		properties = { Size = "$Size2700_1500" },
 		attributes = {
@@ -5886,12 +5472,6 @@
 			[1] = { name = "Size2700_900", value = UDim2.new(0, 162, 0, 54) }
 		}
 	},
-	["size-600"] = {
-		properties = { Size = "$Size600" },
-		attributes = {
-			[1] = { name = "Size600", value = UDim2.new(0, 36, 0, 36) }
-		}
-	},
 	["size-1200-350"] = {
 		properties = { Size = "$Size1200_350" },
 		attributes = {
@@ -5902,6 +5482,12 @@
 		properties = { Size = "$Size1100_3000" },
 		attributes = {
 			[1] = { name = "Size1100_3000", value = UDim2.new(0, 66, 0, 180) }
+		}
+	},
+	["size-1100-2400"] = {
+		properties = { Size = "$Size1100_2400" },
+		attributes = {
+			[1] = { name = "Size1100_2400", value = UDim2.new(0, 66, 0, 144) }
 		}
 	},
 	["size-2700-800"] = {
@@ -5919,10 +5505,10 @@
 			}
 		}
 	},
-	["size-900-1600"] = {
-		properties = { Size = "$Size900_1600" },
+	["size-700-1400"] = {
+		properties = { Size = "$Size700_1400" },
 		attributes = {
-			[1] = { name = "Size900_1600", value = UDim2.new(0, 54, 0, 96) }
+			[1] = { name = "Size700_1400", value = UDim2.new(0, 42, 0, 84) }
 		}
 	},
 	["size-2700-550"] = {
@@ -5937,22 +5523,16 @@
 			[1] = { name = "Size2700_500", value = UDim2.new(0, 162, 0, 30) }
 		}
 	},
-	["size-2600-250"] = {
-		properties = { Size = "$Size2600_250" },
+	["size-150-full"] = {
+		properties = { Size = "$Size150_Full" },
 		attributes = {
-			[1] = { name = "Size2600_250", value = UDim2.new(0, 156, 0, 15) }
+			[1] = { name = "Size150_Full", value = UDim2.new(0, 9, 1, 0) }
 		}
 	},
 	["size-2700-400"] = {
 		properties = { Size = "$Size2700_400" },
 		attributes = {
 			[1] = { name = "Size2700_400", value = UDim2.new(0, 162, 0, 24) }
-		}
-	},
-	["size-2400-300"] = {
-		properties = { Size = "$Size2400_300" },
-		attributes = {
-			[1] = { name = "Size2400_300", value = UDim2.new(0, 144, 0, 18) }
 		}
 	},
 	["size-300-0"] = {
@@ -6001,16 +5581,22 @@
 			[1] = { name = "Size250_800", value = UDim2.new(0, 15, 0, 48) }
 		}
 	},
+	["size-2400-400"] = {
+		properties = { Size = "$Size2400_400" },
+		attributes = {
+			[1] = { name = "Size2400_400", value = UDim2.new(0, 144, 0, 24) }
+		}
+	},
 	["size-2700-200"] = {
 		properties = { Size = "$Size2700_200" },
 		attributes = {
 			[1] = { name = "Size2700_200", value = UDim2.new(0, 162, 0, 12) }
 		}
 	},
-	["size-400-1500"] = {
-		properties = { Size = "$Size400_1500" },
+	["size-400-1600"] = {
+		properties = { Size = "$Size400_1600" },
 		attributes = {
-			[1] = { name = "Size400_1500", value = UDim2.new(0, 24, 0, 90) }
+			[1] = { name = "Size400_1600", value = UDim2.new(0, 24, 0, 96) }
 		}
 	},
 	["size-2700-100"] = {
@@ -6025,16 +5611,16 @@
 			[1] = { name = "Size2700_0", value = UDim2.new(0, 162, 0, 0) }
 		}
 	},
-	["size-2700"] = {
-		properties = { Size = "$Size2700" },
-		attributes = {
-			[1] = { name = "Size2700", value = UDim2.new(0, 162, 0, 162) }
-		}
-	},
 	["size-0-800"] = {
 		properties = { Size = "$Size0_800" },
 		attributes = {
 			[1] = { name = "Size0_800", value = UDim2.new(0, 0, 0, 48) }
+		}
+	},
+	["size-2700"] = {
+		properties = { Size = "$Size2700" },
+		attributes = {
+			[1] = { name = "Size2700", value = UDim2.new(0, 162, 0, 162) }
 		}
 	},
 	["size-2600-3000"] = {
@@ -6043,15 +5629,6 @@
 			[1] = {
 				name = "Size2600_3000",
 				value = UDim2.new(0, 156, 0, 180)
-			}
-		}
-	},
-	["size-2600-2900"] = {
-		properties = { Size = "$Size2600_2900" },
-		attributes = {
-			[1] = {
-				name = "Size2600_2900",
-				value = UDim2.new(0, 156, 0, 174)
 			}
 		}
 	},
@@ -6067,12 +5644,12 @@
 			[1] = { name = "Size550_1600", value = UDim2.new(0, 33, 0, 96) }
 		}
 	},
-	["size-2600-2800"] = {
-		properties = { Size = "$Size2600_2800" },
+	["size-2600-2900"] = {
+		properties = { Size = "$Size2600_2900" },
 		attributes = {
 			[1] = {
-				name = "Size2600_2800",
-				value = UDim2.new(0, 156, 0, 168)
+				name = "Size2600_2900",
+				value = UDim2.new(0, 156, 0, 174)
 			}
 		}
 	},
@@ -6088,12 +5665,12 @@
 			[1] = { name = "Size450_1200", value = UDim2.new(0, 27, 0, 72) }
 		}
 	},
-	["size-2600-2700"] = {
-		properties = { Size = "$Size2600_2700" },
+	["size-2600-2800"] = {
+		properties = { Size = "$Size2600_2800" },
 		attributes = {
 			[1] = {
-				name = "Size2600_2700",
-				value = UDim2.new(0, 156, 0, 162)
+				name = "Size2600_2800",
+				value = UDim2.new(0, 156, 0, 168)
 			}
 		}
 	},
@@ -6109,12 +5686,12 @@
 			[1] = { name = "Size2200_1500", value = UDim2.new(0, 132, 0, 90) }
 		}
 	},
-	["size-2600-2600"] = {
-		properties = { Size = "$Size2600_2600" },
+	["size-2600-2700"] = {
+		properties = { Size = "$Size2600_2700" },
 		attributes = {
 			[1] = {
-				name = "Size2600_2600",
-				value = UDim2.new(0, 156, 0, 156)
+				name = "Size2600_2700",
+				value = UDim2.new(0, 156, 0, 162)
 			}
 		}
 	},
@@ -6130,13 +5707,28 @@
 			[1] = { name = "Size550_100", value = UDim2.new(0, 33, 0, 6) }
 		}
 	},
-	["size-2600-1900"] = {
-		properties = { Size = "$Size2600_1900" },
+	["size-2600-2600"] = {
+		properties = { Size = "$Size2600_2600" },
 		attributes = {
 			[1] = {
-				name = "Size2600_1900",
-				value = UDim2.new(0, 156, 0, 114)
+				name = "Size2600_2600",
+				value = UDim2.new(0, 156, 0, 156)
 			}
+		}
+	},
+	["size-2600-2100"] = {
+		properties = { Size = "$Size2600_2100" },
+		attributes = {
+			[1] = {
+				name = "Size2600_2100",
+				value = UDim2.new(0, 156, 0, 126)
+			}
+		}
+	},
+	["size-1400-850"] = {
+		properties = { Size = "$Size1400_850" },
+		attributes = {
+			[1] = { name = "Size1400_850", value = UDim2.new(0, 84, 0, 51) }
 		}
 	},
 	["size-2600-2300"] = {
@@ -6148,27 +5740,12 @@
 			}
 		}
 	},
-	["size-1400-850"] = {
-		properties = { Size = "$Size1400_850" },
-		attributes = {
-			[1] = { name = "Size1400_850", value = UDim2.new(0, 84, 0, 51) }
-		}
-	},
 	["size-2600-2200"] = {
 		properties = { Size = "$Size2600_2200" },
 		attributes = {
 			[1] = {
 				name = "Size2600_2200",
 				value = UDim2.new(0, 156, 0, 132)
-			}
-		}
-	},
-	["size-2600-2100"] = {
-		properties = { Size = "$Size2600_2100" },
-		attributes = {
-			[1] = {
-				name = "Size2600_2100",
-				value = UDim2.new(0, 156, 0, 126)
 			}
 		}
 	},
@@ -6187,10 +5764,19 @@
 			}
 		}
 	},
-	["size-2400-850"] = {
-		properties = { Size = "$Size2400_850" },
+	["size-2600-1900"] = {
+		properties = { Size = "$Size2600_1900" },
 		attributes = {
-			[1] = { name = "Size2400_850", value = UDim2.new(0, 144, 0, 51) }
+			[1] = {
+				name = "Size2600_1900",
+				value = UDim2.new(0, 156, 0, 114)
+			}
+		}
+	},
+	["size-2000"] = {
+		properties = { Size = "$Size2000" },
+		attributes = {
+			[1] = { name = "Size2000", value = UDim2.new(0, 120, 0, 120) }
 		}
 	},
 	["size-2600-1700"] = {
@@ -6200,12 +5786,6 @@
 				name = "Size2600_1700",
 				value = UDim2.new(0, 156, 0, 102)
 			}
-		}
-	},
-	["size-850-2100"] = {
-		properties = { Size = "$Size850_2100" },
-		attributes = {
-			[1] = { name = "Size850_2100", value = UDim2.new(0, 51, 0, 126) }
 		}
 	},
 	["size-800-0"] = {
@@ -6245,10 +5825,10 @@
 			[1] = { name = "Size1900_550", value = UDim2.new(0, 114, 0, 33) }
 		}
 	},
-	["size-2600-1500"] = {
-		properties = { Size = "$Size2600_1500" },
+	["size-full-1500"] = {
+		properties = { Size = "$SizeFull_1500" },
 		attributes = {
-			[1] = { name = "Size2600_1500", value = UDim2.new(0, 156, 0, 90) }
+			[1] = { name = "SizeFull_1500", value = UDim2.new(1, 0, 0, 90) }
 		}
 	},
 	["size-500-600"] = {
@@ -6269,16 +5849,16 @@
 			[1] = { name = "Size2500_800", value = UDim2.new(0, 150, 0, 48) }
 		}
 	},
+	["size-2600-1500"] = {
+		properties = { Size = "$Size2600_1500" },
+		attributes = {
+			[1] = { name = "Size2600_1500", value = UDim2.new(0, 156, 0, 90) }
+		}
+	},
 	["size-2100-50"] = {
 		properties = { Size = "$Size2100_50" },
 		attributes = {
 			[1] = { name = "Size2100_50", value = UDim2.new(0, 126, 0, 3) }
-		}
-	},
-	["size-2600-900"] = {
-		properties = { Size = "$Size2600_900" },
-		attributes = {
-			[1] = { name = "Size2600_900", value = UDim2.new(0, 156, 0, 54) }
 		}
 	},
 	["gap-xxsmall"] = {
@@ -6292,10 +5872,10 @@
 			[1] = { name = "Size2000_450", value = UDim2.new(0, 120, 0, 27) }
 		}
 	},
-	["size-200-550"] = {
-		properties = { Size = "$Size200_550" },
+	["size-2600-900"] = {
+		properties = { Size = "$Size2600_900" },
 		attributes = {
-			[1] = { name = "Size200_550", value = UDim2.new(0, 12, 0, 33) }
+			[1] = { name = "Size2600_900", value = UDim2.new(0, 156, 0, 54) }
 		}
 	},
 	["radius-right-xsmall"] = {
@@ -6320,10 +5900,10 @@
 			}
 		}
 	},
-	["size-1700-400"] = {
-		properties = { Size = "$Size1700_400" },
+	["size-2300-450"] = {
+		properties = { Size = "$Size2300_450" },
 		attributes = {
-			[1] = { name = "Size1700_400", value = UDim2.new(0, 102, 0, 24) }
+			[1] = { name = "Size2300_450", value = UDim2.new(0, 138, 0, 27) }
 		}
 	},
 	["size-850-300"] = {
@@ -6332,10 +5912,10 @@
 			[1] = { name = "Size850_300", value = UDim2.new(0, 51, 0, 18) }
 		}
 	},
-	["size-850-2600"] = {
-		properties = { Size = "$Size850_2600" },
+	["size-200-700"] = {
+		properties = { Size = "$Size200_700" },
 		attributes = {
-			[1] = { name = "Size850_2600", value = UDim2.new(0, 51, 0, 156) }
+			[1] = { name = "Size200_700", value = UDim2.new(0, 12, 0, 42) }
 		}
 	},
 	["size-full-450"] = {
@@ -6380,10 +5960,10 @@
 			[1] = { name = "Size850_1200", value = UDim2.new(0, 51, 0, 72) }
 		}
 	},
-	["size-400-full"] = {
-		properties = { Size = "$Size400_Full" },
+	["size-1700-400"] = {
+		properties = { Size = "$Size1700_400" },
 		attributes = {
-			[1] = { name = "Size400_Full", value = UDim2.new(0, 24, 1, 0) }
+			[1] = { name = "Size1700_400", value = UDim2.new(0, 102, 0, 24) }
 		}
 	},
 	["size-2200-2900"] = {
@@ -6395,16 +5975,16 @@
 			}
 		}
 	},
+	["size-850-700"] = {
+		properties = { Size = "$Size850_700" },
+		attributes = {
+			[1] = { name = "Size850_700", value = UDim2.new(0, 51, 0, 42) }
+		}
+	},
 	["size-1800-1500"] = {
 		properties = { Size = "$Size1800_1500" },
 		attributes = {
 			[1] = { name = "Size1800_1500", value = UDim2.new(0, 108, 0, 90) }
-		}
-	},
-	["size-700-450"] = {
-		properties = { Size = "$Size700_450" },
-		attributes = {
-			[1] = { name = "Size700_450", value = UDim2.new(0, 42, 0, 27) }
 		}
 	},
 	["size-full-500"] = {
@@ -6419,10 +5999,10 @@
 			[1] = { name = "Size900_50", value = UDim2.new(0, 54, 0, 3) }
 		}
 	},
-	["size-2600-350"] = {
-		properties = { Size = "$Size2600_350" },
+	["size-700-450"] = {
+		properties = { Size = "$Size700_450" },
 		attributes = {
-			[1] = { name = "Size2600_350", value = UDim2.new(0, 156, 0, 21) }
+			[1] = { name = "Size700_450", value = UDim2.new(0, 42, 0, 27) }
 		}
 	},
 	["size-2200-0"] = {
@@ -6437,10 +6017,10 @@
 			[1] = { name = "Size600_250", value = UDim2.new(0, 36, 0, 15) }
 		}
 	},
-	["size-200-700"] = {
-		properties = { Size = "$Size200_700" },
+	["size-2600-350"] = {
+		properties = { Size = "$Size2600_350" },
 		attributes = {
-			[1] = { name = "Size200_700", value = UDim2.new(0, 12, 0, 42) }
+			[1] = { name = "Size2600_350", value = UDim2.new(0, 156, 0, 21) }
 		}
 	},
 	["size-1500-600"] = {
@@ -6461,13 +6041,10 @@
 			[1] = { name = "Size1700_50", value = UDim2.new(0, 102, 0, 3) }
 		}
 	},
-	["size-2500-3000"] = {
-		properties = { Size = "$Size2500_3000" },
+	["size-2600-250"] = {
+		properties = { Size = "$Size2600_250" },
 		attributes = {
-			[1] = {
-				name = "Size2500_3000",
-				value = UDim2.new(0, 150, 0, 180)
-			}
+			[1] = { name = "Size2600_250", value = UDim2.new(0, 156, 0, 15) }
 		}
 	},
 	["size-500"] = {
@@ -6476,16 +6053,16 @@
 			[1] = { name = "Size500", value = UDim2.new(0, 30, 0, 30) }
 		}
 	},
-	["size-400-900"] = {
-		properties = { Size = "$Size400_900" },
+	["size-2600-full"] = {
+		properties = { Size = "$Size2600_Full" },
 		attributes = {
-			[1] = { name = "Size400_900", value = UDim2.new(0, 24, 0, 54) }
+			[1] = { name = "Size2600_Full", value = UDim2.new(0, 156, 1, 0) }
 		}
 	},
-	["size-2600-100"] = {
-		properties = { Size = "$Size2600_100" },
+	["size-200-550"] = {
+		properties = { Size = "$Size200_550" },
 		attributes = {
-			[1] = { name = "Size2600_100", value = UDim2.new(0, 156, 0, 6) }
+			[1] = { name = "Size200_550", value = UDim2.new(0, 12, 0, 33) }
 		}
 	},
 	["size-2200-3000"] = {
@@ -6497,16 +6074,16 @@
 			}
 		}
 	},
+	["size-2600-100"] = {
+		properties = { Size = "$Size2600_100" },
+		attributes = {
+			[1] = { name = "Size2600_100", value = UDim2.new(0, 156, 0, 6) }
+		}
+	},
 	["size-1500-1600"] = {
 		properties = { Size = "$Size1500_1600" },
 		attributes = {
 			[1] = { name = "Size1500_1600", value = UDim2.new(0, 90, 0, 96) }
-		}
-	},
-	["size-2600-0"] = {
-		properties = { Size = "$Size2600_0" },
-		attributes = {
-			[1] = { name = "Size2600_0", value = UDim2.new(0, 156, 0, 0) }
 		}
 	},
 	["size-700-2100"] = {
@@ -6515,16 +6092,25 @@
 			[1] = { name = "Size700_2100", value = UDim2.new(0, 42, 0, 126) }
 		}
 	},
-	["size-2600-full"] = {
-		properties = { Size = "$Size2600_Full" },
+	["size-2600-0"] = {
+		properties = { Size = "$Size2600_0" },
 		attributes = {
-			[1] = { name = "Size2600_Full", value = UDim2.new(0, 156, 1, 0) }
+			[1] = { name = "Size2600_0", value = UDim2.new(0, 156, 0, 0) }
 		}
 	},
 	["size-2600-200"] = {
 		properties = { Size = "$Size2600_200" },
 		attributes = {
 			[1] = { name = "Size2600_200", value = UDim2.new(0, 156, 0, 12) }
+		}
+	},
+	["size-2500-3000"] = {
+		properties = { Size = "$Size2500_3000" },
+		attributes = {
+			[1] = {
+				name = "Size2500_3000",
+				value = UDim2.new(0, 150, 0, 180)
+			}
 		}
 	},
 	["size-2500-2700"] = {
@@ -6534,12 +6120,6 @@
 				name = "Size2500_2700",
 				value = UDim2.new(0, 150, 0, 162)
 			}
-		}
-	},
-	["size-2100-1500"] = {
-		properties = { Size = "$Size2100_1500" },
-		attributes = {
-			[1] = { name = "Size2100_1500", value = UDim2.new(0, 126, 0, 90) }
 		}
 	},
 	["size-2500-2000"] = {
@@ -6560,6 +6140,12 @@
 			}
 		}
 	},
+	["size-2100-1600"] = {
+		properties = { Size = "$Size2100_1600" },
+		attributes = {
+			[1] = { name = "Size2100_1600", value = UDim2.new(0, 126, 0, 96) }
+		}
+	},
 	["size-2500-2400"] = {
 		properties = { Size = "$Size2500_2400" },
 		attributes = {
@@ -6575,12 +6161,6 @@
 			[1] = { name = "Size2500_1600", value = UDim2.new(0, 150, 0, 96) }
 		}
 	},
-	["size-900-850"] = {
-		properties = { Size = "$Size900_850" },
-		attributes = {
-			[1] = { name = "Size900_850", value = UDim2.new(0, 54, 0, 51) }
-		}
-	},
 	["size-1100-0"] = {
 		properties = { Size = "$Size1100_0" },
 		attributes = {
@@ -6593,41 +6173,16 @@
 			[1] = { name = "Size1900", value = UDim2.new(0, 114, 0, 114) }
 		}
 	},
-	["text-display-large"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = {
-						name = "TextPaddingDisplayLarge",
-						value = UDim.new(0, -3)
-					}
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingDisplayLarge",
-					PaddingTop = "$TextPaddingDisplayLarge"
-				},
-				tag = "text-display-large"
-			}
-		},
-		properties = {
-			Font = "$FontDisplayLarge",
-			TextSize = "$TextSizeDisplayLarge",
-			LineHeight = 0.951
-		},
+	["size-1400-150"] = {
+		properties = { Size = "$Size1400_150" },
 		attributes = {
-			[1] = {
-				name = "FontDisplayLarge",
-				value = Enum.Font.BuilderSansBold
-			},
-			[2] = { name = "TextSizeDisplayLarge", value = 151.5 }
+			[1] = { name = "Size1400_150", value = UDim2.new(0, 84, 0, 9) }
 		}
 	},
-	["size-1200-600"] = {
-		properties = { Size = "$Size1200_600" },
+	["size-2500-1400"] = {
+		properties = { Size = "$Size2500_1400" },
 		attributes = {
-			[1] = { name = "Size1200_600", value = UDim2.new(0, 72, 0, 36) }
+			[1] = { name = "Size2500_1400", value = UDim2.new(0, 150, 0, 84) }
 		}
 	},
 	["size-900-300"] = {
@@ -6636,19 +6191,15 @@
 			[1] = { name = "Size900_300", value = UDim2.new(0, 54, 0, 18) }
 		}
 	},
+	["gap-large"] = {
+		pseudo = "UIListLayout",
+		properties = { Padding = "$GapLarge" },
+		attributes = { [1] = { name = "GapLarge", value = UDim.new(0, 24) } }
+	},
 	["size-2500-1200"] = {
 		properties = { Size = "$Size2500_1200" },
 		attributes = {
 			[1] = { name = "Size2500_1200", value = UDim2.new(0, 150, 0, 72) }
-		}
-	},
-	["size-1700-2600"] = {
-		properties = { Size = "$Size1700_2600" },
-		attributes = {
-			[1] = {
-				name = "Size1700_2600",
-				value = UDim2.new(0, 102, 0, 156)
-			}
 		}
 	},
 	["padding-left-xxlarge"] = {
@@ -6658,10 +6209,10 @@
 			[1] = { name = "PaddingXxlarge", value = UDim.new(0, 36) }
 		}
 	},
-	["size-2500-850"] = {
-		properties = { Size = "$Size2500_850" },
+	["size-2500-100"] = {
+		properties = { Size = "$Size2500_100" },
 		attributes = {
-			[1] = { name = "Size2500_850", value = UDim2.new(0, 150, 0, 51) }
+			[1] = { name = "Size2500_100", value = UDim2.new(0, 150, 0, 6) }
 		}
 	},
 	["size-100-50"] = {
@@ -6670,29 +6221,10 @@
 			[1] = { name = "Size100_50", value = UDim2.new(0, 6, 0, 3) }
 		}
 	},
-	["text-body-medium"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = { name = "TextPaddingBodyMedium", value = UDim.new(0, 1) }
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingBodyMedium",
-					PaddingTop = "$TextPaddingBodyMedium"
-				},
-				tag = "text-body-medium"
-			}
-		},
-		properties = {
-			Font = "$FontBodyMedium",
-			TextSize = "$TextSizeBodyMedium",
-			LineHeight = 1.111
-		},
+	["size-2500-850"] = {
+		properties = { Size = "$Size2500_850" },
 		attributes = {
-			[1] = { name = "FontBodyMedium", value = Enum.Font.BuilderSans },
-			[2] = { name = "TextSizeBodyMedium", value = 27 }
+			[1] = { name = "Size2500_850", value = UDim2.new(0, 150, 0, 51) }
 		}
 	},
 	["size-2300-1900"] = {
@@ -6716,6 +6248,12 @@
 			[1] = { name = "Size50_100", value = UDim2.new(0, 3, 0, 6) }
 		}
 	},
+	["size-2500-700"] = {
+		properties = { Size = "$Size2500_700" },
+		attributes = {
+			[1] = { name = "Size2500_700", value = UDim2.new(0, 150, 0, 42) }
+		}
+	},
 	["size-2500-600"] = {
 		properties = { Size = "$Size2500_600" },
 		attributes = {
@@ -6734,16 +6272,10 @@
 			[1] = { name = "Size2500_400", value = UDim2.new(0, 150, 0, 24) }
 		}
 	},
-	["size-500-2300"] = {
-		properties = { Size = "$Size500_2300" },
+	["size-800-300"] = {
+		properties = { Size = "$Size800_300" },
 		attributes = {
-			[1] = { name = "Size500_2300", value = UDim2.new(0, 30, 0, 138) }
-		}
-	},
-	["size-2500-300"] = {
-		properties = { Size = "$Size2500_300" },
-		attributes = {
-			[1] = { name = "Size2500_300", value = UDim2.new(0, 150, 0, 18) }
+			[1] = { name = "Size800_300", value = UDim2.new(0, 48, 0, 18) }
 		}
 	},
 	["size-500-3000"] = {
@@ -6758,6 +6290,12 @@
 			[1] = { name = "Size1400_250", value = UDim2.new(0, 84, 0, 15) }
 		}
 	},
+	["size-2500-300"] = {
+		properties = { Size = "$Size2500_300" },
+		attributes = {
+			[1] = { name = "Size2500_300", value = UDim2.new(0, 150, 0, 18) }
+		}
+	},
 	["size-1600-2700"] = {
 		properties = { Size = "$Size1600_2700" },
 		attributes = {
@@ -6768,12 +6306,6 @@
 		properties = { Size = "$Size2500_200" },
 		attributes = {
 			[1] = { name = "Size2500_200", value = UDim2.new(0, 150, 0, 12) }
-		}
-	},
-	["size-2500-150"] = {
-		properties = { Size = "$Size2500_150" },
-		attributes = {
-			[1] = { name = "Size2500_150", value = UDim2.new(0, 150, 0, 9) }
 		}
 	},
 	["radius-top-left-large"] = {
@@ -6812,10 +6344,10 @@
 			[1] = { name = "Size2500_900", value = UDim2.new(0, 150, 0, 54) }
 		}
 	},
-	["size-2500-full"] = {
-		properties = { Size = "$Size2500_Full" },
+	["size-2500-0"] = {
+		properties = { Size = "$Size2500_0" },
 		attributes = {
-			[1] = { name = "Size2500_Full", value = UDim2.new(0, 150, 1, 0) }
+			[1] = { name = "Size2500_0", value = UDim2.new(0, 150, 0, 0) }
 		}
 	},
 	["size-1400-500"] = {
@@ -6824,10 +6356,10 @@
 			[1] = { name = "Size1400_500", value = UDim2.new(0, 84, 0, 30) }
 		}
 	},
-	["size-350-2600"] = {
-		properties = { Size = "$Size350_2600" },
+	["size-2500-full"] = {
+		properties = { Size = "$Size2500_Full" },
 		attributes = {
-			[1] = { name = "Size350_2600", value = UDim2.new(0, 21, 0, 156) }
+			[1] = { name = "Size2500_Full", value = UDim2.new(0, 150, 1, 0) }
 		}
 	},
 	["size-900-250"] = {
@@ -6836,10 +6368,22 @@
 			[1] = { name = "Size900_250", value = UDim2.new(0, 54, 0, 15) }
 		}
 	},
+	["size-450-800"] = {
+		properties = { Size = "$Size450_800" },
+		attributes = {
+			[1] = { name = "Size450_800", value = UDim2.new(0, 27, 0, 48) }
+		}
+	},
 	["size-1500-2200"] = {
 		properties = { Size = "$Size1500_2200" },
 		attributes = {
 			[1] = { name = "Size1500_2200", value = UDim2.new(0, 90, 0, 132) }
+		}
+	},
+	["size-550-full"] = {
+		properties = { Size = "$Size550_Full" },
+		attributes = {
+			[1] = { name = "Size550_Full", value = UDim2.new(0, 33, 1, 0) }
 		}
 	},
 	["size-2400-2800"] = {
@@ -6851,10 +6395,10 @@
 			}
 		}
 	},
-	["size-550-full"] = {
-		properties = { Size = "$Size550_Full" },
+	["size-1200-150"] = {
+		properties = { Size = "$Size1200_150" },
 		attributes = {
-			[1] = { name = "Size550_Full", value = UDim2.new(0, 33, 1, 0) }
+			[1] = { name = "Size1200_150", value = UDim2.new(0, 72, 0, 9) }
 		}
 	},
 	["size-2400-2700"] = {
@@ -6866,10 +6410,11 @@
 			}
 		}
 	},
-	["size-1200-150"] = {
-		properties = { Size = "$Size1200_150" },
+	["no-wrap"] = { pseudo = "UIListLayout", properties = { Wraps = false } },
+	["size-1100-1400"] = {
+		properties = { Size = "$Size1100_1400" },
 		attributes = {
-			[1] = { name = "Size1200_150", value = UDim2.new(0, 72, 0, 9) }
+			[1] = { name = "Size1100_1400", value = UDim2.new(0, 66, 0, 84) }
 		}
 	},
 	["size-2400-2600"] = {
@@ -6881,16 +6426,10 @@
 			}
 		}
 	},
-	["size-250-2600"] = {
-		properties = { Size = "$Size250_2600" },
+	["size-1100-2700"] = {
+		properties = { Size = "$Size1100_2700" },
 		attributes = {
-			[1] = { name = "Size250_2600", value = UDim2.new(0, 15, 0, 156) }
-		}
-	},
-	["size-1100-1400"] = {
-		properties = { Size = "$Size1100_1400" },
-		attributes = {
-			[1] = { name = "Size1100_1400", value = UDim2.new(0, 66, 0, 84) }
+			[1] = { name = "Size1100_2700", value = UDim2.new(0, 66, 0, 162) }
 		}
 	},
 	["size-2400-2500"] = {
@@ -6902,10 +6441,10 @@
 			}
 		}
 	},
-	["size-1100-2700"] = {
-		properties = { Size = "$Size1100_2700" },
+	["size-1300-1500"] = {
+		properties = { Size = "$Size1300_1500" },
 		attributes = {
-			[1] = { name = "Size1100_2700", value = UDim2.new(0, 66, 0, 162) }
+			[1] = { name = "Size1300_1500", value = UDim2.new(0, 78, 0, 90) }
 		}
 	},
 	["size-2400-2400"] = {
@@ -6914,21 +6453,6 @@
 			[1] = {
 				name = "Size2400_2400",
 				value = UDim2.new(0, 144, 0, 144)
-			}
-		}
-	},
-	["size-1300-1500"] = {
-		properties = { Size = "$Size1300_1500" },
-		attributes = {
-			[1] = { name = "Size1300_1500", value = UDim2.new(0, 78, 0, 90) }
-		}
-	},
-	["size-2400-2300"] = {
-		properties = { Size = "$Size2400_2300" },
-		attributes = {
-			[1] = {
-				name = "Size2400_2300",
-				value = UDim2.new(0, 144, 0, 138)
 			}
 		}
 	},
@@ -6960,6 +6484,15 @@
 			[1] = { name = "Size1300_850", value = UDim2.new(0, 78, 0, 51) }
 		}
 	},
+	["size-2400-2300"] = {
+		properties = { Size = "$Size2400_2300" },
+		attributes = {
+			[1] = {
+				name = "Size2400_2300",
+				value = UDim2.new(0, 144, 0, 138)
+			}
+		}
+	},
 	["size-2400-2100"] = {
 		properties = { Size = "$Size2400_2100" },
 		attributes = {
@@ -6969,16 +6502,16 @@
 			}
 		}
 	},
-	["size-2400-1500"] = {
-		properties = { Size = "$Size2400_1500" },
-		attributes = {
-			[1] = { name = "Size2400_1500", value = UDim2.new(0, 144, 0, 90) }
-		}
-	},
 	["size-1000-3000"] = {
 		properties = { Size = "$Size1000_3000" },
 		attributes = {
 			[1] = { name = "Size1000_3000", value = UDim2.new(0, 60, 0, 180) }
+		}
+	},
+	["size-2400-1600"] = {
+		properties = { Size = "$Size2400_1600" },
+		attributes = {
+			[1] = { name = "Size2400_1600", value = UDim2.new(0, 144, 0, 96) }
 		}
 	},
 	["size-2400-1900"] = {
@@ -6988,12 +6521,6 @@
 				name = "Size2400_1900",
 				value = UDim2.new(0, 144, 0, 114)
 			}
-		}
-	},
-	["size-800-2700"] = {
-		properties = { Size = "$Size800_2700" },
-		attributes = {
-			[1] = { name = "Size800_2700", value = UDim2.new(0, 48, 0, 162) }
 		}
 	},
 	["size-2200-450"] = {
@@ -7020,10 +6547,10 @@
 			[1] = { name = "Size2600_700", value = UDim2.new(0, 156, 0, 42) }
 		}
 	},
-	["size-2400-1600"] = {
-		properties = { Size = "$Size2400_1600" },
+	["size-500-1500"] = {
+		properties = { Size = "$Size500_1500" },
 		attributes = {
-			[1] = { name = "Size2400_1600", value = UDim2.new(0, 144, 0, 96) }
+			[1] = { name = "Size500_1500", value = UDim2.new(0, 30, 0, 90) }
 		}
 	},
 	["size-2400-2000"] = {
@@ -7041,16 +6568,16 @@
 			[1] = { name = "Size2400_1300", value = UDim2.new(0, 144, 0, 78) }
 		}
 	},
+	["size-2400-1500"] = {
+		properties = { Size = "$Size2400_1500" },
+		attributes = {
+			[1] = { name = "Size2400_1500", value = UDim2.new(0, 144, 0, 90) }
+		}
+	},
 	["size-2400-1400"] = {
 		properties = { Size = "$Size2400_1400" },
 		attributes = {
 			[1] = { name = "Size2400_1400", value = UDim2.new(0, 144, 0, 84) }
-		}
-	},
-	["size-2000"] = {
-		properties = { Size = "$Size2000" },
-		attributes = {
-			[1] = { name = "Size2000", value = UDim2.new(0, 120, 0, 120) }
 		}
 	},
 	["items-end"] = {
@@ -7066,6 +6593,12 @@
 			}
 		}
 	},
+	["size-2400-850"] = {
+		properties = { Size = "$Size2400_850" },
+		attributes = {
+			[1] = { name = "Size2400_850", value = UDim2.new(0, 144, 0, 51) }
+		}
+	},
 	["size-2400-700"] = {
 		properties = { Size = "$Size2400_700" },
 		attributes = {
@@ -7076,12 +6609,6 @@
 		properties = { Size = "$Size2400_600" },
 		attributes = {
 			[1] = { name = "Size2400_600", value = UDim2.new(0, 144, 0, 36) }
-		}
-	},
-	["size-2400-550"] = {
-		properties = { Size = "$Size2400_550" },
-		attributes = {
-			[1] = { name = "Size2400_550", value = UDim2.new(0, 144, 0, 33) }
 		}
 	},
 	["size-1300-350"] = {
@@ -7130,10 +6657,10 @@
 			[1] = { name = "Size900", value = UDim2.new(0, 54, 0, 54) }
 		}
 	},
-	["size-2400-500"] = {
-		properties = { Size = "$Size2400_500" },
+	["size-2400-550"] = {
+		properties = { Size = "$Size2400_550" },
 		attributes = {
-			[1] = { name = "Size2400_500", value = UDim2.new(0, 144, 0, 30) }
+			[1] = { name = "Size2400_550", value = UDim2.new(0, 144, 0, 33) }
 		}
 	},
 	["size-150-3000"] = {
@@ -7148,10 +6675,10 @@
 			[1] = { name = "Size350_1500", value = UDim2.new(0, 21, 0, 90) }
 		}
 	},
-	["size-1200-2600"] = {
-		properties = { Size = "$Size1200_2600" },
+	["size-2400-500"] = {
+		properties = { Size = "$Size2400_500" },
 		attributes = {
-			[1] = { name = "Size1200_2600", value = UDim2.new(0, 72, 0, 156) }
+			[1] = { name = "Size2400_500", value = UDim2.new(0, 144, 0, 30) }
 		}
 	},
 	["size-1000-2500"] = {
@@ -7160,10 +6687,10 @@
 			[1] = { name = "Size1000_2500", value = UDim2.new(0, 60, 0, 150) }
 		}
 	},
-	["size-2400-400"] = {
-		properties = { Size = "$Size2400_400" },
+	["size-250-2600"] = {
+		properties = { Size = "$Size250_2600" },
 		attributes = {
-			[1] = { name = "Size2400_400", value = UDim2.new(0, 144, 0, 24) }
+			[1] = { name = "Size250_2600", value = UDim2.new(0, 15, 0, 156) }
 		}
 	},
 	["size-2700-300"] = {
@@ -7202,16 +6729,16 @@
 			[1] = { name = "Size300_2800", value = UDim2.new(0, 18, 0, 168) }
 		}
 	},
-	["size-1400-2200"] = {
-		properties = { Size = "$Size1400_2200" },
+	["size-2400-300"] = {
+		properties = { Size = "$Size2400_300" },
 		attributes = {
-			[1] = { name = "Size1400_2200", value = UDim2.new(0, 84, 0, 132) }
+			[1] = { name = "Size2400_300", value = UDim2.new(0, 144, 0, 18) }
 		}
 	},
-	["size-2400-200"] = {
-		properties = { Size = "$Size2400_200" },
+	["size-800-2700"] = {
+		properties = { Size = "$Size800_2700" },
 		attributes = {
-			[1] = { name = "Size2400_200", value = UDim2.new(0, 144, 0, 12) }
+			[1] = { name = "Size800_2700", value = UDim2.new(0, 48, 0, 162) }
 		}
 	},
 	["size-800-200"] = {
@@ -7220,10 +6747,10 @@
 			[1] = { name = "Size800_200", value = UDim2.new(0, 48, 0, 12) }
 		}
 	},
-	["size-1600-1200"] = {
-		properties = { Size = "$Size1600_1200" },
+	["size-2400-200"] = {
+		properties = { Size = "$Size2400_200" },
 		attributes = {
-			[1] = { name = "Size1600_1200", value = UDim2.new(0, 96, 0, 72) }
+			[1] = { name = "Size2400_200", value = UDim2.new(0, 144, 0, 12) }
 		}
 	},
 	["size-300-50"] = {
@@ -7232,10 +6759,10 @@
 			[1] = { name = "Size300_50", value = UDim2.new(0, 18, 0, 3) }
 		}
 	},
-	["size-700-600"] = {
-		properties = { Size = "$Size700_600" },
+	["size-1600-1200"] = {
+		properties = { Size = "$Size1600_1200" },
 		attributes = {
-			[1] = { name = "Size700_600", value = UDim2.new(0, 42, 0, 36) }
+			[1] = { name = "Size1600_1200", value = UDim2.new(0, 96, 0, 72) }
 		}
 	},
 	["size-800-600"] = {
@@ -7256,10 +6783,16 @@
 			[1] = { name = "Size1200_100", value = UDim2.new(0, 72, 0, 6) }
 		}
 	},
-	["size-2200-full"] = {
-		properties = { Size = "$Size2200_Full" },
+	["size-1600-2200"] = {
+		properties = { Size = "$Size1600_2200" },
 		attributes = {
-			[1] = { name = "Size2200_Full", value = UDim2.new(0, 132, 1, 0) }
+			[1] = { name = "Size1600_2200", value = UDim2.new(0, 96, 0, 132) }
+		}
+	},
+	["size-2200-50"] = {
+		properties = { Size = "$Size2200_50" },
+		attributes = {
+			[1] = { name = "Size2200_50", value = UDim2.new(0, 132, 0, 3) }
 		}
 	},
 	["size-2400"] = {
@@ -7277,25 +6810,16 @@
 			}
 		}
 	},
-	["size-400-2300"] = {
-		properties = { Size = "$Size400_2300" },
-		attributes = {
-			[1] = { name = "Size400_2300", value = UDim2.new(0, 24, 0, 138) }
-		}
-	},
 	["size-350-450"] = {
 		properties = { Size = "$Size350_450" },
 		attributes = {
 			[1] = { name = "Size350_450", value = UDim2.new(0, 21, 0, 27) }
 		}
 	},
-	["size-2300-2800"] = {
-		properties = { Size = "$Size2300_2800" },
+	["size-850-1100"] = {
+		properties = { Size = "$Size850_1100" },
 		attributes = {
-			[1] = {
-				name = "Size2300_2800",
-				value = UDim2.new(0, 138, 0, 168)
-			}
+			[1] = { name = "Size850_1100", value = UDim2.new(0, 51, 0, 66) }
 		}
 	},
 	["size-700-800"] = {
@@ -7310,6 +6834,15 @@
 			[1] = { name = "Size1200_200", value = UDim2.new(0, 72, 0, 12) }
 		}
 	},
+	["size-2300-2800"] = {
+		properties = { Size = "$Size2300_2800" },
+		attributes = {
+			[1] = {
+				name = "Size2300_2800",
+				value = UDim2.new(0, 138, 0, 168)
+			}
+		}
+	},
 	["size-2300-2600"] = {
 		properties = { Size = "$Size2300_2600" },
 		attributes = {
@@ -7319,15 +6852,10 @@
 			}
 		}
 	},
-	["radius-xsmall"] = {
-		attributes = { [1] = { name = "RadiusXsmall", value = UDim.new(0, 3) } },
-		pseudo = "UICorner",
-		priority = 1,
-		properties = {
-			TopRightRadius = "$RadiusXsmall",
-			TopLeftRadius = "$RadiusXsmall",
-			BottomRightRadius = "$RadiusXsmall",
-			BottomLeftRadius = "$RadiusXsmall"
+	["size-1200-2300"] = {
+		properties = { Size = "$Size1200_2300" },
+		attributes = {
+			[1] = { name = "Size1200_2300", value = UDim2.new(0, 72, 0, 138) }
 		}
 	},
 	["size-2300-2400"] = {
@@ -7339,6 +6867,12 @@
 			}
 		}
 	},
+	["size-900-400"] = {
+		properties = { Size = "$Size900_400" },
+		attributes = {
+			[1] = { name = "Size900_400", value = UDim2.new(0, 54, 0, 24) }
+		}
+	},
 	["size-1900-2100"] = {
 		properties = { Size = "$Size1900_2100" },
 		attributes = {
@@ -7346,12 +6880,6 @@
 				name = "Size1900_2100",
 				value = UDim2.new(0, 114, 0, 126)
 			}
-		}
-	},
-	["size-900-400"] = {
-		properties = { Size = "$Size900_400" },
-		attributes = {
-			[1] = { name = "Size900_400", value = UDim2.new(0, 54, 0, 24) }
 		}
 	},
 	["size-2300-2200"] = {
@@ -7363,10 +6891,16 @@
 			}
 		}
 	},
-	["size-850-1500"] = {
-		properties = { Size = "$Size850_1500" },
+	["size-900-350"] = {
+		properties = { Size = "$Size900_350" },
 		attributes = {
-			[1] = { name = "Size850_1500", value = UDim2.new(0, 51, 0, 90) }
+			[1] = { name = "Size900_350", value = UDim2.new(0, 54, 0, 21) }
+		}
+	},
+	["size-2000-700"] = {
+		properties = { Size = "$Size2000_700" },
+		attributes = {
+			[1] = { name = "Size2000_700", value = UDim2.new(0, 120, 0, 42) }
 		}
 	},
 	["size-2300-2000"] = {
@@ -7378,10 +6912,10 @@
 			}
 		}
 	},
-	["size-2000-700"] = {
-		properties = { Size = "$Size2000_700" },
+	["size-450-850"] = {
+		properties = { Size = "$Size450_850" },
 		attributes = {
-			[1] = { name = "Size2000_700", value = UDim2.new(0, 120, 0, 42) }
+			[1] = { name = "Size450_850", value = UDim2.new(0, 27, 0, 51) }
 		}
 	},
 	["size-2300-1600"] = {
@@ -7390,22 +6924,10 @@
 			[1] = { name = "Size2300_1600", value = UDim2.new(0, 138, 0, 96) }
 		}
 	},
-	["size-450-850"] = {
-		properties = { Size = "$Size450_850" },
-		attributes = {
-			[1] = { name = "Size450_850", value = UDim2.new(0, 27, 0, 51) }
-		}
-	},
 	["size-2300-1500"] = {
 		properties = { Size = "$Size2300_1500" },
 		attributes = {
 			[1] = { name = "Size2300_1500", value = UDim2.new(0, 138, 0, 90) }
-		}
-	},
-	["size-2300-1200"] = {
-		properties = { Size = "$Size2300_1200" },
-		attributes = {
-			[1] = { name = "Size2300_1200", value = UDim2.new(0, 138, 0, 72) }
 		}
 	},
 	["size-300-300"] = {
@@ -7426,6 +6948,12 @@
 			[1] = { name = "Size2800_200", value = UDim2.new(0, 168, 0, 12) }
 		}
 	},
+	["size-2300-1100"] = {
+		properties = { Size = "$Size2300_1100" },
+		attributes = {
+			[1] = { name = "Size2300_1100", value = UDim2.new(0, 138, 0, 66) }
+		}
+	},
 	["size-2300-900"] = {
 		properties = { Size = "$Size2300_900" },
 		attributes = {
@@ -7436,12 +6964,6 @@
 		properties = { Size = "$Size2300_800" },
 		attributes = {
 			[1] = { name = "Size2300_800", value = UDim2.new(0, 138, 0, 48) }
-		}
-	},
-	["size-2300-600"] = {
-		properties = { Size = "$Size2300_600" },
-		attributes = {
-			[1] = { name = "Size2300_600", value = UDim2.new(0, 138, 0, 36) }
 		}
 	},
 	["size-850-1800"] = {
@@ -7474,16 +6996,16 @@
 			}
 		}
 	},
+	["size-2300-600"] = {
+		properties = { Size = "$Size2300_600" },
+		attributes = {
+			[1] = { name = "Size2300_600", value = UDim2.new(0, 138, 0, 36) }
+		}
+	},
 	["size-2300-550"] = {
 		properties = { Size = "$Size2300_550" },
 		attributes = {
 			[1] = { name = "Size2300_550", value = UDim2.new(0, 138, 0, 33) }
-		}
-	},
-	["size-2300-500"] = {
-		properties = { Size = "$Size2300_500" },
-		attributes = {
-			[1] = { name = "Size2300_500", value = UDim2.new(0, 138, 0, 30) }
 		}
 	},
 	["size-350-1200"] = {
@@ -7492,10 +7014,10 @@
 			[1] = { name = "Size350_1200", value = UDim2.new(0, 21, 0, 72) }
 		}
 	},
-	["size-2300-450"] = {
-		properties = { Size = "$Size2300_450" },
+	["size-2300-500"] = {
+		properties = { Size = "$Size2300_500" },
 		attributes = {
-			[1] = { name = "Size2300_450", value = UDim2.new(0, 138, 0, 27) }
+			[1] = { name = "Size2300_500", value = UDim2.new(0, 138, 0, 30) }
 		}
 	},
 	["size-400-550"] = {
@@ -7516,16 +7038,16 @@
 			[1] = { name = "Size2600_850", value = UDim2.new(0, 156, 0, 51) }
 		}
 	},
+	["size-1000-250"] = {
+		properties = { Size = "$Size1000_250" },
+		attributes = {
+			[1] = { name = "Size1000_250", value = UDim2.new(0, 60, 0, 15) }
+		}
+	},
 	["size-2300-250"] = {
 		properties = { Size = "$Size2300_250" },
 		attributes = {
 			[1] = { name = "Size2300_250", value = UDim2.new(0, 138, 0, 15) }
-		}
-	},
-	["size-800-300"] = {
-		properties = { Size = "$Size800_300" },
-		attributes = {
-			[1] = { name = "Size800_300", value = UDim2.new(0, 48, 0, 18) }
 		}
 	},
 	["size-300-400"] = {
@@ -7555,16 +7077,16 @@
 			[1] = { name = "Size100_2200", value = UDim2.new(0, 6, 0, 132) }
 		}
 	},
+	["size-400-600"] = {
+		properties = { Size = "$Size400_600" },
+		attributes = {
+			[1] = { name = "Size400_600", value = UDim2.new(0, 24, 0, 36) }
+		}
+	},
 	["size-2300-50"] = {
 		properties = { Size = "$Size2300_50" },
 		attributes = {
 			[1] = { name = "Size2300_50", value = UDim2.new(0, 138, 0, 3) }
-		}
-	},
-	["size-2300-0"] = {
-		properties = { Size = "$Size2300_0" },
-		attributes = {
-			[1] = { name = "Size2300_0", value = UDim2.new(0, 138, 0, 0) }
 		}
 	},
 	["size-2100-2600"] = {
@@ -7588,10 +7110,10 @@
 			[1] = { name = "Size800_3000", value = UDim2.new(0, 48, 0, 180) }
 		}
 	},
-	["size-2300-full"] = {
-		properties = { Size = "$Size2300_Full" },
+	["size-2300-0"] = {
+		properties = { Size = "$Size2300_0" },
 		attributes = {
-			[1] = { name = "Size2300_Full", value = UDim2.new(0, 138, 1, 0) }
+			[1] = { name = "Size2300_0", value = UDim2.new(0, 138, 0, 0) }
 		}
 	},
 	["size-600-600"] = {
@@ -7612,10 +7134,16 @@
 			[1] = { name = "Size500_400", value = UDim2.new(0, 30, 0, 24) }
 		}
 	},
-	["size-700-100"] = {
-		properties = { Size = "$Size700_100" },
+	["size-2300-full"] = {
+		properties = { Size = "$Size2300_Full" },
 		attributes = {
-			[1] = { name = "Size700_100", value = UDim2.new(0, 42, 0, 6) }
+			[1] = { name = "Size2300_Full", value = UDim2.new(0, 138, 1, 0) }
+		}
+	},
+	["size-1400-50"] = {
+		properties = { Size = "$Size1400_50" },
+		attributes = {
+			[1] = { name = "Size1400_50", value = UDim2.new(0, 84, 0, 3) }
 		}
 	},
 	["size-2200-2800"] = {
@@ -7642,12 +7170,6 @@
 			[1] = { name = "Size1600_1100", value = UDim2.new(0, 96, 0, 66) }
 		}
 	},
-	["size-1600-2300"] = {
-		properties = { Size = "$Size1600_2300" },
-		attributes = {
-			[1] = { name = "Size1600_2300", value = UDim2.new(0, 96, 0, 138) }
-		}
-	},
 	["padding-x-xxlarge"] = {
 		pseudo = "UIPadding",
 		properties = {
@@ -7658,18 +7180,18 @@
 			[1] = { name = "PaddingXxlarge", value = UDim.new(0, 36) }
 		}
 	},
-	["size-1100-200"] = {
-		properties = { Size = "$Size1100_200" },
+	["size-300-3000"] = {
+		properties = { Size = "$Size300_3000" },
 		attributes = {
-			[1] = { name = "Size1100_200", value = UDim2.new(0, 66, 0, 12) }
+			[1] = { name = "Size300_3000", value = UDim2.new(0, 18, 0, 180) }
 		}
 	},
-	["size-2200-1800"] = {
-		properties = { Size = "$Size2200_1800" },
+	["size-2200-2200"] = {
+		properties = { Size = "$Size2200_2200" },
 		attributes = {
 			[1] = {
-				name = "Size2200_1800",
-				value = UDim2.new(0, 132, 0, 108)
+				name = "Size2200_2200",
+				value = UDim2.new(0, 132, 0, 132)
 			}
 		}
 	},
@@ -7703,6 +7225,15 @@
 			[1] = { name = "Size850_Full", value = UDim2.new(0, 51, 1, 0) }
 		}
 	},
+	["size-2200-1800"] = {
+		properties = { Size = "$Size2200_1800" },
+		attributes = {
+			[1] = {
+				name = "Size2200_1800",
+				value = UDim2.new(0, 132, 0, 108)
+			}
+		}
+	},
 	["size-2200-1700"] = {
 		properties = { Size = "$Size2200_1700" },
 		attributes = {
@@ -7716,12 +7247,6 @@
 		properties = { Size = "$Size2200_1600" },
 		attributes = {
 			[1] = { name = "Size2200_1600", value = UDim2.new(0, 132, 0, 96) }
-		}
-	},
-	["size-300-350"] = {
-		properties = { Size = "$Size300_350" },
-		attributes = {
-			[1] = { name = "Size300_350", value = UDim2.new(0, 18, 0, 21) }
 		}
 	},
 	["size-1400-0"] = {
@@ -7739,22 +7264,22 @@
 			}
 		}
 	},
-	["size-400-350"] = {
-		properties = { Size = "$Size400_350" },
+	["size-2200-1200"] = {
+		properties = { Size = "$Size2200_1200" },
 		attributes = {
-			[1] = { name = "Size400_350", value = UDim2.new(0, 24, 0, 21) }
+			[1] = { name = "Size2200_1200", value = UDim2.new(0, 132, 0, 72) }
+		}
+	},
+	["size-400-500"] = {
+		properties = { Size = "$Size400_500" },
+		attributes = {
+			[1] = { name = "Size400_500", value = UDim2.new(0, 24, 0, 30) }
 		}
 	},
 	["size-2200-1000"] = {
 		properties = { Size = "$Size2200_1000" },
 		attributes = {
 			[1] = { name = "Size2200_1000", value = UDim2.new(0, 132, 0, 60) }
-		}
-	},
-	["size-600-2700"] = {
-		properties = { Size = "$Size600_2700" },
-		attributes = {
-			[1] = { name = "Size600_2700", value = UDim2.new(0, 36, 0, 162) }
 		}
 	},
 	["size-2900-0"] = {
@@ -7767,6 +7292,12 @@
 		properties = { Size = "$Size50_2100" },
 		attributes = {
 			[1] = { name = "Size50_2100", value = UDim2.new(0, 3, 0, 126) }
+		}
+	},
+	["size-2200-700"] = {
+		properties = { Size = "$Size2200_700" },
+		attributes = {
+			[1] = { name = "Size2200_700", value = UDim2.new(0, 132, 0, 42) }
 		}
 	},
 	["size-2200-600"] = {
@@ -7787,10 +7318,10 @@
 			[1] = { name = "Size2200_400", value = UDim2.new(0, 132, 0, 24) }
 		}
 	},
-	["size-700-500"] = {
-		properties = { Size = "$Size700_500" },
+	["size-150-250"] = {
+		properties = { Size = "$Size150_250" },
 		attributes = {
-			[1] = { name = "Size700_500", value = UDim2.new(0, 42, 0, 30) }
+			[1] = { name = "Size150_250", value = UDim2.new(0, 9, 0, 15) }
 		}
 	},
 	["size-2200-300"] = {
@@ -7805,12 +7336,6 @@
 			[1] = { name = "Size2200_100", value = UDim2.new(0, 132, 0, 6) }
 		}
 	},
-	["size-2200-50"] = {
-		properties = { Size = "$Size2200_50" },
-		attributes = {
-			[1] = { name = "Size2200_50", value = UDim2.new(0, 132, 0, 3) }
-		}
-	},
 	["size-600-1400"] = {
 		properties = { Size = "$Size600_1400" },
 		attributes = {
@@ -7823,19 +7348,16 @@
 			[1] = { name = "Size2400_Full", value = UDim2.new(0, 144, 1, 0) }
 		}
 	},
+	["size-2200-full"] = {
+		properties = { Size = "$Size2200_Full" },
+		attributes = {
+			[1] = { name = "Size2200_Full", value = UDim2.new(0, 132, 1, 0) }
+		}
+	},
 	["size-2200"] = {
 		properties = { Size = "$Size2200" },
 		attributes = {
 			[1] = { name = "Size2200", value = UDim2.new(0, 132, 0, 132) }
-		}
-	},
-	["size-1700-2200"] = {
-		properties = { Size = "$Size1700_2200" },
-		attributes = {
-			[1] = {
-				name = "Size1700_2200",
-				value = UDim2.new(0, 102, 0, 132)
-			}
 		}
 	},
 	["size-1100-1800"] = {
@@ -7872,19 +7394,19 @@
 			[1] = { name = "Size700_2500", value = UDim2.new(0, 42, 0, 150) }
 		}
 	},
-	["size-2100-2700"] = {
-		properties = { Size = "$Size2100_2700" },
+	["size-1700-2200"] = {
+		properties = { Size = "$Size1700_2200" },
 		attributes = {
 			[1] = {
-				name = "Size2100_2700",
-				value = UDim2.new(0, 126, 0, 162)
+				name = "Size1700_2200",
+				value = UDim2.new(0, 102, 0, 132)
 			}
 		}
 	},
-	["size-850-350"] = {
-		properties = { Size = "$Size850_350" },
+	["size-850-500"] = {
+		properties = { Size = "$Size850_500" },
 		attributes = {
-			[1] = { name = "Size850_350", value = UDim2.new(0, 51, 0, 21) }
+			[1] = { name = "Size850_500", value = UDim2.new(0, 51, 0, 30) }
 		}
 	},
 	["size-0-1000"] = {
@@ -7893,10 +7415,10 @@
 			[1] = { name = "Size0_1000", value = UDim2.new(0, 0, 0, 60) }
 		}
 	},
-	["size-700-350"] = {
-		properties = { Size = "$Size700_350" },
+	["size-full-1800"] = {
+		properties = { Size = "$SizeFull_1800" },
 		attributes = {
-			[1] = { name = "Size700_350", value = UDim2.new(0, 42, 0, 21) }
+			[1] = { name = "SizeFull_1800", value = UDim2.new(1, 0, 0, 108) }
 		}
 	},
 	["size-1000-1100"] = {
@@ -8007,12 +7529,12 @@
 			[1] = { name = "Size250_1100", value = UDim2.new(0, 15, 0, 66) }
 		}
 	},
-	["size-2100-2400"] = {
-		properties = { Size = "$Size2100_2400" },
+	["size-2100-2500"] = {
+		properties = { Size = "$Size2100_2500" },
 		attributes = {
 			[1] = {
-				name = "Size2100_2400",
-				value = UDim2.new(0, 126, 0, 144)
+				name = "Size2100_2500",
+				value = UDim2.new(0, 126, 0, 150)
 			}
 		}
 	},
@@ -8026,12 +7548,12 @@
 			[1] = { name = "Size800_1800", value = UDim2.new(0, 48, 0, 108) }
 		}
 	},
-	["size-2100-2200"] = {
-		properties = { Size = "$Size2100_2200" },
+	["size-2100-2400"] = {
+		properties = { Size = "$Size2100_2400" },
 		attributes = {
 			[1] = {
-				name = "Size2100_2200",
-				value = UDim2.new(0, 126, 0, 132)
+				name = "Size2100_2400",
+				value = UDim2.new(0, 126, 0, 144)
 			}
 		}
 	},
@@ -8041,12 +7563,12 @@
 			[1] = { name = "Size300_450", value = UDim2.new(0, 18, 0, 27) }
 		}
 	},
-	["size-2100-2100"] = {
-		properties = { Size = "$Size2100_2100" },
+	["size-2100-2200"] = {
+		properties = { Size = "$Size2100_2200" },
 		attributes = {
 			[1] = {
-				name = "Size2100_2100",
-				value = UDim2.new(0, 126, 0, 126)
+				name = "Size2100_2200",
+				value = UDim2.new(0, 126, 0, 132)
 			}
 		}
 	},
@@ -8062,12 +7584,12 @@
 			[1] = { name = "Size250_1300", value = UDim2.new(0, 15, 0, 78) }
 		}
 	},
-	["size-2100-1900"] = {
-		properties = { Size = "$Size2100_1900" },
+	["size-2100-2100"] = {
+		properties = { Size = "$Size2100_2100" },
 		attributes = {
 			[1] = {
-				name = "Size2100_1900",
-				value = UDim2.new(0, 126, 0, 114)
+				name = "Size2100_2100",
+				value = UDim2.new(0, 126, 0, 126)
 			}
 		}
 	},
@@ -8077,25 +7599,12 @@
 			[1] = { name = "Size350_2000", value = UDim2.new(0, 21, 0, 120) }
 		}
 	},
-	["radius-bottom-none"] = {
-		attributes = { [1] = { name = "RadiusNone", value = UDim.new(0, 0) } },
-		properties = {
-			BottomRightRadius = "$RadiusNone",
-			BottomLeftRadius = "$RadiusNone"
-		},
-		pseudo = "UICorner",
-		priority = 2,
-		children = {
+	["size-2100-1900"] = {
+		properties = { Size = "$Size2100_1900" },
+		attributes = {
 			[1] = {
-				pseudo = "UICorner",
-				priority = 0,
-				properties = {
-					TopRightRadius = UDim.new(0, 0),
-					TopLeftRadius = UDim.new(0, 0),
-					BottomRightRadius = UDim.new(0, 0),
-					BottomLeftRadius = UDim.new(0, 0)
-				},
-				tag = "radius-bottom-none"
+				name = "Size2100_1900",
+				value = UDim2.new(0, 126, 0, 114)
 			}
 		}
 	},
@@ -8119,10 +7628,10 @@
 		properties = { Padding = "$GutterLarge" },
 		attributes = { [1] = { name = "GutterLarge", value = UDim.new(0, 24) } }
 	},
-	["size-2100-1600"] = {
-		properties = { Size = "$Size2100_1600" },
+	["size-full-600"] = {
+		properties = { Size = "$SizeFull_600" },
 		attributes = {
-			[1] = { name = "Size2100_1600", value = UDim2.new(0, 126, 0, 96) }
+			[1] = { name = "SizeFull_600", value = UDim2.new(1, 0, 0, 36) }
 		}
 	},
 	["size-2500-2600"] = {
@@ -8134,10 +7643,16 @@
 			}
 		}
 	},
-	["size-1300-400"] = {
-		properties = { Size = "$Size1300_400" },
+	["size-2100-1500"] = {
+		properties = { Size = "$Size2100_1500" },
 		attributes = {
-			[1] = { name = "Size1300_400", value = UDim2.new(0, 78, 0, 24) }
+			[1] = { name = "Size2100_1500", value = UDim2.new(0, 126, 0, 90) }
+		}
+	},
+	["size-1300-0"] = {
+		properties = { Size = "$Size1300_0" },
+		attributes = {
+			[1] = { name = "Size1300_0", value = UDim2.new(0, 78, 0, 0) }
 		}
 	},
 	["size-2100-1300"] = {
@@ -8152,11 +7667,10 @@
 			[1] = { name = "Size2100_1200", value = UDim2.new(0, 126, 0, 72) }
 		}
 	},
-	["no-wrap"] = { pseudo = "UIListLayout", properties = { Wraps = false } },
-	["size-2100-900"] = {
-		properties = { Size = "$Size2100_900" },
+	["size-50-250"] = {
+		properties = { Size = "$Size50_250" },
 		attributes = {
-			[1] = { name = "Size2100_900", value = UDim2.new(0, 126, 0, 54) }
+			[1] = { name = "Size50_250", value = UDim2.new(0, 3, 0, 15) }
 		}
 	},
 	["margin-bottom-none"] = {
@@ -8164,16 +7678,45 @@
 		properties = { PaddingBottom = "$MarginNone" },
 		attributes = { [1] = { name = "MarginNone", value = UDim.new(0, 0) } }
 	},
-	["size-1400-1900"] = {
-		properties = { Size = "$Size1400_1900" },
-		attributes = {
-			[1] = { name = "Size1400_1900", value = UDim2.new(0, 84, 0, 114) }
+	["radius-bottom-right-xsmall"] = {
+		attributes = { [1] = { name = "RadiusXsmall", value = UDim.new(0, 3) } },
+		properties = { BottomRightRadius = "$RadiusXsmall" },
+		pseudo = "UICorner",
+		priority = 3,
+		children = {
+			[1] = {
+				pseudo = "UICorner",
+				priority = 0,
+				properties = {
+					TopRightRadius = UDim.new(0, 0),
+					TopLeftRadius = UDim.new(0, 0),
+					BottomRightRadius = UDim.new(0, 0),
+					BottomLeftRadius = UDim.new(0, 0)
+				},
+				tag = "radius-bottom-right-xsmall"
+			}
 		}
 	},
-	["size-1100-1100"] = {
-		properties = { Size = "$Size1100_1100" },
-		attributes = {
-			[1] = { name = "Size1100_1100", value = UDim2.new(0, 66, 0, 66) }
+	["radius-right-large"] = {
+		attributes = { [1] = { name = "RadiusLarge", value = UDim.new(0, 24) } },
+		properties = {
+			TopRightRadius = "$RadiusLarge",
+			BottomRightRadius = "$RadiusLarge"
+		},
+		pseudo = "UICorner",
+		priority = 2,
+		children = {
+			[1] = {
+				pseudo = "UICorner",
+				priority = 0,
+				properties = {
+					TopRightRadius = UDim.new(0, 0),
+					TopLeftRadius = UDim.new(0, 0),
+					BottomRightRadius = UDim.new(0, 0),
+					BottomLeftRadius = UDim.new(0, 0)
+				},
+				tag = "radius-right-large"
+			}
 		}
 	},
 	["size-550-200"] = {
@@ -8194,10 +7737,10 @@
 			[1] = { name = "Size0_2400", value = UDim2.new(0, 0, 0, 144) }
 		}
 	},
-	["size-2100-550"] = {
-		properties = { Size = "$Size2100_550" },
+	["size-700-350"] = {
+		properties = { Size = "$Size700_350" },
 		attributes = {
-			[1] = { name = "Size2100_550", value = UDim2.new(0, 126, 0, 33) }
+			[1] = { name = "Size700_350", value = UDim2.new(0, 42, 0, 21) }
 		}
 	},
 	["size-1500-3000"] = {
@@ -8206,28 +7749,18 @@
 			[1] = { name = "Size1500_3000", value = UDim2.new(0, 90, 0, 180) }
 		}
 	},
-	["size-450-2600"] = {
-		properties = { Size = "$Size450_2600" },
+	["size-2100-550"] = {
+		properties = { Size = "$Size2100_550" },
 		attributes = {
-			[1] = { name = "Size450_2600", value = UDim2.new(0, 27, 0, 156) }
+			[1] = { name = "Size2100_550", value = UDim2.new(0, 126, 0, 33) }
 		}
 	},
-	["text-size-defaults"] = {
-		attributes = { [1] = { name = "TextSizeBodyLarge", value = 30 } },
-		properties = { TextSize = "$TextSizeBodyLarge", LineHeight = 1.1 },
-		priority = -1,
-		children = {
+	["size-2700-1900"] = {
+		properties = { Size = "$Size2700_1900" },
+		attributes = {
 			[1] = {
-				attributes = {
-					[1] = { name = "TextPaddingBodyLarge", value = UDim.new(0, 1) }
-				},
-				pseudo = "UIPadding",
-				priority = -1,
-				properties = {
-					PaddingBottom = "$TextPaddingBodyLarge",
-					PaddingTop = "$TextPaddingBodyLarge"
-				},
-				tag = "text-size-defaults"
+				name = "Size2700_1900",
+				value = UDim2.new(0, 162, 0, 114)
 			}
 		}
 	},
@@ -8281,10 +7814,10 @@
 			}
 		}
 	},
-	["size-50-1700"] = {
-		properties = { Size = "$Size50_1700" },
+	["size-0-1100"] = {
+		properties = { Size = "$Size0_1100" },
 		attributes = {
-			[1] = { name = "Size50_1700", value = UDim2.new(0, 3, 0, 102) }
+			[1] = { name = "Size0_1100", value = UDim2.new(0, 0, 0, 66) }
 		}
 	},
 	["size-2600-1200"] = {
@@ -8305,10 +7838,10 @@
 			[1] = { name = "Size2100_Full", value = UDim2.new(0, 126, 1, 0) }
 		}
 	},
-	["size-900-2900"] = {
-		properties = { Size = "$Size900_2900" },
+	["size-150-800"] = {
+		properties = { Size = "$Size150_800" },
 		attributes = {
-			[1] = { name = "Size900_2900", value = UDim2.new(0, 54, 0, 174) }
+			[1] = { name = "Size150_800", value = UDim2.new(0, 9, 0, 48) }
 		}
 	},
 	["size-700-1100"] = {
@@ -8395,10 +7928,10 @@
 			}
 		}
 	},
-	["size-800-2000"] = {
-		properties = { Size = "$Size800_2000" },
+	["size-450-350"] = {
+		properties = { Size = "$Size450_350" },
 		attributes = {
-			[1] = { name = "Size800_2000", value = UDim2.new(0, 48, 0, 120) }
+			[1] = { name = "Size450_350", value = UDim2.new(0, 27, 0, 21) }
 		}
 	},
 	["size-300-2000"] = {
@@ -8489,10 +8022,10 @@
 			[1] = { name = "Size1500_450", value = UDim2.new(0, 90, 0, 27) }
 		}
 	},
-	["size-1200-1700"] = {
-		properties = { Size = "$Size1200_1700" },
+	["size-1100-850"] = {
+		properties = { Size = "$Size1100_850" },
 		attributes = {
-			[1] = { name = "Size1200_1700", value = UDim2.new(0, 72, 0, 102) }
+			[1] = { name = "Size1100_850", value = UDim2.new(0, 66, 0, 51) }
 		}
 	},
 	["size-500-1800"] = {
@@ -8526,10 +8059,10 @@
 		properties = { PaddingTop = "$MarginMedium" },
 		attributes = { [1] = { name = "MarginMedium", value = UDim.new(0, 36) } }
 	},
-	["size-1300-550"] = {
-		properties = { Size = "$Size1300_550" },
+	["size-1300-1600"] = {
+		properties = { Size = "$Size1300_1600" },
 		attributes = {
-			[1] = { name = "Size1300_550", value = UDim2.new(0, 78, 0, 33) }
+			[1] = { name = "Size1300_1600", value = UDim2.new(0, 78, 0, 96) }
 		}
 	},
 	["size-900-full"] = {
@@ -8570,10 +8103,10 @@
 			[1] = { name = "Size2000_850", value = UDim2.new(0, 120, 0, 51) }
 		}
 	},
-	["size-550-1700"] = {
-		properties = { Size = "$Size550_1700" },
+	["size-900-600"] = {
+		properties = { Size = "$Size900_600" },
 		attributes = {
-			[1] = { name = "Size550_1700", value = UDim2.new(0, 33, 0, 102) }
+			[1] = { name = "Size900_600", value = UDim2.new(0, 54, 0, 36) }
 		}
 	},
 	["size-2000-600"] = {
@@ -8772,10 +8305,10 @@
 			[1] = { name = "Size100_1200", value = UDim2.new(0, 6, 0, 72) }
 		}
 	},
-	["size-50-1000"] = {
-		properties = { Size = "$Size50_1000" },
+	["size-700-300"] = {
+		properties = { Size = "$Size700_300" },
 		attributes = {
-			[1] = { name = "Size50_1000", value = UDim2.new(0, 3, 0, 60) }
+			[1] = { name = "Size700_300", value = UDim2.new(0, 42, 0, 18) }
 		}
 	},
 	["size-800-1100"] = {
@@ -8838,10 +8371,10 @@
 			[1] = { name = "Size1900_700", value = UDim2.new(0, 114, 0, 42) }
 		}
 	},
-	["size-350-350"] = {
-		properties = { Size = "$Size350_350" },
+	["size-550-150"] = {
+		properties = { Size = "$Size550_150" },
 		attributes = {
-			[1] = { name = "Size350_350", value = UDim2.new(0, 21, 0, 21) }
+			[1] = { name = "Size550_150", value = UDim2.new(0, 33, 0, 9) }
 		}
 	},
 	["size-1900-400"] = {
@@ -8960,16 +8493,16 @@
 			}
 		}
 	},
-	["size-550-2400"] = {
-		properties = { Size = "$Size550_2400" },
+	["size-600-500"] = {
+		properties = { Size = "$Size600_500" },
 		attributes = {
-			[1] = { name = "Size550_2400", value = UDim2.new(0, 33, 0, 144) }
+			[1] = { name = "Size600_500", value = UDim2.new(0, 36, 0, 30) }
 		}
 	},
-	["size-200-1400"] = {
-		properties = { Size = "$Size200_1400" },
+	["size-50-1700"] = {
+		properties = { Size = "$Size50_1700" },
 		attributes = {
-			[1] = { name = "Size200_1400", value = UDim2.new(0, 12, 0, 84) }
+			[1] = { name = "Size50_1700", value = UDim2.new(0, 3, 0, 102) }
 		}
 	},
 	["size-1000-0"] = {
@@ -8990,23 +8523,10 @@
 			[1] = { name = "Size2600_600", value = UDim2.new(0, 156, 0, 36) }
 		}
 	},
-	["radius-bottom-left-large"] = {
-		attributes = { [1] = { name = "RadiusLarge", value = UDim.new(0, 24) } },
-		properties = { BottomLeftRadius = "$RadiusLarge" },
-		pseudo = "UICorner",
-		priority = 3,
-		children = {
-			[1] = {
-				pseudo = "UICorner",
-				priority = 0,
-				properties = {
-					TopRightRadius = UDim.new(0, 0),
-					TopLeftRadius = UDim.new(0, 0),
-					BottomRightRadius = UDim.new(0, 0),
-					BottomLeftRadius = UDim.new(0, 0)
-				},
-				tag = "radius-bottom-left-large"
-			}
+	["size-900-2000"] = {
+		properties = { Size = "$Size900_2000" },
+		attributes = {
+			[1] = { name = "Size900_2000", value = UDim2.new(0, 54, 0, 120) }
 		}
 	},
 	["size-2900-600"] = {
@@ -9105,10 +8625,10 @@
 			[1] = { name = "Size1900_850", value = UDim2.new(0, 114, 0, 51) }
 		}
 	},
-	["size-200-2300"] = {
-		properties = { Size = "$Size200_2300" },
+	["size-400-100"] = {
+		properties = { Size = "$Size400_100" },
 		attributes = {
-			[1] = { name = "Size200_2300", value = UDim2.new(0, 12, 0, 138) }
+			[1] = { name = "Size400_100", value = UDim2.new(0, 24, 0, 6) }
 		}
 	},
 	["size-450-1300"] = {
@@ -9123,10 +8643,23 @@
 			[1] = { name = "Size2700_700", value = UDim2.new(0, 162, 0, 42) }
 		}
 	},
-	["size-full-1600"] = {
-		properties = { Size = "$SizeFull_1600" },
-		attributes = {
-			[1] = { name = "SizeFull_1600", value = UDim2.new(1, 0, 0, 96) }
+	["radius-bottom-left-large"] = {
+		attributes = { [1] = { name = "RadiusLarge", value = UDim.new(0, 24) } },
+		properties = { BottomLeftRadius = "$RadiusLarge" },
+		pseudo = "UICorner",
+		priority = 3,
+		children = {
+			[1] = {
+				pseudo = "UICorner",
+				priority = 0,
+				properties = {
+					TopRightRadius = UDim.new(0, 0),
+					TopLeftRadius = UDim.new(0, 0),
+					BottomRightRadius = UDim.new(0, 0),
+					BottomLeftRadius = UDim.new(0, 0)
+				},
+				tag = "radius-bottom-left-large"
+			}
 		}
 	},
 	["size-1700-2900"] = {
@@ -9181,10 +8714,10 @@
 			[1] = { name = "Size2500_1000", value = UDim2.new(0, 150, 0, 60) }
 		}
 	},
-	["size-600-1500"] = {
-		properties = { Size = "$Size600_1500" },
+	["size-600-2300"] = {
+		properties = { Size = "$Size600_2300" },
 		attributes = {
-			[1] = { name = "Size600_1500", value = UDim2.new(0, 36, 0, 90) }
+			[1] = { name = "Size600_2300", value = UDim2.new(0, 36, 0, 138) }
 		}
 	},
 	["size-1700-2300"] = {
@@ -9232,32 +8765,11 @@
 			}
 		}
 	},
-	["text-caption-large"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = { name = "TextPaddingCaptionLarge", value = UDim.new(0, 1) }
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingCaptionLarge",
-					PaddingTop = "$TextPaddingCaptionLarge"
-				},
-				tag = "text-caption-large"
-			}
-		},
-		properties = {
-			Font = "$FontCaptionLarge",
-			TextSize = "$TextSizeCaptionLarge",
-			LineHeight = 1.111
-		},
+	["padding-top-xlarge"] = {
+		pseudo = "UIPadding",
+		properties = { PaddingTop = "$PaddingXlarge" },
 		attributes = {
-			[1] = {
-				name = "FontCaptionLarge",
-				value = Enum.Font.BuilderSansMedium
-			},
-			[2] = { name = "TextSizeCaptionLarge", value = 27 }
+			[1] = { name = "PaddingXlarge", value = UDim.new(0, 30) }
 		}
 	},
 	["size-1700-1900"] = {
@@ -9294,10 +8806,10 @@
 			[1] = { name = "Size1200_1900", value = UDim2.new(0, 72, 0, 114) }
 		}
 	},
-	["size-1400-350"] = {
-		properties = { Size = "$Size1400_350" },
+	["size-1400-400"] = {
+		properties = { Size = "$Size1400_400" },
 		attributes = {
-			[1] = { name = "Size1400_350", value = UDim2.new(0, 84, 0, 21) }
+			[1] = { name = "Size1400_400", value = UDim2.new(0, 84, 0, 24) }
 		}
 	},
 	["size-1700-1400"] = {
@@ -9363,10 +8875,10 @@
 			[1] = { name = "Size2700_150", value = UDim2.new(0, 162, 0, 9) }
 		}
 	},
-	["size-550-1100"] = {
-		properties = { Size = "$Size550_1100" },
+	["size-550-2400"] = {
+		properties = { Size = "$Size550_2400" },
 		attributes = {
-			[1] = { name = "Size550_1100", value = UDim2.new(0, 33, 0, 66) }
+			[1] = { name = "Size550_2400", value = UDim2.new(0, 33, 0, 144) }
 		}
 	},
 	["size-1700-1100"] = {
@@ -9387,32 +8899,10 @@
 			[1] = { name = "Size1700_300", value = UDim2.new(0, 102, 0, 18) }
 		}
 	},
-	["text-heading-large"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = { name = "TextPaddingHeadingLarge", value = UDim.new(0, 0) }
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingHeadingLarge",
-					PaddingTop = "$TextPaddingHeadingLarge"
-				},
-				tag = "text-heading-large"
-			}
-		},
-		properties = {
-			Font = "$FontHeadingLarge",
-			TextSize = "$TextSizeHeadingLarge",
-			LineHeight = 0.971
-		},
+	["size-1700-250"] = {
+		properties = { Size = "$Size1700_250" },
 		attributes = {
-			[1] = {
-				name = "FontHeadingLarge",
-				value = Enum.Font.BuilderSansBold
-			},
-			[2] = { name = "TextSizeHeadingLarge", value = 52.5 }
+			[1] = { name = "Size1700_250", value = UDim2.new(0, 102, 0, 15) }
 		}
 	},
 	["size-1700-150"] = {
@@ -9445,10 +8935,10 @@
 			[1] = { name = "Size800_1200", value = UDim2.new(0, 48, 0, 72) }
 		}
 	},
-	["size-1300-300"] = {
-		properties = { Size = "$Size1300_300" },
+	["size-1400-550"] = {
+		properties = { Size = "$Size1400_550" },
 		attributes = {
-			[1] = { name = "Size1300_300", value = UDim2.new(0, 78, 0, 18) }
+			[1] = { name = "Size1400_550", value = UDim2.new(0, 84, 0, 33) }
 		}
 	},
 	["size-800-2100"] = {
@@ -9638,10 +9128,26 @@
 			[1] = { name = "Size150_1800", value = UDim2.new(0, 9, 0, 108) }
 		}
 	},
-	["size-full-1800"] = {
-		properties = { Size = "$SizeFull_1800" },
-		attributes = {
-			[1] = { name = "SizeFull_1800", value = UDim2.new(1, 0, 0, 108) }
+	["radius-bottom-none"] = {
+		attributes = { [1] = { name = "RadiusNone", value = UDim.new(0, 0) } },
+		properties = {
+			BottomRightRadius = "$RadiusNone",
+			BottomLeftRadius = "$RadiusNone"
+		},
+		pseudo = "UICorner",
+		priority = 2,
+		children = {
+			[1] = {
+				pseudo = "UICorner",
+				priority = 0,
+				properties = {
+					TopRightRadius = UDim.new(0, 0),
+					TopLeftRadius = UDim.new(0, 0),
+					BottomRightRadius = UDim.new(0, 0),
+					BottomLeftRadius = UDim.new(0, 0)
+				},
+				tag = "radius-bottom-none"
+			}
 		}
 	},
 	["size-1400-2700"] = {
@@ -9650,10 +9156,10 @@
 			[1] = { name = "Size1400_2700", value = UDim2.new(0, 84, 0, 162) }
 		}
 	},
-	["size-500-1700"] = {
-		properties = { Size = "$Size500_1700" },
+	["size-500-full"] = {
+		properties = { Size = "$Size500_Full" },
 		attributes = {
-			[1] = { name = "Size500_1700", value = UDim2.new(0, 30, 0, 102) }
+			[1] = { name = "Size500_Full", value = UDim2.new(0, 30, 1, 0) }
 		}
 	},
 	["size-1600-700"] = {
@@ -9746,10 +9252,10 @@
 			[1] = { name = "Size1600_150", value = UDim2.new(0, 96, 0, 9) }
 		}
 	},
-	["size-600-2600"] = {
-		properties = { Size = "$Size600_2600" },
+	["size-350-350"] = {
+		properties = { Size = "$Size350_350" },
 		attributes = {
-			[1] = { name = "Size600_2600", value = UDim2.new(0, 36, 0, 156) }
+			[1] = { name = "Size350_350", value = UDim2.new(0, 21, 0, 21) }
 		}
 	},
 	["size-50-2600"] = {
@@ -9801,10 +9307,10 @@
 			[1] = { name = "Size1500_2300", value = UDim2.new(0, 90, 0, 138) }
 		}
 	},
-	["size-400-50"] = {
-		properties = { Size = "$Size400_50" },
+	["size-200-400"] = {
+		properties = { Size = "$Size200_400" },
 		attributes = {
-			[1] = { name = "Size400_50", value = UDim2.new(0, 24, 0, 3) }
+			[1] = { name = "Size200_400", value = UDim2.new(0, 12, 0, 24) }
 		}
 	},
 	["size-300-900"] = {
@@ -9874,10 +9380,10 @@
 			[1] = { name = "PaddingXxsmall", value = UDim.new(0, 3) }
 		}
 	},
-	["size-1300-1800"] = {
-		properties = { Size = "$Size1300_1800" },
+	["size-800-50"] = {
+		properties = { Size = "$Size800_50" },
 		attributes = {
-			[1] = { name = "Size1300_1800", value = UDim2.new(0, 78, 0, 108) }
+			[1] = { name = "Size800_50", value = UDim2.new(0, 48, 0, 3) }
 		}
 	},
 	["size-1500-1700"] = {
@@ -9910,16 +9416,16 @@
 			[1] = { name = "Size1500_1300", value = UDim2.new(0, 90, 0, 78) }
 		}
 	},
-	["size-350-50"] = {
-		properties = { Size = "$Size350_50" },
+	["size-full-150"] = {
+		properties = { Size = "$SizeFull_150" },
 		attributes = {
-			[1] = { name = "Size350_50", value = UDim2.new(0, 21, 0, 3) }
+			[1] = { name = "SizeFull_150", value = UDim2.new(1, 0, 0, 9) }
 		}
 	},
-	["size-150-400"] = {
-		properties = { Size = "$Size150_400" },
+	["size-1400-1900"] = {
+		properties = { Size = "$Size1400_1900" },
 		attributes = {
-			[1] = { name = "Size150_400", value = UDim2.new(0, 9, 0, 24) }
+			[1] = { name = "Size1400_1900", value = UDim2.new(0, 84, 0, 114) }
 		}
 	},
 	["padding-left-small"] = {
@@ -9951,10 +9457,10 @@
 			[1] = { name = "Size1500_250", value = UDim2.new(0, 90, 0, 15) }
 		}
 	},
-	["size-400-1300"] = {
-		properties = { Size = "$Size400_1300" },
+	["size-1000-2600"] = {
+		properties = { Size = "$Size1000_2600" },
 		attributes = {
-			[1] = { name = "Size400_1300", value = UDim2.new(0, 24, 0, 78) }
+			[1] = { name = "Size1000_2600", value = UDim2.new(0, 60, 0, 156) }
 		}
 	},
 	["size-1500-150"] = {
@@ -10011,34 +9517,22 @@
 			[1] = { name = "Size350_700", value = UDim2.new(0, 21, 0, 42) }
 		}
 	},
-	["size-1500"] = {
-		properties = { Size = "$Size1500" },
-		attributes = {
-			[1] = { name = "Size1500", value = UDim2.new(0, 90, 0, 90) }
-		}
-	},
 	["size-50-350"] = {
 		properties = { Size = "$Size50_350" },
 		attributes = {
 			[1] = { name = "Size50_350", value = UDim2.new(0, 3, 0, 21) }
 		}
 	},
-	["size-1200-1600"] = {
-		properties = { Size = "$Size1200_1600" },
+	["size-1500"] = {
+		properties = { Size = "$Size1500" },
 		attributes = {
-			[1] = { name = "Size1200_1600", value = UDim2.new(0, 72, 0, 96) }
+			[1] = { name = "Size1500", value = UDim2.new(0, 90, 0, 90) }
 		}
 	},
-	["size-600-2100"] = {
-		properties = { Size = "$Size600_2100" },
+	["size-1200-1700"] = {
+		properties = { Size = "$Size1200_1700" },
 		attributes = {
-			[1] = { name = "Size600_2100", value = UDim2.new(0, 36, 0, 126) }
-		}
-	},
-	["size-full-2400"] = {
-		properties = { Size = "$SizeFull_2400" },
-		attributes = {
-			[1] = { name = "SizeFull_2400", value = UDim2.new(1, 0, 0, 144) }
+			[1] = { name = "Size1200_1700", value = UDim2.new(0, 72, 0, 102) }
 		}
 	},
 	["size-250-400"] = {
@@ -10047,10 +9541,22 @@
 			[1] = { name = "Size250_400", value = UDim2.new(0, 15, 0, 24) }
 		}
 	},
+	["size-full-2400"] = {
+		properties = { Size = "$SizeFull_2400" },
+		attributes = {
+			[1] = { name = "SizeFull_2400", value = UDim2.new(1, 0, 0, 144) }
+		}
+	},
 	["size-250-250"] = {
 		properties = { Size = "$Size250_250" },
 		attributes = {
 			[1] = { name = "Size250_250", value = UDim2.new(0, 15, 0, 15) }
+		}
+	},
+	["size-300-2600"] = {
+		properties = { Size = "$Size300_2600" },
+		attributes = {
+			[1] = { name = "Size300_2600", value = UDim2.new(0, 18, 0, 156) }
 		}
 	},
 	["size-150-1000"] = {
@@ -10077,10 +9583,10 @@
 			[1] = { name = "Size50_850", value = UDim2.new(0, 3, 0, 51) }
 		}
 	},
-	["size-300-2100"] = {
-		properties = { Size = "$Size300_2100" },
+	["size-800-2000"] = {
+		properties = { Size = "$Size800_2000" },
 		attributes = {
-			[1] = { name = "Size300_2100", value = UDim2.new(0, 18, 0, 126) }
+			[1] = { name = "Size800_2000", value = UDim2.new(0, 48, 0, 120) }
 		}
 	},
 	["size-2000-1500"] = {
@@ -10089,16 +9595,16 @@
 			[1] = { name = "Size2000_1500", value = UDim2.new(0, 120, 0, 90) }
 		}
 	},
-	["size-800-50"] = {
-		properties = { Size = "$Size800_50" },
-		attributes = {
-			[1] = { name = "Size800_50", value = UDim2.new(0, 48, 0, 3) }
-		}
-	},
 	["size-1400-2300"] = {
 		properties = { Size = "$Size1400_2300" },
 		attributes = {
 			[1] = { name = "Size1400_2300", value = UDim2.new(0, 84, 0, 138) }
+		}
+	},
+	["size-1400-2200"] = {
+		properties = { Size = "$Size1400_2200" },
+		attributes = {
+			[1] = { name = "Size1400_2200", value = UDim2.new(0, 84, 0, 132) }
 		}
 	},
 	["size-800-2800"] = {
@@ -10132,26 +9638,10 @@
 			HorizontalFlex = Enum.UIFlexAlignment.Fill
 		}
 	},
-	["radius-right-large"] = {
-		attributes = { [1] = { name = "RadiusLarge", value = UDim.new(0, 24) } },
-		properties = {
-			TopRightRadius = "$RadiusLarge",
-			BottomRightRadius = "$RadiusLarge"
-		},
-		pseudo = "UICorner",
-		priority = 2,
-		children = {
-			[1] = {
-				pseudo = "UICorner",
-				priority = 0,
-				properties = {
-					TopRightRadius = UDim.new(0, 0),
-					TopLeftRadius = UDim.new(0, 0),
-					BottomRightRadius = UDim.new(0, 0),
-					BottomLeftRadius = UDim.new(0, 0)
-				},
-				tag = "radius-right-large"
-			}
+	["size-50-450"] = {
+		properties = { Size = "$Size50_450" },
+		attributes = {
+			[1] = { name = "Size50_450", value = UDim2.new(0, 3, 0, 27) }
 		}
 	},
 	["size-400-1400"] = {
@@ -10185,10 +9675,10 @@
 			[1] = { name = "Size1500_700", value = UDim2.new(0, 90, 0, 42) }
 		}
 	},
-	["size-1000-1800"] = {
-		properties = { Size = "$Size1000_1800" },
+	["size-550-350"] = {
+		properties = { Size = "$Size550_350" },
 		attributes = {
-			[1] = { name = "Size1000_1800", value = UDim2.new(0, 60, 0, 108) }
+			[1] = { name = "Size550_350", value = UDim2.new(0, 33, 0, 21) }
 		}
 	},
 	["size-250-1900"] = {
@@ -10229,10 +9719,10 @@
 			[1] = { name = "Size600_1200", value = UDim2.new(0, 36, 0, 72) }
 		}
 	},
-	["size-450-2100"] = {
-		properties = { Size = "$Size450_2100" },
+	["size-500-1700"] = {
+		properties = { Size = "$Size500_1700" },
 		attributes = {
-			[1] = { name = "Size450_2100", value = UDim2.new(0, 27, 0, 126) }
+			[1] = { name = "Size500_1700", value = UDim2.new(0, 30, 0, 102) }
 		}
 	},
 	["size-2900-700"] = {
@@ -10247,10 +9737,10 @@
 			[1] = { name = "Size550_2500", value = UDim2.new(0, 33, 0, 150) }
 		}
 	},
-	["size-1400-1200"] = {
-		properties = { Size = "$Size1400_1200" },
+	["size-900-2200"] = {
+		properties = { Size = "$Size900_2200" },
 		attributes = {
-			[1] = { name = "Size1400_1200", value = UDim2.new(0, 84, 0, 72) }
+			[1] = { name = "Size900_2200", value = UDim2.new(0, 54, 0, 132) }
 		}
 	},
 	["size-0-1200"] = {
@@ -10265,10 +9755,10 @@
 			[1] = { name = "Size350_600", value = UDim2.new(0, 21, 0, 36) }
 		}
 	},
-	["size-1400-1100"] = {
-		properties = { Size = "$Size1400_1100" },
+	["size-1400-1200"] = {
+		properties = { Size = "$Size1400_1200" },
 		attributes = {
-			[1] = { name = "Size1400_1100", value = UDim2.new(0, 84, 0, 66) }
+			[1] = { name = "Size1400_1200", value = UDim2.new(0, 84, 0, 72) }
 		}
 	},
 	["size-100-2800"] = {
@@ -10277,10 +9767,10 @@
 			[1] = { name = "Size100_2800", value = UDim2.new(0, 6, 0, 168) }
 		}
 	},
-	["size-800-700"] = {
-		properties = { Size = "$Size800_700" },
+	["size-1400-1100"] = {
+		properties = { Size = "$Size1400_1100" },
 		attributes = {
-			[1] = { name = "Size800_700", value = UDim2.new(0, 48, 0, 42) }
+			[1] = { name = "Size1400_1100", value = UDim2.new(0, 84, 0, 66) }
 		}
 	},
 	["size-600-1900"] = {
@@ -10319,10 +9809,10 @@
 			[1] = { name = "Size700_700", value = UDim2.new(0, 42, 0, 42) }
 		}
 	},
-	["size-0-350"] = {
-		properties = { Size = "$Size0_350" },
+	["size-850-350"] = {
+		properties = { Size = "$Size850_350" },
 		attributes = {
-			[1] = { name = "Size0_350", value = UDim2.new(0, 0, 0, 21) }
+			[1] = { name = "Size850_350", value = UDim2.new(0, 51, 0, 21) }
 		}
 	},
 	["size-1500-200"] = {
@@ -10337,10 +9827,10 @@
 			[1] = { name = "Size400_1200", value = UDim2.new(0, 24, 0, 72) }
 		}
 	},
-	["size-1400-700"] = {
-		properties = { Size = "$Size1400_700" },
+	["size-400-1300"] = {
+		properties = { Size = "$Size400_1300" },
 		attributes = {
-			[1] = { name = "Size1400_700", value = UDim2.new(0, 84, 0, 42) }
+			[1] = { name = "Size400_1300", value = UDim2.new(0, 24, 0, 78) }
 		}
 	},
 	["size-350-2900"] = {
@@ -10361,16 +9851,16 @@
 			[1] = { name = "Size800_550", value = UDim2.new(0, 48, 0, 33) }
 		}
 	},
-	["size-900-600"] = {
-		properties = { Size = "$Size900_600" },
+	["size-1400-700"] = {
+		properties = { Size = "$Size1400_700" },
 		attributes = {
-			[1] = { name = "Size900_600", value = UDim2.new(0, 54, 0, 36) }
+			[1] = { name = "Size1400_700", value = UDim2.new(0, 84, 0, 42) }
 		}
 	},
-	["size-1400-550"] = {
-		properties = { Size = "$Size1400_550" },
+	["size-900-700"] = {
+		properties = { Size = "$Size900_700" },
 		attributes = {
-			[1] = { name = "Size1400_550", value = UDim2.new(0, 84, 0, 33) }
+			[1] = { name = "Size900_700", value = UDim2.new(0, 54, 0, 42) }
 		}
 	},
 	["size-100-250"] = {
@@ -10403,11 +9893,9 @@
 			[1] = { name = "Size100_150", value = UDim2.new(0, 6, 0, 9) }
 		}
 	},
-	["size-1100-500"] = {
-		properties = { Size = "$Size1100_500" },
-		attributes = {
-			[1] = { name = "Size1100_500", value = UDim2.new(0, 66, 0, 30) }
-		}
+	["items-center"] = {
+		pseudo = "UIListLayout",
+		properties = { ItemLineAlignment = Enum.ItemLineAlignment.Center }
 	},
 	["size-150-2400"] = {
 		properties = { Size = "$Size150_2400" },
@@ -10415,10 +9903,10 @@
 			[1] = { name = "Size150_2400", value = UDim2.new(0, 9, 0, 144) }
 		}
 	},
-	["size-1400-400"] = {
-		properties = { Size = "$Size1400_400" },
+	["size-1100-550"] = {
+		properties = { Size = "$Size1100_550" },
 		attributes = {
-			[1] = { name = "Size1400_400", value = UDim2.new(0, 84, 0, 24) }
+			[1] = { name = "Size1100_550", value = UDim2.new(0, 66, 0, 33) }
 		}
 	},
 	["size-1700-1600"] = {
@@ -10433,47 +9921,22 @@
 			[1] = { name = "Size500_50", value = UDim2.new(0, 30, 0, 3) }
 		}
 	},
-	["text-display-medium"] = {
-		children = {
-			[1] = {
-				attributes = {
-					[1] = {
-						name = "TextPaddingDisplayMedium",
-						value = UDim.new(0, -2)
-					}
-				},
-				pseudo = "UIPadding",
-				priority = 0,
-				properties = {
-					PaddingBottom = "$TextPaddingDisplayMedium",
-					PaddingTop = "$TextPaddingDisplayMedium"
-				},
-				tag = "text-display-medium"
-			}
-		},
-		properties = {
-			Font = "$FontDisplayMedium",
-			TextSize = "$TextSizeDisplayMedium",
-			LineHeight = 0.958
-		},
+	["size-1400-350"] = {
+		properties = { Size = "$Size1400_350" },
 		attributes = {
-			[1] = {
-				name = "FontDisplayMedium",
-				value = Enum.Font.BuilderSansBold
-			},
-			[2] = { name = "TextSizeDisplayMedium", value = 106.5 }
+			[1] = { name = "Size1400_350", value = UDim2.new(0, 84, 0, 21) }
 		}
 	},
-	["size-600-full"] = {
-		properties = { Size = "$Size600_Full" },
+	["size-1400-300"] = {
+		properties = { Size = "$Size1400_300" },
 		attributes = {
-			[1] = { name = "Size600_Full", value = UDim2.new(0, 36, 1, 0) }
+			[1] = { name = "Size1400_300", value = UDim2.new(0, 84, 0, 18) }
 		}
 	},
-	["size-1400-150"] = {
-		properties = { Size = "$Size1400_150" },
+	["size-700-100"] = {
+		properties = { Size = "$Size700_100" },
 		attributes = {
-			[1] = { name = "Size1400_150", value = UDim2.new(0, 84, 0, 9) }
+			[1] = { name = "Size700_100", value = UDim2.new(0, 42, 0, 6) }
 		}
 	},
 	["size-2500-1500"] = {
@@ -10482,10 +9945,10 @@
 			[1] = { name = "Size2500_1500", value = UDim2.new(0, 150, 0, 90) }
 		}
 	},
-	["size-1400-50"] = {
-		properties = { Size = "$Size1400_50" },
+	["size-900-1000"] = {
+		properties = { Size = "$Size900_1000" },
 		attributes = {
-			[1] = { name = "Size1400_50", value = UDim2.new(0, 84, 0, 3) }
+			[1] = { name = "Size900_1000", value = UDim2.new(0, 54, 0, 60) }
 		}
 	},
 	["size-2300"] = {
@@ -10499,10 +9962,10 @@
 		properties = { PaddingTop = "$PaddingXsmall" },
 		attributes = { [1] = { name = "PaddingXsmall", value = UDim.new(0, 6) } }
 	},
-	["size-400-300"] = {
-		properties = { Size = "$Size400_300" },
+	["size-1100-200"] = {
+		properties = { Size = "$Size1100_200" },
 		attributes = {
-			[1] = { name = "Size400_300", value = UDim2.new(0, 24, 0, 18) }
+			[1] = { name = "Size1100_200", value = UDim2.new(0, 66, 0, 12) }
 		}
 	},
 	["size-0-2800"] = {
@@ -10523,10 +9986,10 @@
 			[1] = { name = "Size600_2900", value = UDim2.new(0, 36, 0, 174) }
 		}
 	},
-	["size-250-200"] = {
-		properties = { Size = "$Size250_200" },
+	["size-0-500"] = {
+		properties = { Size = "$Size0_500" },
 		attributes = {
-			[1] = { name = "Size250_200", value = UDim2.new(0, 15, 0, 12) }
+			[1] = { name = "Size0_500", value = UDim2.new(0, 0, 0, 30) }
 		}
 	},
 	["size-50-550"] = {
@@ -10568,10 +10031,10 @@
 			[1] = { name = "Size400_250", value = UDim2.new(0, 24, 0, 15) }
 		}
 	},
-	["size-1300-2800"] = {
-		properties = { Size = "$Size1300_2800" },
+	["size-0-2300"] = {
+		properties = { Size = "$Size0_2300" },
 		attributes = {
-			[1] = { name = "Size1300_2800", value = UDim2.new(0, 78, 0, 168) }
+			[1] = { name = "Size0_2300", value = UDim2.new(0, 0, 0, 138) }
 		}
 	},
 	["size-250-1000"] = {
@@ -10635,10 +10098,10 @@
 			[1] = { name = "Size200_1200", value = UDim2.new(0, 12, 0, 72) }
 		}
 	},
-	["size-300-2600"] = {
-		properties = { Size = "$Size300_2600" },
+	["size-250-2900"] = {
+		properties = { Size = "$Size250_2900" },
 		attributes = {
-			[1] = { name = "Size300_2600", value = UDim2.new(0, 18, 0, 156) }
+			[1] = { name = "Size250_2900", value = UDim2.new(0, 15, 0, 174) }
 		}
 	},
 	["size-450-1500"] = {
@@ -10653,6 +10116,18 @@
 			[1] = { name = "Size2000_250", value = UDim2.new(0, 120, 0, 15) }
 		}
 	},
+	["size-100-1800"] = {
+		properties = { Size = "$Size100_1800" },
+		attributes = {
+			[1] = { name = "Size100_1800", value = UDim2.new(0, 6, 0, 108) }
+		}
+	},
+	["size-1300-2400"] = {
+		properties = { Size = "$Size1300_2400" },
+		attributes = {
+			[1] = { name = "Size1300_2400", value = UDim2.new(0, 78, 0, 144) }
+		}
+	},
 	["size-1300-2300"] = {
 		properties = { Size = "$Size1300_2300" },
 		attributes = {
@@ -10663,18 +10138,6 @@
 		properties = { Size = "$Size1300_2100" },
 		attributes = {
 			[1] = { name = "Size1300_2100", value = UDim2.new(0, 78, 0, 126) }
-		}
-	},
-	["size-1300-1900"] = {
-		properties = { Size = "$Size1300_1900" },
-		attributes = {
-			[1] = { name = "Size1300_1900", value = UDim2.new(0, 78, 0, 114) }
-		}
-	},
-	["size-50-1200"] = {
-		properties = { Size = "$Size50_1200" },
-		attributes = {
-			[1] = { name = "Size50_1200", value = UDim2.new(0, 3, 0, 72) }
 		}
 	},
 	["radius-top-right-medium"] = {
@@ -10696,16 +10159,16 @@
 			}
 		}
 	},
-	["size-100-1100"] = {
-		properties = { Size = "$Size100_1100" },
+	["size-50-1200"] = {
+		properties = { Size = "$Size50_1200" },
 		attributes = {
-			[1] = { name = "Size100_1100", value = UDim2.new(0, 6, 0, 66) }
+			[1] = { name = "Size50_1200", value = UDim2.new(0, 3, 0, 72) }
 		}
 	},
-	["size-500-2200"] = {
-		properties = { Size = "$Size500_2200" },
+	["size-500-800"] = {
+		properties = { Size = "$Size500_800" },
 		attributes = {
-			[1] = { name = "Size500_2200", value = UDim2.new(0, 30, 0, 132) }
+			[1] = { name = "Size500_800", value = UDim2.new(0, 30, 0, 48) }
 		}
 	},
 	["size-100-1500"] = {
@@ -10714,10 +10177,10 @@
 			[1] = { name = "Size100_1500", value = UDim2.new(0, 6, 0, 90) }
 		}
 	},
-	["size-1300-1600"] = {
-		properties = { Size = "$Size1300_1600" },
+	["size-100-1100"] = {
+		properties = { Size = "$Size100_1100" },
 		attributes = {
-			[1] = { name = "Size1300_1600", value = UDim2.new(0, 78, 0, 96) }
+			[1] = { name = "Size100_1100", value = UDim2.new(0, 6, 0, 66) }
 		}
 	},
 	["size-600-350"] = {
@@ -10744,10 +10207,10 @@
 			[1] = { name = "Size700_550", value = UDim2.new(0, 42, 0, 33) }
 		}
 	},
-	["size-1300-1000"] = {
-		properties = { Size = "$Size1300_1000" },
+	["size-1300-1800"] = {
+		properties = { Size = "$Size1300_1800" },
 		attributes = {
-			[1] = { name = "Size1300_1000", value = UDim2.new(0, 78, 0, 60) }
+			[1] = { name = "Size1300_1800", value = UDim2.new(0, 78, 0, 108) }
 		}
 	},
 	["size-300-850"] = {
@@ -10756,10 +10219,10 @@
 			[1] = { name = "Size300_850", value = UDim2.new(0, 18, 0, 51) }
 		}
 	},
-	["size-1300-full"] = {
-		properties = { Size = "$Size1300_Full" },
+	["size-500-2200"] = {
+		properties = { Size = "$Size500_2200" },
 		attributes = {
-			[1] = { name = "Size1300_Full", value = UDim2.new(0, 78, 1, 0) }
+			[1] = { name = "Size500_2200", value = UDim2.new(0, 30, 0, 132) }
 		}
 	},
 	["size-2000-1200"] = {
@@ -10768,16 +10231,16 @@
 			[1] = { name = "Size2000_1200", value = UDim2.new(0, 120, 0, 72) }
 		}
 	},
-	["size-900-2000"] = {
-		properties = { Size = "$Size900_2000" },
+	["size-1200-2100"] = {
+		properties = { Size = "$Size1200_2100" },
 		attributes = {
-			[1] = { name = "Size900_2000", value = UDim2.new(0, 54, 0, 120) }
+			[1] = { name = "Size1200_2100", value = UDim2.new(0, 72, 0, 126) }
 		}
 	},
-	["size-0-2600"] = {
-		properties = { Size = "$Size0_2600" },
+	["size-100-2700"] = {
+		properties = { Size = "$Size100_2700" },
 		attributes = {
-			[1] = { name = "Size0_2600", value = UDim2.new(0, 0, 0, 156) }
+			[1] = { name = "Size100_2700", value = UDim2.new(0, 6, 0, 162) }
 		}
 	},
 	["size-550-2300"] = {
@@ -10792,10 +10255,10 @@
 			[1] = { name = "Size150_1700", value = UDim2.new(0, 9, 0, 102) }
 		}
 	},
-	["size-1300-450"] = {
-		properties = { Size = "$Size1300_450" },
+	["size-1300-1100"] = {
+		properties = { Size = "$Size1300_1100" },
 		attributes = {
-			[1] = { name = "Size1300_450", value = UDim2.new(0, 78, 0, 27) }
+			[1] = { name = "Size1300_1100", value = UDim2.new(0, 78, 0, 66) }
 		}
 	},
 	["size-250-500"] = {
@@ -10804,10 +10267,10 @@
 			[1] = { name = "Size250_500", value = UDim2.new(0, 15, 0, 30) }
 		}
 	},
-	["size-50-250"] = {
-		properties = { Size = "$Size50_250" },
+	["size-1300-1000"] = {
+		properties = { Size = "$Size1300_1000" },
 		attributes = {
-			[1] = { name = "Size50_250", value = UDim2.new(0, 3, 0, 15) }
+			[1] = { name = "Size1300_1000", value = UDim2.new(0, 78, 0, 60) }
 		}
 	},
 	["size-2100-1400"] = {
@@ -10816,10 +10279,10 @@
 			[1] = { name = "Size2100_1400", value = UDim2.new(0, 126, 0, 84) }
 		}
 	},
-	["size-1200-2100"] = {
-		properties = { Size = "$Size1200_2100" },
+	["size-1300-800"] = {
+		properties = { Size = "$Size1300_800" },
 		attributes = {
-			[1] = { name = "Size1200_2100", value = UDim2.new(0, 72, 0, 126) }
+			[1] = { name = "Size1300_800", value = UDim2.new(0, 78, 0, 48) }
 		}
 	},
 	["size-850-2400"] = {
@@ -10834,10 +10297,10 @@
 			[1] = { name = "Size2100_0", value = UDim2.new(0, 126, 0, 0) }
 		}
 	},
-	["size-600-0"] = {
-		properties = { Size = "$Size600_0" },
+	["size-1300-550"] = {
+		properties = { Size = "$Size1300_550" },
 		attributes = {
-			[1] = { name = "Size600_0", value = UDim2.new(0, 36, 0, 0) }
+			[1] = { name = "Size1300_550", value = UDim2.new(0, 78, 0, 33) }
 		}
 	},
 	["size-2100-1100"] = {
@@ -10858,10 +10321,10 @@
 			[1] = { name = "Size800_1400", value = UDim2.new(0, 48, 0, 84) }
 		}
 	},
-	["size-1300-0"] = {
-		properties = { Size = "$Size1300_0" },
+	["size-1300-450"] = {
+		properties = { Size = "$Size1300_450" },
 		attributes = {
-			[1] = { name = "Size1300_0", value = UDim2.new(0, 78, 0, 0) }
+			[1] = { name = "Size1300_450", value = UDim2.new(0, 78, 0, 27) }
 		}
 	},
 	["radius-left-circle"] = {
@@ -10888,6 +10351,48 @@
 			}
 		}
 	},
+	["size-1300-400"] = {
+		properties = { Size = "$Size1300_400" },
+		attributes = {
+			[1] = { name = "Size1300_400", value = UDim2.new(0, 78, 0, 24) }
+		}
+	},
+	["size-1200-900"] = {
+		properties = { Size = "$Size1200_900" },
+		attributes = {
+			[1] = { name = "Size1200_900", value = UDim2.new(0, 72, 0, 54) }
+		}
+	},
+	["size-1300-300"] = {
+		properties = { Size = "$Size1300_300" },
+		attributes = {
+			[1] = { name = "Size1300_300", value = UDim2.new(0, 78, 0, 18) }
+		}
+	},
+	["size-250-full"] = {
+		properties = { Size = "$Size250_Full" },
+		attributes = {
+			[1] = { name = "Size250_Full", value = UDim2.new(0, 15, 1, 0) }
+		}
+	},
+	["size-1300-200"] = {
+		properties = { Size = "$Size1300_200" },
+		attributes = {
+			[1] = { name = "Size1300_200", value = UDim2.new(0, 78, 0, 12) }
+		}
+	},
+	["size-2400-450"] = {
+		properties = { Size = "$Size2400_450" },
+		attributes = {
+			[1] = { name = "Size2400_450", value = UDim2.new(0, 144, 0, 27) }
+		}
+	},
+	["size-600-50"] = {
+		properties = { Size = "$Size600_50" },
+		attributes = {
+			[1] = { name = "Size600_50", value = UDim2.new(0, 36, 0, 3) }
+		}
+	},
 	["radius-bottom-left-xsmall"] = {
 		attributes = { [1] = { name = "RadiusXsmall", value = UDim.new(0, 3) } },
 		properties = { BottomLeftRadius = "$RadiusXsmall" },
@@ -10907,52 +10412,10 @@
 			}
 		}
 	},
-	["size-1200-900"] = {
-		properties = { Size = "$Size1200_900" },
+	["size-1300-full"] = {
+		properties = { Size = "$Size1300_Full" },
 		attributes = {
-			[1] = { name = "Size1200_900", value = UDim2.new(0, 72, 0, 54) }
-		}
-	},
-	["size-1200-3000"] = {
-		properties = { Size = "$Size1200_3000" },
-		attributes = {
-			[1] = { name = "Size1200_3000", value = UDim2.new(0, 72, 0, 180) }
-		}
-	},
-	["size-250-full"] = {
-		properties = { Size = "$Size250_Full" },
-		attributes = {
-			[1] = { name = "Size250_Full", value = UDim2.new(0, 15, 1, 0) }
-		}
-	},
-	["size-800-2900"] = {
-		properties = { Size = "$Size800_2900" },
-		attributes = {
-			[1] = { name = "Size800_2900", value = UDim2.new(0, 48, 0, 174) }
-		}
-	},
-	["size-2400-450"] = {
-		properties = { Size = "$Size2400_450" },
-		attributes = {
-			[1] = { name = "Size2400_450", value = UDim2.new(0, 144, 0, 27) }
-		}
-	},
-	["size-450-300"] = {
-		properties = { Size = "$Size450_300" },
-		attributes = {
-			[1] = { name = "Size450_300", value = UDim2.new(0, 27, 0, 18) }
-		}
-	},
-	["size-1200-2400"] = {
-		properties = { Size = "$Size1200_2400" },
-		attributes = {
-			[1] = { name = "Size1200_2400", value = UDim2.new(0, 72, 0, 144) }
-		}
-	},
-	["size-1200-2300"] = {
-		properties = { Size = "$Size1200_2300" },
-		attributes = {
-			[1] = { name = "Size1200_2300", value = UDim2.new(0, 72, 0, 138) }
+			[1] = { name = "Size1300_Full", value = UDim2.new(0, 78, 1, 0) }
 		}
 	},
 	["size-2300-300"] = {
@@ -10961,16 +10424,16 @@
 			[1] = { name = "Size2300_300", value = UDim2.new(0, 138, 0, 18) }
 		}
 	},
-	["size-400-1900"] = {
-		properties = { Size = "$Size400_1900" },
+	["size-1200-3000"] = {
+		properties = { Size = "$Size1200_3000" },
 		attributes = {
-			[1] = { name = "Size400_1900", value = UDim2.new(0, 24, 0, 114) }
+			[1] = { name = "Size1200_3000", value = UDim2.new(0, 72, 0, 180) }
 		}
 	},
-	["size-50-500"] = {
-		properties = { Size = "$Size50_500" },
+	["size-1200-2900"] = {
+		properties = { Size = "$Size1200_2900" },
 		attributes = {
-			[1] = { name = "Size50_500", value = UDim2.new(0, 3, 0, 30) }
+			[1] = { name = "Size1200_2900", value = UDim2.new(0, 72, 0, 174) }
 		}
 	},
 	["size-100-600"] = {
@@ -11006,10 +10469,10 @@
 			[1] = { name = "Size150_1400", value = UDim2.new(0, 9, 0, 84) }
 		}
 	},
-	["size-150-full"] = {
-		properties = { Size = "$Size150_Full" },
+	["size-1200-2400"] = {
+		properties = { Size = "$Size1200_2400" },
 		attributes = {
-			[1] = { name = "Size150_Full", value = UDim2.new(0, 9, 1, 0) }
+			[1] = { name = "Size1200_2400", value = UDim2.new(0, 72, 0, 144) }
 		}
 	},
 	["size-full-400"] = {
@@ -11068,16 +10531,21 @@
 			}
 		}
 	},
-	["size-700-1800"] = {
-		properties = { Size = "$Size700_1800" },
-		attributes = {
-			[1] = { name = "Size700_1800", value = UDim2.new(0, 42, 0, 108) }
+	["radius-xsmall"] = {
+		attributes = { [1] = { name = "RadiusXsmall", value = UDim.new(0, 3) } },
+		pseudo = "UICorner",
+		priority = 1,
+		properties = {
+			TopRightRadius = "$RadiusXsmall",
+			TopLeftRadius = "$RadiusXsmall",
+			BottomRightRadius = "$RadiusXsmall",
+			BottomLeftRadius = "$RadiusXsmall"
 		}
 	},
-	["size-150-850"] = {
-		properties = { Size = "$Size150_850" },
+	["size-450-300"] = {
+		properties = { Size = "$Size450_300" },
 		attributes = {
-			[1] = { name = "Size150_850", value = UDim2.new(0, 9, 0, 51) }
+			[1] = { name = "Size450_300", value = UDim2.new(0, 27, 0, 18) }
 		}
 	},
 	["padding-bottom-none"] = {
@@ -11103,10 +10571,10 @@
 			[1] = { name = "Size550_300", value = UDim2.new(0, 33, 0, 18) }
 		}
 	},
-	["size-full-250"] = {
-		properties = { Size = "$SizeFull_250" },
+	["size-700-0"] = {
+		properties = { Size = "$Size700_0" },
 		attributes = {
-			[1] = { name = "SizeFull_250", value = UDim2.new(1, 0, 0, 15) }
+			[1] = { name = "Size700_0", value = UDim2.new(0, 42, 0, 0) }
 		}
 	},
 	["size-250-2100"] = {
@@ -11124,10 +10592,10 @@
 			}
 		}
 	},
-	["size-full-1500"] = {
-		properties = { Size = "$SizeFull_1500" },
+	["size-400-2300"] = {
+		properties = { Size = "$Size400_2300" },
 		attributes = {
-			[1] = { name = "SizeFull_1500", value = UDim2.new(1, 0, 0, 90) }
+			[1] = { name = "Size400_2300", value = UDim2.new(0, 24, 0, 138) }
 		}
 	},
 	["size-550-2900"] = {
@@ -11136,10 +10604,28 @@
 			[1] = { name = "Size550_2900", value = UDim2.new(0, 33, 0, 174) }
 		}
 	},
-	["size-1200-400"] = {
-		properties = { Size = "$Size1200_400" },
+	["size-700-1800"] = {
+		properties = { Size = "$Size700_1800" },
 		attributes = {
-			[1] = { name = "Size1200_400", value = UDim2.new(0, 72, 0, 24) }
+			[1] = { name = "Size700_1800", value = UDim2.new(0, 42, 0, 108) }
+		}
+	},
+	["size-150-850"] = {
+		properties = { Size = "$Size150_850" },
+		attributes = {
+			[1] = { name = "Size150_850", value = UDim2.new(0, 9, 0, 51) }
+		}
+	},
+	["size-1500-1800"] = {
+		properties = { Size = "$Size1500_1800" },
+		attributes = {
+			[1] = { name = "Size1500_1800", value = UDim2.new(0, 90, 0, 108) }
+		}
+	},
+	["size-0-3000"] = {
+		properties = { Size = "$Size0_3000" },
+		attributes = {
+			[1] = { name = "Size0_3000", value = UDim2.new(0, 0, 0, 180) }
 		}
 	},
 	["radius-bottom-right-circle"] = {
@@ -11163,42 +10649,6 @@
 			}
 		}
 	},
-	["size-1500-1800"] = {
-		properties = { Size = "$Size1500_1800" },
-		attributes = {
-			[1] = { name = "Size1500_1800", value = UDim2.new(0, 90, 0, 108) }
-		}
-	},
-	["size-0-3000"] = {
-		properties = { Size = "$Size0_3000" },
-		attributes = {
-			[1] = { name = "Size0_3000", value = UDim2.new(0, 0, 0, 180) }
-		}
-	},
-	["radius-top-circle"] = {
-		attributes = {
-			[1] = { name = "RadiusCircle", value = UDim.new(0, 14998) }
-		},
-		properties = {
-			TopRightRadius = "$RadiusCircle",
-			TopLeftRadius = "$RadiusCircle"
-		},
-		pseudo = "UICorner",
-		priority = 2,
-		children = {
-			[1] = {
-				pseudo = "UICorner",
-				priority = 0,
-				properties = {
-					TopRightRadius = UDim.new(0, 0),
-					TopLeftRadius = UDim.new(0, 0),
-					BottomRightRadius = UDim.new(0, 0),
-					BottomLeftRadius = UDim.new(0, 0)
-				},
-				tag = "radius-top-circle"
-			}
-		}
-	},
 	["size-full-2300"] = {
 		properties = { Size = "$SizeFull_2300" },
 		attributes = {
@@ -11215,10 +10665,10 @@
 		pseudo = "UIListLayout",
 		properties = { VerticalAlignment = Enum.VerticalAlignment.Center }
 	},
-	["size-700-300"] = {
-		properties = { Size = "$Size700_300" },
+	["size-full-250"] = {
+		properties = { Size = "$SizeFull_250" },
 		attributes = {
-			[1] = { name = "Size700_300", value = UDim2.new(0, 42, 0, 18) }
+			[1] = { name = "SizeFull_250", value = UDim2.new(1, 0, 0, 15) }
 		}
 	},
 	["size-500-1600"] = {
@@ -11227,22 +10677,22 @@
 			[1] = { name = "Size500_1600", value = UDim2.new(0, 30, 0, 96) }
 		}
 	},
-	["size-200-850"] = {
-		properties = { Size = "$Size200_850" },
+	["size-1200-600"] = {
+		properties = { Size = "$Size1200_600" },
 		attributes = {
-			[1] = { name = "Size200_850", value = UDim2.new(0, 12, 0, 51) }
+			[1] = { name = "Size1200_600", value = UDim2.new(0, 72, 0, 36) }
 		}
 	},
-	["size-1100-2400"] = {
-		properties = { Size = "$Size1100_2400" },
+	["size-1200-500"] = {
+		properties = { Size = "$Size1200_500" },
 		attributes = {
-			[1] = { name = "Size1100_2400", value = UDim2.new(0, 66, 0, 144) }
+			[1] = { name = "Size1200_500", value = UDim2.new(0, 72, 0, 30) }
 		}
 	},
-	["size-400-100"] = {
-		properties = { Size = "$Size400_100" },
+	["size-250-550"] = {
+		properties = { Size = "$Size250_550" },
 		attributes = {
-			[1] = { name = "Size400_100", value = UDim2.new(0, 24, 0, 6) }
+			[1] = { name = "Size250_550", value = UDim2.new(0, 15, 0, 33) }
 		}
 	},
 	["size-550-500"] = {
@@ -11263,10 +10713,10 @@
 			[1] = { name = "Size2900_Full", value = UDim2.new(0, 174, 1, 0) }
 		}
 	},
-	["size-900-1000"] = {
-		properties = { Size = "$Size900_1000" },
+	["size-200-2300"] = {
+		properties = { Size = "$Size200_2300" },
 		attributes = {
-			[1] = { name = "Size900_1000", value = UDim2.new(0, 54, 0, 60) }
+			[1] = { name = "Size200_2300", value = UDim2.new(0, 12, 0, 138) }
 		}
 	},
 	["size-2100-600"] = {
@@ -11281,10 +10731,10 @@
 			[1] = { name = "Size1100_250", value = UDim2.new(0, 66, 0, 15) }
 		}
 	},
-	["size-1100-1000"] = {
-		properties = { Size = "$Size1100_1000" },
+	["size-200-850"] = {
+		properties = { Size = "$Size200_850" },
 		attributes = {
-			[1] = { name = "Size1100_1000", value = UDim2.new(0, 66, 0, 60) }
+			[1] = { name = "Size200_850", value = UDim2.new(0, 12, 0, 51) }
 		}
 	},
 	["size-850-850"] = {
@@ -11314,10 +10764,10 @@
 			[1] = { name = "SizeFull_Full", value = UDim2.new(1, 0, 1, 0) }
 		}
 	},
-	["size-100-full"] = {
-		properties = { Size = "$Size100_Full" },
+	["size-400-50"] = {
+		properties = { Size = "$Size400_50" },
 		attributes = {
-			[1] = { name = "Size100_Full", value = UDim2.new(0, 6, 1, 0) }
+			[1] = { name = "Size400_50", value = UDim2.new(0, 24, 0, 3) }
 		}
 	},
 	["size-400-2600"] = {
@@ -11326,22 +10776,22 @@
 			[1] = { name = "Size400_2600", value = UDim2.new(0, 24, 0, 156) }
 		}
 	},
-	["size-1100-850"] = {
-		properties = { Size = "$Size1100_850" },
+	["size-1100-2000"] = {
+		properties = { Size = "$Size1100_2000" },
 		attributes = {
-			[1] = { name = "Size1100_850", value = UDim2.new(0, 66, 0, 51) }
+			[1] = { name = "Size1100_2000", value = UDim2.new(0, 66, 0, 120) }
 		}
 	},
-	["size-550-350"] = {
-		properties = { Size = "$Size550_350" },
+	["size-100-1700"] = {
+		properties = { Size = "$Size100_1700" },
 		attributes = {
-			[1] = { name = "Size550_350", value = UDim2.new(0, 33, 0, 21) }
+			[1] = { name = "Size100_1700", value = UDim2.new(0, 6, 0, 102) }
 		}
 	},
-	["size-1100-550"] = {
-		properties = { Size = "$Size1100_550" },
+	["size-1100-1100"] = {
+		properties = { Size = "$Size1100_1100" },
 		attributes = {
-			[1] = { name = "Size1100_550", value = UDim2.new(0, 66, 0, 33) }
+			[1] = { name = "Size1100_1100", value = UDim2.new(0, 66, 0, 66) }
 		}
 	},
 	["size-550-3000"] = {
@@ -11368,10 +10818,10 @@
 			[1] = { name = "Size700_900", value = UDim2.new(0, 42, 0, 54) }
 		}
 	},
-	["size-1100-450"] = {
-		properties = { Size = "$Size1100_450" },
+	["size-600"] = {
+		properties = { Size = "$Size600" },
 		attributes = {
-			[1] = { name = "Size1100_450", value = UDim2.new(0, 66, 0, 27) }
+			[1] = { name = "Size600", value = UDim2.new(0, 36, 0, 36) }
 		}
 	},
 	["size-200-2700"] = {
@@ -11380,34 +10830,34 @@
 			[1] = { name = "Size200_2700", value = UDim2.new(0, 12, 0, 162) }
 		}
 	},
-	["size-1100-400"] = {
-		properties = { Size = "$Size1100_400" },
+	["size-150-2900"] = {
+		properties = { Size = "$Size150_2900" },
 		attributes = {
-			[1] = { name = "Size1100_400", value = UDim2.new(0, 66, 0, 24) }
+			[1] = { name = "Size150_2900", value = UDim2.new(0, 9, 0, 174) }
 		}
 	},
-	["size-500-1500"] = {
-		properties = { Size = "$Size500_1500" },
+	["size-1100-1000"] = {
+		properties = { Size = "$Size1100_1000" },
 		attributes = {
-			[1] = { name = "Size500_1500", value = UDim2.new(0, 30, 0, 90) }
+			[1] = { name = "Size1100_1000", value = UDim2.new(0, 66, 0, 60) }
 		}
 	},
-	["size-200-250"] = {
-		properties = { Size = "$Size200_250" },
+	["size-850-2100"] = {
+		properties = { Size = "$Size850_2100" },
 		attributes = {
-			[1] = { name = "Size200_250", value = UDim2.new(0, 12, 0, 15) }
+			[1] = { name = "Size850_2100", value = UDim2.new(0, 51, 0, 126) }
 		}
 	},
-	["size-150-550"] = {
-		properties = { Size = "$Size150_550" },
+	["size-800-2300"] = {
+		properties = { Size = "$Size800_2300" },
 		attributes = {
-			[1] = { name = "Size150_550", value = UDim2.new(0, 9, 0, 33) }
+			[1] = { name = "Size800_2300", value = UDim2.new(0, 48, 0, 138) }
 		}
 	},
-	["size-1100-150"] = {
-		properties = { Size = "$Size1100_150" },
+	["size-1100-450"] = {
+		properties = { Size = "$Size1100_450" },
 		attributes = {
-			[1] = { name = "Size1100_150", value = UDim2.new(0, 66, 0, 9) }
+			[1] = { name = "Size1100_450", value = UDim2.new(0, 66, 0, 27) }
 		}
 	},
 	["size-0-450"] = {
@@ -11422,10 +10872,10 @@
 			[1] = { name = "Size1700_450", value = UDim2.new(0, 102, 0, 27) }
 		}
 	},
-	["size-1100-100"] = {
-		properties = { Size = "$Size1100_100" },
+	["size-300-2100"] = {
+		properties = { Size = "$Size300_2100" },
 		attributes = {
-			[1] = { name = "Size1100_100", value = UDim2.new(0, 66, 0, 6) }
+			[1] = { name = "Size300_2100", value = UDim2.new(0, 18, 0, 126) }
 		}
 	},
 	["size-250-850"] = {
@@ -11460,10 +10910,10 @@
 			}
 		}
 	},
-	["size-1000-2600"] = {
-		properties = { Size = "$Size1000_2600" },
+	["size-900-2900"] = {
+		properties = { Size = "$Size900_2900" },
 		attributes = {
-			[1] = { name = "Size1000_2600", value = UDim2.new(0, 60, 0, 156) }
+			[1] = { name = "Size900_2900", value = UDim2.new(0, 54, 0, 174) }
 		}
 	},
 	["size-150-50"] = {
@@ -11484,16 +10934,16 @@
 			[1] = { name = "Size1400", value = UDim2.new(0, 84, 0, 84) }
 		}
 	},
-	["size-1000-2000"] = {
-		properties = { Size = "$Size1000_2000" },
+	["size-400-full"] = {
+		properties = { Size = "$Size400_Full" },
 		attributes = {
-			[1] = { name = "Size1000_2000", value = UDim2.new(0, 60, 0, 120) }
+			[1] = { name = "Size400_Full", value = UDim2.new(0, 24, 1, 0) }
 		}
 	},
-	["size-150-800"] = {
-		properties = { Size = "$Size150_800" },
+	["size-1100-150"] = {
+		properties = { Size = "$Size1100_150" },
 		attributes = {
-			[1] = { name = "Size150_800", value = UDim2.new(0, 9, 0, 48) }
+			[1] = { name = "Size1100_150", value = UDim2.new(0, 66, 0, 9) }
 		}
 	},
 	["size-3000-450"] = {
@@ -11520,10 +10970,10 @@
 			[1] = { name = "Size300_1400", value = UDim2.new(0, 18, 0, 84) }
 		}
 	},
-	["size-1000-1500"] = {
-		properties = { Size = "$Size1000_1500" },
+	["size-1100"] = {
+		properties = { Size = "$Size1100" },
 		attributes = {
-			[1] = { name = "Size1000_1500", value = UDim2.new(0, 60, 0, 90) }
+			[1] = { name = "Size1100", value = UDim2.new(0, 66, 0, 66) }
 		}
 	},
 	["gutter-medium"] = {
@@ -11549,10 +10999,10 @@
 			[1] = { name = "Size200_2400", value = UDim2.new(0, 12, 0, 144) }
 		}
 	},
-	["size-1000-800"] = {
-		properties = { Size = "$Size1000_800" },
+	["size-250-600"] = {
+		properties = { Size = "$Size250_600" },
 		attributes = {
-			[1] = { name = "Size1000_800", value = UDim2.new(0, 60, 0, 48) }
+			[1] = { name = "Size250_600", value = UDim2.new(0, 15, 0, 36) }
 		}
 	},
 	["size-3000-1500"] = {
@@ -11561,34 +11011,34 @@
 			[1] = { name = "Size3000_1500", value = UDim2.new(0, 180, 0, 90) }
 		}
 	},
-	["size-150-250"] = {
-		properties = { Size = "$Size150_250" },
+	["size-150-1600"] = {
+		properties = { Size = "$Size150_1600" },
 		attributes = {
-			[1] = { name = "Size150_250", value = UDim2.new(0, 9, 0, 15) }
+			[1] = { name = "Size150_1600", value = UDim2.new(0, 9, 0, 96) }
 		}
 	},
-	["size-1000-450"] = {
-		properties = { Size = "$Size1000_450" },
+	["size-1000-2000"] = {
+		properties = { Size = "$Size1000_2000" },
 		attributes = {
-			[1] = { name = "Size1000_450", value = UDim2.new(0, 60, 0, 27) }
+			[1] = { name = "Size1000_2000", value = UDim2.new(0, 60, 0, 120) }
 		}
 	},
-	["size-1000-350"] = {
-		properties = { Size = "$Size1000_350" },
+	["size-1000-1800"] = {
+		properties = { Size = "$Size1000_1800" },
 		attributes = {
-			[1] = { name = "Size1000_350", value = UDim2.new(0, 60, 0, 21) }
+			[1] = { name = "Size1000_1800", value = UDim2.new(0, 60, 0, 108) }
 		}
 	},
-	["size-1000-150"] = {
-		properties = { Size = "$Size1000_150" },
+	["size-1000-1500"] = {
+		properties = { Size = "$Size1000_1500" },
 		attributes = {
-			[1] = { name = "Size1000_150", value = UDim2.new(0, 60, 0, 9) }
+			[1] = { name = "Size1000_1500", value = UDim2.new(0, 60, 0, 90) }
 		}
 	},
-	["size-1000-100"] = {
-		properties = { Size = "$Size1000_100" },
+	["size-350-2600"] = {
+		properties = { Size = "$Size350_2600" },
 		attributes = {
-			[1] = { name = "Size1000_100", value = UDim2.new(0, 60, 0, 6) }
+			[1] = { name = "Size350_2600", value = UDim2.new(0, 21, 0, 156) }
 		}
 	},
 	["size-1600-450"] = {
@@ -11621,10 +11071,10 @@
 			[1] = { name = "Size850_50", value = UDim2.new(0, 51, 0, 3) }
 		}
 	},
-	["size-900-2700"] = {
-		properties = { Size = "$Size900_2700" },
+	["size-1000-450"] = {
+		properties = { Size = "$Size1000_450" },
 		attributes = {
-			[1] = { name = "Size900_2700", value = UDim2.new(0, 54, 0, 162) }
+			[1] = { name = "Size1000_450", value = UDim2.new(0, 60, 0, 27) }
 		}
 	},
 	["size-250-2500"] = {
@@ -11633,10 +11083,10 @@
 			[1] = { name = "Size250_2500", value = UDim2.new(0, 15, 0, 150) }
 		}
 	},
-	["size-900-2300"] = {
-		properties = { Size = "$Size900_2300" },
+	["size-1000-350"] = {
+		properties = { Size = "$Size1000_350" },
 		attributes = {
-			[1] = { name = "Size900_2300", value = UDim2.new(0, 54, 0, 138) }
+			[1] = { name = "Size1000_350", value = UDim2.new(0, 60, 0, 21) }
 		}
 	},
 	["flex-none"] = {
@@ -11658,10 +11108,10 @@
 			[1] = { name = "Size200_100", value = UDim2.new(0, 12, 0, 6) }
 		}
 	},
-	["size-900-2200"] = {
-		properties = { Size = "$Size900_2200" },
+	["size-1000-50"] = {
+		properties = { Size = "$Size1000_50" },
 		attributes = {
-			[1] = { name = "Size900_2200", value = UDim2.new(0, 54, 0, 132) }
+			[1] = { name = "Size1000_50", value = UDim2.new(0, 60, 0, 3) }
 		}
 	},
 	["size-2700-600"] = {
@@ -11676,10 +11126,10 @@
 			[1] = { name = "Size100_2000", value = UDim2.new(0, 6, 0, 120) }
 		}
 	},
-	["size-100-2700"] = {
-		properties = { Size = "$Size100_2700" },
+	["size-700-200"] = {
+		properties = { Size = "$Size700_200" },
 		attributes = {
-			[1] = { name = "Size100_2700", value = UDim2.new(0, 6, 0, 162) }
+			[1] = { name = "Size700_200", value = UDim2.new(0, 42, 0, 12) }
 		}
 	},
 	["size-2600-1600"] = {
@@ -11688,10 +11138,10 @@
 			[1] = { name = "Size2600_1600", value = UDim2.new(0, 156, 0, 96) }
 		}
 	},
-	["size-900-700"] = {
-		properties = { Size = "$Size900_700" },
+	["size-900-2700"] = {
+		properties = { Size = "$Size900_2700" },
 		attributes = {
-			[1] = { name = "Size900_700", value = UDim2.new(0, 54, 0, 42) }
+			[1] = { name = "Size900_2700", value = UDim2.new(0, 54, 0, 162) }
 		}
 	},
 	["radius-bottom-left-medium"] = {
@@ -11723,10 +11173,26 @@
 		pseudo = "UIListLayout",
 		properties = { VerticalAlignment = Enum.VerticalAlignment.Bottom }
 	},
-	["size-900-350"] = {
-		properties = { Size = "$Size900_350" },
-		attributes = {
-			[1] = { name = "Size900_350", value = UDim2.new(0, 54, 0, 21) }
+	["radius-top-medium"] = {
+		attributes = { [1] = { name = "RadiusMedium", value = UDim.new(0, 12) } },
+		properties = {
+			TopRightRadius = "$RadiusMedium",
+			TopLeftRadius = "$RadiusMedium"
+		},
+		pseudo = "UICorner",
+		priority = 2,
+		children = {
+			[1] = {
+				pseudo = "UICorner",
+				priority = 0,
+				properties = {
+					TopRightRadius = UDim.new(0, 0),
+					TopLeftRadius = UDim.new(0, 0),
+					BottomRightRadius = UDim.new(0, 0),
+					BottomLeftRadius = UDim.new(0, 0)
+				},
+				tag = "radius-top-medium"
+			}
 		}
 	},
 	["size-250-1700"] = {
@@ -11763,10 +11229,10 @@
 			[1] = { name = "Size2100_100", value = UDim2.new(0, 126, 0, 6) }
 		}
 	},
-	["size-450-50"] = {
-		properties = { Size = "$Size450_50" },
+	["size-900-2300"] = {
+		properties = { Size = "$Size900_2300" },
 		attributes = {
-			[1] = { name = "Size450_50", value = UDim2.new(0, 27, 0, 3) }
+			[1] = { name = "Size900_2300", value = UDim2.new(0, 54, 0, 138) }
 		}
 	},
 	["size-850-550"] = {
@@ -11775,23 +11241,10 @@
 			[1] = { name = "Size850_550", value = UDim2.new(0, 51, 0, 33) }
 		}
 	},
-	["radius-bottom-right-xsmall"] = {
-		attributes = { [1] = { name = "RadiusXsmall", value = UDim.new(0, 3) } },
-		properties = { BottomRightRadius = "$RadiusXsmall" },
-		pseudo = "UICorner",
-		priority = 3,
-		children = {
-			[1] = {
-				pseudo = "UICorner",
-				priority = 0,
-				properties = {
-					TopRightRadius = UDim.new(0, 0),
-					TopLeftRadius = UDim.new(0, 0),
-					BottomRightRadius = UDim.new(0, 0),
-					BottomLeftRadius = UDim.new(0, 0)
-				},
-				tag = "radius-bottom-right-xsmall"
-			}
+	["size-50-1000"] = {
+		properties = { Size = "$Size50_1000" },
+		attributes = {
+			[1] = { name = "Size50_1000", value = UDim2.new(0, 3, 0, 60) }
 		}
 	},
 	["size-1800-1300"] = {
@@ -11809,29 +11262,16 @@
 			}
 		}
 	},
-	["size-850-1100"] = {
-		properties = { Size = "$Size850_1100" },
+	["size-900-1600"] = {
+		properties = { Size = "$Size900_1600" },
 		attributes = {
-			[1] = { name = "Size850_1100", value = UDim2.new(0, 51, 0, 66) }
+			[1] = { name = "Size900_1600", value = UDim2.new(0, 54, 0, 96) }
 		}
 	},
-	["radius-top-right-large"] = {
-		attributes = { [1] = { name = "RadiusLarge", value = UDim.new(0, 24) } },
-		properties = { TopRightRadius = "$RadiusLarge" },
-		pseudo = "UICorner",
-		priority = 3,
-		children = {
-			[1] = {
-				pseudo = "UICorner",
-				priority = 0,
-				properties = {
-					TopRightRadius = UDim.new(0, 0),
-					TopLeftRadius = UDim.new(0, 0),
-					BottomRightRadius = UDim.new(0, 0),
-					BottomLeftRadius = UDim.new(0, 0)
-				},
-				tag = "radius-top-right-large"
-			}
+	["size-550-1700"] = {
+		properties = { Size = "$Size550_1700" },
+		attributes = {
+			[1] = { name = "Size550_1700", value = UDim2.new(0, 33, 0, 102) }
 		}
 	},
 	["size-100-2900"] = {
@@ -11869,22 +11309,22 @@
 			[1] = { name = "Size2000_800", value = UDim2.new(0, 120, 0, 48) }
 		}
 	},
-	["size-200-400"] = {
-		properties = { Size = "$Size200_400" },
+	["size-800-450"] = {
+		properties = { Size = "$Size800_450" },
 		attributes = {
-			[1] = { name = "Size200_400", value = UDim2.new(0, 12, 0, 24) }
+			[1] = { name = "Size800_450", value = UDim2.new(0, 48, 0, 27) }
 		}
 	},
-	["size-850-800"] = {
-		properties = { Size = "$Size850_800" },
+	["size-850-150"] = {
+		properties = { Size = "$Size850_150" },
 		attributes = {
-			[1] = { name = "Size850_800", value = UDim2.new(0, 51, 0, 48) }
+			[1] = { name = "Size850_150", value = UDim2.new(0, 51, 0, 9) }
 		}
 	},
-	["size-850-700"] = {
-		properties = { Size = "$Size850_700" },
+	["size-850-2600"] = {
+		properties = { Size = "$Size850_2600" },
 		attributes = {
-			[1] = { name = "Size850_700", value = UDim2.new(0, 51, 0, 42) }
+			[1] = { name = "Size850_2600", value = UDim2.new(0, 51, 0, 156) }
 		}
 	},
 	["size-full-1300"] = {
@@ -11899,28 +11339,41 @@
 			[1] = { name = "Size450_550", value = UDim2.new(0, 27, 0, 33) }
 		}
 	},
-	["size-850-500"] = {
-		properties = { Size = "$Size850_500" },
+	["size-full-1600"] = {
+		properties = { Size = "$SizeFull_1600" },
 		attributes = {
-			[1] = { name = "Size850_500", value = UDim2.new(0, 51, 0, 30) }
+			[1] = { name = "SizeFull_1600", value = UDim2.new(1, 0, 0, 96) }
 		}
 	},
-	["size-600-2800"] = {
-		properties = { Size = "$Size600_2800" },
+	["size-850-1500"] = {
+		properties = { Size = "$Size850_1500" },
 		attributes = {
-			[1] = { name = "Size600_2800", value = UDim2.new(0, 36, 0, 168) }
+			[1] = { name = "Size850_1500", value = UDim2.new(0, 51, 0, 90) }
 		}
 	},
-	["size-850-150"] = {
-		properties = { Size = "$Size850_150" },
+	["size-150-100"] = {
+		properties = { Size = "$Size150_100" },
 		attributes = {
-			[1] = { name = "Size850_150", value = UDim2.new(0, 51, 0, 9) }
+			[1] = { name = "Size150_100", value = UDim2.new(0, 9, 0, 6) }
 		}
 	},
-	["size-200-2100"] = {
-		properties = { Size = "$Size200_2100" },
-		attributes = {
-			[1] = { name = "Size200_2100", value = UDim2.new(0, 12, 0, 126) }
+	["radius-top-right-large"] = {
+		attributes = { [1] = { name = "RadiusLarge", value = UDim.new(0, 24) } },
+		properties = { TopRightRadius = "$RadiusLarge" },
+		pseudo = "UICorner",
+		priority = 3,
+		children = {
+			[1] = {
+				pseudo = "UICorner",
+				priority = 0,
+				properties = {
+					TopRightRadius = UDim.new(0, 0),
+					TopLeftRadius = UDim.new(0, 0),
+					BottomRightRadius = UDim.new(0, 0),
+					BottomLeftRadius = UDim.new(0, 0)
+				},
+				tag = "radius-top-right-large"
+			}
 		}
 	},
 	["size-150-2300"] = {
@@ -11929,10 +11382,10 @@
 			[1] = { name = "Size150_2300", value = UDim2.new(0, 9, 0, 138) }
 		}
 	},
-	["size-100-1700"] = {
-		properties = { Size = "$Size100_1700" },
+	["size-50-1100"] = {
+		properties = { Size = "$Size50_1100" },
 		attributes = {
-			[1] = { name = "Size100_1700", value = UDim2.new(0, 6, 0, 102) }
+			[1] = { name = "Size50_1100", value = UDim2.new(0, 3, 0, 66) }
 		}
 	},
 	["radius-bottom-small"] = {
@@ -12018,10 +11471,10 @@
 			[1] = { name = "Size0_50", value = UDim2.new(0, 0, 0, 3) }
 		}
 	},
-	["size-800-2300"] = {
-		properties = { Size = "$Size800_2300" },
+	["size-400-3000"] = {
+		properties = { Size = "$Size400_3000" },
 		attributes = {
-			[1] = { name = "Size800_2300", value = UDim2.new(0, 48, 0, 138) }
+			[1] = { name = "Size400_3000", value = UDim2.new(0, 24, 0, 180) }
 		}
 	},
 	["size-1000-1200"] = {
@@ -12030,10 +11483,10 @@
 			[1] = { name = "Size1000_1200", value = UDim2.new(0, 60, 0, 72) }
 		}
 	},
-	["size-200-1600"] = {
-		properties = { Size = "$Size200_1600" },
+	["size-800-2900"] = {
+		properties = { Size = "$Size800_2900" },
 		attributes = {
-			[1] = { name = "Size200_1600", value = UDim2.new(0, 12, 0, 96) }
+			[1] = { name = "Size800_2900", value = UDim2.new(0, 48, 0, 174) }
 		}
 	},
 	["size-1100-1500"] = {
@@ -12042,10 +11495,10 @@
 			[1] = { name = "Size1100_1500", value = UDim2.new(0, 66, 0, 90) }
 		}
 	},
-	["size-700-0"] = {
-		properties = { Size = "$Size700_0" },
+	["size-350-900"] = {
+		properties = { Size = "$Size350_900" },
 		attributes = {
-			[1] = { name = "Size700_0", value = UDim2.new(0, 42, 0, 0) }
+			[1] = { name = "Size350_900", value = UDim2.new(0, 21, 0, 54) }
 		}
 	},
 	["size-150-2000"] = {
@@ -12089,10 +11542,10 @@
 		},
 		attributes = { [1] = { name = "MarginNone", value = UDim.new(0, 0) } }
 	},
-	["size-100-300"] = {
-		properties = { Size = "$Size100_300" },
+	["size-350-50"] = {
+		properties = { Size = "$Size350_50" },
 		attributes = {
-			[1] = { name = "Size100_300", value = UDim2.new(0, 6, 0, 18) }
+			[1] = { name = "Size350_50", value = UDim2.new(0, 21, 0, 3) }
 		}
 	},
 	["size-2500-350"] = {
@@ -12101,16 +11554,16 @@
 			[1] = { name = "Size2500_350", value = UDim2.new(0, 150, 0, 21) }
 		}
 	},
-	["size-400-600"] = {
-		properties = { Size = "$Size400_600" },
+	["size-100-300"] = {
+		properties = { Size = "$Size100_300" },
 		attributes = {
-			[1] = { name = "Size400_600", value = UDim2.new(0, 24, 0, 36) }
+			[1] = { name = "Size100_300", value = UDim2.new(0, 6, 0, 18) }
 		}
 	},
-	["size-700-1700"] = {
-		properties = { Size = "$Size700_1700" },
+	["size-500-2300"] = {
+		properties = { Size = "$Size500_2300" },
 		attributes = {
-			[1] = { name = "Size700_1700", value = UDim2.new(0, 42, 0, 102) }
+			[1] = { name = "Size500_2300", value = UDim2.new(0, 30, 0, 138) }
 		}
 	},
 	["size-100-550"] = {
@@ -12119,10 +11572,10 @@
 			[1] = { name = "Size100_550", value = UDim2.new(0, 6, 0, 33) }
 		}
 	},
-	["size-800-450"] = {
-		properties = { Size = "$Size800_450" },
+	["size-800-850"] = {
+		properties = { Size = "$Size800_850" },
 		attributes = {
-			[1] = { name = "Size800_450", value = UDim2.new(0, 48, 0, 27) }
+			[1] = { name = "Size800_850", value = UDim2.new(0, 48, 0, 51) }
 		}
 	},
 	["size-2300-100"] = {
@@ -12155,10 +11608,10 @@
 			[1] = { name = "Size2800_1600", value = UDim2.new(0, 168, 0, 96) }
 		}
 	},
-	["size-550-150"] = {
-		properties = { Size = "$Size550_150" },
+	["size-600-2600"] = {
+		properties = { Size = "$Size600_2600" },
 		attributes = {
-			[1] = { name = "Size550_150", value = UDim2.new(0, 33, 0, 9) }
+			[1] = { name = "Size600_2600", value = UDim2.new(0, 36, 0, 156) }
 		}
 	},
 	["size-full-1100"] = {
@@ -12173,10 +11626,10 @@
 			[1] = { name = "Size200_350", value = UDim2.new(0, 12, 0, 21) }
 		}
 	},
-	["size-700-2200"] = {
-		properties = { Size = "$Size700_2200" },
+	["size-800-150"] = {
+		properties = { Size = "$Size800_150" },
 		attributes = {
-			[1] = { name = "Size700_2200", value = UDim2.new(0, 42, 0, 132) }
+			[1] = { name = "Size800_150", value = UDim2.new(0, 48, 0, 9) }
 		}
 	},
 	["size-1900-500"] = {
@@ -12225,15 +11678,10 @@
 			[1] = { name = "Size2100_800", value = UDim2.new(0, 126, 0, 48) }
 		}
 	},
-	["radius-large"] = {
-		attributes = { [1] = { name = "RadiusLarge", value = UDim.new(0, 24) } },
-		pseudo = "UICorner",
-		priority = 1,
-		properties = {
-			TopRightRadius = "$RadiusLarge",
-			TopLeftRadius = "$RadiusLarge",
-			BottomRightRadius = "$RadiusLarge",
-			BottomLeftRadius = "$RadiusLarge"
+	["size-100-100"] = {
+		properties = { Size = "$Size100_100" },
+		attributes = {
+			[1] = { name = "Size100_100", value = UDim2.new(0, 6, 0, 6) }
 		}
 	},
 	["size-full-550"] = {
@@ -12266,10 +11714,10 @@
 			[1] = { name = "Size350_1300", value = UDim2.new(0, 21, 0, 78) }
 		}
 	},
-	["size-full-600"] = {
-		properties = { Size = "$SizeFull_600" },
+	["size-700-500"] = {
+		properties = { Size = "$Size700_500" },
 		attributes = {
-			[1] = { name = "SizeFull_600", value = UDim2.new(1, 0, 0, 36) }
+			[1] = { name = "Size700_500", value = UDim2.new(0, 42, 0, 30) }
 		}
 	},
 	["size-350-1800"] = {
@@ -12285,16 +11733,21 @@
 			[1] = { name = "GutterXxlarge", value = UDim.new(0, 36) }
 		}
 	},
-	["size-600-2300"] = {
-		properties = { Size = "$Size600_2300" },
-		attributes = {
-			[1] = { name = "Size600_2300", value = UDim2.new(0, 36, 0, 138) }
+	["radius-large"] = {
+		attributes = { [1] = { name = "RadiusLarge", value = UDim.new(0, 24) } },
+		pseudo = "UICorner",
+		priority = 1,
+		properties = {
+			TopRightRadius = "$RadiusLarge",
+			TopLeftRadius = "$RadiusLarge",
+			BottomRightRadius = "$RadiusLarge",
+			BottomLeftRadius = "$RadiusLarge"
 		}
 	},
-	["size-150-500"] = {
-		properties = { Size = "$Size150_500" },
+	["size-600-2700"] = {
+		properties = { Size = "$Size600_2700" },
 		attributes = {
-			[1] = { name = "Size150_500", value = UDim2.new(0, 9, 0, 30) }
+			[1] = { name = "Size600_2700", value = UDim2.new(0, 36, 0, 162) }
 		}
 	},
 	["size-150-0"] = {
@@ -12318,35 +11771,35 @@
 			}
 		}
 	},
+	["size-150-500"] = {
+		properties = { Size = "$Size150_500" },
+		attributes = {
+			[1] = { name = "Size150_500", value = UDim2.new(0, 9, 0, 30) }
+		}
+	},
+	["size-600-2100"] = {
+		properties = { Size = "$Size600_2100" },
+		attributes = {
+			[1] = { name = "Size600_2100", value = UDim2.new(0, 36, 0, 126) }
+		}
+	},
+	wrap = { pseudo = "UIListLayout", properties = { Wraps = true } },
+	["size-full-2100"] = {
+		properties = { Size = "$SizeFull_2100" },
+		attributes = {
+			[1] = { name = "SizeFull_2100", value = UDim2.new(1, 0, 0, 126) }
+		}
+	},
+	["size-600-1500"] = {
+		properties = { Size = "$Size600_1500" },
+		attributes = {
+			[1] = { name = "Size600_1500", value = UDim2.new(0, 36, 0, 90) }
+		}
+	},
 	["size-600-900"] = {
 		properties = { Size = "$Size600_900" },
 		attributes = {
 			[1] = { name = "Size600_900", value = UDim2.new(0, 36, 0, 54) }
-		}
-	},
-	["size-600-500"] = {
-		properties = { Size = "$Size600_500" },
-		attributes = {
-			[1] = { name = "Size600_500", value = UDim2.new(0, 36, 0, 30) }
-		}
-	},
-	wrap = { pseudo = "UIListLayout", properties = { Wraps = true } },
-	["size-600-50"] = {
-		properties = { Size = "$Size600_50" },
-		attributes = {
-			[1] = { name = "Size600_50", value = UDim2.new(0, 36, 0, 3) }
-		}
-	},
-	["size-250-2900"] = {
-		properties = { Size = "$Size250_2900" },
-		attributes = {
-			[1] = { name = "Size250_2900", value = UDim2.new(0, 15, 0, 174) }
-		}
-	},
-	["size-550-2800"] = {
-		properties = { Size = "$Size550_2800" },
-		attributes = {
-			[1] = { name = "Size550_2800", value = UDim2.new(0, 33, 0, 168) }
 		}
 	},
 	["size-1600-1000"] = {
@@ -12367,10 +11820,10 @@
 			[1] = { name = "Size350_Full", value = UDim2.new(0, 21, 1, 0) }
 		}
 	},
-	["size-550-1300"] = {
-		properties = { Size = "$Size550_1300" },
+	["size-550-2800"] = {
+		properties = { Size = "$Size550_2800" },
 		attributes = {
-			[1] = { name = "Size550_1300", value = UDim2.new(0, 33, 0, 78) }
+			[1] = { name = "Size550_2800", value = UDim2.new(0, 33, 0, 168) }
 		}
 	},
 	["size-1700-500"] = {
@@ -12397,10 +11850,10 @@
 			[1] = { name = "Size350_500", value = UDim2.new(0, 21, 0, 30) }
 		}
 	},
-	["size-150-1600"] = {
-		properties = { Size = "$Size150_1600" },
+	["size-0-2600"] = {
+		properties = { Size = "$Size0_2600" },
 		attributes = {
-			[1] = { name = "Size150_1600", value = UDim2.new(0, 9, 0, 96) }
+			[1] = { name = "Size0_2600", value = UDim2.new(0, 0, 0, 156) }
 		}
 	},
 	["size-1600-850"] = {
@@ -12421,10 +11874,10 @@
 			[1] = { name = "Size450_1100", value = UDim2.new(0, 27, 0, 66) }
 		}
 	},
-	["size-500-200"] = {
-		properties = { Size = "$Size500_200" },
+	["size-500-1900"] = {
+		properties = { Size = "$Size500_1900" },
 		attributes = {
-			[1] = { name = "Size500_200", value = UDim2.new(0, 30, 0, 12) }
+			[1] = { name = "Size500_1900", value = UDim2.new(0, 30, 0, 114) }
 		}
 	},
 	["size-900-2800"] = {
@@ -12433,10 +11886,10 @@
 			[1] = { name = "Size900_2800", value = UDim2.new(0, 54, 0, 168) }
 		}
 	},
-	["size-500-full"] = {
-		properties = { Size = "$Size500_Full" },
+	["size-200-250"] = {
+		properties = { Size = "$Size200_250" },
 		attributes = {
-			[1] = { name = "Size500_Full", value = UDim2.new(0, 30, 1, 0) }
+			[1] = { name = "Size200_250", value = UDim2.new(0, 12, 0, 15) }
 		}
 	},
 	["size-2100-500"] = {
@@ -12457,10 +11910,10 @@
 			[1] = { name = "Size0_2200", value = UDim2.new(0, 0, 0, 132) }
 		}
 	},
-	["size-200-1100"] = {
-		properties = { Size = "$Size200_1100" },
+	["size-450-2600"] = {
+		properties = { Size = "$Size450_2600" },
 		attributes = {
-			[1] = { name = "Size200_1100", value = UDim2.new(0, 12, 0, 66) }
+			[1] = { name = "Size450_2600", value = UDim2.new(0, 27, 0, 156) }
 		}
 	},
 	["size-300-600"] = {
@@ -12475,16 +11928,34 @@
 			[1] = { name = "Size700_2300", value = UDim2.new(0, 42, 0, 138) }
 		}
 	},
-	["size-100-100"] = {
-		properties = { Size = "$Size100_100" },
+	["radius-top-circle"] = {
 		attributes = {
-			[1] = { name = "Size100_100", value = UDim2.new(0, 6, 0, 6) }
+			[1] = { name = "RadiusCircle", value = UDim.new(0, 14998) }
+		},
+		properties = {
+			TopRightRadius = "$RadiusCircle",
+			TopLeftRadius = "$RadiusCircle"
+		},
+		pseudo = "UICorner",
+		priority = 2,
+		children = {
+			[1] = {
+				pseudo = "UICorner",
+				priority = 0,
+				properties = {
+					TopRightRadius = UDim.new(0, 0),
+					TopLeftRadius = UDim.new(0, 0),
+					BottomRightRadius = UDim.new(0, 0),
+					BottomLeftRadius = UDim.new(0, 0)
+				},
+				tag = "radius-top-circle"
+			}
 		}
 	},
-	["size-0-2300"] = {
-		properties = { Size = "$Size0_2300" },
+	["size-200-1100"] = {
+		properties = { Size = "$Size200_1100" },
 		attributes = {
-			[1] = { name = "Size0_2300", value = UDim2.new(0, 0, 0, 138) }
+			[1] = { name = "Size200_1100", value = UDim2.new(0, 12, 0, 66) }
 		}
 	},
 	["size-1300-2900"] = {
@@ -12522,10 +11993,10 @@
 			[1] = { name = "Size800_1000", value = UDim2.new(0, 48, 0, 60) }
 		}
 	},
-	["size-400-500"] = {
-		properties = { Size = "$Size400_500" },
+	["size-400-900"] = {
+		properties = { Size = "$Size400_900" },
 		attributes = {
-			[1] = { name = "Size400_500", value = UDim2.new(0, 24, 0, 30) }
+			[1] = { name = "Size400_900", value = UDim2.new(0, 24, 0, 54) }
 		}
 	},
 	["size-2200-1100"] = {
@@ -12534,10 +12005,10 @@
 			[1] = { name = "Size2200_1100", value = UDim2.new(0, 132, 0, 66) }
 		}
 	},
-	["size-150-450"] = {
-		properties = { Size = "$Size150_450" },
+	["size-400-350"] = {
+		properties = { Size = "$Size400_350" },
 		attributes = {
-			[1] = { name = "Size150_450", value = UDim2.new(0, 9, 0, 27) }
+			[1] = { name = "Size400_350", value = UDim2.new(0, 24, 0, 21) }
 		}
 	},
 	["radius-bottom-right-medium"] = {
@@ -12559,22 +12030,22 @@
 			}
 		}
 	},
-	["size-50-1100"] = {
-		properties = { Size = "$Size50_1100" },
+	["size-400-300"] = {
+		properties = { Size = "$Size400_300" },
 		attributes = {
-			[1] = { name = "Size50_1100", value = UDim2.new(0, 3, 0, 66) }
+			[1] = { name = "Size400_300", value = UDim2.new(0, 24, 0, 18) }
+		}
+	},
+	["size-150-450"] = {
+		properties = { Size = "$Size150_450" },
+		attributes = {
+			[1] = { name = "Size150_450", value = UDim2.new(0, 9, 0, 27) }
 		}
 	},
 	["size-50-50"] = {
 		properties = { Size = "$Size50_50" },
 		attributes = {
 			[1] = { name = "Size50_50", value = UDim2.new(0, 3, 0, 3) }
-		}
-	},
-	["size-0-1300"] = {
-		properties = { Size = "$Size0_1300" },
-		attributes = {
-			[1] = { name = "Size0_1300", value = UDim2.new(0, 0, 0, 78) }
 		}
 	},
 	["size-300-1700"] = {

@@ -2,7 +2,6 @@
 local parent = foundation.Parent
 local dashModule = require(parent.Dash)
 local reactModule = require(parent.React)
-local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Components.Types)
 local blendColorsModule = require(foundation.Utility.blendColors)
 local getOriginalBackgroundStyleModule = require(script.Parent.getOriginalBackgroundStyle)
@@ -20,7 +19,7 @@ local t = { component = "ImageButton", isDisabled = false }
 local color = Color3.fromRGB(163, 162, 165)
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), useTokensModule (ref), useCursorModule (ref), controlStateModule (ref), color (ref), getOriginalBackgroundStyleModule (ref), stateLayerAffordanceModule (ref), getStateLayerStyleModule (ref), blendColorsModule (ref), joinBindablesModule (ref), useGuiControlStateModule (ref), mapBindableModule (ref), flagsModule (ref), dashModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), useTokensModule (ref), useCursorModule (ref), controlStateModule (ref), color (ref), getOriginalBackgroundStyleModule (ref), stateLayerAffordanceModule (ref), getStateLayerStyleModule (ref), blendColorsModule (ref), joinBindablesModule (ref), useGuiControlStateModule (ref), mapBindableModule (ref), dashModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = reactModule.useRef(nil)
 	local var3 = useTokensModule()
@@ -102,8 +101,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		Active = not var1.isDisabled,
 		Interactable = not var1.isDisabled,
 		[reactModule.Event.Activated] = if not var1.isDisabled then var1.onActivated else nil,
-		[reactModule.Event.SecondaryActivated] = if flagsModule.FoundationInteractableSecondaryActivated and not var1.isDisabled then var1.onSecondaryActivated else nil,
-		[reactModule.Event.MouseButton2Click] = if flagsModule.FoundationInteractableSecondaryActivated or var1.isDisabled then nil else var1.onSecondaryActivated,
+		[reactModule.Event.SecondaryActivated] = if not var1.isDisabled then var1.onSecondaryActivated else nil,
 		ref = var12,
 		SelectionImageObject = var1.SelectionImageObject or var4
 	})

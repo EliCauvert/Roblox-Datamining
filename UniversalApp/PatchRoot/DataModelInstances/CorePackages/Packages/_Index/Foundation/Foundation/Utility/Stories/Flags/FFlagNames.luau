@@ -1,8 +1,6 @@
 ﻿return {
-	FoundationAvatarBeta = "FoundationAvatarBeta3",
 	FoundationBadgeBetaUpdate = "FoundationBadgeBetaUpdate3",
 	FoundationDisableTokenScaling = "FoundationDisableTokenScaling2",
-	FoundationFixTabsFitBorderWidth = "FoundationFixTabsFitBorderWidth2",
 	FoundationInternalInputBeta = "FoundationInternalInputBeta2",
 	FoundationNumberInputScrubCallbackProps = "FoundationNumberInputScrubCallbackProps2",
 	FoundationPopoverPluginOverlayMeasurement = "FoundationPopoverPluginOverlayMeasurement2",

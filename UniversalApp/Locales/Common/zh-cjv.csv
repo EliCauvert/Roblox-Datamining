@@ -4007,6 +4007,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,建议评级：16 岁
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,游戏内购买（包括随机道具）
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,用户互动
 Feature.Landing.Label.InvitedBy,由“{name}”邀请
+Feature.Landing.Label.PoweredBy,技术支持：
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,开启
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,允许拥有你手机号码的人在 Roblox 上将你添加为好友

@@ -4,7 +4,6 @@ local reactModule = require(parent.React)
 local dashModule = require(parent.Dash)
 local flagsModule = require(foundation.Utility.Flags)
 local imageModule = require(foundation.Components.Image)
-local indicatorModule = require(script.Parent.Indicator)
 local statusIndicatorModule = require(foundation.Components.StatusIndicator)
 local _ = require(foundation.Components.Types)
 local viewModule = require(foundation.Components.View)
@@ -25,7 +24,7 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useAvatarVariantsModule (ref), getAvatarSizeModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), mapBindableModule (ref), getRbxThumbModule (ref), thumbnailTypeModule (ref), thumbnailSizeModule (ref), flagsModule (ref), statusIndicatorModule (ref), dashModule (ref), indicatorModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useAvatarVariantsModule (ref), getAvatarSizeModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), mapBindableModule (ref), getRbxThumbModule (ref), thumbnailTypeModule (ref), thumbnailSizeModule (ref), flagsModule (ref), statusIndicatorModule (ref), dashModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useTokensModule()
 	local var3 = usePresentationContext()
@@ -48,7 +47,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			backgroundStyle = var1.backgroundStyle,
 			testId = `{var1.testId}--image`
 		}),
-		Indicator = if flagsModule.FoundationAvatarBeta then if var4.statusIndicator.isVisible then if flagsModule.FoundationStatusIndicatorMask then reactModule.createElement(statusIndicatorModule, {
+		Indicator = if var4.statusIndicator.isVisible then if flagsModule.FoundationStatusIndicatorMask then reactModule.createElement(statusIndicatorModule, {
 			testId = `{var1.testId}--status-indicator`,
 			variant = var4.statusIndicator.variant,
 			shape = var4.statusIndicator.shape,
@@ -62,6 +61,6 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			variant = var4.statusIndicator.variant,
 			shape = var4.statusIndicator.shape,
 			size = var4.statusIndicator.size
-		})) else nil elseif var4.indicator.isVisible then reactModule.createElement(viewModule, dashModule.join(var4.indicatorBackplate, { testId = `{var1.testId}--indicator` }), reactModule.createElement(indicatorModule, var21.indicator)) else nil
+		})) else nil
 	})
 end))

@@ -4008,6 +4008,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,CLASIFICACIÓN: 16 AÑ
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,Compras en el juego (incluye objetos aleatorios)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Interacción entre usuarios
 Feature.Landing.Label.InvitedBy,Invitatión enviada por {name}
+Feature.Landing.Label.PoweredBy,Desarrollado por
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Activar
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Ayuda a las personas que tienen tu número de teléfono a agregarte como amistad en Roblox.

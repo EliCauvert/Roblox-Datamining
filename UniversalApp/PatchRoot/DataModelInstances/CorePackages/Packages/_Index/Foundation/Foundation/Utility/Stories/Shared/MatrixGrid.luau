@@ -55,6 +55,36 @@ local function renderCells(p1, p2, p3)
 	return t
 end
 
+local function renderHeaderRow(p4, p5, p6, p7, p8, p9, p10)
+	-- upvalues: dashModule (ref), reactModule (ref), textModule (ref), viewModule (ref)
+	local var2 = dashModule.map(p4.columnHeaders, function(p11, p12)
+		-- upvalues: p4 (ref), reactModule (copy), textModule (copy), p5 (ref)
+		local var3 = if p4.cellColumnWidths then p4.cellColumnWidths[p12] else p4.cellColumnWidth
+		
+		return reactModule.createElement(textModule, {
+			Text = p11,
+			tag = `auto-xy text-caption-small content-muted {p5}`,
+			Size = if var3 then UDim2.fromOffset(var3, 0) else nil,
+			LayoutOrder = p12
+		})
+	end)
+	
+	return if p7 then reactModule.createElement(viewModule, { tag = `padding-y-small {p8}`, LayoutOrder = p10 }, {
+		Corner = reactModule.createElement(viewModule, {
+			tag = "col auto-y",
+			LayoutOrder = 1,
+			Size = UDim2.fromOffset(p6, 0)
+		}, {
+			Content = if p4.labelColumnHeader ~= nil then nil else reactModule.createElement(textModule, {
+				Text = p4.labelColumnHeader,
+				tag = `auto-xy text-caption-small content-muted {p5}`,
+				Size = UDim2.fromOffset(p6, 0)
+			})
+		}),
+		Cells = reactModule.createElement(viewModule, { LayoutOrder = 2, tag = p9 }, var2)
+	}) else reactModule.createElement(viewModule, { tag = `padding-y-small {p8}`, LayoutOrder = p10 }, var2)
+end
+
 local function rowView(p4)
 	-- upvalues: reactModule (ref), viewModule (ref)
 	return reactModule.createElement(viewModule, {
@@ -71,7 +101,7 @@ end
 
 return {
 	MatrixGrid = function(p4)
-		-- upvalues: t (ref), t_1 (ref), t_2 (ref), dashModule (ref), reactModule (ref), textModule (ref), viewModule (ref), renderCells (ref), rowView (ref)
+		-- upvalues: t (ref), t_1 (ref), t_2 (ref), renderHeaderRow (ref), reactModule (ref), viewModule (ref), renderCells (ref), rowView (ref)
 		local var2 = p4.showLabelColumn == nil or p4.showLabelColumn
 		local var3 = p4.showHeader == nil or p4.showHeader
 		local labelColumnWidth = p4.labelColumnWidth or 80
@@ -88,29 +118,7 @@ return {
 		local t_3 = {}
 		
 		if var3 then
-			local var10 = dashModule.map(p4.columnHeaders, function(p5, p6)
-				-- upvalues: p4 (ref), reactModule (copy), textModule (copy), var4 (ref)
-				local var11 = if p4.cellColumnWidths then p4.cellColumnWidths[p6] else p4.cellColumnWidth
-				
-				return reactModule.createElement(textModule, {
-					Text = p5,
-					tag = `auto-xy text-caption-small content-muted {var4}`,
-					Size = if var11 then UDim2.fromOffset(var11, 0) else nil,
-					LayoutOrder = p6
-				})
-			end)
-			
-			if var2 then
-				t_3.HeaderRow = reactModule.createElement(viewModule, { tag = `padding-y-small {var7}`, LayoutOrder = var9 }, {
-					Corner = reactModule.createElement(viewModule, {
-						LayoutOrder = 1,
-						Size = UDim2.fromOffset(labelColumnWidth, 0)
-					}),
-					Cells = reactModule.createElement(viewModule, { LayoutOrder = 2, tag = var8 }, var10)
-				})
-			else
-				t_3.HeaderRow = reactModule.createElement(viewModule, { tag = `padding-y-small {var7}`, LayoutOrder = var9 }, var10)
-			end
+			t_3.HeaderRow = renderHeaderRow(p4, var4, labelColumnWidth, var2, var7, var8, var9)
 			var9 += 1
 		end
 		for i, v in p4.rows do

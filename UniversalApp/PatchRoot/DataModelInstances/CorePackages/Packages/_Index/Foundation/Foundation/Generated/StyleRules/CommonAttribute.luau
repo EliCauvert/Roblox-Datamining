@@ -64,7 +64,10 @@
 		pseudo = "UIFlexItem",
 		properties = { ItemLineAlignment = Enum.ItemLineAlignment.End }
 	},
-	["anchor-bottom-right"] = { properties = { AnchorPoint = Vector2.new(1, 1) } },
+	grow = {
+		pseudo = "UIFlexItem",
+		properties = { FlexMode = Enum.UIFlexMode.Grow }
+	},
 	["shrink-2"] = {
 		pseudo = "UIFlexItem",
 		properties = { ShrinkRatio = 2, FlexMode = Enum.UIFlexMode.Custom }
@@ -72,12 +75,9 @@
 	["no-clip"] = { properties = { ClipsDescendants = false } },
 	["auto-none"] = { properties = { AutomaticSize = Enum.AutomaticSize.None } },
 	["anchor-bottom-left"] = { properties = { AnchorPoint = Vector2.new(0, 1) } },
-	["text-defaults"] = {
-		properties = { Font = "$FontBodyLarge" },
-		priority = -1,
-		attributes = {
-			[1] = { name = "FontBodyLarge", value = Enum.Font.BuilderSans }
-		}
+	fill = {
+		pseudo = "UIFlexItem",
+		properties = { FlexMode = Enum.UIFlexMode.Fill }
 	},
 	["text-wrap"] = { properties = { TextWrapped = true } },
 	["position-center-center"] = { properties = { Position = UDim2.new(0.5, 0, 0.5, 0) } },
@@ -99,48 +99,38 @@
 		pseudo = "UIAspectRatioConstraint",
 		properties = { AspectRatio = 0.5 }
 	},
-	["grow-4"] = {
-		pseudo = "UIFlexItem",
-		properties = { GrowRatio = 4, FlexMode = Enum.UIFlexMode.Custom }
-	},
+	["position-bottom-right"] = { properties = { Position = UDim2.new(1, 0, 1, 0) } },
 	["aspect-9-16"] = {
 		pseudo = "UIAspectRatioConstraint",
 		properties = { AspectRatio = 0.563 }
 	},
-	grow = {
-		pseudo = "UIFlexItem",
-		properties = { FlexMode = Enum.UIFlexMode.Grow }
-	},
-	["aspect-3-2"] = {
-		pseudo = "UIAspectRatioConstraint",
-		properties = { AspectRatio = 1.5 }
-	},
+	["x-default-transparency"] = { properties = { BackgroundTransparency = 0 } },
 	["anchor-center-left"] = { properties = { AnchorPoint = Vector2.new(0, 0.5) } },
 	["grow-5"] = {
 		pseudo = "UIFlexItem",
 		properties = { GrowRatio = 5, FlexMode = Enum.UIFlexMode.Custom }
 	},
+	["aspect-3-2"] = {
+		pseudo = "UIAspectRatioConstraint",
+		properties = { AspectRatio = 1.5 }
+	},
+	["anchor-top-center"] = { properties = { AnchorPoint = Vector2.new(0.5, 0) } },
 	["self-start"] = {
 		pseudo = "UIFlexItem",
 		properties = { ItemLineAlignment = Enum.ItemLineAlignment.Start }
 	},
-	["anchor-top-center"] = { properties = { AnchorPoint = Vector2.new(0.5, 0) } },
 	["aspect-5-4"] = {
 		pseudo = "UIAspectRatioConstraint",
 		properties = { AspectRatio = 1.25 }
 	},
-	["x-default-transparency"] = { properties = { BackgroundTransparency = 0 } },
 	["no-flex"] = {
 		pseudo = "UIFlexItem",
 		properties = { FlexMode = Enum.UIFlexMode.None }
 	},
 	["position-center-right"] = { properties = { Position = UDim2.new(1, 0, 0.5, 0) } },
 	["text-truncate-end"] = { properties = { TextTruncate = Enum.TextTruncate.AtEnd } },
+	["auto-y"] = { properties = { AutomaticSize = Enum.AutomaticSize.Y } },
 	["text-truncate-none"] = { properties = { TextTruncate = Enum.TextTruncate.None } },
-	fill = {
-		pseudo = "UIFlexItem",
-		properties = { FlexMode = Enum.UIFlexMode.Fill }
-	},
 	["shrink-1"] = {
 		pseudo = "UIFlexItem",
 		properties = { ShrinkRatio = 1, FlexMode = Enum.UIFlexMode.Custom }
@@ -159,11 +149,14 @@
 		pseudo = "UIFlexItem",
 		properties = { GrowRatio = 1, FlexMode = Enum.UIFlexMode.Custom }
 	},
-	["auto-y"] = { properties = { AutomaticSize = Enum.AutomaticSize.Y } },
+	["anchor-bottom-right"] = { properties = { AnchorPoint = Vector2.new(1, 1) } },
 	["x-default-text-size"] = { properties = { TextSize = 8 } },
-	["position-center-left"] = { properties = { Position = UDim2.new(0, 0, 0.5, 0) } },
+	["grow-4"] = {
+		pseudo = "UIFlexItem",
+		properties = { GrowRatio = 4, FlexMode = Enum.UIFlexMode.Custom }
+	},
 	["auto-xy"] = { properties = { AutomaticSize = Enum.AutomaticSize.XY } },
-	["position-bottom-right"] = { properties = { Position = UDim2.new(1, 0, 1, 0) } },
+	["position-center-left"] = { properties = { Position = UDim2.new(0, 0, 0.5, 0) } },
 	["self-auto"] = {
 		pseudo = "UIFlexItem",
 		properties = { ItemLineAlignment = Enum.ItemLineAlignment.Automatic }

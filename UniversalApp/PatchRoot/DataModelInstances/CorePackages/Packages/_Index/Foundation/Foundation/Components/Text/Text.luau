@@ -3,9 +3,11 @@ local parent = foundation.Parent
 local reactModule = require(parent.React)
 local reactIsModule = require(parent.ReactIs)
 local interactableModule = require(foundation.Components.Interactable)
+local flagsModule = require(foundation.Utility.Flags)
 local guiObjectChildrenModule = require(foundation.Utility.GuiObjectChildren)
 local _ = require(foundation.Components.Types)
 local indexBindableModule = require(foundation.Utility.indexBindable)
+local normalizeFontFaceModule = require(foundation.Utility.normalizeFontFace)
 local useDefaultTagsModule = require(foundation.Utility.useDefaultTags)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local withGuiObjectPropsModule = require(foundation.Utility.withGuiObjectProps)
@@ -19,7 +21,7 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useDefaultTagsModule (ref), useStyleTagsModule (ref), reactModule (ref), reactIsModule (ref), fontScalesModule (ref), withGuiObjectPropsModule (ref), indexBindableModule (ref), interactableModule (ref), guiObjectChildrenModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useDefaultTagsModule (ref), useStyleTagsModule (ref), reactModule (ref), flagsModule (ref), normalizeFontFaceModule (ref), reactIsModule (ref), fontScalesModule (ref), withGuiObjectPropsModule (ref), indexBindableModule (ref), interactableModule (ref), guiObjectChildrenModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = if var1.onStateChanged == nil then if var1.onActivated == nil then var1.onSecondaryActivated ~= nil else true else true
 	local var3 = if var1.backgroundStyle ~= nil then "gui-object-defaults text-defaults text-size-defaults text-color-defaults" else "gui-object-defaults text-defaults text-size-defaults text-color-defaults x-default-transparency"
@@ -29,7 +31,10 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	end
 	local var4 = useStyleTagsModule(useDefaultTagsModule(var1.tag, var3))
 	local var5 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), reactIsModule (copy)
+		-- upvalues: flagsModule (copy), var1 (ref), normalizeFontFaceModule (copy), reactIsModule (copy)
+		if flagsModule.FoundationFontFaceMigration then
+			return normalizeFontFaceModule(if var1.fontStyle ~= nil then nil else var1.fontStyle.Font)
+		end
 		local var6 = if var1.fontStyle ~= nil then nil else var1.fontStyle.Font
 		
 		return if typeof(var6) == "table" and not reactIsModule.isBinding(var6) then Font.new(var6.Family, var6.Weight, var6.Style) elseif typeof(var6) == "EnumItem" then Font.fromEnum(var6) else var6

@@ -1,4 +1,5 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
+local flagsModule = require(foundation.Utility.Flags)
 local popoverAlignModule = require(foundation.Enums.PopoverAlign)
 local popoverSideModule = require(foundation.Enums.PopoverSide)
 
@@ -28,7 +29,7 @@ return {
 		end
 	end,
 	calculatePositions = function(p1, p2, p3, p4, p5, p6, p7, p8)
-		-- upvalues: popoverSideModule (ref), popoverAlignModule (ref)
+		-- upvalues: popoverSideModule (ref), popoverAlignModule (ref), flagsModule (ref)
 		local t = { X = 0, Y = 0 }
 		local t_1 = { X = 0, Y = 0 }
 		local t_2 = { X = 0, Y = 0 }
@@ -95,7 +96,7 @@ return {
 		local maxValue = math.max(y, var8)
 		local minValue = math.min(y_2, var9)
 		t_1[var4] = (if maxValue <= minValue then (maxValue + minValue) / 2 elseif var9 < y then var9 - p7 else var8 + p7) - t[var4]
-		t[var3] = math.clamp(t[var3], x_3, math.max(x_4 - x_1 - var5, 0))
+		t[var3] = math.clamp(t[var3], x_3, math.max(x_4 - x_1 - var5, if flagsModule.FoundationPopoverClampMinBound then x_3 else 0))
 		t.X -= p6.Min.X
 		t.Y -= p6.Min.Y
 		

@@ -4018,6 +4018,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,ADVISORY RATING: 16 YE
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,In-Game Purchases (Includes Random Items)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Users Interact
 Feature.Landing.Label.InvitedBy,Invited by {name}
+Feature.Landing.Label.PoweredBy,Powered by
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Turn on
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Help people who have your phone number add you as a friend on Roblox

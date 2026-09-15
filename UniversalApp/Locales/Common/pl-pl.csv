@@ -4009,6 +4009,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,KLASYFIKACJA WIEKOWA: 
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,Zakupy w grze (w tym przedmioty losowe)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Z interakcją użytkowników
 Feature.Landing.Label.InvitedBy,Osoba zapraszająca: {name}
+Feature.Landing.Label.PoweredBy,Obsługiwane przez
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Włącz
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,"Ułatw osobom, które mają Twój numer telefonu, dodanie Cię do znajomych na Robloxie"
