@@ -1,7 +1,1 @@
-﻿local supportOfferIdsInCollectiblePurchase
-local fFlagMarketplaceOffersRootRandomModule = require(script.Parent.FFlagMarketplaceOffersRootRandom)
-
-if not require(script.Parent.FFlagMarketplaceOffersRootLowSpender) and not require(script.Parent.FFlagMarketplaceOffersRootNoSpender) then
-	supportOfferIdsInCollectiblePurchase = fFlagMarketplaceOffersRootRandomModule and game:GetEngineFeature("SupportOfferIdsInCollectiblePurchase")
-end
-return supportOfferIdsInCollectiblePurchase
+﻿return require(script.Parent.FFlagMarketplaceOffersRootLowSpender) or (require(script.Parent.FFlagMarketplaceOffersRootNoSpender) or require(script.Parent.FFlagMarketplaceOffersRootRandom))

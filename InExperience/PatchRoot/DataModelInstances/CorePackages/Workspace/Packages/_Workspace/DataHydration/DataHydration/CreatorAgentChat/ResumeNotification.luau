@@ -2,7 +2,6 @@
 local localizationService = game:GetService("LocalizationService")
 local parent = script:FindFirstAncestor("DataHydration").Parent
 local acpProtocolModule = require(script.Parent.Acp.AcpProtocol)
-local fFlagBuildResumeToastLocalizationModule = require(script.Parent.FFlagBuildResumeToastLocalization)
 local fFlagCreatorAgentChatFilterTerminalClientToolsModule = require(script.Parent.FFlagCreatorAgentChatFilterTerminalClientTools)
 local localization = require(parent.RobloxAppLocales).Localization
 local fFlagBuildExperiencePinForBuild = require(parent.SharedFlags).FFlagBuildExperiencePinForBuild
@@ -256,24 +255,15 @@ local function getResumeDeepLink(p2)
 end
 
 local function getToastCopy(p2)
-	-- upvalues: fFlagBuildResumeToastLocalizationModule (ref), localization (ref), localizationService (ref)
+	-- upvalues: localization (ref), localizationService (ref)
 	local isLocalToolCall = p2.kind == "local_tool_call"
+	local var2 = localization.new(localizationService.RobloxLocaleId)
 	
-	if fFlagBuildResumeToastLocalizationModule then
-		local var2 = localization.new(localizationService.RobloxLocaleId)
-		
-		return {
-			title = var2:Format(if isLocalToolCall then "Feature.Build.Notification.Title.NeedInput" else "Feature.Build.Notification.Title.Finished"),
-			label = var2:Format(if isLocalToolCall then "Feature.Build.Notification.Message.Continue" else "Feature.Build.Notification.Message.Review"),
-			dismiss = var2:Format("Feature.Build.Action.Dismiss"),
-			resume = var2:Format("Feature.Build.Action.Resume")
-		}
-	end
 	return {
-		dismiss = "Dismiss",
-		resume = "Resume",
-		title = if isLocalToolCall then "Assistant needs your input" else "Assistant finished",
-		label = if isLocalToolCall then "Resume your build chat to continue." else "Resume your build chat to review the result."
+		title = var2:Format(if isLocalToolCall then "Feature.Build.Notification.Title.NeedInput" else "Feature.Build.Notification.Title.Finished"),
+		label = var2:Format(if isLocalToolCall then "Feature.Build.Notification.Message.Continue" else "Feature.Build.Notification.Message.Review"),
+		dismiss = var2:Format("Feature.Build.Action.Dismiss"),
+		resume = var2:Format("Feature.Build.Action.Resume")
 	}
 end
 

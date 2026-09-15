@@ -10,7 +10,6 @@ local timeModule = require(parent.Time)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
 local fFlagBuildExperienceForceRefreshVersionHistoryModule = require(buildExperience.Flags.FFlagBuildExperienceForceRefreshVersionHistory)
-local fFlagBuildVersionHistoryUpdatesModule = require(buildExperience.Flags.FFlagBuildVersionHistoryUpdates)
 local fFlagisPublishOnBuildRevertModule = require(buildExperience.Flags.FFlagisPublishOnBuildRevert)
 local getAgentRollbackRequestStoreModule = require(buildExperience.Stores.GetAgentRollbackRequestStore)
 local getPlaytestLoadingStoreModule = require(parent.BuildExperiencePlaytestLaunch.GetPlaytestLoadingStore)
@@ -154,7 +153,7 @@ local function useAgentRollbackRestore(p8, p9, p10)
 end
 
 return function(p8)
-	-- upvalues: useLocalization (ref), dateHelper (ref), localizationStringsModule (ref), reactModule (ref), localizationModule (ref), placeVersionHistoryModule (ref), fFlagBuildExperienceForceRefreshVersionHistoryModule (ref), signalsReactModule (ref), useScrollToTopAfterRestoreModule (ref), getPlaytestLoadingStoreModule (ref), fFlagBuildVersionHistoryUpdatesModule (ref), useLiveVersionCardViewModelModule (ref), fFlagBuildAgentRollbackModule (ref), useAgentRollbackRestore (ref), rollbackPlaceWithRetryModule (ref), fFlagEnableTeamTestLua (ref), fFlagisPublishOnBuildRevertModule (ref), mapLocalizedHistoryToEntries (ref), useLatestVersionCardViewModelModule (ref), dataStatus (ref), versionHistoryBottomSheetModule (ref), var1 (ref)
+	-- upvalues: useLocalization (ref), dateHelper (ref), localizationStringsModule (ref), reactModule (ref), localizationModule (ref), placeVersionHistoryModule (ref), fFlagBuildExperienceForceRefreshVersionHistoryModule (ref), signalsReactModule (ref), useScrollToTopAfterRestoreModule (ref), getPlaytestLoadingStoreModule (ref), useLiveVersionCardViewModelModule (ref), fFlagBuildAgentRollbackModule (ref), useAgentRollbackRestore (ref), rollbackPlaceWithRetryModule (ref), fFlagEnableTeamTestLua (ref), fFlagisPublishOnBuildRevertModule (ref), mapLocalizedHistoryToEntries (ref), useLatestVersionCardViewModelModule (ref), dataStatus (ref), versionHistoryBottomSheetModule (ref), var1 (ref)
 	local var2 = useLocalization(dateHelper.MonthsLocalizationKeys)
 	local var3 = useLocalization({
 		empty = localizationStringsModule.VERSION_HISTORY_EMPTY,
@@ -183,11 +182,11 @@ return function(p8)
 		-- upvalues: getPlaytestLoadingStoreModule (copy), p8 (ref)
 		return getPlaytestLoadingStoreModule(p9).getAgentStatusForPlaceId(p8.placeId)(p9) == "Loading"
 	end, { p8.placeId }))
-	local var15 = if fFlagBuildVersionHistoryUpdatesModule then useLiveVersionCardViewModelModule({
+	local var15 = useLiveVersionCardViewModelModule({
 		placeId = p8.placeId,
 		universeId = p8.universeId,
 		testId = if p8.testId then `{p8.testId}-live-version-card` else nil
-	}) else nil
+	})
 	local var16 = if fFlagBuildAgentRollbackModule then useAgentRollbackRestore(p8, restoreFailed, var14) else nil
 	local var17 = reactModule.useCallback(function(p9)
 		-- upvalues: var9 (ref), var14 (ref), var10 (ref), var12 (ref), rollbackPlaceWithRetryModule (copy), p8 (ref), fFlagEnableTeamTestLua (copy), fFlagisPublishOnBuildRevertModule (copy), var13 (ref), restoreFailed (ref)
@@ -227,14 +226,14 @@ return function(p8)
 		var4,
 		var3[localizationModule.RobloxLocaleIdKey]
 	})
-	local var19 = if fFlagBuildVersionHistoryUpdatesModule then useLatestVersionCardViewModelModule({
+	local var19 = useLatestVersionCardViewModelModule({
 		layoutOrder = 0,
 		entry = var18[1],
 		placeId = p8.placeId,
 		universeId = p8.universeId,
 		onClose = p8.onClose,
 		testId = if p8.testId then `{p8.testId}-latest-version-card` else nil
-	}) else nil
+	})
 	local var20 = if fFlagBuildAgentRollbackModule then nil else var11
 	local var21 = if var20 ~= nil then if var8 == dataStatus.NotReady then localizationStringsModule.VERSION_HISTORY_LOADING elseif var8 == dataStatus.Failed then localizationStringsModule.VERSION_HISTORY_LOAD_FAILED elseif #var18 == 0 then localizationStringsModule.VERSION_HISTORY_EMPTY else nil else var20
 	

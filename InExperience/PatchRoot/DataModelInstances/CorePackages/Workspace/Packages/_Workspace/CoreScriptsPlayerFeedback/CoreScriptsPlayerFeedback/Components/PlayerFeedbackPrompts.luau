@@ -17,6 +17,10 @@ local t = {
 	TICKET_CREATION_SUBMITTED = "ToastSubmitted",
 	TICKET_CREATION_FAILED = "ToastFailed"
 }
+local t_1 = {
+	TICKET_CREATION_TEXT_FILTER_ERROR = true,
+	TICKET_CREATION_GIBBERISH_ERROR = true
+}
 local _ = {
 	PromptFeedback = "PromptFeedback",
 	PromptPlayerSupport = "PromptPlayerSupport",
@@ -116,7 +120,7 @@ local var2 = reactModule.memo(function(p1)
 	})
 end)
 local var3 = reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), cryoModule (ref), t (ref), unavailablePromptModule (ref), playerSupportUnavailablePromptModule (ref), playerSupportPromptModule (ref), playerFeedbackPromptModule (ref), promptConnectionsModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), playerSupportToastModule (ref)
+	-- upvalues: useLocalization (ref), reactModule (ref), cryoModule (ref), t (ref), unavailablePromptModule (ref), playerSupportUnavailablePromptModule (ref), t_1 (ref), playerSupportPromptModule (ref), playerFeedbackPromptModule (ref), promptConnectionsModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), playerSupportToastModule (ref)
 	local var4 = useLocalization({
 		ToastSubmitted = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted",
 		ToastFailed = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed"
@@ -249,7 +253,7 @@ local var3 = reactModule.memo(function(p1)
 				enableInputDelayed = p1.enableInputDelayed,
 				reason = var23,
 				closePrompt = var17,
-				openPlayerSupportPrompt = if var23 == "TICKET_CREATION_TEXT_FILTER_ERROR" then var19 else nil
+				openPlayerSupportPrompt = if t_1[var23] then var19 else nil
 			})
 		elseif promptType == "PromptPlayerSupport" then
 			var22 = reactModule.createElement(playerSupportPromptModule, {

@@ -12,7 +12,6 @@ local sduiParsers = sduiCoreSystemModule.SduiParsers
 local sduiErrors = sduiCoreSystemModule.SduiErrors
 local fFlagEnableExperienceDetailsBottomSheet = require(parent.SharedFlags).FFlagEnableExperienceDetailsBottomSheet
 local fFlagLuaAppEdpBottomSheetPeekViewEvents = require(parent.SharedFlags).FFlagLuaAppEdpBottomSheetPeekViewEvents
-local fFlagSduiEdpPrefetchPlayability = require(parent.SharedFlags).FFlagSduiEdpPrefetchPlayability
 local fFlagLuaAppSduiEdpEnabled = require(parent.SharedFlags).FFlagLuaAppSduiEdpEnabled
 local fFlagLuaAppAddSeeAllFlagToGameDetailReferral = require(parent.SharedFlags).FFlagLuaAppAddSeeAllFlagToGameDetailReferral
 local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
@@ -20,7 +19,7 @@ local fFlagLuaAppSduiSponsoredTwoByOneTile = require(parent.SharedFlags).FFlagLu
 local t = {}
 
 return function(p1, p2, p3)
-	-- upvalues: sduiErrors (ref), getInputModeStore (ref), t (ref), findAnalyticsFieldInAncestors (ref), intervalPerformanceTracker (ref), fFlagSduiFixSearchTelemetry (ref), sduiParsers (ref), fFlagLuaAppSduiSponsoredTwoByOneTile (ref), cryoModule (ref), fFlagLuaAppAddSeeAllFlagToGameDetailReferral (ref), sponsoredGamesRecordClick (ref), calculateRowPositionFields (ref), openGameDetails (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), fFlagEnableExperienceDetailsBottomSheet (ref), appPage (ref), fFlagSduiEdpPrefetchPlayability (ref), fFlagLuaAppSduiEdpEnabled (ref)
+	-- upvalues: sduiErrors (ref), getInputModeStore (ref), t (ref), findAnalyticsFieldInAncestors (ref), intervalPerformanceTracker (ref), fFlagSduiFixSearchTelemetry (ref), sduiParsers (ref), fFlagLuaAppSduiSponsoredTwoByOneTile (ref), cryoModule (ref), fFlagLuaAppAddSeeAllFlagToGameDetailReferral (ref), sponsoredGamesRecordClick (ref), calculateRowPositionFields (ref), openGameDetails (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), fFlagEnableExperienceDetailsBottomSheet (ref), appPage (ref), fFlagLuaAppSduiEdpEnabled (ref)
 	p3.dependencies.logger.reportCounter(sduiErrors.SduiCounterName.OpenGameDetailsAction, { name = getInputModeStore(false).getLastInputType(false) }, true)
 	local var1 = if p1 then p1.actionParams else t
 	local var2 = findAnalyticsFieldInAncestors("itemComponentType", p2)
@@ -100,6 +99,6 @@ return function(p1, p2, p3)
 		var16 = nil
 	end
 	t_1.mountAsFullView = var16
-	dispatch(openGameDetails(var17, navigation, t_1, if fFlagSduiEdpPrefetchPlayability and fFlagLuaAppSduiEdpEnabled then dependencies.networking else nil))
+	dispatch(openGameDetails(var17, navigation, t_1, if fFlagLuaAppSduiEdpEnabled then dependencies.networking else nil))
 	p3.dependencies.logger.reportCounter(sduiErrors.SduiCounterName.OpenGameDetailsActionFinish, { name = getInputModeStore(false).getLastInputType(false) }, true)
 end

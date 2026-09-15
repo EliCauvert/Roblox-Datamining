@@ -1,10 +1,8 @@
 ﻿local localizationService = game:GetService("LocalizationService")
-local buildExperience = script:FindFirstAncestor("BuildExperience")
-local sharedFlagsModule = require(buildExperience.Parent.SharedFlags)
+local sharedFlagsModule = require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags)
 local fFlagEnableShareSheet = sharedFlagsModule.FFlagEnableShareSheet
 local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
 local fFlagBuildExperienceClientDataModelTools = sharedFlagsModule.FFlagBuildExperienceClientDataModelTools
-local fFlagBuildVersionHistoryUpdatesModule = require(buildExperience.Flags.FFlagBuildVersionHistoryUpdates)
 
 local function formatShareExperience(p1)
 	return `Share {p1}`
@@ -426,9 +424,9 @@ return {
 	PUBLISH_CONTENT_BODY = "Feature.Build.Description.RatingAgreement",
 	PUBLISH_CONTENT_MATURITY = "Feature.Build.Header.ContentMaturity",
 	PUBLISH_CONTENT_TITLE = "Feature.Build.Title.Content",
-	PUBLISH_VERSION_INFORMATION_BODY = if fFlagBuildVersionHistoryUpdatesModule then "Feature.Build.Description.ShareLatest" else "Feature.Build.Description.VersionChanges",
-	PUBLISH_VERSION_INFORMATION_TITLE = if fFlagBuildVersionHistoryUpdatesModule then "Feature.Build.Header.UpdateDetails" else "Feature.Build.Title.VersionInformation",
-	PUBLISH_VERSION_TITLE_DESCRIPTION = if fFlagBuildVersionHistoryUpdatesModule then "Feature.Build.Label.UpdateTitleDesc" else "Feature.Build.Label.VersionTitleDesc",
+	PUBLISH_VERSION_INFORMATION_BODY = "Feature.Build.Description.ShareLatest",
+	PUBLISH_VERSION_INFORMATION_TITLE = "Feature.Build.Header.UpdateDetails",
+	PUBLISH_VERSION_TITLE_DESCRIPTION = "Feature.Build.Label.UpdateTitleDesc",
 	SHARE_AUDIENCE_CANCEL = "Feature.Build.Action.Cancel",
 	SHARE_AUDIENCE_FRIENDS_ONLY_DESCRIPTION = "Feature.Build.Description.FriendsLinkOnly",
 	SHARE_AUDIENCE_FRIENDS_ONLY_TITLE = "Feature.Build.Title.FriendsOnlyPlay",
@@ -473,7 +471,7 @@ return {
 	VERSION_HISTORY_RESTORED_BADGE = "Feature.Build.Label.RestoredVersion",
 	VERSION_HISTORY_RESTORE = "Feature.Build.Action.Restore",
 	VERSION_HISTORY_RESTORE_FAILED = "Feature.Build.Message.RestoreVersionFailed",
-	VERSION_HISTORY_TITLE = if fFlagBuildVersionHistoryUpdatesModule then "Feature.Build.Title.VersionInfo" else "Feature.Build.Title.VersionHistory",
+	VERSION_HISTORY_TITLE = "Feature.Build.Title.VersionInfo",
 	LIVE_VERSION_CARD_CREATED_DATE = "Feature.Build.Label.CreatedDate",
 	LIVE_VERSION_CARD_FALLBACK_DESCRIPTION = "Feature.Build.Message.NoDescriptionProvided",
 	LIVE_VERSION_CARD_PLAY = "Feature.Build.Action.Play",

@@ -727,6 +727,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,我們無法傳送�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,已傳送支援請求
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,玩家支援目前無法使用，請稍後再試。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,玩家支援無法使用
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,請撰寫更詳細的說明
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,若要提出支援請求，你必須最近曾玩過這項體驗。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,造訪此體驗以提出請求
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,請等候創作者回覆你現有的請求，然後再提交另一個請求。
@@ -2057,7 +2058,6 @@ Feature.Build.Description.RevertToVersion,確認以還原最新變更並回到 {
 Feature.Build.Description.ShareLatest,分享最新版本的變更內容。
 Feature.Build.Description.ShopButton,新增購物入口
 Feature.Build.Description.UpdateDeveloperProduct,更新開發者產品 {PRODUCT_ID}。
-Feature.Build.Description.VersionChanges,告訴玩家此版本有哪些變更。
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"說明長度不得超過 1,000 個字元。"
 Feature.Build.Error.DeveloperProductNameRequired,輸入產品名稱。
 Feature.Build.Error.DeveloperProductNameTooLong,名稱長度不得超過 50 個字元。
@@ -2238,7 +2238,6 @@ Feature.Build.Label.Version,版本
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,版本標題和說明
 Feature.Build.Label.Video,影片
 Feature.Build.Message.AccountRequirements,你的帳號不符合使用組建的要求。
 Feature.Build.Message.AccountTooNew,你的帳號太新，無法發佈。請在 2 天後再試一次。
@@ -2371,7 +2370,6 @@ Feature.Build.Title.Tasks,任務
 Feature.Build.Title.TurnActivity,回合活動
 Feature.Build.Title.VersionHistory,版本歷史紀錄
 Feature.Build.Title.VersionInfo,版本資訊
-Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,版本 {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,包含哪些內容？

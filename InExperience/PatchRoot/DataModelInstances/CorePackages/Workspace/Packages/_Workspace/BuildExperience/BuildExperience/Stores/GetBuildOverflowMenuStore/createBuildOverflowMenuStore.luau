@@ -13,7 +13,6 @@ local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBui
 local fFlagBuildExperiencePrivateInvitesModule = require(buildExperience.Flags.FFlagBuildExperiencePrivateInvites)
 local fFlagBuildShareDisabledOnPrivateModule = require(buildExperience.Flags.FFlagBuildShareDisabledOnPrivate)
 local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
-local fFlagBuildVersionHistoryUpdatesModule = require(buildExperience.Flags.FFlagBuildVersionHistoryUpdates)
 local fFlagEnableBuildAdPromotionModule = require(buildExperience.Flags.FFlagEnableBuildAdPromotion)
 local fFlagBuildExperienceMenuImprovementsModule = require(buildExperience.Flags.FFlagBuildExperienceMenuImprovements)
 local fFlagBuildExperienceAnalytics = require(parent.SharedFlags).FFlagBuildExperienceAnalytics
@@ -114,7 +113,7 @@ local t = {
 }
 
 return function()
-	-- upvalues: localizationStringsModule (ref), fFlagBuildShareDisabledOnPrivateModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), isShareUnavailable (ref), onShareActivated (ref), fFlagBuildVersionHistoryUpdatesModule (ref), isVersionHistoryDisabled (ref), onVersionHistoryActivated (ref), isInviteToPlaytestDisabled (ref), sendBuildExperienceEventModule (ref), fFlagBuildExperienceMenuImprovementsModule (ref), isAssistantDisabled (ref), onAssistantActivated (ref), isPlaytestDisabled (ref), onPlaytestActivated (ref), getPublishText (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceManageDevProductModule (ref), signalsModule (ref), reactModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), fFlagEnableBuildAdPromotionModule (ref), privacyType (ref), t (ref)
+	-- upvalues: localizationStringsModule (ref), fFlagBuildShareDisabledOnPrivateModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), isShareUnavailable (ref), onShareActivated (ref), isVersionHistoryDisabled (ref), onVersionHistoryActivated (ref), isInviteToPlaytestDisabled (ref), sendBuildExperienceEventModule (ref), fFlagBuildExperienceMenuImprovementsModule (ref), isAssistantDisabled (ref), onAssistantActivated (ref), isPlaytestDisabled (ref), onPlaytestActivated (ref), getPublishText (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceManageDevProductModule (ref), signalsModule (ref), reactModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), fFlagEnableBuildAdPromotionModule (ref), privacyType (ref), t (ref)
 	local list
 	local t_1 = {
 		id = "settings",
@@ -134,7 +133,7 @@ return function()
 	}
 	local t_3 = {
 		id = "version-history",
-		text = if fFlagBuildVersionHistoryUpdatesModule then localizationStringsModule.BUILD_MENU_VERSIONS else localizationStringsModule.BUILD_MENU_VERSION_HISTORY,
+		text = localizationStringsModule.BUILD_MENU_VERSIONS,
 		isDisabled = isVersionHistoryDisabled,
 		onActivated = onVersionHistoryActivated
 	}

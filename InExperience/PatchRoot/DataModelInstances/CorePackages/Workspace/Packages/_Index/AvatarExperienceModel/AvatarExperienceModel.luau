@@ -5,6 +5,7 @@ local constantsModule = require(script.Constants)
 local focusTypeModule = require(script.Enums.FocusType)
 local headShapeModule = require(script.Enums.HeadShape)
 local inventoryOutfitTypeModule = require(script.Enums.InventoryOutfitType)
+local itemLicenseTypeModule = require(script.Enums.ItemLicenseType)
 local recommendationsTypeModule = require(script.Enums.RecommendationsType)
 local _ = require(script.Types.CommonTypes)
 local _ = require(script.Types.DiscountType)
@@ -24,6 +25,7 @@ return {
 		FocusType = focusTypeModule,
 		HeadShape = headShapeModule,
 		InventoryOutfitType = inventoryOutfitTypeModule,
+		ItemLicenseType = itemLicenseTypeModule,
 		RecommendationsType = recommendationsTypeModule
 	}
 }

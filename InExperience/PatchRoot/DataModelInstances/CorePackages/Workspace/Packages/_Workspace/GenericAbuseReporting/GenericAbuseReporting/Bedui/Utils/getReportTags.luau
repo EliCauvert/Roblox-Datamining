@@ -6,7 +6,6 @@ local _ = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
 local abuseCategoryModule = require(genericAbuseReporting.Enums.AbuseCategory)
 local abuseVectorModule = require(genericAbuseReporting.Enums.AbuseVector)
 local valueToAbuseCategoryModule = require(genericAbuseReporting.Enums.ValueToAbuseCategory)
-local fFlagLuaAppEnableSponsoredReportAd = sharedFlagsModule.FFlagLuaAppEnableSponsoredReportAd
 local fFlagLuaAppEnableReportBadge = sharedFlagsModule.FFlagLuaAppEnableReportBadge
 local fFlagEnableReportingFlowForDevSubs = sharedFlagsModule.FFlagEnableReportingFlowForDevSubs
 local fFlagEnableReportingFlowForExperienceShop = sharedFlagsModule.FFlagEnableReportingFlowForExperienceShop
@@ -30,7 +29,7 @@ local var1 = function(p1)
 end
 
 local var2 = function(p1)
-	-- upvalues: dashModule (ref), abuseVectorModule (ref), fFlagEnableReportingFlowForDevSubs (ref), fFlagEnableReportingFlowForExperienceShop (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppEnableReportBadge (ref)
+	-- upvalues: dashModule (ref), abuseVectorModule (ref), fFlagEnableReportingFlowForDevSubs (ref), fFlagEnableReportingFlowForExperienceShop (ref), fFlagLuaAppEnableReportBadge (ref)
 	local var3 = dashModule.copy(p1.tags)
 	local targetId = p1.targetId
 	
@@ -62,7 +61,7 @@ local var2 = function(p1)
 		var3.REPORT_TARGET_GROUP_ID = targetId
 	elseif p1.abuseVector == abuseVectorModule.Notifications then
 		var3.NOTIFICATION_ID = targetId
-	elseif fFlagLuaAppEnableSponsoredReportAd and p1.abuseVector == abuseVectorModule.AdV2 then
+	elseif p1.abuseVector == abuseVectorModule.AdV2 then
 		var3.AD_ID = targetId
 	elseif fFlagLuaAppEnableReportBadge and p1.abuseVector == abuseVectorModule.Badge then
 		var3.REPORT_TARGET_BADGE_ID = targetId

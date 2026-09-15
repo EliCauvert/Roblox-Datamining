@@ -728,6 +728,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,リクエストを�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,サポートリクエストが送信されました
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,プレイヤーサポートは現在利用できません。後でもう一度お試しください。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,プレイヤーサポートはご利用いただけません
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,より詳しい説明を入力してください
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,サポートリクエストを提出するには、最近このバーチャル空間でプレイしたことが必要です。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,このバーチャル空間にアクセスしてリクエストを提出してください
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,別のリクエストを送信する前に、クリエーターが既存のリクエストに対応するのをお待ちください。
@@ -2058,7 +2059,6 @@ Feature.Build.Description.RevertToVersion,確認して最後の変更を元に�
 Feature.Build.Description.ShareLatest,最新バージョンの変更内容を共有しましょう。
 Feature.Build.Description.ShopButton,ショップボタンを追加
 Feature.Build.Description.UpdateDeveloperProduct,開発者製品{PRODUCT_ID}を更新してください。
-Feature.Build.Description.VersionChanges,このバージョンで変更された点をプレイヤーに伝えましょう。
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"詳細は1,000文字以下で入力してください。"
 Feature.Build.Error.DeveloperProductNameRequired,製品名を入力してください。
 Feature.Build.Error.DeveloperProductNameTooLong,名前は50文字以下にしてください。
@@ -2239,7 +2239,6 @@ Feature.Build.Label.Version,バージョン
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,バージョンタイトルと詳細
 Feature.Build.Label.Video,ビデオ
 Feature.Build.Message.AccountRequirements,アカウントがビルドを使用するための要件を満たしていません。
 Feature.Build.Message.AccountTooNew,お持ちのアカウントは公開するには新しすぎます。2日目になってからもう一度お試しください。
@@ -2372,7 +2371,6 @@ Feature.Build.Title.Tasks,タスク
 Feature.Build.Title.TurnActivity,ターン内のアクティビティ
 Feature.Build.Title.VersionHistory,バージョン履歴
 Feature.Build.Title.VersionInfo,バージョン情報
-Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,バージョン{VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,含まれるもの

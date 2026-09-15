@@ -8,8 +8,7 @@ local viewTypeModule = require(script.Enums.ViewType)
 local inspectAndBuyVersionModule = require(script.Enums.InspectAndBuyVersion)
 local constantsModule = require(script.Constants)
 local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXEnableIaBTimedOptionsBulkPurchase = avatarExperienceFlagsModule.FFlagAXEnableIaBTimedOptionsBulkPurchase
+local fFlagAXEnableIaBTimedOptionsBulkPurchase = require(parent.AvatarExperienceFlags).FFlagAXEnableIaBTimedOptionsBulkPurchase
 local _ = require(script.Stores.createItemSelectionStore)
 
 return {
@@ -28,7 +27,8 @@ return {
 		convertBundleInfoToItemData = if fFlagAXEnableIaBTimedOptionsBulkPurchase then require(script.Utils.convertBundleInfoToItemData) else nil,
 		itemDetailsUtils = if fFlagAXEnableIaBTimedOptionsBulkPurchase then require(script.Utils.itemDetailsUtils) else nil,
 		buildBulkPurchaseAnalyticsPayload = if fFlagAXEnableIaBTimedOptionsBulkPurchase then require(script.Utils.buildBulkPurchaseAnalyticsPayload) else nil,
-		buildItemDataFromAXRodux = require(script.Utils.buildItemDataFromAXRodux)
+		buildItemDataFromAXRodux = require(script.Utils.buildItemDataFromAXRodux),
+		selectItemDataForTryOnItems = require(script.Utils.selectItemDataForTryOnItems)
 	},
 	Hooks = {
 		useViewBreakpoints = useViewBreakpointsModule,
@@ -38,7 +38,8 @@ return {
 	Components = {
 		BuyActionBar = if fFlagSocialEnableProfileInspectAndBuy then require(script.Components.Common.BuyActionBar) else nil,
 		ResponsivePanelLayout = require(script.Components.Common.ResponsivePanelLayout),
-		SelectableItemCardRow = if avatarExperienceFlagsModule.FFlagAXIaBSelectableItemCardRow then require(script.Components.Common.SelectableItemCardRow.SelectableCardRowContainer) else nil
+		SelectableItemCardRow = require(script.Components.Common.SelectableItemCardRow.SelectableCardRowContainer),
+		SelectableItemCardList = require(script.Components.Common.SelectableItemCardList.SelectableItemCardList)
 	},
 	Contexts = {
 		ItemSelectionStoreContext = if fFlagAXEnableIaBTimedOptionsBulkPurchase then require(script.Contexts.ItemSelectionStoreContext) else nil
