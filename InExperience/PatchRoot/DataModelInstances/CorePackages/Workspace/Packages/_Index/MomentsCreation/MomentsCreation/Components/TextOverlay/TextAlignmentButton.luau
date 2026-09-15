@@ -11,6 +11,7 @@ return function(p1)
 	local var1 = useTextAlignmentButtonStateModule(p1.controller)
 	
 	return reactModule.createElement(iconButton, {
+		LayoutOrder = p1.LayoutOrder,
 		icon = var1.icon,
 		onActivated = var1.onActivated,
 		size = foundationModule.Enums.InputSize.Medium

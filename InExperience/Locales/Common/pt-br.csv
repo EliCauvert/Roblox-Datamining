@@ -3536,6 +3536,7 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} segundos
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 segundo
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Quer mesmo excluir este item do seu inventário para sempre? Se mudar de ideia, você precisará ganhá-lo novamente em uma experiência."
 Feature.Item.Label.DeleteItemUndercase,Excluir item
+Feature.Landing.Label.PoweredBy,Fornecido por
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Ativar
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Ajude as pessoas que têm seu celular a adicionarem você aos amigos na Roblox

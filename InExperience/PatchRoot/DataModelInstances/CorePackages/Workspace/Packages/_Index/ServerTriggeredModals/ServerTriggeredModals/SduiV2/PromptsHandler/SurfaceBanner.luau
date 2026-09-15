@@ -1,4 +1,5 @@
-﻿local parent = script:FindFirstAncestor("ServerTriggeredModals").Parent
+﻿local serverTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
+local parent = serverTriggeredModals.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local appNavBarModule = require(parent.AppNavBar)
@@ -11,13 +12,14 @@ local useComponentConfig = sduiSharedUtilitiesModule.useComponentConfig
 local useStatusBarHeight = robloxAppHooksModule.useStatusBarHeight
 local useTopBarHeight = robloxAppHooksModule.useTopBarHeight
 local visibilityControl = appNavBarModule.VisibilityControl
+local fFlagPromptsActionEventLoggingModule = require(serverTriggeredModals.Flags.FFlagPromptsActionEventLogging)
 
 local function noopGetter()
 	return nil
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useStatusBarHeight (ref), useTopBarHeight (ref), reactModule (ref), visibilityControl (ref), useComponentConfig (ref), noopGetter (ref), signalsReactModule (ref), view (ref), sduiFeatureEntryPoint (ref)
+	-- upvalues: useStatusBarHeight (ref), useTopBarHeight (ref), reactModule (ref), visibilityControl (ref), useComponentConfig (ref), noopGetter (ref), signalsReactModule (ref), view (ref), sduiFeatureEntryPoint (ref), fFlagPromptsActionEventLoggingModule (ref)
 	local var1 = useStatusBarHeight()
 	local var2 = useTopBarHeight()
 	local var3, var4 = reactModule.useState(0)
@@ -62,7 +64,10 @@ return reactModule.memo(function(p1)
 				shouldDisplayError = false,
 				configKey = p1.configKey,
 				identifier = p1.identifier,
-				appPage = p1.appPage
+				appPage = p1.appPage,
+				additionalAnalyticsData = if fFlagPromptsActionEventLoggingModule then {
+					promptInstanceId = if p1.identifier then p1.identifier else nil
+				} else nil
 			}) else nil
 		})
 	})

@@ -42,7 +42,14 @@ local var2 = if isPioneerLaunch() then {
 } else nil
 
 if var2 then
-	var2.initialAvailability = serviceModule.AvailabilitySignal.Available
-	var1 = serviceModule:register(var2)
+	var2.initialAvailability = serviceModule.AvailabilitySignal.Unavailable
+	local var3 = serviceModule:register(var2)
+	var1 = var3
+	task.spawn(function()
+		-- upvalues: accountUpgradeModule (ref), pioneer (ref), var3 (ref)
+		if accountUpgradeModule.Eligibility.getAvailability(pioneer).granted then
+			var3.availability:available()
+		end
+	end)
 end
 return var1 or {}

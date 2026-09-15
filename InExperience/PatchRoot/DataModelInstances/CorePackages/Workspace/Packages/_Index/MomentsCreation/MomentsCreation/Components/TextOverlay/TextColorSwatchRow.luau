@@ -12,6 +12,7 @@ local useSignalState = signalsReactModule.useSignalState
 local useTokens = foundationModule.Hooks.useTokens
 local useFormFactor = momentsCommonModule.Hooks.useFormFactor
 local formFactor = momentsCommonModule.Enums.FormFactor
+local constantsModule = require(momentsCreation.Constants)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local _ = require(parent.MomentsTypes)
 local list = {
@@ -22,7 +23,7 @@ local list = {
 }
 
 return function(p1)
-	-- upvalues: useTokens (ref), useFormFactor (ref), formFactor (ref), useMemo (ref), signalsModule (ref), useSignalState (ref), dashModule (ref), list (ref), reactModule (ref), view (ref), foundationModule (ref)
+	-- upvalues: useTokens (ref), useFormFactor (ref), formFactor (ref), useMemo (ref), signalsModule (ref), useSignalState (ref), dashModule (ref), list (ref), reactModule (ref), view (ref), foundationModule (ref), constantsModule (ref)
 	local controller = p1.controller
 	local var1 = useTokens()
 	local var2 = useFormFactor() == formFactor.Wide
@@ -75,7 +76,7 @@ return function(p1)
 	end
 	return reactModule.createElement(foundationModule.ScrollView, {
 		LayoutOrder = p1.LayoutOrder,
-		Size = UDim2.new(1, 0, 0, 40),
+		Size = UDim2.new(1, 0, 0, constantsModule.TextOverlay.PickerRowHeight),
 		scroll = {
 			scrollBarVisibility = foundationModule.Enums.Visibility.None,
 			ScrollingDirection = Enum.ScrollingDirection.X,

@@ -8,6 +8,7 @@ local _ = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryNormaliz
 local sduiListEntryRendererModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryRenderer)
 local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 local fFlagSduiCollectionGridRevealRows = require(parent.SharedFlags).FFlagSduiCollectionGridRevealRows
+local fFlagSduiPerSectionPoolSizing = require(parent.SharedFlags).FFlagSduiPerSectionPoolSizing
 local fFlagSduiVerticalFeedProgressiveFillOnScroll = require(parent.SharedFlags).FFlagSduiVerticalFeedProgressiveFillOnScroll
 
 local function resolvePoolDataGetter(p1, p2, p3, p4)
@@ -120,18 +121,21 @@ local function normalizePoolData(p2)
 	return t
 end
 
-local function poolSectionFromEntry(p3)
+local function poolSectionFromEntry(p3, p4)
+	-- upvalues: fFlagSduiPerSectionPoolSizing (ref)
 	local identifier = p3.identifier
 	
 	if typeof(identifier) ~= "string" then
 		return nil
 	end
+	local var7
 	local poolId = nil
 	local maxVisibleRows = nil
+	local var8 = nil
 	local item = p3.item
 	
 	if typeof(item) == "table" then
-		local var7 = item
+		var7 = item
 		local inputData = var7.input_data
 		
 		if inputData and inputData.kind and inputData.kind.value then
@@ -139,20 +143,35 @@ local function poolSectionFromEntry(p3)
 		end
 		poolId = var7.pool_id
 		maxVisibleRows = var7.max_visible_rows
+		
+		if fFlagSduiPerSectionPoolSizing then
+			var8 = if typeof(var7.collection_item_size) == "string" and var7.collection_item_size ~= "" then var7.collection_item_size else nil
+		end
+	end
+	var7 = nil
+	
+	if fFlagSduiPerSectionPoolSizing and poolId ~= nil and p4 ~= nil then
+		local var9 = p4[poolId]
+		
+		if var9 ~= nil then
+			var7 = var9.collectionItemSize
+		end
 	end
 	return {
 		sectionId = identifier,
 		poolId = poolId,
-		numberOfRows = if maxVisibleRows == -1 and poolId ~= nil then -1 elseif typeof(maxVisibleRows) == "number" and maxVisibleRows > 0 then maxVisibleRows else 1
+		numberOfRows = if maxVisibleRows == -1 and poolId ~= nil then -1 elseif typeof(maxVisibleRows) == "number" and maxVisibleRows > 0 then maxVisibleRows else 1,
+		entryCollectionItemSize = if fFlagSduiPerSectionPoolSizing then var8 else nil,
+		templateCollectionItemSize = if fFlagSduiPerSectionPoolSizing then var7 else nil
 	}
 end
 
-local function computePoolSections(p3)
-	-- upvalues: poolSectionFromEntry (ref)
+local function computePoolSections(p3, p4)
+	-- upvalues: poolSectionFromEntry (ref), fFlagSduiPerSectionPoolSizing (ref)
 	local t = {}
 	
 	for i, v in p3 do
-		local var7 = poolSectionFromEntry(v)
+		local var7 = poolSectionFromEntry(v, if fFlagSduiPerSectionPoolSizing then p4 else nil)
 		
 		if var7 ~= nil then
 			table.insert(t, var7)
@@ -161,8 +180,8 @@ local function computePoolSections(p3)
 	return t
 end
 
-local function sectionsHaveMultiRow(p4)
-	for i, v in p4 do
+local function sectionsHaveMultiRow(p5)
+	for i, v in p5 do
 		if v.numberOfRows ~= 1 then
 			return true
 		end
@@ -170,10 +189,11 @@ local function sectionsHaveMultiRow(p4)
 	return false
 end
 
-local function applyPoolEntryConfigs(p5, p6)
-	if p6 == nil then return end
-	for i, v in p6 do
-		local var8 = p5[i]
+local function applyPoolEntryConfigs(p6, p7)
+	-- upvalues: fFlagSduiPerSectionPoolSizing (ref)
+	if fFlagSduiPerSectionPoolSizing or p7 == nil then return end
+	for i, v in p7 do
+		local var8 = p6[i]
 		
 		if var8 ~= nil and var8.collectionItemSize == nil and v.collectionItemSize ~= nil then
 			var8.collectionItemSize = v.collectionItemSize
@@ -181,19 +201,19 @@ local function applyPoolEntryConfigs(p5, p6)
 	end
 end
 
-local function ingestPoolSections(p7, p8, p9, p10)
+local function ingestPoolSections(p8, p9, p10, p11)
 	-- upvalues: sduiPoolStoreModule (ref), normalizePoolData (ref), applyPoolEntryConfigs (ref)
-	local configKey = p9.configKey
+	local configKey = p10.configKey
 	
-	if configKey == nil or #p7 == 0 then
+	if configKey == nil or #p8 == 0 then
 		return nil
 	end
 	local sduiPoolStore = sduiPoolStoreModule.getSduiPoolStore(configKey)
-	sduiPoolStore.setSections(p7)
-	local var9 = if p8 ~= nil then nil else normalizePoolData(p8)
+	sduiPoolStore.setSections(p8)
+	local var9 = if p9 ~= nil then nil else normalizePoolData(p9)
 	
 	if var9 ~= nil then
-		applyPoolEntryConfigs(var9, p10)
+		applyPoolEntryConfigs(var9, p11)
 		sduiPoolStore.setPools(var9)
 	end
 	return sduiPoolStore
@@ -208,44 +228,44 @@ return {
 	computePoolSections = computePoolSections,
 	sectionsHaveMultiRow = sectionsHaveMultiRow,
 	ingestPoolSections = ingestPoolSections,
-	createPoolEntryFns = function(p7, p8, p9, p10, p11, p12, p13)
+	createPoolEntryFns = function(p8, p9, p10, p11, p12, p13, p14)
 		-- upvalues: ingestPoolSections (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (ref), fFlagSduiCollectionGridRevealRows (ref), sduiListEntryRendererModule (ref)
-		local var9 = ingestPoolSections(p7, p12, p10, p13)
+		local var9 = ingestPoolSections(p8, p13, p11, p14)
 		local var10 = nil
 		local var11 = nil
 		
 		if var9 ~= nil then
 			local t = {}
 			
-			for i, v in p7 do
+			for i, v in p8 do
 				if v.poolId ~= nil then
 					t[v.sectionId] = true
 				end
 			end
-			var10 = function(p14)
+			var10 = function(p15)
 				-- upvalues: t (ref), var9 (ref)
-				local identifier = p14.identifier
+				local identifier = p15.identifier
 				
 				return if typeof(identifier) == "string" and t[identifier] then { _section = { cells = var9.getSectionCells(identifier) } } else nil
 			end
 			
-			var11 = function(p14, _)
+			var11 = function(p15, _)
 				-- upvalues: var9 (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (copy), fFlagSduiCollectionGridRevealRows (copy)
-				local identifier = p14.identifier
+				local identifier = p15.identifier
 				
 				return if typeof(identifier) == "string" then {
 					_requiresDataBinding = true,
 					startRowGetter = var9.getSectionStartRow(identifier),
 					numberOfRowsGetter = if fFlagSduiVerticalFeedProgressiveFillOnScroll then var9.getSectionRowCount(identifier) else nil,
-					setDisplayedRowCount = if fFlagSduiCollectionGridRevealRows then function(p15)
+					setDisplayedRowCount = if fFlagSduiCollectionGridRevealRows then function(p16)
 						-- upvalues: var9 (copy), identifier (ref)
-						var9.setSectionDisplayedRowCount(identifier, p15)
+						var9.setSectionDisplayedRowCount(identifier, p16)
 					end else nil
 				} else nil
 			end
 		end
 		return {
-			inputSlicer = sduiListEntryRendererModule.createInputSlicer(p8, p9, p10, p11, var10),
+			inputSlicer = sduiListEntryRendererModule.createInputSlicer(p9, p10, p11, p12, var10),
 			entryConfigExtrasFn = var11
 		}
 	end

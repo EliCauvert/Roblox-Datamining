@@ -34,7 +34,6 @@ local enableFastScrollingFixTest = game:DefineFastFlag("EnableFastScrollingFixTe
 local fFlagEnablePeekViewFocusNav = require(parent.SharedFlags).FFlagEnablePeekViewFocusNav
 local getFFlagPreventSuperBriefPeekViewClose = require(parent.SharedFlags).GetFFlagPreventSuperBriefPeekViewClose
 local AXMigratePeekViewToFocusNavigation = game:DefineFastFlag("AXMigratePeekViewToFocusNavigation", false)
-local fFlagAXScrollingFramesShouldAnimateOnFocus = require(parent.SharedFlags).FFlagAXScrollingFramesShouldAnimateOnFocus
 local fixPeekViewAnimationJitter = game:DefineFastFlag("FixPeekViewAnimationJitter", false)
 local fFlagPeekViewFixBriefHeightLayoutRace = require(parent.SharedFlags).FFlagPeekViewFixBriefHeightLayoutRace
 local rect = Rect.new(9, 9, 9, 9)
@@ -1062,8 +1061,8 @@ function peekView.willUnmount(p1)
 end
 
 local function PeekViewContainer(p1)
-	-- upvalues: reactModule (ref), fFlagAXScrollingFramesShouldAnimateOnFocus (ref), gamepadUtils (ref), usePeekViewFocusNavigationBindingsModule (ref), peekView (write), cryoModule (ref)
-	local var3 = if fFlagAXScrollingFramesShouldAnimateOnFocus and p1.scrollingFrameRef then p1.scrollingFrameRef else reactModule.useRef(nil)
+	-- upvalues: reactModule (ref), gamepadUtils (ref), usePeekViewFocusNavigationBindingsModule (ref), peekView (write), cryoModule (ref)
+	local var3 = if p1.scrollingFrameRef then p1.scrollingFrameRef else reactModule.useRef(nil)
 	local var4 = reactModule.useRef(nil)
 	local var5 = if p1.fullViewContentHeight then p1.fullViewContentHeight else UDim.new(1, 0)
 	local var6 = reactModule.useCallback(function()

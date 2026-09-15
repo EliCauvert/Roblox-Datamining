@@ -3534,6 +3534,7 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number}秒
 Feature.InExperienceShop.Label.Timer.Second.Singular,1秒
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,このアイテムを持ち物から永久に削除しますか？もし気が変わった場合は、バーチャル空間で再び獲得する必要があります。
 Feature.Item.Label.DeleteItemUndercase,アイテムを削除
+Feature.Landing.Label.PoweredBy,運営：
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,オンにする
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,あなたの電話番号を持っている人に、Roblox上で友達として追加してもらいやすくします

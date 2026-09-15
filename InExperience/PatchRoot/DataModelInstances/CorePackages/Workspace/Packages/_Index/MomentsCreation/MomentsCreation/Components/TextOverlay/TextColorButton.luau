@@ -8,8 +8,12 @@ local useTokens = foundationModule.Hooks.useTokens
 
 return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), iconButton (ref), builderIconsModule (ref), foundationModule (ref)
-	return reactModule.createElement(view, { tag = "auto-xy radius-circle" }, {
+	return reactModule.createElement(view, {
+		tag = "auto-xy radius-circle",
+		LayoutOrder = p1.LayoutOrder
+	}, {
 		Icon = reactModule.createElement(iconButton, {
+			isCircular = true,
 			icon = builderIconsModule.Icon.PaintBucket,
 			onActivated = p1.onToggle,
 			size = foundationModule.Enums.InputSize.Medium
@@ -17,7 +21,7 @@ return function(p1)
 		Highlight = if p1.expanded then reactModule.createElement(view, {
 			ZIndex = 2,
 			tag = "size-full radius-circle",
-			backgroundStyle = useTokens().Color.ActionSubtle.Background
+			backgroundStyle = useTokens().Color.State.Hover
 		}) else nil
 	})
 end

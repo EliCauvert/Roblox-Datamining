@@ -58,6 +58,7 @@ local luaAppSduiMovePromptsActions_1 = game:DefineFastFlag("SduiDismissPromptPag
 local fFlagLuaAppEnableNxMRoduxApportioningModule = require(script.FFlagLuaAppEnableNxMRoduxApportioning)
 local fFlagLuaAppApportioningInCollectionViewsModule = require(script.FFlagLuaAppApportioningInCollectionViews)
 local fFlagLuaAppApportioningInCollectionViewsModule_1 = game:DefineFastFlag("SduiPoolBackedFeed", false) and fFlagLuaAppApportioningInCollectionViewsModule
+local fFlagLuaAppApportioningInCollectionViewsModule_1_1 = game:DefineFastFlag("SduiPerSectionPoolSizing", false) and fFlagLuaAppApportioningInCollectionViewsModule_1
 local enableSummarySystemMessage = game:DefineFastFlag("EnableSummarySystemMessageOnLua", false) and game:GetEngineFeature("EnableSummarySystemMessage")
 local useSignalsNavigation2 = game:DefineFastFlag("UseSignalsNavigation2", false)
 local useSignalsNavigation2_1 = game:DefineFastFlag("RoduxSignalsNavigationMigration2", false) and useSignalsNavigation2
@@ -516,6 +517,7 @@ return {
 	FFlagEnableSocialProofOnItemDetails = require(script.FFlagEnableSocialProofOnItemDetails),
 	FFlagUserListUseSheet = require(script.FFlagUserListUseSheet),
 	FFlagUserListCtaIntegrationEnabled = require(script.FFlagUserListCtaIntegrationEnabled),
+	FFlagJoinabilityCTARefactor = require(script.FFlagJoinabilityCTARefactor),
 	FFlagUserListCtaAnalyticsEnabled = require(script.FFlagUserListCtaAnalyticsEnabled),
 	FFlagSharedChatEntryPointAction = require(script.FFlagSharedChatEntryPointAction),
 	FFlagUserListUsernameFallbackConfig = require(script.FFlagUserListUsernameFallbackConfig),
@@ -965,6 +967,7 @@ return {
 	FFlagFixMediaGalleryOversized = require(script.FFlagFixMediaGalleryOversized),
 	FFlagMediaAccordionAndFullTelemetry = require(script.FFlagMediaAccordionAndFullTelemetry),
 	FFlagSduiPoolBackedFeed = fFlagLuaAppApportioningInCollectionViewsModule_1,
+	FFlagSduiPerSectionPoolSizing = fFlagLuaAppApportioningInCollectionViewsModule_1_1,
 	FFlagSduiVerticalFeedPageShellSupport = sduiVerticalFeedPageShellSupport2,
 	FFlagSduiOptionSelectorCollection = require(script.FFlagSduiOptionSelectorCollection),
 	FFlagSduiOptionImpressionsEventName = game:DefineFastFlag("SduiOptionImpressionsEventName", false),
@@ -1362,7 +1365,6 @@ return {
 	FFlagAXMigrateCatalogSearchToFocusNavigation = require(script.FFlagAXMigrateCatalogSearchToFocusNavigation),
 	FFlagAXMigrateProfilePictureEditorEmotesPageToFocusNavigation = require(script.FFlagAXMigrateProfilePictureEditorEmotesPageToFocusNavigation),
 	FFlagAXMigrateLookDetailsPeekViewToFocusNavigation = require(script.FFlagAXMigrateLookDetailsPeekViewToFocusNavigation),
-	FFlagAXScrollingFramesShouldAnimateOnFocus = require(script.FFlagAXScrollingFramesShouldAnimateOnFocus),
 	GetFFlagLuaEnableShowUpsellMethod = require(script.GetFFlagLuaEnableShowUpsellMethod),
 	GetFFlagLuaAppEnableAndroidPushUpsell = require(script.GetFFlagLuaAppEnableAndroidPushUpsell),
 	GetFStringVoiceUpsellLayer = require(script.GetFStringVoiceUpsellLayer),
@@ -1825,7 +1827,6 @@ return {
 	FFlagEnableTiltLoadingScreen = require(script.FFlagEnableTiltLoadingScreen),
 	FFlagTiltLoadingScreenConsoleHints = require(script.FFlagTiltLoadingScreenConsoleHints),
 	FFlagTiltLoadingScreenEnterExitHold = require(script.FFlagTiltLoadingScreenEnterExitHold),
-	FStringTiltLoadingScreenPreLogoText = require(script.FStringTiltLoadingScreenPreLogoText),
 	FFlagLuaAppEnableInExperienceDataModelStreamStarter = require(script.FFlagLuaAppEnableInExperienceDataModelStreamStarter),
 	FFlagEnablePinnedShortcutsOnHomeScreenLua = game:DefineFastFlag("EnablePinnedShortcutsOnHomeScreenLua2", false),
 	FFlagSduiPinShortcutAction = game:DefineFastFlag("SduiPinShortcutAction", false),

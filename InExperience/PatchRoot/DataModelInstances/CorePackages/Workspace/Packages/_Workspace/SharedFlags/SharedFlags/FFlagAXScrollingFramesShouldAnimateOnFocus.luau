@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXScrollingFramesShouldAnimateOnFocus3", false)

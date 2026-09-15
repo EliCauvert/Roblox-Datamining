@@ -3515,6 +3515,7 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} सेकंड
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 सेकंड
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"क्या आपको वाकई अपनी इन्वेंट्री से इस आइटम को हमेशा के लिए डिलीट करना है? अपना फ़ैसला बदलने पर, आपको इसे किसी एक्सपीरिएंस में फिर से हासिल करना होगा."
 Feature.Item.Label.DeleteItemUndercase,आइटम डिलीट करें
+Feature.Landing.Label.PoweredBy,इसे बनाया है
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,"जिन लोगों के पास आपका फ़ोन नंबर है, उन्हें आपको Roblox पर फ़्रेंड के तौर पर जोड़ने में मदद करें."

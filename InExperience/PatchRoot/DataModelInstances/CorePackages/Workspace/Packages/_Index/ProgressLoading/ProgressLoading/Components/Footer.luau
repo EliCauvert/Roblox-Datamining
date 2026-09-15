@@ -1,14 +1,14 @@
 ﻿local parent = script:FindFirstAncestor("ProgressLoading").Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
+local useLocalization = require(parent.Localization).Hooks.useLocalization
 local view = foundationModule.View
 local text = foundationModule.Text
 local image = foundationModule.Image
 local useTokens = foundationModule.Hooks.useTokens
-local fStringTiltLoadingScreenPreLogoText = require(parent.SharedFlags).FStringTiltLoadingScreenPreLogoText
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), fStringTiltLoadingScreenPreLogoText (ref), text (ref), image (ref)
+	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref), image (ref)
 	local var1 = useTokens()
 	local size300 = var1.Size.Size_300
 	
@@ -24,10 +24,10 @@ return function(p1)
 		},
 		testId = p1.testId
 	}, {
-		Label = if fStringTiltLoadingScreenPreLogoText ~= "" then nil else reactModule.createElement(text, {
+		Label = reactModule.createElement(text, {
 			tag = "auto-xy text-body-medium content-default",
 			LayoutOrder = 1,
-			Text = fStringTiltLoadingScreenPreLogoText,
+			Text = useLocalization({ poweredBy = "Feature.Landing.Label.PoweredBy" }).poweredBy,
 			testId = p1.textTestId
 		}),
 		Wordmark = reactModule.createElement(image, {

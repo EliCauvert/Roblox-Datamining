@@ -1,0 +1,1 @@
+﻿return { Or = "Or", More = "More" }

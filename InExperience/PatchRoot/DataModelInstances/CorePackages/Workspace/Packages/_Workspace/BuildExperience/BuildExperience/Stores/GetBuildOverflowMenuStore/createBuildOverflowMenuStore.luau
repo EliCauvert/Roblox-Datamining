@@ -11,6 +11,7 @@ local launchPlaytestWithLoadingStateModule = require(parent.BuildExperiencePlayt
 local getPrivatePlaytestersStore = require(parent.DataHydration.PrivatePlaytesters).getPrivatePlaytestersStore
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
 local fFlagBuildExperiencePrivateInvitesModule = require(buildExperience.Flags.FFlagBuildExperiencePrivateInvites)
+local fFlagBuildShareDisabledOnPrivateModule = require(buildExperience.Flags.FFlagBuildShareDisabledOnPrivate)
 local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local fFlagBuildVersionHistoryUpdatesModule = require(buildExperience.Flags.FFlagBuildVersionHistoryUpdates)
 local fFlagEnableBuildAdPromotionModule = require(buildExperience.Flags.FFlagEnableBuildAdPromotion)
@@ -50,10 +51,24 @@ local function getPublishText(p1)
 	return if publishStatusModule.isPublishLatest(p1.hasPublishedVersion, p1.hasPublishedTurn) then localizationStringsModule.BUILD_MENU_PUBLISH_LATEST else localizationStringsModule.BUILD_MENU_PUBLISH
 end
 
+local _ = function(p1)
+	-- upvalues: universeConfigurationModule (ref), gameConfigurationLabelsModule (ref)
+	return gameConfigurationLabelsModule.getAudience(universeConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p1.universeId).data())
+end
+
+local function isShareUnavailable(p1)
+	-- upvalues: privacyType (ref)
+	return if p1.shareAudience ~= nil then p1.shareAudience == privacyType.Private else true
+end
+
 local function onShareActivated(p1)
-	-- upvalues: universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), privacyType (ref)
+	-- upvalues: fFlagBuildShareDisabledOnPrivateModule (ref), privacyType (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref)
 	if p1.placeId == nil then
 		return nil
+	elseif fFlagBuildShareDisabledOnPrivateModule then
+		if if p1.shareAudience ~= nil then p1.shareAudience == privacyType.Private else true then
+			return nil
+		end
 	end
 	local audience = gameConfigurationLabelsModule.getAudience(universeConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p1.universeId).data())
 	
@@ -99,7 +114,7 @@ local t = {
 }
 
 return function()
-	-- upvalues: localizationStringsModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), onShareActivated (ref), fFlagBuildVersionHistoryUpdatesModule (ref), isVersionHistoryDisabled (ref), onVersionHistoryActivated (ref), isInviteToPlaytestDisabled (ref), sendBuildExperienceEventModule (ref), fFlagBuildExperienceMenuImprovementsModule (ref), isAssistantDisabled (ref), onAssistantActivated (ref), isPlaytestDisabled (ref), onPlaytestActivated (ref), getPublishText (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceManageDevProductModule (ref), signalsModule (ref), reactModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), fFlagEnableBuildAdPromotionModule (ref), privacyType (ref), t (ref)
+	-- upvalues: localizationStringsModule (ref), fFlagBuildShareDisabledOnPrivateModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), isShareUnavailable (ref), onShareActivated (ref), fFlagBuildVersionHistoryUpdatesModule (ref), isVersionHistoryDisabled (ref), onVersionHistoryActivated (ref), isInviteToPlaytestDisabled (ref), sendBuildExperienceEventModule (ref), fFlagBuildExperienceMenuImprovementsModule (ref), isAssistantDisabled (ref), onAssistantActivated (ref), isPlaytestDisabled (ref), onPlaytestActivated (ref), getPublishText (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceManageDevProductModule (ref), signalsModule (ref), reactModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), fFlagEnableBuildAdPromotionModule (ref), privacyType (ref), t (ref)
 	local list
 	local t_1 = {
 		id = "settings",
@@ -111,6 +126,7 @@ return function()
 	local t_2 = {
 		id = "share",
 		text = localizationStringsModule.BUILD_MENU_SHARE,
+		isDisabled = if fFlagBuildShareDisabledOnPrivateModule and not fFlagBuildExperiencePrivateInvitesModule then isShareUnavailable else nil,
 		onActivated = function(p1)
 			-- upvalues: fFlagBuildExperiencePrivateInvitesModule (copy), onShareActivated (copy)
 			return if fFlagBuildExperiencePrivateInvitesModule then { type = "share" } else onShareActivated(p1)

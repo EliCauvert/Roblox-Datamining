@@ -68,7 +68,8 @@ local function makeDialogChildren(p2)
 			aspectRatio = if heroMedia then heroMedia.aspectRatio else 1.777777777778,
 			mediaStyle = if heroMedia then heroMedia.mediaStyle else nil,
 			backgroundStyle = if heroMedia then heroMedia.backgroundStyle else nil,
-			height = if heroMedia then heroMedia.height else nil
+			height = if heroMedia then heroMedia.height else nil,
+			scaleType = if heroMedia then heroMedia.scaleType else nil
 		}) else nil,
 		DialogTitle = if p2.hasTitle ~= false then nil else reactModule.createElement(dialogModule.Title, { text = p2.title or "Dialog title" }),
 		DialogContent = reactModule.createElement(dialogModule.Content, { LayoutOrder = 2, Selectable = p2.contentSelectable }, if p2.contentChildren then p2.contentChildren else {

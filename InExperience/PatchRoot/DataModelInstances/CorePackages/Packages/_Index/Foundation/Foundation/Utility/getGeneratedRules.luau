@@ -246,16 +246,14 @@ return function(p1, p2, p3)
 	for i_1, v_1 in var2 do
 		var2[i_1] = v_1
 	end
-	if flagsModule.FoundationThemedTypography then
-		local var4 = (t_2[typographyVariantsModule[p1] or builderSans] or t_2[builderSans])[if p3 == deviceModule.Console and not flagsModule.FoundationDisableTokenScaling then deviceModule.Console else deviceModule.Desktop]
+	local var4 = (t_2[typographyVariantsModule[p1] or builderSans] or t_2[builderSans])[if p3 == deviceModule.Console and not flagsModule.FoundationDisableTokenScaling then deviceModule.Console else deviceModule.Desktop]
+	
+	if var4 then
+		local var5 = var4()
 		
-		if var4 then
-			local var5 = var4()
-			
-			if var5 then
-				for i_2, v_2 in var5 do
-					var2[i_2] = v_2
-				end
+		if var5 then
+			for i_2, v_2 in var5 do
+				var2[i_2] = v_2
 			end
 		end
 	end

@@ -14,6 +14,7 @@ local sduiPoolEntryHelpersModule = require(sduiCoreSystem.ClientBinding.PropBuil
 local _ = require(sduiCoreSystem.ClientBinding.SduiPoolStoreTypes)
 local fFlagSduiPoolBackedFeed = require(parent.SharedFlags).FFlagSduiPoolBackedFeed
 local fFlagSduiDeferredListItems = require(parent.SharedFlags).FFlagSduiDeferredListItems
+local fFlagSduiPerSectionPoolSizing = require(parent.SharedFlags).FFlagSduiPerSectionPoolSizing
 local propResultCategory = sduiClientBindingTypesModule.PropResultCategory
 
 local function _(p1, p2)
@@ -29,7 +30,7 @@ local function _(p1, p2)
 end
 
 local function buildItemsFromEntries(p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14)
-	-- upvalues: sduiListEntrySorterModule (ref), fFlagSduiPoolBackedFeed (ref), sduiPoolEntryHelpersModule (ref), sduiListEntryRendererModule (ref), fFlagSduiDeferredListItems (ref)
+	-- upvalues: sduiListEntrySorterModule (ref), fFlagSduiPoolBackedFeed (ref), sduiPoolEntryHelpersModule (ref), fFlagSduiPerSectionPoolSizing (ref), sduiListEntryRendererModule (ref), fFlagSduiDeferredListItems (ref)
 	if p5 ~= nil then
 		local var1
 		local var2 = p3
@@ -53,7 +54,7 @@ local function buildItemsFromEntries(p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, 
 	local entryConfigExtrasFn = nil
 	
 	if fFlagSduiPoolBackedFeed then
-		local var5 = sduiPoolEntryHelpersModule.computePoolSections(var3)
+		local var5 = sduiPoolEntryHelpersModule.computePoolSections(var3, if fFlagSduiPerSectionPoolSizing then p14 else nil)
 		
 		if p13 ~= nil or sduiPoolEntryHelpersModule.sectionsHaveMultiRow(var5) then
 			local var6 = sduiPoolEntryHelpersModule.createPoolEntryFns(var5, p6, p7, p8, p9, if p13 ~= nil then nil else p13(p11), p14)

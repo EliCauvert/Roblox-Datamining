@@ -37,6 +37,8 @@ return function(p1)
 			backgroundStyle = var1.backgroundStyle,
 			tag = var3.heroMedia.tag,
 			aspectRatio = var1.aspectRatio,
+			ScaleType = var1.scaleType,
+			testId = `{var2.testId}--hero-media-image`,
 			Position = UDim2.fromOffset(-offsetX, 0),
 			Size = UDim2.new(1, offsetX * 2, var1.height.Scale, var1.height.Offset)
 		})

@@ -1,13 +1,12 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local iconSizeModule = require(foundation.Enums.IconSize)
 
 local function variantsFactory(_)
-	-- upvalues: inputSizeModule (ref), iconSizeModule (ref), flagsModule (ref)
+	-- upvalues: inputSizeModule (ref), iconSizeModule (ref)
 	return {
 		common = {
 			text = { tag = "auto-x" },
@@ -46,11 +45,7 @@ local function variantsFactory(_)
 			}
 		},
 		paddings = {
-			[inputSizeModule.XSmall] = {
-				content = {
-					tag = if flagsModule.FoundationFixTabsFitBorderWidth then "padding-x-xsmall" else "padding-x-small"
-				}
-			},
+			[inputSizeModule.XSmall] = { content = { tag = "padding-x-xsmall" } },
 			[inputSizeModule.Small] = { content = { tag = "padding-x-small" } },
 			[inputSizeModule.Medium] = { content = { tag = "padding-x-medium" } },
 			[inputSizeModule.Large] = { content = { tag = "padding-x-large" } }
@@ -59,8 +54,8 @@ local function variantsFactory(_)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref), flagsModule (ref)
+	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local tab = variantsContextModule.useVariants("Tab", variantsFactory, p1)
 	
-	return composeStyleVariantModule(tab.common, tab.sizes[p2], tab.isFill[p3], if flagsModule.FoundationFixTabsFitBorderWidth then tab.paddings[p2] elseif p3 then tab.paddings[p2] else {})
+	return composeStyleVariantModule(tab.common, tab.sizes[p2], tab.isFill[p3], tab.paddings[p2])
 end

@@ -4,17 +4,18 @@ local dataHydrationModule = require(parent.DataHydration)
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local placeVersionHistoryModule = require(parent.DataHydration.PlaceVersionHistory)
+local fFlagBuildExperienceForceRefreshVersionHistoryModule = require(buildExperience.Flags.FFlagBuildExperienceForceRefreshVersionHistory)
 local getVersionInformationStoreModule = require(buildExperience.Stores.GetVersionInformationStore)
 local _ = require(script.Parent.VersionTitleDescriptionPageView)
 local dataStatus = dataHydrationModule.DataStatus
 
 return function(p1)
-	-- upvalues: getVersionInformationStoreModule (ref), placeVersionHistoryModule (ref), reactModule (ref), signalsReactModule (ref), dataStatus (ref)
+	-- upvalues: getVersionInformationStoreModule (ref), placeVersionHistoryModule (ref), reactModule (ref), fFlagBuildExperienceForceRefreshVersionHistoryModule (ref), signalsReactModule (ref), dataStatus (ref)
 	local var1 = getVersionInformationStoreModule()
 	local placeVersionHistoryStore = placeVersionHistoryModule.getPlaceVersionHistoryStore()
 	local var2 = reactModule.useMemo(function()
-		-- upvalues: placeVersionHistoryStore (ref), p1 (ref)
-		return placeVersionHistoryStore.getAndFetchHistory(p1.placeId)
+		-- upvalues: fFlagBuildExperienceForceRefreshVersionHistoryModule (copy), placeVersionHistoryStore (ref), p1 (ref)
+		return if fFlagBuildExperienceForceRefreshVersionHistoryModule then placeVersionHistoryStore.fetchHistory(p1.placeId) else placeVersionHistoryStore.getAndFetchHistory(p1.placeId)
 	end, { p1.placeId, placeVersionHistoryStore })
 	local var3 = signalsReactModule.useSignalState(var2.data)
 	local var4 = signalsReactModule.useSignalState(var2.status)
@@ -30,22 +31,18 @@ return function(p1)
 	local var16 = reactModule.useRef("")
 	local var17, var18 = reactModule.useState(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var17 (ref), p1 (ref), var15 (ref), var8 (ref), var16 (ref), var9 (ref), var12 (ref), var14 (ref), var18 (ref)
-		if var10 and var17 ~= p1.placeId then
-			var15.current = var8
-			var16.current = var9
-			var12(var8)
-			var14(var9)
-			var18(p1.placeId)
-			
+		-- upvalues: var10 (ref), var11 (ref), var15 (ref), var13 (ref), var16 (ref), fFlagBuildExperienceForceRefreshVersionHistoryModule (copy), var17 (ref), p1 (ref), var8 (ref), var9 (ref), var12 (ref), var14 (ref), var18 (ref)
+		if not var10 then return end
+		if var17 == p1.placeId and not (fFlagBuildExperienceForceRefreshVersionHistoryModule and not (if var11:getValue() == var15.current then var13:getValue() ~= var16.current else true)) then
 			return
 		end
+		var15.current = var8
+		var16.current = var9
+		var12(var8)
+		var14(var9)
+		var18(p1.placeId)
 	end, {
-		var9,
-		var8,
-		var17,
-		var10,
-		p1.placeId
+		var13, var9, var8, var17, var10, p1.placeId, var11
 	})
 	local var19 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), p1 (ref), var11 (ref), var13 (ref), var15 (ref), var16 (ref), var1 (ref)

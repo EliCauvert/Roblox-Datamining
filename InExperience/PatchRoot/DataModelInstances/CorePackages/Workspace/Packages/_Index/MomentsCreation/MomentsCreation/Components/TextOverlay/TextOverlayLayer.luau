@@ -49,8 +49,14 @@ local verticalFontSizeSliderModule = require(momentsCreation.Components.TextOver
 local getFFlagMomentsTextDragToDeleteModule = require(momentsCreation.Flags.GetFFlagMomentsTextDragToDelete)
 local fFlagMomentsTextAlignmentPickerModule = require(momentsCreation.Flags.FFlagMomentsTextAlignmentPicker)
 local fFlagMomentsTextColorPickerModule = require(momentsCreation.Flags.FFlagMomentsTextColorPicker)
+local fFlagMomentsTextFontPickerModule = require(momentsCreation.Flags.FFlagMomentsTextFontPicker)
+local fFlagMomentsTextOverlayBottomScrimModule = require(momentsCreation.Flags.FFlagMomentsTextOverlayBottomScrim)
 local textOverlayToolbarModule = require(momentsCreation.Components.TextOverlay.TextOverlayToolbar)
 local t = { dampingRatio = 0.85, frequency = 12 }
+local numberSequence = NumberSequence.new({
+	NumberSequenceKeypoint.new(0, 1),
+	NumberSequenceKeypoint.new(1, 0.2)
+})
 
 local function GenerateTextButton(p1)
 	-- upvalues: useTokens (ref), useCreationFlowStringsModule (ref), useSignalState (ref), useCallback (ref), reactModule (ref), view (ref), button (ref), foundationModule (ref), builderIconsModule (ref)
@@ -81,7 +87,7 @@ local function GenerateTextButton(p1)
 end
 
 return function(p1)
-	-- upvalues: useSignalState (ref), getFFlagMomentsCreationTextOverlayResolutionScaleModule (ref), getScale (ref), useMemo (ref), signalsModule (ref), creationFlowStateModule (ref), useRef (ref), useBinding (ref), useOnScreenKeyboardHeightModule (ref), fFlagMomentsTextOverlayPreviewTransform (ref), constantsModule (ref), fitTextOverlayFontSizeModule (ref), useCallback (ref), getFFlagMomentsStickerButton (ref), dashModule (ref), getFFlagEnableMomentTextGeneration (ref), useDeviceInsets (ref), useAnimatedBinding (ref), useIsMultiTouchActive (ref), UIDragDetectorFixEventPositionEnabledEngineFeature (ref), guiService (ref), isPointOverTrashTargetModule (ref), getFFlagMomentsTextDragToDeleteModule (ref), reactOtterModule (ref), t (ref), useEffect (ref), makeTextOverlayEditsForEditorModule (ref), makeDefaultTextOverlayEditModule (ref), textService (ref), reactModule (ref), view (ref), foundationModule (ref), textOverlay (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref), GenerateTextButton (ref), getFFlagMomentsTextVerticalSizeSliderModule (ref), verticalFontSizeSliderModule (ref), fFlagMomentsTextAlignmentPickerModule (ref), fFlagMomentsTextColorPickerModule (ref), textOverlayToolbarModule (ref), overlayDisplay (ref), getFFlagMomentsTextOverlayClampToBoundsModule (ref), textOverlayDisplay (ref), textOverlayTrashZoneModule (ref)
+	-- upvalues: useSignalState (ref), getFFlagMomentsCreationTextOverlayResolutionScaleModule (ref), getScale (ref), useMemo (ref), signalsModule (ref), creationFlowStateModule (ref), useRef (ref), useBinding (ref), useOnScreenKeyboardHeightModule (ref), fFlagMomentsTextOverlayPreviewTransform (ref), constantsModule (ref), fitTextOverlayFontSizeModule (ref), useCallback (ref), getFFlagMomentsStickerButton (ref), dashModule (ref), getFFlagEnableMomentTextGeneration (ref), useDeviceInsets (ref), useAnimatedBinding (ref), useIsMultiTouchActive (ref), UIDragDetectorFixEventPositionEnabledEngineFeature (ref), guiService (ref), isPointOverTrashTargetModule (ref), getFFlagMomentsTextDragToDeleteModule (ref), reactOtterModule (ref), t (ref), useEffect (ref), makeTextOverlayEditsForEditorModule (ref), makeDefaultTextOverlayEditModule (ref), textService (ref), reactModule (ref), view (ref), foundationModule (ref), textOverlay (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref), GenerateTextButton (ref), getFFlagMomentsTextVerticalSizeSliderModule (ref), verticalFontSizeSliderModule (ref), fFlagMomentsTextOverlayBottomScrimModule (ref), numberSequence (ref), fFlagMomentsTextAlignmentPickerModule (ref), fFlagMomentsTextColorPickerModule (ref), fFlagMomentsTextFontPickerModule (ref), textOverlayToolbarModule (ref), overlayDisplay (ref), getFFlagMomentsTextOverlayClampToBoundsModule (ref), textOverlayDisplay (ref), textOverlayTrashZoneModule (ref)
 	local controller = p1.controller
 	local var1 = useSignalState(controller.getStep)
 	local var2 = useSignalState(p1.ctx.getItemSize)
@@ -344,7 +350,15 @@ return function(p1)
 			}),
 			GenerateText = if getFFlagMomentsGenerateTextInTextOverlayModule() and controller.getCanGenerateText(false) then reactModule.createElement(GenerateTextButton, { controller = controller }) else nil,
 			VerticalFontSizeSlider = if getFFlagMomentsTextVerticalSizeSliderModule() and var35 then reactModule.createElement(verticalFontSizeSliderModule, { controller = controller, mediaHeight = var2.Y }) else nil,
-			TextOverlayToolbar = if fFlagMomentsTextAlignmentPickerModule or fFlagMomentsTextColorPickerModule then reactModule.createElement(textOverlayToolbarModule, { controller = controller, isKeyboardVisible = var12 > 0 }) else nil
+			BottomScrim = if fFlagMomentsTextOverlayBottomScrimModule then reactModule.createElement(view, {
+				ZIndex = 5,
+				tag = "position-bottom-center anchor-bottom-center",
+				Size = UDim2.new(1, 0, 0, 200),
+				backgroundStyle = { Color3 = Color3.new(0, 0, 0) }
+			}, {
+				UIGradient = reactModule.createElement("UIGradient", { Rotation = 90, Transparency = numberSequence })
+			}) else nil,
+			TextOverlayToolbar = if fFlagMomentsTextAlignmentPickerModule or fFlagMomentsTextColorPickerModule or fFlagMomentsTextFontPickerModule then reactModule.createElement(textOverlayToolbarModule, { controller = controller, isKeyboardVisible = var12 > 0 }) else nil
 		})
 	elseif textOverlays == nil or #textOverlays == 0 then
 		return nil

@@ -8,6 +8,7 @@ local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local placeVersionHistoryModule = require(parent.DataHydration.PlaceVersionHistory)
 local _ = require(buildExperience.Chat.chatTypes)
 local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
+local fFlagBuildExperienceForceRefreshVersionHistoryModule = require(buildExperience.Flags.FFlagBuildExperienceForceRefreshVersionHistory)
 local fFlagisPublishOnBuildRevertModule = require(buildExperience.Flags.FFlagisPublishOnBuildRevert)
 local feedbackActionModule = require(script.Parent.FeedbackAction)
 local _ = require(script.Parent.UserFeedback)
@@ -113,10 +114,12 @@ local function fetchVersionNote(p3, p4, p5, p6, p7)
 end
 
 local function getVersionNote(p3, p4, p5, p6)
-	-- upvalues: findVersionNote (ref), promiseModule (ref), fetchVersionNote (ref)
-	local var1 = findVersionNote(p3.getHistory(p4).data(false), p5)
-	
-	return if var1 == nil then fetchVersionNote(p3, p4, p5, nil, p6) else promiseModule.resolve(var1)
+	-- upvalues: fFlagBuildExperienceForceRefreshVersionHistoryModule (ref), findVersionNote (ref), promiseModule (ref), fetchVersionNote (ref)
+	if not fFlagBuildExperienceForceRefreshVersionHistoryModule then
+		local var1 = findVersionNote(p3.getHistory(p4).data(false), p5)
+		
+		return if var1 == nil then fetchVersionNote(p3, p4, p5, nil, p6) else promiseModule.resolve(var1)
+	end
 end
 
 return {

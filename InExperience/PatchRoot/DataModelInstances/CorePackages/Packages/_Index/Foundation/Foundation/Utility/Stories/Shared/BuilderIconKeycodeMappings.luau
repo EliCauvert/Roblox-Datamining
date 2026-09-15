@@ -1,6 +1,8 @@
-﻿local parent = script:FindFirstAncestor("Foundation").Parent
+﻿local foundation = script:FindFirstAncestor("Foundation")
+local parent = foundation.Parent
 local builderIconsModule = require(parent.BuilderIcons)
 local dashModule = require(parent.Dash)
+local _ = require(foundation.Enums.InputPlatform)
 
 local function _(value)
 	-- upvalues: builderIconsModule (ref)

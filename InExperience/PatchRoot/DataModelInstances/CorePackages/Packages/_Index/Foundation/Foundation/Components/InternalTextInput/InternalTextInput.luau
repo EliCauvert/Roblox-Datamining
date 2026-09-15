@@ -16,6 +16,7 @@ local getDisabledStyleModule = require(foundation.Utility.getDisabledStyle)
 local getMultiLineTextHeightModule = require(foundation.Utility.getMultiLineTextHeight)
 local isPluginSecurityModule = require(foundation.Utility.isPluginSecurity)
 local mapBindableModule = require(foundation.Utility.mapBindable)
+local normalizeFontFaceModule = require(foundation.Utility.normalizeFontFace)
 local truncateTextToCursorModule = require(script.Parent.truncateTextToCursor)
 local useBindableModule = require(foundation.Utility.useBindable)
 local usePreferredInputModule = require(foundation.Utility.usePreferredInput)
@@ -38,7 +39,7 @@ local t = {
 	variant = inputVariantModule.Standard
 }
 local var1 = reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), isPluginSecurityModule (ref), paddingModule (ref)
+	-- upvalues: reactModule (ref), flagsModule (ref), normalizeFontFaceModule (ref), isPluginSecurityModule (ref), paddingModule (ref)
 	local isBoundsChecker = p1.isBoundsChecker
 	local isMultiLine = p1.isMultiLine or isBoundsChecker
 	
@@ -47,7 +48,8 @@ local var1 = reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		Selectable = false,
 		Active = if isBoundsChecker then false else nil,
 		Visible = if isBoundsChecker then false else nil,
-		Font = p1.fontStyle.Font,
+		Font = if flagsModule.FoundationFontFaceMigration then nil else p1.fontStyle.Font,
+		FontFace = if flagsModule.FoundationFontFaceMigration then normalizeFontFaceModule(p1.fontStyle.Font) else nil,
 		TextSize = p1.fontStyle.FontSize,
 		LineHeight = p1.fontStyle.LineHeight,
 		TextColor3 = if p1.textStyle then p1.textStyle.Color3 else nil,
