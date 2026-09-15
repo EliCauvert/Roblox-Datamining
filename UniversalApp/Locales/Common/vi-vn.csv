@@ -2614,8 +2614,10 @@ Feature.Build.Message.ShareLinkFailed,Không thể tạo đường liên kết c
 Feature.Build.Message.SignedOut,Bạn đã đăng xuất. Hãy đăng nhập và thử lại.
 Feature.Build.Message.TasksCompleted,Đã hoàn thành {NUM_COMPLETED_TASKS} nhiệm vụ
 Feature.Build.Message.ThinkingSeconds,Suy nghĩ trong {SECONDS}giây
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,Hãy trở thành bạn bè đáng tin cậy với nhà sáng tạo này để chơi trò chơi của họ.
 Feature.Build.Message.TryAgain,Hãy thử lại.
 Feature.Build.Message.TurnToPortrait,Hãy xoay thiết bị sang chế độ dọc để tiếp tục thao tác trên trò chơi của bạn.
+Feature.Build.Message.UpdateSettingsToPlaytest,"Để chơi trò chơi này, hãy cập nhật cài đặt xem trước trò chơi."
 Feature.Build.Message.VersionHistoryLoad,Không thể tải lịch sử phiên bản.
 Feature.Build.Message.WhatToCreate,Hôm nay bạn muốn tạo nội dung gì?
 Feature.Build.Message.WorkedMinutesSeconds,Đã xử lý trong {MINUTES} phút {REM_SECONDS} giây
@@ -4816,6 +4818,7 @@ Feature.ReportAbuse.ProblemDescription.Swearing,"Chửi thề, nguyền rủa ho
 Feature.ReportAbuse.ProblemDescription.Violence,Bạo lực cực độ hoặc máu me
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Cảm ơn bạn đã khởi tạo báo cáo trường hợp Vi phạm sở hữu trí tuệ
+Feature.RobloxSubscription.Action.JoinIn,Tham gia sau {time}
 Feature.RobloxSubscription.Action.Subscribe,
 Feature.RobloxSubscription.Action.TryItForFree,Dùng thử miễn phí
 Feature.RobloxSubscription.Body.AlreadySubscribed,Gói đăng ký Plus của bạn đã có sẵn các lợi ích trong trò chơi.
@@ -4825,6 +4828,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,Hãy xác minh tuổi bằn
 Feature.RobloxSubscription.Description.Benefit.Customize,Tùy chỉnh bằng khung hồ sơ và chủ đề của ứng dụng
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"Giảm 10% trong 60 ngày đầu, sau đó giảm 20% cho vật phẩm và avatar"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,"Vui hơn, tốn ít Robux hơn. Đăng ký Roblox Plus ngay."
+Feature.RobloxSubscription.Description.JoinEarly,Mua gói Plus để được tham gia sớm
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Khi nhấp chuột vào \u{201C}{ctaText}\u{201D}, bạn đồng ý với <a href=""{termsUrl}"">Điều khoản gói đăng ký của Roblox</a>. Hệ thống sẽ tự động thu phí hằng tháng cho đến khi bạn hủy."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Máy chủ riêng miễn phí
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4843,6 +4847,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Tin vui cho bạn
 Feature.RobloxSubscription.Title.GenericError,Đã gặp lỗi
 Feature.RobloxSubscription.Title.GetBlackbird,Mua gói Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Gói Roblox Plus không hỗ trợ nền tảng này
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Bạn có thể tham gia sự kiện sớm hơn những người khác.
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Mua gói Plus để có quyền truy cập sớm
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Trạng thái tài khoản, vi phạm và khiếu nại"
 Feature.Schools.Action.AlreadyGraduated,Tôi đã tốt nghiệp
 Feature.Schools.Action.CantFindSchool,Bạn không tìm thấy trường học của mình?

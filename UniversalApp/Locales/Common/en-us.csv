@@ -4305,6 +4305,7 @@ Feature.NotApproved.Label.AbuseType.CheatandExploits,Cheat and Exploits
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,Child Endangerment
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V2,Child Exploitation
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V3,Harmful Content/Behavior
+Feature.NotApproved.Label.AbuseType.ChildEndangerment.V4,Child Safety
 Feature.NotApproved.Label.AbuseType.ClickbaitAds,Clickbait Ads
 Feature.NotApproved.Label.AbuseType.Commerce,Commerce
 Feature.NotApproved.Label.AbuseType.CompromisedAccount,Compromised Account

@@ -2614,8 +2614,10 @@ Feature.Build.Message.ShareLinkFailed,共有リンクを作成できませんで
 Feature.Build.Message.SignedOut,ログアウトしました。ログインしてもう一度お試しください。
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS}のタスクが完了しました
 Feature.Build.Message.ThinkingSeconds,思考時間{SECONDS}秒
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,このゲームをプレイするには、クリエーターと信頼できる友達になりましょう。
 Feature.Build.Message.TryAgain,やり直してください。
 Feature.Build.Message.TurnToPortrait,ゲームの作業を続けるには、デバイスをポートレートモードにしてください。
+Feature.Build.Message.UpdateSettingsToPlaytest,このゲームをプレイするには、ゲームプレビュー設定を更新してください。
 Feature.Build.Message.VersionHistoryLoad,バージョン履歴を読み込めませんでした。
 Feature.Build.Message.WhatToCreate,今日は何を制作したいですか？
 Feature.Build.Message.WorkedMinutesSeconds,作業時間{MINUTES}分{REM_SECONDS}秒
@@ -4814,6 +4816,7 @@ Feature.ReportAbuse.ProblemDescription.Swearing,暴言、罵り、または汚�
 Feature.ReportAbuse.ProblemDescription.Violence,極端な暴力または流血描写
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,
 Feature.ReportAbuse.Title.SelectInSceneIpReport,知的財産侵害の報告を開始していただきありがとうございます
+Feature.RobloxSubscription.Action.JoinIn,{time}後に参加
 Feature.RobloxSubscription.Action.Subscribe,
 Feature.RobloxSubscription.Action.TryItForFree,無料で試す
 Feature.RobloxSubscription.Body.AlreadySubscribed,お持ちのPlus定期購入で、すでにゲーム内特典が提供されています。
@@ -4823,6 +4826,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,年齢チェックで年齢
 Feature.RobloxSubscription.Description.Benefit.Customize,プロフィールフレームとアプリのテーマでカスタマイズ
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,最初の60日間は10%オフ、その後はアイテムとアバターが20%オフ
 Feature.RobloxSubscription.Description.ExclusiveBenefits,少ないRobuxでもっと楽しく。Roblox Plusを定期購入しましょう。
+Feature.RobloxSubscription.Description.JoinEarly,Plusで先行参加
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}をクリックすると、<a href=""{termsUrl}"">Roblox定期購入規約</a>に同意したとみなされます。キャンセルするまで、毎月自動的に料金が課金されます。"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,無料プライベートサーバー
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4841,6 +4845,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,うれしいお知らせで�
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plusを取得する
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plusはこちらではご利用いただけません
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,誰よりも先にイベントに参加できます。
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Plusで早期アクセス
 Feature.SafetyDashboard.Heading.AccountStatus.V2,アカウント状況、違反、異議申し立て
 Feature.Schools.Action.AlreadyGraduated,卒業済みです
 Feature.Schools.Action.CantFindSchool,学校が見つからない場合

@@ -2613,8 +2613,10 @@ Feature.Build.Message.ShareLinkFailed,無法建立分享連結，請再試一次
 Feature.Build.Message.SignedOut,已登出，請登入後再試一次。
 Feature.Build.Message.TasksCompleted,已完成 {NUM_COMPLETED_TASKS} 項任務
 Feature.Build.Message.ThinkingSeconds,思考了 {SECONDS} 秒
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,成為此創作者信任的好友，即可玩對方的遊戲。
 Feature.Build.Message.TryAgain,再試一次。
 Feature.Build.Message.TurnToPortrait,將裝置切換為直放模式，以繼續進行遊戲。
+Feature.Build.Message.UpdateSettingsToPlaytest,若要玩此遊戲，請更新你的遊戲預覽設定。
 Feature.Build.Message.VersionHistoryLoad,無法載入版本歷史紀錄。
 Feature.Build.Message.WhatToCreate,今天你想要建立什麼呢？
 Feature.Build.Message.WorkedMinutesSeconds,已運作 {MINUTES} 分 {REM_SECONDS} 秒
@@ -4815,6 +4817,7 @@ Feature.ReportAbuse.ProblemDescription.Swearing,粗口、謾罵或髒話
 Feature.ReportAbuse.ProblemDescription.Violence,嫉妒暴力或血腥
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,
 Feature.ReportAbuse.Title.SelectInSceneIpReport,感謝你提出智慧財產權侵權檢舉
+Feature.RobloxSubscription.Action.JoinIn,加入時間：{time}
 Feature.RobloxSubscription.Action.Subscribe,
 Feature.RobloxSubscription.Action.TryItForFree,免費試用
 Feature.RobloxSubscription.Body.AlreadySubscribed,您的 Plus 訂閱已提供遊戲內的福利。
@@ -4824,6 +4827,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,完成年齡驗證，即可
 Feature.RobloxSubscription.Description.Benefit.Customize,透過個人檔案外框和 App 主題自訂
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,前 60 天享道具和虛擬人偶 10% 優惠，之後享 20% 優惠
 Feature.RobloxSubscription.Description.ExclusiveBenefits,用更少的 Robux 享受更多樂趣。訂閱 Roblox Plus。
+Feature.RobloxSubscription.Description.JoinEarly,透過 Plus 搶先加入
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"按一下\u{201C}{ctaText}\u{201D}，即表示您同意 <a href=""{termsUrl}"">Roblox 訂閱條款</a>。系統將每月自動向您收取費用，直到取消訂閱為止。"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,免費私人伺服器
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4842,6 +4846,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,好消息
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,取得 Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,此處無法使用 Roblox Plus
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,你可以比其他人更早加入活動。
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,透過 Plus 搶先體驗
 Feature.SafetyDashboard.Heading.AccountStatus.V2,帳號狀態、違規和上訴
 Feature.Schools.Action.AlreadyGraduated,我已經畢業了
 Feature.Schools.Action.CantFindSchool,找不到學校嗎？

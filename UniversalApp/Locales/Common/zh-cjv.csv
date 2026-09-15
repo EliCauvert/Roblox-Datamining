@@ -4294,6 +4294,7 @@ Feature.NotApproved.Label.AbuseType.CheatandExploits,作弊和外挂
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,儿童危害行为
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V2,剥削儿童
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V3,有害内容/行为
+Feature.NotApproved.Label.AbuseType.ChildEndangerment.V4,
 Feature.NotApproved.Label.AbuseType.ClickbaitAds,钓鱼广告
 Feature.NotApproved.Label.AbuseType.Commerce,商务
 Feature.NotApproved.Label.AbuseType.CompromisedAccount,帐户遭到入侵

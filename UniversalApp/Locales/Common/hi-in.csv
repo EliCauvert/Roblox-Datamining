@@ -2594,8 +2594,10 @@ Feature.Build.Message.ShareLinkFailed,शेयर लिंक नहीं ब
 Feature.Build.Message.SignedOut,आपको साइन-आउट कर दिया गया है. साइन-इन करके फिर से कोशिश करें.
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} टास्क पूरे हुए
 Feature.Build.Message.ThinkingSeconds,{SECONDS} सेकंड तक प्रोसेस कर रहा है
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,"इस क्रिएटर का गेम खेलने के लिए, उनके भरोसेमंद दोस्त बनें."
 Feature.Build.Message.TryAgain,फिर से कोशिश करें.
 Feature.Build.Message.TurnToPortrait,"अपने गेम पर काम जारी रखने के लिए, अपने डिवाइस को पोर्ट्रेट मोड पर रखें."
+Feature.Build.Message.UpdateSettingsToPlaytest,"इस गेम को खेलने के लिए, अपने गेम की प्रीव्यू सेटिंग को अपडेट करें."
 Feature.Build.Message.VersionHistoryLoad,वर्ज़न हिस्ट्री लोड नहीं हो सकी.
 Feature.Build.Message.WhatToCreate,आपको आज क्या क्रिएट करना है?
 Feature.Build.Message.WorkedMinutesSeconds,{MINUTES} मिनट {REM_SECONDS} सेकंड तक काम किया
@@ -4796,6 +4798,7 @@ Feature.ReportAbuse.ProblemDescription.Swearing,"गाली देना, द�
 Feature.ReportAbuse.ProblemDescription.Violence,बहुत ज़्यादा हिंसा या खून
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,अपनी रिपोर्ट जारी रखें
 Feature.ReportAbuse.Title.SelectInSceneIpReport,अपनी IP (बौद्धिक संपदा) उल्लंघन रिपोर्ट शुरू करने के लिए धन्यवाद
+Feature.RobloxSubscription.Action.JoinIn,{time} में जॉइन करें
 Feature.RobloxSubscription.Action.Subscribe,सब्सक्राइब करें
 Feature.RobloxSubscription.Action.TryItForFree,इसे फ़्री में आज़माएँ
 Feature.RobloxSubscription.Body.AlreadySubscribed,आपके Plus सब्सक्रिप्शन में पहले से ही गेम में मिलने वाले फ़ायदे शामिल हैं.
@@ -4805,6 +4808,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,उम्र का वे�
 Feature.RobloxSubscription.Description.Benefit.Customize,प्रोफ़ाइल फ़्रेम और ऐप थीम के साथ कस्टमाइज़ करें
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"अलग-अलग आइटम और अवतार पर, पहले 60 दिनों में 10%, और फिर 20% की छूट"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,कम Robux में ज़्यादा मज़ा. Roblox Plus को सब्सक्राइब करें.
+Feature.RobloxSubscription.Description.JoinEarly,Plus के साथ जल्दी जॉइन करें
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} पर क्लिक करने का मतलब है कि आप <a href=""{termsUrl}"">Roblox के सब्सक्रिप्शन की शर्तों</a> से सहमत हैं. आपके कैंसिल करने तक आपसे हर महीने अपने आप शुल्क ले लिया जाएगा."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,फ़्री प्राइवेट सर्वर्स
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4823,6 +4827,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,अच्छी खबर
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus लें
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus यहाँ उपलब्ध नहीं है
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,आपके पास इवेंट में सबसे पहले शामिल होने का विकल्प है.
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Plus के साथ अर्ली ऐक्सेस
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"अकाउंट का स्टेटस, उल्लंघन और अपील"
 Feature.Schools.Action.AlreadyGraduated,मैंने पहले ही ग्रैजुएशन कर लिया है
 Feature.Schools.Action.CantFindSchool,आपको अपना स्कूल नहीं मिल रहा?

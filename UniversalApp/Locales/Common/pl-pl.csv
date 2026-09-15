@@ -2614,8 +2614,10 @@ Feature.Build.Message.ShareLinkFailed,Nie udało się utworzyć linku do udostę
 Feature.Build.Message.SignedOut,Wylogowano Cię. Zaloguj się i spróbuj ponownie.
 Feature.Build.Message.TasksCompleted,Ukończone zadania – {NUM_COMPLETED_TASKS}
 Feature.Build.Message.ThinkingSeconds,Myślenie trwało {SECONDS} s
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,"Zostań zaufanym znajomym tego twórcy, aby zagrać w jego grę."
 Feature.Build.Message.TryAgain,Spróbuj ponownie.
 Feature.Build.Message.TurnToPortrait,"Przełącz urządzenie w tryb pionowy, aby dalej pracować nad grą."
+Feature.Build.Message.UpdateSettingsToPlaytest,"Aby zagrać w tę grę, zaktualizuj ustawienie dotyczące gier w wersji zapoznawczej."
 Feature.Build.Message.VersionHistoryLoad,Nie udało się wczytać historii wersji.
 Feature.Build.Message.WhatToCreate,Co chcesz dziś stworzyć?
 Feature.Build.Message.WorkedMinutesSeconds,Działanie trwało {MINUTES} min {REM_SECONDS} s
@@ -4816,6 +4818,7 @@ Feature.ReportAbuse.ProblemDescription.Swearing,Przekleństwa lub wulgarny języ
 Feature.ReportAbuse.ProblemDescription.Violence,Ekstremalna przemoc lub rozlew krwi
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Kontynuuj zgłoszenie
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Dziękujemy za rozpoczęcie zgłaszania naruszenia praw własności intelektualnej
+Feature.RobloxSubscription.Action.JoinIn,Dołącz za {time}
 Feature.RobloxSubscription.Action.Subscribe,Subskrybuj
 Feature.RobloxSubscription.Action.TryItForFree,Wypróbuj bezpłatnie
 Feature.RobloxSubscription.Body.AlreadySubscribed,Twoja subskrypcja Plus już teraz zapewnia Ci korzyści w grze.
@@ -4825,6 +4828,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,"Przeprowadź weryfikację 
 Feature.RobloxSubscription.Description.Benefit.Customize,Dostosuj za pomocą ramek profilu i motywów aplikacji
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% zniżki przez pierwsze 60 dni, a następnie 20% zniżki na przedmioty i awatary"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Więcej zabawy za mniej Robuxów. Wykup subskrypcję Roblox Plus.
+Feature.RobloxSubscription.Description.JoinEarly,Dołącz wcześniej dzięki subskrypcji Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Klikając przycisk \u{201C}{ctaText}\u{201D}, akceptujesz <a href=""{termsUrl}"">Warunki subskrypcji Robloxa</a>. Opłata będzie pobierana automatycznie co miesiąc do momentu anulowania subskrypcji."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Darmowe serwery prywatne
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4843,6 +4847,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Dobra wiadomość
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Kup Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus jest niedostępny
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Możesz dołączyć do wydarzenia przed innymi osobami.
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Wcześniejszy dostęp dzięki subskrypcji Plus
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Status konta, naruszenia i odwołania"
 Feature.Schools.Action.AlreadyGraduated,Ukończyłem(-am) już szkołę
 Feature.Schools.Action.CantFindSchool,Nie możesz znaleźć swojej szkoły?

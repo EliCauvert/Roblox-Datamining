@@ -2614,8 +2614,10 @@ Feature.Build.Message.ShareLinkFailed,Paylaşım bağlantısı oluşturulamadı.
 Feature.Build.Message.SignedOut,Çıkış yaptın. Giriş yapıp tekrar dene.
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} görev tamamlandı
 Feature.Build.Message.ThinkingSeconds,{SECONDS} saniyedir düşünülüyor
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,Oyununu oynamak için bu yaratıcıyla birbirinizin güvenilir arkadaşı olun.
 Feature.Build.Message.TryAgain,Tekrar dene.
 Feature.Build.Message.TurnToPortrait,Oyunun üzerinde çalışmaya devam etmek için cihazını portre moduna getir.
+Feature.Build.Message.UpdateSettingsToPlaytest,Bu oyunu oynamak için oyun ön izleme ayarını güncelle.
 Feature.Build.Message.VersionHistoryLoad,Versiyon geçmişi yüklenemedi.
 Feature.Build.Message.WhatToCreate,Bugün ne yaratmak istiyorsun?
 Feature.Build.Message.WorkedMinutesSeconds,{MINUTES} dk. {REM_SECONDS} sn. çalışıldı
@@ -4816,6 +4818,7 @@ Feature.ReportAbuse.ProblemDescription.Swearing,"Hakaret, kaba dil, küfür"
 Feature.ReportAbuse.ProblemDescription.Violence,Aşırı şiddet veya vahşet
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Raporlamana devam et
 Feature.ReportAbuse.Title.SelectInSceneIpReport,FM İhlali raporlamanı başlattığın için teşekkür ederiz
+Feature.RobloxSubscription.Action.JoinIn,{time} itibarıyla katılabilirsin
 Feature.RobloxSubscription.Action.Subscribe,Abone Ol
 Feature.RobloxSubscription.Action.TryItForFree,Ücretsiz dene
 Feature.RobloxSubscription.Body.AlreadySubscribed,Plus aboneliğin zaten oyun içi avantajlar sağlıyor.
@@ -4825,6 +4828,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,Yaş kontrolüyle yaşını
 Feature.RobloxSubscription.Description.Benefit.Customize,Profil çerçeveleri ve uygulama temaları ile özelleştir
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"İlk 60 gün %10 indirim, ardından öğeler ve avatarlarda %20 indirim"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Daha az Robux karşılığında daha fazla eğlence. Roblox Plus'a abone ol.
+Feature.RobloxSubscription.Description.JoinEarly,Plus ile erken katıl
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} düğmesine tıklayarak <a href=""{termsUrl}"">Roblox Abonelik Koşulları</a>'nı kabul etmiş olursun. Sen iptal edene kadar her ay otomatik tahsilat yapılır."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Ücretsiz özel sunucular
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4843,6 +4847,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,İyi haberlerimiz var
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus'a geç
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus burada kullanılamıyor
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Etkinliğe herkesten önce katılabilirsin.
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Plus ile erken erişim
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Hesap durumu, ihlaller ve itirazlar"
 Feature.Schools.Action.AlreadyGraduated,Zaten mezun oldum
 Feature.Schools.Action.CantFindSchool,Okulunu bulamıyor musun?
