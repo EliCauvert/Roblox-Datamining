@@ -710,7 +710,6 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,हम आपकी 
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,सपोर्ट रिक्वेस्ट भेजी गई
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,अभी प्लेयर सपोर्ट की सुविधा उपलब्ध नहीं है. बाद में कोशिश करें.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,प्लेयर सपोर्ट की सुविधा उपलब्ध नहीं है
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,कृपया विवरण में ज़्यादा जानकारी दें
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,"सपोर्ट रिक्वेस्ट फ़ाइल करने के लिए, ज़रूरी है कि आपने हाल ही में यह एक्सपीरिएंस खेला हो."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,रिक्वेस्ट फ़ाइल करने के लिए इस एक्सपीरिएंस पर जाएँ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,"एक और रिक्वेस्ट सबमिट करने से पहले, क्रिएटर द्वारा आपकी मौजूदा रिक्वेस्ट का जवाब देने का इंतज़ार करें."
@@ -2040,6 +2039,7 @@ Feature.Build.Description.RevertToVersion,सबसे नए बदलाव �
 Feature.Build.Description.ShareLatest,शेयर करें कि आपके सबसे नए वर्ज़न में क्या बदला है.
 Feature.Build.Description.ShopButton,शॉपिंग एंट्री पॉइंट जोड़ें
 Feature.Build.Description.UpdateDeveloperProduct,डेवलपर प्रॉडक्ट {PRODUCT_ID} को अपडेट करें.
+Feature.Build.Description.VersionChanges,खिलाड़ियों को इस वर्ज़न में हुए बदलावों के बारे में बताएँ.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"विवरण में 1,000 या इससे कम कैरेक्टर होने चाहिए."
 Feature.Build.Error.DeveloperProductNameRequired,प्रॉडक्ट का नाम डालें.
 Feature.Build.Error.DeveloperProductNameTooLong,नाम में 50 या इससे कम कैरेक्टर होने चाहिए.
@@ -2220,6 +2220,7 @@ Feature.Build.Label.Version,वर्ज़न
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
+Feature.Build.Label.VersionTitleDesc,वर्ज़न का टाइटल और विवरण
 Feature.Build.Label.Video,वीडियो
 Feature.Build.Message.AccountRequirements,"आपका अकाउंट, बिल्ड इस्तेमाल करने की शर्तों को पूरा नहीं करता."
 Feature.Build.Message.AccountTooNew,आपका अकाउंट बिल्कुल नया होने की वजह से पब्लिश नहीं किया जा सकता. 2 दिन बाद फिर से कोशिश करें.
@@ -2352,6 +2353,7 @@ Feature.Build.Title.Tasks,टास्क
 Feature.Build.Title.TurnActivity,टर्न ऐक्टिविटी
 Feature.Build.Title.VersionHistory,वर्ज़न हिस्ट्री
 Feature.Build.Title.VersionInfo,वर्ज़न की जानकारी
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,वर्ज़न {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,क्या-क्या शामिल है?

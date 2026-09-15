@@ -5,6 +5,8 @@ local playersService = game:GetService("Players")
 local starterGuiService = game:GetService("StarterGui")
 local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
 local url = require(parent.Http).Url
+local blockingUtilityClearUnblockedFromBlockedList = game:DefineFastFlag("BlockingUtilityClearUnblockedFromBlockedList", false)
+local blockingUtilityRefireOnReplace = game:DefineFastFlag("BlockingUtilityRefireOnReplace", false)
 local t = {}
 t.__index = t
 local var1 = nil
@@ -259,35 +261,45 @@ starterGuiService:RegisterGetCore("PlayerUnmutedEvent", function()
 	return bindableEvent_7
 end)
 task.spawn(function()
-	-- upvalues: t_1 (write), var2 (write), bindableEvent (ref), bindableEvent_3 (ref)
+	-- upvalues: blockingUtilityRefireOnReplace (ref), t_1 (write), var2 (write), bindableEvent (ref), bindableEvent_3 (ref)
 	game:GetService("RobloxReplicatedStorage"):WaitForChild("SendPlayerBlockList", 1e999).OnClientEvent:Connect(function(p1)
-		-- upvalues: t_1 (copy), var2 (copy), bindableEvent (copy), bindableEvent_3 (copy)
+		-- upvalues: blockingUtilityRefireOnReplace (copy), t_1 (copy), var2 (copy), bindableEvent (copy), bindableEvent_3 (copy)
 		local t = {}
 		
 		for i, v in p1 do
 			t[tonumber(i)] = true
 		end
-		t_1 = t
-		var2 = true
-		
-		for i_1 in t do
-			if not t_1[i_1] then
-				bindableEvent:Fire(i_1, true)
+		if blockingUtilityRefireOnReplace then
+			local var4 = t_1
+			t_1 = t
+			var2 = true
+			
+			for i_1 in t do
+				if not var4[i_1] then
+					bindableEvent:Fire(i_1, true)
+				end
 			end
-		end
-		for i_2 in t_1 do
-			if not t[i_2] then
-				bindableEvent:Fire(i_2, false)
+			for i_2 in var4 do
+				if not t[i_2] then
+					bindableEvent:Fire(i_2, false)
+				end
 			end
+		else
+			t_1 = t
+			var2 = true
 		end
 		bindableEvent_3:Fire()
 	end)
 end)
 task.spawn(function()
-	-- upvalues: t_1 (write), bindableEvent (ref)
+	-- upvalues: blockingUtilityClearUnblockedFromBlockedList (ref), t_1 (write), bindableEvent (ref)
 	game:GetService("RobloxReplicatedStorage"):WaitForChild("UpdateLocalPlayerBlockList", 1e999).OnClientEvent:Connect(function(p2, p3)
-		-- upvalues: t_1 (copy), bindableEvent (copy)
-		t_1[p2] = if p3 then true else nil
+		-- upvalues: blockingUtilityClearUnblockedFromBlockedList (copy), t_1 (copy), bindableEvent (copy)
+		if blockingUtilityClearUnblockedFromBlockedList then
+			t_1[p2] = if p3 then true else nil
+		else
+			t_1[p2] = p3
+		end
 		bindableEvent:Fire(p2, p3)
 	end)
 end)

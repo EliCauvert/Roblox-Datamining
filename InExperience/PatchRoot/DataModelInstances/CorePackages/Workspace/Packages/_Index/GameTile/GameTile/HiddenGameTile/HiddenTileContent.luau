@@ -31,10 +31,11 @@ local postSendUserSignal = userSignalsModule.PostSendUserSignal
 local userSignalTypes = userSignalsModule.UserSignalTypes
 local notInterestedUserSignalTelemetryEventConfigsModule = require(gameTile.NotInterestedUserSignalTelemetryEventConfigs)
 local undoGameNotInterestedModule = require(gameTile.undoGameNotInterested)
+local fFlagLuaAppEnableSponsoredReportAd = sharedFlagsModule.FFlagLuaAppEnableSponsoredReportAd
 local fFlagLuaAppExtractNotInterestedHelper = sharedFlagsModule.FFlagLuaAppExtractNotInterestedHelper
 
 return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), useTokens (ref), useFocusGuiObject (ref), useRoactService (ref), roactNetworking (ref), useLocalization (ref), fFlagLuaAppExtractNotInterestedHelper (ref), guiService (ref), undoGameNotInterestedModule (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), postSendUserSignal (ref), userSignalTypes (ref), mutedError (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref)
+	-- upvalues: useDispatch (ref), reactModule (ref), useTokens (ref), useFocusGuiObject (ref), useRoactService (ref), roactNetworking (ref), useLocalization (ref), fFlagLuaAppExtractNotInterestedHelper (ref), guiService (ref), undoGameNotInterestedModule (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), postSendUserSignal (ref), userSignalTypes (ref), mutedError (ref), view (ref), fFlagLuaAppEnableSponsoredReportAd (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref)
 	local var1 = useDispatch()
 	local var2 = reactModule.useRef(nil)
 	local var3 = useTokens()
@@ -46,7 +47,7 @@ return reactModule.memo(function(p1)
 	})
 	
 	return reactModule.createElement(view, {
-		tag = "size-full gap-small col align-x-center align-y-center bg-surface-100 radius-medium padding-medium"
+		tag = if fFlagLuaAppEnableSponsoredReportAd then "size-full gap-small col align-x-center align-y-center bg-surface-100 radius-medium padding-medium" else "size-full gap-small col align-x-center align-y-center bg-surface-100 radius-medium"
 	}, {
 		Message = reactModule.createElement(text, {
 			LayoutOrder = 1,

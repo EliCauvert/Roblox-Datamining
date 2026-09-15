@@ -1,9 +1,11 @@
 ﻿local moments = script:FindFirstAncestor("Moments")
 local parent = moments.Parent
 local momentsCommonModule = require(parent.MomentsCommon)
+local sharedFlagsModule = require(parent.SharedFlags)
 local signalsModule = require(parent.Signals)
 local analytics = momentsCommonModule.Analytics
 local momentsSurfaceLoadManager = momentsCommonModule.Performance.MomentsSurfaceLoadManager
+local fFlagMomentsSurfaceLoadTTI = sharedFlagsModule.FFlagMomentsSurfaceLoadTTI
 local fFlagMomentsRealtimeObservability = momentsCommonModule.Flags.FFlagMomentsRealtimeObservability
 local fFlagMomentsContentStatsTelemetry = momentsCommonModule.Flags.FFlagMomentsContentStatsTelemetry
 local _ = require(script.Parent.FeedTypes)
@@ -14,7 +16,7 @@ local t = { kind = "skeleton" }
 local t_1 = { kind = "endState" }
 
 return function(p1, p2, p3, p4)
-	-- upvalues: createPagerStoreModule (ref), createSignal (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), fFlagMomentsContentStatsTelemetry (ref), analytics (ref), t_1 (ref), fFlagMomentsRealtimeObservability (ref), t (ref), momentsSurfaceLoadManager (ref)
+	-- upvalues: createPagerStoreModule (ref), createSignal (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), fFlagMomentsContentStatsTelemetry (ref), analytics (ref), t_1 (ref), fFlagMomentsRealtimeObservability (ref), t (ref), fFlagMomentsSurfaceLoadTTI (ref), momentsSurfaceLoadManager (ref)
 	local var1 = createPagerStoreModule()
 	local var2, var3 = createSignal("Loading")
 	local var4, var5 = createSignal(nil)
@@ -129,7 +131,7 @@ return function(p1, p2, p3, p4)
 	end
 	
 	local function runFetch(p7)
-		-- upvalues: var12 (write), var6 (ref), var14 (write), var11 (write), var9 (ref), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (ref), var5 (ref), var1 (ref), t (copy), var3 (ref), var15 (write), p4 (ref), var17 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), var19 (write), t_3 (ref), p3 (ref), momentsSurfaceLoadManager (copy), var10 (write), p1 (ref), t_2 (write), dedupeAndTrack (ref), var13 (write), var7 (ref), maybeAppendEndState (ref)
+		-- upvalues: var12 (write), var6 (ref), var14 (write), var11 (write), var9 (ref), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (ref), var5 (ref), var1 (ref), t (copy), var3 (ref), var15 (write), p4 (ref), var17 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), var19 (write), t_3 (ref), fFlagMomentsSurfaceLoadTTI (copy), p3 (ref), momentsSurfaceLoadManager (copy), var10 (write), p1 (ref), t_2 (write), dedupeAndTrack (ref), var13 (write), var7 (ref), maybeAppendEndState (ref)
 		if var12 then return end
 		if not p7 and not var6(false) then return end
 		var14 += 1
@@ -153,7 +155,7 @@ return function(p1, p2, p3, p4)
 			end
 			table.clear(t_3)
 			
-			if p3 then
+			if fFlagMomentsSurfaceLoadTTI and p3 then
 				momentsSurfaceLoadManager.start()
 				momentsSurfaceLoadManager.primaryDataStarted()
 				momentsSurfaceLoadManager.primaryDataNetworkFetch()
@@ -166,12 +168,12 @@ return function(p1, p2, p3, p4)
 		var3("LoadingMore")
 		local var26 = if p7 then nil else var10
 		task.spawn(function()
-			-- upvalues: p1 (copy), var26 (ref), var12 (copy), var25 (ref), var14 (copy), var11 (copy), p3 (copy), p7 (ref), sessionGeneration (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), var1 (copy), var10 (copy), var13 (copy), var7 (copy), var3 (copy), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var5 (copy), var9 (copy)
+			-- upvalues: p1 (copy), var26 (ref), var12 (copy), var25 (ref), var14 (copy), var11 (copy), fFlagMomentsSurfaceLoadTTI (copy), p3 (copy), p7 (ref), sessionGeneration (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), var1 (copy), var10 (copy), var13 (copy), var7 (copy), var3 (copy), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var5 (copy), var9 (copy)
 			local ok, status = pcall(p1.fetchAsync, var26)
 			
 			if var12 or var25 ~= var14 then return end
 			var11 = false
-			local var27 = p3 and (p7 and (sessionGeneration ~= nil and momentsSurfaceLoadManager.getSessionGeneration() == sessionGeneration))
+			local var27 = fFlagMomentsSurfaceLoadTTI and (p3 and (p7 and (sessionGeneration ~= nil and momentsSurfaceLoadManager.getSessionGeneration() == sessionGeneration)))
 			
 			if var27 then
 				momentsSurfaceLoadManager.primaryDataResponseReceived()
@@ -277,7 +279,7 @@ return function(p1, p2, p3, p4)
 		getCanLoadMoreBeyondLimit = var18,
 		loadInitial = loadInitial,
 		loadMore = function()
-			-- upvalues: fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (ref), var16 (ref), var11 (write), var8 (ref), var12 (write), var6 (ref), var14 (write), var9 (ref), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (ref), var1 (ref), t (copy), var3 (ref), var10 (write), p1 (ref), p3 (ref), momentsSurfaceLoadManager (copy), t_2 (write), dedupeAndTrack (ref), var13 (write), var7 (ref), maybeAppendEndState (ref), var5 (ref)
+			-- upvalues: fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (ref), var16 (ref), var11 (write), var8 (ref), var12 (write), var6 (ref), var14 (write), var9 (ref), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (ref), var1 (ref), t (copy), var3 (ref), var10 (write), p1 (ref), fFlagMomentsSurfaceLoadTTI (copy), p3 (ref), momentsSurfaceLoadManager (copy), t_2 (write), dedupeAndTrack (ref), var13 (write), var7 (ref), maybeAppendEndState (ref), var5 (ref)
 			if fFlagMomentsNonInfiniteScrollEndStateFixesModule then
 				if p4 ~= nil and var16(false) then return end
 			elseif var16(false) then return end
@@ -297,12 +299,12 @@ return function(p1, p2, p3, p4)
 			var3("LoadingMore")
 			local var29 = false
 			task.spawn(function()
-				-- upvalues: p1 (copy), var10 (ref), var12 (copy), var27 (ref), var14 (copy), var11 (copy), p3 (copy), var29 (ref), var28 (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), var1 (copy), var10 (copy), var13 (copy), var7 (copy), var3 (copy), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var5 (copy), var9 (copy)
+				-- upvalues: p1 (copy), var10 (ref), var12 (copy), var27 (ref), var14 (copy), var11 (copy), fFlagMomentsSurfaceLoadTTI (copy), p3 (copy), var29 (ref), var28 (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), var1 (copy), var10 (copy), var13 (copy), var7 (copy), var3 (copy), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var5 (copy), var9 (copy)
 				local ok, status = pcall(p1.fetchAsync, var10)
 				
 				if var12 or var27 ~= var14 then return end
 				var11 = false
-				local var30 = p3 and (var29 and (var28 ~= nil and momentsSurfaceLoadManager.getSessionGeneration() == var28))
+				local var30 = fFlagMomentsSurfaceLoadTTI and (p3 and (var29 and (var28 ~= nil and momentsSurfaceLoadManager.getSessionGeneration() == var28)))
 				
 				if var30 then
 					momentsSurfaceLoadManager.primaryDataResponseReceived()
@@ -392,7 +394,7 @@ return function(p1, p2, p3, p4)
 			end)
 		end,
 		loadBeyondLimit = function()
-			-- upvalues: var12 (write), p4 (ref), var16 (ref), var6 (ref), t_3 (ref), var1 (ref), var15 (write), var17 (ref), maybeAppendEndState (ref), var14 (write), var11 (write), var9 (ref), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (ref), t (copy), var3 (ref), var10 (write), p1 (ref), p3 (ref), momentsSurfaceLoadManager (copy), t_2 (write), dedupeAndTrack (ref), var13 (write), var7 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), var5 (ref)
+			-- upvalues: var12 (write), p4 (ref), var16 (ref), var6 (ref), t_3 (ref), var1 (ref), var15 (write), var17 (ref), maybeAppendEndState (ref), var14 (write), var11 (write), var9 (ref), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (ref), t (copy), var3 (ref), var10 (write), p1 (ref), fFlagMomentsSurfaceLoadTTI (copy), p3 (ref), momentsSurfaceLoadManager (copy), t_2 (write), dedupeAndTrack (ref), var13 (write), var7 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), var5 (ref)
 			if var12 or p4 == nil or not var16(false) then return end
 			if not var6(false) and #t_3 == 0 then return end
 			local items = var1.getItems(false)
@@ -438,12 +440,12 @@ return function(p1, p2, p3, p4)
 			var3("LoadingMore")
 			local var34 = false
 			task.spawn(function()
-				-- upvalues: p1 (copy), var10 (ref), var12 (copy), var32 (ref), var14 (copy), var11 (copy), p3 (copy), var34 (ref), var33 (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), var1 (copy), var10 (copy), var13 (copy), var7 (copy), var3 (copy), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var5 (copy), var9 (copy)
+				-- upvalues: p1 (copy), var10 (ref), var12 (copy), var32 (ref), var14 (copy), var11 (copy), fFlagMomentsSurfaceLoadTTI (copy), p3 (copy), var34 (ref), var33 (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), var1 (copy), var10 (copy), var13 (copy), var7 (copy), var3 (copy), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p4 (copy), maybeAppendEndState (copy), var5 (copy), var9 (copy)
 				local ok, status = pcall(p1.fetchAsync, var10)
 				
 				if var12 or var32 ~= var14 then return end
 				var11 = false
-				local var35 = p3 and (var34 and (var33 ~= nil and momentsSurfaceLoadManager.getSessionGeneration() == var33))
+				local var35 = fFlagMomentsSurfaceLoadTTI and (p3 and (var34 and (var33 ~= nil and momentsSurfaceLoadManager.getSessionGeneration() == var33)))
 				
 				if var35 then
 					momentsSurfaceLoadManager.primaryDataResponseReceived()

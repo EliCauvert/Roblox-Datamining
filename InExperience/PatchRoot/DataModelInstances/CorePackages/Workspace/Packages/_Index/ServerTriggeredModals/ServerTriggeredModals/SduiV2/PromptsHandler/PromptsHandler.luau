@@ -23,7 +23,6 @@ local promptsEntryPointModule = require(serverTriggeredModals.SduiV2.PromptsEntr
 local promptStyleModule = require(serverTriggeredModals.SduiV2.PromptStyle)
 local usePromptEntriesModule = require(serverTriggeredModals.SduiV2.usePromptEntries)
 local useModalSignalStoreModule = require(serverTriggeredModals.SignalStores.useModalSignalStore)
-local fFlagPromptsActionEventLoggingModule = require(serverTriggeredModals.Flags.FFlagPromptsActionEventLogging)
 local getEntryPointSurfaceConfigModule = require(script.Parent.getEntryPointSurfaceConfig)
 local getHomepagePromptsClientAttributesModule = require(script.Parent.Parent.getHomepagePromptsClientAttributes)
 local coachmarkRendererModule = require(script.Parent.CoachmarkRenderer)
@@ -41,7 +40,7 @@ local fFlagHomepagePromptsPaddingFix = sharedFlagsModule.FFlagHomepagePromptsPad
 local fFlagHomepagePromptsHandlerPassClientAttributes = sharedFlagsModule.FFlagHomepagePromptsHandlerPassClientAttributes
 
 return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), fFlagSduiDismissPromptAction (ref), useStore (ref), useModalSignalStoreModule (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), reactModule (ref), getEntryPointSurfaceConfigModule (ref), signalsReactModule (ref), fFlagHomepagePromptsHandlerPassClientAttributes (ref), promptsEntryPointModule (ref), getHomepagePromptsClientAttributesModule (ref), fFlagSduiAllowNoConfigsBuilt (ref), sduiLoadTimer (ref), fetchPromptsModule (ref), usePromptEntriesModule (ref), promptStyleModule (ref), setCentralOverlay (ref), centralOverlayType (ref), fFlagPromptsImpressionUsesTitle (ref), reportPromptImpressionModule (ref), loggerModule (ref), sendModalImpressionEvent (ref), fFlagPromptsHandlerCoachmarkEnabled (ref), fFlagSduiSurfaceBannerScrollAwaySticky (ref), fFlagAppIaScrollAway (ref), appNavBarModule (ref), fFlagSduiSurfaceBannerAlwaysMounted (ref), fFlagSduiSystemBannerComponent (ref), surfaceBannerModule (ref), sduiFeatureEntryPoint (ref), fFlagPromptsActionEventLoggingModule (ref), fFlagHomepagePromptsPaddingFix (ref), view (ref), coachmarkRendererModule (ref)
+	-- upvalues: useDispatch (ref), fFlagSduiDismissPromptAction (ref), useStore (ref), useModalSignalStoreModule (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), reactModule (ref), getEntryPointSurfaceConfigModule (ref), signalsReactModule (ref), fFlagHomepagePromptsHandlerPassClientAttributes (ref), promptsEntryPointModule (ref), getHomepagePromptsClientAttributesModule (ref), fFlagSduiAllowNoConfigsBuilt (ref), sduiLoadTimer (ref), fetchPromptsModule (ref), usePromptEntriesModule (ref), promptStyleModule (ref), setCentralOverlay (ref), centralOverlayType (ref), fFlagPromptsImpressionUsesTitle (ref), reportPromptImpressionModule (ref), loggerModule (ref), sendModalImpressionEvent (ref), fFlagPromptsHandlerCoachmarkEnabled (ref), fFlagSduiSurfaceBannerScrollAwaySticky (ref), fFlagAppIaScrollAway (ref), appNavBarModule (ref), fFlagSduiSurfaceBannerAlwaysMounted (ref), fFlagSduiSystemBannerComponent (ref), surfaceBannerModule (ref), sduiFeatureEntryPoint (ref), fFlagHomepagePromptsPaddingFix (ref), view (ref), coachmarkRendererModule (ref)
 	local var1
 	local entryPoint = p1.entryPoint
 	local promptStyle = p1.promptStyle
@@ -196,10 +195,7 @@ return reactModule.memo(function(p1)
 				LayoutOrder = 1,
 				configKey = var6.configKey,
 				identifier = var16.identifier,
-				appPage = var6.appPage,
-				additionalAnalyticsData = if fFlagPromptsActionEventLoggingModule then {
-					promptInstanceId = if var16.identifier then var16.identifier else nil
-				} else nil
+				appPage = var6.appPage
 			}) else nil,
 			ContentContainer = reactModule.createElement("Frame", {
 				LayoutOrder = 2,
@@ -216,10 +212,7 @@ return reactModule.memo(function(p1)
 			shouldDisplayError = false,
 			configKey = var6.configKey,
 			identifier = var20.identifier,
-			appPage = var6.appPage,
-			additionalAnalyticsData = if fFlagPromptsActionEventLoggingModule then {
-				promptInstanceId = if var20.identifier then var20.identifier else nil
-			} else nil
+			appPage = var6.appPage
 		}) else p1.inlineBannerFallback
 	end
 	if fFlagHomepagePromptsPaddingFix and var19 then

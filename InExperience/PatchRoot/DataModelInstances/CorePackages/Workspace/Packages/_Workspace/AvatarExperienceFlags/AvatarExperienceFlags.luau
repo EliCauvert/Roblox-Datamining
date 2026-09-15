@@ -389,12 +389,12 @@
 	FFlagAXFixVRControlBarFlicker = require(script.FFlagAXFixVRControlBarFlicker),
 	FFlagAXFixSearchLandingQuickButtonsOffset = require(script.FFlagAXFixSearchLandingQuickButtonsOffset),
 	FFlagAXAvatarPreviewPhotoboothMomentsButton = require(script.FFlagAXAvatarPreviewPhotoboothMomentsButton),
+	FFlagAXIaBSelectableItemCardRow = require(script.FFlagAXIaBSelectableItemCardRow),
 	FFlagAXFixR6CharacterPlacement = require(script.FFlagAXFixR6CharacterPlacement),
 	FFlagAXFixWidgetListSeeAllListReuse = require(script.FFlagAXFixWidgetListSeeAllListReuse),
 	FFlagAXCatalogHttpLinkSalesTypeFilter = require(script.FFlagAXCatalogHttpLinkSalesTypeFilter),
 	FFlagAXRemoveDynamicHeadBadge = require(script.FFlagAXRemoveDynamicHeadBadge),
 	FFlagAXPhotoboothMomentsPage = require(script.FFlagAXPhotoboothMomentsPage),
 	FFlagAXIaBDiscountPriceLine = require(script.FFlagAXIaBDiscountPriceLine),
-	FFlagAXActionButtonRoundedRectCursor = require(script.FFlagAXActionButtonRoundedRectCursor),
-	FFlagAXMarketplaceLicensingItemDetails = require(script.FFlagAXMarketplaceLicensingItemDetails)
+	FFlagAXActionButtonRoundedRectCursor = require(script.FFlagAXActionButtonRoundedRectCursor)
 }

@@ -5,6 +5,7 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
+local fFlagBuildVersionHistoryUpdatesModule = require(buildExperience.Flags.FFlagBuildVersionHistoryUpdates)
 local latestVersionCardViewModule = require(script.Parent.LatestVersionCard.LatestVersionCardView)
 local liveVersionCardViewModule = require(script.Parent.LiveVersionCard.LiveVersionCardView)
 local restoreVersionDialogModule = require(script.Parent.RestoreVersionDialog)
@@ -16,7 +17,7 @@ local sheet = foundationModule.Sheet
 local text = foundationModule.Text
 local view = foundationModule.View
 local useScaledValue = foundationModule.Hooks.useScaledValue
-local VERSION_HISTORY_VERSIONS_TITLE = localizationStringsModule.VERSION_HISTORY_VERSIONS_TITLE
+local var1 = if fFlagBuildVersionHistoryUpdatesModule then localizationStringsModule.VERSION_HISTORY_VERSIONS_TITLE else localizationStringsModule.VERSION_HISTORY_TITLE
 
 local function VersionHistoryContent(p1)
 	-- upvalues: useScrollPerformanceTrackerModule (ref), reactModule (ref), sheet (ref)
@@ -26,46 +27,97 @@ local function VersionHistoryContent(p1)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), localizationStringsModule (ref), VERSION_HISTORY_VERSIONS_TITLE (ref), fFlagBuildAgentRollbackModule (ref), latestVersionCardViewModule (ref), versionHistoryCardModule (ref), view (ref), checkbox (ref), text (ref), useScaledValue (ref), versionHistorySectionModule (ref), liveVersionCardViewModule (ref), sheet (ref), VersionHistoryContent (ref), restoreVersionDialogModule (ref)
+	-- upvalues: reactModule (ref), useLocalization (ref), localizationStringsModule (ref), var1 (ref), fFlagBuildAgentRollbackModule (ref), fFlagBuildVersionHistoryUpdatesModule (ref), latestVersionCardViewModule (ref), versionHistoryCardModule (ref), view (ref), checkbox (ref), text (ref), useScaledValue (ref), versionHistorySectionModule (ref), liveVersionCardViewModule (ref), sheet (ref), VersionHistoryContent (ref), restoreVersionDialogModule (ref)
 	local testId = p1.testId or "version-history-bottom-sheet"
 	local scrollingFrameRef = p1.scrollingFrameRef or reactModule.useRef(nil)
-	local var1, var2 = reactModule.useState(nil)
-	local var3, var4 = reactModule.useState(false)
-	local var5, var6 = reactModule.useState(true)
-	local var7 = useLocalization({
+	local var2, var3 = reactModule.useState(nil)
+	local var4, var5 = reactModule.useState(false)
+	local var6, var7 = reactModule.useState(true)
+	local var8 = useLocalization({
 		allVersions = localizationStringsModule.VERSION_HISTORY_ALL_VERSIONS,
 		hideAutosaved = localizationStringsModule.VERSION_HISTORY_HIDE_AUTOSAVED,
 		published = localizationStringsModule.VERSION_HISTORY_PUBLISHED,
-		title = VERSION_HISTORY_VERSIONS_TITLE
+		title = var1
 	})
-	local var8 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref)
-		var2(p2)
+	local hideAutosaved = var8.hideAutosaved
+	local title = var8.title
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: var3 (ref), p1 (ref)
+		var3(nil)
+		p1.onClose()
+	end, { p1.onClose })
+	local var10 = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref)
+		var3(p2)
 	end, {})
+	local t = {
+		AutosaveFilter = reactModule.createElement(view, { LayoutOrder = 1, tag = "row size-full-0 auto-y" }, {
+			Checkbox = reactModule.createElement(checkbox, {
+				label = hideAutosaved,
+				isChecked = var6,
+				onActivated = var7,
+				testId = `{testId}-autosave-filter`
+			})
+		}),
+		Status = if p1.statusText then reactModule.createElement(text, {
+			LayoutOrder = 2,
+			tag = "size-full-0 auto-y padding-bottom-medium text-body-medium text-wrap text-align-x-left content-default",
+			Text = p1.statusText
+		}) else nil,
+		Cards = reactModule.createElement(view, {
+			LayoutOrder = 3,
+			tag = "col gap-medium size-full-0 auto-y padding-bottom-large"
+		}, reactModule.useMemo(function()
+			-- upvalues: fFlagBuildVersionHistoryUpdatesModule (copy), p1 (ref), reactModule (copy), latestVersionCardViewModule (copy), var6 (ref), testId (ref), versionHistoryCardModule (copy), var10 (ref)
+			local t = {}
+			local var11 = fFlagBuildVersionHistoryUpdatesModule and p1.latestVersion ~= nil
+			
+			if var11 then
+				t.LatestVersionCard = reactModule.createElement(latestVersionCardViewModule, p1.latestVersion)
+			end
+			for i, v in p1.entries do
+				if (not var11 or i ~= 1) and (not var6 or not v.isAutosaved) then
+					t[v.id] = reactModule.createElement(versionHistoryCardModule, {
+						layoutOrder = i,
+						versionLabel = v.versionLabel,
+						title = v.title,
+						description = v.description,
+						badgeText = v.badgeText,
+						isRestoreDisabled = p1.isRestoreDisabled,
+						onRestore = function()
+							-- upvalues: var10 (copy), v (ref)
+							var10(v)
+						end,
+						testId = `{testId}-card-{v.id}`
+					})
+				end
+			end
+			return t
+		end, {
+			p1.entries, p1.isRestoreDisabled, p1.latestVersion, var6, var10, testId
+		}))
+	}
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		Sheet = reactModule.createElement(sheet.Root, {
 			defaultSnapPointIndex = 2,
 			isOpen = p1.isOpen == nil or p1.isOpen,
 			snapPoints = { 0.5, 1 },
-			onClose = reactModule.useCallback(function()
-				-- upvalues: var2 (ref), p1 (ref)
-				var2(nil)
-				p1.onClose()
-			end, { p1.onClose }),
+			onClose = var9,
 			testId = testId
 		}, {
 			Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
 				Title = reactModule.createElement(text, {
 					LayoutOrder = 1,
-					Text = var7.title,
+					Text = title,
 					tag = {
 						["shrink auto-xy text-wrap text-align-x-left content-emphasis"] = true,
-						["text-heading-medium"] = true
+						["text-heading-small"] = not fFlagBuildVersionHistoryUpdatesModule,
+						["text-heading-medium"] = fFlagBuildVersionHistoryUpdatesModule
 					}
 				})
 			}),
-			Content = reactModule.createElement(VersionHistoryContent, { scrollingFrameRef = scrollingFrameRef }, {
+			Content = reactModule.createElement(VersionHistoryContent, { scrollingFrameRef = scrollingFrameRef }, if fFlagBuildVersionHistoryUpdatesModule then {
 				Sections = reactModule.createElement(view, {
 					tag = "col size-full-0 auto-y",
 					layout = {
@@ -76,119 +128,73 @@ return function(p1)
 				}, {
 					Published = if p1.liveVersion then reactModule.createElement(versionHistorySectionModule, {
 						layoutOrder = 1,
-						title = var7.published,
+						title = var8.published,
 						testId = `{testId}-published`
 					}, {
 						LiveVersionCard = reactModule.createElement(liveVersionCardViewModule, p1.liveVersion)
 					}) else nil,
 					AllVersions = reactModule.createElement(versionHistorySectionModule, {
 						layoutOrder = 2,
-						title = var7.allVersions,
+						title = var8.allVersions,
 						testId = `{testId}-all-versions`
-					}, {
-						AutosaveFilter = reactModule.createElement(view, { LayoutOrder = 1, tag = "row size-full-0 auto-y" }, {
-							Checkbox = reactModule.createElement(checkbox, {
-								label = var7.hideAutosaved,
-								isChecked = var5,
-								onActivated = var6,
-								testId = `{testId}-autosave-filter`
-							})
-						}),
-						Status = if p1.statusText then reactModule.createElement(text, {
-							LayoutOrder = 2,
-							tag = "size-full-0 auto-y padding-bottom-medium text-body-medium text-wrap text-align-x-left content-default",
-							Text = p1.statusText
-						}) else nil,
-						Cards = reactModule.createElement(view, {
-							LayoutOrder = 3,
-							tag = "col gap-medium size-full-0 auto-y padding-bottom-large"
-						}, reactModule.useMemo(function()
-							-- upvalues: p1 (ref), reactModule (copy), latestVersionCardViewModule (copy), var5 (ref), testId (ref), versionHistoryCardModule (copy), var8 (ref)
-							local t = {}
-							local var9 = p1.latestVersion ~= nil
-							
-							if var9 then
-								t.LatestVersionCard = reactModule.createElement(latestVersionCardViewModule, p1.latestVersion)
-							end
-							for i, v in p1.entries do
-								if (not var9 or i ~= 1) and (not var5 or not v.isAutosaved) then
-									t[v.id] = reactModule.createElement(versionHistoryCardModule, {
-										layoutOrder = i,
-										versionLabel = v.versionLabel,
-										title = v.title,
-										description = v.description,
-										badgeText = v.badgeText,
-										isRestoreDisabled = p1.isRestoreDisabled,
-										onRestore = function()
-											-- upvalues: var8 (copy), v (ref)
-											var8(v)
-										end,
-										testId = `{testId}-card-{v.id}`
-									})
-								end
-							end
-							return t
-						end, {
-							p1.entries, p1.isRestoreDisabled, p1.latestVersion, var5, var8, testId
-						}))
-					})
+					}, t)
 				})
-			})
+			} else t)
 		}),
-		RestoreDialog = if var1 then reactModule.createElement(restoreVersionDialogModule, {
+		RestoreDialog = if var2 then reactModule.createElement(restoreVersionDialogModule, {
 			isOpen = true,
-			title = var1.versionLabel,
-			description = var1.description,
-			isLoading = if fFlagBuildAgentRollbackModule then var3 else nil,
+			title = var2.versionLabel,
+			description = var2.description,
+			isLoading = if fFlagBuildAgentRollbackModule then var4 else nil,
 			onRestore = reactModule.useCallback(function()
-				-- upvalues: var1 (ref), fFlagBuildAgentRollbackModule (copy), var2 (ref), p1 (ref), var3 (ref), var4 (ref)
-				if var1 == nil then return end
+				-- upvalues: var2 (ref), fFlagBuildAgentRollbackModule (copy), var3 (ref), p1 (ref), var4 (ref), var5 (ref)
+				if var2 == nil then return end
 				if fFlagBuildAgentRollbackModule then
-					if p1.isRestoreDisabled or var3 then return end
-					var4(true)
-					local var10 = p1.onRestore(var1)
+					if p1.isRestoreDisabled or var4 then return end
+					var5(true)
+					local var12 = p1.onRestore(var2)
 					
-					if var10 == nil then
-						var4(false)
+					if var12 == nil then
+						var5(false)
 						
 						return
 					end
-					var10:andThen(function()
-						-- upvalues: var4 (copy), var2 (copy), p1 (copy)
-						var4(false)
-						var2(nil)
+					var12:andThen(function()
+						-- upvalues: var5 (copy), var3 (copy), p1 (copy)
+						var5(false)
+						var3(nil)
 						
 						if p1.onRestoreStarted ~= nil then
 							p1.onRestoreStarted()
 						end
 					end):catch(function()
-						-- upvalues: var4 (copy)
-						var4(false)
+						-- upvalues: var5 (copy)
+						var5(false)
 					end)
 					
 					return
 				else
-					var2(nil)
+					var3(nil)
 					
 					if p1.isRestoreDisabled then
 						return
 					end
-					p1.onRestore(var1)
+					p1.onRestore(var2)
 				end
 			end, {
-				var1,
+				var2,
 				p1.isRestoreDisabled,
 				p1.onRestore,
 				p1.onRestoreStarted,
-				var3
+				var4
 			}),
 			onCancel = reactModule.useCallback(function()
-				-- upvalues: var3 (ref), var2 (ref)
-				if var3 then
+				-- upvalues: var4 (ref), var3 (ref)
+				if var4 then
 					return
 				end
-				var2(nil)
-			end, { var3 })
+				var3(nil)
+			end, { var4 })
 		}) else nil
 	})
 end

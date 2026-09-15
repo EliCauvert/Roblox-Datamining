@@ -85,6 +85,7 @@ local fFlagLuaAppMigrateGameTileActiveFriendsHydrationFix = require(parent.Share
 local fFlagGameTileMigrateOffLegacyPresence = require(parent.SharedFlags).FFlagGameTileMigrateOffLegacyPresence
 local var1 = if fFlagGameTileMigrateOffLegacyPresence then require(parent.FriendsHydrationReact).useGetOnlineFriendsByUniverseId else nil
 local fFlagLuaAppHapticTriggeredTelemetry = require(parent.SharedFlags).FFlagLuaAppHapticTriggeredTelemetry
+local fFlagLuaAppEnableSponsoredReportAd = require(parent.SharedFlags).FFlagLuaAppEnableSponsoredReportAd
 local fFlagLuaAppNotInterestedReportPlaceId = require(parent.SharedFlags).FFlagLuaAppNotInterestedReportPlaceId
 local fFlagLuaAppEnableReportExperience = require(parent.SharedFlags).FFlagLuaAppEnableReportExperience
 local fFlagLuaAppNarrowTileSmallerFooterFont = require(parent.SharedFlags).FFlagLuaAppNarrowTileSmallerFooterFont
@@ -175,7 +176,7 @@ appGameTile.validateProps = tModule.strictInterface({
 	sponsoredUserCohort = tModule.optional(tModule.string),
 	enableSponsoredFeedback = tModule.optional(tModule.boolean),
 	availableMenuItems = tModule.optional(tModule.table),
-	enableReportAd = tModule.optional(tModule.boolean),
+	enableReportAd = if fFlagLuaAppEnableSponsoredReportAd then tModule.optional(tModule.boolean) else nil,
 	enableReportExperience = if fFlagLuaAppEnableReportExperience then tModule.optional(tModule.boolean) else nil,
 	compactMetadataFormat = if fFlagLuaAppNarrowTileSmallerFooterFont then tModule.optional(tModule.boolean) else nil,
 	hideRating = if fFlagLuaAppNarrowTileHideRating then tModule.optional(tModule.boolean) else nil,
@@ -696,7 +697,7 @@ function appGameTile.renderGridTilesFooter(p2)
 end
 
 function appGameTile.renderContent(p2, p3, p4, p5)
-	-- upvalues: gameTileConstantsModule (ref), gameTileViewConfigModule (ref), fFlagMigrateGameInfoToStore (ref), reactModule (ref), gameStatsModule (ref), hiddenTileContentModule (ref), gameTileVideoThumbnailModule (ref), fFlagLuaAppVideoTileDisableActivation (ref), fFlagLuaAppContinueSortInstantPlay (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref), fFlagLuaAppGameTileExtractGameDetailsCallback (ref), fFlagLuaAppGameDetailsAttributionFix (ref), luaAppKeepTileBadgesDuringVideo (ref), roactModule (ref), gameTileThumbnailBadgesModule (ref), foundationModule (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), fFlagLuaAppGameTileNotInterestedDirectAction (ref), gameTileContextualActionsModule (ref), gameTileOverflowMenuModule (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), fFlagLuaAppEnableReportExperience (ref), gameTileViewModule (ref), fFlagLuaAppMigrateGameTileHoverFixes (ref), appExperienceActionRowModule (ref), fFlagLuaAppUnifyPlayButtonTile (ref), instantPlayLauncherModule (ref), discoveryAnalyticsModule (ref)
+	-- upvalues: gameTileConstantsModule (ref), gameTileViewConfigModule (ref), fFlagMigrateGameInfoToStore (ref), reactModule (ref), gameStatsModule (ref), hiddenTileContentModule (ref), gameTileVideoThumbnailModule (ref), fFlagLuaAppVideoTileDisableActivation (ref), fFlagLuaAppContinueSortInstantPlay (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref), fFlagLuaAppGameTileExtractGameDetailsCallback (ref), fFlagLuaAppGameDetailsAttributionFix (ref), luaAppKeepTileBadgesDuringVideo (ref), roactModule (ref), gameTileThumbnailBadgesModule (ref), foundationModule (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), fFlagLuaAppGameTileNotInterestedDirectAction (ref), gameTileContextualActionsModule (ref), gameTileOverflowMenuModule (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), fFlagLuaAppEnableReportExperience (ref), fFlagLuaAppEnableSponsoredReportAd (ref), gameTileViewModule (ref), fFlagLuaAppMigrateGameTileHoverFixes (ref), appExperienceActionRowModule (ref), fFlagLuaAppUnifyPlayButtonTile (ref), instantPlayLauncherModule (ref), discoveryAnalyticsModule (ref)
 	local createElement
 	local size = p2.props.Size or UDim2.fromScale(1, 1)
 	local imageThumbnail = p2.props.imageThumbnail
@@ -785,7 +786,7 @@ function appGameTile.renderContent(p2, p3, p4, p5)
 			isSponsored = p2.props.entry.isSponsored,
 			payerName = p2.props.entry.payerName,
 			sponsoredUserCohort = p2.props.sponsoredUserCohort,
-			adId = p2.props.entry.adId,
+			adId = if fFlagLuaAppEnableSponsoredReportAd then p2.props.entry.adId else nil,
 			availableMenuItems = p2.props.availableMenuItems,
 			onGameDetailsActivated = if fFlagLuaAppContinueSortInstantPlay and p2.props.enableInstantPlay then p2.onGameDetailsActivated else nil
 		})
@@ -1064,7 +1065,7 @@ if not fFlagLuaAppGameDetailsAttributionFix then
 	appGameTile = roactServices.connect({ networking = roactNetworking })(appGameTile)
 end
 local var5 = function(p2)
-	-- upvalues: reactModule (ref), useTokens (ref), fFlagMigrateGameIconsToStore (ref), gameHydrationReactModule (ref), useIsHoveredTileModule (ref), useUiModeInfo (ref), uiMode (ref), useValidTileBadgesModule (ref), useSelector (ref), fFlagLuaAppMigrateGameTileActiveFriendsHydrationFix (ref), useHasInGameFriendsModule (ref), fFlagGameTileMigrateOffLegacyPresence (ref), var1 (ref), cryoModule (ref), useInGameUserIdsModule (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), fFlagLuaAppSearchResultsPageGameTileVideo (ref), fFlagLuaAppGateVideoPlaybackOnNavigationFocus (ref), fFlagLuaAppFixHiddenTileVideoCleanup (ref), fFlagLuaAppGameDetailsAttributionFix (ref), useRoactService (ref), roactNetworking (ref), sponsoredGamesRecordClick (ref), hoverTileCoordinatorModule (ref), videoEndReasonModule (ref), videoPlaybackCoordinator (ref), gameCollectionItemTypes (ref), getFFlagEnableNavigationPerformanceIntervals (ref), intervalPerformanceTracker (ref), useOverflowMenuOpen (ref), useTriggerFeedback (ref), getAvailableGameTileOverflowMenuItemsModule (ref), fFlagLuaAppContinueSortInstantPlay (ref), fFlagLuaAppEnableReportExperience (ref), useHasVideoThumbnailSelectorModule (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppTileVideoCandidateOnly (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref), usePreferredInput (ref), gameVideoPlaybackDetectorModule (ref), responsiveModule (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), appGameTile (write)
+	-- upvalues: reactModule (ref), useTokens (ref), fFlagMigrateGameIconsToStore (ref), gameHydrationReactModule (ref), useIsHoveredTileModule (ref), useUiModeInfo (ref), uiMode (ref), useValidTileBadgesModule (ref), useSelector (ref), fFlagLuaAppMigrateGameTileActiveFriendsHydrationFix (ref), useHasInGameFriendsModule (ref), fFlagGameTileMigrateOffLegacyPresence (ref), var1 (ref), cryoModule (ref), useInGameUserIdsModule (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), fFlagLuaAppSearchResultsPageGameTileVideo (ref), fFlagLuaAppGateVideoPlaybackOnNavigationFocus (ref), fFlagLuaAppFixHiddenTileVideoCleanup (ref), fFlagLuaAppGameDetailsAttributionFix (ref), useRoactService (ref), roactNetworking (ref), sponsoredGamesRecordClick (ref), hoverTileCoordinatorModule (ref), videoEndReasonModule (ref), videoPlaybackCoordinator (ref), gameCollectionItemTypes (ref), getFFlagEnableNavigationPerformanceIntervals (ref), intervalPerformanceTracker (ref), useOverflowMenuOpen (ref), useTriggerFeedback (ref), getAvailableGameTileOverflowMenuItemsModule (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppContinueSortInstantPlay (ref), fFlagLuaAppEnableReportExperience (ref), useHasVideoThumbnailSelectorModule (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppTileVideoCandidateOnly (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref), usePreferredInput (ref), gameVideoPlaybackDetectorModule (ref), responsiveModule (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), appGameTile (write)
 	local var6 = reactModule.useRef(nil)
 	local var7 = useTokens()
 	local useHoverTile = p2.useHoverTile
@@ -1204,18 +1205,18 @@ local var5 = function(p2)
 		local var34 = useOverflowMenuOpen(var9)
 		local var35 = useTriggerFeedback()
 		local var36 = reactModule.useMemo(function()
-			-- upvalues: getAvailableGameTileOverflowMenuItemsModule (copy), p2 (ref), fFlagLuaAppContinueSortInstantPlay (copy), fFlagLuaAppEnableReportExperience (copy)
+			-- upvalues: getAvailableGameTileOverflowMenuItemsModule (copy), p2 (ref), fFlagLuaAppEnableSponsoredReportAd (copy), fFlagLuaAppContinueSortInstantPlay (copy), fFlagLuaAppEnableReportExperience (copy)
 			return getAvailableGameTileOverflowMenuItemsModule({
 				isSponsored = p2.entry.isSponsored,
 				enableExplicitFeedback = p2.enableExplicitFeedback,
 				enableSponsoredFeedback = p2.enableSponsoredFeedback,
-				enableReportAd = p2.enableReportAd,
+				enableReportAd = if fFlagLuaAppEnableSponsoredReportAd then p2.enableReportAd else nil,
 				enableGameDetails = if fFlagLuaAppContinueSortInstantPlay then p2.enableInstantPlay else nil,
 				enableReportExperience = if fFlagLuaAppEnableReportExperience then p2.enableReportExperience else nil
 			})
 		end, {
 			p2.entry.isSponsored, p2.enableExplicitFeedback, p2.enableSponsoredFeedback,
-			p2.enableReportAd,
+			if fFlagLuaAppEnableSponsoredReportAd then p2.enableReportAd else nil,
 			if fFlagLuaAppContinueSortInstantPlay then p2.enableInstantPlay else nil,
 			if fFlagLuaAppEnableReportExperience then p2.enableReportExperience else nil
 		})

@@ -176,7 +176,6 @@ return function(p3, p4)
 		end, { var8, var4 })),
 		status = var11.status,
 		isActive = var5 ~= "",
-		debouncedQuery = var6,
 		isFetching = var11.status == "NotReady",
 		hasError = var11.status == "Failed",
 		hasSearched = var8.query ~= "",

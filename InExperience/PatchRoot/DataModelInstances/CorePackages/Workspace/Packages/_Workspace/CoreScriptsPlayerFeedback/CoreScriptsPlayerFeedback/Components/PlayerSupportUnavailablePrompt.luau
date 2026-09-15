@@ -19,7 +19,6 @@ local t = {
 		bodyKey = "TextFilterBody",
 		hasReportLink = true
 	},
-	TICKET_CREATION_GIBBERISH_ERROR = { titleKey = "TextFilterTitle", bodyKey = "GibberishBody" },
 	TICKET_CREATION_ELIGIBILITY_FAILURE_REASON_UNDER13 = { titleKey = "Under13Title", bodyKey = "Under13Body" },
 	TICKET_CREATION_ELIGIBILITY_FAILURE_REASON_NOT_RECENTLY_VISITED = {
 		titleKey = "NotRecentlyVisitedTitle",
@@ -69,7 +68,6 @@ return reactModule.memo(function(p1)
 		DefaultBody = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body",
 		TextFilterTitle = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.TextFilter.Title",
 		TextFilterBody = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.TextFilter.Body",
-		GibberishBody = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body",
 		TextFilterLink = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link"
 	})
 	local var3 = t[p1.reason or ""] or t_1

@@ -728,7 +728,6 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,Nie udało się wys�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,Wysłano prośbę o wsparcie
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,Wsparcie dla graczy jest obecnie niedostępne. Spróbuj ponownie później.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,Wsparcie dla graczy jest niedostępne
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,Napisz bardziej szczegółowy opis
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,"Aby przesłać zgłoszenie do zespołu pomocy, musi ono dotyczyć ostatnio granego projektu."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,"Odwiedź ten projekt, aby przesłać prośbę"
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,"Poczekaj, aż twórca odpowie na Twoje istniejące prośby, zanim prześlesz kolejną."
@@ -2059,6 +2058,7 @@ Feature.Build.Description.RevertToVersion,"Potwierdź, aby cofnąć ostatnią zm
 Feature.Build.Description.ShareLatest,Udostępnij informacje dotyczące zmian w najnowszej wersji.
 Feature.Build.Description.ShopButton,Dodaj punkt wejścia do robienia zakupów
 Feature.Build.Description.UpdateDeveloperProduct,Zaktualizuj produkt deweloperski {PRODUCT_ID}.
+Feature.Build.Description.VersionChanges,"Powiedz graczom, co zmieniło się w tej wersji."
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Liczba znaków w opisie nie może przekroczyć 1000.
 Feature.Build.Error.DeveloperProductNameRequired,Wprowadź nazwę produktu.
 Feature.Build.Error.DeveloperProductNameTooLong,Liczba znaków w nazwie nie może przekroczyć 50.
@@ -2239,6 +2239,7 @@ Feature.Build.Label.Version,Wersja
 Feature.Build.Label.VersionCompact,wersja {VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
+Feature.Build.Label.VersionTitleDesc,Tytuł i opis wersji
 Feature.Build.Label.Video,Film
 Feature.Build.Message.AccountRequirements,Twoje konto nie spełnia wymagań dotyczących korzystania z funkcji Buduj.
 Feature.Build.Message.AccountTooNew,"Twoje konto jest zbyt nowe, aby publikować. Spróbuj ponownie za 2 dni."
@@ -2371,6 +2372,7 @@ Feature.Build.Title.Tasks,Zadania
 Feature.Build.Title.TurnActivity,Obróć aktywność
 Feature.Build.Title.VersionHistory,Historia wersji
 Feature.Build.Title.VersionInfo,Informacje o wersji
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,Wersja {VERSION}
 Feature.Build.Title.Versions,Wersje
 Feature.Build.Title.WhatsIncluded,Co jest uwzględnione?

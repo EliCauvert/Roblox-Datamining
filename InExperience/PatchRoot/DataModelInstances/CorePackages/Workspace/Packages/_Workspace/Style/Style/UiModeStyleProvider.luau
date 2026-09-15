@@ -64,20 +64,34 @@ local function UiModeStyleProvider(p1)
 		device = var6.deviceType,
 		colorMode = t[var6.themeName:lower()],
 		themeName = var6.foundationThemeName,
-		preferences = var6.settings
-	}, reactModule.createElement(sceneOverridesRegistryModule, { isActive = var6.foundationThemeName ~= nil }, reactModule.createElement(appStyleProvider, { style = var6 }, p1.children)))
+		preferences = var6.settings,
+		tokenOverrides = var6.tokenOverrides
+	}, reactModule.createElement(sceneOverridesRegistryModule, {
+		isActive = if var6.tokenOverrides == nil then var6.foundationThemeName ~= nil else true
+	}, reactModule.createElement(appStyleProvider, { style = var6 }, p1.children)))
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), fFlagAppNavBarPerItemThemeOverride (ref), cryoModule (ref), appearanceContextModule (ref), UiModeStyleProvider (ref), var1 (ref)
+	-- upvalues: reactModule (ref), fFlagAppNavBarPerItemThemeOverride (ref), t (ref), cryoModule (ref), appearanceContextModule (ref), UiModeStyleProvider (ref), var1 (ref)
 	local var2, var3 = reactModule.useState(p1.style.themeName)
 	local var4 = if fFlagAppNavBarPerItemThemeOverride and p1.syncThemeFromProps then p1.style.themeName else var2
 	local cloned = table.clone(p1)
+	local tokenOverrides = p1.style.tokenOverrides
+	
+	if p1.tokenOverridesByTheme then
+		tokenOverrides = p1.tokenOverridesByTheme[t[var4:lower()]] or tokenOverrides
+	end
 	cloned.style = cryoModule.Dictionary.join(cloned.style, {
 		themeName = var4,
+		tokenOverrides = tokenOverrides or cryoModule.None,
 		foundationThemeName = if p1.foundationThemeName then p1.foundationThemeName else cryoModule.None
 	})
 	local var5 = reactModule.createElement(appearanceContextModule.Provider, { value = { theme = var4, setTheme = var3 } }, reactModule.createElement(UiModeStyleProvider, cloned))
 	
-	return if fFlagAppNavBarPerItemThemeOverride then reactModule.createElement(var1.Provider, { value = { foundationThemeName = p1.foundationThemeName } }, var5) else var5
+	return if fFlagAppNavBarPerItemThemeOverride then reactModule.createElement(var1.Provider, {
+		value = {
+			tokenOverridesByTheme = p1.tokenOverridesByTheme or {},
+			foundationThemeName = p1.foundationThemeName
+		}
+	}, var5) else var5
 end

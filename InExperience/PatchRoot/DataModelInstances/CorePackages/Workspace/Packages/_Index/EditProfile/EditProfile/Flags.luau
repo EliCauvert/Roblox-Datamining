@@ -8,6 +8,5 @@
 	SocialNetworksInEditProfileIXP = require(script.SocialNetworksInEditProfileIXP),
 	FFlagEditProfilePPEStartOnEmotesPage = require(script.FFlagEditProfilePPEStartOnEmotesPage),
 	FFlagEditProfileLandingV2Enabled = require(script.FFlagEditProfileLandingV2Enabled),
-	FFlagFixNonTruncatedText = require(script.FFlagFixNonTruncatedText),
-	FFlagEditProfileFramesImpression = require(script.FFlagEditProfileFramesImpression)
+	FFlagFixNonTruncatedText = require(script.FFlagFixNonTruncatedText)
 }

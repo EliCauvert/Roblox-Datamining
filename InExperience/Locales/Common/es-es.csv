@@ -2057,6 +2057,7 @@ Feature.Build.Description.RevertToVersion,Confirma para revertir el último camb
 Feature.Build.Description.ShareLatest,Comparte lo que ha cambiado en tu última versión.
 Feature.Build.Description.ShopButton,Agregar un punto de entrada de compras
 Feature.Build.Description.UpdateDeveloperProduct,Actualizar producto del desarrollador {PRODUCT_ID}.
+Feature.Build.Description.VersionChanges,Dile a los jugadores qué cambió en esta versión.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,La descripción debe tener 1000 caracteres o menos.
 Feature.Build.Error.DeveloperProductNameRequired,Ingresa un nombre para el producto.
 Feature.Build.Error.DeveloperProductNameTooLong,El nombre debe tener 50 caracteres o menos.
@@ -2237,6 +2238,7 @@ Feature.Build.Label.Version,Versión
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
+Feature.Build.Label.VersionTitleDesc,Título y descripción de la versión
 Feature.Build.Label.Video,Video
 Feature.Build.Message.AccountRequirements,Tu cuenta no cumple los requisitos para usar la compilación.
 Feature.Build.Message.AccountTooNew,Tu cuenta es demasiado nueva para publicar. Inténtalo de nuevo cuando tenga 2 días.
@@ -2369,6 +2371,7 @@ Feature.Build.Title.Tasks,Tareas
 Feature.Build.Title.TurnActivity,Actividad de giro
 Feature.Build.Title.VersionHistory,Historial de la versión
 Feature.Build.Title.VersionInfo,Información de la versión
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,Versión {VERSION}
 Feature.Build.Title.Versions,Versiones
 Feature.Build.Title.WhatsIncluded,¿Qué incluye?

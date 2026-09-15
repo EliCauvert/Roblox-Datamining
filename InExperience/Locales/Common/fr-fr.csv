@@ -728,7 +728,6 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,Nous n'avons pas pu 
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,Demande d'assistance envoyée
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,L'assistance aux joueurs est actuellement indisponible. Réessaie plus tard.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,Assistance aux joueurs indisponible
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,Rédige une description plus détaillée
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,Tu dois avoir joué à cette expérience récemment pour pouvoir envoyer une demande d'assistance.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,Visite cette expérience pour déposer une demande
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,Attends que le créateur réponde à ta demande en cours avant d'en soumettre une autre.
@@ -2059,6 +2058,7 @@ Feature.Build.Description.RevertToVersion,Confirme pour annuler la dernière mod
 Feature.Build.Description.ShareLatest,Présente les nouveautés de cette dernière version.
 Feature.Build.Description.ShopButton,Ajouter un point d'entrée pour les achats
 Feature.Build.Description.UpdateDeveloperProduct,Mets à jour le produit développeur {PRODUCT_ID}.
+Feature.Build.Description.VersionChanges,Indique aux joueurs ce qui a changé dans cette version.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,La description ne peut pas dépasser les 1 000 caractères.
 Feature.Build.Error.DeveloperProductNameRequired,Saisis un nom de produit.
 Feature.Build.Error.DeveloperProductNameTooLong,Le nom ne doit pas dépasser 50 caractères.
@@ -2239,6 +2239,7 @@ Feature.Build.Label.Version,Version
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
+Feature.Build.Label.VersionTitleDesc,Titre et description de la version
 Feature.Build.Label.Video,Vidéo
 Feature.Build.Message.AccountRequirements,Ton compte ne répond pas aux exigences pour utiliser la fonctionnalité Construire.
 Feature.Build.Message.AccountTooNew,Ton compte est trop récent pour publier. Réessaye lorsqu'il aura 2 jours.
@@ -2371,6 +2372,7 @@ Feature.Build.Title.Tasks,Tâches
 Feature.Build.Title.TurnActivity,Activité de ce tour
 Feature.Build.Title.VersionHistory,Historique des versions
 Feature.Build.Title.VersionInfo,Détails de la version
+Feature.Build.Title.VersionInformation,Informations sur la version
 Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,Qu'est-ce qui est inclus ?

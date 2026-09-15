@@ -711,7 +711,6 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,เราไม่�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,ส่งคำขอรับบริการช่วยเหลือแล้ว
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,ไม่สามารถใช้บริการช่วยเหลือผู้เล่นได้ในขณะนี้ โปรดลองอีกครั้งในภายหลัง
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,ไม่สามารถใช้บริการช่วยเหลือผู้เล่นได้
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,โปรดเขียนคำอธิบายให้ละเอียดยิ่งขึ้น
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,คุณต้องเล่นประสบการณ์นี้เมื่อไม่นานมานี้ จึงจะยื่นคำขอบริการช่วยเหลือผู้เล่นได้
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,เข้าประสบการณ์นี้เพื่อส่งคำขอ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,โปรดรอให้ครีเอเตอร์ตอบกลับคำขอที่มีอยู่ของคุณก่อนส่งคำขออื่น
@@ -2042,6 +2041,7 @@ Feature.Build.Description.RevertToVersion,ยืนยันเพื่อย�
 Feature.Build.Description.ShareLatest,แชร์ว่าเวอร์ชันล่าสุดของคุณมีอะไรเปลี่ยนแปลงไปบ้าง
 Feature.Build.Description.ShopButton,เพิ่มจุดเริ่มต้นการช็อปปิ้ง
 Feature.Build.Description.UpdateDeveloperProduct,อัปเดตผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
+Feature.Build.Description.VersionChanges,บอกผู้เล่นว่าเวอร์ชันนี้มีอะไรเปลี่ยนแปลงไปบ้าง
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"คำอธิบายต้องมีความยาวไม่เกิน 1,000 อักขระ"
 Feature.Build.Error.DeveloperProductNameRequired,กรอกชื่อผลิตภัณฑ์
 Feature.Build.Error.DeveloperProductNameTooLong,ชื่อต้องมีความยาวไม่เกิน 50 อักขระ
@@ -2222,6 +2222,7 @@ Feature.Build.Label.Version,เวอร์ชัน
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
+Feature.Build.Label.VersionTitleDesc,ชื่อและคำอธิบายเวอร์ชัน
 Feature.Build.Label.Video,วิดีโอ
 Feature.Build.Message.AccountRequirements,บัญชีของคุณมีคุณสมบัติไม่ตรงตามข้อกำหนดในการใช้ Build
 Feature.Build.Message.AccountTooNew,บัญชีของคุณยังใหม่เกินไปที่จะเผยแพร่ ลองอีกครั้งเมื่อบัญชีมีอายุ 2 วัน
@@ -2354,6 +2355,7 @@ Feature.Build.Title.Tasks,งาน
 Feature.Build.Title.TurnActivity,เปลี่ยนกิจกรรม
 Feature.Build.Title.VersionHistory,ประวัติเวอร์ชัน
 Feature.Build.Title.VersionInfo,ข้อมูลเวอร์ชัน
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,เวอร์ชัน {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,มีอะไรให้บ้าง?

@@ -52,8 +52,8 @@ return {
 	TileOverflowMenuItems = {
 		NotInterested = "NotInterested",
 		WhyThisAd = "WhyThisAd",
-		ReportAd = "ReportAd",
 		GameDetails = if sharedFlagsModule.FFlagLuaAppContinueSortInstantPlay then "GameDetails" else nil,
+		ReportAd = if sharedFlagsModule.FFlagLuaAppEnableSponsoredReportAd then "ReportAd" else nil,
 		ReportExperience = if sharedFlagsModule.FFlagLuaAppEnableReportExperience then "ReportExperience" else nil
 	}
 }

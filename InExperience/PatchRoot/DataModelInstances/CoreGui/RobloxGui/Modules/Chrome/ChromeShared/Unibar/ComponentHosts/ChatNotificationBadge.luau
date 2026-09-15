@@ -12,12 +12,11 @@ local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFla
 local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 local fFlagExpChatUseUnifiedTooltipStore = expChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
 local expChatPresetChatBadgeFTUXExperimentation = require(corePackagesService.Workspace.Packages.SocialExperiments).ExpChatPresetChatBadgeFTUXExperimentation
-local fFlagExpChatPresetChatBadgeExperimentCleanup = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagExpChatPresetChatBadgeExperimentCleanup
 local expChatShowPresetTooltipToNonAgeChecked2 = game:DefineFastFlag("ExpChatShowPresetTooltipToNonAgeChecked2", false)
 local _ = require(corePackagesService.Workspace.Packages.Chrome)
 
 return function(p1)
-	-- upvalues: textChatService (ref), fFlagExpChatUseUnifiedTooltipStore (ref), getChatTooltipStore (ref), signalsReactModule (ref), fFlagExpChatPresetChatEnabled (ref), reactModule (ref), expChatShowPresetTooltipToNonAgeChecked2 (ref), getGlobalChatTooltipStore (ref), getChatStatusStore (ref), isUserChatEnabled (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatPresetChatBadgeExperimentCleanup (ref), expChatPresetChatBadgeFTUXExperimentation (ref)
+	-- upvalues: textChatService (ref), fFlagExpChatUseUnifiedTooltipStore (ref), getChatTooltipStore (ref), signalsReactModule (ref), fFlagExpChatPresetChatEnabled (ref), reactModule (ref), expChatShowPresetTooltipToNonAgeChecked2 (ref), getGlobalChatTooltipStore (ref), getChatStatusStore (ref), isUserChatEnabled (ref), getFFlagTextChatEnableUniverseChatTabs (ref), expChatPresetChatBadgeFTUXExperimentation (ref)
 	local var1, var2, var3
 	local iconHostProps = p1.iconHostProps
 	local isChat = iconHostProps.integration.id == "chat"
@@ -92,22 +91,9 @@ return function(p1)
 			var17(true)
 		end
 	end, { var3, var2 })
-	local var18 = var3 and not var16
-	
-	if fFlagExpChatPresetChatBadgeExperimentCleanup then
-		local var19 = var18 and (var5 and not var2)
-		reactModule.useEffect(function()
-			-- upvalues: var19 (ref), expChatPresetChatBadgeFTUXExperimentation (copy)
-			if var19 and expChatPresetChatBadgeFTUXExperimentation.isExperimentEnabled then
-				expChatPresetChatBadgeFTUXExperimentation.logExposure()
-				
-				return
-			end
-		end, { var19 })
-	end
 	local cloned = table.clone(iconHostProps)
 	
-	if var18 and (not var5 or expChatPresetChatBadgeFTUXExperimentation.getShouldShowPresetChatIconBadge()) then
+	if var3 and not var16 and (not var5 or expChatPresetChatBadgeFTUXExperimentation.getShouldShowPresetChatIconBadge()) then
 		cloned.minBadgeCount = 1
 	end
 	return reactModule.createElement(p1.NotificationBadge, cloned)

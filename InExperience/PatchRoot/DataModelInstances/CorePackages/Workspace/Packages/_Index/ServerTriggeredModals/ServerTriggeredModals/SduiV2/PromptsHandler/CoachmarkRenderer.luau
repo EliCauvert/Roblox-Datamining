@@ -8,10 +8,9 @@ local sendModalImpressionEvent = require(parent.ServerTriggeredModalImpressions)
 local promptStyleModule = require(serverTriggeredModals.SduiV2.PromptStyle)
 local usePromptEntriesModule = require(serverTriggeredModals.SduiV2.usePromptEntries)
 local useModalSignalStoreModule = require(serverTriggeredModals.SignalStores.useModalSignalStore)
-local fFlagPromptsActionEventLoggingModule = require(serverTriggeredModals.Flags.FFlagPromptsActionEventLogging)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useModalSignalStoreModule (ref), reactModule (ref), usePromptEntriesModule (ref), promptStyleModule (ref), reportPromptImpressionModule (ref), loggerModule (ref), sendModalImpressionEvent (ref), sduiFeatureEntryPoint (ref), fFlagPromptsActionEventLoggingModule (ref)
+	-- upvalues: useModalSignalStoreModule (ref), reactModule (ref), usePromptEntriesModule (ref), promptStyleModule (ref), reportPromptImpressionModule (ref), loggerModule (ref), sendModalImpressionEvent (ref), sduiFeatureEntryPoint (ref)
 	local surfaceConfig = p1.surfaceConfig
 	local hasShownKey = p1.hasShownKey
 	local var1 = useModalSignalStoreModule()
@@ -69,10 +68,7 @@ return reactModule.memo(function(p1)
 				shouldDisplayError = false,
 				configKey = surfaceConfig.configKey,
 				identifier = v.identifier,
-				appPage = surfaceConfig.appPage,
-				additionalAnalyticsData = if fFlagPromptsActionEventLoggingModule then {
-					promptInstanceId = if v.identifier then v.identifier else nil
-				} else nil
+				appPage = surfaceConfig.appPage
 			})
 		end
 	end

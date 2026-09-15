@@ -727,7 +727,6 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,Wir konnten deine An
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,Support-Anfrage gesendet
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,Der Spieler-Support ist derzeit nicht verfügbar. Bitte versuche es später erneut.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,Spieler-Support nicht verfügbar
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,Bitte verfasse eine genauere Beschreibung
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,"Du musst diese Experience kürzlich gespielt haben, um eine Support-Anfrage einzureichen."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,"Besuche diese Experience, um eine Anfrage einzureichen"
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,"Bitte warte, bis der Creator auf deine bestehenden Anfragen reagiert hat, bevor du eine weitere Anfrage abschickst."
@@ -1993,6 +1992,7 @@ Feature.Build.Description.RevertToVersion,"Bestätige, dass du die letzte Änder
 Feature.Build.Description.ShareLatest,"Beschreibe, was sich alles in der neuesten Version geändert hat."
 Feature.Build.Description.ShopButton,Einen Shopping-Einstiegspunkt hinzufügen
 Feature.Build.Description.UpdateDeveloperProduct,Entwicklerprodukt {PRODUCT_ID} aktualisieren.
+Feature.Build.Description.VersionChanges,"Teile den Spielern mit, was sich in dieser Version geändert hat."
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Die Beschreibung darf maximal 1.000 Zeichen lang sein.
 Feature.Build.Error.DeveloperProductNameRequired,Gib einen Produktnamen ein.
 Feature.Build.Error.DeveloperProductNameTooLong,Der Name darf maximal 50 Zeichen lang sein.
@@ -2173,6 +2173,7 @@ Feature.Build.Label.Version,Version
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
+Feature.Build.Label.VersionTitleDesc,Versionstitel und Beschreibung
 Feature.Build.Label.Video,Video
 Feature.Build.Message.AccountRequirements,Dein Konto erfüllt nicht die Anforderungen für die Nutzung von Build.
 Feature.Build.Message.AccountTooNew,"Dein Konto ist zu neu, um etwas zu veröffentlichen. Bitte versuche es erneut, wenn es 2 Tage alt ist."
@@ -2305,6 +2306,7 @@ Feature.Build.Title.Tasks,Aufgaben
 Feature.Build.Title.TurnActivity,Aktivität drehen
 Feature.Build.Title.VersionHistory,Versionsverlauf
 Feature.Build.Title.VersionInfo,Versionsinformationen
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versionen
 Feature.Build.Title.WhatsIncluded,Was ist enthalten?

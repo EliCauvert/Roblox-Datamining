@@ -728,7 +728,6 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,Kami tidak dapat men
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,Permintaan dukungan terkirim
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,Dukungan pemain saat ini tidak tersedia. Coba lagi nanti.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,Dukungan pemain tidak tersedia
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,Tulis deskripsi yang lebih terperinci
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,Kamu harus memainkan pengalaman ini baru-baru ini untuk mengajukan permintaan dukungan.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,Kunjungi pengalaman virtual ini untuk mengajukan permintaan
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,Tunggu hingga kreator menanggapi permintaanmu yang sudah ada sebelum mengirimkan permintaan lain.
@@ -2059,6 +2058,7 @@ Feature.Build.Description.RevertToVersion,Konfirmasi untuk membatalkan perubahan
 Feature.Build.Description.ShareLatest,Bagikan apa yang berubah di versi terbarumu.
 Feature.Build.Description.ShopButton,Tambahkan entry point belanja
 Feature.Build.Description.UpdateDeveloperProduct,Perbarui produk developer {PRODUCT_ID}.
+Feature.Build.Description.VersionChanges,Beri tahu pemain perubahan pada versi ini.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Deskripsi maksimal 1.000 karakter.
 Feature.Build.Error.DeveloperProductNameRequired,Masukkan nama produk.
 Feature.Build.Error.DeveloperProductNameTooLong,Nama harus terdiri dari maksimal 50 karakter.
@@ -2239,6 +2239,7 @@ Feature.Build.Label.Version,Versi
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
+Feature.Build.Label.VersionTitleDesc,Judul & deskripsi versi
 Feature.Build.Label.Video,Video
 Feature.Build.Message.AccountRequirements,Akunmu tidak memenuhi persyaratan untuk menggunakan Build.
 Feature.Build.Message.AccountTooNew,Akunmu terlalu baru untuk dipublikasikan. Coba lagi setelah 2 hari.
@@ -2371,6 +2372,7 @@ Feature.Build.Title.Tasks,Tugas
 Feature.Build.Title.TurnActivity,Aktivitas chat saat ini
 Feature.Build.Title.VersionHistory,Riwayat versi
 Feature.Build.Title.VersionInfo,Informasi versi
+Feature.Build.Title.VersionInformation,Informasi Versi
 Feature.Build.Title.VersionNumber,Versi {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,Dapat apa saja?

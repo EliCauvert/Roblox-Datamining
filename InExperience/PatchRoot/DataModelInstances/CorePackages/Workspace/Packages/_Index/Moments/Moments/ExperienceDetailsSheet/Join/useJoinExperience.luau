@@ -18,10 +18,11 @@ local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPrefer
 local sessionUtilModule = require(moments.Analytics.sessionUtil)
 local getToastStoreModule = require(moments.Stores.GetToastStore)
 local listenForTeleportFailureModule = require(script.Parent.listenForTeleportFailure)
+local getFFlagMomentsPauseAudioThroughTeleportModule = require(moments.Flags.GetFFlagMomentsPauseAudioThroughTeleport)
 local t = { joining = constantsModule_1.LocalizationKeys.joining }
 
 return function()
-	-- upvalues: useLocalization (ref), t (ref), useMomentsSession (ref), reactModule (ref), getMomentsPreferencesStoreModule (ref), fireAnalyticsEvent (ref), eventNames (ref), analytics (ref), emitRecommendationActionModule (ref), constantsModule (ref), getToastStoreModule (ref), sessionUtilModule (ref), listenForTeleportFailureModule (ref), launchGame (ref), constantsModule_1 (ref)
+	-- upvalues: useLocalization (ref), t (ref), useMomentsSession (ref), reactModule (ref), getMomentsPreferencesStoreModule (ref), getFFlagMomentsPauseAudioThroughTeleportModule (ref), fireAnalyticsEvent (ref), eventNames (ref), analytics (ref), emitRecommendationActionModule (ref), constantsModule (ref), getToastStoreModule (ref), sessionUtilModule (ref), listenForTeleportFailureModule (ref), launchGame (ref), constantsModule_1 (ref)
 	local var1 = useLocalization(t)
 	local var2 = useMomentsSession()
 	local var3 = reactModule.useRef(nil)
@@ -37,8 +38,9 @@ return function()
 	end, {})
 	
 	return reactModule.useCallback(function(p1, p2)
-		-- upvalues: getMomentsPreferencesStoreModule (copy), var3 (ref), var2 (ref), fireAnalyticsEvent (copy), eventNames (copy), analytics (copy), emitRecommendationActionModule (copy), constantsModule (copy), getToastStoreModule (copy), var1 (ref), sessionUtilModule (copy), listenForTeleportFailureModule (copy), launchGame (copy), constantsModule_1 (copy)
+		-- upvalues: getMomentsPreferencesStoreModule (copy), getFFlagMomentsPauseAudioThroughTeleportModule (copy), var3 (ref), var2 (ref), fireAnalyticsEvent (copy), eventNames (copy), analytics (copy), emitRecommendationActionModule (copy), constantsModule (copy), getToastStoreModule (copy), var1 (ref), sessionUtilModule (copy), listenForTeleportFailureModule (copy), launchGame (copy), constantsModule_1 (copy)
 		local var4 = getMomentsPreferencesStoreModule(false)
+		local var5 = getFFlagMomentsPauseAudioThroughTeleportModule()
 		
 		if var3.current ~= nil then
 			var3.current()
@@ -61,7 +63,7 @@ return function()
 				destinationPlaceId = tostring(p2)
 			})
 		end
-		local var5 = emitRecommendationActionModule({
+		local var6 = emitRecommendationActionModule({
 			itemId = feedItemId,
 			tracingId = tracingId,
 			momentsSessionId = momentsSessionId,
@@ -70,14 +72,23 @@ return function()
 		})
 		getToastStoreModule(false).triggerToast({ text = "", title = var1.joining })
 		
-		if var5 then
-			sessionUtilModule.setPlayIntent(var5)
+		if var6 then
+			sessionUtilModule.setPlayIntent(var6)
 		end
-		var3.current = listenForTeleportFailureModule(function()
-			-- upvalues: var3 (copy), var4 (ref)
-			var3.current = nil
-			var4.setTeleporting(false)
-		end)
-		launchGame(tostring(p2), constantsModule_1.JoinReferralPage, { moments_play_intent_id = var5 }, nil, constantsModule_1.JoinLaunchSource)
+		if var5 then
+			var3.current = listenForTeleportFailureModule(function()
+				-- upvalues: var3 (copy), var4 (ref)
+				var3.current = nil
+				var4.setTeleporting(false)
+			end)
+		end
+		launchGame(tostring(p2), constantsModule_1.JoinReferralPage, { moments_play_intent_id = var6 }, nil, constantsModule_1.JoinLaunchSource)
+		
+		if not var5 then
+			task.delay(6, function()
+				-- upvalues: var4 (ref)
+				var4.setTeleporting(false)
+			end)
+		end
 	end, { var1.joining, var2 })
 end

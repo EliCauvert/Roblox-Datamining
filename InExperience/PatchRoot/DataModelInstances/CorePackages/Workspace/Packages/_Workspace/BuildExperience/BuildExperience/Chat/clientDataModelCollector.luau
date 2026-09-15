@@ -203,6 +203,11 @@ local function getDisplayPath(p9, p10)
 	return if var12 == p10.root then table.concat(t, ".") else tostring(p9)
 end
 
+local function getInstancePath(p11, p12)
+	-- upvalues: getDisplayPath (ref), defaultDependencies (ref)
+	return getDisplayPath(p11, p12 or defaultDependencies())
+end
+
 local function truncateString(p11)
 	if #p11 <= 4096 then
 		return p11
@@ -510,6 +515,7 @@ end
 return {
 	NOT_IN_GAME_MESSAGE = "The user is not in the game.",
 	NOT_FOUND_MESSAGE = "No instance exists at the requested path.",
+	getInstancePath = getInstancePath,
 	searchClientDataModel = function(p29, p30)
 		-- upvalues: defaultDependencies (ref), resolvePath (ref), getKeywords (ref), getChildPathEntries (ref), matchesFilters (ref), makeSearchMatch (ref), countDescendantsByInstance (ref)
 		local var31, path
@@ -526,9 +532,9 @@ return {
 		else
 			var31 = nil
 		end
-		path, var82 = resolvePath(var31, p30)
+		path, var83 = resolvePath(var31, p30)
 		
-		if path == nil or var82 == nil then
+		if path == nil or var83 == nil then
 			return {
 				status = "not_found",
 				message = "No instance exists at the requested path.",
@@ -548,12 +554,12 @@ return {
 		instanceType = getKeywords(p29)
 		local t = {}
 		
-		if var82 == "" then
+		if var83 == "" then
 			for i, v in getChildPathEntries(path) do
 				table.insert(t, { depth = 1, instance = v.instance, path = v.segment })
 			end
 		else
-			table.insert(t, { depth = 0, instance = path, path = var82 })
+			table.insert(t, { depth = 0, instance = path, path = var83 })
 		end
 		local var35
 		local t_1 = {}
@@ -629,9 +635,9 @@ return {
 		if var42 == nil then
 			return { status = "invalid_input", message = "path is required" }
 		end
-		path, var98 = resolvePath(var42, p32)
+		path, var99 = resolvePath(var42, p32)
 		
-		return if path == nil or var98 == nil then {
+		return if path == nil or var99 == nil then {
 			status = "not_found",
 			message = "No instance exists at the requested path.",
 			path = var42
@@ -640,10 +646,10 @@ return {
 			instance = {
 				name = path.Name,
 				className = path.ClassName,
-				path = var98,
+				path = var99,
 				properties = collectProperties(path, p32),
 				attributes = collectAttributes(path, p32),
-				children = summarizeChildren(path, var98)
+				children = summarizeChildren(path, var99)
 			}
 		}
 	end

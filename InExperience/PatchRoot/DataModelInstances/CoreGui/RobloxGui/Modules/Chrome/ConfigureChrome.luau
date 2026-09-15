@@ -14,6 +14,7 @@ local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedF
 local getFFlagDebugEnableUnibarDummyIntegrations = sharedFlagsModule.GetFFlagDebugEnableUnibarDummyIntegrations
 local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
 local fFlagAppNavMyStatsTab = sharedFlagsModule.FFlagAppNavMyStatsTab
+local fFlagBuildExperienceLibrary = sharedFlagsModule.FFlagBuildExperienceLibrary
 local argoPartyExperimentation = require(corePackagesService.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
 local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
 
@@ -28,7 +29,7 @@ local _ = function()
 end
 
 local function configureUnibar()
-	-- upvalues: buildMenuOrderModule (ref), getFFlagDebugEnableUnibarDummyIntegrations (ref), isConnectUnibarEnabledModule (ref), argoPartyExperimentation (ref), constantsModule (ref), fFlagAppNavMyStatsTab (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), serviceModule (ref)
+	-- upvalues: buildMenuOrderModule (ref), getFFlagDebugEnableUnibarDummyIntegrations (ref), isConnectUnibarEnabledModule (ref), argoPartyExperimentation (ref), constantsModule (ref), fFlagBuildExperienceLibrary (ref), fFlagAppNavMyStatsTab (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), serviceModule (ref)
 	local var1 = buildMenuOrderModule()
 	local list = { "nine_dot", "chat", "toggle_mic_mute" }
 	table.insert(list, 3, "join_voice")
@@ -45,7 +46,10 @@ local function configureUnibar()
 	if index then
 		table.insert(list, index, constantsModule.TOGGLE_MIC_INTEGRATION_ID)
 	end
-	if fFlagAppNavMyStatsTab then
+	if fFlagBuildExperienceLibrary then
+		table.insert(list, "library")
+	end
+	if fFlagAppNavMyStatsTab or fFlagBuildExperienceLibrary then
 		table.insert(list, "assistant_build")
 	end
 	if isInExperienceUIVREnabled and isSpatial() then

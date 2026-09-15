@@ -1,14 +1,8 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local signalsModule = require(parent.Signals)
-local createProfileCTAStoreModule = require(script.Parent.createProfileCTAStore)
-local var1 = if require(parent.SharedFlags).FFlagJoinabilityCTARefactor then signalsModule.createComputed(function()
-	-- upvalues: createProfileCTAStoreModule (ref)
-	return createProfileCTAStoreModule()
-end) else signalsModule.createComputed(createProfileCTAStoreModule)
+﻿local var1 = require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(require(script.Parent.createProfileCTAStore))
 
 return {
 	get = function()
-		-- upvalues: var1 (write)
+		-- upvalues: var1 (ref)
 		return var1(false)
 	end
 }

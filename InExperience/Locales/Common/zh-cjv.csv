@@ -720,7 +720,6 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,我们无法发送�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,支持请求已发送
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,玩家支持目前不可用，请稍后重试。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,玩家支持不可用
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,请撰写更详细的描述
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,若要提交支持请求，你需要最近玩过此体验。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,访问此体验以提交请求
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,请等待创作者回复你现有的请求，然后再提交另一个请求。
@@ -2051,6 +2050,7 @@ Feature.Build.Description.RevertToVersion,确认以还原上次更改并返回�
 Feature.Build.Description.ShareLatest,分享最新版本的变化。
 Feature.Build.Description.ShopButton,添加购物入口
 Feature.Build.Description.UpdateDeveloperProduct,更新开发者产品 {PRODUCT_ID}。
+Feature.Build.Description.VersionChanges,告诉玩家此版本的更新内容
 Feature.Build.Error.DeveloperProductDescriptionTooLong,描述不能超过 1000 个字符。
 Feature.Build.Error.DeveloperProductNameRequired,输入产品名称。
 Feature.Build.Error.DeveloperProductNameTooLong,名称不能超过 50 个字符。
@@ -2231,6 +2231,7 @@ Feature.Build.Label.Version,版本
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
+Feature.Build.Label.VersionTitleDesc,版本标题和描述
 Feature.Build.Label.Video,视频
 Feature.Build.Message.AccountRequirements,你的帐户不符合使用 Build 的要求。
 Feature.Build.Message.AccountTooNew,你的帐户刚刚创建，暂时无法发布。请在帐户创建 2 天后重试。
@@ -2365,6 +2366,7 @@ Feature.Build.Title.Tasks,任务
 Feature.Build.Title.TurnActivity,轮次活动
 Feature.Build.Title.VersionHistory,版本历史记录
 Feature.Build.Title.VersionInfo,版本信息
+Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,版本 {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,包含哪些内容？

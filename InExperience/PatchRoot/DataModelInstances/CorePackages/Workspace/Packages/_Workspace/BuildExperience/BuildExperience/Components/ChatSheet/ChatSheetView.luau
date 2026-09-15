@@ -1,5 +1,6 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
+local fFlagBuildExperienceLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceLibrary)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
@@ -33,7 +34,7 @@ local function ChatSheetContent(p1)
 end
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), useTokens (ref), fFlagBuildDesktopReadinessModule (ref), reactModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), view (ref), var1 (ref), dialogSize (ref), ChatSheetContent (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), buildPillMenuPortalModule (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), useTokens (ref), fFlagBuildDesktopReadinessModule (ref), reactModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), view (ref), buildPillMenuPortalModule (ref), var1 (ref), dialogSize (ref), ChatSheetContent (ref), chatActionsModule (ref), fFlagBuildExperienceLibraryModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref)
 	local var2 = useLocalization({
 		composerPlaceholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER
 	})
@@ -46,7 +47,13 @@ return function(p1)
 		var4 = var6
 		var5 = var7
 	end
-	return reactModule.createElement(var1.Root, {
+	local var8 = if p1.topBarPillMenuTarget ~= nil then nil else reactModule.createElement(buildPillMenuPortalModule, {
+		testId = "build-pill-menu",
+		sheet = var4,
+		target = p1.topBarPillMenuTarget,
+		onOpenChat = p1.onOpenChat
+	})
+	local var9 = reactModule.createElement(var1.Root, {
 		ref = var5,
 		isOpen = p1.isOpen,
 		snapPoints = p1.snapPoints,
@@ -78,6 +85,9 @@ return function(p1)
 		Actions = reactModule.createElement(var1.Actions, nil, {
 			Footer = reactModule.createElement(chatActionsModule, {
 				composerText = p1.composerText,
+				composerTextRevision = if fFlagBuildExperienceLibraryModule then p1.composerTextRevision else nil,
+				references = if fFlagBuildExperienceLibraryModule then p1.composerReferences else nil,
+				onRemoveReference = if fFlagBuildExperienceLibraryModule then p1.onRemoveComposerReference else nil,
 				composerErrorText = p1.composerErrorText,
 				onComposerChanged = p1.onComposerChanged,
 				images = if fFlagBuildExperienceChatImageAttachmentsModule then p1.composerImages else nil,
@@ -93,11 +103,8 @@ return function(p1)
 				onStop = p1.onStop
 			})
 		}),
-		TopBarPillMenu = if p1.topBarPillMenuTarget ~= nil then nil else reactModule.createElement(buildPillMenuPortalModule, {
-			testId = "build-pill-menu",
-			sheet = var4,
-			target = p1.topBarPillMenuTarget,
-			onOpenChat = p1.onOpenChat
-		})
+		TopBarPillMenu = if fFlagBuildExperienceLibraryModule then nil else var8
 	})
+	
+	return if fFlagBuildExperienceLibraryModule then reactModule.createElement(reactModule.Fragment, nil, { Sheet = var9, TopBarPillMenu = var8 }) else var9
 end

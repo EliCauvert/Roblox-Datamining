@@ -24,6 +24,7 @@ local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore)
 local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local _ = require(buildExperience.Chat.useChatSessionCore)
 local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
+local fFlagBuildExperienceLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceLibrary)
 local fFlagBuildExperienceAssetLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceAssetLibrary)
 local fFlagBuildExperienceRemoveAgentTaskUiModule = require(buildExperience.Flags.FFlagBuildExperienceRemoveAgentTaskUi)
 local fFlagEnableBuildOverflowMenuForNewGamesModule = require(buildExperience.Flags.FFlagEnableBuildOverflowMenuForNewGames)
@@ -76,7 +77,7 @@ local function toTodoItems(p3)
 end
 
 return function(p4)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), fFlagBuildAdUpsellModule (ref), useTokens (ref), reactModule (ref), useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), chatConstantsModule (ref), pushNotificationsUpsellCardModule (ref), var1 (ref), view (ref), subagentTaskStatus (ref), subagentStatusModule (ref), fFlagBuildDesktopReadinessModule (ref), buyMoreRobuxCardModule (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), iconButton (ref), iconName (ref), inputSize (ref), text (ref), playButtonModule (ref), buttonVariant (ref), agentDetailMenuModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), buildOverflowMenuButtonModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), fFlagEnableBuildAdPromotionModule (ref), scrollView (ref), foundationModule (ref), divider (ref), toTodoItems (ref), var2 (ref), var3 (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), fFlagBuildAdUpsellModule (ref), useTokens (ref), reactModule (ref), useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), chatConstantsModule (ref), pushNotificationsUpsellCardModule (ref), var1 (ref), view (ref), subagentTaskStatus (ref), subagentStatusModule (ref), fFlagBuildDesktopReadinessModule (ref), buyMoreRobuxCardModule (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperienceLibraryModule (ref), iconButton (ref), iconName (ref), inputSize (ref), text (ref), playButtonModule (ref), buttonVariant (ref), agentDetailMenuModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), buildOverflowMenuButtonModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), fFlagEnableBuildAdPromotionModule (ref), scrollView (ref), foundationModule (ref), divider (ref), toTodoItems (ref), var2 (ref), var3 (ref)
 	local var4, v
 	local var5 = useLocalization({
 		composerPlaceholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER,
@@ -219,6 +220,8 @@ return function(p4)
 			images = if fFlagBuildExperienceChatImageAttachmentsModule then p4.composerImages else nil,
 			onImagesChanged = if fFlagBuildExperienceChatImageAttachmentsModule then p4.onComposerImagesChanged else nil,
 			onRetryImage = if fFlagBuildExperienceChatImageAttachmentsModule then p4.onRetryComposerImage else nil,
+			references = if fFlagBuildExperienceLibraryModule then p4.composerReferences else nil,
+			onRemoveReference = if fFlagBuildExperienceLibraryModule then p4.onRemoveComposerReference else nil,
 			isImageSendBlocked = if fFlagBuildExperienceChatImageAttachmentsModule then p4.isComposerSendBlocked else nil,
 			placeholder = var5.composerPlaceholder,
 			textBoxRef = p4.textBoxRef,
@@ -269,14 +272,20 @@ return function(p4)
 					variant = buttonVariant.Utility
 				}),
 				AgentDetail = if taskState then reactModule.createElement(agentDetailMenuModule, { layoutOrder = 4, onActivated = p4.onOpenAgentsPage }) else nil,
-				AssetLibrary = if fFlagBuildExperienceAssetLibraryModule then reactModule.createElement(iconButton, {
+				Library = if fFlagBuildExperienceLibraryModule or fFlagBuildExperienceAssetLibraryModule then reactModule.createElement(iconButton, {
 					LayoutOrder = 5,
 					isCircular = true,
-					testId = "build-header-asset-library-menu",
+					ClipsDescendants = if fFlagBuildExperienceLibraryModule then true else nil,
+					Size = if fFlagBuildExperienceLibraryModule then UDim2.fromOffset(var6.Size.Size_1000, var6.Size.Size_1000) else nil,
+					ZIndex = if fFlagBuildExperienceLibraryModule then 4 else nil,
 					icon = iconName.SquaresGridPlus,
 					isDisabled = p4.isAgentDetailDisabled,
-					onActivated = p4.onOpenAssetLibraryPage,
+					onActivated = function()
+						-- upvalues: p4 (ref)
+						p4.onOpenLibraryPage()
+					end,
 					size = inputSize.Medium,
+					testId = if fFlagBuildExperienceLibraryModule then "build-header-library-menu" else "build-header-asset-library-menu",
 					variant = buttonVariant.Utility
 				}) else nil,
 				Overflow = reactModule.createElement(buildOverflowMenuButtonModule, {

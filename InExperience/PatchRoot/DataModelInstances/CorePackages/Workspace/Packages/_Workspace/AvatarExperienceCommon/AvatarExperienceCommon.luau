@@ -1,5 +1,4 @@
-﻿local parent = script.Parent
-local catalogItemCardModule = require(script.Components.CatalogItemCard.CatalogItemCard)
+﻿local catalogItemCardModule = require(script.Components.CatalogItemCard.CatalogItemCard)
 local catalogRowItemCardModule = require(script.Components.CatalogRowItemCard.CatalogRowItemCard)
 local _ = require(script.Components.CatalogRowItemCard.CatalogRowItemCardFooter)
 local catalogItemCardItemInfoEnumModule = require(script.Components.CatalogItemCard.Enums.CatalogItemCardItemInfoEnum)
@@ -14,7 +13,6 @@ local normalizeModule = require(script.Utils.normalize)
 local AXPartialPageModalModule = require(script.Components.AXPartialPageModal.AXPartialPageModal)
 local backgroundHighlightContainerModule = require(script.Components.BackgroundHighlight.BackgroundHighlightContainer)
 local contextualActionButtonModule = require(script.Components.ContextualActionButton.ContextualActionButton)
-local licensingBadgeModule = require(script.Components.LicensingBadge.LicensingBadge)
 local selectColorAdjustmentButtonColorModule = require(script.State.Selectors.selectColorAdjustmentButtonColor)
 local selectTryOnBodyIdsModule = require(script.State.Selectors.selectTryOnBodyIds)
 local selectHasBodyTryOnModule = require(script.State.Selectors.selectHasBodyTryOn)
@@ -70,7 +68,6 @@ local _ = require(script.Types.AvatarColorTypes)
 local _ = require(script.Types.WidgetAnalyticsInfo)
 local _ = require(script.Types.WidgetInfoContextTypes)
 local _ = require(script.Types.ItemTypes)
-local _ = require(parent.AvatarExperienceModel)
 local _ = require(script.Types.PurchaseItemsTypes)
 local _ = require(script.Types.TryOnItemComparisonData)
 local _ = require(script.Backgrounds.types)
@@ -100,7 +97,6 @@ return {
 			ExpandingFrame = require(script.Components.Filters.ExpandingFrame)
 		},
 		ContextualActionButton = contextualActionButtonModule,
-		LicensingBadge = licensingBadgeModule,
 		AnimatedScrollingFrame = {
 			useAXAnimateScrollFrame = require(script.Components.AnimatedScrollingFrame.useAXAnimateScrollFrame),
 			AnimatedScrollingFrame = require(script.Components.AnimatedScrollingFrame.AnimatedScrollingFrame)

@@ -14,12 +14,14 @@ local getBuildOverflowMenuStoreModule = require(buildExperience.Stores.GetBuildO
 local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local publishStatusModule = require(buildExperience.Chat.PublishStatus)
 local leaveExperienceModule = require(buildExperience.utils.leaveExperience)
+local isLibraryAvailableInExperienceModule = require(buildExperience.utils.isLibraryAvailableInExperience)
+local fFlagBuildExperienceLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceLibrary)
 local fFlagBuildExperienceAssetLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceAssetLibrary)
 local fFlagBuildExperienceRemoveAgentTaskUiModule = require(buildExperience.Flags.FFlagBuildExperienceRemoveAgentTaskUi)
 local fFlagBuildExperienceMenuImprovementsModule = require(buildExperience.Flags.FFlagBuildExperienceMenuImprovements)
 
 return function(p1)
-	-- upvalues: getBuildOverflowMenuStoreModule (ref), publishStatusModule (ref), reactModule (ref), view (ref), fFlagBuildExperienceMenuImprovementsModule (ref), stopPlaytestButtonModule (ref), leaveExperienceModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), agentDetailMenuModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), buildOverflowMenuButtonModule (ref)
+	-- upvalues: getBuildOverflowMenuStoreModule (ref), publishStatusModule (ref), reactModule (ref), view (ref), fFlagBuildExperienceMenuImprovementsModule (ref), stopPlaytestButtonModule (ref), leaveExperienceModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), agentDetailMenuModule (ref), fFlagBuildExperienceLibraryModule (ref), isLibraryAvailableInExperienceModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), buildOverflowMenuButtonModule (ref)
 	local var1 = publishStatusModule.usePublishStatus(p1.target)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
@@ -41,13 +43,13 @@ return function(p1)
 				layoutOrder = 1,
 				onActivated = p1.onOpenAgentsPage or function() end
 			}) else nil,
-			AssetLibrary = if fFlagBuildExperienceAssetLibraryModule then reactModule.createElement(iconButton, {
+			Library = if fFlagBuildExperienceLibraryModule and isLibraryAvailableInExperienceModule() or not fFlagBuildExperienceLibraryModule and fFlagBuildExperienceAssetLibraryModule then reactModule.createElement(iconButton, {
 				LayoutOrder = 2,
 				isCircular = true,
-				testId = "build-header-asset-library-menu",
 				icon = iconName.SquaresGridPlus,
-				onActivated = p1.onOpenAssetLibraryPage,
+				onActivated = p1.onOpenLibraryPage,
 				size = inputSize.Medium,
+				testId = if fFlagBuildExperienceLibraryModule then "build-header-library-menu" else "build-header-asset-library-menu",
 				variant = buttonVariant.Utility
 			}) else nil,
 			Overflow = reactModule.createElement(buildOverflowMenuButtonModule, {
