@@ -174,6 +174,10 @@ Roblox.LangDynamic["Feature.VerificationUpsell"] = {
     "BannerBodyPostCutT1": "Let's check your age now. Your data stays secure.",
     "BannerBodyPostCutT2": "Get a secure age check now.",
     "Label.SlimBanner": "Access to popular games has changed. Let’s check your age to see what you can still play.",
-    "Action.Close": "Close"
+    "Action.Close": "Close",
+    "AgeCheckUpsellDialogBodyM2V2": "Your account age doesn't match what we'd expect. This can affect what you see and do on Roblox. Complete the age check flow to unlock more games.",
+    "AgeCheckUpsellDialogBodyM2V1": "Your account age doesn't match what we'd expect. Complete the age check flow to unlock more games across Roblox.",
+    "Action.ContinueM2V1": "Continue without checking for now",
+    "Action.ContinueM2V2": "Continue without checking yet"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.VerificationUpsell");
