@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "f2b8608a-b1a7-de9d-dfd1-4f29439067d0")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "00e803cf-d8b9-fe09-4422-cf2fea7f8be1")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 523426, e => {
@@ -235,12 +235,18 @@
     e.s(["isBandwidthNetworkTabEnabled", 0, t])
 }, 242002, e => {
     "use strict";
-    let t = (0, e.i(157700).defineFlag)({
-        namespace: "game-discovery-serving",
-        name: "isAcquisitionThumbnailUpsellEnabled",
-        defaultValue: !1
-    });
-    e.s(["isAcquisitionThumbnailUpsellEnabled", 0, t])
+    var t = e.i(157700);
+    let a = (0, t.defineFlag)({
+            namespace: "game-discovery-serving",
+            name: "isAcquisitionThumbnailUpsellEnabled",
+            defaultValue: !1
+        }),
+        n = (0, t.defineFlag)({
+            namespace: "game-discovery-serving",
+            name: "isHomeAcquisitionSignalsLayoutRefreshEnabled",
+            defaultValue: !1
+        });
+    e.s(["isAcquisitionThumbnailUpsellEnabled", 0, a, "isHomeAcquisitionSignalsLayoutRefreshEnabled", 0, n])
 }, 967230, e => {
     "use strict";
     var t = e.i(157700);
@@ -1131,17 +1137,17 @@
                     autoHide: !0,
                     onClose: T
                 })
-            }, [x, T]), [U, R] = (0, a.useState)(), [N, F] = (0, a.useState)(), [k, D] = (0, a.useState)(), [V, O] = (0, a.useState)(), L = (0, a.useCallback)(async () => {
+            }, [x, T]), [R, U] = (0, a.useState)(), [N, F] = (0, a.useState)(), [V, k] = (0, a.useState)(), [D, O] = (0, a.useState)(), L = (0, a.useCallback)(async () => {
                 if (null == l ? void 0 : l.senderUserId) try {
                     let e = await C.default.getUserById(Number.parseInt(l.senderUserId, 10));
-                    D(e.name), O(!1)
+                    k(e.name), O(!1)
                 } catch (e) {
                     O(!0)
                 }
             }, [l]), M = (0, a.useCallback)(async () => {
                 if ((null == u ? void 0 : u.id) && (null == u ? void 0 : u.groupId)) try {
                     let e = await y.default.getGroupInfo(Number.parseInt(u.groupId, 10));
-                    R(null == e ? void 0 : e.name)
+                    U(null == e ? void 0 : e.name)
                 } catch (e) {
                     P(c("Error.GroupInformation"))
                 }
@@ -1191,15 +1197,15 @@
                                 variant: "h4",
                                 className: v,
                                 children: c("Label.JoinOrganization", {
-                                    organizationName: null != U ? U : c("Label.Group")
+                                    organizationName: null != R ? R : c("Label.Group")
                                 })
                             })
                         }), (0, t.jsx)(g.Grid, {
                             container: !0,
                             children: (0, t.jsx)(h.Typography, {
                                 variant: "body1",
-                                children: V ? c("Message.JoinOrganizationWithoutUsername") : c("Message.JoinOrganization", {
-                                    username: null != k ? k : ""
+                                children: D ? c("Message.JoinOrganizationWithoutUsername") : c("Message.JoinOrganization", {
+                                    username: null != V ? V : ""
                                 })
                             })
                         })]
@@ -1321,17 +1327,17 @@
         }, [l.TranslationNamespace.Organization]);
     var T = e.i(582977),
         P = e.i(672401);
-    let U = (0, i.withTranslation)(e => {
+    let R = (0, i.withTranslation)(e => {
         let {
             children: i
         } = e, l = (0, n.useRouter)(), {
             user: d
         } = (0, r.useAuthentication)(), p = (0, u.useCurrentGroup)(), {
             currentItemGroupId: m
-        } = (0, c.default)(), [f, g] = (0, a.useState)(), [h, v] = (0, a.useState)(), [b, y] = (0, a.useState)(), [C, S] = (0, a.useState)(!1), [w, A] = (0, a.useState)(!1), [I, U] = (0, a.useState)(), [R, N] = (0, a.useState)(!1), F = null == d ? void 0 : d.id, k = (0, a.useMemo)(() => {
+        } = (0, c.default)(), [f, g] = (0, a.useState)(), [h, v] = (0, a.useState)(), [b, y] = (0, a.useState)(), [C, S] = (0, a.useState)(!1), [w, A] = (0, a.useState)(!1), [I, R] = (0, a.useState)(), [U, N] = (0, a.useState)(!1), F = null == d ? void 0 : d.id, V = (0, a.useMemo)(() => {
             var e;
             return null != (e = null == p ? void 0 : p.id) ? e : m
-        }, [p, m]), D = l.query[T.InviteQueryKey], V = l.isReady, O = (0, a.useCallback)(() => {
+        }, [p, m]), k = l.query[T.InviteQueryKey], D = l.isReady, O = (0, a.useCallback)(() => {
             n.default.push("https://create.".concat("roblox.com", "/dashboard/creations"))
         }, []), L = (0, a.useCallback)(async e => {
             if (!F) return void y(null);
@@ -1350,13 +1356,13 @@
                 v(null)
             }
         }, [F]), B = (0, a.useCallback)(async () => {
-            if (V) {
+            if (D) {
                 A(!0);
                 try {
-                    if ("string" == typeof D) return void await L(D);
-                    if (!k) return void g(null);
-                    if (y(null), k) {
-                        let e = await s.default.organizationClient.getOrganization(k.toString());
+                    if ("string" == typeof k) return void await L(k);
+                    if (!V) return void g(null);
+                    if (y(null), V) {
+                        let e = await s.default.organizationClient.getOrganization(V.toString());
                         g(e), await M(e.id)
                     } else g(void 0);
                     S(!1)
@@ -1366,7 +1372,7 @@
                     A(!1)
                 }
             }
-        }, [k, L, M, D, V]), j = (0, a.useCallback)(() => {
+        }, [V, L, M, k, D]), j = (0, a.useCallback)(() => {
             S(!0), B()
         }, [B]), G = (0, a.useCallback)(async () => {
             (null == f ? void 0 : f.id) && await M(null == f ? void 0 : f.id)
@@ -1387,11 +1393,11 @@
                     children: [(0, t.jsx)(E, {
                         open: b.invitationStatusType === o.InvitationStatusType.Open && void 0 === I,
                         onClose: e => {
-                            !0 === e ? (U(!0), N(!0)) : !1 === e ? (U(!1), N(!0)) : (O(), y(null))
+                            !0 === e ? (R(!0), N(!0)) : !1 === e ? (R(!1), N(!0)) : (O(), y(null))
                         },
                         invitation: b
                     }), (0, t.jsx)(x, {
-                        open: R,
+                        open: U,
                         onClose: () => {
                             N(!1), !0 === I && j(), O()
                         },
@@ -1402,7 +1408,7 @@
             })
         })
     }, [l.TranslationNamespace.Organization]);
-    e.s(["default", 0, U], 911502)
+    e.s(["default", 0, R], 911502)
 }, 758835, e => {
     "use strict";
     var t = e.i(416340),
@@ -1986,5 +1992,5 @@
     }])
 }]);
 
-//# debugId=f2b8608a-b1a7-de9d-dfd1-4f29439067d0
-//# sourceMappingURL=0o-nhiigyew2i.js.map
+//# debugId=00e803cf-d8b9-fe09-4422-cf2fea7f8be1
+//# sourceMappingURL=238rudbktptit.js.map

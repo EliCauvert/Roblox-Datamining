@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "e231482e-828f-1f51-748a-b4c49bdcf1dd")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "3d3904d6-5d61-9211-8880-010d8d4779dc")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 846130, e => {
@@ -28,8 +28,13 @@
             namespace: "creator-gameops",
             name: "enableAudienceReachV2",
             defaultValue: !1
+        }),
+        l = (0, t.defineFlag)({
+            namespace: "creator-gameops",
+            name: "enablePlayerSupportArchive",
+            defaultValue: !1
         });
-    e.s(["enableAudienceReachV2", 0, i, "enablePlayerHostedEvents", 0, n, "enablePlayerSupport", 0, a, "enablePlayerSupportCreatorTicketReroute", 0, r])
+    e.s(["enableAudienceReachV2", 0, i, "enablePlayerHostedEvents", 0, n, "enablePlayerSupport", 0, a, "enablePlayerSupportArchive", 0, l, "enablePlayerSupportCreatorTicketReroute", 0, r])
 }, 787617, e => {
     "use strict";
     let t = (0, e.i(157700).defineFlag)({
@@ -479,7 +484,7 @@
             defaultProp: null != i && i,
             onChange: u,
             caller: p
-        }), [y, x] = r.useState(null), [E, w] = r.useState(null), I = r.useRef(!1), S = !y || !!s || !!y.closest("form"), O = {
+        }), [y, x] = r.useState(null), [E, w] = r.useState(null), I = r.useRef(!1), S = !y || !!s || !!y.closest("form"), P = {
             checked: v,
             disabled: l,
             setChecked: b,
@@ -497,8 +502,8 @@
         };
         return (0, f.jsx)(h, {
             scope: t,
-            ...O,
-            children: "function" == typeof g ? g(O) : n
+            ...P,
+            children: "function" == typeof g ? g(P) : n
         })
     }
     var x = "CheckboxTrigger",
@@ -578,7 +583,7 @@
                         ...c,
                         ref: t,
                         __scopeCheckbox: a
-                    }), n && (0, f.jsx)(P, {
+                    }), n && (0, f.jsx)(O, {
                         __scopeCheckbox: a
                     })]
                 })
@@ -608,8 +613,8 @@
             })
         });
     S.displayName = I;
-    var O = "CheckboxBubbleInput",
-        P = r.forwardRef((e, t) => {
+    var P = "CheckboxBubbleInput",
+        O = r.forwardRef((e, t) => {
             let {
                 __scopeCheckbox: a,
                 ...n
@@ -625,7 +630,7 @@
                 form: y,
                 bubbleInput: x,
                 setBubbleInput: E
-            } = b(O, a), w = (0, i.useComposedRefs)(t, E), I = (0, d.usePrevious)(o), S = (0, u.useSize)(l);
+            } = b(P, a), w = (0, i.useComposedRefs)(t, E), I = (0, d.usePrevious)(o), S = (0, u.useSize)(l);
             r.useEffect(() => {
                 if (!x) return;
                 let e = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "checked").set,
@@ -637,11 +642,11 @@
                     x.indeterminate = z(o), e.call(x, !z(o) && o), x.dispatchEvent(a)
                 }
             }, [x, I, o, s]);
-            let P = r.useRef(!z(o) && o);
+            let O = r.useRef(!z(o) && o);
             return (0, f.jsx)(m.Primitive.input, {
                 type: "checkbox",
                 "aria-hidden": !0,
-                defaultChecked: null != c ? c : P.current,
+                defaultChecked: null != c ? c : O.current,
                 required: p,
                 disabled: g,
                 name: v,
@@ -669,7 +674,7 @@
     function N(e) {
         return z(e) ? "indeterminate" : e ? "checked" : "unchecked"
     }
-    P.displayName = O;
+    O.displayName = P;
     let R = {
             XSmall: "size-400",
             Small: "size-500",
@@ -885,8 +890,8 @@
                 size: w = "Large",
                 variant: I = "Emphasis",
                 iconColor: S = "Default",
-                asChild: O,
-                children: P,
+                asChild: P,
+                children: O,
                 ...z
             } = e;
             g = y ? u[I] : E ? c[I] : d[I];
@@ -894,11 +899,11 @@
                 R = r.default.createElement(r.default.Fragment, null, r.default.createElement(t.StateLayer, null), r.default.createElement("span", {
                     className: (0, n.default)("icon", h, s[w], y ? f[S][I] : m[S][I])
                 }));
-            if (O) {
+            if (P) {
                 let {
                     as: e,
                     ...t
-                } = z, a = r.default.Children.only(P);
+                } = z, a = r.default.Children.only(O);
                 return r.default.createElement(i.Slot, {
                     ref: p,
                     ...t,
@@ -998,8 +1003,8 @@
                 size: w,
                 variant: I = "Standard",
                 value: S,
-                placeholder: O,
-                isDisabled: P,
+                placeholder: P,
+                isDisabled: O,
                 hasError: z,
                 hint: N,
                 onValueChange: R,
@@ -1014,12 +1019,12 @@
             return l.default.createElement(o.Provider, {
                 value: U
             }, l.default.createElement("div", {
-                className: (0, i.default)("flex flex-col", P && ["opacity-[0.5]", "pointer-events-none"], f[w], E)
+                className: (0, i.default)("flex flex-col", O && ["opacity-[0.5]", "pointer-events-none"], f[w], E)
             }, M && (b ? l.default.createElement("div", {
                 className: "flex items-center gap-xsmall"
             }, M, l.default.createElement(n.LabelTooltip, b)) : M), l.default.createElement(s.Root, {
                 value: S,
-                disabled: P,
+                disabled: O,
                 onValueChange: R,
                 onOpenChange: C
             }, l.default.createElement(s.Trigger, {
@@ -1030,7 +1035,7 @@
             }, l.default.createElement(t.StateLayer, null), l.default.createElement("div", {
                 className: "grow-1 text-truncate-split text-align-x-left"
             }, l.default.createElement(s.Value, {
-                placeholder: O
+                placeholder: P
             })), l.default.createElement(s.Icon, {
                 className: (0, i.default)(d[w], "icon icon-regular-chevron-large-down content-default")
             })), l.default.createElement(s.Portal, null, l.default.createElement(s.Content, {
@@ -1085,13 +1090,13 @@
             Medium: "gap-y-xsmall",
             Large: "gap-y-xsmall"
         },
-        O = {
+        P = {
             XSmall: "text-body-small",
             Small: "text-body-small",
             Medium: "text-body-medium",
             Large: "text-body-large"
         },
-        P = {
+        O = {
             XSmall: "radius-small",
             Small: "radius-medium",
             Medium: "radius-medium",
@@ -1149,7 +1154,7 @@
                 size: y,
                 mode: x
             } = N(),
-            z = (0, i.default)(t.interactable, "foundation-web-menu-item flex items-center content-default text-truncate-split focus-visible:hover:outline-none cursor-pointer stroke-none bg-none text-align-x-left width-full", O[y], E[y], w[y], I[y], P[y], c && "opacity-[0.5]", c && "pointer-events-none", m),
+            z = (0, i.default)(t.interactable, "foundation-web-menu-item flex items-center content-default text-truncate-split focus-visible:hover:outline-none cursor-pointer stroke-none bg-none text-align-x-left width-full", P[y], E[y], w[y], I[y], O[y], c && "opacity-[0.5]", c && "pointer-events-none", m),
             R = l.default.createElement("span", {
                 className: "foundation-web-menu-item-title text-no-wrap text-truncate-split content-emphasis"
             }, o);
@@ -1238,7 +1243,7 @@
             className: o
         } = e, {
             size: d
-        } = N(), u = (0, i.default)("foundation-web-menu-label flex items-center content-default text-truncate-split text-align-x-left width-full", O[d], E[d], w[d], I[d], s && "opacity-[0.5]", o);
+        } = N(), u = (0, i.default)("foundation-web-menu-label flex items-center content-default text-truncate-split text-align-x-left width-full", P[d], E[d], w[d], I[d], s && "opacity-[0.5]", o);
         return l.default.createElement("div", {
             role: "none",
             className: u
@@ -1295,8 +1300,8 @@
             className: "content-inverse-emphasis",
             onClick: u,
             ref: I
-        }, d), O = !!S, P = s.length > 80, z = null == p || p, N = 4e3;
-        O && (N = P ? 1e4 : 7e3);
+        }, d), P = !!S, O = s.length > 80, z = null == p || p, N = 4e3;
+        P && (N = O ? 1e4 : 7e3);
         let R = null != g ? g : N,
             C = (0, i.useCallback)(() => {
                 "exit" !== b && (y("exit"), void 0 !== E.current && (window.clearTimeout(E.current), E.current = void 0), w.current = window.setTimeout(() => {
@@ -1313,8 +1318,8 @@
             }, R))
         }, [R, z, b, C]), (0, i.useEffect)(() => {
             var e;
-            O && (null == (e = I.current) || e.focus())
-        }, [O]), (0, i.useEffect)(() => () => {
+            P && (null == (e = I.current) || e.focus())
+        }, [P]), (0, i.useEffect)(() => () => {
             void 0 !== E.current && window.clearTimeout(E.current), void 0 !== w.current && window.clearTimeout(w.current), void 0 !== x.current && window.cancelAnimationFrame(x.current)
         }, []);
         let L = {
@@ -1734,5 +1739,5 @@
     }])
 }]);
 
-//# debugId=e231482e-828f-1f51-748a-b4c49bdcf1dd
-//# sourceMappingURL=0p_kkg29g5w7z.js.map
+//# debugId=3d3904d6-5d61-9211-8880-010d8d4779dc
+//# sourceMappingURL=1zvc2jrzi_ncv.js.map

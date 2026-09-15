@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "1b764e7c-7756-bdeb-8958-4793edccc86e")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "e6dce12e-8478-7e08-b827-4ae598c64a9b")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 134731, e => {
@@ -628,7 +628,7 @@
         v = e.i(917852),
         h = e.i(576069),
         y = e.i(663563);
-    let b = "".concat("https://assets.create.roblox.com/bc1f661b78168b20af894614f3b014d00227cca6/assets", "/home/publish_eligibility_banner.webp"),
+    let b = "".concat("https://assets.create.roblox.com/dca8b671c04a8c6f33b3f061f6761f3cd35a97ba/assets", "/home/publish_eligibility_banner.webp"),
         A = (0, l.withTranslation)(e => {
             var A;
             let {
@@ -819,7 +819,7 @@
 }, 790806, e => {
     "use strict";
     var t = e.i(721281),
-        a = e.i(685009),
+        a = e.i(176936),
         n = e.i(272593);
     let r = new class {
             getAgeBracket() {
@@ -3276,5 +3276,5 @@
     u.displayName = "TextArea", e.s(["TextArea", 0, u])
 }]);
 
-//# debugId=1b764e7c-7756-bdeb-8958-4793edccc86e
-//# sourceMappingURL=1e-o5vb9b2m8r.js.map
+//# debugId=e6dce12e-8478-7e08-b827-4ae598c64a9b
+//# sourceMappingURL=012k27znx_1a1.js.map

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "3fd96f41-edac-7de0-b580-6cf389563b5b")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "b5f72a9d-4331-166c-98b4-5dad815b750c")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 392782, 311701, e => {
@@ -1455,9 +1455,18 @@
         T = new G(S),
         U = new q(S);
     e.s(["default", 0, {
-        getDetails: e => b.v1GamesGet({
-            universeIds: e
-        }),
+        async getDetails(e) {
+            let r = [];
+            for (let t = 0; t < e.length; t += 50) r.push(e.slice(t, t + 50));
+            return {
+                data: (await Promise.all(r.map(e => b.v1GamesGet({
+                    universeIds: e
+                })))).flatMap(e => {
+                    var r;
+                    return null != (r = e.data) ? r : []
+                })
+            }
+        },
         async getSocialLinks(e) {
             var r, t, i;
             let s = await T.v1GamesUniverseIdSocialLinksListGet({
@@ -1492,5 +1501,5 @@
     }], 392782)
 }]);
 
-//# debugId=3fd96f41-edac-7de0-b580-6cf389563b5b
-//# sourceMappingURL=098yghk1_tz33.js.map
+//# debugId=b5f72a9d-4331-166c-98b4-5dad815b750c
+//# sourceMappingURL=3heayeyyi3slp.js.map

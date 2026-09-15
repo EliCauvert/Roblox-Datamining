@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "173adb13-80ac-f7b7-5df7-d06ee4b394df")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "7579a516-8a45-3075-a372-020ba69fae1b")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 736570, t => {
@@ -17100,7 +17100,7 @@
         e3 = t.i(795621),
         e5 = t.i(279149),
         e6 = t.i(677753),
-        e8 = t.i(685009),
+        e8 = t.i(176936),
         e7 = t.i(780481),
         e9 = t.i(710675),
         te = t.i(874286),
@@ -28487,10 +28487,10 @@
         }
         static async getDataset(t) {
             let r;
-            if ("titles" === n.default.env.recommendedSearchType) r = nf("https://assets.create.roblox.com/bc1f661b78168b20af894614f3b014d00227cca6", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
+            if ("titles" === n.default.env.recommendedSearchType) r = nf("https://assets.create.roblox.com/dca8b671c04a8c6f33b3f061f6761f3cd35a97ba", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
             else {
                 if (!ny()) return [];
-                r = nf("https://assets.create.roblox.com/bc1f661b78168b20af894614f3b014d00227cca6", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
+                r = nf("https://assets.create.roblox.com/dca8b671c04a8c6f33b3f061f6761f3cd35a97ba", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
             }
             let o = await fetch(r),
                 a = await o.json();
@@ -34335,5 +34335,5 @@
     }])
 }]);
 
-//# debugId=173adb13-80ac-f7b7-5df7-d06ee4b394df
-//# sourceMappingURL=0repnldju_tjg.js.map
+//# debugId=7579a516-8a45-3075-a372-020ba69fae1b
+//# sourceMappingURL=2s7wum8sp2-bc.js.map
