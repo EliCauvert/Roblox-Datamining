@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "2d26edcf-6b8d-e5ee-5853-d88a0ba85c90")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "3b047dd2-4269-b86e-4ca9-dbfade8ac8c8")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 97782, e => {
@@ -308,7 +308,7 @@
             group: n
         },
         ei = [D, H, E, S, n, o, s, l, c, d, u, p, m, y, g, h, b, f, en, v, k, N, C, T, x, I, P, M, L, j, B, w, A, R, X, W, J, G, _, z, U, q, V, $, Z, r, i, Q, Y, ee, et, ea, F, K, O, er];
-    e.s(["analyticsAgentNavigationItem", 0, W, "analyticsAiChatNavigationItem", 0, J, "analyticsAlertConfifurationNavigationItem", 0, K, "analyticsAlertCreationNavigationItem", 0, F, "analyticsAlertsNavigationItem", 0, O, "analyticsAnalyticsHomeNavigationItem", 0, r, "analyticsAssistantNavigationItem", 0, X, "analyticsAudienceNavigationItem", 0, x, "analyticsAvatarCreationTokensNavigationItem", 0, er, "analyticsBountyPayoutsNavigationItem", 0, k, "analyticsCommerceNavigationItem", 0, V, "analyticsConfigsHistoryNavigationItem", 0, _, "analyticsConfigsNavigationItem", 0, z, "analyticsCrashesNavigationItem", 0, C, "analyticsCreationOverviewNavigationItem", 0, Z, "analyticsCustomDashboardsManageNavigationItem", 0, A, "analyticsCustomEventsNavigationItem", 0, R, "analyticsDataStoresNavigationItem", 0, m, "analyticsEngagementNavigationItem", 0, E, "analyticsErrorReportNavigationItem", 0, T, "analyticsExperienceCreatorRewardsNavigationItem", 0, v, "analyticsExperienceSubscriptionsNavigationItem", 0, ea, "analyticsExperimentsCreateNavigationItem", 0, Q, "analyticsExperimentsNavigationItem", 0, i, "analyticsExploreNavigationItem", 0, w, "analyticsFeedbackNavigationItem", 0, G, "analyticsGenerativeAINavigationItem", 0, en, "analyticsHttpServiceNavigationItem", 0, y, "analyticsImmersiveAdsNavigationItem", 0, d, "analyticsItemMonetizationAvatarItemsNavigationItem", 0, l, "analyticsItemMonetizationDeveloperProductsNavigationItem", 0, o, "analyticsItemMonetizationPassesNavigationItem", 0, s, "analyticsMatchmakingNavigationItem", 0, q, "analyticsMemoryStoresNavigationItem", 0, p, "analyticsMessagingServiceNavigationItem", 0, g, "analyticsMonetizationNavigationItem", 0, n, "analyticsNotificationsNavigationItem", 0, et, "analyticsPerformanceNavigationItem", 0, N, "analyticsRecommendationServiceNavigationItem", 0, Y, "analyticsRecommendedEventsEconomyNavigationItem", 0, I, "analyticsRecommendedEventsFunnelsNavigationItem", 0, P, "analyticsRecommendedEventsJourneyCreateNavigationItem", 0, L, "analyticsRecommendedEventsJourneyEditNavigationItem", 0, j, "analyticsRecommendedEventsJourneyNavigationItem", 0, M, "analyticsRecommendedEventsJourneyViewNavigationItem", 0, B, "analyticsRetentionNavigationItem", 0, S, "analyticsSafetyNavigationItem", 0, $, "analyticsSpeechToTextNavigationItem", 0, h, "analyticsSubscriptionsNavigationItem", 0, u, "analyticsTextToSpeechNavigationItem", 0, b, "analyticsUserAcquisitionNavigationItem", 0, H, "analyticsVideoServiceNavigationItem", 0, f, "getAnalyticsNavigationItemFromPath", 0, function(e) {
+    e.s(["analyticsAgentNavigationItem", 0, W, "analyticsAiChatNavigationItem", 0, J, "analyticsAlertConfifurationNavigationItem", 0, K, "analyticsAlertCreationNavigationItem", 0, F, "analyticsAlertsNavigationItem", 0, O, "analyticsAnalyticsHomeNavigationItem", 0, r, "analyticsAssistantNavigationItem", 0, X, "analyticsAudienceNavigationItem", 0, x, "analyticsAvatarCreationTokensNavigationItem", 0, er, "analyticsBountyPayoutsNavigationItem", 0, k, "analyticsCommerceNavigationItem", 0, V, "analyticsConfigsHistoryNavigationItem", 0, _, "analyticsConfigsNavigationItem", 0, z, "analyticsCrashesNavigationItem", 0, C, "analyticsCreationOverviewNavigationItem", 0, Z, "analyticsCustomDashboardsManageNavigationItem", 0, A, "analyticsCustomEventsNavigationItem", 0, R, "analyticsDataStoresNavigationItem", 0, m, "analyticsEngagementNavigationItem", 0, E, "analyticsErrorReportNavigationItem", 0, T, "analyticsExperienceCreatorRewardsNavigationItem", 0, v, "analyticsExperienceSubscriptionsNavigationItem", 0, ea, "analyticsExperimentsCreateNavigationItem", 0, Q, "analyticsExperimentsNavigationItem", 0, i, "analyticsExploreNavigationItem", 0, w, "analyticsFeedbackNavigationItem", 0, G, "analyticsGenerativeAINavigationItem", 0, en, "analyticsHttpServiceNavigationItem", 0, y, "analyticsImmersiveAdsNavigationItem", 0, d, "analyticsItemMonetizationAvatarItemsNavigationItem", 0, l, "analyticsItemMonetizationDeveloperProductsNavigationItem", 0, o, "analyticsItemMonetizationPassesNavigationItem", 0, s, "analyticsMatchmakingNavigationItem", 0, q, "analyticsMemoryStoresNavigationItem", 0, p, "analyticsMessagingServiceNavigationItem", 0, g, "analyticsMonetizationNavigationItem", 0, n, "analyticsNotificationsNavigationItem", 0, et, "analyticsPerformanceNavigationItem", 0, N, "analyticsRecommendationServiceNavigationItem", 0, Y, "analyticsRecommendedEventsEconomyNavigationItem", 0, I, "analyticsRecommendedEventsFunnelsNavigationItem", 0, P, "analyticsRecommendedEventsJourneyCreateNavigationItem", 0, L, "analyticsRecommendedEventsJourneyEditNavigationItem", 0, j, "analyticsRecommendedEventsJourneyNavigationItem", 0, M, "analyticsRecommendedEventsJourneyViewNavigationItem", 0, B, "analyticsRetentionNavigationItem", 0, S, "analyticsSafetyNavigationItem", 0, $, "analyticsSpeechToTextNavigationItem", 0, h, "analyticsSubscriptionsNavigationItem", 0, u, "analyticsTextToSpeechNavigationItem", 0, b, "analyticsUserAcquisitionNavigationItem", 0, H, "analyticsUserAcquisitionRFYNavigationItem", 0, D, "analyticsVideoServiceNavigationItem", 0, f, "getAnalyticsNavigationItemFromPath", 0, function(e) {
         return ei.find(t => t.pathPattern.test(e))
     }])
 }, 533968, e => {
@@ -593,6 +593,17 @@
                     }, t)
                 },
                 breadcrumbType: ee.default.Catalog
+            },
+            observability: {
+                displayName: e => {
+                    let {
+                        translate: t
+                    } = e;
+                    return et({
+                        key: "Heading.Observability"
+                    }, t) || "Observability"
+                },
+                breadcrumbType: ee.default.Observability
             },
             creations: {
                 displayName: e => {
@@ -3514,7 +3525,7 @@
                     color: "secondary",
                     component: "span",
                     children: [z, (0, t.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/dca8b671c04a8c6f33b3f061f6761f3cd35a97ba/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/463677ac8b70bd695b9b70c65f8b08baeb350a9b/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -5141,5 +5152,5 @@
     }, "useCookieConsentContext", 0, j], 260241)
 }]);
 
-//# debugId=2d26edcf-6b8d-e5ee-5853-d88a0ba85c90
-//# sourceMappingURL=26z6smhcw2smp.js.map
+//# debugId=3b047dd2-4269-b86e-4ca9-dbfade8ac8c8
+//# sourceMappingURL=2qm0qxg3e4c59.js.map

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "44d0bd0b-195f-6bd7-9401-8da298a4fbe9")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "59e40506-b116-7a1e-3549-d6b9f38bb886")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 261482, 858148, 966956, 719743, 477749, e => {
@@ -3417,14 +3417,14 @@
         let N = null != (t = null != B ? B : E) ? t : 0,
             {
                 thumbnailImage: k,
-                refreshThumbnail: M
+                refreshThumbnail: O
             } = (0, v.default)({
                 targetId: N,
                 targetType: a.ThumbnailTypes.assetThumbnail,
                 fontColor: "dark",
                 returnPolicy: a.ReturnPolicy.PlaceHolder
             }),
-            O = (0, r.useCallback)(e => {
+            M = (0, r.useCallback)(e => {
                 var t, s;
                 let r = Object.values(l.Asset),
                     i = e.type && r.includes(e.type);
@@ -3436,7 +3436,7 @@
                 if (s.status === c.AllSettlePromiseSuccess && r.status === c.AllSettlePromiseSuccess) {
                     var i, n, a, o, u, v, m, f;
                     let t = null == (i = s.value.data) ? void 0 : i[0];
-                    if (t && O(t)) {
+                    if (t && M(t)) {
                         let s = Object.values(l.Asset).find(e => e === t.type),
                             r = Object.values(p.CreatorType).find(e => {
                                 var s;
@@ -3465,11 +3465,11 @@
                     y(r.value)
                 } else b(null), S(void 0);
                 g(!1)
-            }, [O, R]),
+            }, [M, R]),
             F = (0, r.useCallback)(async function() {
                 let e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
-                if (e && M(), E && (null == T ? void 0 : T.id)) return L(E, T.id)
-            }, [T, E, L, M]);
+                if (e && O(), E && (null == T ? void 0 : T.id)) return L(E, T.id)
+            }, [T, E, L, O]);
         (0, r.useEffect)(() => {
             let e = window.setTimeout(() => {
                 F()
@@ -3836,7 +3836,7 @@
     }])
 }, 128106, e => {
     "use strict";
-    var t, s = ((t = s || {}).Creations = "creations", t.Games = "games", t.GamePass = "passes", t.Badge = "badges", t.Bundle = "bundle", t.DeveloperProduct = "developer-products", t.ExternalPurchaseSettings = "external-purchase-settings", t.Catalog = "catalog", t.AssociatedItems = "associated-items", t.Localization = "localization", t.ActivityHistory = "activity-history", t.Notifications = "notifications", t.SocialLinks = "social-links", t.Translation = "translation", t.Overview = "overview", t.ContributionReport = "contribution-report", t.Alerts = "alerts", t.AnalyticsMonetization = "analytics-monetization", t.AnalyticsRetention = "analytics-retention", t.AnalyticsEngagement = "analytics-engagement", t.AnalyticsAcquisition = "analytics-acquisition", t.AnalyticsPerformance = "analytics-performance", t.AnalyticsCrashes = "analytics-crashes", t.AnalyticsExploreMode = "analytics-explore-mode", t.AnalyticsCustomDashboards = "analytics-custom-dashboards", t.AnalyticsAudience = "analytics-audience", t.AnalyticsEconomy = "analytics-economy", t.AnalyticsFunnels = "analytics-funnels", t.AnalyticsErrorReport = "analytics-error-report", t.AnalyticsMemoryStores = "analytics-memory-stores", t.AnalyticsDataStores = "analytics-data-stores", t.AnalyticsHttpServicce = "analytics-http-service", t.AnalyticsMessagingService = "analytics-messaging-service", t.AnalyticsSpeechToText = "analytics-speech-to-text", t.AnalyticsTextToSpeech = "analytics-text-to-speech", t.AnalyticsVideoService = "analytics-video-service", t.AnalyticsGenerativeAI = "analytics-generative-ai", t.AnalyticCustomEvents = "analytics-custom-events", t.ImmersiveAds = "immersive-ads", t.ImmersiveAdsCreatePlacement = "immersive-ads-create-placement", t.Questionnaire = "experience-questionnaire", t.Guidelines = "guidelines", t.Configure = "configure", t.CommunicationSettings = "communication-settings", t.Sales = "sales", t.Promotions = "promotions", t.Create = "create", t.ConfigCreate = "config-create", t.Updates = "updates", t.Places = "places", t.Manage = "manage", t.Icon = "icon", t.Event = "event", t.SelectEligibility = "selectEligibility", t.Thumbnails = "thumbnails", t.Videos = "videos", t.Access = "access", t.Secrets = "secrets", t.CreatorStore = "store", t.Settings = "settings", t.Permissions = "permissions", t.Webhooks = "webhooks", t.Community = "community", t.Category = "category", t.Experiences = "experiences", t.ExperienceSubscription = "experience-subscriptions", t.Commerce = "commerce", t.CreateProducts = "create-products", t.Preferences = "preferences", t.Advanced = "advanced", t.DataSharing = "data-collection", t.PricedAssets = "priced-assets", t.Eligibility = "eligibility", t.AudioDistribution = "audio-distribution", t.PriceOptimization = "price-optimization", t.PriceCheck = "price-check", t.Bans = "bans", t.AntiCheat = "anti-cheat", t.Add = "add", t.Reorder = "reorder", t.AvatarCreationTokens = "avatar-creation-tokens", t.CustomMatchmaking = "custom-matchmaking", t.CreateMatchmakingConfiguration = "create-configuration", t.CreateMatchmakingAttribute = "create-attribute", t.EditMatchmakingConfiguration = "edit-configuration", t.EditMatchmakingServerAttribute = "edit-server-attribute", t.EditMatchmakingPlayerAttribute = "edit-player-attribute", t.PaidAccess = "paid-access", t.ExtendedServices = "extended-services", t.PublicPublish = "public-publish", t.PublishingPermissions = "publishing-permissions", t.UsO18DevexRate = "us-o18-devex-rate", t.Feedback = "feedback", t.ApiSettings = "api-settings", t.Configs = "configs", t.ConfigsHistory = "configs-history", t.Experiments = "experiments", t.ExperimentCreate = "experiment-create", t.ExperimentDetails = "experiment-details", t.ReferralRewards = "referral-reward-details", t.Environments = "environments", t.Collaborators = "collaborators", t.Look = "look", t.AnalyticsJourneys = "analytics-journeys", t.AnalyticsJourneyDetail = "analytics-journey-detail", t.RecommendationService = "recommendation-service", t.ServerManagement = "server-management-service", t.ClientSessions = "client-sessions", t.ClientSession = "client-session", t.ManagedPricing = "managed-pricing", t.HardCodedPrices = "hard-coded-prices", t.ExternallyHiddenDeveloperProducts = "externally-hidden-developer-products", t.Leaderboard = "leaderboard", t.PersonalizedShop = "personalized-shop", t.AudienceReach = "audience-reach", t.PlayerSupport = "player-support", t.PlayerSupportTicket = "player-support-ticket", t.GameDetails = "game-details", t.ContentRating = "content-rating", t.GameJoin = "game-join", t);
+    var t, s = ((t = s || {}).Creations = "creations", t.Games = "games", t.GamePass = "passes", t.Badge = "badges", t.Bundle = "bundle", t.DeveloperProduct = "developer-products", t.ExternalPurchaseSettings = "external-purchase-settings", t.Catalog = "catalog", t.AssociatedItems = "associated-items", t.Localization = "localization", t.ActivityHistory = "activity-history", t.Notifications = "notifications", t.SocialLinks = "social-links", t.Translation = "translation", t.Overview = "overview", t.ContributionReport = "contribution-report", t.Alerts = "alerts", t.AnalyticsMonetization = "analytics-monetization", t.AnalyticsRetention = "analytics-retention", t.AnalyticsEngagement = "analytics-engagement", t.AnalyticsAcquisition = "analytics-acquisition", t.AnalyticsPerformance = "analytics-performance", t.AnalyticsCrashes = "analytics-crashes", t.AnalyticsExploreMode = "analytics-explore-mode", t.AnalyticsCustomDashboards = "analytics-custom-dashboards", t.AnalyticsAudience = "analytics-audience", t.AnalyticsEconomy = "analytics-economy", t.AnalyticsFunnels = "analytics-funnels", t.AnalyticsErrorReport = "analytics-error-report", t.AnalyticsMemoryStores = "analytics-memory-stores", t.AnalyticsDataStores = "analytics-data-stores", t.AnalyticsHttpServicce = "analytics-http-service", t.AnalyticsMessagingService = "analytics-messaging-service", t.AnalyticsSpeechToText = "analytics-speech-to-text", t.AnalyticsTextToSpeech = "analytics-text-to-speech", t.AnalyticsVideoService = "analytics-video-service", t.AnalyticsGenerativeAI = "analytics-generative-ai", t.AnalyticCustomEvents = "analytics-custom-events", t.ImmersiveAds = "immersive-ads", t.ImmersiveAdsCreatePlacement = "immersive-ads-create-placement", t.Questionnaire = "experience-questionnaire", t.Guidelines = "guidelines", t.Configure = "configure", t.CommunicationSettings = "communication-settings", t.Sales = "sales", t.Promotions = "promotions", t.Create = "create", t.ConfigCreate = "config-create", t.Updates = "updates", t.Places = "places", t.Manage = "manage", t.Icon = "icon", t.Event = "event", t.SelectEligibility = "selectEligibility", t.Thumbnails = "thumbnails", t.Videos = "videos", t.Access = "access", t.Secrets = "secrets", t.CreatorStore = "store", t.Settings = "settings", t.Permissions = "permissions", t.Webhooks = "webhooks", t.Community = "community", t.Category = "category", t.Experiences = "experiences", t.ExperienceSubscription = "experience-subscriptions", t.Commerce = "commerce", t.CreateProducts = "create-products", t.Preferences = "preferences", t.Advanced = "advanced", t.DataSharing = "data-collection", t.PricedAssets = "priced-assets", t.Eligibility = "eligibility", t.AudioDistribution = "audio-distribution", t.PriceOptimization = "price-optimization", t.PriceCheck = "price-check", t.Bans = "bans", t.AntiCheat = "anti-cheat", t.Add = "add", t.Reorder = "reorder", t.AvatarCreationTokens = "avatar-creation-tokens", t.CustomMatchmaking = "custom-matchmaking", t.CreateMatchmakingConfiguration = "create-configuration", t.CreateMatchmakingAttribute = "create-attribute", t.EditMatchmakingConfiguration = "edit-configuration", t.EditMatchmakingServerAttribute = "edit-server-attribute", t.EditMatchmakingPlayerAttribute = "edit-player-attribute", t.PaidAccess = "paid-access", t.ExtendedServices = "extended-services", t.PublicPublish = "public-publish", t.PublishingPermissions = "publishing-permissions", t.UsO18DevexRate = "us-o18-devex-rate", t.Feedback = "feedback", t.ApiSettings = "api-settings", t.Configs = "configs", t.ConfigsHistory = "configs-history", t.Experiments = "experiments", t.ExperimentCreate = "experiment-create", t.ExperimentDetails = "experiment-details", t.ReferralRewards = "referral-reward-details", t.Environments = "environments", t.Collaborators = "collaborators", t.Look = "look", t.AnalyticsJourneys = "analytics-journeys", t.AnalyticsJourneyDetail = "analytics-journey-detail", t.RecommendationService = "recommendation-service", t.Observability = "observability", t.ServerManagement = "server-management-service", t.ClientSessions = "client-sessions", t.ClientSession = "client-session", t.ManagedPricing = "managed-pricing", t.HardCodedPrices = "hard-coded-prices", t.ExternallyHiddenDeveloperProducts = "externally-hidden-developer-products", t.Leaderboard = "leaderboard", t.PersonalizedShop = "personalized-shop", t.AudienceReach = "audience-reach", t.PlayerSupport = "player-support", t.PlayerSupportTicket = "player-support-ticket", t.GameDetails = "game-details", t.ContentRating = "content-rating", t.GameJoin = "game-join", t);
     e.s(["default", 0, s])
 }, 509049, e => {
     "use strict";
@@ -3881,7 +3881,7 @@
             lookId: U,
             developerItemDetails: N,
             experimentId: k,
-            environmentId: M
+            environmentId: O
         } = function() {
             var e, r, b, A, S, R, x, T, C, q, D, G;
             let {
@@ -3893,9 +3893,9 @@
                 isLoadingItem: N,
                 marketplaceItemDetails: k
             } = (0, l.default)(), {
-                badgeDetails: M
+                badgeDetails: O
             } = (0, a.default)(), {
-                developerProductDetails: O
+                developerProductDetails: M
             } = (0, u.useCurrentDeveloperProduct)(), {
                 passDetails: L
             } = (0, v.useCurrentPass)(), {
@@ -3944,8 +3944,8 @@
                 return {
                     [w.default.Bundle]: null == k || null == (n = k.item) ? void 0 : n.name,
                     [w.default.Games]: null == B ? void 0 : B.name,
-                    [w.default.Badge]: null == M ? void 0 : M.name,
-                    [w.default.DeveloperProduct]: null != (e = null == O ? void 0 : O.name) ? e : void 0,
+                    [w.default.Badge]: null == O ? void 0 : O.name,
+                    [w.default.DeveloperProduct]: null != (e = null == M ? void 0 : M.name) ? e : void 0,
                     [w.default.GamePass]: null != (t = null == L ? void 0 : L.name) ? t : void 0,
                     [w.default.Catalog]: null == k || null == (a = k.item) ? void 0 : a.name,
                     [w.default.Places]: null == _ ? void 0 : _.name,
@@ -3956,7 +3956,7 @@
                     [w.default.Look]: null != (i = null == F ? void 0 : F.name) ? i : void 0,
                     ...Q
                 }
-            }, [null == k || null == (R = k.item) ? void 0 : R.name, null == B ? void 0 : B.name, null == M ? void 0 : M.name, null == O ? void 0 : O.name, null == L ? void 0 : L.name, null == _ ? void 0 : _.name, null == j ? void 0 : j.title, null == z ? void 0 : z.name, $, E, null == K ? void 0 : K.name, null == F ? void 0 : F.name, Q]), el = (0, t.useMemo)(() => Y.includes(w.default.ExperienceSubscription) ? h.Item.ExperienceSubscription : Y.includes(w.default.Badge) ? h.Item.Badge : Y.includes(w.default.ReferralRewards) ? h.Item.ReferralRewards : Y.includes(w.default.Bundle) ? h.Item.Bundle : Y.includes(w.default.GamePass) ? h.Item.GamePass : Y.includes(w.default.DeveloperProduct) ? h.Item.DeveloperProduct : Y.includes(w.default.Catalog) ? h.Item.CatalogAsset : Y.includes(w.default.CreatorStore) ? h.Item.LibraryAsset : Y.includes(w.default.Places) ? h.Item.Places : Y.includes(w.default.Environments) ? h.Item.Environment : Y.includes(w.default.Alerts) ? h.Item.Alert : Y.includes(w.default.Event) ? h.Item.Event : Y.includes(w.default.Notifications) ? h.Item.Notifications : Y.includes(w.default.AssociatedItems) && "string" == typeof ee && (0, I.isItem)(ee) ? ee : Y.includes(w.default.AvatarCreationTokens) ? h.Item.AvatarCreationToken : Y.includes(w.default.Experiences) ? h.Item.Game : Y.includes(w.default.Advanced) ? h.Item.Advanced : Y.includes(w.default.Look) ? h.Item.Look : void 0, [ee, Y]), {
+            }, [null == k || null == (R = k.item) ? void 0 : R.name, null == B ? void 0 : B.name, null == O ? void 0 : O.name, null == M ? void 0 : M.name, null == L ? void 0 : L.name, null == _ ? void 0 : _.name, null == j ? void 0 : j.title, null == z ? void 0 : z.name, $, E, null == K ? void 0 : K.name, null == F ? void 0 : F.name, Q]), el = (0, t.useMemo)(() => Y.includes(w.default.ExperienceSubscription) ? h.Item.ExperienceSubscription : Y.includes(w.default.Badge) ? h.Item.Badge : Y.includes(w.default.ReferralRewards) ? h.Item.ReferralRewards : Y.includes(w.default.Bundle) ? h.Item.Bundle : Y.includes(w.default.GamePass) ? h.Item.GamePass : Y.includes(w.default.DeveloperProduct) ? h.Item.DeveloperProduct : Y.includes(w.default.Catalog) ? h.Item.CatalogAsset : Y.includes(w.default.CreatorStore) ? h.Item.LibraryAsset : Y.includes(w.default.Places) ? h.Item.Places : Y.includes(w.default.Environments) ? h.Item.Environment : Y.includes(w.default.Alerts) ? h.Item.Alert : Y.includes(w.default.Event) ? h.Item.Event : Y.includes(w.default.Notifications) ? h.Item.Notifications : Y.includes(w.default.AssociatedItems) && "string" == typeof ee && (0, I.isItem)(ee) ? ee : Y.includes(w.default.AvatarCreationTokens) ? h.Item.AvatarCreationToken : Y.includes(w.default.Experiences) ? h.Item.Game : Y.includes(w.default.Advanced) ? h.Item.Advanced : Y.includes(w.default.Look) ? h.Item.Look : void 0, [ee, Y]), {
                 currentItemGroupId: ep,
                 isCurrentItemLoading: ev
             } = (0, t.useMemo)(() => {
@@ -3997,7 +3997,7 @@
                 experimentId: et,
                 environmentId: es
             }
-        }(), O = (0, t.useMemo)(() => ({
+        }(), M = (0, t.useMemo)(() => ({
             translate: e,
             itemType: S,
             enableQuestionnaireV2: b
@@ -4016,12 +4016,12 @@
                     developerItemId: null != (t = null == N ? void 0 : N.id) ? t : void 0,
                     associatedItemType: S,
                     experienceSubscriptionId: B,
-                    environmentId: null != M ? M : void 0,
+                    environmentId: null != O ? O : void 0,
                     experimentId: null != k ? k : void 0,
                     lookId: null != U ? U : void 0
                 }
-            }, [T, C, q, D, R, G, E, null == N ? void 0 : N.id, S, B, M, k, U]),
-            displayNameParam: O,
+            }, [T, C, q, D, R, G, E, null == N ? void 0 : N.id, S, B, O, k, U]),
+            displayNameParam: M,
             currentItemType: S,
             currentItemGroupId: R,
             isCurrentItemLoading: x
@@ -4379,5 +4379,5 @@
     }])
 }]);
 
-//# debugId=44d0bd0b-195f-6bd7-9401-8da298a4fbe9
-//# sourceMappingURL=23ccoq-hrf6sy.js.map
+//# debugId=59e40506-b116-7a1e-3549-d6b9f38bb886
+//# sourceMappingURL=2aqedt27laz7b.js.map

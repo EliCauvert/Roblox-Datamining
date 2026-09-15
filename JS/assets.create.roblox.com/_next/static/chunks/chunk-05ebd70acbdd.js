@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "526d3e3e-03b2-f6cd-e625-c3809b709374")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "32c5ec98-d407-6546-593f-9826d161a826")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 730530, e => {
@@ -620,8 +620,8 @@
             getExtendedServicesUnlock: e => "/dashboard/creations/experiences/".concat(e, "/extended-services"),
             getPaymentsUrl: () => "/dashboard/payments",
             getServerManagementUrl: e => "/dashboard/creations/experiences/".concat(e, "/server-management"),
-            getClientSessionsUrl: e => "/dashboard/creations/experiences/".concat(e, "/client-sessions"),
-            getClientSessionDetailsUrl: (e, a) => "/dashboard/creations/experiences/".concat(e, "/client-sessions/").concat(a),
+            getClientSessionsUrl: e => "/dashboard/creations/experiences/".concat(e, "/observability/client-sessions"),
+            getClientSessionDetailsUrl: (e, a) => "/dashboard/creations/experiences/".concat(e, "/observability/client-sessions/").concat(a),
             getPlayerSupportUrl: e => "/dashboard/creations/experiences/".concat(e, "/player-support")
         };
     e.s(["creatorStore", 0, {
@@ -740,5 +740,5 @@
     e.s(["creatorHub", 0, a])
 }]);
 
-//# debugId=526d3e3e-03b2-f6cd-e625-c3809b709374
-//# sourceMappingURL=37sdm6x6j45er.js.map
+//# debugId=32c5ec98-d407-6546-593f-9826d161a826
+//# sourceMappingURL=1zk3y-qul_tyl.js.map

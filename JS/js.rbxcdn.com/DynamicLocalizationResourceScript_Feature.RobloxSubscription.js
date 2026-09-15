@@ -213,6 +213,7 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Description.ProfileFramePlusUpsell": "Subscribe to Roblox Plus to explore benefits such as profile frames and more.",
     "Title.SubscribeToPlus": "Subscribe to Plus",
     "Description.Benefit.AppThemeAndFrame": "Customize profile and app theme",
-    "Description.Benefit.DiscountBuyRobux": "Up to {discountPercent} off on items and avatars"
+    "Description.Benefit.DiscountBuyRobux": "Up to {discountPercent} off on items and avatars",
+    "Message.AlreadySubscribed": "You already have Plus. This link is for new members. Share your own to invite friends and get rewards."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.RobloxSubscription");
