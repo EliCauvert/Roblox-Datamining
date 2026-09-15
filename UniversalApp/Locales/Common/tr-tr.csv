@@ -2356,7 +2356,6 @@ Feature.Build.Description.RevertToVersion,En son değişikliği geri döndürmek
 Feature.Build.Description.ShareLatest,En son versiyonunda nelerin değiştiğini paylaş.
 Feature.Build.Description.ShopButton,Bir alışveriş giriş noktası ekle
 Feature.Build.Description.UpdateDeveloperProduct,Geliştirici ürününü ({PRODUCT_ID}) güncelle.
-Feature.Build.Description.VersionChanges,Oyunculara bu versiyonda nelerin değiştiğini söyle.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Açıklama 1.000 karakter veya daha kısa olmalıdır.
 Feature.Build.Error.DeveloperProductNameRequired,Bir ürün adı gir.
 Feature.Build.Error.DeveloperProductNameTooLong,Ad 50 karakter veya daha kısa olmalıdır.
@@ -2537,7 +2536,6 @@ Feature.Build.Label.Version,
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,Versiyon başlığı ve açıklaması
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,"Hesabın, İnşa Et'i kullanma gerekliliklerini karşılamıyor."
 Feature.Build.Message.AccountTooNew,Hesabın yayınlanamayacak kadar yeni. 2 günü doldurduğunda tekrar dene.
@@ -2670,7 +2668,6 @@ Feature.Build.Title.Tasks,Görevler
 Feature.Build.Title.TurnActivity,Etkinliği aç
 Feature.Build.Title.VersionHistory,Sürüm geçmişi
 Feature.Build.Title.VersionInfo,Versiyon bilgileri
-Feature.Build.Title.VersionInformation,Versiyon Bilgileri
 Feature.Build.Title.VersionNumber,Sürüm {VERSION}
 Feature.Build.Title.Versions,Versiyonlar
 Feature.Build.Title.WhatsIncluded,Neler dâhil?

@@ -2363,7 +2363,6 @@ Feature.Build.Description.RevertToVersion,Confirm to revert the latest change an
 Feature.Build.Description.ShareLatest,Share what’s changed in your latest version.
 Feature.Build.Description.ShopButton,Add a shopping entry point
 Feature.Build.Description.UpdateDeveloperProduct,Update developer product {PRODUCT_ID}.
-Feature.Build.Description.VersionChanges,Tell players what's changed in this version.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"Description must be 1,000 characters or fewer."
 Feature.Build.Error.DeveloperProductNameRequired,Enter a product name.
 Feature.Build.Error.DeveloperProductNameTooLong,Name must be 50 characters or fewer.
@@ -2544,7 +2543,6 @@ Feature.Build.Label.Version,
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,Version title & description
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,Your account doesn't meet the requirements to use Build.
 Feature.Build.Message.AccountTooNew,Your account is too new to publish. Try again when it's 2 days old.
@@ -2679,7 +2677,6 @@ Feature.Build.Title.Tasks,Tasks
 Feature.Build.Title.TurnActivity,Turn activity
 Feature.Build.Title.VersionHistory,Version history
 Feature.Build.Title.VersionInfo,Version information
-Feature.Build.Title.VersionInformation,Version Information
 Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,What's included?

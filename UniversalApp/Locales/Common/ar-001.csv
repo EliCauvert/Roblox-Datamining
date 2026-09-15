@@ -2336,7 +2336,6 @@ Feature.Build.Description.RevertToVersion,تأكيد التراجع عن الت�
 Feature.Build.Description.ShareLatest,شارك التغييرات التي أُجريت على أحدث إصدار لديك.
 Feature.Build.Description.ShopButton,إضافة نقطة إدخال للتسوق
 Feature.Build.Description.UpdateDeveloperProduct,تحديث منتج المطوّر {PRODUCT_ID}.
-Feature.Build.Description.VersionChanges,أخبر اللاعبين بما تغير في هذا الإصدار.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,يجب أن يتكون الوصف من 1000 حرفٍ أو أقل.
 Feature.Build.Error.DeveloperProductNameRequired,أدخل اسم المنتج.
 Feature.Build.Error.DeveloperProductNameTooLong,يجب أن يتكون الاسم من 50 حرفًا أو أقل.
@@ -2517,7 +2516,6 @@ Feature.Build.Label.Version,
 Feature.Build.Label.VersionCompact,الإصدار {VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,الإصدار 0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,عنوان الإصدار ووصفه
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,لا يفي حسابك بمتطلبات استخدام ميزة Build.
 Feature.Build.Message.AccountTooNew,حسابك جديد جدًا بحيث لا يمكن النشر. حاول مرة أخرى بعد يومين من إنشائه.
@@ -2650,7 +2648,6 @@ Feature.Build.Title.Tasks,المهام
 Feature.Build.Title.TurnActivity,نشاط الدور
 Feature.Build.Title.VersionHistory,سجل الإصدارات
 Feature.Build.Title.VersionInfo,معلومات الإصدار
-Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,الإصدار {VERSION}
 Feature.Build.Title.Versions,الإصدارات
 Feature.Build.Title.WhatsIncluded,ما الذي تشمله الحملة؟

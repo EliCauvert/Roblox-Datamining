@@ -2357,7 +2357,6 @@ Feature.Build.Description.RevertToVersion,확인을 눌러 최신 변경 사항�
 Feature.Build.Description.ShareLatest,최신 버전에서 변경된 사항을 공유하세요.
 Feature.Build.Description.ShopButton,쇼핑 진입점 추가
 Feature.Build.Description.UpdateDeveloperProduct,개발자 상품 {PRODUCT_ID}을(를) 업데이트하세요.
-Feature.Build.Description.VersionChanges,이 버전에서 변경된 사항을 플레이어에게 알려주세요.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"설명은 1,000자 이하여야 합니다."
 Feature.Build.Error.DeveloperProductNameRequired,상품 이름을 입력하세요.
 Feature.Build.Error.DeveloperProductNameTooLong,이름은 50자 이하여야 합니다.
@@ -2538,7 +2537,6 @@ Feature.Build.Label.Version,
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,버전 이름 및 설명
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,회원님의 계정이 Build 사용 요건을 충족하지 않습니다.
 Feature.Build.Message.AccountTooNew,계정을 새로 만든 지 얼마 안 돼서 게시할 수 없습니다. 2일 후에 다시 시도해 보세요.
@@ -2673,7 +2671,6 @@ Feature.Build.Title.Tasks,작업
 Feature.Build.Title.TurnActivity,턴 활동
 Feature.Build.Title.VersionHistory,버전 기록
 Feature.Build.Title.VersionInfo,버전 정보
-Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,{VERSION} 버전
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,포함 사항

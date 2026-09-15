@@ -2356,7 +2356,6 @@ Feature.Build.Description.RevertToVersion,Confirme pour annuler la dernière mod
 Feature.Build.Description.ShareLatest,Présente les nouveautés de cette dernière version.
 Feature.Build.Description.ShopButton,Ajouter un point d'entrée pour les achats
 Feature.Build.Description.UpdateDeveloperProduct,Mets à jour le produit développeur {PRODUCT_ID}.
-Feature.Build.Description.VersionChanges,Indique aux joueurs ce qui a changé dans cette version.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,La description ne peut pas dépasser les 1 000 caractères.
 Feature.Build.Error.DeveloperProductNameRequired,Saisis un nom de produit.
 Feature.Build.Error.DeveloperProductNameTooLong,Le nom ne doit pas dépasser 50 caractères.
@@ -2537,7 +2536,6 @@ Feature.Build.Label.Version,
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,Titre et description de la version
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,Ton compte ne répond pas aux exigences pour utiliser la fonctionnalité Construire.
 Feature.Build.Message.AccountTooNew,Ton compte est trop récent pour publier. Réessaye lorsqu'il aura 2 jours.
@@ -2670,7 +2668,6 @@ Feature.Build.Title.Tasks,Tâches
 Feature.Build.Title.TurnActivity,Activité de ce tour
 Feature.Build.Title.VersionHistory,Historique des versions
 Feature.Build.Title.VersionInfo,Détails de la version
-Feature.Build.Title.VersionInformation,Informations sur la version
 Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,Qu'est-ce qui est inclus ?

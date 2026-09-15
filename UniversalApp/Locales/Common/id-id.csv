@@ -2356,7 +2356,6 @@ Feature.Build.Description.RevertToVersion,Konfirmasi untuk membatalkan perubahan
 Feature.Build.Description.ShareLatest,Bagikan apa yang berubah di versi terbarumu.
 Feature.Build.Description.ShopButton,Tambahkan entry point belanja
 Feature.Build.Description.UpdateDeveloperProduct,Perbarui produk developer {PRODUCT_ID}.
-Feature.Build.Description.VersionChanges,Beri tahu pemain perubahan pada versi ini.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Deskripsi maksimal 1.000 karakter.
 Feature.Build.Error.DeveloperProductNameRequired,Masukkan nama produk.
 Feature.Build.Error.DeveloperProductNameTooLong,Nama harus terdiri dari maksimal 50 karakter.
@@ -2537,7 +2536,6 @@ Feature.Build.Label.Version,
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,Judul & deskripsi versi
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,Akunmu tidak memenuhi persyaratan untuk menggunakan Build.
 Feature.Build.Message.AccountTooNew,Akunmu terlalu baru untuk dipublikasikan. Coba lagi setelah 2 hari.
@@ -2670,7 +2668,6 @@ Feature.Build.Title.Tasks,Tugas
 Feature.Build.Title.TurnActivity,Aktivitas chat saat ini
 Feature.Build.Title.VersionHistory,Riwayat versi
 Feature.Build.Title.VersionInfo,Informasi versi
-Feature.Build.Title.VersionInformation,Informasi Versi
 Feature.Build.Title.VersionNumber,Versi {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,Dapat apa saja?

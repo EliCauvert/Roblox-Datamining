@@ -2356,7 +2356,6 @@ Feature.Build.Description.RevertToVersion,Xác nhận trả về bản thay đ�
 Feature.Build.Description.ShareLatest,Chia sẻ về những thay đổi trong phiên bản mới nhất của bạn.
 Feature.Build.Description.ShopButton,Thêm điểm truy cập cửa hàng
 Feature.Build.Description.UpdateDeveloperProduct,Cập nhật sản phẩm của nhà phát triển {PRODUCT_ID}.
-Feature.Build.Description.VersionChanges,Cho người chơi biết điều gì đã thay đổi trong phiên bản này.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Nội dung mô tả không được quá 1.000 ký tự.
 Feature.Build.Error.DeveloperProductNameRequired,Nhập tên sản phẩm.
 Feature.Build.Error.DeveloperProductNameTooLong,Tên chỉ được chứa tối đa 50 ký tự.
@@ -2537,7 +2536,6 @@ Feature.Build.Label.Version,
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,Tiêu đề và mô tả phiên bản
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,Tài khoản của bạn không đáp ứng các yêu cầu để sử dụng Build.
 Feature.Build.Message.AccountTooNew,Tài khoản của bạn còn quá mới nên chưa thể đăng. Hãy thử lại khi bạn đã tạo tài khoản được 2 ngày.
@@ -2670,7 +2668,6 @@ Feature.Build.Title.Tasks,Nhiệm vụ
 Feature.Build.Title.TurnActivity,Hoạt động trong lượt
 Feature.Build.Title.VersionHistory,Lịch sử phiên bản
 Feature.Build.Title.VersionInfo,Thông tin phiên bản
-Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,Phiên bản {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,Bao gồm những gì?
