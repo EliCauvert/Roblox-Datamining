@@ -1,104 +1,62 @@
-Version version-93202a13414c4131 (2026-09-09 20:09:04 UTC)
+Version version-55808de4b1914919 (2026-09-15 20:33:57 UTC)
 ============================================================
 
-Added Class AnimatedImageTrack : Object {🔒RobloxScript} [NotCreatable] [NotReplicated]
-	Added Property AnimatedImageTrack.Duration: number [Hidden] [ReadOnly] {🔒RobloxScript}
-	Added Property AnimatedImageTrack.FrameCount: number [Hidden] [ReadOnly] {🔒RobloxScript}
-	Added Property AnimatedImageTrack.TrackName: string [Hidden] [ReadOnly] {🔒RobloxScript}
-	Added Function AnimatedImageTrack:GetContent() -> Content {🔒RobloxScript}
-	Added Function AnimatedImageTrack:GetFrameNames() -> { any } {🔒RobloxScript}
+Added Class AdPlacement : Instance
+	Added Property AdPlacement.AdFormat: Enum.AdFormat {🚧Monetization}
+	Added Property AdPlacement.ActivationInstance: Instance? {🚧Monetization}
+	Added Property AdPlacement.PlacementId: number {🚧Monetization}
+	Added Property AdPlacement.RewardId: string [ReadOnly] {🚧Monetization}
+	Added Property AdPlacement.RewardImageContent: Content [ReadOnly] {🚧Monetization}
+	Added Property AdPlacement.RewardName: string [ReadOnly] {🚧Monetization}
+	Added Property AdPlacement.Visible: boolean [ReadOnly] {🚧Monetization}
 
-Added Class AnimationValueNodeDefinition : Instance
-	Added Property AnimationValueNodeDefinition.NodeType: Enum.AnimationValueNodeType {🚧Animation}
-	Added Property AnimationValueNodeDefinition.NodeId: string {🚧Animation} {🔒RobloxScript}
+Added Class QueueService : Instance [NotCreatable] [Service] [NotReplicated]
+	Added Function QueueService:GetStandardQueue(name: string) -> StandardQueue {🚧DataStore}
 
-Added Class AnimationValueOutputDefinition : Instance
+Added Class StandardQueue : Instance [NotCreatable] [NotReplicated]
+	Added Function StandardQueue:BatchCommitAsync(group: string, messageIds: { any }) -> () [Yields] {🚧DataStore}
+	Added Function StandardQueue:PublishAsync(data: any, messageKey: string? = "") -> () [Yields] {🚧DataStore}
+	Added Function StandardQueue:SubscribeAsync(group: string, callback: (...any) -> ...any) -> RBXScriptConnection [Yields] {🚧DataStore}
 
-Added Class AnimatedImageService : Instance {🔒RobloxScript} [NotCreatable] [Service]
-	Added Function AnimatedImageService:GetFrameNames(content: Content) -> { any } {🔒RobloxScript}
-	Added Function AnimatedImageService:GetTrack(content: Content, trackName: string) -> AnimatedImageTrack {🔒RobloxScript}
-	Added Function AnimatedImageService:GetTracksChanged(content: Content) -> RBXScriptSignal {🔒RobloxScript}
-	Added Function AnimatedImageService:Prewarm(content: Content) -> () {🔒RobloxScript}
-	Added Function AnimatedImageService:UnloadTracks(content: Content) -> () {🔒RobloxScript}
+Added Class ExternalIdentityService : Instance {🔒RobloxScript} [NotCreatable] [Service] [NotReplicated]
+	Added Function ExternalIdentityService:AcquireProofAsync(provider: string, nonce: string?, browserStartUrl: string?) -> ...any [Yields] {🔒RobloxScript}
+	Added Function ExternalIdentityService:CancelActiveOperation() -> () {🔒RobloxScript}
+	Added Function ExternalIdentityService:GetCapabilitiesAsync() -> { [string]: any } [Yields] {🔒RobloxScript}
 
-Added Class MomentsService : Instance {🔒RobloxScript} [NotCreatable] [Service]
-	Added Function MomentsService:CheckMomentTextStatusAsync(token: string) -> ...any [Yields] {🚧Capture} {🔒RobloxScript}
-	Added Function MomentsService:CreatePostAsync(postRequest: { [string]: any }) -> { [string]: any } [Yields] {🚧Capture} {🔒RobloxScript}
-	Added Function MomentsService:GenerateMomentTextAsync(capture: Capture, tone: string? = "") -> ...any [Yields] {🚧Capture} {🔒RobloxScript}
+Added Property ChatWindowConfiguration.TextChannelDisplayMode: Enum.TextChannelDisplayMode {🚧🔎Chat} {🚧✏️PluginOrOpenCloud}
+Added Property StateMachineTransitionDefinition.From: Instance? {🚧Animation}
+Added Property StateMachineTransitionDefinition.Priority: number {🚧Animation}
+Added Property StateMachineTransitionDefinition.To: Instance? {🚧Animation}
+Added Property Workspace.MapTVRemoteToGamepadKeycodes: Enum.RolloutState [NotScriptable]
+Added Property StarterPlayer.PlaceAvatarRules: Instance? [Hidden] {🚧Players} {🔒RobloxScript}
+Added Property StateMachineTransitionDefinition.TransitionId: string {🚧Animation} {🔒RobloxScript}
+Added Property TextChannel.IsDefaultTextChannel: boolean [Hidden] {🚧Chat} {🔒RobloxScript}
 
-Added Class AnimatedImage : GuiBase {🔒RobloxScript} [NotCreatable]
-	Added Property AnimatedImage.Content: Content [Hidden] [NotReplicated] {🚧UI} {🔒RobloxScript}
-	Added Property AnimatedImage.PlaybackSpeed: number [Hidden] [NotReplicated] {🚧UI} {🔒RobloxScript}
-	Added Function AnimatedImage:GetBoundTracks() -> { any } {🚧UI} {🔒RobloxScript}
-	Added Function AnimatedImage:Pause() -> () {🚧UI} {🔒RobloxScript}
-	Added Function AnimatedImage:Resume() -> () {🚧UI} {🔒RobloxScript}
+Added Function Terrain:ReplaceMaterialInTransformSubregionSlot(cframe: CFrame, size: Vector3, sourceMaterialIndex: number, targetMaterialIndex: number, targetRegion: Region3int16) -> () {🚧Environment} {🔒RobloxScript}
+Added Function Terrain:SetMaterialInTransformSubregionSlot(cframe: CFrame, size: Vector3, targetMaterialIndex: number, targetRegion: Region3int16) -> () {🚧Environment} {🔒RobloxScript}
+Added Function CallingService:CreateCallAsync(participantIds: { any }? = {}, chatChannelId: string? = "") -> { [string]: any } [Yields] {🔒RobloxScript}
+Added Function UGCValidationService:GetLayeredClothingPostDeformationSizeAsync(accessory: Accessory, editableMesh: EditableMesh, meshScale: Vector3) -> Vector3 [Yields] {🔒RobloxScript}
 
-Added Property AnimationImportData.ForceNewVersion: boolean
-Added Property AnimationImportData.VersionedAssetId: number
-Added Property Folder.IconTint: Color3 {🚧Basic}
-Added Property TextChannel.AddPlayersOnJoin: boolean {🚧Chat}
-Added Property Workspace.StreamingAdaptiveRadius: boolean {🚧PluginOrOpenCloud}
-Added Property AudioDeviceInput.DictationEnabled: boolean [Hidden] {🚧Audio + Input} {🔒RobloxScript}
-Added Property Decal.LocalizedTextureContent: Content [ReadOnly] {🚧Basic} {🔒RobloxScript}
-Added Property LocalizationService.ShouldUseImageLocalizationTable: boolean [Hidden] [NotScriptable] {🚧Basic} {🔒RobloxScript}
-Added Property Studio.ReviewableChangeAddedTextColor: Color3 [Hidden] [NotReplicated] {🔒RobloxScript}
-Added Property Studio.ReviewableChangeRemovedTextColor: Color3 [Hidden] [NotReplicated] {🔒RobloxScript}
+Added Event LiveScriptingService.BeginEditWithUri(id: number, uri: string) [Hidden] {🔒RobloxEngine}
+Added Event LiveScriptingService.SendAtomicOperationWithUri(requestId: number, uri: string, op: string, hash: string) [Hidden] {🔒RobloxEngine}
 
-Added Function RunService:BindToAnimation(function: (...any) -> ...any, frequency: Enum.StepFrequency? = "Hz30", priority: number? = 2000) -> RBXScriptConnection {🚧Basic}
-Added Function ScriptService:ResolveModulePath(relativeTo: Instance, path: string) -> Instance? [CustomLuaState]
-Added Function PinShortcutService:IsRevealPinnedExperienceAvailable() -> boolean {🔒RobloxScript}
-Added Function PinShortcutService:RevealPinnedExperience(placeId: number) -> () {🔒RobloxScript}
-Added Function PinShortcutService:ShouldShowLuaNotificationOnPinExperienceCompleted() -> boolean {🔒RobloxScript}
+Added Enum AnimationNodeBlendMode
+	Added EnumItem AnimationNodeBlendMode.Over : 0
+	Added EnumItem AnimationNodeBlendMode.Add : 1
+	Added EnumItem AnimationNodeBlendMode.Subtract : 2
 
-Added Event PinShortcutService.OnPinExperienceCompleted(status: Enum.PinExperienceStatus, placeId: number, universeId: number, experienceName: string) {🔒RobloxScript}
-Added Event RemoteCursorService.RequestAllRemoteCursorPositionForScriptWithUri(uri: string) [Hidden] {🔒RobloxEngine}
-Added Event RemoteCursorService.UpdateClientRemoteCursorPositionWithUri(uri: string, remoteCursorPosition: string) [Hidden] {🔒RobloxEngine}
+Added Enum QueueDecision
+	Added EnumItem QueueDecision.Commit : 0
+	Added EnumItem QueueDecision.Defer : 1
 
-Added Enum AnimatedImagePlaybackState
-	Added EnumItem AnimatedImagePlaybackState.Begin : 0
-	Added EnumItem AnimatedImagePlaybackState.Playing : 1
-	Added EnumItem AnimatedImagePlaybackState.Paused : 2
-	Added EnumItem AnimatedImagePlaybackState.Completed : 3
-	Added EnumItem AnimatedImagePlaybackState.Canceled : 4
+Added Enum TextChannelDisplayMode
+	Added EnumItem TextChannelDisplayMode.AllTextChannels : 0
+	Added EnumItem TextChannelDisplayMode.DefaultTextChannels : 1
 
-Added Enum AnimatedImageScaleType
-	Added EnumItem AnimatedImageScaleType.Stretch : 0
-	Added EnumItem AnimatedImageScaleType.Tile : 1
-	Added EnumItem AnimatedImageScaleType.Fit : 2
-	Added EnumItem AnimatedImageScaleType.Crop : 3
+Added EnumItem AnimationNodeType.OneShotNode : 14
+Added EnumItem AnimationNodeType.StateMachineNode : 16
+Added EnumItem PromptCreateOutfitResult.UGCValidationFailed : 8
 
-Added Enum AnimationValueNodeType
-	Added EnumItem AnimationValueNodeType.Invalid : 0
-	Added EnumItem AnimationValueNodeType.Expression : 1
+Removed Function CallingService:CreateCall
 
-Added Enum PinExperienceStatus
-	Added EnumItem PinExperienceStatus.Success : 0
-	Added EnumItem PinExperienceStatus.Failure : 1
-	Added EnumItem PinExperienceStatus.AlreadyExists : 2
-
-Added EnumItem ConnectionError.TransportErrors : 1024
-Added EnumItem ConnectionError.DisconnectTransportIoError : 1025
-Added EnumItem ConnectionError.DisconnectTransportIoInternetError : 1026
-Added EnumItem ConnectionError.DisconnectTransportProtocolError : 1027
-Added EnumItem ConnectionError.DisconnectTransportNgtcp2Error : 1028
-Added EnumItem ConnectionError.DisconnectTransportQuicError : 1029
-Added EnumItem ConnectionError.DisconnectTransportRnaError : 1030
-Added EnumItem StudioScriptEditorColorCategories.ReviewableChangeAddedText : 47
-Added EnumItem StudioScriptEditorColorCategories.ReviewableChangeRemovedText : 48
-
-Added Tag [Deprecated] to Property GuiObject.Transparency
-Added Tag [Deprecated] to Function GuiObject:TweenPosition
-Added Tag [Deprecated] to Function GuiObject:TweenSize
-Added Tag [Deprecated] to Function GuiObject:TweenSizeAndPosition
-
-Changed the read permissions of Property Terrain.ExpandedTerrainResolved 
-	from: {🔒RobloxEngine}
-	  to: {🔍RobloxScript}
-
-Removed Class DataModelPatchService
-	Removed Function DataModelPatchService:GetLuaVersion
-	Removed Function DataModelPatchService:GetPatch
-	Removed Function DataModelPatchService:RegisterPatch
-	Removed Function DataModelPatchService:UpdatePatch
-
-Removed Tag [NotScriptable] from Property Terrain.ExpandedTerrainResolved
+Removed Tag [NotReplicated] from Class StateMachineTransitionDefinition
