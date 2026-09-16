@@ -30,35 +30,31 @@ local fFlagSduiHydrationFetchIfMissing = require(parent.SharedFlags).FFlagSduiHy
 local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAppSduiColorPropMigration
 local fFlagSduiFocusNavActionsStructured = require(parent.SharedFlags).FFlagSduiFocusNavActionsStructured
 local fFlagSduiFormatStringPercentSafeGsubModule = require(sduiCoreSystem.FFlagSduiFormatStringPercentSafeGsub)
-local sduiPropBuilderSupportNilHydration = game:DefineFastFlag("SduiPropBuilderSupportNilHydration", false)
 local frozen = table.freeze({ status = dataStatus.Failed })
 local frozen_1 = table.freeze({})
 
 local function resolveHydrationBinding(p1, p2, p3, p4)
-	-- upvalues: sduiPropBuilderSupportNilHydration (ref), sduiDataBindingContentTypeModule (ref), fFlagSduiHydrationFetchIfMissing (ref), sduiDataBinderModule (ref)
+	-- upvalues: sduiDataBindingContentTypeModule (ref), fFlagSduiHydrationFetchIfMissing (ref), sduiDataBinderModule (ref)
 	local joined = table.concat(p1, ".")
 	local var1 = p1[1]
 	local var2 = p2 and p2[var1]
 	
 	if var2 == nil then
-		if sduiPropBuilderSupportNilHydration then
-			if sduiDataBindingContentTypeModule[var1] ~= nil then
-				error(`Could not find data bindingSource for key {var1}, bindingPath: {joined}`)
-			end
-			return nil, nil
-		else
+		if sduiDataBindingContentTypeModule[var1] ~= nil then
 			error(`Could not find data bindingSource for key {var1}, bindingPath: {joined}`)
 		end
+		return nil, nil
+	else
+		local contentType = var2.contentType
+		local id = var2.id
+		
+		if #p1 < 2 then
+			error(`Unsupported path for contentType {contentType}, bindingPath: {joined}`)
+		end
+		local fieldValue, fieldValue_1 = sduiDataBinderModule.getFieldValue(contentType, p1, id, p3, if fFlagSduiHydrationFetchIfMissing then var2.fetchIfMissing or p4 else p4)
+		
+		return fieldValue, fieldValue_1
 	end
-	local contentType = var2.contentType
-	local id = var2.id
-	
-	if #p1 < 2 then
-		error(`Unsupported path for contentType {contentType}, bindingPath: {joined}`)
-	end
-	local fieldValue, fieldValue_1 = sduiDataBinderModule.getFieldValue(contentType, p1, id, p3, if fFlagSduiHydrationFetchIfMissing then var2.fetchIfMissing or p4 else p4)
-	
-	return fieldValue, fieldValue_1
 end
 
 local function resolveBindingPathValue(p5, p6, p7, p8, p9, p10, p11)
@@ -550,7 +546,7 @@ local function evaluateCondition(p11, p12, p13, p14, p15)
 		return var10(value, getFieldObject)
 	elseif type == "and_condition" then
 		for i, v in value.conditions do
-			var11, var96 = evaluateCondition(p11, v, p13, p14, p15)
+			var11, var95 = evaluateCondition(p11, v, p13, p14, p15)
 			
 			if not var12 or var12 == dataStatus.Ready then
 				if not var11 then
@@ -564,7 +560,7 @@ local function evaluateCondition(p11, p12, p13, p14, p15)
 		return nil
 	end
 	for i, v in value.conditions do
-		var11, var96 = evaluateCondition(p11, v, p13, p14, p15)
+		var11, var95 = evaluateCondition(p11, v, p13, p14, p15)
 		
 		if not var12 or var12 == dataStatus.Ready then
 			if var11 or var11 == nil then

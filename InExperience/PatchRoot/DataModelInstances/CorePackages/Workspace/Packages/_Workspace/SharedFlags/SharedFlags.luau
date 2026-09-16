@@ -31,11 +31,9 @@ local sduiFavoritesHydrationStructured = game:DefineFastFlag("SduiFavoritesHydra
 local sduiOptionalUniverseHydration = game:DefineFastFlag("SduiOptionalUniverseHydration", false)
 local luaAppSduiPageEntryPointSnackbar2 = game:DefineFastFlag("LuaAppSduiPageEntryPointSnackbar2", false)
 local sduiLazyNestedComponentProp = game:DefineFastFlag("SduiLazyNestedComponentProp", false)
-local sduiTileTitleTextAlignment = game:DefineFastFlag("SduiTileTitleTextAlignment", false)
 local luaAppSduiEdpHideSystemBarOnPeekViewMount = game:DefineFastFlag("LuaAppSduiEdpHideSystemBarOnPeekViewMount", false)
 local luaAppSduiEdpHideSystemBarOnPeekViewMount_1 = game:DefineFastFlag("EnableExperienceDetailsBottomSheet2", false) and luaAppSduiEdpHideSystemBarOnPeekViewMount
 local sduiLazyNestedComponentProp_1 = game:DefineFastFlag("SduiExperienceDetailsSupport", false) and (luaAppShareEdpVideoBlockingConfig and (sduiIsEmptyConditions and (sduiLaunchExperienceAction and (sduiHydrationFetchIfMissing and (sduiInlineNestedComponentSchema2 and (sduiFavoritesHydrationStructured and (sduiOptionalUniverseHydration and (luaAppSduiPageEntryPointSnackbar2 and sduiLazyNestedComponentProp))))))))
-local sduiNilHydrationGuard = game:DefineFastFlag("SduiNilHydrationGuard", false)
 local sduiGameIconSupport = game:DefineFastFlag("SduiGameIconSupport", false)
 local sduiGameIconSupport_1 = game:DefineFastFlag("MigrateGameIconsToStore", false) and sduiGameIconSupport
 local enableMeTabProfile = game:DefineFastFlag("EnableMeTabProfile", false)
@@ -843,7 +841,6 @@ return {
 	FFlagSduiGameIconSupport = sduiGameIconSupport,
 	FFlagMigrateGameIconsToStore = sduiGameIconSupport_1,
 	FFlagMigrateGameInfoToStore = require(script.FFlagMigrateGameInfoToStore),
-	FFlagSduiNilHydrationGuard = sduiNilHydrationGuard,
 	FFlagSduiPlayWithReward = game:DefineFastFlag("SduiPlayWithReward", false),
 	FFlagSduiPlayWithRewardGapFix = game:DefineFastFlag("SduiPlayWithRewardGapFix", false),
 	FFlagSduiActionSequence = game:DefineFastFlag("SduiActionSequence", false),
@@ -969,7 +966,7 @@ return {
 	FFlagSduiOptionImpressionsEventName = game:DefineFastFlag("SduiOptionImpressionsEventName", false),
 	FFlagLuaAppMoveProfileIntoTopBarIXP = require(script.FFlagLuaAppMoveProfileIntoTopBarIXP),
 	FFlagLuaAppMoveProfileIntoTopBar = require(script.FFlagLuaAppMoveProfileIntoTopBar),
-	FFlagLuaAppChartsAppPage = game:DefineFastFlag("LuaAppChartsAppPage", false) and sduiNilHydrationGuard,
+	FFlagLuaAppChartsAppPage = game:DefineFastFlag("LuaAppChartsAppPage", false),
 	FFlagLuaAppEnableSduiHomePage = game:DefineFastFlag("LuaAppEnableSduiHomePage3", false) and (luaAppSduiHomePageSupport3 and (sduiGameIconSupport and (sduiApiStoreOnSuccessAndRefresh and (homePageSduiPrefetch and (sduiVerticalFeedProgressiveFillOnScroll2 and sduiVerticalFeedPageShellSupport2))))),
 	FFlagLuaAppSduiHomePageSupport = luaAppSduiHomePageSupport3,
 	FFlagLuaAppSharedHomePageInteractive = game:DefineFastFlag("LuaAppSharedHomePageInteractive", false),
@@ -977,7 +974,6 @@ return {
 	FFlagSduiChartsPlaceholderMergeStrategySupport = sduiChartsPlaceholderMergeStrategySupport,
 	FFlagSduiChartsRequestPlaceholders = game:DefineFastFlag("SduiChartsRequestPlaceholders", false) and sduiChartsPlaceholderMergeStrategySupport,
 	FFlagSduiChartsResetSessionOnRefresh = game:DefineFastFlag("SduiChartsResetSessionOnRefresh", false),
-	FFlagSduiChartsDedupSessionRotation = game:DefineFastFlag("SduiChartsDedupSessionRotation", false),
 	FFlagSduiPaginatePostBody = sduiPaginatePostBody,
 	FFlagSduiChartsPostBody = game:DefineFastFlag("SduiChartsPostBody", false) and (sduiPaginatePostBody and sduiClientTemplateCache),
 	FFlagChartsHydrationStreaming = game:DefineFastFlag("ChartsHydrationStreaming2", false) and (sduiPaginatePostBody and (sduiClientTemplateCache and require(script.FFlagLuaAppSduiStreamingChunkedResponses))),
@@ -1204,9 +1200,7 @@ return {
 	FFlagLuaAppWizardContainerBypassNavigationLock = game:DefineFastFlag("LuaAppWizardContainerBypassNavigationLock", false),
 	FFlagSduiTileBottomButton = game:DefineFastFlag("SduiTileBottomButton", false),
 	FFlagSduiTileHoldAction = game:DefineFastFlag("SduiTileHoldAction", false),
-	FFlagSduiTileImagePaddingInset = game:DefineFastFlag("SduiTileImagePaddingInset", false),
 	FFlagSduiTileThumbnailPadding = game:DefineFastFlag("SduiTileThumbnailPadding", false),
-	FFlagSduiTileTitleTextAlignment = sduiTileTitleTextAlignment,
 	FFlagLuaAppSduiGameSortDropDown = game:DefineFastFlag("LuaAppSduiGameSortDropDown2", false),
 	FFlagSduiSystemBannerComponent = game:DefineFastFlag("SduiSystemBannerComponent", false),
 	FFlagSduiSurfaceBannerScrollAwaySticky = game:DefineFastFlag("SduiSurfaceBannerScrollAwaySticky", false),

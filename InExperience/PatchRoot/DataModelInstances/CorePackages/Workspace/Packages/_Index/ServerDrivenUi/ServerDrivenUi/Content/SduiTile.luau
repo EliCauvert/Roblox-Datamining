@@ -19,8 +19,6 @@ local fFlagLuaAppHomePageFirstImageLoadObserver = require(parent.SharedFlags).FF
 local fFlagSduiTileBottomButton = require(parent.SharedFlags).FFlagSduiTileBottomButton
 local fFlagSduiTileHoldAction = require(parent.SharedFlags).FFlagSduiTileHoldAction
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
-local fFlagSduiTileTitleTextAlignment = require(parent.SharedFlags).FFlagSduiTileTitleTextAlignment
-local fFlagSduiTileImagePaddingInset = require(parent.SharedFlags).FFlagSduiTileImagePaddingInset
 local fFlagSduiGameIconSupport = require(parent.SharedFlags).FFlagSduiGameIconSupport
 local fFlagSduiTileThumbnailPadding = require(parent.SharedFlags).FFlagSduiTileThumbnailPadding
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
@@ -68,7 +66,7 @@ local function maybeLayoutForButton(p1, p2, p3, p4, p5)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), fFlagSduiGameIconSupport (ref), contentProviderService (ref), textSizeModule (ref), useTokens (ref), fFlagSduiTileBottomButton (ref), fFlagSduiExperienceDetailsSupport (ref), getInputModeStore (ref), responsiveModule (ref), fFlagSduiTileHoldAction (ref), useTileHoldActionModule (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagSduiTileImagePaddingInset (ref), sduiTileInsetImageModule (ref), fFlagSduiTileThumbnailPadding (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), imageSetLabel (ref), fFlagLuaAppSduiVideoThumbnail (ref), sduiDefaultTileImageModule (ref), loadableImage (ref), maybeLayoutForButton (ref), fFlagSduiTileTitleTextAlignment (ref), cryoModule (ref), t (ref), holdDetector (ref)
+	-- upvalues: reactModule (ref), fFlagSduiGameIconSupport (ref), contentProviderService (ref), textSizeModule (ref), useTokens (ref), fFlagSduiTileBottomButton (ref), fFlagSduiExperienceDetailsSupport (ref), getInputModeStore (ref), responsiveModule (ref), fFlagSduiTileHoldAction (ref), useTileHoldActionModule (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagSduiTileDisableLegacyHover (ref), sduiTileInsetImageModule (ref), fFlagSduiTileThumbnailPadding (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), imageSetLabel (ref), fFlagLuaAppSduiVideoThumbnail (ref), sduiDefaultTileImageModule (ref), loadableImage (ref), maybeLayoutForButton (ref), cryoModule (ref), t (ref), holdDetector (ref)
 	local layoutOrder = p1.layoutOrder
 	local anchorPoint = p1.anchorPoint
 	local automaticSize = p1.automaticSize
@@ -220,7 +218,7 @@ return reactModule.memo(function(p1)
 	end
 	local var24
 	local var25 = if fFlagSduiExperienceDetailsSupport then surface100.Transparency else 0
-	local var26 = if fFlagSduiTileImagePaddingInset and p1.imagePadding ~= nil then reactModule.createElement(sduiTileInsetImageModule, {
+	local var26 = if p1.imagePadding ~= nil then reactModule.createElement(sduiTileInsetImageModule, {
 		image = p1.image,
 		imageComponent = p1.imageComponent,
 		imagePadding = p1.imagePadding,
@@ -346,7 +344,7 @@ return reactModule.memo(function(p1)
 				TextColor3 = emphasis.Color3,
 				TextWrapped = titleLines > 1,
 				TextTruncate = Enum.TextTruncate.SplitWord,
-				TextXAlignment = if fFlagSduiTileTitleTextAlignment then p1.titleTextXAlignment or Enum.TextXAlignment.Left else Enum.TextXAlignment.Left,
+				TextXAlignment = p1.titleTextXAlignment or Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top,
 				AutomaticSize = if var3 then Enum.AutomaticSize.X else nil
 			}) else nil,
