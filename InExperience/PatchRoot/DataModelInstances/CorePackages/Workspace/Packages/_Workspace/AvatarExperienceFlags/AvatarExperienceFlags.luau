@@ -246,6 +246,7 @@
 	FFlagAXFixPrefetchMarketplaceStartupCrash = require(script.FFlagAXFixPrefetchMarketplaceStartupCrash),
 	FFlagAXInventoryItemsListImpressionLogging = require(script.FFlagAXInventoryItemsListImpressionLogging),
 	FFlagAXRecommendedItemsImpressionExposureLogging = require(script.FFlagAXRecommendedItemsImpressionExposureLogging),
+	FFlagAXEditorRecommendedItemsUnifiedImpressions = require(script.FFlagAXEditorRecommendedItemsUnifiedImpressions),
 	FFlagAXAvatarLooksRecommendationExposureLogging = require(script.FFlagAXAvatarLooksRecommendationExposureLogging),
 	FFlagAXAvatarLoadWithRetry = require(script.FFlagAXAvatarLoadWithRetry),
 	FFlagAXCatalogSearchSupportDisableFilters = require(script.FFlagAXCatalogSearchSupportDisableFilters),
@@ -337,6 +338,7 @@
 	FFlagAXAddSearchTrendingChips = require(script.FFlagAXAddSearchTrendingChips),
 	FFlagAXAddHDRowInItemDetailsPage = require(script.FFlagAXAddHDRowInItemDetailsPage),
 	FFlagAXWidgetHeaderTreatEmptyTextAsNil = require(script.FFlagAXWidgetHeaderTreatEmptyTextAsNil),
+	FFlagAXWidgetHeaderFlexLayout = require(script.FFlagAXWidgetHeaderFlexLayout),
 	FIntAXOutfitNameMaxLength = require(script.FIntAXOutfitNameMaxLength),
 	FFlagAXFixWidgetHydrationPermanentPrice = require(script.FFlagAXFixWidgetHydrationPermanentPrice),
 	FFlagAXFixBadgeStatusConfigOptions = require(script.FFlagAXFixBadgeStatusConfigOptions),
@@ -389,12 +391,13 @@
 	FFlagAXFixVRControlBarFlicker = require(script.FFlagAXFixVRControlBarFlicker),
 	FFlagAXFixSearchLandingQuickButtonsOffset = require(script.FFlagAXFixSearchLandingQuickButtonsOffset),
 	FFlagAXAvatarPreviewPhotoboothMomentsButton = require(script.FFlagAXAvatarPreviewPhotoboothMomentsButton),
-	FFlagAXIaBSelectableItemCardRow = require(script.FFlagAXIaBSelectableItemCardRow),
+	FFlagAXIaBEnableShopContext = require(script.FFlagAXIaBEnableShopContext),
 	FFlagAXFixR6CharacterPlacement = require(script.FFlagAXFixR6CharacterPlacement),
 	FFlagAXFixWidgetListSeeAllListReuse = require(script.FFlagAXFixWidgetListSeeAllListReuse),
 	FFlagAXCatalogHttpLinkSalesTypeFilter = require(script.FFlagAXCatalogHttpLinkSalesTypeFilter),
 	FFlagAXRemoveDynamicHeadBadge = require(script.FFlagAXRemoveDynamicHeadBadge),
 	FFlagAXPhotoboothMomentsPage = require(script.FFlagAXPhotoboothMomentsPage),
 	FFlagAXIaBDiscountPriceLine = require(script.FFlagAXIaBDiscountPriceLine),
-	FFlagAXActionButtonRoundedRectCursor = require(script.FFlagAXActionButtonRoundedRectCursor)
+	FFlagAXActionButtonRoundedRectCursor = require(script.FFlagAXActionButtonRoundedRectCursor),
+	FFlagAXMarketplaceLicensingItemDetails = require(script.FFlagAXMarketplaceLicensingItemDetails)
 }

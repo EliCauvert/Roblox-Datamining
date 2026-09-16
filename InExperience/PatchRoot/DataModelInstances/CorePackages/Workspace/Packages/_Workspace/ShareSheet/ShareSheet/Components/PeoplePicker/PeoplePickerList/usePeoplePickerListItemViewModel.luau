@@ -21,7 +21,6 @@ return function(p1)
 	local isSelected = p1.isSelected
 	
 	return {
-		input = "None",
 		leading = {
 			type = "Avatar",
 			userId = p1.primaryUserId,
@@ -41,7 +40,6 @@ return function(p1)
 		description = p1.description,
 		isLoading = var4,
 		onActivated = p1.onActivated,
-		LayoutOrder = p1.LayoutOrder,
 		testId = testId
 	}
 end

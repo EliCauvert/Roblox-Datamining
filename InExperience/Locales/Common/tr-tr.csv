@@ -728,6 +728,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,Talebini gönderemed
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,Destek talebi gönderildi
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,Oyuncu desteği şu anda kullanılamıyor. Lütfen daha sonra tekrar dene.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,Oyuncu desteği kullanılamıyor
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,Lütfen daha ayrıntılı bir açıklama yaz
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,Destek talebi göndermek için bu deneyimi yakın zamanda oynamış olman gerekir.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,Talep göndermek için bu deneyimi ziyaret et
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,Başka talep göndermeden önce lütfen mevcut taleplerine yaratıcının yanıt vermesini bekle.
@@ -2058,7 +2059,6 @@ Feature.Build.Description.RevertToVersion,En son değişikliği geri döndürmek
 Feature.Build.Description.ShareLatest,En son versiyonunda nelerin değiştiğini paylaş.
 Feature.Build.Description.ShopButton,Bir alışveriş giriş noktası ekle
 Feature.Build.Description.UpdateDeveloperProduct,Geliştirici ürününü ({PRODUCT_ID}) güncelle.
-Feature.Build.Description.VersionChanges,Oyunculara bu versiyonda nelerin değiştiğini söyle.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Açıklama 1.000 karakter veya daha kısa olmalıdır.
 Feature.Build.Error.DeveloperProductNameRequired,Bir ürün adı gir.
 Feature.Build.Error.DeveloperProductNameTooLong,Ad 50 karakter veya daha kısa olmalıdır.
@@ -2239,7 +2239,6 @@ Feature.Build.Label.Version,Sürüm
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,Versiyon başlığı ve açıklaması
 Feature.Build.Label.Video,Video
 Feature.Build.Message.AccountRequirements,"Hesabın, İnşa Et'i kullanma gerekliliklerini karşılamıyor."
 Feature.Build.Message.AccountTooNew,Hesabın yayınlanamayacak kadar yeni. 2 günü doldurduğunda tekrar dene.
@@ -2318,8 +2317,10 @@ Feature.Build.Message.ShareLinkFailed,Paylaşım bağlantısı oluşturulamadı.
 Feature.Build.Message.SignedOut,Çıkış yaptın. Giriş yapıp tekrar dene.
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} görev tamamlandı
 Feature.Build.Message.ThinkingSeconds,{SECONDS} saniyedir düşünülüyor
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,Oyununu oynamak için bu yaratıcıyla birbirinizin güvenilir arkadaşı olun.
 Feature.Build.Message.TryAgain,Tekrar dene.
 Feature.Build.Message.TurnToPortrait,Oyunun üzerinde çalışmaya devam etmek için cihazını portre moduna getir.
+Feature.Build.Message.UpdateSettingsToPlaytest,Bu oyunu oynamak için oyun ön izleme ayarını güncelle.
 Feature.Build.Message.VersionHistoryLoad,Versiyon geçmişi yüklenemedi.
 Feature.Build.Message.WhatToCreate,Bugün ne yaratmak istiyorsun?
 Feature.Build.Message.WorkedMinutesSeconds,{MINUTES} dk. {REM_SECONDS} sn. çalışıldı
@@ -2372,7 +2373,6 @@ Feature.Build.Title.Tasks,Görevler
 Feature.Build.Title.TurnActivity,Etkinliği aç
 Feature.Build.Title.VersionHistory,Sürüm geçmişi
 Feature.Build.Title.VersionInfo,Versiyon bilgileri
-Feature.Build.Title.VersionInformation,Versiyon Bilgileri
 Feature.Build.Title.VersionNumber,Sürüm {VERSION}
 Feature.Build.Title.Versions,Versiyonlar
 Feature.Build.Title.WhatsIncluded,Neler dâhil?
@@ -3979,6 +3979,7 @@ Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Raporlamana devam et
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,Bildirimini tamamla
 Feature.ReportAbuse.Title.SelectInSceneIpReport,FM İhlali raporlamanı başlattığın için teşekkür ederiz
 Feature.ReportAbuse.Title.SelectInSceneThankYou,Bildirimin için teşekkürler
+Feature.RobloxSubscription.Action.JoinIn,{time} itibarıyla katılabilirsin
 Feature.RobloxSubscription.Action.Subscribe,Abone Ol
 Feature.RobloxSubscription.Action.TryItForFree,Ücretsiz dene
 Feature.RobloxSubscription.Body.AlreadySubscribed,Plus aboneliğin zaten oyun içi avantajlar sağlıyor.
@@ -3988,6 +3989,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,Yaş kontrolüyle yaşını
 Feature.RobloxSubscription.Description.Benefit.Customize,Profil çerçeveleri ve uygulama temaları ile özelleştir
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"İlk 60 gün %10 indirim, ardından öğeler ve avatarlarda %20 indirim"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Daha az Robux karşılığında daha fazla eğlence. Roblox Plus'a abone ol.
+Feature.RobloxSubscription.Description.JoinEarly,Plus ile erken katıl
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} düğmesine tıklayarak <a href=""{termsUrl}"">Roblox Abonelik Koşulları</a>'nı kabul etmiş olursun. Sen iptal edene kadar her ay otomatik tahsilat yapılır."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Ücretsiz özel sunucular
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4006,6 +4008,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,İyi haberlerimiz var
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus'a geç
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus burada kullanılamıyor
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Etkinliğe herkesten önce katılabilirsin.
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Plus ile erken erişim
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Hesap durumu, ihlaller ve itirazlar"
 Feature.Schools.Label.Classmates,Sınıf arkadaşları
 Feature.Screentime.Content.ScreentimeLimitDialog,Günlük ekran süresi sınırına ulaştın. Roblox'a erişebilmek için yarın tekrar gel.

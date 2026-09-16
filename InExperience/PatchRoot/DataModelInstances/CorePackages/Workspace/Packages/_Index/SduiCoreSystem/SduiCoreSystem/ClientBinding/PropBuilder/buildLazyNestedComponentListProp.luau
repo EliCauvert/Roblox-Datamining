@@ -21,7 +21,6 @@ local fFlagSduiFixEmptyRobloxComponentInPropBuilder = require(parent.SharedFlags
 local fFlagSduiOrderedTemplateDataSupport = require(parent.SharedFlags).FFlagSduiOrderedTemplateDataSupport
 local fFlagSduiImprovedErrorDimensions = require(parent.SharedFlags).FFlagSduiImprovedErrorDimensions
 local fFlagSduiInlineNestedComponentSchema = require(parent.SharedFlags).FFlagSduiInlineNestedComponentSchema
-local fFlagSduiClientPageScope = require(parent.SharedFlags).FFlagSduiClientPageScope
 local t = {}
 
 local function buildItemList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
@@ -98,7 +97,7 @@ local function buildItemList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 end
 
 local function buildOrderedTemplateDataList(p11, p12, p13, p14, p15)
-	-- upvalues: splitDottedPathModule (ref), signalsModule (ref), sduiPropUtilsModule (ref), fFlagSduiClientPageScope (ref), fFlagSduiInlineNestedComponentSchema (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiImprovedErrorDimensions (ref), buildInputsForNestedComponentModule (ref), buildConfigForComponent (ref), sduiParseHelpersModule (ref), propResultCategory (ref)
+	-- upvalues: splitDottedPathModule (ref), signalsModule (ref), sduiPropUtilsModule (ref), fFlagSduiInlineNestedComponentSchema (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiImprovedErrorDimensions (ref), buildInputsForNestedComponentModule (ref), buildConfigForComponent (ref), sduiParseHelpersModule (ref), propResultCategory (ref)
 	local entryMapPath = p11.entry_map_path
 	local entryOrder = p11.entry_order
 	local templateDataMap = p11.template_data_map
@@ -114,20 +113,20 @@ local function buildOrderedTemplateDataList(p11, p12, p13, p14, p15)
 	local var7 = if var6 and var6.type == "binding_path" then splitDottedPathModule(var6.value) else nil
 	
 	return signalsModule.createComputed(function(p16)
-		-- upvalues: var7 (ref), sduiPropUtilsModule (copy), p12 (ref), p13 (ref), fFlagSduiClientPageScope (copy), p14 (ref), var6 (ref), var5 (ref), templateDataMap (ref), fFlagSduiInlineNestedComponentSchema (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), signalsModule (copy), buildInputsForNestedComponentModule (copy), buildConfigForComponent (copy), p15 (ref), sduiParseHelpersModule (copy)
+		-- upvalues: var7 (ref), sduiPropUtilsModule (copy), p12 (ref), p13 (ref), p14 (ref), var6 (ref), var5 (ref), templateDataMap (ref), fFlagSduiInlineNestedComponentSchema (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), signalsModule (copy), buildInputsForNestedComponentModule (copy), buildConfigForComponent (copy), p15 (ref), sduiParseHelpersModule (copy)
 		local ok, status = pcall(function()
-			-- upvalues: var7 (copy), sduiPropUtilsModule (copy), p16 (ref), p12 (copy), p13 (copy), fFlagSduiClientPageScope (copy), p14 (copy), var6 (copy), var5 (copy), templateDataMap (copy), fFlagSduiInlineNestedComponentSchema (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), signalsModule (copy), buildInputsForNestedComponentModule (copy), buildConfigForComponent (copy), p15 (copy), sduiParseHelpersModule (copy)
+			-- upvalues: var7 (copy), sduiPropUtilsModule (copy), p16 (ref), p12 (copy), p13 (copy), p14 (copy), var6 (copy), var5 (copy), templateDataMap (copy), fFlagSduiInlineNestedComponentSchema (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), signalsModule (copy), buildInputsForNestedComponentModule (copy), buildConfigForComponent (copy), p15 (copy), sduiParseHelpersModule (copy)
 			local var8 = nil
 			
 			if var7 then
-				var8 = sduiPropUtilsModule.resolveBindingPathValue(p16, var7, p12, p13, nil, nil, if fFlagSduiClientPageScope then p14 else nil)
+				var8 = sduiPropUtilsModule.resolveBindingPathValue(p16, var7, p12, p13, nil, nil, p14)
 			elseif var6 and var6.type == "literal" then
 				var8 = var6.value and var6.value.items
 			end
 			if var8 == nil then
 				error("entry_order resolved to nil in ordered_template_data")
 			end
-			local var9 = if var5 then sduiPropUtilsModule.resolveBindingPathValue(p16, var5, p12, p13, nil, nil, if fFlagSduiClientPageScope then p14 else nil) else nil
+			local var9 = if var5 then sduiPropUtilsModule.resolveBindingPathValue(p16, var5, p12, p13, nil, nil, p14) else nil
 			local t = {}
 			
 			for i, v in var8 do

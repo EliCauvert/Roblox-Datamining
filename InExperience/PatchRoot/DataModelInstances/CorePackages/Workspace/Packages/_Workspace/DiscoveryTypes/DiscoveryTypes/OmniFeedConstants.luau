@@ -1,7 +1,6 @@
 ﻿local parent = script:FindFirstAncestor("DiscoveryTypes").Parent
 local fFlagLuaAppHeaderButtonText = require(parent.SharedFlags).FFlagLuaAppHeaderButtonText
 local fFlagLuaAppRfySignalApportioningIxp = require(parent.SharedFlags).FFlagLuaAppRfySignalApportioningIxp
-local fFlagLuaAppEnableSponsoredReportAd = require(parent.SharedFlags).FFlagLuaAppEnableSponsoredReportAd
 local fFlagLuaAppEnableReportExperience = require(parent.SharedFlags).FFlagLuaAppEnableReportExperience
 local fFlagLuaAppUsePrevalidatedVideoGamePlayability = require(parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
 local fFlagLuaAppRfyRevealRows = require(parent.SharedFlags).FFlagLuaAppRfyRevealRows
@@ -42,7 +41,7 @@ return {
 		SortHeaderAnchorTag = if require(parent.SharedFlags).FFlagLuaAppSortHeaderAnchorTag then "sortHeaderAnchorTag" else nil,
 		InitialFeedVisibleRows = if fFlagLuaAppRfyRevealRows then "initialFeedVisibleRows" else nil,
 		VisibleRowsPerReveal = if fFlagLuaAppRfyRevealRows then "visibleRowsPerReveal" else nil,
-		EnableReportAd = if fFlagLuaAppEnableSponsoredReportAd then "enableReportAd" else nil,
+		EnableReportAd = "enableReportAd",
 		EnableReportExperience = if fFlagLuaAppEnableReportExperience then "enableReportExperience" else nil,
 		IsSponsoredRatingFooterAllowed = "isSponsoredRatingFooterAllowed",
 		AmpUpsellFeatureName = "ampUpsellFeatureName",

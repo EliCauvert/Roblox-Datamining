@@ -5,8 +5,8 @@ local _ = require(parent.Foundation)
 local priceStatusModule = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
 local getPriceStatusModule = require(avatarExperienceInspectAndBuy.Utils.getPriceStatus)
 local _ = require(avatarExperienceInspectAndBuy.Types)
-local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
 local fFlagAXIaBDiscountPriceLine = require(parent.AvatarExperienceFlags).FFlagAXIaBDiscountPriceLine
+local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy or require(parent.AvatarExperienceFlags).FFlagAXIaBEnableShopContext
 local var1 = if fFlagSocialEnableProfileInspectAndBuy then require(avatarExperienceInspectAndBuy.Utils.getPriceStatusInShop) else nil
 
 return function(p1, p2, p3, p4)

@@ -7,6 +7,7 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local wrapTargetCageUVReferenceValuesModule = require(parent.WrapTargetCageUVReferenceValues)
 local createEditableInstancesForContextModule = require(parent.util.createEditableInstancesForContext)
 local getFFlagUGCValidateMigrateWrapAndMakeupModule = require(parent.flags.getFFlagUGCValidateMigrateWrapAndMakeup)
+local getFFlagUGCValidationAllowFullVaasModule = require(parent.flags.getFFlagUGCValidationAllowFullVaas)
 local t = {
 	Publish = true,
 	Backend = true,
@@ -24,16 +25,23 @@ return {
 	},
 	expectedFailures = {},
 	run = function(p1, p2)
-		-- upvalues: t (ref), t_1 (ref), createEditableInstancesForContextModule (ref), errorSourceStringsModule (ref), UGCValidationService (ref), wrapTargetCageUVReferenceValuesModule (ref), constantsModule (ref)
+		-- upvalues: getFFlagUGCValidationAllowFullVaasModule (ref), validationEnumsModule (ref), t (ref), t_1 (ref), createEditableInstancesForContextModule (ref), errorSourceStringsModule (ref), UGCValidationService (ref), wrapTargetCageUVReferenceValuesModule (ref), constantsModule (ref)
 		local rootInstance = p2.rootInstance
 		local wrapTextureTransfer = rootInstance:FindFirstChildOfClass("WrapTextureTransfer")
 		
 		if wrapTextureTransfer == nil then
 			error(string.format("WrapTextureTransfer child not found for %s", rootInstance.Name))
 		end
-		local source = p2.consumerConfig.source
-		local var1 = t[source] == true
-		local var2 = t_1[source] == true
+		local var1
+		local consumerConfig = p2.consumerConfig
+		
+		if getFFlagUGCValidationAllowFullVaasModule() and consumerConfig.isVaaS then
+			var1 = consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend
+			var1 = nil
+		else
+			var1 = t[consumerConfig.source] == true
+		end
+		local var2 = t_1[consumerConfig.source] == true
 		p1:setReportingInstance(wrapTextureTransfer)
 		local referenceCageMeshContent = wrapTextureTransfer.ReferenceCageMeshContent
 		local var3 = referenceCageMeshContent.Uri ~= nil and referenceCageMeshContent.Uri ~= ""

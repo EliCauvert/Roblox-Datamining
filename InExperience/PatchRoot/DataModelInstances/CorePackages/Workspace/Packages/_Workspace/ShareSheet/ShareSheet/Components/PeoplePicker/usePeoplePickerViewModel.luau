@@ -2,7 +2,8 @@
 local reactModule = require(parent.React)
 local _ = require(parent.AppChat.GetConversationListStore)
 local _ = require(script.Parent.PeoplePickerHeader.PeoplePickerHeaderContainer)
-local _ = require(script.Parent.PeoplePickerList.usePeoplePickerListViewModel)
+local _ = require(script.Parent.PeoplePickerList.PeoplePickerListContainer)
+local usePeoplePickerPaginationModule = require(script.Parent.usePeoplePickerPagination)
 local shareSheetPeoplePickerSearchDebounceMs = game:DefineFastInt("ShareSheetPeoplePickerSearchDebounceMs", 250)
 
 local function usePeoplePickerSearch()
@@ -42,8 +43,14 @@ local function usePeoplePickerSearch()
 end
 
 return function(p1)
-	-- upvalues: usePeoplePickerSearch (ref), reactModule (ref)
+	-- upvalues: usePeoplePickerSearch (ref), usePeoplePickerPaginationModule (ref), reactModule (ref)
 	local var1 = usePeoplePickerSearch()
+	local var2 = usePeoplePickerPaginationModule({
+		conversationCount = #p1.conversations,
+		isEligibilityLoading = p1.isEligibilityLoading,
+		isPeoplePickerDisplayed = p1.isPeoplePickerDisplayed,
+		listStatus = p1.listStatus
+	})
 	
 	return {
 		viewModel = {
@@ -60,8 +67,9 @@ return function(p1)
 				LayoutOrder = 1,
 				conversations = p1.conversations,
 				debouncedQuery = var1.debouncedQuery,
-				isLoading = p1.isLoading,
+				isLoading = var2.isLoading,
 				onConversationActivated = p1.onConversationActivated,
+				paginationProps = var2.paginationProps,
 				selectedConversationIds = p1.selectedConversationIds
 			}
 		}

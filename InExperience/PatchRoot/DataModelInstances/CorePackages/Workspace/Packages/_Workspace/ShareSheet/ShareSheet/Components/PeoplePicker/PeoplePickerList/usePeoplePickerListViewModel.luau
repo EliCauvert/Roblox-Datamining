@@ -128,9 +128,7 @@ return function(p8)
 	local var5 = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0)
 	local var6 = useConversationDisplayNames(p8.conversations, var5, useLocalization({ unknownUser = "Feature.Chat.Label.UnknownUser" }).unknownUser)
 	local displayNamesByConversationId = var6.displayNamesByConversationId
-	local t = {}
-	
-	for i, v in reactModule.useMemo(function()
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: filterConversationsByQueryModule (copy), p8 (ref), displayNamesByConversationId (ref), var6 (ref)
 		return filterConversationsByQueryModule(p8.conversations, p8.debouncedQuery, displayNamesByConversationId, var6.descriptionsByConversationId)
 	end, {
@@ -138,26 +136,34 @@ return function(p8)
 		var6.descriptionsByConversationId,
 		p8.conversations,
 		p8.debouncedQuery
-	}) do
-		local id = v.id
-		local participantUserIds, participantUserIds_1 = conversationUtilsModule.getParticipantUserIds(v, var5)
-		table.insert(t, {
-			description = var6.descriptionsByConversationId[id],
-			displayName = displayNamesByConversationId[id],
-			id = id,
-			isLoading = var6.loadingConversationIds[id] == true,
-			isSelected = p8.selectedConversationIds[id] == true,
-			primaryUserId = participantUserIds,
-			secondUserId = participantUserIds_1
-		})
-	end
-	local isLoading = p8.isLoading or var6.isLoading and #t == 0
+	})
+	local var8 = reactModule.useMemo(function()
+		-- upvalues: var7 (ref), conversationUtilsModule (copy), var5 (ref), var6 (ref), displayNamesByConversationId (ref), p8 (ref)
+		local list = table.create(#var7)
+		
+		for i, v in var7 do
+			local id = v.id
+			local participantUserIds, participantUserIds_1 = conversationUtilsModule.getParticipantUserIds(v, var5)
+			list[i] = {
+				description = var6.descriptionsByConversationId[id],
+				displayName = displayNamesByConversationId[id],
+				id = id,
+				isLoading = var6.loadingConversationIds[id] == true,
+				isSelected = p8.selectedConversationIds[id] == true,
+				primaryUserId = participantUserIds,
+				secondUserId = participantUserIds_1
+			}
+		end
+		return list
+	end, {
+		var6.descriptionsByConversationId, var6.loadingConversationIds,
+		displayNamesByConversationId, var5, p8.selectedConversationIds, var7
+	})
+	local isLoading = p8.isLoading or var6.isLoading and #var8 == 0
 	
 	return {
-		items = t,
-		LayoutOrder = p8.LayoutOrder,
-		onConversationActivated = p8.onConversationActivated,
-		shouldShowEmptyState = #t == 0 and not isLoading,
+		items = var8,
+		shouldShowEmptyState = #var8 == 0 and not isLoading,
 		skeletonCount = if isLoading then shareSheetConstantsModule.FIntShareSheetNumAvatarSkeletons else 0
 	}
 end

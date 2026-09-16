@@ -6,7 +6,7 @@ local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
 local buildDataBindingSourcesForTemplateModule = require(sduiCoreSystem.ClientBinding.buildDataBindingSourcesForTemplate)
 local buildAnalyticsContextForClientBindingModule = require(sduiCoreSystem.ClientBinding.buildAnalyticsContextForClientBinding)
 local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local _ = require(sduiCoreSystem.SduiComponentType)
+local sduiComponentTypeModule = require(sduiCoreSystem.SduiComponentType)
 local propResultCategory = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
 local protoVariableMapperModule = require(sduiCoreSystem.ClientBinding.ProtoVariableMapper)
 local sduiParseHelpersModule = require(sduiCoreSystem.SduiParseHelpers)
@@ -16,6 +16,7 @@ local fFlagSduiNestedComponentListProp = sharedFlagsModule.FFlagSduiNestedCompon
 local fFlagSduiImprovedErrorDimensions = sharedFlagsModule.FFlagSduiImprovedErrorDimensions
 local fFlagSduiInlineNestedComponentSchema = sharedFlagsModule.FFlagSduiInlineNestedComponentSchema
 local fFlagSduiDeferredListItems = sharedFlagsModule.FFlagSduiDeferredListItems
+local fFlagSduiExperimentalComponent = sharedFlagsModule.FFlagSduiExperimentalComponent
 
 local function buildProp(p1, p2, p3, p4, p5)
 	-- upvalues: fFlagSduiOneofPropSupport (ref), buildProp (ref), fFlagSduiImprovedErrorDimensions (ref)
@@ -140,11 +141,39 @@ local t = {
 	end
 }
 
+local function resolveComponentType(p11)
+	-- upvalues: fFlagSduiExperimentalComponent (ref), sduiComponentTypeModule (ref), protoVariableMapperModule (ref)
+	if fFlagSduiExperimentalComponent then
+		local var9 = nil
+		
+		if p11.experimental_type then
+			var9 = sduiComponentTypeModule[p11.experimental_type]
+		else
+			local componentType = p11.shared and p11.shared.component_type
+			
+			if componentType then
+				var9 = protoVariableMapperModule.mapUiComponentTypeToLua(componentType)
+			end
+		end
+		if not var9 then
+			error("Could not determine ui component type")
+		end
+		return var9
+	else
+		local componentType = p11.shared and p11.shared.component_type
+		
+		if not componentType then
+			error("Could not determine ui component type")
+		end
+		return protoVariableMapperModule.mapUiComponentTypeToLua(componentType)
+	end
+end
+
 return {
 	buildPropTable = buildPropTable,
 	buildProp = buildProp,
 	buildConfigForComponent = function(p11, p12, p13, p14, _, p15, p16)
-		-- upvalues: fFlagSduiImprovedErrorDimensions (ref), protoVariableMapperModule (ref), fFlagSduiInlineNestedComponentSchema (ref), signalsModule (ref), buildDataBindingSourcesForTemplateModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), fFlagSduiDeferredListItems (ref), t (ref), buildPropTable (ref), buildAnalyticsContextForClientBindingModule (ref), fFlagSduiNestedComponentListProp (ref), buildProp (ref), propResultCategory (ref)
+		-- upvalues: fFlagSduiImprovedErrorDimensions (ref), resolveComponentType (ref), fFlagSduiInlineNestedComponentSchema (ref), signalsModule (ref), buildDataBindingSourcesForTemplateModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), fFlagSduiDeferredListItems (ref), t (ref), buildPropTable (ref), buildAnalyticsContextForClientBindingModule (ref), fFlagSduiNestedComponentListProp (ref), buildProp (ref), propResultCategory (ref)
 		if not p11 or not next(p11) then
 			error("Attempt to buildConfigForComponent with nil template")
 		end
@@ -152,12 +181,7 @@ return {
 		local var9 = nil
 		
 		if fFlagSduiImprovedErrorDimensions then
-			local componentType = value.shared and value.shared.component_type
-			
-			if not componentType then
-				error("Could not determine ui component type")
-			end
-			var9 = protoVariableMapperModule.mapUiComponentTypeToLua(componentType)
+			var9 = resolveComponentType(value)
 			p13.currentComponentType = var9
 		end
 		local var10
@@ -187,12 +211,7 @@ return {
 			end)
 		end
 		if not fFlagSduiImprovedErrorDimensions then
-			local componentType = value.shared and value.shared.component_type
-			
-			if not componentType then
-				error("Could not determine ui component type")
-			end
-			var9 = protoVariableMapperModule.mapUiComponentTypeToLua(componentType)
+			var9 = resolveComponentType(value)
 		end
 		local p16
 		local _ = nil
@@ -257,7 +276,7 @@ return {
 			elseif var23 == propResultCategory.PropSignal then
 				p16.isComponentFilteredSignal = status
 			elseif var23 == propResultCategory.Literal then
-				function p17.isComponentFilteredSignal()
+				function p18.isComponentFilteredSignal()
 					-- upvalues: status (ref)
 					return { data = status }
 				end

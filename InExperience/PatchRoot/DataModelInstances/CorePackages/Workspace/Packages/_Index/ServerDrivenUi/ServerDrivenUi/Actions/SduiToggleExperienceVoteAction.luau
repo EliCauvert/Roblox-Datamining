@@ -13,14 +13,13 @@ local getSduiClientPageScope = sduiCoreSystemModule.getSduiClientPageScope
 local gameVote = discoveryAnalyticsModule.Events.gameVote
 local getSduiPageEntrySnackbarStore = require(parent.SduiSharedUtilities).getSduiPageEntrySnackbarStore
 local getFFlagEdpPlayerFeedbackEnabled = sharedFlagsModule.GetFFlagEdpPlayerFeedbackEnabled
-local fFlagLuaAppVoteOptimisticUpdateRaceFix = sharedFlagsModule.FFlagLuaAppVoteOptimisticUpdateRaceFix
 
 local function _(p1)
 	return if p1 == true then "UpVoted" elseif p1 == false then "DownVoted" else "NotVoted"
 end
 
 return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), game (ref), fFlagLuaAppVoteOptimisticUpdateRaceFix (ref), playersService (ref), gameVote (ref), getFFlagEdpPlayerFeedbackEnabled (ref), getSduiClientPageScope (ref), signalsModule (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref)
+	-- upvalues: sduiErrorType (ref), sduiActionType (ref), game (ref), playersService (ref), gameVote (ref), getFFlagEdpPlayerFeedbackEnabled (ref), getSduiClientPageScope (ref), signalsModule (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref)
 	local var1 = if p1 then p1.actionParams else nil
 	
 	if var1 == nil then
@@ -45,7 +44,7 @@ return function(p1, _, p2, _)
 	end
 	local ctx = var1.ctx or ""
 	local votesStore = game.getVotesStore(false)
-	local var2 = (if fFlagLuaAppVoteOptimisticUpdateRaceFix then votesStore.getUserVote(universeId) else votesStore.getAndFetchUserVote(universeId)).data(false)
+	local var2 = votesStore.getUserVote(universeId).data(false)
 	local var3 = if var2 then var2.userVote else nil
 	local var4 = if var3 == voteDirection then nil else voteDirection
 	local t = {

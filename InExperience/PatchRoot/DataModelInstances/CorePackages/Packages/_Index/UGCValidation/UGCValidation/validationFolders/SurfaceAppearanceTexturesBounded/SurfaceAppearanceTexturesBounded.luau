@@ -24,7 +24,7 @@ return {
 	fflag = getFFlagUGCValidateMigrateTextureTransparencyModule,
 	expectedFailures = {},
 	run = function(p1, p2)
-		-- upvalues: fetchAllDesiredDataModule (ref), getFFlagUGCValidateAllowEmissivesModule (ref), constantsInterfaceModule (ref), t (ref), UGCValidationService (ref), validationEnumsModule (ref), errorSourceStringsModule (ref)
+		-- upvalues: fetchAllDesiredDataModule (ref), validationEnumsModule (ref), getFFlagUGCValidateAllowEmissivesModule (ref), constantsInterfaceModule (ref), t (ref), UGCValidationService (ref), errorSourceStringsModule (ref)
 		local rootInstance = p2.rootInstance
 		local assetType = p2.uploadEnum.assetType
 		local meshTextures = p2.meshTextures
@@ -35,6 +35,7 @@ return {
 			
 			return
 		end
+		local var1 = consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend
 		local descendants = rootInstance:GetDescendants()
 		table.insert(descendants, rootInstance)
 		
@@ -52,26 +53,26 @@ return {
 							table.insert(list, "EmissiveMask")
 						end
 						for i_1, v_1 in list do
-							local var1 = name[v_1]
+							local var2 = name[v_1]
 							
-							if var1 and var1.editable then
-								local var2 = if assetType then constantsInterfaceModule.getTextureLimit(assetType, surfaceAppearance, v_1) else t[v_1]
+							if var2 and var2.editable then
+								local var3 = if assetType then constantsInterfaceModule.getTextureLimit(assetType, surfaceAppearance, v_1) else t[v_1]
 								local ok, status = pcall(function()
-									-- upvalues: UGCValidationService (copy), var1 (ref)
-									return UGCValidationService:GetEditableImageSize(var1.editable)
+									-- upvalues: UGCValidationService (copy), var2 (ref)
+									return UGCValidationService:GetEditableImageSize(var2.editable)
 								end)
 								
 								if not ok then
-									if consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend then
+									if var1 then
 										p1:fetchError(string.format("Failed to get texture size for '%s'. Make sure the texture exists and try again.", surfaceAppearance:GetFullName() .. "." .. v_1))
 									end
 									p1:fail(errorSourceStringsModule.Keys.TextureSize_FailedToLoad, { FullName = surfaceAppearance:GetFullName() .. "." .. v_1 }, surfaceAppearance)
-								elseif var2 < status.X or var2 < status.Y then
+								elseif var3 < status.X or var3 < status.Y then
 									p1:fail(errorSourceStringsModule.Keys.TextureSize_TooBig, {
 										Width = tostring(status.X),
 										Height = tostring(status.Y),
 										FullName = surfaceAppearance:GetFullName() .. "." .. v_1,
-										MaxSize = tostring(var2),
+										MaxSize = tostring(var3),
 										FieldName = v_1
 									}, surfaceAppearance)
 								end

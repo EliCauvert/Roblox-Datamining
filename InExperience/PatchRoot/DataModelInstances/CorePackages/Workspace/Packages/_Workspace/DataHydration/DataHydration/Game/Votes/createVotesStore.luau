@@ -22,13 +22,12 @@ local fFlagLuaAppDataHydrationOptimisticMutationLayer = sharedFlagsModule.FFlagL
 local reasonNotVoteable = votesStoreTypesModule.ReasonNotVoteable
 local fFlagLuaAppInExperienceDetailsPrompt = require(parent.SharedFlags).FFlagLuaAppInExperienceDetailsPrompt
 local fFlagLuaAppDataHydrationUpdateItem = sharedFlagsModule.FFlagLuaAppDataHydrationUpdateItem
-local fFlagLuaAppVoteOptimisticUpdateRaceFix = sharedFlagsModule.FFlagLuaAppVoteOptimisticUpdateRaceFix
 local getGameInfoStoreModule = require(dataHydration.Game.GameInfo.getGameInfoStore)
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local user_vote_cache_ttl_seconds = game:DefineFastInt("USER_VOTE_CACHE_TTL_SECONDS", 600)
 
 return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), dashModule (ref), fetchVotesModule (ref), fFlagLuaAppInExperienceDetailsPrompt (ref), votesUtilsModule (ref), user_vote_cache_ttl_seconds (ref), logResponseError (ref), fetchUserVoteModule (ref), votesStoreTypesModule (ref), discoveryEventErrorLogger (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), signalsModule (ref), fFlagLuaAppVoteOptimisticUpdateRaceFix (ref), cryoModule (ref), fFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes (ref), fFlagSduiExperienceDetailsSupport (ref), getGameInfoStoreModule (ref), requestUserVoteUpdateModule (ref), httpService (ref), reasonNotVoteable (ref), statusCodes (ref), fFlagLuaAppDataHydrationUpdateItem (ref)
+	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), dashModule (ref), fetchVotesModule (ref), fFlagLuaAppInExperienceDetailsPrompt (ref), votesUtilsModule (ref), user_vote_cache_ttl_seconds (ref), logResponseError (ref), fetchUserVoteModule (ref), votesStoreTypesModule (ref), discoveryEventErrorLogger (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), signalsModule (ref), cryoModule (ref), fFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes (ref), fFlagSduiExperienceDetailsSupport (ref), getGameInfoStoreModule (ref), requestUserVoteUpdateModule (ref), httpService (ref), reasonNotVoteable (ref), statusCodes (ref), fFlagLuaAppDataHydrationUpdateItem (ref)
 	local var1 = createDataCacheModule()
 	local var2 = createDataResolverModule({
 		cache = var1,
@@ -103,7 +102,7 @@ return function()
 		getAndFetchUserVote = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var4.getOptimisticAndFetchItem else var4.getAndFetchItem,
 		getAndFetchUserVotes = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var4.getOptimisticAndFetchItems else var4.getAndFetchItems,
 		updateUserVote = function(p1, p2)
-			-- upvalues: signalsModule (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var4 (ref), var3 (ref), var1 (ref), fFlagLuaAppVoteOptimisticUpdateRaceFix (copy), cryoModule (copy), fFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes (copy), votesUtilsModule (copy), fFlagSduiExperienceDetailsSupport (copy), getGameInfoStoreModule (copy), requestUserVoteUpdateModule (copy), httpService (copy), votesStoreTypesModule (copy), reasonNotVoteable (copy), statusCodes (copy), discoveryEventErrorLogger (copy), logResponseError (copy)
+			-- upvalues: signalsModule (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var4 (ref), var3 (ref), var1 (ref), cryoModule (copy), fFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes (copy), votesUtilsModule (copy), fFlagSduiExperienceDetailsSupport (copy), getGameInfoStoreModule (copy), requestUserVoteUpdateModule (copy), httpService (copy), votesStoreTypesModule (copy), reasonNotVoteable (copy), statusCodes (copy), discoveryEventErrorLogger (copy), logResponseError (copy)
 			local var5, var6
 			local var7, var8 = signalsModule.createSignal(nil)
 			local _ = nil
@@ -123,115 +122,104 @@ return function()
 			local item = var1.getItem(p1)
 			local var11 = item and item.data(false)
 			
-			if fFlagLuaAppVoteOptimisticUpdateRaceFix then
-				if not var6 and var9 and not var9.canVote then
-					var8({
-						type = "error",
-						reasonForNotVoteable = var9.reasonForNotVoteable
-					})
-					
-					return var7
-				elseif fFlagLuaAppDataHydrationOptimisticMutationLayer then
-					var4.setMutation(p1, { userVote = if p2 == nil then cryoModule.None else p2 })
-				else
-					var3.replaceItem(p1, {
-						canVote = if var9 then var9.canVote else nil,
-						reasonForNotVoteable = if var9 then var9.reasonForNotVoteable else nil,
-						userVote = p2
-					})
-				end
-				if var11 then
-					local var12, var13
-					local _ = nil
-					local _ = nil
-					
-					if fFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes then
-						var12 = (if p2 == true then 1 else 0) - (if var10 == true then 1 else 0)
-						var13 = (if p2 == false then 1 else 0) - (if var10 == false then 1 else 0)
-					else
-						var12 = if p2 == true then 1 else 0
-						var13 = if p2 == false then 1 else 0
-					end
-					local var14 = var11.upVotes + var12
-					local var15 = var11.downVotes + var13
-					
-					if fFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes then
-						var14 = math.max(0, var14)
-						var15 = math.max(0, var15)
-					end
-					var1.updateItem(p1, {
-						upVotes = var14,
-						downVotes = var15,
-						rating = votesUtilsModule.calculateRating(var14, var15)
-					})
-				end
-				local var16 = if fFlagSduiExperienceDetailsSupport then getGameInfoStoreModule(false).applyVoteChange(p1, var10, p2) else nil
-				requestUserVoteUpdateModule(p1, p2):andThen(function(_)
-					-- upvalues: fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var4 (copy), p1 (ref), var8 (ref), p2 (ref)
-					if fFlagLuaAppDataHydrationOptimisticMutationLayer then
-						var4.commitMutation(p1)
-					end
-					var8({ type = "success", userVote = p2 })
-				end):catch(function(p3)
-					-- upvalues: fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var4 (copy), p1 (ref), var9 (ref), var3 (copy), var10 (ref), var11 (ref), var1 (copy), fFlagSduiExperienceDetailsSupport (copy), var16 (write), getGameInfoStoreModule (copy), httpService (copy), votesStoreTypesModule (copy), reasonNotVoteable (copy), statusCodes (copy), var8 (ref), discoveryEventErrorLogger (copy), logResponseError (copy)
-					if fFlagLuaAppDataHydrationOptimisticMutationLayer then
-						var4.clearMutation(p1)
-					else
-						var3.replaceItem(p1, {
-							canVote = if var9 then var9.canVote else nil,
-							reasonForNotVoteable = if var9 then var9.reasonForNotVoteable else nil,
-							userVote = var10
-						})
-					end
-					if var11 then
-						var1.updateItem(p1, var11)
-					end
-					if fFlagSduiExperienceDetailsSupport and var16 then
-						getGameInfoStoreModule(false).updateGameInfo(p1, var16)
-					end
-					local var17 = if type(p3) == "table" and p3.StatusCode then p3.StatusCode else nil
-					local floodCheckThresholdMet = nil
-					
-					if var17 then
-						local ok, status = pcall(function()
-							-- upvalues: httpService (copy), p3 (ref)
-							return httpService:JSONDecode(p3.Body)
-						end)
-						
-						if ok and status and status.errors then
-							for i, v in ipairs(status.errors) do
-								if v.code == votesStoreTypesModule.PLAY_GAME_ERROR_CODE then
-									floodCheckThresholdMet = reasonNotVoteable.PlayGame
-								end
-							end
-						end
-						if var17 == statusCodes.TOO_MANY_REQUESTS then
-							floodCheckThresholdMet = reasonNotVoteable.FloodCheckThresholdMet
-						end
-					end
-					var8({
-						type = "error",
-						reasonForNotVoteable = floodCheckThresholdMet
-					})
-					discoveryEventErrorLogger.reportError("updateUserVote", "Error updating user vote", {
-						universeId = p1,
-						statusCode = var17,
-						statusMessage = if type(p3) == "table" and p3.StatusMessage then p3.StatusMessage else nil
-					})
-					logResponseError("v1/games/votes/user-votes", { StatusCode = var17 })
-				end)
-				
-				return var7
-			elseif var6 then
-				var4.fetchItem(p1)
-			elseif var9 and not var9.canVote then
+			if not var6 and var9 and not var9.canVote then
 				var8({
 					type = "error",
 					reasonForNotVoteable = var9.reasonForNotVoteable
 				})
 				
 				return var7
+			elseif fFlagLuaAppDataHydrationOptimisticMutationLayer then
+				var4.setMutation(p1, { userVote = if p2 == nil then cryoModule.None else p2 })
+			else
+				var3.replaceItem(p1, {
+					canVote = if var9 then var9.canVote else nil,
+					reasonForNotVoteable = if var9 then var9.reasonForNotVoteable else nil,
+					userVote = p2
+				})
 			end
+			if var11 then
+				local var12, var13
+				local _ = nil
+				local _ = nil
+				
+				if fFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes then
+					var12 = (if p2 == true then 1 else 0) - (if var10 == true then 1 else 0)
+					var13 = (if p2 == false then 1 else 0) - (if var10 == false then 1 else 0)
+				else
+					var12 = if p2 == true then 1 else 0
+					var13 = if p2 == false then 1 else 0
+				end
+				local var14 = var11.upVotes + var12
+				local var15 = var11.downVotes + var13
+				
+				if fFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes then
+					var14 = math.max(0, var14)
+					var15 = math.max(0, var15)
+				end
+				var1.updateItem(p1, {
+					upVotes = var14,
+					downVotes = var15,
+					rating = votesUtilsModule.calculateRating(var14, var15)
+				})
+			end
+			local var16 = if fFlagSduiExperienceDetailsSupport then getGameInfoStoreModule(false).applyVoteChange(p1, var10, p2) else nil
+			requestUserVoteUpdateModule(p1, p2):andThen(function(_)
+				-- upvalues: fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var4 (copy), p1 (ref), var8 (ref), p2 (ref)
+				if fFlagLuaAppDataHydrationOptimisticMutationLayer then
+					var4.commitMutation(p1)
+				end
+				var8({ type = "success", userVote = p2 })
+			end):catch(function(p3)
+				-- upvalues: fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var4 (copy), p1 (ref), var9 (ref), var3 (copy), var10 (ref), var11 (ref), var1 (copy), fFlagSduiExperienceDetailsSupport (copy), var16 (write), getGameInfoStoreModule (copy), httpService (copy), votesStoreTypesModule (copy), reasonNotVoteable (copy), statusCodes (copy), var8 (ref), discoveryEventErrorLogger (copy), logResponseError (copy)
+				if fFlagLuaAppDataHydrationOptimisticMutationLayer then
+					var4.clearMutation(p1)
+				else
+					var3.replaceItem(p1, {
+						canVote = if var9 then var9.canVote else nil,
+						reasonForNotVoteable = if var9 then var9.reasonForNotVoteable else nil,
+						userVote = var10
+					})
+				end
+				if var11 then
+					var1.updateItem(p1, var11)
+				end
+				if fFlagSduiExperienceDetailsSupport and var16 then
+					getGameInfoStoreModule(false).updateGameInfo(p1, var16)
+				end
+				local var17 = if type(p3) == "table" and p3.StatusCode then p3.StatusCode else nil
+				local floodCheckThresholdMet = nil
+				
+				if var17 then
+					local ok, status = pcall(function()
+						-- upvalues: httpService (copy), p3 (ref)
+						return httpService:JSONDecode(p3.Body)
+					end)
+					
+					if ok and status and status.errors then
+						for i, v in ipairs(status.errors) do
+							if v.code == votesStoreTypesModule.PLAY_GAME_ERROR_CODE then
+								floodCheckThresholdMet = reasonNotVoteable.PlayGame
+							end
+						end
+					end
+					if var17 == statusCodes.TOO_MANY_REQUESTS then
+						floodCheckThresholdMet = reasonNotVoteable.FloodCheckThresholdMet
+					end
+				end
+				var8({
+					type = "error",
+					reasonForNotVoteable = floodCheckThresholdMet
+				})
+				discoveryEventErrorLogger.reportError("updateUserVote", "Error updating user vote", {
+					universeId = p1,
+					statusCode = var17,
+					statusMessage = if type(p3) == "table" and p3.StatusMessage then p3.StatusMessage else nil
+				})
+				logResponseError("v1/games/votes/user-votes", { StatusCode = var17 })
+			end)
+			
+			return var7
 		end,
 		updateVoteItem = if fFlagLuaAppDataHydrationUpdateItem then function(p3, p4, p5)
 			-- upvalues: var1 (ref), votesUtilsModule (copy)

@@ -9,7 +9,6 @@ local placeVersionHistoryModule = require(parent.DataHydration.PlaceVersionHisto
 local _ = require(buildExperience.Chat.chatTypes)
 local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
 local fFlagBuildExperienceForceRefreshVersionHistoryModule = require(buildExperience.Flags.FFlagBuildExperienceForceRefreshVersionHistory)
-local fFlagisPublishOnBuildRevertModule = require(buildExperience.Flags.FFlagisPublishOnBuildRevert)
 local feedbackActionModule = require(script.Parent.FeedbackAction)
 local _ = require(script.Parent.UserFeedback)
 local getAgentRollbackRequestStoreModule = require(buildExperience.Stores.GetAgentRollbackRequestStore)
@@ -225,7 +224,7 @@ return {
 		end)
 	end else nil,
 	rollbackPublishedVersion = function(p3, p4)
-		-- upvalues: debug (ref), placeVersionHistoryModule (ref), getVersionNote (ref), httpService (ref), rollbackPlaceWithRetryModule (ref), fFlagEnableTeamTestLua (ref), fFlagisPublishOnBuildRevertModule (ref)
+		-- upvalues: debug (ref), placeVersionHistoryModule (ref), getVersionNote (ref), httpService (ref), rollbackPlaceWithRetryModule (ref), fFlagEnableTeamTestLua (ref)
 		local rollbackTargetVersionNumber
 		local universeId = p3.universeId
 		local placeId = p3.placeId
@@ -270,7 +269,7 @@ return {
 			
 			return nil
 		end):andThen(function(p5)
-			-- upvalues: debug (copy), placeId (ref), rollbackTargetVersionNumber (ref), rollbackPlaceWithRetryModule (copy), fFlagEnableTeamTestLua (copy), fFlagisPublishOnBuildRevertModule (copy)
+			-- upvalues: debug (copy), placeId (ref), rollbackTargetVersionNumber (ref), rollbackPlaceWithRetryModule (copy), fFlagEnableTeamTestLua (copy)
 			if p5 == nil then
 				debug.log("info", "agent feedback revert note copy skipped", {
 					reason = "source_notes_not_found",
@@ -281,7 +280,7 @@ return {
 			return rollbackPlaceWithRetryModule(placeId, rollbackTargetVersionNumber, {
 				debugSource = "agent feedback revert",
 				note = p5,
-				published = if fFlagEnableTeamTestLua then false else fFlagisPublishOnBuildRevertModule
+				published = if fFlagEnableTeamTestLua then false else true
 			})
 		end):andThen(function()
 			-- upvalues: p4 (ref)

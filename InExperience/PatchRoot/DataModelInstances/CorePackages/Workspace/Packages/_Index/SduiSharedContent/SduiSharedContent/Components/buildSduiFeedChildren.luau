@@ -2,6 +2,7 @@
 local parent = sduiSharedContent.Parent
 local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
+local discoveryTypesModule = require(parent.DiscoveryTypes)
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local findAnalyticsField = sduiCoreSystemModule.findAnalyticsField
 local getSduiComponentWrapper = sduiCoreSystemModule.getSduiComponentWrapper
@@ -11,12 +12,15 @@ local sduiFeedItemModule = require(sduiSharedContent.Components.SduiFeedItem)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiPoolBackedFeed = sharedFlagsModule.FFlagSduiPoolBackedFeed
 local fFlagSduiCollectionGridRevealRows = sharedFlagsModule.FFlagSduiCollectionGridRevealRows
+local fFlagAppPageShellScrollToTopFocus = sharedFlagsModule.FFlagAppPageShellScrollToTopFocus
+local fFlagLuaAppsDefaultSelection = sharedFlagsModule.FFlagLuaAppsDefaultSelection
 local sduiFeedIndexInExtraLocalProps = game:DefineFastFlag("SduiFeedIndexInExtraLocalProps", false)
 local sduiFeedDebugNameWithImpressionsTag = game:DefineFastFlag("SduiFeedDebugNameWithImpressionsTag", false)
+local SORT_INDEX_SELECTION_ORDER_MULTIPLIER = discoveryTypesModule.Constants.SORT_INDEX_SELECTION_ORDER_MULTIPLIER
 local t = {}
 
 return function(p1)
-	-- upvalues: findAnalyticsField (ref), t (ref), sduiBuilder (ref), sduiErrors (ref), getSduiComponentWrapper (ref), fFlagSduiPoolBackedFeed (ref), cryoModule (ref), fFlagSduiCollectionGridRevealRows (ref), sduiFeedIndexInExtraLocalProps (ref), reactModule (ref), sduiFeedDebugNameWithImpressionsTag (ref), sduiFeedItemModule (ref)
+	-- upvalues: findAnalyticsField (ref), t (ref), sduiBuilder (ref), sduiErrors (ref), getSduiComponentWrapper (ref), fFlagSduiPoolBackedFeed (ref), cryoModule (ref), fFlagSduiCollectionGridRevealRows (ref), sduiFeedIndexInExtraLocalProps (ref), fFlagAppPageShellScrollToTopFocus (ref), SORT_INDEX_SELECTION_ORDER_MULTIPLIER (ref), reactModule (ref), sduiFeedDebugNameWithImpressionsTag (ref), sduiFeedItemModule (ref), fFlagLuaAppsDefaultSelection (ref)
 	local t_1 = {}
 	local sduiContext = p1.sduiContext
 	local startRow = p1.extraLocalProps and p1.extraLocalProps.startRow
@@ -59,6 +63,11 @@ return function(p1)
 		if sduiFeedIndexInExtraLocalProps then
 			extraLocalProps = cryoModule.Dictionary.join(extraLocalProps, { index = i })
 		end
+		if fFlagAppPageShellScrollToTopFocus and p1.selectionOrderBase ~= nil then
+			extraLocalProps = cryoModule.Dictionary.join(extraLocalProps, {
+				selectionOrderBase = p1.selectionOrderBase + i * SORT_INDEX_SELECTION_ORDER_MULTIPLIER
+			})
+		end
 		local createElement = reactModule.createElement
 		createElement = createElement(var2, {
 			debugName = if sduiFeedDebugNameWithImpressionsTag and p1.impressionsTag ~= nil and p1.impressionsTag ~= "" then `{componentType_1}_{p1.impressionsTag}` else componentType_1,
@@ -74,7 +83,8 @@ return function(p1)
 			index = if p1.negateImpressionIndex then -i else i,
 			impressionsTag = p1.impressionsTag,
 			selectionBehaviorLeft = p1.selectionBehaviorLeft,
-			selectionBehaviorRight = p1.selectionBehaviorRight
+			selectionBehaviorRight = p1.selectionBehaviorRight,
+			defaultFocusRef = if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection and i == 1 then p1.defaultFocusRef else nil
 		}, { Item = createElement })
 	end
 	return t_1

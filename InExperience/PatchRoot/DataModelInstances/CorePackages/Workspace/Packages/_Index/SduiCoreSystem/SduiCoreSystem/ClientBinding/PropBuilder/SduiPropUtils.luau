@@ -27,7 +27,6 @@ local fFlagSduiInlineNestedComponentSchema = require(parent.SharedFlags).FFlagSd
 local fFlagSduiIsEmptyConditions = require(parent.SharedFlags).FFlagSduiIsEmptyConditions
 local fFlagSduiDismissPromptPageScope = require(parent.SharedFlags).FFlagSduiDismissPromptPageScope
 local fFlagSduiHydrationFetchIfMissing = require(parent.SharedFlags).FFlagSduiHydrationFetchIfMissing
-local fFlagSduiClientPageScope = require(parent.SharedFlags).FFlagSduiClientPageScope
 local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAppSduiColorPropMigration
 local fFlagSduiFocusNavActionsStructured = require(parent.SharedFlags).FFlagSduiFocusNavActionsStructured
 local fFlagSduiFormatStringPercentSafeGsubModule = require(sduiCoreSystem.FFlagSduiFormatStringPercentSafeGsub)
@@ -63,7 +62,7 @@ local function resolveHydrationBinding(p1, p2, p3, p4)
 end
 
 local function resolveBindingPathValue(p5, p6, p7, p8, p9, p10, p11)
-	-- upvalues: tryGetPathFromDataModule (ref), sduiDataBinderModule (ref), fFlagSduiClientPageScope (ref), resolveHydrationBinding (ref)
+	-- upvalues: tryGetPathFromDataModule (ref), sduiDataBinderModule (ref), resolveHydrationBinding (ref)
 	local var3, var4 = tryGetPathFromDataModule(p8(p5), p6)
 	
 	if var3 and var4 ~= nil then
@@ -72,7 +71,7 @@ local function resolveBindingPathValue(p5, p6, p7, p8, p9, p10, p11)
 	local var5 = p6 and p6[1]
 	
 	if sduiDataBinderModule.isClientContentType(var5) then
-		local fieldValueForClientContentType = sduiDataBinderModule.getFieldValueForClientContentType(var5, p6, p5, if fFlagSduiClientPageScope then p11 else nil)
+		local fieldValueForClientContentType = sduiDataBinderModule.getFieldValueForClientContentType(var5, p6, p5, p11)
 		
 		return if p9 and fieldValueForClientContentType ~= nil then p9(fieldValueForClientContentType, p5) else fieldValueForClientContentType
 	end
@@ -89,7 +88,7 @@ local function generateStaticPropValue(p5, p6)
 end
 
 local function generateDynamicBindingPropValue(p5, p6, p7, p8, p9, p10)
-	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), splitDottedPathModule (ref), signalsModule (ref), resolveBindingPathValue (ref), fFlagSduiClientPageScope (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), frozen (ref), tutilsModule (ref)
+	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), splitDottedPathModule (ref), signalsModule (ref), resolveBindingPathValue (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), frozen (ref), tutilsModule (ref)
 	local currentComponentType = nil
 	local currentParserName = nil
 	
@@ -103,10 +102,10 @@ local function generateDynamicBindingPropValue(p5, p6, p7, p8, p9, p10)
 		error(`Invalid bindingPath: {p5}`)
 	end
 	return signalsModule.createComputed(function(p11)
-		-- upvalues: resolveBindingPathValue (copy), var3 (ref), p6 (ref), p8 (ref), p9 (ref), p10 (ref), fFlagSduiClientPageScope (copy), p7 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), p5 (ref), sduiParseHelpersModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), frozen (copy)
+		-- upvalues: resolveBindingPathValue (copy), var3 (ref), p6 (ref), p8 (ref), p9 (ref), p10 (ref), p7 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), p5 (ref), sduiParseHelpersModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), frozen (copy)
 		local ok, status, var4 = pcall(function()
-			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var3 (copy), p6 (copy), p8 (copy), p9 (copy), p10 (copy), fFlagSduiClientPageScope (copy), p7 (copy)
-			local var5, var6 = resolveBindingPathValue(p11, var3, p6, p8, p9, p10, if fFlagSduiClientPageScope then p7 else nil)
+			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var3 (copy), p6 (copy), p8 (copy), p9 (copy), p10 (copy), p7 (copy)
+			local var5, var6 = resolveBindingPathValue(p11, var3, p6, p8, p9, p10, p7)
 			
 			return var5, var6
 		end)
@@ -382,7 +381,7 @@ if fFlagSduiDismissPromptPageScope then
 	end
 end
 local function evaluateCondition(p11, p12, p13, p14, p15)
-	-- upvalues: splitDottedPathModule (ref), resolveBindingPathValue (ref), fFlagSduiClientPageScope (ref), dataStatus (ref), validateNumbers (ref), isSame (ref), fFlagSduiIsEmptyConditions (ref), fFlagSduiDismissPromptPageScope (ref), var10 (write), evaluateCondition (ref)
+	-- upvalues: splitDottedPathModule (ref), resolveBindingPathValue (ref), dataStatus (ref), validateNumbers (ref), isSame (ref), fFlagSduiIsEmptyConditions (ref), fFlagSduiDismissPromptPageScope (ref), var10 (write), evaluateCondition (ref)
 	if p12 == nil then
 		return true
 	end
@@ -397,11 +396,11 @@ local function evaluateCondition(p11, p12, p13, p14, p15)
 	end
 	local var11, var12
 	local function getFieldObject(p16)
-		-- upvalues: splitDottedPathModule (copy), resolveBindingPathValue (copy), p11 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
+		-- upvalues: splitDottedPathModule (copy), resolveBindingPathValue (copy), p11 (ref), p13 (ref), p15 (ref), p14 (ref)
 		local var13 = splitDottedPathModule(p16)
 		local ok, status, var14 = pcall(function()
-			-- upvalues: resolveBindingPathValue (copy), p11 (copy), var13 (ref), p13 (copy), p15 (copy), fFlagSduiClientPageScope (copy), p14 (copy)
-			return resolveBindingPathValue(p11, var13, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
+			-- upvalues: resolveBindingPathValue (copy), p11 (copy), var13 (ref), p13 (copy), p15 (copy), p14 (copy)
+			return resolveBindingPathValue(p11, var13, p13, p15, nil, true, p14)
 		end)
 		
 		if ok then
@@ -414,8 +413,8 @@ local function evaluateCondition(p11, p12, p13, p14, p15)
 		local var13, var14
 		local var15 = splitDottedPathModule(value.field)
 		local ok, status, var16 = pcall(function()
-			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var15 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
-			return resolveBindingPathValue(p11, var15, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
+			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var15 (ref), p13 (ref), p15 (ref), p14 (ref)
+			return resolveBindingPathValue(p11, var15, p13, p15, nil, true, p14)
 		end)
 		
 		if ok then
@@ -465,8 +464,8 @@ local function evaluateCondition(p11, p12, p13, p14, p15)
 		local var25, var26
 		local var27 = splitDottedPathModule(value.field)
 		local ok, status, var28 = pcall(function()
-			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var27 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
-			return resolveBindingPathValue(p11, var27, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
+			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var27 (ref), p13 (ref), p15 (ref), p14 (ref)
+			return resolveBindingPathValue(p11, var27, p13, p15, nil, true, p14)
 		end)
 		
 		if ok then
@@ -484,8 +483,8 @@ local function evaluateCondition(p11, p12, p13, p14, p15)
 		local var29, var30
 		local var31 = splitDottedPathModule(value.field)
 		local ok, status, var32 = pcall(function()
-			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var31 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
-			return resolveBindingPathValue(p11, var31, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
+			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var31 (ref), p13 (ref), p15 (ref), p14 (ref)
+			return resolveBindingPathValue(p11, var31, p13, p15, nil, true, p14)
 		end)
 		
 		if ok then
@@ -503,8 +502,8 @@ local function evaluateCondition(p11, p12, p13, p14, p15)
 		local var33, var34
 		local var35 = splitDottedPathModule(value.field)
 		local ok, status, var36 = pcall(function()
-			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var35 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
-			return resolveBindingPathValue(p11, var35, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
+			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var35 (ref), p13 (ref), p15 (ref), p14 (ref)
+			return resolveBindingPathValue(p11, var35, p13, p15, nil, true, p14)
 		end)
 		
 		if ok then
@@ -522,8 +521,8 @@ local function evaluateCondition(p11, p12, p13, p14, p15)
 		local var37, var38
 		local var39 = splitDottedPathModule(value.field)
 		local ok, status, var40 = pcall(function()
-			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var39 (ref), p13 (ref), p15 (ref), fFlagSduiClientPageScope (copy), p14 (ref)
-			return resolveBindingPathValue(p11, var39, p13, p15, nil, true, if fFlagSduiClientPageScope then p14 else nil)
+			-- upvalues: resolveBindingPathValue (copy), p11 (ref), var39 (ref), p13 (ref), p15 (ref), p14 (ref)
+			return resolveBindingPathValue(p11, var39, p13, p15, nil, true, p14)
 		end)
 		
 		if ok then
@@ -722,8 +721,8 @@ return {
 	resolveBindingPathValue = resolveBindingPathValue,
 	resolveTablePropValue = resolveTablePropValue,
 	resolveSourceArray = function(p25, p26, p27, p28, p29, p30)
-		-- upvalues: splitDottedPathModule (ref), resolveBindingPathValue (ref), fFlagSduiClientPageScope (ref)
-		return if p25 == "binding_path" then resolveBindingPathValue(p27, splitDottedPathModule(p26), p28, p29, nil, nil, if fFlagSduiClientPageScope then p30 else nil) elseif p25 == "literal" then p26 and p26.items else nil
+		-- upvalues: splitDottedPathModule (ref), resolveBindingPathValue (ref)
+		return if p25 == "binding_path" then resolveBindingPathValue(p27, splitDottedPathModule(p26), p28, p29, nil, nil, p30) elseif p25 == "literal" then p26 and p26.items else nil
 	end,
 	resolveFieldMap = function(p25, p26, p27, p28, p29, p30, p31)
 		-- upvalues: resolveTablePropValue (ref)

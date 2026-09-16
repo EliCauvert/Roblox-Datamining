@@ -10,10 +10,12 @@ local recreateSceneFromEditablesModule = require(parent.util.RecreateSceneFromEd
 local stripMeshFromGltfModule = require(parent.util.stripMeshFromGltf)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
+local resetPhysicsDataModule = require(parent.util.resetPhysicsData)
 local getFFlagDebugAllowHRDUploadOnBundleBackendModule = require(parent.flags.getFFlagDebugAllowHRDUploadOnBundleBackend)
 local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.getFFlagUGCValidationAnimationPackSupport)
 local getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule = require(parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
 local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
+local getFFlagUGCValidationAllowFullVaasModule = require(parent.flags.getFFlagUGCValidationAllowFullVaas)
 local getFFlagDebugUGCDisableAssetQualityChecksModule = require(parent.flags.getFFlagDebugUGCDisableAssetQualityChecks)
 local getEngineFeatureEngineUGCValidateEmoteAnimationExportModule = require(parent.flags.getEngineFeatureEngineUGCValidateEmoteAnimationExport)
 local httpService = game:GetService("HttpService")
@@ -28,7 +30,7 @@ local t = {
 	links = "https://create.roblox.com/docs/art/validation-errors",
 	backends = { "EventIngest" },
 	throttlingPercentage = game:GetFastInt("FullValidationTelemetryThrottleHundrethsPercent"),
-	lastUpdated = { 25, 11, 18 }
+	lastUpdated = { 26, 9, 4 }
 }
 local getFFlagDebugUGCValidationPrintNewStructureResultsModule = require(parent.flags.getFFlagDebugUGCValidationPrintNewStructureResults)
 local getFIntUGCValidationFetchQualityMaxRetryModule = require(parent.flags.getFIntUGCValidationFetchQualityMaxRetry)
@@ -94,7 +96,7 @@ local function initRunVariables(p1, p2)
 end
 
 local function fetchQualityResults(p3, p4)
-	-- upvalues: assetQualityService (ref), assetQualityFetchStatus (ref), recreateSceneFromEditablesModule (ref), getEngineFeatureEngineUGCValidateEmoteAnimationExportModule (ref), validationEnumsModule (ref), stripMeshFromGltfModule (ref), getFIntUGCValidationFetchQualityMaxRetryModule (ref), httpService (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref), fetchAllDesiredDataModule (ref)
+	-- upvalues: assetQualityService (ref), assetQualityFetchStatus (ref), recreateSceneFromEditablesModule (ref), getEngineFeatureEngineUGCValidateEmoteAnimationExportModule (ref), validationEnumsModule (ref), stripMeshFromGltfModule (ref), getFIntUGCValidationFetchQualityMaxRetryModule (ref), getFFlagUGCValidationAllowFullVaasModule (ref), httpService (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref), fetchAllDesiredDataModule (ref)
 	if not assetQualityService then
 		p3.aqsFetchMetrics.fetchStatus = assetQualityFetchStatus.assetQualityFetchFailure
 		p3.aqsFetchMetrics.fetchFailureReason = "Not enabled"
@@ -120,12 +122,21 @@ local function fetchQualityResults(p3, p4)
 			if var3 then
 				for i = 1, 1 + getFIntUGCValidationFetchQualityMaxRetryModule() do
 					local ok, status = pcall(function()
-						-- upvalues: p3 (ref), i (ref), assetQualityService (copy), p4 (ref), var5 (write), httpService (copy)
+						-- upvalues: p3 (ref), i (ref), getFFlagUGCValidationAllowFullVaasModule (copy), assetQualityService (copy), p4 (ref), var5 (write), httpService (copy)
+						local aqFetchData, var7
 						p3.aqsFetchMetrics.fetchAttemptCount = i
-						local var7 = if p3.consumerConfig.aqFetchStage == "jobId" then assetQualityService:FetchAssetQualitySummaryFromJobIdAsync(p3.consumerConfig.aqFetchData, p4) else assetQualityService:FetchAssetQualitySummaryFromGltfAsync(var5, p4)
-						local var8 = 1000 * (os.clock() - os.clock())
+						local processTime = os.clock()
+						local _ = nil
+						
+						if p3.consumerConfig.aqFetchStage == "jobId" then
+							aqFetchData = p3.consumerConfig.aqFetchData
+							var7 = if getFFlagUGCValidationAllowFullVaasModule() and aqFetchData ~= nil and aqFetchData ~= "" then assetQualityService:FetchAssetQualitySummaryFromJobIdV2Async(aqFetchData, p4) else assetQualityService:FetchAssetQualitySummaryFromJobIdAsync(aqFetchData, p4)
+						else
+							var7 = assetQualityService:FetchAssetQualitySummaryFromGltfAsync(var5, p4)
+						end
+						aqFetchData = 1000 * (os.clock() - processTime)
 						p3.aqsFetchMetrics.visualizationUrl = var7.visualizationUrl
-						p3.aqsFetchMetrics.fetchTimeMs = var8
+						p3.aqsFetchMetrics.fetchTimeMs = aqFetchData
 						p3.aqsFetchMetrics.aqJobId = var7.aqJobId
 						p3.aqsSummaryData = httpService:JSONDecode(var7.rawJson)
 					end)
@@ -213,30 +224,34 @@ local function _(p8)
 end
 
 local function reportFullResult(p8, p9, p10)
-	-- upvalues: assetQualityFetchStatus (ref), rbxAnalyticsService (ref), telemetryService (ref), t (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref)
+	-- upvalues: assetQualityFetchStatus (ref), rbxAnalyticsService (ref), getFFlagUGCValidationAllowFullVaasModule (ref), telemetryService (ref), t (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref)
 	local var11 = p9.aqsFetchMetrics.fetchStatus ~= assetQualityFetchStatus.assetQualityFetchNA
-	telemetryService:LogEvent(t, {
-		customFields = {
-			validationJobId = p9.jobId,
-			bundleJobId = p9.consumerConfig.telemetryBundleId,
-			rootInstanceId = p9.consumerConfig.telemetryRootId,
-			studioSid = rbxAnalyticsService:GetSessionId(),
-			clientId = rbxAnalyticsService:GetClientId(),
-			placeId = game.PlaceId,
-			validationSource = p9.consumerConfig.source,
-			assetType = if p9.uploadEnum.assetType then p9.uploadEnum.assetType.Value else 0,
-			bundleType = if p9.uploadEnum.bundleType then p9.uploadEnum.bundleType.Value else 0,
-			numFailures = p8.numFailures,
-			passed = p8.pass,
-			durationMs = p10,
-			uploadCategory = p9.uploadCategory,
-			aqFetchStatus = p9.aqsFetchMetrics.fetchStatus,
-			aqFetchAttemptCount = if var11 then p9.aqsFetchMetrics.fetchAttemptCount else 0,
-			aqFetchTimeMs = if var11 then p9.aqsFetchMetrics.fetchTimeMs else 0,
-			aqFetchFailureReason = if var11 then p9.aqsFetchMetrics.fetchFailureReason else "",
-			aqJobId = p9.aqsFetchMetrics.aqJobId or ""
-		}
-	})
+	local t_1 = {
+		validationJobId = p9.jobId,
+		bundleJobId = p9.consumerConfig.telemetryBundleId,
+		rootInstanceId = p9.consumerConfig.telemetryRootId,
+		studioSid = rbxAnalyticsService:GetSessionId(),
+		clientId = rbxAnalyticsService:GetClientId(),
+		placeId = game.PlaceId,
+		validationSource = p9.consumerConfig.source,
+		assetType = if p9.uploadEnum.assetType then p9.uploadEnum.assetType.Value else 0,
+		bundleType = if p9.uploadEnum.bundleType then p9.uploadEnum.bundleType.Value else 0,
+		numFailures = p8.numFailures,
+		passed = p8.pass,
+		durationMs = p10,
+		uploadCategory = p9.uploadCategory,
+		aqFetchStatus = p9.aqsFetchMetrics.fetchStatus,
+		aqFetchAttemptCount = if var11 then p9.aqsFetchMetrics.fetchAttemptCount else 0,
+		aqFetchTimeMs = if var11 then p9.aqsFetchMetrics.fetchTimeMs else 0,
+		aqFetchFailureReason = if var11 then p9.aqsFetchMetrics.fetchFailureReason else "",
+		aqJobId = p9.aqsFetchMetrics.aqJobId or ""
+	}
+	
+	if getFFlagUGCValidationAllowFullVaasModule() then
+		t_1.isVaas = p9.consumerConfig.isVaaS or false
+		t_1.aqFetchStage = p9.consumerConfig.aqFetchStage
+	end
+	telemetryService:LogEvent(t, { customFields = t_1 })
 	
 	if getFFlagDebugUGCValidationPrintNewStructureResultsModule() then
 		local uploadEnum = p9.uploadEnum
@@ -280,7 +295,7 @@ local function updateResultData(p11, p12, p13, _, p14)
 end
 
 local function createConsumerConfigWithDefaults(p15)
-	-- upvalues: getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), t_4 (ref)
+	-- upvalues: getFFlagUGCValidationAllowFullVaasModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), t_4 (ref), validationEnumsModule (ref)
 	local cloned = table.clone(p15)
 	
 	if cloned.enforceR15FolderStructure == nil then
@@ -296,10 +311,19 @@ local function createConsumerConfigWithDefaults(p15)
 	cloned.preloadedHsrAssets = cloned.preloadedHsrAssets or {}
 	cloned.skipModules = cloned.skipModules or {}
 	cloned.skipAssetQualityChecks = cloned.skipAssetQualityChecks or false
+	cloned.skipPhysicsDataReset = cloned.skipPhysicsDataReset or false
+	cloned.isVaaS = cloned.isVaaS or false
+	assert(not (getFFlagUGCValidationAllowFullVaasModule() and cloned.isVaaS) or getFFlagUGCValidateMigrateSchemaPropertiesModule(), "isVaaS requires FFlagUGCValidateMigrateSchemaProperties so the env axes resolve")
 	
 	if getFFlagUGCValidateMigrateSchemaPropertiesModule() then
 		cloned.consumerEnv = t_4[cloned.source]
 		assert(cloned.consumerEnv ~= nil, `unknown consumer source: {tostring(cloned.source)}`)
+		
+		if getFFlagUGCValidationAllowFullVaasModule() and cloned.isVaaS then
+			cloned.validationEnv = validationEnumsModule.ValidationEnv.Backend
+		else
+			cloned.validationEnv = cloned.consumerEnv
+		end
 		cloned.backendConfigs = cloned.backendConfigs or {}
 		cloned.iecConfigs = cloned.iecConfigs or {}
 	end
@@ -311,7 +335,7 @@ local function createConsumerConfigWithDefaults(p15)
 end
 
 local function runValidationOnRootInstance(p15)
-	-- upvalues: getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref), getUploadCategoryModule (ref), initRunVariables (ref), assetQualityFetchStatus (ref), validationTestWrapperModule (ref), validationEnumsModule (ref), updateResultData (ref), populateRelevantSourceStrings (ref), reportFullResult (ref), fetchAllDesiredDataModule (ref), t_2 (ref), runService (ref), fetchQualityResults (ref), getNextLayer (ref), t_3 (ref)
+	-- upvalues: getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref), getFFlagUGCValidationAllowFullVaasModule (ref), getUploadCategoryModule (ref), initRunVariables (ref), assetQualityFetchStatus (ref), validationTestWrapperModule (ref), validationEnumsModule (ref), updateResultData (ref), populateRelevantSourceStrings (ref), reportFullResult (ref), resetPhysicsDataModule (ref), t_2 (ref), fetchAllDesiredDataModule (ref), runService (ref), fetchQualityResults (ref), getNextLayer (ref), t_3 (ref)
 	local processTime = os.clock()
 	local rootInstance = p15.rootInstance
 	local assetType = p15.uploadEnum.assetType
@@ -329,6 +353,7 @@ local function runValidationOnRootInstance(p15)
 		ranIntoInternalError = false,
 		aqJobId = "",
 		validationJobId = p15.jobId,
+		telemetryBundleId = if getFFlagUGCValidationAllowFullVaasModule() then consumerConfig.telemetryBundleId else nil,
 		states = {},
 		failureMap = {},
 		warningMap = {},
@@ -349,13 +374,21 @@ local function runValidationOnRootInstance(p15)
 		reportFullResult(t, p15, -1)
 		
 		return t
+	elseif getFFlagUGCValidationAllowFullVaasModule() and p15.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend then
+		resetPhysicsDataModule({ p15.rootInstance }, {
+			isServer = true,
+			bypassFlags = {
+				skipPhysicsDataReset = p15.consumerConfig.skipPhysicsDataReset
+			}
+		})
 	end
+	local source = t_2[consumerConfig.source] or consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend
 	fetchAllDesiredDataModule.storeDesiredData(p15, var15)
 	
 	if #var13 > 0 then
 		p15.aqsFetchMetrics.fetchStatus = assetQualityFetchStatus.assetQualityFetchInProgress
 		
-		if t_2[consumerConfig.source] then
+		if source then
 			runService:Run()
 			fetchQualityResults(p15, var13)
 			runService:Pause()
@@ -373,11 +406,11 @@ local function runValidationOnRootInstance(p15)
 		for i, v in var17 do
 			updateResultData(t, var14, validationTestWrapperModule(v, p15, t.states), p15.jobId, consumerConfig.enforceShadowValidations)
 			
-			if t_3[consumerConfig.source] then
+			if t_3[consumerConfig.source] and not source then
 				task.wait()
 			end
 		end
-		if var16 and not t_2[consumerConfig.source] then
+		if var16 and not source then
 			task.wait()
 		end
 	end

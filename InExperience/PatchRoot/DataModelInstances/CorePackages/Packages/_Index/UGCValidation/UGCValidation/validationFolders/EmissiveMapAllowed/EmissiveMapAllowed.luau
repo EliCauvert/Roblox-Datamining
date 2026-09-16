@@ -63,13 +63,13 @@ function t.run(p2, p3)
 		if v.EmissiveMask then
 			var1 = true
 			if not var1 then return end
-			local consumerEnv = p3.consumerConfig.consumerEnv
+			local validationEnv = p3.consumerConfig.validationEnv
 			
-			if consumerEnv == validationEnumsModule.ConsumerEnv.IEC then
+			if validationEnv == validationEnumsModule.ValidationEnv.IEC then
 				p2:fail(errorSourceStringsModule.Keys.EmissiveMap_NotAllowed)
 				
 				return
-			elseif consumerEnv == validationEnumsModule.ConsumerEnv.Backend then
+			elseif validationEnv == validationEnumsModule.ValidationEnv.Backend then
 				if not p3.consumerConfig.backendConfigs.isEmissiveAllowed then
 					p2:fail(errorSourceStringsModule.Keys.EmissiveMap_NotAllowed)
 				end

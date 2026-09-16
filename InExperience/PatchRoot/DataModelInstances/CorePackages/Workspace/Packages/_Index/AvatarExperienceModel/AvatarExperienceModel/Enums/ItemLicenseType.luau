@@ -1,0 +1,1 @@
+﻿return { FirstParty = "FirstParty", ThirdParty = "ThirdParty" }

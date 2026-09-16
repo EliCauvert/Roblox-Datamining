@@ -2,7 +2,7 @@
 local parent = avatarExperienceRodux.Parent
 local roduxModule = require(parent.Rodux)
 local cryoModule = require(parent.Cryo)
-local _ = require(parent.AvatarExperienceModel)
+local avatarExperienceModelModule = require(parent.AvatarExperienceModel)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
 local tutilsModule = require(parent.tutils)
@@ -42,7 +42,7 @@ local LOOK_TYPE = avatarExperienceCommonModule.Constants.LOOK_TYPE
 local constants = avatarExperienceCommonModule.Constants
 local itemTypeEnum = avatarExperienceCommonModule.Enums.ItemTypeEnum
 local ASSET_TYPE_NAME_TO_ID_STRING = constants.ASSET_TYPE_NAME_TO_ID_STRING
-local BUNDLE_TYPE_ID_STRINGS = constants.BUNDLE_TYPE_ID_STRINGS
+local bundleTypeIdStrings = avatarExperienceModelModule.Constants.BundleTypeIdStrings
 local BUNDLE_TYPE_ID_STRING_TO_NAME_FOR_BACKEND = constants.BUNDLE_TYPE_ID_STRING_TO_NAME_FOR_BACKEND
 local LAYERED_CLOTHING_ORDER = constants.LAYERED_CLOTHING_ORDER
 local LAYERED_ASSET_TYPES = constants.LAYERED_ASSET_TYPES
@@ -57,7 +57,7 @@ local fFlagHeadRefinementFacialAnimationToggle = avatarExperienceFlagsModule.FFl
 local var1 = 0
 
 local function formatItem(p1, p2)
-	-- upvalues: fFlagAXMISEnableMultiShopping (ref), itemTypeEnum (ref), BUNDLE_TYPE_ID_STRINGS (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), fFlagParseHeadShapeFromAPIResponse (ref), fFlagHeadRefinementFacialAnimationToggle (ref), fFlagAXDurablesForMIS (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), LAYERED_CLOTHING_ORDER (ref), LAYERED_ASSET_TYPES (ref), cryoModule (ref), ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE (ref), LAYERED_MAKEUP_ORDER (ref), var1 (write)
+	-- upvalues: fFlagAXMISEnableMultiShopping (ref), itemTypeEnum (ref), bundleTypeIdStrings (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), fFlagParseHeadShapeFromAPIResponse (ref), fFlagHeadRefinementFacialAnimationToggle (ref), fFlagAXDurablesForMIS (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), LAYERED_CLOTHING_ORDER (ref), LAYERED_ASSET_TYPES (ref), cryoModule (ref), ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE (ref), LAYERED_MAKEUP_ORDER (ref), var1 (write)
 	local var2 = if p1.receivedBundleInfo then true else false
 	local bundleInfo = p1.bundleInfo
 	
@@ -68,7 +68,7 @@ local function formatItem(p1, p2)
 			if v.type == itemTypeEnum.Asset then
 				local assetType = v.assetType
 				
-				if not assetType and p1.itemSubType == BUNDLE_TYPE_ID_STRINGS.DynamicHead then
+				if not assetType and p1.itemSubType == bundleTypeIdStrings.DynamicHead then
 					assetType = ASSET_TYPE_NAME_TO_ID_STRING.DynamicHead
 				end
 				if assetType then
@@ -194,8 +194,8 @@ local function removeItem(p5, p6, p7)
 end
 
 local function _(p5)
-	-- upvalues: itemTypeEnum (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), BUNDLE_TYPE_ID_STRINGS (ref)
-	return p5.itemType == itemTypeEnum.Asset and p5.itemSubType == ASSET_TYPE_NAME_TO_ID_STRING.EmoteAnimation or p5.itemType == itemTypeEnum.Bundle and p5.itemSubType == tostring(BUNDLE_TYPE_ID_STRINGS.Animations)
+	-- upvalues: itemTypeEnum (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), bundleTypeIdStrings (ref)
+	return p5.itemType == itemTypeEnum.Asset and p5.itemSubType == ASSET_TYPE_NAME_TO_ID_STRING.EmoteAnimation or p5.itemType == itemTypeEnum.Bundle and p5.itemSubType == tostring(bundleTypeIdStrings.Animations)
 end
 
 local function getTryOnItemsContainsRecolorableBody(p5)
@@ -287,7 +287,7 @@ return roduxModule.createReducer(t, {
 		return cloned
 	end,
 	[toggleTryOnModule.name] = function(p7, p8)
-		-- upvalues: t (ref), getTryOnItemReducerKey (ref), fFlagAXMISEnableMultiShopping (ref), reconcileAllTryOnState (ref), removeItem (ref), reducerUtilsModule (ref), formatItem (ref), getFilteredTryOnItems (ref), itemTypeEnum (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), BUNDLE_TYPE_ID_STRINGS (ref), cryoModule (ref), getTryOnItemsContainsRecolorableBody (ref), fFlagAXCatalogMakeupSupport (ref), removeMakeupAssetsFromTryOnsIfOverLimit (ref)
+		-- upvalues: t (ref), getTryOnItemReducerKey (ref), fFlagAXMISEnableMultiShopping (ref), reconcileAllTryOnState (ref), removeItem (ref), reducerUtilsModule (ref), formatItem (ref), getFilteredTryOnItems (ref), itemTypeEnum (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), bundleTypeIdStrings (ref), cryoModule (ref), getTryOnItemsContainsRecolorableBody (ref), fFlagAXCatalogMakeupSupport (ref), removeMakeupAssetsFromTryOnsIfOverLimit (ref)
 		local var3
 		local var4 = p7 or t
 		local var5 = var4.TryOnItems or {}
@@ -316,7 +316,7 @@ return roduxModule.createReducer(t, {
 		if var9.itemType == itemTypeEnum.Asset and var9.itemSubType == ASSET_TYPE_NAME_TO_ID_STRING.EmoteAnimation then
 			var10 = true
 		elseif var9.itemType == itemTypeEnum.Bundle then
-			var10 = var9.itemSubType ~= tostring(BUNDLE_TYPE_ID_STRINGS.Animations)
+			var10 = var9.itemSubType ~= tostring(bundleTypeIdStrings.Animations)
 		end
 		if var10 then
 			var11 = var9

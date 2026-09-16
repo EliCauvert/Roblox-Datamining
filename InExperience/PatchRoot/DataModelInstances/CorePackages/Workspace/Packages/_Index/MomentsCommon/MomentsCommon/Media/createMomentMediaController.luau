@@ -322,61 +322,69 @@ return function(p1, p2)
 		var16(false)
 	end
 	
+	local _ = function()
+		-- upvalues: var6 (write)
+		return if var6 ~= nil then var6.isPlaybackReady() else true
+	end
+	
 	local function play()
-		-- upvalues: var21 (write), var22 (write), var8 (write), t_2 (ref), var7 (write), t (ref), var23 (ref), var16 (ref), var26 (write), var27 (write), services (ref), loopEpsilonSeconds (copy)
-		if var21 then return end
-		var22 = nil
-		
-		if var8 ~= nil then
-			var8.realignToRegionStart()
-		end
-		for i, v in t_2 do
-			v.realignToRegionStart()
-		end
-		if var7 ~= nil then
-			var7.seek(0)
-		end
-		for i, v_1 in t do
-			local play = v_1.play
+		-- upvalues: var21 (write), var6 (write), var22 (write), var8 (write), t_2 (ref), var7 (write), t (ref), var23 (ref), var16 (ref), var26 (write), var27 (write), services (ref), loopEpsilonSeconds (copy)
+		if not var21 then
+			if not (if var6 ~= nil then var6.isPlaybackReady() else true) then return end
+			var22 = nil
 			
-			if play ~= nil then
-				play()
+			if var8 ~= nil then
+				var8.realignToRegionStart()
 			end
-		end
-		if var22 ~= nil and var22 > 0 then
-			for i, v_2 in t do
-				local seek = v_2.seek
+			for i, v in t_2 do
+				v.realignToRegionStart()
+			end
+			if var7 ~= nil then
+				var7.seek(0)
+			end
+			for i, v_1 in t do
+				local play = v_1.play
 				
-				if seek ~= nil then
-					seek(var22)
+				if play ~= nil then
+					play()
 				end
 			end
-		end
-		for i, v_2 in t_2 do
-			v_2.syncToClock(var23(false))
-		end
-		var16(true)
-		
-		if var26 == nil then
-			if var8 == nil and #t_2 == 0 then return end
-			var27 = var23(false)
-			var26 = services.runService.RenderStepped:Connect(function()
-				-- upvalues: var21 (copy), var23 (copy), var27 (copy), loopEpsilonSeconds (copy), var8 (copy), t_2 (copy)
-				if var21 then return end
-				local var28 = var23(false)
-				
-				if var28 < var27 - loopEpsilonSeconds then
-					if var8 ~= nil then
-						var8.realignToRegionStart()
+			if var22 ~= nil and var22 > 0 then
+				for i, v_2 in t do
+					local seek = v_2.seek
+					
+					if seek ~= nil then
+						seek(var22)
+					end
+				end
+			end
+			for i, v_2 in t_2 do
+				v_2.syncToClock(var23(false))
+			end
+			var16(true)
+			
+			if var26 == nil then
+				if var8 == nil and #t_2 == 0 then return end
+				var27 = var23(false)
+				var26 = services.runService.RenderStepped:Connect(function()
+					-- upvalues: var21 (copy), var23 (copy), var27 (copy), loopEpsilonSeconds (copy), var8 (copy), t_2 (copy)
+					if var21 then return end
+					local var28 = var23(false)
+					
+					if var28 < var27 - loopEpsilonSeconds then
+						if var8 ~= nil then
+							var8.realignToRegionStart()
+						end
+						for i, v in t_2 do
+							v.realignToRegionStart()
+						end
 					end
 					for i, v in t_2 do
-						v.realignToRegionStart()
+						v.syncToClock(var28)
 					end
-				end
-				for i, v in t_2 do
-					v.syncToClock(var28)
-				end
-			end)
+				end)
+			end
+			return
 		end
 	end
 	
@@ -438,8 +446,11 @@ return function(p1, p2)
 			pauseAndRemember(p4 or 2)
 		end,
 		toggle = function()
-			-- upvalues: var21 (write), var15 (ref), pauseAndRemember (ref), play (ref), var18 (ref), var17 (ref)
+			-- upvalues: var21 (write), var15 (ref), var6 (write), pauseAndRemember (ref), play (ref), var18 (ref), var17 (ref)
 			if var21 then return end
+			if not var15(false) then
+				if not (if var6 ~= nil then var6.isPlaybackReady() else true) then return end
+			end
 			if var15(false) then
 				pauseAndRemember(0)
 			else

@@ -1,15 +1,18 @@
 ﻿local userInputService = game:GetService("UserInputService")
 local runService = game:GetService("RunService")
-local parent = script:FindFirstAncestor("AppPageShell").Parent
+local appPageShell = script:FindFirstAncestor("AppPageShell")
+local parent = appPageShell.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local otterModule = require(parent.Otter)
 local robloxAppEventsModule = require(parent.RobloxAppEvents)
+local scrollToTopModule = require(appPageShell.scrollToTop)
 local view = foundationModule.View
 local icon = foundationModule.Icon
+local fFlagAppPageShellScrollToTopFocus = require(parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), otterModule (ref), robloxAppEventsModule (ref), userInputService (ref), runService (ref), view (ref), icon (ref)
+	-- upvalues: reactModule (ref), otterModule (ref), robloxAppEventsModule (ref), fFlagAppPageShellScrollToTopFocus (ref), scrollToTopModule (ref), userInputService (ref), runService (ref), view (ref), icon (ref)
 	local var1, var2 = reactModule.useBinding(0)
 	local var3, var4 = reactModule.useBinding(0)
 	local var5, var6 = reactModule.useBinding(0)
@@ -85,16 +88,20 @@ return reactModule.memo(function(p1)
 		onSettled()
 	end, { p1.onRefresh })
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), robloxAppEventsModule (copy), var12 (ref)
+		-- upvalues: p1 (ref), robloxAppEventsModule (copy), fFlagAppPageShellScrollToTopFocus (copy), scrollToTopModule (copy), var12 (ref)
 		if p1.appEventName then
 			local reloadPageConnection = robloxAppEventsModule.ReloadPage:connect(function(p2)
-				-- upvalues: p1 (copy), var12 (copy)
+				-- upvalues: p1 (copy), fFlagAppPageShellScrollToTopFocus (copy), scrollToTopModule (copy), var12 (copy)
 				if p2 ~= p1.appEventName then return end
 				local current = p1.scrollingFrameRef.current
 				
 				if not current then return end
 				if current.CanvasPosition.Y == 0 then
 					var12()
+					
+					return
+				elseif fFlagAppPageShellScrollToTopFocus then
+					scrollToTopModule(current)
 					
 					return
 				end
@@ -108,6 +115,25 @@ return reactModule.memo(function(p1)
 		end
 		return nil
 	end, { var12, p1.appEventName, p1.scrollingFrameRef })
+	
+	if fFlagAppPageShellScrollToTopFocus then
+		reactModule.useEffect(function()
+			-- upvalues: userInputService (copy), p1 (ref), scrollToTopModule (copy)
+			local statusBarTappedConnection = userInputService.StatusBarTapped:Connect(function()
+				-- upvalues: p1 (copy), scrollToTopModule (copy)
+				local current = p1.scrollingFrameRef.current
+				
+				if current then
+					scrollToTopModule(current)
+				end
+			end)
+			
+			return function()
+				-- upvalues: statusBarTappedConnection (ref)
+				statusBarTappedConnection:Disconnect()
+			end
+		end, { p1.scrollingFrameRef })
+	end
 	reactModule.useEffect(function()
 		-- upvalues: userInputService (copy), var9 (ref), var10 (ref), idle_2 (ref), var12 (ref)
 		local inputBeganConnection = userInputService.InputBegan:Connect(function(p2)

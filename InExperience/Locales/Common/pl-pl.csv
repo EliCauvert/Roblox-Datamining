@@ -728,6 +728,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,Nie udało się wys�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,Wysłano prośbę o wsparcie
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,Wsparcie dla graczy jest obecnie niedostępne. Spróbuj ponownie później.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,Wsparcie dla graczy jest niedostępne
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,Napisz bardziej szczegółowy opis
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,"Aby przesłać zgłoszenie do zespołu pomocy, musi ono dotyczyć ostatnio granego projektu."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,"Odwiedź ten projekt, aby przesłać prośbę"
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,"Poczekaj, aż twórca odpowie na Twoje istniejące prośby, zanim prześlesz kolejną."
@@ -2058,7 +2059,6 @@ Feature.Build.Description.RevertToVersion,"Potwierdź, aby cofnąć ostatnią zm
 Feature.Build.Description.ShareLatest,Udostępnij informacje dotyczące zmian w najnowszej wersji.
 Feature.Build.Description.ShopButton,Dodaj punkt wejścia do robienia zakupów
 Feature.Build.Description.UpdateDeveloperProduct,Zaktualizuj produkt deweloperski {PRODUCT_ID}.
-Feature.Build.Description.VersionChanges,"Powiedz graczom, co zmieniło się w tej wersji."
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Liczba znaków w opisie nie może przekroczyć 1000.
 Feature.Build.Error.DeveloperProductNameRequired,Wprowadź nazwę produktu.
 Feature.Build.Error.DeveloperProductNameTooLong,Liczba znaków w nazwie nie może przekroczyć 50.
@@ -2239,7 +2239,6 @@ Feature.Build.Label.Version,Wersja
 Feature.Build.Label.VersionCompact,wersja {VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,Tytuł i opis wersji
 Feature.Build.Label.Video,Film
 Feature.Build.Message.AccountRequirements,Twoje konto nie spełnia wymagań dotyczących korzystania z funkcji Buduj.
 Feature.Build.Message.AccountTooNew,"Twoje konto jest zbyt nowe, aby publikować. Spróbuj ponownie za 2 dni."
@@ -2318,8 +2317,10 @@ Feature.Build.Message.ShareLinkFailed,Nie udało się utworzyć linku do udostę
 Feature.Build.Message.SignedOut,Wylogowano Cię. Zaloguj się i spróbuj ponownie.
 Feature.Build.Message.TasksCompleted,Ukończone zadania – {NUM_COMPLETED_TASKS}
 Feature.Build.Message.ThinkingSeconds,Myślenie trwało {SECONDS} s
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,"Zostań zaufanym znajomym tego twórcy, aby zagrać w jego grę."
 Feature.Build.Message.TryAgain,Spróbuj ponownie.
 Feature.Build.Message.TurnToPortrait,"Przełącz urządzenie w tryb pionowy, aby dalej pracować nad grą."
+Feature.Build.Message.UpdateSettingsToPlaytest,"Aby zagrać w tę grę, zaktualizuj ustawienie dotyczące gier w wersji zapoznawczej."
 Feature.Build.Message.VersionHistoryLoad,Nie udało się wczytać historii wersji.
 Feature.Build.Message.WhatToCreate,Co chcesz dziś stworzyć?
 Feature.Build.Message.WorkedMinutesSeconds,Działanie trwało {MINUTES} min {REM_SECONDS} s
@@ -2372,7 +2373,6 @@ Feature.Build.Title.Tasks,Zadania
 Feature.Build.Title.TurnActivity,Obróć aktywność
 Feature.Build.Title.VersionHistory,Historia wersji
 Feature.Build.Title.VersionInfo,Informacje o wersji
-Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,Wersja {VERSION}
 Feature.Build.Title.Versions,Wersje
 Feature.Build.Title.WhatsIncluded,Co jest uwzględnione?
@@ -3979,6 +3979,7 @@ Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Kontynuuj zgłoszenie
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,Dokończ zgłoszenie
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Dziękujemy za rozpoczęcie zgłaszania naruszenia praw własności intelektualnej
 Feature.ReportAbuse.Title.SelectInSceneThankYou,
+Feature.RobloxSubscription.Action.JoinIn,Dołącz za {time}
 Feature.RobloxSubscription.Action.Subscribe,Subskrybuj
 Feature.RobloxSubscription.Action.TryItForFree,Wypróbuj bezpłatnie
 Feature.RobloxSubscription.Body.AlreadySubscribed,Twoja subskrypcja Plus już teraz zapewnia Ci korzyści w grze.
@@ -3988,6 +3989,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,"Przeprowadź weryfikację 
 Feature.RobloxSubscription.Description.Benefit.Customize,Dostosuj za pomocą ramek profilu i motywów aplikacji
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% zniżki przez pierwsze 60 dni, a następnie 20% zniżki na przedmioty i awatary"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Więcej zabawy za mniej Robuxów. Wykup subskrypcję Roblox Plus.
+Feature.RobloxSubscription.Description.JoinEarly,Dołącz wcześniej dzięki subskrypcji Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Klikając przycisk \u{201C}{ctaText}\u{201D}, akceptujesz <a href=""{termsUrl}"">Warunki subskrypcji Robloxa</a>. Opłata będzie pobierana automatycznie co miesiąc do momentu anulowania subskrypcji."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Darmowe serwery prywatne
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4006,6 +4008,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Dobra wiadomość
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Kup Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus jest niedostępny
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Możesz dołączyć do wydarzenia przed innymi osobami.
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Wcześniejszy dostęp dzięki subskrypcji Plus
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Status konta, naruszenia i odwołania"
 Feature.Schools.Label.Classmates,Koledzy z klasy
 Feature.Screentime.Content.ScreentimeLimitDialog,"Twój limit dzienny czasu przy ekranie został przekroczony. Wróć jutro, aby znów korzystać z platformy Roblox."

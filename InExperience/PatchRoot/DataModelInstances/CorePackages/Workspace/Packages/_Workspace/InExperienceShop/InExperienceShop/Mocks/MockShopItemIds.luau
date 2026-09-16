@@ -6,6 +6,7 @@ local t = {
 		{
 			id = 1,
 			name = "Top picks",
+			metadata = { categoryType = "TopPicks" },
 			items = {
 				{ id = 101, type = "Product" }, { id = 201, type = "GamePass" },
 				{ id = 102, type = "Product" }, { id = 202, type = "GamePass" },

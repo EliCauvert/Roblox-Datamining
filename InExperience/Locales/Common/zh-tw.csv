@@ -727,6 +727,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,我們無法傳送�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,已傳送支援請求
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,玩家支援目前無法使用，請稍後再試。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,玩家支援無法使用
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,請撰寫更詳細的說明
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,若要提出支援請求，你必須最近曾玩過這項體驗。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,造訪此體驗以提出請求
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,請等候創作者回覆你現有的請求，然後再提交另一個請求。
@@ -2057,7 +2058,6 @@ Feature.Build.Description.RevertToVersion,確認以還原最新變更並回到 {
 Feature.Build.Description.ShareLatest,分享最新版本的變更內容。
 Feature.Build.Description.ShopButton,新增購物入口
 Feature.Build.Description.UpdateDeveloperProduct,更新開發者產品 {PRODUCT_ID}。
-Feature.Build.Description.VersionChanges,告訴玩家此版本有哪些變更。
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"說明長度不得超過 1,000 個字元。"
 Feature.Build.Error.DeveloperProductNameRequired,輸入產品名稱。
 Feature.Build.Error.DeveloperProductNameTooLong,名稱長度不得超過 50 個字元。
@@ -2238,7 +2238,6 @@ Feature.Build.Label.Version,版本
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,版本標題和說明
 Feature.Build.Label.Video,影片
 Feature.Build.Message.AccountRequirements,你的帳號不符合使用組建的要求。
 Feature.Build.Message.AccountTooNew,你的帳號太新，無法發佈。請在 2 天後再試一次。
@@ -2317,8 +2316,10 @@ Feature.Build.Message.ShareLinkFailed,無法建立分享連結，請再試一次
 Feature.Build.Message.SignedOut,已登出，請登入後再試一次。
 Feature.Build.Message.TasksCompleted,已完成 {NUM_COMPLETED_TASKS} 項任務
 Feature.Build.Message.ThinkingSeconds,思考了 {SECONDS} 秒
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,成為此創作者信任的好友，即可玩對方的遊戲。
 Feature.Build.Message.TryAgain,再試一次。
 Feature.Build.Message.TurnToPortrait,將裝置切換為直放模式，以繼續進行遊戲。
+Feature.Build.Message.UpdateSettingsToPlaytest,若要玩此遊戲，請更新你的遊戲預覽設定。
 Feature.Build.Message.VersionHistoryLoad,無法載入版本歷史紀錄。
 Feature.Build.Message.WhatToCreate,今天你想要建立什麼呢？
 Feature.Build.Message.WorkedMinutesSeconds,已運作 {MINUTES} 分 {REM_SECONDS} 秒
@@ -2371,7 +2372,6 @@ Feature.Build.Title.Tasks,任務
 Feature.Build.Title.TurnActivity,回合活動
 Feature.Build.Title.VersionHistory,版本歷史紀錄
 Feature.Build.Title.VersionInfo,版本資訊
-Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,版本 {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,包含哪些內容？
@@ -3978,6 +3978,7 @@ Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,完成報告
 Feature.ReportAbuse.Title.SelectInSceneIpReport,感謝你提出智慧財產權侵權檢舉
 Feature.ReportAbuse.Title.SelectInSceneThankYou,
+Feature.RobloxSubscription.Action.JoinIn,加入時間：{time}
 Feature.RobloxSubscription.Action.Subscribe,訂閱
 Feature.RobloxSubscription.Action.TryItForFree,免費試用
 Feature.RobloxSubscription.Body.AlreadySubscribed,您的 Plus 訂閱已提供遊戲內的福利。
@@ -3987,6 +3988,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,完成年齡驗證，即可
 Feature.RobloxSubscription.Description.Benefit.Customize,透過個人檔案外框和 App 主題自訂
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,前 60 天享道具和虛擬人偶 10% 優惠，之後享 20% 優惠
 Feature.RobloxSubscription.Description.ExclusiveBenefits,用更少的 Robux 享受更多樂趣。訂閱 Roblox Plus。
+Feature.RobloxSubscription.Description.JoinEarly,透過 Plus 搶先加入
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"按一下\u{201C}{ctaText}\u{201D}，即表示您同意 <a href=""{termsUrl}"">Roblox 訂閱條款</a>。系統將每月自動向您收取費用，直到取消訂閱為止。"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,免費私人伺服器
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4005,6 +4007,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,好消息
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,取得 Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,此處無法使用 Roblox Plus
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,你可以比其他人更早加入活動。
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,透過 Plus 搶先體驗
 Feature.SafetyDashboard.Heading.AccountStatus.V2,帳號狀態、違規和上訴
 Feature.Schools.Label.Classmates,同學
 Feature.Screentime.Content.ScreentimeLimitDialog,您已達到每日螢幕使用時間上限。請明天再回來 Roblox。

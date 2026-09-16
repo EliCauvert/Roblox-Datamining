@@ -727,6 +727,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,Wir konnten deine An
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,Support-Anfrage gesendet
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,Der Spieler-Support ist derzeit nicht verfügbar. Bitte versuche es später erneut.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,Spieler-Support nicht verfügbar
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,Bitte verfasse eine genauere Beschreibung
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,"Du musst diese Experience kürzlich gespielt haben, um eine Support-Anfrage einzureichen."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,"Besuche diese Experience, um eine Anfrage einzureichen"
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,"Bitte warte, bis der Creator auf deine bestehenden Anfragen reagiert hat, bevor du eine weitere Anfrage abschickst."
@@ -1992,7 +1993,6 @@ Feature.Build.Description.RevertToVersion,"Bestätige, dass du die letzte Änder
 Feature.Build.Description.ShareLatest,"Beschreibe, was sich alles in der neuesten Version geändert hat."
 Feature.Build.Description.ShopButton,Einen Shopping-Einstiegspunkt hinzufügen
 Feature.Build.Description.UpdateDeveloperProduct,Entwicklerprodukt {PRODUCT_ID} aktualisieren.
-Feature.Build.Description.VersionChanges,"Teile den Spielern mit, was sich in dieser Version geändert hat."
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Die Beschreibung darf maximal 1.000 Zeichen lang sein.
 Feature.Build.Error.DeveloperProductNameRequired,Gib einen Produktnamen ein.
 Feature.Build.Error.DeveloperProductNameTooLong,Der Name darf maximal 50 Zeichen lang sein.
@@ -2173,7 +2173,6 @@ Feature.Build.Label.Version,Version
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,Versionstitel und Beschreibung
 Feature.Build.Label.Video,Video
 Feature.Build.Message.AccountRequirements,Dein Konto erfüllt nicht die Anforderungen für die Nutzung von Build.
 Feature.Build.Message.AccountTooNew,"Dein Konto ist zu neu, um etwas zu veröffentlichen. Bitte versuche es erneut, wenn es 2 Tage alt ist."
@@ -2252,8 +2251,10 @@ Feature.Build.Message.ShareLinkFailed,Der Freigabelink konnte nicht erstellt wer
 Feature.Build.Message.SignedOut,Du bist abgemeldet. Melde dich an und versuche es erneut.
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} Aufgaben abgeschlossen
 Feature.Build.Message.ThinkingSeconds,Denkt {SECONDS} Sek. nach
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,"Werde ein vertrauter Freund dieses Creators, um sein Spiel zu spielen."
 Feature.Build.Message.TryAgain,Versuche es erneut.
 Feature.Build.Message.TurnToPortrait,"Wechsle ins Hochformat, um weiter an deinem Spiel zu arbeiten."
+Feature.Build.Message.UpdateSettingsToPlaytest,"Aktualisiere deine Spielvorschau-Einstellung, um dieses Spiel zu spielen."
 Feature.Build.Message.VersionHistoryLoad,Versionsverlauf konnte nicht geladen werden.
 Feature.Build.Message.WhatToCreate,Was möchtest du heute erstellen?
 Feature.Build.Message.WorkedMinutesSeconds,{MINUTES} Min. {REM_SECONDS} Sek. funktioniert
@@ -2306,7 +2307,6 @@ Feature.Build.Title.Tasks,Aufgaben
 Feature.Build.Title.TurnActivity,Aktivität drehen
 Feature.Build.Title.VersionHistory,Versionsverlauf
 Feature.Build.Title.VersionInfo,Versionsinformationen
-Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versionen
 Feature.Build.Title.WhatsIncluded,Was ist enthalten?
@@ -3910,6 +3910,7 @@ Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Fahre mit deiner Meldu
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,Schließe deine Meldung ab
 Feature.ReportAbuse.Title.SelectInSceneIpReport,"Vielen Dank, dass du deine Meldung über eine Verletzung des geistigen Eigentums eingereicht hast"
 Feature.ReportAbuse.Title.SelectInSceneThankYou,Danke fürs Melden
+Feature.RobloxSubscription.Action.JoinIn,In {time} mitmachen
 Feature.RobloxSubscription.Action.Subscribe,Abonnieren
 Feature.RobloxSubscription.Action.TryItForFree,Kostenlos ausprobieren
 Feature.RobloxSubscription.Body.AlreadySubscribed,Dein Plus-Abonnement bietet dir bereits In-Game-Vorteile.
@@ -3919,6 +3920,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,"Verifiziere dein Alter mit
 Feature.RobloxSubscription.Description.Benefit.Customize,Mit Profilrahmen und App-Designs anpassen
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10 % Rabatt in den ersten 60 Tagen, dann 20 % Rabatt auf Artikel und Avatare"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Mehr Spaß für weniger Robux. Abonniere Roblox Plus.
+Feature.RobloxSubscription.Description.JoinEarly,Mit Plus frühzeitig mitmachen
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Indem du auf \u{201C}{ctaText}\u{201D} klickst, stimmst du den <a href=""{termsUrl}"">Abonnementbedingungen von Roblox</a> zu. Dir wird jeden Monat automatisch eine Gebühr berechnet, bis du das Abo kündigst."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Kostenlose private Server
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -3937,6 +3939,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Gute Neuigkeiten
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus holen
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus ist hier nicht verfügbar
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Du kannst dem Event vor allen anderen beitreten.
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Frühzeitiger Zugang mit Plus
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Kontostatus, Verstöße und Widersprüche"
 Feature.Schools.Label.Classmates,Mitschüler
 Feature.Screentime.Content.ScreentimeLimitDialog,"Du hast dein tägliches Bildschirmzeitlimit erreicht. Komm morgen wieder, um erneut auf Roblox zuzugreifen."

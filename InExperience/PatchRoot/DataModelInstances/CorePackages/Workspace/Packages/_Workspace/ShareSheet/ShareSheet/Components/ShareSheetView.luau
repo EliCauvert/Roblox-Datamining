@@ -14,15 +14,22 @@ local shareSheetSocialRowModule = require(script.Parent.ShareSheetSocialRow)
 local shareSendRowModule = require(script.Parent.ShareSendRow)
 local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemetry)
 
-local function setContentScrollingFrameRef(value)
+local function setDefaultContentScrollingFrameRef(value)
 	if value then
 		value.AutomaticSize = Enum.AutomaticSize.Y
 		value.ScrollBarThickness = 0
 	end
 end
 
+local function setPeoplePickerContentScrollingFrameRef(value)
+	if value then
+		value.AutomaticSize = Enum.AutomaticSize.None
+		value.ScrollBarThickness = 0
+	end
+end
+
 return function(p1)
-	-- upvalues: fFlagShareSheetPeoplePickerEnabledModule (ref), fIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent (ref), reactModule (ref), shareSheetTelemetryModule (ref), sheet (ref), peoplePickerModule (ref), text (ref), setContentScrollingFrameRef (ref), view (ref), shareSheetSocialRowModule (ref), divider (ref), shareSendRowModule (ref), shareSheetActionRowModule (ref)
+	-- upvalues: fFlagShareSheetPeoplePickerEnabledModule (ref), fIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent (ref), reactModule (ref), shareSheetTelemetryModule (ref), sheet (ref), peoplePickerModule (ref), text (ref), setPeoplePickerContentScrollingFrameRef (ref), setDefaultContentScrollingFrameRef (ref), view (ref), shareSheetSocialRowModule (ref), divider (ref), shareSendRowModule (ref), shareSheetActionRowModule (ref)
 	local var1 = next(p1.selectedConversationIds) ~= nil or p1.isSending == true
 	local peoplePicker = nil
 	local var2 = false
@@ -61,12 +68,13 @@ return function(p1)
 			})
 		}),
 		Content = reactModule.createElement(sheet.Content, {
-			scrollingFrameRef = if fFlagShareSheetPeoplePickerEnabledModule and p1.scrollingFrameRef ~= nil then p1.scrollingFrameRef else setContentScrollingFrameRef,
+			scrollingFrameRef = if fFlagShareSheetPeoplePickerEnabledModule and var2 then setPeoplePickerContentScrollingFrameRef else setDefaultContentScrollingFrameRef,
 			isContentFullBleed = if fFlagShareSheetPeoplePickerEnabledModule then not var2 else true
 		}, {
 			ContentLayout = reactModule.createElement(view, {
 				tag = {
-					["col size-full-0 auto-y"] = true,
+					["col size-full"] = fFlagShareSheetPeoplePickerEnabledModule and var2,
+					["col size-full-0 auto-y"] = not (fFlagShareSheetPeoplePickerEnabledModule and var2),
 					["gap-xlarge"] = if fFlagShareSheetPeoplePickerEnabledModule then not var2 else true
 				}
 			}, if fFlagShareSheetPeoplePickerEnabledModule and var2 then {

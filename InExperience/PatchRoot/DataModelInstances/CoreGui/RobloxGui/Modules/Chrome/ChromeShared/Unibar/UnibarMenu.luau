@@ -11,7 +11,6 @@ local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpCon
 local fFlagAddUILessMode = sharedFlagsModule.FFlagAddUILessMode
 local fIntAddUILessModeVariant = sharedFlagsModule.FIntAddUILessModeVariant
 local fFlagAppNavMyStatsTab = sharedFlagsModule.FFlagAppNavMyStatsTab
-local fFlagBuildExperienceLibrary = sharedFlagsModule.FFlagBuildExperienceLibrary
 local fFlagUnibarMenuOpenSubmenu = require(script.Parent.Parent.Parent.Flags).FFlagUnibarMenuOpenSubmenu
 local fFlagTokenizeUnibarConstantsWithStyleProvider = require(chromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
 local fFlagEnablePlaytestModeUnibar = sharedFlagsModule.FFlagEnablePlaytestModeUnibar
@@ -52,7 +51,7 @@ local argoPartyExperimentation = require(corePackagesService.Workspace.Packages.
 
 if not getFFlagChromeCentralizedConfiguration() then
 	function configureUnibar()
-		-- upvalues: buildMenuOrderModule (ref), getFFlagDebugEnableUnibarDummyIntegrations (ref), isConnectUnibarEnabledModule (ref), argoPartyExperimentation (ref), constantsModule_1 (ref), fFlagBuildExperienceLibrary (ref), fFlagAppNavMyStatsTab (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), serviceModule (ref)
+		-- upvalues: buildMenuOrderModule (ref), getFFlagDebugEnableUnibarDummyIntegrations (ref), isConnectUnibarEnabledModule (ref), argoPartyExperimentation (ref), constantsModule_1 (ref), fFlagAppNavMyStatsTab (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), serviceModule (ref)
 		local var3 = buildMenuOrderModule()
 		local list = { "nine_dot", "chat", "toggle_mic_mute" }
 		table.insert(list, 3, "join_voice")
@@ -69,10 +68,7 @@ if not getFFlagChromeCentralizedConfiguration() then
 		if index then
 			table.insert(list, index, constantsModule_1.TOGGLE_MIC_INTEGRATION_ID)
 		end
-		if fFlagBuildExperienceLibrary then
-			table.insert(list, "library")
-		end
-		if fFlagAppNavMyStatsTab or fFlagBuildExperienceLibrary then
+		if fFlagAppNavMyStatsTab then
 			table.insert(list, "assistant_build")
 		end
 		if isInExperienceUIVREnabled and isSpatial() then

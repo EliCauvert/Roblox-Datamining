@@ -27,5 +27,6 @@
 	community = "community",
 	communityUserMembership = "communityUserMembership",
 	clientPageScope = "clientPageScope",
-	capability = "capability"
+	capability = "capability",
+	notificationBadge = "notificationBadge"
 }

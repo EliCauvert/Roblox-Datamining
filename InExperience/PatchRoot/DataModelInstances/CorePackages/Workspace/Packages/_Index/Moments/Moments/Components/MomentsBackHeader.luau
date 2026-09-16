@@ -9,6 +9,8 @@ return function(p1)
 		showTopScrim = true,
 		layoutOrder = p1.layoutOrder,
 		onBack = p1.onBack,
-		onCreatePressed = p1.onCreatePressed
+		onCreatePressed = p1.onCreatePressed,
+		onNavigateToTrending = p1.onNavigateToTrending,
+		onNavigateToMyMoments = p1.onNavigateToMyMoments
 	})
 end

@@ -17,13 +17,14 @@ local toShopItem = shopItemMappingModule.toShopItem
 local logCounterModule = require(inExperienceShop.Internal.logCounter)
 local productInfoFailedItemsCounterModule = require(inExperienceShop.Events.ProductInfoFailedItemsCounter)
 local fFlagEnableExperienceShopGlobalIconModule = require(inExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
+local fFlagIdentifyTopPicksByCategoryTypeModule = require(inExperienceShop.Flags.FFlagIdentifyTopPicksByCategoryType)
 local t = {
 	name = "CommonUI.Features.Label.Home",
 	id = constantsModule.HOME_CATEGORY_ID
 }
 
 return function(p1, p2)
-	-- upvalues: t (ref), constantsModule (ref), fFlagEnableRobuxInExperienceShop (ref), fFlagEnableBonusJwtInShop (ref), toRobuxPackageItem (ref), promiseModule (ref), fFlagEnableExperienceShopGlobalIconModule (ref), appendBonusItemRequests (ref), makeRequestKey (ref), toShopItem (ref), logCounterModule (ref), productInfoFailedItemsCounterModule (ref), mergeBonusItemDetailsIntoSections (ref)
+	-- upvalues: t (ref), constantsModule (ref), fFlagIdentifyTopPicksByCategoryTypeModule (ref), fFlagEnableRobuxInExperienceShop (ref), fFlagEnableBonusJwtInShop (ref), toRobuxPackageItem (ref), promiseModule (ref), fFlagEnableExperienceShopGlobalIconModule (ref), appendBonusItemRequests (ref), makeRequestKey (ref), toShopItem (ref), logCounterModule (ref), productInfoFailedItemsCounterModule (ref), mergeBonusItemDetailsIntoSections (ref)
 	local list = { t }
 	local t_1 = {}
 	local t_2 = {}
@@ -38,6 +39,9 @@ return function(p1, p2)
 			local t_5 = { id = var1, name = v.name, items = {} }
 			local metadata = v.metadata
 			
+			if fFlagIdentifyTopPicksByCategoryTypeModule and metadata ~= nil and metadata.categoryType ~= nil then
+				t_5.categoryType = metadata.categoryType
+			end
 			if fFlagEnableRobuxInExperienceShop and metadata ~= nil and metadata.paymentSessionId ~= nil then
 				t_5.paymentSessionId = metadata.paymentSessionId
 			end

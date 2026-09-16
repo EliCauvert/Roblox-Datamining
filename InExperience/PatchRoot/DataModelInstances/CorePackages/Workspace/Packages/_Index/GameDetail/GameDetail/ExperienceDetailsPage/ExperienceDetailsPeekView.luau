@@ -10,7 +10,6 @@ local useMotionJitterMetricModule = require(script.Parent.useMotionJitterMetric)
 local experienceDetailsFallbackActionBarModule = require(script.Parent.Fallback.ExperienceDetailsFallbackActionBar)
 local experienceDetailsFallbackFeedModule = require(script.Parent.Fallback.ExperienceDetailsFallbackFeed)
 local setTabBarVisible = require(parent.AppTabBarRodux).Actions.SetTabBarVisible
-local discoveryTypesModule = require(parent.DiscoveryTypes)
 local gameDetailsPeekViewEvents = require(parent.DiscoveryAnalytics).Events.gameDetailsPeekViewEvents
 local _ = require(parent.Navigation)
 local foundationModule = require(parent.Foundation)
@@ -53,11 +52,10 @@ local fFlagLuaAppSduiEdpHideSystemBarOnPeekViewMount = sharedFlagsModule.FFlagLu
 local fFlagSduiPlayWithRewardGapFix = sharedFlagsModule.FFlagSduiPlayWithRewardGapFix
 local fFlagEnableMotionJitterMetric = sharedFlagsModule.FFlagEnableMotionJitterMetric
 local fFlagSduiEdpPersistentActionBarPlayButton = sharedFlagsModule.FFlagSduiEdpPersistentActionBarPlayButton
-local fFlagSduiEdpActionBarJitterFix = sharedFlagsModule.FFlagSduiEdpActionBarJitterFix
 local fFlagLuaAppEdpBottomSheetPeekViewEvents = sharedFlagsModule.FFlagLuaAppEdpBottomSheetPeekViewEvents
 
 return reactModule.memo(function(p1)
-	-- upvalues: experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), usePageScopeRef (ref), reactModule (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useTokens (ref), useNavigation (ref), useRoactService (ref), appEventIngestService (ref), appSessionService (ref), useDispatch (ref), fFlagLuaAppSduiEdpHideSystemBarOnPeekViewMount (ref), setTabBarVisible (ref), fFlagSduiPlayWithRewardGapFix (ref), filterPlayWithReward (ref), useTopBarHeight (ref), useScreenSize (ref), useDeviceInsets (ref), getSafeAreaSize (ref), fFlagSduiEdpActionBarJitterFix (ref), discoveryTypesModule (ref), useEntrySurfacing (ref), experienceDetailsPageConstantsModule (ref), useSelector (ref), peekViewState (ref), fFlagEnableMotionJitterMetric (ref), useMotionJitterMetricModule (ref), appPage (ref), sessionType (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), gameDetailsPeekViewEvents (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), peekViewWithTopBar (ref), peekViewTopBarModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), experienceDetailsPersistentActionBarModule (ref), sduiFeatureEntryPoint (ref), experienceDetailsFallbackActionBarModule (ref)
+	-- upvalues: experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), usePageScopeRef (ref), reactModule (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useTokens (ref), useNavigation (ref), useRoactService (ref), appEventIngestService (ref), appSessionService (ref), useDispatch (ref), fFlagLuaAppSduiEdpHideSystemBarOnPeekViewMount (ref), setTabBarVisible (ref), fFlagSduiPlayWithRewardGapFix (ref), filterPlayWithReward (ref), useTopBarHeight (ref), useScreenSize (ref), useDeviceInsets (ref), getSafeAreaSize (ref), useEntrySurfacing (ref), experienceDetailsPageConstantsModule (ref), useSelector (ref), peekViewState (ref), fFlagEnableMotionJitterMetric (ref), useMotionJitterMetricModule (ref), appPage (ref), sessionType (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), gameDetailsPeekViewEvents (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), peekViewWithTopBar (ref), peekViewTopBarModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), experienceDetailsPersistentActionBarModule (ref), sduiFeatureEntryPoint (ref), experienceDetailsFallbackActionBarModule (ref)
 	local universeId = experienceDetailsPageUtilsModule.getUniverseId(p1)
 	local analyticsSource = experienceDetailsPageUtilsModule.getAnalyticsSource(p1)
 	local tilePositionIndex = experienceDetailsPageUtilsModule.getTilePositionIndex(p1)
@@ -115,21 +113,19 @@ return reactModule.memo(function(p1)
 	local minValue = math.min(getSafeAreaSize(useScreenSize(), useDeviceInsets()).X.Offset, 640)
 	local var9 = reactModule.useRef(nil)
 	local var10, var11 = reactModule.useState(function()
-		-- upvalues: fFlagSduiEdpActionBarJitterFix (copy), var3 (ref), discoveryTypesModule (copy)
-		return if fFlagSduiEdpActionBarJitterFix then var3.Padding.Medium + var3.Size.Size_1200 else discoveryTypesModule.Constants.GAME_DETAILS_ACTION_BAR_HEIGHT
+		-- upvalues: var3 (ref)
+		return var3.Padding.Medium + var3.Size.Size_1200
 	end)
 	local var12 = reactModule.useCallback(function(p2)
-		-- upvalues: fFlagSduiEdpActionBarJitterFix (copy), var3 (ref), var11 (ref)
+		-- upvalues: var3 (ref), var11 (ref)
 		local y = p2.AbsoluteSize.Y
 		
-		if fFlagSduiEdpActionBarJitterFix and y > 0 then
+		if y > 0 then
 			local var13 = var3.Padding.Medium + var3.Size.Size_1200
 			
 			if y <= var13 + var3.Padding.Medium then
 				y = var13
 			end
-		end
-		if y > 0 then
 			var11(y)
 		end
 	end, { var3 })

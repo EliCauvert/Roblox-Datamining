@@ -37,7 +37,7 @@ local function checkEditableImageSize(p1, p2, p3, p4, p5, p6, p7)
 			}, p6)
 		end
 		return
-	elseif p7 and p7.consumerEnv == validationEnumsModule.ConsumerEnv.Backend then
+	elseif p7 and p7.validationEnv == validationEnumsModule.ValidationEnv.Backend then
 		p5:fetchError(string.format("Failed to get texture size for '%s'. Make sure the texture exists and try again.", p3))
 	end
 	p5:fail(errorSourceStringsModule.Keys.TextureSize_FailedToLoad, { FullName = p3 }, p6)

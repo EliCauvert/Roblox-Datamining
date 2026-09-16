@@ -8,6 +8,7 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local createEditableInstancesForContextModule = require(parent.util.createEditableInstancesForContext)
 local getFFlagUGCValidateMigrateWrapAndMakeupModule = require(parent.flags.getFFlagUGCValidateMigrateWrapAndMakeup)
 local getFFlagUGCValidateDecalTextureLimitsModule = require(parent.flags.getFFlagUGCValidateDecalTextureLimits)
+local getFFlagUGCValidationAllowFullVaasModule = require(parent.flags.getFFlagUGCValidationAllowFullVaas)
 local validateMakeupZoneIncludeToleranceHundredthsPercent = game:DefineFastInt("ValidateMakeupZoneIncludeToleranceHundredthsPercent", 100)
 local validateMakeupZoneExcludeHundredthsPercent = game:DefineFastInt("ValidateMakeupZoneExcludeHundredthsPercent", 200)
 local t = {
@@ -129,10 +130,18 @@ local function validateUVZones(p15, p16, p17, p18, p19, p20)
 end
 
 function t_2.run(p21, p22)
-	-- upvalues: t (ref), t_1 (ref), constantsModule (ref), createEditableInstancesForContextModule (ref), errorSourceStringsModule (ref), getFFlagUGCValidateDecalTextureLimitsModule (ref), constantsInterfaceModule (ref), validateTextureSize (ref), validateUVZones (ref)
+	-- upvalues: getFFlagUGCValidationAllowFullVaasModule (ref), validationEnumsModule (ref), t (ref), t_1 (ref), constantsModule (ref), createEditableInstancesForContextModule (ref), errorSourceStringsModule (ref), getFFlagUGCValidateDecalTextureLimitsModule (ref), constantsInterfaceModule (ref), validateTextureSize (ref), validateUVZones (ref)
+	local var14
 	local rootInstance = p22.rootInstance
 	local assetType = p22.uploadEnum.assetType
-	local var14 = t[p22.consumerConfig.source] == true
+	local consumerConfig = p22.consumerConfig
+	
+	if getFFlagUGCValidationAllowFullVaasModule() and consumerConfig.isVaaS then
+		var14 = consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend
+		var14 = nil
+	else
+		var14 = t[consumerConfig.source] == true
+	end
 	local wrapTextureTransfer = rootInstance:FindFirstChildOfClass("WrapTextureTransfer")
 	
 	if wrapTextureTransfer == nil then
@@ -140,7 +149,7 @@ function t_2.run(p21, p22)
 	end
 	p21:setReportingInstance(rootInstance)
 	local preloadedEditableImages = p22.consumerConfig.preloadedEditableImages
-	local var15 = t_1[p22.consumerConfig.source] == true
+	local var15 = t_1[consumerConfig.source] == true
 	local decal = constantsModule.TEXTURE_CONTENT_ID_FIELDS.Decal
 	
 	if not decal then
@@ -154,17 +163,18 @@ function t_2.run(p21, p22)
 		if var17 and var17.Uri ~= nil and var17.Uri ~= "" or var15 and var17 and var17.Object then
 			local editableImage, editableImage_1 = createEditableInstancesForContextModule.getEditableInstanceInfo(var17, preloadedEditableImages, "EditableImage", var15)
 			
-			if editableImage and editableImage_1 and editableImage_1.instance then
-				local instance = editableImage_1.instance
-				
-				if v == "ColorMap" then
-					var16 = instance
+			if not editableImage or not editableImage_1 or not editableImage_1.instance then
+				if var14 then
+					p21:forceError(string.format("Failed to load %s for Decal %s", v, rootInstance.Name))
 				end
-				validateTextureSize(p21, instance, rootInstance:GetFullName() .. "." .. v, v, if getFFlagUGCValidateDecalTextureLimitsModule() and assetType then constantsInterfaceModule.getTextureLimit(assetType, rootInstance, v) else constantsModule.MAX_TEXTURE_SIZE, var14)
-			elseif var14 then
-				p21:forceError(string.format("Failed to load %s for Decal %s", v, rootInstance.Name))
+				p21:fail(errorSourceStringsModule.Keys.MakeupDecal_FailedToLoadTexture, { fieldName = v, instanceName = rootInstance.Name })
 			end
-			p21:fail(errorSourceStringsModule.Keys.MakeupDecal_FailedToLoadTexture, { fieldName = v, instanceName = rootInstance.Name })
+			local instance = editableImage_1.instance
+			
+			if v == "ColorMap" then
+				var16 = instance
+			end
+			validateTextureSize(p21, instance, rootInstance:GetFullName() .. "." .. v, v, if getFFlagUGCValidateDecalTextureLimitsModule() and assetType then constantsInterfaceModule.getTextureLimit(assetType, rootInstance, v) else constantsModule.MAX_TEXTURE_SIZE, var14)
 		end
 	end
 	if not var16 then

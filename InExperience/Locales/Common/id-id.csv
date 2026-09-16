@@ -728,6 +728,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,Kami tidak dapat men
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,Permintaan dukungan terkirim
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,Dukungan pemain saat ini tidak tersedia. Coba lagi nanti.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,Dukungan pemain tidak tersedia
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,Tulis deskripsi yang lebih terperinci
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,Kamu harus memainkan pengalaman ini baru-baru ini untuk mengajukan permintaan dukungan.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,Kunjungi pengalaman virtual ini untuk mengajukan permintaan
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,Tunggu hingga kreator menanggapi permintaanmu yang sudah ada sebelum mengirimkan permintaan lain.
@@ -2058,7 +2059,6 @@ Feature.Build.Description.RevertToVersion,Konfirmasi untuk membatalkan perubahan
 Feature.Build.Description.ShareLatest,Bagikan apa yang berubah di versi terbarumu.
 Feature.Build.Description.ShopButton,Tambahkan entry point belanja
 Feature.Build.Description.UpdateDeveloperProduct,Perbarui produk developer {PRODUCT_ID}.
-Feature.Build.Description.VersionChanges,Beri tahu pemain perubahan pada versi ini.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Deskripsi maksimal 1.000 karakter.
 Feature.Build.Error.DeveloperProductNameRequired,Masukkan nama produk.
 Feature.Build.Error.DeveloperProductNameTooLong,Nama harus terdiri dari maksimal 50 karakter.
@@ -2239,7 +2239,6 @@ Feature.Build.Label.Version,Versi
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,Judul & deskripsi versi
 Feature.Build.Label.Video,Video
 Feature.Build.Message.AccountRequirements,Akunmu tidak memenuhi persyaratan untuk menggunakan Build.
 Feature.Build.Message.AccountTooNew,Akunmu terlalu baru untuk dipublikasikan. Coba lagi setelah 2 hari.
@@ -2318,8 +2317,10 @@ Feature.Build.Message.ShareLinkFailed,Tidak dapat membuat link referensi. Coba l
 Feature.Build.Message.SignedOut,Kamu sudah log out. Log in dan coba lagi.
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} tugas selesai
 Feature.Build.Message.ThinkingSeconds,Berpikir selama {SECONDS}dtk
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,Jadilah teman tepercaya kreator ini untuk memainkan gamenya.
 Feature.Build.Message.TryAgain,Coba lagi.
 Feature.Build.Message.TurnToPortrait,Ubah perangkatmu ke mode potret untuk terus mengerjakan game-mu.
+Feature.Build.Message.UpdateSettingsToPlaytest,"Untuk memainkan game ini, perbarui pengaturan preview game-mu."
 Feature.Build.Message.VersionHistoryLoad,Riwayat versi tidak dapat di-load.
 Feature.Build.Message.WhatToCreate,Apa yang ingin kamu buat hari ini?
 Feature.Build.Message.WorkedMinutesSeconds,Bekerja selama {MINUTES}mnt{REM_SECONDS}dtk
@@ -2372,7 +2373,6 @@ Feature.Build.Title.Tasks,Tugas
 Feature.Build.Title.TurnActivity,Aktivitas chat saat ini
 Feature.Build.Title.VersionHistory,Riwayat versi
 Feature.Build.Title.VersionInfo,Informasi versi
-Feature.Build.Title.VersionInformation,Informasi Versi
 Feature.Build.Title.VersionNumber,Versi {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,Dapat apa saja?
@@ -3977,6 +3977,7 @@ Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Lanjutkan laporanmu
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,Selesaikan laporanmu
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Terima kasih telah memulai laporan Pelanggaran Kekayaan Intelektual
 Feature.ReportAbuse.Title.SelectInSceneThankYou,Terima kasih atas laporannya
+Feature.RobloxSubscription.Action.JoinIn,Bergabunglah dalam {time}
 Feature.RobloxSubscription.Action.Subscribe,Subscribe
 Feature.RobloxSubscription.Action.TryItForFree,Coba gratis
 Feature.RobloxSubscription.Body.AlreadySubscribed,Subscription Plus-mu sudah memberikan manfaat dalam game.
@@ -3986,6 +3987,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,Verifikasi usiamu dengan pe
 Feature.RobloxSubscription.Description.Benefit.Customize,Kustomisasi dengan bingkai profil dan tema aplikasi
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"Diskon 10% selama 60 hari pertama, kemudian diskon 20% untuk item dan avatar"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,"Lebih seru, lebih hemat Robux. Subscribe Roblox Plus."
+Feature.RobloxSubscription.Description.JoinEarly,Bergabung lebih awal dengan Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Dengan mengklik \u{201C}{ctaText}\u{201D}, kamu menyetujui <a href=""{termsUrl}"">Ketentuan Subscription Roblox</a>. Biaya akan otomatis dibebankan setiap bulan hingga kamu membatalkan."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Server privat gratis
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4004,6 +4006,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Kabar baik
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Dapatkan Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus tidak tersedia di sini
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Kamu dapat menjadi yang pertama bergabung ke acara ini.
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Akses awal dengan Plus
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Status akun, pelanggaran, dan banding"
 Feature.Schools.Label.Classmates,Teman sekelas
 Feature.Screentime.Content.ScreentimeLimitDialog,Kamu telah mencapai batas durasi layar harian. Coba lagi besok untuk mengakses Roblox.

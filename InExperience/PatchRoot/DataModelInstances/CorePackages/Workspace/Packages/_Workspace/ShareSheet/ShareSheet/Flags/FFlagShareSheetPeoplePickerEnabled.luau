@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ShareSheetPeoplePickerEnabled", false)
+﻿return game:DefineFastFlag("ShareSheetPeoplePickerEnabled1", false)

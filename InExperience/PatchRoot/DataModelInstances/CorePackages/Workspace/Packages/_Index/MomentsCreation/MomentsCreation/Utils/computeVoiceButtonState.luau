@@ -12,18 +12,16 @@ return function(p1)
 	local var4 = isError and (p1.errorReason == "moderated" and not var2)
 	local text = utf8.len(p1.text) or 0
 	local var5 = p1.maxChars < text
-	local var6 = isError and not var4
+	local var6 = var3 == 0 and ((p1.hasGenerated or p1.lastSavedText ~= "") and var2)
+	local var7 = var3 > 0 and (not var5 and var2:match("%w") ~= nil)
+	local var8 = isError and not var4
 	
-	if not (var3 == 0 and ((p1.hasGenerated or p1.lastSavedText ~= "") and var2)) then
-		var1 = false
+	if not var6 then
+		var1 = var7
 		
-		if var3 > 0 then
-			var1 = not var5
-			
-			if var1 then
-				if not var2 then
-					var1 = var6 and not isLoading
-				end
+		if var1 then
+			if not var2 then
+				var1 = var8 and not isLoading
 			end
 		end
 		return {

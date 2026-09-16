@@ -143,12 +143,13 @@ return {
 		if consumerConfig.source == "AutoSetup" then return end
 		local rootInstance = p14.rootInstance
 		local contentIds = p14.contentIds
+		local validationEnv = consumerConfig.validationEnv
 		
-		if consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Studio then
+		if validationEnv == validationEnumsModule.ValidationEnv.Studio then
 			runStudio(p13, rootInstance, contentIds)
 			
 			return
-		elseif consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend then
+		elseif validationEnv == validationEnumsModule.ValidationEnv.Backend then
 			local backendConfigs = consumerConfig.backendConfigs
 			
 			if getFFlagUGCValidateBackendInExperienceViaCanPublishModule() and backendConfigs.universeId then
@@ -162,7 +163,7 @@ return {
 			runBackend(p13, contentIds, backendConfigs)
 			
 			return
-		elseif consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC then
+		elseif validationEnv == validationEnumsModule.ValidationEnv.IEC then
 			runCanPublishOwnershipCheck(p13, rootInstance, contentIds, consumerConfig.iecConfigs)
 		end
 	end

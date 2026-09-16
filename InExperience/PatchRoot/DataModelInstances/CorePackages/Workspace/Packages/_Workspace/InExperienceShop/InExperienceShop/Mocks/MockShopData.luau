@@ -210,7 +210,11 @@ end
 
 local list_2 = {
 	{ name = "Home" },
-	{ name = "Top picks", items = pickRandomItems() },
+	{
+		name = "Top picks",
+		items = pickRandomItems(),
+		categoryType = constantsModule.TOP_PICKS_CATEGORY_TYPE
+	},
 	{
 		name = "Robux",
 		bonusJwt = "mock-bonus-jwt",
@@ -303,7 +307,8 @@ local function buildShopData()
 				name = v.name,
 				items = v.items or {},
 				robuxPackages = v.robuxPackages,
-				bonusJwt = v.bonusJwt
+				bonusJwt = v.bonusJwt,
+				categoryType = v.categoryType
 			})
 		end
 	end

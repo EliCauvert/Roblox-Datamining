@@ -9,6 +9,7 @@ local unifiedEventLoggingUtilsModule = require(avatarExperienceAnalytics.Utils.U
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAddTypesToWidgetItems = avatarExperienceFlagsModule.FFlagAddTypesToWidgetItems
 local fFlagAXOrganicItemPosition = avatarExperienceFlagsModule.FFlagAXOrganicItemPosition
+local fFlagAXEditorRecommendedItemsUnifiedImpressions = avatarExperienceFlagsModule.FFlagAXEditorRecommendedItemsUnifiedImpressions
 
 local function isReadyToLog(p1)
 	-- upvalues: itemTypeEnum (ref)
@@ -58,7 +59,7 @@ local function isReadyToLog(p1)
 end
 
 local function buildFields(p1)
-	-- upvalues: fFlagAXOrganicItemPosition (ref), getMarketplaceUnifiedItemTypeModule (ref), getItemSelectionActionModule (ref), unifiedEventLoggingUtilsModule (ref), getTimedOptionForItemDataModule (ref), fFlagAddTypesToWidgetItems (ref), cryoModule (ref)
+	-- upvalues: fFlagAXOrganicItemPosition (ref), getMarketplaceUnifiedItemTypeModule (ref), getItemSelectionActionModule (ref), fFlagAXEditorRecommendedItemsUnifiedImpressions (ref), unifiedEventLoggingUtilsModule (ref), getTimedOptionForItemDataModule (ref), fFlagAddTypesToWidgetItems (ref), cryoModule (ref)
 	local itemData = p1.itemData
 	local lookData = p1.lookData
 	local hydratedContent = p1.hydratedContent
@@ -79,6 +80,7 @@ local function buildFields(p1)
 		category = p1.impressionsCategory,
 		subcategory = p1.impressionsSubcategory,
 		taxonomyId = p1.impressionsTaxonomyId,
+		section = if fFlagAXEditorRecommendedItemsUnifiedImpressions then p1.section else nil,
 		assetIds = if widgetAnalyticsInfo and assetAndBundleIds then assetAndBundleIds.assetIds else nil,
 		bundleIds = if widgetAnalyticsInfo and assetAndBundleIds then assetAndBundleIds.bundleIds else nil,
 		organicAssetIds = if isOrganic and assetAndBundleIds then assetAndBundleIds.assetIds else nil,

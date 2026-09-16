@@ -3,24 +3,20 @@ local parent = moments.Parent
 local httpService = game:GetService("HttpService")
 local signalsModule = require(parent.Signals)
 local fFlagEnableArgus = require(parent.SharedFlags).FFlagEnableArgus
-local getFFlagMomentsPauseAudioThroughTeleportModule = require(moments.Flags.GetFFlagMomentsPauseAudioThroughTeleport)
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
 local createSignal = signalsModule.createSignal
 
 return function()
-	-- upvalues: createSignal (ref), httpService (ref), getFFlagMomentsPauseAudioThroughTeleportModule (ref), getMomentsPreferencesStoreModule (ref), fFlagEnableArgus (ref)
+	-- upvalues: createSignal (ref), httpService (ref), getMomentsPreferencesStoreModule (ref), fFlagEnableArgus (ref)
 	local var1, var2 = createSignal(httpService:GenerateGUID(false))
 	local var3, var4 = createSignal("watch_tab")
 	local var5, var6 = createSignal(os.clock())
 	
 	local function resetSession()
-		-- upvalues: var2 (ref), httpService (copy), var6 (ref), getFFlagMomentsPauseAudioThroughTeleportModule (copy), getMomentsPreferencesStoreModule (copy)
+		-- upvalues: var2 (ref), httpService (copy), var6 (ref), getMomentsPreferencesStoreModule (copy)
 		var2(httpService:GenerateGUID(false))
 		var6(os.clock())
-		
-		if getFFlagMomentsPauseAudioThroughTeleportModule() then
-			getMomentsPreferencesStoreModule(false).setTeleporting(false)
-		end
+		getMomentsPreferencesStoreModule(false).setTeleporting(false)
 	end
 	
 	local var7, var8 = createSignal(false)

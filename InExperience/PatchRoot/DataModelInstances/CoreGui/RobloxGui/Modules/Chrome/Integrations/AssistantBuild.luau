@@ -1,5 +1,4 @@
-﻿local var1
-local chrome = script:FindFirstAncestor("Chrome")
+﻿local chrome = script:FindFirstAncestor("Chrome")
 local corePackagesService = game:GetService("CorePackages")
 local VRService = game:GetService("VRService")
 local reactModule = require(corePackagesService.Packages.React)
@@ -7,47 +6,34 @@ local foundationModule = require(corePackagesService.Packages.Foundation)
 local buildExperienceModule = require(corePackagesService.Workspace.Packages.BuildExperience)
 local buildModeLaunchModule = require(corePackagesService.Workspace.Packages.BuildExperiencePlaytestLaunch.BuildModeLaunch)
 local serviceModule = require(chrome.Service)
-local fFlagBuildExperienceLibrary = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagBuildExperienceLibrary
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
 local function _()
-	-- upvalues: buildModeLaunchModule (ref), fFlagBuildExperienceLibrary (ref), VRService (ref)
-	local var2
-	if not buildModeLaunchModule:hasBuildMode() then
-		var2 = fFlagBuildExperienceLibrary and (game:GetEngineFeature("IsViewingCloudEdit") and not VRService.VREnabled)
-	end
-	return var2
+	-- upvalues: buildModeLaunchModule (ref), VRService (ref)
+	return buildModeLaunchModule:hasBuildMode() and not VRService.VREnabled
 end
 
-local t = {
+return serviceModule:register({
 	id = "assistant_build",
-	label = "CommonUI.Features.NavBar.Build"
-}
-
-if not buildModeLaunchModule:hasBuildMode() then
-	var1 = fFlagBuildExperienceLibrary and (game:GetEngineFeature("IsViewingCloudEdit") and not VRService.VREnabled)
-end
-t.initialAvailability = if var1 then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable
-
-function t.activated(_)
-	-- upvalues: buildExperienceModule (ref)
-	local assistantBuildStore = buildExperienceModule.GetAssistantBuildStore()
-	local playButtonStore = buildExperienceModule.GetPlayButtonStore()
-	
-	if assistantBuildStore.getIsDisabled() then
-		assistantBuildStore.setIsDisabledTooltipOpen(not assistantBuildStore.getIsDisabledTooltipOpen())
+	label = "CommonUI.Features.NavBar.Build",
+	initialAvailability = if buildModeLaunchModule:hasBuildMode() and not VRService.VREnabled then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
+	activated = function(_)
+		-- upvalues: buildExperienceModule (ref)
+		local assistantBuildStore = buildExperienceModule.GetAssistantBuildStore()
+		local playButtonStore = buildExperienceModule.GetPlayButtonStore()
 		
-		return
-	end
-	assistantBuildStore.setIsDisabledTooltipOpen(false)
-	playButtonStore.setIsActive(true)
-end
-
-t.components = {
-	Icon = function(_)
-		-- upvalues: reactModule (ref), buildExperienceModule (ref), buttonVariant (ref)
-		return reactModule.createElement(buildExperienceModule.AssistantBuild, { variant = buttonVariant.Utility })
-	end
-}
-
-return serviceModule:register(t)
+		if assistantBuildStore.getIsDisabled() then
+			assistantBuildStore.setIsDisabledTooltipOpen(not assistantBuildStore.getIsDisabledTooltipOpen())
+			
+			return
+		end
+		assistantBuildStore.setIsDisabledTooltipOpen(false)
+		playButtonStore.setIsActive(true)
+	end,
+	components = {
+		Icon = function(_)
+			-- upvalues: reactModule (ref), buildExperienceModule (ref), buttonVariant (ref)
+			return reactModule.createElement(buildExperienceModule.AssistantBuild, { variant = buttonVariant.Utility })
+		end
+	}
+})

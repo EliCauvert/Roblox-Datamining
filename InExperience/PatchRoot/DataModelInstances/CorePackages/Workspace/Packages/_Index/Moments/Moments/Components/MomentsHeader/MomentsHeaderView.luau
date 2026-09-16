@@ -34,7 +34,7 @@ local function renderAction(p1, p2, p3, p4)
 end
 
 return function(p1)
-	-- upvalues: renderAction (ref), chevronLargeLeft (ref), plusLarge (ref), flyoutSidePanelIXP (ref), reactModule (ref), flyoutLeftHeader (ref), view (ref), text (ref), iconButton (ref), buttonVariant (ref), inputSize (ref), foundationModule (ref), coachmark (ref), navigationMenuModule (ref), headerBar (ref), gradientBackdrop (ref), constantsModule (ref)
+	-- upvalues: renderAction (ref), chevronLargeLeft (ref), plusLarge (ref), reactModule (ref), iconButton (ref), buttonVariant (ref), inputSize (ref), navigationMenuModule (ref), view (ref), flyoutSidePanelIXP (ref), flyoutLeftHeader (ref), text (ref), foundationModule (ref), coachmark (ref), headerBar (ref), gradientBackdrop (ref), constantsModule (ref)
 	local var1 = nil
 	local var2 = nil
 	
@@ -44,7 +44,34 @@ return function(p1)
 			return renderAction("back", chevronLargeLeft, p1.onBack, 1)
 		end
 		
-		if p1.showInteractiveButtons and p1.showCreateButton then
+		if p1.showInteractiveButtons and p1.showNavigationMenu then
+			local t = {}
+			
+			if p1.showCreateButton then
+				t.CreateMomentButton = reactModule.createElement(iconButton, {
+					LayoutOrder = 1,
+					isCircular = true,
+					Selectable = true,
+					testId = "--moments-header--actions--create",
+					icon = plusLarge,
+					onActivated = p1.onCreateMomentButtonPressed,
+					variant = buttonVariant.Utility,
+					size = inputSize.Medium
+				})
+			end
+			t.NavigationMenu = reactModule.createElement(navigationMenuModule, {
+				layoutOrder = 2,
+				buttonTestId = "--moments-header--actions--more",
+				buttonVariant = buttonVariant.Utility,
+				onNavigateToTrending = p1.onNavigateToTrending,
+				onNavigateToMyMoments = p1.onNavigateToMyMoments
+			})
+			
+			var2 = function()
+				-- upvalues: reactModule (copy), view (copy), t (ref)
+				return reactModule.createElement(view, { tag = "row align-y-center gap-xsmall auto-xy" }, t)
+			end
+		elseif p1.showInteractiveButtons and p1.showCreateButton then
 			var2 = function()
 				-- upvalues: renderAction (copy), plusLarge (copy), p1 (ref)
 				return renderAction("create", plusLarge, p1.onCreateMomentButtonPressed, 1)

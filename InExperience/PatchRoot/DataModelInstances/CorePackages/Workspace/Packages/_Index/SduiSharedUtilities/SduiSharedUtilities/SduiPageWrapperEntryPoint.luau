@@ -28,9 +28,11 @@ local useUiStatusModule = require(sduiSharedUtilities.hooks.useUiStatus)
 local useDataUpdatedTimestampModule = require(sduiSharedUtilities.hooks.useDataUpdatedTimestamp)
 local useSduiPageContentModule = require(sduiSharedUtilities.hooks.useSduiPageContent)
 local usePageEntrySnackbarModule = require(sduiSharedUtilities.usePageEntrySnackbar)
+local fFlagAppPageShellScrollToTopFocus = require(parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
+local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDefaultSelection
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), useDispatch (ref), useComponentConfigModule (ref), useUiStatusModule (ref), uiStatus (ref), useLocalAnalyticsDataModule (ref), reactModule (ref), signal (ref), useStatefulRefModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateBack (ref), reactFocusNavigationModule (ref), useCloseWithBackButton (ref), usePageEntrySnackbarModule (ref), useDataUpdatedTimestampModule (ref), useCreateClientBindingSduiContextModule (ref), useSduiPageContentModule (ref), getSduiComponentWrapper (ref), foundationModule (ref), loading (ref), sduiPageErrorStateModule (ref), visibilityControl (ref), page (ref), reactRobloxModule (ref), snackbar (ref), coreGuiService (ref)
+	-- upvalues: useTokens (ref), useDispatch (ref), useComponentConfigModule (ref), useUiStatusModule (ref), uiStatus (ref), useLocalAnalyticsDataModule (ref), reactModule (ref), signal (ref), useStatefulRefModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateBack (ref), reactFocusNavigationModule (ref), useCloseWithBackButton (ref), fFlagAppPageShellScrollToTopFocus (ref), usePageEntrySnackbarModule (ref), useDataUpdatedTimestampModule (ref), useCreateClientBindingSduiContextModule (ref), useSduiPageContentModule (ref), fFlagLuaAppsDefaultSelection (ref), getSduiComponentWrapper (ref), foundationModule (ref), loading (ref), sduiPageErrorStateModule (ref), visibilityControl (ref), page (ref), reactRobloxModule (ref), snackbar (ref), coreGuiService (ref)
 	local appPage = p1.appPage
 	local configKey = p1.configKey or appPage
 	local var2 = `SduiPageWrapperEntryPoint-{configKey}`
@@ -67,7 +69,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		var4(navigateBack())
 	end, { var4, p1.onCloseActivated })
 	local _, var14 = reactFocusNavigationModule.useMostRecentOrDefaultFocusBehavior(var12)
-	local var15 = useCloseWithBackButton(var14, var13)
+	local var15 = useCloseWithBackButton(var14, if fFlagAppPageShellScrollToTopFocus and p1.handleBackButton == false then nil else var13)
 	local var16 = usePageEntrySnackbarModule(configKey)
 	local var17, var18 = reactModule.useState(nil)
 	local var19 = useCreateClientBindingSduiContextModule(appPage, var17, nil, useDataUpdatedTimestampModule(configKey, p1.contentIdentifier), configKey, nil, p1.routeName, p1.scrollAway, p1.videoPlaybackContext)
@@ -79,7 +81,8 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		localAnalyticsData = var9,
 		debugName = var2,
 		pageTimer = p1.pageTimer,
-		refreshSignal = var10
+		refreshSignal = var10,
+		defaultFocusRef = if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil
 	})
 	local localStickyHeaderSlot = p1.localStickyHeaderSlot
 	local var21 = reactModule.useMemo(function()

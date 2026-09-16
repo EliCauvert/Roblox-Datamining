@@ -11,13 +11,14 @@ local useDesignTokens = require(parent.Style).useDesignTokens
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXWidgetHeaderTreatEmptyTextAsNil = avatarExperienceFlagsModule.FFlagAXWidgetHeaderTreatEmptyTextAsNil
 local fFlagAXCatalogItemInformationPopover = avatarExperienceFlagsModule.FFlagAXCatalogItemInformationPopover
+local fFlagAXWidgetHeaderFlexLayout = avatarExperienceFlagsModule.FFlagAXWidgetHeaderFlexLayout
 
 local function _(p1)
 	return if p1 == nil or p1 == "" then nil else p1
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), useDesignTokens (ref), useLocalization (ref), fFlagAXWidgetHeaderTreatEmptyTextAsNil (ref), fFlagAXCatalogItemInformationPopover (ref), iconWithTooltip (ref), tooltipOrientation (ref), button (ref), buttonType (ref), standardButtonSize (ref)
+	-- upvalues: reactModule (ref), useDesignTokens (ref), useLocalization (ref), fFlagAXWidgetHeaderTreatEmptyTextAsNil (ref), fFlagAXCatalogItemInformationPopover (ref), fFlagAXWidgetHeaderFlexLayout (ref), iconWithTooltip (ref), tooltipOrientation (ref), button (ref), buttonType (ref), standardButtonSize (ref)
 	local titleText, var1, var2
 	local var3, var4 = reactModule.useBinding(Vector2.new())
 	local var5 = useDesignTokens()
@@ -66,7 +67,7 @@ return function(p1)
 		TextXAlignment = Enum.TextXAlignment.Left
 	}, {
 		UIFlexItem = if var9 then reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Shrink }) else nil,
-		UISizeConstraint = if p1.seeAllCallback then reactModule.createElement("UISizeConstraint", {
+		UISizeConstraint = if fFlagAXWidgetHeaderFlexLayout then nil elseif p1.seeAllCallback then reactModule.createElement("UISizeConstraint", {
 			MinSize = var3:map(function(p2)
 				return Vector2.new(0, p2.Y)
 			end)
@@ -80,15 +81,24 @@ return function(p1)
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = p1.LayoutOrder
 	}, {
+		UIListLayout = if fFlagAXWidgetHeaderFlexLayout then reactModule.createElement("UIListLayout", {
+			FillDirection = Enum.FillDirection.Horizontal,
+			HorizontalAlignment = Enum.HorizontalAlignment.Right,
+			VerticalAlignment = Enum.VerticalAlignment.Center,
+			SortOrder = Enum.SortOrder.LayoutOrder,
+			Padding = UDim.new(0, var5.Size.Size_300)
+		}) else nil,
 		TitleDescriptionFrame = if var1 or var2 then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = if p1.seeAllCallback then var3:map(function(p2)
+			LayoutOrder = if fFlagAXWidgetHeaderFlexLayout then 1 else nil,
+			Size = if fFlagAXWidgetHeaderFlexLayout then UDim2.new(1, 0, 0, 0) elseif p1.seeAllCallback then var3:map(function(p2)
 				-- upvalues: var5 (ref)
 				return UDim2.new(1, 0 - (p2.X + var5.Size.Size_300), 0, 0)
 			end) else UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
+			UIFlexItem = if fFlagAXWidgetHeaderFlexLayout then reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Shrink }) else nil,
 			UIListLayout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
@@ -141,7 +151,17 @@ return function(p1)
 				TextXAlignment = Enum.TextXAlignment.Left
 			}) else nil
 		}) else nil,
-		SeeAll = if p1.seeAllCallback then reactModule.createElement(button, {
+		SeeAll = if fFlagAXWidgetHeaderFlexLayout and p1.seeAllCallback then reactModule.createElement(button, {
+			layoutOrder = 2,
+			fitContent = true,
+			buttonType = buttonType.Secondary,
+			text = var6.seeAllButtonText,
+			standardSize = standardButtonSize.XSmall,
+			onActivated = p1.seeAllCallback,
+			buttonRef = p1.seeAllRef,
+			NextSelectionDown = p1.NextSelectionDown,
+			NextSelectionUp = p1.NextSelectionUp
+		}) elseif p1.seeAllCallback then reactModule.createElement(button, {
 			buttonType = buttonType.Secondary,
 			anchorPoint = Vector2.new(1, 0),
 			position = UDim2.fromScale(1, 0),

@@ -116,7 +116,7 @@ function t.run(p11, p12)
 	end
 	local var13, _, var14 = boundsCalculatorModule.calculateIndividualAssetPartsData(rootInstance, {
 		assetTypeEnum = assetType,
-		isServer = p12.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
+		isServer = p12.consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend,
 		editableMeshes = t
 	})
 	

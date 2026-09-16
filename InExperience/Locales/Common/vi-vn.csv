@@ -728,6 +728,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,Chúng tôi không t
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,Đã gửi yêu cầu hỗ trợ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,Tính năng hỗ trợ người chơi hiện không hoạt động. Vui lòng thử lại sau.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,Tính năng hỗ trợ người chơi không hoạt động
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,Vui lòng mô tả cụ thể hơn
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,Bạn phải chơi trải nghiệm này trong thời gian gần đây mới có thể gửi yêu cầu hỗ trợ.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,Truy cập trải nghiệm này để gửi yêu cầu
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,Vui lòng chờ nhà sáng tạo phản hồi các yêu cầu hiện tại trước khi gửi thêm yêu cầu mới.
@@ -2058,7 +2059,6 @@ Feature.Build.Description.RevertToVersion,Xác nhận trả về bản thay đ�
 Feature.Build.Description.ShareLatest,Chia sẻ về những thay đổi trong phiên bản mới nhất của bạn.
 Feature.Build.Description.ShopButton,Thêm điểm truy cập cửa hàng
 Feature.Build.Description.UpdateDeveloperProduct,Cập nhật sản phẩm của nhà phát triển {PRODUCT_ID}.
-Feature.Build.Description.VersionChanges,Cho người chơi biết điều gì đã thay đổi trong phiên bản này.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,Nội dung mô tả không được quá 1.000 ký tự.
 Feature.Build.Error.DeveloperProductNameRequired,Nhập tên sản phẩm.
 Feature.Build.Error.DeveloperProductNameTooLong,Tên chỉ được chứa tối đa 50 ký tự.
@@ -2239,7 +2239,6 @@ Feature.Build.Label.Version,Phiên bản
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,Tiêu đề và mô tả phiên bản
 Feature.Build.Label.Video,Video
 Feature.Build.Message.AccountRequirements,Tài khoản của bạn không đáp ứng các yêu cầu để sử dụng Build.
 Feature.Build.Message.AccountTooNew,Tài khoản của bạn còn quá mới nên chưa thể đăng. Hãy thử lại khi bạn đã tạo tài khoản được 2 ngày.
@@ -2318,8 +2317,10 @@ Feature.Build.Message.ShareLinkFailed,Không thể tạo đường liên kết c
 Feature.Build.Message.SignedOut,Bạn đã đăng xuất. Hãy đăng nhập và thử lại.
 Feature.Build.Message.TasksCompleted,Đã hoàn thành {NUM_COMPLETED_TASKS} nhiệm vụ
 Feature.Build.Message.ThinkingSeconds,Suy nghĩ trong {SECONDS}giây
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,Hãy trở thành bạn bè đáng tin cậy với nhà sáng tạo này để chơi trò chơi của họ.
 Feature.Build.Message.TryAgain,Hãy thử lại.
 Feature.Build.Message.TurnToPortrait,Hãy xoay thiết bị sang chế độ dọc để tiếp tục thao tác trên trò chơi của bạn.
+Feature.Build.Message.UpdateSettingsToPlaytest,"Để chơi trò chơi này, hãy cập nhật cài đặt xem trước trò chơi."
 Feature.Build.Message.VersionHistoryLoad,Không thể tải lịch sử phiên bản.
 Feature.Build.Message.WhatToCreate,Hôm nay bạn muốn tạo nội dung gì?
 Feature.Build.Message.WorkedMinutesSeconds,Đã xử lý trong {MINUTES} phút {REM_SECONDS} giây
@@ -2372,7 +2373,6 @@ Feature.Build.Title.Tasks,Nhiệm vụ
 Feature.Build.Title.TurnActivity,Hoạt động trong lượt
 Feature.Build.Title.VersionHistory,Lịch sử phiên bản
 Feature.Build.Title.VersionInfo,Thông tin phiên bản
-Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,Phiên bản {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,Bao gồm những gì?
@@ -3979,6 +3979,7 @@ Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,Hoàn thành báo cáo của bạn
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Cảm ơn bạn đã khởi tạo báo cáo trường hợp Vi phạm sở hữu trí tuệ
 Feature.ReportAbuse.Title.SelectInSceneThankYou,Cảm ơn bạn đã báo cáo
+Feature.RobloxSubscription.Action.JoinIn,Tham gia sau {time}
 Feature.RobloxSubscription.Action.Subscribe,Đăng ký
 Feature.RobloxSubscription.Action.TryItForFree,Dùng thử miễn phí
 Feature.RobloxSubscription.Body.AlreadySubscribed,Gói đăng ký Plus của bạn đã có sẵn các lợi ích trong trò chơi.
@@ -3988,6 +3989,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,Hãy xác minh tuổi bằn
 Feature.RobloxSubscription.Description.Benefit.Customize,Tùy chỉnh bằng khung hồ sơ và chủ đề của ứng dụng
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"Giảm 10% trong 60 ngày đầu, sau đó giảm 20% cho vật phẩm và avatar"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,"Vui hơn, tốn ít Robux hơn. Đăng ký Roblox Plus ngay."
+Feature.RobloxSubscription.Description.JoinEarly,Mua gói Plus để được tham gia sớm
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Khi nhấp chuột vào \u{201C}{ctaText}\u{201D}, bạn đồng ý với <a href=""{termsUrl}"">Điều khoản gói đăng ký của Roblox</a>. Hệ thống sẽ tự động thu phí hằng tháng cho đến khi bạn hủy."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Máy chủ riêng miễn phí
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4006,6 +4008,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,Tin vui cho bạn
 Feature.RobloxSubscription.Title.GenericError,Đã gặp lỗi
 Feature.RobloxSubscription.Title.GetBlackbird,Mua gói Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Gói Roblox Plus không hỗ trợ nền tảng này
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Bạn có thể tham gia sự kiện sớm hơn những người khác.
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Mua gói Plus để có quyền truy cập sớm
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"Trạng thái tài khoản, vi phạm và khiếu nại"
 Feature.Schools.Label.Classmates,Bạn cùng lớp
 Feature.Screentime.Content.ScreentimeLimitDialog,Bạn đã đạt giới hạn thời gian dùng máy hàng ngày. Hãy quay lại vào ngày mai để truy cập lại vào Roblox.

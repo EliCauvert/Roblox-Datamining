@@ -20,7 +20,6 @@ local sduiFeatureEntryPointUiModule = require(sduiSharedUtilities.ui.SduiFeature
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler = sharedFlagsModule.FFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler
 local fFlagSduiUseSharedUiStatusHook = sharedFlagsModule.FFlagSduiUseSharedUiStatusHook
-local fFlagSduiClientPageScope = sharedFlagsModule.FFlagSduiClientPageScope
 
 local function _(p1)
 	-- upvalues: signalsReactModule (ref), getSduiApiStoreModule (ref), dataHydrationTypes (ref)
@@ -30,7 +29,7 @@ local function _(p1)
 end
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useComponentConfigModule (ref), useComponentLifecycleTimingModule (ref), useDataUpdatedTimestampModule (ref), fFlagSduiUseSharedUiStatusHook (ref), useUiStatusModule (ref), signalsReactModule (ref), getSduiApiStoreModule (ref), dataHydrationTypes (ref), useStatefulRefModule (ref), useCreateClientBindingSduiContextModule (ref), fFlagSduiClientPageScope (ref), useLocalAnalyticsDataModule (ref), reactModule (ref), sduiFeatureEntryPointUiModule (ref), getSduiComponentWrapper (ref), fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler (ref)
+	-- upvalues: useComponentConfigModule (ref), useComponentLifecycleTimingModule (ref), useDataUpdatedTimestampModule (ref), fFlagSduiUseSharedUiStatusHook (ref), useUiStatusModule (ref), signalsReactModule (ref), getSduiApiStoreModule (ref), dataHydrationTypes (ref), useStatefulRefModule (ref), useCreateClientBindingSduiContextModule (ref), useLocalAnalyticsDataModule (ref), reactModule (ref), sduiFeatureEntryPointUiModule (ref), getSduiComponentWrapper (ref), fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler (ref)
 	local var1
 	local configKey = p1.configKey
 	local appPage = p1.appPage
@@ -54,7 +53,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		contentSlot = if var4 then reactModule.createElement(getSduiComponentWrapper(var4), {
 			debugName = `SduiFeatureEntryPoint-{configKey}`,
 			componentConfig = var4,
-			sduiContext = useCreateClientBindingSduiContextModule(appPage, var7, nil, var5, if fFlagSduiClientPageScope then configKey else nil, p1.appCompositionEnabledOverride, p1.routeName),
+			sduiContext = useCreateClientBindingSduiContextModule(appPage, var7, nil, var5, configKey, p1.appCompositionEnabledOverride, p1.routeName),
 			localAnalyticsData = useLocalAnalyticsDataModule(configKey, appPage, p1.additionalAnalyticsData),
 			extraLocalProps = p1.extraLocalProps
 		}) else nil,

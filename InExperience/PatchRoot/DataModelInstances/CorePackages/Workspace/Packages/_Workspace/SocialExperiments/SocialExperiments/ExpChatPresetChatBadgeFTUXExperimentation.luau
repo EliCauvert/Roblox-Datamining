@@ -1,4 +1,6 @@
-﻿local experimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
+﻿local parent = script:FindFirstAncestor("SocialExperiments").Parent
+local experimentCacheManager = require(parent.ExperimentCacheManager).ExperimentCacheManager
+local fFlagExpChatPresetChatBadgeExperimentCleanup = require(parent.SharedFlags).FFlagExpChatPresetChatBadgeExperimentCleanup
 local expChatPresetChatBadgeFTUXExperimentLayer = game:DefineFastString("ExpChatPresetChatBadgeFTUXExperimentLayer", "UniverseChat.PresetChat")
 local expChatPresetChatBadgeFTUXVariable = game:DefineFastString("ExpChatPresetChatBadgeFTUXVariable", "ChatIconBadged")
 local expChatEnablePresetChatBadgeFTUXExperimentation = game:DefineFastFlag("ExpChatEnablePresetChatBadgeFTUXExperimentation", false)
@@ -14,18 +16,26 @@ end
 
 return {
 	getShouldShowPresetChatIconBadge = function()
-		-- upvalues: expChatPresetChatIconBadgeOverride (ref), expChatEnablePresetChatBadgeFTUXExperimentation (ref), experimentCacheManager (ref), expChatPresetChatBadgeFTUXExperimentLayer (ref), expChatPresetChatBadgeFTUXVariable (ref)
+		-- upvalues: expChatPresetChatIconBadgeOverride (ref), expChatEnablePresetChatBadgeFTUXExperimentation (ref), fFlagExpChatPresetChatBadgeExperimentCleanup (ref), experimentCacheManager (ref), expChatPresetChatBadgeFTUXExperimentLayer (ref), expChatPresetChatBadgeFTUXVariable (ref)
 		if expChatPresetChatIconBadgeOverride == 1 then
 			return true
 		elseif expChatPresetChatIconBadgeOverride == 2 then
 			return false
-		elseif not expChatEnablePresetChatBadgeFTUXExperimentation then
-			return true
+		elseif expChatEnablePresetChatBadgeFTUXExperimentation then
+			local var2 = experimentCacheManager.default:getLayerVariables(expChatPresetChatBadgeFTUXExperimentLayer)
+			local var3 = if var2 and var2[expChatPresetChatBadgeFTUXVariable] ~= nil then var2[expChatPresetChatBadgeFTUXVariable] else nil
+			
+			if var3 == nil then
+				return fFlagExpChatPresetChatBadgeExperimentCleanup
+			elseif not fFlagExpChatPresetChatBadgeExperimentCleanup then
+				return var3 == 1
+			end
+			var2 = if var3 ~= true then var3 == 1 else true
+			
+			return var2
+		else
+			return fFlagExpChatPresetChatBadgeExperimentCleanup
 		end
-		local var2 = experimentCacheManager.default:getLayerVariables(expChatPresetChatBadgeFTUXExperimentLayer)
-		local var3 = if var2 and var2[expChatPresetChatBadgeFTUXVariable] ~= nil then var2[expChatPresetChatBadgeFTUXVariable] else nil
-		
-		return var3 == nil or var3 == 1
 	end,
 	logExposure = function()
 		-- upvalues: expChatEnablePresetChatBadgeFTUXExperimentation (ref), var1 (write), experimentCacheManager (ref), expChatPresetChatBadgeFTUXExperimentLayer (ref), expChatPresetChatBadgeFTUXVariable (ref)
@@ -36,7 +46,10 @@ return {
 			return
 		end
 		var1 = true
-		experimentCacheManager.default:logLayerExposure(expChatPresetChatBadgeFTUXExperimentLayer)
+		pcall(function()
+			-- upvalues: experimentCacheManager (copy), expChatPresetChatBadgeFTUXExperimentLayer (copy)
+			experimentCacheManager.default:logLayerExposure(expChatPresetChatBadgeFTUXExperimentLayer)
+		end)
 	end,
 	isExperimentEnabled = expChatEnablePresetChatBadgeFTUXExperimentation
 }

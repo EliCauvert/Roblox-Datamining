@@ -20,8 +20,22 @@ local navigationMenuModule = require(moments.Components.NavigationMenu)
 local constantsModule = require(moments.Constants)
 local _ = require(script.Parent.MomentsHeaderView)
 
+local function _(p1, p2)
+	-- upvalues: reactModule (ref), iconButton (ref), plusLarge (ref), buttonVariant (ref), inputSize (ref)
+	return reactModule.createElement(iconButton, {
+		isCircular = true,
+		Selectable = true,
+		testId = "--moments-top-bar-create",
+		LayoutOrder = p2,
+		icon = plusLarge,
+		onActivated = p1,
+		variant = buttonVariant.OverMedia,
+		size = inputSize.Medium
+	})
+end
+
 return function(p1)
-	-- upvalues: reactModule (ref), iconButton (ref), iconName (ref), buttonVariant (ref), inputSize (ref), view (ref), plusLarge (ref), foundationModule (ref), coachmark (ref), text (ref), threeBarsHorizontal (ref), navigationMenuModule (ref), foundationProvider (ref), colorMode (ref), gradientBackdrop (ref), constantsModule (ref)
+	-- upvalues: reactModule (ref), iconButton (ref), iconName (ref), buttonVariant (ref), inputSize (ref), view (ref), plusLarge (ref), navigationMenuModule (ref), foundationModule (ref), coachmark (ref), text (ref), threeBarsHorizontal (ref), foundationProvider (ref), colorMode (ref), gradientBackdrop (ref), constantsModule (ref)
 	local t = nil
 	
 	if p1.variant == "back" then
@@ -38,18 +52,45 @@ return function(p1)
 			})
 		}
 		
-		if p1.showInteractiveButtons and p1.showCreateButton then
+		if p1.showInteractiveButtons and (p1.showCreateButton or p1.showNavigationMenu) then
 			t_1.Spacer = reactModule.createElement(view, { LayoutOrder = 2, tag = "grow auto-y" })
-			t_1.CreateButton = reactModule.createElement(iconButton, {
-				LayoutOrder = 3,
-				isCircular = true,
-				Selectable = true,
-				testId = "--moments-top-bar-create",
-				icon = plusLarge,
-				onActivated = p1.onCreateMomentButtonPressed,
-				variant = buttonVariant.OverMedia,
-				size = inputSize.Medium
-			})
+			
+			if p1.showNavigationMenu then
+				local t_2 = {}
+				
+				if p1.showCreateButton then
+					t_2.CreateButton = reactModule.createElement(iconButton, {
+						LayoutOrder = 1,
+						isCircular = true,
+						Selectable = true,
+						testId = "--moments-top-bar-create",
+						icon = plusLarge,
+						onActivated = p1.onCreateMomentButtonPressed,
+						variant = buttonVariant.OverMedia,
+						size = inputSize.Medium
+					})
+				end
+				t_2.NavigationMenu = reactModule.createElement(navigationMenuModule, {
+					layoutOrder = 2,
+					onNavigateToTrending = p1.onNavigateToTrending,
+					onNavigateToMyMoments = p1.onNavigateToMyMoments
+				})
+				t_1.RightCluster = reactModule.createElement(view, {
+					LayoutOrder = 3,
+					tag = "row align-y-center gap-medium auto-xy"
+				}, t_2)
+			elseif p1.showCreateButton then
+				t_1.CreateButton = reactModule.createElement(iconButton, {
+					LayoutOrder = 3,
+					isCircular = true,
+					Selectable = true,
+					testId = "--moments-top-bar-create",
+					icon = plusLarge,
+					onActivated = p1.onCreateMomentButtonPressed,
+					variant = buttonVariant.OverMedia,
+					size = inputSize.Medium
+				})
+			end
 		end
 		t = t_1
 	elseif p1.variant == "base" then

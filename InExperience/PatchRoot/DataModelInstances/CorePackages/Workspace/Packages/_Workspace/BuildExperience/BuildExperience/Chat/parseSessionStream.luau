@@ -1,5 +1,4 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local fFlagBuildExperienceLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceLibrary)
 local creatorAgentChatModule = require(buildExperience.Parent.DataHydration.CreatorAgentChat)
 local chatTypesModule = require(script.Parent.chatTypes)
 local fFlagBuildAdUpsellModule = require(buildExperience.Flags.FFlagBuildAdUpsell)
@@ -139,9 +138,9 @@ local function parseChatItems(p3, p4)
 		var6 = false
 	end
 	
-	local function appendUserMessage(p5, p6, p7, p8, p9)
+	local function appendUserMessage(p5, p6, p7, p8)
 		-- upvalues: t (ref)
-		if p7 == "" and #p8 == 0 and #p9 == 0 then return end
+		if p7 == "" and #p8 == 0 then return end
 		local var7 = t[#t]
 		
 		if var7 == nil or var7.kind ~= "user_message" or var7.messageId ~= p5 then
@@ -150,8 +149,7 @@ local function parseChatItems(p3, p4)
 				messageId = p5,
 				sequenceId = p6,
 				text = p7,
-				images = p8,
-				references = p9
+				images = p8
 			})
 			
 			return
@@ -160,9 +158,6 @@ local function parseChatItems(p3, p4)
 		
 		for i, v in p8 do
 			table.insert(var7.images, v)
-		end
-		for i, v_1 in p9 do
-			table.insert(var7.references, v_1)
 		end
 	end
 	
@@ -230,37 +225,36 @@ local function parseChatItems(p3, p4)
 		local var11 = appendUserMessage
 		local messageId = v.messageId
 		content = if typeof(messageId) == "string" and messageId ~= "" then messageId else nil
-		var11(content, var9, sequenceId, var8, {})
+		var11(content, var9, sequenceId, var8)
 	end
 	flushActiveTurn()
 	
 	return t
 end
 
-local function buildUserMessageItem(p10, p11)
-	-- upvalues: fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperienceLibraryModule (ref)
+local function buildUserMessageItem(p9, p10)
+	-- upvalues: fFlagBuildExperienceChatImageAttachmentsModule (ref)
 	return {
 		kind = "user_message",
-		id = if p11 == nil or p10.sequenceId == nil then p10.messageId else `{p11}:{p10.sequenceId}:user`,
-		text = p10.text,
-		images = if fFlagBuildExperienceChatImageAttachmentsModule then p10.images else nil,
-		references = if fFlagBuildExperienceLibraryModule then p10.references else nil
+		id = if p10 == nil or p9.sequenceId == nil then p9.messageId else `{p10}:{p9.sequenceId}:user`,
+		text = p9.text,
+		images = if fFlagBuildExperienceChatImageAttachmentsModule then p9.images else nil
 	}
 end
 
-local _ = function(p10, p11)
-	return if p11 == nil or p10.eventMetaBySequenceId == nil then nil else p10.eventMetaBySequenceId[p11]
+local _ = function(p9, p10)
+	return if p10 == nil or p9.eventMetaBySequenceId == nil then nil else p9.eventMetaBySequenceId[p10]
 end
 
-local function resolveTurnId(p10, p11)
-	local endSequenceId = p11.endSequenceId
-	local var12 = if endSequenceId == nil or p10.eventMetaBySequenceId == nil then nil else p10.eventMetaBySequenceId[endSequenceId]
+local function resolveTurnId(p9, p10)
+	local endSequenceId = p10.endSequenceId
+	local var12 = if endSequenceId == nil or p9.eventMetaBySequenceId == nil then nil else p9.eventMetaBySequenceId[endSequenceId]
 	
 	if var12 ~= nil and var12.turnId ~= nil then
 		return var12.turnId
 	end
-	for i, v in p11.sequenceIds do
-		local var13 = if v == nil or p10.eventMetaBySequenceId == nil then nil else p10.eventMetaBySequenceId[v]
+	for i, v in p10.sequenceIds do
+		local var13 = if v == nil or p9.eventMetaBySequenceId == nil then nil else p9.eventMetaBySequenceId[v]
 		
 		if var13 ~= nil and var13.turnId ~= nil then
 			return var13.turnId
@@ -269,36 +263,36 @@ local function resolveTurnId(p10, p11)
 	return nil
 end
 
-local function buildTurnFeedbackIds(p12, p13)
+local function buildTurnFeedbackIds(p11, p12)
 	-- upvalues: publishToolUtils (ref), resolveTurnId (ref)
-	local latestSuccessfulResult = publishToolUtils.getLatestSuccessfulResult(p12.turnState)
+	local latestSuccessfulResult = publishToolUtils.getLatestSuccessfulResult(p11.turnState)
 	
 	return {
-		universeId = p13.universeId,
-		placeId = p13.placeId,
-		sessionId = p13.sessionId,
-		sequenceId = p12.endSequenceId,
-		turnId = resolveTurnId(p12.turnState, p12),
+		universeId = p12.universeId,
+		placeId = p12.placeId,
+		sessionId = p12.sessionId,
+		sequenceId = p11.endSequenceId,
+		turnId = resolveTurnId(p11.turnState, p11),
 		publishedVersionNumber = if latestSuccessfulResult ~= nil then nil else latestSuccessfulResult.publishedVersionNumber,
 		rollbackTargetVersionNumber = if latestSuccessfulResult ~= nil then nil else latestSuccessfulResult.rollbackTargetVersionNumber
 	}
 end
 
-return function(p12, p13)
-	-- upvalues: parseChatItems (ref), buildUserMessageItem (ref), turnStateReducer (ref), publishToolUtils (ref), subagentTasks (ref), fFlagBuildAdUpsellModule (ref), buildTurnFeedbackIds (ref), fFlagBuildExperienceSinglePlaytestCardModule (ref), fFlagBuildExperienceLibraryModule (ref), chatTypesModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildAgentRollbackModule (ref)
+return function(p11, p12)
+	-- upvalues: parseChatItems (ref), buildUserMessageItem (ref), turnStateReducer (ref), publishToolUtils (ref), subagentTasks (ref), fFlagBuildAdUpsellModule (ref), buildTurnFeedbackIds (ref), fFlagBuildExperienceSinglePlaytestCardModule (ref), chatTypesModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildAgentRollbackModule (ref)
 	local sequenceIds
-	local sessionId = p13.sessionId
-	local cloned = table.clone(p12)
-	table.sort(cloned, function(p14, p15)
-		local sequenceId = p14.sequenceId
-		local sequenceId_1 = p15.sequenceId
+	local sessionId = p12.sessionId
+	local cloned = table.clone(p11)
+	table.sort(cloned, function(p13, p14)
+		local sequenceId = p13.sequenceId
+		local sequenceId_1 = p14.sequenceId
 		
 		return ((if typeof(sequenceId) == "number" and sequenceId >= 0 then sequenceId else nil) or -1) < ((if typeof(sequenceId_1) == "number" and sequenceId_1 >= 0 then sequenceId_1 else nil) or -1)
 	end)
 	local var14 = parseChatItems(cloned, sessionId or "")
 	local var15 = nil
 	
-	for i, v in p12 do
+	for i, v in p11 do
 		sequenceIds = v.sequenceId
 		local var16 = if typeof(sequenceIds) == "number" and sequenceIds >= 0 then sequenceIds else nil
 		
@@ -322,7 +316,7 @@ return function(p12, p13)
 			continue
 		end
 		local turnState = v_1.turnState
-		local var20 = p13.optimisticCancelledStartSequenceId ~= nil and (v_1.startSequenceId == p13.optimisticCancelledStartSequenceId and not turnState.isDone)
+		local var20 = p12.optimisticCancelledStartSequenceId ~= nil and (v_1.startSequenceId == p12.optimisticCancelledStartSequenceId and not turnState.isDone)
 		
 		if var20 then
 			turnState = turnStateReducer.applySessionUpdate(turnState, {
@@ -352,10 +346,10 @@ return function(p12, p13)
 			startSequenceId = v_1.startSequenceId,
 			endSequenceId = v_1.endSequenceId,
 			isOptimisticallyCancelled = if fFlagBuildAdUpsellModule and var20 then true else nil,
-			optimisticLocalTools = if var24 then p13.optimisticLocalTools else nil,
-			universeId = p13.universeId,
+			optimisticLocalTools = if var24 then p12.optimisticLocalTools else nil,
+			universeId = p12.universeId,
 			sessionId = sessionId,
-			turnFeedbackIds = buildTurnFeedbackIds(v_1, p13)
+			turnFeedbackIds = buildTurnFeedbackIds(v_1, p12)
 		})
 		
 		if var21 and turnState.isDone then
@@ -371,43 +365,41 @@ return function(p12, p13)
 	if fFlagBuildExperienceSinglePlaytestCardModule and tCount_1 ~= nil then
 		t[tCount_1].isLatestPublishTurn = true
 	end
-	local pendingUserMessage = p13.pendingUserMessage
-	local pendingUserImages = p13.pendingUserImages or {}
-	local var25 = if fFlagBuildExperienceLibraryModule then p13.pendingUserReferences or {} else {}
+	local pendingUserMessage = p12.pendingUserMessage
+	local pendingUserImages = p12.pendingUserImages or {}
 	
-	if pendingUserMessage ~= nil and pendingUserMessage ~= "" or (#pendingUserImages > 0 or #var25 > 0) then
-		local pendingUserMessageAfterSequenceId = p13.pendingUserMessageAfterSequenceId or -1
-		v_1 = false
+	if pendingUserMessage ~= nil and pendingUserMessage ~= "" or #pendingUserImages > 0 then
+		local pendingUserMessageAfterSequenceId = p12.pendingUserMessageAfterSequenceId or -1
+		local var25 = false
 		
 		for i_2, v_2 in var14 do
 			if v_2.kind == "user_message" then
 				local sequenceId = v_2.sequenceId
 				
 				if sequenceId ~= nil and pendingUserMessageAfterSequenceId < sequenceId then
-					v_1 = true
+					var25 = true
 					break
 				end
 			end
 		end
-		if not v_1 then
+		if not var25 then
 			table.insert(t, {
 				kind = "user_message",
 				id = if sessionId ~= nil then nil else `{sessionId}{chatTypesModule.PENDING_USER_MESSAGE_ID_SUFFIX}`,
 				text = pendingUserMessage or "",
-				images = if fFlagBuildExperienceChatImageAttachmentsModule then pendingUserImages else nil,
-				references = if fFlagBuildExperienceLibraryModule then var25 else nil
+				images = if fFlagBuildExperienceChatImageAttachmentsModule then pendingUserImages else nil
 			})
 		end
 	end
-	local liveAssistantMessage = p13.liveAssistantMessage
-	v_1 = t[#t]
-	local var26 = v_1 ~= nil and v_1.kind == "assistant_turn"
+	local liveAssistantMessage = p12.liveAssistantMessage
+	local var26 = t[#t]
+	v_1 = var26 ~= nil and var26.kind == "assistant_turn"
 	
-	if fFlagBuildAgentRollbackModule and var26 then
-		local startSequenceId_1 = v_1.startSequenceId
-		var26 = if startSequenceId_1 ~= nil then (p13.pendingUserMessageAfterSequenceId or -1) < startSequenceId_1 else true
+	if fFlagBuildAgentRollbackModule and v_1 then
+		local startSequenceId_1 = var26.startSequenceId
+		v_1 = if startSequenceId_1 ~= nil then (p12.pendingUserMessageAfterSequenceId or -1) < startSequenceId_1 else true
 	end
-	if liveAssistantMessage ~= nil and not var26 then
+	if liveAssistantMessage ~= nil and not v_1 then
 		local var27 = if sessionId ~= nil then nil else `{sessionId}:live`
 		table.insert(t, {
 			kind = "assistant_turn",
@@ -416,7 +408,7 @@ return function(p12, p13)
 			turnKey = var27,
 			loading = liveAssistantMessage.setupErrorText == nil or nil,
 			setupErrorText = liveAssistantMessage.setupErrorText,
-			universeId = p13.universeId,
+			universeId = p12.universeId,
 			turnFeedbackIds = {}
 		})
 	end

@@ -1,5 +1,25 @@
-﻿return {
+﻿local avatarExperienceModel = script:FindFirstAncestor("AvatarExperienceModel")
+local _ = require(avatarExperienceModel.Types.CommonTypes)
+local avatarExperienceFlagsModule = require(avatarExperienceModel.Parent.AvatarExperienceFlags)
+local fFlagAXCatalogBodySuits = avatarExperienceFlagsModule.FFlagAXCatalogBodySuits
+local fFlagAXInventoryDurablesSupport = avatarExperienceFlagsModule.FFlagAXInventoryDurablesSupport
+local t = {}
+local t_1 = {}
+local enumItems = Enum.BundleType:GetEnumItems()
+
+for i, v in enumItems do
+	t[v.Name] = tostring(v.Value)
+	t_1[tostring(v.Value)] = v.Name
+end
+if fFlagAXInventoryDurablesSupport then
+	local var1 = tostring(#enumItems + 1)
+	t.Avatars = var1
+	t_1[var1] = "Avatars"
+end
+return {
 	AnimationCategoryCameraZoomRadius = 5,
+	BundleTypeIdStrings = t,
+	BundleTypeIdStringToName = t_1,
 	CameraZoomRadius = {
 		BodyCategories = {
 			Heads = 8.5,
@@ -57,7 +77,7 @@
 			Tops = 12,
 			Outerwear = 12,
 			Bottoms = 12,
-			Bodysuits = if require(script:FindFirstAncestor("AvatarExperienceModel").Parent.AvatarExperienceFlags).FFlagAXCatalogBodySuits then 12 else nil
+			Bodysuits = if fFlagAXCatalogBodySuits then 12 else nil
 		},
 		Makeup = {
 			Makeup = game:DefineFastInt("AXMakeupZoomRadius", 7),

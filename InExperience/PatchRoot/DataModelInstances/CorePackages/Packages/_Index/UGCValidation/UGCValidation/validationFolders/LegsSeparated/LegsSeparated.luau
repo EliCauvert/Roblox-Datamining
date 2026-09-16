@@ -89,7 +89,7 @@ local function validateFullBodySeparation(p5, p6)
 	-- upvalues: getFFlagUGCValidateLegFullBodySeparationModule (ref), createAllBodyPartsFromRootInstance (ref), buildEditableMeshesFromSharedData (ref), validationEnumsModule (ref), boundsCalculatorModule (ref), errorSourceStringsModule (ref), calculateBounds (ref), constantsModule (ref), boundsDataUtilsModule (ref), getFStringUGCValidateAllowedLegOverlapMultiplierModule (ref)
 	if not getFFlagUGCValidateLegFullBodySeparationModule() then return end
 	local var2, var3, var4 = boundsCalculatorModule.calculateIndividualFullBodyPartsData(createAllBodyPartsFromRootInstance(p6.rootInstance), {
-		isServer = p6.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
+		isServer = p6.consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend,
 		editableMeshes = buildEditableMeshesFromSharedData(p6)
 	}, nil, false)
 	

@@ -711,6 +711,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,เราไม่�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,ส่งคำขอรับบริการช่วยเหลือแล้ว
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,ไม่สามารถใช้บริการช่วยเหลือผู้เล่นได้ในขณะนี้ โปรดลองอีกครั้งในภายหลัง
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,ไม่สามารถใช้บริการช่วยเหลือผู้เล่นได้
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,โปรดเขียนคำอธิบายให้ละเอียดยิ่งขึ้น
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,คุณต้องเล่นประสบการณ์นี้เมื่อไม่นานมานี้ จึงจะยื่นคำขอบริการช่วยเหลือผู้เล่นได้
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,เข้าประสบการณ์นี้เพื่อส่งคำขอ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,โปรดรอให้ครีเอเตอร์ตอบกลับคำขอที่มีอยู่ของคุณก่อนส่งคำขออื่น
@@ -2041,7 +2042,6 @@ Feature.Build.Description.RevertToVersion,ยืนยันเพื่อย�
 Feature.Build.Description.ShareLatest,แชร์ว่าเวอร์ชันล่าสุดของคุณมีอะไรเปลี่ยนแปลงไปบ้าง
 Feature.Build.Description.ShopButton,เพิ่มจุดเริ่มต้นการช็อปปิ้ง
 Feature.Build.Description.UpdateDeveloperProduct,อัปเดตผลิตภัณฑ์นักพัฒนา {PRODUCT_ID}
-Feature.Build.Description.VersionChanges,บอกผู้เล่นว่าเวอร์ชันนี้มีอะไรเปลี่ยนแปลงไปบ้าง
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"คำอธิบายต้องมีความยาวไม่เกิน 1,000 อักขระ"
 Feature.Build.Error.DeveloperProductNameRequired,กรอกชื่อผลิตภัณฑ์
 Feature.Build.Error.DeveloperProductNameTooLong,ชื่อต้องมีความยาวไม่เกิน 50 อักขระ
@@ -2222,7 +2222,6 @@ Feature.Build.Label.Version,เวอร์ชัน
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,ชื่อและคำอธิบายเวอร์ชัน
 Feature.Build.Label.Video,วิดีโอ
 Feature.Build.Message.AccountRequirements,บัญชีของคุณมีคุณสมบัติไม่ตรงตามข้อกำหนดในการใช้ Build
 Feature.Build.Message.AccountTooNew,บัญชีของคุณยังใหม่เกินไปที่จะเผยแพร่ ลองอีกครั้งเมื่อบัญชีมีอายุ 2 วัน
@@ -2301,8 +2300,10 @@ Feature.Build.Message.ShareLinkFailed,ไม่สามารถสร้าง
 Feature.Build.Message.SignedOut,คุณออกจากระบบแล้ว โปรดลงชื่อเข้าใช้แล้วลองอีกครั้ง
 Feature.Build.Message.TasksCompleted,เสร็จแล้ว {NUM_COMPLETED_TASKS} งาน
 Feature.Build.Message.ThinkingSeconds,ใช้เวลาคิดไป {SECONDS} วินาที
+Feature.Build.Message.TrustedFriendsRequiredForPlaytest,ขอเป็นเพื่อนที่เชื่อได้กับครีเอเตอร์รายนี้เพื่อเล่นเกมของครีเอเตอร์
 Feature.Build.Message.TryAgain,
 Feature.Build.Message.TurnToPortrait,หมุนอุปกรณ์ของคุณเป็นแนวตั้งเพื่อพัฒนาเกมของคุณต่อ
+Feature.Build.Message.UpdateSettingsToPlaytest,อัปเดตการตั้งค่าการทดลองเล่นเกมของคุณเพื่อเล่นเกมนี้
 Feature.Build.Message.VersionHistoryLoad,ไม่สามารถโหลดประวัติเวอร์ชันได้
 Feature.Build.Message.WhatToCreate,วันนี้คุณอยากสร้างอะไร?
 Feature.Build.Message.WorkedMinutesSeconds,ใช้เวลาทำงานไป {MINUTES} นาที {REM_SECONDS} วินาที
@@ -2355,7 +2356,6 @@ Feature.Build.Title.Tasks,งาน
 Feature.Build.Title.TurnActivity,เปลี่ยนกิจกรรม
 Feature.Build.Title.VersionHistory,ประวัติเวอร์ชัน
 Feature.Build.Title.VersionInfo,ข้อมูลเวอร์ชัน
-Feature.Build.Title.VersionInformation,
 Feature.Build.Title.VersionNumber,เวอร์ชัน {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,มีอะไรให้บ้าง?
@@ -3962,6 +3962,7 @@ Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,ทำรายงา�
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,ส่งรายงานของคุณให้เสร็จสิ้น
 Feature.ReportAbuse.Title.SelectInSceneIpReport,ขอบคุณที่เริ่มรายงานการละเมิดทรัพย์สินทางปัญญา
 Feature.ReportAbuse.Title.SelectInSceneThankYou,
+Feature.RobloxSubscription.Action.JoinIn,เข้าร่วมได้ในอีก {time}
 Feature.RobloxSubscription.Action.Subscribe,สมัครสมาชิก
 Feature.RobloxSubscription.Action.TryItForFree,ลองใช้ฟรี
 Feature.RobloxSubscription.Body.AlreadySubscribed,การสมัครสมาชิก Plus ของคุณให้สิทธิประโยชน์ในเกมอยู่แล้ว
@@ -3971,6 +3972,7 @@ Feature.RobloxSubscription.Description.AgeCheckTrial,ตรวจสอบยื
 Feature.RobloxSubscription.Description.Benefit.Customize,ปรับแต่งด้วยกรอบโปรไฟล์และธีมแอป
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,ส่วนลด 10% ใน 60 วันแรก จากนั้นลด 20% สำหรับไอเท็มและอวาตาร์
 Feature.RobloxSubscription.Description.ExclusiveBenefits,สนุกมากขึ้น แต่ใช้ Robux น้อยลง สมัครสมาชิก Roblox Plus เลย
+Feature.RobloxSubscription.Description.JoinEarly,เข้าร่วมได้ก่อนใครเมื่อสมัคร Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"การคลิก \u{201C}{ctaText}\u{201D} จะถือว่าคุณยอมรับ<a href=""{termsUrl}"">ข้อกำหนดการสมัครสมาชิกของ Roblox</a> โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติจนกว่าคุณจะยกเลิก"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,เซิร์ฟเวอร์ส่วนตัวฟรี
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -3989,6 +3991,8 @@ Feature.RobloxSubscription.Title.AlreadySubscribed,ข่าวดี
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,รับ Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus ใช้งานไม่ได้ที่นี่
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,คุณสามารถเข้าร่วมกิจกรรมได้ก่อนใคร
+Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,รับสิทธิ์เข้าถึงได้ก่อนเผยแพร่เมื่อสมัคร Plus
 Feature.SafetyDashboard.Heading.AccountStatus.V2,สถานะบัญชี การละเมิด และการอุทธรณ์
 Feature.Schools.Label.Classmates,เพื่อนร่วมชั้น
 Feature.Screentime.Content.ScreentimeLimitDialog,คุณใช้งานจนถึงขีดจำกัดเวลาการใช้หน้าจอต่อวันแล้ว โปรดกลับมาใหม่ในวันพรุ่งนี้เพื่อใช้งาน Roblox อีกครั้ง

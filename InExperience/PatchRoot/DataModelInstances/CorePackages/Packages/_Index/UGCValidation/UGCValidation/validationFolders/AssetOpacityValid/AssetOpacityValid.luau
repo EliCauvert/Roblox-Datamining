@@ -150,7 +150,7 @@ function t.run(p2, p3)
 	local assetType = p3.uploadEnum.assetType
 	local renderMeshesData = p3.renderMeshesData
 	local t = {
-		shouldYield = p3.consumerConfig.consumerEnv ~= validationEnumsModule.ConsumerEnv.Backend,
+		shouldYield = p3.consumerConfig.validationEnv ~= validationEnumsModule.ValidationEnv.Backend,
 		lastTickSeconds = tick()
 	}
 	local t_2 = {}

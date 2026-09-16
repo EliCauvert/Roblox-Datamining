@@ -7,8 +7,7 @@ return function(p1)
 	-- upvalues: reactModule (ref), dialog (ref), foundationModule (ref)
 	return reactModule.createElement(dialog.Root, {
 		hasBackdrop = true,
-		size = foundationModule.Enums.DialogSize.Small,
-		onClose = p1.onCancel
+		size = foundationModule.Enums.DialogSize.Small
 	}, {
 		DialogTitle = reactModule.createElement(dialog.Title, { text = "Delete voiceover?", LayoutOrder = 1 }),
 		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {

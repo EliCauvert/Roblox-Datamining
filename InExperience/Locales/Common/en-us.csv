@@ -176,6 +176,9 @@ Common.Presence.Label.Online,Online
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,Animation is too long ({duration} seconds). Emote animations must be at most {maxLength} seconds long.
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,Animation is too short ({duration} seconds). Emote animations must be longer than {minLength} seconds.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,Cage part placement violation in {cageName}: {upperPart} is not correctly positioned above {lowerPart}.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"Cage part {partName} in {cageName} has {actualCount} vertices, expected approximately {expectedCount}. This may indicate missing or duplicated geometry in that body region."
+Common.UGCValidation.ErrorLabel.AQSFail_CageUV,"The {cage_name} has incorrect UV values that do not match the template. {incorrect_uv_count} incorrect UVs ({unreferenced_vertex_count} unreferenced, {non_template_uv_count} non-template, {duplicate_mapping_count} duplicate mappings), {unmatched_template_count} unmatched template vertices. Please correct the cage UV to match the template."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Your body contains small disconnected mesh components (mesh islands). Please remove floating geometry and ensure all mesh parts are properly connected.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"Asset quality: {partName} has {num_disconnected_components} disconnected components, which exceeds the maximum of {max_disconnected_components}."
 Common.UGCValidation.ErrorLabel.AQSInputDataError,Quality score cannot be properly computed due to the input data is incorrect or incomplete. Please check your model or file a bug report
@@ -729,6 +732,7 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed,We couldn't send you
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted,Support request sent
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Body,Player support is currently unavailable. Please try again later.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Default.Title,Player support unavailable
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body,Please write a more detailed description
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Body,You need to have played this experience recently to file a support request.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.NotRecentlyVisited.Title,Visit this experience to file a request
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.OpenTicketLimit.Body,Please wait for the creator to respond to your existing requests before submitting another request.
@@ -2058,7 +2062,6 @@ Feature.Build.Description.RevertToVersion,Confirm to revert the latest change an
 Feature.Build.Description.ShareLatest,Share what’s changed in your latest version.
 Feature.Build.Description.ShopButton,Add a shopping entry point
 Feature.Build.Description.UpdateDeveloperProduct,Update developer product {PRODUCT_ID}.
-Feature.Build.Description.VersionChanges,Tell players what's changed in this version.
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"Description must be 1,000 characters or fewer."
 Feature.Build.Error.DeveloperProductNameRequired,Enter a product name.
 Feature.Build.Error.DeveloperProductNameTooLong,Name must be 50 characters or fewer.
@@ -2239,7 +2242,6 @@ Feature.Build.Label.Version,Version
 Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
 Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
 Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
-Feature.Build.Label.VersionTitleDesc,Version title & description
 Feature.Build.Label.Video,Video
 Feature.Build.Message.AccountRequirements,Your account doesn't meet the requirements to use Build.
 Feature.Build.Message.AccountTooNew,Your account is too new to publish. Try again when it's 2 days old.
@@ -2374,7 +2376,6 @@ Feature.Build.Title.Tasks,Tasks
 Feature.Build.Title.TurnActivity,Turn activity
 Feature.Build.Title.VersionHistory,Version history
 Feature.Build.Title.VersionInfo,Version information
-Feature.Build.Title.VersionInformation,Version Information
 Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,What's included?

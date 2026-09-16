@@ -16,7 +16,7 @@ return {
 				name = tModule.optional(tModule.string),
 				hasVerifiedBadge = tModule.optional(tModule.boolean)
 			})),
-			visits = if require(parent.SharedFlags).FFlagLuaAppDataHydrationTotalVisitsGameInfoStore then tModule.optional(tModule.number) else nil,
+			visits = tModule.optional(tModule.number),
 			playerCount = if require(parent.SharedFlags).FFlagLuaAppDataHydrationPlayerCountGameInfoStore then tModule.optional(tModule.number) else nil,
 			totalUpVotes = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil,
 			totalDownVotes = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil

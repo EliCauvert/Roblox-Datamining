@@ -9,14 +9,13 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
 local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemetry)
 local _ = require(script.Parent.ShareSheetView)
-local var2 = if fFlagShareSheetPeoplePickerEnabledModule then require(script.Parent.PeoplePicker.usePeoplePickerPagination) else nil
-local usePeoplePickerViewModel = require(script.Parent.PeoplePicker).usePeoplePickerViewModel
+local var2 = if fFlagShareSheetPeoplePickerEnabledModule then require(script.Parent.PeoplePicker.usePeoplePickerViewModel) else nil
 local useShareSheetConversationModelModule = require(script.Parent.useShareSheetConversationModel)
 local useShareSheetSelectionModule = require(script.Parent.useShareSheetSelection)
 local useShareSheetSendModule = require(script.Parent.useShareSheetSend)
 
 return function(p1)
-	-- upvalues: fFlagShareSheetPeoplePickerEnabledModule (ref), var1 (ref), signalsReactModule (ref), getExternalChatMessageSenderStoreModule (ref), useShareSheetSelectionModule (ref), useShareSheetConversationModelModule (ref), useLocalization (ref), reactModule (ref), shareSheetTelemetryModule (ref), var2 (ref), usePeoplePickerViewModel (ref), useShareSheetSendModule (ref), getAppFeaturePolicies (ref)
+	-- upvalues: fFlagShareSheetPeoplePickerEnabledModule (ref), var1 (ref), signalsReactModule (ref), getExternalChatMessageSenderStoreModule (ref), useShareSheetSelectionModule (ref), useShareSheetConversationModelModule (ref), useLocalization (ref), reactModule (ref), shareSheetTelemetryModule (ref), var2 (ref), useShareSheetSendModule (ref), getAppFeaturePolicies (ref)
 	local var3 = nil
 	local var4 = nil
 	
@@ -62,33 +61,27 @@ return function(p1)
 	})
 	local var11 = nil
 	local var12 = nil
-	local var13 = nil
 	
 	if fFlagShareSheetPeoplePickerEnabledModule then
 		var11 = reactModule.useCallback(function()
 			-- upvalues: var3 (write)
 			var3.setIsPeoplePickerDisplayed(true)
 		end, { var3 })
-		local var14 = reactModule.useCallback(function()
-			-- upvalues: var3 (write)
-			var3.setIsPeoplePickerDisplayed(false)
-		end, { var3 })
 		local peoplePickerEligibility = var7.peoplePickerEligibility
 		var12 = var2({
-			conversationCount = #peoplePickerEligibility.eligibleConversations,
+			conversations = peoplePickerEligibility.eligibleConversations,
 			isEligibilityLoading = peoplePickerEligibility.isLoading,
 			isPeoplePickerDisplayed = var4 == true,
-			listStatus = var7.listStatus
-		})
-		var13 = usePeoplePickerViewModel({
-			conversations = peoplePickerEligibility.eligibleConversations,
-			isLoading = var12.isLoading,
-			onBack = var14,
+			listStatus = var7.listStatus,
+			onBack = reactModule.useCallback(function()
+				-- upvalues: var3 (write)
+				var3.setIsPeoplePickerDisplayed(false)
+			end, { var3 }),
 			onConversationActivated = var10,
 			selectedConversationIds = selectedConversationIds
 		})
 	end
-	local var15 = useShareSheetSendModule({
+	local var13 = useShareSheetSendModule({
 		chatShare = var5,
 		context = p1.context,
 		conversations = var7.conversations,
@@ -107,16 +100,15 @@ return function(p1)
 		context = p1.context,
 		isOpen = p1.isOpen == true,
 		isPeoplePickerDisplayed = if fFlagShareSheetPeoplePickerEnabledModule then var4 else nil,
-		isSending = var15.isSending,
+		isSending = var13.isSending,
 		isSocialRowLoading = var7.isSocialRowLoading,
 		messagePlaceholder = p1.messagePlaceholder or "Share a message",
 		onComposerFocused = var9,
 		onCloseWithReason = p1.onCloseWithReason,
 		onConversationActivated = var10,
 		onMoreActivated = if fFlagShareSheetPeoplePickerEnabledModule then var11 else nil,
-		onSendActivated = var15.onSendActivated,
-		peoplePicker = if fFlagShareSheetPeoplePickerEnabledModule then var13.viewModel else nil,
-		scrollingFrameRef = if fFlagShareSheetPeoplePickerEnabledModule then var12.scrollingFrameRef else nil,
+		onSendActivated = var13.onSendActivated,
+		peoplePicker = if fFlagShareSheetPeoplePickerEnabledModule then var12.viewModel else nil,
 		selectedConversationIds = selectedConversationIds,
 		sendLabel = var8.send,
 		shareLabel = var8.share,

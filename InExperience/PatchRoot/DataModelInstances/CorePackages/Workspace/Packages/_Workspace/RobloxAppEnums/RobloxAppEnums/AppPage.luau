@@ -7,6 +7,7 @@
 	CrossDeviceLogin = "CrossDeviceLogin",
 	WeChatLoginWrapper = "WeChatLoginWrapper",
 	Home = "Home",
+	Build = "Build",
 	MyStats = "MyStats",
 	Games = "Games",
 	GamesList = "GamesList",

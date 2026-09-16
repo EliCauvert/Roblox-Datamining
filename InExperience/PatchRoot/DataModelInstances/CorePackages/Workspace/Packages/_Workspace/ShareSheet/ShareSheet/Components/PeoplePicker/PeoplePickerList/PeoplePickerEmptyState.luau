@@ -16,7 +16,6 @@ return function(p1)
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center size-full-0 auto-y padding-y-large",
-		LayoutOrder = p1.LayoutOrder,
 		testId = testId
 	}, {
 		Image = reactModule.createElement(image, {

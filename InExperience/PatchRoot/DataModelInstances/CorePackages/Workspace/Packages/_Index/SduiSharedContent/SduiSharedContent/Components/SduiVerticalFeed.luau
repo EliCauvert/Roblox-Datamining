@@ -14,6 +14,7 @@ local appCommonLibModule = require(parent.AppCommonLib)
 local scrollMovementDirection = require(parent.RobloxAppEnums).ScrollMovementDirection
 local _ = require(parent.SduiCompat)
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
+local discoveryTypesModule = require(parent.DiscoveryTypes)
 local collectionViewsModule = require(parent.CollectionViews)
 local collectionLayoutStoreProvider = collectionViewsModule.CollectionLayoutStoreProvider
 local collectionLayoutStoreContext = collectionViewsModule.CollectionLayoutStoreContext
@@ -47,6 +48,8 @@ local sduiVerticalFeedBottomSpacerLayoutOrderConstant = game:DefineFastFlag("Sdu
 local fFlagSduiVerticalFeedPageShellSupport = sharedFlagsModule.FFlagSduiVerticalFeedPageShellSupport
 local fFlagLuaAppSduiVideoThumbnail = sharedFlagsModule.FFlagLuaAppSduiVideoThumbnail
 local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
+local fFlagAppPageShellScrollToTopFocus = sharedFlagsModule.FFlagAppPageShellScrollToTopFocus
+local fFlagLuaAppsDefaultSelection = sharedFlagsModule.FFlagLuaAppsDefaultSelection
 local var1 = if fFlagSduiVerticalFeedProgressiveFillOnScroll then signalsModule.createSignal(nil) else nil
 local var2 = if fFlagSduiVerticalFeedProgressiveFillOnScroll then table.freeze({}) else nil
 
@@ -122,7 +125,7 @@ local function useProgressiveRowCapWithScroll(p1, p2, p3, p4, p5, p6, p7, p8)
 end
 
 return reactModule.memo(function(p9)
-	-- upvalues: fFlagLuaAppSduiVideoThumbnail (ref), useTokens (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), useNavBarPlacement (ref), appNavBarModule (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), fFlagSduiVerticalFeedPageShellSupport (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (ref), appCommonLibModule (ref), fFlagLuaAppSduiHomeFriendCarousel (ref), fFlagSduiSrpScrollAway (ref), scrollMovementDirection (ref), sduiEnableBackToTop (ref), useAnimateScrollViewToSelection (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), useLastInputMode (ref), useProgressiveRowCapWithScroll (ref), sduiVerticalFeedScrollUnderfillDebounceMs (ref), useProgressiveRowCapModule (ref), useVerticalScrolledToEndThresholdModule (ref), sduiVerticalFeedBottomSpacerLayoutOrderConstant (ref), backToTopButtonModule (ref), fFlagSduiPoolBackedFeed (ref), PoolStoreLayoutStoreWiring (ref), sduiFeedImpressionsDetectorModule (ref), buildSduiFeedChildrenModule (ref), sduiFeedContextModule (ref), collectionLayoutStoreProvider (ref), view (ref), viewportVideoAutoplaySync (ref), scrollDetector (ref), sduiStickyHeaderModule (ref), pullToRefreshSpinner (ref)
+	-- upvalues: fFlagLuaAppSduiVideoThumbnail (ref), useTokens (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), useNavBarPlacement (ref), appNavBarModule (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), fFlagSduiVerticalFeedPageShellSupport (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (ref), appCommonLibModule (ref), fFlagLuaAppSduiHomeFriendCarousel (ref), fFlagSduiSrpScrollAway (ref), scrollMovementDirection (ref), sduiEnableBackToTop (ref), useAnimateScrollViewToSelection (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), useLastInputMode (ref), useProgressiveRowCapWithScroll (ref), sduiVerticalFeedScrollUnderfillDebounceMs (ref), useProgressiveRowCapModule (ref), useVerticalScrolledToEndThresholdModule (ref), sduiVerticalFeedBottomSpacerLayoutOrderConstant (ref), backToTopButtonModule (ref), fFlagSduiPoolBackedFeed (ref), PoolStoreLayoutStoreWiring (ref), sduiFeedImpressionsDetectorModule (ref), buildSduiFeedChildrenModule (ref), fFlagAppPageShellScrollToTopFocus (ref), discoveryTypesModule (ref), fFlagLuaAppsDefaultSelection (ref), sduiFeedContextModule (ref), collectionLayoutStoreProvider (ref), view (ref), viewportVideoAutoplaySync (ref), scrollDetector (ref), sduiStickyHeaderModule (ref), pullToRefreshSpinner (ref)
 	local var7
 	local analyticsContext = p9.analyticsContext
 	local sduiContext = p9.sduiContext
@@ -341,8 +344,9 @@ return reactModule.memo(function(p9)
 		var37 = var41
 	end
 	useVerticalScrolledToEndThresholdModule(var17, thresholdFromEnd, if var37 then nil else p9.onScrollToEnd)
-	local var42 = reactModule.useMemo(function()
-		-- upvalues: feedItems (ref), p9 (ref), sduiEnableBackToTop (copy), var28 (write), reactModule (copy), sduiVerticalFeedBottomSpacerLayoutOrderConstant (copy), backToTopButtonModule (copy), var17 (write), sduiContext (ref), gapBetweenFeedItems (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (copy), var18 (ref), var7 (ref), gapAfterStickyItems (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), fFlagSduiPoolBackedFeed (copy), PoolStoreLayoutStoreWiring (copy), impressionsTag (ref), sduiFeedImpressionsDetectorModule (copy), var19 (ref), buildSduiFeedChildrenModule (copy), debugName (ref), selectionBehaviorLeft (ref), selectionBehaviorRight (ref), var27 (ref), var36 (write)
+	
+	local var42 = function()
+		-- upvalues: feedItems (ref), p9 (ref), sduiEnableBackToTop (copy), var28 (write), reactModule (copy), sduiVerticalFeedBottomSpacerLayoutOrderConstant (copy), backToTopButtonModule (copy), var17 (write), sduiContext (ref), gapBetweenFeedItems (ref), fFlagSduiVerticalFeedProgressiveFillOnScroll (copy), var18 (ref), var7 (ref), gapAfterStickyItems (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), fFlagSduiPoolBackedFeed (copy), PoolStoreLayoutStoreWiring (copy), impressionsTag (ref), sduiFeedImpressionsDetectorModule (copy), var19 (ref), buildSduiFeedChildrenModule (copy), debugName (ref), selectionBehaviorLeft (ref), selectionBehaviorRight (ref), var27 (ref), fFlagAppPageShellScrollToTopFocus (copy), discoveryTypesModule (copy), fFlagLuaAppsDefaultSelection (copy), var36 (write)
 		if feedItems == nil then
 			return nil
 		end
@@ -409,19 +413,24 @@ return reactModule.memo(function(p9)
 			selectionBehaviorLeft = selectionBehaviorLeft,
 			selectionBehaviorRight = selectionBehaviorRight,
 			extraLocalProps = var27,
+			selectionOrderBase = if fFlagAppPageShellScrollToTopFocus then discoveryTypesModule.Constants.SORT_SELECTION_ORDER_BASE else nil,
+			defaultFocusRef = if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection then p9.defaultFocusRef else nil,
 			maxConfigs = var36
 		}) do
 			t[i] = v
 		end
 		return t
-	end, {
+	end
+	
+	var42 = reactModule.useMemo(var42, {
 		feedItems, debugName, var16, var19, sduiContext, analyticsContext,
 		gapBetweenFeedItems, impressionsTag, selectionBehaviorLeft,
 		selectionBehaviorRight, var7, gapAfterStickyItems,
 		if fFlagLuaAppSduiStickyHeaderScrollAway then p9.feedTopMargin else nil,
 		var27, var9, p9.pageBottomPadding,
 		if sduiEnableBackToTop then p9.enableBackToTop else nil,
-		if sduiEnableBackToTop then var28 else nil, var17, var36
+		if sduiEnableBackToTop then var28 else nil, var17, var36,
+		if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection then p9.defaultFocusRef else nil
 	})
 	
 	if var26 then

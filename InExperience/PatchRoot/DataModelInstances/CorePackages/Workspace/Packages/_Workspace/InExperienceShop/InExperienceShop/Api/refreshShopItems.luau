@@ -110,6 +110,7 @@ return {
 					id = v_1.id,
 					name = v_1.name,
 					items = list_1,
+					categoryType = v_1.categoryType,
 					paymentSessionId = v_1.paymentSessionId,
 					bonusJwt = v_1.bonusJwt,
 					robuxPackages = v_1.robuxPackages
@@ -183,6 +184,7 @@ return {
 				id = v_2.id,
 				name = v_2.name,
 				items = list_1,
+				categoryType = v_2.categoryType,
 				paymentSessionId = v_2.paymentSessionId,
 				bonusJwt = v_2.bonusJwt,
 				robuxPackages = v_2.robuxPackages

@@ -31,7 +31,8 @@
 	reportBackgroundUserActionCounter = require(script.reportBackgroundUserActionCounter),
 	Enums = {
 		ImpressionEnums = require(script.Enums.ImpressionEnums),
-		UnifiedLoggingElementNameEnums = require(script.Enums.UnifiedLoggingElementNameEnums)
+		UnifiedLoggingElementNameEnums = require(script.Enums.UnifiedLoggingElementNameEnums),
+		UnifiedLoggingSectionEnums = require(script.Enums.UnifiedLoggingSectionEnums)
 	},
 	Lib = { CartIdService = require(script.Lib.CartIdService) },
 	Store = {

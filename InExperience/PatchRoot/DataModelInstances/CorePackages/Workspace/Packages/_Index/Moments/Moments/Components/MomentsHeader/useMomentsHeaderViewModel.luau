@@ -92,6 +92,7 @@ return function(p1, p2, p3)
 		showInteractiveButtons = not (getFFlagMomentsAndroidTvEnabledModule() and var4),
 		showHamburger = p3,
 		showCreateButton = p1.onCreatePressed ~= nil,
+		showNavigationMenu = p1.onNavigateToTrending ~= nil and p1.onNavigateToMyMoments ~= nil,
 		headerHeight = var7,
 		headerPadding = {
 			left = UDim.new(0, math.max(var2.left, var10)),

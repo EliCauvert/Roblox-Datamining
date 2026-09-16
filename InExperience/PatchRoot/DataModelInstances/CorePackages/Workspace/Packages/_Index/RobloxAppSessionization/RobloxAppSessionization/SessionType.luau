@@ -36,7 +36,8 @@
 			Landing = "Landing",
 			Startup = "Startup",
 			PlayingGame = "PlayingGame",
-			Unknown = "Unknown"
+			Unknown = "Unknown",
+			Build = if require(script:FindFirstAncestor("RobloxAppSessionization").Parent.SharedFlags).FFlagBuildExperienceSessionization then "Build" else nil
 		},
 		Level2b = {
 			AvatarExperienceLandingPage = "AvatarExperienceLandingPage",
@@ -86,7 +87,26 @@
 			ExperienceGuidelinesExplained = "ExperienceGuidelinesExplained",
 			PassesPage = "PassesPage",
 			MomentsFeed = "MomentsFeed",
-			MomentsImmersive = "MomentsFeed"
+			MomentsImmersive = "MomentsFeed",
+			BuildHome = "BuildGameList",
+			BuildChat = "BuildChat",
+			BuildPublish = "BuildGamePublish",
+			BuildSettings = "BuildGameSettings",
+			BuildAudience = "BuildGameAudience",
+			BuildPlaytestInviteManagement = "BuildGamePlaytesters",
+			BuildTitleDescription = "BuildGameTitleDescription",
+			BuildVersionTitleDescription = "BuildGameVersionDetails",
+			BuildMediaSelection = "BuildGameIconThumbnails",
+			BuildAgents = "BuildTasks",
+			BuildAgentDetails = "BuildTaskDetails",
+			BuildCreatorCredit = "BuildUsage",
+			BuildMonetization = "BuildGameEarnRobux",
+			BuildStats = "BuildGameStats",
+			BuildGetUsers = "BuildGameGetUsers",
+			BuildSearch = "BuildGameSearch",
+			BuildAssetLibrary = "BuildAssetLibrary",
+			BuildAssetLibraryCategory = "BuildAssetCategory",
+			BuildAssetLibraryDetail = "BuildAssetDetails"
 		}
 	},
 	Metadata = {

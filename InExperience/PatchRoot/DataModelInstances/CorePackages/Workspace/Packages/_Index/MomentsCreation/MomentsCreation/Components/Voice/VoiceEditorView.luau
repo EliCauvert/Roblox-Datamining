@@ -5,7 +5,10 @@ local momentsCommonModule = require(parent.MomentsCommon)
 local reactModule = require(parent.React)
 local button = foundationModule.Button
 local text = foundationModule.Text
+local textArea = foundationModule.TextArea
 local view = foundationModule.View
+local inputSize = foundationModule.Enums.InputSize
+local inputVariant = foundationModule.Enums.InputVariant
 local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
 local useTokens = foundationModule.Hooks.useTokens
 local audioWaveformOverlayModule = require(momentsCreation.Components.Voice.AudioWaveformOverlay)
@@ -14,7 +17,7 @@ local voiceActionBarModule = require(momentsCreation.Components.Voice.VoiceActio
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 
 return function(p1)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), view (ref), videoTimelineModule (ref), audioWaveformOverlayModule (ref), text (ref), voiceActionBarModule (ref), foundationModule (ref), button (ref)
+	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), view (ref), videoTimelineModule (ref), audioWaveformOverlayModule (ref), textArea (ref), inputSize (ref), inputVariant (ref), text (ref), voiceActionBarModule (ref), foundationModule (ref), button (ref)
 	local var1
 	local var2 = useDeviceInsets()
 	local var3 = useTokens()
@@ -49,41 +52,26 @@ return function(p1)
 			InputContainer = reactModule.createElement(view, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y",
-				GroupTransparency = if isGenerating then 0.3 else 0,
 				stroke = {
-					Color = if isInputInvalid then var3.Color.System.Alert.Color3 else var3.Color.Stroke.Default.Color3,
-					Transparency = if isInputInvalid then 0 else var3.Color.Stroke.Default.Transparency,
+					Color = if isInputInvalid then var3.Color.System.Alert.Color3 else var3.Color.Stroke.Emphasis.Color3,
+					Transparency = if isInputInvalid then 0 else var3.Color.Stroke.Emphasis.Transparency,
 					Thickness = var3.Stroke.Standard
 				},
-				cornerRadius = UDim.new(0, 24),
-				padding = {
-					top = UDim.new(0, var3.Padding.Medium),
-					bottom = UDim.new(0, var3.Padding.Medium),
-					left = UDim.new(0, var3.Padding.Medium),
-					right = UDim.new(0, var3.Padding.Medium)
-				}
+				cornerRadius = UDim.new(0, var3.Radius.Medium),
+				onAbsoluteSizeChanged = p1.onComposerResize
 			}, {
-				TextBox = reactModule.createElement("TextBox", {
-					Size = UDim2.new(1, 0, 0, 76),
-					BackgroundTransparency = 1,
-					ClearTextOnFocus = false,
-					ClipsDescendants = true,
-					Font = Enum.Font.BuilderSans,
-					MultiLine = true,
-					PlaceholderColor3 = var3.Color.Content.Muted.Color3,
-					PlaceholderText = p1.placeholderText,
-					Text = p1.text,
-					TextEditable = not isGenerating,
-					ref = p1.textBoxRef,
-					ShowNativeInput = true,
-					TextColor3 = var3.Color.Content.Emphasis.Color3,
-					TextTransparency = if isGenerating then 0.5 else 0,
-					TextSize = var3.FontSize.FontSize_350,
-					TextWrapped = true,
-					TextXAlignment = Enum.TextXAlignment.Left,
-					TextYAlignment = Enum.TextYAlignment.Top,
-					[reactModule.Change.Text] = p1.onTextChanged,
-					[reactModule.Event.FocusLost] = p1.onTextBoxFocusLost
+				Composer = reactModule.createElement(textArea, {
+					label = "",
+					text = p1.text,
+					width = UDim.new(1, 0),
+					placeholder = p1.placeholderText,
+					numLines = p1.numLines,
+					size = inputSize.Medium,
+					variant = inputVariant.Utility,
+					onChanged = p1.onTextChanged,
+					onFocusLost = p1.onTextBoxFocusLost,
+					isDisabled = isGenerating,
+					textBoxRef = p1.textBoxRef
 				})
 			}),
 			HelperRow = reactModule.createElement(view, {

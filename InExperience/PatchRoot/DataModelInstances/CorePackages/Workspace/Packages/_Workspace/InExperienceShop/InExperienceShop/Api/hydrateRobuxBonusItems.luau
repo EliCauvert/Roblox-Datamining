@@ -93,6 +93,7 @@ return {
 					id = v_1.id,
 					name = v_1.name,
 					items = v_1.items,
+					categoryType = v_1.categoryType,
 					paymentSessionId = v_1.paymentSessionId,
 					bonusJwt = v_1.bonusJwt,
 					robuxPackages = list_1

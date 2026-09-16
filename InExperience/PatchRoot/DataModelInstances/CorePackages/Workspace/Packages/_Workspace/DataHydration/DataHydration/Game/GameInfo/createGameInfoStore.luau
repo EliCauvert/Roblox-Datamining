@@ -12,7 +12,6 @@ local gameInfoStoreTypesModule = require(script.Parent.GameInfoStoreTypes)
 local trim = require(parent.LuauPolyfill).String.trim
 local fFlagLuaAppInExperienceDetailsPrompt = require(parent.SharedFlags).FFlagLuaAppInExperienceDetailsPrompt
 local fFlagLuaAppDataHydrationPlayerCountGameInfoStore = require(parent.SharedFlags).FFlagLuaAppDataHydrationPlayerCountGameInfoStore
-local fFlagLuaAppDataHydrationTotalVisitsGameInfoStore = require(parent.SharedFlags).FFlagLuaAppDataHydrationTotalVisitsGameInfoStore
 local getFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds = require(parent.SharedFlags).GetFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds
 local fFlagLuaAppDataHydrationUpdateItem = require(parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
@@ -28,7 +27,7 @@ local function sanitizeGameInfo(p1)
 end
 
 return function()
-	-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (ref), createDataCacheModule (ref), var1 (ref), sanitizeGameInfo (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), dashModule (ref), fetchGameDetailsModule (ref), gameInfoStoreTypesModule (ref), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (ref), fFlagLuaAppDataHydrationTotalVisitsGameInfoStore (ref), fFlagMigrateGameInfoToStore (ref), fFlagLuaAppDataHydrationUpdateItem (ref), fFlagSduiExperienceDetailsSupport (ref)
+	-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (ref), createDataCacheModule (ref), var1 (ref), sanitizeGameInfo (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), dashModule (ref), fetchGameDetailsModule (ref), gameInfoStoreTypesModule (ref), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (ref), fFlagMigrateGameInfoToStore (ref), fFlagLuaAppDataHydrationUpdateItem (ref), fFlagSduiExperienceDetailsSupport (ref)
 	local t = {}
 	
 	local function _(p1, p2)
@@ -57,11 +56,11 @@ return function()
 			end
 		end else nil,
 		fetchFn = function(p1)
-			-- upvalues: dashModule (copy), fetchGameDetailsModule (copy), fFlagLuaAppInExperienceDetailsPrompt (copy), gameInfoStoreTypesModule (copy), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (copy), fFlagLuaAppDataHydrationTotalVisitsGameInfoStore (copy), fFlagMigrateGameInfoToStore (copy), t (ref)
+			-- upvalues: dashModule (copy), fetchGameDetailsModule (copy), fFlagLuaAppInExperienceDetailsPrompt (copy), gameInfoStoreTypesModule (copy), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (copy), fFlagMigrateGameInfoToStore (copy), t (ref)
 			local var4 = dashModule.keys(p1)
 			
 			return fetchGameDetailsModule(var4):andThen(function(p2)
-				-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (copy), var4 (ref), gameInfoStoreTypesModule (copy), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (copy), fFlagLuaAppDataHydrationTotalVisitsGameInfoStore (copy), dashModule (copy), fFlagMigrateGameInfoToStore (copy), t (copy)
+				-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (copy), var4 (ref), gameInfoStoreTypesModule (copy), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (copy), dashModule (copy), fFlagMigrateGameInfoToStore (copy), t (copy)
 				if not fFlagLuaAppInExperienceDetailsPrompt then
 					if not p2 then
 						error("No response")
@@ -106,7 +105,7 @@ return function()
 									hasVerifiedBadge = v.creator.hasVerifiedBadge
 								} else nil,
 								playerCount = if fFlagLuaAppDataHydrationPlayerCountGameInfoStore then v.playing else nil,
-								totalVisits = if fFlagLuaAppDataHydrationTotalVisitsGameInfoStore then v.visits else nil
+								totalVisits = v.visits
 							}
 						end
 					end
@@ -117,13 +116,13 @@ return function()
 					end
 				else
 					dashModule.forEach(data, function(p3)
-						-- upvalues: t_1 (ref), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (copy), fFlagLuaAppDataHydrationTotalVisitsGameInfoStore (copy)
+						-- upvalues: t_1 (ref), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (copy)
 						t_1[tostring(p3.id)] = {
 							name = p3.name,
 							rootPlaceId = tostring(p3.rootPlaceId),
 							universeId = tostring(p3.id),
 							playerCount = if fFlagLuaAppDataHydrationPlayerCountGameInfoStore then p3.playing else nil,
-							totalVisits = if fFlagLuaAppDataHydrationTotalVisitsGameInfoStore then p3.visits else nil
+							totalVisits = p3.visits
 						}
 					end)
 				end
