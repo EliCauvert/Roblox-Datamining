@@ -30,6 +30,7 @@
 		AQSWarn_CageMeshDistanceAvatar = "Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar",
 		AQSWarn_CageRelevancy = "Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy",
 		AQSWarn_CageUV = "Common.UGCValidation.ErrorLabel.AQSWarn_CageUV",
+		AQSFail_CageUV = "Common.UGCValidation.ErrorLabel.AQSFail_CageUV",
 		AQSWarn_DynamicHead = "Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead",
 		AQSWarn_MeshOutsideOuterCage = "Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage",
 		AQSWarn_MeshIslandVolume = "Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume",
@@ -38,6 +39,8 @@
 		AQSFail_MeshIslandML = "Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML",
 		AQSFail_AnimationTooLong = "Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong",
 		AQSFail_AnimationTooShort = "Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort",
+		AQSFail_CagePartPlacement = "Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement",
+		AQSFail_CagePartVertexCount = "Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount",
 		TexturePackInvalidURL = "Common.UGCValidation.ErrorLabel.TexturePackInvalidURL",
 		DynamicHeadLeftEyeNotClose = "Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose",
 		DynamicHeadRightEyeNotClose = "Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose",
@@ -316,7 +319,8 @@
 		AQSWarn_CageMeshDistance = "Asset quality warning: Cage-to-mesh distance score is {score}. Max distance between outer cage and mesh is {max_distance}, {negative_sdf_percent}% of outer cage vertices are inside render mesh.",
 		AQSWarn_CageMeshDistanceAvatar = "Asset quality warning: Body cage distance score is {score}. Max distance between body cage and mesh is {max_distance}, {negative_sdf_percent}% of body cage vertices are inside the body mesh.",
 		AQSWarn_CageRelevancy = "Asset quality warning: Cage relevancy score is {score}. {irrelevant_percent}% of the modified outer cage vertices do not cover the accessory.",
-		AQSWarn_CageUV = "Asset quality warning: Cage UV score is {score} for {cage_name}. Incorrect UV count: {incorrect_uv_count}.",
+		AQSWarn_CageUV = "Asset quality warning: The {cage_name} has incorrect UV values. {incorrect_uv_count} incorrect UVs ({unreferenced_vertex_count} unreferenced, {non_template_uv_count} non-template, {duplicate_mapping_count} duplicate mappings), {unmatched_template_count} unmatched template vertices.",
+		AQSFail_CageUV = "The {cage_name} has incorrect UV values that do not match the template. {incorrect_uv_count} incorrect UVs ({unreferenced_vertex_count} unreferenced, {non_template_uv_count} non-template, {duplicate_mapping_count} duplicate mappings), {unmatched_template_count} unmatched template vertices. Please correct the cage UV to match the template.",
 		AQSWarn_DynamicHead = "Asset quality warning: Dynamic head expression score is {score}.",
 		AQSWarn_MeshOutsideOuterCage = "Asset quality warning: Mesh containment score is {score}. {mesh_outside_outer_cage_percent}% of mesh vertices are outside the outer cage.",
 		AQSWarn_MeshIslandVolume = "Asset quality: {partName} has {num_small_volume_islands} small disconnected islands out of {num_disconnected_components} components (score: {score}).",
@@ -571,6 +575,8 @@
 		TestWorkflowMessageV2 = "Second test error string used to verify the Hub-first translation sync workflow end-to-end.",
 		AQSFail_MeshIslandML = "Your body contains small disconnected mesh components (mesh islands). Please remove floating geometry and ensure all mesh parts are properly connected.",
 		AQSFail_AnimationTooLong = "Animation is too long ({duration} seconds). Emote animations must be at most {maxLength} seconds long.",
-		AQSFail_AnimationTooShort = "Animation is too short ({duration} seconds). Emote animations must be longer than {minLength} seconds."
+		AQSFail_AnimationTooShort = "Animation is too short ({duration} seconds). Emote animations must be longer than {minLength} seconds.",
+		AQSFail_CagePartPlacement = "Cage part placement violation in {cageName}: {upperPart} is not correctly positioned relative to {lowerPart}.",
+		AQSFail_CagePartVertexCount = "Cage part {partName} in {cageName} has {actualCount} vertices, expected approximately {expectedCount}. This may indicate missing or duplicated geometry in that cage region."
 	}
 }

@@ -92,7 +92,7 @@ function t.run(p1, p2)
 	-- upvalues: validationEnumsModule (ref), calculateMeshSizeForPart (ref), errorSourceStringsModule (ref), getExpectedPartSizeModule (ref), validateWrapTargetComparison (ref), constantsModule (ref)
 	local rootInstance = p2.rootInstance
 	local assetType = p2.uploadEnum.assetType
-	local var1 = p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend
+	local var1 = p2.consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend
 	local t = {}
 	
 	if p2.renderMeshesData then

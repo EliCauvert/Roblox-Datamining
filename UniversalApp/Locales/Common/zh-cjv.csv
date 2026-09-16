@@ -632,6 +632,9 @@ Common.Presence.Label.Online,在线
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,动画过长（{duration} 秒）。动作动画时长上限为 {maxLength} 秒。
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,动画过短（{duration} 秒）。动作动画时长必须超过 {minLength} 秒。
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,
+Common.UGCValidation.ErrorLabel.AQSFail_CageUV,
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,你的身体包含小的不相连的网格组件（网格孤岛）。请移除浮动几何图形，并确保所有网格部件均已正确连接。
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,素材质量：“{partName}”有 {num_disconnected_components} 个未连接的组件，超出了 {max_disconnected_components} 个的上限。
 Common.UGCValidation.ErrorLabel.AQSInputDataError,由于输入数据不正确或不完整，无法正确计算质量分数。请检查你的模型或提交错误报告
@@ -1208,11 +1211,9 @@ Feature.Accessibility.Description.AppThemeMode,选择 App 模式，其他设备�
 Feature.Accessibility.Description.DeviceAppTheme,选择 App 主题。所有类型的设备都会显示所选效果。
 Feature.Accessibility.Description.DeviceAppThemeExclusive,探索 Plus 专属主题，自定义你的体验。立即试用并订阅，保存你的选择。
 Feature.Accessibility.Description.DeviceAppThemeUpsell,
-Feature.Accessibility.Description.DeviceLevelTheme,请选择此设备的主题。(注意：这不会改变 Roblox 在其他设备上的外观。)
 Feature.Accessibility.Description.Haptics,控制 Roblox 应用程序的整体振动
 Feature.Accessibility.Description.LaunchAtStartup,电脑开机时自动启动 Roblox
 Feature.Accessibility.Description.LaunchDestination,
-Feature.Accessibility.Description.Main,这些设置仅适用于此设备。你还可以在任何体验中的“设置”菜单中调整图形、移动和辅助功能。
 Feature.Accessibility.Description.MinimizeToTray,关闭窗口时，将 Roblox 最小化到系统托盘，而非完全退出。
 Feature.Accessibility.Description.PreferredTextSize,根据你的喜好调整 Roblox 上显示的文本大小
 Feature.Accessibility.Description.PreferredTransparency,通过调整某些背景的透明度来提高对比度
@@ -1227,7 +1228,6 @@ Feature.Accessibility.Header.Haptics,触觉
 Feature.Accessibility.Header.ShowInMenuBar,在菜单栏中显示
 Feature.Accessibility.Heading.AppThemeMode,模式
 Feature.Accessibility.Heading.DeviceAppTheme,App 主题
-Feature.Accessibility.Heading.DeviceLevelTheme,设备级别主题
 Feature.Accessibility.Heading.DevicePreferences,设备偏好设置
 Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.ExclusiveThemes,专属主题

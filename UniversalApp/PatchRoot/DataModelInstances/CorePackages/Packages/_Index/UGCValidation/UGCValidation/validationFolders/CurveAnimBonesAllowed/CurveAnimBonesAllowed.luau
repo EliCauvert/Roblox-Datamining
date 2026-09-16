@@ -48,13 +48,13 @@ end
 function t.run(p1, p2)
 	-- upvalues: getFFlagUGCValidateEmotesBoneUserVerificationModule (ref), validationEnumsModule (ref), errorSourceStringsModule (ref), checkTrustedCreatorPermission (ref)
 	if not getFFlagUGCValidateEmotesBoneUserVerificationModule() then return end
-	local consumerEnv = p2.consumerConfig.consumerEnv
+	local validationEnv = p2.consumerConfig.validationEnv
 	
-	if consumerEnv == validationEnumsModule.ConsumerEnv.IEC then
+	if validationEnv == validationEnumsModule.ValidationEnv.IEC then
 		p1:fail(errorSourceStringsModule.Keys.CurveAnim_BonesNotAllowed)
 		
 		return
-	elseif consumerEnv == validationEnumsModule.ConsumerEnv.Backend then
+	elseif validationEnv == validationEnumsModule.ValidationEnv.Backend then
 		if not p2.consumerConfig.backendConfigs.isUserInTrustedCreatorProgram then
 			p1:fail(errorSourceStringsModule.Keys.CurveAnim_BonesNotAllowed)
 		end

@@ -1215,10 +1215,8 @@ Feature.Accessibility.Description.AppThemeMode,Pilih mode aplikasi. Perangkatmu 
 Feature.Accessibility.Description.DeviceAppTheme,Pilih tema aplikasi. Ini akan terlihat di semua tipe perangkat.
 Feature.Accessibility.Description.DeviceAppThemeExclusive,Jelajahi tema eksklusif Plus untuk menyesuaikan pengalaman virtualmu. Coba sekarang dan subscribe untuk menyimpan pilihanmu.
 Feature.Accessibility.Description.DeviceAppThemeUpsell,
-Feature.Accessibility.Description.DeviceLevelTheme,Pilih tema untuk perangkat ini. (Catatan: Pengaturan ini tidak akan mengubah tampilan Roblox-mu di perangkat lain.)
 Feature.Accessibility.Description.Haptics,Mengendalikan getaran keseluruhan aplikasi Roblox
 Feature.Accessibility.Description.LaunchAtStartup,Luncurkan Roblox secara otomatis saat saya memulai komputer
-Feature.Accessibility.Description.Main,"Pengaturan ini hany berlaku untuk perangkat ini. Kamu juga dapat menyesuaikan grafik, gerakan, dan aksesibilitas dari menu Pengaturan dalam pengalaman virtual."
 Feature.Accessibility.Description.MinimizeToTray,"Menutup jendela mengirim Roblox ke system tray, bukan benar-benar menutupnya"
 Feature.Accessibility.Description.PreferredTextSize,Sesuaikan ukuran teks di seluruh Roblox sesuai dengan preferensimu
 Feature.Accessibility.Description.PreferredTransparency,Tingkatkan kontras dengan menyesuaikan transparansi di beberapa latar belakang
@@ -1233,7 +1231,6 @@ Feature.Accessibility.Header.Haptics,Haptik
 Feature.Accessibility.Header.ShowInMenuBar,Tampilkan di bilah menu
 Feature.Accessibility.Heading.AppThemeMode,Mode
 Feature.Accessibility.Heading.DeviceAppTheme,Tema aplikasi
-Feature.Accessibility.Heading.DeviceLevelTheme,Tema level perangkat
 Feature.Accessibility.Heading.DevicePreferences,Preferensi Perangkat
 Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.ExclusiveThemes,Tema eksklusif

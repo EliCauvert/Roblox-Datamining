@@ -1195,10 +1195,8 @@ Feature.Accessibility.Description.AppThemeMode,एक ऐप मोड चुन
 Feature.Accessibility.Description.DeviceAppTheme,एक ऐप थीम चुनें. यह सभी डिवाइस टाइप पर दिखेगी.
 Feature.Accessibility.Description.DeviceAppThemeExclusive,"अपने एक्सपीरिएंस को कस्टमाइज़ करने के लिए, Plus की खास थीम एक्सप्लोर करें. उन्हें अभी आज़माएँ और सब्सक्राइब करके अपना सिलेक्शन सेव करें."
 Feature.Accessibility.Description.DeviceAppThemeUpsell,अपने एक्सपीरिएंस को कस्टमाइज़ करने के लिए Plus की खास थीम्स एक्सप्लोर करें. उन्हें अभी आज़माएँ और सब्सक्राइब करके अपना सिलेक्शन सेव करें.
-Feature.Accessibility.Description.DeviceLevelTheme,इस डिवाइस के लिए एक थीम चुनें. (नोट: इससे यह नहीं बदलेगा कि Roblox आपके दूसरे डिवाइस पर कैसा दिखता है.)
 Feature.Accessibility.Description.Haptics,Roblox ऐप के ओवरऑल वाइब्रेशन को कंट्रोल करें
 Feature.Accessibility.Description.LaunchAtStartup,"मेरे कंप्यूटर चालू करने पर, Roblox को ऑटोमैटिक तरीके से लॉन्च करें"
-Feature.Accessibility.Description.Main,"ये सेटिंग सिर्फ़ इस डिवाइस पर लागू होती हैं. किसी एक्सपीरिएंस में आप सेटिंग्स मेन्यू से ग्राफ़िक्स, मूवमेंट और ऐक्सेसिबिलिटी को भी एडजस्ट कर सकते हैं."
 Feature.Accessibility.Description.MinimizeToTray,"विंडो बंद करने पर, Roblox पूरी तरह से बाहर निकलने के बजाय सिस्टम पर भेज दिया जाता है"
 Feature.Accessibility.Description.PreferredTextSize,"अपनी प्राथमिकताओं के अनुसार, पूरे Roblox में टेक्स्ट का साइज़ एडजस्ट करें"
 Feature.Accessibility.Description.PreferredTransparency,कुछ बैकग्राउंड पर ट्रांसपेरेंसी एडजस्ट करके कॉन्ट्रास्ट को बेहतर करें
@@ -1213,7 +1211,6 @@ Feature.Accessibility.Header.Haptics,हैप्टिक्स
 Feature.Accessibility.Header.ShowInMenuBar,मेन्यू बार में दिखाएँ
 Feature.Accessibility.Heading.AppThemeMode,मोड
 Feature.Accessibility.Heading.DeviceAppTheme,ऐप थीम
-Feature.Accessibility.Heading.DeviceLevelTheme,डिवाइस लेवल की थीम
 Feature.Accessibility.Heading.DevicePreferences,डिवाइस से जुड़ी प्राथमिकताएँ
 Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.ExclusiveThemes,खास थीम

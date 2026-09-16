@@ -46,7 +46,7 @@ function t.run(p2, p3)
 	local t = {
 		shouldYield = false,
 		assetTypeEnum = var2,
-		isServer = p3.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
+		isServer = p3.consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend,
 		editableMeshes = buildEditableMeshesFromSharedData(p3)
 	}
 	local var3, var4 = bodyAssetMasksRendererModule.new(rootInstance, accurateBoundingBoxRasterUtilModule.getBoundsViewsForAssetType(var2), t)

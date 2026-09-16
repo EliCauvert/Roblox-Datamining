@@ -1214,10 +1214,8 @@ Feature.Accessibility.Description.AppThemeMode,選擇 App 模式。你的其他�
 Feature.Accessibility.Description.DeviceAppTheme,選擇 App 主題。此主題將套用至所有裝置類型。
 Feature.Accessibility.Description.DeviceAppThemeExclusive,探索 Plus 專屬主題以自訂體驗。立即試用並訂閱，即可儲存你的選擇。
 Feature.Accessibility.Description.DeviceAppThemeUpsell,
-Feature.Accessibility.Description.DeviceLevelTheme,為此裝置選擇一個外觀主題。（請注意：這不會改變 Roblox 在其他裝置上的外觀。）
 Feature.Accessibility.Description.Haptics,控制 Roblox App 的整體震動。
 Feature.Accessibility.Description.LaunchAtStartup,在我啟動電腦時，自動啟動 Roblox
-Feature.Accessibility.Description.Main,這些設定只會套用至此裝置。您也可以從體驗中的「設定」選單調整圖形、移動和無障礙功能。
 Feature.Accessibility.Description.MinimizeToTray,關閉視窗會將 Roblox 傳送至系統匣，而非完全退出
 Feature.Accessibility.Description.PreferredTextSize,根據您的喜好調整 Roblox 上的文字大小
 Feature.Accessibility.Description.PreferredTransparency,通過調整某些背景的透明度來改善對比度
@@ -1232,7 +1230,6 @@ Feature.Accessibility.Header.Haptics,觸覺
 Feature.Accessibility.Header.ShowInMenuBar,在選單列中顯示
 Feature.Accessibility.Heading.AppThemeMode,模式
 Feature.Accessibility.Heading.DeviceAppTheme,App 主題
-Feature.Accessibility.Heading.DeviceLevelTheme,裝置等級主題
 Feature.Accessibility.Heading.DevicePreferences,裝置偏好
 Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.ExclusiveThemes,專屬主題

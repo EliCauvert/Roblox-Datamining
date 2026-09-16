@@ -641,6 +641,9 @@ Common.Presence.Label.Online,Online
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,Animation is too long ({duration} seconds). Emote animations must be at most {maxLength} seconds long.
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,Animation is too short ({duration} seconds). Emote animations must be longer than {minLength} seconds.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,Cage part placement violation in {cageName}: {upperPart} is not correctly positioned above {lowerPart}.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"Cage part {partName} in {cageName} has {actualCount} vertices, expected approximately {expectedCount}. This may indicate missing or duplicated geometry in that body region."
+Common.UGCValidation.ErrorLabel.AQSFail_CageUV,"The {cage_name} has incorrect UV values that do not match the template. {incorrect_uv_count} incorrect UVs ({unreferenced_vertex_count} unreferenced, {non_template_uv_count} non-template, {duplicate_mapping_count} duplicate mappings), {unmatched_template_count} unmatched template vertices. Please correct the cage UV to match the template."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Your body contains small disconnected mesh components (mesh islands). Please remove floating geometry and ensure all mesh parts are properly connected.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"Asset quality: {partName} has {num_disconnected_components} disconnected components, which exceeds the maximum of {max_disconnected_components}."
 Common.UGCValidation.ErrorLabel.AQSInputDataError,Quality score cannot be properly computed due to the input data is incorrect or incomplete. Please check your model or file a bug report
@@ -1217,11 +1220,9 @@ Feature.Accessibility.Description.AppThemeMode,Select an app mode. Your other de
 Feature.Accessibility.Description.DeviceAppTheme,Select an app theme. This will be reflected on all device types.
 Feature.Accessibility.Description.DeviceAppThemeExclusive,Explore Plus exclusive themes to customize your experience. Try them now and subscribe to save your selection.
 Feature.Accessibility.Description.DeviceAppThemeUpsell,
-Feature.Accessibility.Description.DeviceLevelTheme,Choose a theme for this device. (Note: This won't change how Roblox looks on your other devices.)
 Feature.Accessibility.Description.Haptics,Control the overall vibration of the Roblox app
 Feature.Accessibility.Description.LaunchAtStartup,Launch Roblox automatically when I start my computer
 Feature.Accessibility.Description.LaunchDestination,Choose where the app opens when you start Roblox
-Feature.Accessibility.Description.Main,"These settings only apply to this device. You can also adjust graphics, movement and accessibility from the Settings menu in an experience."
 Feature.Accessibility.Description.MinimizeToTray,Closing the window sends Roblox to the system tray instead of fully exiting
 Feature.Accessibility.Description.PreferredTextSize,Adjust text size across Roblox according to your preferences
 Feature.Accessibility.Description.PreferredTransparency,Improve contrast by adjusting transparency on some backgrounds
@@ -1236,7 +1237,6 @@ Feature.Accessibility.Header.Haptics,Haptics
 Feature.Accessibility.Header.ShowInMenuBar,Show in menu bar
 Feature.Accessibility.Heading.AppThemeMode,Mode
 Feature.Accessibility.Heading.DeviceAppTheme,App theme
-Feature.Accessibility.Heading.DeviceLevelTheme,Device level theme
 Feature.Accessibility.Heading.DevicePreferences,Device Preferences
 Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.ExclusiveThemes,Exclusive themes

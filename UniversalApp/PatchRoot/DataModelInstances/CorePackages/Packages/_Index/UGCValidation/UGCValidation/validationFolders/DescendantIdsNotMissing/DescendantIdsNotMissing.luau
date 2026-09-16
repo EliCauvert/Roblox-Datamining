@@ -87,7 +87,7 @@ return {
 				end
 			end
 		end
-		local var5 = p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend
+		local var5 = p2.consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend
 		
 		if var5 or getFFlagUGCValidateCheckDescendantIdsLoadableModule() then
 			for i_2, v_2 in p2.contentIds do

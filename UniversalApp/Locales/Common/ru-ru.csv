@@ -713,9 +713,7 @@ CoreScripts.TopBar.MusicLoading,Аудио не воспроизводится
 CoreScripts.TopBar.MusicNotVerified,Воспроизведимое аудио не проверено
 Feature.Accessibility.Action.ScrollDown,Прокрутить вниз
 Feature.Accessibility.Action.ScrollUp,Прокрутить вверх
-Feature.Accessibility.Description.DeviceLevelTheme,Выбери тему для этого устройства. (Примечание: это не изменит тему Roblox на других устройствах).
 Feature.Accessibility.Description.Haptics,Контролируй общую вибрацию приложения Roblox
-Feature.Accessibility.Description.Main,"Эти настройки применимы только на этом устройстве. Ты также можешь изменять графику, движение и доступность в меню настроек в игре."
 Feature.Accessibility.Description.PreferredTextSize,Отрегулируй размер текста в Roblox в соответствии с предпочтениями
 Feature.Accessibility.Description.PreferredTransparency,"Улучшить контраст, изменив прозрачность на некоторых фонах"
 Feature.Accessibility.Description.ReducedMotion,Остановить или уменьшить эффекты движения
@@ -724,7 +722,6 @@ Feature.Accessibility.DeviceLevelTheme.Dark,Тёмная
 Feature.Accessibility.DeviceLevelTheme.Light,Светлая
 Feature.Accessibility.DeviceLevelTheme.System,Система
 Feature.Accessibility.Header.Haptics,Вибрация
-Feature.Accessibility.Heading.DeviceLevelTheme,Тема устройства
 Feature.Accessibility.Heading.DevicePreferences,Настройки устройства
 Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.PreferredTextSize,Размер текста

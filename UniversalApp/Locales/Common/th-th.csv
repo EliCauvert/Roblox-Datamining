@@ -1198,10 +1198,8 @@ Feature.Accessibility.Description.AppThemeMode,เลือกโหมดแอ
 Feature.Accessibility.Description.DeviceAppTheme,เลือกธีมแอป ธีมนี้จะปรากฏในอุปกรณ์ทุกประเภท
 Feature.Accessibility.Description.DeviceAppThemeExclusive,สำรวจธีมสุดพิเศษของ Plus เพื่อปรับแต่งประสบการณ์ของคุณ ลองใช้เลยและสมัครสมาชิกเพื่อบันทึกธีมที่เลือกไว้
 Feature.Accessibility.Description.DeviceAppThemeUpsell,สำรวจธีมพิเศษของ Plus เพื่อปรับแต่งประสบการณ์ของคุณ ลองใช้เลยและสมัครสมาชิกเพื่อบันทึกธีมที่เลือกไว้
-Feature.Accessibility.Description.DeviceLevelTheme,เลือกธีมสำหรับอุปกรณ์นี้ (หมายเหตุ: การดำเนินการนี้จะไม่เปลี่ยนรูปลักษณ์ของ Roblox บนอุปกรณ์อื่นๆ ของคุณ)
 Feature.Accessibility.Description.Haptics,ควบคุมการสั่นโดยรวมของแอป Roblox
 Feature.Accessibility.Description.LaunchAtStartup,เปิด Roblox โดยอัตโนมัติเมื่อเปิดคอมพิวเตอร์
-Feature.Accessibility.Description.Main,การตั้งค่าเหล่านี้จะใช้กับอุปกรณ์นี้เท่านั้น คุณยังสามารถปรับแต่งกราฟิก การเคลื่อนไหว และการช่วยเหลือการเข้าถึงได้โดยไปที่เมนูการตั้งค่าในประสบการณ์
 Feature.Accessibility.Description.MinimizeToTray,การปิดหน้าต่างจะย่อให้ Roblox ไปอยู่ที่ถาดระบบ แทนที่จะออกจากโปรแกรมอย่างสมบูรณ์
 Feature.Accessibility.Description.PreferredTextSize,ปรับขนาดข้อความทั่วทั้ง Roblox ตามการตั้งค่าของคุณ
 Feature.Accessibility.Description.PreferredTransparency,ปรับปรุงความคมชัดโดยการปรับความโปร่งใสให้กับบางพื้นหลัง
@@ -1216,7 +1214,6 @@ Feature.Accessibility.Header.Haptics,การสั่น
 Feature.Accessibility.Header.ShowInMenuBar,แสดงในแถบเมนู
 Feature.Accessibility.Heading.AppThemeMode,โหมด
 Feature.Accessibility.Heading.DeviceAppTheme,ธีมแอป
-Feature.Accessibility.Heading.DeviceLevelTheme,ธีมระดับอุปกรณ์
 Feature.Accessibility.Heading.DevicePreferences,
 Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.ExclusiveThemes,ธีมสุดพิเศษ

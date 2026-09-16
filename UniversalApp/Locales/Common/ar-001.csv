@@ -1195,10 +1195,8 @@ Feature.Accessibility.Description.AppThemeMode,حدِّد وضع التطبيق.
 Feature.Accessibility.Description.DeviceAppTheme,حدِّد سمة التطبيق. سينعكس هذا على جميع أنواع الأجهزة.
 Feature.Accessibility.Description.DeviceAppThemeExclusive,استكشِف السمات الحصرية لاشتراك Plus لتخصيص تجربتك. جربها الآن واشترك لحفظ اختياراتك.
 Feature.Accessibility.Description.DeviceAppThemeUpsell,
-Feature.Accessibility.Description.DeviceLevelTheme,اختر سمة لهذا الجهاز. (ملاحظة: لن يؤثر هذا على كيفية عرض Roblox على أجهزتك الأخرى.)
 Feature.Accessibility.Description.Haptics,التحكم في الاهتزاز العام لتطبيق Roblox
 Feature.Accessibility.Description.LaunchAtStartup,فتح منصة Roblox تلقائيًا عند بدء تشغيل جهاز الكمبيوتر
-Feature.Accessibility.Description.Main,تنطبق هذه الإعدادات على هذا الجهاز فقط. يمكنك أيضًا ضبط الرسومات والحركة وإمكانية الوصول من قائمة الإعدادات داخل التجربة.
 Feature.Accessibility.Description.MinimizeToTray,يؤدي إغلاق النافذة إلى إرسال منصة Roblox إلى شريط النظام بدلاً من الخروج بالكامل
 Feature.Accessibility.Description.PreferredTextSize,ضبط حجم النص عبر Roblox وفقًا لتفضيلاتك
 Feature.Accessibility.Description.PreferredTransparency,تحسين التباين بتعديل الشفافية في بعض الخلفيات
@@ -1213,7 +1211,6 @@ Feature.Accessibility.Header.Haptics,اللمس
 Feature.Accessibility.Header.ShowInMenuBar,عرض في شريط القائمة
 Feature.Accessibility.Heading.AppThemeMode,الوضع
 Feature.Accessibility.Heading.DeviceAppTheme,سمة التطبيق
-Feature.Accessibility.Heading.DeviceLevelTheme,مستوى سمة الجهاز
 Feature.Accessibility.Heading.DevicePreferences,تفضيلات الجهاز
 Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.ExclusiveThemes,سمات حصرية

@@ -1215,10 +1215,8 @@ Feature.Accessibility.Description.AppThemeMode,アプリのモードを選択し
 Feature.Accessibility.Description.DeviceAppTheme,アプリのテーマを選択してください。これはすべてのデバイスタイプに反映されます。
 Feature.Accessibility.Description.DeviceAppThemeExclusive,Plus限定テーマを試して、Robloxの表示をカスタマイズしましょう。定期購入すると、選択したテーマを保存できます。
 Feature.Accessibility.Description.DeviceAppThemeUpsell,Plus限定のテーマを閲覧して、体験をカスタマイズしましょう。今すぐ試して、選択したテーマを保存するには定期購入してください。
-Feature.Accessibility.Description.DeviceLevelTheme,このデバイスのテーマを選択してください。（注：他のデバイスでのRobloxの表示は変わりません。）
 Feature.Accessibility.Description.Haptics,Robloxアプリでバイブレーション全般をコントロール。
 Feature.Accessibility.Description.LaunchAtStartup,コンピューター起動時にRobloxを自動的に起動する
-Feature.Accessibility.Description.Main,この設定はこのデバイスにしか適用されません。バーチャル空間内の設定メニューからグラフィックや動作、アクセシビリティの調整もできます。
 Feature.Accessibility.Description.MinimizeToTray,ウィンドウを閉じると、Robloxは完全に終了せずシステムトレイに移動します。
 Feature.Accessibility.Description.PreferredTextSize,Robloxで好みに合わせてテキストのサイズを調整
 Feature.Accessibility.Description.PreferredTransparency,一部の背景の透明度を調整してコントラストを改善
@@ -1233,7 +1231,6 @@ Feature.Accessibility.Header.Haptics,振動
 Feature.Accessibility.Header.ShowInMenuBar,メニューバーに表示
 Feature.Accessibility.Heading.AppThemeMode,モード
 Feature.Accessibility.Heading.DeviceAppTheme,アプリテーマ
-Feature.Accessibility.Heading.DeviceLevelTheme,デバイスのテーマ
 Feature.Accessibility.Heading.DevicePreferences,
 Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.ExclusiveThemes,限定テーマ

@@ -10,6 +10,7 @@ local _ = require(parent.util.Types)
 local sharedDataMember = validationEnumsModule.SharedDataMember
 local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 local getFFlagUGCValidateMigrateBodyPartBoundsModule = require(parent.flags.getFFlagUGCValidateMigrateBodyPartBounds)
+local getFFlagUGCValidationAllowFullVaasModule = require(parent.flags.getFFlagUGCValidationAllowFullVaas)
 local resetPhysicsDataModule = require(parent.util.resetPhysicsData)
 local list = {
 	sharedDataMember.renderMeshesData,
@@ -21,12 +22,12 @@ local t = { InExpServer = true, InExpClient = true }
 local t_1 = { DATA_FETCH_FAILURE = {} }
 
 function t_1.storeDesiredData(p1, p2)
-	-- upvalues: getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), validationEnumsModule (ref), resetPhysicsDataModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), t (ref), list (ref), fetchEditablesModule (ref), t_1 (ref), sharedDataMember (ref), fetchCurveAnimationsModule (ref), fetchCurveAnimComputedFramesModule (ref), fetchContentIdsModule (ref), fetchHSRAssetsModule (ref), fetchCurveAnimBoneDataModule (ref)
+	-- upvalues: getFFlagUGCValidationAllowFullVaasModule (ref), getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), validationEnumsModule (ref), resetPhysicsDataModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), t (ref), list (ref), fetchEditablesModule (ref), t_1 (ref), sharedDataMember (ref), fetchCurveAnimationsModule (ref), fetchCurveAnimComputedFramesModule (ref), fetchContentIdsModule (ref), fetchHSRAssetsModule (ref), fetchCurveAnimBoneDataModule (ref)
 	local rootInstance = p1.rootInstance
 	local preloadedEditableMeshes = p1.consumerConfig.preloadedEditableMeshes or {}
 	local preloadedEditableImages = p1.consumerConfig.preloadedEditableImages or {}
 	
-	if getFFlagUGCValidateMigrateBodyPartBoundsModule() and p1.consumerConfig.consumerEnv ~= validationEnumsModule.ConsumerEnv.IEC then
+	if not getFFlagUGCValidationAllowFullVaasModule() and getFFlagUGCValidateMigrateBodyPartBoundsModule() and p1.consumerConfig.consumerEnv ~= validationEnumsModule.ConsumerEnv.IEC then
 		pcall(resetPhysicsDataModule, { rootInstance }, {
 			isServer = p1.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
 			bypassFlags = {}

@@ -1215,10 +1215,8 @@ Feature.Accessibility.Description.AppThemeMode,Chọn giao diện cho ứng dụ
 Feature.Accessibility.Description.DeviceAppTheme,Chọn một chủ đề cho ứng dụng. Chủ đề này sẽ được áp dụng cho mọi loại thiết bị.
 Feature.Accessibility.Description.DeviceAppThemeExclusive,Khám phá các chủ đề dành riêng cho gói Plus để tùy chỉnh trải nghiệm của bạn. Thử ngay và đăng ký để lưu chủ đề bạn chọn.
 Feature.Accessibility.Description.DeviceAppThemeUpsell,
-Feature.Accessibility.Description.DeviceLevelTheme,Chọn giao diện cho thiết bị này. (Lưu ý: Giao diện Roblox trên các thiết bị khác của bạn sẽ không bị ảnh hưởng.)
 Feature.Accessibility.Description.Haptics,Kiểm soát độ rung tổng thể của ứng dụng Roblox
 Feature.Accessibility.Description.LaunchAtStartup,Tự động mở Roblox khi tôi khởi động máy tính
-Feature.Accessibility.Description.Main,"Các cài đặt này chỉ áp dụng cho thiết bị này. Bạn cũng có thể điều chỉnh đồ họa, chuyển động và trợ năng từ menu Cài Đặt trong một trải nghiệm."
 Feature.Accessibility.Description.MinimizeToTray,Đóng cửa sổ sẽ đưa Roblox vào khay hệ thống thay vì thoát hoàn toàn
 Feature.Accessibility.Description.PreferredTextSize,Điều chỉnh cỡ chữ trên Roblox theo sở thích của bạn
 Feature.Accessibility.Description.PreferredTransparency,Cải thiện độ tương phản bằng cách điều chỉnh độ trong suốt trên một số nền
@@ -1233,7 +1231,6 @@ Feature.Accessibility.Header.Haptics,Phản hồi xúc giác
 Feature.Accessibility.Header.ShowInMenuBar,Hiển thị trong thanh menu
 Feature.Accessibility.Heading.AppThemeMode,Giao diện
 Feature.Accessibility.Heading.DeviceAppTheme,Chủ đề của ứng dụng
-Feature.Accessibility.Heading.DeviceLevelTheme,Giao diện theo thiết bị
 Feature.Accessibility.Heading.DevicePreferences,Tùy chọn thiết bị
 Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.ExclusiveThemes,Chủ đề đặc quyền

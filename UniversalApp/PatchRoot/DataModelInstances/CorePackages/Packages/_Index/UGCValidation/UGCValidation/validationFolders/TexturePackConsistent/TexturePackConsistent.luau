@@ -7,6 +7,7 @@ local texturePackUtilsModule = require(parent.util.TexturePackUtils)
 local getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule = require(parent.flags.getFFlagUGCValidateMigrateSurfaceAppearanceMeshQuality)
 local getFFlagUGCValidateTexturePackModule = require(parent.flags.getFFlagUGCValidateTexturePack)
 local getFFlagUGCValidateTexturePackOnRCCOnlyModule = require(parent.flags.getFFlagUGCValidateTexturePackOnRCCOnly)
+local getFFlagUGCValidationAllowFullVaasModule = require(parent.flags.getFFlagUGCValidationAllowFullVaas)
 local t = {
 	Publish = true,
 	Backend = true,
@@ -26,13 +27,19 @@ return {
 	requiredData = {},
 	expectedFailures = {},
 	run = function(p1, p2)
-		-- upvalues: getFFlagUGCValidateTexturePackModule (ref), t_1 (ref), t (ref), validationEnumsModule (ref), getFFlagUGCValidateTexturePackOnRCCOnlyModule (ref), texturePackUtilsModule (ref), errorSourceStringsModule (ref), UGCValidationService (ref)
+		-- upvalues: getFFlagUGCValidateTexturePackModule (ref), t_1 (ref), getFFlagUGCValidationAllowFullVaasModule (ref), validationEnumsModule (ref), t (ref), getFFlagUGCValidateTexturePackOnRCCOnlyModule (ref), texturePackUtilsModule (ref), errorSourceStringsModule (ref), UGCValidationService (ref)
 		if not getFFlagUGCValidateTexturePackModule() then return end
+		local var1
 		local rootInstance = p2.rootInstance
-		local source = p2.consumerConfig.source
+		local consumerConfig = p2.consumerConfig
 		
-		if t_1[source] == true then return end
-		local var1 = t[source] == true
+		if t_1[consumerConfig.source] == true then return end
+		if getFFlagUGCValidationAllowFullVaasModule() and consumerConfig.isVaaS then
+			var1 = consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend
+			var1 = nil
+		else
+			var1 = t[consumerConfig.source] == true
+		end
 		local uploadCategory = p2.uploadCategory
 		local var2 = if uploadCategory ~= validationEnumsModule.UploadCategory.TORSO_AND_LIMBS then uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD else true
 		

@@ -29,7 +29,9 @@ local t = {
 	mergeLegacyIntoModern = legacyValidationAdapterModule.mergeLegacyIntoModern,
 	isBackendInExperienceViaCanPublishEnabled = require(_script.flags.getFFlagUGCValidateBackendInExperienceViaCanPublish),
 	shouldSkipAssetQualityChecks = require(_script.flags.getFFlagDebugUGCDisableAssetQualityChecks),
-	SplitHrdInUpload = require(_script.util.SplitHumanoidRigDescriptionForUpload).fixUploadInstance
+	isFullVaasEnabled = require(_script.flags.getFFlagUGCValidationAllowFullVaas),
+	SplitHrdInUpload = require(_script.util.SplitHumanoidRigDescriptionForUpload).fixUploadInstance,
+	AssetQualityValidationClient = require(_script.util.AssetQualityValidationClient)
 }
 
 if getEngineFeatureUGCValidationWithContextEntrypointModule() then

@@ -1215,10 +1215,8 @@ Feature.Accessibility.Description.AppThemeMode,Bir uygulama modu seç. Diğer ci
 Feature.Accessibility.Description.DeviceAppTheme,"Bir uygulama teması seç. Bu, tüm cihaz türlerine yansıtılacaktır."
 Feature.Accessibility.Description.DeviceAppThemeExclusive,Deneyimini özelleştirmek için Plus'a özel temaları keşfet. Şimdi dene ve seçimini kaydetmek için abone ol.
 Feature.Accessibility.Description.DeviceAppThemeUpsell,
-Feature.Accessibility.Description.DeviceLevelTheme,"Bu cihaz için bir tema seç. (Not: Bu seçim, Roblox'un diğer cihazlarındaki görünümünü değiştirmez.)"
 Feature.Accessibility.Description.Haptics,Roblox uygulaması için genel titreşim ayarını kontrol eder
 Feature.Accessibility.Description.LaunchAtStartup,Bilgisayarımı başlattığımda Roblox'u otomatik olarak başlat
-Feature.Accessibility.Description.Main,"Bu ayarlar, yalnızca bu cihaz için geçerlidir. Bir deneyimdeki Ayarlar menüsünden grafikleri, hareketi ve erişilebilirliği de ayarlayabilirsin."
 Feature.Accessibility.Description.MinimizeToTray,"Pencere kapatıldığında Roblox tamamen kapatılmaz, sistem tepsisine gönderilir"
 Feature.Accessibility.Description.PreferredTextSize,Tercihlerine göre Roblox genelinde metin boyutunu değiştir
 Feature.Accessibility.Description.PreferredTransparency,Bazı arka planlarda şeffaflığı ayarlayarak kontrastı arttır
@@ -1233,7 +1231,6 @@ Feature.Accessibility.Header.Haptics,Titreşim Ayarı
 Feature.Accessibility.Header.ShowInMenuBar,Menü çubuğunda göster
 Feature.Accessibility.Heading.AppThemeMode,Mod
 Feature.Accessibility.Heading.DeviceAppTheme,Uygulama teması
-Feature.Accessibility.Heading.DeviceLevelTheme,Cihaz seviyesine göre tema
 Feature.Accessibility.Heading.DevicePreferences,Cihaz Tercihleri
 Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.ExclusiveThemes,Özel temalar

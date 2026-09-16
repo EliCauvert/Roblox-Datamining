@@ -1216,10 +1216,8 @@ Feature.Accessibility.Description.AppThemeMode,Selecciona un modo de la app. Tus
 Feature.Accessibility.Description.DeviceAppTheme,Selecciona un tema de la app. Esto se reflejará en todos los tipos de dispositivos.
 Feature.Accessibility.Description.DeviceAppThemeExclusive,Explora los temas exclusivos de Plus para personalizar tu experiencia. Pruébalos ahora y suscríbete para guardar tu selección.
 Feature.Accessibility.Description.DeviceAppThemeUpsell,
-Feature.Accessibility.Description.DeviceLevelTheme,Elige un tema para este dispositivo. (Nota: Esto no cambiará cómo se ve Roblox en tus otros dispositivos.)
 Feature.Accessibility.Description.Haptics,Controla la vibración total de la aplicación Roblox
 Feature.Accessibility.Description.LaunchAtStartup,Abrir Roblox de forma automática al iniciar mi computadora
-Feature.Accessibility.Description.Main,"Estos ajustes solo se aplican a este dispositivo. También puedes cambiar gráficos, movimientos y accesibilidad desde el menú Configuración en una experiencia."
 Feature.Accessibility.Description.MinimizeToTray,"Al cerrar la ventana, envía a Roblox a la bandeja del sistema en lugar de salir por completo"
 Feature.Accessibility.Description.PreferredTextSize,Ajusta el tamaño del texto en Roblox según tus preferencias
 Feature.Accessibility.Description.PreferredTransparency,Mejora el contraste ajustando la transparencia en algunos fondos
@@ -1234,7 +1232,6 @@ Feature.Accessibility.Header.Haptics,Hápticas
 Feature.Accessibility.Header.ShowInMenuBar,Mostrar en la barra de menú
 Feature.Accessibility.Heading.AppThemeMode,Modo
 Feature.Accessibility.Heading.DeviceAppTheme,Tema de la app
-Feature.Accessibility.Heading.DeviceLevelTheme,Tema a nivel de dispositivo
 Feature.Accessibility.Heading.DevicePreferences,Preferencias del dispositivo
 Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.ExclusiveThemes,Temas exclusivos

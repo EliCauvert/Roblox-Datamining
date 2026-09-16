@@ -39,7 +39,7 @@ function t.run(p1, p2)
 	-- upvalues: validationEnumsModule (ref), constantsModule (ref), getAttachmentModule (ref), isMeshPartAccessoryModule (ref), meshpartAccessoryCheckAvatarPartScaleType (ref), legacyAccessoryCheckAvatarPartScaleType (ref), getAccessoryScaleModule (ref), errorSourceStringsModule (ref), UGCValidationScaleMinimumThousandths (ref), getFFlagUGCValidateMeshMaxScaleModule (ref), fIntUGCValidationScaleMaximumThousandths (ref), UGCValidationService (ref), pointInBounds (ref), getMeshMinMaxModule (ref), getFIntUGCValidateMeshCenteringHundredsThresholdModule (ref)
 	local rootInstance = p2.rootInstance
 	local assetType = p2.uploadEnum.assetType
-	local var1 = p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend
+	local var1 = p2.consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend
 	local var2 = constantsModule.ASSET_TYPE_INFO[assetType]
 	
 	if not var2 then return end
