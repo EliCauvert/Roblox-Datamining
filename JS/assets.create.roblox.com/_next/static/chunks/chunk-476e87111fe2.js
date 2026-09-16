@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "59e40506-b116-7a1e-3549-d6b9f38bb886")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "de216aa0-4b58-8138-6637-bcd92b62b6f0")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 261482, 858148, 966956, 719743, 477749, e => {
@@ -3414,12 +3414,12 @@
                 }
             })
         }, [E, null == w ? void 0 : w.type, C.enableAudioUploadRevamp]);
-        let N = null != (t = null != B ? B : E) ? t : 0,
+        let k = null != (t = null != B ? B : E) ? t : 0,
             {
-                thumbnailImage: k,
+                thumbnailImage: N,
                 refreshThumbnail: O
             } = (0, v.default)({
-                targetId: N,
+                targetId: k,
                 targetType: a.ThumbnailTypes.assetThumbnail,
                 fontColor: "dark",
                 returnPolicy: a.ReturnPolicy.PlaceHolder
@@ -3489,9 +3489,9 @@
             isLoadingDeveloperItem: I,
             developerItemDetails: w,
             refreshDeveloperItemDetails: F,
-            developerItemImage: k,
+            developerItemImage: N,
             updateIconAssetId: U
-        }), [P, w, E, B, I, F, k]);
+        }), [P, w, E, B, I, F, N]);
         return (0, s.jsx)(q.Provider, {
             value: V,
             children: f
@@ -3753,8 +3753,13 @@
             namespace: "content-suitability",
             name: "questionnaireSectionStepperEnabled",
             defaultValue: !1
+        }),
+        a = (0, s.defineFlag)({
+            namespace: "content-suitability",
+            name: "questionnaireUsePackage",
+            defaultValue: !1
         });
-    e.s(["questionnaireSectionStepperEnabled", 0, n, "questionnaireV2Allowlist", 0, r, "questionnaireV2Q1Release", 0, i], 779433), e.s(["default", 0, () => {
+    e.s(["questionnaireSectionStepperEnabled", 0, n, "questionnaireUsePackage", 0, a, "questionnaireV2Allowlist", 0, r, "questionnaireV2Q1Release", 0, i], 779433), e.s(["default", 0, () => {
         let {
             ready: e,
             value: s
@@ -3879,8 +3884,8 @@
             bundleId: E,
             experienceSubscriptionId: B,
             lookId: U,
-            developerItemDetails: N,
-            experimentId: k,
+            developerItemDetails: k,
+            experimentId: N,
             environmentId: O
         } = function() {
             var e, r, b, A, S, R, x, T, C, q, D, G;
@@ -3890,8 +3895,8 @@
                 gameDetails: B,
                 isLoadingGame: U
             } = (0, P.useCurrentGame)(), {
-                isLoadingItem: N,
-                marketplaceItemDetails: k
+                isLoadingItem: k,
+                marketplaceItemDetails: N
             } = (0, l.default)(), {
                 badgeDetails: O
             } = (0, a.default)(), {
@@ -3926,28 +3931,28 @@
                 return (null == B || null == (e = B.creator) ? void 0 : e.type) === "Group" ? null == B || null == (t = B.creator) ? void 0 : t.id : void 0
             }, [B]), ei = (0, t.useMemo)(() => {
                 var e, t, s, r;
-                if (null == k || null == (t = k.item) || null == (e = t.marketplaceItemDetails) ? void 0 : e.assetDetails) return null == k || null == (r = k.item) || null == (s = r.id) ? void 0 : s.toString()
-            }, [k]), en = (0, t.useMemo)(() => {
+                if (null == N || null == (t = N.item) || null == (e = t.marketplaceItemDetails) ? void 0 : e.assetDetails) return null == N || null == (r = N.item) || null == (s = r.id) ? void 0 : s.toString()
+            }, [N]), en = (0, t.useMemo)(() => {
                 var e;
                 return null == L || null == (e = L.gamePassId) ? void 0 : e.toString()
             }, [L]), ea = (0, t.useMemo)(() => {
                 var e, t, s, r;
-                if (null == k || null == (t = k.item) || null == (e = t.marketplaceItemDetails) ? void 0 : e.bundleDetails) return null == k || null == (r = k.item) || null == (s = r.id) ? void 0 : s.toString()
-            }, [k]), eo = (0, t.useMemo)(() => {
+                if (null == N || null == (t = N.item) || null == (e = t.marketplaceItemDetails) ? void 0 : e.bundleDetails) return null == N || null == (r = N.item) || null == (s = r.id) ? void 0 : s.toString()
+            }, [N]), eo = (0, t.useMemo)(() => {
                 var e;
                 return null != (e = null == K ? void 0 : K.id) ? e : void 0
             }, [K]), eu = (0, t.useMemo)(() => {
                 var e, t, s, r, i;
-                return (null == k || null == (t = k.item) || null == (e = t.creator) ? void 0 : e.kindCase) === 2 ? null == k || null == (i = k.item) || null == (r = i.creator) || null == (s = r.group) ? void 0 : s.groupId : er
-            }, [er, null == k || null == (b = k.item) || null == (r = b.creator) || null == (e = r.group) ? void 0 : e.groupId, null == k || null == (S = k.item) || null == (A = S.creator) ? void 0 : A.kindCase]), ed = (0, t.useMemo)(() => null == F ? void 0 : F.lookId, [F]), ec = (0, t.useMemo)(() => {
+                return (null == N || null == (t = N.item) || null == (e = t.creator) ? void 0 : e.kindCase) === 2 ? null == N || null == (i = N.item) || null == (r = i.creator) || null == (s = r.group) ? void 0 : s.groupId : er
+            }, [er, null == N || null == (b = N.item) || null == (r = b.creator) || null == (e = r.group) ? void 0 : e.groupId, null == N || null == (S = N.item) || null == (A = S.creator) ? void 0 : A.kindCase]), ed = (0, t.useMemo)(() => null == F ? void 0 : F.lookId, [F]), ec = (0, t.useMemo)(() => {
                 var e, t, s, r, i, n, a;
                 return {
-                    [w.default.Bundle]: null == k || null == (n = k.item) ? void 0 : n.name,
+                    [w.default.Bundle]: null == N || null == (n = N.item) ? void 0 : n.name,
                     [w.default.Games]: null == B ? void 0 : B.name,
                     [w.default.Badge]: null == O ? void 0 : O.name,
                     [w.default.DeveloperProduct]: null != (e = null == M ? void 0 : M.name) ? e : void 0,
                     [w.default.GamePass]: null != (t = null == L ? void 0 : L.name) ? t : void 0,
-                    [w.default.Catalog]: null == k || null == (a = k.item) ? void 0 : a.name,
+                    [w.default.Catalog]: null == N || null == (a = N.item) ? void 0 : a.name,
                     [w.default.Places]: null == _ ? void 0 : _.name,
                     [w.default.Event]: null != (s = null == j ? void 0 : j.title) ? s : void 0,
                     [w.default.CreatorStore]: null == z ? void 0 : z.name,
@@ -3956,14 +3961,14 @@
                     [w.default.Look]: null != (i = null == F ? void 0 : F.name) ? i : void 0,
                     ...Q
                 }
-            }, [null == k || null == (R = k.item) ? void 0 : R.name, null == B ? void 0 : B.name, null == O ? void 0 : O.name, null == M ? void 0 : M.name, null == L ? void 0 : L.name, null == _ ? void 0 : _.name, null == j ? void 0 : j.title, null == z ? void 0 : z.name, $, E, null == K ? void 0 : K.name, null == F ? void 0 : F.name, Q]), el = (0, t.useMemo)(() => Y.includes(w.default.ExperienceSubscription) ? h.Item.ExperienceSubscription : Y.includes(w.default.Badge) ? h.Item.Badge : Y.includes(w.default.ReferralRewards) ? h.Item.ReferralRewards : Y.includes(w.default.Bundle) ? h.Item.Bundle : Y.includes(w.default.GamePass) ? h.Item.GamePass : Y.includes(w.default.DeveloperProduct) ? h.Item.DeveloperProduct : Y.includes(w.default.Catalog) ? h.Item.CatalogAsset : Y.includes(w.default.CreatorStore) ? h.Item.LibraryAsset : Y.includes(w.default.Places) ? h.Item.Places : Y.includes(w.default.Environments) ? h.Item.Environment : Y.includes(w.default.Alerts) ? h.Item.Alert : Y.includes(w.default.Event) ? h.Item.Event : Y.includes(w.default.Notifications) ? h.Item.Notifications : Y.includes(w.default.AssociatedItems) && "string" == typeof ee && (0, I.isItem)(ee) ? ee : Y.includes(w.default.AvatarCreationTokens) ? h.Item.AvatarCreationToken : Y.includes(w.default.Experiences) ? h.Item.Game : Y.includes(w.default.Advanced) ? h.Item.Advanced : Y.includes(w.default.Look) ? h.Item.Look : void 0, [ee, Y]), {
+            }, [null == N || null == (R = N.item) ? void 0 : R.name, null == B ? void 0 : B.name, null == O ? void 0 : O.name, null == M ? void 0 : M.name, null == L ? void 0 : L.name, null == _ ? void 0 : _.name, null == j ? void 0 : j.title, null == z ? void 0 : z.name, $, E, null == K ? void 0 : K.name, null == F ? void 0 : F.name, Q]), el = (0, t.useMemo)(() => Y.includes(w.default.ExperienceSubscription) ? h.Item.ExperienceSubscription : Y.includes(w.default.Badge) ? h.Item.Badge : Y.includes(w.default.ReferralRewards) ? h.Item.ReferralRewards : Y.includes(w.default.Bundle) ? h.Item.Bundle : Y.includes(w.default.GamePass) ? h.Item.GamePass : Y.includes(w.default.DeveloperProduct) ? h.Item.DeveloperProduct : Y.includes(w.default.Catalog) ? h.Item.CatalogAsset : Y.includes(w.default.CreatorStore) ? h.Item.LibraryAsset : Y.includes(w.default.Places) ? h.Item.Places : Y.includes(w.default.Environments) ? h.Item.Environment : Y.includes(w.default.Alerts) ? h.Item.Alert : Y.includes(w.default.Event) ? h.Item.Event : Y.includes(w.default.Notifications) ? h.Item.Notifications : Y.includes(w.default.AssociatedItems) && "string" == typeof ee && (0, I.isItem)(ee) ? ee : Y.includes(w.default.AvatarCreationTokens) ? h.Item.AvatarCreationToken : Y.includes(w.default.Experiences) ? h.Item.Game : Y.includes(w.default.Advanced) ? h.Item.Advanced : Y.includes(w.default.Look) ? h.Item.Look : void 0, [ee, Y]), {
                 currentItemGroupId: ep,
                 isCurrentItemLoading: ev
             } = (0, t.useMemo)(() => {
                 var e, t, s, r, i, a;
                 return el === h.Item.Bundle || el === h.Item.CatalogAsset ? {
                     currentItemGroupId: null != eu ? eu : er,
-                    isCurrentItemLoading: N
+                    isCurrentItemLoading: k
                 } : el === h.Item.DeveloperProduct || el === h.Item.LibraryAsset ? {
                     currentItemGroupId: (null == z || null == (e = z.creator) ? void 0 : e.type) === f.default.Group ? null == z || null == (t = z.creator) ? void 0 : t.id : er,
                     isCurrentItemLoading: H
@@ -3977,7 +3982,7 @@
                     currentItemGroupId: er,
                     isCurrentItemLoading: U
                 }
-            }, [el, eu, er, N, null == z || null == (x = z.creator) ? void 0 : x.type, null == z || null == (T = z.creator) ? void 0 : T.id, H, null == j || null == (C = j.host) ? void 0 : C.hostType, null == j || null == (q = j.host) ? void 0 : q.hostId, J, U, null == F || null == (D = F.curator) ? void 0 : D.type, null == F || null == (G = F.curator) ? void 0 : G.id, V]);
+            }, [el, eu, er, k, null == z || null == (x = z.creator) ? void 0 : x.type, null == z || null == (T = z.creator) ? void 0 : T.id, H, null == j || null == (C = j.host) ? void 0 : C.hostType, null == j || null == (q = j.host) ? void 0 : q.hostId, J, U, null == F || null == (D = F.curator) ? void 0 : D.type, null == F || null == (G = F.curator) ? void 0 : G.id, V]);
             return {
                 itemNameMapping: ec,
                 currentItemType: el,
@@ -4013,14 +4018,14 @@
                     groupId: null != (e = null == D ? void 0 : D.toString()) ? e : R ? R.toString() : void 0,
                     assetId: G,
                     bundleId: E,
-                    developerItemId: null != (t = null == N ? void 0 : N.id) ? t : void 0,
+                    developerItemId: null != (t = null == k ? void 0 : k.id) ? t : void 0,
                     associatedItemType: S,
                     experienceSubscriptionId: B,
                     environmentId: null != O ? O : void 0,
-                    experimentId: null != k ? k : void 0,
+                    experimentId: null != N ? N : void 0,
                     lookId: null != U ? U : void 0
                 }
-            }, [T, C, q, D, R, G, E, null == N ? void 0 : N.id, S, B, O, k, U]),
+            }, [T, C, q, D, R, G, E, null == k ? void 0 : k.id, S, B, O, N, U]),
             displayNameParam: M,
             currentItemType: S,
             currentItemGroupId: R,
@@ -4379,5 +4384,5 @@
     }])
 }]);
 
-//# debugId=59e40506-b116-7a1e-3549-d6b9f38bb886
-//# sourceMappingURL=2aqedt27laz7b.js.map
+//# debugId=de216aa0-4b58-8138-6637-bcd92b62b6f0
+//# sourceMappingURL=29ihu7r9ahpaz.js.map

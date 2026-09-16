@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "934afd9cb858898a94c9c3cd11426c21a86b2076"
+            id: "bf98d2721f9062e6d4f04360f61403bd38490e8b"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "8cd5ebfa-a3c2-4c22-abe0-b9b08a93cc06", e._sentryDebugIdIdentifier = "sentry-dbid-8cd5ebfa-a3c2-4c22-abe0-b9b08a93cc06")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "a6fbebd1-f68a-4f13-8987-55c39176bebb", e._sentryDebugIdIdentifier = "sentry-dbid-a6fbebd1-f68a-4f13-8987-55c39176bebb")
     } catch (e) {}
 }(),
 function() {
@@ -2030,11 +2030,11 @@ function() {
                     var e, t = document.querySelector('meta[name="subscription-referral-data"]');
                     return null != (e = null == t ? void 0 : t.dataset) ? e : null
                 },
-                e9 = function() {
+                e7 = function() {
                     var e;
                     return (null == (e = e8()) ? void 0 : e.isEnabled) === "true"
                 },
-                e7 = "https://www.roblox.com/info/terms",
+                e9 = "https://www.roblox.com/info/terms",
                 te = "referrals",
                 tt = "roblox_subscription_redirect_url",
                 tr = window.React,
@@ -2910,7 +2910,7 @@ function() {
                             primary: a("Description.Benefit.PublishItems"),
                             secondary: a("Description.Benefit.PublishItemsSubtitle"),
                             onTileClick: n
-                        }), void 0 !== i && i && e9() && (0, O.jsx)(t4, {
+                        }), void 0 !== i && i && e7() && (0, O.jsx)(t4, {
                             expandedPrimary: a("Description.Benefit.Referral"),
                             expandedSecondary: a("Description.Benefit.ReferralSubtitle", {
                                 amount: l.n(100)
@@ -2947,13 +2947,13 @@ function() {
                 return t.featureConfig
             }
 
-            function t9(e) {
+            function t7(e) {
                 var t, r = e.productTypeDetails.robloxSubscriptionProductDetails,
                     n = null == r ? void 0 : r.featureConfig.currencySubscriptionConfig;
                 return Math.floor((null != (t = null == n ? void 0 : n.entitledAmountMicros) ? t : 0) / 1e6)
             }
 
-            function t7(e) {
+            function t9(e) {
                 return e.eligibleOffers.find(function(e) {
                     return "FreeTrial" === e.offerType
                 })
@@ -3845,7 +3845,7 @@ function() {
                 })()
             }
 
-            function r9(e, t) {
+            function r7(e, t) {
                 return {
                     top: e.top - t.height,
                     right: e.right - t.width,
@@ -3854,7 +3854,7 @@ function() {
                 }
             }
 
-            function r7(e) {
+            function r9(e) {
                 return rP.some(function(t) {
                     return e[t] >= 0
                 })
@@ -4768,12 +4768,12 @@ function() {
                 return "u" < typeof window ? 1 : (e.ownerDocument.defaultView || window).devicePixelRatio || 1
             }
 
-            function n9(e, t) {
+            function n7(e, t) {
                 var r = n8(e);
                 return Math.round(t * r) / r
             }
 
-            function n7(e) {
+            function n9(e) {
                 var t = tr.useRef(e);
                 return n5(function() {
                     t.current = e
@@ -5074,8 +5074,8 @@ function() {
                                         case 2:
                                             return [2, {
                                                 data: {
-                                                    referenceHiddenOffsets: l = r9(c.sent(), t.reference),
-                                                    referenceHidden: r7(l)
+                                                    referenceHiddenOffsets: l = r7(c.sent(), t.reference),
+                                                    referenceHidden: r9(l)
                                                 }
                                             }];
                                         case 3:
@@ -5085,8 +5085,8 @@ function() {
                                         case 4:
                                             return [2, {
                                                 data: {
-                                                    escapedOffsets: u = r9(c.sent(), t.floating),
-                                                    escaped: r7(u)
+                                                    escapedOffsets: u = r7(c.sent(), t.floating),
+                                                    escaped: r9(u)
                                                 }
                                             }];
                                         case 5:
@@ -5702,7 +5702,7 @@ function() {
                             e !== _.current && (_.current = e, D(e))
                         }, []), k = tr.useCallback(function(e) {
                             e !== B.current && (B.current = e, C(e))
-                        }, []), U = b || T, z = g || L, _ = tr.useRef(null), B = tr.useRef(null), Y = tr.useRef(S), F = null != w, G = n7(w), W = n7(p), Q = n7(x), V = tr.useCallback(function() {
+                        }, []), U = b || T, z = g || L, _ = tr.useRef(null), B = tr.useRef(null), Y = tr.useRef(S), F = null != w, G = n9(w), W = n9(p), Q = n9(x), V = tr.useCallback(function() {
                             if (_.current && B.current) {
                                 var e = {
                                     placement: u,
@@ -5753,8 +5753,8 @@ function() {
                                 top: 0
                             };
                             if (!H.floating) return e;
-                            var t = n9(H.floating, S.x),
-                                r = n9(H.floating, S.y);
+                            var t = n7(H.floating, S.x),
+                                r = n7(H.floating, S.y);
                             return v ? n1(n4(n1({}, e), {
                                 transform: "translate(" + t + "px, " + r + "px)"
                             }), n8(H.floating) >= 1.5 && {
@@ -6146,7 +6146,7 @@ function() {
                 }()
             }
 
-            function i9(e) {
+            function i7(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -6165,11 +6165,11 @@ function() {
                 return e
             }
             i3.displayName = "Presence";
-            var i7 = tr.forwardRef(function(e, t) {
+            var i9 = tr.forwardRef(function(e, t) {
                 var r, n;
-                return (0, O.jsx)(ix.span, (r = i9({}, e), n = n = {
+                return (0, O.jsx)(ix.span, (r = i7({}, e), n = n = {
                     ref: t,
-                    style: i9({
+                    style: i7({
                         position: "absolute",
                         border: 0,
                         width: 1,
@@ -6294,7 +6294,7 @@ function() {
                     if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return oe(e, t)
                 }
             }
-            i7.displayName = "VisuallyHidden";
+            i9.displayName = "VisuallyHidden";
             var ol = oi(rx("Tooltip", [ik]), 2),
                 ou = ol[0];
             ol[1];
@@ -6778,7 +6778,7 @@ function() {
                             }), (0, O.jsx)(oA, {
                                 scope: r,
                                 isInside: !0,
-                                children: (0, O.jsx)(i7, {
+                                children: (0, O.jsx)(i9, {
                                     id: u.contentId,
                                     role: "tooltip",
                                     children: i || n
@@ -7219,11 +7219,11 @@ function() {
                 if (Array.isArray(e)) return e
             }
 
-            function o9() {
+            function o7() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function o7(e) {
+            function o9(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -7367,7 +7367,7 @@ function() {
                 ad = (0, tr.forwardRef)(function(e, t) {
                     var r, n, i = o8(r = [e, t]) || function(e) {
                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                        }(r) || ar(r) || o9(),
+                        }(r) || ar(r) || o7(),
                         o = i[0],
                         a = i.slice(1),
                         l = o.className,
@@ -7405,7 +7405,7 @@ function() {
                                 }
                                 return i
                             }
-                        }(a) || ar(a, 1) || o9())[0];
+                        }(a) || ar(a, 1) || o7())[0];
                     n = d ? al[g] : void 0 !== p && p ? au[g] : aa[g];
                     var S = ti("foundation-web-icon-button", d ? tp : [td, "cursor-pointer"], "relative flex items-center justify-center padding-none stroke-none select-none", an[y], ao[y][void 0 !== f && f ? "circular" : "square"], n, l),
                         I = tn().createElement(tn().Fragment, null, tn().createElement(tf, null), tn().createElement("span", {
@@ -7415,7 +7415,7 @@ function() {
                         j.as;
                         var M = at(j, ["as"]),
                             N = tn().Children.only(x);
-                        return tn().createElement(tP, ae(o7({
+                        return tn().createElement(tP, ae(o9({
                             ref: O
                         }, M), {
                             className: S,
@@ -7427,7 +7427,7 @@ function() {
                         j.as;
                         var P = j.href,
                             E = at(j, ["as", "href"]);
-                        return tn().createElement("a", ae(o7({
+                        return tn().createElement("a", ae(o9({
                             ref: O
                         }, E), {
                             "aria-label": c,
@@ -7438,7 +7438,7 @@ function() {
                     }
                     j.as;
                     var T = at(j, ["as"]);
-                    return tn().createElement("button", ae(o7({
+                    return tn().createElement("button", ae(o9({
                         ref: O,
                         type: "button"
                     }, T), {
@@ -8428,7 +8428,7 @@ function() {
                 }()
             }
             a5.displayName = "Portal";
-            var a9 = function(e) {
+            var a7 = function(e) {
                 var t, r, n, i, o, a, l, u, c, s, d, f, p, m, y, b, g, h = e.present,
                     v = e.children,
                     w = (t = h, o = (i = a8(tr.useState(), 2))[0], a = i[1], l = tr.useRef({}), u = tr.useRef(t), c = tr.useRef("none"), d = (s = a8((r = t ? "mounted" : "unmounted", n = {
@@ -8447,21 +8447,21 @@ function() {
                         var r = n[e][t];
                         return null != r ? r : e
                     }, r)), 2))[0], f = s[1], tr.useEffect(function() {
-                        var e = a7(l.current);
+                        var e = a9(l.current);
                         c.current = "mounted" === d ? e : "none"
                     }, [d]), aI(function() {
                         var e = l.current,
                             r = u.current;
                         if (r !== t) {
                             var n = c.current,
-                                i = a7(e);
+                                i = a9(e);
                             t ? f("MOUNT") : "none" === i || (null == e ? void 0 : e.display) === "none" ? f("UNMOUNT") : r && n !== i ? f("ANIMATION_OUT") : f("UNMOUNT"), u.current = t
                         }
                     }, [t, f]), aI(function() {
                         if (o) {
                             var e, t, r = null != (e = o.ownerDocument.defaultView) ? e : window,
                                 n = function(e) {
-                                    var n = a7(l.current).includes(e.animationName);
+                                    var n = a9(l.current).includes(e.animationName);
                                     if (e.target === o && n && (f("ANIMATION_END"), !u.current)) {
                                         var i = o.style.animationFillMode;
                                         o.style.animationFillMode = "forwards", t = r.setTimeout(function() {
@@ -8470,7 +8470,7 @@ function() {
                                     }
                                 },
                                 i = function(e) {
-                                    e.target === o && (c.current = a7(l.current))
+                                    e.target === o && (c.current = a9(l.current))
                                 };
                             return o.addEventListener("animationstart", i), o.addEventListener("animationcancel", n), o.addEventListener("animationend", n),
                                 function() {
@@ -8493,10 +8493,10 @@ function() {
                 }) : null
             };
 
-            function a7(e) {
+            function a9(e) {
                 return (null == e ? void 0 : e.animationName) || "none"
             }
-            a9.displayName = "Presence";
+            a7.displayName = "Presence";
             var le = window.RadixUI["react-focus-guards"],
                 lt = function() {
                     return (lt = Object.assign || function(e) {
@@ -9224,22 +9224,22 @@ function() {
                 }))
             }).displayName = l6;
             var l8 = "DialogPortal",
-                l9 = l$(l1(l8, {
+                l7 = l$(l1(l8, {
                     forceMount: void 0
                 }), 2),
-                l7 = l9[0],
-                ue = l9[1],
+                l9 = l7[0],
+                ue = l7[1],
                 ut = function(e) {
                     var t = e.__scopeDialog,
                         r = e.forceMount,
                         n = e.children,
                         i = e.container,
                         o = l3(l8, t);
-                    return (0, O.jsx)(l7, {
+                    return (0, O.jsx)(l9, {
                         scope: t,
                         forceMount: r,
                         children: tr.Children.map(n, function(e) {
-                            return (0, O.jsx)(a9, {
+                            return (0, O.jsx)(a7, {
                                 present: r || o.open,
                                 children: (0, O.jsx)(a5, {
                                     asChild: !0,
@@ -9258,7 +9258,7 @@ function() {
                         i = void 0 === n ? r.forceMount : n,
                         o = lZ(e, ["forceMount"]),
                         a = l3(ur, e.__scopeDialog);
-                    return a.modal ? (0, O.jsx)(a9, {
+                    return a.modal ? (0, O.jsx)(a7, {
                         present: i || a.open,
                         children: (0, O.jsx)(uo, lX(lH({}, o), {
                             ref: t
@@ -9292,7 +9292,7 @@ function() {
                         i = void 0 === n ? r.forceMount : n,
                         o = lZ(e, ["forceMount"]),
                         a = l3(ua, e.__scopeDialog);
-                    return (0, O.jsx)(a9, {
+                    return (0, O.jsx)(a7, {
                         present: i || a.open,
                         children: a.modal ? (0, O.jsx)(uu, lX(lH({}, o), {
                             ref: t
@@ -10094,10 +10094,10 @@ function() {
                     })
                 },
                 u8 = window.Roblox,
-                u9 = u8.EnvironmentUrls.apiGatewayUrl,
-                u7 = new e2(new eY({
+                u7 = u8.EnvironmentUrls.apiGatewayUrl,
+                u9 = new e2(new eY({
                     robloxSiteDomain: u8.EnvironmentUrls.domain,
-                    basePath: "".concat(u9, "/subscriptions"),
+                    basePath: "".concat(u7, "/subscriptions"),
                     credentials: "include"
                 }));
 
@@ -10208,7 +10208,7 @@ function() {
                                         switch (e.label) {
                                             case 0:
                                                 if (!i) return [2, void 0];
-                                                return [4, u7.subscriptionsV2CreateSubscriptionReferral({
+                                                return [4, u9.subscriptionsV2CreateSubscriptionReferral({
                                                     referrerId: n
                                                 })];
                                             case 1:
@@ -10376,7 +10376,7 @@ function() {
                                     }(this, function(t) {
                                         switch (t.label) {
                                             case 0:
-                                                return [4, u7.subscriptionsV2ListAvailableSubscriptionProducts({
+                                                return [4, u9.subscriptionsV2ListAvailableSubscriptionProducts({
                                                     productType: eZ,
                                                     includePurchased: !0,
                                                     includeBundles: !0,
@@ -10540,7 +10540,7 @@ function() {
                                         switch (t.label) {
                                             case 0:
                                                 if (!i) return [2, void 0];
-                                                return [4, u7.subscriptionsV2CheckSubscriptionReferralEligibility({
+                                                return [4, u9.subscriptionsV2CheckSubscriptionReferralEligibility({
                                                     referrerId: n
                                                 })];
                                             case 1:
@@ -10782,7 +10782,7 @@ function() {
                             render: function(e) {
                                 return (0, O.jsx)("a", {
                                     className: "content-link underline",
-                                    href: e7,
+                                    href: e9,
                                     rel: "noopener noreferrer",
                                     target: "_blank",
                                     children: e
@@ -10898,7 +10898,7 @@ function() {
                         a = e.subscribePeriodType,
                         l = e.subscribeFeatureConfig,
                         u = e.subscribeEligibleOffers,
-                        c = void 0 !== n && e9(),
+                        c = void 0 !== n && e7(),
                         s = cu({
                             referrerId: null == n ? void 0 : n.referrerId,
                             enabled: c
@@ -11624,13 +11624,13 @@ function() {
                 }
             }
 
-            function c9(e, t) {
+            function c7(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function c7(e, t, r, n, i, o, a) {
+            function c9(e, t, r, n, i, o, a) {
                 try {
                     var l = e[o](a),
                         u = l.value
@@ -11665,10 +11665,10 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return c9(e, t);
+                        if ("string" == typeof e) return c7(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return c9(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return c7(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -12312,7 +12312,7 @@ function() {
                         n = (0, S.useTranslation)(),
                         i = n.translate,
                         o = n.intl,
-                        a = t9(t);
+                        a = t7(t);
                     (0, tr.useEffect)(function() {
                         r && 0 === a && sR(sC.BUNDLE_PICKER_ROW_MISSING_ROBUX_ALLOWANCE, {
                             productId: t.productKey.id
@@ -12450,7 +12450,7 @@ function() {
                                 return e.productKey.id === g
                             })) ? e : c[0]
                         }, [c, g]),
-                        w = !!v && void 0 !== t7(v),
+                        w = !!v && void 0 !== t9(v),
                         x = (0, tr.useRef)(!1);
                     (0, tr.useEffect)(function() {
                         if (!l) {
@@ -12505,14 +12505,14 @@ function() {
                             render: function(e) {
                                 return (0, O.jsx)("a", {
                                     className: "content-link underline",
-                                    href: e7,
+                                    href: e9,
                                     rel: "noopener noreferrer",
                                     target: "_blank",
                                     children: e
                                 })
                             }
                         }],
-                        N = (i = null == (n = t7(v)) || null == (r = n.freeTrialOffer) ? void 0 : r.estimatedTrialEndDate) ? new Date(i).toLocaleDateString(void 0, {
+                        N = (i = null == (n = t9(v)) || null == (r = n.freeTrialOffer) ? void 0 : r.estimatedTrialEndDate) ? new Date(i).toLocaleDateString(void 0, {
                             year: "numeric",
                             month: "long",
                             day: "numeric"
@@ -12804,11 +12804,11 @@ function() {
                                                 var o = t.apply(e, r);
 
                                                 function a(e) {
-                                                    c7(o, n, i, a, l, "next", e)
+                                                    c9(o, n, i, a, l, "next", e)
                                                 }
 
                                                 function l(e) {
-                                                    c7(o, n, i, a, l, "throw", e)
+                                                    c9(o, n, i, a, l, "throw", e)
                                                 }
                                                 a(void 0)
                                             })
@@ -12866,7 +12866,7 @@ function() {
                                 render: function(e) {
                                     return (0, O.jsx)("a", {
                                         className: "content-link underline",
-                                        href: e7,
+                                        href: e9,
                                         rel: "noopener noreferrer",
                                         target: "_blank",
                                         children: e
@@ -13064,8 +13064,150 @@ function() {
                             subscribePrice: d.localizedPrice
                         })]
                     })
+                };
+
+            function sX(e, t, r, n, i, o, a) {
+                try {
+                    var l = e[o](a),
+                        u = l.value
+                } catch (e) {
+                    r(e);
+                    return
+                }
+                l.done ? t(u) : Promise.resolve(u).then(n, i)
+            }
+            var sZ = new Map([
+                    ["Invalid", "Invalid"],
+                    ["Eligible", "Eligible"],
+                    ["Ineligible", "Ineligible"],
+                    [0, "Invalid"],
+                    [1, "Eligible"],
+                    [2, "Ineligible"]
+                ]),
+                s$ = function() {
+                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
+                        t = e.enabled,
+                        r = (void 0 === t || t) && e7(),
+                        n = (0, P.useQuery)({
+                            queryKey: ["plus-referrals", "sender-eligibility"],
+                            enabled: r,
+                            queryFn: function() {
+                                var e;
+                                return (e = function() {
+                                    var e;
+                                    return function(e, t) {
+                                        var r, n, i, o = {
+                                                label: 0,
+                                                sent: function() {
+                                                    if (1 & i[0]) throw i[1];
+                                                    return i[1]
+                                                },
+                                                trys: [],
+                                                ops: []
+                                            },
+                                            a = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
+                                            l = Object.defineProperty;
+                                        return l(a, "next", {
+                                            value: u(0)
+                                        }), l(a, "throw", {
+                                            value: u(1)
+                                        }), l(a, "return", {
+                                            value: u(2)
+                                        }), "function" == typeof Symbol && l(a, Symbol.iterator, {
+                                            value: function() {
+                                                return this
+                                            }
+                                        }), a;
+
+                                        function u(l) {
+                                            return function(u) {
+                                                var c = [l, u];
+                                                if (r) throw TypeError("Generator is already executing.");
+                                                for (; a && (a = 0, c[0] && (o = 0)), o;) try {
+                                                    if (r = 1, n && (i = 2 & c[0] ? n.return : c[0] ? n.throw || ((i = n.return) && i.call(n), 0) : n.next) && !(i = i.call(n, c[1])).done) return i;
+                                                    switch (n = 0, i && (c = [2 & c[0], i.value]), c[0]) {
+                                                        case 0:
+                                                        case 1:
+                                                            i = c;
+                                                            break;
+                                                        case 4:
+                                                            return o.label++, {
+                                                                value: c[1],
+                                                                done: !1
+                                                            };
+                                                        case 5:
+                                                            o.label++, n = c[1], c = [0];
+                                                            continue;
+                                                        case 7:
+                                                            c = o.ops.pop(), o.trys.pop();
+                                                            continue;
+                                                        default:
+                                                            if (!(i = (i = o.trys).length > 0 && i[i.length - 1]) && (6 === c[0] || 2 === c[0])) {
+                                                                o = 0;
+                                                                continue
+                                                            }
+                                                            if (3 === c[0] && (!i || c[1] > i[0] && c[1] < i[3])) {
+                                                                o.label = c[1];
+                                                                break
+                                                            }
+                                                            if (6 === c[0] && o.label < i[1]) {
+                                                                o.label = i[1], i = c;
+                                                                break
+                                                            }
+                                                            if (i && o.label < i[2]) {
+                                                                o.label = i[2], o.ops.push(c);
+                                                                break
+                                                            }
+                                                            i[2] && o.ops.pop(), o.trys.pop();
+                                                            continue
+                                                    }
+                                                    c = t.call(e, o)
+                                                } catch (e) {
+                                                    c = [6, e], n = 0
+                                                } finally {
+                                                    r = i = 0
+                                                }
+                                                if (5 & c[0]) throw c[1];
+                                                return {
+                                                    value: c[0] ? c[1] : void 0,
+                                                    done: !0
+                                                }
+                                            }
+                                        }
+                                    }(this, function(t) {
+                                        switch (t.label) {
+                                            case 0:
+                                                return [4, u9.subscriptionsV2CheckSubscriptionReferralEligibility({})];
+                                            case 1:
+                                                return e = t.sent().eligibility, [2, sZ.get(e)]
+                                        }
+                                    })
+                                }, function() {
+                                    var t = this,
+                                        r = arguments;
+                                    return new Promise(function(n, i) {
+                                        var o = e.apply(t, r);
+
+                                        function a(e) {
+                                            sX(o, n, i, a, l, "next", e)
+                                        }
+
+                                        function l(e) {
+                                            sX(o, n, i, a, l, "throw", e)
+                                        }
+                                        a(void 0)
+                                    })
+                                })()
+                            }
+                        }),
+                        i = n.data,
+                        o = n.isLoading;
+                    return {
+                        eligibility: i,
+                        isLoading: r && o
+                    }
                 },
-                sX = function(e) {
+                sJ = function(e) {
                     var t = e.title,
                         r = e.body;
                     return (0, O.jsxs)("div", {
@@ -13089,11 +13231,11 @@ function() {
                     })
                 };
 
-            function sZ(e, t) {
+            function s0(e, t) {
                 return null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t
             }
-            var s$ = function(e, t) {
-                return (s$ = Object.setPrototypeOf || sZ({
+            var s1 = function(e, t) {
+                return (s1 = Object.setPrototypeOf || s0({
                     __proto__: []
                 }, Array) && function(e, t) {
                     e.__proto__ = t
@@ -13102,16 +13244,16 @@ function() {
                 })(e, t)
             };
 
-            function sJ(e, t) {
+            function s4(e, t) {
                 if ("function" != typeof t && null !== t) throw TypeError("Class extends value " + String(t) + " is not a constructor or null");
 
                 function r() {
                     this.constructor = e
                 }
-                s$(e, t), e.prototype = null === t ? Object.create(t) : (r.prototype = t.prototype, new r)
+                s1(e, t), e.prototype = null === t ? Object.create(t) : (r.prototype = t.prototype, new r)
             }
 
-            function s0(e, t, r, n) {
+            function s2(e, t, r, n) {
                 return new(r || (r = Promise))(function(i, o) {
                     function a(e) {
                         try {
@@ -13131,7 +13273,7 @@ function() {
 
                     function u(e) {
                         var t;
-                        e.done ? i(e.value) : (sZ(t = e.value, r) ? t : new r(function(e) {
+                        e.done ? i(e.value) : (s0(t = e.value, r) ? t : new r(function(e) {
                             e(t)
                         })).then(a, l)
                     }
@@ -13139,7 +13281,7 @@ function() {
                 })
             }
 
-            function s1(e, t) {
+            function s3(e, t) {
                 var r, n, i, o = {
                         label: 0,
                         sent: function() {
@@ -13212,21 +13354,21 @@ function() {
             }
             "function" == typeof SuppressedError && SuppressedError;
 
-            function s4(e) {
+            function s5(e) {
                 var t;
                 return null == (t = e) ? t : {
                     periodIndex: t.periodIndex,
                     discountPercent: t.discountPercent
                 }
             }
-            var s2 = function(e) {
+            var s6 = function(e) {
                     function t() {
                         return null !== e && e.apply(this, arguments) || this
                     }
-                    return sJ(t, e), t.prototype.robloxPlusGetRobloxPlusUserBenefitsRaw = function(e, t) {
-                        return s0(this, void 0, void 0, function() {
+                    return s4(t, e), t.prototype.robloxPlusGetRobloxPlusUserBenefitsRaw = function(e, t) {
+                        return s2(this, void 0, void 0, function() {
                             var r, n;
-                            return s1(this, function(i) {
+                            return s3(this, function(i) {
                                 switch (i.label) {
                                     case 0:
                                         return r = {}, n = {}, void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (n["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
@@ -13252,8 +13394,8 @@ function() {
                             })
                         })
                     }, t.prototype.robloxPlusGetRobloxPlusUserBenefits = function() {
-                        return s0(this, arguments, void 0, function(e, t) {
-                            return void 0 === e && (e = {}), s1(this, function(r) {
+                        return s2(this, arguments, void 0, function(e, t) {
+                            return void 0 === e && (e = {}), s3(this, function(r) {
                                 switch (r.label) {
                                     case 0:
                                         return [4, this.robloxPlusGetRobloxPlusUserBenefitsRaw(e, t)];
@@ -13266,14 +13408,14 @@ function() {
                         })
                     }, t
                 }(eC),
-                s3 = function(e) {
+                s8 = function(e) {
                     function t() {
                         return null !== e && e.apply(this, arguments) || this
                     }
-                    return sJ(t, e), t.prototype.robloxSubscriptionMetadataGetRobloxSubscriptionMetadataRaw = function(e, t) {
-                        return s0(this, void 0, void 0, function() {
+                    return s4(t, e), t.prototype.robloxSubscriptionMetadataGetRobloxSubscriptionMetadataRaw = function(e, t) {
+                        return s2(this, void 0, void 0, function() {
                             var r, n;
-                            return s1(this, function(i) {
+                            return s3(this, function(i) {
                                 switch (i.label) {
                                     case 0:
                                         return r = {}, n = {}, void 0 !== e.robloxUniverseId && null !== e.robloxUniverseId && (n["Roblox-Universe-Id"] = String(e.robloxUniverseId)), void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (n["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
@@ -13300,8 +13442,8 @@ function() {
                             })
                         })
                     }, t.prototype.robloxSubscriptionMetadataGetRobloxSubscriptionMetadata = function() {
-                        return s0(this, arguments, void 0, function(e, t) {
-                            return void 0 === e && (e = {}), s1(this, function(r) {
+                        return s2(this, arguments, void 0, function(e, t) {
+                            return void 0 === e && (e = {}), s3(this, function(r) {
                                 switch (r.label) {
                                     case 0:
                                         return [4, this.robloxSubscriptionMetadataGetRobloxSubscriptionMetadataRaw(e, t)];
@@ -13314,14 +13456,14 @@ function() {
                         })
                     }, t
                 }(eC),
-                s5 = function(e) {
+                s7 = function(e) {
                     function t() {
                         return null !== e && e.apply(this, arguments) || this
                     }
-                    return sJ(t, e), t.prototype.robloxSubscriptionProductsGetRobloxSubscriptionProductRaw = function(e, t) {
-                        return s0(this, void 0, void 0, function() {
+                    return s4(t, e), t.prototype.robloxSubscriptionProductsGetRobloxSubscriptionProductRaw = function(e, t) {
+                        return s2(this, void 0, void 0, function() {
                             var r, n;
-                            return s1(this, function(i) {
+                            return s3(this, function(i) {
                                 switch (i.label) {
                                     case 0:
                                         if (null === e.robloxSubscriptionProductId || void 0 === e.robloxSubscriptionProductId) throw new eU("robloxSubscriptionProductId", "Required parameter requestParameters.robloxSubscriptionProductId was null or undefined when calling robloxSubscriptionProductsGetRobloxSubscriptionProduct.");
@@ -13348,11 +13490,11 @@ function() {
                                                     periodType: t.periodType,
                                                     isRenewable: t.isRenewable,
                                                     featureConfig: null == (n = t.featureConfig) ? n : {
-                                                        virtualTransactionDiscounts: null === n.virtualTransactionDiscounts ? null : n.virtualTransactionDiscounts.map(s4),
+                                                        virtualTransactionDiscounts: null === n.virtualTransactionDiscounts ? null : n.virtualTransactionDiscounts.map(s5),
                                                         isRobuxTransferEnabled: n.isRobuxTransferEnabled,
                                                         isTradingEnabled: n.isTradingEnabled,
                                                         isUgcPublishingEnabled: n.isUgcPublishingEnabled,
-                                                        privateServerDiscounts: null === n.privateServerDiscounts ? null : n.privateServerDiscounts.map(s4),
+                                                        privateServerDiscounts: null === n.privateServerDiscounts ? null : n.privateServerDiscounts.map(s5),
                                                         currencySubscriptionConfig: null == (i = n.currencySubscriptionConfig) ? i : {
                                                             currencyType: i.currencyType,
                                                             entitledAmountMicros: i.entitledAmountMicros
@@ -13374,8 +13516,8 @@ function() {
                             })
                         })
                     }, t.prototype.robloxSubscriptionProductsGetRobloxSubscriptionProduct = function(e, t) {
-                        return s0(this, void 0, void 0, function() {
-                            return s1(this, function(r) {
+                        return s2(this, void 0, void 0, function() {
+                            return s3(this, function(r) {
                                 switch (r.label) {
                                     case 0:
                                         return [4, this.robloxSubscriptionProductsGetRobloxSubscriptionProductRaw(e, t)];
@@ -13388,43 +13530,43 @@ function() {
                         })
                     }, t
                 }(eC),
-                s6 = function(e, t) {
+                s9 = function(e, t) {
                     return new Date(Date.UTC(e, t + 1, 0)).getUTCDate()
                 },
-                s8 = function(e, t) {
+                de = function(e, t) {
                     var r = e.getUTCFullYear(),
                         n = e.getUTCMonth(),
                         i = e.getUTCDate(),
                         o = n + t,
                         a = r + Math.floor(o / 12),
                         l = (o % 12 + 12) % 12,
-                        u = Math.min(i, s6(a, l));
+                        u = Math.min(i, s9(a, l));
                     return new Date(Date.UTC(a, l, u, e.getUTCHours(), e.getUTCMinutes(), e.getUTCSeconds(), e.getUTCMilliseconds()))
                 },
-                s9 = function(e, t) {
+                dt = function(e, t) {
                     var r = e.getUTCFullYear() + t,
                         n = e.getUTCMonth(),
-                        i = Math.min(e.getUTCDate(), s6(r, n));
+                        i = Math.min(e.getUTCDate(), s9(r, n));
                     return new Date(Date.UTC(r, n, i, e.getUTCHours(), e.getUTCMinutes(), e.getUTCSeconds(), e.getUTCMilliseconds()))
                 },
-                s7 = function(e, t, r) {
+                dr = function(e, t, r) {
                     var n = new Date(e);
                     switch (r) {
                         case "Week":
                             return n.setUTCDate(n.getUTCDate() + 7 * t), n;
                         case "Month":
-                            return s8(n, t);
+                            return de(n, t);
                         case "Year":
-                            return s9(n, t);
+                            return dt(n, t);
                         default:
                             throw Error("Unsupported period type: ".concat(r))
                     }
                 },
-                de = function(e, t, r, n) {
-                    for (var i = 0; i < 1e3 && !(n < s7(e, i + 1, t).getTime());) i += 1;
+                dn = function(e, t, r, n) {
+                    for (var i = 0; i < 1e3 && !(n < dr(e, i + 1, t).getTime());) i += 1;
                     return r && r < n && i > 0 && (i -= 1), i
                 },
-                dt = function(e) {
+                di = function(e) {
                     var t = e.currentDiscountPercent,
                         r = e.nextDiscount,
                         n = e.activationTimestampMs,
@@ -13436,7 +13578,7 @@ function() {
                         c = (0, tr.useMemo)(function() {
                             if (!r) return null;
                             var e = Date.now(),
-                                t = s7(n, r.periodIndex, o).getTime();
+                                t = dr(n, r.periodIndex, o).getTime();
                             return {
                                 discountPercent: r.discountPercent,
                                 targetDateDaysUntil: Math.max(0, Math.ceil((t - e) / 864e5)),
@@ -13498,22 +13640,22 @@ function() {
                     })
                 };
 
-            function dr(e, t) {
+            function da(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function dn(e) {
+            function dl(e) {
                 if (Array.isArray(e)) return e
             }
 
-            function di() {
+            function du() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function da(e, t) {
-                return dn(e) || function(e, t) {
+            function dc(e, t) {
+                return dl(e) || function(e, t) {
                     var r, n, i = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                     if (null != i) {
                         var o = [],
@@ -13532,18 +13674,18 @@ function() {
                         }
                         return o
                     }
-                }(e, t) || dl(e, t) || di()
+                }(e, t) || ds(e, t) || du()
             }
 
-            function dl(e, t) {
+            function ds(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return dr(e, t);
+                    if ("string" == typeof e) return da(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return dr(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return da(e, t)
                 }
             }
-            var du = function(e) {
+            var dd = function(e) {
                     var t = e.scrollLeft,
                         r = e.scrollWidth,
                         n = e.clientWidth,
@@ -13551,10 +13693,10 @@ function() {
                         o = r - n;
                     return o <= 1 ? "Middle" : i <= 1 ? "Start" : i >= o - 1 ? "End" : "Middle"
                 },
-                dc = (0, tr.forwardRef)(function(e, t) {
-                    var r, n, i, o = dn(r = [e, t]) || function(e) {
+                df = (0, tr.forwardRef)(function(e, t) {
+                    var r, n, i, o = dl(r = [e, t]) || function(e) {
                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                        }(r) || dl(r) || di(),
+                        }(r) || ds(r) || du(),
                         a = o[0],
                         l = o.slice(1),
                         u = a.children,
@@ -13582,17 +13724,17 @@ function() {
                                 for (i = 0, r = Object.getOwnPropertySymbols(e); i < r.length; i++) n = r[i], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (o[n] = e[n]);
                             return o
                         }(a, ["children", "hasMargin", "discretePosition", "className", "previousButtonAriaLabel", "nextButtonAriaLabel", "aria-label"]),
-                        g = da(l, 1)[0],
+                        g = dc(l, 1)[0],
                         h = (0, tr.useRef)(null),
-                        v = da((0, tr.useState)("Start"), 2),
+                        v = dc((0, tr.useState)("Start"), 2),
                         w = v[0],
                         x = v[1],
-                        j = da((0, tr.useState)(!1), 2),
+                        j = dc((0, tr.useState)(!1), 2),
                         O = j[0],
                         S = j[1],
                         I = (0, tr.useCallback)(function() {
                             var e = h.current;
-                            e && (x(du(e)), S(!!e && e.scrollWidth - e.clientWidth > 1))
+                            e && (x(dd(e)), S(!!e && e.scrollWidth - e.clientWidth > 1))
                         }, []);
                     (0, tr.useEffect)(function() {
                         I();
@@ -13715,8 +13857,8 @@ function() {
                         isDisabled: !T
                     })))
                 });
-            dc.displayName = "CollectionCarousel";
-            var ds = function(e) {
+            df.displayName = "CollectionCarousel";
+            var dp = function(e) {
                 var t = e.children,
                     r = (0, (0, S.useTranslation)().translate)("Heading.InteractWithPlus", void 0, "Get more out of Plus");
                 return (0, O.jsxs)("div", {
@@ -13724,7 +13866,7 @@ function() {
                     children: [(0, O.jsx)("span", {
                         className: "text-heading-small content-emphasis",
                         children: r
-                    }), (0, O.jsx)(dc, {
+                    }), (0, O.jsx)(df, {
                         "aria-label": r,
                         hasMargin: !1,
                         children: t
@@ -13732,12 +13874,12 @@ function() {
                 })
             };
 
-            function dd(e, t) {
+            function dm(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
-            var df = function(e) {
+            var dy = function(e) {
                     var t, r = e.robloxSubscriptionProduct,
                         n = (0, S.useTranslation)().translate,
                         i = function(e) {
@@ -13763,10 +13905,10 @@ function() {
                             }
                         }(t) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return dd(e, 2);
+                                if ("string" == typeof e) return dm(e, 2);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return dd(e, 2)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return dm(e, 2)
                             }
                         }(t) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -13789,7 +13931,7 @@ function() {
                         children: n("Action.Manage")
                     })
                 },
-                dp = function(e) {
+                db = function(e) {
                     var t = e.onOpenDashboard,
                         r = (0, S.useTranslation)(),
                         n = r.translate,
@@ -13814,7 +13956,7 @@ function() {
                         })]
                     })
                 },
-                dm = function(e) {
+                dg = function(e) {
                     var t = e.title,
                         r = e.value;
                     return (0, O.jsxs)("div", {
@@ -13828,7 +13970,7 @@ function() {
                         })]
                     })
                 },
-                dy = function(e) {
+                dh = function(e) {
                     var t = e.currentDiscountPercent,
                         r = e.savedRobux,
                         n = e.itemsBoughtWithDiscountCount,
@@ -13855,23 +13997,23 @@ function() {
                             className: "gap-y-small flex flex-col",
                             children: [(0, O.jsxs)("div", {
                                 className: "gap-x-small flex",
-                                children: [(0, O.jsx)(dm, {
+                                children: [(0, O.jsx)(dg, {
                                     title: l("Label.Savings.InGameItems"),
                                     value: l("Label.Savings.PercentOff", {
                                         discountPercent: u.n(.01 * t, {
                                             style: "percent"
                                         })
                                     })
-                                }), (0, O.jsx)(dm, {
+                                }), (0, O.jsx)(dg, {
                                     title: l("Label.Savings.ItemsBought"),
                                     value: void 0 === n ? "—" : u.n(n)
                                 })]
                             }), (0, O.jsxs)("div", {
                                 className: "gap-x-small flex",
-                                children: [(0, O.jsx)(dm, {
+                                children: [(0, O.jsx)(dg, {
                                     title: l("Label.Savings.PrivateServers"),
                                     value: void 0 === i ? "—" : u.n(i)
-                                }), (0, O.jsx)(dm, {
+                                }), (0, O.jsx)(dg, {
                                     title: l("Label.Savings.RobuxSent"),
                                     value: (0, O.jsxs)("span", {
                                         className: "gap-x-xsmall flex items-center",
@@ -13889,29 +14031,29 @@ function() {
                     })
                 };
 
-            function db(e, t) {
+            function dv(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function dg(e) {
+            function dw(e) {
                 if (Array.isArray(e)) return e
             }
 
-            function dh() {
+            function dx() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function dv(e, t) {
+            function dj(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return db(e, t);
+                    if ("string" == typeof e) return dv(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return db(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return dv(e, t)
                 }
             }
-            var dw = {
+            var dO = {
                     Neutral: "bg-shift-200",
                     Standard: "bg-shift-200",
                     Contrast: "bg-system-contrast",
@@ -13921,7 +14063,7 @@ function() {
                     Alert: "bg-[rgb(from_var(--color-system-alert)_r_g_b_/_0.2)]",
                     OverMedia: "bg-over-media-0"
                 },
-                dx = {
+                dS = {
                     Neutral: "content-emphasis",
                     Standard: "content-emphasis",
                     Contrast: "content-inverse-emphasis",
@@ -13931,7 +14073,7 @@ function() {
                     Alert: "content-emphasis",
                     OverMedia: "content-emphasis"
                 },
-                dj = {
+                dI = {
                     Neutral: "content-emphasis",
                     Standard: "content-emphasis",
                     Contrast: "content-inverse-emphasis",
@@ -13941,7 +14083,7 @@ function() {
                     Alert: "content-system-alert",
                     OverMedia: "content-emphasis"
                 },
-                dO = {
+                dM = {
                     Neutral: "stroke-none",
                     Standard: "stroke-none",
                     Contrast: "stroke-none",
@@ -13951,38 +14093,38 @@ function() {
                     Alert: "stroke-none",
                     OverMedia: "stroke-none"
                 },
-                dS = {
+                dN = {
                     Small: "height-600",
                     XSmall: "height-400"
                 },
-                dI = {
+                dP = {
                     Small: "padding-x-small",
                     XSmall: "padding-x-xsmall"
                 },
-                dM = {
+                dE = {
                     Small: "width-600",
                     XSmall: "width-400"
                 },
-                dN = {
+                dT = {
                     Small: "text-label-small",
                     XSmall: "text-caption-small"
                 },
-                dP = {
+                dD = {
                     Small: "padding-y-xsmall",
                     XSmall: "padding-y-none"
                 },
-                dE = {
+                dA = {
                     Small: "XSmall",
                     XSmall: "XSmall"
                 },
-                dT = {
+                dL = {
                     Pill: "radius-circle",
                     Box: "radius-small"
                 },
-                dD = tn().forwardRef(function(e, t) {
-                    var r, n, i, o = dg(r = [e, t]) || function(e) {
+                dC = tn().forwardRef(function(e, t) {
+                    var r, n, i, o = dw(r = [e, t]) || function(e) {
                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                        }(r) || dv(r) || dh(),
+                        }(r) || dj(r) || dx(),
                         a = o[0],
                         l = o.slice(1),
                         u = a.className,
@@ -14012,7 +14154,7 @@ function() {
                                 for (i = 0, r = Object.getOwnPropertySymbols(e); i < r.length; i++) n = r[i], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (o[n] = e[n]);
                             return o
                         }(a, ["className", "label", "variant", "icon", "iconPosition", "size", "shape"]),
-                        v = (dg(l) || function(e) {
+                        v = (dw(l) || function(e) {
                             var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                             if (null != n) {
                                 var i = [],
@@ -14031,14 +14173,14 @@ function() {
                                 }
                                 return i
                             }
-                        }(l) || dv(l, 1) || dh())[0],
+                        }(l) || dj(l, 1) || dx())[0],
                         w = f && !c,
                         x = "padding-x-xxsmall";
                     f && (x = "Leading" === m ? "padding-right-xxsmall" : "padding-left-xxsmall");
                     var j = f && tn().createElement(ts, {
                         name: f,
-                        size: dE[b],
-                        className: dj[d]
+                        size: dA[b],
+                        className: dI[d]
                     });
                     return tn().createElement("div", (n = function(e) {
                         for (var t = 1; t < arguments.length; t++) {
@@ -14060,7 +14202,7 @@ function() {
                     }({
                         ref: v
                     }, h), i = i = {
-                        className: ti("foundation-web-badge flex items-center select-none gap-[var(--size-150)]", dT[void 0 === g ? "Pill" : g], dS[b], w ? [dM[b], "justify-center"] : ["width-[fit-content]", dI[b]], dw[d], dx[d], dO[d], u)
+                        className: ti("foundation-web-badge flex items-center select-none gap-[var(--size-150)]", dL[void 0 === g ? "Pill" : g], dN[b], w ? [dE[b], "justify-center"] : ["width-[fit-content]", dP[b]], dO[d], dS[d], dM[d], u)
                     }, Object.getOwnPropertyDescriptors ? Object.defineProperties(n, Object.getOwnPropertyDescriptors(i)) : (function(e) {
                         var t = Object.keys(e);
                         if (Object.getOwnPropertySymbols) {
@@ -14071,11 +14213,11 @@ function() {
                     })(Object(i)).forEach(function(e) {
                         Object.defineProperty(n, e, Object.getOwnPropertyDescriptor(i, e))
                     }), n), "Leading" === m && j, c && tn().createElement("span", {
-                        className: ti("text-no-wrap text-truncate-split", dN[b], dP[b], x, dx[d])
+                        className: ti("text-no-wrap text-truncate-split", dT[b], dD[b], x, dS[d])
                     }, c), "Trailing" === m && j)
                 });
-            dD.displayName = "Badge";
-            var dA = function(e) {
+            dC.displayName = "Badge";
+            var dR = function(e) {
                     var t = e.activationTimestampMs,
                         r = e.expirationTimestampMs,
                         n = e.nextRenewalTimestampMs,
@@ -14104,19 +14246,19 @@ function() {
                                     year: "numeric"
                                 })
                             })
-                        }), c ? (0, O.jsx)(dD, {
+                        }), c ? (0, O.jsx)(dC, {
                             label: a("Label.Status.AutoRenewOff"),
                             variant: "Warning"
-                        }) : i ? (0, O.jsx)(dD, {
+                        }) : i ? (0, O.jsx)(dC, {
                             label: a("Label.Status.Freetrial"),
                             variant: "Standard"
-                        }) : (0, O.jsx)(dD, {
+                        }) : (0, O.jsx)(dC, {
                             label: a("Label.Status.Active"),
                             variant: "Standard"
                         })]
                     })
                 },
-                dL = function(e) {
+                dk = function(e) {
                     var t = e.featureConfig,
                         r = (0, S.useTranslation)().translate;
                     return (0, O.jsxs)("div", {
@@ -14163,11 +14305,11 @@ function() {
                     })
                 };
 
-            function dC(e, t) {
+            function dU(e, t) {
                 return null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t
             }
-            var dR = function(e, t) {
-                return (dR = Object.setPrototypeOf || dC({
+            var dz = function(e, t) {
+                return (dz = Object.setPrototypeOf || dU({
                     __proto__: []
                 }, Array) && function(e, t) {
                     e.__proto__ = t
@@ -14176,16 +14318,16 @@ function() {
                 })(e, t)
             };
 
-            function dk(e, t) {
+            function d_(e, t) {
                 if ("function" != typeof t && null !== t) throw TypeError("Class extends value " + String(t) + " is not a constructor or null");
 
                 function r() {
                     this.constructor = e
                 }
-                dR(e, t), e.prototype = null === t ? Object.create(t) : (r.prototype = t.prototype, new r)
+                dz(e, t), e.prototype = null === t ? Object.create(t) : (r.prototype = t.prototype, new r)
             }
 
-            function dU(e, t, r, n) {
+            function dB(e, t, r, n) {
                 return new(r || (r = Promise))(function(i, o) {
                     function a(e) {
                         try {
@@ -14205,7 +14347,7 @@ function() {
 
                     function u(e) {
                         var t;
-                        e.done ? i(e.value) : (dC(t = e.value, r) ? t : new r(function(e) {
+                        e.done ? i(e.value) : (dU(t = e.value, r) ? t : new r(function(e) {
                             e(t)
                         })).then(a, l)
                     }
@@ -14213,7 +14355,7 @@ function() {
                 })
             }
 
-            function dz(e, t) {
+            function dY(e, t) {
                 var r, n, i, o = {
                         label: 0,
                         sent: function() {
@@ -14285,7 +14427,7 @@ function() {
                 }
             }
 
-            function d_(e) {
+            function dF(e) {
                 var t;
                 return null == (t = e) ? t : {
                     name: ez(t, "name") ? t.name : void 0,
@@ -14297,24 +14439,24 @@ function() {
                 }
             }
 
-            function dB(e) {
+            function dG(e) {
                 var t;
                 return null == (t = e) ? t : {
                     name: ez(t, "name") ? t.name : void 0,
                     displayName: ez(t, "displayName") ? t.displayName : void 0,
                     categoryType: ez(t, "categoryType") ? t.categoryType : void 0,
-                    items: ez(t, "items") ? t.items.map(d_) : void 0
+                    items: ez(t, "items") ? t.items.map(dF) : void 0
                 }
             }
             "function" == typeof SuppressedError && SuppressedError;
 
-            function dY(e, t) {
+            function dW(e, t) {
                 return null == e ? e : {
-                    categories: ez(e, "categories") ? e.categories.map(dB) : void 0
+                    categories: ez(e, "categories") ? e.categories.map(dG) : void 0
                 }
             }
 
-            function dF(e) {
+            function dQ(e) {
                 var t;
                 return null == (t = e) ? t : {
                     userAssetId: ez(t, "userAssetId") ? t.userAssetId : void 0,
@@ -14329,7 +14471,7 @@ function() {
                 }
             }
 
-            function dG(e) {
+            function dV(e) {
                 var t;
                 return null == (t = e) ? t : {
                     id: ez(t, "id") ? t.id : void 0,
@@ -14339,7 +14481,7 @@ function() {
                 }
             }
 
-            function dW(e) {
+            function dq(e) {
                 var t, r;
                 return null == (t = e) ? t : {
                     universeId: ez(t, "universeId") ? t.universeId : void 0,
@@ -14356,10 +14498,10 @@ function() {
                 function t() {
                     return null !== e && e.apply(this, arguments) || this
                 }
-                dk(t, e), t.prototype.v1PackagesPackageIdAssetsGetRaw = function(e, t) {
-                    return dU(this, void 0, void 0, function() {
+                d_(t, e), t.prototype.v1PackagesPackageIdAssetsGetRaw = function(e, t) {
+                    return dB(this, void 0, void 0, function() {
                         var r, n;
-                        return dz(this, function(i) {
+                        return dY(this, function(i) {
                             switch (i.label) {
                                 case 0:
                                     if (null === e.packageID || void 0 === e.packageID) throw new eU("packageID", "Required parameter requestParameters.packageID was null or undefined when calling v1PackagesPackageIdAssetsGet.");
@@ -14380,8 +14522,8 @@ function() {
                         })
                     })
                 }, t.prototype.v1PackagesPackageIdAssetsGet = function(e, t) {
-                    return dU(this, void 0, void 0, function() {
-                        return dz(this, function(r) {
+                    return dB(this, void 0, void 0, function() {
+                        return dY(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.v1PackagesPackageIdAssetsGetRaw(e, t)];
@@ -14398,10 +14540,10 @@ function() {
                 function t() {
                     return null !== e && e.apply(this, arguments) || this
                 }
-                dk(t, e), t.prototype.v1CollectionsItemsItemTypeItemTargetIdDeleteRaw = function(e, t) {
-                    return dU(this, void 0, void 0, function() {
+                d_(t, e), t.prototype.v1CollectionsItemsItemTypeItemTargetIdDeleteRaw = function(e, t) {
+                    return dB(this, void 0, void 0, function() {
                         var r, n;
-                        return dz(this, function(i) {
+                        return dY(this, function(i) {
                             switch (i.label) {
                                 case 0:
                                     if (null === e.itemType || void 0 === e.itemType) throw new eU("itemType", "Required parameter requestParameters.itemType was null or undefined when calling v1CollectionsItemsItemTypeItemTargetIdDelete.");
@@ -14419,8 +14561,8 @@ function() {
                         })
                     })
                 }, t.prototype.v1CollectionsItemsItemTypeItemTargetIdDelete = function(e, t) {
-                    return dU(this, void 0, void 0, function() {
-                        return dz(this, function(r) {
+                    return dB(this, void 0, void 0, function() {
+                        return dY(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.v1CollectionsItemsItemTypeItemTargetIdDeleteRaw(e, t)];
@@ -14432,9 +14574,9 @@ function() {
                         })
                     })
                 }, t.prototype.v1CollectionsItemsItemTypeItemTargetIdPostRaw = function(e, t) {
-                    return dU(this, void 0, void 0, function() {
+                    return dB(this, void 0, void 0, function() {
                         var r, n;
-                        return dz(this, function(i) {
+                        return dY(this, function(i) {
                             switch (i.label) {
                                 case 0:
                                     if (null === e.itemType || void 0 === e.itemType) throw new eU("itemType", "Required parameter requestParameters.itemType was null or undefined when calling v1CollectionsItemsItemTypeItemTargetIdPost.");
@@ -14452,8 +14594,8 @@ function() {
                         })
                     })
                 }, t.prototype.v1CollectionsItemsItemTypeItemTargetIdPost = function(e, t) {
-                    return dU(this, void 0, void 0, function() {
-                        return dz(this, function(r) {
+                    return dB(this, void 0, void 0, function() {
+                        return dY(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.v1CollectionsItemsItemTypeItemTargetIdPostRaw(e, t)];
@@ -14466,14 +14608,14 @@ function() {
                     })
                 }
             }(eC);
-            var dQ = function(e) {
+            var dK = function(e) {
                     function t() {
                         return null !== e && e.apply(this, arguments) || this
                     }
-                    return dk(t, e), t.prototype.v1UsersUserIdAssetsCollectiblesGetRaw = function(e, t) {
-                        return dU(this, void 0, void 0, function() {
+                    return d_(t, e), t.prototype.v1UsersUserIdAssetsCollectiblesGetRaw = function(e, t) {
+                        return dB(this, void 0, void 0, function() {
                             var r, n;
-                            return dz(this, function(i) {
+                            return dY(this, function(i) {
                                 switch (i.label) {
                                     case 0:
                                         if (null === e.userId || void 0 === e.userId) throw new eU("userId", "Required parameter requestParameters.userId was null or undefined when calling v1UsersUserIdAssetsCollectiblesGet.");
@@ -14489,15 +14631,15 @@ function() {
                                             return null == e ? e : {
                                                 previousPageCursor: ez(e, "previousPageCursor") ? e.previousPageCursor : void 0,
                                                 nextPageCursor: ez(e, "nextPageCursor") ? e.nextPageCursor : void 0,
-                                                data: ez(e, "data") ? e.data.map(dF) : void 0
+                                                data: ez(e, "data") ? e.data.map(dQ) : void 0
                                             }
                                         })]
                                 }
                             })
                         })
                     }, t.prototype.v1UsersUserIdAssetsCollectiblesGet = function(e, t) {
-                        return dU(this, void 0, void 0, function() {
-                            return dz(this, function(r) {
+                        return dB(this, void 0, void 0, function() {
+                            return dY(this, function(r) {
                                 switch (r.label) {
                                     case 0:
                                         return [4, this.v1UsersUserIdAssetsCollectiblesGetRaw(e, t)];
@@ -14509,9 +14651,9 @@ function() {
                             })
                         })
                     }, t.prototype.v1UsersUserIdCanViewInventoryGetRaw = function(e, t) {
-                        return dU(this, void 0, void 0, function() {
+                        return dB(this, void 0, void 0, function() {
                             var r, n;
-                            return dz(this, function(i) {
+                            return dY(this, function(i) {
                                 switch (i.label) {
                                     case 0:
                                         if (null === e.userId || void 0 === e.userId) throw new eU("userId", "Required parameter requestParameters.userId was null or undefined when calling v1UsersUserIdCanViewInventoryGet.");
@@ -14532,8 +14674,8 @@ function() {
                             })
                         })
                     }, t.prototype.v1UsersUserIdCanViewInventoryGet = function(e, t) {
-                        return dU(this, void 0, void 0, function() {
-                            return dz(this, function(r) {
+                        return dB(this, void 0, void 0, function() {
+                            return dY(this, function(r) {
                                 switch (r.label) {
                                     case 0:
                                         return [4, this.v1UsersUserIdCanViewInventoryGetRaw(e, t)];
@@ -14545,9 +14687,9 @@ function() {
                             })
                         })
                     }, t.prototype.v1UsersUserIdCategoriesFavoritesGetRaw = function(e, t) {
-                        return dU(this, void 0, void 0, function() {
+                        return dB(this, void 0, void 0, function() {
                             var r, n;
-                            return dz(this, function(i) {
+                            return dY(this, function(i) {
                                 switch (i.label) {
                                     case 0:
                                         if (null === e.userId || void 0 === e.userId) throw new eU("userId", "Required parameter requestParameters.userId was null or undefined when calling v1UsersUserIdCategoriesFavoritesGet.");
@@ -14560,14 +14702,14 @@ function() {
                                         }, t)];
                                     case 1:
                                         return [2, new e_(i.sent(), function(e) {
-                                            return dY(e)
+                                            return dW(e)
                                         })]
                                 }
                             })
                         })
                     }, t.prototype.v1UsersUserIdCategoriesFavoritesGet = function(e, t) {
-                        return dU(this, void 0, void 0, function() {
-                            return dz(this, function(r) {
+                        return dB(this, void 0, void 0, function() {
+                            return dY(this, function(r) {
                                 switch (r.label) {
                                     case 0:
                                         return [4, this.v1UsersUserIdCategoriesFavoritesGetRaw(e, t)];
@@ -14579,9 +14721,9 @@ function() {
                             })
                         })
                     }, t.prototype.v1UsersUserIdCategoriesGetRaw = function(e, t) {
-                        return dU(this, void 0, void 0, function() {
+                        return dB(this, void 0, void 0, function() {
                             var r, n;
-                            return dz(this, function(i) {
+                            return dY(this, function(i) {
                                 switch (i.label) {
                                     case 0:
                                         if (null === e.userId || void 0 === e.userId) throw new eU("userId", "Required parameter requestParameters.userId was null or undefined when calling v1UsersUserIdCategoriesGet.");
@@ -14594,14 +14736,14 @@ function() {
                                         }, t)];
                                     case 1:
                                         return [2, new e_(i.sent(), function(e) {
-                                            return dY(e)
+                                            return dW(e)
                                         })]
                                 }
                             })
                         })
                     }, t.prototype.v1UsersUserIdCategoriesGet = function(e, t) {
-                        return dU(this, void 0, void 0, function() {
-                            return dz(this, function(r) {
+                        return dB(this, void 0, void 0, function() {
+                            return dY(this, function(r) {
                                 switch (r.label) {
                                     case 0:
                                         return [4, this.v1UsersUserIdCategoriesGetRaw(e, t)];
@@ -14613,9 +14755,9 @@ function() {
                             })
                         })
                     }, t.prototype.v1UsersUserIdItemsItemTypeItemTargetIdGetRaw = function(e, t) {
-                        return dU(this, void 0, void 0, function() {
+                        return dB(this, void 0, void 0, function() {
                             var r, n;
-                            return dz(this, function(i) {
+                            return dY(this, function(i) {
                                 switch (i.label) {
                                     case 0:
                                         if (null === e.userId || void 0 === e.userId) throw new eU("userId", "Required parameter requestParameters.userId was null or undefined when calling v1UsersUserIdItemsItemTypeItemTargetIdGet.");
@@ -14633,15 +14775,15 @@ function() {
                                             return null == e ? e : {
                                                 previousPageCursor: ez(e, "previousPageCursor") ? e.previousPageCursor : void 0,
                                                 nextPageCursor: ez(e, "nextPageCursor") ? e.nextPageCursor : void 0,
-                                                data: ez(e, "data") ? e.data.map(dG) : void 0
+                                                data: ez(e, "data") ? e.data.map(dV) : void 0
                                             }
                                         })]
                                 }
                             })
                         })
                     }, t.prototype.v1UsersUserIdItemsItemTypeItemTargetIdGet = function(e, t) {
-                        return dU(this, void 0, void 0, function() {
-                            return dz(this, function(r) {
+                        return dB(this, void 0, void 0, function() {
+                            return dY(this, function(r) {
                                 switch (r.label) {
                                     case 0:
                                         return [4, this.v1UsersUserIdItemsItemTypeItemTargetIdGetRaw(e, t)];
@@ -14653,9 +14795,9 @@ function() {
                             })
                         })
                     }, t.prototype.v1UsersUserIdItemsItemTypeItemTargetIdIsOwnedGetRaw = function(e, t) {
-                        return dU(this, void 0, void 0, function() {
+                        return dB(this, void 0, void 0, function() {
                             var r, n, i;
-                            return dz(this, function(o) {
+                            return dY(this, function(o) {
                                 switch (o.label) {
                                     case 0:
                                         if (null === e.userId || void 0 === e.userId) throw new eU("userId", "Required parameter requestParameters.userId was null or undefined when calling v1UsersUserIdItemsItemTypeItemTargetIdIsOwnedGet.");
@@ -14674,8 +14816,8 @@ function() {
                             })
                         })
                     }, t.prototype.v1UsersUserIdItemsItemTypeItemTargetIdIsOwnedGet = function(e, t) {
-                        return dU(this, void 0, void 0, function() {
-                            return dz(this, function(r) {
+                        return dB(this, void 0, void 0, function() {
+                            return dY(this, function(r) {
                                 switch (r.label) {
                                     case 0:
                                         return [4, this.v1UsersUserIdItemsItemTypeItemTargetIdIsOwnedGetRaw(e, t)];
@@ -14688,15 +14830,15 @@ function() {
                         })
                     }, t
                 }(eC),
-                dV = eC;
+                dH = eC;
 
-            function dq() {
-                return null !== dV && dV.apply(this, arguments) || this
+            function dX() {
+                return null !== dH && dH.apply(this, arguments) || this
             }
-            dk(dq, dV), dq.prototype.v1UsersUserIdPlacesInventoryGetRaw = function(e, t) {
-                return dU(this, void 0, void 0, function() {
+            d_(dX, dH), dX.prototype.v1UsersUserIdPlacesInventoryGetRaw = function(e, t) {
+                return dB(this, void 0, void 0, function() {
                     var r, n;
-                    return dz(this, function(i) {
+                    return dY(this, function(i) {
                         switch (i.label) {
                             case 0:
                                 if (null === e.userId || void 0 === e.userId) throw new eU("userId", "Required parameter requestParameters.userId was null or undefined when calling v1UsersUserIdPlacesInventoryGet.");
@@ -14715,15 +14857,15 @@ function() {
                                     return null == e ? e : {
                                         previousPageCursor: ez(e, "previousPageCursor") ? e.previousPageCursor : void 0,
                                         nextPageCursor: ez(e, "nextPageCursor") ? e.nextPageCursor : void 0,
-                                        data: ez(e, "data") ? e.data.map(dW) : void 0
+                                        data: ez(e, "data") ? e.data.map(dq) : void 0
                                     }
                                 })]
                         }
                     })
                 })
-            }, dq.prototype.v1UsersUserIdPlacesInventoryGet = function(e, t) {
-                return dU(this, void 0, void 0, function() {
-                    return dz(this, function(r) {
+            }, dX.prototype.v1UsersUserIdPlacesInventoryGet = function(e, t) {
+                return dB(this, void 0, void 0, function() {
+                    return dY(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return [4, this.v1UsersUserIdPlacesInventoryGetRaw(e, t)];
@@ -14735,62 +14877,63 @@ function() {
                     })
                 })
             };
-            var dK = cN(window.location.hostname),
-                dH = new dQ(new eY({
-                    robloxSiteDomain: dK.rootDomain,
-                    basePath: (v = dK.rootDomain, "https://".concat("inventory", ".").concat(v)),
+            var dZ = cN(window.location.hostname),
+                d$ = new dK(new eY({
+                    robloxSiteDomain: dZ.rootDomain,
+                    basePath: (v = dZ.rootDomain, "https://".concat("inventory", ".").concat(v)),
                     credentials: "include"
                 })),
-                dX = function(e) {
+                dJ = function(e) {
                     if (e === sB.ItemType.Asset) return 0;
                     throw Error("Unsupported gift item type: ".concat(e))
                 },
-                dZ = function() {
+                d0 = function() {
                     var e = !(arguments.length > 0) || void 0 === arguments[0] || arguments[0],
                         t = (0, ru.userId)();
                     return (0, P.useQuery)({
                         queryKey: ["owns-gift-item", t, sY.itemId, sY.itemType],
                         queryFn: function() {
                             if (null == t) throw Error("Cannot check gift item ownership without a user id");
-                            return dH.v1UsersUserIdItemsItemTypeItemTargetIdIsOwnedGet({
+                            return d$.v1UsersUserIdItemsItemTypeItemTargetIdIsOwnedGet({
                                 userId: t,
-                                itemType: dX(sY.itemType),
+                                itemType: dJ(sY.itemType),
                                 itemTargetId: sY.itemId
                             })
                         },
                         enabled: e && null != t
                     })
                 },
-                d$ = function(e) {
+                d1 = function(e) {
                     var t, r, n = e.robloxSubscriptionProduct,
                         i = e.robloxSubscriptionMembership,
                         o = e.robloxPlusUserBenefits,
                         a = e.isFaeFreeTrial,
                         l = e.onOpenReferrals,
                         u = (0, S.useTranslation)().translate,
-                        c = null == o ? void 0 : o.robuxSavedWithPlus,
-                        s = null == o ? void 0 : o.itemsBoughtWithPlusDiscount,
-                        d = null == o ? void 0 : o.privateServersCreatedForFree,
-                        f = null == o ? void 0 : o.robuxSentToFriends,
-                        p = (0, tr.useMemo)(function() {
+                        c = s$().eligibility,
+                        s = null == o ? void 0 : o.robuxSavedWithPlus,
+                        d = null == o ? void 0 : o.itemsBoughtWithPlusDiscount,
+                        f = null == o ? void 0 : o.privateServersCreatedForFree,
+                        p = null == o ? void 0 : o.robuxSentToFriends,
+                        m = (0, tr.useMemo)(function() {
                             return i.activeOffers.some(function(e) {
                                 return "FreeTrial" === e.offerType
                             })
                         }, [i.activeOffers]),
-                        m = (0, tr.useMemo)(function() {
-                            return de(i.activationTimestampMs, i.periodType, i.nextRenewalTimestampMs, Date.now())
-                        }, [i.activationTimestampMs, i.nextRenewalTimestampMs, i.periodType]),
                         y = (0, tr.useMemo)(function() {
+                            return dn(i.activationTimestampMs, i.periodType, i.nextRenewalTimestampMs, Date.now())
+                        }, [i.activationTimestampMs, i.nextRenewalTimestampMs, i.periodType]),
+                        b = (0, tr.useMemo)(function() {
                             var e, t, r, o, a, l, u, c, s, d, f;
                             return t = t8(n), r = null == (e = i.productTypeMembershipDetails.robloxSubscriptionMembershipDetails) ? void 0 : e.features.virtualTransactionDiscountTierId, d = t.virtualTransactionDiscounts, f = null != (o = null == (l = r ? null != (u = null != (c = null == d ? void 0 : d.find(function(e) {
                                 return e.tierId === r
                             })) ? c : null == d ? void 0 : d.toSorted(function(e, t) {
                                 return t.periodIndex - e.periodIndex
                             })[0]) ? u : null : null != (s = null == d ? void 0 : d.filter(function(e) {
-                                return e.periodIndex <= m
+                                return e.periodIndex <= y
                             }).toSorted(function(e, t) {
                                 return t.periodIndex - e.periodIndex
-                            })[0]) ? s : null) ? void 0 : l.periodIndex) ? o : m, {
+                            })[0]) ? s : null) ? void 0 : l.periodIndex) ? o : y, {
                                 current: l,
                                 next: null != (a = null == d ? void 0 : d.filter(function(e) {
                                     return e.periodIndex > f
@@ -14798,14 +14941,14 @@ function() {
                                     return e.periodIndex - t.periodIndex
                                 })[0]) ? a : null
                             }
-                        }, [n, i.productTypeMembershipDetails, m]),
-                        b = null != (t = null == (r = y.current) ? void 0 : r.discountPercent) ? t : 0,
-                        g = dZ(!1).data;
+                        }, [n, i.productTypeMembershipDetails, y]),
+                        g = null != (t = null == (r = b.current) ? void 0 : r.discountPercent) ? t : 0,
+                        h = d0(!1).data;
                     return (0, O.jsx)("div", {
                         className: "flex flex-col items-center",
                         children: (0, O.jsxs)("div", {
                             className: "margin-top-[48px] padding-x-xlarge content-emphasis gap-y-xxlarge width-full large:max-width-[730px] flex flex-col",
-                            children: [!1, a && (0, O.jsx)(sX, {
+                            children: [!1, a && (0, O.jsx)(sJ, {
                                 body: u("Subtext.FreeTrialBanner", {
                                     date: new Date(i.expirationTimestampMs).toLocaleDateString(void 0, {
                                         day: "2-digit",
@@ -14816,36 +14959,36 @@ function() {
                                 title: u("Header.FreeTrialBannerTitle")
                             }), (0, O.jsxs)("div", {
                                 className: "gap-y-small large:items-center flex flex-col",
-                                children: [(0, O.jsx)(sn, {}), (0, O.jsx)(dA, {
+                                children: [(0, O.jsx)(sn, {}), (0, O.jsx)(dR, {
                                     activationTimestampMs: i.activationTimestampMs,
                                     expirationTimestampMs: i.expirationTimestampMs,
-                                    hasFreeTrial: p,
+                                    hasFreeTrial: m,
                                     nextRenewalTimestampMs: i.nextRenewalTimestampMs
-                                }), (0, O.jsx)(dt, {
+                                }), (0, O.jsx)(di, {
                                     activationTimestampMs: i.activationTimestampMs,
-                                    currentDiscountPercent: b,
+                                    currentDiscountPercent: g,
                                     isCancelled: null === i.nextRenewalTimestampMs || 0 === i.nextRenewalTimestampMs,
-                                    nextDiscount: y.next,
+                                    nextDiscount: b.next,
                                     periodType: i.periodType
                                 })]
                             }), (0, O.jsxs)("div", {
                                 className: "flex flex-col gap-y-[32px]",
-                                children: [e9() ? (0, O.jsx)(ds, {
-                                    children: (0, O.jsx)(dp, {
+                                children: [e7() && "Eligible" === c ? (0, O.jsx)(dp, {
+                                    children: (0, O.jsx)(db, {
                                         onOpenDashboard: l
                                     })
-                                }) : null, (0, O.jsx)(dy, {
-                                    currentDiscountPercent: b,
-                                    itemsBoughtWithDiscountCount: s,
-                                    privateServersCreatedCount: d,
-                                    robuxSentToFriendsCount: f,
-                                    savedRobux: c
-                                }), (0, O.jsx)(dL, {
+                                }) : null, (0, O.jsx)(dh, {
+                                    currentDiscountPercent: g,
+                                    itemsBoughtWithDiscountCount: d,
+                                    privateServersCreatedCount: f,
+                                    robuxSentToFriendsCount: p,
+                                    savedRobux: s
+                                }), (0, O.jsx)(dk, {
                                     featureConfig: t8(n)
                                 }), (0, O.jsx)(t3, {
                                     children: (0, O.jsx)("div", {
                                         className: "gap-y-medium flex flex-col",
-                                        children: (0, O.jsx)(df, {
+                                        children: (0, O.jsx)(dy, {
                                             robloxSubscriptionProduct: n
                                         })
                                     })
@@ -14855,12 +14998,12 @@ function() {
                     })
                 };
 
-            function dJ(e, t) {
+            function d4(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
-            var d0 = function(e) {
+            var d2 = function(e) {
                     var t, r, n, i = e.deviceMeta,
                         o = e.robloxSubscriptionProduct,
                         a = e.onDismiss,
@@ -14888,10 +15031,10 @@ function() {
                             }
                         }(t) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return dJ(e, 2);
+                                if ("string" == typeof e) return d4(e, 2);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return dJ(e, 2)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return d4(e, 2)
                             }
                         }(t) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -14986,27 +15129,27 @@ function() {
                         })]
                     })
                 },
-                d1 = cN(window.location.hostname),
-                d4 = new eA({
-                    robloxSiteDomain: d1.rootDomain,
-                    basePath: cI(d1.rootDomain, "roblox-subscriptions"),
+                d3 = cN(window.location.hostname),
+                d5 = new eA({
+                    robloxSiteDomain: d3.rootDomain,
+                    basePath: cI(d3.rootDomain, "roblox-subscriptions"),
                     credentials: "include"
                 });
-            new s3(d4);
-            var d2 = new s2(d4);
-            new s5(d4);
-            var d3 = function(e, t) {
+            new s8(d5);
+            var d6 = new s6(d5);
+            new s7(d5);
+            var d8 = function(e, t) {
                 var r = (0, tr.useRef)();
                 return t(e) && (r.current = e), r.current
             };
 
-            function d5(e, t) {
+            function d7(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function d6(e, t, r, n, i, o, a) {
+            function d9(e, t, r, n, i, o, a) {
                 try {
                     var l = e[o](a),
                         u = l.value
@@ -15017,7 +15160,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, i)
             }
 
-            function d8(e) {
+            function fe(e) {
                 return function() {
                     var t = this,
                         r = arguments;
@@ -15025,18 +15168,18 @@ function() {
                         var o = e.apply(t, r);
 
                         function a(e) {
-                            d6(o, n, i, a, l, "next", e)
+                            d9(o, n, i, a, l, "next", e)
                         }
 
                         function l(e) {
-                            d6(o, n, i, a, l, "throw", e)
+                            d9(o, n, i, a, l, "throw", e)
                         }
                         a(void 0)
                     })
                 }
             }
 
-            function d9(e, t) {
+            function ft(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -15060,17 +15203,17 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return d5(e, t);
+                        if ("string" == typeof e) return d7(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return d5(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return d7(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function d7(e, t) {
+            function fr(e, t) {
                 var r, n, i, o = {
                         label: 0,
                         sent: function() {
@@ -15150,35 +15293,35 @@ function() {
                     }
                 }
             }
-            var fe = function() {
+            var fn = function() {
                     var e, t, r = (0, tr.useMemo)(function() {
                             return (0, e6.getDeviceMeta)()
                         }, []),
-                        n = d9((0, tr.useState)(function() {
+                        n = ft((0, tr.useState)(function() {
                             return new URLSearchParams(window.location.search).has("welcome")
                         }), 2),
                         i = n[0],
                         o = n[1],
-                        a = d9((0, tr.useState)(function() {
+                        a = ft((0, tr.useState)(function() {
                             return new URLSearchParams(window.location.search).has("faeFreeTrialConfirmation")
                         }), 2),
                         l = a[0],
                         u = a[1],
-                        c = d9((0, tr.useState)(function() {
-                            return e9() && new URLSearchParams(window.location.search).has(te)
+                        c = ft((0, tr.useState)(function() {
+                            return e7() && new URLSearchParams(window.location.search).has(te)
                         }), 2),
                         s = c[0],
                         d = c[1],
                         f = (0, tr.useRef)(!1),
-                        p = d9((0, tr.useState)(i || l), 2),
+                        p = ft((0, tr.useState)(i || l), 2),
                         m = p[0],
                         y = p[1],
                         b = (0, P.useQuery)({
                             queryKey: ["get-roblox-subscription-membership"],
                             queryFn: function() {
-                                return d8(function() {
+                                return fe(function() {
                                     var e;
-                                    return d7(this, function(t) {
+                                    return fr(this, function(t) {
                                         switch (t.label) {
                                             case 0:
                                                 return [4, cE.subscriptionsV2ListSubscriptions({
@@ -15197,16 +15340,16 @@ function() {
                             retryDelay: 100,
                             refetchInterval: !!m && 3e3
                         }),
-                        g = d3(b.data, function() {
+                        g = d8(b.data, function() {
                             return void 0 !== b.data
                         }),
                         h = null == g ? void 0 : g.productKey.id,
                         v = (0, P.useQuery)({
                             queryKey: ["check-fae-free-trial", h],
                             queryFn: function() {
-                                return d8(function() {
+                                return fe(function() {
                                     var e, t;
-                                    return d7(this, function(r) {
+                                    return fr(this, function(r) {
                                         switch (r.label) {
                                             case 0:
                                                 if (!h) return [2, !1];
@@ -15233,9 +15376,9 @@ function() {
                         w = (0, P.useQuery)({
                             queryKey: ["list-roblox-subscription-available-products"],
                             queryFn: function() {
-                                return d8(function() {
+                                return fe(function() {
                                     var e;
-                                    return d7(this, function(t) {
+                                    return fr(this, function(t) {
                                         switch (t.label) {
                                             case 0:
                                                 return [4, cE.subscriptionsV2ListAvailableSubscriptionProducts({
@@ -15247,7 +15390,7 @@ function() {
                                             case 1:
                                                 if (0 === (e = t.sent().products).length) return [2, null];
                                                 return [2, e.toSorted(function(e, t) {
-                                                    return t9(e) - t9(t)
+                                                    return t7(e) - t7(t)
                                                 })]
                                         }
                                     })
@@ -15257,17 +15400,17 @@ function() {
                             retry: 3,
                             retryDelay: 100
                         }),
-                        x = d3(w.data, function() {
+                        x = d8(w.data, function() {
                             return void 0 !== w.data
                         }),
-                        j = d3(null != (e = null == (t = b.data) ? void 0 : t.productInfo) ? e : null == x ? void 0 : x[0], function() {
+                        j = d8(null != (e = null == (t = b.data) ? void 0 : t.productInfo) ? e : null == x ? void 0 : x[0], function() {
                             var e;
                             return (null == (e = b.data) ? void 0 : e.productInfo) !== void 0 || void 0 !== x
                         }),
                         S = (0, P.useQuery)({
                             queryKey: ["get-roblox-plus-user-benefits"],
                             queryFn: function() {
-                                return d2.robloxPlusGetRobloxPlusUserBenefits()
+                                return d6.robloxPlusGetRobloxPlusUserBenefits()
                             },
                             enabled: !!g,
                             retry: 3
@@ -15275,8 +15418,8 @@ function() {
                         I = (0, P.useQuery)({
                             queryKey: ["guac/app-policy/disable-blackbird-entrypoints"],
                             queryFn: function() {
-                                return d8(function() {
-                                    return d7(this, function(e) {
+                                return fe(function() {
+                                    return fr(this, function(e) {
                                         switch (e.label) {
                                             case 0:
                                                 return e.trys.push([0, 2, , 3]), [4, (0, e5.callBehaviour)("app-policy")];
@@ -15294,7 +15437,7 @@ function() {
                             retryDelay: 100,
                             staleTime: 1 / 0
                         }),
-                        M = d3(I.data, function() {
+                        M = d8(I.data, function() {
                             return void 0 !== I.data
                         }),
                         N = (0, tr.useCallback)(function() {
@@ -15363,7 +15506,7 @@ function() {
                         onDismiss: T
                     }) : (0, O.jsx)(tG, {}) : m ? (0, O.jsx)(rl, {}) : (0, O.jsx)(tG, {});
                     if (i)
-                        if (C) return (0, O.jsx)(d0, {
+                        if (C) return (0, O.jsx)(d2, {
                             deviceMeta: r,
                             robloxSubscriptionMembership: g,
                             robloxSubscriptionProduct: j,
@@ -15380,7 +15523,7 @@ function() {
                             isDisabled: M
                         },
                         onClose: A
-                    }) : C ? (0, O.jsx)(d$, {
+                    }) : C ? (0, O.jsx)(d1, {
                         isFaeFreeTrial: !0 === v.data,
                         robloxPlusUserBenefits: S.data,
                         robloxSubscriptionMembership: g,
@@ -15393,29 +15536,29 @@ function() {
                         onMobilePurchaseInitiated: L
                     }) : (0, O.jsx)(rl, {})
                 },
-                ft = function(e) {
+                fi = function(e) {
                     var t = e.children;
                     return (0, O.jsx)("div", {
                         className: "clip-x margin-bottom-[160px] min-height-[400px] padding-top-[16px] large:margin-bottom-[120px] relative",
                         children: t
                     })
                 },
-                fr = function() {
+                fo = function() {
                     return (0, O.jsx)(P.QueryClientProvider, {
                         client: S.queryClient,
-                        children: (0, O.jsx)(ft, {
-                            children: (0, O.jsx)(fe, {})
+                        children: (0, O.jsx)(fi, {
+                            children: (0, O.jsx)(fn, {})
                         })
                     })
                 };
             M()(function() {
                 (0, S.renderWithErrorBoundary)((0, O.jsx)(S.TranslationProvider, {
                     config: N.P,
-                    children: (0, O.jsx)(fr, {})
-                }), document.getElementById("roblox-subscription-container"), void 0, (0, O.jsx)(ft, {
+                    children: (0, O.jsx)(fo, {})
+                }), document.getElementById("roblox-subscription-container"), void 0, (0, O.jsx)(fi, {
                     children: (0, O.jsx)(tG, {})
                 }))
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("RobloxSubscription");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/robloxSubscription-76deeb2a0dde1978.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/robloxSubscription-45e03f85ec2c0209.js.map

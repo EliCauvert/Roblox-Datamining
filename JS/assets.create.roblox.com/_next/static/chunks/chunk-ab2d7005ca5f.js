@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "ad5feb43-4ddb-b161-3aba-ad2c9338034f")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "d3ffe339-afbc-26bc-81a3-ac2ba14cc635")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 138726, e => {
@@ -806,7 +806,7 @@
     }
     var S = ((a = {}).changeTheme = "internal:changeTheme", a.changeVolume = "internal:changeVolume", a.init = "internal:init", a.deprecatedSendAnalyticsCounterEvent = "sendAnalyticsCounterEvent", a.deprecatedSendAnalyticsEvent = "sendAnalyticsEvent", a);
 
-    function M(e, t) {
+    function L(e, t) {
         let n = e.getElementsByTagName("video"),
             i = e.getElementsByTagName("audio");
         n.length > 0 && Array.from(n).forEach(e => {
@@ -815,17 +815,21 @@
             e.volume = t
         })
     }
-    let L = [];
+    let M = [],
+        T = e => {
+            var t;
+            return null != (t = Object.values(d.Locale).find(t => t === e)) ? t : null
+        };
 
-    function T() {
+    function I() {
         var e, t;
         null == (t = window.rbx) || null == (e = t.postMessage) || e.call(t, "loadprogress", "afterInteractive")
     }
 
-    function I() {}(null == (t = window.rbx) ? void 0 : t.postMessage) && (null == (i = window.rbx) || null == (n = i.postMessage) || n.call(i, "loadprogress", "beforeInteractive"), "loading" === document.readyState ? document.addEventListener("DOMContentLoaded", T, {
+    function _() {}(null == (t = window.rbx) ? void 0 : t.postMessage) && (null == (i = window.rbx) || null == (n = i.postMessage) || n.call(i, "loadprogress", "beforeInteractive"), "loading" === document.readyState ? document.addEventListener("DOMContentLoaded", I, {
         once: !0
-    }) : T());
-    let k = () => () => I;
+    }) : I());
+    let k = () => () => _;
     e.s(["StubMessageBus", 0, class extends C {
         async initHandshake(e) {
             let {
@@ -845,7 +849,7 @@
             var t, n, i, r, o, s;
             super({
                 namespace: e
-            }), (0, u._)(this, "studioConfiguration", void 0), (0, u._)(this, "loadWebView", I), (0, u._)(this, "setListener", k), (0, u._)(this, "fire", I), this.studioConfiguration = {
+            }), (0, u._)(this, "studioConfiguration", void 0), (0, u._)(this, "loadWebView", _), (0, u._)(this, "setListener", k), (0, u._)(this, "fire", _), this.studioConfiguration = {
                 theme: w.DarkFoundation,
                 locale: d.Locale.English,
                 isPrewarm: !1
@@ -854,9 +858,9 @@
                 studio: null != (t = null == (r = window.rbx) ? void 0 : r.studio) ? t : this.studioConfiguration,
                 messageBus: null != (n = null == (o = window.rbx) ? void 0 : o.messageBus) ? n : {
                     events: new Map,
-                    dispatchEvent: I
+                    dispatchEvent: _
                 },
-                postMessage: null != (i = null == (s = window.rbx) ? void 0 : s.postMessage) ? i : I
+                postMessage: null != (i = null == (s = window.rbx) ? void 0 : s.postMessage) ? i : _
             }
         }
     }, "StudioTheme", 0, w, "StudioWebViewMessageBusConnector", 0, function(e) {
@@ -864,7 +868,7 @@
         let {
             children: i,
             useContextHook: r,
-            capabilities: o = L
+            capabilities: o = M
         } = e, {
             isWebView: s,
             getStudioConfiguration: a,
@@ -877,7 +881,7 @@
         } = r(), m = (0, f.useRef)(s && null != (t = a().volume) ? t : 1), w = (0, f.useRef)(s ? (n = () => m.current, new MutationObserver(e => {
             e.forEach(e => {
                 "childList" === e.type && e.addedNodes.forEach(e => {
-                    e instanceof Element && (("AUDIO" === e.tagName || "VIDEO" === e.tagName) && (e.volume = n()), e.children.length > 0 && M(e, n()))
+                    e instanceof Element && (("AUDIO" === e.tagName || "VIDEO" === e.tagName) && (e.volume = n()), e.children.length > 0 && L(e, n()))
                 })
             })
         })) : null), x = (0, f.useCallback)(e => {
@@ -889,11 +893,11 @@
             let {
                 volume: t
             } = e;
-            m.current = t, M(document.body, t)
+            m.current = t, L(document.body, t)
         }, []);
         return (0, f.useEffect)(() => {
             var e;
-            h.setTag("isWebView", s), s && (M(document.body, m.current), null == (e = w.current) || e.observe(document.body, {
+            h.setTag("isWebView", s), s && (L(document.body, m.current), null == (e = w.current) || e.observe(document.body, {
                 childList: !0,
                 subtree: !0
             }), window.addEventListener("dragover", e => e.preventDefault(), !0), window.addEventListener("drop", e => e.preventDefault(), !0))
@@ -956,60 +960,66 @@
             return function(e) {
                 let {
                     children: s
-                } = e, a = (0, f.useMemo)(() => b(), []), u = i(), [c, d] = (0, v.useSessionStorage)("mock_web_view", null), h = (0, f.useRef)(null), g = !a && (!0 === c || o), m = a || g, p = (0, f.useMemo)(() => g ? (null != h.current || (h.current = new r), h.current) : n, [g]), y = (0, f.useCallback)((e, t, n) => p.call(e, t, n), [p]), E = (0, f.useCallback)((e, t) => {
-                    p.fire(e, t)
-                }, [p]), C = (0, f.useCallback)(() => p.getStudioConfiguration(), [p]), [S, M] = (0, f.useState)(null), L = (0, f.useCallback)(async e => {
-                    let t = await p.initHandshake(e);
+                } = e, a = (0, f.useMemo)(() => b(), []), u = i(), [c, h] = (0, v.useSessionStorage)("mock_web_view", null), g = (0, f.useRef)(null), m = !a && (!0 === c || o), p = a || m, y = (0, f.useMemo)(() => m ? (null != g.current || (g.current = new r), g.current) : n, [m]), E = (0, f.useCallback)((e, t, n) => y.call(e, t, n), [y]), C = (0, f.useCallback)((e, t) => {
+                    y.fire(e, t)
+                }, [y]), S = (0, f.useCallback)(() => y.getStudioConfiguration(), [y]), [L, M] = (0, f.useState)(null), I = (0, f.useCallback)(async e => {
+                    let t = await y.initHandshake(e);
                     return M(t), t
-                }, [p]), T = (0, f.useCallback)(() => {
-                    p.loadWebView()
-                }, [p]), I = (0, f.useMemo)(() => {
+                }, [y]), _ = (0, f.useCallback)(() => {
+                    y.loadWebView()
+                }, [y]), k = (0, f.useMemo)(() => {
                     var e;
                     return !!(null == (e = window.rbx) ? void 0 : e.studio.isPrewarm)
-                }, []), k = (0, f.useMemo)(() => {
+                }, []), W = (0, f.useMemo)(() => {
                     var e, t;
                     let n;
                     return void 0 === (n = null == (t = window) || null == (e = t.navigator) ? void 0 : e.deviceMemory) || n >= 8
-                }, []), _ = (0, f.useMemo)(() => (function() {
+                }, []), F = (0, f.useMemo)(() => (function() {
                     var e, t;
                     let n = null == (t = window) || null == (e = t.navigator) ? void 0 : e.userAgent;
                     if (!n) return "";
                     let i = n.match(/RobloxApp\/([\d.]+)/);
                     return i && i.length > 1 ? i[1] : ""
-                })(), []), W = (0, f.useCallback)((e, t) => p.setListener(e, t), [p]), F = (0, f.useCallback)((e, t) => {
-                    p.removeListener(e, t)
-                }, [p]), [N, A] = (0, v.useSessionStorage)("web_view_theme_override", null);
+                })(), []), N = (0, f.useCallback)((e, t) => y.setListener(e, t), [y]), A = (0, f.useCallback)((e, t) => {
+                    y.removeListener(e, t)
+                }, [y]), [D, O] = (0, v.useSessionStorage)("web_view_theme_override", null), [V, B] = (0, v.useSessionStorage)("web_view_locale_override", null), j = u.get("locale"), R = T(j);
                 (0, f.useEffect)(() => {
                     let e = u.get("mockWebview"),
                         t = "true" === l.default.env.NEXT_PUBLIC_MOCK_WEB_VIEW || "true" === e;
-                    if (a || (t ? d(!0) : "false" === e && d(!1)), g) {
+                    if (a || (t ? h(!0) : "false" === e && h(!1)), m) {
                         let e = u.get("theme");
-                        e && A(e.includes("light") ? w.LightFoundation : w.DarkFoundation)
+                        e && O(e.includes("light") ? w.LightFoundation : w.DarkFoundation), R ? B(R) : j && console.warn("Ignoring unsupported mocked Studio locale: ".concat(j))
                     }
-                }, [a, u, d, A, g]);
-                let D = (0, f.useMemo)(() => {
-                        let e = m && 1 ? C().theme : x;
-                        return null != N ? N : e
-                    }, [C, m, N]),
-                    O = (0, f.useMemo)(() => ({
-                        call: y,
-                        currentStudioTheme: D,
-                        fire: E,
-                        getStudioConfiguration: C,
-                        initHandshake: L,
-                        initHandshakeResponse: S,
-                        isPrewarm: I,
-                        isRecommendedSpecOrAbove: k,
-                        isWebView: m,
-                        isWebViewAvailable: m,
-                        loadWebView: T,
-                        removeListener: F,
-                        setListener: W,
-                        setStudioThemeOverride: A,
-                        studioVersion: _
-                    }), [y, E, C, L, S, I, k, m, T, F, W, A, D, _]);
+                }, [a, u, h, j, R, B, O, m]);
+                let U = (0, f.useMemo)(() => {
+                        let e = p && 1 ? S().theme : x;
+                        return null != D ? D : e
+                    }, [S, p, D]),
+                    P = (0, f.useMemo)(() => {
+                        var e;
+                        let t = p && 1 ? S().locale : d.Locale.English;
+                        return m && null != (e = null != R ? R : T(V)) ? e : t
+                    }, [S, m, p, R, V]),
+                    q = (0, f.useMemo)(() => ({
+                        call: E,
+                        currentStudioLocale: P,
+                        currentStudioTheme: U,
+                        fire: C,
+                        getStudioConfiguration: S,
+                        initHandshake: I,
+                        initHandshakeResponse: L,
+                        isPrewarm: k,
+                        isRecommendedSpecOrAbove: W,
+                        isWebView: p,
+                        isWebViewAvailable: p,
+                        loadWebView: _,
+                        removeListener: A,
+                        setListener: N,
+                        setStudioThemeOverride: O,
+                        studioVersion: F
+                    }), [E, P, C, S, I, L, k, W, p, _, A, N, O, U, F]);
                 return f.default.createElement(t.Provider, {
-                    value: O
+                    value: q
                 }, s)
             }
         })({
@@ -1032,5 +1042,5 @@
     }])
 }]);
 
-//# debugId=ad5feb43-4ddb-b161-3aba-ad2c9338034f
-//# sourceMappingURL=2ai-z91cx1vf7.js.map
+//# debugId=d3ffe339-afbc-26bc-81a3-ac2ba14cc635
+//# sourceMappingURL=3y6zfvgo7oruf.js.map
