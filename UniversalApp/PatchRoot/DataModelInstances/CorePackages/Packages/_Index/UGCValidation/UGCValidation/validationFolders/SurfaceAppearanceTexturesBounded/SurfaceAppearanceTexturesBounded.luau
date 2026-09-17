@@ -5,7 +5,6 @@ local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local fetchAllDesiredDataModule = require(parent.validationSystem.dataFetchModules.FetchAllDesiredData)
-local getFFlagUGCValidateMigrateTextureTransparencyModule = require(parent.flags.getFFlagUGCValidateMigrateTextureTransparency)
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 local t = {
 	ColorMap = game:DefineFastInt("AccessoryColorMapMaxSize", 1024),
@@ -21,7 +20,6 @@ return {
 	},
 	requiredData = {},
 	conditionalData = { validationEnumsModule.SharedDataMember.meshTextures },
-	fflag = getFFlagUGCValidateMigrateTextureTransparencyModule,
 	expectedFailures = {},
 	run = function(p1, p2)
 		-- upvalues: fetchAllDesiredDataModule (ref), validationEnumsModule (ref), getFFlagUGCValidateAllowEmissivesModule (ref), constantsInterfaceModule (ref), t (ref), UGCValidationService (ref), errorSourceStringsModule (ref)

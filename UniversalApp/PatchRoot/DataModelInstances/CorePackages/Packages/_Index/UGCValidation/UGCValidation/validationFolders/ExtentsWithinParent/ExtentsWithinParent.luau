@@ -6,16 +6,25 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local boundsCalculatorModule = require(parent.util.BoundsCalculator)
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getAttachmentCFrameInPartSpaceModule = require(parent.util.getAttachmentCFrameInPartSpace)
+local getFFlagUGCValidateHeadAboveTorsoModule = require(parent.flags.getFFlagUGCValidateHeadAboveTorso)
+local sharedDataMember = validationEnumsModule.SharedDataMember
 local t = {
-	categories = { validationEnumsModule.UploadCategory.TORSO_AND_LIMBS },
-	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.uploadEnum
-	},
-	conditionalData = { validationEnumsModule.SharedDataMember.renderMeshesData },
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateBodyPartBounds),
-	expectedFailures = {}
+	categories = { validationEnumsModule.UploadCategory.TORSO_AND_LIMBS }
 }
+
+if getFFlagUGCValidateHeadAboveTorsoModule() then
+	table.insert(t.categories, validationEnumsModule.UploadCategory.FULL_BODY)
+end
+t.requiredData = {
+	validationEnumsModule.SharedDataMember.rootInstance,
+	validationEnumsModule.SharedDataMember.uploadEnum
+}
+t.conditionalData = { sharedDataMember.renderMeshesData }
+
+if getFFlagUGCValidateHeadAboveTorsoModule() then
+	table.insert(t.conditionalData, sharedDataMember.fullBodyPartsMetrics)
+end
+t.expectedFailures = {}
 local t_1 = {
 	[Enum.AssetType.Torso] = true,
 	[Enum.AssetType.LeftArm] = true,
@@ -84,44 +93,78 @@ local function validateBasedOnAttachmentYPos(p1, p2, p3, p4)
 	end
 end
 
-function t.run(p1, p2)
-	-- upvalues: t_1 (ref), constantsModule (ref), boundsCalculatorModule (ref), t_2 (ref), validateBasedOnBBoxes (ref), t_3 (ref), validateBasedOnAttachmentYPos (ref)
-	local rootInstance = p2.rootInstance
-	local assetType = p2.uploadEnum.assetType
+local function validateHeadAboveTorso(p1, p2)
+	-- upvalues: constantsModule (ref), errorSourceStringsModule (ref)
+	local fullBodyPartsMetrics = p2.fullBodyPartsMetrics
 	
-	if not t_1[assetType] then return end
-	local var1 = constantsModule.ASSET_TYPE_INFO[assetType]
+	if not fullBodyPartsMetrics or not next(fullBodyPartsMetrics) then return end
+	local head = fullBodyPartsMetrics[constantsModule.NAMED_R15_BODY_PARTS.Head]
+	local upperTorso = fullBodyPartsMetrics[constantsModule.NAMED_R15_BODY_PARTS.UpperTorso]
 	
-	if not var1 then return end
-	local renderMeshesData = p2.renderMeshesData
+	if not head or not upperTorso then return end
+	local boundsData = head.boundsData
+	local boundsData_1 = upperTorso.boundsData
 	
-	if not renderMeshesData then return end
-	local var2, _, var3 = boundsCalculatorModule.calculateIndividualAssetPartsDataFromData(rootInstance, assetType, renderMeshesData)
+	if not boundsData.maxOverall or not boundsData.minOverall or (not boundsData_1.maxOverall or not boundsData_1.minOverall) then return end
+	local head_1 = p2.rootInstance:FindFirstChild(constantsModule.NAMED_R15_BODY_PARTS.Head)
 	
-	if not var2 then
-		p1:fetchError("Failed to calculate asset bounds data for extents check on " .. assetType.Name)
-		
-		return
+	if boundsData.minOverall.Y < boundsData_1.minOverall.Y then
+		p1:fail(errorSourceStringsModule.Keys.Extents_ParentBelowPart, {
+			upperPart = "Head",
+			lowerPart = "UpperTorso",
+			attachmentName = "NeckRigAttachment"
+		}, head_1)
 	end
-	for i, v in pairs(var1.subParts) do
-		local var4 = constantsModule.BODYPART_TO_PARENT[i]
+	if boundsData_1.maxOverall.Y >= (boundsData.maxOverall.Y + boundsData.minOverall.Y) / 2 and not ((boundsData.maxOverall.Z + boundsData.minOverall.Z) / 2 < boundsData_1.minOverall.Z) then
+		p1:fail(errorSourceStringsModule.Keys.Extents_HeadBelowTorso, {}, head_1)
+	end
+end
+
+function t.run(p1, p2)
+	-- upvalues: validationEnumsModule (ref), getFFlagUGCValidateHeadAboveTorsoModule (ref), validateHeadAboveTorso (ref), t_1 (ref), constantsModule (ref), boundsCalculatorModule (ref), t_2 (ref), validateBasedOnBBoxes (ref), t_3 (ref), validateBasedOnAttachmentYPos (ref)
+	if p2.uploadCategory == validationEnumsModule.UploadCategory.FULL_BODY then
+		if getFFlagUGCValidateHeadAboveTorsoModule() then
+			validateHeadAboveTorso(p1, p2)
+		end
+		return
+	else
+		local rootInstance = p2.rootInstance
+		local assetType = p2.uploadEnum.assetType
 		
-		if var4 ~= nil then
-			local var5 = rootInstance:FindFirstChild(i)
-			local var6 = rootInstance:FindFirstChild(var4)
+		if not t_1[assetType] then return end
+		local var1 = constantsModule.ASSET_TYPE_INFO[assetType]
+		
+		if not var1 then return end
+		local renderMeshesData = p2.renderMeshesData
+		
+		if not renderMeshesData then return end
+		local var2, _, var3 = boundsCalculatorModule.calculateIndividualAssetPartsDataFromData(rootInstance, assetType, renderMeshesData)
+		
+		if not var2 then
+			p1:fetchError("Failed to calculate asset bounds data for extents check on " .. assetType.Name)
 			
-			if var5 and var6 then
-				local var7 = var6
-				local var8 = var5
+			return
+		end
+		for i, v in pairs(var1.subParts) do
+			local var4 = constantsModule.BODYPART_TO_PARENT[i]
+			
+			if var4 ~= nil then
+				local var5 = rootInstance:FindFirstChild(i)
+				local var6 = rootInstance:FindFirstChild(var4)
 				
-				if t_2[i] then
-					var7 = var5
-					var8 = var6
-				end
-				local name = v.rigAttachmentToParent.name
-				
-				if (if var3[var7.Name] and var3[var8.Name] then validateBasedOnBBoxes(var7, var8, var3, name, p1) else true) and t_3[assetType] then
-					validateBasedOnAttachmentYPos(var7, var8, name, p1)
+				if var5 and var6 then
+					local var7 = var6
+					local var8 = var5
+					
+					if t_2[i] then
+						var7 = var5
+						var8 = var6
+					end
+					local name = v.rigAttachmentToParent.name
+					
+					if (if var3[var7.Name] and var3[var8.Name] then validateBasedOnBBoxes(var7, var8, var3, name, p1) else true) and t_3[assetType] then
+						validateBasedOnAttachmentYPos(var7, var8, name, p1)
+					end
 				end
 			end
 		end

@@ -13,7 +13,6 @@ local t = {
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateTextureTransparency),
 	expectedFailures = {}
 }
 

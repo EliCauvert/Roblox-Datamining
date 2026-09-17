@@ -623,6 +623,8 @@ Common.Presence.Label.Online,ออนไลน์
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,แอนิเมชันยาวเกินไป ({duration} วินาที) แอนิเมชันท่าทางต้องมีความยาวไม่เกิน {maxLength} วินาที
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,แอนิเมชันสั้นเกินไป ({duration} วินาที) แอนิเมชันท่าทางต้องมีความยาวมากกว่า {minLength} วินาที
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,การจัดวางชิ้นส่วน Cage {cageName} ไม่ถูกต้อง: {upperPart} ไม่ได้อยู่เหนือ {lowerPart} ในตำแหน่งที่ถูกต้อง
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,ชิ้นส่วน {partName} ใน Cage {cageName} มีจุดตัด {actualCount} จุด โดยควรมีประมาณ {expectedCount} จุด ซึ่งอาจบ่งชี้ว่ามีรูปทรงเรขาคณิตในบริเวณดังกล่าวของร่างกายไม่ครบหรือซ้ำกัน
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,ร่างกายของคุณมีองค์ประกอบเมชขนาดเล็กที่ไม่เชื่อมต่อกัน (ส่วนย่อยของเมช) โปรดลบรูปทรงที่ลอยอยู่ออกและตรวจสอบให้แน่ใจว่าส่วนต่างๆ ของเมชทั้งหมดเชื่อมต่อกันอย่างถูกต้อง
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,คุณภาพของทรัพยากร: {partName} มีองค์ประกอบที่ไม่เชื่อมต่อกัน {num_disconnected_components} ชิ้น ซึ่งเกินจำนวนสูงสุดที่กำหนดไว้ที่ {max_disconnected_components} ชิ้น
 Common.UGCValidation.ErrorLabel.AQSInputDataError,ไม่สามารถคำนวณคะแนนคุณภาพได้อย่างถูกต้องเนื่องจากข้อมูลที่ป้อนไม่ถูกต้องหรือไม่สมบูรณ์ โปรดตรวจสอบโมเดลหรือกรอกรายงานจุดบกพร่อง
@@ -1197,7 +1199,6 @@ Feature.Accessibility.AppTheme.SuperCharge,ซูเปอร์ชาร์จ
 Feature.Accessibility.Description.AppThemeMode,เลือกโหมดแอป อุปกรณ์อื่นของคุณจะไม่ได้รับผลกระทบ
 Feature.Accessibility.Description.DeviceAppTheme,เลือกธีมแอป ธีมนี้จะปรากฏในอุปกรณ์ทุกประเภท
 Feature.Accessibility.Description.DeviceAppThemeExclusive,สำรวจธีมสุดพิเศษของ Plus เพื่อปรับแต่งประสบการณ์ของคุณ ลองใช้เลยและสมัครสมาชิกเพื่อบันทึกธีมที่เลือกไว้
-Feature.Accessibility.Description.DeviceAppThemeUpsell,สำรวจธีมพิเศษของ Plus เพื่อปรับแต่งประสบการณ์ของคุณ ลองใช้เลยและสมัครสมาชิกเพื่อบันทึกธีมที่เลือกไว้
 Feature.Accessibility.Description.Haptics,ควบคุมการสั่นโดยรวมของแอป Roblox
 Feature.Accessibility.Description.LaunchAtStartup,เปิด Roblox โดยอัตโนมัติเมื่อเปิดคอมพิวเตอร์
 Feature.Accessibility.Description.MinimizeToTray,การปิดหน้าต่างจะย่อให้ Roblox ไปอยู่ที่ถาดระบบ แทนที่จะออกจากโปรแกรมอย่างสมบูรณ์
@@ -2370,7 +2371,6 @@ Feature.Build.Label.Building,กำลังสร้าง...
 Feature.Build.Label.CaptureLibrary,คลังภาพที่จับไว้
 Feature.Build.Label.CaptureSelectionCount,เลือกแล้ว {SELECTED_COUNT} จาก {MAX_SELECTIONS} ภาพ
 Feature.Build.Label.ContentRating,การจัดระดับความเหมาะสมของเนื้อหา
-Feature.Build.Label.Created,สร้างแล้ว
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,ศูนย์กลางครีเอเตอร์
 Feature.Build.Label.DateRange,{startDate} – {endDate}
@@ -2394,7 +2394,6 @@ Feature.Build.Label.GamePlays,จำนวนการเล่นเกม
 Feature.Build.Label.GetMoreBuildUsage,รับโควต้าการใช้งาน Build เพิ่ม
 Feature.Build.Label.Hi,สวัสดี
 Feature.Build.Label.IconThumbnails,ไอคอนและภาพขนาดย่อ
-Feature.Build.Label.Images2D,ภาพ 2D
 Feature.Build.Label.InProgress,อยู่ระหว่างดำเนินการ
 Feature.Build.Label.InputNeeded,ต้องกรอกข้อมูล
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2404,7 +2403,6 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,การตั้งราคาแบบมีการจัดการ
 Feature.Build.Label.ManagedPricingMixed,ราคาคละกันในผลิตภัณฑ์ปัจจุบันทั้งหมด
 Feature.Build.Label.MaximizeForGamePlays,เพิ่มจำนวนการเล่นเกมให้สูงสุด
-Feature.Build.Label.Models3D,โมเดล 3D
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,ไม่จำกัด
 Feature.Build.Label.NotStarted,ยังไม่ได้เริ่ม
@@ -2422,7 +2420,6 @@ Feature.Build.Label.Private,ส่วนตัว
 Feature.Build.Label.Public,สาธารณะ
 Feature.Build.Label.PubliclyUnavailable,ไม่สามารถเข้าถึงได้แบบสาธารณะ
 Feature.Build.Label.Published,
-Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,พร้อม
 Feature.Build.Label.RegionalPricing,ราคาตามภูมิภาค
 Feature.Build.Label.ResetsDaily,รีเซ็ตทุกวัน
@@ -2431,14 +2428,11 @@ Feature.Build.Label.ResetsWeekly,รีเซ็ตทุกสัปดาห�
 Feature.Build.Label.RestoredVersion,กู้คืน {VERSION} แล้ว
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,ค้นหาทรัพยากร
 Feature.Build.Label.SearchGames,ค้นหาเกม
 Feature.Build.Label.SearchTasks,ค้นหางาน
 Feature.Build.Label.SelectOption,
-Feature.Build.Label.Shared,แชร์แล้ว
 Feature.Build.Label.ShopButton,ปุ่มร้านค้า
 Feature.Build.Label.ShopUi,UI ของร้านค้า
-Feature.Build.Label.Sounds,
 Feature.Build.Label.TargetAllRobloxPlayers,กำหนดเป้าหมายเป็นผู้เล่น Roblox ทั้งหมด
 Feature.Build.Label.Thinking,กำลังคิด
 Feature.Build.Label.Title,
@@ -2508,7 +2502,6 @@ Feature.Build.Label.UniverseNumber,ยูนิเวิร์ส {UNIVERSE_ID}
 Feature.Build.Label.Unknown,ไม่ทราบ
 Feature.Build.Label.UnlimitedUsed,ใช้ไปแล้ว {USED} • ไม่จำกัด
 Feature.Build.Label.UpdateTitleDesc,อัปเดตชื่อและคำอธิบาย
-Feature.Build.Label.Updated,อัปเดตเมื่อ
 Feature.Build.Label.Usage,โควต้าการใช้งาน
 Feature.Build.Label.UsageUsed,ใช้ไปแล้ว {USED}
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2529,8 +2522,6 @@ Feature.Build.Message.AdsStatsEmpty,เพิ่มกลุ่มเป้า�
 Feature.Build.Message.AdsStatsEmptyFree,เพิ่มกลุ่มเป้าหมายของคุณด้วยแคมเปญโฆษณาฟรีและทำให้เกมของคุณเป็นที่รู้จัก
 Feature.Build.Message.AllFriendsAdded,คุณเชิญเพื่อนทุกคนมาเป็นผู้ทดลองเล่นระยะแรกแล้ว
 Feature.Build.Message.AnswerBuildQuestion,ตอบคำถามของ Build ด้านล่าง
-Feature.Build.Message.AssetDetailsUnavailable,รายละเอียดทรัพยากรไม่พร้อมใช้งาน
-Feature.Build.Message.AssetsLoadFailed,ไม่สามารถโหลดทรัพยากรได้
 Feature.Build.Message.AudienceIneligible,ไม่มีสิทธิ์เผยแพร่ให้กลุ่มเป้าหมายนี้
 Feature.Build.Message.BuildAccountBlocked,บัญชีของคุณไม่สามารถใช้ Build ได้ในขณะนี้
 Feature.Build.Message.BuildBusy,Build ยุ่งอยู่ โปรดรอสักครู่แล้วลองอีกครั้ง
@@ -2562,7 +2553,6 @@ Feature.Build.Message.InvitesLoadFailed,ไม่สามารถโหลด�
 Feature.Build.Message.LimitBelowSpend,วงเงินต้องไม่น้อยกว่า {ALREADY_SPENT} Robux ที่ใช้ไปแล้วในวันนี้
 Feature.Build.Message.LinkCopied,คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว
 Feature.Build.Message.LoadingVersions,กำลังโหลดประวัติเวอร์ชัน...
-Feature.Build.Message.NoAssetsFound,ไม่พบทรัพยากร
 Feature.Build.Message.NoCapturesAvailable,ไม่มีภาพที่จับ
 Feature.Build.Message.NoDescriptionProvided,ไม่มีคำอธิบาย
 Feature.Build.Message.NoFriendsToAdd,คุณยังไม่มีเพื่อนให้เชิญ ลองหาผู้ใช้ที่จะเชื่อมต่อกันใน Roblox ก่อน
@@ -2617,7 +2607,6 @@ Feature.Build.Title.AddImages,เพิ่มภาพ
 Feature.Build.Title.AdsStatsEmpty,เริ่มใช้แคมเปญ
 Feature.Build.Title.AdsStatsEmptyFree,เริ่มใช้แคมเปญแรก
 Feature.Build.Title.ArchiveThisGame,เก็บเกมนี้ถาวรใช่ไหม?
-Feature.Build.Title.AssetLibrary,คลัง
 Feature.Build.Title.Audience,กลุ่มเป้าหมาย
 Feature.Build.Title.BuildQuestion,Build มีคำถาม
 Feature.Build.Title.BuildQuestions,Build มีอะไรจะถาม
@@ -3356,6 +3345,7 @@ Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,เล่นเดโม
+Feature.ExperienceDetails.PlayButtonText.Playtest,ตัวอย่าง
 Feature.ExperienceDetails.PlayButtonText.Unavailable,ไม่สามารถใช้งานได้
 Feature.ExperienceDetails.PlayButtonText.Unlock,ปลดล็อค
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -3613,7 +3603,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,เพื่อนที่เ�
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,เพิ่มเพื่อนที่เชื่อได้
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
-Feature.Friends.TrustedFriend.Label.Title,เพื่อนที่เชื่อได้
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} เป็นเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,ลบเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,ส่งคำขอเป็นเพื่อนที่เชื่อได้แล้ว
@@ -4008,7 +3997,9 @@ Feature.Moments.Action.AddVoice,เพิ่มเสียง
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
+Feature.Moments.Action.CreateVoiceover,สร้างเสียงบรรยาย
 Feature.Moments.Action.Delete,
+Feature.Moments.Action.DiscardChange,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,ขยาย
 Feature.Moments.Action.GenerateText,สร้างข้อความ
@@ -4017,6 +4008,7 @@ Feature.Moments.Action.GenerateTextFeedbackPolicy,ไม่เหมาะสม
 Feature.Moments.Action.Hide,ซ่อนรายละเอียด
 Feature.Moments.Action.HowToCapture,วิธีจับภาพ
 Feature.Moments.Action.Join,
+Feature.Moments.Action.KeepEditing,แก้ไขต่อ
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,ย่อ
 Feature.Moments.Action.Ok,
@@ -4026,9 +4018,11 @@ Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
 Feature.Moments.Action.Return,กลับไปยังแกลเลอรี
 Feature.Moments.Action.ReturnToEditing,กลับไปที่การแก้ไข
+Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,แสดงรายละเอียด
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,ตัดวิดีโอ
+Feature.Moments.Action.TryAgain,
 Feature.Moments.Description.CommunityStandards,ดูข้อมูลเพิ่มเติมเกี่ยวกับสิ่งที่คุณพูดได้และพูดไม่ได้ในมาตรฐานชุมชน
 Feature.Moments.Description.EmptyCapturesLibrary,ภาพที่คุณจับไว้จะปรากฏที่นี่
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,ข้อความนี้สร้างโดย AI โปรดตรวจสอบก่อนโพสต์ เพราะคุณจะเป็นผู้รับผิดชอบต่อข้อความที่เผยแพร่
@@ -4046,7 +4040,10 @@ Feature.Moments.Label.AttemptingJoinExperience,กำลังพยายาม
 Feature.Moments.Label.CaptureLibrary,คลังภาพที่จับไว้ของคุณ
 Feature.Moments.Label.DeleteMomentBody,คุณไม่สามารถกู้คืนโมเมนต์ได้เมื่อลบไปแล้ว
 Feature.Moments.Label.DeleteMomentTitle,ลบโมเมนต์ใช่ไหม?
+Feature.Moments.Label.DeleteVoiceoverBody,การดำเนินการนี้จะล้างข้อความและเสียงบรรยายของคุณ คุณสามารถเริ่มต้นใหม่ได้ทุกเมื่อ
+Feature.Moments.Label.DeleteVoiceoverTitle,ลบเสียงบรรยายใช่ไหม?
 Feature.Moments.Label.Error,
+Feature.Moments.Label.ExceedsCharacterLimit,เกินจำนวนอักขระที่กำหนด
 Feature.Moments.Label.FeedEndBody,กลับมาอีกครั้งในภายหลังหรือสร้างโมเมนต์ของคุณเอง
 Feature.Moments.Label.FeedEndTitle,ดูหมดแล้ว
 Feature.Moments.Label.FeedFailedToLoad,โหลดฟีดไม่สำเร็จ
@@ -4097,6 +4094,15 @@ Feature.Moments.Label.Tone.Funny,
 Feature.Moments.Label.Tone.Hype,ตื่นเต้น
 Feature.Moments.Label.Tone.Neutral,ปกติ
 Feature.Moments.Label.Videos,
+Feature.Moments.Label.VoiceCoachmarkBody,พิมพ์สคริปต์สำหรับคำบรรยายวิดีโอ
+Feature.Moments.Label.VoiceCoachmarkTitle,
+Feature.Moments.Label.VoiceGenerating,กำลังสร้างเสียงบรรยายของคุณ...
+Feature.Moments.Label.VoiceGenerationFailedBody,สร้างเสียงบรรยายไม่สำเร็จ
+Feature.Moments.Label.VoiceHelperDefault,ตัดเสียงให้มีความยาวเท่าวิดีโอ
+Feature.Moments.Label.VoiceLimitReachedBody,โปรดรอสักครู่แล้วลองอีกครั้ง
+Feature.Moments.Label.VoiceModerationError,สคริปต์ของคุณต้องเป็นไปตามกฎความปลอดภัย
+Feature.Moments.Label.VoicePlaceholder,พิมพ์สคริปต์เสียงบรรยายของคุณ สูงสุด {maxCount} อักขระ
+Feature.Moments.Label.VoiceTimeoutBody,การสร้างเสียงบรรยายหมดเวลา
 Feature.Moments.Title.GenerateTextFeedbackReason,มีอะไรผิดพลาด?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,ต้องการออกจากการสร้างสรรค์โมเมนต์ใช่ไหม?
@@ -4111,6 +4117,7 @@ Feature.NotApproved.Action.ReactivateAccount,เปิดใช้งานบ�
 Feature.NotApproved.Action.ReportMistake,รายงานข้อผิดพลาด
 Feature.NotApproved.Action.RuleConfirmation,ฉันยอมรับว่าเข้าใจและจะปฏิบัติตามกฎ
 Feature.NotApproved.Action.UserAgree,
+Feature.NotApproved.Action.ViewAppealGuidelines,ดูแนวทางการอุทธรณ์
 Feature.NotApproved.Action.ViewLess,ดูน้อยลง
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,ดูกฎ
@@ -4273,6 +4280,7 @@ Feature.NotApproved.Label.AbuseType.CheatandExploits,การโกงและ
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,การกระทำที่เป็นอันตรายต่อเด็ก
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V2,การแสวงหาประโยชน์จากเด็ก
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V3,เนื้อหา/พฤติกรรมที่เป็นอันตราย
+Feature.NotApproved.Label.AbuseType.ChildEndangerment.V4,ความปลอดภัยของเด็ก
 Feature.NotApproved.Label.AbuseType.ClickbaitAds,การโฆษณาแบบล่อลวงให้คลิก
 Feature.NotApproved.Label.AbuseType.Commerce,การค้า
 Feature.NotApproved.Label.AbuseType.CompromisedAccount,บัญชีถูกบุกรุก

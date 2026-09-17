@@ -640,6 +640,8 @@ Common.Presence.Label.Online,Online
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,Die Animation ist zu lang ({duration} Sekunden). Emote-Animationen dürfen höchstens {maxLength} Sekunden lang sein.
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,Die Animation ist zu kurz ({duration} Sekunden). Emote-Animationen müssen länger als {minLength} Sekunden sein.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,Verstoß gegen die Platzierung von Cage-Teilen in {cageName}: {upperPart} ist nicht korrekt über {lowerPart} positioniert.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"Das Cage-Teil {partName} in {cageName} hat {actualCount} Eckpunkte, erwartet werden ungefähr {expectedCount}. Dies kann auf fehlende oder doppelte Geometrie in diesem Körperbereich hinweisen."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,"Dein Körper enthält kleine, nicht verbundene Mesh-Komponenten (Mesh-Inseln). Bitte entferne die schwebende Geometrie und stelle sicher, dass alle Mesh-Teile korrekt verbunden sind."
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"Objektqualität: {partName} hat {num_disconnected_components} nicht verbundene Komponenten, was das Maximum von {max_disconnected_components} überschreitet."
 Common.UGCValidation.ErrorLabel.AQSInputDataError,"Die Qualitätsbewertung kann nicht richtig berechnet werden, da die eingegebenen Daten falsch oder unvollständig sind. Bitte überprüfe dein Modell oder erstelle einen Fehlerbericht."
@@ -1208,7 +1210,6 @@ Feature.Accessibility.AppTheme.SuperCharge,Superladung
 Feature.Accessibility.Description.AppThemeMode,Wähle einen App-Modus aus. Deine anderen Geräte sind davon nicht betroffen.
 Feature.Accessibility.Description.DeviceAppTheme,Wähle ein App-Design aus. Dieses wird auf allen Gerätetypen angezeigt.
 Feature.Accessibility.Description.DeviceAppThemeExclusive,"Entdecke exklusive Plus-Themen, um deine Experience individuell anzupassen. Probiere sie jetzt aus und schließe ein Abo ab, um deine Auswahl zu speichern."
-Feature.Accessibility.Description.DeviceAppThemeUpsell,
 Feature.Accessibility.Description.Haptics,Steuere die allgemeine Vibration der Roblox-App
 Feature.Accessibility.Description.LaunchAtStartup,"Roblox automatisch starten, wenn ich meinen Computer hochfahre"
 Feature.Accessibility.Description.MinimizeToTray,"Wenn du das Fenster schließt, wird Roblox in die Taskleiste verschoben, und nicht vollständig beendet"
@@ -2381,7 +2382,6 @@ Feature.Build.Label.Building,Wird erstellt …
 Feature.Build.Label.CaptureLibrary,Aufnahmen-Bibliothek
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} von {MAX_SELECTIONS} ausgewählt
 Feature.Build.Label.ContentRating,Altersfreigabe
-Feature.Build.Label.Created,Erstellt
 Feature.Build.Label.CreatedDate,{DAY}. {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Creator Hub
 Feature.Build.Label.DateRange,{startDate} – {endDate}
@@ -2405,7 +2405,6 @@ Feature.Build.Label.GamePlays,Spielaufrufe
 Feature.Build.Label.GetMoreBuildUsage,Mehr Build-Kontingent holen
 Feature.Build.Label.Hi,Hallo
 Feature.Build.Label.IconThumbnails,Symbol und Vorschaubilder
-Feature.Build.Label.Images2D,2D-Bilder
 Feature.Build.Label.InProgress,In Arbeit
 Feature.Build.Label.InputNeeded,Eingabe erforderlich
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2415,7 +2414,6 @@ Feature.Build.Label.Loading,Wird geladen …
 Feature.Build.Label.ManagedPricing,Verwaltete Preisgestaltung
 Feature.Build.Label.ManagedPricingMixed,Gemischt über aktuelle Produkte
 Feature.Build.Label.MaximizeForGamePlays,Für maximale Spielaufrufe optimieren
-Feature.Build.Label.Models3D,3D-Modelle
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Kein Limit
 Feature.Build.Label.NotStarted,Nicht begonnen
@@ -2433,7 +2431,6 @@ Feature.Build.Label.Private,Privat
 Feature.Build.Label.Public,Öffentlich
 Feature.Build.Label.PubliclyUnavailable,Öffentlich nicht verfügbar
 Feature.Build.Label.Published,
-Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Bereit
 Feature.Build.Label.RegionalPricing,Regionale Preisgestaltung
 Feature.Build.Label.ResetsDaily,Wird täglich zurückgesetzt
@@ -2442,14 +2439,11 @@ Feature.Build.Label.ResetsWeekly,Wird wöchentlich zurückgesetzt
 Feature.Build.Label.RestoredVersion,{VERSION} wurde wiederhergestellt
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,Objekte durchsuchen
 Feature.Build.Label.SearchGames,Spiele suchen
 Feature.Build.Label.SearchTasks,Aufgaben suchen
 Feature.Build.Label.SelectOption,Wähle eine Option
-Feature.Build.Label.Shared,Geteilt
 Feature.Build.Label.ShopButton,Kaufen-Button
 Feature.Build.Label.ShopUi,Shop-UI
-Feature.Build.Label.Sounds,Sounds
 Feature.Build.Label.TargetAllRobloxPlayers,Alle Roblox-Spieler erreichen
 Feature.Build.Label.Thinking,Denkt nach
 Feature.Build.Label.Title,Titel
@@ -2519,7 +2513,6 @@ Feature.Build.Label.UniverseNumber,Universum {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Unbekannt
 Feature.Build.Label.UnlimitedUsed,{USED} verwendet • Kein Limit
 Feature.Build.Label.UpdateTitleDesc,Titel und Beschreibung aktualisieren
-Feature.Build.Label.Updated,Aktualisiert
 Feature.Build.Label.Usage,Kontingent
 Feature.Build.Label.UsageUsed,{USED} verwendet
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2540,8 +2533,6 @@ Feature.Build.Message.AdsStatsEmpty,"Vergrößere deine Zielgruppe mit einer Wer
 Feature.Build.Message.AdsStatsEmptyFree,"Vergrößere deine Zielgruppe mit einer kostenlosen Werbekampagne und sorge dafür, dass dein Spiel besser entdeckt wird"
 Feature.Build.Message.AllFriendsAdded,Du hast alle deine Freunde als Vorabtester eingeladen.
 Feature.Build.Message.AnswerBuildQuestion,Beantworte unten die Frage von Build.
-Feature.Build.Message.AssetDetailsUnavailable,Objekt-Infos sind nicht verfügbar.
-Feature.Build.Message.AssetsLoadFailed,Objekte können nicht geladen werden.
 Feature.Build.Message.AudienceIneligible,Nicht für diese Zielgruppe zulässig
 Feature.Build.Message.BuildAccountBlocked,Build ist derzeit für dein Konto nicht verfügbar.
 Feature.Build.Message.BuildBusy,Build ist ausgelastet. Warte eine Minute und versuche es dann erneut.
@@ -2573,7 +2564,6 @@ Feature.Build.Message.InvitesLoadFailed,Einladungen konnten nicht geladen werden
 Feature.Build.Message.LimitBelowSpend,"Das Limit darf nicht unter den {ALREADY_SPENT} Robux liegen, die heute bereits ausgegeben wurden."
 Feature.Build.Message.LinkCopied,Link in Zwischenablage kopiert
 Feature.Build.Message.LoadingVersions,Versionsverlauf wird geladen …
-Feature.Build.Message.NoAssetsFound,Keine Objekte gefunden.
 Feature.Build.Message.NoCapturesAvailable,Keine Aufnahmen verfügbar
 Feature.Build.Message.NoDescriptionProvided,Keine Beschreibung vorhanden.
 Feature.Build.Message.NoFriendsToAdd,"Du hast noch keine Freunde, die du einladen kannst. Finde zuerst Personen, mit denen du dich auf Roblox verbinden kannst."
@@ -2628,7 +2618,6 @@ Feature.Build.Title.AddImages,Bilder hinzufügen
 Feature.Build.Title.AdsStatsEmpty,Kampagne starten
 Feature.Build.Title.AdsStatsEmptyFree,Deine erste Kampagne starten
 Feature.Build.Title.ArchiveThisGame,Dieses Spiel archivieren?
-Feature.Build.Title.AssetLibrary,Bibliothek
 Feature.Build.Title.Audience,Zielgruppe
 Feature.Build.Title.BuildQuestion,Build hat eine Frage
 Feature.Build.Title.BuildQuestions,Build hat ein paar Fragen
@@ -3367,6 +3356,7 @@ Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,Demo spielen
+Feature.ExperienceDetails.PlayButtonText.Playtest,
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,Freischalten
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -3624,7 +3614,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Neuer vertrauter Freund
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Vertrauten Freund hinzufügen
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Vertraute Freunde hinzufügen
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
-Feature.Friends.TrustedFriend.Label.Title,Vertrauter Freund
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} ist jetzt ein vertrauter Freund
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Vertrauter Freund entfernt
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Anfrage zum Hinzufügen als vertrauter Freund gesendet
@@ -3673,7 +3662,7 @@ Feature.GameDetails.Label.ChatFeatures,Chat-Funktionen
 Feature.GameDetails.Label.Community,Community
 Feature.GameDetails.Label.ContainsStrongLanguagePillWarning,Enthält Kraftausdrücke
 Feature.GameDetails.Label.ContentMaturity,
-Feature.GameDetails.Label.Created,
+Feature.GameDetails.Label.Created,Erstellt
 Feature.GameDetails.Label.Developer,Entwickler
 Feature.GameDetails.Label.DontLikeGame,Ich mag dieses Spiel nicht
 Feature.GameDetails.Label.DontLikeImage,Ich mag dieses Bild nicht
@@ -3721,7 +3710,7 @@ Feature.GameDetails.Label.Supported,Unterstützt
 Feature.GameDetails.Label.TellUsMorePlaceholder,Erzähle uns mehr
 Feature.GameDetails.Label.TooRepetitive,Zu repetitiv
 Feature.GameDetails.Label.Unavailable,
-Feature.GameDetails.Label.Updated,
+Feature.GameDetails.Label.Updated,Aktualisiert
 Feature.GameDetails.Label.Upvoted,Für gut befunden
 Feature.GameDetails.Label.Visits,
 Feature.GameDetails.Label.VoiceChat,
@@ -4019,7 +4008,9 @@ Feature.Moments.Action.AddVoice,Stimme hinzufügen
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
+Feature.Moments.Action.CreateVoiceover,Voiceover erstellen
 Feature.Moments.Action.Delete,
+Feature.Moments.Action.DiscardChange,Änderung löschen
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Erweitern
 Feature.Moments.Action.GenerateText,Text generieren
@@ -4028,6 +4019,7 @@ Feature.Moments.Action.GenerateTextFeedbackPolicy,Unangemessen oder verletzend
 Feature.Moments.Action.Hide,Details ausblenden
 Feature.Moments.Action.HowToCapture,So erstellst du Aufnahmen
 Feature.Moments.Action.Join,Mitmachen
+Feature.Moments.Action.KeepEditing,Weiter bearbeiten
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Minimieren
 Feature.Moments.Action.Ok,
@@ -4037,9 +4029,11 @@ Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
 Feature.Moments.Action.Return,Zurück zur Galerie
 Feature.Moments.Action.ReturnToEditing,Zurück zum Bearbeiten
+Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,Details anzeigen
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Video zuschneiden
+Feature.Moments.Action.TryAgain,
 Feature.Moments.Description.CommunityStandards,"In den Community-Regeln findest du weitere Informationen darüber, was du schreiben darfst und was nicht."
 Feature.Moments.Description.EmptyCapturesLibrary,Hier werden deine Aufnahmen angezeigt.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,"KI-generiert. Überprüfe den Inhalt vor der Veröffentlichung – du bist verantwortlich für das, was veröffentlicht wird."
@@ -4057,7 +4051,10 @@ Feature.Moments.Label.AttemptingJoinExperience,"Es wird versucht, {placeName} be
 Feature.Moments.Label.CaptureLibrary,Deine Aufnahmen-Bibliothek
 Feature.Moments.Label.DeleteMomentBody,"Du kannst einen Moment nicht wiederherstellen, wenn er einmal gelöscht wurde."
 Feature.Moments.Label.DeleteMomentTitle,Moment löschen?
+Feature.Moments.Label.DeleteVoiceoverBody,Dadurch werden dein Text und dein Voiceover gelöscht. Du kannst jederzeit von vorne anfangen.
+Feature.Moments.Label.DeleteVoiceoverTitle,Voiceover löschen?
 Feature.Moments.Label.Error,
+Feature.Moments.Label.ExceedsCharacterLimit,Zeichenlimit überschritten
 Feature.Moments.Label.FeedEndBody,Schau später nochmal vorbei oder erstelle deinen eigenen Moment.
 Feature.Moments.Label.FeedEndTitle,Du bist auf dem neuesten Stand
 Feature.Moments.Label.FeedFailedToLoad,Feed konnte nicht geladen werden
@@ -4108,6 +4105,15 @@ Feature.Moments.Label.Tone.Funny,Lustig
 Feature.Moments.Label.Tone.Hype,Hype
 Feature.Moments.Label.Tone.Neutral,Neutral
 Feature.Moments.Label.Videos,
+Feature.Moments.Label.VoiceCoachmarkBody,Skript für Videokommentar eingeben
+Feature.Moments.Label.VoiceCoachmarkTitle,
+Feature.Moments.Label.VoiceGenerating,Dein Voiceover wird erstellt …
+Feature.Moments.Label.VoiceGenerationFailedBody,Voiceover-Erstellung fehlgeschlagen.
+Feature.Moments.Label.VoiceHelperDefault,Sprache auf Videolänge zugeschnitten
+Feature.Moments.Label.VoiceLimitReachedBody,Warte eine Minute und versuche es dann erneut
+Feature.Moments.Label.VoiceModerationError,Dein Skript muss den Sicherheitsregeln entsprechen
+Feature.Moments.Label.VoicePlaceholder,Gib dein Voiceover-Skript ein. Maximal {maxCount} Zeichen
+Feature.Moments.Label.VoiceTimeoutBody,Zeitüberschreitung bei der Erstellung des Voiceovers.
 Feature.Moments.Title.GenerateTextFeedbackReason,Was ist schiefgelaufen?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment-Kreation verlassen?
@@ -4122,6 +4128,7 @@ Feature.NotApproved.Action.ReactivateAccount,Mein Konto wieder aktivieren
 Feature.NotApproved.Action.ReportMistake,Einen Fehler melden
 Feature.NotApproved.Action.RuleConfirmation,"Ich bestätige, dass ich die Regeln kenne und einhalte."
 Feature.NotApproved.Action.UserAgree,
+Feature.NotApproved.Action.ViewAppealGuidelines,Richtlinien für Widersprüche anzeigen
 Feature.NotApproved.Action.ViewLess,Weniger anzeigen
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,Regeln anzeigen
@@ -4284,6 +4291,7 @@ Feature.NotApproved.Label.AbuseType.CheatandExploits,Cheat und Exploits
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,Kindesgefährdung
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V2,Ausbeutung von Kindern
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V3,Schädliche Inhalte/Schädliches Verhalten
+Feature.NotApproved.Label.AbuseType.ChildEndangerment.V4,Kindersicherheit
 Feature.NotApproved.Label.AbuseType.ClickbaitAds,Clickbait-Werbung
 Feature.NotApproved.Label.AbuseType.Commerce,Handel
 Feature.NotApproved.Label.AbuseType.CompromisedAccount,Kontogefährdung

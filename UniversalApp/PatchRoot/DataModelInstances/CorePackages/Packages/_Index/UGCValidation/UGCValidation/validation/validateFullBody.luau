@@ -3,13 +3,11 @@ local analyticsModule = require(parent.Analytics)
 local constantsModule = require(parent.Constants)
 local constantsInterfaceModule = require(parent.ConstantsInterface)
 local getFFlagUGCValidateLegFullBodySeparationModule = require(parent.flags.getFFlagUGCValidateLegFullBodySeparation)
-local getFFlagUGCValidateMigrateBodyPartBoundsModule = require(parent.flags.getFFlagUGCValidateMigrateBodyPartBounds)
 local getFFlagUGCValidateMigrateCageGeometryModule = require(parent.flags.getFFlagUGCValidateMigrateCageGeometry)
 local getFFlagUGCValidateMigratePoseBlockingModule = require(parent.flags.getFFlagUGCValidateMigratePoseBlocking)
 local _ = require(parent.util.Types)
 local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
 local validateWithSchemaModule = require(parent.util.validateWithSchema)
-local validateAssetBoundsModule = require(parent.validation.validateAssetBounds)
 local validateSingleInstanceModule = require(parent.validation.validateSingleInstance)
 local validateBodyBlockingTestsModule = require(parent.util.ValidateBodyBlockingTests)
 local validateAssetBodyPartCagesModule = require(parent.validation.ValidateAssetBodyPartCages)
@@ -165,7 +163,7 @@ local function resetAllPhysicsData(value)
 end
 
 return function(p9)
-	-- upvalues: getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), r15plusUtilsModule (ref), constantsModule (ref), validateInstanceHierarchy (ref), resetAllPhysicsData (ref), failureReasonsAccumulatorModule (ref), createAllBodyPartsTable (ref), getFFlagUGCValidateMigratePoseBlockingModule (ref), validateBodyBlockingTestsModule (ref), analyticsModule (ref), getFFlagUGCValidateMigrateCageGeometryModule (ref), validateAssetBodyPartCagesModule (ref), getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), validateAssetBoundsModule (ref), getFFlagUGCValidateLegFullBodySeparationModule (ref), validateLegsSeparationModule (ref)
+	-- upvalues: getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), r15plusUtilsModule (ref), constantsModule (ref), validateInstanceHierarchy (ref), resetAllPhysicsData (ref), failureReasonsAccumulatorModule (ref), createAllBodyPartsTable (ref), getFFlagUGCValidateMigratePoseBlockingModule (ref), validateBodyBlockingTestsModule (ref), analyticsModule (ref), getFFlagUGCValidateMigrateCageGeometryModule (ref), validateAssetBodyPartCagesModule (ref), getFFlagUGCValidateLegFullBodySeparationModule (ref), validateLegsSeparationModule (ref)
 	assert(p9.fullBodyData ~= nil, "fullBodyData required in validationContext for validateFullBody")
 	local fullBodyData = p9.fullBodyData
 	local requireAllFolders = p9.requireAllFolders
@@ -193,9 +191,6 @@ return function(p9)
 				if getFFlagUGCValidateMigratePoseBlockingModule() or validateBodyBlockingTestsModule.validateAll(var11, p9) then
 					if not getFFlagUGCValidateMigrateCageGeometryModule() then
 						var10:updateReasons(validateAssetBodyPartCagesModule.validateFullBody(var11, p9))
-					end
-					if not getFFlagUGCValidateMigrateBodyPartBoundsModule() then
-						var10:updateReasons(validateAssetBoundsModule(var11, nil, p9))
 					end
 					if not getFFlagUGCValidateMigratePoseBlockingModule() and getFFlagUGCValidateLegFullBodySeparationModule() then
 						var10:updateReasons(validateLegsSeparationModule.validateFullBody(var11, p9))

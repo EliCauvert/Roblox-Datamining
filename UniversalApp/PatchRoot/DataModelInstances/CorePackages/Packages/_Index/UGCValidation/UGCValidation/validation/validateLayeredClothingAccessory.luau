@@ -2,7 +2,6 @@
 local _ = require(parent.util.Types)
 local analyticsModule = require(parent.Analytics)
 local constantsModule = require(parent.Constants)
-local constantsInterfaceModule = require(parent.ConstantsInterface)
 local validateLCCageQualityModule = require(parent.validation.validateLCCageQuality)
 local validateInstanceTreeModule = require(parent.validation.validateInstanceTree)
 local validateMeshTrianglesModule = require(parent.validation.validateMeshTriangles)
@@ -10,7 +9,6 @@ local validateModerationModule = require(parent.validation.validateModeration)
 local validateMaterialsModule = require(parent.validation.validateMaterials)
 local validateTagsModule = require(parent.validation.validateTags)
 local validateMeshBoundsModule = require(parent.validation.validateMeshBounds)
-local validateTextureSizeModule = require(parent.validation.validateTextureSize)
 local validatePropertyRequirementsModule = require(parent.validation.validatePropertyRequirements)
 local validateAttributesModule = require(parent.validation.validateAttributes)
 local validateMeshVertColorsModule = require(parent.validation.validateMeshVertColors)
@@ -27,7 +25,6 @@ local validateTotalSurfaceAreaModule = require(parent.validation.validateTotalSu
 local validateCoplanarIntersectionModule = require(parent.validation.validateCoplanarIntersection)
 local validateMaxCubeDensityModule = require(parent.validation.validateMaxCubeDensity)
 local validateHSRDataModule = require(parent.validation.ValidateHSRData)
-local validateSurfaceAppearanceTextureSizeModule = require(parent.validation.validateSurfaceAppearanceTextureSize)
 local validateTexturePackModule = require(parent.validation.ValidateTexturePack)
 local rigidOrLayeredAllowedModule = require(parent.util.RigidOrLayeredAllowed)
 local createLayeredClothingSchemaModule = require(parent.util.createLayeredClothingSchema)
@@ -40,18 +37,15 @@ local getExpectedPartSizeModule = require(parent.util.getExpectedPartSize)
 local pcallDeferredModule = require(parent.util.pcallDeferred)
 local getFIntUGCValidationLCHandleScaleOffsetMaximumModule = require(parent.flags.getFIntUGCValidationLCHandleScaleOffsetMaximum)
 local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
-local getFFlagUGCValidateAccessoryAssetTextureLimitModule = require(parent.flags.getFFlagUGCValidateAccessoryAssetTextureLimit)
-local getFFlagUGCValidateLayeredClothingAssetSurfaceAppearanceTextureLimitsModule = require(parent.flags.getFFlagUGCValidateLayeredClothingAssetSurfaceAppearanceTextureLimits)
 local getFFlagUGCValidateTexturePackModule = require(parent.flags.getFFlagUGCValidateTexturePack)
 local getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule = require(parent.flags.getFFlagUGCValidateEyebrowEyelashThumbnailSchema)
 local validateMeshPartOnlySkinnedToR15Module = require(parent.validation.ValidateMeshPartOnlySkinnedToR15)
 local getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule = require(parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning)
 local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
-local getFFlagUGCValidateMigrateTextureTransparencyModule = require(parent.flags.getFFlagUGCValidateMigrateTextureTransparency)
 local getFFlagUGCValidateMigrateCageGeometryModule = require(parent.flags.getFFlagUGCValidateMigrateCageGeometry)
 
 return function(p1)
-	-- upvalues: rigidOrLayeredAllowedModule (ref), analyticsModule (ref), constantsModule (ref), validateSingleInstanceModule (ref), getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule (ref), createEyebrowEyelashSchemaModule (ref), createLayeredClothingSchemaModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), validateDependenciesModule (ref), getEditableMeshFromContextModule (ref), getEditableImageFromContextModule (ref), pcallDeferredModule (ref), getMeshSizeModule (ref), getExpectedPartSizeModule (ref), getFIntUGCValidationLCHandleScaleOffsetMaximumModule (ref), getAttachmentModule (ref), validateMaterialsModule (ref), validatePropertyRequirementsModule (ref), validateTagsModule (ref), validateAttributesModule (ref), getFFlagUGCValidateMigrateTextureTransparencyModule (ref), getFFlagUGCValidateAccessoryAssetTextureLimitModule (ref), constantsInterfaceModule (ref), validateTextureSizeModule (ref), getFFlagUGCValidateLayeredClothingAssetSurfaceAppearanceTextureLimitsModule (ref), validateSurfaceAppearanceTextureSizeModule (ref), validateScaleTypeModule (ref), validateThumbnailConfigurationModule (ref), validateHSRModule (ref), validateHSRDataModule (ref), validateModerationModule (ref), validateTotalSurfaceAreaModule (ref), validateMeshSizePropertyModule (ref), validateMeshBoundsModule (ref), validateMeshTrianglesModule (ref), validateMeshVertColorsModule (ref), validateCoplanarIntersectionModule (ref), validateMaxCubeDensityModule (ref), validateLCCageQualityModule (ref), getFFlagUGCValidateMigrateCageGeometryModule (ref), validateLayeredClothingInRenderBoundsModule (ref), getFFlagUGCValidateTexturePackModule (ref), validateTexturePackModule (ref), getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule (ref), validateSkinningTransferModule (ref), validateMeshPartOnlySkinnedToR15Module (ref)
+	-- upvalues: rigidOrLayeredAllowedModule (ref), analyticsModule (ref), constantsModule (ref), validateSingleInstanceModule (ref), getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule (ref), createEyebrowEyelashSchemaModule (ref), createLayeredClothingSchemaModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), validateDependenciesModule (ref), getEditableMeshFromContextModule (ref), getEditableImageFromContextModule (ref), pcallDeferredModule (ref), getMeshSizeModule (ref), getExpectedPartSizeModule (ref), getFIntUGCValidationLCHandleScaleOffsetMaximumModule (ref), getAttachmentModule (ref), validateMaterialsModule (ref), validatePropertyRequirementsModule (ref), validateTagsModule (ref), validateAttributesModule (ref), validateScaleTypeModule (ref), validateThumbnailConfigurationModule (ref), validateHSRModule (ref), validateHSRDataModule (ref), validateModerationModule (ref), validateTotalSurfaceAreaModule (ref), validateMeshSizePropertyModule (ref), validateMeshBoundsModule (ref), validateMeshTrianglesModule (ref), validateMeshVertColorsModule (ref), validateCoplanarIntersectionModule (ref), validateMaxCubeDensityModule (ref), validateLCCageQualityModule (ref), getFFlagUGCValidateMigrateCageGeometryModule (ref), validateLayeredClothingInRenderBoundsModule (ref), getFFlagUGCValidateTexturePackModule (ref), validateTexturePackModule (ref), getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule (ref), validateSkinningTransferModule (ref), validateMeshPartOnlySkinnedToR15Module (ref)
 	local instances = p1.instances
 	local assetTypeEnum = p1.assetTypeEnum
 	local isServer = p1.isServer
@@ -208,172 +202,154 @@ return function(p1)
 			var14 = false
 		end
 	end
-	if not getFFlagUGCValidateMigrateTextureTransparencyModule() then
-		local var36, var37 = validateTextureSizeModule(t_2, true, p1, if getFFlagUGCValidateAccessoryAssetTextureLimitModule() then constantsInterfaceModule.getTextureLimit(assetTypeEnum, handle, t_2.fieldName) else nil)
-		local var38 = var37
-		
-		if not var36 then
-			table.insert(t, table.concat(var38, "\n"))
-			var14 = false
-		end
-		if getFFlagUGCValidateLayeredClothingAssetSurfaceAppearanceTextureLimitsModule() then
-			local var39, var40 = validateSurfaceAppearanceTextureSizeModule(var5, p1)
-			local var41 = var40
-			
-			if not var39 then
-				table.insert(t, table.concat(var41, "\n"))
-				var14 = false
-			end
-		end
-	end
 	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
 		local avatarPartScaleType = handle:FindFirstChild("AvatarPartScaleType")
 		
 		if avatarPartScaleType and avatarPartScaleType:IsA("StringValue") then
-			local var42, var43 = validateScaleTypeModule(avatarPartScaleType, p1)
-			local var44 = var43
+			local var36, var37 = validateScaleTypeModule(avatarPartScaleType, p1)
+			local var38 = var37
 			
-			if not var42 then
-				table.insert(t, table.concat(var44, "\n"))
+			if not var36 then
+				table.insert(t, table.concat(var38, "\n"))
 				var14 = false
 			end
 		end
 	end
 	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() and not var4 then
-		local var45, var46 = validateThumbnailConfigurationModule(var5, handle, t_1, var23, p1)
-		local var47 = var46
+		local var39, var40 = validateThumbnailConfigurationModule(var5, handle, t_1, var23, p1)
+		local var41 = var40
 		
-		if not var45 then
-			table.insert(t, table.concat(var47, "\n"))
+		if not var39 then
+			table.insert(t, table.concat(var41, "\n"))
 			var14 = false
 		end
 	end
-	local var48
+	local var42
 	local wrapLayer = handle:FindFirstChildOfClass("WrapLayer")
 	
 	if wrapLayer == nil then
 		analyticsModule.reportFailure(analyticsModule.ErrorType.validateLayeredClothingAccessory_NoWrapLayer, nil, p1)
 		table.insert(t, string.format("Missing WrapLayer on layered clothing accessory %s. You need to create a child WrapLayer and try again.", var5.Name))
-		var48 = false
+		var42 = false
 	elseif not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-		local var49, var50 = validateHSRModule(wrapLayer, p1)
-		local var51 = var50
+		local var43, var44 = validateHSRModule(wrapLayer, p1)
+		local var45 = var44
 		
-		if not var49 then
-			table.insert(t, table.concat(var51, "\n"))
+		if not var43 then
+			table.insert(t, table.concat(var45, "\n"))
 			var14 = false
 		end
 	end
 	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
 		if not p1.allowEditableInstances then
-			local var52, var53 = validateHSRDataModule.validate(wrapLayer, p1)
-			local var54 = var53
+			local var46, var47 = validateHSRDataModule.validate(wrapLayer, p1)
+			local var48 = var47
 			
-			if not var52 then
-				table.insert(t, table.concat(var54, "\n"))
-				var48 = false
-				var48 = var14
+			if not var46 then
+				table.insert(t, table.concat(var48, "\n"))
+				var42 = false
+				var42 = var14
 			end
-			var48 = var14
+			var42 = var14
 		end
-		var48 = var14
+		var42 = var14
 	end
 	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() and (if allowUnreviewedAssets then false else not isServer) then
-		local var55, var56 = validateModerationModule(var5, {}, p1)
-		local var57 = var56
+		local var49, var50 = validateModerationModule(var5, {}, p1)
+		local var51 = var50
 		
-		if not var55 then
-			table.insert(t, table.concat(var57, "\n"))
-			var48 = false
+		if not var49 then
+			table.insert(t, table.concat(var51, "\n"))
+			var42 = false
 		end
 	end
-	local var58, var59 = validateTotalSurfaceAreaModule(t_1, var23, p1)
+	local var52, var53 = validateTotalSurfaceAreaModule(t_1, var23, p1)
+	
+	if not var52 then
+		table.insert(t, table.concat(var53, "\n"))
+		var42 = false
+	end
+	local var54, var55 = validateMeshSizePropertyModule.validateSingleMeshPart(handle, p1)
+	
+	if not var54 then
+		table.insert(t, table.concat(var55, "\n"))
+		var42 = false
+	end
+	local var56, var57 = validateMeshBoundsModule(handle, var24, t_1, var23, name, assetTypeEnum.Name, p1)
+	
+	if not var56 then
+		table.insert(t, table.concat(var57, "\n"))
+		var42 = false
+	end
+	local var58, var59 = validateMeshTrianglesModule(t_1, nil, p1)
 	
 	if not var58 then
 		table.insert(t, table.concat(var59, "\n"))
-		var48 = false
+		var42 = false
 	end
-	local var60, var61 = validateMeshSizePropertyModule.validateSingleMeshPart(handle, p1)
+	local var60, var61 = validateMeshVertColorsModule(t_1, false, p1)
 	
 	if not var60 then
 		table.insert(t, table.concat(var61, "\n"))
-		var48 = false
+		var42 = false
 	end
-	local var62, var63 = validateMeshBoundsModule(handle, var24, t_1, var23, name, assetTypeEnum.Name, p1)
+	local var62, var63 = validateCoplanarIntersectionModule(t_1, var23, p1)
+	local var64 = var63
 	
 	if not var62 then
-		table.insert(t, table.concat(var63, "\n"))
-		var48 = false
+		table.insert(t, table.concat(var64, "\n"))
+		var42 = false
 	end
-	local var64, var65 = validateMeshTrianglesModule(t_1, nil, p1)
+	local var65, var66 = validateMaxCubeDensityModule(t_1, p1, var23)
 	
-	if not var64 then
-		table.insert(t, table.concat(var65, "\n"))
-		var48 = false
+	if not var65 then
+		table.insert(t, table.concat(var66, "\n"))
+		var42 = false
 	end
-	local var66, var67 = validateMeshVertColorsModule(t_1, false, p1)
+	local var67, var68 = validateLCCageQualityModule(var5, t_1, p1)
+	local var69 = var68
 	
-	if not var66 then
-		table.insert(t, table.concat(var67, "\n"))
-		var48 = false
-	end
-	local var68, var69 = validateCoplanarIntersectionModule(t_1, var23, p1)
-	local var70 = var69
-	
-	if not var68 then
-		table.insert(t, table.concat(var70, "\n"))
-		var48 = false
-	end
-	local var71, var72 = validateMaxCubeDensityModule(t_1, p1, var23)
-	
-	if not var71 then
-		table.insert(t, table.concat(var72, "\n"))
-		var48 = false
-	end
-	local var73, var74 = validateLCCageQualityModule(var5, t_1, p1)
-	local var75 = var74
-	
-	if not var73 then
-		for i, v in var75 do
+	if not var67 then
+		for i, v in var69 do
 			table.insert(t, v)
 		end
-		var48 = false
+		var42 = false
 	end
 	if not getFFlagUGCValidateMigrateCageGeometryModule() then
-		local var76, var77 = validateLayeredClothingInRenderBoundsModule(var5, p1)
+		local var70, var71 = validateLayeredClothingInRenderBoundsModule(var5, p1)
+		local var72 = var71
+		
+		if not var70 then
+			table.insert(t, table.concat(var72, "\n"))
+			var42 = false
+		end
+	end
+	if getFFlagUGCValidateTexturePackModule() then
+		local var73, var74 = validateTexturePackModule.validate(var5, false, p1)
+		local var75 = var74
+		
+		if not var73 then
+			table.insert(t, table.concat(var75, "\n"))
+			var42 = false
+		end
+	end
+	if not getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule() then
+		local var76, var77 = validateSkinningTransferModule(handle, p1)
 		local var78 = var77
 		
 		if not var76 then
 			table.insert(t, table.concat(var78, "\n"))
-			var48 = false
-		end
-	end
-	if getFFlagUGCValidateTexturePackModule() then
-		local var79, var80 = validateTexturePackModule.validate(var5, false, p1)
-		local var81 = var80
-		
-		if not var79 then
-			table.insert(t, table.concat(var81, "\n"))
-			var48 = false
-		end
-	end
-	if not getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule() then
-		local var82, var83 = validateSkinningTransferModule(handle, p1)
-		local var84 = var83
-		
-		if not var82 then
-			table.insert(t, table.concat(var84, "\n"))
-			var48 = false
+			var42 = false
 		end
 		if not constantsModule.SkinningTransferRequiredTypes[assetTypeEnum] then
-			local var85, var86 = validateMeshPartOnlySkinnedToR15Module.validateMeshPart(handle, p1)
-			local var87 = var86
+			local var79, var80 = validateMeshPartOnlySkinnedToR15Module.validateMeshPart(handle, p1)
+			local var81 = var80
 			
-			if not var85 then
-				table.insert(t, table.concat(var87, "\n"))
-				var48 = false
+			if not var79 then
+				table.insert(t, table.concat(var81, "\n"))
+				var42 = false
 			end
 		end
 	end
-	return var48, t
+	return var42, t
 end

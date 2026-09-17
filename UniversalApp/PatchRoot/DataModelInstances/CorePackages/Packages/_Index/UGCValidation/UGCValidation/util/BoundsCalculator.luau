@@ -9,7 +9,6 @@ local getMeshInfoModule = require(parent.util.getMeshInfo)
 local boundsDataUtilsModule = require(parent.util.BoundsDataUtils)
 local getExpectedPartSizeModule = require(parent.util.getExpectedPartSize)
 local getFFlagUGCValidateLegFullBodySeparationModule = require(parent.flags.getFFlagUGCValidateLegFullBodySeparation)
-local getFFlagUGCValidateMigrateBodyPartBoundsModule = require(parent.flags.getFFlagUGCValidateMigrateBodyPartBounds)
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getAttachmentCFrameInPartSpaceModule = require(parent.util.getAttachmentCFrameInPartSpace)
 local t = {}
@@ -135,13 +134,13 @@ local function calculateAllPartsBoundsData(p13, p14, p15, p16)
 			end
 			return var7, var13
 		end
-		var7, var47, var48 = calculateBoundsDataForPart(var9, var8, v, p15, p16)
+		var7, var46, var47 = calculateBoundsDataForPart(var9, var8, v, p15, p16)
 		
 		if var7 then
-			t[i] = var48
+			t[i] = var47
 			continue
 		end
-		return var7, var47
+		return var7, var46
 	end
 	return true, nil, t
 end
@@ -270,15 +269,12 @@ function t.calculateFullBodyBounds(p24, p25)
 end
 
 function t.calculateAssetBoundsFromData(value, p24, p25)
-	-- upvalues: getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), buildValidationContextFromRenderMeshes (ref), t (ref)
-	assert(getFFlagUGCValidateMigrateBodyPartBoundsModule(), "calculateAssetBoundsFromData requires FFlagUGCValidateMigrateBodyPartBounds")
-	
+	-- upvalues: buildValidationContextFromRenderMeshes (ref), t (ref)
 	return t.calculateAssetBounds(value, buildValidationContextFromRenderMeshes(value, p24, p25))
 end
 
 function t.calculateFullBodyBoundsFromData(p24, p25)
-	-- upvalues: getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), buildValidationContextFromRenderMeshes (ref), t (ref)
-	assert(getFFlagUGCValidateMigrateBodyPartBoundsModule(), "calculateFullBodyBoundsFromData requires FFlagUGCValidateMigrateBodyPartBounds")
+	-- upvalues: buildValidationContextFromRenderMeshes (ref), t (ref)
 	local var26 = next(p24)
 	
 	if var26 then
@@ -288,9 +284,7 @@ function t.calculateFullBodyBoundsFromData(p24, p25)
 end
 
 function t.calculateIndividualAssetPartsDataFromData(value, p24, p25)
-	-- upvalues: getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), buildValidationContextFromRenderMeshes (ref), t (ref)
-	assert(getFFlagUGCValidateMigrateBodyPartBoundsModule(), "calculateIndividualAssetPartsDataFromData requires FFlagUGCValidateMigrateBodyPartBounds")
-	
+	-- upvalues: buildValidationContextFromRenderMeshes (ref), t (ref)
 	return t.calculateIndividualAssetPartsData(value, buildValidationContextFromRenderMeshes(value, p24, p25))
 end
 

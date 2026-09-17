@@ -640,6 +640,8 @@ Common.Presence.Label.Online,Trực Tuyến
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,Hiệu ứng động quá dài ({duration} giây). Hiệu ứng động biểu cảm chỉ được dài tối đa {maxLength} giây.
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,Hiệu ứng động quá ngắn ({duration} giây). Hiệu ứng động biểu cảm phải dài hơn {minLength} giây.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,Vị trí đặt bộ phận khung bao trong {cageName} vi phạm quy định: {upperPart} chưa được đặt đúng phía trên {lowerPart}.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"Bộ phận khung bao {partName} trong {cageName} có {actualCount} đỉnh, trong khi số lượng dự kiến là khoảng {expectedCount}. Điều này có thể là do thiếu hoặc bị trùng lặp cấu trúc hình học ở vùng đó trên thân."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Thân của bạn chứa một số mảng lưới nhỏ không liên kết với nhau (mesh island). Vui lòng xóa các chi tiết nổi và đảm bảo tất cả các mảng lưới được liên kết với nhau.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,Chất lượng tài sản: {partName} có {num_disconnected_components} thành phần bị ngắt kết nối. Số lượng này vượt quá giới hạn tối đa là {max_disconnected_components} thành phần.
 Common.UGCValidation.ErrorLabel.AQSInputDataError,Không thể tính toán điểm chất lượng đúng cách do dữ liệu đầu vào không chính xác hoặc không đầy đủ. Vui lòng kiểm tra mô hình của bạn hoặc gửi báo cáo lỗi
@@ -1214,7 +1216,6 @@ Feature.Accessibility.AppTheme.SuperCharge,Năng lượng bứt phá
 Feature.Accessibility.Description.AppThemeMode,Chọn giao diện cho ứng dụng. Việc này không ảnh hưởng đến những thiết bị khác mà bạn dùng.
 Feature.Accessibility.Description.DeviceAppTheme,Chọn một chủ đề cho ứng dụng. Chủ đề này sẽ được áp dụng cho mọi loại thiết bị.
 Feature.Accessibility.Description.DeviceAppThemeExclusive,Khám phá các chủ đề dành riêng cho gói Plus để tùy chỉnh trải nghiệm của bạn. Thử ngay và đăng ký để lưu chủ đề bạn chọn.
-Feature.Accessibility.Description.DeviceAppThemeUpsell,
 Feature.Accessibility.Description.Haptics,Kiểm soát độ rung tổng thể của ứng dụng Roblox
 Feature.Accessibility.Description.LaunchAtStartup,Tự động mở Roblox khi tôi khởi động máy tính
 Feature.Accessibility.Description.MinimizeToTray,Đóng cửa sổ sẽ đưa Roblox vào khay hệ thống thay vì thoát hoàn toàn
@@ -2387,7 +2388,6 @@ Feature.Build.Label.Building,Đang xây dựng...
 Feature.Build.Label.CaptureLibrary,Thư viện ảnh/video
 Feature.Build.Label.CaptureSelectionCount,Đã chọn {SELECTED_COUNT}/{MAX_SELECTIONS}
 Feature.Build.Label.ContentRating,Mức phân loại nội dung
-Feature.Build.Label.Created,Thời gian tạo
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} năm {YEAR}
 Feature.Build.Label.CreatorHub,Trung tâm nhà sáng tạo
 Feature.Build.Label.DateRange,{startDate} – {endDate}
@@ -2411,7 +2411,6 @@ Feature.Build.Label.GamePlays,Lượt chơi
 Feature.Build.Label.GetMoreBuildUsage,Mua thêm lượt sử dụng Build
 Feature.Build.Label.Hi,Xin chào
 Feature.Build.Label.IconThumbnails,Biểu tượng và hình nhỏ
-Feature.Build.Label.Images2D,Hình ảnh 2D
 Feature.Build.Label.InProgress,Đang thực hiện
 Feature.Build.Label.InputNeeded,Cần thông tin đầu vào
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2421,7 +2420,6 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Giá được quản lý
 Feature.Build.Label.ManagedPricingMixed,Kết hợp trên các sản phẩm hiện tại
 Feature.Build.Label.MaximizeForGamePlays,Tăng tối đa lượt chơi
-Feature.Build.Label.Models3D,Mô hình 3D
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Không giới hạn
 Feature.Build.Label.NotStarted,Chưa bắt đầu
@@ -2439,7 +2437,6 @@ Feature.Build.Label.Private,
 Feature.Build.Label.Public,Công khai
 Feature.Build.Label.PubliclyUnavailable,Chưa phát hành công khai
 Feature.Build.Label.Published,
-Feature.Build.Label.Purchased,Đã mua
 Feature.Build.Label.Ready,Sẵn sàng
 Feature.Build.Label.RegionalPricing,Giá theo vùng
 Feature.Build.Label.ResetsDaily,Làm mới hằng ngày
@@ -2448,14 +2445,11 @@ Feature.Build.Label.ResetsWeekly,Đặt lại hằng tuần
 Feature.Build.Label.RestoredVersion,Đã khôi phục {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,Tìm kiếm tài sản
 Feature.Build.Label.SearchGames,Tìm kiếm trò chơi
 Feature.Build.Label.SearchTasks,Tìm kiếm nhiệm vụ
 Feature.Build.Label.SelectOption,Chọn một tùy chọn
-Feature.Build.Label.Shared,Đã chia sẻ
 Feature.Build.Label.ShopButton,Nút Cửa hàng
 Feature.Build.Label.ShopUi,UI cửa hàng
-Feature.Build.Label.Sounds,Âm thanh
 Feature.Build.Label.TargetAllRobloxPlayers,Nhắm đến tất cả người chơi Roblox
 Feature.Build.Label.Thinking,Đang tư duy
 Feature.Build.Label.Title,Tiêu đề
@@ -2525,7 +2519,6 @@ Feature.Build.Label.UniverseNumber,Vũ trụ {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Không xác định
 Feature.Build.Label.UnlimitedUsed,Đã dùng {USED} • Không giới hạn
 Feature.Build.Label.UpdateTitleDesc,Cập nhật tiêu đề và mô tả
-Feature.Build.Label.Updated,Thời gian cập nhật
 Feature.Build.Label.Usage,Sử dụng
 Feature.Build.Label.UsageUsed,Đã dùng {USED}
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2546,8 +2539,6 @@ Feature.Build.Message.AdsStatsEmpty,Thu hút thêm người chơi bằng một c
 Feature.Build.Message.AdsStatsEmptyFree,Thu hút thêm người chơi bằng chiến dịch quảng cáo miễn phí và giúp trò chơi của bạn tiếp cận được nhiều người hơn
 Feature.Build.Message.AllFriendsAdded,Bạn đã mời tất cả bạn bè tham gia thử nghiệm sớm.
 Feature.Build.Message.AnswerBuildQuestion,Trả lời câu hỏi của Build ở bên dưới.
-Feature.Build.Message.AssetDetailsUnavailable,Không có chi tiết về tài sản.
-Feature.Build.Message.AssetsLoadFailed,Không thể tải tài sản.
 Feature.Build.Message.AudienceIneligible,Không đủ điều kiện cho đối tượng này
 Feature.Build.Message.BuildAccountBlocked,Tài khoản của bạn chưa sử dụng được Build vào lúc này.
 Feature.Build.Message.BuildBusy,Build đang bận. Hãy đợi một lát rồi thử lại.
@@ -2579,7 +2570,6 @@ Feature.Build.Message.InvitesLoadFailed,Không tải được lời mời
 Feature.Build.Message.LimitBelowSpend,Giới hạn không được thấp hơn con số {ALREADY_SPENT} Robux đã chi tiêu hôm nay.
 Feature.Build.Message.LinkCopied,Đã sao chép đường liên kết vào bộ nhớ tạm.
 Feature.Build.Message.LoadingVersions,Đang tải lịch sử phiên bản...
-Feature.Build.Message.NoAssetsFound,Không tìm thấy tài sản nào.
 Feature.Build.Message.NoCapturesAvailable,Không có ảnh chụp nào
 Feature.Build.Message.NoDescriptionProvided,Không có mô tả nào được cung cấp.
 Feature.Build.Message.NoFriendsToAdd,Bạn chưa có bạn bè để mời. Trước tiên bạn cần tìm người để kết bạn trên Roblox.
@@ -2634,7 +2624,6 @@ Feature.Build.Title.AddImages,Thêm hình ảnh
 Feature.Build.Title.AdsStatsEmpty,Khởi tạo chiến dịch
 Feature.Build.Title.AdsStatsEmptyFree,Khởi tạo chiến dịch đầu tiên của bạn
 Feature.Build.Title.ArchiveThisGame,Lưu trữ trò chơi này?
-Feature.Build.Title.AssetLibrary,Thư viện
 Feature.Build.Title.Audience,Đối tượng
 Feature.Build.Title.BuildQuestion,Build có một câu hỏi
 Feature.Build.Title.BuildQuestions,Build có một số câu hỏi
@@ -3373,6 +3362,7 @@ Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,Chơi bản demo
+Feature.ExperienceDetails.PlayButtonText.Playtest,
 Feature.ExperienceDetails.PlayButtonText.Unavailable,Không Khả Dụng
 Feature.ExperienceDetails.PlayButtonText.Unlock,Mở khóa
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -3630,7 +3620,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Bạn bè đáng tin cậy mới
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Thêm bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
-Feature.Friends.TrustedFriend.Label.Title,Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} đã trở thành bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Đã xóa Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Đã gửi yêu cầu trở thành bạn bè đáng tin cậy
@@ -4025,7 +4014,9 @@ Feature.Moments.Action.AddVoice,Thêm giọng nói
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
+Feature.Moments.Action.CreateVoiceover,Tạo phần thuyết minh
 Feature.Moments.Action.Delete,
+Feature.Moments.Action.DiscardChange,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Mở rộng
 Feature.Moments.Action.GenerateText,Tạo văn bản
@@ -4034,6 +4025,7 @@ Feature.Moments.Action.GenerateTextFeedbackPolicy,Không phù hợp hoặc vi ph
 Feature.Moments.Action.Hide,Ẩn chi tiết
 Feature.Moments.Action.HowToCapture,Cách Chụp ảnh/quay màn hình
 Feature.Moments.Action.Join,
+Feature.Moments.Action.KeepEditing,Tiếp tục chỉnh sửa
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Thu nhỏ
 Feature.Moments.Action.Ok,
@@ -4043,9 +4035,11 @@ Feature.Moments.Action.Report,Báo cáo
 Feature.Moments.Action.Retry,
 Feature.Moments.Action.Return,Quay lại Thư viện
 Feature.Moments.Action.ReturnToEditing,Quay lại Bản chỉnh sửa
+Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,Hiển thị chi tiết
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Cắt video
+Feature.Moments.Action.TryAgain,
 Feature.Moments.Description.CommunityStandards,Xem Tiêu chuẩn cộng đồng để biết thêm thông tin về những điều bạn được phép và không được phép nói.
 Feature.Moments.Description.EmptyCapturesLibrary,Ảnh chụp/video quay màn hình của bạn sẽ xuất hiện ở đây.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Do AI tạo. Vui lòng duyệt lại trước khi đăng. Bạn là người chịu trách nhiệm về nội dung đăng tải.
@@ -4063,7 +4057,10 @@ Feature.Moments.Label.AttemptingJoinExperience,Đang thử tham gia {placeName}.
 Feature.Moments.Label.CaptureLibrary,Thư viện Ảnh chụp/video quay màn hình của bạn
 Feature.Moments.Label.DeleteMomentBody,Bạn không thể khôi phục một Khoảnh khắc sau khi đã xóa.
 Feature.Moments.Label.DeleteMomentTitle,Xóa Khoảnh khắc?
+Feature.Moments.Label.DeleteVoiceoverBody,Thao tác này sẽ xóa văn bản và phần thuyết minh hiện tại. Bạn có thể làm lại từ đầu bất cứ lúc nào.
+Feature.Moments.Label.DeleteVoiceoverTitle,Xóa lời thuyết minh?
 Feature.Moments.Label.Error,Đã xảy ra sự cố. Vui lòng thử lại.
+Feature.Moments.Label.ExceedsCharacterLimit,Vượt giới hạn ký tự
 Feature.Moments.Label.FeedEndBody,Xem lại sau hoặc tạo Khoảnh khắc của riêng bạn.
 Feature.Moments.Label.FeedEndTitle,Bạn đã giải quyết hết các yêu cầu đang chờ xử lý
 Feature.Moments.Label.FeedFailedToLoad,Không tải được bản tin
@@ -4114,6 +4111,15 @@ Feature.Moments.Label.Tone.Funny,Hài hước
 Feature.Moments.Label.Tone.Hype,Sôi động
 Feature.Moments.Label.Tone.Neutral,Trung tính
 Feature.Moments.Label.Videos,
+Feature.Moments.Label.VoiceCoachmarkBody,Nhập kịch bản để tường thuật video
+Feature.Moments.Label.VoiceCoachmarkTitle,
+Feature.Moments.Label.VoiceGenerating,Đang tạo phần thuyết minh...
+Feature.Moments.Label.VoiceGenerationFailedBody,Tạo phần thuyết minh không thành công.
+Feature.Moments.Label.VoiceHelperDefault,Phần lời đã được cắt khớp với thời lượng video
+Feature.Moments.Label.VoiceLimitReachedBody,Vui lòng đợi một lát rồi thử lại
+Feature.Moments.Label.VoiceModerationError,Kịch bản của bạn phải tuân thủ quy tắc an toàn
+Feature.Moments.Label.VoicePlaceholder,Nhập kịch bản thuyết minh. Tối đa {maxCount} ký tự
+Feature.Moments.Label.VoiceTimeoutBody,Đã hết thời gian chờ tạo phần thuyết minh.
 Feature.Moments.Title.GenerateTextFeedbackReason,Đã xảy ra vấn đề gì?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Rời khỏi quá trình tạo Khoảnh khắc?
@@ -4128,6 +4134,7 @@ Feature.NotApproved.Action.ReactivateAccount,Kích Hoạt Lại Tài Khoản C�
 Feature.NotApproved.Action.ReportMistake,Báo cáo sai sót
 Feature.NotApproved.Action.RuleConfirmation,Tôi đồng ý tìm hiểu và tuân thủ các quy tắc.
 Feature.NotApproved.Action.UserAgree,
+Feature.NotApproved.Action.ViewAppealGuidelines,Xem hướng dẫn khiếu nại
 Feature.NotApproved.Action.ViewLess,Ẩn bớt
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,Xem quy tắc
@@ -4290,6 +4297,7 @@ Feature.NotApproved.Label.AbuseType.CheatandExploits,Gian Lận Và Lợi Dụng
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,Gây Nguy Hiểm Cho Trẻ Em
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V2,Bóc lột trẻ em
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V3,Nội dung/hành vi gây hại
+Feature.NotApproved.Label.AbuseType.ChildEndangerment.V4,An toàn cho trẻ
 Feature.NotApproved.Label.AbuseType.ClickbaitAds,Quảng Cáo Dẫn Dụ
 Feature.NotApproved.Label.AbuseType.Commerce,Thương mại
 Feature.NotApproved.Label.AbuseType.CompromisedAccount,Tài Khoản Bị Xâm Phạm

@@ -2,7 +2,6 @@
 local _ = require(parent.util.Types)
 local analyticsModule = require(parent.Analytics)
 local constantsModule = require(parent.Constants)
-local constantsInterfaceModule = require(parent.ConstantsInterface)
 local validateCoplanarIntersectionModule = require(parent.validation.validateCoplanarIntersection)
 local validateInstanceTreeModule = require(parent.validation.validateInstanceTree)
 local validateMeshTrianglesModule = require(parent.validation.validateMeshTriangles)
@@ -10,16 +9,13 @@ local validateModerationModule = require(parent.validation.validateModeration)
 local validateMaterialsModule = require(parent.validation.validateMaterials)
 local validateTagsModule = require(parent.validation.validateTags)
 local validateMeshBoundsModule = require(parent.validation.validateMeshBounds)
-local validateTextureSizeModule = require(parent.validation.validateTextureSize)
 local validatePropertyRequirementsModule = require(parent.validation.validatePropertyRequirements)
 local validateAttributesModule = require(parent.validation.validateAttributes)
 local validateMeshVertColorsModule = require(parent.validation.validateMeshVertColors)
 local validateSingleInstanceModule = require(parent.validation.validateSingleInstance)
 local validateThumbnailConfigurationModule = require(parent.validation.validateThumbnailConfiguration)
 local validateSurfaceAppearancesModule = require(parent.validation.validateSurfaceAppearances)
-local validateSurfaceAppearanceTextureSizeModule = require(parent.validation.validateSurfaceAppearanceTextureSize)
 local validateTexturePackModule = require(parent.validation.ValidateTexturePack)
-local validateSurfaceAppearanceTransparencyModule = require(parent.validation.validateSurfaceAppearanceTransparency)
 local validateScaleTypeModule = require(parent.validation.validateScaleType)
 local validateTotalSurfaceAreaModule = require(parent.validation.validateTotalSurfaceArea)
 local validateRigidMeshNotSkinnedModule = require(parent.validation.validateRigidMeshNotSkinned)
@@ -38,16 +34,14 @@ local getAccessoryScaleModule = require(parent.util.getAccessoryScale)
 local rigidOrLayeredAllowedModule = require(parent.util.RigidOrLayeredAllowed)
 local getEngineFeatureEngineUGCValidateRigidNonSkinnedModule = require(parent.flags.getEngineFeatureEngineUGCValidateRigidNonSkinned)
 local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
-local getFFlagUGCValidateAccessoryAssetTextureLimitModule = require(parent.flags.getFFlagUGCValidateAccessoryAssetTextureLimit)
 local getFFlagUGCValidateTexturePackModule = require(parent.flags.getFFlagUGCValidateTexturePack)
 local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
-local getFFlagUGCValidateMigrateTextureTransparencyModule = require(parent.flags.getFFlagUGCValidateMigrateTextureTransparency)
 local getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule = require(parent.flags.getFFlagUGCValidateMigrateSurfaceAppearanceMeshQuality)
 local getFFlagUGCValidateMigrateMeshGeometryModule = require(parent.flags.getFFlagUGCValidateMigrateMeshGeometry)
 local meshpartAccessoryCheckAvatarPartScaleType = game:DefineFastFlag("MeshpartAccessoryCheckAvatarPartScaleType", false)
 
 return function(p1)
-	-- upvalues: rigidOrLayeredAllowedModule (ref), analyticsModule (ref), constantsModule (ref), validateSingleInstanceModule (ref), createMeshPartAccessorySchemaModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), validateDependenciesModule (ref), failureReasonsAccumulatorModule (ref), getEditableMeshFromContextModule (ref), getEditableImageFromContextModule (ref), pcallDeferredModule (ref), getMeshSizeModule (ref), getExpectedPartSizeModule (ref), getAttachmentModule (ref), validateMaterialsModule (ref), validatePropertyRequirementsModule (ref), validateTagsModule (ref), validateAttributesModule (ref), getFFlagUGCValidateMigrateTextureTransparencyModule (ref), getFFlagUGCValidateAccessoryAssetTextureLimitModule (ref), constantsInterfaceModule (ref), validateTextureSizeModule (ref), validateThumbnailConfigurationModule (ref), validateModerationModule (ref), meshpartAccessoryCheckAvatarPartScaleType (ref), getAccessoryScaleModule (ref), getFFlagUGCValidateMigrateMeshGeometryModule (ref), validateTotalSurfaceAreaModule (ref), validateMeshSizePropertyModule (ref), validateMeshBoundsModule (ref), validateMeshTrianglesModule (ref), getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule (ref), validateMeshVertColorsModule (ref), validateCoplanarIntersectionModule (ref), validateSurfaceAppearancesModule (ref), validateSurfaceAppearanceTextureSizeModule (ref), validateSurfaceAppearanceTransparencyModule (ref), getFFlagUGCValidateTexturePackModule (ref), validateTexturePackModule (ref), getEngineFeatureEngineUGCValidateRigidNonSkinnedModule (ref), validateRigidMeshNotSkinnedModule (ref), validateScaleTypeModule (ref)
+	-- upvalues: rigidOrLayeredAllowedModule (ref), analyticsModule (ref), constantsModule (ref), validateSingleInstanceModule (ref), createMeshPartAccessorySchemaModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), validateDependenciesModule (ref), failureReasonsAccumulatorModule (ref), getEditableMeshFromContextModule (ref), getEditableImageFromContextModule (ref), pcallDeferredModule (ref), getMeshSizeModule (ref), getExpectedPartSizeModule (ref), getAttachmentModule (ref), validateMaterialsModule (ref), validatePropertyRequirementsModule (ref), validateTagsModule (ref), validateAttributesModule (ref), validateThumbnailConfigurationModule (ref), validateModerationModule (ref), meshpartAccessoryCheckAvatarPartScaleType (ref), getAccessoryScaleModule (ref), getFFlagUGCValidateMigrateMeshGeometryModule (ref), validateTotalSurfaceAreaModule (ref), validateMeshSizePropertyModule (ref), validateMeshBoundsModule (ref), validateMeshTrianglesModule (ref), getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule (ref), validateMeshVertColorsModule (ref), validateCoplanarIntersectionModule (ref), validateSurfaceAppearancesModule (ref), getFFlagUGCValidateTexturePackModule (ref), validateTexturePackModule (ref), getEngineFeatureEngineUGCValidateRigidNonSkinnedModule (ref), validateRigidMeshNotSkinnedModule (ref), validateScaleTypeModule (ref)
 	assert(p1.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateMeshPartAccessory")
 	local instances = p1.instances
 	local assetTypeEnum = p1.assetTypeEnum
@@ -147,7 +141,7 @@ return function(p1)
 	local var20 = getExpectedPartSizeModule(handle, p1) / var19
 	local var21 = getAttachmentModule(handle, var1.attachmentNames)
 	assert(var21)
-	local var22 = assert(var1.bounds[var21.Name], "Could not find bounds for " .. var68.Name)
+	local var22 = assert(var1.bounds[var21.Name], "Could not find bounds for " .. var62.Name)
 	
 	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
 		var13:updateReasons(validateMaterialsModule(var4, p1))
@@ -157,9 +151,6 @@ return function(p1)
 	
 	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
 		var13:updateReasons(validateAttributesModule(var4, p1))
-	end
-	if not getFFlagUGCValidateMigrateTextureTransparencyModule() then
-		var13:updateReasons(validateTextureSizeModule(t_1, true, p1, if getFFlagUGCValidateAccessoryAssetTextureLimitModule() then constantsInterfaceModule.getTextureLimit(assetTypeEnum, handle, t_1.fieldName) else nil))
 	end
 	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
 		var13:updateReasons(validateThumbnailConfigurationModule(var4, handle, t, var20, p1))
@@ -193,10 +184,6 @@ return function(p1)
 	end
 	if not getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule() then
 		var13:updateReasons(validateSurfaceAppearancesModule(var4, p1))
-	end
-	if not getFFlagUGCValidateMigrateTextureTransparencyModule() then
-		var13:updateReasons(validateSurfaceAppearanceTextureSizeModule(var4, p1))
-		var13:updateReasons(validateSurfaceAppearanceTransparencyModule(var4, p1))
 	end
 	if not getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule() and getFFlagUGCValidateTexturePackModule() then
 		var13:updateReasons(validateTexturePackModule.validate(var4, false, p1))

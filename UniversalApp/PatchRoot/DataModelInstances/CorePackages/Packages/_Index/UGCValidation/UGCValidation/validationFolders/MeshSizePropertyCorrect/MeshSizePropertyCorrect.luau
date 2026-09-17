@@ -17,7 +17,6 @@ local t = {
 		validationEnumsModule.SharedDataMember.consumerConfig
 	},
 	conditionalData = { validationEnumsModule.SharedDataMember.renderMeshesData },
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateBodyPartBounds),
 	expectedFailures = {}
 }
 

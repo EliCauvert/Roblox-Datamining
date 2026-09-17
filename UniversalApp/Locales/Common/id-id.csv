@@ -640,6 +640,8 @@ Common.Presence.Label.Online,Online
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,Animasi terlalu panjang ({duration} detik). Animasi emote harus berdurasi maksimal {maxLength} detik.
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,Animasi terlalu pendek ({duration} detik). Animasi emote harus berdurasi lebih dari {minLength} detik.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,Pelanggaran penempatan bagian cage di {cageName}: {upperPart} tidak diposisikan dengan benar di atas {lowerPart}.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"Bagian cage {partName} di {cageName} memiliki {actualCount} vertex, seharusnya sekitar {expectedCount}. Hal ini dapat mengindikasikan adanya geometri yang hilang atau terduplikasi di area tubuh tersebut."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Tubuhmu berisi komponen mesh kecil yang terputus (mesh island). Hapus geometri yang mengambang dan pastikan semua bagian mesh tersambung dengan benar.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"Kualitas aset: {partName} memiliki {num_disconnected_components} komponen yang terputus, yang melebihi batas maksimum {max_disconnected_components}."
 Common.UGCValidation.ErrorLabel.AQSInputDataError,Skor kualitas tidak dapat dihitung dengan benar karena data input salah atau tidak lengkap. Periksa model Anda atau ajukan laporan bug
@@ -1214,7 +1216,6 @@ Feature.Accessibility.AppTheme.SuperCharge,Energi Prima
 Feature.Accessibility.Description.AppThemeMode,Pilih mode aplikasi. Perangkatmu yang lain tidak akan terpengaruh.
 Feature.Accessibility.Description.DeviceAppTheme,Pilih tema aplikasi. Ini akan terlihat di semua tipe perangkat.
 Feature.Accessibility.Description.DeviceAppThemeExclusive,Jelajahi tema eksklusif Plus untuk menyesuaikan pengalaman virtualmu. Coba sekarang dan subscribe untuk menyimpan pilihanmu.
-Feature.Accessibility.Description.DeviceAppThemeUpsell,
 Feature.Accessibility.Description.Haptics,Mengendalikan getaran keseluruhan aplikasi Roblox
 Feature.Accessibility.Description.LaunchAtStartup,Luncurkan Roblox secara otomatis saat saya memulai komputer
 Feature.Accessibility.Description.MinimizeToTray,"Menutup jendela mengirim Roblox ke system tray, bukan benar-benar menutupnya"
@@ -2387,7 +2388,6 @@ Feature.Build.Label.Building,Membangun...
 Feature.Build.Label.CaptureLibrary,Perpustakaan Media
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} dari {MAX_SELECTIONS} dipilih
 Feature.Build.Label.ContentRating,Rating konten
-Feature.Build.Label.Created,Dibuat
 Feature.Build.Label.CreatedDate,"{DAY} {MONTH}, {YEAR}"
 Feature.Build.Label.CreatorHub,Pusat Kreator
 Feature.Build.Label.DateRange,{startDate}—{endDate}
@@ -2411,7 +2411,6 @@ Feature.Build.Label.GamePlays,Game dimainkan
 Feature.Build.Label.GetMoreBuildUsage,Dapatkan lebih banyak kuota penggunaan Build
 Feature.Build.Label.Hi,Hai
 Feature.Build.Label.IconThumbnails,Ikon & thumbnail
-Feature.Build.Label.Images2D,Gambar 2D
 Feature.Build.Label.InProgress,Sedang berlangsung
 Feature.Build.Label.InputNeeded,Input diperlukan
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2421,7 +2420,6 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Harga terkelola
 Feature.Build.Label.ManagedPricingMixed,Harga terkelola campuran di seluruh produk saat ini
 Feature.Build.Label.MaximizeForGamePlays,Maksimalkan agar game lebih banyak dimainkan
-Feature.Build.Label.Models3D,Model 3D
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Tidak ada batas
 Feature.Build.Label.NotStarted,Belum dimulai
@@ -2439,7 +2437,6 @@ Feature.Build.Label.Private,Privat
 Feature.Build.Label.Public,Publik
 Feature.Build.Label.PubliclyUnavailable,Tidak tersedia untuk umum
 Feature.Build.Label.Published,
-Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Siap
 Feature.Build.Label.RegionalPricing,Harga regional
 Feature.Build.Label.ResetsDaily,Reset setiap hari
@@ -2448,14 +2445,11 @@ Feature.Build.Label.ResetsWeekly,Direset setiap minggu
 Feature.Build.Label.RestoredVersion,{VERSION} dipulihkan
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,Cari aset
 Feature.Build.Label.SearchGames,Cari game
 Feature.Build.Label.SearchTasks,Cari tugas
 Feature.Build.Label.SelectOption,Pilih opsi
-Feature.Build.Label.Shared,Dibagikan
 Feature.Build.Label.ShopButton,Tombol Belanja
 Feature.Build.Label.ShopUi,UI Belanja
-Feature.Build.Label.Sounds,Suara
 Feature.Build.Label.TargetAllRobloxPlayers,Targetkan semua pemain Roblox
 Feature.Build.Label.Thinking,Sedang memproses
 Feature.Build.Label.Title,Judul
@@ -2525,7 +2519,6 @@ Feature.Build.Label.UniverseNumber,Universe {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Tidak Diketahui
 Feature.Build.Label.UnlimitedUsed,{USED} digunakan • Tidak ada batas
 Feature.Build.Label.UpdateTitleDesc,Ubah judul & deskripsi
-Feature.Build.Label.Updated,Di-update
 Feature.Build.Label.Usage,Penggunaan
 Feature.Build.Label.UsageUsed,{USED} digunakan
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2546,8 +2539,6 @@ Feature.Build.Message.AdsStatsEmpty,Jangkau lebih banyak audiens dengan kampanye
 Feature.Build.Message.AdsStatsEmptyFree,Jangkau lebih banyak audiens dengan kampanye iklan gratis agar game-mu lebih mudah ditemukan
 Feature.Build.Message.AllFriendsAdded,Kamu telah mengundang semua temanmu sebagai penguji tahap awal.
 Feature.Build.Message.AnswerBuildQuestion,Jawab pertanyaan Build di bawah ini.
-Feature.Build.Message.AssetDetailsUnavailable,Detail aset tidak tersedia.
-Feature.Build.Message.AssetsLoadFailed,Tidak bisa me-load aset.
 Feature.Build.Message.AudienceIneligible,Tidak memenuhi syarat untuk audiens ini
 Feature.Build.Message.BuildAccountBlocked,Build tidak tersedia untuk akunmu saat ini.
 Feature.Build.Message.BuildBusy,"Build sibuk. Tunggu sebentar, lalu coba lagi."
@@ -2579,7 +2570,6 @@ Feature.Build.Message.InvitesLoadFailed,Tidak dapat me-load undangan
 Feature.Build.Message.LimitBelowSpend,Batasan tidak boleh kurang dari {ALREADY_SPENT} Robux yang sudah digunakan hari ini.
 Feature.Build.Message.LinkCopied,Link disalin ke clipboard.
 Feature.Build.Message.LoadingVersions,Me-load riwayat versi...
-Feature.Build.Message.NoAssetsFound,Tidak ada aset yang ditemukan.
 Feature.Build.Message.NoCapturesAvailable,Tidak ada media yang tersedia
 Feature.Build.Message.NoDescriptionProvided,Tidak ada deskripsi yang diberikan.
 Feature.Build.Message.NoFriendsToAdd,Kamu belum memiliki teman untuk diundang. Temukan pengguna untuk terhubung di Roblox dulu.
@@ -2634,7 +2624,6 @@ Feature.Build.Title.AddImages,Tambahkan gambar
 Feature.Build.Title.AdsStatsEmpty,Mulai kampanye
 Feature.Build.Title.AdsStatsEmptyFree,Mulai kampanye pertamamu
 Feature.Build.Title.ArchiveThisGame,Arsipkan game ini?
-Feature.Build.Title.AssetLibrary,Perpustakaan
 Feature.Build.Title.Audience,Audiens
 Feature.Build.Title.BuildQuestion,Build memiliki pertanyaan
 Feature.Build.Title.BuildQuestions,Build memiliki beberapa pertanyaan
@@ -3371,6 +3360,7 @@ Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,Main
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,Mainkan Demo
+Feature.ExperienceDetails.PlayButtonText.Playtest,
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,Buka Kunci
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -3628,7 +3618,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Teman tepercaya baru
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Tambahkan teman tepercaya
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Tambahkan Teman Tepercaya
-Feature.Friends.TrustedFriend.Label.Title,Teman tepercaya
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} sekarang adalah teman tepercaya
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Teman tepercaya dihapus
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Permintaan teman tepercaya terkirim
@@ -3677,7 +3666,7 @@ Feature.GameDetails.Label.ChatFeatures,Fitur Chat
 Feature.GameDetails.Label.Community,
 Feature.GameDetails.Label.ContainsStrongLanguagePillWarning,Mengandung bahasa kasar
 Feature.GameDetails.Label.ContentMaturity,Kedewasaan Konten
-Feature.GameDetails.Label.Created,
+Feature.GameDetails.Label.Created,Dibuat
 Feature.GameDetails.Label.Developer,Pengembang
 Feature.GameDetails.Label.DontLikeGame,Tidak suka game ini
 Feature.GameDetails.Label.DontLikeImage,Tidak suka gambar ini
@@ -3725,7 +3714,7 @@ Feature.GameDetails.Label.Supported,Didukung
 Feature.GameDetails.Label.TellUsMorePlaceholder,Beri tahu kami lebih banyak
 Feature.GameDetails.Label.TooRepetitive,Terlalu repetitif
 Feature.GameDetails.Label.Unavailable,
-Feature.GameDetails.Label.Updated,
+Feature.GameDetails.Label.Updated,Di-update
 Feature.GameDetails.Label.Upvoted,Mendukung
 Feature.GameDetails.Label.Visits,
 Feature.GameDetails.Label.VoiceChat,
@@ -4023,7 +4012,9 @@ Feature.Moments.Action.AddVoice,Tambahkan Suara
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
+Feature.Moments.Action.CreateVoiceover,Buat voiceover
 Feature.Moments.Action.Delete,
+Feature.Moments.Action.DiscardChange,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Perluas
 Feature.Moments.Action.GenerateText,Buat Teks
@@ -4032,6 +4023,7 @@ Feature.Moments.Action.GenerateTextFeedbackPolicy,Tidak Pantas atau Melanggar At
 Feature.Moments.Action.Hide,Sembunyikan detail
 Feature.Moments.Action.HowToCapture,Cara mengambil Media
 Feature.Moments.Action.Join,Gabung
+Feature.Moments.Action.KeepEditing,Lanjutkan mengedit
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Ciutkan
 Feature.Moments.Action.Ok,
@@ -4041,9 +4033,11 @@ Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
 Feature.Moments.Action.Return,Kembali ke Galeri
 Feature.Moments.Action.ReturnToEditing,Kembali ke Pengeditan
+Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,Tampilkan detail
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Potong Video
+Feature.Moments.Action.TryAgain,
 Feature.Moments.Description.CommunityStandards,Periksa Standar Komunitas untuk melihat informasi selengkapnya tentang hal yang boleh dan tidak boleh kamu katakan.
 Feature.Moments.Description.EmptyCapturesLibrary,Mediamu akan muncul di sini.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Buatan AI. Review sebelum memosting. Kamu bertanggung jawab atas apa yang dipublikasikan.
@@ -4061,7 +4055,10 @@ Feature.Moments.Label.AttemptingJoinExperience,Mencoba bergabung ke {placeName}.
 Feature.Moments.Label.CaptureLibrary,Perpustakaan Mediamu
 Feature.Moments.Label.DeleteMomentBody,Kamu tidak bisa memulihkan Moment setelah Moment dihapus.
 Feature.Moments.Label.DeleteMomentTitle,Hapus Moment?
+Feature.Moments.Label.DeleteVoiceoverBody,Ini akan menghapus teks dan voiceover-mu. Kamu dapat memulai dari awal kapan saja.
+Feature.Moments.Label.DeleteVoiceoverTitle,Hapus voiceover?
 Feature.Moments.Label.Error,
+Feature.Moments.Label.ExceedsCharacterLimit,Melebihi batas karakter
 Feature.Moments.Label.FeedEndBody,Kembali lagi nanti atau buat Moment-mu sendiri.
 Feature.Moments.Label.FeedEndTitle,Tidak ada permintaan pending
 Feature.Moments.Label.FeedFailedToLoad,Feed gagal di-load
@@ -4112,6 +4109,15 @@ Feature.Moments.Label.Tone.Funny,Lucu
 Feature.Moments.Label.Tone.Hype,Seru
 Feature.Moments.Label.Tone.Neutral,Netral
 Feature.Moments.Label.Videos,
+Feature.Moments.Label.VoiceCoachmarkBody,Ketik skrip untuk narasi video
+Feature.Moments.Label.VoiceCoachmarkTitle,
+Feature.Moments.Label.VoiceGenerating,Membuat voiceover-mu...
+Feature.Moments.Label.VoiceGenerationFailedBody,Pembuatan voiceover gagal.
+Feature.Moments.Label.VoiceHelperDefault,Suara dipotong agar sesuai dengan durasi video
+Feature.Moments.Label.VoiceLimitReachedBody,"Tunggu sebentar, lalu coba lagi"
+Feature.Moments.Label.VoiceModerationError,Skripmu harus mematuhi peraturan keamanan
+Feature.Moments.Label.VoicePlaceholder,Ketik skrip voiceover-mu. Batas {maxCount} karakter
+Feature.Moments.Label.VoiceTimeoutBody,Waktu pembuatan voiceover habis.
 Feature.Moments.Title.GenerateTextFeedbackReason,Apa masalahnya?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
@@ -4126,6 +4132,7 @@ Feature.NotApproved.Action.ReactivateAccount,Aktifkan Kembali Akun Saya
 Feature.NotApproved.Action.ReportMistake,Laporkan kekeliruan
 Feature.NotApproved.Action.RuleConfirmation,Saya setuju untuk memahami dan mematuhi peraturan.
 Feature.NotApproved.Action.UserAgree,
+Feature.NotApproved.Action.ViewAppealGuidelines,Lihat pedoman pengajuan banding
 Feature.NotApproved.Action.ViewLess,Lebih sedikit
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,Lihat peraturan
@@ -4288,6 +4295,7 @@ Feature.NotApproved.Label.AbuseType.CheatandExploits,Kecurangan dan Eksploitasi
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,Membahayakan Anak (Child Endangerment)
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V2,Eksploitasi Anak
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V3,Konten/Perilaku Berbahaya
+Feature.NotApproved.Label.AbuseType.ChildEndangerment.V4,Keamanan Anak
 Feature.NotApproved.Label.AbuseType.ClickbaitAds,Iklan Clickbait
 Feature.NotApproved.Label.AbuseType.Commerce,Komersial
 Feature.NotApproved.Label.AbuseType.CompromisedAccount,Akun Terkompromi

@@ -8,7 +8,6 @@ local t_1 = {
 	categories = { validationEnumsModule.UploadCategory.RIGID_ACCESSORY },
 	requiredData = {},
 	conditionalData = { validationEnumsModule.SharedDataMember.meshTextures },
-	fflag = require(parent.flags.getFFlagUGCValidateMigrateTextureTransparency),
 	expectedFailures = {}
 }
 

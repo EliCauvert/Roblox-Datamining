@@ -641,6 +641,8 @@ Common.Presence.Label.Online,온라인
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,애니메이션이 너무 깁니다({duration}초). 이모티콘 애니메이션은 {maxLength}초 이하여야 합니다.
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,애니메이션이 너무 짧습니다({duration}초). 이모티콘 애니메이션은 {minLength}초 이상이어야 합니다.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,{cageName}의 케이지 파트 배치 위반: {upperPart}이(가) {lowerPart} 위에 올바르게 배치되지 않았습니다.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"{cageName}의 {partName} 케이지 파트에는 {actualCount}개의 버텍스가 있으며, 약 {expectedCount}개의 버텍스가 있어야 합니다. 즉, 해당 신체 영역에 지오메트리가 누락되었거나 중복되었을 수 있습니다."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,신체에 분리된 작은 메시 구성 요소(메시 분리 영역)가 있습니다. 플로팅 지오메트리를 제거하고 모든 메시 부품이 올바르게 연결되었는지 확인하세요.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"애셋 품질: {partName}에는 분리 영역이 {num_disconnected_components}개 존재하며, 이는 최대치인 {max_disconnected_components}을(를) 초과합니다."
 Common.UGCValidation.ErrorLabel.AQSInputDataError,입력 데이터가 올바르지 않거나 불완전하여 품질 점수를 제대로 계산할 수 없습니다. 모델을 확인하거나 버그 신고를 제출하세요.
@@ -1215,7 +1217,6 @@ Feature.Accessibility.AppTheme.SuperCharge,슈퍼 충전
 Feature.Accessibility.Description.AppThemeMode,앱 모드를 선택하세요. 다른 기기에는 영향을 주지 않습니다.
 Feature.Accessibility.Description.DeviceAppTheme,앱 테마를 선택하세요. 모든 기기 유형에 반영됩니다.
 Feature.Accessibility.Description.DeviceAppThemeExclusive,Plus 전용 테마를 둘러보고 체험을 맞춤화하세요. 지금 테마를 사용해 보고 구독하여 선택한 테마를 저장하세요.
-Feature.Accessibility.Description.DeviceAppThemeUpsell,Plus 전용 테마를 둘러보고 체험을 맞춤화하세요. 지금 테마를 사용해보고 구독하여 선택한 테마를 저장하세요.
 Feature.Accessibility.Description.Haptics,Roblox 앱의 전체적인 진동을 조절합니다
 Feature.Accessibility.Description.LaunchAtStartup,컴퓨터를 켤 때 Roblox를 자동으로 실행합니다
 Feature.Accessibility.Description.MinimizeToTray,창을 닫을 경우 Roblox를 완전히 종료하지 않고 시스템 트레이로 보냅니다
@@ -2388,7 +2389,6 @@ Feature.Build.Label.Building,제작 중...
 Feature.Build.Label.CaptureLibrary,캡처 라이브러리
 Feature.Build.Label.CaptureSelectionCount,{MAX_SELECTIONS}개 중 {SELECTED_COUNT}개 선택됨
 Feature.Build.Label.ContentRating,콘텐츠 등급
-Feature.Build.Label.Created,제작 정보
 Feature.Build.Label.CreatedDate,{YEAR}년 {MONTH}월 {DAY}일
 Feature.Build.Label.CreatorHub,크리에이터 허브
 Feature.Build.Label.DateRange,{startDate}~{endDate}
@@ -2412,7 +2412,6 @@ Feature.Build.Label.GamePlays,게임 플레이 횟수
 Feature.Build.Label.GetMoreBuildUsage,Build 사용량 더 구매하기
 Feature.Build.Label.Hi,안녕하세요
 Feature.Build.Label.IconThumbnails,아이콘 및 섬네일
-Feature.Build.Label.Images2D,2D 이미지
 Feature.Build.Label.InProgress,진행 중
 Feature.Build.Label.InputNeeded,입력 필요
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2422,7 +2421,6 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,관리형 가격 책정
 Feature.Build.Label.ManagedPricingMixed,현재 상품 전체에 혼합
 Feature.Build.Label.MaximizeForGamePlays,게임 플레이 횟수 극대화
-Feature.Build.Label.Models3D,3D 모델
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,한도 없음
 Feature.Build.Label.NotStarted,시작 전
@@ -2440,7 +2438,6 @@ Feature.Build.Label.Private,비공개
 Feature.Build.Label.Public,공개
 Feature.Build.Label.PubliclyUnavailable,공개적으로 이용 불가
 Feature.Build.Label.Published,
-Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,준비
 Feature.Build.Label.RegionalPricing,지역별 가격
 Feature.Build.Label.ResetsDaily,매일 재설정
@@ -2449,14 +2446,11 @@ Feature.Build.Label.ResetsWeekly,매주 초기화
 Feature.Build.Label.RestoredVersion,{VERSION} 복원됨
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,애셋 검색
 Feature.Build.Label.SearchGames,게임 검색
 Feature.Build.Label.SearchTasks,작업 검색
 Feature.Build.Label.SelectOption,옵션 선택
-Feature.Build.Label.Shared,공유 완료
 Feature.Build.Label.ShopButton,상점 버튼
 Feature.Build.Label.ShopUi,상점 UI
-Feature.Build.Label.Sounds,사운드
 Feature.Build.Label.TargetAllRobloxPlayers,모든 Roblox 플레이어를 대상으로 하세요
 Feature.Build.Label.Thinking,생각 중
 Feature.Build.Label.Title,제목
@@ -2526,7 +2520,6 @@ Feature.Build.Label.UniverseNumber,{UNIVERSE_ID} 유니버스
 Feature.Build.Label.Unknown,알 수 없음
 Feature.Build.Label.UnlimitedUsed,{USED} 사용됨 • 한도 없음
 Feature.Build.Label.UpdateTitleDesc,제목 및 설명 업데이트
-Feature.Build.Label.Updated,업데이트 시간
 Feature.Build.Label.Usage,사용량
 Feature.Build.Label.UsageUsed,{USED} 사용됨
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2547,8 +2540,6 @@ Feature.Build.Message.AdsStatsEmpty,광고 캠페인으로 오디언스를 확�
 Feature.Build.Message.AdsStatsEmptyFree,무료 광고 캠페인으로 오디언스를 확대하고 게임을 홍보하세요
 Feature.Build.Message.AllFriendsAdded,모든 친구를 얼리 테스터로 초대했습니다.
 Feature.Build.Message.AnswerBuildQuestion,아래에서 Build의 질문에 답하세요.
-Feature.Build.Message.AssetDetailsUnavailable,애셋 세부 정보를 이용할 수 없습니다.
-Feature.Build.Message.AssetsLoadFailed,애셋을 불러오지 못했습니다.
 Feature.Build.Message.AudienceIneligible,이 오디언스에 대한 자격 없음
 Feature.Build.Message.BuildAccountBlocked,현재 회원님의 계정에서는 Build를 이용할 수 없습니다.
 Feature.Build.Message.BuildBusy,Build 사용량이 많습니다. 잠시 후 다시 시도하세요.
@@ -2580,7 +2571,6 @@ Feature.Build.Message.InvitesLoadFailed,초대를 불러오지 못함
 Feature.Build.Message.LimitBelowSpend,오늘 이미 사용한 {ALREADY_SPENT} Robux 미만으로 한도를 설정할 수 없습니다.
 Feature.Build.Message.LinkCopied,링크가 클립보드에 복사되었습니다.
 Feature.Build.Message.LoadingVersions,버전 기록을 불러오는 중...
-Feature.Build.Message.NoAssetsFound,애셋을 찾을 수 없습니다.
 Feature.Build.Message.NoCapturesAvailable,사용 가능한 캡처가 없습니다.
 Feature.Build.Message.NoDescriptionProvided,설명을 입력하지 않았습니다.
 Feature.Build.Message.NoFriendsToAdd,아직 초대할 친구가 없습니다. 먼저 Roblox에서 친구를 찾아보세요.
@@ -2635,7 +2625,6 @@ Feature.Build.Title.AddImages,이미지 추가
 Feature.Build.Title.AdsStatsEmpty,캠페인 시작하기
 Feature.Build.Title.AdsStatsEmptyFree,첫 번째 캠페인 시작하기
 Feature.Build.Title.ArchiveThisGame,이 게임을 보관하시겠어요?
-Feature.Build.Title.AssetLibrary,라이브러리
 Feature.Build.Title.Audience,오디언스
 Feature.Build.Title.BuildQuestion,Build에 질문이 있습니다
 Feature.Build.Title.BuildQuestions,Build에 몇 가지 질문이 있습니다
@@ -3375,6 +3364,7 @@ Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,데모 플레이
+Feature.ExperienceDetails.PlayButtonText.Playtest,
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,잠금 해제
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -3632,7 +3622,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,신뢰할 수 있는 새로운 �
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,신뢰할 수 있는 친구 추가하기
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,신뢰할 수 있는 친구 추가
-Feature.Friends.TrustedFriend.Label.Title,신뢰할 수 있는 친구
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} 님은 이제 신뢰할 수 있는 친구입니다
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,신뢰할 수 있는 친구에서 삭제함
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,신뢰할 수 있는 친구 요청을 보냄
@@ -4028,7 +4017,9 @@ Feature.Moments.Action.AddVoice,음성 추가
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
+Feature.Moments.Action.CreateVoiceover,보이스오버 만들기
 Feature.Moments.Action.Delete,
+Feature.Moments.Action.DiscardChange,변경 사항 삭제
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,펼치기
 Feature.Moments.Action.GenerateText,텍스트 생성
@@ -4037,6 +4028,7 @@ Feature.Moments.Action.GenerateTextFeedbackPolicy,부적절하거나 규정을 �
 Feature.Moments.Action.Hide,세부 정보 숨기기
 Feature.Moments.Action.HowToCapture,캡처 방법
 Feature.Moments.Action.Join,
+Feature.Moments.Action.KeepEditing,계속 편집
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,최소화
 Feature.Moments.Action.Ok,
@@ -4046,9 +4038,11 @@ Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
 Feature.Moments.Action.Return,갤러리로 돌아가기
 Feature.Moments.Action.ReturnToEditing,편집으로 돌아가기
+Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,세부 정보 표시
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,동영상 잘라내기
+Feature.Moments.Action.TryAgain,
 Feature.Moments.Description.CommunityStandards,허용되는 표현과 금지되는 표현에 대한 자세한 내용은 커뮤니티 규정을 확인하세요.
 Feature.Moments.Description.EmptyCapturesLibrary,내 캡처가 표시되는 곳입니다.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI가 생성했습니다. 게시하기 전에 검토하세요. 게시된 내용에 대한 책임은 사용자에게 있습니다.
@@ -4066,7 +4060,10 @@ Feature.Moments.Label.AttemptingJoinExperience,{placeName}에 참가하려고 �
 Feature.Moments.Label.CaptureLibrary,
 Feature.Moments.Label.DeleteMomentBody,모멘트가 삭제되면 복구할 수 없습니다.
 Feature.Moments.Label.DeleteMomentTitle,모멘트를 삭제할까요?
+Feature.Moments.Label.DeleteVoiceoverBody,계속하면 텍스트와 보이스오버가 지워집니다. 언제든지 다시 시작할 수 있습니다.
+Feature.Moments.Label.DeleteVoiceoverTitle,보이스오버를 삭제하시겠습니까?
 Feature.Moments.Label.Error,
+Feature.Moments.Label.ExceedsCharacterLimit,글자 수 한도 초과
 Feature.Moments.Label.FeedEndBody,나중에 다시 확인하거나 나만의 모멘트를 만들어 보세요.
 Feature.Moments.Label.FeedEndTitle,모두 확인했습니다
 Feature.Moments.Label.FeedFailedToLoad,피드를 불러오지 못했습니다.
@@ -4117,6 +4114,15 @@ Feature.Moments.Label.Tone.Funny,유쾌함
 Feature.Moments.Label.Tone.Hype,활기참
 Feature.Moments.Label.Tone.Neutral,무난함
 Feature.Moments.Label.Videos,
+Feature.Moments.Label.VoiceCoachmarkBody,동영상 내레이션용 스크립트 입력
+Feature.Moments.Label.VoiceCoachmarkTitle,
+Feature.Moments.Label.VoiceGenerating,보이스오버 만드는 중...
+Feature.Moments.Label.VoiceGenerationFailedBody,보이스오버를 생성하지 못했습니다.
+Feature.Moments.Label.VoiceHelperDefault,동영상 길이로 음성 트리밍됨
+Feature.Moments.Label.VoiceLimitReachedBody,잠시 기다린 후 다시 시도하세요
+Feature.Moments.Label.VoiceModerationError,스크립트는 안전 규칙을 준수해야 합니다
+Feature.Moments.Label.VoicePlaceholder,보이스오버 스크립트를 입력하세요. 글자 수 한도 {maxCount}자
+Feature.Moments.Label.VoiceTimeoutBody,보이스오버 생성 시간이 초과되었습니다.
 Feature.Moments.Title.GenerateTextFeedbackReason,어떤 문제가 생겼나요?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
@@ -4131,6 +4137,7 @@ Feature.NotApproved.Action.ReactivateAccount,내 계정 재활성화
 Feature.NotApproved.Action.ReportMistake,오류 신고
 Feature.NotApproved.Action.RuleConfirmation,규칙을 숙지하고 따를 것에 동의합니다.
 Feature.NotApproved.Action.UserAgree,
+Feature.NotApproved.Action.ViewAppealGuidelines,이의 신청 가이드라인 보기
 Feature.NotApproved.Action.ViewLess,
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,규칙 보기
@@ -4293,6 +4300,7 @@ Feature.NotApproved.Label.AbuseType.CheatandExploits,치트 및 익스플로잇(
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,아동 학대
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V2,아동 착취
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V3,유해한 콘텐츠/행동
+Feature.NotApproved.Label.AbuseType.ChildEndangerment.V4,아동 안전
 Feature.NotApproved.Label.AbuseType.ClickbaitAds,낚시성 광고
 Feature.NotApproved.Label.AbuseType.Commerce,커머스
 Feature.NotApproved.Label.AbuseType.CompromisedAccount,손상된 계정

@@ -640,6 +640,8 @@ Common.Presence.Label.Online,オンライン
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,アニメーションが長すぎます（{duration}秒）。リアクションアニメーションは{maxLength}秒以下にしてください。
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,アニメーションが短すぎます（{duration}秒）。リアクションアニメーションは{minLength}秒より長くしてください。
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,{cageName}のケージパーツ配置違反：{upperPart}が{lowerPart}の上に正しく配置されていません。
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,{cageName}内のケージパーツ「{partName}」には頂点が{actualCount}個ありますが、約{expectedCount}個ほどに設定してください。これは、そのボディ領域にジオメトリの欠落または重複があることを示している可能性があります。
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,ボディには、小さな分離したメッシュコンポーネント（メッシュアイランド）が含まれています。フローティングジオメトリを削除し、すべてのメッシュパーツが適切に接続されていることを確認してください。
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,アセット品質：{partName}には、{num_disconnected_components}個の分離したコンポーネントがあり、これは最大数の{max_disconnected_components}個を超えています。
 Common.UGCValidation.ErrorLabel.AQSInputDataError,入力データが正しくないか不完全なため、品質スコアを正しく計算できません。モデルを確認するか、バグレポートを提出してください
@@ -1214,7 +1216,6 @@ Feature.Accessibility.AppTheme.SuperCharge,スーパーチャージ
 Feature.Accessibility.Description.AppThemeMode,アプリのモードを選択してください。他のデバイスには影響しません。
 Feature.Accessibility.Description.DeviceAppTheme,アプリのテーマを選択してください。これはすべてのデバイスタイプに反映されます。
 Feature.Accessibility.Description.DeviceAppThemeExclusive,Plus限定テーマを試して、Robloxの表示をカスタマイズしましょう。定期購入すると、選択したテーマを保存できます。
-Feature.Accessibility.Description.DeviceAppThemeUpsell,Plus限定のテーマを閲覧して、体験をカスタマイズしましょう。今すぐ試して、選択したテーマを保存するには定期購入してください。
 Feature.Accessibility.Description.Haptics,Robloxアプリでバイブレーション全般をコントロール。
 Feature.Accessibility.Description.LaunchAtStartup,コンピューター起動時にRobloxを自動的に起動する
 Feature.Accessibility.Description.MinimizeToTray,ウィンドウを閉じると、Robloxは完全に終了せずシステムトレイに移動します。
@@ -2387,7 +2388,6 @@ Feature.Build.Label.Building,制作中…
 Feature.Build.Label.CaptureLibrary,切り抜きライブラリ
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} / {MAX_SELECTIONS}点を選択済み
 Feature.Build.Label.ContentRating,コンテンツのレーティング
-Feature.Build.Label.Created,作成済み
 Feature.Build.Label.CreatedDate,{YEAR}年{MONTH}月{DAY}日
 Feature.Build.Label.CreatorHub,クリエーターハブ
 Feature.Build.Label.DateRange,{startDate}〜{endDate}
@@ -2411,7 +2411,6 @@ Feature.Build.Label.GamePlays,プレイ数
 Feature.Build.Label.GetMoreBuildUsage,もっとビルド使用量を獲得
 Feature.Build.Label.Hi,こんにちは
 Feature.Build.Label.IconThumbnails,アイコンとサムネイル
-Feature.Build.Label.Images2D,2D画像
 Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,入力が必要です
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2421,7 +2420,6 @@ Feature.Build.Label.Loading,読み込み中...
 Feature.Build.Label.ManagedPricing,管理価格設定
 Feature.Build.Label.ManagedPricingMixed,既存の製品で設定が混在
 Feature.Build.Label.MaximizeForGamePlays,プレイ数を最大化
-Feature.Build.Label.Models3D,3Dモデル
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,制限なし
 Feature.Build.Label.NotStarted,開始していません
@@ -2439,7 +2437,6 @@ Feature.Build.Label.Private,
 Feature.Build.Label.Public,
 Feature.Build.Label.PubliclyUnavailable,公開不可
 Feature.Build.Label.Published,
-Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,準備完了
 Feature.Build.Label.RegionalPricing,地域別価格設定
 Feature.Build.Label.ResetsDaily,毎日リセット
@@ -2448,14 +2445,11 @@ Feature.Build.Label.ResetsWeekly,毎週リセット
 Feature.Build.Label.RestoredVersion,復元済みの{VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,アセットをサーチ
 Feature.Build.Label.SearchGames,ゲームをサーチ
 Feature.Build.Label.SearchTasks,タスクをサーチ
 Feature.Build.Label.SelectOption,オプションを選択
-Feature.Build.Label.Shared,シェア済み
 Feature.Build.Label.ShopButton,ショップボタン
 Feature.Build.Label.ShopUi,ショップUI
-Feature.Build.Label.Sounds,サウンド
 Feature.Build.Label.TargetAllRobloxPlayers,すべてのRobloxプレイヤーを対象にする
 Feature.Build.Label.Thinking,考え中
 Feature.Build.Label.Title,タイトル
@@ -2525,7 +2519,6 @@ Feature.Build.Label.UniverseNumber,ユニバース{UNIVERSE_ID}
 Feature.Build.Label.Unknown,不明
 Feature.Build.Label.UnlimitedUsed,{USED}使用済み • 制限なし
 Feature.Build.Label.UpdateTitleDesc,タイトルと詳細を更新
-Feature.Build.Label.Updated,最終更新
 Feature.Build.Label.Usage,使用量
 Feature.Build.Label.UsageUsed,{USED}使用済み
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2546,8 +2539,6 @@ Feature.Build.Message.AdsStatsEmpty,広告キャンペーンでオーディエ�
 Feature.Build.Message.AdsStatsEmptyFree,無料の広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう
 Feature.Build.Message.AllFriendsAdded,すべての友達を早期テスターとして招待しました。
 Feature.Build.Message.AnswerBuildQuestion,以下のビルドの質問に答えてください。
-Feature.Build.Message.AssetDetailsUnavailable,アセットの詳細は表示できません。
-Feature.Build.Message.AssetsLoadFailed,アセットを読み込めません。
 Feature.Build.Message.AudienceIneligible,このオーディエンスの対象外
 Feature.Build.Message.BuildAccountBlocked,現在、お持ちのアカウントではビルドを利用できません。
 Feature.Build.Message.BuildBusy,ビルドがビジー状態です。しばらくしてからもう一度お試しください。
@@ -2579,7 +2570,6 @@ Feature.Build.Message.InvitesLoadFailed,招待を読み込めませんでした
 Feature.Build.Message.LimitBelowSpend,限度額は、今日すでに使用した{ALREADY_SPENT}Robux未満にすることはできません。
 Feature.Build.Message.LinkCopied,リンクをクリップボードにコピーしました。
 Feature.Build.Message.LoadingVersions,バージョン履歴を読み込み中...
-Feature.Build.Message.NoAssetsFound,アセットが見つかりません。
 Feature.Build.Message.NoCapturesAvailable,添付できる切り抜きはありません
 Feature.Build.Message.NoDescriptionProvided,詳細がありません。
 Feature.Build.Message.NoFriendsToAdd,まだ招待できる友達がいません。まずはRobloxでつながる相手を見つけましょう。
@@ -2634,7 +2624,6 @@ Feature.Build.Title.AddImages,画像を追加
 Feature.Build.Title.AdsStatsEmpty,キャンペーンを開始
 Feature.Build.Title.AdsStatsEmptyFree,最初のキャンペーンを開始
 Feature.Build.Title.ArchiveThisGame,このゲームをアーカイブしますか？
-Feature.Build.Title.AssetLibrary,ライブラリ
 Feature.Build.Title.Audience,オーディエンス
 Feature.Build.Title.BuildQuestion,ビルドから質問があります
 Feature.Build.Title.BuildQuestions,ビルドからいくつか質問があります
@@ -3373,6 +3362,7 @@ Feature.ExperienceDetails.PlayButtonText.ActionNeeded,参加する
 Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,デモを再生
+Feature.ExperienceDetails.PlayButtonText.Playtest,
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,ロック解除
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -3630,7 +3620,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,新しい信頼する友達
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,信頼する友達を追加
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,「信頼できる友達」を追加
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,信頼できる友達に追加
-Feature.Friends.TrustedFriend.Label.Title,信頼する友達
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}さんが信頼する友達になりました
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信頼する友達が削除されました
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,信頼する友達リクエストが送信されました
@@ -4025,7 +4014,9 @@ Feature.Moments.Action.AddVoice,ボイスを追加
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
+Feature.Moments.Action.CreateVoiceover,ボイスオーバーを作成
 Feature.Moments.Action.Delete,
+Feature.Moments.Action.DiscardChange,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,展開
 Feature.Moments.Action.GenerateText,テキストを生成
@@ -4034,6 +4025,7 @@ Feature.Moments.Action.GenerateTextFeedbackPolicy,不適切またはコミュニ
 Feature.Moments.Action.Hide,詳細を非表示
 Feature.Moments.Action.HowToCapture,切り抜き方法
 Feature.Moments.Action.Join,
+Feature.Moments.Action.KeepEditing,編集を続ける
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,最小化
 Feature.Moments.Action.Ok,
@@ -4043,9 +4035,11 @@ Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
 Feature.Moments.Action.Return,ギャラリーに戻る
 Feature.Moments.Action.ReturnToEditing,編集に戻る
+Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,ビデオをトリミング
+Feature.Moments.Action.TryAgain,もう一度試す
 Feature.Moments.Description.CommunityStandards,発言できることとできないことの詳細については、コミュニティ基準を確認してください。
 Feature.Moments.Description.EmptyCapturesLibrary,ここに切り抜きが表示されます。
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AIが生成したものです。投稿前にご確認ください。公開された内容に対する責任はご自身にあります。
@@ -4063,7 +4057,10 @@ Feature.Moments.Label.AttemptingJoinExperience,{placeName}に参加しようと�
 Feature.Moments.Label.CaptureLibrary,
 Feature.Moments.Label.DeleteMomentBody,削除したモーメントは復元できません。
 Feature.Moments.Label.DeleteMomentTitle,モーメントを削除しますか？
+Feature.Moments.Label.DeleteVoiceoverBody,これにより、テキストとボイスオーバーが消去されます。この操作はいつでもやり直せます。
+Feature.Moments.Label.DeleteVoiceoverTitle,ボイスオーバーを削除しますか？
 Feature.Moments.Label.Error,
+Feature.Moments.Label.ExceedsCharacterLimit,文字数制限を超過しています
 Feature.Moments.Label.FeedEndBody,後でもう一度確認するか、独自のモーメントを作成してください。
 Feature.Moments.Label.FeedEndTitle,新着のモーメントはありません
 Feature.Moments.Label.FeedFailedToLoad,ロードできませんでした
@@ -4114,6 +4111,15 @@ Feature.Moments.Label.Tone.Funny,面白い
 Feature.Moments.Label.Tone.Hype,エネルギッシュ
 Feature.Moments.Label.Tone.Neutral,客観的
 Feature.Moments.Label.Videos,
+Feature.Moments.Label.VoiceCoachmarkBody,ビデオナレーションのスクリプトを入力してください
+Feature.Moments.Label.VoiceCoachmarkTitle,
+Feature.Moments.Label.VoiceGenerating,ボイスオーバーを作成中...
+Feature.Moments.Label.VoiceGenerationFailedBody,ボイスオーバーを生成できませんでした。
+Feature.Moments.Label.VoiceHelperDefault,音声はビデオの長さに合わせてカットされました
+Feature.Moments.Label.VoiceLimitReachedBody,しばらくしてから、もう一度お試しください
+Feature.Moments.Label.VoiceModerationError,スクリプトは安全に関するルールに従う必要があります
+Feature.Moments.Label.VoicePlaceholder,ボイスオーバーのスクリプトを入力してください。文字数制限は{maxCount}文字です
+Feature.Moments.Label.VoiceTimeoutBody,ボイスオーバーの生成がタイムアウトしました。
 Feature.Moments.Title.GenerateTextFeedbackReason,何が問題でしたか？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
@@ -4128,6 +4134,7 @@ Feature.NotApproved.Action.ReactivateAccount,アカウントを再開する
 Feature.NotApproved.Action.ReportMistake,審査ミスを報告
 Feature.NotApproved.Action.RuleConfirmation,ルールを知り、それに従うことに同意します。
 Feature.NotApproved.Action.UserAgree,
+Feature.NotApproved.Action.ViewAppealGuidelines,異議申し立てのガイドラインを表示
 Feature.NotApproved.Action.ViewLess,
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,ルールを表示
@@ -4289,6 +4296,7 @@ Feature.NotApproved.Label.AbuseType.CheatandExploits,チートとエクスプロ
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,児童を危険にさらすこと
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V2,児童の搾取
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V3,有害なコンテンツや言動
+Feature.NotApproved.Label.AbuseType.ChildEndangerment.V4,お子様の安全
 Feature.NotApproved.Label.AbuseType.ClickbaitAds,釣り広告
 Feature.NotApproved.Label.AbuseType.Commerce,Eコマース
 Feature.NotApproved.Label.AbuseType.CompromisedAccount,アカウント乗っ取り
@@ -5552,7 +5560,7 @@ InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,{experience_name}�
 InstantApps.Shortcuts.Label.ShortcutAlreadyExists,{experience_name}のショートカットはすでに存在します
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,{experience_name}のショートカットをデスクトップに追加しました
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,{experience_name}のショートカットをホーム画面に追加しました
-InstantApps.Shortcuts.Label.TryAgain,もう一度試す
+InstantApps.Shortcuts.Label.TryAgain,
 InstantApps.Shortcuts.Label.ViewShortcut,ショートカットを表示
 Luobu.Authentication.Login.Label.AntiAddictionText,
 Luobu.Authentication.Login.Label.NetworkLicense,

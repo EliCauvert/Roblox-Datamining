@@ -639,6 +639,8 @@ Common.Presence.Label.Online,在線
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,動畫太長（{duration} 秒）。動作動畫最長只能 {maxLength} 秒。
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,動畫太短（{duration} 秒）。動作動畫必須超過 {minLength} 秒。
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,{cageName} 中的圍籠零件放置違規：{upperPart} 未正確放置在 {lowerPart} 上方。
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,{cageName} 中的圍籠零件 {partName} 有 {actualCount} 個頂點，預期約為 {expectedCount} 個。這可能表示該身體區域缺少或出現重複幾何形狀。
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,你的身體包含小型未連接的網格元件（網格島）。請移除浮動幾何，並確保所有網格部位皆已正確連接。
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,素材品質：{partName} 有 {num_disconnected_components} 個未連接的元件，超過 {max_disconnected_components} 個的上限。
 Common.UGCValidation.ErrorLabel.AQSInputDataError,由於輸入資料不正確或不完整，無法正確計算品質分數。請檢查你的模型或提交錯誤報告
@@ -1213,7 +1215,6 @@ Feature.Accessibility.AppTheme.SuperCharge,強力增壓綠
 Feature.Accessibility.Description.AppThemeMode,選擇 App 模式。你的其他裝置不會受到影響。
 Feature.Accessibility.Description.DeviceAppTheme,選擇 App 主題。此主題將套用至所有裝置類型。
 Feature.Accessibility.Description.DeviceAppThemeExclusive,探索 Plus 專屬主題以自訂體驗。立即試用並訂閱，即可儲存你的選擇。
-Feature.Accessibility.Description.DeviceAppThemeUpsell,
 Feature.Accessibility.Description.Haptics,控制 Roblox App 的整體震動。
 Feature.Accessibility.Description.LaunchAtStartup,在我啟動電腦時，自動啟動 Roblox
 Feature.Accessibility.Description.MinimizeToTray,關閉視窗會將 Roblox 傳送至系統匣，而非完全退出
@@ -2386,7 +2387,6 @@ Feature.Build.Label.Building,建立中...
 Feature.Build.Label.CaptureLibrary,截圖資料庫
 Feature.Build.Label.CaptureSelectionCount,已選擇 {SELECTED_COUNT} 個，共 {MAX_SELECTIONS} 個
 Feature.Build.Label.ContentRating,內容分級
-Feature.Build.Label.Created,已建立
 Feature.Build.Label.CreatedDate,{MONTH} {DAY}，{YEAR}
 Feature.Build.Label.CreatorHub,創作者中心
 Feature.Build.Label.DateRange,{startDate} – {endDate}
@@ -2410,7 +2410,6 @@ Feature.Build.Label.GamePlays,遊戲遊玩次數
 Feature.Build.Label.GetMoreBuildUsage,取得更多組建使用量
 Feature.Build.Label.Hi,嗨
 Feature.Build.Label.IconThumbnails,圖示和縮圖
-Feature.Build.Label.Images2D,2D 圖片
 Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,必須輸入內容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2420,7 +2419,6 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,管理定價
 Feature.Build.Label.ManagedPricingMixed,混合套用於現有產品
 Feature.Build.Label.MaximizeForGamePlays,最大化遊戲遊玩次數
-Feature.Build.Label.Models3D,3D 模型
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,無上限
 Feature.Build.Label.NotStarted,尚未開始
@@ -2438,7 +2436,6 @@ Feature.Build.Label.Private,私人
 Feature.Build.Label.Public,公開
 Feature.Build.Label.PubliclyUnavailable,尚未開放大眾遊玩
 Feature.Build.Label.Published,
-Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,就緒
 Feature.Build.Label.RegionalPricing,區域定價
 Feature.Build.Label.ResetsDaily,每日重置
@@ -2447,14 +2444,11 @@ Feature.Build.Label.ResetsWeekly,每週重置
 Feature.Build.Label.RestoredVersion,已還原 {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,搜尋素材
 Feature.Build.Label.SearchGames,搜尋遊戲
 Feature.Build.Label.SearchTasks,搜尋任務
 Feature.Build.Label.SelectOption,選擇一個選項
-Feature.Build.Label.Shared,已分享
 Feature.Build.Label.ShopButton,商店按鈕
 Feature.Build.Label.ShopUi,商店使用者介面
-Feature.Build.Label.Sounds,音效
 Feature.Build.Label.TargetAllRobloxPlayers,鎖定所有 Roblox 玩家
 Feature.Build.Label.Thinking,思考中
 Feature.Build.Label.Title,標題
@@ -2524,7 +2518,6 @@ Feature.Build.Label.UniverseNumber,宇宙 {UNIVERSE_ID}
 Feature.Build.Label.Unknown,未知
 Feature.Build.Label.UnlimitedUsed,已使用 {USED} • 無上限
 Feature.Build.Label.UpdateTitleDesc,更新標題和說明
-Feature.Build.Label.Updated,已更新
 Feature.Build.Label.Usage,使用量
 Feature.Build.Label.UsageUsed,已使用 {USED}
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2545,8 +2538,6 @@ Feature.Build.Message.AdsStatsEmpty,透過廣告活動拓展受眾，讓更多�
 Feature.Build.Message.AdsStatsEmptyFree,透過免費廣告活動拓展受眾，讓更多人發現你的遊戲
 Feature.Build.Message.AllFriendsAdded,你已邀請所有好友成為搶先遊玩的測試員。
 Feature.Build.Message.AnswerBuildQuestion,在下方回答組建的問題。
-Feature.Build.Message.AssetDetailsUnavailable,無法取得素材詳細資訊。
-Feature.Build.Message.AssetsLoadFailed,無法載入素材。
 Feature.Build.Message.AudienceIneligible,不符合向此受眾發佈的資格
 Feature.Build.Message.BuildAccountBlocked,你的帳號目前無法使用組建。
 Feature.Build.Message.BuildBusy,組建忙碌中。請稍候片刻再試。
@@ -2578,7 +2569,6 @@ Feature.Build.Message.InvitesLoadFailed,無法載入邀請
 Feature.Build.Message.LimitBelowSpend,上限不能低於今天已消費的 {ALREADY_SPENT} Robux。
 Feature.Build.Message.LinkCopied,連結已複製到剪貼簿。
 Feature.Build.Message.LoadingVersions,正在載入版本紀錄...
-Feature.Build.Message.NoAssetsFound,找不到素材。
 Feature.Build.Message.NoCapturesAvailable,沒有可用的截圖
 Feature.Build.Message.NoDescriptionProvided,未提供說明。
 Feature.Build.Message.NoFriendsToAdd,你沒有可邀請的好友。請先在 Roblox 上尋找可交流的對象。
@@ -2633,7 +2623,6 @@ Feature.Build.Title.AddImages,新增圖片
 Feature.Build.Title.AdsStatsEmpty,啟動廣告活動
 Feature.Build.Title.AdsStatsEmptyFree,啟動你的第一個廣告活動
 Feature.Build.Title.ArchiveThisGame,要封存此遊戲嗎？
-Feature.Build.Title.AssetLibrary,素材庫
 Feature.Build.Title.Audience,受眾
 Feature.Build.Title.BuildQuestion,組建有一個問題
 Feature.Build.Title.BuildQuestions,組建有一些問題
@@ -3372,6 +3361,7 @@ Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,播放示範
+Feature.ExperienceDetails.PlayButtonText.Playtest,
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,解鎖
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -3629,7 +3619,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,新的信任好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,新增信任的好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
-Feature.Friends.TrustedFriend.Label.Title,信任的好友
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} 現已成為信任的好友
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信任的好友已移除
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,已傳送信任的好友邀請
@@ -4024,7 +4013,9 @@ Feature.Moments.Action.AddVoice,新增語音
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
+Feature.Moments.Action.CreateVoiceover,建立旁白
 Feature.Moments.Action.Delete,
+Feature.Moments.Action.DiscardChange,刪除變更
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,展開
 Feature.Moments.Action.GenerateText,生成文字
@@ -4033,6 +4024,7 @@ Feature.Moments.Action.GenerateTextFeedbackPolicy,不當或違規
 Feature.Moments.Action.Hide,隱藏詳細資訊
 Feature.Moments.Action.HowToCapture,如何截圖
 Feature.Moments.Action.Join,
+Feature.Moments.Action.KeepEditing,繼續編輯
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,最小化
 Feature.Moments.Action.Ok,
@@ -4042,9 +4034,11 @@ Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
 Feature.Moments.Action.Return,返回圖庫
 Feature.Moments.Action.ReturnToEditing,返回編輯
+Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,顯示詳細資訊
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,裁剪影片
+Feature.Moments.Action.TryAgain,再試一次
 Feature.Moments.Description.CommunityStandards,查看社群標準，瞭解哪些內容可以或不能發佈。
 Feature.Moments.Description.EmptyCapturesLibrary,這裡會顯示你的截圖。
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI 生成內容。你必須對發佈的內容負責，張貼前請先審核。
@@ -4062,7 +4056,10 @@ Feature.Moments.Label.AttemptingJoinExperience,正在嘗試加入 {placeName}。
 Feature.Moments.Label.CaptureLibrary,你的截圖資料庫
 Feature.Moments.Label.DeleteMomentBody,美好時光一經刪除即無法復原。
 Feature.Moments.Label.DeleteMomentTitle,要刪除美好時光嗎？
+Feature.Moments.Label.DeleteVoiceoverBody,此操作會清除你的文字和旁白。你可以隨時重新開始。
+Feature.Moments.Label.DeleteVoiceoverTitle,要刪除旁白嗎？
 Feature.Moments.Label.Error,
+Feature.Moments.Label.ExceedsCharacterLimit,超過字元上限
 Feature.Moments.Label.FeedEndBody,請稍後返回查看，或建立自己的美好時光。
 Feature.Moments.Label.FeedEndTitle,你已查看所有的通知
 Feature.Moments.Label.FeedFailedToLoad,無法載入饋送
@@ -4113,6 +4110,15 @@ Feature.Moments.Label.Tone.Funny,
 Feature.Moments.Label.Tone.Hype,充滿活力
 Feature.Moments.Label.Tone.Neutral,中性
 Feature.Moments.Label.Videos,
+Feature.Moments.Label.VoiceCoachmarkBody,輸入影片旁白的指令碼
+Feature.Moments.Label.VoiceCoachmarkTitle,
+Feature.Moments.Label.VoiceGenerating,正在建立你的旁白...
+Feature.Moments.Label.VoiceGenerationFailedBody,旁白生成失敗。
+Feature.Moments.Label.VoiceHelperDefault,語音已裁剪至影片長度
+Feature.Moments.Label.VoiceLimitReachedBody,請稍候片刻，然後再試一次
+Feature.Moments.Label.VoiceModerationError,指令碼必須遵守安全規定
+Feature.Moments.Label.VoicePlaceholder,輸入你的旁白指令碼。{maxCount} 個字元上限
+Feature.Moments.Label.VoiceTimeoutBody,旁白生成逾時。
 Feature.Moments.Title.GenerateTextFeedbackReason,發生什麼問題了嗎？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,要離開「美好時光」建立程序嗎？
@@ -4127,6 +4133,7 @@ Feature.NotApproved.Action.ReactivateAccount,重新啟用我的帳號
 Feature.NotApproved.Action.ReportMistake,回報錯誤
 Feature.NotApproved.Action.RuleConfirmation,我同意了解並遵守規定。
 Feature.NotApproved.Action.UserAgree,
+Feature.NotApproved.Action.ViewAppealGuidelines,檢視上訴指南
 Feature.NotApproved.Action.ViewLess,顯示較少
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,檢視規範
@@ -4289,6 +4296,7 @@ Feature.NotApproved.Label.AbuseType.CheatandExploits,密技和作弊
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,兒童危害
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V2,兒童剝削
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V3,有害內容/行為
+Feature.NotApproved.Label.AbuseType.ChildEndangerment.V4,兒童安全
 Feature.NotApproved.Label.AbuseType.ClickbaitAds,騙點廣告
 Feature.NotApproved.Label.AbuseType.Commerce,商務
 Feature.NotApproved.Label.AbuseType.CompromisedAccount,帳號遭到侵入
@@ -5553,7 +5561,7 @@ InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen,無法將 {experie
 InstantApps.Shortcuts.Label.ShortcutAlreadyExists,「{experience_name}」的捷徑已存在
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,已成功新增「{experience_name}」至桌面
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,已成功新增 {experience_name} 到首頁畫面
-InstantApps.Shortcuts.Label.TryAgain,再試一次
+InstantApps.Shortcuts.Label.TryAgain,
 InstantApps.Shortcuts.Label.ViewShortcut,檢視捷徑
 Luobu.Authentication.Login.Label.AntiAddictionText,
 Luobu.Authentication.Login.Label.NetworkLicense,

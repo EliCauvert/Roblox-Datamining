@@ -632,8 +632,8 @@ Common.Presence.Label.Online,在线
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,动画过长（{duration} 秒）。动作动画时长上限为 {maxLength} 秒。
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,动画过短（{duration} 秒）。动作动画时长必须超过 {minLength} 秒。
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,
-Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,“{cageName}”中的笼架部件放置违规：“{upperPart}”未正确放置在“{lowerPart}”上方。
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,“{cageName}”中的笼架部件“{partName}”有 {actualCount} 个顶点，预期应为 {expectedCount} 个左右。这可能表明该身体部位缺少几何图形或存在重复的几何图形。
 Common.UGCValidation.ErrorLabel.AQSFail_CageUV,
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,你的身体包含小的不相连的网格组件（网格孤岛）。请移除浮动几何图形，并确保所有网格部件均已正确连接。
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,素材质量：“{partName}”有 {num_disconnected_components} 个未连接的组件，超出了 {max_disconnected_components} 个的上限。
@@ -1210,7 +1210,6 @@ Feature.Accessibility.AppTheme.SuperCharge,超级充能
 Feature.Accessibility.Description.AppThemeMode,选择 App 模式，其他设备将不受影响。
 Feature.Accessibility.Description.DeviceAppTheme,选择 App 主题。所有类型的设备都会显示所选效果。
 Feature.Accessibility.Description.DeviceAppThemeExclusive,探索 Plus 专属主题，自定义你的体验。立即试用并订阅，保存你的选择。
-Feature.Accessibility.Description.DeviceAppThemeUpsell,
 Feature.Accessibility.Description.Haptics,控制 Roblox 应用程序的整体振动
 Feature.Accessibility.Description.LaunchAtStartup,电脑开机时自动启动 Roblox
 Feature.Accessibility.Description.LaunchDestination,
@@ -2389,7 +2388,6 @@ Feature.Build.Label.Building,正在构建…
 Feature.Build.Label.CaptureLibrary,截图库
 Feature.Build.Label.CaptureSelectionCount,已选择 {SELECTED_COUNT} 张，共 {MAX_SELECTIONS} 张
 Feature.Build.Label.ContentRating,内容评级
-Feature.Build.Label.Created,创建时间
 Feature.Build.Label.CreatedDate,{YEAR} 年 {MONTH} {DAY} 日
 Feature.Build.Label.CreatorHub,创作者中心
 Feature.Build.Label.DateRange,{startDate} – {endDate}
@@ -2413,7 +2411,6 @@ Feature.Build.Label.GamePlays,游戏游玩次数
 Feature.Build.Label.GetMoreBuildUsage,获得更多 Build 使用额度
 Feature.Build.Label.Hi,你好
 Feature.Build.Label.IconThumbnails,标志和缩略图
-Feature.Build.Label.Images2D,2D 图像
 Feature.Build.Label.InProgress,进行中
 Feature.Build.Label.InputNeeded,需要输入内容
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2423,7 +2420,6 @@ Feature.Build.Label.Loading,正在加载…
 Feature.Build.Label.ManagedPricing,托管定价
 Feature.Build.Label.ManagedPricingMixed,对当前商品使用混合定价
 Feature.Build.Label.MaximizeForGamePlays,最大化游戏游玩次数
-Feature.Build.Label.Models3D,3D 模型
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,无限额
 Feature.Build.Label.NotStarted,未开始
@@ -2441,7 +2437,6 @@ Feature.Build.Label.Private,私人
 Feature.Build.Label.Public,公开
 Feature.Build.Label.PubliclyUnavailable,不公开
 Feature.Build.Label.Published,
-Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,准备就绪
 Feature.Build.Label.RegionalPricing,区域定价
 Feature.Build.Label.ResetsDaily,每日重置
@@ -2450,14 +2445,11 @@ Feature.Build.Label.ResetsWeekly,每周重置
 Feature.Build.Label.RestoredVersion,已恢复 {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,搜索素材
 Feature.Build.Label.SearchGames,搜索游戏
 Feature.Build.Label.SearchTasks,搜索任务
 Feature.Build.Label.SelectOption,选择一个选项
-Feature.Build.Label.Shared,已共享
 Feature.Build.Label.ShopButton,商店按钮
 Feature.Build.Label.ShopUi,商店用户界面
-Feature.Build.Label.Sounds,声音
 Feature.Build.Label.TargetAllRobloxPlayers,定位所有 Roblox 玩家
 Feature.Build.Label.Thinking,正在思考
 Feature.Build.Label.Title,标题
@@ -2527,7 +2519,6 @@ Feature.Build.Label.UniverseNumber,宇宙 {UNIVERSE_ID}
 Feature.Build.Label.Unknown,未知
 Feature.Build.Label.UnlimitedUsed,已使用 {USED} • 无限额
 Feature.Build.Label.UpdateTitleDesc,更新标题和描述
-Feature.Build.Label.Updated,更新时间
 Feature.Build.Label.Usage,使用额度
 Feature.Build.Label.UsageUsed,已使用 {USED}
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2548,8 +2539,6 @@ Feature.Build.Message.AdsStatsEmpty,通过广告活动扩大受众群体，让�
 Feature.Build.Message.AdsStatsEmptyFree,通过免费广告活动扩大受众群体，让更多玩家发现你的游戏
 Feature.Build.Message.AllFriendsAdded,你已邀请所有好友成为初期测试玩家。
 Feature.Build.Message.AnswerBuildQuestion,在下方回答 Build 的问题。
-Feature.Build.Message.AssetDetailsUnavailable,无法显示素材详情。
-Feature.Build.Message.AssetsLoadFailed,无法加载素材。
 Feature.Build.Message.AudienceIneligible,不具备面向此受众发布的资格
 Feature.Build.Message.BuildAccountBlocked,你的帐户目前无法使用 Build。
 Feature.Build.Message.BuildBusy,Build 忙碌中。请稍后重试。
@@ -2581,7 +2570,6 @@ Feature.Build.Message.InvitesLoadFailed,无法加载邀请
 Feature.Build.Message.LimitBelowSpend,限额不能低于今日已支出的 {ALREADY_SPENT} Robux。
 Feature.Build.Message.LinkCopied,链接已复制到剪贴板。
 Feature.Build.Message.LoadingVersions,正在加载版本历史记录…
-Feature.Build.Message.NoAssetsFound,未找到素材。
 Feature.Build.Message.NoCapturesAvailable,无可用截图
 Feature.Build.Message.NoDescriptionProvided,没有提供描述。
 Feature.Build.Message.NoFriendsToAdd,你还没有任何可邀请的好友。请先在 Roblox 上找到要建立联系的人。
@@ -2636,7 +2624,6 @@ Feature.Build.Title.AddImages,添加图片
 Feature.Build.Title.AdsStatsEmpty,开始广告活动
 Feature.Build.Title.AdsStatsEmptyFree,开始你的第一个广告活动
 Feature.Build.Title.ArchiveThisGame,要将此游戏存档吗？
-Feature.Build.Title.AssetLibrary,库
 Feature.Build.Title.Audience,受众
 Feature.Build.Title.BuildQuestion,Build 提出了一个问题
 Feature.Build.Title.BuildQuestions,Build 提出了一些问题
@@ -3373,6 +3360,7 @@ Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,游玩演示
+Feature.ExperienceDetails.PlayButtonText.Playtest,
 Feature.ExperienceDetails.PlayButtonText.Unavailable,无法使用
 Feature.ExperienceDetails.PlayButtonText.Unlock,解锁
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -3630,7 +3618,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,新的信赖好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,添加信赖的好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,添加可信好友
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
-Feature.Friends.TrustedFriend.Label.Title,信赖的好友
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}现已成为你的信赖好友
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信赖的好友已移除
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,“信赖的好友”请求已发送
@@ -3679,7 +3666,7 @@ Feature.GameDetails.Label.ChatFeatures,聊天功能
 Feature.GameDetails.Label.Community,
 Feature.GameDetails.Label.ContainsStrongLanguagePillWarning,包含激烈言辞
 Feature.GameDetails.Label.ContentMaturity,
-Feature.GameDetails.Label.Created,
+Feature.GameDetails.Label.Created,创建时间
 Feature.GameDetails.Label.Developer,开发者
 Feature.GameDetails.Label.DontLikeGame,不喜欢这个游戏
 Feature.GameDetails.Label.DontLikeImage,不喜欢这张图像
@@ -3727,7 +3714,7 @@ Feature.GameDetails.Label.Supported,已支持
 Feature.GameDetails.Label.TellUsMorePlaceholder,请告诉我们详情
 Feature.GameDetails.Label.TooRepetitive,过于重复
 Feature.GameDetails.Label.Unavailable,
-Feature.GameDetails.Label.Updated,
+Feature.GameDetails.Label.Updated,更新时间
 Feature.GameDetails.Label.Upvoted,赞
 Feature.GameDetails.Label.Visits,
 Feature.GameDetails.Label.VoiceChat,
@@ -4024,7 +4011,9 @@ Feature.Moments.Action.AddVoice,添加语音
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
+Feature.Moments.Action.CreateVoiceover,创建旁白
 Feature.Moments.Action.Delete,
+Feature.Moments.Action.DiscardChange,删除更改
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,
 Feature.Moments.Action.GenerateText,生成文本
@@ -4033,6 +4022,7 @@ Feature.Moments.Action.GenerateTextFeedbackPolicy,不适当或违规
 Feature.Moments.Action.Hide,隐藏详情
 Feature.Moments.Action.HowToCapture,如何截取
 Feature.Moments.Action.Join,
+Feature.Moments.Action.KeepEditing,继续编辑
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,最小化
 Feature.Moments.Action.Ok,
@@ -4042,9 +4032,11 @@ Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
 Feature.Moments.Action.Return,返回图库
 Feature.Moments.Action.ReturnToEditing,返回编辑
+Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,显示详情
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,裁剪视频
+Feature.Moments.Action.TryAgain,
 Feature.Moments.Description.CommunityStandards,请查看《社区准则》，进一步了解关于言论的规范。
 Feature.Moments.Description.EmptyCapturesLibrary,你的截图将显示在此处。
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI 生成的内容。发布前请自行审核，你需要对发布的内容承担责任。
@@ -4062,7 +4054,10 @@ Feature.Moments.Label.AttemptingJoinExperience,正在尝试加入“{placeName}�
 Feature.Moments.Label.CaptureLibrary,你的截图库
 Feature.Moments.Label.DeleteMomentBody,精彩瞬间一旦删除，便无法恢复。
 Feature.Moments.Label.DeleteMomentTitle,是否删除精彩瞬间？
+Feature.Moments.Label.DeleteVoiceoverBody,此操作将清除你的文本和旁白。你可以随时重新开始。
+Feature.Moments.Label.DeleteVoiceoverTitle,要删除旁白吗？
 Feature.Moments.Label.Error,
+Feature.Moments.Label.ExceedsCharacterLimit,超出字符数限制
 Feature.Moments.Label.FeedEndBody,稍后返回查看，或创作自己的精彩瞬间。
 Feature.Moments.Label.FeedEndTitle,你都看完啦
 Feature.Moments.Label.FeedFailedToLoad,无法加载推送
@@ -4113,6 +4108,15 @@ Feature.Moments.Label.Tone.Funny,
 Feature.Moments.Label.Tone.Hype,活力
 Feature.Moments.Label.Tone.Neutral,中性
 Feature.Moments.Label.Videos,
+Feature.Moments.Label.VoiceCoachmarkBody,输入视频旁白脚本
+Feature.Moments.Label.VoiceCoachmarkTitle,
+Feature.Moments.Label.VoiceGenerating,正在为你创建旁白…
+Feature.Moments.Label.VoiceGenerationFailedBody,旁白生成失败。
+Feature.Moments.Label.VoiceHelperDefault,语音已剪辑‌为视频长度
+Feature.Moments.Label.VoiceLimitReachedBody,请等待一分钟，然后重试
+Feature.Moments.Label.VoiceModerationError,你的脚本必须遵守安全规则
+Feature.Moments.Label.VoicePlaceholder,请输入你的旁白脚本。字符数限制为 {maxCount} 个
+Feature.Moments.Label.VoiceTimeoutBody,旁白生成超时。
 Feature.Moments.Title.GenerateTextFeedbackReason,内容有什么问题？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页面吗？
@@ -4127,7 +4131,7 @@ Feature.NotApproved.Action.ReactivateAccount,重新激活我的账户
 Feature.NotApproved.Action.ReportMistake,报告错误
 Feature.NotApproved.Action.RuleConfirmation,我同意了解并遵循这些规则。
 Feature.NotApproved.Action.UserAgree,
-Feature.NotApproved.Action.ViewAppealGuidelines,
+Feature.NotApproved.Action.ViewAppealGuidelines,查看申诉准则
 Feature.NotApproved.Action.ViewLess,
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,查看规则
@@ -4294,7 +4298,7 @@ Feature.NotApproved.Label.AbuseType.CheatandExploits,作弊和外挂
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,儿童危害行为
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V2,剥削儿童
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V3,有害内容/行为
-Feature.NotApproved.Label.AbuseType.ChildEndangerment.V4,
+Feature.NotApproved.Label.AbuseType.ChildEndangerment.V4,儿童安全
 Feature.NotApproved.Label.AbuseType.ClickbaitAds,钓鱼广告
 Feature.NotApproved.Label.AbuseType.Commerce,商务
 Feature.NotApproved.Label.AbuseType.CompromisedAccount,帐户遭到入侵

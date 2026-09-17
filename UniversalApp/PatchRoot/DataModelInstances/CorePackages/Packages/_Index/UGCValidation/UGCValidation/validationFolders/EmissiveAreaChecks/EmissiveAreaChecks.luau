@@ -10,6 +10,7 @@ local getFIntUGCValidateMaxEmissiveAreaRigidAccessoryModule = require(parent.fla
 local getFIntUGCValidateMaxEmissiveAreaLayeredClothingModule = require(parent.flags.getFIntUGCValidateMaxEmissiveAreaLayeredClothing)
 local getFIntUGCValidateEmissiveR15BlockyBoundingBoxVolumeModule = require(parent.flags.getFIntUGCValidateEmissiveR15BlockyBoundingBoxVolume)
 local getFIntUGCValidationMaxEmissiveStrengthForAreaChecksModule = require(parent.flags.getFIntUGCValidationMaxEmissiveStrengthForAreaChecks)
+local getFFlagUGCValidateEmissiveFixAreaChecksModule = require(parent.flags.getFFlagUGCValidateEmissiveFixAreaChecks)
 local t = {
 	fflag = getFFlagUGCValidateEmissiveAreaChecksModule,
 	categories = {
@@ -94,7 +95,7 @@ local _ = function(p3, p4, p5, p6)
 end
 
 function t.run(p3, p4)
-	-- upvalues: validationEnumsModule (ref), getTotalEmissiveSurfaceArea (ref), getFIntUGCValidateMaxEmissiveAreaRigidAccessoryModule (ref), errorSourceStringsModule (ref), getFIntUGCValidationMaxEmissiveStrengthForAreaChecksModule (ref), getFIntUGCValidateMaxEmissivePercentageBodyModule (ref), getFIntUGCValidateMaxEmissivePercentageDynamicHeadModule (ref), assetService (ref), getFIntUGCValidateEmissiveR15BlockyBoundingBoxVolumeModule (ref), getFIntUGCValidateMaxEmissiveAreaLayeredClothingModule (ref)
+	-- upvalues: validationEnumsModule (ref), getTotalEmissiveSurfaceArea (ref), getFFlagUGCValidateEmissiveFixAreaChecksModule (ref), getFIntUGCValidationMaxEmissiveStrengthForAreaChecksModule (ref), getFIntUGCValidateMaxEmissiveAreaRigidAccessoryModule (ref), errorSourceStringsModule (ref), getFIntUGCValidateMaxEmissivePercentageBodyModule (ref), getFIntUGCValidateMaxEmissivePercentageDynamicHeadModule (ref), assetService (ref), getFIntUGCValidateEmissiveR15BlockyBoundingBoxVolumeModule (ref), getFIntUGCValidateMaxEmissiveAreaLayeredClothingModule (ref)
 	for i, v in p4.renderMeshesData do
 		local var11 = p4.meshTextures[i]
 		local var12 = if var11 then var11.EmissiveMask else nil
@@ -103,6 +104,21 @@ function t.run(p3, p4)
 			if p4.uploadCategory == validationEnumsModule.UploadCategory.RIGID_ACCESSORY then
 				local var13 = getTotalEmissiveSurfaceArea(v, var12.editable)
 				
+				if getFFlagUGCValidateEmissiveFixAreaChecksModule() then
+					local var14
+					local rootInstance = p4.rootInstance
+					
+					if rootInstance.Name ~= i then
+						rootInstance = p4.rootInstance:FindFirstChild(i, true)
+					end
+					if rootInstance then
+						local surfaceAppearance = rootInstance:FindFirstChildWhichIsA("SurfaceAppearance", true)
+						var14 = if surfaceAppearance then surfaceAppearance.EmissiveStrength else 0
+					else
+						var14 = 0
+					end
+					var13 = var13 * var14 / getFIntUGCValidationMaxEmissiveStrengthForAreaChecksModule()
+				end
 				if getFIntUGCValidateMaxEmissiveAreaRigidAccessoryModule() < var13 then
 					p3:fail(errorSourceStringsModule.Keys.EmissiveArea_SurfaceAreaExceeded, {
 						meshName = i,
@@ -111,12 +127,12 @@ function t.run(p3, p4)
 					})
 				end
 			elseif p4.uploadCategory == validationEnumsModule.UploadCategory.TORSO_AND_LIMBS or p4.uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD then
-				local var14
-				local var15, var16 = getTotalEmissiveSurfaceArea(v, var12.editable)
+				local var15
+				local var16, var17 = getTotalEmissiveSurfaceArea(v, var12.editable)
 				
-				if var16 > 0 then
-					local var17
-					local var18 = var15 / var16
+				if var17 > 0 then
+					local var18
+					local var19 = var16 / var17
 					local rootInstance = p4.rootInstance
 					
 					if rootInstance.Name ~= i then
@@ -124,33 +140,51 @@ function t.run(p3, p4)
 					end
 					if rootInstance then
 						local surfaceAppearance = rootInstance:FindFirstChildWhichIsA("SurfaceAppearance", true)
-						var17 = if surfaceAppearance then surfaceAppearance.EmissiveStrength else 0
+						var18 = if surfaceAppearance then surfaceAppearance.EmissiveStrength else 0
 					else
-						var17 = 0
+						var18 = 0
 					end
-					var14 = var18 * var17 / getFIntUGCValidationMaxEmissiveStrengthForAreaChecksModule()
+					var15 = var19 * var18 / getFIntUGCValidationMaxEmissiveStrengthForAreaChecksModule()
 				else
-					var14 = 0
+					var15 = 0
 				end
-				local var19 = if p4.uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD then getFIntUGCValidateMaxEmissivePercentageDynamicHeadModule() else getFIntUGCValidateMaxEmissivePercentageBodyModule()
+				local var20 = if p4.uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD then getFIntUGCValidateMaxEmissivePercentageDynamicHeadModule() else getFIntUGCValidateMaxEmissivePercentageBodyModule()
 				
-				if var19 / 100 < var14 then
+				if var20 / 100 < var15 then
 					p3:fail(errorSourceStringsModule.Keys.EmissiveArea_AboveThreshold, {
 						meshName = i,
-						emissivePercentage = string.format("%.2f", var14 * 100),
-						maxEmissivePercentage = tostring(var19)
+						emissivePercentage = string.format("%.2f", var15 * 100),
+						maxEmissivePercentage = tostring(var20)
 					})
 				end
 			else
 				local model = Instance.new("Model")
 				assetService:CreateMeshPartAsync(Content.fromObject(p4.innerCagesData[i].editable)).Parent = model
 				local _, boundingBox = model:GetBoundingBox()
-				local var20 = getTotalEmissiveSurfaceArea(v, var12.editable) * ((getFIntUGCValidateEmissiveR15BlockyBoundingBoxVolumeModule() / (boundingBox.X * boundingBox.Y * boundingBox.Z)) ^ 0.333333333333) ^ 2
+				local var21 = ((getFIntUGCValidateEmissiveR15BlockyBoundingBoxVolumeModule() / (boundingBox.X * boundingBox.Y * boundingBox.Z)) ^ 0.333333333333) ^ 2
+				local var22 = getTotalEmissiveSurfaceArea(v, var12.editable)
 				
-				if getFIntUGCValidateMaxEmissiveAreaLayeredClothingModule() < var20 then
+				if getFFlagUGCValidateEmissiveFixAreaChecksModule() then
+					local var23
+					local rootInstance = p4.rootInstance
+					
+					if rootInstance.Name ~= i then
+						rootInstance = p4.rootInstance:FindFirstChild(i, true)
+					end
+					if rootInstance then
+						local surfaceAppearance = rootInstance:FindFirstChildWhichIsA("SurfaceAppearance", true)
+						var23 = if surfaceAppearance then surfaceAppearance.EmissiveStrength else 0
+					else
+						var23 = 0
+					end
+					var22 = var22 * var23 / getFIntUGCValidationMaxEmissiveStrengthForAreaChecksModule()
+				end
+				var22 *= var21
+				
+				if getFIntUGCValidateMaxEmissiveAreaLayeredClothingModule() < var22 then
 					p3:fail(errorSourceStringsModule.Keys.EmissiveArea_SurfaceAreaExceeded, {
 						meshName = i,
-						emissiveArea = string.format("%.2f", var20),
+						emissiveArea = string.format("%.2f", var22),
 						maxEmissiveArea = tostring(getFIntUGCValidateMaxEmissiveAreaLayeredClothingModule())
 					})
 				end

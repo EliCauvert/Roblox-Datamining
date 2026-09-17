@@ -640,6 +640,8 @@ Common.Presence.Label.Online,Çevrimiçi
 Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,Animasyon çok uzun ({duration} saniye). İfade animasyonları en fazla {maxLength} saniye uzunluğunda olmalıdır.
 Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,Animasyon çok kısa ({duration} saniye). İfade animasyonları {minLength} saniyeden uzun olmalıdır.
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartPlacement,"{cageName} için kafes parçası yerleştirme ihlali: {upperPart}, {lowerPart} üzerinde doğru konumlandırılmamış."
+Common.UGCValidation.ErrorLabel.AQSFail_CagePartVertexCount,"{cageName} kafesindeki {partName} kafes parçası {actualCount} köşeli; oysa yaklaşık {expectedCount} köşe bekleniyordu. Bu durum, söz konusu vücut bölgesinde eksik veya yinelenen geometri olduğunu gösterebilir."
 Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Vücudun küçük bağlantısız mesh bileşenleri (mesh adaları) içeriyor. Lütfen serbest geometriyi kaldır ve tüm mesh parçalarının düzgün şekilde bağlanmasını sağla.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"Varlık kalitesi: {partName}, {num_disconnected_components} bağlantısız bileşene sahip ve bu sayı {max_disconnected_components} olan üst sınırı aşıyor."
 Common.UGCValidation.ErrorLabel.AQSInputDataError,Girdi verileri yanlış veya eksik olduğu için kalite puanı düzgün şekilde hesaplanamıyor. Lütfen modelini kontrol et veya bir hata raporu gönder
@@ -1214,7 +1216,6 @@ Feature.Accessibility.AppTheme.SuperCharge,Süper Enerjik
 Feature.Accessibility.Description.AppThemeMode,Bir uygulama modu seç. Diğer cihazların etkilenmeyecek.
 Feature.Accessibility.Description.DeviceAppTheme,"Bir uygulama teması seç. Bu, tüm cihaz türlerine yansıtılacaktır."
 Feature.Accessibility.Description.DeviceAppThemeExclusive,Deneyimini özelleştirmek için Plus'a özel temaları keşfet. Şimdi dene ve seçimini kaydetmek için abone ol.
-Feature.Accessibility.Description.DeviceAppThemeUpsell,
 Feature.Accessibility.Description.Haptics,Roblox uygulaması için genel titreşim ayarını kontrol eder
 Feature.Accessibility.Description.LaunchAtStartup,Bilgisayarımı başlattığımda Roblox'u otomatik olarak başlat
 Feature.Accessibility.Description.MinimizeToTray,"Pencere kapatıldığında Roblox tamamen kapatılmaz, sistem tepsisine gönderilir"
@@ -2387,7 +2388,6 @@ Feature.Build.Label.Building,İnşa ediliyor...
 Feature.Build.Label.CaptureLibrary,Yakalama kütüphanesi
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT}/{MAX_SELECTIONS} seçildi
 Feature.Build.Label.ContentRating,İçerik derecelendirmesi
-Feature.Build.Label.Created,Oluşturma Tarihi
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Yaratıcı Merkezi
 Feature.Build.Label.DateRange,{startDate}-{endDate}
@@ -2411,7 +2411,6 @@ Feature.Build.Label.GamePlays,Oyun oynama sayısı
 Feature.Build.Label.GetMoreBuildUsage,Daha fazla İnşa Et kullanım hakkı al
 Feature.Build.Label.Hi,Merhaba
 Feature.Build.Label.IconThumbnails,Simge ve küçük resimler
-Feature.Build.Label.Images2D,2 Boyutlu Görseller
 Feature.Build.Label.InProgress,Devam ediyor
 Feature.Build.Label.InputNeeded,Giriş gerekli
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -2421,7 +2420,6 @@ Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,Yönetilen fiyatlandırma
 Feature.Build.Label.ManagedPricingMixed,Mevcut ürünler arasında karışık
 Feature.Build.Label.MaximizeForGamePlays,Oyun oynama sayısını en üst düzeye çıkar
-Feature.Build.Label.Models3D,3 Boyutlu Modeller
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Sınır yok
 Feature.Build.Label.NotStarted,Başlamadı
@@ -2439,7 +2437,6 @@ Feature.Build.Label.Private,
 Feature.Build.Label.Public,Herkese Açık
 Feature.Build.Label.PubliclyUnavailable,Herkese açık değil
 Feature.Build.Label.Published,
-Feature.Build.Label.Purchased,Satın alındı
 Feature.Build.Label.Ready,Hazır
 Feature.Build.Label.RegionalPricing,Bölgesel fiyatlandırma
 Feature.Build.Label.ResetsDaily,Her gün sıfırlanır
@@ -2448,14 +2445,11 @@ Feature.Build.Label.ResetsWeekly,Her hafta sıfırlanır
 Feature.Build.Label.RestoredVersion,{VERSION} geri yüklendi
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,Varlık ara
 Feature.Build.Label.SearchGames,Oyun ara
 Feature.Build.Label.SearchTasks,Görev ara
 Feature.Build.Label.SelectOption,Bir seçenek belirle
-Feature.Build.Label.Shared,Paylaşıldı
 Feature.Build.Label.ShopButton,Alışveriş yap düğmesi
 Feature.Build.Label.ShopUi,Alışveriş yap kullanıcı arayüzü
-Feature.Build.Label.Sounds,Sesler
 Feature.Build.Label.TargetAllRobloxPlayers,Tüm Roblox oyuncularını hedefle
 Feature.Build.Label.Thinking,Düşünüyor
 Feature.Build.Label.Title,Başlık
@@ -2525,7 +2519,6 @@ Feature.Build.Label.UniverseNumber,Evren {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Bilinmeyen
 Feature.Build.Label.UnlimitedUsed,{USED} kullanıldı • Sınır yok
 Feature.Build.Label.UpdateTitleDesc,Başlığı ve açıklamayı güncelle
-Feature.Build.Label.Updated,Güncelleme Tarihi
 Feature.Build.Label.Usage,Kullanım
 Feature.Build.Label.UsageUsed,{USED} kullanıldı
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2546,8 +2539,6 @@ Feature.Build.Message.AdsStatsEmpty,Bir reklam kampanyasıyla kitleni genişlet 
 Feature.Build.Message.AdsStatsEmptyFree,Ücretsiz bir reklam kampanyasıyla kitleni genişlet ve oyununun keşfedilmesini sağla
 Feature.Build.Message.AllFriendsAdded,Tüm arkadaşlarını erken test kullanıcısı olmaya davet ettin.
 Feature.Build.Message.AnswerBuildQuestion,İnşa Et'in sorusunu aşağıda yanıtla.
-Feature.Build.Message.AssetDetailsUnavailable,Varlık ayrıntıları kullanılamıyor.
-Feature.Build.Message.AssetsLoadFailed,Varlıklar yüklenemiyor.
 Feature.Build.Message.AudienceIneligible,Bu kitle için gerekli şartları karşılamıyor
 Feature.Build.Message.BuildAccountBlocked,İnşa Et şu anda hesabında kullanılamıyor.
 Feature.Build.Message.BuildBusy,İnşa Et meşgul. Bir dakika bekle ve tekrar dene.
@@ -2579,7 +2570,6 @@ Feature.Build.Message.InvitesLoadFailed,Davetler yüklenemedi
 Feature.Build.Message.LimitBelowSpend,"Sınır, bugün harcanmış olan {ALREADY_SPENT} Robux'un altında olamaz."
 Feature.Build.Message.LinkCopied,"Bağlantı, panoya kopyalandı."
 Feature.Build.Message.LoadingVersions,Sürüm geçmişi yükleniyor...
-Feature.Build.Message.NoAssetsFound,Varlık bulunamadı.
 Feature.Build.Message.NoCapturesAvailable,Hiç yakalanan yok
 Feature.Build.Message.NoDescriptionProvided,Açıklama sağlanmadı.
 Feature.Build.Message.NoFriendsToAdd,Henüz davet edecek arkadaşın yok. Önce Roblox'ta bağlantı kurabileceğin insanlar bul.
@@ -2634,7 +2624,6 @@ Feature.Build.Title.AddImages,Görsel ekle
 Feature.Build.Title.AdsStatsEmpty,Bir kampanya başlat
 Feature.Build.Title.AdsStatsEmptyFree,İlk kampanyanı başlat
 Feature.Build.Title.ArchiveThisGame,Bu oyun arşivlensin mi?
-Feature.Build.Title.AssetLibrary,Kütüphane
 Feature.Build.Title.Audience,Kitle
 Feature.Build.Title.BuildQuestion,İnşa Et'in bir sorusu var
 Feature.Build.Title.BuildQuestions,İnşa Et'in bazı soruları var
@@ -3373,6 +3362,7 @@ Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,Satın al
 Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,Demoyu Oyna
+Feature.ExperienceDetails.PlayButtonText.Playtest,
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,Kilidini Aç
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -3630,7 +3620,6 @@ Feature.Friends.TrustedFriend.Info.Modal.Header,Yeni güvenilir arkadaş
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Güvenilir arkadaş olarak ekle
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Güvenilir arkadaşlara ekle
 Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Güvenilir Arkadaş Ekle
-Feature.Friends.TrustedFriend.Label.Title,Güvenilir arkadaş
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} artık güvenilir arkadaşın
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Güvenilir arkadaş kaldırıldı
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Güvenilir arkadaş olma talebi gönderildi
@@ -3679,7 +3668,7 @@ Feature.GameDetails.Label.ChatFeatures,Sohbet Özellikleri
 Feature.GameDetails.Label.Community,Topluluk
 Feature.GameDetails.Label.ContainsStrongLanguagePillWarning,Sert bir dil içerir
 Feature.GameDetails.Label.ContentMaturity,
-Feature.GameDetails.Label.Created,
+Feature.GameDetails.Label.Created,Oluşturma Tarihi
 Feature.GameDetails.Label.Developer,Geliştirici
 Feature.GameDetails.Label.DontLikeGame,Bu oyunu beğenmedim
 Feature.GameDetails.Label.DontLikeImage,Bu görseli beğenmedim
@@ -4025,7 +4014,9 @@ Feature.Moments.Action.AddVoice,Ses Ekle
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
+Feature.Moments.Action.CreateVoiceover,Seslendirme oluştur
 Feature.Moments.Action.Delete,
+Feature.Moments.Action.DiscardChange,Değişikliği sil
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Genişlet
 Feature.Moments.Action.GenerateText,Metin Oluştur
@@ -4034,6 +4025,7 @@ Feature.Moments.Action.GenerateTextFeedbackPolicy,Uygunsuz veya Kural Dışı
 Feature.Moments.Action.Hide,Ayrıntıları gizle
 Feature.Moments.Action.HowToCapture,Nasıl Yakalama Yapılır?
 Feature.Moments.Action.Join,
+Feature.Moments.Action.KeepEditing,Düzenlemeye devam et
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Küçült
 Feature.Moments.Action.Ok,
@@ -4043,9 +4035,11 @@ Feature.Moments.Action.Report,Raporla
 Feature.Moments.Action.Retry,
 Feature.Moments.Action.Return,Galeriye dön
 Feature.Moments.Action.ReturnToEditing,Düzenlemeye dön
+Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,Ayrıntıları göster
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Videoyu Kırp
+Feature.Moments.Action.TryAgain,
 Feature.Moments.Description.CommunityStandards,Ne söyleyip söyleyemeyeceğin hakkında daha fazla bilgi için Topluluk Standartlarını kontrol et.
 Feature.Moments.Description.EmptyCapturesLibrary,Yakalamaların burada görünecektir.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Yapay zekâ tarafından oluşturuldu. Yayınlamadan önce gözden geçir; yayınlananlardan sen sorumlusun.
@@ -4063,7 +4057,10 @@ Feature.Moments.Label.AttemptingJoinExperience,{placeName} dünyasına katılmay
 Feature.Moments.Label.CaptureLibrary,Yakalama kütüphanen
 Feature.Moments.Label.DeleteMomentBody,Bir An silindikten sonra onu kurtarmak mümkün olmaz.
 Feature.Moments.Label.DeleteMomentTitle,An silinsin mi?
+Feature.Moments.Label.DeleteVoiceoverBody,"Bu, işlem metnini ve seslendirmeni siler. İstediğin zaman baştan başlayabilirsin."
+Feature.Moments.Label.DeleteVoiceoverTitle,Seslendirme silinsin mi?
 Feature.Moments.Label.Error,
+Feature.Moments.Label.ExceedsCharacterLimit,Karakter sınırını aşıyor
 Feature.Moments.Label.FeedEndBody,Daha sonra tekrar kontrol et veya kendi Anını oluştur.
 Feature.Moments.Label.FeedEndTitle,Yeni bir şey yok
 Feature.Moments.Label.FeedFailedToLoad,Sayfa yüklenemedi
@@ -4114,6 +4111,15 @@ Feature.Moments.Label.Tone.Funny,Komik
 Feature.Moments.Label.Tone.Hype,Heyecan verici
 Feature.Moments.Label.Tone.Neutral,Nötr
 Feature.Moments.Label.Videos,
+Feature.Moments.Label.VoiceCoachmarkBody,Video anlatımı için bir metin yaz
+Feature.Moments.Label.VoiceCoachmarkTitle,Bir seslendirme oluştur
+Feature.Moments.Label.VoiceGenerating,Seslendirmen oluşturuluyor...
+Feature.Moments.Label.VoiceGenerationFailedBody,Seslendirme oluşturulamadı.
+Feature.Moments.Label.VoiceHelperDefault,"Ses, video uzunluğuna göre kırpıldı"
+Feature.Moments.Label.VoiceLimitReachedBody,"Bir dakika bekle, ardından tekrar dene"
+Feature.Moments.Label.VoiceModerationError,Metnin güvenlik kurallarına uymalıdır
+Feature.Moments.Label.VoicePlaceholder,Seslendirme metnini yaz. {maxCount} karakter sınırı
+Feature.Moments.Label.VoiceTimeoutBody,Seslendirme oluşturma işlemi zaman aşımına uğradı.
 Feature.Moments.Title.GenerateTextFeedbackReason,Ne yanlış gitti?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?
@@ -4128,6 +4134,7 @@ Feature.NotApproved.Action.ReactivateAccount,Hesabımı Yeniden Etkinleştir
 Feature.NotApproved.Action.ReportMistake,Bir hata raporla
 Feature.NotApproved.Action.RuleConfirmation,Kuralları bildiğimi ve bunlara uyacağımı kabul ediyorum.
 Feature.NotApproved.Action.UserAgree,
+Feature.NotApproved.Action.ViewAppealGuidelines,İtiraz yönergelerini görüntüle
 Feature.NotApproved.Action.ViewLess,Daha azını görüntüle
 Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,Kuralları görüntüle
@@ -4290,6 +4297,7 @@ Feature.NotApproved.Label.AbuseType.CheatandExploits,Hile ve İstismar
 Feature.NotApproved.Label.AbuseType.ChildEndangerment,Çocuğun Tehlikeye Atılması
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V2,Çocuk İstismarı
 Feature.NotApproved.Label.AbuseType.ChildEndangerment.V3,Zararlı İçerik/Davranış
+Feature.NotApproved.Label.AbuseType.ChildEndangerment.V4,Çocuk Güvenliği
 Feature.NotApproved.Label.AbuseType.ClickbaitAds,Tıklama Tuzağı Reklamlar
 Feature.NotApproved.Label.AbuseType.Commerce,Alışveriş
 Feature.NotApproved.Label.AbuseType.CompromisedAccount,Ele Geçirilmiş Hesap

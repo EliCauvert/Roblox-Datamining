@@ -5,17 +5,14 @@ local validateSingleInstanceModule = require(parent.validation.validateSingleIns
 local validateInstanceTreeModule = require(parent.validation.validateInstanceTree)
 local validateLegacyAccessoryMeshPartAssetFormatMatchModule = require(parent.validation.validateLegacyAccessoryMeshPartAssetFormatMatch)
 local validateSurfaceAppearancesModule = require(parent.validation.validateSurfaceAppearances)
-local validateSurfaceAppearanceTextureSizeModule = require(parent.validation.validateSurfaceAppearanceTextureSize)
 local validateTexturePackModule = require(parent.validation.ValidateTexturePack)
-local validateSurfaceAppearanceTransparencyModule = require(parent.validation.validateSurfaceAppearanceTransparency)
 local validatePropertiesSensibleModule = require(parent.validation.ValidatePropertiesSensible)
 local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
 local getFFlagUGCValidateTexturePackModule = require(parent.flags.getFFlagUGCValidateTexturePack)
-local getFFlagUGCValidateMigrateTextureTransparencyModule = require(parent.flags.getFFlagUGCValidateMigrateTextureTransparency)
 local getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule = require(parent.flags.getFFlagUGCValidateMigrateSurfaceAppearanceMeshQuality)
 
 return function(value, p1)
-	-- upvalues: validateSingleInstanceModule (ref), createLegacyAccessoryMeshPartAssetFormatSchemaModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule (ref), validateSurfaceAppearancesModule (ref), getFFlagUGCValidateMigrateTextureTransparencyModule (ref), validateSurfaceAppearanceTextureSizeModule (ref), validateSurfaceAppearanceTransparencyModule (ref), getFFlagUGCValidateTexturePackModule (ref), validateTexturePackModule (ref), validateLegacyAccessoryMeshPartAssetFormatMatchModule (ref)
+	-- upvalues: validateSingleInstanceModule (ref), createLegacyAccessoryMeshPartAssetFormatSchemaModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule (ref), validateSurfaceAppearancesModule (ref), getFFlagUGCValidateTexturePackModule (ref), validateTexturePackModule (ref), validateLegacyAccessoryMeshPartAssetFormatMatchModule (ref)
 	assert(p1.instances ~= nil, "instances required in validationContext for validateLegacyAccessoryMeshPartAssetFormat")
 	local instances = p1.instances
 	local _ = nil
@@ -43,32 +40,20 @@ return function(value, p1)
 			
 			if not var10 then
 				return false, var12
-			elseif not getFFlagUGCValidateMigrateTextureTransparencyModule() then
-				local var13, var14 = validateSurfaceAppearanceTextureSizeModule(var3, p1)
+			elseif not getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule() and getFFlagUGCValidateTexturePackModule() then
+				local var13, var14 = validateTexturePackModule.validate(var3, false, p1)
+				local var15 = var14
 				
 				if not var13 then
-					return false, var14
+					return false, var15
 				end
-				local var15, var16 = validateSurfaceAppearanceTransparencyModule(var3, p1)
-				local var17 = var16
-				
-				if not var15 then
-					return false, var17
-				elseif not getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule() and getFFlagUGCValidateTexturePackModule() then
-					local var18, var19 = validateTexturePackModule.validate(var3, false, p1)
-					local var20 = var19
-					
-					if not var18 then
-						return false, var20
-					end
-				end
-				local var21, var22 = validateLegacyAccessoryMeshPartAssetFormatMatchModule(var3, value, p1)
-				
-				if var21 then
-					return true
-				end
-				return false, var22
 			end
+			local var16, var17 = validateLegacyAccessoryMeshPartAssetFormatMatchModule(var3, value, p1)
+			
+			if var16 then
+				return true
+			end
+			return false, var17
 		end
 	end
 end
