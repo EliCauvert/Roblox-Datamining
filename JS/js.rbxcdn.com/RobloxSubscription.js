@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "bf98d2721f9062e6d4f04360f61403bd38490e8b"
+            id: "6ccc07fd02c1f10281f931f3e39d5988237759bb"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "a6fbebd1-f68a-4f13-8987-55c39176bebb", e._sentryDebugIdIdentifier = "sentry-dbid-a6fbebd1-f68a-4f13-8987-55c39176bebb")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "43c6ba14-cdb2-4bf9-901b-c59ea10af6b4", e._sentryDebugIdIdentifier = "sentry-dbid-43c6ba14-cdb2-4bf9-901b-c59ea10af6b4")
     } catch (e) {}
 }(),
 function() {
@@ -2030,11 +2030,11 @@ function() {
                     var e, t = document.querySelector('meta[name="subscription-referral-data"]');
                     return null != (e = null == t ? void 0 : t.dataset) ? e : null
                 },
-                e7 = function() {
+                e9 = function() {
                     var e;
                     return (null == (e = e8()) ? void 0 : e.isEnabled) === "true"
                 },
-                e9 = "https://www.roblox.com/info/terms",
+                e7 = "https://www.roblox.com/info/terms",
                 te = "referrals",
                 tt = "roblox_subscription_redirect_url",
                 tr = window.React,
@@ -2910,7 +2910,7 @@ function() {
                             primary: a("Description.Benefit.PublishItems"),
                             secondary: a("Description.Benefit.PublishItemsSubtitle"),
                             onTileClick: n
-                        }), void 0 !== i && i && e7() && (0, O.jsx)(t4, {
+                        }), void 0 !== i && i && e9() && (0, O.jsx)(t4, {
                             expandedPrimary: a("Description.Benefit.Referral"),
                             expandedSecondary: a("Description.Benefit.ReferralSubtitle", {
                                 amount: l.n(100)
@@ -2947,13 +2947,13 @@ function() {
                 return t.featureConfig
             }
 
-            function t7(e) {
+            function t9(e) {
                 var t, r = e.productTypeDetails.robloxSubscriptionProductDetails,
                     n = null == r ? void 0 : r.featureConfig.currencySubscriptionConfig;
                 return Math.floor((null != (t = null == n ? void 0 : n.entitledAmountMicros) ? t : 0) / 1e6)
             }
 
-            function t9(e) {
+            function t7(e) {
                 return e.eligibleOffers.find(function(e) {
                     return "FreeTrial" === e.offerType
                 })
@@ -3845,7 +3845,7 @@ function() {
                 })()
             }
 
-            function r7(e, t) {
+            function r9(e, t) {
                 return {
                     top: e.top - t.height,
                     right: e.right - t.width,
@@ -3854,7 +3854,7 @@ function() {
                 }
             }
 
-            function r9(e) {
+            function r7(e) {
                 return rP.some(function(t) {
                     return e[t] >= 0
                 })
@@ -4768,12 +4768,12 @@ function() {
                 return "u" < typeof window ? 1 : (e.ownerDocument.defaultView || window).devicePixelRatio || 1
             }
 
-            function n7(e, t) {
+            function n9(e, t) {
                 var r = n8(e);
                 return Math.round(t * r) / r
             }
 
-            function n9(e) {
+            function n7(e) {
                 var t = tr.useRef(e);
                 return n5(function() {
                     t.current = e
@@ -5074,8 +5074,8 @@ function() {
                                         case 2:
                                             return [2, {
                                                 data: {
-                                                    referenceHiddenOffsets: l = r7(c.sent(), t.reference),
-                                                    referenceHidden: r9(l)
+                                                    referenceHiddenOffsets: l = r9(c.sent(), t.reference),
+                                                    referenceHidden: r7(l)
                                                 }
                                             }];
                                         case 3:
@@ -5085,8 +5085,8 @@ function() {
                                         case 4:
                                             return [2, {
                                                 data: {
-                                                    escapedOffsets: u = r7(c.sent(), t.floating),
-                                                    escaped: r9(u)
+                                                    escapedOffsets: u = r9(c.sent(), t.floating),
+                                                    escaped: r7(u)
                                                 }
                                             }];
                                         case 5:
@@ -5702,7 +5702,7 @@ function() {
                             e !== _.current && (_.current = e, D(e))
                         }, []), k = tr.useCallback(function(e) {
                             e !== B.current && (B.current = e, C(e))
-                        }, []), U = b || T, z = g || L, _ = tr.useRef(null), B = tr.useRef(null), Y = tr.useRef(S), F = null != w, G = n9(w), W = n9(p), Q = n9(x), V = tr.useCallback(function() {
+                        }, []), U = b || T, z = g || L, _ = tr.useRef(null), B = tr.useRef(null), Y = tr.useRef(S), F = null != w, G = n7(w), W = n7(p), Q = n7(x), V = tr.useCallback(function() {
                             if (_.current && B.current) {
                                 var e = {
                                     placement: u,
@@ -5753,8 +5753,8 @@ function() {
                                 top: 0
                             };
                             if (!H.floating) return e;
-                            var t = n7(H.floating, S.x),
-                                r = n7(H.floating, S.y);
+                            var t = n9(H.floating, S.x),
+                                r = n9(H.floating, S.y);
                             return v ? n1(n4(n1({}, e), {
                                 transform: "translate(" + t + "px, " + r + "px)"
                             }), n8(H.floating) >= 1.5 && {
@@ -6146,7 +6146,7 @@ function() {
                 }()
             }
 
-            function i7(e) {
+            function i9(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -6165,11 +6165,11 @@ function() {
                 return e
             }
             i3.displayName = "Presence";
-            var i9 = tr.forwardRef(function(e, t) {
+            var i7 = tr.forwardRef(function(e, t) {
                 var r, n;
-                return (0, O.jsx)(ix.span, (r = i7({}, e), n = n = {
+                return (0, O.jsx)(ix.span, (r = i9({}, e), n = n = {
                     ref: t,
-                    style: i7({
+                    style: i9({
                         position: "absolute",
                         border: 0,
                         width: 1,
@@ -6294,7 +6294,7 @@ function() {
                     if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return oe(e, t)
                 }
             }
-            i9.displayName = "VisuallyHidden";
+            i7.displayName = "VisuallyHidden";
             var ol = oi(rx("Tooltip", [ik]), 2),
                 ou = ol[0];
             ol[1];
@@ -6778,7 +6778,7 @@ function() {
                             }), (0, O.jsx)(oA, {
                                 scope: r,
                                 isInside: !0,
-                                children: (0, O.jsx)(i9, {
+                                children: (0, O.jsx)(i7, {
                                     id: u.contentId,
                                     role: "tooltip",
                                     children: i || n
@@ -7219,11 +7219,11 @@ function() {
                 if (Array.isArray(e)) return e
             }
 
-            function o7() {
+            function o9() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function o9(e) {
+            function o7(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -7367,7 +7367,7 @@ function() {
                 ad = (0, tr.forwardRef)(function(e, t) {
                     var r, n, i = o8(r = [e, t]) || function(e) {
                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                        }(r) || ar(r) || o7(),
+                        }(r) || ar(r) || o9(),
                         o = i[0],
                         a = i.slice(1),
                         l = o.className,
@@ -7405,7 +7405,7 @@ function() {
                                 }
                                 return i
                             }
-                        }(a) || ar(a, 1) || o7())[0];
+                        }(a) || ar(a, 1) || o9())[0];
                     n = d ? al[g] : void 0 !== p && p ? au[g] : aa[g];
                     var S = ti("foundation-web-icon-button", d ? tp : [td, "cursor-pointer"], "relative flex items-center justify-center padding-none stroke-none select-none", an[y], ao[y][void 0 !== f && f ? "circular" : "square"], n, l),
                         I = tn().createElement(tn().Fragment, null, tn().createElement(tf, null), tn().createElement("span", {
@@ -7415,7 +7415,7 @@ function() {
                         j.as;
                         var M = at(j, ["as"]),
                             N = tn().Children.only(x);
-                        return tn().createElement(tP, ae(o9({
+                        return tn().createElement(tP, ae(o7({
                             ref: O
                         }, M), {
                             className: S,
@@ -7427,7 +7427,7 @@ function() {
                         j.as;
                         var P = j.href,
                             E = at(j, ["as", "href"]);
-                        return tn().createElement("a", ae(o9({
+                        return tn().createElement("a", ae(o7({
                             ref: O
                         }, E), {
                             "aria-label": c,
@@ -7438,7 +7438,7 @@ function() {
                     }
                     j.as;
                     var T = at(j, ["as"]);
-                    return tn().createElement("button", ae(o9({
+                    return tn().createElement("button", ae(o7({
                         ref: O,
                         type: "button"
                     }, T), {
@@ -8428,7 +8428,7 @@ function() {
                 }()
             }
             a5.displayName = "Portal";
-            var a7 = function(e) {
+            var a9 = function(e) {
                 var t, r, n, i, o, a, l, u, c, s, d, f, p, m, y, b, g, h = e.present,
                     v = e.children,
                     w = (t = h, o = (i = a8(tr.useState(), 2))[0], a = i[1], l = tr.useRef({}), u = tr.useRef(t), c = tr.useRef("none"), d = (s = a8((r = t ? "mounted" : "unmounted", n = {
@@ -8447,21 +8447,21 @@ function() {
                         var r = n[e][t];
                         return null != r ? r : e
                     }, r)), 2))[0], f = s[1], tr.useEffect(function() {
-                        var e = a9(l.current);
+                        var e = a7(l.current);
                         c.current = "mounted" === d ? e : "none"
                     }, [d]), aI(function() {
                         var e = l.current,
                             r = u.current;
                         if (r !== t) {
                             var n = c.current,
-                                i = a9(e);
+                                i = a7(e);
                             t ? f("MOUNT") : "none" === i || (null == e ? void 0 : e.display) === "none" ? f("UNMOUNT") : r && n !== i ? f("ANIMATION_OUT") : f("UNMOUNT"), u.current = t
                         }
                     }, [t, f]), aI(function() {
                         if (o) {
                             var e, t, r = null != (e = o.ownerDocument.defaultView) ? e : window,
                                 n = function(e) {
-                                    var n = a9(l.current).includes(e.animationName);
+                                    var n = a7(l.current).includes(e.animationName);
                                     if (e.target === o && n && (f("ANIMATION_END"), !u.current)) {
                                         var i = o.style.animationFillMode;
                                         o.style.animationFillMode = "forwards", t = r.setTimeout(function() {
@@ -8470,7 +8470,7 @@ function() {
                                     }
                                 },
                                 i = function(e) {
-                                    e.target === o && (c.current = a9(l.current))
+                                    e.target === o && (c.current = a7(l.current))
                                 };
                             return o.addEventListener("animationstart", i), o.addEventListener("animationcancel", n), o.addEventListener("animationend", n),
                                 function() {
@@ -8493,10 +8493,10 @@ function() {
                 }) : null
             };
 
-            function a9(e) {
+            function a7(e) {
                 return (null == e ? void 0 : e.animationName) || "none"
             }
-            a7.displayName = "Presence";
+            a9.displayName = "Presence";
             var le = window.RadixUI["react-focus-guards"],
                 lt = function() {
                     return (lt = Object.assign || function(e) {
@@ -9224,22 +9224,22 @@ function() {
                 }))
             }).displayName = l6;
             var l8 = "DialogPortal",
-                l7 = l$(l1(l8, {
+                l9 = l$(l1(l8, {
                     forceMount: void 0
                 }), 2),
-                l9 = l7[0],
-                ue = l7[1],
+                l7 = l9[0],
+                ue = l9[1],
                 ut = function(e) {
                     var t = e.__scopeDialog,
                         r = e.forceMount,
                         n = e.children,
                         i = e.container,
                         o = l3(l8, t);
-                    return (0, O.jsx)(l9, {
+                    return (0, O.jsx)(l7, {
                         scope: t,
                         forceMount: r,
                         children: tr.Children.map(n, function(e) {
-                            return (0, O.jsx)(a7, {
+                            return (0, O.jsx)(a9, {
                                 present: r || o.open,
                                 children: (0, O.jsx)(a5, {
                                     asChild: !0,
@@ -9258,7 +9258,7 @@ function() {
                         i = void 0 === n ? r.forceMount : n,
                         o = lZ(e, ["forceMount"]),
                         a = l3(ur, e.__scopeDialog);
-                    return a.modal ? (0, O.jsx)(a7, {
+                    return a.modal ? (0, O.jsx)(a9, {
                         present: i || a.open,
                         children: (0, O.jsx)(uo, lX(lH({}, o), {
                             ref: t
@@ -9292,7 +9292,7 @@ function() {
                         i = void 0 === n ? r.forceMount : n,
                         o = lZ(e, ["forceMount"]),
                         a = l3(ua, e.__scopeDialog);
-                    return (0, O.jsx)(a7, {
+                    return (0, O.jsx)(a9, {
                         present: i || a.open,
                         children: a.modal ? (0, O.jsx)(uu, lX(lH({}, o), {
                             ref: t
@@ -10094,10 +10094,10 @@ function() {
                     })
                 },
                 u8 = window.Roblox,
-                u7 = u8.EnvironmentUrls.apiGatewayUrl,
-                u9 = new e2(new eY({
+                u9 = u8.EnvironmentUrls.apiGatewayUrl,
+                u7 = new e2(new eY({
                     robloxSiteDomain: u8.EnvironmentUrls.domain,
-                    basePath: "".concat(u7, "/subscriptions"),
+                    basePath: "".concat(u9, "/subscriptions"),
                     credentials: "include"
                 }));
 
@@ -10208,7 +10208,7 @@ function() {
                                         switch (e.label) {
                                             case 0:
                                                 if (!i) return [2, void 0];
-                                                return [4, u9.subscriptionsV2CreateSubscriptionReferral({
+                                                return [4, u7.subscriptionsV2CreateSubscriptionReferral({
                                                     referrerId: n
                                                 })];
                                             case 1:
@@ -10376,7 +10376,7 @@ function() {
                                     }(this, function(t) {
                                         switch (t.label) {
                                             case 0:
-                                                return [4, u9.subscriptionsV2ListAvailableSubscriptionProducts({
+                                                return [4, u7.subscriptionsV2ListAvailableSubscriptionProducts({
                                                     productType: eZ,
                                                     includePurchased: !0,
                                                     includeBundles: !0,
@@ -10540,7 +10540,7 @@ function() {
                                         switch (t.label) {
                                             case 0:
                                                 if (!i) return [2, void 0];
-                                                return [4, u9.subscriptionsV2CheckSubscriptionReferralEligibility({
+                                                return [4, u7.subscriptionsV2CheckSubscriptionReferralEligibility({
                                                     referrerId: n
                                                 })];
                                             case 1:
@@ -10782,7 +10782,7 @@ function() {
                             render: function(e) {
                                 return (0, O.jsx)("a", {
                                     className: "content-link underline",
-                                    href: e9,
+                                    href: e7,
                                     rel: "noopener noreferrer",
                                     target: "_blank",
                                     children: e
@@ -10898,7 +10898,7 @@ function() {
                         a = e.subscribePeriodType,
                         l = e.subscribeFeatureConfig,
                         u = e.subscribeEligibleOffers,
-                        c = void 0 !== n && e7(),
+                        c = void 0 !== n && e9(),
                         s = cu({
                             referrerId: null == n ? void 0 : n.referrerId,
                             enabled: c
@@ -11624,13 +11624,13 @@ function() {
                 }
             }
 
-            function c7(e, t) {
+            function c9(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function c9(e, t, r, n, i, o, a) {
+            function c7(e, t, r, n, i, o, a) {
                 try {
                     var l = e[o](a),
                         u = l.value
@@ -11665,17 +11665,111 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return c7(e, t);
+                        if ("string" == typeof e) return c9(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return c7(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return c9(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var st = "paymentSession-".concat((null === u8.CurrentUser || void 0 === u8.CurrentUser ? void 0 : u8.CurrentUser.userId) || "loggedout"),
-                sr = function(e) {
+            var st = "paymentSession-".concat((null === u8.CurrentUser || void 0 === u8.CurrentUser ? void 0 : u8.CurrentUser.userId) || "loggedout");
+
+            function sr(e, t) {
+                (null == t || t > e.length) && (t = e.length);
+                for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
+                return n
+            }
+            var sn = function(e) {
+                    var t = new URLSearchParams(e),
+                        r = t.get("referralCode"),
+                        n = t.get("referrerId");
+                    return r ? function(e) {
+                        for (var t = 1; t < arguments.length; t++) {
+                            var r = null != arguments[t] ? arguments[t] : {},
+                                n = Object.keys(r);
+                            "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(r).filter(function(e) {
+                                return Object.getOwnPropertyDescriptor(r, e).enumerable
+                            }))), n.forEach(function(t) {
+                                var n;
+                                n = r[t], t in e ? Object.defineProperty(e, t, {
+                                    value: n,
+                                    enumerable: !0,
+                                    configurable: !0,
+                                    writable: !0
+                                }) : e[t] = n
+                            })
+                        }
+                        return e
+                    }({
+                        kind: "invite",
+                        code: r
+                    }, n ? {
+                        referrerId: n
+                    } : {}) : t.get("referralStatus") ? {
+                        kind: "invalid"
+                    } : n ? {
+                        kind: "invite",
+                        referrerId: n
+                    } : {
+                        kind: "none"
+                    }
+                },
+                si = function(e) {
+                    var t, r = e.subscribeButtonProps,
+                        n = e.subscribePrice,
+                        i = e.subscribePeriodType,
+                        o = e.subscribeFeatureConfig,
+                        a = e.subscribeEligibleOffers,
+                        l = (0, tr.useMemo)(function() {
+                            return sn(window.location.search)
+                        }, []),
+                        u = function(e) {
+                            if (Array.isArray(e)) return e
+                        }(t = (0, tr.useState)("none" !== l.kind)) || function(e) {
+                            var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                            if (null != n) {
+                                var i = [],
+                                    o = !0,
+                                    a = !1;
+                                try {
+                                    for (n = n.call(e); !(o = (t = n.next()).done) && (i.push(t.value), 2 !== i.length); o = !0);
+                                } catch (e) {
+                                    a = !0, r = e
+                                } finally {
+                                    try {
+                                        o || null == n.return || n.return()
+                                    } finally {
+                                        if (a) throw r
+                                    }
+                                }
+                                return i
+                            }
+                        }(t) || function(e) {
+                            if (e) {
+                                if ("string" == typeof e) return sr(e, 2);
+                                var t = Object.prototype.toString.call(e).slice(8, -1);
+                                if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return sr(e, 2)
+                            }
+                        }(t) || function() {
+                            throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                        }(),
+                        c = u[0],
+                        s = u[1];
+                    return "none" === l.kind ? null : (0, O.jsx)(cS, {
+                        invite: "invite" === l.kind ? l : void 0,
+                        open: c,
+                        subscribeButtonProps: r,
+                        subscribeEligibleOffers: a,
+                        subscribeFeatureConfig: o,
+                        subscribePeriodType: i,
+                        subscribePrice: n,
+                        onOpenChange: s
+                    })
+                },
+                so = function(e) {
                     var t = e.title,
                         r = e.body,
                         n = e.equipText,
@@ -11718,7 +11812,7 @@ function() {
                         })]
                     })
                 },
-                sn = function(e) {
+                sa = function(e) {
                     var t = e.size,
                         r = e.variant,
                         n = (0, (0, S.useTranslation)().translate)("Label.Blackbird");
@@ -11752,15 +11846,15 @@ function() {
                         })]
                     })
                 },
-                si = window.Roblox["core-scripts"].format.string,
-                so = function(e) {
+                sl = window.Roblox["core-scripts"].format.string,
+                su = function(e) {
                     var t, r = e.eligibleOffers,
                         n = e.price,
                         i = e.periodType,
                         o = (0, S.useTranslation)().translate,
                         a = cr(n),
                         l = o("Description.BillingInfo", {
-                            price: "<span class='text-heading-medium'>".concat((0, si.escapeHtml)(a), "</span>"),
+                            price: "<span class='text-heading-medium'>".concat((0, sl.escapeHtml)(a), "</span>"),
                             periodType: i
                         }),
                         u = o("Description.BillingInfoWithFreeTrialOffer", {
@@ -11768,7 +11862,7 @@ function() {
                             boldTagEnd: "</b>",
                             trialPeriod: 1,
                             trialPeriodType: i,
-                            price: (0, si.escapeHtml)(a),
+                            price: (0, sl.escapeHtml)(a),
                             periodType: i
                         }),
                         c = null != (t = null == r ? void 0 : r.some(function(e) {
@@ -11779,100 +11873,6 @@ function() {
                             __html: c ? u : l
                         },
                         className: "text-body-large"
-                    })
-                };
-
-            function sa(e, t) {
-                (null == t || t > e.length) && (t = e.length);
-                for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
-                return n
-            }
-            var sl = function(e) {
-                    var t = new URLSearchParams(e),
-                        r = t.get("referralCode"),
-                        n = t.get("referrerId");
-                    return r ? function(e) {
-                        for (var t = 1; t < arguments.length; t++) {
-                            var r = null != arguments[t] ? arguments[t] : {},
-                                n = Object.keys(r);
-                            "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(r).filter(function(e) {
-                                return Object.getOwnPropertyDescriptor(r, e).enumerable
-                            }))), n.forEach(function(t) {
-                                var n;
-                                n = r[t], t in e ? Object.defineProperty(e, t, {
-                                    value: n,
-                                    enumerable: !0,
-                                    configurable: !0,
-                                    writable: !0
-                                }) : e[t] = n
-                            })
-                        }
-                        return e
-                    }({
-                        kind: "invite",
-                        code: r
-                    }, n ? {
-                        referrerId: n
-                    } : {}) : t.get("referralStatus") ? {
-                        kind: "invalid"
-                    } : n ? {
-                        kind: "invite",
-                        referrerId: n
-                    } : {
-                        kind: "none"
-                    }
-                },
-                su = function(e) {
-                    var t, r = e.subscribeButtonProps,
-                        n = e.subscribePrice,
-                        i = e.subscribePeriodType,
-                        o = e.subscribeFeatureConfig,
-                        a = e.subscribeEligibleOffers,
-                        l = (0, tr.useMemo)(function() {
-                            return sl(window.location.search)
-                        }, []),
-                        u = function(e) {
-                            if (Array.isArray(e)) return e
-                        }(t = (0, tr.useState)("none" !== l.kind)) || function(e) {
-                            var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
-                            if (null != n) {
-                                var i = [],
-                                    o = !0,
-                                    a = !1;
-                                try {
-                                    for (n = n.call(e); !(o = (t = n.next()).done) && (i.push(t.value), 2 !== i.length); o = !0);
-                                } catch (e) {
-                                    a = !0, r = e
-                                } finally {
-                                    try {
-                                        o || null == n.return || n.return()
-                                    } finally {
-                                        if (a) throw r
-                                    }
-                                }
-                                return i
-                            }
-                        }(t) || function(e) {
-                            if (e) {
-                                if ("string" == typeof e) return sa(e, 2);
-                                var t = Object.prototype.toString.call(e).slice(8, -1);
-                                if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return sa(e, 2)
-                            }
-                        }(t) || function() {
-                            throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                        }(),
-                        c = u[0],
-                        s = u[1];
-                    return "none" === l.kind ? null : (0, O.jsx)(cS, {
-                        invite: "invite" === l.kind ? l : void 0,
-                        open: c,
-                        subscribeButtonProps: r,
-                        subscribeEligibleOffers: a,
-                        subscribeFeatureConfig: o,
-                        subscribePeriodType: i,
-                        subscribePrice: n,
-                        onOpenChange: s
                     })
                 },
                 sc = {
@@ -12312,7 +12312,7 @@ function() {
                         n = (0, S.useTranslation)(),
                         i = n.translate,
                         o = n.intl,
-                        a = t7(t);
+                        a = t9(t);
                     (0, tr.useEffect)(function() {
                         r && 0 === a && sR(sC.BUNDLE_PICKER_ROW_MISSING_ROBUX_ALLOWANCE, {
                             productId: t.productKey.id
@@ -12404,11 +12404,12 @@ function() {
                         d = e.isEntrypointDisabled,
                         f = e.onMobilePurchaseInitiated,
                         p = e.paymentSessionId,
-                        m = (0, S.useTranslation)().translate,
-                        y = null == (a = c[0]) ? void 0 : a.productKey.id,
-                        b = function(e) {
+                        m = e.referrerId,
+                        y = (0, S.useTranslation)().translate,
+                        b = null == (a = c[0]) ? void 0 : a.productKey.id,
+                        g = function(e) {
                             if (Array.isArray(e)) return e
-                        }(t = (0, tr.useState)(y)) || function(e) {
+                        }(t = (0, tr.useState)(b)) || function(e) {
                             var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                             if (null != n) {
                                 var i = [],
@@ -12437,34 +12438,34 @@ function() {
                         }(t) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                         }(),
-                        g = b[0],
-                        h = b[1];
+                        h = g[0],
+                        v = g[1];
                     (0, tr.useEffect)(function() {
-                        g && c.some(function(e) {
-                            return e.productKey.id === g
-                        }) || h(y)
-                    }, [y, c, g]);
-                    var v = (0, tr.useMemo)(function() {
+                        h && c.some(function(e) {
+                            return e.productKey.id === h
+                        }) || v(b)
+                    }, [b, c, h]);
+                    var w = (0, tr.useMemo)(function() {
                             var e;
                             return null != (e = c.find(function(e) {
-                                return e.productKey.id === g
+                                return e.productKey.id === h
                             })) ? e : c[0]
-                        }, [c, g]),
-                        w = !!v && void 0 !== t9(v),
-                        x = (0, tr.useRef)(!1);
+                        }, [c, h]),
+                        x = !!w && void 0 !== t7(w),
+                        j = (0, tr.useRef)(!1);
                     (0, tr.useEffect)(function() {
                         if (!l) {
-                            x.current = !1;
+                            j.current = !1;
                             return
-                        }!x.current && p && (x.current = !0, cH().sendUserPurchaseFlowEvent(cH().ENUM_TRIGGERING_CONTEXT.WEB_ROBLOX_PLUS_PURCHASE, !1, cH().ENUM_VIEW_NAME.ROBLOX_PLUS_LANDING, cH().ENUM_PURCHASE_EVENT_TYPE.VIEW_SHOWN, cH().ENUM_VIEW_MESSAGE.ROBLOX_PLUS_BUNDLE_SHEET_OPENED, p ? {
+                        }!j.current && p && (j.current = !0, cH().sendUserPurchaseFlowEvent(cH().ENUM_TRIGGERING_CONTEXT.WEB_ROBLOX_PLUS_PURCHASE, !1, cH().ENUM_VIEW_NAME.ROBLOX_PLUS_LANDING, cH().ENUM_PURCHASE_EVENT_TYPE.VIEW_SHOWN, cH().ENUM_VIEW_MESSAGE.ROBLOX_PLUS_BUNDLE_SHEET_OPENED, p ? {
                             paymentSessionId: p
                         } : {}), sR(sC.BUNDLE_PICKER_SHEET_OPENED, {
                             tierCount: String(c.length),
-                            defaultProductId: null != y ? y : ""
+                            defaultProductId: null != b ? b : ""
                         }))
-                    }, [l, p, c.length, y]);
-                    var j = (0, tr.useCallback)(function(e) {
-                            h(e), cH().sendUserPurchaseFlowEvent(cH().ENUM_TRIGGERING_CONTEXT.WEB_ROBLOX_PLUS_PURCHASE, !1, cH().ENUM_VIEW_NAME.ROBLOX_PLUS_LANDING, cH().ENUM_PURCHASE_EVENT_TYPE.USER_INPUT, cH().ENUM_VIEW_MESSAGE.ROBLOX_PLUS_BUNDLE_TIER_SELECTED, function(e) {
+                    }, [l, p, c.length, b]);
+                    var I = (0, tr.useCallback)(function(e) {
+                            v(e), cH().sendUserPurchaseFlowEvent(cH().ENUM_TRIGGERING_CONTEXT.WEB_ROBLOX_PLUS_PURCHASE, !1, cH().ENUM_VIEW_NAME.ROBLOX_PLUS_LANDING, cH().ENUM_PURCHASE_EVENT_TYPE.USER_INPUT, cH().ENUM_VIEW_MESSAGE.ROBLOX_PLUS_BUNDLE_TIER_SELECTED, function(e) {
                                 for (var t = 1; t < arguments.length; t++) {
                                     var r = null != arguments[t] ? arguments[t] : {},
                                         n = Object.keys(r);
@@ -12489,61 +12490,61 @@ function() {
                                 productId: e
                             })
                         }, [p]),
-                        I = (0, tr.useCallback)(function() {
-                            var e = w ? cH().ENUM_VIEW_MESSAGE.ROBLOX_PLUS_FREE_TRIAL : cH().ENUM_VIEW_MESSAGE.ROBLOX_PLUS_SUBSCRIBE;
+                        M = (0, tr.useCallback)(function() {
+                            var e = x ? cH().ENUM_VIEW_MESSAGE.ROBLOX_PLUS_FREE_TRIAL : cH().ENUM_VIEW_MESSAGE.ROBLOX_PLUS_SUBSCRIBE;
                             cH().sendUserPurchaseFlowEvent(cH().ENUM_TRIGGERING_CONTEXT.WEB_ROBLOX_PLUS_PURCHASE, !1, cH().ENUM_VIEW_NAME.ROBLOX_PLUS_LANDING, cH().ENUM_PURCHASE_EVENT_TYPE.USER_INPUT, e, p ? {
                                 paymentSessionId: p
                             } : {}), sR(sC.BUNDLE_PICKER_SUBSCRIBE_CLICK, {
-                                productId: null != g ? g : "",
-                                isFreeTrial: String(w)
+                                productId: null != h ? h : "",
+                                isFreeTrial: String(x)
                             })
-                        }, [w, g, p]);
-                    if (!v) return null;
-                    var M = [{
+                        }, [x, h, p]);
+                    if (!w) return null;
+                    var N = [{
                             opening: "linkStart",
                             closing: "linkEnd",
                             render: function(e) {
                                 return (0, O.jsx)("a", {
                                     className: "content-link underline",
-                                    href: e9,
+                                    href: e7,
                                     rel: "noopener noreferrer",
                                     target: "_blank",
                                     children: e
                                 })
                             }
                         }],
-                        N = (i = null == (n = t9(v)) || null == (r = n.freeTrialOffer) ? void 0 : r.estimatedTrialEndDate) ? new Date(i).toLocaleDateString(void 0, {
+                        P = (i = null == (n = t7(w)) || null == (r = n.freeTrialOffer) ? void 0 : r.estimatedTrialEndDate) ? new Date(i).toLocaleDateString(void 0, {
                             year: "numeric",
                             month: "long",
                             day: "numeric"
                         }) : "",
-                        P = d ? m("Description.EntrypointDisabled") : o5(m, w ? "Description.SubscriptionFreeTrialLegal" : "Description.SubscriptionLegal", M, w ? {
-                            date: N
+                        E = d ? y("Description.EntrypointDisabled") : o5(y, x ? "Description.SubscriptionFreeTrialLegal" : "Description.SubscriptionLegal", N, x ? {
+                            date: P
                         } : void 0),
-                        E = s.isAndroidApp || s.isIosApp,
-                        T = w ? m("Action.TryItForFree") : m("Action.PricePerMonth", {
-                            price: null != (o = v.localizedPriceDisplayString) ? o : "",
-                            periodType: v.periodType
+                        T = s.isAndroidApp || s.isIosApp,
+                        D = x ? y("Action.TryItForFree") : y("Action.PricePerMonth", {
+                            price: null != (o = w.localizedPriceDisplayString) ? o : "",
+                            periodType: w.periodType
                         });
                     return (0, O.jsx)(u0, {
                         open: l,
                         onOpenChange: u,
                         children: (0, O.jsxs)(u1, {
                             centerSheetSize: "Medium",
-                            closeLabel: m("Action.Close"),
+                            closeLabel: y("Action.Close"),
                             largeScreenVariant: "center",
                             children: [(0, O.jsx)(u2, {
-                                children: m("Label.PickAPlan")
+                                children: y("Label.PickAPlan")
                             }), (0, O.jsx)(u4, {
                                 className: "gap-y-medium padding-y-medium flex flex-col",
                                 "data-testid": "bundle-picker-sheet-body",
                                 children: c.map(function(e, t) {
                                     return (0, O.jsx)(sU, {
                                         isBundle: 0 !== t,
-                                        isSelected: v.productKey.id === e.productKey.id,
+                                        isSelected: w.productKey.id === e.productKey.id,
                                         product: e,
                                         onSelect: function() {
-                                            j(e.productKey.id)
+                                            I(e.productKey.id)
                                         }
                                     }, e.productKey.id)
                                 })
@@ -12555,16 +12556,17 @@ function() {
                                         deviceMeta: s,
                                         isDisabled: d,
                                         paymentSessionId: p,
-                                        productId: null != g ? g : "",
-                                        productType: v.productKey.type,
+                                        productId: null != h ? h : "",
+                                        productType: w.productKey.type,
+                                        referrerId: m,
                                         size: "Medium",
-                                        trackSubscriptionButtonClick: I,
-                                        onSubscribeClick: E ? f : void 0,
-                                        children: T
+                                        trackSubscriptionButtonClick: M,
+                                        onSubscribeClick: T ? f : void 0,
+                                        children: D
                                     }), (0, O.jsx)("p", {
                                         className: "text-caption-small content-muted text-align-x-left",
                                         "data-testid": "bundle-picker-legal-footer",
-                                        children: P
+                                        children: E
                                     })]
                                 })
                             })]
@@ -12804,11 +12806,11 @@ function() {
                                                 var o = t.apply(e, r);
 
                                                 function a(e) {
-                                                    c9(o, n, i, a, l, "next", e)
+                                                    c7(o, n, i, a, l, "next", e)
                                                 }
 
                                                 function l(e) {
-                                                    c9(o, n, i, a, l, "throw", e)
+                                                    c7(o, n, i, a, l, "throw", e)
                                                 }
                                                 a(void 0)
                                             })
@@ -12829,44 +12831,48 @@ function() {
                                 }, [r, o])
                             }(e).paymentSession
                         }()) ? t : {}).id,
-                        d = a[0],
-                        f = a.length > 1,
-                        p = sq((0, tr.useState)(!1), 2),
-                        m = p[0],
-                        y = p[1],
-                        b = (0, tr.useMemo)(function() {
+                        d = (0, tr.useMemo)(function() {
+                            return sn(window.location.search)
+                        }, []),
+                        f = "invite" === d.kind ? d.referrerId : void 0,
+                        p = a[0],
+                        m = a.length > 1,
+                        y = sq((0, tr.useState)(!1), 2),
+                        b = y[0],
+                        g = y[1],
+                        h = (0, tr.useMemo)(function() {
                             return sK.arrivedGiftDate.toLocaleDateString(void 0, {
                                 day: "2-digit",
                                 month: "short",
                                 year: "numeric"
                             })
                         }, []);
-                    if (!d) throw Error("PurchaseView requires at least one subscription product");
-                    var g = d.productKey,
-                        h = g.id,
-                        v = g.type,
-                        w = (0, tr.useMemo)(function() {
-                            return d.eligibleOffers.find(function(e) {
+                    if (!p) throw Error("PurchaseView requires at least one subscription product");
+                    var v = p.productKey,
+                        w = v.id,
+                        x = v.type,
+                        j = (0, tr.useMemo)(function() {
+                            return p.eligibleOffers.find(function(e) {
                                 return "FreeTrial" === e.offerType
                             })
-                        }, [d.eligibleOffers]),
-                        x = null != w,
-                        j = (0, tr.useMemo)(function() {
-                            var e, t = null == w || null == (e = w.freeTrialOffer) ? void 0 : e.estimatedTrialEndDate;
+                        }, [p.eligibleOffers]),
+                        I = null != j,
+                        M = (0, tr.useMemo)(function() {
+                            var e, t = null == j || null == (e = j.freeTrialOffer) ? void 0 : e.estimatedTrialEndDate;
                             return t ? new Date(t).toLocaleDateString(void 0, {
                                 year: "numeric",
                                 month: "long",
                                 day: "numeric"
                             }) : ""
-                        }, [w]),
-                        I = (0, tr.useMemo)(function() {
+                        }, [j]),
+                        N = (0, tr.useMemo)(function() {
                             return [{
                                 opening: "linkStart",
                                 closing: "linkEnd",
                                 render: function(e) {
                                     return (0, O.jsx)("a", {
                                         className: "content-link underline",
-                                        href: e9,
+                                        href: e7,
                                         rel: "noopener noreferrer",
                                         target: "_blank",
                                         children: e
@@ -12874,50 +12880,51 @@ function() {
                                 }
                             }]
                         }, []),
-                        M = l ? c("Description.EntrypointDisabled") : o5(c, x ? "Description.SubscriptionFreeTrialLegal" : "Description.SubscriptionLegal", I, x ? {
-                            date: j
+                        P = l ? c("Description.EntrypointDisabled") : o5(c, I ? "Description.SubscriptionFreeTrialLegal" : "Description.SubscriptionLegal", N, I ? {
+                            date: M
                         } : void 0),
-                        N = (0, tr.useRef)(!1);
+                        E = (0, tr.useRef)(!1);
                     (0, tr.useEffect)(function() {
-                        if (!N.current && s) {
-                            N.current = !0;
-                            var e = x ? cW.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.ROBLOX_PLUS_FREE_TRIAL : cW.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.ROBLOX_PLUS_SUBSCRIBE;
+                        if (!E.current && s) {
+                            E.current = !0;
+                            var e = I ? cW.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.ROBLOX_PLUS_FREE_TRIAL : cW.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.ROBLOX_PLUS_SUBSCRIBE;
                             cW.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent(cW.paymentFlowAnalyticsService.ENUM_TRIGGERING_CONTEXT.WEB_ROBLOX_PLUS_PURCHASE, !1, cW.paymentFlowAnalyticsService.ENUM_VIEW_NAME.ROBLOX_PLUS_LANDING, cW.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.VIEW_SHOWN, e, s ? {
                                 paymentSessionId: s
                             } : {}), sR(sC.PURCHASE_VIEW_SHOWN, {
-                                variant: f ? "multi" : "single",
+                                variant: m ? "multi" : "single",
                                 tierCount: String(a.length),
-                                isFreeTrial: String(x)
+                                isFreeTrial: String(I)
                             })
                         }
-                    }, [s, x, f, a.length]);
-                    var P = o.isAndroidApp || o.isIosApp,
-                        E = sq((0, tr.useState)(null), 2),
-                        T = E[0],
-                        D = E[1],
-                        A = (0, tr.useCallback)(function() {
-                            var e = x ? cW.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.ROBLOX_PLUS_FREE_TRIAL : cW.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.ROBLOX_PLUS_SUBSCRIBE;
+                    }, [s, I, m, a.length]);
+                    var T = o.isAndroidApp || o.isIosApp,
+                        D = sq((0, tr.useState)(null), 2),
+                        A = D[0],
+                        L = D[1],
+                        C = (0, tr.useCallback)(function() {
+                            var e = I ? cW.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.ROBLOX_PLUS_FREE_TRIAL : cW.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.ROBLOX_PLUS_SUBSCRIBE;
                             cW.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent(cW.paymentFlowAnalyticsService.ENUM_TRIGGERING_CONTEXT.WEB_ROBLOX_PLUS_PURCHASE, !1, cW.paymentFlowAnalyticsService.ENUM_VIEW_NAME.ROBLOX_PLUS_LANDING, cW.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT, e, s ? {
                                 paymentSessionId: s
                             } : {})
-                        }, [x, s]),
-                        L = c(x ? "Action.TryItForFree" : "Action.Subscribe"),
-                        C = {
-                            productId: h,
-                            productType: v,
+                        }, [I, s]),
+                        R = c(I ? "Action.TryItForFree" : "Action.Subscribe"),
+                        k = {
+                            productId: w,
+                            productType: x,
                             deviceMeta: o,
                             isDisabled: l,
                             paymentSessionId: s,
-                            trackSubscriptionButtonClick: A,
-                            onSubscribeClick: P ? u : void 0
+                            referrerId: f,
+                            trackSubscriptionButtonClick: C,
+                            onSubscribeClick: T ? u : void 0
                         },
-                        R = sV(sQ({}, C), {
+                        U = sV(sQ({}, k), {
                             trackSubscriptionButtonClick: void 0
                         }),
-                        k = function() {
-                            l || (sR(sC.PURCHASE_VIEW_OPEN_SHEET_CLICK), y(!0))
+                        z = function() {
+                            l || (sR(sC.PURCHASE_VIEW_OPEN_SHEET_CLICK), g(!0))
                         },
-                        U = function(e) {
+                        _ = function(e) {
                             var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "Large";
                             return (0, O.jsx)(tF, {
                                 className: e,
@@ -12925,11 +12932,11 @@ function() {
                                 isDisabled: l,
                                 size: t,
                                 variant: "Emphasis",
-                                onClick: k,
-                                children: L
+                                onClick: z,
+                                children: R
                             })
                         },
-                        z = o5(c, "Label.PlusLandingPage.Subtitle.V3", [{
+                        B = o5(c, "Label.PlusLandingPage.Subtitle.V3", [{
                             opening: "boldStart",
                             closing: "boldEnd",
                             render: function(e) {
@@ -12939,23 +12946,23 @@ function() {
                                 })
                             }
                         }], {
-                            price: null != (r = d.localizedPriceDisplayString) ? r : "",
-                            periodType: d.periodType
+                            price: null != (r = p.localizedPriceDisplayString) ? r : "",
+                            periodType: p.periodType
                         }),
-                        _ = (0, O.jsxs)("div", {
+                        Y = (0, O.jsxs)("div", {
                             "aria-label": c("Action.Subscribe"),
                             className: "bottom-dock padding-t-medium bg-surface-100 large:hidden width-full gap-y-medium flex flex-col",
                             "data-testid": "purchase-subscribe-dock",
                             role: "region",
                             children: [(0, O.jsx)(t6, {}), (0, O.jsxs)("div", {
                                 className: "width-full gap-y-medium padding-b-[env(safe-area-inset-bottom\\,0px)] padding-x-xxlarge flex flex-col items-stretch",
-                                children: [f ? U("min-width-0 width-full") : (0, O.jsx)(cp, sV(sQ({}, C), {
+                                children: [m ? _("min-width-0 width-full") : (0, O.jsx)(cp, sV(sQ({}, k), {
                                     className: "min-width-0 width-full",
                                     size: "Medium",
-                                    children: L
+                                    children: R
                                 })), (0, O.jsx)("p", {
                                     className: "text-caption-small content-muted margin-bottom-[24px] large:margin-bottom-none padding-x-xsmall text-align-x-start",
-                                    children: M
+                                    children: P
                                 })]
                             })]
                         });
@@ -12966,9 +12973,9 @@ function() {
                                 className: "margin-top-[48px] width-full min-width-0 content-emphasis large:max-width-[730px] large:gap-y-[32px] large:self-auto large:padding-x-xlarge flex flex-col gap-y-[32px] self-stretch",
                                 children: [sK.enabled && (0, O.jsx)("div", {
                                     className: "width-full min-width-0 padding-x-xxlarge large:padding-x-none",
-                                    children: (0, O.jsx)(sr, {
+                                    children: (0, O.jsx)(so, {
                                         body: c("Description.BannerBodyArrivedPurchase", {
-                                            date: b
+                                            date: h
                                         }),
                                         title: c("Description.BannerTitleArrivedPurchase"),
                                         onItemDetailsClick: function() {
@@ -12979,7 +12986,7 @@ function() {
                                     className: "width-full min-width-0 gap-y-xxlarge padding-x-xxlarge text-align-x-start large:gap-y-[24px] large:items-center large:padding-x-none large:text-align-x-center flex flex-col items-start",
                                     children: [(0, O.jsxs)("div", {
                                         className: "gap-y-xsmall large:items-center flex flex-col items-start",
-                                        children: [(0, O.jsx)(sn, {
+                                        children: [(0, O.jsx)(sa, {
                                             variant: "compact"
                                         }), (0, O.jsxs)("h1", {
                                             className: "font-builder-extended text-display-small large:![font-size:var(--font-size-1000)] content-emphasis ![font-size:var(--font-size-800)]",
@@ -12996,21 +13003,21 @@ function() {
                                         })]
                                     }), (0, O.jsxs)("div", {
                                         className: "gap-y-xsmall width-full min-width-0 large:text-align-x-center flex flex-col",
-                                        children: [f ? (0, O.jsx)("span", {
+                                        children: [m ? (0, O.jsx)("span", {
                                             className: "text-body-large content-emphasis",
-                                            children: z
-                                        }) : (0, O.jsx)(so, {
-                                            eligibleOffers: d.eligibleOffers,
-                                            periodType: d.periodType,
-                                            price: d.localizedPrice
+                                            children: B
+                                        }) : (0, O.jsx)(su, {
+                                            eligibleOffers: p.eligibleOffers,
+                                            periodType: p.periodType,
+                                            price: p.localizedPrice
                                         }), (0, O.jsx)("div", {
                                             className: "width-full gap-y-medium padding-t-none large:margin-x-auto large:margin-top-[24px] large:flex large:max-width-[min(440px,100%)] large:width-full large:flex-col large:items-center hidden items-start",
                                             children: (0, O.jsx)("div", {
                                                 className: "width-full gap-x-small flex shrink-0 flex-row items-start justify-center",
-                                                children: f ? U("width-full large:width-[230px] shrink-0", "Medium") : (0, O.jsx)(cp, sV(sQ({}, C), {
+                                                children: m ? _("width-full large:width-[230px] shrink-0", "Medium") : (0, O.jsx)(cp, sV(sQ({}, k), {
                                                     className: "width-full large:width-[230px] shrink-0",
                                                     size: "Medium",
-                                                    children: L
+                                                    children: R
                                                 }))
                                             })
                                         })]
@@ -13025,10 +13032,10 @@ function() {
                                     }), (0, O.jsx)("div", {
                                         className: "width-full padding-b-xlarge large:padding-b-none",
                                         children: (0, O.jsx)(t2, {
-                                            featureConfig: t8(d),
-                                            periodType: d.periodType,
+                                            featureConfig: t8(p),
+                                            periodType: p.periodType,
                                             onTileClick: function(e, t) {
-                                                D({
+                                                L({
                                                     primary: e,
                                                     secondary: t
                                                 })
@@ -13037,31 +13044,32 @@ function() {
                                     }), (0, O.jsx)("p", {
                                         className: "text-caption-small content-muted padding-x-xsmall text-align-x-start large:block large:padding-x-none hidden",
                                         "data-testid": "purchase-legal-footer",
-                                        children: M
+                                        children: P
                                     })]
                                 })]
                             })
-                        }), _, (0, O.jsx)(sS, {
-                            body: null != (n = null == T ? void 0 : T.secondary) ? n : "",
-                            open: null != T,
-                            title: null != (i = null == T ? void 0 : T.primary) ? i : "",
+                        }), Y, (0, O.jsx)(sS, {
+                            body: null != (n = null == A ? void 0 : A.secondary) ? n : "",
+                            open: null != A,
+                            title: null != (i = null == A ? void 0 : A.primary) ? i : "",
                             onOpenChange: function(e) {
-                                e || D(null)
+                                e || L(null)
                             }
-                        }), f && (0, O.jsx)(s_, {
+                        }), m && (0, O.jsx)(s_, {
                             deviceMeta: o,
                             isEntrypointDisabled: l,
-                            isOpen: m,
+                            isOpen: b,
                             paymentSessionId: s,
                             products: a,
+                            referrerId: f,
                             onMobilePurchaseInitiated: u,
-                            onOpenChange: y
-                        }), (0, O.jsx)(su, {
-                            subscribeButtonProps: R,
-                            subscribeEligibleOffers: d.eligibleOffers,
-                            subscribeFeatureConfig: t8(d),
-                            subscribePeriodType: d.periodType,
-                            subscribePrice: d.localizedPrice
+                            onOpenChange: g
+                        }), (0, O.jsx)(si, {
+                            subscribeButtonProps: U,
+                            subscribeEligibleOffers: p.eligibleOffers,
+                            subscribeFeatureConfig: t8(p),
+                            subscribePeriodType: p.periodType,
+                            subscribePrice: p.localizedPrice
                         })]
                     })
                 };
@@ -13087,7 +13095,7 @@ function() {
                 s$ = function() {
                     var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
                         t = e.enabled,
-                        r = (void 0 === t || t) && e7(),
+                        r = (void 0 === t || t) && e9(),
                         n = (0, P.useQuery)({
                             queryKey: ["plus-referrals", "sender-eligibility"],
                             enabled: r,
@@ -13177,7 +13185,7 @@ function() {
                                     }(this, function(t) {
                                         switch (t.label) {
                                             case 0:
-                                                return [4, u9.subscriptionsV2CheckSubscriptionReferralEligibility({})];
+                                                return [4, u7.subscriptionsV2CheckSubscriptionReferralEligibility({})];
                                             case 1:
                                                 return e = t.sent().eligibility, [2, sZ.get(e)]
                                         }
@@ -13456,7 +13464,7 @@ function() {
                         })
                     }, t
                 }(eC),
-                s7 = function(e) {
+                s9 = function(e) {
                     function t() {
                         return null !== e && e.apply(this, arguments) || this
                     }
@@ -13530,7 +13538,7 @@ function() {
                         })
                     }, t
                 }(eC),
-                s9 = function(e, t) {
+                s7 = function(e, t) {
                     return new Date(Date.UTC(e, t + 1, 0)).getUTCDate()
                 },
                 de = function(e, t) {
@@ -13540,13 +13548,13 @@ function() {
                         o = n + t,
                         a = r + Math.floor(o / 12),
                         l = (o % 12 + 12) % 12,
-                        u = Math.min(i, s9(a, l));
+                        u = Math.min(i, s7(a, l));
                     return new Date(Date.UTC(a, l, u, e.getUTCHours(), e.getUTCMinutes(), e.getUTCSeconds(), e.getUTCMilliseconds()))
                 },
                 dt = function(e, t) {
                     var r = e.getUTCFullYear() + t,
                         n = e.getUTCMonth(),
-                        i = Math.min(e.getUTCDate(), s9(r, n));
+                        i = Math.min(e.getUTCDate(), s7(r, n));
                     return new Date(Date.UTC(r, n, i, e.getUTCHours(), e.getUTCMinutes(), e.getUTCSeconds(), e.getUTCMilliseconds()))
                 },
                 dr = function(e, t, r) {
@@ -14959,7 +14967,7 @@ function() {
                                 title: u("Header.FreeTrialBannerTitle")
                             }), (0, O.jsxs)("div", {
                                 className: "gap-y-small large:items-center flex flex-col",
-                                children: [(0, O.jsx)(sn, {}), (0, O.jsx)(dR, {
+                                children: [(0, O.jsx)(sa, {}), (0, O.jsx)(dR, {
                                     activationTimestampMs: i.activationTimestampMs,
                                     expirationTimestampMs: i.expirationTimestampMs,
                                     hasFreeTrial: m,
@@ -14973,7 +14981,7 @@ function() {
                                 })]
                             }), (0, O.jsxs)("div", {
                                 className: "flex flex-col gap-y-[32px]",
-                                children: [e7() && "Eligible" === c ? (0, O.jsx)(dp, {
+                                children: [e9() && "Eligible" === c ? (0, O.jsx)(dp, {
                                     children: (0, O.jsx)(db, {
                                         onOpenDashboard: l
                                     })
@@ -15137,19 +15145,19 @@ function() {
                 });
             new s8(d5);
             var d6 = new s6(d5);
-            new s7(d5);
+            new s9(d5);
             var d8 = function(e, t) {
                 var r = (0, tr.useRef)();
                 return t(e) && (r.current = e), r.current
             };
 
-            function d7(e, t) {
+            function d9(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function d9(e, t, r, n, i, o, a) {
+            function d7(e, t, r, n, i, o, a) {
                 try {
                     var l = e[o](a),
                         u = l.value
@@ -15168,11 +15176,11 @@ function() {
                         var o = e.apply(t, r);
 
                         function a(e) {
-                            d9(o, n, i, a, l, "next", e)
+                            d7(o, n, i, a, l, "next", e)
                         }
 
                         function l(e) {
-                            d9(o, n, i, a, l, "throw", e)
+                            d7(o, n, i, a, l, "throw", e)
                         }
                         a(void 0)
                     })
@@ -15203,10 +15211,10 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return d7(e, t);
+                        if ("string" == typeof e) return d9(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return d7(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return d9(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -15308,7 +15316,7 @@ function() {
                         l = a[0],
                         u = a[1],
                         c = ft((0, tr.useState)(function() {
-                            return e7() && new URLSearchParams(window.location.search).has(te)
+                            return e9() && new URLSearchParams(window.location.search).has(te)
                         }), 2),
                         s = c[0],
                         d = c[1],
@@ -15390,7 +15398,7 @@ function() {
                                             case 1:
                                                 if (0 === (e = t.sent().products).length) return [2, null];
                                                 return [2, e.toSorted(function(e, t) {
-                                                    return t7(e) - t7(t)
+                                                    return t9(e) - t9(t)
                                                 })]
                                         }
                                     })
@@ -15561,4 +15569,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("RobloxSubscription");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/robloxSubscription-45e03f85ec2c0209.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/robloxSubscription-aa385ffc8f16a357.js.map

@@ -2,7 +2,7 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "293b975bde1f6c214128f0f559e81a9eeeebce16"
+            id: "6ccc07fd02c1f10281f931f3e39d5988237759bb"
         };
         var t = (new e.Error).stack;
         t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "3705d68a-ed02-44bb-a80e-af342b94d9e2", e._sentryDebugIdIdentifier = "sentry-dbid-3705d68a-ed02-44bb-a80e-af342b94d9e2")

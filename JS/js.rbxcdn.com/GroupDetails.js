@@ -8035,7 +8035,6 @@
                     "./groupAnnouncementsComponent.js": 39167,
                     "./groupDescriptionComponent.js": 66105,
                     "./groupEventsComponent.js": 76666,
-                    "./groupForumsComponent.js": 1707,
                     "./groupForumsDiscoveryComponent.js": 41915,
                     "./groupGamesComponent.js": 93034,
                     "./groupGamesItemComponent.js": 43331,
@@ -8089,10 +8088,9 @@
                 var n = {
                     "./groupAffiliatesController.js": 94743,
                     "./groupAnnouncementsController.js": 95719,
-                    "./groupController.js": 17525,
+                    "./groupController.js": 33104,
                     "./groupDescriptionController.js": 71481,
                     "./groupEventsController.js": 32810,
-                    "./groupForumsController.js": 59645,
                     "./groupForumsDiscoveryController.js": 74995,
                     "./groupGamesController.js": 55904,
                     "./groupGamesItemController.js": 8063,
@@ -8126,8 +8124,8 @@
                     "./groupAnnouncementsDirective.js": 19347,
                     "./groupBaseDirective.js": 45282,
                     "./groupEventsDirective.js": 42454,
-                    "./groupForumsDirective.js": 39087,
                     "./groupForumsDiscoveryDirective.js": 92095,
+                    "./groupPostsDirective.js": 73406,
                     "./groupPublicServersDirective.js": 65938,
                     "./groupReactAffiliatesDirective.js": 74362,
                     "./groupReactCoverPhotoDirective.js": 62445,
@@ -8206,7 +8204,6 @@
                     "./components/templates/groupAnnouncements.html": 6346,
                     "./components/templates/groupDescription.html": 40364,
                     "./components/templates/groupEvents.html": 6365,
-                    "./components/templates/groupForums.html": 57510,
                     "./components/templates/groupForumsDiscovery.html": 70158,
                     "./components/templates/groupGames.html": 93549,
                     "./components/templates/groupGamesItem.html": 23154,
@@ -9042,10 +9039,10 @@
                     c = e.isDeepEqual, s = e.isDeepStrictEqual
                 }
                 var E = !1,
-                    G = e.exports = C,
-                    I = {};
+                    O = e.exports = C,
+                    G = {};
 
-                function O(e) {
+                function I(e) {
                     if (e.message instanceof Error) throw e.message;
                     throw new m(e)
                 }
@@ -9070,7 +9067,7 @@
                     for (var e = arguments.length, t = new Array(e), r = 0; r < e; r++) t[r] = arguments[r];
                     j.apply(void 0, [C, t.length].concat(t))
                 }
-                G.fail = function e(t, r, i, a, u) {
+                O.fail = function e(t, r, i, a, u) {
                     var c, s = arguments.length;
                     if (0 === s) c = "Failed";
                     else if (1 === s) i = t, t = void 0;
@@ -9088,73 +9085,73 @@
                     void 0 !== i && (l.message = i);
                     var p = new m(l);
                     throw c && (p.message = c, p.generatedMessage = !0), p
-                }, G.AssertionError = m, G.ok = C, G.equal = function e(t, r, n) {
+                }, O.AssertionError = m, O.ok = C, O.equal = function e(t, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
-                    t != r && O({
+                    t != r && I({
                         actual: t,
                         expected: r,
                         message: n,
                         operator: "==",
                         stackStartFn: e
                     })
-                }, G.notEqual = function e(t, r, n) {
+                }, O.notEqual = function e(t, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
-                    t == r && O({
+                    t == r && I({
                         actual: t,
                         expected: r,
                         message: n,
                         operator: "!=",
                         stackStartFn: e
                     })
-                }, G.deepEqual = function e(t, r, n) {
+                }, O.deepEqual = function e(t, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
-                    void 0 === c && x(), c(t, r) || O({
+                    void 0 === c && x(), c(t, r) || I({
                         actual: t,
                         expected: r,
                         message: n,
                         operator: "deepEqual",
                         stackStartFn: e
                     })
-                }, G.notDeepEqual = function e(t, r, n) {
+                }, O.notDeepEqual = function e(t, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
-                    void 0 === c && x(), c(t, r) && O({
+                    void 0 === c && x(), c(t, r) && I({
                         actual: t,
                         expected: r,
                         message: n,
                         operator: "notDeepEqual",
                         stackStartFn: e
                     })
-                }, G.deepStrictEqual = function e(t, r, n) {
+                }, O.deepStrictEqual = function e(t, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
-                    void 0 === c && x(), s(t, r) || O({
+                    void 0 === c && x(), s(t, r) || I({
                         actual: t,
                         expected: r,
                         message: n,
                         operator: "deepStrictEqual",
                         stackStartFn: e
                     })
-                }, G.notDeepStrictEqual = function e(t, r, n) {
+                }, O.notDeepStrictEqual = function e(t, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
                     void 0 === c && x();
-                    s(t, r) && O({
+                    s(t, r) && I({
                         actual: t,
                         expected: r,
                         message: n,
                         operator: "notDeepStrictEqual",
                         stackStartFn: e
                     })
-                }, G.strictEqual = function e(t, r, n) {
+                }, O.strictEqual = function e(t, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
-                    S(t, r) || O({
+                    S(t, r) || I({
                         actual: t,
                         expected: r,
                         message: n,
                         operator: "strictEqual",
                         stackStartFn: e
                     })
-                }, G.notStrictEqual = function e(t, r, n) {
+                }, O.notStrictEqual = function e(t, r, n) {
                     if (arguments.length < 2) throw new g("actual", "expected");
-                    S(t, r) && O({
+                    S(t, r) && I({
                         actual: t,
                         expected: r,
                         message: n,
@@ -9202,7 +9199,7 @@
                                             });
                                         throw c.actual = e, c.expected = t, c.operator = i.name, c
                                     }
-                                    O({
+                                    I({
                                         actual: e,
                                         expected: t,
                                         message: n,
@@ -9223,7 +9220,7 @@
                     } catch (e) {
                         return e
                     }
-                    return I
+                    return G
                 }
 
                 function U(e) {
@@ -9242,7 +9239,7 @@
                         return Promise.resolve().then((function() {
                             return t
                         })).then((function() {
-                            return I
+                            return G
                         })).catch((function(e) {
                             return e
                         }))
@@ -9257,11 +9254,11 @@
                         } else if (t === r) throw new p("error/message", 'The error "'.concat(t, '" is identical to the message.'));
                         n = r, r = void 0
                     } else if (null != r && "object" !== i(r) && "function" != typeof r) throw new f("error", ["Object", "Error", "Function", "RegExp"], r);
-                    if (t === I) {
+                    if (t === G) {
                         var o = "";
                         r && r.name && (o += " (".concat(r.name, ")")), o += n ? ": ".concat(n) : ".";
                         var a = "rejects" === e.name ? "rejection" : "exception";
-                        O({
+                        I({
                             actual: void 0,
                             expected: r,
                             operator: e.name,
@@ -9273,11 +9270,11 @@
                 }
 
                 function B(e, t, r, n) {
-                    if (t !== I) {
+                    if (t !== G) {
                         if ("string" == typeof r && (n = r, r = void 0), !r || R(t, r)) {
                             var o = n ? ": ".concat(n) : ".",
                                 i = "doesNotReject" === e.name ? "rejection" : "exception";
-                            O({
+                            I({
                                 actual: t,
                                 expected: r,
                                 operator: e.name,
@@ -9311,23 +9308,23 @@
                     for (var e = arguments.length, t = new Array(e), r = 0; r < e; r++) t[r] = arguments[r];
                     j.apply(void 0, [N, t.length].concat(t))
                 }
-                G.throws = function e(t) {
+                O.throws = function e(t) {
                     for (var r = arguments.length, n = new Array(r > 1 ? r - 1 : 0), o = 1; o < r; o++) n[o - 1] = arguments[o];
                     D.apply(void 0, [e, k(t)].concat(n))
-                }, G.rejects = function e(t) {
+                }, O.rejects = function e(t) {
                     for (var r = arguments.length, n = new Array(r > 1 ? r - 1 : 0), o = 1; o < r; o++) n[o - 1] = arguments[o];
                     return M(t).then((function(t) {
                         return D.apply(void 0, [e, t].concat(n))
                     }))
-                }, G.doesNotThrow = function e(t) {
+                }, O.doesNotThrow = function e(t) {
                     for (var r = arguments.length, n = new Array(r > 1 ? r - 1 : 0), o = 1; o < r; o++) n[o - 1] = arguments[o];
                     B.apply(void 0, [e, k(t)].concat(n))
-                }, G.doesNotReject = function e(t) {
+                }, O.doesNotReject = function e(t) {
                     for (var r = arguments.length, n = new Array(r > 1 ? r - 1 : 0), o = 1; o < r; o++) n[o - 1] = arguments[o];
                     return M(t).then((function(t) {
                         return B.apply(void 0, [e, t].concat(n))
                     }))
-                }, G.ifError = function e(t) {
+                }, O.ifError = function e(t) {
                     if (null != t) {
                         var r = "ifError got unwanted exception: ";
                         "object" === i(t) && "string" == typeof t.message ? 0 === t.message.length && t.constructor ? r += t.constructor.name : r += t.message : r += b(t);
@@ -9353,16 +9350,16 @@
                         }
                         throw n
                     }
-                }, G.match = function e(t, r, n) {
+                }, O.match = function e(t, r, n) {
                     T(t, r, n, e, "match")
-                }, G.doesNotMatch = function e(t, r, n) {
+                }, O.doesNotMatch = function e(t, r, n) {
                     T(t, r, n, e, "doesNotMatch")
-                }, G.strict = A(N, G, {
-                    equal: G.strictEqual,
-                    deepEqual: G.deepStrictEqual,
-                    notEqual: G.notStrictEqual,
-                    notDeepEqual: G.notDeepStrictEqual
-                }), G.strict.strict = G.strict
+                }, O.strict = A(N, O, {
+                    equal: O.strictEqual,
+                    deepEqual: O.deepStrictEqual,
+                    notEqual: O.notStrictEqual,
+                    notDeepEqual: O.notDeepStrictEqual
+                }), O.strict.strict = O.strict
             },
             49801: function(e, t, r) {
                 "use strict";
@@ -9530,7 +9527,7 @@
                     }), r
                 }
 
-                function G(e) {
+                function O(e) {
                     return b(e, {
                         compact: !1,
                         customInspect: !1,
@@ -9544,15 +9541,15 @@
                     })
                 }
 
-                function I(e, t, r) {
+                function G(e, t, r) {
                     var o = "",
                         i = "",
                         a = 0,
                         u = "",
                         c = !1,
-                        s = G(e),
+                        s = O(e),
                         l = s.split("\n"),
-                        p = G(t).split("\n"),
+                        p = O(t).split("\n"),
                         f = 0,
                         y = "";
                     if ("strictEqual" === r && "object" === m(e) && "object" === m(t) && null !== e && null !== t && (r = "strictEqualObject"), 1 === l.length && 1 === p.length && l[0] !== p[0]) {
@@ -9580,24 +9577,24 @@
                         return "".concat(x.notIdentical, "\n\n").concat(E.join("\n"), "\n")
                     }
                     f > 3 && (u = "\n".concat(w, "...").concat(P).concat(u), c = !0), "" !== o && (u = "\n  ".concat(o).concat(u), o = "");
-                    var I = 0,
-                        O = x[r] + "\n".concat(A, "+ actual").concat(P, " ").concat(S, "- expected").concat(P),
+                    var G = 0,
+                        I = x[r] + "\n".concat(A, "+ actual").concat(P, " ").concat(S, "- expected").concat(P),
                         j = " ".concat(w, "...").concat(P, " Lines skipped");
                     for (f = 0; f < h; f++) {
                         var C = f - a;
-                        if (l.length < f + 1) C > 1 && f > 2 && (C > 4 ? (i += "\n".concat(w, "...").concat(P), c = !0) : C > 3 && (i += "\n  ".concat(p[f - 2]), I++), i += "\n  ".concat(p[f - 1]), I++), a = f, o += "\n".concat(S, "-").concat(P, " ").concat(p[f]), I++;
-                        else if (p.length < f + 1) C > 1 && f > 2 && (C > 4 ? (i += "\n".concat(w, "...").concat(P), c = !0) : C > 3 && (i += "\n  ".concat(l[f - 2]), I++), i += "\n  ".concat(l[f - 1]), I++), a = f, i += "\n".concat(A, "+").concat(P, " ").concat(l[f]), I++;
+                        if (l.length < f + 1) C > 1 && f > 2 && (C > 4 ? (i += "\n".concat(w, "...").concat(P), c = !0) : C > 3 && (i += "\n  ".concat(p[f - 2]), G++), i += "\n  ".concat(p[f - 1]), G++), a = f, o += "\n".concat(S, "-").concat(P, " ").concat(p[f]), G++;
+                        else if (p.length < f + 1) C > 1 && f > 2 && (C > 4 ? (i += "\n".concat(w, "...").concat(P), c = !0) : C > 3 && (i += "\n  ".concat(l[f - 2]), G++), i += "\n  ".concat(l[f - 1]), G++), a = f, i += "\n".concat(A, "+").concat(P, " ").concat(l[f]), G++;
                         else {
                             var F = p[f],
                                 R = l[f],
                                 k = R !== F && (!v(R, ",") || R.slice(0, -1) !== F);
-                            k && v(F, ",") && F.slice(0, -1) === R && (k = !1, R += ","), k ? (C > 1 && f > 2 && (C > 4 ? (i += "\n".concat(w, "...").concat(P), c = !0) : C > 3 && (i += "\n  ".concat(l[f - 2]), I++), i += "\n  ".concat(l[f - 1]), I++), a = f, i += "\n".concat(A, "+").concat(P, " ").concat(R), o += "\n".concat(S, "-").concat(P, " ").concat(F), I += 2) : (i += o, o = "", 1 !== C && 0 !== f || (i += "\n  ".concat(R), I++))
+                            k && v(F, ",") && F.slice(0, -1) === R && (k = !1, R += ","), k ? (C > 1 && f > 2 && (C > 4 ? (i += "\n".concat(w, "...").concat(P), c = !0) : C > 3 && (i += "\n  ".concat(l[f - 2]), G++), i += "\n  ".concat(l[f - 1]), G++), a = f, i += "\n".concat(A, "+").concat(P, " ").concat(R), o += "\n".concat(S, "-").concat(P, " ").concat(F), G += 2) : (i += o, o = "", 1 !== C && 0 !== f || (i += "\n  ".concat(R), G++))
                         }
-                        if (I > 20 && f < h - 2) return "".concat(O).concat(j, "\n").concat(i, "\n").concat(w, "...").concat(P).concat(o, "\n") + "".concat(w, "...").concat(P)
+                        if (G > 20 && f < h - 2) return "".concat(I).concat(j, "\n").concat(i, "\n").concat(w, "...").concat(P).concat(o, "\n") + "".concat(w, "...").concat(P)
                     }
-                    return "".concat(O).concat(c ? j : "", "\n").concat(i).concat(o).concat(u).concat(y)
+                    return "".concat(I).concat(c ? j : "", "\n").concat(i).concat(o).concat(u).concat(y)
                 }
-                var O = function(e, t) {
+                var I = function(e, t) {
                     ! function(e, t) {
                         if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function");
                         e.prototype = Object.create(t && t.prototype, {
@@ -9631,18 +9628,18 @@
                             u = e.expected,
                             c = Error.stackTraceLimit;
                         if (Error.stackTraceLimit = 0, null != r) t = f.call(this, String(r));
-                        else if (n.stderr && n.stderr.isTTY && (n.stderr && n.stderr.getColorDepth && 1 !== n.stderr.getColorDepth() ? (w = "[34m", A = "[32m", P = "[39m", S = "[31m") : (w = "", A = "", P = "", S = "")), "object" === m(a) && null !== a && "object" === m(u) && null !== u && "stack" in a && a instanceof Error && "stack" in u && u instanceof Error && (a = E(a), u = E(u)), "deepStrictEqual" === o || "strictEqual" === o) t = f.call(this, I(a, u, o));
+                        else if (n.stderr && n.stderr.isTTY && (n.stderr && n.stderr.getColorDepth && 1 !== n.stderr.getColorDepth() ? (w = "[34m", A = "[32m", P = "[39m", S = "[31m") : (w = "", A = "", P = "", S = "")), "object" === m(a) && null !== a && "object" === m(u) && null !== u && "stack" in a && a instanceof Error && "stack" in u && u instanceof Error && (a = E(a), u = E(u)), "deepStrictEqual" === o || "strictEqual" === o) t = f.call(this, G(a, u, o));
                         else if ("notDeepStrictEqual" === o || "notStrictEqual" === o) {
                             var p = x[o],
-                                y = G(a).split("\n");
+                                y = O(a).split("\n");
                             if ("notStrictEqual" === o && "object" === m(a) && null !== a && (p = x.notStrictEqualObject), y.length > 30)
                                 for (y[26] = "".concat(w, "...").concat(P); y.length > 27;) y.pop();
                             t = 1 === y.length ? f.call(this, "".concat(p, " ").concat(y[0])) : f.call(this, "".concat(p, "\n\n").concat(y.join("\n"), "\n"))
                         } else {
-                            var d = G(a),
+                            var d = O(a),
                                 g = "",
                                 b = x[o];
-                            "notDeepEqual" === o || "notEqual" === o ? (d = "".concat(x[o], "\n\n").concat(d)).length > 1024 && (d = "".concat(d.slice(0, 1021), "...")) : (g = "".concat(G(u)), d.length > 512 && (d = "".concat(d.slice(0, 509), "...")), g.length > 512 && (g = "".concat(g.slice(0, 509), "...")), "deepEqual" === o || "equal" === o ? d = "".concat(b, "\n\n").concat(d, "\n\nshould equal\n\n") : g = " ".concat(o, " ").concat(g)), t = f.call(this, "".concat(d).concat(g))
+                            "notDeepEqual" === o || "notEqual" === o ? (d = "".concat(x[o], "\n\n").concat(d)).length > 1024 && (d = "".concat(d.slice(0, 1021), "...")) : (g = "".concat(O(u)), d.length > 512 && (d = "".concat(d.slice(0, 509), "...")), g.length > 512 && (g = "".concat(g.slice(0, 509), "...")), "deepEqual" === o || "equal" === o ? d = "".concat(b, "\n\n").concat(d, "\n\nshould equal\n\n") : g = " ".concat(o, " ").concat(g)), t = f.call(this, "".concat(d).concat(g))
                         }
                         return Error.stackTraceLimit = c, t.generatedMessage = !r, Object.defineProperty(l(t), "name", {
                             value: "AssertionError [ERR_ASSERTION]",
@@ -9668,7 +9665,7 @@
                         writable: !1
                     }), v
                 }(p(Error), b.custom);
-                e.exports = O
+                e.exports = I
             },
             41342: function(e, t, r) {
                 "use strict";
@@ -9909,9 +9906,9 @@
                     P = m.isNativeError,
                     x = m.isBoxedPrimitive,
                     E = m.isNumberObject,
-                    G = m.isStringObject,
-                    I = m.isBooleanObject,
-                    O = m.isBigIntObject,
+                    O = m.isStringObject,
+                    G = m.isBooleanObject,
+                    I = m.isBigIntObject,
                     j = m.isSymbolObject,
                     C = m.isFloat32Array,
                     F = m.isFloat64Array;
@@ -9984,7 +9981,7 @@
                         if (b(e)) {
                             if (u = t, (o = e).byteLength !== u.byteLength || 0 !== U(new Uint8Array(o), new Uint8Array(u))) return !1
                         } else if (x(e) && ! function(e, t) {
-                                return E(e) ? E(t) && s(Number.prototype.valueOf.call(e), Number.prototype.valueOf.call(t)) : G(e) ? G(t) && String.prototype.valueOf.call(e) === String.prototype.valueOf.call(t) : I(e) ? I(t) && Boolean.prototype.valueOf.call(e) === Boolean.prototype.valueOf.call(t) : O(e) ? O(t) && BigInt.prototype.valueOf.call(e) === BigInt.prototype.valueOf.call(t) : j(t) && Symbol.prototype.valueOf.call(e) === Symbol.prototype.valueOf.call(t)
+                                return E(e) ? E(t) && s(Number.prototype.valueOf.call(e), Number.prototype.valueOf.call(t)) : O(e) ? O(t) && String.prototype.valueOf.call(e) === String.prototype.valueOf.call(t) : G(e) ? G(t) && Boolean.prototype.valueOf.call(e) === Boolean.prototype.valueOf.call(t) : I(e) ? I(t) && BigInt.prototype.valueOf.call(e) === BigInt.prototype.valueOf.call(t) : j(t) && Symbol.prototype.valueOf.call(e) === Symbol.prototype.valueOf.call(t)
                             }(e, t)) return !1
                     }
                     return B(e, t, r, n, 0)
@@ -10443,9 +10440,9 @@
                         "%WeakSetPrototype%": ["WeakSet", "prototype"]
                     },
                     E = r(83208),
-                    G = r(78554),
-                    I = E.call(Function.call, Array.prototype.concat),
-                    O = E.call(Function.apply, Array.prototype.splice),
+                    O = r(78554),
+                    G = E.call(Function.call, Array.prototype.concat),
+                    I = E.call(Function.apply, Array.prototype.splice),
                     j = E.call(Function.call, String.prototype.replace),
                     C = E.call(Function.call, String.prototype.slice),
                     F = E.call(Function.call, RegExp.prototype.exec),
@@ -10453,7 +10450,7 @@
                     k = /\\(\\)?/g,
                     U = function(e, t) {
                         var r, n = e;
-                        if (G(x, n) && (n = "%" + (r = x[n])[0] + "%"), G(A, n)) {
+                        if (O(x, n) && (n = "%" + (r = x[n])[0] + "%"), O(A, n)) {
                             var o = A[n];
                             if (o === v && (o = P(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
                             return {
@@ -10484,13 +10481,13 @@
                         a = o.value,
                         u = !1,
                         l = o.alias;
-                    l && (n = l[0], O(r, I([0, 1], l)));
+                    l && (n = l[0], I(r, G([0, 1], l)));
                     for (var p = 1, f = !0; p < r.length; p += 1) {
                         var d = r[p],
                             g = C(d, 0, 1),
                             m = C(d, -1);
                         if (('"' === g || "'" === g || "`" === g || '"' === m || "'" === m || "`" === m) && g !== m) throw new c("property names with quotes must have matching quotes");
-                        if ("constructor" !== d && f || (u = !0), G(A, i = "%" + (n += "." + d) + "%")) a = A[i];
+                        if ("constructor" !== d && f || (u = !0), O(A, i = "%" + (n += "." + d) + "%")) a = A[i];
                         else if (null != a) {
                             if (!(d in a)) {
                                 if (!t) throw new s("base intrinsic for " + e + " exists, but the property is not available.");
@@ -10499,7 +10496,7 @@
                             if (y && p + 1 >= r.length) {
                                 var b = y(a, d);
                                 a = (f = !!b) && "get" in b && !("originalValue" in b.get) ? b.get : a[d]
-                            } else f = G(a, d), a = a[d];
+                            } else f = O(a, d), a = a[d];
                             f && !u && (A[i] = a)
                         }
                     }
@@ -11822,6 +11819,7 @@
                         policies: "<",
                         metadata: "<",
                         canCreateAnnouncements: "<",
+                        canViewAnnouncements: "<",
                         onAnnouncementLoaded: "<",
                         announcementsData: "<",
                         refreshAnnouncements: "<"
@@ -11858,23 +11856,6 @@
                     controller: "groupEventsController"
                 };
                 r(76125).A.component("groupEvents", n), t.default = n
-            },
-            1707: function(e, t, r) {
-                "use strict";
-                r.r(t);
-                var n = {
-                    templateUrl: "group-forums",
-                    bindings: {
-                        group: "<",
-                        permissions: "<",
-                        channelsPermissions: "<",
-                        userId: "<",
-                        isGroupMember: "<",
-                        isEnabled: "<"
-                    },
-                    controller: "groupForumsController"
-                };
-                r(76125).A.component("groupForums", n), t.default = n
             },
             41915: function(e, t, r) {
                 "use strict";
@@ -12039,28 +12020,36 @@
                         },
                         tabs: {
                             about: {
+                                key: "about",
                                 translationKey: "Heading.About",
                                 state: "about"
                             },
                             forums: {
+                                key: "forums",
                                 translationKey: "Heading.Forums",
                                 state: "forums",
                                 label: "Forums"
                             },
                             events: {
+                                key: "events",
                                 translationKey: "Heading.Events",
                                 state: "events"
                             },
                             store: {
+                                key: "store",
                                 translationKey: "Heading.Store",
                                 state: "store"
                             },
                             affiliates: {
+                                key: "affiliates",
                                 translationKey: "Heading.Affiliates",
                                 state: "affiliates"
                             }
                         },
                         stateToTab: {
+                            announcements: "forums",
+                            "announcements.detail": "forums",
+                            "announcements.detail.edit": "forums",
                             "forums.category": "forums",
                             "forums.category.post": "forums",
                             "forums.category.post.comment": "forums",
@@ -12193,11 +12182,11 @@
                 }
                 o.$inject = ["$scope"], n.A.controller("groupAnnouncementsController", o), t.default = o
             },
-            17525: function(e, t, r) {
+            33104: function(e, t, r) {
                 "use strict";
                 r.r(t), r.d(t, {
                     default: function() {
-                        return d
+                        return h
                     }
                 });
                 var n = r(87577),
@@ -12206,36 +12195,7 @@
                     a = n.EnvironmentUrls.groupsApi,
                     u = ("".concat(a, "/v1/groups"), r(76125));
 
-                function c(e, t, r, n, o, i, a) {
-                    try {
-                        var u = e[i](a),
-                            c = u.value
-                    } catch (e) {
-                        return void r(e)
-                    }
-                    u.done ? t(c) : Promise.resolve(c).then(n, o)
-                }
-
-                function s(e) {
-                    return function() {
-                        var t = this,
-                            r = arguments;
-                        return new Promise((function(n, o) {
-                            var i = e.apply(t, r);
-
-                            function a(e) {
-                                c(i, n, o, a, u, "next", e)
-                            }
-
-                            function u(e) {
-                                c(i, n, o, a, u, "throw", e)
-                            }
-                            a(void 0)
-                        }))
-                    }
-                }
-
-                function l(e, t) {
+                function c(e, t) {
                     var r = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
                         var n = Object.getOwnPropertySymbols(e);
@@ -12246,19 +12206,86 @@
                     return r
                 }
 
-                function p(e) {
+                function s(e) {
                     for (var t = 1; t < arguments.length; t++) {
                         var r = null != arguments[t] ? arguments[t] : {};
-                        t % 2 ? l(Object(r), !0).forEach((function(t) {
-                            f(e, t, r[t])
-                        })) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(r)) : l(Object(r)).forEach((function(t) {
+                        t % 2 ? c(Object(r), !0).forEach((function(t) {
+                            l(e, t, r[t])
+                        })) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(r)) : c(Object(r)).forEach((function(t) {
                             Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(r, t))
                         }))
                     }
                     return e
                 }
 
-                function f(e, t, r) {
+                function l(e, t, r) {
+                    return t in e ? Object.defineProperty(e, t, {
+                        value: r,
+                        enumerable: !0,
+                        configurable: !0,
+                        writable: !0
+                    }) : e[t] = r, e
+                }
+                var p = function(e, t) {
+                    var r = s({}, e);
+                    return Object.keys(t).forEach((function(n) {
+                        r[n] = s(s({}, e[n]), t[n])
+                    })), r
+                };
+
+                function f(e, t, r, n, o, i, a) {
+                    try {
+                        var u = e[i](a),
+                            c = u.value
+                    } catch (e) {
+                        return void r(e)
+                    }
+                    u.done ? t(c) : Promise.resolve(c).then(n, o)
+                }
+
+                function y(e) {
+                    return function() {
+                        var t = this,
+                            r = arguments;
+                        return new Promise((function(n, o) {
+                            var i = e.apply(t, r);
+
+                            function a(e) {
+                                f(i, n, o, a, u, "next", e)
+                            }
+
+                            function u(e) {
+                                f(i, n, o, a, u, "throw", e)
+                            }
+                            a(void 0)
+                        }))
+                    }
+                }
+
+                function d(e, t) {
+                    var r = Object.keys(e);
+                    if (Object.getOwnPropertySymbols) {
+                        var n = Object.getOwnPropertySymbols(e);
+                        t && (n = n.filter((function(t) {
+                            return Object.getOwnPropertyDescriptor(e, t).enumerable
+                        }))), r.push.apply(r, n)
+                    }
+                    return r
+                }
+
+                function g(e) {
+                    for (var t = 1; t < arguments.length; t++) {
+                        var r = null != arguments[t] ? arguments[t] : {};
+                        t % 2 ? d(Object(r), !0).forEach((function(t) {
+                            m(e, t, r[t])
+                        })) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(r)) : d(Object(r)).forEach((function(t) {
+                            Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(r, t))
+                        }))
+                    }
+                    return e
+                }
+
+                function m(e, t, r) {
                     return t in e ? Object.defineProperty(e, t, {
                         value: r,
                         enumerable: !0,
@@ -12267,13 +12294,30 @@
                     }) : e[t] = r, e
                 }
 
-                function y(e, t, r, a, u, c, l, f, y, d, g, m, b, h, v, w, A, S, P, x, E, G, I) {
-                    function O() {
+                function b(e, t, r, a, u, c, s, l, f, d, m, b, h, v, w, A, S, P, x, E, O, G, I) {
+                    var j = p(f.tabs, {
+                            about: {
+                                translationKey: "Heading.Home"
+                            },
+                            forums: {
+                                translationKey: "Heading.Posts"
+                            }
+                        }),
+                        C = p(j, {
+                            forums: {
+                                state: "announcements"
+                            }
+                        }),
+                        F = function() {
+                            return e.isAnnouncementArchiveEnabled ? e.canViewForums() ? j : C : f.tabs
+                        };
+
+                    function R() {
                         var t = [e.loadGroup(e.library.currentGroup.id), e.loadGroupsList(!0), e.loadGroupMembership(e.library.currentGroup.id), e.refreshProfileHeader(e.library.currentGroup.id)];
-                        return h.all(t)
+                        return v.all(t)
                     }
 
-                    function j(e) {
+                    function k(e) {
                         window.dispatchEvent(new CustomEvent("roblox.group.membershipChanged", {
                             detail: {
                                 groupId: e
@@ -12281,23 +12325,23 @@
                         }))
                     }
 
-                    function C() {
+                    function U() {
                         angular.element(document.querySelector("body")).click()
                     }
-                    var F = !1,
-                        R = function(e) {
+                    var M = !1,
+                        D = function(e) {
                             var t;
-                            return null !== (t = y.stateToTab[null == e ? void 0 : e.name]) && void 0 !== t ? t : null == e ? void 0 : e.name
+                            return null !== (t = f.stateToTab[null == e ? void 0 : e.name]) && void 0 !== t ? t : null == e ? void 0 : e.name
                         },
-                        k = function(t) {
+                        B = function(t) {
                             var r, n, o;
-                            if (!F && R(null != t ? t : I.current) === y.tabs.about.state) {
+                            if (!M && D(null != t ? t : I.current) === f.tabs.about.key) {
                                 var a = null === (r = e.profilePlatform) || void 0 === r ? void 0 : r.componentOrdering,
                                     u = null === (n = e.library) || void 0 === n || null === (o = n.currentGroup) || void 0 === o ? void 0 : o.areGroupGamesVisible;
                                 if (Array.isArray(a) && "boolean" == typeof u) {
-                                    F = !0;
+                                    M = !0;
                                     var c = a.includes(i.uA.ExperienceServers) && u;
-                                    P.exposeAboutTabExperiment(c)
+                                    x.exposeAboutTabExperiment(c)
                                 }
                             }
                         };
@@ -12307,10 +12351,10 @@
                             bodyText: t,
                             actionButtonShow: !0,
                             actionButtonId: r,
-                            neutralButtonText: w.get(y.translations.no)
+                            neutralButtonText: A.get(f.translations.no)
                         })
                     }, e.showLeaveGroupOrChangeOwnerModal = function(t, n) {
-                        if (C(), e.isCurrentUserOwner()) {
+                        if (U(), e.isCurrentUserOwner()) {
                             var o = e.library.currentGroup.group,
                                 i = {
                                     animation: !1,
@@ -12318,23 +12362,23 @@
                                     controller: d.modals.changeOwnerUpsell.controller,
                                     resolve: {
                                         modalData: {
-                                            changeOwnerUrl: l.changeOwnerCreatorHubUrl(o.id),
+                                            changeOwnerUrl: s.changeOwnerCreatorHubUrl(o.id),
                                             onLeaveGroup: function() {
                                                 e.showLeaveGroupModal(t, n)
                                             }
                                         }
                                     }
                                 };
-                            v.open(i)
+                            w.open(i)
                         } else e.hasSocialModules ? e.showLeaveGroupModal(t, n) : e.leaveGroup(t, n).then((function() {
-                            O().then((function() {
-                                j(e.library.currentGroup.id)
+                            R().then((function() {
+                                k(e.library.currentGroup.id)
                             }), (function() {}))
                         })).catch((function() {
-                            m.warning(w.get(y.translations.unfollowGroupError)), r.debug("--leaveGroup-error---")
+                            b.warning(A.get(f.translations.unfollowGroupError)), r.debug("--leaveGroup-error---")
                         }))
                     }, e.showLeaveGroupModal = function(t, r) {
-                        C();
+                        U();
                         var n = {
                             animation: !1,
                             templateUrl: d.modals.leaveGroup.templateUrl,
@@ -12345,8 +12389,8 @@
                                     userId: r,
                                     isOwner: e.isCurrentUserOwner(),
                                     refreshGroupData: function() {
-                                        O().then((function() {
-                                            j(e.library.currentGroup.id)
+                                        R().then((function() {
+                                            k(e.library.currentGroup.id)
                                         }), (function() {}))
                                     },
                                     leaveGroup: function() {
@@ -12355,14 +12399,14 @@
                                 }
                             }
                         };
-                        v.open(n)
+                        w.open(n)
                     }, e.leaveGroup = function(e, t) {
-                        return S.leaveGroup(e, t)
+                        return P.leaveGroup(e, t)
                     }, e.showChangeOwnerModal = function() {
-                        C(), window.location.href = l.changeOwnerCreatorHubUrl(e.library.currentGroup.id)
+                        U(), window.location.href = s.changeOwnerCreatorHubUrl(e.library.currentGroup.id)
                     }, e.showReportAbuseModal = function(t) {
-                        C();
-                        var r = p({}, y.reportAbuseName);
+                        U();
+                        var r = g({}, f.reportAbuseName);
                         e.canViewAndReportAnnouncement() || delete r.announcements, 0 === e.library.currentGroup.roles.length && delete r.role;
                         var n = function(n) {
                             var o = {
@@ -12378,9 +12422,9 @@
                                     }
                                 }
                             };
-                            v.open(o)
+                            w.open(o)
                         };
-                        l.getAbuseReportRevampPolicyInfo().then((function(e) {
+                        s.getAbuseReportRevampPolicyInfo().then((function(e) {
                             n(e)
                         })).catch((function() {
                             n({
@@ -12391,25 +12435,25 @@
                             })
                         }))
                     }, e.cancelJoinRequest = function(e, t) {
-                        S.cancelGroupJoinRequest(e, t).then((function() {
-                            O()
+                        P.cancelGroupJoinRequest(e, t).then((function() {
+                            R()
                         }), (function() {
-                            m.warning(w.get(y.translations.defaultError)), r.debug("--cancelJoinRequest-error---")
+                            b.warning(A.get(f.translations.defaultError)), r.debug("--cancelJoinRequest-error---")
                         }))
                     }, e.makePrimary = function(t) {
-                        C(), e.showModal(w.get(y.translations.makePrimaryGroup), w.get(y.translations.makePrimaryGroupWarning), y.makePrimaryActionButtonId).result.then((function() {
-                            S.makePrimaryGroup(t).then((function() {
-                                O()
+                        U(), e.showModal(A.get(f.translations.makePrimaryGroup), A.get(f.translations.makePrimaryGroupWarning), f.makePrimaryActionButtonId).result.then((function() {
+                            P.makePrimaryGroup(t).then((function() {
+                                R()
                             }), (function() {
-                                m.warning(w.get(y.translations.makePrimaryError)), r.debug("--makePrimary-error---")
+                                b.warning(A.get(f.translations.makePrimaryError)), r.debug("--makePrimary-error---")
                             }))
                         }))
                     }, e.removePrimary = function() {
-                        C(), e.showModal(w.get(y.translations.removePrimaryGroup), w.get(y.translations.removePrimaryGroupWarning), y.removePrimaryActionButtonId).result.then((function() {
-                            S.removePrimaryGroup().then((function() {
-                                O()
+                        U(), e.showModal(A.get(f.translations.removePrimaryGroup), A.get(f.translations.removePrimaryGroupWarning), f.removePrimaryActionButtonId).result.then((function() {
+                            P.removePrimaryGroup().then((function() {
+                                R()
                             }), (function() {
-                                m.warning(w.get(y.translations.removePrimaryError)), r.debug("--removePrimary-error---")
+                                b.warning(A.get(f.translations.removePrimaryError)), r.debug("--removePrimary-error---")
                             }))
                         }))
                     }, e.triggerProofOfWorkChallenge = function(t) {
@@ -12423,14 +12467,14 @@
                                 })
                             },
                             onChallengeInvalidated: function() {
-                                m.warning(w.get(y.translations.joinGroupEr$scope.ror)), r.debug("--proof-of-work-challenge-invalidated---")
+                                b.warning(A.get(f.translations.joinGroupEr$scope.ror)), r.debug("--proof-of-work-challenge-invalidated---")
                             },
                             onModalChallengeAbandoned: function() {}
                         }).catch((function() {
-                            m.warning(w.get(y.translations.joinGroupError)), r.debug("--proof-of-work-challenge-error---")
+                            b.warning(A.get(f.translations.joinGroupError)), r.debug("--proof-of-work-challenge-error---")
                         }))
                     }, e.joinGroupCaptchaFailed = function() {
-                        m.warning(w.get(y.translations.joinGroupError))
+                        b.warning(A.get(f.translations.joinGroupError))
                     }, e.joinGroupCaptchaPassed = function(t) {
                         e.joinGroup(!0, t)
                     }, e.triggerCaptcha = function() {
@@ -12438,24 +12482,24 @@
                     }, e.isCaptchaActive = function() {
                         return t.captcha.activated
                     }, e.joinGroup = function(t, n, o) {
-                        return e.isCaptchaActive() && !t ? h((function(e, t) {
+                        return e.isCaptchaActive() && !t ? v((function(e, t) {
                             return t(new Error("captcha active"))
-                        })) : (x.logGroupPageClickEvent({
+                        })) : (E.logGroupPageClickEvent({
                             clickTargetType: "joinGroup",
                             context: G.EventContext.GroupHomepage,
                             groupId: e.library.currentGroup.id,
-                            enterFrom: x.getCommunitySessionEnterFrom()
-                        }), h((function(t, i) {
-                            S.joinGroup(e.library.currentGroup.id, n, o || y.challengeData.defaultProofOfWorkData).then((function() {
-                                O().then((function() {
-                                    if (e.showJoinGroupButtonUI() === y.joinStatus.joinPending) m.success(w.get(y.translations.joinGroupPendingSuccess));
+                            enterFrom: E.getCommunitySessionEnterFrom()
+                        }), v((function(t, i) {
+                            P.joinGroup(e.library.currentGroup.id, n, o || f.challengeData.defaultProofOfWorkData).then((function() {
+                                R().then((function() {
+                                    if (e.showJoinGroupButtonUI() === f.joinStatus.joinPending) b.success(A.get(f.translations.joinGroupPendingSuccess));
                                     else {
-                                        var r = e.hasSocialModules ? w.get(y.translations.joinGroupSuccess) : w.get(y.translations.followGroupSuccess, {
+                                        var r = e.hasSocialModules ? A.get(f.translations.joinGroupSuccess) : A.get(f.translations.followGroupSuccess, {
                                             name: e.library.currentGroup.group.name
                                         });
-                                        m.success(r)
+                                        b.success(r)
                                     }
-                                    j(e.library.currentGroup.id), t()
+                                    k(e.library.currentGroup.id), t()
                                 }), (function(e) {
                                     i(e)
                                 }))
@@ -12463,7 +12507,7 @@
                                 if (t && t.errors && t.errors[0]) {
                                     var n = t.errors[0];
                                     switch (n.code) {
-                                        case A.errorCodes.membership.proofOfWork:
+                                        case S.errorCodes.membership.proofOfWork:
                                             var o = {
                                                 sessionId: ""
                                             };
@@ -12476,9 +12520,9 @@
                                                     o.sessionId = a
                                                 }
                                                 e.triggerProofOfWorkChallenge(o)
-                                            } else m.warning(w.get(y.translations.joinGroupError)), r.debug("--proof-of-work-challenge-error-session-id-missing---");
+                                            } else b.warning(A.get(f.translations.joinGroupError)), r.debug("--proof-of-work-challenge-error-session-id-missing---");
                                             break;
-                                        case A.errorCodes.membership.captcha:
+                                        case S.errorCodes.membership.captcha:
                                             if (e.captchaInputParams = {
                                                     dataExchange: "",
                                                     unifiedCaptchaId: ""
@@ -12493,34 +12537,34 @@
                                             }
                                             e.triggerCaptcha();
                                             break;
-                                        case A.errorCodes.membership.operationUnavailable:
-                                            m.warning(w.get(A.translations.groupMembershipsUnavailableError));
+                                        case S.errorCodes.membership.operationUnavailable:
+                                            b.warning(A.get(S.translations.groupMembershipsUnavailableError));
                                             break;
                                         default:
-                                            m.warning(w.get(y.translations.joinGroupError)), r.debug("--joinGroup-error---")
+                                            b.warning(A.get(f.translations.joinGroupError)), r.debug("--joinGroup-error---")
                                     }
                                 }
                                 i(t)
                             }))
                         })))
                     }, e.claimOwnership = function(e) {
-                        C(), S.claimOwnership(e).then((function() {
-                            m.success(w.get(y.translations.claimOwnershipSuccess)), O()
+                        U(), P.claimOwnership(e).then((function() {
+                            b.success(A.get(f.translations.claimOwnershipSuccess)), R()
                         }), (function() {
-                            m.warning(w.get(y.translations.claimOwnershipError)), r.debug("--claimOwnership-error---")
+                            b.warning(A.get(f.translations.claimOwnershipError)), r.debug("--claimOwnership-error---")
                         }))
                     }, e.isCurrentUserOwner = function() {
                         return e.doesGroupHaveOwner() && e.library.currentUser.id === e.library.currentGroup.group.owner.userId
                     }, e.$on("$stateChangeSuccess", (function(t, r) {
-                        var n = R(r);
-                        if (e.policiesLoaded && n === y.tabs.forums.state && !e.canViewForums()) return void I.go(y.tabs.about.state, {
+                        var n = D(r);
+                        if (e.policiesLoaded && I.includes(f.tabs.forums.state) && !e.canViewForums()) return void I.go(f.tabs.about.state, {
                             success: !0
                         }, {
                             reload: !0
                         });
-                        e.layout.activeTab = y.tabs[n], k(r)
+                        e.layout.activeTab = F()[n], B(r)
                     })), e.loadGroup = function(t) {
-                        return e.layout.isLoadingGroup = !0, f.getGroup(t).then((function(t) {
+                        return e.layout.isLoadingGroup = !0, l.getGroup(t).then((function(t) {
                             t && (e.library.currentGroup.group = t)
                         }), (function() {
                             e.layout.loadGroupError = !0, r.debug("--loadGroup-error---")
@@ -12528,27 +12572,27 @@
                             e.layout.isLoadingGroup = !1
                         }))
                     }, e.loadGroupForums = function(t) {
-                        return f.getGroupForums(t).then((function(t) {
+                        return l.getGroupForums(t).then((function(t) {
                             e.library.currentGroup.forumsEnabled = t.data.length > 0
                         })).finally((function() {
-                            I.current.label !== y.tabs.forums.label || e.library.currentGroup.forumsEnabled || I.go(y.tabs.about.state, {
+                            I.includes(f.tabs.forums.state) && !e.library.currentGroup.forumsEnabled && I.go(f.tabs.about.state, {
                                 success: !0
                             }, {
                                 reload: !0
                             })
                         }))
                     }, e.loadGroupEvents = function(t) {
-                        return f.getGroupEvents(t).then((function(t) {
+                        return l.getGroupEvents(t).then((function(t) {
                             var r;
                             e.library.currentGroup.eventsEnabled = (null == t || null === (r = t.data) || void 0 === r ? void 0 : r.length) > 0
                         }))
                     }, e.loadGroupStore = function(t) {
-                        return f.getGroupStore(t).then((function(t) {
+                        return l.getGroupStore(t).then((function(t) {
                             var r;
                             e.library.currentGroup.storeEnabled = (null == t || null === (r = t.data) || void 0 === r ? void 0 : r.length) > 0
                         }))
                     }, e.loadGroupAffiliates = function(t) {
-                        return f.getGroupAffiliates(t).then((function(t) {
+                        return l.getGroupAffiliates(t).then((function(t) {
                             e.library.currentGroup.affiliatesEnabled = (null == t ? void 0 : t.totalGroupCount) > 0
                         }))
                     }, e.isLockedGroup = function() {
@@ -12564,9 +12608,9 @@
                             e.library.groupsList.isLoadingGroups = !1
                         })))
                     }, e.loadGroupMembership = function(t) {
-                        return e.layout.isLoadingGroupMembership = !0, h((function(n, o) {
-                            S.getGroupMembership(t).then((function(t) {
-                                t && (t.userRole && (e.library.currentGroup.role = t.userRole.role), e.library.currentGroup.isPendingJoin = t.isPendingJoin, e.library.currentGroup.isPrimary = t.isPrimary, t.permissions && (e.library.currentGroup.permissions = t.permissions), t.channelPermissions && (e.library.currentGroup.channelPermissions = t.channelPermissions), e.library.currentGroup.canConfigureGroup = t.canConfigure, e.library.currentGroup.canViewMemberList = t.canViewMemberList, e.library.currentGroup.areGroupFundsVisible = t.areGroupFundsVisible, e.library.currentGroup.areEnemiesAllowed = t.areEnemiesAllowed, e.library.currentGroup.areGroupGamesVisible = t.areGroupGamesVisible, e.library.currentGroup.isBannedFromGroup = t.isBannedFromGroup), k(), n(t)
+                        return e.layout.isLoadingGroupMembership = !0, v((function(n, o) {
+                            P.getGroupMembership(t).then((function(t) {
+                                t && (t.userRole && (e.library.currentGroup.role = t.userRole.role), e.library.currentGroup.isPendingJoin = t.isPendingJoin, e.library.currentGroup.isPrimary = t.isPrimary, t.permissions && (e.library.currentGroup.permissions = t.permissions), t.channelPermissions && (e.library.currentGroup.channelPermissions = t.channelPermissions), e.library.currentGroup.canConfigureGroup = t.canConfigure, e.library.currentGroup.canViewMemberList = t.canViewMemberList, e.library.currentGroup.areGroupFundsVisible = t.areGroupFundsVisible, e.library.currentGroup.areEnemiesAllowed = t.areEnemiesAllowed, e.library.currentGroup.areGroupGamesVisible = t.areGroupGamesVisible, e.library.currentGroup.isBannedFromGroup = t.isBannedFromGroup), B(), n(t)
                             }), (function(t) {
                                 r.debug("--loadGroupMembership-error---"), e.layout.loadGroupMembershipError = !0, o(t)
                             })).finally((function() {
@@ -12575,7 +12619,7 @@
                         }))
                     }, e.loadGroupRoles = function(t) {
                         var n;
-                        null !== (n = e.policies) && void 0 !== n && n.isGracefulDegradationEnabled || f.getGroupRoles(t).then((function(t) {
+                        null !== (n = e.policies) && void 0 !== n && n.isGracefulDegradationEnabled || l.getGroupRoles(t).then((function(t) {
                             var r = t.roles;
                             if (r && r.length > 1) {
                                 var n = r.filter((function(e) {
@@ -12589,8 +12633,8 @@
                     }, e.getCurrencyIfNeeded = function() {
                         e.library.currentGroup.areGroupFundsVisible && e.loadGroupCurrency()
                     }, e.loadGroupMetadata = function(t) {
-                        return h((function(t, o) {
-                            f.getGroupMetadata().then((function(r) {
+                        return v((function(t, o) {
+                            l.getGroupMetadata().then((function(r) {
                                 r && (e.library.metadata = r), e.library.metadata.isPhone = n.DeviceMeta && (0, n.DeviceMeta)().isPhone, e.library.metadata.isApp = n.DeviceMeta && (0, n.DeviceMeta)().isInApp, t(r)
                             }), (function(t) {
                                 r.debug("--loadGroupMetadata-error---"), e.layout.loadGroupMetadataError = !0, o(t)
@@ -12599,7 +12643,7 @@
                             }))
                         }))
                     }, e.loadGroupCurrency = function() {
-                        f.getGroupCurrency(e.library.currentGroup.id).then((function(t) {
+                        l.getGroupCurrency(e.library.currentGroup.id).then((function(t) {
                             e.currencyInRobux = t
                         }), (function() {
                             r.debug("--loadGroupCurrency-error---")
@@ -12615,7 +12659,7 @@
                     }, e.isGroupPrimary = function() {
                         return e.library.currentGroup.isPrimary
                     }, e.showJoinGroupButtonUI = function() {
-                        return e.isInGroup() ? y.joinStatus.inGroup : e.library.currentUser.groupCount >= e.library.metadata.groupLimit ? y.joinStatus.maxGroups : e.library.currentGroup.isPendingJoin ? y.joinStatus.joinPending : e.doesGroupHaveOwner() || e.library.currentGroup.group.publicEntryAllowed ? y.joinStatus.allowed : y.joinStatus.groupClosed
+                        return e.isInGroup() ? f.joinStatus.inGroup : e.library.currentUser.groupCount >= e.library.metadata.groupLimit ? f.joinStatus.maxGroups : e.library.currentGroup.isPendingJoin ? f.joinStatus.joinPending : e.doesGroupHaveOwner() || e.library.currentGroup.group.publicEntryAllowed ? f.joinStatus.allowed : f.joinStatus.groupClosed
                     }, e.canViewEvents = function() {
                         var t;
                         return (null === (t = e.policies) || void 0 === t || !t.isGracefulDegradationEnabled) && (!!e.policies.displayGroupEvents && (!!e.isCurrentUserOwner() || !(e.isHidingEmptyCommunityTabsEnabled && !e.library.currentGroup.eventsEnabled)))
@@ -12632,11 +12676,11 @@
                     }, e.canJoinGroup = function() {
                         return !e.isCaptchaActive() && e.canViewGroupDetails() && e.library.currentGroup.roles && e.library.currentGroup.roles.length > 0
                     }, e.canViewCommunityTabs = function() {
-                        return !(e.isHidingEmptyCommunityTabsEnabled && e.groupDetailsNumTabs() <= 1)
+                        return !!e.isAnnouncementArchiveEnabled || !(e.isHidingEmptyCommunityTabsEnabled && e.groupDetailsNumTabs() <= 1)
                     }, e.groupDetailsTabs = function() {
-                        var t = p({}, y.tabs);
-                        return e.canViewEvents() || delete t.events, e.canViewForums() || delete t.forums, e.canViewStore() || delete t.store, e.canViewAffiliates() || delete t.affiliates, void 0 !== e.availableProfilePlatformTabs && Object.keys(t).forEach((function(r) {
-                            e.availableProfilePlatformTabs.has(r) || delete t[r]
+                        var t = g({}, F());
+                        return e.canViewEvents() || delete t.events, e.isAnnouncementArchiveEnabled || e.canViewForums() || delete t.forums, e.canViewStore() || delete t.store, e.canViewAffiliates() || delete t.affiliates, void 0 !== e.availableProfilePlatformTabs && Object.keys(t).forEach((function(r) {
+                            "forums" === r && e.isAnnouncementArchiveEnabled || e.availableProfilePlatformTabs.has(r) || delete t[r]
                         })), t
                     }, e.isBannedFromGroup = function() {
                         return e.library.currentGroup.isBannedFromGroup
@@ -12667,28 +12711,28 @@
                     }, e.showGroupsList = function() {
                         return e.isAuthenticatedUser && !e.library.metadata.isPhone && e.layout.isMetadataLoaded && e.isCommunitiesLayoutVisible
                     }, e.loadGroupsListRedesignExperiment = function() {
-                        P.isGroupsListRedesignExperimentEnabled().then((function(t) {
+                        x.isGroupsListRedesignExperimentEnabled().then((function(t) {
                             e.isGroupsListRedesignEnabled = t
                         }))
                     }, e.profilePageUrl = function(e) {
-                        return l.profilePageUrl(e)
+                        return s.profilePageUrl(e)
                     }, e.configureGroupUrl = function(e) {
-                        return l.configureGroupUrl(e)
+                        return s.configureGroupUrl(e)
                     }, e.changeOwnerCreatorHubUrl = function(e) {
-                        return l.changeOwnerCreatorHubUrl(e)
+                        return s.changeOwnerCreatorHubUrl(e)
                     }, e.verifyGroupOrigin = function() {
                         var t = e.library.currentGroup.id;
-                        f.getGroupPolicyInfo([t]).then((function(t) {
+                        l.getGroupPolicyInfo([t]).then((function(t) {
                             var r = t && t.groups && t.groups[0] && !0 === t.groups[0].canViewGroup;
                             e.library.currentGroup.group.isRestrictedByPolicy = !r
                         }), (function() {
                             r.debug("--checkGroupOrigin-error---"), e.library.currentGroup.group.isRestrictedByPolicy = !0
                         }))
-                    }, e.loadHidingEmptyCommunityTabsExperiment = s(regeneratorRuntime.mark((function t() {
+                    }, e.loadHidingEmptyCommunityTabsExperiment = y(regeneratorRuntime.mark((function t() {
                         return regeneratorRuntime.wrap((function(t) {
                             for (;;) switch (t.prev = t.next) {
                                 case 0:
-                                    P.isHidingEmptyCommunityTabsExperimentEnabled().then((function(t) {
+                                    x.isHidingEmptyCommunityTabsExperimentEnabled().then((function(t) {
                                         e.isHidingEmptyCommunityTabsEnabled = t
                                     }));
                                 case 1:
@@ -12696,11 +12740,11 @@
                                     return t.stop()
                             }
                         }), t)
-                    }))), e.loadGroupExperienceServersExperiment = s(regeneratorRuntime.mark((function t() {
+                    }))), e.loadGroupExperienceServersExperiment = y(regeneratorRuntime.mark((function t() {
                         return regeneratorRuntime.wrap((function(t) {
                             for (;;) switch (t.prev = t.next) {
                                 case 0:
-                                    P.isGroupExperienceServersExperimentEnabled().then((function(t) {
+                                    x.isGroupExperienceServersExperimentEnabled().then((function(t) {
                                         e.isGroupExperienceServersExperimentEnabled = t
                                     }));
                                 case 1:
@@ -12708,22 +12752,22 @@
                                     return t.stop()
                             }
                         }), t)
-                    }))), e.loadReactAffiliatesFlag = function(t) {
-                        f.getGroupProductFeatures(t).then((function(t) {
-                            e.isReactAffiliatesEnabled = !0 === (null == t ? void 0 : t.ReactGroupAffiliates), e.reactAffiliatesFlagLoaded = !0
+                    }))), e.loadGroupProductFeatures = function(t) {
+                        l.getGroupProductFeatures(t).then((function(t) {
+                            e.isReactAffiliatesEnabled = !0 === (null == t ? void 0 : t.ReactGroupAffiliates), e.reactAffiliatesFlagLoaded = !0, e.isAnnouncementArchiveEnabled = !0 === (null == t ? void 0 : t.AnnouncementArchive) && !0 === (null == t ? void 0 : t.AnnouncementsUsingCommsPlat)
                         }), (function() {
-                            e.isReactAffiliatesEnabled = !1, e.reactAffiliatesFlagLoaded = !0
+                            e.isReactAffiliatesEnabled = !1, e.reactAffiliatesFlagLoaded = !0, e.isAnnouncementArchiveEnabled = !1
                         }))
                     }, e.loadGroupDetailPolicies = function(t) {
-                        e.loadReactAffiliatesFlag(t), e.library.metadata.isGroupDetailsPolicyEnabled ? f.getGroupDetailRules(e.library.currentUser.id).then((function(r) {
-                            e.policies = r, e.policiesLoaded = !0, e.loadProfilePlatform(t), e.policies.checkGroupOrigin && e.verifyGroupOrigin(), e.policies.displayGroupForums ? e.loadGroupForums(t) : I.current.label === y.tabs.forums.label && I.go(y.tabs.about.state, {
+                        e.loadGroupProductFeatures(t), e.library.metadata.isGroupDetailsPolicyEnabled ? l.getGroupDetailRules(e.library.currentUser.id).then((function(r) {
+                            e.policies = r, e.policiesLoaded = !0, e.loadProfilePlatform(t), e.policies.checkGroupOrigin && e.verifyGroupOrigin(), e.policies.displayGroupForums ? e.loadGroupForums(t) : I.includes(f.tabs.forums.state) && I.go(f.tabs.about.state, {
                                 success: !0
                             }, {
                                 reload: !0
                             }), e.loadGroupEvents(t), e.loadGroupStore(t), e.loadGroupAffiliates(t)
                         }), (function() {
                             r.debug("--loadGroupDetailPolicies-error---"), e.loadProfilePlatform(t)
-                        })) : (Object.keys(y.policies).forEach((function(t) {
+                        })) : (Object.keys(f.policies).forEach((function(t) {
                             e.policies[t] = !0
                         })), e.loadProfilePlatform(t))
                     }, e.initGroupDetails = function(t) {
@@ -12757,27 +12801,27 @@
                     }, e.doesCurrentGroupOwnerHaveVerifiedBadge = function() {
                         var t, r, n, o;
                         return null == e || null === (t = e.library) || void 0 === t || null === (r = t.currentGroup) || void 0 === r || null === (n = r.group) || void 0 === n || null === (o = n.owner) || void 0 === o ? void 0 : o.hasVerifiedBadge
-                    }, e.fetchAndExposeExperiment = s(regeneratorRuntime.mark((function e() {
+                    }, e.fetchAndExposeExperiment = y(regeneratorRuntime.mark((function e() {
                         return regeneratorRuntime.wrap((function(e) {
                             for (;;) switch (e.prev = e.next) {
                                 case 0:
-                                    return e.next = 2, P.getLandingPageExperiment();
+                                    return e.next = 2, x.getLandingPageExperiment();
                                 case 2:
-                                    P.exposeLandingPageExperiment();
+                                    x.exposeLandingPageExperiment();
                                 case 3:
                                 case "end":
                                     return e.stop()
                             }
                         }), e)
                     }))), e.logPageExposure = function() {
-                        x.logGroupPageExposureEvent({
+                        E.logGroupPageExposureEvent({
                             exposureType: G.ExposureType.GroupHomepage,
                             groupId: e.library.currentGroup.id,
                             context: G.EventContext.GroupHomepage
                         })
                     }, e.loadProfilePlatform = function(t) {
                         var r;
-                        e.hasSocialModules = !0, h.when(E.initializeProfilePlatform(t, null === (r = e.policies) || void 0 === r ? void 0 : r.isGracefulDegradationEnabled)).then((function(t) {
+                        e.hasSocialModules = !0, v.when(O.initializeProfilePlatform(t, null === (r = e.policies) || void 0 === r ? void 0 : r.isGracefulDegradationEnabled)).then((function(t) {
                             var r, n, o, i;
                             e.profilePlatform = t;
                             var a = null == t || null === (r = t.components) || void 0 === r || null === (n = r.CommunityProfileHeader) || void 0 === n ? void 0 : n.hasSocialModules;
@@ -12785,14 +12829,14 @@
                             var u = null == t || null === (o = t.components) || void 0 === o || null === (i = o.CommunityTabs) || void 0 === i ? void 0 : i.tabs;
                             void 0 !== u && (e.availableProfilePlatformTabs = new Set(u.map((function(e) {
                                 return e.toLowerCase()
-                            })))), k()
+                            })))), B()
                         })).catch((function() {
                             e.profilePlatform = {
                                 componentOrdering: [i.uA.CommunityProfileHeader, i.uA.About, i.uA.Announcements, i.uA.Events, i.uA.Experiences, i.uA.ForumsDiscovery, i.uA.Members, i.uA.SocialLinks]
-                            }, k()
+                            }, B()
                         }))
                     }, e.refreshProfileHeader = function(t) {
-                        E.refreshProfilePlatform(t, [{
+                        O.refreshProfilePlatform(t, [{
                             component: i.uA.CommunityProfileHeader
                         }, {
                             component: i.uA.Actions
@@ -12800,7 +12844,7 @@
                             e.mergeAndUpdateProfilePlatformData(t)
                         }))
                     }, e.refreshAnnouncements = function() {
-                        return E.refreshProfilePlatform(e.library.currentGroup.id, [{
+                        return O.refreshProfilePlatform(e.library.currentGroup.id, [{
                             component: i.uA.Announcements
                         }]).then((function(e) {
                             var t, r;
@@ -12810,22 +12854,22 @@
                         var r;
                         if (e.profilePlatform) {
                             var n = null !== (r = t.componentOrdering) && void 0 !== r ? r : e.profilePlatform.componentOrdering,
-                                o = p(p({}, e.profilePlatform.components), t.components);
+                                o = g(g({}, e.profilePlatform.components), t.components);
                             e.profilePlatform = {
                                 profileType: t.profileType,
                                 profileId: t.profileId,
                                 componentOrdering: n,
                                 components: o
-                            }, k()
+                            }, B()
                         } else e.profilePlatform = t
                     }, e.updateCommunitiesLayoutVisibility = function() {
                         e.isCommunitiesLayoutVisible = window.location.pathname.includes("/communities/")
                     }, e.init = function() {
-                        g.redirectToCommunitiesIfNecessary();
-                        var t = g.parseGroupId(a.absUrl());
-                        e.thumbnailTypes = b.thumbnailTypes, e.relationshipTypes = A.relationshipTypes, e.groupDetailsConstants = y, e.policies = e.groupDetailsConstants.policies, e.policiesLoaded = !1, e.isReactAffiliatesEnabled = !1, e.reactAffiliatesFlagLoaded = !1, e.isAuthenticatedUser = n.CurrentUser.isAuthenticated, e.groupAnnouncement = {}, e.layout = {
+                        m.redirectToCommunitiesIfNecessary();
+                        var t = m.parseGroupId(a.absUrl());
+                        e.thumbnailTypes = h.thumbnailTypes, e.relationshipTypes = S.relationshipTypes, e.groupDetailsConstants = f, e.policies = e.groupDetailsConstants.policies, e.policiesLoaded = !1, e.isReactAffiliatesEnabled = !1, e.reactAffiliatesFlagLoaded = !1, e.isAuthenticatedUser = n.CurrentUser.isAuthenticated, e.groupAnnouncement = {}, e.layout = {
                             activeTab: "about"
-                        }, e.library = {}, e.library.moreGroupsUrl = A.absoluteUrls.moreGroups, e.library.currentUser = {
+                        }, e.library = {}, e.library.moreGroupsUrl = S.absoluteUrls.moreGroups, e.library.currentUser = {
                             id: parseInt(n.CurrentUser.userId),
                             groupCount: null,
                             maxGroups: 0
@@ -12840,7 +12884,7 @@
                         };
                         var r = e.loadGroupMetadata(t),
                             o = e.fetchAndExposeExperiment();
-                        h.all([r, o]).then((function() {
+                        v.all([r, o]).then((function() {
                             e.updateGroup(t), e.logPageExposure()
                         })).finally((function() {
                             e.loadGroupDetailPolicies(t)
@@ -12853,8 +12897,8 @@
                         return !0 === e.library.currentGroup.forumsEnabled
                     }
                 }
-                y.$inject = ["$scope", "$rootScope", "$log", "$location", "modalService", "groupsListService", "groupDetailsService", "groupsService", "groupDetailsConstants", "groupResources", "groupUtilityService", "systemFeedbackService", "thumbnailConstants", "$q", "$uibModal", "languageResource", "groupsConstants", "groupMembershipService", "groupExperimentsService", "groupEventLoggingService", "profilePlatformService", "eventConstants", "$state"], u.A.controller("groupController", y);
-                var d = y
+                b.$inject = ["$scope", "$rootScope", "$log", "$location", "modalService", "groupsListService", "groupDetailsService", "groupsService", "groupDetailsConstants", "groupResources", "groupUtilityService", "systemFeedbackService", "thumbnailConstants", "$q", "$uibModal", "languageResource", "groupsConstants", "groupMembershipService", "groupExperimentsService", "groupEventLoggingService", "profilePlatformService", "eventConstants", "$state"], u.A.controller("groupController", b);
+                var h = b
             },
             71481: function(e, t, r) {
                 "use strict";
@@ -12899,16 +12943,6 @@
                     this.$onInit = function() {}
                 }
                 o.$inject = ["$scope"], n.A.controller("groupEventsController", o), t.default = o
-            },
-            59645: function(e, t, r) {
-                "use strict";
-                r.r(t);
-                var n = r(76125);
-
-                function o(e) {
-                    this.$onInit = function() {}
-                }
-                o.$inject = ["$scope"], n.A.controller("groupForumsController", o), t.default = o
             },
             74995: function(e, t, r) {
                 "use strict";
@@ -13358,6 +13392,7 @@
                             policies: "<",
                             metadata: "<",
                             canCreateAnnouncements: "<",
+                            canViewAnnouncements: "<",
                             onAnnouncementLoaded: "<",
                             announcementsData: "<",
                             refreshAnnouncements: "<"
@@ -13395,6 +13430,7 @@
                                         policies: e.policies,
                                         metadata: e.metadata,
                                         canCreateAnnouncements: e.canCreateAnnouncements,
+                                        canViewAnnouncements: e.canViewAnnouncements,
                                         onAnnouncementLoaded: function() {
                                             return e.onAnnouncementLoaded()
                                         },
@@ -13408,7 +13444,7 @@
                                         scrollOnMount: !0
                                     }))
                                 };
-                            t.ready(c), ["communityInfo", "isOwner", "announcement", "canCreateAnnouncements", "announcementsData"].forEach((function(t) {
+                            t.ready(c), ["communityInfo", "isOwner", "announcement", "canCreateAnnouncements", "canViewAnnouncements", "announcementsData"].forEach((function(t) {
                                 e.$watch(t, (function(e, t) {
                                     JSON.stringify(e) !== JSON.stringify(t) && c()
                                 }), !0)
@@ -13467,55 +13503,6 @@
                 }
                 r(76125).A.directive("groupEvents", o), t.default = o
             },
-            39087: function(e, t, r) {
-                "use strict";
-                r.r(t);
-                var n = r(87577);
-
-                function o() {
-                    return {
-                        restrict: "A",
-                        scope: {
-                            group: "<",
-                            permissions: "<",
-                            channelsPermissions: "<",
-                            userId: "<",
-                            isGroupMember: "<",
-                            isEnabled: "<"
-                        },
-                        link: function(e, t) {
-                            var r = function() {
-                                var r;
-                                null !== (r = e.group) && void 0 !== r && r.id && e.permissions && (null === n.GroupForumsService || void 0 === n.GroupForumsService || n.GroupForumsService.renderGroupForums(t[0], {
-                                    group: e.group,
-                                    permissions: e.permissions,
-                                    channelsPermissions: e.channelsPermissions,
-                                    userId: e.userId,
-                                    isGroupMember: e.isGroupMember,
-                                    isEnabled: e.isEnabled
-                                }))
-                            };
-                            t.ready(r), e.$on("$destroy", (function() {
-                                var e;
-                                null === n.GroupForumsService || void 0 === n.GroupForumsService || null === (e = n.GroupForumsService.unmountGroupForums) || void 0 === e || e.call(n.GroupForumsService, t[0])
-                            })), e.$watch((function() {
-                                return {
-                                    group: e.group,
-                                    permissions: e.permissions,
-                                    channelsPermissions: e.channelsPermissions,
-                                    userId: e.userId,
-                                    isGroupMember: e.isGroupMember,
-                                    isEnabled: e.isEnabled
-                                }
-                            }), (function(e, t) {
-                                var n;
-                                null !== (n = e.group) && void 0 !== n && n.id && e.permissions && (e.group.id === t.group.id && JSON.stringify(e.permissions) === JSON.stringify(t.permissions) && JSON.stringify(e.channelsPermissions) === JSON.stringify(t.channelsPermissions) && e.userId === t.userId && e.isGroupMember === t.isGroupMember && e.isEnabled === t.isEnabled || r())
-                            }), !0)
-                        }
-                    }
-                }
-                r(76125).A.directive("groupForums", o), t.default = o
-            },
             92095: function(e, t, r) {
                 "use strict";
                 r.r(t);
@@ -13559,6 +13546,58 @@
                     }
                 }
                 r(76125).A.directive("groupForumsDiscovery", o), t.default = o
+            },
+            73406: function(e, t, r) {
+                "use strict";
+                r.r(t);
+                var n = r(87577);
+
+                function o() {
+                    return {
+                        restrict: "E",
+                        scope: {
+                            group: "<",
+                            permissions: "<",
+                            channelsPermissions: "<",
+                            userId: "<",
+                            isGroupMember: "<",
+                            forumsEnabled: "<",
+                            policies: "<"
+                        },
+                        link: function(e, t) {
+                            var r = function() {
+                                var r;
+                                null !== (r = e.group) && void 0 !== r && r.id && e.permissions && (null === n.GroupPostsService || void 0 === n.GroupPostsService || n.GroupPostsService.renderGroupPosts(t[0], {
+                                    group: e.group,
+                                    permissions: e.permissions,
+                                    channelsPermissions: e.channelsPermissions,
+                                    userId: e.userId,
+                                    isGroupMember: e.isGroupMember,
+                                    forumsEnabled: e.forumsEnabled,
+                                    policies: e.policies
+                                }))
+                            };
+                            t.ready(r), e.$on("$destroy", (function() {
+                                var e;
+                                null === n.GroupPostsService || void 0 === n.GroupPostsService || null === (e = n.GroupPostsService.unmountGroupPosts) || void 0 === e || e.call(n.GroupPostsService, t[0])
+                            })), e.$watch((function() {
+                                return {
+                                    group: e.group,
+                                    permissions: e.permissions,
+                                    channelsPermissions: e.channelsPermissions,
+                                    userId: e.userId,
+                                    isGroupMember: e.isGroupMember,
+                                    forumsEnabled: e.forumsEnabled,
+                                    policies: e.policies
+                                }
+                            }), (function(e, t) {
+                                var n;
+                                null !== (n = e.group) && void 0 !== n && n.id && e.permissions && (e.group.id === t.group.id && JSON.stringify(e.permissions) === JSON.stringify(t.permissions) && JSON.stringify(e.channelsPermissions) === JSON.stringify(t.channelsPermissions) && e.userId === t.userId && e.isGroupMember === t.isGroupMember && e.forumsEnabled === t.forumsEnabled && JSON.stringify(e.policies) === JSON.stringify(t.policies) || r())
+                            }), !0)
+                        }
+                    }
+                }
+                r(76125).A.directive("groupPosts", o), t.default = o
             },
             65938: function(e, t, r) {
                 "use strict";
@@ -13783,7 +13822,7 @@
                         templateUrl: e.templates.groupTabTemplate,
                         link: function(e) {
                             e.onTabClick = function() {
-                                (0, o.Ch)(e.tab && e.tab.state)
+                                (0, o.Ch)(e.tab && e.tab.key)
                             }
                         }
                     }
@@ -13838,6 +13877,18 @@
                         }).state("forums", {
                             url: "/forums",
                             label: "Forums",
+                            authenticate: !1
+                        }).state("announcements", {
+                            url: "/announcements",
+                            label: "Posts",
+                            authenticate: !1
+                        }).state("announcements.detail", {
+                            url: "/:announcementId",
+                            label: "Posts",
+                            authenticate: !1
+                        }).state("announcements.detail.edit", {
+                            url: "/edit",
+                            label: "Posts",
                             authenticate: !1
                         }).state("forums.category", {
                             url: "/:categoryId",
@@ -14444,9 +14495,9 @@
                         "%WeakSetPrototype%": ["WeakSet", "prototype"]
                     },
                     E = r(97768),
-                    G = r(78554),
-                    I = E.call(Function.call, Array.prototype.concat),
-                    O = E.call(Function.apply, Array.prototype.splice),
+                    O = r(78554),
+                    G = E.call(Function.call, Array.prototype.concat),
+                    I = E.call(Function.apply, Array.prototype.splice),
                     j = E.call(Function.call, String.prototype.replace),
                     C = E.call(Function.call, String.prototype.slice),
                     F = E.call(Function.call, RegExp.prototype.exec),
@@ -14454,7 +14505,7 @@
                     k = /\\(\\)?/g,
                     U = function(e, t) {
                         var r, n = e;
-                        if (G(x, n) && (n = "%" + (r = x[n])[0] + "%"), G(A, n)) {
+                        if (O(x, n) && (n = "%" + (r = x[n])[0] + "%"), O(A, n)) {
                             var o = A[n];
                             if (o === v && (o = P(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
                             return {
@@ -14485,13 +14536,13 @@
                         a = o.value,
                         u = !1,
                         l = o.alias;
-                    l && (n = l[0], O(r, I([0, 1], l)));
+                    l && (n = l[0], I(r, G([0, 1], l)));
                     for (var p = 1, f = !0; p < r.length; p += 1) {
                         var d = r[p],
                             g = C(d, 0, 1),
                             m = C(d, -1);
                         if (('"' === g || "'" === g || "`" === g || '"' === m || "'" === m || "`" === m) && g !== m) throw new c("property names with quotes must have matching quotes");
-                        if ("constructor" !== d && f || (u = !0), G(A, i = "%" + (n += "." + d) + "%")) a = A[i];
+                        if ("constructor" !== d && f || (u = !0), O(A, i = "%" + (n += "." + d) + "%")) a = A[i];
                         else if (null != a) {
                             if (!(d in a)) {
                                 if (!t) throw new s("base intrinsic for " + e + " exists, but the property is not available.");
@@ -14500,7 +14551,7 @@
                             if (y && p + 1 >= r.length) {
                                 var b = y(a, d);
                                 a = (f = !!b) && "get" in b && !("originalValue" in b.get) ? b.get : a[d]
-                            } else f = G(a, d), a = a[d];
+                            } else f = O(a, d), a = a[d];
                             f && !u && (A[i] = a)
                         }
                     }
@@ -15047,9 +15098,9 @@
                         "%WeakSetPrototype%": ["WeakSet", "prototype"]
                     },
                     E = r(71452),
-                    G = r(78554),
-                    I = E.call(Function.call, Array.prototype.concat),
-                    O = E.call(Function.apply, Array.prototype.splice),
+                    O = r(78554),
+                    G = E.call(Function.call, Array.prototype.concat),
+                    I = E.call(Function.apply, Array.prototype.splice),
                     j = E.call(Function.call, String.prototype.replace),
                     C = E.call(Function.call, String.prototype.slice),
                     F = E.call(Function.call, RegExp.prototype.exec),
@@ -15057,7 +15108,7 @@
                     k = /\\(\\)?/g,
                     U = function(e, t) {
                         var r, n = e;
-                        if (G(x, n) && (n = "%" + (r = x[n])[0] + "%"), G(A, n)) {
+                        if (O(x, n) && (n = "%" + (r = x[n])[0] + "%"), O(A, n)) {
                             var o = A[n];
                             if (o === v && (o = P(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
                             return {
@@ -15088,13 +15139,13 @@
                         a = o.value,
                         u = !1,
                         l = o.alias;
-                    l && (n = l[0], O(r, I([0, 1], l)));
+                    l && (n = l[0], I(r, G([0, 1], l)));
                     for (var p = 1, f = !0; p < r.length; p += 1) {
                         var d = r[p],
                             g = C(d, 0, 1),
                             m = C(d, -1);
                         if (('"' === g || "'" === g || "`" === g || '"' === m || "'" === m || "`" === m) && g !== m) throw new c("property names with quotes must have matching quotes");
-                        if ("constructor" !== d && f || (u = !0), G(A, i = "%" + (n += "." + d) + "%")) a = A[i];
+                        if ("constructor" !== d && f || (u = !0), O(A, i = "%" + (n += "." + d) + "%")) a = A[i];
                         else if (null != a) {
                             if (!(d in a)) {
                                 if (!t) throw new s("base intrinsic for " + e + " exists, but the property is not available.");
@@ -15103,7 +15154,7 @@
                             if (y && p + 1 >= r.length) {
                                 var b = y(a, d);
                                 a = (f = !!b) && "get" in b && !("originalValue" in b.get) ? b.get : a[d]
-                            } else f = G(a, d), a = a[d];
+                            } else f = O(a, d), a = a[d];
                             f && !u && (A[i] = a)
                         }
                     }
@@ -15291,16 +15342,13 @@
                 e.exports = '<div class="container-header"> <h2 ng-bind="$ctrl.sectionTitle | translate"></h2> <div ng-show="$ctrl.affiliates.length > 0" class="pager-holder" cursor-pagination="affiliatesPager"></div> </div> <div class="group-affiliates"> <div class="spinner spinner-default" ng-show="affiliatesPager.isBusy()"></div> <div class="section-content-off" ng-show="!affiliatesPager.isBusy() && $ctrl.affiliates.length == 0" ng-bind="$ctrl.loadAffiliatesError ? \'Message.GetGroupRelationshipsError\' : $ctrl.noAffiliatesMessage | translate"> </div> <ul class="hlist game-cards" ng-show="!affiliatesPager.isBusy() && $ctrl.affiliates"> <li class="list-item" ng-repeat="group in $ctrl.affiliates"> <group-card class="game-card game-tile" group="group"></group-card> </li> </ul> </div>'
             },
             6346: function(e) {
-                e.exports = '<div class="group-announcements" group-announcements is-owner="$ctrl.isOwner" group="$ctrl.group" community-info="$ctrl.communityInfo" join-group="$ctrl.joinGroup" allowed-to-join-group="$ctrl.allowedToJoinGroup" policies="$ctrl.policies" metadata="$ctrl.metadata" can-create-announcements="$ctrl.canCreateAnnouncements" on-announcement-loaded="$ctrl.onAnnouncementLoaded" announcements-data="$ctrl.announcementsData" refresh-announcements="$ctrl.refreshAnnouncements"></div> '
+                e.exports = '<div class="group-announcements" group-announcements is-owner="$ctrl.isOwner" group="$ctrl.group" community-info="$ctrl.communityInfo" join-group="$ctrl.joinGroup" allowed-to-join-group="$ctrl.allowedToJoinGroup" policies="$ctrl.policies" metadata="$ctrl.metadata" can-create-announcements="$ctrl.canCreateAnnouncements" can-view-announcements="$ctrl.canViewAnnouncements" on-announcement-loaded="$ctrl.onAnnouncementLoaded" announcements-data="$ctrl.announcementsData" refresh-announcements="$ctrl.refreshAnnouncements"></div> '
             },
             40364: function(e) {
                 e.exports = '<div class="section"> <div class="container-header"> <h2 ng-bind="\'Heading.Description\' | translate"></h2> <social-link-icon-list target-type="group" target-id="$ctrl.groupId"></social-link-icon-list> </div> <div class="section-content remove-panel"> <div class="group-description toggle-target" ng-if="$ctrl.canViewDescription()"> <pre id="group-description-text" class="content-overflow-toggle content-height text group-description-text">\r\n                <span class="group-description-content-text" ng-bind-html="$ctrl.description | linkify"></span>\r\n            </pre> <span class="hidden toggle-content text-link cursor-pointer" data-container-id="group-description-text" data-show-label="{{ \'Action.ReadMore\' | translate }}" data-hide-label="{{ \'Action.ShowLess\' | translate }}" ng-bind=" \'Action.ReadMore\' | translate "></span> </div> <ul ng-if="$ctrl.funds !== null" class="border-top group-detail-stats"> <li class="group-detail-stat col-xs-6 col-md-2"> <p class="text-label font-caption-header" ng-bind="\'Label.Funds\' | translate"></p> <p class="text-lead"></p> <h2 title="R$ {{ $ctrl.funds | number }}" class="icon-text-wrapper"> <span class="icon-robux-28x28"></span> <span class="text-robux-lg" ng-bind="$ctrl.funds | abbreviate"></span> </h2> </li> </ul> </div> <div class="section-content remove-panel"> <div class="border-top group-description-footer"> <span class="group-name-history" ng-if="$ctrl.previousGroupNames.length > 0"> <button class="btn-pastnames btn-control-xs" ng-click="$ctrl.showPastGroupNames()"> <span class="icon-pastname"></span> </button> <span class="tooltip-container tooltip-pastnames" tooltip-placement="bottom" uib-tooltip="{{ $ctrl.previousGroupNamesCsvString }}"> <span class="icon-pastname"></span> </span> <span class="text-pastname" ng-bind="\'Heading.PreviousGroupNames\' | translate"></span> </span> <span ng-if="$ctrl.layout.loadError"> <span class="icon-warning"></span> <span class="text-error" ng-bind="\'Message.LoadPreviousGroupNamesError\' | translate"></span> </span> </div> </div> </div>'
             },
             6365: function(e) {
                 e.exports = '<div group-events only-show-featured-event="$ctrl.onlyShowFeaturedEvent" group="$ctrl.group" can-set-featured-event="$ctrl.canSetFeaturedEvent"></div> '
-            },
-            57510: function(e) {
-                e.exports = '<div group-forums is-enabled="$ctrl.isEnabled" group="$ctrl.group" permissions="$ctrl.permissions" channels-permissions="$ctrl.channelsPermissions" user-id="$ctrl.userId" is-group-member="$ctrl.isGroupMember"></div> '
             },
             70158: function(e) {
                 e.exports = '<div group-forums-discovery is-enabled="$ctrl.isEnabled" group-id="$ctrl.groupId" permissions="$ctrl.permissions" channels-permissions="$ctrl.channelsPermissions" is-group-member="$ctrl.isGroupMember"></div> '
@@ -15333,16 +15381,16 @@
                 e.exports = '<li class="list-item item-card"> <a ng-href="{{ $ctrl.urlPath | seoUrl:$ctrl.item.id:$ctrl.item.name}}" target="_self" class="item-card-container"> <div class="item-card-link"> <div class="item-card-thumb-container"> <thumbnail-2d class="item-card-thumb" thumbnail-type="$ctrl.thumbnailType" thumbnail-target-id="$ctrl.item.id"></thumbnail-2d> </div> </div> <div class="item-card-caption"> <div class="item-card-name-link"> <div class="item-card-name" title="{{ $ctrl.item.name }}" ng-bind="$ctrl.item.name"></div> </div> <div ng-if="$ctrl.item.price" class="text-overflow item-card-price"> <span class="icon-robux-16x16"></span> <span class="text-robux" ng-bind="$ctrl.item.price | number"></span> </div> </div> </a> </li>'
             },
             85781: function(e) {
-                e.exports = '<div ng-if="canViewGroupDetails()" class="tab-content rbx-tab-content col-xs-12"> <community-tiers-disclosure-banner group-id="library.currentGroup.id" is-group-member="isInGroup()" is-community-page="isCommunitiesLayoutVisible"></community-tiers-disclosure-banner> <ng-container ng-repeat="component in profilePlatform.componentOrdering" ng-switch="component"> <div ng-switch-when="Videos" id="group-videos" ng-if="profilePlatform.components.Videos.assetIds.length > 0"> <group-react-videos group-id="library.currentGroup.id" videos-data="profilePlatform.components.Videos"> </group-react-videos> </div> <group-announcements ng-switch-when="Announcements" id="group-announcements" is-owner="isCurrentUserOwner()" community-info="linkedCommunityInfo" group="library.currentGroup.group" join-group="joinGroup" can-create-announcements="canCreateAnnouncements()" on-announcement-loaded="onAnnouncementLoaded" allowed-to-join-group="showJoinGroupButtonUI() == groupDetailsConstants.joinStatus.allowed" policies="policies" metadata="library.metadata" ng-if="showReactAnnouncement()" announcements-data="profilePlatform.components.Announcements" refresh-announcements="refreshAnnouncements"></group-announcements> <group-events ng-switch-when="Events" only-show-featured-event="true" group="library.currentGroup.group" can-set-featured-event="isCurrentUserOwner()" ng-if="canViewEvents()"></group-events> <group-public-servers ng-switch-when="ExperienceServers" ng-if="isGroupExperienceServersExperimentEnabled && library.currentGroup.areGroupGamesVisible" group-id="library.currentGroup.id"></group-public-servers> <group-games ng-switch-when="Experiences" ng-if="library.currentGroup.areGroupGamesVisible" group-id="library.currentGroup.id"></group-games> <group-forums-discovery ng-switch-when="ForumsDiscovery" group-id="library.currentGroup.id" is-enabled="canViewForums()" permissions="library.currentGroup.permissions" channels-permissions="library.currentGroup.channelPermissions" is-group-member="isInGroup()"></group-forums-discovery> </ng-container> <group-payouts ng-if="isAuthenticatedUser" group-id="library.currentGroup.id" policies="policies"></group-payouts> <div class="clearfix"></div> </div> '
+                e.exports = '<div ng-if="canViewGroupDetails()" class="tab-content rbx-tab-content col-xs-12"> <community-tiers-disclosure-banner group-id="library.currentGroup.id" is-group-member="isInGroup()" is-community-page="isCommunitiesLayoutVisible"></community-tiers-disclosure-banner> <ng-container ng-repeat="component in profilePlatform.componentOrdering" ng-switch="component"> <div ng-switch-when="Videos" id="group-videos" ng-if="profilePlatform.components.Videos.assetIds.length > 0"> <group-react-videos group-id="library.currentGroup.id" videos-data="profilePlatform.components.Videos"> </group-react-videos> </div> <group-announcements ng-switch-when="Announcements" id="group-announcements" is-owner="isCurrentUserOwner()" community-info="linkedCommunityInfo" group="library.currentGroup.group" join-group="joinGroup" can-create-announcements="canCreateAnnouncements()" can-view-announcements="canViewAnnouncements()" on-announcement-loaded="onAnnouncementLoaded" allowed-to-join-group="showJoinGroupButtonUI() == groupDetailsConstants.joinStatus.allowed" policies="policies" metadata="library.metadata" ng-if="showReactAnnouncement()" announcements-data="profilePlatform.components.Announcements" refresh-announcements="refreshAnnouncements"></group-announcements> <group-events ng-switch-when="Events" only-show-featured-event="true" group="library.currentGroup.group" can-set-featured-event="isCurrentUserOwner()" ng-if="canViewEvents()"></group-events> <group-public-servers ng-switch-when="ExperienceServers" ng-if="isGroupExperienceServersExperimentEnabled && library.currentGroup.areGroupGamesVisible" group-id="library.currentGroup.id"></group-public-servers> <group-games ng-switch-when="Experiences" ng-if="library.currentGroup.areGroupGamesVisible" group-id="library.currentGroup.id"></group-games> <group-forums-discovery ng-switch-when="ForumsDiscovery" group-id="library.currentGroup.id" is-enabled="canViewForums()" permissions="library.currentGroup.permissions" channels-permissions="library.currentGroup.channelPermissions" is-group-member="isInGroup()"></group-forums-discovery> </ng-container> <group-payouts ng-if="isAuthenticatedUser" group-id="library.currentGroup.id" policies="policies"></group-payouts> <div class="clearfix"></div> </div> '
             },
             45775: function(e) {
-                e.exports = '<div ng-cloak ng-controller="groupController" ng-class="{\'group-details-container-desktop-and-tablet\': !library.metadata.isPhone,\'no-list\': !isAuthenticatedUser || !isCommunitiesLayoutVisible, \'new-list\': showGroupsList() && isGroupsListRedesignEnabled,\'group-details-container-mobile\': library.metadata.isPhone}" class="section" group-page-scroll-tracker> <system-feedback></system-feedback> <div ng-if="isGroupsListRedesignEnabled && profilePlatform.components.CoverPhoto && profilePlatform.components.CoverPhoto.coverPhotoId"> <group-react-cover-photo group-id="library.currentGroup.id" cover-photo-data="profilePlatform.components.CoverPhoto"> </group-react-cover-photo> </div> <div ng-if="!library.metadata.isPhone && isCommunitiesLayoutVisible && !isGroupsListRedesignEnabled" class="container-header see-all-container-header"> <h1 ng-bind="\'Heading.Groups\' | translate"></h1> <a ng-href="{{ library.moreGroupsUrl }}" class="btn-secondary-xs btn-more see-all-link-icon" target="_self" ng-bind="\'Action.MoreGroups\' | translate"></a> </div> <groups-list ng-if="showGroupsList() && !isGroupsListRedesignEnabled" group-list="library.groupsList.groups" current-group="library.currentGroup" max-groups="library.metadata.groupLimit" is-loading-groups="library.groupsList.isLoadingGroups" load-failure="library.groupsList.loadFailure" class="groups-list col-xs-12 col-sm-3"></groups-list> <div class="groups-list-sidebar" ng-if="showGroupsList() && isGroupsListRedesignEnabled"> <group-react-groups-list groups-list="library.groupsList.groups" current-group="library.currentGroup" show-member-counts="true" can-create-group="canCreateGroup()" is-sidebar="true" is-loading-groups="library.groupsList.isLoadingGroups" load-failure="library.groupsList.loadFailure"> </group-react-groups-list> </div> <div class="group-details col-xs-12" ng-if="layout.isMetadataLoaded" ng-class="{\'col-sm-9\' : isAuthenticatedUser && !library.metadata.isPhone && isCommunitiesLayoutVisible && !isGroupsListRedesignEnabled}"> <div ng-if="isLockedGroup()" class="section-content"> <p ng-bind="\'Label.GroupLocked\' | translate"></p> <button ng-if="isInGroup() && !isCurrentUserOwner()" type="submit" id="leave-locked-group" class="btn-secondary-md group-button" ng-click="showLeaveGroupModal(library.currentGroup.id, library.currentUser.id)" ng-bind="\'Action.LeaveGroup\' | translate"></button> </div> <div ng-if="isGroupRestrictedByPolicy()" class="section-content-off" ng-bind="\'Message.GroupRestricted\' | translate"></div> <div ng-if="layout.loadGroupMetadataError" class="section-content-off" ng-bind="\'Message.LoadGroupMetadataError\' | translate"></div> <div ng-if="!isLockedGroup() && !isGroupRestrictedByPolicy() && !layout.loadGroupMetadataError"> <div ng-if="isGroupsListRedesignEnabled && profilePlatform.components.CoverPhoto && profilePlatform.components.CoverPhoto.coverPhotoId" class="profile-header-with-cover"> <div class="group-profile-header-over-cover"> <group-react-profile-header group-id="library.currentGroup.id" is-community-profile="isCommunitiesLayoutVisible" community-profile-header-data="profilePlatform.components.CommunityProfileHeader" roles-data="library.currentGroup.roles" user-role="library.currentGroup.role" permissions="library.currentGroup.permissions" policies="policies" can-view-members="canViewMembers()" is-group-verification-required-to-join="policies.isGroupVerificationRequiredToJoin" actions-data="profilePlatform.components.Actions" about-data="profilePlatform.components.About" join-group="joinGroup()" cancel-join-request="cancelJoinRequest(library.currentGroup.id, library.currentUser.id)" show-leave-group-or-change-owner-modal="showLeaveGroupOrChangeOwnerModal(library.currentGroup.id, library.currentUser.id)" make-primary="makePrimary(library.currentGroup.id)" remove-primary="removePrimary()" show-report-abuse-modal="showReportAbuseModal(library.currentGroup.id)" show-change-owner-modal="showChangeOwnerModal()" claim-ownership="claimOwnership(library.currentGroup.id)"> </group-react-profile-header> </div> </div> <div ng-if="!profilePlatform.components.CoverPhoto || !profilePlatform.components.CoverPhoto.coverPhotoId || !isGroupsListRedesignEnabled"> <group-react-profile-header group-id="library.currentGroup.id" is-community-profile="isCommunitiesLayoutVisible" community-profile-header-data="profilePlatform.components.CommunityProfileHeader" roles-data="library.currentGroup.roles" user-role="library.currentGroup.role" permissions="library.currentGroup.permissions" policies="policies" can-view-members="canViewMembers()" is-group-verification-required-to-join="policies.isGroupVerificationRequiredToJoin" actions-data="profilePlatform.components.Actions" about-data="profilePlatform.components.About" join-group="joinGroup()" cancel-join-request="cancelJoinRequest(library.currentGroup.id, library.currentUser.id)" show-leave-group-or-change-owner-modal="showLeaveGroupOrChangeOwnerModal(library.currentGroup.id, library.currentUser.id)" make-primary="makePrimary(library.currentGroup.id)" remove-primary="removePrimary()" show-report-abuse-modal="showReportAbuseModal(library.currentGroup.id)" show-change-owner-modal="showChangeOwnerModal()" claim-ownership="claimOwnership(library.currentGroup.id)"> </group-react-profile-header> </div> <div class="rbx-tabs-horizontal" ng-if="canViewGroupDetails() && canViewCommunityTabs()"> <ul id="horizontal-tabs" class="nav nav-tabs group-foundation-tabs" role="tablist"> <li ng-repeat="tab in groupDetailsTabs()" active-tab="layout.activeTab" tab="tab" num-tabs="groupDetailsNumTabs()" group-tab></li> </ul> </div> <div ng-if="layout.activeTab === groupDetailsConstants.tabs.about" group-about></div> <div ng-if="layout.activeTab === groupDetailsConstants.tabs.forums" class="tab-content rbx-tab-content section col-xs-12"> <group-forums group="library.currentGroup.group" permissions="library.currentGroup.permissions" channels-permissions="library.currentGroup.channelPermissions" user-id="library.currentUser.id" is-group-member="isInGroup()" is-enabled="canViewForums()"></group-forums> </div> <group-store ng-if="layout.activeTab === groupDetailsConstants.tabs.store" group-id="library.currentGroup.id" group-name="library.currentGroup.group.name" permissions="library.currentGroup.permissions" metadata="library.metadata"></group-store> <div ng-if="layout.activeTab === groupDetailsConstants.tabs.affiliates && isReactAffiliatesEnabled" class="tab-content rbx-tab-content section col-xs-12" group-react-affiliates group-id="library.currentGroup.id" are-enemies-allowed="library.currentGroup.areEnemiesAllowed"></div> <div ng-if="layout.activeTab === groupDetailsConstants.tabs.affiliates && reactAffiliatesFlagLoaded && !isReactAffiliatesEnabled" class="tab-content rbx-tab-content section col-xs-12"> <group-affiliates group-id="library.currentGroup.id" section-title="\'Heading.Allies\'" no-affiliates-message="\'Label.NoAllies\'" relationship-type="relationshipTypes.allies"> </group-affiliates> <group-affiliates ng-if="library.currentGroup.areEnemiesAllowed" group-id="library.currentGroup.id" section-title="\'Heading.Enemies\'" no-affiliates-message="\'Label.NoEnemies\'" relationship-type="relationshipTypes.enemies"></group-affiliates> </div> <div ng-if="layout.activeTab === groupDetailsConstants.tabs.events" class="tab-content rbx-tab-content section col-xs-12"> <group-events ng-if="canViewEvents()" group="library.currentGroup.group" can-set-featured-event="isCurrentUserOwner()"></group-events> </div> </div> </div> <span id="2sv-popup-container"></span> <div id="pow-popup-container"></div> </div> '
+                e.exports = '<div ng-cloak ng-controller="groupController" ng-class="{\'group-details-container-desktop-and-tablet\': !library.metadata.isPhone,\'no-list\': !isAuthenticatedUser || !isCommunitiesLayoutVisible, \'new-list\': showGroupsList() && isGroupsListRedesignEnabled,\'group-details-container-mobile\': library.metadata.isPhone}" class="section" group-page-scroll-tracker> <system-feedback></system-feedback> <div ng-if="isGroupsListRedesignEnabled && profilePlatform.components.CoverPhoto && profilePlatform.components.CoverPhoto.coverPhotoId"> <group-react-cover-photo group-id="library.currentGroup.id" cover-photo-data="profilePlatform.components.CoverPhoto"> </group-react-cover-photo> </div> <div ng-if="!library.metadata.isPhone && isCommunitiesLayoutVisible && !isGroupsListRedesignEnabled" class="container-header see-all-container-header"> <h1 ng-bind="\'Heading.Groups\' | translate"></h1> <a ng-href="{{ library.moreGroupsUrl }}" class="btn-secondary-xs btn-more see-all-link-icon" target="_self" ng-bind="\'Action.MoreGroups\' | translate"></a> </div> <groups-list ng-if="showGroupsList() && !isGroupsListRedesignEnabled" group-list="library.groupsList.groups" current-group="library.currentGroup" max-groups="library.metadata.groupLimit" is-loading-groups="library.groupsList.isLoadingGroups" load-failure="library.groupsList.loadFailure" class="groups-list col-xs-12 col-sm-3"></groups-list> <div class="groups-list-sidebar" ng-if="showGroupsList() && isGroupsListRedesignEnabled"> <group-react-groups-list groups-list="library.groupsList.groups" current-group="library.currentGroup" show-member-counts="true" can-create-group="canCreateGroup()" is-sidebar="true" is-loading-groups="library.groupsList.isLoadingGroups" load-failure="library.groupsList.loadFailure"> </group-react-groups-list> </div> <div class="group-details col-xs-12" ng-if="layout.isMetadataLoaded" ng-class="{\'col-sm-9\' : isAuthenticatedUser && !library.metadata.isPhone && isCommunitiesLayoutVisible && !isGroupsListRedesignEnabled}"> <div ng-if="isLockedGroup()" class="section-content"> <p ng-bind="\'Label.GroupLocked\' | translate"></p> <button ng-if="isInGroup() && !isCurrentUserOwner()" type="submit" id="leave-locked-group" class="btn-secondary-md group-button" ng-click="showLeaveGroupModal(library.currentGroup.id, library.currentUser.id)" ng-bind="\'Action.LeaveGroup\' | translate"></button> </div> <div ng-if="isGroupRestrictedByPolicy()" class="section-content-off" ng-bind="\'Message.GroupRestricted\' | translate"></div> <div ng-if="layout.loadGroupMetadataError" class="section-content-off" ng-bind="\'Message.LoadGroupMetadataError\' | translate"></div> <div ng-if="!isLockedGroup() && !isGroupRestrictedByPolicy() && !layout.loadGroupMetadataError"> <div ng-if="isGroupsListRedesignEnabled && profilePlatform.components.CoverPhoto && profilePlatform.components.CoverPhoto.coverPhotoId" class="profile-header-with-cover"> <div class="group-profile-header-over-cover"> <group-react-profile-header group-id="library.currentGroup.id" is-community-profile="isCommunitiesLayoutVisible" community-profile-header-data="profilePlatform.components.CommunityProfileHeader" roles-data="library.currentGroup.roles" user-role="library.currentGroup.role" permissions="library.currentGroup.permissions" policies="policies" can-view-members="canViewMembers()" is-group-verification-required-to-join="policies.isGroupVerificationRequiredToJoin" actions-data="profilePlatform.components.Actions" about-data="profilePlatform.components.About" join-group="joinGroup()" cancel-join-request="cancelJoinRequest(library.currentGroup.id, library.currentUser.id)" show-leave-group-or-change-owner-modal="showLeaveGroupOrChangeOwnerModal(library.currentGroup.id, library.currentUser.id)" make-primary="makePrimary(library.currentGroup.id)" remove-primary="removePrimary()" show-report-abuse-modal="showReportAbuseModal(library.currentGroup.id)" show-change-owner-modal="showChangeOwnerModal()" claim-ownership="claimOwnership(library.currentGroup.id)"> </group-react-profile-header> </div> </div> <div ng-if="!profilePlatform.components.CoverPhoto || !profilePlatform.components.CoverPhoto.coverPhotoId || !isGroupsListRedesignEnabled"> <group-react-profile-header group-id="library.currentGroup.id" is-community-profile="isCommunitiesLayoutVisible" community-profile-header-data="profilePlatform.components.CommunityProfileHeader" roles-data="library.currentGroup.roles" user-role="library.currentGroup.role" permissions="library.currentGroup.permissions" policies="policies" can-view-members="canViewMembers()" is-group-verification-required-to-join="policies.isGroupVerificationRequiredToJoin" actions-data="profilePlatform.components.Actions" about-data="profilePlatform.components.About" join-group="joinGroup()" cancel-join-request="cancelJoinRequest(library.currentGroup.id, library.currentUser.id)" show-leave-group-or-change-owner-modal="showLeaveGroupOrChangeOwnerModal(library.currentGroup.id, library.currentUser.id)" make-primary="makePrimary(library.currentGroup.id)" remove-primary="removePrimary()" show-report-abuse-modal="showReportAbuseModal(library.currentGroup.id)" show-change-owner-modal="showChangeOwnerModal()" claim-ownership="claimOwnership(library.currentGroup.id)"> </group-react-profile-header> </div> <div class="rbx-tabs-horizontal" ng-if="canViewGroupDetails() && canViewCommunityTabs()"> <ul id="horizontal-tabs" class="nav nav-tabs group-foundation-tabs" role="tablist"> <li ng-repeat="tab in groupDetailsTabs()" active-tab="layout.activeTab" tab="tab" num-tabs="groupDetailsNumTabs()" group-tab></li> </ul> </div> <div ng-if="layout.activeTab.key === groupDetailsConstants.tabs.about.key" group-about></div> <div ng-if="layout.activeTab.key === groupDetailsConstants.tabs.forums.key" class="tab-content rbx-tab-content section col-xs-12"> <group-posts group="library.currentGroup.group" permissions="library.currentGroup.permissions" channels-permissions="library.currentGroup.channelPermissions" user-id="library.currentUser.id" is-group-member="isInGroup()" forums-enabled="library.currentGroup.forumsEnabled" policies="policies"></group-posts> </div> <group-store ng-if="layout.activeTab.key === groupDetailsConstants.tabs.store.key" group-id="library.currentGroup.id" group-name="library.currentGroup.group.name" permissions="library.currentGroup.permissions" metadata="library.metadata"></group-store> <div ng-if="layout.activeTab.key === groupDetailsConstants.tabs.affiliates.key && isReactAffiliatesEnabled" class="tab-content rbx-tab-content section col-xs-12" group-react-affiliates group-id="library.currentGroup.id" are-enemies-allowed="library.currentGroup.areEnemiesAllowed"></div> <div ng-if="layout.activeTab.key === groupDetailsConstants.tabs.affiliates.key && reactAffiliatesFlagLoaded && !isReactAffiliatesEnabled" class="tab-content rbx-tab-content section col-xs-12"> <group-affiliates group-id="library.currentGroup.id" section-title="\'Heading.Allies\'" no-affiliates-message="\'Label.NoAllies\'" relationship-type="relationshipTypes.allies"> </group-affiliates> <group-affiliates ng-if="library.currentGroup.areEnemiesAllowed" group-id="library.currentGroup.id" section-title="\'Heading.Enemies\'" no-affiliates-message="\'Label.NoEnemies\'" relationship-type="relationshipTypes.enemies"></group-affiliates> </div> <div ng-if="layout.activeTab.key === groupDetailsConstants.tabs.events.key" class="tab-content rbx-tab-content section col-xs-12"> <group-events ng-if="canViewEvents()" group="library.currentGroup.group" can-set-featured-event="isCurrentUserOwner()"></group-events> </div> </div> </div> <span id="2sv-popup-container"></span> <div id="pow-popup-container"></div> </div> '
             },
             33616: function(e) {
                 e.exports = '<div> <ul class="dropdown-menu" role="menu"> <li ng-if="isInGroup() && canConfigureGroup()" id="configure-group"> <a ng-href="{{ configureGroupUrl(library.currentGroup.id) }}" ng-bind="\'Action.ConfigureGroup\' | translate"></a> </li> <li ng-if="isInGroup() && !doesGroupHaveOwner()" id="claim-ownership"> <button ng-click="claimOwnership(library.currentGroup.id)" ng-bind="\'Action.ClaimOwnership\' | translate"></button> </li> <li ng-if="isInGroup() && isGroupPrimary()" id="remove-primary"> <button ng-click="removePrimary()" ng-bind="\'Action.RemovePrimary\' | translate"></button> </li> <li ng-if="isInGroup() && !isGroupPrimary()" id="make-primary"> <button ng-click="makePrimary(library.currentGroup.id)" ng-bind="\'Action.MakePrimary\' | translate"></button> </li> <li ng-if="isInGroup()" id="leave-group"> <button ng-click="showLeaveGroupOrChangeOwnerModal(library.currentGroup.id, library.currentUser.id)" ng-bind="\'Action.LeaveGroup\' | translate"></button> </li> <li ng-if="isInGroup() && isCurrentUserOwner()" id="change-ownership"> <a class="change-owner-menu-link" ng-href="{{ changeOwnerCreatorHubUrl(library.currentGroup.id) }}" aria-label="{{ \'Label.ChangeOwner\' | translate }}"> <span ng-bind="\'Label.ChangeOwner\' | translate"></span> <span class="icon-nav-external-link-sm change-owner-link-icon" aria-hidden="true"></span> </a> </li> <li id="report-abuse"> <button ng-click="showReportAbuseModal(library.currentGroup.id)" ng-bind="\'Action.ReportAbuse\' | translate"></button> </li> </ul> </div>'
             },
             84715: function(e) {
-                e.exports = '<li id="{{ tab.state }}" class="rbx-tab group-tab" ng-class="{\'active\': activeTab === tab, \'group-tab-1-buttons\': numTabs === 1, \'group-tab-2-buttons\': numTabs === 2, \'group-tab-3-buttons\': numTabs === 3, \'group-tab-4-buttons\': numTabs === 4, \'group-tab-5-buttons\': numTabs === 5}" ui-sref="{{ tab.state }}" ng-click="onTabClick()"> <a class="rbx-tab-heading" tabindex="0"> <span class="text-lead" ng-bind="tab.translationKey | translate"></span> </a> </li>'
+                e.exports = '<li id="{{ tab.key }}" class="rbx-tab group-tab" ng-class="{\'active\': activeTab.key === tab.key, \'group-tab-1-buttons\': numTabs === 1, \'group-tab-2-buttons\': numTabs === 2, \'group-tab-3-buttons\': numTabs === 3, \'group-tab-4-buttons\': numTabs === 4, \'group-tab-5-buttons\': numTabs === 5}" ui-sref="{{ tab.state }}" ng-click="onTabClick()"> <a class="rbx-tab-heading" tabindex="0"> <span class="text-lead" ng-bind="tab.translationKey | translate"></span> </a> </li> '
             },
             52018: function(e) {
                 e.exports = '<div class="modal-header"> <button type="button" class="close" ng-click="close()"> <span class="icon-close"></span> </button> <div class="modal-title"> <h4 ng-bind="\'Heading.LeaveGroup\' | translate"></h4> </div> </div> <div class="modal-body"> <p class="body-text text-description" ng-bind="\'Description.LeaveGroupWarning\' | translate"></p> <div class="border-warning group-modal-warning" ng-if="params.isOwner"> <span class="icon-warning-orange"></span> <span id="leave-group-as-owner-warning" class="text-warning form-warning-text" ng-bind="\'Description.LeaveGroupAsOwnerWarning\' | translate"></span> </div> <span id="2sv-popup-container"></span> </div> <div class="modal-buttons"> <button id="leave-group-button" type="submit" class="modal-button btn-secondary-md" ng-click="leaveGroup()" ng-bind="\'Action.Yes\' | translate"></button> <button type="button" class="modal-button btn-secondary-md" ng-click="close()" ng-bind="\'Action.No\' | translate"></button> </div> '
@@ -15639,9 +15687,9 @@
                         "%WeakSetPrototype%": ["WeakSet", "prototype"]
                     },
                     E = r(44041),
-                    G = r(78554),
-                    I = E.call(Function.call, Array.prototype.concat),
-                    O = E.call(Function.apply, Array.prototype.splice),
+                    O = r(78554),
+                    G = E.call(Function.call, Array.prototype.concat),
+                    I = E.call(Function.apply, Array.prototype.splice),
                     j = E.call(Function.call, String.prototype.replace),
                     C = E.call(Function.call, String.prototype.slice),
                     F = E.call(Function.call, RegExp.prototype.exec),
@@ -15649,7 +15697,7 @@
                     k = /\\(\\)?/g,
                     U = function(e, t) {
                         var r, n = e;
-                        if (G(x, n) && (n = "%" + (r = x[n])[0] + "%"), G(A, n)) {
+                        if (O(x, n) && (n = "%" + (r = x[n])[0] + "%"), O(A, n)) {
                             var o = A[n];
                             if (o === v && (o = P(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
                             return {
@@ -15680,13 +15728,13 @@
                         a = o.value,
                         u = !1,
                         l = o.alias;
-                    l && (n = l[0], O(r, I([0, 1], l)));
+                    l && (n = l[0], I(r, G([0, 1], l)));
                     for (var p = 1, f = !0; p < r.length; p += 1) {
                         var d = r[p],
                             g = C(d, 0, 1),
                             m = C(d, -1);
                         if (('"' === g || "'" === g || "`" === g || '"' === m || "'" === m || "`" === m) && g !== m) throw new c("property names with quotes must have matching quotes");
-                        if ("constructor" !== d && f || (u = !0), G(A, i = "%" + (n += "." + d) + "%")) a = A[i];
+                        if ("constructor" !== d && f || (u = !0), O(A, i = "%" + (n += "." + d) + "%")) a = A[i];
                         else if (null != a) {
                             if (!(d in a)) {
                                 if (!t) throw new s("base intrinsic for " + e + " exists, but the property is not available.");
@@ -15695,7 +15743,7 @@
                             if (y && p + 1 >= r.length) {
                                 var b = y(a, d);
                                 a = (f = !!b) && "get" in b && !("originalValue" in b.get) ? b.get : a[d]
-                            } else f = G(a, d), a = a[d];
+                            } else f = O(a, d), a = a[d];
                             f && !u && (A[i] = a)
                         }
                     }
@@ -16313,9 +16361,9 @@
                         "%WeakSetPrototype%": ["WeakSet", "prototype"]
                     },
                     E = r(8280),
-                    G = r(78554),
-                    I = E.call(Function.call, Array.prototype.concat),
-                    O = E.call(Function.apply, Array.prototype.splice),
+                    O = r(78554),
+                    G = E.call(Function.call, Array.prototype.concat),
+                    I = E.call(Function.apply, Array.prototype.splice),
                     j = E.call(Function.call, String.prototype.replace),
                     C = E.call(Function.call, String.prototype.slice),
                     F = E.call(Function.call, RegExp.prototype.exec),
@@ -16323,7 +16371,7 @@
                     k = /\\(\\)?/g,
                     U = function(e, t) {
                         var r, n = e;
-                        if (G(x, n) && (n = "%" + (r = x[n])[0] + "%"), G(A, n)) {
+                        if (O(x, n) && (n = "%" + (r = x[n])[0] + "%"), O(A, n)) {
                             var o = A[n];
                             if (o === v && (o = P(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
                             return {
@@ -16354,13 +16402,13 @@
                         a = o.value,
                         u = !1,
                         l = o.alias;
-                    l && (n = l[0], O(r, I([0, 1], l)));
+                    l && (n = l[0], I(r, G([0, 1], l)));
                     for (var p = 1, f = !0; p < r.length; p += 1) {
                         var d = r[p],
                             g = C(d, 0, 1),
                             m = C(d, -1);
                         if (('"' === g || "'" === g || "`" === g || '"' === m || "'" === m || "`" === m) && g !== m) throw new c("property names with quotes must have matching quotes");
-                        if ("constructor" !== d && f || (u = !0), G(A, i = "%" + (n += "." + d) + "%")) a = A[i];
+                        if ("constructor" !== d && f || (u = !0), O(A, i = "%" + (n += "." + d) + "%")) a = A[i];
                         else if (null != a) {
                             if (!(d in a)) {
                                 if (!t) throw new s("base intrinsic for " + e + " exists, but the property is not available.");
@@ -16369,7 +16417,7 @@
                             if (y && p + 1 >= r.length) {
                                 var b = y(a, d);
                                 a = (f = !!b) && "get" in b && !("originalValue" in b.get) ? b.get : a[d]
-                            } else f = G(a, d), a = a[d];
+                            } else f = O(a, d), a = a[d];
                             f && !u && (A[i] = a)
                         }
                     }
@@ -16509,15 +16557,15 @@
                 }, A.working = "undefined" != typeof ArrayBuffer && A(new ArrayBuffer), t.isArrayBuffer = S, P.working = "undefined" != typeof ArrayBuffer && "undefined" != typeof DataView && P(new DataView(new ArrayBuffer(1), 0, 1)), t.isDataView = x;
                 var E = "undefined" != typeof SharedArrayBuffer ? SharedArrayBuffer : void 0;
 
-                function G(e) {
+                function O(e) {
                     return "[object SharedArrayBuffer]" === l(e)
                 }
 
-                function I(e) {
-                    return void 0 !== E && (void 0 === G.working && (G.working = G(new E)), G.working ? G(e) : e instanceof E)
+                function G(e) {
+                    return void 0 !== E && (void 0 === O.working && (O.working = O(new E)), O.working ? O(e) : e instanceof E)
                 }
 
-                function O(e) {
+                function I(e) {
                     return m(e, p)
                 }
 
@@ -16536,7 +16584,7 @@
                 function R(e) {
                     return s && m(e, g)
                 }
-                t.isSharedArrayBuffer = I, t.isAsyncFunction = function(e) {
+                t.isSharedArrayBuffer = G, t.isAsyncFunction = function(e) {
                     return "[object AsyncFunction]" === l(e)
                 }, t.isMapIterator = function(e) {
                     return "[object Map Iterator]" === l(e)
@@ -16546,10 +16594,10 @@
                     return "[object Generator]" === l(e)
                 }, t.isWebAssemblyCompiledModule = function(e) {
                     return "[object WebAssembly.Module]" === l(e)
-                }, t.isNumberObject = O, t.isStringObject = j, t.isBooleanObject = C, t.isBigIntObject = F, t.isSymbolObject = R, t.isBoxedPrimitive = function(e) {
-                    return O(e) || j(e) || C(e) || F(e) || R(e)
+                }, t.isNumberObject = I, t.isStringObject = j, t.isBooleanObject = C, t.isBigIntObject = F, t.isSymbolObject = R, t.isBoxedPrimitive = function(e) {
+                    return I(e) || j(e) || C(e) || F(e) || R(e)
                 }, t.isAnyArrayBuffer = function(e) {
-                    return "undefined" != typeof Uint8Array && (S(e) || I(e))
+                    return "undefined" != typeof Uint8Array && (S(e) || G(e))
                 }, ["isProxy", "isExternal", "isModuleNamespaceObject"].forEach((function(e) {
                     Object.defineProperty(t, e, {
                         enumerable: !1,
@@ -16631,7 +16679,7 @@
                 }
 
                 function y(e, r, n) {
-                    if (e.customInspect && r && G(r.inspect) && r.inspect !== t.inspect && (!r.constructor || r.constructor.prototype !== r)) {
+                    if (e.customInspect && r && O(r.inspect) && r.inspect !== t.inspect && (!r.constructor || r.constructor.prototype !== r)) {
                         var o = r.inspect(n, e);
                         return w(o) || (o = y(e, o, n)), o
                     }
@@ -16655,7 +16703,7 @@
                         }(a);
                     if (e.showHidden && (a = Object.getOwnPropertyNames(r)), E(r) && (a.indexOf("message") >= 0 || a.indexOf("description") >= 0)) return d(r);
                     if (0 === a.length) {
-                        if (G(r)) {
+                        if (O(r)) {
                             var c = r.name ? ": " + r.name : "";
                             return e.stylize("[Function" + c + "]", "special")
                         }
@@ -16666,7 +16714,7 @@
                     var s, l = "",
                         p = !1,
                         f = ["{", "}"];
-                    (m(r) && (p = !0, f = ["[", "]"]), G(r)) && (l = " [Function" + (r.name ? ": " + r.name : "") + "]");
+                    (m(r) && (p = !0, f = ["[", "]"]), O(r)) && (l = " [Function" + (r.name ? ": " + r.name : "") + "]");
                     return S(r) && (l = " " + RegExp.prototype.toString.call(r)), x(r) && (l = " " + Date.prototype.toUTCString.call(r)), E(r) && (l = " " + d(r)), 0 !== a.length || p && 0 != r.length ? n < 0 ? S(r) ? e.stylize(RegExp.prototype.toString.call(r), "regexp") : e.stylize("[Object]", "special") : (e.seen.push(r), s = p ? function(e, t, r, n, o) {
                         for (var i = [], a = 0, u = t.length; a < u; ++a) C(t, String(a)) ? i.push(g(e, t, r, n, String(a), !0)) : i.push("");
                         return o.forEach((function(o) {
@@ -16727,7 +16775,7 @@
                 }
 
                 function S(e) {
-                    return P(e) && "[object RegExp]" === I(e)
+                    return P(e) && "[object RegExp]" === G(e)
                 }
 
                 function P(e) {
@@ -16735,22 +16783,22 @@
                 }
 
                 function x(e) {
-                    return P(e) && "[object Date]" === I(e)
+                    return P(e) && "[object Date]" === G(e)
                 }
 
                 function E(e) {
-                    return P(e) && ("[object Error]" === I(e) || e instanceof Error)
-                }
-
-                function G(e) {
-                    return "function" == typeof e
-                }
-
-                function I(e) {
-                    return Object.prototype.toString.call(e)
+                    return P(e) && ("[object Error]" === G(e) || e instanceof Error)
                 }
 
                 function O(e) {
+                    return "function" == typeof e
+                }
+
+                function G(e) {
+                    return Object.prototype.toString.call(e)
+                }
+
+                function I(e) {
                     return e < 10 ? "0" + e.toString(10) : e.toString(10)
                 }
                 t.debuglog = function(e) {
@@ -16790,7 +16838,7 @@
                     return null == e
                 }, t.isNumber = v, t.isString = w, t.isSymbol = function(e) {
                     return "symbol" == typeof e
-                }, t.isUndefined = A, t.isRegExp = S, t.types.isRegExp = S, t.isObject = P, t.isDate = x, t.types.isDate = x, t.isError = E, t.types.isNativeError = E, t.isFunction = G, t.isPrimitive = function(e) {
+                }, t.isUndefined = A, t.isRegExp = S, t.types.isRegExp = S, t.isObject = P, t.isDate = x, t.types.isDate = x, t.isError = E, t.types.isNativeError = E, t.isFunction = O, t.isPrimitive = function(e) {
                     return null === e || "boolean" == typeof e || "number" == typeof e || "string" == typeof e || "symbol" == typeof e || void 0 === e
                 }, t.isBuffer = r(95272);
                 var j = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -16800,7 +16848,7 @@
                 }
                 t.log = function() {
                     var e, r;
-                    o.log("%s - %s", (e = new Date, r = [O(e.getHours()), O(e.getMinutes()), O(e.getSeconds())].join(":"), [e.getDate(), j[e.getMonth()], r].join(" ")), t.format.apply(t, arguments))
+                    o.log("%s - %s", (e = new Date, r = [I(e.getHours()), I(e.getMinutes()), I(e.getSeconds())].join(":"), [e.getDate(), j[e.getMonth()], r].join(" ")), t.format.apply(t, arguments))
                 }, t.inherits = r(35615), t._extend = function(e, t) {
                     if (!t || !P(t)) return e;
                     for (var r = Object.keys(t), n = r.length; n--;) e[r[n]] = t[r[n]];
@@ -17184,9 +17232,9 @@
                         "%WeakSetPrototype%": ["WeakSet", "prototype"]
                     },
                     E = r(14258),
-                    G = r(78554),
-                    I = E.call(Function.call, Array.prototype.concat),
-                    O = E.call(Function.apply, Array.prototype.splice),
+                    O = r(78554),
+                    G = E.call(Function.call, Array.prototype.concat),
+                    I = E.call(Function.apply, Array.prototype.splice),
                     j = E.call(Function.call, String.prototype.replace),
                     C = E.call(Function.call, String.prototype.slice),
                     F = E.call(Function.call, RegExp.prototype.exec),
@@ -17194,7 +17242,7 @@
                     k = /\\(\\)?/g,
                     U = function(e, t) {
                         var r, n = e;
-                        if (G(x, n) && (n = "%" + (r = x[n])[0] + "%"), G(A, n)) {
+                        if (O(x, n) && (n = "%" + (r = x[n])[0] + "%"), O(A, n)) {
                             var o = A[n];
                             if (o === v && (o = P(n)), void 0 === o && !t) throw new s("intrinsic " + e + " exists, but is not available. Please file an issue!");
                             return {
@@ -17225,13 +17273,13 @@
                         a = o.value,
                         u = !1,
                         l = o.alias;
-                    l && (n = l[0], O(r, I([0, 1], l)));
+                    l && (n = l[0], I(r, G([0, 1], l)));
                     for (var p = 1, f = !0; p < r.length; p += 1) {
                         var d = r[p],
                             g = C(d, 0, 1),
                             m = C(d, -1);
                         if (('"' === g || "'" === g || "`" === g || '"' === m || "'" === m || "`" === m) && g !== m) throw new c("property names with quotes must have matching quotes");
-                        if ("constructor" !== d && f || (u = !0), G(A, i = "%" + (n += "." + d) + "%")) a = A[i];
+                        if ("constructor" !== d && f || (u = !0), O(A, i = "%" + (n += "." + d) + "%")) a = A[i];
                         else if (null != a) {
                             if (!(d in a)) {
                                 if (!t) throw new s("base intrinsic for " + e + " exists, but the property is not available.");
@@ -17240,7 +17288,7 @@
                             if (y && p + 1 >= r.length) {
                                 var b = y(a, d);
                                 a = (f = !!b) && "get" in b && !("originalValue" in b.get) ? b.get : a[d]
-                            } else f = G(a, d), a = a[d];
+                            } else f = O(a, d), a = a[d];
                             f && !u && (A[i] = a)
                         }
                     }
@@ -17363,7 +17411,7 @@
                     E = (r(14777), r(68550), r(47895));
                 r(28601), r(58074);
 
-                function G(e, t) {
+                function O(e, t) {
                     return function(e) {
                         if (Array.isArray(e)) return e
                     }(e) || function(e, t) {
@@ -17384,20 +17432,20 @@
                             }
                         }
                         return r
-                    }(e, t) || I(e, t) || function() {
+                    }(e, t) || G(e, t) || function() {
                         throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                     }()
                 }
 
-                function I(e, t) {
+                function G(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return O(e, t);
+                        if ("string" == typeof e) return I(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
-                        return "Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r ? Array.from(e) : "Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r) ? O(e, t) : void 0
+                        return "Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r ? Array.from(e) : "Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r) ? I(e, t) : void 0
                     }
                 }
 
-                function O(e, t) {
+                function I(e, t) {
                     (null == t || t > e.length) && (t = e.length);
                     for (var r = 0, n = new Array(t); r < t; r++) n[r] = e[r];
                     return n
@@ -18197,7 +18245,7 @@
                 }));
                 var X = function(e, t) {
                     try {
-                        var r = G(E(e).rgb().array(), 3),
+                        var r = O(E(e).rgb().array(), 3),
                             n = r[0],
                             o = r[1],
                             i = r[2];
@@ -18517,7 +18565,7 @@
             }))
         }()
 }();
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/0299da89b4b25113050e369c7298457b-groupDetails.bundle.min.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/fb65e8aadfb74844ed3120f321dcad23-groupDetails.bundle.min.js.map
 
 /*! For license information please see groupProfileHeader.bundle.min.js.LICENSE.txt */
 ! function() {
@@ -35166,8 +35214,11 @@
                         ForumsAgeCheck: !1,
                         ForumsRestrictedCategories: !1,
                         ForumsSearch: !1,
+                        ForumsUnrestrictedMessages: !1,
                         RealtimeMessaging: !1,
                         AnnouncementPolls: !1,
+                        AnnouncementArchive: !1,
+                        AnnouncementsUsingCommsPlat: !1,
                         AnnouncementsRichTextRead: !1,
                         AnnouncementsRichTextWrite: !1,
                         IsOwnerRolesetDeprecated: !1,
@@ -35557,20 +35608,23 @@
                                 return n && void 0 !== t && e.userId === t
                             }(e, d, y) ? f("Label.Owner") : void 0
                         }), [y, d, f]),
-                        A = f(l ? "Heading.Members" : "Heading.Followers");
-                    return o().createElement(Zs, {
-                        open: t,
-                        onClose: n,
-                        title: A,
-                        filterOptions: l ? v : void 0,
-                        defaultFilter: l ? h : void 0,
-                        filterOptionLeadingElement: w,
-                        filterOptionTrailingElement: x,
-                        queryFunction: g,
-                        queryKey: b,
-                        onCtaAction: S,
-                        userDisplayNameTrailingLabel: E
-                    })
+                        A = f(l ? "Heading.Members" : "Heading.Followers"),
+                        O = o().createElement(Zs, {
+                            open: t,
+                            onClose: n,
+                            title: A,
+                            filterOptions: l ? v : void 0,
+                            defaultFilter: l ? h : void 0,
+                            filterOptionLeadingElement: w,
+                            filterOptionTrailingElement: x,
+                            queryFunction: g,
+                            queryKey: b,
+                            onCtaAction: S,
+                            userDisplayNameTrailingLabel: E
+                        });
+                    return If.ProfileFrameDefaultContext ? o().createElement(If.ProfileFrameDefaultContext.Provider, {
+                        value: !0
+                    }, O) : O
                 },
                 Jp = function(e) {
                     var t = e.groupId;
@@ -43118,7 +43172,7 @@
             })
         }()
 }();
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/0905968e4c7e25e2b20a28adc2bbb565-groupProfileHeader.bundle.min.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/5f8b3af7a5880bf3fc94775fa9531d9d-groupProfileHeader.bundle.min.js.map
 
 /*! For license information please see groupExperiences.bundle.min.js.LICENSE.txt */
 ! function() {

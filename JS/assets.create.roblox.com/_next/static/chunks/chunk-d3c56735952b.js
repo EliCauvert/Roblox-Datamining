@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "6f791dfd-dcb5-f8e6-cbec-f3572628a65e")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "1739a23b-bee5-1e47-efe6-90e724d31636")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 736570, t => {
@@ -7055,7 +7055,7 @@
             }, r
         }(n.BaseAPI));
     t.s(["CountryRegionsApi", 0, f, "LocaleApi", 0, g])
-}, 874286, 710319, 782262, 780087, 324201, 668833, 220747, 773470, 797117, 656879, 16537, 500192, 157924, 470527, 616420, 332719, t => {
+}, 874286, 710319, 324201, 668833, 773470, 797117, 500192, 157924, 470527, 616420, 332719, t => {
     "use strict";
     var n = t.i(197649),
         r = t.i(416340);
@@ -7165,29 +7165,27 @@
                 "data-testid": "foundation-web-state-layer",
                 className: (0, n.default)("absolute inset-[0] transition-colors group-hover/interactable:bg-[var(--color-state-hover)] group-active/interactable:bg-[var(--color-state-press)] group-disabled/interactable:bg-none", o)
             })
+        },
+        p = "opacity-[0.5]",
+        m = t => {
+            let {
+                width: n,
+                height: o
+            } = t;
+            return r.default.createElement("svg", {
+                className: "foundation-web-loading-spinner",
+                width: n,
+                height: o,
+                viewBox: "0 0 20 20",
+                fill: "none",
+                xmlns: "http://www.w3.org/2000/svg"
+            }, r.default.createElement("path", {
+                fillRule: "evenodd",
+                clipRule: "evenodd",
+                fill: "currentColor",
+                d: "M10 2.75C8.56609 2.75 7.16438 3.1752 5.97212 3.97185C4.77986 4.76849 3.85061 5.90078 3.30188 7.22554C2.75314 8.55031 2.60957 10.008 2.88931 11.4144C3.16905 12.8208 3.85955 14.1126 4.87348 15.1265C5.88741 16.1405 7.17924 16.831 8.5856 17.1107C9.99196 17.3904 11.4497 17.2469 12.7745 16.6981C14.0992 16.1494 15.2315 15.2201 16.0282 14.0279C16.8248 12.8356 17.25 11.4339 17.25 10C17.25 9.58579 17.5858 9.25 18 9.25C18.4142 9.25 18.75 9.58579 18.75 10C18.75 11.7306 18.2368 13.4223 17.2754 14.8612C16.3139 16.3002 14.9473 17.4217 13.3485 18.0839C11.7496 18.7462 9.9903 18.9195 8.29296 18.5819C6.59563 18.2443 5.03653 17.4109 3.81282 16.1872C2.58911 14.9635 1.75575 13.4044 1.41813 11.707C1.08051 10.0097 1.25379 8.25037 1.91606 6.65152C2.57832 5.05267 3.69983 3.6861 5.13876 2.72464C6.57769 1.76318 8.26942 1.25 10 1.25C10.4142 1.25 10.75 1.58579 10.75 2C10.75 2.41421 10.4142 2.75 10 2.75Z"
+            }))
         };
-    t.s(["StateLayer", 0, d, "interactable", 0, c], 782262);
-    let p = "opacity-[0.5]";
-    t.s(["disabledOpacity", 0, p], 780087);
-    let m = t => {
-        let {
-            width: n,
-            height: o
-        } = t;
-        return r.default.createElement("svg", {
-            className: "foundation-web-loading-spinner",
-            width: n,
-            height: o,
-            viewBox: "0 0 20 20",
-            fill: "none",
-            xmlns: "http://www.w3.org/2000/svg"
-        }, r.default.createElement("path", {
-            fillRule: "evenodd",
-            clipRule: "evenodd",
-            fill: "currentColor",
-            d: "M10 2.75C8.56609 2.75 7.16438 3.1752 5.97212 3.97185C4.77986 4.76849 3.85061 5.90078 3.30188 7.22554C2.75314 8.55031 2.60957 10.008 2.88931 11.4144C3.16905 12.8208 3.85955 14.1126 4.87348 15.1265C5.88741 16.1405 7.17924 16.831 8.5856 17.1107C9.99196 17.3904 11.4497 17.2469 12.7745 16.6981C14.0992 16.1494 15.2315 15.2201 16.0282 14.0279C16.8248 12.8356 17.25 11.4339 17.25 10C17.25 9.58579 17.5858 9.25 18 9.25C18.4142 9.25 18.75 9.58579 18.75 10C18.75 11.7306 18.2368 13.4223 17.2754 14.8612C16.3139 16.3002 14.9473 17.4217 13.3485 18.0839C11.7496 18.7462 9.9903 18.9195 8.29296 18.5819C6.59563 18.2443 5.03653 17.4109 3.81282 16.1872C2.58911 14.9635 1.75575 13.4044 1.41813 11.707C1.08051 10.0097 1.25379 8.25037 1.91606 6.65152C2.57832 5.05267 3.69983 3.6861 5.13876 2.72464C6.57769 1.76318 8.26942 1.25 10 1.25C10.4142 1.25 10.75 1.58579 10.75 2C10.75 2.41421 10.4142 2.75 10 2.75Z"
-        }))
-    };
     var h = t.i(23342);
     let f = {
             Large: 24,
@@ -7363,90 +7361,89 @@
                 name: "icon-regular-x",
                 size: i
             }))
-        };
-    t.s(["CloseAffordance", 0, S], 220747);
-    let I = (0, r.forwardRef)((t, o) => {
-        let {
-            title: i,
-            icon: l,
-            actionLabel: s,
-            onAction: u,
-            actions: c,
-            onClose: d,
-            closeIconAriaLabel: p = "Dismiss snackbar",
-            shouldAutoDismiss: m,
-            autoDismissDurationMs: h,
-            className: f,
-            ...g
-        } = t, [y, v] = (0, r.useState)("enter"), C = (0, r.useRef)(void 0), E = (0, r.useRef)(void 0), w = (0, r.useRef)(void 0), I = (0, r.useRef)(null), x = null != c ? c : s && u && r.default.createElement(b, {
-            size: "Small",
-            variant: "Utility",
-            className: "content-inverse-emphasis",
-            onClick: u,
-            ref: I
-        }, s), A = !!x, T = i.length > 80, k = null == m || m, D = 4e3;
-        A && (D = T ? 1e4 : 7e3);
-        let j = null != h ? h : D,
-            R = (0, r.useCallback)(() => {
-                "exit" !== y && (v("exit"), void 0 !== E.current && (window.clearTimeout(E.current), E.current = void 0), w.current = window.setTimeout(() => {
-                    null == d || d()
-                }, 150))
-            }, [d, y]);
-        (0, r.useEffect)(() => (C.current = window.requestAnimationFrame(() => {
-            v("idle")
-        }), () => {
-            void 0 !== C.current && window.cancelAnimationFrame(C.current)
-        }), []), (0, r.useEffect)(() => {
-            void 0 !== E.current && (window.clearTimeout(E.current), E.current = void 0), k && "exit" !== y && (E.current = window.setTimeout(() => {
-                R()
-            }, j))
-        }, [j, k, y, R]), (0, r.useEffect)(() => {
-            var t;
-            A && (null == (t = I.current) || t.focus())
-        }, [A]), (0, r.useEffect)(() => () => {
-            void 0 !== E.current && window.clearTimeout(E.current), void 0 !== w.current && window.clearTimeout(w.current), void 0 !== C.current && window.cancelAnimationFrame(C.current)
-        }, []);
-        let _ = {
-                position: "fixed",
-                left: "50%",
-                bottom: "max(var(--padding-xxlarge, 32px), env(safe-area-inset-bottom))",
-                transform: "translate(-50%, ".concat("idle" === y ? "0" : "120%", ")"),
-                zIndex: "var(--foundation-portal-zindex, 9999)"
-            },
-            L = g.style ? {
-                ..._,
-                ...g.style
-            } : _;
-        return r.default.createElement("div", {
-            ref: o,
-            role: "status",
-            "aria-live": "polite",
-            className: (0, n.default)("flex items-center gap-xxlarge radius-medium shadow-transient-low bg-inverse-surface-0 padding-x-medium padding-y-medium stroke-standard shrink-0", "max-width-[480px] min-height-[48px]", "min-width-[min(100%-max(2_*_var(--margin-small),env(safe-area-inset-left)+env(safe-area-inset-right)),393px)]", "foundation-web-portal-zindex pointer-events-auto", "exit" === y ? "ease-standard-in" : "ease-standard-out", f),
-            style: {
-                ...L,
-                transitionDuration: "".concat("exit" === y ? 150 : 200, "ms"),
-                transitionProperty: "transform"
-            },
-            ...g
-        }, r.default.createElement("div", {
-            className: "flex items-center gap-medium grow-1 basis-0 min-h-[40px]"
-        }, l && r.default.createElement(a, {
-            name: l,
-            size: "Small",
-            className: "shrink-0 content-inverse-emphasis"
-        }), r.default.createElement("div", {
-            className: "grow-1 basis-0 text-caption-large content-inverse-emphasis text-truncate-end"
-        }, i)), r.default.createElement("div", {
-            className: "flex items-center justify-end gap-small shrink-0"
-        }, x, d && r.default.createElement(S, {
-            variant: "Utility",
-            size: "Small",
-            isCircular: !0,
-            className: "content-inverse-emphasis",
-            "aria-label": p,
-            onClick: R
-        })))
-    });
+        },
+        I = (0, r.forwardRef)((t, o) => {
+            let {
+                title: i,
+                icon: l,
+                actionLabel: s,
+                onAction: u,
+                actions: c,
+                onClose: d,
+                closeIconAriaLabel: p = "Dismiss snackbar",
+                shouldAutoDismiss: m,
+                autoDismissDurationMs: h,
+                className: f,
+                ...g
+            } = t, [y, v] = (0, r.useState)("enter"), C = (0, r.useRef)(void 0), E = (0, r.useRef)(void 0), w = (0, r.useRef)(void 0), I = (0, r.useRef)(null), x = null != c ? c : s && u && r.default.createElement(b, {
+                size: "Small",
+                variant: "Utility",
+                className: "content-inverse-emphasis",
+                onClick: u,
+                ref: I
+            }, s), A = !!x, T = i.length > 80, k = null == m || m, D = 4e3;
+            A && (D = T ? 1e4 : 7e3);
+            let j = null != h ? h : D,
+                R = (0, r.useCallback)(() => {
+                    "exit" !== y && (v("exit"), void 0 !== E.current && (window.clearTimeout(E.current), E.current = void 0), w.current = window.setTimeout(() => {
+                        null == d || d()
+                    }, 150))
+                }, [d, y]);
+            (0, r.useEffect)(() => (C.current = window.requestAnimationFrame(() => {
+                v("idle")
+            }), () => {
+                void 0 !== C.current && window.cancelAnimationFrame(C.current)
+            }), []), (0, r.useEffect)(() => {
+                void 0 !== E.current && (window.clearTimeout(E.current), E.current = void 0), k && "exit" !== y && (E.current = window.setTimeout(() => {
+                    R()
+                }, j))
+            }, [j, k, y, R]), (0, r.useEffect)(() => {
+                var t;
+                A && (null == (t = I.current) || t.focus())
+            }, [A]), (0, r.useEffect)(() => () => {
+                void 0 !== E.current && window.clearTimeout(E.current), void 0 !== w.current && window.clearTimeout(w.current), void 0 !== C.current && window.cancelAnimationFrame(C.current)
+            }, []);
+            let _ = {
+                    position: "fixed",
+                    left: "50%",
+                    bottom: "max(var(--padding-xxlarge, 32px), env(safe-area-inset-bottom))",
+                    transform: "translate(-50%, ".concat("idle" === y ? "0" : "120%", ")"),
+                    zIndex: "var(--foundation-portal-zindex, 9999)"
+                },
+                L = g.style ? {
+                    ..._,
+                    ...g.style
+                } : _;
+            return r.default.createElement("div", {
+                ref: o,
+                role: "status",
+                "aria-live": "polite",
+                className: (0, n.default)("flex items-center gap-xxlarge radius-medium shadow-transient-low bg-inverse-surface-0 padding-x-medium padding-y-medium stroke-standard shrink-0", "max-width-[480px] min-height-[48px]", "min-width-[min(100%-max(2_*_var(--margin-small),env(safe-area-inset-left)+env(safe-area-inset-right)),393px)]", "foundation-web-portal-zindex pointer-events-auto", "exit" === y ? "ease-standard-in" : "ease-standard-out", f),
+                style: {
+                    ...L,
+                    transitionDuration: "".concat("exit" === y ? 150 : 200, "ms"),
+                    transitionProperty: "transform"
+                },
+                ...g
+            }, r.default.createElement("div", {
+                className: "flex items-center gap-medium grow-1 basis-0 min-h-[40px]"
+            }, l && r.default.createElement(a, {
+                name: l,
+                size: "Small",
+                className: "shrink-0 content-inverse-emphasis"
+            }), r.default.createElement("div", {
+                className: "grow-1 basis-0 text-caption-large content-inverse-emphasis text-truncate-end"
+            }, i)), r.default.createElement("div", {
+                className: "flex items-center justify-end gap-small shrink-0"
+            }, x, d && r.default.createElement(S, {
+                variant: "Utility",
+                size: "Small",
+                isCircular: !0,
+                className: "content-inverse-emphasis",
+                "aria-label": p,
+                onClick: R
+            })))
+        });
     t.s(["Snackbar", 0, I], 773470);
     var x = t.i(734463);
     let A = t => {
@@ -7513,33 +7510,31 @@
             let t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "«r",
                 n = (0, r.useRef)();
             return n.current || (T += 1, n.current = "".concat(t).concat(T)), n.current
-        };
-    t.s(["default", 0, k], 656879);
-    let D = t => {
-        let {
-            title: n,
-            description: o,
-            position: i = "top-center"
-        } = t;
-        return r.default.createElement(s, {
-            position: i,
-            title: n,
-            description: o
-        }, r.default.createElement(u, {
-            asChild: !0
-        }, r.default.createElement("span", {
-            role: "button",
-            tabIndex: 0,
-            "aria-label": n,
-            className: "flex items-center content-muted",
-            "data-testid": "label-tooltip-trigger"
-        }, r.default.createElement(a, {
-            name: "icon-regular-circle-i",
-            size: "Small"
-        }))))
-    };
-    t.s(["LabelTooltip", 0, D], 16537);
-    let j = {
+        },
+        D = t => {
+            let {
+                title: n,
+                description: o,
+                position: i = "top-center"
+            } = t;
+            return r.default.createElement(s, {
+                position: i,
+                title: n,
+                description: o
+            }, r.default.createElement(u, {
+                asChild: !0
+            }, r.default.createElement("span", {
+                role: "button",
+                tabIndex: 0,
+                "aria-label": n,
+                className: "flex items-center content-muted",
+                "data-testid": "label-tooltip-trigger"
+            }, r.default.createElement(a, {
+                name: "icon-regular-circle-i",
+                size: "Small"
+            }))))
+        },
+        j = {
             Standard: "bg-none",
             Contrast: "bg-shift-200",
             Utility: "bg-none"
@@ -28518,10 +28513,10 @@
         }
         static async getDataset(t) {
             let r;
-            if ("titles" === n.default.env.recommendedSearchType) r = nf("https://assets.create.roblox.com/17154a3bd8669d1c1b5c8a799a0be1f497b8549f", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
+            if ("titles" === n.default.env.recommendedSearchType) r = nf("https://assets.create.roblox.com/c3a2fb37c3375746be217cebd9f7e9d5f968ebf0", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
             else {
                 if (!ny()) return [];
-                r = nf("https://assets.create.roblox.com/17154a3bd8669d1c1b5c8a799a0be1f497b8549f", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
+                r = nf("https://assets.create.roblox.com/c3a2fb37c3375746be217cebd9f7e9d5f968ebf0", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
             }
             let o = await fetch(r),
                 a = await o.json();
@@ -34366,5 +34361,5 @@
     }])
 }]);
 
-//# debugId=6f791dfd-dcb5-f8e6-cbec-f3572628a65e
-//# sourceMappingURL=3s83v2kj1259f.js.map
+//# debugId=1739a23b-bee5-1e47-efe6-90e724d31636
+//# sourceMappingURL=41wo0v7rhr9tk.js.map

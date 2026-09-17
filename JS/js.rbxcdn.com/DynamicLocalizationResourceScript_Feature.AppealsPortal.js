@@ -130,7 +130,7 @@ Roblox.LangDynamic["Feature.AppealsPortal"] = {
     "Label.TypeLower.Screenshot": "screenshot",
     "Label.TypePlural.Screenshot": "screenshots",
     "Heading.AppealDecision": "Appeal a decision",
-    "Description.AppealDisclosures": "More about appeals: {link}learn more and review disclosures.{linkEnd}",
+    "Description.AppealDisclosures": "{link}View appeal guidelines and disclosures{linkEnd}",
     "Label.EmailInput": "Your email",
     "Label.DecisionCategory": "What kind of decision do you want to appeal?",
     "Label.DropdownPlaceholder": "Select one",

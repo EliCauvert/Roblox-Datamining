@@ -1915,6 +1915,7 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Heading.PrivatePlayest.ConsentRequest": "Who can invite your child to preview their games?",
     "Disclaimer.PrivatePlaytestOnContentMaturityConsent": "Your child may still be able to test a limited set of early access games created by friends before these games are available in our catalog for kids and young teens",
     "Heading.PrivatePlaytest.ConsentTitle": "Who can invite your child to preview their games?",
-    "Heading.PrivatePlaytestSettingCapitalized": "Preview games setting"
+    "Heading.PrivatePlaytestSettingCapitalized": "Preview games setting",
+    "Label.NoLimitSetByParent": "No limit set by parent"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSettings");

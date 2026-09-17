@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "de216aa0-4b58-8138-6637-bcd92b62b6f0")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "0cf279dc-1d29-c28c-e677-056a4aaccb5b")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 261482, 858148, 966956, 719743, 477749, e => {
@@ -3354,12 +3354,14 @@
     }, T = async e => {
         if (0 === e.length) return null;
         let t = await y.default.getDetails(e);
-        return t.data && t.data.length > 0 ? t.data.filter(e => e && e.id && e.name && e.creator && e.creator.name).map(e => {
-            var t;
+        return t.data && t.data.length > 0 ? t.data.filter(e => e && e.id && e.name && e.creator && e.creator.name && e.creator.id && e.creator.type).map(e => {
+            var t, s, r;
             return {
                 universeId: e.id,
                 experienceName: e.name,
-                creatorName: null == (t = e.creator) ? void 0 : t.name
+                creatorName: null == (t = e.creator) ? void 0 : t.name,
+                creatorId: null == (s = e.creator) ? void 0 : s.id,
+                creatorType: null == (r = e.creator) ? void 0 : r.type
             }
         }) : null
     };
@@ -4384,5 +4386,5 @@
     }])
 }]);
 
-//# debugId=de216aa0-4b58-8138-6637-bcd92b62b6f0
-//# sourceMappingURL=29ihu7r9ahpaz.js.map
+//# debugId=0cf279dc-1d29-c28c-e677-056a4aaccb5b
+//# sourceMappingURL=41q1guf02ie8l.js.map

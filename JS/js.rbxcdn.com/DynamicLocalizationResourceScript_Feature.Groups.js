@@ -1300,6 +1300,8 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Action.Start": "Start",
     "Label.HiddenPostsHeader": "Posts below are hidden",
     "Label.HiddenPostHeader": "Post below is hidden",
+    "Label.UnrestrictedMessagesToggle": "Unrestricted messages",
+    "Description.UnrestrictedMessagesToggle": "TextFilter is disabled for messages in this category.",
     "Action.Reset": "Reset",
     "Label.NoSearchResults": "No results found",
     "Action.SearchForums": "Search for keywords or @users",
@@ -1320,6 +1322,9 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Label.MemberSearchHint": "Start typing to search members",
     "Label.NoMembersFound": "No members found",
     "Label.MemberSearchError": "Something went wrong. Please try again.",
+    "Description.CommunityTierEnterprise": "This community has been manually assigned to Enterprise Tier by Roblox staff. Please contact the Communities team for more information.",
+    "Message.GrantEnterpriseTier": "{actor} assigned Community Tier: Enterprise.",
+    "Message.RevokeEnterpriseTier": "{actor} removed Community Tier: Enterprise.",
     "Description.UnrestrictedMessagesCategory": "Members can send unrestricted messages and attach images in this category.",
     "Message.UpdateRolesetPropertiesVisibilityPrivate": "Visibility: Private",
     "Message.UpdateRolesetPositionTopRole": "highest role",
@@ -1334,6 +1339,8 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Label.UpdateRoleProperties": "Update Role Properties",
     "Error.SupportTicketOpenLimitReached": "You’ve reached the limit for open support tickets. Visit your Experience Support History to resolve open tickets.",
     "Error.SupportTicketIneligible": "You can’t submit a bug report for this experience right now.",
-    "Placeholder.PollQuestion": "Write your question"
+    "Placeholder.PollQuestion": "Write your question",
+    "Label.OverflowMenu": "More options",
+    "Label.AddImage": "Add image"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Groups");

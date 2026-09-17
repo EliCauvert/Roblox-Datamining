@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "6a5b5c7c-2cde-9b36-91f2-92f5257f5b6b")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "96ea345e-bbd0-4ef7-311d-0d56224b4881")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 272593, 650502, e => {
@@ -638,7 +638,7 @@
                 currentUrl: String(t),
                 additionalProperties: {
                     ...r,
-                    loggerVersion: "1.5.2",
+                    loggerVersion: "1.6.0",
                     viewportWidth: i,
                     viewportHeight: n
                 }
@@ -956,7 +956,7 @@
                 parameters: a,
                 tags: i
             });
-            this.events.emit("webvitals", s), this.logEventToLogger(s)
+            this.events.emit("apivitals", s), this.logEventToLogger(s)
         }
         logFormVitalsEvent(e) {
             let {
@@ -1068,5 +1068,5 @@
     }])
 }]);
 
-//# debugId=6a5b5c7c-2cde-9b36-91f2-92f5257f5b6b
-//# sourceMappingURL=2g4djy_obzbnk.js.map
+//# debugId=96ea345e-bbd0-4ef7-311d-0d56224b4881
+//# sourceMappingURL=0qsebd0s_lwh2.js.map

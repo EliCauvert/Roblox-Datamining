@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "97e813015cc34de71fad389196245a003fdf22c1"
+            id: "6ccc07fd02c1f10281f931f3e39d5988237759bb"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "a0f718e7-8578-4772-8ef6-08489ad4f634", e._sentryDebugIdIdentifier = "sentry-dbid-a0f718e7-8578-4772-8ef6-08489ad4f634")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "1028f55e-1da5-499b-a1fb-3bf99ca1865e", e._sentryDebugIdIdentifier = "sentry-dbid-1028f55e-1da5-499b-a1fb-3bf99ca1865e")
     } catch (e) {}
 }(),
 function() {
@@ -18620,18 +18620,18 @@ function() {
                         })()
                     }, []), Y = (0, c.useCallback)(function() {
                         return s4(function() {
-                            var e, t, r;
-                            return s9(this, function(n) {
-                                switch (n.label) {
+                            var e, t, r, n, o;
+                            return s9(this, function(a) {
+                                switch (a.label) {
                                     case 0:
                                         return [4, s$()];
                                     case 1:
-                                        if (!(null == (e = n.sent()) ? void 0 : e.enablePurchases)) return [2, !1];
-                                        return r = (t = e.enablePurchases).currentValue, [2, t.options.some(function(e) {
+                                        if (!(null == (t = a.sent()) ? void 0 : t.enablePurchases)) return [2, !1];
+                                        return n = (r = t.enablePurchases).currentValue, [2, null != (e = null == (o = r.options) ? void 0 : o.some(function(e) {
                                             var t = e.option.optionValue,
-                                                n = e.requirement;
-                                            return t !== r && n === sz.SelfUpdateSetting
-                                        })]
+                                                r = e.requirement;
+                                            return t !== n && r === sz.SelfUpdateSetting
+                                        })) && e]
                                 }
                             })
                         })()
@@ -35442,4 +35442,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("RobuxRedesign");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/robuxRedesign-44a68956e2f46017.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/robuxRedesign-c8886d559a738603.js.map

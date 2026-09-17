@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "7ca33247-f20e-edae-24a6-551650e5f7f0")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "de53eb93-1384-4d7a-7a33-8ad1b5f82e93")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 358763, e => {
@@ -1722,6 +1722,8 @@
         return t.default.createElement(a.Provider, {
             value: b
         }, o)
+    }, "useOptionalUnifiedLoggerProvider", 0, function() {
+        return (0, t.useContext)(a)
     }, "useUnifiedLoggerProvider", 0, function() {
         let e = (0, t.useContext)(a);
         if (null === e) throw Error("useUnifiedLoggerProvider must be used within a UnifiedLoggerProvider");
@@ -1729,5 +1731,5 @@
     }])
 }]);
 
-//# debugId=7ca33247-f20e-edae-24a6-551650e5f7f0
-//# sourceMappingURL=1j3xigaaw1oig.js.map
+//# debugId=de53eb93-1384-4d7a-7a33-8ad1b5f82e93
+//# sourceMappingURL=09c4hcg1msz8t.js.map

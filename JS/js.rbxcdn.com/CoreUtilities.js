@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "fda7012a0caf0c1e2bac173bd4a703869401705d"
+            id: "4dbd27c9eba2be2672558b6ce15fe1cf5797be62"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "a5f35bce-ce74-4509-9143-a1847e2155af", e._sentryDebugIdIdentifier = "sentry-dbid-a5f35bce-ce74-4509-9143-a1847e2155af")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "68ee14af-b38f-43d4-af22-60d0282abf47", e._sentryDebugIdIdentifier = "sentry-dbid-68ee14af-b38f-43d4-af22-60d0282abf47")
     } catch (e) {}
 }(),
 function() {
@@ -32493,7 +32493,7 @@ function() {
                                     d5(o.type, o.context, o.params), "Valid" !== r && (null == wc || wc("DeeplinkParserRobloxPlusReferralResolutionFailed"));
                                     var a = t.data.targetId ? "&referrerId=".concat(t.data.targetId) : "",
                                         i = "Valid" === r ? "referralCode=".concat(p).concat(a) : "referralStatus=".concat(r);
-                                    return window.location.href = "".concat(Sg.Home, "?ctx=plus_referral&").concat(i), !0
+                                    return window.location.href = "".concat(Sg.Plus, "?ctx=plus_referral&").concat(i), !0
                                 }
                                 if ("Invalid" === t.data.status) return !1;
                                 var u = SS(t.data.status, p, S0.EXPERIENCE_V2);
@@ -42037,7 +42037,22 @@ function() {
                         }(t.prototype, e), t
                 }();
 
-            function xO(e) {
+            function xO(e, t, n, r, o, a, i) {
+                try {
+                    var u = e[a](i),
+                        s = u.value
+                } catch (e) {
+                    n(e);
+                    return
+                }
+                u.done ? t(s) : Promise.resolve(s).then(r, o)
+            }
+
+            function xR(e, t) {
+                return null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t
+            }
+
+            function x_(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var n = null != arguments[t] ? arguments[t] : {},
                         r = Object.keys(n);
@@ -42066,8 +42081,118 @@ function() {
                         var e = new(_I())().getLocale();
                         return ew(_P, e) ? e : "en-us"
                     },
-                    challengeContainerId: "generic-challenge-container"
-                }).getUserId, r = e.getLocale, o = e.challengeContainerId, a = null, i = "x-csrf-token", u = ["POST", "PATCH", "PUT", "DELETE"], tK([tZ, function(e) {
+                    gcs: ed.fn(function(e, t, n, r) {
+                        var o;
+                        return (o = function() {
+                            var o, a, i, u;
+                            return function(e, t) {
+                                var n, r, o, a = {
+                                        label: 0,
+                                        sent: function() {
+                                            if (1 & o[0]) throw o[1];
+                                            return o[1]
+                                        },
+                                        trys: [],
+                                        ops: []
+                                    },
+                                    i = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype),
+                                    u = Object.defineProperty;
+                                return u(i, "next", {
+                                    value: s(0)
+                                }), u(i, "throw", {
+                                    value: s(1)
+                                }), u(i, "return", {
+                                    value: s(2)
+                                }), "function" == typeof Symbol && u(i, Symbol.iterator, {
+                                    value: function() {
+                                        return this
+                                    }
+                                }), i;
+
+                                function s(u) {
+                                    return function(s) {
+                                        var c = [u, s];
+                                        if (n) throw TypeError("Generator is already executing.");
+                                        for (; i && (i = 0, c[0] && (a = 0)), a;) try {
+                                            if (n = 1, r && (o = 2 & c[0] ? r.return : c[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, c[1])).done) return o;
+                                            switch (r = 0, o && (c = [2 & c[0], o.value]), c[0]) {
+                                                case 0:
+                                                case 1:
+                                                    o = c;
+                                                    break;
+                                                case 4:
+                                                    return a.label++, {
+                                                        value: c[1],
+                                                        done: !1
+                                                    };
+                                                case 5:
+                                                    a.label++, r = c[1], c = [0];
+                                                    continue;
+                                                case 7:
+                                                    c = a.ops.pop(), a.trys.pop();
+                                                    continue;
+                                                default:
+                                                    if (!(o = (o = a.trys).length > 0 && o[o.length - 1]) && (6 === c[0] || 2 === c[0])) {
+                                                        a = 0;
+                                                        continue
+                                                    }
+                                                    if (3 === c[0] && (!o || c[1] > o[0] && c[1] < o[3])) {
+                                                        a.label = c[1];
+                                                        break
+                                                    }
+                                                    if (6 === c[0] && a.label < o[1]) {
+                                                        a.label = o[1], o = c;
+                                                        break
+                                                    }
+                                                    if (o && a.label < o[2]) {
+                                                        a.label = o[2], a.ops.push(c);
+                                                        break
+                                                    }
+                                                    o[2] && a.ops.pop(), a.trys.pop();
+                                                    continue
+                                            }
+                                            c = t.call(e, a)
+                                        } catch (e) {
+                                            c = [6, e], r = 0
+                                        } finally {
+                                            n = o = 0
+                                        }
+                                        if (5 & c[0]) throw c[1];
+                                        return {
+                                            value: c[0] ? c[1] : void 0,
+                                            done: !0
+                                        }
+                                    }
+                                }
+                            }(this, function(s) {
+                                return xR(n, tl) && (a = (o = n.response.headers).get("rblx-challenge-id"), i = o.get("rblx-challenge-type"), u = o.get("rblx-challenge-metadata"), null != a && null != i && null != u) && i$.isSupportedByGrasshopper(i) ? [2, s_({
+                                    retryRequest: function(n, o) {
+                                        return t.headers.set("rblx-challenge-id", n), t.headers.set("rblx-challenge-type", i), t.headers.set("rblx-challenge-metadata", o), r(e, t)
+                                    },
+                                    containerId: "generic-challenge-container",
+                                    challengeId: a,
+                                    challengeTypeRaw: i,
+                                    challengeMetadataJsonBase64: u
+                                })] : [2, ev(n)]
+                            })
+                        }, function() {
+                            var e = this,
+                                t = arguments;
+                            return new Promise(function(n, r) {
+                                var a = o.apply(e, t);
+
+                                function i(e) {
+                                    xO(a, n, r, i, u, "next", e)
+                                }
+
+                                function u(e) {
+                                    xO(a, n, r, i, u, "throw", e)
+                                }
+                                i(void 0)
+                            })
+                        })()
+                    })
+                }).getUserId, r = e.getLocale, o = e.gcs, a = null, i = "x-csrf-token", u = ["POST", "PATCH", "PUT", "DELETE"], tK([tZ, function(e) {
                     return ed.fn(function(n, s) {
                         var c;
                         return (c = function() {
@@ -42168,25 +42293,7 @@ function() {
                                                 var r = t.response.headers.get(i);
                                                 if (null != r) return a = r, s.headers.set(i, a), e(n, s)
                                             }
-                                            if (_G(t, tl)) {
-                                                var c = "rblx-challenge-id",
-                                                    l = "rblx-challenge-type",
-                                                    f = "rblx-challenge-metadata",
-                                                    d = t.response.headers,
-                                                    p = d.get(c),
-                                                    h = d.get(l),
-                                                    y = d.get(f);
-                                                if (null != p && null != h && null != y && i$.isSupportedByGrasshopper(h)) return s_({
-                                                    retryRequest: function(t, r) {
-                                                        return s.headers.set(c, t), s.headers.set(l, h), s.headers.set(f, r), e(n, s)
-                                                    },
-                                                    containerId: o,
-                                                    challengeId: p,
-                                                    challengeTypeRaw: h,
-                                                    challengeMetadataJsonBase64: y
-                                                })
-                                            }
-                                            return ev(t)
+                                            return o(n, s, t, e)
                                         })];
                                     case 1:
                                         return b = g.sent(), null != d && (d.setStatus({
@@ -42279,22 +42386,22 @@ function() {
                 }), $.ajaxPrefilter(n_)
             } catch (e) {}
             try {
-                var xR = function(e) {
+                var xP = function(e) {
                         if (e.hostname === window.location.hostname) {
                             var t = e.href,
                                 n = ng(t);
                             n !== t && (e.href = n)
                         }
                     },
-                    x_ = function() {
+                    xT = function() {
                         var e = document.links,
                             t = !0,
                             n = !1,
                             r = void 0;
                         try {
                             for (var o, a = e[Symbol.iterator](); !(t = (o = a.next()).done); t = !0) {
-                                var i, u = o.value;
-                                i = HTMLAnchorElement, (null != i && "u" > typeof Symbol && i[Symbol.hasInstance] ? !!i[Symbol.hasInstance](u) : u instanceof i) && xR(u)
+                                var i = o.value;
+                                xR(i, HTMLAnchorElement) && xP(i)
                             }
                         } catch (e) {
                             n = !0, r = e
@@ -42306,27 +42413,27 @@ function() {
                             }
                         }
                     },
-                    xP = function() {
+                    xx = function() {
                         $("body").on("click", "a", function() {
-                            xR(this)
+                            xP(this)
                         })
                     };
                 np && $(document).ready(function() {
-                    x_(), xP()
+                    xT(), xx()
                 })
             } catch (e) {}
-            ee(["Roblox", "core-scripts", "endpoints"], d), ee(["Roblox", "core-scripts", "format", "number"], p), ee(["Roblox", "core-scripts", "format", "string"], h), ee(["Roblox", "core-scripts", "http", "http"], w), ee(["Roblox", "core-scripts", "http", "util"], y), ee(["Roblox", "core-scripts", "util", "accessibility"], E), ee(["Roblox", "core-scripts", "util", "batchRequest"], A), ee(["Roblox", "core-scripts", "util", "currentBrowser"], O), ee(["Roblox", "core-scripts", "util", "cursorPagination"], R), ee(["Roblox", "core-scripts", "util", "date"], _), ee(["Roblox", "core-scripts", "util", "defer"], M), ee(["Roblox", "core-scripts", "util", "pageName"], P), ee(["Roblox", "core-scripts", "util", "ready"], T), ee(["Roblox", "core-scripts", "util", "url"], x), ee("CoreUtilities", xO({}, Y)), Q(["Roblox", "Endpoints"], d), ee(["Roblox", "core-scripts", "auth", "boundAuth"], S), ee(["Roblox", "core-scripts", "auth", "crypto"], v), ee(["Roblox", "core-scripts", "auth", "fido2"], G), ee(["Roblox", "core-scripts", "auth", "hba"], m), ee(["Roblox", "core-scripts", "auth", "hybridResponse"], C), ee(["Roblox", "core-scripts", "auth", "sai"], k), ee(["Roblox", "core-scripts", "dataStore"], N), ee(["Roblox", "core-scripts", "deepLink"], U), ee(["Roblox", "core-scripts", "entityUrl"], V), ee(["Roblox", "core-scripts", "eventStream"], b), ee(["Roblox", "web-telemetry", "fire"], K), ee(["Roblox", "core-scripts", "game"], j), ee(["Roblox", "core-scripts", "guac"], F), Q(["Roblox", "Guac"], F), ee(["Roblox", "core-scripts", "hybrid"], D), ee(["Roblox", "core-scripts", "localStorage", "localStorage"], I), ee(["Roblox", "core-scripts", "localStorage", "keys"], W), ee(["Roblox", "core-scripts", "paymentsFlow"], B), ee(["Roblox", "core-scripts", "theme"], Z), ee(["Roblox", "core-scripts", "util", "chat"], L), ee(["Roblox", "core-scripts", "util", "elementVisibility"], X), ee(["Roblox", "core-scripts", "util", "upsell"], q), ee(["Roblox", "core-scripts", "util", "user"], z), ee("CoreRobloxUtilities", xO({}, H)), Q(["Roblox", "DeepLinkService"], {
+            ee(["Roblox", "core-scripts", "endpoints"], d), ee(["Roblox", "core-scripts", "format", "number"], p), ee(["Roblox", "core-scripts", "format", "string"], h), ee(["Roblox", "core-scripts", "http", "http"], w), ee(["Roblox", "core-scripts", "http", "util"], y), ee(["Roblox", "core-scripts", "util", "accessibility"], E), ee(["Roblox", "core-scripts", "util", "batchRequest"], A), ee(["Roblox", "core-scripts", "util", "currentBrowser"], O), ee(["Roblox", "core-scripts", "util", "cursorPagination"], R), ee(["Roblox", "core-scripts", "util", "date"], _), ee(["Roblox", "core-scripts", "util", "defer"], M), ee(["Roblox", "core-scripts", "util", "pageName"], P), ee(["Roblox", "core-scripts", "util", "ready"], T), ee(["Roblox", "core-scripts", "util", "url"], x), ee("CoreUtilities", x_({}, Y)), Q(["Roblox", "Endpoints"], d), ee(["Roblox", "core-scripts", "auth", "boundAuth"], S), ee(["Roblox", "core-scripts", "auth", "crypto"], v), ee(["Roblox", "core-scripts", "auth", "fido2"], G), ee(["Roblox", "core-scripts", "auth", "hba"], m), ee(["Roblox", "core-scripts", "auth", "hybridResponse"], C), ee(["Roblox", "core-scripts", "auth", "sai"], k), ee(["Roblox", "core-scripts", "dataStore"], N), ee(["Roblox", "core-scripts", "deepLink"], U), ee(["Roblox", "core-scripts", "entityUrl"], V), ee(["Roblox", "core-scripts", "eventStream"], b), ee(["Roblox", "web-telemetry", "fire"], K), ee(["Roblox", "core-scripts", "game"], j), ee(["Roblox", "core-scripts", "guac"], F), Q(["Roblox", "Guac"], F), ee(["Roblox", "core-scripts", "hybrid"], D), ee(["Roblox", "core-scripts", "localStorage", "localStorage"], I), ee(["Roblox", "core-scripts", "localStorage", "keys"], W), ee(["Roblox", "core-scripts", "paymentsFlow"], B), ee(["Roblox", "core-scripts", "theme"], Z), ee(["Roblox", "core-scripts", "util", "chat"], L), ee(["Roblox", "core-scripts", "util", "elementVisibility"], X), ee(["Roblox", "core-scripts", "util", "upsell"], q), ee(["Roblox", "core-scripts", "util", "user"], z), ee("CoreRobloxUtilities", x_({}, H)), Q(["Roblox", "DeepLinkService"], {
                 parseDeeplink: wg,
                 navigateToDeepLink: wS
             }), Q(["Roblox", "ShareLinks"], ww), Q(["Roblox", "ShareLinksType"], S$);
             try {
                 if ((null == xI ? void 0 : xI.userId) && parseInt(xI.userId, 10) % 1e3 < 1e3) {
-                    var xT = new xA(2e4, 6e5, 1);
+                    var xG = new xA(2e4, 6e5, 1);
                     xw.forEach(function(e) {
                         window.addEventListener(e, function() {
-                            xT.onActiveEvent()
+                            xG.onActiveEvent()
                         })
-                    }), xT.start()
+                    }), xG.start()
                 }
             } catch (e) {}
             try {
@@ -42399,4 +42506,4 @@ function() {
             } catch (e) {}
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("CoreUtilities");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/coreUtilities-938aa1210051d016.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/coreUtilities-e8822683060c5228.js.map

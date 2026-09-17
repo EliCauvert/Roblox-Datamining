@@ -46,6 +46,7 @@ Roblox.LangDynamic["Feature.Tracking"] = {
     "Heading.InformationPartnerCollection": "Information Our Partners Collect",
     "Description.InformationPartnerCollection": "We use the following third parties to better improve your experience on Roblox. They may use cookies and other mechanisms to track usage statistics on our website. You may opt-out of this information collection by turning the analytics toggle to the off position.",
     "Heading.AnalyticsCookies": "Analytics Cookies",
-    "Description.CookieT": "User authentication token cookie"
+    "Description.CookieT": "User authentication token cookie",
+    "Description.RBXcp": "Stores your choice to limit non-essential tracking so we can honor it on future visits."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Tracking");
